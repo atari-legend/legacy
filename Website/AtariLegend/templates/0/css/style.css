@@ -1,4 +1,4 @@
-/*---------------------------------------------------------- 
+	/*---------------------------------------------------------- 
  Main website specifications - AL Legacy skin
 ------------------------------------------------------------ */
 /* load the main site font */
@@ -692,12 +692,16 @@ Standard tile settings
 		padding-left: 5%;
 		padding-right: 5%;
 	}	
-		
+
 #welcome_quote { padding-top:20px;
 		font-size : 30pt;
 		margin-top : 12%;
 		color : white; 	
 	}
+	
+@media screen and (min-width: 500px) and (max-width: 1099px) { 	
+#welcome_quote { font-size : 20pt;}
+}	
 
 #welcome_slogan { font-size : 16pt; 
 		color : #bcbdbd;
@@ -723,7 +727,7 @@ Standard tile settings
 		border-left: 2px solid #01b5b5; 
 		font-size : 13pt;
 	}
-	#welcome_quote { font-size : 20pt; 
+	#welcome_quote { font-size : 15pt; 
 		padding-top: 0px;
 		border-left: 2px solid #01b5b5;	
 		border-top: 2px solid #01b5b5; 
