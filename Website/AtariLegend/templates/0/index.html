@@ -205,36 +205,18 @@
 					<!--Start latest reviews tile-->
 					<div class="standard_tile" id="latest_reviews">
 						<h1><a href="#" class="standard_tile_link">LATEST REVIEWS</a></h1>
+						{foreach from=$recent_reviews item=line}
 						<div class="standard_tile_line"></div>	
-						<div class="standard_list_entry">
+							<div class="standard_list_entry">
 							<div class="standard_list_entry_left">
-								<a href="#"><img src="../templates/0/images/dummy/pang.png" alt="latest_review"></a>
+								<a href="#"><img src="{$line.review_img}" alt="latest_review"></a>
 							</div>
 							<div class="standard_list_entry_right">
-								<h4><a href="#" class="standard_tile_link">Pang</a></h4>
-								<h5>Nice colorful graphics, lots a catchy tunes and extremely addictive gameplay!</h5>
+								<h4><a href="#" class="standard_tile_link">{$line.review_name}</a></h4>
+								<h5>{$line.review_text}</h5>
 							</div>							
 						</div>
-						<div class="standard_tile_line"></div>
-						<div class="standard_list_entry">
-							<div class="standard_list_entry_left">
-								<a href="#"><img src="../templates/0/images/dummy/pang.png" alt="latest_review"></a>
-							</div>
-							<div class="standard_list_entry_right">
-								<h4><a href="#" class="standard_tile_link">Pang</a></h4>
-								<h5>Nice colorful graphics, lots a catchy tunes and extremely addictive gameplay!</h5>
-							</div>									
-						</div>	
-						<div class="standard_tile_line"></div>
-						<div class="standard_list_entry">
-							<div class="standard_list_entry_left">
-								<a href="#"><img src="../templates/0/images/dummy/pang.png" alt="latest_review"></a>
-							</div>
-							<div class="standard_list_entry_right">
-								<h4><a href="#" class="standard_tile_link">Pang</a></h4>
-								<h5>Nice colorful graphics, lots a catchy tunes and extremely addictive gameplay!</h5>
-							</div>									
-						</div>	
+						{/foreach}
 						<div class="standard_tile_line"></div>
 					</div>
 					
