@@ -35,7 +35,7 @@ $v_rows = mysql_result($query_number,0,0) or die("Couldn't get the number of new
 //Lets put all the acquired news data into a smarty array and send them to the template.
 while ($sql_news = mysql_fetch_array($query_news))  
 {	
-	$v_image  = '../data/images/news_images/';
+	$v_image  = $news_images_path;
 	$v_image .= $sql_news['news_image_id'];
 	$v_image .= '.';
 	$v_image .= $sql_news['news_image_ext'];
