@@ -46,6 +46,7 @@ while ($sql_news = mysql_fetch_array($query_news))
 	//Only 41 characters
 	$news_text = substr($news_text, 0,44);
 	$news_text = trim($news_text);
+	$news_text .= "...";
 	
 	//convert the date to readible format
 	$news_date = convert_timestamp($sql_news['news_date']);
