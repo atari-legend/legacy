@@ -147,72 +147,19 @@
 					<!--Start latest news tile-->
 					<div class="standard_tile" id="latest_news">
 						<h1><a href="#" class="standard_tile_link">LATEST NEWS</a></h1>
+						{foreach from=$news item=line}
 						<div class="standard_tile_line"></div>
 						<div class="standard_list_entry">
 							<div class="standard_list_entry_left">
-								<a href="#"><img src="../templates/0/images/dummy/gods.png" alt="latest_news"></a>
+								<a href="#"><img src="{$line.image}" alt="latest_news"></a>
 							</div>
 							<div class="standard_list_entry_right">
-								<h4><a href="#" class="standard_tile_link">Gods remake released</a></h4>
-								<h5>12-02-2015</h5>
-								<h5>The classic Bitmap game is back with more...</h5>
+								<h4><a href="#" class="standard_tile_link">{$line.news_headline}</a></h4>
+								<h5>{$line.news_date}</h5>
+								<h5>{$line.news_text}</h5>
 							</div>							
 						</div>
-						<div class="standard_tile_line"></div>
-						<div class="standard_list_entry">
-							<div class="standard_list_entry_left">
-								<a href="#"><img src="../templates/0/images/dummy/gods.png" alt="latest_news"></a>
-							</div>
-							<div class="standard_list_entry_right">
-								<h4><a href="#" class="standard_tile_link">Gods remake released</a></h4>
-								<h5>12-02-2015</h5>
-								<h5>The classic Bitmap game is back with more...</h5>
-							</div>									
-						</div>	
-						<div class="standard_tile_line"></div>
-						<div class="standard_list_entry">
-							<div class="standard_list_entry_left">
-								<a href="#"><img src="../templates/0/images/dummy/gods.png" alt="latest_news"></a>
-							</div>
-							<div class="standard_list_entry_right">
-								<h4><a href="#" class="standard_tile_link">Gods remake released</a></h4>
-								<h5>12-02-2015</h5>
-								<h5>The classic Bitmap game is back with more...</h5>
-							</div>									
-						</div>	
-						<div class="standard_tile_line"></div>
-						<div class="standard_list_entry">
-							<div class="standard_list_entry_left">
-								<a href="#"><img src="../templates/0/images/dummy/gods.png" alt="latest_news"></a>
-							</div>
-							<div class="standard_list_entry_right">
-								<h4><a href="#" class="standard_tile_link">Gods remake released</a></h4>
-								<h5>12-02-2015</h5>
-								<h5>The classic Bitmap game is back with more...</h5>
-							</div>									
-						</div>	
-						<div class="standard_tile_line"></div>
-						<div class="standard_list_entry">
-							<div class="standard_list_entry_left">
-								<a href="#"><img src="../templates/0/images/dummy/gods.png" alt="latest_news"></a>
-							</div>
-							<div class="standard_list_entry_right">
-								<h4><a href="#" class="standard_tile_link">Gods remake released</a></h4>
-								<h5>12-02-2015</h5>
-								<h5>The classic Bitmap game is back with more...</h5>
-							</div>									
-						</div>	
-						<div class="standard_tile_line"></div>
-						<div class="standard_list_entry">
-							<div class="standard_list_entry_left">
-								<a href="#"><img src="../templates/0/images/dummy/gods.png" alt="latest_news"></a>
-							</div>
-							<div class="standard_list_entry_right">
-								<h4><a href="#" class="standard_tile_link">Gods remake released</a></h4>
-								<h5>12-02-2015</h5>
-								<h5>The classic Bitmap game is back with more...</h5>
-							</div>									
-						</div>	
+						{/foreach}
 						<div class="standard_tile_line"></div>
 					</div>
 					
