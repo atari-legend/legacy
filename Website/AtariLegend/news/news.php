@@ -63,6 +63,12 @@ $sql_trivia_quote = mysql_fetch_array($query_trivia_quote);
 
 $smarty->assign('trivia_quote', $sql_trivia_quote['trivia_quote']);
 
+//Lets get some did you know texts
+$query_trivia_text = mysql_query("SELECT trivia_text FROM trivia ORDER BY RAND() LIMIT 1"); 
+$sql_trivia_text = mysql_fetch_array($query_trivia_text);
+
+$smarty->assign('trivia_text', $sql_trivia_text['trivia_text']);
+
 $smarty->assign('news_tpl', '1');
 
 //Send all smarty variables to the templates
