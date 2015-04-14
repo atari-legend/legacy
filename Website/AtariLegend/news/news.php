@@ -21,7 +21,6 @@ include("../includes/common.php");
 //Select the news from the DB
 $query_news = mysql_query("SELECT * FROM news 
 						   LEFT JOIN news_image ON (news.news_image_id = news_image.news_image_id) 
-						   LEFT JOIN users ON (news.user_id = users.user_id) 
 						   ORDER BY news.news_date DESC LIMIT 6"); 
 						 
 //Lets put all the acquired news data into a smarty array and send them to the template.
