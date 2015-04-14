@@ -1,24 +1,25 @@
-<?php
+{* 
 /***************************************************************************
-*                                index.php
-*                            -----------------------
-*   begin                : Friday, March 20, 2015
+*                              footer.html
+*                            -----------------
+*   begin                : Tuesday, April 14, 2015
 *   copyright            : (C) 2015 Atari Legend
 *   email                : martens_maarten@hotmail.com
 *   actual update        : Creation of file
 *
-*   Id: index.php,v 0.1 2015/03/20 21:06 ST Graveyard
+*   Id: footer,v 0.1 2015/04/15 00:07 ST Graveyard
 *
 ***************************************************************************/
 
 //****************************************************************************************
-// This file is only used to start up the actual website
+// This is the footer of the site
 //**************************************************************************************** 
-
-header("Location: main/main.php");
-
-?>
-
-
-
-
+*}
+{block name=footer}
+	<footer class="footer">
+		<div class="footer_logo">
+			<img id="footer_img" src="../templates/0/images/footer_logo.png" alt="logo">
+			<h3>&copy; copyright 2004 - 2015 </h3>
+		</div>
+	</footer>
+{/block}
