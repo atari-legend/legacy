@@ -74,9 +74,7 @@ $smarty->assign('trivia_text', $sql_trivia_text['trivia_text']);
 $query_recent_reviews = mysql_query("SELECT 
 								   review_game.review_id,
 								   review_game.game_id,
-								   review_main.member_id,
 								   review_main.review_edit,
-								   review_main.review_date,
 								   review_main.review_text,	
 								   game.game_name,
 								   screenshot_review.screenshot_id,
