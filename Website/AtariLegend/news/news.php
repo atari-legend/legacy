@@ -96,10 +96,10 @@ while ($sql_recent_reviews = mysql_fetch_array($query_recent_reviews))
 			
 	$smarty->append('recent_reviews',
 	     array('review_name' => $sql_recent_reviews[game_name],
-		 	   'review_id' => $sql_recent_reviews[review_id],
-		 	   'game_id' => $sql_recent_reviews[game_id],
-			   'review_text' => $review_text,
-			   'review_img' => $v_review_image));
+		   'review_id' => $sql_recent_reviews[review_id],
+		   'game_id' => $sql_recent_reviews[game_id],
+		   'review_text' => $review_text,
+		   'review_img' => $v_review_image));
 }
 
 $smarty->assign('news_tpl', '1');
