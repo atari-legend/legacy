@@ -1,0 +1,78 @@
+{* 
+/***************************************************************************
+*                                top.html
+*                            ----------------
+*   begin                : Tuesday, April 14, 2015
+*   copyright            : (C) 2015 Atari Legend
+*   email                : martens_maarten@hotmail.com
+*   actual update        : Creation of file
+*
+*   Id: top.html,v 0.1 2015/04/14 23:52 ST Graveyard
+*
+***************************************************************************/
+
+//****************************************************************************************
+// This is the top of the site
+//**************************************************************************************** 
+*}
+
+{block name=top}
+	<div id="top_background">
+		<!-- This is the side menu only visible for smartphones (max resolution 480pc)-->				
+		<div class="container">
+		  <div id="sidebar">
+			  <ul>
+				  <li><a href="#" title="Games"><img id="games_side" src="../templates/0/../templates/0/images/menu_games.png" alt="games_side" /></a></li>
+				  <li><a href="#" title="Menus"><img id="menus_side" src="../templates/0/images/menu_menus.png" alt="menus_side" /></a></li>
+				  <li><a href="#" title="Demos"><img id="demos_side" src="../templates/0/images/menu_demos.png" alt="demos_side" /></a></li>
+				  <li><a href="#" title="Links"><img id="links_side" src="../templates/0/images/menu_links.png" alt="links_side" /></a></li>
+				  <li><a href="#" title="About"><img id="about_side" src="../templates/0/images/menu_about.png" alt="about_side" /></a></li>
+			  </ul>
+			  <ul id="search_ul">
+				  <li><input id="search_text_side" type="text" name="search_text" maxlength="11" /></li>
+				  <li><a href="#" title="search"><img id="search_side" src="../templates/0/images/menu_search.png" alt="search" /></a></li>
+			  </ul>
+			  <div class="skin-wrap">
+				<nav class="skin-menu">
+				  <ul class="clearfix">
+					<li>
+						<img id="skin_side" src="../templates/0/images/menu_skin.png" alt="about_side" />
+						<ul class="sub-menu">
+							<li><a href="#">LEGACY</a></li>
+							<li><a href="#">CLASSIC</a></li>
+						</ul>
+					</li>
+				  </ul>
+				</nav>
+			  </div>
+		  </div>
+		  <div class="main-content">
+			  <a href="#" data-toggle=".container" id="sidebar-toggle">
+				  <span class="bar"></span>
+				  <span class="bar"></span>
+				  <span class="bar"></span>
+			  </a>
+		  </div>
+		</div>		
+		<!-- end of side menu-->
+		<div id="left">
+			<img id="logo_img" src="../templates/0/images/top_logo01.png" alt="logo" />
+			<img id="logo_img_480" src="../templates/0/images/top_logo01_480.png" alt="logo_480" />
+		</div>
+		<div id="right">
+			<img src="../templates/0/images/top_bee.png" alt="bee" />
+		</div>
+	</div>			
+	<nav>
+		<ul>
+			<li><a href="#" title="Home"><img id="home" src="../templates/0/images/menu_home.png" alt="home" /></a></li>
+			<li><a href="#" title="Games"><img id="games" src="../templates/0/images/menu_games.png" alt="games" /></a></li>
+			<li><a href="#" title="Menus"><img id="menus" src="../templates/0/images/menu_menus.png" alt="menus" /></a></li>
+			<li><a href="#" title="Demos"><img id="demos" src="../templates/0/images/menu_demos.png" alt="demos" /></a></li>
+			<li><a href="#" title="Links"><img id="links" src="../templates/0/images/menu_links.png" alt="links" /></a></li>
+			<li><a href="#" title="About"><img id="about" src="../templates/0/images/menu_about.png" alt="about" /></a></li>
+			<li><input id="search_text" type="text" name="search_text" maxlength="30" /></li>
+			<li><a href="#" title="search"><img id="search" src="../templates/0/images/menu_search.png" alt="search" /></a></li>
+		</ul>
+	</nav>	
+{/block}

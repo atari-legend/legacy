@@ -1,65 +1,19 @@
 <?php
 /***************************************************************************
-*                                news.php
-*                            -----------------------
-*   begin                : Friday, March 20, 2015
+*                                latest_reviews_tile.php
+*                            -------------------------------
+*   begin                : Tuesday, April 14, 2015
 *   copyright            : (C) 2015 Atari Legend
 *   email                : martens_maarten@hotmail.com
 *   actual update        : Creation of file
 *
-*   Id: news.php,v 0.1 2015/03/20 21:06 ST Graveyard
+*   Id: latest_reviews_tile.php,v 0.1 2015/04/14 22:56 ST Graveyard
 *
 ***************************************************************************/
 
 //*********************************************************************************************
-// This file will insert the AtariLegend news into the MIDDLE section of an AL template  file
+// This is the php code for the latest news tile
 //********************************************************************************************* 
-
-//load all common functions
-include("../includes/common.php"); 
-
-//Select the news from the DB
-$query_news = mysql_query("SELECT * FROM news 
-						   LEFT JOIN news_image ON (news.news_image_id = news_image.news_image_id) 
-						   ORDER BY news.news_date DESC LIMIT 6"); 
-						 
-//Lets put all the acquired news data into a smarty array and send them to the template.
-while ($sql_news = mysql_fetch_array($query_news))  
-{	
-	$v_image  = $news_images_path;
-	$v_image .= $sql_news['news_image_id'];
-	$v_image .= '.';
-	$v_image .= $sql_news['news_image_ext'];
-
-	//fixxx the enters 
-	$news_text = nl2br($sql_news['news_text']);
-	//$news_text = InsertALCode($news_text); // disabled this as it wrecked the design.
-	//Only 41 characters
-	$news_text = substr($news_text, 0,44);
-	$news_text = trim($news_text);
-	$news_text .= "...";
-	
-	//convert the date to readible format
-	$news_date = convert_timestamp($sql_news['news_date']);
-	
-	$smarty->append('news',
-	    array('news_date' => $news_date,
-		  'news_headline' => $sql_news['news_headline'],
-        	  'news_text' => $news_text,
-		  'image' => $v_image));
-}
-
-//Lets get some trivia quotes
-$query_trivia_quote = mysql_query("SELECT trivia_quote FROM trivia_quotes ORDER BY RAND() LIMIT 1"); 
-$sql_trivia_quote = mysql_fetch_array($query_trivia_quote);
-
-$smarty->assign('trivia_quote', $sql_trivia_quote['trivia_quote']);
-
-//Lets get some did you know texts
-$query_trivia_text = mysql_query("SELECT trivia_text FROM trivia ORDER BY RAND() LIMIT 1"); 
-$sql_trivia_text = mysql_fetch_array($query_trivia_text);
-
-$smarty->assign('trivia_text', $sql_trivia_text['trivia_text']);
 
 //Get the latest reviews
 $query_recent_reviews = mysql_query("SELECT 
@@ -101,12 +55,4 @@ while ($sql_recent_reviews = mysql_fetch_array($query_recent_reviews))
 		   'review_text' => $review_text,
 		   'review_img' => $v_review_image));
 }
-
-$smarty->assign('news_tpl', '1');
-
-//Send all smarty variables to the templates
-$smarty->display('file:../templates/0/index.html');
-
-//close the connection
-mysql_close();
 ?>
