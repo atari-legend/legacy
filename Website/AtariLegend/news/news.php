@@ -90,25 +90,21 @@ $query_recent_reviews = mysql_query("SELECT
 
 while ($sql_recent_reviews = mysql_fetch_array($query_recent_reviews))
 {	
-	
-	//convert the date to readible format
-	$v_review_date = convert_timestamp($sql_recent_reviews[review_date]);
-	
-	$game_name = $sql_recent_reviews[game_name];
+	//Structure and manipulate the review text
 	$review_text = $sql_recent_reviews[review_text];
 	$review_text = str_replace("[i][b]Comments[/b][/i]", "",$review_text);
 	$review_text = substr($review_text, 0,75);
 	$review_text = trim($review_text);
 	$review_text .= "...";
 
+	//Ready screenshots path and filename
 	$v_review_image  = $game_screenshot_path;
 	$v_review_image .= $sql_recent_reviews['screenshot_id'];
 	$v_review_image .= '.';
 	$v_review_image .= $sql_recent_reviews['imgext'];
-
 			
 	$smarty->append('recent_reviews',
-	     array('review_name' => $game_name,
+	     array('review_name' => $sql_recent_reviews[game_name],
 		 	   'review_id' => $sql_recent_reviews[review_id],
 		 	   'game_id' => $sql_recent_reviews[game_id],
 			   'review_text' => $review_text,
