@@ -82,7 +82,7 @@ $query_recent_reviews = mysql_query("SELECT
 while ($sql_recent_reviews = mysql_fetch_array($query_recent_reviews))
 {	
 	//Structure and manipulate the review text
-	$review_text = $sql_recent_reviews[review_text];
+	$review_text = $sql_recent_reviews['review_text'];
 	$review_text = str_replace("[i][b]Comments[/b][/i]", "",$review_text);
 	$review_text = substr($review_text, 0,75);
 	$review_text = trim($review_text);
@@ -95,9 +95,9 @@ while ($sql_recent_reviews = mysql_fetch_array($query_recent_reviews))
 	$v_review_image .= $sql_recent_reviews['imgext'];
 			
 	$smarty->append('recent_reviews',
-	     array('review_name' => $sql_recent_reviews[game_name],
-		   'review_id' => $sql_recent_reviews[review_id],
-		   'game_id' => $sql_recent_reviews[game_id],
+	     array('review_name' => $sql_recent_reviews['game_name'],
+		   'review_id' => $sql_recent_reviews['review_id'],
+		   'game_id' => $sql_recent_reviews['game_id'],
 		   'review_text' => $review_text,
 		   'review_img' => $v_review_image));
 }
