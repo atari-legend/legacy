@@ -1,0 +1,36 @@
+{* 
+/***************************************************************************
+*                                latest_reviews_tile.html
+*                            -------------------------------
+*   begin                : Tuesday, April 14, 2015
+*   copyright            : (C) 2015 Atari Legend
+*   email                : martens_maarten@hotmail.com
+*   actual update        : Creation of file
+*
+*   Id: latest_reviews_tile.html,v 0.1 2015/04/14 23:36 ST Graveyard
+*
+***************************************************************************/
+
+//****************************************************************************************
+// This is the latest reviews tile
+//**************************************************************************************** 
+*}
+
+{block name=latest_reviews_tile}
+<div class="standard_tile" id="latest_reviews">
+	<h1><a href="#" class="standard_tile_link">LATEST REVIEWS</a></h1>
+	{foreach from=$recent_reviews item=line}
+		<div class="standard_tile_line"></div>	
+		<div class="standard_list_entry">
+			<div class="standard_list_entry_left">
+				<a href="#"><img src="{$line.review_img}" alt="latest_review"></a>
+			</div>
+			<div class="standard_list_entry_right">
+				<h4><a href="#" class="standard_tile_link">{$line.review_name}</a></h4>
+				<h5>{$line.review_text}</h5>
+			</div>							
+		</div>
+	{/foreach}
+	<div class="standard_tile_line"></div>
+</div>
+{/block}

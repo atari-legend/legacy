@@ -21,12 +21,12 @@
 // will replace with this for now:
 extract($_REQUEST);
 
-include("connect.php"); 
-include("config_smarty.php");
-include("functions.php"); 
-include("functions_session.php");
-include("constants.php");
-include("config.php");
+include("../includes/connect.php"); 
+include("../includes/config_smarty.php");
+include("../includes/functions.php"); 
+include("../includes/functions_session.php");
+include("../includes/constants.php");
+include("../includes/config.php");
 
 //Check if the user is logged on to the site
 if(!session_id())
