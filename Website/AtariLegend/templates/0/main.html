@@ -41,123 +41,74 @@
 	<body id="body">
 		<div id="wrapper">
 			<header>
-				{block name=top}{/block}
+				<div id="top_background">
+		<!-- This is the side menu only visible for smartphones (max resolution 480pc)-->				
+		<div class="container">
+		  <div id="sidebar">
+			  <ul>
+				  <li><a href="#" title="Games"><img id="games_side" src="../templates/0/../templates/0/images/menu_games.png" alt="games_side" /></a></li>
+				  <li><a href="#" title="Menus"><img id="menus_side" src="../templates/0/images/menu_menus.png" alt="menus_side" /></a></li>
+				  <li><a href="#" title="Demos"><img id="demos_side" src="../templates/0/images/menu_demos.png" alt="demos_side" /></a></li>
+				  <li><a href="#" title="Links"><img id="links_side" src="../templates/0/images/menu_links.png" alt="links_side" /></a></li>
+				  <li><a href="#" title="About"><img id="about_side" src="../templates/0/images/menu_about.png" alt="about_side" /></a></li>
+			  </ul>
+			  <ul id="search_ul">
+				  <li><input id="search_text_side" type="text" name="search_text" maxlength="11" /></li>
+				  <li><a href="#" title="search"><img id="search_side" src="../templates/0/images/menu_search.png" alt="search" /></a></li>
+			  </ul>
+			  <div class="skin-wrap">
+				<nav class="skin-menu">
+				  <ul class="clearfix">
+					<li>
+						<img id="skin_side" src="../templates/0/images/menu_skin.png" alt="about_side" />
+						<ul class="sub-menu">
+							<li><a href="#">LEGACY</a></li>
+							<li><a href="#">CLASSIC</a></li>
+						</ul>
+					</li>
+				  </ul>
+				</nav>
+			  </div>
+		  </div>
+		  <div class="main-content">
+			  <a href="#" data-toggle=".container" id="sidebar-toggle">
+				  <span class="bar"></span>
+				  <span class="bar"></span>
+				  <span class="bar"></span>
+			  </a>
+		  </div>
+		</div>		
+		<!-- end of side menu-->
+		<div id="left">
+			<img id="logo_img" src="../templates/0/images/top_logo01.png" alt="logo" />
+			<img id="logo_img_480" src="../templates/0/images/top_logo01_480.png" alt="logo_480" />
+		</div>
+		<div id="right">
+			<img src="../templates/0/images/top_bee.png" alt="bee" />
+		</div>
+	</div>			
+	<nav>
+		<ul>
+			<li><a href="#" title="Home"><img id="home" src="../templates/0/images/menu_home.png" alt="home" /></a></li>
+			<li><a href="#" title="Games"><img id="games" src="../templates/0/images/menu_games.png" alt="games" /></a></li>
+			<li><a href="#" title="Menus"><img id="menus" src="../templates/0/images/menu_menus.png" alt="menus" /></a></li>
+			<li><a href="#" title="Demos"><img id="demos" src="../templates/0/images/menu_demos.png" alt="demos" /></a></li>
+			<li><a href="#" title="Links"><img id="links" src="../templates/0/images/menu_links.png" alt="links" /></a></li>
+			<li><a href="#" title="About"><img id="about" src="../templates/0/images/menu_about.png" alt="about" /></a></li>
+			<li><input id="search_text" type="text" name="search_text" maxlength="30" /></li>
+			<li><a href="#" title="search"><img id="search" src="../templates/0/images/menu_search.png" alt="search" /></a></li>
+		</ul>
+	</nav>	
 			</header>	
-			<div id="main">
-				
-				<!--this column is always visible-->
-				<div class="column-wide">	
-					
-					<!--Start Welcome tile - will only be used on the front page so no inheritance here -->
-					<div id="welcome"> <!--style="background-image: url(../templates/0/images/dummy/another_world.jpg);"-->
-						<p id="welcome_quote">{$trivia_quote}</p>
-						<p id="welcome_slogan">Atari Legend is the number 1 Atari ST resource on the net!<p>
-						<p id="welcome_text"><br>Atari Legend is a living and breathing webproject, designed by sceners. 
-						We like to involve as many people as possible to make it fresh and up to date. We offer a nostalgic trip down the Atari ST memory lane, focussing on exciting game related content. 
-						Details on all the classics, in-depth reviews, interviews with the creators of yesterday’s gems and much more.<p>
-					</div>
-					
-					<!--Start logon tile - will only be used on the front page so no inheritance here -->
-					<div class="standard_tile" id="logon">
-						<h1>LOG ON</h1>
-						<div class="standard_tile_line"></div>
-						<div class="logon_input_usn">
-							<div class="logon_left">
-								<img src="../templates/0/images/logon_usn.png" alt="username" />
-							</div>
-							<div class="logon_right">
-								<input class="standard_tile_input" type="text" name="usn_text" maxlength="30" />
-							</div>
-						</div>
-						<div class="logon_input_pwd">
-							<div class="logon_left">
-								<img src="../templates/0/images/logon_pwd.png" alt="password" />
-							</div>
-							<div class="logon_right">
-								<input class="standard_tile_input" type="text" name="pwd_text" maxlength="30" />
-							</div>
-						</div> 
-						<div class="logon_signin">
-							<a href="#"><img src="../templates/0/images/logon_signin.png" alt="sign in"></a>
-						</div>
-						<br>	
-						<h3><a href="#" class="standard_tile_link">Forget used name or password</a></h3>
-						<br>
-					</div>
-					
-				</div>
-				
-				<!--this column is only visible in the 3 colum mode and 1 column mode-->				
-				<div class="column-left">		
-					<!--Start latest news tile-->
-					{block name=latest_news_tile}{/block}
-					
-					<!--Start "Who is it" tile-->
-					{block name=who_is_it_tile}{/block}
-				</div>
-				
-				<!--this column is only visible in the 3 colum mode and 1 column mode-->
-				<div class="column-center">		
-					<!--Start screenstar tile-->
-					{block name=screenstar_tile}{/block}
-					
-					<!--Start latest reviews tile-->
-					{block name=latest_reviews_tile}{/block}
-					
-					<!--Start "hotlinks" tile-->
-					{block name=hotlinks_tile}{/block}					
-				</div>
-				
-				<!--this column is only visible in the 3 colum mode and 1 column mode-->
-				<div class="column-right">
-										
-					<!--Start date quote tile-->
-					{block name=date_quote_tile}{/block}		
-					
-					<!--Start "Did you know" tile-->
-					{block name=did_you_know_tile}{/block}						
-				
-					<!--Start "statistics" tile-->
-					{block name=statistics_tile}{/block}
-				
-					<!--Start contact tiles - will only be used on the front page so no inheritance here -->
-					<div class="standard_tile" id="contact_tiles">
-						<a href="#"><img src="../templates/0/images/email.png" alt="email"></a>
-						<a href="#"><img src="../templates/0/images/facebook.png" alt="facebook"></a>
-						<a href="#"><img src="../templates/0/images/jukebox.png" alt="jukebox"></a>
-						<a href="#"><img src="../templates/0/images/chat.png" alt="chat"></a>
-					</div>	
-				</div>
-				
-				<!--this column is only visible in the 2 colum mode -->
-				<div class="column-left-tab">
-					<!--Start date quote tile-->
-					{block name=date_quote_tile}{/block}
-					
-					<!--Start "Did you know" tile-->
-					{block name=did_you_know_tile}{/block}
 
-					<!--Start contact tiles-->
-					<div class="standard_tile" id="contact_tiles">
-						<a href="#"><img src="../templates/0/images/jukebox.png" alt="jukebox"></a>
-						<a href="#"><img src="../templates/0/images/chat.png" alt="chat"></a>
-					</div>	
-				</div>
-				
-				<!--this column is only visible in the 2 colum mode -->
-				<div class="column-right-tab">
-					<!--Start "statistics" tile-->
-					{block name=statistics_tile}{/block}
-					
-					<!--Start contact tiles-->
-					<div class="standard_tile" id="contact_tiles">
-						<a href="#"><img src="../templates/0/images/email.png" alt="email"></a>
-						<a href="#"><img src="../templates/0/images/facebook.png" alt="facebook"></a>
-					</div>	
-				</div>
-			</div>
-			
-			{block name=footer}{/block}
+			{block name=main_body}{/block}
+
+				<footer class="footer">
+				<div class="footer_logo">
+				<img id="footer_img" src="../templates/0/images/footer_logo.png" alt="logo">
+				<h3>&copy; copyright 2004 - 2015 </h3>
+		</div>
+	</footer>
 		</div>
 	</body>
 </html>

@@ -17,13 +17,15 @@
 
 //load all common functions
 include("../includes/common.php"); 
-include("../news/latest_news_tile.php"); 
-include("../trivia/trivia_tile.php"); 
-include("../trivia/did_you_know_tile.php"); 
-include("../reviews/latest_reviews_tile.php"); 
+include("../tiles/latest_news_tile.php"); 
+include("../tiles/trivia_tile.php"); 
+include("../tiles/did_you_know_tile.php"); 
+include("../tiles/latest_reviews_tile.php"); 
 
 //Send all smarty variables to the templates
-$smarty->display('extends:../templates/0/main.html|../templates/0/top.html|../templates/0/latest_news_tile.html|../templates/0/latest_reviews_tile.html|../templates/0/who_is_it_tile.html|../templates/0/screenstar_tile.html|../templates/0/hotlinks_tile.html|../templates/0/date_quote_tile.html|../templates/0/did_you_know_tile.html|../templates/0/statistics_tile.html|../templates/0/footer.html'); 
+$smarty->display('extends:../templates/0/main.html|../templates/0/frontpage.html|../templates/0/latest_news_tile.html|../templates/0/latest_reviews_tile.html|../templates/0/who_is_it_tile.html|../templates/0/screenstar_tile.html|../templates/0/hotlinks_tile.html|../templates/0/date_quote_tile.html|../templates/0/did_you_know_tile.html|../templates/0/statistics_tile.html');
+
+
 
 //close the connection
 mysql_close();
