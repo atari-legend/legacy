@@ -1,0 +1,132 @@
+{* 
+/***************************************************************************
+*                                frontpage.html
+*                            ----------------
+*   begin                : Tuesday, April 15, 2015
+*   copyright            : (C) 2015 Atari Legend
+*   email                : martens_maarten@hotmail.com
+*   actual update        : Creation of file
+*
+*   Id: frontpage.html,v 0.1 2015/04/15 23:52 SilverSurfer
+*
+***************************************************************************/
+
+//****************************************************************************************
+// This is the top of the site
+//**************************************************************************************** 
+*}
+{block name=main_body}
+			<div id="main">
+				
+				<!--this column is always visible-->
+				<div class="column-wide">	
+					
+					<!--Start Welcome tile - will only be used on the front page so no inheritance here -->
+					<div id="welcome"> <!--style="background-image: url(../templates/0/images/dummy/another_world.jpg);"-->
+						<p id="welcome_quote">{$trivia_quote}</p>
+						<p id="welcome_slogan">Atari Legend is the number 1 Atari ST resource on the net!<p>
+						<p id="welcome_text"><br>Atari Legend is a living and breathing webproject, designed by sceners. 
+						We like to involve as many people as possible to make it fresh and up to date. We offer a nostalgic trip down the Atari ST memory lane, focussing on exciting game related content. 
+						Details on all the classics, in-depth reviews, interviews with the creators of yesterday’s gems and much more.<p>
+					</div>
+					
+					<!--Start logon tile - will only be used on the front page so no inheritance here -->
+					<div class="standard_tile" id="logon">
+						<h1>LOG ON</h1>
+						<div class="standard_tile_line"></div>
+						<div class="logon_input_usn">
+							<div class="logon_left">
+								<img src="../templates/0/images/logon_usn.png" alt="username" />
+							</div>
+							<div class="logon_right">
+								<input class="standard_tile_input" type="text" name="usn_text" maxlength="30" />
+							</div>
+						</div>
+						<div class="logon_input_pwd">
+							<div class="logon_left">
+								<img src="../templates/0/images/logon_pwd.png" alt="password" />
+							</div>
+							<div class="logon_right">
+								<input class="standard_tile_input" type="text" name="pwd_text" maxlength="30" />
+							</div>
+						</div> 
+						<div class="logon_signin">
+							<a href="#"><img src="../templates/0/images/logon_signin.png" alt="sign in"></a>
+						</div>
+						<br>	
+						<h3><a href="#" class="standard_tile_link">Forget used name or password</a></h3>
+						<br>
+					</div>
+					
+				</div>
+				
+				<!--this column is only visible in the 3 colum mode and 1 column mode-->				
+				<div class="column-left">		
+					<!--Start latest news tile-->
+					{block name=latest_news_tile}{/block}
+					<!--Start "Who is it" tile-->
+					{block name=who_is_it_tile}{/block}
+				</div>
+				
+				<!--this column is only visible in the 3 colum mode and 1 column mode-->
+				<div class="column-center">		
+					<!--Start screenstar tile-->
+					{block name=screenstar_tile}{/block}
+					
+					<!--Start latest reviews tile-->
+					{block name=latest_reviews_tile}{/block}
+					
+					<!--Start "hotlinks" tile-->
+					{block name=hotlinks_tile}{/block}					
+				</div>
+				
+				<!--this column is only visible in the 3 colum mode and 1 column mode-->
+				<div class="column-right">
+										
+					<!--Start date quote tile-->
+					{block name=date_quote_tile}{/block}		
+					
+					<!--Start "Did you know" tile-->
+					{block name=did_you_know_tile}{/block}						
+				
+					<!--Start "statistics" tile-->
+					{block name=statistics_tile}{/block}
+				
+					<!--Start contact tiles - will only be used on the front page so no inheritance here -->
+					<div class="standard_tile" id="contact_tiles">
+						<a href="#"><img src="../templates/0/images/email.png" alt="email"></a>
+						<a href="#"><img src="../templates/0/images/facebook.png" alt="facebook"></a>
+						<a href="#"><img src="../templates/0/images/jukebox.png" alt="jukebox"></a>
+						<a href="#"><img src="../templates/0/images/chat.png" alt="chat"></a>
+					</div>	
+				</div>
+				
+				<!--this column is only visible in the 2 colum mode -->
+				<div class="column-left-tab">
+					<!--Start date quote tile-->
+					{block name=date_quote_tile}{/block}
+					
+					<!--Start "Did you know" tile-->
+					{block name=did_you_know_tile}{/block}
+
+					<!--Start contact tiles-->
+					<div class="standard_tile" id="contact_tiles">
+						<a href="#"><img src="../templates/0/images/jukebox.png" alt="jukebox"></a>
+						<a href="#"><img src="../templates/0/images/chat.png" alt="chat"></a>
+					</div>	
+				</div>
+				
+				<!--this column is only visible in the 2 colum mode -->
+				<div class="column-right-tab">
+					<!--Start "statistics" tile-->
+					{block name=statistics_tile}{/block}
+					
+					<!--Start contact tiles-->
+					<div class="standard_tile" id="contact_tiles">
+						<a href="#"><img src="../templates/0/images/email.png" alt="email"></a>
+						<a href="#"><img src="../templates/0/images/facebook.png" alt="facebook"></a>
+					</div>	
+				</div>
+			</div>
+				
+{/block}
