@@ -49,10 +49,10 @@ $alcode = str_replace("[quote]", "<blockquote><span class=\"12px\">quote:</span>
 $alcode = str_replace("[/quote]", "<hr></blockquote>", $alcode);
 $alcode = str_replace("[code]","<blockquote><pre>",$alcode);
 $alcode = str_replace("[/code]","</pre></blockquote>",$alcode);
-$alcode = eregi_replace("\\[url\\]www.([^\\[]*)\\[/url\\]", "<a href=\"http://www.\\1\" target=\"_blank\" class=\"main_links\">\\1</a>",$alcode);
-$alcode = eregi_replace("\\[url\\]([^\\[]*)\\[/url\\]","<a href=\"\\1\" target=_blank class=\"main_links\">\\1</a>",$alcode);
-$alcode = eregi_replace("\\[url=([^\\[]*)\\]([^\\[]*)\\[/url\\]","<a href=\"\\1\" target=\"_blank\" class=\"main_links\">\\2</a>",$alcode);
-$alcode = eregi_replace("\\[hotspotUrl=([^\\[]*)\\]([^\\[]*)\\[/hotspotUrl\\]","<a href=\"\\1\" class=\"main_links\">\\2</a>",$alcode);
+$alcode = eregi_replace("\\[url\\]www.([^\\[]*)\\[/url\\]", "<a href=\"http://www.\\1\" target=\"_blank\" class=\"standard_tile_link\">\\1</a>",$alcode);
+$alcode = eregi_replace("\\[url\\]([^\\[]*)\\[/url\\]","<a href=\"\\1\" target=_blank class=\"standard_tile_link\">\\1</a>",$alcode);
+$alcode = eregi_replace("\\[url=([^\\[]*)\\]([^\\[]*)\\[/url\\]","<a href=\"\\1\" target=\"_blank\" class=\"standard_tile_link\">\\2</a>",$alcode);
+$alcode = eregi_replace("\\[hotspotUrl=([^\\[]*)\\]([^\\[]*)\\[/hotspotUrl\\]","<a href=\"\\1\" class=\"standard_tile_link\">\\2</a>",$alcode);
 $alcode = preg_replace("#(^|[\n ])([\w]+?://.*?[^ \"\n\r\t<]*)#is", "\\1<a href=\"\\2\" target=\"_blank\" class=\"main_links\">\\2</a>", $alcode);
 $alcode = preg_replace("#(^|[\n ])((www|ftp)\.[\w\-]+\.[\w\-.\~]+(?:/[^ \"\t\n\r<]*)?)#is", "\\1<a href=\"http://\\2\" target=\"_blank\" class=\"main_links\">\\2</a>", $alcode);
 
