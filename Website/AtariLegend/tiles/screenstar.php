@@ -27,11 +27,9 @@ $query_screenstar = $mysqli->query("SELECT
 					LEFT JOIN game ON (game_user_comments.game_id = game.game_id)
 					LEFT JOIN screenshot_game ON (game.game_id = screenshot_game.game_id)
 					LEFT JOIN screenshot_main ON (screenshot_game.screenshot_id = screenshot_main.screenshot_id)
-					ORDER BY RAND() LIMIT 1") or die("query error, screenstar");
+					WHERE CHAR_LENGTH( game_name ) <15 ORDER BY RAND() LIMIT 1") or die("query error, screenstar");
 
 $sql_screenstar = $query_screenstar->fetch_array(MYSQLI_BOTH);
-
-
 	
 	//Structure and manipulate the comment text
 	$screenstar_comment = $sql_screenstar['comment'];
