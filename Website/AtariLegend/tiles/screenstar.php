@@ -16,7 +16,7 @@
 //*********************************************************************************************
 
 //Select the screenstar info from the DB
-$query_screenstar = mysql_query("SELECT 
+$query_screenstar = $mysqli->query("SELECT 
 					game.game_name,
 					game.game_id,
 					comments.comment,
@@ -29,7 +29,7 @@ $query_screenstar = mysql_query("SELECT
 					LEFT JOIN screenshot_main ON (screenshot_game.screenshot_id = screenshot_main.screenshot_id)
 					ORDER BY RAND() LIMIT 1") or die("query error, screenstar");
 
-$sql_screenstar = mysql_fetch_array($query_screenstar);
+$sql_screenstar = $query_screenstar->fetch_array(MYSQLI_BOTH);
 
 
 	

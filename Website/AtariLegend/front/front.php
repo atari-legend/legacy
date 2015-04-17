@@ -28,5 +28,5 @@ include("../tiles/screenstar.php");
 $smarty->display('extends:../templates/0/main.html|../templates/0/frontpage.html|../templates/0/latest_news_tile.html|../templates/0/latest_reviews_tile.html|../templates/0/who_is_it_tile.html|../templates/0/screenstar_tile.html|../templates/0/hotlinks_tile.html|../templates/0/date_quote_tile.html|../templates/0/did_you_know_tile.html|../templates/0/statistics_tile.html');
 
 //close the connection
-mysql_close();
+mysqli_close($mysqli)
 ?>

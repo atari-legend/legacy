@@ -16,8 +16,8 @@
 //********************************************************************************************* 
 
 //Lets get some trivia quotes
-$query_trivia_quote = mysql_query("SELECT trivia_quote FROM trivia_quotes ORDER BY RAND() LIMIT 1"); 
-$sql_trivia_quote = mysql_fetch_array($query_trivia_quote);
+$query_trivia_quote = $mysqli->query("SELECT trivia_quote FROM trivia_quotes ORDER BY RAND() LIMIT 1"); 
+$sql_trivia_quote = $query_trivia_quote->fetch_array(MYSQLI_BOTH);
 
 $smarty->assign('trivia_quote', $sql_trivia_quote['trivia_quote']);
 ?>
