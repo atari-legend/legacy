@@ -16,7 +16,7 @@
 //********************************************************************************************* 
 
 //Get the latest reviews
-$query_recent_reviews = mysql_query("SELECT 
+$query_recent_reviews = $mysqli->query("SELECT 
 								   review_game.review_id,
 								   review_game.game_id,
 								   review_main.review_edit,
@@ -33,7 +33,7 @@ $query_recent_reviews = mysql_query("SELECT
 								   GROUP BY game_id
 								   ORDER BY review_main.review_date DESC LIMIT 3") or die ("couldn't get 3 latest reviews");
 
-while ($sql_recent_reviews = mysql_fetch_array($query_recent_reviews))
+while ($sql_recent_reviews = $query_recent_reviews->fetch_array(MYSQLI_BOTH))
 {	
 	//Structure and manipulate the review text
 	$review_text = $sql_recent_reviews['review_text'];
