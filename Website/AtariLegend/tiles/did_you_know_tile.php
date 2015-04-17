@@ -16,8 +16,8 @@
 //*********************************************************************************************
 
 //Lets get some did you know texts
-$query_trivia_text = mysql_query("SELECT trivia_text FROM trivia ORDER BY RAND() LIMIT 1"); 
-$sql_trivia_text = mysql_fetch_array($query_trivia_text);
+$query_trivia_text = $mysqli->query("SELECT trivia_text FROM trivia ORDER BY RAND() LIMIT 1"); 
+$sql_trivia_text = $query_trivia_text->fetch_assoc();
 
 $smarty->assign('trivia_text', $sql_trivia_text['trivia_text']);
 ?>

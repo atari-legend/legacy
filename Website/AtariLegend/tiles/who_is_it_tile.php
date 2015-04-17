@@ -16,7 +16,7 @@
 //*********************************************************************************************
 
 //Select a random interview record
-$query_interview = mysql_query("SELECT  
+$query_interview = $mysqli->query("SELECT  
 								   interview_main.interview_id,
 								   interview_text.interview_intro,	
 								   individuals.ind_id,
@@ -31,7 +31,7 @@ $query_interview = mysql_query("SELECT
 						   WHERE individual_text.ind_imgext <> ' '
 						   ORDER BY RAND() LIMIT 1") or die("query error, who_is_it");  
 
-$sql_interview = mysql_fetch_array($query_interview); 
+$sql_interview = $query_interview->fetch_array(MYSQLI_BOTH); 
 
 //Get the dataElements we want to place on screen
 
