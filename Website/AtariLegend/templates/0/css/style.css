@@ -498,7 +498,7 @@ Standard tile settings
 		margin-top : 46%;
 		color : white; 	
 		z-index:100;
-		position:absolute;	
+		position:absolute;
 }
 
 .standard_tile_subtitle { background: none;
@@ -664,6 +664,11 @@ Standard tile settings
 		transform: translateY(-50%);
 }
  
+.standard_list_entry_right_news_text {
+		height: 70px;
+		overflow: hidden;
+}
+
 @media screen and (min-width: 450px) and (max-width: 639px) { 
 	.standard_list_entry{height: 180px;}
 } 
