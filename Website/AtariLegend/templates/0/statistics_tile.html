@@ -12,7 +12,7 @@
 ***************************************************************************/
 
 //****************************************************************************************
-// This is the 'did you know' tile
+// This is the 'statistics' tile
 //**************************************************************************************** 
 *}
 {block name=statistics_tile}
@@ -20,15 +20,17 @@
 		<h1>STATISTICS</h1>
 		<div class="standard_tile_line"></div>
 		<div class="standard_tile_text">
-			<h6>4844 games in the AL database <br>
-				19767 screenshots in the AL database <br> 
-				4423 games have screenshots <br>
-				3977 game publishers in the AL database <br> 
-				3031 game developers in the AL database <br> 
-				3615 games have a release year <br> 
-				700 gamebox scans in the AL database <br> 
-				2803 games are signed to a category <br> 
-				1796 games are downloadable <br>
+			<h6>{$statistics.games_number} games in the AL database <br>
+				{$statistics.demos_number} demos in the AL database <br>
+				{$statistics.games_screenshot} screenshots in the AL database <br> 
+				{$statistics.games_screenshot_distinct} games have screenshots <br>
+				{$statistics.demos_screenshot_distinct} demos have screenshots <br>
+				{$statistics.game_publisher} game publishers in the AL database <br> 
+				{$statistics.game_developer} game developers in the AL database <br> 
+				{$statistics.game_year} games have a release year <br> 
+				{$statistics.games_boxscan} gamebox scans in the AL database <br> 
+				{$statistics.game_category} games are signed to a category <br> 
+				{$statistics.game_download} games are downloadable <br>
 			</h6>
 		</div>
 	</div>	

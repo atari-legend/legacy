@@ -15,7 +15,6 @@
 // This is the latest news tile
 //**************************************************************************************** 
 *}
-
 {block name=latest_news_tile}
 <div class="standard_tile" id="latest_news">
 	<h1><a href="#" class="standard_tile_link">LATEST NEWS</a></h1>
@@ -28,7 +27,13 @@
 			<div class="standard_list_entry_right">
 				<h4><a href="#" class="standard_tile_link">{$line.news_headline}</a></h4>
 				<h5>{$line.news_date}</h5>
-				<h5>{$line.news_text}</h5>
+				<h5 class="standard_list_entry_right_news_text" style="text-overflow: ellipsis">
+
+					<span style="">
+						{$line.news_text}
+
+					</span>
+				</h5>
 			</div>							
 		</div>
 	{/foreach}
