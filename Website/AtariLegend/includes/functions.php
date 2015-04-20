@@ -13,15 +13,15 @@
 *
 ***************************************************************************/
 
-function InsertALCode($alcode){
-$alcode = eregi_replace("\\[color=([^\\[]*)\\]","<font color=\"\\1\">",$alcode);
-$alcode = str_replace("[/color]", "</font>", $alcode);
-$alcode = eregi_replace("\\[style=([^\\[]*)\\]","<span class=\"\\1\">",$alcode);
-$alcode = str_replace("[/style]", "</span>", $alcode);
-$alcode = preg_replace("(\[size=(.+?)\](.+?)\[\/size\])is","<span style=\"font-size: $1px\">$2</span>",$alcode);
-$alcode = eregi_replace("\\[font=([^\\[]*)\\]([^\\[]*)\\[/font\\]","<font face=\"\\1\">\\2</font>",$alcode);
-$alcode = eregi_replace("\\[align=([^\\[]*)\\]([^\\[]*)\\[/align\\]","<span style=\"\\1\">\\2</span>",$alcode);
+//this is a test
 
+function InsertALCode($alcode){
+$alcode = preg_replace("#\[color\=(\#[0-9A-F]{0,6}|[A-z]+)\](.*)\[\/color\]#Ui", "<span style=\"color: $1;\">$2</span>", $alcode);
+//$alcode = eregi_replace("\\[style=([^\\[]*)\\]","<span class=\"\\1\">",$alcode);
+//$alcode = str_replace("[/style]", "</span>", $alcode);
+$alcode = preg_replace("(\[size=(.+?)\](.+?)\[\/size\])is","<span style=\"font-size: $1px\">$2</span>",$alcode);
+$alcode = preg_replace("#\[font\=(.*)\](.*)\[\/font\]#Ui", "<span style=\"font-family: $1;\">$2</span>", $alcode);
+$alcode = preg_replace("#\[align\=(.*)\](.*)\[\/align\]#Ui", "<span style=\" $1;\">$2</span>", $alcode);
 $alcode = str_replace("[move]", "<marquee>", $alcode);
 $alcode = str_replace("[/move]", "</marquee>", $alcode);
 $alcode = str_replace("[hr]", "<hr>", $alcode);
@@ -33,26 +33,25 @@ $alcode = str_replace("[tt]", "<tt>", $alcode);
 $alcode = str_replace("[/tt]", "</tt>", $alcode);
 $alcode = str_replace("[sup]", "<sup>", $alcode);
 $alcode = str_replace("[/sup]", "</sup>", $alcode);
-
 $alcode = preg_replace( "#\[b\](.+?)\[/b\]#is", "<b>\\1</b>", $alcode );
 $alcode = preg_replace( "#\[i\](.+?)\[/i\]#is", "<i>\\1</i>", $alcode );
 $alcode = preg_replace( "#\[u\](.+?)\[/u\]#is", "<u>\\1</u>", $alcode );
 $alcode = preg_replace( "#\[s\](.+?)\[/s\]#is", "<s>\\1</s>", $alcode );
-
 $alcode = str_replace("[*]", "<li>", $alcode);
 $alcode = str_replace("[list]", "<ul>", $alcode);
 $alcode = str_replace("[/list]", "</ul>", $alcode);
-$alcode = eregi_replace("\\[email\\]([^\\[]*)\\[/email\\]", "<a href=\"mailto:\\1\" class=\"main_links\">\\1</a>",$alcode);
-$alcode = eregi_replace("\\[email=([^\\[]*)\\]([^\\[]*)\\[/email\\]", "<a href=\"mailto:\\1\" class=\"main_links\">\\2</a>",$alcode);
-$alcode = eregi_replace("\\[hotspot=([^\\[]*)\\]([^\\[]*)\\[/hotspot\\]","<a name=\"\\1\">\\2</a>",$alcode);
+$alcode = preg_replace("#\[email\=(.*)\](.*)\[\/email\]#Ui", "<a href=\"mailto: $1\">$2</a>", $alcode);
+$alcode = preg_replace("#\[email\](.*)\[\/email\]#Ui", "<a href=\"mailto: $1\">$1</a>", $alcode);
+$alcode = preg_replace("#\[hotspot\](.*)\[\/hotspot\]#Ui", "<a name=\"$1\">$1</a>", $alcode);
 $alcode = str_replace("[quote]", "<blockquote><span class=\"12px\">quote:</span><hr>", $alcode);
 $alcode = str_replace("[/quote]", "<hr></blockquote>", $alcode);
 $alcode = str_replace("[code]","<blockquote><pre>",$alcode);
 $alcode = str_replace("[/code]","</pre></blockquote>",$alcode);
-$alcode = eregi_replace("\\[url\\]www.([^\\[]*)\\[/url\\]", "<a href=\"http://www.\\1\" target=\"_blank\" class=\"standard_tile_link\">\\1</a>",$alcode);
-$alcode = eregi_replace("\\[url\\]([^\\[]*)\\[/url\\]","<a href=\"\\1\" target=_blank class=\"standard_tile_link\">\\1</a>",$alcode);
-$alcode = eregi_replace("\\[url=([^\\[]*)\\]([^\\[]*)\\[/url\\]","<a href=\"\\1\" target=\"_blank\" class=\"standard_tile_link\">\\2</a>",$alcode);
-$alcode = eregi_replace("\\[hotspotUrl=([^\\[]*)\\]([^\\[]*)\\[/hotspotUrl\\]","<a href=\"\\1\" class=\"standard_tile_link\">\\2</a>",$alcode);
+$alcode = preg_replace("#\[url\](www\..+)\[\/url\]#i", "[url=http://$1]$1[/url]", $alcode);
+$alcode = preg_replace("#\[url\=(www\..+)\](.*)\[\/url\]#i", "[url=http://$1]$2[/url]", $alcode);
+$alcode = preg_replace("#\[url\=(.*)\](.*)\[\/url\]#Ui", "<a href=\"$1\" class=\"standard_tile_link\">$2</a>", $alcode);
+$alcode = preg_replace("#\[url\](.*)\[\/url\]#Ui", "<a href=\"$1\" class=\"standard_tile_link\">$1</a>", $alcode);
+$alcode = preg_replace("#\[hotspotUrl\](.*)\[\/hotspotUrl\]#Ui", "<a href=\"$1\" class=\"standard_tile_link\">$1</a>", $alcode);
 $alcode = preg_replace("#(^|[\n ])([\w]+?://.*?[^ \"\n\r\t<]*)#is", "\\1<a href=\"\\2\" target=\"_blank\" class=\"main_links\">\\2</a>", $alcode);
 $alcode = preg_replace("#(^|[\n ])((www|ftp)\.[\w\-]+\.[\w\-.\~]+(?:/[^ \"\t\n\r<]*)?)#is", "\\1<a href=\"http://\\2\" target=\"_blank\" class=\"main_links\">\\2</a>", $alcode);
 
@@ -72,9 +71,9 @@ function BBCode($Text)
             $MAILSearchString = $URLSearchString . " a-zA-Z0-9\.@";
 
             // Perform URL Search
-            $Text = preg_replace("/\[url\]([$URLSearchString]*)\[\/url\]/", '<a href="$1" target="_blank" class="main_links">$1</a>', $Text);
-            $Text = preg_replace("(\[url\=([$URLSearchString]*)\](.+?)\[/url\])", '<a href="$1" target="_blank" class="main_links">$2</a>', $Text);
-			//$Text = preg_replace("(\[url\=([$URLSearchString]*)\]([$URLSearchString]*)\[/url\])", '<a href="$1" target="_blank" class="main_links">$2</a>', $Text);
+            $Text = preg_replace("/\[url\]([$URLSearchString]*)\[\/url\]/", '<a href="$1" target="_blank" class="standard_tile_link">$1</a>', $Text);
+            $Text = preg_replace("(\[url\=([$URLSearchString]*)\](.+?)\[/url\])", '<a href="$1" target="_blank" class="standard_tile_link">$2</a>', $Text);
+	    //$Text = preg_replace("(\[url\=([$URLSearchString]*)\]([$URLSearchString]*)\[/url\])", '<a href="$1" target="_blank" class="main_links">$2</a>', $Text);
 
             // Perform MAIL Search
             $Text = preg_replace("(\[mail\]([$MAILSearchString]*)\[/mail\])", '<a href="mailto:$1">$1</a>', $Text);
@@ -146,9 +145,9 @@ function BBCode($Text)
             $Text = preg_replace("/\[img\=([0-9]*)x([0-9]*)\](.+?)\[\/img\]/", '<img src="$3" height="$2" width="$1">', $Text);
 			
 			// urls without using the url tag
-			$Text = preg_replace("#(^|[\n ])([\w]+?://.*?[^ \"\n\r\t<]*)#is", "\\1<a href=\"\\2\" target=\"_blank\" class=\"main_links\">\\2</a>", $Text);
+			$Text = preg_replace("#(^|[\n ])([\w]+?://.*?[^ \"\n\r\t<]*)#is", "\\1<a href=\"\\2\" target=\"_blank\" class=\"standard_tile_link\">\\2</a>", $Text);
 
-			$Text = preg_replace("#(^|[\n ])((www|ftp)\.[\w\-]+\.[\w\-.\~]+(?:/[^ \"\t\n\r<]*)?)#is", "\\1<a href=\"http://\\2\" target=\"_blank\" class=\"main_links\">\\2</a>", $Text);
+			$Text = preg_replace("#(^|[\n ])((www|ftp)\.[\w\-]+\.[\w\-.\~]+(?:/[^ \"\t\n\r<]*)?)#is", "\\1<a href=\"http://\\2\" target=\"_blank\" class=\"standard_tile_link\">\\2</a>", $Text);
 
 	        return $Text;
 		}
