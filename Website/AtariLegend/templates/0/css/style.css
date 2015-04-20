@@ -488,33 +488,39 @@ Standard tile settings
 		width: 91.7%;
 }
 				
-.standard_tile_title{ background: none;
-		background: -webkit-linear-gradient(bottom, rgba(20, 80, 80,0.4), rgba(0, 80, 80,1)); /* For Safari 5.1 to 6.0 */
-		background: -o-linear-gradient(top, rgba(0, 80, 80,0.4), rgba(0, 80, 80,1)); /* For Opera 11.1 to 12.0 */
-		background: -moz-linear-gradient(top, rgba(0, 80, 80,0.4), rgba(0, 80, 80,1)); /* For Firefox 3.6 to 15 */
-		background: linear-gradient(to top, rgba(0, 80, 80,0.4), rgba(0, 80, 80,1)); 
+.standard_tile_title{ 
+		background: rgb(0, 80, 80) transparent;   /* Fallback for web browsers that doesn't support RGBa */
+        background: rgba(0, 80, 80, 0.6);   /* RGBa with 0.6 opacity */
+		filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#005050, endColorstr=#005050);  /* For IE 5.5 - 7*/
+		-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#005050, endColorstr=#005050)";  /* For IE 8*/ 
+/*		background: none;
+/*		background: -webkit-linear-gradient(bottom, rgba(20, 80, 80,0.4), rgba(0, 80, 80,1)); /* For Safari 5.1 to 6.0 */
+/*		background: -o-linear-gradient(top, rgba(0, 80, 80,0.4), rgba(0, 80, 80,1)); /* For Opera 11.1 to 12.0 */
+/*		background: -moz-linear-gradient(top, rgba(0, 80, 80,0.4), rgba(0, 80, 80,1)); /* For Firefox 3.6 to 15 */
+/*		background: linear-gradient(to top, rgba(0, 80, 80,0.4), rgba(0, 80, 80,1)); */
 		padding-top:3%;
 		font-size : 17pt;
 		margin-top : 46%;
 		color : white; 	
 		z-index:100;
 		position:absolute;
+	    border-bottom: 2px solid #01b5b5;
 }
 
-.standard_tile_subtitle { background: none;
-		background: -webkit-linear-gradient(top, rgba(20, 80, 80,0.4), rgba(0, 80, 80,1)); /* For Safari 5.1 to 6.0 */
-		background: -o-linear-gradient(bottom, rgba(0, 80, 80,0.4), rgba(0, 80, 80,1)); /* For Opera 11.1 to 12.0 */
-		background: -moz-linear-gradient(bottom, rgba(0, 80, 80,0.4), rgba(0, 80, 80,1)); /* For Firefox 3.6 to 15 */
-		background: linear-gradient(to bottom, rgba(0, 80, 80,0.4), rgba(0, 80, 80,1)); 
-		padding-bottom: 2.7%;
-		padding-top: 1%;
-		font-size : 10pt; 
-		color : #bcbdbd;
-		z-index:100;
-		margin-top: 56.2%;
-		position:absolute;
-		border-bottom: 2px solid #01b5b5;
-}
+/* .standard_tile_subtitle { background: none;
+/*  	background: -webkit-linear-gradient(top, rgba(20, 80, 80,0.4), rgba(0, 80, 80,1)); /* For Safari 5.1 to 6.0 */
+/*		background: -o-linear-gradient(bottom, rgba(0, 80, 80,0.4), rgba(0, 80, 80,1)); /* For Opera 11.1 to 12.0 */
+/*		background: -moz-linear-gradient(bottom, rgba(0, 80, 80,0.4), rgba(0, 80, 80,1)); /* For Firefox 3.6 to 15 */
+/*		background: linear-gradient(to bottom, rgba(0, 80, 80,0.4), rgba(0, 80, 80,1)); 
+/*		padding-bottom: 2.7%;
+/*		padding-top: 1%;
+/*		font-size : 10pt; 
+/*		color : #bcbdbd;
+/*		z-index:100;
+/*		margin-top: 56.2%;
+/*		position:absolute;
+/*		border-bottom: 2px solid #01b5b5;
+} */
 
 /* 1 tile and a simplified intro screen */
 @media screen and (max-width: 639px) { 
