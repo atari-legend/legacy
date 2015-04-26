@@ -31,32 +31,7 @@
 			</div>
 			
 			<!--Start logon tile - will only be used on the front page so no inheritance here -->
-			<div class="standard_tile" id="logon">
-				<h1>LOG ON</h1>
-				<div class="standard_tile_line"></div>
-				<div class="logon_input_usn">
-					<div class="logon_left">
-						<img src="../templates/0/images/logon_usn.png" alt="username" />
-					</div>
-					<div class="logon_right">
-						<input class="standard_tile_input" type="text" name="usn_text" maxlength="30" />
-					</div>
-				</div>
-				<div class="logon_input_pwd">
-					<div class="logon_left">
-						<img src="../templates/0/images/logon_pwd.png" alt="password" />
-					</div>
-					<div class="logon_right">
-						<input class="standard_tile_input" type="text" name="pwd_text" maxlength="30" />
-					</div>
-				</div> 
-				<div class="logon_signin">
-					<a href="#"><img src="../templates/0/images/logon_signin.png" alt="sign in"></a>
-				</div>
-				<br>	
-				<h3><a href="#" class="standard_tile_link">Forget used name or password</a></h3>
-				<br>
-			</div>
+			{block name=user_login_tile}{/block}
 			
 		</div>
 		
