@@ -24,7 +24,9 @@ extract($_REQUEST);
 //The foreach loop solves the problem of getting the image manipulations in the desired order.
 //Doc: http://wideimage.sourceforge.net/wp-content/current/doc/WideImage/WideImage_Image.html
 foreach ( $_GET as $key => $value ) {
-            
+
+
+            	//set value for filepath
 		if($key=="file") { 
 
 			$file_path = $value; 
@@ -32,6 +34,7 @@ foreach ( $_GET as $key => $value ) {
 			$image = WideImage::load("$file_path");
 		}
 
+		//set value for resizing
 		if($key=="resize") { 
 
 			$resize_exp = explode(",",$value); 
@@ -44,6 +47,7 @@ foreach ( $_GET as $key => $value ) {
 			
 		}
 		
+		//set value for croping
 		if($key=="crop") { 
 
 			$crop_exp = explode(",",$value); 
@@ -70,7 +74,37 @@ foreach ( $_GET as $key => $value ) {
 
 
 		}
+
+		//passing 2 values in minimum_size
+		//this one is useful when the crop value i larger then the size of the image.
+		if($key=="minimum_size") {
+			
+			$minimum_exp = explode(",",$value);
+			$minimum_width = $minimum_exp[0];
+			$minimum_height = $minimum_exp[1];
+
+		}
             }
+
+	// lets check if the image is atleast the size of the minimum values passed
+	if(isset($minimum_width) or isset($minimum_height)) {
+
+		$current_width = $image->getWidth();
+		$current_height = $image->getHeight();
+
+		//if height is smaller then minimum height resize
+		if($current_height<$minimum_height) {
+
+		$image = $image->resize($minimum_width,$minimum_height,'fill','up');
+
+		}
+
+  	}
+
+
+
+
+
 
 $image->output('png');
 ?>
