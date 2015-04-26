@@ -477,14 +477,15 @@ Standard tile settings
 		position:absolute;
 		left:0;
 		top:0;
-	}
+}
 
 .standard_tile p { 
 		text-align: left;
 		border-right: 2px solid #01b5b5;
+		/*border-left: 2px solid #01b5b5;*/
 		padding-left: 4%;
 		padding-right: 4%;
-		width: 91.7%; 
+		width: 91.7%;
 }
 				
 .standard_tile_title{ 
@@ -492,68 +493,61 @@ Standard tile settings
         background: rgba(0, 80, 80, 0.6);   /* RGBa with 0.6 opacity */
 		filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#005050, endColorstr=#005050);  /* For IE 5.5 - 7*/
 		-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#005050, endColorstr=#005050)";  /* For IE 8*/ 
-		padding-top:1%;
-		padding-bottom:1%;
+/*		background: none;
+/*		background: -webkit-linear-gradient(bottom, rgba(20, 80, 80,0.4), rgba(0, 80, 80,1)); /* For Safari 5.1 to 6.0 */
+/*		background: -o-linear-gradient(top, rgba(0, 80, 80,0.4), rgba(0, 80, 80,1)); /* For Opera 11.1 to 12.0 */
+/*		background: -moz-linear-gradient(top, rgba(0, 80, 80,0.4), rgba(0, 80, 80,1)); /* For Firefox 3.6 to 15 */
+/*		background: linear-gradient(to top, rgba(0, 80, 80,0.4), rgba(0, 80, 80,1)); */
+		padding-top:3%;
 		font-size : 17pt;
-		margin-top : 46.5%;
+		margin-top : 46%;
 		color : white; 	
 		z-index:100;
 		position:absolute;
-	    border-bottom: 2px solid #01b5b5;	
+	    border-bottom: 2px solid #01b5b5;
 }
 
- @media screen and (max-width: 1150px) { 
-.standard_tile_title{ margin-top : 44.5%;
+/* .standard_tile_subtitle { background: none;
+/*  	background: -webkit-linear-gradient(top, rgba(20, 80, 80,0.4), rgba(0, 80, 80,1)); /* For Safari 5.1 to 6.0 */
+/*		background: -o-linear-gradient(bottom, rgba(0, 80, 80,0.4), rgba(0, 80, 80,1)); /* For Opera 11.1 to 12.0 */
+/*		background: -moz-linear-gradient(bottom, rgba(0, 80, 80,0.4), rgba(0, 80, 80,1)); /* For Firefox 3.6 to 15 */
+/*		background: linear-gradient(to bottom, rgba(0, 80, 80,0.4), rgba(0, 80, 80,1)); 
+/*		padding-bottom: 2.7%;
+/*		padding-top: 1%;
+/*		font-size : 10pt; 
+/*		color : #bcbdbd;
+/*		z-index:100;
+/*		margin-top: 56.2%;
+/*		position:absolute;
+/*		border-bottom: 2px solid #01b5b5;
+} */
+
+/* 1 tile and a simplified intro screen */
+@media screen and (max-width: 639px) { 
+.standard_tile_title{ margin-top : 50.5%;
+	}
+
+.standard_tile_subtitle { margin-top: 58%;
 	}
 }
 
- @media screen and (max-width: 980px) { 
-.standard_tile_title{ margin-top : 42%;
-	}
-}
-
- @media screen and (max-width: 850px) { 
-.standard_tile_title{ margin-top : 38.5%;
+ @media screen and (max-width: 1025px) { 
+.standard_tile_title{ padding: 0.5%;
 	}
 }
 
 @media screen and (max-width: 800px) { 
-.standard_tile_title{ margin-top : 44.5%;
+.standard_tile_title{ padding: 1.5%;
 	}
 }
 
-@media screen and (max-width: 700px) { 
-.standard_tile_title{ margin-top : 43%;
+@media screen and (max-width: 500px) { 
+.standard_tile_title{ padding : 1%;
 	}
 }
 
-@media screen and (max-width: 639px) { 
-.standard_tile_title{ margin-top : 51%;
-	}
-}
-
-@media screen and (max-width: 525px) { 
-.standard_tile_title{ margin-top : 49%;
-	}
-}
-
-@media screen and (max-width: 450px) { 
-.standard_tile_title{ margin-top : 47%;
-	}
-}
-
-@media screen and (max-width: 360px) { 
-.standard_tile_title{ margin-top : 45%;
-	}
-}
-
-@media screen and (max-width: 300px) { 
-.standard_tile_title{ margin-top : 41%;
-	}
-}
-
-@media screen and (max-width: 250px) { 
-.standard_tile_title{ margin-top : 39%;
+@media screen and (max-width: 400px) { 
+.standard_tile_title{ padding : 0;
 	}
 }
 
@@ -696,7 +690,6 @@ Standard tile settings
 		margin-top: 20px;
 		border-top: 10px solid #01b5b5;
 		border-bottom: 3px solid #01b5b5;
-		background-image: url(../images/dummy/another_world.jpg);
 		margin-bottom:20px;
 	}
 	

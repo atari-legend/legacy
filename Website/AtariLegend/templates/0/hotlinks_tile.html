@@ -20,14 +20,14 @@
 		<h1><a href="#" class="standard_tile_link">HOT LINKS</a></h1>
 		<div class="standard_tile_line"></div>
 		<div class="standard_tile_background">
-			<a href="{$hotlinks.website_url}" class="standard_tile_link"><img class="standard_tile_image" src="../includes/show_image.php?file={$hotlinks.website_img}&w=400&h=100&mode=adapt" alt="hot links"></a>
-			<p class="standard_tile_title"><a href="{$hotlinks.website_url}" class="standard_tile_link">{$hotlinks.website_name}</a>
+			<a href="{$hotlinks.website_url}" class="standard_tile_link"><img class="standard_tile_image" src="../includes/show_image.php?file={$hotlinks.website_img}&resize=410,null,null,null&crop=left,top,410,259&minimum_size=410,259" alt="hot links"></a>
+			<p class="standard_tile_title" style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis">
+			<a href="{$hotlinks.website_url}" title="{$hotlinks.website_name}" class="standard_tile_link">{$hotlinks.website_name}</a>
 			<br><span style='font-size:10pt; color:#bcbdbd;'>link added by {$hotlinks.userid}</span></p>
 		</div>
 		<div class="standard_tile_explanation">
 			<br>	
-			<h6>Stonish.net provides currently 1602 menus disks for Atari ST. All should work on the real machines and the best emulators 
-				(Steem SSE, SainT, Hatari, Hataroid...). All disks have been verified and ....</h6>
+			<h6>{$hotlinks.website_text}</h6>
 			<br>
 			<h2><a href="#" class="standard_tile_link">Visit ></a></h2>
 		</div>

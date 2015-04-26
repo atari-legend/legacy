@@ -22,10 +22,14 @@
 		<div class="standard_tile_line"></div>
 		<div class="standard_list_entry">
 			<div class="standard_list_entry_left">
-				<a href="#"><img src="{$line.image}" alt="latest_news"></a>
+				<a href="#">
+				<img src="../includes/show_image.php?file={$line.image}&resize=164,null,null,null&crop=left,top,164,120" alt="latest_news">
+				</a>
 			</div>
 			<div class="standard_list_entry_right">
-				<h4><a href="#" class="standard_tile_link">{$line.news_headline}</a></h4>
+				<h4 style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis">
+					<a href="#" title="{$line.news_headline}" class="standard_tile_link">{$line.news_headline}</a>
+				</h4>
 				<h5>{$line.news_date}</h5>
 				<h5 class="standard_list_entry_right_news_text" style="text-overflow: ellipsis">
 
