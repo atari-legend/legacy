@@ -17,19 +17,19 @@
 
 //Select a random interview record
 $query_interview = $mysqli->query("SELECT  
-								   interview_main.interview_id,
-								   interview_text.interview_intro,	
-								   individuals.ind_id,
-								   individuals.ind_name,
-								   individual_text.ind_imgext,
-								   users.userid						   
-						   FROM interview_main
-						   LEFT JOIN interview_text ON (interview_main.interview_id = interview_text.interview_id) 
-						   LEFT JOIN individuals ON (interview_main.ind_id = individuals.ind_id) 
-						   LEFT JOIN individual_text ON (individuals.ind_id = individual_text.ind_id)
-						   LEFT JOIN users ON (interview_main.member_id = users.user_id)
-						   WHERE individual_text.ind_imgext <> ' '
-						   ORDER BY RAND() LIMIT 1") or die("query error, who_is_it");  
+						interview_main.interview_id,
+						interview_text.interview_intro,	
+						individuals.ind_id,
+						individuals.ind_name,
+						individual_text.ind_imgext,
+						users.userid						   
+						FROM interview_main
+						LEFT JOIN interview_text ON (interview_main.interview_id = interview_text.interview_id) 
+						LEFT JOIN individuals ON (interview_main.ind_id = individuals.ind_id) 
+						LEFT JOIN individual_text ON (individuals.ind_id = individual_text.ind_id)
+						LEFT JOIN users ON (interview_main.member_id = users.user_id)
+						WHERE individual_text.ind_imgext <> ' '
+						ORDER BY RAND() LIMIT 1") or die("query error, who_is_it");  
 
 $sql_interview = $query_interview->fetch_array(MYSQLI_BOTH); 
 
@@ -39,12 +39,18 @@ $v_ind_image  = $individual_screenshot_path;
 $v_ind_image .= $sql_interview['ind_id'];
 $v_ind_image .= '.';
 $v_ind_image .= $sql_interview['ind_imgext'];
+
+	//fixxx the enters 
+	$int_text = nl2br($sql_interview['interview_intro']);
+	$int_text = InsertALCode($int_text); // disabled this as it wrecked the design.
+	$int_text = trim($int_text);
+
 	
 $smarty->assign('who_is_it',
     	 array('ind_id' => $sql_interview['ind_id'],
 		 	   'ind_name' => $sql_interview['ind_name'],
 		 	   'ind_img' => $v_ind_image,
 			   'int_id' => $sql_interview['interview_id'],
-			   'int_text' => $sql_interview['interview_intro'],
+			   'int_text' => $int_text,
 			   'int_userid' => $sql_interview['userid']));
 ?>
