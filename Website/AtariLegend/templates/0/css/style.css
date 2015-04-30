@@ -677,8 +677,22 @@ Standard tile settings
 }
  
 .standard_list_entry_right_news_text {
-		height: 70px;
-		overflow: hidden;
+		margin: 0;
+  		padding: 0;
+  		-moz-box-sizing: border-box;
+  		-webkit-box-sizing: border-box;
+  		box-sizing: border-box;
+
+		display: block;
+  		/* Fallback for non-webkit */
+  		display: -webkit-box;
+  		height: 70px;
+  		/* Fallback for non-webkit */
+    		line-height: 1.2;
+  		-webkit-line-clamp: 5;
+  		-webkit-box-orient: vertical;
+  		overflow: hidden;
+  		text-overflow: ellipsis;		
 }
 
 @media screen and (min-width: 450px) and (max-width: 639px) { 
