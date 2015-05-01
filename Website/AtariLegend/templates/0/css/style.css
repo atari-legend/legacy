@@ -435,6 +435,42 @@ header nav { float: center;
   text-decoration:none;
 }
 
+.signinbutton
+{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  cursor: pointer;
+  border: 0px;
+  background: #00d3d3;
+  font-family: Audiowide,Arial,helvetica,sans-serif;
+	  color: #182727;
+  height: 60px;
+  width: 134px;
+  font-size: 20px;
+  border-bottom: 3px solid #008b8b;
+  border-left: 1px solid #007878;
+  padding-top: 3px;
+  text-decoration:none;
+}
+
+.signinbutton:hover {
+  background: #00a9a9;
+  color: #182727;
+  text-decoration:none;
+  border-bottom: 3px solid #006f6f;
+}
+
+
+.signinbutton:visited {
+  text-decoration:none;
+}
+
+.signinbutton:link {
+  text-decoration:none;
+}
+
+
 /*---------------------------------------------------------- 
  Main site
 ------------------------------------------------------------ */	
