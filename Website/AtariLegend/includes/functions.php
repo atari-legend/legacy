@@ -52,8 +52,8 @@ $alcode = preg_replace("#\[url\=(www\..+)\](.*)\[\/url\]#i", "[url=http://$1]$2[
 $alcode = preg_replace("#\[url\=(.*)\](.*)\[\/url\]#Ui", "<a href=\"$1\" class=\"standard_tile_link\">$2</a>", $alcode);
 $alcode = preg_replace("#\[url\](.*)\[\/url\]#Ui", "<a href=\"$1\" class=\"standard_tile_link\">$1</a>", $alcode);
 $alcode = preg_replace("#\[hotspotUrl\](.*)\[\/hotspotUrl\]#Ui", "<a href=\"$1\" class=\"standard_tile_link\">$1</a>", $alcode);
-$alcode = preg_replace("#(^|[\n ])([\w]+?://.*?[^ \"\n\r\t<]*)#is", "\\1<a href=\"\\2\" target=\"_blank\" class=\"main_links\">\\2</a>", $alcode);
-$alcode = preg_replace("#(^|[\n ])((www|ftp)\.[\w\-]+\.[\w\-.\~]+(?:/[^ \"\t\n\r<]*)?)#is", "\\1<a href=\"http://\\2\" target=\"_blank\" class=\"main_links\">\\2</a>", $alcode);
+$alcode = preg_replace("#(^|[\n ])([\w]+?://.*?[^ \"\n\r\t<]*)#is", "\\1<a href=\"\\2\" target=\"_blank\" class=\"standard_tile_link\">\\2</a>", $alcode);
+$alcode = preg_replace("#(^|[\n ])((www|ftp)\.[\w\-]+\.[\w\-.\~]+(?:/[^ \"\t\n\r<]*)?)#is", "\\1<a href=\"http://\\2\" target=\"_blank\" class=\"standard_tile_link\">\\2</a>", $alcode);
 
 return $alcode;
 }
@@ -153,7 +153,7 @@ function BBCode($Text)
 		}
 
 function InsertSmillies($alcode){
-$alcode = eregi_replace(":-D", "<img style=\"vertical-align: middle;\" src=\"../templates/0/emoticons/icon_biggrin.gif\">", $alcode);
+$alcode = str_replace(":-D", "<img style=\"vertical-align: middle;\" src=\"../templates/0/emoticons/icon_biggrin.gif\">", $alcode);
 $alcode = str_replace(":)", "<img style=\"vertical-align: middle;\" src=\"../templates/0/emoticons/icon_smile.gif\">", $alcode);
 $alcode = str_replace(":(", "<img style=\"vertical-align: middle;\" src=\"../templates/0/emoticons/icon_sad.gif\">", $alcode);
 $alcode = str_replace("8O", "<img style=\"vertical-align: middle;\" src=\"../templates/0/emoticons/icon_eek.gif\">", $alcode);
