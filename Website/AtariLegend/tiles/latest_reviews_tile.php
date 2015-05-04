@@ -17,28 +17,28 @@
 
 //Get the latest reviews
 $query_recent_reviews = $mysqli->query("SELECT 
-								   review_game.review_id,
-								   review_game.game_id,
-								   review_main.review_edit,
-								   review_main.review_text,	
-								   game.game_name,
-								   screenshot_review.screenshot_id,
-								   screenshot_main.imgext
-								   FROM review_game
-								   LEFT JOIN review_main on (review_game.review_id = review_main.review_id)
-								   LEFT JOIN game on (review_game.game_id = game.game_id)
-								   LEFT JOIN screenshot_review on (review_game.review_id = screenshot_review.review_id)
-								   LEFT JOIN screenshot_main on (screenshot_review.screenshot_id = screenshot_main.screenshot_id)
-								   WHERE review_main.review_edit = '0'
-								   GROUP BY game_id
-								   ORDER BY review_main.review_date DESC LIMIT 3") or die ("couldn't get 3 latest reviews");
+						review_game.review_id,
+						review_game.game_id,
+						review_main.review_edit,
+						review_main.review_text,	
+						game.game_name,
+						screenshot_review.screenshot_id,
+						screenshot_main.imgext
+						FROM review_game
+						LEFT JOIN review_main on (review_game.review_id = review_main.review_id)
+						LEFT JOIN game on (review_game.game_id = game.game_id)
+						LEFT JOIN screenshot_review on (review_game.review_id = screenshot_review.review_id)
+						LEFT JOIN screenshot_main on (screenshot_review.screenshot_id = screenshot_main.screenshot_id)
+						WHERE review_main.review_edit = '0'
+						GROUP BY game_id
+						ORDER BY review_main.review_date DESC LIMIT 3") or die ("couldn't get 3 latest reviews");
 
 while ($sql_recent_reviews = $query_recent_reviews->fetch_array(MYSQLI_BOTH))
 {	
 	//Structure and manipulate the review text
 	$review_text = $sql_recent_reviews['review_text'];
 	$review_text = str_replace("[i][b]Comments[/b][/i]", "",$review_text);
-	$review_text = substr($review_text, 0,75);
+	$review_text = substr($review_text, 0,145);
 	$review_text = trim($review_text);
 	$review_text .= "...";
 
