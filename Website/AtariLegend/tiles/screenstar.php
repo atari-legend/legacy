@@ -37,9 +37,8 @@ $sql_screenstar = $query_screenstar->fetch_array(MYSQLI_BOTH);
 	$screenstar_comment = $sql_screenstar['comment'];
 	$screenstar_comment = stripslashes($screenstar_comment);
 	$screenstar_comment = InsertALCode($screenstar_comment); 
-	//$screenstar_comment = substr($screenstar_comment, 0,180);
 	$screenstar_comment = trim($screenstar_comment);
-	//$screenstar_comment .= "..."; // need to write a if statement for this only if there are more then 180 chars
+	$screenstar_comment = RemoveSmillies($screenstar_comment);
 
 	//Ready screenshots path and filename
 	$screenstar_image  = $game_screenshot_path;
