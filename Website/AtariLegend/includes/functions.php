@@ -73,7 +73,7 @@ function BBCode($Text)
             // Perform URL Search
             $Text = preg_replace("/\[url\]([$URLSearchString]*)\[\/url\]/", '<a href="$1" target="_blank" class="standard_tile_link">$1</a>', $Text);
             $Text = preg_replace("(\[url\=([$URLSearchString]*)\](.+?)\[/url\])", '<a href="$1" target="_blank" class="standard_tile_link">$2</a>', $Text);
-	    //$Text = preg_replace("(\[url\=([$URLSearchString]*)\]([$URLSearchString]*)\[/url\])", '<a href="$1" target="_blank" class="main_links">$2</a>', $Text);
+			//$Text = preg_replace("(\[url\=([$URLSearchString]*)\]([$URLSearchString]*)\[/url\])", '<a href="$1" target="_blank" class="main_links">$2</a>', $Text);
 
             // Perform MAIL Search
             $Text = preg_replace("(\[mail\]([$MAILSearchString]*)\[/mail\])", '<a href="mailto:$1">$1</a>', $Text);
@@ -180,6 +180,34 @@ $alcode = str_replace(":idea:", "<img style=\"vertical-align: middle;\" src=\"..
 return $alcode;
 }
 
+function RemoveSmillies($alcode){
+$alcode = str_replace(":-D", "", $alcode);
+$alcode = str_replace(":)", "", $alcode);
+$alcode = str_replace(":(", "", $alcode);
+$alcode = str_replace("8O", "", $alcode);
+$alcode = str_replace(":?", "", $alcode);
+$alcode = str_replace(" 8)", "", $alcode);
+$alcode = str_replace(":x", "", $alcode);
+$alcode = str_replace(":P", "", $alcode);
+$alcode = str_replace(":oops:", "", $alcode);
+$alcode = str_replace(":evil:", "", $alcode);
+$alcode = str_replace(":twisted:", "", $alcode);
+$alcode = str_replace(":roll:", "", $alcode);
+$alcode = str_replace(":frown:", "", $alcode);
+$alcode = str_replace(":|", "", $alcode);
+$alcode = str_replace(":mrgreen:", "", $alcode);
+$alcode = str_replace(":o", "", $alcode);
+$alcode = str_replace(":lol:", "", $alcode);
+$alcode = str_replace(":cry:", "", $alcode);
+$alcode = str_replace(";)", "", $alcode);
+$alcode = str_replace(":wink:", "", $alcode);
+$alcode = str_replace(":!:", "", $alcode);
+$alcode = str_replace(":arrow:", "", $alcode);
+$alcode = str_replace(":?:", "", $alcode);
+$alcode = str_replace(":idea:", "", $alcode);
+return $alcode;
+}
+
 function convert_timestamp($timestamp)
 	{
 		$timestamp = date("F j, Y",$timestamp);
@@ -222,181 +250,6 @@ function get_rows ($result)
 		return $num;
 	}
 
-	
-function review_screenshot($alcode)
-	{
- 		include("config.php");
-		
-		$regexp = '/(\[image\]img=)+(\d*)(\[\/image\])/U'; 
-		
-		preg_match_all($regexp,$alcode,$matches,PREG_SET_ORDER); 
-		
-		foreach ($matches as $parts) 
-		{ 
-		
-		//get the extension 
-		$SCREENSHOT = mysql_query("SELECT * FROM screenshot_main
-	   					   		   WHERE screenshot_id = '$parts[2]'")
-			 		 or die ("Database error - selecting screenshots");
-		
-		$screenshotrow = mysql_fetch_array($SCREENSHOT);
-		$screenshot_ext = $screenshotrow[imgext];
-		
-		// $parts will be an array $parts[0] to $parts[6] 
-		$SCREENCOM = mysql_query("SELECT * FROM screenshot_review
-								LEFT JOIN review_comments ON (screenshot_review.screenshot_review_id = review_comments.screenshot_review_id)
-								WHERE screenshot_review.screenshot_id='$parts[2]'")
-					  or die ("Database error - selecting screenshot");
-		
-		$comments = mysql_fetch_array($SCREENCOM);
-		
-		// if there is a comment, insert the comment code and comment into a var
-		if (!isset($comments[comment_text])) 
-			
-			{
-			$screencomment="";
-			}
-		
-		else
-			{
-			$screencomment="<tr>
-    							<td  width='200'><h6 style=\"text-align:center;\">$comments[comment_text]</td>
-							</tr>";
-			}
-		
-		$new_path = $game_screenshot_path;
-		$new_path .= $parts[2];
-		$new_path .= ".";
-		$new_path .= $screenshot_ext;
-		
-		$screenshotcomment = "
-			<table border='0' cellspacing='1' cellpadding='1' class=\"game_review_shot\" align=\"center\">
-			<tr>
-   				 <td><img src=\"../includes/showimage.php?img=$new_path&w=200&shadow=0&bgcolour=a2a2a2\" border='0' width='200'></td>
-			</tr>
-			<tr>
-				<td width='200'>
-				$screencomment
-				</td>
-			</tr>
-			</table>";
-
-		$alcode = str_replace($parts[0], "$screenshotcomment", $alcode);
-		}
-		return $alcode;
-	}
-	
-function article_screenshot($alcode)
-	{
-		include("config.php");
-		
-		$regexp = '/(\[image\]img=)+(\d*)(\[\/image\])/U'; 
-		
-		preg_match_all($regexp,$alcode,$matches,PREG_SET_ORDER); 
-		
-		foreach ($matches as $parts) 
-		{ 
-		
-		// $parts will be an array $parts[0] to $parts[6] 
-
-		$SCREENCOM = mysql_query("SELECT * FROM screenshot_article
-								  LEFT JOIN article_comments ON (screenshot_article.screenshot_article_id = article_comments.screenshot_article_id)
-								  WHERE screenshot_article.screenshot_id='$parts[2]'")
-					  or die ("Database error - selecting screenshot");
-		
-		$comments = mysql_fetch_array($SCREENCOM);
-		
-		// if there is a comment, insert the comment code and comment into a var
-		
-		if (!isset($comments[comment_text])) 
-			
-			{
-			$screencomment="";
-			}
-		
-		else
-			{
-			$screencomment="<tr>
-    							<td><h6 style=\"text-align:center;\">$comments[comment_text]</td>
-							</tr>";
-			}
-		
-		$screenshotcomment = "
-			<table border='0' cellspacing='2' cellpadding='2' class=\"boxborder\">
-			<tr>
-   				 <td><img src=\"showscreens.php?article_screenshot_id=$parts[2]\" border='0' width='160'></td>
-			</tr>
-			$screencomment
-			</table>";
-
-		$alcode = str_replace($parts[0], "$screenshotcomment", $alcode);
-		}
-		return $alcode;
-	}
-
-function interview_screenshot($alcode)
-	{
-		include("config.php");
-		
-		$regexp = '/(\[image\]img=)+(\d*)(\[\/image\])/U'; 
-		
-		preg_match_all($regexp,$alcode,$matches,PREG_SET_ORDER); 
-				
-		foreach ($matches as $parts) 
-		{ 
-		
-		//get the extension 
-		$SCREENSHOT = mysql_query("SELECT * FROM screenshot_main
-	   					   		   WHERE screenshot_id = '$parts[2]'")
-			 		 or die ("Database error - selecting screenshots");
-		
-		$screenshotrow = mysql_fetch_array($SCREENSHOT);
-		$screenshot_ext = $screenshotrow[imgext];
-		
-		// $parts will be an array $parts[0] to $parts[6] 
-		$SCREENCOM = mysql_query("SELECT * FROM screenshot_interview
-								  LEFT JOIN interview_comments ON (screenshot_interview.screenshot_interview_id = interview_comments.screenshot_interview_id)
-								  WHERE screenshot_interview.screenshot_id='$parts[2]'")
-					  or die ("Database error - selecting screenshot");
-		
-		$comments = mysql_fetch_array($SCREENCOM);
-		
-		// if there is a comment, insert the comment code and comment into a var
-		
-		if (!isset($comments[comment_text])) 
-			
-			{
-			$screencomment="";
-			}
-		
-		else
-			{
-			$screencomment="<tr>
-    							<td><h6 style=\"text-align:center;\">$comments[comment_text]</td>
-							</tr>";
-			}
-		
-			$new_path = $interview_screenshot_path;
-			$new_path .= $parts[2];
-			$new_path .= ".";
-			$new_path .= $screenshot_ext;
-		
-			$screenshotcomment = "
-			<table border='0' cellspacing='1' cellpadding='1' class=\"game_review_shot\" align=\"center\">
-			<tr>
-   				 <td><img src=\"../includes/showimage.php?img=$new_path&w=200&shadow=0&bgcolour=a2a2a2\" border='0' width='200'></td>
-			</tr>
-			<tr>
-				<td width='200'>
-				$screencomment
-				</td>
-			</tr>
-			</table>";
-
-		$alcode = str_replace($parts[0], "$screenshotcomment", $alcode);
-		}
-		return $alcode;
-}
 	
 function maketree($rootcatid,$sql,$maxlevel)
 {
