@@ -41,7 +41,7 @@ $v_link_image .= $sql_links['website_imgext'];
 $website_text = nl2br($sql_links['website_description_text']);
 $website_text = InsertALCode($website_text); // disabled this as it wrecked the design.
 $website_text = trim($website_text);
-
+$website_text = RemoveSmillies($website_text);
 	
 $smarty->assign('hotlinks',
     	 array('website_id' => $sql_links['website_id'],

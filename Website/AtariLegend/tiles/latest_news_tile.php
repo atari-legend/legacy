@@ -32,7 +32,7 @@ while ($sql_news = $query_news->fetch_array(MYSQLI_BOTH))
 	$news_text = nl2br($sql_news['news_text']);
 	$news_text = InsertALCode($news_text); // disabled this as it wrecked the design.
 	$news_text = trim($news_text);
-	//$news_text .= "...";
+	$news_text = RemoveSmillies($news_text);
 	
 	//convert the date to readible format
 	$news_date = convert_timestamp($sql_news['news_date']);
@@ -40,7 +40,7 @@ while ($sql_news = $query_news->fetch_array(MYSQLI_BOTH))
 	$smarty->append('news',
 	    array('news_date' => $news_date,
 		  'news_headline' => $sql_news['news_headline'],
-        	  'news_text' => $news_text,
+          'news_text' => $news_text,
 		  'image' => $v_image));
 }
 ?>
