@@ -34,7 +34,7 @@
 				
 				{if  $line.website_imgext !== ""}
 					<a href="{$line.website_url}" target="_blank" style="target-net:tab;">
-					<img src="../includes/showscreens.php?website_id={$line.website_id}" border="0" style="border: 1px solid black; float: right;">
+					<img src="../includes/show_image.php?file={$line.website_image}&resize=410,null,null,null&crop=left,top,410,260&minimum_size=410,260" border="0" style="border: 1px solid black; float: right;">
 					</a>					
 				{/if}
 				
