@@ -18,7 +18,6 @@ This is the demo browse page where you can navigate your way through the demo db
 
 //load all common functions
 include("../includes/common.php"); 
-include("../includes/config.php"); 
 
 $start1=gettimeofday();
 list($start2, $start3) = explode(":", exec('date +%N:%S'));
@@ -30,6 +29,12 @@ screen and we're gonna fill some extra variables accordingly. These variables wi
 used to create the querystring later.
 ***********************************************************************************
 */
+//	if (empty($action)) {$action ="";}
+//	if (empty($crew)) {$crew ="";}
+//	if (empty($year)) {$year ="";}
+//	if (empty($crew_select)) {$crew_select ="";}
+//	if (empty($year_select)) {$year_select ="";}
+	
 	if ( $action == "insert" )
 	{
 		//Insert the demo in the demo table
@@ -53,8 +58,8 @@ used to create the querystring later.
 		while  ($crew=mysql_fetch_array($sql_crew)) 
 		{  
 			$smarty->append('crew',
-	    		 array('crew_id' => $crew[crew_id],
-					   'crew_name' => $crew[crew_name]));
+	    		 array('crew_id' => $crew['crew_id'],
+					   'crew_name' => $crew['crew_name']));
 		}
 
 		$smarty->assign("user_id",$_SESSION[user_id]);
@@ -66,7 +71,7 @@ used to create the querystring later.
 	elseif ( $action == "search" )
 	{		
 		//check the $gamebrowse select
-		if ($demobrowse == "")
+		if (empty($demobrowse))
 		{
 			$demobrowse_select = "";
 			$akabrowse_select = "";
@@ -88,11 +93,12 @@ used to create the querystring later.
 		}
 		
 		//check the crew select
-		if ($crew == '-')
-		{
+		if (empty($crew))
+		{	
+			$crew = "";
 			$crew_select = "";
 		}
-		elseif ($crew == "")
+		elseif ($crew == "-")
 		{
 			$crew_select = "";
 		}
@@ -106,16 +112,19 @@ used to create the querystring later.
 		}
 		
 		//check to see if the year has been clicked
-		if ($year != "")
+		if (isset($year))
 		{
 			$year_select = " AND demo_year LIKE '$year%'";
+		}
+		else
+		{
+			$year_select = "";
 		}
 		
 		//Before we start the build the query, we check if there is at least
 		//one search field filled in or used! 
 		
-		if ( $crew_select == "" and $demobrowse_select == ""  and 
-			 $demosearch == "" and $year_select == "")
+		if ( empty($crew_select) and empty($demobrowse_select) and empty($demosearch) and empty($year_select))
 		{
 			$message = "Please fill in one of the fields";
 			$smarty->assign("message",$message);
@@ -127,11 +136,11 @@ used to create the querystring later.
 			while  ($crew=mysql_fetch_array($sql_crew)) 
 			{  
 				$smarty->append('crew',
-	    			 array('crew_id' => $crew[crew_id],
-					 	   'crew_name' => $crew[crew_name]));
+	    			 array('crew_id' => $crew['crew_id'],
+					 	   'crew_name' => $crew['crew_name']));
 			}
 				
-			$smarty->assign("user_id",$_SESSION[user_id]);
+			$smarty->assign("user_id",$_SESSION['user_id']);
 			
 			$smarty->assign('demos_main_tpl', '1');
 
@@ -172,7 +181,7 @@ querystring for faster output
 					   LEFT JOIN demo_ste_enhan ON (demo_ste_enhan.demo_id = demo.demo_id)
 					   WHERE ";
 		}
-		elseif ($year != "")
+		elseif (isset($year))
 		{
 		$RESULTDEMO = "SELECT  demo.demo_id,
 							   demo.demo_name,
@@ -240,11 +249,11 @@ querystring for faster output
 			while  ($crew=mysql_fetch_array($sql_crew)) 
 			{  
 				$smarty->append('crew',
-	    			 array('crew_id' => $crew[crew_id],
-					 	   'crew_name' => $crew[crew_name]));
+	    			 array('crew_id' => $crew['crew_id'],
+					 	   'crew_name' => $crew['crew_name']));
 			}
 			
-			$smarty->assign("user_id",$_SESSION[user_id]);
+			$smarty->assign("user_id",$_SESSION['user_id']);
 			$smarty->assign('demo_main_tpl', '1');
 
 			//Send all smarty variables to the templates
@@ -280,7 +289,7 @@ querystring for faster output
 					   LEFT JOIN demo_ste_enhan ON (demo_ste_enhan.demo_id = demo.demo_id)
 					   WHERE ";
 				}
-				elseif ($year != "")
+				elseif (isset($year))
 				{
 				$RESULTAKA = "SELECT  
 							   demo_aka.demo_id,
@@ -338,7 +347,7 @@ querystring for faster output
 				$RESULTAKA .= ' GROUP BY demo_aka.demo_id, demo_aka.aka_name HAVING COUNT(DISTINCT demo_aka.demo_id, demo_aka.aka_name) = 1';
 				$RESULTAKA .= ' ORDER BY demo_aka.aka_name ASC';
 				
-				mysql_query("CREATE TEMPORARY TABLE temp TYPE=HEAP $RESULTDEMO") or die("does not compute");
+				mysql_query("CREATE TEMPORARY TABLE temp ENGINE=MEMORY $RESULTDEMO") or die("does not compute");
 				mysql_query("INSERT INTO temp $RESULTAKA") or die("does not compute2");
 
 				$temp_query = mysql_query("SELECT * FROM temp ORDER BY demo_name ASC") or die("does not compute3");
@@ -356,16 +365,15 @@ querystring for faster output
 				      $i++;
 					  
 					  $smarty->append('demo_search',
-	  				  array('demo_id' => $sql_demo_search[demo_id],
-			  				'demo_name' => $sql_demo_search[demo_name],
-			 				'crew_id' => $sql_demo_search[crew_id],
-			  				'crew_name' => $sql_demo_search[crew_name],
-			  				'year_id' => $sql_demo_search[year_id],
-			  				'year' => $sql_demo_search[demo_year],
-			  				'music' => $sql_demo_search[music],
-			  				'download' => $sql_demo_search[download],
-							'ste_enhan' => $sql_demo_search[ste_enhanced],
-			  				'screenshot' => $sql_demo_search[screenshot_id]));
+	  				  array('demo_id' => $sql_demo_search['demo_id'],
+			  				'demo_name' => $sql_demo_search['demo_name'],
+			 				'crew_id' => $sql_demo_search['crew_id'],
+			  				'crew_name' => $sql_demo_search['crew_name'],
+			  				'year' => $sql_demo_search['demo_year'],
+			  				//'music' => $sql_demo_search['music'],
+			  				'download' => $sql_demo_search['demo_download_id'],
+							'ste_enhan' => $sql_demo_search['ste_enhanced'],
+			  				'screenshot' => $sql_demo_search['screenshot_id']));
 				}
 				
 				$smarty->assign("nr_of_demos",$i);
@@ -373,7 +381,7 @@ querystring for faster output
 				
 				mysql_query("DROP TABLE temp") or die("does not compute4");
 				
-				$smarty->assign("user_id",$_SESSION[user_id]);
+				$smarty->assign("user_id",$_SESSION['user_id']);
 				$smarty->assign('demo_list_tpl', '1');
 
 				//Send all smarty variables to the templates
@@ -391,11 +399,11 @@ querystring for faster output
 				while  ($crew=mysql_fetch_array($sql_crew)) 
 				{  
 					$smarty->append('crew',
-	    				 array('crew_id' => $crew[crew_id],
-						 	   'crew_name' => $crew[crew_name]));
+	    				 array('crew_id' => $crew['crew_id'],
+						 	   'crew_name' => $crew['crew_name']));
 				}
 				
-				$smarty->assign("user_id",$_SESSION[user_id]);
+				$smarty->assign("user_id",$_SESSION['user_id']);
 				$smarty->assign('demos_main_tpl', '1');
 
 				//Send all smarty variables to the templates
@@ -413,8 +421,8 @@ querystring for faster output
 		while  ($crew=mysql_fetch_array($sql_crew)) 
 		{  
 			$smarty->append('crew',
-	   			 	 array('crew_id' => $crew[crew_id],
-						   'crew_name' => $crew[crew_name]));
+	   			 	 array('crew_id' => $crew['crew_id'],
+						   'crew_name' => $crew['crew_name']));
 		}
 		
 		//get the number of demos in the archive
@@ -423,7 +431,7 @@ querystring for faster output
 
 		$smarty->assign('demos_nr', $v_rows); 
 		
-		$smarty->assign("user_id",$_SESSION[user_id]);
+		$smarty->assign("user_id",$_SESSION['user_id']);
 		$smarty->assign('demos_main_tpl', '1');
 
 		//Send all smarty variables to the templates
