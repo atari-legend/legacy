@@ -1,0 +1,5 @@
+[11-Nov-2006 17:48:08] PHP Warning:  getimagesize(../../../images/user_avatars/2.): failed to open stream: No such file or directory in /home/legend/public_html/admin_new/user/user_detail.php on line 211
+[11-Nov-2006 17:50:56] PHP Warning:  getimagesize(../../../images/user_avatars/3.): failed to open stream: No such file or directory in /home/legend/public_html/admin_new/user/user_detail.php on line 211
+[11-Nov-2006 17:54:07] PHP Warning:  getimagesize(../../../images/user_avatars/3.): failed to open stream: No such file or directory in /home/legend/public_html/admin_new/user/user_detail.php on line 64
+[11-Nov-2006 17:54:27] PHP Warning:  getimagesize(../../../images/user_avatars/3.): failed to open stream: No such file or directory in /home/legend/public_html/admin_new/user/user_detail.php on line 64
+[11-Nov-2006 18:02:18] PHP Warning:  getimagesize(../../../images/user_avatars/3.): failed to open stream: No such file or directory in /home/legend/public_html/admin_new/user/user_detail.php on line 64
