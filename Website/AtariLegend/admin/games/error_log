@@ -1,0 +1,77 @@
+[13-Nov-2006 19:57:08] PHP Warning:  mysql_query(): Access denied for user 'legend'@'localhost' (using password: NO) in /home/legend/public_html/admin_new/games/games_detail.php on line 513
+[13-Nov-2006 19:57:08] PHP Warning:  mysql_query(): A link to the server could not be established in /home/legend/public_html/admin_new/games/games_detail.php on line 513
+[14-Nov-2006 08:51:26] PHP Warning:  upload_max_filesize of 2097152 bytes exceeded - file [image[1]=C:\Phoenix_front.PNG] not saved in Unknown on line 0
+[14-Nov-2006 08:51:26] PHP Warning:  rename(,../../../images/game_boxscans/984.jpg): No such file or directory in /home/legend/public_html/admin_new/games/db_games_box.php on line 70
+[14-Nov-2006 08:51:26] PHP Warning:  chmod(): No such file or directory in /home/legend/public_html/admin_new/games/db_games_box.php on line 72
+[14-Nov-2006 08:51:26] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/legend/public_html/admin_new/games/db_games_box.php:70) in /home/legend/public_html/admin_new/games/db_games_box.php on line 78
+[14-Nov-2006 08:51:47] PHP Warning:  getimagesize(../../../images/game_boxscans/984.jpg): failed to open stream: No such file or directory in /home/legend/public_html/admin_new/games/games_box.php on line 69
+[14-Nov-2006 15:13:01] PHP Warning:  unlink(../../../images/game_boxscans/987.png): No such file or directory in /home/legend/public_html/admin_new/games/db_games_box.php on line 102
+[14-Nov-2006 15:13:01] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/legend/public_html/admin_new/games/db_games_box.php:102) in /home/legend/public_html/admin_new/games/db_games_box.php on line 105
+[14-Nov-2006 15:13:08] PHP Warning:  unlink(../../../images/game_boxscans/986.png): No such file or directory in /home/legend/public_html/admin_new/games/db_games_box.php on line 102
+[14-Nov-2006 15:13:08] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/legend/public_html/admin_new/games/db_games_box.php:102) in /home/legend/public_html/admin_new/games/db_games_box.php on line 105
+[29-Nov-2006 09:30:20] PHP Warning:  unlink(../../../images/game_boxscans/991.png): No such file or directory in /home/legend/public_html/admin_new/games/db_games_box.php on line 102
+[29-Nov-2006 09:30:20] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/legend/public_html/admin_new/games/db_games_box.php:102) in /home/legend/public_html/admin_new/games/db_games_box.php on line 105
+[03-Dec-2006 13:50:41] PHP Warning:  unlink(../../../images/game_boxscans/1006.png): No such file or directory in /home/legend/public_html/admin_new/games/db_games_box.php on line 102
+[03-Dec-2006 13:50:41] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/legend/public_html/admin_new/games/db_games_box.php:102) in /home/legend/public_html/admin_new/games/db_games_box.php on line 105
+[14-Dec-2006 08:09:23] PHP Warning:  unlink(../../../images/game_boxscans/1069.png): No such file or directory in /home/legend/public_html/admin_new/games/db_games_box.php on line 102
+[14-Dec-2006 08:09:23] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/legend/public_html/admin_new/games/db_games_box.php:102) in /home/legend/public_html/admin_new/games/db_games_box.php on line 105
+[14-Dec-2006 22:13:00] PHP Warning:  unlink(../../../images/game_boxscans/1108.png): No such file or directory in /home/legend/public_html/admin_new/games/db_games_box.php on line 102
+[14-Dec-2006 22:13:00] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/legend/public_html/admin_new/games/db_games_box.php:102) in /home/legend/public_html/admin_new/games/db_games_box.php on line 105
+[23-Dec-2006 20:36:43] PHP Warning:  unlink(../../../images/game_screenshots/9585.): No such file or directory in /home/legend/public_html/admin_new/games/games_screenshot_add.php on line 114
+[24-Mar-2007 23:03:39] PHP Warning:  unlink(../../../images/game_boxscans/1178.png): No such file or directory in /home/legend/public_html/admin_new/games/db_games_box.php on line 102
+[24-Mar-2007 23:03:39] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/legend/public_html/admin_new/games/db_games_box.php:102) in /home/legend/public_html/admin_new/games/db_games_box.php on line 105
+[24-Mar-2007 23:03:44] PHP Warning:  unlink(../../../images/game_boxscans/1177.png): No such file or directory in /home/legend/public_html/admin_new/games/db_games_box.php on line 102
+[24-Mar-2007 23:03:44] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/legend/public_html/admin_new/games/db_games_box.php:102) in /home/legend/public_html/admin_new/games/db_games_box.php on line 105
+[27-May-2007 21:29:58] PHP Warning:  unlink(../../../images/game_boxscans/1198.png): No such file or directory in /home/legend/public_html/admin_new/games/db_games_box.php on line 102
+[27-May-2007 21:29:58] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/legend/public_html/admin_new/games/db_games_box.php:102) in /home/legend/public_html/admin_new/games/db_games_box.php on line 105
+[27-May-2007 21:42:58] PHP Warning:  unlink(../../../images/game_boxscans/1001.png): No such file or directory in /home/legend/public_html/admin_new/games/db_games_box.php on line 102
+[27-May-2007 21:42:58] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/legend/public_html/admin_new/games/db_games_box.php:102) in /home/legend/public_html/admin_new/games/db_games_box.php on line 105
+[27-May-2007 21:43:02] PHP Warning:  unlink(../../../images/game_boxscans/1000.png): No such file or directory in /home/legend/public_html/admin_new/games/db_games_box.php on line 102
+[27-May-2007 21:43:02] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/legend/public_html/admin_new/games/db_games_box.php:102) in /home/legend/public_html/admin_new/games/db_games_box.php on line 105
+[29-Jun-2007 16:42:32] PHP Warning:  rename(/tmp/php4Y6Oue,../../../images/game_screenshots/21735.png): Disk quota exceeded in /home/legend/public_html/admin_new/games/games_screenshot_add.php on line 78
+[29-Jun-2007 16:42:32] PHP Warning:  rename(/tmp/phpm2vazd,../../../images/game_screenshots/21736.png): Disk quota exceeded in /home/legend/public_html/admin_new/games/games_screenshot_add.php on line 78
+[29-Jun-2007 16:42:32] PHP Warning:  rename(/tmp/php8s8xDc,../../../images/game_screenshots/21737.png): Disk quota exceeded in /home/legend/public_html/admin_new/games/games_screenshot_add.php on line 78
+[29-Jun-2007 16:42:32] PHP Warning:  rename(/tmp/phpjOAXHb,../../../images/game_screenshots/21738.png): Disk quota exceeded in /home/legend/public_html/admin_new/games/games_screenshot_add.php on line 78
+[29-Jun-2007 16:42:32] PHP Warning:  getimagesize(): Read error! in /home/legend/public_html/admin_new/games/games_screenshot_add.php on line 131
+[29-Jun-2007 16:42:32] PHP Warning:  getimagesize(): Read error! in /home/legend/public_html/admin_new/games/games_screenshot_add.php on line 131
+[29-Jun-2007 16:42:32] PHP Warning:  getimagesize(): Read error! in /home/legend/public_html/admin_new/games/games_screenshot_add.php on line 131
+[29-Jun-2007 16:42:32] PHP Warning:  getimagesize(): Read error! in /home/legend/public_html/admin_new/games/games_screenshot_add.php on line 131
+[29-Jun-2007 16:43:30] PHP Warning:  getimagesize(): Read error! in /home/legend/public_html/admin_new/games/games_screenshot_add.php on line 131
+[29-Jun-2007 16:43:30] PHP Warning:  getimagesize(): Read error! in /home/legend/public_html/admin_new/games/games_screenshot_add.php on line 131
+[29-Jun-2007 16:43:30] PHP Warning:  getimagesize(): Read error! in /home/legend/public_html/admin_new/games/games_screenshot_add.php on line 131
+[29-Jun-2007 16:43:30] PHP Warning:  getimagesize(): Read error! in /home/legend/p[29-Oct-2007 20:48:02] PHP Warning:  mysql_query(): Access denied for user 'legend'@'localhost' (using password: NO) in /home/legend/public_html/admin_new/games/games_detail.php on line 513
+[29-Oct-2007 20:48:02] PHP Warning:  mysql_query(): A link to the server could not be established in /home/legend/public_html/admin_new/games/games_detail.php on line 513
+[08-Nov-2007 21:28:00] PHP Warning:  mysql_query(): Access denied for user 'legend'@'localhost' (using password: NO) in /home/legend/public_html/admin_new/games/games_detail.php on line 513
+[08-Nov-2007 21:28:00] PHP Warning:  mysql_query(): A link to the server could not be established in /home/legend/public_html/admin_new/games/games_detail.php on line 513
+[10-Dec-2007 21:33:53] PHP Warning:  date() expects parameter 2 to be long, string given in /home/legend/public_html/admin_new/includes/functions.php on line 93
+[10-Dec-2007 21:33:53] PHP Warning:  date() expects parameter 2 to be long, string given in /home/legend/public_html/admin_new/includes/functions.php on line 93
+[10-Dec-2007 22:12:41] PHP Warning:  date() expects parameter 2 to be long, string given in /home/legend/public_html/admin_new/includes/functions.php on line 93
+[10-Dec-2007 22:12:42] PHP Warning:  date() expects parameter 2 to be long, string given in /home/legend/public_html/admin_new/includes/functions.php on line 93
+[10-Dec-2007 22:15:42] PHP Warning:  date() expects parameter 2 to be long, string given in /home/legend/public_html/admin_new/includes/functions.php on line 93
+[10-Dec-2007 22:17:26] PHP Warning:  date() expects parameter 2 to be long, string given in /home/legend/public_html/admin_new/includes/functions.php on line 93
+[10-Dec-2007 22:19:43] PHP Warning:  date() expects parameter 2 to be long, string given in /home/legend/public_html/admin_new/includes/functions.php on line 93
+[10-Dec-2007 22:20:28] PHP Warning:  date() expects parameter 2 to be long, string given in /home/legend/public_html/admin_new/includes/functions.php on line 93
+[10-Dec-2007 22:22:33] PHP Warning:  date() expects parameter 2 to be long, string given in /home/legend/public_html/admin_new/includes/functions.php on line 93
+[10-Dec-2007 22:23:22] PHP Warning:  date() expects parameter 2 to be long, string given in /home/legend/public_html/admin_new/includes/functions.php on line 93
+[11-Dec-2007 21:52:42] PHP Warning:  date() expects parameter 2 to be long, string given in /home/legend/public_html/admin_new/includes/functions.php on line 93
+[11-Dec-2007 21:52:42] PHP Warning:  date() expects parameter 2 to be long, string given in /home/legend/public_html/admin_new/includes/functions.php on line 93
+[11-Dec-2007 21:56:16] PHP Warning:  date() expects parameter 2 to be long, string given in /home/legend/public_html/admin_new/includes/functions.php on line 93
+[11-Dec-2007 21:56:17] PHP Warning:  date() expects parameter 2 to be long, string given in /home/legend/public_html/admin_new/includes/functions.php on line 93
+[11-Dec-2007 21:56:30] PHP Warning:  date() expects parameter 2 to be long, string given in /home/legend/public_html/admin_new/includes/functions.php on line 93
+[11-Dec-2007 21:56:34] PHP Warning:  date() expects parameter 2 to be long, string given in /home/legend/public_html/admin_new/includes/functions.php on line 93
+[11-Dec-2007 22:20:59] PHP Warning:  date() expects parameter 2 to be long, string given in /home/legend/public_html/admin_new/includes/functions.php on line 93
+[11-Dec-2007 22:20:59] PHP Warning:  date() expects parameter 2 to be long, string given in /home/legend/public_html/admin_new/includes/functions.php on line 93
+[11-Dec-2007 22:21:53] PHP Warning:  date() expects parameter 2 to be long, string given in /home/legend/public_html/admin_new/includes/functions.php on line 93
+[11-Dec-2007 22:41:35] PHP Warning:  date() expects parameter 2 to be long, string given in /home/legend/public_html/admin_new/includes/functions.php on line 93
+[24-Dec-2007 23:23:30] PHP Warning:  date() expects parameter 2 to be long, string given in /home/legend/public_html/admin_new/includes/functions.php on line 93
+[24-Dec-2007 23:23:31] PHP Warning:  date() expects parameter 2 to be long, string given in /home/legend/public_html/admin_new/includes/functions.php on line 93
+[04-Jan-2008 20:09:29] PHP Warning:  unlink(../../../images/game_boxscans/1244.png) [<a href='function.unlink'>function.unlink</a>]: No such file or directory in /home/legend/public_html/admin_new/games/db_games_box.php on line 102
+[04-Jan-2008 20:09:29] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/legend/public_html/admin_new/games/db_games_box.php:102) in /home/legend/public_html/admin_new/games/db_games_box.php on line 105
+[05-Jan-2008 00:00:29] PHP Warning:  date() expects parameter 2 to be long, string given in /home/legend/public_html/admin_new/includes/functions.php on line 93
+[05-Jan-2008 00:00:38] PHP Warning:  date() expects parameter 2 to be long, string given in /home/legend/public_html/admin_new/includes/functions.php on line 93
+[05-Jan-2008 19:47:04] PHP Warning:  date() expects parameter 2 to be long, string given in /home/legend/public_html/admin_new/includes/functions.php on line 93
+[05-Jan-2008 19:47:12] PHP Warning:  date() expects parameter 2 to be long, string given in /home/legend/public_html/admin_new/includes/functions.php on line 93
+[05-Jan-2008 19:47:21] PHP Warning:  date() expects parameter 2 to be long, string given in /home/legend/public_html/admin_new/includes/functions.php on line 93
+[21-Jul-2008 21:36:59] PHP Warning:  rename(/tmp/phpvJPj2P,../../../images/game_boxscans/1463.jpg) [<a href='function.rename'>function.rename</a>]: Disk quota exceeded in /home/legend/public_html/admin_new/games/db_games_box.php on line 82
+[21-Jul-2008 21:36:59] PHP Warning:  Cannot modify header information - headers already sent by (output started at /home/legend/public_html/admin_new/games/db_games_box.php:82) in /home/legend/public_html/admin_new/games/db_games_box.php on line 90
+[21-Jul-2008 21:37:09] PHP Warning:  getimagesize() [<a href='function.getimagesize'>function.getimagesize</a>]: Read error! in /home/legend/public_html/admin_new/games/games_box.php on line 69
