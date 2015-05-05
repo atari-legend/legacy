@@ -19,7 +19,7 @@ In this section we modify links
 */
 
 include("../includes/common.php");
-if(empty($catpick)) {$catpick="";}
+if(empty($catpick)) {$catpick=0;}
 		$SQL = "SELECT website_category_id, website_category_name FROM website_category ORDER BY website_category_name";
 		$linkcategorysql = mysql_query($SQL) or die("Couldn't query categories");
 		
@@ -47,7 +47,7 @@ if(empty($catpick)) {$catpick="";}
 		$LINKSQL = mysql_query("SELECT * FROM website 
 								LEFT JOIN website_description ON (website.website_id = website_description.website_id)
 								LEFT JOIN website_category_cross ON (website.website_id = website_category_cross.website_id) 
-								WHERE website_category_cross.website_category_id='$website_category_id' ORDER by website.website_name")
+								WHERE website_category_cross.website_category_id=$website_category_id ORDER by website.website_name")
 				   or die ("Couldn't query website and website description");
 		
 		
@@ -55,13 +55,17 @@ if(empty($catpick)) {$catpick="";}
  		{  
 			$timestamp = convert_timestamp($rowlink['website_date']); 
 			$submitted = get_username_from_id($rowlink['website_user_sub']);
+			$website_image = $website_image_path;
+			$website_image .= $rowlink['website_id'];
+			$website_image .= ".";
+			$website_image .= $rowlink['website_imgext'];
 			
 			$smarty->append('link_list',
 	    			array('website_id' => $rowlink['website_id'],
 						  'website_name' => $rowlink['website_name'],
 						  'website_url' => $rowlink['website_url'],
 						  'website_description' => $rowlink['website_description_text'],
-						  'website_url' => $rowlink['website_url'],
+						  'website_image' => $website_image,
 						  'timestamp' => $timestamp,
 						  'submitted' => $submitted,
 						  'website_imgext' => $rowlink['website_imgext']));
