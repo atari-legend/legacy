@@ -29,9 +29,9 @@ $g_tree = array();
                  while($link_row=mysql_fetch_array($LINKSQL)){
                  
 $g_tree[]  = array(
-                    'id'        => $link_row[website_category_id],
-                    'id_parent' => $link_row[parent_category],
-                    'title'     => $link_row[website_category_name]);
+                    'id'        => $link_row['website_category_id'],
+                    'id_parent' => $link_row['parent_category'],
+                    'title'     => $link_row['website_category_name']);
                  };
 				 
 				$ret_tree = array();
