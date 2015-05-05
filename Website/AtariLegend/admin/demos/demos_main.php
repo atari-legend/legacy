@@ -29,25 +29,12 @@ screen and we're gonna fill some extra variables accordingly. These variables wi
 used to create the querystring later.
 ***********************************************************************************
 */
-//	if (empty($action)) {$action ="";}
-//	if (empty($crew)) {$crew ="";}
-//	if (empty($year)) {$year ="";}
-//	if (empty($crew_select)) {$crew_select ="";}
-//	if (empty($year_select)) {$year_select ="";}
 	
-	if ( $action == "insert" )
+	if ( isset($action) and $action == "insert" )
 	{
 		//Insert the demo in the demo table
 		$sql_demo = mysql_query("INSERT INTO demo (demo_name) VALUES ('$newdemo')") or die ("Couldn't insert demo into database");  
 		
-		// **** NOT USED ANYMORE **** 
-		//get the demo_id we just inserted
-		//$sql_demosearch = mysql_query("SELECT demo_id FROM demo ORDER BY demo_id DESC LIMIT 1") or die ("Database error - selecting demo_id");
-		
-		//add the demo to the demo_search table for faster searching
-		//$latest_demo = mysql_fetch_array($sql_demosearch);
-		//mysql_query("INSERT INTO demo_search (demo_id,demo_name) VALUES ('$latest_demo[demo_id]','$newdemo')") or die("Couldn't update dump table");
-
 		$message = "demo has been inserted into the database";
 		$smarty->assign("message",$message);
 		
@@ -62,21 +49,16 @@ used to create the querystring later.
 					   'crew_name' => $crew['crew_name']));
 		}
 
-		$smarty->assign("user_id",$_SESSION[user_id]);
+		$smarty->assign("user_id",$_SESSION['user_id']);
 		$smarty->assign('demos_main_tpl', '1');
 
 		//Send all smarty variables to the templates
 		$smarty->display('file:../templates/0/index.tpl');
 	}
-	elseif ( $action == "search" )
+	elseif ( isset($action) and $action == "search" )
 	{		
 		//check the $gamebrowse select
-		if (empty($demobrowse))
-		{
-			$demobrowse_select = "";
-			$akabrowse_select = "";
-		}
-		elseif ($demobrowse == '-')
+		if (empty($demobrowse) or $demobrowse == '-')
 		{
 			$demobrowse_select = "";
 			$akabrowse_select = "";
@@ -93,13 +75,8 @@ used to create the querystring later.
 		}
 		
 		//check the crew select
-		if (empty($crew))
+		if (empty($crew) or $crew == '-')
 		{	
-			$crew = "";
-			$crew_select = "";
-		}
-		elseif ($crew == "-")
-		{
 			$crew_select = "";
 		}
 		elseif ($crew == "null")
@@ -120,6 +97,7 @@ used to create the querystring later.
 		{
 			$year_select = "";
 		}
+		if(empty($demosearch)) {$demosearch="";}
 		
 		//Before we start the build the query, we check if there is at least
 		//one search field filled in or used! 
@@ -158,82 +136,41 @@ of search features. If we are searching for a crew or ind only, we create a diff
 querystring for faster output
 ***********************************************************************************
 */
-		if ($crew != '-' and $crew != "")
-		{
-		$RESULTDEMO = "SELECT  demo.demo_id,
-							   demo.demo_name,
-							   demo_year.demo_year,
-							   screenshot_demo.screenshot_id,
-							   demo_music.music_id,
-							   demo_download.demo_download_id,
-							   demo_falcon_only.falcon_only,
-							   crew.crew_id,
-							   crew.crew_name,
-							   demo_ste_enhan.ste_enhanced 
-					   FROM crew_demo_prod
-					   LEFT JOIN demo ON (crew_demo_prod.demo_id = demo.demo_id)
-					   LEFT JOIN demo_year ON (demo_year.demo_id = demo.demo_id)
-					   LEFT JOIN screenshot_demo ON (screenshot_demo.demo_id = demo.demo_id)
-  				       LEFT JOIN demo_music ON (demo_music.demo_id = demo.demo_id)
-  				       LEFT JOIN demo_download ON (demo_download.demo_id = demo.demo_id)
-  				       LEFT JOIN demo_falcon_only ON (demo_falcon_only.demo_id = demo.demo_id)
-  				       LEFT JOIN crew ON (crew.crew_id = crew_demo_prod.crew_id)
-					   LEFT JOIN demo_ste_enhan ON (demo_ste_enhan.demo_id = demo.demo_id)
-					   WHERE ";
-		}
-		elseif (isset($year))
-		{
-		$RESULTDEMO = "SELECT  demo.demo_id,
-							   demo.demo_name,
-							   demo_year.demo_year,
-							   screenshot_demo.screenshot_id,
-							   demo_music.music_id,
-							   demo_download.demo_download_id,
-							   demo_falcon_only.falcon_only,
-							   crew.crew_id,
-							   crew.crew_name,
-							   demo_ste_enhan.ste_enhanced 
-					   FROM demo_year
-					   LEFT JOIN demo ON (demo_year.demo_id = demo.demo_id)
-					   LEFT JOIN screenshot_demo ON (screenshot_demo.demo_id = demo.demo_id)
-  				       LEFT JOIN demo_music ON (demo_music.demo_id = demo.demo_id)
-  				       LEFT JOIN demo_download ON (demo_download.demo_id = demo.demo_id)
-  				       LEFT JOIN demo_falcon_only ON (demo_falcon_only.demo_id = demo.demo_id)
-  				       LEFT JOIN crew_demo_prod ON (crew_demo_prod.demo_id = demo.demo_id)
-					   LEFT JOIN crew ON (crew.crew_id = crew_demo_prod.crew_id)
-					   LEFT JOIN demo_ste_enhan ON (demo_ste_enhan.demo_id = demo.demo_id)
-					   WHERE ";
-		}
-		else
-		{
-		$RESULTDEMO = "SELECT  demo.demo_id,
-							   demo.demo_name,
-							   demo_year.demo_year,
-							   screenshot_demo.screenshot_id,
-							   demo_music.music_id,
-							   demo_download.demo_download_id,
-							   demo_falcon_only.falcon_only,
-							   crew.crew_id,
-							   crew.crew_name,
-							   demo_ste_enhan.ste_enhanced 
-					   FROM demo
-					   LEFT JOIN demo_year ON (demo_year.demo_id = demo.demo_id)
-					   LEFT JOIN screenshot_demo ON (screenshot_demo.demo_id = demo.demo_id)
-  				       LEFT JOIN demo_music ON (demo_music.demo_id = demo.demo_id)
-  				       LEFT JOIN demo_download ON (demo_download.demo_id = demo.demo_id)
-  				       LEFT JOIN demo_falcon_only ON (demo_falcon_only.demo_id = demo.demo_id)
-  				       LEFT JOIN crew_demo_prod ON (crew_demo_prod.demo_id = demo.demo_id)
-					   LEFT JOIN crew ON (crew.crew_id = crew_demo_prod.crew_id)
-					   LEFT JOIN demo_ste_enhan ON (demo_ste_enhan.demo_id = demo.demo_id)
-					   WHERE ";
-		}
+
 		
+		$RESULTDEMO  = "SELECT  demo.demo_id,
+							   demo.demo_name,
+							   demo_year.demo_year,
+							   screenshot_demo.screenshot_id,
+							   demo_music.music_id,
+							   demo_download.demo_download_id,
+							   demo_falcon_only.falcon_only,
+							   crew.crew_id,
+							   crew.crew_name,
+							   demo_ste_enhan.ste_enhanced 
+					   FROM demo 
+					   LEFT JOIN demo_year ON (demo_year.demo_id = demo.demo_id)
+					   LEFT JOIN screenshot_demo ON (screenshot_demo.demo_id = demo.demo_id)
+  				       LEFT JOIN demo_music ON (demo_music.demo_id = demo.demo_id)
+  				       LEFT JOIN demo_download ON (demo_download.demo_id = demo.demo_id)
+  				       LEFT JOIN demo_falcon_only ON (demo_falcon_only.demo_id = demo.demo_id)
+  				       LEFT JOIN crew_demo_prod ON (crew_demo_prod.demo_id = demo.demo_id)
+					   LEFT JOIN crew ON (crew.crew_id = crew_demo_prod.crew_id)
+					   LEFT JOIN demo_ste_enhan ON (demo_ste_enhan.demo_id = demo.demo_id)
+					   WHERE ";
+
+
+
+
 		$RESULTDEMO .= $demobrowse_select;
 		$RESULTDEMO .= "demo_name LIKE '%$demosearch%'"; 
 		$RESULTDEMO .= $crew_select;
 		$RESULTDEMO .= $year_select;
 		$RESULTDEMO .= ' GROUP BY demo.demo_id, demo.demo_name HAVING COUNT(DISTINCT demo.demo_id, demo.demo_name ) = 1';
 		$RESULTDEMO .= ' ORDER BY demo_name ASC';
+
+		//echo $RESULTDEMO;
+		//exit;
 		
 		$demos = mysql_query($RESULTDEMO) or die ('problem with the demo query');
 		
@@ -264,82 +201,31 @@ querystring for faster output
 			$rows = mysql_num_rows($demos);
 			if ( $rows > 0 )
 			{	
-				if ($crew != '-' and $crew != "")
-				{
-				$RESULTAKA = "SELECT  
-							   demo_aka.demo_id,
-							   demo_aka.aka_name,
-							   demo_year.demo_year,
-							   screenshot_demo.screenshot_id,
-							   demo_music.music_id,
-							   demo_download.demo_download_id,
-							   demo_falcon_only.falcon_only,
-							   crew.crew_id,
-							   crew.crew_name,
-							   demo_ste_enhan.ste_enhanced 
-					   FROM crew_demo_prod
-					   LEFT JOIN demo_aka ON (crew_demo_prod.demo_id = demo_aka.demo_id)
-					   LEFT JOIN demo ON (demo_aka.demo_id = demo.demo_id)
-					   LEFT JOIN demo_year ON (demo_year.demo_id = demo.demo_id)
-					   LEFT JOIN screenshot_demo ON (screenshot_demo.demo_id = demo.demo_id)
-  				       LEFT JOIN demo_music ON (demo_music.demo_id = demo.demo_id)
-  				       LEFT JOIN demo_download ON (demo_download.demo_id = demo.demo_id)
-  				       LEFT JOIN demo_falcon_only ON (demo_falcon_only.demo_id = demo.demo_id)
-  				       LEFT JOIN crew ON (crew.crew_id = crew_demo_prod.crew_id)
-					   LEFT JOIN demo_ste_enhan ON (demo_ste_enhan.demo_id = demo.demo_id)
-					   WHERE ";
-				}
-				elseif (isset($year))
-				{
-				$RESULTAKA = "SELECT  
-							   demo_aka.demo_id,
-							   demo_aka.aka_name,
-							   demo_year.demo_year,
-							   screenshot_demo.screenshot_id,
-							   demo_music.music_id,
-							   demo_download.demo_download_id,
-							   demo_falcon_only.falcon_only,
-							   crew.crew_id,
-							   crew.crew_name,
-							   demo_ste_enhan.ste_enhanced 
-					   FROM demo_year
-					   LEFT JOIN demo_aka ON (demo_year.demo_id = demo_aka.demo_id)
-					   LEFT JOIN demo ON (demo_aka.demo_id = demo.demo_id)
-					   LEFT JOIN screenshot_demo ON (screenshot_demo.demo_id = demo.demo_id)
-  				       LEFT JOIN demo_music ON (demo_music.demo_id = demo.demo_id)
-  				       LEFT JOIN demo_download ON (demo_download.demo_id = demo.demo_id)
-  				       LEFT JOIN demo_falcon_only ON (demo_falcon_only.demo_id = demo.demo_id)
-					   LEFT JOIN crew_demo_prod ON (crew_demo_prod.demo_id = demo.demo_id)
-  				       LEFT JOIN crew ON (crew.crew_id = crew_demo_prod.crew_id)
-					   LEFT JOIN demo_ste_enhan ON (demo_ste_enhan.demo_id = demo.demo_id)
-					   WHERE ";
-				}
-				else
-				{
-				$RESULTAKA = "SELECT  
-							   demo_aka.demo_id,
-							   demo_aka.aka_name,
-							   demo_year.demo_year,
-							   screenshot_demo.screenshot_id,
-							   demo_music.music_id,
-							   demo_download.demo_download_id,
-							   demo_falcon_only.falcon_only,
-							   crew.crew_id,
-							   crew.crew_name,
-							   demo_ste_enhan.ste_enhanced 
-					   FROM demo_aka
-					   LEFT JOIN demo ON (demo_aka.demo_id = demo.demo_id)
-					   LEFT JOIN screenshot_demo ON (screenshot_demo.demo_id = demo.demo_id)
-  				       LEFT JOIN demo_music ON (demo_music.demo_id = demo.demo_id)
-  				       LEFT JOIN demo_download ON (demo_download.demo_id = demo.demo_id)
-  				       LEFT JOIN demo_falcon_only ON (demo_falcon_only.demo_id = demo.demo_id)
-					   LEFT JOIN demo_year ON (demo_year.demo_id = demo.demo_id)
-					   LEFT JOIN crew_demo_prod ON (crew_demo_prod.demo_id = demo.demo_id)
-  				       LEFT JOIN crew ON (crew.crew_id = crew_demo_prod.crew_id)
-					   LEFT JOIN demo_ste_enhan ON (demo_ste_enhan.demo_id = demo.demo_id)
-					   WHERE ";
-				}
 				
+				$RESULTAKA = "SELECT  
+							   demo_aka.demo_id,
+							   demo_aka.aka_name,
+							   demo_year.demo_year,
+							   screenshot_demo.screenshot_id,
+							   demo_music.music_id,
+							   demo_download.demo_download_id,
+							   demo_falcon_only.falcon_only,
+							   crew.crew_id,
+							   crew.crew_name,
+							   demo_ste_enhan.ste_enhanced 
+					   FROM demo_aka 
+					   LEFT JOIN demo ON (demo_aka.demo_id = demo.demo_id)
+					   LEFT JOIN screenshot_demo ON (screenshot_demo.demo_id = demo.demo_id)
+  				       LEFT JOIN demo_music ON (demo_music.demo_id = demo.demo_id)
+  				       LEFT JOIN demo_download ON (demo_download.demo_id = demo.demo_id)
+  				       LEFT JOIN demo_falcon_only ON (demo_falcon_only.demo_id = demo.demo_id)
+					   LEFT JOIN demo_year ON (demo_year.demo_id = demo.demo_id)
+					   LEFT JOIN crew_demo_prod ON (crew_demo_prod.demo_id = demo.demo_id)
+  				       LEFT JOIN crew ON (crew.crew_id = crew_demo_prod.crew_id)
+					   LEFT JOIN demo_ste_enhan ON (demo_ste_enhan.demo_id = demo.demo_id)
+					   WHERE ";
+				
+
 				$RESULTAKA .= $akabrowse_select;
 				$RESULTAKA .= "demo_aka.aka_name LIKE '%$demosearch%'"; 
 				$RESULTAKA .= $crew_select;
