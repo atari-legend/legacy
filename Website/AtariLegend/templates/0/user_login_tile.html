@@ -16,6 +16,8 @@
 //**************************************************************************************** 
 *}
 {block name=user_login_tile}
+
+			{if ! isset($user_session.userid)}
 			<div class="standard_tile" id="logon">
 			<form action="../includes/user_process_login.php" method="post" name="login_form">
 				<h1>LOG ON</h1>
@@ -38,7 +40,7 @@
 					</div>
 				</div> 
 				<div class="logon_signin">
-				<button type="submit" alt="sign in" value="Login" class="signinbutton" id="login" style="width:134px;" onclick="formhash(this.form, this.form.password);">
+				<button type="button" value="Login" class="signinbutton" onclick="formhash(this.form, this.form.password);" />
 				Sign In
 				</button>
 				</div>
@@ -47,6 +49,42 @@
 				<br>
 			</form>
 			</div>
+
+			{else}
+			<div class="standard_tile" id="logon">
+				<h1>Welcome {$user_session.userid}</h1>
+				<div class="standard_tile_line"></div>
+				<div class="logon_input_usn">
+					<div class="logon_left">
+						<img src="../templates/0/images/logon_usn.png" alt="username" />
+					</div>
+					
+					<div class="logon_right">
+						<input class="standard_tile_input" type="text" name="userid" maxlength="30" />
+					</div>
+				</div>
+				<div class="logon_input_pwd">
+					<div class="logon_left">
+						<img src="../templates/0/images/logon_pwd.png" alt="password" />
+					</div>
+					<div class="logon_right">
+						<input class="standard_tile_input" type="password" name="password" maxlength="30" id="password" />
+					</div>
+				</div> 
+				<div class="logon_signin">
+				<button type="button" value="Login" class="signinbutton" onclick="formhash(this.form, this.form.password);" />
+				Sign In
+				</button>
+				</div>
+				<br>	
+				<h3><a href="#" class="standard_tile_link">Forgot user name or password?</a></h3>
+				<br>
+			</form>
+			</div>
+
+
+
+			{/if}
 {/block}	
 
              
