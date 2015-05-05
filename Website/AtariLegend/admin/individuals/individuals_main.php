@@ -20,6 +20,7 @@ include("../includes/common.php");
 include("../includes/config.php"); 
 
 //if we want to delete the individual (from the edit page)
+if (empty($action)) {$action = "";}
 if ( $action == 'delete_ind' )
 {	
 	//first delete picture
@@ -92,7 +93,7 @@ $sql_individuals = "SELECT * FROM individuals ORDER BY ind_name ASC";
 $sql_aka = "SELECT ind_id,nick FROM individual_nicks ORDER BY nick ASC";
 
 //Create a temporary table to build an array with both names and nicknames
-mysql_query("CREATE TEMPORARY TABLE temp TYPE=HEAP $sql_individuals") or die("failed to create temporary table");
+mysql_query("CREATE TEMPORARY TABLE temp ENGINE = MEMORY $sql_individuals") or die("failed to create temporary table");
 mysql_query("INSERT INTO temp $sql_aka") or die("failed to insert akas into temporary table");
 			
 $query_temporary = mysql_query("SELECT * FROM temp ORDER BY ind_name ASC") or die("Failed to query temporary table");
@@ -101,15 +102,15 @@ mysql_query("DROP TABLE temp");
 				   
 while  ($individuals=mysql_fetch_array($query_temporary)) 
 {  
-	if ( $individuals[ind_name] != '' )
+	if ( $individuals['ind_name'] != '' )
 	{
 		$smarty->append('individuals',
-	    		 array('ind_id' => $individuals[ind_id],
-					   'ind_name' => $individuals[ind_name]));
+	    		 array('ind_id' => $individuals['ind_id'],
+					   'ind_name' => $individuals['ind_name']));
 	}
 }
 
-$smarty->assign("user_id",$_SESSION[user_id]);
+$smarty->assign("user_id",$_SESSION['user_id']);
 $smarty->assign('individuals_main_tpl', '1');
 
 //Send all smarty variables to the templates
