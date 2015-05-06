@@ -23,7 +23,7 @@ include("../includes/config.php");
 //***********************************************************************************
 //If delete aka link has been pressed
 //***********************************************************************************
-if ( $action == 'delete_aka' )
+if ( isset($action) and $action == 'delete_aka' )
 {
 	$sql_aka = mysql_query("DELETE FROM game_aka WHERE game_aka_id = '$game_aka_id' AND game_id = '$game_id'") 
  			   or die ("Couldn't delete aka");
@@ -32,7 +32,7 @@ if ( $action == 'delete_aka' )
 //***********************************************************************************
 //If add aka button has been pressed
 //***********************************************************************************
-if ( $action == 'game_aka' )
+if ( isset($action) and $action == 'game_aka' )
 {
 	$sql_aka = mysql_query("INSERT INTO game_aka (game_id, aka_name) VALUES ('$game_id','$game_aka')")
  			   or die ("Couldn't insert aka games");
@@ -41,7 +41,7 @@ if ( $action == 'game_aka' )
 //***********************************************************************************
 //If delete publisher button has been pressed
 //***********************************************************************************
-if ( $action == 'delete_creator' )
+if ( isset($action) and $action == 'delete_creator' )
 {
 	if(isset($game_author_id)) 
 	{
@@ -59,7 +59,7 @@ if ( $action == 'delete_creator' )
 //***********************************************************************************
 //If add publisher button has been pressed
 //***********************************************************************************
-if ( $action == 'add_creator' )
+if ( isset($action) and $action == 'add_creator' )
 {
 	if ( $ind_id != '-' ) 
 	{
@@ -74,7 +74,7 @@ if ( $action == 'add_creator' )
 //***********************************************************************************
 //If delete publisher button has been pressed
 //***********************************************************************************
-if ( $action == 'delete_publisher' )
+if ( isset($action) and $action == 'delete_publisher' )
 {
 	if(isset($game_publisher_id)) 
 	{
@@ -93,7 +93,7 @@ if ( $action == 'delete_publisher' )
 //***********************************************************************************
 //If add publisher button has been pressed
 //***********************************************************************************
-if ( $action == 'add_publisher' )
+if ( isset($action) and $action == 'add_publisher' )
 {
 	if ( $company_id_pub != '-' ) 
 	{
@@ -109,7 +109,7 @@ if ( $action == 'add_publisher' )
 //***********************************************************************************
 //If delete developer button has been pressed
 //***********************************************************************************
-if ( $action == 'delete_developer' )
+if ( isset($action) and $action == 'delete_developer' )
 {
 	if(isset($game_developer_id)) 
 	{
@@ -127,7 +127,7 @@ if ( $action == 'delete_developer' )
 //***********************************************************************************
 //If add developer button has been pressed
 //***********************************************************************************
-if ( $action == 'add_developer' )
+if ( isset($action) and $action == 'add_developer' )
 {
 	if ( $company_id_dev != '-' ) 
 	{
@@ -143,7 +143,7 @@ if ( $action == 'add_developer' )
 //***********************************************************************************
 //If delete year button has been pressed
 //***********************************************************************************
-if ( $action == 'delete_year' )
+if ( isset($action) and $action == 'delete_year' )
 {
 	if(isset($game_year_id)) 
 	{
@@ -161,7 +161,7 @@ if ( $action == 'delete_year' )
 //***********************************************************************************
 //If add year button has been pressed
 //***********************************************************************************
-if ( $action == 'add_year' )
+if ( isset($action) and $action == 'add_year' )
 {
 	$sql = mysql_query("INSERT INTO game_year (game_id, game_year, game_extra_info_id) VALUES ('$game_id','$Date_Year','$game_extra_info_year')") or die ("Release year insertion failed");  
 }	
@@ -169,7 +169,7 @@ if ( $action == 'add_year' )
 //***********************************************************************************
 //If the modify button has been pressed, update the necesarry tables 
 //***********************************************************************************
-	if ( $action == 'modify_game' )
+	if ( isset($action) and $action == 'modify_game' )
 	{
 		// game_table
 		$sdbquery  = mysql_query("UPDATE game SET game_name='$game_name' WHERE game_id=$game_id") or die ("trouble updating game"); 
@@ -339,7 +339,7 @@ if ( $action == 'add_year' )
 //***********************************************************************************
 //If the delete button has been pressed, delete the necesarry records from the tables
 //***********************************************************************************
-	if ( $action == 'delete_game' )
+	if ( isset($action) and $action == 'delete_game' )
 	{
 		//First we need to do a hell of a lot checks before we can delete an actual game.
 		$sdbquery = mysql_query("SELECT * FROM game_download WHERE game_id='$game_id'")
@@ -449,13 +449,13 @@ if ( $action == 'add_year' )
 											while  ($company=mysql_fetch_array($sql_company)) 
 											{  
 												$smarty->append('company',
-	    											 array('comp_id' => $company[pub_dev_id],
-				 	  									   'comp_name' => $company[pub_dev_name]));
+	    											 array('comp_id' => $company['pub_dev_id'],
+				 	  									   'comp_name' => $company['pub_dev_name']));
 											}
 
 											$smarty->assign("message",'Game succesfully deleted');
 
-											$smarty->assign("user_id",$_SESSION[user_id]);
+											$smarty->assign("user_id",$_SESSION['user_id']);
 											$smarty->assign('games_main_tpl', '1');
 
 											//Send all smarty variables to the templates
@@ -517,22 +517,22 @@ if ( $action == 'add_year' )
 		while ($game_info=mysql_fetch_array($sql_game)) 
 		{  
 			$smarty->assign('game_info',
-	    		 array('game_name' => $game_info[game_name],
-				 	   'game_id' => $game_info[game_id],
-				 	   'game_free' => $game_info[free],
-					   'game_development' => $game_info[development],
-					   'game_unreleased' => $game_info[unreleased],
-					   'game_ste_only' => $game_info[ste_only],
-					   'game_ste_enhan' => $game_info[ste_enhanced],
-					   'game_falcon_only' => $game_info[falcon_only],
-					   'game_falcon_enhan' => $game_info[falcon_enhanced],
-					   'game_unfinished' => $game_info[unfinished],
-					   'game_mono' => $game_info[monochrome],
-					   'game_wanted' => $game_info[game_wanted_id],
-					   'game_arcade' => $game_info[arcade],
-					   'game_seuck' => $game_info[seuck],
-					   'game_stos' => $game_info[stos],
-					   'game_stac' => $game_info[stac]));
+	    		 array('game_name' => $game_info['game_name'],
+				 	   'game_id' => $game_info['game_id'],
+				 	   'game_free' => $game_info['free'],
+					   'game_development' => $game_info['development'],
+					   'game_unreleased' => $game_info['unreleased'],
+					   'game_ste_only' => $game_info['ste_only'],
+					   'game_ste_enhan' => $game_info['ste_enhanced'],
+					   'game_falcon_only' => $game_info['falcon_only'],
+					   'game_falcon_enhan' => $game_info['falcon_enhanced'],
+					   'game_unfinished' => $game_info['unfinished'],
+					   'game_mono' => $game_info['monochrome'],
+					   'game_wanted' => $game_info['game_wanted_id'],
+					   'game_arcade' => $game_info['arcade'],
+					   'game_seuck' => $game_info['seuck'],
+					   'game_stos' => $game_info['stos'],
+					   'game_stac' => $game_info['stac']));
 		}
 			
 //***********************************************************************************
@@ -547,9 +547,9 @@ if ( $action == 'add_year' )
 	while ($year=mysql_fetch_array($sql_year)) 
 	{  
 		$smarty->append('game_year',
-	   		 array('game_year_id' => $year[game_year_id],
-			 	   'game_year' => $year[game_year],
-			 	   'game_extra_info' => $year[game_extra_info]));
+	   		 array('game_year_id' => $year['game_year_id'],
+			 	   'game_year' => $year['game_year'],
+			 	   'game_extra_info' => $year['game_extra_info']));
 	}
 						  
 //***********************************************************************************
@@ -575,8 +575,8 @@ if ( $action == 'add_year' )
 			}
 			
 			$smarty->append('cat',
-	    			 array('cat_id' => $categories[game_cat_id],
-					 	   'cat_name' => $categories[game_cat_name],
+	    			 array('cat_id' => $categories['game_cat_id'],
+					 	   'cat_name' => $categories['game_cat_name'],
 						   'cat_selected' => $selected)); 
 		}
 
@@ -592,8 +592,8 @@ if ( $action == 'add_year' )
 	while  ($individuals=mysql_fetch_array($sql_individuals)) 
 	{  
 		$smarty->append('individuals',
-	    		 array('ind_id' => $individuals[ind_id],
-					   'ind_name' => $individuals[ind_name]));
+	    		 array('ind_id' => $individuals['ind_id'],
+					   'ind_name' => $individuals['ind_name']));
 	}
 
 	// Get the author types
@@ -603,8 +603,8 @@ if ( $action == 'add_year' )
 	while  ($author=mysql_fetch_array($sql_author)) 
 	{  
 		$smarty->append('author_types',
- 			 array('author_type' => $author[author_type_info],
-				   'author_type_id' => $author[author_type_id]));
+ 			 array('author_type' => $author['author_type_info'],
+				   'author_type_id' => $author['author_type_id']));
 	}
 	
 	
@@ -618,10 +618,10 @@ if ( $action == 'add_year' )
 	 while  ($game_author=mysql_fetch_array ($sql_gameauthors)) 
 	 {
 	 	$smarty->append('game_author',
- 			 array('game_author_id' => $game_author[game_author_id],
-				   'ind_name' => $game_author[ind_name],
-				   'ind_id' => $game_author[ind_id],
-				   'auhthor_type_info' => $game_author[author_type_info]));
+ 			 array('game_author_id' => $game_author['game_author_id'],
+				   'ind_name' => $game_author['ind_name'],
+				   'ind_id' => $game_author['ind_id'],
+				   'auhthor_type_info' => $game_author['author_type_info']));
 	 }
 
 //**********************************************************************************		
@@ -635,8 +635,8 @@ if ( $action == 'add_year' )
 	while  ($company=mysql_fetch_array($sql_company)) 
 	{  
 		$smarty->append('company',
-	   		 	 array('comp_id' => $company[pub_dev_id],
-					   'comp_name' => $company[pub_dev_name]));
+	   		 	 array('comp_id' => $company['pub_dev_id'],
+					   'comp_name' => $company['pub_dev_name']));
 	}
 	
 	
@@ -651,11 +651,11 @@ if ( $action == 'add_year' )
 	while  ($publishers=mysql_fetch_array($sql_publisher)) 
 	{  
 		$smarty->append('publisher',
-	   		 	 array('pub_id' => $publishers[pub_dev_id],
-					   'pub_name' => $publishers[pub_dev_name],
-					   'continent_id' => $publishers[continent_id],
-					   'extra_info' => $publishers[game_extra_info],
-					   'continent' => $publishers[continent_name]));
+	   		 	 array('pub_id' => $publishers['pub_dev_id'],
+					   'pub_name' => $publishers['pub_dev_name'],
+					   'continent_id' => $publishers['continent_id'],
+					   'extra_info' => $publishers['game_extra_info'],
+					   'continent' => $publishers['continent_name']));
 	}
 	
 	
@@ -670,11 +670,11 @@ if ( $action == 'add_year' )
 	while  ($developers=mysql_fetch_array($sql_developer)) 
 	{  
 		$smarty->append('developer',
-	   		 	 array('pub_id' => $developers[pub_dev_id],
-					   'pub_name' => $developers[pub_dev_name],
-					   'continent_id' => $developers[continent_id],
-					   'extra_info' => $developers[game_extra_info],
-					   'continent' => $developers[continent_name]));
+	   		 	 array('pub_id' => $developers['pub_dev_id'],
+					   'pub_name' => $developers['pub_dev_name'],
+					   'continent_id' => $developers['continent_id'],
+					   'extra_info' => $developers['game_extra_info'],
+					   'continent' => $developers['continent_name']));
 	}
 
 	
@@ -688,8 +688,8 @@ if ( $action == 'add_year' )
 	while  ($continent=mysql_fetch_array($sql_continent)) 
 	{  
 		$smarty->append('continent',
-	   		 	 array('continent_id' => $continent[continent_id],
-					   'continent_name' => $continent[continent_name]));
+	   		 	 array('continent_id' => $continent['continent_id'],
+					   'continent_name' => $continent['continent_name']));
 	}
 	
 
@@ -703,8 +703,8 @@ if ( $action == 'add_year' )
 	while  ($game_extra_info=mysql_fetch_array($sql_game_extra_info)) 
 	{  
 		$smarty->append('game_extra_info',
-	   		 	 array('game_extra_info_id' => $game_extra_info[game_extra_info_id],
-					   'game_extra_info' => $game_extra_info[game_extra_info]));
+	   		 	 array('game_extra_info_id' => $game_extra_info['game_extra_info_id'],
+					   'game_extra_info' => $game_extra_info['game_extra_info']));
 	}
 
 	
@@ -718,8 +718,8 @@ if ( $action == 'add_year' )
 	while  ($categories=mysql_fetch_array($sql_categories)) 
 	{ 
 		$smarty->append('categories',
-	   		 		 array('game_cat_id' => $categories[game_cat_id],
-					 	   'game_cat_name' => $categories[game_cat_name]));
+	   		 		 array('game_cat_id' => $categories['game_cat_id'],
+					 	   'game_cat_name' => $categories['game_cat_name']));
 	}
 	
 						
@@ -731,8 +731,8 @@ if ( $action == 'add_year' )
 	while  ($catcross=mysql_fetch_array($sql_catcross)) 
 	{ 
 		$smarty->append('catcross',
-	   		 		 array('game_id' => $catcross[game_id],
-					 	   'game_cat_id' => $catcross[game_cat_id]));
+	   		 		 array('game_id' => $catcross['game_id'],
+					 	   'game_cat_id' => $catcross['game_cat_id']));
 		
 		$nr_catcross++; 
 	}
@@ -752,9 +752,9 @@ if ( $action == 'add_year' )
 	while ($aka = mysql_fetch_array ($sql_aka)) 
 	{
 		$smarty->append('aka',
-	   		 	 array('game_aka_name' => $aka[aka_name],
-					   'game_id' => $aka[game_id],
-					   'game_aka_id' => $aka[game_aka_id]));
+	   		 	 array('game_aka_name' => $aka['aka_name'],
+					   'game_id' => $aka['game_id'],
+					   'game_aka_id' => $aka['game_aka_id']));
 		$nr_aka++;
 	}
 	
@@ -813,7 +813,7 @@ $smarty->assign("nr_magazines",$array['count']);
 //**********************************************************************************
 
 $smarty->assign("game_id",$game_id);
-$smarty->assign("user_id",$_SESSION[user_id]);
+$smarty->assign("user_id",$_SESSION['user_id']);
 $smarty->assign('games_detail_tpl', '1');
 
 //Send all smarty variables to the templates
