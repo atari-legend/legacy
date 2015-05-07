@@ -17,7 +17,6 @@ A little logo preview page
 ***************************************************************************/
 
 include("../includes/common.php");
-include("../includes/config.php"); 
 
 $sql_logos = mysql_query ("SELECT *
 				  			FROM pub_dev 
@@ -27,8 +26,16 @@ $sql_logos = mysql_query ("SELECT *
 
 while ( $logos = mysql_fetch_array($sql_logos) )
 {
+
+	
+	$company_image  = $company_screenshot_path;
+	$company_image .= $logos['pub_dev_id'];
+	$company_image .= '.';
+	$company_image .= $logos['pub_dev_imgext'];
+
 	$smarty->append('company',
 	    	 array('comp_id' => $logos['pub_dev_id'],
+			'company_image' => $company_image,
 				   'comp_name' => $logos['pub_dev_name']));
 }
 

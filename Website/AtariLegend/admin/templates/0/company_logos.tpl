@@ -38,7 +38,7 @@ The company logos preview page
 		<b><a href="../company/company_edit.php?comp_id={$line.comp_id}" class="MAINNAV">{$line.comp_name}</a></b>
 	</td>
 	<td align="left" width="75%">
-		<img src="../includes/showscreens.php?pub_dev_id={$line.comp_id}" border="0">	
+		<img src="../includes/show_image.php?file={$line.company_image}&resize=null,null,null,null&crop=null,null,null,null" border="0">	
 	</td>		
 </tr>
 {/foreach}

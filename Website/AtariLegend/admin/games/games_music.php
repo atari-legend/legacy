@@ -88,7 +88,7 @@ if ($action == 'search')
 		{
 			$rows = mysql_num_rows($games);
 			if ( $rows > 0 )
-			{
+			{ $i = 0;
 				while ( $row=mysql_fetch_assoc($games) ) 
 				{  
 					$i++;
@@ -100,10 +100,10 @@ if ($action == 'search')
 					$array = mysql_fetch_array($numberzaks);
 				
 					$smarty->append('music',
-	   			 	 array('game_id' => $row[game_id],
-						   'game_name' => $row[game_name],
-						   'game_publisher' => $row[pub_dev_name],
-						   'game_year' => $row[game_year],
+	   			 	 array('game_id' => $row['game_id'],
+						   'game_name' => $row['game_name'],
+						   'game_publisher' => $row['pub_dev_name'],
+						   'game_year' => $row['game_year'],
 						   'number_zaks' => $array['count']));	
 				}	
 				
@@ -113,7 +113,7 @@ if ($action == 'search')
 				$smarty->assign('querytime', $totaltime1);
 				$smarty->assign('nr_of_entries', $i);
 				
-				$smarty->assign("user_id",$_SESSION[user_id]);
+				$smarty->assign("user_id",$_SESSION['user_id']);
 				$smarty->assign('games_music_list_tpl', '1');
 				
 				//Send all smarty variables to the templates

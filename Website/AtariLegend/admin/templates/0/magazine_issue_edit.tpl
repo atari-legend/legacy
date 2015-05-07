@@ -32,7 +32,7 @@ function coverdelete(JSmagazine_issue_id)
 	
 		{if $magazine.scan eq "1"}
 		 coverscan preview<br><br>
-		<img src="../includes/showscreens.php?magazine_scan_id={$magazine.magazine_issue_id}" alt="" border="0">
+		<img src="../includes/show_image.php?file={$magazine.magazine_image}&resize=null,null,null,null&crop=null,null,null,null" alt="" border="0">
 		<table>
 			<tr>
 				<td class="boxborder">

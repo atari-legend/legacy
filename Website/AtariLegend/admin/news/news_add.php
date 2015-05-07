@@ -26,12 +26,12 @@ $sql_newsimage = mysql_query("SELECT news_image_id,news_image_name FROM news_ima
 while ($newsimages = mysql_fetch_array($sql_newsimage))
 {
 	$smarty->append('news_images',
-	    	 array('image_id' => $newsimages[news_image_id],
-				   'image_name' => $newsimages[news_image_name]));
+	    	 array('image_id' => $newsimages['news_image_id'],
+				   'image_name' => $newsimages['news_image_name']));
 }
 
 
-if ($action=="add_news")
+if (isset($action) and $action=="add_news")
 //****************************************************************************************
 // This is where we add the actual news to the submission table
 //**************************************************************************************** 
@@ -59,7 +59,7 @@ if ($action=="add_news")
 	$smarty->assign('message', $message);
 }
 
-$smarty->assign("user_id",$_SESSION[user_id]);
+$smarty->assign("user_id",$_SESSION['user_id']);
 $smarty->assign('news_add_tpl', '1');
 
 //Send all smarty variables to the templates
