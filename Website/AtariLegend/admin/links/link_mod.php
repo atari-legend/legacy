@@ -30,13 +30,20 @@ include("../includes/common.php");
 		
 		$rowlink=mysql_fetch_array ($LINKSQL);
 		
+			$website_image = $website_image_path;
+			$website_image .= $rowlink['website_id'];
+			$website_image .= ".";
+			$website_image .= $rowlink['website_imgext'];
+
+
+
 		$smarty->assign('website',
-	    array('website_name' => $rowlink[website_name],
-			  'website_url' => $rowlink[website_url],
-			  'website_id' => $rowlink[website_id],
-			  'category_id' => $rowlink[website_category_id],
-			  'website_description_text' => $rowlink[website_description_text],
-			  'website_imgext' => $rowlink[website_imgext]));
+	    array('website_name' => $rowlink['website_name'],
+			  'website_url' => $rowlink['website_url'],
+			  'website_id' => $rowlink['website_id'],
+			  'category_id' => $rowlink['website_category_id'],
+			  'website_description_text' => $rowlink['website_description_text'],
+			  'website_image' => $website_image));
 	
 	// Do the category selector
 	$RESULT=mysql_query("SELECT * FROM website_category ORDER BY website_category_name");
@@ -46,14 +53,14 @@ include("../includes/common.php");
 	while ($rowlinkcat=mysql_fetch_array($RESULT)) 
 	{ 
 		$sel='';
-			if($rowlink[website_category_id]==$rowlinkcat[website_category_id]) 
+			if($rowlink['website_category_id']==$rowlinkcat['website_category_id']) 
 			{
 				$sel="SELECTED"; 
 			}
 		
 		$smarty->append('category',
-	    			array('category_id' => $rowlinkcat[website_category_id],
-						  'category_name' => $rowlinkcat[website_category_name],
+	    			array('category_id' => $rowlinkcat['website_category_id'],
+						  'category_name' => $rowlinkcat['website_category_name'],
 						  'selected' => $sel));
 	} 
 
