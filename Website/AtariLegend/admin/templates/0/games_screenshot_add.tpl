@@ -72,8 +72,9 @@ function delete_screenshot(screenshot_id, game_id)
 			<td align="center">	
 				Image {$line.count} :: 
 				<a href="javascript:delete_screenshot({$line.id},{$game_id})" class="MAINNAV">Delete</a> ::    	
-				<a href="javascript:void(window.open('../includes/showscreens.php?screenshot_id={$line.id}','4','width={$line.width},height={$line.height},toolbar=no,statusbar=no'))" class="MAINNAV"><img src="../includes/showimage.php?img={$line.image}&amp;w=89&amp;shadow=0&amp;bgcolour=a2a2a2" width=75 class="shot_border" alt="Click to enlarge!" vspace="2" hspace="1"></a>
-			</td>
+				<a href="javascript:void(window.open('../includes/show_image.php?file={$line.screenshot_image}&resize=410,null,null,null&crop=null,null,null,null','4','width=460,height=300,toolbar=no,statusbar=no'))" class="MAINNAV">
+<img src="../includes/show_image.php?file={$line.screenshot_image}&resize=75,null,null,null&crop=null,null,null,null" width=75 class="shot_border" alt="Click to enlarge!" vspace="2" hspace="1"></a>
+			</td> 
 		{if $smarty.foreach.screen.iteration eq 7}</tr>{/if}
 		{if $smarty.foreach.screen.iteration eq 14}</tr>{/if}
 		{if $smarty.foreach.screen.iteration eq 21}</tr>{/if}

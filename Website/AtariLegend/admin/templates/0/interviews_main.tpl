@@ -113,9 +113,9 @@ function deleteinterview(interview_id)
 		<tr>
 			<td width="20%" valign="top" align="left">
 			{if $line.ind_photo == 'none'}
-				<img src="../includes/showimage.php?img=../templates/0/images/unknown.png&amp;w=60&amp;shadow=1&amp;bgcolour=FFFFFF">
+				<img src="../includes/show_image.php?file=../templates/0/images/unknown.png">
 			{else}
-				<img src="../includes/showimage.php?img={$line.ind_photo}&amp;w=60&amp;shadow=1&amp;bgcolour=FFFFFF" alt="photo">
+				<img src="../includes/show_image.php?file={$line.ind_photo}&resize=210,null,null,null" alt="photo">
 			{/if}
 			</td>
 			<td width="80%" align="left">

@@ -16,13 +16,11 @@
 
 //load all common functions
 include("../includes/common.php"); 
-include("../includes/config.php"); 
-
 
 //***********************************************************************************
 //If delete aka link has been pressed
 //***********************************************************************************
-if ( $action == 'delete_aka' )
+if ( isset($action) and $action == 'delete_aka' )
 {
 	$sql_aka = mysql_query("DELETE FROM demo_aka WHERE demo_aka_id = '$demo_aka_id' and demo_id = '$demo_id'") 
  			   or die ("Couldn't delete aka");
@@ -31,7 +29,7 @@ if ( $action == 'delete_aka' )
 //***********************************************************************************
 //If add aka button has been pressed
 //***********************************************************************************
-if ( $action == 'demo_aka' )
+if ( isset($action) and $action == 'demo_aka' )
 {
 	$sql_aka = mysql_query("INSERT INTO demo_aka (demo_id, aka_name) VALUES ('$demo_id','$demo_aka')")
  			   or die ("Couldn't insert aka demos");
@@ -40,7 +38,7 @@ if ( $action == 'demo_aka' )
 //***********************************************************************************
 //If delete creator button has been pressed
 //***********************************************************************************
-if ( $action == 'delete_author' )
+if ( isset($action) and $action == 'delete_author' )
 {
 	if(isset($demo_author_id)) 
 	{	
@@ -54,7 +52,7 @@ if ( $action == 'delete_author' )
 //***********************************************************************************
 //If delete crew button has been pressed
 //***********************************************************************************
-if ( $action == 'delete_crew' )
+if ( isset($action) and $action == 'delete_crew' )
 {
 	if(isset($demo_crew_id)) 
 	{
@@ -68,7 +66,7 @@ if ( $action == 'delete_crew' )
 //***********************************************************************************
 //If add crew button has been pressed
 //***********************************************************************************
-if ( $action == 'add_crew' )
+if ( isset($action) and $action == 'add_crew' )
 {
 	$sql = mysql_query("INSERT INTO crew_demo_prod (demo_id,crew_id) VALUES ('$demo_id','$crew_id_select')") or die ("crew insertion failed");  
 }
@@ -77,7 +75,7 @@ if ( $action == 'add_crew' )
 //***********************************************************************************
 //If the add creator button has been pressed
 //***********************************************************************************
-if ( $action == 'add_author' )
+if ( isset($action) and $action == 'add_author' )
 {
 	$sql = mysql_query("INSERT INTO demo_author (demo_id,ind_id,author_type_id) VALUES ('$demo_id','$ind_id','$author_type_id')") or die ("individual insertion failed");  
 }
@@ -86,14 +84,10 @@ if ( $action == 'add_author' )
 //***********************************************************************************
 //If the modify button has been pressed, update the necesarry tables 
 //***********************************************************************************
-	if ( $action == 'modify_demo' )
+	if ( isset($action) and $action == 'modify_demo' )
 	{
 		// demo_table
 		$sdbquery  = mysql_query("UPDATE demo SET demo_name='$demo_name' WHERE demo_id=$demo_id") or die ("trouble updating demo"); 
-		
-		//***NOT USED ANYMORE***
-		// DUMP TABLE UPDATE
-		//$sdbquery  = mysql_query("UPDATE demo_search SET demo_name='$demo_name' WHERE demo_id=$demo_id") or die ("trouble updating dump table - demo"); 
 		
 		// demo year
 		// Start off by deleting previos value
@@ -172,7 +166,7 @@ if ( $action == 'add_author' )
 //***********************************************************************************
 //If the delete button has been pressed, delete the necesarry records from the tables
 //***********************************************************************************
-	if ( $action == 'delete_demo' )
+	if ( isset($action) and $action == 'delete_demo' )
 	{
 		//First we need to do a hell of a lot checks before we can delete an actual game.
 		$sdbquery = mysql_query("SELECT * FROM demo_download WHERE demo_id='$demo_id'")
@@ -238,13 +232,13 @@ if ( $action == 'add_author' )
 							while  ($crew=mysql_fetch_array($sql_crew)) 
 							{  
 								$smarty->append('crew',
-				    				 array('crew_id' => $crew[crew_id],
-									 	   'crew_name' => $crew[crew_name]));
+				    				 array('crew_id' => $crew['crew_id'],
+									 	   'crew_name' => $crew['crew_name']));
 							}
 							
 							$smarty->assign("message",'Demo has been deleted succesfully');
 							
-							$smarty->assign("user_id",$_SESSION[user_id]);
+							$smarty->assign("user_id",$_SESSION['user_id']);
 							$smarty->assign('demos_main_tpl', '1');
 
 							//Send all smarty variables to the templates
@@ -286,19 +280,19 @@ if ( $action == 'add_author' )
 					
 		while ($demo_info=mysql_fetch_array($sql_demo)) 
 		{  
-			$demo_year = $demo_info[demo_year];
+			$demo_year = $demo_info['demo_year'];
 			$demo_year .= '01';
 			$demo_year .= '01';
 			
 			$smarty->assign('demo_info',
-	    		 array('demo_name' => $demo_info[demo_name],
+	    		 array('demo_name' => $demo_info['demo_name'],
 				 	   'demo_year' => $demo_year,
-				 	   'demo_id' => $demo_info[demo_id],
-				 	   'demo_ste_only' => $demo_info[ste_only],
-					   'demo_ste_enhan' => $demo_info[ste_enhanced],
-					   'demo_falcon_only' => $demo_info[falcon_only],
-					   'demo_falcon_enhan' => $demo_info[falcon_enhanced],
-					   'demo_mono_only' => $demo_info[mono_only]));
+				 	   'demo_id' => $demo_info['demo_id'],
+				 	   'demo_ste_only' => $demo_info['ste_only'],
+					   'demo_ste_enhan' => $demo_info['ste_enhanced'],
+					   'demo_falcon_only' => $demo_info['falcon_only'],
+					   'demo_falcon_enhan' => $demo_info['falcon_enhanced'],
+					   'demo_mono_only' => $demo_info['mono_only']));
 		}
 
 //***********************************************************************************
@@ -324,8 +318,8 @@ if ( $action == 'add_author' )
 			}
 			
 			$smarty->append('cat',
-	    			 array('cat_id' => $categories[demo_cat_id],
-					 	   'cat_name' => $categories[demo_cat_name],
+	    			 array('cat_id' => $categories['demo_cat_id'],
+					 	   'cat_name' => $categories['demo_cat_name'],
 						   'cat_selected' => $selected)); 
 		}
 
@@ -339,7 +333,7 @@ if ( $action == 'add_author' )
 	$sql_individuals_aka = "SELECT ind_id,nick FROM individual_nicks ORDER BY nick ASC";
 
 	//Create a temporary table to build an array with both names and nicknames
-	mysql_query("CREATE TEMPORARY TABLE temp TYPE=HEAP $sql_individuals") or die("failed to create temporary table");
+	mysql_query("CREATE TEMPORARY TABLE temp ENGINE=MEMORY $sql_individuals") or die("failed to create temporary table");
 	mysql_query("INSERT INTO temp $sql_individuals_aka") or die("failed to insert akas into temporary table");
 			
 	$query_temporary = mysql_query("SELECT * FROM temp ORDER BY ind_name ASC") or die("Failed to query temporary table");
@@ -348,8 +342,8 @@ if ( $action == 'add_author' )
 	while  ($individuals=mysql_fetch_array($query_temporary)) 
 	{  
 		$smarty->append('individuals',
-	    		 array('ind_id' => $individuals[ind_id],
-					   'ind_name' => $individuals[ind_name]));
+	    		 array('ind_id' => $individuals['ind_id'],
+					   'ind_name' => $individuals['ind_name']));
 	}
 
 	// Get the author types
@@ -359,8 +353,8 @@ if ( $action == 'add_author' )
 	while  ($author=mysql_fetch_array($sql_author)) 
 	{  
 		$smarty->append('author_types',
- 			 array('author_type' => $author[author_type_info],
-				   'author_type_id' => $author[author_type_id]));
+ 			 array('author_type' => $author['author_type_info'],
+				   'author_type_id' => $author['author_type_id']));
 	}
 	
 	
@@ -374,10 +368,10 @@ if ( $action == 'add_author' )
 	 while  ($demo_author=mysql_fetch_array ($sql_demoauthors)) 
 	 {
 	 	$smarty->append('demo_author',
- 			 array('demo_author_id' => $demo_author[demo_author_id],
-				   'ind_name' => $demo_author[ind_name],
-				   'ind_id' => $demo_author[ind_id],
-				   'auhthor_type_info' => $demo_author[author_type_info]));
+ 			 array('demo_author_id' => $demo_author['demo_author_id'],
+				   'ind_name' => $demo_author['ind_name'],
+				   'ind_id' => $demo_author['ind_id'],
+				   'auhthor_type_info' => $demo_author['author_type_info']));
 		
 		$smarty->assign("demo_author_nr",'1');
 	 }
@@ -393,8 +387,8 @@ if ( $action == 'add_author' )
 	while  ($crew=mysql_fetch_array($sql_crew)) 
 	{  
 		$smarty->append('crew',
-	   		 	 array('crew_id' => $crew[crew_id],
-					   'crew_name' => $crew[crew_name]));
+	   		 	 array('crew_id' => $crew['crew_id'],
+					   'crew_name' => $crew['crew_name']));
 	}
 	
 	
@@ -407,8 +401,8 @@ if ( $action == 'add_author' )
 	while  ($crew=mysql_fetch_array($sql_crew)) 
 	{  
 		$smarty->append('demo_crew',
-	   		 	 array('crew_id' => $crew[crew_id],
-					   'crew_name' => $crew[crew_name]));
+	   		 	 array('crew_id' => $crew['crew_id'],
+					   'crew_name' => $crew['crew_name']));
 					   
 		$smarty->assign("demo_crew_nr",'1');
 	}
@@ -426,9 +420,9 @@ if ( $action == 'add_author' )
 	while ($aka = mysql_fetch_array ($sql_aka)) 
 	{
 		$smarty->append('aka',
-	   		 	 array('demo_aka_name' => $aka[aka_name],
-					   'demo_id' => $aka[demo_id],
-					   'demo_aka_id' => $aka[demo_aka_id]));
+	   		 	 array('demo_aka_name' => $aka['aka_name'],
+					   'demo_id' => $aka['demo_id'],
+					   'demo_aka_id' => $aka['demo_aka_id']));
 		$nr_aka++;
 	}
 	
@@ -458,7 +452,7 @@ $smarty->assign("nr_music",$array['count']);
 //**********************************************************************************
 
 $smarty->assign("demo_id",$demo_id);
-$smarty->assign("user_id",$_SESSION[user_id]);
+$smarty->assign("user_id",$_SESSION['user_id']);
 $smarty->assign('demo_detail_tpl', '1');
 
 //Send all smarty variables to the templates
