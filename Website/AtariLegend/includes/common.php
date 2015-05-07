@@ -24,17 +24,19 @@ extract($_REQUEST);
 include("../includes/connect.php"); 
 include("../includes/config_smarty.php");
 include("../includes/functions.php"); 
-include("../includes/functions_session.php");
+include("../includes/user_functions.php");
 include("../includes/constants.php");
 include("../includes/config.php");
 
 //Check if the user is logged on to the site
-if(!session_id())
-{
-	session_start();
+sec_session_start();
+if (login_check($mysqli) == true) {
+	
+	$smarty->assign('user_session',
+	     array('userid' => $_SESSION['userid'],
+		   'user_id' => $_SESSION['user_id']));
 }
 
-$logged_in = checkLogin();
 
 if (SITESTATUS=="offline") {
 
@@ -43,12 +45,5 @@ if (SITESTATUS=="offline") {
 			header("Location: ".SITEURL."blank.php");
 			
 			}
-}
-
-//Send the var to the template files
-$smarty->assign('logged_in', $logged_in);
-if(isset($_SESSION['username']))
-{ 
-	$smarty->assign('username', $_SESSION['username']);
 }
 ?>
