@@ -18,8 +18,8 @@ This is the crew page contructor
 
 //load all common functions
 include("../includes/common.php"); 
-include("../includes/config.php"); 
 
+if(empty($action)) {$action = "";}
 
 /*if (isset($new_crew)) 
 {
@@ -36,8 +36,8 @@ if ($crewsearch !='' and $crewbrowse == '')
 		while  ($crew=mysql_fetch_array($sql_crew)) 
 		{  
 			$smarty->append('crew',
-	    		 array('crew_id' => $crew[crew_id],
-				 	   'crew_name' => $crew[crew_name]));
+	    		 array('crew_id' => $crew['crew_id'],
+				 	   'crew_name' => $crew['crew_name']));
 		}
 }
 
@@ -51,8 +51,8 @@ elseif ($crewbrowse !='' and $crewsearch == '')
 		while  ($crew=mysql_fetch_array($sql_crew)) 
 		{  
 			$smarty->append('crew',
-	    		 array('crew_id' => $crew[crew_id],
-				 	   'crew_name' => $crew[crew_name]));
+	    		 array('crew_id' => $crew['crew_id'],
+				 	   'crew_name' => $crew['crew_name']));
 		}
 }
 
@@ -73,12 +73,12 @@ $sql_crew = mysql_query("SELECT * FROM crew
 					   
 			$crew=mysql_fetch_array($sql_crew);		   
 				
-			$crew_history=stripslashes($crew[crew_history]);		   
+			$crew_history=stripslashes($crew['crew_history']);		   
 					   
 $smarty->assign('crew_select',
 	    		 array('crew_id' => $crew_select,
-				 	   'crew_name' => $crew[crew_name],
-					   'crew_logo' => $crew[crew_logo],
+				 	   'crew_name' => $crew['crew_name'],
+					   'crew_logo' => $crew['crew_logo'],
 					   'crew_history' => $crew_history));
 
 }
@@ -93,7 +93,7 @@ $smarty->assign('crew_action',
 }
 
 // set values for genealogy edit of crew...
-if ($action=="genealogy")
+if (isset($action) and $action=="genealogy")
 {
 	
 	$smarty->assign('crew_action',
@@ -106,8 +106,8 @@ if ($action=="genealogy")
 			while  ($genealogy=mysql_fetch_array($sql_crewgene)) 
 			{  
 				$smarty->append('crew_gene',
-	    				  array('crew_id' => $genealogy[crew_id],
-					 	 	    'crew_name' => $genealogy[crew_name]));
+	    				  array('crew_id' => $genealogy['crew_id'],
+					 	 	    'crew_name' => $genealogy['crew_name']));
 								
 			}
 			
@@ -116,7 +116,7 @@ if ($action=="genealogy")
 			$sql_aka = "SELECT ind_id,nick FROM individual_nicks ORDER BY nick ASC";
 			
 			//Create a temporary table to build an array with both names and nicknames
-			mysql_query("CREATE TEMPORARY TABLE temp TYPE=HEAP $sql_individuals") or die("failed to create temporary table");
+			mysql_query("CREATE TEMPORARY TABLE temp ENGINE=MEMORY $sql_individuals") or die("failed to create temporary table");
 			mysql_query("INSERT INTO temp $sql_aka") or die("failed to insert akas into temporary table");
 			
 			$query_temporary = mysql_query("SELECT * FROM temp ORDER BY ind_name ASC") or die("Failed to query temporary table");
@@ -132,10 +132,10 @@ if ($action=="genealogy")
 			while  ($genealogy_ind=mysql_fetch_array($query_temporary)) 
 			{  
 			/*	$smarty->append('ind_gene',
-	    				  array('ind_id' => $genealogy_ind[ind_id],
-					 	 	    'ind_name' => $genealogy_ind[ind_name]));
+	    				  array('ind_id' => $genealogy_ind['ind_id'],
+					 	 	    'ind_name' => $genealogy_ind['ind_name']));
 			*/					
-			$string_name = $genealogy_ind[ind_name];
+			$string_name = $genealogy_ind['ind_name'];
 			$string_name = strtolower($string_name);
 			
 			// alfabetic array to loop through
@@ -146,6 +146,8 @@ if ($action=="genealogy")
 				
 				for($i = 0; $i < count($alfabetic_array); $i++)
 				{
+		
+					//if ($string_name{0} == $alfabetic_array[$i])
 					if ($string_name{0} == $alfabetic_array[$i])
 					{
 					
@@ -158,12 +160,11 @@ if ($action=="genealogy")
 					}
 				
 				}
-				
 				if ($string_name{0} == 'a')
 				{
 				$smarty->append('ind_gene',
 	    				  array('ind_id' => "../crew/db_crew.php?action=add_member&crew_select=$crew_select&crewsearch=$crewsearch&crewbrowse=$crewbrowse&ind_id=$genealogy_ind[ind_id]",
-					 	 	    'ind_name' => $genealogy_ind[ind_name]));
+					 	 	    'ind_name' => $genealogy_ind['ind_name']));
 				}
 				
 			}			
@@ -178,9 +179,9 @@ if ($action=="genealogy")
 			while  ($fetch_subcrew=mysql_fetch_array($sql_subcrew)) 
 			{  
 				$smarty->append('subcrew',
-	    				  array('sub_crew_id' => $fetch_subcrew[sub_crew_id],
-						  		'crew_id' => $fetch_subcrew[crew_id],
-					 	 	    'crew_name' => $fetch_subcrew[crew_name]));
+	    				  array('sub_crew_id' => $fetch_subcrew['sub_crew_id'],
+						  		'crew_id' => $fetch_subcrew['crew_id'],
+					 	 	    'crew_name' => $fetch_subcrew['crew_name']));
 								
 			}
 
@@ -220,9 +221,9 @@ if ($action=="genealogy")
 				{
 				
 				$smarty->append('nick_names',
-	    				  array('individual_nicks_id' => $fetch_ind_nicks[individual_nicks_id],
-						  		'ind_id' => $fetch_ind_nicks[ind_id],
-					 	 	    'nick' => $fetch_ind_nicks[nick]));
+	    				  array('individual_nicks_id' => $fetch_ind_nicks['individual_nicks_id'],
+						  		'ind_id' => $fetch_ind_nicks['ind_id'],
+					 	 	    'nick' => $fetch_ind_nicks['nick']));
 				}			
 			
 		$smarty->assign('ind_array',

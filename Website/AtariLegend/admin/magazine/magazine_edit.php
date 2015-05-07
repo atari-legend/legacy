@@ -35,12 +35,12 @@ list ($magazine_id,$magazine_name) = mysql_fetch_row($sql_magazine);
 			while ($fetch = mysql_fetch_array($sql)) 
 			{
 
-			if ($fetch[magazine_issue_imgext]!=='') { $scan = 'scan'; } else { $scan='No Scan'; }
+			if ($fetch['magazine_issue_imgext']!=='') { $scan = 'scan'; } else { $scan='No Scan'; }
 
 
 			$smarty->append('issues',
-	   			  	  array('magazine_issue_id' => $fetch[magazine_issue_id],
-					        'magazine_issue_nr' => $fetch[magazine_issue_nr],
+	   			  	  array('magazine_issue_id' => $fetch['magazine_issue_id'],
+					        'magazine_issue_nr' => $fetch['magazine_issue_nr'],
 							'scan' => $scan));
 			}
 	
