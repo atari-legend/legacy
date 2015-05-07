@@ -16,11 +16,11 @@
 //**************************************************************************************** 	
 
 include("../includes/common.php");
-include("../includes/config.php"); 
 
+if(empty($v_linkback)) {$v_linkback = '';}
 
 //Delete the selected news entrie
-if ($action=="delete")
+if (isset($action) and $action=="delete")
 {
 	include("../includes/functions_search.php");
 
@@ -54,24 +54,24 @@ $sql_news = mysql_query("SELECT
 
 while ($news = mysql_fetch_array($sql_news))
 {
-	$user_name = get_username_from_id($news[user_id]);
-	$news_date = convert_timestamp($news[news_date]);
-	$news_text = InsertALCode($news[news_text]);
+	$user_name = get_username_from_id($news['user_id']);
+	$news_date = convert_timestamp($news['news_date']);
+	$news_text = InsertALCode($news['news_text']);
 	$news_text = InsertSmillies($news_text);
 	$news_text = nl2br($news_text);
 	
 	$v_image  = $news_images_path;
-	$v_image .= $news[news_image_id];
+	$v_image .= $news['news_image_id'];
 	$v_image .= '.';
-	$v_image .= $news[news_image_ext];
+	$v_image .= $news['news_image_ext'];
 	
 	$smarty->append('edit_submissions',
  		 		array('edit_userid' => $user_name,
-					  'edit_id' => $news[news_id],
-					  'edit_headline' => $news[news_headline],
+					  'edit_id' => $news['news_id'],
+					  'edit_headline' => $news['news_headline'],
 			  		  'edit_date' => $news_date,
 			  		  'edit_text' => $news_text,
-					  'edit_email' => $news[email],
+					  'edit_email' => $news['email'],
 			  		  'edit_icon' => $v_image));	
 }			 
 
@@ -93,7 +93,7 @@ $smarty->assign('links',
 	     array('linkback' => $v_linkback,
 			   'linknext' => $v_linknext));
 
-$smarty->assign("user_id",$_SESSION[user_id]);
+$smarty->assign("user_id",$_SESSION['user_id']);
 $smarty->assign('news_edit_all_tpl', '1');
 
 //Send all smarty variables to the templates
