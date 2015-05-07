@@ -32,8 +32,7 @@
 				<tr>
 			{/if}
 					<td width="130" align="center">
-						{*<img src="../includes/showscreens.php?news_image_id={$line.image_id}" alt="newsbutton" width="120" border="0">*}
-						<img src="../includes/showimage.php?img={$line.image_link}&amp;w=120&amp;shadow=1&amp;bgcolour=D0D1DF" alt="newsbutton">
+						<img src="../includes/show_image.php?file={$line.image_link}&resize=410,null,null,null&crop=left,top,410,260&minimum_size=410,260" alt="newsbutton">
 						<br>
 						{$line.image_name}
 					</td>

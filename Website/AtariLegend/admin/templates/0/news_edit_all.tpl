@@ -53,7 +53,7 @@
 		</tr>
 		<tr>
 			<td width="20%" valign="top" align="left">
-				<img src="../includes/showimage.php?img={$line.edit_icon}&amp;w=90&amp;shadow=1&amp;bgcolour=FFFFFF" alt="newsbutton">
+				<img src="../includes/show_image.php?file={$line.edit_icon}&resize=null,null,null,null&crop=null,null,null,null" alt="newsbutton">
 			</td>
 			<td width="80%" align="left">
 				<i>{$line.edit_text}</i>

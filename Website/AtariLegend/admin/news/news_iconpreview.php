@@ -27,13 +27,13 @@ $sql_images = mysql_query("SELECT * FROM news_image");
 while ( $news_images = mysql_fetch_array($sql_images) )
 {
 	$v_image  = $news_images_path;
-	$v_image .= $news_images[news_image_id];
+	$v_image .= $news_images['news_image_id'];
 	$v_image .= '.';
-	$v_image .= $news_images[news_image_ext];
+	$v_image .= $news_images['news_image_ext'];
 	
 	$smarty->append('news_images',
-	    	 array('image_id' => $news_images[news_image_id],
-				   'image_name' => $news_images[news_image_name],
+	    	 array('image_id' => $news_images['news_image_id'],
+				   'image_name' => $news_images['news_image_name'],
 				   'image_link' => $v_image,
 				   'count' => $count));
 				   
