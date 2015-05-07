@@ -60,7 +60,7 @@ function deletelink()
 		  	<label for="delete_image">Delete Image?</label>
 			<input type="checkbox" name="delete_image" id="delete_image" value="yes" class="links_checkbox"><br>
 			<div class="links_screenshot">
-	 		<img src="../includes/showscreens.php?website_id={$website.website_id}" border="0" style="border: 1px solid black;">
+	 		<img src="../includes/show_image.php?file={$website.website_image}&resize=410,null,null,null&crop=left,top,410,260&minimum_size=410,260" border="0" style="border: 1px solid black;">
 	 		</div>
 
 		{else}

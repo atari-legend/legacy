@@ -28,8 +28,8 @@ include("../includes/common.php");
 		$rowcat=mysql_fetch_array ($CATSQL);
 		
 		$smarty->assign('category',
-	    array('category_name' => $rowcat[website_category_name],
-			  'category_id' => $rowcat[website_category_id]));
+	    array('category_name' => $rowcat['website_category_name'],
+			  'category_id' => $rowcat['website_category_id']));
 	
 	// Do the category selector
 	$RESULT=mysql_query("SELECT * FROM website_category ORDER BY website_category_name");
@@ -39,14 +39,14 @@ include("../includes/common.php");
 	while ($rowlinkcat=mysql_fetch_array($RESULT)) 
 	{ 
 		$sel='';
-			if($rowcat[parent_category]==$rowlinkcat[website_category_id]) 
+			if($rowcat['parent_category']==$rowlinkcat['website_category_id']) 
 			{
 				$sel="SELECTED"; 
 			}
 		
 		$smarty->append('category_list',
-	    			array('category_id' => $rowlinkcat[website_category_id],
-						  'category_name' => $rowlinkcat[website_category_name],
+	    			array('category_id' => $rowlinkcat['website_category_id'],
+						  'category_name' => $rowlinkcat['website_category_name'],
 						  'selected' => $sel));
 	} 
 
