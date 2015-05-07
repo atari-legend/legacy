@@ -16,11 +16,9 @@
 //**************************************************************************************** 
 
 include("../includes/common.php");
-include("../includes/config.php"); 
-
 
 //If the delete comment has been triggered
-if ( $action == 'delete_comment' )
+if ( isset($action) and $action == 'delete_comment' )
 {
 	$sql_interviewshot = mysql_query("SELECT * FROM screenshot_interview
 	   					   			  	WHERE interview_id = $interview_id 
@@ -57,7 +55,7 @@ if ( $action == 'delete_comment' )
 }
 
 //If the Update interview has been triggered
-if ( $action == 'Update_Interview' )
+if ( isset($action) and $action == 'Update_Interview' )
 {
 	//First, we'll be filling up the main interview table
 	$sdbquery = mysql_query("UPDATE interview_main SET member_id = $members, ind_id = $individual
@@ -120,8 +118,8 @@ $sql_individuals = mysql_query("SELECT * FROM individuals ORDER BY ind_name ASC"
 while ($individuals = mysql_fetch_array($sql_individuals))
 {
 	$smarty->append('individuals',
-	    	 array('ind_id' => $individuals[ind_id],
-				   'ind_name' => $individuals[ind_name]));
+	    	 array('ind_id' => $individuals['ind_id'],
+				   'ind_name' => $individuals['ind_name']));
 }
 
 
@@ -132,8 +130,8 @@ $sql_author = mysql_query("SELECT user_id,userid FROM users")
 while ( $authors=mysql_fetch_array($sql_author) )
 {
 	$smarty->append('authors',
-	    	 array('user_id' => $authors[user_id],
-				   'user_name' => $authors[userid]));
+	    	 array('user_id' => $authors['user_id'],
+				   'user_name' => $authors['userid']));
 }				   
 
 
@@ -147,14 +145,14 @@ $sql_interview = mysql_query("SELECT * FROM interview_main
 while ($interview = mysql_fetch_array($sql_interview))
 {	
 	$smarty->assign('interview',
-	    	 array('interview_date' => $interview[interview_date],
+	    	 array('interview_date' => $interview['interview_date'],
 			 	   'interview_id' => $interview_id,
-				   'interview_intro' => $interview[interview_intro],
-				   'interview_chapters' => $interview[interview_chapters],
-				   'interview_text' => $interview[interview_text],
-				   'interview_ind_name' => $interview[ind_name],
-				   'interview_author' => $interview[member_id],
-				   'interview_ind_id' => $interview[ind_id]));
+				   'interview_intro' => $interview['interview_intro'],
+				   'interview_chapters' => $interview['interview_chapters'],
+				   'interview_text' => $interview['interview_text'],
+				   'interview_ind_name' => $interview['ind_name'],
+				   'interview_author' => $interview['member_id'],
+				   'interview_ind_id' => $interview['ind_id']));
 }
 
 //Let's get the screenshots for the interview
@@ -173,9 +171,9 @@ while ($screenshots = mysql_fetch_array($sql_screenshots))
 {	
 	
 	$v_int_image  = $interview_screenshot_path;
-	$v_int_image .= $screenshots[screenshot_id];
+	$v_int_image .= $screenshots['screenshot_id'];
 	$v_int_image .= '.';
-	$v_int_image .= $screenshots[imgext];
+	$v_int_image .= $screenshots['imgext'];
 	
 	//We need to get the comments with each screenshot
 	$sql_comments = mysql_query("SELECT * FROM interview_comments 
@@ -186,14 +184,14 @@ while ($screenshots = mysql_fetch_array($sql_screenshots))
 	
 	$smarty->append('screenshots',
 	    	 array('interview_screenshot' => $v_int_image,
-			 	   'interview_screenshot_id' => $screenshots[screenshot_id],
+			 	   'interview_screenshot_id' => $screenshots['screenshot_id'],
 			 	   'interview_screenshot_count' => $count,
-				   'interview_screenshot_comment' => $comments[comment_text]));
+				   'interview_screenshot_comment' => $comments['comment_text']));
 				   
 	$count=$count+1;
 }
 
-$smarty->assign("user_id",$_SESSION[user_id]);
+$smarty->assign("user_id",$_SESSION['user_id']);
 $smarty->assign('interviews_edit_tpl', '1');
 
 //Send all smarty variables to the templates

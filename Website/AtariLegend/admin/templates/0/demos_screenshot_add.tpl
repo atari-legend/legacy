@@ -61,7 +61,7 @@ function delete_screenshot(screenshot_id, demo_id)
 			{foreach from=$screenshots item=line}
 				Image {$line.count} :: 
 				<a href="javascript:delete_screenshot({$line.id},{$demo_id})" class="MAINNAV">Delete</a> ::    	
-				<a href="javascript:void(window.open('../includes/showscreens.php?demo_screenshot_id={$line.id}','4','width={$line.width},height={$line.height},toolbar=no,statusbar=no'))" class="MAINNAV">Look at image</a>
+				<a href="javascript:void(window.open('../includes/show_image.php?file={$line.demo_screenshot_image}&resize=410,null,null,null&crop=left,top,410,260&minimum_size=410,260','4','width=460,height=290,toolbar=no,statusbar=no'))" class="MAINNAV">Look at image</a>
 				<br>
 			{/foreach}
 		{else}
