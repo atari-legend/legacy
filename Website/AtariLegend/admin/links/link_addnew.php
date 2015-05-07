@@ -26,12 +26,12 @@ include("../includes/common.php");
 	while ($rowlinkcat=mysql_fetch_array($RESULT)) 
 	{ 
 		   			$smarty->append('website_category',
-	    			array('website_category_id' => $rowlinkcat[website_category_id],
-						  'website_category_name' => $rowlinkcat[website_category_name]));
+	    			array('website_category_id' => $rowlinkcat['website_category_id'],
+						  'website_category_name' => $rowlinkcat['website_category_name']));
 	} 
 
 
-$smarty->assign("user_id",$_SESSION[user_id]);
+$smarty->assign("user_id",$_SESSION['user_id']);
 
 
 $smarty->assign('link_addnew_tpl', '1');
