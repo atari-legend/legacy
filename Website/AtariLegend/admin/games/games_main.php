@@ -21,8 +21,7 @@ include("../includes/common.php");
 include("../includes/config.php"); 
 
 date_default_timezone_set('UTC');
-$start1=gettimeofday();
-list($start2, $start3) = explode(":", exec('date +%N:%S'));
+$start = microtime(true);
 if (empty($action)) {$action='';}
 /*
 ***********************************************************************************
@@ -31,7 +30,7 @@ screen and we're gonna fill some extra variables accordingly. These variables wi
 used to create the querystring later.
 ***********************************************************************************
 */
-	if ( $action == "insert" )
+	if (isset($action) and $action == "insert" )
 	{
 		//Insert the game in the game table
 		$sql_game = mysql_query("INSERT INTO game (game_name) VALUES ('$newgame')") or die ("Couldn't insert game into database");  
@@ -56,7 +55,7 @@ used to create the querystring later.
 		//Send all smarty variables to the templates
 		$smarty->display('file:../templates/0/index.tpl');
 	}
-	elseif ( $action == "search" )
+	elseif (isset($action) and $action == "search" )
 	{		
 		//check the $gamebrowse select
 		if (empty($gamebrowse) or $gamebrowse == '-')
@@ -209,11 +208,11 @@ used to create the querystring later.
 			while  ($company=mysql_fetch_array($sql_company)) 
 			{  
 				$smarty->append('company',
-	    			 array('comp_id' => $company[pub_dev_id],
-					 	   'comp_name' => $company[pub_dev_name]));
+	    			 array('comp_id' => $company['pub_dev_id'],
+					 	   'comp_name' => $company['pub_dev_name']));
 			}	
 		
-			$smarty->assign("user_id",$_SESSION[user_id]);
+			$smarty->assign("user_id",$_SESSION['user_id']);
 			
 			$smarty->assign('games_main_tpl', '1');
 
@@ -302,7 +301,7 @@ querystring for faster output
 
 		$games = mysql_query($RESULTGAME);
 		
-		if (!$games)		
+		if (empty($games))		
 		{
 			$message = "There are problems with the game querie, please try again";
 			$smarty->assign("message",$message);
@@ -404,11 +403,7 @@ querystring for faster output
 
 				$temp_query = mysql_query("SELECT * FROM temp ORDER BY game_name ASC") or die("does not compute3");
 				
-				$end1=gettimeofday();
-				$totaltime1 = (float)($end1['sec'] - $start1['sec']) + ((float)($end1['usec'] - $start1['usec'])/1000000);
-
-				list($end2, $end3) = explode(":", exec('date +%N:%S'));
-				$totaltime2 = (float)($end3 - $start3) + ((float)($end2 - $start2)/1000000000);
+				
 				
 				$i = 0;
 				
@@ -434,9 +429,9 @@ querystring for faster output
 							'ste_enhanced' => $sql_game_search['ste_enhanced'],
 							'ste_only' => $sql_game_search['ste_only']));
 				}
-				
+				$time_elapsed_secs = microtime(true) - $start;
 				$smarty->assign("nr_of_games",$i);
-				//$smarty->assign("query_time",$totaltime1 );
+				$smarty->assign("query_time",$time_elapsed_secs);
 				
 				mysql_query("DROP TABLE temp") or die("does not compute4");
 				
