@@ -17,7 +17,7 @@
 include("../includes/common.php");
 include("../includes/config.php"); 
 
-if ( $action == 'insert' )
+if ( isset($action) and $action == 'insert' )
 {
 	$sql_author = mysql_query("INSERT INTO author_type (author_type_info) VALUES ('$newtype')")
 				  or die("Couldn't insert into author_type");
@@ -25,7 +25,7 @@ if ( $action == 'insert' )
 	$smarty->assign("message",'Insert succesfull');
 }
 
-if ( $action == 'edit' )
+if ( isset($action) and $action == 'edit' )
 {
 	$sql_author = mysql_query("UPDATE author_type set author_type_info='$newtype' WHERE author_type_id=$type_id")
 				  or die("Couldn't edit the author type");
@@ -33,7 +33,7 @@ if ( $action == 'edit' )
 	$smarty->assign("message",'Update succesfull');
 }
 
-if ( $action == 'delete' )
+if ( isset($action) and $action == 'delete' )
 {
 	$sql_author = mysql_query("DELETE FROM author_type WHERE author_type_id = $type_id")
 				  or die("Couldn't delete from author_type");
@@ -41,7 +41,7 @@ if ( $action == 'delete' )
 	$smarty->assign("message",'Delete succesfull');
 }
 
-if ( $action == 'load' )
+if ( isset($action) and $action == 'load' )
 {
 		
 	$sql_author = mysql_query("SELECT * FROM author_type WHERE author_type_id = '$type_id' 
@@ -51,8 +51,8 @@ if ( $action == 'load' )
 	while  ($author=mysql_fetch_array($sql_author)) 
 	{  
 		$smarty->assign('author_types_load',
-	 		 array('author_type' => $author[author_type_info],
-				   'author_type_id' => $author[author_type_id]));
+	 		 array('author_type' => $author['author_type_info'],
+				   'author_type_id' => $author['author_type_id']));
 	
 		$smarty->assign("load", '1');
 	}
@@ -64,11 +64,11 @@ $sql_author = mysql_query("SELECT * FROM author_type ORDER BY author_type_info A
 while  ($author=mysql_fetch_array($sql_author)) 
 {  
 	$smarty->append('author_types',
- 		 array('author_type' => $author[author_type_info],
-			   'author_type_id' => $author[author_type_id]));
+ 		 array('author_type' => $author['author_type_info'],
+			   'author_type_id' => $author['author_type_id']));
 }
 
-$smarty->assign("user_id",$_SESSION[user_id]);
+$smarty->assign("user_id",$_SESSION['user_id']);
 $smarty->assign('individuals_author_tpl', '1');
 
 //Send all smarty variables to the templates

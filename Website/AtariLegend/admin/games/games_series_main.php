@@ -32,8 +32,8 @@ include("../includes/common.php");
 				{  
 				   
 				  $smarty->append('game_series',
-	    			array('game_series_id' => $query_series[game_series_id],
-						  'game_series_name' => $query_series[game_series_name]));
+	    			array('game_series_id' => $query_series['game_series_id'],
+						  'game_series_name' => $query_series['game_series_name']));
 				}
 	if ( $series_page == '' ) { }
 	else
@@ -56,28 +56,28 @@ include("../includes/common.php");
 				
 				// Check if there is a game linked to this series. For the list of games in a series
 				$sql_series_link = mysql_query("SELECT * FROM game_series_cross 
-												LEFT JOIN game ON (game_series_cross.game_id = game.game_id)
-												LEFT JOIN game_series ON (game_series_cross.game_series_id = game_series.game_series_id)
-												WHERE game_series_cross.game_series_id='$game_series_id' ORDER BY game.game_name")
-				 		   		 				or die ("Couldn't query Game Series Database3");
+								LEFT JOIN game ON (game_series_cross.game_id = game.game_id)
+								LEFT JOIN game_series ON (game_series_cross.game_series_id = game_series.game_series_id)
+								WHERE game_series_cross.game_series_id='$game_series_id' ORDER BY game.game_name")
+				 		   		 	or die ("Couldn't query Game Series Database3");
 				// check how many games is linked to a particular series
 				$sql_series_link_nr = mysql_num_rows($sql_series_link);
 				
 				$smarty->assign('series_info',
-	    			array('game_series_id' => $query_series2[game_series_id],
-						  'game_series_name' => $query_series2[game_series_name],
+	    			array('game_series_id' => $query_series2['game_series_id'],
+						  'game_series_name' => $query_series2['game_series_name'],
 						  'sql_series_link_nr' => $sql_series_link_nr,
 						  'series_page' => $series_page));
 				
 				while  ($query_series_link = mysql_fetch_array ($sql_series_link)) 
 				{ 		// This smarty is used for creating the list of games contained within a game series
 						$smarty->append('series_link',
-	    				array('game_series_cross_id' => $query_series_link[game_series_cross_id],
-							  'game_id' => $query_series_link[game_id],
-						  	  'game_name' => $query_series_link[game_name],
-							  'publisher_name' => $query_series_link[publisher_name],
-							  'developer_name' => $query_series_link[developer_name],
-							  'year' => $query_series_link[year]));
+	    				array('game_series_cross_id' => $query_series_link['game_series_cross_id'],
+							  'game_id' => $query_series_link['game_id'],
+						  	  'game_name' => $query_series_link['game_name'],
+							  'publisher_name' => $query_series_link['publisher_name'],
+							  'developer_name' => $query_series_link['developer_name'],
+							  'year' => $query_series_link['year']));
 				}
 				
 				
@@ -145,19 +145,19 @@ include("../includes/common.php");
 				 		   		 	or die ("Couldn't query Game Series Database5 ($sql_build)");
 				
 				$smarty->assign('series_info',
-	    			array('game_series_id' => $query_series2[game_series_id],
-						  'game_series_name' => $query_series2[game_series_name],
+	    			array('game_series_id' => $query_series2['game_series_id'],
+						  'game_series_name' => $query_series2['game_series_name'],
 						  'series_page' => $series_page));
 				
 				while  ($query_series_link = mysql_fetch_array ($sql_series_link)) 
 				{ 		// This smarty is used for creating the list of games contained within a game series
 						$smarty->append('series_link',
-	    				array('game_series_cross_id' => $query_series_link[game_series_cross_id],
-							  'game_id' => $query_series_link[game_id],
-						  	  'game_name' => $query_series_link[game_name],
-							  'publisher_name' => $query_series_link[publisher_name],
-							  'developer_name' => $query_series_link[developer_name],
-							  'year' => $query_series_link[year]));
+	    				array('game_series_cross_id' => $query_series_link['game_series_cross_id'],
+							  'game_id' => $query_series_link['game_id'],
+						  	  'game_name' => $query_series_link['game_name'],
+							  'publisher_name' => $query_series_link['publisher_name'],
+							  'developer_name' => $query_series_link['developer_name'],
+							  'year' => $query_series_link['year']));
 				}
 				
 				
@@ -178,8 +178,8 @@ include("../includes/common.php");
 				
 				$smarty->assign('series_info',
 	    			array('series_page' => $series_page,
-						  'game_series_id' => $query_series2[game_series_id],
-						  'game_series_name' => $query_series2[game_series_name]));
+						  'game_series_id' => $query_series2['game_series_id'],
+						  'game_series_name' => $query_series2['game_series_name']));
 				break;
 			default :
 			}

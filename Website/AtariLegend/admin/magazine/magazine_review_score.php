@@ -19,7 +19,6 @@ In this section of the site we can add game review score from magazines!
 */
 
 include("../includes/common.php");
-include("../includes/config.php");
 		
 		// Get all the issues
 		$sql = mysql_query("SELECT * FROM magazine_issue
@@ -30,9 +29,9 @@ include("../includes/config.php");
 		{
 		// put in smarty array
 		$smarty->append('issues',
-	   			  array('magazine_name' => $fetch[magazine_name],
-					    'magazine_issue_id' => $fetch[magazine_issue_id],
-						'magazine_issue_nr' => $fetch[magazine_issue_nr]));
+	   			  array('magazine_name' => $fetch['magazine_name'],
+					    'magazine_issue_id' => $fetch['magazine_issue_id'],
+						'magazine_issue_nr' => $fetch['magazine_issue_nr']));
 		}
 		
 		// get reviews for game
@@ -47,11 +46,11 @@ include("../includes/config.php");
 							
 					// Create smarty array
 					$smarty->append('game_score',
-	   			  array('game_name' => $fetch_game[game_name],
-					    'magazine_name' => $fetch_game[magazine_name],
-						'magazine_issue_nr' => $fetch_game[magazine_issue_nr],
-						'score' => $fetch_game[score],
-						'magazine_game_id' => $fetch_game[magazine_game_id]));
+	   			  array('game_name' => $fetch_game['game_name'],
+					    'magazine_name' => $fetch_game['magazine_name'],
+						'magazine_issue_nr' => $fetch_game['magazine_issue_nr'],
+						'score' => $fetch_game['score'],
+						'magazine_game_id' => $fetch_game['magazine_game_id']));
 					
 					
 				}

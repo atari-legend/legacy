@@ -57,7 +57,7 @@ if (isset($action) and $action=="update")
 	}
 }
 
-if ($news_id =='')
+if (empty($news_id))
 {
 //We're dealing with a submission. Get the actual submission we wanna edit
 $sql_news  =  mysql_query("SELECT
