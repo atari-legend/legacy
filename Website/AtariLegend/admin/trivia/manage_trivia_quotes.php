@@ -20,15 +20,14 @@ Manage our trivia quotes!
 
 include("../includes/common.php");
 
-		$sql_trivia =  mysql_query("SELECT * FROM trivia_quotes ORDER BY trivia_quote_id");
-		
-		while (list($trivia_quote_id,$trivia_quote) = mysql_fetch_row($sql_trivia))
-		
+		$sql_trivia = $mysqli->query("SELECT * FROM trivia_quotes ORDER BY trivia_quote_id");
+
+		while ($query_trivia = $sql_trivia->fetch_array(MYSQLI_BOTH))  		
 		{
 		
 					$smarty->append('trivia',
-	    			array('trivia_quote_id' => $trivia_quote_id,
-						  'trivia_quote' => $trivia_quote));
+	    			array('trivia_quote_id' => $query_trivia['trivia_quote_id'],
+						  'trivia_quote' => $query_trivia['trivia_quote']));
 		} 
 		
  
