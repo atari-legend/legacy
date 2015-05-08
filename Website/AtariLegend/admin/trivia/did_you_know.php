@@ -20,16 +20,16 @@ Manage our Did you know? quotes!
 
 include("../includes/common.php");
 
-		$sql_trivia =  mysql_query("SELECT * FROM trivia ORDER BY trivia_id");
+		$sql_trivia = $mysqli->query("SELECT * FROM trivia ORDER BY trivia_id");
 		
-		while (list($trivia_id,$trivia_text) = mysql_fetch_row($sql_trivia))
-		
+
+		while ($query_trivia = $sql_trivia->fetch_array(MYSQLI_BOTH))  
 		{
-				$trivia_text = nl2br($trivia_text);
+				$trivia_text = nl2br($query_trivia['trivia_text']);
 				$trivia_text = stripslashes($trivia_text);
 		
 					$smarty->append('trivia',
-	    			array('trivia_id' => $trivia_id,
+	    			array('trivia_id' => $query_trivia['trivia_id'],
 						  'trivia_text' => $trivia_text));
 		} 
 		

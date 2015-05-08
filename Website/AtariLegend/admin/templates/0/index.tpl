@@ -353,8 +353,8 @@
 					{if $games_box_tpl eq "1"} 
                		{include file="../templates/0/games_box.tpl"} 
                		{/if}
-					{if $games_review_tpl eq "1"} 
-               		{include file="../templates/0/games_review.tpl"} 
+					{if $games_review_html eq "1"} 
+               		{include file="../templates/0/games_review.html"} 
                		{/if}
 					{if $games_review_list_tpl eq "1"} 
                		{include file="../templates/0/games_review_list.tpl"} 
