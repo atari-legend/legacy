@@ -64,7 +64,7 @@ header("Location: ../crew/crew_main.php?message=$message");
 
 }
 
-if ($crew_select !='')
+if (isset($crew_select))
 {
 // Do query for crew data
 $sql_crew = mysql_query("SELECT * FROM crew
