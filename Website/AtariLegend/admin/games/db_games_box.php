@@ -17,7 +17,6 @@
 
 
 include("../includes/common.php");
-include("../includes/config.php");
 
 $filename = $_FILES['image'];
 
@@ -28,7 +27,7 @@ $filename=$filename['tmp_name'][1];
 //print_r($image);
 //exit;
 
-if($action=="boxscan_upload")
+if(isset($action) and $action=="boxscan_upload")
 
 {
 
@@ -90,7 +89,7 @@ mysql_close();
 header("Location: ../games/games_box.php?game_id=$game_id");
 }
 
-if($action=="boxscan_delete")
+if(isset($action) and $action=="boxscan_delete")
 
 {
 
