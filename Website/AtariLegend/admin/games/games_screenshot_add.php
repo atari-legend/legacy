@@ -16,10 +16,9 @@
 //**************************************************************************************** 
 
 include("../includes/common.php");
-include("../includes/config.php"); 
 
 //If we are uploading new screenshots
-if ( $action == 'add_screens' )
+if (isset($action) and $action == 'add_screens' )
 {
 
 //Here we'll be looping on each of the inputs on the page that are filled in with an image!
@@ -85,7 +84,7 @@ foreach($image['tmp_name'] as $key=>$tmp_name)
 }
 
 //If we pressed the delete screenshot link
-if ( $action == 'delete_screen' )
+if ( isset($action) and $action == 'delete_screen' )
 {
 	$sql_gameshot = mysql_query("SELECT * FROM screenshot_game
 	   					   			  WHERE game_id = $game_id 
@@ -124,21 +123,21 @@ $sql_screenshots = mysql_query("SELECT * FROM screenshot_game
 				   or die ("Database error - selecting screenshots");
 
 $count = 1;
-
+$v_screenshots =1;
 while ( $screenshots=mysql_fetch_array ($sql_screenshots)) 
 {
-	// Get the image dimensions for the pop up window
-	$imginfo = getimagesize("$game_screenshot_path$screenshots[screenshot_id].$screenshots[imgext]");
-	$width = $imginfo[0]+20;
-	$height = $imginfo[1]+25;
+
+	//Ready screenshots path and filename
+	$screenshot_image  = $game_screenshot_path;
+	$screenshot_image .= $screenshots['screenshot_id'];
+	$screenshot_image .= '.';
+	$screenshot_image .= $screenshots['imgext'];
 				
 	$smarty->append('screenshots',
 	    	 array('count' => $count,
-			 	   'width' => $width,
-				   'height' => $height,
 				   'path' => $game_screenshot_path,
-				   'image' => "$game_screenshot_path$screenshots[screenshot_id].$screenshots[imgext]",
-				   'id' => $screenshots[screenshot_id]));
+				   'screenshot_image' => $screenshot_image,
+				   'id' => $screenshots['screenshot_id']));
 
 	$count++;
 	$v_screenshots++;
@@ -152,11 +151,11 @@ $sql_game = mysql_query("SELECT * FROM game WHERE game_id = '$game_id'")
 
 while ( $game=mysql_fetch_array ($sql_game)) 
 {
-	$smarty->assign("game_id",$game[game_id]);
-	$smarty->assign("game_name",$game[game_name]);
+	$smarty->assign("game_id",$game['game_id']);
+	$smarty->assign("game_name",$game['game_name']);
 }
 
-$smarty->assign("user_id",$_SESSION[user_id]);
+$smarty->assign("user_id",$_SESSION['user_id']);
 $smarty->assign('games_screenshot_add_tpl', '1');
 
 //Send all smarty variables to the templates

@@ -194,13 +194,13 @@ function convert_timestamp_rss($timestamp)
 	
 function get_username_from_id($submitted)
 	{
-					$query = "SELECT username FROM users WHERE user_id = '$submitted'";
+					$query = "SELECT userid FROM users WHERE user_id = '$submitted'";
 					$result = mysql_query($query) or die("Query failed");
 					if(mysql_num_rows($result) == 0) return 0;
 					else
 					{
 						$query_data = mysql_fetch_array($result);
-					return $query_data[username];
+					return $query_data['userid'];
 					}
 	}
 

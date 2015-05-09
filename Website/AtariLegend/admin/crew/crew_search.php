@@ -64,7 +64,7 @@ header("Location: ../crew/crew_main.php?message=$message");
 
 }
 
-if ($crew_select !='')
+if (isset($crew_select))
 {
 // Do query for crew data
 $sql_crew = mysql_query("SELECT * FROM crew
@@ -148,7 +148,7 @@ if (isset($action) and $action=="genealogy")
 				{
 		
 					//if ($string_name{0} == $alfabetic_array[$i])
-					if ($string_name{0} == $alfabetic_array[$i])
+					if (isset($string_name[0]) and $string_name[0] == $alfabetic_array[$i])
 					{
 					
 					if ($last != $alfabetic_array[$i]) { $names .= "newCat();";}
@@ -160,7 +160,7 @@ if (isset($action) and $action=="genealogy")
 					}
 				
 				}
-				if ($string_name{0} == 'a')
+				if (isset($string_name[0]) and $string_name[0] == 'a')
 				{
 				$smarty->append('ind_gene',
 	    				  array('ind_id' => "../crew/db_crew.php?action=add_member&crew_select=$crew_select&crewsearch=$crewsearch&crewbrowse=$crewbrowse&ind_id=$genealogy_ind[ind_id]",

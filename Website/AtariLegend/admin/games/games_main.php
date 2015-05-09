@@ -18,7 +18,6 @@ This is the game browse page where you can navigate your way through the games d
 
 //load all common functions
 include("../includes/common.php"); 
-include("../includes/config.php"); 
 
 date_default_timezone_set('UTC');
 $start = microtime(true);
@@ -30,6 +29,7 @@ screen and we're gonna fill some extra variables accordingly. These variables wi
 used to create the querystring later.
 ***********************************************************************************
 */
+
 	if (isset($action) and $action == "insert" )
 	{
 		//Insert the game in the game table
@@ -192,10 +192,9 @@ used to create the querystring later.
 		//Before we start the build the query, we check if there is at least
 		//one search field filled in or used! 
 		
-		if ( $publisher_select == "" and $gamebrowse_select == ""  and 
-			 $gamesearch == "" and $developer_select  == "" and
-			 $year_select == "" and $falcon_only_select == "" and $falcon_enhanced_select == ""
-			 and $ste_only_select == "" and $ste_enhanced_select == "" 
+		if ( $publisher_select == "-" and $gamebrowse_select == ""  and 
+			 $gamesearch == "" and $developer_select  == "-" and empty($year_select) and empty($falcon_only_select) and empty($falcon_enhanced_select) 
+			 and empty($ste_only_select) and empty($ste_enhanced_select) 
 			 and $unreleased_select =="" and $development_select == "" and $arcade_select == "" and $wanted_select == "")
 		{
 			$message = "Please fill in one of the fields";
@@ -448,7 +447,7 @@ querystring for faster output
 				
 				
 				$smarty->assign("user_id",$_SESSION['user_id']);
-				$smarty->assign('games_list_tpl', '1');
+				$smarty->assign('games_list_html', '1');
 
 				//Send all smarty variables to the templates
 				$smarty->display('file:../templates/0/index.tpl');

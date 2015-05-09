@@ -254,7 +254,7 @@ function deleteinterview(interview_id)
 		<legend class="links_legend">Screenshots</legend>
 		{if $screenshots_nr <> ''}
 			{foreach from=$screenshots item=line} 
-				<img src="../includes/showimage.php?img={$line.interview_screenshot}&amp;w=50&amp;shadow=1&amp;bgcolour=ffffff" align="center">
+				<img src="../includes/show_image.php?file={$line.interview_screenshot}&resize=50,null,null,null&crop=null,null,null,null" align="center">
 				<input class="review_input" type="text" name="inputfield[]" value="{$line.interview_screenshot_comment}">
 				<a href="javascript:deletecomment({$line.interview_screenshot_id},{$interview.interview_id})" class="MAINNAV">Delete Shot</a>
 				<br>

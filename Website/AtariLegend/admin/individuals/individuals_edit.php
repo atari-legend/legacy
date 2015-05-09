@@ -17,7 +17,6 @@ The individuals edit page
 */
 
 include("../includes/common.php");
-include("../includes/config.php"); 
 
 if ($ind_id == '-')
 {
@@ -31,11 +30,11 @@ if ($ind_id == '-')
 		while  ($individuals=mysql_fetch_array($sql_individuals)) 
 		{  
 			$smarty->append('individuals',
-	   		 	 array('ind_id' => $individuals[ind_id],
-					   'ind_name' => $individuals[ind_name]));
+	   		 	 array('ind_id' => $individuals['ind_id'],
+					   'ind_name' => $individuals['ind_name']));
 		}
 
-		$smarty->assign("user_id",$_SESSION[user_id]);
+		$smarty->assign("user_id",$_SESSION['user_id']);
 		$smarty->assign('individuals_main_tpl', '1');
 
 		//Send all smarty variables to the templates
@@ -45,7 +44,7 @@ else
 {
 
 // Here we delete the individual image
-if ( $action == 'delete_pic' )
+if ( isset($action) and $action == 'delete_pic' )
 {
 	
 	$sql_photo = "SELECT ind_imgext FROM individual_text WHERE ind_id='$ind_id'";
@@ -57,7 +56,7 @@ if ( $action == 'delete_pic' )
 }
 
 //If we want to upload a photo
-if ( $action == 'add_photo' )
+if ( isset($action) and $action == 'add_photo' )
 {
 	
 	$image = $_FILES['individual_pic'];
@@ -102,7 +101,7 @@ if ( $action == 'add_photo' )
 }
 
 //update the info of the individual
-if ( $action == 'update' )
+if ( isset($action) and $action == 'update' )
 {
 	$sdbquery = mysql_query("UPDATE individuals SET ind_name = '$ind_name' WHERE ind_id = $ind_id")
 				or die("Couldn't Update into individuals");
@@ -129,7 +128,7 @@ if ( $action == 'update' )
 }
 
 // Add nicknames
-if ($action == "add_nick")
+if (isset($action) and $action == "add_nick")
 {
 
 	if ($ind_nick !='')
@@ -144,7 +143,7 @@ if ($action == "add_nick")
 }
 
 // Delete Nickname
-if ($action == "delete_nick")
+if (isset($action) and $action == "delete_nick")
 {
 
 	if (isset($nick_id))
@@ -166,14 +165,14 @@ $sql_individuals = mysql_query("SELECT * FROM individuals
 while ( $individuals=mysql_fetch_array($sql_individuals) ) 
 {  
 	//The interviewed person's picture
-	if ( $individuals[ind_imgext] == 'png' or  
-		 $individuals[ind_imgext] == 'jpg' or 
-		 $individuals[ind_imgext] == 'gif')
+	if ( $individuals['ind_imgext'] == 'png' or  
+		 $individuals['ind_imgext'] == 'jpg' or 
+		 $individuals['ind_imgext'] == 'gif')
 	{
 		$v_ind_image  = $individual_screenshot_path;
 		$v_ind_image .= $ind_id;
 		$v_ind_image .= '.';
-		$v_ind_image .= $individuals[ind_imgext];
+		$v_ind_image .= $individuals['ind_imgext'];
 	}
 	else
 	{
@@ -182,10 +181,10 @@ while ( $individuals=mysql_fetch_array($sql_individuals) )
 
 	$smarty->assign('individuals',
 	    	 array('ind_id' => $ind_id,
-				   'ind_name' => $individuals[ind_name],
-				   'ind_profile' => $individuals[ind_profile],
+				   'ind_name' => $individuals['ind_name'],
+				   'ind_profile' => $individuals['ind_profile'],
 				   'ind_screenshot_path' => $individual_screenshot_path,
-				   'ind_email' => $individuals[ind_email],
+				   'ind_email' => $individuals['ind_email'],
 				   'ind_image' => $v_ind_image));
 }
 
@@ -196,11 +195,11 @@ while ( $ind_nicks=mysql_fetch_array($sql_individuals) )
 {  
 
 	$smarty->append('nicks',
-	    	 array('nick_id' => $ind_nicks[individual_nicks_id],
-				   'nick_name' => $ind_nicks[nick]));
+	    	 array('nick_id' => $ind_nicks['individual_nicks_id'],
+				   'nick_name' => $ind_nicks['nick']));
 }
 
-$smarty->assign("user_id",$_SESSION[user_id]);
+$smarty->assign("user_id",$_SESSION['user_id']);
 $smarty->assign('individuals_edit_tpl', '1');
 
 //Send all smarty variables to the templates

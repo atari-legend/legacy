@@ -35,7 +35,7 @@ include("../includes/common.php");
 	    			array('game_series_id' => $query_series['game_series_id'],
 						  'game_series_name' => $query_series['game_series_name']));
 				}
-	if ( $series_page == '' ) { }
+	if ( empty($series_page)) { }
 	else
 	{
 			global $series_page;
@@ -55,9 +55,21 @@ include("../includes/common.php");
 								$query_series2 = mysql_fetch_array ($sql_series2);
 				
 				// Check if there is a game linked to this series. For the list of games in a series
-				$sql_series_link = mysql_query("SELECT * FROM game_series_cross 
+				$sql_series_link = mysql_query("SELECT game.game_id,
+							   game.game_name,
+							   game_publisher.pub_dev_id as 'publisher_id',
+							   pd1.pub_dev_name as 'publisher_name',
+							   game_developer.dev_pub_id as 'developer_id',
+							   pd2.pub_dev_name as 'developer_name',
+							   game_year.game_year
+								FROM game_series_cross 
 								LEFT JOIN game ON (game_series_cross.game_id = game.game_id)
 								LEFT JOIN game_series ON (game_series_cross.game_series_id = game_series.game_series_id)
+								LEFT JOIN game_publisher ON (game.game_id = game_publisher.game_id)
+								LEFT JOIN pub_dev pd1 ON (pd1.pub_dev_id = game_publisher.pub_dev_id) 
+								LEFT JOIN game_developer ON (game_developer.game_id = game.game_id)
+								LEFT JOIN pub_dev pd2 on (pd2.pub_dev_id = game_developer.dev_pub_id) 
+								LEFT JOIN game_year ON (game.game_id = game_year.game_id)
 								WHERE game_series_cross.game_series_id='$game_series_id' ORDER BY game.game_name")
 				 		   		 	or die ("Couldn't query Game Series Database3");
 				// check how many games is linked to a particular series
@@ -72,12 +84,11 @@ include("../includes/common.php");
 				while  ($query_series_link = mysql_fetch_array ($sql_series_link)) 
 				{ 		// This smarty is used for creating the list of games contained within a game series
 						$smarty->append('series_link',
-	    				array('game_series_cross_id' => $query_series_link['game_series_cross_id'],
-							  'game_id' => $query_series_link['game_id'],
+	    				array('game_id' => $query_series_link['game_id'],
 						  	  'game_name' => $query_series_link['game_name'],
 							  'publisher_name' => $query_series_link['publisher_name'],
 							  'developer_name' => $query_series_link['developer_name'],
-							  'year' => $query_series_link['year']));
+							  'year' => $query_series_link['game_year']));
 				}
 				
 				
@@ -93,7 +104,7 @@ include("../includes/common.php");
 				
 				// Do a simple gamesearch... no aka's or the likes of that.
 				
-					if ($gamebrowse == 'num' or $gamebrowse == '' and $gamesearch == '')
+					if ( empty($gamebrowse) or $gamebrowse == 'num' and empty($gamesearch))
 					{
 						$gamebrowse_select = "game_name REGEXP '^[0-9].*'";
 					}
@@ -112,14 +123,7 @@ include("../includes/common.php");
 							   pd1.pub_dev_name as 'publisher_name',
 							   game_developer.dev_pub_id as 'developer_id',
 							   pd2.pub_dev_name as 'developer_name',
-							   game_year.game_year_id,
-							   game_year.game_year AS 'year',
-							   COUNT(screenshot_game.screenshot_id) AS 'screenshot',
-							   COUNT(game_music.music_id) AS 'music',
-							   COUNT(game_boxscan.game_boxscan_id) AS 'boxscan',
-							   COUNT(game_download.game_download_id) AS 'download',
-							   game_ste_enhan.ste_enhanced,
-							   game_ste_only.ste_only ";
+							   game_year.game_year AS 'year'";
 				$sql_build .= "	FROM game ";
 				$sql_build .= "	LEFT JOIN game_year on (game_year.game_id = game.game_id) ";
 				$sql_build .= " LEFT JOIN game_publisher ON (game_publisher.game_id = game.game_id)"; 
@@ -127,16 +131,6 @@ include("../includes/common.php");
 				$sql_build .= " LEFT JOIN game_developer ON (game_developer.game_id = game.game_id)";
 				$sql_build .= " LEFT JOIN pub_dev pd2 on (pd2.pub_dev_id = game_developer.dev_pub_id)"; 
 
-				$sql_build .= " LEFT JOIN game_boxscan ON (game_boxscan.game_id = game.game_id) ";
-				$sql_build .= " LEFT JOIN screenshot_game ON (screenshot_game.game_id = game.game_id) ";
-				$sql_build .= " LEFT JOIN game_music ON (game_music.game_id = game.game_id) ";
-				$sql_build .= " LEFT JOIN game_download ON (game_download.game_id = game.game_id) ";
-
-				$sql_build .= " LEFT JOIN game_ste_enhan ON (game.game_id = game_ste_enhan.game_id) 
-								LEFT JOIN game_ste_only ON (game.game_id = game_ste_only.game_id)";
-				$sql_build .= " LEFT JOIN game_falcon_only ON (game_falcon_only.game_id = game.game_id) "; 
-				$sql_build .= " LEFT JOIN game_development ON (game_development.game_id = game.game_id) "; 
-				$sql_build .= " LEFT JOIN game_wanted ON (game_wanted.game_id = game.game_id) "; 
 				$sql_build .= " WHERE ";
 				$sql_build .= $gamebrowse_select;
 				$sql_build .= " GROUP BY game.game_name";
@@ -152,8 +146,7 @@ include("../includes/common.php");
 				while  ($query_series_link = mysql_fetch_array ($sql_series_link)) 
 				{ 		// This smarty is used for creating the list of games contained within a game series
 						$smarty->append('series_link',
-	    				array('game_series_cross_id' => $query_series_link['game_series_cross_id'],
-							  'game_id' => $query_series_link['game_id'],
+	    				array('game_id' => $query_series_link['game_id'],
 						  	  'game_name' => $query_series_link['game_name'],
 							  'publisher_name' => $query_series_link['publisher_name'],
 							  'developer_name' => $query_series_link['developer_name'],

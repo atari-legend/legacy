@@ -18,6 +18,7 @@ extract($_REQUEST);
 date_default_timezone_set('UTC');
 
 include("../includes/connect.php");
+include("../includes/config.php");
 include("../includes/config_smarty.php");
 include("../includes/functions.php"); 
 include("../includes/user_functions.php");

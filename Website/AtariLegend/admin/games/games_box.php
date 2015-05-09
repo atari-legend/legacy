@@ -13,8 +13,6 @@
 
 //load all common functions
 include("../includes/common.php"); 
-include("../includes/config.php"); 
-
 /*
 ************************************************************************************************
 This is the game box main page
@@ -26,8 +24,8 @@ This is the game box main page
        	$game_name=mysql_fetch_array($sql_game);
 		
 		$smarty->assign('game_info',
-	    array('game_id' => $game_name[game_id],
-			  'game_name' => $game_name[game_name]));
+	    array('game_id' => $game_name['game_id'],
+			  'game_name' => $game_name['game_name']));
 		
 		if ($mode == "back") 
 		{
@@ -61,7 +59,7 @@ This is the game box main page
 			
 			while ($rowimage=mysql_fetch_array ($IMAGE)) 
 			{	// First check if front cover
-				if ($rowimage[game_boxscan_side] == 0)
+				if ($rowimage['game_boxscan_side'] == 0)
 				{
 					$front++;
 					
@@ -71,7 +69,7 @@ This is the game box main page
 					$height = $imginfo[1]+25;		
 					
 					$smarty->append('frontscan',
-	    						array('game_boxscan_id' => $rowimage[game_boxscan_id],
+	    						array('game_boxscan_id' => $rowimage['game_boxscan_id'],
 			  						  'height' => $height,
 									  'width' => $width));
 				} 
@@ -93,7 +91,7 @@ This is the game box main page
 							
 			       	
 					$smarty->append('backscan',
-	    						array('game_boxscan_id' => $rowimage[game_boxscan_id],
+	    						array('game_boxscan_id' => $rowimage['game_boxscan_id'],
 			  						  'height' => $height,
 									  'width' => $width,
 									  'boxscan_cross_id' => $boxscan_cross_id));
