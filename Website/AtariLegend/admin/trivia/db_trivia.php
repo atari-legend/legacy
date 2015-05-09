@@ -17,9 +17,8 @@
 // We are using the action var to separate all the queries.
 
 include("../includes/common.php"); 
-include("../includes/config.php");
 
-if($action=="did_you_know_insert")
+if(isset($action) and $action =="did_you_know_insert")
 
 {
 
@@ -27,7 +26,7 @@ if($action=="did_you_know_insert")
 // Insert did you know quote!
 //**************************************************************************************** 
 
-	$sql = mysql_query("INSERT INTO trivia (trivia_text) VALUES ('$trivia_text')") or die("Couldn't insert trivia text");
+	$sql = $mysqli->query("INSERT INTO trivia (trivia_text) VALUES ('$trivia_text')") or die("Couldn't insert trivia text");
 
 	header("Location: ../trivia/did_you_know.php");
 
@@ -35,7 +34,7 @@ if($action=="did_you_know_insert")
 
 }
 
-if($action=="did_you_know_delete")
+if(isset($action) and $action=="did_you_know_delete")
 
 {
 
@@ -43,7 +42,7 @@ if($action=="did_you_know_delete")
 // Delete did you know quote!
 //**************************************************************************************** 
 
-	$sql = mysql_query("DELETE FROM trivia WHERE trivia_id = '$trivia_id'") or die("Couldn't delete trivia text");
+	$sql = $mysqli->query("DELETE FROM trivia WHERE trivia_id = '$trivia_id'") or die("Couldn't delete trivia text");
 
 	header("Location: ../trivia/did_you_know.php");
 
@@ -51,7 +50,7 @@ if($action=="did_you_know_delete")
 
 }
 
-if ($action=="delete_trivia_quote")
+if (isset($action) and $action=="delete_trivia_quote")
 
 {
 
@@ -63,7 +62,7 @@ if (isset($trivia_quote_id))
 
 	{
 	
-	$sql = mysql_query("DELETE FROM trivia_quotes WHERE trivia_quote_id = '$trivia_quote_id'") or die("couldn't delete trivia quote");
+	$sql = $mysqli->query("DELETE FROM trivia_quotes WHERE trivia_quote_id = '$trivia_quote_id'") or die("couldn't delete trivia quote");
 	
 	header("Location: ../trivia/manage_trivia_quotes.php");
 	
@@ -72,7 +71,7 @@ if (isset($trivia_quote_id))
 }
 
 
-if ($action=="add_trivia")
+if (isset($action) and $action=="add_trivia")
 
 {
 
@@ -84,7 +83,7 @@ if (isset($trivia_quote))
 
 	{
 	
-	mysql_query("INSERT INTO trivia_quotes (trivia_quote) VALUES ('$trivia_quote')") or die("couldn't add trivia quote");
+	$mysqli->query("INSERT INTO trivia_quotes (trivia_quote) VALUES ('$trivia_quote')") or die("couldn't add trivia quote");
 	
 	header("Location: ../trivia/manage_trivia_quotes.php");
 	
@@ -93,7 +92,7 @@ if (isset($trivia_quote))
 }
 
 
-if ($action=="trivia_upload")
+if (isset($action) and $action=="trivia_upload")
 
 {
 
@@ -140,7 +139,7 @@ foreach($image['tmp_name'] as $key=>$tmp_name)
 		 
 		// First we insert extension of the file... this also creates an autoinc number for us.
 		
-		$sdbquery = mysql_query("INSERT INTO trivia_screens (trivia_screens_id, imgext, skin_id) VALUES ('', '$ext', 'skin')")
+		$sdbquery = $mysqli->query("INSERT INTO trivia_screens (trivia_screens_id, imgext, skin_id) VALUES ('', '$ext', 'skin')")
 					or die ("Database error - inserting screenshots");
 		
 		//select the newly entered screenshot_id from the main table
@@ -165,7 +164,7 @@ mysql_close();
 
 }
 
-if ($action=="delete_trivia_screen")
+if (isset($action) and $action=="delete_trivia_screen")
 
 {
 
@@ -178,14 +177,14 @@ if (isset($imageid))
 	{
 	
 	//get the extension 
-		$SCREENSHOT = mysql_query("SELECT * FROM trivia_screens
+		$SCREENSHOT = $mysqli->query("SELECT * FROM trivia_screens
 	   							   WHERE trivia_screens_id = '$imageid'")
 			 					 or die ("Database error - selecting screenshots");
 		
-			$screenshotrow = mysql_fetch_array($SCREENSHOT);
-			$screenshot_ext = $screenshotrow[imgext];
+			$screenshotrow = $SCREENSHOT->fetch_array(MYSQLI_BOTH);
+			$screenshot_ext = $screenshotrow['imgext'];
 
-			$sql = mysql_query("DELETE FROM trivia_screens WHERE trivia_screens_id = '$imageid' ");
+			$sql = $mysqli->query("DELETE FROM trivia_screens WHERE trivia_screens_id = '$imageid' ");
 
 			$new_path = $trivia_screenshot_path;
 			$new_path .= $imageid;
@@ -201,3 +200,4 @@ if (isset($imageid))
 	}
 	
 }
+?>
