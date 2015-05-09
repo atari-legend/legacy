@@ -29,6 +29,7 @@ screen and we're gonna fill some extra variables accordingly. These variables wi
 used to create the querystring later.
 ***********************************************************************************
 */
+
 	if (isset($action) and $action == "insert" )
 	{
 		//Insert the game in the game table
@@ -446,7 +447,7 @@ querystring for faster output
 				
 				
 				$smarty->assign("user_id",$_SESSION['user_id']);
-				$smarty->assign('games_list_tpl', '1');
+				$smarty->assign('games_list_html', '1');
 
 				//Send all smarty variables to the templates
 				$smarty->display('file:../templates/0/index.tpl');

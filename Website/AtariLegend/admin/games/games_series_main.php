@@ -35,7 +35,7 @@ include("../includes/common.php");
 	    			array('game_series_id' => $query_series['game_series_id'],
 						  'game_series_name' => $query_series['game_series_name']));
 				}
-	if ( $series_page == '' ) { }
+	if ( empty($series_page)) { }
 	else
 	{
 			global $series_page;

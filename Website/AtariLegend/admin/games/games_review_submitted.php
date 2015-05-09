@@ -19,7 +19,6 @@ This is the submitted review page
 
 //load all common functions
 include("../includes/common.php"); 
-include("../includes/config.php"); 
 
 //get the submitted reviews
 $sql_submission =  mysql_query("SELECT * FROM review_main
@@ -35,12 +34,12 @@ while ($review=mysql_fetch_array($sql_submission))
 	$i++;
 	
 	$smarty->append('review',
-	    	 array('game_name' => $review[game_name],
-				   'user_id' => $review[user_id],
-				   'userid' => $review[userid],
-				   'review_date' => $review[review_date],
-				   'review_id' => $review[review_id],
-				   'game_id' => $review[game_id]));
+	    	 array('game_name' => $review['game_name'],
+				   'user_id' => $review['user_id'],
+				   'userid' => $review['userid'],
+				   'review_date' => $review['review_date'],
+				   'review_id' => $review['review_id'],
+				   'game_id' => $review['game_id']));
 }
 
 
