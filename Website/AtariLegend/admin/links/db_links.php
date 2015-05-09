@@ -17,7 +17,6 @@
 // We are using the action var to separate all the queries.
 
 include("../includes/common.php"); 
-include("../includes/config.php");
 if($action=="addnew_link")
 
 {
@@ -96,7 +95,7 @@ if($action=='modify_link')
 //**************************************************************************************** 
 
 // Here we add the website image
-if ($delete_image != 'yes')
+if (isset($_POST['file_upload']) and $_POST['file_upload'] == "yes" and isset($_FILES['image']))
 {	
 	$image = $_FILES['image'];
 	$tmp_name=$image['tmp_name']; 
@@ -140,9 +139,11 @@ if ($delete_image=='yes')
 	$sql = "SELECT website_imgext FROM website WHERE website_id='$website_id'";
 	$website_query = mysql_query($sql);
 	list ($website_imgext) = mysql_fetch_row($website_query);
-	
-	mysql_query("UPDATE website SET website_imgext='' WHERE website_id='$website_id'");
-	unlink ("$website_image_path$website_id.$website_imgext");
+	$full_filename = "$website_image_path$website_id.$website_imgext";
+
+	chmod($full_filename, 0777) or die("Couldn't set file permissions");
+	mysql_query("UPDATE website SET website_imgext='' WHERE website_id='$website_id'") or die("unable to delete the file from the database");
+	unlink ("$website_image_path$website_id.$website_imgext") or die("unable to delete the file from server");
 }
 
 // Do the website updating
