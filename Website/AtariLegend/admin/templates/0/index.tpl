@@ -245,8 +245,8 @@
 					{if $games_main_tpl eq "1"} 
                		{include file="../templates/0/games_main.tpl"} 
                		{/if}	
-					{if $games_list_tpl eq "1"} 
-               		{include file="../templates/0/games_list.tpl"} 
+					{if $games_list_html eq "1"} 
+               		{include file="../templates/0/games_list.html"} 
                		{/if}
 					{if $games_detail_tpl eq "1"} 
                		{include file="../templates/0/games_detail.tpl"} 
