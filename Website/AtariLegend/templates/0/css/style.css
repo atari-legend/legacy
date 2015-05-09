@@ -410,7 +410,7 @@ header nav { float: center;
   border: 0px;
   background: #00d3d3;
   font-family: Audiowide,Arial,helvetica,sans-serif;
-	  color: #182727;
+  color: #182727;
   height: 60px;
   width: 170px;
   font-size: 20px;
@@ -444,7 +444,7 @@ header nav { float: center;
   border: 0px;
   background: #00d3d3;
   font-family: Audiowide,Arial,helvetica,sans-serif;
-	  color: #182727;
+  color: #182727;
   height: 60px;
   width: 134px;
   font-size: 20px;
@@ -771,15 +771,16 @@ Standard tile settings
 /*---------------------------------------------------------- 
  Welcome tile settings --> frontpage
 ------------------------------------------------------------ */
-#welcome { width: 66%;
-		height: 460px;
-		float: left;
+#welcome { position: relative;
+		width: 600px; 
+		height: 300px; 
+		overflow: hidden;
 		margin-top: 20px;
 		border-top: 10px solid #01b5b5;
 		border-bottom: 3px solid #01b5b5;
-		background-image: url(../images/dummy/another_world.jpg);
 		margin-bottom:20px;
-	}
+		float: left;
+}
 	
 #welcome p { background: rgb(0, 80, 80) transparent;   /* Fallback for web browsers that doesn't support RGBa */
         background: rgba(0, 80, 80, 0.6);   /* RGBa with 0.6 opacity */
@@ -790,46 +791,35 @@ Standard tile settings
 		padding-left: 5%;
 		padding-right: 5%;
 	}	
-
-#welcome_quote { padding-top:20px;
-		font-size : 30pt;
-		margin-top : 12%;
-		color : white; 	
+	
+#welcome_image { position:absolute;
+		left:0;
+		top:0;
 	}
 	
-@media screen and (min-width: 500px) and (max-width: 1099px) { 	
-#welcome_quote { font-size : 20pt;}
-}	
-
-#welcome_slogan { font-size : 16pt; 
-		color : #bcbdbd;
-	}
-
-#welcome_text { font-size : 13pt; 
-		padding-bottom: 25px;	
+#welcome_text { font-size : 11pt; 
+		padding-bottom: 10px;	
+		padding-top: 10px;	
 		color : white;
-		border-bottom: 2px solid #01b5b5;				
+		border-bottom: 2px solid #01b5b5;	
+		position: absolute;		
+		Margin-top: 40px;
 	}
 
 /* 1 tile and a simplified intro screen */
 @media screen and (max-width: 639px) { 
-	#welcome  { width: 100%;
+	#welcome  { 
+		/*width: 100%;
 		background-image: none;
 		margin-top: -20px;
 		margin-bottom: 25px;
-		border-top: 0px}	
-
-	#welcome_text { display : none;}
+		border-top: 0px;*/
+		visibility : hidden;
+	}	
 	
-	#welcome_slogan { border-bottom: 2px solid #01b5b5; 
-		border-left: 2px solid #01b5b5; 
-		font-size : 13pt;
-	}
-	#welcome_quote { font-size : 15pt; 
-		padding-top: 0px;
-		border-left: 2px solid #01b5b5;	
-		border-top: 2px solid #01b5b5; 
-	}
+	/*#welcome img { display : none;}
+
+	#welcome_text { display : none;}*/
 }
 
 /* 2 tiles and background welcome image */
@@ -911,7 +901,7 @@ screenstar tile - front page
 /*---------------------------------------------------------- 
 datequote tile - front page
 ------------------------------------------------------------ */
-#datequote_position_front { 	margin-top:-95px;	
+#datequote_position_front { 	margin-top:-62px;	
 				margin-bottom: 20px;
 }
 

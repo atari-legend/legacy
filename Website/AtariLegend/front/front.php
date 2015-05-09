@@ -26,6 +26,11 @@ include("../tiles/screenstar.php");
 include("../tiles/statistics_tile.php");
 include("../tiles/hotlinks_tile.php");
 
+foreach (glob("../templates/0/images/trivia/*.*") as $filename) {
+    $smarty->append('image',
+	    array('image_name' => $filename ));
+}
+
 //Send all smarty variables to the templates
 $smarty->display('extends:../templates/0/main.html|../templates/0/frontpage.html|../templates/0/latest_news_tile.html|../templates/0/latest_reviews_tile.html|../templates/0/who_is_it_tile.html|../templates/0/screenstar_tile.html|../templates/0/hotlinks_tile.html|../templates/0/date_quote_tile.html|../templates/0/did_you_know_tile.html|../templates/0/statistics_tile.html|../templates/0/user_login_tile.html');
 
