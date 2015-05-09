@@ -13,7 +13,6 @@
 
 //load all common functions
 include("../includes/common.php"); 
-include("../includes/config.php"); 
 
 /*
 ************************************************************************************************
@@ -23,7 +22,7 @@ This is the game music main page
 $start1=gettimeofday();
 list($start2, $start3) = explode(":", exec('date +%N:%S'));
 				
-if ($action == 'search')
+if (isset($action) and $action == 'search')
 {
 	//check the $gamebrowse select
 	if ($gamebrowse == "")
@@ -50,7 +49,7 @@ if ($action == 'search')
 	{
 		$smarty->assign("message","Please fill in one of the search fields");
 		
-		$smarty->assign("user_id",$_SESSION[user_id]);
+		$smarty->assign("user_id",$_SESSION['user_id']);
 		$smarty->assign('games_music_tpl', '1');
 
 		//Send all smarty variables to the templates
@@ -126,7 +125,7 @@ if ($action == 'search')
 			{
 				$smarty->assign("message","No entries for your query!");
 		
-				$smarty->assign("user_id",$_SESSION[user_id]);
+				$smarty->assign("user_id",$_SESSION['user_id']);
 				$smarty->assign('games_music_tpl', '1');
 
 				//Send all smarty variables to the templates
@@ -140,7 +139,7 @@ if ($action == 'search')
 }
 else
 {
-	$smarty->assign("user_id",$_SESSION[user_id]);
+	$smarty->assign("user_id",$_SESSION['user_id']);
 	$smarty->assign('games_music_tpl', '1');
 
 	//Send all smarty variables to the templates

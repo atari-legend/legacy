@@ -214,7 +214,7 @@ if ($action == 'delete_user')
 		$width = $imginfo[0];
 		}
 		$smarty->assign('users',
-	    				array('user_id' => $query_users[user_id],
+	    				array('user_id' => $query_users['user_id'],
 							  'user_name' => $query_users['userid'],
 						  	  'user_pwd' => $query_users['password'],
 							  'user_email' => $query_users['email'],

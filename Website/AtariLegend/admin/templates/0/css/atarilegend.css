@@ -418,3 +418,34 @@ background-color: Menu;
 .highlight { background-color:#c0c0c0; }
 
 .quote { padding:5px; border:solid 1px #000000; background-color:#e6e6e6; color:#000000;}
+
+
+
+ .Table
+    {
+        display: table;
+	border: solid 1px #b2b2b2;
+	background-color:#E9E9E9;
+	width: 90%;
+	max-height: 20px;
+    }
+    .Heading
+    {
+        display: table-row;
+        font-weight: bold;
+        text-align: left;
+    }
+    .Row
+    {
+        display: table-row;
+        text-align: left;
+    }
+    .Cell
+    {
+        display: table-cell;
+        padding: 2px;
+    }
+
+
+
+

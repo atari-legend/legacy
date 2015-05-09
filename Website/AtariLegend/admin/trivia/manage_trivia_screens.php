@@ -19,21 +19,19 @@ Manage our trivia screens!
 */
 
 include("../includes/common.php");
-include("../includes/config.php");
 
-		$sql_trivia_screen =  mysql_query("SELECT * FROM trivia_screens") or die ("Database error - selecting screenshot");
-		
-		while (list($trivia_screens_id,$imgext,$skin_id) = mysql_fetch_row($sql_trivia_screen))
-		
+		$sql_trivia_screen = $mysqli->query("SELECT * FROM trivia_screens");
+
+		while ($query_trivia_screen = $sql_trivia_screen->fetch_array(MYSQLI_BOTH))  	
 		{
-					$imginfo = getimagesize("$trivia_screenshot_path$trivia_screens_id.$imgext");
+					$imginfo = getimagesize("$trivia_screenshot_path$query_trivia_screen[trivia_screens_id].$query_trivia_screen[imgext]");
 					$width = $imginfo[0]+20;
 					$height = $imginfo[1]+25;
 		
 		
 					$smarty->append('trivia',
-	    			array('trivia_screens_id' => $trivia_screens_id,
-						  'imgext' => $imgext,
+	    			array('trivia_screens_id' => $query_trivia_screen['trivia_screens_id'],
+						  'imgext' => $query_trivia_screen['imgext'],
 						  'width' => $width,
 						  'height' => $height));
 		} 

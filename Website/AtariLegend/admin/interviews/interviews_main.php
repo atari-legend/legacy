@@ -93,15 +93,15 @@ if ( $individual_search == " " or $individual_search == '-' )
 		$v_ind_image = "none";
 	}
 	
-	$interview_date = convert_timestamp($interview[interview_date]);
+	$interview_date = convert_timestamp($interview['interview_date']);
 	
-	$interview_text = $interview[interview_intro];
+	$interview_text = $interview['interview_intro'];
 	$interview_text = nl2br($interview_text);
 	$interview_text = InsertALCode($interview_text);
 	$interview_text = InsertSmillies($interview_text);
 	
 	$smarty->append('interview',
-	    	 array('user_id' => $interview[userid],
+	    	 array('user_id' => $interview['userid'],
 			 	   'user_email' => $interview['email'],
 				   'interview_id' => $interview['interview_id'],
 				   'ind_id' => $interview['ind_id'],

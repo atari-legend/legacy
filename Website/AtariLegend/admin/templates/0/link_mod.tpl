@@ -67,7 +67,8 @@ function deletelink()
 			<br>
 			
 	 		<label for="image" style="cursor: help; text-decoration: underline; margin:5px;" accesskey="1" title="Choose an image from your harddrive to attach to be associated with this website.">Attach image</label>
-			<input type="hidden" name="MAX_FILE_SIZE" value="10000">
+			<input type="hidden" name="MAX_FILE_SIZE" value="100000000">
+			<input type="hidden" name="file_upload" value="yes">
 			<input type="file" name="image" class="links_file-box">
 	
 		{/if}
