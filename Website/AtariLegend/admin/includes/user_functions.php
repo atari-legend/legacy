@@ -89,7 +89,7 @@ function md5_test($userid, $md5_password, $password, $mysqli) {
                     // Password is not correct
                     // We record this attempt in the database
                     $now = time();
-                    $mysqli->query("INSERT INTO user_login_attempts(user_id, time)
+                    $mysqli->query("INSERT INTO users_login_attempts(user_id, time)
                                     VALUES ('$user_id', '$now')");
                     return false;
                 }
@@ -148,7 +148,7 @@ function login($userid, $password, $mysqli) {
                     // Password is not correct
                     // We record this attempt in the database
                     $now = time();
-                    $mysqli->query("INSERT INTO login_attempts(user_id, time)
+                    $mysqli->query("INSERT INTO users_login_attempts(user_id, time)
                                     VALUES ('$user_id', '$now')");
                     return false;
                 }
@@ -169,7 +169,7 @@ function checkbrute($user_id, $mysqli) {
     $valid_attempts = $now - (2 * 60 * 60);
  
     if ($stmt = $mysqli->prepare("SELECT time 
-                             FROM login_attempts 
+                             FROM users_login_attempts 
                              WHERE user_id = ? 
                             AND time > '$valid_attempts'")) {
         $stmt->bind_param('i', $user_id);
