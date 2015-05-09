@@ -44,14 +44,14 @@ if(empty($catpick)) {$catpick=0;}
 
 		if(isset($catpick)) {$website_category_id=$catpick;}
 		
-		$LINKSQL = mysql_query("SELECT * FROM website 
+		$LINKSQL = $mysqli->query("SELECT * FROM website 
 								LEFT JOIN website_description ON (website.website_id = website_description.website_id)
 								LEFT JOIN website_category_cross ON (website.website_id = website_category_cross.website_id) 
 								WHERE website_category_cross.website_category_id=$website_category_id ORDER by website.website_name")
 				   or die ("Couldn't query website and website description");
 		
 		
-		while  ($rowlink=mysql_fetch_array ($LINKSQL))
+		while  ($rowlink = $LINKSQL->fetch_array(MYSQLI_BOTH)) 
  		{  
 			$timestamp = convert_timestamp($rowlink['website_date']); 
 			$submitted = get_username_from_id($rowlink['website_user_sub']);

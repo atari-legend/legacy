@@ -43,6 +43,7 @@ include("../includes/common.php");
 			  'website_id' => $rowlink['website_id'],
 			  'category_id' => $rowlink['website_category_id'],
 			  'website_description_text' => $rowlink['website_description_text'],
+			  'website_imgext' => $rowlink['website_imgext'],
 			  'website_image' => $website_image));
 	
 	// Do the category selector
