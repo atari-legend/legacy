@@ -353,7 +353,8 @@ function add_year()
 		<legend class="links_legend">Developer info</legend>
 			<table width="100%">
 			<tr>
-				<td width="33%">	
+				<td width="33%">
+					{if isset($developer)}	
 					{foreach from=$developer item=line}
 						<input type="checkbox" name="game_developer_id[]" value="{$line.pub_id}">
 					  	<a href="../company/company_edit.php?comp_id={$line.pub_id}" class="MAINNAV">{$line.pub_name}</a> {if $line.continent <> '' }<b>({$line.continent})</b>{/if} {if  $line.extra_info <> '' }<b>({$line.extra_info})</b>{/if}
@@ -362,6 +363,7 @@ function add_year()
 					{/foreach}
 				 	<img src="../templates/0/images/arrow_ltr.gif" alt="" width="38" height="22" border="0">		
 				 	<input type="button" name="valider" value="Delete" onclick="delete_developer()">
+					{/if}
 					<br>
 					<br>
 					<select name="company_id_dev" class="authorSelects">
@@ -402,15 +404,18 @@ function add_year()
 		<legend class="links_legend">Creator info</legend>
 			<table width="100%">
 			<tr>
-				<td width="33%">	
+				<td width="33%">
+					{if isset($game_author)}		
 					{foreach from=$game_author item=line}
 						<input type="checkbox" name="game_author_id[]" value="{$line.game_author_id}">
 					  		<a href="../individuals/individuals_edit.php?ind_id={$line.ind_id}" class="MAINNAV">{$line.ind_name}</a> <b>({$line.auhthor_type_info})</b>
+					
 					  	<br>
 					  	<br>
 					{/foreach}
 				 	<img src="../templates/0/images/arrow_ltr.gif" alt="" width="38" height="22" border="0">		
 				 	<input type="button" name="valider" value="Delete" onclick="delete_creator()">
+					{/if}
 					<br>
 					<br>
 					<select name="ind_id" class="authorSelects">
@@ -445,14 +450,17 @@ function add_year()
 		<legend class="links_legend">Release Year</legend>
 			<table width="100%">
 			<tr>
-				<td width="33%">	
+				<td width="33%">
+				{if isset($game_year)}	
 				{foreach from=$game_year item=line}
 					<input type="checkbox" name="game_year_id[]" value="{$line.game_year_id}">{$line.game_year} {if  $line.game_extra_info <> ''}<b>({$line.game_extra_info})</b>{/if}
 					<br>
 					<br>
 				{/foreach}
+				
 				<img src="../templates/0/images/arrow_ltr.gif" alt="" width="38" height="22" border="0">		
 				 <input type="button" name="valider" value="Delete" onclick="delete_year()">
+				{/if}
 				<br>
 				<br>
 				{html_select_date start_year=1984 display_days=0 display_months=0}
@@ -558,7 +566,7 @@ function add_year()
 </table>
 <br>
 
-{if $message <> ''}
+{if isset($message) and $message <> ''}
 	<table align="center" width="100%" cellspacing="0" cellpadding="0" border="0">
 	<tr>
 		<td align="center" >

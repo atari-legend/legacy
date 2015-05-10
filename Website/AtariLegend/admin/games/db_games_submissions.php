@@ -74,7 +74,7 @@ if($action=="move_submission_tocomment")
 {
 
 //****************************************************************************************
-// This is the game comment edit place
+// This is the move to comments place
 //**************************************************************************************** 
 
 	if (isset($submit_id))

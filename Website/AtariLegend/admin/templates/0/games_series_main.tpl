@@ -1,6 +1,6 @@
 <script type="text/javascript">
 function deleteseries()
-{literal}	{ {/literal}
+{ 
     // CONFIRM REQUIRES ONE ARGUMENT
     var message = "Are you sure you want to delete this Serie?";
     // CONFIRM IS BOOLEAN. THAT MEANS THAT
@@ -9,11 +9,11 @@ function deleteseries()
     var return_value = confirm(message);
 
     if (return_value !="0")
-    {literal}	{ {/literal}
+{
     	url="../games/db_games_series.php?action=delete_gameseries&game_series_id={$series_info.game_series_id}";
 		location.href=url;
-    {literal}	} {/literal}  
-{literal}	} {/literal}
+    }   
+	} 
 </script>
 <table align="center" class="HEADERBAR" width="100%" cellspacing="0" cellpadding="2" border="0">
 <tr>
@@ -68,11 +68,17 @@ function deleteseries()
 				</td>
 				<td width="84%" align="center" valign="top">
 				
-				{if (isset($series_info.series_page) and $series_info.series_page eq 'add_series')} {include file="../templates/0/games_series_addseries.tpl"} {/if}
+				{if (isset($series_info.series_page) and $series_info.series_page eq 'add_series')} 
+					{include file="../templates/0/games_series_addseries.tpl"} 
+				{/if}
 				
-				{if (isset($series_info.series_page) and $series_info.series_page eq 'edit_series')} {include file="../templates/0/games_series_editseries.tpl"} {/if}
+				{if (isset($series_info.series_page) and $series_info.series_page eq 'edit_series')} 
+					{include file="../templates/0/games_series_editseries.tpl"} 
+				{/if}
 				
-				{if (isset($series_info.series_page) and $series_info.series_page eq 'addgames_series')} {include file="../templates/0/games_series_addgames.tpl"} {/if}
+				{if (isset($series_info.series_page) and $series_info.series_page eq 'addgames_series')} 
+					{include file="../templates/0/games_series_addgames.tpl"} 
+				{/if}
 				
 				{if (isset($series_info.series_page) and $series_info.series_page eq 'series_editor')}
 				
