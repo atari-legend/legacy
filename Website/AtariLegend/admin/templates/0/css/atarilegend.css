@@ -427,11 +427,16 @@ background-color: Menu;
 	border: solid 1px #b2b2b2;
 	background-color:#E9E9E9;
 	width: 90%;
-	max-height: 20px;
+
     }
     .Heading
     {
         display: table-row;
+        font-weight: bold;
+        text-align: left;
+    }
+    .table_head
+    {
         font-weight: bold;
         text-align: left;
     }
@@ -445,7 +450,7 @@ background-color: Menu;
         display: table-cell;
         padding: 2px;
     }
-
-
-
-
+    .Row div:hover
+    {
+	background-color:#b2b2b2;
+    }

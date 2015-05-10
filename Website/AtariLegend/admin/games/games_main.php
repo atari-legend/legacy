@@ -21,6 +21,7 @@ include("../includes/common.php");
 
 date_default_timezone_set('UTC');
 $start = microtime(true);
+
 if (empty($action)) {$action='';}
 /*
 ***********************************************************************************
