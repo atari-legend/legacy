@@ -71,11 +71,11 @@ function commentdelete(JScomID,JSusers_id)
 				<tr bgcolor="#EFEFEF">
 					<td class="main_text" width="150" valign="top" style="line-height: 13px; border-right: solid 1px #b2b2b2;">
 					<br>
-					{if $line.avatar_ext !=''}
+					{if isset($line.avatar_image) and $line.avatar_image != ''}
 					<table>
 					<tr>
 					<td align="center">
-		 <img src="../includes/show_image.php?file={$line.avatar_image}&resize=80,null,null,null&crop=null,null,null,null" width={$line.avatar_width} alt="Avatar">				
+		 <img src="../includes/show_image.php?file={if isset($line.avatar_image)}{$line.avatar_image}{/if}&resize=80,null,null,null&crop=null,null,null,null" alt="Avatar">				
 					</td>
 					</tr>
 					</table>
@@ -89,8 +89,8 @@ function commentdelete(JScomID,JSusers_id)
 					<td class="main_text" valign="top" style="line-height: 13px;">
 						<br>
 						<br>
-						{if isset($line.image)}<span style="float:right;">
-					<a href="../games/games_detail.php?game_id={$line.game_id}"><img src="../includes/show_image.php?file={$line.image}&resize=160,null,null,null&crop=null,null,null,null" alt="{$line.game_name}" border="0"></a></span>{/if}
+						{if isset($line.image) and $line.image != ''}<span style="float:right;">
+					<a href="../games/games_detail.php?game_id={$line.game_id}"><img src="../includes/show_image.php?file={$line.image}&resize=160,null,null,null&crop=null,null,null,null" alt="{$line.game}" border="0"></a></span>{/if}
 						{$line.comment}
 						<br>
 						<br>

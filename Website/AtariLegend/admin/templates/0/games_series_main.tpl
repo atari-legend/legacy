@@ -30,10 +30,14 @@ function deleteseries()
 	<table width="100%" cellspacing="2" cellpadding="2" border="0" class="CELLCOLOR" >
 			<tr>
     			<td width="16%" valign="top">
-				{if $series_info.series_page eq 'series_editor' or $series_info.series_page eq 'addgames_series'}<span class="LEFTNAV"><strong>{$series_info.game_series_name} selected</strong></span>{/if}
+				{if (isset($series_info.series_page) and $series_info.series_page eq 'series_editor') or (isset($series_info.series_page) and $series_info.series_page eq 'addgames_series')}<span class="LEFTNAV"><strong>{$series_info.game_series_name} selected</strong></span>{/if}
 				</td>
 				<td width="84%" align="left" valign="top">
-				{if $series_info.series_page eq 'series_editor' or $series_info.series_page eq '' or $series_info.series_page eq 'edit_series' or $series_info.series_page eq 'addgames_series'}<a href="../games/games_series_main.php?series_page=add_series"><img src="../templates/0/icons/icon_new_series.png" alt="" width="59" height="18" border="0"></a> {/if} 
+				{if $series_info.series_page eq 'series_editor' or $series_info.series_page eq '' or $series_info.series_page eq 'edit_series' or $series_info.series_page eq 'addgames_series'}
+					<a href="../games/games_series_main.php?series_page=add_series">
+						<img src="../templates/0/icons/icon_new_series.png" alt="" width="59" height="18" border="0">
+					</a> 
+				{/if} 
 				{if $series_info.series_page eq 'series_editor' or $series_info.series_page eq 'addgames_series'}<a href="../games/games_series_main.php?series_page=edit_series&game_series_id={$series_info.game_series_id}"><img src="../templates/0/icons/icon_edit_series.png" alt="" width="59" height="18" border="0"></a> {/if}
 				{if $series_info.series_page eq 'series_editor' or $series_info.series_page eq 'edit_series' or $series_info.series_page eq 'addgames_series'}<a style="cursor: pointer;" onClick="deleteseries(); return false;"><img src="../templates/0/icons/icon_delete_series.png" alt="" width="59" height="18" border="0"></a> {/if}
 				{if $series_info.series_page eq 'series_editor' or $series_info.series_page eq 'edit_series'}<a href="../games/games_series_main.php?series_page=addgames_series&game_series_id={$series_info.game_series_id}"><img src="../templates/0/icons/add_games_button.png" alt="" width="59" height="18" border="0"></a> {/if} 
@@ -64,15 +68,15 @@ function deleteseries()
 				</td>
 				<td width="84%" align="center" valign="top">
 				
-				{if $series_info.series_page eq 'add_series'} {include file="../templates/0/games_series_addseries.tpl"} {/if}
+				{if (isset($series_info.series_page) and $series_info.series_page eq 'add_series')} {include file="../templates/0/games_series_addseries.tpl"} {/if}
 				
-				{if $series_info.series_page eq 'edit_series'} {include file="../templates/0/games_series_editseries.tpl"} {/if}
+				{if (isset($series_info.series_page) and $series_info.series_page eq 'edit_series')} {include file="../templates/0/games_series_editseries.tpl"} {/if}
 				
-				{if $series_info.series_page eq 'addgames_series'} {include file="../templates/0/games_series_addgames.tpl"} {/if}
+				{if (isset($series_info.series_page) and $series_info.series_page eq 'addgames_series')} {include file="../templates/0/games_series_addgames.tpl"} {/if}
 				
-				{if $series_info.series_page eq 'series_editor'}
+				{if (isset($series_info.series_page) and $series_info.series_page eq 'series_editor')}
 				
-				{if $series_info.sql_series_link_nr < 1}
+				{if (isset($series_info.sql_series_link_nr) and $series_info.sql_series_link_nr < 1)}
 				
 				No games hooked to this series yet.
 				
@@ -90,11 +94,45 @@ function deleteseries()
 				<table cellspacing="0" cellpadding="2" border="0" width="95%" style="border: solid 1px #b2b2b2; background-color:#E9E9E9;">
 				{foreach from=$series_link item=line}
 					<tr bgcolor="{cycle name="tr" values="#EFEFEF,#E9E9E9"}">
-						<td width="5%" valign="top"><input type="checkbox" name="game_series_cross_id[]" value="{$line.game_series_cross_id}"></td>
-						<td width="30%" valign="top">{if $line.game_name != ''}<a href="../administration/construction.php" class="MAINNAV">{$line.game_name}</a>{else}<i>n/a</i>{/if}</td>
-						<td width="25%" valign="top">{if $line.publisher_name != ''}<a href="games_main.php?publisher={$line.publisher_id}&amp;action=search" class="MAINNAV">{$line.publisher_name}</a>{else}<i>n/a</i>{/if}</td>
-						<td width="25%" valign="top">{if $line.developer_name != ''}<a href="games_main.php?developer={$line.developer_id}&amp;action=search" class="MAINNAV">{$line.developer_name}</a>{else}<i>n/a</i>{/if}</td>				
-						<td width="15%" valign="top">{if $line.year != ''}<a href="games_main.php?year={$line.year}&amp;action=search" class="MAINNAV">{$line.year}</a>{else}<i>n/a</i>{/if}</td>
+						<td width="5%" valign="top">
+							<input type="checkbox" name="game_series_cross_id[]" value="{$line.game_series_cross_id}">
+						</td>
+						<td width="30%" valign="top">
+							{if $line.game_name != ''}
+								<a href="../administration/construction.php" class="MAINNAV">
+									{$line.game_name}
+								</a>
+							{else}
+								<i>n/a</i>
+							{/if}
+						</td>
+						<td width="25%" valign="top">
+							{if (isset($line.publisher_name) and $line.publisher_name != '')}
+								<a href="games_main.php?publisher={$line.publisher_id}&amp;action=search" class="MAINNAV">
+									{$line.publisher_name}
+								</a>
+							{else}
+								<i>n/a</i>
+							{/if}
+						</td>
+						<td width="25%" valign="top">
+							{if (isset($line.developer_name) and $line.developer_name != '')}
+								<a href="games_main.php?developer={$line.developer_id}&amp;action=search" class="MAINNAV">
+									{$line.developer_name}
+								</a>
+							{else}
+								<i>n/a</i>
+							{/if}
+						</td>				
+						<td width="15%" valign="top">
+							{if (isset($line.year) and $line.year != '')}
+								<a href="games_main.php?year={$line.year}&amp;action=search" class="MAINNAV">
+									{$line.year}
+								</a>
+							{else}
+								<i>n/a</i>
+							{/if}
+						</td>
 					</tr>
 				{/foreach}
 					
