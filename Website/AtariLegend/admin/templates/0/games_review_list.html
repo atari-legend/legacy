@@ -26,37 +26,81 @@ The main game page
 <table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
 <tr>
 	<td colspan="2">
-	<fieldset class="category_set">
+
+		<div class="category_set" style="border:solid 1px;padding:5px;">
 		This is the search result page. Click a game to go to the main review page. 
 		If you want to do a new search query, click <a href="games_review.php" class="MAINNAV"><b>here</b></a>!
-	</fieldset> 
+		
+		</div> 
+
 	</td>
 </tr>
 <tr>
 	<td align="center">
-		<table cellspacing="0" cellpadding="2" border="0" width="90%" style="border: solid 1px #b2b2b2; background-color:#E9E9E9;">
-		<tr>
-			<td valign="top" width="30%"><b>Game Name</b></td>
-			<td valign="top" width="30%"><b>Publisher</b></td>
-			<td valign="top" width="25%"><b>Year</b></td>
-			<td valign="top" width="15%"><b>Nr of reviews</b></td>		
-		</tr>
-		</table>
-		<table cellspacing="0" cellpadding="2" border="0" width="90%" style="border: solid 1px #b2b2b2; background-color:#E9E9E9;">
-		{foreach from=$review item=line}
-		<tr bgcolor="{cycle name="tr" values="#EFEFEF,#E9E9E9"}">
-			<td width="30%" valign="top">{if $line.game_name != ''}<a href="games_review_add.php?game_id={$line.game_id}" class="MAINNAV">{$line.game_name}</a>{else}<i>n/a</i>{/if}</td>
-			<td width="30%" valign="top">{if $line.game_publisher != ''}{$line.game_publisher}{else}<i>n/a</i>{/if}</td>
-			<td width="30%" valign="top">{if $line.game_year != ''}{$line.game_year}{else}<i>n/a</i>{/if}</td>				
-			<td width="10%" valign="top">{if $line.number_reviews != ''}{$line.number_reviews}{else}<i>0</i>{/if}</td>
-		</tr>
+
+		<div class="Table">
+			<div class="Heading">
+				<div class="Cell" style="width:30%;">
+					Game Name
+				</div>
+				<div class="Cell" style="width:30%;">
+					Publisher
+				</div>				
+				<div class="Cell" style="width:25%;">
+					Year
+				</div>
+				<div class="Cell" style="width:15%;">
+					Nr of reviews
+				</div>
+			</div>
+		</div>
+
+		<div class="Table">
+		{foreach from=$review item item=line}
+			<div class="Row" style="background-color:{cycle name="tr" values="#EFEFEF,#E9E9E9"};" id="game_row">
+				<div class="Cell" style="width:30%;">
+						{if $line.game_name != ''}
+						<a href="games_review_add.php?game_id={$line.game_id}" class="MAINNAV">
+							{$line.game_name}
+						</a>
+						{else}
+						<i>n/a</i>
+						{/if}
+				</div>
+				<div class="Cell" style="width:30%;">
+						{if $line.game_publisher != ''}
+							{$line.game_publisher}
+						{else}
+							<i>n/a</i>
+						{/if}
+				</div>				
+				<div class="Cell" style="width:25%;">
+						{if $line.game_year != ''}
+							{$line.game_year}
+						{else}
+							<i>n/a</i>
+						{/if}
+				</div>
+				<div class="Cell" style="width:15%;">
+						{if $line.number_reviews != ''}
+							{$line.number_reviews}
+						{else}
+							<i>n/a</i>
+						{/if}
+				</div>
+			</div>
 		{/foreach}
-		</table>	
-		<table cellspacing="0" cellpadding="2" border="0" width="90%" style="border-left: solid 1px #b2b2b2; border-left: solid 1px #b2b2b2; border-right: solid 1px #b2b2b2; border-bottom: solid 1px #b2b2b2;background-color:#E9E9E9;">
-		<tr>
-			<td valign="top" width="100%"><b>{if $nr_of_entries == 1}1 game found {else} {$nr_of_entries} games found{/if} in {$querytime} sec</b></td>
-		</tr>
-		</table>
+		</div>
+
+
+		<div class="Table">
+			<div class="Heading">
+				<div class="Cell" style="width:100%;">
+					{if $nr_of_entries == 1}1 game found {else} {$nr_of_entries} games found{/if} in {$querytime} sec
+				</div>
+			</div>
+		</div>
+
 		<br>
 	</td>
 </tr>
@@ -77,7 +121,7 @@ The main game page
 	</tr>
 </table>
 <br>
-{if $message <> ''}
+{if isset($message) and $message <> ''}
 	<table align="center" width="100%" cellspacing="0" cellpadding="0" border="0">
 	<tr>
 		<td align="center" >

@@ -20,6 +20,11 @@
 <meta http-equiv="Content-Style-Type" content="text/css">
 <meta http-equiv="Content-Type" content="text/html; charset=us-ascii">
 <link href="../templates/0/css/atarilegend.css" hreflang="en" rel="stylesheet" type="text/css" charset="ISO-8859-1">
+{if isset($games_review_add_html) or isset($games_review_edit_tpl)} 		
+	<script type='text/JavaScript' src='../templates/0/js/sha512.js'></script>
+	<script type='text/JavaScript' src='../templates/0/js/md5.js'></script> 
+{/if}
+
 	<title>Cpanel</title>
 </head>
 <body class="BODY">
@@ -357,13 +362,13 @@
                		{include file="./games_review.html"} 
                		{/if}
 					{if isset($games_review_list_tpl) and $games_review_list_tpl eq "1"} 
-               		{include file="./games_review_list.tpl"} 
+               		{include file="./games_review_list.html"} 
                		{/if}
-					{if isset($games_review_add_tpl) and $games_review_add_tpl eq "1"} 
-               		{include file="./games_review_add.tpl"} 
+					{if isset($games_review_add_html) and $games_review_add_html eq "1"} 
+               		{include file="./games_review_add.html"} 
                		{/if}
-					{if isset($games_review_edit_tpl) and $games_review_edit_tpl eq "1"} 
-               		{include file="./games_review_edit.tpl"} 
+					{if isset($games_review_edit_html) and $games_review_edit_html eq "1"} 
+               		{include file="./games_review_edit.html"} 
                		{/if}
 					{if isset($games_review_preview_tpl) and $games_review_preview_tpl eq "1"} 
                		{include file="./games_review_preview.tpl"} 

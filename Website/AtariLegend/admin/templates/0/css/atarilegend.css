@@ -449,6 +449,7 @@ background-color: Menu;
     {
         display: table-cell;
         padding: 2px;
+	font-size : 12px;
     }
     .Row div:hover
     {

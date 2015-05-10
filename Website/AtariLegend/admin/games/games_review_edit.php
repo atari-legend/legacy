@@ -16,8 +16,6 @@
 
 //load all common functions
 include("../includes/common.php"); 
-include("../includes/config.php"); 
-
 
 if ($action == 'delete_comment')
 {
@@ -61,7 +59,7 @@ if ($action == 'delete_review')
 	{ 
 		$smarty->assign('game',
 	   		 	 array('game_id' => $gameid,
-					   'game_name' => $game[game_name]));
+					   'game_name' => $game['game_name']));
 	}
 
 	//Get the authors
@@ -71,8 +69,8 @@ if ($action == 'delete_review')
 	while ( $authors=mysql_fetch_array($sql_author) )
 	{
 		$smarty->append('authors',
-		   		 array('user_id' => $authors[user_id],
-					   'user_name' => $authors[userid]));
+		   		 array('user_id' => $authors['user_id'],
+					   'user_name' => $authors['userid']));
 	}
 
 	//get the reviews of the game	
@@ -88,7 +86,7 @@ if ($action == 'delete_review')
 	
 		$smarty->append('review',
 		    	 array('review_id' => $review[review_id],
-					   'user_name' => $review[userid],
+					   'user_name' => $review['userid'],
 					   'review_nr' => $i));
 	}	
 
@@ -103,19 +101,19 @@ if ($action == 'delete_review')
 		$i++;
 	
 		$v_screenshot  = $game_screenshot_path;
-		$v_screenshot .= $screenshots[screenshot_id];
+		$v_screenshot .= $screenshots['screenshot_id'];
 		$v_screenshot .= '.';
 		$v_screenshot .= 'png';
 
 		$smarty->append('screenshots',
-	    		 array('screenshot_id' => $screenshots[screenshot_id],
+	    		 array('screenshot_id' => $screenshots['screenshot_id'],
 					   'screenshot_link' => $v_screenshot));
 	}
 
 	$smarty->assign("screenshots_nr",$i);
 
-	$smarty->assign("user_id",$_SESSION[user_id]);
-	$smarty->assign('games_review_add_tpl', '1');
+	$smarty->assign("user_id",$_SESSION['user_id']);
+	$smarty->assign('games_review_add_html', '1');
 
 	//Send all smarty variables to the templates
 	$smarty->display('file:../templates/0/index.tpl');
@@ -223,7 +221,7 @@ while ($game=mysql_fetch_array($sql_game))
 { 
 	$smarty->assign('game',
 	    	 array('game_id' => $game_id,
-				   'game_name' => $game[game_name]));
+				   'game_name' => $game['game_name']));
 }
 
 //Get the authors
@@ -233,8 +231,8 @@ $sql_author = mysql_query("SELECT user_id,userid FROM users")
 while ( $authors=mysql_fetch_array($sql_author) )
 {
 	$smarty->append('authors',
-	   		 array('user_id' => $authors[user_id],
-				   'user_name' => $authors[userid]));
+	   		 array('user_id' => $authors['user_id'],
+				   'user_name' => $authors['userid']));
 }
 
 //get the reviews of the game	
@@ -243,15 +241,16 @@ $sql_review = mysql_query("SELECT * FROM review_game
 	   					   LEFT JOIN users ON (review_main.member_id = users.user_id)
 	   					   WHERE review_game.game_id='$game_id' ORDER BY review_game.review_id")
 			  or die ("Database error - selecting review");
-
+$i=1;
 while ($review=mysql_fetch_array($sql_review)) 
 {
-	$i++;
+	
 	
 	$smarty->append('review',
-	    	 array('review_id' => $review[review_id],
-				   'user_name' => $review[userid],
+	    	 array('review_id' => $review['review_id'],
+				   'user_name' => $review['userid'],
 				   'review_nr' => $i));
+$i++;
 }
 
 //get the actual edit review data
@@ -275,14 +274,14 @@ $sql_edit_REVIEW = mysql_query("SELECT
 while ($edit_review=mysql_fetch_array($sql_edit_REVIEW)) 
 {
 	$smarty->assign('edit_review',
-	    	  array('member_id' => $edit_review[member_id],
-				    'review_text' => $edit_review[review_text],
-				    'review_date' => $edit_review[review_date],
-					'review_score_id' => $edit_review[review_score_id],
-					'review_graphics' => $edit_review[review_graphics],
-					'review_sound' => $edit_review[review_sound],
-					'review_gameplay' => $edit_review[review_gameplay],
-					'review_overall' => $edit_review[review_overall]));
+	    	  array('member_id' => $edit_review['member_id'],
+				    'review_text' => $edit_review['review_text'],
+				    'review_date' => $edit_review['review_date'],
+					'review_score_id' => $edit_review['review_score_id'],
+					'review_graphics' => $edit_review['review_graphics'],
+					'review_sound' => $edit_review['review_sound'],
+					'review_gameplay' => $edit_review['review_gameplay'],
+					'review_overall' => $edit_review['review_overall']));
 }
 
 //get the screenshots
@@ -296,7 +295,7 @@ while ($screenshots=mysql_fetch_array($sql_screenshots))
 	$i++;
 	
 	$v_screenshot  = $game_screenshot_path;
-	$v_screenshot .= $screenshots[screenshot_id];
+	$v_screenshot .= $screenshots['screenshot_id'];
 	$v_screenshot .= '.';
 	$v_screenshot .= 'png';
 	
@@ -308,17 +307,17 @@ while ($screenshots=mysql_fetch_array($sql_screenshots))
 	$screencomment=mysql_fetch_array($sql_COMMENTS);
 
 	$smarty->append('screenshots',
-	    	 array('screenshot_id' => $screenshots[screenshot_id],
+	    	 array('screenshot_id' => $screenshots['screenshot_id'],
 				   'screenshot_link' => $v_screenshot,
-				   'screenshot_comment' => $screencomment[comment_text],
+				   'screenshot_comment' => $screencomment['comment_text'],
 				   'screenshot_id' => $screenshots[2]));
 }
 
 $smarty->assign("screenshots_nr",$i);
 $smarty->assign("reviewid",$reviewid);
 
-$smarty->assign("user_id",$_SESSION[user_id]);
-$smarty->assign('games_review_edit_tpl', '1');
+$smarty->assign("user_id",$_SESSION['user_id']);
+$smarty->assign('games_review_edit_html', '1');
 
 //Send all smarty variables to the templates
 $smarty->display('file:../templates/0/index.tpl');
