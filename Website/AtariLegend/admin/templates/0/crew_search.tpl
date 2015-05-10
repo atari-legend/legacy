@@ -650,6 +650,7 @@ window.onload = IEsetup;
 					</tr>
 					</table>	
 					<table cellspacing="0" cellpadding="2" border="0" width="100%" style="border: solid 1px #b2b2b2; background-color:#E9E9E9;">
+					{if isset($subcrew)}					
 					{foreach from=$subcrew item=line}
 					<tr bgcolor="{cycle name="tr" values="#EFEFEF,#E9E9E9"}">
 						<td width="75%" valign="top">
@@ -659,6 +660,7 @@ window.onload = IEsetup;
 						</td>
 					</tr>
 					{/foreach}
+					{/if}
 					</table>
 					
 					
@@ -676,21 +678,23 @@ window.onload = IEsetup;
 					
 	
 					
-					
+					{if isset($crew_individuals)}
 					{foreach name=outer item=individual from=$crew_individuals}
 					<tr bgcolor="{cycle name="tr" values="#EFEFEF,#E9E9E9"}">
 						<td width="30%" valign="top">
 							{$individual.ind_name}</td>
-						<form action="../crew/db_crew.php" method="post" name="nick_edit{$individual.id}" id="nick_edit{$individual.ind_id}">
+						<form action="../crew/db_crew.php" method="post" name="nick_edit{$individual.ind_id}" id="nick_edit{$individual.ind_id}">
 						<td width="30%" valign="top">
 						<select name="individual_nicks_id" id="individual_nicks_id" size="1">
 						<option value="-" {if $individual.individual_nicks_id <> ''} {else}SELECTED{/if}>None</option>
 
+						{if isset($nick_names)}
 						{foreach name=inner item=line from=$nick_names}
-						{if $individual.ind_id eq $line.ind_id}
+						{if (isset($individual.ind_id) and $individual.ind_id eq $line.ind_id)}
 						<option value="{$line.individual_nicks_id}" {if $individual.individual_nicks_id eq $line.individual_nicks_id}SELECTED{/if}>{$line.nick}</option>
 						{/if}
 						{/foreach}
+						{/if}
 
 						</select>
 						</td>
@@ -709,6 +713,7 @@ window.onload = IEsetup;
 						</td>
 					</tr>
 					{/foreach}
+					{/if}
 					</table>
 	
 					</td>

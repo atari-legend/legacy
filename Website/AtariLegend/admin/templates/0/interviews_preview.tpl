@@ -18,7 +18,7 @@
 <table align="center" class="HEADERBAR" width="100%" cellspacing="0" cellpadding="2" border="0">
 <tr>
 	<td style="vertical-align:top;" height="5" colspan=6 width="50%" align="left">
-		<span class="LEFTNAVHEADING">&nbsp;Written by <a href="mailto:{$interview_email}?subject=Your interview with {$line.interview_author} at Atari Legend" class="MAINNAV_WHITE">{$interview.interview_author}</a></span>		
+		<span class="LEFTNAVHEADING">&nbsp;Written by <a href="mailto:{if isset($interview.interview_email)}{$interview.interview_email}{/if}?subject=Your interview with {$interview.interview_author} at Atari Legend" class="MAINNAV_WHITE">{$interview.interview_author}</a></span>		
 	</td>
 	<td style="vertical-align:top;" height="5" colspan=6 width="50%" align="right">
 		<span class="LEFTNAVHEADING">{$interview.interview_date}</span>
@@ -30,7 +30,7 @@
 <tr>
 	<td>		
 		{if $interview.interview_img != 'none'}
-			<span style="float:right;"><img src="../includes/showimage.php?img={$interview.interview_img}&amp;w=120&amp;shadow=1&amp;bgcolour=D0D1DF;" alt="{$interview.individual_name}"></span>
+			<span style="float:right;"><img src="../includes/show_image.php?file={$interview.interview_img}" alt="{$interview.individual_name}"></span>
 		{/if}
 		{$interview.interview_chapters}
 	</td>
@@ -54,7 +54,7 @@
 <table align="center" class="HEADERBAR" width="100%" cellspacing="0" cellpadding="2" border="0">
 <tr>
 	<td style="vertical-align:top;" height="5" colspan=6 width="50%" align="left">
-		<span class="LEFTNAVHEADING">&nbsp;Written by <a href="mailto:{$interview_email}?subject=Your interview with {$line.interview_author} at Atari Legend" class="MAINNAV_WHITE">{$interview.interview_author}</a></span>		
+		<span class="LEFTNAVHEADING">&nbsp;Written by <a href="mailto:{$interview.interview_email}?subject=Your interview with {$interview.interview_author} at Atari Legend" class="MAINNAV_WHITE">{$interview.interview_author}</a></span>		
 	</td>
 	<td style="vertical-align:top;" height="5" colspan=6 width="50%" align="right">
 		<span class="LEFTNAVHEADING">{$interview.interview_date}</span>
@@ -78,7 +78,7 @@
 				<table width="100%">
 				<tr>
    					 <td align="center">
-					 	<img src="../includes/showimage.php?img={$line.screenshot}&amp;w=120&amp;shadow=0&amp;bgcolour=a2a2a2" border="1">
+					 	<img src="../includes/show_image.php?file={$line.screenshot}&amp;w=120&amp;shadow=0&amp;bgcolour=a2a2a2" border="1">
 					</td>
 				</tr>
 				<tr>

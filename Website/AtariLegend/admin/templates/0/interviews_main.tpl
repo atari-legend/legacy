@@ -91,6 +91,7 @@ function deleteinterview(interview_id)
 	</table>
 	</td>
 </tr>
+{if isset($interview)}
 {foreach from=$interview item=line}
 <tr>
 	<td align="center">
@@ -133,6 +134,7 @@ function deleteinterview(interview_id)
 	</td>
 </tr>
 {/foreach}
+{/if}
 </table>
 
 <table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
@@ -150,7 +152,7 @@ function deleteinterview(interview_id)
 </tr>
 </table>
 
-{if $message <> ''}
+{if isset($message) and $message <> ''}
 	<table align="center" width="100%" cellspacing="0" cellpadding="0" border="0">
 	<tr>
 		<td align="center" >

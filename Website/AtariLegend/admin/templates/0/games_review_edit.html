@@ -28,7 +28,22 @@ function deletereview(reviewid, gameid)
     var return_value = confirm(message);
 	if (return_value !="0")
     {
-      	url="games_review_edit.php?reviewid="+reviewid+"&gameid="+gameid+"&action=delete_review";
+      	url="db_games_review_edit.php?reviewid="+reviewid+"&game_id="+gameid+"&action=delete_review";
+		location.href=url;
+    }
+}
+
+function move_to_comment(reviewid, gameid)
+{	
+	// CONFIRM REQUIRES ONE ARGUMENT
+    var message = "Are you sure you want to move this review to the comments section? Some content will be deleted in the moving process.";
+    // CONFIRM IS BOOLEAN. THAT MEANS THAT
+    // IT RETURNS TRUE IF 'OK' IS CLICKED
+    // OTHERWISE IT RETURN FALSE
+    var return_value = confirm(message);
+	if (return_value !="0")
+    {
+      	url="db_games_review_edit.php?reviewid="+reviewid+"&game_id="+gameid+"&action=move_to_comment";
 		location.href=url;
     }
 }
@@ -43,14 +58,14 @@ function deletecomment(game_id,reviewid,screenshot_id)
      var return_value = confirm(message);
 	 if (return_value !="0")
      {
-      	url="games_review_edit.php?game_id="+game_id+"&reviewid="+reviewid+"&screenshot_id="+screenshot_id+"&action=delete_comment";
+      	url="db_games_review_edit.php?game_id="+game_id+"&reviewid="+reviewid+"&screenshot_id="+screenshot_id+"&action=delete_comment";
 		location.href=url;
      }
 }
 </script>
 {/literal}
 
-<form action="../games/games_review_edit.php" method="post" name="post">
+<form action="../games/db_games_review_edit.php" method="post" name="post">
 <table align="center" class="HEADERBAR" width="100%" cellspacing="0" cellpadding="2" border="0">
 <tr>
 	<td style="vertical-align:top;" height="5" colspan=6>
@@ -211,7 +226,7 @@ function deletecomment(game_id,reviewid,screenshot_id)
 		<legend class="links_legend">Screenshots</legend>
 		{if $screenshots_nr <> 0}
 			{foreach from=$screenshots item=line} 
-				<img src="../includes/showimage.php?img={$line.screenshot_link}&amp;w=60&amp;shadow=1&amp;bgcolour=ffffff" align="center">
+				<img src="../includes/show_image.php?file={$line.screenshot_link}&amp;resize=120,null,null,null&amp;shadow=1&amp;bgcolour=ffffff" align="center">
 				<input class="review_input" type="text" name="inputfield[]" value="{$line.screenshot_comment}">
 				<br>
 				<a href="javascript:deletecomment({$game.game_id},{$reviewid},{$line.screenshot_id})" class="MAINNAV">
@@ -238,6 +253,7 @@ function deletecomment(game_id,reviewid,screenshot_id)
 			<input type="hidden" name="reviewid" value="{$reviewid}">
 			<input type="submit" name="Create Review" value="Edit Review">
 			<input type="button" name="delete" value="Delete review" onclick="deletereview({$reviewid},{$game.game_id})">
+			<input type="button" name="delete" value="Move to Comments" onclick="move_to_comment({$reviewid},{$game.game_id})">
 		</td>
 	</tr>
 	</table>	
