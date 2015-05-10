@@ -50,12 +50,6 @@ function deletecomment(game_id,reviewid,screenshot_id)
 </script>
 {/literal}
 
-{* load the button javascripts *}
-{include file="../templates/0/js/game_comment.js"}
-
-{* popup_init must be called once at the top of the page *}
-{popup_init src="../templates/0/js/overlib.js"}
-
 <form action="../games/games_review_edit.php" method="post" name="post">
 <table align="center" class="HEADERBAR" width="100%" cellspacing="0" cellpadding="2" border="0">
 <tr>
@@ -230,7 +224,7 @@ function deletecomment(game_id,reviewid,screenshot_id)
 			There are currently no screenshots attached to this game. Go to the<a href="../games/games_detail.php?game_id={$game.game_id}" class="MAINNAV"> screenshot adding</a>
 			page to link specific screenshots to this game. 
 		{/if}
-		</fieldset> 
+		</fieldset> 																																																																																																																																																																										
 		</td>
 	</tr>
 	</table>	
@@ -268,7 +262,7 @@ function deletecomment(game_id,reviewid,screenshot_id)
 </table>
 <br>
 
-{if $message <> ''}
+{if isset($message) and $message <> ''}
 	<table align="center" width="100%" cellspacing="0" cellpadding="0" border="0">
 	<tr>
 		<td align="center" >

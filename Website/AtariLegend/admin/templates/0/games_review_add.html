@@ -16,12 +16,6 @@
 //**************************************************************************************** 
 *}
 
-{* load the button javascripts *}
-{include file="../templates/0/js/game_comment.js"}
-
-{* popup_init must be called once at the top of the page *}
-{popup_init src="../templates/0/js/overlib.js"}
-
 <form action="../games/games_review_add.php" method="post" name="post">
 <table align="center" class="HEADERBAR" width="100%" cellspacing="0" cellpadding="2" border="0">
 <tr>
@@ -224,7 +218,7 @@
 </table>
 <br>
 
-{if $message <> ''}
+{if isset($message) and $message <> ''}
 	<table align="center" width="100%" cellspacing="0" cellpadding="0" border="0">
 	<tr>
 		<td align="center" >
