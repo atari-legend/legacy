@@ -103,7 +103,7 @@ function crewinsert()
 					<option value="y">Y</option>
 					<option value="z">Z</option>
 				</select>
-				<input type="text" name="crewsearch" value="{if $new_crew <> ''}{$new_crew}{/if}">
+				<input type="text" name="crewsearch" value="{if (isset($new_crew) and $new_crew <> '')}{$new_crew}{/if}">
 			</td>
 		</tr>
 			
@@ -122,7 +122,7 @@ function crewinsert()
 <tr>
 	<td align="center">
 	
-	<span class="MAINNAV" style="text-align:center;">{if $new_crew <> ''}{$new_crew} added to the database!{/if}<br></span><br>
+	<span class="MAINNAV" style="text-align:center;">{if (isset($new_crew) and $new_crew <> '')}{$new_crew} added to the database!{/if}<br></span><br>
 		<form method="post" name="insertcrew">
 		<fieldset class="interview_set">
 		<legend class="links_legend">Add Crew</legend>
@@ -141,7 +141,7 @@ function crewinsert()
 </tr>
 </table>
 
-{if $message <> ''}
+{if (isset($message) and $message <> '')}
 	<table align="center" width="100%" cellspacing="0" cellpadding="0" border="0">
 	<tr>
 		<td align="center" >

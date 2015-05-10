@@ -45,14 +45,49 @@ The main game page
 		<table cellspacing="0" cellpadding="2" border="0" width="90%" style="border: solid 1px #b2b2b2; background-color:#E9E9E9;">
 		{foreach from=$demo_search item=line}
 		<tr bgcolor="{cycle name="tr" values="#EFEFEF,#E9E9E9"}">
-			<td width="25%" valign="top">{if $line.demo_name != ''}<a href="demos_detail.php?demo_id={$line.demo_id}" class="MAINNAV">{$line.demo_name}</a>{else}<i>n/a</i>{/if}</td>
-			<td width="25%" valign="top">{if $line.crew_name != ''}<a href="demos_main.php?crew={$line.crew_id}&amp;action=search" class="MAINNAV">{$line.crew_name}</a>{else}<i>n/a</i>{/if}</td>
-			<td width="10%" valign="top">{if $line.year != ''}<a href="demos_main.php?year={$line.year}&amp;action=search" class="MAINNAV">{$line.year}</a>{else}<i>n/a</i>{/if}</td>
+			<td width="25%" valign="top">
+				{if (isset($line.demo_name) and $line.demo_name != '')}
+					<a href="demos_detail.php?demo_id={$line.demo_id}" class="MAINNAV">
+						{$line.demo_name}
+					</a>
+				{else}
+					<i>n/a</i>
+				{/if}
+			</td>
+			<td width="25%" valign="top">
+				{if (isset($line.crew_name) and $line.crew_name != '')}
+					<a href="demos_main.php?crew={$line.crew_id}&amp;action=search" class="MAINNAV">
+						{$line.crew_name}
+					</a>
+				{else}
+					<i>n/a</i>
+				{/if}
+			</td>
+			<td width="10%" valign="top">
+				{if (isset($line.year) and $line.year != '')}
+					<a href="demos_main.php?year={$line.year}&amp;action=search" class="MAINNAV">
+						{$line.year}
+					</a>
+				{else}
+					<i>n/a</i>
+				{/if}
+			</td>
 			<td width="15%" valign="top">
-				{if $line.screenshot != ''}<img src="../templates/0/icons/screen.gif" alt="Screenshots available" hspace="0" vspace="0" border="0" title="Screenshot Available">{/if}
-				{if $line.music != ''}<img src="../templates/0/icons/sound.gif" alt="Music available" hspace="0" vspace="0" border="0" title="Music Available">{/if}
-				{if $line.download != ''}<img src="../templates/0/icons/disk.gif" alt="Download available" hspace="0" vspace="0" border="0" title="Download Available">{/if}
-				{if $line.ste_enhan != '' or $line.ste_only >='1'}<img src="../templates/0/icons/ste.png" alt="STE Game" hspace="0" vspace="0" border="0" title="STE Game">{/if}
+				{if (isset($line.screenshot) and $line.screenshot != '')}
+					<img src="../templates/0/icons/screen.gif" alt="Screenshots available" hspace="0" vspace="0" border="0" title="Screenshot Available">
+				{/if}
+				{if (isset($line.music) and $line.music != '')}
+					<img src="../templates/0/icons/sound.gif" alt="Music available" hspace="0" vspace="0" border="0" title="Music Available">
+				{/if}
+				{if (isset($line.download) and $line.download != '')}
+					<img src="../templates/0/icons/disk.gif" alt="Download available" hspace="0" vspace="0" border="0" title="Download Available">
+				{/if}
+				{if (isset($line.ste_enhan) and $line.ste_enhan != '')}
+					<img src="../templates/0/icons/ste.png" alt="STE Game" hspace="0" vspace="0" border="0" title="STE Game">
+				{/if}
+				{if (isset($line.ste_only) and $line.ste_only >='1')}
+					<img src="../templates/0/icons/ste.png" alt="STE Game" hspace="0" vspace="0" border="0" title="STE Game">
+				{/if}
 			</td>
 		</tr>
 		{/foreach}
@@ -82,7 +117,7 @@ The main game page
 	</tr>
 </table>
 <br>
-{if $message <> ''}
+{if (isset($message) and $message <> '')}
 	<table align="center" width="100%" cellspacing="0" cellpadding="0" border="0">
 	<tr>
 		<td align="center" >

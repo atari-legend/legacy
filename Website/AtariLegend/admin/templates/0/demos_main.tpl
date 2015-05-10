@@ -151,7 +151,7 @@ function demoinsert()
 </tr>
 </table>
 
-{if $message <> ''}
+{if (isset($message) and $message <> '')}
 	<table align="center" width="100%" cellspacing="0" cellpadding="0" border="0">
 	<tr>
 		<td align="center" >

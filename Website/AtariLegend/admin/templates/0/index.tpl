@@ -152,7 +152,7 @@
 					{if isset($link_addnew_tpl) and $link_addnew_tpl eq "1"}
 					{include file="./link_addnew.tpl"}
 					{/if}
-					{if isset($link_modlist_tpl) and $link_addnew_tpl eq "1"}
+					{if isset($link_modlist_tpl) and $link_modlist_tpl eq "1"}
 					{include file="./link_modlist.tpl"}
 					{/if}
 					{if isset($link_mod_tpl) and $link_mod_tpl eq "1"}
