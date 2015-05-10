@@ -91,10 +91,15 @@ while ($query_comment = mysql_fetch_array($sql_comment))
 	$usersubmit_number = mysql_result($query_submitinfo,0,0);
 	
 	//Get the dataElements we want to place on screen
+	if (isset($sql_game['imgext'])) {
 	$v_game_image  = $game_screenshot_path;
 	$v_game_image .= $sql_game['screenshot_id'];
 	$v_game_image .= '.';
 	$v_game_image .= $sql_game['imgext'];
+	}
+	else {
+	$v_game_image = '';
+	}
 	
 	$oldcomment = $query_comment['comment'];
 

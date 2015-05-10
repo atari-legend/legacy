@@ -110,17 +110,17 @@ function submovetocomment(JSsubID)
 				<tr bgcolor="#EFEFEF">
 					<td class="main_text" width="150" valign="top" style="line-height: 13px; border-right: solid 1px #b2b2b2;">
 					<br>
-					{if $line.avatar_ext !=''}
+					{if isset($line.avatar_image) and $line.avatar_image != ''}
 					<table>
 					<tr>
 					<td align="center">
-		 <img src="../includes/show_image.php?file={$line.avatar_image}&resize=80,null,null,null&crop=null,null,null,null" width={$line.avatar_width} alt="Avatar">				
+		 <img src="../includes/show_image.php?file={$line.avatar_image}&resize=80,null,null,null&crop=null,null,null,null" alt="Avatar">				
 					</td>
 					</tr>
 					</table>
 					<br>{/if}
 					Joined: {$line.user_joindate}<br>
-					{if $line.user_comment_nr eq 0} {else}<a href="../games/games_comment.php?c_counter={$links.v_counter}&users_id={$line.user_id}&view=users_comments" class="MAINNAV">{/if}Game Comments: {$line.user_comment_nr}{if $line.user_comment_nr eq 0} {else}</a>{/if}<br>
+					{if $line.user_comment_nr eq 0} {else}<a href="../games/games_comment.php?c_counter={$structure.v_counter}&users_id={$line.user_id}&view=users_comments" class="MAINNAV">{/if}Game Comments: {$line.user_comment_nr}{if $line.user_comment_nr eq 0} {else}</a>{/if}<br>
 					Game Submissions: {$line.usersubmit_number}<br>
 					Karma: {$line.karma}
 					
@@ -128,8 +128,13 @@ function submovetocomment(JSsubID)
 					<td class="main_text" valign="top" style="line-height: 13px;">
 						<br>
 						<br>
-						{if isset($line.image)}<span style="float:right;"><a href="../games/games_detail.php?game_id={$line.game_id}">
-					<img src="../includes/show_image.php?file={$line.image}&resize=240,null,null,null&crop=null,null,null,null" alt="{$line.game_name}" border="0"></a></span>{/if}
+						{if isset($line.image) and $line.image != ''}
+							<span style="float:right;">
+								<a href="../games/games_detail.php?game_id={$line.game_id}">
+			<img src="../includes/show_image.php?file={$line.image}&resize=240,null,null,null&crop=null,null,null,null" alt="{$line.game_name}" border="0">
+								</a>
+							</span>
+						{/if}
 						{$line.comment}
 						<br>
 						<br>
