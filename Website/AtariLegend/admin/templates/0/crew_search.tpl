@@ -67,11 +67,11 @@ function CrewDelete(crew_select)
 </script>
 
 {* load the button javascripts *}
-{if $crew_action.action eq 'main'}
-{include file="../templates/0/js/game_comment.js"}
+{if (isset($crew_action.action) and $crew_action.action eq 'main')}
+{include file="../0/js/game_comment.js"}
 {/if}
 
-{if $crew_action.action eq 'genealogy'}
+{if (isset($crew_action.action) and $crew_action.action eq 'genealogy')}
 
 
 
@@ -278,7 +278,7 @@ window.onload = IEsetup;
 					<option value="y"{if $tracking.crewbrowse eq 'y'} SELECTED{/if}>Y</option>
 					<option value="z"{if $tracking.crewbrowse eq 'z'} SELECTED{/if}>Z</option>
 				</select>
-				<input type="text" name="crewsearch" value="{if $new_crew <> ''}{$new_crew}{/if}" style="width:70px;">
+				<input type="text" name="crewsearch" value="{if (isset($new_crew) and $new_crew <> '')}{$new_crew}{/if}" style="width:70px;">
 			</td>
 			<td>
 			<input type="submit" value="Search">
@@ -298,7 +298,7 @@ window.onload = IEsetup;
 	
 	</td>
 	<td align="center" width="50%">
-	{if $new_crew <> ''}<span class="MAINNAV" style="text-align:center;">{$new_crew} added to the database!<br></span>{/if}
+	{if (isset($new_crew) and $new_crew <> '')}<span class="MAINNAV" style="text-align:center;">{$new_crew} added to the database!<br></span>{/if}
 		<form method="post" name="insertcrew">
 		<fieldset class="interview_set">
 		<legend class="links_legend">Add Crew</legend>
@@ -326,10 +326,10 @@ window.onload = IEsetup;
 	{* SEARCH RESULTS - UNDERLINE IF SELECTED *}
 	{foreach from=$crew item=line}
 			
-			{if $line.crew_id eq $crew_select.crew_id}
-			<a href="../crew/crew_search.php?crew_select={$line.crew_id}&crewsearch={$tracking.crewsearch}&crewbrowse={$tracking.crewbrowse}" class="LEFTNAV" style="text-decoration:underline;">{$line.crew_name}</a><br>
+			{if (isset($crew_select.crew_id) and $crew_select.crew_id eq $line.crew_id)}
+			<a href="../crew/crew_search.php?crew_select={if isset($line.crew_id)}{$line.crew_id}{/if}&crewsearch={$tracking.crewsearch}&crewbrowse={$tracking.crewbrowse}" class="LEFTNAV" style="text-decoration:underline;">{$line.crew_name}</a><br>
 			{else}
-			<a href="../crew/crew_search.php?crew_select={$line.crew_id}&crewsearch={$tracking.crewsearch}&crewbrowse={$tracking.crewbrowse}" class="LEFTNAV">{$line.crew_name}</a><br>
+			<a href="../crew/crew_search.php?crew_select={if isset($line.crew_id)}{$line.crew_id}{/if}&crewsearch={$tracking.crewsearch}&crewbrowse={$tracking.crewbrowse}" class="LEFTNAV">{$line.crew_name}</a><br>
 			{/if}
 	{/foreach}	
 	
@@ -344,7 +344,7 @@ window.onload = IEsetup;
 	
 	{* Start crew editing table	*}
 	
-	{if $crew_select.crew_id <> ''}
+	{if (isset($crew_select.crew_id) and $crew_select.crew_id <> '')}
 	<table width="100%" cellspacing="2" cellpadding="0" border="0" style="margin-left: auto; margin-right: auto;">
 		<tr>
 			<td style="width:25%;" align="center">
@@ -352,7 +352,7 @@ window.onload = IEsetup;
 		
 					<input type="submit" value="Main edit">
 					<input type="hidden" name="action" id="action1" value="main">
-					<input type="hidden" name="crew_select" id="crew_select1" value="{$crew_select.crew_id}">
+					<input type="hidden" name="crew_select" id="crew_select1" value="{if isset($crew_select.crew_id)}{$crew_select.crew_id}{/if}">
 					<input type="hidden" name="crewsearch" id="crewsearch1" value="{$tracking.crewsearch}">
 					<input type="hidden" name="crewbrowse" id="crewbrowse1" value="{$tracking.crewbrowse}">
 				</form>	
@@ -362,7 +362,7 @@ window.onload = IEsetup;
 		
 					<input type="submit" value="Genealogy">
 					<input type="hidden" name="action" id="action2" value="genealogy">
-					<input type="hidden" name="crew_select" id="crew_select2" value="{$crew_select.crew_id}">
+					<input type="hidden" name="crew_select" id="crew_select2" value="{if isset($crew_select.crew_id)}{$crew_select.crew_id}{/if}">
 					<input type="hidden" name="crewsearch" id="crewsearch2" value="{$tracking.crewsearch}">
 					<input type="hidden" name="crewbrowse" id="crewbrowse2" value="{$tracking.crewbrowse}">
 				</form>
@@ -372,7 +372,7 @@ window.onload = IEsetup;
 		
 					<input type="submit" value="Statistics">
 					<input type="hidden" name="action" id="action3" value="statistics">
-					<input type="hidden" name="crew_select" id="crew_select3" value="{$crew_select.crew_id}">
+					<input type="hidden" name="crew_select" id="crew_select3" value="{if isset($crew_select.crew_id)}{$crew_select.crew_id}{/if}">
 					<input type="hidden" name="crewsearch" id="crewsearch3" value="{$tracking.crewsearch}">
 					<input type="hidden" name="crewbrowse" id="crewbrowse3" value="{$tracking.crewbrowse}">
 				</form>
@@ -382,7 +382,7 @@ window.onload = IEsetup;
 		
 					<input type="submit" value="Comments/Submissions">
 					<input type="hidden" name="action" id="action4" value="comments">
-					<input type="hidden" name="crew_select" id="crew_select4" value="{$crew_select.crew_id}">
+					<input type="hidden" name="crew_select" id="crew_select4" value="{if isset($crew_select.crew_id)}{$crew_select.crew_id}{/if}">
 					<input type="hidden" name="crewsearch" id="crewsearch4" value="{$tracking.crewsearch}">
 					<input type="hidden" name="crewbrowse" id="crewbrowse4" value="{$tracking.crewbrowse}">
 				</form>
@@ -390,7 +390,7 @@ window.onload = IEsetup;
 		</tr>
 		<tr>
 			<td colspan="4">
-			{if $crew_action.action eq 'main'}
+			{if (isset($crew_action.action) and $crew_action.action eq 'main')}
 			{* START THE CREW MAIN EDIT *}
 			
 			<table width="100%" cellspacing="2" cellpadding="15" align="center">
@@ -409,7 +409,7 @@ window.onload = IEsetup;
 			<td width="100%" colspan="2">
 				<b>Name :</b>
 				<br>
-				<input type="text" name="crew_name" value="{$crew_select.crew_name}">
+				<input type="text" name="crew_name" value="{if isset($crew_select.crew_name)}{$crew_select.crew_name}{/if}">
 			</td>
 		</tr>
 		<tr>
@@ -462,9 +462,9 @@ window.onload = IEsetup;
 			<td width="50%">
 				<br>
 				<input type="submit" value="Update">
-				<input type="button" value="Delete Crew" onClick="CrewDelete({$crew_select.crew_id}); return false;">	
+				<input type="button" value="Delete Crew" onClick="CrewDelete({if isset($crew_select.crew_id)}{$crew_select.crew_id}{/if}); return false;">	
 				<input type="hidden" name="action" value="update_main_info">
-				<input type="hidden" name="crew_select" id="crew_select5" value="{$crew_select.crew_id}">
+				<input type="hidden" name="crew_select" id="crew_select5" value="{if isset($crew_select.crew_id)}{$crew_select.crew_id}{/if}">
 				<input type="hidden" name="crewsearch" id="crewsearch5" value="{$tracking.crewsearch}">
 				<input type="hidden" name="crewbrowse" id="crewbrowse5" value="{$tracking.crewbrowse}">
 			</td>
@@ -479,19 +479,19 @@ window.onload = IEsetup;
 				<br>
 				<br>
 				<br>
-				{if $crew_select.crew_logo <> ''}
+				{if (isset($crew_select.crew_logo) and $crew_select.crew_logo <> '')}
 					<fieldset class="links_set">
 					<legend class="links_legend">Crew Logo</legend>
-						<img src="../includes/showscreens.php?crew_id={$crew_select.crew_id}" border="0">
+						<img src="../includes/showscreens.php?crew_id={if isset($crew_select.crew_id)}{$crew_select.crew_id}{/if}" border="0">
 						
 						<form action="../crew/db_crew.php" method="post" name="crew_pic_delete" id="crew_pic_delete">
 						<input type="submit" name="inserter" value="Delete" onClick="deletelogo(); return false;">
 						<input type="hidden" name="action" value="delete_logo">
-						<input type="hidden" name="crew_select" id="crew_select6" value="{$crew_select.crew_id}">
+						<input type="hidden" name="crew_select" id="crew_select6" value="{if isset($crew_select.crew_id)}{$crew_select.crew_id}{/if}">
 						<input type="hidden" name="crewsearch" id="crewsearch6" value="{$tracking.crewsearch}">
 						<input type="hidden" name="crewbrowse" id="crewbrowse6" value="{$tracking.crewbrowse}">
 						</form>
-						{*<a href="javascript:crew_pic_delete({$crew_select.crew_id});" class="MAINNAV">delete logo</a>*}
+						{*<a href="javascript:crew_pic_delete({if isset($crew_select.crew_id)}{$crew_select.crew_id}{/if});" class="MAINNAV">delete logo</a>*}
 					</fieldset>
 				{else}
 					<form action="../crew/db_crew.php" method="post" enctype="multipart/form-data" name="crew_pic" id="crew_pic">
@@ -503,7 +503,7 @@ window.onload = IEsetup;
 						<input type="submit" name="inserter" value="Upload">
 					</fieldset>
 					<input type="hidden" name="action" value="add_logo">
-					<input type="hidden" name="crew_select" id="crew_select7" value="{$crew_select.crew_id}">
+					<input type="hidden" name="crew_select" id="crew_select7" value="{if isset($crew_select.crew_id)}{$crew_select.crew_id}{/if}">
 					<input type="hidden" name="crewsearch" id="crewsearch7" value="{$tracking.crewsearch}">
 					<input type="hidden" name="crewbrowse" id="crewbrowse7" value="{$tracking.crewbrowse}">
 					</form>
@@ -521,7 +521,7 @@ window.onload = IEsetup;
 			{/if}
 			
 			
-			{if $crew_action.action eq 'genealogy'}
+			{if (isset($crew_action.action) and $crew_action.action eq 'genealogy')}
 			{* START THE CREW GENEALOGY EDIT *}
 			
 			
@@ -554,8 +554,8 @@ window.onload = IEsetup;
 			</select>
 			<br>
 			<input type="hidden" name="action" value="parent_crew">
-			<input type="hidden" name="parent_id" value="{$crew_select.crew_id}">
-			<input type="hidden" name="crew_select" id="crew_select8" value="{$crew_select.crew_id}">
+			<input type="hidden" name="parent_id" value="{if isset($crew_select.crew_id)}{$crew_select.crew_id}{/if}">
+			<input type="hidden" name="crew_select" id="crew_select8" value="{if isset($crew_select.crew_id)}{$crew_select.crew_id}{/if}">
 			<input type="hidden" name="crewsearch" id="crewsearch8" value="{$tracking.crewsearch}">
 			<input type="hidden" name="crewbrowse" id="crewbrowse8" value="{$tracking.crewbrowse}">
 			<input type="submit" value="Add Subcrew">
@@ -614,18 +614,18 @@ window.onload = IEsetup;
 
         {foreach from=$ind_gene item=line}
 				<option value="{$line.ind_id}">{$line.ind_name}</option>
-					{/foreach}	
+	{/foreach}	
 
 
 
         </SELECT><br>
 			<input type="hidden" name="action" value="stop">
-			<input type="hidden" name="parent_id" value="{$crew_select.crew_id}">
-			<input type="hidden" name="crew_select" id="crew_select8" value="{$crew_select.crew_id}">
+			<input type="hidden" name="parent_id" value="{if isset($crew_select.crew_id)}{$crew_select.crew_id}{/if}">
+			<input type="hidden" name="crew_select" id="crew_select8" value="{if isset($crew_select.crew_id)}{$crew_select.crew_id}{/if}">
 			<input type="hidden" name="crewsearch" id="crewsearch8" value="{$tracking.crewsearch}">
 			<input type="hidden" name="crewbrowse" id="crewbrowse8" value="{$tracking.crewbrowse}">
         <INPUT onclick=jmp(this.form,0); type=submit value="Add Crewmember">
-<INPUT name=baseurl type=hidden value=../crew/db_crew.php?action=stop&crew_select={$crew_select.crew_id}&crewsearch={$tracking.crewsearch}&crewbrowse={$tracking.crewbrowse}&ind_id=>
+<INPUT name=baseurl type=hidden value=../crew/db_crew.php?action=stop&crew_select={if isset($crew_select.crew_id)}{$crew_select.crew_id}{/if}&crewsearch={$tracking.crewsearch}&crewbrowse={$tracking.crewbrowse}&ind_id=>
 </FORM>
 					
 					</td>
@@ -655,7 +655,7 @@ window.onload = IEsetup;
 						<td width="75%" valign="top">
 							{$line.crew_name}</td>
 						<td width="25%" valign="top">
-						<a href="../crew/db_crew.php?action=delete_subcrew&crew_select={$crew_select.crew_id}&crewsearch={$tracking.crewsearch}&crewbrowse={$tracking.crewbrowse}&sub_crew_id={$line.sub_crew_id}" class="MAINNAV">Delete</a>
+						<a href="../crew/db_crew.php?action=delete_subcrew&crew_select={if isset($crew_select.crew_id)}{$crew_select.crew_id}{/if}&crewsearch={$tracking.crewsearch}&crewbrowse={$tracking.crewbrowse}&sub_crew_id={$line.sub_crew_id}" class="MAINNAV">Delete</a>
 						</td>
 					</tr>
 					{/foreach}
@@ -680,8 +680,8 @@ window.onload = IEsetup;
 					{foreach name=outer item=individual from=$crew_individuals}
 					<tr bgcolor="{cycle name="tr" values="#EFEFEF,#E9E9E9"}">
 						<td width="30%" valign="top">
-							{ $individual.ind_name }</td>
-						<form action="../crew/db_crew.php" method="post" name="nick_edit{ $individual.id }" id="nick_edit{ $individual.ind_id }">
+							{$individual.ind_name}</td>
+						<form action="../crew/db_crew.php" method="post" name="nick_edit{$individual.id}" id="nick_edit{$individual.ind_id}">
 						<td width="30%" valign="top">
 						<select name="individual_nicks_id" id="individual_nicks_id" size="1">
 						<option value="-" {if $individual.individual_nicks_id <> ''} {else}SELECTED{/if}>None</option>
@@ -690,22 +690,22 @@ window.onload = IEsetup;
 						{if $individual.ind_id eq $line.ind_id}
 						<option value="{$line.individual_nicks_id}" {if $individual.individual_nicks_id eq $line.individual_nicks_id}SELECTED{/if}>{$line.nick}</option>
 						{/if}
-						{ /foreach }
+						{/foreach}
 
 						</select>
 						</td>
 						<td width="30%" valign="top">
 						<input type="hidden" name="action" value="update_nick">
 						<input type="hidden" name="crew_individual_id" value="{$individual.crew_individual_id}">
-						<input type="hidden" name="parent_id" value="{$crew_select.crew_id}">
-						<input type="hidden" name="crew_select" id="crew_select8" value="{$crew_select.crew_id}">
+						<input type="hidden" name="parent_id" value="{if isset($crew_select.crew_id)}{$crew_select.crew_id}{/if}">
+						<input type="hidden" name="crew_select" id="crew_select8" value="{if isset($crew_select.crew_id)}{$crew_select.crew_id}{/if}">
 						<input type="hidden" name="crewsearch" id="crewsearch8" value="{$tracking.crewsearch}">
 						<input type="hidden" name="crewbrowse" id="crewbrowse8" value="{$tracking.crewbrowse}">		
 						<input type="submit" name="inserter" value="Update">
 						</td>
 						</form>
 						<td width="10%" valign="top">
-							<a href="../crew/db_crew.php?action=delete_crew_member&crew_select={$crew_select.crew_id}&crewsearch={$tracking.crewsearch}&crewbrowse={$tracking.crewbrowse}&crew_individual_id={ $individual.crew_individual_id }" class="MAINNAV">Delete</a>
+							<a href="../crew/db_crew.php?action=delete_crew_member&crew_select={if isset($crew_select.crew_id)}{$crew_select.crew_id}{/if}&crewsearch={$tracking.crewsearch}&crewbrowse={$tracking.crewbrowse}&crew_individual_id={$individual.crew_individual_id}" class="MAINNAV">Delete</a>
 						</td>
 					</tr>
 					{/foreach}
@@ -783,7 +783,7 @@ window.onload = IEsetup;
 </tr>
 </table>
 
-{if $message <> ''}
+{if (isset($message) and $message <> '')}
 	<table align="center" width="100%" cellspacing="0" cellpadding="0" border="0">
 	<tr>
 		<td align="center" >
