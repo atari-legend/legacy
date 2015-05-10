@@ -451,7 +451,11 @@ querystring for faster output
 				$smarty->assign('games_list_html', '1');
 
 				//Send all smarty variables to the templates
-				$smarty->display('file:../templates/0/index.tpl');
+				$smarty->display('extends:../templates/1/main.html|../templates/1/games_list.html');
+
+
+
+				//$smarty->display('file:../templates/1/games_list.html');
 			}
 			else
 			{
