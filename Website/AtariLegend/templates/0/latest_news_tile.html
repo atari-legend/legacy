@@ -23,7 +23,7 @@
 	{foreach from=$news item=line}
 		
 		<div class="standard_tile_line"></div>
-		<div class="standard_list_entry" {if $number is even}style="background-color:black;"{/if}>
+		<div class="standard_list_entry" {if $number is odd}style="background-color:black;"{/if}>
 			<div class="standard_list_entry_left">
 				<a href="#">
 				<img src="../includes/show_image.php?file={$line.image}&resize=164,null,null,null&crop=left,top,164,120" alt="latest_news">
