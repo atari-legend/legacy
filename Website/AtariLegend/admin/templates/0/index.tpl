@@ -1,12 +1,12 @@
 {* 
 /***************************************************************************
-*                                index.tpl
+*                                index.html
 *                            --------------------------
 *   begin                : 2005-01-06
 *   copyright            : (C) 2005 Atari Legend
 *   email                : admin@atarilegend.com
 *
-*   Id: index.tpl,v 0.10 2005/01/06 Silver
+*   Id: index.html,v 0.10 2005/01/06 Silver
 *
 ***************************************************************************/
 
@@ -143,220 +143,220 @@
 			<tr>
     			<td width="16%" valign="top">
 
-				{include file='./leftnav.tpl'}
+				{include file='./leftnav.html'}
 				</td>
 				<!--Begin of Middle Comlumn-->
 				<!--The middle column is called with a var-->	
     			<td width="84%" valign="top">
 					{if isset($updates_tpl) and $updates_tpl eq "1"}
-					{include file="./updates.tpl"}
+					{include file="./updates.html"}
 					{/if}
 					{if isset($statistics_tpl) and $statistics_tpl eq "1"}
-					{include file="./statistics.tpl"}
+					{include file="./statistics.html"}
 					{/if}
 					{if isset($link_addnew_tpl) and $link_addnew_tpl eq "1"}
-					{include file="./link_addnew.tpl"}
+					{include file="./link_addnew.html"}
 					{/if}
 					{if isset($link_modlist_tpl) and $link_modlist_tpl eq "1"}
-					{include file="./link_modlist.tpl"}
+					{include file="./link_modlist.html"}
 					{/if}
 					{if isset($link_mod_tpl) and $link_mod_tpl eq "1"}
-					{include file="./link_mod.tpl"}
+					{include file="./link_mod.html"}
 					{/if}
 					{if isset($link_validate_tpl) and $link_validate_tpl eq "1"}
-					{include file="./link_validate.tpl"}
+					{include file="./link_validate.html"}
 					{/if}
 					{if isset($link_cat_tpl) and $link_cat_tpl eq "1"}
-					{include file="./link_cat.tpl"}
+					{include file="./link_cat.html"}
 					{/if}
 					{if isset($link_cat_mod_tpl) and $link_cat_mod_tpl eq "1"}
-					{include file="./link_cat_mod.tpl"}
+					{include file="./link_cat_mod.html"}
 					{/if}
 					{if isset($link_cat_del_tpl) and $link_cat_del_tpl eq "1"}
-					{include file="./link_cat_del.tpl"}
+					{include file="./link_cat_del.html"}
 					{/if}
 					{if isset($error_message_tpl) and $error_message_tpl eq "1"}
-					{include file="./error_message.tpl"}
+					{include file="./error_message.html"}
 					{/if}
 					{if isset($news_add_tpl) and $news_add_tpl eq "1"}
-					{include file="./news_add.tpl"}
+					{include file="./news_add.html"}
 					{/if}
 					{if isset($news_iconpreview_tpl) and $news_iconpreview_tpl eq "1"}
-					{include file="./news_iconpreview.tpl"}
+					{include file="./news_iconpreview.html"}
 					{/if}
 					{if isset($news_add_images_tpl) and $news_add_images_tpl eq "1"}
-					{include file="./news_add_images.tpl"}
+					{include file="./news_add_images.html"}
 					{/if}
 					{if isset($news_edit_images_tpl) and $news_edit_images_tpl eq "1"}
-					{include file="./news_edit_images.tpl"}
+					{include file="./news_edit_images.html"}
 					{/if}
 					{if isset($news_approve_tpl) and $news_approve_tpl eq "1"}
-					{include file="./news_approve.tpl"}
+					{include file="./news_approve.html"}
 					{/if}
 					{if isset($news_edit_tpl) and $news_edit_tpl eq "1"}
-					{include file="./news_edit.tpl"}
+					{include file="./news_edit.html"}
 					{/if}
 					{if isset($news_edit_all_tpl) and $news_edit_all_tpl eq "1"}
-					{include file="./news_edit_all.tpl"}
+					{include file="./news_edit_all.html"}
 					{/if}
 					{if isset($submission_games_tpl) and $submission_games_tpl eq "1"}
-					{include file="./submission_games.tpl"}
+					{include file="./submission_games.html"}
 					{/if}
 					{if isset($interviews_main_tpl) and $interviews_main_tpl eq "1"} 
-              		{include file="./interviews_main.tpl"} 
+              		{include file="./interviews_main.html"} 
                		{/if}	
 					{if isset($interviews_preview_tpl) and $interviews_preview_tpl eq "1"} 
-              		{include file="./interviews_preview.tpl"} 
+              		{include file="./interviews_preview.html"} 
                		{/if}	
 					{if isset($interviews_edit_tpl) and $interviews_edit_tpl eq "1"} 
-              		{include file="./interviews_edit.tpl"} 
+              		{include file="./interviews_edit.html"} 
                		{/if}	
 					{if isset($interviews_add_tpl) and $interviews_add_tpl eq "1"} 
-              		{include file="./interviews_add.tpl"} 
+              		{include file="./interviews_add.html"} 
                		{/if}	
 					{if isset($interviews_screenshots_add_tpl) and $interviews_screenshots_add_tpl eq "1"} 
-              		{include file="./interviews_screenshots_add.tpl"} 
+              		{include file="./interviews_screenshots_add.html"} 
                		{/if}	
 					{if isset($interviews_hlp_tpl) and $interviews_hlp_tpl eq "1"} 
-              		{include file="./interviews_help.tpl"} 
+              		{include file="./interviews_help.html"} 
                		{/if}
 					{if isset($individuals_main_tpl) and $individuals_main_tpl eq "1"} 
-              		{include file="./individuals_main.tpl"} 
+              		{include file="./individuals_main.html"} 
                		{/if}	
 					{if isset($individuals_edit_tpl) and $individuals_edit_tpl eq "1"} 
-              		{include file="./individuals_edit.tpl"} 
+              		{include file="./individuals_edit.html"} 
                		{/if}	
 					{if isset($individuals_author_tpl) and $individuals_author_tpl eq "1"} 
-              		{include file="./individuals_author.tpl"} 
+              		{include file="./individuals_author.html"} 
                		{/if}
 					{if isset($company_main_tpl) and $company_main_tpl eq "1"} 
-              		{include file="./company_main.tpl"} 
+              		{include file="./company_main.html"} 
                		{/if}
 					{if isset($company_edit_tpl) and $company_edit_tpl eq "1"} 
-              		{include file="./company_edit.tpl"} 
+              		{include file="./company_edit.html"} 
                		{/if}	
 					{if isset($company_logos_tpl) and $company_logos_tpl eq "1"} 
-              		{include file="./company_logos.tpl"} 
+              		{include file="./company_logos.html"} 
                		{/if}
 					{if isset($did_you_know_tpl) and $did_you_know_tpl eq "1"}
-					{include file="./did_you_know.tpl"}
+					{include file="./did_you_know.html"}
 					{/if}
 					{if isset($manage_trivia_quotes_tpl) and $manage_trivia_quotes_tpl eq "1"}
-					{include file="./manage_trivia_quotes.tpl"}
+					{include file="./manage_trivia_quotes.html"}
 					{/if}
 					{if isset($manage_trivia_screens_tpl) and $manage_trivia_screens_tpl eq "1"}
-					{include file="./manage_trivia_screens.tpl"}
+					{include file="./manage_trivia_screens.html"}
 					{/if}
 					{if isset($games_main_tpl) and $games_main_tpl eq "1"} 
-               		{include file="./games_main.tpl"} 
+               		{include file="./games_main.html"} 
                		{/if}	
 					{if isset($games_list_html) and $games_list_html eq "1"} 
                		{include file="./games_list.html"} 
                		{/if}
 					{if isset($games_detail_tpl) and $games_detail_tpl eq "1"} 
-               		{include file="./games_detail.tpl"} 
+               		{include file="./games_detail.html"} 
                		{/if}	
 					{if isset($magazine_add_tpl) and $magazine_add_tpl eq "1"} 
-               		{include file="./magazine_add.tpl"} 
+               		{include file="./magazine_add.html"} 
                		{/if}
 					{if isset($magazine_manage_tpl) and $magazine_manage_tpl eq "1"} 
-               		{include file="./magazine_manage.tpl"} 
+               		{include file="./magazine_manage.html"} 
                		{/if}
 					{if isset($magazine_edit_tpl) and $magazine_edit_tpl eq "1"} 
-               		{include file="./magazine_edit.tpl"} 
+               		{include file="./magazine_edit.html"} 
                		{/if}
 					{if isset($magazine_issue_edit_tpl) and $magazine_issue_edit_tpl eq "1"} 
-               		{include file="./magazine_issue_edit.tpl"} 
+               		{include file="./magazine_issue_edit.html"} 
                		{/if}
 					{if isset($magazine_review_list_tpl) and $magazine_review_list_tpl eq "1"} 
-               		{include file="./magazine_review_list.tpl"} 
+               		{include file="./magazine_review_list.html"} 
                		{/if}
 					{if isset($magazine_review_score_tpl) and $magazine_review_score_tpl eq "1"} 
-               		{include file="./magazine_review_score.tpl"} 
+               		{include file="./magazine_review_score.html"} 
                		{/if}
 					{if isset($magazine_setscore_tpl) and $magazine_setscore_tpl eq "1"} 
-               		{include file="./magazine_setscore.tpl"} 
+               		{include file="./magazine_setscore.html"} 
                		{/if}
 					{if isset($games_comment_tpl) and $games_comment_tpl eq "1"} 
-               		{include file="./games_comment.tpl"} 
+               		{include file="./games_comment.html"} 
                		{/if}
 					{if isset($games_comment_edit_tpl) and $games_comment_edit_tpl eq "1"} 
-               		{include file="./games_comment_edit.tpl"} 
+               		{include file="./games_comment_edit.html"} 
                		{/if}
 					{if isset($games_series_main_tpl) and $games_series_main_tpl eq "1"} 
-               		{include file="./games_series_main.tpl"} 
+               		{include file="./games_series_main.html"} 
                		{/if}
 					{if isset($user_main_tpl) and $user_main_tpl eq "1"} 
-               		{include file="./user_main.tpl"} 
+               		{include file="./user_main.html"} 
                		{/if}
 					{if isset($user_search_tpl) and $user_search_tpl eq "1"} 
-               		{include file="./user_search.tpl"} 
+               		{include file="./user_search.html"} 
                		{/if}
 					{if isset($user_detail_tpl) and $user_detail_tpl eq "1"} 
-               		{include file="./user_detail.tpl"} 
+               		{include file="./user_detail.html"} 
                		{/if}	
 					{if isset($user_statistics_tpl) and $user_statistics_tpl eq "1"} 
-               		{include file="./user_statistics.tpl"} 
+               		{include file="./user_statistics.html"} 
                		{/if}	
 					{if isset($crew_main_tpl) and $crew_main_tpl eq "1"} 
-               		{include file="./crew_main.tpl"} 
+               		{include file="./crew_main.html"} 
                		{/if}
 					{if isset($crew_search_tpl) and $crew_search_tpl eq "1"} 
-               		{include file="./crew_search.tpl"} 
+               		{include file="./crew_search.html"} 
                		{/if}
 					{if isset($demos_main_tpl) and $demos_main_tpl eq "1"} 
-               		{include file="./demos_main.tpl"} 
+               		{include file="./demos_main.html"} 
                		{/if}	
 					{if isset($demo_list_tpl) and $demo_list_tpl eq "1"} 
-               		{include file="./demos_list.tpl"} 
+               		{include file="./demos_list.html"} 
                		{/if}	
 					{if isset($demo_detail_tpl) and $demo_detail_tpl eq "1"} 
-               		{include file="./demos_detail.tpl"} 
+               		{include file="./demos_detail.html"} 
                		{/if}	
 					{if isset($demo_screenshot_add_tpl) and $demo_screenshot_add_tpl eq "1"} 
-               		{include file="./demos_screenshot_add.tpl"} 
+               		{include file="./demos_screenshot_add.html"} 
                		{/if}	
 					{if isset($demos_comment_tpl) and $demos_comment_tpl eq "1"} 
-               		{include file="./demos_comment.tpl"} 
+               		{include file="./demos_comment.html"} 
                		{/if}
 					{if isset($demos_comment_edit_tpl) and $demos_comment_edit_tpl eq "1"} 
-               		{include file="./demos_comment_edit.tpl"} 
+               		{include file="./demos_comment_edit.html"} 
                		{/if}
 					{if isset($demos_upload_tpl) and $demos_upload_tpl eq "1"} 
-               		{include file="./demos_upload.tpl"} 
+               		{include file="./demos_upload.html"} 
                		{/if}
 					{if isset($demos_music_list_tpl) and $demos_music_list_tpl eq "1"} 
-               		{include file="./demos_music_list.tpl"} 
+               		{include file="./demos_music_list.html"} 
                		{/if}		
 					{if isset($demos_music_detail_tpl) and $demos_music_detail_tpl eq "1"} 
-               		{include file="./demos_music_detail.tpl"} 
+               		{include file="./demos_music_detail.html"} 
                		{/if}	
 					{if isset($demos_music_tpl) and $demos_music_tpl eq "1"} 
-               		{include file="./demos_music.tpl"} 
+               		{include file="./demos_music.html"} 
                		{/if}
 					{if isset($submission_demos_tpl) and $submission_demos_tpl eq "1"} 
-               		{include file="./submission_demos.tpl"} 
+               		{include file="./submission_demos.html"} 
                		{/if}
 					{if isset($games_upload_tpl) and $games_upload_tpl eq "1"} 
-               		{include file="./games_upload.tpl"} 
+               		{include file="./games_upload.html"} 
                		{/if}	
 					{if isset($games_screenshot_add_tpl) and $games_screenshot_add_tpl eq "1"} 
-               		{include file="./games_screenshot_add.tpl"} 
+               		{include file="./games_screenshot_add.html"} 
                		{/if}	
 					{if isset($games_music_tpl) and $games_music_tpl eq "1"} 
-               		{include file="./games_music.tpl"} 
+               		{include file="./games_music.html"} 
                		{/if}
 					{if isset($games_music_list_tpl) and $games_music_list_tpl eq "1"} 
-               		{include file="./games_music_list.tpl"} 
+               		{include file="./games_music_list.html"} 
                		{/if}		
 					{if isset($games_music_detail_tpl) and $games_music_detail_tpl eq "1"} 
-               		{include file="./games_music_detail.tpl"} 
+               		{include file="./games_music_detail.html"} 
                		{/if}	
 					{if isset($user_karmasync_tpl) and $user_karmasync_tpl eq "1"} 
-               		{include file="./user_karmasync.tpl"} 
+               		{include file="./user_karmasync.html"} 
                		{/if}
 					{if isset($games_box_tpl) and $games_box_tpl eq "1"} 
-               		{include file="./games_box.tpl"} 
+               		{include file="./games_box.html"} 
                		{/if}
 					{if isset($games_review_html) and $games_review_html eq "1"} 
                		{include file="./games_review.html"} 
@@ -371,16 +371,16 @@
                		{include file="./games_review_edit.html"} 
                		{/if}
 					{if isset($games_review_preview_tpl) and $games_review_preview_tpl eq "1"} 
-               		{include file="./games_review_preview.tpl"} 
+               		{include file="./games_review_preview.html"} 
                		{/if}
 					{if isset($games_review_submitted_tpl) and $games_review_submitted_tpl eq "1"} 
-               		{include file="./games_review_submitted.tpl"} 
+               		{include file="./games_review_submitted.html"} 
                		{/if}
 					{if isset($app_main_tpl) and $app_main_tpl eq "1"} 
-               		{include file="./app_main.tpl"} 
+               		{include file="./app_main.html"} 
                		{/if}
 					{if isset($games_similar_tpl) and $games_similar_tpl eq "1"} 
-               		{include file="./games_similar.tpl"} 
+               		{include file="./games_similar.html"} 
                		{/if}
 				</td>
 			</tr>
