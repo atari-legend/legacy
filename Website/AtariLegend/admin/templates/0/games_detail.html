@@ -29,7 +29,7 @@ function deletegame(game_id)
 
     if (return_value !="0")
     {
-    	url="../games/games_detail.php?game_id="+game_id+"&action=delete_game";
+    	url="../games/db_games_detail.php?game_id="+game_id+"&action=delete_game";
 		location.href=url;
     }  
 }
@@ -37,56 +37,56 @@ function deletegame(game_id)
 function delete_publisher() 
 {
 	document.publisher.method="post";
-	document.publisher.action="../games/games_detail.php?action=delete_publisher";
+	document.publisher.action="../games/db_games_detail.php?action=delete_publisher";
    	document.publisher.submit();
 }
 
 function add_publisher() 
 {
 	document.publisher.method="post";
-	document.publisher.action="../games/games_detail.php?action=add_publisher";
+	document.publisher.action="../games/db_games_detail.php?action=add_publisher";
    	document.publisher.submit();
 }
 
 function delete_developer() 
 {
 	document.developer.method="post";
-	document.developer.action="../games/games_detail.php?action=delete_developer";
+	document.developer.action="../games/db_games_detail.php?action=delete_developer";
    	document.developer.submit();
 }
 
 function add_developer() 
 {
 	document.developer.method="post";
-	document.developer.action="../games/games_detail.php?action=add_developer";
+	document.developer.action="../games/db_games_detail.php?action=add_developer";
    	document.developer.submit();
 }
 
 function delete_creator() 
 {
 	document.creator.method="post";
-	document.creator.action="../games/games_detail.php?action=delete_creator";
+	document.creator.action="../games/db_games_detail.php?action=delete_creator";
    	document.creator.submit();
 }
 
 function add_creator() 
 {
 	document.creator.method="post";
-	document.creator.action="../games/games_detail.php?action=add_creator";
+	document.creator.action="../games/db_games_detail.php?action=add_creator";
    	document.creator.submit();
 }
 
 function delete_year() 
 {
 	document.year.method="post";
-	document.year.action="../games/games_detail.php?action=delete_year";
+	document.year.action="../games/db_games_detail.php?action=delete_year";
    	document.year.submit();
 }
 
 function add_year() 
 {
 	document.year.method="post";
-	document.year.action="../games/games_detail.php?action=add_year";
+	document.year.action="../games/db_games_detail.php?action=add_year";
    	document.year.submit();
 }
 </script>
@@ -121,7 +121,7 @@ function add_year()
 <table width="100%" cellspacing="2" cellpadding="15" class="CELLCOLOR">
 <tr>
 	<td>
-	<form action="../games/games_detail.php" method="post" name="edit">
+	<form action="../games/db_games_detail.php" method="post" name="edit">
 	<fieldset class="game_set">
 		<legend class="links_legend">Basic game info</legend>
 		<table>
@@ -298,7 +298,7 @@ function add_year()
 <table width="100%" cellspacing="2" cellpadding="15" class="CELLCOLOR">
 <tr>
 	<td width="33%">
-	<form action="../games/games_detail.php" method="post" name="publisher">
+	<form action="../games/db_games_detail.php" method="post" name="publisher">
 	<fieldset class="game_set">
 		<legend class="links_legend">Publisher info</legend>
 			<table width="100%">
@@ -348,7 +348,7 @@ function add_year()
 	</form>
 	</td>
 	<td width="33%">
-	<form action="../games/games_detail.php" method="post" name="developer">
+	<form action="../games/db_games_detail.php" method="post" name="developer">
 	<fieldset class="game_set">
 		<legend class="links_legend">Developer info</legend>
 			<table width="100%">
@@ -399,7 +399,7 @@ function add_year()
 	</form>
 	</td>
 	<td width="33%">
-	<form action="../games/games_detail.php" method="post" name="creator">
+	<form action="../games/db_games_detail.php" method="post" name="creator">
 	<fieldset class="game_set">
 		<legend class="links_legend">Creator info</legend>
 			<table width="100%">
@@ -445,7 +445,7 @@ function add_year()
 </tr>
 <tr>
 	<td width="33%" align="center">
-	<form action="../games/games_detail.php" method="post" name="year">
+	<form action="../games/db_games_detail.php" method="post" name="year">
 	<fieldset class="game_set">
 		<legend class="links_legend">Release Year</legend>
 			<table width="100%">
@@ -486,7 +486,7 @@ function add_year()
 		
 	</td>
 	<td width="33%" align="center">
-		<form action="../games/games_detail.php" method="post" name="aka">
+		<form action="../games/db_games_detail.php" method="post" name="aka">
 		<fieldset class="game_set">
 			<legend class="links_legend">Add game AKA</legend>
 			<b>Game AKA :</b> <input type="text" name="game_aka">
@@ -500,7 +500,10 @@ function add_year()
 				<b>Current AKA</b>
 				<br>
 				{foreach from=$aka item=line}
-					<a href="../games/games_detail.php?game_id={$line.game_id}" class="MAINNAV">{$line.game_aka_name}</a> - <b><a href="../games/games_detail.php?game_aka_id={$line.game_aka_id}&action=delete_aka&game_id={$line.game_id}" class="MAINNAV">delete</a></b> 
+					<a href="../games/games_detail.php?game_id={$line.game_id}" class="MAINNAV">
+						{$line.game_aka_name}
+					</a> - <b>
+					<a href="../games/db_games_detail.php?game_aka_id={$line.game_aka_id}&action=delete_aka&game_id={$line.game_id}" class="MAINNAV">delete</a></b> 
 					<br>
 				{/foreach}
 			{/if}
