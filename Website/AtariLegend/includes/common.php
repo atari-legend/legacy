@@ -34,7 +34,8 @@ if (login_check($mysqli) == true) {
 	
 	$smarty->assign('user_session',
 	     array('userid' => $_SESSION['userid'],
-		   'user_id' => $_SESSION['user_id']));
+		   'user_id' => $_SESSION['user_id'],
+		   'permission' => $_SESSION['permission']));
 }
 
 

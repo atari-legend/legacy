@@ -76,7 +76,12 @@
 				<a href="../includes/user_logout.php" class="top_button">Logout</a>
 				</button>
 				</div>
+				<br>
+				
+				{if $user_session.permission eq 1}
+				<h3><a href="../admin/" class="standard_tile_link">Go to Cpanel</a></h3>
 				<br>	
+				{/if}
 				<h3><a href="#" class="standard_tile_link">Forgot user name or password?</a></h3>
 				<br>
 			</form>
