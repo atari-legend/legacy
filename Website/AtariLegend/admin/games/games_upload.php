@@ -118,7 +118,47 @@ if (isset($action) and $action == 'add_download' )
 //**************************************************************************************** 
 if (isset($action) and $action == 'update_download')
 {
-	mysql_query("UPDATE game_download SET cracker='$cracker', supplier='$supplier', screen='$screen', language='$language', trainer='$trainer', legend='$legend', disks='$disks', set_nr='$set_nr', intro='$intro', harddrive='$harddrive', disable='$disable', version='$version', tos='$tos' WHERE game_download_id='$game_download_id'");
+
+if (isset($cracker)) {
+	mysql_query("UPDATE game_download SET cracker='$cracker' WHERE game_download_id='$game_download_id'");
+}
+if (isset($supplier)) {
+	mysql_query("UPDATE game_download SET supplier='$supplier' WHERE game_download_id='$game_download_id'");
+}
+if (isset($screen)) {
+	mysql_query("UPDATE game_download SET screen='$screen' WHERE game_download_id='$game_download_id'");
+}
+if (isset($language)) {
+	mysql_query("UPDATE game_download SET language='$language' WHERE game_download_id='$game_download_id'");
+}
+if (isset($trainer)) {
+	mysql_query("UPDATE game_download SET trainer='$trainer' WHERE game_download_id='$game_download_id'");
+}
+if (isset($legend)) {
+	mysql_query("UPDATE game_download SET legend='$legend' WHERE game_download_id='$game_download_id'");
+}
+if (isset($disks)) {
+	mysql_query("UPDATE game_download SET disks='$disks' WHERE game_download_id='$game_download_id'");
+}
+if (isset($set_nr)) {
+	mysql_query("UPDATE game_download SET set_nr='$set_nr' WHERE game_download_id='$game_download_id'");
+}
+if (isset($intro)) {
+	mysql_query("UPDATE game_download SET intro='$intro' WHERE game_download_id='$game_download_id'");
+}
+if (isset($harddrive)) {
+	mysql_query("UPDATE game_download SET harddrive='$harddrive' WHERE game_download_id='$game_download_id'");
+}
+if (isset($disable)) {
+	mysql_query("UPDATE game_download SET disable='$disable' WHERE game_download_id='$game_download_id'");
+}
+if (isset($version)) {
+	mysql_query("UPDATE game_download SET version='$version' WHERE game_download_id='$game_download_id'");
+}
+if (isset($tos)) {
+	mysql_query("UPDATE game_download SET tos='$tos' WHERE game_download_id='$game_download_id'");
+}
+
 }
 
 //****************************************************************************************
