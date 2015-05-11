@@ -19,12 +19,9 @@ This is the user detail page
 */
 // include common variables and functions
 include("../includes/common.php");
-include("../includes/config.php");
-
-if (empty($action)) {$action='';} 
 
 // Here we add the website image
-if ($action == 'avatar_upload')
+if (isset($action) and $action == 'avatar_upload')
 {	
 	$image = $_FILES['image'];
 	
@@ -82,7 +79,7 @@ if ($action == 'avatar_upload')
 
 //Delete avatar
 
-if ($action=="delete_avatar")
+if (isset($action) and $action=="delete_avatar")
 {
 
 $sql = "SELECT avatar_ext FROM users WHERE user_id='$user_id_selected'";
@@ -94,12 +91,12 @@ $sql = "SELECT avatar_ext FROM users WHERE user_id='$user_id_selected'";
 
 }
 
-if ($action == 'reset_pwd')
+if (isset($action) and $action == 'reset_pwd')
 {
 	mysql_query("UPDATE users SET password='' WHERE user_id='$user_id_selected'");
 }
 
-if ($action == 'modify_user')
+if (isset($action) and $action == 'modify_user')
 {
 	if ( $user_pwd != '' )
 	{
@@ -113,7 +110,7 @@ if ($action == 'modify_user')
 	}
 }
 
-if ($action == 'delete_user')
+if (isset($action) and $action == 'delete_user')
 {
 	//First we need to do a hell of a lot checks before we can delete an actual user.
 	$sql = mysql_query("SELECT * FROM comments
@@ -208,11 +205,6 @@ if ($action == 'delete_user')
 		{
 		$last_visit = convert_timestamp($query_users['last_visit']);
 		}
-		if ($query_users['avatar_ext']!=="")
-		{
-		$imginfo = getimagesize("$user_avatar_path$user_id_selected.$query_users[avatar_ext]");
-		$width = $imginfo[0];
-		}
 		$smarty->assign('users',
 	    				array('user_id' => $query_users['user_id'],
 							  'user_name' => $query_users['userid'],
@@ -223,7 +215,6 @@ if ($action == 'delete_user')
 							  'user_icq' => $query_users['user_icq'],
 							  'user_msnm' => $query_users['user_msnm'],
 							  'avatar_ext' => $query_users['avatar_ext'],
-							  'width' => $width,
 							  'image' => "$user_avatar_path$query_users[user_id].$query_users[avatar_ext]",
 							  'user_aim' => $query_users['user_aim']));
 	}
