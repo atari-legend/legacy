@@ -15,7 +15,6 @@
 //**************************************************************************************** 
 
 include("../includes/common.php");
-include("../includes/config.php"); 
 
 if ( isset($action) and $action == 'insert' )
 {

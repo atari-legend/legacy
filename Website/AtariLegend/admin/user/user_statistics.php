@@ -26,13 +26,15 @@ $sql = mysql_query("SELECT * FROM comments
 					LEFT JOIN game ON ( game_user_comments.game_id = game.game_id )
 					WHERE comments.user_id = $user_id_selected");
 
+$nr_comments=0;
+
 while ($query = mysql_fetch_array($sql))
 {
     $nr_comments++;
 	
 	$smarty->append('users_comments',
-				array('game_id' => $query[game_id],
-					  'game_name' => $query[game_name]));
+				array('game_id' => $query['game_id'],
+					  'game_name' => $query['game_name']));
 }
 
 $smarty->assign('nr_comments', $nr_comments);
@@ -45,15 +47,15 @@ $sql = mysql_query("SELECT * FROM review_main
 					LEFT JOIN review_game ON (review_main.review_id = review_game.review_id)
 					LEFT JOIN game ON ( review_game.game_id = game.game_id )
 					WHERE review_main.member_id = $user_id_selected");
-
+$nr_reviews=0;
 while ($query = mysql_fetch_array($sql))
 {
     $nr_reviews++;
 	
 	$smarty->append('users_reviews',
-				array('game_id' => $query[game_id],
-					  'game_name' => $query[game_name],
-					  'review_id' => $query[review_id]));
+				array('game_id' => $query['game_id'],
+					  'game_name' => $query['game_name'],
+					  'review_id' => $query['review_id']));
 }
 
 $smarty->assign('nr_reviews', $nr_reviews);
@@ -65,7 +67,7 @@ mysql_free_result($sql);
 $sql = "SELECT COUNT(*) AS count FROM game_download_info WHERE user_id = $user_id_selected";
 $query = mysql_query($sql);
 $gamecount = mysql_fetch_array($query);
-$gamecount = $gamecount[count];
+$gamecount = $gamecount['count'];
 
 $smarty->assign('nr_downloads', $gamecount);
 
@@ -76,14 +78,14 @@ mysql_free_result($query);
 $sql = mysql_query("SELECT * FROM game_submitinfo 
 				    LEFT JOIN game ON (game_submitinfo.game_id = game.game_id)
 					WHERE user_id = $user_id_selected");
-
+$nr_submission=0;
 while ($query = mysql_fetch_array($sql))
 {
 	$nr_submission++;
 	
 	$smarty->append('users_submission',
-				array('game_id' => $query[game_id],
-					  'game_name' => $query[game_name]));
+				array('game_id' => $query['game_id'],
+					  'game_name' => $query['game_name']));
 }
 
 $smarty->assign('nr_submission', $nr_submission);
@@ -93,14 +95,14 @@ mysql_free_result($sql);
 
 // START - NUMBER OF LINKS BY USER
 $sql = mysql_query("SELECT * FROM website WHERE website_user_sub = $user_id_selected");
-	
+$nr_links=0;	
 while ($query = mysql_fetch_array($sql))
 {
 	$nr_links++;
 	
 	$smarty->append('users_website',
-			  array('website_id' => $query[website_id],
-					'website_name' => $query[website_name]));
+			  array('website_id' => $query['website_id'],
+					'website_name' => $query['website_name']));
 }
 
 $smarty->assign('nr_links', $nr_links);
@@ -109,14 +111,14 @@ mysql_free_result($sql);
 
 // START - NUMBER OF NEWS POSTS BY USER
 $sql = mysql_query("SELECT * FROM news WHERE user_id = $user_id_selected");
-	
+$nr_news=0;	
 while ($query = mysql_fetch_array($sql))
 {
 	$nr_news++;
 	
 	$smarty->append('users_news',
-			  array('news_id' => $query[news_id],
-					'news_headline' => $query[news_headline]));
+			  array('news_id' => $query['news_id'],
+					'news_headline' => $query['news_headline']));
 }
 
 //get user info
@@ -126,9 +128,9 @@ $sql = mysql_query("SELECT * FROM users WHERE user_id = $user_id_selected") or d
 while ($query = mysql_fetch_array($sql))
 {
 	$smarty->assign('user',
-			  array('user_id' => $query[user_id],
-					'username' => $query[userid],
-					'user_email' => $query[email]));
+			  array('user_id' => $query['user_id'],
+					'username' => $query['userid'],
+					'user_email' => $query['email']));
 }
 
 $smarty->assign('nr_news', $nr_news);

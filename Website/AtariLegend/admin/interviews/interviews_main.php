@@ -43,7 +43,7 @@ while ($individuals2 = mysql_fetch_array($sql_individuals2))
 }
 
 
-if ( $action == 'search' )
+if ( isset($action) and $action == 'search' )
 {
 if ( $individual_search == " " or $individual_search == '-' )
 {

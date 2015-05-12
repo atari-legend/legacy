@@ -19,7 +19,7 @@ In this section we modify links
 */
 
 include("../includes/common.php");
-if(empty($catpick)) {$catpick=0;}
+if(empty($catpick)) {$catpick=1;}
 		$SQL = "SELECT website_category_id, website_category_name FROM website_category ORDER BY website_category_name";
 		$linkcategorysql = mysql_query($SQL) or die("Couldn't query categories");
 		

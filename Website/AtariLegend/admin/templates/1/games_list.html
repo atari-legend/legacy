@@ -1,0 +1,213 @@
+{* 
+/***************************************************************************
+*                                frontpage.html
+*                            ----------------
+*   begin                : Tuesday, April 15, 2015
+*   copyright            : (C) 2015 Atari Legend
+*   email                : martens_maarten@hotmail.com
+*   actual update        : Creation of file
+*
+*   Id: frontpage.html,v 0.1 2015/04/15 23:52 SilverSurfer
+*
+***************************************************************************/
+
+//****************************************************************************************
+// This is the top of the site
+//**************************************************************************************** 
+*}
+{block name=main_body}
+	<div id="main">
+	
+		<!--this column is always visible-->
+		<div class="column-wide">	
+
+
+			<!-- Jssor Slider Begin -->
+			<!-- To move inline styles to css file/block, please specify a class name for each element. --> 
+			{* <div id="welcome">*}
+				<br><br>
+		<div class="Table">
+			<div class="Heading">
+				<div class="Cell" style="width:25%;">
+					Game Name
+				</div>
+				<div class="Cell" style="width:25%;">
+					Publisher
+				</div>				
+				<div class="Cell" style="width:25%;">
+					Developer
+				</div>
+				<div class="Cell" style="width:10%;">
+					Year
+				</div>
+				<div class="Cell" style="width:15%;">
+					Info
+				</div>
+			</div>
+		</div>
+		<div class="Table">
+		{foreach from=$game_search item=line}
+			<div class="Row" style="background-color:{cycle name="tr" values="#EFEFEF,#E9E9E9"};" id="game_row">
+				<div class="Cell" style="width:25%;">
+						{if $line.game_name != ''}
+						<a href="games_detail.php?game_id={$line.game_id}" class="MAINNAV">
+							{$line.game_name}
+						</a>
+						{else}
+						<i>n/a</i>
+						{/if}
+				</div>
+				<div class="Cell" style="width:25%;">
+						{if $line.publisher_name != ''}
+						<a href="games_main.php?publisher={$line.publisher_id}&amp;action=search" class="MAINNAV">
+							{$line.publisher_name}
+					</a>
+						{else}
+							<i>n/a</i>
+						{/if}
+				</div>				
+				<div class="Cell" style="width:25%;">
+						{if $line.developer_name != ''}
+						<a href="games_main.php?developer={$line.developer_id}&amp;action=search" class="MAINNAV">
+							{$line.developer_name}
+						</a>
+						{else}
+							<i>n/a</i>
+						{/if}
+				</div>
+				<div class="Cell" style="width:10%;">
+						{if $line.year != ''}
+						<a href="games_main.php?year={$line.year}&amp;action=search" class="MAINNAV">
+							{$line.year}
+						</a>
+						{else}
+							<i>n/a</i>
+						{/if}
+				</div>
+				<div class="Cell" style="width:15%;">
+						{if isset($line.screenshot)}
+							<img src="../templates/0/icons/screen.gif" alt="Screenshots available" hspace="0" vspace="0" border="0">
+						{/if}
+						{if isset($line.music)}
+							<img src="../templates/0/icons/sound.gif" alt="Music available" hspace="0" vspace="0" border="0">
+						{/if}
+						{if isset($line.boxscan)}
+							<img src="../templates/0/icons/scan.gif" alt="Boxscan available" hspace="0" vspace="0" border="0">
+						{/if}
+						{if isset($line.download)}
+							<img src="../templates/0/icons/disk.gif" alt="Download available" hspace="0" vspace="0" border="0">
+						{/if}
+						{if isset($line.ste_enhan) or isset($line.ste_only)}
+							<img src="../templates/0/icons/ste.png" alt="STE Game" hspace="0" vspace="0" border="0">
+						{/if}
+						{if isset($line.falcon_only) or isset($line.falcon.enhan)}
+							<img src="../templates/0/icons/falcon.png" alt="Falcon Game" hspace="0" vspace="0" border="0">
+						{/if}
+				</div>
+			</div>
+		{/foreach}
+		</div>
+		
+				<div class="Table">
+			<div class="Heading">
+				<div class="Cellgame_name">
+					{if $nr_of_games == 1}1 game found {else} {$nr_of_games} games found{/if} in {$query_time} sec
+				</div>
+
+			</div>
+		</div>			
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			{*</div>*}
+			<!-- Jssor Slider End -->		
+			
+			
+			<!--Start logon tile - will only be used on the front page so no inheritance here -->
+			{block name=user_login_tile}{/block}
+			
+		</div>
+		
+		<!--this column is only visible in the 3 colum mode and 1 column mode-->				
+		<div class="column-left">		
+			<!--Start latest news tile-->
+			{block name=latest_news_tile}{/block}
+			<!--Start "Who is it" tile-->
+			{block name=who_is_it_tile}{/block}
+		</div>
+		
+		<!--this column is only visible in the 3 colum mode and 1 column mode-->
+		<div class="column-center">		
+			<!--Start screenstar tile-->
+			{block name=screenstar_tile}{/block}
+			
+			<!--Start latest reviews tile-->
+			{block name=latest_reviews_tile}{/block}
+			
+			<!--Start "hotlinks" tile-->
+			{block name=hotlinks_tile}{/block}					
+		</div>
+		
+		<!--this column is only visible in the 3 colum mode and 1 column mode-->
+		<div class="column-right">
+								
+			<!--Start date quote tile-->
+			{block name=date_quote_tile}{/block}		
+			
+			<!--Start "Did you know" tile-->
+			{block name=did_you_know_tile}{/block}						
+		
+			<!--Start "statistics" tile-->
+			{block name=statistics_tile}{/block}
+		
+			<!--Start contact tiles - will only be used on the front page so no inheritance here -->
+
+		</div>
+		
+		<!--this column is only visible in the 2 colum mode -->
+		<div class="column-left-tab">
+			<!--Start date quote tile-->
+			{block name=date_quote_tile}{/block}
+			
+			<!--Start "Did you know" tile-->
+			{block name=did_you_know_tile}{/block}
+
+			<!--Start contact tiles-->
+			<div class="standard_tile" id="contact_tiles">
+				<a href="#"><img src="../templates/1/images/jukebox.png" alt="jukebox"></a>
+				<a href="#"><img src="../templates/1/images/chat.png" alt="chat"></a>
+			</div>	
+		</div>
+		
+		<!--this column is only visible in the 2 colum mode -->
+		<div class="column-right-tab">
+			<!--Start "statistics" tile-->
+			{block name=statistics_tile}{/block}
+			
+			<!--Start contact tiles-->
+			<div class="standard_tile" id="contact_tiles">
+				<a href="#"><img src="../templates/1/images/email.png" alt="email"></a>
+				<a href="#"><img src="../templates/1/images/facebook.png" alt="facebook"></a>
+			</div>	
+		</div>
+	</div>		
+{/block}

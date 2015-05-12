@@ -19,7 +19,6 @@ This is the game review page where you add a review to the db
 
 //load all common functions
 include("../includes/common.php"); 
-include("../includes/config.php"); 
 
 if (empty($action)) {$action = "";}
 If ( $action  == 'add_review' )
@@ -113,13 +112,13 @@ $sql_review = mysql_query("SELECT * FROM review_game
 	   					   LEFT JOIN users ON (review_main.member_id = users.user_id)
 	   					   WHERE review_game.game_id='$game_id' ORDER BY review_game.review_id")
 			  or die ("Database error - selecting review");
-
+$i=1;
 while ($review=mysql_fetch_array($sql_review)) 
 {
 	$i++;
 	
 	$smarty->append('review',
-	    	 array('review_id' => $review[review_id],
+	    	 array('review_id' => $review['review_id'],
 				   'user_name' => $review['userid'],
 				   'review_nr' => $i));
 }
@@ -147,7 +146,7 @@ while ($screenshots=mysql_fetch_array($sql_screenshots))
 $smarty->assign("screenshots_nr",$i);
 
 $smarty->assign("user_id",$_SESSION['user_id']);
-$smarty->assign('games_review_add_tpl', '1');
+$smarty->assign('games_review_add_html', '1');
 
 //Send all smarty variables to the templates
 $smarty->display('file:../templates/0/index.tpl');

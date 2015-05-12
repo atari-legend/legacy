@@ -25,11 +25,13 @@ The main game page
 
 <table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
 <tr>
-	<td colspan="2">
-	<fieldset class="category_set">
+	<td colspan="2" style="text-align:center;">
+	<br>
+	<div="category_set" style="border:solid 1px;padding:5px;">
 		This is the search result page. Click a game to go to the main page. Click a Publisher/Developer/Year to do a new search.
 		If you want to do a new search query or like to add a new game, click <a href="games_main.php" class="MAINNAV"><b>here</b></a>!
-	</fieldset> 
+		
+	</div> 
 	</td>
 </tr>
 <tr>
@@ -37,28 +39,27 @@ The main game page
 
 		<div class="Table">
 			<div class="Heading">
-				<div class="Cell">
-					<p>Game Name</p>
+				<div class="Cell" style="width:25%;">
+					Game Name
 				</div>
-				<div class="Cell">
-					<p>Publisher</p>
+				<div class="Cell" style="width:25%;">
+					Publisher
 				</div>				
-				<div class="Cell">
-					<p>Developer</p>
+				<div class="Cell" style="width:25%;">
+					Developer
 				</div>
-				<div class="Cell">
-					<p>Year</p>
+				<div class="Cell" style="width:10%;">
+					Year
 				</div>
-				<div class="Cell">
-					<p>Info</p>
+				<div class="Cell" style="width:15%;">
+					Info
 				</div>
 			</div>
 		</div>
 		<div class="Table">
 		{foreach from=$game_search item=line}
-			<div class="Row" style="background-color:{cycle name="tr" values="#EFEFEF,#E9E9E9"};">
-				<div class="Cell">
-					<p>
+			<div class="Row" style="background-color:{cycle name="tr" values="#EFEFEF,#E9E9E9"};" id="game_row">
+				<div class="Cell" style="width:25%;">
 						{if $line.game_name != ''}
 						<a href="games_detail.php?game_id={$line.game_id}" class="MAINNAV">
 							{$line.game_name}
@@ -66,10 +67,8 @@ The main game page
 						{else}
 						<i>n/a</i>
 						{/if}
-					</p>
 				</div>
-				<div class="Cell">
-					<p>
+				<div class="Cell" style="width:25%;">
 						{if $line.publisher_name != ''}
 						<a href="games_main.php?publisher={$line.publisher_id}&amp;action=search" class="MAINNAV">
 							{$line.publisher_name}
@@ -77,10 +76,8 @@ The main game page
 						{else}
 							<i>n/a</i>
 						{/if}
-					</p>
 				</div>				
-				<div class="Cell">
-					<p>
+				<div class="Cell" style="width:25%;">
 						{if $line.developer_name != ''}
 						<a href="games_main.php?developer={$line.developer_id}&amp;action=search" class="MAINNAV">
 							{$line.developer_name}
@@ -88,10 +85,8 @@ The main game page
 						{else}
 							<i>n/a</i>
 						{/if}
-					</p>
 				</div>
-				<div class="Cell">
-					<p>
+				<div class="Cell" style="width:10%;">
 						{if $line.year != ''}
 						<a href="games_main.php?year={$line.year}&amp;action=search" class="MAINNAV">
 							{$line.year}
@@ -99,72 +94,41 @@ The main game page
 						{else}
 							<i>n/a</i>
 						{/if}
-					</p>
 				</div>
-				<div class="Cell">
-					<p>
-						{if $line.screenshot != ''}
+				<div class="Cell" style="width:15%;">
+						{if isset($line.screenshot)}
 							<img src="../templates/0/icons/screen.gif" alt="Screenshots available" hspace="0" vspace="0" border="0">
 						{/if}
-						{if $line.music != ''}
+						{if isset($line.music)}
 							<img src="../templates/0/icons/sound.gif" alt="Music available" hspace="0" vspace="0" border="0">
 						{/if}
-						{if $line.boxscan != ''}
+						{if isset($line.boxscan)}
 							<img src="../templates/0/icons/scan.gif" alt="Boxscan available" hspace="0" vspace="0" border="0">
 						{/if}
-						{if $line.download != ''}
+						{if isset($line.download)}
 							<img src="../templates/0/icons/disk.gif" alt="Download available" hspace="0" vspace="0" border="0">
 						{/if}
-						{if $line.ste_enhan != '' or $line.ste_only !=''}
+						{if isset($line.ste_enhan) or isset($line.ste_only)}
 							<img src="../templates/0/icons/ste.png" alt="STE Game" hspace="0" vspace="0" border="0">
 						{/if}
-						{if $line.falcon_only != '' or $line.falcon.enhan !=''}
+						{if isset($line.falcon_only) or isset($line.falcon.enhan)}
 							<img src="../templates/0/icons/falcon.png" alt="Falcon Game" hspace="0" vspace="0" border="0">
 						{/if}
-
-
-
-					</p>
 				</div>
 			</div>
 		{/foreach}
 		</div>
-		<table cellspacing="0" cellpadding="2" border="0" width="90%" style="border: solid 1px #b2b2b2; background-color:#E9E9E9;">
-		<tr>
-			<td valign="top" width="25%"><b>Game Name</b></td>
-			<td valign="top" width="25%"><b>Publisher</b></td>
-			<td valign="top" width="25%"><b>Developer</b></td>
-			<td valign="top" width="10%"><b>Year</b></td>
-			<td valign="top" width="15%"><b>Info</b></td>			
-		</tr>
-		</table>
+		
+				<div class="Table">
+			<div class="Heading">
+				<div class="Cellgame_name">
+					{if $nr_of_games == 1}1 game found {else} {$nr_of_games} games found{/if} in {$query_time} sec
+				</div>
+
+			</div>
+		</div>
 
 
-		<table cellspacing="0" cellpadding="2" border="0" width="90%" style="border: solid 1px #b2b2b2; background-color:#E9E9E9;">
-		{foreach from=$game_search item=line}
-		<tr bgcolor="{cycle name="tr" values="#EFEFEF,#E9E9E9"}">
-			<td width="25%" valign="top">{if $line.game_name != ''}<a href="games_detail.php?game_id={$line.game_id}" class="MAINNAV">{$line.game_name}</a>{else}<i>n/a</i>{/if}</td>
-			<td width="25%" valign="top">{if $line.publisher_name != ''}<a href="games_main.php?publisher={$line.publisher_id}&amp;action=search" class="MAINNAV">{$line.publisher_name}</a>{else}<i>n/a</i>{/if}</td>
-			<td width="25%" valign="top">{if $line.developer_name != ''}<a href="games_main.php?developer={$line.developer_id}&amp;action=search" class="MAINNAV">{$line.developer_name}</a>{else}<i>n/a</i>{/if}</td>				
-			<td width="10%" valign="top">{if $line.year != ''}<a href="games_main.php?year={$line.year}&amp;action=search" class="MAINNAV">{$line.year}</a>{else}<i>n/a</i>{/if}</td>
-			<td width="15%" valign="top">
-				{if $line.screenshot != ''}<img src="../templates/0/icons/screen.gif" alt="Screenshots available" hspace="0" vspace="0" border="0" title="Screenshot Available">{/if}
-				{if $line.music != ''}<img src="../templates/0/icons/sound.gif" alt="Music available" hspace="0" vspace="0" border="0" title="Music Available">{/if}
-				{if $line.boxscan != ''}<img src="../templates/0/icons/scan.gif" alt="Boxscan available" hspace="0" vspace="0" border="0" title="Boxscan Available">{/if}
-				{if $line.download != ''}<img src="../templates/0/icons/disk.gif" alt="Download available" hspace="0" vspace="0" border="0" title="Download Available">{/if}
-				{if $line.ste_enhan != '' or $line.ste_only !=''}<img src="../templates/0/icons/ste.png" alt="STE Game" hspace="0" vspace="0" border="0" title="STE Game">{/if}
-				{if $line.falcon_only != '' or $line.falcon.enhan !=''}<img src="../templates/0/icons/falcon.png" alt="Falcon Game" hspace="0" vspace="0" border="0" title="Falcon Game">{/if}
-			</td>
-		</tr>
-		{/foreach}
-		</table>
-
-	
-		<table cellspacing="0" cellpadding="2" border="0" width="90%" style="border-left: solid 1px #b2b2b2; border-left: solid 1px #b2b2b2; border-right: solid 1px #b2b2b2; border-bottom: solid 1px #b2b2b2;background-color:#E9E9E9;">
-		<tr>
-			<td valign="top" width="100%"><b>{if $nr_of_games == 1}1 game found {else} {$nr_of_games} games found{/if} in {$query_time} sec</b></td>
-		</tr>
-		</table>
 		<br>
 	</td>
 </tr>
@@ -185,7 +149,7 @@ The main game page
 	</tr>
 </table>
 <br>
-{if $message <> ''}
+{if isset($message) and $message <> ''}
 	<table align="center" width="100%" cellspacing="0" cellpadding="0" border="0">
 	<tr>
 		<td align="center" >
