@@ -19,10 +19,8 @@ In this section we can add or delete a newsimage
 */
 
 include("../includes/common.php");
-include("../includes/config.php"); 
 
-
-if ($action=="image_upload")
+if (isset($action) and $action=="image_upload")
 {
 //****************************************************************************************
 // This is where we handle the uploaded images and rename them and save them to db and hd
@@ -54,6 +52,7 @@ if(isset($news_image))
 		if ($image_name=='')
 		{
 			$message = "You forgot to add an image comment!";
+			$smarty->assign('message', $message);
 		}
 		else
 		{
@@ -84,15 +83,16 @@ if(isset($news_image))
 	else
 	{
 		$message = "Filetype not supported";
+		$smarty->assign('message', $message);
 	}
 
 	mysql_close();
 	}
 }
 
-$smarty->assign('message', $message);
-$smarty->assign('news_add_images_tpl', '1');
 
+$smarty->assign('news_add_images_tpl', '1');
+$smarty->assign("user_id",$_SESSION['user_id']);
 //Send all smarty variables to the templates
 $smarty->display('file:../templates/0/index.tpl');
 

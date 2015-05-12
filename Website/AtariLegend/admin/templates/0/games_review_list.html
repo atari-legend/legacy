@@ -1,0 +1,135 @@
+{* 
+/***************************************************************************
+                              games_review_list.tpl
+*                            --------------------------
+*   begin                : Sunday, November 27, 2005
+*   copyright            : (C) 2005 Atari Legend
+*   email                : admin@atarilegend.com
+*
+*   Id: games_review_list.tpl,v 0.10 2005/11/27 Gatekeeper
+*
+***************************************************************************/
+
+************************************************************************************************
+The main game page
+************************************************************************************************
+*}
+
+<table align="center" class="HEADERBAR" width="100%" cellspacing="0" cellpadding="2" border="0">
+<tr>
+	<td style="vertical-align:top;" height="5" colspan=6>
+	<span class="LEFTNAVHEADING">&nbsp;Search results</span>
+	</td>
+</tr>
+</table>
+
+<table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
+<tr>
+	<td colspan="2">
+
+		<div class="category_set" style="border:solid 1px;padding:5px;">
+		This is the search result page. Click a game to go to the main review page. 
+		If you want to do a new search query, click <a href="games_review.php" class="MAINNAV"><b>here</b></a>!
+		
+		</div> 
+
+	</td>
+</tr>
+<tr>
+	<td align="center">
+
+		<div class="Table">
+			<div class="Heading">
+				<div class="Cell" style="width:30%;">
+					Game Name
+				</div>
+				<div class="Cell" style="width:30%;">
+					Publisher
+				</div>				
+				<div class="Cell" style="width:25%;">
+					Year
+				</div>
+				<div class="Cell" style="width:15%;">
+					Nr of reviews
+				</div>
+			</div>
+		</div>
+
+		<div class="Table">
+		{foreach from=$review item item=line}
+			<div class="Row" style="background-color:{cycle name="tr" values="#EFEFEF,#E9E9E9"};" id="game_row">
+				<div class="Cell" style="width:30%;">
+						{if $line.game_name != ''}
+						<a href="games_review_add.php?game_id={$line.game_id}" class="MAINNAV">
+							{$line.game_name}
+						</a>
+						{else}
+						<i>n/a</i>
+						{/if}
+				</div>
+				<div class="Cell" style="width:30%;">
+						{if $line.game_publisher != ''}
+							{$line.game_publisher}
+						{else}
+							<i>n/a</i>
+						{/if}
+				</div>				
+				<div class="Cell" style="width:25%;">
+						{if $line.game_year != ''}
+							{$line.game_year}
+						{else}
+							<i>n/a</i>
+						{/if}
+				</div>
+				<div class="Cell" style="width:15%;">
+						{if $line.number_reviews != ''}
+							{$line.number_reviews}
+						{else}
+							<i>n/a</i>
+						{/if}
+				</div>
+			</div>
+		{/foreach}
+		</div>
+
+
+		<div class="Table">
+			<div class="Heading">
+				<div class="Cell" style="width:100%;">
+					{if $nr_of_entries == 1}1 game found {else} {$nr_of_entries} games found{/if} in {$querytime} sec
+				</div>
+			</div>
+		</div>
+
+		<br>
+	</td>
+</tr>
+</table>
+<table align="center" class="HEADERBAR" width="100%" cellspacing="0" cellpadding="0" border="0">
+<tr>
+	<td>
+ 	<span class="LEFTNAVHEADING">&nbsp;&nbsp;&nbsp;</span>
+	</td>
+</tr>
+</table>
+<br>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+	<tr>
+   		<td colspan="3" valign=top align=center>
+			<b><a href="../games/games_review.php" class="MAINNAV">back</a></b>
+		</td>
+	</tr>
+</table>
+<br>
+{if isset($message) and $message <> ''}
+	<table align="center" width="100%" cellspacing="0" cellpadding="0" border="0">
+	<tr>
+		<td align="center" >
+			<br><br>
+			<span class="MAINAV">{$message}</span>
+		</td>
+	</tr>
+	</table>
+{/if}
+<br>
+<br>

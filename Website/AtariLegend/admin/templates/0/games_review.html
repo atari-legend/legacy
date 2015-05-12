@@ -34,9 +34,9 @@ The main game reviw
 </tr>
 <tr>
 	<td align="center">
-		<form action="../games/games_review.php" method="post" name="game_review" id="game_review">
+		<form action="../games/games_review_list.php" method="post" name="game_review" id="game_review">
 		<fieldset class="interview_set">
-		<legend class="links_legend">Search review</legend>
+		<legend class="links_legend">Add new Reviews</legend>
 		<br>
 		<table>
 		<tr>
@@ -86,6 +86,93 @@ The main game reviw
 		<input type="hidden" name="action" id="action" value="search">
 		<input type="hidden" name="user_id" id="user_id" value="{$user_id}">
 		</form>
+
+
+		<br>
+		<br>
+{if isset($message) and $message <> ''}
+	<table align="center" width="90%" cellspacing="0" cellpadding="0" border="0">
+	<tr>
+		<td align="center" >
+			<br><br>
+			<span class="MAINAV">{$message}</span>
+		</td>
+	</tr>
+	</table>
+<br><br>
+{/if}
+
+		<div class="Table" style="border-bottom:0px;">
+			<div class="Heading">
+				<div class="Cell" style="width:100%;text-align:center;font-size: 15px;">
+					Latest Reviews
+				</div>
+			</div>
+		</div>
+
+
+		<div class="Table" style="border-top:0px;">
+			<div class="Heading">
+				<div class="Cell" style="width:30%;">
+					Game Name
+				</div>
+				<div class="Cell" style="width:30%;">
+					Publisher
+				</div>				
+				<div class="Cell" style="width:25%;">
+					Year
+				</div>
+				<div class="Cell" style="width:15%;">
+					Nr of reviews
+				</div>
+			</div>
+		</div>
+		
+
+		<div class="Table">
+		{foreach from=$review item item=line}
+			<div class="Row" style="background-color:{cycle name="tr" values="#EFEFEF,#E9E9E9"};" id="game_row">
+				<div class="Cell" style="width:30%;">
+						{if $line.game_name != ''}
+						<a href="games_review_add.php?game_id={$line.game_id}" class="MAINNAV">
+							{$line.game_name}
+						</a>
+						{else}
+						<i>n/a</i>
+						{/if}
+				</div>
+				<div class="Cell" style="width:30%;">
+						{if $line.game_publisher != ''}
+							{$line.game_publisher}
+						{else}
+							<i>n/a</i>
+						{/if}
+				</div>				
+				<div class="Cell" style="width:25%;">
+						{if $line.game_year != ''}
+							{$line.game_year}
+						{else}
+							<i>n/a</i>
+						{/if}
+				</div>
+				<div class="Cell" style="width:15%;">
+						{if $line.number_reviews != ''}
+							{$line.number_reviews}
+						{else}
+							<i>n/a</i>
+						{/if}
+				</div>
+			</div>
+		{/foreach}
+		</div>
+
+
+
+
+
+
+
+
 	</td>
 </tr>
 </table>
@@ -97,8 +184,8 @@ The main game reviw
 </tr>
 </table>
 
-{if $message <> ''}
-	<table align="center" width="100%" cellspacing="0" cellpadding="0" border="0">
+{if isset($message) and $message <> ''}
+	<table align="center" width="90%" cellspacing="0" cellpadding="0" border="0">
 	<tr>
 		<td align="center" >
 			<br><br>

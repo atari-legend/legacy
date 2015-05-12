@@ -16,7 +16,6 @@
 
 //load all common functions
 include("../includes/common.php"); 
-include("../includes/config.php"); 
 
 $sql_interview = mysql_query("SELECT 
 								   interview_main.interview_id,
@@ -37,14 +36,14 @@ $sql_interview = mysql_query("SELECT
 						   
 $query_interview = mysql_fetch_array($sql_interview);
 
-	$v_interview_date = convert_timestamp($query_interview[interview_date]);
+	$v_interview_date = convert_timestamp($query_interview['interview_date']);
 	
-	$interview_text = $query_interview[interview_text];
+	$interview_text = $query_interview['interview_text'];
 	$interview_text = nl2br($interview_text);
 	$interview_text = InsertALCode($interview_text);
 	$interview_text = InsertSmillies($interview_text);
 	
-	$interview_chapters = $query_interview[interview_chapters];
+	$interview_chapters = $query_interview['interview_chapters'];
 	$interview_chapters = nl2br($interview_chapters);
 	$interview_chapters = InsertALCode($interview_chapters);
 	$interview_chapters = InsertSmillies($interview_chapters);
@@ -55,14 +54,14 @@ $query_interview = mysql_fetch_array($sql_interview);
 	$sql_author = mysql_fetch_array($query_author);
 	
 	//The interviewed person's picture
-	if ( $query_interview[ind_imgext] == 'png' or  
-		 $query_interview[ind_imgext] == 'jpg' or 
-		 $query_interview[ind_imgext] == 'gif')
+	if ( $query_interview['ind_imgext'] == 'png' or  
+		 $query_interview['ind_imgext'] == 'jpg' or 
+		 $query_interview['ind_imgext'] == 'gif')
 	{
 		$v_ind_image  = $individual_screenshot_path;
-		$v_ind_image .= $query_interview[ind_id];
+		$v_ind_image .= $query_interview['ind_id'];
 		$v_ind_image .= '.';
-		$v_ind_image .= $query_interview[ind_imgext];
+		$v_ind_image .= $query_interview['ind_imgext'];
 	}
 	else
 	{
@@ -70,10 +69,10 @@ $query_interview = mysql_fetch_array($sql_interview);
 	}
 	
 	$smarty->assign('interview',
-	     array('individual_name' => $query_interview[ind_name],
-			   'individual_id' => $query_interview[ind_id],
-		 	   'interview_author' => $sql_author[userid],
-			   'interview_email' => $sql_author[email],
+	     array('individual_name' => $query_interview['ind_name'],
+			   'individual_id' => $query_interview['ind_id'],
+		 	   'interview_author' => $sql_author['userid'],
+			   'interview_email' => $sql_author['email'],
 			   'interview_id' => $interview_id,
 		 	   'interview_date' => $v_interview_date,
 			   'interview_img' => $v_ind_image,
@@ -91,14 +90,14 @@ $query_screenshots = mysql_query("SELECT * FROM interview_main
 while ($sql_screenshots = mysql_fetch_array($query_screenshots))
 {
 	$new_path = $interview_screenshot_path;
-	$new_path .= $sql_screenshots[screenshot_id];
+	$new_path .= $sql_screenshots['screenshot_id'];
 	$new_path .= ".";
-	$new_path .= $sql_screenshots[imgext];
+	$new_path .= $sql_screenshots['imgext'];
 		
 	
 	$smarty->append('screenshots',
 	    		  array('screenshot' => $new_path,
-			 		    'comment' => $sql_screenshots[comment_text])); 
+			 		    'comment' => $sql_screenshots['comment_text'])); 
 }
 
 $smarty->assign('interviews_preview_tpl', '1');

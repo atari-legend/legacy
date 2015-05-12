@@ -19,24 +19,31 @@ In this section we can delete/edit a newsimage
 */
 
 include("../includes/common.php"); 
-include("../includes/config.php"); 
 
 $sql_images = mysql_query("SELECT * FROM news_image");
 	
 while ( $news_images = mysql_fetch_array($sql_images) )
 {
 	$v_image  = $news_images_path;
-	$v_image .= $news_images[news_image_id];
+	$v_image .= $news_images['news_image_id'];
 	$v_image .= '.';
-	$v_image .= $news_images[news_image_ext];
+	$v_image .= $news_images['news_image_ext'];
+
+// Count how many times the image is used.
+	$sql = "SELECT COUNT(*) AS count FROM news WHERE news_image_id = $news_images[news_image_id]";
+	$query = mysql_query($sql);
+	$imagecount = mysql_fetch_array($query);	
+
+
 	
 	$smarty->append('news_images',
-	    	 array('image_id' => $news_images[news_image_id],
-				   'image_name' => $news_images[news_image_name],
+	    	 array('image_id' => $news_images['news_image_id'],
+				   'image_name' => $news_images['news_image_name'],
+				   'image_count' => $imagecount['count'],
 				   'image_link' => $v_image));
 }
 
-if ($action=="delete_image")
+if (isset($action) and $action=="delete_image")
 {
 	if(isset($news_image_id)) 
 	{

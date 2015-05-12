@@ -20,14 +20,14 @@ Display submissions
 */
 
 include("../includes/common.php");
-include("../includes/config.php");
 
 // get the total nr of submissions in the DB
 $query_total_number = mysql_query("SELECT count(*) FROM game_submitinfo") or die ("Couldn't get the total number of submissions");
 $v_rows_total = mysql_result($query_total_number,0,0) or die("Couldn't get the total number of submissions");
 $smarty->assign('total_nr_submissions', $v_rows_total);
 
-$v_counter = (isset($_GET['v_counter']) ? $_GET['v_counter'] : 0);
+//$v_counter = (isset($_GET['v_counter']) ? $_GET['v_counter'] : 0);
+		if (empty($v_counter)) {$v_counter = 0;}
 		if (!isset($list)) {$list="current"; }
 		if ($list=="done") 
 		
@@ -70,7 +70,7 @@ $v_counter = (isset($_GET['v_counter']) ? $_GET['v_counter'] : 0);
 		}
 		
 										
-		$number_sub = get_rows($sql_submission);
+		$number_sub = mysql_num_rows($sql_submission);
 	
 		while ($query_submission = mysql_fetch_array($sql_submission))  
 		{

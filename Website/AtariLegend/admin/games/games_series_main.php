@@ -61,6 +61,7 @@ include("../includes/common.php");
 							   pd1.pub_dev_name as 'publisher_name',
 							   game_developer.dev_pub_id as 'developer_id',
 							   pd2.pub_dev_name as 'developer_name',
+							   game_series_cross.game_series_cross_id,
 							   game_year.game_year
 								FROM game_series_cross 
 								LEFT JOIN game ON (game_series_cross.game_id = game.game_id)
@@ -87,7 +88,10 @@ include("../includes/common.php");
 	    				array('game_id' => $query_series_link['game_id'],
 						  	  'game_name' => $query_series_link['game_name'],
 							  'publisher_name' => $query_series_link['publisher_name'],
+							  'publisher_id' => $query_series_link['publisher_id'],
 							  'developer_name' => $query_series_link['developer_name'],
+							  'developer_id' => $query_series_link['developer_id'],
+							  'game_series_cross_id' => $query_series_link['game_series_cross_id'],
 							  'year' => $query_series_link['game_year']));
 				}
 				
