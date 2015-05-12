@@ -152,7 +152,8 @@ footer, header, hgroup, menu, nav, section {
     }
     
     #sidebar {
-        position: absolute;
+		z-index:1;
+		position: absolute;
         left: -170px;
         background: black;
         width: 170px;
@@ -495,8 +496,13 @@ Standard tile settings
 	 float:right;
 }
 
-.column-wide { width: 100%; 
+.column-wide-left { width: 64%; 
 	 float:left;
+	 margin-top:0;
+}
+
+.column-wide-right { width: 32%; 
+	 float:right;
 	 margin-top:0;
 }
 
@@ -511,6 +517,8 @@ Standard tile settings
 	.column-right{display : none;}
 	.column-left-tab { width: 48%; float: left;}
 	.column-right-tab { width: 48%; float: right}
+	.column-wide-right {width: 48%; float: right}
+	.column-wide-left {width: 100%; }
 }
 
 /* 1 tile and a simplified intro screen */
@@ -520,11 +528,14 @@ Standard tile settings
 	.column-right { width: 100%; }	
 	.column-right-tab {display:none}
 	.column-left-tab {display:none}
+	.column-wide-right { width: 100%;}
+	.column-wide-left {display:none}
 }
 
 @media screen and (min-width: 801px) { 
 	.column-right-tab {display:none}
 	.column-left-tab {display:none}
+	.column-wide {display : none}
 }
 
 .standard_tile  { width: 100%; 
@@ -772,8 +783,8 @@ Standard tile settings
  Welcome tile settings --> frontpage
 ------------------------------------------------------------ */
 #welcome { position: relative;
-		width: 600px; 
-		height: 300px; 
+		width: 845px; 
+		height: 460px; 
 		overflow: hidden;
 		margin-top: 20px;
 		border-top: 10px solid #01b5b5;
@@ -781,7 +792,16 @@ Standard tile settings
 		margin-bottom:20px;
 		float: left;
 }
-	
+
+.welcome_slides { cursor: move; 
+		position: absolute; 
+		left: 0px; 
+		top: 0px; 
+		width: 845px; 
+		height: 460px; 
+		overflow: hidden;
+}
+
 #welcome p { background: rgb(0, 80, 80) transparent;   /* Fallback for web browsers that doesn't support RGBa */
         background: rgba(0, 80, 80, 0.6);   /* RGBa with 0.6 opacity */
 		filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#005050, endColorstr=#005050);  /* For IE 5.5 - 7*/
@@ -792,40 +812,23 @@ Standard tile settings
 		padding-right: 5%;
 	}	
 	
-#welcome_image { position:absolute;
-		left:0;
-		top:0;
-	}
-	
 #welcome_text { font-size : 11pt; 
 		padding-bottom: 10px;	
 		padding-top: 10px;	
 		color : white;
 		border-bottom: 2px solid #01b5b5;	
 		position: absolute;		
-		Margin-top: 40px;
+		Margin-top: 130px;
 	}
 
 /* 1 tile and a simplified intro screen */
 @media screen and (max-width: 639px) { 
-	#welcome  { 
-		/*width: 100%;
-		background-image: none;
-		margin-top: -20px;
-		margin-bottom: 25px;
-		border-top: 0px;*/
-		visibility : hidden;
-	}	
-	
-	/*#welcome img { display : none;}
-
-	#welcome_text { display : none;}*/
+	#welcome  { visibility : hidden; }	
 }
 
 /* 2 tiles and background welcome image */
 @media screen and (min-width: 640px) and (max-width: 800px) { 
-	#welcome  { width: 100%; 
-			margin-bottom: 20px;
+	#welcome  { margin-bottom: 20px;
 	}
 }
 
@@ -835,7 +838,7 @@ logon tile --> front page
 #logon { margin-top: 20px;
 		float : right;
 		margin-bottom : 20px;
-		width: 32%;
+		width: 100%;
 }
 	
 .logon_input_usn{position : relative;
@@ -868,19 +871,26 @@ logon tile --> front page
 
 .logon_signin img:hover{ opacity:0.7;}
 
+.logon_socmed{ margin-top:10px; 
+}
+
+.logon_socmed img{ display:block;
+    margin:auto;
+	width: 40%;	
+}
+
+.logon_socmed img:hover{ opacity:0.7;}
+
+/* 2 tiles and background welcome image */
+@media screen and (min-width: 640px) and (max-width: 800px) { 
+	#logon { margin-top: 0px;}
+}
+
 /* 1 tile */
 @media screen and (max-width: 639px) { 
 	#logon  { width: 100%; 
-	margin-top: -320px;	
+	margin-top: 20px;	
 	margin-bottom: 20px;
-	}
-}
-
-/* 2 tiles */
-@media screen and (min-width: 640px) and (max-width: 800px) { 
-	#logon  { width: 48%; 
-		margin-bottom: 20px;	
-		margin-top: 0px;
 	}
 }
 
@@ -891,6 +901,10 @@ latest news tile --> front page
 			margin-bottom: 20px;
 }
 
+@media screen and (min-width: 640px) and (max-width: 800px) { 
+	#latest_news { margin-top: 395px;
+	}
+}
 
 /*---------------------------------------------------------- 
 screenstar tile - front page
@@ -901,9 +915,7 @@ screenstar tile - front page
 /*---------------------------------------------------------- 
 datequote tile - front page
 ------------------------------------------------------------ */
-#datequote_position_front { 	margin-top:-62px;	
-				margin-bottom: 20px;
-}
+#datequote_position_front { 	margin-bottom: 20px; }
 
 #datequote_bg { background: url(../images/datequote_bg.jpg) ;}
 
