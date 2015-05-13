@@ -99,7 +99,7 @@ A
 .LEFTNAV 
 {
 	font-family : Verdana, Arial, Helvetica, sans-serif;
-	font-size: 10px;
+	font-size: 12px;
 	text-align: center;
 	color: black;
 	font-weight : bold;
@@ -455,3 +455,42 @@ background-color: Menu;
     {
 	background-color:#b2b2b2;
     }
+
+.NEWNAVCELL 
+{
+	background-color:#E9E9E9;
+	border: solid #1A168B;
+	vertical-align: top;
+	padding: 2px;
+	list-style-type:none;
+	text-align: center;
+
+}
+
+.NEWHEADERBAR 
+{
+	background-image: url(headerback.png);
+	color: #FFFFDD;
+	vertical-align: center;
+	font-weight: 600;
+	height: 20px;
+	background-attachment: inherit;
+	background-repeat: repeat-x;
+	font-family : Verdana, Arial, Helvetica, sans-serif;
+	font-size : 12px;
+	padding-bottom:5px;
+	padding-top:2px;
+}
+
+.leftnav_list {
+
+	padding-bottom:1px;
+	padding-top:0px;
+}
+
+.leftnav_list:hover {
+
+	background-color:#b2b2b2;
+}
+
+

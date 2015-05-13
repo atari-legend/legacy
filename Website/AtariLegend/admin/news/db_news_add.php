@@ -1,5 +1,5 @@
 <?/***************************************************************************
-*                                news_add.php
+*                                db_news_add.php
 *                            -----------------------
 *   begin                : Sunday, may 1 2005
 *   copyright            : (C) 2005 Atari Legend
@@ -18,16 +18,6 @@ In this section we can add a news update to the DB
 */
 
 include("../includes/common.php");
-				
-$sql_newsimage = mysql_query("SELECT news_image_id,news_image_name FROM news_image ORDER BY news_image_name");
-				
-while ($newsimages = mysql_fetch_array($sql_newsimage))
-{
-	$smarty->append('news_images',
-	    	 array('image_id' => $newsimages['news_image_id'],
-				   'image_name' => $newsimages['news_image_name']));
-}
-
 
 if (isset($action) and $action=="add_news")
 //****************************************************************************************
@@ -55,13 +45,8 @@ if (isset($action) and $action=="add_news")
 	}
 	
 	$smarty->assign('message', $message);
+	header("Location: ../news/news_add.php");
 }
-
-$smarty->assign("user_id",$_SESSION['user_id']);
-$smarty->assign('news_add_tpl', '1');
-
-//Send all smarty variables to the templates
-$smarty->display('file:../templates/0/index.tpl');
 
 //close the connection
 mysql_close();
