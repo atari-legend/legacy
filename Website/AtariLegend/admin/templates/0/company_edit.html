@@ -15,7 +15,7 @@ The company edit page
 ************************************************************************************************
 *}
 
-{literal}
+
 <script type="text/javascript">
 function company_pic_delete(comp_id)
 { 
@@ -51,10 +51,9 @@ function companydelete(comp_id)
    	} 	
 }
 </script>
-{/literal}
 
 {* load the button javascripts *}
-{include file="../templates/0/js/game_comment.js"}
+{include file="./js/game_comment.js"}
 
 <table align="center" class="HEADERBAR" width="100%" cellspacing="0" cellpadding="2" border="0">
 <tr>
@@ -191,7 +190,7 @@ function companydelete(comp_id)
 </table>
 <br>
 
-{if $message <> ''}
+{if (isset($message) and $message <> '')}
 	<table align="center" width="100%" cellspacing="0" cellpadding="0" border="0">
 	<tr>
 		<td align="center" >

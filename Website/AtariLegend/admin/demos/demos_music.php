@@ -13,7 +13,6 @@
 
 //load all common functions
 include("../includes/common.php"); 
-include("../includes/config.php"); 
 
 /*
 ************************************************************************************************
@@ -50,7 +49,7 @@ if ($action == 'search')
 	{
 		$smarty->assign("message","Please fill in one of the search fields");
 		
-		$smarty->assign("user_id",$_SESSION[user_id]);
+		$smarty->assign("user_id",$_SESSION['user_id']);
 		$smarty->assign('demos_music_tpl', '1');
 
 		//Send all smarty variables to the templates
@@ -100,10 +99,10 @@ if ($action == 'search')
 					$array = mysql_fetch_array($numberzaks);
 				
 					$smarty->append('music',
-	   			 	 array('demo_id' => $row[demo_id],
-						   'demo_name' => $row[demo_name],
-						   'demo_crew' => $row[crew_name],
-						   'demo_year' => $row[demo_year],
+	   			 	 array('demo_id' => $row['demo_id'],
+						   'demo_name' => $row['demo_name'],
+						   'demo_crew' => $row['crew_name'],
+						   'demo_year' => $row['demo_year'],
 						   'number_zaks' => $array['count']));	
 				}	
 				
@@ -113,7 +112,7 @@ if ($action == 'search')
 				$smarty->assign('querytime', $totaltime1);
 				$smarty->assign('nr_of_entries', $i);
 				
-				$smarty->assign("user_id",$_SESSION[user_id]);
+				$smarty->assign("user_id",$_SESSION['user_id']);
 				$smarty->assign('demos_music_list_tpl', '1');
 				
 				//Send all smarty variables to the templates
@@ -126,7 +125,7 @@ if ($action == 'search')
 			{
 				$smarty->assign("message","No entries for your query!");
 		
-				$smarty->assign("user_id",$_SESSION[user_id]);
+				$smarty->assign("user_id",$_SESSION['user_id']);
 				$smarty->assign('demos_music_tpl', '1');
 
 				//Send all smarty variables to the templates
@@ -140,7 +139,7 @@ if ($action == 'search')
 }
 else
 {
-	$smarty->assign("user_id",$_SESSION[user_id]);
+	$smarty->assign("user_id",$_SESSION['user_id']);
 	$smarty->assign('demos_music_tpl', '1');
 
 	//Send all smarty variables to the templates
