@@ -70,8 +70,8 @@
 					<tr bgcolor="{cycle name="tr" values="#EFEFEF,#E9E9E9"}">
 						<td width="5%" valign="top"><input type="checkbox" name="game_id[]" value="{$line.game_id}"></td>
 						<td width="30%" valign="top">{if $line.game_name != ''}<a href="../administration/construction.php" class="MAINNAV">{$line.game_name}</a>{else}<i>n/a</i>{/if}</td>
-						<td width="25%" valign="top">{if $line.publisher_name != ''}<a href="games_main.php?publisher={$line.publisher_id}&amp;action=search" class="MAINNAV">{$line.publisher_name}</a>{else}<i>n/a</i>{/if}</td>
-						<td width="25%" valign="top">{if $line.developer_name != ''}<a href="games_main.php?developer={$line.developer_id}&amp;action=search" class="MAINNAV">{$line.developer_name}</a>{else}<i>n/a</i>{/if}</td>				
+						<td width="25%" valign="top">{if isset($line.publisher_name) and isset($line.publisher_id)}<a href="games_main.php?publisher={$line.publisher_id}&amp;action=search" class="MAINNAV">{$line.publisher_name}</a>{else}<i>n/a</i>{/if}</td>
+						<td width="25%" valign="top">{if isset($line.developer_name) and isset($line.developer_id)}<a href="games_main.php?developer={$line.developer_id}&amp;action=search" class="MAINNAV">{$line.developer_name}</a>{else}<i>n/a</i>{/if}</td>				
 						<td width="15%" valign="top">{if $line.year != ''}<a href="games_main.php?year={$line.year}&amp;action=search" class="MAINNAV">{$line.year}</a>{else}<i>n/a</i>{/if}</td>
 					</tr>
 				{/foreach}

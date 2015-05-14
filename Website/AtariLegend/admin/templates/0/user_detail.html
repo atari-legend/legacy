@@ -157,7 +157,7 @@ function user_stats()
 	<form action="../user/user_detail.php?action=delete_avatar" method="post" name="delete_avatar">
 	<label for="delete_image">Delete Image?</label>
 	<div class="links_screenshot">
-	 <img src="../includes/showimage.php?img={$users.image}&amp;w={$users.width}&amp;shadow=0&amp;bgcolour=a2a2a2" width={$users.width} alt="Avatar">
+	 <img src="../includes/show_image.php?file={$users.image}&amp;resize=160,null,null,null" alt="Avatar">
 	 </div>
 	 <input type="hidden" name="user_id_selected" value="{$users.user_id}">
 	 <input type="submit" value="Delete">
