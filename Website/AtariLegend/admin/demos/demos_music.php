@@ -22,7 +22,7 @@ This is the demo music main page
 $start1=gettimeofday();
 list($start2, $start3) = explode(":", exec('date +%N:%S'));
 				
-if ($action == 'search')
+if (isset($action) and $action == 'search')
 {
 	//check the $gamebrowse select
 	if ($demobrowse == "")
@@ -88,6 +88,7 @@ if ($action == 'search')
 			$rows = mysql_num_rows($demos);
 			if ( $rows > 0 )
 			{
+				$i = 1;
 				while ( $row=mysql_fetch_assoc($demos) ) 
 				{  
 					$i++;
