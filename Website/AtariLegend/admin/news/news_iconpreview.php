@@ -1,4 +1,5 @@
-<?/***************************************************************************
+<?php
+/***************************************************************************
 *                                news_iconpreview.php
 *                            -----------------------
 *   begin                : Sunday, May 1, 2005
@@ -18,7 +19,6 @@ In this section we can preview the news icons
 */
 
 include("../includes/common.php"); 
-include("../includes/config.php"); 
 
 $count=1;
 
