@@ -28,7 +28,7 @@ function company_pic_delete(comp_id)
 
     if (return_value !="0")
     {
-    	url="company_edit.php?comp_id="+comp_id+"&action=delete_logo";
+    	url="db_company_edit.php?comp_id="+comp_id+"&action=delete_logo";
 		location.href=url;
     } 
 }
@@ -46,7 +46,7 @@ function companydelete(comp_id)
 
    	if (return_value !="0")
    	{
-   		url="company_main.php?comp_id="+comp_id+"&action=delete_comp";
+   		url="db_company_edit.php?comp_id="+comp_id+"&action=delete_comp";
 		location.href=url;
    	} 	
 }
@@ -74,7 +74,7 @@ function companydelete(comp_id)
 </tr>
 <tr>
 	<td>
-	<form action="../company/company_edit.php" method="post" name="post" id="comp_edit">
+	<form action="../company/db_company_edit.php" method="post" name="post" id="comp_edit">
 		<table width="100%" cellspacing="0" cellpadding="0">
 		<tr>
 			<td width="100%" colspan="2">
@@ -155,7 +155,7 @@ function companydelete(comp_id)
 						<a href="javascript:company_pic_delete({$company.comp_id});" class="MAINNAV">delete logo</a>
 					</fieldset>
 				{else}
-					<form action="../company/company_edit.php" method="post" enctype="multipart/form-data" name="company_pic" id="compnay_pic">
+					<form action="../company/db_company_edit.php" method="post" enctype="multipart/form-data" name="company_pic" id="compnay_pic">
 					<fieldset class="links_set">
 					<legend class="links_legend">Company Logo</legend>
 						<input type="file" name="company_pic">
