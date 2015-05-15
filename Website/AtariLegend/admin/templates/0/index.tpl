@@ -24,6 +24,12 @@
 	<script type='text/JavaScript' src='../templates/0/js/sha512.js'></script>
 	<script type='text/JavaScript' src='../templates/0/js/md5.js'></script> 
 {/if}
+{if isset($games_box_tpl)}
+<script src="../templates/0/js/jquery-1.11.0.min.js"></script>
+	<script src="../templates/0/js/lightbox.min.js"></script>
+<link href="../templates/0/css/lightbox.css" rel="stylesheet" />
+ 
+{/if}
 
 	<title>Cpanel</title>
 </head>

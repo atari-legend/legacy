@@ -27,7 +27,7 @@ This is the game box main page
 	    array('game_id' => $game_name['game_id'],
 			  'game_name' => $game_name['game_name']));
 		
-		if ($mode == "back") 
+		if (isset($mode) and $mode == "back") 
 		{
 		$smarty->assign('mode',
 	    array('mode' => $mode,
@@ -63,15 +63,11 @@ This is the game box main page
 				{
 					$front++;
 					
-					// Get the image dimensions for the pop up window
-					$imginfo = getimagesize("$game_boxscan_path$rowimage[game_boxscan_id].jpg");
-					$width = $imginfo[0]+20;
-					$height = $imginfo[1]+25;		
+					$front_image_filename = "$game_boxscan_path$rowimage[game_boxscan_id].$rowimage[imgext]";		
 					
 					$smarty->append('frontscan',
 	    						array('game_boxscan_id' => $rowimage['game_boxscan_id'],
-			  						  'height' => $height,
-									  'width' => $width));
+									  'front_image' => $front_image_filename));
 				} 
 				// Else back covers
 				else
@@ -83,17 +79,11 @@ This is the game box main page
 					$couplerow = mysql_fetch_row($couple);
 					$boxscan_cross_id = $couplerow[0];
 					
+					$back_image_filename = "$game_boxscan_path$rowimage[game_boxscan_id].$rowimage[imgext]";	
 							
-					// Get the image dimensions for the pop up window
-					$imginfo = getimagesize("$game_boxscan_path$rowimage[game_boxscan_id].jpg");
-					$width = $imginfo[0]+20;
-					$height = $imginfo[1]+25;
-							
-			       	
 					$smarty->append('backscan',
 	    						array('game_boxscan_id' => $rowimage['game_boxscan_id'],
-			  						  'height' => $height,
-									  'width' => $width,
+									  'back_image' => $back_image_filename,
 									  'boxscan_cross_id' => $boxscan_cross_id));
 				}
 		 	}

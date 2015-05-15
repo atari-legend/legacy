@@ -28,7 +28,6 @@ function deletescreen(JSgameboxID,JSmode)
 }{/literal}
 </script>
 
-
 <table width="100%" border="0" cellspacing="0" cellpadding="2" align="center" class="HEADERBAR">
 <tr>    
 	<td height="5" style="vertical-align:top;">
@@ -114,7 +113,7 @@ function deletescreen(JSgameboxID,JSmode)
 						<a style="cursor:pointer;" class="MAINNAV" OnClick="deletescreen({$line.game_boxscan_id},'notback'); return false;">Delete</a>
 						</td>
 						<td width="20%" valign="top">
-						<a href="javascript:void(window.open('../includes/showscreens.php?game_boxscan_id={$line.game_boxscan_id}','4','width={$line.width},height={$line.height},toolbar=no,statusbar=no'))" class="MAINNAV">View</a>
+						<a href="../includes/show_image.php?file={$line.front_image}" data-lightbox="image-1" data-title="My caption">View</a>
 						</td>
 						<td width="50%" valign="top">
 						<a href="../games/games_box.php?game_id={$game_info.game_id}&mode=back&frontscan_id={$line.game_boxscan_id}" class="MAINNAV">Add Back</a>
@@ -150,7 +149,7 @@ function deletescreen(JSgameboxID,JSmode)
 						<a style="cursor:pointer;" class="MAINNAV" OnClick="deletescreen({$line.game_boxscan_id},back); return false;">Delete</a>
 						</td>
 						<td width="20%" valign="top">
-						<a href="javascript:void(window.open('../includes/showscreens.php?game_boxscan_id={$line.game_boxscan_id}','4','width={$line.width},height={$line.height},toolbar=no,statusbar=no'))" class="MAINNAV">View</a>
+						<a href="../includes/show_image.php?file={$line.back_image}" data-lightbox="image-1" data-title="My caption">View</a>
 						</td>
 						<td width="50%" valign="top">
 						{if $line.boxscan_cross_id neq ""}
@@ -186,7 +185,7 @@ function deletescreen(JSgameboxID,JSmode)
 </table>
 <br>
 
-{if $message <> ''}
+{if isset($message)}
 	<table align="center" width="100%" cellspacing="0" cellpadding="0" border="0">
 	<tr>
 		<td align="center" >
