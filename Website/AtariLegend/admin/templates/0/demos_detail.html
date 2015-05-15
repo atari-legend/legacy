@@ -132,13 +132,15 @@ function add_author()
 			<table width="100%">
 			<tr>
 				<td>	
+					{if isset($demo_author)} 
 					{foreach from=$demo_author item=line}
 						<input type="checkbox" name="demo_author_id[]" value="{$line.demo_author_id}">
 					  		<a href="../individuals/individuals_edit.php?ind_id={$line.ind_id}" class="MAINNAV">{$line.ind_name}</a> <b>({$line.auhthor_type_info})</b>
 					  	<br>
 					  	<br>
 					{/foreach}
-					{if $demo_author_nr == 1} 
+					{/if}
+					{if isset($demo_author_nr) and $demo_author_nr == 1} 
 				 		<img src="../templates/0/images/arrow_ltr.gif" alt="" width="38" height="22" border="0">		
 				 		<input type="button" value="Delete" onclick="delete_author()">
 					{/if}

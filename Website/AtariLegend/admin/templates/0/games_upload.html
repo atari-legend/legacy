@@ -59,8 +59,9 @@ function delete_download(id, game_id)
 </tr>
 </table>
 
-{if $nr_downloads >= '1'}
+{if isset($nr_downloads) and $nr_downloads >= '1'}
 <table width="100%" cellspacing="2" cellpadding="15" class="CELLCOLOR">
+{if isset($downloads)}
 {foreach from=$downloads item=line}
 <tr>
 	<td>
@@ -228,6 +229,7 @@ function delete_download(id, game_id)
 	</td>
 </tr>
 {/foreach}
+{/if}
 </table>
 {/if}
 

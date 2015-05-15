@@ -33,11 +33,12 @@ function scoredelete(JSmagID,JSgame_id)
 	
 		
 		<br>
+		{if isset($game_score)}
 		{foreach from=$game_score item=line}
 		{$line.game_name} - {$line.magazine_name} {$line.magazine_issue_nr} - score {$line.score} 
 		- <a onClick="scoredelete({$line.magazine_game_id},{$game.game_id})" style="cursor: pointer;" class="MAINNAV">Delete Score</a><br>
 		{/foreach}<br>
-		
+		{/if}
 		<fieldset class="category_set_noGrave">
 	<legend class="links_legend">Reviewed games.</legend>
 	<br>
