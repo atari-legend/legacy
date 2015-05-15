@@ -19,7 +19,6 @@ Display submissions
 */
 
 include("../includes/common.php");
-include("../includes/config.php");
 
 // get the total nr of submissions in the DB
 $query_total_number = mysql_query("SELECT count(*) FROM demo_submitinfo") or die ("Couldn't get the total number of submissions");
