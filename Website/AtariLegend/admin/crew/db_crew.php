@@ -1,4 +1,4 @@
-<?
+<?php
 /***************************************************************************
 *                                db_crew.php
 *                            -----------------------
@@ -17,7 +17,6 @@
 // We are using the action var to separate all the queries.
 
 include("../includes/common.php"); 
-include("../includes/config.php"); 
 
 if ($action=="stop")
 {

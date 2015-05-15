@@ -31,5 +31,3 @@ $smarty->assign('updates_tpl', '1');
 //Send all smarty variables to the templates
 $smarty->display('file:../templates/0/index.tpl');
 ?>
-
-

@@ -240,7 +240,7 @@ function review_screenshot($alcode)
 			 		 or die ("Database error - selecting screenshots");
 		
 		$screenshotrow = mysql_fetch_array($SCREENSHOT);
-		$screenshot_ext = $screenshotrow[imgext];
+		$screenshot_ext = $screenshotrow['imgext'];
 		
 		// $parts will be an array $parts[0] to $parts[6] 
 		$SCREENCOM = mysql_query("SELECT * FROM screenshot_review
@@ -251,7 +251,7 @@ function review_screenshot($alcode)
 		$comments = mysql_fetch_array($SCREENCOM);
 		
 		// if there is a comment, insert the comment code and comment into a var
-		if (!isset($comments[comment_text])) 
+		if (!isset($comments['comment_text'])) 
 			
 			{
 			$screencomment="";
@@ -308,7 +308,7 @@ function article_screenshot($alcode)
 		
 		// if there is a comment, insert the comment code and comment into a var
 		
-		if (!isset($comments[comment_text])) 
+		if (!isset($comments['comment_text'])) 
 			
 			{
 			$screencomment="";
@@ -404,6 +404,7 @@ function maketree($rootcatid,$sql,$maxlevel)
 // you MUST keep this order:
 // 1) the category ID, 2) the parent category ID, 3) the name of the category
          $result=mysql_query($sql);
+		//$result=$sql;
 		 
                  while(list($catid,$parcat,$name)=mysql_fetch_array($result)){
                  $table[$parcat][$catid]=$name; // array $table get 2 keys both with value $name
@@ -427,22 +428,22 @@ function makebranch($parcat,$table,$level,$maxlevel)
 		// do the indent
         if ($level=="0")
 		{
-        	$branche_info[cat_width]="0";
+        	$branche_info['cat_width']="0";
         }
 		else
 		{
             $width=($level+1)*10;
-            $branche_info[cat_width] = $width;
+            $branche_info['cat_width'] = $width;
         };
         // the resulting HTML - feel free to change it
         // $level is optional
 	
 		$website = mysql_query ("SELECT count(*) FROM website_category_cross WHERE website_category_id='$key'");
 	
-		$branche_info[cat_links] = mysql_result($website,0,0);
-		$branche_info[cat_name] = $val;
-		$branche_info[cat_id] = $key;
-		$tree[info][] = $branche_info;
+		$branche_info['cat_links'] = mysql_result($website,0,0);
+		$branche_info['cat_name'] = $val;
+		$branche_info['cat_id'] = $key;
+		$tree['info'][] = $branche_info;
 		
 		// ask if case to query if the category in this "cycle" has a subcategory, if it has execute makebranch2
 		if ((isset($table[$key])) AND (($maxlevel>$level+1) OR ($maxlevel=="0")))
