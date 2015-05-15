@@ -1,4 +1,4 @@
-<?
+<?php
 /***************************************************************************
 *                                Individuals_main.php
 *                            --------------------------
@@ -17,7 +17,6 @@ The main individual page
 */
 
 include("../includes/common.php");
-include("../includes/config.php"); 
 
 //if we want to delete the individual (from the edit page)
 if (empty($action)) {$action = "";}

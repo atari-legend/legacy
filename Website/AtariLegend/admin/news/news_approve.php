@@ -1,4 +1,5 @@
-<?/***************************************************************************
+<?php
+/***************************************************************************
 *                                news_approve.php
 *                            ---------------------------
 *   begin                : Thursday, May 5, 2005
@@ -18,8 +19,6 @@ In this section we can approve a news update.
 */
 
 include("../includes/common.php");
-include("../includes/config.php"); 
-
 
 if (isset($action) and $action=="approve")
 {

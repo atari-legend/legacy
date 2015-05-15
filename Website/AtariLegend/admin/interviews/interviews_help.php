@@ -1,4 +1,4 @@
-<?
+<?php
 /***************************************************************************
 *                                interviews_help.php
 *                            --------------------------
@@ -16,9 +16,8 @@
 //**************************************************************************************** 
 
 include("../includes/common.php");
-include("../includes/config.php"); 
 
-$smarty->assign("user_id",$_SESSION[user_id]);
+$smarty->assign("user_id",$_SESSION['user_id']);
 $smarty->assign('interviews_hlp_tpl', '1');
 
 //Send all smarty variables to the templates

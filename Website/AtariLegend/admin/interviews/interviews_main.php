@@ -1,4 +1,4 @@
-<?
+<?php
 /***************************************************************************
 *                                interviews_main.php
 *                            ------------------------------
@@ -16,7 +16,6 @@
 //**************************************************************************************** 
 
 include("../includes/common.php");
-include("../includes/config.php"); 
 
 //Get list of all individuals
 $sql_individuals = mysql_query("SELECT * FROM individuals ORDER BY ind_name ASC")

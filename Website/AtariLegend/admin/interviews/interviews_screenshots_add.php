@@ -1,4 +1,4 @@
-<?
+<?php
 /***************************************************************************
 *                                interviews_screenshots_add.php
 *                            -------------------------------------
@@ -16,7 +16,6 @@
 //**************************************************************************************** 
 
 include("../includes/common.php");
-include("../includes/config.php"); 
 
 //If we are uploading new screenshots
 if ( $action == 'add_screens' )
@@ -105,7 +104,7 @@ if ( $action == 'delete_screen' )
 				  or die ("Database error - selecting screenshots");
 		
 	$screenshotrow = mysql_fetch_array($SCREENSHOT);
-	$screenshot_ext = $screenshotrow[imgext];
+	$screenshot_ext = $screenshotrow['imgext'];
 
 	$sql = mysql_query("DELETE FROM screenshot_main WHERE screenshot_id = '$screenshot_id' ");
 	$sql = mysql_query("DELETE FROM screenshot_interview WHERE screenshot_id = '$screenshot_id' ");
@@ -161,9 +160,9 @@ while ($interview = mysql_fetch_array($sql_interview))
 {	
 	$smarty->assign('interview',
 	    	 array('interview_id' => $interview_id,
-				   'interview_ind_name' => $interview[ind_name],
-				   'interview_author' => $interview[member_id],
-				   'interview_ind_id' => $interview[ind_id]));
+				   'interview_ind_name' => $interview['ind_name'],
+				   'interview_author' => $interview['member_id'],
+				   'interview_ind_id' => $interview['ind_id']));
 }
 
 $smarty->assign("user_id",$_SESSION[user_id]);
