@@ -202,10 +202,6 @@ header("Location: ../games/games_detail.php?game_id=$game_id");
 		// game_table
 		$sdbquery  = mysql_query("UPDATE game SET game_name='$game_name' WHERE game_id=$game_id") or die ("trouble updating game"); 
 		
-		//******NOT USED ANYMORE******//
-		// DUMP TABLE UPDATE
-		//$sdbquery  = mysql_query("UPDATE game_search SET game_name='$game_name' WHERE game_id=$game_id") or die ("trouble updating dump table"); 
-		
 		// Delete the category crosses currently in the database for this game
 		$sdbquery  = mysql_query("DELETE FROM game_cat_cross WHERE game_id=$game_id");	
 
