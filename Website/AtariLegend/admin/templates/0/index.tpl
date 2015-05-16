@@ -47,9 +47,9 @@
     				<td width="20%" valign="top">
 					<img src="../templates/0/images/al-beta2logo.png" alt="logo" width="200" height="71" border="0" align="top"> 
 					</td>
-					{if isset($games_list_html) or isset($games_detail_tpl)} 
+				{if isset($games_list_html) or isset($games_detail_tpl)} 
 					<td width="80%" valign="top">
-					<form action="../games/games_main.php" method="post" name="game_search" id="game_search">
+					<form action="../games/games_list.php" method="post" name="game_search" id="game_search">
 				<br>
 		<table align="left">
 		<tr>
@@ -118,7 +118,7 @@
 			<td align="left">
 				<select name="developer" style="width:90px;">
 					<option value="-" SELECTED>-</option>
-					{foreach from=$company item=line} 
+					{foreach from=$company_developer item=line} 
 						<option value="{$line.comp_id}">{$line.comp_name}</option>
 					{/foreach}
 				</select>
@@ -129,7 +129,7 @@
 			<td align="left">
 			<select name="publisher" style="width:90px;">
 					<option value="-" SELECTED>-</option>
-					{foreach from=$company item=line} 
+					{foreach from=$company_publisher item=line} 
 						<option value="{$line.comp_id}">{$line.comp_name}</option>
 					{/foreach}
 				</select>	

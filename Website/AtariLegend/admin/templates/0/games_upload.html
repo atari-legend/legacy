@@ -29,7 +29,7 @@ function delete_download(id, game_id)
 
     	if (return_value !="0")
     	{
-    		url="../games/games_upload.php?game_id="+game_id+"&game_download_id="+id+"&action=delete_download";
+    		url="../games/db_games_upload.php?game_id="+game_id+"&game_download_id="+id+"&action=delete_download";
 			location.href=url;
     	} 
 }
@@ -65,13 +65,13 @@ function delete_download(id, game_id)
 {foreach from=$downloads item=line}
 <tr>
 	<td>
-	<form action="../games/games_upload.php?action=update_download" method="post" name="upload">
+	<form action="../games/db_games_upload.php?action=update_download" method="post" name="upload">
 	<fieldset class="game_set">
 		<legend class="links_legend">{$line.date}</legend>
 		<table width="100%">
 		<tr>
 			<td colspan="4">
-				<a href="../../games/game_download.php?game_download_id={$line.game_download_id}" class="MAINNAV">{$line.filename}</a>
+				<a href="{$line.filepath}.zip" class="MAINNAV">{$line.filename}</a>
 				<br>
 				<br>
 			</td>
@@ -236,7 +236,7 @@ function delete_download(id, game_id)
 <table width="100%" cellspacing="2" cellpadding="15" class="CELLCOLOR">
 <tr>
 	<td>
-	<form action="../games/games_upload.php?action=add_download" enctype="multipart/form-data" method="post" name="add_file">
+	<form action="../games/db_games_upload.php?action=add_download" enctype="multipart/form-data" method="post" name="add_file">
 	<fieldset class="category_set">
 		<legend class="links_legend">Add a new download</legend>
 		<table>
