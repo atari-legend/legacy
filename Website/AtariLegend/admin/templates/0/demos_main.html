@@ -36,7 +36,7 @@ function demoinsert()
 		
     	if (return_value !="0")
     	{
-    		url="demos_main.php?newdemo="+JSnewdemo+"&action=insert";
+    		url="db_demos.php?newdemo="+JSnewdemo+"&action=insert_demo";
 			location.href=url;
     	} 
 	}
@@ -64,7 +64,7 @@ function demoinsert()
 </tr>
 <tr>
 	<td align="center">
-		<form action="../demos/demos_main.php" method="post" name="demo_search" id="demo_search">
+		<form action="../demos/demos_list.php" method="post" name="demo_search" id="demo_search">
 		<fieldset class="interview_set">
 		<legend class="links_legend">Search demos</legend>
 		<br>
