@@ -22,50 +22,16 @@ include("../includes/common.php");
 //When we are dealing with the news_id var, we're talking about newsthreads online, the news_submission_id
 //is used for the submitted news threads.
 
-//when we press the update button, update the actual news and go back to the edit page
-if (isset($action) and $action=="update")
-{
-	//Submitted thread change
-	if ($news_id =='')
-	{
-		//Its a submission
-		mysql_query("UPDATE 
-					news_submission SET 
-					news_headline='$news_headline', 
-					news_text='$news_text',
-					news_image_id='$news_image_id'
-					WHERE news_submission_id='$news_submission_id'")
-		 	or die("The update failed");
-	
-		$message = "News submission updated correctly";
-		$smarty->assign('message', $message );
-	}
-	else
-	{
-		//Actual news thread change
-		mysql_query("UPDATE 
-					news SET 
-					news_headline='$news_headline', 
-					news_text='$news_text',
-					news_image_id='$news_image_id'
-					WHERE news_id='$news_id'")
-		 	or die("The update failed");
-	
-		$message = "News thread updated correctly";
-		$smarty->assign('message', $message );
-	}
-}
-
 if (empty($news_id))
 {
 //We're dealing with a submission. Get the actual submission we wanna edit
 $sql_news  =  mysql_query("SELECT
-			  			   news_headline,
-					   	   news_text,
-			  			   news_image_id,
-			  			   user_id,
-			  			   news_date
-			  			   FROM news_submission WHERE news_submission_id = '$news_submission_id'");
+			  	news_headline,
+				news_text,
+			  	news_image_id,
+			  	user_id,
+			  	news_date
+			  	FROM news_submission WHERE news_submission_id = '$news_submission_id'");
 
 $news = mysql_fetch_array($sql_news);
 
