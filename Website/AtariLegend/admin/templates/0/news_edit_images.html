@@ -38,7 +38,7 @@
 	</td>
 </tr>
 
-{foreach from=$news_images item=line}
+{foreach name='outer' from=$news_images item='line'}
 <tr>
 	<td width="5%">	
 		<input type="checkbox" name="news_image_id[]" value="{$line.image_id}">
@@ -49,6 +49,12 @@
 	<td width="90%" style="vertical-align: text-top;">
 		{$line.image_name}<br>
 		Image has been used in {$line.image_count} news posts.<br>
+			{foreach from=$news_headlines name='inner' item='line2'}
+			{if $line.image_id == $line2.news_image_id}
+			<a href="../news/news_edit.php?news_id={$line2.news_id}" class="MAINNAV"><b>{$line2.news_headline}</b></a><br>
+			{/if}
+			{/foreach}
+
 	</td>
 </tr>
 {/foreach}	

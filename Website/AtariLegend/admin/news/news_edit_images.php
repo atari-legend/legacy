@@ -21,7 +21,7 @@ In this section we can delete/edit a newsimage
 
 include("../includes/common.php"); 
 
-$sql_images = mysql_query("SELECT * FROM news_image");
+$sql_images = mysql_query("SELECT * FROM news_image ORDER BY news_image_name ASC");
 	
 while ( $news_images = mysql_fetch_array($sql_images) )
 {
@@ -43,6 +43,22 @@ while ( $news_images = mysql_fetch_array($sql_images) )
 				   'image_count' => $imagecount['count'],
 				   'image_link' => $v_image));
 }
+
+
+$sql_news = mysql_query("SELECT 
+				news_id,
+				news_headline,
+				news_image_id
+				FROM news ORDER BY news_image_id") or die("Error retriving news posts");
+
+while ($news = mysql_fetch_array($sql_news))
+{
+	$smarty->append('news_headlines',
+ 		 		array('news_id' => $news['news_id'],
+					  'news_headline' => $news['news_headline'],
+			  		  'news_image_id' => $news['news_image_id']));	
+}
+
 
 if (isset($action) and $action=="delete_image")
 {
