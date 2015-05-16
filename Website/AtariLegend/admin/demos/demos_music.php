@@ -63,15 +63,15 @@ if (isset($action) and $action == 'search')
 		//In all cases we search we start searching through the demo table
 		//first
 		$RESULTDEMO = "SELECT 
-							demo.demo_id, 
-							demo.demo_name, 
-							crew.crew_name, 
-							crew.crew_id, 
-							demo_year.demo_year
-					   FROM demo
-					   LEFT JOIN crew_demo_prod ON ( demo.demo_id = crew_demo_prod.demo_id ) 
-					   LEFT JOIN crew ON ( crew_demo_prod.crew_id = crew.crew_id ) 
-					   LEFT JOIN demo_year ON ( demo_year.demo_id = demo.demo_id ) WHERE ";
+					demo.demo_id, 
+					demo.demo_name, 
+					crew.crew_name, 
+					crew.crew_id, 
+					demo_year.demo_year
+					FROM demo
+					LEFT JOIN crew_demo_prod ON ( demo.demo_id = crew_demo_prod.demo_id ) 
+					LEFT JOIN crew ON ( crew_demo_prod.crew_id = crew.crew_id ) 
+					LEFT JOIN demo_year ON ( demo_year.demo_id = demo.demo_id ) WHERE ";
 		
 		$RESULTDEMO .= $demobrowse_select;
 		$RESULTDEMO .= "demo.demo_name LIKE '%$demosearch%'"; 

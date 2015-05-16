@@ -29,19 +29,19 @@ include("../includes/common.php");
 $sql_comment = mysql_query($sql_build) or die("couldn't build query");
 $query_comment = mysql_fetch_array($sql_comment) or die("couldn't build query");
 
-$date = convert_timestamp($query_comment[timestamp]);
+$date = convert_timestamp($query_comment['timestamp']);
 	
 		$smarty->assign('comments',
-	    array('comment' => $query_comment[comment],
+	    array('comment' => $query_comment['comment'],
 			  'date' => $date,
-			  'demo' => $query_comment[demo_name],
-			  'demo_id' => $query_comment[demo_id],
+			  'demo' => $query_comment['demo_name'],
+			  'demo_id' => $query_comment['demo_id'],
 			  'view' => $view,
-			  'user_name' => $query_comment[userid],
-			  'users_id' => $query_comment[user_id],
+			  'user_name' => $query_comment['userid'],
+			  'users_id' => $query_comment['user_id'],
 			  'demo_user_comments_id' => $demo_user_comments_id,
 			  'c_counter' => $c_counter,
-			  'comment_id' => $query_comment[comments_id],
+			  'comment_id' => $query_comment['comments_id'],
 			  'v_counter' => $v_counter));
 
 $smarty->assign('demos_comment_edit_tpl', '1');
