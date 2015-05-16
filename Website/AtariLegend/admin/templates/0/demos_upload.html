@@ -29,7 +29,7 @@ function delete_download(id, demo_id)
 
     	if (return_value !="0")
     	{
-    		url="../demos/demos_upload.php?demo_id="+demo_id+"&demo_download_id="+id+"&action=delete_download";
+    		url="../demos/db_demos_upload.php?demo_id="+demo_id+"&demo_download_id="+id+"&action=delete_download";
 			location.href=url;
     	} 
 }
@@ -61,10 +61,11 @@ function delete_download(id, demo_id)
 
 {if $nr_downloads >= '1'}
 <table width="100%" cellspacing="2" cellpadding="15" class="CELLCOLOR">
+{if isset($downloads)}
 {foreach from=$downloads item=line}
 <tr>
 	<td>
-	<form action="../demos/demos_upload.php?action=update_download" method="post" name="upload">
+	<form action="../demos/db_demos_upload.php?action=update_download" method="post" name="upload">
 	<fieldset class="game_set">
 		<legend class="links_legend">{$line.date}</legend>
 		<table width="100%">
@@ -123,15 +124,15 @@ function delete_download(id, demo_id)
 			</td>
 			<td width="40%">
 				<select name="language" size="1">
-					<option value="Ar" {if $line.language=='Ar'} "SELECTED" {/if}>Arabic</option>
-					<option value="En" {if $line.language=='En'} "SELECTED" {/if}>English</option>
-					<option value="Es" {if $line.language=='Es'} "SELECTED" {/if}>Spanish</option>
-					<option value="Fr" {if $line.language=='Fr'} "SELECTED" {/if}>French</option>
-					<option value="Sv" {if $line.language=='Sv'} "SELECTED" {/if}>Swedish</option>
-					<option value="It" {if $line.language=='It'} "SELECTED" {/if}>Italian</option>
-					<option value="De" {if $line.language=='De'} "SELECTED" {/if}>German</option>
-					<option value="Fi" {if $line.language=='Fi'} "SELECTED" {/if}>Finish</option>
-					<option value="Mu" {if $line.language=='Mu'} "SELECTED" {/if}>Mulilanguage</option>
+					<option value="Ar" {if $line.language=='Ar'} selected {/if}>Arabic</option>
+					<option value="En" {if $line.language=='En'} selected {/if}>English</option>
+					<option value="Es" {if $line.language=='Es'} selected {/if}>Spanish</option>
+					<option value="Fr" {if $line.language=='Fr'} selected {/if}>French</option>
+					<option value="Sv" {if $line.language=='Sv'} selected {/if}>Swedish</option>
+					<option value="It" {if $line.language=='It'} selected {/if}>Italian</option>
+					<option value="De" {if $line.language=='De'} selected {/if}>German</option>
+					<option value="Fi" {if $line.language=='Fi'} selected {/if}>Finish</option>
+					<option value="Mu" {if $line.language=='Mu'} selected {/if}>Mulilanguage</option>
 				</select>
 			</td>
 			<td width="10%">
@@ -139,9 +140,9 @@ function delete_download(id, demo_id)
 			</td>
 			<td width="40%">
 				<select name="trainer" size="1">
-					<option value=""  {if $line.trainer !=='M' and $line.trainer !=='T'} "SELECTED" {/if}>No Trainer</option>
-					<option value="T" {if $line.trainer =='T'} "SELECTED" {/if}>Trainer</option>
-					<option value="M" {if $line.trainer =='M'} "SELECTED" {/if}>Mega Trainer</option>
+					<option value=""  {if $line.trainer !=='M' and $line.trainer !=='T'} selected {/if}>No Trainer</option>
+					<option value="T" {if $line.trainer =='T'} selected {/if}>Trainer</option>
+					<option value="M" {if $line.trainer =='M'} selected {/if}>Mega Trainer</option>
 				</select>
 			</td>
 		</tr>
@@ -151,17 +152,17 @@ function delete_download(id, demo_id)
 			</td>
 			<td width="40%">
 				<select name="disks" size="1">
-					<option value="0"  {if $line.disks == '' or $line.disks == '0'} "SELECTED" {/if}>Single disk game</option>
-					<option value="1"  {if $line.disks == '1'} "SELECTED" {/if}>1</option>
-					<option value="2"  {if $line.disks == '2'} "SELECTED" {/if}>2</option>
-					<option value="3"  {if $line.disks == '3'} "SELECTED" {/if}>3</option>
-					<option value="4"  {if $line.disks == '4'} "SELECTED" {/if}>4</option>
-					<option value="5"  {if $line.disks == '5'} "SELECTED" {/if}>5</option>
-					<option value="6"  {if $line.disks == '6'} "SELECTED" {/if}>6</option>
-					<option value="7"  {if $line.disks == '7'} "SELECTED" {/if}>7</option>
-					<option value="8"  {if $line.disks == '8'} "SELECTED" {/if}>8</option>
-					<option value="9"  {if $line.disks == '9'} "SELECTED" {/if}>9</option>
-					<option value="10" {if $line.disks == '10'} "SELECTED" {/if}>10</option>
+					<option value="0"  {if $line.disks == '' or $line.disks == '0'}  selected  {/if}>Single disk game</option>
+					<option value="1"  {if $line.disks == '1'} selected {/if}>1</option>
+					<option value="2"  {if $line.disks == '2'} selected {/if}>2</option>
+					<option value="3"  {if $line.disks == '3'} selected {/if}>3</option>
+					<option value="4"  {if $line.disks == '4'} selected {/if}>4</option>
+					<option value="5"  {if $line.disks == '5'} selected {/if}>5</option>
+					<option value="6"  {if $line.disks == '6'} selected {/if}>6</option>
+					<option value="7"  {if $line.disks == '7'} selected {/if}>7</option>
+					<option value="8"  {if $line.disks == '8'} selected {/if}>8</option>
+					<option value="9"  {if $line.disks == '9'} selected {/if}>9</option>
+					<option value="10" {if $line.disks == '10'} selected {/if}>10</option>
 				</select>
 			</td>
 			<td width="10%">
@@ -169,16 +170,16 @@ function delete_download(id, demo_id)
 			</td>
 			<td width="40%">
 				<select name="set_nr" size="1">
-					<option value="1"  {if $line.set_nr == '1'} "SELECTED" {/if}>1</option>
-					<option value="2"  {if $line.set_nr == '2'} "SELECTED" {/if}>2</option>
-					<option value="3"  {if $line.set_nr == '3'} "SELECTED" {/if}>3</option>
-					<option value="4"  {if $line.set_nr == '4'} "SELECTED" {/if}>4</option>
-					<option value="5"  {if $line.set_nr == '5'} "SELECTED" {/if}>5</option>
-					<option value="6"  {if $line.set_nr == '6'} "SELECTED" {/if}>6</option>
-					<option value="7"  {if $line.set_nr == '7'} "SELECTED" {/if}>7</option>
-					<option value="8"  {if $line.set_nr == '8'} "SELECTED" {/if}>8</option>
-					<option value="9"  {if $line.set_nr == '9'} "SELECTED" {/if}>9</option>
-					<option value="10" {if $line.set_nr == '10'} "SELECTED" {/if}>10</option>
+					<option value="1"  {if $line.set_nr == '1'}  selected  {/if}>1</option>
+					<option value="2"  {if $line.set_nr == '2'}  selected  {/if}>2</option>
+					<option value="3"  {if $line.set_nr == '3'}  selected  {/if}>3</option>
+					<option value="4"  {if $line.set_nr == '4'}  selected  {/if}>4</option>
+					<option value="5"  {if $line.set_nr == '5'}  selected  {/if}>5</option>
+					<option value="6"  {if $line.set_nr == '6'}  selected  {/if}>6</option>
+					<option value="7"  {if $line.set_nr == '7'}  selected  {/if}>7</option>
+					<option value="8"  {if $line.set_nr == '8'}  selected  {/if}>8</option>
+					<option value="9"  {if $line.set_nr == '9'}  selected  {/if}>9</option>
+					<option value="10" {if $line.set_nr == '10'}  selected  {/if}>10</option>
 				</select>
 			</td>
 		</tr>
@@ -227,13 +228,14 @@ function delete_download(id, demo_id)
 	</td>
 </tr>
 {/foreach}
+{/if}
 </table>
 {/if}
 
 <table width="100%" cellspacing="2" cellpadding="15" class="CELLCOLOR">
 <tr>
 	<td>
-	<form action="../demos/demos_upload.php?action=add_download" enctype="multipart/form-data" method="post" name="add_file">
+	<form action="../demos/db_demos_upload.php?action=add_download" enctype="multipart/form-data" method="post" name="add_file">
 	<fieldset class="category_set">
 		<legend class="links_legend">Add a new download</legend>
 		<table>
