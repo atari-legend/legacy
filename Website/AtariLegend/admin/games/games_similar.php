@@ -16,24 +16,6 @@ include("../includes/common.php");
 
 
 //***********************************************************************************
-//If delete similar link has been pressed
-//***********************************************************************************
-if ( isset($action) and $action == 'delete_similar' )
-{
-	$sql_aka = mysql_query("DELETE FROM game_similar WHERE game_similar_id = '$game_similar_id' AND game_id = '$game_id'") 
-			   or die ("Couldn't delete similar game");
-}
-
-//***********************************************************************************
-//If add similar button has been pressed
-//***********************************************************************************
-if ( isset($action) and $action == 'game_similar' )
-{
-	$sql_aka = mysql_query("INSERT INTO game_similar (game_id, game_similar_cross) VALUES ('$game_id','$game_similar')")
- 			   or die ("Couldn't insert similar game");
-}
-
-//***********************************************************************************
 //Let's get the general game info first. 
 //***********************************************************************************
 

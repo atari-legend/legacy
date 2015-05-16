@@ -37,7 +37,7 @@ The main game page
 		<table>
 		<tr>
 			<td>
-			<form action="../games/games_similar.php" method="post" name="similar">
+			<form action="../games/db_games_similar.php" method="post" name="similar">
 		<fieldset class="game_set">
 		<legend class="links_legend">Games Similar to {$game_info.game_name}</legend>
 			<b>Similar game :</b> 
@@ -50,7 +50,7 @@ The main game page
 			</select>	
 			<br>
 			<input type="submit" name="valider" value="Add">
-			<input type="hidden" name="action" value="game_similar">	
+			<input type="hidden" name="action" value="add_game_similar">	
 			<input type="hidden" name="game_id" value="{$game_info.game_id}">	
 			<br>
 			<br>
@@ -59,7 +59,7 @@ The main game page
 				<br>
 				<br>
 				{foreach from=$similar item=line}
-					<a href="../games/games_detail.php?game_id={$line.game_id}" class="MAINNAV">{$line.game_name}</a> - <b><a href="../games/games_similar.php?game_similar_id={$line.game_similar_id}&action=delete_similar&game_id={$game_info.game_id}" class="MAINNAV">delete</a></b> 
+					<a href="../games/games_detail.php?game_id={$line.game_id}" class="MAINNAV">{$line.game_name}</a> - <b><a href="../games/db_games_similar.php?game_similar_id={$line.game_similar_id}&action=delete_similar&game_id={$game_info.game_id}" class="MAINNAV">delete</a></b> 
 					<br>
 				{/foreach}
 			{/if}
