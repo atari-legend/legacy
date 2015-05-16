@@ -114,6 +114,7 @@ if (isset($action) and $action=="update_news")
 {
 
 		$news_text = addslashes($news_text);
+		$news_headline = addslashes($news_headline);
 
 		//Actual news thread change
 		mysql_query("UPDATE 
