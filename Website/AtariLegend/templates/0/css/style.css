@@ -51,7 +51,7 @@ footer, header, hgroup, menu, nav, section {
 	width: 100%;
 	float: left;
 	display: block;
-	background: url(../../../includes/show_image.php?file=../templates/0/images/top_bg.png) 0 0 no-repeat;
+	background: url(../../../includes/show_image.php?file=../templates/0/images/top_bg.jpg) 0 0 no-repeat;
 	height:100%;
 	}
 
@@ -1024,8 +1024,6 @@ contact tiles - front page
 ------------------------------------------------------------ */
 .footer{ width: 100%;
 		float: left;	
-		margin-top: 20px;
-		padding-top: 20px;
 		border-top: 10px solid #01b5b5;
 		background: url(../images/footer_bg.jpg) 0 0 no-repeat;
 	}
@@ -1033,6 +1031,7 @@ contact tiles - front page
 .footer_logo{ color: white;
 		font-size: 10pt;
 		text-align: center;
+		height : 120px;
 	}
 
 #footer_img {margin-left: auto;

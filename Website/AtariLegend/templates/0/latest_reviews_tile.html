@@ -19,9 +19,10 @@
 {block name=latest_reviews_tile}
 <div class="standard_tile" id="latest_reviews">
 	<h1><a href="#" class="standard_tile_link">LATEST REVIEWS</a></h1>
+	{assign var="number" value=1}
 	{foreach from=$recent_reviews item=line}
 		<div class="standard_tile_line"></div>	
-		<div class="standard_list_entry">
+		<div class="standard_list_entry" {if $number is odd}style="background-color:black;"{/if}>
 			<div class="standard_list_entry_left">
 				<a href="#"><img src="../includes/show_image.php?file={$line.review_img}&resize=164,null,null,null&crop=left,top,164,120" alt="latest_review"></a>
 			</div>
@@ -32,6 +33,7 @@
 				<h5>{$line.review_text}</h5>
 			</div>							
 		</div>
+		{$number=$number+1}
 	{/foreach}
 	<div class="standard_tile_line"></div>
 </div>
