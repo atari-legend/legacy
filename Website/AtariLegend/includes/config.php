@@ -25,4 +25,9 @@ $interview_screenshot_path="../data/images/interview_screenshots/";
 $individual_screenshot_path="../data/images/individual_screenshots/";
 $trivia_screenshot_path="../data/images/trivia_screens/";
 $music_game_path="../data/music/games/";
+
+//Set image quality
+
+$jpeg_compression = '90';
+$png_compression = '7';
 ?>

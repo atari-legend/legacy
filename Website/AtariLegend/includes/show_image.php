@@ -1,5 +1,7 @@
 <?php
 extract($_REQUEST);
+include("../includes/common.php");
+include "../includes/wideimage/WideImage.php";
 //
 //example: file=../data/images/game_screenshots/521.png&resize=420,null,null,null&crop=null,null,null,null
 //WideImage_Image resize( [mixed $width = null], [mixed $height = null], [string $fit = 'inside'], [string $scale = 'any'])
@@ -19,7 +21,7 @@ extract($_REQUEST);
 //mixed   	$height   	Height of the crop rect, smart coordinate
 
 
-    include "../includes/wideimage/WideImage.php";
+
 //The foreach loop, we may be able to implement the whole API this way
 //The foreach loop solves the problem of getting the image manipulations in the desired order.
 //Doc: http://wideimage.sourceforge.net/wp-content/current/doc/WideImage/WideImage_Image.html
@@ -101,10 +103,6 @@ foreach ( $_GET as $key => $value ) {
 
   	}
 
-
-
-
-
-
-$image->output('png');
+//set the compression in the config.php file
+$image->output('jpg', "$jpeg_compression");
 ?>
