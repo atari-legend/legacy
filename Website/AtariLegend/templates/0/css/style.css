@@ -51,7 +51,7 @@ footer, header, hgroup, menu, nav, section {
 	width: 100%;
 	float: left;
 	display: block;
-	background: url(../images/top_bg.png) 0 0 no-repeat;
+	background: url(../../../includes/show_image.php?file=../templates/0/images/top_bg.png) 0 0 no-repeat;
 	height:100%;
 	}
 
@@ -561,7 +561,6 @@ Standard tile settings
 @media screen and (min-width: 801px) { 
 	.column-right-tab {display:none}
 	.column-left-tab {display:none}
-	.column-wide {display : none}
 }
 
 .standard_tile  { width: 100%; 
@@ -943,7 +942,7 @@ datequote tile - front page
 ------------------------------------------------------------ */
 #datequote_position_front { 	margin-bottom: 20px; }
 
-#datequote_bg { background: url(../images/datequote_bg.jpg) ;}
+#datequote_bg { background: url(../../../includes/show_image.php?file=../templates/0/images/datequote_bg.jpg) ;}
 
 /* 1 and 2 tiles */
 @media screen and (max-width: 800px) { 
