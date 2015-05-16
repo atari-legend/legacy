@@ -1,7 +1,12 @@
 <?php
 extract($_REQUEST);
-include("../includes/common.php");
 include "../includes/wideimage/WideImage.php";
+
+//Set image quality
+
+$jpeg_compression = '90';
+$png_compression = '7';
+
 //
 //example: file=../data/images/game_screenshots/521.png&resize=420,null,null,null&crop=null,null,null,null
 //WideImage_Image resize( [mixed $width = null], [mixed $height = null], [string $fit = 'inside'], [string $scale = 'any'])
