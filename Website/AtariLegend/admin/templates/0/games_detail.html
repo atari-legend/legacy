@@ -303,13 +303,15 @@ function add_year()
 		<legend class="links_legend">Publisher info</legend>
 			<table width="100%">
 			<tr>
-				<td width="33%">		
+				<td width="33%">
+					{if isset($publisher)}			
 					{foreach from=$publisher item=line}
 						<input type="checkbox" name="game_publisher_id[]" value="{$line.pub_id}">
 					  		<a href="../company/company_edit.php?comp_id={$line.pub_id}" class="MAINNAV">{$line.pub_name}</a> {if $line.continent <> '' }<b>({$line.continent})</b>{/if} {if  $line.extra_info <> '' }<b>({$line.extra_info})</b>{/if} 					
 					  	<br>
 					  	<br>
-					{/foreach}					
+					{/foreach}
+					{/if}					
 					<img src="../templates/0/images/arrow_ltr.gif" alt="" width="38" height="22" border="0">		
 					<input type="button" name="valider" value="Delete" onclick="delete_publisher()">
 					<br>

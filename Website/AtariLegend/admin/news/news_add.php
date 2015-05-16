@@ -1,4 +1,5 @@
-<?/***************************************************************************
+<?php
+/***************************************************************************
 *                                news_add.php
 *                            -----------------------
 *   begin                : Sunday, may 1 2005
@@ -8,7 +9,6 @@
 *							 
 *							
 *
-*   Id: news_add.php,v 0.10 01/05/2005 12:00 gatekeeper
 *
 ***************************************************************************/
 
@@ -19,7 +19,6 @@ In this section we can add a news update to the DB
 */
 
 include("../includes/common.php");
-include("../includes/config.php"); 
 				
 $sql_newsimage = mysql_query("SELECT news_image_id,news_image_name FROM news_image ORDER BY news_image_name");
 				

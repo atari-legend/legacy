@@ -16,7 +16,7 @@
 //**************************************************************************************** 
 *}
 
-<form action="../games/games_review_add.php" method="post" name="post">
+<form action="../games/db_games_review.php" method="post" name="post">
 <table align="center" class="HEADERBAR" width="100%" cellspacing="0" cellpadding="2" border="0">
 <tr>
 	<td style="vertical-align:top;" height="5" colspan=6>
@@ -173,7 +173,7 @@
 		<legend class="links_legend">Screenshots</legend>
 		{if $screenshots_nr <> 0}
 			{foreach from=$screenshots item=line} 
-				<img src="../includes/showimage.php?img={$line.screenshot_link}&amp;w=60&amp;shadow=1&amp;bgcolour=ffffff" align="center">
+				<img src="../includes/show_image.php?file={$line.screenshot_link}&amp;resize=100,null,null,null" align="center">
 				<input class="review_input" type="text" name="inputfield[]">
 				<br>
 				<br>

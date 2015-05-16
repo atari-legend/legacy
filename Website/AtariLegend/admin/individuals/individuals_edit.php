@@ -1,4 +1,4 @@
-<?
+<?php
 /***************************************************************************
 *                                Individuals_edit.php
 *                            --------------------------
@@ -43,124 +43,10 @@ if ($ind_id == '-')
 else
 {
 
-// Here we delete the individual image
-if ( isset($action) and $action == 'delete_pic' )
-{
-	
-	$sql_photo = "SELECT ind_imgext FROM individual_text WHERE ind_id='$ind_id'";
-	$photo = mysql_query($sql_photo);
-	list ($ind_imgext) = mysql_fetch_row($photo);
-
-	mysql_query("UPDATE individual_text SET ind_imgext='' WHERE ind_id='$ind_id'");
-	unlink ("$individual_screenshot_path$ind_id.$ind_imgext");
-}
-
-//If we want to upload a photo
-if ( isset($action) and $action == 'add_photo' )
-{
-	
-	$image = $_FILES['individual_pic'];
-
-	$tmp_name=$image['tmp_name']; 
-
-	if ($tmp_name!=='none')
-	{
-		// Check what extention the file has and if it is allowed.
-	
-		$ext="";
-		$type_image = $image['type'];
-		
-		// set extension
-		if ( $type_image=='image/x-png')
-			{
-				$ext='png';
-			}
-		elseif ( $type_image=='image/png')
-			{
-				$ext='png';
-			}
-		
-		elseif ( $type_image=='image/gif')
-			{
-				$ext='gif';
-			} 
-		elseif ( $type_image=='image/pjpeg')
-			{
-				$ext='jpg';
-			} 
-		
-		 if ($ext!=="")
-		 	{
-		   	    // Rename the uploaded file to its autoincrement number and move it to its proper place.
-	   			mysql_query("UPDATE individual_text SET ind_imgext='$ext' WHERE ind_id='$ind_id'");
-	  			$file_data = rename("$tmp_name", "$individual_screenshot_path$ind_id.$ext");
-	   
-	  			chmod("$individual_screenshot_path$ind_id.$ext", 0777);
-			}
-	}
-}
-
-//update the info of the individual
-if ( isset($action) and $action == 'update' )
-{
-	$sdbquery = mysql_query("UPDATE individuals SET ind_name = '$ind_name' WHERE ind_id = $ind_id")
-				or die("Couldn't Update into individuals");
-
-	$INDIVIDUALtext = mysql_query("SELECT ind_id FROM individual_text 
-								    WHERE ind_id = $ind_id")
-			  or die ("Database error - selecting individual_text");
-		
-	$indrowtext = mysql_numrows($INDIVIDUALtext);
-
-	if ( $indrowtext < 1 )
-	{
-		$sdbquery = mysql_query("INSERT INTO individual_text (ind_id, ind_profile, ind_email) VALUES ($ind_id, '$textfield', '$ind_email')") 
-					or die("Couldn't insert into individual_text (profile,email)");
-	}
-	else
-	{
-		$sdbquery = mysql_query("UPDATE individual_text SET ind_profile = '$textfield', ind_email = '$ind_email' WHERE ind_id = '$ind_id'")
-					or die("Couldn't Update into individual_text (profile,email)");
-	}
-
-	$message = 'Individual succesfully updated';
-	$smarty->assign("message",$message);
-}
-
-// Add nicknames
-if (isset($action) and $action == "add_nick")
-{
-
-	if ($ind_nick !='')
-	{
-
-		$sdbquery = mysql_query("INSERT INTO individual_nicks (ind_id, nick) VALUES ($ind_id, '$ind_nick')") 
-			        	or die("Couldn't insert into individual_nicks");
-						
-			$message = 'Individual succesfully updated';
-			$smarty->assign("message",$message);
-	}
-}
-
-// Delete Nickname
-if (isset($action) and $action == "delete_nick")
-{
-
-	if (isset($nick_id))
-	{
-		mysql_query("DELETE FROM individual_nicks WHERE individual_nicks_id='$nick_id'")
-			or die("Failed to delete nickname");
-		
-			$message = 'Nickname succesfully deleted';
-			$smarty->assign("message",$message);
-	}
-}
-
-
 //Get the individual data
 $sql_individuals = mysql_query("SELECT * FROM individuals 
-								 LEFT JOIN individual_text ON (individuals.ind_id = individual_text.ind_id )
-								 WHERE individuals.ind_id=$ind_id");
+					LEFT JOIN individual_text ON (individuals.ind_id = individual_text.ind_id )
+					WHERE individuals.ind_id=$ind_id");
 
 while ( $individuals=mysql_fetch_array($sql_individuals) ) 
 {  

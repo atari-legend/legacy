@@ -1,4 +1,4 @@
-<?
+<?php
 /***************************************************************************
 *                                demos_music_detail.php
 *                            ------------------------------
@@ -14,7 +14,6 @@
 
 //load all common functions
 include("../includes/common.php"); 
-include("../includes/config.php"); 
 
 /*
 ***********************************************************************************
@@ -22,7 +21,7 @@ This is the demo music detail page.
 ***********************************************************************************
 */
 
-if ($action == 'delete_music')
+if (isset ($action) and $action == 'delete_music')
 {
 
 if(isset($music_id)) 
@@ -53,7 +52,7 @@ if(isset($music_id))
 }
 }
 
-if ($action == 'play_music')
+if (isset ($action) and $action == 'play_music')
 {
 	$query_music = mysql_query("SELECT * FROM music 
 							WHERE music.music_id='$music_id'");
@@ -88,7 +87,7 @@ if ($action == 'play_music')
 	exit;
 }
 
-if ($action == 'pick_composer')
+if (isset ($action) and $action == 'pick_composer')
 {
 	if ( $individuals == '-' )
 	{
@@ -113,7 +112,7 @@ if ($action == 'pick_composer')
 	}
 }
 	
-if ($action == 'upload_zaks')
+if (isset ($action) and $action == 'upload_zaks')
 {
 	//Here we'll be looping on each of the inputs on the page that are filled in with an image!
 
@@ -195,8 +194,8 @@ $SQL_DEMO = mysql_query("SELECT demo.demo_name,
 while ( $DEMO=mysql_fetch_assoc($SQL_DEMO) ) 
 {  
 	$smarty->assign('demo',
-	   		 array('demo_id' => $DEMO[demo_id],
-				   'demo_name' => $DEMO[demo_name]));
+	   		 array('demo_id' => $DEMO['demo_id'],
+				   'demo_name' => $DEMO['demo_name']));
 }
 
 //get the music info
@@ -207,29 +206,21 @@ $sql_music = mysql_query("SELECT * FROM demo_music
 							LEFT JOIN music_types ON (music.music_id = music_types.music_id)
 							LEFT JOIN music_types_main ON (music_types.music_types_main_id = music_types_main.music_types_main_id)
 							WHERE demo_music.demo_id='$demo_id'");
-
+$i = 0;
 while ( $MUSIC=mysql_fetch_assoc($sql_music) ) 
 { 		
 	$i++;
 	
 	$smarty->append('music',
-	   		 array('music_id' => $MUSIC[music_id],
-				   'ind_name' => $MUSIC[ind_name],
-				   'music_id' => $MUSIC[music_id],
-				   'extention' => $MUSIC[extention]));
+	   		 array('music_id' => $MUSIC['music_id'],
+				   'ind_name' => $MUSIC['ind_name'],
+				   'music_id' => $MUSIC['music_id'],
+				   'extention' => $MUSIC['extention']));
 }
 
 $smarty->assign('nr_of_zaks', $i);
 
 //get the individuals
-//$sql_author = mysql_query("SELECT * FROM individuals ORDER BY ind_name ASC");
-
-//while ( $IND=mysql_fetch_array($sql_author) ) 
-//{ 		
-//	$smarty->append('ind',
-//	   		 array('ind_id' => $IND[ind_id],
-//				   'ind_name' => $IND[ind_name]));
-//}
 
 $SQL_MUSICIAN = mysql_query("SELECT *
 						   FROM demo_author
@@ -246,8 +237,8 @@ while ( $MUSICIAN=mysql_fetch_assoc($SQL_MUSICIAN) )
 	$i++;
 	
 	$smarty->append('ind',
-	   		 array('ind_id' => $MUSICIAN[ind_id],
-				   'ind_name' => $MUSICIAN[ind_name]));
+	   		 array('ind_id' => $MUSICIAN['ind_id'],
+				   'ind_name' => $MUSICIAN['ind_name']));
 }
 
 if ( $i == 0 )
@@ -261,7 +252,7 @@ elseif ( $individuals !== '-' )
 	$smarty->assign("message",$message);
 }
 
-$smarty->assign("user_id",$_SESSION[user_id]);
+$smarty->assign("user_id",$_SESSION['user_id']);
 $smarty->assign('demos_music_detail_tpl', '1');
 
 //Send all smarty variables to the templates

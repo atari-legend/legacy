@@ -1,4 +1,4 @@
-<?
+<?php
 /***************************************************************************
  *                                games_detail.php
  *                            ------------------------
@@ -350,6 +350,47 @@ $array = mysql_fetch_array($numbermag);
 
 $smarty->assign("nr_magazines",$array['count']); 
 	
+		//Get the companies to fill the search fields
+		//Get publisher values to fill the searchfield
+		$sql_publisher = mysql_query("SELECT pub_dev.pub_dev_id,
+							pub_dev.pub_dev_name
+							FROM game_publisher
+							LEFT JOIN pub_dev ON (game_publisher.pub_dev_id = pub_dev.pub_dev_id)
+							GROUP BY pub_dev.pub_dev_id HAVING COUNT(DISTINCT pub_dev.pub_dev_id) = 1
+							ORDER BY pub_dev.pub_dev_name ASC") 
+								or die("Problems retriving values from publishers.")or die("error publisher");
+		
+		while ($company_publisher = mysql_fetch_assoc($sql_publisher))
+		{
+		
+			$smarty->append('company_publisher',
+	    		 array('comp_id' => $company_publisher['pub_dev_id'],
+				 	   'comp_name' => $company_publisher['pub_dev_name']));
+		
+		}
+		
+		//Get Developer values to fill the searchfield
+		$sql_developer = mysql_query("SELECT pub_dev.pub_dev_id,
+							pub_dev.pub_dev_name
+							FROM game_developer
+							LEFT JOIN pub_dev ON (game_developer.dev_pub_id = pub_dev.pub_dev_id)
+							GROUP BY pub_dev.pub_dev_id HAVING COUNT(DISTINCT pub_dev.pub_dev_id) = 1
+							ORDER BY pub_dev.pub_dev_name ASC") 
+								or die("Problems retriving values from developers.");
+		
+		while ($company_developer = mysql_fetch_assoc($sql_developer))
+		{
+		
+			$smarty->append('company_developer',
+	    		 array('comp_id' => $company_developer['pub_dev_id'],
+				 	   'comp_name' => $company_developer['pub_dev_name']));
+		
+		}
+
+
+
+
+
 
 //**********************************************************************************		
 //Send it all to the template

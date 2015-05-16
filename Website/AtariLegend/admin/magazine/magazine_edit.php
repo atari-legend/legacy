@@ -1,4 +1,4 @@
-<?
+<?php
 /***************************************************************************
 *                                magazine_edit.php
 *                            -----------------------
@@ -19,7 +19,6 @@ Edit Issues!
 */
 
 include("../includes/common.php");
-include("../includes/config.php");
 
 $sql_magazine = mysql_query("SELECT * FROM magazine WHERE magazine_id='$magazine_id'") or die ("Error retriving magazines info");
 			

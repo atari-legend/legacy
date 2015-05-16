@@ -1,4 +1,4 @@
-<?
+<?php
 /***************************************************************************
 *                                add_magazine.php
 *                            -----------------------
@@ -19,7 +19,6 @@ Add Magazine screens!
 */
 
 include("../includes/common.php");
-include("../includes/config.php");
 
 $sql_magazine = mysql_query("SELECT * FROM magazine ORDER BY magazine_name ASC") or die ("Error retriving magazines");
 			

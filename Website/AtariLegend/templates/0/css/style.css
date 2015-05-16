@@ -51,7 +51,7 @@ footer, header, hgroup, menu, nav, section {
 	width: 100%;
 	float: left;
 	display: block;
-	background: url(../images/top_bg.png) 0 0 no-repeat;
+	background: url(../../../includes/show_image.php?file=../templates/0/images/top_bg.png) 0 0 no-repeat;
 	height:100%;
 	}
 
@@ -231,15 +231,23 @@ footer, header, hgroup, menu, nav, section {
 	#search_ul li { display: inline; float: left; }
 	
 	#search_side { width: 50px;}
+
+	#searchbutton_side {
+		background: #00d3d3;
+		height: 38px;
+		width: 119px;
+		border-bottom: 2px solid #008b8b;
+		border-left : 1px solid #007878;
+ 		padding-top: 0px;
+	}
 	
 	#search_text_side{ color: #ffffff;				
-				width: 120px;
-				height: 40px;
-				border: 0;
-				margin: 0;
+				width: 105px;
+				height: 23px;
+				border: 1px solid #007b7b;
+				margin: 7px 0px 0px 6px;
 				padding: 0;
-				background: url(../images/menu_search_input.png) 0 0 no-repeat; 
-				background-size: 120px 40px;
+				background: #000; 
 				text-align: center;
 				font-family: Audiowide;
 			}
@@ -334,9 +342,9 @@ footer, header, hgroup, menu, nav, section {
 	#about_side{height: 40px; width: 113px; font-size: 14px;}
 	#links_side{height: 40px; width: 113px; font-size: 14px;}
 	#skin_side{height: 37px; width: 113px; font-size: 14px;}
-	#search_side {height: 40px; width: 23px;}
-	#search_text_side{ width: 90px; background-size: 90px 40px;}
-	
+	#search_side {height: 40px; width: 25px;}
+	#search_text_side{height: 20px; width: 70px;}
+	#searchbutton_side{height: 38px; width: 87px;}
 	.container.open-sidebar { left: 113px;}
     #sidebar { left: -113px;
         width: 113px;
@@ -387,20 +395,21 @@ header nav { float: center;
 	}
 	header nav ul { font-size: 0; width : 100%; text-align : center; 
 		}
+	header nav img:hover{ opacity:0.8; 
+	}
 	header nav li {	display: inline-block;
 		}
-		header nav img:hover{ opacity:0.8; 
-			}
-			header nav input{ color: #ffffff;				
-				width: 280px;
-				height: 60px;
-				border: 0;
-				margin: 0;
-				padding: 0;
-				background: url(../images/menu_search_input.png) 0 0 no-repeat; 
-				text-align: center;
-				display: block;
-				font-family: Audiowide;
+	header nav input{
+	background-color: #000;
+	color: #ffffff;
+	width: 247px;
+	height: 35px;
+	border: 1px solid #007b7b;
+	margin: 11px 0px 0px 16px;
+	padding: 0;
+	text-align: center;
+	display: block;
+	font-family: Audiowide;
 			}
 
 .topbutton
@@ -433,6 +442,23 @@ header nav { float: center;
 }
 
 .top_button:link {
+  text-decoration:none;
+}
+
+.searchbutton
+{
+  display: block;
+  float:left;
+  border: 0px;
+  background: #00d3d3;
+  font-family: Audiowide,Arial,helvetica,sans-serif;
+  color: #182727;
+  height: 57px;
+  width: 280px;
+  font-size: 20px;
+  border-bottom: 3px solid #008b8b;
+  border-left: 1px solid #007878;
+  padding-top: 0px;
   text-decoration:none;
 }
 
@@ -535,7 +561,6 @@ Standard tile settings
 @media screen and (min-width: 801px) { 
 	.column-right-tab {display:none}
 	.column-left-tab {display:none}
-	.column-wide {display : none}
 }
 
 .standard_tile  { width: 100%; 
@@ -917,7 +942,7 @@ datequote tile - front page
 ------------------------------------------------------------ */
 #datequote_position_front { 	margin-bottom: 20px; }
 
-#datequote_bg { background: url(../images/datequote_bg.jpg) ;}
+#datequote_bg { background: url(../../../includes/show_image.php?file=../templates/0/images/datequote_bg.jpg) ;}
 
 /* 1 and 2 tiles */
 @media screen and (max-width: 800px) { 

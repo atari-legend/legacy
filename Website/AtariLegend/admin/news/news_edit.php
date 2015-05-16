@@ -1,4 +1,5 @@
-<?/***************************************************************************
+<?php
+/***************************************************************************
 *                                news_edit.php
 *                            ---------------------------
 *   begin                : Thursday, May 5, 2005
@@ -16,8 +17,6 @@
 //**************************************************************************************** 	
 
 include("../includes/common.php");
-include("../includes/config.php"); 
-
 
 //This file deal with the editing of the still to approve news threads and the news threads online. 
 //When we are dealing with the news_id var, we're talking about newsthreads online, the news_submission_id
@@ -67,6 +66,25 @@ $sql_news  =  mysql_query("SELECT
 			  			   user_id,
 			  			   news_date
 			  			   FROM news_submission WHERE news_submission_id = '$news_submission_id'");
+
+$news = mysql_fetch_array($sql_news);
+
+$user_name = get_username_from_id($news['user_id']);
+$news_date = convert_timestamp($news['news_date']);
+//$news_text = InsertALCode($news['news_text']);
+//$news_text = InsertSmillies($news_text);
+		
+
+$smarty->assign('edit_submissions',
+   		array('edit_userid' => $user_name,
+			  'edit_submission_id' => $news_submission_id,
+			  'edit_headline' => $news['news_headline'],
+			  'edit_date' => $news_date,
+			  'edit_text' => $news['news_text'],
+			  'edit_image_id' => $news['news_image_id']));	
+
+
+
 }
 else
 {
@@ -78,7 +96,7 @@ $sql_news  =  mysql_query("SELECT
 			  			   user_id,
 			  			   news_date
 			  			   FROM news WHERE news_id = '$news_id'");
-}
+
 
 $news = mysql_fetch_array($sql_news);
 
@@ -89,13 +107,12 @@ $news_date = convert_timestamp($news['news_date']);
 		
 $smarty->assign('edit_submissions',
    		array('edit_userid' => $user_name,
-			  'edit_submission_id' => $news_submission_id,
 			  'edit_id' => $news_id,
 			  'edit_headline' => $news['news_headline'],
 			  'edit_date' => $news_date,
 			  'edit_text' => $news['news_text'],
 			  'edit_image_id' => $news['news_image_id']));	
-
+}
 
 //Get the news images
 $sql_newsimage = mysql_query("SELECT news_image_id,news_image_name FROM news_image ORDER BY news_image_name");

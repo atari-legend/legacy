@@ -1,4 +1,4 @@
-<?
+<?php
 /***************************************************************************
 *                                interviews_delete.php
 *                            --------------------------
@@ -16,7 +16,6 @@
 
 //load all common functions
 include("../includes/common.php"); 
-include("../includes/config.php"); 
 
 $sql = mysql_query("DELETE FROM interview_main WHERE interview_id = '$interview_id' ");
 $sql = mysql_query("DELETE FROM interview_text WHERE interview_id = '$interview_id' ");
@@ -63,8 +62,8 @@ $sql_individuals = mysql_query("SELECT * FROM individuals ORDER BY ind_name ASC"
 while ($individuals = mysql_fetch_array($sql_individuals))
 {
 	$smarty->append('individuals',
-	    	 array('ind_id' => $individuals[ind_id],
-				   'ind_name' => $individuals[ind_name]));
+	    	 array('ind_id' => $individuals['ind_id'],
+				   'ind_name' => $individuals['ind_name']));
 }
 
 mysql_close(); 
@@ -72,7 +71,7 @@ mysql_close();
 $message = "Interview deleted succesfully";
 $smarty->assign("message",$message);
 
-$smarty->assign("user_id",$_SESSION[user_id]);
+$smarty->assign("user_id",$_SESSION['user_id']);
 $smarty->assign('interviews_main_tpl', '1');
 
 //Send all smarty variables to the templates

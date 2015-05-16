@@ -1,4 +1,4 @@
-<?
+<?php
 /***************************************************************************
 *                                demos_music.php
 *                            --------------------------
@@ -13,7 +13,6 @@
 
 //load all common functions
 include("../includes/common.php"); 
-include("../includes/config.php"); 
 
 /*
 ************************************************************************************************
@@ -23,7 +22,7 @@ This is the demo music main page
 $start1=gettimeofday();
 list($start2, $start3) = explode(":", exec('date +%N:%S'));
 				
-if ($action == 'search')
+if (isset($action) and $action == 'search')
 {
 	//check the $gamebrowse select
 	if ($demobrowse == "")
@@ -50,7 +49,7 @@ if ($action == 'search')
 	{
 		$smarty->assign("message","Please fill in one of the search fields");
 		
-		$smarty->assign("user_id",$_SESSION[user_id]);
+		$smarty->assign("user_id",$_SESSION['user_id']);
 		$smarty->assign('demos_music_tpl', '1');
 
 		//Send all smarty variables to the templates
@@ -64,15 +63,15 @@ if ($action == 'search')
 		//In all cases we search we start searching through the demo table
 		//first
 		$RESULTDEMO = "SELECT 
-							demo.demo_id, 
-							demo.demo_name, 
-							crew.crew_name, 
-							crew.crew_id, 
-							demo_year.demo_year
-					   FROM demo
-					   LEFT JOIN crew_demo_prod ON ( demo.demo_id = crew_demo_prod.demo_id ) 
-					   LEFT JOIN crew ON ( crew_demo_prod.crew_id = crew.crew_id ) 
-					   LEFT JOIN demo_year ON ( demo_year.demo_id = demo.demo_id ) WHERE ";
+					demo.demo_id, 
+					demo.demo_name, 
+					crew.crew_name, 
+					crew.crew_id, 
+					demo_year.demo_year
+					FROM demo
+					LEFT JOIN crew_demo_prod ON ( demo.demo_id = crew_demo_prod.demo_id ) 
+					LEFT JOIN crew ON ( crew_demo_prod.crew_id = crew.crew_id ) 
+					LEFT JOIN demo_year ON ( demo_year.demo_id = demo.demo_id ) WHERE ";
 		
 		$RESULTDEMO .= $demobrowse_select;
 		$RESULTDEMO .= "demo.demo_name LIKE '%$demosearch%'"; 
@@ -89,6 +88,7 @@ if ($action == 'search')
 			$rows = mysql_num_rows($demos);
 			if ( $rows > 0 )
 			{
+				$i = 1;
 				while ( $row=mysql_fetch_assoc($demos) ) 
 				{  
 					$i++;
@@ -100,10 +100,10 @@ if ($action == 'search')
 					$array = mysql_fetch_array($numberzaks);
 				
 					$smarty->append('music',
-	   			 	 array('demo_id' => $row[demo_id],
-						   'demo_name' => $row[demo_name],
-						   'demo_crew' => $row[crew_name],
-						   'demo_year' => $row[demo_year],
+	   			 	 array('demo_id' => $row['demo_id'],
+						   'demo_name' => $row['demo_name'],
+						   'demo_crew' => $row['crew_name'],
+						   'demo_year' => $row['demo_year'],
 						   'number_zaks' => $array['count']));	
 				}	
 				
@@ -113,7 +113,7 @@ if ($action == 'search')
 				$smarty->assign('querytime', $totaltime1);
 				$smarty->assign('nr_of_entries', $i);
 				
-				$smarty->assign("user_id",$_SESSION[user_id]);
+				$smarty->assign("user_id",$_SESSION['user_id']);
 				$smarty->assign('demos_music_list_tpl', '1');
 				
 				//Send all smarty variables to the templates
@@ -126,7 +126,7 @@ if ($action == 'search')
 			{
 				$smarty->assign("message","No entries for your query!");
 		
-				$smarty->assign("user_id",$_SESSION[user_id]);
+				$smarty->assign("user_id",$_SESSION['user_id']);
 				$smarty->assign('demos_music_tpl', '1');
 
 				//Send all smarty variables to the templates
@@ -140,7 +140,7 @@ if ($action == 'search')
 }
 else
 {
-	$smarty->assign("user_id",$_SESSION[user_id]);
+	$smarty->assign("user_id",$_SESSION['user_id']);
 	$smarty->assign('demos_music_tpl', '1');
 
 	//Send all smarty variables to the templates
