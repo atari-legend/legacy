@@ -19,7 +19,6 @@ Display submissions
 */
 
 include("../includes/common.php");
-include("../includes/config.php");
 
 // get the total nr of submissions in the DB
 $query_total_number = mysql_query("SELECT count(*) FROM demo_submitinfo") or die ("Couldn't get the total number of submissions");
@@ -75,7 +74,7 @@ $v_counter = (isset($_GET["v_counter"]) ? $_GET["v_counter"] : 0);
 		{
 		
 		
-	if (isset($query_submission[demo_id])) 
+	if (isset($query_submission['demo_id'])) 
 	{
 	
 		//Select a random screenshot record
@@ -105,13 +104,13 @@ $v_counter = (isset($_GET["v_counter"]) ? $_GET["v_counter"] : 0);
 	
 			//Get the dataElements we want to place on screen
 			$v_demo_image  = $demo_screenshot_path;
-			$v_demo_image .= $sql_demo[screenshot_id];
+			$v_demo_image .= $sql_demo['screenshot_id'];
 			$v_demo_image .= '.';
-			$v_demo_image .= $sql_demo[imgext];
+			$v_demo_image .= $sql_demo['imgext'];
 	
-			$converted_date = convert_timestamp($query_submission[timestamp]);
-			$user_joindate = convert_timestamp($query_submission[join_date]);
-				$comment = InsertALCode($query_submission[submit_text]);
+			$converted_date = convert_timestamp($query_submission['timestamp']);
+			$user_joindate = convert_timestamp($query_submission['join_date']);
+				$comment = InsertALCode($query_submission['submit_text']);
 				$comment = InsertSmillies($comment);
 				$comment = nl2br($comment);
 				$comment = stripslashes($comment);
@@ -124,12 +123,12 @@ $v_counter = (isset($_GET["v_counter"]) ? $_GET["v_counter"] : 0);
 						  'comment' => $comment,
 						  'submit_id' => $query_submission['demo_submitinfo_id'],
 						  'user_name' => $query_submission['userid'],
-						  'user_id' => $query_submission[user_id],
-						  'karma' => $query_submission[karma],
+						  'user_id' => $query_submission['user_id'],
+						  'karma' => $query_submission['karma'],
 						  'user_joindate' => $user_joindate,
 						  'user_comment_nr' => $usercomment_number,
 						  'usersubmit_number' => $usersubmit_number,
-						  'email' => $query_submission[email]));
+						  'email' => $query_submission['email']));
 		} 
 		
 		//Check if back arrow is needed 

@@ -10,7 +10,7 @@ function deleteseries()
 
     if (return_value !="0")
 {
-    	url="../games/db_games_series.php?action=delete_gameseries&game_series_id={$series_info.game_series_id}";
+    	url="../games/db_games_series.php?action=delete_gameseries&game_series_id={if isset($series_info.game_series_id)}{$series_info.game_series_id}{/if}";
 		location.href=url;
     }   
 	} 
@@ -29,7 +29,8 @@ function deleteseries()
 	
 	<table width="100%" cellspacing="2" cellpadding="2" border="0" class="CELLCOLOR" >
 			<tr>
-    			<td width="16%" valign="top">
+    			<td width="16%" valign="top">	
+			{if isset($series_info.series_page)}
 				{if (isset($series_info.series_page) and $series_info.series_page eq 'series_editor') or (isset($series_info.series_page) and $series_info.series_page eq 'addgames_series')}<span class="LEFTNAV"><strong>{$series_info.game_series_name} selected</strong></span>{/if}
 				</td>
 				<td width="84%" align="left" valign="top">
@@ -37,10 +38,15 @@ function deleteseries()
 					<a href="../games/games_series_main.php?series_page=add_series">
 						<img src="../templates/0/icons/icon_new_series.png" alt="" width="59" height="18" border="0">
 					</a> 
-				{/if} 
-				{if $series_info.series_page eq 'series_editor' or $series_info.series_page eq 'addgames_series'}<a href="../games/games_series_main.php?series_page=edit_series&game_series_id={$series_info.game_series_id}"><img src="../templates/0/icons/icon_edit_series.png" alt="" width="59" height="18" border="0"></a> {/if}
-				{if $series_info.series_page eq 'series_editor' or $series_info.series_page eq 'edit_series' or $series_info.series_page eq 'addgames_series'}<a style="cursor: pointer;" onClick="deleteseries(); return false;"><img src="../templates/0/icons/icon_delete_series.png" alt="" width="59" height="18" border="0"></a> {/if}
-				{if $series_info.series_page eq 'series_editor' or $series_info.series_page eq 'edit_series'}<a href="../games/games_series_main.php?series_page=addgames_series&game_series_id={$series_info.game_series_id}"><img src="../templates/0/icons/add_games_button.png" alt="" width="59" height="18" border="0"></a> {/if} 
+				{/if}
+ 				
+				{if $series_info.series_page eq 'series_editor' or $series_info.series_page eq 'addgames_series'}<a href="../games/games_series_main.php?series_page=edit_series&game_series_id={$series_info.game_series_id}"><img src="../templates/0/icons/icon_edit_series.png" alt="" width="59" height="18" border="0"></a> {/if}				
+
+					{if $series_info.series_page eq 'series_editor' or $series_info.series_page eq 'edit_series' or $series_info.series_page eq 'addgames_series'}<a style="cursor: pointer;" onClick="deleteseries(); return false;"><img src="../templates/0/icons/icon_delete_series.png" alt="" width="59" height="18" border="0"></a> 
+					{/if}
+				
+				{if $series_info.series_page eq 'series_editor' or $series_info.series_page eq 'edit_series'}<a href="../games/games_series_main.php?series_page=addgames_series&game_series_id={if isset($series_info.game_series_id)}{$series_info.game_series_id}{/if}"><img src="../templates/0/icons/add_games_button.png" alt="" width="59" height="18" border="0"></a> {/if} 
+			{/if}
 				</td>
 			</tr>
 	</table>
@@ -50,7 +56,7 @@ function deleteseries()
 	<table width="100%" cellspacing="2" cellpadding="2" border="0" class="CELLCOLOR" >
 			<tr>
     			<td width="16%" valign="top">
-					<table width="100%" border="0" cellspacing="2" cellpadding="2" class="NAVCELL">
+					<table width="100%" border="0" cellspacing="2" cellpadding="2" class="NEWNAVCELL">
 						<tr>
     						<td style="text-align: center;" class="HEADERBAR">
 								<span class="LEFTNAVHEADING"> Game Series</span>
@@ -69,15 +75,15 @@ function deleteseries()
 				<td width="84%" align="center" valign="top">
 				
 				{if (isset($series_info.series_page) and $series_info.series_page eq 'add_series')} 
-					{include file="../templates/0/games_series_addseries.tpl"} 
+					{include file="./games_series_addseries.html"} 
 				{/if}
 				
 				{if (isset($series_info.series_page) and $series_info.series_page eq 'edit_series')} 
-					{include file="../templates/0/games_series_editseries.tpl"} 
+					{include file="./games_series_editseries.html"} 
 				{/if}
 				
 				{if (isset($series_info.series_page) and $series_info.series_page eq 'addgames_series')} 
-					{include file="../templates/0/games_series_addgames.tpl"} 
+					{include file="./games_series_addgames.html"} 
 				{/if}
 				
 				{if (isset($series_info.series_page) and $series_info.series_page eq 'series_editor')}
@@ -144,7 +150,7 @@ function deleteseries()
 					
 				<input type="hidden" name="series_page" value="series_editor">
 				<input type="hidden" name="action" value="delete_from_series">
-				<input type="hidden" name="game_series_id" value="{$series_info.game_series_id}">
+				<input type="hidden" name="game_series_id" value="{if isset($series_info.game_series_id)}{$series_info.game_series_id}{/if}">
 					<tr style="border-top: solid 2px #b2b2b2; background-color:#ffffff;">
 						<td colspan="5" style="border-top: solid 2px #b2b2b2; background-color:#ffffff;">
 						<img src="../templates/0/images/arrow_ltr.gif" alt="" width="38" height="22" border="0"><input type="submit" value="Delete from series"></td>

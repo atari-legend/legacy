@@ -28,7 +28,7 @@ function delete_screenshot(screenshot_id, demo_id)
     var return_value = confirm(message);
 	if (return_value !="0")
     {
-      	url="demos_screenshot_add.php?demo_id="+demo_id+"&screenshot_id="+screenshot_id+"&action=delete_screen";
+      	url="db_demos_screenshot_add.php?demo_id="+demo_id+"&screenshot_id="+screenshot_id+"&action=delete_screen";
 		location.href=url;
     }
 }
@@ -78,7 +78,7 @@ function delete_screenshot(screenshot_id, demo_id)
 	<td align="center">
 		<fieldset class="news_set">
 		<legend class="links_legend">Browse</legend>
-		<form enctype="multipart/form-data" name="frmUploadShot" action="demos_screenshot_add.php" method="post">
+		<form enctype="multipart/form-data" name="frmUploadShot" action="db_demos_screenshot_add.php" method="post">
 		{section name=loop loop=11 start=1} 
 			<input type="file" name="image[{$smarty.section.loop.index}]">
 		{/section}	
@@ -116,7 +116,7 @@ function delete_screenshot(screenshot_id, demo_id)
 </table>
 <br>
 
-{if $message <> ''}
+{if isset($message) and $message <> ''}
 	<table align="center" width="100%" cellspacing="0" cellpadding="0" border="0">
 	<tr>
 		<td align="center" >

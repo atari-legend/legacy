@@ -86,7 +86,7 @@ function delete_music(game_id)
 					</select>	
 					<b>Composers</b>					
 					<br><br>
-					<input type="hidden" name="music_id" value="{$line.music_id}">
+					<input type="hidden" name="music_id" value="{if isset($line.music_id)}{$line.music_id}{/if}">
 					<input type="hidden" name="game_id" value="{$game.game_id}">
 					<input type="button" value="Pick" onclick="add_composer()">
 				</td>
@@ -98,7 +98,7 @@ function delete_music(game_id)
 </tr>
 </table>
 
-{if $action == 'pick_composer'}
+{if isset($action) and $action == 'pick_composer'}
 <table width="100%" cellspacing="2" cellpadding="15" class="CELLCOLOR">
 <tr>
 	<td width="100%">
@@ -147,7 +147,7 @@ function delete_music(game_id)
 </table>
 <br>
 
-{if $message <> ''}
+{if (isset($message) and $message <> '')}
 	<table align="center" width="100%" cellspacing="0" cellpadding="0" border="0">
 	<tr>
 		<td align="center" >

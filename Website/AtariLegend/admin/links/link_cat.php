@@ -1,4 +1,4 @@
-<?
+<?php
 /***************************************************************************
 *                                link_mod.php
 *                            -----------------------
@@ -20,7 +20,7 @@ In this section we modify links
 
 include("../includes/common.php");
 
-
+global $g_tree;
 $g_tree = array();
 
 		$LINKSQL = mysql_query("SELECT website_category_id,parent_category,website_category_name FROM website_category order by website_category_name")
@@ -33,15 +33,19 @@ $g_tree[]  = array(
                     'id_parent' => $link_row['parent_category'],
                     'title'     => $link_row['website_category_name']);
                  };
-				 
-				$ret_tree = array();
+		global $ret_tree;		 
+			$ret_tree = array();
 
 // __Recursive function call__
 // If you want to print out only
 // a subtree you have to modify the first value
 // of this function to the id of the subtree
 //
-tree(0,0);
+
+$sql_query = "SELECT website_category_id,parent_category,website_category_name FROM website_category order by website_category_name";
+
+//maketree(,,)
+maketree(0,$sql_query,0);
 
 //Print the tree structure with indents
 //

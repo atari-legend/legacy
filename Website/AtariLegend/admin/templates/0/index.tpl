@@ -24,6 +24,12 @@
 	<script type='text/JavaScript' src='../templates/0/js/sha512.js'></script>
 	<script type='text/JavaScript' src='../templates/0/js/md5.js'></script> 
 {/if}
+{if isset($games_box_tpl)}
+<script src="../templates/0/js/jquery-1.11.0.min.js"></script>
+	<script src="../templates/0/js/lightbox.min.js"></script>
+<link href="../templates/0/css/lightbox.css" rel="stylesheet" />
+ 
+{/if}
 
 	<title>Cpanel</title>
 </head>
@@ -41,9 +47,9 @@
     				<td width="20%" valign="top">
 					<img src="../templates/0/images/al-beta2logo.png" alt="logo" width="200" height="71" border="0" align="top"> 
 					</td>
-					{if isset($games_list_html) or isset($games_detail_tpl)} 
+				{if isset($games_list_html) or isset($games_detail_tpl)} 
 					<td width="80%" valign="top">
-					<form action="../games/games_main.php" method="post" name="game_search" id="game_search">
+					<form action="../games/games_list.php" method="post" name="game_search" id="game_search">
 				<br>
 		<table align="left">
 		<tr>
@@ -112,7 +118,7 @@
 			<td align="left">
 				<select name="developer" style="width:90px;">
 					<option value="-" SELECTED>-</option>
-					{foreach from=$company item=line} 
+					{foreach from=$company_developer item=line} 
 						<option value="{$line.comp_id}">{$line.comp_name}</option>
 					{/foreach}
 				</select>
@@ -123,7 +129,7 @@
 			<td align="left">
 			<select name="publisher" style="width:90px;">
 					<option value="-" SELECTED>-</option>
-					{foreach from=$company item=line} 
+					{foreach from=$company_publisher item=line} 
 						<option value="{$line.comp_id}">{$line.comp_name}</option>
 					{/foreach}
 				</select>	
@@ -143,7 +149,126 @@
 			<tr>
     			<td width="16%" valign="top">
 
-				{include file='./leftnav.html'}
+			<!--Begin Leftnav Section-->
+
+<div class="NEWNAVCELL">
+
+	<li class="NEWHEADERBAR">Administration</li>
+
+	<li class="leftnav_list"><a href="../index.php" class="LEFTNAV">Main Page</a></li>
+	<li class="leftnav_list"><a href="../administration/statistics.php" class="LEFTNAV">Statistics</a></li>
+	<li class="leftnav_list"><a href="http://team.atarizone.com" class="LEFTNAV">Forum</a></li>
+      	<li class="leftnav_list"><a href="../administration/construction.php" class="LEFTNAV">Log Out</a></li>
+	
+	<li class="NEWHEADERBAR">Trivia</li>
+
+	<li class="leftnav_list"><a href="../trivia/did_you_know.php" class="LEFTNAV">Did you know</a></li>
+	<li class="leftnav_list"><a href="../trivia/manage_trivia_screens.php" class="LEFTNAV">Trivia Screenshots</a></li>
+	<li class="leftnav_list"><a href="../trivia/manage_trivia_quotes.php" class="LEFTNAV">Trivia Quotes</a></li>
+
+	<li class="NEWHEADERBAR">Users</li>
+
+	<li class="leftnav_list"><a href="../user/user_main.php" class="LEFTNAV">User admin page</a></li>
+
+	<li class="NEWHEADERBAR">Links</li>
+
+	<li class="leftnav_list"><a href="../links/link_addnew.php" class="LEFTNAV">Add new Links</a></li>
+ 	<li class="leftnav_list"><a href="../links/link_validate.php" class="LEFTNAV">Validate Links</a></li>
+ 	<li class="leftnav_list"><a href="../links/link_modlist.php" class="LEFTNAV">Modify Links</a></li>
+ 	<li class="leftnav_list"><a href="../links/link_cat.php" class="LEFTNAV">Link Categories</a></li>
+
+	<li class="NEWHEADERBAR">Games</li>
+
+	<li class="leftnav_list"><a href="../games/games_main.php" class="LEFTNAV">Game Editor</a></li>
+	<li class="leftnav_list"><a href="../games/games_comment.php" class="LEFTNAV">Game Comments</a></li>
+	<li class="leftnav_list"><a href="../games/games_review.php" class="LEFTNAV">Reviews</a></li>
+	<li class="leftnav_list"><a href="../games/games_review_submitted.php" class="LEFTNAV">Submitted reviews</a></li>
+	<li class="leftnav_list"><a href="../games/games_series_main.php" class="LEFTNAV">Game Series</a></li>
+	<li class="leftnav_list"><a href="../games/games_music.php" class="LEFTNAV">Game Music</a></li>
+	<li class="leftnav_list"><a href="../games/submission_games.php" class="LEFTNAV">Submissions</a></li>
+
+	<li class="NEWHEADERBAR">Articles</li>
+
+	<li class="leftnav_list"><a href="../administration/construction.php" class="LEFTNAV">Articles</a></li>
+	<li class="leftnav_list"><a href="../administration/construction.php" class="LEFTNAV">Article types</a></li>
+	<li class="leftnav_list"><a href="../administration/construction.php" class="LEFTNAV">Screenshots</a></li>
+
+	<li class="NEWHEADERBAR">Company</li>
+
+	<li class="leftnav_list"><a href="../company/company_main.php" class="LEFTNAV">Companies</a></li>
+	<li class="leftnav_list"><a href="../company/company_logos.php" class="LEFTNAV">Company Logos</a></li>
+
+	<li class="NEWHEADERBAR">Individuals</li>
+
+	<li class="leftnav_list"><a href="../individuals/individuals_main.php" class="LEFTNAV">Indivuals</a></li>
+	<li class="leftnav_list"><a href="../individuals/individuals_author.php" class="LEFTNAV">Author types</a></li>
+
+	<li class="NEWHEADERBAR">Magazines</li>
+
+	<li class="leftnav_list"><a href="../magazine/magazine_add.php" class="LEFTNAV">Add Magazine</a></li>
+	<li class="leftnav_list"><a href="../magazine/magazine_manage.php" class="LEFTNAV">Manage issues</a></li>
+
+	<li class="NEWHEADERBAR">Interviews</li>
+
+	<li class="leftnav_list"><a href="../interviews/interviews_main.php" class="LEFTNAV">Interviews</a></li>
+	<li class="leftnav_list"><a href="../interviews/interviews_help.php" class="LEFTNAV">Interviews Help</a></li>
+
+	<li class="NEWHEADERBAR">Crews</li>
+
+	<li class="leftnav_list"><a href="../crew/crew_main.php" class="LEFTNAV">Crew Editor</a></li>
+
+	<li class="NEWHEADERBAR">Demos</li>
+
+	<li class="leftnav_list"><a href="../demos/demos_main.php" class="LEFTNAV">Demo Editor</a></li>
+	<li class="leftnav_list"><a href="../demos/demos_comment.php" class="LEFTNAV">Demo Comments</a></li>
+	<li class="leftnav_list"><a href="../demos/demos_music.php" class="LEFTNAV">Demo Music</a></li>
+	<li class="leftnav_list"><a href="../demos/submission_demos.php" class="LEFTNAV">Submissions</a></li>
+
+	<li class="NEWHEADERBAR">News</li>
+
+	<div class="leftnav_list"><a href="../news/news_add.php" class="LEFTNAV">Add News</a></div>
+	<div class="leftnav_list"><a href="../news/news_approve.php" class="LEFTNAV">Approve News</a></div>
+	<div class="leftnav_list"><a href="../news/news_edit_all.php" class="LEFTNAV">Edit/Delete News</a></div>
+	<div class="leftnav_list"><a href="../news/news_add_images.php" class="LEFTNAV">Add news images</a></div> 
+
+
+</div>
+
+<br>
+<!--
+//****************************************************************************************
+// Online users
+//**************************************************************************************** 
+-->
+
+<div class="NEWNAVCELL">
+
+	<li class="NEWHEADERBAR">Online Users</li>
+
+		{foreach from=$onlineusers item=line}
+		<li class="leftnav_list">- <a href="../user/user_detail.php?user_id_selected={$line.user_id}" class="LEFTNAV">{$line.user_name}</a></li> 
+		{/foreach}
+
+
+</div>
+
+
+<!--
+//****************************************************************************************
+// This is the disclaimer that is called on all pages
+//**************************************************************************************** 
+-->
+<br>
+
+<div class="NEWNAVCELL">
+	<li class="leftnav_list" style="text-weight:bold;">
+	© 2015 AtariLegend<br>
+	AtariLegend is not affiliated with <a href="http://www.atari.com" class="MAINNAV">Atari Corporation</a> in any way.
+	</li>	
+</div>
+
+			<!--End Leftnav Section-->
+
 				</td>
 				<!--Begin of Middle Comlumn-->
 				<!--The middle column is called with a var-->	

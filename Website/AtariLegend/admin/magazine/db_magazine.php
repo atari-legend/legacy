@@ -1,4 +1,4 @@
-<?
+<?php
 /***************************************************************************
 *                                db_magazine.php
 *                            -----------------------
@@ -17,9 +17,8 @@
 // We are using the action var to separate all the queries.
 
 include("../includes/common.php"); 
-include("../includes/config.php");
 
-if($action=="insert_magazine")
+if(isset($action) and $action=="insert_magazine")
 
 {
 
@@ -35,7 +34,7 @@ header("Location: ../magazine/magazine_add.php");
 }
 
 
-if($action=="add_issue")
+if(isset($action) and $action=="add_issue")
 
 {
 
@@ -56,7 +55,7 @@ header("Location: ../magazine/magazine_edit.php?magazine_id=$magazine_id");
 }
 
 
-if($action=="delete_issue")
+if(isset($action) and $action=="delete_issue")
 
 {
 
@@ -81,7 +80,7 @@ $sqldel = mysql_query("SELECT * FROM magazine_issue WHERE magazine_issue_id='$ma
 header("Location: ../magazine/magazine_edit.php?magazine_id=$magazine_id");
 }
 
-if($action=="coverscan_upload")
+if(isset($action) and $action=="coverscan_upload")
 
 {
 
@@ -89,6 +88,7 @@ if($action=="coverscan_upload")
 // This is where we upload coverscans
 //**************************************************************************************** 
 
+	$coverscan = $_FILES['coverscan'];
 	if(isset($coverscan))
 	{
       	$imgext="jpg";
@@ -112,7 +112,7 @@ mysql_close();
 header("Location: ../magazine/magazine_issue_edit.php?magazine_issue_id=$magazine_issue_id");
 }
 
-if($action=="delete_coverscan")
+if(isset($action) and $action=="delete_coverscan")
 
 {
 
@@ -125,7 +125,7 @@ $sqldel = mysql_query("SELECT * FROM magazine_issue WHERE magazine_issue_id='$ma
 		
 		//remove coverscan
 		
-			if ($fetchdel[magazine_issue_imgext]!=='') 
+			if ($fetchdel['magazine_issue_imgext']!=='') 
 			{
 				unlink ("$magazine_scan_path$magazine_issue_id.$fetchdel[magazine_issue_imgext]");
 			}
@@ -140,7 +140,7 @@ mysql_close();
 header("Location: ../magazine/magazine_issue_edit.php?magazine_issue_id=$magazine_issue_id");
 }
 
-if($action=="score_delete")
+if(isset($action) and $action=="score_delete")
 
 {
 
@@ -156,7 +156,7 @@ mysql_close();
 header("Location: ../magazine/magazine_review_score.php?game_id=$game_id");
 }
 
-if($action=="set_score")
+if(isset($action) and $action=="set_score")
 
 {
 

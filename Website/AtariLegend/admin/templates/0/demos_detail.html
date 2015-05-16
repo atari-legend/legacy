@@ -28,7 +28,7 @@ function deletedemo(demo_id)
 
     if (return_value !="0")
     {
-    	url="../demos/demos_detail.php?demo_id="+demo_id+"&action=delete_demo";
+    	url="../demos/db_demos.php?demo_id="+demo_id+"&action=delete_demo";
 		location.href=url;
     }  
 }
@@ -36,28 +36,28 @@ function deletedemo(demo_id)
 function delete_crew() 
 {
 	document.crew.method="post";
-	document.crew.action="../demos/demos_detail.php?action=delete_crew";
+	document.crew.action="../demos/db_demos.php?action=delete_crew";
    	document.crew.submit();
 }
 
 function add_crew() 
 {
 	document.crew.method="post";
-	document.crew.action="../demos/demos_detail.php?action=add_crew";
+	document.crew.action="../demos/db_demos.php?action=add_crew";
    	document.crew.submit();
 }
 
 function delete_author() 
 {
 	document.creator.method="post";
-	document.creator.action="../demos/demos_detail.php?action=delete_author";
+	document.creator.action="../demos/db_demos.php?action=delete_author";
    	document.creator.submit();
 }
 
 function add_author() 
 {
 	document.creator.method="post";
-	document.creator.action="../demos/demos_detail.php?action=add_author";
+	document.creator.action="../demos/db_demos.php?action=add_author";
    	document.creator.submit();
 }
 </script>
@@ -94,19 +94,21 @@ function add_author()
 <table width="100%" cellspacing="2" cellpadding="15" class="CELLCOLOR">
 <tr>
 	<td width="50%">
-	<form action="../demos/demos_detail.php" method="post" name="crew">
+	<form action="../demos/db_demos.php" method="post" name="crew">
 	<fieldset class="game_set">
 		<legend class="links_legend">Crew info</legend>
 			<table width="100%">
 			<tr>
 				<td>		
+					{if isset($demo_crew)} 
 					{foreach from=$demo_crew item=line}
 						<input type="checkbox" name="demo_crew_id[]" value="{$line.crew_id}">
 					  		<a href="../crew/crew_search.php?crew_select={$line.crew_id}&crewsearch={$line.crew_name}&action=main" class="MAINNAV">{$line.crew_name}</a>				
 					  	<br>
 					  	<br>
-					{/foreach}	
-					{if $demo_crew_nr == 1} 				
+					{/foreach}
+					{/if}	
+					{if isset($demo_crew_nr) and $demo_crew_nr == 1} 				
 						<img src="../templates/0/images/arrow_ltr.gif" alt="" width="38" height="22" border="0">		
 						<input type="button" value="Delete" onclick="delete_crew()">
 					{/if}
@@ -126,19 +128,21 @@ function add_author()
 	</form>
 	</td>
 	<td align="50%">
-	<form action="../demos/demos_detail.php" method="post" name="creator">
+	<form action="../demos/db_demos.php" method="post" name="creator">
 	<fieldset class="game_set">
 		<legend class="links_legend">Creator info</legend>
 			<table width="100%">
 			<tr>
 				<td>	
+					{if isset($demo_author)} 
 					{foreach from=$demo_author item=line}
 						<input type="checkbox" name="demo_author_id[]" value="{$line.demo_author_id}">
 					  		<a href="../individuals/individuals_edit.php?ind_id={$line.ind_id}" class="MAINNAV">{$line.ind_name}</a> <b>({$line.auhthor_type_info})</b>
 					  	<br>
 					  	<br>
 					{/foreach}
-					{if $demo_author_nr == 1} 
+					{/if}
+					{if isset($demo_author_nr) and $demo_author_nr == 1} 
 				 		<img src="../templates/0/images/arrow_ltr.gif" alt="" width="38" height="22" border="0">		
 				 		<input type="button" value="Delete" onclick="delete_author()">
 					{/if}
@@ -187,7 +191,7 @@ function add_author()
 </tr>
 <tr>
 	<td>
-	<form action="../demos/demos_detail.php" method="post" name="edit">
+	<form action="../demos/db_demos.php" method="post" name="edit">
 	<fieldset class="game_set">
 		<legend class="links_legend">Basic demo info</legend>
 		<table>
@@ -281,7 +285,7 @@ function add_author()
 <table width="100%" cellspacing="2" cellpadding="15" class="CELLCOLOR">
 <tr>
 	<td width="33%" align="center">
-	<form action="../demos/demos_detail.php" method="post" name="aka">
+	<form action="../demos/db_demos.php" method="post" name="aka">
 	<fieldset class="game_set">
 		<legend class="links_legend">Other Features</legend>
 			<table width="100%">
@@ -296,7 +300,7 @@ function add_author()
 					<b>Current AKA</b>
 					<br>
 						{foreach from=$aka item=line}
-							<a href="../demos/demos_detail.php?demo_id={$line.demo_id}" class="MAINNAV">{$line.demo_aka_name}</a> - <b><a href="../demos/demos_detail.php?demo_aka_id={$line.demo_aka_id}&action=delete_aka&demo_id={$line.demo_id}" class="MAINNAV">delete</a></b> 
+							<a href="../demos/demos_detail.php?demo_id={$line.demo_id}" class="MAINNAV">{$line.demo_aka_name}</a> - <b><a href="../demos/db_demos.php?demo_aka_id={$line.demo_aka_id}&action=delete_aka&demo_id={$line.demo_id}" class="MAINNAV">delete</a></b> 
 							<br>
 						{/foreach}
 					{/if}
@@ -344,7 +348,7 @@ function add_author()
 </table>
 <br>
 
-{if $message <> ''}
+{if (isset($message) and $message <> '')}
 	<table align="center" width="100%" cellspacing="0" cellpadding="0" border="0">
 	<tr>
 		<td align="center" >

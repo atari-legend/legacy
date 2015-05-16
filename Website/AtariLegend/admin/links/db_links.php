@@ -1,4 +1,4 @@
-<?
+<?php
 /***************************************************************************
 *                                db_links.php
 *                            -----------------------
@@ -17,7 +17,7 @@
 // We are using the action var to separate all the queries.
 
 include("../includes/common.php"); 
-if($action=="addnew_link")
+if(isset($action) and $action=="addnew_link")
 
 {
 
@@ -57,7 +57,7 @@ header("Location: ../links/link_modlist.php?catpick=$category");
 
 // LINK DELETE AREA //
 
-if ($action=="link_delete")
+if (isset($action) and $action=="link_delete")
 
 {
 
@@ -86,7 +86,7 @@ header("Location: ../links/link_modlist.php?catpick=$rowcat[website_category_id]
 
 // LINK UPDATE AREA //
 
-if($action=='modify_link')
+if(isset($action) and $action=='modify_link')
 
 {
 
@@ -184,7 +184,7 @@ mysql_close();
 header("Location: ../links/link_mod.php?website_id=$website_id");
 }
 
-if($action=="approve_link")
+if(isset($action) and $action=="approve_link")
 
 {
 
@@ -224,7 +224,7 @@ mysql_close();
 header("Location: ../links/link_validate.php");
 }
 
-if($action=="val_delete")
+if(isset($action) and $action=="val_delete")
 
 {
 
@@ -239,7 +239,7 @@ mysql_close();
 header("Location: ../links/link_validate.php");
 }
 
-if($action=="new_cat")
+if(isset($action) and $action=="new_cat")
 
 {
 
@@ -254,7 +254,7 @@ mysql_close();
 header("Location: ../links/link_cat.php");
 }
 
-if($action=='mod_cat')
+if(isset($action) and $action=='mod_cat')
 
 {
 
@@ -270,7 +270,7 @@ header("Location: ../links/link_cat.php");
 
 }
 
-if($action=='del_cat')
+if(isset($action) and $action=='del_cat')
 
 {
 

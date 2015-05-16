@@ -54,8 +54,13 @@
 	<textarea cols="70" rows="8" name="news_text" >{$edit_submissions.edit_text}</textarea>
 	<br>
 	<br>
+	
+     	{if isset($edit_submissions.edit_submission_id)}
 	<input type="hidden" name="news_submission_id" value="{$edit_submissions.edit_submission_id}">
+	{/if}
+	{if isset($edit_submissions.edit_id)}
 	<input type="hidden" name="news_id" value="{$edit_submissions.edit_id}">
+	{/if}
 	<input type="hidden" name="action" value="update">
 	<input type="submit" value="Update">	
 	</form>
@@ -70,7 +75,7 @@
 </tr>
 </table>
 
-{if $message <> ''}
+{if isset($message)}
 	<table align="center" width="100%" cellspacing="0" cellpadding="0" border="0">
 	<tr>
 		<td align="center" >

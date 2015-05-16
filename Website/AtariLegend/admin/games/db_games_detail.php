@@ -1,4 +1,4 @@
-<?
+<?php
 /***************************************************************************
  *                                games_detail.php
  *                            ------------------------
@@ -17,6 +17,25 @@
 
 //load all common functions
 include("../includes/common.php"); 
+
+//***********************************************************************************
+//Insert new game
+//***********************************************************************************
+
+	if (isset($action) and $action == "insert_game" )
+	{
+		//Insert the game in the game table
+		$sql_game = mysql_query("INSERT INTO game (game_name) VALUES ('$newgame')") or die ("Couldn't insert game into database");  
+
+		$message = "Game has been inserted into the database";
+		$smarty->assign("message",$message);
+		
+		$new_game_id = mysql_insert_id();
+
+		header("Location: ../games/games_detail.php?game_id=$new_game_id");
+
+	}
+
 
 //***********************************************************************************
 //If delete aka link has been pressed
@@ -448,24 +467,11 @@ header("Location: ../games/games_detail.php?game_id=$game_id");
 											$sdbquery = mysql_query("DELETE FROM game_series_cross WHERE game_id='$game_id'");
 											$sdbquery = mysql_query("DELETE FROM game_author WHERE game_id='$game_id'");				
 	
-											//Get the companies to fill the search fields
-											$sql_company = mysql_query("SELECT * FROM pub_dev ORDER BY pub_dev_name ASC")
-			    	 									   or die ("Couldn't query Publisher and Developer database");
-		
-											while  ($company=mysql_fetch_array($sql_company)) 
-											{  
-												$smarty->append('company',
-	    											 array('comp_id' => $company['pub_dev_id'],
-				 	  									   'comp_name' => $company['pub_dev_name']));
-											}
-
 											$smarty->assign("message",'Game succesfully deleted');
+											
+											header("Location: ../games/games_main.php");
 
 											$smarty->assign("user_id",$_SESSION['user_id']);
-											$smarty->assign('games_main_tpl', '1');
-
-											//Send all smarty variables to the templates
-											$smarty->display('file:../templates/0/index.tpl');
 
 											//close the connection
 											mysql_close();
@@ -478,7 +484,7 @@ header("Location: ../games/games_detail.php?game_id=$game_id");
 				}
 			}
 		}
-header("Location: ../games/games_main.php");
+
 	}
 //close the connection
 mysql_close();

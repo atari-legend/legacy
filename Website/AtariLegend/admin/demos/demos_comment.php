@@ -1,4 +1,4 @@
-<?
+<?php
 /***************************************************************************
 *                                demos_comment.php
 *                            -----------------------
@@ -13,7 +13,6 @@
 ***************************************************************************/
 
 include("../includes/common.php");
-include("../includes/config.php");
 
 $v_counter= (isset($_GET["v_counter"]) ? $_GET["v_counter"] : 0);
 
@@ -89,34 +88,34 @@ while ($query_comment = mysql_fetch_array($sql_comment))
 	
 	//Get the dataElements we want to place on screen
 	$v_demo_image  = $demo_screenshot_path;
-	$v_demo_image .= $sql_demo[screenshot_id];
+	$v_demo_image .= $sql_demo['screenshot_id'];
 	$v_demo_image .= '.';
-	$v_demo_image .= $sql_demo[imgext];
+	$v_demo_image .= $sql_demo['imgext'];
 	
-	$oldcomment = $query_comment[comment];
+	$oldcomment = $query_comment['comment'];
 
 	$oldcomment = InsertALCode($oldcomment);
 	$oldcomment = InsertSmillies($oldcomment);
 	$oldcomment = nl2br($oldcomment);
 	$oldcomment = stripslashes($oldcomment);
 	
-	$user_joindate = convert_timestamp($query_comment[join_date]);
-	$date = convert_timestamp($query_comment[timestamp]);
+	$user_joindate = convert_timestamp($query_comment['join_date']);
+	$date = convert_timestamp($query_comment['timestamp']);
 	
 	 $smarty->append('comments',
 	    array('comment' => $oldcomment,
 			  'date' => $date,
-			  'demo' => $query_comment[demo_name],
-			  'demo_id' => $query_comment[demo_id],
+			  'demo' => $query_comment['demo_name'],
+			  'demo_id' => $query_comment['demo_id'],
 			  'image' => $v_demo_image,
-			  'user_name' => $query_comment[userid],
-			  'users_id' => $query_comment[user_id],
-			  'demo_user_comments_id' => $query_comment[demo_user_comments_id],
+			  'user_name' => $query_comment['userid'],
+			  'users_id' => $query_comment['user_id'],
+			  'demo_user_comments_id' => $query_comment['demo_user_comments_id'],
 			  'user_comment_nr' => $usercomment_number,
 			  'user_joindate' => $user_joindate,
 			  'usersubmit_number' => $usersubmit_number,
-			  'comment_id' => $query_comment[comments_id],
-			  'email' => $query_comment[email]));
+			  'comment_id' => $query_comment['comments_id'],
+			  'email' => $query_comment['email']));
 }
 
 //Check if back arrow is needed 
