@@ -30,7 +30,7 @@ include("../includes/common.php");
 		$message = "Game has been inserted into the database";
 		$smarty->assign("message",$message);
 		
-		$new_game_id = mysql_insert_id();
+		$new_game_id = $mysqli->insert_id;
 
 		header("Location: ../games/games_detail.php?game_id=$new_game_id");
 
@@ -470,7 +470,7 @@ header("Location: ../games/games_detail.php?game_id=$game_id");
 											$smarty->assign("user_id",$_SESSION['user_id']);
 
 											//close the connection
-											mysql_close();
+											mysqli_free_result();
 										}
 									}
 								}
@@ -483,5 +483,5 @@ header("Location: ../games/games_detail.php?game_id=$game_id");
 
 	}
 //close the connection
-mysql_close();
+mysqli_close($mysqli);
 ?>
