@@ -23,14 +23,14 @@ $sql_individuals = "SELECT * FROM individuals ORDER BY ind_name ASC";
 $sql_aka = "SELECT ind_id,nick FROM individual_nicks ORDER BY nick ASC";
 
 //Create a temporary table to build an array with both names and nicknames
-mysql_query("CREATE TEMPORARY TABLE temp ENGINE = MEMORY $sql_individuals") or die("failed to create temporary table");
-mysql_query("INSERT INTO temp $sql_aka") or die("failed to insert akas into temporary table");
+$mysqli->query("CREATE TEMPORARY TABLE temp ENGINE = MEMORY $sql_individuals") or die("failed to create temporary table");
+$mysqli->query("INSERT INTO temp $sql_aka") or die("failed to insert akas into temporary table");
 			
-$query_temporary = mysql_query("SELECT * FROM temp ORDER BY ind_name ASC") or die("Failed to query temporary table");
-mysql_query("DROP TABLE temp");
+$query_temporary = $mysqli->query("SELECT * FROM temp ORDER BY ind_name ASC") or die("Failed to query temporary table");
+$mysqli->query("DROP TABLE temp");
 				   
 				   
-while  ($individuals=mysql_fetch_array($query_temporary)) 
+while  ($individuals=$query_temporary->fetch_array(MYSQLI_BOTH)) 
 {  
 	if ( $individuals['ind_name'] != '' )
 	{

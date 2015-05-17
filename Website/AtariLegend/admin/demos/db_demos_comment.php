@@ -29,7 +29,7 @@ if($action=="edit_demos_comment")
 
 if (isset($comment_text) and isset($comment_id))
 {
-	$commentquery = mysql_query("UPDATE comments SET comment='$comment_text' WHERE comments_id='$comment_id'") or die ('no working');
+	$commentquery = $mysqli->query("UPDATE comments SET comment='$comment_text' WHERE comments_id='$comment_id'") or die ('no working');
 }
 
 if ($view == "users_comments")
@@ -54,8 +54,8 @@ if($action=="delete_comment")
 
 	if (isset($comment_id))
 	{
-		$sql = mysql_query("DELETE FROM demo_user_comments WHERE comments_id = '$comment_id'") or die("couldn't delete demo_comment quote");
-		$sql = mysql_query("DELETE FROM comments WHERE comments_id = '$comment_id'") or die("couldn't delete comment quote");
+		$sql = $mysqli->query("DELETE FROM demo_user_comments WHERE comments_id = '$comment_id'") or die("couldn't delete demo_comment quote");
+		$sql = $mysqli->query("DELETE FROM comments WHERE comments_id = '$comment_id'") or die("couldn't delete comment quote");
 	}
 
 

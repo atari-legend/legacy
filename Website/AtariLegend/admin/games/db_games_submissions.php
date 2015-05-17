@@ -28,11 +28,11 @@ if($action=="update_submission")
 
 if (isset($submit_id))
 {
-		$commentquery = mysql_query("UPDATE game_submitinfo SET game_done = '1' WHERE game_submitinfo_id='$submit_id'");
+		$commentquery = $mysqli->query("UPDATE game_submitinfo SET game_done = '1' WHERE game_submitinfo_id='$submit_id'");
 		
-		$sql_user = mysql_query("SELECT user_id FROM game_submitinfo WHERE game_submitinfo_id='$submit_id'");
+		$sql_user = $mysqli->query("SELECT user_id FROM game_submitinfo WHERE game_submitinfo_id='$submit_id'");
 		
-		list($user_id) = mysql_fetch_array($sql_user);
+		list($user_id) = $sql_user->fetch_array(MYSQLI_BOTH);
 		$karma_action = "game_submission";
 		
 		UserKarma($user_id,$karma_action);
@@ -54,7 +54,7 @@ if($action=="delete_submission")
 
 	if (isset($submit_id))
 	{
-		$sql = mysql_query("DELETE FROM game_submitinfo WHERE game_submitinfo_id = '$submit_id'") or die("couldn't delete game_submissions quote");
+		$sql = $mysqli->query("DELETE FROM game_submitinfo WHERE game_submitinfo_id = '$submit_id'") or die("couldn't delete game_submissions quote");
 	}
 
 
@@ -90,10 +90,10 @@ if($action=="move_submission_tocomment")
 		$sub_game_id = $sql_submit['game_id'];
 
 
-		$sql = mysql_query("INSERT INTO comments (comment,timestamp,user_id) VALUES ('$submit_text','$sub_timestamp','$sub_user_id')") or die("something is wrong with INSERT mysql3");
-		$sql = mysql_query("INSERT INTO game_user_comments (game_id,comment_id) VALUES ('$sub_game_id',LAST_INSERT_ID())") or die("something is wrong with INSERT mysql4");
+		$sql = $mysqli->query("INSERT INTO comments (comment,timestamp,user_id) VALUES ('$submit_text','$sub_timestamp','$sub_user_id')") or die("something is wrong with INSERT mysql3");
+		$sql = $mysqli->query("INSERT INTO game_user_comments (game_id,comment_id) VALUES ('$sub_game_id',LAST_INSERT_ID())") or die("something is wrong with INSERT mysql4");
 
-		$sql = mysql_query("DELETE FROM game_submitinfo WHERE game_submitinfo_id = ".$submit_id."") or die("couldn't delete game_submissions quote");
+		$sql = $mysqli->query("DELETE FROM game_submitinfo WHERE game_submitinfo_id = ".$submit_id."") or die("couldn't delete game_submissions quote");
 	}
 
 

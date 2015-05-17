@@ -21,7 +21,7 @@ This is the submitted review page
 include("../includes/common.php"); 
 
 //get the submitted reviews
-$sql_submission =  mysql_query("SELECT * FROM review_main
+$sql_submission =  $mysqli->query("SELECT * FROM review_main
 							    LEFT JOIN review_game ON (review_main.review_id = review_game.review_id)
 								LEFT JOIN game ON (review_game.game_id = game.game_id)
 								LEFT JOIN users ON (review_main.member_id = users.user_id)
@@ -29,7 +29,7 @@ $sql_submission =  mysql_query("SELECT * FROM review_main
 
 $i = 0;
 
-while ($review=mysql_fetch_array($sql_submission)) 
+while ($review=$sql_submission->fetch_array(MYSQLI_BOTH)) 
 { 
 	$i++;
 	

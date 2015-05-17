@@ -28,7 +28,7 @@ if($action=="edit_games_comment")
 
 if (isset($comment_text) and isset($comment_id))
 {
-		$commentquery = mysql_query("UPDATE comments SET comment='$comment_text' WHERE comments_id='$comment_id'");
+		$commentquery = $mysqli->query("UPDATE comments SET comment='$comment_text' WHERE comments_id='$comment_id'");
 }
 
 
@@ -54,8 +54,8 @@ if($action=="delete_comment")
 
 	if (isset($comment_id))
 	{
-		$sql = mysql_query("DELETE FROM game_user_comments WHERE comment_id = '$comment_id'") or die("couldn't delete game_comment quote");
-		$sql = mysql_query("DELETE FROM comments WHERE comments_id = '$comment_id'") or die("couldn't delete comment quote");
+		$sql = $mysqli->query("DELETE FROM game_user_comments WHERE comment_id = '$comment_id'") or die("couldn't delete game_comment quote");
+		$sql = $mysqli->query("DELETE FROM comments WHERE comments_id = '$comment_id'") or die("couldn't delete comment quote");
 	}
 
 

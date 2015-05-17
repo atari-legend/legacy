@@ -18,7 +18,7 @@
 include("../includes/common.php");
 
 //Get the screenshots for this demo, if they exist
-$sql_screenshots = mysql_query("SELECT * FROM screenshot_demo
+$sql_screenshots = $mysqli->query("SELECT * FROM screenshot_demo
 			   		  			LEFT JOIN screenshot_main ON (screenshot_demo.screenshot_id = screenshot_main.screenshot_id)
 								WHERE screenshot_demo.demo_id = '$demo_id' ORDER BY screenshot_demo.screenshot_id")
 				   or die ("Database error - selecting screenshots");
@@ -44,7 +44,7 @@ while ( $screenshots=mysql_fetch_array ($sql_screenshots))
 $smarty->assign("screenshots_nr",$v_screenshots);
 
 //Get the demo data
-$sql_demo = mysql_query("SELECT * FROM demo WHERE demo_id = '$demo_id'")
+$sql_demo = $mysqli->query("SELECT * FROM demo WHERE demo_id = '$demo_id'")
 			   	   or die ("Database error - selecting demo");
 
 while ( $demo=mysql_fetch_array ($sql_demo)) 

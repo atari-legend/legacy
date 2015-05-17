@@ -26,12 +26,12 @@ if (isset($new_crew))
 
 if ($crewsearch !='' and $crewbrowse == '')
 {
-		$sql_crew = mysql_query("SELECT * FROM crew
+		$sql_crew = $mysqli->query("SELECT * FROM crew
 						WHERE crew_name LIKE '%$crewsearch%' 
 						ORDER BY crew_name ASC")
 			    	   or die ("Couldn't query Crew database");
 		
-		while  ($crew=mysql_fetch_array($sql_crew)) 
+		while  ($crew=$sql_crew->fetch_array(MYSQLI_BOTH)) 
 		{  
 			$smarty->append('crew',
 	    		 array('crew_id' => $crew['crew_id'],
@@ -41,12 +41,12 @@ if ($crewsearch !='' and $crewbrowse == '')
 
 elseif ($crewbrowse !='' and $crewsearch == '')
 {
-			$sql_crew = mysql_query("SELECT * FROM crew
+			$sql_crew = $mysqli->query("SELECT * FROM crew
 						WHERE crew_name LIKE '$crewbrowse%' 
 						ORDER BY crew_name ASC")
 			    	   or die ("Couldn't query Crew database");
 		
-		while  ($crew=mysql_fetch_array($sql_crew)) 
+		while  ($crew=$sql_crew->fetch_array(MYSQLI_BOTH)) 
 		{  
 			$smarty->append('crew',
 	    		 array('crew_id' => $crew['crew_id'],
@@ -65,11 +65,11 @@ header("Location: ../crew/crew_main.php?message=$message");
 if (isset($crew_select))
 {
 // Do query for crew data
-$sql_crew = mysql_query("SELECT * FROM crew
+$sql_crew = $mysqli->query("SELECT * FROM crew
 						WHERE crew_id = '$crew_select'")
 			    	   or die ("Couldn't query Crew database");
 					   
-			$crew=mysql_fetch_array($sql_crew);		   
+			$crew=$sql_crew->fetch_array(MYSQLI_BOTH);		   
 				
 			$crew_history=stripslashes($crew['crew_history']);		   
 					   
@@ -97,11 +97,11 @@ if (isset($action) and $action=="genealogy")
 	$smarty->assign('crew_action',
 	    		 array('action' => $action));
 	
-	$sql_crewgene = mysql_query("SELECT * FROM crew
+	$sql_crewgene = $mysqli->query("SELECT * FROM crew
 						ORDER BY crew_name")
 			    	   or die ("Couldn't query Crew database");
 					   
-			while  ($genealogy=mysql_fetch_array($sql_crewgene)) 
+			while  ($genealogy=$sql_crewgene->fetch_array(MYSQLI_BOTH)) 
 			{  
 				$smarty->append('crew_gene',
 	    				  array('crew_id' => $genealogy['crew_id'],
@@ -114,18 +114,18 @@ if (isset($action) and $action=="genealogy")
 			$sql_aka = "SELECT ind_id,nick FROM individual_nicks ORDER BY nick ASC";
 			
 			//Create a temporary table to build an array with both names and nicknames
-			mysql_query("CREATE TEMPORARY TABLE temp ENGINE=MEMORY $sql_individuals") or die("failed to create temporary table");
-			mysql_query("INSERT INTO temp $sql_aka") or die("failed to insert akas into temporary table");
+			$mysqli->query("CREATE TEMPORARY TABLE temp ENGINE=MEMORY $sql_individuals") or die("failed to create temporary table");
+			$mysqli->query("INSERT INTO temp $sql_aka") or die("failed to insert akas into temporary table");
 			
-			$query_temporary = mysql_query("SELECT * FROM temp ORDER BY ind_name ASC") or die("Failed to query temporary table");
-			mysql_query("DROP TABLE temp");
+			$query_temporary = $mysqli->query("SELECT * FROM temp ORDER BY ind_name ASC") or die("Failed to query temporary table");
+			$mysqli->query("DROP TABLE temp");
 			
 			
 			$names = "newCat();";
 			$names2 = "<br>";
 			$last = "a";
 					   
-			while  ($genealogy_ind=mysql_fetch_array($query_temporary)) 
+			while  ($genealogy_ind=$query_temporary->fetch_array(MYSQLI_BOTH)) 
 			{  
 			/*	$smarty->append('ind_gene',
 	    				  array('ind_id' => $genealogy_ind['ind_id'],
@@ -166,13 +166,13 @@ if (isset($action) and $action=="genealogy")
 			}			
 			
 			// member of crew - subcrew query
-			$sql_subcrew = mysql_query("SELECT * FROM sub_crew
+			$sql_subcrew = $mysqli->query("SELECT * FROM sub_crew
 										LEFT JOIN crew ON (sub_crew.crew_id = crew.crew_id)
 										WHERE sub_crew.parent_id='$crew_select'
 										ORDER BY crew.crew_name")
 			    	   or die ("Couldn't query Crew database");
 					   
-			while  ($fetch_subcrew=mysql_fetch_array($sql_subcrew)) 
+			while  ($fetch_subcrew=$sql_subcrew->fetch_array(MYSQLI_BOTH)) 
 			{  
 				$smarty->append('subcrew',
 	    				  array('sub_crew_id' => $fetch_subcrew['sub_crew_id'],
@@ -184,14 +184,14 @@ if (isset($action) and $action=="genealogy")
 	
 			$crew_individuals = array();
 			// member of crew - individuals query
-			$sql_crewind = mysql_query("SELECT * FROM crew_individual
+			$sql_crewind = $mysqli->query("SELECT * FROM crew_individual
 										LEFT JOIN individuals ON (crew_individual.ind_id = individuals.ind_id)
 										WHERE crew_individual.crew_id='$crew_select'
 										ORDER BY individuals.ind_name")
 			    	   or die ("Couldn't query ind database");
 				$crew_individual = array();
 				
-			while  ($fetch_member=mysql_fetch_array($sql_crewind)) 
+			while  ($fetch_member=$sql_crewind->fetch_array(MYSQLI_BOTH)) 
 			{  
 				//$crew_individual = array();
 				$crew_individual['crew_individual_id'] = $fetch_member['crew_individual_id'];
@@ -206,14 +206,14 @@ if (isset($action) and $action=="genealogy")
 			
 
 			//Build a list of known nicknames for the crew members
-			$sql_ind_nicks = mysql_query("SELECT 
+			$sql_ind_nicks = $mysqli->query("SELECT 
 										  individual_nicks.individual_nicks_id,
 										  individual_nicks.ind_id,
 										  individual_nicks.nick 
 										  FROM individual_nicks
 										  LEFT JOIN crew_individual ON (individual_nicks.ind_id = crew_individual.ind_id)
 										  WHERE crew_individual.crew_id = '$crew_select'") or die ("Couldn't retrieve nick names");	
-				while  ($fetch_ind_nicks = mysql_fetch_array($sql_ind_nicks)) 
+				while  ($fetch_ind_nicks = $sql_ind_nicks->fetch_array(MYSQLI_BOTH)) 
 				{
 				
 				$smarty->append('nick_names',

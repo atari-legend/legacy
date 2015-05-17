@@ -25,7 +25,7 @@ include("../includes/common.php");
 	
 	
 				
-				$sql_series = mysql_query("SELECT * FROM game_series ORDER BY game_series_name ASC")
+				$sql_series = $mysqli->query("SELECT * FROM game_series ORDER BY game_series_name ASC")
 				 		    or die ("Couldn't query Game Series Database1");
 		
 				while  ($query_series = mysql_fetch_array ($sql_series)) 
@@ -49,13 +49,13 @@ include("../includes/common.php");
 				
 			case 'series_editor' :
 				// Get the information of the selected gameseries	
-				$sql_series2 = mysql_query("SELECT * FROM game_series WHERE game_series_id='$game_series_id'")
+				$sql_series2 = $mysqli->query("SELECT * FROM game_series WHERE game_series_id='$game_series_id'")
 									or die ("Couldn't query Game Series Database2");
 
 								$query_series2 = mysql_fetch_array ($sql_series2);
 				
 				// Check if there is a game linked to this series. For the list of games in a series
-				$sql_series_link = mysql_query("SELECT game.game_id,
+				$sql_series_link = $mysqli->query("SELECT game.game_id,
 							   game.game_name,
 							   game_publisher.pub_dev_id as 'publisher_id',
 							   pd1.pub_dev_name as 'publisher_name',
@@ -101,7 +101,7 @@ include("../includes/common.php");
 				
 			case 'addgames_series' :
 				// Get the information of the selected gameseries	
-				$sql_series2 = mysql_query("SELECT * FROM game_series WHERE game_series_id='$game_series_id'")
+				$sql_series2 = $mysqli->query("SELECT * FROM game_series WHERE game_series_id='$game_series_id'")
 									or die ("Couldn't query Game Series Database4");
 
 								$query_series2 = mysql_fetch_array ($sql_series2);
@@ -139,7 +139,7 @@ include("../includes/common.php");
 				$sql_build .= $gamebrowse_select;
 				$sql_build .= " GROUP BY game.game_name";
 
-				$sql_series_link = mysql_query($sql_build)
+				$sql_series_link = $mysqli->query($sql_build)
 				 		   		 	or die ("Couldn't query Game Series Database5 ($sql_build)");
 				
 				$smarty->assign('series_info',
@@ -168,7 +168,7 @@ include("../includes/common.php");
 				
 				
 				// Get the information of the selected gameseries	
-				$sql_series2 = mysql_query("SELECT * FROM game_series WHERE game_series_id='$game_series_id'")
+				$sql_series2 = $mysqli->query("SELECT * FROM game_series WHERE game_series_id='$game_series_id'")
 									or die ("Couldn't query Game Series Database6");
 
 								$query_series2 = mysql_fetch_array ($sql_series2);

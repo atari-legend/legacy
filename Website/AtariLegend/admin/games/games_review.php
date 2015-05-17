@@ -23,8 +23,8 @@ $start1=gettimeofday();
 list($start2, $start3) = explode(":", exec('date +%N:%S'));
 
 	//get the number of reviews in the archive
-	$query_number = mysql_query("SELECT count(*) FROM review_main WHERE review_edit = '0'") or die("Couldn't get the number of reviews");
-	$v_reviews = mysql_result($query_number,0,0) or die("Couldn't get the number of reviews");
+	$query_number = $mysqli->query("SELECT * FROM review_main WHERE review_edit = '0'") or die("Couldn't get the number of reviews");
+	$v_reviews = $query_number->num_rows;
 
 
 		$RESULTGAME = "SELECT 
@@ -42,28 +42,28 @@ list($start2, $start3) = explode(":", exec('date +%N:%S'));
 					WHERE review_game.game_id IS NOT NULL ORDER BY review_main.review_date DESC";
 
 		
-		$games = mysql_query($RESULTGAME);
+		$games = $mysqli->query($RESULTGAME);
 		
 
-			$rows = mysql_num_rows($games);
+			$rows = $games->num_rows;
 			if ( $rows > 0 )
 			{	if (empty($i)) {$i = 0;}
-				while ( $row=mysql_fetch_assoc($games) ) 
+				while ( $row = $games->fetch_array(MYSQLI_BOTH) ) 
 				{  
 					$i++;
 				
 					//check how many reviews there are for the game
-					$number_revs = mysql_query("SELECT count(*) as count FROM review_game WHERE game_id='$row[game_id]'")
+					$number_revs = $mysqli->query("SELECT * FROM review_game WHERE game_id='$row[game_id]'")
 				    			  or die ("couldn't get number of reviews");
 				
-					$array = mysql_fetch_array($number_revs);
+					$array_number = $number_revs->num_rows;
 				
 					$smarty->append('review',
 	   			 	 array('game_id' => $row['game_id'],
 						   'game_name' => $row['game_name'],
 						   'game_publisher' => $row['pub_dev_name'],
 						   'game_year' => $row['game_year'],
-						   'number_reviews' => $array['count']));	
+						   'number_reviews' => $array_number));	
 				}
 			}
 

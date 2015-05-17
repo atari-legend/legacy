@@ -31,7 +31,7 @@ if(isset($game_series_cross_id))
 
 	foreach($game_series_cross_id as $game_series_cross_id_sql) 
 	{
-		mysql_query("DELETE FROM game_series_cross WHERE game_series_cross_id='$game_series_cross_id_sql'"); 
+		$mysqli->query("DELETE FROM game_series_cross WHERE game_series_cross_id='$game_series_cross_id_sql'"); 
 	}
 
 	mysql_close(); 
@@ -52,7 +52,7 @@ if($action=="addnew_series")
 
 if(isset($new_series)) 
 {
-	$sql = mysql_query("INSERT INTO game_series (game_series_name) VALUES ('$new_series')");  
+	$sql = $mysqli->query("INSERT INTO game_series (game_series_name) VALUES ('$new_series')");  
 	mysql_close(); 
 }
 
@@ -71,7 +71,7 @@ if($action=="edit_series")
 
 if(isset($game_series_name)) 
 {
-	$sql = mysql_query("UPDATE game_series SET game_series_name='$game_series_name' 
+	$sql = $mysqli->query("UPDATE game_series SET game_series_name='$game_series_name' 
 					    WHERE game_series_id='$game_series_id'");  
 	mysql_close(); 
 }
@@ -91,8 +91,8 @@ if($action=="delete_gameseries")
 if(isset($game_series_id)) 
 {
 
-	mysql_query("DELETE FROM game_series WHERE game_series_id='$game_series_id'"); 
-	mysql_query("DELETE FROM game_series_cross WHERE game_series_id='$game_series_id'"); 
+	$mysqli->query("DELETE FROM game_series WHERE game_series_id='$game_series_id'"); 
+	$mysqli->query("DELETE FROM game_series_cross WHERE game_series_id='$game_series_id'"); 
 	mysql_close(); 
 }
 
@@ -113,7 +113,7 @@ if(isset($game_id))
 
 	foreach($game_id as $game) 
 	{
-		mysql_query("INSERT INTO game_series_cross (game_id,game_series_id) VALUES ('$game','$game_series_id')"); 
+		$mysqli->query("INSERT INTO game_series_cross (game_id,game_series_id) VALUES ('$game','$game_series_id')"); 
 	}
 
 	mysql_close(); 
