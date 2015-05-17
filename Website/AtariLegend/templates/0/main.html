@@ -47,7 +47,7 @@
 			<header>
 				<div id="top_background">
 					<!-- This is the side menu only visible for smartphones (max resolution 480pc)-->				
-					<div class="container">
+					<div class="container" style="position: fixed;">
 					  <div id="sidebar">
 						  <ul>
 						<li><a href="#" title="Games" class="top_button"><button type="button" class="topbutton" id="games_side">GAMES</button></a></li>
@@ -75,11 +75,10 @@
 						  </div>
 					  </div>
 					  <div class="main-content">
-						  <a href="#" data-toggle=".container" id="sidebar-toggle">
+						  <button type="button" href="#" data-toggle=".container" id="sidebar-toggle" style="border:none; cursor: pointer;">
 							  <span class="bar"></span>
 							  <span class="bar"></span>
 							  <span class="bar"></span>
-						  </a>
 					  </div>
 					</div>		
 					<!-- end of side menu-->
