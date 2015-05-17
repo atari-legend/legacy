@@ -86,10 +86,10 @@ if (isset($action) and $action == 'search')
 		}
 		else
 		{
-			$rows = $games->num_rows();
+			$rows = $games->num_rows;
 			if ( $rows > 0 )
 			{	if (empty($i)) {$i = 0;}
-				while ( $row=mysql_fetch_assoc($games) ) 
+				while ($row = $games->fetch_array(MYSQLI_BOTH)) 
 				{  
 					$i++;
 				

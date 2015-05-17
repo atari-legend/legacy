@@ -196,7 +196,7 @@ if ( isset($action) and $action == 'add_author' )
 		//First we need to do a hell of a lot checks before we can delete an actual game.
 		$sdbquery = $mysqli->query("SELECT * FROM demo_download WHERE demo_id='$demo_id'")
 				 	or die ("Error getting download info");
-		if ( mysql_num_rows($sdbquery) > 0 )
+		if ( $sdbquery->num_rows > 0 )
 		{
 			$smarty->assign("message",'Deletion failed - This demo has downloads - Delete it in the appropriate section');
 		}
@@ -204,7 +204,7 @@ if ( isset($action) and $action == 'add_author' )
 		{
 			$sdbquery = $mysqli->query("SELECT * FROM demo_user_comments WHERE demo_id='$demo_id'")
 		 				or die ("Error getting user comments");
-			if ( mysql_num_rows($sdbquery) > 0 )
+			if ( $sdbquery->num_rows > 0 )
 			{
 				$smarty->assign("message",'Deletion failed - This demo has user comments - Delete it in the appropriate section');
 			}
@@ -212,7 +212,7 @@ if ( isset($action) and $action == 'add_author' )
 			{
 				$sdbquery = $mysqli->query("SELECT * FROM demo_submitinfo WHERE demo_id='$demo_id'")
 							or die ("Error getting submit info");
-				if ( mysql_num_rows($sdbquery) > 0 )
+				if ( $sdbquery->num_rows > 0 )
 				{
 					$smarty->assign("message",'Deletion failed - This demo has info submitted from visitors - Delete it in the appropriate section');
 				}
@@ -220,7 +220,7 @@ if ( isset($action) and $action == 'add_author' )
 				{
 					$sdbquery = $mysqli->query("SELECT * FROM screenshot_demo WHERE demo_id='$demo_id'")
 				 				or die ("Error getting screenshot info");
-					if ( mysql_num_rows($sdbquery) > 0 )
+					if ( $sdbquery->num_rows > 0 )
 					{
 						$smarty->assign("message",'Deletion failed - This demo has screenshots - Delete it in the appropriate section');
 					}
@@ -228,7 +228,7 @@ if ( isset($action) and $action == 'add_author' )
 					{
 						$sdbquery = $mysqli->query("SELECT * FROM demo_music WHERE demo_id='$demo_id'")
 				 					or die ("Error getting music info");
-						if ( mysql_num_rows($sdbquery) > 0 )
+						if ( $sdbquery->num_rows > 0 )
 						{
 							$smarty->assign("message",'Deletion failed - This demo has music files attached - Delete it in the appropriate section');
 						}
