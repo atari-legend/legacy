@@ -136,8 +136,8 @@ footer, header, hgroup, menu, nav, section {
 
 	.container {
 		display : block;
+		z-index: 3;
 		position: relative;
-        height: 100%;
         width: 100%;
         left: 0;
         -webkit-transition:  left 0.4s ease-in-out;
@@ -600,7 +600,7 @@ Standard tile settings
 		font-size : 17pt;
 		margin-top : 46%;
 		color : white; 	
-		z-index:100;
+		z-index:1;
 		position:absolute;
 	    border-bottom: 2px solid #01b5b5;
 }
