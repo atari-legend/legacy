@@ -23,7 +23,7 @@ date_default_timezone_set('UTC');
 $start = microtime(true);
 
 		//Get publisher values to fill the searchfield
-		$sql_publisher = mysql_query("SELECT pub_dev.pub_dev_id,
+		$sql_publisher = $mysqli->query("SELECT pub_dev.pub_dev_id,
 											 pub_dev.pub_dev_name
 											 FROM game_publisher
 											 LEFT JOIN pub_dev ON (game_publisher.pub_dev_id = pub_dev.pub_dev_id)
@@ -31,7 +31,7 @@ $start = microtime(true);
 											 ORDER BY pub_dev.pub_dev_name ASC") 
 										or die("Problems retriving values from publishers.");
 		
-		while ($company_publisher = mysql_fetch_assoc($sql_publisher))
+		while ($company_publisher = $sql_publisher->fetch_array(MYSQLI_BOTH))
 		{
 		
 			$smarty->append('company_publisher',
@@ -41,7 +41,7 @@ $start = microtime(true);
 		}
 		
 		//Get Developer values to fill the searchfield
-		$sql_developer = mysql_query("SELECT pub_dev.pub_dev_id,
+		$sql_developer = $mysqli->query("SELECT pub_dev.pub_dev_id,
 											 pub_dev.pub_dev_name
 											 FROM game_developer
 											 LEFT JOIN pub_dev ON (game_developer.dev_pub_id = pub_dev.pub_dev_id)
@@ -49,7 +49,7 @@ $start = microtime(true);
 											 ORDER BY pub_dev.pub_dev_name ASC") 
 										or die("Problems retriving values from developers.");
 		
-		while ($company_developer = mysql_fetch_assoc($sql_developer))
+		while ($company_developer = $sql_developer->fetch_array(MYSQLI_BOTH))
 		{
 		
 			$smarty->append('company_developer',
@@ -59,8 +59,8 @@ $start = microtime(true);
 		}
 		
 		//get the number of games in the archive
-		$query_number = mysql_query("SELECT count(*) FROM game") or die("Couldn't get the number of games");
-		$v_rows = mysql_result($query_number,0,0) or die("Couldn't get the number of games");
+		$query_number = $mysqli->query("SELECT * FROM game") or die("Couldn't get the number of games");
+		$v_rows = get_rows($query_number) or die("Couldn't get the number of games");
 
 		$smarty->assign('games_nr', $v_rows); 
 
