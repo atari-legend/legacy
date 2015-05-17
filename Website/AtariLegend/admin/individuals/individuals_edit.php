@@ -24,10 +24,10 @@ if ($ind_id == '-')
 		$smarty->assign("message",$message);
 		
 		//Get the individuals
-		$sql_individuals = mysql_query("SELECT * FROM individuals ORDER BY ind_name ASC")
+		$sql_individuals = $mysqli->query("SELECT * FROM individuals ORDER BY ind_name ASC")
 				 		   or die ("Couldn't query individual database");
 		
-		while  ($individuals=mysql_fetch_array($sql_individuals)) 
+		while  ($individuals=$sql_individuals->fetch_array(MYSQLI_BOTH)) 
 		{  
 			$smarty->append('individuals',
 	   		 	 array('ind_id' => $individuals['ind_id'],
@@ -44,11 +44,11 @@ else
 {
 
 //Get the individual data
-$sql_individuals = mysql_query("SELECT * FROM individuals 
+$sql_individuals = $mysqli->query("SELECT * FROM individuals 
 					LEFT JOIN individual_text ON (individuals.ind_id = individual_text.ind_id )
 					WHERE individuals.ind_id=$ind_id");
 
-while ( $individuals=mysql_fetch_array($sql_individuals) ) 
+while ( $individuals=$sql_individuals->fetch_array(MYSQLI_BOTH) ) 
 {  
 	//The interviewed person's picture
 	if ( $individuals['ind_imgext'] == 'png' or  
@@ -75,9 +75,9 @@ while ( $individuals=mysql_fetch_array($sql_individuals) )
 }
 
 // Get nickname information
-$sql_individuals = mysql_query("SELECT * FROM individual_nicks WHERE ind_id=$ind_id");
+$sql_individuals = $mysqli->query("SELECT * FROM individual_nicks WHERE ind_id=$ind_id");
 
-while ( $ind_nicks=mysql_fetch_array($sql_individuals) ) 
+while ( $ind_nicks=$sql_individuals->fetch_array(MYSQLI_BOTH) ) 
 {  
 
 	$smarty->append('nicks',

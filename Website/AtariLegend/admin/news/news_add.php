@@ -20,9 +20,9 @@ In this section we can add a news update to the DB
 
 include("../includes/common.php");
 				
-$sql_newsimage = mysql_query("SELECT news_image_id,news_image_name FROM news_image ORDER BY news_image_name");
+$sql_newsimage = $mysqli->query("SELECT news_image_id,news_image_name FROM news_image ORDER BY news_image_name");
 				
-while ($newsimages = mysql_fetch_array($sql_newsimage))
+while ($newsimages = $sql_newsimage->fetch_array(MYSQLI_BOTH))
 {
 	$smarty->append('news_images',
 	    	 array('image_id' => $newsimages['news_image_id'],
@@ -45,7 +45,7 @@ if (isset($action) and $action=="add_news")
 	else
 	{	
 		// Insert the description and the image into the news_image table.
-		$sdbquery = mysql_query("INSERT INTO news_submission 
+		$sdbquery = $mysqli->query("INSERT INTO news_submission 
 							(news_headline,news_text,news_image_id,user_id,news_date)
 							 VALUES ('$headline','$descr','$icon','$user_id','$news_date')")
 							 or die ("Error inserting news update");

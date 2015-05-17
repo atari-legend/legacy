@@ -20,9 +20,9 @@ Add Magazine screens!
 
 include("../includes/common.php");
 
-$sql_magazine = mysql_query("SELECT * FROM magazine ORDER BY magazine_name ASC") or die ("Error retriving magazines");
+$sql_magazine = $mysqli->query("SELECT * FROM magazine ORDER BY magazine_name ASC") or die ("Error retriving magazines");
 			
-while ( list ($magazine_id,$magazine_name) = mysql_fetch_row($sql_magazine)) 
+while ( list ($magazine_id,$magazine_name) = $sql_magazine->fetch_row()) 
 	{
 	
 		$smarty->append('magazine',

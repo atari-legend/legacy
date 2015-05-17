@@ -26,8 +26,8 @@ include("../includes/common.php");
 							LEFT JOIN demo ON ( demo_user_comments.demo_id = demo.demo_id ) 
 							WHERE demo_user_comments_id = '$demo_user_comments_id'";
 
-$sql_comment = mysql_query($sql_build) or die("couldn't build query");
-$query_comment = mysql_fetch_array($sql_comment) or die("couldn't build query");
+$sql_comment = $mysqli->query($sql_build) or die("couldn't build query");
+$query_comment = $sql_comment->fetch_array(MYSQLI_BOTH) or die("couldn't build query");
 
 $date = convert_timestamp($query_comment['timestamp']);
 	

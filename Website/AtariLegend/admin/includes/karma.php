@@ -76,23 +76,26 @@ function UserKarma($user_id,$karma_action)
 	 $karma_value = $karma_value+10;	
 	}
 	
-	$update_karma = mysql_query("UPDATE users SET karma='$karma_value' WHERE user_id = '$user_id'");
+	$update_karma = $mysqli->query("UPDATE users SET karma='$karma_value' WHERE user_id = '$user_id'");
 	
 return;
 }
 
 function KarmaGood()
 {
-	$sql = mysql_query("SELECT karma,userid,user_id FROM users ORDER BY karma DESC LIMIT 15");
- 	while($row=mysql_fetch_array($sql))$result[]=$row;
+	global $mysqli;
+	$sql = $mysqli->query("SELECT karma,userid,user_id FROM users ORDER BY karma DESC LIMIT 15");
+	while ($row = $sql->fetch_array(MYSQLI_BOTH))$result[]=$row;
+
 return $result;	
 }
 
 function KarmaBad()
 {
+	global $mysqli;
 	$sql = mysql_query("SELECT karma,userid,user_id FROM users WHERE karma IS NOT NULL ORDER BY karma ASC LIMIT 15");
- 	while($row=mysql_fetch_array($sql))$result[]=$row;
+	while ($row = $sql->fetch_array(MYSQLI_BOTH))$result[]=$row;
+
 return $result;	
 }
-
 ?>

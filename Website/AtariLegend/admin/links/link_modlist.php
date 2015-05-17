@@ -21,13 +21,13 @@ In this section we modify links
 include("../includes/common.php");
 if(empty($catpick)) {$catpick=1;}
 		$SQL = "SELECT website_category_id, website_category_name FROM website_category ORDER BY website_category_name";
-		$linkcategorysql = mysql_query($SQL) or die("Couldn't query categories");
+		$linkcategorysql = $mysqli->query($SQL) or die("Couldn't query categories");
 		
-			list($website_category_id,$website_category_name) = mysql_fetch_row($linkcategorysql);
+			list($website_category_id,$website_category_name) = $linkcategorysql->fetch_array(MYSQLI_BOTH);
 		
 		
-			mysql_data_seek($linkcategorysql,0);
-			while (list($category_id,$category_name) = mysql_fetch_row($linkcategorysql)) {
+			mysqli_data_seek($linkcategorysql,0) or die("what happend?");
+			while (list($category_id,$category_name) = $linkcategorysql->fetch_array(MYSQLI_BOTH)) {
 			
 			if ($category_id==$website_category_id) {$selected="SELECTED";}
 				

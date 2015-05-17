@@ -18,10 +18,10 @@
 include("../includes/common.php");
 
 //Get list of all individuals
-$sql_individuals = mysql_query("SELECT * FROM individuals ORDER BY ind_name ASC")
+$sql_individuals = $mysqli->query("SELECT * FROM individuals ORDER BY ind_name ASC")
 		  		   or die ("Couldn't query indiciduals database");
 		
-while ($individuals = mysql_fetch_array($sql_individuals))
+while ($individuals = $sql_individuals->fetch_array(MYSQLI_BOTH))
 {
 	$smarty->append('individuals',
 	    	 array('ind_id' => $individuals['ind_id'],
@@ -29,12 +29,12 @@ while ($individuals = mysql_fetch_array($sql_individuals))
 }
 
 //Get list of individuals who have been interviewed
-$sql_individuals2 = mysql_query("SELECT * FROM interview_main
+$sql_individuals2 = $mysqli->query("SELECT * FROM interview_main
 								LEFT JOIN individuals ON (interview_main.ind_id = individuals.ind_id)
 								ORDER BY individuals.ind_name ASC")
 		  		   or die ("Couldn't query indiciduals database");
 		
-while ($individuals2 = mysql_fetch_array($sql_individuals2))
+while ($individuals2 = $sql_individuals2->fetch_array(MYSQLI_BOTH))
 {
 	$smarty->append('individuals_interviewed',
 	    	 array('ind_id' => $individuals2['ind_id'],
@@ -47,7 +47,7 @@ if ( isset($action) and $action == 'search' )
 if ( $individual_search == " " or $individual_search == '-' )
 {
 	//show all
-	$sql_interview = mysql_query("SELECT * FROM interview_main 
+	$sql_interview = $mysqli->query("SELECT * FROM interview_main 
 								  LEFT JOIN interview_text on (interview_main.interview_id = interview_text.interview_id)
 								  LEFT JOIN users on ( interview_main.member_id = users.user_id )
 								  LEFT JOIN individuals on ( interview_main.ind_id = individuals.ind_id )
@@ -57,7 +57,7 @@ if ( $individual_search == " " or $individual_search == '-' )
 	}
 	else
 	{
-	$sql_interview = mysql_query("SELECT * FROM interview_main 
+	$sql_interview = $mysqli->query("SELECT * FROM interview_main 
 								  LEFT JOIN interview_text on (interview_main.interview_id = interview_text.interview_id)
 								  LEFT JOIN users on ( interview_main.member_id = users.user_id )
 								  LEFT JOIN individuals on ( interview_main.ind_id = individuals.ind_id )
@@ -74,7 +74,7 @@ if ( $individual_search == " " or $individual_search == '-' )
 	$message .= ' hits';
 	$smarty->assign("message",$message);
 	
-	while ($interview = mysql_fetch_array($sql_interview))
+	while ($interview = $sql_interview->fetch_array(MYSQLI_BOTH))
 	{
 	
 	//The interviewed person's picture

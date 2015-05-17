@@ -40,17 +40,17 @@ $sql_build = "SELECT *
 							 " . $where_clause . "
 							ORDER BY comments.timestamp DESC LIMIT  " . $v_counter . ", 15";
 
-$sql_comment = mysql_query($sql_build);
+$sql_comment = $mysqli->query($sql_build);
 
 // get the total nr of comments in the DB
-$query_total_number = mysql_query("SELECT count(*) FROM demo_user_comments") or die ("Couldn't get the total number of comments");
+$query_total_number = $mysqli->query("SELECT count(*) FROM demo_user_comments") or die ("Couldn't get the total number of comments");
 $v_rows_total = mysql_result($query_total_number,0,0) or die("Couldn't get the total number of comments");
 $smarty->assign('total_nr_comments', $v_rows_total);
 
 
 
 // count number of comments
-$query_number = mysql_query("SELECT count(*) FROM demo_user_comments
+$query_number = $mysqli->query("SELECT count(*) FROM demo_user_comments
 							 LEFT JOIN comments ON ( demo_user_comments.comments_id = comments.comments_id )
 							 LEFT JOIN users ON ( comments.user_id = users.user_id ) " . $where_clause) or die("Couldn't get the number of comments");
 
@@ -60,11 +60,11 @@ $smarty->assign('nr_comments', $v_rows);
 
 
 // lets put the comments in a smarty array
-while ($query_comment = mysql_fetch_array($sql_comment)) 
+while ($query_comment = $sql_comment->fetch_array(MYSQLI_BOTH)) 
 {
 	
 //Select a random screenshot record
-	$query_demo = mysql_query("SELECT 
+	$query_demo = $mysqli->query("SELECT 
 							   screenshot_demo.demo_id,
 							   screenshot_demo.screenshot_id,
 							   screenshot_main.imgext
@@ -73,16 +73,16 @@ while ($query_comment = mysql_fetch_array($sql_comment))
 							   WHERE screenshot_demo.demo_id = $query_comment[demo_id]						   	   
 						   	   ORDER BY RAND() LIMIT 1"); 
 							   
-	$sql_demo = mysql_fetch_array($query_demo);  
+	$sql_demo = $query_demo->fetch_array(MYSQLI_BOTH);  
 
 // Retrive userstats from database
-	$query_user = mysql_query("SELECT count(*)
+	$query_user = $mysqli->query("SELECT count(*)
 							   FROM demo_user_comments
 							   LEFT JOIN comments ON ( demo_user_comments.comments_id = comments.comments_id )
 							   WHERE user_id = $query_comment[user_id]") or die ("Could not count user comments");
 	$usercomment_number = mysql_result($query_user,0,0) or die("Couldn't get the number of comments");
 	
-	$query_submitinfo = mysql_query("SELECT count(*) FROM demo_submitinfo WHERE user_id = $query_comment[user_id]") 
+	$query_submitinfo = $mysqli->query("SELECT count(*) FROM demo_submitinfo WHERE user_id = $query_comment[user_id]") 
 						or die ("Could not count user submissions");
 	$usersubmit_number = mysql_result($query_submitinfo,0,0);
 	

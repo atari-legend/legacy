@@ -22,7 +22,7 @@ include("../includes/common.php");
 //Let's get the general game info first. 
 //***********************************************************************************
 
-	$sql_game = mysql_query("SELECT game_name, 
+	$sql_game = $mysqli->query("SELECT game_name, 
 						   game.game_id, 
 						   game_free.free,
 						   game_development.development,
@@ -57,7 +57,7 @@ include("../includes/common.php");
 				    or die ("Error getting game info");
 
 					
-		while ($game_info=mysql_fetch_array($sql_game)) 
+		while ($game_info= $sql_game->fetch_array(MYSQLI_BOTH)) 
 		{  
 			$smarty->assign('game_info',
 	    		 array('game_name' => $game_info['game_name'],
@@ -82,12 +82,12 @@ include("../includes/common.php");
 //get the release dates
 //***********************************************************************************
 
-	$sql_year = mysql_query("SELECT * FROM game_year 
+	$sql_year = $mysqli->query("SELECT * FROM game_year 
 							 LEFT JOIN game_extra_info ON ( game_year.game_extra_info_id = game_extra_info.game_extra_info_id )
 							 WHERE game_id='$game_id'")
 				or die ("Error loading year");
 						  
-	while ($year=mysql_fetch_array($sql_year)) 
+	while ($year= $sql_year->fetch_array(MYSQLI_BOTH)) 
 	{  
 		$smarty->append('game_year',
 	   		 array('game_year_id' => $year['game_year_id'],
@@ -99,15 +99,15 @@ include("../includes/common.php");
 //get the game categories & the categories already selected for this game
 //***********************************************************************************
 
-		$sql_categories = mysql_query("SELECT * FROM game_cat ORDER BY game_cat_name")
+		$sql_categories = $mysqli->query("SELECT * FROM game_cat ORDER BY game_cat_name")
 						  or die ("Error loading categories");
 		
-		while ($categories=mysql_fetch_array ($sql_categories)) 
+		while ($categories= $sql_categories->fetch_array(MYSQLI_BOTH) ) 
 		{
-			$sql_game_cat = mysql_query("SELECT * FROM game_cat_cross WHERE game_id='$game_id' AND game_cat_id=$categories[game_cat_id]")
+			$sql_game_cat = $mysqli->query("SELECT * FROM game_cat_cross WHERE game_id='$game_id' AND game_cat_id=$categories[game_cat_id]")
 							or die ("Error loading categorie cross table");
 			
-			$selected=mysql_num_rows($sql_game_cat);		
+			$selected=get_rows($sql_game_cat);		
 			if ( $selected == 1 )
 			{
 				$selected = 'selected';
@@ -129,10 +129,10 @@ include("../includes/common.php");
 //**********************************************************************************
 
 	//Get the individuals
-	$sql_individuals = mysql_query("SELECT * FROM individuals ORDER BY ind_name ASC")
+	$sql_individuals = $mysqli->query("SELECT * FROM individuals ORDER BY ind_name ASC")
 					   or die ("Couldn't query individual database");
 		
-	while  ($individuals=mysql_fetch_array($sql_individuals)) 
+	while  ($individuals= $sql_individuals->fetch_array(MYSQLI_BOTH)) 
 	{  
 		$smarty->append('individuals',
 	    		 array('ind_id' => $individuals['ind_id'],
@@ -140,10 +140,10 @@ include("../includes/common.php");
 	}
 
 	// Get the author types
-	$sql_author = mysql_query("SELECT * FROM author_type ORDER BY author_type_info ASC")
+	$sql_author = $mysqli->query("SELECT * FROM author_type ORDER BY author_type_info ASC")
 		      or die ("Couldn't query author_types");
 		
-	while  ($author=mysql_fetch_array($sql_author)) 
+	while  ($author= $sql_author->fetch_array(MYSQLI_BOTH)) 
 	{  
 		$smarty->append('author_types',
  			 array('author_type' => $author['author_type_info'],
@@ -152,13 +152,13 @@ include("../includes/common.php");
 	
 	
 	//Starting off with displaying the authors that are linked to the game and having a delete option for them */
-	$sql_gameauthors = mysql_query("SELECT * FROM game_author
+	$sql_gameauthors = $mysqli->query("SELECT * FROM game_author
 									LEFT JOIN individuals ON (game_author.ind_id = individuals.ind_id)
 									LEFT JOIN author_type ON (game_author.author_type_id = author_type.author_type_id) 
 									WHERE game_author.game_id='$game_id' ORDER BY author_type.author_type_id, individuals.ind_name")
 						or die ("Error loading authors");
 										
-	 while  ($game_author=mysql_fetch_array ($sql_gameauthors)) 
+	 while  ($game_author= $sql_gameauthors->fetch_array(MYSQLI_BOTH)) 
 	 {
 	 	$smarty->append('game_author',
  			 array('game_author_id' => $game_author['game_author_id'],
@@ -172,10 +172,10 @@ include("../includes/common.php");
 //**********************************************************************************
 	
 	//let's get all the companies in the DB
-	$sql_company = mysql_query("SELECT * FROM pub_dev ORDER BY pub_dev_name ASC")
+	$sql_company = $mysqli->query("SELECT * FROM pub_dev ORDER BY pub_dev_name ASC")
 			     or die ("Couldn't query Publisher and Developer database");
 		
-	while  ($company=mysql_fetch_array($sql_company)) 
+	while  ($company= $sql_company->fetch_array(MYSQLI_BOTH)) 
 	{  
 		$smarty->append('company',
 	   		 	 array('comp_id' => $company['pub_dev_id'],
@@ -184,14 +184,14 @@ include("../includes/common.php");
 	
 	
 	//let's get the publishers for this game
-	$sql_publisher = mysql_query("SELECT * FROM pub_dev 
+	$sql_publisher = $mysqli->query("SELECT * FROM pub_dev 
 								 LEFT JOIN game_publisher ON ( pub_dev.pub_dev_id = game_publisher.pub_dev_id ) 
 								 LEFT JOIN game_extra_info ON ( game_publisher.game_extra_info_id = game_extra_info.game_extra_info_id )
 								 LEFT JOIN continent ON ( game_publisher.continent_id = continent.continent_id )
 								 WHERE game_publisher.game_id = '$game_id' ORDER BY pub_dev_name ASC")
 			        or die ("Couldn't query publishers");
 	
-	while  ($publishers=mysql_fetch_array($sql_publisher)) 
+	while  ($publishers= $sql_publisher->fetch_array(MYSQLI_BOTH)) 
 	{  
 		$smarty->append('publisher',
 	   		 	 array('pub_id' => $publishers['pub_dev_id'],
@@ -203,14 +203,14 @@ include("../includes/common.php");
 	
 	
 	//let's get the developers for this game
-	$sql_developer = mysql_query("SELECT * FROM pub_dev 
+	$sql_developer = $mysqli->query("SELECT * FROM pub_dev 
 								  LEFT JOIN game_developer ON ( pub_dev.pub_dev_id = game_developer.dev_pub_id ) 
 								  LEFT JOIN game_extra_info ON ( game_developer.game_extra_info_id = game_extra_info.game_extra_info_id )
 								  LEFT JOIN continent ON ( game_developer.continent_id = continent.continent_id )
 								  WHERE game_developer.game_id = '$game_id' ORDER BY pub_dev_name ASC")
 			        or die ("Couldn't query developers");
 	
-	while  ($developers=mysql_fetch_array($sql_developer)) 
+	while  ($developers= $sql_developer->fetch_array(MYSQLI_BOTH)) 
 	{  
 		$smarty->append('developer',
 	   		 	 array('pub_id' => $developers['pub_dev_id'],
@@ -225,10 +225,10 @@ include("../includes/common.php");
 //Get all the continents
 //**********************************************************************************
 
-	$sql_continent = mysql_query("SELECT * FROM continent ORDER BY continent_name ASC")
+	$sql_continent = $mysqli->query("SELECT * FROM continent ORDER BY continent_name ASC")
 			     or die ("Couldn't query continent database");
 		
-	while  ($continent=mysql_fetch_array($sql_continent)) 
+	while  ($continent= $sql_continent->fetch_array(MYSQLI_BOTH)) 
 	{  
 		$smarty->append('continent',
 	   		 	 array('continent_id' => $continent['continent_id'],
@@ -240,10 +240,10 @@ include("../includes/common.php");
 //Get the extra game info
 //**********************************************************************************
 
-	$sql_game_extra_info = mysql_query("SELECT * FROM game_extra_info ORDER BY game_extra_info ASC")
+	$sql_game_extra_info = $mysqli->query("SELECT * FROM game_extra_info ORDER BY game_extra_info ASC")
 			     or die ("Couldn't query game_extra_info database");
 		
-	while  ($game_extra_info=mysql_fetch_array($sql_game_extra_info)) 
+	while  ($game_extra_info= $sql_game_extra_info->fetch_array(MYSQLI_BOTH)) 
 	{  
 		$smarty->append('game_extra_info',
 	   		 	 array('game_extra_info_id' => $game_extra_info['game_extra_info_id'],
@@ -255,10 +255,10 @@ include("../includes/common.php");
 //The game categories
 //***********************************************************************************
 
-	$sql_categories = mysql_query("SELECT * FROM game_cat ORDER BY game_cat_name")
+	$sql_categories = $mysqli->query("SELECT * FROM game_cat ORDER BY game_cat_name")
 				 	  or die ("Error loading categories");
 			
-	while  ($categories=mysql_fetch_array($sql_categories)) 
+	while  ($categories= $sql_categories->fetch_array(MYSQLI_BOTH)) 
 	{ 
 		$smarty->append('categories',
 	   		 		 array('game_cat_id' => $categories['game_cat_id'],
@@ -266,12 +266,12 @@ include("../includes/common.php");
 	}
 	
 						
-	$sql_catcross = mysql_query("SELECT * FROM game_cat_cross WHERE game_id='$game_id'")
+	$sql_catcross = $mysqli->query("SELECT * FROM game_cat_cross WHERE game_id='$game_id'")
 					or die ("Error loading categorie cross table");
 	
 	$nr_catcross = 0;
 	
-	while  ($catcross=mysql_fetch_array($sql_catcross)) 
+	while  ($catcross= $sql_catcross->fetch_array(MYSQLI_BOTH)) 
 	{ 
 		$smarty->append('catcross',
 	   		 		 array('game_id' => $catcross['game_id'],
@@ -287,12 +287,12 @@ include("../includes/common.php");
 //AKA's
 //***********************************************************************************
 
-	$sql_aka = mysql_query("SELECT * FROM game_aka WHERE game_id='$game_id'")
+	$sql_aka = $mysqli->query("SELECT * FROM game_aka WHERE game_id='$game_id'")
  			   or die ("Couldn't query aka games");
 	
 	$nr_aka=0;
 	
-	while ($aka = mysql_fetch_array ($sql_aka)) 
+	while ($aka = $sql_aka->fetch_array(MYSQLI_BOTH)) 
 	{
 		$smarty->append('aka',
 	   		 	 array('game_aka_name' => $aka['aka_name'],
@@ -309,50 +309,50 @@ include("../includes/common.php");
 
 
 //Get the number of screenshots!
-$numberscreen = mysql_query("SELECT count(*) as count FROM screenshot_game WHERE game_id = '$game_id'")
+$numberscreen = $mysqli->query("SELECT count(*) as count FROM screenshot_game WHERE game_id = '$game_id'")
 		  		or die ("couldn't get number of screenshots");
-$array = mysql_fetch_array($numberscreen);
+$array = $numberscreen->fetch_array(MYSQLI_BOTH);
 
 $smarty->assign("nr_screenshots",$array['count']); 
 
 //check the number of boxscans
-$numberbox = mysql_query("SELECT count(*) as count FROM game_boxscan WHERE game_id = '$game_id'")
+$numberbox = $mysqli->query("SELECT count(*) as count FROM game_boxscan WHERE game_id = '$game_id'")
 			 or die ("couldn't get number of boxscans");
-$array = mysql_fetch_array($numberbox);
+$array = $numberbox->fetch_array(MYSQLI_BOTH);
 
 $smarty->assign("nr_boxscans",$array['count']); 
 
 //Check how many reviews a game has 	
-$numberreviews = mysql_query("SELECT count(*) as count FROM review_game WHERE game_id = '$game_id'")
+$numberreviews = $mysqli->query("SELECT count(*) as count FROM review_game WHERE game_id = '$game_id'")
 			     or die ("couldn't get number of reviews");
-$array = mysql_fetch_array($numberreviews);
+$array = $numberreviews->fetch_array(MYSQLI_BOTH);
 
 $smarty->assign("nr_reviews",$array['count']); 
 
 //check how many pics there are in the game gallery
-$numbergallery = mysql_query("SELECT count(*) as count FROM game_gallery WHERE game_id = '$game_id'")
+$numbergallery = $mysqli->query("SELECT count(*) as count FROM game_gallery WHERE game_id = '$game_id'")
 			     or die ("couldn't get number of gallery pics");
-$array = mysql_fetch_array($numbergallery);
+$array = $numbergallery->fetch_array(MYSQLI_BOTH);
 
 $smarty->assign("nr_pics",$array['count']); 
 
 //check how many music files this game has
-$numbermusic = mysql_query("SELECT count(*) as count FROM game_music WHERE game_id = '$game_id'")
+$numbermusic = $mysqli->query("SELECT count(*) as count FROM game_music WHERE game_id = '$game_id'")
 			     or die ("couldn't get number of music files");
-$array = mysql_fetch_array($numbermusic);
+$array = $numbermusic->fetch_array(MYSQLI_BOTH);
 
 $smarty->assign("nr_music",$array['count']); 
 
 //check how many magazine reviews this game has
-$numbermag = mysql_query("SELECT count(*) as count FROM magazine_game WHERE game_id = '$game_id'")
+$numbermag = $mysqli->query("SELECT count(*) as count FROM magazine_game WHERE game_id = '$game_id'")
 			     or die ("couldn't get number of mag reviews");
-$array = mysql_fetch_array($numbermag);
+$array = $numbermag->fetch_array(MYSQLI_BOTH);
 
 $smarty->assign("nr_magazines",$array['count']); 
 	
 		//Get the companies to fill the search fields
 		//Get publisher values to fill the searchfield
-		$sql_publisher = mysql_query("SELECT pub_dev.pub_dev_id,
+		$sql_publisher = $mysqli->query("SELECT pub_dev.pub_dev_id,
 							pub_dev.pub_dev_name
 							FROM game_publisher
 							LEFT JOIN pub_dev ON (game_publisher.pub_dev_id = pub_dev.pub_dev_id)
@@ -360,7 +360,7 @@ $smarty->assign("nr_magazines",$array['count']);
 							ORDER BY pub_dev.pub_dev_name ASC") 
 								or die("Problems retriving values from publishers.")or die("error publisher");
 		
-		while ($company_publisher = mysql_fetch_assoc($sql_publisher))
+		while ($company_publisher = $sql_publisher->fetch_array(MYSQLI_BOTH))
 		{
 		
 			$smarty->append('company_publisher',
@@ -370,7 +370,7 @@ $smarty->assign("nr_magazines",$array['count']);
 		}
 		
 		//Get Developer values to fill the searchfield
-		$sql_developer = mysql_query("SELECT pub_dev.pub_dev_id,
+		$sql_developer = $mysqli->query("SELECT pub_dev.pub_dev_id,
 							pub_dev.pub_dev_name
 							FROM game_developer
 							LEFT JOIN pub_dev ON (game_developer.dev_pub_id = pub_dev.pub_dev_id)
@@ -378,7 +378,7 @@ $smarty->assign("nr_magazines",$array['count']);
 							ORDER BY pub_dev.pub_dev_name ASC") 
 								or die("Problems retriving values from developers.");
 		
-		while ($company_developer = mysql_fetch_assoc($sql_developer))
+		while ($company_developer = $sql_developer->fetch_array(MYSQLI_BOTH))
 		{
 		
 			$smarty->append('company_developer',
@@ -404,4 +404,4 @@ $smarty->assign('games_detail_tpl', '1');
 $smarty->display('file:../templates/0/index.tpl');
 
 //close the connection
-mysql_close();
+mysqli_close($mysqli);

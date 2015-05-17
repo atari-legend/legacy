@@ -19,13 +19,13 @@ A little logo preview page
 
 include("../includes/common.php");
 
-$sql_logos = mysql_query ("SELECT *
+$sql_logos = $mysqli->query("SELECT *
 				  			FROM pub_dev 
 				  			LEFT JOIN pub_dev_text ON (pub_dev.pub_dev_id = pub_dev_text.pub_dev_id) 
 				  			WHERE pub_dev_text.pub_dev_imgext <> 'NULL'
 				  			ORDER BY pub_dev.pub_dev_name");
 
-while ( $logos = mysql_fetch_array($sql_logos) )
+while  ($logos=$sql_logos->fetch_array(MYSQLI_BOTH)) 
 {
 
 	

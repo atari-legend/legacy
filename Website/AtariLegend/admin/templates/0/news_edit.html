@@ -29,7 +29,7 @@
 <table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
 <tr>
 	<td>
-	<form action="news_edit.php" method="post" name="news_edit" id="news_edit">
+	<form action="db_news.php" method="post" name="news_edit" id="news_edit">
 	<fieldset class="category_set">
 		This is the news edit page. Change a news post accordingly.
 	</fieldset> 
@@ -57,11 +57,12 @@
 	
      	{if isset($edit_submissions.edit_submission_id)}
 	<input type="hidden" name="news_submission_id" value="{$edit_submissions.edit_submission_id}">
+	<input type="hidden" name="action" value="update_submission">
 	{/if}
 	{if isset($edit_submissions.edit_id)}
 	<input type="hidden" name="news_id" value="{$edit_submissions.edit_id}">
+	<input type="hidden" name="action" value="update_news">
 	{/if}
-	<input type="hidden" name="action" value="update">
 	<input type="submit" value="Update">	
 	</form>
 	</td>

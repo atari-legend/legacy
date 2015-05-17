@@ -21,7 +21,7 @@ In this section we modify links
 include("../includes/common.php");
 
 
-		$CATSQL = mysql_query("SELECT * FROM website_category
+		$CATSQL = $mysqli->query("SELECT * FROM website_category
 								WHERE website_category_id='$category_id'")
 				   or die ("Error while querying the category database");
 		
@@ -33,7 +33,7 @@ include("../includes/common.php");
 	
 	// count links in the category
 	
-	$website = mysql_query ("SELECT website_category_id FROM website_category_cross WHERE website_category_id='$category_id'");
+	$website = $mysqli->query ("SELECT website_category_id FROM website_category_cross WHERE website_category_id='$category_id'");
 	
 	$website_count = get_rows($website); // count how many links there are within a category
 	
@@ -41,9 +41,9 @@ include("../includes/common.php");
 	    array('count' => $website_count));
 	
 	// Do the category selector
-	$RESULT=mysql_query("SELECT * FROM website_category ORDER BY website_category_name");
+	$RESULT=$mysqli->query("SELECT * FROM website_category ORDER BY website_category_name");
 
-	while ($rowlinkcat=mysql_fetch_array($RESULT)) 
+	while ($rowlinkcat=$RESULT->fetch_array(MYSQLI_BOTH)) 
 	{ 
 		$sel='';
 			if($rowcat['website_category_id']!==$rowlinkcat['website_category_id']) 

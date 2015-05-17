@@ -19,12 +19,12 @@ include("../includes/common.php");
 //Let's get the general game info first. 
 //***********************************************************************************
 
-	$sql_game = mysql_query("SELECT * FROM game 
+	$sql_game = $mysqli->query("SELECT * FROM game 
 					       WHERE game_id='$game_id' ORDER BY game_name")
 				    or die ("Error getting game info");
 
 					
-		$game_info=mysql_fetch_array($sql_game);
+		$game_info=$sql_game->fetch_array(MYSQLI_BOTH);
 		
 			$smarty->assign('game_info',
 	    		 array('game_name' => $game_info['game_name'],
@@ -36,12 +36,12 @@ include("../includes/common.php");
 //***********************************************************************************
 		
 		
-	$sql_similar = mysql_query("SELECT * FROM game_similar 
+	$sql_similar = $mysqli->query("SELECT * FROM game_similar 
 							    LEFT JOIN game ON (game_similar.game_similar_cross = game.game_id)
 								WHERE game_similar.game_id='$game_id'")
 					or die ("Couldn't query similar games");
 	$nr_similar = 0;
-	while  ($similar=mysql_fetch_array($sql_similar)) 
+	while  ($similar=$sql_similar->fetch_array(MYSQLI_BOTH)) 
 	{ 
 		$smarty->append('similar',
 	   		 	 array('game_similar_id' => $similar['game_similar_id'],
@@ -53,9 +53,9 @@ include("../includes/common.php");
 	$smarty->assign("nr_similar",$nr_similar); 
 	
 	//get all the games for the similar dropdown
-	$sql_game_similar = mysql_query("SELECT * FROM game order by game_name") or die ("Couldn't query all games"); 
+	$sql_game_similar = $mysqli->query("SELECT * FROM game order by game_name") or die ("Couldn't query all games"); 
 	
-	while  ($game_similar=mysql_fetch_array($sql_game_similar)) 
+	while  ($game_similar=$sql_game_similar->fetch_array(MYSQLI_BOTH)) 
 	{ 
 		$smarty->append('similar_games',
 	   		 	 array('game_id' => $game_similar['game_id'],

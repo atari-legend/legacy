@@ -24,10 +24,10 @@ list($start2, $start3) = explode(":", exec('date +%N:%S'));
 
 
 		//let's get all the crews in the DB
-		$sql_crew = mysql_query("SELECT * FROM crew ORDER BY crew_name ASC")
+		$sql_crew = $mysqli->query("SELECT * FROM crew ORDER BY crew_name ASC")
 				     or die ("Couldn't query crew database");
 		
-		while  ($crew=mysql_fetch_array($sql_crew)) 
+		while  ($crew=$sql_crew->fetch_array(MYSQLI_BOTH)) 
 		{  
 			$smarty->append('crew',
 	   			 	 array('crew_id' => $crew['crew_id'],
@@ -35,7 +35,7 @@ list($start2, $start3) = explode(":", exec('date +%N:%S'));
 		}
 		
 		//get the number of demos in the archive
-		$query_number = mysql_query("SELECT count(*) FROM demo") or die("Couldn't get the number of demos");
+		$query_number = $mysqli->query("SELECT count(*) FROM demo") or die("Couldn't get the number of demos");
 		$v_rows = mysql_result($query_number,0,0) or die("Couldn't get the number of demos");
 
 		$smarty->assign('demos_nr', $v_rows); 

@@ -21,7 +21,7 @@ Display submissions
 include("../includes/common.php");
 
 // get the total nr of submissions in the DB
-$query_total_number = mysql_query("SELECT count(*) FROM demo_submitinfo") or die ("Couldn't get the total number of submissions");
+$query_total_number = $mysqli->query("SELECT count(*) FROM demo_submitinfo") or die ("Couldn't get the total number of submissions");
 $v_rows_total = mysql_result($query_total_number,0,0) or die("Couldn't get the total number of submissions");
 $smarty->assign('total_nr_submissions', $v_rows_total);
 
@@ -30,7 +30,7 @@ $v_counter = (isset($_GET["v_counter"]) ? $_GET["v_counter"] : 0);
 		if ($list=="done") 
 		
 		{
-		$sql_submission =  mysql_query("SELECT * FROM demo_submitinfo
+		$sql_submission =  $mysqli->query("SELECT * FROM demo_submitinfo
 									 	LEFT JOIN demo ON (demo_submitinfo.demo_id = demo.demo_id)
 									 	LEFT JOIN users ON (demo_submitinfo.user_id = users.user_id)
 										WHERE demo_done = '1'
@@ -38,7 +38,7 @@ $v_counter = (isset($_GET["v_counter"]) ? $_GET["v_counter"] : 0);
 										DESC LIMIT  " . $v_counter . ", 25");
 										
 				//check the number of comments
-				$query_number = mysql_query("SELECT count(*) FROM demo_submitinfo 
+				$query_number = $mysqli->query("SELECT count(*) FROM demo_submitinfo 
 											 WHERE demo_done = '1' 
 											 ORDER BY demo_submitinfo_id DESC") 
 											 or die("Couldn't get the number of demo submissions");
@@ -50,7 +50,7 @@ $v_counter = (isset($_GET["v_counter"]) ? $_GET["v_counter"] : 0);
 		
 		{
 		
-		$sql_submission =  mysql_query("SELECT * FROM demo_submitinfo
+		$sql_submission =  $mysqli->query("SELECT * FROM demo_submitinfo
 									 	LEFT JOIN demo ON (demo_submitinfo.demo_id = demo.demo_id)
 									 	LEFT JOIN users ON (demo_submitinfo.user_id = users.user_id)
 										WHERE demo_done <> '1'
@@ -58,7 +58,7 @@ $v_counter = (isset($_GET["v_counter"]) ? $_GET["v_counter"] : 0);
 										DESC LIMIT  " . $v_counter . ", 25");
 										
 				//check the number of comments
-				$query_number = mysql_query("SELECT count(*) FROM demo_submitinfo 
+				$query_number = $mysqli->query("SELECT count(*) FROM demo_submitinfo 
 											 WHERE demo_done <> '1' 
 											 ORDER BY demo_submitinfo_id DESC") 
 											 or die("Couldn't get the number of demo submissions");
@@ -70,7 +70,7 @@ $v_counter = (isset($_GET["v_counter"]) ? $_GET["v_counter"] : 0);
 										
 		$number_sub = get_rows($sql_submission);
 	
-		while ($query_submission = mysql_fetch_array($sql_submission))  
+		while ($query_submission = $sql_submission->fetch_array(MYSQLI_BOTH))  
 		{
 		
 		
@@ -78,7 +78,7 @@ $v_counter = (isset($_GET["v_counter"]) ? $_GET["v_counter"] : 0);
 	{
 	
 		//Select a random screenshot record
-	$query_demo = mysql_query("SELECT 
+	$query_demo = $mysqli->query("SELECT 
 							   screenshot_demo.demo_id,
 							   screenshot_demo.screenshot_id,
 							   screenshot_main.imgext
@@ -87,17 +87,17 @@ $v_counter = (isset($_GET["v_counter"]) ? $_GET["v_counter"] : 0);
 							   WHERE screenshot_demo.demo_id = $query_submission[demo_id]						   	   
 						   	   ORDER BY RAND() LIMIT 1"); 
 							   
-	$sql_demo = mysql_fetch_array($query_demo);  
+	$sql_demo = $query_demo->fetch_array(MYSQLI_BOTH);  
 	}
 	
 	// Retrive userstats from database
-	$query_user = mysql_query("SELECT count(*)
+	$query_user = $mysqli->query("SELECT count(*)
 							   FROM demo_user_comments
 							   LEFT JOIN comments ON ( demo_user_comments.comments_id = comments.comments_id )
 							   WHERE user_id = '$query_submission[user_id]'");
 	$usercomment_number = mysql_result($query_user,0,0);
 	
-	$query_submitinfo = mysql_query("SELECT count(*) FROM demo_submitinfo WHERE user_id = '$query_submission[user_id]'") 
+	$query_submitinfo = $mysqli->query("SELECT count(*) FROM demo_submitinfo WHERE user_id = '$query_submission[user_id]'") 
 						or die ("Could not count user submissions");
 	$usersubmit_number = mysql_result($query_submitinfo,0,0);
 	

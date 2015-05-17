@@ -29,10 +29,10 @@ if ( $individual_create == " " or $individual_create == '-' )
 	$smarty->assign("user_id",$_SESSION[user_id]);
 	
 	//Get the individuals
-	$sql_individuals = mysql_query("SELECT * FROM individuals ORDER BY ind_name ASC")
+	$sql_individuals = $mysqli->query("SELECT * FROM individuals ORDER BY ind_name ASC")
 			  		   or die ("Couldn't query indiciduals database");
 		
-	while ($individuals = mysql_fetch_array($sql_individuals))
+	while ($individuals = $sql_individuals->fetch_array(MYSQLI_BOTH))
 	{
 		$smarty->append('individuals',
 	    		 array('ind_id' => $individuals[ind_id],
@@ -58,10 +58,10 @@ elseif ( $action == 'Add_Interview' )
 		$smarty->assign("message",$message);
 		
 		//Get the individuals
-		$sql_individuals = mysql_query("SELECT * FROM individuals ORDER BY ind_name ASC")
+		$sql_individuals = $mysqli->query("SELECT * FROM individuals ORDER BY ind_name ASC")
 				  		   or die ("Couldn't query indiciduals database");
 		
-		while ($individuals = mysql_fetch_array($sql_individuals))
+		while ($individuals = $sql_individuals->fetch_array(MYSQLI_BOTH))
 		{
 	
 			//Get the selected individual data
@@ -78,10 +78,10 @@ elseif ( $action == 'Add_Interview' )
 		}
 
 		//Get the authors for the interview
-		$sql_author = mysql_query("SELECT user_id,userid FROM users")
+		$sql_author = $mysqli->query("SELECT user_id,userid FROM users")
 					  or die ("Database error - getting members name");
         
-		while ( $authors=mysql_fetch_array($sql_author) )
+		while ( $authors=$sql_author->fetch_array(MYSQLI_BOTH) )
 		{
 			$smarty->append('authors',
 	    		 array('user_id' => $authors[user_id],
@@ -97,29 +97,29 @@ elseif ( $action == 'Add_Interview' )
 	}	
 	else
 	{
-		$sdbquery = mysql_query("INSERT INTO interview_main (member_id, ind_id) VALUES ($members, $individual)")
+		$sdbquery = $mysqli->query("INSERT INTO interview_main (member_id, ind_id) VALUES ($members, $individual)")
 					or die("Couldn't insert into interview_main");
 	
 		//get the id of the inserted interview
-		$INTERVIEW = mysql_query("SELECT interview_id FROM interview_main
+		$INTERVIEW = $mysqli->query("SELECT interview_id FROM interview_main
 		   					      ORDER BY interview_id desc")
 				     or die ("Database error - selecting interviews");
 		
-		$interviewrow = mysql_fetch_row($INTERVIEW);
+		$interviewrow = $INTERVIEW->fetch_row();
 
 		$id = $interviewrow[0];	
 	
 		// first we have to convert the date vars into a time stamp to be inserted to review_date
 		$date = date_to_timestamp($Date_Year,$Date_Month,$Date_Day);
 	
-		$sdbquery = mysql_query("INSERT INTO interview_text (interview_id, interview_text, interview_date, interview_intro, interview_chapters) VALUES ($id, '$textfield', '$date', '$textintro','$textchapters')") 
+		$sdbquery = $mysqli->query("INSERT INTO interview_text (interview_id, interview_text, interview_date, interview_intro, interview_chapters) VALUES ($id, '$textfield', '$date', '$textintro','$textchapters')") 
 					or die("Couldn't insert into interview_text");
 		
 		//Get the individuals
-		$sql_individuals = mysql_query("SELECT * FROM individuals ORDER BY ind_name ASC")
+		$sql_individuals = $mysqli->query("SELECT * FROM individuals ORDER BY ind_name ASC")
 				  		   or die ("Couldn't query indiciduals database");
 		
-		while ($individuals = mysql_fetch_array($sql_individuals))
+		while ($individuals = $sql_individuals->fetch_array(MYSQLI_BOTH))
 		{
 		$smarty->append('individuals',
 	    		 array('ind_id' => $individuals[ind_id],
@@ -145,10 +145,10 @@ elseif ( $action == 'Add_Interview' )
 else
 {
 //Get the individuals
-$sql_individuals = mysql_query("SELECT * FROM individuals ORDER BY ind_name ASC")
+$sql_individuals = $mysqli->query("SELECT * FROM individuals ORDER BY ind_name ASC")
 		  		   or die ("Couldn't query indiciduals database");
 		
-while ($individuals = mysql_fetch_array($sql_individuals))
+while ($individuals = $sql_individuals->fetch_array(MYSQLI_BOTH))
 {
 	
 	//Get the selected individual data
@@ -165,10 +165,10 @@ while ($individuals = mysql_fetch_array($sql_individuals))
 }
 
 //Get the authors for the interview
-$sql_author = mysql_query("SELECT user_id,userid FROM users")
+$sql_author = $mysqli->query("SELECT user_id,userid FROM users")
 			  or die ("Database error - getting members name");
         
-while ( $authors=mysql_fetch_array($sql_author) )
+while ( $authors=$sql_author->fetch_array(MYSQLI_BOTH) )
 {
 	$smarty->append('authors',
 	    	 array('user_id' => $authors[user_id],

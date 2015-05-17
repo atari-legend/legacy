@@ -27,8 +27,8 @@ include("../includes/common.php");
 							LEFT JOIN game ON ( game_user_comments.game_id = game.game_id ) 
 							WHERE game_user_comments_id = '$game_user_comments_id'";
 
-$sql_comment = mysql_query($sql_build) or die("couldn't build query");
-$query_comment = mysql_fetch_array($sql_comment) or die("couldn't build query");
+$sql_comment = $mysqli->query($sql_build) or die("couldn't build query");
+$query_comment = $sql_comment->fetch_array(MYSQLI_BOTH) or die("couldn't build query");
 
 $date = convert_timestamp($query_comment['timestamp']);
 	

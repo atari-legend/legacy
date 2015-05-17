@@ -21,14 +21,14 @@ In this section we modify links
 include("../includes/common.php");
 
 
-		$LINKSQL = mysql_query("SELECT * FROM website
-								LEFT JOIN website_description ON (website.website_id = website_description.website_id)
-								LEFT JOIN website_category_cross ON (website.website_id = website_category_cross.website_id)
-								LEFT JOIN website_category ON (website_category_cross.website_category_id  = website_category.website_category_id )
-	 							WHERE website.website_id='$website_id'")
+		$LINKSQL = $mysqli->query("SELECT * FROM website
+						LEFT JOIN website_description ON (website.website_id = website_description.website_id)
+						LEFT JOIN website_category_cross ON (website.website_id = website_category_cross.website_id)
+						LEFT JOIN website_category ON (website_category_cross.website_category_id  = website_category.website_category_id )
+	 					WHERE website.website_id='$website_id'")
 				   or die ("Error while querying the links database");
 		
-		$rowlink=mysql_fetch_array ($LINKSQL);
+		$rowlink= $LINKSQL->fetch_array(MYSQLI_BOTH);
 		
 			$website_image = $website_image_path;
 			$website_image .= $rowlink['website_id'];
@@ -47,11 +47,11 @@ include("../includes/common.php");
 			  'website_image' => $website_image));
 	
 	// Do the category selector
-	$RESULT=mysql_query("SELECT * FROM website_category ORDER BY website_category_name");
+	$RESULT=$mysqli->query("SELECT * FROM website_category ORDER BY website_category_name");
 
 	$sel='';
 	
-	while ($rowlinkcat=mysql_fetch_array($RESULT)) 
+	while ($rowlinkcat = $RESULT->fetch_array(MYSQLI_BOTH)) 
 	{ 
 		$sel='';
 			if($rowlink['website_category_id']==$rowlinkcat['website_category_id']) 

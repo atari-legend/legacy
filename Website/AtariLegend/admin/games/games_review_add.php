@@ -21,10 +21,10 @@ This is the game review page where you add a review to the db
 include("../includes/common.php"); 
 
 //get the name of the game
-$sql_game = mysql_query("SELECT * FROM game WHERE game_id='$game_id'")
+$sql_game = $mysqli->query("SELECT * FROM game WHERE game_id='$game_id'")
 		or die ("Database error - getting game name");
 
-while ($game=mysql_fetch_array($sql_game)) 
+while ($game=$sql_game->fetch_array(MYSQLI_BOTH)) 
 { 
 	$smarty->assign('game',
 	    	 array('game_id' => $game_id,
@@ -32,10 +32,10 @@ while ($game=mysql_fetch_array($sql_game))
 }
 
 //Get the authors
-$sql_author = mysql_query("SELECT user_id,userid FROM users")
+$sql_author = $mysqli->query("SELECT user_id,userid FROM users")
 			  or die ("Database error - getting members name");
 
-while ( $authors=mysql_fetch_array($sql_author) )
+while ( $authors=$sql_author->fetch_array(MYSQLI_BOTH) )
 {
 	$smarty->append('authors',
 	   		 array('user_id' => $authors['user_id'],
@@ -43,13 +43,13 @@ while ( $authors=mysql_fetch_array($sql_author) )
 }
 
 //get the reviews of the game	
-$sql_review = mysql_query("SELECT * FROM review_game 
+$sql_review = $mysqli->query("SELECT * FROM review_game 
  					  	   LEFT JOIN review_main ON (review_game.review_id = review_main.review_id)
 	   					   LEFT JOIN users ON (review_main.member_id = users.user_id)
 	   					   WHERE review_game.game_id='$game_id' ORDER BY review_game.review_id")
 			  or die ("Database error - selecting review");
 $i=1;
-while ($review=mysql_fetch_array($sql_review)) 
+while ($review=$sql_review->fetch_array(MYSQLI_BOTH)) 
 {
 	$i++;
 	
@@ -60,12 +60,12 @@ while ($review=mysql_fetch_array($sql_review))
 }
 
 //get the screenshots
-$sql_screenshots= mysql_query("SELECT * FROM screenshot_game WHERE game_id = '$game_id' ORDER BY screenshot_id ASC")
+$sql_screenshots= $mysqli->query("SELECT * FROM screenshot_game WHERE game_id = '$game_id' ORDER BY screenshot_id ASC")
 				  or die ("Database error - getting screenshots");
 
 $i=0;
 
-while ($screenshots=mysql_fetch_array($sql_screenshots)) 
+while ($screenshots=$sql_screenshots->fetch_array(MYSQLI_BOTH)) 
 {
 	$i++;
 	
