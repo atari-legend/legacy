@@ -51,7 +51,7 @@ for($i=1; $i <= 1; $i++)
 	   					   		     order by game_boxscan_id desc")
 					    or die ("Database error - selecting back box scan");
 		
-			 $backbox = mysql_fetch_row($boxback);
+			 $backbox = $boxback->fetch_row();
 			 $backbox_id = $backbox[0];
 			 
 			 //insert the id of the front box
@@ -74,7 +74,7 @@ for($i=1; $i <= 1; $i++)
 	   				   		    order by game_boxscan_id desc")
 				   or die ("Database error - selecting front box scan");
 			
-			$boxCover = mysql_fetch_row($box);
+			$boxCover = $box->fetch_row();
 			$box_id = $boxCover[0];
 			// @Dal, notice I use $filename instead of $file_data
 			 // Rename the uploaded file to its autoincrement number and move it to its proper place.

@@ -34,7 +34,7 @@ if (isset($action) and $action  == 'add_review' )
 	   					   ORDER BY review_id desc")
 			  or die ("Database error - selecting reviews");
 		
-	$reviewrow = mysql_fetch_row($REVIEW);
+	$reviewrow = $REVIEW->fetch_row();
 
 	$reviewid = $reviewrow[0];
     
@@ -54,7 +54,7 @@ if (isset($action) and $action  == 'add_review' )
 				
     	$i=0;
 		
-		while ( $screenrow=mysql_fetch_row($SCREEN) )
+		while ( $screenrow=$SCREEN->fetch_row() )
 		{
 			
 			if($inputfield[$i] != "")
@@ -71,7 +71,7 @@ if (isset($action) and $action  == 'add_review' )
 	   				   		 			   ORDER BY screenshot_review_id desc")
 		  					  or die ("Database error - selecting screenshots review");
 			
-				$reviewshotrow = mysql_fetch_row($REVIEWSHOT);
+				$reviewshotrow = $REVIEWSHOT->fetch_row();
 				
 			 	$reviewshotid = $reviewshotrow[0];
 			

@@ -369,7 +369,7 @@ header("Location: ../games/games_detail.php?game_id=$game_id");
 		//First we need to do a hell of a lot checks before we can delete an actual game.
 		$sdbquery = $mysqli->query("SELECT * FROM game_download WHERE game_id='$game_id'")
 				 	or die ("Error getting download info");
-		if ( mysql_num_rows($sdbquery) > 0 )
+		if ( $sdbquery->num_rows() > 0 )
 		{
 			$smarty->assign("message",'Deletion failed - This game has downloads - Delete it in the appropriate section');
 		}
@@ -377,7 +377,7 @@ header("Location: ../games/games_detail.php?game_id=$game_id");
 		{
 			$sdbquery = $mysqli->query("SELECT * FROM game_diskscan WHERE game_id='$game_id'")
 				 		or die ("Error getting diskscan info");
-			if ( mysql_num_rows($sdbquery) > 0 )
+			if ( $sdbquery->num_rows() > 0 )
 			{
 				$smarty->assign("message",'Deletion failed - This game has a diskscan - Delete it in the appropriate section');
 			}
@@ -385,7 +385,7 @@ header("Location: ../games/games_detail.php?game_id=$game_id");
 			{
 				$sdbquery = $mysqli->query("SELECT * FROM game_gallery WHERE game_id='$game_id'")
 				 			or die ("Error getting gallery info");
-				if ( mysql_num_rows($sdbquery) > 0 )
+				if ( $sdbquery->num_rows() > 0 )
 				{
 					$smarty->assign("message",'Deletion failed - This game has a images in the gallery table - Delete it in the appropriate section');
 				}
@@ -393,7 +393,7 @@ header("Location: ../games/games_detail.php?game_id=$game_id");
 				{
 					$sdbquery = $mysqli->query("SELECT * FROM game_boxscan WHERE game_id='$game_id'")
 				 				or die ("Error getting boxscan info");
-					if ( mysql_num_rows($sdbquery) > 0 )
+					if ( $sdbquery->num_rows() > 0 )
 					{
 						$smarty->assign("message",'Deletion failed - This game has (a) boxscan(s) - Delete it in the appropriate section');
 					}
@@ -401,7 +401,7 @@ header("Location: ../games/games_detail.php?game_id=$game_id");
 					{
 						$sdbquery = $mysqli->query("SELECT * FROM game_user_comments WHERE game_id='$game_id'")
 				 					or die ("Error getting user comments");
-						if ( mysql_num_rows($sdbquery) > 0 )
+						if ( $sdbquery->num_rows() > 0 )
 						{
 							$smarty->assign("message",'Deletion failed - This game has user comments - Delete it in the appropriate section');
 						}
@@ -409,7 +409,7 @@ header("Location: ../games/games_detail.php?game_id=$game_id");
 						{
 							$sdbquery = $mysqli->query("SELECT * FROM game_submitinfo WHERE game_id='$game_id'")
 				 						or die ("Error getting submit info");
-							if ( mysql_num_rows($sdbquery) > 0 )
+							if ( $sdbquery->num_rows() > 0 )
 							{
 								$smarty->assign("message",'Deletion failed - This game has info submitted from visitors - Delete it in the appropriate section');
 							}
@@ -417,7 +417,7 @@ header("Location: ../games/games_detail.php?game_id=$game_id");
 							{
 								$sdbquery = $mysqli->query("SELECT * FROM screenshot_game WHERE game_id='$game_id'")
 				 							or die ("Error getting screenshot info");
-								if ( mysql_num_rows($sdbquery) > 0 )
+								if ( $sdbquery->num_rows() > 0 )
 								{
 									$smarty->assign("message",'Deletion failed - This game has screenshots - Delete it in the appropriate section');
 								}
@@ -425,7 +425,7 @@ header("Location: ../games/games_detail.php?game_id=$game_id");
 								{
 									$sdbquery = $mysqli->query("SELECT * FROM review_game WHERE game_id='$game_id'")
 				 								or die ("Error getting review info");
-									if ( mysql_num_rows($sdbquery) > 0 )
+									if ( $sdbquery->num_rows() > 0 )
 									{
 										$smarty->assign("message",'Deletion failed - This game has reviews - Delete it in the appropriate section');
 									}
@@ -433,7 +433,7 @@ header("Location: ../games/games_detail.php?game_id=$game_id");
 									{
 										$sdbquery = $mysqli->query("SELECT * FROM game_music WHERE game_id='$game_id'")
 				 									or die ("Error getting music info");
-										if ( mysql_num_rows($sdbquery) > 0 )
+										if ( $sdbquery->num_rows() > 0 )
 										{
 											$smarty->assign("message",'Deletion failed - This game has music files attached - Delete it in the appropriate section');
 										}

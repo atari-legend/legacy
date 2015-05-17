@@ -70,7 +70,7 @@ $smarty->assign('total_nr_submissions', $v_rows_total);
 		}
 		
 										
-		$number_sub = mysql_num_rows($sql_submission);
+		$number_sub = $sql_submission->num_rows();
 	
 		while ($query_submission = $sql_submission->fetch_array(MYSQLI_BOTH))  
 		{

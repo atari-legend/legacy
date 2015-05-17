@@ -24,7 +24,7 @@ if (isset($action) and $action == 'delete_comment')
 							   AND screenshot_id = $screenshot_id")
 	     		  or die ("Database error - selecting screenshots review");
 							  
-	$reviewshotrow = mysql_fetch_row($REVIEWSHOT);
+	$reviewshotrow = $REVIEWSHOT->fetch_row();
 	$reviewshotid = $reviewshotrow[0];
 	
 	//delete the screenshot comment from the DB table
@@ -46,7 +46,7 @@ if (isset($action) and $action == 'delete_review')
 	$SCREENSHOT = $mysqli->query("SELECT * FROM screenshot_review where review_id = '$reviewid' ")
 				  or die ("Database error - getting screenshots");
         
-	while ( $screenshotrow=mysql_fetch_row($SCREENSHOT) )
+	while ( $screenshotrow=$SCREENSHOT->fetch_row() )
 	{
 		$sql = $mysqli->query("DELETE FROM review_comments WHERE screenshot_review_id = $screenshotrow[0] ") or die ("deletion review_comments failed");
 	}
@@ -71,7 +71,7 @@ if ($action == 'edit_review')
 	$REVIEWSCORE = $mysqli->query("SELECT * FROM review_score where review_id = $reviewid")
 	  		       or die ("Database error - selecting scores");
 					
-	$score = mysql_num_rows($REVIEWSCORE);
+	$score = $REVIEWSCORE->num_rows();
 	
 	if ($score > 0)
 	{
@@ -92,7 +92,7 @@ if ($action == 'edit_review')
 				
     	$i=0;
 		
-		while ( $screenrow=mysql_fetch_row($SCREEN) )
+		while ( $screenrow=$SCREEN->fetch_row() )
 		{
 			
 			if($inputfield[$i] != "")
@@ -107,7 +107,7 @@ if ($action == 'edit_review')
 	    					    or die ("Database error - getting review - screenshots");
 					
 				//check if shot exists
-				$number = mysql_num_rows($REVIEWSCREEN);
+				$number = $REVIEWSCREEN->num_rows();
 				
 				if ($number > 0)
 				{
@@ -123,7 +123,7 @@ if ($action == 'edit_review')
 										   screenshot_id = '$screenid'")
 							  or die ("Database error - selecting screenshots review");
 								  			   
-				$reviewshotrow = mysql_fetch_row($REVIEWSHOT);
+				$reviewshotrow = $REVIEWSHOT->fetch_row();
 				
 			  	$reviewshotid = $reviewshotrow[0];
 				
@@ -131,7 +131,7 @@ if ($action == 'edit_review')
 				$REVIEWCOMMENT = $mysqli->query("SELECT * FROM review_comments where screenshot_review_id = '$reviewshotid'")
 							     or die ("Database error - selecting screenshot review comment");
 				
-				$number = mysql_num_rows($REVIEWCOMMENT);
+				$number = $REVIEWCOMMENT->num_rows();
 				
 				if ($number > 0)
 				{
@@ -181,7 +181,7 @@ $sql_edit_REVIEW = $mysqli->query("SELECT * FROM review_main WHERE review_id = $
 	$SCREENSHOT = $mysqli->query("SELECT * FROM screenshot_review where review_id = '$reviewid' ")
 				  or die ("Database error - getting screenshots");
         
-	while ( $screenshotrow=mysql_fetch_row($SCREENSHOT) )
+	while ( $screenshotrow=$SCREENSHOT->fetch_row() )
 	{
 		$sql = $mysqli->query("DELETE FROM review_comments WHERE screenshot_review_id = $screenshotrow[0] ") or die ("deletion review_comments failed");
 	}

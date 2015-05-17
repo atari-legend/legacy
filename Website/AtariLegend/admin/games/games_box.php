@@ -47,7 +47,7 @@ This is the game box main page
 	 	$IMAGE = $mysqli->query("SELECT * FROM game_boxscan WHERE game_id='$game_id' ORDER BY game_boxscan_side, game_boxscan_id")
 				 or die ("Database error - selecting gamebox scan");
 		
-		$imagenum_rows = mysql_num_rows($IMAGE);
+		$imagenum_rows = $IMAGE->num_rows();
 		
 		// if no boxscans are attached
 		$smarty->assign('numberscans', $imagenum_rows);
@@ -76,7 +76,7 @@ This is the game box main page
 					
 					$couple = $mysqli->query("SELECT game_boxscan_id FROM game_box_couples WHERE game_boxscan_cross=$rowimage[game_boxscan_id]")
 				 			  or die ("Database error - selecting gamebox scan");
-					$couplerow = mysql_fetch_row($couple);
+					$couplerow = $couple->fetch_row();
 					$boxscan_cross_id = $couplerow[0];
 					
 					$back_image_filename = "$game_boxscan_path$rowimage[game_boxscan_id].$rowimage[imgext]";	
