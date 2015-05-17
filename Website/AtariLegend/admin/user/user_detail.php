@@ -54,7 +54,7 @@ if (isset($action) and $action == 'avatar_upload')
 			if ($ext!=="")
 			{
 				// Rename the uploaded file to the users id number and move it to its proper place.
-				mysql_query("UPDATE users SET avatar_ext='$ext' WHERE user_id='$user_id_selected'");
+				$mysqli->query("UPDATE users SET avatar_ext='$ext' WHERE user_id='$user_id_selected'");
 				$file_data = rename("$tmp_name", "$user_avatar_path$user_id_selected.$ext");
 				chmod("$user_avatar_path$user_id_selected.$ext", 0777);
 			}
@@ -71,7 +71,7 @@ if (isset($action) and $action == 'avatar_upload')
 		else
 		{
 		$smarty->assign('message', 'Upload failed due to not confirming to specs.');
-		mysql_query("UPDATE users SET avatar_ext='' WHERE user_id='$user_id_selected'");
+		$mysqli->query("UPDATE users SET avatar_ext='' WHERE user_id='$user_id_selected'");
 		unlink ("$user_avatar_path$user_id_selected.$ext");
 		}
 	}
@@ -83,17 +83,17 @@ if (isset($action) and $action=="delete_avatar")
 {
 
 $sql = "SELECT avatar_ext FROM users WHERE user_id='$user_id_selected'";
-	$avatar_query = mysql_query($sql);
-	list ($avatar_ext) = mysql_fetch_row($avatar_query);
+	$avatar_query = $mysqli->query($sql);
+	list ($avatar_ext) = $avatar_query->fetch_array(MYSQLI_BOTH);
 	
-	mysql_query("UPDATE users SET avatar_ext='' WHERE user_id='$user_id_selected'");
+	$mysqli->query("UPDATE users SET avatar_ext='' WHERE user_id='$user_id_selected'");
 	unlink ("$user_avatar_path$user_id_selected.$avatar_ext");
 
 }
 
 if (isset($action) and $action == 'reset_pwd')
 {
-	mysql_query("UPDATE users SET password='' WHERE user_id='$user_id_selected'");
+	$mysqli->query("UPDATE users SET password='' WHERE user_id='$user_id_selected'");
 }
 
 if (isset($action) and $action == 'modify_user')
@@ -102,23 +102,23 @@ if (isset($action) and $action == 'modify_user')
 	{
 		$md5pass = md5($user_pwd);
 		echo $md5pass;
-		mysql_query("UPDATE users SET userid='$user_name', password='$md5pass', email='$user_email', permission='$user_permission', user_website='$user_website', user_icq='$user_icq', user_msnm='$user_msnm', user_aim='$user_aim' WHERE user_id='$user_id_selected'");
+		$mysqli->query("UPDATE users SET userid='$user_name', password='$md5pass', email='$user_email', permission='$user_permission', user_website='$user_website', user_icq='$user_icq', user_msnm='$user_msnm', user_aim='$user_aim' WHERE user_id='$user_id_selected'");
 	}
 	else
 	{
-		mysql_query("UPDATE users SET userid='$user_name', email='$user_email', permission='$user_permission', user_website='$user_website', user_icq='$user_icq', user_msnm='$user_msnm', user_aim='$user_aim' WHERE user_id='$user_id_selected'");
+		$mysqli->query("UPDATE users SET userid='$user_name', email='$user_email', permission='$user_permission', user_website='$user_website', user_icq='$user_icq', user_msnm='$user_msnm', user_aim='$user_aim' WHERE user_id='$user_id_selected'");
 	}
 }
 
 if (isset($action) and $action == 'delete_user')
 {
 	//First we need to do a hell of a lot checks before we can delete an actual user.
-	$sql = mysql_query("SELECT * FROM comments
+	$sql = $mysqli->query("SELECT * FROM comments
 						LEFT JOIN game_user_comments ON (comments.comments_id = game_user_comments.comment_id)
 						LEFT JOIN game ON ( game_user_comments.game_id = game.game_id )
 						WHERE comments.user_id = $user_id_selected");
 	
-	if ( mysql_num_rows($sql) > 0 )
+	if ( get_rows($sql) > 0 )
 	{
 		$smarty->assign("message",'Deletion failed - This user has submitted game comments - Delete it in the appropriate section');
 		
@@ -126,54 +126,54 @@ if (isset($action) and $action == 'delete_user')
 	}
 	else
 	{
-		$sql = mysql_query("SELECT * FROM review_main
+		$sql = $mysqli->query("SELECT * FROM review_main
 							LEFT JOIN review_game ON (review_main.review_id = review_game.review_id)
 							LEFT JOIN game ON ( review_game.game_id = game.game_id )
 							WHERE review_main.member_id = $user_id_selected");
 		
-		if ( mysql_num_rows($sql) > 0 )
+		if ( get_rows($sql) > 0 )
 		{
 			$smarty->assign("message",'Deletion failed - This user has submitted game reviews - Delete it in the appropriate section');
 		}
 		else
 		{
-			$sql = mysql_query("SELECT * FROM game_submitinfo 
+			$sql = $mysqli->query("SELECT * FROM game_submitinfo 
 				   				LEFT JOIN game ON (game_submitinfo.game_id = game.game_id)
 								WHERE user_id = $user_id_selected");
-			if ( mysql_num_rows($sql) > 0 )
+			if ( get_rows($sql) > 0 )
 			{
 				$smarty->assign("message",'Deletion failed - This user has submitted game info - Delete it in the appropriate section');
 			}
 			else
 			{
-				$sql = mysql_query("SELECT * FROM website WHERE website_user_sub = $user_id_selected");
+				$sql = $mysqli->query("SELECT * FROM website WHERE website_user_sub = $user_id_selected");
 				
-				if ( mysql_num_rows($sql) > 0 )
+				if ( get_rows($sql) > 0 )
 				{
 					$smarty->assign("message",'Deletion failed - This user has submitted links - Delete it in the appropriate section');
 				}
 				else
 				{
-					$sql = mysql_query("SELECT * FROM news WHERE user_id = $user_id_selected");
+					$sql = $mysqli->query("SELECT * FROM news WHERE user_id = $user_id_selected");
 				
-					if ( mysql_num_rows($sql) > 0 )
+					if ( get_rows($sql) > 0 )
 					{
 						$smarty->assign("message",'Deletion failed - This user has submitted news updates - Delete it in the appropriate section');
 					}
 					else
 					{
-						$sql = mysql_query("SELECT * FROM comments
+						$sql = $mysqli->query("SELECT * FROM comments
 						LEFT JOIN demo_user_comments ON (comments.comments_id = demo_user_comments.comment_id)
 						LEFT JOIN demo ON ( demo_user_comments.demo_id = demo.demo_id )
 						WHERE comments.user_id = $user_id_selected");
 	
-						if ( mysql_num_rows($sql) > 0 )
+						if ( get_rows($sql) > 0 )
 						{
 							$smarty->assign("message",'Deletion failed - This user has submitted demo comments - Delete it in the appropriate section');
 						}
 						else
 						{
-							mysql_query("DELETE from users WHERE user_id='$user_id_selected'") or die ('deleting user failed');
+							$mysqli->query("DELETE from users WHERE user_id='$user_id_selected'") or die ('deleting user failed');
 	
 							$smarty->assign('message', 'User deleted succesfully');
 							$smarty->assign('user_main_tpl', '1');
@@ -189,11 +189,11 @@ if (isset($action) and $action == 'delete_user')
 }
 
 //Lets get all the date of the selected user
-	$sql_users = mysql_query("SELECT * FROM users 
+	$sql_users = $mysqli->query("SELECT * FROM users 
 		  					  WHERE user_id = $user_id_selected")
 		 	     or die ("Couldn't query users Database");
 	
-	while ($query_users = mysql_fetch_array($sql_users))  
+	while ($query_users = $sql_users->fetch_array(MYSQLI_BOTH))
 	{
 		$email = trim($query_users['email']);
 		

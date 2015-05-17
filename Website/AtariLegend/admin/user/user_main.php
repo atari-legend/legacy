@@ -21,8 +21,8 @@ User main
 include("../includes/common.php");
 
 //get all the user accounts
-$query__number = mysql_query("SELECT count(*) FROM users") or die ("Couldn't get the total number of users");
-$v_rows = mysql_result($query__number,0,0) or die("Couldn't get the total number of users");
+$query__number = $mysqli->query("SELECT count(*) FROM users") or die ("Couldn't get the total number of users");
+$v_rows = $query__number->num_rows;
 $smarty->assign('nr_users', $v_rows);
 
 $smarty->assign('user_main_tpl', '1');
