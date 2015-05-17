@@ -17,6 +17,7 @@
 *}
 {block name=main_body}
 	
+	<script type="text/javascript" src="../templates/0/js/jquery-ui.js"></script><!-- This script is needed for the animation of all the tiles - slide effect -->
     <script type="text/javascript" src="../templates/0/js/jssor.slider.mini.js"></script>  <!-- This script is needed for the animation in the welcome tile -->
 	
 	<script> <!-- This script is needed for the animation in the welcome tile -->
@@ -131,7 +132,66 @@
  
         }); 
 	</script>
-	
+	<script><!-- This script is needed for the animation of all the tiles - slide effect -->
+	  $(function() {
+
+		// run the currently selected effect
+		function runEffect() {
+		
+			if ($(window).width() < 640)  
+			{
+				$( "#latest_news" ).effect("slide", { direction: "right" }, 1000 );
+				$( "#welcome" ).effect("slide", { direction: "left" }, 1000 );
+				$( "#whoisit_position_front" ).effect("slide", { direction: "left" }, 1000 );
+				$( "#logon" ).effect("slide", { direction: "left" }, 1000 );
+				$( "#datequote_position_front" ).effect("slide", { direction: "left" }, 1000 );
+				$( "#didyouknow_position_front" ).effect("slide", { direction: "right" }, 1000 );
+				$( "#statistics_position_front" ).effect("slide", { direction: "left" }, 1000 );
+				$( "#contact_tiles" ).effect("slide", { direction: "right" }, 1000 );
+				$( "#screenstar_position_front" ).effect("slide", { direction: "right" }, 1000 );
+				$( "#latest_reviews" ).effect("slide", { direction: "left" }, 1000 );
+				$( "#hotlinks_position_front" ).effect("slide", { direction: "right" }, 1000 );		  
+			}
+			else if ($(window).width() > 639)
+			{
+				if ($(window).width() < 801)
+				{
+					$( "#latest_news" ).effect("slide", { direction: "left" }, 1000 );
+					$( "#welcome" ).effect("slide", { direction: "left" }, 1000 );
+					$( "#whoisit_position_front" ).effect("slide", { direction: "left" }, 1000 );
+					$( "#logon" ).effect("slide", { direction: "right" }, 1000 );
+					$( "#datequote_position_front" ).effect("slide", { direction: "left" }, 1000 );
+					$( "#didyouknow_position_front" ).effect("slide", { direction: "right" }, 1000 );
+					$( "#statistics_position_front" ).effect("slide", { direction: "right" }, 1000 );
+					$( "#contact_tiles" ).effect("slide", { direction: "right" }, 1000 );
+					$( "#screenstar_position_front" ).effect("slide", { direction: "right" }, 1000 );
+					$( "#latest_reviews" ).effect("slide", { direction: "right" }, 1000 );
+					$( "#hotlinks_position_front" ).effect("slide", { direction: "right" }, 1000 );
+				}
+				else 
+				{
+					$( "#latest_news" ).effect("slide", { direction: "left" }, 1000 );
+					$( "#welcome" ).effect("slide", { direction: "left" }, 1000 );
+					$( "#whoisit_position_front" ).effect("slide", { direction: "left" }, 1000 );
+					$( "#logon" ).effect("slide", { direction: "right" }, 1000 );
+					$( "#datequote_position_front" ).effect("slide", { direction: "right" }, 1000 );
+					$( "#didyouknow_position_front" ).effect("slide", { direction: "right" }, 1000 );
+					$( "#statistics_position_front" ).effect("slide", { direction: "right" }, 1000 );
+					$( "#contact_tiles" ).effect("slide", { direction: "right" }, 1000 );
+					$( "#screenstar_position_front" ).effect("slide", { direction: "down" }, 1000 );
+					$( "#latest_reviews" ).effect("slide", { direction: "down" }, 1000 );
+					$( "#hotlinks_position_front" ).effect("slide", { direction: "down" }, 1000 );
+				}
+			}	
+		};
+
+		// set effect from select menu value
+		$(document).ready(function() {
+		  runEffect();
+		  return false;
+		});
+	  });
+	 </script>
 
 	<div id="main">
 	
