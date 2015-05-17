@@ -67,7 +67,7 @@ foreach($image['tmp_name'] as $key=>$tmp_name)
 	   					   		   ORDER BY screenshot_id desc")
 					  or die ("Database error - selecting screenshots");
 		
-		$screenshotrow = mysql_fetch_row($SCREENSHOT);
+		$screenshotrow = $SCREENSHOT->fetch_row();
 		$screenshot_id = $screenshotrow[0];
 		
 		$sdbquery = $mysqli->query("INSERT INTO screenshot_game (game_id, screenshot_id) VALUES ($game_id, $screenshot_id)")
@@ -93,7 +93,7 @@ if ( isset($action) and $action == 'delete_screen' )
 									  AND screenshot_id = $screenshot_id")
 	     		  or die ("Database error - selecting screenshots game");
 						
-	$gameshot = mysql_fetch_row($sql_gameshot);
+	$gameshot = $sql_gameshot->fetch_row();
 	$gameshotid = $gameshot[0];
 	
 	//get the extension 

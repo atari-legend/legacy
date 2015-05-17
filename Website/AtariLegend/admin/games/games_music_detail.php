@@ -146,7 +146,7 @@ foreach($image['tmp_name'] as $key=>$tmp_name)
 	   					   	  ORDER BY music_id desc")
 				 or die ("Database error - selecting music_id");
 		
-		$musicrow = mysql_fetch_row($MUSIC);
+		$musicrow = $MUSIC->fetch_row();
 		$music_id = $musicrow[0];
 		
 		$sdbquery = $mysqli->query("INSERT INTO game_music (game_id,music_id) VALUES ('$game_id','$music_id')")
@@ -161,7 +161,7 @@ foreach($image['tmp_name'] as $key=>$tmp_name)
 		$typequery = $mysqli->query("SELECT music_types_main_id FROM music_types_main WHERE extention='$ext'") 
 					 or die ("Database error - selecting music_id");
 		
-		$typerow = mysql_fetch_row($typequery);
+		$typerow = $typequery->fetch_row();
 		$type_id = $typerow[0];
 		
 		// Insert the type id

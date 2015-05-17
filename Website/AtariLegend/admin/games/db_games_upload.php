@@ -76,7 +76,7 @@ if (isset($action) and $action == 'add_download' )
 	   					   		 ORDER BY game_download_id desc")
 					or die ("Database error - selecting game_download");
 		
-		$gamedownrow = mysql_fetch_row($GAMEDOWN);
+		$gamedownrow = $GAMEDOWN->fetch_row();
 		
 		// Time to unzip the file to the temporary directory
 		$archive = new PclZip("$tempfilename");

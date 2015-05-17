@@ -74,7 +74,7 @@ include("../includes/common.php");
 								WHERE game_series_cross.game_series_id='$game_series_id' ORDER BY game.game_name")
 				 		   		 	or die ("Couldn't query Game Series Database3");
 				// check how many games is linked to a particular series
-				$sql_series_link_nr = mysql_num_rows($sql_series_link);
+				$sql_series_link_nr = $sql_series_link->num_rows();
 				
 				$smarty->assign('series_info',
 	    			array('game_series_id' => $query_series2['game_series_id'],
