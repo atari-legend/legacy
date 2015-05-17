@@ -23,10 +23,10 @@ include("../includes/common.php");
 global $g_tree;
 $g_tree = array();
 
-		$LINKSQL = mysql_query("SELECT website_category_id,parent_category,website_category_name FROM website_category order by website_category_name")
+		$LINKSQL = $mysqli->query("SELECT website_category_id,parent_category,website_category_name FROM website_category order by website_category_name")
 				   or die ("Error while querying the links category database");
 		 
-                 while($link_row=mysql_fetch_array($LINKSQL)){
+                 while($link_row = $LINKSQL->fetch_array(MYSQLI_BOTH)){
                  
 $g_tree[]  = array(
                     'id'        => $link_row['website_category_id'],
@@ -42,23 +42,48 @@ $g_tree[]  = array(
 // of this function to the id of the subtree
 //
 
-$sql_query = "SELECT website_category_id,parent_category,website_category_name FROM website_category order by website_category_name";
+$sql_query = $mysqli->query("SELECT website_category_id,parent_category,website_category_name FROM website_category order by website_category_name");
 
 //maketree(,,)
-maketree(0,$sql_query,0);
+$ret_tree = maketree(0,$sql_query,0);
+
+//$ret_tree = asort($ret_tree);
+asort($ret_tree);
+//print_r(array_values($ret_tree));
+//print_r(array_keys($ret_tree));
 
 //Print the tree structure with indents
 //
+
+$arr = array("one", "two", "three");
+reset($arr);
+echo"<br><br>";
+
+while (list($key, $value) = each($ret_tree)) {
+
+	
+	
+	foreach($value as $cat) {
+		asort($cat);
+		foreach($cat as $cat2) {
+
+    				echo "Key: $key; Value: $cat2; <br />\n";
+		}
+	}
+}
+
+
+
 foreach($ret_tree as $cat)
 {
     $indent = '0';
     
-    for($i=0;$i<$cat['indent'];$i++)
+    for($i=0; $i < $cat['$indent']; $i++)
     {
         $indent=$indent+15;
     }
   		
-		$website = mysql_query ("SELECT website_category_id FROM website_category_cross WHERE website_category_id='$cat[id]'");
+		$website = $mysqli->query("SELECT website_category_id FROM website_category_cross WHERE website_category_id='$cat[id]'");
 	
 		$website_count = get_rows($website);
 		
