@@ -19,18 +19,16 @@ This is the crew page contructor
 //load all common functions
 include("../includes/common.php"); 
 
-if(empty($action)) {$action = "";}
-
-/*if (isset($new_crew)) 
+if (isset($new_crew)) 
 {
 	$smarty->assign('new_crew', $new_crew);
-}*/
+}
 
 if ($crewsearch !='' and $crewbrowse == '')
 {
 		$sql_crew = mysql_query("SELECT * FROM crew
-									WHERE crew_name LIKE '%$crewsearch%' 
-									ORDER BY crew_name ASC")
+						WHERE crew_name LIKE '%$crewsearch%' 
+						ORDER BY crew_name ASC")
 			    	   or die ("Couldn't query Crew database");
 		
 		while  ($crew=mysql_fetch_array($sql_crew)) 
@@ -44,8 +42,8 @@ if ($crewsearch !='' and $crewbrowse == '')
 elseif ($crewbrowse !='' and $crewsearch == '')
 {
 			$sql_crew = mysql_query("SELECT * FROM crew
-									WHERE crew_name LIKE '$crewbrowse%' 
-									ORDER BY crew_name ASC")
+						WHERE crew_name LIKE '$crewbrowse%' 
+						ORDER BY crew_name ASC")
 			    	   or die ("Couldn't query Crew database");
 		
 		while  ($crew=mysql_fetch_array($sql_crew)) 
@@ -84,7 +82,7 @@ $smarty->assign('crew_select',
 }
 
 // set values for main edit of crew... change name etc
-if ($action=="main" or $action=="genealogy")
+if (isset($action) and ($action=="main" or $action=="genealogy"))
 {
 
 $smarty->assign('crew_action',
@@ -122,8 +120,6 @@ if (isset($action) and $action=="genealogy")
 			$query_temporary = mysql_query("SELECT * FROM temp ORDER BY ind_name ASC") or die("Failed to query temporary table");
 			mysql_query("DROP TABLE temp");
 			
-			/*$sql_individualgene = mysql_query("SELECT * FROM individuals ORDER BY ind_name")
-			    	   or die ("Couldn't query Individual database");*/
 			
 			$names = "newCat();";
 			$names2 = "<br>";
@@ -231,7 +227,7 @@ if (isset($action) and $action=="genealogy")
 }
 
 // If no choice has been made but a crew has been selected we should be brought to the crew main edit regardless
-if ($action=='')
+if (empty($action))
 {
 
 $action = "main";
