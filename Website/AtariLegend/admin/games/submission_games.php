@@ -22,8 +22,8 @@ Display submissions
 include("../includes/common.php");
 
 // get the total nr of submissions in the DB
-$query_total_number = $mysqli->query("SELECT count(*) FROM game_submitinfo") or die ("Couldn't get the total number of submissions");
-$v_rows_total = mysql_result($query_total_number,0,0) or die("Couldn't get the total number of submissions");
+$query_total_number = $mysqli->query("SELECT * FROM game_submitinfo") or die ("Couldn't get the total number of submissions");
+$v_rows_total = $query_total_number->num_rows;
 $smarty->assign('total_nr_submissions', $v_rows_total);
 
 //$v_counter = (isset($_GET['v_counter']) ? $_GET['v_counter'] : 0);
@@ -60,17 +60,17 @@ $smarty->assign('total_nr_submissions', $v_rows_total);
 										DESC LIMIT  " . $v_counter . ", 25");
 										
 				//check the number of comments
-				$query_number = $mysqli->query("SELECT count(*) FROM game_submitinfo 
+				$query_number = $mysqli->query("SELECT * FROM game_submitinfo 
 											 WHERE game_done <> '1' 
 											 ORDER BY game_submitinfo_id DESC") 
 											 or die("Couldn't get the number of game submissions");
 									 
-				$v_rows = mysql_result($query_number,0,0);
+				$v_rows = $query_number->num_rows;
 
 		}
 		
 										
-		$number_sub = $sql_submission->num_rows();
+		$number_sub = $sql_submission->num_rows;
 	
 		while ($query_submission = $sql_submission->fetch_array(MYSQLI_BOTH))  
 		{
@@ -93,15 +93,15 @@ $smarty->assign('total_nr_submissions', $v_rows_total);
 	}
 	
 	// Retrive userstats from database
-	$query_user = $mysqli->query("SELECT count(*)
+	$query_user = $mysqli->query("SELECT *
 							   FROM game_user_comments
 							   LEFT JOIN comments ON ( game_user_comments.comment_id = comments.comments_id )
 							   WHERE user_id = " .$query_submission['user_id']."");
-	$usercomment_number = mysql_result($query_user,0,0);
+	$usercomment_number = $query_user->num_rows;
 	
-	$query_submitinfo = $mysqli->query("SELECT count(*) FROM game_submitinfo WHERE user_id = ".$query_submission['user_id']."") 
+	$query_submitinfo = $mysqli->query("SELECT * FROM game_submitinfo WHERE user_id = ".$query_submission['user_id']."") 
 						or die ("Could not count user submissions");
-	$usersubmit_number = mysql_result($query_submitinfo,0,0);
+	$usersubmit_number = $query_submitinfo->num_rows;
 	
 	
 			//Get the dataElements we want to place on screen
