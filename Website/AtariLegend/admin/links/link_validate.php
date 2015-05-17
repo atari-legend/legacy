@@ -23,7 +23,7 @@ include("../includes/common.php");
 $sql = "SELECT * FROM website_validate
 		LEFT JOIN users ON (website_validate.user_id = users.user_id)";
 
-$result = mysql_query($sql) or die("couldn't query website_validate");
+$result = $mysqli->query($sql) or die("couldn't query website_validate");
 
 if (get_rows($result)<1)
 
@@ -41,22 +41,22 @@ if (get_rows($result)<1)
 else
 	{
 
- while ($valrow = mysql_fetch_array($result))
+ while ($valrow = $result->fetch_array(MYSQLI_BOTH))
  		{
 		
-		$link_sub = get_rows(mysql_query("SELECT website_user_sub FROM website WHERE website_user_sub='$valrow[user_id]'"));
+		$link_sub = get_rows($mysqli->query("SELECT website_user_sub FROM website WHERE website_user_sub='$valrow[user_id]'"));
 		
-		$website_date = convert_timestamp($valrow[website_date]); 
-		$user_name = get_username_from_id($valrow[user_id]);
+		$website_date = convert_timestamp($valrow['website_date']); 
+		$user_name = get_username_from_id($valrow['user_id']);
 				
 				$smarty->append('validate',
-	    			array('website_id' => $valrow[website_id],
-						  'website_name' => $valrow[website_name],
-						  'website_url' => $valrow[website_url],
+	    			array('website_id' => $valrow['website_id'],
+						  'website_name' => $valrow['website_name'],
+						  'website_url' => $valrow['website_url'],
 						  'website_date' => $website_date,
-						  'website_category' => $valrow[website_category],
-						  'website_description' => $valrow[website_description],
-						  'user_email' => $valrow[email],
+						  'website_category' => $valrow['website_category'],
+						  'website_description' => $valrow['website_description'],
+						  'user_email' => $valrow['email'],
 						  'link_sub' => $link_sub,
 						  'user_name' => $user_name));
 		}
@@ -64,14 +64,14 @@ else
 	$sql_cat = "SELECT website_category_id,website_category_name FROM website_category
 				ORDER BY website_category_name";
 
-		$result_cat = mysql_query($sql_cat) or die("couldn't query website_category");
+		$result_cat = $mysqli->query($sql_cat) or die("couldn't query website_category");
 	
-			while ($row_cat = mysql_fetch_array($result_cat))
+			while ($row_cat = $result_cat->fetch_array(MYSQLI_BOTH))
 				{
 				
 				$smarty->append('category',
-	    			array('website_category_id' => $row_cat[website_category_id],
-						  'website_category_name' => $row_cat[website_category_name]));
+	    			array('website_category_id' => $row_cat['website_category_id'],
+						  'website_category_name' => $row_cat['website_category_name']));
 				}
 	
 	$smarty->assign('link_validate_tpl', '1');

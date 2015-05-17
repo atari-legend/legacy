@@ -255,7 +255,7 @@ querystring for faster output
 		$RESULTGAME .= ' ORDER BY game_name ASC';
 		
 
-		$games = mysql_query($RESULTGAME);
+		$games = $mysqli->query($RESULTGAME);
 		
 		if (empty($games))		
 		{
@@ -266,7 +266,7 @@ querystring for faster output
 		}
 		else
 		{
-			$rows = mysql_num_rows($games);
+			$rows = get_rows($games);
 			if ( $rows > 0 )
 			{	
 				
@@ -337,14 +337,14 @@ querystring for faster output
 				$RESULTAKA .= ' ORDER BY game_aka.aka_name ASC';
 
 
-				mysql_query("CREATE TEMPORARY TABLE temp ENGINE=MEMORY $RESULTGAME") or die(mysql_error());
-				mysql_query("INSERT INTO temp $RESULTAKA") or die("does not compute2");
+				$mysqli->query("CREATE TEMPORARY TABLE temp ENGINE=MEMORY $RESULTGAME") or die(mysqli_error());
+				$mysqli->query("INSERT INTO temp $RESULTAKA") or die("does not compute2");
 
-				$temp_query = mysql_query("SELECT * FROM temp ORDER BY game_name ASC") or die("does not compute3");
+				$temp_query = $mysqli->query("SELECT * FROM temp ORDER BY game_name ASC") or die("does not compute3");
 				
 				$i = 0;
 				
-				while ( $sql_game_search = mysql_fetch_assoc($temp_query) ) 
+				while ( $sql_game_search = $temp_query->fetch_array(MYSQLI_BOTH) ) 
 				{  
 				      $i++;
 					  
@@ -370,11 +370,11 @@ querystring for faster output
 				$smarty->assign("nr_of_games",$i);
 				$smarty->assign("query_time",$time_elapsed_secs);
 				
-				mysql_query("DROP TABLE temp") or die("does not compute4");
+				$mysqli->query("DROP TABLE temp") or die("does not compute4");
 				
 		//Get the companies to fill the search fields
 		//Get publisher values to fill the searchfield
-		$sql_publisher = mysql_query("SELECT pub_dev.pub_dev_id,
+		$sql_publisher = $mysqli->query("SELECT pub_dev.pub_dev_id,
 							pub_dev.pub_dev_name
 							FROM game_publisher
 							LEFT JOIN pub_dev ON (game_publisher.pub_dev_id = pub_dev.pub_dev_id)
@@ -382,7 +382,7 @@ querystring for faster output
 							ORDER BY pub_dev.pub_dev_name ASC") 
 								or die("Problems retriving values from publishers.")or die("error publisher");
 		
-		while ($company_publisher = mysql_fetch_assoc($sql_publisher))
+		while ($company_publisher = $sql_publisher->fetch_array(MYSQLI_BOTH))
 		{
 		
 			$smarty->append('company_publisher',
@@ -392,7 +392,7 @@ querystring for faster output
 		}
 		
 		//Get Developer values to fill the searchfield
-		$sql_developer = mysql_query("SELECT pub_dev.pub_dev_id,
+		$sql_developer = $mysqli->query("SELECT pub_dev.pub_dev_id,
 							pub_dev.pub_dev_name
 							FROM game_developer
 							LEFT JOIN pub_dev ON (game_developer.dev_pub_id = pub_dev.pub_dev_id)
@@ -400,7 +400,7 @@ querystring for faster output
 							ORDER BY pub_dev.pub_dev_name ASC") 
 								or die("Problems retriving values from developers.");
 		
-		while ($company_developer = mysql_fetch_assoc($sql_developer))
+		while ($company_developer = $sql_developer->fetch_array(MYSQLI_BOTH))
 		{
 		
 			$smarty->append('company_developer',
@@ -427,6 +427,4 @@ querystring for faster output
 		}
 	}
 
-//close the connection
-mysql_close();
 ?>

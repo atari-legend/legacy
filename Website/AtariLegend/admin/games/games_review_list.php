@@ -78,7 +78,7 @@ if (isset($action) and $action == 'search')
 		$RESULTGAME .= "game.game_name LIKE '%$gamesearch%'"; 
 		$RESULTGAME .= ' ORDER BY game.game_name ASC';
 		
-		$games = mysql_query($RESULTGAME);
+		$games = $mysqli->query($RESULTGAME);
 		
 		if (!$games)
 		{
@@ -86,18 +86,18 @@ if (isset($action) and $action == 'search')
 		}
 		else
 		{
-			$rows = mysql_num_rows($games);
+			$rows = $games->num_rows;
 			if ( $rows > 0 )
 			{	if (empty($i)) {$i = 0;}
-				while ( $row=mysql_fetch_assoc($games) ) 
+				while ($row = $games->fetch_array(MYSQLI_BOTH)) 
 				{  
 					$i++;
 				
 					//check how many reviews there are for the game
-					$number_revs = mysql_query("SELECT count(*) as count FROM review_game WHERE game_id='$row[game_id]'")
+					$number_revs = $mysqli->query("SELECT count(*) as count FROM review_game WHERE game_id='$row[game_id]'")
 				    			  or die ("couldn't get number of reviews");
 				
-					$array = mysql_fetch_array($number_revs);
+					$array = $number_revs->fetch_array(MYSQLI_BOTH);
 				
 					$smarty->append('review',
 	   			 	 array('game_id' => $row['game_id'],

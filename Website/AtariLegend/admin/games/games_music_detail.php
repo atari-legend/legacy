@@ -29,17 +29,17 @@ if(isset($music_id))
 	{
 		//get the extension 
 
-		$MUSIC = mysql_query("SELECT * FROM music
+		$MUSIC = $mysqli->query("SELECT * FROM music
 	   			   		      WHERE music_id = '$music'")
 				 or die ("Database error - selecting screenshots");
 		
-		$musicrow = mysql_fetch_array($MUSIC);
+		$musicrow = $MUSIC->fetch_array(MYSQLI_BOTH);
 		$music_ext = $musicrow['imgext'];
 
-		$sql = mysql_query("DELETE FROM music WHERE music_id = '$music' ") or die ("error deleting music");
-		$sql = mysql_query("DELETE FROM game_music WHERE music_id = '$music' ")  or die ("error deleting game_music");
-		$sql = mysql_query("DELETE FROM music_author WHERE music_id = '$music' ")  or die ("error deleting music_author");
-		$sql = mysql_query("DELETE FROM music_types WHERE music_id = '$music' ")  or die ("error deleting music_types");
+		$sql = $mysqli->query("DELETE FROM music WHERE music_id = '$music' ") or die ("error deleting music");
+		$sql = $mysqli->query("DELETE FROM game_music WHERE music_id = '$music' ")  or die ("error deleting game_music");
+		$sql = $mysqli->query("DELETE FROM music_author WHERE music_id = '$music' ")  or die ("error deleting music_author");
+		$sql = $mysqli->query("DELETE FROM music_types WHERE music_id = '$music' ")  or die ("error deleting music_types");
 
 		$new_path = $music_game_path;
 		$new_path .= $music;
@@ -53,10 +53,10 @@ if(isset($music_id))
 
 if (isset($action) and $action == 'play_music')
 {
-	$query_music = mysql_query("SELECT * FROM music 
+	$query_music = $mysqli->query("SELECT * FROM music 
 							WHERE music.music_id='$music_id'");
 							
-	$sql_music = mysql_fetch_array($query_music);
+	$sql_music = $query_music->fetch_array(MYSQLI_BOTH);
 
 	$filename="$music_game_path$sql_music[music_id].$sql_music[imgext]";
 
@@ -97,12 +97,12 @@ if (isset($action) and $action == 'pick_composer')
 		$smarty->assign('action', 'pick_composer');
 	
 		//We need to get all the info of this game. 
-		$SQL_IND = mysql_query("SELECT *
+		$SQL_IND = $mysqli->query("SELECT *
 							   	 FROM individuals
 						         WHERE ind_id='$individuals'")
 			        or die ("Error getting ind name");
 	
-		while ( $IND=mysql_fetch_assoc($SQL_IND) ) 
+		while ( $IND=$SQL_IND->fetch_array(MYSQLI_BOTH) ) 
 		{  
 			$smarty->assign('ind_selected',
 		  	 		 array( 'ind_id'  => $IND['ind_id'],
@@ -138,34 +138,34 @@ foreach($image['tmp_name'] as $key=>$tmp_name)
 		
 		{
 		// First we insert extension of the file... this also creates an autoinc number for us.
-		$sdbquery = mysql_query("INSERT INTO music (music_id,imgext,mime_type) VALUES ('','$ext','$mime_type')")
+		$sdbquery = $mysqli->query("INSERT INTO music (music_id,imgext,mime_type) VALUES ('','$ext','$mime_type')")
 					or die ("Database error - inserting music_id");
 		
 		//select the newly entered music_id from the main table
-		$MUSIC = mysql_query("SELECT music_id FROM music
+		$MUSIC = $mysqli->query("SELECT music_id FROM music
 	   					   	  ORDER BY music_id desc")
 				 or die ("Database error - selecting music_id");
 		
-		$musicrow = mysql_fetch_row($MUSIC);
+		$musicrow = $MUSIC->fetch_row();
 		$music_id = $musicrow[0];
 		
-		$sdbquery = mysql_query("INSERT INTO game_music (game_id,music_id) VALUES ('$game_id','$music_id')")
+		$sdbquery = $mysqli->query("INSERT INTO game_music (game_id,music_id) VALUES ('$game_id','$music_id')")
 					or die ("Database error - inserting music id");
 		
 		// Insert the author id
 		
-		$sdbquery = mysql_query("INSERT INTO music_author (music_id,ind_id) VALUES ('$music_id','$ind_id')")
+		$sdbquery = $mysqli->query("INSERT INTO music_author (music_id,ind_id) VALUES ('$music_id','$ind_id')")
 					or die ("Database error - couldn't insert author id");
 		
 		// Get the type id and insert it into the music type table
-		$typequery = mysql_query("SELECT music_types_main_id FROM music_types_main WHERE extention='$ext'") 
+		$typequery = $mysqli->query("SELECT music_types_main_id FROM music_types_main WHERE extention='$ext'") 
 					 or die ("Database error - selecting music_id");
 		
-		$typerow = mysql_fetch_row($typequery);
+		$typerow = $typequery->fetch_row();
 		$type_id = $typerow[0];
 		
 		// Insert the type id
-		$sdbquery = mysql_query("INSERT INTO music_types (music_types_main_id,music_id) VALUES ('$type_id','$music_id')")
+		$sdbquery = $mysqli->query("INSERT INTO music_types (music_types_main_id,music_id) VALUES ('$type_id','$music_id')")
 					or die ("Database error - inserting type id");
 		
 		// Rename the uploaded file to its autoincrement number and move it to its proper place.
@@ -184,13 +184,13 @@ foreach($image['tmp_name'] as $key=>$tmp_name)
 }
 
 //We need to get all the info of this game. 
-$SQL_GAME = mysql_query("SELECT game_name, 
+$SQL_GAME = $mysqli->query("SELECT game_name, 
 						   game.game_id
 						   FROM game 
 					       WHERE game.game_id='$game_id'")
 		      or die ("Error getting game info");
 			
-while ( $GAME=mysql_fetch_assoc($SQL_GAME) ) 
+while ( $GAME=$SQL_GAME->fetch_array(MYSQLI_BOTH) ) 
 {  
 	$smarty->assign('game',
 	   		 array('game_id' => $GAME['game_id'],
@@ -198,7 +198,7 @@ while ( $GAME=mysql_fetch_assoc($SQL_GAME) )
 }
 
 //get the music info
-$sql_music = mysql_query("SELECT * FROM game_music 
+$sql_music = $mysqli->query("SELECT * FROM game_music 
 							LEFT JOIN music ON (game_music.music_id = music.music_id)
 							LEFT JOIN music_author ON (music.music_id = music_author.music_id)
 							LEFT JOIN individuals ON (music_author.ind_id = individuals.ind_id)
@@ -206,7 +206,7 @@ $sql_music = mysql_query("SELECT * FROM game_music
 							LEFT JOIN music_types_main ON (music_types.music_types_main_id = music_types_main.music_types_main_id)
 							WHERE game_music.game_id='$game_id'");
 $i = 0;
-while ( $MUSIC=mysql_fetch_assoc($sql_music) ) 
+while ( $MUSIC=$sql_music->fetch_array(MYSQLI_BOTH) ) 
 { 		
 	$i++;
 	
@@ -220,16 +220,16 @@ while ( $MUSIC=mysql_fetch_assoc($sql_music) )
 $smarty->assign('nr_of_zaks', $i);
 
 //get the individuals
-//$sql_author = mysql_query("SELECT * FROM individuals ORDER BY ind_name ASC");
+//$sql_author = $mysqli->query("SELECT * FROM individuals ORDER BY ind_name ASC");
 
-//while ( $IND=mysql_fetch_array($sql_author) ) 
+//while ( $IND=$sql_author->fetch_array(MYSQLI_BOTH) ) 
 //{ 		
 //	$smarty->append('ind',
 //	   		 array('ind_id' => $IND[ind_id],
 //				   'ind_name' => $IND[ind_name]));
 //}
 
-$SQL_MUSICIAN = mysql_query("SELECT *
+$SQL_MUSICIAN = $mysqli->query("SELECT *
 						   FROM game_author
 						   LEFT JOIN author_type ON ( game_author.author_type_id = author_type.author_type_id )
 					       LEFT JOIN game ON ( game_author.game_id = game.game_id )
@@ -239,7 +239,7 @@ $SQL_MUSICIAN = mysql_query("SELECT *
 		      or die ("Error getting game musician");
 $i = 0;
 
-while ( $MUSICIAN=mysql_fetch_assoc($SQL_MUSICIAN) ) 
+while ( $MUSICIAN=$SQL_MUSICIAN->fetch_array(MYSQLI_BOTH) ) 
 {  
 	$i++;
 	

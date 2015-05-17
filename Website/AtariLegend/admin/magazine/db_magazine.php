@@ -26,7 +26,7 @@ if(isset($action) and $action=="insert_magazine")
 // This is where we insert the magazine name into the database
 //**************************************************************************************** 
 
-mysql_query("INSERT INTO magazine (magazine_name) VALUES ('$newmag')")
+$mysqli->query("INSERT INTO magazine (magazine_name) VALUES ('$newmag')")
 			or die("Unable to insert magazine into database");  
 
 // Redirect back to previous page
@@ -45,7 +45,7 @@ if(isset($action) and $action=="add_issue")
 if(isset($newissue) and isset($magazine_id)) 
 {
 
-	mysql_query("INSERT INTO magazine_issue (magazine_issue_nr,magazine_id) VALUES ('$newissue','$magazine_id')"); 
+	$mysqli->query("INSERT INTO magazine_issue (magazine_issue_nr,magazine_id) VALUES ('$newissue','$magazine_id')"); 
 	
 	mysql_close(); 
 }
@@ -63,11 +63,11 @@ if(isset($action) and $action=="delete_issue")
 // This is where we delete issue
 //**************************************************************************************** 
 
-$sqldel = mysql_query("SELECT * FROM magazine_issue WHERE magazine_issue_id='$magazine_issue_id'") or die ("Error retriving magazines");
-		$fetchdel = mysql_fetch_array($sqldel);
+$sqldel = $mysqli->query("SELECT * FROM magazine_issue WHERE magazine_issue_id='$magazine_issue_id'") or die ("Error retriving magazines");
+		$fetchdel = $sqldel->fetch_array(MYSQLI_BOTH);
 		
-		$do_delete = mysql_query("DELETE FROM magazine_issue WHERE magazine_issue_id='$magazine_issue_id'") or die("couldn't delete issue!");
-		$do_delete = mysql_query("DELETE FROM magazine_game WHERE magazine_issue_id='$magazine_issue_id'") or die("couldn't delete score!");
+		$do_delete = $mysqli->query("DELETE FROM magazine_issue WHERE magazine_issue_id='$magazine_issue_id'") or die("couldn't delete issue!");
+		$do_delete = $mysqli->query("DELETE FROM magazine_game WHERE magazine_issue_id='$magazine_issue_id'") or die("couldn't delete score!");
 		
 		//remove potential coverscan
 		
@@ -94,7 +94,7 @@ if(isset($action) and $action=="coverscan_upload")
       	$imgext="jpg";
 	  	
 		// Insert the image extention to the database.
-		$sdbquery = mysql_query("UPDATE magazine_issue SET magazine_issue_imgext='$imgext' WHERE magazine_issue_id='$magazine_issue_id'")
+		$sdbquery = $mysqli->query("UPDATE magazine_issue SET magazine_issue_imgext='$imgext' WHERE magazine_issue_id='$magazine_issue_id'")
 		or die("ERROR! Couldn't insert extension");
 		
 		
@@ -120,8 +120,8 @@ if(isset($action) and $action=="delete_coverscan")
 // This is where we delete coverscans
 //**************************************************************************************** 
 
-$sqldel = mysql_query("SELECT * FROM magazine_issue WHERE magazine_issue_id='$magazine_issue_id'") or die ("Error retriving magazines");
-		$fetchdel = mysql_fetch_array($sqldel);
+$sqldel = $mysqli->query("SELECT * FROM magazine_issue WHERE magazine_issue_id='$magazine_issue_id'") or die ("Error retriving magazines");
+		$fetchdel = $sqldel->fetch_array(MYSQLI_BOTH);
 		
 		//remove coverscan
 		
@@ -130,7 +130,7 @@ $sqldel = mysql_query("SELECT * FROM magazine_issue WHERE magazine_issue_id='$ma
 				unlink ("$magazine_scan_path$magazine_issue_id.$fetchdel[magazine_issue_imgext]");
 			}
 			
-			$sdbquery = mysql_query("UPDATE magazine_issue SET magazine_issue_imgext='' WHERE magazine_issue_id='$magazine_issue_id'")
+			$sdbquery = $mysqli->query("UPDATE magazine_issue SET magazine_issue_imgext='' WHERE magazine_issue_id='$magazine_issue_id'")
 			or die("ERROR! Couldn't delete extension");
 			
 
@@ -148,7 +148,7 @@ if(isset($action) and $action=="score_delete")
 // This is where we delete review scores
 //**************************************************************************************** 
 
-$do_delete = mysql_query("DELETE FROM magazine_game WHERE magazine_game_id='$magazine_game_id'") or die("couldn't delete score!");
+$do_delete = $mysqli->query("DELETE FROM magazine_game WHERE magazine_game_id='$magazine_game_id'") or die("couldn't delete score!");
 
 mysql_close();
 
@@ -167,7 +167,7 @@ if(isset($action) and $action=="set_score")
 if (isset($score))
 		{
 		
-		mysql_query("INSERT INTO magazine_game (magazine_issue_id,game_id,score) VALUES ('$magazine_issue_id','$game_id','$score')") 
+		$mysqli->query("INSERT INTO magazine_game (magazine_issue_id,game_id,score) VALUES ('$magazine_issue_id','$game_id','$score')") 
 		or die("Couldn't update the magazine table");
 		}
 

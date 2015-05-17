@@ -23,10 +23,10 @@ if ( isset($action) and $action == 'delete_logo' )
 {
 	
 	$sql = "SELECT pub_dev_imgext FROM pub_dev_text WHERE pub_dev_id='$comp_id'";
-	$pub_dev_query = mysql_query($sql);
-	list ($pub_dev_imgext) = mysql_fetch_row($pub_dev_query);
+	$pub_dev_query = $mysqli->query($sql);
+	list ($pub_dev_imgext) = $pub_dev_query->fetch_array(MYSQLI_BOTH); 
 
-	mysql_query("UPDATE pub_dev_text SET pub_dev_imgext='' WHERE pub_dev_id='$comp_id'");
+	$mysqli->query("UPDATE pub_dev_text SET pub_dev_imgext='' WHERE pub_dev_id='$comp_id'");
 	unlink ("$company_screenshot_path$comp_id.$pub_dev_imgext");
 
 header("Location: ../company/company_edit.php?comp_id=$comp_id");
@@ -71,17 +71,17 @@ if ( isset($action) and $action == 'add_logo' )
 		 	{
 			
        			// Rename the uploaded file to its autoincrement number and move it to its proper place.
-	  			 $query = mysql_query("SELECT * FROM pub_dev_text WHERE pub_dev_id='$comp_id'");
+	  			 $query = $mysqli->query("SELECT * FROM pub_dev_text WHERE pub_dev_id='$comp_id'");
 	   
 	  			 $num_row = get_rows($query);
 	   
 	 			  if ( $num_row==0 )
 	   			  {
-	   			  	mysql_query("INSERT INTO pub_dev_text (pub_dev_id,pub_dev_imgext) VALUES ('$comp_id','$ext')");
+	   			  	$mysqli->query("INSERT INTO pub_dev_text (pub_dev_id,pub_dev_imgext) VALUES ('$comp_id','$ext')");
 	 			  }
 	   			  else
 	     	      {
-	  	 			 mysql_query("UPDATE pub_dev_text SET pub_dev_imgext='$ext' WHERE pub_dev_id='$comp_id'");
+	  	 			 $mysqli->query("UPDATE pub_dev_text SET pub_dev_imgext='$ext' WHERE pub_dev_id='$comp_id'");
 	   			  }
 	   
 	  			  $file_data = rename("$tmp_name", "$company_screenshot_path$comp_id.$ext");
@@ -97,23 +97,23 @@ header("Location: ../company/company_edit.php?comp_id=$comp_id");
 //update the info of the individual
 if ( isset($action) and $action == 'update' )
 {
-	$sdbquery = mysql_query("UPDATE pub_dev SET pub_dev_name = '$comp_name' WHERE pub_dev_id = $comp_id")
+	$sdbquery = $mysqli->query("UPDATE pub_dev SET pub_dev_name = '$comp_name' WHERE pub_dev_id = $comp_id")
 				or die("Couldn't Update into pub_dev");
 			
-	$COMPANYtext = mysql_query("SELECT pub_dev_id FROM pub_dev_text 
+	$COMPANYtext = $mysqli->query("SELECT pub_dev_id FROM pub_dev_text 
 								WHERE pub_dev_id = $comp_id")
 			  or die ("Database error - selecting pub_dev_text");
 		
-	$pubdevrowtext = mysql_numrows($COMPANYtext);
+	$pubdevrowtext = get_rows($COMPANYtext);
 
 	if ( $pubdevrowtext < 1 )
 	{
-		$sdbquery = mysql_query("INSERT INTO pub_dev_text (pub_dev_id, pub_dev_profile) VALUES ($comp_id, '$textfield')") 
+		$sdbquery = $mysqli->query("INSERT INTO pub_dev_text (pub_dev_id, pub_dev_profile) VALUES ($comp_id, '$textfield')") 
 					or die("Couldn't insert into pub_dev_text");
 	}
 	else
 	{
-		$sdbquery = mysql_query("UPDATE pub_dev_text SET pub_dev_profile = '$textfield' WHERE pub_dev_id = $comp_id")
+		$sdbquery = $mysqli->query("UPDATE pub_dev_text SET pub_dev_profile = '$textfield' WHERE pub_dev_id = $comp_id")
 					or die("Couldn't Update into pub_dev_text");
 	}
 	
@@ -129,18 +129,18 @@ if ( $action == 'delete_comp' )
 {	
 	// Here we delete the company image
 	$sql = "SELECT pub_dev_imgext FROM pub_dev_text WHERE pub_dev_id='$comp_id'";
-	$pub_dev_query = mysql_query($sql);
-	list ($pub_dev_imgext) = mysql_fetch_row($pub_dev_query);
+	$pub_dev_query = $mysqli->query($sql);
+	list ($pub_dev_imgext) = $pub_dev_query->fetch_array(MYSQLI_BOTH); 
 	
 	if ( $pub_dev_imgext <> '' )
 	{
 		unlink ("$company_screenshot_path$comp_id.$pub_dev_imgext");
 	}
 	
-	$sql = mysql_query("DELETE FROM pub_dev WHERE pub_dev_id = '$comp_id'");
-	$sql = mysql_query("DELETE FROM pub_dev_text WHERE pub_dev_id = '$comp_id'");
-	$sql = mysql_query("DELETE FROM game_developer WHERE dev_pub_id = '$comp_id'");
-	$sql = mysql_query("DELETE FROM game_publisher WHERE pub_dev_id = '$comp_id'");
+	$sql = $mysqli->query("DELETE FROM pub_dev WHERE pub_dev_id = '$comp_id'");
+	$sql = $mysqli->query("DELETE FROM pub_dev_text WHERE pub_dev_id = '$comp_id'");
+	$sql = $mysqli->query("DELETE FROM game_developer WHERE dev_pub_id = '$comp_id'");
+	$sql = $mysqli->query("DELETE FROM game_publisher WHERE pub_dev_id = '$comp_id'");
 
 	$message = "Company succesfully deleted";
 	$smarty->assign("message",$message);
@@ -160,18 +160,18 @@ if ( $action == "insert_comp" )
 	}
 	else
 	{
-		$sql = mysql_query("INSERT INTO pub_dev (pub_dev_name) VALUES ('$comp_name')");  
+		$sql = $mysqli->query("INSERT INTO pub_dev (pub_dev_name) VALUES ('$comp_name')");  
 
 		//get the id of the inserted individual
-		$COMPANY = mysql_query("SELECT pub_dev_id FROM pub_dev
+		$COMPANY = $mysqli->query("SELECT pub_dev_id FROM pub_dev
 	   					    	ORDER BY pub_dev_id desc")
 				  or die ("Database error - selecting company");
 		
-		$pubdevrow = mysql_fetch_row($COMPANY);
+		$pubdevrow = $COMPANY->fetch_row();
 
 		$id = $pubdevrow[0];	
 
-		$sdbquery = mysql_query("INSERT INTO pub_dev_text (pub_dev_id, pub_dev_profile) VALUES ($id, '$textfield')") 
+		$sdbquery = $mysqli->query("INSERT INTO pub_dev_text (pub_dev_id, pub_dev_profile) VALUES ($id, '$textfield')") 
 					or die("Couldn't insert into pub_dev_text");
 
 		$message = "Company succesfully inserted";

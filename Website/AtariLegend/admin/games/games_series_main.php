@@ -25,10 +25,10 @@ include("../includes/common.php");
 	
 	
 				
-				$sql_series = mysql_query("SELECT * FROM game_series ORDER BY game_series_name ASC")
+				$sql_series = $mysqli->query("SELECT * FROM game_series ORDER BY game_series_name ASC")
 				 		    or die ("Couldn't query Game Series Database1");
 		
-				while  ($query_series = mysql_fetch_array ($sql_series)) 
+				while  ($query_series = $sql_series->fetch_array(MYSQLI_BOTH)) 
 				{  
 				   
 				  $smarty->append('game_series',
@@ -49,13 +49,13 @@ include("../includes/common.php");
 				
 			case 'series_editor' :
 				// Get the information of the selected gameseries	
-				$sql_series2 = mysql_query("SELECT * FROM game_series WHERE game_series_id='$game_series_id'")
+				$sql_series2 = $mysqli->query("SELECT * FROM game_series WHERE game_series_id='$game_series_id'")
 									or die ("Couldn't query Game Series Database2");
 
-								$query_series2 = mysql_fetch_array ($sql_series2);
+								$query_series2 = $sql_series2->fetch_array(MYSQLI_BOTH);
 				
 				// Check if there is a game linked to this series. For the list of games in a series
-				$sql_series_link = mysql_query("SELECT game.game_id,
+				$sql_series_link = $mysqli->query("SELECT game.game_id,
 							   game.game_name,
 							   game_publisher.pub_dev_id as 'publisher_id',
 							   pd1.pub_dev_name as 'publisher_name',
@@ -74,7 +74,7 @@ include("../includes/common.php");
 								WHERE game_series_cross.game_series_id='$game_series_id' ORDER BY game.game_name")
 				 		   		 	or die ("Couldn't query Game Series Database3");
 				// check how many games is linked to a particular series
-				$sql_series_link_nr = mysql_num_rows($sql_series_link);
+				$sql_series_link_nr = $sql_series_link->num_rows;
 				
 				$smarty->assign('series_info',
 	    			array('game_series_id' => $query_series2['game_series_id'],
@@ -82,7 +82,7 @@ include("../includes/common.php");
 						  'sql_series_link_nr' => $sql_series_link_nr,
 						  'series_page' => $series_page));
 				
-				while  ($query_series_link = mysql_fetch_array ($sql_series_link)) 
+				while  ($query_series_link = $sql_series_link->fetch_array(MYSQLI_BOTH)) 
 				{ 		// This smarty is used for creating the list of games contained within a game series
 						$smarty->append('series_link',
 	    				array('game_id' => $query_series_link['game_id'],
@@ -101,10 +101,10 @@ include("../includes/common.php");
 				
 			case 'addgames_series' :
 				// Get the information of the selected gameseries	
-				$sql_series2 = mysql_query("SELECT * FROM game_series WHERE game_series_id='$game_series_id'")
+				$sql_series2 = $mysqli->query("SELECT * FROM game_series WHERE game_series_id='$game_series_id'")
 									or die ("Couldn't query Game Series Database4");
 
-								$query_series2 = mysql_fetch_array ($sql_series2);
+								$query_series2 = $sql_series2->fetch_array(MYSQLI_BOTH);
 				
 				// Do a simple gamesearch... no aka's or the likes of that.
 				
@@ -139,7 +139,7 @@ include("../includes/common.php");
 				$sql_build .= $gamebrowse_select;
 				$sql_build .= " GROUP BY game.game_name";
 
-				$sql_series_link = mysql_query($sql_build)
+				$sql_series_link = $mysqli->query($sql_build)
 				 		   		 	or die ("Couldn't query Game Series Database5 ($sql_build)");
 				
 				$smarty->assign('series_info',
@@ -147,7 +147,7 @@ include("../includes/common.php");
 						  'game_series_name' => $query_series2['game_series_name'],
 						  'series_page' => $series_page));
 				
-				while  ($query_series_link = mysql_fetch_array ($sql_series_link)) 
+				while  ($query_series_link = $sql_series_link->fetch_array(MYSQLI_BOTH)) 
 				{ 		// This smarty is used for creating the list of games contained within a game series
 						$smarty->append('series_link',
 	    				array('game_id' => $query_series_link['game_id'],
@@ -168,10 +168,10 @@ include("../includes/common.php");
 				
 				
 				// Get the information of the selected gameseries	
-				$sql_series2 = mysql_query("SELECT * FROM game_series WHERE game_series_id='$game_series_id'")
+				$sql_series2 = $mysqli->query("SELECT * FROM game_series WHERE game_series_id='$game_series_id'")
 									or die ("Couldn't query Game Series Database6");
 
-								$query_series2 = mysql_fetch_array ($sql_series2);
+								$query_series2 = $sql_series2->fetch_array(MYSQLI_BOTH);
 				
 				$smarty->assign('series_info',
 	    			array('series_page' => $series_page,

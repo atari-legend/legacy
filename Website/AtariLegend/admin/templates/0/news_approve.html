@@ -38,8 +38,8 @@
 	{foreach from=$news_submissions item=line}
 		<fieldset class="news_set">
 		<legend class="links_legend">
-			{if $line.user_email <> ''}
-				Written by <a href="mailto:{$line.user_email}?subject=Your newspost {$line.news_headline} at Atari Legend" class="MAINNAV">{$line.news_userid}</a> on {$line.news_date}
+			{if isset($line.user_email) and $line.user_email <> ''}
+				Written by <a href="mailto:{if isset($line.user_email)}{$line.user_email}{/if}?subject=Your newspost {$line.news_headline} at Atari Legend" class="MAINNAV">{$line.news_userid}</a> on {$line.news_date}
 			{else}
 				Written by {$line.news_userid} on {$line.news_date}
 			{/if}
@@ -54,7 +54,7 @@
 		</tr>
 		<tr>
 			<td width="20%" valign="top">
-				<img src="../includes/showimage.php?img={$line.news_icon}&amp;w=90&amp;shadow=1&amp;bgcolour=FFFFFF" alt="newsbutton">
+				<img src="../includes/show_image.php?file={$line.news_icon}&amp;resize=90,null,null,null" alt="newsbutton">
 			</td>
 			<td width="80%">
 				<i>{$line.news_text}</i>
@@ -63,9 +63,9 @@
 		<tr>
 			<td align="center" colspan="2">
 				<br>
-				<a href="news_approve.php?action=approve&amp;news_submission_id={$line.news_submission_id}" class="MAINNAV">APPROVE</a> :: 
+				<a href="db_news.php?action=approve_submission&amp;news_submission_id={$line.news_submission_id}" class="MAINNAV">APPROVE</a> :: 
 				<a href="news_edit.php?news_submission_id={$line.news_submission_id}" class="MAINNAV">EDIT</a> :: 
-				<a href="news_approve.php?action=delete&amp;news_submission_id={$line.news_submission_id}" class="MAINNAV">DELETE</a>
+				<a href="news_approve.php?action=delete_submission&amp;news_submission_id={$line.news_submission_id}" class="MAINNAV">DELETE</a>
 			</td>
 		</tr>
 		</table>

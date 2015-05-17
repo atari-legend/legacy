@@ -26,11 +26,11 @@ if($action=="update_submission")
 
 if (isset($submit_id))
 {
-		$commentquery = mysql_query("UPDATE demo_submitinfo SET demo_done = '1' WHERE demo_submitinfo_id='$submit_id'") or die("couldn't update demo_submissions quote");
+		$commentquery = $mysqli->query("UPDATE demo_submitinfo SET demo_done = '1' WHERE demo_submitinfo_id='$submit_id'") or die("couldn't update demo_submissions quote");
 		
-		$sql_user = mysql_query("SELECT user_id FROM demo_submitinfo WHERE demo_submitinfo_id='$submit_id'");
+		$sql_user = $mysqli->query("SELECT user_id FROM demo_submitinfo WHERE demo_submitinfo_id='$submit_id'");
 		
-		list($user_id) = mysql_fetch_array($sql_user);
+		list($user_id) = $sql_user->fetch_array(MYSQLI_BOTH);
 		$karma_action = "demo_submission";
 		
 		UserKarma($user_id,$karma_action);
@@ -52,7 +52,7 @@ if($action=="delete_submission")
 
 	if (isset($submit_id))
 	{
-		$sql = mysql_query("DELETE FROM demo_submitinfo WHERE demo_submitinfo_id = '$submit_id'") or die("couldn't delete demo_submissions quote");
+		$sql = $mysqli->query("DELETE FROM demo_submitinfo WHERE demo_submitinfo_id = '$submit_id'") or die("couldn't delete demo_submissions quote");
 	}
 
 

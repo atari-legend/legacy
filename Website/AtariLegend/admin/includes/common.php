@@ -42,9 +42,9 @@ if ($_SESSION['permission']!==1)
 
 $time_users = time() - (5*60);	
 
-	$query_onlineusers = mysql_query("SELECT userid, user_id FROM users WHERE last_visit > '$time_users'");
+	$query_onlineusers = $mysqli->query("SELECT userid, user_id FROM users WHERE last_visit > '$time_users'");
 
-while ($fetch_onlineusers = mysql_fetch_array($query_onlineusers))
+while ($fetch_onlineusers = $query_onlineusers->fetch_array(MYSQLI_BOTH))
 {
 
 $smarty->append('onlineusers',

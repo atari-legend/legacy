@@ -21,9 +21,9 @@ In this section we can add a new link to the DB
 include("../includes/common.php"); 
 
 
-	$RESULT=mysql_query("SELECT * FROM website_category ORDER BY website_category_name");
+	$RESULT=$mysqli->query("SELECT * FROM website_category ORDER BY website_category_name");
 	
-	while ($rowlinkcat=mysql_fetch_array($RESULT)) 
+	while ($rowlinkcat = $RESULT->fetch_array(MYSQLI_BOTH)) 
 	{ 
 		   			$smarty->append('website_category',
 	    			array('website_category_id' => $rowlinkcat['website_category_id'],

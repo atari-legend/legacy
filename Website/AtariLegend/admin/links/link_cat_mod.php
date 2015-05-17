@@ -21,7 +21,7 @@ In this section we modify links
 include("../includes/common.php");
 
 
-		$CATSQL = mysql_query("SELECT * FROM website_category
+		$CATSQL = $mysqli->query("SELECT * FROM website_category
 								WHERE website_category_id='$category_id'")
 				   or die ("Error while querying the category database");
 		
@@ -32,11 +32,11 @@ include("../includes/common.php");
 			  'category_id' => $rowcat['website_category_id']));
 	
 	// Do the category selector
-	$RESULT=mysql_query("SELECT * FROM website_category ORDER BY website_category_name");
+	$RESULT=$mysqli->query("SELECT * FROM website_category ORDER BY website_category_name");
 
 	$sel='';
 	
-	while ($rowlinkcat=mysql_fetch_array($RESULT)) 
+	while ($rowlinkcat=$RESULT->fetch_array(MYSQLI_BOTH)) 
 	{ 
 		$sel='';
 			if($rowcat['parent_category']==$rowlinkcat['website_category_id']) 

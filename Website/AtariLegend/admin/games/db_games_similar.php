@@ -20,7 +20,7 @@ include("../includes/common.php");
 //***********************************************************************************
 if (isset($action) and $action == 'delete_similar')
 {
-	$sql_aka = mysql_query("DELETE FROM game_similar WHERE game_similar_id = '$game_similar_id' AND game_id = '$game_id'") 
+	$sql_aka = $mysqli->query("DELETE FROM game_similar WHERE game_similar_id = '$game_similar_id' AND game_id = '$game_id'") 
 			   or die ("Couldn't delete similar game");
 		header("Location: ../games/games_similar.php?game_id=$game_id");
 }
@@ -30,7 +30,7 @@ if (isset($action) and $action == 'delete_similar')
 //***********************************************************************************
 if (isset($action) and $action == 'add_game_similar')
 {
-	$sql_aka = mysql_query("INSERT INTO game_similar (game_id, game_similar_cross) VALUES ('$game_id','$game_similar')")
+	$sql_aka = $mysqli->query("INSERT INTO game_similar (game_id, game_similar_cross) VALUES ('$game_id','$game_similar')")
  			   or die ("Couldn't insert similar game");
 		header("Location: ../games/games_similar.php?game_id=$game_id");
 }

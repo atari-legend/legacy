@@ -21,16 +21,16 @@ In this section of the site we can add game review score from magazines!
 include("../includes/common.php");
 		
 		// Get issue info
-		$sql = mysql_query("SELECT * FROM magazine_issue
+		$sql = $mysqli->query("SELECT * FROM magazine_issue
 							LEFT JOIN magazine ON (magazine.magazine_id = magazine_issue.magazine_id)
 							WHERE magazine_issue.magazine_issue_id='$magazine_issue_id' 
 							ORDER BY magazine_name, magazine_issue_nr ASC") or die ("Error retriving magazines issues");
 	
-		$fetch = mysql_fetch_array($sql);
+		$fetch = $sql->fetch_array(MYSQLI_BOTH);
 	
 	
 		// get game info
-		$fetchgame = mysql_fetch_array( mysql_query("SELECT * FROM game WHERE game_id='$game_id'"));
+		$fetchgame =  $mysqli->query("SELECT * FROM game WHERE game_id='$game_id'"->fetch_array(MYSQLI_BOTH));
 		
 				// Create smarty array
 					$smarty->assign('game',

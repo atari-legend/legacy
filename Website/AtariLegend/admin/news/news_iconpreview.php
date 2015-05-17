@@ -22,9 +22,9 @@ include("../includes/common.php");
 
 $count=1;
 
-$sql_images = mysql_query("SELECT * FROM news_image");
+$sql_images = $mysqli->query("SELECT * FROM news_image");
 	
-while ( $news_images = mysql_fetch_array($sql_images) )
+while ( $news_images = $sql_images->fetch_array(MYSQLI_BOTH) )
 {
 	$v_image  = $news_images_path;
 	$v_image .= $news_images['news_image_id'];

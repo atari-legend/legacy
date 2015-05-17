@@ -22,7 +22,7 @@ include("../includes/common.php");
 //Let's get the game info for the file name concatenation, and the download data for disks already
 //uploaded
 //************************************************************************************************
-$SQL_GAME_INFO = mysql_query("SELECT * FROM game 
+$SQL_GAME_INFO = $mysqli->query("SELECT * FROM game 
 							   LEFT JOIN game_publisher ON (game.game_id = game_publisher.game_id)
 							   LEFT JOIN pub_dev ON (game_publisher.pub_dev_id = pub_dev.pub_dev_id)
 							   LEFT JOIN game_year ON (game.game_id = game_year.game_id)
@@ -37,11 +37,11 @@ $smarty->assign('game',
 		 	   'game_name' => $game_info['game_name']));
 
 //get the existing downloads
-$SQL_DOWNLOADS = mysql_query("SELECT * FROM game_download WHERE game_id='$game_id'")
+$SQL_DOWNLOADS = $mysqli->query("SELECT * FROM game_download WHERE game_id='$game_id'")
 			  	 or die ("Error getting download info");		
 
 $nr_downloads = 1;
-while ($downloads=mysql_fetch_array($SQL_DOWNLOADS)) 
+while ($downloads=$SQL_DOWNLOADS->fetch_array(MYSQLI_BOTH)) 
 {
 	// first lets create the filenames
 	$filename = "$game_info[game_name]";

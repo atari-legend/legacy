@@ -35,7 +35,7 @@ if($action=="insert_crew")
 if(isset($new_crew)) 
 {
 
-		mysql_query("INSERT INTO crew (crew_name) VALUES ('$new_crew')"); 
+		$mysqli->query("INSERT INTO crew (crew_name) VALUES ('$new_crew')"); 
 
 
 	mysql_close(); 
@@ -90,7 +90,7 @@ if($action=="add_logo")
 		 	{
 			
        			// Rename the uploaded file to its autoincrement number and move it to its proper place.
-	  			 mysql_query("UPDATE crew SET crew_logo='$ext' WHERE crew_id='$crew_select'");
+	  			 $mysqli->query("UPDATE crew SET crew_logo='$ext' WHERE crew_id='$crew_select'");
 	   			
 	   
 	  			 $file_data = rename("$tmp_name", "$crew_logo_path$crew_select.$ext");
@@ -110,14 +110,14 @@ if($action=="delete_logo")
 // Delete Logo
 //**************************************************************************************** 
 			
-       			$sql_crew = mysql_query("SELECT crew_logo FROM crew
+       			$sql_crew = $mysqli->query("SELECT crew_logo FROM crew
 						WHERE crew_id = '$crew_select'")
 			    	   or die ("Couldn't query Crew database");
 					   
-				$crew=mysql_fetch_array($sql_crew);		
+				$crew=$sql_crew->fetch_array(MYSQLI_BOTH);		
 				
 				
-	  			 mysql_query("UPDATE crew SET crew_logo='' WHERE crew_id='$crew_select'");
+	  			 $mysqli->query("UPDATE crew SET crew_logo='' WHERE crew_id='$crew_select'");
 	   			
 				 unlink ("$crew_logo_path$crew_select.$crew[crew_logo]");
 
@@ -136,17 +136,17 @@ if($action=="delete_crew")
 	if (isset($crew_select))
 	{
 	
-		$sql_crew = mysql_query("SELECT crew_logo FROM crew
+		$sql_crew = $mysqli->query("SELECT crew_logo FROM crew
 						WHERE crew_id = '$crew_select'")
 			    	   or die ("Couldn't query Crew database");
 					   
-		$crew=mysql_fetch_array($sql_crew);
+		$crew=$sql_crew->fetch_array(MYSQLI_BOTH);
 	
 	
-		mysql_query("DELETE FROM crew WHERE crew_id='$crew_select'");
-		mysql_query("DELETE FROM sub_crew WHERE crew_id='$crew_select'");
-		mysql_query("DELETE FROM sub_crew WHERE parent_id='$crew_select'");
-		mysql_query("DELETE FROM crew_individual WHERE crew_id='$crew_select'");
+		$mysqli->query("DELETE FROM crew WHERE crew_id='$crew_select'");
+		$mysqli->query("DELETE FROM sub_crew WHERE crew_id='$crew_select'");
+		$mysqli->query("DELETE FROM sub_crew WHERE parent_id='$crew_select'");
+		$mysqli->query("DELETE FROM crew_individual WHERE crew_id='$crew_select'");
 	   			
 				 unlink ("$crew_logo_path$crew_select.$crew[crew_logo]");
 	}
@@ -163,15 +163,15 @@ if($action=="update_main_info")
 // update main crew info
 //**************************************************************************************** 
 			
-       			$sql_crew = mysql_query("SELECT * FROM crew
+       			$sql_crew = $mysqli->query("SELECT * FROM crew
 						WHERE crew_id = '$crew_select'")
 			    	   or die ("Couldn't query Crew database");
 					   
-				$crew=mysql_fetch_array($sql_crew);		
+				$crew=$sql_crew->fetch_array(MYSQLI_BOTH);		
 				
 				if ($crew_name !='')
 				{
-				mysql_query("UPDATE crew SET crew_name='$crew_name' WHERE crew_id='$crew_select'");
+				$mysqli->query("UPDATE crew SET crew_name='$crew_name' WHERE crew_id='$crew_select'");
 				}
 				
 				$textfield = trim($textfield);
@@ -179,7 +179,7 @@ if($action=="update_main_info")
 				if ($textfield !='')
 				{
 				$textfield = addslashes($textfield);
-				mysql_query("UPDATE crew SET crew_history='$textfield' WHERE crew_id='$crew_select'");
+				$mysqli->query("UPDATE crew SET crew_history='$textfield' WHERE crew_id='$crew_select'");
 				
 				}
 
@@ -196,7 +196,7 @@ if($action=="parent_crew")
 
 foreach($sub_crew as $value)
 {
-		mysql_query("INSERT INTO sub_crew (parent_id,crew_id) VALUES ('$crew_select','$value')");
+		$mysqli->query("INSERT INTO sub_crew (parent_id,crew_id) VALUES ('$crew_select','$value')");
 }
 
 header("Location: ../crew/crew_search.php?crew_select=$crew_select&crewsearch=$crewsearch&crewbrowse=$crewbrowse&action=genealogy");
@@ -212,7 +212,7 @@ if($action=="add_member")
 
 if(isset($ind_id))
 {
-		mysql_query("INSERT INTO crew_individual (crew_id,ind_id) VALUES ('$crew_select','$ind_id')");
+		$mysqli->query("INSERT INTO crew_individual (crew_id,ind_id) VALUES ('$crew_select','$ind_id')");
 }
 
 header("Location: ../crew/crew_search.php?crew_select=$crew_select&crewsearch=$crewsearch&crewbrowse=$crewbrowse&action=genealogy");
@@ -228,7 +228,7 @@ if($action=="delete_crew_member")
 
 if(isset($crew_individual_id))
 {
-		mysql_query("DELETE FROM crew_individual WHERE crew_individual_id='$crew_individual_id'");
+		$mysqli->query("DELETE FROM crew_individual WHERE crew_individual_id='$crew_individual_id'");
 
 }
 
@@ -245,7 +245,7 @@ if($action=="delete_subcrew")
 
 if(isset($sub_crew_id))
 {
-		mysql_query("DELETE FROM sub_crew WHERE sub_crew_id='$sub_crew_id'");
+		$mysqli->query("DELETE FROM sub_crew WHERE sub_crew_id='$sub_crew_id'");
 
 }
 
@@ -265,11 +265,11 @@ if(isset($individual_nicks_id) and isset($crew_individual_id))
 {
 	if ($individual_nicks_id == "-")
 	{
-		mysql_query("UPDATE crew_individual SET individual_nicks_id='' WHERE crew_individual_id='$crew_individual_id'") or die("Failed to remove nickname");
+		$mysqli->query("UPDATE crew_individual SET individual_nicks_id='' WHERE crew_individual_id='$crew_individual_id'") or die("Failed to remove nickname");
 	}
 	else
 	{
-		mysql_query("UPDATE crew_individual SET individual_nicks_id='$individual_nicks_id' WHERE crew_individual_id='$crew_individual_id'") or die("Failed to update nickname information");
+		$mysqli->query("UPDATE crew_individual SET individual_nicks_id='$individual_nicks_id' WHERE crew_individual_id='$crew_individual_id'") or die("Failed to update nickname information");
 	}
 }
 

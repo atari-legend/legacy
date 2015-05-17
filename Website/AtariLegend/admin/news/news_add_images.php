@@ -65,15 +65,15 @@ if(isset($news_image))
 		//exit;
 			
 			// Insert the description and the image into the news_image table.
-			$sdbquery = mysql_query("INSERT INTO news_image (news_image_name,news_image_ext) VALUES ('$image_name','$ext')")
+			$sdbquery = $mysqli->query("INSERT INTO news_image (news_image_name,news_image_ext) VALUES ('$image_name','$ext')")
 		 				or die("Couldn't insert image!");
 		
 			//select the newly created news_image_id from the news_image table
-			$NEWS = mysql_query("SELECT news_image_id FROM news_image
+			$NEWS = $mysqli->query("SELECT news_image_id FROM news_image
 	   					   		 ORDER BY news_image_id desc")
 					or die ("Database error - selecting news_image_id");
 		
-			$newsimagerow = mysql_fetch_row($NEWS);
+			$newsimagerow = $NEWS->fetch_row();
 		
 			// Rename the uploaded file to its autoincrement number and move it to its proper place.
 			$file_data = rename("$file_name_tmp", "$news_images_path$newsimagerow[0].$ext");

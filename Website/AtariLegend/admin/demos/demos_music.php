@@ -77,7 +77,7 @@ if (isset($action) and $action == 'search')
 		$RESULTDEMO .= "demo.demo_name LIKE '%$demosearch%'"; 
 		$RESULTDEMO .= ' ORDER BY demo.demo_name ASC';
 		
-		$demos = mysql_query($RESULTDEMO);
+		$demos = $mysqli->query($RESULTDEMO);
 		
 		if (!$demos)
 		{
@@ -85,19 +85,19 @@ if (isset($action) and $action == 'search')
 		}
 		else
 		{
-			$rows = mysql_num_rows($demos);
+			$rows = $demos->num_rows;
 			if ( $rows > 0 )
 			{
 				$i = 1;
-				while ( $row=mysql_fetch_assoc($demos) ) 
+				while ( $row=$demos->fetch_array(MYSQLI_BOTH) ) 
 				{  
 					$i++;
 				
 					//check how many muzaks there are for the game
-					$numberzaks = mysql_query("SELECT count(*) as count FROM demo_music WHERE demo_id='$row[demo_id]'")
+					$numberzaks = $mysqli->query("SELECT count(*) as count FROM demo_music WHERE demo_id='$row[demo_id]'")
 				    			  or die ("couldn't get number of zaks");
 				
-					$array = mysql_fetch_array($numberzaks);
+					$array = $numberzaks->fetch_array(MYSQLI_BOTH);
 				
 					$smarty->append('music',
 	   			 	 array('demo_id' => $row['demo_id'],

@@ -20,10 +20,10 @@ include("../includes/common.php");
 if (isset($reviewid) and isset($game_id))
 {
 //get the name of the game
-$sql_game = mysql_query("SELECT * FROM game WHERE game_id='$game_id'")
+$sql_game = $mysqli->query("SELECT * FROM game WHERE game_id='$game_id'")
 		or die ("Database error - getting game name");
 
-while ($game=mysql_fetch_array($sql_game)) 
+while ($game=$sql_game->fetch_array(MYSQLI_BOTH)) 
 { 
 	$smarty->assign('game',
 	    	 array('game_id' => $game_id,
@@ -31,10 +31,10 @@ while ($game=mysql_fetch_array($sql_game))
 }
 
 //Get the authors
-$sql_author = mysql_query("SELECT user_id,userid FROM users")
+$sql_author = $mysqli->query("SELECT user_id,userid FROM users")
 			  or die ("Database error - getting members name");
 
-while ( $authors=mysql_fetch_array($sql_author) )
+while ( $authors=$sql_author->fetch_array(MYSQLI_BOTH) )
 {
 	$smarty->append('authors',
 	   		 array('user_id' => $authors['user_id'],
@@ -42,13 +42,13 @@ while ( $authors=mysql_fetch_array($sql_author) )
 }
 
 //get the reviews of the game	
-$sql_review = mysql_query("SELECT * FROM review_game 
+$sql_review = $mysqli->query("SELECT * FROM review_game 
  					  	   LEFT JOIN review_main ON (review_game.review_id = review_main.review_id)
 	   					   LEFT JOIN users ON (review_main.member_id = users.user_id)
 	   					   WHERE review_game.game_id='$game_id' ORDER BY review_game.review_id")
 			  or die ("Database error - selecting review");
 $i=1;
-while ($review=mysql_fetch_array($sql_review)) 
+while ($review=$sql_review->fetch_array(MYSQLI_BOTH)) 
 {
 	
 	
@@ -60,7 +60,7 @@ $i++;
 }
 
 //get the actual edit review data
-$sql_edit_REVIEW = mysql_query("SELECT 
+$sql_edit_REVIEW = $mysqli->query("SELECT 
 							   member_id, 
 							   review_text, 
 							   review_date, 
@@ -77,7 +77,7 @@ $sql_edit_REVIEW = mysql_query("SELECT
 							   ORDER BY review_game.review_id")
 				   or die ("Database error - selecting review data");
 
-while ($edit_review=mysql_fetch_array($sql_edit_REVIEW)) 
+while ($edit_review=$sql_edit_REVIEW->fetch_array(MYSQLI_BOTH)) 
 {
 	
 	$review_text = stripslashes($edit_review['review_text']);
@@ -94,12 +94,12 @@ while ($edit_review=mysql_fetch_array($sql_edit_REVIEW))
 }
 
 //get the screenshots
-$sql_screenshots= mysql_query("SELECT * FROM screenshot_game WHERE game_id = '$game_id' ORDER BY screenshot_id ASC")
+$sql_screenshots= $mysqli->query("SELECT * FROM screenshot_game WHERE game_id = '$game_id' ORDER BY screenshot_id ASC")
 				  or die ("Database error - getting screenshots");
 
 $i=0;
 
-while ($screenshots=mysql_fetch_array($sql_screenshots)) 
+while ($screenshots=$sql_screenshots->fetch_array(MYSQLI_BOTH)) 
 {
 	$i++;
 	
@@ -108,12 +108,12 @@ while ($screenshots=mysql_fetch_array($sql_screenshots))
 	$v_screenshot .= '.';
 	$v_screenshot .= 'png';
 	
-	$sql_COMMENTS = mysql_query("SELECT review_comments.comment_text FROM screenshot_review
+	$sql_COMMENTS = $mysqli->query("SELECT review_comments.comment_text FROM screenshot_review
 								 LEFT JOIN review_comments on (screenshot_review.screenshot_review_id = review_comments.screenshot_review_id)
 			    				 WHERE screenshot_review.screenshot_id = '$screenshots[2]' AND screenshot_review.review_id = '$reviewid'")
 				    or die ("Database error - getting screenshots comments");
 				
-	$screencomment=mysql_fetch_array($sql_COMMENTS);
+	$screencomment=$sql_COMMENTS->fetch_array(MYSQLI_BOTH);
 
 	$smarty->append('screenshots',
 	    	 array('screenshot_id' => $screenshots['screenshot_id'],

@@ -20,65 +20,10 @@ In this section we can approve a news update.
 
 include("../includes/common.php");
 
-if (isset($action) and $action=="approve")
-{
-//****************************************************************************************
-// This is where we will approve the news. Deleting it from the submission table and adding 
-// it to the news page
-//**************************************************************************************** 	
-	include("../includes/functions_search.php");
-
-	$sql_submission = "SELECT
-					  news_headline,
-					  news_text,
-					  news_image_id,
-					  user_id,
-					  news_date
-					  FROM news_submission WHERE news_submission_id = '$news_submission_id'";
-					  
-	$query_submission = mysql_query($sql_submission) or die("Couldn't find the submitted news!");
-	
-	list($news_headline,$news_text,$news_image_id,$user_id,$news_date) = mysql_fetch_array($query_submission);
-	
-	$news_headline = addslashes($news_headline);
-	$news_text = addslashes($news_text);
-	
-	// Insert the news story.
-	mysql_query("INSERT INTO news (news_headline,news_text,news_image_id,user_id,news_date) VALUES ('$news_headline','$news_text','$news_image_id','$user_id','$news_date')")
-		or die ("DOES NOT COMPUTE...DOES NOT COMPUTE...DOES NOT COMPUTE");
-
-	mysql_query("DELETE FROM news_submission WHERE news_submission_id='$news_submission_id'")
-		or die ("Couldn't kill news_submission!!!");
-				
-	$NEWS = mysql_query("SELECT news_id FROM news ORDER BY news_id desc")
-		or die ("Database error - selecting news_id");
-		
-	$newsid = mysql_fetch_row($NEWS);				
-
-	$mode="post";
-		
-	add_search_words($mode, $newsid[0], $news_text, $news_headline);
-}
-
-
-
-if (isset($action) and $action=="delete")
-//********************************************************************************************
-// This is where we will delete unapproved news. It will be deleted from the submission table
-//******************************************************************************************** 	
-{
-	mysql_query("delete from
-	  			 news_submission 
-				 WHERE news_submission_id='$news_submission_id'")
-	or die("Deletion of the unapproved news update failed!");	
-}
-
-
-
 //********************************************************************************************
 // Get all the needed data to load the submission page!
 //******************************************************************************************** 	
-$sql_submissions = mysql_query("SELECT 
+$sql_submissions = $mysqli->query("SELECT 
 				  			  news_submission_id,
 				  			  news_headline,
 				  			  news_text,
@@ -98,7 +43,7 @@ if ($num_submissions=='0')
 }
 else
 {
-	while ($submission = mysql_fetch_array($sql_submissions))
+	while ($submission = $sql_submissions->fetch_array(MYSQLI_BOTH))
 	{
 		$user_name = get_username_from_id($submission['user_id']);
 		$news_date = convert_timestamp($submission['news_date']);
