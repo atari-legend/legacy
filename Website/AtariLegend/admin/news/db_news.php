@@ -35,7 +35,7 @@ if (isset($action) and $action=="add_news")
 	else
 	{	
 		// Insert the description and the image into the news_image table.
-		$sdbquery = mysql_query("INSERT INTO news_submission 
+		$sdbquery = $mysqli->query("INSERT INTO news_submission 
 							(news_headline,news_text,news_image_id,user_id,news_date)
 							 VALUES ('$headline','$descr','$icon','$user_id','$news_date')")
 							 or die ("Error inserting news update");
@@ -67,24 +67,24 @@ if (isset($action) and $action=="approve_submission")
 					  news_date
 					  FROM news_submission WHERE news_submission_id = '$news_submission_id'";
 					  
-	$query_submission = mysql_query($sql_submission) or die("Couldn't find the submitted news!");
+	$query_submission = $mysqli->query($sql_submission) or die("Couldn't find the submitted news!");
 	
-	list($news_headline,$news_text,$news_image_id,$user_id,$news_date) = mysql_fetch_array($query_submission);
+	list($news_headline,$news_text,$news_image_id,$user_id,$news_date) = $query_submission->fetch_array(MYSQLI_BOTH);
 	
 	$news_headline = addslashes($news_headline);
 	$news_text = addslashes($news_text);
 	
 	// Insert the news story.
-	mysql_query("INSERT INTO news (news_headline,news_text,news_image_id,user_id,news_date) VALUES ('$news_headline','$news_text','$news_image_id','$user_id','$news_date')")
+	$mysqli->query("INSERT INTO news (news_headline,news_text,news_image_id,user_id,news_date) VALUES ('$news_headline','$news_text','$news_image_id','$user_id','$news_date')")
 		or die ("DOES NOT COMPUTE...DOES NOT COMPUTE...DOES NOT COMPUTE");
 
-	mysql_query("DELETE FROM news_submission WHERE news_submission_id='$news_submission_id'")
+	$mysqli->query("DELETE FROM news_submission WHERE news_submission_id='$news_submission_id'")
 		or die ("Couldn't kill news_submission!!!");
 				
-	$NEWS = mysql_query("SELECT news_id FROM news ORDER BY news_id desc")
+	$NEWS = $mysqli->query("SELECT news_id FROM news ORDER BY news_id desc")
 		or die ("Database error - selecting news_id");
 		
-	$newsid = mysql_fetch_row($NEWS);				
+	$newsid = $NEWS->fetch_row();				
 
 	$mode="post";
 		
@@ -101,7 +101,7 @@ if (isset($action) and $action=="approve_submission")
 if (isset($action) and $action=="delete_submission")
 	
 {
-	mysql_query("delete from
+	$mysqli->query("delete from
 	  			 news_submission 
 				 WHERE news_submission_id='$news_submission_id'")
 	or die("Deletion of the unapproved news update failed!");
@@ -117,7 +117,7 @@ if (isset($action) and $action=="update_news")
 		$news_headline = addslashes($news_headline);
 
 		//Actual news thread change
-		mysql_query("UPDATE 
+		$mysqli->query("UPDATE 
 					news SET 
 					news_headline='$news_headline', 
 					news_text='$news_text',
@@ -138,7 +138,7 @@ if (isset($action) and $action=="update_submission")
 		$news_text = addslashes($news_text);
 
 		//Its a submission
-		mysql_query("UPDATE 
+		$mysqli->query("UPDATE 
 					news_submission SET 
 					news_headline='$news_headline', 
 					news_text='$news_text',

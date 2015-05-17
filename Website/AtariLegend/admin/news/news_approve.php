@@ -23,7 +23,7 @@ include("../includes/common.php");
 //********************************************************************************************
 // Get all the needed data to load the submission page!
 //******************************************************************************************** 	
-$sql_submissions = mysql_query("SELECT 
+$sql_submissions = $mysqli->query("SELECT 
 				  			  news_submission_id,
 				  			  news_headline,
 				  			  news_text,
@@ -43,7 +43,7 @@ if ($num_submissions=='0')
 }
 else
 {
-	while ($submission = mysql_fetch_array($sql_submissions))
+	while ($submission = $sql_submissions->fetch_array(MYSQLI_BOTH))
 	{
 		$user_name = get_username_from_id($submission['user_id']);
 		$news_date = convert_timestamp($submission['news_date']);

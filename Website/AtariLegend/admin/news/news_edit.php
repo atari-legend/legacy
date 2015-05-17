@@ -25,7 +25,7 @@ include("../includes/common.php");
 if (empty($news_id))
 {
 //We're dealing with a submission. Get the actual submission we wanna edit
-$sql_news  =  mysql_query("SELECT
+$sql_news  =  $mysqli->query("SELECT
 			  	news_headline,
 				news_text,
 			  	news_image_id,
@@ -33,7 +33,7 @@ $sql_news  =  mysql_query("SELECT
 			  	news_date
 			  	FROM news_submission WHERE news_submission_id = '$news_submission_id'");
 
-$news = mysql_fetch_array($sql_news);
+$news = $sql_news->fetch_array(MYSQLI_BOTH);
 
 $user_name = get_username_from_id($news['user_id']);
 $news_date = convert_timestamp($news['news_date']);
@@ -55,7 +55,7 @@ $smarty->assign('edit_submissions',
 else
 {
 //we're dealing with a news post which has to be altered
-$sql_news  =  mysql_query("SELECT
+$sql_news  =  $mysqli->query("SELECT
 			  			   news_headline,
 					   	   news_text,
 			  			   news_image_id,
@@ -64,7 +64,7 @@ $sql_news  =  mysql_query("SELECT
 			  			   FROM news WHERE news_id = '$news_id'");
 
 
-$news = mysql_fetch_array($sql_news);
+$news = $sql_news->fetch_array(MYSQLI_BOTH);
 
 $user_name = get_username_from_id($news['user_id']);
 $news_date = convert_timestamp($news['news_date']);
@@ -81,9 +81,9 @@ $smarty->assign('edit_submissions',
 }
 
 //Get the news images
-$sql_newsimage = mysql_query("SELECT news_image_id,news_image_name FROM news_image ORDER BY news_image_name");
+$sql_newsimage = $mysqli->query("SELECT news_image_id,news_image_name FROM news_image ORDER BY news_image_name");
 				
-while ($newsimages = mysql_fetch_array($sql_newsimage))
+while ($newsimages = $sql_newsimage->fetch_array(MYSQLI_BOTH))
 {
 	$smarty->append('news_images',
 	    	 array('image_id' => $newsimages['news_image_id'],
