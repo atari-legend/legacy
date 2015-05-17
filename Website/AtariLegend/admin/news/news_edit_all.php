@@ -25,21 +25,21 @@ if (isset($action) and $action=="delete")
 {
 	include("../includes/functions_search.php");
 
-	mysql_query("DELETE FROM news WHERE news_id ='$news_id'") 
+	$mysqli->query("DELETE FROM news WHERE news_id ='$news_id'") 
 	or die("No Go with update!!");
 				
 	remove_search_post($news_id);
 }
 
 //get the number of news threads in the archive
-$query_number = mysql_query("SELECT count(*) FROM news") or die("Couldn't get the number of news threads");
+$query_number = $mysqli->query("SELECT count(*) FROM news") or die("Couldn't get the number of news threads");
 $v_news = mysql_result($query_number,0,0) or die("Couldn't get the number of news threads");
 
 $smarty->assign('news_nr', $v_news);
 
 $v_counter= (isset($_GET["v_counter"]) ? $_GET["v_counter"] : 0);
 
-$sql_news = mysql_query("SELECT 
+$sql_news = $mysqli->query("SELECT 
 						 news.news_id,
 						 news.news_headline,
 						 news.user_id,
@@ -53,7 +53,7 @@ $sql_news = mysql_query("SELECT
 						 LEFT JOIN users on ( news.user_id = users.user_id )
 						 ORDER BY news_date DESC LIMIT  " . $v_counter . ", 10");
 
-while ($news = mysql_fetch_array($sql_news))
+while ($news = $sql_news->fetch_array(MYSQLI_BOTH))
 {
 	$user_name = get_username_from_id($news['user_id']);
 	$news_date = convert_timestamp($news['news_date']);

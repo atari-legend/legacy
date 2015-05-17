@@ -20,18 +20,18 @@ Edit Issues!
 
 include("../includes/common.php");
 
-$sql_magazine = mysql_query("SELECT * FROM magazine WHERE magazine_id='$magazine_id'") or die ("Error retriving magazines info");
+$sql_magazine = $mysqli->query("SELECT * FROM magazine WHERE magazine_id='$magazine_id'") or die ("Error retriving magazines info");
 			
-list ($magazine_id,$magazine_name) = mysql_fetch_row($sql_magazine); 
+list ($magazine_id,$magazine_name) = $sql_magazine->fetch_row(); 
 	
 	$smarty->assign('magazine',
 	   			  array('magazine_id' => $magazine_id,
 					    'magazine_name' => $magazine_name));
 			
 			// Query for issues
-			$sql = mysql_query("SELECT * FROM magazine_issue WHERE magazine_id='$magazine_id' ORDER BY magazine_issue_nr ASC") or die ("Error retriving issues");
+			$sql = $mysqli->query("SELECT * FROM magazine_issue WHERE magazine_id='$magazine_id' ORDER BY magazine_issue_nr ASC") or die ("Error retriving issues");
 			
-			while ($fetch = mysql_fetch_array($sql)) 
+			while ($fetch = $sql->fetch_array(MYSQLI_BOTH)) 
 			{
 
 			if ($fetch['magazine_issue_imgext']!=='') { $scan = 'scan'; } else { $scan='No Scan'; }

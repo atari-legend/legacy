@@ -143,11 +143,11 @@ foreach($image['tmp_name'] as $key=>$tmp_name)
 					or die ("Database error - inserting screenshots");
 		
 		//select the newly entered screenshot_id from the main table
-		$SCREENSHOT = mysql_query("SELECT trivia_screens_id FROM trivia_screens
+		$SCREENSHOT = $mysqli->query("SELECT trivia_screens_id FROM trivia_screens
 	   					   		   ORDER BY trivia_screens_id desc")
 					  or die ("Database error - selecting screenshots");
 		
-		$screenshotrow = mysql_fetch_row($SCREENSHOT);
+		$screenshotrow = $SCREENSHOT->fetch_row();
 		$screenshot_id = $screenshotrow[0];
 		
 		// Rename the uploaded file to its autoincrement number and move it to its proper place.

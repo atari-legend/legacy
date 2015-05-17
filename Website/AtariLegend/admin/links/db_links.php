@@ -63,7 +63,7 @@ if (isset($action) and $action=="link_delete")
 // Delete the links from the tables
 //**************************************************************************************** 
 
-$RESULT=mysql_query("SELECT website_category_id FROM website_category_cross WHERE website_id = '$website_id'")
+$RESULT=$mysqli->query("SELECT website_category_id FROM website_category_cross WHERE website_id = '$website_id'")
 			or die("Unable to select the website_category_id");
 $rowcat=mysql_fetch_assoc($RESULT);
 
@@ -146,8 +146,8 @@ if ($delete_image=='yes')
 
 // Do the website updating
 
-mysql_query("UPDATE website SET website_name='$website_name', website_url='$website_url' WHERE website_id='$website_id'");
-mysql_query("UPDATE website_category_cross SET website_category_id='$category' WHERE website_id='$website_id'"); 
+$mysqli->query("UPDATE website SET website_name='$website_name', website_url='$website_url' WHERE website_id='$website_id'");
+$mysqli->query("UPDATE website_category_cross SET website_category_id='$category' WHERE website_id='$website_id'"); 
 
 $sql_desc = $mysqli->query("SELECT * FROM website_description WHERE website_id='$website_id'");
 

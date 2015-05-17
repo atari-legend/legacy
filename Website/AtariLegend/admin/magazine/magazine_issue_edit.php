@@ -20,10 +20,10 @@ Add Magazine screens!
 
 include("../includes/common.php");
 
-	$sql = mysql_query("SELECT * FROM magazine
+	$sql = $mysqli->query("SELECT * FROM magazine
 						LEFT JOIN magazine_issue ON (magazine.magazine_id = magazine_issue.magazine_id)
 						WHERE magazine_issue_id='$magazine_issue_id'") or die ("Error retriving magazines issue");
-	$fetch = mysql_fetch_array($sql);
+	$fetch = $sql->fetch_array(MYSQLI_BOTH);
 
 	if ($fetch['magazine_issue_imgext']!="") 
 

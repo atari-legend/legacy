@@ -44,9 +44,9 @@ $value_weblink = 3;
 $value_news = 15;
 $value_gamereview = 50;
 
-$sql_user = mysql_query("SELECT user_id,userid,karma FROM users");
+$sql_user = $mysqli->query("SELECT user_id,userid,karma FROM users");
 
- while (list ($user_id,$user_name,$karma_value) = mysql_fetch_array($sql_user))
+ while (list ($user_id,$user_name,$karma_value) = $sql_user->fetch_array(MYSQLI_BOTH))
 	{
 	
 	$nr_gamecomments = 0;
@@ -57,7 +57,7 @@ $sql_user = mysql_query("SELECT user_id,userid,karma FROM users");
 	$nr_news = 0;
 	
 	// gamecomments
-	$sql_gamecomments = mysql_query("SELECT * FROM comments
+	$sql_gamecomments = $mysqli->query("SELECT * FROM comments
 					LEFT JOIN game_user_comments ON (comments.comments_id = game_user_comments.comment_id)
 					LEFT JOIN game ON ( game_user_comments.game_id = game.game_id )
 					WHERE comments.user_id = $user_id");
@@ -67,7 +67,7 @@ $sql_user = mysql_query("SELECT user_id,userid,karma FROM users");
 	mysql_free_result($sql_gamecomments);
 	
 	// reviews
-	$sql_gamereview = mysql_query("SELECT * FROM review_main
+	$sql_gamereview = $mysqli->query("SELECT * FROM review_main
 					LEFT JOIN review_game ON (review_main.review_id = review_game.review_id)
 					LEFT JOIN game ON ( review_game.game_id = game.game_id )
 					WHERE review_main.member_id = $user_id");
@@ -76,13 +76,13 @@ $sql_user = mysql_query("SELECT user_id,userid,karma FROM users");
 	mysql_free_result($sql_gamereview);
 	
 	// START - NUMBER OF DOWNLOADS BY USER
-	$sql_downloads = mysql_query("SELECT COUNT(*) AS count FROM game_download_info WHERE user_id = $user_id");
-	$gamecount = mysql_fetch_array($sql_downloads);
+	$sql_downloads = $mysqli->query("SELECT COUNT(*) AS count FROM game_download_info WHERE user_id = $user_id");
+	$gamecount = $sql_downloads->fetch_array(MYSQLI_BOTH);
 	$nr_downloads = $gamecount[count];
 	mysql_free_result($sql_downloads);
 	
 	// gamesubmissions
-	$sql_submissions = mysql_query("SELECT * FROM game_submitinfo 
+	$sql_submissions = $mysqli->query("SELECT * FROM game_submitinfo 
 				    LEFT JOIN game ON (game_submitinfo.game_id = game.game_id)
 					WHERE user_id = $user_id");
 					
@@ -90,13 +90,13 @@ $sql_user = mysql_query("SELECT user_id,userid,karma FROM users");
 	mysql_free_result($sql_submissions);
 	
 	// Submitted links
-	$sql_links = mysql_query("SELECT * FROM website WHERE website_user_sub = $user_id");
+	$sql_links = $mysqli->query("SELECT * FROM website WHERE website_user_sub = $user_id");
 	
 	$nr_links = mysql_num_rows($sql_links);
 	mysql_free_result($sql_links);
 	
 	// START - NUMBER OF NEWS POSTS BY USER
-	$sql_news = mysql_query("SELECT * FROM news WHERE user_id = $user_id");
+	$sql_news = $mysqli->query("SELECT * FROM news WHERE user_id = $user_id");
 	
 	$nr_news = mysql_num_rows($sql_news);
 	mysql_free_result($sql_news);
@@ -110,11 +110,11 @@ $sql_user = mysql_query("SELECT user_id,userid,karma FROM users");
 	$karma_value = $karma_value + ($nr_news*$value_news);
 	$karma_value = $karma_value + ($nr_downloads*$value_gamedownload);
 	
-	$update = mysql_query("UPDATE users SET karma='$karma_value' WHERE user_id='$user_id'") or die("Failed to update karma");
+	$update = $mysqli->query("UPDATE users SET karma='$karma_value' WHERE user_id='$user_id'") or die("Failed to update karma");
 	
 	}
 	
-	$sql_user2 = mysql_query("SELECT user_id,userid,karma FROM users ORDER BY karma DESC");
+	$sql_user2 = $mysqli->query("SELECT user_id,userid,karma FROM users ORDER BY karma DESC");
 	
 	while ($user_info = mysql_fetch_assoc($sql_user2))
 	{
