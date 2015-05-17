@@ -85,7 +85,7 @@ for($i=1; $i <= 1; $i++)
 		}
 	}
 }
-mysql_close();
+mysqli_free_result();
 header("Location: ../games/games_box.php?game_id=$game_id");
 }
 
@@ -112,7 +112,7 @@ else
 
 unlink ("$game_boxscan_path$game_boxscan_id.jpg");
 
-mysql_close(); 
+mysqli_free_result(); 
 header("Location: ../games/games_box.php?game_id=$game_id");
 }
 ?>

@@ -38,7 +38,7 @@ if(isset($new_crew))
 		$mysqli->query("INSERT INTO crew (crew_name) VALUES ('$new_crew')"); 
 
 
-	mysql_close(); 
+	mysqli_free_result(); 
 }
 // we are sending the $new_crew value to the main page again to place that one 
 // in the search field would the user want to edit the crew right away.

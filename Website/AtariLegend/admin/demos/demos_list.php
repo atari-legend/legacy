@@ -230,5 +230,5 @@ querystring for faster output
 	}
 
 //close the connection
-mysql_close();
+mysqli_close($mysqli);
 ?>

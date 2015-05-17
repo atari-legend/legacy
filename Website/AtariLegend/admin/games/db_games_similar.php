@@ -36,5 +36,5 @@ if (isset($action) and $action == 'add_game_similar')
 }
 
 //close the connection
-mysql_close();
+mysqli_close($mysqli);
 ?>

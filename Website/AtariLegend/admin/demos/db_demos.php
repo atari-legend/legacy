@@ -265,7 +265,7 @@ if ( isset($action) and $action == 'add_author' )
 							
 							header("Location: ../demos/demos_main.php");
 							//close the connection
-							mysql_close();
+							mysqli_free_result();
 
 						}
 					}
@@ -287,5 +287,5 @@ $smarty->assign('demo_detail_tpl', '1');
 $smarty->display('file:../templates/0/index.tpl');
 
 //close the connection
-mysql_close();
+mysqli_close($mysqli);
 ?>

@@ -155,5 +155,5 @@ if (isset($action) and $action=="update_submission")
 
 
 //close the connection
-mysql_close();
+mysqli_close($mysqli);
 ?>

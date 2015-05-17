@@ -183,5 +183,5 @@ if ( $action == "insert_comp" )
 
 
 //close the connection
-mysql_close();
+mysqli_close($mysqli);
 ?>

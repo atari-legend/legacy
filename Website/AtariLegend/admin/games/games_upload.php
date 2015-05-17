@@ -29,7 +29,7 @@ $SQL_GAME_INFO = $mysqli->query("SELECT * FROM game
 						   	   WHERE game.game_id='$game_id'")
 			  or die ("Error getting game info");
 
-$game_info=mysql_fetch_array ($SQL_GAME_INFO); 
+$game_info=$SQL_GAME_INFO->fetch_array(MYSQLI_BOTH); 
 
 //get some basic game info
 $smarty->assign('game',
@@ -97,5 +97,5 @@ $smarty->assign('games_upload_tpl', '1');
 $smarty->display('file:../templates/0/index.tpl');
 
 //close the connection
-mysql_close();
+mysqli_close($mysqli);
 ?>

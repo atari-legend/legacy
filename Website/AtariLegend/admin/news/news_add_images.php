@@ -98,5 +98,5 @@ $smarty->assign("user_id",$_SESSION['user_id']);
 $smarty->display('file:../templates/0/index.tpl');
 
 //close the connection
-mysql_close();
+mysqli_close($mysqli);
 ?>

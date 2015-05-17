@@ -77,5 +77,5 @@ list($start2, $start3) = explode(":", exec('date +%N:%S'));
 	$smarty->display('file:../templates/0/index.tpl');
 
 	//close the connection
-	mysql_close();
+	mysqli_free_result();
 ?>
