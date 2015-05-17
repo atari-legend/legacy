@@ -34,11 +34,11 @@ include("../includes/common.php");
 	$userbrowse_select = "userid LIKE '%$usersearch%'";
 	}
 	
-		$sql_users = mysql_query("SELECT * FROM users 
+		$sql_users = $mysqli->query("SELECT * FROM users 
 		  						  WHERE ". $userbrowse_select ." ORDER BY users.userid")
 		 		   		 		  or die ("Couldn't query users Database");
 	
-	while ($query_users = mysql_fetch_array($sql_users))  
+	while ($query_users = $sql_users->fetch_array(MYSQLI_BOTH))
 	{
 	
 	if(empty($nr_users)) {$nr_users='';}

@@ -21,14 +21,14 @@ This is the user statistics page
 include("../includes/common.php");
 
 // START - NUMBER OF USERCOMMENTS
-$sql = mysql_query("SELECT * FROM comments
+$sql = $mysqli->query("SELECT * FROM comments
 					LEFT JOIN game_user_comments ON (comments.comments_id = game_user_comments.comment_id)
 					LEFT JOIN game ON ( game_user_comments.game_id = game.game_id )
 					WHERE comments.user_id = $user_id_selected");
 
 $nr_comments=0;
 
-while ($query = mysql_fetch_array($sql))
+while ($sql->fetch_array(MYSQLI_BOTH))
 {
     $nr_comments++;
 	
@@ -39,16 +39,16 @@ while ($query = mysql_fetch_array($sql))
 
 $smarty->assign('nr_comments', $nr_comments);
 
-mysql_free_result($sql);
+mysqli_free_result($sql);
 
 
 // START - NUMBER OF reviews
-$sql = mysql_query("SELECT * FROM review_main
+$sql = $mysqli->query("SELECT * FROM review_main
 					LEFT JOIN review_game ON (review_main.review_id = review_game.review_id)
 					LEFT JOIN game ON ( review_game.game_id = game.game_id )
 					WHERE review_main.member_id = $user_id_selected");
 $nr_reviews=0;
-while ($query = mysql_fetch_array($sql))
+while ($sql->fetch_array(MYSQLI_BOTH))
 {
     $nr_reviews++;
 	
@@ -60,26 +60,26 @@ while ($query = mysql_fetch_array($sql))
 
 $smarty->assign('nr_reviews', $nr_reviews);
 
-mysql_free_result($sql);
+mysqli_free_result($sql);
 
 
 // START - NUMBER OF DOWNLOADS BY USER
 $sql = "SELECT COUNT(*) AS count FROM game_download_info WHERE user_id = $user_id_selected";
-$query = mysql_query($sql);
-$gamecount = mysql_fetch_array($query);
+$query = $mysqli->query($sql);
+$gamecount = $query->fetch_array(MYSQLI_BOTH);
 $gamecount = $gamecount['count'];
 
 $smarty->assign('nr_downloads', $gamecount);
 
-mysql_free_result($query);
+mysqli_free_result($query);
 
 
 // START - NUMBER OF SUBMISSIONS BY USER
-$sql = mysql_query("SELECT * FROM game_submitinfo 
+$sql = $mysqli->query("SELECT * FROM game_submitinfo 
 				    LEFT JOIN game ON (game_submitinfo.game_id = game.game_id)
 					WHERE user_id = $user_id_selected");
 $nr_submission=0;
-while ($query = mysql_fetch_array($sql))
+while ($sql->fetch_array(MYSQLI_BOTH))
 {
 	$nr_submission++;
 	
@@ -90,13 +90,13 @@ while ($query = mysql_fetch_array($sql))
 
 $smarty->assign('nr_submission', $nr_submission);
 
-mysql_free_result($sql);
+mysqli_free_result($sql);
 
 
 // START - NUMBER OF LINKS BY USER
-$sql = mysql_query("SELECT * FROM website WHERE website_user_sub = $user_id_selected");
+$sql = $mysqli->query("SELECT * FROM website WHERE website_user_sub = $user_id_selected");
 $nr_links=0;	
-while ($query = mysql_fetch_array($sql))
+while ($query = $sql->fetch_array(MYSQLI_BOTH))
 {
 	$nr_links++;
 	
@@ -107,12 +107,12 @@ while ($query = mysql_fetch_array($sql))
 
 $smarty->assign('nr_links', $nr_links);
 
-mysql_free_result($sql);
+mysqli_free_result($sql);
 
 // START - NUMBER OF NEWS POSTS BY USER
-$sql = mysql_query("SELECT * FROM news WHERE user_id = $user_id_selected");
+$sql = $mysqli->query("SELECT * FROM news WHERE user_id = $user_id_selected");
 $nr_news=0;	
-while ($query = mysql_fetch_array($sql))
+while ($query = $sql->fetch_array(MYSQLI_BOTH))
 {
 	$nr_news++;
 	
@@ -123,9 +123,9 @@ while ($query = mysql_fetch_array($sql))
 
 //get user info
 // START - NUMBER OF NEWS POSTS BY USER
-$sql = mysql_query("SELECT * FROM users WHERE user_id = $user_id_selected") or die ('problem getting user data');
+$sql = $mysqli->query("SELECT * FROM users WHERE user_id = $user_id_selected") or die ('problem getting user data');
 	
-while ($query = mysql_fetch_array($sql))
+while ($sql->fetch_array(MYSQLI_BOTH))
 {
 	$smarty->assign('user',
 			  array('user_id' => $query['user_id'],
@@ -135,7 +135,7 @@ while ($query = mysql_fetch_array($sql))
 
 $smarty->assign('nr_news', $nr_news);
 
-mysql_free_result($sql);
+mysqli_free_result($sql);
 
 $smarty->assign('user_id_selected', $user_id_selected);
 $smarty->assign('user_statistics_tpl', '1');
