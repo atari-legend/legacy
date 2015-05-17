@@ -59,18 +59,18 @@ foreach($image['tmp_name'] as $key=>$tmp_name)
 			
 		// First we insert the directory path of where the file will be stored... this also creates an autoinc number for us.
 		
-		$sdbquery = mysql_query("INSERT INTO screenshot_main (screenshot_id,imgext) VALUES ('','$ext')")
+		$sdbquery = $mysqli->query("INSERT INTO screenshot_main (screenshot_id,imgext) VALUES ('','$ext')")
 					or die ("Database error - inserting screenshots");
 
 		//select the newly entered screenshot_id from the main table
-		$SCREENSHOT = mysql_query("SELECT screenshot_id FROM screenshot_main
+		$SCREENSHOT = $mysqli->query("SELECT screenshot_id FROM screenshot_main
 	   					   		   ORDER BY screenshot_id desc")
 					  or die ("Database error - selecting screenshots");
 		
-		$screenshotrow = mysql_fetch_row($SCREENSHOT);
+		$screenshotrow = $SCREENSHOT->fetch_row();
 		$screenshot_id = $screenshotrow[0];
 		
-		$sdbquery = mysql_query("INSERT INTO screenshot_demo (demo_id, screenshot_id) VALUES ($demo_id, $screenshot_id)")
+		$sdbquery = $mysqli->query("INSERT INTO screenshot_demo (demo_id, screenshot_id) VALUES ($demo_id, $screenshot_id)")
 					or die ("Database error - inserting screenshots2");
 		
 		// Rename the uploaded file to its autoincrement number and move it to its proper place.
@@ -87,24 +87,24 @@ foreach($image['tmp_name'] as $key=>$tmp_name)
 //If we pressed the delete screenshot link
 if ( isset($action) and $action == 'delete_screen' )
 {
-	$sql_demoshot = mysql_query("SELECT * FROM screenshot_demo
+	$sql_demoshot = $mysqli->query("SELECT * FROM screenshot_demo
 	   					   			  WHERE demo_id = $demo_id 
 									  AND screenshot_id = $screenshot_id")
 	     		  or die ("Database error - selecting screenshots demo");
 						
-	$demoshot = mysql_fetch_row($sql_demoshot);
+	$demoshot = $sql_demoshot->fetch_row();
 	$demoshotid = $demoshot[0];
 	
 	//get the extension 
-	$SCREENSHOT = mysql_query("SELECT * FROM screenshot_main
+	$SCREENSHOT = $mysqli->query("SELECT * FROM screenshot_main
 	   					  	  WHERE screenshot_id = '$screenshot_id'")
 				  or die ("Database error - selecting screenshots");
 		
-	$screenshotrow = mysql_fetch_array($SCREENSHOT);
+	$screenshotrow = $SCREENSHOT->fetch_array(MYSQLI_BOTH);
 	$screenshot_ext = $screenshotrow['imgext'];
 
-	$sql = mysql_query("DELETE FROM screenshot_main WHERE screenshot_id = '$screenshot_id' ");
-	$sql = mysql_query("DELETE FROM screenshot_demo WHERE screenshot_id = '$screenshot_id' ");
+	$sql = $mysqli->query("DELETE FROM screenshot_main WHERE screenshot_id = '$screenshot_id' ");
+	$sql = $mysqli->query("DELETE FROM screenshot_demo WHERE screenshot_id = '$screenshot_id' ");
 
 	$new_path = $demo_screenshot_path;
 	$new_path .= $screenshot_id;

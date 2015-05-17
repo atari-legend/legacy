@@ -23,10 +23,10 @@ if (isset($ind_id) and isset($action) and $action == 'delete_pic')
 {
 	
 	$sql_photo = "SELECT ind_imgext FROM individual_text WHERE ind_id='$ind_id'";
-	$photo = mysql_query($sql_photo);
-	list ($ind_imgext) = mysql_fetch_row($photo);
+	$photo = $mysqli->query($sql_photo);
+	list ($ind_imgext) = $photo->fetch_row();
 
-	mysql_query("UPDATE individual_text SET ind_imgext='' WHERE ind_id='$ind_id'");
+	$mysqli->query("UPDATE individual_text SET ind_imgext='' WHERE ind_id='$ind_id'");
 	unlink ("$individual_screenshot_path$ind_id.$ind_imgext");
 		header("Location: ../individuals/individuals_edit.php?ind_id=$ind_id");
 }
@@ -68,7 +68,7 @@ if (isset($ind_id) and isset($action) and $action == 'add_photo')
 		 if ($ext!=="")
 		 	{
 		   	    // Rename the uploaded file to its autoincrement number and move it to its proper place.
-	   			mysql_query("UPDATE individual_text SET ind_imgext='$ext' WHERE ind_id='$ind_id'");
+	   			$mysqli->query("UPDATE individual_text SET ind_imgext='$ext' WHERE ind_id='$ind_id'");
 	  			$file_data = rename("$tmp_name", "$individual_screenshot_path$ind_id.$ext");
 	   
 	  			chmod("$individual_screenshot_path$ind_id.$ext", 0777);
@@ -80,10 +80,10 @@ if (isset($ind_id) and isset($action) and $action == 'add_photo')
 //update the info of the individual
 if (isset($ind_id) and isset($action) and $action == 'update')
 {
-	$sdbquery = mysql_query("UPDATE individuals SET ind_name = '$ind_name' WHERE ind_id = $ind_id")
+	$sdbquery = $mysqli->query("UPDATE individuals SET ind_name = '$ind_name' WHERE ind_id = $ind_id")
 				or die("Couldn't Update into individuals");
 
-	$INDIVIDUALtext = mysql_query("SELECT ind_id FROM individual_text 
+	$INDIVIDUALtext = $mysqli->query("SELECT ind_id FROM individual_text 
 								    WHERE ind_id = $ind_id")
 			  or die ("Database error - selecting individual_text");
 		
@@ -91,12 +91,12 @@ if (isset($ind_id) and isset($action) and $action == 'update')
 
 	if ( $indrowtext < 1 )
 	{
-		$sdbquery = mysql_query("INSERT INTO individual_text (ind_id, ind_profile, ind_email) VALUES ($ind_id, '$textfield', '$ind_email')") 
+		$sdbquery = $mysqli->query("INSERT INTO individual_text (ind_id, ind_profile, ind_email) VALUES ($ind_id, '$textfield', '$ind_email')") 
 					or die("Couldn't insert into individual_text (profile,email)");
 	}
 	else
 	{
-		$sdbquery = mysql_query("UPDATE individual_text SET ind_profile = '$textfield', ind_email = '$ind_email' WHERE ind_id = '$ind_id'")
+		$sdbquery = $mysqli->query("UPDATE individual_text SET ind_profile = '$textfield', ind_email = '$ind_email' WHERE ind_id = '$ind_id'")
 					or die("Couldn't Update into individual_text (profile,email)");
 	}
 
@@ -112,7 +112,7 @@ if (isset($ind_id) and isset($action) and $action == "add_nick")
 	if ($ind_nick !='')
 	{
 
-		$sdbquery = mysql_query("INSERT INTO individual_nicks (ind_id, nick) VALUES ($ind_id, '$ind_nick')") 
+		$sdbquery = $mysqli->query("INSERT INTO individual_nicks (ind_id, nick) VALUES ($ind_id, '$ind_nick')") 
 			        	or die("Couldn't insert into individual_nicks");
 						
 			$message = 'Individual succesfully updated';
@@ -127,7 +127,7 @@ if (isset($ind_id) and isset($action) and $action == "delete_nick")
 
 	if (isset($nick_id))
 	{
-		mysql_query("DELETE FROM individual_nicks WHERE individual_nicks_id='$nick_id'")
+		$mysqli->query("DELETE FROM individual_nicks WHERE individual_nicks_id='$nick_id'")
 			or die("Failed to delete nickname");
 		
 			$message = 'Nickname succesfully deleted';
@@ -141,15 +141,15 @@ if (isset($ind_id) and isset($action) and $action == 'delete_ind')
 {	
 	//first delete picture
 	$sql_photo = "SELECT ind_imgext FROM individual_text WHERE ind_id='$ind_id'";
-	$photo = mysql_query($sql_photo);
-	list ($ind_imgext) = mysql_fetch_row($photo);
+	$photo = $mysqli->query($sql_photo);
+	list ($ind_imgext) = $photo->fetch_row();
 	
 	if ( $ind_imgext <> '' )
 	{
 		unlink ("$individual_screenshot_path$ind_id.$ind_imgext");
 	}
 	
-	$sdbquery = mysql_query("SELECT * FROM interview_main WHERE ind_id='$ind_id'")
+	$sdbquery = $mysqli->query("SELECT * FROM interview_main WHERE ind_id='$ind_id'")
 				or die ("Error getting interview info");
 	if ( mysql_num_rows($sdbquery) > 0 )
 	{
@@ -157,7 +157,7 @@ if (isset($ind_id) and isset($action) and $action == 'delete_ind')
 	}
 	else
 	{
-		$sdbquery = mysql_query("SELECT * FROM game_author WHERE ind_id='$ind_id'")
+		$sdbquery = $mysqli->query("SELECT * FROM game_author WHERE ind_id='$ind_id'")
 					or die ("Error getting interview info");
 		if ( mysql_num_rows($sdbquery) > 0 )
 		{
@@ -166,9 +166,9 @@ if (isset($ind_id) and isset($action) and $action == 'delete_ind')
 		else
 		{
 			//then delete the rest
-			$sql = mysql_query("DELETE FROM individuals WHERE ind_id = $ind_id");
-			$sql = mysql_query("DELETE FROM individual_text WHERE ind_id = $ind_id");
-			$sql = mysql_query("DELETE FROM individual_nicks WHERE ind_id = $ind_id");
+			$sql = $mysqli->query("DELETE FROM individuals WHERE ind_id = $ind_id");
+			$sql = $mysqli->query("DELETE FROM individual_text WHERE ind_id = $ind_id");
+			$sql = $mysqli->query("DELETE FROM individual_nicks WHERE ind_id = $ind_id");
 		    $smarty->assign("message",'individual succesfully deleted');
 			header("Location: ../individuals/individuals_main.php");
 		}
@@ -189,18 +189,18 @@ if (isset($action) and $action == 'insert_ind')
 	}
 	else
 	{
-		$sql_individuals = mysql_query("INSERT INTO individuals (ind_name) VALUES ('$ind_name')");  
+		$sql_individuals = $mysqli->query("INSERT INTO individuals (ind_name) VALUES ('$ind_name')");  
 
 		//get the id of the inserted individual
-		$individuals = mysql_query("SELECT ind_id FROM individuals
+		$individuals = $mysqli->query("SELECT ind_id FROM individuals
 	  	 					    	ORDER BY ind_id desc")
 				  or die ("Database error - selecting individuals");
 		
-		$indrow = mysql_fetch_row($individuals);
+		$indrow = $individuals->fetch_row();
 
 		$id = $indrow[0];	
 
-		$sdbquery = mysql_query("INSERT INTO individual_text (ind_id, ind_profile) VALUES ($id, '$textfield')") 
+		$sdbquery = $mysqli->query("INSERT INTO individual_text (ind_id, ind_profile) VALUES ($id, '$textfield')") 
 					or die("Couldn't insert into individual_text");
 				
 		$message = "individual succesfully inserted";

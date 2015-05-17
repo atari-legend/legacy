@@ -24,7 +24,7 @@ include("../includes/common.php");
 	if ( isset($action) and $action == "insert_demo" )
 	{
 		//Insert the demo in the demo table
-		$sql_demo = mysql_query("INSERT INTO demo (demo_name) VALUES ('$newdemo')") or die ("Couldn't insert demo into database");  
+		$sql_demo = $mysqli->query("INSERT INTO demo (demo_name) VALUES ('$newdemo')") or die ("Couldn't insert demo into database");  
 		
 		$message = "demo has been inserted into the database";
 		$smarty->assign("message",$message);
@@ -37,7 +37,7 @@ include("../includes/common.php");
 //***********************************************************************************
 if (isset($action) and $action == 'delete_aka')
 {
-	$sql_aka = mysql_query("DELETE FROM demo_aka WHERE demo_aka_id = '$demo_aka_id' and demo_id = '$demo_id'") 
+	$sql_aka = $mysqli->query("DELETE FROM demo_aka WHERE demo_aka_id = '$demo_aka_id' and demo_id = '$demo_id'") 
  			   or die ("Couldn't delete aka");
 	header("Location: ../demos/demos_detail.php?demo_id=$demo_id");
 }
@@ -47,7 +47,7 @@ if (isset($action) and $action == 'delete_aka')
 //***********************************************************************************
 if (isset($action) and $action == 'demo_aka')
 {
-	$sql_aka = mysql_query("INSERT INTO demo_aka (demo_id, aka_name) VALUES ('$demo_id','$demo_aka')")
+	$sql_aka = $mysqli->query("INSERT INTO demo_aka (demo_id, aka_name) VALUES ('$demo_id','$demo_aka')")
  			   or die ("Couldn't insert aka demos");
 	header("Location: ../demos/demos_detail.php?demo_id=$demo_id");
 }
@@ -61,7 +61,7 @@ if (isset($action) and $action == 'delete_author')
 	{	
 		foreach($demo_author_id as $author) 
 		{
-			mysql_query("DELETE FROM demo_author WHERE demo_author_id = '$author' and demo_id = '$demo_id'"); 
+			$mysqli->query("DELETE FROM demo_author WHERE demo_author_id = '$author' and demo_id = '$demo_id'"); 
 		}
 	}
 	header("Location: ../demos/demos_detail.php?demo_id=$demo_id");
@@ -76,7 +76,7 @@ if (isset($action) and $action == 'delete_crew')
 	{
 		foreach($demo_crew_id as $crew) 
 		{
-			mysql_query("DELETE FROM crew_demo_prod WHERE crew_id = '$crew' and demo_id = '$demo_id'"); 
+			$mysqli->query("DELETE FROM crew_demo_prod WHERE crew_id = '$crew' and demo_id = '$demo_id'"); 
 		}
 	}
 
@@ -88,7 +88,7 @@ if (isset($action) and $action == 'delete_crew')
 //***********************************************************************************
 if (isset($action) and $action == 'add_crew')
 {
-	$sql = mysql_query("INSERT INTO crew_demo_prod (demo_id,crew_id) VALUES ('$demo_id','$crew_id_select')") or die ("crew insertion failed");  
+	$sql = $mysqli->query("INSERT INTO crew_demo_prod (demo_id,crew_id) VALUES ('$demo_id','$crew_id_select')") or die ("crew insertion failed");  
 
 	header("Location: ../demos/demos_detail.php?demo_id=$demo_id");
 }
@@ -99,7 +99,7 @@ if (isset($action) and $action == 'add_crew')
 //***********************************************************************************
 if ( isset($action) and $action == 'add_author' )
 {
-	$sql = mysql_query("INSERT INTO demo_author (demo_id,ind_id,author_type_id) VALUES ('$demo_id','$ind_id','$author_type_id')") or die ("individual insertion failed");
+	$sql = $mysqli->query("INSERT INTO demo_author (demo_id,ind_id,author_type_id) VALUES ('$demo_id','$ind_id','$author_type_id')") or die ("individual insertion failed");
 
 	header("Location: ../demos/demos_detail.php?demo_id=$demo_id");  
 }
@@ -111,76 +111,76 @@ if ( isset($action) and $action == 'add_author' )
 	if (isset($action) and $action == 'modify_demo')
 	{
 		// demo_table
-		$sdbquery  = mysql_query("UPDATE demo SET demo_name='$demo_name' WHERE demo_id=$demo_id") or die ("trouble updating demo"); 
+		$sdbquery  = $mysqli->query("UPDATE demo SET demo_name='$demo_name' WHERE demo_id=$demo_id") or die ("trouble updating demo"); 
 		
 		// demo year
 		// Start off by deleting previos value
-		$sdbquery = mysql_query("DELETE FROM demo_year WHERE demo_id='$demo_id'");	
-		$sdbquery = mysql_query("INSERT INTO demo_year (demo_id,demo_year) VALUES ($demo_id,$Date_Year)");	
+		$sdbquery = $mysqli->query("DELETE FROM demo_year WHERE demo_id='$demo_id'");	
+		$sdbquery = $mysqli->query("INSERT INTO demo_year (demo_id,demo_year) VALUES ($demo_id,$Date_Year)");	
 		
 		// DUMP TABLE UPDATE
-		$sdbquery = mysql_query("UPDATE demo_search SET year='$Date_Year' WHERE demo_id='$demo_id'") or die ("couldn't update dumptable - year");	
+		$sdbquery = $mysqli->query("UPDATE demo_search SET year='$Date_Year' WHERE demo_id='$demo_id'") or die ("couldn't update dumptable - year");	
 
 		// Delete the category crosses currently in the database for this game
-		$sdbquery  = mysql_query("DELETE FROM demo_cat_cross WHERE demo_id=$demo_id");	
+		$sdbquery  = $mysqli->query("DELETE FROM demo_cat_cross WHERE demo_id=$demo_id");	
 
 		// Insert the values from the passed category array
 		if(isset($category)) 
 		{
 			foreach ($category as $cat) 
 			{
-				$sdbquery  = mysql_query("INSERT INTO demo_cat_cross (demo_id,demo_cat_id) VALUES ($demo_id,$cat)");	
+				$sdbquery  = $mysqli->query("INSERT INTO demo_cat_cross (demo_id,demo_cat_id) VALUES ($demo_id,$cat)");	
 			}
 		}
 		
 		// Update the STE ONLY tick box info
 		// Start off by deleting previos value
-		$sdbquery = mysql_query("DELETE FROM demo_ste_only WHERE demo_id='$demo_id'");	
+		$sdbquery = $mysqli->query("DELETE FROM demo_ste_only WHERE demo_id='$demo_id'");	
 	
 		// then insert the new value if it has been passed.
 		if(isset($ste_only))
 		{
-			$sdbquery = mysql_query("INSERT INTO demo_ste_only (demo_id,ste_only) VALUES ('$demo_id','$ste_only')");
+			$sdbquery = $mysqli->query("INSERT INTO demo_ste_only (demo_id,ste_only) VALUES ('$demo_id','$ste_only')");
 		} 
 
 		// Update the STE ENHANCED tick box info
 		// Start off by deleting previos value
-		$sdbquery = mysql_query("DELETE FROM demo_ste_enhan WHERE demo_id='$demo_id'");	
+		$sdbquery = $mysqli->query("DELETE FROM demo_ste_enhan WHERE demo_id='$demo_id'");	
 
 		// then insert the new value if it has been passed.
 		if(isset($ste_enhanced))
 		{	
-			$sdbquery = mysql_query("INSERT INTO demo_ste_enhan (demo_id,ste_enhanced) VALUES ('$demo_id','$ste_enhanced')");
+			$sdbquery = $mysqli->query("INSERT INTO demo_ste_enhan (demo_id,ste_enhanced) VALUES ('$demo_id','$ste_enhanced')");
 		} 
 
 		// Update the FALCON ONLY tick box info
 		// Start off by deleting previos value
-		$sdbquery = mysql_query("DELETE FROM demo_falcon_only WHERE demo_id='$demo_id'");	
+		$sdbquery = $mysqli->query("DELETE FROM demo_falcon_only WHERE demo_id='$demo_id'");	
 
 		// then insert the new value if it has been passed.
 		if(isset($falcon_only))
 		{
-			$sdbquery = mysql_query("INSERT INTO demo_falcon_only (demo_id,falcon_only) VALUES ('$demo_id','$falcon_only')");
+			$sdbquery = $mysqli->query("INSERT INTO demo_falcon_only (demo_id,falcon_only) VALUES ('$demo_id','$falcon_only')");
 		} 
 
 		// Update the FALCON ENHANCED tick box info
 		// Start off by deleting previos value
-		$sdbquery = mysql_query("DELETE FROM demo_falcon_enhan WHERE demo_id='$demo_id'");	
+		$sdbquery = $mysqli->query("DELETE FROM demo_falcon_enhan WHERE demo_id='$demo_id'");	
 
 		// then insert the new value if it has been passed.
 		if(isset($falcon_enhanced))
 		{
-			$sdbquery = mysql_query("INSERT INTO demo_falcon_enhan (demo_id,falcon_enhanced) VALUES ('$demo_id','$falcon_enhanced')");
+			$sdbquery = $mysqli->query("INSERT INTO demo_falcon_enhan (demo_id,falcon_enhanced) VALUES ('$demo_id','$falcon_enhanced')");
 		} 
 		
 		// Update the MONO ONLY tick box info
 		// Start off by deleting previos value
-		$sdbquery = mysql_query("DELETE FROM demo_mono_only WHERE demo_id='$demo_id'");	
+		$sdbquery = $mysqli->query("DELETE FROM demo_mono_only WHERE demo_id='$demo_id'");	
 
 		// then insert the new value if it has been passed.
 		if(isset($mono_only))
 		{
-			$sdbquery = mysql_query("INSERT INTO demo_mono_only (demo_id,mono_only) VALUES ('$demo_id','$mono_only')");
+			$sdbquery = $mysqli->query("INSERT INTO demo_mono_only (demo_id,mono_only) VALUES ('$demo_id','$mono_only')");
 		} 
 
 		$smarty->assign("message",'Demo has been modified correctly');
@@ -194,7 +194,7 @@ if ( isset($action) and $action == 'add_author' )
 	if ( isset($action) and $action == 'delete_demo' )
 	{
 		//First we need to do a hell of a lot checks before we can delete an actual game.
-		$sdbquery = mysql_query("SELECT * FROM demo_download WHERE demo_id='$demo_id'")
+		$sdbquery = $mysqli->query("SELECT * FROM demo_download WHERE demo_id='$demo_id'")
 				 	or die ("Error getting download info");
 		if ( mysql_num_rows($sdbquery) > 0 )
 		{
@@ -202,7 +202,7 @@ if ( isset($action) and $action == 'add_author' )
 		}
 		else
 		{
-			$sdbquery = mysql_query("SELECT * FROM demo_user_comments WHERE demo_id='$demo_id'")
+			$sdbquery = $mysqli->query("SELECT * FROM demo_user_comments WHERE demo_id='$demo_id'")
 		 				or die ("Error getting user comments");
 			if ( mysql_num_rows($sdbquery) > 0 )
 			{
@@ -210,7 +210,7 @@ if ( isset($action) and $action == 'add_author' )
 			}
 			else
 			{
-				$sdbquery = mysql_query("SELECT * FROM demo_submitinfo WHERE demo_id='$demo_id'")
+				$sdbquery = $mysqli->query("SELECT * FROM demo_submitinfo WHERE demo_id='$demo_id'")
 							or die ("Error getting submit info");
 				if ( mysql_num_rows($sdbquery) > 0 )
 				{
@@ -218,7 +218,7 @@ if ( isset($action) and $action == 'add_author' )
 				}
 				else
 				{
-					$sdbquery = mysql_query("SELECT * FROM screenshot_demo WHERE demo_id='$demo_id'")
+					$sdbquery = $mysqli->query("SELECT * FROM screenshot_demo WHERE demo_id='$demo_id'")
 				 				or die ("Error getting screenshot info");
 					if ( mysql_num_rows($sdbquery) > 0 )
 					{
@@ -226,7 +226,7 @@ if ( isset($action) and $action == 'add_author' )
 					}
 					else
 					{
-						$sdbquery = mysql_query("SELECT * FROM demo_music WHERE demo_id='$demo_id'")
+						$sdbquery = $mysqli->query("SELECT * FROM demo_music WHERE demo_id='$demo_id'")
 				 					or die ("Error getting music info");
 						if ( mysql_num_rows($sdbquery) > 0 )
 						{
@@ -234,27 +234,27 @@ if ( isset($action) and $action == 'add_author' )
 						}
 						else
 						{
-							$sdbquery = mysql_query("DELETE FROM demo WHERE demo_id = '$demo_id' ") or die ("Error deleting demo");
-							$sdbquery = mysql_query("DELETE FROM crew_demo_prod WHERE demo_id = '$demo_id'") or die ("Error deleting crew_demo_prod");
-							$sdbquery = mysql_query("DELETE FROM ind_demo_prod WHERE demo_id = '$demo_id' ") or die ("Error deleting ind_demo_prod");
-							$sdbquery = mysql_query("DELETE FROM demo_year WHERE demo_id = '$demo_id' ") or die ("Error deleting demo_year");
-							$sdbquery = mysql_query("DELETE FROM demo_cat_cross WHERE demo_id = '$demo_id' ") or die ("Error deleting demo_cat_cross");
-							$sdbquery = mysql_query("DELETE FROM demo_falcon_only WHERE demo_id='$demo_id'") or die ("Error deleting demo_falcon_only");
-							$sdbquery = mysql_query("DELETE FROM demo_ste_enhan WHERE demo_id='$demo_id'") or die ("Error deleting demo_ste_enhan");
-							$sdbquery = mysql_query("DELETE FROM demo_ste_only WHERE demo_id='$demo_id'") or die ("Error deleting demo_ste_only");
-							$sdbquery = mysql_query("DELETE FROM demo_aka WHERE demo_id='$demo_id'") or die ("Error deleting demo_aka");
-							$sdbquery = mysql_query("DELETE FROM demo_info WHERE demo_id='$demo_id'") or die ("Error deleting demo_info");
-							$sdbquery = mysql_query("DELETE FROM demo_emulator WHERE demo_id='$demo_id'") or die ("Error deleting demo_emulator");
-							$sdbquery = mysql_query("DELETE FROM demo_author WHERE demo_id='$demo_id'") or die ("Error deleting demo_author");
+							$sdbquery = $mysqli->query("DELETE FROM demo WHERE demo_id = '$demo_id' ") or die ("Error deleting demo");
+							$sdbquery = $mysqli->query("DELETE FROM crew_demo_prod WHERE demo_id = '$demo_id'") or die ("Error deleting crew_demo_prod");
+							$sdbquery = $mysqli->query("DELETE FROM ind_demo_prod WHERE demo_id = '$demo_id' ") or die ("Error deleting ind_demo_prod");
+							$sdbquery = $mysqli->query("DELETE FROM demo_year WHERE demo_id = '$demo_id' ") or die ("Error deleting demo_year");
+							$sdbquery = $mysqli->query("DELETE FROM demo_cat_cross WHERE demo_id = '$demo_id' ") or die ("Error deleting demo_cat_cross");
+							$sdbquery = $mysqli->query("DELETE FROM demo_falcon_only WHERE demo_id='$demo_id'") or die ("Error deleting demo_falcon_only");
+							$sdbquery = $mysqli->query("DELETE FROM demo_ste_enhan WHERE demo_id='$demo_id'") or die ("Error deleting demo_ste_enhan");
+							$sdbquery = $mysqli->query("DELETE FROM demo_ste_only WHERE demo_id='$demo_id'") or die ("Error deleting demo_ste_only");
+							$sdbquery = $mysqli->query("DELETE FROM demo_aka WHERE demo_id='$demo_id'") or die ("Error deleting demo_aka");
+							$sdbquery = $mysqli->query("DELETE FROM demo_info WHERE demo_id='$demo_id'") or die ("Error deleting demo_info");
+							$sdbquery = $mysqli->query("DELETE FROM demo_emulator WHERE demo_id='$demo_id'") or die ("Error deleting demo_emulator");
+							$sdbquery = $mysqli->query("DELETE FROM demo_author WHERE demo_id='$demo_id'") or die ("Error deleting demo_author");
 
 							// DUMP TABLE
-							$sdbquery = mysql_query("DELETE FROM demo_search WHERE game_id = '$demo_id' ");
+							$sdbquery = $mysqli->query("DELETE FROM demo_search WHERE game_id = '$demo_id' ");
 
 							//Get the crews to fill the search fields
-							$sql_crew = mysql_query("SELECT * FROM crew ORDER BY crew_name ASC")
+							$sql_crew = $mysqli->query("SELECT * FROM crew ORDER BY crew_name ASC")
 		 		   	    				or die ("Couldn't query Crews database");
 		
-							while  ($crew=mysql_fetch_array($sql_crew)) 
+							while  ($crew=$sql_crew->fetch_array(MYSQLI_BOTH)) 
 							{  
 								$smarty->append('crew',
 				    				 array('crew_id' => $crew['crew_id'],

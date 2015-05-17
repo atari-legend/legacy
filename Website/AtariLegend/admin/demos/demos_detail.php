@@ -21,7 +21,7 @@ include("../includes/common.php");
 //Let's get the general demo info first. 
 //***********************************************************************************
 
-	$sql_demo = mysql_query("SELECT 
+	$sql_demo = $mysqli->query("SELECT 
 						   demo.demo_name, 
 						   demo.demo_id, 
 						   demo_ste_only.ste_only,
@@ -41,7 +41,7 @@ include("../includes/common.php");
 				    or die ("Error getting demo info");
 
 					
-		while ($demo_info=mysql_fetch_array($sql_demo)) 
+		while ($demo_info=$sql_demo->fetch_array(MYSQLI_BOTH)) 
 		{  
 			$demo_year = $demo_info['demo_year'];
 			$demo_year .= '01';
@@ -62,12 +62,12 @@ include("../includes/common.php");
 //get the game categories & the categories already selected for this game
 //***********************************************************************************
 
-		$sql_categories = mysql_query("SELECT * FROM demo_cat ORDER BY demo_cat_name")
+		$sql_categories = $mysqli->query("SELECT * FROM demo_cat ORDER BY demo_cat_name")
 						  or die ("Error loading categories");
 		
 		while ($categories=mysql_fetch_array ($sql_categories)) 
 		{
-			$sql_demo_cat = mysql_query("SELECT * FROM demo_cat_cross WHERE demo_id='$demo_id' AND demo_cat_id=$categories[demo_cat_id]")
+			$sql_demo_cat = $mysqli->query("SELECT * FROM demo_cat_cross WHERE demo_id='$demo_id' AND demo_cat_id=$categories[demo_cat_id]")
 							or die ("Error loading categorie cross table");
 			
 			$selected=mysql_num_rows($sql_demo_cat);		
@@ -96,13 +96,13 @@ include("../includes/common.php");
 	$sql_individuals_aka = "SELECT ind_id,nick FROM individual_nicks ORDER BY nick ASC";
 
 	//Create a temporary table to build an array with both names and nicknames
-	mysql_query("CREATE TEMPORARY TABLE temp ENGINE=MEMORY $sql_individuals") or die("failed to create temporary table");
-	mysql_query("INSERT INTO temp $sql_individuals_aka") or die("failed to insert akas into temporary table");
+	$mysqli->query("CREATE TEMPORARY TABLE temp ENGINE=MEMORY $sql_individuals") or die("failed to create temporary table");
+	$mysqli->query("INSERT INTO temp $sql_individuals_aka") or die("failed to insert akas into temporary table");
 			
-	$query_temporary = mysql_query("SELECT * FROM temp ORDER BY ind_name ASC") or die("Failed to query temporary table");
-	mysql_query("DROP TABLE temp");
+	$query_temporary = $mysqli->query("SELECT * FROM temp ORDER BY ind_name ASC") or die("Failed to query temporary table");
+	$mysqli->query("DROP TABLE temp");
 	
-	while  ($individuals=mysql_fetch_array($query_temporary)) 
+	while  ($individuals=$query_temporary->fetch_array(MYSQLI_BOTH)) 
 	{  
 		$smarty->append('individuals',
 	    		 array('ind_id' => $individuals['ind_id'],
@@ -110,10 +110,10 @@ include("../includes/common.php");
 	}
 
 	// Get the author types
-	$sql_author = mysql_query("SELECT * FROM author_type ORDER BY author_type_info ASC")
+	$sql_author = $mysqli->query("SELECT * FROM author_type ORDER BY author_type_info ASC")
 		      or die ("Couldn't query author_types");
 		
-	while  ($author=mysql_fetch_array($sql_author)) 
+	while  ($author=$sql_author->fetch_array(MYSQLI_BOTH)) 
 	{  
 		$smarty->append('author_types',
  			 array('author_type' => $author['author_type_info'],
@@ -122,7 +122,7 @@ include("../includes/common.php");
 	
 	
 	//Starting off with displaying the authors that are linked to the game and having a delete option for them */
-	$sql_demoauthors = mysql_query("SELECT * FROM demo_author
+	$sql_demoauthors = $mysqli->query("SELECT * FROM demo_author
 									LEFT JOIN individuals ON (demo_author.ind_id = individuals.ind_id)
 									LEFT JOIN author_type ON (demo_author.author_type_id = author_type.author_type_id) 
 									WHERE demo_author.demo_id='$demo_id' ORDER BY author_type.author_type_id, individuals.ind_name")
@@ -144,10 +144,10 @@ include("../includes/common.php");
 //**********************************************************************************
 	
 	//let's get all the crews in the DB
-	$sql_crew = mysql_query("SELECT * FROM crew ORDER BY crew_name ASC")
+	$sql_crew = $mysqli->query("SELECT * FROM crew ORDER BY crew_name ASC")
 			     or die ("Couldn't query crew database");
 		
-	while  ($crew=mysql_fetch_array($sql_crew)) 
+	while  ($crew=$sql_crew->fetch_array(MYSQLI_BOTH)) 
 	{  
 		$smarty->append('crew',
 	   		 	 array('crew_id' => $crew['crew_id'],
@@ -156,12 +156,12 @@ include("../includes/common.php");
 	
 	
 	//let's get the crew for this demo
-	$sql_crew = mysql_query("SELECT * FROM crew 
+	$sql_crew = $mysqli->query("SELECT * FROM crew 
 								 LEFT JOIN crew_demo_prod ON ( crew.crew_id = crew_demo_prod.crew_id ) 
 								 WHERE crew_demo_prod.demo_id = '$demo_id' ORDER BY crew_name ASC")
 			        or die ("Couldn't query publishers");
 	
-	while  ($crew=mysql_fetch_array($sql_crew)) 
+	while  ($crew=$sql_crew->fetch_array(MYSQLI_BOTH)) 
 	{  
 		$smarty->append('demo_crew',
 	   		 	 array('crew_id' => $crew['crew_id'],
@@ -175,7 +175,7 @@ include("../includes/common.php");
 //AKA's
 //***********************************************************************************
 
-	$sql_aka = mysql_query("SELECT * FROM demo_aka WHERE demo_id='$demo_id'")
+	$sql_aka = $mysqli->query("SELECT * FROM demo_aka WHERE demo_id='$demo_id'")
  			   or die ("Couldn't query aka demos");
 	
 	$nr_aka=0;
@@ -197,16 +197,16 @@ include("../includes/common.php");
 //***********************************************************************************
 
 //Get the number of screenshots!
-$numberscreen = mysql_query("SELECT count(*) as count FROM screenshot_demo WHERE demo_id = '$demo_id'")
+$numberscreen = $mysqli->query("SELECT count(*) as count FROM screenshot_demo WHERE demo_id = '$demo_id'")
 		  		or die ("couldn't get number of screenshots");
-$array = mysql_fetch_array($numberscreen);
+$array = $numberscreen->fetch_array(MYSQLI_BOTH);
 
 $smarty->assign("nr_screenshots",$array['count']); 
 
 //check how many music files this game has
-$numbermusic = mysql_query("SELECT count(*) as count FROM demo_music WHERE demo_id = '$demo_id'")
+$numbermusic = $mysqli->query("SELECT count(*) as count FROM demo_music WHERE demo_id = '$demo_id'")
 			     or die ("couldn't get number of music files");
-$array = mysql_fetch_array($numbermusic);
+$array = $numbermusic->fetch_array(MYSQLI_BOTH);
 
 $smarty->assign("nr_music",$array['count']); 
 

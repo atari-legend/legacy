@@ -77,7 +77,7 @@ if (isset($action) and $action == 'search')
 		$RESULTGAME .= "game.game_name LIKE '%$gamesearch%'"; 
 		$RESULTGAME .= ' ORDER BY game.game_name ASC';
 		
-		$games = mysql_query($RESULTGAME);
+		$games = $mysqli->query($RESULTGAME);
 		
 		if (!$games)
 		{
@@ -93,10 +93,10 @@ if (isset($action) and $action == 'search')
 					$i++;
 				
 					//check how many muzaks there are for the game
-					$numberzaks = mysql_query("SELECT count(*) as count FROM game_music WHERE game_id='$row[game_id]'")
+					$numberzaks = $mysqli->query("SELECT count(*) as count FROM game_music WHERE game_id='$row[game_id]'")
 				    			  or die ("couldn't get number of zaks");
 				
-					$array = mysql_fetch_array($numberzaks);
+					$array = $numberzaks->fetch_array(MYSQLI_BOTH);
 				
 					$smarty->append('music',
 	   			 	 array('game_id' => $row['game_id'],

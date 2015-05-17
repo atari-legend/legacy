@@ -30,17 +30,17 @@ if(isset($music_id))
 	{
 		//get the extension 
 
-		$MUSIC = mysql_query("SELECT * FROM music
+		$MUSIC = $mysqli->query("SELECT * FROM music
 	   			   		      WHERE music_id = '$music'")
 				 or die ("Database error - selecting music");
 		
-		$musicrow = mysql_fetch_array($MUSIC);
+		$musicrow = $MUSIC->fetch_array(MYSQLI_BOTH);
 		$music_ext = $musicrow[imgext];
 
-		$sql = mysql_query("DELETE FROM music WHERE music_id = '$music' ") or die ("error deleting music");
-		$sql = mysql_query("DELETE FROM demo_music WHERE music_id = '$music' ")  or die ("error deleting game_music");
-		$sql = mysql_query("DELETE FROM music_author WHERE music_id = '$music' ")  or die ("error deleting music_author");
-		$sql = mysql_query("DELETE FROM music_types WHERE music_id = '$music' ")  or die ("error deleting music_types");
+		$sql = $mysqli->query("DELETE FROM music WHERE music_id = '$music' ") or die ("error deleting music");
+		$sql = $mysqli->query("DELETE FROM demo_music WHERE music_id = '$music' ")  or die ("error deleting game_music");
+		$sql = $mysqli->query("DELETE FROM music_author WHERE music_id = '$music' ")  or die ("error deleting music_author");
+		$sql = $mysqli->query("DELETE FROM music_types WHERE music_id = '$music' ")  or die ("error deleting music_types");
 
 		$new_path = $music_demo_path;
 		$new_path .= $music;
@@ -54,10 +54,10 @@ if(isset($music_id))
 
 if (isset ($action) and $action == 'play_music')
 {
-	$query_music = mysql_query("SELECT * FROM music 
+	$query_music = $mysqli->query("SELECT * FROM music 
 							WHERE music.music_id='$music_id'");
 							
-	$sql_music = mysql_fetch_array($query_music);
+	$sql_music = $query_music->fetch_array(MYSQLI_BOTH);
 
 	$filename="$music_demo_path$sql_music[music_id].$sql_music[imgext]";
 
@@ -98,7 +98,7 @@ if (isset ($action) and $action == 'pick_composer')
 		$smarty->assign('action', 'pick_composer');
 	
 		//We need to get all the info of this game. 
-		$SQL_IND = mysql_query("SELECT *
+		$SQL_IND = $mysqli->query("SELECT *
 							   	 FROM individuals
 						         WHERE ind_id='$individuals'")
 			        or die ("Error getting ind name");
@@ -139,34 +139,34 @@ foreach($image['tmp_name'] as $key=>$tmp_name)
 		
 		{
 		// First we insert extension of the file... this also creates an autoinc number for us.
-		$sdbquery = mysql_query("INSERT INTO music (music_id,imgext,mime_type) VALUES ('','$ext','$mime_type')")
+		$sdbquery = $mysqli->query("INSERT INTO music (music_id,imgext,mime_type) VALUES ('','$ext','$mime_type')")
 					or die ("Database error - inserting music_id");
 		
 		//select the newly entered music_id from the main table
-		$MUSIC = mysql_query("SELECT music_id FROM music
+		$MUSIC = $mysqli->query("SELECT music_id FROM music
 	   					   	  ORDER BY music_id desc")
 				 or die ("Database error - selecting music_id");
 		
-		$musicrow = mysql_fetch_row($MUSIC);
+		$musicrow = $MUSIC->fetch_row();
 		$music_id = $musicrow[0];
 		
-		$sdbquery = mysql_query("INSERT INTO demo_music (demo_id,music_id) VALUES ('$demo_id','$music_id')")
+		$sdbquery = $mysqli->query("INSERT INTO demo_music (demo_id,music_id) VALUES ('$demo_id','$music_id')")
 					or die ("Database error - inserting music id");
 		
 		// Insert the author id
 		
-		$sdbquery = mysql_query("INSERT INTO music_author (music_id,ind_id) VALUES ('$music_id','$ind_id')")
+		$sdbquery = $mysqli->query("INSERT INTO music_author (music_id,ind_id) VALUES ('$music_id','$ind_id')")
 					or die ("Database error - couldn't insert author id");
 		
 		// Get the type id and insert it into the music type table
-		$typequery = mysql_query("SELECT music_types_main_id FROM music_types_main WHERE extention='$ext'") 
+		$typequery = $mysqli->query("SELECT music_types_main_id FROM music_types_main WHERE extention='$ext'") 
 					 or die ("Database error - selecting music_id");
 		
-		$typerow = mysql_fetch_row($typequery);
+		$typerow = $typequery->fetch_row();
 		$type_id = $typerow[0];
 		
 		// Insert the type id
-		$sdbquery = mysql_query("INSERT INTO music_types (music_types_main_id,music_id) VALUES ('$type_id','$music_id')")
+		$sdbquery = $mysqli->query("INSERT INTO music_types (music_types_main_id,music_id) VALUES ('$type_id','$music_id')")
 					or die ("Database error - inserting type id");
 		
 		// Rename the uploaded file to its autoincrement number and move it to its proper place.
@@ -185,7 +185,7 @@ foreach($image['tmp_name'] as $key=>$tmp_name)
 }
 
 //We need to get all the info of this game. 
-$SQL_DEMO = mysql_query("SELECT demo.demo_name, 
+$SQL_DEMO = $mysqli->query("SELECT demo.demo_name, 
 						   demo.demo_id
 						   FROM demo 
 					       WHERE demo.demo_id='$demo_id'")
@@ -199,7 +199,7 @@ while ( $DEMO=mysql_fetch_assoc($SQL_DEMO) )
 }
 
 //get the music info
-$sql_music = mysql_query("SELECT * FROM demo_music 
+$sql_music = $mysqli->query("SELECT * FROM demo_music 
 							LEFT JOIN music ON (demo_music.music_id = music.music_id)
 							LEFT JOIN music_author ON (music.music_id = music_author.music_id)
 							LEFT JOIN individuals ON (music_author.ind_id = individuals.ind_id)
@@ -222,7 +222,7 @@ $smarty->assign('nr_of_zaks', $i);
 
 //get the individuals
 
-$SQL_MUSICIAN = mysql_query("SELECT *
+$SQL_MUSICIAN = $mysqli->query("SELECT *
 						   FROM demo_author
 						   LEFT JOIN author_type ON ( demo_author.author_type_id = author_type.author_type_id )
 					       LEFT JOIN demo ON ( demo_author.demo_id = demo.demo_id )

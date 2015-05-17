@@ -18,7 +18,7 @@
 include("../includes/common.php");
 
 //Get the screenshots for this game, if they exist
-$sql_screenshots = mysql_query("SELECT * FROM screenshot_game
+$sql_screenshots = $mysqli->query("SELECT * FROM screenshot_game
 			   		LEFT JOIN screenshot_main ON (screenshot_game.screenshot_id = screenshot_main.screenshot_id)
 					WHERE screenshot_game.game_id = '$game_id' ORDER BY screenshot_game.screenshot_id")
 				   		or die ("Database error - selecting screenshots");
@@ -47,7 +47,7 @@ while ( $screenshots=mysql_fetch_array ($sql_screenshots))
 $smarty->assign("screenshots_nr",$v_screenshots);
 
 //Get the game data
-$sql_game = mysql_query("SELECT * FROM game WHERE game_id = '$game_id'")
+$sql_game = $mysqli->query("SELECT * FROM game WHERE game_id = '$game_id'")
 			   	   or die ("Database error - selecting game");
 
 while ( $game=mysql_fetch_array ($sql_game)) 

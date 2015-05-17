@@ -22,7 +22,7 @@ Display submissions
 include("../includes/common.php");
 
 // get the total nr of submissions in the DB
-$query_total_number = mysql_query("SELECT count(*) FROM game_submitinfo") or die ("Couldn't get the total number of submissions");
+$query_total_number = $mysqli->query("SELECT count(*) FROM game_submitinfo") or die ("Couldn't get the total number of submissions");
 $v_rows_total = mysql_result($query_total_number,0,0) or die("Couldn't get the total number of submissions");
 $smarty->assign('total_nr_submissions', $v_rows_total);
 
@@ -32,7 +32,7 @@ $smarty->assign('total_nr_submissions', $v_rows_total);
 		if ($list=="done") 
 		
 		{
-		$sql_submission =  mysql_query("SELECT * FROM game_submitinfo
+		$sql_submission =  $mysqli->query("SELECT * FROM game_submitinfo
 									 	LEFT JOIN game ON (game_submitinfo.game_id = game.game_id)
 									 	LEFT JOIN users ON (game_submitinfo.user_id = users.user_id)
 										WHERE game_done = '1'
@@ -40,7 +40,7 @@ $smarty->assign('total_nr_submissions', $v_rows_total);
 										DESC LIMIT  " . $v_counter . ", 25");
 										
 				//check the number of comments
-				$query_number = mysql_query("SELECT count(*) FROM game_submitinfo 
+				$query_number = $mysqli->query("SELECT count(*) FROM game_submitinfo 
 											 WHERE game_done = '1' 
 											 ORDER BY game_submitinfo_id DESC") 
 											 or die("Couldn't get the number of game submissions");
@@ -52,7 +52,7 @@ $smarty->assign('total_nr_submissions', $v_rows_total);
 		
 		{
 		
-		$sql_submission =  mysql_query("SELECT * FROM game_submitinfo
+		$sql_submission =  $mysqli->query("SELECT * FROM game_submitinfo
 									 	LEFT JOIN game ON (game_submitinfo.game_id = game.game_id)
 									 	LEFT JOIN users ON (game_submitinfo.user_id = users.user_id)
 										WHERE game_done <> '1'
@@ -60,7 +60,7 @@ $smarty->assign('total_nr_submissions', $v_rows_total);
 										DESC LIMIT  " . $v_counter . ", 25");
 										
 				//check the number of comments
-				$query_number = mysql_query("SELECT count(*) FROM game_submitinfo 
+				$query_number = $mysqli->query("SELECT count(*) FROM game_submitinfo 
 											 WHERE game_done <> '1' 
 											 ORDER BY game_submitinfo_id DESC") 
 											 or die("Couldn't get the number of game submissions");
@@ -72,7 +72,7 @@ $smarty->assign('total_nr_submissions', $v_rows_total);
 										
 		$number_sub = mysql_num_rows($sql_submission);
 	
-		while ($query_submission = mysql_fetch_array($sql_submission))  
+		while ($query_submission = $sql_submission->fetch_array(MYSQLI_BOTH))  
 		{
 		
 		
@@ -80,7 +80,7 @@ $smarty->assign('total_nr_submissions', $v_rows_total);
 	{
 	
 		//Select a random screenshot record
-	$query_game = mysql_query("SELECT 
+	$query_game = $mysqli->query("SELECT 
 							   screenshot_game.game_id,
 							   screenshot_game.screenshot_id,
 							   screenshot_main.imgext
@@ -89,17 +89,17 @@ $smarty->assign('total_nr_submissions', $v_rows_total);
 							   WHERE screenshot_game.game_id = " .$query_submission['game_id']. "						   	   
 						   	   ORDER BY RAND() LIMIT 1"); 
 							   
-	$sql_game = mysql_fetch_array($query_game);  
+	$sql_game = $query_game->fetch_array(MYSQLI_BOTH);  
 	}
 	
 	// Retrive userstats from database
-	$query_user = mysql_query("SELECT count(*)
+	$query_user = $mysqli->query("SELECT count(*)
 							   FROM game_user_comments
 							   LEFT JOIN comments ON ( game_user_comments.comment_id = comments.comments_id )
 							   WHERE user_id = " .$query_submission['user_id']."");
 	$usercomment_number = mysql_result($query_user,0,0);
 	
-	$query_submitinfo = mysql_query("SELECT count(*) FROM game_submitinfo WHERE user_id = ".$query_submission['user_id']."") 
+	$query_submitinfo = $mysqli->query("SELECT count(*) FROM game_submitinfo WHERE user_id = ".$query_submission['user_id']."") 
 						or die ("Could not count user submissions");
 	$usersubmit_number = mysql_result($query_submitinfo,0,0);
 	

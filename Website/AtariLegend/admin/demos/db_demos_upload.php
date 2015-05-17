@@ -67,15 +67,15 @@ $demo_download_name = $_FILES['demo_download_name'];
 		$timestamp = time();
 		
 		// Insert the ext,timestamp and the demo id into the demo download table.
-		$sdbquery = mysql_query("INSERT INTO demo_download (demo_id,demo_ext,date) VALUES ('$demo_id','$ext','$timestamp')")
+		$sdbquery = $mysqli->query("INSERT INTO demo_download (demo_id,demo_ext,date) VALUES ('$demo_id','$ext','$timestamp')")
 		or die("ERROR! Couldn't insert date, ext and demo id");
 		
 		//select the newly created demo_download_id from the demo_download table
-		$DEMODOWN = mysql_query("SELECT demo_download_id FROM demo_download
+		$DEMODOWN = $mysqli->query("SELECT demo_download_id FROM demo_download
 	   					   		 ORDER BY demo_download_id desc")
 					or die ("Database error - selecting demo_download");
 		
-		$demodownrow = mysql_fetch_row($DEMODOWN);
+		$demodownrow = $DEMODOWN->fetch_row();
 		
 		// Time to unzip the file to the temporary directory
 		$archive = new PclZip("$tempfilename");
@@ -99,11 +99,11 @@ $demo_download_name = $_FILES['demo_download_name'];
 		// function to check everytime the file is being downloaded... if the hashes don't match, then datacorruption have changed the file.
 		$crc = md5_file ( "$demo_file_path$demodownrow[0].zip");
 		
-		$sdbquery = mysql_query("UPDATE demo_download SET md5 = '$crc' WHERE demo_download_id = '$demodownrow[0]'")
+		$sdbquery = $mysqli->query("UPDATE demo_download SET md5 = '$crc' WHERE demo_download_id = '$demodownrow[0]'")
 				or die("Couldn't insert md5hash");
 		
 		// Add entry to search table for search purposes
-		mysql_query("UPDATE demo_search SET download='1' WHERE demo_id='$demo_id'");
+		$mysqli->query("UPDATE demo_search SET download='1' WHERE demo_id='$demo_id'");
 		
 		// Chmod file so that we can backup/delete files through ftp.
 		chmod("$demo_file_path$demodownrow[0].zip", 0777);
@@ -121,40 +121,40 @@ if (isset($action) and $action == 'update_download')
 {
 
 if (isset($cracker)) {
-	mysql_query("UPDATE demo_download SET cracker='$cracker' WHERE demo_download_id='$demo_download_id'");
+	$mysqli->query("UPDATE demo_download SET cracker='$cracker' WHERE demo_download_id='$demo_download_id'");
 }
 if (isset($supplier)) {
-	mysql_query("UPDATE demo_download SET supplier='$supplier' WHERE demo_download_id='$demo_download_id'");
+	$mysqli->query("UPDATE demo_download SET supplier='$supplier' WHERE demo_download_id='$demo_download_id'");
 }
 if (isset($screen)) {
-	mysql_query("UPDATE demo_download SET screen='$screen' WHERE demo_download_id='$demo_download_id'");
+	$mysqli->query("UPDATE demo_download SET screen='$screen' WHERE demo_download_id='$demo_download_id'");
 }
 if (isset($language)) {
-	mysql_query("UPDATE demo_download SET language='$language' WHERE demo_download_id='$demo_download_id'");
+	$mysqli->query("UPDATE demo_download SET language='$language' WHERE demo_download_id='$demo_download_id'");
 }
 if (isset($trainer)) {
-	mysql_query("UPDATE demo_download SET trainer='$trainer' WHERE demo_download_id='$demo_download_id'");
+	$mysqli->query("UPDATE demo_download SET trainer='$trainer' WHERE demo_download_id='$demo_download_id'");
 }
 if (isset($legend)) {
-	mysql_query("UPDATE demo_download SET legend='$legend' WHERE demo_download_id='$demo_download_id'");
+	$mysqli->query("UPDATE demo_download SET legend='$legend' WHERE demo_download_id='$demo_download_id'");
 }
 if (isset($disks)) {
-	mysql_query("UPDATE demo_download SET disks='$disks' WHERE demo_download_id='$demo_download_id'");
+	$mysqli->query("UPDATE demo_download SET disks='$disks' WHERE demo_download_id='$demo_download_id'");
 }
 if (isset($set_nr)) {
-	mysql_query("UPDATE demo_download SET set_nr='$set_nr' WHERE demo_download_id='$demo_download_id'");
+	$mysqli->query("UPDATE demo_download SET set_nr='$set_nr' WHERE demo_download_id='$demo_download_id'");
 }
 if (isset($harddrive)) {
-	mysql_query("UPDATE demo_download SET harddrive='$harddrive' WHERE demo_download_id='$demo_download_id'");
+	$mysqli->query("UPDATE demo_download SET harddrive='$harddrive' WHERE demo_download_id='$demo_download_id'");
 }
 if (isset($disable)) {
-	mysql_query("UPDATE demo_download SET disable='$disable' WHERE demo_download_id='$demo_download_id'");
+	$mysqli->query("UPDATE demo_download SET disable='$disable' WHERE demo_download_id='$demo_download_id'");
 }
 if (isset($version)) {
-	mysql_query("UPDATE demo_download SET version='$version' WHERE demo_download_id='$demo_download_id'");
+	$mysqli->query("UPDATE demo_download SET version='$version' WHERE demo_download_id='$demo_download_id'");
 }
 if (isset($tos)) {
-	mysql_query("UPDATE demo_download SET tos='$tos' WHERE demo_download_id='$demo_download_id'");
+	$mysqli->query("UPDATE demo_download SET tos='$tos' WHERE demo_download_id='$demo_download_id'");
 }
 		header("Location: ../demos/demos_upload.php?demo_id=$demo_id");
 }
@@ -164,7 +164,7 @@ if (isset($tos)) {
 //**************************************************************************************** 
 if (isset($action) and $action == "delete_download")
 {
-	mysql_query("DELETE from demo_download WHERE demo_download_id='$demo_download_id'");
+	$mysqli->query("DELETE from demo_download WHERE demo_download_id='$demo_download_id'");
 	unlink ("$demo_file_path$demo_download_id.zip");
 		header("Location: ../demos/demos_upload.php?demo_id=$demo_id");
 }

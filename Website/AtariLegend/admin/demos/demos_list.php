@@ -132,7 +132,7 @@ querystring for faster output
 		//echo $RESULTDEMO;
 		//exit;
 		
-		$demos = mysql_query($RESULTDEMO) or die ('problem with the demo query');
+		$demos = $mysqli->query($RESULTDEMO) or die ('problem with the demo query');
 		
 		if (!$demos)		
 		{
@@ -178,10 +178,10 @@ querystring for faster output
 				$RESULTAKA .= ' GROUP BY demo_aka.demo_id, demo_aka.aka_name HAVING COUNT(DISTINCT demo_aka.demo_id, demo_aka.aka_name) = 1';
 				$RESULTAKA .= ' ORDER BY demo_aka.aka_name ASC';
 				
-				mysql_query("CREATE TEMPORARY TABLE temp ENGINE=MEMORY $RESULTDEMO") or die("does not compute");
-				mysql_query("INSERT INTO temp $RESULTAKA") or die("does not compute2");
+				$mysqli->query("CREATE TEMPORARY TABLE temp ENGINE=MEMORY $RESULTDEMO") or die("does not compute");
+				$mysqli->query("INSERT INTO temp $RESULTAKA") or die("does not compute2");
 
-				$temp_query = mysql_query("SELECT * FROM temp ORDER BY demo_name ASC") or die("does not compute3");
+				$temp_query = $mysqli->query("SELECT * FROM temp ORDER BY demo_name ASC") or die("does not compute3");
 				
 				$end1=gettimeofday();
 				$totaltime1 = (float)($end1['sec'] - $start1['sec']) + ((float)($end1['usec'] - $start1['usec'])/1000000);
@@ -191,7 +191,7 @@ querystring for faster output
 				
 				$i = 0;
 				
-				while ( $sql_demo_search = mysql_fetch_array($temp_query) ) 
+				while ( $sql_demo_search = $temp_query->fetch_array(MYSQLI_BOTH) ) 
 				{  
 				      $i++;
 					  
@@ -210,7 +210,7 @@ querystring for faster output
 				$smarty->assign("nr_of_demos",$i);
 				$smarty->assign("query_time",$totaltime1 );
 				
-				mysql_query("DROP TABLE temp") or die("does not compute4");
+				$mysqli->query("DROP TABLE temp") or die("does not compute4");
 				
 				$smarty->assign("user_id",$_SESSION['user_id']);
 				$smarty->assign('demo_list_tpl', '1');

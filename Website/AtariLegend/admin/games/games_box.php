@@ -19,9 +19,9 @@ This is the game box main page
 ************************************************************************************************
 */
 
-		$sql_game = mysql_query("SELECT * FROM game WHERE game_id='$game_id'")
+		$sql_game = $mysqli->query("SELECT * FROM game WHERE game_id='$game_id'")
 				   or die ("Database error - getting game name");
-       	$game_name=mysql_fetch_array($sql_game);
+       	$game_name=$sql_game->fetch_array(MYSQLI_BOTH);
 		
 		$smarty->assign('game_info',
 	    array('game_id' => $game_name['game_id'],
@@ -44,7 +44,7 @@ This is the game box main page
 		}
 
 		
-	 	$IMAGE = mysql_query("SELECT * FROM game_boxscan WHERE game_id='$game_id' ORDER BY game_boxscan_side, game_boxscan_id")
+	 	$IMAGE = $mysqli->query("SELECT * FROM game_boxscan WHERE game_id='$game_id' ORDER BY game_boxscan_side, game_boxscan_id")
 				 or die ("Database error - selecting gamebox scan");
 		
 		$imagenum_rows = mysql_num_rows($IMAGE);
@@ -74,7 +74,7 @@ This is the game box main page
 				{
 					$back++;
 					
-					$couple = mysql_query("SELECT game_boxscan_id FROM game_box_couples WHERE game_boxscan_cross=$rowimage[game_boxscan_id]")
+					$couple = $mysqli->query("SELECT game_boxscan_id FROM game_box_couples WHERE game_boxscan_cross=$rowimage[game_boxscan_id]")
 				 			  or die ("Database error - selecting gamebox scan");
 					$couplerow = mysql_fetch_row($couple);
 					$boxscan_cross_id = $couplerow[0];

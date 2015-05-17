@@ -44,30 +44,30 @@ $sql_build = "SELECT *
 							 " . $where_clause . "
 							ORDER BY comments.timestamp DESC LIMIT  " . $v_counter . ", 15";
 
-$sql_comment = mysql_query($sql_build);
+$sql_comment = $mysqli->query($sql_build);
 
 // get the total nr of comments in the DB
-$query_total_number = mysql_query("SELECT count(*) FROM game_user_comments") or die ("Couldn't get the total number of comments");
-$v_rows_total = mysql_result($query_total_number,0,0) or die("Couldn't get the total number of comments");
+$query_total_number = $mysqli->query("SELECT * FROM game_user_comments") or die ("Couldn't get the total number of comments");
+$v_rows_total = $query_total_number->num_rows;
 $smarty->assign('total_nr_comments', $v_rows_total);
 
 
 // count number of comments
-$query_number = mysql_query("SELECT count(*) FROM game_user_comments
+$query_number = $mysqli->query("SELECT * FROM game_user_comments
 							 LEFT JOIN comments ON ( game_user_comments.comment_id = comments.comments_id )
 							 LEFT JOIN users ON ( comments.user_id = users.user_id ) " . $where_clause) or die("Couldn't get the number of comments");
 
-$v_rows = mysql_result($query_number,0,0) or die("Couldn't get the number of comments");
+$v_rows = $query_number->num_rows;
 
 $smarty->assign('nr_comments', $v_rows);
 
 
 // lets put the comments in a smarty array
-while ($query_comment = mysql_fetch_array($sql_comment)) 
+while ($query_comment = $sql_comment->fetch_array(MYSQLI_BOTH)) 
 {
 	$query_game_id = $query_comment['game_id'];
 //Select a random screenshot record
-	$query_game = mysql_query("SELECT 
+	$query_game = $mysqli->query("SELECT 
 							   screenshot_game.game_id,
 							   screenshot_game.screenshot_id,
 							   screenshot_main.imgext
@@ -76,18 +76,18 @@ while ($query_comment = mysql_fetch_array($sql_comment))
 							   WHERE screenshot_game.game_id = $query_game_id						   	   
 						   	   ORDER BY RAND() LIMIT 1"); 
 							   
-	$sql_game = mysql_fetch_array($query_game);  
+	$sql_game = $query_game->fetch_array(MYSQLI_BOTH);  
 
 // Retrive userstats from database
-	$query_user = mysql_query("SELECT count(*)
+	$query_user = $mysqli->query("SELECT *
 							   FROM game_user_comments
 							   LEFT JOIN comments ON ( game_user_comments.comment_id = comments.comments_id )
 							   WHERE user_id = $query_comment[user_id]") or die ("Could not count user comments");
-	$usercomment_number = mysql_result($query_user,0,0) or die("Couldn't get the number of comments");
+	$usercomment_number = $query_user->num_rows;
 	
-	$query_submitinfo = mysql_query("SELECT count(*) FROM game_submitinfo WHERE user_id = $query_comment[user_id]") 
+	$query_submitinfo = $mysqli->query("SELECT * FROM game_submitinfo WHERE user_id = $query_comment[user_id]") 
 						or die ("Could not count user submissions");
-	$usersubmit_number = mysql_result($query_submitinfo,0,0);
+	$usersubmit_number = $query_submitinfo->num_rows;
 	
 	//Get the dataElements we want to place on screen
 	if (isset($sql_game['imgext'])) {

@@ -18,7 +18,7 @@
 include("../includes/common.php"); 
 include("../includes/config.php"); 
 
-$sql_review = mysql_query("SELECT * FROM game
+$sql_review = $mysqli->query("SELECT * FROM game
 						   LEFT JOIN review_game ON (game.game_id = review_game.game_id)
 						   LEFT JOIN review_main ON (review_game.review_id = review_main.review_id)
 						   LEFT JOIN review_score ON (review_main.review_id = review_score.review_id)
@@ -27,7 +27,7 @@ $sql_review = mysql_query("SELECT * FROM game
 						   AND review_main.review_edit = '0'") 
 			  or die("Error - Couldn't query review data");
 						   
-$query_review = mysql_fetch_array($sql_review);
+$query_review = $sql_review->fetch_array(MYSQLI_BOTH);
 
 	$review_date = convert_timestamp($query_review['review_date']);
 	
@@ -52,13 +52,13 @@ $query_review = mysql_fetch_array($sql_review);
 		   'overall' => $query_review['review_overall']));
 
 //Get the screenshots and the comments of this review
-$query_screenshots = mysql_query("SELECT * FROM review_main 
+$query_screenshots = $mysqli->query("SELECT * FROM review_main 
 								LEFT JOIN screenshot_review ON (review_main.review_id = screenshot_review.review_id)
 								LEFT JOIN screenshot_main ON (screenshot_review.screenshot_id = screenshot_main.screenshot_id)
 								LEFT JOIN review_comments ON (screenshot_review.screenshot_review_id = review_comments.screenshot_review_id)
 								WHERE review_main.review_id = '$review_id' AND review_main.review_edit = '0'");
 
-while ($sql_screenshots = mysql_fetch_array($query_screenshots))
+while ($sql_screenshots = $query_screenshots->fetch_array(MYSQLI_BOTH))
 {
 	$new_path = $game_screenshot_path;
 	$new_path .= $sql_screenshots['screenshot_id'];
