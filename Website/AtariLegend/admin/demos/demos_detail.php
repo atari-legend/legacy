@@ -70,7 +70,7 @@ include("../includes/common.php");
 			$sql_demo_cat = $mysqli->query("SELECT * FROM demo_cat_cross WHERE demo_id='$demo_id' AND demo_cat_id=$categories[demo_cat_id]")
 							or die ("Error loading categorie cross table");
 			
-			$selected=mysql_num_rows($sql_demo_cat);		
+			$selected=$sql_demo_cat->num_rows;		
 			if ( $selected == 1 )
 			{
 				$selected = 'selected';

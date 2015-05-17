@@ -85,11 +85,11 @@ if (isset($action) and $action == 'search')
 		}
 		else
 		{
-			$rows = mysql_num_rows($demos);
+			$rows = $demos->num_rows;
 			if ( $rows > 0 )
 			{
 				$i = 1;
-				while ( $row=mysql_fetch_assoc($demos) ) 
+				while ( $row=$demos->fetch_array(MYSQLI_BOTH) ) 
 				{  
 					$i++;
 				

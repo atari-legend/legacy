@@ -62,7 +62,7 @@ $sql_user = $mysqli->query("SELECT user_id,userid,karma FROM users");
 					LEFT JOIN game ON ( game_user_comments.game_id = game.game_id )
 					WHERE comments.user_id = $user_id");
 	
-	$nr_gamecomments = mysql_num_rows($sql_gamecomments);
+	$nr_gamecomments = $sql_gamecomments->num_rows;
 	
 	mysql_free_result($sql_gamecomments);
 	
@@ -72,7 +72,7 @@ $sql_user = $mysqli->query("SELECT user_id,userid,karma FROM users");
 					LEFT JOIN game ON ( review_game.game_id = game.game_id )
 					WHERE review_main.member_id = $user_id");
 	
-	$nr_gamereviews = mysql_num_rows($sql_gamereview);
+	$nr_gamereviews = $sql_gamereview->num_rows;
 	mysql_free_result($sql_gamereview);
 	
 	// START - NUMBER OF DOWNLOADS BY USER
@@ -86,19 +86,19 @@ $sql_user = $mysqli->query("SELECT user_id,userid,karma FROM users");
 				    LEFT JOIN game ON (game_submitinfo.game_id = game.game_id)
 					WHERE user_id = $user_id");
 					
-	$nr_gamesubmissions = mysql_num_rows($sql_submissions);
+	$nr_gamesubmissions = $sql_submissions->num_rows;
 	mysql_free_result($sql_submissions);
 	
 	// Submitted links
 	$sql_links = $mysqli->query("SELECT * FROM website WHERE website_user_sub = $user_id");
 	
-	$nr_links = mysql_num_rows($sql_links);
+	$nr_links = $sql_links->num_rows;
 	mysql_free_result($sql_links);
 	
 	// START - NUMBER OF NEWS POSTS BY USER
 	$sql_news = $mysqli->query("SELECT * FROM news WHERE user_id = $user_id");
 	
-	$nr_news = mysql_num_rows($sql_news);
+	$nr_news = $sql_news->num_rows;
 	mysql_free_result($sql_news);
 	
 	$karma_value = 0;
@@ -116,13 +116,13 @@ $sql_user = $mysqli->query("SELECT user_id,userid,karma FROM users");
 	
 	$sql_user2 = $mysqli->query("SELECT user_id,userid,karma FROM users ORDER BY karma DESC");
 	
-	while ($user_info = mysql_fetch_assoc($sql_user2))
+	while ($user_info = $sql_user2->fetch_array(MYSQLI_BOTH))
 	{
 	
 	$smarty->append('sync',
-			  array('user_id' => $user_info[user_id],
-					'user_name' => $user_info[userid],
-					'karma_value' => $user_info[karma]));
+			  array('user_id' => $user_info['user_id'],
+					'user_name' => $user_info['userid'],
+					'karma_value' => $user_info['karma']));
 	
 	}
 

@@ -89,7 +89,7 @@ if ( isset($action) and $action == 'Update_Interview' )
 			$INTERVIEWCOMMENT = $mysqli->query("SELECT * FROM interview_comments where screenshot_interview_id = $interviewshotid")
 						        or die ("Database error - selecting screenshot interview comment");
 					
-			$number = mysql_num_rows($INTERVIEWCOMMENT);
+			$number = $INTERVIEWCOMMENT->num_rows;
 					
 			if ($number > 0)
 			{

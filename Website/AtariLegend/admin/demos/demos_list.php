@@ -143,7 +143,7 @@ querystring for faster output
 		}
 		else
 		{
-			$rows = mysql_num_rows($demos);
+			$rows = $demos->num_rows;
 			if ( $rows > 0 )
 			{	
 				

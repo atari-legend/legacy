@@ -103,7 +103,7 @@ if (isset ($action) and $action == 'pick_composer')
 						         WHERE ind_id='$individuals'")
 			        or die ("Error getting ind name");
 	
-		while ( $IND=mysql_fetch_assoc($SQL_IND) ) 
+		while ( $IND=$SQL_IND->fetch_array(MYSQLI_BOTH) ) 
 		{  
 			$smarty->assign('ind_selected',
 		  	 		 array( 'ind_id'  => $IND[ind_id],
@@ -191,7 +191,7 @@ $SQL_DEMO = $mysqli->query("SELECT demo.demo_name,
 					       WHERE demo.demo_id='$demo_id'")
 		      or die ("Error getting demo info");
 			
-while ( $DEMO=mysql_fetch_assoc($SQL_DEMO) ) 
+while ( $DEMO=$SQL_DEMO->fetch_array(MYSQLI_BOTH) ) 
 {  
 	$smarty->assign('demo',
 	   		 array('demo_id' => $DEMO['demo_id'],
@@ -207,7 +207,7 @@ $sql_music = $mysqli->query("SELECT * FROM demo_music
 							LEFT JOIN music_types_main ON (music_types.music_types_main_id = music_types_main.music_types_main_id)
 							WHERE demo_music.demo_id='$demo_id'");
 $i = 0;
-while ( $MUSIC=mysql_fetch_assoc($sql_music) ) 
+while ( $MUSIC=$sql_music->fetch_array(MYSQLI_BOTH) ) 
 { 		
 	$i++;
 	
@@ -232,7 +232,7 @@ $SQL_MUSICIAN = $mysqli->query("SELECT *
 		      or die ("Error getting demo musician");
 $i = 0;
 
-while ( $MUSICIAN=mysql_fetch_assoc($SQL_MUSICIAN) ) 
+while ( $MUSICIAN=$SQL_MUSICIAN->fetch_array(MYSQLI_BOTH) ) 
 {  
 	$i++;
 	

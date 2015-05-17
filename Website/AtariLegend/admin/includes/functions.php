@@ -194,19 +194,21 @@ function convert_timestamp_rss($timestamp)
 	
 function get_username_from_id($submitted)
 	{
-					$query = "SELECT userid FROM users WHERE user_id = '$submitted'";
-					$result = mysql_query($query) or die("Query failed");
-					if(mysql_num_rows($result) == 0) return 0;
+					$query = "SELECT userid FROM users WHERE user_id = $submitted";
+					global $mysqli;
+					$result = $mysqli->query($query) or die("Query failed");
+					if(get_rows($result) == 0) return 0;
 					else
 					{
-						$query_data = mysql_fetch_array($result);
+						$query_data = $result->fetch_array(MYSQLI_BOTH);
 					return $query_data['userid'];
 					}
 	}
 
 function get_user_id_from_name($submitted)
 	{
-					$query = "SELECT user_id FROM users WHERE userid = '$submitted'";
+					$query = "SELECT user_id FROM users WHERE userid = $submitted";
+					global $mysqli;
 					$result = mysql_query($query) or die("Query failed");
 					if(mysql_num_rows($result) == 0) return 0;
 					else
@@ -218,7 +220,7 @@ function get_user_id_from_name($submitted)
 	
 function get_rows ($result)
 	{
-		$num=mysql_num_rows($result);
+		$num=$result->num_rows;
 		return $num;
 	}
 
@@ -403,54 +405,67 @@ function maketree($rootcatid,$sql,$maxlevel)
 // $sql is the sql statement which fetches the data
 // you MUST keep this order:
 // 1) the category ID, 2) the parent category ID, 3) the name of the category
-         $result=mysql_query($sql);
-		//$result=$sql;
+ 
+		$result=$sql;
 		 
-                 while(list($catid,$parcat,$name)=mysql_fetch_array($result)){
+                 while(list($catid,$parcat,$name) = $result->fetch_array(MYSQLI_BOTH)){
                  $table[$parcat][$catid]=$name; // array $table get 2 keys both with value $name
 
                  };
 
-         $result=makebranch($rootcatid,$table,0,$maxlevel);
+         //$result=makebranch($rootcatid,$table,0,$maxlevel);
+	$result=makebranch($rootcatid,$table,0,$maxlevel);
 
          RETURN $result;
+	//RETURN $table;
 }
 
 function makebranch($parcat,$table,$level,$maxlevel)
 {
 	global $branche_info;
 	global $tree;
+	global $mysqli;
 
 	$list=$table[$parcat];
-    asort($list); // here we do the sorting
-    while(list($key,$val)=each($list))
+	natcasesort($list);
+
+
+    //asort($table); // here we do the sorting
+
+
+    while(list($key,$val)=each($table))
 	{
 		// do the indent
         if ($level=="0")
 		{
         	$branche_info['cat_width']="0";
-        }
+        	}
 		else
 		{
             $width=($level+1)*10;
             $branche_info['cat_width'] = $width;
-        };
+        	}
         // the resulting HTML - feel free to change it
         // $level is optional
 	
-		$website = mysql_query ("SELECT count(*) FROM website_category_cross WHERE website_category_id='$key'");
+		$website = $mysqli->query("SELECT count(*) FROM website_category_cross WHERE website_category_id='$key'");
 	
-		$branche_info['cat_links'] = mysql_result($website,0,0);
+		$branche_info['cat_links'] = $website->field_seek(0);
 		$branche_info['cat_name'] = $val;
 		$branche_info['cat_id'] = $key;
 		$tree['info'][] = $branche_info;
 		
+		//print_r($branche_info['cat_name']);
+		//echo "<br>";
+
 		// ask if case to query if the category in this "cycle" has a subcategory, if it has execute makebranch2
-		if ((isset($table[$key])) AND (($maxlevel>$level+1) OR ($maxlevel=="0")))
-  	    {
- 	    	makebranch($key,$table,$level+1,$maxlevel);
-        };
-    };
+		if ((isset($table[$key])) and (($maxlevel>$level+1) or ($maxlevel=="0")))
+  	    	{
+ 	    		makebranch($key,$table,$level+1,$maxlevel);
+        	}
+    	}
+	RETURN $tree;
+
 }
 
 

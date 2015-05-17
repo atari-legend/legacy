@@ -151,7 +151,7 @@ if (isset($ind_id) and isset($action) and $action == 'delete_ind')
 	
 	$sdbquery = $mysqli->query("SELECT * FROM interview_main WHERE ind_id='$ind_id'")
 				or die ("Error getting interview info");
-	if ( mysql_num_rows($sdbquery) > 0 )
+	if ( $sdbquery->num_rows > 0 )
 	{
 		$smarty->assign("message",'Deletion failed - This individual is interviewed - Delete it in the appropriate section');
 	}
@@ -159,7 +159,7 @@ if (isset($ind_id) and isset($action) and $action == 'delete_ind')
 	{
 		$sdbquery = $mysqli->query("SELECT * FROM game_author WHERE ind_id='$ind_id'")
 					or die ("Error getting interview info");
-		if ( mysql_num_rows($sdbquery) > 0 )
+		if ( $sdbquery->num_rows > 0 )
 		{
 			$smarty->assign("message",'Deletion failed - This individual is linked to a game - Delete it in the appropriate section');
 		}

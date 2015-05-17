@@ -65,7 +65,7 @@ if (isset($action) and $action=="link_delete")
 
 $RESULT=$mysqli->query("SELECT website_category_id FROM website_category_cross WHERE website_id = '$website_id'")
 			or die("Unable to select the website_category_id");
-$rowcat=mysql_fetch_assoc($RESULT);
+$rowcat=$RESULT->fetch_array(MYSQLI_BOTH);
 
 	$sql = "SELECT website_imgext FROM website WHERE website_id='$website_id'";
 	$website_query = $mysqli->query($sql);
