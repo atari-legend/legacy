@@ -32,8 +32,8 @@ if (isset($action) and $action=="delete")
 }
 
 //get the number of news threads in the archive
-$query_number = $mysqli->query("SELECT count(*) FROM news") or die("Couldn't get the number of news threads");
-$v_news = mysql_result($query_number,0,0) or die("Couldn't get the number of news threads");
+$query_number = $mysqli->query("SELECT * FROM news") or die("Couldn't get the number of news threads");
+$v_news = $query_number->num_rows;
 
 $smarty->assign('news_nr', $v_news);
 

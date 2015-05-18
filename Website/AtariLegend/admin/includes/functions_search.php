@@ -137,7 +137,7 @@ function add_search_words($mode, $post_id, $post_text, $post_title = '')
 				 	$sql = "INSERT IGNORE INTO news_search_wordlist (news_word_text) 
 						VALUES $value_sql"; 
 
-			if ( !mysql_query($sql) )
+			if ( !$mysqli->query($sql) )
 			{
 				die ("Could not insert new word");
 			} 
@@ -156,7 +156,7 @@ function add_search_words($mode, $post_id, $post_text, $post_title = '')
 				SELECT $post_id, news_word_id, $title_match  
 					FROM news_search_wordlist 
 					WHERE news_word_text IN ($match_sql)"; 
-			if ( !mysql_query($sql) )
+			if ( !$mysqli->query($sql) )
 			{
 				die ("Could not insert new word2");
 			}
@@ -178,10 +178,10 @@ function remove_search_post($post_id_sql)
 				FROM news_search_wordmatch 
 				WHERE news_id IN ($post_id_sql) 
 				GROUP BY news_word_id";
-			if ( $result = mysql_query($sql) )
+			if ( $result = $mysqli->query($sql) )
 			{
 				$word_id_sql = '';
-				while ( $row = mysql_fetch_array($result) )
+				while ( $row = $result->fetch_array(MYSQLI_BOTH) )
 				{
 					$word_id_sql .= ( $word_id_sql != '' ) ? ', ' . $row['news_word_id'] : $row['news_word_id']; 
 				}
@@ -191,10 +191,10 @@ function remove_search_post($post_id_sql)
 					WHERE news_word_id IN ($word_id_sql) 
 					GROUP BY news_word_id 
 					HAVING COUNT(news_word_id) = 1";
-				if ( $result = mysql_query($sql) )
+				if ( $result = $mysqli->query($sql) )
 				{
 					$word_id_sql = '';
-					while ( $row = mysql_fetch_array($result) )
+					while ( $row = $result->fetch_array(MYSQLI_BOTH) )
 					{
 						$word_id_sql .= ( $word_id_sql != '' ) ? ', ' . $row['news_word_id'] : $row['news_word_id']; 
 					}
@@ -203,12 +203,12 @@ function remove_search_post($post_id_sql)
 					{
 						$sql = "DELETE FROM news_search_wordlist 
 							WHERE news_word_id IN ($word_id_sql)";
-						if ( !mysql_query($sql) )
+						if ( !$mysqli->query($sql) )
 						{
 							die("Could not delete word list entry");
 						}
 
-						$words_removed = mysql_affected_rows();
+						$words_removed = $mysqli->affected_rows;
 					}
 				}
 			}
@@ -216,7 +216,7 @@ function remove_search_post($post_id_sql)
 
 	$sql = "DELETE FROM news_search_wordmatch  
 		WHERE news_id IN ($post_id_sql)";
-	if ( !mysql_query($sql) )
+	if ( !$mysqli->query($sql) )
 	{
 		die("Error in deleting post");
 	}
