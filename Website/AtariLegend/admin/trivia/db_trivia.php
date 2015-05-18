@@ -30,7 +30,7 @@ if(isset($action) and $action =="did_you_know_insert")
 
 	header("Location: ../trivia/did_you_know.php");
 
-	mysql_close();
+	mysqli_close($mysqli);
 
 }
 
@@ -46,7 +46,7 @@ if(isset($action) and $action=="did_you_know_delete")
 
 	header("Location: ../trivia/did_you_know.php");
 
-	mysql_close();
+	mysqli_close($mysqli);
 
 }
 
@@ -158,7 +158,7 @@ foreach($image['tmp_name'] as $key=>$tmp_name)
 	}
 }
 
-mysql_close();
+mysqli_close($mysqli);
 
 	header("Location: ../trivia/manage_trivia_screens.php");
 
@@ -193,7 +193,7 @@ if (isset($imageid))
 
 			unlink ("$new_path");
 
-		mysql_close(); 
+		mysqli_close($mysqli); 
 	
 	header("Location: ../trivia/manage_trivia_screens.php");
 	

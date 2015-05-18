@@ -103,8 +103,8 @@ while ($sql_screenshots = $query_screenshots->fetch_array(MYSQLI_BOTH))
 $smarty->assign('interviews_preview_tpl', '1');
 
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/index.tpl');
+$smarty->display('file:../templates/0/index.html');
 
 //close the connection
-mysql_close();
+mysqli_close($mysqli);
 ?>

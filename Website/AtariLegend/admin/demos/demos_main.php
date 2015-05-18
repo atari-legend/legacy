@@ -35,8 +35,8 @@ list($start2, $start3) = explode(":", exec('date +%N:%S'));
 		}
 		
 		//get the number of demos in the archive
-		$query_number = $mysqli->query("SELECT count(*) FROM demo") or die("Couldn't get the number of demos");
-		$v_rows = mysql_result($query_number,0,0) or die("Couldn't get the number of demos");
+		$query_number = $mysqli->query("SELECT * FROM demo") or die("Couldn't get the number of demos");
+		$v_rows = $query_number->num_rows;
 
 		$smarty->assign('demos_nr', $v_rows); 
 		
@@ -44,7 +44,7 @@ list($start2, $start3) = explode(":", exec('date +%N:%S'));
 		$smarty->assign('demos_main_tpl', '1');
 
 		//Send all smarty variables to the templates
-		$smarty->display('file:../templates/0/index.tpl');
+		$smarty->display('file:../templates/0/index.html');
 //close the connection
-mysql_close();
+mysqli_close($mysqli);
 ?>

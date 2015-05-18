@@ -71,7 +71,7 @@ if ($action == 'edit_review')
 	$REVIEWSCORE = $mysqli->query("SELECT * FROM review_score where review_id = $reviewid")
 	  		       or die ("Database error - selecting scores");
 					
-	$score = $REVIEWSCORE->num_rows();
+	$score = $REVIEWSCORE->num_rows;
 	
 	if ($score > 0)
 	{
@@ -107,7 +107,7 @@ if ($action == 'edit_review')
 	    					    or die ("Database error - getting review - screenshots");
 					
 				//check if shot exists
-				$number = $REVIEWSCREEN->num_rows();
+				$number = $REVIEWSCREEN->num_rows;
 				
 				if ($number > 0)
 				{
@@ -131,7 +131,7 @@ if ($action == 'edit_review')
 				$REVIEWCOMMENT = $mysqli->query("SELECT * FROM review_comments where screenshot_review_id = '$reviewshotid'")
 							     or die ("Database error - selecting screenshot review comment");
 				
-				$number = $REVIEWCOMMENT->num_rows();
+				$number = $REVIEWCOMMENT->num_rows;
 				
 				if ($number > 0)
 				{
@@ -164,7 +164,7 @@ $sql_edit_REVIEW = $mysqli->query("SELECT * FROM review_main WHERE review_id = $
 	$edit_review=$sql_edit_REVIEW->fetch_array(MYSQLI_BOTH); 
 
 	
-	$review_text = mysql_real_escape_string($edit_review['review_text']);
+	$review_text = $mysqli->mysqli_real_escape_string($edit_review['review_text']);
 	$review_timestamp = $edit_review['review_date'];
 	$review_user_id = $edit_review['member_id'];
 

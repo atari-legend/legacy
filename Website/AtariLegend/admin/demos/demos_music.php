@@ -53,10 +53,10 @@ if (isset($action) and $action == 'search')
 		$smarty->assign('demos_music_tpl', '1');
 
 		//Send all smarty variables to the templates
-		$smarty->display('file:../templates/0/index.tpl');
+		$smarty->display('file:../templates/0/index.html');
 
 		//close the connection
-		mysql_close();
+		mysqli_close($mysqli);
 	}
 	else
 	{
@@ -117,10 +117,10 @@ if (isset($action) and $action == 'search')
 				$smarty->assign('demos_music_list_tpl', '1');
 				
 				//Send all smarty variables to the templates
-				$smarty->display('file:../templates/0/index.tpl');
+				$smarty->display('file:../templates/0/index.html');
 
 				//close the connection
-				mysql_close();	
+				mysqli_close($mysqli);	
 			}	
 			else
 			{
@@ -130,10 +130,10 @@ if (isset($action) and $action == 'search')
 				$smarty->assign('demos_music_tpl', '1');
 
 				//Send all smarty variables to the templates
-				$smarty->display('file:../templates/0/index.tpl');
+				$smarty->display('file:../templates/0/index.html');
 
 				//close the connection
-				mysql_close();
+				mysqli_close($mysqli);
 			}
 		}
 	}
@@ -144,9 +144,9 @@ else
 	$smarty->assign('demos_music_tpl', '1');
 
 	//Send all smarty variables to the templates
-	$smarty->display('file:../templates/0/index.tpl');
+	$smarty->display('file:../templates/0/index.html');
 
 	//close the connection
-	mysql_close();
+	mysqli_close($mysqli);
 }
 ?>

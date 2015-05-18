@@ -132,7 +132,7 @@ $smarty->assign("screenshots_nr",$v_screenshots);
 
 $count = 1;
 
-while ( $screenshots=mysql_fetch_array ($sql_screenshots)) 
+while ( $screenshots=$sql_screenshots->fetch_array(MYSQLI_BOTH)) 
 {
 	// Get the image dimensions for the pop up window
 	$imginfo = getimagesize("$interview_screenshot_path$screenshots[screenshot_id].$screenshots[imgext]");
@@ -169,7 +169,7 @@ $smarty->assign("user_id",$_SESSION['user_id']);
 $smarty->assign('interviews_screenshots_add_tpl', '1');
 
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/index.tpl');
+$smarty->display('file:../templates/0/index.html');
 
 //close the connection
-mysql_close();
+mysqli_close($mysqli);

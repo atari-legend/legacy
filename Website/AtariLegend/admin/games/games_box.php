@@ -47,7 +47,7 @@ This is the game box main page
 	 	$IMAGE = $mysqli->query("SELECT * FROM game_boxscan WHERE game_id='$game_id' ORDER BY game_boxscan_side, game_boxscan_id")
 				 or die ("Database error - selecting gamebox scan");
 		
-		$imagenum_rows = $IMAGE->num_rows();
+		$imagenum_rows = $IMAGE->num_rows;
 		
 		// if no boxscans are attached
 		$smarty->assign('numberscans', $imagenum_rows);
@@ -57,7 +57,7 @@ This is the game box main page
 			$front = 0;
 			$back = 0;
 			
-			while ($rowimage=mysql_fetch_array ($IMAGE)) 
+			while ($rowimage=$IMAGE->fetch_array(MYSQLI_BOTH)) 
 			{	// First check if front cover
 				if ($rowimage['game_boxscan_side'] == 0)
 				{
@@ -96,8 +96,8 @@ This is the game box main page
 	$smarty->assign('games_box_tpl', '1');
 
 	//Send all smarty variables to the templates
-	$smarty->display('file:../templates/0/index.tpl');
+	$smarty->display('file:../templates/0/index.html');
 
 	//close the connection
-	mysql_close();
+	mysqli_free_result();
 ?>

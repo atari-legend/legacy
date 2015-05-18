@@ -52,7 +52,7 @@ if (isset($action) and $action=="add_news")
 							 
 		$message = "News added correctly";
 					
-		mysql_close();
+		mysqli_close($mysqli);
 	}
 	
 	$smarty->assign('message', $message);
@@ -62,8 +62,8 @@ $smarty->assign("user_id",$_SESSION['user_id']);
 $smarty->assign('news_add_tpl', '1');
 
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/index.tpl');
+$smarty->display('file:../templates/0/index.html');
 
 //close the connection
-mysql_close();
+mysqli_close($mysqli);
 ?>
