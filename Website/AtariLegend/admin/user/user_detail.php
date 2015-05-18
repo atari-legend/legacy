@@ -179,7 +179,7 @@ if (isset($action) and $action == 'delete_user')
 							$smarty->assign('user_main_tpl', '1');
 
 							//Send all smarty variables to the templates
-							$smarty->display('file:../templates/0/index.tpl');
+							$smarty->display('file:../templates/0/index.html');
 						}
 					}
 				}
@@ -222,7 +222,7 @@ if (isset($action) and $action == 'delete_user')
 $smarty->assign('user_detail_tpl', '1');
 
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/index.tpl');
+$smarty->display('file:../templates/0/index.html');
 
 //close the connection
 mysqli_close($mysqli);

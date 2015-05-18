@@ -216,7 +216,7 @@ querystring for faster output
 				$smarty->assign('demo_list_tpl', '1');
 
 				//Send all smarty variables to the templates
-				$smarty->display('file:../templates/0/index.tpl');
+				$smarty->display('file:../templates/0/index.html');
 			}
 			else
 			{

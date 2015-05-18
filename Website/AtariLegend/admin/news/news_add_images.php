@@ -95,7 +95,7 @@ if(isset($news_image))
 $smarty->assign('news_add_images_tpl', '1');
 $smarty->assign("user_id",$_SESSION['user_id']);
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/index.tpl');
+$smarty->display('file:../templates/0/index.html');
 
 //close the connection
 mysqli_close($mysqli);
