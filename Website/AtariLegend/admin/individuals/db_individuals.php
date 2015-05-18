@@ -87,7 +87,7 @@ if (isset($ind_id) and isset($action) and $action == 'update')
 								    WHERE ind_id = $ind_id")
 			  or die ("Database error - selecting individual_text");
 		
-	$indrowtext = mysql_numrows($INDIVIDUALtext);
+	$indrowtext = $INDIVIDUALtext->num_rows;
 
 	if ( $indrowtext < 1 )
 	{
@@ -211,5 +211,5 @@ if (isset($action) and $action == 'insert_ind')
 
 
 //close the connection
-mysql_close();
+mysqli_close($mysqli);
 ?>

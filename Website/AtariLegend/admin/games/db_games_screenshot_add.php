@@ -121,5 +121,5 @@ if ( isset($action) and $action == 'delete_screen' )
 }
 
 //close the connection
-mysql_close();
+mysqli_close($mysqli);
 ?>

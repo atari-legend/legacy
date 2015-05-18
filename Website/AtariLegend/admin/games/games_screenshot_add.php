@@ -25,7 +25,7 @@ $sql_screenshots = $mysqli->query("SELECT * FROM screenshot_game
 
 $count = 1;
 $v_screenshots =1;
-while ( $screenshots=mysql_fetch_array ($sql_screenshots)) 
+while ( $screenshots=$sql_screenshots->fetch_array(MYSQLI_BOTH)) 
 {
 
 	//Ready screenshots path and filename
@@ -50,7 +50,7 @@ $smarty->assign("screenshots_nr",$v_screenshots);
 $sql_game = $mysqli->query("SELECT * FROM game WHERE game_id = '$game_id'")
 			   	   or die ("Database error - selecting game");
 
-while ( $game=mysql_fetch_array ($sql_game)) 
+while ( $game=$sql_game->fetch_array(MYSQLI_BOTH)) 
 {
 	$smarty->assign("game_id",$game['game_id']);
 	$smarty->assign("game_name",$game['game_name']);
@@ -60,8 +60,8 @@ $smarty->assign("user_id",$_SESSION['user_id']);
 $smarty->assign('games_screenshot_add_tpl', '1');
 
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/index.tpl');
+$smarty->display('file:../templates/0/index.html');
 
 //close the connection
-mysql_close();
+mysqli_close($mysqli);
 ?>

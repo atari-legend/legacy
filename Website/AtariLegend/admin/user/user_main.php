@@ -28,5 +28,5 @@ $smarty->assign('nr_users', $v_rows);
 $smarty->assign('user_main_tpl', '1');
 
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/index.tpl');
+$smarty->display('file:../templates/0/index.html');
 ?>

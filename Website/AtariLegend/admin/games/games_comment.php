@@ -166,5 +166,5 @@ $smarty->assign('links',
 $smarty->assign('games_comment_tpl', '1');
 
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/index.tpl');
+$smarty->display('file:../templates/0/index.html');
 ?>

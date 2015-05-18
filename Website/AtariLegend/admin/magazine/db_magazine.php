@@ -47,7 +47,7 @@ if(isset($newissue) and isset($magazine_id))
 
 	$mysqli->query("INSERT INTO magazine_issue (magazine_issue_nr,magazine_id) VALUES ('$newissue','$magazine_id')"); 
 	
-	mysql_close(); 
+	mysqli_close($mysqli); 
 }
 
 // Redirect back to previous page
@@ -106,7 +106,7 @@ if(isset($action) and $action=="coverscan_upload")
 	
 	}
 
-mysql_close();
+mysqli_close($mysqli);
 
 // Redirect back to previous page
 header("Location: ../magazine/magazine_issue_edit.php?magazine_issue_id=$magazine_issue_id");
@@ -134,7 +134,7 @@ $sqldel = $mysqli->query("SELECT * FROM magazine_issue WHERE magazine_issue_id='
 			or die("ERROR! Couldn't delete extension");
 			
 
-mysql_close();
+mysqli_close($mysqli);
 
 // Redirect back to previous page
 header("Location: ../magazine/magazine_issue_edit.php?magazine_issue_id=$magazine_issue_id");
@@ -150,7 +150,7 @@ if(isset($action) and $action=="score_delete")
 
 $do_delete = $mysqli->query("DELETE FROM magazine_game WHERE magazine_game_id='$magazine_game_id'") or die("couldn't delete score!");
 
-mysql_close();
+mysqli_close($mysqli);
 
 // Redirect back to previous page
 header("Location: ../magazine/magazine_review_score.php?game_id=$game_id");
@@ -171,7 +171,7 @@ if (isset($score))
 		or die("Couldn't update the magazine table");
 		}
 
-mysql_close();
+mysqli_close($mysqli);
 
 // Redirect back to previous page
 header("Location: ../magazine/magazine_review_score.php?game_id=$game_id");

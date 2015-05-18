@@ -176,5 +176,5 @@ if (isset($action) and $action == "delete_download")
 }
 
 //close the connection
-mysql_close();
+mysqli_close($mysqli);
 ?>

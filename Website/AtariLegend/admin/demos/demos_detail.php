@@ -65,7 +65,7 @@ include("../includes/common.php");
 		$sql_categories = $mysqli->query("SELECT * FROM demo_cat ORDER BY demo_cat_name")
 						  or die ("Error loading categories");
 		
-		while ($categories=mysql_fetch_array ($sql_categories)) 
+		while ($categories=$sql_categories->fetch_array(MYSQLI_BOTH)) 
 		{
 			$sql_demo_cat = $mysqli->query("SELECT * FROM demo_cat_cross WHERE demo_id='$demo_id' AND demo_cat_id=$categories[demo_cat_id]")
 							or die ("Error loading categorie cross table");
@@ -128,7 +128,7 @@ include("../includes/common.php");
 									WHERE demo_author.demo_id='$demo_id' ORDER BY author_type.author_type_id, individuals.ind_name")
 						or die ("Error loading authors");
 										
-	 while  ($demo_author=mysql_fetch_array ($sql_demoauthors)) 
+	 while  ($demo_author=$sql_demoauthors->fetch_array(MYSQLI_BOTH)) 
 	 {
 	 	$smarty->append('demo_author',
  			 array('demo_author_id' => $demo_author['demo_author_id'],
@@ -180,7 +180,7 @@ include("../includes/common.php");
 	
 	$nr_aka=0;
 	
-	while ($aka = mysql_fetch_array ($sql_aka)) 
+	while ($aka = $sql_aka->fetch_array(MYSQLI_BOTH)) 
 	{
 		$smarty->append('aka',
 	   		 	 array('demo_aka_name' => $aka['aka_name'],
@@ -219,7 +219,8 @@ $smarty->assign("user_id",$_SESSION['user_id']);
 $smarty->assign('demo_detail_tpl', '1');
 
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/index.tpl');
+$smarty->display('file:../templates/0/index.html');
 
 //close the connection
-mysql_close();
+mysqli_close($mysqli);
+?>

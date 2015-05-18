@@ -32,8 +32,8 @@ if (isset($action) and $action=="delete")
 }
 
 //get the number of news threads in the archive
-$query_number = $mysqli->query("SELECT count(*) FROM news") or die("Couldn't get the number of news threads");
-$v_news = mysql_result($query_number,0,0) or die("Couldn't get the number of news threads");
+$query_number = $mysqli->query("SELECT * FROM news") or die("Couldn't get the number of news threads");
+$v_news = $query_number->num_rows;
 
 $smarty->assign('news_nr', $v_news);
 
@@ -98,8 +98,8 @@ $smarty->assign("user_id",$_SESSION['user_id']);
 $smarty->assign('news_edit_all_tpl', '1');
 
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/index.tpl');
+$smarty->display('file:../templates/0/index.html');
 
 //close the connection
-mysql_close();
+mysqli_close($mysqli);
 ?>

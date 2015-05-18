@@ -209,11 +209,11 @@ function get_user_id_from_name($submitted)
 	{
 					$query = "SELECT user_id FROM users WHERE userid = $submitted";
 					global $mysqli;
-					$result = mysql_query($query) or die("Query failed");
+					$result = $mysqli->query($query) or die("Query failed");
 					if(mysql_num_rows($result) == 0) return 0;
 					else
 					{
-						$query_data = mysql_fetch_array($result);
+						$query_data = $result->fetch_array(MYSQLI_BOTH);
 					return $query_data[user_id];
 					}
 	}
@@ -237,20 +237,20 @@ function review_screenshot($alcode)
 		{ 
 		
 		//get the extension 
-		$SCREENSHOT = mysql_query("SELECT * FROM screenshot_main
+		$SCREENSHOT = $mysqli->query("SELECT * FROM screenshot_main
 	   					   		   WHERE screenshot_id = '$parts[2]'")
 			 		 or die ("Database error - selecting screenshots");
 		
-		$screenshotrow = mysql_fetch_array($SCREENSHOT);
+		$screenshotrow = $SCREENSHOT->fetch_array(MYSQLI_BOTH);
 		$screenshot_ext = $screenshotrow['imgext'];
 		
 		// $parts will be an array $parts[0] to $parts[6] 
-		$SCREENCOM = mysql_query("SELECT * FROM screenshot_review
+		$SCREENCOM = $mysqli->query("SELECT * FROM screenshot_review
 								LEFT JOIN review_comments ON (screenshot_review.screenshot_review_id = review_comments.screenshot_review_id)
 								WHERE screenshot_review.screenshot_id='$parts[2]'")
 					  or die ("Database error - selecting screenshot");
 		
-		$comments = mysql_fetch_array($SCREENCOM);
+		$comments = $SCREENCOM->fetch_array(MYSQLI_BOTH);
 		
 		// if there is a comment, insert the comment code and comment into a var
 		if (!isset($comments['comment_text'])) 
@@ -301,12 +301,12 @@ function article_screenshot($alcode)
 		
 		// $parts will be an array $parts[0] to $parts[6] 
 
-		$SCREENCOM = mysql_query("SELECT * FROM screenshot_article
+		$SCREENCOM = $mysqli->query("SELECT * FROM screenshot_article
 								  LEFT JOIN article_comments ON (screenshot_article.screenshot_article_id = article_comments.screenshot_article_id)
 								  WHERE screenshot_article.screenshot_id='$parts[2]'")
 					  or die ("Database error - selecting screenshot");
 		
-		$comments = mysql_fetch_array($SCREENCOM);
+		$comments = $SCREENCOM->fetch_array(MYSQLI_BOTH);
 		
 		// if there is a comment, insert the comment code and comment into a var
 		
@@ -348,24 +348,24 @@ function interview_screenshot($alcode)
 		{ 
 		
 		//get the extension 
-		$SCREENSHOT = mysql_query("SELECT * FROM screenshot_main
+		$SCREENSHOT = $mysqli->query("SELECT * FROM screenshot_main
 	   					   		   WHERE screenshot_id = '$parts[2]'")
 			 		 or die ("Database error - selecting screenshots");
 		
-		$screenshotrow = mysql_fetch_array($SCREENSHOT);
-		$screenshot_ext = $screenshotrow[imgext];
+		$screenshotrow = $SCREENSHOT->fetch_array(MYSQLI_BOTH);
+		$screenshot_ext = $screenshotrow['imgext'];
 		
 		// $parts will be an array $parts[0] to $parts[6] 
-		$SCREENCOM = mysql_query("SELECT * FROM screenshot_interview
+		$SCREENCOM = $mysqli->query("SELECT * FROM screenshot_interview
 								  LEFT JOIN interview_comments ON (screenshot_interview.screenshot_interview_id = interview_comments.screenshot_interview_id)
 								  WHERE screenshot_interview.screenshot_id='$parts[2]'")
 					  or die ("Database error - selecting screenshot");
 		
-		$comments = mysql_fetch_array($SCREENCOM);
+		$comments = $SCREENCOM->fetch_array(MYSQLI_BOTH);
 		
 		// if there is a comment, insert the comment code and comment into a var
 		
-		if (!isset($comments[comment_text])) 
+		if (!isset($comments['comment_text'])) 
 			
 			{
 			$screencomment="";
