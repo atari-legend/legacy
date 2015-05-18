@@ -87,7 +87,7 @@ if(isset($news_image))
 		$smarty->assign('message', $message);
 	}
 
-	mysql_close();
+	mysqli_close($mysqli);
 	}
 }
 

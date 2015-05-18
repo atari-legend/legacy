@@ -21,8 +21,8 @@ Display submissions
 include("../includes/common.php");
 
 // get the total nr of submissions in the DB
-$query_total_number = $mysqli->query("SELECT count(*) FROM demo_submitinfo") or die ("Couldn't get the total number of submissions");
-$v_rows_total = mysql_result($query_total_number,0,0) or die("Couldn't get the total number of submissions");
+$query_total_number = $mysqli->query("SELECT * FROM demo_submitinfo") or die ("Couldn't get the total number of submissions");
+$v_rows_total = $query_total_number->num_rows;
 $smarty->assign('total_nr_submissions', $v_rows_total);
 
 $v_counter = (isset($_GET["v_counter"]) ? $_GET["v_counter"] : 0);
@@ -38,12 +38,12 @@ $v_counter = (isset($_GET["v_counter"]) ? $_GET["v_counter"] : 0);
 										DESC LIMIT  " . $v_counter . ", 25");
 										
 				//check the number of comments
-				$query_number = $mysqli->query("SELECT count(*) FROM demo_submitinfo 
+				$query_number = $mysqli->query("SELECT * FROM demo_submitinfo 
 											 WHERE demo_done = '1' 
 											 ORDER BY demo_submitinfo_id DESC") 
 											 or die("Couldn't get the number of demo submissions");
 									 
-				$v_rows = mysql_result($query_number,0,0) or die("Couldn't get the number of demo_submissions");
+				$v_rows = $query_number->num_rows;
 		}
 		
 		else
@@ -58,12 +58,12 @@ $v_counter = (isset($_GET["v_counter"]) ? $_GET["v_counter"] : 0);
 										DESC LIMIT  " . $v_counter . ", 25");
 										
 				//check the number of comments
-				$query_number = $mysqli->query("SELECT count(*) FROM demo_submitinfo 
+				$query_number = $mysqli->query("SELECT * FROM demo_submitinfo 
 											 WHERE demo_done <> '1' 
 											 ORDER BY demo_submitinfo_id DESC") 
 											 or die("Couldn't get the number of demo submissions");
 									 
-				$v_rows = mysql_result($query_number,0,0);
+				$v_rows = $query_number->num_rows;
 
 		}
 		
@@ -91,15 +91,15 @@ $v_counter = (isset($_GET["v_counter"]) ? $_GET["v_counter"] : 0);
 	}
 	
 	// Retrive userstats from database
-	$query_user = $mysqli->query("SELECT count(*)
+	$query_user = $mysqli->query("SELECT *
 							   FROM demo_user_comments
 							   LEFT JOIN comments ON ( demo_user_comments.comments_id = comments.comments_id )
 							   WHERE user_id = '$query_submission[user_id]'");
-	$usercomment_number = mysql_result($query_user,0,0);
+	$usercomment_number = $query_user->num_rows;
 	
-	$query_submitinfo = $mysqli->query("SELECT count(*) FROM demo_submitinfo WHERE user_id = '$query_submission[user_id]'") 
+	$query_submitinfo = $mysqli->query("SELECT * FROM demo_submitinfo WHERE user_id = '$query_submission[user_id]'") 
 						or die ("Could not count user submissions");
-	$usersubmit_number = mysql_result($query_submitinfo,0,0);
+	$usersubmit_number = $query_submitinfo->num_rows;
 	
 	
 			//Get the dataElements we want to place on screen

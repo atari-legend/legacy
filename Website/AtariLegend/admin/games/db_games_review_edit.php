@@ -164,7 +164,7 @@ $sql_edit_REVIEW = $mysqli->query("SELECT * FROM review_main WHERE review_id = $
 	$edit_review=$sql_edit_REVIEW->fetch_array(MYSQLI_BOTH); 
 
 	
-	$review_text = mysql_real_escape_string($edit_review['review_text']);
+	$review_text = $mysqli->mysqli_real_escape_string($edit_review['review_text']);
 	$review_timestamp = $edit_review['review_date'];
 	$review_user_id = $edit_review['member_id'];
 

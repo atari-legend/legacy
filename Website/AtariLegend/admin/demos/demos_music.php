@@ -56,7 +56,7 @@ if (isset($action) and $action == 'search')
 		$smarty->display('file:../templates/0/index.tpl');
 
 		//close the connection
-		mysql_close();
+		mysqli_close($mysqli);
 	}
 	else
 	{
@@ -120,7 +120,7 @@ if (isset($action) and $action == 'search')
 				$smarty->display('file:../templates/0/index.tpl');
 
 				//close the connection
-				mysql_close();	
+				mysqli_close($mysqli);	
 			}	
 			else
 			{
@@ -133,7 +133,7 @@ if (isset($action) and $action == 'search')
 				$smarty->display('file:../templates/0/index.tpl');
 
 				//close the connection
-				mysql_close();
+				mysqli_close($mysqli);
 			}
 		}
 	}
@@ -147,6 +147,6 @@ else
 	$smarty->display('file:../templates/0/index.tpl');
 
 	//close the connection
-	mysql_close();
+	mysqli_close($mysqli);
 }
 ?>

@@ -25,7 +25,7 @@ $sql_screenshots = $mysqli->query("SELECT * FROM screenshot_demo
 
 $count = 1;
 $v_screenshots =1;
-while ( $screenshots=mysql_fetch_array ($sql_screenshots)) 
+while ( $screenshots=$sql_screenshots->fetch_array(MYSQLI_BOTH)) 
 {
 	$demo_screenshot_image = $demo_screenshot_path;
 	$demo_screenshot_image .= $screenshots['screenshot_id'];
@@ -47,7 +47,7 @@ $smarty->assign("screenshots_nr",$v_screenshots);
 $sql_demo = $mysqli->query("SELECT * FROM demo WHERE demo_id = '$demo_id'")
 			   	   or die ("Database error - selecting demo");
 
-while ( $demo=mysql_fetch_array ($sql_demo)) 
+while ( $demo=$sql_demo->fetch_array(MYSQLI_BOTH)) 
 {
 	$smarty->assign("demo_id",$demo['demo_id']);
 	$smarty->assign("demo_name",$demo['demo_name']);
@@ -60,4 +60,4 @@ $smarty->assign('demo_screenshot_add_tpl', '1');
 $smarty->display('file:../templates/0/index.tpl');
 
 //close the connection
-mysql_close();
+mysqli_close($mysqli);

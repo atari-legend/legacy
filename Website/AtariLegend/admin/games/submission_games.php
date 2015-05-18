@@ -40,12 +40,12 @@ $smarty->assign('total_nr_submissions', $v_rows_total);
 										DESC LIMIT  " . $v_counter . ", 25");
 										
 				//check the number of comments
-				$query_number = $mysqli->query("SELECT count(*) FROM game_submitinfo 
+				$query_number = $mysqli->query("SELECT * FROM game_submitinfo 
 											 WHERE game_done = '1' 
 											 ORDER BY game_submitinfo_id DESC") 
 											 or die("Couldn't get the number of game submissions");
 									 
-				$v_rows = mysql_result($query_number,0,0) or die("Couldn't get the number of game_submissions");
+				$v_rows = $query_number->num_rows;
 		}
 		
 		else
