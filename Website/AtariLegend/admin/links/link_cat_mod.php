@@ -25,7 +25,7 @@ include("../includes/common.php");
 								WHERE website_category_id='$category_id'")
 				   or die ("Error while querying the category database");
 		
-		$rowcat=mysql_fetch_array ($CATSQL);
+		$rowcat=$CATSQL->fetch_array(MYSQLI_BOTH);
 		
 		$smarty->assign('category',
 	    array('category_name' => $rowcat['website_category_name'],

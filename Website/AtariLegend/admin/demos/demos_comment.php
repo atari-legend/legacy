@@ -43,18 +43,18 @@ $sql_build = "SELECT *
 $sql_comment = $mysqli->query($sql_build);
 
 // get the total nr of comments in the DB
-$query_total_number = $mysqli->query("SELECT count(*) FROM demo_user_comments") or die ("Couldn't get the total number of comments");
-$v_rows_total = mysql_result($query_total_number,0,0) or die("Couldn't get the total number of comments");
+$query_total_number = $mysqli->query("SELECT * FROM demo_user_comments") or die ("Couldn't get the total number of comments");
+$v_rows_total = $query_total_number->num_rows;
 $smarty->assign('total_nr_comments', $v_rows_total);
 
 
 
 // count number of comments
-$query_number = $mysqli->query("SELECT count(*) FROM demo_user_comments
+$query_number = $mysqli->query("SELECT * FROM demo_user_comments
 							 LEFT JOIN comments ON ( demo_user_comments.comments_id = comments.comments_id )
 							 LEFT JOIN users ON ( comments.user_id = users.user_id ) " . $where_clause) or die("Couldn't get the number of comments");
 
-$v_rows = mysql_result($query_number,0,0) or die("Couldn't get the number of comments");
+$v_rows = $query_number->num_rows;
 
 $smarty->assign('nr_comments', $v_rows);
 
@@ -76,15 +76,15 @@ while ($query_comment = $sql_comment->fetch_array(MYSQLI_BOTH))
 	$sql_demo = $query_demo->fetch_array(MYSQLI_BOTH);  
 
 // Retrive userstats from database
-	$query_user = $mysqli->query("SELECT count(*)
+	$query_user = $mysqli->query("SELECT *
 							   FROM demo_user_comments
 							   LEFT JOIN comments ON ( demo_user_comments.comments_id = comments.comments_id )
 							   WHERE user_id = $query_comment[user_id]") or die ("Could not count user comments");
-	$usercomment_number = mysql_result($query_user,0,0) or die("Couldn't get the number of comments");
+	$usercomment_number = $query_user->num_rows;
 	
-	$query_submitinfo = $mysqli->query("SELECT count(*) FROM demo_submitinfo WHERE user_id = $query_comment[user_id]") 
+	$query_submitinfo = $mysqli->query("SELECT * FROM demo_submitinfo WHERE user_id = $query_comment[user_id]") 
 						or die ("Could not count user submissions");
-	$usersubmit_number = mysql_result($query_submitinfo,0,0);
+	$usersubmit_number = $query_submitinfo->num_rows;
 	
 	//Get the dataElements we want to place on screen
 	$v_demo_image  = $demo_screenshot_path;

@@ -177,7 +177,7 @@ $num_desc = get_rows ($sql_desc);
 		}
 	}
 
-mysql_close(); 
+mysqli_close($mysqli); 
 
 header("Location: ../links/link_mod.php?website_id=$website_id");
 }

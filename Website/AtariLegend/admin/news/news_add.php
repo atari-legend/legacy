@@ -52,7 +52,7 @@ if (isset($action) and $action=="add_news")
 							 
 		$message = "News added correctly";
 					
-		mysql_close();
+		mysqli_close($mysqli);
 	}
 	
 	$smarty->assign('message', $message);

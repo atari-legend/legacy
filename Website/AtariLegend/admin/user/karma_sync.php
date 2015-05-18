@@ -64,7 +64,7 @@ $sql_user = $mysqli->query("SELECT user_id,userid,karma FROM users");
 	
 	$nr_gamecomments = $sql_gamecomments->num_rows;
 	
-	mysql_free_result($sql_gamecomments);
+	mysqli_free_result($sql_gamecomments);
 	
 	// reviews
 	$sql_gamereview = $mysqli->query("SELECT * FROM review_main
@@ -73,13 +73,13 @@ $sql_user = $mysqli->query("SELECT user_id,userid,karma FROM users");
 					WHERE review_main.member_id = $user_id");
 	
 	$nr_gamereviews = $sql_gamereview->num_rows;
-	mysql_free_result($sql_gamereview);
+	mysqli_free_result($sql_gamereview);
 	
 	// START - NUMBER OF DOWNLOADS BY USER
 	$sql_downloads = $mysqli->query("SELECT COUNT(*) AS count FROM game_download_info WHERE user_id = $user_id");
 	$gamecount = $sql_downloads->fetch_array(MYSQLI_BOTH);
 	$nr_downloads = $gamecount[count];
-	mysql_free_result($sql_downloads);
+	mysqli_free_result($sql_downloads);
 	
 	// gamesubmissions
 	$sql_submissions = $mysqli->query("SELECT * FROM game_submitinfo 
@@ -87,19 +87,19 @@ $sql_user = $mysqli->query("SELECT user_id,userid,karma FROM users");
 					WHERE user_id = $user_id");
 					
 	$nr_gamesubmissions = $sql_submissions->num_rows;
-	mysql_free_result($sql_submissions);
+	mysqli_free_result($sql_submissions);
 	
 	// Submitted links
 	$sql_links = $mysqli->query("SELECT * FROM website WHERE website_user_sub = $user_id");
 	
 	$nr_links = $sql_links->num_rows;
-	mysql_free_result($sql_links);
+	mysqli_free_result($sql_links);
 	
 	// START - NUMBER OF NEWS POSTS BY USER
 	$sql_news = $mysqli->query("SELECT * FROM news WHERE user_id = $user_id");
 	
 	$nr_news = $sql_news->num_rows;
-	mysql_free_result($sql_news);
+	mysqli_free_result($sql_news);
 	
 	$karma_value = 0;
 	

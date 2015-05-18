@@ -29,7 +29,7 @@ $SQL_DEMO_INFO = $mysqli->query("SELECT * FROM demo
 						   	   WHERE demo.demo_id='$demo_id'")
 			  or die ("Error getting demo info");
 
-$demo_info=mysql_fetch_array ($SQL_DEMO_INFO); 
+$demo_info = $SQL_DEMO_INFO->fetch_array(MYSQLI_BOTH); 
 
 //get some basic demo info
 $smarty->assign('demo',
@@ -42,7 +42,7 @@ $SQL_DOWNLOADS = $mysqli->query("SELECT * FROM demo_download WHERE demo_id='$dem
 
 $nr_downloads = 1;
 
-while ($downloads=$SQL_DOWNLOADS->fetch_array(MYSQLI_BOTH)) 
+while ($downloads = $SQL_DOWNLOADS->fetch_array(MYSQLI_BOTH)) 
 {
 	// first lets create the filenames
 	$filename = "$demo_info[demo_name]";
@@ -98,5 +98,5 @@ $smarty->assign('demos_upload_tpl', '1');
 $smarty->display('file:../templates/0/index.tpl');
 
 //close the connection
-mysql_close();
+mysqli_close($mysqli);
 ?>

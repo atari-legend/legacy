@@ -84,7 +84,7 @@ if($action=="move_submission_tocomment")
 		$sql_submit = $query_submit->fetch_array(MYSQLI_BOTH) or die("something is wrong with mysqli2");
 		
 		$submit_text = $sql_submit['submit_text'];
-		$submit_text = mysql_real_escape_string($submit_text);
+		$submit_text = $mysqli->mysqli_real_escape_string($submit_text);
 		$sub_timestamp = $sql_submit['timestamp']; 
 		$sub_user_id = $sql_submit['user_id'];
 		$sub_game_id = $sql_submit['game_id'];

@@ -66,7 +66,7 @@ while ($individuals = $sql_individuals->fetch_array(MYSQLI_BOTH))
 				   'ind_name' => $individuals['ind_name']));
 }
 
-mysql_close(); 
+mysqli_close($mysqli); 
 
 $message = "Interview deleted succesfully";
 $smarty->assign("message",$message);
