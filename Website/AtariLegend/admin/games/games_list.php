@@ -414,7 +414,7 @@ querystring for faster output
 				//Send all smarty variables to the templates
 				//$smarty->display('extends:../templates/1/main.html|../templates/1/games_list.html');
 
-				$smarty->display('file:../templates/0/index.tpl');
+				$smarty->display('file:../templates/0/index.html');
 			}
 			else
 			{

@@ -42,7 +42,7 @@ if ( $individual_create == " " or $individual_create == '-' )
 	$smarty->assign('interviews_main_tpl', '1');
 
 	//Send all smarty variables to the templates
-	$smarty->display('file:../templates/0/index.tpl');
+	$smarty->display('file:../templates/0/index.html');
 }
 
 //****************************************************************************************
@@ -92,7 +92,7 @@ elseif ( $action == 'Add_Interview' )
 		$smarty->assign('interviews_add_tpl', '1');
 
 		//Send all smarty variables to the templates
-		$smarty->display('file:../templates/0/index.tpl');
+		$smarty->display('file:../templates/0/index.html');
 		
 	}	
 	else
@@ -133,7 +133,7 @@ elseif ( $action == 'Add_Interview' )
 		$smarty->assign('interviews_main_tpl', '1');
 
 		//Send all smarty variables to the templates
-		$smarty->display('file:../templates/0/index.tpl');
+		$smarty->display('file:../templates/0/index.html');
 	}
 }
 
@@ -179,7 +179,7 @@ $smarty->assign("user_id",$_SESSION[user_id]);
 $smarty->assign('interviews_add_tpl', '1');
 
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/index.tpl');
+$smarty->display('file:../templates/0/index.html');
 }
 
 //close the connection

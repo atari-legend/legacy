@@ -43,7 +43,7 @@ while ( $news_images = $sql_images->fetch_array(MYSQLI_BOTH) )
 $smarty->assign('news_iconpreview_tpl', '1');
 
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/index.tpl');
+$smarty->display('file:../templates/0/index.html');
 
 //close the connection
 mysqli_close($mysqli);

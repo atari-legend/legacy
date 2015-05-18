@@ -25,7 +25,7 @@ $smarty->assign('error_msg',
 $smarty->assign('error_message_tpl', '1');
 
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/index.tpl');
+$smarty->display('file:../templates/0/index.html');
 
 //close the connection
 mysql_close();
