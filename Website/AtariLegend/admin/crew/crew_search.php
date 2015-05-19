@@ -26,6 +26,8 @@ if (isset($new_crew))
 
 if ($crewsearch !='' and $crewbrowse == '')
 {
+		
+	
 		$sql_crew = $mysqli->query("SELECT * FROM crew
 						WHERE crew_name LIKE '%$crewsearch%' 
 						ORDER BY crew_name ASC")
@@ -41,10 +43,22 @@ if ($crewsearch !='' and $crewbrowse == '')
 
 elseif ($crewbrowse !='' and $crewsearch == '')
 {
+	
+		
+		if($crewbrowse =="num") {	
+			
+			$sql_crew = $mysqli->query("SELECT * FROM crew
+						WHERE crew_name REGEXP '^[0-9].*' 
+						ORDER BY crew_name ASC")
+			    	   or die ("Couldn't query Crew database");
+		}
+		else {
+			
 			$sql_crew = $mysqli->query("SELECT * FROM crew
 						WHERE crew_name LIKE '$crewbrowse%' 
 						ORDER BY crew_name ASC")
 			    	   or die ("Couldn't query Crew database");
+	}
 		
 		while  ($crew=$sql_crew->fetch_array(MYSQLI_BOTH)) 
 		{  
