@@ -81,8 +81,17 @@ $smarty->assign('crew_select',
 
 }
 
+// set values for main edit of crew... change name etc
+if (isset($action) and $action=="main")
+{
+
+$smarty->assign('crew_action',
+	    		 array('action' => $action));
+
+}
+
 // If no choice has been made but a crew has been selected we should be brought to the crew main edit regardless
-if (empty($action))
+if (empty($action) or (isset($action) and $action=="main"))
 {
 
 $action = "main";
@@ -99,7 +108,7 @@ $smarty->assign('tracking',
 				 	   'crewbrowse' => $crewbrowse));
 
 
-		$smarty->assign('crew_search_tpl', '1');
+		$smarty->assign('crew_editor_tpl', '1');
 
 		//Send all smarty variables to the templates
 		$smarty->display('file:../templates/0/index.html');
