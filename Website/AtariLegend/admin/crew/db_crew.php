@@ -98,7 +98,7 @@ if($action=="add_logo")
 				 chmod("$crew_logo_path$crew_select.$ext", 0777);
 			}
 	}
-header("Location: ../crew/crew_search.php?crew_select=$crew_select&crewsearch=$crewsearch&crewbrowse=$crewbrowse");
+header("Location: ../crew/crew_editor.php?crew_select=$crew_select&crewsearch=$crewsearch&crewbrowse=$crewbrowse");
 
 }
 
@@ -121,7 +121,7 @@ if($action=="delete_logo")
 	   			
 				 unlink ("$crew_logo_path$crew_select.$crew[crew_logo]");
 
-header("Location: ../crew/crew_search.php?crew_select=$crew_select&crewsearch=$crew_search&crewbrowse=$crewbrowse&action=main");
+header("Location: ../crew/crew_editor.php?crew_select=$crew_select&crewsearch=$crew_search&crewbrowse=$crewbrowse&action=main");
 
 }
 
@@ -183,7 +183,7 @@ if($action=="update_main_info")
 				
 				}
 
-header("Location: ../crew/crew_search.php?crew_select=$crew_select&crewsearch=$crewsearch&crewbrowse=$crewbrowse&action=main");
+header("Location: ../crew/crew_editor.php?crew_select=$crew_select&crewsearch=$crewsearch&crewbrowse=$crewbrowse&action=main");
 }
 
 if($action=="parent_crew")
@@ -199,7 +199,7 @@ foreach($sub_crew as $value)
 		$mysqli->query("INSERT INTO sub_crew (parent_id,crew_id) VALUES ('$crew_select','$value')");
 }
 
-header("Location: ../crew/crew_search.php?crew_select=$crew_select&crewsearch=$crewsearch&crewbrowse=$crewbrowse&action=genealogy");
+header("Location: ../crew/crew_genealogy.php?crew_select=$crew_select&crewsearch=$crewsearch&crewbrowse=$crewbrowse&action=genealogy");
 }
 
 if($action=="add_member")
@@ -215,7 +215,7 @@ if(isset($ind_id))
 		$mysqli->query("INSERT INTO crew_individual (crew_id,ind_id) VALUES ('$crew_select','$ind_id')");
 }
 
-header("Location: ../crew/crew_search.php?crew_select=$crew_select&crewsearch=$crewsearch&crewbrowse=$crewbrowse&action=genealogy");
+header("Location: ../crew/crew_genealogy.php?crew_select=$crew_select&crewsearch=$crewsearch&crewbrowse=$crewbrowse&action=genealogy");
 }
 
 if($action=="delete_crew_member")
@@ -232,7 +232,7 @@ if(isset($crew_individual_id))
 
 }
 
-header("Location: ../crew/crew_search.php?crew_select=$crew_select&crewsearch=$crewsearch&crewbrowse=$crewbrowse&action=genealogy");
+header("Location: ../crew/crew_genealogy.php?crew_select=$crew_select&crewsearch=$crewsearch&crewbrowse=$crewbrowse&action=genealogy");
 }
 
 if($action=="delete_subcrew")
@@ -249,7 +249,7 @@ if(isset($sub_crew_id))
 
 }
 
-header("Location: ../crew/crew_search.php?crew_select=$crew_select&crewsearch=$crewsearch&crewbrowse=$crewbrowse&action=genealogy");
+header("Location: ../crew/crew_genealogy.php?crew_select=$crew_select&crewsearch=$crewsearch&crewbrowse=$crewbrowse&action=genealogy");
 }
 
 
@@ -273,6 +273,6 @@ if(isset($individual_nicks_id) and isset($crew_individual_id))
 	}
 }
 
-header("Location: ../crew/crew_search.php?crew_select=$crew_select&crewsearch=$crewsearch&crewbrowse=$crewbrowse&action=genealogy");
+header("Location: ../crew/crew_genealogy.php?crew_select=$crew_select&crewsearch=$crewsearch&crewbrowse=$crewbrowse&action=genealogy");
 }?>
 
