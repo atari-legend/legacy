@@ -382,7 +382,7 @@ footer, header, hgroup, menu, nav, section {
 /*  2) Side bar needs to be transparant for resolutions between 1281 and 16** or something --> #sidebar
 /*  3) header nav is switched to absolute, if this is not done, the hyperlinks won't work anymore becauwe of position of container
 /*  4) since header nav is absolute, the main part of the site needs to be repositioned */
-@media screen and (min-width: 1281px){  	
+@media screen and (min-width: 1280px){  	
 	.container { position: absolute;}
 	#sidebar {background-color: rgba(0, 0, 0, 0);}
 	header nav { position: absolute; margin-top: 225px; left : 0}
