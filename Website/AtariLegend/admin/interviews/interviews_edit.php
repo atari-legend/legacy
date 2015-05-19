@@ -38,7 +38,7 @@ if ( isset($action) and $action == 'delete_comment' )
 				  or die ("Database error - selecting screenshots");
 		
 	$screenshotrow = $SCREENSHOT->fetch_array(MYSQLI_BOTH);
-	$screenshot_ext = $screenshotrow[imgext];
+	$screenshot_ext = $screenshotrow['imgext'];
 
 	$sql = $mysqli->query("DELETE FROM screenshot_main WHERE screenshot_id = '$screenshot_id' ");
 	$sql = $mysqli->query("DELETE FROM screenshot_interview WHERE screenshot_id = '$screenshot_id' ");
@@ -199,3 +199,5 @@ $smarty->display('file:../templates/0/index.html');
 
 //close the connection
 mysqli_close($mysqli);
+
+?>
