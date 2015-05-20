@@ -429,6 +429,12 @@
 					{if isset($crew_search_tpl) and $crew_search_tpl eq "1"} 
                		{include file="./crew_search.html"} 
                		{/if}
+               		{if isset($crew_editor_tpl) and $crew_editor_tpl eq "1"} 
+               		{include file="./crew_editor.html"} 
+               		{/if}
+               		{if isset($crew_genealogy_tpl) and $crew_genealogy_tpl eq "1"} 
+               		{include file="./crew_genealogy.html"} 
+               		{/if}
 					{if isset($demos_main_tpl) and $demos_main_tpl eq "1"} 
                		{include file="./demos_main.html"} 
                		{/if}	
