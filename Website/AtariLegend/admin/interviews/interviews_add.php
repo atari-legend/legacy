@@ -26,7 +26,7 @@ if ( $individual_create == " " or $individual_create == '-' )
 	$message = 'Please choose an individual to interview';
 	$smarty->assign("message",$message);
 		
-	$smarty->assign("user_id",$_SESSION[user_id]);
+	$smarty->assign("user_id",$_SESSION['user_id']);
 	
 	//Get the individuals
 	$sql_individuals = $mysqli->query("SELECT * FROM individuals ORDER BY ind_name ASC")
@@ -35,8 +35,8 @@ if ( $individual_create == " " or $individual_create == '-' )
 	while ($individuals = $sql_individuals->fetch_array(MYSQLI_BOTH))
 	{
 		$smarty->append('individuals',
-	    		 array('ind_id' => $individuals[ind_id],
-					   'ind_name' => $individuals[ind_name]));
+	    		 array('ind_id' => $individuals['ind_id'],
+					   'ind_name' => $individuals['ind_name']));
 	}
 
 	$smarty->assign('interviews_main_tpl', '1');
@@ -50,7 +50,7 @@ if ( $individual_create == " " or $individual_create == '-' )
 //page
 //****************************************************************************************
 
-elseif ( $action == 'Add_Interview' )
+elseif (isset($action) and $action == 'Add_Interview')
 {
 	if ( $members == '' or $members == '-' or $individual == '' or $individual == "-"  )
 	{
@@ -68,13 +68,13 @@ elseif ( $action == 'Add_Interview' )
 			if ( $individuals[ind_id] == $individual )
 			{
 				$smarty->assign('selected_individual',
-	    	 		array('ind_id' => $individuals[ind_id],
-				 		  'ind_name' => $individuals[ind_name]));
+	    	 		array('ind_id' => $individuals['ind_id'],
+				 		  'ind_name' => $individuals['ind_name']));
 			}
 	
 			$smarty->append('individuals',
-	    		 array('ind_id' => $individuals[ind_id],
-					   'ind_name' => $individuals[ind_name]));	
+	    		 array('ind_id' => $individuals['ind_id'],
+					   'ind_name' => $individuals['ind_name']));	
 		}
 
 		//Get the authors for the interview
@@ -84,11 +84,11 @@ elseif ( $action == 'Add_Interview' )
 		while ( $authors=$sql_author->fetch_array(MYSQLI_BOTH) )
 		{
 			$smarty->append('authors',
-	    		 array('user_id' => $authors[user_id],
-					   'user_name' => $authors[userid]));
+	    		 array('user_id' => $authors['user_id'],
+					   'user_name' => $authors['userid']));
 		}				   
 
-		$smarty->assign("user_id",$_SESSION[user_id]);
+		$smarty->assign("user_id",$_SESSION['user_id']);
 		$smarty->assign('interviews_add_tpl', '1');
 
 		//Send all smarty variables to the templates
@@ -122,14 +122,14 @@ elseif ( $action == 'Add_Interview' )
 		while ($individuals = $sql_individuals->fetch_array(MYSQLI_BOTH))
 		{
 		$smarty->append('individuals',
-	    		 array('ind_id' => $individuals[ind_id],
-					   'ind_name' => $individuals[ind_name]));
+	    		 array('ind_id' => $individuals['ind_id'],
+					   'ind_name' => $individuals['ind_name']));
 		}
 		
 		$message = "Interview added succesfully";
 		$smarty->assign("message",$message);
 		
-		$smarty->assign("user_id",$_SESSION[user_id]);
+		$smarty->assign("user_id",$_SESSION['user_id']);
 		$smarty->assign('interviews_main_tpl', '1');
 
 		//Send all smarty variables to the templates
@@ -152,16 +152,16 @@ while ($individuals = $sql_individuals->fetch_array(MYSQLI_BOTH))
 {
 	
 	//Get the selected individual data
-	if ( $individuals[ind_id] == $individual_create )
+	if ( $individuals['ind_id'] == $individual_create )
 	{
 		$smarty->assign('selected_individual',
-	    	 	array('ind_id' => $individuals[ind_id],
-				 	  'ind_name' => $individuals[ind_name]));
+	    	 	array('ind_id' => $individuals['ind_id'],
+				 	  'ind_name' => $individuals['ind_name']));
 	}
 	
 	$smarty->append('individuals',
-	    	 array('ind_id' => $individuals[ind_id],
-				   'ind_name' => $individuals[ind_name]));
+	    	 array('ind_id' => $individuals['ind_id'],
+				   'ind_name' => $individuals['ind_name']));
 }
 
 //Get the authors for the interview
@@ -171,11 +171,11 @@ $sql_author = $mysqli->query("SELECT user_id,userid FROM users")
 while ( $authors=$sql_author->fetch_array(MYSQLI_BOTH) )
 {
 	$smarty->append('authors',
-	    	 array('user_id' => $authors[user_id],
-				   'user_name' => $authors[userid]));
+	    	 array('user_id' => $authors['user_id'],
+				   'user_name' => $authors['userid']));
 }				   
 
-$smarty->assign("user_id",$_SESSION[user_id]);
+$smarty->assign("user_id",$_SESSION['user_id']);
 $smarty->assign('interviews_add_tpl', '1');
 
 //Send all smarty variables to the templates

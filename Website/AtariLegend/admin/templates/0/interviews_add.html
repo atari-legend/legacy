@@ -36,10 +36,7 @@ function deletecomment(screenshot_id, interview_id)
 {/literal}
 		
 {* load the button javascripts *}
-{include file="../templates/0/js/game_comment.js"}
-
-{* popup_init must be called once at the top of the page *}
-{popup_init src="../templates/0/js/overlib.js"}
+{include file="./js/game_comment.js"}
 
 <form action="../interviews/interviews_add.php" method="post" name="post">
 <table align="center" class="HEADERBAR" width="100%" cellspacing="0" cellpadding="2" border="0">
@@ -234,7 +231,7 @@ function deletecomment(screenshot_id, interview_id)
 		<td valign="top" width="100%">
 			<br>
 			<br>
-			<input type="hidden" name="interview_id" value="{$interview.interview_id}">
+			<input type="hidden" name="interview_id" value="{if isset($interview.interview_id)}{$interview.interview_id}{/if}">
 			<input type="hidden" name="action" value="Add_Interview">
 			<input type="submit" name="Create Interview" value="Create Interview">
 		</td>
@@ -261,7 +258,7 @@ function deletecomment(screenshot_id, interview_id)
 </table>
 <br>
 
-{if $message <> ''}
+{if isset($message)}
 	<table align="center" width="100%" cellspacing="0" cellpadding="0" border="0">
 	<tr>
 		<td align="center" >
