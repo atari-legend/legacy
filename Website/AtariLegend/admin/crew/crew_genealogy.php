@@ -108,44 +108,12 @@ if (isset($action) and $action=="genealogy")
 			$query_temporary = $mysqli->query("SELECT * FROM temp WHERE ind_name LIKE 'a%' ORDER BY ind_name ASC") or die("Failed to query temporary table");
 			$mysqli->query("DROP TABLE temp");
 			
-			$names = "newCat();";
-			$names2 = "<br>";
-			$last = "a";
-					   
+
 			while  ($genealogy_ind=$query_temporary->fetch_array(MYSQLI_BOTH)) 
 			{  
 				$smarty->append('ind_gene',
 	    				  array('ind_id' => $genealogy_ind['ind_id'],
 					 	 	    'ind_name' => $genealogy_ind['ind_name']));
-							
-			/*$string_name = $genealogy_ind['ind_name'];
-			$string_name = strtolower($string_name);
-			
-			// alfabetic array to loop through
-			$alfabetic_array =   array('a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z');
-				
-				for($i = 0; $i < count($alfabetic_array); $i++)
-				{
-		
-					//if ($string_name{0} == $alfabetic_array[$i])
-					if (isset($string_name[0]) and $string_name[0] == $alfabetic_array[$i])
-					{
-					
-					if ($last != $alfabetic_array[$i]) { $names .= "newCat();";}
-					
-					$names .= "O(\"$genealogy_ind[ind_name]\",\"../crew/db_crew.php?action=add_member&crew_select=$crew_select&crewsearch=$crewsearch&crewbrowse=$crewbrowse&ind_id=$genealogy_ind[ind_id]\");";
-		
-					
-					$last = $alfabetic_array[$i];
-					}
-				
-				}
-				if (isset($string_name[0]) and $string_name[0] == 'a')
-				{
-				$smarty->append('ind_gene',
-	    				  array('ind_id' => "../crew/db_crew.php?action=add_member&crew_select=$crew_select&crewsearch=$crewsearch&crewbrowse=$crewbrowse&ind_id=$genealogy_ind[ind_id]",
-					 	 	    'ind_name' => $genealogy_ind['ind_name']));
-				}*/
 				
 			}			
 			
