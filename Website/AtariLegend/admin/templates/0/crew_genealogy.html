@@ -49,141 +49,32 @@ function crewinsert()
 {include file="../0/js/game_comment.js"}
 {/if}
 
-{if (isset($crew_action.action) and $crew_action.action eq 'genealogy')}
-
-
-
-<META content=history name=save>
-<STYLE>.saveHistory { 
-	BEHAVIOR: url(#default#savehistory)
-}
-</STYLE>
-<!-- you need this stuff above-->
-
-<SCRIPT language=JavaScript>
-<!--
-v=false;
-//-->
-</SCRIPT>
-
-<SCRIPT language=JavaScript1.1>
-<!--
-if (typeof(Option)+"" != "undefined") v=true;
-//-->
-</SCRIPT>
-
-<SCRIPT language=JavaScript>
-<!--
-
-if(v) { a=new Array(22); }
-
-function getFormNum (formName) {
-	var formNum =-1;
-	for (i=0;i<document.forms.length;i++){
-		tempForm = document.forms[i];
-		if (formName == tempForm) {
-			formNum = i;
-			break;
-		}
-	}
-	return formNum;
-}
-
-function jmp(form, elt)
-// The first parameter is a reference to the form.
-{
-	if (form != null) {
-		with (form.elements[elt]) {
-			if (0 <= selectedIndex)
-				location = options[selectedIndex].value;
-		}
-	}
-}
-
-var catsIndex = -1;
-var itemsIndex;
-
-if (v) { // ns 2 fix
-function newCat(){
-	catsIndex++;
-	a[catsIndex] = new Array();
-	itemsIndex = 0;
-}
-
-function O(txt,url) {
-	a[catsIndex][itemsIndex]=new myOptions(txt,url);
-	itemsIndex++;
-}
-
-function myOptions(text,value){
-	this.text = text;
-	this.value = value;
-}
-
-{$ind_array.names}
-
- } // if (v)
-
-
-
-function relate(formName,elementNum,j) {
-    if(v){
-        var formNum = getFormNum(formName);
-         if (formNum>=0) {
-        	formNum++; // reference next form, assume it follows in HTML
-        	with (document.forms[formNum].elements[elementNum]) {
-        		for(i=options.length-1;i>0;i--) options[i] = null; // null out in reverse order (bug workarnd)
-        		for(i=0;i<a[j].length;i++){
-        			options[i] = new Option(a[j][i].text,a[j][i].value);
-        		}
-        		options[0].selected = true;
-        	}
+<script language="JavaScript">
+function browseSubCrew(str2) {
+    if (str2 == "") {
+        document.getElementById("sub_crew").innerHTML = "";
+        return;
+    } else { 
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
         }
-    }
-    else {
-        jmp(formName,elementNum);
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) 
+            {
+                document.getElementById("sub_crew").innerHTML = xmlhttp.responseText;
+            } 
+        }
+        xmlhttp.open("GET","../crew/ajax_crew_search.php?crewsearch={$tracking.crewsearch}&crewbrowse={$tracking.crewbrowse}&action=crew_gen_browse&query="+str2,true);
+        xmlhttp.send();
     }
 }
+</script>
 
-// BACK BUTTON FIX for ie4+- or
-// MEMORY-CACHE-STORING-ONLY-INDEX-AND-NOT-CONTENT
-//
-// from peter belesis:
-// IE4+ remembers the index of each SELECT but NOT the CONTENTS of each
-// SELECT, so it gets it wrong.
-//
-// it has to do with MEMORY CACHE (where form input is stored) and how
-// IE stores information about SELECT menus.
-//
-// IE stores the selectedINDEX ONLY of the SELECT menu, not the
-// CONTENTS-AT-THE-TIME-OF-SELECTION
-//
-// when we return to a page, it displays the default contents of each
-// SELECT, grabs the stored index from cache and aligns the default
-// contents to that index.
-// 
-// Netscape, on the other hand, seems to remember both INDEX and CONTENTS
-// added ie5 persistence 990714
-
-function IEsetup(){
-	if(!document.all) return;
-	IE5 = navigator.appVersion.indexOf("5.")!=-1;
-	if(!IE5) {
-		for (i=0;i<document.forms.length;i++) {
-			document.forms[i].reset();
-		}
-	}
-}
-
-window.onload = IEsetup;
-
-//-->
-</SCRIPT>
-
-
-{/if}
-
-<script language=JavaScript>
+<script language="JavaScript">
 function browseCrew(str) {
     if (str == "") {
         document.getElementById("crew_list").innerHTML = "";
@@ -201,12 +92,35 @@ function browseCrew(str) {
                 document.getElementById("crew_list").innerHTML = xmlhttp.responseText;
             }
         }
-        xmlhttp.open("GET","../crew/ajax_crew_search.php?&crewsearch={$tracking.crewsearch}&crewbrowse={$tracking.crewbrowse}&action=crew_browse&query="+str,true);
+        xmlhttp.open("GET","../crew/ajax_crew_search.php?crewsearch={$tracking.crewsearch}&crewbrowse={$tracking.crewbrowse}&action=crew_browse&query="+str,true);
         xmlhttp.send();
     }
 }
 </script>
 
+<script language="JavaScript">
+function browseInd(str) {
+    if (str == "") {
+        document.getElementById("ind_member").innerHTML = "";
+        return;
+    } else { 
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("ind_member").innerHTML = xmlhttp.responseText;
+            }
+        }
+        xmlhttp.open("GET","../crew/ajax_crew_search.php?crewsearch={$tracking.crewsearch}&crewbrowse={$tracking.crewbrowse}&action=ind_gen_browse&query="+str,true);
+        xmlhttp.send();
+    }
+}
+</script>
 
 
 
@@ -293,7 +207,7 @@ function browseCrew(str) {
 <tr>
 	<td colspan="2">
 	
-	<table>
+	<table width="100%">
 	<tr>
 	<td width="20%" style="vertical-align:top;">
 	
@@ -400,19 +314,60 @@ function browseCrew(str) {
 		<table width="100%" cellspacing="0" cellpadding="0">
 		<tr>
 			<td width="50%">
+				
+			<div style="float:left;padding-left:55px;">
+			<form action="../crew/db_crew.php" method="post" name="crew_gene2" id="crew_gene2">
+				<select id="crewbrowse2" onchange="browseSubCrew(this.value)">
+					<option value="num" selected>0-9</option>
+					<option value="a">A</option>
+					<option value="b">B</option>
+					<option value="c">C</option>
+					<option value="d">D</option>
+					<option value="e">E</option>
+					<option value="f">F</option>
+					<option value="g">G</option>
+					<option value="h">H</option>
+					<option value="i">I</option>
+					<option value="j">J</option>
+					<option value="k">K</option>
+					<option value="l">L</option>
+					<option value="m">M</option>
+					<option value="n">N</option>
+					<option value="o">O</option>
+					<option value="p">P</option>
+					<option value="q">Q</option>
+					<option value="r">R</option>
+					<option value="s">S</option>
+					<option value="t">T</option>
+					<option value="u">U</option>
+					<option value="v">V</option>
+					<option value="w">W</option>
+					<option value="x">X</option>
+					<option value="y">Y</option>
+					<option value="z">Z</option>
+				</select>
+			</form>	
+			</div>	
+			<div style="float:right;padding-right:105px;">	
 			<form action="../crew/db_crew.php" method="post" name="crew_gene" id="crew_gene">
 			
-			<select name="sub_crew[]" id="sub_crew" size="10" multiple>
+			
+			
+			<div id="sub_crew">
+			<select name="sub_crew[]" id="subCrewList" size="10" multiple style="width:200px;">
 				
-				<option value="" SELECTED>-</option>
+				
+					
+				<option value="" selected>-</option>
 			
 					{foreach from=$crew_gene item=line}
-				{if $line.crew_id <> $crew_select.crew_id}
-				<option value="{$line.crew_id}">{$line.crew_name}</option>
-				{/if}
+						{if $line.crew_id <> $crew_select.crew_id}
+							<option value="{$line.crew_id}">{$line.crew_name}</option>
+						{/if}
 					{/foreach}	
-			
+				
 			</select>
+			</div>
 			<br>
 			<input type="hidden" name="action" value="parent_crew">
 			<input type="hidden" name="parent_id" value="{if isset($crew_select.crew_id)}{$crew_select.crew_id}{/if}">
@@ -422,7 +377,7 @@ function browseCrew(str) {
 			<input type="submit" value="Add Subcrew">
 			
 			</form>
-			
+			</div>
 			</td>
 			<td width="50%">
 			
@@ -433,7 +388,7 @@ function browseCrew(str) {
 					
 					 <FORM action= method=post name=f1
       onsubmit="return false;">
-      <SELECT class=saveHistory id=m1 name=m1 onchange=relate(this.form,0,this.selectedIndex)>
+      <SELECT class=saveHistory id=m1 name=m1 onchange="browseInd(this.value)">
 
 						<option value="a">A</option>
 						<option value="b">B</option>
@@ -469,24 +424,25 @@ function browseCrew(str) {
 					</td>
 					<td width="75%" style="vertical-align:top;" align="left">
 					
-					      <FORM action="../crew/db_crew.php" method=post name=f2
-      onsubmit="return false;">
-      <SELECT class=saveHistory id=m2 name=m2 size="10">
+					      <FORM action="../crew/db_crew.php" method="post">
+   		<div id="ind_member">   
+      <SELECT id="ind_id" name="ind_id" size="10" style="width:200px;">
 
         {foreach from=$ind_gene item=line}
 				<option value="{$line.ind_id}">{$line.ind_name}</option>
-	{/foreach}	
+		{/foreach}	
 
 
 
-        </SELECT><br>
-			<input type="hidden" name="action" value="stop">
+        </SELECT>
+  	</div>	      
+        <br>
+			<input type="hidden" name="action" value="add_member">
 			<input type="hidden" name="parent_id" value="{if isset($crew_select.crew_id)}{$crew_select.crew_id}{/if}">
 			<input type="hidden" name="crew_select" id="crew_select8" value="{if isset($crew_select.crew_id)}{$crew_select.crew_id}{/if}">
 			<input type="hidden" name="crewsearch" id="crewsearch8" value="{$tracking.crewsearch}">
 			<input type="hidden" name="crewbrowse" id="crewbrowse8" value="{$tracking.crewbrowse}">
-        <INPUT onclick=jmp(this.form,0); type=submit value="Add Crewmember">
-<INPUT name=baseurl type=hidden value=../crew/db_crew.php?action=stop&crew_select={if isset($crew_select.crew_id)}{$crew_select.crew_id}{/if}&crewsearch={$tracking.crewsearch}&crewbrowse={$tracking.crewbrowse}&ind_id=>
+        <INPUT type="submit" value="Add Crewmember">
 </FORM>
 					
 					</td>
