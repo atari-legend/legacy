@@ -87,7 +87,7 @@ if (isset($action) and $action=="genealogy")
 	$smarty->assign('crew_action',
 	    		 array('action' => $action));
 	
-	$sql_crewgene = $mysqli->query("SELECT * FROM crew
+	$sql_crewgene = $mysqli->query("SELECT * FROM crew WHERE crew_name REGEXP '^[0-9].*' 
 						ORDER BY crew_name")
 			    	   or die ("Couldn't query Crew database");
 					   
@@ -105,7 +105,7 @@ if (isset($action) and $action=="genealogy")
 			$mysqli->query("CREATE TEMPORARY TABLE temp ENGINE=MEMORY $sql_individuals") or die("failed to create temporary table");
 			$mysqli->query("INSERT INTO temp $sql_aka") or die("failed to insert akas into temporary table");
 			
-			$query_temporary = $mysqli->query("SELECT * FROM temp ORDER BY ind_name ASC") or die("Failed to query temporary table");
+			$query_temporary = $mysqli->query("SELECT * FROM temp WHERE ind_name LIKE 'a%' ORDER BY ind_name ASC") or die("Failed to query temporary table");
 			$mysqli->query("DROP TABLE temp");
 			
 			$names = "newCat();";
@@ -114,11 +114,11 @@ if (isset($action) and $action=="genealogy")
 					   
 			while  ($genealogy_ind=$query_temporary->fetch_array(MYSQLI_BOTH)) 
 			{  
-			/*	$smarty->append('ind_gene',
+				$smarty->append('ind_gene',
 	    				  array('ind_id' => $genealogy_ind['ind_id'],
 					 	 	    'ind_name' => $genealogy_ind['ind_name']));
-			*/					
-			$string_name = $genealogy_ind['ind_name'];
+							
+			/*$string_name = $genealogy_ind['ind_name'];
 			$string_name = strtolower($string_name);
 			
 			// alfabetic array to loop through
@@ -145,7 +145,7 @@ if (isset($action) and $action=="genealogy")
 				$smarty->append('ind_gene',
 	    				  array('ind_id' => "../crew/db_crew.php?action=add_member&crew_select=$crew_select&crewsearch=$crewsearch&crewbrowse=$crewbrowse&ind_id=$genealogy_ind[ind_id]",
 					 	 	    'ind_name' => $genealogy_ind['ind_name']));
-				}
+				}*/
 				
 			}			
 			
