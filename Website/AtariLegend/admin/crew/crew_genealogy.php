@@ -173,9 +173,7 @@ if (isset($action) and $action=="genealogy")
 						  		'ind_id' => $fetch_ind_nicks['ind_id'],
 					 	 	    'nick' => $fetch_ind_nicks['nick']));
 				}			
-			
-		$smarty->assign('ind_array',
-	    		 array('names' => $names));
+
 }
 
 // If no choice has been made but a crew has been selected we should be brought to the crew main edit regardless
