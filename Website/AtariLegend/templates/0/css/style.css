@@ -443,6 +443,7 @@ header nav { float: center;
 
 .top_button:link {
   text-decoration:none;
+  color: #182727;
 }
 
 .searchbutton
