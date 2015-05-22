@@ -16,13 +16,9 @@ The main game page
 *}
 {extends file='head.html'}
 {block name=body}
-<table align="center" class="HEADERBAR" width="100%" cellspacing="0" cellpadding="2" border="0">
-<tr>
-	<td style="vertical-align:top;" height="5" colspan=6>
-	<span class="LEFTNAVHEADING">&nbsp;Search results</span>
-	</td>
-</tr>
-</table>
+<div class="MAINHEADERBAR">
+<div class="MAINHEADING">&nbsp;Search results</div>
+</div>
 
 <table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
 <tr>
@@ -102,31 +98,20 @@ The main game page
 	</td>
 </tr>
 </table>
-<table align="center" class="HEADERBAR" width="100%" cellspacing="0" cellpadding="0" border="0">
-<tr>
-	<td>
- 	<span class="LEFTNAVHEADING">&nbsp;&nbsp;&nbsp;</span>
-	</td>
-</tr>
-</table>
+<div class="MAINHEADERBAR">
+<div class="MAINHEADING">&nbsp;&nbsp;&nbsp;</div>
+</div>
 <br>
-<table width="100%" border="0" cellspacing="0" cellpadding="0">
-	<tr>
-   		<td colspan="3" valign=top align=center>
-			<b><a href="../demos/demos_main.php" class="MAINNAV">back</a></b>
-		</td>
-	</tr>
-</table>
+<div style="text-align: center;">
+			<br>
+			<span class="MAINAV"><b><a href="../demos/demos_main.php" class="MAINNAV">back</a></b></span>
+		</div>
 <br>
-{if (isset($message) and $message <> '')}
-	<table align="center" width="100%" cellspacing="0" cellpadding="0" border="0">
-	<tr>
-		<td align="center" >
+{if isset($message)}
+	<div style="text-align: center;">
 			<br><br>
 			<span class="MAINAV">{$message}</span>
-		</td>
-	</tr>
-	</table>
+		</div>
 {/if}
 <br>
 <br>

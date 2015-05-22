@@ -16,7 +16,9 @@
 //**************************************************************************************** 
 *}
 {extends file='head.html'}
-{block name=body}
+{block name=head}
+<script src="../templates/0/js/game_comment.js"></script>
+<script src="../templates/0/js/overlib.js"></script>	
 <script type="text/javascript">
 function deletecomment(screenshot_id, interview_id)
 {	
@@ -47,23 +49,13 @@ function deleteinterview(interview_id)
 		location.href=url;
     }
 }
-</script>
-
-		
-{* load the button javascripts *}
-{include file="./js/game_comment.js"}
-
-{* popup_init must be called once at the top of the page *}
-{ popup_init src="../templates/0/js/overlib.js" }
-
+</script>	
+{/block}
+{block name=body}
 <form action="../interviews/interviews_edit.php" method="post" name="post">
-<table align="center" class="HEADERBAR" width="100%" cellspacing="0" cellpadding="2" border="0">
-<tr>
-	<td style="vertical-align:top;" height="5" colspan=6>
-	<span class="LEFTNAVHEADING">&nbsp;Edit Interviews - <a href="../individuals/individuals_edit.php?ind_id={$interview.interview_ind_id}" class="MAINNAV_WHITE">{$interview.interview_ind_name}</a></span>
-	</td>
-</tr>
-</table>
+<div class="MAINHEADERBAR">
+<div class="MAINHEADING">&nbsp;Edit Interviews - <a href="../individuals/individuals_edit.php?ind_id={$interview.interview_ind_id}" class="MAINNAV_WHITE">{$interview.interview_ind_name}</a></div>
+</div>
 
 <table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
 <tr>
@@ -284,13 +276,9 @@ function deleteinterview(interview_id)
 </tr>
 </table>
 	
-<table align="center" class="HEADERBAR" width="100%" cellspacing="0" cellpadding="0" border="0">
-<tr>
-	<td>
- 	<span class="LEFTNAVHEADING">&nbsp;&nbsp;&nbsp;</span>
-	</td>
-</tr>
-</table>
+<div class="MAINHEADERBAR">
+<div class="MAINHEADING">&nbsp;&nbsp;&nbsp;</div>
+</div>
 <br>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 	<tr>
@@ -301,15 +289,11 @@ function deleteinterview(interview_id)
 </table>
 <br>
 
-{if isset($message) and $message <> ''}
-	<table align="center" width="100%" cellspacing="0" cellpadding="0" border="0">
-	<tr>
-		<td align="center" >
+{if isset($message)}
+	<div style="text-align: center;">
 			<br><br>
 			<span class="MAINAV">{$message}</span>
-		</td>
-	</tr>
-	</table>
+		</div>
 {/if}
 
 </form>

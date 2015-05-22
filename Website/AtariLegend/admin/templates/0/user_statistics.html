@@ -143,13 +143,9 @@ The the user stats page
 </tr>
 </table>
 
-<table align="center" class="HEADERBAR" width="100%" cellspacing="0" cellpadding="0" border="0">
-<tr>
-	<td>
- 	<span class="LEFTNAVHEADING">&nbsp;&nbsp;&nbsp;</span>
-	</td>
-</tr>
-</table>
+<div class="MAINHEADERBAR">
+<div class="MAINHEADING">&nbsp;&nbsp;&nbsp;</div>
+</div>
 <br>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 	<tr>
@@ -161,13 +157,9 @@ The the user stats page
 <br>
 
 {if isset($message) and $message <> ''}
-	<table align="center" width="100%" cellspacing="0" cellpadding="0" border="0">
-	<tr>
-		<td align="center" >
+	<div style="text-align: center;">
 			<br><br>
 			<span class="MAINAV">{$message}</span>
-		</td>
-	</tr>
-	</table>
+		</div>
 {/if}
 {/block}

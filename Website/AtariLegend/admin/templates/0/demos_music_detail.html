@@ -16,8 +16,7 @@
 //**************************************************************************************** 
 *}
 {extends file='head.html'}
-{block name=body}
-{literal}
+{block name=head}
 <script type="text/javascript">
 function add_composer() 
 {
@@ -33,15 +32,11 @@ function delete_music(demo_id)
    	document.editmuzak.submit();
 }
 </script>
-{/literal}
-
-<table align="center" class="HEADERBAR" width="100%" cellspacing="0" cellpadding="2" border="0">
-<tr>
-	<td style="vertical-align:top;" height="5" colspan=6>
-	<span class="LEFTNAVHEADING">&nbsp;Edit demo music - <a href="../demos/demos_detail.php?demo_id={$demo.demo_id}" class=MAINNAV_WHITE>{$demo.demo_name}</a></span>
-	</td>
-</tr>
-</table>
+{/block}
+{block name=body}
+<div class="MAINHEADERBAR">
+<div class="MAINHEADING">&nbsp;Edit demo music - <a href="../demos/demos_detail.php?demo_id={$demo.demo_id}" class=MAINNAV_WHITE>{$demo.demo_name}</a></div>
+</div>
 
 <table width="100%" cellspacing="2" cellpadding="15" class="CELLCOLOR">
 <tr>
@@ -135,31 +130,19 @@ function delete_music(demo_id)
 </table>
 {/if}
 
-<table align="center" class="HEADERBAR" width="100%" cellspacing="0" cellpadding="0" border="0">
-<tr>
-	<td>
- 	<span class="LEFTNAVHEADING">&nbsp;&nbsp;&nbsp;</span>
-	</td>
-</tr>
-</table>
+<div class="MAINHEADERBAR">
+<div class="MAINHEADING">&nbsp;&nbsp;&nbsp;</div>
+</div>
 <br>
-<table width="100%" border="0" cellspacing="0" cellpadding="0">
-	<tr>
-   		<td colspan="3" valign=top align=center>
-			<b><a href="../demos/demos_music.php" class="MAINNAV">back</a></b>
-		</td>
-	</tr>
-</table>
+<div style="text-align: center;">
+			<br>
+			<span class="MAINAV"><b><a href="../demos/demos_music.php" class="MAINNAV">back</a></b></span>
+		</div>
 <br>
-
-{if (isset($message) and $message <> '')}
-	<table align="center" width="100%" cellspacing="0" cellpadding="0" border="0">
-	<tr>
-		<td align="center" >
+{if isset($message)}
+	<div style="text-align: center;">
 			<br><br>
 			<span class="MAINAV">{$message}</span>
-		</td>
-	</tr>
-	</table>
+		</div>
 {/if}
 [/block}
