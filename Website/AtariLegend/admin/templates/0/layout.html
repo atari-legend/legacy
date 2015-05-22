@@ -27,25 +27,17 @@
 	<title>{block name=title}Cpanel{/block}</title>
 </head>
 <body class="BODY">
-	<table width="100%" cellspacing="0" cellpadding="0" border="0" align="center" >
-	<tr>
-		<td>
+
 			{*
 				//****************************************************************************************
 				// This is the header with the Atari Legend logo
 				//**************************************************************************************** 
 			*}
-			<table width="100%" cellspacing="0" cellpadding="0" border="0" class="HEADER">
-				<tr>
-    				<td width="20%" valign="top">
-					<img src="../templates/0/images/al-beta2logo.png" alt="logo" width="200" height="71" border="0" align="top"> 
-					</td>
-				</tr>
-			</table>
+			<div>
+				<img src="../templates/0/images/al-beta2logo.png" alt="logo" width="200" height="71" border="0" align="top"> 
+			</div>
 			
-			<table width="100%" cellspacing="2" cellpadding="2" border="0" class="MAINTABLE" >
-			<tr>
-    			<td width="16%" valign="top">
+			<div class="leftcell">
 
 			<!--Begin Leftnav Section-->
 
@@ -167,17 +159,13 @@
 
 			<!--End Leftnav Section-->
 
-				</td>
+				</div>
 				<!--Begin of Middle Comlumn-->
 				<!--The middle column is called with a var-->	
-    			<td width="84%" valign="top">
+    			<div class="rightcell">
 				{block name=body}{/block}
-				</td>
-			</tr>
-			</table>
-		</td>
-	</tr>
-	</table>
+				</div>
+
 </body>
 </html>
 
