@@ -30,10 +30,9 @@ while  ($company=$sql_company->fetch_array(MYSQLI_BOTH))
 }
 
 $smarty->assign("user_id",$_SESSION['user_id']);
-$smarty->assign('company_main_tpl', '1');
 
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/index.html');
+$smarty->display('file:../templates/0/company_main.html');
 
 //close the connection
 mysqli_close($mysqli);

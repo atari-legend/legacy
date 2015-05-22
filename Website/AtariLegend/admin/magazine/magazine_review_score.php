@@ -59,10 +59,6 @@ include("../includes/common.php");
 					$smarty->assign('game',
 	   			 			  array('game_id' => $game_id));
 
-	
-						
-$smarty->assign('magazine_review_score_tpl', '1');
-
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/index.html');
+$smarty->display('file:../templates/0/magazine_review_score.html');
 ?>

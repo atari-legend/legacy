@@ -152,9 +152,7 @@ $v_counter = (isset($_GET["v_counter"]) ? $_GET["v_counter"] : 0);
 						  'back_arrow' => $back_arrow,
 						  'forward_arrow' => $forward_arrow,
 						  'num_sub' => $number_sub));
- 
-$smarty->assign('submission_demos_tpl', '1');
 
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/index.html');
+$smarty->display('file:../templates/0/submission_demos.html');
 ?>

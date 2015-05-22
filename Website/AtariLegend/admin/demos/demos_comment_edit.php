@@ -44,8 +44,6 @@ $date = convert_timestamp($query_comment['timestamp']);
 			  'comment_id' => $query_comment['comments_id'],
 			  'v_counter' => $v_counter));
 
-$smarty->assign('demos_comment_edit_tpl', '1');
-
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/index.html');
+$smarty->display('file:../templates/0/demos_comment_edit.html');
 ?>

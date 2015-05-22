@@ -126,9 +126,8 @@ $smarty->assign("screenshots_nr",$i);
 $smarty->assign("reviewid",$reviewid);
 
 $smarty->assign("user_id",$_SESSION['user_id']);
-$smarty->assign('games_review_edit_html', '1');
 
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/index.html');
+$smarty->display('file:../templates/0/games_review_edit.html');
 }
 ?>

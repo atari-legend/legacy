@@ -138,10 +138,9 @@ $smarty->assign('nr_news', $nr_news);
 mysqli_free_result($sql);
 
 $smarty->assign('user_id_selected', $user_id_selected);
-$smarty->assign('user_statistics_tpl', '1');
 
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/index.html');
+$smarty->display('file:../templates/0/user_statistics.html');
 
 //close the connection
 mysqli_close($mysqli);

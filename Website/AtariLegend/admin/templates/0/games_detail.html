@@ -15,7 +15,8 @@
 // This is the detail page of a game. Change all the specifics over here!
 //**************************************************************************************** 
 *}
-
+{extends file='head.html'}
+{block name=body}
 {literal}
 <script type="text/javascript">
 function deletegame(game_id)
@@ -581,3 +582,4 @@ function add_year()
 	</tr>
 	</table>
 {/if}
+{/block}

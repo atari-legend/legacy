@@ -126,10 +126,8 @@ $sql_user = $mysqli->query("SELECT user_id,userid,karma FROM users");
 	
 	}
 
-$smarty->assign('user_karmasync_tpl', '1');
-
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/index.html');
+$smarty->display('file:../templates/0/user_karmasync.html');
 
 //close the connection
 mysqli_close($mysqli);?>

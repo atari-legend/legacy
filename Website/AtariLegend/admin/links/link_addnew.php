@@ -30,12 +30,8 @@ include("../includes/common.php");
 						  'website_category_name' => $rowlinkcat['website_category_name']));
 	} 
 
-
 $smarty->assign("user_id",$_SESSION['user_id']);
 
-
-$smarty->assign('link_addnew_tpl', '1');
-
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/index.html');
+$smarty->display('file:../templates/0/link_addnew.html');
 ?>

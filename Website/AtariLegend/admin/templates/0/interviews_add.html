@@ -15,7 +15,8 @@
 // This is the sub template file to generate the interviews add page
 //**************************************************************************************** 
 *}
-
+{extends file='head.html'}
+{block name=body}
 {literal}
 <script type="text/javascript">
 function deletecomment(screenshot_id, interview_id)
@@ -270,3 +271,4 @@ function deletecomment(screenshot_id, interview_id)
 {/if}
 
 </form>
+{/block}
