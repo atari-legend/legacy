@@ -11,10 +11,10 @@
 ***************************************************************************/
 *}
 {extends file='head.html'}
-{block name=body}
+{block name=head}
 <script language="JavaScript">
 function deletescreen(JSgameboxID,JSmode)
-{literal}{ {/literal}
+{
 	// CONFIRM REQUIRES ONE ARGUMENT
     var message = "Are you sure you want to delete this scan?";
     // CONFIRM IS BOOLEAN. THAT MEANS THAT
@@ -22,13 +22,16 @@ function deletescreen(JSgameboxID,JSmode)
     // OTHERWISE IT RETURN FALSE
     var return_value = confirm(message);
 	if (return_value !="0")
-  {literal}  { {/literal}
+    { 
       	url="../games/db_games_box.php?mode="+JSmode+"&game_boxscan_id="+JSgameboxID+"&game_id={$game_info.game_id}&action=boxscan_delete";
 		location.href=url;
- {literal}   }
-}{/literal}
+    }
+}
 </script>
-
+<script src="../templates/0/js/lightbox.min.js"></script>
+<link href="../templates/0/css/lightbox.css" rel="stylesheet" />
+{/block}
+{block name=body}
 <table width="100%" border="0" cellspacing="0" cellpadding="2" align="center" class="HEADERBAR">
 <tr>    
 	<td height="5" style="vertical-align:top;">
