@@ -89,6 +89,12 @@
 					<div id="right">
 						<img src="../templates/0/images/top_bee.png" alt="bee" />
 					</div>
+					{assign var='number' value=1|rand:5}
+					{if $number is odd}
+					<img id="animation" src="../templates/0/images/animations/animation0{math equation='rand(1,5)'}.gif" alt="animation" />
+					{else}
+					<img id="animation_vert" src="../templates/0/images/animations/animation_vert0{math equation='rand(1,2)'}.gif" alt="animation" />
+					{/if}
 				</div>			
 				<nav>
 					<ul>
