@@ -25,8 +25,6 @@ $query__number = $mysqli->query("SELECT count(*) FROM users") or die ("Couldn't 
 $v_rows = $query__number->num_rows;
 $smarty->assign('nr_users', $v_rows);
 
-$smarty->assign('user_main_tpl', '1');
-
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/index.html');
+$smarty->display('file:../templates/0/user_main.html');
 ?>

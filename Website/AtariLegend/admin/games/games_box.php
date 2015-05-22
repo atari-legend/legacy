@@ -92,11 +92,9 @@ This is the game box main page
 		
 	$smarty->assign('nr_front', $front);
 	$smarty->assign('nr_back', $back);
-	
-	$smarty->assign('games_box_tpl', '1');
 
 	//Send all smarty variables to the templates
-	$smarty->display('file:../templates/0/index.html');
+	$smarty->display('file:../templates/0/games_box.html');
 
 	//close the connection
 	mysqli_free_result();

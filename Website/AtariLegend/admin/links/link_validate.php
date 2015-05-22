@@ -73,11 +73,8 @@ else
 	    			array('website_category_id' => $row_cat['website_category_id'],
 						  'website_category_name' => $row_cat['website_category_name']));
 				}
-	
-	$smarty->assign('link_validate_tpl', '1');
-	
 	}
 
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/index.html');
+$smarty->display('file:../templates/0/link_validate.html');
 ?>

@@ -71,8 +71,6 @@ if(empty($catpick)) {$catpick=1;}
 						  'website_imgext' => $rowlink['website_imgext']));
 		}
 
-$smarty->assign('link_modlist_tpl', '1');
-
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/index.html');
+$smarty->display('file:../templates/0/link_modlist.html');
 ?>

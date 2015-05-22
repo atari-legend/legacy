@@ -59,10 +59,9 @@ if (isset($action) and $action=="add_news")
 }
 
 $smarty->assign("user_id",$_SESSION['user_id']);
-$smarty->assign('news_add_tpl', '1');
 
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/index.html');
+$smarty->display('file:../templates/0/news_add.html');
 
 //close the connection
 mysqli_close($mysqli);

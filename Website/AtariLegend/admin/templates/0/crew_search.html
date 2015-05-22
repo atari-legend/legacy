@@ -14,7 +14,8 @@
 The main game page
 ************************************************************************************************
 *}
-
+{extends file='head.html'}
+{block name=body}
 <script type="text/javascript">
 function crewinsert()
 {
@@ -358,3 +359,4 @@ function browseCrew(str) {
 	</tr>
 	</table>
 {/if}
+{/block}

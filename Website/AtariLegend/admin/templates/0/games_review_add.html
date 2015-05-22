@@ -15,7 +15,8 @@
 // This is the sub template file to generate the reviews add page
 //**************************************************************************************** 
 *}
-
+{extends file='head.html'}
+{block name=body}
 <form action="../games/db_games_review.php" method="post" name="post">
 <table align="center" class="HEADERBAR" width="100%" cellspacing="0" cellpadding="2" border="0">
 <tr>
@@ -230,3 +231,4 @@
 {/if}
 
 </form>
+{/block}

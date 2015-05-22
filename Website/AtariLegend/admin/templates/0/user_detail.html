@@ -15,7 +15,8 @@
 The game upload page
 ************************************************************************************************
 *}
-
+{extends file='head.html'}
+{block name=body}
 {literal}
 <script type="text/javascript">
 function delete_user() 
@@ -219,3 +220,4 @@ function user_stats()
 	</tr>
 	</table>
 {/if}
+{/block}

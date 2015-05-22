@@ -69,10 +69,9 @@ else
 }
 
 $smarty->assign("user_id",$_SESSION['user_id']);
-$smarty->assign('news_approve_tpl', '1');
 
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/index.html');
+$smarty->display('file:../templates/0/news_approve.html');
 
 //close the connection
 mysqli_close($mysqli);

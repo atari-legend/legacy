@@ -41,10 +41,9 @@ while  ($individuals=$query_temporary->fetch_array(MYSQLI_BOTH))
 }
 
 $smarty->assign("user_id",$_SESSION['user_id']);
-$smarty->assign('individuals_main_tpl', '1');
 
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/index.html');
+$smarty->display('file:../templates/0/individuals_main.html');
 
 //close the connection
 mysqli_close($mysqli);

@@ -15,7 +15,8 @@
 // This is the sub template file to generate the games main screenshot page
 //************************************************************************************ 
 *}
-
+{extends file='head.html'}
+{block name=body}
 <script type="text/javascript">
 function delete_screenshot(screenshot_id, game_id)
 {	
@@ -145,3 +146,4 @@ function delete_screenshot(screenshot_id, game_id)
 	</tr>
 	</table>
 {/if}
+{/block}

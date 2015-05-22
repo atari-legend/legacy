@@ -48,8 +48,6 @@ include("../includes/common.php");
 						'scan' => $scan,
 						'magazine_image' => $magazine_image));
  
-$smarty->assign('magazine_issue_edit_tpl', '1');
-
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/index.html');
+$smarty->display('file:../templates/0/magazine_issue_edit.html');
 ?>

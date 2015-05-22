@@ -32,10 +32,7 @@ include("../includes/common.php");
 	    			array('trivia_id' => $query_trivia['trivia_id'],
 						  'trivia_text' => $trivia_text));
 		} 
-		
- 
-$smarty->assign('did_you_know_tpl', '1');
 
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/index.html');
+$smarty->display('file:../templates/0/did_you_know.html');
 ?>

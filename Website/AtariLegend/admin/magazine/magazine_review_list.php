@@ -36,9 +36,7 @@ include("../includes/common.php");
 	
 		$smarty->assign('magazine_info',
 	   			  array('magazine_id' => $fetch_magazine['magazine_id']));
-						
-$smarty->assign('magazine_review_list_tpl', '1');
 
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/index.html');
+$smarty->display('file:../templates/0/magazine_review_list.html');
 ?>

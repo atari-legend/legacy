@@ -50,10 +50,9 @@ if (isset($action) and $action == 'search')
 		$smarty->assign("message","Please fill in one of the search fields");
 		
 		$smarty->assign("user_id",$_SESSION['user_id']);
-		$smarty->assign('games_music_tpl', '1');
 
 		//Send all smarty variables to the templates
-		$smarty->display('file:../templates/0/index.html');
+		$smarty->display('file:../templates/0/games_music.html');
 
 		//close the connection
 		mysqli_free_result();
@@ -113,10 +112,9 @@ if (isset($action) and $action == 'search')
 				$smarty->assign('nr_of_entries', $i);
 				
 				$smarty->assign("user_id",$_SESSION['user_id']);
-				$smarty->assign('games_music_list_tpl', '1');
-				
+
 				//Send all smarty variables to the templates
-				$smarty->display('file:../templates/0/index.html');
+				$smarty->display('file:../templates/0/games_music_list.html');
 
 				//close the connection
 				mysqli_free_result();	
@@ -126,10 +124,9 @@ if (isset($action) and $action == 'search')
 				$smarty->assign("message","No entries for your query!");
 		
 				$smarty->assign("user_id",$_SESSION['user_id']);
-				$smarty->assign('games_music_tpl', '1');
 
 				//Send all smarty variables to the templates
-				$smarty->display('file:../templates/0/index.html');
+				$smarty->display('file:../templates/0/games_music.html');
 
 				//close the connection
 				mysqli_free_result();
@@ -140,10 +137,9 @@ if (isset($action) and $action == 'search')
 else
 {
 	$smarty->assign("user_id",$_SESSION['user_id']);
-	$smarty->assign('games_music_tpl', '1');
 
 	//Send all smarty variables to the templates
-	$smarty->display('file:../templates/0/index.html');
+	$smarty->display('file:../templates/0/games_music.html');
 
 	//close the connection
 	mysqli_free_result();

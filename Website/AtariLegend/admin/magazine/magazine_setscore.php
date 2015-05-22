@@ -40,10 +40,6 @@ include("../includes/common.php");
 									'magazine_issue_nr' => $fetch['magazine_issue_nr'],
 									'magazine_issue_id' => $magazine_issue_id));
 
-
-						
-$smarty->assign('magazine_setscore_tpl', '1');
-
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/index.html');
+$smarty->display('file:../templates/0/magazine_setscore.html');
 ?>

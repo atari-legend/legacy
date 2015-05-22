@@ -216,10 +216,9 @@ $smarty->assign("nr_music",$array['count']);
 
 $smarty->assign("demo_id",$demo_id);
 $smarty->assign("user_id",$_SESSION['user_id']);
-$smarty->assign('demo_detail_tpl', '1');
 
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/index.html');
+$smarty->display('file:../templates/0/demo_detail.html');
 
 //close the connection
 mysqli_close($mysqli);

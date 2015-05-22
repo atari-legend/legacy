@@ -72,8 +72,6 @@ while (list($key, $value) = each($ret_tree)) {
 	}
 }
 
-
-
 foreach($ret_tree as $cat)
 {
     $indent = '0';
@@ -96,13 +94,7 @@ foreach($ret_tree as $cat)
 				  'category_count' => $website_count));
 	
 } 
-				 
-				 
-					
-               
-				 
-$smarty->assign('link_cat_tpl', '1');
 
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/index.html');
+$smarty->display('file:../templates/0/link_cat.html');
 ?>

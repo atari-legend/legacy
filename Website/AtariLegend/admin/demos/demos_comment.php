@@ -139,10 +139,7 @@ $smarty->assign('links',
 			   'view' => $view,
 			   'users_comments' => $users_comments,
 			   'c_counter' => $c_counter));
-		
- 
-$smarty->assign('demos_comment_tpl', '1');
 
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/index.html');
+$smarty->display('file:../templates/0/demos_comment.html');
 ?>

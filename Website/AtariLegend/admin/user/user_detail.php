@@ -176,10 +176,9 @@ if (isset($action) and $action == 'delete_user')
 							$mysqli->query("DELETE from users WHERE user_id='$user_id_selected'") or die ('deleting user failed');
 	
 							$smarty->assign('message', 'User deleted succesfully');
-							$smarty->assign('user_main_tpl', '1');
 
 							//Send all smarty variables to the templates
-							$smarty->display('file:../templates/0/index.html');
+							$smarty->display('file:../templates/0/user_main.html');
 						}
 					}
 				}
@@ -219,10 +218,8 @@ if (isset($action) and $action == 'delete_user')
 							  'user_aim' => $query_users['user_aim']));
 	}
 
-$smarty->assign('user_detail_tpl', '1');
-
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/index.html');
+$smarty->display('file:../templates/0/user_detail.html');
 
 //close the connection
 mysqli_close($mysqli);
