@@ -4,6 +4,20 @@
 	font:70% verdana,tahoma,helvetica,sans-serif;
 }
 
+.leftcell {
+
+	width: 16%;
+	float: left;
+
+}
+
+.rightcell {
+
+	width: 84%;
+	float: right;
+
+}
+
 .HEADERBAR 
 {
 	background-image: url(headerback.png);
@@ -87,15 +101,6 @@ A
 	text-decoration: none;
 }
 
-.GAMENAV 
-{
-	font-family : Verdana, Arial, Helvetica, sans-serif;
-	font-size: 10px;
-	text-align: left;
-	color: black;
-	font-weight : bold;
-}
-
 .LEFTNAV 
 {
 	font-family : Verdana, Arial, Helvetica, sans-serif;
@@ -130,16 +135,6 @@ A.MAINNAV_WHITE:HOVER
 	color: #EFEFEF;
 } 
 
-.HEADER 
-{
-	background-color: white;
-}
-
-.MAINTABLE 
-{
-	background-color: white;
-}
-
 SELECT.linkcategory_select 
 {
 	font-family: Verdana, Arial, Helvetica, sans-serif;
@@ -150,16 +145,7 @@ SELECT.linkcategory_select
 	font-size: 12px;
 }
 
-.graveselect 
-{
-	font-family : Verdana, Arial, Helvetica, sans-serif;
-	font-size : xx-small;
-	background-color :#F0FFDD;
-	color : black;
-	font-weight : bold;
-}
-
-TEXTAREA.gamesearchInputs
+TEXTAREA.
 {
 	font-family: Verdana, Helvetica, sans-serif;
 	color: gray;
@@ -178,11 +164,6 @@ TEXTAREA.textarea_links
 	font-weight: normal;
 	font-style: italic;
 	font-size: 13px;
-}
-
-.explination
-{
-	cursor: text;
 }
 
 label
@@ -250,15 +231,6 @@ margin-bottom: 10px;
 	clear: right;
 }
 
-.tdOn
-{
-    BACKGROUND: #7ABE47;
-}
-.tdOff
-{
-    BACKGROUND: #FFFFDD;
-}
-
 .reviewCommentInput
 {
 	background-color : #F4F4F4;
@@ -270,11 +242,6 @@ margin-bottom: 10px;
 	background-color : #F4F4F4;
     WIDTH: 40px
 }
-
-.screenshotInput
-{
-	background-color : #F4F4F4;
-} 
 
 .gamesearchInputs
 {
@@ -300,13 +267,6 @@ margin-bottom: 10px;
 	
 }
 
-.prereview {
-	font-weight : normal;
-	color : Gray;
-	line-height : 17px;
-}
-
-
 .news_set
 {
 border: #26a solid 1px;
@@ -330,16 +290,6 @@ width: 90%;
 background-color: Menu;
 -moz-border-radius:10px;
 }
-
-.MAINLINKS 
-{
-	color: #1A168B;
-}
-
-A.MAINLINKS:HOVER 
-{
-	color: Black;
-} 
 
 .review_input
 {
@@ -401,26 +351,6 @@ background-color: Menu;
 	font-style: italic;
 }
 
-.table_data { font-family:arial; font-size:9pt; color:#000000; background-color:#ffffff; }
-
-.flat { background-color:#000000 }
-
-.table_header { background-color:#006699; color:#ffffff; }
-
-.latest_post { font-family:arial; font-size:8pt; color:#000000; }
-.latest_post_link { background-color:#c0c0c0; color:#000000; font-size:9pt; font-family:arial; border: solid 1px #000000; text-decoration:none;}
-
-.new	{font-family:verdana; font-size:7pt; color:#ff0000; font-weight:bold;}
-.notnew {font-family:verdana; font-size:7pt; color:#808080;}
-
-.message { border-bottom:solid 1px #000000;}
-
-.highlight { background-color:#c0c0c0; }
-
-.quote { padding:5px; border:solid 1px #000000; background-color:#e6e6e6; color:#000000;}
-
-
-
  .Table
     {
         display: table;
@@ -464,6 +394,7 @@ background-color: Menu;
 	padding: 2px;
 	list-style-type:none;
 	text-align: center;
+	margin-right: 4px;
 
 }
 

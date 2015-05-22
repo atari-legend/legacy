@@ -15,8 +15,7 @@ The company edit page
 ************************************************************************************************
 *}
 {extends file='head.html'}
-{block name=body}
-
+{block name=head}
 <script type="text/javascript">
 function company_pic_delete(comp_id)
 { 
@@ -51,11 +50,12 @@ function companydelete(comp_id)
 		location.href=url;
    	} 	
 }
+
+<script src="../templates/0/js/game_comment.js"></script>
+
 </script>
-
-{* load the button javascripts *}
-{include file="./js/game_comment.js"}
-
+{/block}
+{block name=body}
 <table align="center" class="HEADERBAR" width="100%" cellspacing="0" cellpadding="2" border="0">
 <tr>
 	<td style="vertical-align:top;" height="5" colspan=6>
