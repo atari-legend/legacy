@@ -15,7 +15,8 @@
 The tpl upload page
 ************************************************************************************************
 *}
-
+{extends file='head.html'}
+{block name=body}
 {literal}
 <script type="text/javascript">
 function delete_download(id, demo_id)
@@ -284,3 +285,4 @@ function delete_download(id, demo_id)
 	</tr>
 	</table>
 {/if}
+[/block}

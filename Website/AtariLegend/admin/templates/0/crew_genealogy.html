@@ -14,7 +14,8 @@
 The main game page
 ************************************************************************************************
 *}
-{block name=main_body}
+{extends file='head.html'}
+{block name=body}
 <script type="text/javascript">
 function crewinsert()
 {
@@ -122,7 +123,34 @@ function browseInd(str) {
 }
 </script>
 
+<script language="JavaScript">
+function searchInd(str) {
+    if (str == "") {
+        str = "empty";
+			xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("ind_member").innerHTML = xmlhttp.responseText;
+            }
+        }   
 
+    } else { 
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("ind_member").innerHTML = xmlhttp.responseText;
+            }
+        }
+        xmlhttp.open("GET","../crew/ajax_crew_search.php?crewsearch={$tracking.crewsearch}&crewbrowse={$tracking.crewbrowse}&action=ind_gen_search&query="+str,true);
+        xmlhttp.send();
+    }
+}
+</script>
 
 
 <table align="center" class="HEADERBAR" width="100%" cellspacing="0" cellpadding="2" border="0">
@@ -418,6 +446,9 @@ function browseInd(str) {
 						<option value="z">Z</option>
 
         				</SELECT>
+						<br><br>
+						Search<br>
+						<input type="text" onkeyup="searchInd(this.value)" style="width:100px;">
 
       				</FORM>
 					

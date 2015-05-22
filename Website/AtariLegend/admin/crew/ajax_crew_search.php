@@ -109,6 +109,48 @@ if (isset($action) and $action=="ind_gen_browse")
 		echo '</select>';
 }
 
+if (isset($action) and $action=="ind_gen_search")
+{
+	if(isset($query) and $query!=="empty") 
+		{	
+			$sql_individuals = "SELECT ind_id,ind_name FROM individuals ORDER BY ind_name ASC";
+			$sql_aka = "SELECT ind_id,nick FROM individual_nicks ORDER BY nick ASC";
+			
+			//Create a temporary table to build an array with both names and nicknames
+			$mysqli->query("CREATE TEMPORARY TABLE temp ENGINE=MEMORY $sql_individuals") or die("failed to create temporary table");
+			$mysqli->query("INSERT INTO temp $sql_aka") or die("failed to insert akas into temporary table");
+			
+			$query_temporary = $mysqli->query("SELECT * FROM temp WHERE ind_name LIKE '%$query%' ORDER BY ind_name ASC") or die("Failed to query temporary table");
+			$mysqli->query("DROP TABLE temp");
+						
+		}
+		elseif ($query=="empty")
+		{
+			$sql_individuals = "SELECT ind_id,ind_name FROM individuals ORDER BY ind_name ASC";
+			$sql_aka = "SELECT ind_id,nick FROM individual_nicks ORDER BY nick ASC";
+			
+			//Create a temporary table to build an array with both names and nicknames
+			$mysqli->query("CREATE TEMPORARY TABLE temp ENGINE=MEMORY $sql_individuals") or die("failed to create temporary table");
+			$mysqli->query("INSERT INTO temp $sql_aka") or die("failed to insert akas into temporary table");
+			
+			$query_temporary = $mysqli->query("SELECT * FROM temp WHERE ind_name LIKE '%a%' ORDER BY ind_name ASC") or die("Failed to query temporary table");
+			$mysqli->query("DROP TABLE temp");
+		}	
+			
+		echo '<SELECT id="ind_id" name="ind_id" size="10" style="width:200px;">';
+		while  ($genealogy_ind=$query_temporary->fetch_array(MYSQLI_BOTH)) 
+			{  
+				
+			$ind_id = $genealogy_ind['ind_id'];
+			$ind_name = $genealogy_ind['ind_name'];
+			
+			echo "<option value=\"$ind_id\">$ind_name</option>";
+
+		}
+		echo '</select>';
+}
+
+
 	/*	$smarty->assign('crew_main_tpl', '1');
 
 		//Send all smarty variables to the templates

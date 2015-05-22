@@ -15,7 +15,8 @@
 // This is the sub template file to generate the interviews main
 //**************************************************************************************** 
 *}
-
+{extends file='head.html'}
+{block name=body}
 {literal}
 <script type="text/javascript">
 function deleteinterview(interview_id)
@@ -162,3 +163,4 @@ function deleteinterview(interview_id)
 	</tr>
 	</table>
 {/if}
+{/block}

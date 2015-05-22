@@ -409,12 +409,8 @@ querystring for faster output
 		
 		}
 				$smarty->assign("user_id",$_SESSION['user_id']);
-				$smarty->assign('games_list_html', '1');
 
-				//Send all smarty variables to the templates
-				//$smarty->display('extends:../templates/1/main.html|../templates/1/games_list.html');
-
-				$smarty->display('file:../templates/0/index.html');
+				$smarty->display('file:../templates/0/games_list.html');
 			}
 			else
 			{

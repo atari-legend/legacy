@@ -14,7 +14,8 @@
 The company edit page
 ************************************************************************************************
 *}
-
+{extends file='head.html'}
+{block name=body}
 
 <script type="text/javascript">
 function company_pic_delete(comp_id)
@@ -200,3 +201,4 @@ function companydelete(comp_id)
 	</tr>
 	</table>
 {/if}
+{/block}

@@ -54,7 +54,7 @@ if (isset($action) and $action == 'search')
 		$smarty->assign('games_review_tpl', '1');
 
 		//Send all smarty variables to the templates
-		$smarty->display('file:../templates/0/index.html');
+		$smarty->display('file:../templates/0/games_review.html');
 
 		//close the connection
 		mysqli_free_result();
@@ -114,10 +114,9 @@ if (isset($action) and $action == 'search')
 				$smarty->assign('nr_of_entries', $i);
 				
 				$smarty->assign("user_id",$_SESSION['user_id']);
-				$smarty->assign('games_review_list_tpl', '1');
 				
 				//Send all smarty variables to the templates
-				$smarty->display('file:../templates/0/index.html');
+				$smarty->display('file:../templates/0/games_review_list.html');
 
 				//close the connection
 				mysqli_free_result();	
@@ -127,10 +126,9 @@ if (isset($action) and $action == 'search')
 				$smarty->assign("message","No entries for your query!");
 		
 				$smarty->assign("user_id",$_SESSION['user_id']);
-				$smarty->assign('games_review_tpl', '1');
 
 				//Send all smarty variables to the templates
-				$smarty->display('file:../templates/0/index.html');
+				$smarty->display('file:../templates/0/games_review.html');
 
 				//close the connection
 				mysqli_free_result();

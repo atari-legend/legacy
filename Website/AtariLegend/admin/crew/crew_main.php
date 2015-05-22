@@ -30,11 +30,8 @@ if (isset($message))
 	$smarty->assign('message', $message);
 }
 
-
-		$smarty->assign('crew_main_tpl', '1');
-
 		//Send all smarty variables to the templates
-		$smarty->display('file:../templates/0/index.html');
+		$smarty->display('file:../templates/0/crew_main.html');
 
 //close the connection
 mysqli_close($mysqli);

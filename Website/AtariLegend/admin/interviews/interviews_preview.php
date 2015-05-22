@@ -100,10 +100,8 @@ while ($sql_screenshots = $query_screenshots->fetch_array(MYSQLI_BOTH))
 			 		    'comment' => $sql_screenshots['comment_text'])); 
 }
 
-$smarty->assign('interviews_preview_tpl', '1');
-
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/index.html');
+$smarty->display('file:../templates/0/interviews_preview.html');
 
 //close the connection
 mysqli_close($mysqli);

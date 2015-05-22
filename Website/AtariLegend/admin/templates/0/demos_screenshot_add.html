@@ -15,7 +15,8 @@
 // This is the sub template file to generate the demos main screenshot page
 //************************************************************************************ 
 *}
-
+{extends file='head.html'}
+{block name=body}
 {literal}
 <script type="text/javascript">
 function delete_screenshot(screenshot_id, demo_id)
@@ -126,3 +127,4 @@ function delete_screenshot(screenshot_id, demo_id)
 	</tr>
 	</table>
 {/if}
+[/block}

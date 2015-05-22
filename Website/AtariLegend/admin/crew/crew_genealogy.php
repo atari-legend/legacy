@@ -173,9 +173,7 @@ if (isset($action) and $action=="genealogy")
 						  		'ind_id' => $fetch_ind_nicks['ind_id'],
 					 	 	    'nick' => $fetch_ind_nicks['nick']));
 				}			
-			
-		$smarty->assign('ind_array',
-	    		 array('names' => $names));
+
 }
 
 // If no choice has been made but a crew has been selected we should be brought to the crew main edit regardless
@@ -195,11 +193,8 @@ $smarty->assign('tracking',
 	    		 array('crewsearch' => $crewsearch,
 				 	   'crewbrowse' => $crewbrowse));
 
-
-		$smarty->assign('crew_genealogy_tpl', '1');
-
 		//Send all smarty variables to the templates
-		$smarty->display('file:../templates/0/index.html');
+		$smarty->display('file:../templates/0/crew_genealogy.html');
 
 //close the connection
 mysqli_close($mysqli);

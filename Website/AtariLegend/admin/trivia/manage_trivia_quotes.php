@@ -29,10 +29,7 @@ include("../includes/common.php");
 	    			array('trivia_quote_id' => $query_trivia['trivia_quote_id'],
 						  'trivia_quote' => $query_trivia['trivia_quote']));
 		} 
-		
- 
-$smarty->assign('manage_trivia_quotes_tpl', '1');
 
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/index.html');
+$smarty->display('file:../templates/0/manage_trivia_quotes.html');
 ?>
