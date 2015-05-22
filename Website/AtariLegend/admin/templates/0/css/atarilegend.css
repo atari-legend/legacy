@@ -423,5 +423,25 @@ background-color: Menu;
 
 	background-color:#b2b2b2;
 }
+.MAINHEADERBAR 
+{
+	background-image: url(headerback.png);
+	color: #FFFFDD;
+	vertical-align: center;
+	font-weight: 600;
+	height: 20px;
+	background-attachment: inherit;
+	background-repeat: repeat-x;
+	font-family : Verdana, Arial, Helvetica, sans-serif;
+	font-size : 12px;
 
+	padding-top:0px;
+}
+.MAINHEADING {
+	color: #FFFFDD;
+	font-family : Verdana, Arial, Helvetica, sans-serif;
+	font-size : 12px;
+	height:20px;
+	padding-top:2px;
+}
 

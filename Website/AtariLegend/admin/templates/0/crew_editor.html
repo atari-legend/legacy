@@ -15,7 +15,8 @@ The main game page
 ************************************************************************************************
 *}
 {extends file='head.html'}
-{block name=body}
+{block name=head}
+<script src="../templates/0/js/game_comment.js"></script>
 <script type="text/javascript">
 function crewinsert()
 {
@@ -42,8 +43,6 @@ function crewinsert()
 	}
 }
 
-{if $crew_action.action eq 'main'}
-
 function CrewDelete(crew_select) 
 { 
             // CONFIRM REQUIRES ONE ARGUMENT 
@@ -59,14 +58,7 @@ function CrewDelete(crew_select)
                location.href=url; 
          }  
 } 
-
-{/if}
 </script>
-
-{* load the button javascripts *}
-{if (isset($crew_action.action) and $crew_action.action eq 'main')}
-{include file="../0/js/game_comment.js"}
-{/if}
 
 <script language=JavaScript>
 function browseCrew(str) {
@@ -91,18 +83,11 @@ function browseCrew(str) {
     }
 }
 </script>
-
-
-
-
-
-<table align="center" class="NEWHEADERBAR" width="100%" cellspacing="0" cellpadding="2" border="0">
-<tr>
-	<td style="vertical-align:top;" height="5" colspan=6>
-	<span class="LEFTNAVHEADING">&nbsp;Crew editor</span>
-	</td>
-</tr>
-</table>
+{/block}
+{block name=body}
+<div class="MAINHEADERBAR">
+<div class="MAINHEADING">&nbsp;Crew editor</div>
+</div>
 
 <table width="100%" cellspacing="2" cellpadding="5" align="center" class="CELLCOLOR">
 <tr>
@@ -209,16 +194,11 @@ function browseCrew(str) {
 
 </div>
 
-
-
-
 	</td>
 
 	<td width="80%">
-	
 	{* Start crew editing table	*}
-	
-	{if (isset($crew_select.crew_id) and $crew_select.crew_id <> '')}
+
 	<table width="100%" cellspacing="2" cellpadding="0" border="0" style="margin-left: auto; margin-right: auto;">
 		<tr>
 			<td style="width:25%;" align="center">
@@ -264,7 +244,6 @@ function browseCrew(str) {
 		</tr>
 		<tr>
 			<td colspan="4">
-			{if (isset($crew_action.action) and $crew_action.action eq 'main')}
 			{* START THE CREW MAIN EDIT *}
 			
 			<table width="100%" cellspacing="2" cellpadding="15" align="center">
@@ -388,20 +367,10 @@ function browseCrew(str) {
 	</td>
 </tr>
 </table>
-			
-			
-			
 			{* END THE CREW MAIN EDIT *}
-			{/if}
-			
 			</td>
-			
-		</tr>
-		<tr>
-			<td colspan="4"></td>
 		</tr>
 	</table>
-	{/if}
 	{* End crew editing table	*}
 	</td>
 	</tr>
@@ -409,22 +378,14 @@ function browseCrew(str) {
 	</td>
 </tr>
 </table>
-<table align="center" class="HEADERBAR" width="100%" cellspacing="0" cellpadding="0" border="0">
-<tr>
-	<td>
- 	<span class="LEFTNAVHEADING">&nbsp;&nbsp;&nbsp;</span>
-	</td>
-</tr>
-</table>
+<div class="MAINHEADERBAR">
+<div class="MAINHEADING">&nbsp;&nbsp;&nbsp;</div>
+</div>
 
-{if (isset($message) and $message <> '')}
-	<table align="center" width="100%" cellspacing="0" cellpadding="0" border="0">
-	<tr>
-		<td align="center" >
+{if isset($message)}
+	<div style="text-align: center;">
 			<br><br>
 			<span class="MAINAV">{$message}</span>
-		</td>
-	</tr>
-	</table>
+		</div>
 {/if}
 {/block}

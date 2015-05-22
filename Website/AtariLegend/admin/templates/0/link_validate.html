@@ -1,6 +1,6 @@
 {extends file='head.html'}
-{block name=body}
-{literal}
+{block name=head}
+
 <script language='JavaScript'>
 function deletelink(JSid)
 {  
@@ -18,16 +18,11 @@ function deletelink(JSid)
     } 
 }
 </script>
-{/literal}
-<table width="100%" border="0" cellspacing="0" cellpadding="2" align="center" class="HEADERBAR">
-<tr>    
-	<td height="5" style="vertical-align:top;">
-	<span class="LEFTNAVHEADING">&nbsp;&nbsp;Validate Links</span>
-	</td>
-</tr>
-</table>
-
-
+{/block}
+{block name=body}
+<div class="MAINHEADERBAR">
+<div class="MAINHEADING">&nbsp;&nbsp;Validate Links</div>
+</div>
 
 <table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
 
@@ -102,11 +97,7 @@ function deletelink(JSid)
 		</table>
 			
 	
-<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center" class="HEADERBAR">
-<tr>
-	<td>
-	<span class="LEFTNAVHEADING">&nbsp;&nbsp;&nbsp;</span>
- 	</td>
-</tr>
-</table>
+<div class="MAINHEADERBAR">
+<div class="MAINHEADING">&nbsp;&nbsp;&nbsp;</div>
+</div>
 {/block}

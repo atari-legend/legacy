@@ -1,8 +1,8 @@
 {extends file='head.html'}
-{block name=body}
+{block name=head}
 <script language="JavaScript">
 function coverdelete(JSmagazine_issue_id)
-{literal}{ {/literal}  
+{ 
 	
     	// CONFIRM REQUIRES ONE ARGUMENT
     	var message = "Are you sure you want to DELETE this Coverscan??";
@@ -12,14 +12,15 @@ function coverdelete(JSmagazine_issue_id)
     	var return_value = confirm(message);
 
     	if (return_value !="0")
-    	{literal}{ {/literal} 
+    	{ 
     		url="../magazine/db_magazine.php?action=delete_coverscan&magazine_issue_id="+JSmagazine_issue_id+""
 			location.href=url;
-    	{literal}}  {/literal} 
+    	}  
 
-{literal}} {/literal} 
+} 
 </script>
-
+{/block}
+{block name=body}
 <table width="100%" border="0" cellspacing="0" cellpadding="2" align="center" class="HEADERBAR">
 <tr>    
 	<td height="5" style="vertical-align:top;">
@@ -76,11 +77,7 @@ function coverdelete(JSmagazine_issue_id)
 </tr>
 </table>
 
-<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center" class="HEADERBAR">
-<tr>
-	<td>
-	<span class="LEFTNAVHEADING">&nbsp;&nbsp;&nbsp;</span>
- 	</td>
-</tr>
-</table>
+<div class="MAINHEADERBAR">
+<div class="MAINHEADING">&nbsp;&nbsp;&nbsp;</div>
+</div>
 {/block}

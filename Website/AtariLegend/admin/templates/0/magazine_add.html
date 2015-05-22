@@ -1,16 +1,16 @@
 {extends file='head.html'}
-{block name=body}
+{block name=head}
 <script language="JavaScript">
 function maginsert()
-{literal}{ {/literal}
+{ 
     JSnewmag=document.forms["insertmag"].newmag.value;
 	
 	if (JSnewmag=='')
-{literal}	{ {/literal}
+	{ 
 		alert('Please fill in a magazine name');
-{literal}	} {/literal}
+	} 
 	else
-{literal}	{ {/literal}
+	{ 
     	// CONFIRM REQUIRES ONE ARGUMENT
     	var message = "Are you sure you want to insert this magazine name into the database?";
     	// CONFIRM IS BOOLEAN. THAT MEANS THAT
@@ -19,21 +19,18 @@ function maginsert()
     	var return_value = confirm(message);
 
     	if (return_value !="0")
-{literal}    	{ {/literal}
+    	{ 
     		url="../magazine/db_magazine.php?newmag="+JSnewmag+"&action=insert_magazine"
 			location.href=url;
-{literal}    	}  {/literal}
-{literal}	} {/literal}
-{literal}} {/literal}
+   	}  
+	} 
+} 
 </script>
-
-<table width="100%" border="0" cellspacing="0" cellpadding="2" align="center" class="HEADERBAR">
-<tr>    
-	<td height="5" style="vertical-align:top;">
-	<span class="LEFTNAVHEADING">&nbsp;&nbsp;Add Magazines</span>
-	</td>
-</tr>
-</table>
+{/block}
+{block name=body}
+<div class="MAINHEADERBAR">
+<div class="MAINHEADING">&nbsp;&nbsp;Add Magazines</div>
+</div>
 
 <table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
 <tr>
@@ -89,11 +86,7 @@ function maginsert()
 </tr>
 </table>
 
-<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center" class="HEADERBAR">
-<tr>
-	<td>
-	<span class="LEFTNAVHEADING">&nbsp;&nbsp;&nbsp;</span>
- 	</td>
-</tr>
-</table>
+<div class="MAINHEADERBAR">
+<div class="MAINHEADING">&nbsp;&nbsp;&nbsp;</div>
+</div>
 {/block}

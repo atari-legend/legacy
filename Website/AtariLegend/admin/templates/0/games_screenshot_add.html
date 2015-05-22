@@ -37,13 +37,9 @@ function delete_screenshot(screenshot_id, game_id)
 <link href="../templates/0/css/lightbox.css" rel="stylesheet" />
 {/block}
 {block name=body}				
-<table align="center" class="HEADERBAR" width="100%" cellspacing="0" cellpadding="2" border="0">
-<tr>
-	<td style="vertical-align:top;" height="5" colspan=6>
-	<span class="LEFTNAVHEADING">&nbsp;Game screenshots - <a href="../games/games_detail.php?game_id={$game_id}" class="MAINNAV_WHITE">{$game_name}</a></span>
-	</td>
-</tr>
-</table>
+<div class="MAINHEADERBAR">
+<div class="MAINHEADING">&nbsp;Game screenshots - <a href="../games/games_detail.php?game_id={$game_id}" class="MAINNAV_WHITE">{$game_name}</a></div>
+</div>
 
 <table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
 <tr>
@@ -122,13 +118,9 @@ function delete_screenshot(screenshot_id, game_id)
 </tr>
 </table>
 	
-<table align="center" class="HEADERBAR" width="100%" cellspacing="0" cellpadding="0" border="0">
-<tr>
-	<td>
- 	<span class="LEFTNAVHEADING">&nbsp;&nbsp;&nbsp;</span>
-	</td>
-</tr>
-</table>
+<div class="MAINHEADERBAR">
+<div class="MAINHEADING">&nbsp;&nbsp;&nbsp;</div>
+</div>
 <br>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 	<tr>
@@ -140,13 +132,9 @@ function delete_screenshot(screenshot_id, game_id)
 <br>
 
 {if isset($message)}
-	<table align="center" width="100%" cellspacing="0" cellpadding="0" border="0">
-	<tr>
-		<td align="center" >
+	<div style="text-align: center;">
 			<br><br>
 			<span class="MAINAV">{$message}</span>
-		</td>
-	</tr>
-	</table>
+		</div>
 {/if}
 {/block}
