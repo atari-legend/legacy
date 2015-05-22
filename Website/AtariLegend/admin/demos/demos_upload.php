@@ -92,10 +92,9 @@ while ($downloads = $SQL_DOWNLOADS->fetch_array(MYSQLI_BOTH))
 $smarty->assign('nr_downloads',$nr_downloads);
 
 $smarty->assign("user_id",$_SESSION['user_id']);
-$smarty->assign('demos_upload_tpl', '1');
 
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/index.html');
+$smarty->display('file:../templates/0/demos_upload.html');
 
 //close the connection
 mysqli_close($mysqli);

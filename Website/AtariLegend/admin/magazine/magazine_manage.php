@@ -29,10 +29,7 @@ while ( list ($magazine_id,$magazine_name) = $sql_magazine->fetch_row())
 	   			  array('magazine_id' => $magazine_id,
 					    'magazine_name' => $magazine_name));
 	}
-	
- 
-$smarty->assign('magazine_manage_tpl', '1');
 
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/index.html');
+$smarty->display('file:../templates/0/magazine_manage.html');
 ?>

@@ -73,10 +73,8 @@ while ($sql_screenshots = $query_screenshots->fetch_array(MYSQLI_BOTH))
 
 $smarty->assign('game_id', $game_id);
 
-$smarty->assign('games_review_preview_tpl', '1');
-
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/index.html');
+$smarty->display('file:../templates/0/games_review_preview.html');
 
 //close the connection
 mysqli_close($mysqli);

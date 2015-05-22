@@ -166,9 +166,7 @@ $smarty->assign('total_nr_submissions', $v_rows_total);
 						  'back_arrow' => $back_arrow,
 						  'forward_arrow' => $forward_arrow,
 						  'num_sub' => $number_sub));
- 
-$smarty->assign('submission_games_tpl', '1');
 
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/index.html');
+$smarty->display('file:../templates/0/submission_games.html');
 ?>

@@ -398,10 +398,9 @@ $smarty->assign("nr_magazines",$array['count']);
 
 $smarty->assign("game_id",$game_id);
 $smarty->assign("user_id",$_SESSION['user_id']);
-$smarty->assign('games_detail_tpl', '1');
 
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/index.html');
+$smarty->display('file:../templates/0/games_detail.html');
 
 //close the connection
 mysqli_close($mysqli);

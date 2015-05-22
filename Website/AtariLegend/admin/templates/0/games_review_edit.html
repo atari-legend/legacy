@@ -15,7 +15,8 @@
 // This is the sub template file to generate the reviews edit page
 //**************************************************************************************** 
 *}
-
+{extends file='head.html'}
+{block name=body}
 {literal}
 <script type="text/javascript">
 function deletereview(reviewid, gameid)
@@ -290,3 +291,4 @@ function deletecomment(game_id,reviewid,screenshot_id)
 {/if}
 
 </form>
+{/block}

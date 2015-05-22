@@ -15,6 +15,8 @@
 //**************************************************************************************** 
 
 *}
+{extends file='head.html'}
+{block name=body}
 <form enctype="multipart/form-data" action="../news/news_edit_images.php?action=delete_image" method="post" name="deleteimage" id="deleteimage">
 <table align="center" class="HEADERBAR" width="100%" cellspacing="0" cellpadding="2" border="0">
 <tr>
@@ -85,3 +87,4 @@
 </tr>
 </table>
 </form>
+{/block}

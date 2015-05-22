@@ -15,7 +15,8 @@
 The individuals edit page
 ************************************************************************************************
 *}
-
+{extends file='head.html'}
+{block name=body}
 <script type="text/javascript">
 function individual_pic_delete(ind_id)
 { 
@@ -250,3 +251,4 @@ function nickdelete(nick_id,ind_id)
 	</tr>
 	</table>
 {/if}
+{/block}

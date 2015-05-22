@@ -192,10 +192,9 @@ while ($screenshots = $sql_screenshots->fetch_array(MYSQLI_BOTH))
 }
 
 $smarty->assign("user_id",$_SESSION['user_id']);
-$smarty->assign('interviews_edit_tpl', '1');
 
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/index.html');
+$smarty->display('file:../templates/0/interviews_edit.html');
 
 //close the connection
 mysqli_close($mysqli);

@@ -42,10 +42,7 @@ list ($magazine_id,$magazine_name) = $sql_magazine->fetch_row();
 					        'magazine_issue_nr' => $fetch['magazine_issue_nr'],
 							'scan' => $scan));
 			}
-	
- 
-$smarty->assign('magazine_edit_tpl', '1');
 
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/index.html');
+$smarty->display('file:../templates/0/magazine_edit.html');
 ?>

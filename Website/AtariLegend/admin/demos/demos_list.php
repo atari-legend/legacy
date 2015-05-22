@@ -213,10 +213,9 @@ querystring for faster output
 				$mysqli->query("DROP TABLE temp") or die("does not compute4");
 				
 				$smarty->assign("user_id",$_SESSION['user_id']);
-				$smarty->assign('demo_list_tpl', '1');
 
 				//Send all smarty variables to the templates
-				$smarty->display('file:../templates/0/index.html');
+				$smarty->display('file:../templates/0/demo_list.html');
 			}
 			else
 			{

@@ -71,10 +71,9 @@ list($start2, $start3) = explode(":", exec('date +%N:%S'));
 	$smarty->assign('review_nr', $v_reviews);
 								  
 	$smarty->assign("user_id",$_SESSION['user_id']);
-	$smarty->assign('games_review_html', '1');
 
 	//Send all smarty variables to the templates
-	$smarty->display('file:../templates/0/index.html');
+	$smarty->display('file:../templates/0/games_review.html');
 
 	//close the connection
 mysqli_close($mysqli);

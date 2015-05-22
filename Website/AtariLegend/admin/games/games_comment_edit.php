@@ -45,8 +45,6 @@ $date = convert_timestamp($query_comment['timestamp']);
 			  'comment_id' => $query_comment['comment_id'],
 			  'v_counter' => $v_counter));
 
-$smarty->assign('games_comment_edit_tpl', '1');
-
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/index.html');
+$smarty->display('file:../templates/0/games_comment_edit.html');
 ?>

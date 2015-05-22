@@ -112,10 +112,9 @@ if ( $individual_search == " " or $individual_search == '-' )
 }
 
 $smarty->assign("user_id",$_SESSION['user_id']);
-$smarty->assign('interviews_main_tpl', '1');
 
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/index.html');
+$smarty->display('file:../templates/0/interviews_main.html');
 
 //close the connection
 mysqli_close($mysqli);
