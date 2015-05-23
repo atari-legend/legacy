@@ -12,6 +12,8 @@
 *}
 {extends file='head.html'}
 {block name=head}
+<script src="../templates/0/js/lightbox.min.js"></script>
+<link href="../templates/0/css/lightbox.css" rel="stylesheet" />
 <script language="JavaScript">
 function deletescreen(JSgameboxID,JSmode)
 {
@@ -28,17 +30,11 @@ function deletescreen(JSgameboxID,JSmode)
     }
 }
 </script>
-<script src="../templates/0/js/lightbox.min.js"></script>
-<link href="../templates/0/css/lightbox.css" rel="stylesheet" />
 {/block}
 {block name=body}
-<table width="100%" border="0" cellspacing="0" cellpadding="2" align="center" class="HEADERBAR">
-<tr>    
-	<td height="5" style="vertical-align:top;">
-	<span class="LEFTNAVHEADING">&nbsp;&nbsp;{$game_info.game_name} - Boxscans</span>
-	</td>
-</tr>
-</table>
+<div class="MAINHEADERBAR">
+<div class="MAINHEADING">&nbsp;&nbsp;{$game_info.game_name} - Boxscans</div>
+</div>
 
 <table width="100%" cellspacing="2" cellpadding="2" align="center" class="CELLCOLOR">
 <tr>
@@ -171,32 +167,20 @@ function deletescreen(JSgameboxID,JSmode)
 </tr>
 </table>
 
-
-<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center" class="HEADERBAR">
-<tr>
-	<td>
-	<span class="LEFTNAVHEADING">&nbsp;&nbsp;&nbsp;</span>
- 	</td>
-</tr>
-</table>
+<div class="MAINHEADERBAR">
+<div class="MAINHEADING">&nbsp;&nbsp;&nbsp;</div>
+</div>
 <br>
-<table width="100%" border="0" cellspacing="0" cellpadding="0">
-	<tr>
-   		<td colspan="3" valign=top align=center>
-			<b><a href="../games/games_detail.php?game_id={$game_info.game_id}" class="MAINNAV">back</a></b>
-		</td>
-	</tr>
-</table>
+	<div style="text-align: center;">
+			<br>
+			<span class="MAINAV"><b><a href="../games/games_detail.php?game_id={$game_info.game_id}" class="MAINNAV">back</a></b></span>
+		</div>
 <br>
 
 {if isset($message)}
-	<table align="center" width="100%" cellspacing="0" cellpadding="0" border="0">
-	<tr>
-		<td align="center" >
+	<div style="text-align: center;">
 			<br><br>
 			<span class="MAINAV">{$message}</span>
-		</td>
-	</tr>
-	</table>
+		</div>
 {/if}
 {/block}

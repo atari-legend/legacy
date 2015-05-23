@@ -218,7 +218,7 @@ $smarty->assign("demo_id",$demo_id);
 $smarty->assign("user_id",$_SESSION['user_id']);
 
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/demo_detail.html');
+$smarty->display('file:../templates/0/demos_detail.html');
 
 //close the connection
 mysqli_close($mysqli);
