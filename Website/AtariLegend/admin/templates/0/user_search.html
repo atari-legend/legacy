@@ -16,13 +16,9 @@ User search result
 *}
 {extends file='head.html'}
 {block name=body}
-<table align="center" class="HEADERBAR" width="100%" cellspacing="0" cellpadding="2" border="0">
-<tr>
-	<td style="vertical-align:top;" height="5" colspan=6>
-	<span class="LEFTNAVHEADING">&nbsp;Search results</span>
-	</td>
-</tr>
-</table>
+<div class="MAINHEADERBAR">
+<div class="MAINHEADING">&nbsp;Search results</div>
+</div>
 
 <table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
 <tr>
@@ -118,20 +114,16 @@ User search result
 <div class="MAINHEADING">&nbsp;&nbsp;&nbsp;</div>
 </div>
 <br>
-<table width="100%" border="0" cellspacing="0" cellpadding="0">
-	<tr>
-   		<td colspan="3" valign=top align=center>
-			<b><a href="javascript:history.go(-1)" class="MAINNAV">back</a></b>
-		</td>
-	</tr>
-</table>
+<div style="text-align: center;">
+			<br>
+			<span class="MAINAV"><b><a href="javascript:history.go(-1)" class="MAINNAV">back</a></b></span>
+		</div>
 <br>
-{if isset($message) and $message <> ''}
+{if isset($message)}
 	<div style="text-align: center;">
 			<br><br>
 			<span class="MAINAV">{$message}</span>
 		</div>
 {/if}
-<br>
-<br>
+
 {/block}
