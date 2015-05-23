@@ -18,13 +18,9 @@
 *}
 {extends file='head.html'}
 {block name=body}
-<table align="center" class="HEADERBAR" width="100%" cellspacing="0" cellpadding="2" border="0">
-<tr>
-	<td style="vertical-align:top;" height="5" colspan=6>
-	<span class="LEFTNAVHEADING">&nbsp;Edit News</span>
-	</td>
-</tr>
-</table>
+<div class="MAINHEADERBAR">
+<div class="MAINHEADING">&nbsp;Edit News</div>
+</div>
 
 
 <table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
@@ -75,7 +71,7 @@
 
 {if isset($message)}
 	<div style="text-align: center;">
-			<br><br>
+			<br>
 			<span class="MAINAV">{$message}</span>
 		</div>
 {/if}

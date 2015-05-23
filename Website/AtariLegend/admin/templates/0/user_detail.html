@@ -16,8 +16,7 @@ The game upload page
 ************************************************************************************************
 *}
 {extends file='head.html'}
-{block name=body}
-{literal}
+{block name=head}
 <script type="text/javascript">
 function delete_user() 
 {
@@ -40,31 +39,24 @@ function user_stats()
    	document.user.submit();
 }
 </script>
-{/literal}
-
-<table align="center" class="HEADERBAR" width="100%" cellspacing="0" cellpadding="2" border="0">
-<tr>
-	<td style="vertical-align:top;" height="5" colspan=6>
-	&nbsp;Details for user <a href="mailto:{$users.user_email}" class="MAINNAV_WHITE">{$users.user_name}</a>
-	</td>
-</tr>
-</table>
+{/block}
+{block name=body}
+<div class="MAINHEADERBAR">
+<div class="MAINHEADING">&nbsp;Details for user <a href="mailto:{$users.user_email}" class="MAINNAV_WHITE">{$users.user_name}</a>
+</div>
+</div>
 
 <table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
 <tr>
-	<td colspan="2">
-	<fieldset class="category_set">
+	<td>
+	<fieldset class="game_set">
 		Overhere you can maintain the log on data of a user and have a look at his activities. Press 'modify' to change certain
 		data. 'Delete' will completely remove the account. You are also able to reset the password of the user. After resetting, you are
 		able to enter and save a new password for the account. Finally, press 'statistics' to see what this user has done at AL so far.
 	</fieldset> 
 	</td>
-</tr>
-</table>
-
-
-<table width="100%" cellspacing="2" cellpadding="15" class="CELLCOLOR">
-<tr>
+	</tr>
+	<tr>
 	<td>
 	<form action="../user/user_detail.php?action=modify_user" method="post" name="user">
 	<fieldset class="game_set">
@@ -197,16 +189,13 @@ function user_stats()
 <div class="MAINHEADING">&nbsp;&nbsp;&nbsp;</div>
 </div>
 <br>
-<table width="100%" border="0" cellspacing="0" cellpadding="0">
-	<tr>
-   		<td colspan="3" valign=top align=center>
-			<b><a href="../user/user_main.php" class="MAINNAV">back</a></b>
-		</td>
-	</tr>
-</table>
+	<div style="text-align: center;">
+			<br>
+			<span class="MAINAV"><b><a href="../user/user_main.php" class="MAINNAV">back</a></b></span>
+		</div>
 <br>
 
-{if isset($message) and $message <> ''}
+{if isset($message)}
 	<div style="text-align: center;">
 			<br><br>
 			<span class="MAINAV">{$message}</span>

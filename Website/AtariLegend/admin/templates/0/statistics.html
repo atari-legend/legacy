@@ -12,13 +12,9 @@
 *}
 {extends file='head.html'}
 {block name=body}
-<table width="100%" border="0" cellspacing="0" cellpadding="2" align="center" class="HEADERBAR">
-<tr>    
-	<td height="5" style="vertical-align:top;">
-	<span class="LEFTNAVHEADING">&nbsp;&nbsp;Database statistics</span>
-	</td>
-</tr>
-</table>
+<div class="MAINHEADERBAR">
+<div class="MAINHEADING">&nbsp;&nbsp;Database statistics</div>
+</div>
 
 <table width="100%" cellspacing="2" cellpadding="2" align="center" class="CELLCOLOR">
 <tr>
@@ -34,7 +30,7 @@
 					</table>
 					<table cellspacing="0" cellpadding="2" border="0" width="90%" style="border: solid 1px #b2b2b2; background-color:#E9E9E9;">
 					{foreach from=$statistics item=line}
-					<tr bgcolor="{cycle name="tr" values="#EFEFEF,#E9E9E9"}">
+					<tr bgcolor="{cycle name='tr' values='#EFEFEF,#E9E9E9'}">
 						<td width="100%" valign="top">
 							<span style="background-color:{cycle values="#EFEFEF,#E9E9E9"}; font-family:verdana;">{$line.value}</span><br>
 						</td>
