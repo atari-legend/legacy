@@ -1,21 +1,25 @@
 .BODY 
 {
-	background-color: white;
-	font:70% verdana,tahoma,helvetica,sans-serif;
+	background: #DBD7D1;
+	font-family: "Lucida Grande", Verdana, Helvetica, Arial, sans-serif;
+	font-size: 70%;
+}
+
+.pagebody {
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .leftcell {
 
-	width: 16%;
+	width: 239px;
 	float: left;
-
 }
 
 .rightcell {
 
-	width: 84%;
-	float: right;
-
+	width: 1000px;
+	float: left;
 }
 
 .HEADERBAR 
@@ -35,18 +39,20 @@ A.HEADERBAR
 
 .LEFTNAVHEADING {
 	color: #FFFFDD;
-	font-family : Verdana, Arial, Helvetica, sans-serif;
+	font-family: "Lucida Grande", Verdana, Helvetica, Arial, sans-serif;
 	font-size : 12px;
 	height:20px;
 }
 
 .CELLCOLOR 
 {
-	background-color: #D0D1DF;
+	background-color: #E9E9E9;
 	border-left-color: #1A168B;
 	border-right-color: #1A168B;
 	border-left-style: solid;
 	border-right-style: solid;
+	border-left-width: 1px;
+	border-right-width: 1px;
 }
 
 .NAVCELL 
@@ -57,36 +63,36 @@ A.HEADERBAR
 
 H3
 {
-	font-family : Verdana, Arial, Helvetica, sans-serif;
+	font-family: "Lucida Grande", Verdana, Helvetica, Arial, sans-serif;
 }
 
 H4
 {
-	font-family : Verdana, Arial, Helvetica, sans-serif;
+	font-family: "Lucida Grande", Verdana, Helvetica, Arial, sans-serif;
 	font-size : 12px;
 }
 
 H5
 {
-	font-family : Verdana, Arial, Helvetica, sans-serif;
+	font-family: "Lucida Grande", Verdana, Helvetica, Arial, sans-serif;
 }
 
 H6
 {
-	font-family : Verdana, Arial, Helvetica, sans-serif;
+	font-family: "Lucida Grande", Verdana, Helvetica, Arial, sans-serif;
 	font-size : 10px;
 }
 
 .maintext 
 {
-	font-family : Verdana, Arial, Helvetica, sans-serif;
+	font-family: "Lucida Grande", Verdana, Helvetica, Arial, sans-serif;
 	font-size : 10px;
 	font-weight : bold;
 }
 
 .maintext_light
 {
-	font-family : Verdana, Arial, Helvetica, sans-serif;
+	font-family: "Lucida Grande", Verdana, Helvetica, Arial, sans-serif;
 	font-size : 10px;
 	font-weight: normal;
 }
@@ -103,7 +109,7 @@ A
 
 .LEFTNAV 
 {
-	font-family : Verdana, Arial, Helvetica, sans-serif;
+	font-family: "Lucida Grande", Verdana, Helvetica, Arial, sans-serif;
 	font-size: 12px;
 	text-align: center;
 	color: black;
@@ -137,7 +143,7 @@ A.MAINNAV_WHITE:HOVER
 
 SELECT.linkcategory_select 
 {
-	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-family: "Lucida Grande", Verdana, Helvetica, Arial, sans-serif;
 	background-color: #F4F4F4;
 	color: black;
 	font-weight: bold;
@@ -147,7 +153,7 @@ SELECT.linkcategory_select
 
 TEXTAREA.
 {
-	font-family: Verdana, Helvetica, sans-serif;
+	font-family: "Lucida Grande", Verdana, Helvetica, Arial, sans-serif;
 	color: gray;
 	HEIGHT: 200px;
 	WIDTH: 630px;
@@ -157,7 +163,7 @@ TEXTAREA.
 
 TEXTAREA.textarea_links
 {
-	font-family: Verdana, Helvetica, sans-serif;
+	font-family: "Lucida Grande", Verdana, Helvetica, Arial, sans-serif;
 	color: gray;
 	HEIGHT: 200px;
 	WIDTH: 320px;
@@ -293,7 +299,7 @@ background-color: Menu;
 
 .review_input
 {
-	font-family : Verdana, Helvetica, sans-serif;
+	font-family: "Lucida Grande", Verdana, Helvetica, Arial, sans-serif;
 	color : black;
 	background-color: #D0D1DF;
 	font-size-adjust : inherit;
@@ -315,14 +321,14 @@ a.links_links:hover
 .links_links
 {
     COLOR: black;
-	font-family: Verdana, sans-serif;
+	font-family: "Lucida Grande", Verdana, Helvetica, Arial, sans-serif;
     FONT-SIZE: 10px;
 	TEXT-DECORATION: none;
 }
 
 .main_text
 {
-	font-family: Verdana, sans-serif;
+	font-family: "Lucida Grande", Verdana, Helvetica, Arial, sans-serif;
 	font-size: 10px;
 	color: #000000;
 	padding: 5px;
@@ -344,7 +350,7 @@ background-color: Menu;
 
 .gamescore
 {
-	font-family: Verdana, Helvetica, sans-serif;
+	font-family: "Lucida Grande", Verdana, Helvetica, Arial, sans-serif;
 	color: gray;
 	WIDTH: 50px;
 	font-weight: normal;
@@ -389,7 +395,7 @@ background-color: Menu;
 .NEWNAVCELL 
 {
 	background-color:#E9E9E9;
-	border: solid #1A168B;
+	border: solid #1A168B 1px;
 	vertical-align: top;
 	padding: 2px;
 	list-style-type:none;
@@ -407,7 +413,7 @@ background-color: Menu;
 	height: 20px;
 	background-attachment: inherit;
 	background-repeat: repeat-x;
-	font-family : Verdana, Arial, Helvetica, sans-serif;
+	font-family: "Lucida Grande", Verdana, Helvetica, Arial, sans-serif;
 	font-size : 12px;
 	padding-bottom:5px;
 	padding-top:2px;
@@ -423,5 +429,25 @@ background-color: Menu;
 
 	background-color:#b2b2b2;
 }
+.MAINHEADERBAR 
+{
+	background-image: url(headerback.png);
+	color: #FFFFDD;
+	vertical-align: center;
+	font-weight: 600;
+	height: 20px;
+	background-attachment: inherit;
+	background-repeat: repeat-x;
+	font-family: "Lucida Grande", Verdana, Helvetica, Arial, sans-serif;
+	font-size : 12px;
 
+	padding-top:0px;
+}
+.MAINHEADING {
+	color: #FFFFDD;
+	font-family: "Lucida Grande", Verdana, Helvetica, Arial, sans-serif;
+	font-size : 12px;
+	height:20px;
+	padding-top:2px;
+}
 

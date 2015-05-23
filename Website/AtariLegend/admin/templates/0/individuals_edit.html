@@ -16,7 +16,9 @@ The individuals edit page
 ************************************************************************************************
 *}
 {extends file='head.html'}
-{block name=body}
+{block name=head}
+<script src="../templates/0/js/game_comment.js"></script>
+<script src="../templates/0/js/overlib.js"></script>	
 <script type="text/javascript">
 function individual_pic_delete(ind_id)
 { 
@@ -70,19 +72,11 @@ function nickdelete(nick_id,ind_id)
    	} 	
 }
 </script>
-
-{* load the button javascripts *}
-{block name="js"}
-{include file="../0/js/game_comment.js"}
 {/block}
-
-<table align="center" class="HEADERBAR" width="100%" cellspacing="0" cellpadding="2" border="0">
-<tr>
-	<td style="vertical-align:top;" height="5" colspan=6>
-	<span class="LEFTNAVHEADING">&nbsp;Edit {$individuals.ind_name}</span>
-	</td>
-</tr>
-</table>
+{block name=body}
+<div class="MAINHEADERBAR">
+<div class="MAINHEADING">&nbsp;Edit {$individuals.ind_name}</div>
+</div>
 
 <table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
 <tr>
@@ -224,13 +218,9 @@ function nickdelete(nick_id,ind_id)
 	</td>
 </tr>
 </table>
-<table align="center" class="HEADERBAR" width="100%" cellspacing="0" cellpadding="0" border="0">
-<tr>
-	<td>
- 	<span class="LEFTNAVHEADING">&nbsp;&nbsp;&nbsp;</span>
-	</td>
-</tr>
-</table>
+<div class="MAINHEADERBAR">
+<div class="MAINHEADING">&nbsp;&nbsp;&nbsp;</div>
+</div>
 <br>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 	<tr>
@@ -241,14 +231,10 @@ function nickdelete(nick_id,ind_id)
 </table>
 <br>
 
-{if isset($message) and $message <> ''}
-	<table align="center" width="100%" cellspacing="0" cellpadding="0" border="0">
-	<tr>
-		<td align="center" >
+{if isset($message)}
+	<div style="text-align: center;">
 			<br><br>
 			<span class="MAINAV">{$message}</span>
-		</td>
-	</tr>
-	</table>
+		</div>
 {/if}
 {/block}

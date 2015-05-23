@@ -1,18 +1,12 @@
 {extends file='head.html'}
-{block name=body}
-
+{block name=head}
 <script language="JavaScript">
-
-
-
 function commentdelete(JScomID,JSusers_id)
-{literal}{ {/literal}  
-	
+{ 
 	JSview = "{$links.view}";
 	JSv_count = {$links.v_counter};
 	
 	{if $links.c_counter !=''}JSc_count = {$links.c_counter}{/if}
-	
 	
     	// CONFIRM REQUIRES ONE ARGUMENT
     	var message = "Are you sure you want to delete this comment?";
@@ -25,18 +19,15 @@ function commentdelete(JScomID,JSusers_id)
     	{literal}{ {/literal} 
     		url="../demos/db_demos_comment.php?action=delete_comment&comment_id="+JScomID+"&v_counter="+JSv_count+"&view="+JSview+"users_id"+JSusers_id+{if $links.c_counter !=''}"&c_counter="+JSc_count+{/if}""
 			location.href=url;
-    	{literal}}  {/literal} 
-
-{literal}} {/literal} 
+    	}  
+} 
 </script>
+{/block}
+{block name=body}
 <a name="top"></a>
-<table width="100%" border="0" cellspacing="0" cellpadding="2" align="center" class="HEADERBAR">
-<tr>    
-	<td height="5" style="vertical-align:top;">
-	<span class="LEFTNAVHEADING">&nbsp;&nbsp;Demo Comments</span>
-	</td>
-</tr>
-</table>
+<div class="MAINHEADERBAR">
+<div class="MAINHEADING">&nbsp;&nbsp;Demo Comments</div>
+</div>
 
 <table width="100%" cellspacing="2" cellpadding="15" class="CELLCOLOR">
 <tr>
@@ -140,11 +131,7 @@ function commentdelete(JScomID,JSusers_id)
 </tr>
 </table>
 
-<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center" class="HEADERBAR">
-<tr>
-	<td>
-	<span class="LEFTNAVHEADING">&nbsp;&nbsp;&nbsp;</span>
- 	</td>
-</tr>
-</table>
+<div class="MAINHEADERBAR">
+<div class="MAINHEADING">&nbsp;&nbsp;&nbsp;</div>
+</div>
 {/block}

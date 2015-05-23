@@ -16,8 +16,7 @@
 //**************************************************************************************** 
 *}
 {extends file='head.html'}
-{block name=body}
-{literal}
+{block name=head}
 <script type="text/javascript">
 function deletereview(reviewid, gameid)
 {	
@@ -64,16 +63,12 @@ function deletecomment(game_id,reviewid,screenshot_id)
      }
 }
 </script>
-{/literal}
-
+{/block}
+{block name=body}
 <form action="../games/db_games_review_edit.php" method="post" name="post">
-<table align="center" class="HEADERBAR" width="100%" cellspacing="0" cellpadding="2" border="0">
-<tr>
-	<td style="vertical-align:top;" height="5" colspan=6>
-	<span class="LEFTNAVHEADING">&nbsp;Edit review - <a href="../games/games_detail.php?game_id={$game.game_id}" class="MAINNAV_WHITE">{$game.game_name}</a></span>
-	</td>
-</tr>
-</table>
+<div class="MAINHEADERBAR">
+<div class="MAINHEADING">&nbsp;Edit review - <a href="../games/games_detail.php?game_id={$game.game_id}" class="MAINNAV_WHITE">{$game.game_name}</a></div>
+</div>
 
 <table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
 <tr>
@@ -262,32 +257,23 @@ function deletecomment(game_id,reviewid,screenshot_id)
 </tr>
 </table>
 	
-<table align="center" class="HEADERBAR" width="100%" cellspacing="0" cellpadding="0" border="0">
-<tr>
-	<td>
- 	<span class="LEFTNAVHEADING">&nbsp;&nbsp;&nbsp;</span>
-	</td>
-</tr>
-</table>
+<div class="MAINHEADERBAR">
+<div class="MAINHEADING">&nbsp;&nbsp;&nbsp;</div>
+</div>
 <br>
-<table width="100%" border="0" cellspacing="0" cellpadding="0">
-	<tr>
-   		<td colspan="3" valign=top align=center>
+<div style="text-align: center;">
+			<br>
+			<span class="MAINAV">
 			<b><a href="javascript:history.go(-1)" class="MAINNAV">back</a></b>
-		</td>
-	</tr>
-</table>
+			</span>
+		</div>
 <br>
 
-{if isset($message) and $message <> ''}
-	<table align="center" width="100%" cellspacing="0" cellpadding="0" border="0">
-	<tr>
-		<td align="center" >
+{if isset($message)}
+	<div style="text-align: center;">
 			<br><br>
 			<span class="MAINAV">{$message}</span>
-		</td>
-	</tr>
-	</table>
+		</div>
 {/if}
 
 </form>
