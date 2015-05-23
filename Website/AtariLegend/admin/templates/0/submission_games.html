@@ -1,9 +1,8 @@
 {extends file='head.html'}
-{block name=body}
+{block name=head}
 <script language="JavaScript">
 function commentdelete(JSsubID)
-{literal}{ {/literal}  
-	
+{ 
 	JSview = "{$structure.list}";
 	JSv_count = {$structure.v_counter};
 	
@@ -15,17 +14,16 @@ function commentdelete(JSsubID)
     	var return_value = confirm(message);
 
     	if (return_value !="0")
-    	{literal}{ {/literal} 
+    	{ 
     		url="../games/db_games_submissions.php?action=delete_submission&submit_id="+JSsubID+"&v_counter="+JSv_count+"&list="+JSview+""
 			location.href=url;
-    	{literal}}  {/literal} 
-{literal}} {/literal} 
+    	}   
+} 
 </script>
 
 <script language="JavaScript">
 function submovetocomment(JSsubID)
-{literal}{ {/literal}  
-	
+{ 
 	JSview = "{$structure.list}";
 	JSv_count = {$structure.v_counter};
 	
@@ -37,39 +35,29 @@ function submovetocomment(JSsubID)
     	var return_value = confirm(message);
 
     	if (return_value !="0")
-    	{literal}{ {/literal} 
+    	{ 
     		url="../games/db_games_submissions.php?action=move_submission_tocomment&submit_id="+JSsubID+"&v_counter="+JSv_count+"&list="+JSview+""
 			location.href=url;
-    	{literal}}  {/literal} 
-{literal}} {/literal} 
+    	}  
+}
 </script>
-
-<table width="100%" border="0" cellspacing="0" cellpadding="2" align="center" class="HEADERBAR">
-<tr>    
-	<td height="5" style="vertical-align:top;">
-	<span class="LEFTNAVHEADING">&nbsp;&nbsp;Game Submissions</span>
-	</td>
-</tr>
-</table>
+{/block}
+{block name=body}
+<div class="MAINHEADERBAR">
+<div class="MAINHEADING">&nbsp;&nbsp;Game Submissions</div>
+</div>
 
 <table width="100%" cellspacing="2" cellpadding="15" class="CELLCOLOR">
 <tr>
 	<td align="center">
-	<fieldset class="category_set">
-		<table>
-		<tr>
-			<td width="100%" valign="top">
+	<fieldset class="interview_set">
 				When you have finished reviewing the submitted data move the submission to the "Done list" by clicking the appropriate Done button. 
 				Users have submitted a total of <b>{$total_nr_submissions}</b> entries in the AL DB!
-			</td>
-		</tr>
-		</table>
+
 	</fieldset> 
 	</td>
 </tr>
-</table>
- 
-<table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
+
 <tr>
 	<td align="center">
 		{if $structure.list == 'current'}
@@ -209,4 +197,5 @@ function submovetocomment(JSsubID)
 <div class="MAINHEADERBAR">
 <div class="MAINHEADING">&nbsp;&nbsp;&nbsp;</div>
 </div>
+<br>
 {/block}

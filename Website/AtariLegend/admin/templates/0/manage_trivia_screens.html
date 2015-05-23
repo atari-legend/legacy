@@ -1,12 +1,8 @@
 {extends file='head.html'}
 {block name=body}
-<table width="100%" border="0" cellspacing="0" cellpadding="2" align="center" class="HEADERBAR">
-<tr>    
-	<td height="5" style="vertical-align:top;">
-	<span class="LEFTNAVHEADING">&nbsp;&nbsp;Manage Intro Screens</span>
-	</td>
-</tr>
-</table>
+<div class="MAINHEADERBAR">
+<div class="MAINHEADING">&nbsp;&nbsp;Manage Intro Screens</div>
+</div>
 
 <table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
 <tr>
@@ -27,7 +23,7 @@
 
 					<script language="JavaScript">
 				  	function deletescreen{$line.trivia_screens_id}()
-			{literal}	  	{ {/literal}
+					{ 
 			      		// CONFIRM REQUIRES ONE ARGUMENT
      					var message = "Are you sure you want to delete this image?";
     					// CONFIRM IS BOOLEAN. THAT MEANS THAT
@@ -35,11 +31,11 @@
     					// OTHERWISE IT RETURN FALSE
      					var return_value = confirm(message);
 	    				if (return_value !="0")
-        		{literal}		{ {/literal}
+							{ 
       						url="../trivia/db_trivia.php?action=delete_trivia_screen&imageid={$line.trivia_screens_id}";
 							location.href=url;
-       			{literal}		} {/literal}
-		{literal}		  	} {/literal}
+							} 
+						} 
 				  	</script>
 
 

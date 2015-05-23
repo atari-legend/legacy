@@ -16,13 +16,9 @@
 *}
 {extends file='head.html'}
 {block name=body}
-<table align="center" class="HEADERBAR" width="100%" cellspacing="0" cellpadding="2" border="0">
-<tr>
-	<td style="vertical-align:top;" height="5" colspan=6>
-	<span class="LEFTNAVHEADING">&nbsp;Preview news icons</span>
-	</td>
-</tr>
-</table>
+<div class="MAINHEADERBAR">
+<div class="MAINHEADING">&nbsp;Preview news icons</div>
+</div>
 
 <table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
 <tr>
@@ -48,12 +44,9 @@
 <div class="MAINHEADERBAR">
 <div class="MAINHEADING">&nbsp;&nbsp;&nbsp;</div>
 </div>
-<table align="center" width="100%" cellspacing="0" cellpadding="0" border="0">
-<tr>
-	<td align="center" >
-		<br><br>
-		<a href="javascript:history.go(-1)" class="MAINNAV"><b>back</b></a>
-	</td>
-</tr>
-</table>
+<div style="text-align: center;">
+			<br>
+			<span class="MAINAV">
+		<a href="javascript:history.go(-1)" class="MAINNAV"><b>back</b></a></span>
+		</div>
 {/block}

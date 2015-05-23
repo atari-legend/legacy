@@ -15,8 +15,7 @@ The main Users page
 ************************************************************************************************
 *}
 {extends file='head.html'}
-{block name=body}
-{literal}
+{block name=head}
 <script type="text/javascript">
 function SyncKarma()
 { 
@@ -34,19 +33,16 @@ function SyncKarma()
     } 
 }
 </script>
-{/literal}
-<table align="center" class="HEADERBAR" width="100%" cellspacing="0" cellpadding="2" border="0">
-<tr>
-	<td style="vertical-align:top;" height="5" colspan=6>
-	<span class="LEFTNAVHEADING">&nbsp;User Area</span>
-	</td>
-</tr>
-</table>
+{/block}
+{block name=body}
+<div class="MAINHEADERBAR">
+<div class="MAINHEADING">&nbsp;User Area</div>
+</div>
 
 <table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
 <tr>
 	<td align="center">
-	<fieldset class="category_set">
+	<fieldset class="interview_set">
 		This is the user area. Overhere you can maintain user accounts of the AL website! There are currently 
 		<b>{$nr_users}</b> users in the DB.
 	</fieldset> 
@@ -119,7 +115,7 @@ function SyncKarma()
 <div class="MAINHEADING">&nbsp;&nbsp;&nbsp;</div>
 </div>
 
-{if isset($message) and $message <> ''}
+{if isset($message)}
 	<div style="text-align: center;">
 			<br><br>
 			<span class="MAINAV">{$message}</span>
