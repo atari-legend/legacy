@@ -1,5 +1,6 @@
 {if isset($smarty_action) and $smarty_action == "game_list"}
 
+	{if isset($series_link)}
 			{foreach from=$series_link item=line}
 			<div class="Row" style="background-color:{cycle name="tr" values="#EFEFEF,#E9E9E9"};" id="game_row">
 				<div class="Cell" style="width:5%;">
@@ -44,4 +45,5 @@
 
 			</div>
 			{/foreach}
+		{/if}
 {/if}
