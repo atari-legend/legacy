@@ -45,7 +45,7 @@ A.HEADERBAR
 
 .CELLCOLOR 
 {
-	background-color: #E9E9E9;
+	background-color: #F3F3F3;
 	border-left-color: #1A168B;
 	border-right-color: #1A168B;
 	border-left-style: solid;
@@ -250,7 +250,7 @@ background-color: Menu;
 {
 border: #26a solid 1px;
 width: 75%;
-background-color: Menu;
+background-color: white;
 -moz-border-radius:10px;
 }
 

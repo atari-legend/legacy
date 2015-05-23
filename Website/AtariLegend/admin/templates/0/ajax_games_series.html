@@ -1,0 +1,47 @@
+{if isset($smarty_action) and $smarty_action == "game_list"}
+
+			{foreach from=$series_link item=line}
+			<div class="Row" style="background-color:{cycle name="tr" values="#EFEFEF,#E9E9E9"};" id="game_row">
+				<div class="Cell" style="width:5%;">
+				<input type="checkbox" name="game_id[]" value="{$line.game_id}">
+				</div>
+				<div class="Cell" style="width:30%;">
+						{if $line.game_name != ''}
+						<a href="games_detail.php?game_id={$line.game_id}" class="MAINNAV">
+							{$line.game_name}
+						</a>
+						{else}
+						<i>n/a</i>
+						{/if}
+				</div>
+				<div class="Cell" style="width:20%;">
+						{if $line.publisher_name != ''}
+						<a href="games_main.php?publisher={$line.publisher_id}&amp;action=search" class="MAINNAV">
+							{$line.publisher_name}
+					</a>
+						{else}
+							<i>n/a</i>
+						{/if}
+				</div>				
+				<div class="Cell" style="width:20%;">
+						{if $line.developer_name != ''}
+						<a href="games_main.php?developer={$line.developer_id}&amp;action=search" class="MAINNAV">
+							{$line.developer_name}
+						</a>
+						{else}
+							<i>n/a</i>
+						{/if}
+				</div>
+				<div class="Cell" style="width:15%;">
+						{if $line.year != ''}
+						<a href="games_main.php?year={$line.year}&amp;action=search" class="MAINNAV">
+							{$line.year}
+						</a>
+						{else}
+							<i>n/a</i>
+						{/if}
+				</div>
+
+			</div>
+			{/foreach}
+{/if}
