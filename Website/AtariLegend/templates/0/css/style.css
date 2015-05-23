@@ -171,6 +171,7 @@ footer, header, hgroup, menu, nav, section {
 			margin-right: auto;
 			margin-bottom: 5px;		
 		}
+	#animation, #animation_vert{ display: none;}
 	#right { width: 0%;
 		display: none;
 	}
@@ -194,6 +195,7 @@ footer, header, hgroup, menu, nav, section {
 	#logo_img{ margin-left: auto;
 			   margin-right: auto; 
 		}
+	#animation, #animation_vert{ display: none;}
 	#logo_img_480{ display: none;}
 		
 	#right { width: 0%;
