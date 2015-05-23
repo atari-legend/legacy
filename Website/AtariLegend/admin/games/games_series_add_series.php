@@ -33,6 +33,10 @@ include("../includes/common.php");
 						  'game_series_name' => $query_series['game_series_name']));
 				}
 
+				$smarty->assign('series_info',
+	    			array('series_page' => $series_page));
+
+
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/games_series_main.html');
+$smarty->display('file:../templates/0/games_series_add_series.html');
 ?>
