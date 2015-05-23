@@ -38,6 +38,7 @@ while ($sql_recent_reviews = $query_recent_reviews->fetch_array(MYSQLI_BOTH))
 	//Structure and manipulate the review text
 	$review_text = $sql_recent_reviews['review_text'];
 	$review_text = str_replace("[i][b]Comments[/b][/i]", "",$review_text);
+	$review_text = str_replace("[i][b]Intro[/b][/i]", "",$review_text);
 	$review_text = substr($review_text, 0,100);
 	$review_text = trim($review_text);
 	$review_text .= "...";
