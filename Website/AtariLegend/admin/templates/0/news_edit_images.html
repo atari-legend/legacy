@@ -18,13 +18,9 @@
 {extends file='head.html'}
 {block name=body}
 <form enctype="multipart/form-data" action="../news/news_edit_images.php?action=delete_image" method="post" name="deleteimage" id="deleteimage">
-<table align="center" class="HEADERBAR" width="100%" cellspacing="0" cellpadding="2" border="0">
-<tr>
-	<td style="vertical-align:top;" height="5" colspan=6>
-	<span class="LEFTNAVHEADING">&nbsp;Edit a news image</span>
-	</td>
-</tr>
-</table>
+<div class="MAINHEADERBAR">
+<div class="MAINHEADING">&nbsp;Edit a news image</div>
+</div>
 <table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
 <tr>
 	<td colspan="3">
@@ -34,7 +30,7 @@
 </tr>
 <tr>	
 	<td colspan="3">
-	<fieldset class="category_set">
+	<fieldset class="game_set">
 		Here you can delete a news image
 	</fieldset> 
 	</td>
@@ -74,13 +70,10 @@
 <div class="MAINHEADERBAR">
 <div class="MAINHEADING">&nbsp;&nbsp;&nbsp;</div>
 </div>
-<table align="center" width="100%" cellspacing="0" cellpadding="0" border="0">
-<tr>
-	<td align="center" >
-		<br><br>
-		<a href="../news/news_add_images.php" class="MAINNAV"><b>back</b></a>
-	</td>
-</tr>
-</table>
+<div style="text-align: center;">
+			<br>
+			<span class="MAINAV">
+		<a href="../news/news_add_images.php" class="MAINNAV"><b>back</b></a></span>
+		</div>
 </form>
 {/block}

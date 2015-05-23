@@ -13,11 +13,10 @@
 ***************************************************************************/
 *}
 {extends file='head.html'}
-{block name=body}
+{block name=head}
 <script language="JavaScript">
 function commentdelete(JSsubID)
-{literal}{ {/literal}  
-	
+{ 
 	JSview = "{$structure.list}";
 	JSv_count = {$structure.v_counter};
 	
@@ -29,25 +28,22 @@ function commentdelete(JSsubID)
     	var return_value = confirm(message);
 
     	if (return_value !="0")
-    	{literal}{ {/literal} 
+    	{ 
     		url="../demos/db_demos_submissions.php?action=delete_submission&submit_id="+JSsubID+"&v_counter="+JSv_count+"&list="+JSview+""
 			location.href=url;
-    	{literal}}  {/literal} 
-{literal}} {/literal} 
+    	}  
+} 
 </script>
-
-<table width="100%" border="0" cellspacing="0" cellpadding="2" align="center" class="HEADERBAR">
-<tr>    
-	<td height="5" style="vertical-align:top;">
-	<span class="LEFTNAVHEADING">&nbsp;&nbsp;Demo Submissions</span>
-	</td>
-</tr>
-</table>
+{/block}
+{block name=body}
+<div class="MAINHEADERBAR">
+<div class="MAINHEADING">&nbsp;&nbsp;Demo Submissions</div>
+</div>
 
 <table width="100%" cellspacing="2" cellpadding="15" class="CELLCOLOR">
 <tr>
 	<td align="center">
-	<fieldset class="category_set">
+	<fieldset class="game_set">
 		<table>
 		<tr>
 			<td width="100%" valign="top">
