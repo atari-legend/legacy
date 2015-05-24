@@ -7,7 +7,7 @@ $text = $mysqli->real_escape_string($_GET['term']);
 
 //Set up queries
 $game_name_query = "SELECT game_name FROM game";
-$game_aka_name_query = "SELECT aka_name AS game_name FROM aka_game";
+$game_aka_name_query = "SELECT aka_name AS game_name FROM game_aka";
 $demo_name_query = "SELECT demo_name AS game_name FROM demo";
 $demo_aka_name_query = "SELECT aka_name AS game_name FROM demo_aka";
 
