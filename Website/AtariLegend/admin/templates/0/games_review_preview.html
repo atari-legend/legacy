@@ -15,16 +15,11 @@
 *}
 {extends file='head.html'}
 {block name=body}
-<table align="center" class="HEADERBAR" width="100%" cellspacing="0" cellpadding="2" border="0">
-<tr>
-	<td style="vertical-align:top;" height="5" colspan=6 width="50%" align="left">
-		<span class="LEFTNAVHEADING">&nbsp;Written by {if $review.email != ''}<a href="mailto:{$review.email}?subject=Your review of {$review.game_name} at Atari Legend" class="MAINNAV_WHITE">{$review.user_name}</a>{else}{$review.user_name}{/if}</span>		
-	</td>
-	<td style="vertical-align:top;" height="5" colspan=6 width="50%" align="right">
-		<span class="LEFTNAVHEADING">{$review.date}</span>
-	</td>			
-</tr>
-</table>
+<div class="MAINHEADERBAR">
+<div class="MAINHEADING" style="float:left;">&nbsp;Written by {if $review.email != ''}<a href="mailto:{$review.email}?subject=Your review of {$review.game_name} at Atari Legend" class="MAINNAV_WHITE">{$review.user_name}</a>{else}{$review.user_name}{/if}
+</div>
+	<div class="MAINHEADING" style="float:right;padding-right:5px;">{$review.date}</div>
+</div>
 
 <table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
 <tr>			
@@ -59,25 +54,16 @@
 	</td>
 </tr>
 </table>
-<table align="center" class="HEADERBAR" width="100%" cellspacing="0" cellpadding="2" border="0">
-<tr>
-	<td style="vertical-align:top;" height="5" colspan=6 width="50%" align="left">
-		<span class="LEFTNAVHEADING">&nbsp;Written by {if $review.email != ''}<a href="mailto:{$review.email}?subject=Your review of {$review.game_name} at Atari Legend" class="MAINNAV_WHITE">{$review.user_name}</a>{else}{$review.user_name}{/if}</span>		
-	</td>
-	<td style="vertical-align:top;" height="5" colspan=6 width="50%" align="right">
-		<span class="LEFTNAVHEADING">{$review.date}</span>
-	</td>			
-</tr>
-</table>
+<div class="MAINHEADERBAR">
+<div class="MAINHEADING" style="float:left;">&nbsp;Written by {if $review.email != ''}<a href="mailto:{$review.email}?subject=Your review of {$review.game_name} at Atari Legend" class="MAINNAV_WHITE">{$review.user_name}</a>{else}{$review.user_name}{/if}
+</div>
+	<div class="MAINHEADING" style="float:right;padding-right:5px;">{$review.date}</div>
+</div>
 
 <td width="25%" align="right" valign="top">
-	<table align="center" class="HEADERBAR" width="100%" cellspacing="0" cellpadding="2" border="0">
-	<tr>
-		<td style="vertical-align:top;" height="5" colspan=6 width="50%" align="left">
-			<span class="LEFTNAVHEADING">&nbsp;Screenshots</span>		
-		</td>
-	</tr>
-	</table>
+<div class="MAINHEADERBAR">
+<div class="MAINHEADING">&nbsp;Screenshots</div>
+</div>
 	<table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
 	<tr>			
 		<td width="100%" valign="top">

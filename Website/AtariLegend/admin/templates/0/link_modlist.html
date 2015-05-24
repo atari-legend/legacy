@@ -8,10 +8,10 @@
 <tr>
 	<td>
 	
-		<span class="maintext">Links in Archive</span>
+		Links in Archive
 		
 		<form action="../links/link_modlist.php" method="post" name="catdrop" id="catdrop">
-		<span class="maintext">Pick category</span>
+		Pick category
 	
 	
 			
@@ -40,7 +40,7 @@
 			<a href="{$line.website_url}" class="LEFTNAV" target="_blank">{$line.website_name}</a> 
 			<a href="link_mod.php?website_id={$line.website_id}" class="MAINNAV">(Click to modify)</a><br>
 			added on {$line.timestamp} by</span> <span class="maintext">{$line.submitted}</span><br>
-			<span class="maintext_light">{$line.website_description}</span>
+			{$line.website_description}
 				</td>
 			</tr>
 		{/foreach}

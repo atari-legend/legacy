@@ -338,7 +338,7 @@ querystring for faster output
 
 
 				$mysqli->query("CREATE TEMPORARY TABLE temp ENGINE=MEMORY $RESULTGAME") or die(mysqli_error());
-				$mysqli->query("INSERT INTO temp $RESULTAKA") or die("does not compute2");
+				$mysqli->query("INSERT INTO temp $RESULTAKA") or die(mysqli_error());
 
 				$temp_query = $mysqli->query("SELECT * FROM temp ORDER BY game_name ASC") or die("does not compute3");
 				
