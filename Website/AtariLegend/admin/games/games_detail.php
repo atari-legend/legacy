@@ -172,7 +172,7 @@ include("../includes/common.php");
 //**********************************************************************************
 	
 	//let's get all the companies in the DB
-	$sql_company = $mysqli->query("SELECT * FROM pub_dev ORDER BY pub_dev_name ASC")
+	$sql_company = $mysqli->query("SELECT * FROM pub_dev WHERE pub_dev_name REGEXP '^[0-9].*' ORDER BY pub_dev_name ASC")
 			     or die ("Couldn't query Publisher and Developer database");
 		
 	while  ($company= $sql_company->fetch_array(MYSQLI_BOTH)) 
