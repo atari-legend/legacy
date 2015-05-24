@@ -161,9 +161,10 @@ function browseDeveloper(str) {
 
 <table width="100%" cellspacing="2" cellpadding="15" class="CELLCOLOR">
 <tr>
-	<td>
+	<td style="display:block;width:950px;vertical-align:text-top;">
 	<form action="../games/db_games_detail.php" method="post" name="edit">
-	<fieldset class="game_set">
+	<div style="display:inline;float:left;">
+	<fieldset class="game_set" style="width:650px;display:inline;">
 		<legend class="links_legend">Basic game info</legend>
 		<table>
 		<tr>
@@ -313,7 +314,45 @@ function browseDeveloper(str) {
 		</tr>
 		</table>
 	</fieldset>
+	</div>
 	</form>
+	<div style="display:inline;float:right;">
+			<fieldset class="game_set" style="width:240px; text-align:center;">
+		<legend class="links_legend" style="text-align:right;">Other Features</legend>
+
+					<a href="../games/games_upload.php?game_id={$game_info.game_id}" class="MAINNAV">Add file download</a><br>
+				  	<a href="../administration/construction.php" class="MAINNAV">Image Gallery</a><br>					
+					<a href="../games/games_screenshot_add.php?game_id={$game_info.game_id}&game_name={$game_info.game_name}" class="MAINNAV">Add screenshots</a><br>
+					<a href="../magazine/magazine_review_score.php?game_id={$game_info.game_id}&game_name={$game_info.game_name}" class="MAINNAV">Add Mag review score</a><br>
+					<a href="../games/games_box.php?game_id={$game_info.game_id}&game_name={$game_info.game_name}" class="MAINNAV">Add boxscans</a><br>
+					<a href="../games/games_similar.php?game_id={$game_info.game_id}&game_name={$game_info.game_name}" class="MAINNAV">Add Similar Games</a><br>
+					<a href="../administration/construction.php" class="MAINNAV">Write a review</a><br>
+					<br>
+					<a href="../administration/construction.php" class="MAINNAV">Moderate comments</a>
+
+	</fieldset>
+	<br>
+					<fieldset class="game_set" style="width:240px; text-align:center;">
+						<legend class="links_legend" style="text-align:right;">Statistics</legend>
+						Nr of Screenshots - {$nr_screenshots}<br>
+						Nr of Box scans - {$nr_boxscans}<br>
+						Nr of reviews - {$nr_reviews}<br>
+						Nr of entries in the Gallery - {$nr_pics}<br>
+						Nr of music files - {$nr_music}<br>
+						Nr of magazine reviews - {$nr_magazines}<br>
+					</fieldset>
+	
+	
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	</td>	
 </tr>	
 </table>
@@ -623,46 +662,6 @@ function browseDeveloper(str) {
 		</fieldset>
 		</form>
 	</td>
-</tr>
-<tr>
-	<td width="33%" align="center">
-	<fieldset class="game_set">
-		<legend class="links_legend">Other Features</legend>
-			<table width="100%">
-			<tr>
-				<td width="33%" align="center">	
-					<b><a href="../games/games_upload.php?game_id={$game_info.game_id}" class="MAINNAV">Add file download</a></b><br>
-				  	<b><a href="../administration/construction.php" class="MAINNAV">Image Gallery</a></b><br>					
-					<b><a href="../games/games_screenshot_add.php?game_id={$game_info.game_id}&game_name={$game_info.game_name}" class="MAINNAV">Add screenshots</a></b><br>
-					<b><a href="../magazine/magazine_review_score.php?game_id={$game_info.game_id}&game_name={$game_info.game_name}" class="MAINNAV">Add Mag review score</a></b><br>
-					<b><a href="../games/games_box.php?game_id={$game_info.game_id}&game_name={$game_info.game_name}" class="MAINNAV">Add boxscans</a></b><br>
-					<b><a href="../games/games_similar.php?game_id={$game_info.game_id}&game_name={$game_info.game_name}" class="MAINNAV">Add Similar Games</a></b><br>
-					<b><a href="../administration/construction.php" class="MAINNAV">Write a review</a></b><br>
-					<br>
-					<b><a href="../administration/construction.php" class="MAINNAV">Moderate comments</a></b>
-				</td>
-			</tr>
-			</table>
-	</fieldset>
-	</td>
-	<td width="33%" align="center">
-		<fieldset class="game_set">
-		<legend class="links_legend">Statistics</legend>
-			<table width="100%">
-			<tr>
-				<td width="33%" align="center">	
-					Nr of Screenshots - {$nr_screenshots}<br>
-					Nr of Box scans - {$nr_boxscans}<br>
-					Nr of reviews - {$nr_reviews}<br>
-					Nr of entries in the Gallery - {$nr_pics}<br>
-					Nr of music files - {$nr_music}<br>
-					Nr of magazine reviews - {$nr_magazines}<br>
-				</td>
-			</tr>
-			</table>
-		</fieldset>
-	</td>
-	<td width="33%" align="center"></td>
 </tr>
 </table>
 <div class="MAINHEADERBAR">
