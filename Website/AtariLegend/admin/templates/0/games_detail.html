@@ -109,7 +109,28 @@ function browseCompany(str) {
                 document.getElementById("companyPublisher").innerHTML = xmlhttp.responseText;
             }
         }
-        xmlhttp.open("GET","../crew/ajax_games_detail.php?action=company_publisher_browse&query="+str,true);
+        xmlhttp.open("GET","../games/ajax_games_detail.php?action=company_publisher_browse&query="+str,true);
+        xmlhttp.send();
+    }
+}
+function browseDeveloper(str) {
+    if (str == "") {
+        document.getElementById("companyDeveloper").innerHTML = "";
+        return;
+    } else { 
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("companyDeveloper").innerHTML = xmlhttp.responseText;
+            }
+        }
+        xmlhttp.open("GET","../games/ajax_games_detail.php?action=company_publisher_browse&query="+str,true);
         xmlhttp.send();
     }
 }
@@ -336,8 +357,10 @@ function browseCompany(str) {
 					<input type="button" name="valider" value="Delete" onclick="delete_publisher()">
 					<br>
 					<br>
-					<span style="display:table-cell;width:100%">
-					<select name="companybrowse" onchange="browseCompany(this.value)">
+					
+					
+					<div style="display:table-cell;width:100%">
+					<select name="companybrowse" onchange="browseCompany(this.value)" style="float:left;padding-right:5px;">
 					<option value="num" SELECTED>0-9</option>
 					<option value="a">A</option>
 					<option value="b">B</option>
@@ -366,7 +389,7 @@ function browseCompany(str) {
 					<option value="y">Y</option>
 					<option value="z">Z</option>
 				</select>
-					<div id="companyPublisher">
+					<div id="companyPublisher" style="display:inline;">
 					<select name="company_id_pub" class="authorSelects">
 						<option value="-" selected>-</option>
 						{foreach from=$company item=line}
@@ -376,7 +399,7 @@ function browseCompany(str) {
 					</div>
 					<input type="hidden" value="{$line.comp_name}" name="pub_name">
 					<b>Name</b>
-					</span>		
+					</div>		
 					<br>
 					<select name="continent_pub" class="continentSelects">
 						<option value="-" selected>-</option>
@@ -421,13 +444,48 @@ function browseCompany(str) {
 					{/if}
 					<br>
 					<br>
+					
+					
+					<div style="display:table-cell;width:100%">
+					<select name="companybrowse" onchange="browseDeveloper(this.value)" style="float:left;">
+					<option value="num" SELECTED>0-9</option>
+					<option value="a">A</option>
+					<option value="b">B</option>
+					<option value="c">C</option>
+					<option value="d">D</option>
+					<option value="e">E</option>
+					<option value="f">F</option>
+					<option value="g">G</option>
+					<option value="h">H</option>
+					<option value="i">I</option>
+					<option value="j">J</option>
+					<option value="k">K</option>
+					<option value="l">L</option>
+					<option value="m">M</option>
+					<option value="n">N</option>
+					<option value="o">O</option>
+					<option value="p">P</option>
+					<option value="q">Q</option>
+					<option value="r">R</option>
+					<option value="s">S</option>
+					<option value="t">T</option>
+					<option value="u">U</option>
+					<option value="v">V</option>
+					<option value="w">W</option>
+					<option value="x">X</option>
+					<option value="y">Y</option>
+					<option value="z">Z</option>
+				</select>
+					<div id="companyDeveloper" style="display:inline;">
 					<select name="company_id_dev" class="authorSelects">
 						<option value="-" selected>-</option>
 						{foreach from=$company item=line}
 							<option value="{$line.comp_id}">{$line.comp_name}</option>
 						{/foreach}
 					</select>
-					<b>Name</b>		
+					</div>
+					<b>Name</b>
+					</div>		
 					<br>
 					<select name="continent_dev" class="continentSelects">
 						<option value="-" selected>-</option>
