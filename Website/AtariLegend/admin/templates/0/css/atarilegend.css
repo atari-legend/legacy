@@ -5,9 +5,10 @@
 	font-size: 70%;
 }
 
-.pagebody {
-    margin-left: auto;
-    margin-right: auto;
+#pagebody {
+	width: 100%;	
+	max-width: 1280px;
+	margin: auto;
 }
 
 .leftcell {
@@ -22,25 +23,36 @@
 	float: left;
 }
 
-.HEADERBAR 
+.MAINHEADERBAR 
 {
 	background-image: url(headerback.png);
 	color: #FFFFDD;
+	vertical-align: center;
 	font-weight: 600;
 	height: 20px;
 	background-attachment: inherit;
 	background-repeat: repeat-x;
-}
+	font-size : 12px;
 
-A.HEADERBAR 
-{
-	color: #FFFFDD;
+	padding-top:0px;
 }
-
-.LEFTNAVHEADING {
+.MAINHEADING {
 	color: #FFFFDD;
 	font-size : 12px;
 	height:20px;
+	padding-top:2px;
+}
+
+.NEWMAINCELL 
+{
+	background-color: #F3F3F3;
+	border-left-color: #1A168B;
+	border-right-color: #1A168B;
+	border-left-style: solid;
+	border-right-style: solid;
+	border-left-width: 1px;
+	border-right-width: 1px;
+	padding:15px;
 }
 
 .CELLCOLOR 
@@ -82,7 +94,6 @@ A
 	font-size: 12px;
 	text-align: center;
 	color: black;
-	font-weight : bold;
 }
 
 A.LEFTNAV:HOVER 
@@ -389,22 +400,4 @@ background-color: white;
 
 	background-color:#b2b2b2;
 }
-.MAINHEADERBAR 
-{
-	background-image: url(headerback.png);
-	color: #FFFFDD;
-	vertical-align: center;
-	font-weight: 600;
-	height: 20px;
-	background-attachment: inherit;
-	background-repeat: repeat-x;
-	font-size : 12px;
 
-	padding-top:0px;
-}
-.MAINHEADING {
-	color: #FFFFDD;
-	font-size : 12px;
-	height:20px;
-	padding-top:2px;
-}
