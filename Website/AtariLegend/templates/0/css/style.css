@@ -51,7 +51,7 @@ footer, header, hgroup, menu, nav, section {
 	width: 100%;
 	float: left;
 	display: block;
-	background: url(../../../includes/show_image.php?file=../templates/0/images/top_bg.jpg) 0 0 no-repeat;
+	background: url(../../../templates/0/images/top_bg.jpg) 0 0 no-repeat;
 	height:100%;
 	}
 
@@ -1035,7 +1035,7 @@ datequote tile - front page
 ------------------------------------------------------------ */
 #datequote_position_front { 	margin-bottom: 20px; }
 
-#datequote_bg { background: url(../../../includes/show_image.php?file=../templates/0/images/datequote_bg.jpg) ;}
+#datequote_bg { background: url(../../../templates/0/images/datequote_bg.jpg) ;}
 
 /* 1 and 2 tiles */
 @media screen and (max-width: 800px) { 
