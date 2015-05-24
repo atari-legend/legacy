@@ -20,7 +20,7 @@ include("../includes/common.php");
 $smarty->assign("user_id",$_SESSION['user_id']);
 
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/interviews_hlp.html');
+$smarty->display('file:../templates/0/interviews_help.html');
 
 //close the connection
 mysqli_close($mysqli);

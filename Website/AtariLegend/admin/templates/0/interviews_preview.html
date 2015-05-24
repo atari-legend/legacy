@@ -16,86 +16,55 @@
 *}
 {extends file='head.html'}
 {block name=body}
-<table align="center" class="HEADERBAR" width="100%" cellspacing="0" cellpadding="2" border="0">
-<tr>
-	<td style="vertical-align:top;" height="5" colspan=6 width="50%" align="left">
-		<span class="LEFTNAVHEADING">&nbsp;Written by <a href="mailto:{if isset($interview.interview_email)}{$interview.interview_email}{/if}?subject=Your interview with {$interview.interview_author} at Atari Legend" class="MAINNAV_WHITE">{$interview.interview_author}</a></span>		
-	</td>
-	<td style="vertical-align:top;" height="5" colspan=6 width="50%" align="right">
-		<span class="LEFTNAVHEADING">{$interview.interview_date}</span>
-	</td>			
-</tr>
-</table>
+<div class="MAINHEADERBAR">
+<div class="MAINHEADING" style="float:left;">
+	&nbsp;Written by <a href="mailto:{if isset($interview.interview_email)}{$interview.interview_email}{/if}?subject=Your interview with {$interview.interview_author} at Atari Legend" class="MAINNAV_WHITE">{$interview.interview_author}</a>
+</div>
+	<div class="MAINHEADING" style="float:right;padding-right:5px;">{$interview.interview_date}</div>
+</div>
 
-<table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
-<tr>
-	<td>		
+<div class="NEWMAINCELL">	
 		{if $interview.interview_img != 'none'}
 			<span style="float:right;"><img src="../includes/show_image.php?file={$interview.interview_img}" alt="{$interview.individual_name}"></span>
 		{/if}
 		{$interview.interview_chapters}
-	</td>
-</tr>
-</table>
+</div>
 			
-<table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
-<tr>			
-	<td width="100%" colspan="4" valign="top">		
+<div class="NEWMAINCELL">			
 		{$interview.interview_text}
-	</td>
-</tr>
-<tr>		
-	<td width="100%" colspan="4" align="center" valign="top">		
+	
+		<br><br>
+		<span style="display:block;text-align:center;">© 2001 - 2005 by "Atari Legend". All rights reserved.</span>
 		<br>
-		© 2001 - 2005 by "Atari Legend". All rights reserved.
-	</td>
-</tr>
-</table>
+</div>
 
-<table align="center" class="HEADERBAR" width="100%" cellspacing="0" cellpadding="2" border="0">
-<tr>
-	<td style="vertical-align:top;" height="5" colspan=6 width="50%" align="left">
-		<span class="LEFTNAVHEADING">&nbsp;Written by <a href="mailto:{$interview.interview_email}?subject=Your interview with {$interview.interview_author} at Atari Legend" class="MAINNAV_WHITE">{$interview.interview_author}</a></span>		
-	</td>
-	<td style="vertical-align:top;" height="5" colspan=6 width="50%" align="right">
-		<span class="LEFTNAVHEADING">{$interview.interview_date}</span>
-	</td>			
-</tr>
-</table>
+<div class="MAINHEADERBAR">
+<div class="MAINHEADING" style="float:left;">&nbsp;Written by <a href="mailto:{$interview.interview_email}?subject=Your interview with {$interview.interview_author} at Atari Legend" class="MAINNAV_WHITE">{$interview.interview_author}</a>
+</div>
+	<div class="MAINHEADING" style="float:right;padding-right:5px;">{$interview.interview_date}</div>
+</div>
 </td>
 
 <td width="30%" align="right" valign="top">
-	<table align="center" class="HEADERBAR" width="100%" cellspacing="0" cellpadding="2" border="0">
-	<tr>
-		<td style="vertical-align:top;" height="5" colspan=6 width="50%" align="left">
-			<span class="LEFTNAVHEADING">&nbsp;Screenshots</span>		
-		</td>
-	</tr>
-	</table>
-	<table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
-	<tr>			
-		<td width="100%" valign="top">
+<div class="MAINHEADERBAR" style="float:right;vertical-align:top;">
+<div class="MAINHEADING">&nbsp;Screenshots</div>
+
+<div class="NEWMAINCELL">	
 			{foreach from=$screenshots item=line} 
-				<table width="100%">
-				<tr>
-   					 <td align="center">
+				<div style="text-align:center;">
 					 	<img src="../includes/show_image.php?file={$line.screenshot}&amp;w=120&amp;shadow=0&amp;bgcolour=a2a2a2" border="1">
-					</td>
-				</tr>
-				<tr>
-					<td width="100%" align="center">
+					</div>
+					<div class="LEFTNAV" style="text-align:center;">
 						{$line.comment}
-					</td>
-				</tr>
-				</table>
+					</div>
 				<br>
 				<br>
 			{/foreach}
-		</td>
-	</tr>
-	</table>
+</div>
+
 <div class="MAINHEADERBAR">
 <div class="MAINHEADING">&nbsp;&nbsp;&nbsp;</div>
+</div>
 </div>
 </td>
 </tr>
@@ -104,12 +73,9 @@
 </tr>
 </table>
 <br>
-<table width="100%" border="0" cellspacing="0" cellpadding="0">
-	<tr>
-   		<td colspan="3" valign=top align=center>
-			<b><a href="javascript:history.go(-1)" class="MAINNAV">back</a></b>
-		</td>
-	</tr>
-</table>
+<div style="text-align: center;">
+			<br>
+			<span class="MAINAV"><b><a href="javascript:history.go(-1)" class="MAINNAV">back</a></b></span>
+		</div>
 <br>
 {/block}
