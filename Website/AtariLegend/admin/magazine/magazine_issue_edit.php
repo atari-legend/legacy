@@ -37,7 +37,8 @@ include("../includes/common.php");
 		} 
 		else 
 		{ 
-			$scan=""; 
+			$scan="";
+			 $magazine_image="";
 		}
 	
 		$smarty->assign('magazine',
