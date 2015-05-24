@@ -42,7 +42,7 @@ function deleteinterview(interview_id)
 <table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
 <tr>
 	<td>
-	<fieldset class="category_set">
+	<fieldset class="game_set">
 		Overhere you can add a new interview or edit an existing interview. If you like to edit an interview,
 		just look up the person in the dropdown list and press <b>search</b>. If you like a list of all interviewed
 		people, just press search without making a selection. If you like to add an interview, select the person
@@ -50,41 +50,48 @@ function deleteinterview(interview_id)
 	</fieldset> 
 	<br>
 	<br>
-	<table width="100%" cellspacing="0" cellpadding="0">
-	<tr>
-		<td align="center" width="55%">
+<div style="display:table;width:100%;margin: 0 auto;">
+		<div style="display:table-cell;width:50%;margin: 0 auto;">
+			
 		<form action="../interviews/interviews_main.php" method="post" name="search">
-		<fieldset class="interview_set">
-		<legend class="links_legend">Search for an Interview</legend>
-		<select name="individual_search" class="links_selector">
+		<fieldset class="interview_set" style="display:block;margin: 0 auto;">
+		<legend class="links_legend" style="margin: 0 auto;">Search for an Interview</legend>
+		<div style="display:block;text-align:center;">
+		<select name="individual_search" class="links_selector" style="display:inline;margin: 0 auto;">
 			<option value="-" selected>-</option>
 			{foreach from=$individuals_interviewed item=line}
 				<option value="{$line.ind_id}">{$line.ind_name}</option>
 			{/foreach}	
 		</select>
-		<input type="submit" value="Search">
+		<input type="submit" value="Search" style="display:inline;margin: 0 auto;">
+		</div>
 		</fieldset>
 		<input type="hidden" name="action" value="search">
 		<input type="hidden" name="user_id" id="user_id" value="{$user_id}">
 		</form>	
-		</td>
-		<td align="center" width="50%">
+		
+		</div>
+		<div style="display:table-cell;width:50%;margin: 0 auto;">
+			
 		<form action="../interviews/interviews_add.php" method="post" name="insert">
-		<fieldset class="interview_set">
-		<legend class="links_legend">Add an Interview</legend>
-		<select name="individual_create" class="links_selector">
+		<fieldset class="interview_set" style="display:block;margin: 0 auto;">
+		<legend class="links_legend" style="margin: 0 auto;">Add an Interview</legend>
+				<div style="display:block;text-align:center;">
+		<select name="individual_create" class="links_selector" style="display:inline;margin: 0 auto;">
 			<option value="-" selected>-</option>
 			{foreach from=$individuals item=line}
 				<option value="{$line.ind_id}">{$line.ind_name}</option>
 			{/foreach}	
 		</select>
 		<input type="submit" value="Add">
+		</div>
 		</fieldset>
 		<input type="hidden" name="user_id" id="user_id" value="{$user_id}">
 		</form>	
-		</td>
-	</tr>
-	</table>
+		
+		</div>
+</div>
+	
 	</td>
 </tr>
 {if isset($interview)}
@@ -133,18 +140,13 @@ function deleteinterview(interview_id)
 {/if}
 </table>
 
-<table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
-<tr>
-	<td>
-	</td>
-</tr>
-</table>
+
 	
 <div class="MAINHEADERBAR">
 <div class="MAINHEADING">&nbsp;&nbsp;&nbsp;</div>
 </div>
 
-{if isset($message) and $message <> ''}
+{if isset($message)}
 	<div style="text-align: center;">
 			<br><br>
 			<span class="MAINAV">{$message}</span>

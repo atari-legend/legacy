@@ -45,7 +45,7 @@ function delete_download(id, game_id)
 <table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
 <tr>
 	<td colspan="2">
-	<fieldset class="category_set">
+	<fieldset class="game_set">
 		In this section you can upload a download for <b><a href="../games/games_detail.php?game_id={$game.game_id}" class="MAINNAV">{$game.game_name}</a></b>.	Make sure to give 
 		every version a different set nr. If a game has 2 disks, those 2 disks should have equal
 		set nr's. set nrs are linked to the version/crack you upload. If you upload 2 different 
@@ -234,7 +234,7 @@ function delete_download(id, game_id)
 <tr>
 	<td>
 	<form action="../games/db_games_upload.php?action=add_download" enctype="multipart/form-data" method="post" name="add_file">
-	<fieldset class="category_set">
+	<fieldset class="game_set">
 		<legend class="links_legend">Add a new download</legend>
 		<table>
 		<tr>
