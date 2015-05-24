@@ -107,7 +107,6 @@ foreach ( $_GET as $key => $value ) {
 		}
 
   	}
-
 //set the compression in the config.php file
 $image->output('jpg', "$jpeg_compression");
 ?>
