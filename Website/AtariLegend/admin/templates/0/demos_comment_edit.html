@@ -7,16 +7,16 @@
 <table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
 <tr>
 	<td>
-	<br>
+	<br/>
 		Comment by <strong>{$comments.user_name}</strong> on <strong>{$comments.demo}</strong> on {$comments.date}
-	<br>
-	<br>	
+	<br/>
+	<br/>	
 	<form action="../demos/db_demos_comment.php" method="post" name="editdemos_comment" id="editdemos_comment">
 
 	<label for="comment_text">Comment</label>
 	<textarea cols="50" rows="8" name="comment_text" class="textarea_links">{$comments.comment}</textarea>
-	<br>
-	<br>
+	<br/>
+	<br/>
 	<input type="hidden" name="action" id="action" value="edit_demos_comment">
 	<input type="hidden" name="users_id" value="{$comments.users_id}">
 	<input type="hidden" name="view" value="{$comments.view}">

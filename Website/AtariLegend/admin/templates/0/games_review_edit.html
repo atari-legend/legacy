@@ -76,8 +76,8 @@ function deletecomment(game_id,reviewid,screenshot_id)
 	<fieldset class="game_set">
 		At this page you can edit or delete an existing review in the AL database.
 	</fieldset> 
-	<br>
-	<br>
+	<br/>
+	<br/>
 	<table width="50%" cellspacing="0" cellpadding="0">
 	<tr>
 		<td width="50%">
@@ -87,7 +87,7 @@ function deletecomment(game_id,reviewid,screenshot_id)
 			<tr>
 				<td width="100%" align="left" colspan="3">
 				{foreach from=$review item=line}
-					<b>Review {$line.review_nr} :: <a href="../games/games_review_edit.php?reviewid={$line.review_id}&game_id={$game.game_id}" class="MAINNAV">Edit</a> :: <a href="../games/games_review_preview.php?review_id={$line.review_id}&game_id={$game.game_id}" class="MAINNAV"> Preview </a>by {$line.user_name}</b><br>
+					<b>Review {$line.review_nr} :: <a href="../games/games_review_edit.php?reviewid={$line.review_id}&game_id={$game.game_id}" class="MAINNAV">Edit</a> :: <a href="../games/games_review_preview.php?review_id={$line.review_id}&game_id={$game.game_id}" class="MAINNAV"> Preview </a>by {$line.user_name}</b><br/>
 				{/foreach}	
 				</td>
 			</tr>
@@ -96,8 +96,8 @@ function deletecomment(game_id,reviewid,screenshot_id)
 		</td>
 	</tr>
 	</table>
-	<br>
-	<br>
+	<br/>
+	<br/>
 	<table width="100%" cellspacing="0" cellpadding="0">
 	<tr>
 		<td width="10%">
@@ -128,7 +128,7 @@ function deletecomment(game_id,reviewid,screenshot_id)
 	</tr>
 	<tr>
 		<td align="right" colspan="3">
-			<br>
+			<br/>
 			&nbsp;<input type="text" size="60" name="helpbox" maxlength="100" style="font-size:10px; border=0px; background-color:#D0D1DF" value="Tip: Styles can be applied quickly to selected text." />
 		</td>
 	</tr>
@@ -136,14 +136,14 @@ function deletecomment(game_id,reviewid,screenshot_id)
 	<table width="100%" cellspacing="0" cellpadding="0" align="center">
 	<tr>
 		<td width="100%" colspan="8">
-			<br>
-			<br>
+			<br/>
+			<br/>
 			<b>Review :</b>
 		</td>
 	</tr>
 	<tr>
 		<td width="100%" align="left" colspan="8">
-			<br>
+			<br/>
 			<input type="button" accesskey= "b" name="addbbcode0" value="B" onclick="bbstyle(0,'textfield')" onMouseOver="helpline('b')" />
 			<input type="button" accesskey= "u" name="addbbcode4" value="U" onclick="bbstyle(4,'textfield')" onMouseOver="helpline('u')" />
 			<input type="button" accesskey= "i" name="addbbcode2" value="I" onclick="bbstyle(2,'textfield')" onMouseOver="helpline('i')" />
@@ -183,8 +183,8 @@ function deletecomment(game_id,reviewid,screenshot_id)
 		</td>
 	</tr>
 	</table>
-	<br>
-	<br>
+	<br/>
+	<br/>
 	<table width="100%" cellspacing="0" cellpadding="0" align="center">
 	<tr>
 		<td width="15%" align="right">
@@ -216,20 +216,20 @@ function deletecomment(game_id,reviewid,screenshot_id)
 	<table width="100%" cellspacing="0" cellpadding="0" align="center">
 	<tr>
 		<td valign="top" width="100%" align="center">
-		<br>
-		<br>
+		<br/>
+		<br/>
 		<fieldset class="interview_set_screenshot">
 		<legend class="links_legend">Screenshots</legend>
 		{if $screenshots_nr <> 0}
 			{foreach from=$screenshots item=line} 
 				<img src="../includes/show_image.php?file={$line.screenshot_link}&amp;resize=120,null,null,null&amp;shadow=1&amp;bgcolour=ffffff" align="center">
 				<input class="review_input" type="text" name="inputfield[]" value="{$line.screenshot_comment}">
-				<br>
+				<br/>
 				<a href="javascript:deletecomment({$game.game_id},{$reviewid},{$line.screenshot_id})" class="MAINNAV">
 					delete comment
 				</a></span>
-				<br>
-				<br>
+				<br/>
+				<br/>
 			{/foreach}
 		{else}
 			There are currently no screenshots attached to this game. Go to the<a href="../games/games_detail.php?game_id={$game.game_id}" class="MAINNAV"> screenshot adding</a>
@@ -242,8 +242,8 @@ function deletecomment(game_id,reviewid,screenshot_id)
 	<table width="100%" cellspacing="0" cellpadding="0" align="center">
 	<tr>
 		<td valign="top" width="100%">
-			<br>
-			<br>
+			<br/>
+			<br/>
 			<input type="hidden" name="action" value="edit_review">
 			<input type="hidden" name="game_id" value="{$game.game_id}">
 			<input type="hidden" name="reviewid" value="{$reviewid}">
@@ -260,18 +260,18 @@ function deletecomment(game_id,reviewid,screenshot_id)
 <div class="MAINHEADERBAR">
 <div class="MAINHEADING">&nbsp;&nbsp;&nbsp;</div>
 </div>
-<br>
+<br/>
 <div style="text-align: center;">
-			<br>
+			<br/>
 			<span class="MAINAV">
 			<b><a href="javascript:history.go(-1)" class="MAINNAV">back</a></b>
 			</span>
 		</div>
-<br>
+<br/>
 
 {if isset($message)}
 	<div style="text-align: center;">
-			<br><br>
+			<br/><br/>
 			<span class="MAINAV">{$message}</span>
 		</div>
 {/if}

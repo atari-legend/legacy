@@ -147,7 +147,7 @@ function browseCrew(str) {
 	<td align="center" width="50%">
 	{if (isset($new_crew) and $new_crew <> '')}
 		<span class="MAINNAV" style="text-align:center;">
-		{$new_crew} added to the database!<br>
+		{$new_crew} added to the database!<br/>
 		</span>
 	{/if}
 		<form method="post" name="insertcrew">
@@ -157,7 +157,7 @@ function browseCrew(str) {
 			<input type="submit" value="Insert" onClick="crewinsert(); return false;">	
 		</fieldset>
 		</form>
-		<br>
+		<br/>
 	</td>
 </tr>
 <tr>
@@ -261,19 +261,19 @@ function browseCrew(str) {
 		<tr>
 			<td width="100%" colspan="2">
 				<b>Name :</b>
-				<br>
+				<br/>
 				<input type="text" name="crew_name" value="{if isset($crew_select.crew_name)}{$crew_select.crew_name}{/if}">
 			</td>
 		</tr>
 		<tr>
 			<td width="100%" colspan="2">
-				<br>
+				<br/>
 				<b>History :</b>
 			</td>
 		</tr>
 		<tr>
 			<td width="100%" align="left" colspan="2">
-			<br>
+			<br/>
 			<input type="button" accesskey= "b" name="addbbcode0" value="B" onclick="bbstyle(0,'textfield')" onMouseOver="helpline('b')" />
 			<input type="button" accesskey= "u" name="addbbcode4" value="U" onclick="bbstyle(4,'textfield')" onMouseOver="helpline('u')" />
 			<input type="button" accesskey= "i" name="addbbcode2" value="I" onclick="bbstyle(2,'textfield')" onMouseOver="helpline('i')" />
@@ -313,7 +313,7 @@ function browseCrew(str) {
 		</tr>
 		<tr>
 			<td width="50%">
-				<br>
+				<br/>
 				<input type="submit" value="Update">
 				<input type="button" value="Delete Crew" onClick="CrewDelete({if isset($crew_select.crew_id)}{$crew_select.crew_id}{/if}); return false;">	
 				<input type="hidden" name="action" value="update_main_info">
@@ -322,16 +322,16 @@ function browseCrew(str) {
 				<input type="hidden" name="crewbrowse" id="crewbrowse5" value="{$tracking.crewbrowse}">
 			</td>
 			<td align="right" width="50%">
-				<br>
+				<br/>
 				&nbsp;<input type="text" size="60" name="helpbox" maxlength="100" style="font-size:10px; border=0px; background-color:#D0D1DF" value="Tip: Styles can be applied quickly to selected text." />
 			</td>
 		</tr>
 		</form>	
 		<tr>
 			<td width="100%" colspan="2">
-				<br>
-				<br>
-				<br>
+				<br/>
+				<br/>
+				<br/>
 				{if (isset($crew_select.crew_logo) and $crew_select.crew_logo <> '')}
 					<fieldset class="links_set">
 					<legend class="links_legend">Crew Logo</legend>
@@ -351,8 +351,8 @@ function browseCrew(str) {
 					<fieldset class="links_set">
 					<legend class="links_legend">Crew Logo</legend>
 						<input type="file" name="crew_pic" accept="image/jpeg,image/x-png">
-						<br>
-						<br>
+						<br/>
+						<br/>
 						<input type="submit" name="inserter" value="Upload">
 					</fieldset>
 					<input type="hidden" name="action" value="add_logo">
@@ -384,7 +384,7 @@ function browseCrew(str) {
 
 {if isset($message)}
 	<div style="text-align: center;">
-			<br><br>
+			<br/><br/>
 			<span class="MAINAV">{$message}</span>
 		</div>
 {/if}

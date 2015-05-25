@@ -21,28 +21,20 @@ The main game music
 <div class="MAINHEADING">&nbsp;Add/Edit a game music entry</div>
 </div>
 
-<table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
-<tr>
-	<td colspan="2">
+<div class="NEWMAINCELL" style="text-align:center;>
 	<fieldset class="game_set">
 		In this section you can add game music files to the games. They are used in the main pages 
 		and will also appear in the jukebox.
 	</fieldset> 
-	</td>
-</tr>
-<tr>
-	<td align="center">
+<br/><br/>
 		<form action="../games/games_music.php" method="post" name="game_music" id="game_music">
-		<fieldset class="interview_set">
+		<fieldset class="interview_set" style="margin-left:auto;margin-right:auto;">
 		<legend class="links_legend">Search music</legend>
-		<br>
-		<table>
-		<tr>
-			<td>
+		<br/>
+		
 				<b>By name :</b>
-			</td>
-			<td>
-				<select name="gamebrowse">
+			
+				<select name="gamebrowse" style="display:inline">
 					<option value="" SELECTED>-</option>
 					<option value="num">0-9</option>
 					<option value="a">A</option>
@@ -72,28 +64,26 @@ The main game music
 					<option value="y">Y</option>
 					<option value="z">Z</option>
 				</select>
-				<input type="text" name="gamesearch" value="">
-			</td>
-		</tr>
-		</table>
-		<br>
-		<br>
+				<input type="text" name="gamesearch" value="" style="display:inline">
+			
+		<br/>
+		<br/>
 		<input type="submit" value="Search">
-		<br>
+		<br/>
 		</fieldset>
 		<input type="hidden" name="action" id="action" value="search">
 		<input type="hidden" name="user_id" id="user_id" value="{$user_id}">
 		</form>	
-	</td>
-</tr>
-</table>
+		<br/>
+		<br/>
+</div>
 <div class="MAINHEADERBAR">
 <div class="MAINHEADING">&nbsp;&nbsp;&nbsp;</div>
 </div>
 
 {if isset($message)}
 	<div style="text-align: center;">
-			<br><br>
+			<br/><br/>
 			<span class="MAINAV">{$message}</span>
 		</div>
 {/if}

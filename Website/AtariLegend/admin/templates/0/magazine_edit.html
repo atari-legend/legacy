@@ -56,45 +56,45 @@ function issuedelete(JSmagID,JSmagazine_issue_id)
 	<td>
 	
 		
-		  {$magazine.magazine_name} selected.<br>
-		<br>
+		  {$magazine.magazine_name} selected.<br/>
+		<br/>
 		
 		
-		<br>
+		<br/>
 		
 		
 <fieldset class="category_set_noGrave">
 	<legend class="links_legend">{$magazine.magazine_name} issues in archive</legend>
 	
-	<br>
+	<br/>
 	{foreach from=$issues item=line}
 	
 	<a href="../magazine/magazine_issue_edit.php?magazine_issue_id={$line.magazine_issue_id}" class="MAINNAV">Issue {$line.magazine_issue_nr}</a> | 
 	{$line.scan} 
 	 | <a href="../magazine/magazine_review_list.php?magazine_issue_id={$line.magazine_issue_id}" class="MAINNAV">List reviews</a> 
-	| <a onClick="issuedelete({$magazine.magazine_id},{$line.magazine_issue_id})" style="cursor: pointer;" class="MAINNAV">Delete Issue</a><br>
+	| <a onClick="issuedelete({$magazine.magazine_id},{$line.magazine_issue_id})" style="cursor: pointer;" class="MAINNAV">Delete Issue</a><br/>
 	
 	{/foreach}
-	<br>
+	<br/>
 	
 	
 </fieldset> 
 
-<br>
+<br/>
 <fieldset class="category_set_noGrave">
 	<legend class="links_legend">Add a new issue to the database</legend>
-	<br>
+	<br/>
 	<form action="" method="post" name="insertissue" id="insertissue">
 
 	<label for="name">Issue Number</label>
 	<input type="text" name="newissue" id="newissue" size="50" maxlength="50" class="links_input-box">
-	<br>
+	<br/>
 	<input type="hidden" name="magazine_id" value="{$magazine.magazine_id}">
 	<input type="submit" name="inserter" value="Insert" onClick="issueinsert(); return false;">		
 	</form>
 </fieldset>
 
-<br>
+<br/>
 <a href="../magazine/magazine_manage.php" class="MAINNAV">Back</a>
 
 	</td>

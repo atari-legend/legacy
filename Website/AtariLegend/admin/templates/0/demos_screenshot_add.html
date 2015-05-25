@@ -46,8 +46,8 @@ function delete_screenshot(screenshot_id, demo_id)
 		In this section you can add screenshots to a selected demo. Use the browse buttons to select the shots and press the 
 		'Submit Query' button to link them to the demo.
 	</fieldset> 
-	<br>
-	<br>
+	<br/>
+	<br/>
 	<table width="100%" cellspacing="0" cellpadding="0">
 	<tr>
 		<td align="center" width="100%">
@@ -58,7 +58,7 @@ function delete_screenshot(screenshot_id, demo_id)
 				Image {$line.count} :: 
 				<a href="javascript:delete_screenshot({$line.id},{$demo_id})" class="MAINNAV">Delete</a> ::    	
 				<a href="javascript:void(window.open('../includes/show_image.php?file={$line.demo_screenshot_image}&resize=410,null,null,null&crop=left,top,410,260&minimum_size=410,260','4','width=460,height=290,toolbar=no,statusbar=no'))" class="MAINNAV">Look at image</a>
-				<br>
+				<br/>
 			{/foreach}
 		{else}
 			No screenshots attached to this demo
@@ -98,16 +98,16 @@ function delete_screenshot(screenshot_id, demo_id)
 <div class="MAINHEADERBAR">
 <div class="MAINHEADING">&nbsp;&nbsp;&nbsp;</div>
 </div>
-<br>
+<br/>
 <div style="text-align: center;">
-			<br>
+			<br/>
 			<span class="MAINAV"><b><a href="../demos/demos_detail.php?demo_id={$demo_id}" class="MAINNAV">back</a></b></span>
 		</div>
-<br>
+<br/>
 
 {if isset($message)}
 	<div style="text-align: center;">
-			<br><br>
+			<br/><br/>
 			<span class="MAINAV">{$message}</span>
 		</div>
 {/if}
