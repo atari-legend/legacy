@@ -32,17 +32,17 @@ function deletelink()
 	
 	<label for="website_name">Site Name</label>
 	<input type="text" name="website_name" id="website_name" value="{$website.website_name}" size="50" maxlength="50" class="links_input-box">
-	<br>
+	<br/>
 	<label for="website_url">URL</label>	 
 	<input type="text" name="website_url" id="website_url" value="{$website.website_url}" size="50" maxlength="200" class="links_input-box">		 
-	<br>
+	<br/>
 	<label for="category">Category</label> 
 		<select name="category" id="category" class="links_selector">
 			{foreach from=$category item=line}
 					<option value="{$line.category_id}" {$line.selected}>{$line.category_name}</option>
 			{/foreach}
 		</select>
-	<br>
+	<br/>
 	<label for="website_description_text">Description</label>	
 		<textarea name="website_description_text" id="website_description_text" class="textarea_links">{$website.website_description_text}</textarea>
 	
@@ -53,15 +53,15 @@ function deletelink()
 	<legend class="links_legend">Website Image</legend>
 	
 		{if  $website.website_imgext !== ""}
-			<br>
+			<br/>
 		  	<label for="delete_image">Delete Image?</label>
-			<input type="checkbox" name="delete_image" id="delete_image" value="yes" class="links_checkbox"><br>
+			<input type="checkbox" name="delete_image" id="delete_image" value="yes" class="links_checkbox"><br/>
 			<div class="links_screenshot">
 	 		<img src="../includes/show_image.php?file={$website.website_image}&resize=410,null,null,null&crop=left,top,410,260&minimum_size=410,260" border="0" style="border: 1px solid black;">
 	 		</div>
 
 		{else}
-			<br>
+			<br/>
 			
 	 		<label for="image" style="cursor: help; text-decoration: underline; margin:5px;" accesskey="1" title="Choose an image from your harddrive to attach to be associated with this website.">Attach image</label>
 			<input type="hidden" name="MAX_FILE_SIZE" value="100000000">
@@ -89,9 +89,9 @@ function deletelink()
 		  <td colspan="2" style="padding-top: 5px;">
 		  <span style="text-align: center;">
 		  Make the changes you want, then hit the submit button to modify. 
-		  <br>
+		  <br/>
 		  Should you want to delete the link, click the delete button. The effects are immidiate.</span>
-		  <br><br>
+		  <br/><br/>
 		  
 		  
 		  <strong><a href="../links/link_modlist.php?catpick={$website.category_id}" class="MAINNAV">Back</a></strong> 

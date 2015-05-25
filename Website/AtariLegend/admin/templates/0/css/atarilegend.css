@@ -11,13 +11,13 @@
 
 .leftcell {
 
-	width: 239px;
+	width: 241px;
 	float: left;
 }
 
 .rightcell {
 
-	width: 1000px;
+	width: 1001px;
 	float: left;
 }
 
@@ -397,5 +397,65 @@ background-color: white;
 .leftnav_list:hover {
 
 	background-color:#b2b2b2;
+}
+
+.table_game_list {
+
+	width: 90%;
+	border: solid 1px #b2b2b2; 
+	background-color:#BABABA;
+	margin-left:auto;
+	margin-right:auto;
+	border-spacing: 0;
+	text-align:left;
+}
+
+.table_game_list th {
+
+	border-bottom: solid 2px #b2b2b2;
+	background-color:#E9E9E9;
+	border-collapse: collapse;
+	padding-top:3px;
+	padding-bottom:3px;
+	padding-left:3px;
+	margin:0px;
+	
+}
+
+.table_game_list tr:nth-child(even){
+
+	background-color:#EFEFEF;
+}
+
+.table_game_list tr:nth-child(odd){
+
+	background-color:#E9E9E9;
+}
+
+.table_game_list tr:hover {
+
+	background-color:#DBD7D1;
+}
+
+
+.table_game_list td {
+
+	padding-top:3px;
+	padding-bottom:3px;
+	padding-left:3px;
+	margin:0px;
+	
+}
+
+.game_list_footer {
+
+	border-top: solid 1px #b2b2b2;
+	background-color:white;
+	border-collapse: collapse;
+	padding-top:3px;
+	padding-bottom:3px;
+	padding-left:10px;
+	margin:0px;
+	font-weight: bold;
 }
 

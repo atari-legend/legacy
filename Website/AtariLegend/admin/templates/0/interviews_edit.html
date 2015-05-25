@@ -64,8 +64,8 @@ function deleteinterview(interview_id)
 		At this page you can change an existing interview in the AL database. the screen might seem a little complex,
 		therefor I suggest you first read the <b><a href="../interviews/interviews_help.php" class="LEFTNAV">help</a></b> provided with this section!
 	</fieldset> 
-	<br>
-	<br>
+	<br/>
+	<br/>
 	<table width="100%" cellspacing="0" cellpadding="0">
 	<tr>
 		<td width="10%">
@@ -113,7 +113,7 @@ function deleteinterview(interview_id)
 	</tr>
 	<tr>
 		<td align="right" colspan="3">
-			<br>
+			<br/>
 			&nbsp;<input type="text" size="60" name="helpbox" maxlength="100" style="font-size:10px; border=0px; background-color:#D0D1DF" value="Tip: Styles can be applied quickly to selected text." />
 		</td>
 	</tr>
@@ -121,13 +121,13 @@ function deleteinterview(interview_id)
 	<table width="100%" cellspacing="0" cellpadding="0" align="center">
 	<tr>
 		<td width="100%">
-			<br>
+			<br/>
 			<b>Intro :</b>
 		</td>
 	</tr>
 	<tr>
 		<td width="100%" align="left">
-			<br>
+			<br/>
 			<input type="button" accesskey= "b" name="addbbcode0" value="B" onclick="bbstyle(0,'textintro')" onMouseOver="helpline('b')" />
 			<input type="button" accesskey= "u" name="addbbcode4" value="U" onclick="bbstyle(4,'textintro')" onMouseOver="helpline('u')" />
 			<input type="button" accesskey= "i" name="addbbcode2" value="I" onclick="bbstyle(2,'textintro')" onMouseOver="helpline('i')" />
@@ -167,14 +167,14 @@ function deleteinterview(interview_id)
 	</tr>				
 	<tr>
 		<td width="100%">
-			<br>
-			<br>
+			<br/>
+			<br/>
 			<b>Chapters :</b>
 		</td>
 	</tr>
 	<tr>
 		<td width="100%" align="left">
-			<br>
+			<br/>
 			<input type="button" accesskey= "b" name="addbbcode0" value="B" onclick="bbstyle(0,'textchapters')" onMouseOver="helpline('b')" />
 			<input type="button" accesskey= "u" name="addbbcode4" value="U" onclick="bbstyle(4,'textchapters')" onMouseOver="helpline('u')" />
 			<input type="button" accesskey= "i" name="addbbcode2" value="I" onclick="bbstyle(2,'textchapters')" onMouseOver="helpline('i')" />
@@ -190,14 +190,14 @@ function deleteinterview(interview_id)
 	</tr>
 	<tr>
 		<td width="100%">
-			<br>
-			<br>
+			<br/>
+			<br/>
 			<b>Interview :</b>
 		</td>
 	</tr>
 	<tr>
 		<td width="100%" align="left">
-			<br>
+			<br/>
 			<input type="button" accesskey= "b" name="addbbcode0" value="B" onclick="bbstyle(0,'textfield')" onMouseOver="helpline('b')" />
 			<input type="button" accesskey= "u" name="addbbcode4" value="U" onclick="bbstyle(4,'textfield')" onMouseOver="helpline('u')" />
 			<input type="button" accesskey= "i" name="addbbcode2" value="I" onclick="bbstyle(2,'textfield')" onMouseOver="helpline('i')" />
@@ -240,8 +240,8 @@ function deleteinterview(interview_id)
 	<table width="100%" cellspacing="0" cellpadding="0" align="center">
 	<tr>
 		<td valign="top" width="100%" align="center">
-		<br>
-		<br>
+		<br/>
+		<br/>
 		<fieldset class="interview_set_screenshot">
 		<legend class="links_legend">Screenshots</legend>
 		{if $screenshots_nr <> ''}
@@ -249,8 +249,8 @@ function deleteinterview(interview_id)
 				<img src="../includes/show_image.php?file={$line.interview_screenshot}&resize=50,null,null,null&crop=null,null,null,null" align="center">
 				<input class="review_input" type="text" name="inputfield[]" value="{$line.interview_screenshot_comment}">
 				<a href="javascript:deletecomment({$line.interview_screenshot_id},{$interview.interview_id})" class="MAINNAV">Delete Shot</a>
-				<br>
-				<br>
+				<br/>
+				<br/>
 			{/foreach}
 		{else}
 			There are currently no screenshots attached to this interview. Go to the <a href="interviews_screenshots_add.php?interview_id={$interview.interview_id}" class="MAINNAV">screenshot adding</a>
@@ -263,8 +263,8 @@ function deleteinterview(interview_id)
 	<table width="100%" cellspacing="0" cellpadding="0" align="center">
 	<tr>
 		<td valign="top" width="100%">
-			<br>
-			<br>
+			<br/>
+			<br/>
 			<input type="hidden" name="interview_id" value="{$interview.interview_id}">
 			<input type="hidden" name="action" value="Update_Interview">
 			<input type="submit" name="update" value="Update interview">
@@ -279,7 +279,7 @@ function deleteinterview(interview_id)
 <div class="MAINHEADERBAR">
 <div class="MAINHEADING">&nbsp;&nbsp;&nbsp;</div>
 </div>
-<br>
+<br/>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 	<tr>
    		<td colspan="3" valign=top align=center>
@@ -287,11 +287,11 @@ function deleteinterview(interview_id)
 		</td>
 	</tr>
 </table>
-<br>
+<br/>
 
 {if isset($message)}
 	<div style="text-align: center;">
-			<br><br>
+			<br/><br/>
 			<span class="MAINAV">{$message}</span>
 		</div>
 {/if}

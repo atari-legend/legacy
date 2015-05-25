@@ -1,6 +1,6 @@
 {extends file='head.html'}
 {block name=head}
-<script language="JavaScript">
+<script language="JavaScript" type="text/javascript">
 function commentdelete(JScomID,JSusers_id)
 { 
 	
@@ -19,7 +19,7 @@ function commentdelete(JScomID,JSusers_id)
 
     	if (return_value !="0")
     	{ 
-    		url="../games/db_games_comment.php?action=delete_comment&comment_id="+JScomID+"&v_counter="+JSv_count+"&view="+JSview+"users_id"+JSusers_id+{if $links.c_counter !=''}"&c_counter="+JSc_count+{/if}""
+    		url="../games/db_games_comment.php?action=delete_comment&amp;comment_id="+JScomID+"&amp;v_counter="+JSv_count+"&amp;view="+JSview+"users_id"+JSusers_id+{if $links.c_counter !=''}"&amp;c_counter="+JSc_count+{/if}""
 			location.href=url;
     	}  
 
@@ -32,31 +32,21 @@ function commentdelete(JScomID,JSusers_id)
 <div class="MAINHEADING">&nbsp;&nbsp;Game Comments</div>
 </div>
 
-<table width="100%" cellspacing="2" cellpadding="15" class="CELLCOLOR">
-<tr>
-	<td align="center">
-	<fieldset class="game_set">
-		<table>
-		<tr>
-			<td width="100%" valign="top">
+<div class="NEWMAINCELL" style="text-align:center;">
+	<fieldset class="game_set" style="padding:px;">
+
 				This is the user comment edit page. Overhere you can edit or delete user comments for games. 
 				There is currently a total of <b>{$total_nr_comments}</b> comments in the AL DB!
-			</td>
-		</tr>
-		</table>
-	</fieldset> 
-	</td>
-</tr>
-</table>
 
-<table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
-<tr>
-	<td align="center">
-		{if $links.view eq "users_comments"}<a href="../games/games_comment.php?v_counter={$links.c_counter}" class="MAINNAV">Sort by latest comments</a><br>{/if}
-		<br>
+	</fieldset> 
+</div>
+<div class="NEWMAINCELL" style="display:block; margin-left:auto;margin-right: auto;">
+
+		<br/>
 		
 		
 		{foreach from=$comments item=line}
+			
 				<table cellspacing="0" cellpadding="2" border="0" width="95%" style="border: solid 1px #b2b2b2; background-color:#E9E9E9;">
 				<tr>
 						<td class="main_text" valign="top" width="150" style="border-right: solid 1px #b2b2b2;"><b>Posted by <a href="../user/user_detail.php?user_id_selected={$line.users_id}" class="links_links">{$line.user_name}</a></b></td>
@@ -67,31 +57,31 @@ function commentdelete(JScomID,JSusers_id)
 				<table cellspacing="0" cellpadding="0" border="0" width="95%" style="border: solid 1px #b2b2b2; background-color:#E9E9E9;">
 				<tr bgcolor="#EFEFEF">
 					<td class="main_text" width="150" valign="top" style="line-height: 13px; border-right: solid 1px #b2b2b2;">
-					<br>
+					<br/>
 					{if isset($line.avatar_image) and $line.avatar_image != ''}
 					<table>
 					<tr>
 					<td align="center">
-		 <img src="../includes/show_image.php?file={if isset($line.avatar_image)}{$line.avatar_image}{/if}&resize=80,null,null,null&crop=null,null,null,null" alt="Avatar">				
+		 <img src="../includes/show_image.php?file={if isset($line.avatar_image)}{$line.avatar_image}{/if}&amp;resize=80,null,null,null&amp;crop=null,null,null,null" alt="Avatar">				
 					</td>
 					</tr>
 					</table>
-					<br>{/if}
-					Joined: {$line.user_joindate}<br>
-					<a href="../games/games_comment.php?c_counter={$links.v_counter}&users_id={$line.users_id}&view=users_comments" class="MAINNAV">Game Comments: {$line.user_comment_nr}</a><br>
-					Game Submissions: {$line.usersubmit_number}<br>
-					Karma: {$line.karma}<br>
+					<br/>{/if}
+					Joined: {$line.user_joindate}<br/>
+					<a href="../games/games_comment.php?c_counter={$links.v_counter}&amp;users_id={$line.users_id}&amp;view=users_comments" class="MAINNAV">Game Comments: {$line.user_comment_nr}</a><br/>
+					Game Submissions: {$line.usersubmit_number}<br/>
+					Karma: {$line.karma}<br/>
 					
 					</td>
 					<td class="main_text" valign="top" style="line-height: 13px;">
-						<br>
-						<br>
+						<br/>
+						<br/>
 						{if isset($line.image) and $line.image != ''}<span style="float:right;">
-					<a href="../games/games_detail.php?game_id={$line.game_id}"><img src="../includes/show_image.php?file={$line.image}&resize=160,null,null,null&crop=null,null,null,null" alt="{$line.game}" border="0"></a></span>{/if}
+					<a href="../games/games_detail.php?game_id={$line.game_id}"><img src="../includes/show_image.php?file={$line.image}&amp;resize=160,null,null,null&amp;crop=null,null,null,null" alt="{$line.game}" border="0"/></a></span>{/if}
 						{$line.comment}
-						<br>
-						<br>
-						<br>		
+						<br/>
+						<br/>
+						<br/>		
 					</td>
 				</tr>
 				</table>	
@@ -106,13 +96,13 @@ function commentdelete(JScomID,JSusers_id)
 					<td valign="top" class="main_text">
 						{if $line.email != ''}
 							<a href="mailto:{$line.email}?subject=Comment of {$line.game} at Atari Legend">
-							<img src="../templates/0/icons/icon_email.gif" alt="Email User" title="Email User" width="59" height="18" border="0">
+							<img src="../templates/0/icons/icon_email.gif" alt="Email User" title="Email User" width="59" height="18" border="0"/>
 							</a>{/if}
-							<a href="../games/games_comment_edit.php?game_user_comments_id={$line.game_user_comments_id}{$links.users_comments}&v_counter={$links.v_counter}">
-							<img src="../templates/0/icons/icon_edit.gif" alt="Edit Comment" title="Edit Comment" width="59" height="18" border="0">
+							<a href="../games/games_comment_edit.php?game_user_comments_id={$line.game_user_comments_id}{$links.users_comments}&amp;v_counter={$links.v_counter}">
+							<img src="../templates/0/icons/icon_edit.gif" alt="Edit Comment" title="Edit Comment" width="59" height="18" border="0"/>
 							</a>
 							<a  onClick="commentdelete({$line.comment_id},{$line.users_id})" style="cursor: pointer;">
-							<img src="../templates/0/icons/icon_delete.gif" alt="Delete Comment" title="Delete Comment" width="16" height="18" border="0">
+							<img src="../templates/0/icons/icon_delete.gif" alt="Delete Comment" title="Delete Comment" width="16" height="18" border="0"/>
 							</a>					
 					</td>
 					<td valign="middle" class="main_text" style="text-align: right;">
@@ -120,11 +110,11 @@ function commentdelete(JScomID,JSusers_id)
 					</td>		
 				</tr>
 				</table>
-				<br>
+				<br/>
 				{/foreach}
 
 				
-				<br>
+				<br/>
 	<table width="100%" border="0" cellspacing="0" cellpadding="0">
 	<tr>
     	<td width="50%" align=center>
@@ -140,10 +130,7 @@ function commentdelete(JScomID,JSusers_id)
 	</tr>
 	</table>
 				
-				
-	</td>
-</tr>
-</table>
+</div>
 
 <div class="MAINHEADERBAR">
 <div class="MAINHEADING">&nbsp;&nbsp;&nbsp;</div>

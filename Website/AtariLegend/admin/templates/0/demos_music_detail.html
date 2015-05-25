@@ -68,14 +68,14 @@ function delete_music(demo_id)
 					{foreach from=$music item=line}
 						<input type="checkbox" name="music_id_selected[]" value="{$line.music_id}">
 					  	<a href="../demos/demos_music_detail.php?music_id={$line.music_id}&amp;action=play_music" class="MAINNAV">{$line.ind_name}_{$line.music_id}.{$line.extention}</a>
-					  	<br>
-					  	<br>
+					  	<br/>
+					  	<br/>
 					{/foreach}
 					{/if}					
 					<img src="../templates/0/images/arrow_ltr.gif" alt="" width="38" height="22" border="0">		
 					<input type="button" value="Delete" onclick="delete_music({$demo.demo_id})">
-					<br>
-					<br>
+					<br/>
+					<br/>
 					<select name="individuals" class="continentSelects">
 						<option value="-" selected>-</option>
 						{if isset($ind)}
@@ -85,7 +85,7 @@ function delete_music(demo_id)
 						{/if}			
 					</select>	
 					<b>Composers</b>					
-					<br><br>
+					<br/><br/>
 					<input type="hidden" name="music_id" value="{$line.music_id}">
 					<input type="hidden" name="demo_id" value="{$demo.demo_id}">
 					<input type="button" value="Pick" onclick="add_composer()">
@@ -110,15 +110,15 @@ function delete_music(demo_id)
 				<td width="100%">		
 					{section name=loop loop=6 start=1} 
 						<input type="file" name="music[{$smarty.section.loop.index}]">
-						<br>
+						<br/>
 					{/section}	
 					<input type="hidden" name="ind_id" value="{$ind_selected.ind_id}">
 					<input type="hidden" name="MAX_FILE_SIZE" value="100000">
 					<input type="hidden" name="action" value="upload_zaks">
 					<input type="hidden" name="demo_id" value="{$demo.demo_id}">
 					<input type="submit" name="valider" value="Upload">
-					<br>
-					<br>
+					<br/>
+					<br/>
 					<a href="../demos/demos_music_detail.php?demo_id={$demo.demo_id}" class=MAINNAV> Pick another composer </a>
 				</td>
 			</tr>
@@ -133,15 +133,15 @@ function delete_music(demo_id)
 <div class="MAINHEADERBAR">
 <div class="MAINHEADING">&nbsp;&nbsp;&nbsp;</div>
 </div>
-<br>
+<br/>
 <div style="text-align: center;">
-			<br>
+			<br/>
 			<span class="MAINAV"><b><a href="../demos/demos_music.php" class="MAINNAV">back</a></b></span>
 		</div>
-<br>
+<br/>
 {if isset($message)}
 	<div style="text-align: center;">
-			<br><br>
+			<br/><br/>
 			<span class="MAINAV">{$message}</span>
 		</div>
 {/if}

@@ -61,11 +61,11 @@ function commentdelete(JSsubID)
 <tr>
 	<td align="center">
 		{if $structure.list == 'current'}
-		<strong><a href="../demos/submission_demos.php?list=done" class="MAINNAV">Switch to Done list</a></strong><br>
+		<strong><a href="../demos/submission_demos.php?list=done" class="MAINNAV">Switch to Done list</a></strong><br/>
 		{elseif $structure.list == 'done'}
-		<strong><a href="../demos/submission_demos.php?list=current" class="MAINNAV">Switch to Current list</a></strong><br>
+		<strong><a href="../demos/submission_demos.php?list=current" class="MAINNAV">Switch to Current list</a></strong><br/>
 		{/if}
-		<br>
+		<br/>
 		<table width="400" border="0" cellspacing="2" cellpadding="2">
 			<tr>
 				<td width="50%" align="left">
@@ -86,7 +86,7 @@ function commentdelete(JSsubID)
 			</tr>
 		</table>
 
-		<br>
+		<br/>
 		
 		{foreach from=$submission item=line}
 				<table cellspacing="0" cellpadding="2" border="0" width="95%" style="border: solid 1px #b2b2b2; background-color:#E9E9E9;">
@@ -99,21 +99,21 @@ function commentdelete(JSsubID)
 				<table cellspacing="0" cellpadding="0" border="0" width="95%" style="border: solid 1px #b2b2b2; background-color:#E9E9E9;">
 				<tr bgcolor="#EFEFEF">
 					<td class="main_text" width="150" valign="top" style="line-height: 13px; border-right: solid 1px #b2b2b2;">
-					<br>
-					Joined: {$line.user_joindate}<br>
-					{if $line.user_comment_nr eq 0} {else}<a href="../demos/demos_comment.php?c_counter={$links.v_counter}&users_id={$line.user_id}&view=users_comments" class="MAINNAV">{/if}Demo Comments: {$line.user_comment_nr}{if $line.user_comment_nr eq 0} {else}</a>{/if}<br>
-					Demo Submissions: {$line.usersubmit_number}<br>
+					<br/>
+					Joined: {$line.user_joindate}<br/>
+					{if $line.user_comment_nr eq 0} {else}<a href="../demos/demos_comment.php?c_counter={$links.v_counter}&users_id={$line.user_id}&view=users_comments" class="MAINNAV">{/if}Demo Comments: {$line.user_comment_nr}{if $line.user_comment_nr eq 0} {else}</a>{/if}<br/>
+					Demo Submissions: {$line.usersubmit_number}<br/>
 					Karma: {$line.karma}
 					
 					</td>
 					<td class="main_text" valign="top" style="line-height: 13px;">
-						<br>
-						<br>
+						<br/>
+						<br/>
 						{if $line.image != "../../../images/demo_screenshots/."}<span style="float:right;"><a href="../demos/demos_detail.php?demo_id={$line.demo_id}"><img src="../includes/showimage.php?img={$line.image}&w=120&shadow=1&bgcolour=EFEFEF" alt="{$line.demo_name}" border="0"></a></span>{/if}
 						{$line.comment}
-						<br>
-						<br>
-						<br>		
+						<br/>
+						<br/>
+						<br/>		
 					</td>
 				</tr>
 				</table>	
@@ -144,7 +144,7 @@ function commentdelete(JSsubID)
 					</td>		
 				</tr>
 				</table>
-				<br>
+				<br/>
 				{/foreach}
 		
 		

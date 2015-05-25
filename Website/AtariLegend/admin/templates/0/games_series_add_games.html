@@ -60,9 +60,7 @@ function searchGame(str) {
 <div class="MAINHEADING">&nbsp;Game Series</div>
 </div>
 
-<table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
-<tr>
-	<td>
+<div class="NEWMAINCELL" style="text-align:center;">
 <div style="display:inline;">
     	<div style="float:left;margin-right:30px;">
 			
@@ -81,7 +79,7 @@ function searchGame(str) {
 		</div>
 </div>
 	
-	<br>
+	<br/>
 	
 	<table width="100%" cellspacing="2" cellpadding="2" border="0">
 			<tr>
@@ -97,16 +95,15 @@ function searchGame(str) {
 					</div>
 				</td>
 				<td width="84%" align="center" valign="top">
-				
-					<br>
-					<br>
+
+					<br/>
 					
 					<form action="" method="post" name="game_search" id="game_search">
-					<div align="left"><fieldset class="category_set_noGrave" style="margin-left: 2em">
-					<legend class="links_legend" style="text-align: left; -moz-border-radius:10px;">Search games</legend>
+					<fieldset class="game_set" style="display:inline; text-align:center;width:92%;">
+					<legend class="links_legend">Search games</legend>
 					
-					<div style="display: flex;align-items:center;margin: 0 auto;text-align:center;">
-					<span style="margin-right:10px;float:left;"><strong>By name :</strong></span>
+					<div style="display: inline;align-items:center;margin: 0 auto;text-align:center;">
+					<span style="margin-right:10px;"><strong>By name :</strong></span>
 					<select name="gamebrowse" onchange="browseGame(this.value)">
 					<option value="num" selected>0-9</option>
 					<option value="a">A</option>
@@ -137,98 +134,77 @@ function searchGame(str) {
 					<option value="z">Z</option>
 					</select>
 					<input type="text" name="gamesearch" onkeyup="searchGame(this.value)">
-					<br>
-				</div>
+					<br/>
+				
 					</fieldset>
 					</form>
 
-					<br>
-					<br>
+					<br/>
+					<br/>
 					<form action="../games/db_games_series.php" method="post" name="add_to_series" id="add_to_series">	
-				
-		<div class="Table" style="width:95%;">
-			<div class="Heading">
-				<div class="Cell" style="width:5%;">
-					Info
-				</div>
-				<div class="Cell" style="width:30%;">
-					Game Name
-				</div>
-				<div class="Cell" style="width:20%;">
-					Publisher
-				</div>				
-				<div class="Cell" style="width:20%;">
-					Developer
-				</div>
-				<div class="Cell" style="width:15%;">
-					Year
-				</div>
-			</div>
-			</div>
-			<div class="Table" style="width:95%;">
-			<div id="game_list">
+		<div id="game_list">		
+		<table class="table_game_list" style="width:95%;">
+			<tr>
+				<th width="5%">Info</th>
+				<th width="30%">Game Name</th>
+				<th width="20%">Publisher</td>
+				<th width="20%">Developer</th>
+				<th width="15%">Year</th>
+			</tr>
+
 			{foreach from=$series_link item=line}
-			<div class="Row" style="background-color:{cycle name="tr" values="#EFEFEF,#E9E9E9"};" id="game_row">
-				<div class="Cell" style="width:5%;">
-				<input type="checkbox" name="game_id[]" value="{$line.game_id}">
-				</div>
-				<div class="Cell" style="width:30%;">
-						{if $line.game_name != ''}
-						<a href="games_detail.php?game_id={$line.game_id}" class="MAINNAV">
-							{$line.game_name}
-						</a>
-						{else}
-						<i>n/a</i>
-						{/if}
-				</div>
-				<div class="Cell" style="width:20%;">
-						{if $line.publisher_name != ''}
+			<tr>
+				<td width="5%">
+					<input type="checkbox" name="game_id[]" value="{$line.game_id}">
+				</td>
+				<td width="30%">{if $line.game_name != ''}<a href="games_detail.php?game_id={$line.game_id}" class="MAINNAV">{$line.game_name}</a>
+						{else}<i>n/a</i>{/if}
+				</td>
+				<td width="20%">{if $line.publisher_name != ''}
 						<a href="games_main.php?publisher={$line.publisher_id}&amp;action=search" class="MAINNAV">
 							{$line.publisher_name}
 					</a>
 						{else}
 							<i>n/a</i>
-						{/if}
-				</div>				
-				<div class="Cell" style="width:20%;">
-						{if $line.developer_name != ''}
+						{/if}</td>
+				<td width="20%">{if $line.developer_name != ''}
 						<a href="games_main.php?developer={$line.developer_id}&amp;action=search" class="MAINNAV">
 							{$line.developer_name}
 						</a>
 						{else}
 							<i>n/a</i>
-						{/if}
-				</div>
-				<div class="Cell" style="width:15%;">
-						{if $line.year != ''}
+						{/if}</td>				
+				<td width="15%">
+					{if $line.year != ''}
 						<a href="games_main.php?year={$line.year}&amp;action=search" class="MAINNAV">
 							{$line.year}
 						</a>
 						{else}
 							<i>n/a</i>
 						{/if}
-				</div>
-
-			</div>
+					</td>
+			</tr>
 			{/foreach}
-			</div>
-		</div>
 			
-				<input type="hidden" name="series_page" value="series_editor">
-				<input type="hidden" name="action" value="add_to_series">
-				<input type="hidden" name="game_series_id" value="{if isset($series_info.game_series_id)}{$series_info.game_series_id}{/if}">
-				<div class="Table" style="width:95%;border-top: solid 1px #b2b2b2; background-color:#ffffff;">
-					<img src="../templates/0/images/arrow_ltr.gif" alt="" width="38" height="22" border="0" style="float:left;">
-					<input type="submit" value="Add to series" style="float:left;">
+				<tr>
+					<td class="game_list_footer" colspan="5" width="100%">
+						<input type="hidden" name="series_page" value="series_editor">
+						<input type="hidden" name="action" value="add_to_series">
+						<input type="hidden" name="game_series_id" value="{if isset($series_info.game_series_id)}{$series_info.game_series_id}{/if}">
+						<img src="../templates/0/images/arrow_ltr.gif" alt="" width="38" height="22" border="0" style="float:left;">
+						<input type="submit" value="Add to series" style="float:left;">
+					</td>
+				</tr>
+			</table>
 				</div>
+				
+				
 				</form>
 								
 				</td>
 			</tr>
 	</table>
-	</td>
-</tr>
-</table>
+	</div>
 
 <div class="MAINHEADERBAR">
 <div class="MAINHEADING">&nbsp;&nbsp;&nbsp;</div>

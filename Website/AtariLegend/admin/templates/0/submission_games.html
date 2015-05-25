@@ -61,11 +61,11 @@ function submovetocomment(JSsubID)
 <tr>
 	<td align="center">
 		{if $structure.list == 'current'}
-		<strong><a href="../games/submission_games.php?list=done" class="MAINNAV">Switch to Done list</a></strong><br>
+		<strong><a href="../games/submission_games.php?list=done" class="MAINNAV">Switch to Done list</a></strong><br/>
 		{elseif $structure.list == 'done'}
-		<strong><a href="../games/submission_games.php?list=current" class="MAINNAV">Switch to Current list</a></strong><br>
+		<strong><a href="../games/submission_games.php?list=current" class="MAINNAV">Switch to Current list</a></strong><br/>
 		{/if}
-		<br>
+		<br/>
 		<table width="400" border="0" cellspacing="2" cellpadding="2">
 			<tr>
 				<td width="50%" align="left">
@@ -86,7 +86,7 @@ function submovetocomment(JSsubID)
 			</tr>
 		</table>
 
-		<br>
+		<br/>
 		
 		{foreach from=$submission item=line}
 				<table cellspacing="0" cellpadding="2" border="0" width="95%" style="border: solid 1px #b2b2b2; background-color:#E9E9E9;">
@@ -99,7 +99,7 @@ function submovetocomment(JSsubID)
 				<table cellspacing="0" cellpadding="0" border="0" width="95%" style="border: solid 1px #b2b2b2; background-color:#E9E9E9;">
 				<tr bgcolor="#EFEFEF">
 					<td class="main_text" width="150" valign="top" style="line-height: 13px; border-right: solid 1px #b2b2b2;">
-					<br>
+					<br/>
 					{if isset($line.avatar_image) and $line.avatar_image != ''}
 					<table>
 					<tr>
@@ -108,16 +108,16 @@ function submovetocomment(JSsubID)
 					</td>
 					</tr>
 					</table>
-					<br>{/if}
-					Joined: {$line.user_joindate}<br>
-					{if $line.user_comment_nr eq 0} {else}<a href="../games/games_comment.php?c_counter={$structure.v_counter}&users_id={$line.user_id}&view=users_comments" class="MAINNAV">{/if}Game Comments: {$line.user_comment_nr}{if $line.user_comment_nr eq 0} {else}</a>{/if}<br>
-					Game Submissions: {$line.usersubmit_number}<br>
+					<br/>{/if}
+					Joined: {$line.user_joindate}<br/>
+					{if $line.user_comment_nr eq 0} {else}<a href="../games/games_comment.php?c_counter={$structure.v_counter}&users_id={$line.user_id}&view=users_comments" class="MAINNAV">{/if}Game Comments: {$line.user_comment_nr}{if $line.user_comment_nr eq 0} {else}</a>{/if}<br/>
+					Game Submissions: {$line.usersubmit_number}<br/>
 					Karma: {$line.karma}
 					
 					</td>
 					<td class="main_text" valign="top" style="line-height: 13px;">
-						<br>
-						<br>
+						<br/>
+						<br/>
 						{if isset($line.image) and $line.image != ''}
 							<span style="float:right;">
 								<a href="../games/games_detail.php?game_id={$line.game_id}">
@@ -126,9 +126,9 @@ function submovetocomment(JSsubID)
 							</span>
 						{/if}
 						{$line.comment}
-						<br>
-						<br>
-						<br>		
+						<br/>
+						<br/>
+						<br/>		
 					</td>
 				</tr>
 				</table>	
@@ -163,7 +163,7 @@ function submovetocomment(JSsubID)
 					</td>		
 				</tr>
 				</table>
-				<br>
+				<br/>
 				{/foreach}
 		
 
@@ -197,5 +197,5 @@ function submovetocomment(JSsubID)
 <div class="MAINHEADERBAR">
 <div class="MAINHEADING">&nbsp;&nbsp;&nbsp;</div>
 </div>
-<br>
+<br/>
 {/block}

@@ -30,11 +30,11 @@
 	<fieldset class="game_set">
 		This is the news edit page. Change a news post accordingly.
 	</fieldset> 
-	<br>
-	<br>
+	<br/>
+	<br/>
 	<label for="name">Headline</label>
 	<input type="text" name="news_headline" id="headline" size='50' maxlength='64' class="links_input-box" value="{$edit_submissions.edit_headline}">
-	<br>
+	<br/>
 	<label for="icon">News Icon : </label>
 	<select name="news_image_id" class="links_selector">
 	{foreach from=$news_images item=line}
@@ -46,11 +46,11 @@
 	{/foreach}	
 	</select>
 	<a href="../news/news_iconpreview.php" class="MAINNAV">Preview Icons</a>
-	<br>
+	<br/>
 	<label for="descr">Description</label>
 	<textarea cols="70" rows="8" name="news_text" >{$edit_submissions.edit_text}</textarea>
-	<br>
-	<br>
+	<br/>
+	<br/>
 	
      	{if isset($edit_submissions.edit_submission_id)}
 	<input type="hidden" name="news_submission_id" value="{$edit_submissions.edit_submission_id}">
@@ -71,7 +71,7 @@
 
 {if isset($message)}
 	<div style="text-align: center;">
-			<br>
+			<br/>
 			<span class="MAINAV">{$message}</span>
 		</div>
 {/if}

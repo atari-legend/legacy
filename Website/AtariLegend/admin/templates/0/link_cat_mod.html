@@ -8,21 +8,21 @@
 <tr>
 	<td>
 			
-		Change the name of the category where indicated.<br>
-		Use the dropdown menu to change if this category should be a subcategory and to what it should be a subcategory.<br>
+		Change the name of the category where indicated.<br/>
+		Use the dropdown menu to change if this category should be a subcategory and to what it should be a subcategory.<br/>
 		
 		
-		<br>
+		<br/>
 		
 	<fieldset class="category_set_noGrave">
 	<legend class="links_legend">Modify Category</legend>
-	<br>
+	<br/>
 	<form action="../links/db_links.php" method="post" name="cat_modification" id="cat_modification">
 	
 	<label for="category_name">Site Name</label>
 	<input type="text" name="category_name" id="category_name" value="{$category.category_name}" size="50" maxlength="50" class="links_input-box">
 
-	<br>
+	<br/>
 	<label for="category">Category</label> 
 		<select name="category" id="category" class="links_selector">
 					<option value="0">Nothing</option>
@@ -30,7 +30,7 @@
 					<option value="{$line.category_id}" {$line.selected}>{$line.category_name}</option>
 			{/foreach}
 		</select>
-	<br>
+	<br/>
 
 	<input type="hidden" name="action" value="mod_cat">
 	<input type="hidden" name="category_id" value="{$category.category_id}">
@@ -38,11 +38,11 @@
 	</form>
 </fieldset> 
 
-<br>
+<br/>
 
 <strong><a href="../links/link_cat.php" class="MAINNAV">Back</a></strong>
 
-<br>
+<br/>
 
 	
 
