@@ -327,41 +327,6 @@ background-color: white;
 	font-style: italic;
 }
 
- .Table
-    {
-        display: table;
-	border: solid 1px #b2b2b2;
-	background-color:#E9E9E9;
-	width: 90%;
-
-    }
-    .Heading
-    {
-        display: table-row;
-        font-weight: bold;
-        text-align: left;
-    }
-    .table_head
-    {
-        font-weight: bold;
-        text-align: left;
-    }
-    .Row
-    {
-        display: table-row;
-        text-align: left;
-    }
-    .Cell
-    {
-        display: table-cell;
-        padding: 2px;
-	font-size : 12px;
-    }
-    .Row div:hover
-    {
-	background-color:#b2b2b2;
-    }
-
 .NEWNAVCELL 
 {
 	background-color:#E9E9E9;
@@ -459,3 +424,100 @@ background-color: white;
 	font-weight: bold;
 }
 
+.comment_box {
+
+	display:table;
+	font-size : 10px;
+	border: solid 1px #b2b2b2;
+	margin: 0px;
+	margin-left:auto;
+	margin-right:auto;
+
+}
+.comment_box_top {
+
+	display:table-row;
+	font-weight:bold;
+	background-color:#E9E9E9;
+	margin: 0px;
+}
+.comment_box_top_left {
+
+	display:table-cell;
+	padding:2px;
+	padding-left:6px;
+	padding-top:5px;
+	padding-bottom:5px;
+	margin: 0px;
+	width:150px;
+	border-right: solid 1px #b2b2b2;
+	border-bottom: solid 1px #b2b2b2;
+
+}
+.comment_box_top_right {
+
+	display:table-cell;
+	padding:2px;
+	padding-left:6px;
+	padding-right:6px;
+	padding-top:5px;
+	padding-bottom:5px;
+	margin: 0px;
+	border-bottom: solid 1px #b2b2b2;
+}
+.comment_box_middle {
+
+	display:table-row;
+	background-color:#EFEFEF;
+}
+.comment_box_middle_left {
+
+	display:table-cell;
+	width:150px;
+	min-width: 150px;
+	line-height: 13px;
+	border-right: solid 1px #b2b2b2;
+	border-bottom: solid 1px #b2b2b2;
+	padding:2px;
+	padding-left:6px;
+	padding-top:5px;
+	padding-bottom:5px;
+
+}
+.comment_box_middle_right {
+
+	display:table-cell;
+	border-spacing: 0px;
+	width:800px;
+	border-bottom: solid 1px #b2b2b2;
+	padding:15px;
+	line-height: 13px;
+	vertical-align:middle;
+}
+
+.comment_box_bottom {
+
+	display:table-row;
+	font-weight:bold;
+	background-color:#E9E9E9;
+	padding:2px;
+	padding-left:6px;
+	padding-top:5px;
+	padding-bottom:5px;
+	border-top: solid 1px #b2b2b2;
+}
+.comment_box_bottom_left {
+
+	display:table-cell;
+	width:150px;
+	min-width: 150px;
+	border-right: solid 1px #b2b2b2;
+	padding:6px;
+	vertical-align:middle;
+}
+.comment_box_bottom_right {
+
+	display:table-cell;
+	padding-left:6px;
+	padding:6px;
+}
