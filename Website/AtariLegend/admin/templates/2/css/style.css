@@ -1,0 +1,451 @@
+/*---------------------------------------------------------- 
+CPANEL specifications - AL Legacy skin
+------------------------------------------------------------ */
+
+/* load the main site font */
+@font-face {
+   font-family: Audiowide;
+   src: url(../font/Audiowide-Regular.ttf);
+}
+
+* { 	margin: 0; padding: 0; 
+}
+
+html { overflow-y: scroll; 
+	overflow-x: hidden;
+}
+
+body { background: black; font-family: Audiowide, Arial, helvetica, sans-serif;
+}
+
+img { display: block;
+}
+
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section { 
+	display: block;
+}
+
+.container { display: none; }
+
+	
+/*---------------------------------------------------------- 
+ Main site width
+------------------------------------------------------------ */
+#wrapper {
+	width: 100%;	
+	max-width: 1280px;
+	margin: auto;
+} 
+ 
+#main {
+	width: 100%;
+	margin-right: 5%;
+	float: left;
+}		
+	
+/*---------------------------------------------------------- 
+ Top
+------------------------------------------------------------ */
+/* background */
+#top_background {
+	width: 100%;
+	float: left;
+	display: block;
+	background: url(../../../templates/2/images/top_bg.jpg) 0 0 no-repeat;
+	height:100%;
+	}
+
+	
+/* logos */	
+#left { 	float: left;}
+#logo_img { 	max-width: 100%;}
+#logo_img_480 {	max-width: 100%;}	
+
+			
+#right { float: right;}
+	#right img {
+		max-width: 100%;
+		float: right;
+		}			
+
+		/* animation */
+#animation {
+    position: relative;
+	-webkit-animation-name: STcharacters;
+	animation-name: STcharacters;
+	-webkit-animation-duration: 20s;
+	animation-duration: 20s;
+	-webkit-animation-iteration-count: infinite;
+	animation-iteration-count: infinite;
+	-webkit-animation-timing-function: linear;
+	animation-timing-function: linear;
+}
+
+@-webkit-keyframes STcharacters {
+    0% {
+        top: 145px;
+		left: -20%;
+		opacity: 0;}	
+	
+	10% { opacity: 1;}
+	70% { opacity: 1;}
+	
+	100% {
+        top: 145px;
+		left: 45%;
+		opacity: 0;
+    }
+}
+@keyframes STcharacters {
+    0% {
+        top:145px;
+		left: -20%;
+		opacity: 0;}		
+		
+	10% { opacity: 1;}
+	70% { opacity: 1;}
+    	
+    100% {
+        top:145px;
+		left: 45%;
+		opacity: 0;
+    }
+}
+
+#animation_vert{ position: relative;
+	-webkit-animation-name: STcharacters_vert;
+	animation-name: STcharacters_vert;
+	-webkit-animation-duration: 10s;
+	animation-duration: 10s;
+	-webkit-animation-iteration-count: infinite;
+	animation-iteration-count: infinite;
+	-webkit-animation-timing-function: linear;
+	animation-timing-function: linear;
+}
+
+@-webkit-keyframes STcharacters_vert {
+    0% {
+        top: 145px;
+		left: -5%;
+		opacity: 0;}	
+	
+	10% { opacity: 1;}
+	70% { opacity: 1;
+	left: 0%;}
+	
+	100% {
+        top:10px;
+		left: 5%;
+		opacity: 0;
+    }
+}
+@keyframes STcharacters_vert {
+    0% {
+        top:145px;
+		left: -5%;
+		opacity: 0;}		
+		
+	10% { opacity: 1;}
+	70% { opacity: 1;
+	left: 0%;}
+    	
+    100% {
+        top:10px;
+		left: 5%;
+		opacity: 0;
+    }
+}
+
+
+
+/* at a resolution of max 480 (smartphones) we want a smaller logo with border */		
+@media screen and (max-width: 480px) { 
+	.container { width: 15%; } 
+	#left { width: 85%;
+		}	
+	#logo_img { margin-left: auto;
+			margin-right: auto;
+			display: none;
+		}
+	#logo_img_480  { margin-left: auto;
+			margin-right: auto;
+			margin-bottom: 5px;		
+		}
+	#animation, #animation_vert{ display: none;}
+	#right { width: 0%;
+		display: none;
+	}
+	#top_background  { border-top-width: 0px;
+			border-left-width: 0px;
+			border-bottom-width: 7px;
+			border-bottom-color: #00d3d3;
+			border-style: solid;
+			box-shadow: 0 0 7px #00d3d3;
+		    background: -webkit-linear-gradient(black, #01b5b5); /* For Safari 5.1 to 6.0 */
+			background: -o-linear-gradient(black, #01b5b5); /* For Opera 11.1 to 12.0 */
+			background: -moz-linear-gradient(black, #01b5b5); /* For Firefox 3.6 to 15 */
+			background: linear-gradient(#175f5f, black); /* Standard syntax (must be last) */
+		}
+}		
+
+/* at a resolution of max 960 (Tablets & low res laptop) we want the original logo without the bee */				
+@media screen and (min-width: 481px) and (max-width: 960px){  
+	.container { width: 15%; } 
+	#left { width: 100%; }
+	#logo_img{ margin-left: auto;
+			   margin-right: auto; 
+		}
+	#animation, #animation_vert{ display: none;}
+	#logo_img_480{ display: none;}
+		
+	#right { width: 0%;
+		display: none;
+	}
+}
+
+/* For high res screens we want the full package - original logo and bee */
+@media screen and (min-width: 961px) { 
+	.container { width: 15%; } 
+	#left { width: 50%;}
+	#logo_img_480{ display: none;}	
+	#right{ width: 35%;
+		display: block;
+		text-align: right;}
+	}	
+	
+/* For high res screens we want the full package - original logo and bee */
+@media screen and (min-width: 1280px) { 
+	.container { visibility : hidden; } 
+	}		
+	
+/*---------------------------------------------------------- 
+ Menu
+------------------------------------------------------------ */
+/* ---------the side menu--------*/
+
+/* the side menu for smartphones, tablets and old (laptop) screens */
+/* it is also used for the high res monitors, but then only the skin switch will be visible */
+
+	body, html {
+        height: 100%;
+        margin: 0;
+     }
+
+	.container {
+		display : block;
+		z-index: 3;
+		position: relative;
+        width: 100%;
+        left: 0;
+        -webkit-transition:  left 0.4s ease-in-out;
+        -moz-transition:  left 0.4s ease-in-out;
+        -ms-transition:  left 0.4s ease-in-out;
+        -o-transition:  left 0.4s ease-in-out;
+        transition:  left 0.4s ease-in-out;
+    }
+    
+    .container.open-sidebar {
+        left: 170px;
+    }
+    
+    #sidebar {
+		z-index:1;
+		position: absolute;
+        left: -170px;
+        background: black;
+        width: 170px;
+        height: 100%;
+        box-sizing: border-box;
+    }
+	
+    #sidebar ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+	
+    #sidebar ul li { margin: 0;
+			background:#00d3d3; }
+	
+    #sidebar ul li a {
+        padding: 0;
+        display: block;
+        -webkit-transition:  background 0.3s ease-in-out;
+        -moz-transition:  background 0.3s ease-in-out;
+        -ms-transition:  background 0.3s ease-in-out;
+        -o-transition:  background 0.3s ease-in-out;
+        transition:  background 0.3s ease-in-out;
+    }
+	
+ 
+	#sidebar ul li a img:hover { opacity:0.5;}
+	
+    .main-content {
+        width: 100%;
+        height: 100%;
+        padding: 1px;
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        position: absolute;
+    }
+	
+    .main-content .content{
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+		padding-left: 60px;
+		width: 100%;
+    }
+	
+    .main-content .content p{
+        width: 100%;
+        line-height: 160%;
+    }
+	
+    .main-content #sidebar-toggle {
+        background: #01b5b5;
+        border-radius: 3px;
+        display: block;
+        position: absolute;
+        padding: 10px 7px;
+        float: left;
+    }
+	
+    .main-content #sidebar-toggle .bar{
+        display: block;
+        width: 18px;
+        margin-bottom: 3px;
+        height: 2px;
+        background-color: #fff;
+        border-radius: 1px;   
+    }
+	
+    .main-content #sidebar-toggle .bar:last-child{
+         margin-bottom: 0;   
+    }
+
+/* 'position' is needed for smartphone view else the logo is covered by the sidemenu button */
+@media screen and (max-width: 480px) { 
+	.main-content {position: relative;}
+	.main-content #sidebar-toggle {position: relative;}
+	}	
+
+/* resizing of buttons is done to get al info on screen in landscape for phones and tablets*/
+@media screen and (max-width: 640px) { 
+	#games_side{height: 40px; width: 113px; font-size: 14px;}
+	#menus_side{height: 40px; width: 113px; font-size: 14px;}
+	#demos_side{height: 40px; width: 113px; font-size: 14px;}
+	#about_side{height: 40px; width: 113px; font-size: 14px;}
+	#links_side{height: 40px; width: 113px; font-size: 14px;}
+	#skin_side{height: 37px; width: 113px; font-size: 14px;}
+	#search_side {height: 40px; width: 25px;}
+	#search_text_side{height: 20px; width: 70px;}
+	#searchbutton_side{height: 38px; width: 87px;}
+	.container.open-sidebar { left: 113px;}
+    #sidebar { left: -113px;
+        width: 113px;
+	}
+	.sub-menu li { font-size:13px; }
+}
+
+/* for the lower resolutions, we don't have the menu bar below the top */ 
+@media screen and (max-width: 1279px) {  	
+	#games { display: none; }
+	#menus { display: none; } 
+	#demos { display: none; } 
+	#users { display: none; }
+	#admin { display: none; }
+	#other { display: none; }
+}
+
+/* for the high resolutions, we only have the skin switch in the side menu */ 
+@media screen and (min-width: 1280px) {  	
+	#links_side { display: none; }
+	#search_side { display: none; } 
+	#search_text_side{ display: none; } 
+	#games_side { display: none; }
+	#demos_side { display: none; }
+	#about_side { display: none; }
+	#menus_side { display: none; }
+}
+
+/* ---------the main menu below top--------*/
+
+/* This piece of code is used for higher res :
+/*	1) making the side menu go to the left of the screen  --> Container absolute
+/*  2) Side bar needs to be transparant for resolutions between 1281 and 16** or something --> #sidebar
+/*  3) header nav is switched to absolute, if this is not done, the hyperlinks won't work anymore becauwe of position of container
+/*  4) since header nav is absolute, the main part of the site needs to be repositioned */
+@media screen and (min-width: 1280px){  	
+	.container {position: absolute;}
+	#sidebar {background-color: rgba(0, 0, 0, 0);}
+	header nav { position: absolute; margin-top: 225px;}	
+}
+
+nav ul {
+  list-style: none;
+}
+
+.nav li {
+  position: relative;
+}
+.nav > li { 
+  float: left; 
+} 
+
+.nav li a:first-child:nth-last-child(2):before { 
+  content: ""; 
+  position: absolute; 
+ }
+ 
+ /* submenu positioning*/
+.nav ul {
+  position: absolute;
+  z-index: 1;
+  left: -99999em;
+  top: 61px;
+}
+.nav > li:hover > ul {
+  left: auto;
+}
+.nav > li li:hover > ul { 
+  left: 100%;
+}
+
+.topbutton
+{
+  cursor: pointer;
+  border: 0px;
+  background: #161c71;
+  font-family: Audiowide,Arial,helvetica,sans-serif;
+  color: White;
+  height: 60px;
+  width: 213px;
+  font-size: 20px;
+  border-bottom: 3px solid #12164a;
+  border-left: 1px solid #12164a;
+  padding-top: 3px;
+  text-decoration:none;
+}
+
+.topbutton:hover {
+  background: #1e269c;
+  color: white;
+  text-decoration:none;
+  border-bottom: 3px solid #12164a;
+}
+
+.top_button:visited {
+  text-decoration:none;
+}
+
+#game_editor, #game_comments, #game_series, #game_music, #game_submissions, #game_reviews, #submitted_reviews,
+#menu_editor, #menu_comments, #menu_submissions, #demo_editor, #demo_comments, #demo_music, #demo_submissions,
+#user_admin, #individuals, #author_types, #crew_editor, #companies, #company_logo, #add_news, #approve_news, 
+#submitted_news, #Statistics,#did_you_know, #trivia_screenshots, #trivia_quotes, #add_links, #validate_links,
+#modify_links, #link_categories, #articles, #article_types, #screenshots, #modify_links, 
+#link_categories, #articles, #article_types, #article_screenshots, #add_magazines, #manage_issues, #interviews, 
+#interviews_help, #forum, #logout {
+		height: 40px;
+		font-size: 16px;
+}
