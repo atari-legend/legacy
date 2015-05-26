@@ -44,56 +44,52 @@ function commentdelete(JScomID,JSusers_id)
 
 		<br/>
 		
+		{* START NEW COMMENT BOX *}	
 		
 		{foreach from=$comments item=line}
 			
-				<table cellspacing="0" cellpadding="2" border="0" width="95%" style="border: solid 1px #b2b2b2; background-color:#E9E9E9;">
-				<tr>
-						<td class="main_text" valign="top" width="150" style="border-right: solid 1px #b2b2b2;"><b>Posted by <a href="../user/user_detail.php?user_id_selected={$line.users_id}" class="links_links">{$line.user_name}</a></b></td>
-						<td class="main_text" valign="top" ><b><a href="../games/games_detail.php?game_id={$line.game_id}" class="links_links">{$line.game}</a></b> </td>
-						<td class="main_text" valign="top" align="right"><b>{$line.date}</b></td>			
-				</tr>
-				</table>
-				<table cellspacing="0" cellpadding="0" border="0" width="95%" style="border: solid 1px #b2b2b2; background-color:#E9E9E9;">
-				<tr bgcolor="#EFEFEF">
-					<td class="main_text" width="150" valign="top" style="line-height: 13px; border-right: solid 1px #b2b2b2;">
-					<br/>
-					{if isset($line.avatar_image) and $line.avatar_image != ''}
-					<table>
-					<tr>
-					<td align="center">
-		 <img src="../includes/show_image.php?file={if isset($line.avatar_image)}{$line.avatar_image}{/if}&amp;resize=80,null,null,null&amp;crop=null,null,null,null" alt="Avatar">				
-					</td>
-					</tr>
-					</table>
-					<br/>{/if}
-					Joined: {$line.user_joindate}<br/>
-					<a href="../games/games_comment.php?c_counter={$links.v_counter}&amp;users_id={$line.users_id}&amp;view=users_comments" class="MAINNAV">Game Comments: {$line.user_comment_nr}</a><br/>
-					Game Submissions: {$line.usersubmit_number}<br/>
-					Karma: {$line.karma}<br/>
+		<div class="comment_box" style="width:95%;">
+			
+			<div class="comment_box_top">
+			
+				<div class="comment_box_top_left" style="margin-right:10px;">
+
+						Posted by <a href="../user/user_detail.php?user_id_selected={$line.users_id}" class="links_links">{$line.user_name}</a>
+				</div>
+				<div class="comment_box_top_right" style="">
+					<span style=""><a href="../games/games_detail.php?game_id={$line.game_id}" class="links_links">{$line.game}</a></span>
+					<span style="float:right;">{$line.date}</span>
+				</div>
+			</div>
+			<div class="comment_box_middle">
+				<div class="comment_box_middle_left" style="">
+						{if isset($line.avatar_image) and $line.avatar_image != ''}
+						<img src="../includes/show_image.php?file={if isset($line.avatar_image)}{$line.avatar_image}{/if}&amp;resize=80,null,null,null&amp;crop=null,null,null,null" alt="Avatar">
+						<br/>
+						{/if}
+						<br/>
+						Joined: {$line.user_joindate}<br/>
+						<a href="../games/games_comment.php?c_counter={$links.v_counter}&amp;users_id={$line.users_id}&amp;view=users_comments" class="MAINNAV">Game Comments: {$line.user_comment_nr}</a><br/>
+						Game Submissions: {$line.usersubmit_number}<br/>
+						Karma: {$line.karma}<br/>
+				</div>
+				<div class="comment_box_middle_right" style="">
 					
-					</td>
-					<td class="main_text" valign="top" style="line-height: 13px;">
-						<br/>
-						<br/>
-						{if isset($line.image) and $line.image != ''}<span style="float:right;">
-					<a href="../games/games_detail.php?game_id={$line.game_id}"><img src="../includes/show_image.php?file={$line.image}&amp;resize=160,null,null,null&amp;crop=null,null,null,null" alt="{$line.game}" border="0"/></a></span>{/if}
+						{if isset($line.image) and $line.image != ''}
+								<a href="../games/games_detail.php?game_id={$line.game_id}">
+									<img src="../includes/show_image.php?file={$line.image}&amp;resize=160,null,null,null" alt="{$line.game}" border="0" style="float:right;"/>
+								</a>
+						{/if}
 						{$line.comment}
-						<br/>
-						<br/>
-						<br/>		
-					</td>
-				</tr>
-				</table>	
-				<table cellspacing="0" cellpadding="2" border="0" width="95%" style="border-left: solid 1px #b2b2b2; border-right: solid 1px #b2b2b2; border-bottom: solid 1px #b2b2b2;background-color:#E9E9E9;">
-				<tr>
-					<td width="150" valign="middle" class="main_text" style="line-height: 13px; border-right: solid 1px #b2b2b2;">
-					
-					<strong><a href="#top" class="MAINNAV">Back to top</a></strong>
-					
-					</td>
 				
-					<td valign="top" class="main_text">
+				</div>
+			</div>
+			<div class="comment_box_bottom" style="">
+				<div class="comment_box_bottom_left" style="">
+						<a href="#top" class="MAINNAV">Back to top</a>
+				</div>
+				<div class="comment_box_bottom_right" style="">
+					
 						{if $line.email != ''}
 							<a href="mailto:{$line.email}?subject=Comment of {$line.game} at Atari Legend">
 							<img src="../templates/0/icons/icon_email.gif" alt="Email User" title="Email User" width="59" height="18" border="0"/>
@@ -103,14 +99,17 @@ function commentdelete(JScomID,JSusers_id)
 							</a>
 							<a  onClick="commentdelete({$line.comment_id},{$line.users_id})" style="cursor: pointer;">
 							<img src="../templates/0/icons/icon_delete.gif" alt="Delete Comment" title="Delete Comment" width="16" height="18" border="0"/>
-							</a>					
-					</td>
-					<td valign="middle" class="main_text" style="text-align: right;">
+							</a>	
 					
-					</td>		
-				</tr>
-				</table>
-				<br/>
+					
+				</div>
+			</div>
+	
+		</div>
+			<br/>
+		{* END NEW COMMENT BOX *}	
+	
+				
 				{/foreach}
 
 				
