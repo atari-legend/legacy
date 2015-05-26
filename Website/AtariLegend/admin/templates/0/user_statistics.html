@@ -43,94 +43,94 @@ The the user stats page
 			<td width="100%" valign="top">
 				This user has posted <b>{if $nr_comments ==! ''}{$nr_comments}{else}0{/if}</b> game comments.
 				{if $nr_comments ==! ''}
-				<br>
-				<br>
+				<br/>
+				<br/>
 				The following games have been commented : 	
-				<br>
-				<br>
+				<br/>
+				<br/>
 				{foreach from=$users_comments item=line}
 					<a href="../games/games_detail.php?game_id={$line.game_id}" class="MAINNAV">{$line.game_name}</a>
-					<br>
+					<br/>
 				{/foreach}		
 				{/if}
 			</td>
 		</tr>
 		<tr>
 			<td width="100%" valign="top">
-				<br>
-				<br>
+				<br/>
+				<br/>
 				This user has posted <b>{if $nr_reviews ==! ''}{$nr_reviews}{else}0{/if}</b> game reviews.
 				{if $nr_reviews ==! ''}
-				<br>
-				<br>
+				<br/>
+				<br/>
 				The following games have been reviewed : 	
-				<br>
-				<br>
+				<br/>
+				<br/>
 				{foreach from=$users_reviews item=line}
 					<a href="../administration/construction.php" class="MAINNAV">{$line.game_name}</a>
-					<br>
+					<br/>
 				{/foreach}	
 				{/if}	
 			</td>
 		</tr>
 		<tr>
 			<td width="100%" valign="top">
-				<br>
-				<br>
+				<br/>
+				<br/>
 				This user has posted <b>{if $nr_submission ==! ''}{$nr_submission}{else}0{/if}</b> game submissions.
 				{if $nr_submission ==! ''}
-				<br>
-				<br>
+				<br/>
+				<br/>
 				The following submissions have been sent : 	
-				<br>
-				<br>
+				<br/>
+				<br/>
 				{foreach from=$users_submission item=line}
 					<a href="../administration/construction.php" class="MAINNAV">{$line.game_name}</a>
-					<br>
+					<br/>
 				{/foreach}		
 				{/if}
 			</td>
 		</tr>
 		<tr>
 			<td width="100%" valign="top">
-				<br>
-				<br>
+				<br/>
+				<br/>
 				This user has posted <b>{if $nr_links ==! ''}{$nr_links}{else}0{/if}</b> links.
 				{if $nr_links ==! ''}
-				<br>
-				<br>
+				<br/>
+				<br/>
 				The following links have been sent : 	
-				<br>
-				<br>
+				<br/>
+				<br/>
 				{foreach from=$users_website item=line}
 					<a href="../links/link_mod.php?website_id={$line.website_id}" class="MAINNAV">{$line.website_name}</a>
-					<br>
+					<br/>
 				{/foreach}		
 				{/if}
 			</td>
 		</tr>
 		<tr>
 			<td width="100%" valign="top">
-				<br>
-				<br>
+				<br/>
+				<br/>
 				This user has posted <b>{if $nr_news ==! ''}{$nr_news}{else}0{/if}</b> news updates.
 				{if $nr_news ==! ''}
-				<br>
-				<br>
+				<br/>
+				<br/>
 				The following updates have been sent : 	
-				<br>
-				<br>
+				<br/>
+				<br/>
 				{foreach from=$users_news item=line}
 					<a href="../news/news_edit.php?news_id={$line.news_id}" class="MAINNAV">{$line.news_headline}</a>
-					<br>
+					<br/>
 				{/foreach}
 				{/if}	
 			</td>
 		</tr>
 		<tr>
 			<td width="100%" valign="top">
-				<br>
-				<br>
+				<br/>
+				<br/>
 				This user has downloaded <b>{if $nr_downloads ==! ''}{$nr_downloads}{else}0{/if}</b> games.
 			</td>
 		</table>
@@ -142,16 +142,16 @@ The the user stats page
 <div class="MAINHEADERBAR">
 <div class="MAINHEADING">&nbsp;&nbsp;&nbsp;</div>
 </div>
-<br>
+<br/>
 	<div style="text-align: center;">
-			<br>
+			<br/>
 			<span class="MAINAV"><b><a href="../user/user_detail.php?user_id_selected={$user_id_selected}" class="MAINNAV">back</a></b></span>
 		</div>
-<br>
+<br/>
 
 {if isset($message)}
 	<div style="text-align: center;">
-			<br><br>
+			<br/><br/>
 			<span class="MAINAV">{$message}</span>
 		</div>
 {/if}

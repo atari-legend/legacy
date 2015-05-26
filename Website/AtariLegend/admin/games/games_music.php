@@ -117,7 +117,7 @@ if (isset($action) and $action == 'search')
 				$smarty->display('file:../templates/0/games_music_list.html');
 
 				//close the connection
-				mysqli_free_result();	
+				mysqli_free_result($numberzaks);	
 			}	
 			else
 			{
@@ -142,6 +142,6 @@ else
 	$smarty->display('file:../templates/0/games_music.html');
 
 	//close the connection
-	mysqli_free_result();
+	mysqli_close($mysqli);
 }
 ?>

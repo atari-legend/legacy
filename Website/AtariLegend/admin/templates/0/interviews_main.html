@@ -48,8 +48,8 @@ function deleteinterview(interview_id)
 		people, just press search without making a selection. If you like to add an interview, select the person
 		and press the <b>add</b> button.
 	</fieldset> 
-	<br>
-	<br>
+	<br/>
+	<br/>
 <div style="display:table;width:100%;margin: 0 auto;">
 		<div style="display:table-cell;width:50%;margin: 0 auto;">
 			
@@ -110,8 +110,8 @@ function deleteinterview(interview_id)
 		<tr>
 			<td width="100%" valign="top" align="left" colspan="2">
 				Interview with <a href="../individuals/individuals_edit.php?ind_id={$line.ind_id}" class="MAINNAV"><b>{$line.ind_name}</b></a>
-				<br>
-				<br>
+				<br/>
+				<br/>
 			</td>
 		</tr>
 		<tr>
@@ -128,7 +128,7 @@ function deleteinterview(interview_id)
 		</tr>
 		<tr>
 			<td width="100%" valign="top" align="center" colspan="2">
-				<br>
+				<br/>
 				<a href="interviews_edit.php?interview_id={$line.interview_id}" class="MAINNAV">EDIT</a> :: <a href="javascript:deleteinterview({$line.interview_id})" class="MAINNAV">DELETE</a> :: <a href="interviews_preview.php?interview_id={$line.interview_id}" class="MAINNAV">PREVIEW</a> :: <a href="interviews_screenshots_add.php?interview_id={$line.interview_id}" class="MAINNAV">ADD SCREENSHOTS</a>
 			</td>
 		</tr>
@@ -148,7 +148,7 @@ function deleteinterview(interview_id)
 
 {if isset($message)}
 	<div style="text-align: center;">
-			<br><br>
+			<br/><br/>
 			<span class="MAINAV">{$message}</span>
 		</div>
 {/if}

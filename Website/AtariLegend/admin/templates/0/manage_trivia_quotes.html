@@ -9,11 +9,11 @@
 	<td>
 	
 		
-		 Here you can add a new <strong>trivia quote</strong> by using the below text field or you can delete old trivia quotes.<br>
-		<br>
+		 Here you can add a new <strong>trivia quote</strong> by using the below text field or you can delete old trivia quotes.<br/>
+		<br/>
 		
 		
-		<br>
+		<br/>
 		
 		<fieldset class="category_set_noGrave">
 	<legend class="links_legend">Add a new Trivia quote to the database</legend>
@@ -32,16 +32,16 @@
 
 </fieldset> 
 		
-		<br>
-		<br>
+		<br/>
+		<br/>
 		
 		{foreach from=$trivia item=line}
 		
 <fieldset class="category_set_noGrave">
 	<legend class="links_legend">Trivia ID {$line.trivia_quote_id}</legend>
 	
-	<br>
-	{$line.trivia_quote}<br>
+	<br/>
+	{$line.trivia_quote}<br/>
 	
 	<form action="../trivia/db_trivia.php" method="post" name="trivia{$line.trivia_quote_id}" id="trivia{$line.trivia_quote_id}">
 	<input type="hidden" name="action" value="delete_trivia_quote">
@@ -50,8 +50,8 @@
 	</form>
 </fieldset> 
 
-<br>
-<br>
+<br/>
+<br/>
 
 		{/foreach}
 

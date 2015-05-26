@@ -34,19 +34,19 @@
 		image and to what kind of news it should be used. You can use either jpg, 
 		png or gif images but png images are prefered. Keep the size to a minimun, we are talking icons here, no 300Kb images.
 	</fieldset> 
-	<br>
-	<br>
-	<br>
+	<br/>
+	<br/>
+	<br/>
 	<form  enctype="multipart/form-data" action="../news/news_add_images.php" method="post" name="imageadd" id="imageadd">
 	<label for="name">Image Name</label>
 	<input type="text" name="image_name" id="image_name" size='50' maxlength='64' class="links_input-box">
-	<br>
+	<br/>
 	<label for="icon">Image File</label>
 	<input type="file" name="news_image" id="news_image">
-	<br>
-	<br>
-	<br>
-	<br>
+	<br/>
+	<br/>
+	<br/>
+	<br/>
 	<input type="hidden" name="action" id="action" value="image_upload">
 	<input type="hidden" name="user_id" id="user_id" value="{$user_id}">
 	<input type="submit" value="Submit">
@@ -61,7 +61,7 @@
 
 {if isset($message) and $message <> ''}
 	<div style="text-align: center;">
-			<br><br>
+			<br/><br/>
 			<span class="MAINAV">{$message}</span>
 		</div>
 {/if}

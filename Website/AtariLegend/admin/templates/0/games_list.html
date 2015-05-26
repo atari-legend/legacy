@@ -20,80 +20,50 @@ The main game page
 <div class="MAINHEADING">&nbsp;Search results</div>
 </div>
 
-<table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
-<tr>
-	<td colspan="2" style="text-align:center;">
-	<br>
+<div class="NEWMAINCELL" style="text-align:center;">
+	
+	<br/>
 	<fieldset class="game_set" style="padding:5px;">
 		This is the search result page. Click a game to go to the main page. Click a Publisher/Developer/Year to do a new search.
 		If you want to do a new search query or like to add a new game, click <a href="games_main.php" class="MAINNAV"><b>here</b></a>!
-		
 	</fieldset> 
-	</td>
-</tr>
-<tr>
-	<td align="center">
 
-		<div class="Table">
-			<div class="Heading">
-				<div class="Cell" style="width:25%;">
-					Game Name
-				</div>
-				<div class="Cell" style="width:25%;">
-					Publisher
-				</div>				
-				<div class="Cell" style="width:25%;">
-					Developer
-				</div>
-				<div class="Cell" style="width:10%;">
-					Year
-				</div>
-				<div class="Cell" style="width:15%;">
-					Info
-				</div>
-			</div>
-		</div>
-		<div class="Table">
-		{foreach from=$game_search item=line}
-			<div class="Row" style="background-color:{cycle name="tr" values="#EFEFEF,#E9E9E9"};" id="game_row">
-				<div class="Cell" style="width:25%;">
-						{if $line.game_name != ''}
-						<a href="games_detail.php?game_id={$line.game_id}" class="MAINNAV">
-							{$line.game_name}
-						</a>
-						{else}
-						<i>n/a</i>
-						{/if}
-				</div>
-				<div class="Cell" style="width:25%;">
-						{if $line.publisher_name != ''}
+<br/>
+<br/>
+
+	<table class="table_game_list">
+			<tr>
+				<th width="40%">Game Name</th>
+				<th width="20%">Publisher</th>
+				<th width="20%">Developer</td>
+				<th width="10%">Year</th>
+				<th width="10%">Info</th>
+			</tr>
+					{foreach from=$game_search item=line}
+			<tr>
+				<td width="40%">{if $line.game_name != ''}<a href="games_detail.php?game_id={$line.game_id}" class="MAINNAV">{$line.game_name}</a>{else}<i>n/a</i>{/if}</td>
+				<td width="20%">{if $line.publisher_name != ''}
 						<a href="games_main.php?publisher={$line.publisher_id}&amp;action=search" class="MAINNAV">
 							{$line.publisher_name}
 					</a>
 						{else}
 							<i>n/a</i>
-						{/if}
-				</div>				
-				<div class="Cell" style="width:25%;">
-						{if $line.developer_name != ''}
+						{/if}</td>
+				<td width="20%">{if $line.developer_name != ''}
 						<a href="games_main.php?developer={$line.developer_id}&amp;action=search" class="MAINNAV">
 							{$line.developer_name}
 						</a>
 						{else}
 							<i>n/a</i>
-						{/if}
-				</div>
-				<div class="Cell" style="width:10%;">
-						{if $line.year != ''}
+						{/if}</td>
+				<td width="10%">{if $line.year != ''}
 						<a href="games_main.php?year={$line.year}&amp;action=search" class="MAINNAV">
 							{$line.year}
 						</a>
 						{else}
 							<i>n/a</i>
-						{/if}
-				</div>
-				<div class="Cell" style="width:15%;">
-						{if isset($line.screenshot)}
+						{/if}</td>				
+				<td width="10%">{if isset($line.screenshot)}
 							<img src="../templates/0/icons/screen.gif" alt="Screenshots available" hspace="0" vspace="0" border="0">
 						{/if}
 						{if isset($line.music)}
@@ -110,40 +80,38 @@ The main game page
 						{/if}
 						{if isset($line.falcon_only) or isset($line.falcon.enhan)}
 							<img src="../templates/0/icons/falcon.png" alt="Falcon Game" hspace="0" vspace="0" border="0">
-						{/if}
-				</div>
-			</div>
+						{/if}</td>
+			</tr>
 		{/foreach}
-		</div>
-		
-				<div class="Table">
-			<div class="Heading">
-				<div class="Cellgame_name">
+			<tr>
+				<td class="game_list_footer" colspan="5" width="100%">
 					{if $nr_of_games == 1}1 game found {else} {$nr_of_games} games found{/if} in {$query_time} sec
-				</div>
+				</td>
+			</tr>
+		</table>
 
-			</div>
-		</div>
 
 
-		<br>
-	</td>
-</tr>
-</table>
+<br/>
+		
+</div>
+
+
+		
 <div class="MAINHEADERBAR">
 <div class="MAINHEADING">&nbsp;&nbsp;&nbsp;</div>
 </div>
-<br>
+<br/>
 	<div style="text-align: center;">
-			<br>
+			<br/>
 			<span class="MAINAV">
 			<b><a href="../games/games_main.php" class="MAINNAV">back</a></b>
 		</span>
 		</div>
-<br>
+<br/>
 {if isset($message)}
 	<div style="text-align: center;">
-			<br><br>
+			<br/><br/>
 			<span class="MAINAV">{$message}</span>
 		</div>
 {/if}

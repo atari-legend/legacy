@@ -119,7 +119,7 @@ if (isset($action) and $action == 'search')
 				$smarty->display('file:../templates/0/games_review_list.html');
 
 				//close the connection
-				mysqli_free_result();	
+				mysqli_close($mysqli);	
 			}	
 			else
 			{
@@ -131,7 +131,7 @@ if (isset($action) and $action == 'search')
 				$smarty->display('file:../templates/0/games_review.html');
 
 				//close the connection
-				mysqli_free_result();
+				mysqli_close($mysqli);
 			}
 		}
 	}

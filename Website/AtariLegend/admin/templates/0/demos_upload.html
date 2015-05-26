@@ -67,8 +67,8 @@ function delete_download(id, demo_id)
 		<tr>
 			<td colspan="4">
 				<a href="{$line.filepath}.zip" class="MAINNAV">{$line.filename}</a>
-				<br>
-				<br>
+				<br/>
+				<br/>
 			</td>
 		</tr>	
 		<tr>
@@ -209,8 +209,8 @@ function delete_download(id, demo_id)
 		
 		<tr>
 			<td colspan="4">
-				<br>
-				<br>
+				<br/>
+				<br/>
 				<input type="hidden" name="demo_download_id" value="{$line.demo_download_id}">
 				<input type="hidden" name="demo_id" value="{$demo.demo_id}">
 				<input type="button" value="Delete" onClick="delete_download({$line.demo_download_id},{$demo.demo_id});">
@@ -255,16 +255,16 @@ function delete_download(id, demo_id)
 <div class="MAINHEADERBAR">
 <div class="MAINHEADING">&nbsp;&nbsp;&nbsp;</div>
 </div>
-<br>
+<br/>
 <div style="text-align: center;">
-			<br>
+			<br/>
 			<span class="MAINAV"><b><a href="../demos/demos_detail.php?demo_id={$demo.demo_id}" class="MAINNAV">back</a></span>
 		</div>
-<br>
+<br/>
 
 {if isset($message)}
 	<div style="text-align: center;">
-			<br><br>
+			<br/><br/>
 			<span class="MAINAV">{$message}</span>
 		</div>
 {/if}

@@ -38,7 +38,7 @@ The submitted review page
 			{if $submission_nr != '0'}
 			<td>
 				{foreach from=$review item=line}
-					<a href="../games/games_review_edit.php?reviewid={$line.review_id}&game_id={$line.game_id}" class="MAINNAV"><b>{$line.game_name}</b></a> reviewed by <a href="../user/user_detail.php?user_id_selected={$line.user_id}" class="MAINNAV"><b>{$line.userid}</b></a><br>
+					<a href="../games/games_review_edit.php?reviewid={$line.review_id}&game_id={$line.game_id}" class="MAINNAV"><b>{$line.game_name}</b></a> reviewed by <a href="../user/user_detail.php?user_id_selected={$line.user_id}" class="MAINNAV"><b>{$line.userid}</b></a><br/>
 				{/foreach}
 			</td>
 			{else}
@@ -58,7 +58,7 @@ The submitted review page
 
 {if isset($message)}
 	<div style="text-align: center;">
-			<br><br>
+			<br/><br/>
 			<span class="MAINAV">{$message}</span>
 		</div>
 {/if}

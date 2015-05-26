@@ -208,7 +208,7 @@ function searchInd(str) {
 	<td align="center" width="50%">
 	{if (isset($new_crew) and $new_crew <> '')}
 		<span class="MAINNAV" style="text-align:center;">
-		{$new_crew} added to the database!<br>
+		{$new_crew} added to the database!<br/>
 		</span>
 	{/if}
 		<form method="post" name="insertcrew">
@@ -218,7 +218,7 @@ function searchInd(str) {
 			<input type="submit" value="Insert" onClick="crewinsert(); return false;">	
 		</fieldset>
 		</form>
-		<br>
+		<br/>
 	</td>
 </tr>
 <tr>
@@ -373,7 +373,7 @@ function searchInd(str) {
 				
 			</select>
 			</div>
-			<br>
+			<br/>
 			<input type="hidden" name="action" value="parent_crew">
 			<input type="hidden" name="parent_id" value="{if isset($crew_select.crew_id)}{$crew_select.crew_id}{/if}">
 			<input type="hidden" name="crew_select" id="crew_select8" value="{if isset($crew_select.crew_id)}{$crew_select.crew_id}{/if}">
@@ -423,8 +423,8 @@ function searchInd(str) {
 						<option value="z">Z</option>
 
         				</SELECT>
-						<br><br>
-						Search<br>
+						<br/><br/>
+						Search<br/>
 						<input type="text" onkeyup="searchInd(this.value)" style="width:100px;">
 
       				</FORM>
@@ -444,7 +444,7 @@ function searchInd(str) {
 
         </SELECT>
   	</div>	      
-        <br>
+        <br/>
 			<input type="hidden" name="action" value="add_member">
 			<input type="hidden" name="parent_id" value="{if isset($crew_select.crew_id)}{$crew_select.crew_id}{/if}">
 			<input type="hidden" name="crew_select" id="crew_select8" value="{if isset($crew_select.crew_id)}{$crew_select.crew_id}{/if}">
@@ -461,7 +461,7 @@ function searchInd(str) {
 		</tr>
 		<tr>{* MEMBERS OF CREW *}
 			<td width="100%" colspan="2">
-			<br>
+			<br/>
 			<fieldset>
 			<legend class="links_legend">Members</legend>
 			
@@ -582,7 +582,7 @@ function searchInd(str) {
 
 {if isset($message)}
 	<div style="text-align: center;">
-			<br><br>
+			<br/><br/>
 			<span class="MAINAV">{$message}</span>
 		</div>
 {/if}

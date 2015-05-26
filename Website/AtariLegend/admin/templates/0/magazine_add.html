@@ -37,21 +37,21 @@ function maginsert()
 	<td>
 	
 		
-		  Add Magazines here, enter the name of the magazine in the field below and press "Insert" to enter it into the database.<br>
-		<br>
+		  Add Magazines here, enter the name of the magazine in the field below and press "Insert" to enter it into the database.<br/>
+		<br/>
 		
 		
-		<br>
+		<br/>
 		
 		<fieldset class="category_set_noGrave">
 	<legend class="links_legend">New Magazine.</legend>
-	<br>
+	<br/>
 	<form method="post" action="" name="insertmag">
 		<label for="newmag">Magazine Name</label>
 		<input type="text" name="newmag" size="50" maxlength="50" class="links_input-box">
 		<input type="submit" name="inserter" value="Insert" onClick="maginsert(); return false;">		
 		<input type="hidden" name="choice" value="insert_magazine" size="35" maxlength="255" class="gamesearchInputs">
-	</form> <br>
+	</form> <br/>
 				
 	
 	
@@ -59,7 +59,7 @@ function maginsert()
 
 </fieldset> 
 		
-		<br>
+		<br/>
 		
 		
 
@@ -67,18 +67,18 @@ function maginsert()
 <fieldset class="category_set_noGrave">
 	<legend class="links_legend">Magazines already in archive</legend>
 	
-	<br>
+	<br/>
 	{foreach from=$magazine item=line}
 	
-	{$line.magazine_name}<br>
+	{$line.magazine_name}<br/>
 	
 	{/foreach}
-	<br>
+	<br/>
 	
 	
 </fieldset> 
 
-<br>
+<br/>
 
 
 

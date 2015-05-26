@@ -124,7 +124,7 @@ function browseCrew(str) {
 	<td align="center" width="50%">
 	{if (isset($new_crew) and $new_crew <> '')}
 		<span class="MAINNAV" style="text-align:center;">
-		{$new_crew} added to the database!<br>
+		{$new_crew} added to the database!<br/>
 		</span>
 	{/if}
 		<form method="post" name="insertcrew">
@@ -134,7 +134,7 @@ function browseCrew(str) {
 			<input type="submit" value="Insert" onClick="crewinsert(); return false;">	
 		</fieldset>
 		</form>
-		<br>
+		<br/>
 	</td>
 </tr>
 <tr>
@@ -188,7 +188,7 @@ function browseCrew(str) {
 
 {if isset($message)}
 	<div style="text-align: center;">
-			<br><br>
+			<br/><br/>
 			<span class="MAINAV">{$message}</span>
 		</div>
 {/if}
