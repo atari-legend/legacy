@@ -46,8 +46,8 @@ function deletecomment(screenshot_id, interview_id)
 		In this section you can add screenshots to a selected interview. Use the browse buttons to select the shots and press the 
 		'Submit Query' button to link them to the interview.
 	</fieldset> 
-	<br>
-	<br>
+	<br/>
+	<br/>
 	<table width="100%" cellspacing="0" cellpadding="0">
 	<tr>
 		<td align="center" width="100%">
@@ -58,7 +58,7 @@ function deletecomment(screenshot_id, interview_id)
 				Image {$line.count} :: 
 				<a href="javascript:deletecomment({$line.id},{$interview.interview_id})" class="MAINNAV">Delete</a> ::    	
 				<a href="javascript:void(window.open('../includes/show_image.php?file={$line.image_path}','4','width={$line.width},height={$line.height},toolbar=no,statusbar=no'))" class="MAINNAV">Look at image</a>
-				<br>
+				<br/>
 			{/foreach}
 		{else}
 			No screenshots attached to this interview
@@ -99,7 +99,7 @@ function deletecomment(screenshot_id, interview_id)
 <div class="MAINHEADERBAR">
 <div class="MAINHEADING">&nbsp;&nbsp;&nbsp;</div>
 </div>
-<br>
+<br/>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 	<tr>
    		<td colspan="3" valign=top align=center>
@@ -107,11 +107,11 @@ function deletecomment(screenshot_id, interview_id)
 		</td>
 	</tr>
 </table>
-<br>
+<br/>
 
 {if isset($message)}
 	<div style="text-align: center;">
-			<br><br>
+			<br/><br/>
 			<span class="MAINAV">{$message}</span>
 		</div>
 {/if}

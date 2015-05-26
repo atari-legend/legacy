@@ -19,20 +19,20 @@
 <table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
 <tr>
 	<td>
-		Click modify, to change name or make subcategory of the category<br>
-		Click delete to remove the category<br>
-		<br>
+		Click modify, to change name or make subcategory of the category<br/>
+		Click delete to remove the category<br/>
+		<br/>
 		<fieldset class="category_set_noGrave">
 		<legend class="links_legend">Categories in Archive</legend>
 	
 		{foreach from=$category item=line}
 		<img src="../templates/0/images/e.gif" alt="" width="{$line.category_indent}" height="1" border="0">{$line.category_name} :: 
-	 	<a href="../links/link_cat_mod.php?category_id={$line.category_id}" class="MAINNAV">Modify</a> :: <a href="link_cat_del.php?category_id={$line.category_id}" class="MAINNAV">Delete</a> :: ({$line.category_count} links)<br>
+	 	<a href="../links/link_cat_mod.php?category_id={$line.category_id}" class="MAINNAV">Modify</a> :: <a href="link_cat_del.php?category_id={$line.category_id}" class="MAINNAV">Delete</a> :: ({$line.category_count} links)<br/>
 		{/foreach}
 
 </fieldset> 
 
-<br>
+<br/>
 
 	<form action="../links/db_links.php" method="post" name="insertcat" id="insertcat">
 	<input type="text" name="newcat">

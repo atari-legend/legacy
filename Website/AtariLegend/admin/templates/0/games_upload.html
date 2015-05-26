@@ -69,8 +69,8 @@ function delete_download(id, game_id)
 		<tr>
 			<td colspan="4">
 				<a href="{$line.filepath}.zip" class="MAINNAV">{$line.filename}</a>
-				<br>
-				<br>
+				<br/>
+				<br/>
 			</td>
 		</tr>	
 		<tr>
@@ -212,8 +212,8 @@ function delete_download(id, game_id)
 		
 		<tr>
 			<td colspan="4">
-				<br>
-				<br>
+				<br/>
+				<br/>
 				<input type="hidden" name="game_download_id" value="{$line.game_download_id}">
 				<input type="hidden" name="game_id" value="{$game.game_id}">
 				<input type="button" value="Delete" onClick="delete_download({$line.game_download_id},{$game.game_id});">
@@ -258,7 +258,7 @@ function delete_download(id, game_id)
 <div class="MAINHEADERBAR">
 <div class="MAINHEADING">&nbsp;&nbsp;&nbsp;</div>
 </div>
-<br>
+<br/>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 	<tr>
    		<td colspan="3" valign=top align=center>
@@ -266,11 +266,11 @@ function delete_download(id, game_id)
 		</td>
 	</tr>
 </table>
-<br>
+<br/>
 
 {if isset($message)}
 	<div style="text-align: center;">
-			<br><br>
+			<br/><br/>
 			<span class="MAINAV">{$message}</span>
 		</div>
 {/if}

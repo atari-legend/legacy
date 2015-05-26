@@ -36,26 +36,26 @@ The main game page
 		<fieldset class="game_set">
 		<legend class="links_legend">Games Similar to {$game_info.game_name}</legend>
 			<b>Similar game :</b> 
-			<br>
+			<br/>
 			<select name="game_similar" class="authorSelects2">
 				<option value="-" selected>-</option>
 				{foreach from=$similar_games item=line}
 					<option value="{$line.game_id}">{$line.game_name}</option>
 				{/foreach}			
 			</select>	
-			<br>
+			<br/>
 			<input type="submit" name="valider" value="Add">
 			<input type="hidden" name="action" value="add_game_similar">	
 			<input type="hidden" name="game_id" value="{$game_info.game_id}">	
-			<br>
-			<br>
+			<br/>
+			<br/>
 			{if $nr_similar <> 0}
 				<b>Current Similar games</b>
-				<br>
-				<br>
+				<br/>
+				<br/>
 				{foreach from=$similar item=line}
 					<a href="../games/games_detail.php?game_id={$line.game_id}" class="MAINNAV">{$line.game_name}</a> - <b><a href="../games/db_games_similar.php?game_similar_id={$line.game_similar_id}&action=delete_similar&game_id={$game_info.game_id}" class="MAINNAV">delete</a></b> 
-					<br>
+					<br/>
 				{/foreach}
 			{/if}
 		</fieldset>
@@ -63,8 +63,8 @@ The main game page
 			</td>
 		</tr>
 		</table>
-		<br>
-		<br>
+		<br/>
+		<br/>
 	<a href="../games/games_detail.php?game_id={$game_info.game_id}" class="MAINNAV">Back to Detail</a>
 	</td>
 </tr>
@@ -75,7 +75,7 @@ The main game page
 
 {if isset($message)}
 	<div style="text-align: center;">
-			<br><br>
+			<br/><br/>
 			<span class="MAINAV">{$message}</span>
 		</div>
 {/if}

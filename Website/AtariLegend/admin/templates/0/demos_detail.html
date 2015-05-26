@@ -99,16 +99,16 @@ function add_author()
 					{foreach from=$demo_crew item=line}
 						<input type="checkbox" name="demo_crew_id[]" value="{$line.crew_id}">
 					  		<a href="../crew/crew_search.php?crew_select={$line.crew_id}&crewsearch={$line.crew_name}&action=main" class="MAINNAV">{$line.crew_name}</a>				
-					  	<br>
-					  	<br>
+					  	<br/>
+					  	<br/>
 					{/foreach}
 					{/if}	
 					{if isset($demo_crew_nr) and $demo_crew_nr == 1} 				
 						<img src="../templates/0/images/arrow_ltr.gif" alt="" width="38" height="22" border="0">		
 						<input type="button" value="Delete" onclick="delete_crew()">
 					{/if}
-					<br>
-					<br>
+					<br/>
+					<br/>
 					<select name="crew_id_select" class="authorSelects">
 					{foreach from=$crew item=line}
 						<option value="{$line.crew_id}">{$line.crew_name}</option>
@@ -133,30 +133,30 @@ function add_author()
 					{foreach from=$demo_author item=line}
 						<input type="checkbox" name="demo_author_id[]" value="{$line.demo_author_id}">
 					  		<a href="../individuals/individuals_edit.php?ind_id={$line.ind_id}" class="MAINNAV">{$line.ind_name}</a> <b>({$line.auhthor_type_info})</b>
-					  	<br>
-					  	<br>
+					  	<br/>
+					  	<br/>
 					{/foreach}
 					{/if}
 					{if isset($demo_author_nr) and $demo_author_nr == 1} 
 				 		<img src="../templates/0/images/arrow_ltr.gif" alt="" width="38" height="22" border="0">		
 				 		<input type="button" value="Delete" onclick="delete_author()">
 					{/if}
-					<br>
-					<br>
+					<br/>
+					<br/>
 					<select name="ind_id" class="authorSelects">
 					{foreach from=$individuals item=line}
 						<option value="{$line.ind_id}">{$line.ind_name}</option>
 					{/foreach}
 					</select>
 					<b>Name</b>		
-					<br>
+					<br/>
 					<select name="author_type_id" class="authorSelects">
 					{foreach from=$author_types item=line}
 						<option value="{$line.author_type_id}">{$line.author_type}</option>
 					{/foreach}
 					</select>
 					<b>Job</b>		
-					<br><br>
+					<br/><br/>
 					<input type="hidden" name="demo_id" value="{$demo_id}">	
 					<input type="button" value="Add" onclick="add_author()">
 				</td>
@@ -252,7 +252,7 @@ function add_author()
 			</td>
 			<td width="25%" align="left">
 				<b>Category</b>
-				<br>
+				<br/>
 				<select name="category[]" multiple size="8">
 				{foreach from=$cat item=line}
 					<option value="{$line.cat_id}" {$line.cat_selected}>{$line.cat_name}</option>
@@ -262,7 +262,7 @@ function add_author()
 		</tr>
 		<tr>
 			<td width="100%" align="left" colspan="3">
-				<br><br>
+				<br/><br/>
 				<input type="submit" name="valider" value="Modify">
 				<input type="button" name="delete" value="Delete" onClick="deletedemo({$demo_id}); return false;">	
 				<input type="hidden" name="action" value="modify_demo">	
@@ -289,21 +289,21 @@ function add_author()
 					<b>Demo AKA :</b> <input type="text" name="demo_aka"><input type="submit" name="valider" value="Add">
 					<input type="hidden" name="action" value="demo_aka">	
 					<input type="hidden" name="demo_id" value="{$demo_id}">	
-					<br>
-					<br>
+					<br/>
+					<br/>
 					{if $nr_aka <> 0}
 					<b>Current AKA</b>
-					<br>
+					<br/>
 						{foreach from=$aka item=line}
 							<a href="../demos/demos_detail.php?demo_id={$line.demo_id}" class="MAINNAV">{$line.demo_aka_name}</a> - <b><a href="../demos/db_demos.php?demo_aka_id={$line.demo_aka_id}&action=delete_aka&demo_id={$line.demo_id}" class="MAINNAV">delete</a></b> 
-							<br>
+							<br/>
 						{/foreach}
 					{/if}
-					<br>
-					<br>
-					<b><a href="../demos/demos_upload.php?demo_id={$demo_info.demo_id}" class="MAINNAV">Add file download</a></b><br>
-				  	<b><a href="../demos/demos_screenshot_add.php?demo_id={$demo_info.demo_id}&demo_name={$demo_info.demo_name}" class="MAINNAV">Add screenshots</a></b><br>
-					<br>
+					<br/>
+					<br/>
+					<b><a href="../demos/demos_upload.php?demo_id={$demo_info.demo_id}" class="MAINNAV">Add file download</a></b><br/>
+				  	<b><a href="../demos/demos_screenshot_add.php?demo_id={$demo_info.demo_id}&demo_name={$demo_info.demo_name}" class="MAINNAV">Add screenshots</a></b><br/>
+					<br/>
 					<b><a href="../administration/construction.php" class="MAINNAV">Moderate comments</a></b>
 				</td>
 			</tr>
@@ -317,8 +317,8 @@ function add_author()
 			<table width="100%">
 			<tr>
 				<td width="33%" align="center">	
-					Nr of Screenshots - {$nr_screenshots}<br>
-					Nr of music files - {$nr_music}<br>
+					Nr of Screenshots - {$nr_screenshots}<br/>
+					Nr of music files - {$nr_music}<br/>
 				</td>
 			</tr>
 			</table>
@@ -329,16 +329,16 @@ function add_author()
 <div class="MAINHEADERBAR">
 <div class="MAINHEADING">&nbsp;&nbsp;&nbsp;</div>
 </div>
-<br>
+<br/>
 <div style="text-align: center;">
-			<br><br>
+			<br/><br/>
 			<span class="MAINAV"><b><a href="../demos/demos_main.php" class="MAINNAV">back</a></b></span>
 		</div>
-<br>
+<br/>
 
 {if isset($message)}
 	<div style="text-align: center;">
-			<br><br>
+			<br/><br/>
 			<span class="MAINAV">{$message}</span>
 		</div>
 {/if}

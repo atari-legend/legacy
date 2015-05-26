@@ -30,7 +30,7 @@ function coverdelete(JSmagazine_issue_id)
 	<td>
 	
 		{if $magazine.scan eq "1"}
-		 coverscan preview<br><br>
+		 coverscan preview<br/><br/>
 		<img src="../includes/show_image.php?file={$magazine.magazine_image}&resize=null,null,null,null&crop=null,null,null,null" alt="" border="0">
 		<table>
 			<tr>
@@ -41,22 +41,22 @@ function coverdelete(JSmagazine_issue_id)
 		</table>
 
 		{else}
-		 No coverscan has been uploaded, please upload one.<br>
-		<br>
+		 No coverscan has been uploaded, please upload one.<br/>
+		<br/>
 		
 		
-		<br>
+		<br/>
 		
 		<fieldset class="category_set_noGrave">
 	<legend class="links_legend">New Magazine.</legend>
-	<br>
+	<br/>
 	<form method="post" enctype="multipart/form-data" action="../magazine/db_magazine.php" name="magazinecoverscan">
 	
 	Coverscan: <input type="file" name="coverscan" accept="image/jpeg" class="gamesearchInputs">
 	<input type="hidden" name="action" value="coverscan_upload">
 	<input type="hidden" name="magazine_issue_id" value="{$magazine.magazine_issue_id}">
 	<input type='submit' value='Upload'>
-	</form> <br>
+	</form> <br/>
 
 </fieldset>
 		
@@ -65,7 +65,7 @@ function coverdelete(JSmagazine_issue_id)
 
  
 		{/if}	
-<br>
+<br/>
 
 <a href="../magazine/magazine_edit.php?magazine_id={$magazine.magazine_id}" class="MAINNAV">Back</a>
 

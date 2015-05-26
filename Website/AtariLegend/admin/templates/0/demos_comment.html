@@ -49,8 +49,8 @@ function commentdelete(JScomID,JSusers_id)
 <table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
 <tr>
 	<td align="center">
-		{if $links.view eq "users_comments"}<a href="../demos/demos_comment.php?v_counter={$links.c_counter}" class="MAINNAV">Sort by latest comments</a><br>{/if}
-		<br>
+		{if $links.view eq "users_comments"}<a href="../demos/demos_comment.php?v_counter={$links.c_counter}" class="MAINNAV">Sort by latest comments</a><br/>{/if}
+		<br/>
 		
 		
 		{foreach from=$comments item=line}
@@ -64,20 +64,20 @@ function commentdelete(JScomID,JSusers_id)
 				<table cellspacing="0" cellpadding="0" border="0" width="95%" style="border: solid 1px #b2b2b2; background-color:#E9E9E9;">
 				<tr bgcolor="#EFEFEF">
 					<td class="main_text" width="150" valign="top" style="line-height: 13px; border-right: solid 1px #b2b2b2;">
-					<br>
-					Joined: {$line.user_joindate}<br>
-					<a href="../demos/demos_comment.php?c_counter={$links.v_counter}&users_id={$line.users_id}&view=users_comments" class="MAINNAV">Demo Comments: {$line.user_comment_nr}</a><br>
+					<br/>
+					Joined: {$line.user_joindate}<br/>
+					<a href="../demos/demos_comment.php?c_counter={$links.v_counter}&users_id={$line.users_id}&view=users_comments" class="MAINNAV">Demo Comments: {$line.user_comment_nr}</a><br/>
 					Demo Submissions: {$line.usersubmit_number}
 					
 					</td>
 					<td class="main_text" valign="top" style="line-height: 13px;">
-						<br>
-						<br>
+						<br/>
+						<br/>
 						{if $line.image != "../../../images/demo_screenshots/."}<span style="float:right;"><a href="../demos/demos_detail.php?demo_id={$line.demo_id}"><img src="../includes/showimage.php?img={$line.image}&w=120&shadow=1&bgcolour=EFEFEF" alt="{$line.demo_name}" border="0"></a></span>{/if}
 						{$line.comment}
-						<br>
-						<br>
-						<br>		
+						<br/>
+						<br/>
+						<br/>		
 					</td>
 				</tr>
 				</table>	
@@ -106,11 +106,11 @@ function commentdelete(JScomID,JSusers_id)
 					</td>		
 				</tr>
 				</table>
-				<br>
+				<br/>
 				{/foreach}
 
 				
-				<br>
+				<br/>
 	<table width="100%" border="0" cellspacing="0" cellpadding="0">
 	<tr>
     	<td width="50%" align=center>
