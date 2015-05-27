@@ -2,11 +2,10 @@
 {
 	background: #DBD7D1;
 	font-family: "Lucida Grande", Verdana, Helvetica, Arial, sans-serif;
-	font-size: 80%;
-	width: 1280px;	
+	font-size: 100%;
+	width: 100%;
 	max-width: 1280px;
-	margin-left:auto;
-	margin-right:auto;
+	margin: auto;
 }
 
 .leftcell {
@@ -17,7 +16,7 @@
 
 .rightcell {
 
-	width: 1001px;
+	width: 1039px;
 	float: left;
 }
 
@@ -29,7 +28,7 @@
 	font-weight: 600;
 	height: 20px;
 	background-attachment: inherit;
-	background-repeat: repeat-x;
+	background-repeat: repeat;
 	font-size : 12px;
 
 	padding-top:0px;
@@ -294,13 +293,13 @@ a.links_links:hover
 .links_links
 {
     COLOR: black;
-    FONT-SIZE: 10px;
+    FONT-SIZE: 11px;
 	TEXT-DECORATION: none;
 }
 
 .main_text
 {
-	font-size: 10px;
+	font-size: 11px;
 	color: #000000;
 	padding: 5px;
 }	
@@ -427,7 +426,7 @@ background-color: white;
 .comment_box {
 
 	display:table;
-	font-size : 10px;
+	font-size : 11px;
 	border: solid 1px #b2b2b2;
 	margin: 0px;
 	margin-left:auto;
