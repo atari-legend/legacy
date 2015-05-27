@@ -25,6 +25,17 @@
 		<title> Atari Legend | Legends Never Die</title>
 		<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0" />
 		<link href="../templates/2/css/style.css" type="text/css" rel="stylesheet">
+		<script type='text/javascript' src='../templates/2/js/jquery-1.11.2.js'></script> <!-- main jquery stuff -->
+		<script type="text/javascript"> <!-- script needed for the side menu -->
+			//<![CDATA[ 
+			$(window).load(function(){
+			  $("[data-toggle]").click(function() {
+				var toggle_el = $(this).data("toggle");
+				$(toggle_el).toggleClass("open-sidebar");
+			  });
+			});
+			//]]> 
+		</script>
 	</head>
 	<body id="body">
 		<div id="wrapper">
@@ -32,21 +43,121 @@
 				<div id="top_background">
 					<!-- This is the side menu only visible for smartphones (max resolution 480pc)-->				
 					<div class="container" style="position: fixed;">
-					  <div id="sidebar">
-						  <ul>
-							<li><a href="#" title="Games" class="top_button"><button type="button" class="topbutton" id="games_side">GAMES</button></a></li>
-							<li><a href="#" title="Menus" class="top_button"><button type="button" class="topbutton" id="menus_side">MENUS</button></a></li>
-							<li><a href="#" title="Demos" class="top_button"><button type="button" class="topbutton" id="demos_side">DEMOS</button></a></li>
-							<li><a href="#" title="Links" class="top_button"><button type="button" class="topbutton" id="links_side">LINKS</button></a></li>
-							<li><a href="#" title="About" class="top_button"><button type="button" class="topbutton" id="about_side">ABOUT</button></a></li>
-						  </ul>
-					  </div>
-					  <div class="main-content">
-						  <button type="button" href="#" data-toggle=".container" id="sidebar-toggle" style="border:none; cursor: pointer;">
-							  <span class="bar"></span>
-							  <span class="bar"></span>
-							  <span class="bar"></span>
-					  </div>
+					   <div id="sidebar">
+						    <div class="skin-wrap">
+								<nav class="skin-menu">
+								  <ul class="clearfix">
+									<li><a href="#" title="Games" class="top_button"><button type="button" class="topbutton" id="games_side">GAMES</button></a>
+										<ul class="sub-menu">
+											<li><a href="#" title="Game editor" class="top_button"><button type="button" class="topbutton" id="game_editor">GAME EDITOR</button></li>
+											<li><a href="#" title="Game comments" class="top_button"><button type="button" class="topbutton" id="game_comments">GAME COMMENTS</button></li>
+											<li><a href="#" title="Game series" class="top_button"><button type="button" class="topbutton" id="game_series">GAME SERIES</button></li>
+											<li><a href="#" title="Game music" class="top_button"><button type="button" class="topbutton" id="game_music">GAME MUSIC</button></li>
+											<li><a href="#" title="Game submissions" class="top_button"><button type="button" class="topbutton" id="game_submissions">GAME SUBMISSIONS</button></li>
+											<li><a href="#" title="Game_reviews" class="top_button"><button type="button" class="topbutton" id="game_reviews">REVIEWS</button></li>
+											<li><a href="#" title="submitted_reviews" class="top_button"><button type="button" class="topbutton" id="submitted_reviews">REVIEW SUBMISSIONS</button></li>
+											<li><a href="#" title="Individuals" class="top_button"><button type="button" class="topbutton" id="individuals">INDIVIDIUALS</button></li>
+											<li><a href="#" title="Author types" class="top_button"><button type="button" class="topbutton" id="author_types">AUTHOR TYPES</button></li>
+											<li><a href="#" title="Companies" class="top_button"><button type="button" class="topbutton" id="companies">COMPANIES</button></li>
+											<li><a href="#" title="Company logo" class="top_button"><button type="button" class="topbutton" id="company_logo">COMPANY LOGO</button></li>
+											<li><a href="#" title="Interviews" class="top_button"><button type="button" class="topbutton" id="interviews">INTERVIEWS</button></li>
+											<li><a href="#" title="Interviews help" class="top_button"><button type="button" class="topbutton" id="interviews_help">INTERVIEWS HELP</button></li>
+										</ul>
+									</li>
+								  </ul>
+								</nav>
+						    </div>
+							 <div class="skin-wrap">
+								<nav class="skin-menu">
+								  <ul class="clearfix">
+									<li><a href="#" title="Menus" class="top_button"><button type="button" class="topbutton" id="menus_side">MENUS</button></a>
+										<ul class="sub-menu">
+											<li><a href="#" title="Menu editor" class="top_button"><button type="button" class="topbutton" id="menu_editor">MENU EDITOR</button></li>
+											<li><a href="#" title="Menu comments" class="top_button"><button type="button" class="topbutton" id="menu_comments">MENU COMMENTS</button></li>
+											<li><a href="#" title="Menu submissions" class="top_button"><button type="button" class="topbutton" id="menu_submissions">MENU SUBMISSIONS</button></li>
+											<li><a href="#" title="Individuals" class="top_button"><button type="button" class="topbutton" id="individuals">INDIVIDIUALS</button></li>
+											<li><a href="#" title="Author types" class="top_button"><button type="button" class="topbutton" id="author_types">AUTHOR TYPES</button></li>
+											<li><a href="#" title="Crew editor" class="top_button"><button type="button" class="topbutton" id="crew_editor">CREW EDITOR</button></li>
+										</ul>
+									</li>
+								  </ul>
+								</nav>
+						    </div>
+							 <div class="skin-wrap">
+								<nav class="skin-menu">
+								  <ul class="clearfix">
+									<li><a href="#" title="Demos" class="top_button"><button type="button" class="topbutton" id="demos_side">DEMOS</button></a>
+										<ul class="sub-menu">
+											<li><a href="#" title="Demo editor" class="top_button"><button type="button" class="topbutton" id="demo_editor">DEMO EDITOR</button></li>
+											<li><a href="#" title="Demo comments" class="top_button"><button type="button" class="topbutton" id="demo_comments">DEMO COMMENTS</button></li>
+											<li><a href="#" title="Demo music" class="top_button"><button type="button" class="topbutton" id="demo_music">DEMO MUSIC</button></li>
+											<li><a href="#" title="Demo submissions" class="top_button"><button type="button" class="topbutton" id="demo_submissions">DEMO SUBMISSIONS</button></li>
+											<li><a href="#" title="Individuals" class="top_button"><button type="button" class="topbutton" id="individuals">INDIVIDIUALS</button></li>
+											<li><a href="#" title="Author types" class="top_button"><button type="button" class="topbutton" id="author_types">AUTHOR TYPES</button></li>
+											<li><a href="#" title="Crew editor" class="top_button"><button type="button" class="topbutton" id="crew_editor">CREW EDITOR</button></li>
+											<li><a href="#" title="Interviews" class="top_button"><button type="button" class="topbutton" id="interviews">INTERVIEWS</button></li>
+											<li><a href="#" title="Interviews help" class="top_button"><button type="button" class="topbutton" id="interviews_help">INTERVIEWS HELP</button></li>
+										</ul>
+									</li>
+								  </ul>
+								</nav>
+						    </div>
+							<div class="skin-wrap">
+								<nav class="skin-menu">
+								  <ul class="clearfix">
+									<li><a href="#" title="Users" class="top_button"><button type="button" class="topbutton" id="users_side">USERS</button></a>
+										<ul class="sub-menu">
+											<li><a href="#" title="User admin" class="top_button"><button type="button" class="topbutton" id="user_admin">USER ADMIN</button></li>
+										</ul>
+									</li>
+								  </ul>
+								</nav>
+						    </div>
+							<div class="skin-wrap">
+								<nav class="skin-menu">
+								  <ul class="clearfix">
+									<li><a href="#" title="Admin" class="top_button"><button type="button" class="topbutton" id="admin_side">NEWS</button></a>
+										<ul class="sub-menu">
+											<li><a href="#" title="Add news" class="top_button"><button type="button" class="topbutton" id="add_news">ADD NEWS</button></li>
+											<li><a href="#" title="Approve news" class="top_button"><button type="button" class="topbutton" id="approve_news">APPROVE NEWS</button></li>
+											<li><a href="#" title="Submitted news" class="top_button"><button type="button" class="topbutton" id="submitted_news">SUBMITTED NEWS</button></li>
+										</ul>
+									</li>
+								  </ul>
+								</nav>
+						    </div>
+							<div class="skin-wrap">
+								<nav class="skin-menu">
+								  <ul class="clearfix">
+									<li><a href="#" title="Other" class="top_button"><button type="button" class="topbutton" id="other_side">OTHER</button></a>
+										<ul class="sub-menu">
+											<li><a href="#" title="Statistics" class="top_button"><button type="button" class="topbutton" id="Statistics">STATISTICS</button></li>
+											<li><a href="#" title="Did you know" class="top_button"><button type="button" class="topbutton" id="did_you_know">DID YOU KNOW</button></li>
+											<li><a href="#" title="Trivia screenshots" class="top_button"><button type="button" class="topbutton" id="trivia_screenshots">TRIVIA SCREENSHOTS</button></li>
+											<li><a href="#" title="Trivie quotes" class="top_button"><button type="button" class="topbutton" id="trivia_quotes">TRIVIA QUOTES</button></li>
+											<li><a href="#" title="Add links" class="top_button"><button type="button" class="topbutton" id="add_links">ADD LINKS</button></li>
+											<li><a href="#" title="Validate links" class="top_button"><button type="button" class="topbutton" id="validate_links">VALIDATE LINKS</button></li>
+											<li><a href="#" title="Modify links" class="top_button"><button type="button" class="topbutton" id="modify_links">MODIFY LINKS</button></li>
+											<li><a href="#" title="Link categories" class="top_button"><button type="button" class="topbutton" id="link_categories">LINK CATEGORIES</button></li>
+											<li><a href="#" title="Articles" class="top_button"><button type="button" class="topbutton" id="articles">ARTICLES</button></li>
+											<li><a href="#" title="Article types" class="top_button"><button type="button" class="topbutton" id="article_types">ARTICLE TYPES</button></li>
+											<li><a href="#" title="Screenshots" class="top_button"><button type="button" class="topbutton" id="screenshots">SCREENSHOTS</button></li>
+											<li><a href="#" title="Add magazines" class="top_button"><button type="button" class="topbutton" id="add_magazines">ADD MAGAZINES</button></li>
+											<li><a href="#" title="Manage issues" class="top_button"><button type="button" class="topbutton" id="manage_issues">MANAGE ISSUES</button></li>
+											<li><a href="#" title="Forum" class="top_button"><button type="button" class="topbutton" id="forum">FORUM</button></li>
+											<li><a href="#" title="Log out" class="top_button"><button type="button" class="topbutton" id="logout">LOG OUT</button></li>
+										</ul>
+									</li>
+								  </ul>
+								</nav>
+						    </div>
+					   </div>
+					   <div class="main-content">
+						    <button type="button" href="#" data-toggle=".container" id="sidebar-toggle" style="border:none; cursor: pointer;">
+								  <span class="bar"></span>
+								  <span class="bar"></span>
+								  <span class="bar"></span>
+					   </div>
 					</div>		
 					<!-- end of side menu-->
 					<div id="left">
@@ -143,8 +254,7 @@
 			{block name=main_body}{/block}
 			<footer class="footer">
 				<div class="footer_logo">
-					<br><br><br>
-					
+					<br><br><br>				
 					<h3>&copy; copyright 2004 - {'Y'|date} </h3>
 				</div>
 			</footer>

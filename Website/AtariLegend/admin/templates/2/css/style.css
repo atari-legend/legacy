@@ -25,9 +25,6 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section { 
 	display: block;
 }
-
-.container { display: none; }
-
 	
 /*---------------------------------------------------------- 
  Main site width
@@ -222,6 +219,7 @@ footer, header, hgroup, menu, nav, section {
 /*---------------------------------------------------------- 
  Menu
 ------------------------------------------------------------ */
+
 /* ---------the side menu--------*/
 
 /* the side menu for smartphones, tablets and old (laptop) screens */
@@ -303,7 +301,7 @@ footer, header, hgroup, menu, nav, section {
     }
 	
     .main-content #sidebar-toggle {
-        background: #01b5b5;
+        background: #161c71;
         border-radius: 3px;
         display: block;
         position: absolute;
@@ -324,29 +322,65 @@ footer, header, hgroup, menu, nav, section {
          margin-bottom: 0;   
     }
 
+	
+	/*-----some code for the skin submenu-------*/
+	
+	.clearfix:after {
+		display:block;
+		clear:both;
+	}
+
+	/*----- Menu Outline -----*/
+	.skin-wrap {
+		width:100%;
+	}
+	 
+	.skin-menu {
+		width:100%;
+		margin:0px auto;
+	}
+	 
+	.skin-menu li {
+		margin:0px;
+		list-style:none;
+	}
+	 
+	.skin-menu a {
+		transition:all linear 0.15s;
+		color:#000000;
+	}
+	 
+	 
+	/*----- Top Level -----*/
+	.skin-menu > ul > li {
+		float:left;
+		display:inline-block;
+		position:relative;
+	}
+	 
+	/*----- Bottom Level -----*/
+	.skin-menu li:hover .sub-menu {
+		z-index:1;
+		opacity:1;
+	}
+
+	.sub-menu {
+		width:75%;
+		padding:5px 0px;
+		position:absolute;
+		top:100%;
+		left:30px;
+		z-index:-1;
+		opacity:0;
+		transition:opacity linear 0.15s;
+		box-shadow:0px 2px 3px rgba(0,0,0,0.2);
+	}	 
+	
 /* 'position' is needed for smartphone view else the logo is covered by the sidemenu button */
 @media screen and (max-width: 480px) { 
 	.main-content {position: relative;}
 	.main-content #sidebar-toggle {position: relative;}
 	}	
-
-/* resizing of buttons is done to get al info on screen in landscape for phones and tablets*/
-@media screen and (max-width: 640px) { 
-	#games_side{height: 40px; width: 113px; font-size: 14px;}
-	#menus_side{height: 40px; width: 113px; font-size: 14px;}
-	#demos_side{height: 40px; width: 113px; font-size: 14px;}
-	#about_side{height: 40px; width: 113px; font-size: 14px;}
-	#links_side{height: 40px; width: 113px; font-size: 14px;}
-	#skin_side{height: 37px; width: 113px; font-size: 14px;}
-	#search_side {height: 40px; width: 25px;}
-	#search_text_side{height: 20px; width: 70px;}
-	#searchbutton_side{height: 38px; width: 87px;}
-	.container.open-sidebar { left: 113px;}
-    #sidebar { left: -113px;
-        width: 113px;
-	}
-	.sub-menu li { font-size:13px; }
-}
 
 /* for the lower resolutions, we don't have the menu bar below the top */ 
 @media screen and (max-width: 1279px) {  	
@@ -356,18 +390,39 @@ footer, header, hgroup, menu, nav, section {
 	#users { display: none; }
 	#admin { display: none; }
 	#other { display: none; }
+	.container.open-sidebar { left: 215px;}
+	#sidebar { left: -215px;
+        width: 215px;
+	}
+	.sub-menu li { font-size:20px; }
+}
+
+/* resizing of buttons is done to get al info on screen in landscape for phones and tablets*/
+@media screen and (max-width: 640px) { 
+	#games_side{height: 40px; width: 113px; font-size: 14px;}
+	#menus_side{height: 40px; width: 113px; font-size: 14px;}
+	#demos_side{height: 40px; width: 113px; font-size: 14px;}
+	#users_side{height: 40px; width: 113px; font-size: 14px;}
+	#admin_side{height: 40px; width: 113px; font-size: 14px;}
+	#other_side{height: 40px; width: 113px; font-size: 14px;}	
+	.container.open-sidebar { left: 113px;}
+	#sidebar { left: -113px;
+        width: 113px;
+	}
+	.sub-menu li { font-size:13px; }
 }
 
 /* for the high resolutions, we only have the skin switch in the side menu */ 
 @media screen and (min-width: 1280px) {  	
-	#links_side { display: none; }
-	#search_side { display: none; } 
-	#search_text_side{ display: none; } 
 	#games_side { display: none; }
 	#demos_side { display: none; }
-	#about_side { display: none; }
+	#users_side { display: none; }
 	#menus_side { display: none; }
+	#admin_side { display: none; }
+	#other_side { display: none; }
 }
+
+
 
 /* ---------the main menu below top--------*/
 
