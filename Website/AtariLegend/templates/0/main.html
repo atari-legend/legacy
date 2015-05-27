@@ -30,20 +30,22 @@
 		<script type='text/JavaScript' src='../templates/0/js/sha512.js'></script> <!-- log on security script -->
 		<script type='text/JavaScript' src='../templates/0/js/md5.js'></script>  <!-- log on security script -->
         <script type='text/JavaScript' src='../templates/0/js/forms.js'></script> <!-- log on security script -->
-		<script type='text/javascript' src='../templates/0/js/jquery-1.11.2.js'></script> <!-- main jquery stuff -->
-		<script src="../templates/0/js/jquery-2.1.4.min.js" type="text/javascript"></script>
-		<script src="../templates/0/js/jquery-ui.min.js" type="text/javascript"></script>
+		<script src="../templates/0/js/jquery-2.1.4.min.js" type="text/javascript"></script> <!-- main jquery stuff -->
+		<script src="../templates/0/js/jquery-ui.min.js" type="text/javascript"></script> <!-- main jqueryUI stuff -->
 		
-		<script type="text/javascript">
-			$(document).ready(function()
+	<script type="text/javascript"> <!-- script needed for the autocompletion search engine -->
+		$(document).ready(function()
+		{
+			$('#auto').autocomplete(
 			{
-				$('#auto').autocomplete(
-				{
-					source: "../includes/autocomplete.php",
-					minLength: 2
-				});
+				source: "../includes/autocomplete.php",
+				minLength: 2
 			});
-		</script>
+		$(window).resize(function() {
+    		$(".ui-autocomplete").css('display', 'none');
+			});
+		});
+	</script>
 		<script type="text/javascript"> <!-- script needed for the side menu -->
 			//<![CDATA[ 
 			$(window).load(function(){
