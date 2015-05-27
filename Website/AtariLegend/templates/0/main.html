@@ -25,25 +25,25 @@
 		<title> Atari Legend | Legends Never Die</title>
 		<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0" />
 		<link href="../templates/0/css/style.css" type="text/css" rel="stylesheet">
-	<link type="text/css" href="../templates/0/css/jquery-ui.css" rel="Stylesheet" />
+		<link type="text/css" href="../templates/0/css/jquery-ui.css" rel="Stylesheet" />
 		<script type='text/javascript' src='../templates/0/js/respond.min.js'></script> <!-- script needed for the side menu -->
 		<script type='text/JavaScript' src='../templates/0/js/sha512.js'></script> <!-- log on security script -->
 		<script type='text/JavaScript' src='../templates/0/js/md5.js'></script>  <!-- log on security script -->
         <script type='text/JavaScript' src='../templates/0/js/forms.js'></script> <!-- log on security script -->
 		<script type='text/javascript' src='../templates/0/js/jquery-1.11.2.js'></script> <!-- main jquery stuff -->
-	<script src="../templates/0/js/jquery-2.1.4.min.js" type="text/javascript"></script>
-	<script src="../templates/0/js/jquery-ui.min.js" type="text/javascript"></script>
-	
-	<script type="text/javascript">
-		$(document).ready(function()
-		{
-			$('#auto').autocomplete(
+		<script src="../templates/0/js/jquery-2.1.4.min.js" type="text/javascript"></script>
+		<script src="../templates/0/js/jquery-ui.min.js" type="text/javascript"></script>
+		
+		<script type="text/javascript">
+			$(document).ready(function()
 			{
-				source: "../includes/autocomplete.php",
-				minLength: 2
+				$('#auto').autocomplete(
+				{
+					source: "../includes/autocomplete.php",
+					minLength: 2
+				});
 			});
-		});
-	</script>
+		</script>
 		<script type="text/javascript"> <!-- script needed for the side menu -->
 			//<![CDATA[ 
 			$(window).load(function(){
@@ -63,11 +63,11 @@
 					<div class="container" style="position: fixed;">
 					  <div id="sidebar">
 						  <ul>
-						<li><a href="#" title="Games" class="top_button"><button type="button" class="topbutton" id="games_side">GAMES</button></a></li>
-						<li><a href="#" title="Menus" class="top_button"><button type="button" class="topbutton" id="menus_side">MENUS</button></a></li>
-						<li><a href="#" title="Demos" class="top_button"><button type="button" class="topbutton" id="demos_side">DEMOS</button></a></li>
-						<li><a href="#" title="Links" class="top_button"><button type="button" class="topbutton" id="links_side">LINKS</button></a></li>
-						<li><a href="#" title="About" class="top_button"><button type="button" class="topbutton" id="about_side">ABOUT</button></a></li>
+							<li><a href="#" title="Games" class="top_button"><button type="button" class="topbutton" id="games_side">GAMES</button></a></li>
+							<li><a href="#" title="Menus" class="top_button"><button type="button" class="topbutton" id="menus_side">MENUS</button></a></li>
+							<li><a href="#" title="Demos" class="top_button"><button type="button" class="topbutton" id="demos_side">DEMOS</button></a></li>
+							<li><a href="#" title="Links" class="top_button"><button type="button" class="topbutton" id="links_side">LINKS</button></a></li>
+							<li><a href="#" title="About" class="top_button"><button type="button" class="topbutton" id="about_side">ABOUT</button></a></li>
 						  </ul>
 						  <ul id="search_ul">
 							  <li id="searchbutton_side"><input id="search_text_side" type="text" name="search_text" maxlength="11" /></li>
