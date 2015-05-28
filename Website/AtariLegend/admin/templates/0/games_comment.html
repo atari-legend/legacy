@@ -1,6 +1,6 @@
 {extends file='head.html'}
 {block name=head}
-<script language="JavaScript" type="text/javascript">
+<script type="text/javascript">
 function commentdelete(JScomID,JSusers_id)
 { 
 	
@@ -75,7 +75,7 @@ function commentdelete(JScomID,JSusers_id)
 					
 						{if isset($line.image) and $line.image != ''}
 								<a href="../games/games_detail.php?game_id={$line.game_id}">
-									<img src="../includes/show_image.php?file={$line.image}&amp;resize=160,null,null,null" alt="{$line.game}" border="0" style="float:right;"/>
+									<img src="../includes/show_image.php?file={$line.image}&amp;resize=160,null,null,null" alt="{$line.game}" style="float:right;"/>
 								</a>
 						{/if}
 						{$line.comment}
@@ -90,13 +90,13 @@ function commentdelete(JScomID,JSusers_id)
 					
 						{if $line.email != ''}
 							<a href="mailto:{$line.email}?subject=Comment of {$line.game} at Atari Legend">
-							<img src="../templates/0/icons/icon_email.gif" alt="Email User" title="Email User" width="59" height="18" border="0"/>
+							<img src="../templates/0/icons/icon_email.gif" alt="Email User" title="Email User" width="59" height="18"/>
 							</a>{/if}
 							<a href="../games/games_comment_edit.php?game_user_comments_id={$line.game_user_comments_id}{$links.users_comments}&amp;v_counter={$links.v_counter}">
-							<img src="../templates/0/icons/icon_edit.gif" alt="Edit Comment" title="Edit Comment" width="59" height="18" border="0"/>
+							<img src="../templates/0/icons/icon_edit.gif" alt="Edit Comment" title="Edit Comment" width="59" height="18"/>
 							</a>
 							<a  onClick="commentdelete({$line.comment_id},{$line.users_id})" style="cursor: pointer;">
-							<img src="../templates/0/icons/icon_delete.gif" alt="Delete Comment" title="Delete Comment" width="16" height="18" border="0"/>
+							<img src="../templates/0/icons/icon_delete.gif" alt="Delete Comment" title="Delete Comment" width="16" height="18"/>
 							</a>	
 					
 					
@@ -112,20 +112,25 @@ function commentdelete(JScomID,JSusers_id)
 
 				
 				<br/>
-	<table width="100%" border="0" cellspacing="0" cellpadding="0">
-	<tr>
-    	<td width="50%" align=center>
+				
+			<div>
+	
 			{if $links.linkback != ''}
+			<div style="float:left;margin-left:150px;">
 			<a href="../games/games_comment.php{$links.linkback}" class="MAINNAV">Previous page</a>
+			</div>	
 			{/if}
-		</td>
-		<td width="50%" align=center>
+	
+			
+				
+	
 			{if $links.linknext != ''}
+			<div style="float:right;margin-right:150px;">
 			<a href="../games/games_comment.php{$links.linknext}" class="MAINNAV">Next page</a>
+			</div>
 			{/if}
-		</td>
-	</tr>
-	</table>
+	
+
 				
 </div>
 {/block}
