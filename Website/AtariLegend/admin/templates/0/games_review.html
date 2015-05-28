@@ -16,10 +16,8 @@ The main game reviw
 ************************************************************************************************
 *}
 {extends file='head.html'}
+{block name=title}Add/Edit a game review entry{/block}
 {block name=body}
-<div class="MAINHEADERBAR">
-<div class="MAINHEADING">&nbsp;Add/Edit a game review entry</div>
-</div>
 
 <div class="NEWMAINCELL" style="text-align:center;">
 	<fieldset class="game_set">
@@ -84,8 +82,6 @@ The main game reviw
 			<span class="MAINAV">{$message}</span>
 		</div>
 {/if}
-
-
 	<table class="table_game_list">
 			<tr>
 				<th width="40%">Game Name</th>
@@ -108,9 +104,6 @@ The main game reviw
 			</tr>
 		</table>
 		<br/>
-</div>
-<div class="MAINHEADERBAR">
-<div class="MAINHEADING">&nbsp;&nbsp;&nbsp;</div>
 </div>
 <br/>
 {if isset($message)}
