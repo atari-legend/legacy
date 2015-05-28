@@ -34,10 +34,8 @@ function delete_screenshot(screenshot_id, demo_id)
 }
 </script>
 {/block}
+{block name=title}Demo screenshots - <a href="../demos/demos_detail.php?demo_id={$demo_id}" class="MAINNAV_WHITE">{$demo_name}</a>{/block}
 {block name=body}	
-<div class="MAINHEADERBAR">
-<div class="MAINHEADING">&nbsp;Demo screenshots - <a href="../demos/demos_detail.php?demo_id={$demo_id}" class="MAINNAV_WHITE">{$demo_name}</a></div>
-</div>
 
 <table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
 <tr>
@@ -94,10 +92,6 @@ function delete_screenshot(screenshot_id, demo_id)
 	</td>
 </tr>
 </table>
-	
-<div class="MAINHEADERBAR">
-<div class="MAINHEADING">&nbsp;&nbsp;&nbsp;</div>
-</div>
 <br/>
 <div style="text-align: center;">
 			<br/>

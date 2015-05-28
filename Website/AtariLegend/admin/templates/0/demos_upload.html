@@ -35,10 +35,8 @@ function delete_download(id, demo_id)
 }
 </script>
 {/block}
+{block name=title}Upload file for <a href="../demos/demos_detail.php?demo_id={$demo.demo_id}" class="MAINNAV_WHITE">{$demo.demo_name}{/block}
 {block name=body}
-<div class="MAINHEADERBAR">
-<div class="MAINHEADING">&nbsp;Upload file for <a href="../demos/demos_detail.php?demo_id={$demo.demo_id}" class="MAINNAV_WHITE">{$demo.demo_name}</a></div>
-</div>
 
 <table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
 <tr>
@@ -252,9 +250,6 @@ function delete_download(id, demo_id)
 </tr>
 </table>
 
-<div class="MAINHEADERBAR">
-<div class="MAINHEADING">&nbsp;&nbsp;&nbsp;</div>
-</div>
 <br/>
 <div style="text-align: center;">
 			<br/>
