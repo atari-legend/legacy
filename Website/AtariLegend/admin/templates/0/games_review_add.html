@@ -16,11 +16,9 @@
 //**************************************************************************************** 
 *}
 {extends file='head.html'}
+{block name=title}Add review - <a href="../games/games_detail.php?game_id={$game.game_id}" class="MAINNAV_WHITE">{$game.game_name}</a>{/block}
 {block name=body}
 <form action="../games/db_games_review.php" method="post" name="post">
-<div class="MAINHEADERBAR">
-<div class="MAINHEADING">&nbsp;Add review - <a href="../games/games_detail.php?game_id={$game.game_id}" class="MAINNAV_WHITE">{$game.game_name}</a></div>
-</div>
 
 <table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
 <tr>
@@ -197,10 +195,7 @@
 	</td>
 </tr>
 </table>
-	
-<div class="MAINHEADERBAR">
-<div class="MAINHEADING">&nbsp;&nbsp;&nbsp;</div>
-</div>
+
 <br/>
 	<div style="text-align: center;">
 			<br/>

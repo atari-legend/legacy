@@ -14,12 +14,13 @@
 //**************************************************************************************** 
 *}
 {extends file='head.html'}
+{block name=title}
+<div style="float:left;">
+Written by {if $review.email != ''}<a href="mailto:{$review.email}?subject=Your review of {$review.game_name} at Atari Legend" class="MAINNAV_WHITE">{$review.user_name}</a>{else}{$review.user_name}{/if}
+</div>
+<div style="float:right;padding-right:5px;">{$review.date}</div>
+{/block}
 {block name=body}
-<div class="MAINHEADERBAR">
-<div class="MAINHEADING" style="float:left;">&nbsp;Written by {if $review.email != ''}<a href="mailto:{$review.email}?subject=Your review of {$review.game_name} at Atari Legend" class="MAINNAV_WHITE">{$review.user_name}</a>{else}{$review.user_name}{/if}
-</div>
-	<div class="MAINHEADING" style="float:right;padding-right:5px;">{$review.date}</div>
-</div>
 
 <table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
 <tr>			
@@ -86,9 +87,7 @@
 		</td>
 	</tr>
 	</table>
-<div class="MAINHEADERBAR">
-<div class="MAINHEADING">&nbsp;&nbsp;&nbsp;</div>
-</div>
+
 </td>
 </tr>
 </table>
