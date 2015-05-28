@@ -17,11 +17,8 @@ The the user stats page
 ************************************************************************************************
 *}
 {extends file='head.html'}
+{block name=title}Statistics for user <a href="mailto:{$user.user_email}" class="MAINNAV_WHITE">{$user.username}</a>{/block}
 {block name=body}
-<div class="MAINHEADERBAR">
-<div class="MAINHEADING">&nbsp;Statistics for user <a href="mailto:{$user.user_email}" class="MAINNAV_WHITE">{$user.username}</a></div>
-</div>
-
 <table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
 <tr>
 	<td colspan="2" align="center">
@@ -138,10 +135,6 @@ The the user stats page
 	</td>
 </tr>
 </table>
-
-<div class="MAINHEADERBAR">
-<div class="MAINHEADING">&nbsp;&nbsp;&nbsp;</div>
-</div>
 <br/>
 	<div style="text-align: center;">
 			<br/>

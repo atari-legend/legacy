@@ -15,10 +15,8 @@ The main individual page
 ************************************************************************************************
 *}
 {extends file='head.html'}
+{block name=title}Add/Edit an individual{/block}
 {block name=body}
-<div class="MAINHEADERBAR">
-<div class="MAINHEADING">&nbsp;Add/Edit an individual</div>
-</div>
 
 <table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
 <tr>
@@ -59,9 +57,6 @@ The main individual page
 	</td>
 </tr>
 </table>
-<div class="MAINHEADERBAR">
-<div class="MAINHEADING">&nbsp;&nbsp;&nbsp;</div>
-</div>
 
 {if isset($message)}
 	<div style="text-align: center;">

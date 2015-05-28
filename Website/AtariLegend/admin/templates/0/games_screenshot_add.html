@@ -36,10 +36,8 @@ function delete_screenshot(screenshot_id, game_id)
 <script src="../templates/0/js/lightbox.min.js"></script>
 <link href="../templates/0/css/lightbox.css" rel="stylesheet" />
 {/block}
+{block name=title}Game screenshots - <a href="../games/games_detail.php?game_id={$game_id}" class="MAINNAV_WHITE">{$game_name}</a>{/block}
 {block name=body}				
-<div class="MAINHEADERBAR">
-<div class="MAINHEADING">&nbsp;Game screenshots - <a href="../games/games_detail.php?game_id={$game_id}" class="MAINNAV_WHITE">{$game_name}</a></div>
-</div>
 
 <table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
 <tr>
@@ -118,17 +116,12 @@ function delete_screenshot(screenshot_id, game_id)
 </tr>
 </table>
 	
-<div class="MAINHEADERBAR">
-<div class="MAINHEADING">&nbsp;&nbsp;&nbsp;</div>
-</div>
+
 <br/>
-<table width="100%" border="0" cellspacing="0" cellpadding="0">
-	<tr>
-   		<td colspan="3" valign=top align=center>
-			<b><a href="../games/games_detail.php?game_id={$game_id}" class="MAINNAV">back</a></b>
-		</td>
-	</tr>
-</table>
+<div style="text-align: center;">
+			<br/>
+			<span class="MAINAV"><b><a href="../games/games_detail.php?game_id={$game_id}" class="MAINNAV">back</a></b></span>
+		</div>
 <br/>
 
 {if isset($message)}

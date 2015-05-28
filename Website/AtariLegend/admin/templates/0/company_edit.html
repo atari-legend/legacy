@@ -53,10 +53,8 @@ function companydelete(comp_id)
 }
 </script>
 {/block}
+{block name=title}Edit {$company.comp_name}{/block}
 {block name=body}
-<div class="MAINHEADERBAR">
-<div class="MAINHEADING">&nbsp;Edit {$company.comp_name}</div>
-</div>
 
 <table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
 <tr>
@@ -168,9 +166,7 @@ function companydelete(comp_id)
 	</td>
 </tr>
 </table>
-<div class="MAINHEADERBAR">
-<div class="MAINHEADING">&nbsp;&nbsp;&nbsp;</div>
-</div>
+
 <br/>
 	<div style="text-align: center;">
 			<br/>

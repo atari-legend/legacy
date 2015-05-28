@@ -15,11 +15,8 @@ The main company (developer/publisher) page
 ************************************************************************************************
 *}
 {extends file='head.html'}
+{block name=title}Add/Edit a company (publisher/developer){/block}
 {block name=body}
-<div class="MAINHEADERBAR">
-<div class="MAINHEADING">&nbsp;Add/Edit a company (publisher/developer)</div>
-</div>
-
 <table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
 <tr>
 	<td colspan="2">
@@ -59,9 +56,6 @@ The main company (developer/publisher) page
 	</td>
 </tr>
 </table>
-<div class="MAINHEADERBAR">
-<div class="MAINHEADING">&nbsp;&nbsp;&nbsp;</div>
-</div>
 
 {if isset($message)}
 	<div style="text-align: center;">
