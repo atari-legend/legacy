@@ -20,10 +20,8 @@ function coverdelete(JSmagazine_issue_id)
 } 
 </script>
 {/block}
+{block name=title}{$magazine.magazine_name} issue {$magazine.magazine_issue_nr} selected.{/block}
 {block name=body}
-<div class="MAINHEADERBAR">
-<div class="MAINHEADING">&nbsp;&nbsp;{$magazine.magazine_name} issue {$magazine.magazine_issue_nr} selected.</div>
-</div>
 
 <table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
 <tr>
@@ -72,8 +70,4 @@ function coverdelete(JSmagazine_issue_id)
 	</td>
 </tr>
 </table>
-
-<div class="MAINHEADERBAR">
-<div class="MAINHEADING">&nbsp;&nbsp;&nbsp;</div>
-</div>
 {/block}
