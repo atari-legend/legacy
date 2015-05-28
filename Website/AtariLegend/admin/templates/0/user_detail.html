@@ -40,12 +40,8 @@ function user_stats()
 }
 </script>
 {/block}
+{block name=title}Details for user <a href="mailto:{$users.user_email}" class="MAINNAV_WHITE">{$users.user_name}</a>{/block}
 {block name=body}
-<div class="MAINHEADERBAR">
-<div class="MAINHEADING">&nbsp;Details for user <a href="mailto:{$users.user_email}" class="MAINNAV_WHITE">{$users.user_name}</a>
-</div>
-</div>
-
 <table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
 <tr>
 	<td>
@@ -185,9 +181,6 @@ function user_stats()
 </tr>
 </table>
 
-<div class="MAINHEADERBAR">
-<div class="MAINHEADING">&nbsp;&nbsp;&nbsp;</div>
-</div>
 <br/>
 	<div style="text-align: center;">
 			<br/>

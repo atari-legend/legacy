@@ -15,10 +15,8 @@ The company logos preview page
 ************************************************************************************************
 *}
 {extends file='head.html'}
+{block name=title}Company logos preview{/block}
 {block name=body}
-<div class="MAINHEADERBAR">
-<div class="MAINHEADING">&nbsp;Company logos preview</div>
-</div>
 
 <table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
 <tr>
@@ -40,9 +38,7 @@ The company logos preview page
 </tr>
 {/foreach}
 </table>
-<div class="MAINHEADERBAR">
-<div class="MAINHEADING">&nbsp;&nbsp;&nbsp;</div>
-</div>
+
 
 {if isset($message)}
 	<div style="text-align: center;">

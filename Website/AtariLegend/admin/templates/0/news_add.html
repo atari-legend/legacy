@@ -12,13 +12,10 @@
 //****************************************************************************************
 // This is the sub template file to generate the news add page
 //**************************************************************************************** 
-
 *}
 {extends file='head.html'}
+{block name=title}Add a News Item{/block}
 {block name=body}
-<div class="MAINHEADERBAR">
-<div class="MAINHEADING">&nbsp;Add a News Item</div>
-</div>
 
 <table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
 <tr>
@@ -55,9 +52,6 @@
 	</td>
 </tr>
 </table>
-<div class="MAINHEADERBAR">
-<div class="MAINHEADING">&nbsp;&nbsp;&nbsp;</div>
-</div>
 
 {if isset($message)}
 	<div style="text-align: center;">

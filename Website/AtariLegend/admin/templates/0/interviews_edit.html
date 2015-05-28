@@ -51,11 +51,9 @@ function deleteinterview(interview_id)
 }
 </script>	
 {/block}
+{block name=title}Edit Interviews - <a href="../individuals/individuals_edit.php?ind_id={$interview.interview_ind_id}" class="MAINNAV_WHITE">{$interview.interview_ind_name}</a>{/block}
 {block name=body}
 <form action="../interviews/interviews_edit.php" method="post" name="post">
-<div class="MAINHEADERBAR">
-<div class="MAINHEADING">&nbsp;Edit Interviews - <a href="../individuals/individuals_edit.php?ind_id={$interview.interview_ind_id}" class="MAINNAV_WHITE">{$interview.interview_ind_name}</a></div>
-</div>
 
 <table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
 <tr>
@@ -275,10 +273,7 @@ function deleteinterview(interview_id)
 	</td>
 </tr>
 </table>
-	
-<div class="MAINHEADERBAR">
-<div class="MAINHEADING">&nbsp;&nbsp;&nbsp;</div>
-</div>
+
 <br/>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 	<tr>

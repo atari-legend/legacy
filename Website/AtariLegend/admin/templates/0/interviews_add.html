@@ -35,11 +35,9 @@ function deletecomment(screenshot_id, interview_id)
 }
 </script>
 {/block}
+{block name=title}Add Interviews - <a href="../administration/construction.php" class="MAINNAV_WHITE">{$selected_individual.ind_name}</a>{/block}
 {block name=body}
 <form action="../interviews/interviews_add.php" method="post" name="post">
-<div class="MAINHEADERBAR">
-<div class="MAINHEADING">&nbsp;Add Interviews - <a href="../administration/construction.php" class="MAINNAV_WHITE">{$selected_individual.ind_name}</a></div>
-</div>
 
 <table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
 <tr>
@@ -234,10 +232,6 @@ function deletecomment(screenshot_id, interview_id)
 	</td>
 </tr>
 </table>
-	
-<div class="MAINHEADERBAR">
-<div class="MAINHEADING">&nbsp;&nbsp;&nbsp;</div>
-</div>
 <br/>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 	<tr>

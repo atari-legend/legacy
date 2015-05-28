@@ -16,10 +16,8 @@ The submitted review page
 ************************************************************************************************
 *}
 {extends file='head.html'}
+{block name=title}Submitted game reviews{/block}
 {block name=body}
-<div class="MAINHEADERBAR">
-<div class="MAINHEADING">&nbsp;Submitted game reviews</div>
-</div>
 
 <table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
 <tr>
@@ -52,9 +50,7 @@ The submitted review page
 	</td>
 </tr>
 </table>
-<div class="MAINHEADERBAR">
-<div class="MAINHEADING">&nbsp;&nbsp;&nbsp;</div>
-</div>
+
 
 {if isset($message)}
 	<div style="text-align: center;">

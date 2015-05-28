@@ -34,10 +34,8 @@ function deleteinterview(interview_id)
 }
 </script>
 {/block}
+{block name=title}Interviews{/block}
 {block name=body}
-<div class="MAINHEADERBAR">
-<div class="MAINHEADING">&nbsp;Interviews</div>
-</div>
 
 <table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
 <tr>
@@ -139,12 +137,6 @@ function deleteinterview(interview_id)
 {/foreach}
 {/if}
 </table>
-
-
-	
-<div class="MAINHEADERBAR">
-<div class="MAINHEADING">&nbsp;&nbsp;&nbsp;</div>
-</div>
 
 {if isset($message)}
 	<div style="text-align: center;">
