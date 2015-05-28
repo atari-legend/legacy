@@ -64,11 +64,9 @@ function deletecomment(game_id,reviewid,screenshot_id)
 }
 </script>
 {/block}
+{block name=title}Edit review - <a href="../games/games_detail.php?game_id={$game.game_id}" class="MAINNAV_WHITE">{$game.game_name}</a>{/block}
 {block name=body}
 <form action="../games/db_games_review_edit.php" method="post" name="post">
-<div class="MAINHEADERBAR">
-<div class="MAINHEADING">&nbsp;Edit review - <a href="../games/games_detail.php?game_id={$game.game_id}" class="MAINNAV_WHITE">{$game.game_name}</a></div>
-</div>
 
 <table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
 <tr>
@@ -256,10 +254,7 @@ function deletecomment(game_id,reviewid,screenshot_id)
 	</td>
 </tr>
 </table>
-	
-<div class="MAINHEADERBAR">
-<div class="MAINHEADING">&nbsp;&nbsp;&nbsp;</div>
-</div>
+
 <br/>
 <div style="text-align: center;">
 			<br/>
