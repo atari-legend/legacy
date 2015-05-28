@@ -15,13 +15,13 @@
 //**************************************************************************************** 
 *}
 {extends file='head.html'}
+{block name=title}
+<div style="float:left;">
+Written by <a href="mailto:{if isset($interview.interview_email)}{$interview.interview_email}{/if}?subject=Your interview with {$interview.interview_author} at Atari Legend" class="MAINNAV_WHITE">{$interview.interview_author}</a>
+</div>
+<div style="float:right;padding-right:5px;">{$interview.interview_date}</div>
+{/block}
 {block name=body}
-<div class="MAINHEADERBAR">
-<div class="MAINHEADING" style="float:left;">
-	&nbsp;Written by <a href="mailto:{if isset($interview.interview_email)}{$interview.interview_email}{/if}?subject=Your interview with {$interview.interview_author} at Atari Legend" class="MAINNAV_WHITE">{$interview.interview_author}</a>
-</div>
-	<div class="MAINHEADING" style="float:right;padding-right:5px;">{$interview.interview_date}</div>
-</div>
 
 <div class="NEWMAINCELL">	
 		{if $interview.interview_img != 'none'}
@@ -52,9 +52,7 @@
 			{/foreach}
 </div>
 
-<div class="MAINHEADERBAR">
-<div class="MAINHEADING">&nbsp;&nbsp;&nbsp;</div>
-</div>
+
 </div>
 		{* test *}
 		
