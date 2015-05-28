@@ -33,11 +33,8 @@ function delete_music(game_id)
 }
 </script>
 {/block}
+{block name=title}Edit game music - <a href="../games/games_detail.php?game_id={$game.game_id}" class=MAINNAV_WHITE>{$game.game_name}</a>{/block}
 {block name=body}
-<div class="MAINHEADERBAR">
-<div class="MAINHEADING">&nbsp;Edit game music - <a href="../games/games_detail.php?game_id={$game.game_id}" class=MAINNAV_WHITE>{$game.game_name}</a></div>
-</div>
-
 <table width="100%" cellspacing="2" cellpadding="15" class="CELLCOLOR">
 <tr>
 	<td>
@@ -126,9 +123,6 @@ function delete_music(game_id)
 </table>
 {/if}
 
-<div class="MAINHEADERBAR">
-<div class="MAINHEADING">&nbsp;&nbsp;&nbsp;</div>
-</div>
 <br/>
 <div style="text-align: center;">
 			<br/>
