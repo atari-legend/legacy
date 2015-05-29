@@ -24,11 +24,6 @@ footer, header, hgroup, menu, nav, section {
 }
 
 .container { display: none; }
-
-.headercolor { 
-
-
-}
 	
 /*---------------------------------------------------------- 
  Main site width
@@ -190,15 +185,15 @@ header {
 	#top_background  { border-top-width: 0px;
 			border-left-width: 0px;
 			border-bottom-width: 7px;
-			border-bottom-color: #00d3d3;
+			border-bottom-color: #161c71;
 			border-style: solid;
-			box-shadow: 0 0 7px #00d3d3;
-		    background: -webkit-linear-gradient(black, #01b5b5); /* For Safari 5.1 to 6.0 */
-			background: -o-linear-gradient(black, #01b5b5); /* For Opera 11.1 to 12.0 */
-			background: -moz-linear-gradient(black, #01b5b5); /* For Firefox 3.6 to 15 */
-			background: linear-gradient(#175f5f, black); /* Standard syntax (must be last) */
+			box-shadow: 0 0 7px #161c71;
+		    background: -webkit-linear-gradient(black, #161c71); /* For Safari 5.1 to 6.0 */
+			background: -o-linear-gradient(black, #161c71); /* For Opera 11.1 to 12.0 */
+			background: -moz-linear-gradient(black, #161c71); /* For Firefox 3.6 to 15 */
+			background: linear-gradient(#161c71, black); /* Standard syntax (must be last) */
 		}
-}		
+}	
 
 /* at a resolution of max 960 (Tablets & low res laptop) we want the original logo without the bee */				
 @media screen and (min-width: 481px) and (max-width: 960px){  
@@ -263,24 +258,9 @@ header {
     #sidebar {
 		z-index:1;
 		position: absolute;
-        left: -170px;
-        background: black;
-        width: 170px;
-        height: 100%;
-        box-sizing: border-box;
     }
-	
-    #sidebar ul {
-        margin: 0;
-        padding: 0;
-        list-style: none;
-    }
-	
-    #sidebar ul li { margin: 0;
-			background:#00d3d3; }
 	
     #sidebar ul li a {
-        padding: 0;
         display: block;
         -webkit-transition:  background 0.3s ease-in-out;
         -moz-transition:  background 0.3s ease-in-out;
@@ -288,9 +268,6 @@ header {
         -o-transition:  background 0.3s ease-in-out;
         transition:  background 0.3s ease-in-out;
     }
-	
- 
-	#sidebar ul li a img:hover { opacity:0.5;}
 	
     .main-content {
         width: 100%;
@@ -334,30 +311,63 @@ header {
     .main-content #sidebar-toggle .bar:last-child{
          margin-bottom: 0;   
     }
+	
+	/*-----some code for the skin submenu-------*/
+	
+	.clearfix:after {
+		display:block;
+		clear:both;
+	}
 
+	/*----- Menu Outline -----*/
+	.skin-wrap {
+		width:100%;
+	}
+	 
+	.skin-menu {
+		width:100%;
+		margin:0px auto;
+	}
+	 
+	.skin-menu li {
+		margin:0px;
+		list-style:none;
+	}
+	 
+	.skin-menu a {
+		transition:all linear 0.15s;
+	}
+	 
+	 
+	/*----- Top Level -----*/
+	.skin-menu > ul > li {
+		float:left;
+		display:inline-block;
+		position:relative;
+	}
+	 
+	/*----- Bottom Level -----*/
+	.skin-menu li:hover .sub-menu {
+		z-index:1;
+		opacity:1;
+	}
+
+	.sub-menu {
+		width:75%;
+		padding:5px 0px;
+		position:absolute;
+		top:100%;
+		left:30px;
+		z-index:-1;
+		opacity:0;
+		transition:opacity linear 0.15s;
+		box-shadow:0px 2px 3px rgba(0,0,0,0.2);
+	}	 
 /* 'position' is needed for smartphone view else the logo is covered by the sidemenu button */
 @media screen and (max-width: 480px) { 
 	.main-content {position: relative;}
 	.main-content #sidebar-toggle {position: relative;}
 	}	
-
-/* resizing of buttons is done to get al info on screen in landscape for phones and tablets*/
-@media screen and (max-width: 640px) { 
-	#games_side{height: 40px; width: 113px; font-size: 14px;}
-	#menus_side{height: 40px; width: 113px; font-size: 14px;}
-	#demos_side{height: 40px; width: 113px; font-size: 14px;}
-	#about_side{height: 40px; width: 113px; font-size: 14px;}
-	#links_side{height: 40px; width: 113px; font-size: 14px;}
-	#skin_side{height: 37px; width: 113px; font-size: 14px;}
-	#search_side {height: 40px; width: 25px;}
-	#search_text_side{height: 20px; width: 70px;}
-	#searchbutton_side{height: 38px; width: 87px;}
-	.container.open-sidebar { left: 113px;}
-    #sidebar { left: -113px;
-        width: 113px;
-	}
-	.sub-menu li { font-size:13px; }
-}
 
 /* for the lower resolutions, we don't have the menu bar below the top */ 
 @media screen and (max-width: 1279px) {  	
@@ -367,18 +377,23 @@ header {
 	#users { display: none; }
 	#admin { display: none; }
 	#other { display: none; }
+	.container.open-sidebar { left: 245px;}
+	#sidebar { left: -245px;
+        width: 245px;
+	}
+	.sub-menu li { font-size:20px; }
 }
 
 /* for the high resolutions, we only have the skin switch in the side menu */ 
 @media screen and (min-width: 1280px) {  	
-	#links_side { display: none; }
-	#search_side { display: none; } 
-	#search_text_side{ display: none; } 
 	#games_side { display: none; }
 	#demos_side { display: none; }
-	#about_side { display: none; }
+	#users_side { display: none; }
 	#menus_side { display: none; }
+	#admin_side { display: none; }
+	#other_side { display: none; }
 }
+
 
 /* ---------the main menu below top--------*/
 
@@ -438,6 +453,7 @@ nav ul {
   border-left: 1px solid #12164a;
   padding-top: 3px;
   text-decoration:none;
+
 }
 
 .topbutton:hover {
@@ -447,9 +463,16 @@ nav ul {
   border-bottom: 3px solid #12164a;
 }
 
-.top_button:visited {
+.topbutton:visited {
   text-decoration:none;
+  color: white;
 }
+
+.topbutton > a:visited {
+  text-decoration:none;
+  color: white;
+}
+
 
 #game_editor, #game_comments, #game_series, #game_music, #game_submissions, #game_reviews, #submitted_reviews,
 #menu_editor, #menu_comments, #menu_submissions, #demo_editor, #demo_comments, #demo_music, #demo_submissions,
@@ -460,4 +483,9 @@ nav ul {
 #interviews_help, #forum, #logout {
 		height: 40px;
 		font-size: 16px;
+		text-decoration:none;
+		display:table-cell;
+		text-align:center;
+		vertical-align:middle;
+
 }
