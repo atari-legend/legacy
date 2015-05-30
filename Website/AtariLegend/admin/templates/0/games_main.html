@@ -45,29 +45,25 @@ function gameinsert()
 {/block}
 {block name=title}Add/Edit a game{/block}
 {block name=body}
-<table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
-<tr>
-	<td colspan="2">
-	<fieldset class="game_set">
+
+<div class="NEWMAINCELL" style="text-align:center;">
+	<fieldset class="interview_set">
 		In this section you can add or edit a game. Search for a game by using any of the 
 		functionalities below. Combinations are allowed. There are currently <b>{$games_nr}</b> games
 		in the DB.
 	</fieldset> 
-	</td>
-</tr>
-<tr>
-	<td align="center">
+<br/><br/>
+
 		<form action="../games/games_list.php" method="post" name="game_search" id="game_search">
 		<fieldset class="interview_set">
 		<legend class="links_legend">Search games</legend>
 		<br/>
-		<table>
-		<tr>
-			<td align="left">
+		
+		
+		<div style="display:block; margin-left:auto;margin-right: auto;">
+			<div style="display:block;padding-bottom:2px;">
 				<b>By name :</b>
-			</td>
-			<td align="left">
-				<select name="gamebrowse">
+					<select name="gamebrowse">
 					<option value="" SELECTED>-</option>
 					<option value="num">0-9</option>
 					<option value="a">A</option>
@@ -98,112 +94,69 @@ function gameinsert()
 					<option value="z">Z</option>
 				</select>
 				<input type="text" name="gamesearch" value="">
-			</td>
-		</tr>
-		<tr>
-			<td align="left">
+			</div>
+			<div style="display:block;padding-bottom:2px;">
 				<b>By Publisher :</b>
-			</td>
-			<td align="left">
 				<select name="publisher">
 					<option value="-" SELECTED>-</option>
 					{foreach from=$company_publisher item=line} 
 						<option value="{$line.comp_id}">{$line.comp_name}</option>
 					{/foreach}
 				</select>		
-			</td>
-		</tr>
-		<tr>
-			<td align="left">
+			</div>
+			<div style="left:0px;padding:2px;">
 				<b>By Developer :</b>
-			</td>
-			<td align="left">
 				<select name="developer">
 					<option value="-" SELECTED>-</option>
 					{foreach from=$company_developer item=line} 
 						<option value="{$line.comp_id}">{$line.comp_name}</option>
 					{/foreach}
 				</select>
-			</td>
-		</tr>
-		<tr>
-		<td align="left">
+			</div>
+		</div>
 		<br/>
 		<br/>
-		<input type="checkbox" name="falcon_only" value="1"><strong>Falcon only&nbsp;</strong>
-		</td>
-		<td align="left">
-		<br/>
-		<br/>
-		<input type="checkbox" name="falcon_enhanced" value="1"><strong>Falcon Enhanced&nbsp;</strong>
-		</td>
-		</tr>
-		<tr>
-		<td align="left">
-		<input type="checkbox" name="ste_only" value="1"><strong>STE only</strong>
-		</td>
-		<td align="left">
-		<input type="checkbox" name="ste_enhanced" value="1"><strong>STE Enhanced&nbsp;</strong>
-		</td>
-		</tr>
-		<tr>
-		<td align="left">
-		<input type="checkbox" name="free" value="1"><strong>Non-Commercial&nbsp;</strong>
-		</td>
-		<td align="left">
-		<input type="checkbox" name="arcade" value="1"><strong>Arcade Conversion&nbsp;</strong>
-		</td>
-		</tr>
-		<tr>
-		<td align="left">
-		<input type="checkbox" name="development" value="1"><strong>In development&nbsp;</strong>
-		</td>
-		<td align="left">
-		<input type="checkbox" name="wanted" value="1"><strong>Wanted&nbsp;</strong>
-		</td>
-		</tr>
-		<tr>
-		<td align="left">
-		<input type="checkbox" name="unreleased" value="1"><strong>Unreleased&nbsp;</strong>
-		</td>
-		<td align="left">
-		<input type="checkbox" name="unfinished" value="1"><strong>Unfinished/Rumoured&nbsp;</strong>
-		</td>
-		</tr>
-		<tr>
-		<td align="left">
-		<input type="checkbox" name="monochrome" value="1"><strong>Monochrome&nbsp;</strong>
-		</td>
-		<td align="left">
-		<input type="checkbox" name="seuck" value="1"><strong>SEUCK&nbsp;</strong>
-		</td>
-		</tr>
-		<tr>
-		<td align="left">
-		<input type="checkbox" name="stos" value="1"><strong>STOS&nbsp;</strong>
-		</td>
-		<td align="left">
-		<input type="checkbox" name="stac" value="1"><strong>STAC&nbsp;</strong>
-		</td>
-		</tr>	
-		<tr>
-		<td align="left">
+	<div style="display:table; width:50%; margin-left:auto;margin-right: auto;text-align:left;">
+		<div style="display:table-row;">
+			<div style="display:table-cell;"><input type="checkbox" name="falcon_only" value="1"><strong>Falcon only&nbsp;</strong></div>
+			<div style="display:table-cell;"><input type="checkbox" name="falcon_enhanced" value="1"><strong>Falcon Enhanced&nbsp;</strong></div>
+		</div>
+		<div style="display:table-row;">
+			<div style="display:table-cell;"><input type="checkbox" name="ste_only" value="1"><strong>STE only</strong></div>
+			<div style="display:table-cell;"><input type="checkbox" name="ste_enhanced" value="1"><strong>STE Enhanced&nbsp;</strong></div>
+		</div>	
+		<div style="display:table-row;">
+			<div style="display:table-cell;"><input type="checkbox" name="free" value="1"><strong>Non-Commercial&nbsp;</strong></div>
+			<div style="display:table-cell;"><input type="checkbox" name="arcade" value="1"><strong>Arcade Conversion&nbsp;</strong></div>
+		</div>		
+		<div style="display:table-row;">
+			<div style="display:table-cell;"><input type="checkbox" name="development" value="1"><strong>In development&nbsp;</strong></div>
+			<div style="display:table-cell;"><input type="checkbox" name="wanted" value="1"><strong>Wanted&nbsp;</strong></div>
+		</div>			
+		<div style="display:table-row;">
+			<div style="display:table-cell;"><input type="checkbox" name="unreleased" value="1"><strong>Unreleased&nbsp;</strong></div>
+			<div style="display:table-cell;"><input type="checkbox" name="unfinished" value="1"><strong>Unfinished/Rumoured&nbsp;</strong></div>
+		</div>				
+		<div style="display:table-row;">
+			<div style="display:table-cell;"><input type="checkbox" name="monochrome" value="1"><strong>Monochrome&nbsp;</strong></div>
+			<div style="display:table-cell;"><input type="checkbox" name="seuck" value="1"><strong>SEUCK&nbsp;</strong></div>
+		</div>					
+		<div style="display:table-row;">
+			<div style="display:table-cell;"><input type="checkbox" name="stos" value="1"><strong>STOS&nbsp;</strong></div>
+			<div style="display:table-cell;"><input type="checkbox" name="stac" value="1"><strong>STAC&nbsp;</strong></div>
+		</div>						
+	</div>
 		<br/>
 		<br/>
 		<input type="submit" value="Search">
 		<br/>
 		<br/>
-		</td>
-		</tr>
-		</table>
 		</fieldset>
 		<input type="hidden" name="action" id="action" value="search">
 		<input type="hidden" name="user_id" id="user_id" value="{$user_id}">
 		</form>	
-	</td>
-</tr>
-<tr>
-	<td align="center">
+	<br/>	
+	<br/>
 		<form method="post" name="insertgame">
 		<fieldset class="interview_set">
 		<legend class="links_legend">Add games</legend>
@@ -211,13 +164,11 @@ function gameinsert()
 			<input type="submit" value="Insert" onClick="gameinsert(); return false;">	
 		</fieldset>
 		</form>
-	</td>
-</tr>
-</table>
+</div>
 {if isset($message)}
 	<div style="text-align: center;">
 			<br/><br/>
 			<span class="MAINAV">{$message}</span>
-		</div>
+	</div>
 {/if}
 {/block}
