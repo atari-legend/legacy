@@ -33,9 +33,7 @@ function company_pic_delete(comp_id)
 		location.href=url;
     } 
 }
-</script>
 
-<script type="text/javascript">
 function companydelete(comp_id)
 { 
    	// CONFIRM REQUIRES ONE ARGUMENT
@@ -56,35 +54,25 @@ function companydelete(comp_id)
 {block name=title}Edit {$company.comp_name}{/block}
 {block name=body}
 
-<table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
-<tr>
-	<td colspan="2">
-	<fieldset class="game_set">
+<div class="NEWMAINCELL" style="display:block; margin-left:auto;margin-right: auto;">
+
+	<fieldset class="game_set" style="width:75%; margin-left:auto;margin-right: auto;">
 		In this section you can edit a company. You can use the profile box for additional info.
 		A logo can be uploaded as well. If a picture is already linked, you can delete it and upload a new one.
 	</fieldset> 
-	</td>
-</tr>
-<tr>
-	<td>
+<br/><br/>
 	<form action="../company/db_company_edit.php" method="post" name="post" id="comp_edit">
-		<table width="100%" cellspacing="0" cellpadding="0">
-		<tr>
-			<td width="100%" colspan="2">
+
 				<b>Name :</b>
-				<br/>
+				
 				<input type="text" name="comp_name" value="{$company.comp_name}">
-			</td>
-		</tr>
-		<tr>
-			<td width="100%" colspan="2">
-				<br/>
+
+				<br/><br/>
 				<b>Profile :</b>
-			</td>
-		</tr>
-		<tr>
-			<td width="100%" align="left" colspan="2">
-			<br/>
+
+
+			<br/><br/>
+			<div>
 			<input type="button" accesskey= "b" name="addbbcode0" value="B" onclick="bbstyle(0,'textfield')" onMouseOver="helpline('b')" />
 			<input type="button" accesskey= "u" name="addbbcode4" value="U" onclick="bbstyle(4,'textfield')" onMouseOver="helpline('u')" />
 			<input type="button" accesskey= "i" name="addbbcode2" value="I" onclick="bbstyle(2,'textfield')" onMouseOver="helpline('i')" />
@@ -115,29 +103,26 @@ function companydelete(comp_id)
 			<a href="javascript:setsmileyn(' :arrow: ')"><img src="../templates/0/emoticons/icon_arrow.gif" alt="smilie" border="0" onMouseOver="helpline('x')"></a>
 			<a href="javascript:setsmileyn(' :?: ')"><img src="../templates/0/emoticons/icon_question.gif" alt="Question" border="0" onMouseOver="helpline('x')"></a>
 			<a href="javascript:setsmileyn(' :idea: ')"><img src="../templates/0/emoticons/icon_idea.gif" alt="Idea" border="0" onMouseOver="helpline('x')"></a>
-			</td>
-		</tr>
-		<tr>
-			<td width="100%" colspan="2">
+</div>
+
 				<textarea name="textfield" ONSELECT="javascript:storeCaret(this);" ONCLICK="javascript:storeCaret(this);" ONKEYUP="javascript:storeCaret(this);" ONCHANGE="javascript:storeCaret(this);" rows="5" class="textarea_interviews">{$company.comp_profile}</textarea>
-			</td>
-		</tr>
-		<tr>
-			<td width="50%">
-				<br/>
+			
+		<br/><br/>
+			<div style="width:50%;display:inline;">
+				
 				<input type="submit" value="Update">
 				<input type="submit" value="Delete Company" onClick="companydelete({$company.comp_id}); return false;">	
 				<input type="hidden" name="action" value="update">
 				<input type="hidden" name="comp_id" value="{$company.comp_id}">
-			</td>
-			<td align="right" width="50%">
-				<br/>
+			</div>
+			<div style="width:50%;display:inline;float:right;">
+				
 				&nbsp;<input type="text" size="60" name="helpbox" maxlength="100" style="font-size:10px; border=0px; background-color:#D0D1DF" value="Tip: Styles can be applied quickly to selected text." />
-			</td>
-		</tr>
+			</div>
+		
 		</form>	
-		<tr>
-			<td width="100%" colspan="2">
+		<br/>
+			<div width="100%" colspan="2">
 				<br/>
 				<br/>
 				<br/>
@@ -160,13 +145,8 @@ function companydelete(comp_id)
 					<input type="hidden" name="comp_id" value="{$company.comp_id}">
 					</form>
 				{/if}
-			</td>
-		</tr>
-		</table>
-	</td>
-</tr>
-</table>
-
+			</div>
+</div>
 <br/>
 	<div style="text-align: center;">
 			<br/>
