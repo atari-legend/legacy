@@ -427,13 +427,14 @@ footer, header, hgroup, menu, nav, section {
 	}	
 
 /* resizing of buttons is done to get al info on screen in landscape for phones and tablets*/
-@media screen and (max-width: 640px) { 
-	#games_side{height: 40px; width: 113px; font-size: 14px;}
-	#menus_side{height: 40px; width: 113px; font-size: 14px;}
-	#demos_side{height: 40px; width: 113px; font-size: 14px;}
-	#about_side{height: 40px; width: 113px; font-size: 14px;}
-	#links_side{height: 40px; width: 113px; font-size: 14px;}
-	#skin_side{height: 37px; width: 113px; font-size: 14px;}
+@media screen and (max-width: 640px) {
+
+#games_side, #menus_side, #demos_side, #about_side, #links_side {
+	height: 40px; 
+	width: 113px; 
+	font-size: 14px;
+	vertical-align: 50%;
+}
 	#search_side {height: 40px; width: 25px;}
 	#search_text_side{height: 20px; width: 70px;}
 	#searchbutton_side{height: 38px; width: 87px;}
@@ -506,20 +507,21 @@ header nav { float: center;
 
 .topbutton
 {
-  display: block;
-  float:left;
+  display:table-cell;
   cursor: pointer;
   border: 0px;
   background: #00d3d3;
   font-family: Audiowide,Arial,helvetica,sans-serif;
   color: #182727;
-  height: 60px;
+  height: 57px;
   width: 170px;
   font-size: 20px;
   border-bottom: 3px solid #008b8b;
   border-left: 1px solid #007878;
-  padding-top: 3px;
+  padding-top: 0px;
   text-decoration:none;
+  vertical-align:middle;
+  text-align:center;
 }
 
 .topbutton:hover {
@@ -529,11 +531,12 @@ header nav { float: center;
   border-bottom: 3px solid #006f6f;
 }
 
-.top_button:visited {
+.topbutton:visited {
   text-decoration:none;
+  color: #182727;
 }
 
-.top_button:link {
+.topbutton:link {
   text-decoration:none;
   color: #182727;
 }
