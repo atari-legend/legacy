@@ -64,12 +64,12 @@
 					<!-- This is the side menu only visible for smartphones (max resolution 480pc)-->				
 					<div class="container" style="position: fixed;">
 					  <div id="sidebar">
-						  <ul>
-							<li><a href="#" title="Games" class="top_button"><button type="button" class="topbutton" id="games_side">GAMES</button></a></li>
-							<li><a href="#" title="Menus" class="top_button"><button type="button" class="topbutton" id="menus_side">MENUS</button></a></li>
-							<li><a href="#" title="Demos" class="top_button"><button type="button" class="topbutton" id="demos_side">DEMOS</button></a></li>
-							<li><a href="#" title="Links" class="top_button"><button type="button" class="topbutton" id="links_side">LINKS</button></a></li>
-							<li><a href="#" title="About" class="top_button"><button type="button" class="topbutton" id="about_side">ABOUT</button></a></li>
+						  <ul style="vertical-align:middle;">
+							<li><a href="#" title="Games" id="games_side" class="topbutton">GAMES</a></li>
+							<li><a href="#" title="Menus" id="menus_side" class="topbutton">MENUS</a></li>
+							<li><a href="#" title="Demos" id="demos_side" class="topbutton">DEMOS</a></li>
+							<li><a href="#" title="Links" id="links_side" class="topbutton">LINKS</a></li>
+							<li><a href="#" title="About" id="about_side" class="topbutton">ABOUT</a></li>
 						  </ul>
 						  <ul id="search_ul">
 							  <li id="searchbutton_side"><input id="search_text_side" type="text" name="search_text" maxlength="11" /></li>
@@ -90,10 +90,11 @@
 						  </div>
 					  </div>
 					  <div class="main-content">
-						  <button type="button" href="#" data-toggle=".container" id="sidebar-toggle" style="border:none; cursor: pointer;">
+							<button type="button" data-toggle=".container" id="sidebar-toggle" style="border:none; cursor: pointer;">
 							  <span class="bar"></span>
 							  <span class="bar"></span>
 							  <span class="bar"></span>
+							</button>
 					  </div>
 					</div>		
 					<!-- end of side menu-->
@@ -112,13 +113,13 @@
 					{/if}
 				</div>			
 				<nav>
-					<ul>
+					<ul class="nav">
 						<li><a href="#" title="Home"><img id="home" src="../templates/0/images/menu_home.png" alt="home" /></a></li>
-						<li><a href="#" title="Games" class="top_button"><button type="button" class="topbutton" id="games">GAMES</button></a></li>
-						<li><a href="#" title="Menus" class="top_button"><button type="button" class="topbutton" id="menus">MENUS</button></a></li>
-						<li><a href="#" title="Demos" class="top_button"><button type="button" class="topbutton" id="demos">DEMOS</button></a></li>
-						<li><a href="#" title="Links" class="top_button"><button type="button" class="topbutton" id="links">LINKS</button></a></li>
-						<li><a href="#" title="About" class="top_button"><button type="button" class="topbutton" id="about">ABOUT</button></a></li>
+						<li><a href="#" title="Games" id="games" class="topbutton">GAMES</a></li>
+						<li><a href="#" title="Menus" id="menus" class="topbutton">MENUS</a></li>
+						<li><a href="#" title="Demos" id="demos" class="topbutton">DEMOS</a></li>
+						<li><a href="#" title="Links" id="links" class="topbutton">LINKS</a></li>
+						<li><a href="#" title="About" id="about" class="topbutton">ABOUT</a></li>
 						<li><div class="searchbutton" id="search_text"><input type="text" id="auto" /></div></li>
 						<li><a href="#" title="search"><img id="search" src="../templates/0/images/menu_search.png" alt="search" /></a></li>
 					</ul>
