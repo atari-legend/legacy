@@ -1,7 +1,7 @@
 {block name=navbar}
 				<nav>
 					<ul class="nav">
-						<li><button type="button" class="topbutton">GAMES</button>
+						<li><button type="button" class="topbutton" id="games">GAMES</button>
 							<ul>
 								
 								<li><a href="../games/games_main.php" title="Game editor" id="game_editor" class="topbutton">GAME EDITOR</a></li>
@@ -11,12 +11,12 @@
 								<li><a href="../games/submission_games.php" title="Game submissions" id="game_submissions" class="topbutton">GAME SUBMISSIONS</a></li>
 								<li><a href="../games/games_review.php" title="Game_reviews" id="game_reviews" class="topbutton">REVIEWS</a></li>
 								<li><a href="../games/games_review_submitted.php" title="submitted_reviews" id="submitted_reviews" class="topbutton">REVIEW SUBMISSIONS</a></li>
-								<li><a href="../individuals/individuals_main.php" title="Individuals" id="individuals" class="topbutton">INDIVIDIUALS</a></li>
-								<li><a href="../individuals/individuals_author.php" title="Author types" id="author_types" class="topbutton">AUTHOR TYPES</a></li>
+								<li><a href="../individuals/individuals_main.php" title="Individuals" id="game_individuals" class="topbutton">INDIVIDIUALS</a></li>
+								<li><a href="../individuals/individuals_author.php" title="Author types" id="game_author_types" class="topbutton">AUTHOR TYPES</a></li>
 								<li><a href="../company/company_main.php" title="Companies" id="companies" class="topbutton">COMPANIES</a></li>
 								<li><a href="../company/company_logos.php" title="Company logo" id="company_logo" class="topbutton">COMPANY LOGO</a></li>
-								<li><a href="../interviews/interviews_main.php" title="Interviews" id="interviews" class="topbutton">INTERVIEWS</a></li>
-								<li><a href="../interviews/interviews_help.php" title="Interviews help" id="interviews_help" class="top_button">INTERVIEWS HELP</a></li>
+								<li><a href="../interviews/interviews_main.php" title="Interviews" id="game_interviews" class="topbutton">INTERVIEWS</a></li>
+								<li><a href="../interviews/interviews_help.php" title="Interviews help" id="game_interviews_help" class="top_button">INTERVIEWS HELP</a></li>
 							</ul>
 						</li>
 						<li><button type="button" class="topbutton" id="menus">MENUS</button>
@@ -24,9 +24,9 @@
 								<li><a href="#" title="Menu editor" id="menu_editor" class="topbutton">MENU EDITOR</a></li>
 								<li><a href="#" title="Menu comments" id="menu_comments" class="topbutton">MENU COMMENTS</a></li>
 								<li><a href="#" title="Menu submissions" id="menu_submissions" class="topbutton">MENU SUBMISSIONS</a></li>
-								<li><a href="../individuals/individuals_main.php" title="Individuals" id="individuals" class="topbutton">INDIVIDIUALS</a></li>
-								<li><a href="../individuals/individuals_author.php" title="Author types" id="author_types" class="topbutton">AUTHOR TYPES</a></li>
-								<li><a href="../crew/crew_main.php" title="Crew editor" id="crew_editor" class="topbutton">CREW EDITOR</a></li>
+								<li><a href="../individuals/individuals_main.php" title="Individuals" id="menu_individuals" class="topbutton">INDIVIDIUALS</a></li>
+								<li><a href="../individuals/individuals_author.php" title="Author types" id="menu_author_types" class="topbutton">AUTHOR TYPES</a></li>
+								<li><a href="../crew/crew_main.php" title="Crew editor" id="menu_crew_editor" class="topbutton">CREW EDITOR</a></li>
 							</ul>
 						</li>
 						<li><button type="button" class="topbutton" id="demos">DEMOS</button>
@@ -35,11 +35,11 @@
 								<li><a href="../demos/demos_comment.php" title="Demo comments" id="demo_comments" class="topbutton">DEMO COMMENTS</a></li>
 								<li><a href="../demos/demos_music.php" title="Demo music" id="demo_music" class="topbutton">DEMO MUSIC</a></li>
 								<li><a href="../demos/submission_demos.php" title="Demo submissions" id="demo_submissions" class="topbutton">DEMO SUBMISSIONS</a></li>
-								<li><a href="../individuals/individuals_main.php" title="Individuals" id="individuals" class="topbutton">INDIVIDIUALS</a></li>
-								<li><a href="../individuals/individuals_author.php" title="Author types" id="author_types" class="topbutton">AUTHOR TYPES</a></li>
-								<li><a href="../crew/crew_main.php" title="Crew editor" id="crew_editor" class="topbutton">CREW EDITOR</a></li>
-								<li><a href="../interviews/interviews_main.php" title="Interviews" id="interviews" class="topbutton">INTERVIEWS</a></li>
-								<li><a href="../interviews/interviews_help.php" title="Interviews help" id="interviews_help" class="topbutton">INTERVIEWS HELP</a></li>
+								<li><a href="../individuals/individuals_main.php" title="Individuals" id="demo_individuals" class="topbutton">INDIVIDIUALS</a></li>
+								<li><a href="../individuals/individuals_author.php" title="Author types" id="demo_author_types" class="topbutton">AUTHOR TYPES</a></li>
+								<li><a href="../crew/crew_main.php" title="Crew editor" id="demo_crew_editor" class="topbutton">CREW EDITOR</a></li>
+								<li><a href="../interviews/interviews_main.php" title="Interviews" id="demo_interviews" class="topbutton">INTERVIEWS</a></li>
+								<li><a href="../interviews/interviews_help.php" title="Interviews help" id="demo_interviews_help" class="topbutton">INTERVIEWS HELP</a></li>
 							</ul>
 						</li>
 						<li><button type="button" class="topbutton" id="users">USERS</button>
@@ -52,12 +52,12 @@
 								<li><a href="../news/news_add.php" title="Add news" id="add_news" class="topbutton">ADD NEWS</a></li>
 								<li><a href="../news/news_approve.php" title="Approve news" id="approve_news" class="topbutton">APPROVE NEWS</a></li>
 								<li><a href="../news/news_edit_all.php" title="Submitted news" id="submitted_news" class="topbutton">EDIT NEWS</a></li>
-								<li><a href="../news/news_add_images.php" title="Add news images" id="submitted_news" class="topbutton">ADD NEWS IMAGES</a></li>
+								<li><a href="../news/news_add_images.php" title="Add news images" id="add_news_images" class="topbutton">ADD NEWS IMAGES</a></li>
 							</ul>
 						</li>
 						<li><button type="button" class="topbutton" id="other">OTHER</button>
 							<ul>
-								<li><a href="../administration/statistics.php" title="Statistics" id="Statistics" class="topbutton">STATISTICS</a></li>
+								<li><a href="../administration/statistics.php" title="Statistics" id="statistics" class="topbutton">STATISTICS</a></li>
 								<li><a href="../trivia/did_you_know.php" title="Did you know" id="did_you_know" class="topbutton">DID YOU KNOW</a></li>
 								<li><a href="../trivia/manage_trivia_screens.php" title="Trivia screenshots" id="trivia_screenshots" class="topbutton">TRIVIA SCREENSHOTS</a></li>
 								<li><a href="../trivia/manage_trivia_quotes.php" title="Trivie quotes" id="trivia_quotes" class="topbutton">TRIVIA QUOTES</a></li>

@@ -33,149 +33,97 @@ function deletescreen(JSgameboxID,JSmode)
 {/block}
 {block name=title}{$game_info.game_name} - Boxscans{/block}
 {block name=body}
-
-<table width="100%" cellspacing="2" cellpadding="2" align="center" class="CELLCOLOR">
-<tr>
-	<td>
-		<fieldset class="game_set">
+<div class="NEWMAINCELL" style="text-align:center;">
+		<fieldset class="interview_set">
 			<legend class="links_legend">Boxscans - help</legend>
-			<table>
-				<tr>
-					<td width="100%" align="left" valign="top">
+
 					In this section you can add boxscans to the database. Front and back scans. First add a front box, then you'll have the opportunity to upload and link a back scan with it! 
-					</td>
-				</tr>
-			</table>
+		
 		</fieldset> 	
-
-	</td>
-</tr>
-</table>
-
-<table width="100%" cellspacing="2" cellpadding="2" align="center" class="CELLCOLOR">
-<tr>
-	<td width="50%" valign="top">
-					<table cellspacing="0" cellpadding="2" border="0" width="90%" style="border: solid 1px #b2b2b2; background-color:#E9E9E9;">
-					<tr>
-						<td valign="top" width="100%"><b>Browse for a <span style="color:red;">{$mode.mode}</span> boxscan and click "submit" to upload it.</b></td>
-		
-					</tr>
-					</table>
-					<table cellspacing="0" cellpadding="10" border="0" width="90%" style="border: solid 1px #b2b2b2; background-color:#E9E9E9;">
-					
-					<tr bgcolor="#EFEFEF">
-						<td width="100%" valign="top">
-							<br/>
-								<form enctype="multipart/form-data" name="frmUploadShot" action="db_games_box.php" method="post">		
-							
-								<input type="file" name="image[1]">
-								<input type="hidden" name="game_id" value="{$game_info.game_id}">
-								{if $mode.mode eq "back"}
-								<input type="hidden" name="mode" value="back">
-								<input type="hidden" name="frontscan_id" value="{$mode.frontscan_id}">
-								{/if}
-								<input type="hidden" name="action" value="boxscan_upload">
-								<input type="submit" value="Upload">
-								
-								</form>
-						</td>
-					</tr>
-					
-					</table>		
-				</td>
-	
-	<td width="50%" valign="top">
-				
-				
-				<table cellspacing="0" cellpadding="2" border="0" width="90%" style="border: solid 1px #b2b2b2; background-color:#E9E9E9;">
-					<tr>
-						<td valign="top" width="100%"><b>Front boxscans</b></td>
-					</tr>
-					</table>
-					{if $nr_front == 0}
-					<table cellspacing="0" cellpadding="10" border="0" width="90%" style="border: solid 1px #b2b2b2; background-color:#E9E9E9;">
-					<tr bgcolor="{cycle name="tr" values="#EFEFEF,#E9E9E9"}">
-						<td width="100%" valign="top">
-							No frontscan available
-						</td>
-					</tr>
-					</table>
-					{else}
-					<table cellspacing="0" cellpadding="10" border="0" width="90%" style="border: solid 1px #b2b2b2; background-color:#E9E9E9;">
-					{foreach from=$frontscan item=line}
-						<tr bgcolor="{cycle name="tr" values="#EFEFEF,#E9E9E9"}">
-						<td width="10%" valign="top">
+<br/><br/>
+<div style="display:table-cell;">
+	<div class="boxscan_table_head">
+		Browse for a <span style="color:red;">{$mode.mode}</span> boxscan and click "submit" to upload it.
+	</div>
+	<div class="boxscan_table_body">
+		<form enctype="multipart/form-data" name="frmUploadShot" action="db_games_box.php" method="post">		
+			<br/><br/>
+			<input type="file" name="image[1]">
+			<input type="hidden" name="game_id" value="{$game_info.game_id}">
+			{if $mode.mode eq "back"}
+			<input type="hidden" name="mode" value="back">
+			<input type="hidden" name="frontscan_id" value="{$mode.frontscan_id}">
+			{/if}
+			<input type="hidden" name="action" value="boxscan_upload">
+			<input type="submit" value="Upload">
+		</form>
+		<br/><br/>
+	</div>
+</div>
+<div style="display:table-cell;padding-left:100px;">
+	<div class="boxscan_table_head">
+		Front boxscans
+	</div>
+		{if $nr_front == 0}
+		No frontscan available
+		{else}
+			{foreach from=$frontscan item=line}
+				<div class="boxscan_table_body">
+					<div style="display:inline-block;padding-top:8px;padding-bottom:8px;width:44px;">
 						{$line.game_boxscan_id}
-						</td>
-						<td width="20%" valign="top">
+					</div>
+					<div style="display:inline-block;padding-top:8px;padding-bottom:8px;width:88px;">
 						<a style="cursor:pointer;" class="MAINNAV" OnClick="deletescreen({$line.game_boxscan_id},'notback'); return false;">Delete</a>
-						</td>
-						<td width="20%" valign="top">
+					</div>
+					<div style="display:inline-block;padding-top:8px;padding-bottom:8px;width:88px;">
 						<a href="../includes/show_image.php?file={$line.front_image}" data-lightbox="image-1" data-title="My caption">View</a>
-						</td>
-						<td width="50%" valign="top">
-						<a href="../games/games_box.php?game_id={$game_info.game_id}&mode=back&frontscan_id={$line.game_boxscan_id}" class="MAINNAV">Add Back</a>
-						</td>
-					</tr>
-					{/foreach}
-					</table>	
-					{/if}
-				<br/>
-				<table cellspacing="0" cellpadding="2" border="0" width="90%" style="border: solid 1px #b2b2b2; background-color:#E9E9E9;">
-					<tr>
-						<td valign="top" width="100%"><b>Back boxscans</b></td>
-		
-					</tr>
-					</table>
-					{if $nr_back == 0}
-					<table cellspacing="0" cellpadding="10" border="0" width="90%" style="border: solid 1px #b2b2b2; background-color:#E9E9E9;">
-					<tr bgcolor="{cycle name="tr" values="#EFEFEF,#E9E9E9"}">
-						<td width="100%" valign="top">
-							No backscan available
-						</td>
-					</tr>
-					</table>
-					{else}
-					<table cellspacing="0" cellpadding="10" border="0" width="90%" style="border: solid 1px #b2b2b2; background-color:#E9E9E9;">
-					
-					{foreach from=$backscan item=line}
-						<tr bgcolor="{cycle name="tr" values="#EFEFEF,#E9E9E9"}">
-						<td width="10%" valign="top">
+					</div>
+					<div style="display:inline-block;padding-top:8px;padding-bottom:8px;width:220px;">
+						<a href="../games/games_box.php?game_id={$game_info.game_id}&amp;mode=back&amp;frontscan_id={$line.game_boxscan_id}" class="MAINNAV">Add Back</a>
+					</div>
+				</div>
+			{/foreach}
+		{/if}
+	<br/>
+	<div class="boxscan_table_head">
+		Back boxscans
+	</div>
+		{if $nr_back == 0}
+		<div class="boxscan_table_body">
+		No backscan available
+		</div>
+		{else}
+			{foreach from=$backscan item=line}
+				<div class="boxscan_table_body">
+					<div style="display:inline-block;padding-top:8px;padding-bottom:8px;width:44px;">
 						{$line.game_boxscan_id}
-						</td>
-						<td width="20%" valign="top">
+					</div>
+					<div style="display:inline-block;padding-top:8px;padding-bottom:8px;width:88px;">
 						<a style="cursor:pointer;" class="MAINNAV" OnClick="deletescreen({$line.game_boxscan_id},back); return false;">Delete</a>
-						</td>
-						<td width="20%" valign="top">
+					</div>
+					<div style="display:inline-block;padding-top:8px;padding-bottom:8px;width:88px;">
 						<a href="../includes/show_image.php?file={$line.back_image}" data-lightbox="image-1" data-title="My caption">View</a>
-						</td>
-						<td width="50%" valign="top">
+					</div>
+					<div style="display:inline-block;padding-top:8px;padding-bottom:8px;width:220px;">
 						{if $line.boxscan_cross_id neq ""}
 						<span style="color:green;">--> linked to image {$line.boxscan_cross_id}</span>
 						{/if}
-						</td>
-					</tr>
-					{/foreach}
-					
-					</table>
-					{/if}
-	
-	</td>
-	
-</tr>
-</table>
-
+					</div>
+				</div>
+			{/foreach}
+		{/if}
+</div>
 <br/>
 	<div style="text-align: center;">
 			<br/>
 			<span class="MAINAV"><b><a href="../games/games_detail.php?game_id={$game_info.game_id}" class="MAINNAV">back</a></b></span>
 		</div>
 <br/>
-
 {if isset($message)}
 	<div style="text-align: center;">
 			<br/><br/>
 			<span class="MAINAV">{$message}</span>
 		</div>
 {/if}
+</div>
 {/block}

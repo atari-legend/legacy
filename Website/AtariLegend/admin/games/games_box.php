@@ -97,5 +97,5 @@ This is the game box main page
 	$smarty->display('file:../templates/0/games_box.html');
 
 	//close the connection
-	mysqli_free_result();
+	mysqli_close($mysqli);
 ?>
