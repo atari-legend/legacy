@@ -17,20 +17,17 @@ The main company (developer/publisher) page
 {extends file='head.html'}
 {block name=title}Add/Edit a company (publisher/developer){/block}
 {block name=body}
-<table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
-<tr>
-	<td colspan="2">
-	<fieldset class="game_set">
+<div class="NEWMAINCELL" style="display:block; margin-left:auto;margin-right: auto;">
+	<fieldset class="game_set" style="width:75%;">
 		In this section you can add or edit a publisher or developer. To edit an existing entry, look up the name
 		in the dropdown box and press the 'Edit' button. To add a new entry, use the input field and press 'add'
 	</fieldset> 
-	</td>
-</tr>
-<tr>
-	<td align="center">
-	<form action="../company/company_edit.php" method="post" name="comp_edit" id="comp_edit">
-	<fieldset class="interview_set">
-	<legend class="links_legend">Edit a company</legend>
+<br/>
+	<div style="display:inline;">
+	<fieldset class="interview_set" style="width:400px;display:inline;float:left;">
+			<legend class="links_legend">Edit a company</legend>
+			<form action="../company/company_edit.php" method="post" name="comp_edit" id="comp_edit">
+
 	<select name="comp_id">
 		<option value="-">-</option>
 		{foreach from=$company item=line}
@@ -38,14 +35,14 @@ The main company (developer/publisher) page
 		{/foreach}	
 	</select>
 	<input type="submit" value="Edit">
-	</fieldset>
-	<input type="hidden" name="action" id="action" value="search_comp">
+		<input type="hidden" name="action" id="action" value="search_comp">
 	<input type="hidden" name="user_id" id="user_id" value="{$user_id}">
 	</form>	
-	</td>
-	<td align="center">
+	</fieldset>
+
+
 	<form action="../company/company_main.php" method="post" name="comp_add" id="comp_add">
-	<fieldset class="interview_set">
+	<fieldset class="interview_set" style="width:400px;display:inline;float:right;">
 	<legend class="links_legend">Add a company</legend>
 	<input type="text" name="comp_name">
 	<input type="submit" value="Add">
@@ -53,9 +50,8 @@ The main company (developer/publisher) page
 	<input type="hidden" name="action" id="action" value="insert_comp">
 	<input type="hidden" name="user_id" id="user_id" value="{$user_id}">
 	</form>	
-	</td>
-</tr>
-</table>
+	</div>
+</div>
 
 {if isset($message)}
 	<div style="text-align: center;">

@@ -28,19 +28,18 @@ function commentdelete(JScomID,JSusers_id)
 {/block}
 {block name=title}Comments Games{/block}
 {block name=body}
-<a name="top"></a>
+<div id="top"></div>
 
-<div class="NEWMAINCELL" style="text-align:center;">
-	<fieldset class="game_set" style="padding:px;">
+<div class="NEWMAINCELL" style="display:block; margin-left:auto;margin-right: auto;">
+	<fieldset class="game_set" style="padding:5px;width:95%;margin-left:auto;margin-right: auto;text-align:center;">
 
 				This is the user comment edit page. Overhere you can edit or delete user comments for games. 
 				There is currently a total of <b>{$total_nr_comments}</b> comments in the AL DB!
 
 	</fieldset> 
-</div>
-<div class="NEWMAINCELL" style="display:block; margin-left:auto;margin-right: auto;">
 
-		<br/>
+
+		<br/><br/><br/>
 		
 		{* START NEW COMMENT BOX *}	
 		
@@ -98,8 +97,7 @@ function commentdelete(JScomID,JSusers_id)
 							<a  onClick="commentdelete({$line.comment_id},{$line.users_id})" style="cursor: pointer;">
 							<img src="../templates/0/icons/icon_delete.gif" alt="Delete Comment" title="Delete Comment" width="16" height="18"/>
 							</a>	
-					
-					
+
 				</div>
 			</div>
 	
@@ -113,7 +111,7 @@ function commentdelete(JScomID,JSusers_id)
 				
 				<br/>
 				
-			<div>
+
 	
 			{if $links.linkback != ''}
 			<div style="float:left;margin-left:150px;">

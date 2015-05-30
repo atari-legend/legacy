@@ -116,6 +116,8 @@ $smarty->assign('total_nr_submissions', $v_rows_total);
 				$comment = InsertSmillies($comment);
 				$comment = nl2br($comment);
 				$comment = stripslashes($comment);
+
+				$email_game = rawurlencode($query_submission['game_name']);
 		
 			if ($query_submission['avatar_ext']!=="")
 			{
@@ -142,6 +144,7 @@ $smarty->assign('total_nr_submissions', $v_rows_total);
 						  'user_joindate' => $user_joindate,
 						  'user_comment_nr' => $usercomment_number,
 						  'usersubmit_number' => $usersubmit_number,
+						  'email_game' => $email_game,
 						  'email' => $query_submission['email']));
 		} 
 		

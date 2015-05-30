@@ -10,7 +10,7 @@
 
 .leftcell {
 
-	width: 226px;
+	width: 230px;
 	float: left;
 	background-color:#E9E9E9;
 }
@@ -25,7 +25,7 @@
 {
 	background-image: url(headerback.png);
 	color: #FFFFDD;
-	vertical-align: center;
+	vertical-align: middle;
 	font-weight: 600;
 	height: 20px;
 	background-attachment: inherit;
@@ -37,14 +37,17 @@
 .MAINHEADING {
 	color: #FFFFDD;
 	font-size : 12px;
-	height:20px;
+	height:40px;
+	min-height: 40px;
 	padding-top:2px;
+	padding-bottom:2px;
 }
 
 .NEWMAINCELL 
 {
 	background-color: #F3F3F3;
 	padding:8px;
+	margin:15px;
 }
 
 .MAINBODY 
@@ -136,7 +139,7 @@ SELECT.linkcategory_select
 	font-size: 12px;
 }
 
-TEXTAREA.
+TEXTAREA
 {
 	color: gray;
 	HEIGHT: 200px;
@@ -269,6 +272,8 @@ border: #26a solid 1px;
 width: 75%;
 background-color: white;
 -moz-border-radius:10px;
+margin-left:auto;
+margin-right:auto;
 }
 
 .interview_set_screenshot
@@ -351,7 +356,7 @@ background-color: white;
 {
 	background-image: url(headerback.png);
 	color: #FFFFDD;
-	vertical-align: center;
+	vertical-align: middle;
 	font-weight: 600;
 	height: 20px;
 	background-attachment: inherit;
@@ -528,4 +533,37 @@ background-color: white;
 	display:table-cell;
 	padding-left:6px;
 	padding:6px;
+}
+
+.boxscan_table_head {
+
+	width:440px;
+	border: solid 1px #b2b2b2;
+	padding-top:2px;
+	padding-bottom:2px; 
+	background-color:#E9E9E9;
+	font-weight: bold;
+
+}
+
+.boxscan_table_body {
+
+	display:table;
+	width:440px;
+	border: solid 1px #b2b2b2; 
+	background-color:#EFEFEF;
+
+}
+
+.review_score_box {
+	display:table;
+	font-size: 11px;
+	color: #000000;
+	padding: 5px;
+	width:70%;
+	border: solid 1px #b2b2b2; 
+	background-color:white;
+	margin-left:auto;
+	margin-right: auto;
+	text-align:center;
 }

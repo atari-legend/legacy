@@ -453,7 +453,6 @@ nav ul {
   border-left: 1px solid #12164a;
   padding-top: 3px;
   text-decoration:none;
-
 }
 
 .topbutton:hover {
@@ -472,15 +471,36 @@ nav ul {
   text-decoration:none;
   color: white;
 }
+#other {
 
+  width: 215px;
+}
 
 #game_editor, #game_comments, #game_series, #game_music, #game_submissions, #game_reviews, #submitted_reviews,
 #menu_editor, #menu_comments, #menu_submissions, #demo_editor, #demo_comments, #demo_music, #demo_submissions,
 #user_admin, #individuals, #author_types, #crew_editor, #companies, #company_logo, #add_news, #approve_news, 
-#submitted_news, #Statistics,#did_you_know, #trivia_screenshots, #trivia_quotes, #add_links, #validate_links,
+#submitted_news, #add_news_images, #statistics,#did_you_know, #trivia_screenshots, #trivia_quotes, #add_links, #validate_links,
 #modify_links, #link_categories, #articles, #article_types, #screenshots, #modify_links, 
-#link_categories, #articles, #article_types, #article_screenshots, #add_magazines, #manage_issues, #interviews, 
-#interviews_help, #forum, #logout {
+#link_categories, #articles, #article_types, #article_screenshots, #add_magazines, #manage_issues, #game_interviews, 
+#game_interviews_help, #forum, #logout, #game_individuals, #game_author_types, #menu_individuals, #menu_author_types,
+#menu_crew_editor, #demo_individuals, #demo_author_types, #demo_crew_editor, #demo_interviews, #demo_interviews_help {
+		height: 40px;
+		font-size: 16px;
+		text-decoration:none;
+		display:table-cell;
+		text-align:center;
+		vertical-align:middle;
+
+}
+
+#side_game_editor, #side_game_comments, #side_game_series, #side_game_music, #side_game_submissions, #side_game_reviews, #side_submitted_reviews,
+#side_menu_editor, #side_menu_comments, #side_menu_submissions, #side_demo_editor, #side_demo_comments, #side_demo_music, #side_demo_submissions,
+#side_user_admin, #side_individuals, #side_author_types, #side_crew_editor, #side_companies, #side_company_logo, #side_add_news, #side_approve_news, 
+#side_submitted_news, #side_statistics,#side_did_you_know, #side_trivia_screenshots, #side_trivia_quotes, #side_add_links, #side_validate_links,
+#side_modify_links, #side_link_categories, #side_articles, #side_article_types, #side_screenshots, #side_modify_links, 
+#side_link_categories, #side_articles, #side_article_types, #side_article_screenshots, #side_add_magazines, #side_manage_issues, #side_interviews, 
+#side_interviews_help, #side_forum, #side_logout, #side_game_individuals, #side_game_author_types, #side_menu_individuals, #side_menu_author_types,
+#side_menu_crew_editor, #side_demo_individuals, #side_demo_author_types, #side_demo_crew_editor, #side_demo_interviews, #side_demo_interviews_help {
 		height: 40px;
 		font-size: 16px;
 		text-decoration:none;
