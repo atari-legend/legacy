@@ -567,3 +567,39 @@ background-color: white;
 	margin-right: auto;
 	text-align:center;
 }
+
+.click_button {
+	display:block;
+	font-family: Impact, Charcoal, sans-serif;
+	height: 18px;
+	width:70px;
+	background-color:white;
+	color: #161c71;
+	border: solid 1px #161c71;
+	text-align:center;
+	font-size: 11px;
+	padding-top:5px;
+	border-radius: 5px;
+	float:left;
+	margin-right:5px;
+}
+
+.click_button:hover {
+	background-color:#1e269c;
+	color: white;
+	border: solid 1px #161c71;
+	font-size: 12px;
+}
+
+.game_series_nav {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    float:left;
+}
+
+.game_series_nav li {
+
+	display: inline;
+}
+
