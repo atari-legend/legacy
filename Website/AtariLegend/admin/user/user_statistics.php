@@ -28,7 +28,7 @@ $sql = $mysqli->query("SELECT * FROM comments
 
 $nr_comments=0;
 
-while ($sql->fetch_array(MYSQLI_BOTH))
+while ($query = $sql->fetch_array(MYSQLI_BOTH))
 {
     $nr_comments++;
 	
@@ -48,7 +48,7 @@ $sql = $mysqli->query("SELECT * FROM review_main
 					LEFT JOIN game ON ( review_game.game_id = game.game_id )
 					WHERE review_main.member_id = $user_id_selected");
 $nr_reviews=0;
-while ($sql->fetch_array(MYSQLI_BOTH))
+while ($query = $sql->fetch_array(MYSQLI_BOTH))
 {
     $nr_reviews++;
 	
@@ -79,7 +79,7 @@ $sql = $mysqli->query("SELECT * FROM game_submitinfo
 				    LEFT JOIN game ON (game_submitinfo.game_id = game.game_id)
 					WHERE user_id = $user_id_selected");
 $nr_submission=0;
-while ($sql->fetch_array(MYSQLI_BOTH))
+while ($query = $sql->fetch_array(MYSQLI_BOTH))
 {
 	$nr_submission++;
 	
@@ -125,7 +125,7 @@ while ($query = $sql->fetch_array(MYSQLI_BOTH))
 // START - NUMBER OF NEWS POSTS BY USER
 $sql = $mysqli->query("SELECT * FROM users WHERE user_id = $user_id_selected") or die ('problem getting user data');
 	
-while ($sql->fetch_array(MYSQLI_BOTH))
+while ($query = $sql->fetch_array(MYSQLI_BOTH))
 {
 	$smarty->assign('user',
 			  array('user_id' => $query['user_id'],

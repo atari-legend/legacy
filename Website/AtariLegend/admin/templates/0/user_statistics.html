@@ -19,25 +19,17 @@ The the user stats page
 {extends file='head.html'}
 {block name=title}Statistics for user <a href="mailto:{$user.user_email}" class="MAINNAV_WHITE">{$user.username}</a>{/block}
 {block name=body}
-<table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
-<tr>
-	<td colspan="2" align="center">
-	<fieldset class="game_set">
+<div class="NEWMAINCELL" style="text-align:center;">	
+	<fieldset class="interview_set">
 		Some statistics of this specific user.
 	</fieldset> 
-	</td>
-</tr>
-</table>
+</div>
 
 
-<table width="100%" cellspacing="2" cellpadding="15" class="CELLCOLOR">
-<tr>
-	<td>
+<div class="NEWMAINCELL">
 	<fieldset class="game_set">
 		<legend class="links_legend">User statistics</legend>
-		<table width="100%">
-		<tr>
-			<td width="100%" valign="top">
+
 				This user has posted <b>{if $nr_comments ==! ''}{$nr_comments}{else}0{/if}</b> game comments.
 				{if $nr_comments ==! ''}
 				<br/>
@@ -50,10 +42,7 @@ The the user stats page
 					<br/>
 				{/foreach}		
 				{/if}
-			</td>
-		</tr>
-		<tr>
-			<td width="100%" valign="top">
+
 				<br/>
 				<br/>
 				This user has posted <b>{if $nr_reviews ==! ''}{$nr_reviews}{else}0{/if}</b> game reviews.
@@ -68,10 +57,7 @@ The the user stats page
 					<br/>
 				{/foreach}	
 				{/if}	
-			</td>
-		</tr>
-		<tr>
-			<td width="100%" valign="top">
+
 				<br/>
 				<br/>
 				This user has posted <b>{if $nr_submission ==! ''}{$nr_submission}{else}0{/if}</b> game submissions.
@@ -86,10 +72,7 @@ The the user stats page
 					<br/>
 				{/foreach}		
 				{/if}
-			</td>
-		</tr>
-		<tr>
-			<td width="100%" valign="top">
+
 				<br/>
 				<br/>
 				This user has posted <b>{if $nr_links ==! ''}{$nr_links}{else}0{/if}</b> links.
@@ -104,10 +87,7 @@ The the user stats page
 					<br/>
 				{/foreach}		
 				{/if}
-			</td>
-		</tr>
-		<tr>
-			<td width="100%" valign="top">
+
 				<br/>
 				<br/>
 				This user has posted <b>{if $nr_news ==! ''}{$nr_news}{else}0{/if}</b> news updates.
@@ -122,19 +102,13 @@ The the user stats page
 					<br/>
 				{/foreach}
 				{/if}	
-			</td>
-		</tr>
-		<tr>
-			<td width="100%" valign="top">
+
 				<br/>
 				<br/>
 				This user has downloaded <b>{if $nr_downloads ==! ''}{$nr_downloads}{else}0{/if}</b> games.
-			</td>
-		</table>
+
 	</fieldset>
-	</td>
-</tr>
-</table>
+</div>
 <br/>
 	<div style="text-align: center;">
 			<br/>
@@ -142,8 +116,6 @@ The the user stats page
 		</div>
 <br/>
 {if isset($message)}
-	<div class="message_box">
-		{$message}
-	</div>
+	<div class="message_box">{$message}</div>
 {/if}
 {/block}
