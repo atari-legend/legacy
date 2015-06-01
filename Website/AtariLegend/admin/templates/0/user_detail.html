@@ -165,7 +165,7 @@ function user_stats()
 	</td>
 	<td width="30%" align="left">
 	<input type="hidden" name="MAX_FILE_SIZE" value="50000">
-	<input type="file" name="image" class="links_file-box">
+	<input type="file" name="image">
 	</td>
 	<td width="50%" align="left">
 	<input type="hidden" name="user_id_selected" value="{$users.user_id}">
@@ -189,9 +189,8 @@ function user_stats()
 <br/>
 
 {if isset($message)}
-	<div style="text-align: center;">
-			<br/><br/>
-			<span class="MAINAV">{$message}</span>
-		</div>
+	<div class="message_box">
+		{$message}
+	</div>
 {/if}
 {/block}

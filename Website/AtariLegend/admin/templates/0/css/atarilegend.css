@@ -48,6 +48,7 @@
 	background-color: #F3F3F3;
 	padding:8px;
 	margin:15px;
+
 }
 
 .MAINBODY 
@@ -202,11 +203,6 @@ background-color: Menu;
 	margin-bottom: 5px;
 }
 
-.links_file-box
-{
-	margin: 10px;
-}
-
 .links_input-box
 {
 margin-bottom: 10px;
@@ -256,7 +252,6 @@ margin-bottom: 10px;
 {
 	border : 1px solid #1A168B;
 	background : White;
-	
 }
 
 .news_set
@@ -601,5 +596,23 @@ background-color: white;
 .game_series_nav li {
 
 	display: inline;
+}
+
+.message_box {
+	display:table;
+	font-size: 12px;
+	font-style:italic;
+	color: #000000;
+	padding: 5px;
+	padding-top:10px;
+	padding-bottom:10px;
+	width:70%;
+	border: solid 1px #b2b2b2; 
+	background-color:white;
+	margin-left:auto;
+	margin-right: auto;
+	text-align:center;
+
+
 }
 

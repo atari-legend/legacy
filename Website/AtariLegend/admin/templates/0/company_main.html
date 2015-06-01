@@ -17,8 +17,8 @@ The main company (developer/publisher) page
 {extends file='head.html'}
 {block name=title}Add/Edit a company (publisher/developer){/block}
 {block name=body}
-<div class="NEWMAINCELL" style="display:block; margin-left:auto;margin-right: auto;">
-	<fieldset class="game_set" style="width:75%;">
+<div class="NEWMAINCELL" style="text-align:center;">
+	<fieldset class="interview_set" style="width:75%;">
 		In this section you can add or edit a publisher or developer. To edit an existing entry, look up the name
 		in the dropdown box and press the 'Edit' button. To add a new entry, use the input field and press 'add'
 	</fieldset> 
@@ -54,9 +54,8 @@ The main company (developer/publisher) page
 </div>
 
 {if isset($message)}
-	<div style="text-align: center;">
-			<br/><br/>
-			<span class="MAINAV">{$message}</span>
-		</div>
+	<div class="message_box">
+		{$message}
+	</div>
 {/if}
 {/block}
