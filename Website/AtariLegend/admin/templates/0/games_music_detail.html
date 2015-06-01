@@ -35,26 +35,16 @@ function delete_music(game_id)
 {/block}
 {block name=title}Edit game music - <a href="../games/games_detail.php?game_id={$game.game_id}" class=MAINNAV_WHITE>{$game.game_name}</a>{/block}
 {block name=body}
-<table width="100%" cellspacing="2" cellpadding="15" class="CELLCOLOR">
-<tr>
-	<td>
-	<fieldset class="game_set">
+<div class="NEWMAINCELL" style="text-align:center;">
+	<fieldset class="interview_set">
 		<legend class="links_legend">Game Music</legend>
-		<table>
-		<tr>
-			<td width="100%" align="left" valign="top">
-				Add a new muzak or delete an existing one from the db. Choose the composer and go for it!
-			</td>
-		</tr>
-		</table>
-	</fieldset> 
-	</td>
-</tr>
-</table>
 
-<table width="100%" cellspacing="2" cellpadding="15" class="CELLCOLOR">
-<tr>
-	<td width="100%">
+				Add a new muzak or delete an existing one from the db. Choose the composer and go for it!
+
+	</fieldset> 
+</div>
+
+<div class="NEWMAINCELL">
 	<form action="../games/games_music_detail.php" method="post" name="editmuzak">
 	<fieldset class="game_set">
 		<legend class="links_legend">Edit existing files</legend>
@@ -87,14 +77,10 @@ function delete_music(game_id)
 			</table>
 	</fieldset>
 	</form>
-	</td>
-</tr>
-</table>
+</div>
 
 {if isset($action) and $action == 'pick_composer'}
-<table width="100%" cellspacing="2" cellpadding="15" class="CELLCOLOR">
-<tr>
-	<td width="100%">
+<div class="NEWMAINCELL">
 		<form enctype="multipart/form-data" method="post" action="../games/games_music_detail.php" name="composer">		
 		<fieldset class="game_set">
 		<legend class="links_legend">Music files for {$ind_selected.ind_name}</legend>
@@ -118,9 +104,7 @@ function delete_music(game_id)
 			</table>
 	</fieldset>
 	</form>
-	</td>
-</tr>
-</table>
+</div>
 {/if}
 
 <br/>
@@ -133,9 +117,8 @@ function delete_music(game_id)
 <br/>
 
 {if isset($message)}
-	<div style="text-align: center;">
-			<br/><br/>
-			<span class="MAINAV">{$message}</span>
-		</div>
+	<div class="message_box">
+		{$message}
+	</div>
 {/if}
 {/block}

@@ -18,17 +18,12 @@
 {block name=title}Add/Edit Author types{/block}
 {block name=body}
 
-<table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
-<tr>
-	<td colspan="2">
-	<fieldset class="game_set">
+<div class="NEWMAINCELL" style="display:block; margin-left:auto;margin-right: auto;">
+	<fieldset class="interview_set">
 		Here you can add, edit or delete an author type. These groupings are used in the actual game section
 		to connect them to a certain genre. 		
 	</fieldset> 
-	</td>
-</tr>
-<tr>
-	<td>
+<br/><br/>
 		{if isset($load) and $load == '1'}
 			<form action="../individuals/db_individuals_author.php" method="post" name="post">
 			<fieldset class="links_set">
@@ -49,39 +44,31 @@
 			</fieldset>
 			</form>
 		{/if}
-	</td>
-</tr>
-<tr>
-	<td>
+<br/><br/>
 		<fieldset class="links_set">
 		<legend class="links_legend">Current types</legend>
-		<table>
+		
 		{foreach from=$author_types item=line} 
-		<tr>
-			<td align="left" width="70%">{$line.author_type}</td>
-			<td align="center" width="15%"><a href="../individuals/individuals_author.php?type_id={$line.author_type_id}&amp;action=load" class=MAINNAV>Edit</a></td>
-			<td align="right" width="15%"><a href="../individuals/db_individuals_author.php?type_id={$line.author_type_id}&amp;action=delete" class=MAINNAV>Delete</a></td>
-		</tr>
+		<ul style="display:block;width:100%;padding:0px;margin:0px;">
+			<li style="display:table-cell;width:70%;">{$line.author_type}</li>
+			<li style="display:table-cell;width:15%;"><a href="../individuals/individuals_author.php?type_id={$line.author_type_id}&amp;action=load" class=MAINNAV>Edit</a></li>
+			<li style="display:table-cell;width:15%;"><a href="../individuals/db_individuals_author.php?type_id={$line.author_type_id}&amp;action=delete" class=MAINNAV>Delete</a></li>
+		</ul>
+		
 		{/foreach}
-		</table>
+		
 		</fieldset>
-	</td>
-</tr>
-</table>		
+<br/>	
 <br/>
-<table width="100%" border="0" cellspacing="0" cellpadding="0">
-	<tr>
-   		<td colspan="3" valign=top align=center>
-			<b><a href="javascript:history.go(-1)" class="MAINNAV">back</a></b>
-		</td>
-	</tr>
-</table>
-<br/>
-
-{if isset($message)}
-	<div style="text-align: center;">
+<div style="text-align: center;">
 			<br/><br/>
-			<span class="MAINAV">{$message}</span>
+			<span class="MAINAV"><b><a href="javascript:history.go(-1)" class="MAINNAV">back</a></b></span>
 		</div>
+<br/>
+</div>
+{if isset($message)}
+	<div class="message_box">
+		{$message}
+	</div>
 {/if}
 {/block}

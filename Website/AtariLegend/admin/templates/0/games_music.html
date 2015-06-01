@@ -19,7 +19,7 @@ The main game music
 {block name=title}Add/Edit a game music entry{/block}
 {block name=body}
 <div class="NEWMAINCELL" style="text-align:center;">
-	<fieldset class="game_set">
+	<fieldset class="interview_set">
 		In this section you can add game music files to the games. They are used in the main pages 
 		and will also appear in the jukebox.
 	</fieldset> 
@@ -76,9 +76,8 @@ The main game music
 </div>
 
 {if isset($message)}
-	<div style="text-align: center;">
-			<br/><br/>
-			<span class="MAINAV">{$message}</span>
-		</div>
+	<div class="message_box">
+		{$message}
+	</div>
 {/if}
 {/block}
