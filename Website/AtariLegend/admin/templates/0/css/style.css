@@ -484,7 +484,7 @@ nav ul {
 #link_categories, #articles, #article_types, #article_screenshots, #add_magazines, #manage_issues, #game_interviews, 
 #game_interviews_help, #forum, #logout, #game_individuals, #game_author_types, #menu_individuals, #menu_author_types,
 #menu_crew_editor, #demo_individuals, #demo_author_types, #demo_crew_editor, #demo_interviews, #demo_interviews_help {
-		height: 40px;
+		height: 30px;
 		font-size: 16px;
 		text-decoration:none;
 		display:table-cell;
