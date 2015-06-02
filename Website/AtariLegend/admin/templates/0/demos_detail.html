@@ -69,15 +69,11 @@ function add_author()
 	<td>
 	<fieldset class="game_set">
 		<legend class="links_legend">Crew/Creator info - help</legend>
-		<table>
-		<tr>
-			<td width="100%" align="left" valign="top">
+
 				A demo can be build by a crew, or can be created by an individual. If the demo is a one mans job, the crew data should not be filled.
 				However, if the demo is constructed by a crew, the crew should be added in the crew box. As well as the members (of this crew) who participated on this
 				demo, they should be added in the Creator box. You can link as many Crews/Creators to this demo as you wish.
-			</td>
-		</tr>
-		</table>
+
 	</fieldset> 
 	</td>
 </tr>
@@ -277,12 +273,11 @@ function add_author()
 <table width="100%" cellspacing="2" cellpadding="15" class="CELLCOLOR">
 <tr>
 	<td width="33%" align="center">
-	<form action="../demos/db_demos.php" method="post" name="aka">
-	<fieldset class="game_set">
+
+	<fieldset class="game_set" style="padding:15px;">
 		<legend class="links_legend">Other Features</legend>
-			<table width="100%">
-			<tr>
-				<td width="33%" align="center">	
+			<form action="../demos/db_demos.php" method="post" name="aka">
+			
 					<b>Demo AKA :</b> <input type="text" name="demo_aka"><input type="submit" name="valider" value="Add">
 					<input type="hidden" name="action" value="demo_aka">	
 					<input type="hidden" name="demo_id" value="{$demo_id}">	
@@ -302,23 +297,17 @@ function add_author()
 				  	<b><a href="../demos/demos_screenshot_add.php?demo_id={$demo_info.demo_id}&demo_name={$demo_info.demo_name}" class="MAINNAV">Add screenshots</a></b><br/>
 					<br/>
 					<b><a href="../administration/construction.php" class="MAINNAV">Moderate comments</a></b>
-				</td>
-			</tr>
-			</table>
-	</fieldset>
 	</form>
+	</fieldset>
+
 	</td>
 	<td width="33%" align="center">
 	<fieldset class="game_set">
 		<legend class="links_legend">Statistics</legend>
-			<table width="100%">
-			<tr>
-				<td width="33%" align="center">	
+
 					Nr of Screenshots - {$nr_screenshots}<br/>
 					Nr of music files - {$nr_music}<br/>
-				</td>
-			</tr>
-			</table>
+
 	</fieldset>
 	</td>
 </tr>

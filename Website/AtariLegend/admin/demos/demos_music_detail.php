@@ -214,7 +214,6 @@ while ( $MUSIC=$sql_music->fetch_array(MYSQLI_BOTH) )
 	$smarty->append('music',
 	   		 array('music_id' => $MUSIC['music_id'],
 				   'ind_name' => $MUSIC['ind_name'],
-				   'music_id' => $MUSIC['music_id'],
 				   'extention' => $MUSIC['extention']));
 }
 

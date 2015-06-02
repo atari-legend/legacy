@@ -36,20 +36,14 @@ function deletecomment(screenshot_id, interview_id)
 {/block}
 {block name=title}Interviews screenshots - <a href="../individuals/individuals_edit.php?ind_id={$interview.interview_ind_id}" class="MAINNAV_WHITE">{$interview.interview_ind_name}</a>{/block}
 {block name=body}		
-
-<table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
-<tr>
-	<td>
-	<fieldset class="game_set">
+<div class="NEWMAINCELL" style="text-align:center;">
+	<fieldset class="interview_set">
 		In this section you can add screenshots to a selected interview. Use the browse buttons to select the shots and press the 
 		'Submit Query' button to link them to the interview.
 	</fieldset> 
 	<br/>
 	<br/>
-	<table width="100%" cellspacing="0" cellpadding="0">
-	<tr>
-		<td align="center" width="100%">
-		<fieldset class="news_set">
+		<fieldset class="interview_set">
 		<legend class="links_legend">screenshots</legend>
 		{if $screenshots_nr <> ''}
 			{foreach from=$screenshots item=line}
@@ -62,49 +56,28 @@ function deletecomment(screenshot_id, interview_id)
 			No screenshots attached to this interview
 		{/if}
 		</fieldset>	
-		</td>
-	</tr>
-	</table>
-	</td>
-</tr>
+<br/><br/>
 
-<tr>
-	<td align="center">
-		<fieldset class="news_set">
+		<fieldset class="interview_set">
 		<legend class="links_legend">Browse</legend>
 		<form enctype="multipart/form-data" name="frmUploadShot" action="db_interview.php" method="post">
 		{section name=loop loop=11 start=1} 
 			<input type="file" name="image[{$smarty.section.loop.index}]">
 		{/section}	
+		<br/><br/>
+			<input type="hidden" name="MAX_FILE_SIZE" value="100000">
+			<input type="hidden" name="interview_id" value="{$interview.interview_id}">
+			<input type="hidden" name="individual" value="{$interview.interview_ind_id}">
+			<input type="hidden" name="action" value="add_screens">
+			<input type="submit" name="cmdSubmit">
+			</form>
 		</fieldset> 
-	</td>
-</tr>
-</table>
-
-<table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
-<tr>
-	<td>
-	<input type="hidden" name="MAX_FILE_SIZE" value="100000">
-	<input type="hidden" name="interview_id" value="{$interview.interview_id}">
-	<input type="hidden" name="individual" value="{$interview.interview_ind_id}">
-	<input type="hidden" name="action" value="add_screens">
-	<input type="submit" name="cmdSubmit">
-	</form>
-	</td>
-</tr>
-</table>
 
 <br/>
-<table width="100%" border="0" cellspacing="0" cellpadding="0">
-	<tr>
-   		<td colspan="3" valign=top align=center>
-			<b><a href="javascript:history.go(-1)" class="MAINNAV">back</a></b>
-		</td>
-	</tr>
-</table>
+<div class="back_button"><a href="javascript:history.go(-1)" class="MAINNAV">back</a></div>
 <br/>
-
 {if isset($message)}
 	<div class="message_box">{$message}</div>
 {/if}
+</div>
 {/block}
