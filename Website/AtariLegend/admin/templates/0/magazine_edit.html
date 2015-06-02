@@ -49,9 +49,7 @@ function issuedelete(JSmagID,JSmagazine_issue_id)
 {/block}
 {block name=title}Magazines Issues{/block}
 {block name=body}
-<table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
-<tr>
-	<td>
+<div class="NEWMAINCELL">
 	
 		
 		  {$magazine.magazine_name} selected.<br/>
@@ -59,8 +57,6 @@ function issuedelete(JSmagID,JSmagazine_issue_id)
 		
 		
 		<br/>
-		
-		
 <fieldset class="category_set_noGrave">
 	<legend class="links_legend">{$magazine.magazine_name} issues in archive</legend>
 	
@@ -74,8 +70,6 @@ function issuedelete(JSmagID,JSmagazine_issue_id)
 	
 	{/foreach}
 	<br/>
-	
-	
 </fieldset> 
 
 <br/>
@@ -92,10 +86,7 @@ function issuedelete(JSmagID,JSmagazine_issue_id)
 	</form>
 </fieldset>
 
-<br/>
-<a href="../magazine/magazine_manage.php" class="MAINNAV">Back</a>
-
-	</td>
-</tr>
-</table>
+<br/><br/><br/>
+<div class="back_button"><a href="../magazine/magazine_manage.php" class="MAINNAV">Back</a></div>
+</div>
 {/block}
