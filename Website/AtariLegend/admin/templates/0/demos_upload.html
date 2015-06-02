@@ -35,22 +35,18 @@ function delete_download(id, demo_id)
 }
 </script>
 {/block}
-{block name=title}Upload file for <a href="../demos/demos_detail.php?demo_id={$demo.demo_id}" class="MAINNAV_WHITE">{$demo.demo_name}{/block}
+{block name=title}Upload file for <a href="../demos/demos_detail.php?demo_id={$demo.demo_id}" class="MAINNAV_WHITE">{$demo.demo_name}</a>{/block}
 {block name=body}
 
-<table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
-<tr>
-	<td colspan="2">
-	<fieldset class="game_set">
+<div class="NEWMAINCELL">
+	<fieldset class="interview_set">
 		In this section you can upload a download for <b><a href="../demos/demos_detail.php?demo_id={$demo.demo_id}" class="MAINNAV">{$demo.demo_name}</a></b>.	Make sure to give 
 		every version a different set nr. If a demo has 2 disks, those 2 disks should have equal
 		set nr's. set nrs are linked to the version/crack you upload. If you upload 2 different 
 		cracks with the same set_nr for a certain demo, it all gets screwed! so make sure you do it 
 		correctly!
 	</fieldset> 
-	</td>
-</tr>
-</table>
+
 
 {if $nr_downloads >= '1'}
 <table width="100%" cellspacing="2" cellpadding="15" class="CELLCOLOR">
@@ -59,7 +55,7 @@ function delete_download(id, demo_id)
 <tr>
 	<td>
 	<form action="../demos/db_demos_upload.php?action=update_download" method="post" name="upload">
-	<fieldset class="game_set">
+	<fieldset class="interview_set">
 		<legend class="links_legend">{$line.date}</legend>
 		<table width="100%">
 		<tr>
@@ -225,11 +221,9 @@ function delete_download(id, demo_id)
 </table>
 {/if}
 
-<table width="100%" cellspacing="2" cellpadding="15" class="CELLCOLOR">
-<tr>
-	<td>
+<div class="NEWMAINCELL">
 	<form action="../demos/db_demos_upload.php?action=add_download" enctype="multipart/form-data" method="post" name="add_file">
-	<fieldset class="game_set">
+	<fieldset class="interview_set">
 		<legend class="links_legend">Add a new download</legend>
 		<table>
 		<tr>
@@ -246,18 +240,14 @@ function delete_download(id, demo_id)
 	   </table>
 	</fieldset>
 	</form>
-	</td>
-</tr>
-</table>
+</div>
 
 <br/>
-<div style="text-align: center;">
-			<br/>
-			<span class="MAINAV"><b><a href="../demos/demos_detail.php?demo_id={$demo.demo_id}" class="MAINNAV">back</a></span>
-		</div>
+<div class="back_button"><a href="../demos/demos_detail.php?demo_id={$demo.demo_id}" class="MAINNAV">back</a></div>
 <br/>
 
 {if isset($message)}
 	<div class="message_box">{$message}</div>
 {/if}
-[/block}
+</div>
+{/block}

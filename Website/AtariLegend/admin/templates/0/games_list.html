@@ -18,21 +18,18 @@ The main game page
 {block name=title}Search results{/block}
 {block name=body}
 <div class="NEWMAINCELL" style="text-align:center;">
-	
 	<br/>
 	<fieldset class="interview_set" style="padding:5px;">
 		This is the search result page. Click a game to go to the main page. Click a Publisher/Developer/Year to do a new search.
 		If you want to do a new search query or like to add a new game, click <a href="games_main.php" class="MAINNAV"><b>here</b></a>!
 	</fieldset> 
-
 <br/>
 <br/>
-
 	<table class="table_game_list" style="">
 			<tr>
 				<th width="40%">Game Name</th>
 				<th width="20%">Publisher</th>
-				<th width="20%">Developer</td>
+				<th width="20%">Developer</th>
 				<th width="10%">Year</th>
 				<th width="10%">Info</th>
 			</tr>
@@ -86,19 +83,11 @@ The main game page
 				</td>
 			</tr>
 		</table>
-
-
-
 <br/>
 		
 </div>
 <br/>
-	<div style="text-align: center;">
-			<br/>
-			<span class="MAINAV">
-			<b><a href="../games/games_main.php" class="MAINNAV">back</a></b>
-		</span>
-		</div>
+<div class="back_button"><a href="../games/games_main.php" class="MAINNAV">back</a></div>
 <br/>
 {if isset($message)}
 	<div class="message_box">{$message}</div>

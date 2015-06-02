@@ -19,7 +19,6 @@ The the user karma sync page
 {extends file='head.html'}
 {block name=title}Karma sync{/block}
 {block name=body}
-
 <table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
 <tr>
 	<td colspan="2" align="center">
@@ -59,16 +58,9 @@ The the user karma sync page
 </table>
 
 <br/>
-<div style="text-align: center;">
-			<br/>
-			<span class="MAINAV"><b><a href="../user/user_main.php" class="MAINNAV">back</a></b></span>
-		</div>
+<div class="back_button"><a href="../user/user_main.php" class="MAINNAV">back</a></div>
 <br/>
-
-{if $message <> ''}
-	<div style="text-align: center;">
-			<br/><br/>
-			<span class="MAINAV">{$message}</span>
-		</div>
+{if isset($message)}
+	<div class="message_box">{$message}</div>
 {/if}
 {/block}
