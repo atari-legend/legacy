@@ -18,27 +18,18 @@ The main demo music
 {extends file='head.html'}
 {block name=title}Add/Edit a demo music entry{/block}
 {block name=body}
-
-<table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
-<tr>
-	<td colspan="2">
-	<fieldset class="game_set">
+<div class="NEWMAINCELL" style="text-align:center;">
+	<fieldset class="interview_set">
 		In this section you can add demo music files to the demos. They are used in the main pages! 
 	</fieldset> 
-	</td>
-</tr>
-<tr>
-	<td align="center">
-		<form action="../demos/demos_music.php" method="post" name="demo_music" id="demo_music">
-		<fieldset class="interview_set">
+<br/><br/>
+		<fieldset class="interview_set" style="text-align:center;">
 		<legend class="links_legend">Search music</legend>
+			<form action="../demos/demos_music.php" method="post" name="demo_music">
 		<br/>
-		<table>
-		<tr>
-			<td>
+
 				<b>By name :</b>
-			</td>
-			<td>
+
 				<select name="demobrowse">
 					<option value="" SELECTED>-</option>
 					<option value="num">0-9</option>
@@ -70,23 +61,16 @@ The main demo music
 					<option value="z">Z</option>
 				</select>
 				<input type="text" name="demosearch" value="">
-			</td>
-		</tr>
-		</table>
-		<br/>
-		<br/>
-		<input type="submit" value="Search">
-		<br/>
-		</fieldset>
-		<input type="hidden" name="action" id="action" value="search">
-		<input type="hidden" name="user_id" id="user_id" value="{$user_id}">
-		</form>	
-	</td>
-</tr>
-</table>
 
+		<input type="submit" value="Search">
+		<br/><br/>
+			<input type="hidden" name="action" id="action" value="search">
+			<input type="hidden" name="user_id" id="user_id" value="{$user_id}">
+			</form>	
+		</fieldset>
 
 {if isset($message)}
 	<div class="message_box">{$message}</div>
 {/if}
+</div>
 {/block}

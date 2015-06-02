@@ -612,7 +612,12 @@ background-color: white;
 	margin-left:auto;
 	margin-right: auto;
 	text-align:center;
+}
 
+.back_button {
+
+	text-align:center;
+	font-weight:bold;
 
 }
 

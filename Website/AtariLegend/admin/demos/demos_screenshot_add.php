@@ -56,7 +56,7 @@ while ( $demo=$sql_demo->fetch_array(MYSQLI_BOTH))
 $smarty->assign("user_id",$_SESSION['user_id']);
 
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/demo_screenshot_add.html');
+$smarty->display('file:../templates/0/demos_screenshot_add.html');
 
 //close the connection
 mysqli_close($mysqli);
