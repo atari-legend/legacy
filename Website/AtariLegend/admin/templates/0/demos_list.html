@@ -17,85 +17,58 @@ The main game page
 {extends file='head.html'}
 {block name=title}Search results{/block}
 {block name=body}
-
-<table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
-<tr>
-	<td colspan="2">
-	<fieldset class="game_set">
+<div class="NEWMAINCELL" style="text-align:center;">
+	<fieldset class="interview_set">
 		This is the search result page. Click a demo to go to the main page. Click a Crew/Year to do a new search.
 		If you want to do a new search query or like to add a new demo, click <a href="demos_main.php" class="MAINNAV"><b>here</b></a>!
 	</fieldset> 
-	</td>
-</tr>
-<tr>
-	<td align="center">
-		<table cellspacing="0" cellpadding="2" border="0" width="90%" style="border: solid 1px #b2b2b2; background-color:#E9E9E9;">
-		<tr>
-			<td valign="top" width="25%"><b>Demo Name</b></td>
-			<td valign="top" width="25%"><b>Crew</b></td>
-			<td valign="top" width="10%"><b>Year</b></td>
-			<td valign="top" width="15%"><b>Info</b></td>			
-		</tr>
-		</table>
-		<table cellspacing="0" cellpadding="2" border="0" width="90%" style="border: solid 1px #b2b2b2; background-color:#E9E9E9;">
-		{foreach from=$demo_search item=line}
-		<tr bgcolor="{cycle name="tr" values="#EFEFEF,#E9E9E9"}">
-			<td width="25%" valign="top">
-				{if (isset($line.demo_name) and $line.demo_name != '')}
-					<a href="demos_detail.php?demo_id={$line.demo_id}" class="MAINNAV">
-						{$line.demo_name}
-					</a>
+<br/><br/>
+			<table class="table_game_list">
+			<tr>
+				<th style="width:25%;">Demo Name</th>
+				<th style="width:25%;">Crew</th>
+				<th style="width:10%;">Year</th>
+				<th style="width:15%;">Info</th>
+			</tr>
+					{foreach from=$demo_search item=line}
+			<tr>
+				<td style="width:25%;">{if (isset($line.demo_name) and $line.demo_name != '')}
+					<a href="demos_detail.php?demo_id={$line.demo_id}" class="MAINNAV">{$line.demo_name}</a>
+				{else}<i>n/a</i>{/if}</td>
+				<td style="width:25%;">{if (isset($line.crew_name) and $line.crew_name != '')}
+					<a href="demos_main.php?crew={$line.crew_id}&amp;action=search" class="MAINNAV">{$line.crew_name}</a>
 				{else}
 					<i>n/a</i>
-				{/if}
-			</td>
-			<td width="25%" valign="top">
-				{if (isset($line.crew_name) and $line.crew_name != '')}
-					<a href="demos_main.php?crew={$line.crew_id}&amp;action=search" class="MAINNAV">
-						{$line.crew_name}
-					</a>
+				{/if}</td>
+				<td style="width:10%;">{if (isset($line.year) and $line.year != '')}
+					<a href="demos_main.php?year={$line.year}&amp;action=search" class="MAINNAV">{$line.year}</a>
 				{else}
 					<i>n/a</i>
-				{/if}
-			</td>
-			<td width="10%" valign="top">
-				{if (isset($line.year) and $line.year != '')}
-					<a href="demos_main.php?year={$line.year}&amp;action=search" class="MAINNAV">
-						{$line.year}
-					</a>
-				{else}
-					<i>n/a</i>
-				{/if}
-			</td>
-			<td width="15%" valign="top">
-				{if (isset($line.screenshot) and $line.screenshot != '')}
-					<img src="../templates/0/icons/screen.gif" alt="Screenshots available" hspace="0" vspace="0" border="0" title="Screenshot Available">
-				{/if}
-				{if (isset($line.music) and $line.music != '')}
-					<img src="../templates/0/icons/sound.gif" alt="Music available" hspace="0" vspace="0" border="0" title="Music Available">
-				{/if}
-				{if (isset($line.download) and $line.download != '')}
-					<img src="../templates/0/icons/disk.gif" alt="Download available" hspace="0" vspace="0" border="0" title="Download Available">
-				{/if}
-				{if (isset($line.ste_enhan) and $line.ste_enhan != '')}
-					<img src="../templates/0/icons/ste.png" alt="STE Game" hspace="0" vspace="0" border="0" title="STE Game">
-				{/if}
-				{if (isset($line.ste_only) and $line.ste_only >='1')}
-					<img src="../templates/0/icons/ste.png" alt="STE Game" hspace="0" vspace="0" border="0" title="STE Game">
-				{/if}
-			</td>
-		</tr>
+				{/if}</td>				
+				<td style="width:15%;">{if (isset($line.screenshot) and $line.screenshot != '')}
+					<img src="../templates/0/icons/screen.gif" alt="Screenshots available" title="Screenshot Available">
+						{/if}
+						{if (isset($line.music) and $line.music != '')}
+						<img src="../templates/0/icons/sound.gif" alt="Music available" title="Music Available">
+						{/if}
+						{if (isset($line.download) and $line.download != '')}
+							<img src="../templates/0/icons/disk.gif" alt="Download available" title="Download Available">
+						{/if}
+						{if (isset($line.ste_enhan) and $line.ste_enhan != '')}
+							<img src="../templates/0/icons/ste.png" alt="STE Game" title="STE Game">
+						{/if}
+						{if (isset($line.ste_only) and $line.ste_only >='1')}
+							<img src="../templates/0/icons/ste.png" alt="STE Game" title="STE Game">
+						{/if}
+			</tr>
 		{/foreach}
-		</table>	
-		<table cellspacing="0" cellpadding="2" border="0" width="90%" style="border-left: solid 1px #b2b2b2; border-left: solid 1px #b2b2b2; border-right: solid 1px #b2b2b2; border-bottom: solid 1px #b2b2b2;background-color:#E9E9E9;">
-		<tr>
-			<td valign="top" width="100%"><b>{if $nr_of_demos == 1}1 demo found {else} {$nr_of_demos} demos found{/if} in {$query_time} sec</b></td>
-		</tr>
+			<tr>
+				<td class="game_list_footer" colspan="4">
+					{if $nr_of_demos == 1}1 demo found {else} {$nr_of_demos} demos found{/if} in {$query_time} sec
+				</td>
+			</tr>
 		</table>
 		<br/>
-	</td>
-</tr>
-</table>
 <br/>
 <div class="back_button"><a href="../demos/demos_main.php" class="MAINNAV">back</a></div>
 <br/>
@@ -104,4 +77,5 @@ The main game page
 {/if}
 <br/>
 <br/>
+</div>
 {/block}

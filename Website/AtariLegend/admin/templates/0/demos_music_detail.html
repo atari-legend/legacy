@@ -41,13 +41,9 @@ function delete_music(demo_id)
 	<td>
 	<fieldset class="game_set">
 		<legend class="links_legend">Demo Music</legend>
-		<table>
-		<tr>
-			<td width="100%" align="left" valign="top">
+
 				Add a new muzak or delete an existing one from the db. Choose the composer and go for it!
-			</td>
-		</tr>
-		</table>
+
 	</fieldset> 
 	</td>
 </tr>
@@ -62,7 +58,7 @@ function delete_music(demo_id)
 			<table width="100%">
 			<tr>
 				<td width="100%">
-					{if isset($music)}		
+					{if $nr_of_zaks >= 1}		
 					{foreach from=$music item=line}
 						<input type="checkbox" name="music_id_selected[]" value="{$line.music_id}">
 					  	<a href="../demos/demos_music_detail.php?music_id={$line.music_id}&amp;action=play_music" class="MAINNAV">{$line.ind_name}_{$line.music_id}.{$line.extention}</a>

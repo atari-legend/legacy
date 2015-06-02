@@ -39,7 +39,7 @@ if (isset($action) and $action == 'search')
 	}
 	else
 	{
-		$demobrowse_select = "demo.demo_name LIKE '$gamebrowse%' AND ";
+		$demobrowse_select = "demo.demo_name LIKE '$demobrowse%' AND ";
 	}
 	
 	//Before we start the build the query, we check if there is at least

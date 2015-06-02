@@ -36,20 +36,15 @@ function delete_screenshot(screenshot_id, demo_id)
 {/block}
 {block name=title}Demo screenshots - <a href="../demos/demos_detail.php?demo_id={$demo_id}" class="MAINNAV_WHITE">{$demo_name}</a>{/block}
 {block name=body}	
-
-<table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
-<tr>
-	<td>
-	<fieldset class="game_set">
+<div class="NEWMAINCELL" style="text-align:center;">
+	<fieldset class="interview_set">
 		In this section you can add screenshots to a selected demo. Use the browse buttons to select the shots and press the 
 		'Submit Query' button to link them to the demo.
 	</fieldset> 
 	<br/>
 	<br/>
-	<table width="100%" cellspacing="0" cellpadding="0">
-	<tr>
-		<td align="center" width="100%">
-		<fieldset class="news_set">
+
+		<fieldset class="interview_set">
 		<legend class="links_legend">screenshots</legend>
 		{if $screenshots_nr <> ''}
 			{foreach from=$screenshots item=line}
@@ -62,41 +57,26 @@ function delete_screenshot(screenshot_id, demo_id)
 			No screenshots attached to this demo
 		{/if}
 		</fieldset>	
-		</td>
-	</tr>
-	</table>
-	</td>
-</tr>
-
-<tr>
-	<td align="center">
-		<fieldset class="news_set">
+<br/><br/>
+		<fieldset class="interview_set">
 		<legend class="links_legend">Browse</legend>
 		<form enctype="multipart/form-data" name="frmUploadShot" action="db_demos_screenshot_add.php" method="post">
 		{section name=loop loop=11 start=1} 
 			<input type="file" name="image[{$smarty.section.loop.index}]">
 		{/section}	
+		<br/><br/>
+		<input type="hidden" name="MAX_FILE_SIZE" value="100000">
+		<input type="hidden" name="demo_id" value="{$demo_id}">
+		<input type="hidden" name="action" value="add_screens">
+		<input type="submit" name="cmdSubmit">
+		</form>
 		</fieldset> 
-	</td>
-</tr>
-</table>
 
-<table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
-<tr>
-	<td>
-	<input type="hidden" name="MAX_FILE_SIZE" value="100000">
-	<input type="hidden" name="demo_id" value="{$demo_id}">
-	<input type="hidden" name="action" value="add_screens">
-	<input type="submit" name="cmdSubmit">
-	</form>
-	</td>
-</tr>
-</table>
 <br/>
 <div class="back_button"><a href="../demos/demos_detail.php?demo_id={$demo_id}" class="MAINNAV">back</a></div>
 <br/>
-
 {if isset($message)}
 	<div class="message_box">{$message}</div>
 {/if}
-[/block}
+</div>
+{/block}

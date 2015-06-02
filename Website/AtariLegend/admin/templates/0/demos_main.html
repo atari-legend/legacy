@@ -45,29 +45,20 @@ function demoinsert()
 {/block}
 {block name=title}Add/Edit a demo{/block}
 {block name=body}
-
-<table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
-<tr>
-	<td colspan="2">
-	<fieldset class="game_set">
+<div class="NEWMAINCELL" style="text-align:center;">
+	<fieldset class="interview_set">
 		In this section you can add or edit a demo. Search for a demo by using any of the 
 		functionalities below. Combinations are allowed. There are currently <b>{$demos_nr}</b> demos
 		in the db!
 	</fieldset> 
-	</td>
-</tr>
-<tr>
-	<td align="center">
-		<form action="../demos/demos_list.php" method="post" name="demo_search" id="demo_search">
-		<fieldset class="interview_set">
+<br/><br/>
+
+		<fieldset class="interview_set" style="text-align:center;">
 		<legend class="links_legend">Search demos</legend>
+		<form action="../demos/demos_list.php" method="post" name="demo_search" id="demo_search">
 		<br/>
-		<table>
-		<tr>
-			<td>
+
 				<b>By name :</b>
-			</td>
-			<td>
 				<select name="demobrowse">
 					<option value="" SELECTED>-</option>
 					<option value="num">0-9</option>
@@ -99,47 +90,38 @@ function demoinsert()
 					<option value="z">Z</option>
 				</select>
 				<input type="text" name="demosearch" value="">
-			</td>
-		</tr>
-		<tr>
-			<td>
+				<br/><br/>
 				<b>By Crew :</b>
-			</td>
-			<td>
+
 				<select name="crew">
 					<option value="-" SELECTED>-</option>
 					{foreach from=$crew item=line} 
 						<option value="{$line.crew_id}">{$line.crew_name}</option>
 					{/foreach}
 				</select>		
-			</td>
-		</tr>
-		</table>
+
 		<br/>
 		<br/>
-		<input type="submit" value="Search">
+			<input type="submit" value="Search">
 		<br/>
+			<input type="hidden" name="action" id="action" value="search">
+			<input type="hidden" name="user_id" id="user_id" value="{$user_id}">
+			</form>	
 		</fieldset>
-		<input type="hidden" name="action" id="action" value="search">
-		<input type="hidden" name="user_id" id="user_id" value="{$user_id}">
-		</form>	
-	</td>
-</tr>
-<tr>
-	<td align="center">
-		<form method="post" name="insertdemo">
+
+<br/><br/>
+
 		<fieldset class="interview_set">
 		<legend class="links_legend">Add demos</legend>
+			<form method="post" name="insertdemo">
 			<input type="text" name="newdemo">
 			<input type="submit" value="Insert" onClick="demoinsert(); return false;">	
+			</form>
 		</fieldset>
 		</form>
-	</td>
-</tr>
-</table>
-
 
 {if isset($message)}
 	<div class="message_box">{$message}</div>
 {/if}
+</div>
 {/block}
