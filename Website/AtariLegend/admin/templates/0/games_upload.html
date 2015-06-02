@@ -39,19 +39,15 @@ function delete_download(id, game_id)
 {block name=body}
 
 
-<table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
-<tr>
-	<td colspan="2">
-	<fieldset class="game_set">
+<div class="NEWMAINCELL">
+	<fieldset class="interview_set">
 		In this section you can upload a download for <b><a href="../games/games_detail.php?game_id={$game.game_id}" class="MAINNAV">{$game.game_name}</a></b>.	Make sure to give 
 		every version a different set nr. If a game has 2 disks, those 2 disks should have equal
 		set nr's. set nrs are linked to the version/crack you upload. If you upload 2 different 
 		crack with the same set_nr for a certain game, it all gets screwed! so make sure you do it 
 		correctly!
 	</fieldset> 
-	</td>
-</tr>
-</table>
+
 
 {if isset($nr_downloads) and $nr_downloads >= '1'}
 <table width="100%" cellspacing="2" cellpadding="15" class="CELLCOLOR">
@@ -60,7 +56,7 @@ function delete_download(id, game_id)
 <tr>
 	<td>
 	<form action="../games/db_games_upload.php?action=update_download" method="post" name="upload">
-	<fieldset class="game_set">
+	<fieldset class="interview_set">
 		<legend class="links_legend">{$line.date}</legend>
 		<table width="100%">
 		<tr>
@@ -227,30 +223,18 @@ function delete_download(id, game_id)
 </table>
 {/if}
 
-<table width="100%" cellspacing="2" cellpadding="15" class="CELLCOLOR">
-<tr>
-	<td>
+
 	<form action="../games/db_games_upload.php?action=add_download" enctype="multipart/form-data" method="post" name="add_file">
-	<fieldset class="game_set">
+	<fieldset class="interview_set">
 		<legend class="links_legend">Add a new download</legend>
-		<table>
-		<tr>
-			<td>
-				<b>Filename :</b> <input type="file" name="game_download_name" accept="application/x-zip-compressed,application/x-zip-compressed,application/x-zip-compressed">
-			</td>
-		</tr>
-		<tr>
-			<td>
+				<b>Filename :</b> 
+				<input type="file" name="game_download_name" accept="application/x-zip-compressed,application/x-zip-compressed,application/x-zip-compressed">
 				<input type="submit" value="Upload">
 				<input type="hidden" name="game_id" value="{$game.game_id}">
-			</td>
-		</tr>
-	   </table>
+
 	</fieldset>
 	</form>
-	</td>
-</tr>
-</table>
+
 
 
 <br/>
@@ -260,4 +244,5 @@ function delete_download(id, game_id)
 {if isset($message)}
 	<div class="message_box">{$message}</div>
 {/if}
+</div>
 {/block}

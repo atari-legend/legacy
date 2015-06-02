@@ -577,6 +577,7 @@ background-color: white;
 	border-radius: 5px;
 	float:left;
 	margin-right:5px;
+	cursor: pointer;
 }
 
 .click_button:hover {
@@ -618,6 +619,13 @@ background-color: white;
 
 	text-align:center;
 	font-weight:bold;
+}
 
+.smileybox {
+	display:block;
+}
+
+.smileybox img {
+	vertical-align:middle;
 }
 
