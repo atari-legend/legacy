@@ -18,19 +18,14 @@
 {block name=title}Edit News{/block}
 {block name=body}
 
-<table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
-<tr>
-	<td>
+<div class="NEWMAINCELL">
 	<fieldset class="game_set">
 		This is the main edit page. Here you may selected whichever news update and edit it. 
 		Currently <b>{$news_nr}</b> news threads in the DB.
 	</fieldset> 
-	</td>
-</tr>
-<tr>
-	<td align="center">
+<br/><br/>
 	{foreach from=$edit_submissions item=line}
-		<fieldset class="news_set">
+		<fieldset class="game_set">
 		<legend class="links_legend">
 		{if $line.edit_email <> ''}	
 			Submitted by <a href="mailto:{$line.edit_email}?subject=Your newspost {$line.edit_headline} at Atari Legend" class="MAINNAV">{$line.edit_userid}</a> on {$line.edit_date}</legend>
@@ -66,9 +61,7 @@
 		<br/>
 		<br/>
 	{/foreach}	
-	</td>
-</tr>
-</table>
+
 
 <br/>
 <br/>
@@ -88,4 +81,5 @@
 </table>
 <br/>
 <br/>
+</div>
 {/block}

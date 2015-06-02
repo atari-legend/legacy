@@ -38,20 +38,15 @@ function delete_screenshot(screenshot_id, game_id)
 {/block}
 {block name=title}Game screenshots - <a href="../games/games_detail.php?game_id={$game_id}" class="MAINNAV_WHITE">{$game_name}</a>{/block}
 {block name=body}				
-
-<table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
-<tr>
-	<td>
+<div class="NEWMAINCELL" style="text-align:center;">
 	<fieldset class="game_set">
 		In this section you can add screenshots to a selected game. Use the browse buttons to select the shots and press the 
 		'Submit Query' button to link them to the game.
 	</fieldset> 
 	<br/>
 	<br/>
-	<table width="100%" cellspacing="0" cellpadding="0">
-	<tr>
-		<td align="center" width="100%">
-		<fieldset class="news_set">
+
+		<fieldset class="game_set">
 		<legend class="links_legend">screenshots</legend>
 		
 	<table border="0" cellspacing="2" cellpadding="2" align="center">	
@@ -68,8 +63,8 @@ function delete_screenshot(screenshot_id, game_id)
 			<td align="center">	
 				Image {$line.count} :: 
 				<a href="javascript:delete_screenshot({$line.id},{$game_id})" class="MAINNAV">Delete</a> ::    	
-				<a href="../includes/show_image.php?file={$line.screenshot_image}&resize=410,null,null,null&crop=null,null,null,null"  data-lightbox="image-1" data-title="My caption" class="MAINNAV">
-<img src="../includes/show_image.php?file={$line.screenshot_image}&resize=75,null,null,null&crop=null,null,null,null" width=75 class="shot_border" alt="Click to enlarge!" vspace="2" hspace="1"></a>
+				<a href="../includes/show_image.php?file={$line.screenshot_image}&resize=410,null,null,null"  data-lightbox="image-1" data-title="My caption" class="MAINNAV">
+<img src="../includes/show_image.php?file={$line.screenshot_image}&resize=75,null,null,null" width=75 class="shot_border" alt="Click to enlarge!" vspace="2" hspace="1"></a>
 			</td> 
 		{if $smarty.foreach.screen.iteration eq 7}</tr>{/if}
 		{if $smarty.foreach.screen.iteration eq 14}</tr>{/if}
@@ -85,42 +80,25 @@ function delete_screenshot(screenshot_id, game_id)
 			No screenshots attached to this game
 		{/if}
 		</fieldset>	
-		</td>
-	</tr>
-	</table>
-	</td>
-</tr>
 
-<tr>
-	<td align="center">
-		<fieldset class="news_set">
+<br/><br/>
+		<fieldset class="game_set">
 		<legend class="links_legend">Browse</legend>
 		<form enctype="multipart/form-data" name="frmUploadShot" action="db_games_screenshot_add.php" method="post">
-		{section name=loop loop=11 start=1} 
-			<input type="file" name="image[{$smarty.section.loop.index}]">
-		{/section}	
+			{section name=loop loop=11 start=1} 
+				<input type="file" name="image[{$smarty.section.loop.index}]">
+			{/section}
+			<br/><br/>
+			<input type="hidden" name="MAX_FILE_SIZE" value="100000">
+			<input type="hidden" name="game_id" value="{$game_id}">
+			<input type="hidden" name="action" value="add_screens">
+			<input type="submit" name="cmdSubmit">
+		</form>	
 		</fieldset> 
-	</td>
-</tr>
-</table>
-
-<table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
-<tr>
-	<td>
-	<input type="hidden" name="MAX_FILE_SIZE" value="100000">
-	<input type="hidden" name="game_id" value="{$game_id}">
-	<input type="hidden" name="action" value="add_screens">
-	<input type="submit" name="cmdSubmit">
-	</form>
-	</td>
-</tr>
-</table>
-	
-
+</div>
 <br/>
 <div class="back_button"><a href="../games/games_detail.php?game_id={$game_id}" class="MAINNAV">back</a></div>
 <br/>
-
 {if isset($message)}
 	<div class="message_box">{$message}</div>
 {/if}
