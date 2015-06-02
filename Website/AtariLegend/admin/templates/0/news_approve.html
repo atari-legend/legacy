@@ -22,7 +22,7 @@
 <table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
 <tr>
 	<td>
-	<fieldset class="game_set">
+	<fieldset class="interview_set">
 		This is the approval page. News send in by users, or news which has just been added, 
 		should be approved by the admin users before it gets online at the front porche of AL.
 	</fieldset> 
@@ -32,7 +32,7 @@
 <tr>
 	<td align="center">
 	{foreach from=$news_submissions item=line}
-		<fieldset class="news_set">
+		<fieldset class="interview_set">
 		<legend class="links_legend">
 			{if isset($line.user_email) and $line.user_email <> ''}
 				Written by <a href="mailto:{if isset($line.user_email)}{$line.user_email}{/if}?subject=Your newspost {$line.news_headline} at Atari Legend" class="MAINNAV">{$line.news_userid}</a> on {$line.news_date}

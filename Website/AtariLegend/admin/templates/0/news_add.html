@@ -17,10 +17,8 @@
 {block name=title}Add a News Item{/block}
 {block name=body}
 
-<table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
-<tr>
-	<td>
-	<fieldset class="game_set">
+<div class="NEWMAINCELL">
+	<fieldset class="interview_set">
 		This is the news adding page. Fill out the headline, text field and pick a news icon. If you feel there is no icon that 
 		represents the news you are about to submit then go <a href="../news/news_add_images.php" class="MAINNAV">here</a> first. 
 		After you have submitted your news text it is not actually out on the main site, there is failsafe installed. So to get your news online
@@ -49,11 +47,9 @@
 	<input type="submit" value="Submit">
 	<input type="reset">
 	</form>	
-	</td>
-</tr>
-</table>
 
 {if isset($message)}
 	<div class="message_box">{$message}</div>
 {/if}
+</div>
 {/block}
