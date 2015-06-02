@@ -29,24 +29,24 @@ function maginsert()
 {/block}
 {block name=title}Add Magazines{/block}
 {block name=body}
-<table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
-<tr>
-	<td>
+<div class="NEWMAINCELL" style="text-align:center;">
+	<fieldset class="interview_set">
 		  Add Magazines here, enter the name of the magazine in the field below and press "Insert" to enter it into the database.<br/>
+	</fieldset> 	 
 		<br/>
 		<br/>
-		<fieldset class="category_set_noGrave">
+		<fieldset class="interview_set">
 	<legend class="links_legend">New Magazine.</legend>
 	<br/>
 	<form method="post" action="" name="insertmag">
-		<label for="newmag">Magazine Name</label>
+		Magazine Name
 		<input type="text" name="newmag" size="50" maxlength="50" class="links_input-box">
 		<input type="submit" name="inserter" value="Insert" onClick="maginsert(); return false;">		
 		<input type="hidden" name="choice" value="insert_magazine" size="35" maxlength="255" class="gamesearchInputs">
 	</form> <br/>
 </fieldset> 
 		<br/>
-<fieldset class="category_set_noGrave">
+<fieldset class="interview_set">
 	<legend class="links_legend">Magazines already in archive</legend>
 	
 	<br/>
@@ -58,7 +58,5 @@ function maginsert()
 	<br/>
 </fieldset> 
 <br/>
-	</td>
-</tr>
-</table>
+</div>
 {/block}

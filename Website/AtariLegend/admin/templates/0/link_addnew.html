@@ -1,9 +1,7 @@
 {extends file='head.html'}
 {block name=title}Add a Link{/block}
 {block name=body}
-<table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
-<tr>
-	<td>
+<div class="NEWMAINCELL">
 	<br/>
 	
 	<form action="../links/db_links.php" method="post" name="linkadd" id="linkadd">
@@ -33,12 +31,10 @@
 	<input type="submit" value="Submit">
 	<input type="reset">
 	</form>
-
-	<span class="LEFTNAV" style="color:#483D8B;">
+<br/><br/>
+	<div class="message_box">
 	Note, submitting this information, will add a link on to the online Links Archive, which means that it wont be needing validation first.
-	</span>
+	</div>
 	
-	</td>
-</tr>
-</table>
+</div>
 {/block}

@@ -1,37 +1,33 @@
 {extends file='head.html'}
 {block name=title}Magazine reviews{/block}
 {block name=body}
-<table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
-<tr>
-	<td>
+<div class="NEWMAINCELL">
 		<br/>
-		
-		<fieldset class="category_set_noGrave">
+	<fieldset class="category_set_noGrave">
 	<legend class="links_legend">Reviewed games.</legend>
 	<br/>
-	
-	<table cellspacing="2" cellpadding="2" border="1">
-<tr>
-	<th><span class="LEFTNAV">Game name</span></th>
-	<th><span class="LEFTNAV">Score</span></th>
-</tr>
-{foreach from=$magazine item=line}
-<tr>
-	<td><span class="LEFTNAV">{$line.game}</span></td>
-	<td><span class="LEFTNAV">{$line.score}</span></td>
-</tr>
-
-{/foreach}
-</table>
-
+		<table class="table_game_list">
+			<tr>
+				<th style="width:80%;">Game Name</th>
+				<th style="width:20%;">Score</th>
+			</tr>
+					{foreach from=$magazine item=line}
+			<tr>
+				<td style="width:80%;">{if $line.game != ''}{$line.game}</a>{else}<i>n/a</i>{/if}</td>
+				<td style="width:20%;">{$line.score}</td>				
+			</tr>
+		{/foreach}
+			<tr>
+				<td class="game_list_footer" colspan="2">
+					&nbsp;&nbsp;&nbsp;
+				</td>
+			</tr>
+		</table>
 </fieldset>
 		
 		
 <br/>
-
-<a href="../magazine/magazine_edit.php?magazine_id={$magazine_info.magazine_id}" class="MAINNAV">Back</a>
-
-	</td>
-</tr>
-</table>
+<br/><br/>
+<div class="back_button"><a href="../magazine/magazine_edit.php?magazine_id={$magazine_info.magazine_id}" class="MAINNAV">Back</a></div>
+</div>
 {/block}
