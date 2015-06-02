@@ -53,11 +53,7 @@
 	</td>
 </tr>
 </table>
-
-{if isset($message) and $message <> ''}
-	<div style="text-align: center;">
-			<br/><br/>
-			<span class="MAINAV">{$message}</span>
-		</div>
+{if isset($message)}
+	<div class="message_box">{$message}</div>
 {/if}
 {/block}
