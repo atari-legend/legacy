@@ -2,13 +2,13 @@
 {block name=title}Did you know?{/block}
 {block name=body}
 
-<table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
-<tr>
-	<td>
+<div class="NEWMAINCELL">
+	<fieldset class="interview_set" style="text-align:center;">
 		 Here you can add a new trivia by using the below text field or you can delete one of the old trivias.<br/>
+	 </fieldset> 
 		<br/>		
 		<br/>
-<fieldset class="category_set_noGrave">
+<fieldset class="interview_set">
 	<legend class="links_legend">Add new Trivia</legend>
 	
 	<form action="../trivia/db_trivia.php" method="post" name="trivia" id="trivia">
@@ -21,11 +21,10 @@
 	</form>
 	
 </fieldset> 
-		
 		<br/>
 		{foreach from=$trivia item=line}
 		
-<fieldset class="category_set_noGrave">
+<fieldset class="interview_set">
 	<legend class="links_legend">Trivia ID {$line.trivia_id}</legend>
 	
 	<br/>
@@ -37,14 +36,7 @@
 	<input type="submit" value="Delete" style="margin-left: 80%;">
 	</form>
 </fieldset> 
-
-
 <br/>
-
 		{/foreach}
-
-	</td>
-</tr>
-</table>
-
+</div>
 {/block}
