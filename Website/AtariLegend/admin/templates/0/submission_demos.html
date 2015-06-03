@@ -37,135 +37,113 @@ function commentdelete(JSsubID)
 {/block}
 {block name=title}Demo Submissions{/block}
 {block name=body}
-
-<table width="100%" cellspacing="2" cellpadding="15" class="CELLCOLOR">
-<tr>
-	<td align="center">
-	<fieldset class="game_set">
-		<table>
-		<tr>
-			<td width="100%" valign="top">
+<div class="NEWMAINCELL">
+	<fieldset class="interview_set">
 				When you have finished reviewing the submitted data move the submission to the "Done list" by clicking the appropriate Done button. 
 				Users have submitted a total of <b>{$total_nr_submissions}</b> entries in the AL DB!
-			</td>
-		</tr>
-		</table>
 	</fieldset> 
-	</td>
-</tr>
-</table>
- 
-<table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
-<tr>
-	<td align="center">
+		<br/><br/>
+		<div style="text-align:center;">
 		{if $structure.list == 'current'}
 		<strong><a href="../demos/submission_demos.php?list=done" class="MAINNAV">Switch to Done list</a></strong><br/>
 		{elseif $structure.list == 'done'}
 		<strong><a href="../demos/submission_demos.php?list=current" class="MAINNAV">Switch to Current list</a></strong><br/>
 		{/if}
+		</div>
 		<br/>
-		<table width="400" border="0" cellspacing="2" cellpadding="2">
-			<tr>
-				<td width="50%" align="left">
-			{if $structure.v_counter > 0}
-	
-			<strong><a href="../demos/submission_demos.php?list={$structure.list}&amp;v_counter={$structure.back_arrow}" class="MAINNAV">Previous</a></strong>
-	
-			{/if}
-				</td>
-				<td width="50%" align="right">
 
-			{if $structure.forward_arrow >= 25}
-	
-			<strong><a href="../demos/submission_demos.php?list={$structure.list}&amp;v_counter={$structure.forward_arrow}" class="MAINNAV">Next</a></strong>
-	
+		<div style="display:table;width:400px; margin-left:auto;margin-right: auto;">
+			<div style="display:table-cell;width:50%;">
+			{if $structure.v_counter > 0}
+			<strong><a href="../demos/submission_demos.php?list={$structure.list}&amp;v_counter={$structure.back_arrow}" class="MAINNAV">Previous</a></strong>
 			{/if}
-				</td>
-			</tr>
-		</table>
+			</div>
+			<div style="display:table-cell;width:50%;float:right;">
+			{if $structure.forward_arrow >= 25}
+			<strong><a href="../demos/submission_demos.php?list={$structure.list}&amp;v_counter={$structure.forward_arrow}" class="MAINNAV">Next</a></strong>
+			{/if}
+			</div>
+		</div>
 
 		<br/>
 		
+						{* START NEW COMMENT BOX *}	
+		
 		{foreach from=$submission item=line}
-				<table cellspacing="0" cellpadding="2" border="0" width="95%" style="border: solid 1px #b2b2b2; background-color:#E9E9E9;">
-				<tr>
-						<td class="main_text" valign="top" width="150" style="border-right: solid 1px #b2b2b2;"><b>Posted by <a href="../user/user_detail.php?user_id_selected={$line.user_id}" class="links_links">{$line.user_name}</a></b></td>
-						<td class="main_text" valign="top" ><b><a href="../demos/demos_detail.php?demo_id={$line.demo_id}" class="links_links">{$line.demo_name}</a></b> </td>
-						<td class="main_text" valign="top" align="right"><b>{$line.date}</b></td>			
-				</tr>
-				</table>
-				<table cellspacing="0" cellpadding="0" border="0" width="95%" style="border: solid 1px #b2b2b2; background-color:#E9E9E9;">
-				<tr bgcolor="#EFEFEF">
-					<td class="main_text" width="150" valign="top" style="line-height: 13px; border-right: solid 1px #b2b2b2;">
-					<br/>
-					Joined: {$line.user_joindate}<br/>
-					{if $line.user_comment_nr eq 0} {else}<a href="../demos/demos_comment.php?c_counter={$links.v_counter}&users_id={$line.user_id}&view=users_comments" class="MAINNAV">{/if}Demo Comments: {$line.user_comment_nr}{if $line.user_comment_nr eq 0} {else}</a>{/if}<br/>
-					Demo Submissions: {$line.usersubmit_number}<br/>
-					Karma: {$line.karma}
+			
+		<div class="comment_box">
+			
+			<div class="comment_box_top">
+			
+				<div class="comment_box_top_left">
+
+						Posted by <a href="../user/user_detail.php?user_id_selected={$line.user_id}" class="links_links">{$line.user_name}</a>
+				</div>
+				<div class="comment_box_top_right">
+					<span style=""><a href="../demos/demos_detail.php?demo_id={$line.demo_id}" class="links_links">{$line.demo_name}</a></span>
+					<span style="float:right;">{$line.date}</span>
+				</div>
+			</div>
+			<div class="comment_box_middle">
+				<div class="comment_box_middle_left">
+						{if isset($line.avatar_image) and $line.avatar_image != ''}
+						<img src="../includes/show_image.php?file={if isset($line.avatar_image)}{$line.avatar_image}{/if}&amp;resize=80,null,null,null" alt="Avatar">
+						<br/>
+						{/if}
+						<br/>
+						Joined: {$line.user_joindate}<br/>
+						{if $line.user_comment_nr eq 0} {else}<a href="../games/games_comment.php?c_counter={$structure.v_counter}&amp;users_id={$line.user_id}&amp;view=users_comments" class="MAINNAV">{/if}Game Comments: {$line.user_comment_nr}{if $line.user_comment_nr eq 0} {else}</a>{/if}<br/>
+						Game Submissions: {$line.usersubmit_number}<br/>
+						Karma: {$line.karma}
+				</div>
+				<div class="comment_box_middle_right">
 					
-					</td>
-					<td class="main_text" valign="top" style="line-height: 13px;">
-						<br/>
-						<br/>
-						{if $line.image != "../../../images/demo_screenshots/."}<span style="float:right;"><a href="../demos/demos_detail.php?demo_id={$line.demo_id}"><img src="../includes/showimage.php?img={$line.image}&w=120&shadow=1&bgcolour=EFEFEF" alt="{$line.demo_name}"></a></span>{/if}
+						{if isset($line.image) and $line.image != ''}
+								<a href="../demos/demos_detail.php?demo_id={$line.demo_id}">
+									<img src="../includes/show_image.php?file={$line.image}&amp;resize=160,null,null,null" alt="{$line.demo_name}" style="float:right;"/>
+								</a>
+						{/if}
 						{$line.comment}
-						<br/>
-						<br/>
-						<br/>		
-					</td>
-				</tr>
-				</table>	
-				<table cellspacing="0" cellpadding="2" border="0" width="95%" style="border-left: solid 1px #b2b2b2; border-right: solid 1px #b2b2b2; border-bottom: solid 1px #b2b2b2;background-color:#E9E9E9;">
-				<tr>
-					<td width="150" valign="middle" class="main_text" style="line-height: 13px; border-right: solid 1px #b2b2b2;">
-					
-					<strong><a href="#top" class="MAINNAV">Back to top</a></strong>
-					
-					</td>
 				
-					<td valign="top" class="main_text">
+				</div>
+			</div>
+			<div class="comment_box_bottom">
+				<div class="comment_box_bottom_left" style="">
+						<a href="#top" class="MAINNAV">Back to top</a>
+				</div>
+				<div class="comment_box_bottom_right">
+					
 						{if $line.email != ''}
 							<a href="mailto:{$line.email}?subject=Thanks for the submission on {$line.demo_name} at Atari Legend">
 							<img src="../templates/0/icons/icon_email.gif" alt="Email User" title="Email User" width="59" height="18">
 							</a>{/if}
 							{if $structure.list == 'done'} {else}
-							<a href="../demos/db_demos_submissions.php?action=update_submission&submit_id={$line.submit_id}&list={$structure.list}&v_counter={$structure.v_counter}">
+							<a href="../games/db_games_submissions.php?action=update_submission&amp;submit_id={$line.submit_id}&amp;list={$structure.list}&amp;v_counter={$structure.v_counter}">
 							<img src="../templates/0/icons/icon_done.png" alt="Done" width="59" height="18" title="Edit Comment">
 							</a>
 							{/if}
 							<a  onClick="commentdelete({$line.submit_id})" style="cursor: pointer;">
 							<img src="../templates/0/icons/icon_delete.gif" alt="Delete Comment" title="Delete Comment" width="16" height="18">
-							</a>					
-					</td>
-					<td valign="middle" class="main_text" style="text-align: right;">
-					
-					</td>		
-				</tr>
-				</table>
-				<br/>
+							</a>
+				</div>
+			</div>
+	
+		</div>
+			<br/>
+		{* END NEW COMMENT BOX *}	
 				{/foreach}
 
-
-<table width="400" border="0" cellspacing="2" cellpadding="2">
-<tr>
-	<td width="50%" align="left">
-	{if $structure.v_counter > 0}
-	
-	<strong><a href="../demos/submission_demos.php?list={$structure.list}&amp;v_counter={$structure.back_arrow}" class="MAINNAV">Previous</a></strong>
-	
-	{/if}
-	</td>
-	<td width="50%" align="right">
-
-	{if $structure.forward_arrow >= 25}
-	
-	<strong><a href="../demos/submission_demos.php?list={$structure.list}&amp;v_counter={$structure.forward_arrow}" class="MAINNAV">Next</a></strong>
-	
-	{/if}
-	</td>
-</tr>
-</table>
-	</td>
-</tr>
-</table>
+		<div style="display:table;width:400px; margin-left:auto;margin-right: auto;">
+			<div style="display:table-cell;width:50%;">
+			{if $structure.v_counter > 0}
+			<strong><a href="../demos/submission_demos.php?list={$structure.list}&amp;v_counter={$structure.back_arrow}" class="MAINNAV">Previous</a></strong>
+			{/if}
+			</div>
+			<div style="display:table-cell;width:50%;float:right;">
+			{if $structure.forward_arrow >= 25}
+			<strong><a href="../demos/submission_demos.php?list={$structure.list}&amp;v_counter={$structure.forward_arrow}" class="MAINNAV">Next</a></strong>
+			{/if}
+			</div>
+		</div>
+</div>
 {/block}
