@@ -17,17 +17,11 @@
 {extends file='head.html'}
 {block name=title}Add a News Image{/block}
 {block name=body}
-
-<table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
-<tr>
-	<td>
+<div class="NEWMAINCELL">
 		<a href="../news/news_add_images.php" class="MAINNAV"><b>Add images</b></a> / 
 		<a href="../news/news_edit_images.php" class="MAINNAV"><b>Edit images</b></a>
-	</td
-</tr>
-<tr>	
-	<td>
-	<fieldset class="game_set">
+	<br/>	<br/>	<br/>
+	<fieldset class="interview_set">
 		Here you can add news images to go with a news update, add a name to describe the 
 		image and to what kind of news it should be used. You can use either jpg, 
 		png or gif images but png images are prefered. Keep the size to a minimun, we are talking icons here, no 300Kb images.
@@ -50,9 +44,7 @@
 	<input type="submit" value="Submit">
 	<input type="reset">
 	</form>	
-	</td>
-</tr>
-</table>
+</div>
 {if isset($message)}
 	<div class="message_box">{$message}</div>
 {/if}

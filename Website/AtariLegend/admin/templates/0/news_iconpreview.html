@@ -17,32 +17,25 @@
 {extends file='head.html'}
 {block name=title}Preview news icons{/block}
 {block name=body}
-
-<table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
-<tr>
-	<td align="center">	
-		<table width="100%" cellspacing="2" cellpadding="0" align="center">
-		{foreach from=$news_images item=line}
+<div class="NEWMAINCELL" style="text-align:center;">
+		<div style="display:table;">
+		{foreach from=$news_images item=line name=line}
 			{if $line.count=="1"}
-				<tr>
+				<div style="display:table-row;">
 			{/if}
-					<td width="130" align="center">
-						<img src="../includes/show_image.php?file={$line.image_link}&resize=410,null,null,null&crop=left,top,410,260&minimum_size=410,260" alt="newsbutton">
+					<div style="display:table-cell;">
+						<img src="../includes/show_image.php?file={$line.image_link}&amp;resize=310,null,null,null&amp;crop=left,top,310,260&amp;minimum_size=310,260" alt="newsbutton">
 						<br/>
 						{$line.image_name}
-					</td>
+					</div>
+						{if $smarty.foreach.line.last}
+							{if $line.count=="2" or $line.count=="1"}</div>{/if}
+						{/if}
 					{if $line.count=="3"}
-				</tr>
+				</div>
 			{/if}
 		{/foreach}
-		</table>			
-	</td>
-</tr>
-</table>
-
-<div style="text-align: center;">
-			<br/>
-			<span class="MAINAV">
-		<a href="javascript:history.go(-1)" class="MAINNAV"><b>back</b></a></span>
-		</div>
+		</div>			
+<div class="back_button"><a href="javascript:history.go(-1)" class="MAINNAV">back</a></div>
+</div>		
 {/block}

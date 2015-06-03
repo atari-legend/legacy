@@ -37,8 +37,6 @@ function delete_download(id, game_id)
 {/block}
 {block name=title}Upload file for <a href="../games/games_detail.php?game_id={$game.game_id}" class="MAINNAV_WHITE">{$game.game_name}</a>{/block}
 {block name=body}
-
-
 <div class="NEWMAINCELL">
 	<fieldset class="interview_set">
 		In this section you can upload a download for <b><a href="../games/games_detail.php?game_id={$game.game_id}" class="MAINNAV">{$game.game_name}</a></b>.	Make sure to give 
@@ -47,73 +45,40 @@ function delete_download(id, game_id)
 		crack with the same set_nr for a certain game, it all gets screwed! so make sure you do it 
 		correctly!
 	</fieldset> 
-
-
+<br/>
 {if isset($nr_downloads) and $nr_downloads >= '1'}
-<table width="100%" cellspacing="2" cellpadding="15" class="CELLCOLOR">
 {if isset($downloads)}
 {foreach from=$downloads item=line}
-<tr>
-	<td>
 	<form action="../games/db_games_upload.php?action=update_download" method="post" name="upload">
 	<fieldset class="interview_set">
 		<legend class="links_legend">{$line.date}</legend>
-		<table width="100%">
-		<tr>
-			<td colspan="4">
+		
+				<br/>
 				<a href="{$line.filepath}.zip" class="MAINNAV">{$line.filename}</a>
 				<br/>
 				<br/>
-			</td>
-		</tr>	
-		<tr>
-			<td width="10%">
-				<b>Cracker :</b>
-			</td>
-			<td width="40%">
-				<input type="text" name="cracker"  maxlength="60" value="{$line.cracker}">
-			</td>
-			<td width="10%">
-				<b>Supplier :</b>
-			</td>
-			<td width="40%">
-				<input type="text" name="supplier"  maxlength="60" value="{$line.supplier}">
-			</td>
-		</tr>
-		<tr>
-			<td width="10%">
-				<b>Intro By :</b>
-			</td>
-			<td width="40%">
-				<input type="text" name="intro"  maxlength="60" value="{$line.intro}">
-			</td>
-			<td width="10%">
-				<b>Harddrive :</b>
-			</td>
-			<td width="40%">
-				<input type="checkbox" name="harddrive" value="1" {if $line.harddrive=="1"}  "checked" {/if}>
-			</td>
-		</tr>
-		<tr>
-			<td width="10%">
-				<b>PAL only :</b>
-			</td>
-			<td width="40%">
-				<input type="checkbox" name="screen" value="PAL" {if $line.pal_ntsc=="PAL"} "checked" {/if}>
-			</td>
-			<td width="10%">
-				<b>NTSC only :</b>
-			</td>
-			<td width="40%">
-				<input type="checkbox" name="screen" value="NTSC" {if $line.pal_ntsc=="NTSC"} "checked" {/if}>
-			</td>
-		</tr>
-		<tr>
-			<td width="10%">
-				<b>Language :</b>
-			</td>
-			<td width="40%">
-				<select name="language" size="1">
+			
+		<div style="display:table;width:100%;padding:2px;">
+				<div style="display:table-cell;width:150px;"><b>Cracker :</b></div>
+				<div style="display:table-cell;width:270px;"><input type="text" name="cracker"  maxlength="60" value="{$line.cracker}"></div>
+				<div style="display:table-cell;width:150px;"><b>Supplier :</b></div>
+				<div style="display:table-cell;width:170px;"><input type="text" name="supplier"  maxlength="60" value="{$line.supplier}"></div>
+		</div>
+		<div style="display:table;width:100%;padding:2px;">
+				<div style="display:table-cell;width:150px;"><b>Intro By :</b></div>
+				<div style="display:table-cell;width:270px;"><input type="text" name="intro"  maxlength="60" value="{$line.intro}"></div>
+				<div style="display:table-cell;width:150px;"><b>Harddrive :</b></div>
+				<div style="display:table-cell;width:170px;"><input type="checkbox" name="harddrive" value="1" {if $line.harddrive=="1"} checked{/if}></div>
+		</div>
+		<div style="display:table;width:100%;padding:2px;">
+				<div style="display:table-cell;width:150px;"><b>PAL only :</b></div>
+				<div style="display:table-cell;width:270px;"><input type="checkbox" name="screen" value="PAL" {if $line.pal_ntsc=="PAL"} checked{/if}></div>
+				<div style="display:table-cell;width:150px;"><b>NTSC only :</b></div>
+				<div style="display:table-cell;width:170px;"><input type="checkbox" name="screen" value="NTSC" {if $line.pal_ntsc=="NTSC"} checked {/if}></div>
+		</div>
+		<div style="display:table;width:100%;padding:2px;">
+				<div style="display:table-cell;width:150px;"><b>Language :</b></div>
+				<div style="display:table-cell;width:270px;"><select name="language" size="1">
 					<option value="Ar" {if $line.language eq 'Ar'} selected {/if}>Arabic</option>
 					<option value="En" {if $line.language eq 'En'} selected {/if}>English</option>
 					<option value="Es" {if $line.language eq 'Es'} selected {/if}>Spanish</option>
@@ -124,43 +89,31 @@ function delete_download(id, game_id)
 					<option value="Nl" {if $line.language eq 'Nl'} selected {/if}>Dutch</option>
 					<option value="Fi" {if $line.language eq 'Fi'} selected {/if}>Finish</option>
 					<option value="Mu" {if $line.language eq 'Mu'} selected {/if}>Mulilanguage</option>
-				</select>
-			</td>
-			<td width="10%">
-				<b>Trainer :</b>
-			</td>
-			<td width="40%">
-				<select name="trainer" size="1">
+				</select></div>
+				<div style="display:table-cell;width:150px;"><b>Trainer :</b></div>
+				<div style="display:table-cell;width:170px;"><select name="trainer" size="1">
 					<option value=""  {if $line.trainer !=='M' and $line.trainer !=='T'} selected {/if}>No Trainer</option>
 					<option value="T" {if $line.trainer =='T'} selected {/if}>Trainer</option>
 					<option value="M" {if $line.trainer =='M'} selected {/if}>Mega Trainer</option>
-				</select>
-			</td>
-		</tr>
-		<tr>
-			<td width="10%">
-				<b>Disk :</b>
-			</td>
-			<td width="40%">
-				<select name="disks" size="1">
-					<option value="0"  {if $line.disks == '' or $line.disks == '0'} selected {/if}>Single disk game</option>
-					<option value="1"  {if $line.disks == '1'} selected {/if}>1</option>
-					<option value="2"  {if $line.disks == '2'} selected {/if}>2</option>
-					<option value="3"  {if $line.disks == '3'} selected {/if}>3</option>
-					<option value="4"  {if $line.disks == '4'} selected {/if}>4</option>
-					<option value="5"  {if $line.disks == '5'} selected {/if}>5</option>
-					<option value="6"  {if $line.disks == '6'} selected {/if}>6</option>
-					<option value="7"  {if $line.disks == '7'} selected {/if}>7</option>
-					<option value="8"  {if $line.disks == '8'} selected {/if}>8</option>
-					<option value="9"  {if $line.disks == '9'} selected {/if}>9</option>
+				</select></div>
+		</div>
+		<div style="display:table;width:100%;padding:2px;">
+				<div style="display:table-cell;width:150px;"><b>Disk :</b></div>
+				<div style="display:table-cell;width:270px;"><select name="disks" size="1">
+					<option value="0" {if $line.disks == '' or $line.disks == '0'} selected {/if}>Single disk game</option>
+					<option value="1" {if $line.disks == '1'} selected {/if}>1</option>
+					<option value="2" {if $line.disks == '2'} selected {/if}>2</option>
+					<option value="3" {if $line.disks == '3'} selected {/if}>3</option>
+					<option value="4" {if $line.disks == '4'} selected {/if}>4</option>
+					<option value="5" {if $line.disks == '5'} selected {/if}>5</option>
+					<option value="6" {if $line.disks == '6'} selected {/if}>6</option>
+					<option value="7" {if $line.disks == '7'} selected {/if}>7</option>
+					<option value="8" {if $line.disks == '8'} selected {/if}>8</option>
+					<option value="9" {if $line.disks == '9'} selected {/if}>9</option>
 					<option value="10" {if $line.disks == '10'} selected {/if}>10</option>
-				</select>
-			</td>
-			<td width="10%">
-				<b>SET NR :</b>
-			</td>
-			<td width="40%">
-				<select name="set_nr" size="1">
+				</select></div>
+				<div style="display:table-cell;width:150px;"><b>SET NR :</b></div>
+				<div style="display:table-cell;width:170px;"><select name="set_nr" size="1">
 					<option value="1"  {if $line.set_nr == '1'} selected {/if}>1</option>
 					<option value="2"  {if $line.set_nr == '2'} selected {/if}>2</option>
 					<option value="3"  {if $line.set_nr == '3'} selected {/if}>3</option>
@@ -171,76 +124,49 @@ function delete_download(id, game_id)
 					<option value="8"  {if $line.set_nr == '8'} selected {/if}>8</option>
 					<option value="9"  {if $line.set_nr == '9'} selected {/if}>9</option>
 					<option value="10" {if $line.set_nr == '10'} selected {/if}>10</option>
-				</select>
-			</td>
-		</tr>
-		<tr>
-			<td width="10%">
-				<b>Game version :</b>
-			</td>
-			<td width="40%">
-				<input type="text" name="version" maxlength="60" value="{$line.version}">
-			</td>
-			<td width="10%">
-				<b>TOS version</b>
-			</td>
-			<td width="40%">
-				<input type="text" name="tos" maxlength="60" value="{$line.tos}">
-			</td>
-		</tr>
-		<tr>
-			<td width="20%">
-				<b>Atari Legend Disk :</b>
-			</td>
-			<td width="30%">
-				<input type="checkbox" name="legend" value="1" {if $line.legend == '1'} "checked" {/if}>
-			</td>
-			<td width="20%">
-				<b>Disable download :</b>
-			</td>
-			<td width="30%">
-				<input type="checkbox" name="disable" value="1" {if $line.disable =='1'} "checked" {/if}>
-			</td>
-		</tr>
-		
-		<tr>
-			<td colspan="4">
+				</select></div>
+		</div>
+		<div style="display:table;width:100%;padding:2px;">
+				<div style="display:table-cell;width:150px;"><b>Game version :</b></div>
+				<div style="display:table-cell;width:270px;"><input type="text" name="version" maxlength="60" value="{$line.version}"></div>
+				<div style="display:table-cell;width:150px;"><b>TOS version</b></div>
+				<div style="display:table-cell;width:170px;"><input type="text" name="tos" maxlength="60" value="{$line.tos}"></div>
+		</div>
+		<div style="display:table;width:100%;padding:2px;">
+				<div style="display:table-cell;width:150px;"><b>Atari Legend Disk :</b></div>
+				<div style="display:table-cell;width:270px;"><input type="checkbox" name="legend" value="1" {if $line.legend == '1'} checked{/if}></div>
+				<div style="display:table-cell;width:150px;"><b>Disable download :</b></div>
+				<div style="display:table-cell;width:170px;"><input type="checkbox" name="disable" value="1" {if $line.disable =='1'} checked{/if}></div>
+		</div>
 				<br/>
 				<br/>
 				<input type="hidden" name="game_download_id" value="{$line.game_download_id}">
 				<input type="hidden" name="game_id" value="{$game.game_id}">
 				<input type="button" value="Delete" onClick="delete_download({$line.game_download_id},{$game.game_id});">
 				<input type="submit" value="Update_info">
-			</td>
-		</tr>	
-		</table>
+
 	</fieldset>
 	</form>
-	</td>
-</tr>
+<br/>
 {/foreach}
 {/if}
-</table>
 {/if}
 
 
 	<form action="../games/db_games_upload.php?action=add_download" enctype="multipart/form-data" method="post" name="add_file">
 	<fieldset class="interview_set">
 		<legend class="links_legend">Add a new download</legend>
+		<br/>
 				<b>Filename :</b> 
 				<input type="file" name="game_download_name" accept="application/x-zip-compressed,application/x-zip-compressed,application/x-zip-compressed">
 				<input type="submit" value="Upload">
 				<input type="hidden" name="game_id" value="{$game.game_id}">
-
+		<br/><br/>
 	</fieldset>
 	</form>
-
-
-
 <br/>
 <div class="back_button"><a href="../games/games_detail.php?game_id={$game.game_id}" class="MAINNAV">back</a></div>
 <br/>
-
 {if isset($message)}
 	<div class="message_box">{$message}</div>
 {/if}

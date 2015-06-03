@@ -22,9 +22,7 @@ function scoredelete(JSmagID,JSgame_id)
 {/block}
 {block name=title}Add Review Score{/block}
 {block name=body}
-<table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
-<tr>
-	<td>
+<div class="NEWMAINCELL">
 		<br/>
 		{if isset($game_score)}
 		{foreach from=$game_score item=line}
@@ -32,7 +30,7 @@ function scoredelete(JSmagID,JSgame_id)
 		- <a onClick="scoredelete({$line.magazine_game_id},{$game.game_id})" style="cursor: pointer;" class="MAINNAV">Delete Score</a><br/>
 		{/foreach}<br/>
 		{/if}
-		<fieldset class="category_set_noGrave">
+		<fieldset class="interview_set">
 	<legend class="links_legend">Reviewed games.</legend>
 	<br/>
 	{* Marty! Hi mate! here you need to add the search variables. Take care /Matt *}
@@ -50,13 +48,7 @@ function scoredelete(JSmagID,JSgame_id)
 	</form>
 	
 </fieldset>
-		
-		
 <br/>
-
-<a href="../game/game_detail.php?game_id={$game.game_id}" class="MAINNAV">Back</a>
-
-	</td>
-</tr>
-</table>
+<div class="back_button"><a href="../game/game_detail.php?game_id={$game.game_id}" class="MAINNAV">Back</a></div>
+</div>
 {/block}

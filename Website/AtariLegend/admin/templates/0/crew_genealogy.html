@@ -216,7 +216,7 @@ function searchInd(str) {
 	<tr>
 	<td width="20%" style="vertical-align:top;">
 	
-<div class="NEWNAVCELL">
+<ul class="NEWNAVCELL">
 
 	<li class="NEWHEADERBAR">Search Results</li>
 
@@ -227,13 +227,13 @@ function searchInd(str) {
 			
 			{if (isset($crew_select.crew_id) and $crew_select.crew_id eq $line.crew_id)}
 			<li class="leftnav_list" style="background-color:#b2b2b2;">
-			<a href="../crew/crew_editor.php?crew_select={if isset($line.crew_id)}{$line.crew_id}{/if}&crewsearch={$tracking.crewsearch}&crewbrowse={$tracking.crewbrowse}" class="LEFTNAV">
+			<a href="../crew/crew_editor.php?crew_select={if isset($line.crew_id)}{$line.crew_id}{/if}&amp;crewsearch={$tracking.crewsearch}&amp;crewbrowse={$tracking.crewbrowse}" class="LEFTNAV">
 			{$line.crew_name}
 			</a>
 			</li>
 			{else}
 			<li class="leftnav_list">
-			<a href="../crew/crew_editor.php?crew_select={if isset($line.crew_id)}{$line.crew_id}{/if}&crewsearch={$tracking.crewsearch}&crewbrowse={$tracking.crewbrowse}" class="LEFTNAV">
+			<a href="../crew/crew_editor.php?crew_select={if isset($line.crew_id)}{$line.crew_id}{/if}&amp;crewsearch={$tracking.crewsearch}&amp;crewbrowse={$tracking.crewbrowse}" class="LEFTNAV">
 			{$line.crew_name}
 			</a>
 			</li>
@@ -242,7 +242,7 @@ function searchInd(str) {
 	
 </div>	
 
-</div>
+</ul>
 
 	</td>
 	<td width="80%">
@@ -459,20 +459,20 @@ function searchInd(str) {
 					
 					<table class="table_game_list" style="width:100%;">
 						<tr>
-							<th width="75%">SubCrews</th>
-							<th width="25%"></th>
+							<th style="width:75%;">SubCrews</th>
+							<th style="width:25%;"></th>
 						</tr>
 						{if isset($subcrew)}					
 						{foreach from=$subcrew item=line}
 						<tr>
-							<td width="75%">{$line.crew_name}</td>
-							<td width="25%"><a href="../crew/db_crew.php?action=delete_subcrew&crew_select={if isset($crew_select.crew_id)}{$crew_select.crew_id}{/if}&crewsearch={$tracking.crewsearch}&crewbrowse={$tracking.crewbrowse}&sub_crew_id={$line.sub_crew_id}" class="MAINNAV">Delete</a>
+							<td style="width:75%;">{$line.crew_name}</td>
+							<td style="width:25%;"><a href="../crew/db_crew.php?action=delete_subcrew&amp;crew_select={if isset($crew_select.crew_id)}{$crew_select.crew_id}{/if}&amp;crewsearch={$tracking.crewsearch}&amp;crewbrowse={$tracking.crewbrowse}&amp;sub_crew_id={$line.sub_crew_id}" class="MAINNAV">Delete</a>
 							</td>
 						</tr>
 							{/foreach}
 							{/if}
 						<tr>
-							<td class="game_list_footer" colspan="2" width="100%">
+							<td class="game_list_footer" colspan="2">
 								&nbsp;&nbsp;&nbsp;
 							</td>
 						</tr>
@@ -487,17 +487,17 @@ function searchInd(str) {
 	
 	<table class="table_game_list" style="width:100%;">
 			<tr>
-				<th width="30%">"Sceners"</th>
-				<th width="30%">Used nick</th>
-				<th width="30%"></th>
-				<th width="10%"></th>
+				<th style="width:30%;">"Sceners"</th>
+				<th style="width:30%;">Used nick</th>
+				<th style="width:30%;"></th>
+				<th style="width:10%;"></th>
 			</tr>
 					{if isset($crew_individuals)}
 					{foreach name=outer item=individual from=$crew_individuals}	
 			<tr>
-				<td width="30%">{$individual.ind_name}</td>
+				<td style="width:30%;">{$individual.ind_name}</td>
 				<form action="../crew/db_crew.php" method="post" name="nick_edit{$individual.ind_id}" id="nick_edit{$individual.ind_id}">
-				<td width="30%">
+				<td style="width:30%;">
 					<select name="individual_nicks_id" id="individual_nicks_id" size="1">
 									<option value="-" {if $individual.individual_nicks_id <> ''} {else}SELECTED{/if}>None</option>
 
@@ -511,7 +511,7 @@ function searchInd(str) {
 
 						</select>
 					</td>
-				<td width="30%">
+				<td style="width:30%;">
 						<input type="hidden" name="action" value="update_nick">
 						<input type="hidden" name="crew_individual_id" value="{$individual.crew_individual_id}">
 						<input type="hidden" name="parent_id" value="{if isset($crew_select.crew_id)}{$crew_select.crew_id}{/if}">
@@ -521,14 +521,14 @@ function searchInd(str) {
 						<input type="submit" name="inserter" value="Update" style="margin: 0 auto;">
 						</form>
 					</td>				
-				<td width="10%">
-				<a href="../crew/db_crew.php?action=delete_crew_member&crew_select={if isset($crew_select.crew_id)}{$crew_select.crew_id}{/if}&crewsearch={$tracking.crewsearch}&crewbrowse={$tracking.crewbrowse}&crew_individual_id={$individual.crew_individual_id}" class="MAINNAV">Delete</a>
+				<td style="width:10%">
+				<a href="../crew/db_crew.php?action=delete_crew_member&amp;crew_select={if isset($crew_select.crew_id)}{$crew_select.crew_id}{/if}&amp;crewsearch={$tracking.crewsearch}&amp;crewbrowse={$tracking.crewbrowse}&amp;crew_individual_id={$individual.crew_individual_id}" class="MAINNAV">Delete</a>
 				</td>
 			</tr>
 					{/foreach}
 					{/if}
 			<tr>
-				<td class="game_list_footer" colspan="4" width="100%">
+				<td class="game_list_footer" colspan="4">
 					&nbsp;&nbsp;&nbsp;
 				</td>
 			</tr>

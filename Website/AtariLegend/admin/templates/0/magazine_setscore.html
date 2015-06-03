@@ -1,16 +1,11 @@
 {extends file='head.html'}
 {block name=title}Set Review Score{/block}
 {block name=body}
-
-<table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
-<tr>
-	<td>
-	
-		
+<div class="NEWMAINCELL">
 		<br/>
 		{$game.magazine_name} issue {$game.magazine_issue_nr} Selected. <br/><br/>
 		
-<fieldset class="category_set_noGrave">
+<fieldset class="interview_set">
 	<legend class="links_legend">Set review score.</legend>
 	<br/>
 	{* Marty! Hi mate! here you need to add the search variables. Take care /Matt *}
@@ -22,16 +17,9 @@
 	<input type="hidden" name="action" value="set_score">	
 	<input type="submit" value="Add">
 	</form>
-	
 </fieldset>
-		
-		
 <br/>
-
-<a href="../magazine/magazine_review_score.php?game_id={$game.game_id}" class="MAINNAV">Back</a>
-
-	</td>
-</tr>
-</table>
+<div class="back_button"><a href="../magazine/magazine_review_score.php?game_id={$game.game_id}" class="MAINNAV">Back</a></div>
+</div>
 
 {/block}

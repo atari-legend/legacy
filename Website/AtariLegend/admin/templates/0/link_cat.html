@@ -23,7 +23,7 @@
 		<legend class="links_legend">Categories in Archive</legend>
 	
 		{foreach from=$category item=line}
-		<img src="../templates/0/images/e.gif" alt="" width="{$line.category_indent}" height="1" border="0">{$line.category_name} :: 
+		<img src="../templates/0/images/e.gif" alt="" width="{$line.category_indent}" height="1">{$line.category_name} :: 
 	 	<a href="../links/link_cat_mod.php?category_id={$line.category_id}" class="MAINNAV">Modify</a> :: <a href="link_cat_del.php?category_id={$line.category_id}" class="MAINNAV">Delete</a> :: ({$line.category_count} links)<br/>
 		{/foreach}
 

@@ -20,6 +20,8 @@ This will compile the games comment edit page
 
 include("../includes/common.php"); 
 
+if(empty($view)) {$view="comment";}
+if(empty($c_counter)) {$c_counter="";}
 
 	$sql_build = "SELECT *	FROM game_user_comments
 							LEFT JOIN comments ON ( game_user_comments.comment_id = comments.comments_id )

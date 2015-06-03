@@ -20,11 +20,9 @@
 {block name=title}Edit News{/block}
 {block name=body}
 
-<table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
-<tr>
-	<td>
+<div class="NEWMAINCELL">
 	<form action="db_news.php" method="post" name="news_edit" id="news_edit">
-	<fieldset class="game_set">
+	<fieldset class="interview_set">
 		This is the news edit page. Change a news post accordingly.
 	</fieldset> 
 	<br/>
@@ -59,11 +57,9 @@
 	{/if}
 	<input type="submit" value="Update">	
 	</form>
-	</td>
-</tr>
-</table>
 
 {if isset($message)}
 	<div class="message_box">{$message}</div>
 {/if}
+</div>
 {/block}
