@@ -138,16 +138,12 @@ function searchInd(str) {
 {/block}
 {block name=title}Crew editor - Genealogy{/block}
 {block name=body}
-<table width="100%" cellspacing="2" cellpadding="5" align="center" class="CELLCOLOR">
-<tr>
-	<td align="center" width="50%">
-	
-	
-	
-		<form action="../crew/crew_search.php" method="post" name="crew_search" id="crew_search">
-		<fieldset class="interview_set">
+<div class="NEWMAINCELL" style="text-align:center;">
+
+<div style="display:inline;">
+		<fieldset class="interview_set" style="width:400px;display:inline;float:left;">
 		<legend class="links_legend">Search crews</legend>
-		
+		<form action="../crew/crew_search.php" method="post" name="crew_search" id="crew_search">		
 				<b>By name :</b>
 		
 				<select name="crewbrowse" onchange="browseCrew(this.value)">
@@ -183,39 +179,31 @@ function searchInd(str) {
 				<input type="text" name="crewsearch" value="{if (isset($new_crew) and $new_crew <> '')}{$new_crew}{/if}" style="width:70px;">
 		
 			<input type="submit" value="Search">
-		
-		</fieldset>
-		<input type="hidden" name="action" id="action" value="search">
+			<input type="hidden" name="action" id="action" value="search">
 		</form>	
-	</td>
-	
-	
-	
-	
-	
-	<td align="center" width="50%">
+		</fieldset>
+
 	{if (isset($new_crew) and $new_crew <> '')}
 		<span class="MAINNAV" style="text-align:center;">
 		{$new_crew} added to the database!<br/>
 		</span>
 	{/if}
-		<form method="post" name="insertcrew">
-		<fieldset class="interview_set">
+
+		<fieldset class="interview_set" style="width:400px;display:inline;float:right;">
 		<legend class="links_legend">Add Crew</legend>
-			<input type="text" name="newcrew">
-			<input type="submit" value="Insert" onClick="crewinsert(); return false;">	
+				<form method="post" name="insertcrew">
+					<input type="text" name="newcrew">
+					<input type="submit" value="Insert" onClick="crewinsert(); return false;">
+				</form>	
 		</fieldset>
-		</form>
-		<br/>
-	</td>
-</tr>
-<tr>
-	<td colspan="2">
-	
+		<br/><br/><br/>
+</div>
+
+	<br/><br/>
 	<table width="100%">
 	<tr>
 	<td width="20%" style="vertical-align:top;">
-	
+
 <ul class="NEWNAVCELL">
 
 	<li class="NEWHEADERBAR">Search Results</li>
@@ -247,63 +235,26 @@ function searchInd(str) {
 	</td>
 	<td width="80%">
 	{* Start crew editing table	*}
-	<table width="100%" cellspacing="2" cellpadding="0" border="0" style="margin-left: auto; margin-right: auto;">
-		<tr>
-			<td style="width:25%;" align="center">
-				<form action="../crew/crew_search.php" method="post" name="main_edit" id="main_edit">
-		
-					<input type="submit" value="Main edit">
-					<input type="hidden" name="action" id="action1" value="main">
-					<input type="hidden" name="crew_select" id="crew_select1" value="{if isset($crew_select.crew_id)}{$crew_select.crew_id}{/if}">
-					<input type="hidden" name="crewsearch" id="crewsearch1" value="{$tracking.crewsearch}">
-					<input type="hidden" name="crewbrowse" id="crewbrowse1" value="{$tracking.crewbrowse}">
-				</form>	
-			</td>
-			<td style="width:25%;" align="center">
-				<form action="../crew/crew_search.php" method="get" name="Genealogy" id="Genealogy">
-		
-					<input type="submit" value="Genealogy">
-					<input type="hidden" name="action" id="action2" value="genealogy">
-					<input type="hidden" name="crew_select" id="crew_select2" value="{if isset($crew_select.crew_id)}{$crew_select.crew_id}{/if}">
-					<input type="hidden" name="crewsearch" id="crewsearch2" value="{$tracking.crewsearch}">
-					<input type="hidden" name="crewbrowse" id="crewbrowse2" value="{$tracking.crewbrowse}">
-				</form>
-			</td>
-			<td style="width:25%;" align="center">
-				<form action="" method="post" name="Statistics" id="Statistics">
-		
-					<input type="submit" value="Statistics">
-					<input type="hidden" name="action" id="action3" value="statistics">
-					<input type="hidden" name="crew_select" id="crew_select3" value="{if isset($crew_select.crew_id)}{$crew_select.crew_id}{/if}">
-					<input type="hidden" name="crewsearch" id="crewsearch3" value="{$tracking.crewsearch}">
-					<input type="hidden" name="crewbrowse" id="crewbrowse3" value="{$tracking.crewbrowse}">
-				</form>
-			</td>
-			<td style="width:25%;" align="center">
-				<form action="" method="post" name="Comments_Submissions" id="Comments_Submissions">
-		
-					<input type="submit" value="Comments/Submissions">
-					<input type="hidden" name="action" id="action4" value="comments">
-					<input type="hidden" name="crew_select" id="crew_select4" value="{if isset($crew_select.crew_id)}{$crew_select.crew_id}{/if}">
-					<input type="hidden" name="crewsearch" id="crewsearch4" value="{$tracking.crewsearch}">
-					<input type="hidden" name="crewbrowse" id="crewbrowse4" value="{$tracking.crewbrowse}">
-				</form>
-			</td>
-		</tr>
-		<tr>
-			<td colspan="4">
+
+				<div style="display:flex;justify-content: space-around;">
+				<a href="../crew/crew_editor.php?crew_select={if isset($crew_select.crew_id)}{$crew_select.crew_id}{/if}&amp;crewsearch={$tracking.crewsearch}&amp;crewbrowse={$tracking.crewbrowse}" class="click_button">
+				Main Edit</a>
+				<a href="../crew/crew_genealogy.php?action=genealogy&amp;crew_select={if isset($crew_select.crew_id)}{$crew_select.crew_id}{/if}&amp;crewsearch={$tracking.crewsearch}&amp;crewbrowse={$tracking.crewbrowse}" class="click_button">
+				Genealogy</a>
+				<a href="#?action=statistics&amp;crew_select={if isset($crew_select.crew_id)}{$crew_select.crew_id}{/if}&amp;crewsearch={$tracking.crewsearch}&amp;crewbrowse={$tracking.crewbrowse}" class="click_button">
+				Statistics</a>
+				<a href="#?action=comments&amp;crew_select={if isset($crew_select.crew_id)}{$crew_select.crew_id}{/if}&amp;crewsearch={$tracking.crewsearch}&amp;crewbrowse={$tracking.crewbrowse}" class="click_button">
+				Comments/Submissions</a>
+				</div>
+
+
 			{* START THE CREW GENEALOGY EDIT *}
-			<table width="100%" cellspacing="2" cellpadding="15" align="center" border="0">
-<tr>
-	<td colspan="2">
+<br/><br/>
+
 	<fieldset class="category_set_noGrave" style="margin-left: 5%;margin-right: 5%; width:90%;">
 		This is the scene genealogy page where we can add members to crews. We can add both indiviual members and subcrews.
 	</fieldset> 
-	</td>
-</tr>
-<tr>
-	<td>
-	
+	<br/><br/>
 		<table width="100%" cellspacing="0" cellpadding="0">
 		<tr>
 			<td width="50%">
@@ -379,8 +330,7 @@ function searchInd(str) {
 				<tr>
 					<td width="25%" style="vertical-align:top;">
 					
-					 <FORM action= method=post name=f1
-      onsubmit="return false;">
+					 <FORM action= method=post name="f1" onsubmit="return false;">
       <SELECT class=saveHistory id=m1 name=m1 onchange="browseInd(this.value)">
 
 						<option value="a">A</option>
@@ -454,9 +404,7 @@ function searchInd(str) {
 			<legend class="links_legend">Members</legend>
 			
 			<div style="width:50%;float:left;">
-					
-					
-					
+
 					<table class="table_game_list" style="width:100%;">
 						<tr>
 							<th style="width:75%;">SubCrews</th>
@@ -477,9 +425,7 @@ function searchInd(str) {
 							</td>
 						</tr>
 					</table>
-					
 
-					
 					</div>
 					<div style="width:50%;float:right;">
 					
@@ -546,18 +492,11 @@ function searchInd(str) {
 </tr>
 </table>
 			{* END THE CREW GENEALOGY EDIT *}
-			</td>
-		</tr>
-	</table>
+
 	{* End crew editing table	*}
-	</td>
-	</tr>
-	</table>
-	</td>
-</tr>
-</table>
 
 {if isset($message)}
 	<div class="message_box">{$message}</div>
 {/if}
+</div>
 {/block}
