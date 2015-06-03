@@ -25,39 +25,39 @@ The main game page
 	</fieldset> 
 <br/>
 <br/>
-	<table class="table_game_list" style="">
+	<table class="table_game_list">
 			<tr>
-				<th width="40%">Game Name</th>
-				<th width="20%">Publisher</th>
-				<th width="20%">Developer</th>
-				<th width="10%">Year</th>
-				<th width="10%">Info</th>
+				<th style="width:40%;">Game Name</th>
+				<th style="width:20%;">Publisher</th>
+				<th style="width:20%;">Developer</th>
+				<th style="width:10%;">Year</th>
+				<th style="width:10%;">Info</th>
 			</tr>
 					{foreach from=$game_search item=line}
 			<tr>
-				<td width="40%">{if $line.game_name != ''}<a href="games_detail.php?game_id={$line.game_id}" class="MAINNAV">{$line.game_name}</a>{else}<i>n/a</i>{/if}</td>
-				<td width="20%">{if $line.publisher_name != ''}
+				<td style="width:40%;">{if $line.game_name != ''}<a href="games_detail.php?game_id={$line.game_id}" class="MAINNAV">{$line.game_name}</a>{else}<i>n/a</i>{/if}</td>
+				<td style="width:20%;">{if $line.publisher_name != ''}
 						<a href="games_main.php?publisher={$line.publisher_id}&amp;action=search" class="MAINNAV">
 							{$line.publisher_name}
 					</a>
 						{else}
 							<i>n/a</i>
 						{/if}</td>
-				<td width="20%">{if $line.developer_name != ''}
+				<td style="width:20%;">{if $line.developer_name != ''}
 						<a href="games_main.php?developer={$line.developer_id}&amp;action=search" class="MAINNAV">
 							{$line.developer_name}
 						</a>
 						{else}
 							<i>n/a</i>
 						{/if}</td>
-				<td width="10%">{if $line.year != ''}
+				<td style="width:10%;">{if $line.year != ''}
 						<a href="games_main.php?year={$line.year}&amp;action=search" class="MAINNAV">
 							{$line.year}
 						</a>
 						{else}
 							<i>n/a</i>
 						{/if}</td>				
-				<td width="10%">{if isset($line.screenshot)}
+				<td style="width:10%;">{if isset($line.screenshot)}
 							<img src="../templates/0/icons/screen.gif" alt="Screenshots available">
 						{/if}
 						{if isset($line.music)}
@@ -78,7 +78,7 @@ The main game page
 			</tr>
 		{/foreach}
 			<tr>
-				<td class="game_list_footer" colspan="5" width="100%">
+				<td class="game_list_footer" colspan="5">
 					{if $nr_of_games == 1}1 game found {else} {$nr_of_games} games found{/if} in {$query_time} sec
 				</td>
 			</tr>
