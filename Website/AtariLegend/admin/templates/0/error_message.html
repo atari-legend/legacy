@@ -13,16 +13,7 @@
 {extends file='head.html'}
 {block name=title}{$error_msg.section}{/block}
 {block name=body}
-<table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
-<tr>
-	<td width="100%" align="center">		
-		<div style="border: 1px black solid;background-color:white;">
-		<span class="MAINAV">
-			{$error_msg.message}
-		</span>
-		</div>
-	  </td>
-</tr>
-</table>	
-
+<div class="NEWMAINCELL" style="text-align:center;">		
+		<div class="message_box">{$error_msg.message}</div>
+</div>	
 [/block}

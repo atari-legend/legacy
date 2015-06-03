@@ -66,43 +66,29 @@ function deletecomment(game_id,reviewid,screenshot_id)
 {/block}
 {block name=title}Edit review - <a href="../games/games_detail.php?game_id={$game.game_id}" class="MAINNAV_WHITE">{$game.game_name}</a>{/block}
 {block name=body}
-<form action="../games/db_games_review_edit.php" method="post" name="post">
-
-<table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
-<tr>
-	<td>
-	<fieldset class="game_set">
+<div class="NEWMAINCELL">
+	<form action="../games/db_games_review_edit.php" method="post" name="post">
+	<fieldset class="interview_set">
 		At this page you can edit or delete an existing review in the AL database.
 	</fieldset> 
 	<br/>
 	<br/>
-	<table width="50%" cellspacing="0" cellpadding="0">
-	<tr>
-		<td width="50%">
-		<fieldset class="game_set">
+
+		<fieldset class="game_set" style="padding:10px;">
 		<legend class="links_legend">Other reviews</legend>
-			<table>
-			<tr>
-				<td width="100%" align="left" colspan="3">
+
 				{foreach from=$review item=line}
 					<b>Review {$line.review_nr} :: <a href="../games/games_review_edit.php?reviewid={$line.review_id}&game_id={$game.game_id}" class="MAINNAV">Edit</a> :: <a href="../games/games_review_preview.php?review_id={$line.review_id}&game_id={$game.game_id}" class="MAINNAV"> Preview </a>by {$line.user_name}</b><br/>
 				{/foreach}	
-				</td>
-			</tr>
-			</table>
+
 		</fieldset>
-		</td>
-	</tr>
-	</table>
+
 	<br/>
 	<br/>
-	<table width="100%" cellspacing="0" cellpadding="0">
-	<tr>
-		<td width="10%">
+
 			<b>Written by :</b>
-		</td>
-		<td width="90%">
-			<select name="members" class="links_selector">
+
+			<select name="members" class="links_selector" style="margin-left:10px;">
 				<option value="-" selected>-</option>
 				{foreach from=$authors item=line}
 					{if $edit_review.member_id == $line.user_id}
@@ -112,9 +98,7 @@ function deletecomment(game_id,reviewid,screenshot_id)
 					{/if}
 				{/foreach}	
 			</select>
-		</td>
-	</tr>
-	</table>
+
 	<table width="100%" cellspacing="0" cellpadding="0">
 	<tr>
 		<td width="10%">
@@ -131,6 +115,7 @@ function deletecomment(game_id,reviewid,screenshot_id)
 		</td>
 	</tr>
 	</table>
+	
 	<table width="100%" cellspacing="0" cellpadding="0" align="center">
 	<tr>
 		<td width="100%" colspan="8">
@@ -150,29 +135,29 @@ function deletecomment(game_id,reviewid,screenshot_id)
 			<input type="button" accesskey= "t" name="addbbcode12" value="Hotspot Target" onclick="bbstyle(12,'textfield')" onMouseOver="helpline('t')" />		 
 			&nbsp;
 			&nbsp;
-			<a href="javascript:setsmileyn(' :-D ')"><img src="../templates/0/emoticons/icon_biggrin.gif" alt="Very Happy" border="0" onMouseOver="helpline('x')"></a>
-			<a href="javascript:setsmileyn(' :) ')"><img src="../templates/0/emoticons/icon_smile.gif" alt="Smile" border="0" onMouseOver="helpline('x')"></a>
-			<a href="javascript:setsmileyn(' :( ')"><img src="../templates/0/emoticons/icon_sad.gif" alt="sad" border="0" onMouseOver="helpline('x')"></a> 
-			<a href="javascript:setsmileyn(' 8O ')"><img src="../templates/0/emoticons/icon_eek.gif" alt="shocked" border="0" onMouseOver="helpline('x')"></a>
-			<a href="javascript:setsmileyn(' :? ')"><img src="../templates/0/emoticons/icon_confused.gif" alt="confused" border="0" onMouseOver="helpline('x')"></a>
-			<a href="javascript:setsmileyn(' 8)')"><img src="../templates/0/emoticons/icon_cool.gif" alt="Cool" border="0" onMouseOver="helpline('x')"></a>
-			<a href="javascript:setsmileyn(' :x ')"><img src="../templates/0/emoticons/icon_mad.gif" alt="Mad" border="0" onMouseOver="helpline('x')"></a>
-			<a href="javascript:setsmileyn(' :P ')"><img src="../templates/0/emoticons/icon_razz.gif" alt="Razz" border="0" onMouseOver="helpline('x')"></a>
-			<a href="javascript:setsmileyn(' :oops: ')"><img src="../templates/0/emoticons/icon_redface.gif" alt="Embarassed" border="0" onMouseOver="helpline('x')"></a>
-			<a href="javascript:setsmileyn(' :evil: ')"><img src="../templates/0/emoticons/icon_evil.gif" alt="Evil or Very mad" border="0" onMouseOver="helpline('x')"></a>
-			<a href="javascript:setsmileyn(' :twisted: ')"><img src="../templates/0/emoticons/icon_twisted.gif" alt="Twisted Evil" border="0" onMouseOver="helpline('x')"></a>
-			<a href="javascript:setsmileyn(' :roll: ')"><img src="../templates/0/emoticons/icon_rolleyes.gif" alt="Rolling eyes" border="0" onMouseOver="helpline('x')"></a>
-			<a href="javascript:setsmileyn(' :frown: ')"><img src="../templates/0/emoticons/icon_frown.gif" alt="Frowning" border="0" onMouseOver="helpline('x')"></a>
-			<a href="javascript:setsmileyn(' :| ')"><img src="../templates/0/emoticons/icon_neutral.gif" alt="Neutral" border="0" onMouseOver="helpline('x')"></a>
-			<a href="javascript:setsmileyn(' :mrgreen: ')"><img src="../templates/0/emoticons/icon_mrgreen.gif" alt="Mr. Green" border="0" onMouseOver="helpline('x')"></a>
-			<a href="javascript:setsmileyn(' :o ')"><img src="../templates/0/emoticons/icon_surprised.gif" alt="Surprised" border="0" onMouseOver="helpline('x')"></a>
-			<a href="javascript:setsmileyn(' :lol: ')"><img src="../templates/0/emoticons/icon_lol.gif" alt="Laughing" border="0" onMouseOver="helpline('x')"></a>
-			<a href="javascript:setsmileyn(' :cry: ')"><img src="../templates/0/emoticons/icon_cry.gif" alt="Crying or Very sad" border="0" onMouseOver="helpline('x')"></a>
-			<a href="javascript:setsmileyn(' :wink: ')"><img src="../templates/0/emoticons/icon_wink.gif" alt="Wink" border="0" onMouseOver="helpline('x')"></a>
-			<a href="javascript:setsmileyn(' :!: ')"><img src="../templates/0/emoticons/icon_exclaim.gif" alt="Exclamation" border="0" onMouseOver="helpline('x')"></a>
-			<a href="javascript:setsmileyn(' :arrow: ')"><img src="../templates/0/emoticons/icon_arrow.gif" alt="smilie" border="0" onMouseOver="helpline('x')"></a>
-			<a href="javascript:setsmileyn(' :?: ')"><img src="../templates/0/emoticons/icon_question.gif" alt="Question" border="0" onMouseOver="helpline('x')"></a>
-			<a href="javascript:setsmileyn(' :idea: ')"><img src="../templates/0/emoticons/icon_idea.gif" alt="Idea" border="0" onMouseOver="helpline('x')"></a>
+			<a href="javascript:setsmileyn(' :-D ')"><img src="../templates/0/emoticons/icon_biggrin.gif" alt="Very Happy" onMouseOver="helpline('x')"></a>
+			<a href="javascript:setsmileyn(' :) ')"><img src="../templates/0/emoticons/icon_smile.gif" alt="Smile" onMouseOver="helpline('x')"></a>
+			<a href="javascript:setsmileyn(' :( ')"><img src="../templates/0/emoticons/icon_sad.gif" alt="sad" onMouseOver="helpline('x')"></a> 
+			<a href="javascript:setsmileyn(' 8O ')"><img src="../templates/0/emoticons/icon_eek.gif" alt="shocked" onMouseOver="helpline('x')"></a>
+			<a href="javascript:setsmileyn(' :? ')"><img src="../templates/0/emoticons/icon_confused.gif" alt="confused" onMouseOver="helpline('x')"></a>
+			<a href="javascript:setsmileyn(' 8)')"><img src="../templates/0/emoticons/icon_cool.gif" alt="Cool" onMouseOver="helpline('x')"></a>
+			<a href="javascript:setsmileyn(' :x ')"><img src="../templates/0/emoticons/icon_mad.gif" alt="Mad" onMouseOver="helpline('x')"></a>
+			<a href="javascript:setsmileyn(' :P ')"><img src="../templates/0/emoticons/icon_razz.gif" alt="Razz" onMouseOver="helpline('x')"></a>
+			<a href="javascript:setsmileyn(' :oops: ')"><img src="../templates/0/emoticons/icon_redface.gif" alt="Embarassed" onMouseOver="helpline('x')"></a>
+			<a href="javascript:setsmileyn(' :evil: ')"><img src="../templates/0/emoticons/icon_evil.gif" alt="Evil or Very mad" onMouseOver="helpline('x')"></a>
+			<a href="javascript:setsmileyn(' :twisted: ')"><img src="../templates/0/emoticons/icon_twisted.gif" alt="Twisted Evil" onMouseOver="helpline('x')"></a>
+			<a href="javascript:setsmileyn(' :roll: ')"><img src="../templates/0/emoticons/icon_rolleyes.gif" alt="Rolling eyes" onMouseOver="helpline('x')"></a>
+			<a href="javascript:setsmileyn(' :frown: ')"><img src="../templates/0/emoticons/icon_frown.gif" alt="Frowning" onMouseOver="helpline('x')"></a>
+			<a href="javascript:setsmileyn(' :| ')"><img src="../templates/0/emoticons/icon_neutral.gif" alt="Neutral" onMouseOver="helpline('x')"></a>
+			<a href="javascript:setsmileyn(' :mrgreen: ')"><img src="../templates/0/emoticons/icon_mrgreen.gif" alt="Mr. Green" onMouseOver="helpline('x')"></a>
+			<a href="javascript:setsmileyn(' :o ')"><img src="../templates/0/emoticons/icon_surprised.gif" alt="Surprised" onMouseOver="helpline('x')"></a>
+			<a href="javascript:setsmileyn(' :lol: ')"><img src="../templates/0/emoticons/icon_lol.gif" alt="Laughing" onMouseOver="helpline('x')"></a>
+			<a href="javascript:setsmileyn(' :cry: ')"><img src="../templates/0/emoticons/icon_cry.gif" alt="Crying or Very sad" onMouseOver="helpline('x')"></a>
+			<a href="javascript:setsmileyn(' :wink: ')"><img src="../templates/0/emoticons/icon_wink.gif" alt="Wink" onMouseOver="helpline('x')"></a>
+			<a href="javascript:setsmileyn(' :!: ')"><img src="../templates/0/emoticons/icon_exclaim.gif" alt="Exclamation" onMouseOver="helpline('x')"></a>
+			<a href="javascript:setsmileyn(' :arrow: ')"><img src="../templates/0/emoticons/icon_arrow.gif" alt="smilie" onMouseOver="helpline('x')"></a>
+			<a href="javascript:setsmileyn(' :?: ')"><img src="../templates/0/emoticons/icon_question.gif" alt="Question" onMouseOver="helpline('x')"></a>
+			<a href="javascript:setsmileyn(' :idea: ')"><img src="../templates/0/emoticons/icon_idea.gif" alt="Idea" onMouseOver="helpline('x')"></a>
 		</td>	
 	</tr>
 	<tr>
@@ -237,9 +222,7 @@ function deletecomment(game_id,reviewid,screenshot_id)
 		</td>
 	</tr>
 	</table>	
-	<table width="100%" cellspacing="0" cellpadding="0" align="center">
-	<tr>
-		<td valign="top" width="100%">
+
 			<br/>
 			<br/>
 			<input type="hidden" name="action" value="edit_review">
@@ -248,20 +231,13 @@ function deletecomment(game_id,reviewid,screenshot_id)
 			<input type="submit" name="Create Review" value="Edit Review">
 			<input type="button" name="delete" value="Delete review" onclick="deletereview({$reviewid},{$game.game_id})">
 			<input type="button" name="delete" value="Move to Comments" onclick="move_to_comment({$reviewid},{$game.game_id})">
-		</td>
-	</tr>
-	</table>	
-	</td>
-</tr>
-</table>
 
-<br/>
+<br/><br/>
 <div class="back_button"><a href="javascript:history.go(-1)" class="MAINNAV">back</a></div>
 <br/>
-
 {if isset($message)}
 	<div class="message_box">{$message}</div>
 {/if}
-
 </form>
+</div>
 {/block}
