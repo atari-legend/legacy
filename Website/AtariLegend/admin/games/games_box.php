@@ -89,7 +89,8 @@ This is the game box main page
 		 	}
 		} 
 
-		
+	if (empty($front)) {$front="";}
+	if (empty($back)) {$back="";}	
 	$smarty->assign('nr_front', $front);
 	$smarty->assign('nr_back', $back);
 
