@@ -2,9 +2,7 @@
 {block name=title}Edit Comment{/block}
 {block name=body}
 
-<table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
-<tr>
-	<td>
+<div class="NEWMAINCELL">
 	<br/>
 		Comment by <strong>{$comments.user_name}</strong> on <strong>{$comments.game}</strong> on {$comments.date}
 	<br/>
@@ -12,7 +10,7 @@
 	<form action="../games/db_games_comment.php" method="post" name="editgames_comment" id="editgames_comment">
 
 	<label for="comment_text">Comment</label>
-	<textarea cols="50" rows="8" name="comment_text" class="textarea_links">{$comments.comment}</textarea>
+	<textarea cols="450" rows="8" name="comment_text" class="textarea_links">{$comments.comment}</textarea>
 	<br/>
 	<br/>
 	<input type="hidden" name="action" id="action" value="edit_games_comment">
@@ -26,8 +24,5 @@
 	<input type="reset">
 	</form>
 
-	</td>
-</tr>
-</table>
-
+</div>
 {/block}

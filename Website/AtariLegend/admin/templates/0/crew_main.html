@@ -45,27 +45,17 @@ function crewinsert()
 {/block}
 {block name=title}Crew editor{/block}
 {block name=body}
-<table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
-<tr>
-	<td colspan="2">
-	<fieldset class="category_set_noGrave" style="margin-left: 5%;margin-right: 5%; width:90%;text-align:center;">
+<div class="NEWMAINCELL" style="text-align:center;">
+	<fieldset class="interview_set">
 		In this section you can add or edit a crew. Search for a crew by using any of the 
 		functionalities below. 
 	</fieldset> 
-	</td>
-</tr>
-<tr>
-	<td align="center">
+<br/><br/>
 		<form action="../crew/crew_search.php" method="post" name="crew_search" id="crew_search">
 		<fieldset class="interview_set">
 		<legend class="links_legend">Search crews</legend>
 		<br/>
-		<table>
-		<tr>
-			<td>
 				<b>By name :</b>
-			</td>
-			<td>
 				<select name="crewbrowse">
 					<option value="" SELECTED>-</option>
 					<option value="num">0-9</option>
@@ -97,25 +87,15 @@ function crewinsert()
 					<option value="z">Z</option>
 				</select>
 				<input type="text" name="crewsearch" value="{if (isset($new_crew) and $new_crew <> '')}{$new_crew}{/if}">
-			</td>
-		</tr>
-			
-		</table>
 		<br/>
-		
 		<br/>
-		
 		<input type="submit" value="Search">
 		<br/>
 		</fieldset>
 		<input type="hidden" name="action" id="action" value="search">
 		</form>	
-	</td>
-</tr>
-<tr>
-	<td align="center">
-	
-	<span class="MAINNAV" style="text-align:center;">{if (isset($new_crew) and $new_crew <> '')}{$new_crew} added to the database!{/if}<br/></span><br/>
+	{if (isset($new_crew) and $new_crew <> '')}<div class="message_box">{$new_crew} added to the database!</div><br/>{/if}
+	<br/><br/>
 		<form method="post" name="insertcrew">
 		<fieldset class="interview_set">
 		<legend class="links_legend">Add Crew</legend>
@@ -123,11 +103,8 @@ function crewinsert()
 			<input type="submit" value="Insert" onClick="crewinsert(); return false;">	
 		</fieldset>
 		</form>
-	</td>
-</tr>
-</table>
-
 {if isset($message)}
 	<div class="message_box">{$message}</div>
 {/if}
+</div>
 {/block}

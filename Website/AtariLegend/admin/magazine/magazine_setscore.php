@@ -30,7 +30,7 @@ include("../includes/common.php");
 	
 	
 		// get game info
-		$fetchgame =  $mysqli->query("SELECT * FROM game WHERE game_id='$game_id'"->fetch_array(MYSQLI_BOTH));
+		$fetchgame =  $mysqli->query("SELECT * FROM game WHERE game_id='$game_id'")->fetch_array(MYSQLI_BOTH);
 		
 				// Create smarty array
 					$smarty->assign('game',

@@ -107,7 +107,7 @@ function commentdelete(JSsubID)
 					<td class="main_text" valign="top" style="line-height: 13px;">
 						<br/>
 						<br/>
-						{if $line.image != "../../../images/demo_screenshots/."}<span style="float:right;"><a href="../demos/demos_detail.php?demo_id={$line.demo_id}"><img src="../includes/showimage.php?img={$line.image}&w=120&shadow=1&bgcolour=EFEFEF" alt="{$line.demo_name}" border="0"></a></span>{/if}
+						{if $line.image != "../../../images/demo_screenshots/."}<span style="float:right;"><a href="../demos/demos_detail.php?demo_id={$line.demo_id}"><img src="../includes/showimage.php?img={$line.image}&w=120&shadow=1&bgcolour=EFEFEF" alt="{$line.demo_name}"></a></span>{/if}
 						{$line.comment}
 						<br/>
 						<br/>
@@ -126,15 +126,15 @@ function commentdelete(JSsubID)
 					<td valign="top" class="main_text">
 						{if $line.email != ''}
 							<a href="mailto:{$line.email}?subject=Thanks for the submission on {$line.demo_name} at Atari Legend">
-							<img src="../templates/0/icons/icon_email.gif" alt="Email User" title="Email User" width="59" height="18" border="0">
+							<img src="../templates/0/icons/icon_email.gif" alt="Email User" title="Email User" width="59" height="18">
 							</a>{/if}
 							{if $structure.list == 'done'} {else}
 							<a href="../demos/db_demos_submissions.php?action=update_submission&submit_id={$line.submit_id}&list={$structure.list}&v_counter={$structure.v_counter}">
-							<img src="../templates/0/icons/icon_done.png" alt="Done" width="59" height="18" border="0" title="Edit Comment">
+							<img src="../templates/0/icons/icon_done.png" alt="Done" width="59" height="18" title="Edit Comment">
 							</a>
 							{/if}
 							<a  onClick="commentdelete({$line.submit_id})" style="cursor: pointer;">
-							<img src="../templates/0/icons/icon_delete.gif" alt="Delete Comment" title="Delete Comment" width="16" height="18" border="0">
+							<img src="../templates/0/icons/icon_delete.gif" alt="Delete Comment" title="Delete Comment" width="16" height="18">
 							</a>					
 					</td>
 					<td valign="middle" class="main_text" style="text-align: right;">

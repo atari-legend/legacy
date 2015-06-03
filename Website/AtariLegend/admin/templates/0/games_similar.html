@@ -17,21 +17,13 @@ The main game page
 {extends file='head.html'}
 {block name=title}Similar Games{/block}
 {block name=body}
-
-<table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
-<tr>
-	<td colspan="2">
-	<fieldset class="game_set">
+<div class="NEWMAINCELL" style="text-align:center;">
+	<fieldset class="interview_set">
 		Select a game from the dropdown field and hit the "Add" button.
-	</td>
-</tr>
-<tr>
-	<td align="center">
-		<table>
-		<tr>
-			<td>
+	</fieldset>
+	<br/><br/>
 			<form action="../games/db_games_similar.php" method="post" name="similar">
-		<fieldset class="game_set">
+		<fieldset class="interview_set">
 		<legend class="links_legend">Games Similar to {$game_info.game_name}</legend>
 			<b>Similar game :</b> 
 			<br/>
@@ -58,18 +50,12 @@ The main game page
 			{/if}
 		</fieldset>
 		</form>
-			</td>
-		</tr>
-		</table>
+
 		<br/>
 		<br/>
-	<a href="../games/games_detail.php?game_id={$game_info.game_id}" class="MAINNAV">Back to Detail</a>
-	</td>
-</tr>
-</table>
-
-
+<div class="back_button"><a href="../games/games_detail.php?game_id={$game_info.game_id}" class="MAINNAV">Back to Detail</a></div>
 {if isset($message)}
 	<div class="message_box">{$message}</div>
 {/if}
+</div>
 {/block}

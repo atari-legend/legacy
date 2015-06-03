@@ -26,25 +26,15 @@ function commentdelete(JScomID,JSusers_id)
 {block name=title}Demo Comments{/block}
 {block name=body}
 <a name="top"></a>
-
-<table width="100%" cellspacing="2" cellpadding="15" class="CELLCOLOR">
-<tr>
-	<td align="center">
+<div class="NEWMAINCELL">
 	<fieldset class="interview_set">
 				This is the user comment edit page. Overhere you can edit or delete user comments for demos. 
 				There is currently a total of <b>{$total_nr_comments}</b> comments in the AL DB!
 	</fieldset> 
-	</td>
-</tr>
-</table>
+<br/><br/><br/>
 
-<table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
-<tr>
-	<td align="center">
 		{if $links.view eq "users_comments"}<a href="../demos/demos_comment.php?v_counter={$links.c_counter}" class="MAINNAV">Sort by latest comments</a><br/>{/if}
 		<br/>
-		
-		
 		{foreach from=$comments item=line}
 				<table cellspacing="0" cellpadding="2" border="0" width="95%" style="border: solid 1px #b2b2b2; background-color:#E9E9E9;">
 				<tr>
@@ -65,7 +55,7 @@ function commentdelete(JScomID,JSusers_id)
 					<td class="main_text" valign="top" style="line-height: 13px;">
 						<br/>
 						<br/>
-						{if $line.image != "../../../images/demo_screenshots/."}<span style="float:right;"><a href="../demos/demos_detail.php?demo_id={$line.demo_id}"><img src="../includes/showimage.php?img={$line.image}&w=120&shadow=1&bgcolour=EFEFEF" alt="{$line.demo_name}" border="0"></a></span>{/if}
+						{if $line.image != "../../../images/demo_screenshots/."}<span style="float:right;"><a href="../demos/demos_detail.php?demo_id={$line.demo_id}"><img src="../includes/showimage.php?img={$line.image}&w=120&shadow=1&bgcolour=EFEFEF" alt="{$line.demo_name}"></a></span>{/if}
 						{$line.comment}
 						<br/>
 						<br/>
@@ -84,13 +74,13 @@ function commentdelete(JScomID,JSusers_id)
 					<td valign="top" class="main_text">
 						{if $line.email != ''}
 							<a href="mailto:{$line.email}?subject=Comment of {$line.demo} at Atari Legend">
-							<img src="../templates/0/icons/icon_email.gif" alt="Email User" title="Email User" width="59" height="18" border="0">
+							<img src="../templates/0/icons/icon_email.gif" alt="Email User" title="Email User" width="59" height="18">
 							</a>{/if}
 							<a href="../demos/demos_comment_edit.php?demo_user_comments_id={$line.demo_user_comments_id}{$links.users_comments}&v_counter={$links.v_counter}">
-							<img src="../templates/0/icons/icon_edit.gif" alt="Edit Comment" title="Edit Comment" width="59" height="18" border="0">
+							<img src="../templates/0/icons/icon_edit.gif" alt="Edit Comment" title="Edit Comment" width="59" height="18">
 							</a>
 							<a  onClick="commentdelete({$line.comment_id},{$line.users_id})" style="cursor: pointer;">
-							<img src="../templates/0/icons/icon_delete.gif" alt="Delete Comment" title="Delete Comment" width="16" height="18" border="0">
+							<img src="../templates/0/icons/icon_delete.gif" alt="Delete Comment" title="Delete Comment" width="16" height="18">
 							</a>					
 					</td>
 					<td valign="middle" class="main_text" style="text-align: right;">
@@ -117,10 +107,5 @@ function commentdelete(JScomID,JSusers_id)
 		</td>
 	</tr>
 	</table>
-				
-				
-	</td>
-</tr>
-</table>
-
+</div>		
 {/block}

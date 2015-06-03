@@ -35,26 +35,18 @@ function delete_music(demo_id)
 {/block}
 {block name=title}Edit demo music - <a href="../demos/demos_detail.php?demo_id={$demo.demo_id}" class=MAINNAV_WHITE>{$demo.demo_name}</a>{/block}
 {block name=body}
-
-<table width="100%" cellspacing="2" cellpadding="15" class="CELLCOLOR">
-<tr>
-	<td>
-	<fieldset class="game_set">
+<div class="NEWMAINCELL">
+	<fieldset class="interview_set">
 		<legend class="links_legend">Demo Music</legend>
 
 				Add a new muzak or delete an existing one from the db. Choose the composer and go for it!
-
+<br/>
 	</fieldset> 
-	</td>
-</tr>
-</table>
-
-<table width="100%" cellspacing="2" cellpadding="15" class="CELLCOLOR">
-<tr>
-	<td width="100%">
+<br/><br/>
 	<form action="../demos/demos_music_detail.php" method="post" name="editmuzak">
-	<fieldset class="game_set">
+	<fieldset class="interview_set">
 		<legend class="links_legend">Edit existing files</legend>
+		<br/>
 			<table width="100%">
 			<tr>
 				<td width="100%">
@@ -66,7 +58,7 @@ function delete_music(demo_id)
 					  	<br/>
 					{/foreach}
 					{/if}					
-					<img src="../templates/0/images/arrow_ltr.gif" alt="" width="38" height="22" border="0">		
+					<img src="../templates/0/images/arrow_ltr.gif" alt="" width="38" height="22">		
 					<input type="button" value="Delete" onclick="delete_music({$demo.demo_id})">
 					<br/>
 					<br/>
@@ -80,7 +72,7 @@ function delete_music(demo_id)
 					</select>	
 					<b>Composers</b>					
 					<br/><br/>
-					<input type="hidden" name="music_id" value="{$line.music_id}">
+					<input type="hidden" name="music_id" value="{if isset($line.music_id)}{$line.music_id}{/if}">
 					<input type="hidden" name="demo_id" value="{$demo.demo_id}">
 					<input type="button" value="Pick" onclick="add_composer()">
 				</td>
@@ -88,20 +80,14 @@ function delete_music(demo_id)
 			</table>
 	</fieldset>
 	</form>
-	</td>
-</tr>
-</table>
+
 
 {if isset($action) and $action == 'pick_composer'}
-<table width="100%" cellspacing="2" cellpadding="15" class="CELLCOLOR">
-<tr>
-	<td width="100%">
+<br/><br/>
 		<form enctype="multipart/form-data" method="post" action="../demos/demos_music_detail.php" name="composer">		
-		<fieldset class="game_set">
+		<fieldset class="interview_set">
 		<legend class="links_legend">Music files for {$ind_selected.ind_name}</legend>
-			<table width="100%">
-			<tr>
-				<td width="100%">		
+	<br/>
 					{section name=loop loop=6 start=1} 
 						<input type="file" name="music[{$smarty.section.loop.index}]">
 						<br/>
@@ -114,14 +100,10 @@ function delete_music(demo_id)
 					<br/>
 					<br/>
 					<a href="../demos/demos_music_detail.php?demo_id={$demo.demo_id}" class=MAINNAV> Pick another composer </a>
-				</td>
-			</tr>
-			</table>
+	<br/>
 	</fieldset>
 	</form>
-	</td>
-</tr>
-</table>
+
 {/if}
 
 <br/>
@@ -130,4 +112,5 @@ function delete_music(demo_id)
 {if isset($message)}
 	<div class="message_box">{$message}</div>
 {/if}
+</div>
 {/block}
