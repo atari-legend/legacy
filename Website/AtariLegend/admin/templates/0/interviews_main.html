@@ -36,10 +36,7 @@ function deleteinterview(interview_id)
 {/block}
 {block name=title}Interviews{/block}
 {block name=body}
-
-<table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
-<tr>
-	<td>
+<div class="NEWMAINCELL">
 	<fieldset class="game_set">
 		Overhere you can add a new interview or edit an existing interview. If you like to edit an interview,
 		just look up the person in the dropdown list and press <b>search</b>. If you like a list of all interviewed
@@ -89,13 +86,11 @@ function deleteinterview(interview_id)
 		
 		</div>
 </div>
-	
-	</td>
-</tr>
+	<br/><br/>
+
 {if isset($interview)}
 {foreach from=$interview item=line}
-<tr>
-	<td align="center">
+
 		<fieldset class="news_set">
 		<legend class="links_legend">
 		{if $line.user_email <> ''}	
@@ -132,12 +127,11 @@ function deleteinterview(interview_id)
 		</tr>
 		</table>
 		</fieldset> 
-	</td>
-</tr>
+<br/><br/>
 {/foreach}
 {/if}
-</table>
 {if isset($message)}
 	<div class="message_box">{$message}</div>
 {/if}
+</div>
 {/block}

@@ -19,21 +19,12 @@ The the user karma sync page
 {extends file='head.html'}
 {block name=title}Karma sync{/block}
 {block name=body}
-<table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
-<tr>
-	<td colspan="2" align="center">
-	<fieldset class="game_set">
+<div class="NEWMAINCELL">
+	<fieldset class="interview_set">
 		Syncing karma values.
 	</fieldset> 
-	</td>
-</tr>
-</table>
-
-
-<table width="100%" cellspacing="2" cellpadding="15" class="CELLCOLOR">
-<tr>
-	<td align="center">
-		<table cellspacing="0" cellpadding="2" border="0" width="90%" style="border: solid 1px #b2b2b2; background-color:#E9E9E9;">
+<br/><br/>	
+	<table cellspacing="0" cellpadding="2" border="0" width="90%" style="border: solid 1px #b2b2b2; background-color:#E9E9E9;">
 		<tr>
 			<td valign="top" width="25%"><b>User Name</b></td>
 			<td valign="top" width="25%"><b>Karma Value</b></td>
@@ -53,14 +44,11 @@ The the user karma sync page
 		</tr>
 		{/foreach}
 		</table>	
-	</td>
-</tr>
-</table>
-
 <br/>
 <div class="back_button"><a href="../user/user_main.php" class="MAINNAV">back</a></div>
 <br/>
 {if isset($message)}
 	<div class="message_box">{$message}</div>
 {/if}
+</div>
 {/block}

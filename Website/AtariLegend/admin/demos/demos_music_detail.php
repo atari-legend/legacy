@@ -106,8 +106,8 @@ if (isset ($action) and $action == 'pick_composer')
 		while ( $IND=$SQL_IND->fetch_array(MYSQLI_BOTH) ) 
 		{  
 			$smarty->assign('ind_selected',
-		  	 		 array( 'ind_id'  => $IND[ind_id],
-					 		'ind_name' => $IND[ind_name]));
+		  	 		 array( 'ind_id'  => $IND['ind_id'],
+					 		'ind_name' => $IND['ind_name']));
 		}
 	}
 }
@@ -245,7 +245,7 @@ if ( $i == 0 )
 	$message = "No musician attached to this demo, go to the detail pages to add a musician first";
 	$smarty->assign("message",$message);
 }
-elseif ( $individuals !== '-' )
+elseif ( empty($individuals) or $individuals !== '-' )
 {
 	$message = "To add more musicians, just click the demo name in the header to go to the detail pages of this demo";
 	$smarty->assign("message",$message);
