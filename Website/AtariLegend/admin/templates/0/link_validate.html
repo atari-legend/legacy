@@ -21,7 +21,7 @@ function deletelink(JSid)
 {block name=title}Validate Links{/block}
 {block name=body}
 <table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
-
+{if isset($validate)}
 {foreach from=$validate item=lineweb}
 <tr>
 	<td width="45%">
@@ -71,6 +71,7 @@ function deletelink(JSid)
 		  </td>
 		  </tr>
 	{/foreach}
+	{/if}
 		  <tr>
 		  
 		  <td colspan="2" style="padding:0px;">
