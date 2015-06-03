@@ -55,11 +55,9 @@ function searchGame(str) {
 {/block}
 {block name=title}Game Series{/block}
 {block name=body}
-
 <div class="NEWMAINCELL" style="text-align:center;">
 <div style="display:inline;">
     	<div style="float:left;margin-right:30px;">
-			
 			<span class="LEFTNAV"><strong>{$series_info.game_series_name} selected</strong></span>
 		</div>
 		<ul class="game_series_nav">
@@ -183,7 +181,7 @@ function searchGame(str) {
 			{/foreach}
 			
 				<tr>
-					<td class="game_list_footer" colspan="5" width="100%">
+					<td class="game_list_footer" colspan="5">
 						<input type="hidden" name="series_page" value="series_editor">
 						<input type="hidden" name="action" value="add_to_series">
 						<input type="hidden" name="game_series_id" value="{if isset($series_info.game_series_id)}{$series_info.game_series_id}{/if}">
