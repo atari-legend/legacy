@@ -19,7 +19,7 @@ Display submissions
 */
 
 include("../includes/common.php");
-
+if (empty($list) or $list=='') {$list="current"; }
 // get the total nr of submissions in the DB
 $query_total_number = $mysqli->query("SELECT * FROM demo_submitinfo") or die ("Couldn't get the total number of submissions");
 $v_rows_total = $query_total_number->num_rows;
@@ -144,7 +144,9 @@ $v_counter = (isset($_GET["v_counter"]) ? $_GET["v_counter"] : 0);
 				$forward_arrow = ($v_counter + 25);
 			}
 
-			if ($list=='') {$list="current"; }
+			if (empty($list) or $list=='') {$list="current"; }
+				 if (empty($back_arrow) or $back_arrow=='') {$back_arrow=""; }
+				 if (empty($forward_arrow) or $forward_arrow=='') {$forward_arrow=""; }
 				 
 				 $smarty->assign('structure',
 	    			array('list' => $list,

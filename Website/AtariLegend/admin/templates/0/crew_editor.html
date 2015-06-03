@@ -195,49 +195,18 @@ function browseCrew(str) {
 	<td width="80%">
 	{* Start crew editing table	*}
 
-	<table width="100%" cellspacing="2" cellpadding="0" border="0" style="margin-left: auto; margin-right: auto;">
-		<tr>
-			<td style="width:25%;" align="center">
-				<form action="../crew/crew_editor.php" method="post" name="main_edit" id="main_edit">
+				<div style="display:flex;justify-content: space-around;">
+				<a href="../crew/crew_editor.php?crew_select={if isset($crew_select.crew_id)}{$crew_select.crew_id}{/if}&crewsearch={$tracking.crewsearch}&crewbrowse={$tracking.crewbrowse}" class="click_button">
+				Main Edit</a>
+				<a href="../crew/crew_genealogy.php?action=genealogy&crew_select={if isset($crew_select.crew_id)}{$crew_select.crew_id}{/if}&crewsearch={$tracking.crewsearch}&crewbrowse={$tracking.crewbrowse}" class="click_button">
+				Genealogy</a>
+				<a href="#?action=statistics&crew_select={if isset($crew_select.crew_id)}{$crew_select.crew_id}{/if}&crewsearch={$tracking.crewsearch}&crewbrowse={$tracking.crewbrowse}" class="click_button">
+				Statistics</a>
+				<a href="#?action=comments&crew_select={if isset($crew_select.crew_id)}{$crew_select.crew_id}{/if}&crewsearch={$tracking.crewsearch}&crewbrowse={$tracking.crewbrowse}" class="click_button">
+				Comments/Submissions</a>
+				</div>
 		
-					<input type="submit" value="Main edit">
-					<input type="hidden" name="action" id="action1" value="main">
-					<input type="hidden" name="crew_select" id="crew_select1" value="{if isset($crew_select.crew_id)}{$crew_select.crew_id}{/if}">
-					<input type="hidden" name="crewsearch" id="crewsearch1" value="{$tracking.crewsearch}">
-					<input type="hidden" name="crewbrowse" id="crewbrowse1" value="{$tracking.crewbrowse}">
-				</form>	
-			</td>
-			<td style="width:25%;" align="center">
-				<form action="../crew/crew_genealogy.php" method="get" name="Genealogy" id="Genealogy">
-		
-					<input type="submit" value="Genealogy">
-					<input type="hidden" name="action" id="action2" value="genealogy">
-					<input type="hidden" name="crew_select" id="crew_select2" value="{if isset($crew_select.crew_id)}{$crew_select.crew_id}{/if}">
-					<input type="hidden" name="crewsearch" id="crewsearch2" value="{$tracking.crewsearch}">
-					<input type="hidden" name="crewbrowse" id="crewbrowse2" value="{$tracking.crewbrowse}">
-				</form>
-			</td>
-			<td style="width:25%;" align="center">
-				<form action="" method="post" name="Statistics" id="Statistics">
-		
-					<input type="submit" value="Statistics">
-					<input type="hidden" name="action" id="action3" value="statistics">
-					<input type="hidden" name="crew_select" id="crew_select3" value="{if isset($crew_select.crew_id)}{$crew_select.crew_id}{/if}">
-					<input type="hidden" name="crewsearch" id="crewsearch3" value="{$tracking.crewsearch}">
-					<input type="hidden" name="crewbrowse" id="crewbrowse3" value="{$tracking.crewbrowse}">
-				</form>
-			</td>
-			<td style="width:25%;" align="center">
-				<form action="" method="post" name="Comments_Submissions" id="Comments_Submissions">
-		
-					<input type="submit" value="Comments/Submissions">
-					<input type="hidden" name="action" id="action4" value="comments">
-					<input type="hidden" name="crew_select" id="crew_select4" value="{if isset($crew_select.crew_id)}{$crew_select.crew_id}{/if}">
-					<input type="hidden" name="crewsearch" id="crewsearch4" value="{$tracking.crewsearch}">
-					<input type="hidden" name="crewbrowse" id="crewbrowse4" value="{$tracking.crewbrowse}">
-				</form>
-			</td>
-		</tr>
+<table width="100%" cellspacing="2" cellpadding="0" border="0" style="margin-left: auto; margin-right: auto;">
 		<tr>
 			<td colspan="4">
 			{* START THE CREW MAIN EDIT *}
