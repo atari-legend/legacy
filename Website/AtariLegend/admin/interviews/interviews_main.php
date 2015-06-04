@@ -98,6 +98,7 @@ if ( $individual_search == " " or $individual_search == '-' )
 	$interview_text = nl2br($interview_text);
 	$interview_text = InsertALCode($interview_text);
 	$interview_text = InsertSmillies($interview_text);
+	$interview_name = rawurlencode($interview['ind_name']);
 	
 	$smarty->append('interview',
 	    	 array('user_id' => $interview['userid'],
@@ -105,6 +106,7 @@ if ( $individual_search == " " or $individual_search == '-' )
 				   'interview_id' => $interview['interview_id'],
 				   'ind_id' => $interview['ind_id'],
 				   'ind_name' => $interview['ind_name'],
+				   'email_name' => $interview_name,
 				   'ind_photo' => $v_ind_image,
 				   'interview_date' => $interview_date,
 				   'interview_text' => $interview_text));
