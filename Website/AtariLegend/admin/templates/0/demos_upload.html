@@ -225,19 +225,12 @@ function delete_download(id, demo_id)
 	<form action="../demos/db_demos_upload.php?action=add_download" enctype="multipart/form-data" method="post" name="add_file">
 	<fieldset class="interview_set">
 		<legend class="links_legend">Add a new download</legend>
-		<table>
-		<tr>
-			<td>
+
 				<b>Filename :</b> <input type="file" name="demo_download_name" accept="application/x-zip-compressed,application/x-zip-compressed,application/x-zip-compressed">
-			</td>
-		</tr>
-		<tr>
-			<td>
+<br/>
 				<input type="submit" value="Upload">
 				<input type="hidden" name="demo_id" value="{$demo.demo_id}">
-			</td>
-		</tr>
-	   </table>
+
 	</fieldset>
 	</form>
 </div>

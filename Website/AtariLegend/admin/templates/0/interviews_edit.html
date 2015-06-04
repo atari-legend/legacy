@@ -53,22 +53,20 @@ function deleteinterview(interview_id)
 {/block}
 {block name=title}Edit Interviews - <a href="../individuals/individuals_edit.php?ind_id={$interview.interview_ind_id}" class="MAINNAV_WHITE">{$interview.interview_ind_name}</a>{/block}
 {block name=body}
-<form action="../interviews/interviews_edit.php" method="post" name="post">
+
 <div class="NEWMAINCELL" style="margin-left:auto;margin-right:auto;">
+<form action="../interviews/interviews_edit.php" method="post" name="post">
 	<fieldset class="game_set">
 		At this page you can change an existing interview in the AL database. the screen might seem a little complex,
 		therefor I suggest you first read the <b><a href="../interviews/interviews_help.php" class="LEFTNAV">help</a></b> provided with this section!
 	</fieldset> 
 	<br/>
 	<br/>
-	<table width="100%" cellspacing="0" cellpadding="0">
-	<tr>
-		<td width="10%">
-			<b>Written by :</b>
-		</td>
-		<td width="90%">
-			<select name="members" class="links_selector">
-				<option value="-" selected>-</option>
+
+			<div style="width:100px;display:inline-block;"><b>Written by :</b></div>
+
+			<select name="members" id="members" class="links_selector" >
+				<option value="-">-</option>
 				{foreach from=$authors item=line}
 					{if $line.user_id == $interview.interview_author}
 						<option value="{$line.user_id}" selected>{$line.user_name}</option>
@@ -77,15 +75,12 @@ function deleteinterview(interview_id)
 					{/if}
 				{/foreach}	
 			</select>
-		</td>
-	</tr>
-	<tr>
-		<td width="10%">
-			<b>Individual :</b>
-		</td>
-		<td width="90%">
-			<select name="individual" class="links_selector">
-				<option value="-" selected>-</option>
+
+<br/>
+			<div style="width:100px;display:inline-block;"><b>Individual :</b></div>
+
+			<select name="individual" id="individual" class="links_selector">
+				<option value="-">-</option>
 				{foreach from=$individuals item=line}
 					{if $line.ind_id == $interview.interview_ind_id}
 						<option value="{$line.ind_id}" selected>{$line.ind_name}</option>
@@ -94,35 +89,19 @@ function deleteinterview(interview_id)
 					{/if}
 				{/foreach}	
 			</select>
-		</td>
-	</tr>
-	</table>
-	<table width="100%" cellspacing="0" cellpadding="0">
-	<tr>
-		<td width="10%">
-			<b>Date :</b>
-		</td>
-		<td width="90%">
+
+			<br/>
+			<div style="width:100px;display:inline-block;"><b>Date :</b></div>
+
+
 			{html_select_date time=$interview.interview_date start_year="2000"}
-		</td>
-	</tr>
-	<tr>
-		<td align="right" colspan="3">
-			<br/>
-			&nbsp;<input type="text" size="60" name="helpbox" maxlength="100" style="font-size:10px; border=0px; background-color:#D0D1DF" value="Tip: Styles can be applied quickly to selected text." />
-		</td>
-	</tr>
-	</table>
-	<table width="100%" cellspacing="0" cellpadding="0" align="center">
-	<tr>
-		<td width="100%">
-			<br/>
+
+
+			<br/><br/>
 			<b>Intro :</b>
-		</td>
-	</tr>
-	<tr>
-		<td width="100%" align="left">
-			<br/>
+
+			<br/><br/>
+			<div class="smileybox">
 			<input type="button" accesskey= "b" name="addbbcode0" value="B" onclick="bbstyle(0,'textintro')" onMouseOver="helpline('b')" />
 			<input type="button" accesskey= "u" name="addbbcode4" value="U" onclick="bbstyle(4,'textintro')" onMouseOver="helpline('u')" />
 			<input type="button" accesskey= "i" name="addbbcode2" value="I" onclick="bbstyle(2,'textintro')" onMouseOver="helpline('i')" />
@@ -153,46 +132,35 @@ function deleteinterview(interview_id)
 			<a href="javascript:setsmileyn2(' :arrow: ')"><img src="../templates/0/emoticons/icon_arrow.gif" alt="smilie" onMouseOver="helpline('x')"></a>
 			<a href="javascript:setsmileyn2(' :?: ')"><img src="../templates/0/emoticons/icon_question.gif" alt="Question" onMouseOver="helpline('x')"></a>
 			<a href="javascript:setsmileyn2(' :idea: ')"><img src="../templates/0/emoticons/icon_idea.gif" alt="Idea" onMouseOver="helpline('x')"></a>
-		</td>
-	</tr>
-	<tr>
-		<td width="100%">
+			&nbsp;<input type="text" size="60" name="helpbox" maxlength="100" style="float:right;vertical-align:middle;font-size:10px; border=0px; background-color:#D0D1DF" value="Tip: Styles can be applied quickly to selected text." />
+			</div>
+
 			<textarea name="textintro" ONSELECT="javascript:storeCaret(this);" ONCLICK="javascript:storeCaret(this);" ONKEYUP="javascript:storeCaret(this);" ONCHANGE="javascript:storeCaret(this);" rows="5" class="textarea_interviews">{$interview.interview_intro}</textarea>
-		</td>
-	</tr>				
-	<tr>
-		<td width="100%">
+
+
+
 			<br/>
 			<br/>
 			<b>Chapters :</b>
-		</td>
-	</tr>
-	<tr>
-		<td width="100%" align="left">
-			<br/>
+
+			<br/><br/>
+			<div class="smileybox">
 			<input type="button" accesskey= "b" name="addbbcode0" value="B" onclick="bbstyle(0,'textchapters')" onMouseOver="helpline('b')" />
 			<input type="button" accesskey= "u" name="addbbcode4" value="U" onclick="bbstyle(4,'textchapters')" onMouseOver="helpline('u')" />
 			<input type="button" accesskey= "i" name="addbbcode2" value="I" onclick="bbstyle(2,'textchapters')" onMouseOver="helpline('i')" />
 			<input type="button" accesskey="w" name="addbbcode6" value="URL" onClick="bbstyle(6,'textchapters')" onMouseOver="helpline('h')" />			  
 			<input type="button" accesskey="x" name="addbbcode8" value="@" onClick="bbstyle(8,'textchapters')" onMouseOver="helpline('e')" />			  			
 			<input type="button" accesskey= "s" name="addbbcode10" value="Hotspot Source" onclick="bbstyle(10,'textchapters')"  onMouseOver="helpline('s')" />
-		</td>	
-	</tr>
-	<tr>
-		<td width="100%">
+			</div>
+
 			<textarea name="textchapters" ONSELECT="javascript:storeCaret(this);" ONCLICK="javascript:storeCaret(this);" ONKEYUP="javascript:storeCaret(this);" ONCHANGE="javascript:storeCaret(this);" rows="5" class="textarea_interviews">{$interview.interview_chapters}</textarea>
-		</td>
-	</tr>
-	<tr>
-		<td width="100%">
+
 			<br/>
 			<br/>
 			<b>Interview :</b>
-		</td>
-	</tr>
-	<tr>
-		<td width="100%" align="left">
-			<br/>
+
+			<br/><br/>
+			<div class="smileybox">
 			<input type="button" accesskey= "b" name="addbbcode0" value="B" onclick="bbstyle(0,'textfield')" onMouseOver="helpline('b')" />
 			<input type="button" accesskey= "u" name="addbbcode4" value="U" onclick="bbstyle(4,'textfield')" onMouseOver="helpline('u')" />
 			<input type="button" accesskey= "i" name="addbbcode2" value="I" onclick="bbstyle(2,'textfield')" onMouseOver="helpline('i')" />
@@ -224,14 +192,9 @@ function deleteinterview(interview_id)
 			<a href="javascript:setsmileyn(' :arrow: ')"><img src="../templates/0/emoticons/icon_arrow.gif" alt="smilie" onMouseOver="helpline('x')"></a>
 			<a href="javascript:setsmileyn(' :?: ')"><img src="../templates/0/emoticons/icon_question.gif" alt="Question" onMouseOver="helpline('x')"></a>
 			<a href="javascript:setsmileyn(' :idea: ')"><img src="../templates/0/emoticons/icon_idea.gif" alt="Idea" onMouseOver="helpline('x')"></a>
-		</td>	
-	</tr>
-	<tr>
-		<td width="100%">
+			</div>
+
 			<textarea name="textfield" ONSELECT="javascript:storeCaret(this);" ONCLICK="javascript:storeCaret(this);" ONKEYUP="javascript:storeCaret(this);" ONCHANGE="javascript:storeCaret(this);" rows="15" class="textarea_interviews">{$interview.interview_text}</textarea>
-		</td>
-	</tr>
-	</table>	
 
 		<br/>
 		<br/>
@@ -239,9 +202,11 @@ function deleteinterview(interview_id)
 		<legend class="links_legend" style="text-align:center;">Screenshots</legend>
 		{if $screenshots_nr <> ''}
 			{foreach from=$screenshots item=line} 
-				<img src="../includes/show_image.php?file={$line.interview_screenshot}&resize=50,null,null,null&crop=null,null,null,null" align="center">
+			<div class="smileybox">
+				<img src="../includes/show_image.php?file={$line.interview_screenshot}&amp;resize=50,null,null,null&amp;crop=null,null,null,null" alt="screenshot">
 				<input class="review_input" type="text" name="inputfield[]" value="{$line.interview_screenshot_comment}">
 				<a href="javascript:deletecomment({$line.interview_screenshot_id},{$interview.interview_id})" class="MAINNAV">Delete Shot</a>
+				</div>
 				<br/>
 				<br/>
 			{/foreach}
@@ -258,6 +223,7 @@ function deleteinterview(interview_id)
 			<input type="hidden" name="action" value="Update_Interview">
 			<input type="submit" name="update" value="Update interview">
 			<input type="button" name="delete" value="Delete interview" onclick="deleteinterview({$interview.interview_id})">
+			</form>
 
 
 <br/>
@@ -269,5 +235,5 @@ function deleteinterview(interview_id)
 	<div class="message_box">{$message}</div>
 {/if}
 </div>
-</form>
+
 {/block}

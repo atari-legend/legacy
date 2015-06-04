@@ -64,9 +64,7 @@ function add_author()
 {/block}
 {block name=title}Edit demo - {$demo_info.demo_name}{/block}
 {block name=body}
-<table width="100%" cellspacing="2" cellpadding="15" class="CELLCOLOR">
-<tr>
-	<td>
+<div class="NEWMAINCELL">
 	<fieldset class="game_set">
 		<legend class="links_legend">Crew/Creator info - help</legend>
 
@@ -75,9 +73,7 @@ function add_author()
 				demo, they should be added in the Creator box. You can link as many Crews/Creators to this demo as you wish.
 
 	</fieldset> 
-	</td>
-</tr>
-</table>
+
 
 <table width="100%" cellspacing="2" cellpadding="15" class="CELLCOLOR">
 <tr>
@@ -166,14 +162,10 @@ function add_author()
 	<td>
 	<fieldset class="game_set">
 		<legend class="links_legend">Basic demo Info - help</legend>
-		<table>
-		<tr>
-			<td width="75%" align="left" valign="top">
+
 				Add this part of the screen you can add additional demo info. Just select what you think is neceasrry, and press the modify button to link it all to the demo.
 				When you press the delete button, the complete demo and all table entries linked to this demo entity will be removed from the database!
-			</td>
-		</tr>
-		</table>
+
 	</fieldset> 
 	</td>
 </tr>
@@ -320,4 +312,5 @@ function add_author()
 {if isset($message)}
 	<div class="message_box">{$message}</div>
 {/if}
+</div>
 {/block}
