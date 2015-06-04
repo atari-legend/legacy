@@ -103,31 +103,23 @@ function commentdelete(JScomID,JSusers_id)
 	
 		</div>
 			<br/>
-		{* END NEW COMMENT BOX *}	
-	
-				
 				{/foreach}
-
+		{* END NEW COMMENT BOX *}	
 				
+	
 				<br/>
 				
 
-	
-			{if $links.linkback != ''}
-			<div style="float:left;margin-left:150px;">
-			<a href="../games/games_comment.php{$links.linkback}" class="MAINNAV">Previous page</a>
-			</div>	
-			{/if}
-	
 			
-				
-	
-			{if $links.linknext != ''}
-			<div style="float:right;margin-right:150px;">
-			<a href="../games/games_comment.php{$links.linknext}" class="MAINNAV">Next page</a>
-			</div>
-			{/if}
-	
+	<div style="margin-left:100px;margin-right:100px;">
+	{if $links.linkback != ''}
+		<a href ="../games/games_comment.php{$links.linkback}" class="click_button_next" style="float:left;">Previous news</a>
+	{/if}
+
+	{if $links.linknext != ''}
+		<a href="../games/games_comment.php{$links.linknext}" class="click_button_next" style="float:right;">Next news</a>
+	{/if}
+	</div>
 
 				
 </div>

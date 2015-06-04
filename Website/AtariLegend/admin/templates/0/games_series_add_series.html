@@ -3,9 +3,7 @@
 {block name=body}
 <div class="NEWMAINCELL" style="display:block; margin-left:auto;margin-right: auto;">
 	<br/>
-	<table width="100%" cellspacing="2" cellpadding="2" border="0">
-			<tr>
-    			<td width="16%" valign="top">
+	<div style="width:20%;display:table-cell;">
 					<div class="NEWNAVCELL">
 
 						<li class="NEWHEADERBAR">Game Series</li>
@@ -15,10 +13,9 @@
 							</li>
 						{/foreach}	
 					</div>
-				</td>
-				<td width="84%" align="center" valign="top">
-					<br/>
-					<br/>
+				</div>
+				<div style="width:80%;display:table-cell;">
+
 					<form action="../games/db_games_series.php" method="post" name="add_series" id="add_series">
 					<fieldset class="interview_set" style="width:90%; margin-left:auto;margin-right: auto;">
 					<legend class="links_legend">Add series</legend>
@@ -32,9 +29,7 @@
 					</div>
 					</fieldset>
 					</form>
-				</td>
-			</tr>
-	</table>
+	</div>
 </div>
 
 {/block}
