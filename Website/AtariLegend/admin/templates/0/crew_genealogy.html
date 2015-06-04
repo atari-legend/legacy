@@ -200,16 +200,13 @@ function searchInd(str) {
 </div>
 
 	<br/><br/>
-	<table width="100%">
-	<tr>
-	<td width="20%" style="vertical-align:top;">
+	<div style="width:20%;display:table-cell;">
 
 <ul class="NEWNAVCELL">
 
 	<li class="NEWHEADERBAR">Search Results</li>
 
 <div id="crew_list">
-
 	{* SEARCH RESULTS - UNDERLINE IF SELECTED *}
 	{foreach from=$crew item=line}
 			
@@ -232,8 +229,8 @@ function searchInd(str) {
 
 </ul>
 
-	</td>
-	<td width="80%">
+	</div>
+	<div style="width:80%;display:table-cell;">
 	{* Start crew editing table	*}
 
 				<div style="display:flex;justify-content: space-around;">
@@ -251,14 +248,12 @@ function searchInd(str) {
 			{* START THE CREW GENEALOGY EDIT *}
 <br/><br/>
 
-	<fieldset class="category_set_noGrave" style="margin-left: 5%;margin-right: 5%; width:90%;">
+	<fieldset class="interview_set" style="margin-left: 5%;margin-right: 5%; width:90%;">
 		This is the scene genealogy page where we can add members to crews. We can add both indiviual members and subcrews.
 	</fieldset> 
 	<br/><br/>
-		<table width="100%" cellspacing="0" cellpadding="0">
-		<tr>
-			<td width="50%">
-				
+		<div style="display:table-row;">
+		<div style="width:50%;display:table-cell;">
 			<div style="float:left;padding-left:55px;">
 			<form action="../crew/db_crew.php" method="post" name="crew_gene2" id="crew_gene2">
 				<select id="crewbrowse2" onchange="browseSubCrew(this.value)">
@@ -322,16 +317,16 @@ function searchInd(str) {
 			
 			</form>
 			</div>
-			</td>
-			<td width="50%">
-			
-			
+			</div>
+			<div style="width:50%;display:table-cell;">
+
+
 			<table width="100%" cellspacing="0" cellpadding="0">
 				<tr>
 					<td width="25%" style="vertical-align:top;">
 					
-					 <FORM action= method=post name="f1" onsubmit="return false;">
-      <SELECT class=saveHistory id=m1 name=m1 onchange="browseInd(this.value)">
+					 <FORM action="" method="post" name="f1" onsubmit="return false;">
+      <SELECT class="saveHistory" id="m1" name="m1" onchange="browseInd(this.value)">
 
 						<option value="a">A</option>
 						<option value="b">B</option>
@@ -394,13 +389,14 @@ function searchInd(str) {
 					</td>
 				</tr>
 			</table>
+			</div>
+			</div>
+			<div style="display:table;width:100%;">
+			<div style="width:100%;display:table-cell;">
 
-			</td>
-		</tr>
-		<tr>{* MEMBERS OF CREW *}
-			<td width="100%" colspan="2">
+				{* MEMBERS OF CREW *}
 			<br/>
-			<fieldset>
+			<fieldset style="width:100%;">
 			<legend class="links_legend">Members</legend>
 			
 			<div style="width:50%;float:left;">
@@ -483,14 +479,10 @@ function searchInd(str) {
 					</div>
 		
 			</fieldset>
-			</td>
-		</tr>
-	
 
-		</table>
-	</td>
-</tr>
-</table>
+		</div>
+		</div>
+</div>
 			{* END THE CREW GENEALOGY EDIT *}
 
 	{* End crew editing table	*}

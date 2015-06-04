@@ -41,9 +41,7 @@ function deleteseries()
 	
 	<br/>
 	
-	<table width="100%" cellspacing="2" cellpadding="2" border="0">
-			<tr>
-    			<td width="16%" valign="top">
+	<div style="width:20%;display:table-cell;">
 					<ul class="NEWNAVCELL">
 
 						<li class="NEWHEADERBAR">Game Series</li>
@@ -53,8 +51,8 @@ function deleteseries()
 							</li>
 						{/foreach}	
 					</ul>
-				</td>
-				<td width="84%" align="center" valign="top">
+				</div>
+				<div style="width:80%;display:table-cell;">
 				
 				{if (isset($series_info.sql_series_link_nr) and $series_info.sql_series_link_nr ==0)}
 				
@@ -139,9 +137,8 @@ function deleteseries()
 		
 				{/if}
 								
-				</td>
-			</tr>
-	</table>
+
+	</div>
 </div>
 
 {/block}

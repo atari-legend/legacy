@@ -46,36 +46,29 @@ function delete_screenshot(screenshot_id, game_id)
 	<br/>
 	<br/>
 
-		<fieldset class="game_set">
+		<fieldset class="game_set" style="margin-left:auto;margin-right:auto;">
 		<legend class="links_legend">screenshots</legend>
 		
-	<table border="0" cellspacing="2" cellpadding="2" align="center">	
+
 		{if $screenshots_nr <> ''}
 			{foreach from=$screenshots item=line name=screen}
-		{if $smarty.foreach.screen.iteration eq 1}<tr>{/if}
-		{if $smarty.foreach.screen.iteration eq 8}<tr>{/if}
-		{if $smarty.foreach.screen.iteration eq 15}<tr>{/if}
-		{if $smarty.foreach.screen.iteration eq 22}<tr>{/if}
-		{if $smarty.foreach.screen.iteration eq 29}<tr>{/if}
-		{if $smarty.foreach.screen.iteration eq 36}<tr>{/if}
-		{if $smarty.foreach.screen.iteration eq 43}<tr>{/if}
-		{if $smarty.foreach.screen.iteration eq 50}<tr>{/if}		
-			<td align="center">	
-				Image {$line.count} :: 
+
+		<div style="display:inline-block;margin-left:auto;margin-right:auto;">
+				Image {$line.count}<br/> :: 
 				<a href="javascript:delete_screenshot({$line.id},{$game_id})" class="MAINNAV">Delete</a> ::    	
-				<a href="../includes/show_image.php?file={$line.screenshot_image}&resize=410,null,null,null"  data-lightbox="image-1" data-title="My caption" class="MAINNAV">
-<img src="../includes/show_image.php?file={$line.screenshot_image}&resize=75,null,null,null" width=75 class="shot_border" alt="Click to enlarge!" vspace="2" hspace="1"></a>
-			</td> 
-		{if $smarty.foreach.screen.iteration eq 7}</tr>{/if}
-		{if $smarty.foreach.screen.iteration eq 14}</tr>{/if}
-		{if $smarty.foreach.screen.iteration eq 21}</tr>{/if}
-		{if $smarty.foreach.screen.iteration eq 28}</tr>{/if}
-		{if $smarty.foreach.screen.iteration eq 35}</tr>{/if}
-		{if $smarty.foreach.screen.iteration eq 42}</tr>{/if}
-		{if $smarty.foreach.screen.iteration eq 49}</tr>{/if}
-		{if $smarty.foreach.screen.last}</tr>{/if}
+				<a href="../includes/show_image.php?file={$line.screenshot_image}&amp;resize=410,null,null,null" data-lightbox="image-1" data-title="My caption" class="MAINNAV">
+<br/><img src="../includes/show_image.php?file={$line.screenshot_image}&amp;resize=75,null,null,null" width=75 class="shot_border" alt="Click to enlarge!"></a>
+		</div>
+		{if $smarty.foreach.screen.iteration eq 7}<br/>{/if}
+		{if $smarty.foreach.screen.iteration eq 14}<br/>{/if}
+		{if $smarty.foreach.screen.iteration eq 21}<br/>{/if}
+		{if $smarty.foreach.screen.iteration eq 28}<br/>{/if}
+		{if $smarty.foreach.screen.iteration eq 35}<br/>{/if}
+		{if $smarty.foreach.screen.iteration eq 42}<br/>{/if}
+		{if $smarty.foreach.screen.iteration eq 49}<<br/>{/if}
+		{if $smarty.foreach.screen.last}<br/>{/if}
 			{/foreach}
-	</table>
+
 		{else}
 			No screenshots attached to this game
 		{/if}
