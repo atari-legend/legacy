@@ -318,15 +318,13 @@ function searchInd(str) {
 			</form>
 			</div>
 			</div>
-			<div style="width:50%;display:table-cell;">
+			<div style="width:50%;display:table;">
 
 
-			<table width="100%" cellspacing="0" cellpadding="0">
-				<tr>
-					<td width="25%" style="vertical-align:top;">
+					<div style="display:table-cell;width:25%;vertical-align:top;">
 					
 					 <FORM action="" method="post" name="f1" onsubmit="return false;">
-      <SELECT class="saveHistory" id="m1" name="m1" onchange="browseInd(this.value)">
+						<SELECT class="saveHistory" id="m1" name="m1" onchange="browseInd(this.value)">
 
 						<option value="a">A</option>
 						<option value="b">B</option>
@@ -362,33 +360,28 @@ function searchInd(str) {
 
       				</FORM>
 					
-					</td>
-					<td width="75%" style="vertical-align:top;" align="left">
+					</div>
+					<div style="display:table-cell;width:75%;vertical-align:top;">
 					
-					      <FORM action="../crew/db_crew.php" method="post">
-   		<div id="ind_member">   
-      <SELECT id="ind_id" name="ind_id" size="10" style="width:200px;">
-
-        {foreach from=$ind_gene item=line}
-				<option value="{$line.ind_id}">{$line.ind_name}</option>
-		{/foreach}	
-
-
-
-        </SELECT>
-  	</div>	      
-        <br/>
-			<input type="hidden" name="action" value="add_member">
-			<input type="hidden" name="parent_id" value="{if isset($crew_select.crew_id)}{$crew_select.crew_id}{/if}">
-			<input type="hidden" name="crew_select" id="crew_select8" value="{if isset($crew_select.crew_id)}{$crew_select.crew_id}{/if}">
-			<input type="hidden" name="crewsearch" id="crewsearch8" value="{$tracking.crewsearch}">
-			<input type="hidden" name="crewbrowse" id="crewbrowse8" value="{$tracking.crewbrowse}">
-        <INPUT type="submit" value="Add Crewmember">
-</FORM>
+							<FORM action="../crew/db_crew.php" method="post">
+							<div id="ind_member">   
+								<SELECT id="ind_id" name="ind_id" size="10" style="width:200px;">
+								{foreach from=$ind_gene item=line}
+								<option value="{$line.ind_id}">{$line.ind_name}</option>
+								{/foreach}	
+								</SELECT>
+							</div>	      
+							<br/>
+							<input type="hidden" name="action" value="add_member">
+							<input type="hidden" name="parent_id" value="{if isset($crew_select.crew_id)}{$crew_select.crew_id}{/if}">
+							<input type="hidden" name="crew_select" id="crew_select8" value="{if isset($crew_select.crew_id)}{$crew_select.crew_id}{/if}">
+							<input type="hidden" name="crewsearch" id="crewsearch8" value="{$tracking.crewsearch}">
+							<input type="hidden" name="crewbrowse" id="crewbrowse8" value="{$tracking.crewbrowse}">
+							<INPUT type="submit" value="Add Crewmember">
+							</FORM>
 					
-					</td>
-				</tr>
-			</table>
+					</div>
+
 			</div>
 			</div>
 			<div style="display:table;width:100%;">
