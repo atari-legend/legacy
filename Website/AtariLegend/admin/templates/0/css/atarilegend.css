@@ -594,16 +594,43 @@ background-color: white;
 	font-size: 12px;
 }
 
+.click_button_next {
+	display:block;
+	font-family: Impact, Charcoal, sans-serif;
+	height: 18px;
+	width:150px;
+	background-color:white;
+	color: #161c71;
+	border: solid 1px #161c71;
+	text-align:center;
+	font-size: 12px;
+	padding-top:5px;
+	border-radius: 5px;
+	float:left;
+	margin-right:5px;
+	cursor: pointer;
+}
+
+.click_button_next:hover {
+	background-color:#1e269c;
+	color: white;
+	border: solid 1px #161c71;
+	font-size: 12px;
+}
+
 .game_series_nav {
     list-style-type: none;
     margin: 0;
     padding: 0;
     float:left;
+    display:flex;
+    justify-content: space-around;
 }
 
 .game_series_nav li {
 
 	display: inline;
+	justify-content: space-around;
 }
 
 .message_box {
@@ -630,6 +657,7 @@ background-color: white;
 
 .smileybox {
 	display:block;
+	margin-bottom:5px;
 }
 
 .smileybox img {
