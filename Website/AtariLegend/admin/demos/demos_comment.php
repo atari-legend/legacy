@@ -21,7 +21,7 @@ $v_counter= (isset($_GET["v_counter"]) ? $_GET["v_counter"] : 0);
 // User comments
 //*********************************************************************************************  
 
-if ( $view == "users_comments" ) 
+if ( isset($view) and $view == "users_comments" ) 
 { 
 	$where_clause = "WHERE users.user_id = '$users_id'"; 
 	
@@ -131,6 +131,11 @@ if($v_rows > ($v_counter + 15))
 //Build the link
 	$v_linknext =('?v_counter=' . ($v_counter + 15 . $users_comments));
 }
+
+if (empty($v_linkback)) {$v_linkback="";}
+if (empty($v_linknext)) {$v_linknext="";}
+if (empty($users_comments)) {$users_comments="";}
+if (empty($c_counter)) {$c_counter="";}
 
 $smarty->assign('links',
 	     array('linkback' => $v_linkback,

@@ -60,6 +60,7 @@ while ($news = $sql_news->fetch_array(MYSQLI_BOTH))
 	$news_text = InsertALCode($news['news_text']);
 	$news_text = InsertSmillies($news_text);
 	$news_text = nl2br($news_text);
+	$email_headline = rawurlencode($news['news_headline']);
 	
 	$v_image  = $news_images_path;
 	$v_image .= $news['news_image_id'];
@@ -70,6 +71,7 @@ while ($news = $sql_news->fetch_array(MYSQLI_BOTH))
  		 		array('edit_userid' => $user_name,
 					  'edit_id' => $news['news_id'],
 					  'edit_headline' => $news['news_headline'],
+					  'email_headline' => $email_headline,
 			  		  'edit_date' => $news_date,
 			  		  'edit_text' => $news_text,
 					  'edit_email' => $news['email'],
