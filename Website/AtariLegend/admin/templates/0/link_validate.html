@@ -20,11 +20,11 @@ function deletelink(JSid)
 {/block}
 {block name=title}Validate Links{/block}
 {block name=body}
-<table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
+<div class="NEWMAINCELL">
 {if isset($validate)}
 {foreach from=$validate item=lineweb}
-<tr>
-	<td width="45%">
+
+	<div style="width:45%;float:left;">
 	
 	<fieldset class="links_set">
 	<legend class="links_legend">New website submitted</legend>
@@ -53,8 +53,8 @@ function deletelink(JSid)
 		  <input type="button" name="delete" value="Delete" onClick="deletelink({$lineweb.website_id}); return false;">
 		  </form>
 	</fieldset> 
-	</td>
-	<td align="left" valign="top">
+	</div>
+<div style="width:45%;float:right;">
 	
 <fieldset class="links_set">
 	<legend class="links_legend">Submission details</legend>
@@ -67,29 +67,18 @@ function deletelink(JSid)
 	
 
 </fieldset> 
-	
-		  </td>
-		  </tr>
-	{/foreach}
-	{/if}
-		  <tr>
-		  
-		  <td colspan="2" style="padding:0px;">
+	</div>
 
-	 	  
-		  </td>
-		  </tr>
-		  <tr>
-		  
-		  <td colspan="2" style="padding-top: 5px;">
-		  <span style="text-align: center;">
+	{/foreach}
+	<br/><br/>
+	{/if}
+		 
+		  <div class="message_box" style="spacing-top:350px;">
 		  Make the changes you want, then hit the submit button to modify. 
 		  <br/>
-		  Should you want to delete the link, click the delete button. The effects are immidiate.</span>
+		  Should you want to delete the link, click the delete button. The effects are immidiate.</div>
 		  <br/><br/>
 		  
 		  
-		</td>
-		</tr>
-		</table>
+</div>
 {/block}
