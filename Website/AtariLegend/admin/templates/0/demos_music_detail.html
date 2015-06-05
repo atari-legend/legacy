@@ -47,9 +47,7 @@ function delete_music(demo_id)
 	<fieldset class="interview_set">
 		<legend class="links_legend">Edit existing files</legend>
 		<br/>
-			<table width="100%">
-			<tr>
-				<td width="100%">
+
 					{if $nr_of_zaks >= 1}		
 					{foreach from=$music item=line}
 						<input type="checkbox" name="music_id_selected[]" value="{$line.music_id}">
@@ -75,9 +73,7 @@ function delete_music(demo_id)
 					<input type="hidden" name="music_id" value="{if isset($line.music_id)}{$line.music_id}{/if}">
 					<input type="hidden" name="demo_id" value="{$demo.demo_id}">
 					<input type="button" value="Pick" onclick="add_composer()">
-				</td>
-			</tr>
-			</table>
+
 	</fieldset>
 	</form>
 

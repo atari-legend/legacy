@@ -19,7 +19,8 @@ This will compile the demos comment edit page
 
 include("../includes/common.php"); 
 
-
+if (empty($view)) {$view="";}
+if (empty($c_counter)) {$c_counter="";}
 	$sql_build = "SELECT *	FROM demo_user_comments
 							LEFT JOIN comments ON ( demo_user_comments.comments_id = comments.comments_id )
 							LEFT JOIN users ON ( comments.user_id = users.user_id )

@@ -25,21 +25,13 @@ The submitted review page
 
 		<fieldset class="game_set">
 		<legend class="links_legend">Submitted Reviews</legend>
-		<table>
-		<tr>
 			{if $submission_nr != '0'}
-			<td>
 				{foreach from=$review item=line}
 					<a href="../games/games_review_edit.php?reviewid={$line.review_id}&game_id={$line.game_id}" class="MAINNAV"><b>{$line.game_name}</b></a> reviewed by <a href="../user/user_detail.php?user_id_selected={$line.user_id}" class="MAINNAV"><b>{$line.userid}</b></a><br/>
 				{/foreach}
-			</td>
 			{else}
-			<td>
 				No reviews submitted today!
-			</td>
 			{/if}
-		</tr>
-		</table>
 		</fieldset>
 {if isset($message)}
 	<div class="message_box">{$message}</div>

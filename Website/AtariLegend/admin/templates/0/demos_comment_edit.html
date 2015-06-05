@@ -1,10 +1,7 @@
 {extends file='head.html'}
 {block name=title}Edit Comment{/block}
 {block name=body}
-
-<table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
-<tr>
-	<td>
+<div class="NEWMAINCELL">
 	<br/>
 		Comment by <strong>{$comments.user_name}</strong> on <strong>{$comments.demo}</strong> on {$comments.date}
 	<br/>
@@ -26,8 +23,5 @@
 	<input type="reset">
 	</form>
 
-	</td>
-</tr>
-</table>
-
+</div>
 {/block}
