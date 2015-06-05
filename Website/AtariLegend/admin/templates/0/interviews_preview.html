@@ -17,13 +17,14 @@
 {extends file='head.html'}
 {block name=title}
 <div style="float:left;">
-Written by <a href="mailto:{if isset($interview.interview_email)}{$interview.interview_email}{/if}?subject=Your interview with {$interview.interview_author} at Atari Legend" class="MAINNAV_WHITE">{$interview.interview_author}</a>
+Interview by <a href="mailto:{if isset($interview.interview_email)}{$interview.interview_email}{/if}?subject=Your interview with {$interview.interview_author} at Atari Legend" class="MAINNAV_WHITE">{$interview.interview_author}</a>
 </div>
 <div style="float:right;padding-right:5px;">{$interview.interview_date}</div>
 {/block}
 {block name=body}
-
 <div class="NEWMAINCELL">	
+
+<div style="display:inline-block;width:680px;">
 		{if $interview.interview_img != 'none'}
 			<span style="float:right;"><img src="../includes/show_image.php?file={$interview.interview_img}" alt="{$interview.individual_name}"></span>
 		{/if}
@@ -32,17 +33,18 @@ Written by <a href="mailto:{if isset($interview.interview_email)}{$interview.int
 		{$interview.interview_text}
 	
 		<br/><br/>
-		<span style="display:block;text-align:center;">© 2001 - 2005 by "Atari Legend". All rights reserved.</span>
+		<span style="display:block;text-align:center;">© 2001 - 2015 by "Atari Legend". All rights reserved.</span>
 		<br/>
-		
-		{* test *}
-		<div class="MAINHEADERBAR" style="float:right;vertical-align:top;">
-<div class="MAINHEADING">&nbsp;Screenshots</div>
 
-<div class="NEWMAINCELL">	
+</div>	
+		{* test *}
+<div class="MAINHEADERBAR" style="display:inline;width: 300px;float:right;vertical-align:top;">
+	<div class="MAINHEADING">&nbsp;Screenshots</div>
+
+		<div class="NEWMAINCELL">	
 			{foreach from=$screenshots item=line} 
 				<div style="text-align:center;">
-					 	<img src="../includes/show_image.php?file={$line.screenshot}&amp;w=120&amp;shadow=0&amp;bgcolour=a2a2a2">
+					 	<img src="../includes/show_image.php?file={$line.screenshot}&amp;resize=240,null,null,null">
 					</div>
 					<div class="LEFTNAV" style="text-align:center;">
 						{$line.comment}
@@ -50,21 +52,14 @@ Written by <a href="mailto:{if isset($interview.interview_email)}{$interview.int
 				<br/>
 				<br/>
 			{/foreach}
-</div>
-
-
+		</div>
 </div>
 		{* test *}
 				
-</div>
 
-<div class="MAINHEADERBAR">
-<div class="MAINHEADING" style="float:left;">&nbsp;Written by <a href="mailto:{$interview.interview_email}?subject=Your interview with {$interview.interview_author} at Atari Legend" class="MAINNAV_WHITE">{$interview.interview_author}</a>
-</div>
-	<div class="MAINHEADING" style="float:right;padding-right:5px;">{$interview.interview_date}</div>
-</div>
 
 <br/>
 <div class="back_button"><a href="javascript:history.go(-1)" class="MAINNAV">back</a></div>
 <br/>
+</div>
 {/block}

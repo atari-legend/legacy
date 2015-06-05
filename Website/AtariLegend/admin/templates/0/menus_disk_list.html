@@ -1,0 +1,82 @@
+{* 
+/***************************************************************************
+                              menu_disk_list.tpl
+*                            --------------------------
+*   begin                : Sunday, August 28, 2005
+*   copyright            : (C) 2005 Atari Legend
+*   email                : admin@atarilegend.com
+*
+*
+***************************************************************************/
+
+************************************************************************************************
+The main game page
+************************************************************************************************
+*}
+{extends file='head.html'}
+{block name=title}Menus Search results{/block}
+{block name=body}
+<div class="NEWMAINCELL">
+	<fieldset class="game_set">
+		<legend class="links_legend">Menu Set edit</legend>
+		
+		
+		<b>{$menu_set.menu_sets_name} selected!</b><br/>
+		This is the Menus search page. Select a menu set to browse that menu set.
+		<br/><br/><br/>
+		<div style="display:block;float:left;text-align:center;width:200px;border: solid 1px #161c71;padding:5px;">
+		<form action="../menus/db_menus_disk.php" method="post" name="post" id="menu_edit">
+		Change name of menu set:<br/> 
+		<input type="text" name="comp_name" value="{$menu_set.menu_sets_name}" style="margin:5px;"><br/>
+		<input type="hidden" name="menu_sets_id" value="{$menu_set.menu_sets_id}">
+		<input type="hidden" name="action" value="menu_set_name_update">
+		<input type="submit" value="Update">
+		</form>
+		</div>
+		<div style="display:block;float:left;text-align:center;width:300px;border: solid 1px #161c71;padding:5px;margin-left:15px;">
+		Crew Editor:<br/>
+		<br/>
+		Set Crew for this menudisk series:<br/> 
+		<select name="crew_browse" size="1" style="vertical-align:top;">
+			{html_options values=$az_value output=$az_output}
+		</select>
+		<select name="sub_crew[]" id="subCrewList" size="5" multiple style="width:200px;">
+				<option value="" selected>-</option>
+		</select>
+		<input type="submit" value="Add" style="vertical-align:top;">
+		<br/> <br/> 
+		</div>
+		<br/><br/> 
+		
+		
+	</fieldset> 
+<br/><br/>
+	<table class="table_game_list">
+			<tr>
+				<th style="width:40%;">Menu Disk</th>
+				<th style="width:30%;">Crew</th>
+				<th style="width:15%;">Release Year</th>
+				<th style="width:15%;">Version</th>
+			</tr>
+					{foreach from=$menus item=line}
+			<tr>
+				<td style="width:40%;">{if $line.menu_sets_name != ''}<a href="../menus/menus_disk_list.php?menu_sets_id={$line.menu_sets_id}" class="MAINNAV">{$line.menu_disk_name}</a>{else}<i>n/a</i>{/if}</td>
+				<td style="width:30%;"><i>n/a</i></td>
+				<td style="width:15%;"><i>n/a</i></td>				
+				<td style="width:15%;"><i>n/a</i></td>
+			</tr>
+		{/foreach}
+			<tr>
+				<td class="game_list_footer" colspan="4">
+					{if $nr_of_entries == 1}1 menus set found {else} {$nr_of_entries} menus sets found{/if} in {$querytime} sec
+				</td>
+			</tr>
+		</table>
+<br/>
+
+<br/>
+{if isset($message)}
+	<div class="message_box">{$message}</div>
+{/if}
+</div>
+{/block}
