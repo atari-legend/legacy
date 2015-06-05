@@ -43,11 +43,12 @@ function commentdelete(JSsubID)
 				Users have submitted a total of <b>{$total_nr_submissions}</b> entries in the AL DB!
 	</fieldset> 
 		<br/><br/>
-		<div style="text-align:center;">
+		
+		<div style="display:flex;align-items:center;justify-content: center;">
 		{if $structure.list == 'current'}
-		<strong><a href="../demos/submission_demos.php?list=done" class="MAINNAV">Switch to Done list</a></strong><br/>
+		<a href="../demos/submission_demos.php?list=done" class="click_button_next">Switch to Done list</a><br/>
 		{elseif $structure.list == 'done'}
-		<strong><a href="../demos/submission_demos.php?list=current" class="MAINNAV">Switch to Current list</a></strong><br/>
+		<a href="../demos/submission_demos.php?list=current" class="click_button_next">Switch to Current list</a><br/>
 		{/if}
 		</div>
 		<br/>

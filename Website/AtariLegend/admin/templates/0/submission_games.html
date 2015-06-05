@@ -42,54 +42,38 @@ function submovetocomment(JSsubID)
 {/block}
 {block name=title}Game Submissions{/block}
 {block name=body}
-
-
 <div class="NEWMAINCELL">
-
 	<fieldset class="interview_set" style="text-align:center;">
 				When you have finished reviewing the submitted data move the submission to the "Done list" by clicking the appropriate Done button. 
 				Users have submitted a total of <b>{$total_nr_submissions}</b> entries in the AL DB!
-
 	</fieldset> 
 
 <br/><br/>
+		<div style="display:flex;align-items:center;justify-content: center;">
 		{if $structure.list == 'current'}
-		<strong><a href="../games/submission_games.php?list=done" class="MAINNAV">Switch to Done list</a></strong><br/>
+		<a href="../games/submission_games.php?list=done" class="click_button_next">Switch to Done list</a><br/>
 		{elseif $structure.list == 'done'}
-		<strong><a href="../games/submission_games.php?list=current" class="MAINNAV">Switch to Current list</a></strong><br/>
+		<strong><a href="../games/submission_games.php?list=current" class="click_button_next">Switch to Current list</a></strong><br/>
 		{/if}
-		<br/>
-		
-		<div style="display:table;width:400px; margin-left:auto;margin-right: auto;">
-			<div style="display:table-cell;width:50%;">
-				{if $structure.v_counter > 0}
-					<strong><a href="../games/submission_games.php?list={$structure.list}&amp;v_counter={$structure.back_arrow}" class="MAINNAV">Previous</a></strong>
-				{/if}
-			</div>
-			<div style="display:table-cell;width:50%;float:right;">
-				{if $structure.forward_arrow >= 25}
-					<strong><a href="../games/submission_games.php?list={$structure.list}&amp;v_counter={$structure.forward_arrow}" class="MAINNAV">Next</a></strong>
-				{/if}
-			</div>
-		
 		</div>
-		
-		
-		
-		
-
 		<br/>
 		
-				{* START NEW COMMENT BOX *}	
-		
-		{foreach from=$submission item=line}
-			
-		<div class="comment_box" style="width:95%;">
-			
-			<div class="comment_box_top">
-			
-				<div class="comment_box_top_left" style="margin-right:10px;">
+	<div style="margin-left:100px;margin-right:100px;">
+	{if $structure.v_counter > 0}
+		<a href ="../games/submission_games.php?list={$structure.list}&amp;v_counter={$structure.back_arrow}" class="click_button_next" style="float:left;">Previous</a>
+	{/if}
 
+	{if $structure.forward_arrow >= 25}
+		<a href="../games/submission_games.php?list={$structure.list}&amp;v_counter={$structure.forward_arrow}" class="click_button_next" style="float:right;">Next</a>
+	{/if}
+	</div>		
+		<br/><br/><br/>
+
+				{* START NEW COMMENT BOX *}	
+		{foreach from=$submission item=line}
+		<div class="comment_box" style="width:95%;">
+			<div class="comment_box_top">
+				<div class="comment_box_top_left" style="margin-right:10px;">
 						Posted by <a href="../user/user_detail.php?user_id_selected={$line.user_id}" class="links_links">{$line.user_name}</a>
 				</div>
 				<div class="comment_box_top_right" style="">
@@ -125,7 +109,6 @@ function submovetocomment(JSsubID)
 						<a href="#top" class="MAINNAV">Back to top</a>
 				</div>
 				<div class="comment_box_bottom_right" style="">
-					
 						{if $line.email != ''}
 							<a href="mailto:{$line.email}?subject=Thanks%20for%20the%20submission%20on%20{$line.email_game}%20at%20Atari%20Legend">
 							<img src="../templates/0/icons/icon_email.gif" alt="Email User" title="Email User" width="59" height="18">
@@ -141,40 +124,25 @@ function submovetocomment(JSsubID)
 							<a  onClick="submovetocomment({$line.submit_id})" style="cursor: pointer;">
 							<img src="../templates/0/icons/icon_movetocomments.png" alt="Move Comment" title="Move Comment" width="135" height="18">
 							</a>	
-					
-					
 				</div>
 			</div>
 	
 		</div>
 			<br/>
 		{* END NEW COMMENT BOX *}	
-	
-				
 				{/foreach}
-		
-		
-		
+	<div style="margin-left:100px;margin-right:100px;">
+	{if $structure.v_counter > 0}
+		<a href ="../games/submission_games.php?list={$structure.list}&amp;v_counter={$structure.back_arrow}" class="click_button_next" style="float:left;">Previous</a>
+	{/if}
+
+	{if $structure.forward_arrow >= 25}
+		<a href="../games/submission_games.php?list={$structure.list}&amp;v_counter={$structure.forward_arrow}" class="click_button_next" style="float:right;">Next</a>
+	{/if}
+	</div>		
 	
 		
-
-
-		
-		<div style="display:table;width:400px; margin-left:auto;margin-right: auto;">
-			<div style="display:table-cell;width:50%;">
-				{if $structure.v_counter > 0}
-					<strong><a href="../games/submission_games.php?list={$structure.list}&amp;v_counter={$structure.back_arrow}" class="MAINNAV">Previous</a></strong>
-				{/if}
-			</div>
-			<div style="display:table-cell;width:50%;float:right;">
-				{if $structure.forward_arrow >= 25}
-					<strong><a href="../games/submission_games.php?list={$structure.list}&amp;v_counter={$structure.forward_arrow}" class="MAINNAV">Next</a></strong>
-				{/if}
-			</div>
-		</div>
 <br/>
 
 		</div>	
-
-
 {/block}
