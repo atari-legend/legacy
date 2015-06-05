@@ -48,9 +48,6 @@ function delete_music(game_id)
 	<form action="../games/games_music_detail.php" method="post" name="editmuzak">
 	<fieldset class="game_set">
 		<legend class="links_legend">Edit existing files</legend>
-			<table width="100%">
-			<tr>
-				<td width="100%">
 					{if isset($music)}		
 					{foreach from=$music item=line}
 						<input type="checkbox" name="music_id_selected[]" value="{$line.music_id}">
@@ -76,9 +73,7 @@ function delete_music(game_id)
 					<input type="hidden" name="music_id" value="{if isset($line.music_id)}{$line.music_id}{/if}">
 					<input type="hidden" name="game_id" value="{$game.game_id}">
 					<input type="button" value="Pick" onclick="add_composer()">
-				</td>
-			</tr>
-			</table>
+
 	</fieldset>
 	</form>
 </div>
@@ -88,9 +83,6 @@ function delete_music(game_id)
 		<form enctype="multipart/form-data" method="post" action="../games/games_music_detail.php" name="composer">		
 		<fieldset class="game_set">
 		<legend class="links_legend">Music files for {$ind_selected.ind_name}</legend>
-			<table width="100%">
-			<tr>
-				<td width="100%">		
 					{section name=loop loop=6 start=1} 
 						<input type="file" name="music[{$smarty.section.loop.index}]">
 						<br/>
@@ -103,9 +95,6 @@ function delete_music(game_id)
 					<br/>
 					<br/>
 					<a href="../games/games_music_detail.php?game_id={$game.game_id}" class=MAINNAV> Pick another composer </a>
-				</td>
-			</tr>
-			</table>
 	</fieldset>
 	</form>
 </div>

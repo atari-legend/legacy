@@ -12,10 +12,10 @@
 			</select>
 			<input type="submit" value="Pick">
 			</form>
-		<table>
+
 		{foreach from=$link_list item=line}
-			<tr>
-    			<td style="border: solid 1px gray;">
+
+    			<div style="display:table;width:100%;border: solid 1px gray;margin-bottom:5px;">
 				
 				{if  $line.website_imgext !== ""}
 					<a href="{$line.website_url}" target="_blank" style="target-net:tab;">
@@ -27,9 +27,9 @@
 			<a href="link_mod.php?website_id={$line.website_id}" class="MAINNAV">(Click to modify)</a><br/>
 			added on {$line.timestamp} by</span> <span class="maintext">{$line.submitted}</span><br/>
 			{$line.website_description}
-				</td>
-			</tr>
+				</div>
+
 		{/foreach}
-	</table>
+
 </div>	
 {/block}
