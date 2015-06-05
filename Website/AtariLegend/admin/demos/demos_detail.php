@@ -46,10 +46,12 @@ include("../includes/common.php");
 			$demo_year = $demo_info['demo_year'];
 			$demo_year .= '01';
 			$demo_year .= '01';
+			$url_demo_name = rawurlencode($demo_info['demo_name']);
 			
 			$smarty->assign('demo_info',
 	    		 array('demo_name' => $demo_info['demo_name'],
 				 	   'demo_year' => $demo_year,
+				 	   'url_demo_name' => $url_demo_name,
 				 	   'demo_id' => $demo_info['demo_id'],
 				 	   'demo_ste_only' => $demo_info['ste_only'],
 					   'demo_ste_enhan' => $demo_info['ste_enhanced'],
@@ -93,7 +95,7 @@ include("../includes/common.php");
 
 	//Get the individuals
 	$sql_individuals = "SELECT ind_id,ind_name FROM individuals ORDER BY ind_name ASC";
-	$sql_individuals_aka = "SELECT ind_id,nick FROM individual_nicks ORDER BY nick ASC";
+	$sql_individuals_aka = "SELECT ind_id,nick as ind_name FROM individual_nicks ORDER BY nick ASC";
 
 	//Create a temporary table to build an array with both names and nicknames
 	$mysqli->query("CREATE TEMPORARY TABLE temp ENGINE=MEMORY $sql_individuals") or die("failed to create temporary table");
@@ -163,9 +165,13 @@ include("../includes/common.php");
 	
 	while  ($crew=$sql_crew->fetch_array(MYSQLI_BOTH)) 
 	{  
+		
+		$url_crew_name = rawurlencode($crew['crew_name']);
+		
 		$smarty->append('demo_crew',
 	   		 	 array('crew_id' => $crew['crew_id'],
-					   'crew_name' => $crew['crew_name']));
+					   'crew_name' => $crew['crew_name'],
+					   'url_crew_name' => $url_crew_name));
 					   
 		$smarty->assign("demo_crew_nr",'1');
 	}
