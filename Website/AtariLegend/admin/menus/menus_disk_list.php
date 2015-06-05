@@ -1,0 +1,96 @@
+<?php
+/***************************************************************************
+*                                menus_list.php
+*                            --------------------------
+*   begin                : June 05, 2015
+*   copyright            : (C) 2015 Atari Legend
+*   email                : admin@atarilegend.com
+*						   Created file
+*						
+*
+***************************************************************************/
+
+//load all common functions
+include("../includes/common.php"); 
+
+/*
+************************************************************************************************
+This is the menus disk search list page
+************************************************************************************************
+*/
+$start1=gettimeofday();
+list($start2, $start3) = explode(":", exec('date +%N:%S'));
+				
+		//In all cases we search we start searching through the menu_set table
+		//first
+		$sql_menus = "SELECT menu_disk.menu_sets_id,
+						menu_set.menu_sets_name,
+						menu_disk.menu_disk_id,
+						menu_disk.menu_disk_number,
+						menu_disk.menu_disk_letter,
+						menu_disk.menu_disk_version,
+						menu_disk.menu_disk_part,
+						menu_disk.state
+						FROM menu_disk 
+						LEFT JOIN menu_set ON (menu_disk.menu_sets_id = menu_set.menu_sets_id)
+						WHERE menu_disk.menu_sets_id = '$menu_sets_id' ORDER BY menu_disk_number, menu_disk_letter, menu_disk_part, menu_disk_version ASC";
+		
+		$result_menus= $mysqli->query($sql_menus);
+		
+			$rows = $result_menus->num_rows;
+			if ( $rows > 0 )
+			{ $i = 0;
+				while ( $row=$result_menus->fetch_array(MYSQLI_BOTH) ) 
+				{  
+					$i++;
+				
+				$menu_disk_name = "$row[menu_sets_name] ";
+				if(isset($row['menu_disk_number'])) {$menu_disk_name .= "$row[menu_disk_number]";}
+				if(isset($row['menu_disk_letter'])) {$menu_disk_name .= "$row[menu_disk_letter]";}
+				if(isset($row['menu_disk_part'])) {$menu_disk_name .= "$row[menu_disk_part]";}
+				if(isset($row['menu_disk_version']) and $row['menu_disk_version']!=='') {$menu_disk_name .= " v$row[menu_disk_version]";}
+				
+					
+				
+					$smarty->append('menus',
+	   			 	 array('menu_sets_id' => $row['menu_sets_id'],
+						   'menu_sets_name' => $row['menu_sets_name'],
+						   'menu_disk_name' => $menu_disk_name,
+						   'menu_disk_id' => $row['menu_disk_id'],
+						   'menu_disk_number' => $row['menu_disk_number'],
+						   'menu_disk_letter' => $row['menu_disk_letter'],
+						   'menu_disk_version' => $row['menu_disk_version'],
+						   'menu_disk_part' => $row['menu_disk_part'],
+						   'state' => $row['state']));	
+				}	
+				
+				$end1=gettimeofday();
+				$totaltime1 = (float)($end1['sec'] - $start1['sec']) + ((float)($end1['usec'] - $start1['usec'])/1000000);
+				
+				$sql_menu_set = "SELECT * FROM menu_set WHERE menu_sets_id = '$menu_sets_id'";
+				
+					$result_menu_set = $mysqli->query($sql_menu_set);
+					$row=$result_menu_set->fetch_array(MYSQLI_BOTH);
+					
+					$smarty->assign('menu_set',
+	   			 	 array('menu_sets_id' => $row['menu_sets_id'],
+						   'menu_sets_name' => $row['menu_sets_name']));
+						   
+				$az_value = az_dropdown_value(0);
+				$az_output = az_dropdown_output(0);
+						   
+				$smarty->assign('az_value', $az_value);
+				$smarty->assign('az_output', $az_output);		   
+				
+				$smarty->assign('querytime', $totaltime1);
+				$smarty->assign('nr_of_entries', $i);
+				
+				$smarty->assign("user_id",$_SESSION['user_id']);
+
+				//Send all smarty variables to the templates
+				$smarty->display('file:../templates/0/menus_disk_list.html');
+
+				//close the connection
+				mysqli_free_result($result_menus);	
+		}
+?>
