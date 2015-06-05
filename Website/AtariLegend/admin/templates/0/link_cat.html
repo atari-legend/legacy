@@ -13,9 +13,7 @@
 {extends file='head.html'}
 {block name=title}Website Categories{/block}
 {block name=body}
-<table width="100%" cellspacing="2" cellpadding="15" align="center" class="CELLCOLOR">
-<tr>
-	<td>
+<div class="NEWMAINCELL" style="text-align:center;">
 		Click modify, to change name or make subcategory of the category<br/>
 		Click delete to remove the category<br/>
 		<br/>
@@ -36,10 +34,5 @@
 	<input type="hidden" name="action" value="new_cat">
 	<input type="submit" value="Insert new category">
 	</form>
-
-
-
-	</td>
-</tr>
-</table>
+</div>
 {/block}
