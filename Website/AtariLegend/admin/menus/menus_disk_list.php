@@ -44,6 +44,7 @@ list($start2, $start3) = explode(":", exec('date +%N:%S'));
 				{  
 					$i++;
 				
+				// Create Menu disk name
 				$menu_disk_name = "$row[menu_sets_name] ";
 				if(isset($row['menu_disk_number'])) {$menu_disk_name .= "$row[menu_disk_number]";}
 				if(isset($row['menu_disk_letter'])) {$menu_disk_name .= "$row[menu_disk_letter]";}
@@ -75,7 +76,21 @@ list($start2, $start3) = explode(":", exec('date +%N:%S'));
 					$smarty->assign('menu_set',
 	   			 	 array('menu_sets_id' => $row['menu_sets_id'],
 						   'menu_sets_name' => $row['menu_sets_name']));
-						   
+
+				// Crew data for crew editor
+				$sql_crew = $mysqli->query("SELECT * FROM crew WHERE crew_name REGEXP '^[0-9].*' 
+											ORDER BY crew_name")
+												or die ("Couldn't query Crew database");
+					   
+			while  ($crew_result=$sql_crew->fetch_array(MYSQLI_BOTH)) 
+			{  
+				$smarty->append('crew',
+	    				  array('crew_id' => $crew_result['crew_id'],
+					 	 	    'crew_name' => $crew_result['crew_name']));
+				}
+
+
+				// Create dropdown values a-z
 				$az_value = az_dropdown_value(0);
 				$az_output = az_dropdown_output(0);
 						   

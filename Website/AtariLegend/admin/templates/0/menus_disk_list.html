@@ -14,39 +14,84 @@ The main game page
 ************************************************************************************************
 *}
 {extends file='head.html'}
+{block name=head}
+<script type="text/javascript">
+function browseCrew(str) {
+    if (str == "") {
+        document.getElementById("option_crew").innerHTML = "";
+        return;
+    } else { 
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) 
+            {
+                document.getElementById("option_crew").innerHTML = xmlhttp.responseText;
+            } 
+        }
+        xmlhttp.open("GET","../menus/ajax_menus.php?action=crew_browse&query="+str,true);
+        xmlhttp.send();
+    }
+} 
+</script>
+{/block}
 {block name=title}Menus Search results{/block}
-{block name=body}
-<div class="NEWMAINCELL">
-	<fieldset class="game_set">
-		<legend class="links_legend">Menu Set edit</legend>
-		
-		
-		<b>{$menu_set.menu_sets_name} selected!</b><br/>
-		This is the Menus search page. Select a menu set to browse that menu set.
-		<br/><br/><br/>
-		<div style="display:block;float:left;text-align:center;width:200px;border: solid 1px #161c71;padding:5px;">
+{block name=quicklinks}
+		<br/><br/>
+		{* Name set *}
+		<div style="display:block;text-align:center;width:220px;border: solid 1px #161c71;padding:5px;">
 		<form action="../menus/db_menus_disk.php" method="post" name="post" id="menu_edit">
-		Change name of menu set:<br/> 
+		Change name of menu disk series:<br/> 
 		<input type="text" name="comp_name" value="{$menu_set.menu_sets_name}" style="margin:5px;"><br/>
 		<input type="hidden" name="menu_sets_id" value="{$menu_set.menu_sets_id}">
 		<input type="hidden" name="action" value="menu_set_name_update">
 		<input type="submit" value="Update">
 		</form>
 		</div>
-		<div style="display:block;float:left;text-align:center;width:300px;border: solid 1px #161c71;padding:5px;margin-left:15px;">
+		<br/><br/>
+		
+		{* Add crew section *}
+		
+		<div style="display:block;text-align:center;width:220px;border: solid 1px #161c71;padding:5px;">
 		Crew Editor:<br/>
 		<br/>
-		Set Crew for this menudisk series:<br/> 
-		<select name="crew_browse" size="1" style="vertical-align:top;">
+		Set Crew for this menudisk series:<br/>
+		<form action="../menus/db_menus_disk.php" method="post" name="post_menu_crew_set" id="menu_crew_set">
+		<select name="crew_browse" size="1" style="vertical-align:top;" onchange="browseCrew(this.value)">
 			{html_options values=$az_value output=$az_output}
 		</select>
-		<select name="sub_crew[]" id="subCrewList" size="5" multiple style="width:200px;">
+		{* Ajax *}
+		<div id="option_crew">
+		<select name="sub_crew[]" id="CrewList" size="5" style="width:200px;">
 				<option value="" selected>-</option>
+
+			{foreach from=$crew item=line}	
+				{html_options values=$line.crew_id output=$line.crew_name}
+			{/foreach}
 		</select>
-		<input type="submit" value="Add" style="vertical-align:top;">
+		</div>
+		<input type="submit" value="Set" style="vertical-align:top;">
+		<input type="hidden" name="menu_sets_id" value="{$menu_set.menu_sets_id}">
+		<input type="hidden" name="action" value="menu_set_crew_set">
+		</form>
 		<br/> <br/> 
 		</div>
 		<br/><br/> 
+{/block}
+{block name=body}
+<div class="NEWMAINCELL">
+	<fieldset class="interview_set">
+		<legend class="links_legend">Menu Set edit</legend>
+		
+		
+		<b>{$menu_set.menu_sets_name} selected!</b><br/>
+		This is the Menus search page. Select a menu set to browse that menu set.
+		<br/><br/><br/>
 		
 		
 	</fieldset> 
@@ -56,7 +101,7 @@ The main game page
 				<th style="width:40%;">Menu Disk</th>
 				<th style="width:30%;">Crew</th>
 				<th style="width:15%;">Release Year</th>
-				<th style="width:15%;">Version</th>
+				<th style="width:15%;">State</th>
 			</tr>
 					{foreach from=$menus item=line}
 			<tr>
