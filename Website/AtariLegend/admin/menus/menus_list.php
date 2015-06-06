@@ -23,7 +23,14 @@ list($start2, $start3) = explode(":", exec('date +%N:%S'));
 				
 		//In all cases we search we start searching through the menu_set table
 		//first
-		$sql_menus = "SELECT * FROM menu_set ORDER BY menu_sets_name ASC";
+		$sql_menus = "SELECT menu_set.menu_sets_id,
+						menu_set.menu_sets_name,
+						crew.crew_id,
+						crew.crew_name
+						FROM menu_set 
+						LEFT JOIN crew_menu_prod ON (menu_set.menu_sets_id = crew_menu_prod.menu_sets_id)
+						LEFT JOIN crew ON (crew_menu_prod.crew_id = crew.crew_id)
+						ORDER BY menu_sets_name ASC";
 		
 		$result_menus= $mysqli->query($sql_menus);
 		
@@ -43,6 +50,8 @@ list($start2, $start3) = explode(":", exec('date +%N:%S'));
 					$smarty->append('menus',
 	   			 	 array('menu_sets_id' => $row['menu_sets_id'],
 						   'menu_sets_name' => $row['menu_sets_name'],
+						   'crew_id' => $row['crew_id'],
+						   'crew_name' => $row['crew_name'],
 						   'numbermenus' => $array['count']));	
 				}	
 				
