@@ -51,9 +51,9 @@ function browseCrew(str) {
 		<br/>
 		{* Name set *}
 		<div class="quicklinkbox">
-		<form action="../menus/db_menus_disk.php" method="post" name="post" id="menu_edit">
-		Change name of menu disk series:<br/> 
-		<input type="text" name="comp_name" value="{$menu_set.menu_sets_name}" style="margin:5px;"><br/>
+		<form action="../menus/db_menu_disk.php" method="post" name="post" id="menu_edit">
+		<b>Change name of menu series:</b><br/> 
+		<input type="text" name="menu_sets_name" value="{$menu_set.menu_sets_name}" style="margin:5px;"><br/>
 		<input type="hidden" name="menu_sets_id" value="{$menu_set.menu_sets_id}">
 		<input type="hidden" name="action" value="menu_set_name_update">
 		<input type="submit" value="Update">
@@ -64,16 +64,16 @@ function browseCrew(str) {
 		{* Add crew section *}
 		
 		<div class="quicklinkbox">
-		Crew Editor:<br/>
+		<b>Crew Editor:</b><br/>
 		<br/>
 		Set Crew for this menudisk series:<br/>
-		<form action="../menus/db_menus_disk.php" method="post" name="post_menu_crew_set" id="menu_crew_set">
+		<form action="../menus/db_menu_disk.php" method="post" name="post_menu_crew_set" id="menu_crew_set">
 		<select name="crew_browse" size="1" style="vertical-align:top;" onchange="browseCrew(this.value)">
 			{html_options values=$az_value output=$az_output}
 		</select>
 		{* Ajax *}
 		<div id="option_crew">
-		<select name="sub_crew[]" id="CrewList" size="5" style="width:200px;">
+		<select name="crew_id" id="CrewList" size="5" style="width:200px;">
 				<option value="" selected>-</option>
 
 			{foreach from=$crew item=line}	
@@ -112,7 +112,7 @@ function browseCrew(str) {
 					{foreach from=$menus item=line}
 			<tr>
 				<td style="width:40%;">{if $line.menu_sets_name != ''}<a href="../menus/menus_disk_list.php?menu_sets_id={$line.menu_sets_id}" class="MAINNAV">{$line.menu_disk_name}</a>{else}<i>n/a</i>{/if}</td>
-				<td style="width:30%;"><i>n/a</i></td>
+				<td style="width:30%;">{if isset($line.crew_id)}{$line.crew_name}{else}<i>n/a</i>{/if}</td>
 				<td style="width:15%;"><i>n/a</i></td>				
 				<td style="width:15%;"><i>n/a</i></td>
 			</tr>
