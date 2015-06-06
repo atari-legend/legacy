@@ -31,7 +31,7 @@ include("../includes/constants.php");
 				
 					if (isset($query) and $query== "num")
 					{
-						$crewbrowse_select = " crew_name REGEXP '^[0-9].*'";
+						$crewbrowse_select = " WHERE crew_name REGEXP '^[0-9].*'";
 					}
 					else
 					{

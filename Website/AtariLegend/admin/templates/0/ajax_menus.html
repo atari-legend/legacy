@@ -1,6 +1,6 @@
 {* Crew browse for the crew pick list *}
 {if isset($smarty_action) and $smarty_action == "crew_list"}
-		<select name="sub_crew[]" id="CrewList" size="5" style="width:200px;">
+		<select name="crew_id" id="CrewList" size="5" style="width:200px;">
 				<option value="" selected>-</option>
 						{foreach from=$crew item=line}
 							<option value="{$line.crew_id}">{$line.crew_name}</option>

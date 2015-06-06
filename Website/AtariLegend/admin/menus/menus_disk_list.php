@@ -30,9 +30,13 @@ list($start2, $start3) = explode(":", exec('date +%N:%S'));
 						menu_disk.menu_disk_letter,
 						menu_disk.menu_disk_version,
 						menu_disk.menu_disk_part,
+						crew.crew_id,
+						crew.crew_name,
 						menu_disk.state
 						FROM menu_disk 
 						LEFT JOIN menu_set ON (menu_disk.menu_sets_id = menu_set.menu_sets_id)
+						LEFT JOIN crew_menu_prod ON (menu_set.menu_sets_id = crew_menu_prod.menu_sets_id)
+						LEFT JOIN crew ON (crew_menu_prod.crew_id = crew.crew_id)
 						WHERE menu_disk.menu_sets_id = '$menu_sets_id' ORDER BY menu_disk_number, menu_disk_letter, menu_disk_part, menu_disk_version ASC";
 		
 		$result_menus= $mysqli->query($sql_menus);
@@ -51,8 +55,6 @@ list($start2, $start3) = explode(":", exec('date +%N:%S'));
 				if(isset($row['menu_disk_part'])) {$menu_disk_name .= "$row[menu_disk_part]";}
 				if(isset($row['menu_disk_version']) and $row['menu_disk_version']!=='') {$menu_disk_name .= " v$row[menu_disk_version]";}
 				
-					
-				
 					$smarty->append('menus',
 	   			 	 array('menu_sets_id' => $row['menu_sets_id'],
 						   'menu_sets_name' => $row['menu_sets_name'],
@@ -62,6 +64,8 @@ list($start2, $start3) = explode(":", exec('date +%N:%S'));
 						   'menu_disk_letter' => $row['menu_disk_letter'],
 						   'menu_disk_version' => $row['menu_disk_version'],
 						   'menu_disk_part' => $row['menu_disk_part'],
+						   'crew_id' => $row['crew_id'],
+						   'crew_name' => $row['crew_name'],
 						   'state' => $row['state']));	
 				}	
 				
@@ -82,13 +86,28 @@ list($start2, $start3) = explode(":", exec('date +%N:%S'));
 											ORDER BY crew_name")
 												or die ("Couldn't query Crew database");
 					   
-			while  ($crew_result=$sql_crew->fetch_array(MYSQLI_BOTH)) 
-			{  
+				while  ($crew_result=$sql_crew->fetch_array(MYSQLI_BOTH)) 
+				{  
 				$smarty->append('crew',
 	    				  array('crew_id' => $crew_result['crew_id'],
 					 	 	    'crew_name' => $crew_result['crew_name']));
 				}
 
+				//Get data for crew editor box, what crews are connected to this menu_set
+				
+				$sql_crew = $mysqli->query("SELECT 
+						crew.crew_id,
+						crew.crew_name
+						FROM crew_menu_prod 
+						LEFT JOIN crew ON (crew_menu_prod.crew_id = crew.crew_id)
+						WHERE crew_menu_prod.menu_sets_id = '$menu_sets_id' ORDER BY crew.crew_name ASC") or die ("Couldn't query Crew database");
+
+				while  ($crew_result=$sql_crew->fetch_array(MYSQLI_BOTH)) 
+				{  
+				$smarty->append('connected_crew',
+	    				  array('crew_id' => $crew_result['crew_id'],
+					 	 	    'crew_name' => $crew_result['crew_name']));
+				}
 
 				// Create dropdown values a-z
 				$az_value = az_dropdown_value(0);
