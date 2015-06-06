@@ -42,9 +42,15 @@ function browseCrew(str) {
 {/block}
 {block name=title}Menus Search results{/block}
 {block name=quicklinks}
-		<br/><br/>
+		<br/>
+		
+		<div style="display:flex;justify-content: space-around;">
+		<a href="../menus/menus_list.php" class="click_button_next">
+		Back to Menu Series</a>
+		</div>
+		<br/>
 		{* Name set *}
-		<div style="display:block;text-align:center;width:220px;border: solid 1px #161c71;padding:5px;">
+		<div class="quicklinkbox">
 		<form action="../menus/db_menus_disk.php" method="post" name="post" id="menu_edit">
 		Change name of menu disk series:<br/> 
 		<input type="text" name="comp_name" value="{$menu_set.menu_sets_name}" style="margin:5px;"><br/>
@@ -57,7 +63,7 @@ function browseCrew(str) {
 		
 		{* Add crew section *}
 		
-		<div style="display:block;text-align:center;width:220px;border: solid 1px #161c71;padding:5px;">
+		<div class="quicklinkbox">
 		Crew Editor:<br/>
 		<br/>
 		Set Crew for this menudisk series:<br/>
@@ -79,7 +85,7 @@ function browseCrew(str) {
 		<input type="hidden" name="menu_sets_id" value="{$menu_set.menu_sets_id}">
 		<input type="hidden" name="action" value="menu_set_crew_set">
 		</form>
-		<br/> <br/> 
+		<br/>
 		</div>
 		<br/><br/> 
 {/block}
@@ -90,8 +96,8 @@ function browseCrew(str) {
 		
 		
 		<b>{$menu_set.menu_sets_name} selected!</b><br/>
-		This is the Menus search page. Select a menu set to browse that menu set.
-		<br/><br/><br/>
+		Edit Menu Series or select a disk.
+		<br/>
 		
 		
 	</fieldset> 

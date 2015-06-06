@@ -12,13 +12,25 @@
 
 	width: 230px;
 	float: left;
-	background-color:#E9E9E9;
+
+}
+
+.quicklinkbox {
+
+	display:block;
+	text-align:center;
+	width:220px;
+	border-top: solid 1px #B8C1CA;
+	border-bottom: solid 1px #B8C1CA;
+	padding:2px;
+
 }
 
 .rightcell {
 
-	width: 1032px;
+	width: 1031px;
 	float: right;
+	border-left: 1px solid #B8C1CA;
 }
 
 .MAINHEADERBAR 
