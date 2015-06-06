@@ -23,7 +23,8 @@ include("../../includes/connect.php");
 include("../includes/config.php");
 include("../includes/config_smarty.php");
 include("../includes/constants.php");
-				
+	
+	// Crew browse function			
 	if (isset($action) and $action=="crew_browse")
 	{
 				
@@ -58,6 +59,14 @@ include("../includes/constants.php");
 
 
 	}
+
+	// Add new menu disk box			
+	if (isset($action) and $action=="add_new_disk_box")
+	{
+				$smarty->assign('smarty_action', 'add_new_disk_box');
+				$smarty->assign('menu_sets_id', $menu_sets_id);
+	}
+
 
 
 //Send all smarty variables to the templates
