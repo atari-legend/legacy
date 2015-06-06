@@ -52,7 +52,8 @@ function browseCrew(str) {
 		{* Name set *}
 		<div class="quicklinkbox">
 		<form action="../menus/db_menu_disk.php" method="post" name="post" id="menu_edit">
-		<b>Change name of menu series:</b><br/> 
+		<b>Menu series Editor</b><br/><br/>
+		Change name of menu series:<br/> 
 		<input type="text" name="menu_sets_name" value="{$menu_set.menu_sets_name}" style="margin:5px;"><br/>
 		<input type="hidden" name="menu_sets_id" value="{$menu_set.menu_sets_id}">
 		<input type="hidden" name="action" value="menu_set_name_update">
@@ -64,11 +65,11 @@ function browseCrew(str) {
 		{* Add crew section *}
 		
 		<div class="quicklinkbox">
-		<b>Crew Editor:</b><br/>
+		<b>Crew Editor</b><br/>
 		<br/>
-		Set Crew for this menudisk series:<br/>
+		Set Crew for menudisk series:<br/>
 		<form action="../menus/db_menu_disk.php" method="post" name="post_menu_crew_set" id="menu_crew_set">
-		<select name="crew_browse" size="1" style="vertical-align:top;" onchange="browseCrew(this.value)">
+		<select name="crew_browse" size="1" style="margin:5px;vertical-align:top;" onchange="browseCrew(this.value)">
 			{html_options values=$az_value output=$az_output}
 		</select>
 		{* Ajax *}
@@ -81,7 +82,7 @@ function browseCrew(str) {
 			{/foreach}
 		</select>
 		</div>
-		<input type="submit" value="Set" style="vertical-align:top;">
+		<input type="submit" value="Set" style="margin:5px;vertical-align:top;">
 		<input type="hidden" name="menu_sets_id" value="{$menu_set.menu_sets_id}">
 		<input type="hidden" name="action" value="menu_set_crew_set">
 		</form>
