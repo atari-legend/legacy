@@ -65,6 +65,7 @@ function CrewDelete(crew_select)
 		Back to Menu Series</a>
 		</div>
 		<br/>
+		<hr>
 		{* Name set *}
 		<div class="quicklinkbox">
 		<form action="../menus/db_menu_disk.php" method="post" name="post" id="menu_edit">
@@ -76,10 +77,10 @@ function CrewDelete(crew_select)
 		<input type="submit" value="Update">
 		</form>
 		</div>
-		<br/><br/>
+		<br/>
 		
 		{* Add crew section *}
-		
+		<hr>
 		<div class="quicklinkbox">
 		<b>Crew Editor</b><br/>
 		<br/>
@@ -106,16 +107,22 @@ function CrewDelete(crew_select)
 		
 		
 		<br/>
+		{if isset($connected_crew)}
 		{foreach from=$connected_crew item=line}	
 		 {$line.crew_name} - <a href="#" class="MAINNAV" onclick="CrewDelete({$line.crew_id});">Delete</a><br>
 		{/foreach}
-		
+		{/if}
 		<hr>
 		
 		Quick add new Crew to db:
+		<form action="../menus/db_menu_disk.php" method="post" name="post_menu_crew_add" id="menu_crew_add">
 		<input type="text" name="new_crew_name" value="" style="margin:5px;"><br/>
 		<input type="submit" value="Add new crew" style="margin:5px;vertical-align:top;">
+		<input type="hidden" name="menu_sets_id" value="{$menu_set.menu_sets_id}">
+		<input type="hidden" name="action" value="menu_set_crew_add">
+		</form>
 		</div>
+		<hr>
 		{* END crew section *}
 		<br/><br/> 
 {/block}
