@@ -47,6 +47,21 @@ header("Location: ../menus/menus_disk_list.php?menu_sets_id=$menu_sets_id");
 }
 
 //****************************************************************************************
+// Quick add new crew
+//**************************************************************************************** 
+
+if($action=="menu_set_crew_add")
+{
+if(isset($new_crew_name) and isset($menu_sets_id)) 
+{
+	$sql = $mysqli->query("INSERT INTO crew (crew_name) VALUES ('$new_crew_name')");  
+	mysqli_free_result($sql); 
+}
+
+header("Location: ../menus/menus_disk_list.php?menu_sets_id=$menu_sets_id");
+
+}
+//****************************************************************************************
 // This is delete crew from menu series
 //**************************************************************************************** 
 if($action=="delete_crew_from_menu_set")
