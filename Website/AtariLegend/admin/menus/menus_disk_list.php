@@ -41,9 +41,8 @@ list($start2, $start3) = explode(":", exec('date +%N:%S'));
 		
 		$result_menus= $mysqli->query($sql_menus);
 		
-			$rows = $result_menus->num_rows;
-			if ( $rows > 0 )
-			{ $i = 0;
+				$rows = $result_menus->num_rows;
+				$i = 0;
 				while ( $row=$result_menus->fetch_array(MYSQLI_BOTH) ) 
 				{  
 					$i++;
@@ -126,5 +125,4 @@ list($start2, $start3) = explode(":", exec('date +%N:%S'));
 
 				//close the connection
 				mysqli_free_result($result_menus);	
-		}
 ?>
