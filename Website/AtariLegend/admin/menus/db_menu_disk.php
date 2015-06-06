@@ -47,22 +47,16 @@ header("Location: ../menus/menus_disk_list.php?menu_sets_id=$menu_sets_id");
 }
 
 //****************************************************************************************
-// This is delete from series place
+// This is delete crew from menu series
 //**************************************************************************************** 
-if($action=="delete_from_series")
+if($action=="delete_crew_from_menu_set")
 {
-if(isset($game_series_cross_id)) 
+if(isset($crew_id) and isset($menu_sets_id)) 
 {
-
-	foreach($game_series_cross_id as $game_series_cross_id_sql) 
-	{
-		$mysqli->query("DELETE FROM game_series_cross WHERE game_series_cross_id='$game_series_cross_id_sql'"); 
-	}
-
-	mysqli_free_result(); 
+		$mysqli->query("DELETE FROM crew_menu_prod WHERE crew_id='$crew_id' AND menu_sets_id='$menu_sets_id'"); 
 }
 
-header("Location: ../games/games_series_editor.php?series_page=$series_page&game_series_id=$game_series_id");
+header("Location: ../menus/menus_disk_list.php?menu_sets_id=$menu_sets_id");
 
 }
 
