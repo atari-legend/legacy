@@ -146,6 +146,7 @@ function CrewDelete(crew_select)
 				<th style="width:15%;">Release Year</th>
 				<th style="width:15%;">State</th>
 			</tr>
+					{if isset($menus)}
 					{foreach from=$menus item=line}
 			<tr>
 				<td style="width:40%;">{if $line.menu_sets_name != ''}<a href="../menus/menus_disk_list.php?menu_sets_id={$line.menu_sets_id}" class="MAINNAV">{$line.menu_disk_name}</a>{else}<i>n/a</i>{/if}</td>
@@ -153,7 +154,8 @@ function CrewDelete(crew_select)
 				<td style="width:15%;"><i>n/a</i></td>				
 				<td style="width:15%;"><i>n/a</i></td>
 			</tr>
-		{/foreach}
+					{/foreach}
+					{/if}
 			<tr>
 				<td class="game_list_footer" colspan="4">
 					{if $nr_of_entries == 1}1 menus set found {else} {$nr_of_entries} menus sets found{/if} in {$querytime} sec
