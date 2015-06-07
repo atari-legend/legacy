@@ -51,7 +51,15 @@ list($start2, $start3) = explode(":", exec('date +%N:%S'));
 				$menu_disk_name = "$row[menu_sets_name] ";
 				if(isset($row['menu_disk_number'])) {$menu_disk_name .= "$row[menu_disk_number]";}
 				if(isset($row['menu_disk_letter'])) {$menu_disk_name .= "$row[menu_disk_letter]";}
-				if(isset($row['menu_disk_part'])) {$menu_disk_name .= "$row[menu_disk_part]";}
+				if(isset($row['menu_disk_part'])) 
+					{
+						if (is_numeric($row['menu_disk_part']))
+							{$menu_disk_name .= " part $row[menu_disk_part]";}
+							else 
+							{
+								$menu_disk_name .= "$row[menu_disk_part]";
+							}
+					}
 				if(isset($row['menu_disk_version']) and $row['menu_disk_version']!=='') {$menu_disk_name .= " v$row[menu_disk_version]";}
 				
 					$smarty->append('menus',

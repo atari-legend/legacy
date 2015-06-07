@@ -62,6 +62,33 @@ function addNewdisk(str) {
     }
 } 
 
+function editDisk(str) {
+	
+	var str2 = "diskedit_ajax_";
+	var disk_edit_ajax = str2.concat(str);
+	
+    if (str == "") {
+        document.getElementById(disk_edit_ajax).innerHTML = "";
+        return;
+    } else { 
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) 
+            {
+                document.getElementById(disk_edit_ajax).innerHTML = xmlhttp.responseText;
+            } 
+        }
+        xmlhttp.open("GET","../menus/ajax_menus.php?action=edit_disk_box&menu_disk_id="+str,true);
+        xmlhttp.send();
+    }
+} 
+
 function CrewDelete(crew_select) 
 { 
             // CONFIRM REQUIRES ONE ARGUMENT 
@@ -172,12 +199,16 @@ function CrewDelete(crew_select)
 			</tr>
 					{if isset($menus)}
 					{foreach from=$menus item=line}
-			<tr>
-				<td style="width:40%;">{if $line.menu_sets_name != ''}<a href="../menus/menus_disk_list.php?menu_sets_id={$line.menu_sets_id}" class="MAINNAV">{$line.menu_disk_name}</a>{else}<i>n/a</i>{/if}</td>
+
+			<tr id="diskedit_ajax_{$line.menu_disk_id}">
+			
+				<td style="width:40%;">{if $line.menu_disk_id != ''}<a href="#" onclick="editDisk({$line.menu_disk_id})" class="MAINNAV">{$line.menu_disk_name}</a>{else}<i>n/a</i>{/if}</td>
 				<td style="width:30%;">{if isset($line.crew_id)}{$line.crew_name}{else}<i>n/a</i>{/if}</td>
 				<td style="width:15%;"><i>n/a</i></td>				
 				<td style="width:15%;"><i>n/a</i></td>
+
 			</tr>
+
 					{/foreach}
 					{/if}
 			<tr>
