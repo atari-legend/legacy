@@ -442,6 +442,31 @@ background-color: white;
 	font-weight: bold;
 }
 
+.inner_table {
+
+	width:100%;
+	margin:0px;
+	padding:0px;
+	border:0px;
+	background-color:white;
+}
+
+.inner_table tr {
+
+	margin:0px;
+	padding:0px;
+	border:0px;
+	background-color:white;
+}
+
+.inner_table td {
+
+	margin:0px;
+	padding:0px;
+	border:0px;
+	background-color:white;
+}
+
 .comment_box {
 
 	display:table;

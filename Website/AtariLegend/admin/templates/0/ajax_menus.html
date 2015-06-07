@@ -23,3 +23,21 @@
 		<input type="submit" value="Add new">
 		</form>
 {/if}
+{* EDIT BOX FOR MENU DISKS *}
+{if isset($smarty_action) and $smarty_action == "edit_disk_box"}
+			<td colspan="4" style="width:100%;margin:0px;padding:0px;border:0px;">
+				<table class="inner_table">
+					<tr>
+						<td style="width:40%;"><a href="#" class="MAINNAV">{$menus.menu_disk_name}</a></td>
+						<td style="width:30%;"><i>n/a</i></td>
+						<td style="width:15%;"><i>n/a</i></td>				
+						<td style="width:15%;"><i>n/a</i></td>
+					</tr>
+					<tr>
+						<td class="game_list_footer" colspan="4" style="border-top: solid 1px #b2b2b2;">
+							tons of editing!!!<br/><br/><br/><br/><br/><br/>
+						</td>
+					</tr>
+				</table>
+			</td>
+{/if}
