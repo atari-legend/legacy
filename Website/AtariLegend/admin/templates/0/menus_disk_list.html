@@ -120,7 +120,54 @@ function CloseeditDisk(str) {
         xmlhttp.send();
     }
 } 
+function browseInd(str) {
+    if (str == "") {
+        document.getElementById("ind_member").innerHTML = "";
+        return;
+    } else { 
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("ind_member").innerHTML = xmlhttp.responseText;
+            }
+        }
+        xmlhttp.open("GET","../crew/ajax_crew_search.php?action=ind_gen_browse&query="+str,true);
+        xmlhttp.send();
+    }
+}
 
+function searchInd(str) {
+    if (str == "") {
+        str = "empty";
+			xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("ind_member").innerHTML = xmlhttp.responseText;
+            }
+        }   
+
+    } else { 
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("ind_member").innerHTML = xmlhttp.responseText;
+            }
+        }
+        xmlhttp.open("GET","../crew/ajax_crew_search.php?action=ind_gen_search&query="+str,true);
+        xmlhttp.send();
+    }
+}
 function CrewDelete(crew_select) 
 { 
             // CONFIRM REQUIRES ONE ARGUMENT 
@@ -238,7 +285,7 @@ function CrewDelete(crew_select)
 				<td style="width:40%;">{if $line.menu_disk_id != ''}<a onclick="editDisk({$line.menu_disk_id})" style="cursor: pointer;" class="MAINNAV">{$line.menu_disk_name}</a>{else}<i>n/a</i>{/if}</td>
 				<td style="width:30%;">{if isset($line.crew_id)}{$line.crew_name}{else}<i>n/a</i>{/if}</td>
 				<td style="width:15%;"><i>n/a</i></td>				
-				<td style="width:15%;"><i>n/a</i></td>
+				<td style="width:15%;">{if isset($line.menu_state)}{$line.menu_state}{else}<i>n/a</i>{/if}</td>
 
 			</tr>
 
