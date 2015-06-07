@@ -32,11 +32,12 @@ list($start2, $start3) = explode(":", exec('date +%N:%S'));
 						menu_disk.menu_disk_part,
 						crew.crew_id,
 						crew.crew_name,
-						menu_disk.state
+						menu_disk_state.menu_state
 						FROM menu_disk 
 						LEFT JOIN menu_set ON (menu_disk.menu_sets_id = menu_set.menu_sets_id)
 						LEFT JOIN crew_menu_prod ON (menu_set.menu_sets_id = crew_menu_prod.menu_sets_id)
 						LEFT JOIN crew ON (crew_menu_prod.crew_id = crew.crew_id)
+						LEFT JOIN menu_disk_state ON ( menu_disk.state = menu_disk_state.state_id)
 						WHERE menu_disk.menu_sets_id = '$menu_sets_id' ORDER BY menu_disk_number, menu_disk_letter, menu_disk_part, menu_disk_version ASC";
 		
 		$result_menus= $mysqli->query($sql_menus);
@@ -73,7 +74,7 @@ list($start2, $start3) = explode(":", exec('date +%N:%S'));
 						   'menu_disk_part' => $row['menu_disk_part'],
 						   'crew_id' => $row['crew_id'],
 						   'crew_name' => $row['crew_name'],
-						   'state' => $row['state']));	
+						   'menu_state' => $row['menu_state']));	
 				}	
 				
 				$end1=gettimeofday();
