@@ -20,7 +20,7 @@
 		<div style="display:inline-block;width:100px;">Disk version: </div><input type="text" name="menu_disk_version" value="" style="margin:5px;width:30px;"><br/>
 		<input type="hidden" name="menu_sets_id" value="{$menu_sets_id}">
 		<input type="hidden" name="action" value="add_new_menu_disk">
-		<input type="submit" value="Add new">
+		<input type="submit" value="Add new"> <button type="button" onclick="CloseaddNewdisk()" style="margin-left:5px;">Cancel</button>
 		</form>
 {/if}
 {* EDIT BOX FOR MENU DISKS *}
@@ -28,16 +28,62 @@
 			<td colspan="4" style="width:100%;margin:0px;padding:0px;border:0px;">
 				<table class="inner_table">
 					<tr>
-						<td style="width:40%;"><a href="#" class="MAINNAV">{$menus.menu_disk_name}</a></td>
-						<td style="width:30%;"><i>n/a</i></td>
+						<td style="width:40%;"><a onclick="CloseeditDisk({$menus.menu_disk_id})" style="cursor: pointer;" class="MAINNAV">{$menus.menu_disk_name}</a></td>
+						<td style="width:30%;">{if isset($menus.crew_id)}{$menus.crew_name}{else}<i>n/a</i>{/if}</td>
 						<td style="width:15%;"><i>n/a</i></td>				
-						<td style="width:15%;"><i>n/a</i></td>
+						<td style="width:15%;">{if isset($menus.menu_state)}{$menus.menu_state}{else}<i>n/a</i>{/if}</td>
 					</tr>
 					<tr>
-						<td class="game_list_footer" colspan="4" style="border-top: solid 1px #b2b2b2;">
-							tons of editing!!!<br/><br/><br/><br/><br/><br/>
+						<td colspan="4" style="border-top: solid 1px #b2b2b2;font-weight:normal;">
+							tons of editing!!!<br/>
+							<br/>
+						<div style="display:block;width:220px;margin-left:10px;text-align:center;float:left;">	
+							<hr>
+							{* Start Individual add box *}
+							<FORM action="" method="post">
+						
+							<br/>
+							Add intro credits:<br/>
+							<SELECT class="saveHistory" id="m1" name="m1" onchange="browseInd(this.value)">
+							{html_options values=$az_value output=$az_output}
+							</SELECT>
+							<input type="text" onkeyup="searchInd(this.value)" style="width:100px;">
+							<div id="ind_member">   
+								<SELECT id="ind_id" name="ind_id" size="10" style="width:200px;">
+								{foreach from=$ind item=line}
+								<option value="{$line.ind_id}">{$line.ind_name}</option>
+								{/foreach}	
+								</SELECT>
+							</div>	      
+							<br/>
+							<input type="hidden" name="action" value="add_member">
+							<INPUT type="submit" value="Add Crewmember">
+							</FORM>
+							{* END Individual add box *}
+							<hr>
+						</div>
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 						</td>
 					</tr>
 				</table>
 			</td>
 {/if}
+{* EDIT BOX FOR MENU DISKS *}
+{if isset($smarty_action) and $smarty_action == "close_edit_disk_box"}
+						<td style="width:40%;"><a onclick="editDisk({$menus.menu_disk_id})" style="cursor: pointer;" class="MAINNAV">{$menus.menu_disk_name}</a></td>
+						<td style="width:30%;">{if isset($menus.crew_id)}{$menus.crew_name}{else}<i>n/a</i>{/if}</td>
+						<td style="width:15%;"><i>n/a</i></td>				
+						<td style="width:15%;">{if isset($menus.menu_state)}{$menus.menu_state}{else}<i>n/a</i>{/if}</td>
+{/if}
+
+
+
