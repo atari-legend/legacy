@@ -62,6 +62,11 @@ function addNewdisk(str) {
     }
 } 
 
+function CloseaddNewdisk() {
+        document.getElementById("new_disk").innerHTML = "";
+        return;
+} 
+
 function editDisk(str) {
 	
 	var str2 = "diskedit_ajax_";
@@ -85,6 +90,33 @@ function editDisk(str) {
             } 
         }
         xmlhttp.open("GET","../menus/ajax_menus.php?action=edit_disk_box&menu_disk_id="+str,true);
+        xmlhttp.send();
+    }
+} 
+
+function CloseeditDisk(str) {
+	
+	var str2 = "diskedit_ajax_";
+	var disk_edit_ajax = str2.concat(str);
+	
+    if (str == "") {
+        document.getElementById(disk_edit_ajax).innerHTML = "";
+        return;
+    } else { 
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) 
+            {
+                document.getElementById(disk_edit_ajax).innerHTML = xmlhttp.responseText;
+            } 
+        }
+        xmlhttp.open("GET","../menus/ajax_menus.php?action=close_edit_disk_box&menu_disk_id="+str,true);
         xmlhttp.send();
     }
 } 
@@ -121,7 +153,7 @@ function CrewDelete(crew_select)
 		<form action="../menus/db_menu_disk.php" method="post" name="post" id="menu_edit">
 		<b>Menu series Editor</b><br/><br/>
 		Change name of menu series:<br/> 
-		<input type="text" name="menu_sets_name" value="{$menu_set.menu_sets_name}" style="margin:5px;"><br/>
+		<input type="text" name="menu_sets_name" value="{$menu_set.menu_sets_name}" style="margin:5px; width:200px;"><br/>
 		<input type="hidden" name="menu_sets_id" value="{$menu_set.menu_sets_id}">
 		<input type="hidden" name="action" value="menu_set_name_update">
 		<input type="submit" value="Update">
@@ -166,7 +198,7 @@ function CrewDelete(crew_select)
 		
 		Quick add new Crew to db:
 		<form action="../menus/db_menu_disk.php" method="post" name="post_menu_crew_add" id="menu_crew_add">
-		<input type="text" name="new_crew_name" value="" style="margin:5px;"><br/>
+		<input type="text" name="new_crew_name" value="" style="margin:5px; width:200px;"><br/>
 		<input type="submit" value="Add new crew" style="margin:5px;vertical-align:top;">
 		<input type="hidden" name="menu_sets_id" value="{$menu_set.menu_sets_id}">
 		<input type="hidden" name="action" value="menu_set_crew_add">
@@ -185,6 +217,7 @@ function CrewDelete(crew_select)
 		<b>{$menu_set.menu_sets_name} selected!</b><br/>
 		Edit Menu Series or select a disk.<br/>
 		<br/>
+		
 		<a href="#" class="MAINNAV" onclick="addNewdisk()">Add New Disk</a> to series.<br/>
 		<div id="new_disk"> </div>
 		
@@ -202,7 +235,7 @@ function CrewDelete(crew_select)
 
 			<tr id="diskedit_ajax_{$line.menu_disk_id}">
 			
-				<td style="width:40%;">{if $line.menu_disk_id != ''}<a href="#" onclick="editDisk({$line.menu_disk_id})" class="MAINNAV">{$line.menu_disk_name}</a>{else}<i>n/a</i>{/if}</td>
+				<td style="width:40%;">{if $line.menu_disk_id != ''}<a onclick="editDisk({$line.menu_disk_id})" style="cursor: pointer;" class="MAINNAV">{$line.menu_disk_name}</a>{else}<i>n/a</i>{/if}</td>
 				<td style="width:30%;">{if isset($line.crew_id)}{$line.crew_name}{else}<i>n/a</i>{/if}</td>
 				<td style="width:15%;"><i>n/a</i></td>				
 				<td style="width:15%;"><i>n/a</i></td>

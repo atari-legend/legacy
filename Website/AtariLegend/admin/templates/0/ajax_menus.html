@@ -20,7 +20,7 @@
 		<div style="display:inline-block;width:100px;">Disk version: </div><input type="text" name="menu_disk_version" value="" style="margin:5px;width:30px;"><br/>
 		<input type="hidden" name="menu_sets_id" value="{$menu_sets_id}">
 		<input type="hidden" name="action" value="add_new_menu_disk">
-		<input type="submit" value="Add new">
+		<input type="submit" value="Add new"> <button type="button" onclick="CloseaddNewdisk()" style="margin-left:5px;">Cancel</button>
 		</form>
 {/if}
 {* EDIT BOX FOR MENU DISKS *}
@@ -28,16 +28,26 @@
 			<td colspan="4" style="width:100%;margin:0px;padding:0px;border:0px;">
 				<table class="inner_table">
 					<tr>
-						<td style="width:40%;"><a href="#" class="MAINNAV">{$menus.menu_disk_name}</a></td>
-						<td style="width:30%;"><i>n/a</i></td>
+						<td style="width:40%;"><a onclick="CloseeditDisk({$menus.menu_disk_id})" style="cursor: pointer;" class="MAINNAV">{$menus.menu_disk_name}</a></td>
+						<td style="width:30%;">{if isset($menus.crew_id)}{$menus.crew_name}{else}<i>n/a</i>{/if}</td>
 						<td style="width:15%;"><i>n/a</i></td>				
 						<td style="width:15%;"><i>n/a</i></td>
 					</tr>
 					<tr>
 						<td class="game_list_footer" colspan="4" style="border-top: solid 1px #b2b2b2;">
-							tons of editing!!!<br/><br/><br/><br/><br/><br/>
+							tons of editing!!!<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 						</td>
 					</tr>
 				</table>
 			</td>
 {/if}
+{* EDIT BOX FOR MENU DISKS *}
+{if isset($smarty_action) and $smarty_action == "close_edit_disk_box"}
+						<td style="width:40%;"><a onclick="editDisk({$menus.menu_disk_id})" style="cursor: pointer;" class="MAINNAV">{$menus.menu_disk_name}</a></td>
+						<td style="width:30%;">{if isset($menus.crew_id)}{$menus.crew_name}{else}<i>n/a</i>{/if}</td>
+						<td style="width:15%;"><i>n/a</i></td>				
+						<td style="width:15%;"><i>n/a</i></td>
+{/if}
+
+
+
