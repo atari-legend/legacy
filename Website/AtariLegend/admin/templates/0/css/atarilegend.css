@@ -448,7 +448,13 @@ background-color: white;
 	margin:0px;
 	padding:0px;
 	border:0px;
-	background-color:white;
+	background-color:#DBD7D1;
+	position:absolute; 
+	width:950px; 
+	z-index:200;
+	margin-left:auto;
+	margin-right:auto;
+	border:solid 1px #26a;
 }
 
 .inner_table tr {
@@ -456,7 +462,15 @@ background-color: white;
 	margin:0px;
 	padding:0px;
 	border:0px;
-	background-color:white;
+	background-color:#DBD7D1;
+}
+
+.inner_table th {
+
+	margin:0px;
+	padding:0px;
+	border:0px;
+	background-color:#DBD7D1;
 }
 
 .inner_table td {
@@ -697,4 +711,6 @@ background-color: white;
 .smileybox img {
 	vertical-align:middle;
 }
+
+
 
