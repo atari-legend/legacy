@@ -1,0 +1,58 @@
+{* EDIT BOX FOR MENU DISKS *}
+{if isset($smarty_action) and $smarty_action == "edit_disk_box"}
+			
+			<td colspan="4" style="width:100%;margin:0px;padding:0px;">
+				
+				<table class="inner_table">
+					<tr>
+						<th style="width:40%;"><a onclick="CloseeditDisk({$menus.menu_disk_id})" style="cursor: pointer;" class="MAINNAV">{$menus.menu_disk_name}</a></th>
+						<th style="width:30%;">{if isset($menus.crew_id)}{$menus.crew_name}{else}<i>n/a</i>{/if}</th>
+						<th style="width:15%;"><i>n/a</i></th>				
+						<th style="width:15%;">{if isset($menus.menu_state)}{$menus.menu_state}{else}<i>n/a</i>{/if}</th>
+					</tr>
+					<tr>
+						<td colspan="4" style="border-top: solid 1px #b2b2b2;font-weight:normal;">
+							tons of editing!!!<br/>
+							<br/>
+						<div style="display:block;width:220px;margin-left:10px;text-align:center;float:left;">	
+							<hr>
+							{* Start Individual add box *}
+							<FORM action="" method="post" id="hidden_ajax" onload="popUP()">
+						
+							<br/>
+							Add intro credits:<br/>
+							<SELECT class="saveHistory" id="m1" name="m1" onchange="browseInd(this.value)">
+							{html_options values=$az_value output=$az_output}
+							</SELECT>
+							<input type="text" onkeyup="searchInd(this.value)" style="width:100px;">
+							<div id="ind_member">   
+								<SELECT id="ind_id" name="ind_id" size="10" style="width:200px;">
+								{foreach from=$ind item=line}
+								<option value="{$line.ind_id}">{$line.ind_name}</option>
+								{/foreach}	
+								</SELECT>
+							</div>	      
+							<br/>
+							<input type="hidden" name="action" value="add_member">
+							<INPUT type="submit" value="Add Crewmember">
+							</FORM>
+							{* END Individual add box *}
+							<hr>
+						
+
+							<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+						</td>
+					</tr>
+				</table>
+			</td>
+{/if}
+{* CLOSE EDIT BOX FOR MENU DISKS *}
+{if isset($smarty_action) and $smarty_action == "close_edit_disk_box"}
+						<td style="width:40%;"><a onclick="editDisk({$menus.menu_disk_id})" style="cursor: pointer;" class="MAINNAV">{$menus.menu_disk_name}</a></td>
+						<td style="width:30%;">{if isset($menus.crew_id)}{$menus.crew_name}{else}<i>n/a</i>{/if}</td>
+						<td style="width:15%;"><i>n/a</i></td>				
+						<td style="width:15%;">{if isset($menus.menu_state)}{$menus.menu_state}{else}<i>n/a</i>{/if}</td>
+{/if}
+
+
+

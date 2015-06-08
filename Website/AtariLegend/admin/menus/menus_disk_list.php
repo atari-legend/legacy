@@ -116,6 +116,26 @@ list($start2, $start3) = explode(":", exec('date +%N:%S'));
 	    				  array('crew_id' => $crew_result['crew_id'],
 					 	 	    'crew_name' => $crew_result['crew_name']));
 				}
+				
+				//get the menu sets for the quick changer
+				$sql_menus = "SELECT menu_set.menu_sets_id,
+								menu_set.menu_sets_name
+								FROM menu_set 
+								ORDER BY menu_sets_name ASC";
+		
+				$result_menus= $mysqli->query($sql_menus);
+
+				while ( $row=$result_menus->fetch_array(MYSQLI_BOTH) ) 
+				{  
+
+				
+					$smarty->append('menu_set_list',
+	   			 	 array('menu_sets_id' => $row['menu_sets_id'],
+						   'menu_sets_name' => $row['menu_sets_name']));	
+				}
+				
+				
+				
 
 				// Create dropdown values a-z
 				$az_value = az_dropdown_value(0);
