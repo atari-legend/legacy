@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Värd: localhost
--- Skapad: 09 jun 2015 kl 16:43
+-- Skapad: 09 jun 2015 kl 18:02
 -- Serverversion: 5.5.43
 -- PHP-version: 5.4.41-0+deb7u1
 
@@ -29,6 +29,7 @@ SET time_zone = "+00:00";
 CREATE TABLE IF NOT EXISTS `tools` (
   `tools_id` int(11) NOT NULL AUTO_INCREMENT,
   `tools_name` varchar(255) NOT NULL,
+  `stonish_id` int(11) NOT NULL,
   PRIMARY KEY (`tools_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 
