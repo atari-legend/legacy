@@ -228,7 +228,7 @@ function CrewDelete(crew_select)
 		<br/>
 		Set Crew for menudisk series:<br/>
 		<form action="../menus/db_menu_disk.php" method="post" name="post_menu_crew_set" id="menu_crew_set">
-		<select name="crew_browse" size="1" style="margin:5px;vertical-align:top;" onchange="browseCrew(this.value)">
+		<select name="crew_browse" size="1" style="margin:5px;vertical-align:top;background-color:white;" onchange="browseCrew(this.value)">
 			{html_options values=$az_value output=$az_output}
 		</select>
 		{* Ajax *}
