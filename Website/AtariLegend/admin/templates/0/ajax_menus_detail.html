@@ -14,6 +14,63 @@
 						<td colspan="4" style="border-top: solid 1px #b2b2b2;font-weight:normal;">
 							tons of editing!!!<br/>
 							<br/>
+						
+						
+						
+						
+			{if isset($game)}
+			<table class="table_game_list" style="width:95%;">
+			<tr>
+				<th class="table_game_list" style="width:5%;">Mark</th>
+				<th class="table_game_list" style="width:30%;">Game Name</th>
+				<th class="table_game_list" style="width:20%;">Developer</th>
+				<th class="table_game_list" style="width:20%;">Year</th>
+				<th class="table_game_list" style="width:15%;">Info</th>
+			</tr>
+			{foreach from=$game item=line}
+			<tr>
+				<td class="table_game_list" style="width:5%;">
+					<input type="checkbox" name="game_id[]" value="{$line.game_id}">
+				</td>
+				<td class="table_game_list" style="width:25%;">{if $line.game_name != ''}<a href="games_detail.php?game_id={$line.game_id}" class="MAINNAV">{$line.game_name}</a>
+						{else}<i>n/a</i>{/if}
+				</td>
+				<td class="table_game_list" style="width:30%;">{if $line.developer_name != ''}
+						<a href="games_main.php?developer={$line.developer_id}&amp;action=search" class="MAINNAV">
+							{$line.developer_name}
+						</a>
+						{else}
+							
+						{/if}</td>				
+				<td class="table_game_list" style="width:15%;">
+					{if $line.game_year != ''}
+						<a href="games_main.php?year={$line.game_year}&amp;action=search" class="MAINNAV">
+							{$line.game_year}
+						</a>
+						{else}
+							<i>n/a</i>
+						{/if}
+					</td>
+					<td class="table_game_list" style="width:20%;">
+						{$line.menu_types_text}
+					</td>
+			</tr>
+			{/foreach}
+							<tr>
+					<td class="game_list_footer" colspan="5">
+						<input type="hidden" name="series_page" value="series_editor">
+						<input type="hidden" name="action" value="add_to_series">
+						<img src="../templates/0/images/arrow_ltr.gif" alt="" width="38" height="22" style="float:left;">
+						<input type="submit" value="Delete from menu disk" style="float:left;">
+					</td>
+				</tr>
+			</table>
+			{/if}			
+						
+						
+						
+						
+						
 						<div style="display:block;width:220px;margin-left:10px;text-align:center;float:left;">	
 							<hr>
 							{* Start Individual add box *}
