@@ -89,7 +89,7 @@ function editDisk(str) {
                 document.getElementById(disk_edit_ajax).innerHTML = xmlhttp.responseText;
             } 
         }
-        xmlhttp.open("GET","../menus/ajax_menus.php?action=edit_disk_box&menu_disk_id="+str,true);
+        xmlhttp.open("GET","../menus/ajax_menus_detail.php?action=edit_disk_box&menu_disk_id="+str,true);
         xmlhttp.send();
     }
 } 
@@ -116,7 +116,7 @@ function CloseeditDisk(str) {
                 document.getElementById(disk_edit_ajax).innerHTML = xmlhttp.responseText;
             } 
         }
-        xmlhttp.open("GET","../menus/ajax_menus.php?action=close_edit_disk_box&menu_disk_id="+str,true);
+        xmlhttp.open("GET","../menus/ajax_menus_detail.php?action=close_edit_disk_box&menu_disk_id="+str,true);
         xmlhttp.send();
     }
 } 
@@ -183,6 +183,7 @@ function CrewDelete(crew_select)
                location.href=url; 
          }  
 } 
+
 </script>
 {/block}
 {block name=title}Menus Search results{/block}
@@ -194,6 +195,18 @@ function CrewDelete(crew_select)
 		Back to Menu Series</a>
 		</div>
 		<br/>
+		<hr>
+		<div class="quicklinkbox">
+			<form action="../menus/menus_disk_list.php" method="get" name="post" id="menu_set_change">
+				<select name="menu_sets_id" id="menu_sets_list" size="1" style="width:200px;background-color:white;" onchange="this.form.submit()">
+				<option value="" selected style="background-color:white;">Change Menu Series</option>
+
+			{foreach from=$menu_set_list item=line}	
+				{html_options values=$line.menu_sets_id output=$line.menu_sets_name}
+			{/foreach}
+		</select>
+		</form>	
+		</div>
 		<hr>
 		{* Name set *}
 		<div class="quicklinkbox">
@@ -215,7 +228,7 @@ function CrewDelete(crew_select)
 		<br/>
 		Set Crew for menudisk series:<br/>
 		<form action="../menus/db_menu_disk.php" method="post" name="post_menu_crew_set" id="menu_crew_set">
-		<select name="crew_browse" size="1" style="margin:5px;vertical-align:top;" onchange="browseCrew(this.value)">
+		<select name="crew_browse" size="1" style="margin:5px;vertical-align:top;background-color:white;" onchange="browseCrew(this.value)">
 			{html_options values=$az_value output=$az_output}
 		</select>
 		{* Ajax *}
@@ -265,7 +278,7 @@ function CrewDelete(crew_select)
 		Edit Menu Series or select a disk.<br/>
 		<br/>
 		
-		<a href="#" class="MAINNAV" onclick="addNewdisk()">Add New Disk</a> to series.<br/>
+		<a class="MAINNAV" onclick="addNewdisk()" style="cursor: pointer;">Add New Disk</a> to series.<br/>
 		<div id="new_disk"> </div>
 		
 	</fieldset> 
@@ -279,16 +292,15 @@ function CrewDelete(crew_select)
 			</tr>
 					{if isset($menus)}
 					{foreach from=$menus item=line}
-
+			
 			<tr id="diskedit_ajax_{$line.menu_disk_id}">
 			
 				<td style="width:40%;">{if $line.menu_disk_id != ''}<a onclick="editDisk({$line.menu_disk_id})" style="cursor: pointer;" class="MAINNAV">{$line.menu_disk_name}</a>{else}<i>n/a</i>{/if}</td>
 				<td style="width:30%;">{if isset($line.crew_id)}{$line.crew_name}{else}<i>n/a</i>{/if}</td>
 				<td style="width:15%;"><i>n/a</i></td>				
 				<td style="width:15%;">{if isset($line.menu_state)}{$line.menu_state}{else}<i>n/a</i>{/if}</td>
-
 			</tr>
-
+			 
 					{/foreach}
 					{/if}
 			<tr>
