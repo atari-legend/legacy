@@ -3,7 +3,7 @@ CPANEL specifications - AL Legacy skin
 ------------------------------------------------------------ */
 
 /* load the main site font */
-@font-face {
+@font-face { 
    font-family: Audiowide;
    src: url(../font/Audiowide-Regular.ttf);
 }
@@ -15,7 +15,7 @@ html { overflow-y: scroll;
 	overflow-x: hidden;
 }
 
-body { background: black; font-family: Audiowide, Arial, helvetica, sans-serif;
+body { background:black; font-family: verdana; Audiowide, Arial, helvetica, sans-serif; 
 }
 
 img { display: block;
@@ -25,7 +25,12 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section { 
 	display: block;
 }
-	
+
+a
+{
+	text-decoration: none;
+}
+
 /*---------------------------------------------------------- 
  Main site width
 ------------------------------------------------------------ */
@@ -66,7 +71,7 @@ footer, header, hgroup, menu, nav, section {
 		float: right;
 		}			
 
-		/* animation */
+/* animation */
 #animation {
     position: relative;
 	-webkit-animation-name: STcharacters;
@@ -246,6 +251,7 @@ footer, header, hgroup, menu, nav, section {
     #sidebar {
 		z-index:1;
 		position: absolute;
+		box-sizing: border-box;
     }
 	
     #sidebar ul li a {
@@ -263,6 +269,7 @@ footer, header, hgroup, menu, nav, section {
         position: absolute;
         padding: 10px 7px;
         float: left;
+		border-radius: 3px;
     }
 	
     .main-content #sidebar-toggle .bar{
@@ -440,6 +447,139 @@ nav ul {
 #modify_links, #link_categories, #articles, #article_types, #screenshots, #modify_links, 
 #link_categories, #articles, #article_types, #article_screenshots, #add_magazines, #manage_issues, #interviews, 
 #interviews_help, #forum, #logout {
-		height: 40px;
+		height: 30px;
 		font-size: 16px;
 }
+
+/*------------------------------------------------------------
+Standard table settings 
+-------------------------------------------------------------*/
+.column-left { width: 25%; 
+	 float:left;
+}
+
+.column-right { width: 73%; 
+	 float:right;
+}
+
+.standard_tile  { width: 100%; 
+		background-color: #b6b5ca;
+		border-top: 10px solid #161c71;
+		border-bottom: 3px solid #161c71;
+	}
+
+.standard_tile_line{ border-bottom: 2px solid #000000;
+	}
+	
+.standard_list_entry{ width: 100%;
+		height: 140px;
+		display: table;
+		background-color: #dcdaf1;
+ }
+ 
+.standard_tile_text {background-color: #dcdaf1;}
+
+.standard_tile_text img { max-width: 100%;
+		box-shadow: 0 0 12px #161c71;
+		opacity: 0.8;
+		filter: alpha(opacity=40); /* For IE8 and earlier */
+		margin-left: 33%;
+		margin-top: 8%;
+		margin-bottom: 4%;
+}
+
+.standard_tile h1 { color: black;
+			font-size: 16pt;
+			font-weight: bold;
+			text-align: center;	
+			margin-top:20px;
+			margin-bottom:20px;
+			font-family: Audiowide,
+	}
+	
+.standard_tile h2 { color: black;
+			font-size: 11pt;
+			font-weight: bold;
+			margin-left: 10px;
+			margin-right: 10px;
+	}
+
+.standard_tile h3 { color: black;
+			font-size: 10pt;
+			font-weight: 100;
+			margin-left: 2px;
+			margin-right: 4px;
+	}		
+
+.standard_tile h4 { font-size: 10pt;
+			font-weight: bold;
+			margin-left: 2px;
+			margin-top: 1px;
+			margin-bottom: 1px;
+	}
+	
+.mainnav
+{
+	color: #1A168B;
+}
+
+a.mainnav:hover
+{
+	color: Black;
+} 
+	
+/*---------------------------------------------------------- 
+User stats - front page
+------------------------------------------------------------ */
+#user_stats{ margin-top: 80px;}	
+#main_stats{ margin-top: 80px; margin-bottom: 30px;}	
+
+
+.table_game_list {
+	width: 90%;
+	border: solid 1px #b2b2b2; 
+	background-color:#BABABA;
+	margin-left:auto;
+	margin-right:auto;
+	border-spacing: 0;
+	text-align:left;
+}
+
+.table_game_list th {
+	border-bottom: solid 2px #b2b2b2;
+	background-color:#E9E9E9;
+	border-collapse: collapse;
+	padding-top:3px;
+	padding-bottom:3px;
+	padding-left:3px;
+	margin:0px;
+}
+
+.table_game_list tr:nth-child(even){
+	background-color:#EFEFEF;
+}
+
+.table_game_list tr:nth-child(odd){
+	background-color:#E9E9E9;
+}
+
+.table_game_list tr:hover {
+	background-color:#DBD7D1;
+}
+
+
+.table_game_list td {
+	padding-top:3px;
+	padding-bottom:3px;
+	padding-left:3px;
+	margin:0px;
+}
+
+/*---------------------------------------------------------- 
+ Footer
+------------------------------------------------------------ */
+.footer{ width: 100%;
+		float: left;	
+		border-top: 10px solid #161c71;
+		background: url(../images/footer_bg.jpg) 0 0 no-repeat;
+	}

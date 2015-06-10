@@ -1,0 +1,66 @@
+{* 
+/***************************************************************************
+*                                main_stats.hmtl
+*                            --------------------------
+*   begin                : 2005-01-06
+*   copyright            : (C) 2005 Atari Legend
+*   email                : admin@atarilegend.com
+*
+*   Id:  statistics.tpl,v 0.10 2005/01/06 Silver
+*
+*	Update: 2015/06/01 22:43 ST Graveyard 
+*			- New version for AL 2015
+***************************************************************************/
+*}
+{block name=right}	
+<div class="standard_tile" id="main_stats">
+	<h1>MAIN STATS</h1>
+	<div class="standard_tile_line"></div>
+	<div class="standard_tile_text">
+		<br>
+		<table cellspacing="2" cellpadding="2" border="0" width="100%">
+		<tr>
+			<td width="50%" valign="top">
+				<table class="table_game_list">
+				<tr>
+					<th width="90%"><span style="color:black;"><h4>Some Stats</h4></span></th>
+				</tr>
+					{foreach from=$statistics item=line}
+				<tr>
+					<td width="90%"><h3>{if $line.value != ''}{$line.value}{/if}</h3></td>
+				</tr>
+					{/foreach}
+				</table>	
+			</td>
+			<td width="25%" valign="top">
+				<table class="table_game_list">
+				<tr>
+					<th width="100%" colspan="2"><span style="color:green;"><h4>Good Karma</h4></span></th>
+				</tr>
+					{foreach from=$karma_good item=line}
+				<tr>
+					<td width="75%"><a href="../user/user_detail.php?user_id_selected={$line.user_id}" class="MAINNAV"><h3>{$line.user_name}</h3></a></td>
+					<td width="25%"><h3>{$line.karma}</h3></td>
+				</tr>
+					{/foreach}
+				</table>						
+			</td>
+			<td width="25%" valign="top">
+				<table class="table_game_list">
+				<tr>
+					<th width="100%" colspan="2"><span style="color:red;"><h4>Bad Voodoo</h4></span></th>
+				</tr>
+					{foreach from=$karma_bad item=line}
+				<tr>
+					<td width="75%"><a href="../user/user_detail.php?user_id_selected={$line.user_id}" class="MAINNAV"><h3>{$line.user_name}</h3></a></td>
+					<td width="25%"><h3>{$line.karma}</h3></td>
+				</tr>
+					{/foreach}
+				</table>	
+			</td>
+			</tr>
+		</table>
+		<br>
+	</div>
+</div>
+{/block}
