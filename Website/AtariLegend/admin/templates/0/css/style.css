@@ -8,7 +8,7 @@ CPANEL specifications - AL Legacy skin
    src: url(../font/Audiowide-Regular.ttf);
 }
 
-* { 
+* {  margin: 0; padding: 0; 
 }
 
 html { overflow-y: scroll; 
