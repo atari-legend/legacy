@@ -83,94 +83,52 @@ function browseCrew(str) {
 </script>
 {/block}
 {block name=title}Crew editor{/block}
+{block name=quicklinks}
+		<br/>
+		
+		{* Add crew section *}
+		<div class="quicklinkbox">
+		<b>Crew Editor</b><br/>
+		<br/>
+		Search for crew:<br/>
+		<form action="../crew/crew_editor.php" method="get" name="post_menu_crew_set" id="menu_crew_set">
+		<select name="crew_browse" size="1" style="margin-top:5px;margin-bottom:5px;vertical-align:top;background-color:white;" onchange="browseCrew(this.value)">
+			{html_options values=$az_value output=$az_output}
+		</select>
+		<input type="text" name="crewsearch" value="" style="margin-top:5px;margin-bottom:5px;vertical-align:top;background-color:white;width:147px;">
+		{* Ajax *}
+		<div id="crew_list">
+		<select name="crew_select" id="CrewList" size="8" style="width:200px;">
+			{foreach from=$crew item=line}	
+				{html_options values=$line.crew_id output=$line.crew_name}
+			{/foreach}
+		</select>
+		</div>
+		<input type="submit" value="Select" style="margin:5px;vertical-align:top;">
+		<input type="hidden" name="crewsearch" value="{$tracking.crewsearch}">
+		<input type="hidden" name="crewbrowse" value="{$tracking.crewbrowse}">
+		</form>
+		
+		
+		<br/>
+
+		<hr>
+		<br/>
+		Add new Crew to db:
+		<form method="post" name="insertcrew">
+		<input type="text" name="newcrew" value="" style="margin:5px; width:200px;"><br/>
+		<input type="submit" value="Insert" style="margin:5px;vertical-align:top;" onClick="crewinsert(); return false;">
+		</form>
+		</div>
+		<hr>
+		{* END crew section *}
+		<br/><br/> 
+{/block}
 {block name=body}
 <div class="NEWMAINCELL" style="text-align:center;">
-<div style="display:inline;">
-		<form action="../crew/crew_search.php" method="post" name="crew_search" id="crew_search">
-		<fieldset class="interview_set" style="width:400px;display:inline;float:left;">
-		<legend class="links_legend">Search crews</legend>
-		
-				<b>By name :</b>
-		
-				<select name="crewbrowse" onchange="browseCrew(this.value)">
-					<option value=""{if $tracking.crewbrowse eq ''} SELECTED{/if}>-</option>
-					<option value="num"{if $tracking.crewbrowse eq 'num'} SELECTED{/if}>0-9</option>
-					<option value="a"{if $tracking.crewbrowse eq 'a'} SELECTED{/if}>A</option>
-					<option value="b"{if $tracking.crewbrowse eq 'b'} SELECTED{/if}>B</option>
-					<option value="c"{if $tracking.crewbrowse eq 'c'} SELECTED{/if}>C</option>
-					<option value="d"{if $tracking.crewbrowse eq 'd'} SELECTED{/if}>D</option>
-					<option value="e"{if $tracking.crewbrowse eq 'e'} SELECTED{/if}>E</option>
-					<option value="f"{if $tracking.crewbrowse eq 'f'} SELECTED{/if}>F</option>
-					<option value="g"{if $tracking.crewbrowse eq 'g'} SELECTED{/if}>G</option>
-					<option value="h"{if $tracking.crewbrowse eq 'h'} SELECTED{/if}>H</option>
-					<option value="i"{if $tracking.crewbrowse eq 'i'} SELECTED{/if}>I</option>
-					<option value="j"{if $tracking.crewbrowse eq 'j'} SELECTED{/if}>J</option>
-					<option value="k"{if $tracking.crewbrowse eq 'k'} SELECTED{/if}>K</option>
-					<option value="l"{if $tracking.crewbrowse eq 'l'} SELECTED{/if}>L</option>
-					<option value="m"{if $tracking.crewbrowse eq 'm'} SELECTED{/if}>M</option>
-					<option value="n"{if $tracking.crewbrowse eq 'n'} SELECTED{/if}>N</option>
-					<option value="o"{if $tracking.crewbrowse eq 'o'} SELECTED{/if}>O</option>
-					<option value="p"{if $tracking.crewbrowse eq 'p'} SELECTED{/if}>P</option>
-					<option value="q"{if $tracking.crewbrowse eq 'q'} SELECTED{/if}>Q</option>
-					<option value="r"{if $tracking.crewbrowse eq 'r'} SELECTED{/if}>R</option>
-					<option value="s"{if $tracking.crewbrowse eq 's'} SELECTED{/if}>S</option>
-					<option value="t"{if $tracking.crewbrowse eq 't'} SELECTED{/if}>T</option>
-					<option value="u"{if $tracking.crewbrowse eq 'u'} SELECTED{/if}>U</option>
-					<option value="v"{if $tracking.crewbrowse eq 'v'} SELECTED{/if}>V</option>
-					<option value="w"{if $tracking.crewbrowse eq 'w'} SELECTED{/if}>W</option>
-					<option value="x"{if $tracking.crewbrowse eq 'x'} SELECTED{/if}>X</option>
-					<option value="y"{if $tracking.crewbrowse eq 'y'} SELECTED{/if}>Y</option>
-					<option value="z"{if $tracking.crewbrowse eq 'z'} SELECTED{/if}>Z</option>
-				</select>
-				<input type="text" name="crewsearch" value="{if (isset($new_crew) and $new_crew <> '')}{$new_crew}{/if}" style="width:70px;">
-		
-			<input type="submit" value="Search">
-		
-		</fieldset>
-		<input type="hidden" name="action" id="action" value="search">
-		</form>	
-
-	{if (isset($new_crew) and $new_crew <> '')}
-		<span class="MAINNAV" style="text-align:center;">
-		{$new_crew} added to the database!<br/>
-		</span>
-	{/if}
-		<form method="post" name="insertcrew">
-		<fieldset class="interview_set" style="width:400px;display:inline;float:right;">
-		<legend class="links_legend">Add Crew</legend>
-			<input type="text" name="newcrew">
-			<input type="submit" value="Insert" onClick="crewinsert(); return false;">	
-		</fieldset>
-		</form>
-		<br/><br/><br/>
-</div>
 	<br/><br/>
 	<div style="width:20%;display:table-cell;">
 	
-<ul class="NEWNAVCELL">
-
-	<li class="NEWHEADERBAR">Search Results</li>
-
-<div id="crew_list">
-	{* SEARCH RESULTS - UNDERLINE IF SELECTED *}
-	{foreach from=$crew item=line}
-			
-			{if (isset($crew_select.crew_id) and $crew_select.crew_id eq $line.crew_id)}
-			<li class="leftnav_list" style="background-color:#b2b2b2;">
-			<a href="../crew/crew_editor.php?crew_select={if isset($line.crew_id)}{$line.crew_id}{/if}&amp;crewsearch={$tracking.crewsearch}&amp;crewbrowse={$tracking.crewbrowse}" class="LEFTNAV">
-			{$line.crew_name}
-			</a>
-			</li>
-			{else}
-			<li class="leftnav_list">
-			<a href="../crew/crew_editor.php?crew_select={if isset($line.crew_id)}{$line.crew_id}{/if}&amp;crewsearch={$tracking.crewsearch}&amp;crewbrowse={$tracking.crewbrowse}" class="LEFTNAV">
-			{$line.crew_name}
-			</a>
-			</li>
-			{/if}
-	{/foreach}	
-</div>
-</ul>	
 	</div>
 	<div style="width:80%;display:table-cell;">
 	{* Start crew editing table	*}
@@ -253,9 +211,9 @@ function browseCrew(str) {
 				<br/>
 				<br/>
 				{if (isset($crew_select.crew_logo) and $crew_select.crew_logo <> '')}
-					<fieldset class="links_set">
+					<fieldset class="game_set">
 					<legend class="links_legend">Crew Logo</legend>
-						<img src="../includes/show_image.php?file={if isset($crew_select.crew_id)}{$crew_select.crew_id}{/if}">
+						<img src="../includes/show_image.php?file={$crew_select.crew_logo}">
 						
 						<form action="../crew/db_crew.php" method="post" name="crew_pic_delete" id="crew_pic_delete">
 						<input type="submit" name="inserter" value="Delete" onClick="deletelogo(); return false;">
@@ -268,7 +226,7 @@ function browseCrew(str) {
 					</fieldset>
 				{else}
 					<form action="../crew/db_crew.php" method="post" enctype="multipart/form-data" name="crew_pic" id="crew_pic">
-					<fieldset class="links_set">
+					<fieldset class="game_set">
 					<legend class="links_legend">Crew Logo</legend>
 						<input type="file" name="crew_pic" accept="image/jpeg,image/x-png">
 						<br/>
