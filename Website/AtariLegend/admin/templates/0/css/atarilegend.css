@@ -200,14 +200,6 @@ background-color: Menu;
 	font-weight: bold;
 }
 
-.category_set_noGrave
-{
-border: #26a solid 1px;
-width: 40em;
-background-color: Menu;
--moz-border-radius:10px;
-}
-
 .links_checkbox 
 {
 	margin-bottom: 5px;
@@ -221,12 +213,6 @@ margin-bottom: 10px;
 .links_selector
 {
 	margin-bottom: 10px;
-}
-
-.submit-button
-{
-	margin-left: 5em;
-	clear: right;
 }
 
 .reviewCommentInput
@@ -258,17 +244,11 @@ margin-bottom: 10px;
     WIDTH: 200px
 }
 
-.boxborder 
-{
-	border : 1px solid #1A168B;
-	background : White;
-}
-
 .news_set
 {
 border: #26a solid 1px;
 background-color: Menu;
--moz-border-radius:10px;
+padding:4px;
 }
 
 .interview_set
@@ -276,9 +256,9 @@ background-color: Menu;
 border: #26a solid 1px;
 width: 75%;
 background-color: white;
--moz-border-radius:10px;
 margin-left:auto;
 margin-right:auto;
+padding:4px;
 }
 
 .interview_set_screenshot
@@ -286,7 +266,6 @@ margin-right:auto;
 border: #26a solid 1px;
 width: 90%;
 background-color: Menu;
--moz-border-radius:10px;
 }
 
 .review_input
@@ -327,8 +306,8 @@ a.links_links:hover
 {
 border: #26a solid 1px;
 width: 98%;
+padding:4px;
 background-color: white;
--moz-border-radius:10px;
 }
 
 .continentSelects

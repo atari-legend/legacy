@@ -38,19 +38,18 @@ if (isset($action) and $action=="crew_browse")
 			    	   or die ("Couldn't query Crew database");
 			}
 		
-		while  ($crew=$sql_crew->fetch_array(MYSQLI_BOTH)) 
+		$smarty->assign('smarty_action', 'crew_list');
+		
+		
+		while  ($query_crew=$sql_crew->fetch_array(MYSQLI_BOTH)) 
 		{  
-			$crew_id = $crew['crew_id'];
-			$crew_name = $crew['crew_name'];
-			
-			echo "
-			<li class=\"leftnav_list\">
-				<a href=\"../crew/crew_editor.php?crew_select=$crew_id&crewsearch=$crewsearch&crewbrowse=$crewbrowse\" class=\"LEFTNAV\">
-				$crew_name
-				</a>
-			</li>";
 
+			// This smarty is used for creating the list of crews
+						$smarty->append('crew',
+	    				array('crew_id' => $query_crew['crew_id'],
+						  	  'crew_name' => $query_crew['crew_name']));
 		}
+		$smarty->display('file:../templates/0/ajax_crew_editor.html');
 }
 
 if (isset($action) and $action=="crew_gen_browse")
