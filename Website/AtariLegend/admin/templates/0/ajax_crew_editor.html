@@ -1,0 +1,17 @@
+{* Crew browse for the crew pick list *}
+{if isset($smarty_action) and $smarty_action == "crew_list"}
+		<select name="crew_select" id="CrewList" size="8" style="width:200px;">
+						{foreach from=$crew item=line}
+							<option value="{$line.crew_id}">{$line.crew_name}</option>
+						{/foreach}
+		</select>
+{/if}
+{* The Add new menu disk box *}
+{if isset($smarty_action) and $smarty_action == "add_new_disk_box"}
+
+		
+{/if}
+
+
+
+

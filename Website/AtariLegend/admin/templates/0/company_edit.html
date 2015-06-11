@@ -127,7 +127,7 @@ function companydelete(comp_id)
 				<br/>
 				<br/>
 				{if $company.comp_image !== 'none'}
-					<fieldset class="links_set">
+					<fieldset class="interview_set">
 					<legend class="links_legend">Company Logo</legend>
 					<br/>
 						<img src="../includes/show_image.php?file={$company.comp_image}" alt="company logo">
@@ -136,7 +136,7 @@ function companydelete(comp_id)
 					</fieldset>
 				{else}
 					<form action="../company/db_company_edit.php" method="post" enctype="multipart/form-data" name="company_pic" id="compnay_pic">
-					<fieldset class="links_set">
+					<fieldset class="interview_set">
 					<legend class="links_legend">Company Logo</legend>
 						<input type="file" name="company_pic">
 						<br/>

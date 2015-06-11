@@ -26,8 +26,8 @@
 <br/><br/>
 		{if isset($load) and $load == '1'}
 			<form action="../individuals/db_individuals_author.php" method="post" name="post">
-			<fieldset class="links_set">
-			<legend class="links_legend">Add a new type</legend>
+			<fieldset class="game_set">
+			<legend class="links_legend">Modify type</legend>
 			<input type="text" name="newtype" value="{$author_types_load.author_type}">
 			<input type="hidden" name="action" value="edit">
 			<input type="hidden" name="type_id" value="{$author_types_load.author_type_id}">
@@ -36,7 +36,7 @@
 			</form>
 		{else}
 			<form action="../individuals/db_individuals_author.php" method="post" name="post">
-			<fieldset class="links_set">
+			<fieldset class="game_set" style="width:250px;">
 			<legend class="links_legend">Add a new type</legend>
 			<input type="text" name="newtype">
 			<input type="hidden" name="action" value="insert">
@@ -45,7 +45,7 @@
 			</form>
 		{/if}
 <br/><br/>
-		<fieldset class="links_set">
+		<fieldset class="game_set" style="width:250px;">
 		<legend class="links_legend">Current types</legend>
 		
 		{foreach from=$author_types item=line} 

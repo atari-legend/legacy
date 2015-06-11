@@ -72,11 +72,18 @@ $sql_crew = $mysqli->query("SELECT * FROM crew
 			$crew=$sql_crew->fetch_array(MYSQLI_BOTH);		   
 				
 			$crew_history=stripslashes($crew['crew_history']);		   
+			
+			if (isset($crew['crew_logo']) and $crew['crew_logo']!=='')
+				{
+					
+				$crew_logo = "$crew_logo_path$crew_select.$crew[crew_logo]";	
+					
+				}
 					   
 $smarty->assign('crew_select',
 	    		 array('crew_id' => $crew_select,
 				 	   'crew_name' => $crew['crew_name'],
-					   'crew_logo' => $crew['crew_logo'],
+					   'crew_logo' => $crew_logo,
 					   'crew_history' => $crew_history));
 
 }
@@ -101,6 +108,13 @@ $smarty->assign('crew_action',
 
 }
 
+				// Create dropdown values a-z
+				$az_value = az_dropdown_value(0);
+				$az_output = az_dropdown_output(0);
+						   
+				$smarty->assign('az_value', $az_value);
+				$smarty->assign('az_output', $az_output);
+				
 
 // Search variables that got to be sent with the headers all through this module or else the code will dump the user back to the crew_main.php
 $smarty->assign('tracking',
