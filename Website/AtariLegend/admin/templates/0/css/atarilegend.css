@@ -31,6 +31,20 @@
 	border-left: 1px solid #B8C1CA;
 }
 
+/* for the lower resolutions, we don't have the menu bar below the top so we need to reposition the content below the nav */ 
+@media screen and (max-width: 1279px) {  	
+
+.main_body_container { position:absolute; margin-top:229px;}
+
+}
+
+/* for the high resolutions, we have the navbar so we need to position the content */ 
+@media screen and (min-width: 1280px) {  	
+
+.main_body_container { position:absolute; margin-top:290px;}
+
+}
+
 .MAINHEADERBAR 
 {
 	background-image: url(headerback.png);
