@@ -86,6 +86,33 @@ function browseCrew(str) {
     }
 }
 
+function searchCrew(str) {
+    if (str == "") {
+        str = "empty";
+			xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("crew_list").innerHTML = xmlhttp.responseText;
+            }
+        }   
+
+    } else { 
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("crew_list").innerHTML = xmlhttp.responseText;
+            }
+        }
+        xmlhttp.open("GET","../crew/ajax_crew_search.php?crewsearch={$tracking.crewsearch}&crewbrowse={$tracking.crewbrowse}&action=crew_search&query="+str,true);
+        xmlhttp.send();
+    }
+}
+
 function browseInd(str) {
     if (str == "") {
         document.getElementById("ind_member").innerHTML = "";
@@ -148,7 +175,7 @@ function searchInd(str) {
 		<select name="crew_browse" size="1" style="margin-top:5px;margin-bottom:5px;vertical-align:top;background-color:white;" onchange="browseCrew(this.value)">
 			{html_options values=$az_value output=$az_output}
 		</select>
-		<input type="text" name="crewsearch" value="" style="margin-top:5px;margin-bottom:5px;vertical-align:top;background-color:white;width:147px;">
+		<input type="text" name="crewsearch" value="" onkeyup="searchCrew(this.value)" style="margin-top:5px;margin-bottom:5px;vertical-align:top;background-color:white;width:147px;">
 		{* Ajax *}
 		<div id="crew_list">
 		<select name="crew_select" id="CrewList" size="8" style="width:200px;">
