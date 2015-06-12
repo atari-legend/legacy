@@ -21,28 +21,28 @@
 			{if isset($game)}
 			<table class="table_game_list" style="width:95%;">
 			<tr>
-				<th class="table_game_list" style="width:5%;">Mark</th>
-				<th class="table_game_list" style="width:30%;">Game Name</th>
-				<th class="table_game_list" style="width:20%;">Developer</th>
-				<th class="table_game_list" style="width:20%;">Year</th>
-				<th class="table_game_list" style="width:15%;">Info</th>
+				<th class="table_game_list" style="width:5%;margin:0px;">Mark</th>
+				<th class="table_game_list" style="width:30%;margin:0px;">Game Name</th>
+				<th class="table_game_list" style="width:20%;margin:0px;">Developer</th>
+				<th class="table_game_list" style="width:20%;margin:0px;">Year</th>
+				<th class="table_game_list" style="width:15%;margin:0px;">Info</th>
 			</tr>
 			{foreach from=$game item=line}
 			<tr>
-				<td class="table_game_list" style="width:5%;">
+				<td class="table_game_list" style="width:5%;margin:0px;border:0px;">
 					<input type="checkbox" name="game_id[]" value="{$line.game_id}">
 				</td>
-				<td class="table_game_list" style="width:25%;">{if $line.game_name != ''}<a href="games_detail.php?game_id={$line.game_id}" class="MAINNAV">{$line.game_name}</a>
+				<td class="table_game_list" style="width:25%;margin:0px;border:0px;">{if $line.game_name != ''}<a href="games_detail.php?game_id={$line.game_id}" class="MAINNAV">{$line.game_name}</a>
 						{else}<i>n/a</i>{/if}
 				</td>
-				<td class="table_game_list" style="width:30%;">{if $line.developer_name != ''}
+				<td class="table_game_list" style="width:30%;margin:0px;border:0px;">{if $line.developer_name != ''}
 						<a href="games_main.php?developer={$line.developer_id}&amp;action=search" class="MAINNAV">
 							{$line.developer_name}
 						</a>
 						{else}
 							
 						{/if}</td>				
-				<td class="table_game_list" style="width:15%;">
+				<td class="table_game_list" style="width:15%;margin:0px;border:0px;">
 					{if $line.game_year != ''}
 						<a href="games_main.php?year={$line.game_year}&amp;action=search" class="MAINNAV">
 							{$line.game_year}
@@ -51,7 +51,7 @@
 							<i>n/a</i>
 						{/if}
 					</td>
-					<td class="table_game_list" style="width:20%;">
+					<td class="table_game_list" style="width:20%;margin:0px;border:0px;">
 						{$line.menu_types_text}
 					</td>
 			</tr>
@@ -67,7 +67,7 @@
 			</table>
 			{/if}			
 						
-						
+						<br/><br/>
 						
 						
 						
@@ -83,14 +83,14 @@
 							</SELECT>
 							<input type="text" onkeyup="searchInd(this.value)" style="width:100px;">
 							<div id="ind_member">   
-								<SELECT id="ind_id" name="ind_id" size="10" style="width:200px;">
+								<SELECT id="ind_id" name="ind_id" size="10" style="margin:5px;width:200px;">
 								{foreach from=$ind item=line}
 								<option value="{$line.ind_id}">{$line.ind_name}</option>
 								{/foreach}	
 								</SELECT>
 							</div>	      
 							<br/>
-							<input type="hidden" name="action" value="add_member">
+							<input type="hidden" name="action" value="add_member" style="margin:5px;vertical-align:top;">
 							<INPUT type="submit" value="Add Crewmember">
 							</FORM>
 							{* END Individual add box *}
