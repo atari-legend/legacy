@@ -54,13 +54,6 @@ elseif ($crewbrowse !='' and $crewsearch == '')
 		}
 }
 
-elseif ($crewsearch == '' and $crewbrowse == '')
-{
-
-$message="eh... come on! Stop fumbling and search for something!!";
-header("Location: ../crew/crew_main.php?message=$message");
-
-}
 
 if (isset($crew_select))
 {
@@ -78,6 +71,10 @@ $sql_crew = $mysqli->query("SELECT * FROM crew
 					
 				$crew_logo = "$crew_logo_path$crew_select.$crew[crew_logo]";	
 					
+				}
+				else
+				{
+					$crew_logo='';
 				}
 					   
 $smarty->assign('crew_select',
