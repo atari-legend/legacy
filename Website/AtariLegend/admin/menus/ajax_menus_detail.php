@@ -92,7 +92,7 @@ include("../includes/functions.php");
 								LEFT JOIN pub_dev ON (game_developer.dev_pub_id = pub_dev.pub_dev_id)
 								LEFT JOIN game_year ON (game.game_id = game_year.game_id)
 								LEFT JOIN menu_types_main ON (menu_disk_title.menu_types_main_id = menu_types_main.menu_types_main_id)
-								WHERE menu_disk_title.menu_disk_id = '$menu_disk_id'";
+								WHERE menu_disk_title.menu_disk_id = '$menu_disk_id' GROUP BY game.game_name ORDER BY game.game_name ASC";
 				
 				$result_games = $mysqli->query($sql_games);
 				
