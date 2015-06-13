@@ -230,7 +230,7 @@ function popAddGames(str) {
                 document.getElementById("gameto_menu_link").innerHTML = "<a onclick=\"closeAddGames("+str+")\" style=\"cursor: pointer;\" class=\"MAINNAV\">Add Game to menu</a>";
             }
         }
-        xmlhttp.open("GET","../menus/ajax_addgames_menus.php?action=game_browse&query=num",true);
+        xmlhttp.open("GET","../menus/ajax_addgames_menus.php?action=game_browse&list=full&query=num",true);
         xmlhttp.send();
     }
 }
@@ -258,7 +258,7 @@ function browseGame(str) {
                 document.getElementById("game_list").innerHTML = xmlhttp.responseText;
             }
         }
-        xmlhttp.open("GET","../games/ajax_games_series.php?action=game_browse&query="+str,true);
+        xmlhttp.open("GET","../menus/ajax_addgames_menus.php?action=game_browse&list=inner&query="+str,true);
         xmlhttp.send();
     }
 }
@@ -286,11 +286,39 @@ function searchGame(str) {
             }
         }
         if (str.length >= 3) {
-        xmlhttp.open("GET","../games/ajax_games_series.php?action=game_search&query="+str,true);
+        xmlhttp.open("GET","../menus/ajax_addgames_menus.php?action=game_search&list=inner&query="+str,true);
         xmlhttp.send();
 	}
     }
 }
+
+function addGametoMenu(form) {
+	
+	 var game_id = form.game_id.value;
+	
+		alert ("You typed: " + game_id);
+	
+  {*  if (str == "") {
+        document.getElementById("game_list").innerHTML = "";
+        return;
+    } else { 
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("game_list").innerHTML = xmlhttp.responseText;
+            }
+        }
+        xmlhttp.open("GET","../menus/ajax_addgames_menus.php?action=game_browse&query="+str,true);
+        xmlhttp.send();
+    } *}
+}
+
 </script>
 {/block}
 {block name=title}Menus Search results{/block}
@@ -378,7 +406,7 @@ function searchGame(str) {
 {block name=body}
 <div class="NEWMAINCELL">
 	<fieldset class="interview_set" style="width:88%;">
-		<legend class="links_legend">Menu Set edit</legend>
+		<legend class="links_legend">Menu Series Edit</legend>
 		
 		
 		<b>{$menu_set.menu_sets_name} selected!</b><br/>
