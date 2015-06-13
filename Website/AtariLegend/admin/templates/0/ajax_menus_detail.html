@@ -16,25 +16,25 @@
 							<br/>
 						
 						<ul id="menu_disk_detail_links">
-						<li><a onclick="popAddIntroCred({$menus.menu_disk_id})" style="cursor: pointer;" class="MAINNAV">Add intro credits</a></li>
-						<li><a onclick="CloseeditDisk({$menus.menu_disk_id})" style="cursor: pointer;" class="MAINNAV">Add Game to menu</a></li>
-						<li><a onclick="CloseeditDisk({$menus.menu_disk_id})" style="cursor: pointer;" class="MAINNAV">Add Tool to menu</a></li>
-						<li><a onclick="CloseeditDisk({$menus.menu_disk_id})" style="cursor: pointer;" class="MAINNAV">Add Demo to menu</a></li>
-						<li><a onclick="CloseeditDisk({$menus.menu_disk_id})" style="cursor: pointer;" class="MAINNAV">Add Game Doc to menu</a></li>
-						<li><a onclick="CloseeditDisk({$menus.menu_disk_id})" style="cursor: pointer;" class="MAINNAV">Add Tool Doc to menu</a></li>
+						<li id="intro_credit_link"><a onclick="popAddIntroCred({$menus.menu_disk_id})" style="cursor: pointer;" class="MAINNAV">Add intro credits</a></li>
+						<li id="gameto_menu_link"><a onclick="popAddGames({$menus.menu_disk_id})" style="cursor: pointer;" class="MAINNAV">Add Game to menu</a></li>
+						<li id="toolto_menu_link"><a onclick="CloseeditDisk({$menus.menu_disk_id})" style="cursor: pointer;" class="MAINNAV">Add Tool to menu</a></li>
+						<li id="demoto_menu_link"><a onclick="CloseeditDisk({$menus.menu_disk_id})" style="cursor: pointer;" class="MAINNAV">Add Demo to menu</a></li>
+						<li id="gamedocto_menu_link"><a onclick="CloseeditDisk({$menus.menu_disk_id})" style="cursor: pointer;" class="MAINNAV">Add Game Doc to menu</a></li>
+						<li id="gamedocto_menu_link"><a onclick="CloseeditDisk({$menus.menu_disk_id})" style="cursor: pointer;" class="MAINNAV">Add Tool Doc to menu</a></li>
 						</ul>
 						<br/>
 			{if isset($game)}
 			<table class="table_game_list" style="width:95%;">
 			<tr>
-				<th class="table_game_list" style="width:5%;margin:0px;">Mark</th>
-				<th class="table_game_list" style="width:30%;margin:0px;">Game Name</th>
-				<th class="table_game_list" style="width:20%;margin:0px;">Developer</th>
-				<th class="table_game_list" style="width:20%;margin:0px;">Year</th>
-				<th class="table_game_list" style="width:15%;margin:0px;">Info</th>
+				<th class="table_game_list" style="width:5%;margin:0px;border-right:0px;">Mark</th>
+				<th class="table_game_list" style="width:30%;margin:0px;border-right:0px;border-left:0px;">Game Name</th>
+				<th class="table_game_list" style="width:20%;margin:0px;border-right:0px;border-left:0px;">Developer</th>
+				<th class="table_game_list" style="width:20%;margin:0px;border-right:0px;border-left:0px;">Year</th>
+				<th class="table_game_list" style="width:15%;margin:0px;border-right:0px;border-left:0px;">Info</th>
 			</tr>
 			{foreach from=$game item=line}
-			<tr>
+			<tr class="table_game_list">
 				<td class="table_game_list" style="width:5%;margin:0px;border:0px;">
 					<input type="checkbox" name="game_id[]" value="{$line.game_id}">
 				</td>

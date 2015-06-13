@@ -198,10 +198,97 @@ function popAddIntroCred(str) {
         xmlhttp.onreadystatechange = function() {
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
                 document.getElementById("menu_detail_expand").innerHTML = xmlhttp.responseText;
+                document.getElementById("intro_credit_link").innerHTML = "<a onclick=\"closeAddIntroCred("+str+")\" style=\"cursor: pointer;\" class=\"MAINNAV\">Add intro credits</a>";
             }
         }
         xmlhttp.open("GET","../menus/ajax_menus_detail.php?action=add_intro_credit&query="+str,true);
         xmlhttp.send();
+    }
+}
+
+function closeAddIntroCred(str) {
+        document.getElementById("menu_detail_expand").innerHTML = "";
+        document.getElementById("intro_credit_link").innerHTML = "<a onclick=\"popAddIntroCred("+str+")\" style=\"cursor: pointer;\" class=\"MAINNAV\">Add intro credits</a>";
+        return;
+} 
+
+function popAddGames(str) {
+    if (str == "") {
+        document.getElementById("menu_detail_expand").innerHTML = "";
+        return;
+    } else { 
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("menu_detail_expand").innerHTML = xmlhttp.responseText;
+                document.getElementById("gameto_menu_link").innerHTML = "<a onclick=\"closeAddGames("+str+")\" style=\"cursor: pointer;\" class=\"MAINNAV\">Add Game to menu</a>";
+            }
+        }
+        xmlhttp.open("GET","../menus/ajax_addgames_menus.php?action=game_browse&query=num",true);
+        xmlhttp.send();
+    }
+}
+
+function closeAddGames(str) {
+        document.getElementById("menu_detail_expand").innerHTML = "";
+        document.getElementById("gameto_menu_link").innerHTML = "<a onclick=\"popAddGames("+str+")\" style=\"cursor: pointer;\" class=\"MAINNAV\">Add Game to menu</a>";
+        return;
+} 
+
+function browseGame(str) {
+    if (str == "") {
+        document.getElementById("game_list").innerHTML = "";
+        return;
+    } else { 
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("game_list").innerHTML = xmlhttp.responseText;
+            }
+        }
+        xmlhttp.open("GET","../games/ajax_games_series.php?action=game_browse&query="+str,true);
+        xmlhttp.send();
+    }
+}
+
+function searchGame(str) {
+    if (str == "") {
+        str = "empty";
+			xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("game_list").innerHTML = xmlhttp.responseText;
+            }
+        }   
+
+    } else { 
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("game_list").innerHTML = xmlhttp.responseText;
+            }
+        }
+        if (str.length >= 3) {
+        xmlhttp.open("GET","../games/ajax_games_series.php?action=game_search&query="+str,true);
+        xmlhttp.send();
+	}
     }
 }
 </script>

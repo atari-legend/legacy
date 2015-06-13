@@ -1,0 +1,80 @@
+					
+					
+					<form action="" method="post" name="game_search" id="game_search">
+					<div style="display:block;width:95%;margin-left:auto;margin-right:auto;text-align:center;">
+					<fieldset class="game_set" style="display:inline; text-align:center;width:92%;">
+					<legend class="links_legend">Search games</legend>
+					
+					<div style="display: inline;align-items:center;margin: 0 auto;text-align:center;">
+					<span style="margin-right:10px;"><strong>By name :</strong></span>
+					<select name="gamebrowse" onchange="browseGame(this.value)">
+					{html_options values=$az_value output=$az_output selected=$mySelect}
+					</select>
+					<input type="text" name="gamesearch" onkeyup="searchGame(this.value)">
+					<br/>
+					</div>
+					</fieldset>
+					</div>
+					</form>
+
+					<br/>
+					<br/>
+					<form action="../games/db_games_series.php" method="post" name="add_to_series" id="add_to_series">	
+		<div id="game_list">		
+		<table class="table_game_list" style="width:95%;">
+			<tr>
+				<th style="width:5%;">Info</th>
+				<th style="width:30%;">Game Name</th>
+				<th style="width:20%;">Publisher</th>
+				<th style="width:20%;">Developer</th>
+				<th style="width:15%;">Year</th>
+			</tr>
+
+			{foreach from=$series_link item=line}
+			<tr>
+				<td style="width:5%;">
+					<input type="checkbox" name="game_id[]" value="{$line.game_id}">
+				</td>
+				<td style="width:30%;">{if $line.game_name != ''}<a href="games_detail.php?game_id={$line.game_id}" class="MAINNAV">{$line.game_name}</a>
+						{else}<i>n/a</i>{/if}
+				</td>
+				<td style="width:20%;">{if $line.publisher_name != ''}
+						<a href="games_main.php?publisher={$line.publisher_id}&amp;action=search" class="MAINNAV">
+							{$line.publisher_name}
+					</a>
+						{else}
+							<i>n/a</i>
+						{/if}</td>
+				<td style="width:20%;">{if $line.developer_name != ''}
+						<a href="games_main.php?developer={$line.developer_id}&amp;action=search" class="MAINNAV">
+							{$line.developer_name}
+						</a>
+						{else}
+							<i>n/a</i>
+						{/if}</td>				
+				<td style="width:15%;">
+					{if $line.year != ''}
+						<a href="games_main.php?year={$line.year}&amp;action=search" class="MAINNAV">
+							{$line.year}
+						</a>
+						{else}
+							<i>n/a</i>
+						{/if}
+					</td>
+			</tr>
+			{/foreach}
+			
+				<tr>
+					<td class="game_list_footer" colspan="5">
+						<input type="hidden" name="series_page" value="series_editor">
+						<input type="hidden" name="action" value="add_to_series">
+						<input type="hidden" name="game_series_id" value="{if isset($series_info.game_series_id)}{$series_info.game_series_id}{/if}">
+						<img src="../templates/0/images/arrow_ltr.gif" alt="" width="38" height="22" style="float:left;">
+						<input type="submit" value="Add to menu" style="float:left;">
+					</td>
+				</tr>
+			</table>
+				</div>
+				
+				
+				</form>
