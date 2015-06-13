@@ -15,9 +15,15 @@
 							tons of editing!!!<br/>
 							<br/>
 						
-						
-						
-						
+						<ul id="menu_disk_detail_links">
+						<li><a onclick="popAddIntroCred({$menus.menu_disk_id})" style="cursor: pointer;" class="MAINNAV">Add intro credits</a></li>
+						<li><a onclick="CloseeditDisk({$menus.menu_disk_id})" style="cursor: pointer;" class="MAINNAV">Add Game to menu</a></li>
+						<li><a onclick="CloseeditDisk({$menus.menu_disk_id})" style="cursor: pointer;" class="MAINNAV">Add Tool to menu</a></li>
+						<li><a onclick="CloseeditDisk({$menus.menu_disk_id})" style="cursor: pointer;" class="MAINNAV">Add Demo to menu</a></li>
+						<li><a onclick="CloseeditDisk({$menus.menu_disk_id})" style="cursor: pointer;" class="MAINNAV">Add Game Doc to menu</a></li>
+						<li><a onclick="CloseeditDisk({$menus.menu_disk_id})" style="cursor: pointer;" class="MAINNAV">Add Tool Doc to menu</a></li>
+						</ul>
+						<br/>
 			{if isset($game)}
 			<table class="table_game_list" style="width:95%;">
 			<tr>
@@ -70,11 +76,29 @@
 						<br/><br/>
 						
 						
+						<div id="menu_detail_expand"> </div>
 						
-						<div style="display:block;width:220px;margin-left:10px;text-align:center;float:left;">	
+						
+
+						</td>
+					</tr>
+				</table>
+			</td>
+{/if}
+{* CLOSE EDIT BOX FOR MENU DISKS *}
+{if isset($smarty_action) and $smarty_action == "close_edit_disk_box"}
+						<td style="width:40%;"><a onclick="editDisk({$menus.menu_disk_id})" style="cursor: pointer;" class="MAINNAV">{$menus.menu_disk_name}</a></td>
+						<td style="width:30%;">{if isset($menus.crew_id)}{$menus.crew_name}{else}<i>n/a</i>{/if}</td>
+						<td style="width:15%;"><i>n/a</i></td>				
+						<td style="width:15%;">{if isset($menus.menu_state)}{$menus.menu_state}{else}<i>n/a</i>{/if}</td>
+{/if}
+{* POP FOR ADD INTRO CRED *}
+{if isset($smarty_action) and $smarty_action == "add_intro_credit"}
+
+							<div style="display:block;width:220px;margin-left:10px;text-align:center;float:left;">	
 							<hr>
 							{* Start Individual add box *}
-							<FORM action="" method="post" id="hidden_ajax" onload="popUP()">
+							<FORM action="" method="post" id="hidden_ajax">
 						
 							<br/>
 							Add intro credits:<br/>
@@ -95,21 +119,6 @@
 							</FORM>
 							{* END Individual add box *}
 							<hr>
-						
+							</div>
 
-							<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-						</td>
-					</tr>
-				</table>
-			</td>
 {/if}
-{* CLOSE EDIT BOX FOR MENU DISKS *}
-{if isset($smarty_action) and $smarty_action == "close_edit_disk_box"}
-						<td style="width:40%;"><a onclick="editDisk({$menus.menu_disk_id})" style="cursor: pointer;" class="MAINNAV">{$menus.menu_disk_name}</a></td>
-						<td style="width:30%;">{if isset($menus.crew_id)}{$menus.crew_name}{else}<i>n/a</i>{/if}</td>
-						<td style="width:15%;"><i>n/a</i></td>				
-						<td style="width:15%;">{if isset($menus.menu_state)}{$menus.menu_state}{else}<i>n/a</i>{/if}</td>
-{/if}
-
-
-

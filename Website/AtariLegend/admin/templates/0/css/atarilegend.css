@@ -705,3 +705,9 @@ background-color: white;
 .smileybox img {
 	vertical-align:middle;
 }
+
+#menu_disk_detail_links {
+
+	list-style: none;
+	margin-left:10px;
+}
