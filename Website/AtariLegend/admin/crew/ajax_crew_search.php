@@ -39,7 +39,29 @@ if (isset($action) and $action=="crew_browse")
 			}
 		
 		$smarty->assign('smarty_action', 'crew_list');
+		$smarty->assign('crewbrowse', '$query');
 		
+		while  ($query_crew=$sql_crew->fetch_array(MYSQLI_BOTH)) 
+		{  
+
+			// This smarty is used for creating the list of crews
+						$smarty->append('crew',
+	    				array('crew_id' => $query_crew['crew_id'],
+						  	  'crew_name' => $query_crew['crew_name']));
+		}
+		$smarty->display('file:../templates/0/ajax_crew_editor.html');
+}
+
+if (isset($action) and $action=="crew_search")
+	{
+
+			$sql_crew = $mysqli->query("SELECT * FROM crew
+						WHERE crew_name LIKE '%$query%' 
+						ORDER BY crew_name ASC")
+			    	   or die ("Couldn't query Crew database");
+
+		$smarty->assign('smarty_action', 'crew_list');
+		$smarty->assign('crewsearch', '$query');
 		
 		while  ($query_crew=$sql_crew->fetch_array(MYSQLI_BOTH)) 
 		{  

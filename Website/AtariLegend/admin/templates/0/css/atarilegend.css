@@ -21,7 +21,6 @@
 	text-align:center;
 	width:220px;
 	padding:2px;
-
 }
 
 .rightcell {
@@ -29,6 +28,29 @@
 	width: 1031px;
 	float: right;
 	border-left: 1px solid #B8C1CA;
+}
+
+/* 'position' is needed for smartphone view else the logo is covered by the sidemenu button */
+@media screen and (max-width: 480px) { 
+	.main_body_container {position:absolute; margin-top:44px;}
+	.leftcell {	display:block; width: 320px;  }
+	.quicklinkbox { display:block;text-align:center;width:320px;padding:2px; margin-left: auto; margin-right:auto;}
+}
+
+/* for the lower resolutions, we don't have the menu bar below the top so we need to reposition the content below the nav */ 
+@media screen and (min-width: 481px) and (max-width: 1279px) {  	
+
+	.main_body_container { position:absolute; margin-top:229px;}
+	.leftcell {	display:block; width: 320px;  }
+	.quicklinkbox { display:block;text-align:center;width:320px;padding:2px; margin-left: auto; margin-right:auto;}
+
+}
+
+/* for the high resolutions, we have the navbar so we need to position the content */ 
+@media screen and (min-width: 1280px) {  	
+
+.main_body_container { position:absolute; margin-top:290px;}
+
 }
 
 .MAINHEADERBAR 
@@ -428,8 +450,7 @@ background-color: white;
 	padding:0px;
 	border:0px;
 	background-color:#DBD7D1;
-	position:absolute; 
-	width:950px; 
+
 	z-index:200;
 	margin-left:auto;
 	margin-right:auto;
@@ -438,25 +459,19 @@ background-color: white;
 
 .inner_table tr {
 
-	margin:0px;
-	padding:0px;
-	border:0px;
+
 	background-color:#DBD7D1;
 }
 
 .inner_table th {
 
-	margin:0px;
-	padding:0px;
-	border:0px;
+
 	background-color:#DBD7D1;
 }
 
 .inner_table td {
 
-	margin:0px;
-	padding:0px;
-	border:0px;
+
 	background-color:white;
 }
 
@@ -689,4 +704,10 @@ background-color: white;
 
 .smileybox img {
 	vertical-align:middle;
+}
+
+#menu_disk_detail_links {
+
+	list-style: none;
+	margin-left:10px;
 }
