@@ -15,34 +15,40 @@
 							tons of editing!!!<br/>
 							<br/>
 						
-						
-						
-						
+						<ul id="menu_disk_detail_links">
+						<li id="intro_credit_link"><a onclick="popAddIntroCred({$menus.menu_disk_id})" style="cursor: pointer;" class="MAINNAV">Add intro credits</a></li>
+						<li id="gameto_menu_link"><a onclick="popAddGames({$menus.menu_disk_id})" style="cursor: pointer;" class="MAINNAV">Add Game to menu</a></li>
+						<li id="toolto_menu_link"><a onclick="CloseeditDisk({$menus.menu_disk_id})" style="cursor: pointer;" class="MAINNAV">Add Tool to menu</a></li>
+						<li id="demoto_menu_link"><a onclick="CloseeditDisk({$menus.menu_disk_id})" style="cursor: pointer;" class="MAINNAV">Add Demo to menu</a></li>
+						<li id="gamedocto_menu_link"><a onclick="CloseeditDisk({$menus.menu_disk_id})" style="cursor: pointer;" class="MAINNAV">Add Game Doc to menu</a></li>
+						<li id="gamedocto_menu_link"><a onclick="CloseeditDisk({$menus.menu_disk_id})" style="cursor: pointer;" class="MAINNAV">Add Tool Doc to menu</a></li>
+						</ul>
+						<br/>
 			{if isset($game)}
 			<table class="table_game_list" style="width:95%;">
 			<tr>
-				<th class="table_game_list" style="width:5%;">Mark</th>
-				<th class="table_game_list" style="width:30%;">Game Name</th>
-				<th class="table_game_list" style="width:20%;">Developer</th>
-				<th class="table_game_list" style="width:20%;">Year</th>
-				<th class="table_game_list" style="width:15%;">Info</th>
+				<th class="table_game_list" style="width:5%;margin:0px;border-right:0px;">Mark</th>
+				<th class="table_game_list" style="width:30%;margin:0px;border-right:0px;border-left:0px;">Game Name</th>
+				<th class="table_game_list" style="width:20%;margin:0px;border-right:0px;border-left:0px;">Developer</th>
+				<th class="table_game_list" style="width:20%;margin:0px;border-right:0px;border-left:0px;">Year</th>
+				<th class="table_game_list" style="width:15%;margin:0px;border-right:0px;border-left:0px;">Info</th>
 			</tr>
 			{foreach from=$game item=line}
-			<tr>
-				<td class="table_game_list" style="width:5%;">
+			<tr class="table_game_list">
+				<td class="table_game_list" style="width:5%;margin:0px;border:0px;">
 					<input type="checkbox" name="game_id[]" value="{$line.game_id}">
 				</td>
-				<td class="table_game_list" style="width:25%;">{if $line.game_name != ''}<a href="games_detail.php?game_id={$line.game_id}" class="MAINNAV">{$line.game_name}</a>
+				<td class="table_game_list" style="width:25%;margin:0px;border:0px;">{if $line.game_name != ''}<a href="games_detail.php?game_id={$line.game_id}" class="MAINNAV">{$line.game_name}</a>
 						{else}<i>n/a</i>{/if}
 				</td>
-				<td class="table_game_list" style="width:30%;">{if $line.developer_name != ''}
+				<td class="table_game_list" style="width:30%;margin:0px;border:0px;">{if $line.developer_name != ''}
 						<a href="games_main.php?developer={$line.developer_id}&amp;action=search" class="MAINNAV">
 							{$line.developer_name}
 						</a>
 						{else}
 							
 						{/if}</td>				
-				<td class="table_game_list" style="width:15%;">
+				<td class="table_game_list" style="width:15%;margin:0px;border:0px;">
 					{if $line.game_year != ''}
 						<a href="games_main.php?year={$line.game_year}&amp;action=search" class="MAINNAV">
 							{$line.game_year}
@@ -51,7 +57,7 @@
 							<i>n/a</i>
 						{/if}
 					</td>
-					<td class="table_game_list" style="width:20%;">
+					<td class="table_game_list" style="width:20%;margin:0px;border:0px;">
 						{$line.menu_types_text}
 					</td>
 			</tr>
@@ -67,37 +73,13 @@
 			</table>
 			{/if}			
 						
+						<br/><br/>
 						
 						
+						<div id="menu_detail_expand"> </div>
 						
-						
-						<div style="display:block;width:220px;margin-left:10px;text-align:center;float:left;">	
-							<hr>
-							{* Start Individual add box *}
-							<FORM action="" method="post" id="hidden_ajax" onload="popUP()">
-						
-							<br/>
-							Add intro credits:<br/>
-							<SELECT class="saveHistory" id="m1" name="m1" onchange="browseInd(this.value)">
-							{html_options values=$az_value output=$az_output}
-							</SELECT>
-							<input type="text" onkeyup="searchInd(this.value)" style="width:100px;">
-							<div id="ind_member">   
-								<SELECT id="ind_id" name="ind_id" size="10" style="width:200px;">
-								{foreach from=$ind item=line}
-								<option value="{$line.ind_id}">{$line.ind_name}</option>
-								{/foreach}	
-								</SELECT>
-							</div>	      
-							<br/>
-							<input type="hidden" name="action" value="add_member">
-							<INPUT type="submit" value="Add Crewmember">
-							</FORM>
-							{* END Individual add box *}
-							<hr>
 						
 
-							<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
 						</td>
 					</tr>
 				</table>
@@ -110,6 +92,33 @@
 						<td style="width:15%;"><i>n/a</i></td>				
 						<td style="width:15%;">{if isset($menus.menu_state)}{$menus.menu_state}{else}<i>n/a</i>{/if}</td>
 {/if}
+{* POP FOR ADD INTRO CRED *}
+{if isset($smarty_action) and $smarty_action == "add_intro_credit"}
 
+							<div style="display:block;width:220px;margin-left:10px;text-align:center;float:left;">	
+							<hr>
+							{* Start Individual add box *}
+							<FORM action="" method="post" id="hidden_ajax">
+						
+							<br/>
+							Add intro credits:<br/>
+							<SELECT class="saveHistory" id="m1" name="m1" onchange="browseInd(this.value)">
+							{html_options values=$az_value output=$az_output}
+							</SELECT>
+							<input type="text" onkeyup="searchInd(this.value)" style="width:100px;">
+							<div id="ind_member">   
+								<SELECT id="ind_id" name="ind_id" size="10" style="margin:5px;width:200px;">
+								{foreach from=$ind item=line}
+								<option value="{$line.ind_id}">{$line.ind_name}</option>
+								{/foreach}	
+								</SELECT>
+							</div>	      
+							<br/>
+							<input type="hidden" name="action" value="add_member" style="margin:5px;vertical-align:top;">
+							<INPUT type="submit" value="Add Crewmember">
+							</FORM>
+							{* END Individual add box *}
+							<hr>
+							</div>
 
-
+{/if}

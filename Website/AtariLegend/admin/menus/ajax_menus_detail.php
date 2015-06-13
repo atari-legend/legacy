@@ -92,7 +92,7 @@ include("../includes/functions.php");
 								LEFT JOIN pub_dev ON (game_developer.dev_pub_id = pub_dev.pub_dev_id)
 								LEFT JOIN game_year ON (game.game_id = game_year.game_id)
 								LEFT JOIN menu_types_main ON (menu_disk_title.menu_types_main_id = menu_types_main.menu_types_main_id)
-								WHERE menu_disk_title.menu_disk_id = '$menu_disk_id'";
+								WHERE menu_disk_title.menu_disk_id = '$menu_disk_id' GROUP BY game.game_name ORDER BY game.game_name ASC";
 				
 				$result_games = $mysqli->query($sql_games);
 				
@@ -107,39 +107,7 @@ include("../includes/functions.php");
 						  	  'menu_types_text' => $query_game['menu_types_text']));
 				}
 				
-				// Create individuals array
-				
-				$sql_individuals = "SELECT ind_id,ind_name FROM individuals ORDER BY ind_name ASC";
-				$sql_aka = "SELECT ind_id,nick FROM individual_nicks ORDER BY nick ASC";
-			
-				//Create a temporary table to build an array with both names and nicknames
-				$mysqli->query("CREATE TEMPORARY TABLE temp ENGINE=MEMORY $sql_individuals") or die("failed to create temporary table");
-				$mysqli->query("INSERT INTO temp $sql_aka") or die("failed to insert akas into temporary table");
-			
-				$query_temporary = $mysqli->query("SELECT * FROM temp WHERE ind_name LIKE 'a%' ORDER BY ind_name ASC") or die("Failed to query temporary table");
-				$mysqli->query("DROP TABLE temp");
-			
 
-				while  ($genealogy_ind=$query_temporary->fetch_array(MYSQLI_BOTH)) 
-				{  
-					$smarty->append('ind',
-							array('ind_id' => $genealogy_ind['ind_id'],
-									'ind_name' => $genealogy_ind['ind_name']));
-				
-				}	
-				
-				// Lets get the titles this soft
-				
-				
-				
-				
-		
-				// Create dropdown values a-z
-				$az_value = az_dropdown_value(0);
-				$az_output = az_dropdown_output(0);
-						   
-				$smarty->assign('az_value', $az_value);
-				$smarty->assign('az_output', $az_output);
 				
 				$smarty->assign('smarty_action', 'edit_disk_box');
 				$smarty->assign('menu_disk_id', $menu_disk_id);
@@ -202,6 +170,45 @@ include("../includes/functions.php");
 				$smarty->assign('menu_disk_id', $menu_disk_id);
 	}
 
+	// POP ADD INTRO CREDITS
+	if (isset($action) and $action=="add_intro_credit")
+	{
+	
+				// Create individuals array
+				$menu_disk_id = $query;
+				
+				$sql_individuals = "SELECT ind_id,ind_name FROM individuals ORDER BY ind_name ASC";
+				$sql_aka = "SELECT ind_id,nick FROM individual_nicks ORDER BY nick ASC";
+			
+				//Create a temporary table to build an array with both names and nicknames
+				$mysqli->query("CREATE TEMPORARY TABLE temp ENGINE=MEMORY $sql_individuals") or die("failed to create temporary table");
+				$mysqli->query("INSERT INTO temp $sql_aka") or die("failed to insert akas into temporary table");
+			
+				$query_temporary = $mysqli->query("SELECT * FROM temp WHERE ind_name LIKE 'a%' ORDER BY ind_name ASC") or die("Failed to query temporary table");
+				$mysqli->query("DROP TABLE temp");
+			
+
+				while  ($genealogy_ind=$query_temporary->fetch_array(MYSQLI_BOTH)) 
+				{  
+					$smarty->append('ind',
+							array('ind_id' => $genealogy_ind['ind_id'],
+									'ind_name' => $genealogy_ind['ind_name']));
+				
+				}	
+
+				// Create dropdown values a-z
+				$az_value = az_dropdown_value(0);
+				$az_output = az_dropdown_output(0);
+						   
+				$smarty->assign('az_value', $az_value);
+				$smarty->assign('az_output', $az_output);
+	
+				$smarty->assign('smarty_action', 'add_intro_credit');
+				$smarty->assign('menu_disk_id', $menu_disk_id);
+	}
+	
+	
+	
 //Send all smarty variables to the templates
 $smarty->display('file:../templates/0/ajax_menus_detail.html');
 ?>
