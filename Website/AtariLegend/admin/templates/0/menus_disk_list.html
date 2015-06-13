@@ -183,7 +183,27 @@ function CrewDelete(crew_select)
                location.href=url; 
          }  
 } 
-
+function popAddIntroCred(str) {
+    if (str == "") {
+        document.getElementById("menu_detail_expand").innerHTML = "";
+        return;
+    } else { 
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("menu_detail_expand").innerHTML = xmlhttp.responseText;
+            }
+        }
+        xmlhttp.open("GET","../menus/ajax_menus_detail.php?action=add_intro_credit&query="+str,true);
+        xmlhttp.send();
+    }
+}
 </script>
 {/block}
 {block name=title}Menus Search results{/block}
