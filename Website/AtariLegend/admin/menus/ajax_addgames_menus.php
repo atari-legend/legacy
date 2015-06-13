@@ -150,6 +150,16 @@ include("../includes/functions.php");
 				$smarty->assign('az_output', $az_output);
 				$smarty->assign('mySelect', 'num');
 
+				if (isset($list) and $list=="full")
+				{
+					$smarty->assign('smarty_action', 'full_list');
+				}
+				else
+				{
+					$smarty->assign('smarty_action', 'inner_list');
+				}
+
+
 
 //Send all smarty variables to the templates
 $smarty->display('file:../templates/0/ajax_menus_add_games.html');
