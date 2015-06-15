@@ -38,15 +38,15 @@ function deletelink(JSid)
 	<input type="text" name="validate_website_url" id="website_url" value="{$lineweb.website_url}" size="50" maxlength="200" class="links_input-box">		 
 	<br/>
 	<label for="category">Category</label> 
-		<select name="validate_category" id="category" class="links_selector">
+		<select name="validate_category" id="category" class="links_input-box">
 			{foreach from=$category item=line}
 					<option value="{$line.website_category_id}" {if $line.website_category_id eq $lineweb.website_category}SELECTED{/if}>{$line.website_category_name}</option>
 			{/foreach}
 		</select>
 	<br/>
 	<label for="website_description_text">Description</label>	
-		<textarea name="validate_website_description_text" id="website_description_text" class="textarea_links">{$lineweb.website_description}</textarea>
-	
+		<textarea name="validate_website_description_text" id="website_description_text">{$lineweb.website_description}</textarea>
+	<br/><br/>
 		  <input type="hidden" name="validate_website_id" value="{$lineweb.website_id}">
 		  <input type="hidden" name="action" value="approve_link">
 		  <input type="submit" name="Approve" value="Approve">
