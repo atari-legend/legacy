@@ -40,7 +40,7 @@
 	<br/>
 	<br/>
 			<div style="width:100px;display:inline-block;"><b>Written by :  </b></div>
-			<select name="members" class="links_selector" style="margin-left:10px;">
+			<select name="members" class="links_input-box" style="margin-left:10px;">
 				<option value="-" selected>-</option>
 				{foreach from=$authors item=line}
 					<option value="{$line.user_id}">{$line.user_name}</option>
@@ -89,7 +89,7 @@
 			&nbsp;<input type="text" size="50" name="helpbox" maxlength="100" style="vertical-align:middle;float:right;font-size:10px; border:1px; background-color:#D0D1DF" value="Tip: Styles can be applied quickly to selected text." />
 			</div>
 
-			<textarea name="textfield" ONSELECT="javascript:storeCaret(this);" ONCLICK="javascript:storeCaret(this);" ONKEYUP="javascript:storeCaret(this);" ONCHANGE="javascript:storeCaret(this);" rows="15" class="textarea_interviews"></textarea>
+			<textarea name="textfield" ONSELECT="javascript:storeCaret(this);" ONCLICK="javascript:storeCaret(this);" ONKEYUP="javascript:storeCaret(this);" ONCHANGE="javascript:storeCaret(this);" rows="15" ></textarea>
 
 	<br/>
 	<br/>

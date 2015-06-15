@@ -19,7 +19,7 @@
 
 	<br/>
 	<label for="category">Category</label> 
-		<select name="category" id="category" class="links_selector">
+		<select name="category" id="category" class="links_input-box">
 					<option value="0">Nothing</option>
 			{foreach from=$category_list item=line}
 					<option value="{$line.category_id}" {$line.selected}>{$line.category_name}</option>

@@ -39,7 +39,7 @@ function coverdelete(JSmagazine_issue_id)
 		<br/>
 		<form method="post" enctype="multipart/form-data" action="../magazine/db_magazine.php" name="magazinecoverscan">
 	
-		Coverscan: <input type="file" name="coverscan" accept="image/jpeg" class="gamesearchInputs">
+		Coverscan: <input type="file" name="coverscan" accept="image/jpeg">
 		<input type="hidden" name="action" value="coverscan_upload">
 		<input type="hidden" name="magazine_issue_id" value="{$magazine.magazine_issue_id}">
 		<input type='submit' value='Upload'>

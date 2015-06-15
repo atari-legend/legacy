@@ -26,7 +26,7 @@ function deletelink()
 
 
 	<form enctype="multipart/form-data" action="../links/db_links.php" method="post" name="linkmod" id="linkmod">
-<fieldset class="links_set" style="float:left;">
+	<fieldset class="links_set" style="float:left;">
 	<legend class="links_legend">Website Data</legend>
 	<label for="website_name">Site Name</label>
 	<input type="text" name="website_name" id="website_name" value="{$website.website_name}" size="50" maxlength="50" class="links_input-box">
@@ -35,15 +35,15 @@ function deletelink()
 	<input type="text" name="website_url" id="website_url" value="{$website.website_url}" size="50" maxlength="200" class="links_input-box">		 
 	<br/>
 	<label for="category">Category</label> 
-		<select name="category" id="category" class="links_selector">
+		<select name="category" id="category" class="links_input-box">
 			{foreach from=$category item=line}
 					<option value="{$line.category_id}" {$line.selected}>{$line.category_name}</option>
 			{/foreach}
 		</select>
 	<br/>
 	<label for="website_description_text">Description</label>	
-		<textarea name="website_description_text" id="website_description_text" class="textarea_links">{$website.website_description_text}</textarea>
-</fieldset>	
+		<textarea name="website_description_text" id="website_description_text">{$website.website_description_text}</textarea>
+	</fieldset>	
 
 
 <fieldset class="links_set" style="float:right;">

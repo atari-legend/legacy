@@ -31,7 +31,7 @@
 	<input type="text" name="headline" id="headline" size='50' maxlength='64' class="links_input-box">
 	<br/>
 	<label for="icon">News Icon</label>
-	<select name="icon" class="links_selector">
+	<select name="icon" class="links_input-box">
 		{foreach from=$news_images item=line}
 			<option value="{$line.image_id}">{$line.image_name}</option>
 		{/foreach}	
