@@ -8,10 +8,10 @@
 					
 					<div style="display: inline;align-items:center;margin: 0 auto;text-align:center;">
 					<span style="margin-right:10px;"><strong>By name :</strong></span>
-					<select name="gamebrowse" onchange="browseGame(this.value)">
+					<select name="gamebrowse" onchange="browseGame(this.value,{$menu_disk_id})">
 					{html_options values=$az_value output=$az_output selected=$mySelect}
 					</select>
-					<input type="text" name="gamesearch" onkeyup="searchGame(this.value)">
+					<input type="text" name="gamesearch" onkeyup="searchGame(this.value,{$menu_disk_id})">
 					<br/>
 					</div>
 					</fieldset>
@@ -34,7 +34,7 @@
 			{foreach from=$series_link item=line}
 			<tr>
 				<td style="width:5%;">
-					<input type="checkbox" name="game_id[]" value="{$line.game_id}" style="margin-left:4px;">
+					<input type="checkbox" name="game_id[]" value="{$line.game_id}" style="margin-left:4px;" onchange="addGametoMenu(this.value,{$menu_disk_id})">
 				</td>
 				<td style="width:30%;">{if $line.game_name != ''}<a href="games_detail.php?game_id={$line.game_id}" class="MAINNAV">{$line.game_name}</a>
 						{else}<i>n/a</i>{/if}
@@ -93,7 +93,7 @@
 			{foreach from=$series_link item=line}
 			<tr>
 				<td style="width:5%;">
-					<input type="checkbox" name="game_id[]" value="{$line.game_id}" style="margin-left:4px;">
+					<input type="checkbox" name="game_id[]" value="{$line.game_id}" style="margin-left:4px;" onchange="addGametoMenu(this.value,{$menu_disk_id})">
 				</td>
 				<td style="width:30%;">{if $line.game_name != ''}<a href="games_detail.php?game_id={$line.game_id}" class="MAINNAV">{$line.game_name}</a>
 						{else}<i>n/a</i>{/if}
@@ -128,7 +128,7 @@
 					<td class="game_list_footer" colspan="5">
 						<input type="hidden" name="action" value="add_game_to_menu">
 						<img src="../templates/0/images/arrow_ltr.gif" alt="" width="38" height="22" style="float:left;">
-						<input type="button" value="Add to menu" style="float:left;padding:2px;" onclick="addGametoMenu(this.form)">
+						<input type="button" value="Add to menu" style="float:left;padding:2px;">
 					</td>
 				</tr>
 			</table>

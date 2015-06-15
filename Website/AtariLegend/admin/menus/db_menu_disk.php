@@ -138,7 +138,62 @@ header("Location: ../menus/menus_disk_list.php?menu_sets_id=$menu_sets_id");
 
 }
 
+//****************************************************************************************
+// Add game to menu disk AJAX DB job
+//**************************************************************************************** 
 
+if(isset($action) and $action=="add_game_to_menu")
+{
+if(isset($game_id) and isset($menu_disk_id)) 
+{		
+		//Insert new title in menu_disk_title table
+		$mysqli->query("INSERT INTO menu_disk_title (menu_disk_id,menu_types_main_id) VALUES ('$menu_disk_id','1')"); 
+		$last_id = $mysqli->insert_id; // Get Last autoinc id
+		// Specify title in menu_disk_title_game table
+		$mysqli->query("INSERT INTO menu_disk_title_game (menu_disk_title_id,game_id) VALUES ('$last_id','$game_id')"); 
+
+		// ok, insert done. Now this is a ajax job so we need a return value.
+		//
+			//list of games for the menu disk
+				$sql_games = "SELECT game.game_id,
+								game.game_name,
+								pub_dev.pub_dev_id,
+								pub_dev.pub_dev_name,
+								game_year.game_year,
+								menu_types_main.menu_types_text
+								FROM menu_disk_title
+								LEFT JOIN menu_disk_title_game ON (menu_disk_title.menu_disk_title_id = menu_disk_title_game.menu_disk_title_id)
+								LEFT JOIN game ON (menu_disk_title_game.game_id = game.game_id)
+								LEFT JOIN game_developer ON (game.game_id = game_developer.game_id)
+								LEFT JOIN pub_dev ON (game_developer.dev_pub_id = pub_dev.pub_dev_id)
+								LEFT JOIN game_year ON (game.game_id = game_year.game_id)
+								LEFT JOIN menu_types_main ON (menu_disk_title.menu_types_main_id = menu_types_main.menu_types_main_id)
+								WHERE menu_disk_title.menu_disk_id = '$menu_disk_id' GROUP BY game.game_name ORDER BY game.game_name ASC";
+				
+				$result_games = $mysqli->query($sql_games);
+				
+				while  ($query_game = $result_games->fetch_array(MYSQLI_BOTH)) 
+				{ 		// This smarty is used for creating the list of games
+						$smarty->append('game',
+	    				array('game_id' => $query_game['game_id'],
+						  	  'game_name' => $query_game['game_name'],
+						  	  'developer_id' => $query_game['pub_dev_id'],
+						  	  'developer_name' => $query_game['pub_dev_name'],
+						  	  'game_year' => $query_game['game_year'],
+						  	  'menu_types_text' => $query_game['menu_types_text']));
+				}
+				
+
+				
+				$smarty->assign('smarty_action', 'add_game_to_menu_return');
+				$smarty->assign('menu_disk_id', $menu_disk_id);
+	
+	//Send to smarty for return value
+	$smarty->display('file:../templates/0/ajax_menus_detail.html');
+	
+}
+
+}
 
 //****************************************************************************************
 // delete serie
@@ -157,20 +212,4 @@ header("Location: ../games/games_series_main.php");
 
 }
 
-//****************************************************************************************
-// add_to_series
-//**************************************************************************************** 
 
-if($action=="add_to_series")
-{
-if(isset($game_id)) 
-{
-	foreach($game_id as $game) 
-	{
-		$mysqli->query("INSERT INTO game_series_cross (game_id,game_series_id) VALUES ('$game','$game_series_id')"); 
-	}
-	mysqli_free_result(); 
-}
-header("Location: ../games/games_series_editor.php?game_series_id=$game_series_id&series_page=$series_page");
-
-}

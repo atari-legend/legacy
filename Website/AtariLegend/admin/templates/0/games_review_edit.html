@@ -144,7 +144,7 @@ function deletecomment(game_id,reviewid,screenshot_id)
 			&nbsp;<input type="text" size="50" name="helpbox" maxlength="100" style="float:right;font-size:10px; border=0px; background-color:#D0D1DF" value="Tip: Styles can be applied quickly to selected text." />
 			</div>
 
-			<textarea name="textfield" ONSELECT="javascript:storeCaret(this);" ONCLICK="javascript:storeCaret(this);" ONKEYUP="javascript:storeCaret(this);" ONCHANGE="javascript:storeCaret(this);" rows="15" >{$edit_review.review_text}</textarea>
+			<textarea name="textfield" id="game_review_textfield" ONSELECT="javascript:storeCaret(this);" ONCLICK="javascript:storeCaret(this);" ONKEYUP="javascript:storeCaret(this);" ONCHANGE="javascript:storeCaret(this);" rows="15" >{$edit_review.review_text}</textarea>
 
 	<br/><br/>
 	<br/>
