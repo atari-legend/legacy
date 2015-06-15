@@ -230,7 +230,7 @@ function popAddGames(str) {
                 document.getElementById("gameto_menu_link").innerHTML = "<a onclick=\"closeAddGames("+str+")\" style=\"cursor: pointer;\" class=\"MAINNAV\">Add Game to menu</a>";
             }
         }
-        xmlhttp.open("GET","../menus/ajax_addgames_menus.php?action=game_browse&list=full&query=num",true);
+        xmlhttp.open("GET","../menus/ajax_addgames_menus.php?action=game_browse&list=full&query=num&menu_disk_id="+str,true);
         xmlhttp.send();
     }
 }
@@ -241,7 +241,7 @@ function closeAddGames(str) {
         return;
 } 
 
-function browseGame(str) {
+function browseGame(str,menu_disk_id) {
     if (str == "") {
         document.getElementById("game_list").innerHTML = "";
         return;
@@ -258,12 +258,12 @@ function browseGame(str) {
                 document.getElementById("game_list").innerHTML = xmlhttp.responseText;
             }
         }
-        xmlhttp.open("GET","../menus/ajax_addgames_menus.php?action=game_browse&list=inner&query="+str,true);
+        xmlhttp.open("GET","../menus/ajax_addgames_menus.php?action=game_browse&list=inner&query="+str+"&menu_disk_id="+menu_disk_id,true);
         xmlhttp.send();
     }
 }
 
-function searchGame(str) {
+function searchGame(str,menu_disk_id) {
     if (str == "") {
         str = "empty";
 			xmlhttp.onreadystatechange = function() {
@@ -286,20 +286,15 @@ function searchGame(str) {
             }
         }
         if (str.length >= 3) {
-        xmlhttp.open("GET","../menus/ajax_addgames_menus.php?action=game_search&list=inner&query="+str,true);
+        xmlhttp.open("GET","../menus/ajax_addgames_menus.php?action=game_search&list=inner&query="+str+"&menu_disk_id="+menu_disk_id,true);
         xmlhttp.send();
 	}
     }
 }
 
-function addGametoMenu(form) {
-	
-	 var game_id = form.game_id.value;
-	
-		alert ("You typed: " + game_id);
-	
-  {*  if (str == "") {
-        document.getElementById("game_list").innerHTML = "";
+function addGametoMenu(game_id,menu_disk_id) {
+ if (game_id == "") {
+        document.getElementById("menu_software_list").innerHTML = "";
         return;
     } else { 
         if (window.XMLHttpRequest) {
@@ -311,14 +306,13 @@ function addGametoMenu(form) {
         }
         xmlhttp.onreadystatechange = function() {
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                document.getElementById("game_list").innerHTML = xmlhttp.responseText;
+                document.getElementById("menu_software_list").innerHTML = xmlhttp.responseText;
             }
         }
-        xmlhttp.open("GET","../menus/ajax_addgames_menus.php?action=game_browse&query="+str,true);
+        xmlhttp.open("GET","../menus/db_menu_disk.php?action=add_game_to_menu&game_id="+game_id+"&menu_disk_id="+menu_disk_id,true);
         xmlhttp.send();
-    } *}
+    } 
 }
-
 </script>
 {/block}
 {block name=title}Menus Search results{/block}

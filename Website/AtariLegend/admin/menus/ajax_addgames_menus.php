@@ -149,6 +149,7 @@ include("../includes/functions.php");
 				$smarty->assign('az_value', $az_value);
 				$smarty->assign('az_output', $az_output);
 				$smarty->assign('mySelect', 'num');
+				$smarty->assign('menu_disk_id', $menu_disk_id);
 
 				if (isset($list) and $list=="full")
 				{

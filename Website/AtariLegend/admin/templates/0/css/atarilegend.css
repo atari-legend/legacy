@@ -191,6 +191,15 @@ padding:5px;
 	width: 546px;
 
 }
+
+#game_review_textfield 
+{
+
+	width:100%;
+	padding:5px;
+
+}
+
 .links_legend
 {
 	background: #D0D1DF;
