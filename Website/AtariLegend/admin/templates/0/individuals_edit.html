@@ -137,8 +137,8 @@ function nickdelete(nick_id,ind_id)
 
 				<br/><br/>
 				<div>
-				<input type="submit" value="Update">
-				<input type="submit" value="Delete Individual" onClick="individualdelete({$individuals.ind_id}); return false;">	
+				<input type="submit" value="Update" style="padding:2px;">
+				<input type="submit" value="Delete Individual" onClick="individualdelete({$individuals.ind_id}); return false;" style="padding:2px;">	
 				<input type="hidden" name="action" value="update">
 				<input type="hidden" name="ind_id" value="{$individuals.ind_id}">
 
@@ -168,7 +168,7 @@ function nickdelete(nick_id,ind_id)
 						<input type="file" name="individual_pic">
 						<br/>
 						<br/>
-						<input type="submit" name="inserter" value="Upload">
+						<input type="submit" name="inserter" value="Upload" style="padding:2px;">
 						<br/>
 					
 					<input type="hidden" name="action" value="add_photo">
@@ -184,7 +184,7 @@ function nickdelete(nick_id,ind_id)
 				<br/>	
 				<form action="../individuals/individuals_edit.php" method="post" name="ind" id="NickAdd">		
 				<input type="text" name="ind_nick" value="">		
-				<input type="submit" value="Add Nick">
+				<input type="submit" value="Add Nick" style="padding:2px;">
 				<input type="hidden" name="action" value="add_nick">
 				<input type="hidden" name="ind_id" value="{$individuals.ind_id}">		
 				</form>
