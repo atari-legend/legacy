@@ -34,7 +34,7 @@ The main company (developer/publisher) page
 			<option value="{$line.comp_id}">{$line.comp_name}</option>
 		{/foreach}	
 	</select>
-	<input type="submit" value="Edit" style="padding:2px;">
+	<input type="submit" value="Edit">
 		<input type="hidden" name="action" id="action" value="search_comp">
 	<input type="hidden" name="user_id" id="user_id" value="{$user_id}">
 	</form>	
@@ -44,7 +44,7 @@ The main company (developer/publisher) page
 	<fieldset class="interview_set" style="width:400px;display:inline;float:right;">
 	<legend class="links_legend">Add a company</legend>
 	<input type="text" name="comp_name">
-	<input type="submit" value="Add" style="padding:2px;">
+	<input type="submit" value="Add">
 	</fieldset>
 	<input type="hidden" name="action" id="action" value="insert_comp">
 	<input type="hidden" name="user_id" id="user_id" value="{$user_id}">

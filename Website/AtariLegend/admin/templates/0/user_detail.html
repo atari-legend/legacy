@@ -90,7 +90,7 @@ function user_stats()
 				<br/>
 		<div style="display:table;padding:5px;width:100%;">
 				<input type="hidden" name="user_id_selected" value="{$users.user_id}">
-				<input type="submit" value="Modify" style="padding:2px;margin-right:10px;">
+				<input type="submit" value="Modify" style="margin-right:10px;">
 				<input type="button" value="Delete" onClick="delete_user();" style="padding:2px;margin-right:10px;">
 				<input type="button" value="Statistics" onClick="user_stats();">
 		</div>
@@ -108,7 +108,7 @@ function user_stats()
 			<img src="../includes/show_image.php?file={$users.image}&amp;resize=160,null,null,null" alt="Avatar">
 			</div>
 			<input type="hidden" name="user_id_selected" value="{$users.user_id}">
-			<input type="submit" value="Delete" style="padding:2px;">
+			<input type="submit" value="Delete">
 			</form>
 	{else}
 			<form enctype="multipart/form-data" action="../user/user_detail.php" method="post" name="avatar" id="avatar">
@@ -119,7 +119,7 @@ function user_stats()
 				<input type="file" name="image">
 				<input type="hidden" name="user_id_selected" value="{$users.user_id}">
 				<input type="hidden" name="action" value="avatar_upload">
-				<input type="submit" name="Modify" value="Upload" style="padding:2px;">
+				<input type="submit" name="Modify" value="Upload">
 			</form>
 	{/if}
 	</fieldset>
