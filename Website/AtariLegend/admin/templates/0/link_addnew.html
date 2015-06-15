@@ -13,7 +13,7 @@
 	<input type="text" name="url" id="url" value="http://" size="50" maxlength="200" class="links_input-box">
 	<br/>
 	<label for="category">Category</label>
-	<select name="category" class="links_selector">
+	<select name="category" class="links_input-box">
 		
 		{foreach from=$website_category item=line}
 			<option value="{$line.website_category_id}">{$line.website_category_name}</option>
@@ -23,7 +23,7 @@
 	</select>
 	<br/>
 	<label for="descr">Description</label>
-	<textarea cols="50" rows="8" name="descr" class="textarea_links"></textarea>
+	<textarea cols="50" rows="8" name="descr"></textarea>
 	<br/>
 	<br/>
 	<input type="hidden" name="action" id="action" value="addnew_link">

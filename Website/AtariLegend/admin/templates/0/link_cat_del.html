@@ -33,7 +33,7 @@
 	<br/>
 	<br/>
 	<label for="new_category">Destination</label> 
-		<select name="new_category" id="new_category" class="links_selector">
+		<select name="new_category" id="new_category" class="links_input-box">
 			{foreach from=$category_list item=line}
 					<option value="{$line.category_id}" {$line.selected}>{$line.category_name}</option>
 			{/foreach}

@@ -24,6 +24,7 @@
 						<li id="gamedocto_menu_link"><a onclick="CloseeditDisk({$menus.menu_disk_id})" style="cursor: pointer;" class="MAINNAV">Add Tool Doc to menu</a></li>
 						</ul>
 						<br/>
+						<div id="menu_software_list">
 			{if isset($game)}
 			<table class="table_game_list" style="width:95%;">
 			<tr>
@@ -72,7 +73,7 @@
 				</tr>
 			</table>
 			{/if}			
-						
+					</div>	
 						<br/><br/>
 						
 						
@@ -122,3 +123,58 @@
 							</div>
 
 {/if}
+{if isset($smarty_action) and $smarty_action == "add_game_to_menu_return"}
+
+			{if isset($game)}
+			<table class="table_game_list" style="width:95%;">
+			<tr>
+				<th class="table_game_list" style="width:5%;margin:0px;border-right:0px;">Mark</th>
+				<th class="table_game_list" style="width:30%;margin:0px;border-right:0px;border-left:0px;">Game Name</th>
+				<th class="table_game_list" style="width:20%;margin:0px;border-right:0px;border-left:0px;">Developer</th>
+				<th class="table_game_list" style="width:20%;margin:0px;border-right:0px;border-left:0px;">Year</th>
+				<th class="table_game_list" style="width:15%;margin:0px;border-right:0px;border-left:0px;">Info</th>
+			</tr>
+			{foreach from=$game item=line}
+			<tr class="table_game_list">
+				<td class="table_game_list" style="width:5%;margin:0px;border:0px;">
+					<input type="checkbox" name="game_id[]" value="{$line.game_id}">
+				</td>
+				<td class="table_game_list" style="width:25%;margin:0px;border:0px;">{if $line.game_name != ''}<a href="games_detail.php?game_id={$line.game_id}" class="MAINNAV">{$line.game_name}</a>
+						{else}<i>n/a</i>{/if}
+				</td>
+				<td class="table_game_list" style="width:30%;margin:0px;border:0px;">{if $line.developer_name != ''}
+						<a href="games_main.php?developer={$line.developer_id}&amp;action=search" class="MAINNAV">
+							{$line.developer_name}
+						</a>
+						{else}
+							
+						{/if}</td>				
+				<td class="table_game_list" style="width:15%;margin:0px;border:0px;">
+					{if $line.game_year != ''}
+						<a href="games_main.php?year={$line.game_year}&amp;action=search" class="MAINNAV">
+							{$line.game_year}
+						</a>
+						{else}
+							<i>n/a</i>
+						{/if}
+					</td>
+					<td class="table_game_list" style="width:20%;margin:0px;border:0px;">
+						{$line.menu_types_text}
+					</td>
+			</tr>
+			{/foreach}
+							<tr>
+					<td class="game_list_footer" colspan="5">
+						<input type="hidden" name="series_page" value="series_editor">
+						<input type="hidden" name="action" value="add_to_series">
+						<img src="../templates/0/images/arrow_ltr.gif" alt="" width="38" height="22" style="float:left;">
+						<input type="submit" value="Delete from menu disk" style="float:left;">
+					</td>
+				</tr>
+			</table>
+			{/if}
+
+
+
+{/if}
+

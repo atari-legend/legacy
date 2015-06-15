@@ -31,7 +31,7 @@
 	<input type="text" name="news_headline" id="headline" size='50' maxlength='64' class="links_input-box" value="{$edit_submissions.edit_headline}">
 	<br/>
 	<label for="icon">News Icon : </label>
-	<select name="news_image_id" class="links_selector">
+	<select name="news_image_id" class="links_input-box">
 	{foreach from=$news_images item=line}
 		{if $edit_submissions.edit_image_id eq $line.image_id}			
 			<option value="{$line.image_id}" selected>{$line.image_name}</option>

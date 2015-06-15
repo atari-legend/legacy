@@ -46,7 +46,7 @@ function deletecomment(screenshot_id, interview_id)
 	<br/>
 	<br/>
 			<div style="width:100px;display:inline-block;"><b>Written by :</b></div>
-			<select name="members" class="links_selector" style="margin-left:10px;">
+			<select name="members" class="links_input-box" style="margin-left:10px;">
 				<option value="-" selected>-</option>
 				{foreach from=$authors item=line}
 					<option value="{$line.user_id}">{$line.user_name}</option>
@@ -54,7 +54,7 @@ function deletecomment(screenshot_id, interview_id)
 			</select>
 			<br/>
 			<div style="width:100px;display:inline-block;"><b>Individual :</b></div>
-			<select name="individual" class="links_selector" style="margin-left:10px;">
+			<select name="individual" class="links_input-box" style="margin-left:10px;">
 				<option value="-" selected>-</option>
 				{foreach from=$individuals item=line}
 					{if $line.ind_id == $selected_individual.ind_id}
@@ -110,7 +110,7 @@ function deletecomment(screenshot_id, interview_id)
 			&nbsp;<input type="text" size="60" name="helpbox" maxlength="100" style="float:right;font-size:10px; border=0px; background-color:#D0D1DF" value="Tip: Styles can be applied quickly to selected text." />
 			</div>
 
-			<textarea name="textintro" ONSELECT="javascript:storeCaret(this);" ONCLICK="javascript:storeCaret(this);" ONKEYUP="javascript:storeCaret(this);" ONCHANGE="javascript:storeCaret(this);" rows="5" class="textarea_interviews">
+			<textarea name="textintro" ONSELECT="javascript:storeCaret(this);" ONCLICK="javascript:storeCaret(this);" ONKEYUP="javascript:storeCaret(this);" ONCHANGE="javascript:storeCaret(this);" rows="5" >
 			</textarea>
 
 			<br/>
@@ -127,7 +127,7 @@ function deletecomment(screenshot_id, interview_id)
 			<input type="button" accesskey= "s" name="addbbcode10" value="Hotspot Source" onclick="bbstyle(10,'textchapters')"  onMouseOver="helpline('s')" />
 			</div>
 
-			<textarea name="textchapters" ONSELECT="javascript:storeCaret(this);" ONCLICK="javascript:storeCaret(this);" ONKEYUP="javascript:storeCaret(this);" ONCHANGE="javascript:storeCaret(this);" rows="5" class="textarea_interviews">
+			<textarea name="textchapters" ONSELECT="javascript:storeCaret(this);" ONCLICK="javascript:storeCaret(this);" ONKEYUP="javascript:storeCaret(this);" ONCHANGE="javascript:storeCaret(this);" rows="5" >
 			</textarea>
 	
 			<br/>
@@ -169,7 +169,7 @@ function deletecomment(screenshot_id, interview_id)
 			<a href="javascript:setsmileyn(' :idea: ')"><img src="../templates/0/emoticons/icon_idea.gif" alt="Idea" onMouseOver="helpline('x')"></a>
 			</div>
 
-			<textarea name="textfield" ONSELECT="javascript:storeCaret(this);" ONCLICK="javascript:storeCaret(this);" ONKEYUP="javascript:storeCaret(this);" ONCHANGE="javascript:storeCaret(this);" rows="15" class="textarea_interviews">
+			<textarea name="textfield" ONSELECT="javascript:storeCaret(this);" ONCLICK="javascript:storeCaret(this);" ONKEYUP="javascript:storeCaret(this);" ONCHANGE="javascript:storeCaret(this);" rows="15" >
 			</textarea>
 
 			<br/>
