@@ -96,24 +96,6 @@
 	padding:8px;
 }
 
-
-.CELLCOLOR 
-{
-	background-color: #F3F3F3;
-	border-left-color: #1A168B;
-	border-right-color: #1A168B;
-	border-left-style: solid;
-	border-right-style: solid;
-	border-left-width: 1px;
-	border-right-width: 1px;
-}
-
-.NAVCELL 
-{
-	background-color: #D0D1DF;
-	border: solid #1A168B;
-}
-
 .maintext 
 {
 	font-size : 10px;
@@ -175,20 +157,8 @@ SELECT.linkcategory_select
 TEXTAREA
 {
 	color: gray;
-	HEIGHT: 200px;
-	WIDTH: 630px;
 	font-weight: normal;
 	font-style: italic;
-}
-
-TEXTAREA.textarea_links
-{
-	color: gray;
-	HEIGHT: 200px;
-	WIDTH: 320px;
-	font-weight: normal;
-	font-style: italic;
-	font-size: 13px;
 }
 
 label
@@ -209,8 +179,25 @@ clear: both;
 {
 border: #26a solid 1px;
 width: 20em;
-background-color: Menu;
--moz-border-radius:10px;
+background-color: #DBD7D1;
+padding:5px;
+}
+
+#website_description_text 
+{
+
+	margin: 0px; 
+	height: 196px; 
+	width: 546px;
+
+}
+
+#game_review_textfield 
+{
+
+	width:100%;
+	padding:5px;
+
 }
 
 .links_legend
@@ -230,28 +217,6 @@ background-color: Menu;
 .links_input-box
 {
 margin-bottom: 10px;
-}
-
-.links_selector
-{
-	margin-bottom: 10px;
-}
-
-.reviewCommentInput
-{
-	background-color : #F4F4F4;
-    WIDTH: 350px
-}
-
-.reviewScoreInput
-{
-	background-color : #F4F4F4;
-    WIDTH: 40px
-}
-
-.gamesearchInputs
-{
-	background-color : #F4F4F4;
 }
 
 .authorSelects
@@ -299,10 +264,6 @@ background-color: Menu;
 	font-weight : 200;
 }
 
-.textarea_interviews
-{
-	WIDTH: 100%;
-}
 
 a.links_links:hover
 {

@@ -131,13 +131,13 @@ function nickdelete(nick_id,ind_id)
 			</div>
 
 
-				<textarea name="textfield" ONSELECT="javascript:storeCaret(this);" ONCLICK="javascript:storeCaret(this);" ONKEYUP="javascript:storeCaret(this);" ONCHANGE="javascript:storeCaret(this);" rows="5" class="textarea_interviews">{$individuals.ind_profile}</textarea>
+				<textarea name="textfield" ONSELECT="javascript:storeCaret(this);" ONCLICK="javascript:storeCaret(this);" ONKEYUP="javascript:storeCaret(this);" ONCHANGE="javascript:storeCaret(this);" rows="5" >{$individuals.ind_profile}</textarea>
 
 
 
 				<br/><br/>
 				<div>
-				<input type="submit" value="Update">
+				<input type="submit" value="Update" style="padding:2px;">
 				<input type="submit" value="Delete Individual" onClick="individualdelete({$individuals.ind_id}); return false;">	
 				<input type="hidden" name="action" value="update">
 				<input type="hidden" name="ind_id" value="{$individuals.ind_id}">

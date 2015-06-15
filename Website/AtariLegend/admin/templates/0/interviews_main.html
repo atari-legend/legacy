@@ -52,7 +52,7 @@ function deleteinterview(interview_id)
 		<fieldset class="interview_set" style="display:block;margin: 0 auto;">
 		<legend class="links_legend" style="margin: 0 auto;">Search for an Interview</legend>
 		<div style="display:block;text-align:center;">
-		<select name="individual_search" class="links_selector" style="display:inline;margin: 0 auto;">
+		<select name="individual_search" class="links_input-box" style="display:inline;margin: 0 auto;">
 			<option value="-" selected>-</option>
 			{foreach from=$individuals_interviewed item=line}
 				<option value="{$line.ind_id}">{$line.ind_name}</option>
@@ -71,7 +71,7 @@ function deleteinterview(interview_id)
 		<fieldset class="interview_set" style="display:block;margin: 0 auto;">
 		<legend class="links_legend" style="margin: 0 auto;">Add an Interview</legend>
 				<div style="display:block;text-align:center;">
-		<select name="individual_create" class="links_selector" style="display:inline;margin: 0 auto;">
+		<select name="individual_create" class="links_input-box" style="display:inline;margin: 0 auto;">
 			<option value="-" selected>-</option>
 			{foreach from=$individuals item=line}
 				<option value="{$line.ind_id}">{$line.ind_name}</option>

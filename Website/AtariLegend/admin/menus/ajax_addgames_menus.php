@@ -149,6 +149,17 @@ include("../includes/functions.php");
 				$smarty->assign('az_value', $az_value);
 				$smarty->assign('az_output', $az_output);
 				$smarty->assign('mySelect', 'num');
+				$smarty->assign('menu_disk_id', $menu_disk_id);
+
+				if (isset($list) and $list=="full")
+				{
+					$smarty->assign('smarty_action', 'full_list');
+				}
+				else
+				{
+					$smarty->assign('smarty_action', 'inner_list');
+				}
+
 
 
 //Send all smarty variables to the templates
