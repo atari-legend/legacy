@@ -63,6 +63,13 @@ $start = microtime(true);
 		$v_rows = get_rows($query_number) or die("Couldn't get the number of games");
 
 		$smarty->assign('games_nr', $v_rows); 
+		
+				// Create dropdown values a-z
+				$az_value = az_dropdown_value(0);
+				$az_output = az_dropdown_output(0);
+						   
+				$smarty->assign('az_value', $az_value);
+				$smarty->assign('az_output', $az_output);	
 
 		$smarty->assign("user_id",$_SESSION['user_id']);
 
