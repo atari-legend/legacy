@@ -189,7 +189,7 @@ function deletecomment(game_id,reviewid,screenshot_id)
 			<input type="hidden" name="action" value="edit_review">
 			<input type="hidden" name="game_id" value="{$game.game_id}">
 			<input type="hidden" name="reviewid" value="{$reviewid}">
-			<input type="submit" name="Create Review" value="Edit Review" style="padding:2px;">
+			<input type="submit" name="Create Review" value="Edit Review">
 			<input type="button" name="delete" value="Delete review" onclick="deletereview({$reviewid},{$game.game_id})" style="padding:2px;">
 			<input type="button" name="delete" value="Move to Comments" onclick="move_to_comment({$reviewid},{$game.game_id})" style="padding:2px;">
 
