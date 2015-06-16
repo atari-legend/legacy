@@ -303,7 +303,7 @@ header {
     }
 	
     .main-content #sidebar-toggle {
-        background: #01b5b5;
+        background: #161c71;
         border-radius: 3px;
         display: block;
         position: absolute;
@@ -513,11 +513,11 @@ nav ul {
 #side_link_categories, #side_articles, #side_article_types, #side_article_screenshots, #side_add_magazines, #side_manage_issues, #side_interviews, 
 #side_interviews_help, #side_forum, #side_logout, #side_game_individuals, #side_game_author_types, #side_menu_individuals, #side_menu_author_types,
 #side_menu_crew_editor, #side_demo_individuals, #side_demo_author_types, #side_demo_crew_editor, #side_demo_interviews, #side_demo_interviews_help {
-		height: 40px;
+		height: 30px;
 		font-size: 16px;
 		text-decoration:none;
 		display:table-cell;
 		text-align:center;
-		vertical-align:middle;
+		vertical-align:bottom;
 
 }
