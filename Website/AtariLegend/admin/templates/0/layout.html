@@ -26,7 +26,20 @@
 		<link href="../templates/0/css/style.css" type="text/css" rel="stylesheet">
 		<link href="../templates/0/css/atarilegend.css" hreflang="en" rel="stylesheet" type="text/css">
 		<script src="../templates/0/js/jquery-1.11.0.min.js"></script>
+		<script type="text/javascript"> <!-- script needed for the side menu -->
+			//<![CDATA[ 
+			$(window).load(function(){
+			  $("[data-toggle]").click(function() {
+				var toggle_el = $(this).data("toggle");
+				$(toggle_el).toggleClass("open-sidebar");
+			  });
+			});
+			//]]> 
+		</script>
 		{block name=head}{/block}
+		
+		
+		
 	</head>
 	<body id="body">
 		
@@ -124,7 +137,7 @@
 								  <ul class="clearfix">
 									<li><button type="button" class="topbutton" id="other_side">OTHER</button>
 										<ul class="sub-menu">
-											<li><a href="#" title="Statistics" class="topbutton" id="side_Statistics">STATISTICS</a></li>
+											<li><a href="#" title="Statistics" class="topbutton" id="side_statistics">STATISTICS</a></li>
 											<li><a href="#" title="Did you know" class="topbutton" id="side_did_you_know">DID YOU KNOW</a></li>
 											<li><a href="#" title="Trivia screenshots" class="topbutton" id="side_trivia_screenshots">TRIVIA SCREENSHOTS</a></li>
 											<li><a href="#" title="Trivie quotes" class="topbutton" id="side_trivia_quotes">TRIVIA QUOTES</a></li>
