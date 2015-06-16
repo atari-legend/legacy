@@ -35,6 +35,7 @@
 	.main_body_container {position:absolute; margin-top:44px;}
 	.leftcell {	display:block; width: 320px;  }
 	.quicklinkbox { display:block;text-align:center;width:320px;padding:2px; margin-left: auto; margin-right:auto;}
+	.interview_set {width: 320px;background-color: white;text-align:left;padding:4px;}
 }
 
 /* for the lower resolutions, we don't have the menu bar below the top so we need to reposition the content below the nav */ 
@@ -43,6 +44,7 @@
 	.main_body_container { position:absolute; margin-top:229px;}
 	.leftcell {	display:block; width: 320px;  }
 	.quicklinkbox { display:block;text-align:center;width:320px;padding:2px; margin-left: auto; margin-right:auto;}
+	.interview_set {width: 320px;background-color: white;text-align:left;padding:4px;}
 
 }
 
