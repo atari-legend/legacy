@@ -84,6 +84,7 @@ include("../includes/functions.php");
 								pub_dev.pub_dev_id,
 								pub_dev.pub_dev_name,
 								game_year.game_year,
+								menu_disk_title.menu_disk_title_id,
 								menu_types_main.menu_types_text
 								FROM menu_disk_title
 								LEFT JOIN menu_disk_title_game ON (menu_disk_title.menu_disk_title_id = menu_disk_title_game.menu_disk_title_id)
@@ -104,6 +105,7 @@ include("../includes/functions.php");
 						  	  'developer_id' => $query_game['pub_dev_id'],
 						  	  'developer_name' => $query_game['pub_dev_name'],
 						  	  'game_year' => $query_game['game_year'],
+						  	  'menu_disk_title_id' => $query_game['menu_disk_title_id'],
 						  	  'menu_types_text' => $query_game['menu_types_text']));
 				}
 				

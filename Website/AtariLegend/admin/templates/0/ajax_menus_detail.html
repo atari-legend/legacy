@@ -37,7 +37,8 @@
 			{foreach from=$game item=line}
 			<tr class="table_game_list">
 				<td class="table_game_list" style="width:5%;margin:0px;border:0px;">
-					<input type="checkbox" name="game_id[]" value="{$line.game_id}">
+					<form name="MenuDiskContent" id="MenuDiskContent">
+					<input type="checkbox" id="menu_disk_title_id{$line.menu_disk_title_id}" name="menu_disk_title_id[]" value="{$line.menu_disk_title_id}" onchange="deleteGamefromMenu({$line.menu_disk_title_id},{$menu_disk_id})">
 				</td>
 				<td class="table_game_list" style="width:25%;margin:0px;border:0px;">{if $line.game_name != ''}<a href="games_detail.php?game_id={$line.game_id}" class="MAINNAV">{$line.game_name}</a>
 						{else}<i>n/a</i>{/if}
@@ -65,10 +66,10 @@
 			{/foreach}
 							<tr>
 					<td class="game_list_footer" colspan="5">
-						<input type="hidden" name="series_page" value="series_editor">
-						<input type="hidden" name="action" value="add_to_series">
 						<img src="../templates/0/images/arrow_ltr.gif" alt="" width="38" height="22" style="float:left;">
-						<input type="submit" value="Delete from menu disk" style="float:left;">
+						<input type="hidden" name="action" value="delete_from_menu_disk">
+						<input type="button" value="Delete from menu disk" style="float:left;">
+						</form>
 					</td>
 				</tr>
 			</table>
@@ -137,7 +138,8 @@
 			{foreach from=$game item=line}
 			<tr class="table_game_list">
 				<td class="table_game_list" style="width:5%;margin:0px;border:0px;">
-					<input type="checkbox" name="game_id[]" value="{$line.game_id}">
+					<form name="MenuDiskContent" id="MenuDiskContent">
+					<input type="checkbox" id="menu_disk_title_id{$line.menu_disk_title_id}" name="menu_disk_title_id[]" value="{$line.menu_disk_title_id}" onchange="deleteGamefromMenu({$line.menu_disk_title_id},{$menu_disk_id})">
 				</td>
 				<td class="table_game_list" style="width:25%;margin:0px;border:0px;">{if $line.game_name != ''}<a href="games_detail.php?game_id={$line.game_id}" class="MAINNAV">{$line.game_name}</a>
 						{else}<i>n/a</i>{/if}
@@ -165,10 +167,10 @@
 			{/foreach}
 							<tr>
 					<td class="game_list_footer" colspan="5">
-						<input type="hidden" name="series_page" value="series_editor">
-						<input type="hidden" name="action" value="add_to_series">
 						<img src="../templates/0/images/arrow_ltr.gif" alt="" width="38" height="22" style="float:left;">
-						<input type="submit" value="Delete from menu disk" style="float:left;">
+						<input type="hidden" name="action" value="delete_from_menu_disk">
+						<input type="button" value="Delete from menu disk" style="float:left;">
+						</form>
 					</td>
 				</tr>
 			</table>
