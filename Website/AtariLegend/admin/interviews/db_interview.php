@@ -287,5 +287,79 @@ if ( isset($action) and $action == 'update_interview' )
 	header("Location: ../interviews/interviews_edit.php?interview_id=$interview_id");
 }
 
+
+//****************************************************************************************
+//This is what happens when we press the create interview button in the interview creation 
+//page
+//****************************************************************************************
+
+elseif (isset($action) and $action == 'add_interview')
+{
+	if ( $members == '' or $members == '-' or $individual == '' or $individual == "-"  )
+	{
+		$message = "Some required info is not filled in. Make sure the 'author' and 'individual' fields are completed";
+		$smarty->assign("message",$message);
+		
+		//Get the individuals
+		$sql_individuals = $mysqli->query("SELECT * FROM individuals ORDER BY ind_name ASC")
+				  		   or die ("Couldn't query indiciduals database");
+		
+		while ($individuals = $sql_individuals->fetch_array(MYSQLI_BOTH))
+		{
+	
+			//Get the selected individual data
+			if ( $individuals['ind_id'] == $individual )
+			{
+				$smarty->assign('selected_individual',
+	    	 		array('ind_id' => $individuals['ind_id'],
+				 		  'ind_name' => $individuals['ind_name']));
+			}
+	
+			$smarty->append('individuals',
+	    		 array('ind_id' => $individuals['ind_id'],
+					   'ind_name' => $individuals['ind_name']));	
+		}
+
+		//Get the authors for the interview
+		$sql_author = $mysqli->query("SELECT user_id,userid FROM users")
+					  or die ("Database error - getting members name");
+        
+		while ( $authors=$sql_author->fetch_array(MYSQLI_BOTH) )
+		{
+			$smarty->append('authors',
+	    		 array('user_id' => $authors['user_id'],
+					   'user_name' => $authors['userid']));
+		}				   
+
+		$smarty->assign("user_id",$_SESSION['user_id']);
+
+		//Send all smarty variables to the templates
+		$smarty->display('file:../templates/0/interviews_add.html');
+		
+	}	
+	else
+	{
+		$sdbquery = $mysqli->query("INSERT INTO interview_main (member_id, ind_id) VALUES ($members, $individual)")
+					or die("Couldn't insert into interview_main");
+	
+		//get the id of the inserted interview
+		$id = $mysqli->insert_id;
+	
+		// first we have to convert the date vars into a time stamp to be inserted to review_date
+		$date = date_to_timestamp($Date_Year,$Date_Month,$Date_Day);
+	
+		$sdbquery = $mysqli->query("INSERT INTO interview_text (interview_id, interview_text, interview_date, interview_intro, interview_chapters) VALUES ($id, '$textfield', '$date', '$textintro','$textchapters')") 
+					or die("Couldn't insert into interview_text");
+		
+		$message = "Interview added succesfully";
+		$smarty->assign("message",$message);
+		
+		$smarty->assign("user_id",$_SESSION['user_id']);
+
+		//Send all smarty variables to the templates
+	header("Location: ../interviews/interviews_edit.php?interview_id=$id");
+	}
+}
+
 ?>
 
