@@ -200,9 +200,20 @@ if(isset($software_id) and isset($menu_disk_id))
 								LEFT JOIN menu_types_main ON (menu_disk_title.menu_types_main_id = menu_types_main.menu_types_main_id)
 								WHERE menu_disk_title.menu_disk_id = '$menu_disk_id' AND menu_disk_title.menu_types_main_id = '2' ORDER BY demo.demo_name ASC";				
 				
+				$sql_tools = "SELECT tools.tools_name AS 'software_name',
+								'' AS developer_name,
+								'' AS year,
+								menu_disk_title.menu_disk_title_id,
+								menu_types_main.menu_types_text
+								FROM menu_disk_title
+								LEFT JOIN menu_disk_title_tools ON (menu_disk_title.menu_disk_title_id = menu_disk_title_tools.menu_disk_title_id)
+								LEFT JOIN tools ON (menu_disk_title_tools.tools_id = tools.tools_id)
+								LEFT JOIN menu_types_main ON (menu_disk_title.menu_types_main_id = menu_types_main.menu_types_main_id)
+								WHERE menu_disk_title.menu_disk_id = '$menu_disk_id' AND menu_disk_title.menu_types_main_id = '3' ORDER BY tools.tools_name ASC";
 				
 				$temp_query = $mysqli->query("CREATE TEMPORARY TABLE temp ENGINE=MEMORY $sql_games") or die(mysqli_error());
 				$temp_query = $mysqli->query("INSERT INTO temp $sql_demos") or die(mysqli_error());
+				$temp_query = $mysqli->query("INSERT INTO temp $sql_tools") or die(mysqli_error());
 
 				$temp_query = $mysqli->query("SELECT * FROM temp GROUP BY menu_disk_title_id ORDER BY software_name ASC") or die("does not compute3");
 
@@ -279,9 +290,20 @@ if(isset($action) and $action=="delete_from_menu_disk")
 								LEFT JOIN menu_types_main ON (menu_disk_title.menu_types_main_id = menu_types_main.menu_types_main_id)
 								WHERE menu_disk_title.menu_disk_id = '$menu_disk_id' AND menu_disk_title.menu_types_main_id = '2' ORDER BY demo.demo_name ASC";				
 				
+				$sql_tools = "SELECT tools.tools_name AS 'software_name',
+								'' AS developer_name,
+								'' AS year,
+								menu_disk_title.menu_disk_title_id,
+								menu_types_main.menu_types_text
+								FROM menu_disk_title
+								LEFT JOIN menu_disk_title_tools ON (menu_disk_title.menu_disk_title_id = menu_disk_title_tools.menu_disk_title_id)
+								LEFT JOIN tools ON (menu_disk_title_tools.tools_id = tools.tools_id)
+								LEFT JOIN menu_types_main ON (menu_disk_title.menu_types_main_id = menu_types_main.menu_types_main_id)
+								WHERE menu_disk_title.menu_disk_id = '$menu_disk_id' AND menu_disk_title.menu_types_main_id = '3' ORDER BY tools.tools_name ASC";
 				
 				$temp_query = $mysqli->query("CREATE TEMPORARY TABLE temp ENGINE=MEMORY $sql_games") or die(mysqli_error());
 				$temp_query = $mysqli->query("INSERT INTO temp $sql_demos") or die(mysqli_error());
+				$temp_query = $mysqli->query("INSERT INTO temp $sql_tools") or die(mysqli_error());
 
 				$temp_query = $mysqli->query("SELECT * FROM temp GROUP BY menu_disk_title_id ORDER BY software_name ASC") or die("does not compute3");
 
