@@ -28,7 +28,7 @@ function deleteinterview(interview_id)
     var return_value = confirm(message);
 	if (return_value !="0")
     {
-      	url="interviews_delete.php?interview_id="+interview_id;
+      	url="db_interview.php?action=delete_interview&interview_id="+interview_id;
 		location.href=url;
     }
 }
