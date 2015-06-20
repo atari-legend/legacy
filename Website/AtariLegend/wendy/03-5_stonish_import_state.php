@@ -68,7 +68,7 @@ $count=$count+1;
 		
 		echo "<br/><br/>
 		
-		<a href=\"../wendy/stonish_import_state.php?action=do_update\">DO UPDATE</a><br/>
+		<a href=\"../wendy/03-5_stonish_import_state.php?action=do_update\">DO UPDATE</a><br/>
 		";
 		
 		}

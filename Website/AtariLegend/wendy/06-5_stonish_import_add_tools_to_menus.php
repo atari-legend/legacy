@@ -60,7 +60,7 @@ else {
 	<br/>
 	Make sure you have a database backup before continuing!<br/><br/>
 	
-	<a href=\"../wendy/stonish_import_add_tools_to_menus.php?continue=1\">Continue</a>";
+	<a href=\"../wendy/06-5_stonish_import_add_tools_to_menus.php?continue=1\">Continue</a>";
 	
 	
 }
