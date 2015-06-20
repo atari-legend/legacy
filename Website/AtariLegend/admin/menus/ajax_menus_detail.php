@@ -78,11 +78,9 @@ include("../includes/functions.php");
 						   'menu_state' => $row['menu_state']));
 				
 				//list of games for the menu disk
-				$sql_games = "SELECT game.game_id,
-								game.game_name,
-								pub_dev.pub_dev_id,
-								pub_dev.pub_dev_name,
-								game_year.game_year,
+				$sql_games = "SELECT game.game_name AS 'software_name',
+								pub_dev.pub_dev_name AS 'developer_name',
+								game_year.game_year AS 'year',
 								menu_disk_title.menu_disk_title_id,
 								menu_types_main.menu_types_text
 								FROM menu_disk_title
@@ -92,20 +90,39 @@ include("../includes/functions.php");
 								LEFT JOIN pub_dev ON (game_developer.dev_pub_id = pub_dev.pub_dev_id)
 								LEFT JOIN game_year ON (game.game_id = game_year.game_id)
 								LEFT JOIN menu_types_main ON (menu_disk_title.menu_types_main_id = menu_types_main.menu_types_main_id)
-								WHERE menu_disk_title.menu_disk_id = '$menu_disk_id' GROUP BY game.game_name ORDER BY game.game_name ASC";
+								WHERE menu_disk_title.menu_disk_id = '$menu_disk_id' AND menu_disk_title.menu_types_main_id = '1' ORDER BY game.game_name ASC";
 				
-				$result_games = $mysqli->query($sql_games);
+				$sql_demos = "SELECT demo.demo_name AS 'software_name',
+								crew.crew_name AS 'developer_name',
+								demo_year.demo_year AS 'year',
+								menu_disk_title.menu_disk_title_id,
+								menu_types_main.menu_types_text
+								FROM menu_disk_title
+								LEFT JOIN menu_disk_title_demo ON (menu_disk_title.menu_disk_title_id = menu_disk_title_demo.menu_disk_title_id)
+								LEFT JOIN demo ON (menu_disk_title_demo.demo_id = demo.demo_id)
+								LEFT JOIN demo_year ON (demo.demo_id = demo_year.demo_id)
+								LEFT JOIN crew_demo_prod ON (demo.demo_id = crew_demo_prod.demo_id)
+								LEFT JOIN crew ON (crew_demo_prod.crew_id = crew.crew_id)
+								LEFT JOIN menu_types_main ON (menu_disk_title.menu_types_main_id = menu_types_main.menu_types_main_id)
+								WHERE menu_disk_title.menu_disk_id = '$menu_disk_id' AND menu_disk_title.menu_types_main_id = '2' ORDER BY demo.demo_name ASC";				
 				
-				while  ($query_game = $result_games->fetch_array(MYSQLI_BOTH)) 
-				{ 		// This smarty is used for creating the list of games
+				
+				$temp_query = $mysqli->query("CREATE TEMPORARY TABLE temp ENGINE=MEMORY $sql_games") or die(mysqli_error());
+				$temp_query = $mysqli->query("INSERT INTO temp $sql_demos") or die(mysqli_error());
+
+				$temp_query = $mysqli->query("SELECT * FROM temp GROUP BY menu_disk_title_id ORDER BY software_name ASC") or die("does not compute3");
+
+				
+				while  ($query = $temp_query->fetch_array(MYSQLI_BOTH)) 
+				{ 		
+					
+					// This smarty is used for creating the list of games
 						$smarty->append('game',
-	    				array('game_id' => $query_game['game_id'],
-						  	  'game_name' => $query_game['game_name'],
-						  	  'developer_id' => $query_game['pub_dev_id'],
-						  	  'developer_name' => $query_game['pub_dev_name'],
-						  	  'game_year' => $query_game['game_year'],
-						  	  'menu_disk_title_id' => $query_game['menu_disk_title_id'],
-						  	  'menu_types_text' => $query_game['menu_types_text']));
+	    				array('game_name' => $query['software_name'],
+						  	  'developer_name' => $query['developer_name'],
+						  	  'year' => $query['year'],
+						  	  'menu_disk_title_id' => $query['menu_disk_title_id'],
+						  	  'menu_types_text' => $query['menu_types_text']));
 				}
 				
 
