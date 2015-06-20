@@ -77,7 +77,6 @@ include("../includes/functions.php");
 						   'crew_name' => $row['crew_name'],
 						   'menu_state' => $row['menu_state']));
 				
-				
 				//list of games for the menu disk
 				$sql_games = "SELECT game.game_id,
 								game.game_name,
