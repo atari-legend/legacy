@@ -142,16 +142,34 @@ header("Location: ../menus/menus_disk_list.php?menu_sets_id=$menu_sets_id");
 // Add game to menu disk AJAX DB job
 //**************************************************************************************** 
 
-if(isset($action) and $action=="add_game_to_menu")
+if(isset($action) and $action=="add_title_to_menu")
 {
-if(isset($game_id) and isset($menu_disk_id)) 
+if(isset($software_id) and isset($menu_disk_id)) 
 {		
+	if (isset($software_type) and $software_type=="Game")
+	{
 		//Insert new title in menu_disk_title table
 		$mysqli->query("INSERT INTO menu_disk_title (menu_disk_id,menu_types_main_id) VALUES ('$menu_disk_id','1')"); 
 		$last_id = $mysqli->insert_id; // Get Last autoinc id
 		// Specify title in menu_disk_title_game table
-		$mysqli->query("INSERT INTO menu_disk_title_game (menu_disk_title_id,game_id) VALUES ('$last_id','$game_id')"); 
-
+		$mysqli->query("INSERT INTO menu_disk_title_game (menu_disk_title_id,game_id) VALUES ('$last_id','$software_id')"); 
+	}
+	if (isset($software_type) and $software_type=="Demo")
+	{
+		$mysqli->query("INSERT INTO menu_disk_title (menu_disk_id,menu_types_main_id) VALUES ('$menu_disk_id','2')"); 	
+		$last_id = $mysqli->insert_id; // Get Last autoinc id
+		// Specify title in menu_disk_title_game table
+		$mysqli->query("INSERT INTO menu_disk_title_demo (menu_disk_title_id,demo_id) VALUES ('$last_id','$software_id')"); 			
+	}
+	if (isset($software_type) and $software_type=="Tool")
+	{
+		$mysqli->query("INSERT INTO menu_disk_title (menu_disk_id,menu_types_main_id) VALUES ('$menu_disk_id','3')"); 	
+		$last_id = $mysqli->insert_id; // Get Last autoinc id
+		// Specify title in menu_disk_title_game table
+		$mysqli->query("INSERT INTO menu_disk_title_tools (menu_disk_title_id,tools_id) VALUES ('$last_id','$software_id')"); 			
+	}	
+	
+		
 		// ok, insert done. Now this is a ajax job so we need a return value.
 		//
 			//list of games for the menu disk

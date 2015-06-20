@@ -227,7 +227,7 @@ function popAddGames(str) {
         xmlhttp.onreadystatechange = function() {
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
                 document.getElementById("menu_detail_expand").innerHTML = xmlhttp.responseText;
-                document.getElementById("gameto_menu_link").innerHTML = "<a onclick=\"closeAddGames("+str+")\" style=\"cursor: pointer;\" class=\"MAINNAV\">Add Game to menu</a>";
+                document.getElementById("gameto_menu_link").innerHTML = "<a onclick=\"closeAddGames("+str+")\" style=\"cursor: pointer;\" class=\"MAINNAV\">Add Game/Tool/Demo to menu</a>";
             }
         }
         xmlhttp.open("GET","../menus/ajax_addgames_menus.php?action=game_browse&list=full&query=num&menu_disk_id="+str,true);
@@ -237,7 +237,7 @@ function popAddGames(str) {
 
 function closeAddGames(str) {
         document.getElementById("menu_detail_expand").innerHTML = "";
-        document.getElementById("gameto_menu_link").innerHTML = "<a onclick=\"popAddGames("+str+")\" style=\"cursor: pointer;\" class=\"MAINNAV\">Add Game to menu</a>";
+        document.getElementById("gameto_menu_link").innerHTML = "<a onclick=\"popAddGames("+str+")\" style=\"cursor: pointer;\" class=\"MAINNAV\">Add Game/Tool/Demo to menu</a>";
         return;
 } 
 
@@ -292,8 +292,8 @@ function searchGame(str,menu_disk_id) {
     }
 }
 
-function addGametoMenu(game_id,menu_disk_id) {
- if (game_id == "") {
+function addGametoMenu(software_id,menu_disk_id,software_type) {
+ if (software_id == "") {
         document.getElementById("menu_software_list").innerHTML = "";
         return;
     } else { 
@@ -309,7 +309,7 @@ function addGametoMenu(game_id,menu_disk_id) {
                 document.getElementById("menu_software_list").innerHTML = xmlhttp.responseText;
             }
         }
-        xmlhttp.open("GET","../menus/db_menu_disk.php?action=add_game_to_menu&game_id="+game_id+"&menu_disk_id="+menu_disk_id,true);
+        xmlhttp.open("GET","../menus/db_menu_disk.php?action=add_title_to_menu&software_id="+software_id+"&menu_disk_id="+menu_disk_id+"&software_type="+software_type,true);
         xmlhttp.send();
     } 
 }
