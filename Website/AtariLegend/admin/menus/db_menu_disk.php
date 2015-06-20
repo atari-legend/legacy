@@ -77,6 +77,34 @@ header("Location: ../menus/menus_disk_list.php?menu_sets_id=$menu_sets_id");
 
 }
 
+
+//****************************************************************************************
+// MULTI Add new menu disk
+//**************************************************************************************** 
+
+if(isset($action) and $action=="multi_add_new_menu_disk")
+{
+	if ($first_disk!=='' and $last_disk!=='')
+	{	
+		//First disk must me a smaller number then last disk
+		if($first_disk < $last_disk)
+			{	
+			$i = $first_disk;
+			
+			while ($i <= $last_disk)
+				{
+					$sql = $mysqli->query("INSERT INTO menu_disk (menu_sets_id,menu_disk_number) VALUES ('$menu_sets_id','$i')");
+				$i++;
+				}
+				
+			}
+	
+	}
+
+header("Location: ../menus/menus_disk_list.php?menu_sets_id=$menu_sets_id");
+
+}
+
 //****************************************************************************************
 // Edit menu_set name
 //**************************************************************************************** 
