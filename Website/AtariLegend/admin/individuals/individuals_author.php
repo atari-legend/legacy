@@ -16,30 +16,6 @@
 
 include("../includes/common.php");
 
-if ( isset($action) and $action == 'insert' )
-{
-	$sql_author = $mysqli->query("INSERT INTO author_type (author_type_info) VALUES ('$newtype')")
-				  or die("Couldn't insert into author_type");
-	
-	$smarty->assign("message",'Insert succesfull');
-}
-
-if ( isset($action) and $action == 'edit' )
-{
-	$sql_author = $mysqli->query("UPDATE author_type set author_type_info='$newtype' WHERE author_type_id=$type_id")
-				  or die("Couldn't edit the author type");
-	
-	$smarty->assign("message",'Update succesfull');
-}
-
-if ( isset($action) and $action == 'delete' )
-{
-	$sql_author = $mysqli->query("DELETE FROM author_type WHERE author_type_id = $type_id")
-				  or die("Couldn't delete from author_type");
-	
-	$smarty->assign("message",'Delete succesfull');
-}
-
 if ( isset($action) and $action == 'load' )
 {
 		
