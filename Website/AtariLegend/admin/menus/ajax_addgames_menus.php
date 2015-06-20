@@ -187,8 +187,6 @@ include("../includes/functions.php");
 					$smarty->assign('smarty_action', 'inner_list');
 				}
 
-
-
 //Send all smarty variables to the templates
 $smarty->display('file:../templates/0/ajax_menus_add_games.html');
 ?>

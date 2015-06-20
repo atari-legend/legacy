@@ -169,7 +169,6 @@ if(isset($software_id) and isset($menu_disk_id))
 		$mysqli->query("INSERT INTO menu_disk_title_tools (menu_disk_title_id,tools_id) VALUES ('$last_id','$software_id')"); 			
 	}	
 	
-		
 		// ok, insert done. Now this is a ajax job so we need a return value.
 		//
 			//list of games for the menu disk
