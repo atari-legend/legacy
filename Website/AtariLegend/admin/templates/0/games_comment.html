@@ -27,15 +27,14 @@ function commentdelete(JScomID,JSusers_id)
 </script>
 {/block}
 {block name=title}Comments Games{/block}
+{block name=quicklinks} {/block}
 {block name=body}
 <div id="top"></div>
 
-<div class="NEWMAINCELL" style="display:block; margin-left:auto;margin-right: auto;">
-	<fieldset class="game_set" style="padding:5px;width:95%;margin-left:auto;margin-right: auto;text-align:center;">
-
+<div class="NEWMAINCELL" id="NEWMAINCELL_games_comment">
+	<fieldset class="game_set" id="game_set_games_comment">
 				This is the user comment edit page. Overhere you can edit or delete user comments for games. 
 				There is currently a total of <b>{$total_nr_comments}</b> comments in the AL DB!
-
 	</fieldset> 
 
 
@@ -49,17 +48,17 @@ function commentdelete(JScomID,JSusers_id)
 			
 			<div class="comment_box_top">
 			
-				<div class="comment_box_top_left" style="margin-right:10px;">
+				<div class="comment_box_top_left">
 
 						Posted by <a href="../user/user_detail.php?user_id_selected={$line.users_id}" class="links_links">{$line.user_name}</a>
 				</div>
-				<div class="comment_box_top_right" style="">
+				<div class="comment_box_top_right">
 					<span style=""><a href="../games/games_detail.php?game_id={$line.game_id}" class="links_links">{$line.game}</a></span>
 					<span style="float:right;">{$line.date}</span>
 				</div>
 			</div>
 			<div class="comment_box_middle">
-				<div class="comment_box_middle_left" style="">
+				<div class="comment_box_middle_left">
 						{if isset($line.avatar_image) and $line.avatar_image != ''}
 						<img src="../includes/show_image.php?file={if isset($line.avatar_image)}{$line.avatar_image}{/if}&amp;resize=80,null,null,null&amp;crop=null,null,null,null" alt="Avatar">
 						<br/>
@@ -70,7 +69,7 @@ function commentdelete(JScomID,JSusers_id)
 						Game Submissions: {$line.usersubmit_number}<br/>
 						Karma: {$line.karma}<br/>
 				</div>
-				<div class="comment_box_middle_right" style="">
+				<div class="comment_box_middle_right">
 					
 						{if isset($line.image) and $line.image != ''}
 								<a href="../games/games_detail.php?game_id={$line.game_id}">
@@ -81,11 +80,11 @@ function commentdelete(JScomID,JSusers_id)
 				
 				</div>
 			</div>
-			<div class="comment_box_bottom" style="">
-				<div class="comment_box_bottom_left" style="">
+			<div class="comment_box_bottom">
+				<div class="comment_box_bottom_left">
 						<a href="#top" class="MAINNAV">Back to top</a>
 				</div>
-				<div class="comment_box_bottom_right" style="">
+				<div class="comment_box_bottom_right">
 					
 						{if $line.email != ''}
 							<a href="mailto:{$line.email}?subject=Comment of {$line.game} at Atari Legend">
@@ -113,11 +112,11 @@ function commentdelete(JScomID,JSusers_id)
 			
 	<div style="margin-left:100px;margin-right:100px;">
 	{if $links.linkback != ''}
-		<a href ="../games/games_comment.php{$links.linkback}" class="click_button_next" style="float:left;">Previous news</a>
+		<a href ="../games/games_comment.php{$links.linkback}" class="click_button_next" style="float:left;">Previous Comments</a>
 	{/if}
 
 	{if $links.linknext != ''}
-		<a href="../games/games_comment.php{$links.linknext}" class="click_button_next" style="float:right;">Next news</a>
+		<a href="../games/games_comment.php{$links.linknext}" class="click_button_next" style="float:right;">Next Comments</a>
 	{/if}
 	</div>
 

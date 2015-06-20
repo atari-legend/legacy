@@ -35,17 +35,17 @@ used to create the querystring later.
 		//check the $gamebrowse select
 		if (empty($gamebrowse) or $gamebrowse == '-')
 		{
-			$gamebrowse_select = "game_name LIKE '%'";
-			$akabrowse_select = "game_name LIKE '%'";
+			$gamebrowse_select = "game.game_name LIKE '%'";
+			$akabrowse_select = "game_aka.aka_name LIKE '%'";
 		}
 		elseif ($gamebrowse == 'num')
 		{
-			$gamebrowse_select = "game_name REGEXP '^[0-9].*'";
+			$gamebrowse_select = "game.game_name REGEXP '^[0-9].*'";
 			$akabrowse_select = "game_aka.aka_name REGEXP '^[0-9].*'";
 		}
 		else
 		{
-			$gamebrowse_select = "game_name LIKE '$gamebrowse%'";
+			$gamebrowse_select = "game.game_name LIKE '$gamebrowse%'";
 			$akabrowse_select = "game_aka.aka_name LIKE '$gamebrowse%'";
 		}
 		
@@ -409,6 +409,15 @@ querystring for faster output
 		
 		}
 				$smarty->assign("user_id",$_SESSION['user_id']);
+				
+				// Create dropdown values a-z
+				$az_value = az_dropdown_value(0);
+				$az_output = az_dropdown_output(0);
+						   
+				$smarty->assign('az_value', $az_value);
+				$smarty->assign('az_output', $az_output);	
+				
+				
 
 				$smarty->display('file:../templates/0/games_list.html');
 			}

@@ -2,7 +2,6 @@
 {if isset($smarty_action) and $smarty_action == "edit_disk_box"}
 			
 			<td colspan="4" style="width:100%;margin:0px;padding:0px;">
-				
 				<table class="inner_table">
 					<tr>
 						<th style="width:40%;"><a onclick="CloseeditDisk({$menus.menu_disk_id})" style="cursor: pointer;" class="MAINNAV">{$menus.menu_disk_name}</a></th>
@@ -17,9 +16,7 @@
 						
 						<ul id="menu_disk_detail_links">
 						<li id="intro_credit_link"><a onclick="popAddIntroCred({$menus.menu_disk_id})" style="cursor: pointer;" class="MAINNAV">Add intro credits</a></li>
-						<li id="gameto_menu_link"><a onclick="popAddGames({$menus.menu_disk_id})" style="cursor: pointer;" class="MAINNAV">Add Game to menu</a></li>
-						<li id="toolto_menu_link"><a onclick="CloseeditDisk({$menus.menu_disk_id})" style="cursor: pointer;" class="MAINNAV">Add Tool to menu</a></li>
-						<li id="demoto_menu_link"><a onclick="CloseeditDisk({$menus.menu_disk_id})" style="cursor: pointer;" class="MAINNAV">Add Demo to menu</a></li>
+						<li id="gameto_menu_link"><a onclick="popAddGames({$menus.menu_disk_id})" style="cursor: pointer;" class="MAINNAV">Add Game/Tool/Demo to menu</a></li>
 						<li id="gamedocto_menu_link"><a onclick="CloseeditDisk({$menus.menu_disk_id})" style="cursor: pointer;" class="MAINNAV">Add Game Doc to menu</a></li>
 						<li id="gamedocto_menu_link"><a onclick="CloseeditDisk({$menus.menu_disk_id})" style="cursor: pointer;" class="MAINNAV">Add Tool Doc to menu</a></li>
 						</ul>
@@ -37,7 +34,8 @@
 			{foreach from=$game item=line}
 			<tr class="table_game_list">
 				<td class="table_game_list" style="width:5%;margin:0px;border:0px;">
-					<input type="checkbox" name="game_id[]" value="{$line.game_id}">
+					<form name="MenuDiskContent" id="MenuDiskContent">
+					<input type="checkbox" id="menu_disk_title_id{$line.menu_disk_title_id}" name="menu_disk_title_id[]" value="{$line.menu_disk_title_id}" onchange="deleteGamefromMenu({$line.menu_disk_title_id},{$menu_disk_id})">
 				</td>
 				<td class="table_game_list" style="width:25%;margin:0px;border:0px;">{if $line.game_name != ''}<a href="games_detail.php?game_id={$line.game_id}" class="MAINNAV">{$line.game_name}</a>
 						{else}<i>n/a</i>{/if}
@@ -65,10 +63,10 @@
 			{/foreach}
 							<tr>
 					<td class="game_list_footer" colspan="5">
-						<input type="hidden" name="series_page" value="series_editor">
-						<input type="hidden" name="action" value="add_to_series">
 						<img src="../templates/0/images/arrow_ltr.gif" alt="" width="38" height="22" style="float:left;">
-						<input type="submit" value="Delete from menu disk" style="float:left;">
+						<input type="hidden" name="action" value="delete_from_menu_disk">
+						<input type="button" value="Delete from menu disk" style="float:left;">
+						</form>
 					</td>
 				</tr>
 			</table>
@@ -137,7 +135,8 @@
 			{foreach from=$game item=line}
 			<tr class="table_game_list">
 				<td class="table_game_list" style="width:5%;margin:0px;border:0px;">
-					<input type="checkbox" name="game_id[]" value="{$line.game_id}">
+					<form name="MenuDiskContent" id="MenuDiskContent">
+					<input type="checkbox" id="menu_disk_title_id{$line.menu_disk_title_id}" name="menu_disk_title_id[]" value="{$line.menu_disk_title_id}" onchange="deleteGamefromMenu({$line.menu_disk_title_id},{$menu_disk_id})">
 				</td>
 				<td class="table_game_list" style="width:25%;margin:0px;border:0px;">{if $line.game_name != ''}<a href="games_detail.php?game_id={$line.game_id}" class="MAINNAV">{$line.game_name}</a>
 						{else}<i>n/a</i>{/if}
@@ -165,10 +164,10 @@
 			{/foreach}
 							<tr>
 					<td class="game_list_footer" colspan="5">
-						<input type="hidden" name="series_page" value="series_editor">
-						<input type="hidden" name="action" value="add_to_series">
 						<img src="../templates/0/images/arrow_ltr.gif" alt="" width="38" height="22" style="float:left;">
-						<input type="submit" value="Delete from menu disk" style="float:left;">
+						<input type="hidden" name="action" value="delete_from_menu_disk">
+						<input type="button" value="Delete from menu disk" style="float:left;">
+						</form>
 					</td>
 				</tr>
 			</table>

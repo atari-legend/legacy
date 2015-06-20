@@ -36,6 +36,7 @@
 	.leftcell {	display:block; width: 320px;  }
 	.quicklinkbox { display:block;text-align:center;width:320px;padding:2px; margin-left: auto; margin-right:auto;}
 	.interview_set {width: 320px;background-color: white;text-align:left;padding:4px;}
+	#NEWMAINCELL_games_comment {width: 470px;float:left;}
 }
 
 /* for the lower resolutions, we don't have the menu bar below the top so we need to reposition the content below the nav */ 
@@ -45,7 +46,7 @@
 	.leftcell {	display:block; width: 320px;  }
 	.quicklinkbox { display:block;text-align:center;width:320px;padding:2px; margin-left: auto; margin-right:auto;}
 	.interview_set {width: 320px;background-color: white;text-align:left;padding:4px;}
-
+	#NEWMAINCELL_games_comment {width: 470px;float:left;}
 }
 
 /* for the high resolutions, we have the navbar so we need to position the content */ 
@@ -673,4 +674,21 @@ background-color: white;
 
 	list-style: none;
 	margin-left:10px;
+}
+
+#game_set_games_comment 
+{
+	padding:5px;
+	width:95%;
+	margin-left:auto;
+	margin-right: auto;
+	text-align:center;
+
+}
+
+#NEWMAINCELL_games_comment 
+{
+	display:block; 
+	margin-left:auto;
+	margin-right: auto;
 }
