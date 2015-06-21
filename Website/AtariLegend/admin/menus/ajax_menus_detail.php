@@ -259,7 +259,14 @@ if (isset($action) and $action=="ind_gen_browse")
 			$mysqli->query("CREATE TEMPORARY TABLE temp ENGINE=MEMORY $sql_individuals") or die("failed to create temporary table");
 			$mysqli->query("INSERT INTO temp $sql_aka") or die("failed to insert akas into temporary table");
 			
+			if($query=="num")
+			{
+			$query_temporary = $mysqli->query("SELECT * FROM temp WHERE ind_name REGEXP '^[0-9].*' ORDER BY ind_name ASC") or die("Failed to query temporary table");	
+			}
+			else
+			{
 			$query_temporary = $mysqli->query("SELECT * FROM temp WHERE ind_name LIKE '$query%' ORDER BY ind_name ASC") or die("Failed to query temporary table");
+			}
 			$mysqli->query("DROP TABLE temp");
 						
 			}
