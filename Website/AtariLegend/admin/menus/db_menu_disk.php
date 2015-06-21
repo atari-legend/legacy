@@ -369,9 +369,80 @@ if(isset($ind_id) and isset($author_type_id) and isset($menu_disk_id))
 		//Insert individual into the menu_disk credits table
 		$mysqli->query("INSERT INTO menu_disk_credits (menu_disk_id,ind_id,author_type_id) VALUES ('$menu_disk_id','$ind_id','$author_type_id')"); 
 
-
-
+				// Get the menudisk credits
+				$sql_individuals = "SELECT 
+									individuals.ind_id,
+									individuals.ind_name,
+									menu_disk_credits.menu_disk_credits_id,
+									author_type.author_type_info
+									FROM individuals 
+									LEFT JOIN menu_disk_credits ON (individuals.ind_id = menu_disk_credits.ind_id)
+									LEFT JOIN author_type ON (menu_disk_credits.author_type_id = author_type.author_type_id)
+									WHERE menu_disk_credits.menu_disk_id = '$menu_disk_id'
+									ORDER BY individuals.ind_name ASC";
+				
+				$query_individual = $mysqli->query($sql_individuals);
+				
+				while  ($query = $query_individual->fetch_array(MYSQLI_BOTH)) 
+				{
+						// This smarty is used for for the menu_disk credits
+						$smarty->append('individuals',
+	    				array('menu_disk_credits_id' => $query['menu_disk_credits_id'],
+						  	  'ind_id' => $query['ind_id'],
+						  	  'ind_name' => $query['ind_name'],
+						  	  'menu_disk_id' => $menu_disk_id,
+						  	  'author_type_info' => $query['author_type_info']));
+				
+				}
+				
+				
+				$smarty->assign('smarty_action', 'update_menu_disk_credits');
+				//Send to smarty for return value
+				$smarty->display('file:../templates/0/ajax_menus_detail.html');
 }
 }
 
+//****************************************************************************************
+// DELETE MENU CREDITS
+//**************************************************************************************** 
+
+if(isset($action) and $action=="delete_menu_disk_credits")
+{
+if(isset($menu_disk_credits_id)) 
+{
+		//Insert individual into the menu_disk credits table
+		$mysqli->query("DELETE FROM menu_disk_credits WHERE menu_disk_credits_id = '$menu_disk_credits_id'"); 
+
+				// Get the menudisk credits
+				$sql_individuals = "SELECT 
+									individuals.ind_id,
+									individuals.ind_name,
+									menu_disk_credits.menu_disk_credits_id,
+									author_type.author_type_info
+									FROM individuals 
+									LEFT JOIN menu_disk_credits ON (individuals.ind_id = menu_disk_credits.ind_id)
+									LEFT JOIN author_type ON (menu_disk_credits.author_type_id = author_type.author_type_id)
+									WHERE menu_disk_credits.menu_disk_id = '$menu_disk_id'
+									ORDER BY individuals.ind_name ASC";
+				
+				$query_individual = $mysqli->query($sql_individuals);
+				
+				while  ($query = $query_individual->fetch_array(MYSQLI_BOTH)) 
+				{
+						// This smarty is used for for the menu_disk credits
+						$smarty->append('individuals',
+	    				array('menu_disk_credits_id' => $query['menu_disk_credits_id'],
+						  	  'ind_id' => $query['ind_id'],
+						  	  'ind_name' => $query['ind_name'],
+						  	  'menu_disk_id' => $menu_disk_id,
+						  	  'author_type_info' => $query['author_type_info']));
+				
+				}
+				
+				
+				$smarty->assign('smarty_action', 'update_menu_disk_credits');
+				//Send to smarty for return value
+				$smarty->display('file:../templates/0/ajax_menus_detail.html');
+}
+}
 
