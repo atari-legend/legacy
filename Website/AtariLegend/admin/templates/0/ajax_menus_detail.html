@@ -97,7 +97,7 @@
 							<div style="display:block;width:220px;margin-left:10px;text-align:center;float:left;">	
 							<hr>
 							{* Start Individual add box *}
-							<FORM action="" method="post" id="hidden_ajax">
+							<FORM action="" method="post" id="menu_credits_form">
 						
 							<br/>
 							Add intro credits:<br/>
@@ -113,13 +113,15 @@
 								</SELECT>
 							</div>	      
 								<SELECT id="author_type_id" name="author_type_id" size="1" style="margin:5px;margin-top:0px;width:200px;">
+								<option value="">-</option>	
 								{foreach from=$author_type item=line}
 								<option value="{$line.author_type_id}">{$line.author_type_info}</option>
 								{/foreach}	
 								</SELECT>
 							
-							<input type="hidden" name="action" value="add_member" style="margin:5px;vertical-align:top;">
-							<INPUT type="submit" value="Add Crewmember">
+							<input type="hidden" name="action" value="add_intro_credits">
+							<input type="hidden" name="menu_disk_id" value="{$menu_disk_id}">
+							<INPUT type="button" value="Add Crewmember" onclick="addCreditstoMenu({$menu_disk_id})">
 							</FORM>
 							{* END Individual add box *}
 							<hr>
