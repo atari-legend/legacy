@@ -356,36 +356,22 @@ if(isset($action) and $action=="delete_from_menu_disk")
 	//Send to smarty for return value
 	$smarty->display('file:../templates/0/ajax_menus_detail.html');
 
-
-
-
-
-
-
-
-
-
-
-
 }
-
-
 
 //****************************************************************************************
-// delete serie
+// ADD MENU CREDITS!
 //**************************************************************************************** 
 
-if($action=="delete_gameseries")
+if(isset($action) and $action=="add_intro_credits")
 {
-if(isset($game_series_id)) 
+if(isset($ind_id) and isset($author_type_id) and isset($menu_disk_id)) 
 {
-	$mysqli->query("DELETE FROM game_series WHERE game_series_id='$game_series_id'"); 
-	$mysqli->query("DELETE FROM game_series_cross WHERE game_series_id='$game_series_id'"); 
-	mysqli_free_result(); 
+		//Insert individual into the menu_disk credits table
+		$mysqli->query("INSERT INTO menu_disk_credits (menu_disk_id,ind_id,author_type_id) VALUES ('$menu_disk_id','$ind_id','$author_type_id')"); 
+
+
+
 }
-
-header("Location: ../games/games_series_main.php");
-
 }
 
 

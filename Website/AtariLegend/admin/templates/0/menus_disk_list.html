@@ -326,9 +326,7 @@ function deleteGamefromMenu(str,menu_disk_id) {
 		
          if (return_value !="0") 
          { 
-			
-			
-			
+
 			if (str == "") {
         document.getElementById("menu_software_list").innerHTML = "";
         return;
@@ -347,13 +345,36 @@ function deleteGamefromMenu(str,menu_disk_id) {
         }
         xmlhttp.open("GET","../menus/db_menu_disk.php?action=delete_from_menu_disk&menu_disk_title_id="+str+"&menu_disk_id="+menu_disk_id,true);
         xmlhttp.send();
-    } 
-			
-
+			}		 
          }  
-
-	
 }
+
+function addCreditstoMenu(menu_disk_id) {
+ if (menu_disk_id == "") {
+        document.getElementById("menu_software_list").innerHTML = "";
+        return;
+    } else { 
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("menu_software_list").innerHTML = xmlhttp.responseText;
+            }
+        }
+        
+        var ind_id = document.getElementById("menu_credits_form").elements.namedItem("ind_id").value;
+        var author_type_id = document.getElementById("menu_credits_form").elements.namedItem("author_type_id").value;
+        
+        xmlhttp.open("GET","../menus/db_menu_disk.php?action=add_intro_credits&author_type_id="+author_type_id+"&menu_disk_id="+menu_disk_id+"&ind_id="+ind_id,true);
+        xmlhttp.send();
+    } 
+}
+
 </script>
 {/block}
 {block name=title}Menus Search results{/block}
