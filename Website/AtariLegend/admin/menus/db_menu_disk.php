@@ -77,6 +77,34 @@ header("Location: ../menus/menus_disk_list.php?menu_sets_id=$menu_sets_id");
 
 }
 
+
+//****************************************************************************************
+// MULTI Add new menu disk
+//**************************************************************************************** 
+
+if(isset($action) and $action=="multi_add_new_menu_disk")
+{
+	if ($first_disk!=='' and $last_disk!=='')
+	{	
+		//First disk must me a smaller number then last disk
+		if($first_disk < $last_disk)
+			{	
+			$i = $first_disk;
+			
+			while ($i <= $last_disk)
+				{
+					$sql = $mysqli->query("INSERT INTO menu_disk (menu_sets_id,menu_disk_number) VALUES ('$menu_sets_id','$i')");
+				$i++;
+				}
+				
+			}
+	
+	}
+
+header("Location: ../menus/menus_disk_list.php?menu_sets_id=$menu_sets_id");
+
+}
+
 //****************************************************************************************
 // Edit menu_set name
 //**************************************************************************************** 
@@ -172,11 +200,9 @@ if(isset($software_id) and isset($menu_disk_id))
 		// ok, insert done. Now this is a ajax job so we need a return value.
 		//
 			//list of games for the menu disk
-				$sql_games = "SELECT game.game_id,
-								game.game_name,
-								pub_dev.pub_dev_id,
-								pub_dev.pub_dev_name,
-								game_year.game_year,
+				$sql_games = "SELECT game.game_name AS 'software_name',
+								pub_dev.pub_dev_name AS 'developer_name',
+								game_year.game_year AS 'year',
 								menu_disk_title.menu_disk_title_id,
 								menu_types_main.menu_types_text
 								FROM menu_disk_title
@@ -186,20 +212,50 @@ if(isset($software_id) and isset($menu_disk_id))
 								LEFT JOIN pub_dev ON (game_developer.dev_pub_id = pub_dev.pub_dev_id)
 								LEFT JOIN game_year ON (game.game_id = game_year.game_id)
 								LEFT JOIN menu_types_main ON (menu_disk_title.menu_types_main_id = menu_types_main.menu_types_main_id)
-								WHERE menu_disk_title.menu_disk_id = '$menu_disk_id' GROUP BY game.game_name ORDER BY game.game_name ASC";
+								WHERE menu_disk_title.menu_disk_id = '$menu_disk_id' AND menu_disk_title.menu_types_main_id = '1' ORDER BY game.game_name ASC";
 				
-				$result_games = $mysqli->query($sql_games);
+				$sql_demos = "SELECT demo.demo_name AS 'software_name',
+								crew.crew_name AS 'developer_name',
+								demo_year.demo_year AS 'year',
+								menu_disk_title.menu_disk_title_id,
+								menu_types_main.menu_types_text
+								FROM menu_disk_title
+								LEFT JOIN menu_disk_title_demo ON (menu_disk_title.menu_disk_title_id = menu_disk_title_demo.menu_disk_title_id)
+								LEFT JOIN demo ON (menu_disk_title_demo.demo_id = demo.demo_id)
+								LEFT JOIN demo_year ON (demo.demo_id = demo_year.demo_id)
+								LEFT JOIN crew_demo_prod ON (demo.demo_id = crew_demo_prod.demo_id)
+								LEFT JOIN crew ON (crew_demo_prod.crew_id = crew.crew_id)
+								LEFT JOIN menu_types_main ON (menu_disk_title.menu_types_main_id = menu_types_main.menu_types_main_id)
+								WHERE menu_disk_title.menu_disk_id = '$menu_disk_id' AND menu_disk_title.menu_types_main_id = '2' ORDER BY demo.demo_name ASC";				
 				
-				while  ($query_game = $result_games->fetch_array(MYSQLI_BOTH)) 
-				{ 		// This smarty is used for creating the list of games
+				$sql_tools = "SELECT tools.tools_name AS 'software_name',
+								'' AS developer_name,
+								'' AS year,
+								menu_disk_title.menu_disk_title_id,
+								menu_types_main.menu_types_text
+								FROM menu_disk_title
+								LEFT JOIN menu_disk_title_tools ON (menu_disk_title.menu_disk_title_id = menu_disk_title_tools.menu_disk_title_id)
+								LEFT JOIN tools ON (menu_disk_title_tools.tools_id = tools.tools_id)
+								LEFT JOIN menu_types_main ON (menu_disk_title.menu_types_main_id = menu_types_main.menu_types_main_id)
+								WHERE menu_disk_title.menu_disk_id = '$menu_disk_id' AND menu_disk_title.menu_types_main_id = '3' ORDER BY tools.tools_name ASC";
+				
+				$temp_query = $mysqli->query("CREATE TEMPORARY TABLE temp ENGINE=MEMORY $sql_games") or die(mysqli_error());
+				$temp_query = $mysqli->query("INSERT INTO temp $sql_demos") or die(mysqli_error());
+				$temp_query = $mysqli->query("INSERT INTO temp $sql_tools") or die(mysqli_error());
+
+				$temp_query = $mysqli->query("SELECT * FROM temp GROUP BY menu_disk_title_id ORDER BY software_name ASC") or die("does not compute3");
+
+				
+				while  ($query = $temp_query->fetch_array(MYSQLI_BOTH)) 
+				{ 		
+					
+					// This smarty is used for creating the list of games
 						$smarty->append('game',
-	    				array('game_id' => $query_game['game_id'],
-						  	  'game_name' => $query_game['game_name'],
-						  	  'developer_id' => $query_game['pub_dev_id'],
-						  	  'developer_name' => $query_game['pub_dev_name'],
-						  	  'game_year' => $query_game['game_year'],
-						  	  'menu_disk_title_id' => $query_game['menu_disk_title_id'],
-						  	  'menu_types_text' => $query_game['menu_types_text']));
+	    				array('game_name' => $query['software_name'],
+						  	  'developer_name' => $query['developer_name'],
+						  	  'year' => $query['year'],
+						  	  'menu_disk_title_id' => $query['menu_disk_title_id'],
+						  	  'menu_types_text' => $query['menu_types_text']));
 				}
 				
 
@@ -234,11 +290,9 @@ if(isset($action) and $action=="delete_from_menu_disk")
 		// ok, delete done. Now this is a ajax job so we need a return value.
 		//
 			//list of games for the menu disk
-				$sql_games = "SELECT game.game_id,
-								game.game_name,
-								pub_dev.pub_dev_id,
-								pub_dev.pub_dev_name,
-								game_year.game_year,
+				$sql_games = "SELECT game.game_name AS 'software_name',
+								pub_dev.pub_dev_name AS 'developer_name',
+								game_year.game_year AS 'year',
 								menu_disk_title.menu_disk_title_id,
 								menu_types_main.menu_types_text
 								FROM menu_disk_title
@@ -248,20 +302,50 @@ if(isset($action) and $action=="delete_from_menu_disk")
 								LEFT JOIN pub_dev ON (game_developer.dev_pub_id = pub_dev.pub_dev_id)
 								LEFT JOIN game_year ON (game.game_id = game_year.game_id)
 								LEFT JOIN menu_types_main ON (menu_disk_title.menu_types_main_id = menu_types_main.menu_types_main_id)
-								WHERE menu_disk_title.menu_disk_id = '$menu_disk_id' GROUP BY game.game_name ORDER BY game.game_name ASC";
+								WHERE menu_disk_title.menu_disk_id = '$menu_disk_id' AND menu_disk_title.menu_types_main_id = '1' ORDER BY game.game_name ASC";
 				
-				$result_games = $mysqli->query($sql_games);
+				$sql_demos = "SELECT demo.demo_name AS 'software_name',
+								crew.crew_name AS 'developer_name',
+								demo_year.demo_year AS 'year',
+								menu_disk_title.menu_disk_title_id,
+								menu_types_main.menu_types_text
+								FROM menu_disk_title
+								LEFT JOIN menu_disk_title_demo ON (menu_disk_title.menu_disk_title_id = menu_disk_title_demo.menu_disk_title_id)
+								LEFT JOIN demo ON (menu_disk_title_demo.demo_id = demo.demo_id)
+								LEFT JOIN demo_year ON (demo.demo_id = demo_year.demo_id)
+								LEFT JOIN crew_demo_prod ON (demo.demo_id = crew_demo_prod.demo_id)
+								LEFT JOIN crew ON (crew_demo_prod.crew_id = crew.crew_id)
+								LEFT JOIN menu_types_main ON (menu_disk_title.menu_types_main_id = menu_types_main.menu_types_main_id)
+								WHERE menu_disk_title.menu_disk_id = '$menu_disk_id' AND menu_disk_title.menu_types_main_id = '2' ORDER BY demo.demo_name ASC";				
 				
-				while  ($query_game = $result_games->fetch_array(MYSQLI_BOTH)) 
-				{ 		// This smarty is used for creating the list of games
+				$sql_tools = "SELECT tools.tools_name AS 'software_name',
+								'' AS developer_name,
+								'' AS year,
+								menu_disk_title.menu_disk_title_id,
+								menu_types_main.menu_types_text
+								FROM menu_disk_title
+								LEFT JOIN menu_disk_title_tools ON (menu_disk_title.menu_disk_title_id = menu_disk_title_tools.menu_disk_title_id)
+								LEFT JOIN tools ON (menu_disk_title_tools.tools_id = tools.tools_id)
+								LEFT JOIN menu_types_main ON (menu_disk_title.menu_types_main_id = menu_types_main.menu_types_main_id)
+								WHERE menu_disk_title.menu_disk_id = '$menu_disk_id' AND menu_disk_title.menu_types_main_id = '3' ORDER BY tools.tools_name ASC";
+				
+				$temp_query = $mysqli->query("CREATE TEMPORARY TABLE temp ENGINE=MEMORY $sql_games") or die(mysqli_error());
+				$temp_query = $mysqli->query("INSERT INTO temp $sql_demos") or die(mysqli_error());
+				$temp_query = $mysqli->query("INSERT INTO temp $sql_tools") or die(mysqli_error());
+
+				$temp_query = $mysqli->query("SELECT * FROM temp GROUP BY menu_disk_title_id ORDER BY software_name ASC") or die("does not compute3");
+
+				
+				while  ($query = $temp_query->fetch_array(MYSQLI_BOTH)) 
+				{ 		
+					
+					// This smarty is used for creating the list of games
 						$smarty->append('game',
-	    				array('game_id' => $query_game['game_id'],
-						  	  'game_name' => $query_game['game_name'],
-						  	  'developer_id' => $query_game['pub_dev_id'],
-						  	  'developer_name' => $query_game['pub_dev_name'],
-						  	  'game_year' => $query_game['game_year'],
-						  	  'menu_disk_title_id' => $query_game['menu_disk_title_id'],
-						  	  'menu_types_text' => $query_game['menu_types_text']));
+	    				array('game_name' => $query['software_name'],
+						  	  'developer_name' => $query['developer_name'],
+						  	  'year' => $query['year'],
+						  	  'menu_disk_title_id' => $query['menu_disk_title_id'],
+						  	  'menu_types_text' => $query['menu_types_text']));
 				}
 				
 
@@ -272,36 +356,22 @@ if(isset($action) and $action=="delete_from_menu_disk")
 	//Send to smarty for return value
 	$smarty->display('file:../templates/0/ajax_menus_detail.html');
 
-
-
-
-
-
-
-
-
-
-
-
 }
-
-
 
 //****************************************************************************************
-// delete serie
+// ADD MENU CREDITS!
 //**************************************************************************************** 
 
-if($action=="delete_gameseries")
+if(isset($action) and $action=="add_intro_credits")
 {
-if(isset($game_series_id)) 
+if(isset($ind_id) and isset($author_type_id) and isset($menu_disk_id)) 
 {
-	$mysqli->query("DELETE FROM game_series WHERE game_series_id='$game_series_id'"); 
-	$mysqli->query("DELETE FROM game_series_cross WHERE game_series_id='$game_series_id'"); 
-	mysqli_free_result(); 
+		//Insert individual into the menu_disk credits table
+		$mysqli->query("INSERT INTO menu_disk_credits (menu_disk_id,ind_id,author_type_id) VALUES ('$menu_disk_id','$ind_id','$author_type_id')"); 
+
+
+
 }
-
-header("Location: ../games/games_series_main.php");
-
 }
 
 
