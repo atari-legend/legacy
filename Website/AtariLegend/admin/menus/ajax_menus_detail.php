@@ -157,6 +157,7 @@ include("../includes/functions.php");
 	    				array('menu_disk_credits_id' => $query['menu_disk_credits_id'],
 						  	  'ind_id' => $query['ind_id'],
 						  	  'ind_name' => $query['ind_name'],
+						  	  'menu_disk_id' => $menu_disk_id,
 						  	  'author_type_info' => $query['author_type_info']));
 				
 				}
