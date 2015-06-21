@@ -22,6 +22,96 @@ include("../includes/common.php");
 date_default_timezone_set('UTC');
 $start = microtime(true);
 
+// First create base sql statements
+
+		$RESULTGAME = "SELECT  game.game_id,
+						game.game_name,
+						game_boxscan.game_boxscan_id,
+						screenshot_game.screenshot_id,
+						game_music.music_id,
+						game_download.game_download_id,
+						game_falcon_only.falcon_only,
+						game_falcon_enhan.falcon_enhanced,
+						game_ste_enhan.ste_enhanced,
+						game_ste_only.ste_only,
+	   					pd1.pub_dev_name as 'publisher_name',
+						pd1.pub_dev_id as 'publisher_id',
+						pd2.pub_dev_name as 'developer_name',
+						pd2.pub_dev_id as 'developer_id',
+						game_year.game_year
+					   FROM game
+					   LEFT JOIN game_boxscan ON (game_boxscan.game_id = game.game_id)
+					   LEFT JOIN screenshot_game ON (screenshot_game.game_id = game.game_id)
+					   LEFT JOIN game_music ON (game_music.game_id = game.game_id)
+					   LEFT JOIN game_download ON (game_download.game_id = game.game_id)
+					   LEFT JOIN game_falcon_only ON (game_falcon_only.game_id = game.game_id)
+					   LEFT JOIN game_falcon_enhan ON (game.game_id = game_falcon_enhan.game_id)
+					   LEFT JOIN game_ste_enhan ON (game.game_id = game_ste_enhan.game_id) 
+					   LEFT JOIN game_ste_only ON (game.game_id = game_ste_only.game_id)
+				LEFT JOIN game_free ON (game.game_id = game_free.game_id)
+				LEFT JOIN game_arcade ON (game.game_id = game_arcade.game_id)
+				LEFT JOIN game_development ON (game.game_id = game_development.game_id)
+				LEFT JOIN game_unreleased ON (game.game_id = game_unreleased.game_id)
+				LEFT JOIN game_unfinished ON (game.game_id = game_unfinished.game_id)
+				LEFT JOIN game_mono ON (game.game_id = game_mono.game_id)
+				LEFT JOIN game_seuck ON (game.game_id = game_seuck.game_id)
+				LEFT JOIN game_stos ON (game.game_id = game_stos.game_id)
+				LEFT JOIN game_stac ON (game.game_id = game_stac.game_id)
+				LEFT JOIN game_wanted ON (game.game_id = game_wanted.game_id)
+					   
+					   LEFT JOIN game_publisher ON (game_publisher.game_id = game.game_id) 
+					   LEFT JOIN pub_dev pd1 ON (pd1.pub_dev_id = game_publisher.pub_dev_id) 
+					   LEFT JOIN game_developer ON (game_developer.game_id = game.game_id) 
+					   LEFT JOIN pub_dev pd2 on (pd2.pub_dev_id = game_developer.dev_pub_id) 
+					   LEFT JOIN game_year on (game_year.game_id = game.game_id) 
+					   WHERE ";
+
+				$RESULTAKA = "SELECT
+							   game_aka.game_id,
+							   game_aka.aka_name,
+							   game_boxscan.game_boxscan_id,
+							   screenshot_game.screenshot_id,
+							   game_music.music_id,
+							   game_download.game_download_id,
+							   game_falcon_only.falcon_only,
+							   game_falcon_enhan.falcon_enhanced,
+							   game_ste_enhan.ste_enhanced,
+							   game_ste_only.ste_only,
+							   pd1.pub_dev_name as 'publisher_name', 
+						 	   pd1.pub_dev_id as 'publisher_id',
+						  	   pd2.pub_dev_name as 'developer_name',
+						   	   pd2.pub_dev_id as 'developer_id',
+							   game_year.game_year
+							  FROM game_aka 
+							  LEFT JOIN game ON (game_aka.game_id = game.game_id)
+							  LEFT JOIN game_boxscan ON (game_boxscan.game_id = game_aka.game_id)
+					 		  LEFT JOIN screenshot_game ON (screenshot_game.game_id = game.game_id)
+					   		  LEFT JOIN game_music ON (game_music.game_id = game.game_id)
+					   		  LEFT JOIN game_download ON (game_download.game_id = game.game_id)
+					 		  LEFT JOIN game_falcon_only ON (game_falcon_only.game_id = game.game_id)
+							  LEFT JOIN game_falcon_enhan ON (game.game_id = game_falcon_enhan.game_id)
+							  LEFT JOIN game_ste_enhan ON (game.game_id = game_ste_enhan.game_id) 
+					   		  LEFT JOIN game_ste_only ON (game.game_id = game_ste_only.game_id)
+					   LEFT JOIN game_free ON (game.game_id = game_free.game_id)
+					   LEFT JOIN game_arcade ON (game.game_id = game_arcade.game_id)
+					   LEFT JOIN game_development ON (game.game_id = game_development.game_id)
+					   LEFT JOIN game_unreleased ON (game.game_id = game_unreleased.game_id)
+					   LEFT JOIN game_unfinished ON (game.game_id = game_unfinished.game_id)
+					   LEFT JOIN game_mono ON (game.game_id = game_mono.game_id)
+					   LEFT JOIN game_seuck ON (game.game_id = game_seuck.game_id)
+					   LEFT JOIN game_stos ON (game.game_id = game_stos.game_id)
+					   LEFT JOIN game_stac ON (game.game_id = game_stac.game_id)
+					   LEFT JOIN game_wanted ON (game.game_id = game_wanted.game_id)
+					   
+					   	   	  LEFT JOIN game_publisher ON (game.game_id = game_publisher.game_id)
+							  LEFT JOIN pub_dev pd1 ON (game_publisher.pub_dev_id = pd1.pub_dev_id) 
+					   	      LEFT JOIN game_developer ON (game.game_id = game_developer.game_id) 
+					          LEFT JOIN pub_dev pd2 on (pd2.pub_dev_id = game_developer.dev_pub_id) 
+							  LEFT JOIN game_year on (game_year.game_id = game.game_id) 
+					   WHERE ";
+
+
+
 if (empty($action)) {$action='';}
 /*
 ***********************************************************************************
@@ -134,36 +224,6 @@ used to create the querystring later.
 			$unreleased_select = " AND game_unreleased.unreleased =$unreleased";
 		}
 		
-		if (isset($unfinished) and $unfinished == "1")
-		{
-			$unfinished_select = " AND game_unfinished.unfinished =$unfinished";
-		}
-		
-		if (isset($monochrome) and $monochrome == "1")
-		{
-			$monochrome_select = " AND game_mono.monochrome =$monochrome";
-		}
-		
-		if (isset($seuck) and $seuck == "1")
-		{
-			$seuck_select = " AND game_seuck.seuck =$seuck";
-		}
-		
-		if (isset($stos) and $stos == "1")
-		{
-			$stos_select = " AND game_stos.stos =$stos";
-		}
-		
-		if (isset($stac) and $stac == "1")
-		{
-			$stac_select = " AND game_stac.stac =$stac";
-		}
-		
-		if (isset($wanted) and $wanted == "1")
-		{
-			$wanted_select = " AND game_wanted.game_id IS NOT NULL";
-		}
-		
 		//Before we start the build the query, we check if there is at least
 		//one search field filled in or used! 
 		
@@ -189,47 +249,7 @@ querystring for faster output
 *********************************************************************************** 
 */
 		
-		$RESULTGAME = "SELECT  game.game_id,
-						game.game_name,
-						game_boxscan.game_boxscan_id,
-						screenshot_game.screenshot_id,
-						game_music.music_id,
-						game_download.game_download_id,
-						game_falcon_only.falcon_only,
-						game_falcon_enhan.falcon_enhanced,
-						game_ste_enhan.ste_enhanced,
-						game_ste_only.ste_only,
-	   					pd1.pub_dev_name as 'publisher_name',
-						pd1.pub_dev_id as 'publisher_id',
-						pd2.pub_dev_name as 'developer_name',
-						pd2.pub_dev_id as 'developer_id',
-						game_year.game_year
-					   FROM game
-					   LEFT JOIN game_boxscan ON (game_boxscan.game_id = game.game_id)
-					   LEFT JOIN screenshot_game ON (screenshot_game.game_id = game.game_id)
-					   LEFT JOIN game_music ON (game_music.game_id = game.game_id)
-					   LEFT JOIN game_download ON (game_download.game_id = game.game_id)
-					   LEFT JOIN game_falcon_only ON (game_falcon_only.game_id = game.game_id)
-					   LEFT JOIN game_falcon_enhan ON (game.game_id = game_falcon_enhan.game_id)
-					   LEFT JOIN game_ste_enhan ON (game.game_id = game_ste_enhan.game_id) 
-					   LEFT JOIN game_ste_only ON (game.game_id = game_ste_only.game_id)
-				LEFT JOIN game_free ON (game.game_id = game_free.game_id)
-				LEFT JOIN game_arcade ON (game.game_id = game_arcade.game_id)
-				LEFT JOIN game_development ON (game.game_id = game_development.game_id)
-				LEFT JOIN game_unreleased ON (game.game_id = game_unreleased.game_id)
-				LEFT JOIN game_unfinished ON (game.game_id = game_unfinished.game_id)
-				LEFT JOIN game_mono ON (game.game_id = game_mono.game_id)
-				LEFT JOIN game_seuck ON (game.game_id = game_seuck.game_id)
-				LEFT JOIN game_stos ON (game.game_id = game_stos.game_id)
-				LEFT JOIN game_stac ON (game.game_id = game_stac.game_id)
-				LEFT JOIN game_wanted ON (game.game_id = game_wanted.game_id)
-					   
-					   LEFT JOIN game_publisher ON (game_publisher.game_id = game.game_id) 
-					   LEFT JOIN pub_dev pd1 ON (pd1.pub_dev_id = game_publisher.pub_dev_id) 
-					   LEFT JOIN game_developer ON (game_developer.game_id = game.game_id) 
-					   LEFT JOIN pub_dev pd2 on (pd2.pub_dev_id = game_developer.dev_pub_id) 
-					   LEFT JOIN game_year on (game_year.game_id = game.game_id) 
-					   WHERE ";
+
 		
 		$RESULTGAME .= $gamebrowse_select;
 		if (!empty($gamesearch)) {$RESULTGAME .= "game_name LIKE '%$gamesearch%'";} 
@@ -243,13 +263,13 @@ querystring for faster output
 		if (isset($free) and $free == "1") {$RESULTGAME .= $free_select;}
 		if (isset($arcade) and $arcade == "1") {$RESULTGAME .= $arcade_select;}		
 		if (isset($development) and $development == "1") {$RESULTGAME .= $development_select;}
-		if (isset($unreleased) and $unreleased == "1") {$RESULTGAME .= $unreleased_select;}
-		if (isset($unfinished) and $unfinished == "1") {$RESULTGAME .= $unfinished_select;}
-		if (isset($monochrome) and $monochrome == "1") {$RESULTGAME .= $monochrome_select;}
-		if (isset($seuck) and $seuck == "1") {$RESULTGAME .= $seuck_select;}
-		if (isset($stos) and $stos == "1") {$RESULTGAME .= $stos_select;}
-		if (isset($stac) and $stac == "1") {$RESULTGAME .= $stac_select;}
-		if (isset($wanted) and $wanted == "1") {$RESULTGAME .= $wanted_select;}
+		if (isset($unreleased) and $unreleased == "1") {$RESULTGAME .= " AND game_unreleased.unreleased =$unreleased";}
+		if (isset($unfinished) and $unfinished == "1") {$RESULTGAME .= " AND game_unfinished.unfinished =$unfinished";}
+		if (isset($monochrome) and $monochrome == "1") {$RESULTGAME .= " AND game_mono.monochrome =$monochrome";}
+		if (isset($seuck) and $seuck == "1") {$RESULTGAME .= " AND game_seuck.seuck = $seuck";}
+		if (isset($stos) and $stos == "1") {$RESULTGAME .= " AND game_stos.stos = $stos";}
+		if (isset($stac) and $stac == "1") {$RESULTGAME .= " AND game_stac.stac = $stac";}
+		if (isset($wanted) and $wanted == "1") {$RESULTGAME .= " AND game_wanted.game_id IS NOT NULL";}
 		
 		$RESULTGAME .= ' GROUP BY game.game_id, game.game_name HAVING COUNT(DISTINCT game.game_id, game.game_name) = 1';
 		$RESULTGAME .= ' ORDER BY game_name ASC';
@@ -270,49 +290,7 @@ querystring for faster output
 			if ( $rows > 0 )
 			{	
 				
-				$RESULTAKA = "SELECT
-							   game_aka.game_id,
-							   game_aka.aka_name,
-							   game_boxscan.game_boxscan_id,
-							   screenshot_game.screenshot_id,
-							   game_music.music_id,
-							   game_download.game_download_id,
-							   game_falcon_only.falcon_only,
-							   game_falcon_enhan.falcon_enhanced,
-							   game_ste_enhan.ste_enhanced,
-							   game_ste_only.ste_only,
-							   pd1.pub_dev_name as 'publisher_name', 
-						 	   pd1.pub_dev_id as 'publisher_id',
-						  	   pd2.pub_dev_name as 'developer_name',
-						   	   pd2.pub_dev_id as 'developer_id',
-							   game_year.game_year
-							  FROM game_aka 
-							  LEFT JOIN game ON (game_aka.game_id = game.game_id)
-							  LEFT JOIN game_boxscan ON (game_boxscan.game_id = game_aka.game_id)
-					 		  LEFT JOIN screenshot_game ON (screenshot_game.game_id = game.game_id)
-					   		  LEFT JOIN game_music ON (game_music.game_id = game.game_id)
-					   		  LEFT JOIN game_download ON (game_download.game_id = game.game_id)
-					 		  LEFT JOIN game_falcon_only ON (game_falcon_only.game_id = game.game_id)
-							  LEFT JOIN game_falcon_enhan ON (game.game_id = game_falcon_enhan.game_id)
-							  LEFT JOIN game_ste_enhan ON (game.game_id = game_ste_enhan.game_id) 
-					   		  LEFT JOIN game_ste_only ON (game.game_id = game_ste_only.game_id)
-					   LEFT JOIN game_free ON (game.game_id = game_free.game_id)
-					   LEFT JOIN game_arcade ON (game.game_id = game_arcade.game_id)
-					   LEFT JOIN game_development ON (game.game_id = game_development.game_id)
-					   LEFT JOIN game_unreleased ON (game.game_id = game_unreleased.game_id)
-					   LEFT JOIN game_unfinished ON (game.game_id = game_unfinished.game_id)
-					   LEFT JOIN game_mono ON (game.game_id = game_mono.game_id)
-					   LEFT JOIN game_seuck ON (game.game_id = game_seuck.game_id)
-					   LEFT JOIN game_stos ON (game.game_id = game_stos.game_id)
-					   LEFT JOIN game_stac ON (game.game_id = game_stac.game_id)
-					   LEFT JOIN game_wanted ON (game.game_id = game_wanted.game_id)
-					   
-					   	   	  LEFT JOIN game_publisher ON (game.game_id = game_publisher.game_id)
-							  LEFT JOIN pub_dev pd1 ON (game_publisher.pub_dev_id = pd1.pub_dev_id) 
-					   	      LEFT JOIN game_developer ON (game.game_id = game_developer.game_id) 
-					          LEFT JOIN pub_dev pd2 on (pd2.pub_dev_id = game_developer.dev_pub_id) 
-							  LEFT JOIN game_year on (game_year.game_id = game.game_id) 
-					   WHERE ";
+
 				
 				$RESULTAKA .= $akabrowse_select;
 				if (!empty($gamesearch)) {$RESULTAKA .= "game_aka.aka_name LIKE '%$gamesearch%'";} 
@@ -326,13 +304,13 @@ querystring for faster output
 				if (isset($free) and $free == "1") {$RESULTAKA .= $free_select;}
 				if (isset($arcade) and $arcade == "1") {$RESULTAKA .= $arcade_select;}		
 				if (isset($development) and $development == "1") {$RESULTAKA .= $development_select;}
-				if (isset($unreleased) and $unreleased == "1") {$RESULTAKA .= $unreleased_select;}
-				if (isset($unfinished) and $unfinished == "1") {$RESULTAKA .= $unfinished_select;}
-				if (isset($monochrome) and $monochrome == "1") {$RESULTAKA .= $monochrome_select;}
-				if (isset($seuck) and $seuck == "1") {$RESULTAKA .= $seuck_select;}
-				if (isset($stos) and $stos == "1") {$RESULTAKA .= $stos_select;}
-				if (isset($stac) and $stac == "1") {$RESULTAKA .= $stac_select;}
-				if (isset($wanted) and $wanted == "1") {$RESULTAKA .= $wanted_select;}
+				if (isset($unreleased) and $unreleased == "1") {$RESULTAKA .= " AND game_unreleased.unreleased =$unreleased";}
+				if (isset($unfinished) and $unfinished == "1") {$RESULTAKA .= " AND game_unfinished.unfinished =$unfinished";}
+				if (isset($monochrome) and $monochrome == "1") {$RESULTAKA .= " AND game_mono.monochrome =$monochrome";}
+				if (isset($seuck) and $seuck == "1") {$RESULTAKA .= " AND game_seuck.seuck = $seuck";}
+				if (isset($stos) and $stos == "1") {$RESULTAKA .= " AND game_stos.stos = $stos";}
+				if (isset($stac) and $stac == "1") {$RESULTAKA .= " AND game_stac.stac = $stac";}
+				if (isset($wanted) and $wanted == "1") {$RESULTAKA .= " AND game_wanted.game_id IS NOT NULL";}
 				$RESULTAKA .= ' GROUP BY game_aka.game_id, game_aka.aka_name HAVING COUNT(DISTINCT game_aka.game_id, game_aka.aka_name) = 1';
 				$RESULTAKA .= ' ORDER BY game_aka.aka_name ASC';
 
