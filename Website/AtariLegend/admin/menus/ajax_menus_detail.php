@@ -223,7 +223,19 @@ include("../includes/functions.php");
 							array('ind_id' => $genealogy_ind['ind_id'],
 									'ind_name' => $genealogy_ind['ind_name']));
 				
-				}	
+				}
+				
+				// Get Author types for 
+					
+					$sql_author_types = "SELECT * FROM author_type ORDER BY author_type_info ASC";
+					$query_author = $mysqli->query($sql_author_types) or die("Failed to query author_type table");
+					
+					while  ($author_ind=$query_author->fetch_array(MYSQLI_BOTH)) 
+					{  
+						$smarty->append('author_type',
+								array('author_type_id' => $author_ind['author_type_id'],
+									  'author_type_info' => $author_ind['author_type_info']));
+					}
 
 				// Create dropdown values a-z
 				$az_value = az_dropdown_value(0);
@@ -236,6 +248,70 @@ include("../includes/functions.php");
 				$smarty->assign('menu_disk_id', $menu_disk_id);
 	}
 	
+if (isset($action) and $action=="ind_gen_browse")
+{
+	if(isset($query)) 
+		{	
+			$sql_individuals = "SELECT ind_id,ind_name FROM individuals ORDER BY ind_name ASC";
+			$sql_aka = "SELECT ind_id,nick FROM individual_nicks ORDER BY nick ASC";
+			
+			//Create a temporary table to build an array with both names and nicknames
+			$mysqli->query("CREATE TEMPORARY TABLE temp ENGINE=MEMORY $sql_individuals") or die("failed to create temporary table");
+			$mysqli->query("INSERT INTO temp $sql_aka") or die("failed to insert akas into temporary table");
+			
+			$query_temporary = $mysqli->query("SELECT * FROM temp WHERE ind_name LIKE '$query%' ORDER BY ind_name ASC") or die("Failed to query temporary table");
+			$mysqli->query("DROP TABLE temp");
+						
+			}
+		while  ($genealogy_ind=$query_temporary->fetch_array(MYSQLI_BOTH)) 
+			{  
+			$smarty->append('author_type',
+					array('ind_id' => $genealogy_ind['ind_id'],
+						  'ind_name' => $genealogy_ind['ind_name']));
+			}
+
+			$smarty->assign('smarty_action', 'ind_gen_browse');
+}
+
+if (isset($action) and $action=="ind_gen_search")
+{
+	if(isset($query) and $query!=="empty") 
+		{	
+			$sql_individuals = "SELECT ind_id,ind_name FROM individuals ORDER BY ind_name ASC";
+			$sql_aka = "SELECT ind_id,nick FROM individual_nicks ORDER BY nick ASC";
+			
+			//Create a temporary table to build an array with both names and nicknames
+			$mysqli->query("CREATE TEMPORARY TABLE temp ENGINE=MEMORY $sql_individuals") or die("failed to create temporary table");
+			$mysqli->query("INSERT INTO temp $sql_aka") or die("failed to insert akas into temporary table");
+			
+			$query_temporary = $mysqli->query("SELECT * FROM temp WHERE ind_name LIKE '%$query%' ORDER BY ind_name ASC") or die("Failed to query temporary table");
+			$mysqli->query("DROP TABLE temp");
+						
+		}
+		elseif ($query=="empty")
+		{
+			$sql_individuals = "SELECT ind_id,ind_name FROM individuals ORDER BY ind_name ASC";
+			$sql_aka = "SELECT ind_id,nick FROM individual_nicks ORDER BY nick ASC";
+			
+			//Create a temporary table to build an array with both names and nicknames
+			$mysqli->query("CREATE TEMPORARY TABLE temp ENGINE=MEMORY $sql_individuals") or die("failed to create temporary table");
+			$mysqli->query("INSERT INTO temp $sql_aka") or die("failed to insert akas into temporary table");
+			
+			$query_temporary = $mysqli->query("SELECT * FROM temp WHERE ind_name LIKE '%a%' ORDER BY ind_name ASC") or die("Failed to query temporary table");
+			$mysqli->query("DROP TABLE temp");
+		}	
+			
+		while  ($genealogy_ind=$query_temporary->fetch_array(MYSQLI_BOTH)) 
+			{  
+			$smarty->append('author_type',
+					array('ind_id' => $genealogy_ind['ind_id'],
+						  'ind_name' => $genealogy_ind['ind_name']));
+			}
+
+			$smarty->assign('smarty_action', 'ind_gen_browse');
+}
+
+
 	
 	
 //Send all smarty variables to the templates

@@ -137,7 +137,7 @@ function browseInd(str) {
                 document.getElementById("ind_member").innerHTML = xmlhttp.responseText;
             }
         }
-        xmlhttp.open("GET","../crew/ajax_crew_search.php?action=ind_gen_browse&query="+str,true);
+        xmlhttp.open("GET","../menus/ajax_menus_detail.php?action=ind_gen_browse&query="+str,true);
         xmlhttp.send();
     }
 }
@@ -164,7 +164,7 @@ function searchInd(str) {
                 document.getElementById("ind_member").innerHTML = xmlhttp.responseText;
             }
         }
-        xmlhttp.open("GET","../crew/ajax_crew_search.php?action=ind_gen_search&query="+str,true);
+        xmlhttp.open("GET","../menus/ajax_menus_detail.php?action=ind_gen_search&query="+str,true);
         xmlhttp.send();
     }
 }

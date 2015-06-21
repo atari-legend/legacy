@@ -112,7 +112,12 @@
 								{/foreach}	
 								</SELECT>
 							</div>	      
-							<br/>
+								<SELECT id="author_type_id" name="author_type_id" size="1" style="margin:5px;margin-top:0px;width:200px;">
+								{foreach from=$author_type item=line}
+								<option value="{$line.author_type_id}">{$line.author_type_info}</option>
+								{/foreach}	
+								</SELECT>
+							
 							<input type="hidden" name="action" value="add_member" style="margin:5px;vertical-align:top;">
 							<INPUT type="submit" value="Add Crewmember">
 							</FORM>
@@ -170,8 +175,12 @@
 				</tr>
 			</table>
 			{/if}
-
-
-
 {/if}
-
+{* This is the Ind browse *}
+{if isset($smarty_action) and $smarty_action == "ind_gen_browse"}
+<select id="ind_id" name="ind_id" size="10" style="margin:5px;width:200px;">
+{foreach from=$author_type item=line}
+<option value="{$line.ind_id}">{$line.ind_name}</option>
+{/foreach}
+</select>
+{/if}
