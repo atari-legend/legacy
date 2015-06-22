@@ -33,7 +33,7 @@ $query_review = $sql_review->fetch_array(MYSQLI_BOTH);
 	
 	$review_text = $query_review['review_text'];
 	$review_text = nl2br($review_text);
-	$review_text = review_screenshot($review_text);
+
 	$review_text = InsertALCode($review_text);
 	$review_text = InsertSmillies($review_text);
 	
