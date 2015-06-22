@@ -27,7 +27,7 @@
 						</div>
 						
 						<div class="game_set" style="display:inline-block;width:450px;float:right;margin-right:20px;">
-						
+			<div id="menu_credit_list">			
 							<table class="table_game_list" style="width:100%;float:right;">
 			<tr>
 				<th style="width:20%;">Menu Credits</th>
@@ -57,7 +57,7 @@
 						</form>
 					</td>				
 				<td style="width:10%">
-				<a href="#" class="MAINNAV">Delete</a>
+				<a style="cursor: pointer;" class="MAINNAV" onclick="DeleteCredits({$individual.menu_disk_credits_id},{$individual.menu_disk_id})">Delete</a>
 				</td>
 			</tr>
 					{/foreach}
@@ -68,7 +68,7 @@
 				</td>
 			</tr>
 		</table>
-						
+			</div>			
 						</div>
 						
 						
@@ -238,4 +238,46 @@
 <option value="{$line.ind_id}">{$line.ind_name}</option>
 {/foreach}
 </select>
+{/if}
+{if isset($smarty_action) and $smarty_action == "update_menu_disk_credits"}
+							<table class="table_game_list" style="width:100%;float:right;">
+			<tr>
+				<th style="width:20%;">Menu Credits</th>
+				<th style="width:20%;">"Sceners"</th>
+				<th style="width:20%;">Used nick</th>
+				<th style="width:20%;"></th>
+				<th style="width:10%;"></th>
+			</tr>
+					{if isset($individuals)}
+					{foreach name=outer item=individual from=$individuals}	
+			<tr>
+				<td style="width:20%;">{$individual.author_type_info}</td>
+				<td style="width:20%;">{$individual.ind_name}</td>
+				<form action="#" method="post" name="nick_edit{$individual.ind_id}" id="nick_edit{$individual.ind_id}">
+				<td style="width:20%;">
+					<select name="individual_nicks_id" id="individual_nicks_id" size="1">
+									<option value="-" SELECTED>None</option>
+
+
+
+						</select>
+					</td>
+				<td style="width:20%;">
+						<input type="hidden" name="action" value="update_nick">
+	
+						<input type="submit" name="inserter" value="Update" style="margin: 0 auto;">
+						</form>
+					</td>				
+				<td style="width:10%">
+				<a style="cursor: pointer;" class="MAINNAV" onclick="DeleteCredits({$individual.menu_disk_credits_id},{$individual.menu_disk_id})">Delete</a>
+				</td>
+			</tr>
+					{/foreach}
+					{/if}
+			<tr>
+				<td class="game_list_footer" colspan="5">
+					&nbsp;&nbsp;&nbsp;
+				</td>
+			</tr>
+		</table>
 {/if}

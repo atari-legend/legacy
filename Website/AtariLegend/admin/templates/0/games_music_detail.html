@@ -28,7 +28,7 @@ function add_composer()
 function delete_music(game_id) 
 {
 	document.editmuzak.method="post";
-	document.editmuzak.action="../games/games_music_detail.php?game_id="+game_id+"&action=delete_music";
+	document.editmuzak.action="../games/db_games_music.php?game_id="+game_id+"&action=delete_music";
    	document.editmuzak.submit();
 }
 </script>
@@ -45,7 +45,7 @@ function delete_music(game_id)
 </div>
 
 <div class="NEWMAINCELL">
-	<form action="../games/games_music_detail.php" method="post" name="editmuzak">
+	<form action="../games/db_games_music.php" method="post" name="editmuzak">
 	<fieldset class="game_set">
 		<legend class="links_legend">Edit existing files</legend>
 					{if isset($music)}		
@@ -60,7 +60,7 @@ function delete_music(game_id)
 					<input type="button" value="Delete" onclick="delete_music({$game.game_id})">
 					<br/>
 					<br/>
-					<select name="individuals" class="continentSelects">
+					<select name="individuals" class="continentSelects" style="width:200px;">
 						<option value="-" selected>-</option>
 						{if isset($ind)}
 						{foreach from=$ind item=line}
@@ -80,7 +80,7 @@ function delete_music(game_id)
 
 {if isset($action) and $action == 'pick_composer'}
 <div class="NEWMAINCELL">
-		<form enctype="multipart/form-data" method="post" action="../games/games_music_detail.php" name="composer">		
+		<form enctype="multipart/form-data" method="post" action="../games/db_games_music.php" name="composer">		
 		<fieldset class="game_set">
 		<legend class="links_legend">Music files for {$ind_selected.ind_name}</legend>
 					{section name=loop loop=6 start=1} 
