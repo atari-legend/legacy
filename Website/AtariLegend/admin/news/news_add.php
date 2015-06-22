@@ -29,35 +29,6 @@ while ($newsimages = $sql_newsimage->fetch_array(MYSQLI_BOTH))
 				   'image_name' => $newsimages['news_image_name']));
 }
 
-
-if (isset($action) and $action=="add_news")
-//****************************************************************************************
-// This is where we add the actual news to the submission table
-//**************************************************************************************** 
-{
-	$news_date = time();
-
-	// Check if form is filled.
-	if ($headline=='' or $descr=='')
-	{
-		$message = "Please fill in the necessary fields";
-	}
-	else
-	{	
-		// Insert the description and the image into the news_image table.
-		$sdbquery = $mysqli->query("INSERT INTO news_submission 
-							(news_headline,news_text,news_image_id,user_id,news_date)
-							 VALUES ('$headline','$descr','$icon','$user_id','$news_date')")
-							 or die ("Error inserting news update");
-							 
-		$message = "News added correctly";
-					
-		mysqli_close($mysqli);
-	}
-	
-	$smarty->assign('message', $message);
-}
-
 $smarty->assign("user_id",$_SESSION['user_id']);
 
 //Send all smarty variables to the templates
