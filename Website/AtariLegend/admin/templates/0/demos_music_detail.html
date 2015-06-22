@@ -28,7 +28,7 @@ function add_composer()
 function delete_music(demo_id) 
 {
 	document.editmuzak.method="post";
-	document.editmuzak.action="../demos/demos_music_detail.php?demo_id="+demo_id+"&action=delete_music";
+	document.editmuzak.action="../demos/db_demos_music.php?demo_id="+demo_id+"&action=delete_music";
    	document.editmuzak.submit();
 }
 </script>
@@ -80,7 +80,7 @@ function delete_music(demo_id)
 
 {if isset($action) and $action == 'pick_composer'}
 <br/><br/>
-		<form enctype="multipart/form-data" method="post" action="../demos/demos_music_detail.php" name="composer">		
+		<form enctype="multipart/form-data" method="post" action="../demos/db_demos_music.php" name="composer">		
 		<fieldset class="interview_set">
 		<legend class="links_legend">Music files for {$ind_selected.ind_name}</legend>
 	<br/>
