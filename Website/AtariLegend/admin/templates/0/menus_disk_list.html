@@ -306,7 +306,23 @@ function addGametoMenu(software_id,menu_disk_id,software_type) {
         }
         xmlhttp.onreadystatechange = function() {
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                document.getElementById("menu_software_list").innerHTML = xmlhttp.responseText;
+				
+				
+				data = xmlhttp.responseText.split ( "[BRK]" );
+				document.getElementById("menu_software_list").innerHTML = data[0];
+				
+                // document.getElementById("menu_software_list").innerHTML = xmlhttp.responseText;
+            
+            $.notify_osd.create({
+				'text'        : data[1],             // notification message
+				'icon'        : '../templates/0/icons/star.png', // icon path, 48x48
+				'sticky'      : false,             // if true, timeout is ignored
+				'timeout'     : 4,                 // disappears after 6 seconds
+				'dismissable' : true               // can be dismissed manually
+				});
+            
+            document.getElementById("game_add_to_menu").reset();
+            
             }
         }
         xmlhttp.open("GET","../menus/db_menu_disk.php?action=add_title_to_menu&software_id="+software_id+"&menu_disk_id="+menu_disk_id+"&software_type="+software_type,true);
