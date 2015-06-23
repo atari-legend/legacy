@@ -132,7 +132,7 @@ if(isset($crew_id) and isset($menu_sets_id))
 	$sql = $mysqli->query("INSERT INTO crew_menu_prod (crew_id,menu_sets_id) VALUES ('$crew_id','$menu_sets_id')");  
 	mysqli_free_result($sql); 
 }
-
+$_SESSION['edit_message'] = "Crew hooked to this Menu disk series";
 header("Location: ../menus/menus_disk_list.php?menu_sets_id=$menu_sets_id");
 
 }
@@ -148,7 +148,7 @@ if(isset($new_crew_name) and isset($menu_sets_id))
 	$sql = $mysqli->query("INSERT INTO crew (crew_name) VALUES ('$new_crew_name')");  
 	mysqli_free_result($sql); 
 }
-
+$_SESSION['edit_message'] = "$new_crew_name added to the crew database";
 header("Location: ../menus/menus_disk_list.php?menu_sets_id=$menu_sets_id");
 
 }
@@ -162,6 +162,7 @@ if(isset($crew_id) and isset($menu_sets_id))
 		$mysqli->query("DELETE FROM crew_menu_prod WHERE crew_id='$crew_id' AND menu_sets_id='$menu_sets_id'"); 
 }
 
+$_SESSION['edit_message'] = "Crew removed from Menu Disk series.";
 header("Location: ../menus/menus_disk_list.php?menu_sets_id=$menu_sets_id");
 
 }

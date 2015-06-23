@@ -310,9 +310,7 @@ function addGametoMenu(software_id,menu_disk_id,software_type) {
 				
 				data = xmlhttp.responseText.split ( "[BRK]" );
 				document.getElementById("menu_software_list").innerHTML = data[0];
-				
-                // document.getElementById("menu_software_list").innerHTML = xmlhttp.responseText;
-            
+ 
             $.notify_osd.create({
 				'text'        : data[1],             // notification message
 				'icon'        : '../templates/0/icons/star.png', // icon path, 48x48
@@ -322,7 +320,6 @@ function addGametoMenu(software_id,menu_disk_id,software_type) {
 				});
             
             document.getElementById("game_add_to_menu").reset();
-            
             }
         }
         xmlhttp.open("GET","../menus/db_menu_disk.php?action=add_title_to_menu&software_id="+software_id+"&menu_disk_id="+menu_disk_id+"&software_type="+software_type,true);
@@ -357,6 +354,15 @@ function deleteGamefromMenu(str,menu_disk_id) {
         xmlhttp.onreadystatechange = function() {
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
                 document.getElementById("menu_software_list").innerHTML = xmlhttp.responseText;
+                
+                 $.notify_osd.create({
+				'text'        : 'Title deleted from menudisk.',             // notification message
+				'icon'        : '../templates/0/icons/star.png', // icon path, 48x48
+				'sticky'      : false,             // if true, timeout is ignored
+				'timeout'     : 4,                 // disappears after 6 seconds
+				'dismissable' : true               // can be dismissed manually
+				});
+                
             }
         }
         xmlhttp.open("GET","../menus/db_menu_disk.php?action=delete_from_menu_disk&menu_disk_title_id="+str+"&menu_disk_id="+menu_disk_id,true);
@@ -424,7 +430,6 @@ function DeleteCredits(menu_disk_credits_id,menu_disk_id) {
 			}		 
          }  
 }
-
 
 </script>
 {/block}
@@ -515,12 +520,20 @@ function DeleteCredits(menu_disk_credits_id,menu_disk_id) {
 	<fieldset class="interview_set" style="width:88%;">
 		<legend class="links_legend">Menu Series Edit</legend>
 		
-		
+		<div style="float:left;">
 		<b>{$menu_set.menu_sets_name} selected!</b><br/>
 		Edit Menu Series or select a disk.<br/>
 		<br/>
 		
 		<a class="MAINNAV" onclick="addNewdisk()" style="cursor: pointer;">Add New Disk</a> to series.<br/>
+		</div>
+		<div style="float:right;">
+			Publish Series: <br/>
+			<input type="radio" name="publish" value="online" checked> Online<br/>
+			<input type="radio" name="publish" value="offline" checked> Offline<br/>
+		</div>
+		
+		
 		<div id="new_disk"> </div>
 		
 	</fieldset> 
