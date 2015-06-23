@@ -37,7 +37,23 @@
 			  });
 			});
 			//]]> 
-		</script>
+
+		
+{if isset($edit_message)}
+
+		$( document ).ready(function() {
+            $.notify_osd.create({
+				'text'        : '{$edit_message}',             // notification message
+				'icon'        : '../templates/0/icons/star.png', // icon path, 48x48
+				'sticky'      : false,             // if true, timeout is ignored
+				'timeout'     : 4,                 // disappears after 6 seconds
+				'dismissable' : true               // can be dismissed manually
+				});
+		});
+
+{/if}
+				</script>
+		
 		{block name=head}{/block}
 		
 		
