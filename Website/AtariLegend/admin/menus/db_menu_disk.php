@@ -181,20 +181,32 @@ if(isset($software_id) and isset($menu_disk_id))
 		$last_id = $mysqli->insert_id; // Get Last autoinc id
 		// Specify title in menu_disk_title_game table
 		$mysqli->query("INSERT INTO menu_disk_title_game (menu_disk_title_id,game_id) VALUES ('$last_id','$software_id')"); 
+		
+		$sql = $mysqli->query("SELECT game_name FROM game WHERE game_id = '$software_id'");
+		$row=$sql->fetch_array(MYSQLI_BOTH);
+		$software_name = $row['game_name'];
 	}
 	if (isset($software_type) and $software_type=="Demo")
 	{
 		$mysqli->query("INSERT INTO menu_disk_title (menu_disk_id,menu_types_main_id) VALUES ('$menu_disk_id','2')"); 	
 		$last_id = $mysqli->insert_id; // Get Last autoinc id
 		// Specify title in menu_disk_title_game table
-		$mysqli->query("INSERT INTO menu_disk_title_demo (menu_disk_title_id,demo_id) VALUES ('$last_id','$software_id')"); 			
+		$mysqli->query("INSERT INTO menu_disk_title_demo (menu_disk_title_id,demo_id) VALUES ('$last_id','$software_id')");
+		
+		$sql = $mysqli->query("SELECT demo_name FROM demo WHERE demo_id = '$software_id'");
+		$row=$sql->fetch_array(MYSQLI_BOTH);
+		$software_name = $row['demo_name']; 			
 	}
 	if (isset($software_type) and $software_type=="Tool")
 	{
 		$mysqli->query("INSERT INTO menu_disk_title (menu_disk_id,menu_types_main_id) VALUES ('$menu_disk_id','3')"); 	
 		$last_id = $mysqli->insert_id; // Get Last autoinc id
 		// Specify title in menu_disk_title_game table
-		$mysqli->query("INSERT INTO menu_disk_title_tools (menu_disk_title_id,tools_id) VALUES ('$last_id','$software_id')"); 			
+		$mysqli->query("INSERT INTO menu_disk_title_tools (menu_disk_title_id,tools_id) VALUES ('$last_id','$software_id')"); 	
+		
+		$sql = $mysqli->query("SELECT tools_name FROM tools WHERE tools_id = '$software_id'");
+		$row=$sql->fetch_array(MYSQLI_BOTH);
+		$software_name = $row['tools_name']; 			
 	}	
 	
 		// ok, insert done. Now this is a ajax job so we need a return value.
@@ -258,9 +270,10 @@ if(isset($software_id) and isset($menu_disk_id))
 						  	  'menu_types_text' => $query['menu_types_text']));
 				}
 				
-
+				$osd_message = "$software_name added to menu disk!";
 				
 				$smarty->assign('smarty_action', 'add_game_to_menu_return');
+				$smarty->assign('osd_message', $osd_message);
 				$smarty->assign('menu_disk_id', $menu_disk_id);
 	
 	//Send to smarty for return value

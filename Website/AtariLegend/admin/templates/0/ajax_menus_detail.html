@@ -230,6 +230,12 @@
 				</tr>
 			</table>
 			{/if}
+			
+			{if isset($osd_message)}
+			[BRK]{$osd_message}
+			{/if}
+			
+			
 {/if}
 {* This is the Ind browse *}
 {if isset($smarty_action) and $smarty_action == "ind_gen_browse"}
