@@ -148,6 +148,30 @@ A.MAINNAV_WHITE:HOVER
 	color: #EFEFEF;
 } 
 
+.quicklinks_crew_browse
+{
+	margin-top:5px;
+	margin-bottom:5px;
+	vertical-align:top;
+	height:23px;
+	padding:1px;
+	cursor:pointer;
+
+}
+
+.quicklinks_crew_search
+{
+	margin-top:5px;
+	margin-bottom:5px;
+	vertical-align:top;
+	width:135px;
+	height:18px;
+	padding:1px;
+	appearance: none;
+	box-shadow: none;
+	border-radius: none;
+}
+
 SELECT.linkcategory_select 
 {
 	background-color: #F4F4F4;

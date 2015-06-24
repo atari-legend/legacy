@@ -64,6 +64,34 @@ function browseSubCrew(str2) {
     }
 }
 
+function searchSubCrew(str) {
+    if (str == "") {
+        str = "empty";
+			xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("sub_crew").innerHTML = xmlhttp.responseText;
+            }
+        }   
+
+    } else { 
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("sub_crew").innerHTML = xmlhttp.responseText;
+            }
+        }
+        xmlhttp.open("GET","../crew/ajax_crew_search.php?crewsearch={$tracking.crewsearch}&crewbrowse={$tracking.crewbrowse}&action=crew_search&query="+str,true);
+        xmlhttp.send();
+    }
+}
+
+
 function browseCrew(str) {
     if (str == "") {
         document.getElementById("crew_list").innerHTML = "";
@@ -172,10 +200,10 @@ function searchInd(str) {
 		<br/>
 		Search for crew:<br/>
 		<form action="../crew/crew_editor.php" method="get" name="post_menu_crew_set" id="menu_crew_set">
-		<select name="crew_browse" size="1" style="margin-top:5px;margin-bottom:5px;vertical-align:top;background-color:white;" onchange="browseCrew(this.value)">
+		<select name="crew_browse" class="quicklinks_crew_browse" onchange="browseCrew(this.value)">
 			{html_options values=$az_value output=$az_output}
 		</select>
-		<input type="text" name="crewsearch" value="" onkeyup="searchCrew(this.value)" style="margin-top:5px;margin-bottom:5px;vertical-align:top;background-color:white;width:147px;">
+		<input type="text" name="crewsearch" value="" onkeyup="searchCrew(this.value)" class="quicklinks_crew_search">
 		{* Ajax *}
 		<div id="crew_list">
 		<select name="crew_select" id="CrewList" size="8" style="width:200px;">
@@ -238,39 +266,12 @@ function searchInd(str) {
 		<div style="width:50%;display:table-cell;">
 			<div style="float:left;padding-left:55px;">
 			<form action="../crew/db_crew.php" method="post" name="crew_gene2" id="crew_gene2">
-				<select id="crewbrowse2" onchange="browseSubCrew(this.value)">
-					<option value="num" selected>0-9</option>
-					<option value="a">A</option>
-					<option value="b">B</option>
-					<option value="c">C</option>
-					<option value="d">D</option>
-					<option value="e">E</option>
-					<option value="f">F</option>
-					<option value="g">G</option>
-					<option value="h">H</option>
-					<option value="i">I</option>
-					<option value="j">J</option>
-					<option value="k">K</option>
-					<option value="l">L</option>
-					<option value="m">M</option>
-					<option value="n">N</option>
-					<option value="o">O</option>
-					<option value="p">P</option>
-					<option value="q">Q</option>
-					<option value="r">R</option>
-					<option value="s">S</option>
-					<option value="t">T</option>
-					<option value="u">U</option>
-					<option value="v">V</option>
-					<option value="w">W</option>
-					<option value="x">X</option>
-					<option value="y">Y</option>
-					<option value="z">Z</option>
+				<select id="crewbrowse2" onchange="browseSubCrew(this.value)" class="quicklinks_crew_browse">
+					{html_options values=$az_value output=$az_output}
 				</select>
-			</form>	
-			</div>	
-			<div style="float:right;padding-right:105px;">	
-			<form action="../crew/db_crew.php" method="post" name="crew_gene" id="crew_gene">
+			<input type="text" name="crewsearch" value="" onkeyup="searchSubCrew(this.value)" class="quicklinks_crew_search">
+
+
 			
 			
 			
@@ -300,52 +301,25 @@ function searchInd(str) {
 			</form>
 			</div>
 			</div>
-			<div style="width:50%;display:table;">
+			<div style="width:50%;display:inline-block;float:right;">
 
 
-					<div style="display:table-cell;width:25%;vertical-align:top;">
+					<div style="display:table-cell;vertical-align:top;">
 					
-					 <FORM action="" method="post" name="f1" onsubmit="return false;">
-						<SELECT class="saveHistory" id="m1" name="m1" onchange="browseInd(this.value)">
+					 <FORM action="../crew/db_crew.php" method="post">
+						<SELECT id="m1" name="m1" onchange="browseInd(this.value)" class="quicklinks_crew_browse">
 
-						<option value="a">A</option>
-						<option value="b">B</option>
-						<option value="c">C</option>
-						<option value="d">D</option>
-						<option value="e">E</option>
-						<option value="f">F</option>
-						<option value="g">G</option>
-						<option value="h">H</option>
-						<option value="i">I</option>
-						<option value="j">J</option>
-						<option value="k">K</option>
-						<option value="l">L</option>
-						<option value="m">M</option>
-						<option value="n">N</option>
-						<option value="o">O</option>
-						<option value="p">P</option>
-						<option value="q">Q</option>
-						<option value="r">R</option>
-						<option value="s">S</option>
-						<option value="t">T</option>
-						<option value="u">U</option>
-						<option value="v">V</option>
-						<option value="w">W</option>
-						<option value="x">X</option>
-						<option value="y">Y</option>
-						<option value="z">Z</option>
+						{html_options values=$az_value output=$az_output}
 
         				</SELECT>
-						<br/><br/>
-						Search<br/>
-						<input type="text" onkeyup="searchInd(this.value)" style="width:100px;">
 
-      				</FORM>
+						<input type="text" onkeyup="searchInd(this.value)" class="quicklinks_crew_search">
+
+      				
 					
-					</div>
-					<div style="display:table-cell;width:75%;vertical-align:top;">
+
 					
-							<FORM action="../crew/db_crew.php" method="post">
+							
 							<div id="ind_member">   
 								<SELECT id="ind_id" name="ind_id" size="10" style="width:200px;">
 								{foreach from=$ind_gene item=line}

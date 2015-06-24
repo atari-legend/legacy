@@ -24,7 +24,7 @@ $start = microtime(true);
 
 // First create base sql statements
 
-		$RESULTGAME = "SELECT  game.game_id,
+		$RESULTGAME = "SELECT game.game_id,
 						game.game_name,
 						game_boxscan.game_boxscan_id,
 						screenshot_game.screenshot_id,
@@ -125,8 +125,8 @@ used to create the querystring later.
 		//check the $gamebrowse select
 		if (empty($gamebrowse) or $gamebrowse == '-')
 		{
-			$gamebrowse_select = "game.game_name LIKE '%'";
-			$akabrowse_select = "game_aka.aka_name LIKE '%'";
+			$gamebrowse_select = "";
+			$akabrowse_select = "";
 		}
 		elseif ($gamebrowse == 'num')
 		{
@@ -232,8 +232,8 @@ used to create the querystring later.
 			 and empty($ste_only_select) and empty($ste_enhanced_select) 
 			 and $unreleased_select =="" and $development_select == "" and $arcade_select == "" and $wanted_select == "")
 		{
-			$message = "Please fill in one of the fields";
-			$smarty->assign("message",$message);
+			$edit_message = "Please fill in one of the fields";
+			$_SESSION['edit_message'] = $edit_message;
 		
 			header("Location: ../games/games_main.php");			
 
@@ -252,7 +252,7 @@ querystring for faster output
 
 		
 		$RESULTGAME .= $gamebrowse_select;
-		if (!empty($gamesearch)) {$RESULTGAME .= "game_name LIKE '%$gamesearch%'";} 
+		if (!empty($gamesearch)) {$RESULTGAME .= "game.game_name LIKE '%$gamesearch%'";} 
 		$RESULTGAME .= $publisher_select;
 		$RESULTGAME .= $developer_select;
 		if (isset($year_select)) {$RESULTGAME .= $year_select;}
@@ -274,13 +274,13 @@ querystring for faster output
 		$RESULTGAME .= ' GROUP BY game.game_id, game.game_name HAVING COUNT(DISTINCT game.game_id, game.game_name) = 1';
 		$RESULTGAME .= ' ORDER BY game_name ASC';
 		
-
 		$games = $mysqli->query($RESULTGAME);
 		
 		if (empty($games))		
 		{
-			$message = "There are problems with the game querie, please try again";
-			$smarty->assign("message",$message);
+			$edit_message = "There are problems with the game search, please try again";
+			$_SESSION['edit_message'] = $edit_message;
+			$smarty->assign("message",$edit_message);
 			
 			header("Location: ../games/games_main.php");	
 		}
@@ -401,8 +401,9 @@ querystring for faster output
 			}
 			else
 			{
-				$message = "No entries found for your selection";
-				$smarty->assign("message",$message);
+				$edit_message = "No entries found for your selection";
+				$_SESSION['edit_message'] = $edit_message;
+				$smarty->assign("message",$edit_message);
 				
 				header("Location: ../games/games_main.php");	
 				}

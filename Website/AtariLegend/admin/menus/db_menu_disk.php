@@ -23,6 +23,7 @@ if(isset($menu_sets_name))
 {
 	$sql = $mysqli->query("INSERT INTO menu_set (menu_sets_name) VALUES ('$menu_sets_name')");  
 	mysqli_free_result($sql); 
+	$_SESSION['edit_message'] = "New Menu Series added";
 }
 
 header("Location: ../menus/menus_list.php");
@@ -70,7 +71,8 @@ if($action=="add_new_menu_disk")
 					    WHERE menu_disk_id='$last_id2'");
 					}
 			
-			}		
+			}
+				$_SESSION['edit_message'] = "New Menu disk added";			
 	}
 
 header("Location: ../menus/menus_disk_list.php?menu_sets_id=$menu_sets_id");
@@ -98,7 +100,7 @@ if(isset($action) and $action=="multi_add_new_menu_disk")
 				}
 				
 			}
-	
+		$_SESSION['edit_message'] = "New Menu disks added";
 	}
 
 header("Location: ../menus/menus_disk_list.php?menu_sets_id=$menu_sets_id");
@@ -116,6 +118,7 @@ if(isset($menu_sets_id) and $menu_sets_name!=="")
 	$sql = $mysqli->query("UPDATE menu_set SET menu_sets_name='$menu_sets_name' 
 					    WHERE menu_sets_id='$menu_sets_id'");  
 	mysqli_free_result($sql); 
+	$_SESSION['edit_message'] = "Menu Series Name updated!";
 }
 header("Location: ../menus/menus_disk_list.php?menu_sets_id=$menu_sets_id");
 }
@@ -132,7 +135,7 @@ if(isset($crew_id) and isset($menu_sets_id))
 	$sql = $mysqli->query("INSERT INTO crew_menu_prod (crew_id,menu_sets_id) VALUES ('$crew_id','$menu_sets_id')");  
 	mysqli_free_result($sql); 
 }
-
+$_SESSION['edit_message'] = "Crew hooked to this Menu disk series";
 header("Location: ../menus/menus_disk_list.php?menu_sets_id=$menu_sets_id");
 
 }
@@ -148,7 +151,7 @@ if(isset($new_crew_name) and isset($menu_sets_id))
 	$sql = $mysqli->query("INSERT INTO crew (crew_name) VALUES ('$new_crew_name')");  
 	mysqli_free_result($sql); 
 }
-
+$_SESSION['edit_message'] = "$new_crew_name added to the crew database";
 header("Location: ../menus/menus_disk_list.php?menu_sets_id=$menu_sets_id");
 
 }
@@ -162,6 +165,7 @@ if(isset($crew_id) and isset($menu_sets_id))
 		$mysqli->query("DELETE FROM crew_menu_prod WHERE crew_id='$crew_id' AND menu_sets_id='$menu_sets_id'"); 
 }
 
+$_SESSION['edit_message'] = "Crew removed from Menu Disk series.";
 header("Location: ../menus/menus_disk_list.php?menu_sets_id=$menu_sets_id");
 
 }
@@ -181,20 +185,32 @@ if(isset($software_id) and isset($menu_disk_id))
 		$last_id = $mysqli->insert_id; // Get Last autoinc id
 		// Specify title in menu_disk_title_game table
 		$mysqli->query("INSERT INTO menu_disk_title_game (menu_disk_title_id,game_id) VALUES ('$last_id','$software_id')"); 
+		
+		$sql = $mysqli->query("SELECT game_name FROM game WHERE game_id = '$software_id'");
+		$row=$sql->fetch_array(MYSQLI_BOTH);
+		$software_name = $row['game_name'];
 	}
 	if (isset($software_type) and $software_type=="Demo")
 	{
 		$mysqli->query("INSERT INTO menu_disk_title (menu_disk_id,menu_types_main_id) VALUES ('$menu_disk_id','2')"); 	
 		$last_id = $mysqli->insert_id; // Get Last autoinc id
 		// Specify title in menu_disk_title_game table
-		$mysqli->query("INSERT INTO menu_disk_title_demo (menu_disk_title_id,demo_id) VALUES ('$last_id','$software_id')"); 			
+		$mysqli->query("INSERT INTO menu_disk_title_demo (menu_disk_title_id,demo_id) VALUES ('$last_id','$software_id')");
+		
+		$sql = $mysqli->query("SELECT demo_name FROM demo WHERE demo_id = '$software_id'");
+		$row=$sql->fetch_array(MYSQLI_BOTH);
+		$software_name = $row['demo_name']; 			
 	}
 	if (isset($software_type) and $software_type=="Tool")
 	{
 		$mysqli->query("INSERT INTO menu_disk_title (menu_disk_id,menu_types_main_id) VALUES ('$menu_disk_id','3')"); 	
 		$last_id = $mysqli->insert_id; // Get Last autoinc id
 		// Specify title in menu_disk_title_game table
-		$mysqli->query("INSERT INTO menu_disk_title_tools (menu_disk_title_id,tools_id) VALUES ('$last_id','$software_id')"); 			
+		$mysqli->query("INSERT INTO menu_disk_title_tools (menu_disk_title_id,tools_id) VALUES ('$last_id','$software_id')"); 	
+		
+		$sql = $mysqli->query("SELECT tools_name FROM tools WHERE tools_id = '$software_id'");
+		$row=$sql->fetch_array(MYSQLI_BOTH);
+		$software_name = $row['tools_name']; 			
 	}	
 	
 		// ok, insert done. Now this is a ajax job so we need a return value.
@@ -258,9 +274,10 @@ if(isset($software_id) and isset($menu_disk_id))
 						  	  'menu_types_text' => $query['menu_types_text']));
 				}
 				
-
+				$osd_message = "$software_name added to menu disk!";
 				
 				$smarty->assign('smarty_action', 'add_game_to_menu_return');
+				$smarty->assign('osd_message', $osd_message);
 				$smarty->assign('menu_disk_id', $menu_disk_id);
 	
 	//Send to smarty for return value
