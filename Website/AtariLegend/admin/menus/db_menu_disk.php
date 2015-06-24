@@ -23,6 +23,7 @@ if(isset($menu_sets_name))
 {
 	$sql = $mysqli->query("INSERT INTO menu_set (menu_sets_name) VALUES ('$menu_sets_name')");  
 	mysqli_free_result($sql); 
+	$_SESSION['edit_message'] = "New Menu Series added";
 }
 
 header("Location: ../menus/menus_list.php");
@@ -70,7 +71,8 @@ if($action=="add_new_menu_disk")
 					    WHERE menu_disk_id='$last_id2'");
 					}
 			
-			}		
+			}
+				$_SESSION['edit_message'] = "New Menu disk added";			
 	}
 
 header("Location: ../menus/menus_disk_list.php?menu_sets_id=$menu_sets_id");
@@ -98,7 +100,7 @@ if(isset($action) and $action=="multi_add_new_menu_disk")
 				}
 				
 			}
-	
+		$_SESSION['edit_message'] = "New Menu disks added";
 	}
 
 header("Location: ../menus/menus_disk_list.php?menu_sets_id=$menu_sets_id");
@@ -116,6 +118,7 @@ if(isset($menu_sets_id) and $menu_sets_name!=="")
 	$sql = $mysqli->query("UPDATE menu_set SET menu_sets_name='$menu_sets_name' 
 					    WHERE menu_sets_id='$menu_sets_id'");  
 	mysqli_free_result($sql); 
+	$_SESSION['edit_message'] = "Menu Series Name updated!";
 }
 header("Location: ../menus/menus_disk_list.php?menu_sets_id=$menu_sets_id");
 }
