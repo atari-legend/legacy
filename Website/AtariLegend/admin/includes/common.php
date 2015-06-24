@@ -51,7 +51,11 @@ $smarty->append('onlineusers',
 	      array('user_name' => $fetch_onlineusers['userid'],
 		  		'user_id' => $fetch_onlineusers['user_id']));
 }
-
+if( isset($_SESSION['edit_message']) )
+{
+	$smarty->assign('edit_message', $_SESSION['edit_message']);
+    unset($_SESSION['edit_message']);
+}
 //Send the var to the template files
 //$smarty->assign('logged_in', $logged_in); comment this out, don't know what it is for.
 $smarty->assign('username', $_SESSION['userid']);

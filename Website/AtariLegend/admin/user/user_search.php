@@ -75,6 +75,13 @@ include("../includes/common.php");
 		$smarty->assign('nr_users', $nr_users);
 	}
 
+				// Create dropdown values a-z
+				$az_value = az_dropdown_value(0);
+				$az_output = az_dropdown_output(0);
+						   
+				$smarty->assign('az_value', $az_value);
+				$smarty->assign('az_output', $az_output);	
+
 //Send all smarty variables to the templates
 $smarty->display('file:../templates/0/user_search.html');
 ?>

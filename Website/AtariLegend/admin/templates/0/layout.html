@@ -25,7 +25,9 @@
 		<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0" />
 		<link href="../templates/0/css/style.css" type="text/css" rel="stylesheet">
 		<link href="../templates/0/css/atarilegend.css" hreflang="en" rel="stylesheet" type="text/css">
+		<link href="../templates/0/css/notify-osd.css" hreflang="en" rel="stylesheet" type="text/css">
 		<script src="../templates/0/js/jquery-1.11.0.min.js"></script>
+		<script src="../templates/0/js/notify-osd.js"></script>
 		<script type="text/javascript"> <!-- script needed for the side menu -->
 			//<![CDATA[ 
 			$(window).load(function(){
@@ -35,7 +37,23 @@
 			  });
 			});
 			//]]> 
-		</script>
+
+		
+{if isset($edit_message)}
+
+		$( document ).ready(function() {
+            $.notify_osd.create({
+				'text'        : '{$edit_message}',             // notification message
+				'icon'        : '../templates/0/icons/star.png', // icon path, 48x48
+				'sticky'      : false,             // if true, timeout is ignored
+				'timeout'     : 4,                 // disappears after 6 seconds
+				'dismissable' : true               // can be dismissed manually
+				});
+		});
+
+{/if}
+				</script>
+		
 		{block name=head}{/block}
 		
 		
@@ -139,7 +157,6 @@
 										<ul class="sub-menu">
 											<li><a href="#" title="Statistics" class="topbutton" id="side_statistics">STATISTICS</a></li>
 											<li><a href="#" title="Did you know" class="topbutton" id="side_did_you_know">DID YOU KNOW</a></li>
-											<li><a href="#" title="Trivia screenshots" class="topbutton" id="side_trivia_screenshots">TRIVIA SCREENSHOTS</a></li>
 											<li><a href="#" title="Trivie quotes" class="topbutton" id="side_trivia_quotes">TRIVIA QUOTES</a></li>
 											<li><a href="#" title="Add links" class="topbutton" id="side_add_links">ADD LINKS</a></li>
 											<li><a href="#" title="Validate links" class="topbutton" id="side_validate_links">VALIDATE LINKS</a></li>
