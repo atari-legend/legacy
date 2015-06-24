@@ -64,6 +64,34 @@ function browseSubCrew(str2) {
     }
 }
 
+function searchSubCrew(str) {
+    if (str == "") {
+        str = "empty";
+			xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("sub_crew").innerHTML = xmlhttp.responseText;
+            }
+        }   
+
+    } else { 
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("sub_crew").innerHTML = xmlhttp.responseText;
+            }
+        }
+        xmlhttp.open("GET","../crew/ajax_crew_search.php?crewsearch={$tracking.crewsearch}&crewbrowse={$tracking.crewbrowse}&action=crew_search&query="+str,true);
+        xmlhttp.send();
+    }
+}
+
+
 function browseCrew(str) {
     if (str == "") {
         document.getElementById("crew_list").innerHTML = "";
@@ -273,13 +301,13 @@ function searchInd(str) {
 			</form>
 			</div>
 			</div>
-			<div style="width:50%;display:table;">
+			<div style="width:50%;display:inline-block;float:right;">
 
 
-					<div style="display:table-cell;width:50%;vertical-align:top;">
+					<div style="display:table-cell;vertical-align:top;">
 					
 					 <FORM action="../crew/db_crew.php" method="post">
-						<SELECT class="saveHistory" id="m1" name="m1" onchange="browseInd(this.value)" class="quicklinks_crew_browse">
+						<SELECT id="m1" name="m1" onchange="browseInd(this.value)" class="quicklinks_crew_browse">
 
 						{html_options values=$az_value output=$az_output}
 
