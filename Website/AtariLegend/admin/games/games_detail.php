@@ -396,6 +396,14 @@ $smarty->assign("nr_magazines",$array['count']);
 //Send it all to the template
 //**********************************************************************************
 
+// Create dropdown values a-z
+$az_value = az_dropdown_value(0);
+$az_output = az_dropdown_output(0);
+						   
+$smarty->assign('az_value', $az_value);
+$smarty->assign('az_output', $az_output);	
+
+
 $smarty->assign("game_id",$game_id);
 $smarty->assign("user_id",$_SESSION['user_id']);
 
