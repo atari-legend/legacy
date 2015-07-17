@@ -26,13 +26,53 @@ include("../tiles/screenstar.php");
 include("../tiles/statistics_tile.php");
 include("../tiles/hotlinks_tile.php");
 
-foreach (glob("../templates/0/images/trivia/*.*") as $filename) {
-    $smarty->append('image',
-	    array('image_name' => $filename ));
+if (isset($skin))
+{
+	if ($skin == '0')
+	{
+		$smarty->assign('css_file', '../templates/0/css/style.css');
+		$smarty->assign('img_dir', '../templates/0/images/');
+		
+		foreach (glob("../templates/0/images/trivia/*.*") as $filename) {
+			$smarty->append('image',
+				array('image_name' => $filename ));
+		}	
+	}
+	elseif ($skin == '0')
+	{
+		$smarty->assign('css_file', '../templates/1/css/style.css');
+		$smarty->assign('img_dir', '../templates/1/images/');
+		
+		foreach (glob("../templates/1/images/trivia/*.*") as $filename) {
+			$smarty->append('image',
+				array('image_name' => $filename ));
+		}
+	}
+	else
+	{
+		$smarty->assign('css_file', '../templates/1/css/style.css');
+		$smarty->assign('img_dir', '../templates/1/images/');
+		
+		foreach (glob("../templates/1/images/trivia/*.*") as $filename) {
+			$smarty->append('image',	
+				array('image_name' => $filename ));
+		}
+			
+	}
+}
+else
+{
+	$smarty->assign('css_file', '../templates/1/css/style.css');
+	$smarty->assign('img_dir', '../templates/1/images/');
+	
+	foreach (glob("../templates/1/images/trivia/*.*") as $filename) {
+		$smarty->append('image',
+			array('image_name' => $filename ));
+	}
 }
 
 //Send all smarty variables to the templates
-$smarty->display('extends:../templates/0/main.html|../templates/0/frontpage.html|../templates/0/latest_news_tile.html|../templates/0/latest_reviews_tile.html|../templates/0/who_is_it_tile.html|../templates/0/screenstar_tile.html|../templates/0/hotlinks_tile.html|../templates/0/date_quote_tile.html|../templates/0/did_you_know_tile.html|../templates/0/statistics_tile.html|../templates/0/user_login_tile.html');
+$smarty->display('extends:../templates/html/main.html|../templates/html/frontpage.html|../templates/html/latest_news_tile.html|../templates/html/latest_reviews_tile.html|../templates/html/who_is_it_tile.html|../templates/html/screenstar_tile.html|../templates/html/hotlinks_tile.html|../templates/html/date_quote_tile.html|../templates/html/did_you_know_tile.html|../templates/html/statistics_tile.html|../templates/html/user_login_tile.html');
 
 //close the connection
 mysqli_close($mysqli)
