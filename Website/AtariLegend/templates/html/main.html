@@ -24,14 +24,14 @@
 		<meta name="keywords" content="atari, atari st, games, game, demo, demos, reviews, articles, interviews, st">
 		<title> Atari Legend | Legends Never Die</title>
 		<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0" />
-		<link href="../templates/0/css/style.css" type="text/css" rel="stylesheet">
-		<link type="text/css" href="../templates/0/css/jquery-ui.css" rel="Stylesheet" />
-		<script type='text/javascript' src='../templates/0/js/respond.min.js'></script> <!-- script needed for the side menu -->
-		<script type='text/JavaScript' src='../templates/0/js/sha512.js'></script> <!-- log on security script -->
-		<script type='text/JavaScript' src='../templates/0/js/md5.js'></script>  <!-- log on security script -->
-        <script type='text/JavaScript' src='../templates/0/js/forms.js'></script> <!-- log on security script -->
-		<script src="../templates/0/js/jquery-2.1.4.min.js" type="text/javascript"></script> <!-- main jquery stuff -->
-		<script src="../templates/0/js/jquery-ui.min.js" type="text/javascript"></script> <!-- main jqueryUI stuff -->
+		<link href="{$css_file}" type="text/css" rel="stylesheet">
+		<link type="text/css" href="../templates/main_css/jquery-ui.css" rel="Stylesheet" />
+		<script type='text/javascript' src='../templates/js/respond.min.js'></script> <!-- script needed for the side menu -->
+		<script type='text/JavaScript' src='../templates/js/sha512.js'></script> <!-- log on security script -->
+		<script type='text/JavaScript' src='../templates/js/md5.js'></script>  <!-- log on security script -->
+        <script type='text/JavaScript' src='../templates/js/forms.js'></script> <!-- log on security script -->
+		<script src="../templates/js/jquery-2.1.4.min.js" type="text/javascript"></script> <!-- main jquery stuff -->
+		<script src="../templates/js/jquery-ui.min.js" type="text/javascript"></script> <!-- main jqueryUI stuff -->
 		
 	<script type="text/javascript"> <!-- script needed for the autocompletion search engine -->
 		$(document).ready(function()
@@ -64,16 +64,16 @@
 					<!-- This is the side menu only visible for smartphones (max resolution 480pc)-->				
 					<div class="container" style="position: fixed;">
 					  <div id="sidebar">
-						  <ul style="vertical-align:middle;">
-							<li><a href="#" title="Games" id="games_side" class="topbutton">GAMES</a></li>
-							<li><a href="#" title="Menus" id="menus_side" class="topbutton">MENUS</a></li>
-							<li><a href="#" title="Demos" id="demos_side" class="topbutton">DEMOS</a></li>
-							<li><a href="#" title="Links" id="links_side" class="topbutton">LINKS</a></li>
-							<li><a href="#" title="About" id="about_side" class="topbutton">ABOUT</a></li>
+						  <ul>
+							<li><a href="#" title="Games" class="top_button"><button type="button" class="topbutton" id="games_side">GAMES</button></a></li>
+							<li><a href="#" title="Menus" class="top_button"><button type="button" class="topbutton" id="menus_side">MENUS</button></a></li>
+							<li><a href="#" title="Demos" class="top_button"><button type="button" class="topbutton" id="demos_side">DEMOS</button></a></li>
+							<li><a href="#" title="Links" class="top_button"><button type="button" class="topbutton" id="links_side">LINKS</button></a></li>
+							<li><a href="#" title="About" class="top_button"><button type="button" class="topbutton" id="about_side">ABOUT</button></a></li>
 						  </ul>
 						  <ul id="search_ul">
 							  <li id="searchbutton_side"><input id="search_text_side" type="text" name="search_text" maxlength="11" /></li>
-							  <li><a href="#" title="search"><img id="search_side" src="../templates/0/images/menu_search.png" alt="search" /></a></li>
+							  <li><a href="#" title="search"><img id="search_side" src="{$img_dir}menu_search.png" alt="search" /></a></li>
 						  </ul>
 						  <div class="skin-wrap">
 							<nav class="skin-menu">
@@ -81,8 +81,8 @@
 								<li>
 									<button type="button" class="topbutton" id="skin_side">SKIN</button>
 									<ul class="sub-menu">
-										<li><a href="#">LEGACY</a></li>
-										<li><a href="#">CLASSIC</a></li>
+										<li><a href="../front/front.php?skin=1">LEGACY</a></li>
+										<li><a href="../front/front.php?skin=0">TOS 2.07</a></li>
 									</ul>
 								</li>
 							  </ul>
@@ -99,29 +99,29 @@
 					</div>		
 					<!-- end of side menu-->
 					<div id="left">
-						<img id="logo_img" src="../templates/0/images/logos/top_logo0{math equation='rand(1,5)'}.png" alt="logo" />
-						<img id="logo_img_480" src="../templates/0/images/logos/top_logo01_480.png" alt="logo_480" />
+						<img id="logo_img" src="{$img_dir}logos/top_logo0{math equation='rand(1,5)'}.png" alt="logo" />
+						<img id="logo_img_480" src="{$img_dir}logos/top_logo01_480.png" alt="logo_480" />
 					</div>
 					<div id="right">
-						<img src="../templates/0/images/top_right0{math equation='rand(1,2)'}.png" alt="bee" />
+						<img src="{$img_dir}top_right0{math equation='rand(1,2)'}.png" alt="bee" />
 					</div>
 					{assign var='number' value=1|rand:5}
 					{if $number is odd}
-					<img id="animation" src="../templates/0/images/animations/animation0{math equation='rand(1,5)'}.gif" alt="animation" />
+					<img id="animation" src="{$img_dir}animations/animation0{math equation='rand(1,5)'}.gif" alt="animation" />
 					{else}
-					<img id="animation_vert" src="../templates/0/images/animations/animation_vert0{math equation='rand(1,2)'}.gif" alt="animation" />
+					<img id="animation_vert" src="{$img_dir}animations/animation_vert0{math equation='rand(1,2)'}.gif" alt="animation" />
 					{/if}
 				</div>			
 				<nav>
 					<ul class="nav">
-						<li><a href="#" title="Home"><img id="home" src="../templates/0/images/menu_home.png" alt="home" /></a></li>
-						<li><a href="#" title="Games" id="games" class="topbutton">GAMES</a></li>
-						<li><a href="#" title="Menus" id="menus" class="topbutton">MENUS</a></li>
-						<li><a href="#" title="Demos" id="demos" class="topbutton">DEMOS</a></li>
-						<li><a href="#" title="Links" id="links" class="topbutton">LINKS</a></li>
-						<li><a href="#" title="About" id="about" class="topbutton">ABOUT</a></li>
+						<li><a href="#" title="Home"><img id="home" src="{$img_dir}menu_home.png" alt="home" /></a></li>
+						<li><a href="#" title="Games" class="top_button"><button type="button" class="topbutton" id="games">GAMES</button></a></li>
+						<li><a href="#" title="Menus" class="top_button"><button type="button" class="topbutton" id="menus">MENUS</button></a></li>
+						<li><a href="#" title="Demos" class="top_button"><button type="button" class="topbutton" id="demos">DEMOS</button></a></li>
+						<li><a href="#" title="Links" class="top_button"><button type="button" class="topbutton" id="links">LINKS</button></a></li>
+						<li><a href="#" title="About" class="top_button"><button type="button" class="topbutton" id="about">ABOUT</button></a></li>
 						<li><div class="searchbutton" id="search_text"><input type="text" id="auto" /></div></li>
-						<li><a href="#" title="search"><img id="search" src="../templates/0/images/menu_search.png" alt="search" /></a></li>
+						<li><a href="#" title="search"><img id="search" src="{$img_dir}menu_search.png" alt="search" /></a></li>
 					</ul>
 				</nav>	
 			</header>	
@@ -129,8 +129,8 @@
 			<footer class="footer">
 				<div class="footer_logo">
 					<br><br><br>
-					<img id="footer_img" src="../templates/0/images/footer_logo.png" alt="logo">
-					<h3>&copy; copyright 2004 - {'Y'|date} </h3>
+					<img id="footer_img" src="{$img_dir}footer_logo.png" alt="logo">
+					<h3>&copy; copyright 2004 - {'Y'|date}</h3>
 				</div>
 			</footer>
 		</div>

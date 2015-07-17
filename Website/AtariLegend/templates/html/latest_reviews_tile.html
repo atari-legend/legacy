@@ -22,7 +22,7 @@
 	{assign var="number" value=1}
 	{foreach from=$recent_reviews item=line}
 		<div class="standard_tile_line"></div>	
-		<div class="standard_list_entry" {if $number is odd}style="background-color:black;"{/if}>
+		<div {if $number is even}class="standard_list_entry"{else}class="standard_list_entry_odd"{/if}>
 			<div class="standard_list_entry_left">
 				<a href="#"><img src="../includes/show_image.php?file={$line.review_img}&amp;resize=164,null,null,null&amp;crop=left,top,164,120" alt="latest_review"></a>
 			</div>
