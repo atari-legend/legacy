@@ -561,6 +561,16 @@ header nav { float: center;
   text-decoration:none;
 }
 
+#search:hover { background: url(../../../templates/0/images/menu_search_hover.png) 0 0 no-repeat;
+	           height: 0px;
+			   padding-top: 30px;
+			   padding-left: 30px;}
+
+#home:hover { background: url(../../../templates/0/images/menu_home_hover.png) 0 0 no-repeat;
+				height: 0px;
+				padding-top: 30px;
+				padding-left: 30px;}
+
 /* This little fix was added because we had a weird menubar bug at 1280. */
 @media screen and (min-width: 1280px) and (max-width: 1296px) {  
 	#search { width: 21px; height: 30px;}
@@ -837,7 +847,7 @@ Standard tile settings
 
 a.standard_tile_link:link
 { 	
-	color: #fff;
+	color: white;
 	text-shadow: -1px 1px 8px #686868, 1px -1px 8px #515151;
 	text-decoration: none;
 	outline: 0 none;
@@ -861,6 +871,14 @@ a.standard_tile_link:hover, a.standard_tile_link:focus
 	color: white;
 	text-shadow: -1px 1px 8px #686868, 1px -1px 8px #515151;
 }
+
+.standard_tile_link_button:link { 
+		text-decoration: none;
+		color : black;
+	} 
+
+.standard_tile_link_button:visited { text-decoration: none; }
+.standard_tile_link_button:hover { text-decoration: none; }
 
 .standard_list_entry{position : relative;
 		width: 100%;
@@ -976,6 +994,10 @@ a.standard_tile_link:hover, a.standard_tile_link:focus
 		position: absolute;		
 		Margin-top: 130px;
 	}
+
+.trivia_title { font-size:19pt; color:white;}
+.trivia_tag { font-size:13pt}
+.trivia_text{ font-size:12pt; color:white }
 	
 /* 1 tile and a simplified intro screen */
 @media screen and (max-width: 639px) { 
@@ -1144,7 +1166,7 @@ Statistics tile - front page
 ------------------------------------------------------------ */
 #statistics_position_front{ margin-bottom: 20px; }	
 
-.statistics_dark { color: #acacac;}
+.statistics_dark { color: #6a6a6a;}
 	
 	
 /*---------------------------------------------------------- 
