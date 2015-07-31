@@ -38,7 +38,7 @@ if (isset($skin))
 				array('image_name' => $filename ));
 		}	
 	}
-	elseif ($skin == '0')
+	elseif ($skin == '1')
 	{
 		$smarty->assign('css_file', '../templates/1/css/style.css');
 		$smarty->assign('img_dir', '../templates/1/images/');
@@ -50,10 +50,10 @@ if (isset($skin))
 	}
 	else
 	{
-		$smarty->assign('css_file', '../templates/1/css/style.css');
-		$smarty->assign('img_dir', '../templates/1/images/');
+		$smarty->assign('css_file', '../templates/2/css/style.css');
+		$smarty->assign('img_dir', '../templates/2/images/');
 		
-		foreach (glob("../templates/1/images/trivia/*.*") as $filename) {
+		foreach (glob("../templates/2/images/trivia/*.*") as $filename) {
 			$smarty->append('image',	
 				array('image_name' => $filename ));
 		}

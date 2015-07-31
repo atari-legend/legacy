@@ -3,10 +3,11 @@
 ------------------------------------------------------------ */
 /* load the main site font */
 @font-face {
-   font-family: Audiowide;
-   src: url(../font/Audiowide-Regular.ttf);
-}
-
+ font-family: robot;
+   src: url(../font/Ubuntu.ttf),
+		url(../font/Ubuntu.woff);
+}		
+	
 * { 	margin: 0; padding: 0; 
 }
 
@@ -14,7 +15,8 @@ html { overflow-y: scroll;
 	overflow-x: hidden;
 }
 
-body { background: black; font-family: Audiowide, Arial, helvetica, sans-serif;
+body { background: #dbd7d1; 
+	  font-family: robot, arial, helvetica, sans-serif;
 }
 
 img { display: block;
@@ -51,7 +53,7 @@ footer, header, hgroup, menu, nav, section {
 	width: 100%;
 	float: left;
 	display: block;
-	background: url(../../../templates/1/images/top_bg.jpg) 0 0 no-repeat;
+	background: url(../../../templates/2/images/top_bg.jpg) 0 0 no-repeat;
 	height:100%;
 	}
 
@@ -66,6 +68,8 @@ footer, header, hgroup, menu, nav, section {
 	#right img {
 		max-width: 100%;
 		float: right;
+		margin-right: 35px;
+		margin-top: 10px;
 		}			
 
 		/* animation */
@@ -83,7 +87,7 @@ footer, header, hgroup, menu, nav, section {
 
 @-webkit-keyframes STcharacters {
     0% {
-        top: 145px;
+        top: 156px;
 		left: -20%;
 		opacity: 0;}	
 	
@@ -91,14 +95,14 @@ footer, header, hgroup, menu, nav, section {
 	70% { opacity: 1;}
 	
 	100% {
-        top: 145px;
+        top: 156px;
 		left: 45%;
 		opacity: 0;
     }
 }
 @keyframes STcharacters {
     0% {
-        top:145px;
+        top:156px;
 		left: -20%;
 		opacity: 0;}		
 		
@@ -106,7 +110,7 @@ footer, header, hgroup, menu, nav, section {
 	70% { opacity: 1;}
     	
     100% {
-        top:145px;
+        top:156px;
 		left: 45%;
 		opacity: 0;
     }
@@ -156,8 +160,6 @@ footer, header, hgroup, menu, nav, section {
     }
 }
 
-
-
 /* at a resolution of max 480 (smartphones) we want a smaller logo with border */		
 @media screen and (max-width: 480px) { 
 	.container { width: 15%; } 
@@ -178,13 +180,13 @@ footer, header, hgroup, menu, nav, section {
 	#top_background  { border-top-width: 0px;
 			border-left-width: 0px;
 			border-bottom-width: 7px;
-			border-bottom-color: #00d3d3;
+			border-bottom-color: #161c71;
 			border-style: solid;
-			box-shadow: 0 0 7px #00d3d3;
-		    background: -webkit-linear-gradient(black, #01b5b5); /* For Safari 5.1 to 6.0 */
-			background: -o-linear-gradient(black, #01b5b5); /* For Opera 11.1 to 12.0 */
-			background: -moz-linear-gradient(black, #01b5b5); /* For Firefox 3.6 to 15 */
-			background: linear-gradient(#175f5f, black); /* Standard syntax (must be last) */
+			box-shadow: 0 0 7px #161c71;
+		    background: -webkit-linear-gradient(black, #161c71); /* For Safari 5.1 to 6.0 */
+			background: -o-linear-gradient(black, #161c71); /* For Opera 11.1 to 12.0 */
+			background: -moz-linear-gradient(black, #161c71); /* For Firefox 3.6 to 15 */
+			background: linear-gradient(#161c71, black); /* Standard syntax (must be last) */
 		}
 }		
 
@@ -194,6 +196,7 @@ footer, header, hgroup, menu, nav, section {
 	#left { width: 100%; }
 	#logo_img{ margin-left: auto;
 			   margin-right: auto; 
+			   margin-top: 0px;
 		}
 	#animation, #animation_vert{ display: none;}
 	#logo_img_480{ display: none;}
@@ -246,9 +249,9 @@ footer, header, hgroup, menu, nav, section {
     #sidebar {
 		z-index:1;
 		position: absolute;
-        left: -170px;
+        left: -172px;
         background: black;
-        width: 170px;
+        width: 172px;
         height: 100%;
         box-sizing: border-box;
     }
@@ -260,7 +263,7 @@ footer, header, hgroup, menu, nav, section {
     }
 	
     #sidebar ul li { margin: 0;
-			background:#00d3d3; }
+			background:trasparant; }
 	
     #sidebar ul li a {
         padding: 0;
@@ -271,9 +274,6 @@ footer, header, hgroup, menu, nav, section {
         -o-transition:  background 0.3s ease-in-out;
         transition:  background 0.3s ease-in-out;
     }
-	
- 
-	#sidebar ul li a img:hover { opacity:0.5;}
 	
     .main-content {
         width: 100%;
@@ -297,7 +297,7 @@ footer, header, hgroup, menu, nav, section {
     }
 	
     .main-content #sidebar-toggle {
-        background: #01b5b5;
+        background: #161c71;
         border-radius: 3px;
         display: block;
         position: absolute;
@@ -322,26 +322,32 @@ footer, header, hgroup, menu, nav, section {
 	
 	#search_ul li { display: inline; float: left; }
 	
-	#search_side { width: 50px;}
-
+	#search_side { width: 45px; 
+		height: 28px;
+		-webkit-border-radius: 0 15px 15px 0;
+		-moz-border-radius: 0 15px 15px 0;
+		border-radius: 0 15px 15px 0;
+		border:1px solid black;
+	}
+	
 	#searchbutton_side {
-		background: #00d3d3;
-		height: 38px;
+		background: #161c71;
+		height: 28px;
 		width: 119px;
-		border-bottom: 2px solid #008b8b;
-		border-left : 1px solid #007878;
+		border-bottom: 2px solid #161c71;
+		border-left : 4px solid black;
  		padding-top: 0px;
 	}
 	
 	#search_text_side{ color: #ffffff;				
 				width: 105px;
-				height: 23px;
-				border: 1px solid #007b7b;
-				margin: 7px 0px 0px 6px;
+				height: 18px;
+				border: 1px solid #161c71;
+				margin: 4.5px 0px 0px 6px;
 				padding: 0;
 				background: #000; 
 				text-align: center;
-				font-family: Audiowide;
+				font-family: robot; arial;
 			}
 	
 /*-----some code for the skin submenu-------*/
@@ -410,13 +416,13 @@ footer, header, hgroup, menu, nav, section {
 		display:block;
 		text-decoration: none;
 		font-weight: normal;
-		color: #182727;
-		background : #00bdbf;
+		color: white;
+		background : #161c71;
 	}
 	 
 	.sub-menu li a:hover, .sub-menu .current-item a {
-		background:#01b5b5;
-		color:#43635f;
+		background:#dbd7d1;
+		color:black;
 	}
 
 
@@ -434,18 +440,183 @@ footer, header, hgroup, menu, nav, section {
 	#about_side{height: 40px; width: 113px; font-size: 14px;}
 	#links_side{height: 40px; width: 113px; font-size: 14px;}
 	#skin_side{height: 37px; width: 113px; font-size: 14px;}
-	#search_side {height: 40px; width: 25px;}
-	#search_text_side{height: 20px; width: 70px;}
+	#search_side {height: 37px; width: 20px;}
+	#search_text_side{height: 24px; width: 70px;}
 	#searchbutton_side{height: 38px; width: 87px;}
 	.container.open-sidebar { left: 113px;}
-    #sidebar { left: -113px;
-        width: 113px;
+    #sidebar { left: -115px;
+        width: 115px;
 	}
 	.sub-menu li { font-size:13px; }
 }
 
+/* ---------the main menu below top--------*/
+
+/* This piece of code is used for higher res :
+/*	1) making the side menu go to the left of the screen  --> Container absolute
+/*  2) Side bar needs to be transparant for resolutions between 1281 and 16** or something --> #sidebar
+/*  3) header nav is switched to absolute, if this is not done, the hyperlinks won't work anymore becauwe of position of container
+/*  4) since header nav is absolute, the main part of the site needs to be repositioned */
+@media screen and (min-width: 1280px){  	
+	.container { position: absolute;}
+	#sidebar {background-color: rgba(0, 0, 0, 0);}
+	header nav { position: absolute; margin-top: 220px; left : 0}
+	#main { position: relative; margin-top: 60px;}
+}
+
+@media screen and (max-width: 1279px){ 
+	#main { margin-top: 25px;}
+}
+
+header nav { float: center;
+	width: 100%; 	
+	}
+	header nav ul { font-size: 0; width : 100%; text-align : center; 
+		}
+	header nav img:hover{ opacity:1; 
+	}
+	header nav li {	display: inline-block;
+		}
+	header nav input{
+	background-color: #000;
+	color: #ffffff;
+	width: 247px;
+	height: 20px;
+	border: 1px solid #4f4f4f;
+	margin: 2px 0px 0px 16px;
+	padding: 0;
+	text-align: center;
+	display: block;
+	font-family: robot, Arial, sans-serif;
+			}
+
+.topbutton
+{
+display: block;
+float:left;
+border:2px solid black;
+height: 30px;
+width: 170px;
+background: #161c71;
+font-family: robot, arial, sans-serif;
+color:black;
+font-size:19px;
+font-weight: bold;
+text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #fff;
+/*give the corners a small curve*/ 
+-webkit-border-radius: 0 15px 15px 0;
+-moz-border-radius: 0 15px 15px 0;
+border-radius: 0 15px 15px 0;
+margin-left: 2px;
+text-decoration:none;
+}
+
+#home { 
+display: block;
+-webkit-border-radius: 0 15px 15px 0;
+-moz-border-radius: 0 15px 15px 0;
+border-radius: 0 15px 15px 0;
+height: 26px;
+border:2px solid black;
+}
+
+#home:hover { background: url(../../../templates/2/images/menu_home_hover.png) 0 0 no-repeat;
+	height: 0px;
+	padding-top: 26px;
+	padding-left: 60px;
+	border:2px solid #4f4f4f;
+}
+
+.topbutton:hover {
+  background: #dbd7d1;
+  color: black;
+  text-decoration:none;
+  border:2px solid #4f4f4f;
+}
+
+.top_button:visited {
+  text-decoration:none;
+}
+
+.top_button:link {
+  text-decoration:none;
+  color: #182727;
+}
+
+.searchbutton
+{ 
+	display: block;
+	float:left;
+	border:2px solid black;
+	height: 26px;
+	width: 280px;
+	background:  #161c71;
+	color:black;
+	font-size:20px;
+	text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #fff;
+	/*give the corners a small curve*/ 
+	-webkit-border-radius: 0 15px 15px 0;
+	-moz-border-radius: 0 15px 15px 0;
+	border-radius: 0 15px 15px 0;
+	margin-left: 2px;
+}
+
+#search { 
+	display: block;
+	-webkit-border-radius: 0 15px 15px 0;
+	-moz-border-radius: 0 15px 15px 0;
+	border-radius: 0 15px 15px 0;
+	height: 26px;
+	border:2px solid black;
+	margin-left: 2px;
+}
+
+#search:hover { background: url(../../../templates/2/images/menu_search_hover.png) 0 0 no-repeat;
+	height: 0px;
+	padding-top: 26px;
+	padding-left: 60px;
+	border:2px solid #4f4f4f;
+}
+
+.signinbutton
+{
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border:2px solid black;
+  height: 30px;
+  width: 170px;
+  background:#161c71;
+  color:black;
+  font-family: robot, arial, sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+  text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #fff;
+  /*give the corners a small curve*/ 
+  -webkit-border-radius: 0 15px 15px 0;
+  -moz-border-radius: 0 15px 15px 0;
+  border-radius: 0 15px 15px 0;
+  text-decoration:none;
+}
+
+.signinbutton:hover {
+  background: #dbd7d1;
+  color: black;
+  text-decoration:none;
+  border:2px solid #4f4f4f;
+}
+
+
+.signinbutton:visited {
+  text-decoration:none;
+}
+
+.signinbutton:link {
+  text-decoration:none;
+}
+
 /* for the lower resolutions, we don't have the menu bar below the top */ 
-@media screen and (max-width: 1279px) {  	
+@media screen and (max-width: 1279px) {  
 	#home { display: none; }
 	#search { display: none; } 
 	#search_text{ display: none; } 
@@ -467,135 +638,13 @@ footer, header, hgroup, menu, nav, section {
 	#menus_side { display: none; }
 }
 
-/* ---------the main menu below top--------*/
-
-/* This piece of code is used for higher res :
-/*	1) making the side menu go to the left of the screen  --> Container absolute
-/*  2) Side bar needs to be transparant for resolutions between 1281 and 16** or something --> #sidebar
-/*  3) header nav is switched to absolute, if this is not done, the hyperlinks won't work anymore becauwe of position of container
-/*  4) since header nav is absolute, the main part of the site needs to be repositioned */
-@media screen and (min-width: 1280px){  	
-	.container { position: absolute;}
-	#sidebar {background-color: rgba(0, 0, 0, 0);}
-	header nav { position: absolute; margin-top: 225px; left : 0}
-	#main { position: relative; margin-top: 60px;}
-}
-
-
-header nav { float: center;
-	width: 100%; 	
-	}
-	header nav ul { font-size: 0; width : 100%; text-align : center; 
-		}
-	header nav img:hover{ opacity:0.8; 
-	}
-	header nav li {	display: inline-block;
-		}
-	header nav input{
-	background-color: #000;
-	color: #ffffff;
-	width: 247px;
-	height: 35px;
-	border: 1px solid #007b7b;
-	margin: 11px 0px 0px 16px;
-	padding: 0;
-	text-align: center;
-	display: block;
-	font-family: Audiowide;
-			}
-
-.topbutton
-{
-  display: block;
-  float:left;
-  cursor: pointer;
-  border: 0px;
-  background: #00d3d3;
-  font-family: Audiowide,Arial,helvetica,sans-serif;
-  color: #182727;
-  height: 60px;
-  width: 170px;
-  font-size: 20px;
-  border-bottom: 3px solid #008b8b;
-  border-left: 1px solid #007878;
-  padding-top: 3px;
-  text-decoration:none;
-}
-
-.topbutton:hover {
-  background: #00a9a9;
-  color: #182727;
-  text-decoration:none;
-  border-bottom: 3px solid #006f6f;
-}
-
-.top_button:visited {
-  text-decoration:none;
-}
-
-.top_button:link {
-  text-decoration:none;
-  color: #182727;
-}
-
-.searchbutton
-{
-  display: block;
-  float:left;
-  border: 0px;
-  background: #00d3d3;
-  font-family: Audiowide,Arial,helvetica,sans-serif;
-  color: #182727;
-  height: 57px;
-  width: 280px;
-  font-size: 20px;
-  border-bottom: 3px solid #008b8b;
-  border-left: 1px solid #007878;
-  padding-top: 0px;
-  text-decoration:none;
-}
-
 /* This little fix was added because we had a weird menubar bug at 1280. */
-@media screen and (min-width: 1280px) and (max-width: 1297px) {  
-	#search { width: 66px; height: 60px;}
-	#home  { width: 66px; height: 60px;}
+@media screen and (min-width: 1280px) and (max-width: 1296px) {  
+	.topbutton{ margin-left: 0px; }
+	#home{ margin-left: 0px; }
+	#search{ margin-left: 0px; }
+	.searchbutton{ width: 278px; }
 }
-
-.signinbutton
-{
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  cursor: pointer;
-  border: 0px;
-  background: #00d3d3;
-  font-family: Audiowide,Arial,helvetica,sans-serif;
-  color: #182727;
-  height: 60px;
-  width: 134px;
-  font-size: 20px;
-  border-bottom: 3px solid #008b8b;
-  border-left: 1px solid #007878;
-  padding-top: 3px;
-  text-decoration:none;
-}
-
-.signinbutton:hover {
-  background: #00a9a9;
-  color: #182727;
-  text-decoration:none;
-  border-bottom: 3px solid #006f6f;
-}
-
-
-.signinbutton:visited {
-  text-decoration:none;
-}
-
-.signinbutton:link {
-  text-decoration:none;
-}
-
 
 /*---------------------------------------------------------- 
  Main site
@@ -663,12 +712,16 @@ Standard tile settings
 }
 
 .standard_tile  { width: 100%; 
-		background-color: #122323;
-		border-top: 10px solid #01b5b5;
-		border-bottom: 3px solid #01b5b5;
+		/*background-color: #a6a6a6;*/
+		background: -webkit-linear-gradient(bottom, white , #a6a6a6); /* For Safari 5.1 to 6.0 */
+	    background: -o-linear-gradient(bottom, white, #a6a6a6); /* For Opera 11.1 to 12.0 */
+	    background: -moz-linear-gradient(bottom, white, #a6a6a6); /* For Firefox 3.6 to 15 */
+	    background: linear-gradient(to top, white, #a6a6a6); /* Standard syntax */
+		border-top: 10px solid #161c71;
+		border-bottom: 3px solid #161c71;
 	}
 
-.standard_tile_line{ border-bottom: 2px solid #000000;
+.standard_tile_line{ border-bottom: 2px solid black;
 	}
 	
 .standard_tile_background{
@@ -684,12 +737,12 @@ Standard tile settings
 .standard_tile_subtext
 {
 	font-size:10pt; 
-	color:#bcbdbd;
+	color:white;
 }
 
 .standard_tile p { 
 		text-align: left;
-		border-right: 2px solid #01b5b5;
+		border-right: 2px solid #484c7b;
 		/*border-left: 2px solid #01b5b5;*/
 		padding-left: 4%;
 		padding-right: 4%;
@@ -697,17 +750,18 @@ Standard tile settings
 }
 				
 .standard_tile_title{ 
-		background: rgb(0, 80, 80) transparent;   /* Fallback for web browsers that doesn't support RGBa */
-        background: rgba(0, 80, 80, 0.6);   /* RGBa with 0.6 opacity */
-		filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#005050, endColorstr=#005050);  /* For IE 5.5 - 7*/
-		-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#005050, endColorstr=#005050)";  /* For IE 8*/ 
+		background: rgb(192, 193, 202) transparent;   /* Fallback for web browsers that doesn't support RGBa */
+        background: rgba(192, 193, 202, 0.6);   /* RGBa with 0.6 opacity */
+		filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#c0c1ca, endColorstr=#c0c1ca);  /* For IE 5.5 - 7*/
+		-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#c0c1ca, endColorstr=#c0c1ca)";  /* For IE 8*/
 		padding-top:3%;
 		font-size : 17pt;
-		margin-top : 46%;
+		font-weight: 100;
+		margin-top : 47%;
 		color : white; 	
 		z-index:1;
 		position:absolute;
-	    border-bottom: 2px solid #01b5b5;
+	    border-bottom: 2px solid #484c7b;
 }
 
 @media screen and (max-width: 1150px) { 
@@ -773,40 +827,41 @@ Standard tile settings
 					padding-bottom: 3%;}
 					
 
-.standard_tile h1 { color: white;
+.standard_tile h1 { color: black;
 			font-size: 18pt;
-			font-weight: 100;
+			font-weight: bold;
 			text-align: center;	
 			margin-top:20px;
 			margin-bottom:20px;
+			text-shadow: 0 0 0.2em white
 	}
 	
 .standard_tile h2 { color: #00d3d3;
 			font-size: 10pt;
-			font-weight: 100;
+			font-weight: bold;
 			font-style: italic;
 			float: right;	
 	}
 	
-.standard_tile h3 { color: white;
-			font-size: 10pt;
+.standard_tile h3 { color: black;
+			font-size: 13pt;
 			font-weight: 100;
 			text-align: center;
 	}
 	
-.standard_tile h4 { color: white;
-			font-size: 12pt;
+.standard_tile h4 { color: black;
+			font-size: 13pt;
 			font-weight: 100;
 			text-align: left;
 	}
  
-.standard_tile h5 { color: #9c9c9c;
+.standard_tile h5 { color: black;
 			font-size: 9pt;
 			font-weight: 100;
 			text-align: left;
 	}
 
-.standard_tile h6 { color: white;
+.standard_tile h6 { color: black;
 			font-size: 11pt;
 			font-weight: 100;
 			text-align: left;
@@ -822,30 +877,30 @@ Standard tile settings
 				border: 0;
 				text-align: left;
 				display: block;
-				background-size: 85% 44px;
-				font-family: Audiowide;	
+				background-size: 85% 42px;
+				font-family: Robot, Arial;	
 }
 
 .standard_tile_link:link { text-decoration: none;
-	color: white;
+	color: black;
 }
 
 .standard_tile_link:visited { text-decoration: none;
-	color: white;
+	color: black;
 }
 
 .standard_tile_link:hover { text-decoration: none;
-	color: #01b5b5;
+	color: #161c71;
 }
 
 .standard_tile_link_reverse:link { text-decoration: none;
-	color: #01b5b5;
-}
+	color:  black;
+}	
 
 .standard_tile_link_reverse:visited { text-decoration: none;
-	color: #01b5b5;
+	color:  black;
 }
-
+	
 .standard_tile_link_reverse:hover { text-decoration: none;
 	color: white;
 }
@@ -857,7 +912,8 @@ Standard tile settings
 
 .standard_tile_link_button:visited { text-decoration: none; }
 .standard_tile_link_button:hover { text-decoration: none; }
-
+	
+	
 .standard_list_entry{position : relative;
 		width: 100%;
 		height: 140px;
@@ -868,7 +924,7 @@ Standard tile settings
 		width: 100%;
 		height: 140px;
 		display: table;
-		background: black;
+		background: #6a6a6a;
  }
 
 .standard_list_entry_left{
@@ -883,7 +939,7 @@ Standard tile settings
 
 .standard_list_entry_left img { max-width: 100%;
 		width: 80%;
-		box-shadow: 0 0 7px #00d3d3;
+		box-shadow: 0 0 7px #484c7b;
 		margin-left: 15px;
 }
 
@@ -931,9 +987,9 @@ Standard tile settings
 		width: 845px; 
 		height: 460px; 
 		overflow: hidden;
-		margin-top: 20px;
-		border-top: 10px solid #01b5b5;
-		border-bottom: 3px solid #01b5b5;
+		margin-top: -10px;
+		border-top: 10px solid #161c71;
+		border-bottom: 3px solid #161c71;
 		margin-bottom:20px;
 		float: left;
 }
@@ -947,12 +1003,12 @@ Standard tile settings
 		overflow: hidden;
 }
 
-#welcome p { background: rgb(0, 80, 80) transparent;   /* Fallback for web browsers that doesn't support RGBa */
-        background: rgba(0, 80, 80, 0.6);   /* RGBa with 0.6 opacity */
-		filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#005050, endColorstr=#005050);  /* For IE 5.5 - 7*/
-		-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#005050, endColorstr=#005050)";  /* For IE 8*/
+#welcome p { background: rgb(192, 193, 202) transparent;   /* Fallback for web browsers that doesn't support RGBa */
+        background: rgba(192, 193, 202, 0.6);   /* RGBa with 0.6 opacity */
+		filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#c0c1ca, endColorstr=#c0c1ca);  /* For IE 5.5 - 7*/
+		-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#c0c1ca, endColorstr=#c0c1ca)";  /* For IE 8*/
 		text-align: center;
-		border-right: 2px solid #01b5b5;
+		border-right: 2px solid #484c7b;
 		padding-left: 5%;
 		padding-right: 5%;
 	}	
@@ -960,15 +1016,15 @@ Standard tile settings
 #welcome_text { font-size : 11pt; 
 		padding-bottom: 10px;	
 		padding-top: 10px;	
-		color : #bcbdbd;
-		border-bottom: 2px solid #01b5b5;	
+		color : #161c71;
+		border-bottom: 2px solid #484c7b;	
 		position: absolute;		
 		Margin-top: 130px;
 	}
 	
-.trivia_title { font-size:19pt; color:white;}
-.trivia_tag { font-size:13pt}
-.trivia_text{ font-size:12pt; color:white }
+.trivia_title { color: black; font-size:20pt;}
+.trivia_tag { font-size:13pt;}
+.trivia_text{ color: black; font-size : 13pt; }
 
 /* 1 tile and a simplified intro screen */
 @media screen and (max-width: 639px) { 
@@ -984,7 +1040,7 @@ Standard tile settings
 /*---------------------------------------------------------- 
 logon tile --> front page
 ------------------------------------------------------------ */
-#logon { margin-top: 20px;
+#logon { margin-top: -10px;
 		float : right;
 		margin-bottom : 20px;
 		width: 100%;
@@ -1028,7 +1084,7 @@ logon tile --> front page
 	width: 40%;	
 }
 
-.logon_socmed img:hover{ opacity:0.7;}
+.logon_socmed img:hover{ opacity:0.7;}	
 
 /* 2 tiles and background welcome image */
 @media screen and (min-width: 640px) and (max-width: 800px) { 
@@ -1038,7 +1094,7 @@ logon tile --> front page
 /* 1 tile */
 @media screen and (max-width: 639px) { 
 	#logon  { width: 100%; 
-	margin-top: 20px;	
+	margin-top: 0px;	
 	margin-bottom: 20px;
 	}
 }
@@ -1066,7 +1122,7 @@ datequote tile - front page
 ------------------------------------------------------------ */
 #datequote_position_front { 	margin-bottom: 20px; }
 
-#datequote_bg { background: url(../../../templates/1/images/datequote_bg.jpg) ;}
+#datequote_bg { background: url(../../../templates/2/images/datequote_bg.jpg) ;}
 
 /* 1 and 2 tiles */
 @media screen and (max-width: 800px) { 
@@ -1092,10 +1148,10 @@ datequote tile - front page
 		margin-top: -10px;
 	}
 
-#datequote_text { background: rgb(0, 80, 80) transparent;   /* Fallback for web browsers that doesn't support RGBa */
-        background: rgba(0, 80, 80, 0.6);   /* RGBa with 0.6 opacity */
-		filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#005050, endColorstr=#005050);  /* For IE 5.5 - 7*/
-		-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#005050, endColorstr=#005050)";  /* For IE 8*/ 
+#datequote_text { background: rgb(192, 193, 202) transparent;   /* Fallback for web browsers that doesn't support RGBa */
+        background: rgba(192, 193, 202, 0.6);   /* RGBa with 0.6 opacity */
+		filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#c0c1ca, endColorstr=#c0c1ca);  /* For IE 5.5 - 7*/
+		-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#c0c1ca, endColorstr=#c0c1ca)";  /* For IE 8*/
 		color: white; 
 		padding-top: 10px;
 		padding-bottom: 10px;
@@ -1124,7 +1180,7 @@ Statistics tile - front page
 ------------------------------------------------------------ */
 #statistics_position_front{ margin-bottom: 20px; }	
 
-.statistics_dark { color: #cccccc; }
+.statistics_dark { color: #161c71; }
 	
 /*---------------------------------------------------------- 
 Hotlinks tile - front page
@@ -1149,7 +1205,7 @@ contact tiles - front page
 ------------------------------------------------------------ */
 .footer{ width: 100%;
 		float: left;	
-		border-top: 10px solid #01b5b5;
+		border-top: 10px solid #161c71;
 		background: url(../images/footer_bg.jpg) 0 0 no-repeat;
 	}
 
