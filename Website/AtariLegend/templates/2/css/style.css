@@ -499,10 +499,10 @@ height: 30px;
 width: 170px;
 background: #161c71;
 font-family: robot, arial, sans-serif;
-color:black;
+color:white;
 font-size:19px;
 font-weight: bold;
-text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #fff;
+/*text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #fff;*/
 /*give the corners a small curve*/ 
 -webkit-border-radius: 0 15px 15px 0;
 -moz-border-radius: 0 15px 15px 0;
@@ -587,11 +587,11 @@ border:2px solid black;
   height: 30px;
   width: 170px;
   background:#161c71;
-  color:black;
+  color:white;
   font-family: robot, arial, sans-serif;
   font-size: 18px;
   font-weight: bold;
-  text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #fff;
+  /*text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #fff;*/
   /*give the corners a small curve*/ 
   -webkit-border-radius: 0 15px 15px 0;
   -moz-border-radius: 0 15px 15px 0;
@@ -737,7 +737,8 @@ Standard tile settings
 .standard_tile_subtext
 {
 	font-size:10pt; 
-	color:white;
+	color:#161c71;
+	font-weight: bold;
 }
 
 .standard_tile p { 
