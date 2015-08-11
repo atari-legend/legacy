@@ -1,6 +1,6 @@
 <?php
 /***************************************************************************
-*                                main.php
+*                                front.php
 *                            -----------------------
 *   begin                : Tuesday, April 14, 2015
 *   copyright            : (C) 2015 Atari Legend
@@ -25,51 +25,6 @@ include("../tiles/who_is_it_tile.php");
 include("../tiles/screenstar.php");
 include("../tiles/statistics_tile.php");
 include("../tiles/hotlinks_tile.php");
-
-if (isset($skin))
-{
-	if ($skin == '0')
-	{
-		$smarty->assign('css_file', '../templates/0/css/style.css');
-		$smarty->assign('img_dir', '../templates/0/images/');
-		
-		foreach (glob("../templates/0/images/trivia/*.*") as $filename) {
-			$smarty->append('image',
-				array('image_name' => $filename ));
-		}	
-	}
-	elseif ($skin == '1')
-	{
-		$smarty->assign('css_file', '../templates/1/css/style.css');
-		$smarty->assign('img_dir', '../templates/1/images/');
-		
-		foreach (glob("../templates/1/images/trivia/*.*") as $filename) {
-			$smarty->append('image',
-				array('image_name' => $filename ));
-		}
-	}
-	else
-	{
-		$smarty->assign('css_file', '../templates/2/css/style.css');
-		$smarty->assign('img_dir', '../templates/2/images/');
-		
-		foreach (glob("../templates/2/images/trivia/*.*") as $filename) {
-			$smarty->append('image',	
-				array('image_name' => $filename ));
-		}
-			
-	}
-}
-else
-{
-	$smarty->assign('css_file', '../templates/1/css/style.css');
-	$smarty->assign('img_dir', '../templates/1/images/');
-	
-	foreach (glob("../templates/1/images/trivia/*.*") as $filename) {
-		$smarty->append('image',
-			array('image_name' => $filename ));
-	}
-}
 
 //Send all smarty variables to the templates
 $smarty->display('extends:../templates/html/main.html|../templates/html/frontpage.html|../templates/html/latest_news_tile.html|../templates/html/latest_reviews_tile.html|../templates/html/who_is_it_tile.html|../templates/html/screenstar_tile.html|../templates/html/hotlinks_tile.html|../templates/html/date_quote_tile.html|../templates/html/did_you_know_tile.html|../templates/html/statistics_tile.html|../templates/html/user_login_tile.html');
