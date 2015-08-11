@@ -15,10 +15,7 @@
 * User login process
 *********************************************************************************/
 
-include_once("../includes/connect.php");
-include_once("../includes/user_functions.php");
- 
-sec_session_start(); // Our custom secure way of starting a PHP session.
+include("../includes/common.php"); 
 
 //Do the md5 stuff first
 if (isset($_POST['userid'], $_POST['pmd5'])) {
