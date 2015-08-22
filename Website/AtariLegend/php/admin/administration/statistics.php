@@ -246,7 +246,10 @@ while ($query_users = $sql_users->fetch_array(MYSQLI_BOTH))
 						  'image' => "$user_avatar_path$query_users[user_id].$query_users[avatar_ext]",
 						  'user_aim' => $query_users['user_aim']));
 }
+
+//Create the id's for dynamic positioning of the tiles
+$smarty->assign('left_nav', 'leftnav_position_front');
 		
 //Send all smarty variables to the templates
-$smarty->display('extends:../../../templates/html/admin/main.html|../../../templates/html/admin/user_stats.html|../../../templates/html/admin/main_stats.html');
+$smarty->display('extends:../../../templates/html/admin/main.html|../../../templates/html/admin/user_stats.html|../../../templates/html/admin/left_nav.html|../../../templates/html/admin/main_stats.html');
 ?>

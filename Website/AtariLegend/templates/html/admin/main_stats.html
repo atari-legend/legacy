@@ -18,47 +18,95 @@
 	<div class="standard_tile_line"></div>
 	<div class="standard_tile_text">
 		<br>
-		<table cellspacing="2" cellpadding="2" border="0" width="100%">
+		<table cellspacing="2" cellpadding="2" border="0" width="100%" class="main_stats_high">
 		<tr>
-			<td width="50%" valign="top">
+			<td width="40%" valign="top">
 				<table class="standard_table_list">
 				<tr>
-					<th width="90%"><span style="color:black;"><h7>Some Stats</h7></span></th>
+					<th width="90%">Some Stats</th>
 				</tr>
 					{foreach from=$statistics item=line}
 				<tr>
-					<td width="90%"><h3>{if $line.value != ''}{$line.value}{/if}</h3></td>
+					<td width="90%" class="standard_table_center">{if $line.value != ''}{$line.value}{/if}</td>
 				</tr>
 					{/foreach}
 				</table>	
 			</td>
-			<td width="25%" valign="top">
+			<td width="30%" valign="top">
 				<table class="standard_table_list">
 				<tr>
-					<th width="100%" colspan="2"><span style="color:green;"><h7>Good Karma</h7></span></th>
+					<th width="100%" colspan="2">Good Karma</th>
 				</tr>
 					{foreach from=$karma_good item=line}
 				<tr>
-					<td width="75%"><a href="../user/user_detail.php?user_id_selected={$line.user_id}" class="MAINNAV"><h3>{$line.user_name}</h3></a></td>
-					<td width="25%"><h3>{$line.karma}</h3></td>
+					<td width="75%"><a href="../user/user_detail.php?user_id_selected={$line.user_id}" class="standard_table_left">{$line.user_name}</a></td>
+					<td width="25%" class="standard_table_right">{$line.karma}</td>
 				</tr>
 					{/foreach}
 				</table>						
 			</td>
-			<td width="25%" valign="top">
+			<td width="30%" valign="top">
 				<table class="standard_table_list">
 				<tr>
-					<th width="100%" colspan="2"><span style="color:red;"><h7>Bad Voodoo</h7></span></th>
+					<th width="100%" colspan="2">Bad Voodoo</span></th>
 				</tr>
 					{foreach from=$karma_bad item=line}
 				<tr>
-					<td width="75%"><a href="../user/user_detail.php?user_id_selected={$line.user_id}" class="MAINNAV"><h3>{$line.user_name}</h3></a></td>
-					<td width="25%"><h3>{$line.karma}</h3></td>
+					<td width="75%"><a href="../user/user_detail.php?user_id_selected={$line.user_id}" class="standard_table_left">{$line.user_name}</a></td>
+					<td width="25%" class="standard_table_right">{$line.karma}</td>
 				</tr>
 					{/foreach}
 				</table>	
 			</td>
-			</tr>
+		</tr>
+		</table>
+		<table cellspacing="2" cellpadding="2" border="0" width="100%" class="main_stats_low">
+		<tr>
+			<td width="100%" valign="top">
+				<table class="standard_table_list">
+				<tr>
+					<th width="90%">Some Stats</span></th>
+				</tr>
+					{foreach from=$statistics item=line}
+				<tr>
+					<td width="90%" class="standard_table_center">{if $line.value != ''}{$line.value}{/if}</td>
+				</tr>
+					{/foreach}
+				</table>	
+				<br>
+			</td>
+		</tr>
+		<tr>
+			<td width="100%" valign="top">
+				<table class="standard_table_list">
+				<tr>
+					<th width="100%" colspan="2">Good Karma</th>
+				</tr>
+					{foreach from=$karma_good item=line}
+				<tr>
+					<td width="75%"><a href="../user/user_detail.php?user_id_selected={$line.user_id}" class="standard_table_left">{$line.user_name}</a></td>
+					<td width="25%" class="standard_table_right">{$line.karma}</td>
+				</tr>
+					{/foreach}
+				</table>	
+				<br>				
+			</td>
+		</tr>
+		<tr>
+			<td width="100%" valign="top">
+				<table class="standard_table_list">
+				<tr>
+					<th width="100%" colspan="2">Bad Voodoo</span></th>
+				</tr>
+					{foreach from=$karma_bad item=line}
+				<tr>
+					<td width="75%"><a href="../user/user_detail.php?user_id_selected={$line.user_id}" class="standard_table_left">{$line.user_name}</a></td>
+					<td width="25%" class="standard_table_right">{$line.karma}</td>
+				</tr>
+					{/foreach}
+				</table>	
+			</td>
+		</tr>
 		</table>
 		<br>
 	</div>
