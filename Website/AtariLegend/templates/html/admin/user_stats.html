@@ -16,7 +16,7 @@
 //**************************************************************************************** 
 *}
 
-{block name=left}
+{block name=left2}
 <div class="standard_tile" id="user_stats">
 	<h1>ADMIN STATS</h1>
 		<div class="standard_tile_line"></div>
@@ -24,13 +24,13 @@
 			<div class="standard_tile_text">
 				<table width="100%">
 				<tr>
-					<td><img class="user_stats_img" src="../../includes/show_image.php?file={$users.image}&crop=164,null,null,null&crop=left,top,164,120" alt="avatar"></td>
+					<td align="center"><img class="user_stats_img" src="../../includes/show_image.php?file={$users.image}&crop=164,null,null,null&crop=left,top,164,120" alt="avatar"><br></td>
 				</tr>
 				<tr>
-					<td align="center"><h3>Welcome {$users.user_name}</h3></td>
+					<td class="standard_table_center">Welcome {$users.user_name}</td>
 				</tr>
 				<tr>
-					<td align="center"><h3>Your <a href="../user/user_detail.php?user_id_selected={$users.user_id}" class="standard_tile_link_reverse">detail page</a></h3></td>
+					<td class="standard_table_center">Your <a href="../user/user_detail.php?user_id_selected={$users.user_id}" class="standard_tile_link_reverse">detail page</a></td>
 				</tr>
 				</table>
 				<br>

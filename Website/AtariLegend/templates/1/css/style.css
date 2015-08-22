@@ -826,6 +826,12 @@ Standard tile settings
 				font-family: Audiowide;	
 }
 
+.standard_tile th { color: white;
+			font-size: 12pt;
+			font-weight: bold;
+			text-align: center;
+	}
+
 .standard_tile_link:link { text-decoration: none;
 	color: white;
 }
@@ -1295,9 +1301,9 @@ contact tiles - front page
 	#users_side{height: 40px; width: 113px; font-size: 14px;}
 	#admin_side{height: 40px; width: 113px; font-size: 14px;}
 	#other_side{height: 40px; width: 113px; font-size: 14px;}
-	.container_cpanel.open-sidebar_cpanel { left: 113px;}
-    #sidebar_cpanel { left: -113px;
-        width: 113px;
+	.container_cpanel.open-sidebar_cpanel { left: 225px;}
+    #sidebar_cpanel { left: -225px;
+        width: 225px;
 	}
 	.sub-menu_cpanel li { font-size:13px; }
 }
@@ -1325,8 +1331,6 @@ contact tiles - front page
 	#article_screenshots_side, #add_magazines_side, #manage_issues_side, #interviews_side, #interviews_help_side,
 	#forum_side, #logout_side{ display: none; }
 }
-
-	
 
 /* CPANEL menu below top*/ 
 
@@ -1429,6 +1433,15 @@ Standard table settings
 	text-align:left;
 }
 
+.standard_table_list  li {
+	color: white;
+	font-size: 10pt;
+	font-weight: 100;
+	text-align: center;
+	text-decoration: none; 
+	list-style-type: none;
+}
+
 .standard_table_list th {
 	border-bottom: solid 1px black;
 	background-color:#006f6f;
@@ -1452,7 +1465,6 @@ Standard table settings
 }
 
 .standard_table_list td {
-	
 	border-bottom: solid 1px black;
 	padding-top:1px;
 	padding-bottom:1px;
@@ -1460,27 +1472,95 @@ Standard table settings
 	margin:0px;
 }
 
-.standard_tile h7 { color: white;
-			font-size: 12pt;
-			font-weight: bold;
+.standard_table_center { color: white;
+			font-size: 10pt;
+			font-weight: 100;
 			text-align: center;
+			text-decoration: none; 
+}
+
+.standard_table_left { color: white;
+			font-size: 10pt;
+			font-weight: 100;
+			text-align: left;
+			text-decoration: none; 
+			padding-left: 2px;
+}
+
+.standard_table_right { color: white;
+			font-size: 10pt;
+			font-weight: 100;
+			text-align: right;
+			text-decoration: none; 
+			padding-right: 2px;
+}
+
+/* for lower resolutions put the left and right below eachother */
+@media screen and (max-width: 799px) { 	
+	.column-left-cpanel { display: none;
 	}
-	
+	.column-right-cpanel { width: 100%;
+	}
+}
 
 /*---------------------------------------------------------- 
-User stats - front page
+User stats
 ------------------------------------------------------------ */
 #user_stats{ margin-top: 80px;}	
 #main_stats{ margin-top: 80px; margin-bottom: 30px;}
 
+@media screen and (max-width: 1279px) {  
+#user_stats{ margin-top: 20px;}	
+#main_stats{ margin-top: 20px;}
+}
+
 .user_stats_img{ max-width: 100%;
-		box-shadow: 0 0 12px #cccccc;
+		box-shadow: 0 0 12px #cccccc;	
 		opacity: 0.8;
 		filter: alpha(opacity=40); /* For IE8 and earlier */
-		margin-left: 33%;
-		margin-top: 8%;
-		margin-bottom: 4%;
 }
+
+/* Make the table view responsive */
+@media screen and (max-width: 1199px) { 
+	.main_stats_high{display:none;}
+}
+
+@media screen and (min-width: 1200px) { 
+	.main_stats_low{display:none;}
+}
+
+/*---------------------------------------------------------- 
+Left nav
+------------------------------------------------------------ */
+#leftnav_position_front { margin-top: 20px; margin-bottom: 30px; float: lefft;
+}
+
+.left_nav_section{
+	background-color:#006f6f;
+	color: #FFFFDD;
+	border-bottom: solid 1px black;
+	background-color:#006f6f;
+	border-collapse: collapse;
+	padding-top:3px;
+	padding-bottom:3px;
+	padding-left:3px;
+	margin:0px;
+	text-align: center;
+	list-style-type: none;
+}
+
+.left_nav_link:link { text-decoration: none;
+	color: #122323;
+}
+
+.left_nav_link:visited { text-decoration: none;
+	color: #122323;
+}
+
+.left_nav_link:hover { text-decoration: none;
+	color: white;
+}
+
 	
 /*---------------------------------------------------------- 
  resolutions tested!

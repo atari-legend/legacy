@@ -1,6 +1,7 @@
-	/*---------------------------------------------------------- 
- Main website specifications - AL Legacy skin
------------------------------------------------------------- */
+/*************************************************************	
+/*************MAIN WEBSITE + Mutual specifics*****************
+/**********************PICASSO SKIN***************************
+/*************************************************************
 /* load the main site font */
 @font-face {
  font-family: robot;
@@ -263,7 +264,7 @@ footer, header, hgroup, menu, nav, section {
     }
 	
     #sidebar ul li { margin: 0;
-			background:trasparant; }
+			background:transparant; }
 	
     #sidebar ul li a {
         padding: 0;
@@ -274,7 +275,7 @@ footer, header, hgroup, menu, nav, section {
         -o-transition:  background 0.3s ease-in-out;
         transition:  background 0.3s ease-in-out;
     }
-	
+			
     .main-content {
         width: 100%;
         height: 100%;
@@ -402,6 +403,7 @@ footer, header, hgroup, menu, nav, section {
 		opacity:0;
 		transition:opacity linear 0.15s;
 		box-shadow:0px 2px 3px rgba(0,0,0,0.2);
+		text-align:center;
 	}
 	 
 	.sub-menu li {
@@ -460,24 +462,26 @@ footer, header, hgroup, menu, nav, section {
 @media screen and (min-width: 1280px){  	
 	.container { position: absolute;}
 	#sidebar {background-color: rgba(0, 0, 0, 0);}
-	header nav { position: absolute; margin-top: 220px; left : 0}
+	header nav { position: absolute; margin-top: 220px; float: center;}
 	#main { position: relative; margin-top: 60px;}
+}
+
+#main_nav { width: 100%; left: 0;}
+
+#main_nav_ul { font-size: 0; text-align : center; width: 100%;
 }
 
 @media screen and (max-width: 1279px){ 
 	#main { margin-top: 25px;}
 }
 
-header nav { float: center;
-	width: 100%; 	
-	}
-	header nav ul { font-size: 0; width : 100%; text-align : center; 
-		}
-	header nav img:hover{ opacity:1; 
-	}
-	header nav li {	display: inline-block;
-		}
-	header nav input{
+header nav img:hover{ opacity:1; 
+}
+
+header nav li {	display: inline-block;
+}
+
+header nav input{
 	background-color: #000;
 	color: #ffffff;
 	width: 247px;
@@ -1220,6 +1224,403 @@ contact tiles - front page
 			margin-right: auto;
 			margin-bottom: 5px;	
 	}
+	
+/*************************************************************	
+/*******************CPANEL Specifics**************************
+/*************************************************************	
+
+/* ---------the side menu--------*/
+
+/* the side menu for smartphones, tablets and old (laptop) screens */
+/* it is also used for the high res monitors, but then only the skin switch will be visible */
+	.container_cpanel {
+		display : block;
+		z-index: 3;
+		position: relative;
+        width: 100%;
+        left: 0;
+        -webkit-transition:  left 0.4s ease-in-out;
+        -moz-transition:  left 0.4s ease-in-out;
+        -ms-transition:  left 0.4s ease-in-out;
+        -o-transition:  left 0.4s ease-in-out;
+        transition:  left 0.4s ease-in-out;
+    }
+    
+    #sidebar_cpanel {
+		z-index:1;
+		position: absolute;
+		box-sizing: border-box;
+    }
+	
+    #sidebar_cpanel ul li a {
+        display: block;
+        -webkit-transition:  background 0.3s ease-in-out;
+        -moz-transition:  background 0.3s ease-in-out;
+        -ms-transition:  background 0.3s ease-in-out;
+        -o-transition:  background 0.3s ease-in-out;
+        transition:  background 0.3s ease-in-out;
+    }
+
+	.container_cpanel.open-sidebar_cpanel{ left: 245px;}
+	#sidebar_cpanel{ left: -245px;
+        width: 245px;
+	}
+	.sub-menu_cpanel li { font-size:20px; }
+	
+    .main-content #sidebar_cpanel-toggle {
+        background: #161c71;
+        border-radius: 3px;
+        display: block;
+        position: absolute;
+        padding: 10px 7px;
+        float: left;
+    }
+	
+    .main-content #sidebar_cpanel-toggle .bar{
+        display: block;
+        width: 18px;
+        margin-bottom: 3px;
+        height: 2px;
+        background-color: #fff;
+        border-radius: 1px;   
+    }
+	
+    .main-content #sidebar_cpanel-toggle .bar:last-child{
+         margin-bottom: 0;  
+    }
+
+	
+	/*-----some code for the skin submenu-------*/
+	
+	.clearfix_cpanel:after {
+		display:block;
+		clear:both;
+	}
+
+	/*----- Menu Outline -----*/
+	.skin-wrap_cpanel {
+		width:100%;
+	}
+	 
+	.skin-menu_cpanel {
+		width:100%;
+		margin:0px auto;
+	}
+	 
+	.skin-menu_cpanel li {
+		margin:0px;
+		list-style:none;
+	}
+	 
+	.skin-menu_cpanel a {
+		transition:all linear 0.15s;
+	}
+	 
+	 
+	/*----- Top Level -----*/
+	.skin-menu_cpanel > ul > li {
+		float:left;
+		display:inline-block;
+		position:relative;
+	}
+	 
+	/*----- Bottom Level -----*/
+	.skin-menu_cpanel li:hover .sub-menu_cpanel {
+		z-index:1;
+		opacity:1;
+	}
+
+	.sub-menu_cpanel {
+		width:75%;
+		padding:5px 0px;
+		position:absolute;
+		top:100%;
+		left:20px;
+		z-index:-1;
+		opacity:0;
+		transition:opacity linear 0.15s;
+	}	 
+	
+/* 'position' is needed for smartphone view else the logo is covered by the sidemenu button */
+@media screen and (max-width: 480px) { 
+	.main-content_cpanel {position: relative;}
+	.main-content_cpanel #sidebar-toggle_cpanel {position: relative;}
+	}	
+	
+/* resizing of buttons is done to get al info on screen in landscape for phones and tablets*/
+@media screen and (max-width: 640px) { 
+	#games_side{height: 40px; width: 113px; font-size: 14px;}
+	#menus_side{height: 40px; width: 113px; font-size: 14px;}
+	#demos_side{height: 40px; width: 113px; font-size: 14px;}
+	#users_side{height: 40px; width: 113px; font-size: 14px;}
+	#admin_side{height: 40px; width: 113px; font-size: 14px;}
+	#other_side{height: 40px; width: 113px; font-size: 14px;}
+	.container_cpanel.open-sidebar_cpanel { left: 225px;}
+    #sidebar_cpanel { left: -225px;
+        width: 225px;
+	}
+	.sub-menu_cpanel li { font-size:13px; }
+}
+
+/* for the lower resolutions, we don't have the menu bar below the top */ 
+@media screen and (max-width: 1279px) {  	
+	#games { display: none; }
+	#menus { display: none; } 
+	#demos { display: none; } 
+	#users { display: none; }
+	#admin { display: none; }
+	#other { display: none; }
+}
+
+/* for the high resolutions, we only have the skin switch in the side menu */ 
+@media screen and (min-width: 1280px) {  	
+	#games_side , #demos_side, #users_side , #menus_side, #admin_side, #other_side, #game_editor_side,
+	#game_comments_side, #game_series_side,	#game_music_side, #game_submissions_side, #game_reviews_side,
+	#submitted_reviews_side, #menu_editor_side, #menu_comments_side, #menu_submissions_side, #demo_editor_side,
+	#demo_comments_side, #demo_music_side, #demo_submissions_side, #user_admin_side, #individuals_side,
+	#author_types_side, #crew_editor_side, #companies_side, #company_logo_side, #add_news_side, #approve_news_side,
+	#submitted_news_side, #Statistics_side, #did_you_know_side, #trivia_screenshots_side, #trivia_quotes_side,
+	#add_links_side, #validate_links_side, #modify_links_side, #link_categories_side, #articles_side, #article_types_side,
+	#screenshots_side, #modify_links_side, #link_categories_side, #articles_side, #article_types_side,
+	#article_screenshots_side, #add_magazines_side, #manage_issues_side, #interviews_side, #interviews_help_side,
+	#forum_side, #logout_side{ display: none; }
+}
+
+/* CPANEL menu below top*/ 
+
+nav ul {
+  list-style: none;
+}
+
+.nav li {
+  position: relative;
+}
+.nav > li { 
+  float: center; 
+} 
+
+.nav li a:first-child:nth-last-child(2):before { 
+  content: ""; 
+  position: absolute; 
+ }
+ 
+ /* submenu positioning*/
+.nav ul {
+  position: absolute;
+  z-index: 1;
+  left: -99999em;
+  top: 31px;
+}
+.nav > li:hover > ul {
+  left: auto;
+}
+.nav > li li:hover > ul { 
+  left: 100%;
+}
+
+.topbutton_cpanel
+{
+	border:2px solid black;
+	height: 30px;
+	width: 205px;
+	background: #161c71;
+	font-family: robot, arial, sans-serif;
+	color:white;
+	font-size:19px;
+	font-weight: bold;
+	/*text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #fff;*/
+	/*give the corners a small curve*/ 
+	-webkit-border-radius: 0 15px 15px 0;
+	-moz-border-radius: 0 15px 15px 0;
+	border-radius: 0 15px 15px 0;
+	margin-left: 2px;
+	text-decoration:none;
+}
+
+.topbutton_cpanel:hover {
+  background: #dbd7d1;
+  color: black;
+  text-decoration:none;
+  border:2px solid #4f4f4f;
+}
+
+.top_button_cpanel:visited {
+  text-decoration:none;
+}
+
+#game_editor, #game_comments, #game_series, #game_music, #game_submissions, #game_reviews, #submitted_reviews,
+#menu_editor, #menu_comments, #menu_submissions, #demo_editor, #demo_comments, #demo_music, #demo_submissions,
+#user_admin, #individuals, #author_types, #crew_editor, #companies, #company_logo, #add_news, #approve_news, 
+#submitted_news, #Statistics,#did_you_know, #trivia_screenshots, #trivia_quotes, #add_links, #validate_links,
+#modify_links, #link_categories, #articles, #article_types, #screenshots, #modify_links, 
+#link_categories, #articles, #article_types, #article_screenshots, #add_magazines, #manage_issues, #interviews, 
+#interviews_help, #forum, #logout , #legacy, #tos, #picasso, #game_editor_side,
+#game_comments_side, #game_series_side,	#game_music_side, #game_submissions_side, #game_reviews_side,
+#submitted_reviews_side, #menu_editor_side, #menu_comments_side, #menu_submissions_side, #demo_editor_side,
+#demo_comments_side, #demo_music_side, #demo_submissions_side, #user_admin_side, #individuals_side,
+#author_types_side, #crew_editor_side, #companies_side, #company_logo_side, #add_news_side, #approve_news_side,
+#submitted_news_side, #Statistics_side, #did_you_know_side, #trivia_screenshots_side, #trivia_quotes_side,
+#add_links_side, #validate_links_side, #modify_links_side, #link_categories_side, #articles_side, #article_types_side,
+#screenshots_side, #modify_links_side, #link_categories_side, #articles_side, #article_types_side,
+#article_screenshots_side, #add_magazines_side, #manage_issues_side, #interviews_side, #interviews_help_side,
+#forum_side, #logout_side{
+		height: 30px;
+		font-size: 16px;
+}
+
+/*------------------------------------------------------------
+Standard table settings 
+-------------------------------------------------------------*/
+
+.column-left-cpanel { width: 25%; 
+	 float:left;
+}
+
+.column-right-cpanel { width: 73%; 
+	 float:right;
+}
+
+.standard_table_list {
+	width: 90%;
+	border: solid 1px #b2b2b2; 
+	background-color:#f3f3f3;
+	margin-left:auto;
+	margin-right:auto;
+	border-spacing: 0;
+}
+
+.standard_table_list  li {
+	color: black;
+	font-size: 113pxpt;
+	text-align: center;
+	text-decoration: none; 
+	list-style-type: none;
+}
+
+.standard_table_list th {
+	border-bottom: solid 2px #b2b2b2;
+	background-color:#DBD7D1;
+	border-collapse: collapse;
+	padding-top:3px;
+	padding-bottom:3px;
+	padding-left:3px;
+	margin:0px;
+}
+
+.standard_table_list tr:nth-child(even){
+	background-color:#f3f3f3;
+}
+
+.standard_table_list tr:nth-child(odd){
+	background-color:#EFEFEF;
+}
+
+.standard_table_list tr:hover {
+	background-color:#DBD7D1;
+}
+
+.standard_table_list td {	
+	padding-top:1px;
+	padding-bottom:1px;
+	padding-left:3px;
+	margin:0px;
+}
+
+.standard_table_center { color: black;
+			font-size: 11pt;
+			font-weight: 100;
+			text-align: center;
+			text-decoration: none; 
+}
+
+.standard_table_left { color: black;
+			font-size: 11pt;
+			font-weight: 100;
+			text-align: left;
+			text-decoration: none; 
+			padding-left: 2px;
+}
+
+.standard_table_right { color: black;
+			font-size: 11pt;
+			font-weight: 100;
+			text-align: right;
+			text-decoration: none; 
+			padding-right: 2px;
+}
+
+/* for lower resolutions put the left and right below eachother */
+@media screen and (max-width: 799px) { 	
+	.column-left-cpanel { display: none;
+	}
+	.column-right-cpanel { width: 100%;
+	}
+}
+
+/*---------------------------------------------------------- 
+User stats
+------------------------------------------------------------ */
+#user_stats{ margin-top: 50px;}	
+#main_stats{ margin-top: 50px; margin-bottom: 30px;}
+
+@media screen and (max-width: 1279px) {  
+#user_stats{ margin-top: 20px;}	
+#main_stats{ margin-top: 20px;}
+}
+
+@media screen and (max-width: 480px) {  
+#user_stats{ margin-top: 0px;}	
+#main_stats{ margin-top: 0px;}
+}
+
+.user_stats_img{ max-width: 100%;
+		box-shadow: 0 0 12px #161c71;	
+		opacity: 0.8;
+		filter: alpha(opacity=40); /* For IE8 and earlier */
+}
+
+/* Make the table view responsive */
+@media screen and (max-width: 1199px) { 
+	.main_stats_high{display:none;}
+}
+
+@media screen and (min-width: 1200px) { 
+	.main_stats_low{display:none;}
+}
+
+/*---------------------------------------------------------- 
+Left nav
+------------------------------------------------------------ */
+#leftnav_position_front { margin-top: 20px; margin-bottom: 30px; float: lefft;
+}
+
+.left_nav_section{
+	font-weight: bold;
+	border-bottom: solid 2px #b2b2b2;
+	border-top: solid 2px #b2b2b2;
+	background-color:#DBD7D1;
+	border-collapse: collapse;
+	padding-top:3px;
+	padding-bottom:3px;
+	padding-left:3px;
+	margin:0px;
+	text-align: center;
+	list-style-type: none;
+}
+
+.left_nav_link:link { text-decoration: none;
+	color: #122323;
+	font-size: 11pt;
+}
+
+.left_nav_link:visited { text-decoration: none;
+	color: #122323;
+}
+
+.left_nav_link:hover { text-decoration: none;
+	color: #6a6a6a;
+}
+	
 /*---------------------------------------------------------- 
  resolutions tested!
 ------------------------------------------------------------ */
