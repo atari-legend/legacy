@@ -34,17 +34,28 @@ sec_session_start();
 
 //create skin switch links dynamically with called page
 //using the filter command, this should be a safe way of using PHP_SELF
+$variables = $_SERVER['QUERY_STRING'];
+
+if (strpos($variables,'skin') !== false) {
+    $variables = substr($variables, 7);
+}
 
 $php_self = filter_var($_SERVER['PHP_SELF'], FILTER_SANITIZE_STRING);
 $php_self.= '?skin=0';
+$php_self.= '&';
+$php_self.= $variables;
 $smarty->assign('skin_switch_0', $php_self );
 
 $php_self = filter_var($_SERVER['PHP_SELF'], FILTER_SANITIZE_STRING);
 $php_self.= '?skin=1';
+$php_self.= '&';
+$php_self.= $variables;
 $smarty->assign('skin_switch_1', $php_self );
 
 $php_self = filter_var($_SERVER['PHP_SELF'], FILTER_SANITIZE_STRING);
 $php_self.= '?skin=2';	
+$php_self.= '&';
+$php_self.= $variables;
 $smarty->assign('skin_switch_2', $php_self );
 
 

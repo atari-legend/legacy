@@ -1,0 +1,37 @@
+{* 
+/***************************************************************************
+*                                frontpage.html
+*                            --------------------
+*   begin                : sunday, August 23, 2015
+*   copyright            : (C) 2015 Atari Legend
+*   email                : martens_maarten@hotmail.com
+*   actual update        : Creation of file
+*
+*   Id: frontpage.html,v 0.1 2015/08/23 23:29 STG
+*
+***************************************************************************/
+
+//****************************************************************************************
+// This is the front page of the cpanel (statistics)
+//**************************************************************************************** 
+*}
+{block name=main_body}
+	<div class="column-left-cpanel">		
+		{block name=left_nav}{/block}
+	</div>
+	<div class="column-right-cpanel">
+		{block name=main_stats}{/block}
+		{block name=welcome}{/block}
+		{block name=user_stats}{/block}
+		{block name=user_detail}{/block}
+		{block name=user_statistics}{/block}
+	</div>
+	<div class="column-center-cpanel">	
+		{block name=welcome}{/block}
+		{block name=user_stats}{/block}
+		{block name=main_stats}{/block}
+		{block name=user_detail}{/block}
+		{block name=user_statistics}{/block}
+		{block name=left_nav}{/block}
+	</div>
+{/block}
