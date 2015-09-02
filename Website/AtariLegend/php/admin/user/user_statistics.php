@@ -8,7 +8,8 @@
 *   actual update        : file creation
 *							
 *
-*   Id: user_statistics.php.php,v 0.10 2005/05/01 ST Graveman
+*   Id: user_statistics.php,v 0.10 2005/05/01 ST Graveman
+		user_statistics.php,v 0.20 2015/02/09 ST Graveman
 *
 ***************************************************************************/
 
@@ -18,7 +19,7 @@ This is the user statistics page
 ***********************************************************************************
 */
 // include common variables and functions
-include("../includes/common.php");
+include("../../includes/common.php");
 
 // START - NUMBER OF USERCOMMENTS
 $sql = $mysqli->query("SELECT * FROM comments
@@ -137,10 +138,12 @@ $smarty->assign('nr_news', $nr_news);
 
 mysqli_free_result($sql);
 
+$smarty->assign('left_nav', 'leftnav_position_userstatistics');
+
 $smarty->assign('user_id_selected', $user_id_selected);
 
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/user_statistics.html');
+$smarty->display('extends:../../../templates/html/admin/main.html|../../../templates/html/admin/frontpage.html|../../../templates/html/admin/left_nav.html|../../../templates/html/admin/user_statistics.html');
 
 //close the connection
 mysqli_close($mysqli);

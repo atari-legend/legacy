@@ -8,7 +8,7 @@
 *   actual update        : file creation
 *							
 *
-*   Id: user_detail.php,v 0.10 2005/05/01 ST Graveman
+*   Id: user_detail.php,v 0.20 2015/08/22 ST Graveman
 *
 ***************************************************************************/
 
@@ -18,7 +18,7 @@ This is the user detail page
 ***********************************************************************************
 */
 // include common variables and functions
-include("../includes/common.php");
+include("../../includes/common.php");
 
 // Here we add the website image
 if (isset($action) and $action == 'avatar_upload')
@@ -217,9 +217,11 @@ if (isset($action) and $action == 'delete_user')
 							  'image' => "$user_avatar_path$query_users[user_id].$query_users[avatar_ext]",
 							  'user_aim' => $query_users['user_aim']));
 	}
+	
+$smarty->assign('left_nav', 'leftnav_position_userdetails');	
 
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/user_detail.html');
+$smarty->display('extends:../../../templates/html/admin/main.html|../../../templates/html/admin/frontpage.html|../../../templates/html/admin/left_nav.html|../../../templates/html/admin/user_detail.html');
 
 //close the connection
 mysqli_close($mysqli);
