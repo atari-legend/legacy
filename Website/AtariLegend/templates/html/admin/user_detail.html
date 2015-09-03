@@ -51,8 +51,8 @@ function user_stats()
 		<br><br>
 		<fieldset>
 			<legend>User details</legend>
-			<form action="../user/user_detail.php?action=modify_user" method="post" name="user" id="user">
-			<table width="100%" class="userdetail_two">	
+			<form action="../user/user_detail.php?action=modify_user" method="post" name="user" id="user" class="userdetail_two">
+			<table width="100%">	
 			<tr>
 				<td width="20%">User name :</td>
 				<td width="30%"><input type="text" name="user_name"  maxlength="60" value="{$users.user_name}" class="standard_tile_input_small"></td>
@@ -82,7 +82,17 @@ function user_stats()
 				<td width="30%"><input type="text" name="user_aim"  maxlength="255" value="{$users.user_aim}" class="standard_tile_input_small"></td>
 			</tr>
 			</table>
-			<table width="100%" class="userdetail_one">	
+			<table width="100%">	
+			<tr>
+				<td width="10%"><br><br><input type="submit" value="Modify" class="topbutton_cpanel_small"></td>
+				<td width="10%"><br><br><input type="button" value="Delete" onClick="delete_user();" class="topbutton_cpanel_small"></td>
+				<td width="70%0%"><br><br><input type="button" value="Statistics" onClick="user_stats();" class="topbutton_cpanel_small"></td>
+				<td width="10%"><br><br><input type="hidden" name="user_id_selected" value="{$users.user_id}" class="topbutton_cpanel_small"></td>
+			</tr>
+			</table>
+			</form>
+			<form action="../user/user_detail.php?action=modify_user" method="post" name="user" id="user" class="userdetail_one">
+			<table width="100%">	
 			<tr>
 				<td width="20%">User name :</td>
 				<td width="30%"><input type="text" name="user_name"  maxlength="60" value="{$users.user_name}" class="standard_tile_input_small"></td>
@@ -120,7 +130,17 @@ function user_stats()
 				<td width="30%"><input type="text" name="user_aim"  maxlength="255" value="{$users.user_aim}" class="standard_tile_input_small"></td>
 			</tr>
 			</table>
-			<table width="100%" class="userdetail_zero">	
+			<table width="100%">	
+			<tr>
+				<td width="10%"><br><br><input type="submit" value="Modify" class="topbutton_cpanel_small"></td>
+				<td width="10%"><br><br><input type="button" value="Delete" onClick="delete_user();" class="topbutton_cpanel_small"></td>
+				<td width="70%0%"><br><br><input type="button" value="Statistics" onClick="user_stats();" class="topbutton_cpanel_small"></td>
+				<td width="10%"><br><br><input type="hidden" name="user_id_selected" value="{$users.user_id}" class="topbutton_cpanel_small"></td>
+			</tr>
+			</table>
+			</form>
+			<form action="../user/user_detail.php?action=modify_user" method="post" name="user" id="user" class="userdetail_zero">
+			<table width="100%">	
 			<tr>
 				<td width="20%">User name :</td>
 			</tr>
@@ -213,10 +233,11 @@ function user_stats()
 			{/if}
 		</fieldset>
 		<br><br>
+		{if isset($message)}	
+		<div class="left_nav_section">{$message}</div>
+		<br>
+		{/if}
 		<div align="center"><a href="../user/user_main.php" class="standard_tile_link">back</a></div>
-	{if isset($message)}
-		<div class="message_box">{$message}</div>
-	{/if}
 	</div>
 </div>
 {/block}

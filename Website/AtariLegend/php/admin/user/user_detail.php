@@ -98,15 +98,14 @@ if (isset($action) and $action == 'reset_pwd')
 
 if (isset($action) and $action == 'modify_user')
 {
-	if ( $user_pwd != '' )
+	if ( isset($user_pwd) && $user_pwd != '' )
 	{
-		$md5pass = md5($user_pwd);
-		echo $md5pass;
-		$mysqli->query("UPDATE users SET userid='$user_name', password='$md5pass', email='$user_email', permission='$user_permission', user_website='$user_website', user_icq='$user_icq', user_msnm='$user_msnm', user_aim='$user_aim' WHERE user_id='$user_id_selected'");
+			$md5pass = md5($user_pwd);
+			$mysqli->query("UPDATE users SET userid='$user_name', password='$md5pass', email='$user_email', permission='$user_permission', user_website='$user_website', user_icq='$user_icq', user_msnm='$user_msnm', user_aim='$user_aim' WHERE user_id='$user_id_selected'");
 	}
 	else
 	{
-		$mysqli->query("UPDATE users SET userid='$user_name', email='$user_email', permission='$user_permission', user_website='$user_website', user_icq='$user_icq', user_msnm='$user_msnm', user_aim='$user_aim' WHERE user_id='$user_id_selected'");
+			$mysqli->query("UPDATE users SET userid='$user_name', email='$user_email', permission='$user_permission', user_website='$user_website', user_icq='$user_icq', user_msnm='$user_msnm', user_aim='$user_aim' WHERE user_id='$user_id_selected'");
 	}
 }
 
@@ -116,8 +115,8 @@ if (isset($action) and $action == 'delete_user')
 	$sql = $mysqli->query("SELECT * FROM comments
 						LEFT JOIN game_user_comments ON (comments.comments_id = game_user_comments.comment_id)
 						LEFT JOIN game ON ( game_user_comments.game_id = game.game_id )
-						WHERE comments.user_id = $user_id_selected");
-	
+						WHERE comments.user_id = '$user_id_selected'") or die ("error selecting game comments");
+						
 	if ( get_rows($sql) > 0 )
 	{
 		$smarty->assign("message",'Deletion failed - This user has submitted game comments - Delete it in the appropriate section');
@@ -129,7 +128,7 @@ if (isset($action) and $action == 'delete_user')
 		$sql = $mysqli->query("SELECT * FROM review_main
 							LEFT JOIN review_game ON (review_main.review_id = review_game.review_id)
 							LEFT JOIN game ON ( review_game.game_id = game.game_id )
-							WHERE review_main.member_id = $user_id_selected");
+							WHERE review_main.member_id = '$user_id_selected'") or die ("error selecting game reviews");
 		
 		if ( get_rows($sql) > 0 )
 		{
@@ -139,14 +138,14 @@ if (isset($action) and $action == 'delete_user')
 		{
 			$sql = $mysqli->query("SELECT * FROM game_submitinfo 
 				   				LEFT JOIN game ON (game_submitinfo.game_id = game.game_id)
-								WHERE user_id = $user_id_selected");
+								WHERE user_id = '$user_id_selected'") or die ("error selecting game info");
 			if ( get_rows($sql) > 0 )
 			{
 				$smarty->assign("message",'Deletion failed - This user has submitted game info - Delete it in the appropriate section');
 			}
 			else
 			{
-				$sql = $mysqli->query("SELECT * FROM website WHERE website_user_sub = $user_id_selected");
+				$sql = $mysqli->query("SELECT * FROM website WHERE website_user_sub = '$user_id_selected'") or die ("error selecting links");
 				
 				if ( get_rows($sql) > 0 )
 				{
@@ -154,7 +153,7 @@ if (isset($action) and $action == 'delete_user')
 				}
 				else
 				{
-					$sql = $mysqli->query("SELECT * FROM news WHERE user_id = $user_id_selected");
+					$sql = $mysqli->query("SELECT * FROM news WHERE user_id = '$user_id_selected'") or die ("error selecting news");
 				
 					if ( get_rows($sql) > 0 )
 					{
@@ -162,10 +161,10 @@ if (isset($action) and $action == 'delete_user')
 					}
 					else
 					{
-						$sql = $mysqli->query("SELECT * FROM comments
-						LEFT JOIN demo_user_comments ON (comments.comments_id = demo_user_comments.comment_id)
+					 	$sql = $mysqli->query("SELECT * FROM comments
+						LEFT JOIN demo_user_comments ON (comments.comments_id = demo_user_comments.comments_id)
 						LEFT JOIN demo ON ( demo_user_comments.demo_id = demo.demo_id )
-						WHERE comments.user_id = $user_id_selected");
+						WHERE comments.user_id = $user_id_selected") or die ("error selecting demo comments");	
 	
 						if ( get_rows($sql) > 0 )
 						{
@@ -177,8 +176,11 @@ if (isset($action) and $action == 'delete_user')
 	
 							$smarty->assign('message', 'User deleted succesfully');
 
+							$smarty->assign('left_nav', 'leftnav_position_userdetails');	
+
 							//Send all smarty variables to the templates
-							$smarty->display('file:../templates/0/user_main.html');
+							$smarty->display('extends:../../../templates/html/admin/main.html|../../../templates/html/admin/frontpage.html|../../../templates/html/admin/left_nav.html|../../../templates/html/admin/user_detail.html');
+
 						}
 					}
 				}

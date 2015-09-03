@@ -244,7 +244,7 @@ function get_user_id_from_name($submitted)
 	
 function get_rows ($result)
 	{
-		$num=mysql_num_rows($result);
+		$num=$result->num_rows;
 		return $num;
 	}
 
