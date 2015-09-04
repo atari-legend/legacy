@@ -828,14 +828,27 @@ Standard tile settings
 
 .standard_tile_input_small { background : black;
 				color: #ffffff;				
-				width: 75%;
+				width: 200px;
 				height: 20px;
 				margin-top:0;
 				padding: 0;
 				padding-left: 5px;
 				border: 0;
 				text-align: left;
-				display: block;
+				/*display: block;*/
+				font-family: Audiowide;	
+}
+
+.standard_tile_input_area { background : black;
+				color: #ffffff;				
+				width: 50%;
+				height: 40px;
+				margin-top:0;
+				padding: 0;
+				padding-left: 5px;
+				border: 0;
+				text-align: left;
+				/*display: block;*/
 				font-family: Audiowide;	
 }
 
@@ -964,10 +977,10 @@ Standard tile settings
 	padding-left: 5px;
 	font-family: Audiowide;	
 	width: 78%;
-	height: 25px;}
+	height: 20px;}
 
 #small_select{ 
-	width: 15%;
+	width: 50px;
 }
 	
 /*---------------------------------------------------------- 
@@ -1362,7 +1375,7 @@ contact tiles - front page
 @media screen and (min-width: 1280px) {  	
 	#games_side , #demos_side, #users_side , #menus_side, #admin_side, #other_side, #game_editor_side,
 	#game_comments_side, #game_series_side,	#game_music_side, #game_submissions_side, #game_reviews_side,
-	#	ted_reviews_side, #menu_editor_side, #menu_comments_side, #menu_submissions_side, #demo_editor_side,
+	#submitted_reviews_side, #menu_editor_side, #menu_comments_side, #menu_submissions_side, #demo_editor_side,
 	#demo_comments_side, #demo_music_side, #demo_submissions_side, #user_admin_side, #individuals_side,
 	#author_types_side, #crew_editor_side, #companies_side, #company_logo_side, #add_news_side, #approve_news_side,
 	#submitted_news_side, #Statistics_side, #did_you_know_side, #trivia_screenshots_side, #trivia_quotes_side,
@@ -1535,6 +1548,8 @@ Standard table settings
 			padding-right: 2px;
 }
 
+.standard_table_center img {display: inline;}
+
 .topbutton_cpanel_small
 {
   cursor: pointer;
@@ -1661,19 +1676,19 @@ User details
 #user_details{ margin-top: 80px; margin-bottom: 30px; float: left;}
 #user_stats_img_dark{ box-shadow: 0 0 12px black;}
 
-@media screen and (max-width: 360px) { 
+@media screen and (max-width: 480px) { 
 .userdetail_two {display:none;}
 .userdetail_one {display:none;}
 #user_details{ margin-top: 20px;}	
 #leftnav_position_userdetails{ margin-top: 0px;}
 }
 
-@media screen and (min-width: 361px) and (max-width: 480px) { 
+/* @media screen and (min-width: 361px) and (max-width: 480px) { 
 .userdetail_two {display:none;}
 .userdetail_zero {display:none;}
 #user_details{ margin-top: 20px;}	
 #leftnav_position_userdetails{ margin-top: 0px;}
-}
+} */
 
 @media screen and (min-width: 481px) and (max-width: 1279px) { 
 .userdetail_two {display:none;}
@@ -1702,6 +1717,97 @@ User statistics
 	#user_statistics{ margin-top: 20px;}
 }
 
+/*---------------------------------------------------------- 
+User statistics
+------------------------------------------------------------ */
+#leftnav_position_usermain{ margin-top: 80px; margin-bottom: 30px; float: left;}
+#user_main{ margin-top: 80px; margin-bottom: 30px; float: left;}
+#main_stats_position_usermain{ margin-top: 0px; margin-bottom: 30px; float: left;}
+
+@media screen and (max-width: 500px) { 
+#user_search { display: none;}
+#leftnav_position_usermain{ margin-top: 20px;}
+#user_main{margin-top: 20px;}
+#main_stats_position_usermain{margin-bottom: 10px;}	
+}
+
+@media screen and (min-width: 501px) and (max-width: 1279px) { 
+	#leftnav_position_usermain{ margin-top: 20px;}
+	#user_main{margin-top: 20px;}
+	#user_search_one{ display: none;}	
+}
+
+@media screen and (min-width: 1280px) { 
+	#user_search_one{ display: none;}
+}
+
+/*---------------------------------------------------------- 
+User search
+------------------------------------------------------------ */
+#leftnav_position_usersearch{ margin-top: 80px; margin-bottom: 30px; float: left;}
+#usersearch{ margin-top: 80px; margin-bottom: 30px; float: left;}
+
+@media screen and (max-width: 1279px) { 
+	#leftnav_position_usersearch{ margin-top: 20px;}
+	#usersearch{margin-top: 20px;}
+}
+
+@media screen and (max-width: 1024px) { 
+	#email_th{display: none;}
+	#email_td{display: none;}
+	#website_th{display: none;}
+	#website_td{display: none;}
+}
+
+@media screen and (max-width: 600px) { 
+	#lastvisit_th{display: none;}
+	#lastvisit_td{display: none;}
+	#joindate_td{display: none;}
+	#joindate_th{display: none;}
+}
+
+@media screen and (max-width: 500px) { 
+#user_search { display: none;}
+#usersearch{margin-bottom: 20px;}
+}
+
+@media screen and (min-width: 1280px) { 
+#user_search_one{ display: none;}
+}
+
+/*---------------------------------------------------------- 
+User Karma
+------------------------------------------------------------ */
+#leftnav_position_karma{ margin-top: 80px; margin-bottom: 30px; float: left;}
+#karma{ margin-top: 80px; margin-bottom: 30px; float: left;}
+
+
+@media screen and (max-width: 1279px) { 
+	#leftnav_position_karma{ margin-top: 20px;}
+	#karma{margin-top: 20px;}
+}
+
+/*---------------------------------------------------------- 
+Did you know
+------------------------------------------------------------ */
+#leftnav_position_didyouknow{ margin-top: 80px; margin-bottom: 30px; float: left;}
+#didyouknow{ margin-top: 80px; margin-bottom: 30px; float: left;}
+
+@media screen and (max-width: 1279px) { 
+	#leftnav_position_didyouknow{ margin-top: 20px;}
+	#didyouknow{margin-top: 20px;}
+}
+
+/*---------------------------------------------------------- 
+Trivia Quotes
+------------------------------------------------------------ */
+#leftnav_position_triviaquotes{ margin-top: 80px; margin-bottom: 30px; float: left;}
+#triviaquotes{ margin-top: 80px; margin-bottom: 30px; float: left;}
+
+@media screen and (max-width: 1279px) { 
+	#leftnav_position_triviaquotes{ margin-top: 20px;}
+	#triviaquotes{margin-top: 20px;}
+}
 
 /*---------------------------------------------------------- 
  resolutions tested!

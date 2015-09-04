@@ -32,11 +32,12 @@
 + 50pts / game review
 */
 
+ini_set('max_execution_time', 300); 
+
 // Include common files
-include("../includes/common.php");
+include("../../includes/common.php");
 
 // Set values
-
 $value_gamedownload = -5;
 $value_gamecomment = 5;
 $value_gamesubmission = 10;
@@ -78,7 +79,8 @@ $sql_user = $mysqli->query("SELECT user_id,userid,karma FROM users");
 	// START - NUMBER OF DOWNLOADS BY USER
 	$sql_downloads = $mysqli->query("SELECT COUNT(*) AS count FROM game_download_info WHERE user_id = $user_id");
 	$gamecount = $sql_downloads->fetch_array(MYSQLI_BOTH);
-	$nr_downloads = $gamecount[count];
+	//$nr_downloads = $gamecount[count];
+	$nr_downloads = $sql_downloads->num_rows;;
 	mysqli_free_result($sql_downloads);
 	
 	// gamesubmissions
@@ -126,8 +128,11 @@ $sql_user = $mysqli->query("SELECT user_id,userid,karma FROM users");
 	
 	}
 
+$smarty->assign('left_nav', 'leftnav_position_karma');	
+	
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/user_karmasync.html');
+$smarty->display('extends:../../../templates/html/admin/main.html|../../../templates/html/admin/frontpage.html|../../../templates/html/admin/user_karmasync.html|../../../templates/html/admin/left_nav.html');
 
 //close the connection
-mysqli_close($mysqli);?>
+mysqli_close($mysqli);
+?>

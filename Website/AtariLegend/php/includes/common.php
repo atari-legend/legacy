@@ -40,6 +40,11 @@ if (strpos($variables,'skin') !== false) {
     $variables = substr($variables, 7);
 }
 
+$variables = str_replace("action=modify_user", "", $variables);
+$variables = str_replace("action=delete_user", "", $variables);
+$variables = str_replace("action=reset_pwd", "", $variables);
+$variables = str_replace("action=delete_avatar", "", $variables);
+
 $php_self = filter_var($_SERVER['PHP_SELF'], FILTER_SANITIZE_STRING);
 $php_self.= '?skin=0';
 $php_self.= '&';
