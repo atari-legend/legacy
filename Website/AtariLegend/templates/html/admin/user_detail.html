@@ -20,14 +20,14 @@ User detail page. Overhere you can maintain the log on data of a user and have a
 function delete_user() 
 {
 	document.getElementById('user').method="post";
-	document.getElementById('user').action="../user/user_detail.php?action=delete_user";
+	document.getElementById('user').action="../user/user_main.php?action=delete_user";
    	document.getElementById('user').submit();
 }
 
 function reset_pwd() 
 {
 	document.getElementById('user').method="post";
-	document.getElementById('user').action="../user/user_detail.php?action=reset_pwd";
+	document.getElementById('user').action="../user/user_detail.php?action=reset_pwd&user_id_selected={$users.user_id}";
    	document.getElementById('user').submit();
 }
 
@@ -51,7 +51,7 @@ function user_stats()
 		<br><br>
 		<fieldset>
 			<legend>User details</legend>
-			<form action="../user/user_detail.php?action=modify_user" method="post" name="user" id="user" class="userdetail_two">
+			<form action="../user/user_detail.php?action=modify_user&user_id_selected={$users.user_id}" method="post" name="user" id="user" class="userdetail_two">
 			<table width="100%">	
 			<tr>
 				<td width="20%">User name :</td>
@@ -91,7 +91,7 @@ function user_stats()
 			</tr>
 			</table>
 			</form>
-			<form action="../user/user_detail.php?action=modify_user" method="post" name="user" id="user" class="userdetail_one">
+			<form action="../user/user_detail.php?action=modify_user&user_id_selected={$users.user_id}" method="post" name="user" id="user" class="userdetail_one">
 			<table width="100%">	
 			<tr>
 				<td width="20%">User name :</td>
@@ -139,7 +139,7 @@ function user_stats()
 			</tr>
 			</table>
 			</form>
-			<form action="../user/user_detail.php?action=modify_user" method="post" name="user" id="user" class="userdetail_zero">
+			<form action="../user/user_detail.php?action=modify_user&user_id_selected={$users.user_id}" method="post" name="user" id="user" class="userdetail_zero">
 			<table width="100%">	
 			<tr>
 				<td width="20%">User name :</td>
@@ -209,7 +209,7 @@ function user_stats()
 		<fieldset>
 			<legend>Avatar</legend>
 			{if $users.avatar_ext !=''}
-				<form action="../user/user_detail.php?action=delete_avatar" method="post" name="delete_avatar">
+				<form action="../user/user_detail.php?action=delete_avatar&user_id_selected={$users.user_id}" method="post" name="delete_avatar">
 				<label for="delete_image">Delete Image?</label>
 				<div>
 					<br><img src="../../includes/show_image.php?file={$users.image}&amp;resize=160,null,null,null" alt="Avatar" class="user_stats_img" id="user_stats_img_dark">
@@ -219,12 +219,12 @@ function user_stats()
 				<input type="submit" value="Delete" class="topbutton_cpanel_small">
 				</form>
 			{else}
-				<form enctype="multipart/form-data" action="../user/user_detail.php" method="post" name="avatar" id="avatar">
+				<form enctype="multipart/form-data" action="../user/user_detail.php?&user_id_selected={$users.user_id}" method="post" name="avatar" id="avatar">
 				<label for="image" style="cursor: help; margin:5px;" accesskey="1" title="Choose an image from your harddrive to attach to be associated with this user.">
 					Attach image
 				</label>
 				<br><br>
-				<input type="file" name="image" class="topbutton_cpanel_small">
+				<input type="file" name="image">
 				<input type="submit" name="Modify" value="Upload" class="topbutton_cpanel_small">
 				<input type="hidden" name="MAX_FILE_SIZE" value="50000">
 				<input type="hidden" name="user_id_selected" value="{$users.user_id}">

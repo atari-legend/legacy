@@ -59,4 +59,5 @@ $magazine_scan_path="../../data/images/magazine_scans/";
 
 //users
 $user_avatar_path="../../data/images/user_avatars/";
+$user_avatar_save_path="../../../data/images/user_avatars/";
 ?>
