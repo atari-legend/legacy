@@ -889,11 +889,11 @@ Standard tile settings
 .standard_tile_input_small { background : black;
 				color: #ffffff;				
 				width: 200px;
-				height: 20px;
+				height: 18fpx;
 				margin-top:0;
 				padding: 0;
 				padding-left: 5px;
-				border: 0;
+				border: 1px solid #b2b2b2;
 				text-align: left;
 				font-family: Robot, Arial;	
 }
@@ -905,7 +905,7 @@ Standard tile settings
 				margin-top:0;
 				padding: 0;
 				padding-left: 5px;
-				border: 0;
+				border: 1px solid #b2b2b2;
 				text-align: left;
 				font-family: Robot, Arial;	
 }
@@ -1035,6 +1035,11 @@ Standard tile settings
 
 #small_select{ 
 	width: 50px;
+}
+
+#medium_select{ 
+	width: 200px;
+	margin-top: 0px;
 }
 
 /*---------------------------------------------------------- 
@@ -1604,10 +1609,10 @@ Standard table settings
 .topbutton_cpanel_small
 {
   cursor: pointer;
-  border:2px solid black;
-  background: #161c71;
+  border:1px solid black;
+  background: #dbd7d1;
   font-family: robot, arial, sans-serif;
-  color: white;
+  color: black;
   height: 19px;
   width: 80px;
   font-size: 10pt;
@@ -1619,10 +1624,10 @@ Standard table settings
 }
 
 .topbutton_cpanel_small:hover {
-  background: #dbd7d1;
-  color: black;
+  background: #161c71;
+  color: white;
   text-decoration:none;
-  border:2px solid #4f4f4f;
+  border:1px solid #4f4f4f;
 }
 
 .top_button_cpanel_small:visited {
@@ -1640,14 +1645,14 @@ Standard table settings
 }
 
 fieldset { 
-	border: solid 1px black; 
+	border: solid 1px #b2b2b2;
 	background: #EFEFEF; 
 	padding: 8px;
 	font-size: 11pt;
 }
 
 legend {
-	border: black solid 1px;
+	border: solid 2px #b2b2b2;	
 	padding: 1px 10px;
 	color: #122323;
 	font-weight: bold;
@@ -1887,6 +1892,30 @@ Trivia Quotes
 
 @media screen and (max-width: 480px) { 
 	#triviaquotes{ margin-top: 0px;}
+}
+
+/*---------------------------------------------------------- 
+Links addnew
+------------------------------------------------------------ */
+#leftnav_position_linkaddnew{ margin-top: 50px; margin-bottom: 30px; float: left;}
+#linkaddnew{ margin-top: 50px; margin-bottom: 30px; float: left;}
+
+
+@media screen and (max-width: 1279px) { 
+	#leftnav_position_linkaddnew{ margin-top: 20px;}
+	#linkaddnew{margin-top: 20px;}
+}
+
+@media screen and (max-width: 480px) { 
+	#linkaddnew{ margin-top: 0px;}
+}
+
+@media screen and (max-width: 480px) { 
+#linkadd_two{ display: none;}
+}
+
+@media screen and (min-width: 481px) { 
+#linkadd_one{ display: none;}
 }
 
 /*---------------------------------------------------------- 

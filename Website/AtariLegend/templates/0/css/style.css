@@ -852,11 +852,11 @@ Standard tile settings
 .standard_tile_input_small { background : black;
 				color: #ffffff;				
 				width: 200px;
-				height: 20px;
+				height: 18px;
 				margin-top:0;
 				padding: 0;
 				padding-left: 5px;
-				border: 0;
+				border: 1px solid #b2b2b2;
 				text-align: left;
 				font-family: AtariST;
 }
@@ -868,7 +868,7 @@ Standard tile settings
 				margin-top:0;
 				padding: 0;
 				padding-left: 5px;
-				border: 0;
+				border: 1px solid #b2b2b2;
 				text-align: left;
 				font-family: AtariST;
 }
@@ -1011,6 +1011,11 @@ a.standard_tile_link:hover, a.standard_tile_link:focus
 
 #small_select{ 
 	width: 50px;
+}
+
+#medium_select{ 
+	width: 200px;
+	margin-top: 0px;
 }
  
 /*---------------------------------------------------------- 
@@ -1706,7 +1711,7 @@ Standard table settings
 }
 
 fieldset { 
-	border: solid 2px #b2b2b2; 
+	border: solid 1px #b2b2b2; 
 	background: #DBD7D1;
 	padding: 8px;
 	font-size: 12pt;
@@ -1910,6 +1915,20 @@ Trivia Quotes
 ------------------------------------------------------------ */
 #leftnav_position_triviaquotes{ margin-top: 20px; margin-bottom: 30px; float: left;}
 #triviaquotes{ margin-top: 20px; margin-bottom: 30px; float: left;}
+
+/*---------------------------------------------------------- 
+Links addnew
+------------------------------------------------------------ */
+#leftnav_position_linkaddnew{ margin-top: 20px; margin-bottom: 30px; float: left;}
+#linkaddnew{ margin-top: 20px; margin-bottom: 30px; float: left;}
+
+@media screen and (max-width: 480px) { 
+#linkadd_two{ display: none;}
+}
+
+@media screen and (min-width: 481px) { 
+#linkadd_one{ display: none;}
+}
 
 /*---------------------------------------------------------- 
  resolutions tested!
