@@ -829,11 +829,11 @@ Standard tile settings
 .standard_tile_input_small { background : black;
 				color: #ffffff;				
 				width: 200px;
-				height: 20px;
+				height: 18px;
 				margin-top:0;
 				padding: 0;
 				padding-left: 5px;
-				border: 0;
+				border: 1px solid #008b8b;
 				text-align: left;
 				/*display: block;*/
 				font-family: Audiowide;	
@@ -846,11 +846,13 @@ Standard tile settings
 				margin-top:0;
 				padding: 0;
 				padding-left: 5px;
-				border: 0;
+				border: 1px solid #008b8b;
 				text-align: left;
 				/*display: block;*/
 				font-family: Audiowide;	
 }
+
+#text_area_big { height: 150px; }
 
 .standard_tile th { color: white;
 			font-size: 12pt;
@@ -981,6 +983,11 @@ Standard tile settings
 
 #small_select{ 
 	width: 50px;
+}
+
+#medium_select{ 
+	width: 200px;
+	margin-top: 0px;
 }
 	
 /*---------------------------------------------------------- 
@@ -1554,7 +1561,7 @@ Standard table settings
 {
   cursor: pointer;
   border: 0px;
-  background: #006f6f;
+  background: #122323;
   font-family: Audiowide,Arial,helvetica,sans-serif;
   color: white;
   height: 19px;
@@ -1566,7 +1573,7 @@ Standard table settings
 }
 
 .topbutton_cpanel_small:hover {
-  background: #122323;
+  background:#006f6f;
   color: white;
   text-decoration:none;
   border-bottom: 3px solid #122323;
@@ -1807,6 +1814,26 @@ Trivia Quotes
 @media screen and (max-width: 1279px) { 
 	#leftnav_position_triviaquotes{ margin-top: 20px;}
 	#triviaquotes{margin-top: 20px;}
+}
+
+/*---------------------------------------------------------- 
+Links addnew
+------------------------------------------------------------ */
+#leftnav_position_linkaddnew{ margin-top: 80px; margin-bottom: 30px; float: left;}
+#linkaddnew{ margin-top: 80px; margin-bottom: 30px; float: left;}
+
+
+@media screen and (max-width: 1279px) { 
+	#leftnav_position_linkaddnew{ margin-top: 20px;}
+	#linkaddnew{margin-top: 20px;}
+}
+
+@media screen and (max-width: 480px) { 
+#linkadd_two{ display: none;}
+}
+
+@media screen and (min-width: 481px) { 
+#linkadd_one{ display: none;}
 }
 
 /*---------------------------------------------------------- 
