@@ -75,7 +75,5 @@ if(empty($catpick)) {$catpick=1;}
 $smarty->assign('left_nav', 'leftnav_position_linkmodlist');
 
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/link_modlist.html');
-
 $smarty->display('extends:../../../templates/html/admin/main.html|../../../templates/html/admin/frontpage.html|../../../templates/html/admin/link_modlist.html|../../../templates/html/admin/left_nav.html');
 ?>
