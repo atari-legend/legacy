@@ -9,6 +9,7 @@
 *							
 *
 *   Id: link_modlist.php,v 0.10 2005/01/08 Silver Surfer
+*   Id: link_modlist.php,v 0.20 2015/09/12 ST Graveyard
 *
 ***************************************************************************/
 
@@ -18,28 +19,28 @@ In this section we modify links
 ***********************************************************************************
 */
 
-include("../includes/common.php");
+include("../../includes/common.php");
+
 if(empty($catpick)) {$catpick=1;}
-		$SQL = "SELECT website_category_id, website_category_name FROM website_category ORDER BY website_category_name";
-		$linkcategorysql = $mysqli->query($SQL) or die("Couldn't query categories");
+	$SQL = "SELECT website_category_id, website_category_name FROM website_category ORDER BY website_category_name";
+	$linkcategorysql = $mysqli->query($SQL) or die("Couldn't query categories");
 		
-			list($website_category_id,$website_category_name) = $linkcategorysql->fetch_array(MYSQLI_BOTH);
+	list($website_category_id,$website_category_name) = $linkcategorysql->fetch_array(MYSQLI_BOTH);
+
+	mysqli_data_seek($linkcategorysql,0) or die("what happend?");
+	while (list($category_id,$category_name) = $linkcategorysql->fetch_array(MYSQLI_BOTH)) {
+	
+	if ($category_id==$website_category_id) {$selected="SELECTED";}
 		
+		else {$selected="";}
+	if ($catpick==$category_id) {$selected="SELECTED";}
 		
-			mysqli_data_seek($linkcategorysql,0) or die("what happend?");
-			while (list($category_id,$category_name) = $linkcategorysql->fetch_array(MYSQLI_BOTH)) {
-			
-			if ($category_id==$website_category_id) {$selected="SELECTED";}
-				
-				else {$selected="";}
-			if ($catpick==$category_id) {$selected="SELECTED";}
-				
-				else {$selected="";}
-				
-				$smarty->append('category',
-	    			array('category_id' => $category_id,
-						  'category_name' => $category_name,
-						  'selected' => $selected));
+		else {$selected="";}
+		
+		$smarty->append('category',
+			array('category_id' => $category_id,
+				  'category_name' => $category_name,
+				  'selected' => $selected));
 			} 
 
 		if(isset($catpick)) {$website_category_id=$catpick;}
@@ -71,6 +72,10 @@ if(empty($catpick)) {$catpick=1;}
 						  'website_imgext' => $rowlink['website_imgext']));
 		}
 
+$smarty->assign('left_nav', 'leftnav_position_linkmodlist');
+
 //Send all smarty variables to the templates
 $smarty->display('file:../templates/0/link_modlist.html');
+
+$smarty->display('extends:../../../templates/html/admin/main.html|../../../templates/html/admin/frontpage.html|../../../templates/html/admin/link_modlist.html|../../../templates/html/admin/left_nav.html');
 ?>
