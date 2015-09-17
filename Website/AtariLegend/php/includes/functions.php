@@ -220,24 +220,26 @@ function convert_timestamp_rss($timestamp)
 	
 function get_username_from_id($submitted)
 	{
-					$query = "SELECT username FROM users WHERE user_id = '$submitted'";
-					$result = mysql_query($query) or die("Query failed");
-					if(mysql_num_rows($result) == 0) return 0;
+					$query = "SELECT userid FROM users WHERE user_id = $submitted";
+					global $mysqli;
+					$result = $mysqli->query($query) or die("Query failed");
+					if(get_rows($result) == 0) return 0;
 					else
 					{
-						$query_data = mysql_fetch_array($result);
-					return $query_data[username];
+						$query_data = $result->fetch_array(MYSQLI_BOTH);
+					return $query_data['userid'];
 					}
 	}
 
 function get_user_id_from_name($submitted)
 	{
-					$query = "SELECT user_id FROM users WHERE userid = '$submitted'";
-					$result = mysql_query($query) or die("Query failed");
+					$query = "SELECT user_id FROM users WHERE userid = $submitted";
+					global $mysqli;
+					$result = $mysqli->query($query) or die("Query failed");
 					if(mysql_num_rows($result) == 0) return 0;
 					else
 					{
-						$query_data = mysql_fetch_array($result);
+						$query_data = $result->fetch_array(MYSQLI_BOTH);
 					return $query_data[user_id];
 					}
 	}

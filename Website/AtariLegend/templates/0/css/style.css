@@ -1921,14 +1921,41 @@ Links addnew
 ------------------------------------------------------------ */
 #leftnav_position_linkaddnew{ margin-top: 20px; margin-bottom: 30px; float: left;}
 #linkaddnew{ margin-top: 20px; margin-bottom: 30px; float: left;}
+#linkvalidate{ margin-bottom: 30px; float: left;}
 
 @media screen and (max-width: 480px) { 
 #linkadd_two{ display: none;}
+#linkvalidate_two{ display: none;}
 }
 
 @media screen and (min-width: 481px) { 
 #linkadd_one{ display: none;}
+#linkvalidate_one{ display: none;}
 }
+
+.links_addnew_info { font-size: 11pt; color: black; font-style: italic;}
+
+.links_addnew_link:link { text-decoration: none;
+	color: #6a6a6a;
+}
+
+.links_addnew_link:visited { text-decoration: none;
+	color: #6a6a6a;
+}
+
+.links_addnew_link:hover { text-decoration: none;
+	color: black;
+}
+
+/*---------------------------------------------------------- 
+Links Modify list
+------------------------------------------------------------ */
+#user_stats_img_dark{ box-shadow: 0 0 12px black;
+					margin-left : 5px;
+					margin-right : 5px;
+					margin-top : 10px;
+					margin-bottom : 10px}
+						
 
 /*---------------------------------------------------------- 
  resolutions tested!

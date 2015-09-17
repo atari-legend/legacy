@@ -44,13 +44,11 @@ $result = $mysqli->query($sql) or die("couldn't query website_validate");
 if (get_rows($result)<1)
 	{
 		$section = "Validate links";
-		$error_msg = "No links has been submitted.";
+		$error_msg = "There are currently no new submitted links in the database to be validated.";
 	
 			$smarty->assign('error_msg',
 	    			  array('section' => $section,
-			  	  			'message' => $error_msg));
-	
-		$smarty->assign('error_message_tpl', '1');
+			  	  			'message' => $error_msg));	
 	}
 else 
 	{ 
@@ -70,6 +68,7 @@ else
 				  'website_description' => $valrow['website_description'],
 				  'user_email' => $valrow['email'],
 				  'link_sub' => $link_sub,
+				  'user_id' => $valrow['user_id'],
 				  'user_name' => $user_name));
 		} 
 	}
