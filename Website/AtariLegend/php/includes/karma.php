@@ -27,7 +27,6 @@
 
 function UserKarma($user_id,$karma_action)
 {
-	
 	if (empty($user_id)) {die("user_id wasn't passed properly");}
 	if (empty($karma_action)) {die("karma values wasn't passed properly");}
 	

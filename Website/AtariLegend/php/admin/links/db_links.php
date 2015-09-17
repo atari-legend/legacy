@@ -16,13 +16,14 @@
 // This document contain all the code needed to operate the website database.
 // We are using the action var to separate all the queries.
 
-include("../includes/common.php"); 
+include("../../includes/common.php");
 if(isset($action) and $action=="addnew_link")
 
 {
 //****************************************************************************************
 // This is where the actual links will be inserted into the DB!!
 //**************************************************************************************** 
+echo $user_id;
 
 $timestamp = time();
 $name = trim($name);

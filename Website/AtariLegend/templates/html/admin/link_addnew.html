@@ -100,68 +100,122 @@
 		</div>
 		</form>
 	</div>
-</div>
-<div class="standard_tile" id="linkaddnew">
+</div>	
+<div class="standard_tile" id="linkvalidate">
 	<h1>VALIDATE LINK</h1>
 	<div class="standard_tile_line"></div>
 	<div class="standard_tile_text">
 		<div class="left_nav_section">
-			  Here you can check and validate submitted links. Once validated, they will be available on the website.<br/>
+			  Here you can check and validate submitted links. Once validated, they will be available on the website.<br>
+			  {if isset($error_msg.message)}
+				<b>{$error_msg.message}</b>
+			  {/if}
 		</div> 
 		<br>		
 		<br>		
 		{if isset($validate)}
 			{foreach from=$validate item=lineweb}
-				<form enctype="multipart/form-data" action="../links/db_links.php" method="post" name="linkmod{$lineweb.website_id}" id="linkmod{$lineweb.website_id}">
-				<fieldset>
-				<legend>New submitted website</legend>
-				<table width="100%">
-				<tr>
-					<td>Site Name</td>
-					<td><input type="text" name="validate_website_name" id="website_name" value="{$lineweb.website_name}" class="standard_tile_input_small"></td>
-				</tr>
-				<tr>
-					<td>URL</td>	 
-					<td><input type="text" name="validate_website_url" id="website_url" value="{$lineweb.website_url}" class="standard_tile_input_small"></td>		 
-				</tr>
-				<tr>
-					<td>Category</td> 
-					<td><select name="validate_category" id="medium_select">
-						{foreach from=$category item=line}
-							<option value="{$line.website_category_id}" {if $line.website_category_id eq $lineweb.website_category}SELECTED{/if}>{$line.website_category_name}</option>
-						{/foreach}
-					</select></td>
-				</tr>
-				<tr>
-					<td>Description</td>	
-					<td><textarea cols="50" rows="8" name="validate_website_description_text" class="standard_tile_input_area" id="text_area_big">{$lineweb.website_description}</textarea></td>
-				</tr>
-				</table>
-				<br>
-				<br>
-			    <input type="hidden" name="validate_website_id" value="{$lineweb.website_id}">
-			    <input type="hidden" name="action" value="approve_link">
-			    <input type="submit" name="Approve" value="Approve" class="topbutton_cpanel_small">
-			    <input type="button" name="delete" value="Delete" onClick="deletelink({$lineweb.website_id}); return false;" class="topbutton_cpanel_small">
-				</form>
-				</fieldset> 
-
-				<fieldset>
-				<legend>Submission details</legend>
-	
-					Submitted by {$lineweb.user_name}<br>
-					On {$lineweb.website_date}<br>
-					User Email <a href="mailto:{$lineweb.user_email}?Subject=Thanks for the link you submitted" class="MAINNAV">{$lineweb.user_email}</a><br>
+				<div id="linkvalidate_two">
+					<form enctype="multipart/form-data" action="../links/db_links.php" method="post" name="linkmod{$lineweb.website_id}" id="linkmod{$lineweb.website_id}">
+					<fieldset>
+					<legend>New submitted website</legend>
+					<table width="100%">
+					<tr>
+						<td>Site Name</td>
+						<td><input type="text" name="validate_website_name" id="website_name" value="{$lineweb.website_name}" class="standard_tile_input_small"></td>
+					</tr>
+					<tr>
+						<td>URL</td>	 
+						<td><input type="text" name="validate_website_url" id="website_url" value="{$lineweb.website_url}" class="standard_tile_input_small"></td>		 
+					</tr>
+					<tr>
+						<td>Category</td> 
+						<td><select name="validate_category" id="medium_select">
+							{foreach from=$website_category item=line}
+								<option value="{$line.website_category_id}" {if $line.website_category_id eq $lineweb.website_category}SELECTED{/if}>{$line.website_category_name}</option>
+							{/foreach}
+						</select></td>
+					</tr>
+					<tr>
+						<td>Description</td>	
+						<td><textarea cols="50" rows="8" name="validate_website_description_text" class="standard_tile_input_area" id="text_area_big">{$lineweb.website_description}</textarea></td>
+					</tr>
+					</table>
 					<br>
-					{$lineweb.user_name} has submitted {$lineweb.link_sub} links before.
-				</fieldset> 
+					<br>
+					<input type="hidden" name="validate_website_id" value="{$lineweb.website_id}">
+					<input type="hidden" name="action" value="approve_link">
+					<input type="submit" name="Approve" value="Approve" class="topbutton_cpanel_small">
+					<input type="button" name="delete" value="Delete" onClick="deletelink({$lineweb.website_id}); return false;" class="topbutton_cpanel_small">
+					</form>
+					</fieldset> 
+					<fieldset>
+						<div class="links_addnew_info">Submitted by <a href="../user/user_detail.php?user_id_selected={$lineweb.user_id}" class="links_addnew_link">{$lineweb.user_name}</a> on {$lineweb.website_date}<br>
+						User Email : <a href="mailto:{$lineweb.user_email}?Subject=Thanks for the link you submitted" class="links_addnew_link">{$lineweb.user_email}</a><br>
+						<br>
+						{$lineweb.user_name} has submitted {$lineweb.link_sub} links before.</div>
+					</fieldset> 
+					<br>
+					<br>
+				</div>	
+				<div id="linkvalidate_one">
+					<form enctype="multipart/form-data" action="../links/db_links.php" method="post" name="linkmod{$lineweb.website_id}" id="linkmod{$lineweb.website_id}">
+					<fieldset>
+					<legend>New submitted website</legend>
+					<table width="100%" style="text-align: center;">
+					<tr>
+						<td>Site Name</td>
+					</tr>
+					<tr>
+						<td><input type="text" name="validate_website_name" id="website_name" value="{$lineweb.website_name}" class="standard_tile_input_small"></td>
+					</tr>
+					<tr>
+						<td>URL</td>	
+					</tr>
+					<tr>
+						<td><input type="text" name="validate_website_url" id="website_url" value="{$lineweb.website_url}" class="standard_tile_input_small"></td>		 
+					</tr>
+					<tr>
+						<td>Category</td> 
+					</tr>
+					<tr>
+						<td><select name="validate_category" id="medium_select">
+							{foreach from=$website_category item=line}
+								<option value="{$line.website_category_id}" {if $line.website_category_id eq $lineweb.website_category}SELECTED{/if}>{$line.website_category_name}</option>
+							{/foreach}
+						</select></td>
+					</tr>
+					<tr>
+						<td>Description</td>
+					</tr>
+					<tr>
+						<td><textarea cols="50" rows="8" name="validate_website_description_text" class="standard_tile_input_area" id="text_area_big">{$lineweb.website_description}</textarea></td>
+					</tr>
+					<tr>
+						<td>
+							<br>
+							<input type="hidden" name="validate_website_id" value="{$lineweb.website_id}">
+							<input type="hidden" name="action" value="approve_link">
+							<input type="submit" name="Approve" value="Approve" class="topbutton_cpanel_small">
+							<input type="button" name="delete" value="Delete" onClick="deletelink({$lineweb.website_id}); return false;" class="topbutton_cpanel_small">
+						</td>
+					</tr>	
+					</table>
+					</form>
+					</fieldset> 
+					<fieldset>
+						<div class="links_addnew_info">Submitted by <a href="../user/user_detail.php?user_id_selected={$lineweb.user_id}" class="links_addnew_link">{$lineweb.user_name}</a> on {$lineweb.website_date}<br>
+						User Email : <a href="mailto:{$lineweb.user_email}?Subject=Thanks for the link you submitted" class="links_addnew_link">{$lineweb.user_email}</a><br>
+						<br>
+						{$lineweb.user_name} has submitted {$lineweb.link_sub} links before.</div>
+					</fieldset> 
+					<br>
+					<br>
+				</div>	
 			{/foreach}
-			<br>
-			<br>
 		{/if}
 		<div class="left_nav_section">
-		  Make the changes you want, then hit the submit button to modify. 
-		  <br>
+		  Make the changes you want, then hit the 'Approve' button to modify. 
 		  Should you want to delete the link, click the delete button. The effects are immidiate.
 		  <br><br>
 		</div> 
