@@ -9,6 +9,7 @@
 *							
 *
 *   Id: link_mod.php,v 0.10 2005/01/08 Silver Surfer
+*   Id: link_mod.php,v 0.20 2015/10/01 STG
 *
 ***************************************************************************/
 
@@ -18,23 +19,23 @@ In this section we modify links
 ***********************************************************************************
 */
 
-include("../includes/common.php");
+include("../../includes/common.php");
 
 global $g_tree;
 $g_tree = array();
 
-		$LINKSQL = $mysqli->query("SELECT website_category_id,parent_category,website_category_name FROM website_category order by website_category_name")
-				   or die ("Error while querying the links category database");
-		 
-                 while($link_row = $LINKSQL->fetch_array(MYSQLI_BOTH)){
+$LINKSQL = $mysqli->query("SELECT website_category_id,parent_category,website_category_name FROM website_category order by website_category_name")
+		   or die ("Error while querying the links category database");
+ 
+while($link_row = $LINKSQL->fetch_array(MYSQLI_BOTH)){
                  
-$g_tree[]  = array(
-                    'id'        => $link_row['website_category_id'],
-                    'id_parent' => $link_row['parent_category'],
-                    'title'     => $link_row['website_category_name']);
-                 };
-		global $ret_tree;		 
-			$ret_tree = array();
+	$g_tree[]  = array(
+						'id'        => $link_row['website_category_id'],
+						'id_parent' => $link_row['parent_category'],
+						'title'     => $link_row['website_category_name']);
+};
+global $ret_tree;		 
+$ret_tree = array();
 
 // __Recursive function call__
 // If you want to print out only
@@ -42,7 +43,7 @@ $g_tree[]  = array(
 // of this function to the id of the subtree
 //
 
-$sql_query = $mysqli->query("SELECT website_category_id,parent_category,website_category_name FROM website_category order by website_category_name");
+$sql_query = "SELECT website_category_id,parent_category,website_category_name FROM website_category order by website_category_name";
 
 //maketree(,,)
 $ret_tree = maketree(0,$sql_query,0);
@@ -53,41 +54,36 @@ asort($ret_tree);
 //print_r(array_keys($ret_tree));
 
 //Print the tree structure with indents
-//
-
 $arr = array("one", "two", "three");
 reset($arr);
 echo"<br><br>";
 
 while (list($key, $value) = each($ret_tree)) {
-
-	
-	
 	foreach($value as $cat) {
 		asort($cat);
 		foreach($cat as $cat2) {
 
-    				echo "Key: $key; Value: $cat2; <br />\n";
+					echo "Key: $key; Value: $cat2; <br />\n";
 		}
 	}
 }
 
 foreach($ret_tree as $cat)
 {
-    $indent = '0';
-    
-    for($i=0; $i < $cat['$indent']; $i++)
-    {
-        $indent=$indent+15;
-    }
-  		
+	$indent = '0';
+	
+	for($i=0; $i < $cat['$indent']; $i++)
+	{
+		$indent=$indent+15;
+	}
+		
 		$website = $mysqli->query("SELECT website_category_id FROM website_category_cross WHERE website_category_id='$cat[id]'");
 	
 		$website_count = get_rows($website);
 		
 		
 			$smarty->append('category',
-	    	array('category_name' => $cat['title'],
+			array('category_name' => $cat['title'],
 				  'category_id' => $cat['id'],
 				  'category_parent' => $cat['id_parent'],
 				  'category_indent' => $indent,
@@ -95,6 +91,8 @@ foreach($ret_tree as $cat)
 	
 } 
 
+$smarty->assign('left_nav', 'leftnav_position_linkcat');
+
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/link_cat.html');
+$smarty->display('extends:../../../templates/html/admin/main.html|../../../templates/html/admin/frontpage.html|../../../templates/html/admin/link_cat.html|../../../templates/html/admin/left_nav.html');
 ?>

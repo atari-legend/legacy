@@ -11,7 +11,7 @@
 ***************************************************************************/
 *}
 {block name=link_modlist}
-<div class="standard_tile" id="linkaddnew">
+<div class="standard_tile" id="linkmodlist">
 	<h1>MODIFY LINKS</h1>
 	<div class="standard_tile_line"></div>
 	<div class="standard_tile_text">
@@ -27,25 +27,37 @@
 				</select>
 				<input type="submit" value="Pick" class="topbutton_cpanel_small">
 			</form>
+			<form action="../links/link_modlist.php" method="post" name="catdrop" id="catdrop_one">
+				Pick category <br><br>
+				<select name="catpick" id="medium_select">
+						{foreach from=$category item=line}
+							<option value="{$line.category_id}" {$line.selected}>{$line.category_name}</option>
+						{/foreach}
+				</select>
+				<br><br>	
+				<input type="submit" value="Pick" class="topbutton_cpanel_small">
+			</form>
 			</div>
 		</fieldset>
 		<br><br>
 		{if isset($link_list)}
-		<table class="standard_table_list">
+		<table class="standard_table_list" id="extra_padding">
 		{foreach from=$link_list item=line}
    			<tr>
-				<td class="links_addnew_info">
+				<td class="links_addnew_info" id="links_modlist_tdline">
 				{if  $line.website_imgext !== ""}
 					<a href="{$line.website_url}" target="_blank" class="links_addnew_link">
 					<img src="../../includes/show_image.php?file={$line.website_image}&amp;resize=160,null,null,null" alt="website screenshot" class="user_stats_img" id="user_stats_img_dark">
 					</a>					
 				{/if}
 				</td>
-				<td class="links_addnew_info">
+				<td class="links_addnew_info" id="links_modlist_tdline">	
+				<br>
 				<a href="{$line.website_url}" class="links_addnew_link" target="_blank">{$line.website_name}</a>
 				<a href="link_mod.php?website_id={$line.website_id}" class="links_addnew_link">(Click to modify)</a><br>
-				<i>added on {$line.timestamp} by {$line.submitted}</i><br><br>	
+				<sup>added on {$line.timestamp} by {$line.submitted}</sup><br>
 				{$line.website_description}
+				<br><br>	
 				</td>
 			</tr>
 		{/foreach}

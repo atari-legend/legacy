@@ -852,13 +852,14 @@ Standard tile settings
 .standard_tile_input_small { background : black;
 				color: #ffffff;				
 				width: 200px;
-				height: 18px;
+				height: 25px;
 				margin-top:0;
 				padding: 0;
-				padding-left: 5px;
+				padding-left: 7px;
 				border: 1px solid #b2b2b2;
 				text-align: left;
 				font-family: AtariST;
+				background: #666666;
 }
 
 .standard_tile_input_area { background : black;
@@ -866,12 +867,15 @@ Standard tile settings
 				width: 50%;
 				height: 40px;
 				margin-top:0;
-				padding: 0;
-				padding-left: 5px;
+				padding: 2px;
+				padding-left: 7px;
 				border: 1px solid #b2b2b2;
 				text-align: left;
 				font-family: AtariST;
+				background: #666666;
 }
+
+#text_area_big { height: 150px; }
 
 a.standard_tile_link:link
 { 	
@@ -1011,11 +1015,15 @@ a.standard_tile_link:hover, a.standard_tile_link:focus
 
 #small_select{ 
 	width: 50px;
+	height: 27px;
+	background: #666666;
 }
 
 #medium_select{ 
 	width: 200px;
 	margin-top: 0px;
+	background: #666666;
+	height: 27px;
 }
  
 /*---------------------------------------------------------- 
@@ -1679,7 +1687,7 @@ Standard table settings
   background: white;
   font-family: AtariST,Arial,helvetica,sans-serif;
   color: #182727;
-  height: 18px;
+  height: 25px;
   width: 80px;
   font-size: 11pt;
   border-bottom: 3px solid black;
@@ -1933,7 +1941,7 @@ Links addnew
 #linkvalidate_one{ display: none;}
 }
 
-.links_addnew_info { font-size: 11pt; color: black; font-style: italic;}
+.links_addnew_info { font-size: 12pt; color: black; padding: 5px;}
 
 .links_addnew_link:link { text-decoration: none;
 	color: #6a6a6a;
@@ -1950,13 +1958,26 @@ Links addnew
 /*---------------------------------------------------------- 
 Links Modify list
 ------------------------------------------------------------ */
+#links_modlist_tdline{ 	border-bottom: solid 1px #b2b2b2; }
+
 #user_stats_img_dark{ box-shadow: 0 0 12px black;
 					margin-left : 5px;
 					margin-right : 5px;
 					margin-top : 10px;
 					margin-bottom : 10px}
 						
+#leftnav_position_linkmodlist {margin-top: 20px; margin-bottom: 30px; float: left;}
+#linkmodlist{ margin-top: 20px; margin-bottom: 30px; float: left;}
 
+@media screen and (max-width: 480px) { 
+	#catdrop{display : none;}
+	#user_stats_img_dark{display : none;}
+}	
+
+@media screen and (min-width: 481px) { 
+	#catdrop_one{display : none;}
+}
+						
 /*---------------------------------------------------------- 
  resolutions tested!
 ------------------------------------------------------------ */
