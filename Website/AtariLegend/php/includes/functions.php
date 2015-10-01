@@ -240,7 +240,7 @@ function get_user_id_from_name($submitted)
 					else
 					{
 						$query_data = $result->fetch_array(MYSQLI_BOTH);
-					return $query_data[user_id];
+						return $query_data[user_id];
 					}
 	}
 	
@@ -250,29 +250,41 @@ function get_rows ($result)
 		return $num;
 	}
 
+function mysqli_result($res,$row=0,$col=0){ 
+    $numrows = mysqli_num_rows($res); 
+    if ($numrows && $row <= ($numrows-1) && $row >=0){
+        mysqli_data_seek($res,$row);
+        $resrow = (is_numeric($col)) ? mysqli_fetch_row($res) : mysqli_fetch_assoc($res);
+        if (isset($resrow[$col])){
+            return $resrow[$col];
+        }
+    }
+    return false;
+}
 	
 function maketree($rootcatid,$sql,$maxlevel)
 {
 // $sql is the sql statement which fetches the data
 // you MUST keep this order:
 // 1) the category ID, 2) the parent category ID, 3) the name of the category
-         $result=mysql_query($sql);
-		 
-                 while(list($catid,$parcat,$name)=mysql_fetch_array($result)){
-                 $table[$parcat][$catid]=$name; // array $table get 2 keys both with value $name
+	$mysqli = new mysqli("localhost", "root", "", "atarilegend");
+	
+    $result = $mysqli->query($sql) or die("Query failed");
+	while(list($catid,$parcat,$name)=$result->fetch_array(MYSQLI_BOTH)){
+        $table[$parcat][$catid]=$name; // array $table get 2 keys both with value $name
+	};
 
-                 };
+	$result=makebranch($rootcatid,$table,0,$maxlevel);
 
-         $result=makebranch($rootcatid,$table,0,$maxlevel);
-
-         RETURN $result;
+	RETURN $result;
 }
 
 function makebranch($parcat,$table,$level,$maxlevel)
 {
 	global $branche_info;
 	global $tree;
-
+	$mysqli = new mysqli("localhost", "root", "", "atarilegend");
+	
 	$list=$table[$parcat];
     asort($list); // here we do the sorting
     while(list($key,$val)=each($list))
@@ -280,22 +292,22 @@ function makebranch($parcat,$table,$level,$maxlevel)
 		// do the indent
         if ($level=="0")
 		{
-        	$branche_info[cat_width]="0";
+        	$branche_info['cat_width']="0";
         }
 		else
 		{
             $width=($level+1)*10;
-            $branche_info[cat_width] = $width;
+            $branche_info['cat_width'] = $width;
         };
         // the resulting HTML - feel free to change it
         // $level is optional
 	
-		$website = mysql_query ("SELECT count(*) FROM website_category_cross WHERE website_category_id='$key'");
+		$website = $mysqli->query("SELECT count(*) FROM website_category_cross WHERE website_category_id='$key'");
 	
-		$branche_info[cat_links] = mysql_result($website,0,0);
-		$branche_info[cat_name] = $val;
-		$branche_info[cat_id] = $key;
-		$tree[info][] = $branche_info;
+		$branche_info['cat_links'] = mysqli_result($website,0,0);
+		$branche_info['cat_name'] = $val;
+		$branche_info['cat_id'] = $key;
+		$tree['info'][] = $branche_info;
 		
 		// ask if case to query if the category in this "cycle" has a subcategory, if it has execute makebranch2
 		if ((isset($table[$key])) AND (($maxlevel>$level+1) OR ($maxlevel=="0")))
@@ -304,7 +316,6 @@ function makebranch($parcat,$table,$level,$maxlevel)
         };
     };
 }
-
 
 function date_selector($inName, $useDate=0) 
     { 

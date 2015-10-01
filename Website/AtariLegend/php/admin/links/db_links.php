@@ -23,8 +23,6 @@ if(isset($action) and $action=="addnew_link")
 //****************************************************************************************
 // This is where the actual links will be inserted into the DB!!
 //**************************************************************************************** 
-echo $user_id;
-
 $timestamp = time();
 $name = trim($name);
 
@@ -33,7 +31,7 @@ $mysqli->query("INSERT INTO website (website_name, website_url, website_date, we
 
 $karma_action = "weblink";
 
-UserKarma($user_id,$karma_action);
+//UserKarma($user_id,$karma_action);
 			
 $RESULT=$mysqli->query("SELECT * FROM website WHERE website_name='$name' AND website_url='$url'")
 			or die("Unable to select website database");
@@ -63,6 +61,7 @@ if (isset($action) and $action=="link_delete")
 //****************************************************************************************
 // Delete the links from the tables
 //**************************************************************************************** 
+echo $website_id;
 
 $RESULT=$mysqli->query("SELECT website_category_id FROM website_category_cross WHERE website_id = '$website_id'")
 			or die("Unable to select the website_category_id");
@@ -127,8 +126,8 @@ if (isset($_POST['file_upload']) and $_POST['file_upload'] == "yes" and isset($_
 		{
 			// Rename the uploaded file to its autoincrement number and move it to its proper place.
 			$mysqli->query("UPDATE website SET website_imgext='$ext' WHERE website_id='$website_id'");
-			$file_data = rename("$tmp_name", "$website_image_path$website_id.$ext");
-			chmod("$website_image_path$website_id.$ext", 0777);
+			$file_data = rename("$tmp_name", "$website_image_save_path$website_id.$ext");
+			chmod("$website_image_save_path$website_id.$ext", 0777);
 		}
 	}
 }
@@ -138,11 +137,11 @@ if ($delete_image=='yes')
 	$sql = "SELECT website_imgext FROM website WHERE website_id='$website_id'";
 	$website_query = $mysqli->query($sql);
 	list ($website_imgext) = $website_query->fetch_array(MYSQLI_BOTH);
-	$full_filename = "$website_image_path$website_id.$website_imgext";
+	$full_filename = "$website_image_save_path$website_id.$website_imgext";
 
 	chmod($full_filename, 0777) or die("Couldn't set file permissions");
 	$mysqli->query("UPDATE website SET website_imgext='' WHERE website_id='$website_id'") or die("unable to delete the file from the database");
-	unlink ("$website_image_path$website_id.$website_imgext") or die("unable to delete the file from server");
+	unlink ("$website_image_save_path$website_id.$website_imgext") or die("unable to delete the file from server");
 }
 
 // Do the website updating
@@ -199,7 +198,7 @@ list($website_id,$name,$url,$website_date,$category,$descr,$user_id) = $result->
 
 $karma_action = "weblink";
 
-UserKarma($user_id,$karma_action);
+//UserKarma($user_id,$karma_action);
 
 $mysqli->query("INSERT INTO website (website_name, website_url, website_date, website_user_sub) VALUES ('$validate_website_name', '$validate_website_url','$website_date',$user_id)");  
 
@@ -220,7 +219,7 @@ $sql = $mysqli->query("DELETE FROM website_validate WHERE website_id = '$validat
 
 mysqli_close(); 
  
-header("Location: ../links/link_validate.php");
+header("Location: ../links/link_addnew.php");
 }
 
 if(isset($action) and $action=="val_delete")
@@ -235,7 +234,7 @@ $sql = $mysqli->query("DELETE FROM website_validate WHERE website_id = '$website
 
 mysqli_close(); 
  
-header("Location: ../links/link_validate.php");
+header("Location: ../links/link_addnew.php");
 }
 
 if(isset($action) and $action=="new_cat")
