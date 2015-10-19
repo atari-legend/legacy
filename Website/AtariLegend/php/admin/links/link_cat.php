@@ -1,6 +1,6 @@
 <?php
 /***************************************************************************
-*                                link_mod.php
+*                                link_cat.php
 *                            -----------------------
 *   begin                : Saturday, Jan 08, 2005
 *   copyright            : (C) 2003 Atari Legend
@@ -21,74 +21,27 @@ In this section we modify links
 
 include("../../includes/common.php");
 
-global $g_tree;
-$g_tree = array();
-
-$LINKSQL = $mysqli->query("SELECT website_category_id,parent_category,website_category_name FROM website_category order by website_category_name")
-		   or die ("Error while querying the links category database");
- 
-while($link_row = $LINKSQL->fetch_array(MYSQLI_BOTH)){
-                 
-	$g_tree[]  = array(
-						'id'        => $link_row['website_category_id'],
-						'id_parent' => $link_row['parent_category'],
-						'title'     => $link_row['website_category_name']);
-};
-global $ret_tree;		 
-$ret_tree = array();
-
-// __Recursive function call__
-// If you want to print out only
-// a subtree you have to modify the first value
-// of this function to the id of the subtree
-//
-
-$sql_query = "SELECT website_category_id,parent_category,website_category_name FROM website_category order by website_category_name";
-
-//maketree(,,)
-$ret_tree = maketree(0,$sql_query,0);
-
-//$ret_tree = asort($ret_tree);
-asort($ret_tree);
-//print_r(array_values($ret_tree));
-//print_r(array_keys($ret_tree));
-
-//Print the tree structure with indents
-$arr = array("one", "two", "three");
-reset($arr);
-echo"<br><br>";
-
-while (list($key, $value) = each($ret_tree)) {
-	foreach($value as $cat) {
-		asort($cat);
-		foreach($cat as $cat2) {
-
-					echo "Key: $key; Value: $cat2; <br />\n";
-		}
-	}
+//****************************************************************************************
+// Delete the categorie from the tables
+//**************************************************************************************** 
+if (isset($action) and $action=="del_cat")
+{
+	$sql = $mysqli->query("DELETE FROM website_category WHERE website_category_id = '$category_id'") or die("Failed to delete category");
+	$smarty->assign('message', 'Category deleted');
 }
 
-foreach($ret_tree as $cat)
+$website = $mysqli->query("SELECT website_category_id, website_category_name FROM website_category ORDER by website_category_name");
+
+while($category_row = $website->fetch_array(MYSQLI_BOTH))
 {
-	$indent = '0';
-	
-	for($i=0; $i < $cat['$indent']; $i++)
-	{
-		$indent=$indent+15;
-	}
-		
-		$website = $mysqli->query("SELECT website_category_id FROM website_category_cross WHERE website_category_id='$cat[id]'");
-	
-		$website_count = get_rows($website);
-		
-		
-			$smarty->append('category',
-			array('category_name' => $cat['title'],
-				  'category_id' => $cat['id'],
-				  'category_parent' => $cat['id_parent'],
-				  'category_indent' => $indent,
-				  'category_count' => $website_count));
-	
+
+	$website_count = $mysqli->query("SELECT website_id FROM website_category_cross WHERE website_category_id = '$category_row[website_category_id]'");
+	$nr_of_links = get_rows($website_count);
+
+	$smarty->append('category',
+	array('category_name' => $category_row['website_category_name'],
+		  'category_id' => $category_row['website_category_id'],
+		  'category_count' => $nr_of_links));
 } 
 
 $smarty->assign('left_nav', 'leftnav_position_linkcat');

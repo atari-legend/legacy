@@ -262,61 +262,6 @@ function mysqli_result($res,$row=0,$col=0){
     return false;
 }
 	
-function maketree($rootcatid,$sql,$maxlevel)
-{
-// $sql is the sql statement which fetches the data
-// you MUST keep this order:
-// 1) the category ID, 2) the parent category ID, 3) the name of the category
-	$mysqli = new mysqli("localhost", "root", "", "atarilegend");
-	
-    $result = $mysqli->query($sql) or die("Query failed");
-	while(list($catid,$parcat,$name)=$result->fetch_array(MYSQLI_BOTH)){
-        $table[$parcat][$catid]=$name; // array $table get 2 keys both with value $name
-	};
-
-	$result=makebranch($rootcatid,$table,0,$maxlevel);
-
-	RETURN $result;
-}
-
-function makebranch($parcat,$table,$level,$maxlevel)
-{
-	global $branche_info;
-	global $tree;
-	$mysqli = new mysqli("localhost", "root", "", "atarilegend");
-	
-	$list=$table[$parcat];
-    asort($list); // here we do the sorting
-    while(list($key,$val)=each($list))
-	{
-		// do the indent
-        if ($level=="0")
-		{
-        	$branche_info['cat_width']="0";
-        }
-		else
-		{
-            $width=($level+1)*10;
-            $branche_info['cat_width'] = $width;
-        };
-        // the resulting HTML - feel free to change it
-        // $level is optional
-	
-		$website = $mysqli->query("SELECT count(*) FROM website_category_cross WHERE website_category_id='$key'");
-	
-		$branche_info['cat_links'] = mysqli_result($website,0,0);
-		$branche_info['cat_name'] = $val;
-		$branche_info['cat_id'] = $key;
-		$tree['info'][] = $branche_info;
-		
-		// ask if case to query if the category in this "cycle" has a subcategory, if it has execute makebranch2
-		if ((isset($table[$key])) AND (($maxlevel>$level+1) OR ($maxlevel=="0")))
-  	    {
- 	    	makebranch($key,$table,$level+1,$maxlevel);
-        };
-    };
-}
-
 function date_selector($inName, $useDate=0) 
     { 
         //create array so we can name months 

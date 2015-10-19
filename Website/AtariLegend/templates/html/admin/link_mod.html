@@ -45,52 +45,122 @@ function deletelink()
 		<br>		
 		<br>
 		<form enctype="multipart/form-data" action="../links/db_links.php" method="post" name="linkmod">
-		<fieldset>
-		<legend>Website Data</legend>
-		<table width="100%">
-		<tr>
-			<td>Site Name</td>
-			<td><input type="text" name="website_name" id="website_name" value="{$website.website_name}" class="standard_tile_input_small"></td>
-		</tr>
-		<tr>
-			<td>URL</td> 
-			<td><input type="text" name="website_url" id="website_url" value="{$website.website_url}" class="standard_tile_input_small"></td>		 
-		</tr>
-		<tr>		
-			<td>Category</td> 
-			<td>
-				<select name="category" id="medium_select">
-					{foreach from=$category item=line}
-							<option value="{$line.category_id}" {$line.selected}>{$line.category_name}</option>
-					{/foreach}
-				</select>
-			</td>
-		</tr>
-		<tr>
-			<td valign="top">Description</td>	
-			<td><textarea name="website_description_text" class="standard_tile_input_area" id="text_area_big">{$website.website_description_text}</textarea></td>
-		</tr>
-		<tr>
-		{if  $website.website_imgext !== ""}
-			<td valign="top">Delete Image? <input type="checkbox" name="delete_image" id="delete_image" value="yes"></td><br>
-			<td> 
-				<img src="../../includes/show_image.php?file={$website.website_image}&amp;resize=160,null,null,null" class="user_stats_img" id="user_stats_img_dark" alt="website image">
-			</td>
-		{else}
-			<td>Attach image</td>
-			<td>
-				<input type="hidden" name="MAX_FILE_SIZE" value="100000000">
-				<input type="hidden" name="file_upload" value="yes">
-				<input type="file" name="image">
-			</td>
-		{/if}
-		</tr>
-		</table>
-		<br><br>
-	    <input type="hidden" name="website_id" 	id="delete_id" value="{$website.website_id}">
-	    <input type="hidden" name="action" value="modify_link">
-	    <input type="submit" name="Modify" value="Modify" class="topbutton_cpanel_small">
-	    <input type="button" name="delete" value="Delete" onClick="deletelink(); return false;" class="topbutton_cpanel_small">
+		<div id="linkmod_two">
+			<fieldset>
+			<legend>Website Data</legend>
+			<table width="100%">
+			<tr>
+				<td>Site Name</td>
+				<td><input type="text" name="website_name" id="website_name" value="{$website.website_name}" class="standard_tile_input_small"></td>
+			</tr>
+			<tr>
+				<td>URL</td> 
+				<td><input type="text" name="website_url" id="website_url" value="{$website.website_url}" class="standard_tile_input_small"></td>		 
+			</tr>
+			<tr>		
+				<td>Category</td> 
+				<td>
+					<select name="category" id="medium_select">
+						{foreach from=$category item=line}
+								<option value="{$line.category_id}" {$line.selected}>{$line.category_name}</option>
+						{/foreach}
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td valign="top">Description</td>	
+				<td><textarea name="website_description_text" class="standard_tile_input_area" id="text_area_big">{$website.website_description_text}</textarea></td>
+			</tr>
+			<tr>
+			{if  $website.website_imgext !== ""}
+				<td valign="top">Delete Image? <input type="checkbox" name="delete_image" id="delete_image" value="yes"></td><br>
+				<td> 
+					<img src="../../includes/show_image.php?file={$website.website_image}&amp;resize=160,null,null,null" class="user_stats_img" id="user_stats_img_dark" alt="website image">
+				</td>
+			{else}
+				<td>Attach image</td>
+				<td>
+					<input type="hidden" name="MAX_FILE_SIZE" value="100000000">
+					<input type="hidden" name="file_upload" value="yes">
+					<input type="file" name="image">
+				</td>
+			{/if}
+			</tr>
+			</table>
+			<br><br>
+			<input type="hidden" name="website_id" 	id="delete_id" value="{$website.website_id}">
+			<input type="hidden" name="action" value="modify_link">
+			<input type="submit" name="Modify" value="Modify" class="topbutton_cpanel_small">	
+			<input type="button" name="delete" value="Delete" onClick="deletelink(); return false;" class="topbutton_cpanel_small">
+			</fieldset>
+		</div>
+	    </form>
+		<form enctype="multipart/form-data" action="../links/db_links.php" method="post" name="linkmod">
+		<div id="linkmod_one">
+			<fieldset>
+			<legend>Website Data</legend>
+			<table width="100%" style="text-align: center;">
+			<tr>
+				<td>Site Name</td>
+			</tr>
+			<tr>	
+				<td><input type="text" name="website_name" id="website_name" value="{$website.website_name}" class="standard_tile_input_small"></td>
+			</tr>
+			<tr>
+				<td>URL</td> 
+			</tr>
+			<tr>
+				<td><input type="text" name="website_url" id="website_url" value="{$website.website_url}" class="standard_tile_input_small"></td>		 
+			</tr>
+			<tr>		
+				<td>Category</td> 
+			</tr>
+			<tr>
+				<td>
+					<select name="category" id="medium_select">
+						{foreach from=$category item=line}
+								<option value="{$line.category_id}" {$line.selected}>{$line.category_name}</option>
+						{/foreach}
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td valign="top">Description</td>
+			</tr>
+			<tr>
+				<td><textarea name="website_description_text" class="standard_tile_input_area" id="text_area_big">{$website.website_description_text}</textarea></td>
+			</tr>
+			<tr>
+			{if  $website.website_imgext !== ""}
+				<td valign="top">Delete Image? <input type="checkbox" name="delete_image" id="delete_image" value="yes"></td><br>
+			</tr>
+			<tr>
+				<td> 
+					<img src="../../includes/show_image.php?file={$website.website_image}&amp;resize=160,null,null,null" class="user_stats_img" id="user_stats_img_dark" alt="website image">
+				</td>
+			{else}
+				<td><br>Attach image</td>
+			</tr>
+			<tr>
+				<td>
+					<input type="hidden" name="MAX_FILE_SIZE" value="100000000">
+					<input type="hidden" name="file_upload" value="yes">
+					<input type="file" name="image">
+				</td>
+			{/if}
+			</tr>
+			<tr>
+				<td>
+					<input type="hidden" name="website_id" 	id="delete_id" value="{$website.website_id}">
+					<input type="hidden" name="action" value="modify_link">
+					<br>
+					<input type="submit" name="Modify" value="Modify" class="topbutton_cpanel_small">
+					<input type="button" name="delete" value="Delete" onClick="deletelink(); return false;" class="topbutton_cpanel_small">		
+				</td>
+			</tr>	
+			</table>
+			</fieldset>
+		</div>
 	    </form>
 		<br>
 		<br>
