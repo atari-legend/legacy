@@ -1523,7 +1523,7 @@ Standard table settings
 }
 
 .standard_table_list tr:hover {
-	background-color:#122323;
+	background-color:#294f4f;
 }
 
 .standard_table_list td {
@@ -1909,11 +1909,12 @@ Links Modify
 	#link_mod{margin-top: 20px;}
 }
 
-@media screen and (max-width: 480px) { 
+@media screen and (max-width: 600px) { 
 #linkmod_two{ display: none;}
+#user_stats_img_dark{display : none;}
 }
 
-@media screen and (min-width: 481px) { 
+@media screen and (min-width: 601px) { 
 #linkmod_one{ display: none;}
 }
 

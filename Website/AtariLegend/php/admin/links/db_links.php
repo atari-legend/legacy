@@ -10,6 +10,7 @@
 *							
 *
 *   Id: db_links.php,v 1.00 2005/01/08 Silver Surfer
+*	Id: db_links.php,v 2.00 2015/10/21 Grave
 *
 ***************************************************************************/
 
@@ -52,6 +53,39 @@ if($category!=='')
 header("Location: ../links/link_modlist.php?catpick=$category");
 }
 
+//add category
+if (isset($action) and $action=="add_cat")
+
+{
+//****************************************************************************************
+// add category to the tables
+//**************************************************************************************** 	
+	if($cat_id!=='') 
+	{
+		$mysqli->query("INSERT INTO website_category_cross (website_id, website_category_id) VALUES ('$website_id', '$cat_id')")
+			or die("Unable to insert category into database");  
+	}
+	
+	header("Location: ../links/link_mod.php?website_id=$website_id");
+}
+
+
+//delete category from website (only website_cat_cross)
+if (isset($action) and $action=="delete_category")
+
+{
+//****************************************************************************************
+// delete category from the tables
+//**************************************************************************************** 	
+	if(category_id!=='') 
+	{
+		$sql = $mysqli->query("DELETE FROM website_category_cross WHERE website_category_id = '$category_id' and website_id = '$website_id'") or die("Failed to delete category");
+	}
+	
+	header("Location: ../links/link_mod.php?website_id=$website_id");
+}
+
+
 // LINK DELETE AREA //
 
 if (isset($action) and $action=="link_delete")
@@ -61,8 +95,6 @@ if (isset($action) and $action=="link_delete")
 //****************************************************************************************
 // Delete the links from the tables
 //**************************************************************************************** 
-echo $website_id;
-
 $RESULT=$mysqli->query("SELECT website_category_id FROM website_category_cross WHERE website_id = '$website_id'")
 			or die("Unable to select the website_category_id");
 $rowcat=$RESULT->fetch_array(MYSQLI_BOTH);
@@ -147,7 +179,7 @@ if ($delete_image=='yes')
 // Do the website updating
 
 $mysqli->query("UPDATE website SET website_name='$website_name', website_url='$website_url' WHERE website_id='$website_id'");
-$mysqli->query("UPDATE website_category_cross SET website_category_id='$category' WHERE website_id='$website_id'"); 
+//$mysqli->query("UPDATE website_category_cross SET website_category_id='$category' WHERE website_id='$website_id'"); 
 
 $sql_desc = $mysqli->query("SELECT * FROM website_description WHERE website_id='$website_id'");
 

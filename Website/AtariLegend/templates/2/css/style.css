@@ -896,7 +896,6 @@ Standard tile settings
 				border: 1px solid #b2b2b2;
 				text-align: left;
 				font-family: Robot, Arial;	
-				font-style: italic;
 }
 
 .standard_tile_input_area { background : #666666;
@@ -909,7 +908,6 @@ Standard tile settings
 				border: 1px solid #b2b2b2;
 				text-align: left;
 				font-family: Robot, Arial;	
-				font-style: italic;
 }
 
 #text_area_big { height: 150px; }
@@ -1041,14 +1039,12 @@ Standard tile settings
 	width: 50px;
 	height: 26px;	 
 	margin-top: 0px;
-	font-style: italic;
 }
 
 #medium_select{ background: #666666;
 	width: 200px;
 	height: 28px;	 
 	margin-top: 0px;
-	font-style: italic;
 }
 
 /*---------------------------------------------------------- 
@@ -2010,11 +2006,12 @@ Links Modify
 	#link_mod{ margin-top: 0px;}
 }
 
-@media screen and (max-width: 480px) { 
+@media screen and (max-width: 600px) { 
 #linkmod_two{ display: none;}
+#user_stats_img_dark{display : none;}
 }
 
-@media screen and (min-width: 481px) { 
+@media screen and (min-width: 601px) { 
 #linkmod_one{ display: none;}
 }
 
