@@ -1998,11 +1998,12 @@ Links Modify
 #leftnav_position_linkmod {margin-top: 20px; margin-bottom: 30px; float: left;}
 #link_mod{margin-top: 20px; margin-bottom: 30px; float: left;}
 
-@media screen and (max-width: 480px) { 
+@media screen and (max-width: 600px) { 
 #linkmod_two{ display: none;}
+#user_stats_img_dark{display : none;}
 }
 
-@media screen and (min-width: 481px) { 
+@media screen and (min-width: 601px) { 
 #linkmod_one{ display: none;}
 }						
 /*---------------------------------------------------------- 

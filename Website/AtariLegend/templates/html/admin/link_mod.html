@@ -31,6 +31,28 @@ function deletelink()
 	  location.href=url;
     } 
 }
+
+function addcat()
+{  
+    var JSid=document.getElementById("delete_id");
+	var website_id = JSid.value
+	
+	var JSid2=document.getElementById("medium_select");
+	var cat_id = JSid2.value
+
+    // CONFIRM REQUIRES ONE ARGUMENT
+    var message = "Are you sure you want to add this category?";
+    // CONFIRM IS BOOLEAN. THAT MEANS THAT
+    // IT RETURNS TRUE IF 'OK' IS CLICKED
+    // OTHERWISE IT RETURN FALSE
+    var return_value = confirm(message);
+
+    if (return_value !="0")
+    {
+      url="../links/db_links.php?action=add_cat&website_id="+website_id+"&cat_id="+cat_id;
+	  location.href=url;
+    } 
+}
 </script>
 
 
@@ -40,12 +62,13 @@ function deletelink()
 	<div class="standard_tile_text">
 		<div class="left_nav_section">
 			Make the changes you want, then hit the submit button to modify.<br>
-			Should you want to delete the link, click the delete button. The effects are immidiate.
+			Should you want to delete the link, click the delete button. The effects are immediate.<br>
+			If you want to link the website to more than one category, use the add button.
 		</div> 
-		<br>		
 		<br>
-		<form enctype="multipart/form-data" action="../links/db_links.php" method="post" name="linkmod">
+		<br>
 		<div id="linkmod_two">
+		<form enctype="multipart/form-data" action="../links/db_links.php" method="post" name="linkmod">
 			<fieldset>
 			<legend>Website Data</legend>
 			<table width="100%">
@@ -65,11 +88,30 @@ function deletelink()
 								<option value="{$line.category_id}" {$line.selected}>{$line.category_name}</option>
 						{/foreach}
 					</select>
+					<input type="button" name="add_category" value="Add" onClick="addcat(); return false;" class="topbutton_cpanel_small">
 				</td>
 			</tr>
 			<tr>
 				<td valign="top">Description</td>	
 				<td><textarea name="website_description_text" class="standard_tile_input_area" id="text_area_big">{$website.website_description_text}</textarea></td>
+			</tr>
+			<tr>
+				<td valign="top">Linked categories</td>	
+				<td>
+					<table>
+					{foreach from=$website_category item=line}
+					<tr>
+						<td>
+							{if  $nr_of_cats == '1'}
+								<b>{$line.category_name}</b>
+							{else}
+								<b>{$line.category_name}</b> -- <a href="db_links.php?category_id={$line.category_id}&action=delete_category&website_id={$website.website_id}" class="links_addnew_link">Delete</a> 
+							{/if}							
+						</td>
+					</tr>
+					{/foreach}
+					</table>
+				</td>
 			</tr>
 			<tr>
 			{if  $website.website_imgext !== ""}
@@ -93,10 +135,10 @@ function deletelink()
 			<input type="submit" name="Modify" value="Modify" class="topbutton_cpanel_small">	
 			<input type="button" name="delete" value="Delete" onClick="deletelink(); return false;" class="topbutton_cpanel_small">
 			</fieldset>
-		</div>
 	    </form>
-		<form enctype="multipart/form-data" action="../links/db_links.php" method="post" name="linkmod">
+		</div>
 		<div id="linkmod_one">
+		<form enctype="multipart/form-data" action="../links/db_links.php" method="post" name="linkmod">
 			<fieldset>
 			<legend>Website Data</legend>
 			<table width="100%" style="text-align: center;">
@@ -107,13 +149,13 @@ function deletelink()
 				<td><input type="text" name="website_name" id="website_name" value="{$website.website_name}" class="standard_tile_input_small"></td>
 			</tr>
 			<tr>
-				<td>URL</td> 
+				<td><br>URL</td> 
 			</tr>
 			<tr>
 				<td><input type="text" name="website_url" id="website_url" value="{$website.website_url}" class="standard_tile_input_small"></td>		 
 			</tr>
 			<tr>		
-				<td>Category</td> 
+				<td><br>Category</td> 
 			</tr>
 			<tr>
 				<td>
@@ -122,17 +164,40 @@ function deletelink()
 								<option value="{$line.category_id}" {$line.selected}>{$line.category_name}</option>
 						{/foreach}
 					</select>
+					<br><input type="button" name="add_category" value="Add" onClick="addcat(); return false;" class="topbutton_cpanel_small">
 				</td>
 			</tr>
 			<tr>
-				<td valign="top">Description</td>
+				<td valign="top"><br>Description</td>
 			</tr>
 			<tr>
 				<td><textarea name="website_description_text" class="standard_tile_input_area" id="text_area_big">{$website.website_description_text}</textarea></td>
 			</tr>
 			<tr>
+				<td valign="top"><br>Linked categories</td>	
+			</tr>
+			<tr>	
+				<td>
+					<div align="center">
+					<table>
+					{foreach from=$website_category item=line}
+					<tr>
+						<td>
+							{if  $nr_of_cats == '1'}
+								<b>{$line.category_name}</b>
+							{else}
+								<b>{$line.category_name}</b> -- <a href="db_links.php?category_id={$line.category_id}&action=delete_category&website_id={$website.website_id}" class="links_addnew_link">Delete</a> 
+							{/if}		
+						</td>
+					</tr>
+					{/foreach}
+					</table>
+					</div>	
+				</td>
+			</tr>
+			<tr>
 			{if  $website.website_imgext !== ""}
-				<td valign="top">Delete Image? <input type="checkbox" name="delete_image" id="delete_image" value="yes"></td><br>
+				<td valign="top"><br>Delete Image? <input type="checkbox" name="delete_image" id="delete_image" value="yes"></td><br>
 			</tr>
 			<tr>
 				<td> 
@@ -160,12 +225,12 @@ function deletelink()
 			</tr>	
 			</table>
 			</fieldset>
-		</div>
 	    </form>
+		</div>
 		<br>
 		<br>
 	</div>
-	<div align="center"><a href="../links/link_modlist.php?catpick={$website.category_id}" class="standard_tile_link">back</a></div> 
+	<div align="center"><a href="../links/link_modlist.php" class="standard_tile_link">back</a></div> 
 	<br>
 </div>	
 {/block}
