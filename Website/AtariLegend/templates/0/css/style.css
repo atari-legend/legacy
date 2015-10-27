@@ -1567,12 +1567,43 @@ nav ul {
 .topbutton_cpanel:hover {
   background: black;
   color: white;
-  text-decoration:none;;
+  text-decoration:none;
 }
 
 .top_button_cpanel:visited {
   text-decoration:none;
   color: #182727;
+}
+
+.top_button_cpanel:link {
+  text-decoration:none;
+  color: #182727;
+}
+
+.sidebutton_cpanel
+{
+  cursor: pointer;
+  border: 0px;
+  font-family: AtariST,Arial,helvetica,sans-serif;
+  background:white;
+  color:black;
+  font-size: 16px;
+  vertical-align:middle;
+  text-decoration:none;
+  text-align:center;
+  text-shadow: -1px 1px 5px white, 1px -1px 15px #acacac;
+  line-height:27px;
+  white-space: nowrap;
+  }
+
+.sidebutton_cpanel:hover {
+  background: black;
+  color: white;
+  text-decoration:none;
+}
+
+.sidebutton_cpanel:link {
+  text-decoration:none;
 }
 
 #game_editor, #game_comments, #game_series, #game_music, #game_submissions, #game_reviews, #submitted_reviews,
@@ -1581,7 +1612,12 @@ nav ul {
 #submitted_news, #Statistics,#did_you_know, #trivia_screenshots, #trivia_quotes, #add_links, #validate_links,
 #modify_links, #link_categories, #articles, #article_types, #screenshots, #modify_links, 
 #link_categories, #articles, #article_types, #article_screenshots, #add_magazines, #manage_issues, #interviews, 
-#interviews_help, #forum, #logout , #legacy, #tos, #picasso, #game_editor_side,
+#interviews_help, #forum, #logout{
+		height: 30px;
+		font-size: 16px;
+}
+
+#legacy, #tos, #picasso, #game_editor_side,
 #game_comments_side, #game_series_side,	#game_music_side, #game_submissions_side, #game_reviews_side,
 #submitted_reviews_side, #menu_editor_side, #menu_comments_side, #menu_submissions_side, #demo_editor_side,
 #demo_comments_side, #demo_music_side, #demo_submissions_side, #user_admin_side, #individuals_side,
@@ -1590,9 +1626,13 @@ nav ul {
 #add_links_side, #validate_links_side, #modify_links_side, #link_categories_side, #articles_side, #article_types_side,
 #screenshots_side, #modify_links_side, #link_categories_side, #articles_side, #article_types_side,
 #article_screenshots_side, #add_magazines_side, #manage_issues_side, #interviews_side, #interviews_help_side,
-#forum_side, #logout_side{
-		height: 30px;
+#forum_side, #logout_side, #menu_individuals_side, #menu_author_types_side, #demo_individuals_side, #demo_author_types_side,
+#menu_crew_editor_side, #demo_interviews_side, #demo_interviews_help_side {
+		height: 27px;
+		width: 213px;
 		font-size: 16px;
+		vertical-align:middle;
+		border-bottom: 3px solid black;
 }
 
 /*------------------------------------------------------------
