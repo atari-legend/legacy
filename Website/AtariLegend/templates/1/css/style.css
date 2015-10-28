@@ -828,7 +828,7 @@ Standard tile settings
 
 .standard_tile_input_small { background : black;
 				color: #ffffff;				
-				width: 200px;
+				width: 185px;
 				height: 25px;
 				margin-top:0;
 				padding: 0;
@@ -987,7 +987,7 @@ Standard tile settings
 }
 
 #medium_select{ 
-	width: 200px;
+	width: 185px;
 	margin-top: 0px;
 	height: 25px;
 }
@@ -1953,6 +1953,88 @@ Links Modify
 @media screen and (min-width: 601px) { 
 #linkmod_one{ display: none;}
 }
+
+/*---------------------------------------------------------- 
+Games main
+------------------------------------------------------------ */			
+#quick_search_games_main{margin-top: 80px; margin-bottom: 30px; float: left;}
+
+#quick_search_check {margin-right: 5px;}
+
+@media screen and (max-width: 1279px) { 
+	#quick_search_games_main{ margin-top: 20px;}
+}	
+
+#games_main_options{ display:table; 
+	width:50%; 
+	margin-left:auto;
+	margin-right: auto;
+	text-align:left;
+}
+
+#quick_search_options{display:table; 
+	width:75%; 
+	margin-left:auto;
+	margin-right: auto;
+	text-align:left;		
+}
+
+#quick_search_games_button{  height: 25px;
+	  width: 80px;
+	  font-size: 10pt;
+}
+
+
+@media screen and (max-width: 1199px) { 	
+	#games_main_options{ width:80%; 
+		margin-left:20%;
+	}
+}
+
+@media screen and (max-width: 1099px) { 
+	#quick_search_options{margin-left:5%; width:100%; }
+}
+
+@media screen and (max-width: 999px) { 
+	#games_main_options{ margin-left:15%; }
+}
+
+@media screen and (max-width: 799px) { 
+	#quick_search_options{display:table; 
+		width:50%; 
+		margin-left:40%;
+		margin-right: auto;
+		text-align:left;	
+	}
+}
+
+@media screen and (max-width: 599px) { 
+	#games_main_two{ display: none;}
+	#games_main_options{ width:75%;
+		margin-left:25%;
+	}
+	#quick_search_options { margin-left:30%;}
+}
+
+@media screen and (max-width: 499px) { 
+	#games_main_options{ margin-left:5%; width: 100%;	
+	}
+}
+
+@media screen and (max-width: 399px) { 
+	#quick_search_options { width:75%; margin-left:15%;}
+	}
+}
+
+@media screen and (max-width: 599px) { 
+	#games_main_two{ display: none;}
+}
+
+@media screen and (min-width: 600px) { 
+	#games_main_one{ display: none;}
+}
+
+
 
 /*---------------------------------------------------------- 
  resolutions tested!

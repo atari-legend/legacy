@@ -1,0 +1,263 @@
+{* 
+/***************************************************************************
+                              games_main.tpl
+*                            --------------------------
+*   begin                : Sunday, August 28, 2005
+*   copyright            : (C) 2005 Atari Legend
+*   email                : admin@atarilegend.com
+*
+*   Id: games_main.tpl,v 0.10 2005/08/28 17:40 Gatekeeper
+*   Id: games_main.tpl,v 0.20 2015/10/24 22:35 Gatekeeper
+*
+***************************************************************************/
+
+************************************************************************************************
+The main game page
+************************************************************************************************
+*}
+{block name=games_main}
+<script type="text/javascript">
+function gameinsert()
+{
+    JSnewgame=document.forms["insertgame"].newgame.value;
+	
+	if (JSnewgame=='')
+	{
+		alert('Please fill in a game name');
+	}
+	else
+	{
+    	// CONFIRM REQUIRES ONE ARGUMENT
+    	var message = "Are you sure you want to insert this game into the database?";
+    	// CONFIRM IS BOOLEAN. THAT MEANS THAT
+    	// IT RETURNS TRUE IF 'OK' IS CLICKED
+    	// OTHERWISE IT RETURN FALSE
+    	var return_value = confirm(message);
+		
+    	if (return_value !="0")
+    	{
+    		url="db_games_detail.php?newgame="+JSnewgame+"&action=insert_game";
+			location.href=url;
+    	} 
+	}
+}
+</script>
+
+<div class="standard_tile" id="linkaddnew">
+	<h1>ADD/EDIT A GAME</h1>
+	<div class="standard_tile_line"></div>
+	<div class="standard_tile_text">
+		<div class="left_nav_section">
+			In this section you can add or edit a game. Search for a game by using any of the 
+			functionalities below. Combinations are allowed. There are currently <b>{$games_nr}</b> games
+			in the DB.
+		</div> 
+		<br>
+		<br>
+		<div id="games_main_two">
+			<form action="../games/games_list.php" method="post" name="game_search" id="game_search">
+			<fieldset>
+			<legend>Search games</legend>
+			<br>
+			<div id="games_main_options">
+				<table width="100%">
+				<tr>
+					<td><b>By name :</b></td>
+					<td>
+						<select name="gamebrowse" id="small_select">
+							<option value="" SELECTED>-</option>
+							{html_options values=$az_value output=$az_output}
+						</select>
+						<input type="text" name="gamesearch" value="" class="standard_tile_input_small">
+					</td>
+				</tr>
+				<tr>
+					<td><b>By Publisher :</b></td>
+					<td>
+						<select name="publisher" id="medium_select">
+							<option value="-" SELECTED>-</option>
+							{foreach from=$company_publisher item=line} 
+								<option value="{$line.comp_id}">{$line.comp_name}</option>
+							{/foreach}
+						</select>		
+					</td>
+				</tr>
+				<tr>
+					<td><b>By Developer :</b></td>
+					<td>
+						<select name="developer" id="medium_select">
+							<option value="-" SELECTED>-</option>
+							{foreach from=$company_developer item=line} 
+								<option value="{$line.comp_id}">{$line.comp_name}</option>
+							{/foreach}
+						</select>
+					</td>
+				</tr>
+				</table>
+			</div>
+			<br>
+			<br>
+			<div id="games_main_options">
+				<div style="display:table-row;">
+					<div style="display:table-cell;"><input type="checkbox" name="falcon_only" value="1" id="quick_search_check"><strong>Falcon only&nbsp;</strong></div>
+					<div style="display:table-cell;"><input type="checkbox" name="falcon_enhanced" value="1" id="quick_search_check"><strong>Falcon Enhanced&nbsp;</strong></div>
+				</div>
+				<div style="display:table-row;">
+					<div style="display:table-cell;"><input type="checkbox" name="ste_only" value="1" id="quick_search_check"><strong>STE only</strong></div>
+					<div style="display:table-cell;"><input type="checkbox" name="ste_enhanced" value="1" id="quick_search_check"><strong>STE Enhanced&nbsp;</strong></div>
+				</div>	
+				<div style="display:table-row;">
+					<div style="display:table-cell;"><input type="checkbox" name="free" value="1" id="quick_search_check"><strong>Non-Commercial&nbsp;</strong></div>
+					<div style="display:table-cell;"><input type="checkbox" name="arcade" value="1" id="quick_search_check"><strong>Arcade Conversion&nbsp;</strong></div>
+				</div>		
+				<div style="display:table-row;">
+					<div style="display:table-cell;"><input type="checkbox" name="development" value="1" id="quick_search_check"><strong>In development&nbsp;</strong></div>
+					<div style="display:table-cell;"><input type="checkbox" name="wanted" value="1" id="quick_search_check"><strong>Wanted&nbsp;</strong></div>
+				</div>			
+				<div style="display:table-row;">
+					<div style="display:table-cell;"><input type="checkbox" name="unreleased" value="1" id="quick_search_check"><strong>Unreleased&nbsp;</strong></div>
+					<div style="display:table-cell;"><input type="checkbox" name="unfinished" value="1" id="quick_search_check"><strong>Unfinished/Rumoured&nbsp;</strong></div>
+				</div>				
+				<div style="display:table-row;">
+					<div style="display:table-cell;"><input type="checkbox" name="monochrome" value="1" id="quick_search_check"><strong>Monochrome&nbsp;</strong></div>
+					<div style="display:table-cell;"><input type="checkbox" name="seuck" value="1" id="quick_search_check"><strong>SEUCK&nbsp;</strong></div>
+				</div>					
+				<div style="display:table-row;">
+					<div style="display:table-cell;"><input type="checkbox" name="stos" value="1" id="quick_search_check"><strong>STOS&nbsp;</strong></div>
+					<div style="display:table-cell;"><input type="checkbox" name="stac" value="1" id="quick_search_check"><strong>STAC&nbsp;</strong></div>
+				</div>						
+			</div>
+			<br>
+			<br>
+			<div align="center">
+				<input type="submit" value="Search" class="topbutton_cpanel_small">
+			</div>
+			<br>
+			<br>
+			</fieldset>
+			<input type="hidden" name="action" id="action" value="search">
+			<input type="hidden" name="user_id" id="user_id" value="{$user_id}">
+			</form>	
+		</div>
+		<div id="games_main_one">
+			<form action="../games/games_list.php" method="post" name="game_search" id="game_search">
+			<fieldset>
+			<legend>Search games</legend>
+			<br>
+			<div id="games_main_options">
+				<table width="100%">
+				<tr>
+					<td><b>By name :</b></td>
+				</tr>
+				<tr>
+					<td>
+						<select name="gamebrowse" id="small_select">
+							<option value="" SELECTED>-</option>
+							{html_options values=$az_value output=$az_output}
+						</select>
+						<input type="text" name="gamesearch" value="" class="standard_tile_input_small">
+					</td>
+				</tr>
+				<tr>
+					<td><b>By Publisher :</b></td>
+				</tr>
+				<tr>
+					<td>
+						<select name="publisher" id="medium_select">
+							<option value="-" SELECTED>-</option>
+							{foreach from=$company_publisher item=line} 
+								<option value="{$line.comp_id}">{$line.comp_name}</option>
+							{/foreach}
+						</select>		
+					</td>
+				</tr>
+				<tr>
+					<td><b>By Developer :</b></td>
+				</tr>
+				<tr>
+					<td>
+						<select name="developer" id="medium_select">
+							<option value="-" SELECTED>-</option>
+							{foreach from=$company_developer item=line} 
+								<option value="{$line.comp_id}">{$line.comp_name}</option>
+							{/foreach}
+						</select>
+					</td>
+				</tr>
+				</table>
+			</div>
+			<br>
+			<br>
+			<div id="games_main_options">
+				<div style="display:table-row;">
+					<div style="display:table-cell;"><input type="checkbox" name="falcon_only" value="1" id="quick_search_check"><strong>Falcon only&nbsp;</strong></div>
+				</div>
+				<div style="display:table-row;">
+					<div style="display:table-cell;"><input type="checkbox" name="falcon_enhanced" value="1" id="quick_search_check"><strong>Falcon Enhanced&nbsp;</strong></div>
+				</div>
+				<div style="display:table-row;">
+					<div style="display:table-cell;"><input type="checkbox" name="ste_only" value="1" id="quick_search_check"><strong>STE only</strong></div>
+				</div>
+				<div style="display:table-row;">
+					<div style="display:table-cell;"><input type="checkbox" name="ste_enhanced" value="1" id="quick_search_check"><strong>STE Enhanced&nbsp;</strong></div>
+				</div>	
+				<div style="display:table-row;">
+					<div style="display:table-cell;"><input type="checkbox" name="free" value="1" id="quick_search_check"><strong>Non-Commercial&nbsp;</strong></div>
+				</div>
+				<div style="display:table-row;">
+					<div style="display:table-cell;"><input type="checkbox" name="arcade" value="1" id="quick_search_check"><strong>Arcade Conversion&nbsp;</strong></div>
+				</div>		
+				<div style="display:table-row;">
+					<div style="display:table-cell;"><input type="checkbox" name="development" value="1" id="quick_search_check"><strong>In development&nbsp;</strong></div>
+				</div>
+				<div style="display:table-row;">
+					<div style="display:table-cell;"><input type="checkbox" name="wanted" value="1" id="quick_search_check"><strong>Wanted&nbsp;</strong></div>
+				</div>			
+				<div style="display:table-row;">
+					<div style="display:table-cell;"><input type="checkbox" name="unreleased" value="1" id="quick_search_check"><strong>Unreleased&nbsp;</strong></div>
+				</div>
+				<div style="display:table-row;">
+					<div style="display:table-cell;"><input type="checkbox" name="unfinished" value="1" id="quick_search_check"><strong>Unfinished/Rumoured&nbsp;</strong></div>
+				</div>				
+				<div style="display:table-row;">
+					<div style="display:table-cell;"><input type="checkbox" name="monochrome" value="1" id="quick_search_check"><strong>Monochrome&nbsp;</strong></div>
+				</div>
+				<div style="display:table-row;">
+					<div style="display:table-cell;"><input type="checkbox" name="seuck" value="1" id="quick_search_check"><strong>SEUCK&nbsp;</strong></div>
+				</div>					
+				<div style="display:table-row;">
+					<div style="display:table-cell;"><input type="checkbox" name="stos" value="1" id="quick_search_check"><strong>STOS&nbsp;</strong></div>
+				</div>
+				<div style="display:table-row;">
+					<div style="display:table-cell;"><input type="checkbox" name="stac" value="1" id="quick_search_check"><strong>STAC&nbsp;</strong></div>
+				</div>						
+			</div>
+			<br>
+			<br>
+			<div align="center">
+				<input type="submit" value="Search" class="topbutton_cpanel_small">
+			</div>
+			<br>
+			<br>
+			</fieldset>
+			<input type="hidden" name="action" id="action" value="search">
+			<input type="hidden" name="user_id" id="user_id" value="{$user_id}">
+			</form>	
+		</div>
+		<br>	
+		<br>
+		<form method="post" name="insertgame">
+		<fieldset class="interview_set">
+		<legend class="links_legend">Add games</legend>
+			<div align="center">
+				<input type="text" name="newgame" class="standard_tile_input_small">
+				<input type="submit" value="Insert" onClick="gameinsert(); return false;" class="topbutton_cpanel_small"> 	
+			</div>
+		</fieldset>
+		</form>
+	</div>	
+</div>
+{if isset($message)}
+	<div class="message_box">{$message}</div>
+{/if}
+{/block}
