@@ -24,7 +24,7 @@
 			<div class="standard_table_center">
 				<form method="post" name="insertgame">
 					<br>Add new Game:<br>	
-					<input type="text" name="newgame" value="" class="standard_tile_input" id="quick_search_games_input"><br>
+					<input type="text" name="newgame" value="" class="standard_tile_input_small"><br><br>	
 					<input type="submit" value="Insert" onClick="gameinsert(); return false;" class="signinbutton" id="quick_search_games_button">	
 				</form>
 			</div>
@@ -40,12 +40,12 @@
 							<option value="" SELECTED>-</option>
 							{html_options values=$az_value output=$az_output}
 						</select>
-						<input type="text" name="gamesearch" value="" class="standard_tile_input" id="quick_search_games_input">
+						<input type="text" name="gamesearch" value="" class="standard_tile_input_small">
 					</div>
 					<br>
 					<div class="standard_table_center">
-						By Publisher :
-						<select name="publisher">
+						By Publisher : <br>
+						<select name="publisher" id="medium_select">
 							<option value="-" SELECTED>-</option>
 							{foreach from=$company_publisher item=line} 
 								<option value="{$line.comp_id}">{$line.comp_name}</option>
@@ -54,8 +54,8 @@
 					</div>
 					<br>
 					<div class="standard_table_center">
-						By Developer :
-						<select name="developer">
+						By Developer : <br>
+						<select name="developer" id="medium_select">
 							<option value="-" SELECTED>-</option>
 							{foreach from=$company_developer item=line} 
 								<option value="{$line.comp_id}">{$line.comp_name}</option>
@@ -64,74 +64,74 @@
 					</div>
 					<br>
 					<br>
-					<div style="display:table; width:90%; margin-left:10%;margin-right: auto;text-align:left;" class="standard_table_left">
+					<div id="quick_search_options" class="standard_table_left">
 						<div style="display:table-row;">
-							<div style="display:table-cell;font-weight:bold;vertical-align:middle;"><input type="checkbox" name="falcon_only" value="1" style="margin-right:10px;">
+							<div style="display:table-cell;font-weight:bold;vertical-align:middle;"><input type="checkbox" name="falcon_only" value="1" id="quick_search_check">
 								Falcon only&nbsp;
 							</div>
 						</div>
 						<div style="display:table-row;">	
-							<div style="display:table-cell;font-weight:bold;vertical-align:middle;"><input type="checkbox" name="falcon_enhanced" value="1" style="margin-right:10px;">
+							<div style="display:table-cell;font-weight:bold;vertical-align:middle;"><input type="checkbox" name="falcon_enhanced" value="1" id="quick_search_check">
 								Falcon Enhanced&nbsp;
 							</div>
 						</div>
 						<div style="display:table-row;">
-							<div style="display:table-cell;font-weight:bold;vertical-align:middle;"><input type="checkbox" name="ste_only" value="1" style="margin-right:10px;">
+							<div style="display:table-cell;font-weight:bold;vertical-align:middle;"><input type="checkbox" name="ste_only" value="1" id="quick_search_check">
 								STE only
 							</div>
 						</div>
 						<div style="display:table-row;">	
-							<div style="display:table-cell;font-weight:bold;vertical-align:middle;"><input type="checkbox" name="ste_enhanced" value="1" style="margin-right:10px;">
+							<div style="display:table-cell;font-weight:bold;vertical-align:middle;"><input type="checkbox" name="ste_enhanced" value="1" id="quick_search_check">
 								STE Enhanced&nbsp;
 							</div>
 						</div>	
 						<div style="display:table-row;">
-							<div style="display:table-cell;font-weight:bold;vertical-align:middle;"><input type="checkbox" name="free" value="1" style="margin-right:10px;">
+							<div style="display:table-cell;font-weight:bold;vertical-align:middle;"><input type="checkbox" name="free" value="1" id="quick_search_check">
 								Non-Commercial&nbsp;
 							</div>
 						</div>
 						<div style="display:table-row;">	
-							<div style="display:table-cell;font-weight:bold;vertical-align:middle;"><input type="checkbox" name="arcade" value="1" style="margin-right:10px;">
+							<div style="display:table-cell;font-weight:bold;vertical-align:middle;"><input type="checkbox" name="arcade" value="1" id="quick_search_check">
 								Arcade Conversion&nbsp;
 							</div>
 						</div>		
 						<div style="display:table-row;">
-							<div style="display:table-cell;font-weight:bold;vertical-align:middle;"><input type="checkbox" name="development" value="1" style="margin-right:10px;">
+							<div style="display:table-cell;font-weight:bold;vertical-align:middle;"><input type="checkbox" name="development" value="1" id="quick_search_check">
 								In development&nbsp;
 							</div>
 						</div>
 						<div style="display:table-row;">	
-							<div style="display:table-cell;font-weight:bold;vertical-align:middle;"><input type="checkbox" name="wanted" value="1" style="margin-right:10px;">
+							<div style="display:table-cell;font-weight:bold;vertical-align:middle;"><input type="checkbox" name="wanted" value="1" id="quick_search_check">
 								Wanted&nbsp;
 							</div>
 						</div>			
 						<div style="display:table-row;">
-							<div style="display:table-cell;font-weight:bold;vertical-align:middle;"><input type="checkbox" name="unreleased" value="1" style="margin-right:10px;">
+							<div style="display:table-cell;font-weight:bold;vertical-align:middle;"><input type="checkbox" name="unreleased" value="1" id="quick_search_check">
 								Unreleased&nbsp;
 							</div>
 						</div>
 						<div style="display:table-row;">	
-							<div style="display:table-cell;font-weight:bold;vertical-align:middle;"><input type="checkbox" name="unfinished" value="1" style="margin-right:10px;">
-								Unfinished/Rumoured&nbsp;
+							<div style="display:table-cell;font-weight:bold;vertical-align:middle;"><input type="checkbox" name="unfinished" value="1" id="quick_search_check">
+								Unfinished/Rumour&nbsp;
 							</div>
 						</div>				
 						<div style="display:table-row;">
-							<div style="display:table-cell;font-weight:bold;vertical-align:middle;"><input type="checkbox" name="monochrome" value="1" style="margin-right:10px;">
+							<div style="display:table-cell;font-weight:bold;vertical-align:middle;"><input type="checkbox" name="monochrome" value="1" id="quick_search_check">
 								Monochrome&nbsp;
 							</div>
 						</div>
 						<div style="display:table-row;">	
-							<div style="display:table-cell;font-weight:bold;vertical-align:middle;"><input type="checkbox" name="seuck" value="1" style="margin-right:10px;">
+							<div style="display:table-cell;font-weight:bold;vertical-align:middle;"><input type="checkbox" name="seuck" value="1" id="quick_search_check">
 								SEUCK&nbsp;
 							</div>
 						</div>					
 						<div style="display:table-row;">
-							<div style="display:table-cell;font-weight:bold;vertical-align:middle;"><input type="checkbox" name="stos" value="1" style="margin-right:10px;">
+							<div style="display:table-cell;font-weight:bold;vertical-align:middle;"><input type="checkbox" name="stos" value="1" id="quick_search_check">
 								STOS&nbsp;
 							</div>
 						</div>
 						<div style="display:table-row;">	
-							<div style="display:table-cell;font-weight:bold;vertical-align:middle;"><input type="checkbox" name="stac" value="1" style="margin-right:10px;">
+							<div style="display:table-cell;font-weight:bold;vertical-align:middle;"><input type="checkbox" name="stac" value="1" id="quick_search_check">
 								STAC&nbsp;
 							</div>
 						</div>						
