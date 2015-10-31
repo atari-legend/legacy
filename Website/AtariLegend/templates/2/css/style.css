@@ -1483,6 +1483,8 @@ nav ul {
 
 .topbutton_cpanel
 {
+    display: block;  
+    cursor: pointer;
 	border:2px solid black;
 	height: 30px;
 	width: 205px;
@@ -1498,6 +1500,8 @@ nav ul {
 	border-radius: 0 15px 15px 0;
 	margin-left: 2px;
 	text-decoration:none;
+	text-align:center;
+	line-height:30px;
 }
 
 .topbutton_cpanel:hover {
@@ -1507,10 +1511,43 @@ nav ul {
   border:2px solid #4f4f4f;
 }
 
-.top_button_cpanel:visited {
+.topbutton_cpanel:visited {
   text-decoration:none;
 }
 
+.topbutton_cpanel:link {
+  text-decoration:none;
+ 	color:white;
+}
+
+.subbutton_cpanel
+{
+    display: block;  
+    cursor: pointer;
+	border:2px solid black;
+	width: 201px;
+	background: #161c71;
+	font-family: robot, arial, sans-serif;
+	color:white;
+	font-size:16px;
+	font-weight: bold;
+	/*text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #fff;*/
+	/*give the corners a small curve*/ 
+	-webkit-border-radius: 0 15px 15px 0;
+	-moz-border-radius: 0 15px 15px 0;
+	border-radius: 0 15px 15px 0;
+	margin-left: 2px;
+	text-decoration:none;
+	text-align:center;
+	line-height:26px;
+}
+
+.subbutton_cpanel:hover {
+  background: #dbd7d1;
+  color: black;
+  text-decoration:none;
+  border:2px solid #4f4f4f;
+}
 .sidebutton_cpanel
 {
   cursor: pointer;
@@ -1551,7 +1588,14 @@ nav ul {
 #submitted_news, #Statistics,#did_you_know, #trivia_screenshots, #trivia_quotes, #add_links, #validate_links,
 #modify_links, #link_categories, #articles, #article_types, #screenshots, #modify_links, 
 #link_categories, #articles, #article_types, #article_screenshots, #add_magazines, #manage_issues, #interviews, 
-#interviews_help, #forum, #logout , #legacy, #tos, #picasso, #game_editor_side,
+#interviews_help, #forum, #logout, #demo_crew_editor, #demo_individuals, #demo_author_types, #demo_interviews, 
+#demo_interviews_help, #menu_individuals, #menu_author_types, #menu_crew_editor {
+
+		font-size: 16px;
+
+}
+
+#legacy, #tos, #picasso, #game_editor_side,
 #game_comments_side, #game_series_side,	#game_music_side, #game_submissions_side, #game_reviews_side,
 #submitted_reviews_side, #menu_editor_side, #menu_comments_side, #menu_submissions_side, #demo_editor_side,
 #demo_comments_side, #demo_music_side, #demo_submissions_side, #user_admin_side, #individuals_side,
@@ -1565,6 +1609,8 @@ nav ul {
 		height: 30px;
 		font-size: 16px;
 }
+
+
 
 /*------------------------------------------------------------
 Standard table settings 

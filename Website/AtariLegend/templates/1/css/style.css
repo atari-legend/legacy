@@ -1428,6 +1428,7 @@ nav ul {
 
 .topbutton_cpanel
 {
+  display: block;
   cursor: pointer;
   border: 0px;
   background: #00d3d3;
@@ -1440,6 +1441,8 @@ nav ul {
   border-left: 1px solid #007878;
   padding-top: 3px;
   text-decoration:none;
+  text-align:center;
+    line-height:27px;
 }
 
 .topbutton_cpanel:hover {
@@ -1449,8 +1452,33 @@ nav ul {
   border-bottom: 3px solid #006f6f;
 }
 
-.top_button_cpanel:visited {
+.topbutton_cpanel:visited {
   text-decoration:none;
+}
+
+.subbutton_cpanel
+{
+  display: block;
+  cursor: pointer;
+  border: 0px;
+  background: #00d3d3;
+  font-family: Audiowide,Arial,helvetica,sans-serif;
+  color: #182727;
+  width: 213px;
+  font-size: 20px;
+  border-bottom: 3px solid #008b8b;
+  border-left: 1px solid #007878;
+  padding-top: 3px;
+  text-decoration:none;
+  text-align:center;
+    line-height:27px;
+}
+
+.subbutton_cpanel:hover {
+  background: #00a9a9;
+  color: #182727;
+  text-decoration:none;
+  border-bottom: 3px solid #006f6f;
 }
 
 .sidebutton_cpanel
@@ -1487,9 +1515,14 @@ nav ul {
 #submitted_news, #Statistics,#did_you_know, #trivia_screenshots, #trivia_quotes, #add_links, #validate_links,
 #modify_links, #link_categories, #articles, #article_types, #screenshots, #modify_links, 
 #link_categories, #articles, #article_types, #article_screenshots, #add_magazines, #manage_issues, #interviews, 
-#interviews_help, #forum, #logout , #legacy, #tos, #picasso  {
+#interviews_help, #forum, #logout, #demo_crew_editor, #demo_individuals, #demo_author_types, #demo_interviews, 
+#demo_interviews_help, #menu_individuals, #menu_author_types, #menu_crew_editor  {
 		height: 30px;
 		font-size: 16px;
+		line-height:30px;
+		min-width: 213px;
+		padding-top: 3px;
+
 }
 
 #game_editor_side, #game_comments_side, #game_series_side,
@@ -1502,7 +1535,7 @@ nav ul {
 #screenshots_side, #modify_links_side, #link_categories_side, #articles_side, #article_types_side,
 #article_screenshots_side, #add_magazines_side, #manage_issues_side, #interviews_side, #interviews_help_side,
 #forum_side, #logout_side, #menu_individuals_side, #menu_author_types_side, #demo_individuals_side, #demo_author_types_side,
-#menu_crew_editor_side, #demo_interviews_side, #demo_interviews_help_side {
+#menu_crew_editor_side, #demo_interviews_side, #demo_interviews_help_side, #legacy, #tos, #picasso {
 		height: 27px;
 		font-size: 16px;
 		border-bottom: 3px solid #008b8b;

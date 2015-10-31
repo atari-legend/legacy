@@ -1562,6 +1562,9 @@ nav ul {
   padding-top: 3px;
   text-decoration:none;
   text-shadow: -1px 1px 5px white, 1px -1px 15px #acacac;
+  text-align:center;
+
+  
 }
 
 .topbutton_cpanel:hover {
@@ -1574,12 +1577,29 @@ nav ul {
   text-decoration:none;
   color: #182727;
 }
-
-.top_button_cpanel:link {
-  text-decoration:none;
+.subbutton_cpanel
+{
+  display: block;
+  float:left;
+  cursor: pointer;
+  border: 0px;
+  background: white;
+  font-family: AtariST,Arial,helvetica,sans-serif;
   color: #182727;
+  height: 24px;
+  width: 213px;
+  border-bottom: 3px solid black;
+  padding-top: 3px;
+  text-decoration:none;
+  text-shadow: -1px 1px 5px white, 1px -1px 15px #acacac;
+  text-align:center;
 }
 
+.subbutton_cpanel:hover {
+  background: black;
+  color: white;
+  text-decoration:none;
+}
 .sidebutton_cpanel
 {
   cursor: pointer;
@@ -1612,9 +1632,14 @@ nav ul {
 #submitted_news, #Statistics,#did_you_know, #trivia_screenshots, #trivia_quotes, #add_links, #validate_links,
 #modify_links, #link_categories, #articles, #article_types, #screenshots, #modify_links, 
 #link_categories, #articles, #article_types, #article_screenshots, #add_magazines, #manage_issues, #interviews, 
-#interviews_help, #forum, #logout{
-		height: 30px;
+#interviews_help, #forum, #logout, #demo_crew_editor, #demo_individuals, #demo_author_types, #demo_interviews, 
+#demo_interviews_help, #menu_individuals, #menu_author_types, #menu_crew_editor{
+		height: 24px;
 		font-size: 16px;
+		padding:0px;
+		display:inline;
+		line-height:24px;
+		vertical-align:bottom;
 }
 
 #legacy, #tos, #picasso, #game_editor_side,
