@@ -1660,6 +1660,13 @@ nav ul {
 		border-bottom: 3px solid black;
 }
 
+.centered_fieldset {
+
+	text-align:center;
+	margin: auto;
+
+}
+
 /*------------------------------------------------------------
 Standard table settings 
 -------------------------------------------------------------*/

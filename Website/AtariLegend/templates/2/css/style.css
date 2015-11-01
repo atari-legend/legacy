@@ -1610,7 +1610,12 @@ nav ul {
 		font-size: 16px;
 }
 
+.centered_fieldset {
 
+	text-align:center;
+	margin: auto;
+
+}
 
 /*------------------------------------------------------------
 Standard table settings 
