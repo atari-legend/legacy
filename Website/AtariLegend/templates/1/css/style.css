@@ -1541,7 +1541,12 @@ nav ul {
 		border-bottom: 3px solid #008b8b;
 		padding:0px;
 }
+.centered_fieldset {
 
+	text-align:center;
+	margin: auto;
+
+}
 /*------------------------------------------------------------
 Standard table settings 
 -------------------------------------------------------------*/
