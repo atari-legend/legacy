@@ -17,6 +17,34 @@
 *}
 
 {block name=quick_search_games}
+<script type="text/javascript">
+function gameinsert()
+{
+    JSnewgame=document.getElementById("qs_newgame").value;
+	
+	if (JSnewgame=='')
+	{
+		alert('Please fill in a game name');
+	}
+	else
+	{
+    	// CONFIRM REQUIRES ONE ARGUMENT
+    	var message = "Are you sure you want to insert this game into the database?";
+    	// CONFIRM IS BOOLEAN. THAT MEANS THAT
+    	// IT RETURNS TRUE IF 'OK' IS CLICKED
+    	// OTHERWISE IT RETURN FALSE
+    	var return_value = confirm(message);
+		
+    	if (return_value !="0")
+    	{
+    		url="db_games_detail.php?newgame="+JSnewgame+"&action=insert_game";
+			location.href=url;
+    	} 
+	}
+}
+</script>
+
+
 <div class="standard_tile" id="{$quick_search_games}">
 	<h1>QUICKSEARCH</h1>
 	<div class="standard_tile_line"></div>
@@ -24,7 +52,7 @@
 			<div class="standard_table_center">
 				<form method="post" name="insertgame">
 					<br>Add new Game:<br>	
-					<input type="text" name="newgame" value="" class="standard_tile_input_small"><br><br>	
+					<input type="text" name="newgame" id="qs_newgame" value="" class="standard_tile_input_small"><br><br>	
 					<input type="submit" value="Insert" onClick="gameinsert(); return false;" class="signinbutton" id="quick_search_games_button">	
 				</form>
 			</div>
@@ -32,7 +60,7 @@
 			<div class="standard_tile_line"></div>
 			<br>
 			<div class="standard_table_center">
-				<form action="../games/games_list.php" method="post" name="game_search" id="game_search">
+				<form action="../games/games_list.php" method="get" name="game_search" id="game_search">
 					<h3>Search for Game:</h3>	<br> 			
 					<div class="standard_table_center">
 						By name :<br>	

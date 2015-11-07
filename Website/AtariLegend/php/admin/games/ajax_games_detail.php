@@ -1,15 +1,16 @@
 <?php
 /***************************************************************************
-*                             games_series_main.php
+*                             ajax_games_detail.php
 *                            -----------------------
-*   begin                : Saturday, Sept 24, 2005
-*   copyright            : (C) 2003 Atari Legend
+*   begin                : July 2015
+*   copyright            : (C) 2015 Atari Legend
 *   email                : silversurfer@atari-forum.com
-*   actual update        : Creation from scratch for smarty usage
+*   actual update        : Creation
 						   
 *							
 *
-*   Id: games_series_main.php,v 0.2 2005/09/24 Silver Surfer
+*   Id: ajax_games_detail.php,v 0.2 2015/07 Silver Surfer
+*   Id: ajax_games_detail.php,v 0.3 2015/11/06 STG
 *
 ***************************************************************************/
 
@@ -29,7 +30,7 @@ include("../includes/constants.php");
 				
 				// Do a simple gamesearch... no aka's or the likes of that.
 				
-					if (isset($query) and $query== "num")
+					if (isset($query) and $query == "num")
 					{
 						$gamebrowse_select = " WHERE pub_dev_name REGEXP '^[0-9].*'";
 					}
@@ -38,7 +39,7 @@ include("../includes/constants.php");
 					$gamebrowse_select = " WHERE pub_dev_name LIKE '$query%'";
 					}
 				
-				 $sql_build = "SELECT * FROM pub_dev ";
+				$sql_build = "SELECT * FROM pub_dev ";
 
 				$sql_build .= $gamebrowse_select;
 				$sql_build .= " ORDER BY pub_dev_name ASC";

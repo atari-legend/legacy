@@ -65,19 +65,25 @@ $v_rows = get_rows($query_number) or die("Couldn't get the number of games");
 
 $smarty->assign('games_nr', $v_rows); 
 
-		// Create dropdown values a-z
-		$az_value = az_dropdown_value(0);
-		$az_output = az_dropdown_output(0);
-				   
-		$smarty->assign('az_value', $az_value);
-		$smarty->assign('az_output', $az_output);	
+// Create dropdown values a-z
+$az_value = az_dropdown_value(0);
+$az_output = az_dropdown_output(0);
+		   
+$smarty->assign('az_value', $az_value);
+$smarty->assign('az_output', $az_output);	
 
 $smarty->assign("user_id",$_SESSION['user_id']);
 
+if (isset ($_SESSION['edit_message']))
+{
+	$smarty->assign("message",$_SESSION['edit_message']);
+}
+
 $smarty->assign('quick_search_games', 'quick_search_games_main');
+$smarty->assign('left_nav', 'leftnav_position_games_main');
 
 //Send all smarty variables to the templates
-$smarty->display('extends:../../../templates/html/admin/main.html|../../../templates/html/admin/frontpage.html|../../../templates/html/admin/games_main.html|../../../templates/html/admin/quick_search_games.html');
+$smarty->display('extends:../../../templates/html/admin/main.html|../../../templates/html/admin/frontpage.html|../../../templates/html/admin/games_main.html|../../../templates/html/admin/quick_search_games.html|../../../templates/html/admin/left_nav.html');
 
 //close the connection
 mysqli_close($mysqli);

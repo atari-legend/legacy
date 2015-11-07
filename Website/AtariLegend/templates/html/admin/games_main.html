@@ -19,7 +19,7 @@ The main game page
 <script type="text/javascript">
 function gameinsert()
 {
-    JSnewgame=document.forms["insertgame"].newgame.value;
+    JSnewgame=document.getElementById("newgame").value;
 	
 	if (JSnewgame=='')
 	{
@@ -43,7 +43,7 @@ function gameinsert()
 }
 </script>
 
-<div class="standard_tile" id="linkaddnew">
+<div class="standard_tile" id="games_main">
 	<h1>ADD/EDIT A GAME</h1>
 	<div class="standard_tile_line"></div>
 	<div class="standard_tile_text">
@@ -55,7 +55,7 @@ function gameinsert()
 		<br>
 		<br>
 		<div id="games_main_two">
-			<form action="../games/games_list.php" method="post" name="game_search" id="game_search">
+			<form action="../games/games_list.php" method="get" name="game_search" id="game_search">
 			<fieldset>
 			<legend>Search games</legend>
 			<br>
@@ -247,17 +247,19 @@ function gameinsert()
 		<br>	
 		<br>
 		<form method="post" name="insertgame">
-		<fieldset class="interview_set">
-		<legend class="links_legend">Add games</legend>
+		<fieldset>
+		<legend>Add games</legend>
 			<div align="center">
-				<input type="text" name="newgame" class="standard_tile_input_small">
+				<input type="text" name="newgame" class="standard_tile_input_small" id="newgame">
 				<input type="submit" value="Insert" onClick="gameinsert(); return false;" class="topbutton_cpanel_small"> 	
 			</div>
 		</fieldset>
 		</form>
+		{if isset($message)}	
+			<br><br><div class="left_nav_section">{$message}</div>
+		{/if}
 	</div>	
-</div>
-{if isset($message)}
-	<div class="message_box">{$message}</div>
-{/if}
+</div>	
 {/block}
+
+

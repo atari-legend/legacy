@@ -991,6 +991,12 @@ Standard tile settings
 	margin-top: 0px;
 	height: 25px;
 }
+
+#medium_select2{ 
+	width: 140px;
+	margin-top: 0px;
+	height: 25px;
+}
 	
 /*---------------------------------------------------------- 
  Welcome tile settings --> frontpage
@@ -1442,7 +1448,7 @@ nav ul {
   padding-top: 3px;
   text-decoration:none;
   text-align:center;
-    line-height:27px;
+  line-height:27px;
 }
 
 .topbutton_cpanel:hover {
@@ -1996,6 +2002,8 @@ Links Modify
 Games main
 ------------------------------------------------------------ */			
 #quick_search_games_main{margin-top: 80px; margin-bottom: 30px; float: left;}
+#games_main{ margin-top: 80px; margin-bottom: 30px; float: left;}
+#leftnav_position_games_main{ margin-bottom: 30px; float: left;}
 
 #quick_search_check {margin-right: 5px;}
 
@@ -2072,6 +2080,95 @@ Games main
 	#games_main_one{ display: none;}
 }
 
+/*---------------------------------------------------------- 
+Games list
+------------------------------------------------------------ */	
+#games_list{margin-top: 80px; margin-bottom: 30px; float: left;}
+#quick_search_games_list{margin-top: 80px; margin-bottom: 00px; float: left;}
+#leftnav_position_games_list{margin-top: 20px; margin-bottom: 30px; float: left;}
+
+
+@media screen and (max-width: 1279px) { 
+	#quick_search_games_list{ margin-top: 20px;}
+	#games_list	{margin-top: 20px;}
+}
+
+@media screen and (max-width: 1210px) { 
+ #info_td,#year_td,#info_th,#year_th{display:none;}
+}
+
+@media screen and (max-width: 985px) { 
+ #dev_td,#dev_th{display:none;}
+}
+
+@media screen and (max-width: 600px) { 
+ #pub_td,#pub_th{display:none;}
+ #game_th{text-align:center;}
+}
+
+#game_list_table{width: 100%;}
+
+/*---------------------------------------------------------- 
+Games detail
+------------------------------------------------------------ */	
+#games_detail{margin-top: 80px; margin-bottom: 30px; float: left;}
+#quick_search_games_detail{margin-top: 80px; margin-bottom: 00px; float: left;}
+#leftnav_position_games_detail{margin-top: 20px; margin-bottom: 30px; float: left;}
+
+#gd_left{width: 32%; float:left;}
+#gd_center { width: 32%; float:left; margin-left: 2%;}
+#gd_right { width: 32%; float:right;}
+#gd_development {width:100%; float:left; margin-top:20px;}
+#gd_basic_game_info{width:60%; float:left;}
+#gd_basic_game_info_row{display:table;width:65%;padding:2px; margin-left:5%}
+#gd_basic_game_info_row_check{display:table-cell;width:3%;}
+#gd_basic_game_info_row_checktxt{display:table-cell;width:45%;}
+#gd_basic_game_info_category{float:right;width:40%;margin-top:-285px;}
+#gd_other_features{width:38%;float:right; }
+#gd_creator_info{margin-bottom:20px;}
+#gd_publisher_info{margin-bottom:20px;}
+#gd_developer_info{margin-bottom:20px;}
+#gd_back{margin-bottom:20px; margin-top:20px;}
+#gd_bottom{width:100%; float:left;}	
+#gd_dev_small_select{ 
+	width: 50px;
+	height: 27px;
+}
+#gd_pub_small_select{ 
+	width: 50px;
+	height: 27px;
+}
+#gd_text_area_big {height: 250px;}
+
+@media screen and (min-width: 1280px) {
+	#gd_other_features_left{display:none;}
+	#gd_other_features_right{display:none;}
+}
+
+@media screen and (max-width: 1279px) { 
+	#games_detail{margin-top: 20px;}
+	#quick_search_games_detail{margin-top: 20px;}
+	#gd_basic_game_info{width:100%; margin-bottom: 20px;}
+	#gd_other_features{display:none}
+	#gd_other_features_left{float:left; width:49%;}
+	#gd_other_features_right{float:right; width:49%;}
+	#gd_left{float:left; width:49%;}
+	#gd_right{float:right; width:49%;}
+	#gd_center{float:right; width:49%;}
+	#gd_back{margin-top:20px;}
+	#gd_publisher_info{margin-top:20px;}
+}
+
+@media screen and (max-width: 600px) { 
+	#gd_basic_game_info_category{width:100%; float:left; margin-top:20px; margin-bottom:20px; margin-left:5%}
+	#gd_other_features_left{float:left; width:100%; margin-bottom:20px;}
+	#gd_game_aka{margin-bottom:20px;}
+	#gd_other_features_right{float:right; width:100%;}
+	#gd_left{float:left; width:100%;}
+	#gd_right{float:right; width:100%;}
+	#gd_center{float:right; width:100%;}
+	#gd_publisher_info{margin-top:0px;}
+}
 
 
 /*---------------------------------------------------------- 
