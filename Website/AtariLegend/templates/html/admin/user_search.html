@@ -62,7 +62,7 @@ User search result
 				{if isset($users)}
 				<table class="standard_table_list">
 				<tr>
-					<th style="width:25%;">User Name</th>
+					<th style="width:25%;" id="username_th">User Name</th>
 					<th style="width:25%;" id="joindate_th">Join Date</th>
 					<th style="width:25%;" id="lastvisit_th">Last Visit</th>
 					<th style="width:10%;" id="email_th">Email</th>
@@ -70,9 +70,9 @@ User search result
 				</tr>
 					{foreach from=$users item=line}
 					<tr>
-						<td width="25%" class="standard_table_center">{if $line.user_name != ''}<a href="../user/user_detail.php?user_id_selected={$line.user_id}" class="standard_table_center">{$line.user_name}</a>{else}<i>n/a</i>{/if}</td>
-						<td width="25%" class="standard_table_center" id="joindate_td">{if $line.join_date != ''}{$line.join_date}{else}<i>n/a</i>{/if}</td>
-						<td width="25%" class="standard_table_center" id="lastvisit_td">{if $line.last_visit != ''}{$line.last_visit}{else}<i>n/a</i>{/if}</td>				
+						<td width="25%" class="standard_table_left">{if $line.user_name != ''}<a href="../user/user_detail.php?user_id_selected={$line.user_id}" class="standard_table_center">{$line.user_name}</a>{else}<i>n/a</i>{/if}</td>
+						<td width="25%" class="standard_table_left" id="joindate_td">{if $line.join_date != ''}{$line.join_date}{else}<i>n/a</i>{/if}</td>
+						<td width="25%" class="standard_table_left" id="lastvisit_td">{if $line.last_visit != ''}{$line.last_visit}{else}<i>n/a</i>{/if}</td>				
 						<td width="10%" class="standard_table_center" id="email_td">{if $line.email != ''}<a href="mailto:{$line.email}"><img src="../templates/0/icons/icon_email.gif" alt="" width="59" height="18"></a>{else}<i>n/a</i>{/if}</td>
 						<td width="15%" class="standard_table_center" id="website_td">{if $line.user_website != ''}<a href="http://{$line.user_website}"><img src="../templates/0/icons/icon_www.gif" alt="" width="59" height="18"></a>{else}<i>n/a</i>{/if}</td>
 					</tr>

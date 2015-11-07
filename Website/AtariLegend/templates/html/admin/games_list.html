@@ -1,0 +1,142 @@
+{* 
+/***************************************************************************
+                              games_list.tpl
+*                            --------------------------
+*   begin                : Sunday, August 28, 2005
+*   copyright            : (C) 2005 Atari Legend
+*   email                : admin@atarilegend.com
+*
+*   Id: games_list.tpl,v 0.10 2005/08/28 22:02 Gatekeeper
+*   Id: games_list.tpl,v 0.20 2015/10/31 10:01 Gatekeeper
+*
+***************************************************************************/
+
+************************************************************************************************
+The main game page
+************************************************************************************************
+*}
+{block name=games_list}
+<script type="text/javascript">
+function gameinsert()
+{
+    JSnewgame=document.forms["insertgame"].newgame.value;
+	
+	if (JSnewgame=='')
+	{
+		alert('Please fill in a game name');
+	}
+	else
+	{
+    	// CONFIRM REQUIRES ONE ARGUMENT
+    	var message = "Are you sure you want to insert this game into the database?";
+    	// CONFIRM IS BOOLEAN. THAT MEANS THAT
+    	// IT RETURNS TRUE IF 'OK' IS CLICKED
+    	// OTHERWISE IT RETURN FALSE
+    	var return_value = confirm(message);
+		
+    	if (return_value !="0")
+    	{
+    		url="db_games_detail.php?newgame="+JSnewgame+"&action=insert_game";
+			location.href=url;
+    	} 
+	}
+}
+</script>
+
+<div class="standard_tile" id="games_list">
+	<h1>ADD/EDIT A GAME</h1>
+	<div class="standard_tile_line"></div>
+	<div class="standard_tile_text">
+		<div class="left_nav_section">
+		This is the search result page. Click a game to go to the main page. Click a Publisher/Developer/Year to do a new search.
+		If you want to do a new search query or like to add a new game, click <a href="games_main.php" class="standard_tile_link_cpanel">here</a>!<br><br>
+		S - Screenshot | M - Msic | B - Boxscan | D - Download | E - STE Only | F - Falcom Only
+	</div> 
+	<br>
+	<br>
+	<div id="games_list_4">
+		<table class="standard_table_list" id="game_list_table">
+			<tr>
+				<th style="width:40%;" id="game_th">Game Name</th>
+				<th style="width:20%;" id="pub_th">Publisher</th>
+				<th style="width:20%;" id="dev_th">Developer</th>
+				<th style="width:10%;" id="year_th">Year</th>
+				<th style="width:10%;" id="info_th">Info</th>
+			</tr>
+			{foreach from=$game_search item=line}
+			<tr>
+				<td width="40%" class="standard_table_left" id="game_td">
+					{if $line.game_name != ''}
+						<a href="games_detail.php?game_id={$line.game_id}" class="standard_table_left">
+							{$line.game_name}
+						</a>
+					{else}
+						<i>n/a</i>
+					{/if}
+				</td>
+				<td width="20%" class="standard_table_left" id="pub_td">
+					{if $line.publisher_name != ''}
+						<a href="games_list.php?publisher={$line.publisher_id}&amp;action=search" class="standard_table_left">
+						{$line.publisher_name}
+						</a>
+					{else}
+						<i>n/a</i>
+					{/if}
+				</td>
+				<td width="20%" class="standard_table_left" id="dev_td">
+					{if $line.developer_name != ''}
+						<a href="games_list.php?developer={$line.developer_id}&amp;action=search" class="standard_table_left">
+							{$line.developer_name}
+						</a>
+					{else}
+						<i>n/a</i>
+					{/if}
+				</td>
+				<td width="10%" class="standard_table_left" id="year_td">
+					{if $line.year != ''}
+						<a href="games_list.php?year={$line.year}&amp;action=search" class="standard_table_left">
+							{$line.year}
+						</a>
+					{else}
+							<i>n/a</i>
+					{/if}
+				</td>				
+				<td width="10%" class="standard_table_left" id="info_td">
+					{if isset($line.screenshot)}
+						<b>S</b>
+					{/if}
+					{if isset($line.music)}
+						<b>M</b>
+					{/if}
+					{if isset($line.boxscan)}
+						<b>B</b>
+					{/if}
+					{if isset($line.download)}
+						<b>D</b>
+					{/if}
+					{if isset($line.ste_enhan) or isset($line.ste_only)}
+						<b>E</b>
+					{/if}
+					{if isset($line.falcon_only) or isset($line.falcon.enhan)}
+						<b>F</b>
+					{/if}
+				</td>
+			</tr>
+			{/foreach}
+			<tr>
+				<td class="standard_table_left" colspan="5">
+					<br><b>{if $nr_of_games == 1}1 game found {else} {$nr_of_games} games found{/if} in {$query_time} sec</b>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<br>
+	{if isset($message)}	
+		<br><br><div class="left_nav_section">{$message}</div>
+	{/if}	
+</div>	
+</div>
+<br>
+<div align="center"><a href="javascript:history.go(-1)" class="standard_tile_link">back</a></div>
+<br>
+{/block}

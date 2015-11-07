@@ -8,6 +8,7 @@
  *	 actual update        : Creation of file
  *
  *   Id: games_detail.php,v 0.10 2005/10/06 17:41 Zombieman
+ *   Id: games_detail.php,v 0.10 2015/11/06 22:16 Zombieman
  *
  ***************************************************************************/
 
@@ -16,7 +17,7 @@
 //**************************************************************************************** 
 
 //load all common functions
-include("../includes/common.php"); 
+include("../../includes/common.php"); 
 
 //***********************************************************************************
 //Insert new game
@@ -337,12 +338,12 @@ header("Location: ../games/games_detail.php?game_id=$game_id");
 		
 		// UPDATE THE STOS TICK BOX INFO
 		// Start off by deleting previos value
-		$sdbquery = $mysqli->query("DELETE FROM game_stos WHERE game_id='$game_id'");	
-
+		$sdbquery = $mysqli->query("DELETE FROM game_stos WHERE game_id='$game_id'") or die ("STOS Deletion failed");;	
+		
 		// then insert the new value if it has been passed.
 		if(isset($stos))
 		{
-			$sdbquery = $mysqli->query("INSERT INTO game_stos (game_id,stos) VALUES ('$game_id','$stos')") or die("Couldn't insert stos tick box info");
+			$sdbquery = $mysqli->query("INSERT INTO game_stos (game_id,stos) VALUES ('$game_id','$stos')");
 		}
 		
 		// UPDATE THE STAC TICK BOX INFO
@@ -357,7 +358,7 @@ header("Location: ../games/games_detail.php?game_id=$game_id");
 		
 		$smarty->assign("message",'Game has been modified correctly');
 	
-header("Location: ../games/games_detail.php?game_id=$game_id");
+		header("Location: ../games/games_detail.php?game_id=$game_id");
 	}
 	
 
@@ -369,7 +370,8 @@ header("Location: ../games/games_detail.php?game_id=$game_id");
 		//First we need to do a hell of a lot checks before we can delete an actual game.
 		$sdbquery = $mysqli->query("SELECT * FROM game_download WHERE game_id='$game_id'")
 				 	or die ("Error getting download info");
-		if ( $sdbquery->num_rows() > 0 )
+		$rows = get_rows($sdbquery);			
+		if ( $rows > 0 )
 		{
 			$smarty->assign("message",'Deletion failed - This game has downloads - Delete it in the appropriate section');
 		}
@@ -377,7 +379,8 @@ header("Location: ../games/games_detail.php?game_id=$game_id");
 		{
 			$sdbquery = $mysqli->query("SELECT * FROM game_diskscan WHERE game_id='$game_id'")
 				 		or die ("Error getting diskscan info");
-			if ( $sdbquery->num_rows() > 0 )
+			$rows = get_rows($sdbquery);	
+			if ( $rows > 0 )
 			{
 				$smarty->assign("message",'Deletion failed - This game has a diskscan - Delete it in the appropriate section');
 			}
@@ -385,7 +388,8 @@ header("Location: ../games/games_detail.php?game_id=$game_id");
 			{
 				$sdbquery = $mysqli->query("SELECT * FROM game_gallery WHERE game_id='$game_id'")
 				 			or die ("Error getting gallery info");
-				if ( $sdbquery->num_rows() > 0 )
+				$rows = get_rows($sdbquery);	
+				if ( $rows > 0 )
 				{
 					$smarty->assign("message",'Deletion failed - This game has a images in the gallery table - Delete it in the appropriate section');
 				}
@@ -393,7 +397,8 @@ header("Location: ../games/games_detail.php?game_id=$game_id");
 				{
 					$sdbquery = $mysqli->query("SELECT * FROM game_boxscan WHERE game_id='$game_id'")
 				 				or die ("Error getting boxscan info");
-					if ( $sdbquery->num_rows() > 0 )
+					$rows = get_rows($sdbquery);	
+					if ( $rows > 0 )
 					{
 						$smarty->assign("message",'Deletion failed - This game has (a) boxscan(s) - Delete it in the appropriate section');
 					}
@@ -401,7 +406,8 @@ header("Location: ../games/games_detail.php?game_id=$game_id");
 					{
 						$sdbquery = $mysqli->query("SELECT * FROM game_user_comments WHERE game_id='$game_id'")
 				 					or die ("Error getting user comments");
-						if ( $sdbquery->num_rows() > 0 )
+						$rows = get_rows($sdbquery);	
+						if ( $rows > 0 )
 						{
 							$smarty->assign("message",'Deletion failed - This game has user comments - Delete it in the appropriate section');
 						}
@@ -409,7 +415,8 @@ header("Location: ../games/games_detail.php?game_id=$game_id");
 						{
 							$sdbquery = $mysqli->query("SELECT * FROM game_submitinfo WHERE game_id='$game_id'")
 				 						or die ("Error getting submit info");
-							if ( $sdbquery->num_rows() > 0 )
+							$rows = get_rows($sdbquery);	
+							if ( $rows > 0 )
 							{
 								$smarty->assign("message",'Deletion failed - This game has info submitted from visitors - Delete it in the appropriate section');
 							}
@@ -417,7 +424,8 @@ header("Location: ../games/games_detail.php?game_id=$game_id");
 							{
 								$sdbquery = $mysqli->query("SELECT * FROM screenshot_game WHERE game_id='$game_id'")
 				 							or die ("Error getting screenshot info");
-								if ( $sdbquery->num_rows() > 0 )
+								$rows = get_rows($sdbquery);	
+								if ( $rows > 0 )
 								{
 									$smarty->assign("message",'Deletion failed - This game has screenshots - Delete it in the appropriate section');
 								}
@@ -425,7 +433,8 @@ header("Location: ../games/games_detail.php?game_id=$game_id");
 								{
 									$sdbquery = $mysqli->query("SELECT * FROM review_game WHERE game_id='$game_id'")
 				 								or die ("Error getting review info");
-									if ( $sdbquery->num_rows() > 0 )
+									$rows = get_rows($sdbquery);	
+									if ( $rows > 0 )
 									{
 										$smarty->assign("message",'Deletion failed - This game has reviews - Delete it in the appropriate section');
 									}
@@ -433,7 +442,8 @@ header("Location: ../games/games_detail.php?game_id=$game_id");
 									{
 										$sdbquery = $mysqli->query("SELECT * FROM game_music WHERE game_id='$game_id'")
 				 									or die ("Error getting music info");
-										if ( $sdbquery->num_rows() > 0 )
+										$rows = get_rows($sdbquery);	
+										if ( $rows > 0 )
 										{
 											$smarty->assign("message",'Deletion failed - This game has music files attached - Delete it in the appropriate section');
 										}

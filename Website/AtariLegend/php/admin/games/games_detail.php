@@ -8,6 +8,7 @@
  *	 actual update        : Creation of file
  *
  *   Id: games_detail.php,v 0.10 2005/10/06 17:41 Zombieman
+ *   Id: games_detail.php,v 0.10 2015/11/01 11:11 STG
  *
  ***************************************************************************/
 
@@ -16,7 +17,7 @@
 //**************************************************************************************** 
 
 //load all common functions
-include("../includes/common.php"); 
+include("../../includes/common.php"); 
 
 //***********************************************************************************
 //Let's get the general game info first. 
@@ -407,8 +408,12 @@ $smarty->assign('az_output', $az_output);
 $smarty->assign("game_id",$game_id);
 $smarty->assign("user_id",$_SESSION['user_id']);
 
+$smarty->assign('quick_search_games', 'quick_search_games_detail');
+$smarty->assign('left_nav', 'leftnav_position_games_detail');
+
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/games_detail.html');
+$smarty->display('extends:../../../templates/html/admin/main.html|../../../templates/html/admin/frontpage.html|../../../templates/html/admin/games_detail.html|../../../templates/html/admin/quick_search_games.html|../../../templates/html/admin/left_nav.html');
+
 
 //close the connection
 mysqli_close($mysqli);
