@@ -10,6 +10,7 @@
 *
 *	Update: 2015/06/01 22:43 ST Graveyard 
 *			- New version for AL 2015
+*   Id: main_stats.html v0.2 09/11/2015 STG - HTML validated/flex box
 ***************************************************************************/
 *}
 {block name=main_stats}	
@@ -17,98 +18,64 @@
 	<h1>MAIN STATS</h1>
 	<div class="standard_tile_line"></div>
 	<div class="standard_tile_text">
-		<br>
-		<table cellspacing="2" cellpadding="2" border="0" width="100%" class="main_stats_high">
-		<tr>
-			<td width="40%" valign="top">
-				<table class="standard_table_list">
+		<div class="main_stats_container">
+			<div class="main_stats_child" id="child_some_stats">
+				<table>
 				<tr>
-					<th width="90%" id="some_stats">Some Stats</th>
+					<td>
+						<table class="standard_table_list">
+						<tr>
+							<th>Some Stats</th>
+						</tr>
+							{foreach from=$statistics item=line}
+						<tr>
+							<td class="standard_table_center">{if $line.value != ''}{$line.value}{/if}</td>
+						</tr>
+							{/foreach}
+						</table>	
+					</td>
 				</tr>
-					{foreach from=$statistics item=line}
+				</table>
+			</div>
+			<div class="main_stats_child" id="child_good_karma">
+				<table>
 				<tr>
-					<td width="90%" class="standard_table_center">{if $line.value != ''}{$line.value}{/if}</td>
+					<td>
+						<table class="standard_table_list">
+						<tr>
+							<th colspan="2" id="good_karma">Good Karma</th>
+						</tr>
+							{foreach from=$karma_good item=line}
+						<tr>
+							<td><a href="../user/user_detail.php?user_id_selected={$line.user_id}" class="standard_table_left">{$line.user_name}</a></td>
+							<td class="standard_table_right">{$line.karma}</td>
+						</tr>
+							{/foreach}
+						</table>						
+					</td>
 				</tr>
-					{/foreach}
-				</table>	
-			</td>
-			<td width="30%" valign="top">
-				<table class="standard_table_list">
+				</table>
+			</div>
+			<div class="main_stats_child" id="child_bad_karma">
+				<table>
 				<tr>
-					<th width="100%" colspan="2" id="good_karma">Good Karma</th>
+					<td>
+						<table class="standard_table_list">
+						<tr>
+							<th colspan="2" id="bad_voodoo">Bad Voodoo</th>
+						</tr>
+							{foreach from=$karma_bad item=line}
+						<tr>
+							<td><a href="../user/user_detail.php?user_id_selected={$line.user_id}" class="standard_table_left">{$line.user_name}</a></td>
+							<td class="standard_table_right">{$line.karma}</td>
+						</tr>
+							{/foreach}
+						</table>	
+					</td>
 				</tr>
-					{foreach from=$karma_good item=line}
-				<tr>
-					<td width="75%"><a href="../user/user_detail.php?user_id_selected={$line.user_id}" class="standard_table_left">{$line.user_name}</a></td>
-					<td width="25%" class="standard_table_right">{$line.karma}</td>
-				</tr>
-					{/foreach}
-				</table>						
-			</td>
-			<td width="30%" valign="top">
-				<table class="standard_table_list">
-				<tr>
-					<th width="100%" colspan="2" id="bad_voodoo">Bad Voodoo</span></th>
-				</tr>
-					{foreach from=$karma_bad item=line}
-				<tr>
-					<td width="75%"><a href="../user/user_detail.php?user_id_selected={$line.user_id}" class="standard_table_left">{$line.user_name}</a></td>
-					<td width="25%" class="standard_table_right">{$line.karma}</td>
-				</tr>
-					{/foreach}
-				</table>	
-			</td>
-		</tr>
-		</table>
-		<table cellspacing="2" cellpadding="2" border="0" width="100%" class="main_stats_low">
-		<tr>
-			<td width="100%" valign="top">
-				<table class="standard_table_list">
-				<tr>
-					<th width="90%" id="some_stats">Some Stats</span></th>
-				</tr>
-					{foreach from=$statistics item=line}
-				<tr>
-					<td width="90%" class="standard_table_center">{if $line.value != ''}{$line.value}{/if}</td>
-				</tr>
-					{/foreach}
-				</table>	
-				<br>
-			</td>
-		</tr>
-		<tr>
-			<td width="100%" valign="top">
-				<table class="standard_table_list">
-				<tr>
-					<th width="100%" colspan="2" id="good_karma">Good Karma</th>
-				</tr>
-					{foreach from=$karma_good item=line}
-				<tr>
-					<td width="75%"><a href="../user/user_detail.php?user_id_selected={$line.user_id}" class="standard_table_left">{$line.user_name}</a></td>
-					<td width="25%" class="standard_table_right">{$line.karma}</td>
-				</tr>
-					{/foreach}
-				</table>	
-				<br>				
-			</td>
-		</tr>
-		<tr>
-			<td width="100%" valign="top">
-				<table class="standard_table_list">
-				<tr>
-					<th width="100%" colspan="2" id="bad_voodoo">Bad Voodoo</span></th>
-				</tr>
-					{foreach from=$karma_bad item=line}
-				<tr>
-					<td width="75%"><a href="../user/user_detail.php?user_id_selected={$line.user_id}" class="standard_table_left">{$line.user_name}</a></td>
-					<td width="25%" class="standard_table_right">{$line.karma}</td>
-				</tr>
-					{/foreach}
-				</table>	
-			</td>
-		</tr>
-		</table>
-		<br>
+				</table>
+			</div>
+		</div>
 	</div>
 </div>
 {/block}

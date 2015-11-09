@@ -1628,11 +1628,11 @@ nav ul {
 Standard table settings 
 -------------------------------------------------------------*/
 
-.column-left-cpanel { width: 25%; 
+#column-left-cpanel { width: 25%; 
 	 float:left;
 }
 
-.column-right-cpanel { width: 73%; 
+#column-right-cpanel { width: 73%; 
 	 float:right;
 }
 
@@ -1733,14 +1733,32 @@ Standard table settings
   text-decoration:none;
 }
 
-@media screen and (min-width: 800px) { 	
-	.column-center-cpanel { display: none; }
-}
-
 /* for lower resolutions put the left and right below eachother */
 @media screen and (max-width: 799px) { 	
-	.column-left-cpanel { display: none;}
-	.column-right-cpanel { display: none;}
+.main_container_cpanel {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -moz-flex;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column-reverse; 
+  flex-direction: column-reverse; 
+  float: left;
+  width:100%;
+}	
+	
+#column-left-cpanel { width:100%; float:left; margin:auto;  }
+#column-right-cpanel { width:100%; float:left; margin:auto; }
+
+.main_container_cpanel >div {
+	width:100%;
+	}
+	
+.content_box_cpanel {
+		display: block;
+		margin: 0 auto;
+	}
 }
 
 fieldset { 
@@ -1761,7 +1779,7 @@ legend {
 /*---------------------------------------------------------- 
 Front page
 ------------------------------------------------------------ */
-#user_stats{ float: right; width:48%; margin-bottom: 20px;}	
+#user_stats{ float:right; width:48%; margin-bottom: 20px;}	
 #welcome_cpanel{ margin-top: 390x; float: left; width:48%; margin-bottom: 20px;}	
 #left_nav_position_front{ margin-top: 50px; margin-bottom: 20px; float: left;}
 #main_stats_position_front{ margin-top: 50px; margin-bottom: 20px;}
@@ -1775,27 +1793,58 @@ Front page
 		box-shadow: 0 0 12px black;	
 		opacity: 0.8;
 		filter: alpha(opacity=40); /* For IE8 and earlier */
+		margin-bottom: 10px;
 }
 
 /* Make the table view responsive */
 @media screen and (max-width: 799px) { 
-#welcome_cpanel{ width:100%; margin-top: 10px; }		
-#user_stats{ width:100%; }	
-#main_stats_position_front{ width:100%; float: left; margin-top: 0px;}
-#left_nav_position_front{ width:100%;  float: left; margin-top: 0px;}
+	#welcome_cpanel{ width:100%; margin-top: 10px; }		
+	#user_stats{ width:100%; }	
+	#main_stats_position_front{ width:100%; float: left; }
+	#left_nav_position_front{ width:100%;  float: left;}
 }
 
 @media screen and (max-width: 480px) { 
-#welcome_cpanel{ width:100%; margin-top: 0px; }	
+	#welcome_cpanel{ width:100%; margin-top: 0px;}	
+	#main_stats_position_front{ margin-top: -5px;}
 }
+
+.main_stats_container {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -moz-flex;
+  display: -webkit-flex;
+  display: flex;
+    -webkit-align-items: flex-start;
+  align-items: flex-start; 
+ }
+  
+#child_some_stats { width:45%; float:left;}
+#child_good_karma,#child_bad_karma{ width:27%; float:left;}
 
 @media screen and (max-width: 1199px) { 
-	.main_stats_high{display:none;}
+	.main_stats_container {
+	  -webkit-flex-direction: column; 
+	  flex-direction: column; 
+	}	
+		
+	#child_some_stats,#child_good_karma,#child_bad_karma{width:100%; float:left;}
+	#child_good_karma,#child_bad_karma{margin-top:20px}
+
+	.main_stats_container >div {
+		width:100%;
+		}
+		
+	.main_stats_child {
+			display: block;
+			margin: 0 auto;
+		}
 }
 
-@media screen and (min-width: 1200px) { 
-	.main_stats_low{display:none;}
-}
+.main_stats_child  table { width:98%;}
+#user_stats table { width:100%;}
+#welcome_cpanel table { width:100%;}
 
 /*---------------------------------------------------------- 
 Left nav
