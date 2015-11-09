@@ -8,6 +8,7 @@
 *   actual update        : Creation of file
 *
 *   Id: user_stats.html,v 0.1 2015/05/29 23:07 ST Graveyard
+*   Id: user_stats.html,v 0.2 2015/11/09 23:22 ST Graveyard - HTML validated
 *
 ***************************************************************************/
 
@@ -22,9 +23,9 @@
 		<div class="standard_tile_line"></div>
 		<div class="standard_list_entry">
 			<div class="standard_tile_text">
-				<table width="100%">
+				<table>
 				<tr>
-					<td align="center"><img class="user_stats_img" src="../../includes/show_image.php?file={$users.image}&crop=164,null,null,null&crop=left,top,164,120" alt="avatar"><br></td>
+					<td class="standard_table_center"><img class="user_stats_img" src="../../includes/show_image.php?file={$users.image}&amp;crop=164,null,null,null&amp;crop=left,top,164,120" alt="avatar"><br></td>
 				</tr>
 				<tr>
 					<td class="standard_table_center">Welcome {$users.user_name}</td>
