@@ -7,7 +7,8 @@
 *   email                : admin@atarilegend.com
 *
 *   Id: user_main.html,v 0.10 2005/09/29 Silver
-*   Id: user_main.html,v 0.20 2015/09/07 Grave
+*   Id: user_main.html,v 0.20 2015/09/07 Grave - AL 2.0
+*   Id: user_main.html,v 0.30 2015/11/12 Grave - Validated HTML/Flex box
 *
 ***************************************************************************/
 
@@ -35,7 +36,7 @@ function SyncKarma()
 </script>
 
 <div class="standard_tile" id="user_main">
-	<h1>USER ADMINISTRATION</h1>
+	<h1>USER ADMIN</h1>
 	<div class="standard_tile_line"></div>
 	<div class="standard_tile_text">
 		<div class="left_nav_section">
@@ -43,43 +44,31 @@ function SyncKarma()
 			<b>{$nr_users}</b> users in the DB.
 		</div> 
 		<br><br>
-		<form action="../user/user_search.php" method="get" name="user_search" id="user_search">
+		<form action="../user/user_search.php" method="get" name="user_search">
 			<fieldset>
 			<legend>User Search</legend>
-			<div align="center">
-			By name :
-			<select name="userbrowse" id="small_select">
-				<option value="" SELECTED>-</option>
-				{html_options values=$az_value output=$az_output}
-			</select>
-			<input type="text" name="usersearch" value="" class="standard_tile_input_small">
-			<input type="submit" value="Search" class="topbutton_cpanel_small">
-			<input type="hidden" name="action" id="action" value="search">
-			</div>
-			<br>
-			</fieldset>
-		</form>
-		<form action="../user/user_search.php" method="get" name="user_search" id="user_search_one">
-			<fieldset>
-			<legend>User Search</legend>
-			<div align="center">
-			By name : <br>
-			<select name="userbrowse" id="small_select">
-				<option value="" SELECTED>-</option>
-				{html_options values=$az_value output=$az_output}
-			</select>
-			<input type="text" name="usersearch" value="" class="standard_tile_input_small">
-			<br>	
-			<br>
-			<input type="submit" value="Search" class="topbutton_cpanel_small">
-			<input type="hidden" name="action" id="action" value="search">
-			</div>
+				<div class="user_main_container">
+					<div class="user_main_child" id="user_main_child_1">
+						By name : &nbsp;
+					</div>
+					<div class="user_main_child" id="user_main_child_2">
+						<select name="userbrowse" id="small_select">
+							<option value="" SELECTED>-</option>
+							{html_options values=$az_value output=$az_output}
+						</select>
+						<input type="text" name="usersearch" value="" class="standard_tile_input_small">&nbsp;
+					</div>
+					<div class="user_main_child" id="user_main_child_3">
+						<input type="submit" value="Search" class="topbutton_cpanel_small">
+						<input type="hidden" name="action" id="action" value="search">
+					</div>
+				</div>
 			<br>
 			</fieldset>
 		</form>
 		<br>
 		<br>
-		<div align="center"><a href="../user/karma_sync.php" class="standard_tile_link_cpanel" onclick="SyncKarma(); return false;">Karma Re-Sync</a></div>
+		<div class="centered_fieldset"><a href="../user/karma_sync.php" class="standard_tile_link_cpanel" onclick="SyncKarma(); return false;">Karma Re-Sync</a></div>
 		<br>
 		{if isset($message)}
 			<div class="left_nav_section">{$message}</div><br>

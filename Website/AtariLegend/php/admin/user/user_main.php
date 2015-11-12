@@ -20,7 +20,6 @@ User main
 */
 // Include common variables and functions
 include("../../includes/common.php");
-include("../administration/main_stats.php");
 
 if (isset($action) and $action == 'delete_user')
 {
@@ -96,6 +95,7 @@ if (isset($action) and $action == 'delete_user')
 	}
 }
 
+include("../administration/main_stats.php");
 
 //get all the user accounts
 $query_number = $mysqli->query("SELECT email FROM users") or die ("Couldn't get the total number of users");

@@ -47,19 +47,19 @@ $variables = str_replace("action=delete_avatar", "", $variables);
 
 $php_self = filter_var($_SERVER['PHP_SELF'], FILTER_SANITIZE_STRING);
 $php_self.= '?skin=0';
-$php_self.= '&';
+$php_self.= '&amp;';
 $php_self.= $variables;
 $smarty->assign('skin_switch_0', $php_self );
 
 $php_self = filter_var($_SERVER['PHP_SELF'], FILTER_SANITIZE_STRING);
 $php_self.= '?skin=1';
-$php_self.= '&';
+$php_self.= '&amp;';
 $php_self.= $variables;
 $smarty->assign('skin_switch_1', $php_self );
 
 $php_self = filter_var($_SERVER['PHP_SELF'], FILTER_SANITIZE_STRING);
 $php_self.= '?skin=2';	
-$php_self.= '&';
+$php_self.= '&amp;';
 $php_self.= $variables;
 $smarty->assign('skin_switch_2', $php_self );
 
