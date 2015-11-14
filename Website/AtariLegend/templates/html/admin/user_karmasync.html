@@ -1,6 +1,6 @@
 {* 
 /***************************************************************************
-*                               user_karmasync.tpl
+*                               user_karmasync.html
 *                            -----------------------
 *   begin                : friday, November 11, 2005
 *   copyright            : (C) 2005 Atari Legend
@@ -8,8 +8,9 @@
 *   actual update        : file creation
 *							
 *
-*   Id: user_karmasync.tpl,v 0.10 2005/11/13 silver
-*   Id: user_karmasync.tpl,v 0.20 2015/09/04 Grave
+*   Id: user_karmasync.html,v 0.10 2005/11/13 silver
+*   Id: user_karmasync.html,v 0.20 2015/09/04 Grave - AL 2.0
+*   Id: user_karmasync.html,v 0.20 2015/11/14 Grave - HTML validation
 *
 ***************************************************************************/
 
@@ -27,18 +28,18 @@ The the user karma sync page
 		</div>
 		<br>
 		<br>
-		<table cellspacing="2" cellpadding="2" border="0" width="100%">
+		<table id="user_search_main_tabel">
 		<tr>
-			<td width="100%" valign="top">	
+			<td>	
 				<table class="standard_table_list">
 					<tr>
-						<th style="width:50%;" align="center">User Name</th>
-						<th style="width:50%," align="center">Karma Value</th>
+						<th class="karma_column">User</th>
+						<th class="karma_column">Karma</th>
 					</tr>
 					{foreach from=$sync item=line}
 					<tr>
-						<td style="width:50%;" align="center">{if $line.user_name != ''}<a class="standard_table_center">{$line.user_name}</a>{/if}</td>
-						<td style="width:50%;" align="center">{if $line.karma_value != ''}<a class="standard_table_center"	>{$line.karma_value}</a>{/if}</td>
+						<td class="karma_column">{if $line.user_name != ''}<a class="standard_table_center">{$line.user_name}</a>{/if}</td>
+						<td class="karma_column">{if $line.karma_value != ''}<a class="standard_table_center">{$line.karma_value}</a>{/if}</td>
 					</tr>
 					{/foreach}
 				</table>
@@ -47,7 +48,7 @@ The the user karma sync page
 		</table>
 		<br>
 		<br>
-		<div align="center"><a href="../user/user_main.php" class="standard_tile_link">back</a></div>
+		<div class="standard_table_center"><a href="../user/user_main.php" class="standard_tile_link">back</a></div>
 		<br>
 		{if isset($message)}
 			<div class="left_nav_section">{$message}</div><br>

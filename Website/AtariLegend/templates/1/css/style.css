@@ -897,6 +897,19 @@ Standard tile settings
 	color: white;
 }
 
+.standard_tile_link_black:link { text-decoration: none;
+	color: black;
+	font-weight:bold;
+}
+
+.standard_tile_link_black:visited { text-decoration: none;
+	color: black;
+}
+
+.standard_tile_link_black:hover { text-decoration: none;
+	color: white;
+}
+
 .standard_tile_link_button:link { 
 		text-decoration: none;
 		color : black;
@@ -1905,33 +1918,38 @@ User search
 ------------------------------------------------------------ */
 #leftnav_position_usersearch{ margin-top: 80px; margin-bottom: 30px; float: left;}
 #usersearch{ margin-top: 80px; margin-bottom: 30px; float: left;}
+#usersearch th {text-align:left;}
+.username_th,.joindate_th,.lastvisit_th{width:25%;}
+.username_td,.joindate_td,.lastvisit_td{width:25%;color: white; font-size: 10pt; font-weight: 100; padding-left: 2px;}
+.email_th{width:10%;}
+.email_td{width:10%;color: white; font-size: 10pt; font-weight: 100; padding-left: 2px;}
+.website_th{width:15%;}
+.website_td{width:15%;color: white; font-size: 10pt; font-weight: 100; padding-left: 2px;}
+#user_search_main_tabel{border:0; width:100%; margin-top:3px; margin-bottom:3px;}
 
 @media screen and (max-width: 1279px) { 
 	#leftnav_position_usersearch{ margin-top: 20px;}
 	#usersearch{margin-top: 20px;}
 }
 
-@media screen and (max-width: 1024px) { 
-	#email_th{display: none;}
-	#email_td{display: none;}
-	#website_th{display: none;}
-	#website_td{display: none;}
+@media screen and (max-width: 1150px) { 
+	.email_th{display: none;}
+	.email_td{display: none;}
+	.website_th{display: none;}
+	.website_td{display: none;}
 }
 
 @media screen and (max-width: 600px) { 
-	#lastvisit_th{display: none;}
-	#lastvisit_td{display: none;}
-	#joindate_td{display: none;}
-	#joindate_th{display: none;}
+	.lastvisit_th{display: none;}
+	.lastvisit_td{display: none;}
+	.joindate_td{display: none;}
+	.joindate_th{display: none;}
+	#usersearch td {text-align:center;}
+	#usersearch th {text-align:center;}
 }
 
 @media screen and (max-width: 500px) { 
-#user_search { display: none;}
 #usersearch{margin-bottom: 20px;}
-}
-
-@media screen and (min-width: 1280px) { 
-#user_search_one{ display: none;}
 }
 
 /*---------------------------------------------------------- 
@@ -1939,7 +1957,7 @@ User Karma
 ------------------------------------------------------------ */
 #leftnav_position_karma{ margin-top: 80px; margin-bottom: 30px; float: left;}
 #karma{ margin-top: 80px; margin-bottom: 30px; float: left;}
-
+.karma_column{width:50%; text-align:center;}
 
 @media screen and (max-width: 1279px) { 
 	#leftnav_position_karma{ margin-top: 20px;}
