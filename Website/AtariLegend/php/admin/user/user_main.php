@@ -95,7 +95,32 @@ if (isset($action) and $action == 'delete_user')
 	}
 }
 
-include("../administration/main_stats.php");
+//Do some stats
+foreach (KarmaGood() as $key => $value)
+{
+	$smarty->append('karma_good',
+	    			array('karma' => $value[0],
+						  'user_name' => $value[1],
+						  'user_id' => $value[2]));
+   
+}
+
+foreach (KarmaBad() as $key => $value)
+{
+	$smarty->append('karma_bad',
+	    			array('karma' => $value[0],
+						  'user_name' => $value[1],
+						  'user_id' => $value[2]));
+   
+}
+
+$stack = statistics_stack();
+
+// smack the stack into a smarty var and pray it works
+foreach ($stack as $value) {
+		$smarty->append('statistics',
+				array('value' => $value));
+		}
 
 //get all the user accounts
 $query_number = $mysqli->query("SELECT email FROM users") or die ("Couldn't get the total number of users");
@@ -113,5 +138,5 @@ $smarty->assign('left_nav', 'leftnav_position_usermain');
 $smarty->assign('main_stats', 'main_stats_position_usermain');			
 		
 //Send all smarty variables to the templates
-$smarty->display('extends:../../../templates/html/admin/main.html|../../../templates/html/admin/frontpage.html|../../../templates/html/admin/user_main.html|../../../templates/html/admin/left_nav.html|../../../templates/html/admin/main_stats.html');
+$smarty->display('extends:../../../templates/html/admin/main.html|../../../templates/html/admin/frontpage.html|../../../templates/html/admin/user_main.html|../../../templates/html/admin/left_nav.html');
 ?>

@@ -16,6 +16,72 @@
 The main Users page
 ************************************************************************************************
 *}
+{block name=main_stats}	
+<div class="standard_tile" id="{$main_stats}">
+	<h1>MAIN STATS</h1>
+	<div class="standard_tile_line"></div>
+	<div class="standard_tile_text">
+		<div class="main_stats_container">
+			<div class="main_stats_child" id="child_some_stats">
+				<table>
+				<tr>
+					<td>
+						<table class="standard_table_list">
+						<tr>
+							<th>Some Stats</th>
+						</tr>
+							{foreach from=$statistics item=line}
+						<tr>
+							<td class="standard_table_center">{if $line.value != ''}{$line.value}{/if}</td>
+						</tr>
+							{/foreach}
+						</table>	
+					</td>
+				</tr>
+				</table>
+			</div>
+			<div class="main_stats_child" id="child_good_karma">
+				<table>
+				<tr>
+					<td>
+						<table class="standard_table_list">
+						<tr>
+							<th colspan="2" id="good_karma">Good Karma</th>
+						</tr>
+							{foreach from=$karma_good item=line}
+						<tr>
+							<td><a href="../user/user_detail.php?user_id_selected={$line.user_id}" class="standard_table_left">{$line.user_name}</a></td>
+							<td class="standard_table_right">{$line.karma}</td>
+						</tr>
+							{/foreach}
+						</table>						
+					</td>
+				</tr>
+				</table>
+			</div>
+			<div class="main_stats_child" id="child_bad_karma">
+				<table>
+				<tr>
+					<td>
+						<table class="standard_table_list">
+						<tr>
+							<th colspan="2" id="bad_voodoo">Bad Voodoo</th>
+						</tr>
+							{foreach from=$karma_bad item=line}
+						<tr>
+							<td><a href="../user/user_detail.php?user_id_selected={$line.user_id}" class="standard_table_left">{$line.user_name}</a></td>
+							<td class="standard_table_right">{$line.karma}</td>
+						</tr>
+							{/foreach}
+						</table>	
+					</td>
+				</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+{/block}
 {block name=user_main}
 <script type="text/javascript">
 function SyncKarma()
