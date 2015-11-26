@@ -842,7 +842,7 @@ Standard tile settings
 
 .standard_tile_input_area { background : black;
 				color: #ffffff;				
-				width: 50%;
+				width: 90%;
 				height: 40px;
 				margin-top:0;
 				padding: 0;
@@ -1998,19 +1998,38 @@ Links addnew
 	#linkaddnew{margin-top: 20px;}
 }
 
-@media screen and (max-width: 480px) { 
-#linkadd_two{ display: none;}
-#linkvalidate_two{ display: none;}
+.links_addnew_area { background : black;
+				color: #ffffff;				
+				width: 90%;
+				height: 150px;
+				margin-top:0;
+				padding: 0;
+				padding-left: 5px;
+				border: 1px solid #008b8b;
+				text-align: left;
+				font-family: Audiowide;	
 }
 
-@media screen and (min-width: 481px) { 
-#linkadd_one{ display: none;}
-#linkvalidate_one{ display: none;}
+.links_addnew_row select  { 
+	background-color: black;
+	border: 1px solid #008b8b;
+	color: #ffffff;				
+	margin-top:5px;
+	padding: 0;
+	padding-left: 5px;
+	font-family: Audiowide;	
+	width: 185px;
+	height: 25px;
+	margin-top: 0px;
 }
+
+.links_addnew_text{width:25%;display:table-cell; vertical-align:top;}
+.links_addnew_input{width:75%;display:table-cell;}
+.links_addnew_row{display:table;width:100%;}
 
 .links_addnew_info { font-size: 10pt; color: black; padding: 5px;}
 
-.links_addnew_link:link { text-decoration: none;
+.links_addnew_link:link { text-decoration: none;	
 	color: white;
 }
 
@@ -2021,17 +2040,51 @@ Links addnew
 .links_addnew_link:hover { text-decoration: none;
 	color: black;
 }
+
+@media screen and (max-width: 480px) { 
+.links_addnew_text{width:100%;display:block;}
+.links_addnew_input{width:100%;display:block;}
+.links_addnew_row{width:100%;}
+}
+
 /*---------------------------------------------------------- 
 Links Modify list
 ------------------------------------------------------------ */
-#user_stats_img_dark{ box-shadow: 0 0 12px black;
+.links_modlist_tdline { font-size: 10pt; color: black; padding: 5px;}
+
+.user_stats_img_dark{ 
+					box-shadow: 0 0 12px black;
 					margin-left : 5px;
 					margin-right : 5px;
 					margin-top : 10px;
-					margin-bottom : 10px}
+					margin-bottom : 10px;
+					max-width: 100%;
+					opacity: 0.8;
+					filter: alpha(opacity=40); /* For IE8 and earlier */}
 					
 #leftnav_position_linkmodlist {margin-top: 80px; margin-bottom: 30px; float: left;}
 #linkmodlist{ margin-top: 80px; margin-bottom: 30px; float: left;}
+
+.links_list_text{margin-right:1%;}
+.links_list_input{margin-left:1%;}
+
+.links_list_row{
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -moz-flex;
+  display: -webkit-flex;
+  display: flex; 
+  justify-content: center;
+  align-items: center;
+ }
+ 
+@media screen and (max-width: 500px) { 
+	.links_list_row{
+			-webkit-flex-direction: column; 
+			flex-direction: column;
+	}
+}
 
 @media screen and (max-width: 1279px) { 
 	#leftnav_position_linkmodlist{ margin-top: 20px;}
@@ -2039,20 +2092,15 @@ Links Modify list
 }
 
 @media screen and (max-width: 480px) { 
-	#catdrop{display : none;}
-	#user_stats_img_dark{display : none;}
+	.user_stats_img_dark{display : none;}
 }	
-
-@media screen and (min-width: 481px) { 
-	#catdrop_one{display : none;}
-}
 
 /*---------------------------------------------------------- 
 Links category
 ------------------------------------------------------------ */
 #leftnav_position_linkcat{margin-top: 80px; margin-bottom: 30px; float: left;}
 #linkcat{ margin-top: 80px; margin-bottom: 30px; float: left;}
-
+.link_cat_td { text-align:right;}
 @media screen and (max-width: 1279px) { 
 	#leftnav_position_linkcat{ margin-top: 20px;}
 	#linkcat{margin-top: 20px;}
@@ -2077,13 +2125,18 @@ Links Modify
 	#link_mod{margin-top: 20px;}
 }
 
-@media screen and (max-width: 600px) { 
-#linkmod_two{ display: none;}
-#user_stats_img_dark{display : none;}
+.links_mod_text{width:35%;display:table-cell; vertical-align:top;}
+.links_mod_input{width:65%;display:table-cell;}
+.links_mod_row{display:table;width:100%;}
+
+@media screen and (max-width: 550px) { 
+.links_mod_text{width:100%;display:block;}
+.links_mod_input{width:100%;display:block;}
+.links_mod_row{width:100%;margin-bottom:10px;}
 }
 
-@media screen and (min-width: 601px) { 
-#linkmod_one{ display: none;}
+@media screen and (max-width: 600px) { 
+#user_stats_img_dark{display : none;}
 }
 
 /*---------------------------------------------------------- 
