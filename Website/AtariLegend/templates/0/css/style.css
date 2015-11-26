@@ -2197,6 +2197,7 @@ Links category
 ------------------------------------------------------------ */
 #leftnav_position_linkcat{margin-top: 20px; margin-bottom: 30px; float: left;}
 #linkcat{ margin-top: 20px; margin-bottom: 30px; float: left;}
+.link_cat_td { text-align:right;}
 
 @media screen and (max-width: 500px) { 
 #linkcat_wide{ display: none;}
