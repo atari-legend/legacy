@@ -16,7 +16,7 @@
 // This is the detail page of a game. Change all the specifics over here!
 //**************************************************************************************** 
 *}
-{block name=games_detail}
+{block name=java_script}
 <script type="text/javascript">
 function deletegame(game_id)
 {
@@ -133,6 +133,9 @@ function browseDeveloper(str) {
     }
 }
 </script>
+
+{/block}
+{block name=games_detail}
 
 <div class="standard_tile" id="games_detail">
 	<h1>{$game_info.game_name}</h1>
