@@ -16,7 +16,7 @@
 User detail page. Overhere you can maintain the log on data of a user and have a look at his activities.
 *********************************************************************************************************
 *}
-{block name=user_detail}	
+{block name=java_script}
 <script type="text/javascript">
 function delete_user() 
 {
@@ -39,7 +39,8 @@ function user_stats()
    	document.getElementById('user').submit();
 }
 </script>
-
+{/block}
+{block name=user_detail}	
 <div class="standard_tile" id="user_details">
 	<h1>USER DETAILS</h1>
 	<div class="standard_tile_line"></div>
