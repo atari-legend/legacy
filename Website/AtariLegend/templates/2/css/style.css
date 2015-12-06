@@ -265,7 +265,7 @@ footer, header, hgroup, menu, nav, section {
     }
 	
     #sidebar ul li { margin: 0;
-			background:transparant; }
+			background:transparent; }
 	
     #sidebar ul li a {
         padding: 0;
@@ -349,7 +349,7 @@ footer, header, hgroup, menu, nav, section {
 				padding: 0;
 				background: #000; 
 				text-align: center;
-				font-family: robot; arial;
+				font-family: robot, arial;
 			}
 	
 /*-----some code for the skin submenu-------*/
@@ -463,7 +463,7 @@ footer, header, hgroup, menu, nav, section {
 @media screen and (min-width: 1280px){  	
 	.container { position: absolute;}
 	#sidebar {background-color: rgba(0, 0, 0, 0);}
-	header nav { position: absolute; margin-top: 220px; float: center;}
+	header nav { position: absolute; margin-top: 220px;}
 	#main { position: relative; margin-top: 60px;}
 }
 
@@ -1479,9 +1479,6 @@ nav ul {
 .nav li {
   position: relative;
 }
-.nav > li { 
-  float: center; 
-} 
 
 .nav li a:first-child:nth-last-child(2):before { 
   content: ""; 
@@ -1865,7 +1862,7 @@ Front page
 /*---------------------------------------------------------- 
 Left nav
 ------------------------------------------------------------ */
-#leftnav_position_front { margin-top: 20px; margin-bottom: 30px; float: lefft;
+#leftnav_position_front { margin-top: 20px; margin-bottom: 30px; float: left;
 }
 
 .left_nav_section{
