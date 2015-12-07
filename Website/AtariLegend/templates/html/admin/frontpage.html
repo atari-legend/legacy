@@ -16,30 +16,17 @@
 // This is the front page of the cpanel (statistics)
 //**************************************************************************************** 
 *}
+{extends file='html/admin/main.html'}
 {block name=main_body}
 	<div class="main_container_cpanel">
 		<div class="content_box_cpanel" id="column-left-cpanel">		
-			{block name=left_nav}{/block}
-			{block name=quick_search_games}{/block}
+{block name=left_tile}
+{include file='html/admin/left_nav.html'}
+{/block}
+
 		</div>
 		<div class="content_box_cpanel" id="column-right-cpanel">
-			{block name=user_main}{/block}
-			{block name=main_stats}{/block}
-			{block name=welcome}{/block}
-			{block name=user_stats}{/block}
-			{block name=user_detail}{/block}
-			{block name=user_statistics}{/block}
-			{block name=user_search}{/block}
-			{block name=user_karma}{/block}
-			{block name=did_you_know}{/block}
-			{block name=trivia_quotes}{/block}
-			{block name=link_addnew}{/block}
-			{block name=link_modlist}{/block}
-			{block name=link_mod}{/block}
-			{block name=link_cat}{/block}
-			{block name=games_main}{/block}
-			{block name=games_list}{/block}
-			{block name=games_detail}{/block}
+			{block name=main_tile}{/block}
 		</div>
 	</div>
 {/block}

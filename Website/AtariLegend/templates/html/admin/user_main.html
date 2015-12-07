@@ -16,6 +16,7 @@
 The main Users page
 ************************************************************************************************
 *}
+{extends file='html/admin/frontpage.html'}
 {block name=java_script}
 <script type="text/javascript">
 function SyncKarma()
@@ -34,6 +35,50 @@ function SyncKarma()
     } 
 }
 </script>
+{/block}
+{block name=main_tile}
+
+{block name=user_main}
+<div class="standard_tile" id="user_main">
+	<h1>USER ADMIN</h1>
+	<div class="standard_tile_line"></div>
+	<div class="standard_tile_text">
+		<div class="left_nav_section">
+			This is the user area. Overhere you can maintain user accounts of the AL website! There are currently 
+			<b>{$nr_users}</b> users in the DB.
+		</div> 
+		<br><br>
+		<form action="../user/user_search.php" method="get" name="user_search">
+			<fieldset>
+			<legend>User Search</legend>
+				<div class="user_main_container">
+					<div class="user_main_child" id="user_main_child_1">
+						By name : &nbsp;
+					</div>
+					<div class="user_main_child" id="user_main_child_2">
+						<select name="userbrowse" id="small_select">
+							<option value="" SELECTED>-</option>
+							{html_options values=$az_value output=$az_output}
+						</select>
+						<input type="text" name="usersearch" value="" class="standard_tile_input_small">&nbsp;
+					</div>
+					<div class="user_main_child" id="user_main_child_3">
+						<input type="submit" value="Search" class="topbutton_cpanel_small">
+						<input type="hidden" name="action" id="action" value="search">
+					</div>
+				</div>
+			<br>
+			</fieldset>
+		</form>
+		<br>
+		<br>
+		<div class="centered_fieldset"><a href="../user/karma_sync.php" class="standard_tile_link_cpanel" onclick="SyncKarma(); return false;">Karma Re-Sync</a></div>
+		<br>
+		{if isset($message)}
+			<div class="left_nav_section">{$message}</div><br>
+		{/if}
+	</div>
+</div>
 {/block}
 {block name=main_stats}	
 <div class="standard_tile" id="{$main_stats}">
@@ -101,46 +146,4 @@ function SyncKarma()
 	</div>
 </div>
 {/block}
-{block name=user_main}
-
-<div class="standard_tile" id="user_main">
-	<h1>USER ADMIN</h1>
-	<div class="standard_tile_line"></div>
-	<div class="standard_tile_text">
-		<div class="left_nav_section">
-			This is the user area. Overhere you can maintain user accounts of the AL website! There are currently 
-			<b>{$nr_users}</b> users in the DB.
-		</div> 
-		<br><br>
-		<form action="../user/user_search.php" method="get" name="user_search">
-			<fieldset>
-			<legend>User Search</legend>
-				<div class="user_main_container">
-					<div class="user_main_child" id="user_main_child_1">
-						By name : &nbsp;
-					</div>
-					<div class="user_main_child" id="user_main_child_2">
-						<select name="userbrowse" id="small_select">
-							<option value="" SELECTED>-</option>
-							{html_options values=$az_value output=$az_output}
-						</select>
-						<input type="text" name="usersearch" value="" class="standard_tile_input_small">&nbsp;
-					</div>
-					<div class="user_main_child" id="user_main_child_3">
-						<input type="submit" value="Search" class="topbutton_cpanel_small">
-						<input type="hidden" name="action" id="action" value="search">
-					</div>
-				</div>
-			<br>
-			</fieldset>
-		</form>
-		<br>
-		<br>
-		<div class="centered_fieldset"><a href="../user/karma_sync.php" class="standard_tile_link_cpanel" onclick="SyncKarma(); return false;">Karma Re-Sync</a></div>
-		<br>
-		{if isset($message)}
-			<div class="left_nav_section">{$message}</div><br>
-		{/if}
-	</div>
-</div>
 {/block}

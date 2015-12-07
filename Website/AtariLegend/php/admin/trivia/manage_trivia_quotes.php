@@ -34,6 +34,6 @@ include("../../includes/common.php");
 $smarty->assign('left_nav', 'leftnav_position_triviaquotes');	
 		
 //Send all smarty variables to the templates
-$smarty->display('extends:../../../templates/html/admin/main.html|../../../templates/html/admin/frontpage.html|../../../templates/html/admin/manage_trivia_quotes.html|../../../templates/html/admin/left_nav.html');
+$smarty->display('file:../../../templates/html/admin/manage_trivia_quotes.html');
 
 ?>

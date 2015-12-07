@@ -65,5 +65,6 @@ $smarty->assign('left_nav', 'left_nav_position_front');
 $smarty->assign('main_stats', 'main_stats_position_front');
 		
 //Send all smarty variables to the templates
-$smarty->display('extends:../../../templates/html/admin/main.html|../../../templates/html/admin/frontpage.html|../../../templates/html/admin/start_page.html|../../../templates/html/admin/left_nav.html');
+
+$smarty->display('file:html/admin/start_page.html');
 ?>

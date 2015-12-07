@@ -58,5 +58,5 @@ while($category_row = $website->fetch_array(MYSQLI_BOTH))
 $smarty->assign('left_nav', 'leftnav_position_linkcat');
 
 //Send all smarty variables to the templates
-$smarty->display('extends:../../../templates/html/admin/main.html|../../../templates/html/admin/frontpage.html|../../../templates/html/admin/link_cat.html|../../../templates/html/admin/left_nav.html');
+$smarty->display('file:../../../templates/html/admin/link_cat.html');
 ?>

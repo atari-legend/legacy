@@ -143,7 +143,7 @@ $smarty->assign('left_nav', 'leftnav_position_userstatistics');
 $smarty->assign('user_id_selected', $user_id_selected);
 
 //Send all smarty variables to the templates
-$smarty->display('extends:../../../templates/html/admin/main.html|../../../templates/html/admin/frontpage.html|../../../templates/html/admin/left_nav.html|../../../templates/html/admin/user_statistics.html');
+$smarty->display('file:../../../templates/html/admin/user_statistics.html');
 
 //close the connection
 mysqli_close($mysqli);

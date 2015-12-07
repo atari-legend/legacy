@@ -131,7 +131,7 @@ $sql_user = $mysqli->query("SELECT user_id,userid,karma FROM users");
 $smarty->assign('left_nav', 'leftnav_position_karma');	
 	
 //Send all smarty variables to the templates
-$smarty->display('extends:../../../templates/html/admin/main.html|../../../templates/html/admin/frontpage.html|../../../templates/html/admin/user_karmasync.html|../../../templates/html/admin/left_nav.html');
+$smarty->display('file:../../../templates/html/admin/user_karmasync.html');
 
 //close the connection
 mysqli_close($mysqli);

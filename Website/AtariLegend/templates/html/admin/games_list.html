@@ -15,6 +15,7 @@
 The main game page
 ************************************************************************************************
 *}
+{extends file='html/admin/frontpage.html'}
 {block name=java_script}
 <script type="text/javascript">
 function gameinsert()
@@ -43,6 +44,10 @@ function gameinsert()
 }
 </script>
 {/block}
+{block name=left_tile}
+{include file='html/admin/quick_search_games.html'}
+{/block}
+{block name=main_tile}
 {block name=games_list}
 
 
@@ -142,4 +147,5 @@ function gameinsert()
 <br>
 <div align="center"><a href="javascript:history.go(-1)" class="standard_tile_link">back</a></div>
 <br>
+{/block}
 {/block}
