@@ -15,6 +15,7 @@
 The main game page
 ************************************************************************************************
 *}
+{extends file='html/admin/frontpage.html'}
 {block name=java_script}
 <script type="text/javascript">
 function gameinsert()
@@ -43,9 +44,11 @@ function gameinsert()
 }
 </script>
 {/block}
+{block name=left_tile}
+{include file='html/admin/quick_search_games.html'}
+{/block}
+{block name=main_tile}
 {block name=games_main}
-
-
 <div class="standard_tile" id="games_main">
 	<h1>ADD/EDIT A GAME</h1>
 	<div class="standard_tile_line"></div>
@@ -264,5 +267,5 @@ function gameinsert()
 	</div>	
 </div>	
 {/block}
-
+{/block}
 

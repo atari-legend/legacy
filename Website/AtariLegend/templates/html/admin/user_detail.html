@@ -16,6 +16,7 @@
 User detail page. Overhere you can maintain the log on data of a user and have a look at his activities.
 *********************************************************************************************************
 *}
+{extends file='html/admin/frontpage.html'}
 {block name=java_script}
 <script type="text/javascript">
 function delete_user() 
@@ -40,6 +41,7 @@ function user_stats()
 }
 </script>
 {/block}
+{block name=main_tile}
 {block name=user_detail}	
 <div class="standard_tile" id="user_details">
 	<h1>USER DETAILS</h1>
@@ -139,4 +141,5 @@ function user_stats()
 		<div class="standard_table_center"><a href="../user/user_main.php" class="standard_tile_link">back</a></div>
 	</div>
 </div>
+{/block}
 {/block}

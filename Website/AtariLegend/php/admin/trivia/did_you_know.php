@@ -37,6 +37,6 @@ include("../../includes/common.php");
 $smarty->assign('left_nav', 'leftnav_position_didyouknow');	
 		
 //Send all smarty variables to the templates
-$smarty->display('extends:../../../templates/html/admin/main.html|../../../templates/html/admin/frontpage.html|../../../templates/html/admin/did_you_know.html|../../../templates/html/admin/left_nav.html');
+$smarty->display('file:../../../templates/html/admin/did_you_know.html');
 
 ?>

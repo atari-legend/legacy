@@ -143,7 +143,7 @@ if (isset($action) and $action == 'modify_user')
 $smarty->assign('left_nav', 'leftnav_position_userdetails');	
 
 //Send all smarty variables to the templates
-$smarty->display('extends:../../../templates/html/admin/main.html|../../../templates/html/admin/frontpage.html|../../../templates/html/admin/left_nav.html|../../../templates/html/admin/user_detail.html');
+$smarty->display('file:../../../templates/html/admin/user_detail.html');
 
 
 //close the connection

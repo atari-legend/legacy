@@ -16,6 +16,7 @@
 // This is the detail page of a game. Change all the specifics over here!
 //**************************************************************************************** 
 *}
+{extends file='html/admin/frontpage.html'}
 {block name=java_script}
 <script type="text/javascript">
 function deletegame(game_id)
@@ -135,6 +136,10 @@ function browseDeveloper(str) {
 </script>
 
 {/block}
+{block name=left_tile}
+{include file='html/admin/quick_search_games.html'}
+{/block}
+{block name=main_tile}
 {block name=games_detail}
 
 <div class="standard_tile" id="games_detail">
@@ -510,5 +515,5 @@ function browseDeveloper(str) {
 	</div>
 </div>
 
-	
+{/block}	
 {/block}
