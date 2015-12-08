@@ -28,8 +28,7 @@ include("../../includes/common.php");
 		//Insert the game in the game table
 		$sql_game = $mysqli->query("INSERT INTO game (game_name) VALUES ('$newgame')") or die ("Couldn't insert game into database");  
 
-		$message = "Game has been inserted into the database";
-		$smarty->assign("message",$message);
+		$_SESSION['edit_message'] = "The game $newgame has been inserted into the database";
 		
 		$new_game_id = $mysqli->insert_id;
 

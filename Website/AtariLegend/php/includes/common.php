@@ -129,6 +129,13 @@ if (login_check($mysqli) == true) {
 		   'permission' => $_SESSION['permission']));
 }
 
+//transfer edit messages to template
+if( isset($_SESSION['edit_message']) )
+{
+	$smarty->assign('edit_message', $_SESSION['edit_message']);
+    unset($_SESSION['edit_message']);
+}
+
 
 if (SITESTATUS=="offline") {
 

@@ -25,7 +25,9 @@
 		<title> Atari Legend | Legends Never Die</title>
 		<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0" />
 		<link href="{$css_file}" type="text/css" rel="stylesheet">
+		<link href="../../../templates/html/includes/main_css/notify-osd.css" hreflang="en" rel="stylesheet" type="text/css">
 		<script type="text/javascript" src="../../../templates/html/includes/js/jquery-2.1.4.min.js"></script> <!-- main jquery stuff -->
+		<script src="../../../templates/html/includes/js/notify-osd.js"></script>
 		<script type="text/javascript"> <!-- script needed for the side menu -->
 			//<![CDATA[ 
 			$(window).load(function(){
@@ -35,6 +37,21 @@
 			  });
 			});
 			//]]> 
+			
+	{if isset($edit_message)}
+
+		$( document ).ready(function() {
+            $.notify_osd.create({
+				'text'        : '{$edit_message}',             // notification message
+				'icon'        : '../templates/0/icons/star.png', // icon path, 48x48
+				'sticky'      : false,             // if true, timeout is ignored
+				'timeout'     : 4,                 // disappears after 6 seconds
+				'dismissable' : true               // can be dismissed manually
+				});
+		});
+
+	{/if}
+			
 		</script>
 		{block name=java_script}{/block}
 	</head>
