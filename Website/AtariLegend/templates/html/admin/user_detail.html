@@ -22,14 +22,14 @@ User detail page. Overhere you can maintain the log on data of a user and have a
 function delete_user() 
 {
 	document.getElementById('user').method="post";
-	document.getElementById('user').action="../user/user_main.php?action=delete_user";
+	document.getElementById('user').action="../user/db_user.php?action=delete_user";
    	document.getElementById('user').submit();
 }
 
 function reset_pwd() 
 {
 	document.getElementById('user').method="post";
-	document.getElementById('user').action="../user/user_detail.php?action=reset_pwd&user_id_selected={$users.user_id}";
+	document.getElementById('user').action="../user/db_user.php?action=reset_pwd&user_id_selected={$users.user_id}";
    	document.getElementById('user').submit();
 }
 
@@ -54,7 +54,7 @@ function user_stats()
 		<br><br>
 		<fieldset>
 			<legend>User details</legend>
-			<form action="../user/user_detail.php?action=modify_user&amp;user_id_selected={$users.user_id}" method="post" name="user" id="user">
+			<form action="../user/db_user.php?action=modify_user&amp;user_id_selected={$users.user_id}" method="post" name="user" id="user">
 			<div class="user_details_container">
 				<div class="user_details_child" id="child_1">
 					<div class="user_details_row">
@@ -121,7 +121,7 @@ function user_stats()
 				<input type="submit" value="Delete" class="topbutton_cpanel_small">
 				</form>
 			{else}
-				<form enctype="multipart/form-data" action="../user/user_detail.php?user_id_selected={$users.user_id}" method="post" name="avatar" id="avatar">
+				<form enctype="multipart/form-data" action="../user/db_user.php?user_id_selected={$users.user_id}" method="post" name="avatar" id="avatar">
 					Attach image
 				<br><br>
 				<input type="file" name="image">
