@@ -8,6 +8,7 @@
 *   actual update        : Creation of file
 *
 *   Id: main.html,v 0.1 2015/04/14 23:09 ST Graveyard
+*	Id: main.html,v 0.2 2015/12/05 14:56 ST Graveyard - 1920 compatible/New menu/HTML validated
 *
 ***************************************************************************/
 
@@ -58,18 +59,18 @@
 		</script>
 	</head>
 	<body id="body">
-		<div id="wrapper">
+		<div id="wrapper_header">
 			<header>
 				<div id="top_background">
 					<!-- This is the side menu only visible for smartphones (max resolution 480pc)-->				
 					<div class="container" style="position: fixed;">
 					  <div id="sidebar">
 						  <ul>
-							<li><a href="#" title="Games" class="top_button"><button type="button" class="topbutton" id="games_side">GAMES</button></a></li>
-							<li><a href="#" title="Menus" class="top_button"><button type="button" class="topbutton" id="menus_side">MENUS</button></a></li>
-							<li><a href="#" title="Demos" class="top_button"><button type="button" class="topbutton" id="demos_side">DEMOS</button></a></li>
-							<li><a href="#" title="Links" class="top_button"><button type="button" class="topbutton" id="links_side">LINKS</button></a></li>
-							<li><a href="#" title="About" class="top_button"><button type="button" class="topbutton" id="about_side">ABOUT</button></a></li>
+							<li><button type="button" class="topbutton" id="games_side" onClick="">GAMES</button></li>
+							<li><button type="button" class="topbutton" id="menus_side" onClick="">MENUS</button></li>
+							<li><button type="button" class="topbutton" id="demos_side" onClick="">DEMOS</button></li>
+							<li><button type="button" class="topbutton" id="links_side" onClick="">LINKS</button></li>
+							<li><button type="button" class="topbutton" id="about_side" onClick="">ABOUT</button></li>
 						  </ul>
 						  <ul id="search_ul">
 							  <li id="searchbutton_side"><input id="search_text_side" type="text" name="search_text" maxlength="11" /></li>
@@ -115,25 +116,30 @@
 				</div>			
 				<nav id="main_nav">
 					<ul id="main_nav_ul">
-						<li><a href="#" title="Home"><img id="home" src="{$img_dir}menu_home.png" alt="home" /></a></li>
-						<li><a href="#" title="Games" class="top_button"><button type="button" class="topbutton" id="games">GAMES</button></a></li>
-						<li><a href="#" title="Menus" class="top_button"><button type="button" class="topbutton" id="menus">MENUS</button></a></li>
-						<li><a href="#" title="Demos" class="top_button"><button type="button" class="topbutton" id="demos">DEMOS</button></a></li>
-						<li><a href="#" title="Links" class="top_button"><button type="button" class="topbutton" id="links">LINKS</button></a></li>
-						<li><a href="#" title="About" class="top_button"><button type="button" class="topbutton" id="about">ABOUT</button></a></li>
-						<li><div class="searchbutton" id="search_text"><input type="text" id="auto" /></div></li>
-						<li><a href="#" title="search"><img id="search" src="{$img_dir}menu_search.png" alt="search" /></a></li>
+						<li><img id="home" src="{$img_dir}menu_home.png" alt="home" onClick=""></li>
+						<li><button type="button" class="topbutton" id="games" onClick="">GAMES</button></li>
+						<li><button type="button" class="topbutton" id="menus" onClick="">MENUS</button></li>
+						<li><button type="button" class="topbutton" id="demos" onClick="">DEMOS</button></li>
+						<li><button type="button" class="topbutton" id="links" onClick="">LINKS</button></li>
+						<li><button type="button" class="topbutton" id="reviews_top" onClick="">REVIEWS</button></li>
+						<li><button type="button" class="topbutton" id="interviews_top" onClick="">INTERVIEWS</button></li>
+						<li><button type="button" class="topbutton" id="scene_top" onClick="">SCENE</button></li>
+						<li><button type="button" class="topbutton" id="about" onClick="">ABOUT</button></li>
+						<li><div class="searchbutton" id="search_text"><input type="text" id="auto"></div></li>
+						<li><img id="search" src="{$img_dir}menu_search.png" alt="search" onClick=""></li>
 					</ul>
 				</nav>	
-			</header>	
-			{block name=main_body}{/block}
-			<footer class="footer">
-				<div class="footer_logo">
-					<br><br><br>
-					<img id="footer_img" src="{$img_dir}footer_logo.png" alt="logo">
-					<h3>&copy; copyright 2004 - {'Y'|date}</h3>
-				</div>
-			</footer>
+			</header>
 		</div>
+		<div id="wrapper">
+			{block name=main_body}{/block}
+		</div>
+		<footer class="footer">
+			<div class="footer_logo">
+				<br><br><br>
+				<img id="footer_img" src="{$img_dir}footer_logo.png" alt="logo">
+				<h3>&copy; copyright 2004 - {'Y'|date}</h3>
+			</div>
+		</footer>
 	</body>
 </html>

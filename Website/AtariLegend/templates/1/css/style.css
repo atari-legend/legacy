@@ -15,8 +15,34 @@ html { overflow-y: scroll;
 	overflow-x: hidden;
 }
 
-body { background: black; font-family: Audiowide, Arial, helvetica, sans-serif;
+body { background-color: black; 
+	  background-image: url(../../../templates/1/images/top_bg_sides.jpg), url(../../../templates/1/images/top_bg_menu.png); 
+	  background-position: left top, left 225px;
+	  background-repeat: repeat-x, repeat-x;
+	  font-family: Audiowide, Arial, helvetica, sans-serif;
 }
+
+@media screen and (min-width: 1920px) { 
+	body {	background-image: url(../../../templates/1/images/top_bg_left.jpg), url(../../../templates/1/images/top_bg_right.jpg);
+			background-position: left 2px, right 2px;
+			background-repeat: no-repeat, repeat-x;
+		 }
+}
+
+@media screen and (min-width: 1921px) { 
+	body { 	background-image: url(../../../templates/1/images/top_bg_sides.jpg), url(../../../templates/1/images/top_bg_menu.png), url(../../../templates/1/images/main_bg.png), url(../../../templates/1/images/main_bg.png); 
+			background-position: left top, left 225px, -3% 45%, 95% 125%, left top;
+			background-repeat: repeat-x, repeat-x, no-repeat, no-repeat;
+		}
+}
+
+@media screen and (max-width: 1279px)
+{	
+	body { background-image: url(../../../templates/1/images/top_bg_sides.jpg); }
+}
+
+/*body { background: black; font-family: Audiowide, Arial, helvetica, sans-serif;
+}*/
 
 img { display: block;
 }
@@ -34,9 +60,16 @@ footer, header, hgroup, menu, nav, section {
 ------------------------------------------------------------ */
 #wrapper {
 	width: 100%;	
+	max-width: 1920px;
+	margin: auto;
+} 
+
+#wrapper_header {
+	width: 100%;	
 	max-width: 1280px;
 	margin: auto;
 } 
+ 
  
 #main {
 	width: 100%;
@@ -345,7 +378,8 @@ footer, header, hgroup, menu, nav, section {
 			}
 	
 /*-----some code for the skin submenu-------*/
-	
+	#skin_side{width:170px;}
+		
 	.clearfix:after {
 		display:block;
 		clear:both;
@@ -516,7 +550,7 @@ header nav input{
   font-family: Audiowide,Arial,helvetica,sans-serif;
   color: #182727;
   height: 60px;
-  width: 170px;
+  width: 184px;
   font-size: 20px;
   border-bottom: 3px solid #008b8b;
   border-left: 1px solid #007878;
@@ -529,15 +563,6 @@ header nav input{
   color: #182727;
   text-decoration:none;
   border-bottom: 3px solid #006f6f;
-}
-
-.top_button:visited {
-  text-decoration:none;
-}
-
-.top_button:link {
-  text-decoration:none;
-  color: #182727;
 }
 
 .searchbutton
@@ -598,6 +623,26 @@ header nav input{
   text-decoration:none;
 }
 
+/* responsiveness of the top menu for resolutions from 1281 to 1920 */
+@media screen and (max-width: 1919px)
+{	
+	#reviews_top{display:none;}
+}
+
+@media screen and (max-width: 1719px)
+{	
+	#interviews_top {display:none;}
+}
+
+@media screen and (max-width: 1534px)
+{	
+	#scene_top {display:none;}
+}
+
+@media screen and (max-width: 1350px)
+{	
+	.topbutton{width: 170px;}
+}
 
 /*---------------------------------------------------------- 
  Main site
@@ -633,6 +678,10 @@ Standard tile settings
 	 margin-top:0;
 }
 
+.column-wide-right_1920 {display: none;	}
+.column-wide-left_1920 {display: none;}
+.column-wide-center_1920{display: none;}
+
 /* 2 tiles and background welcome image */
 @media screen and (min-width: 640px) and (max-width: 800px)
 {
@@ -662,6 +711,18 @@ Standard tile settings
 @media screen and (min-width: 801px) { 
 	.column-right-tab {display:none}
 	.column-left-tab {display:none}
+}
+
+/*  4 tiles and background welcome image */
+@media screen and (min-width: 1495px){ 
+	.column-wide-left { width: 49%;}
+	.column-wide-center_1920 { display:inline; width: 100%;}
+	.column-wide-right_1920 { width: 24.75%; float: right; display:inline;}
+	.column-wide-left_1920 { width: 24.75%; float: left; display:inline;}
+	.column-wide-right {display: none;}
+	.column-left {display: none;}
+	.column-center{display: none;}
+	.column-right {display: none;}
 }
 
 .standard_tile  { width: 100%; 
@@ -712,12 +773,62 @@ Standard tile settings
 	    border-bottom: 2px solid #01b5b5;
 }
 
-@media screen and (max-width: 1150px) { 
+@media screen and (max-width: 5501px) { 
+.standard_tile_title{ margin-top : 48.5%;
+	}
+}
+
+@media screen and (max-width: 3501px) { 
+.standard_tile_title{ margin-top : 48%;
+	}
+}
+
+@media screen and (max-width: 1921px) { 
+.standard_tile_title{ margin-top : 47.5%;
+	}
+}
+
+@media screen and (max-width: 1801px) { 
+.standard_tile_title{ margin-top : 47%;
+	}
+}
+
+@media screen and (max-width: 1701px) { 
+.standard_tile_title{ margin-top : 46%;
+	}
+}
+
+@media screen and (max-width: 1601px) { 
+.standard_tile_title{ margin-top : 45%;
+	}
+}
+
+@media screen and (max-width: 1501px) { 
+.standard_tile_title{ margin-top : 46.2%;
+	}
+}
+
+@media screen and (max-width: 1401px) { 
+.standard_tile_title{ margin-top : 47%;
+	}
+}
+
+@media screen and (max-width: 1301px) { 
+.standard_tile_title{ margin-top : 46%;
+	}
+}
+
+@media screen and (max-width: 1201px) { 
 .standard_tile_title{ margin-top : 44.5%;
 	}
 }
 
- @media screen and (max-width: 980px) { 
+@media screen and (max-width: 1101px) { 
+.standard_tile_title{ margin-top : 43%;
+	}
+}
+
+ @media screen and (max-width: 1001px) { 
 .standard_tile_title{ margin-top : 42%;
 	}
 }
@@ -733,7 +844,7 @@ Standard tile settings
 }
 
 @media screen and (max-width: 700px) { 
-.standard_tile_title{ margin-top : 43%;
+.standard_tile_title{ margin-top : 41.5%;
 	}
 }
 
@@ -747,17 +858,17 @@ Standard tile settings
 	}
 }
 
-@media screen and (max-width: 450px) { 
-.standard_tile_title{ margin-top : 47%;
+@media screen and (max-width: 480px) { 
+.standard_tile_title{ margin-top : 47.5%;
 	}
 }
 
 @media screen and (max-width: 360px) { 
-.standard_tile_title{ margin-top : 45%;
+.standard_tile_title{ margin-top : 44%;
 	}
 }
 
-@media screen and (max-width: 300px) { 
+@media screen and (max-width: 320px) { 
 .standard_tile_title{ margin-top : 41%;
 	}
 }
@@ -1045,7 +1156,7 @@ Standard tile settings
 		padding-right: 5%;
 	}	
 	
-#welcome_text { font-size : 11pt; 
+.welcome_text { font-size : 11pt; 
 		padding-bottom: 10px;	
 		padding-top: 10px;	
 		color : #bcbdbd;
@@ -1072,7 +1183,7 @@ Standard tile settings
 /*---------------------------------------------------------- 
 logon tile --> front page
 ------------------------------------------------------------ */
-#logon { margin-top: 20px;
+.logon { margin-top: 20px;
 		float : right;
 		margin-bottom : 20px;
 		width: 100%;
@@ -1120,12 +1231,12 @@ logon tile --> front page
 
 /* 2 tiles and background welcome image */
 @media screen and (min-width: 640px) and (max-width: 800px) { 
-	#logon { margin-top: 0px;}
+	.logon { margin-top: 0px;}
 }
 
 /* 1 tile */
 @media screen and (max-width: 639px) { 
-	#logon  { width: 100%; 
+	.logon  { width: 100%; 
 	margin-top: 20px;	
 	margin-bottom: 20px;
 	}
@@ -1134,53 +1245,65 @@ logon tile --> front page
 /*---------------------------------------------------------- 
 latest news tile --> front page
 ------------------------------------------------------------ */
-#latest_news { margin-right: 20px;
-			margin-bottom: 20px;
-}
+.latest_news { margin-bottom: 20px;}
 
 @media screen and (min-width: 640px) and (max-width: 800px) { 
-	#latest_news { margin-top: 395px;
+	.latest_news { margin-top: 395px;
 	}
+}
+
+@media screen and (min-width: 1495px){ 
+	.latest_news   { float: left; width: 48%;} 
 }
 
 /*---------------------------------------------------------- 
 screenstar tile - front page
 ------------------------------------------------------------ */
-#screenstar_position_front { margin-bottom: 20px;}
+.screenstar_position_front { margin-bottom: 20px;}
+
+@media screen and (min-width: 1495px){ 
+	.screenstar_position_front  { margin-top: 20px; width: 94%;} 
+}
 
 
 /*---------------------------------------------------------- 
 datequote tile - front page
 ------------------------------------------------------------ */
-#datequote_position_front { 	margin-bottom: 20px; }
+.datequote_position_front { 	margin-bottom: 20px; }
 
-#datequote_bg { background: url(../../../templates/1/images/datequote_bg.jpg) ;}
+.datequote_bg { background: url(../../../templates/1/images/datequote_bg.jpg) ;}
 
 /* 1 and 2 tiles */
 @media screen and (max-width: 800px) { 
-	#datequote_position_front { margin-top: 0px;}
+	.datequote_position_front { margin-top: 0px;}
+}
+
+@media screen and (min-width: 1495px){ 
+	.datequote_position_front { float:left; width: 94%;} 
 }
 
 
-#datequote_day{ font-size : 85pt;
+.datequote_bg p {text-align: center;}
+
+.datequote_day{ font-size : 85pt;
 		color : white; 
 		margin-top: 0px;
 		margin-bottom: -20px;
 }
 
-#datequote_month { font-size : 30pt;
+.datequote_month { font-size : 30pt;
 		color : white;
 		margin-top: -10px;
 		margin-bottom: -10px;
 	}
 
-#datequote_year { font-size : 55pt;
+.datequote_year { font-size : 55pt;
 		text-align: center;
 		color : #cccccc; 
 		margin-top: -10px;
 	}
 
-#datequote_text { background: rgb(0, 80, 80) transparent;   /* Fallback for web browsers that doesn't support RGBa */
+.datequote_text { background: rgb(0, 80, 80) transparent;   /* Fallback for web browsers that doesn't support RGBa */
         background: rgba(0, 80, 80, 0.6);   /* RGBa with 0.6 opacity */
 		filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#005050, endColorstr=#005050);  /* For IE 5.5 - 7*/
 		-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#005050, endColorstr=#005050)";  /* For IE 8*/ 
@@ -1192,59 +1315,95 @@ datequote tile - front page
 /*---------------------------------------------------------- 
 Who is it - front page
 ------------------------------------------------------------ */
-#whoisit_position_front { margin-bottom: 20px; }
+.whoisit_position_front { margin-bottom: 20px; }
+
+@media screen and (min-width: 1495px){ 
+	.whoisit_position_front  { float:right;} 
+}
 
 
 /*---------------------------------------------------------- 
 Latest reviews tile - front page
 ------------------------------------------------------------ */
-#latest_reviews{ margin-bottom: 20px;}	
+.latest_reviews{ margin-bottom: 20px;}	
 		
+@media screen and (min-width: 1495px){ 
+	.latest_reviews  { width: 49%; float: right;} 
+}
+
 
 /*---------------------------------------------------------- 
 Did you know tile - front page
 ------------------------------------------------------------ */
-#didyouknow_position_front{ margin-bottom: 20px; }	
-			
+.didyouknow_position_front{ margin-bottom: 20px; }	
+
+@media screen and (min-width: 1495px){ 
+	.didyouknow_position_front  { width: 49%; float: right;} 
+}			
 
 /*---------------------------------------------------------- 
 Statistics tile - front page
 ------------------------------------------------------------ */
-#statistics_position_front{ margin-bottom: 20px; }	
+.statistics_position_front{ margin-bottom: 20px; }	
 
 .statistics_dark { color: #cccccc; }
+
+@media screen and (min-width: 1495px){ 
+	.statistics_position_front  {float:left; width:100%;} 
+}
 	
 /*---------------------------------------------------------- 
 Hotlinks tile - front page
 ------------------------------------------------------------ */
-#hotlinks_position_front{ margin-bottom: 20px; }	
-				
+.hotlinks_position_front{ margin-bottom: 20px; }	
+
+@media screen and (min-width: 1495px){ 
+	.hotlinks_position_front {width: 94%; float: left;} 
+}				
 
 /*---------------------------------------------------------- 
 contact tiles - front page
 ------------------------------------------------------------ */
-#contact_tiles { margin-bottom: 20px;
+.contact_tiles { 
+			width: 100%; 
+			margin-bottom: 20px;
 			background: none;
 			border: none;
 }
 
-#contact_tiles  img{ margin-bottom: 20px;
+.contact_tiles  img{ margin-bottom: 20px;
 			max-width: 100%;
 }
-			
+
+@media screen and (min-width: 1495px){ 
+	.contact_tiles_center_right{ width: 49%; float: right;} 
+	.contact_tiles_center_left{ width: 48%;} 	
+	.contact_tiles_right{ width: 94%; float: left;} 
+	.contact_tiles_left{ float:left; width:100%;} 	
+	.contact_tiles_center_right  img{ margin-bottom: 20px;
+			max-width: 100%;}
+	.contact_tiles_right  img{ margin-bottom: 20px;
+			max-width: 100%;}
+	.contact_tiles_center_left  img{ margin-bottom: 20px;
+			max-width: 100%;}
+	.contact_tiles_left  img{ margin-bottom: 20px;
+			max-width: 100%;}
+}	
+		
 /*---------------------------------------------------------- 
  Footer
 ------------------------------------------------------------ */
 .footer{ width: 100%;
 		float: left;	
 		border-top: 10px solid #01b5b5;
-		background: url(../images/footer_bg.jpg) 0 0 no-repeat;
+		background: url(../images/bottom_bg_sides.jpg) left 0 repeat-x;
 	}
 
 .footer_logo{ color: white;
 		font-size: 10pt;
 		text-align: center;
 		height : 120px;
+		background: url(../images/footer_bg.jpg) center 0 no-repeat;
 	}
 
 #footer_img {margin-left: auto;
@@ -1725,7 +1884,7 @@ legend {
 Front page
 ------------------------------------------------------------ */
 #user_stats{ float: right; width:48%; margin-bottom: 30px;}	
-#welcome_cpanel{ margin-top: 390x; float: left; width:48%; margin-bottom: 30px;}	
+#welcome_cpanel{ margin-top: 390px; float: left; width:48%; margin-bottom: 30px;}	
 #left_nav_position_front{ margin-top: 80px; margin-bottom: 30px; float: left;}
 #main_stats_position_front{ margin-top: 80px; margin-bottom: 30px;}
 	
@@ -2211,7 +2370,6 @@ Games main
 @media screen and (max-width: 399px) { 
 	#quick_search_options { width:75%; margin-left:15%;}
 	}
-}
 
 @media screen and (max-width: 599px) { 
 	#games_main_two{ display: none;}
