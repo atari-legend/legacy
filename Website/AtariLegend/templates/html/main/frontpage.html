@@ -145,7 +145,7 @@
 
 		// run the currently selected effect
 		function runEffect() {
-			
+				
 			if ($(window).width() > 1494)
 			{
 				$( ".latest_news" ).effect("slide", { direction: "down" }, 1000 );
@@ -153,12 +153,9 @@
 				$( ".whoisit_position_front" ).effect("slide", { direction: "right" }, 1000 );
 				$( ".logon" ).effect("slide", { direction: "right" }, 1000 );
 				$( ".datequote_position_front" ).effect("slide", { direction: "left" }, 1000 );
-				$( ".didyouknow_position_front" ).effect("slide", { direction: "down" }, 1000 );
+				$( ".didyouknow_position_front" ).effect("slide", { direction: "right" }, 1000 );
 				$( ".statistics_position_front" ).effect("slide", { direction: "right" }, 1000 );
-				$( ".contact_tiles_right" ).effect("slide", { direction: "left" }, 1000 );
-				$( ".contact_tiles_left" ).effect("slide", { direction: "right" }, 1000 );
-				$( ".contact_tiles_center_left" ).effect("slide", { direction: "down" }, 1000 );
-				$( ".contact_tiles_center_right" ).effect("slide", { direction: "down" }, 1000 );
+				$( ".contact_tiles" ).effect("slide", { direction: "down" }, 1000 );
 				$( ".screenstar_position_front" ).effect("slide", { direction: "left" }, 1000 );
 				$( ".latest_reviews" ).effect("slide", { direction: "down" }, 1000 );
 				$( ".hotlinks_position_front" ).effect("slide", { direction: "left" }, 1000 );
@@ -227,10 +224,6 @@
 			
 			<!--Start "hotlinks" tile-->
 			{block name=hotlinks_tile}{/block}	
-			
-			<div class="contact_tiles_right">
-				<a href="#"><img src="{$img_dir}email.png" alt="email"></a>
-			</div>
 		</div>
 	
 		<!--this column is only visible with 3 and 2 columns-->
@@ -264,17 +257,12 @@
 				<!--Start latest reviews tile-->
 				{block name=latest_reviews_tile}{/block}
 				
-				<!--Start "Did you know" tile-->
-				{block name=did_you_know_tile}{/block}	
-				
-				<div class="contact_tiles_center_right">
+				<div class="contact_tiles">
+					<a href="#"><img src="{$img_dir}email.png" alt="email"></a>
 					<a href="#"><img src="{$img_dir}facebook.png" alt="facebook"></a>
-				</div>
-				
-				<div class="contact_tiles_center_left">
 					<a href="#"><img src="{$img_dir}jukebox.png" alt="jukebox"></a>
-				</div>
-
+					<a href="#"><img src="{$img_dir}chat.png" alt="chat"></a>
+				</div>	
 			</div>			
 		</div>	
 
@@ -285,13 +273,12 @@
 			
 			<!--Start "Who is it" tile-->
 			{block name=who_is_it_tile}{/block}
+							
+			<!--Start "Did you know" tile-->
+			{block name=did_you_know_tile}{/block}	
 						
 			<!--Start "statistics" tile-->
 			{block name=statistics_tile}{/block}
-
-			<div class="contact_tiles_left">
-				<a href="#"><img src="{$img_dir}chat.png" alt="chat"></a>
-			</div>
 		</div>		
 		
 		<!--this column is only visible with 3 columns-->
