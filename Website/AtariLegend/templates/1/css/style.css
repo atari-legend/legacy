@@ -16,16 +16,20 @@ html { overflow-y: scroll;
 }
 
 body { background-color: black; 
-	  background-image: url(../../../templates/1/images/top_bg_sides.jpg), url(../../../templates/1/images/top_bg_menu.png); 
-	  background-position: left top, left 225px;
-	  background-repeat: repeat-x, repeat-x;
 	  font-family: Audiowide, Arial, helvetica, sans-serif;
+}
+
+
+@media screen and (min-width: 1281px){
+	body { background-image: url(../../../templates/1/images/top_bg_menu.png), url(../../../templates/1/images/top_bg_sides.jpg); 
+	  background-position: left 225px,left top;
+	  background-repeat: repeat-x,repeat-x;}
 }
 
 @media screen and (min-width: 1920px) { 
 	body {	background-image: url(../../../templates/1/images/top_bg_left.jpg), url(../../../templates/1/images/top_bg_right.jpg);
 			background-position: left 2px, right 2px;
-			background-repeat: no-repeat, repeat-x;
+			background-repeat: no-repeat, no-repeat;
 		 }
 }
 
@@ -35,12 +39,7 @@ body { background-color: black;
 			background-repeat: repeat-x, repeat-x, no-repeat, no-repeat;
 		}
 }
-
-@media screen and (max-width: 1279px)
-{	
-	body { background-image: url(../../../templates/1/images/top_bg_sides.jpg); }
-}
-
+ 
 /*body { background: black; font-family: Audiowide, Arial, helvetica, sans-serif;
 }*/
 
@@ -378,7 +377,7 @@ footer, header, hgroup, menu, nav, section {
 			}
 	
 /*-----some code for the skin submenu-------*/
-	#skin_side{width:170px;}
+	#skin_side, #games_side,#menus_side,#demos_side,#links_side,#about_side,#music_side,#forum_main_side,#magazines_side{width:170px;}
 		
 	.clearfix:after {
 		display:block;
@@ -387,7 +386,13 @@ footer, header, hgroup, menu, nav, section {
 
 	/*----- Menu Outline -----*/
 	.skin-wrap {
-		width:100%;
+		width:100%;	
+	}
+	
+	@media screen and (max-width: 1919px) { 
+		.skin-wrap {
+			margin-top:41px;
+		}
 	}
 	 
 	.skin-menu {
@@ -466,6 +471,9 @@ footer, header, hgroup, menu, nav, section {
 	#games_side{height: 40px; width: 113px; font-size: 14px;}
 	#menus_side{height: 40px; width: 113px; font-size: 14px;}
 	#demos_side{height: 40px; width: 113px; font-size: 14px;}
+	#forum_main_side{height: 40px; width: 113px; font-size: 14px;}
+	#magazines_side{height: 40px; width: 113px; font-size: 14px;}
+	#music_side{height: 40px; width: 113px; font-size: 14px;}
 	#about_side{height: 40px; width: 113px; font-size: 14px;}
 	#links_side{height: 40px; width: 113px; font-size: 14px;}
 	#skin_side{height: 37px; width: 113px; font-size: 14px;}
@@ -489,17 +497,26 @@ footer, header, hgroup, menu, nav, section {
 	#about { display: none; }
 	#menus { display: none; }
 	#links { display: none; }
+	#forum_top { display: none; }
+	#magazines { display: none; }
+	#music { display: none; }
 }
 
 /* for the high resolutions, we only have the skin switch in the side menu */ 
 @media screen and (min-width: 1280px) {  	
 	#links_side { display: none; }
-	#search_side { display: none; } 
-	#search_text_side{ display: none; } 
 	#games_side { display: none; }
 	#demos_side { display: none; }
 	#about_side { display: none; }
 	#menus_side { display: none; }
+	#music_side{display: none; }
+	#magazines_side{display: none; }
+	#forum_main_side{display: none; }
+}
+
+@media screen and (min-width: 1920px) { 
+	#search_side { display: none; } 
+	#search_text_side{ display: none; } 
 }
 
 /* ---------the main menu below top--------*/
@@ -512,7 +529,7 @@ footer, header, hgroup, menu, nav, section {
 @media screen and (min-width: 1280px){  	
 	.container { position: absolute;}
 	#sidebar {background-color: rgba(0, 0, 0, 0);}
-	header nav { position: absolute; margin-top: 225px; float: center;}
+	header nav { position: absolute; margin-top: 225px;}
 	#main { position: relative; margin-top: 60px;}
 }
 
@@ -626,22 +643,19 @@ header nav input{
 /* responsiveness of the top menu for resolutions from 1281 to 1920 */
 @media screen and (max-width: 1919px)
 {	
-	#reviews_top{display:none;}
+	#search_text{display:none;}
+	#search{display:none;}
+	#about{border-right: 1px solid #007878;}
 }
 
-@media screen and (max-width: 1719px)
+@media screen and (max-width: 1550px)
 {	
-	#interviews_top {display:none;}
+	#home{display:none;}
 }
 
-@media screen and (max-width: 1534px)
+@media screen and (max-width: 1475px)
 {	
-	#scene_top {display:none;}
-}
-
-@media screen and (max-width: 1350px)
-{	
-	.topbutton{width: 170px;}
+	.topbutton{width: 160px;}
 }
 
 /*---------------------------------------------------------- 
@@ -760,7 +774,7 @@ Standard tile settings
 }
 				
 .standard_tile_title{ 
-		background: rgb(0, 80, 80) transparent;   /* Fallback for web browsers that doesn't support RGBa */
+		background: rgb(0, 80, 80)	;   /* Fallback for web browsers that doesn't support RGBa */
         background: rgba(0, 80, 80, 0.6);   /* RGBa with 0.6 opacity */
 		filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#005050, endColorstr=#005050);  /* For IE 5.5 - 7*/
 		-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#005050, endColorstr=#005050)";  /* For IE 8*/ 
@@ -1146,7 +1160,7 @@ Standard tile settings
 		overflow: hidden;
 }
 
-#welcome p { background: rgb(0, 80, 80) transparent;   /* Fallback for web browsers that doesn't support RGBa */
+#welcome p { background: rgb(0, 80, 80);   /* Fallback for web browsers that doesn't support RGBa */
         background: rgba(0, 80, 80, 0.6);   /* RGBa with 0.6 opacity */
 		filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#005050, endColorstr=#005050);  /* For IE 5.5 - 7*/
 		-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#005050, endColorstr=#005050)";  /* For IE 8*/
@@ -1282,7 +1296,6 @@ datequote tile - front page
 	.datequote_position_front { float:left; width: 94%;} 
 }
 
-
 .datequote_bg p {text-align: center;}
 
 .datequote_day{ font-size : 85pt;
@@ -1303,7 +1316,7 @@ datequote tile - front page
 		margin-top: -10px;
 	}
 
-.datequote_text { background: rgb(0, 80, 80) transparent;   /* Fallback for web browsers that doesn't support RGBa */
+.datequote_text { background: rgb(0, 80, 80);   /* Fallback for web browsers that doesn't support RGBa */
         background: rgba(0, 80, 80, 0.6);   /* RGBa with 0.6 opacity */
 		filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#005050, endColorstr=#005050);  /* For IE 5.5 - 7*/
 		-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#005050, endColorstr=#005050)";  /* For IE 8*/ 
@@ -1338,7 +1351,7 @@ Did you know tile - front page
 .didyouknow_position_front{ margin-bottom: 20px; }	
 
 @media screen and (min-width: 1495px){ 
-	.didyouknow_position_front  { width: 49%; float: right;} 
+	.didyouknow_position_front  {float:left; width:100%;} 
 }			
 
 /*---------------------------------------------------------- 
@@ -1374,21 +1387,10 @@ contact tiles - front page
 .contact_tiles  img{ margin-bottom: 20px;
 			max-width: 100%;
 }
-
+	
 @media screen and (min-width: 1495px){ 
-	.contact_tiles_center_right{ width: 49%; float: right;} 
-	.contact_tiles_center_left{ width: 48%;} 	
-	.contact_tiles_right{ width: 94%; float: left;} 
-	.contact_tiles_left{ float:left; width:100%;} 	
-	.contact_tiles_center_right  img{ margin-bottom: 20px;
-			max-width: 100%;}
-	.contact_tiles_right  img{ margin-bottom: 20px;
-			max-width: 100%;}
-	.contact_tiles_center_left  img{ margin-bottom: 20px;
-			max-width: 100%;}
-	.contact_tiles_left  img{ margin-bottom: 20px;
-			max-width: 100%;}
-}	
+	.contact_tiles { width: 49%; float: right;} 
+}
 		
 /*---------------------------------------------------------- 
  Footer
