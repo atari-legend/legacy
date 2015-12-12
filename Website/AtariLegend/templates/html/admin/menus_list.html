@@ -1,0 +1,70 @@
+{* 
+/***************************************************************************
+                              menus_list.html
+*                            --------------------------
+*   begin                : Sunday, August 28, 2005
+*   copyright            : (C) 2005 Atari Legend
+*   email                : admin@atarilegend.com
+*
+*
+***************************************************************************/
+
+************************************************************************************************
+The main game page
+************************************************************************************************
+*}
+{extends file='html/admin/frontpage.html'}
+{block name=title}Menus Search results{/block}
+{block name=left_tile}
+		<br/>
+
+		{* Start New set *}
+		<div class="quicklinkbox">
+		<form action="../menus/db_menu_disk.php" method="post" name="post" id="menu_edit">
+		<b>Menu series Editor</b><br/><br/>
+		Add new Menu Series:<br/> 
+		<input type="text" name="menu_sets_name" value="" style="margin:5px;width:200px;"><br/>
+		<input type="hidden" name="action" value="menu_set_new">
+		<input type="submit" value="Add New">
+		</form>
+		</div>
+		<br/>
+		<hr>
+		{* End New set *}
+		<br/><br/> 
+{/block}
+{block name=main_tile}
+<div class="NEWMAINCELL" style="text-align:center;">
+	<fieldset class="interview_set">
+		This is the Menus search page. Select a menu set to browse that menu set. 
+	</fieldset> 
+<br/><br/>
+	<table class="table_game_list">
+			<tr>
+				<th style="width:40%;">Menu Disk Set</th>
+				<th style="width:30%;">Crew</th>
+				<th style="width:15%;">Start Year</th>
+				<th style="width:15%;">Nr of menu disks</th>
+			</tr>
+					{foreach from=$menus item=line}
+			<tr>
+				<td style="width:40%;">{if $line.menu_sets_name != ''}<a href="../menus/menus_disk_list.php?menu_sets_id={$line.menu_sets_id}" class="MAINNAV">{$line.menu_sets_name}</a>{else}<i>n/a</i>{/if}</td>
+				<td style="width:30%;">{if $line.crew_name != ''}{$line.crew_name}{else}<i>n/a</i>{/if}</td>
+				<td style="width:15%;"><i>n/a</i></td>				
+				<td style="width:15%;">{if $line.numbermenus != ''}{$line.numbermenus}{else}<i>0</i>{/if}</td>
+			</tr>
+		{/foreach}
+			<tr>
+				<td class="game_list_footer" colspan="4">
+					{if $nr_of_entries == 1}1 menus set found {else} {$nr_of_entries} menus sets found{/if} in {$querytime} sec
+				</td>
+			</tr>
+		</table>
+<br/>
+
+<br/>
+{if isset($message)}
+	<div class="message_box">{$message}</div>
+{/if}
+</div>
+{/block}
