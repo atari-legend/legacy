@@ -1338,6 +1338,8 @@ datequote tile - front page
 	.datequote_position_front { float:left; width: 94%;} 
 }
 
+.datequote_bg p {text-align: center;}
+
 .datequote_day{ font-size : 85pt;
 		color : white; 
 		margin-top: 0px;
