@@ -101,7 +101,7 @@ footer, header, hgroup, menu, nav, section {
 		float: right;
 		}			
 
-/* animation */
+		/* animation */
 #animation {
     position: relative;
 	-webkit-animation-name: STcharacters;
