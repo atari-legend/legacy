@@ -270,8 +270,7 @@ footer, header, hgroup, menu, nav, section {
         list-style: none;
     }
 	
-    #sidebar ul li { margin: 0;
-			background:transparent; }
+    #sidebar ul li { margin: 0;}
 	
     #sidebar ul li a {
         padding: 0;
@@ -373,7 +372,7 @@ footer, header, hgroup, menu, nav, section {
 	
 	@media screen and (max-width: 1919px) { 
 		.skin-wrap {
-			margin-top:41px;
+			margin-top:31px;
 		}
 	}
 	 
@@ -518,7 +517,7 @@ float:left;
 cursor: pointer;
 border:2px solid black;
 height: 30px;
-width: 170px;
+width: 183px;
 background: #161c71;
 font-family: robot, arial, sans-serif;
 color:white;
@@ -605,6 +604,7 @@ border:2px solid black;
   display: block;
   margin-left: auto;
   margin-right: auto;
+    margin-bottom: 30px;
   border:2px solid black;
   height: 30px;
   width: 170px;
@@ -647,18 +647,27 @@ border:2px solid black;
 	#about { display: none; }
 	#menus { display: none; }
 	#links { display: none; }
+	#forum_top { display: none; }
+	#magazines { display: none; }
+	#music { display: none; }
 }
 
 /* for the high resolutions, we only have the skin switch in the side menu */ 
 @media screen and (min-width: 1280px) {  	
 	#links_side { display: none; }
-	#search_side { display: none; } 
-	#search_text_side{ display: none; } 
 	#games_side { display: none; }
 	#demos_side { display: none; }
 	#about_side { display: none; }
 	#menus_side { display: none; }
+	#music_side{display: none; }
+	#magazines_side{display: none; }
+	#forum_main_side{display: none; }
 }
+
+@media screen and (min-width: 1920px) { 
+	#search_side { display: none; } 
+	#search_text_side{ display: none; } 
+}	
 
 /* This little fix was added because we had a weird menubar bug at 1280. */
 @media screen and (min-width: 1280px) and (max-width: 1296px) {  
@@ -666,6 +675,23 @@ border:2px solid black;
 	#home{ margin-left: 0px; }
 	#search{ margin-left: 0px; }
 	.searchbutton{ width: 278px; }
+}
+
+/* responsiveness of the top menu for resolutions from 1281 to 1920 */
+@media screen and (max-width: 1919px)
+{	
+	#search_text{display:none;}
+	#search{display:none;}
+}
+
+@media screen and (max-width: 1550px)
+{	
+	#home{display:none;}
+}
+
+@media screen and (max-width: 1480px)
+{	
+	.topbutton{width: 160px;}
 }
 
 /*---------------------------------------------------------- 
@@ -757,6 +783,8 @@ Standard tile settings
 	    background: linear-gradient(to top, white, #a6a6a6); /* Standard syntax */
 		border-top: 10px solid #161c71;
 		border-bottom: 3px solid #161c71;
+		border-left : 1px solid #161c71;
+		border-right : 1px solid #161c71;
 	}
 
 .standard_tile_line{ border-bottom: 2px solid black;
@@ -1048,7 +1076,7 @@ Standard tile settings
 
 .standard_tile_link_button:link { 
 		text-decoration: none;
-		color : black;
+		color : white;
 	} 
 
 .standard_tile_link_button:visited { text-decoration: none; }
@@ -1161,6 +1189,8 @@ Standard tile settings
 		margin-top: -10px;
 		border-top: 10px solid #161c71;
 		border-bottom: 3px solid #161c71;
+		border-left: 1px solid #161c71;
+		border-right: 1px solid #161c71;
 		margin-bottom:20px;
 		float: left;
 }
@@ -1273,9 +1303,7 @@ logon tile --> front page
 /*---------------------------------------------------------- 
 latest news tile --> front page
 ------------------------------------------------------------ */
-.latest_news { margin-right: 20px;
-			margin-bottom: 20px;
-}
+.latest_news { margin-bottom: 20px;}
 
 @media screen and (min-width: 640px) and (max-width: 800px) { 
 	.latest_news { margin-top: 395px;
@@ -1293,7 +1321,7 @@ screenstar tile - front page
 .screenstar_position_front { margin-bottom: 20px;}
 
 @media screen and (min-width: 1495px){ 
-	.screenstar_position_front  { margin-top: 20px; width: 94%;} 
+	.screenstar_position_front  { float:left; width: 94%; margin-top: -10px;} 
 }
 
 /*---------------------------------------------------------- 
@@ -1306,6 +1334,10 @@ datequote tile - front page
 /* 1 and 2 tiles */
 @media screen and (max-width: 800px) { 
 	.datequote_position_front { margin-top: 0px;}
+}
+
+@media screen and (min-width: 1495px){ 
+	.datequote_position_front { float:left; width: 94%;} 
 }
 
 .datequote_bg p {text-align: center;}
