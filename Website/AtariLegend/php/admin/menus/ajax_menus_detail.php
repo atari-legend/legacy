@@ -347,5 +347,5 @@ if (isset($action) and $action=="ind_gen_search")
 	
 	
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/ajax_menus_detail.html');
+$smarty->display('file:../../../templates/html/admin/ajax_menus_detail.html');
 ?>
