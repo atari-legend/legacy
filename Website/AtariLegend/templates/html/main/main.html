@@ -34,19 +34,25 @@
 		<script type="text/javascript" src="../../../templates/html/includes/js/jquery-2.1.4.min.js"></script> <!-- main jquery stuff -->
 		<script type="text/javascript" src="../../../templates/html/includes/js/jquery-ui.min.js"></script> <!-- main jqueryUI stuff -->
 		
-	<script type="text/javascript"> <!-- script needed for the autocompletion search engine -->
-		$(document).ready(function()
-		{
-			$('#auto').autocomplete(
+		<script type="text/javascript"> <!-- script needed for the autocompletion search engine -->
+			$(document).ready(function()
 			{
-				source: "../../../php/includes/autocomplete.php",
-				minLength: 2
+				$('#auto').autocomplete(
+				{
+					source: "../../../php/includes/autocomplete.php",
+					minLength: 2
+				});
+				
+				$('#search_text_side').autocomplete(
+				{
+					source: "../../../php/includes/autocomplete.php",
+					 position: { my : "right center", at: "right bottom" }
+				});
+			$(window).resize(function() {
+				$(".ui-autocomplete").css('display', 'none');
+				});
 			});
-		$(window).resize(function() {
-    		$(".ui-autocomplete").css('display', 'none');
-			});
-		});
-	</script>
+		</script>
 		<script type="text/javascript"> <!-- script needed for the side menu -->
 			//<![CDATA[ 
 			$(window).load(function(){

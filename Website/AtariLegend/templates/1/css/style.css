@@ -1413,6 +1413,31 @@ contact tiles - front page
 			margin-bottom: 5px;	
 	}
 	
+/* Component containers
+----------------------------------*/
+.ui-widget-content {
+	border: 1px solid #00d3d3;
+	background: #000000;
+	color: #ffffff;
+	width: 245px;
+	font-family: Audiowide;
+	font-size:13px;
+}
+
+/* Interaction states
+----------------------------------*/
+
+.ui-state-hover,
+.ui-widget-content .ui-state-hover,
+.ui-widget-header .ui-state-hover,
+.ui-state-focus,
+.ui-widget-content .ui-state-focus,
+.ui-widget-header .ui-state-focus {
+	border: 1px solid #000000;
+	background: #00d3d3;
+	color: #000;
+}
+	
 /*************************************************************	
 /*******************CPANEL Specifics**************************
 /*************************************************************	
