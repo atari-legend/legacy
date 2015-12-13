@@ -69,5 +69,5 @@ include("../../includes/functions.php");
 	}
 
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/ajax_menus.html');
+$smarty->display('file:../../../templates/html/admin/ajax_menus.html');
 ?>
