@@ -1,0 +1,5 @@
+Website/AtariLegend/data/images/article_screenshots/952.png
+
+$ cat .gitignore
+# exclude everything except directory foo/bar
+Website/AtariLegend/data/*
