@@ -438,6 +438,7 @@ footer, header, hgroup, menu, nav, section {
 	.sub-menu li a:hover, .sub-menu .current-item a {
 		background:#dbd7d1;
 		color:black;
+	    border: 1px solid black;
 	}
 
 
@@ -832,17 +833,12 @@ Standard tile settings
 }
 
 @media screen and (max-width: 5501px) { 
-.standard_tile_title{ margin-top : 48.5%;
-	}
-}
-
-@media screen and (max-width: 3501px) { 
-.standard_tile_title{ margin-top : 48%;
+.standard_tile_title{ margin-top : 47.5%;
 	}
 }
 
 @media screen and (max-width: 1921px) { 
-.standard_tile_title{ margin-top : 47.5%;
+.standard_tile_title{ margin-top : 48.5%;
 	}
 }
 
@@ -862,47 +858,47 @@ Standard tile settings
 }
 
 @media screen and (max-width: 1501px) { 
-.standard_tile_title{ margin-top : 46.2%;
+.standard_tile_title{ margin-top : 44.5%;
 	}
 }
 
 @media screen and (max-width: 1401px) { 
-.standard_tile_title{ margin-top : 47%;
+.standard_tile_title{ margin-top : 47.5%;
 	}
 }
 
 @media screen and (max-width: 1301px) { 
-.standard_tile_title{ margin-top : 46%;
+.standard_tile_title{ margin-top : 46.5%;
 	}
 }
 
 @media screen and (max-width: 1201px) { 
-.standard_tile_title{ margin-top : 44.5%;
+.standard_tile_title{ margin-top : 45.5%;
 	}
 }
 
 @media screen and (max-width: 1101px) { 
-.standard_tile_title{ margin-top : 43%;
+.standard_tile_title{ margin-top : 44%;
 	}
 }
 
  @media screen and (max-width: 1001px) { 
-.standard_tile_title{ margin-top : 42%;
+.standard_tile_title{ margin-top : 42.5%;
 	}
 }
 
- @media screen and (max-width: 850px) { 
-.standard_tile_title{ margin-top : 38.5%;
+ @media screen and (max-width: 900px) { 
+.standard_tile_title{ margin-top : 40.5%;
 	}
 }
 
 @media screen and (max-width: 800px) { 
-.standard_tile_title{ margin-top : 44.5%;
+.standard_tile_title{ margin-top : 45.5%;
 	}
 }
 
 @media screen and (max-width: 700px) { 
-.standard_tile_title{ margin-top : 41.5%;
+.standard_tile_title{ margin-top : 42%;
 	}
 }
 
@@ -917,7 +913,7 @@ Standard tile settings
 }
 
 @media screen and (max-width: 480px) { 
-.standard_tile_title{ margin-top : 47.5%;
+.standard_tile_title{ margin-top : 48	.5%;
 	}
 }
 
@@ -927,12 +923,12 @@ Standard tile settings
 }
 
 @media screen and (max-width: 320px) { 
-.standard_tile_title{ margin-top : 41%;
+.standard_tile_title{ margin-top : 42.5%;
 	}
 }
 
 @media screen and (max-width: 250px) { 
-.standard_tile_title{ margin-top : 39%;
+.standard_tile_title{ margin-top : 38%;
 	}
 }
 
@@ -1451,6 +1447,31 @@ contact tiles - front page
 			margin-right: auto;
 			margin-bottom: 5px;	
 	}
+	
+/* Component containers
+----------------------------------*/
+.ui-widget-content {
+	border: 1px solid #161c71;
+	background: #000000;
+	color: #ffffff;
+	width: 245px;
+	font-family: robot;
+	font-size:13px;
+}
+
+/* Interaction states
+----------------------------------*/
+
+.ui-state-hover,
+.ui-widget-content .ui-state-hover,
+.ui-widget-header .ui-state-hover,
+.ui-state-focus,
+.ui-widget-content .ui-state-focus,
+.ui-widget-header .ui-state-focus {
+	border: 1px solid #4f4f4f;
+	background: #dbd7d1;
+	color: #000;
+}
 	
 /*************************************************************	
 /*******************CPANEL Specifics**************************
