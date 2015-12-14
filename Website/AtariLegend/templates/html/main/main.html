@@ -46,7 +46,7 @@
 				$('#search_text_side').autocomplete(
 				{
 					source: "../../../php/includes/autocomplete.php",
-					 position: { my : "right center", at: "right bottom" }
+					position: { my : "left top", at: "right top", of: $("#skin_side"), collision: "flipfit none" }
 				});
 			$(window).resize(function() {
 				$(".ui-autocomplete").css('display', 'none');
@@ -82,8 +82,8 @@
 							<li><button type="button" class="topbutton" id="about_side" onClick="">ABOUT</button></li>
 						  </ul>
 						  <ul id="search_ul">
-							  <li id="searchbutton_side"><input id="search_text_side" type="text" name="search_text" maxlength="11" /></li>
-							  <li><a href="#" title="search"><img id="search_side" src="{$img_dir}menu_search.png" alt="search" /></a></li>
+							  <li id="searchbutton_side"><input id="search_text_side" type="text" name="search_text" maxlength="11"></li>
+							  <li><a href="#" title="search"><img id="search_side" src="{$img_dir}menu_search.png" alt="search"></a></li>
 						  </ul>
 						  <div class="skin-wrap">
 							<nav class="skin-menu">
