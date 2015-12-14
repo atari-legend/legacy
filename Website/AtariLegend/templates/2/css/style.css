@@ -20,6 +20,33 @@ body { background: #dbd7d1;
 	  font-family: robot, arial, helvetica, sans-serif;
 }
 
+@media screen and (min-width: 481px) { 
+	body { background-image: url(../../../templates/2/images/top_bg_sides.jpg);
+		  background-position: left top;
+		  background-repeat: repeat-x;
+	}
+}
+
+@media screen and (min-width: 1281px){
+	body { background-image: url(../../../templates/2/images/top_bg_menu.jpg), url(../../../templates/2/images/top_bg_sides.jpg);
+	  background-position: left 220px, left top;
+	  background-repeat: repeat-x, repeat-x;}
+}
+
+@media screen and (min-width: 1920px) { 
+	body {	background-image: url(../../../templates/2/images/top_bg_left.jpg), url(../../../templates/2/images/top_bg_right.jpg);
+			background-position: left 2px, right 2px;
+			background-repeat: no-repeat, repeat-x;
+		 }
+}
+
+@media screen and (min-width: 1921px) { 
+	body { 	background-image: url(../../../templates/2/images/top_bg_sides.jpg), url(../../../templates/2/images/top_bg_menu.jpg), url(../../../templates/2/images/main_bg.png), url(../../../templates/2/images/main_bg.png); 
+			background-position: left top, left 220px, -3% 45%, 95% 125%, left top;
+			background-repeat: repeat-x, repeat-x, no-repeat, no-repeat;
+		}
+}
+
 img { display: block;
 }
 
@@ -372,7 +399,7 @@ footer, header, hgroup, menu, nav, section {
 	
 	@media screen and (max-width: 1919px) { 
 		.skin-wrap {
-			margin-top:31px;
+			margin-top:30px;
 		}
 	}
 	 
@@ -459,9 +486,9 @@ footer, header, hgroup, menu, nav, section {
 	#about_side{height: 40px; width: 113px; font-size: 14px;}
 	#links_side{height: 40px; width: 113px; font-size: 14px;}
 	#skin_side{height: 37px; width: 113px; font-size: 14px;}
-	#search_side {height: 37px; width: 20px;}
-	#search_text_side{height: 24px; width: 70px;}
-	#searchbutton_side{height: 38px; width: 87px;}
+	#search_side {height: 37px; width: 39px;}
+	#search_text_side{height: 28px; width: 60px; margin-left:3px;}
+	#searchbutton_side{height: 37px; width: 70px;}
 	.container.open-sidebar { left: 113px;}
     #sidebar { left: -115px;
         width: 115px;
