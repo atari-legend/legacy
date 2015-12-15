@@ -42,7 +42,7 @@ body { background: #dbd7d1;
 
 @media screen and (min-width: 1921px) { 
 	body { 	background-image: url(../../../templates/2/images/top_bg_sides.jpg), url(../../../templates/2/images/top_bg_menu.jpg), url(../../../templates/2/images/main_bg.png), url(../../../templates/2/images/main_bg.png); 
-			background-position: left top, left 220px, -3% 45%, 95% 125%, left top;
+			background-position: left top, left 220px, -3% 45%, 110% 135%, left top;
 			background-repeat: repeat-x, repeat-x, no-repeat, no-repeat;
 		}
 }
@@ -1459,6 +1459,7 @@ contact tiles - front page
 .footer{ width: 100%;
 		float: left;	
 		border-top: 10px solid #161c71;
+		background: url(../images/bottom_bg_sides.jpg) left 0 repeat-x;
 	}
 
 .footer_logo{ color: white;
