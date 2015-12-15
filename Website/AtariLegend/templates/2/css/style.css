@@ -20,6 +20,33 @@ body { background: #dbd7d1;
 	  font-family: robot, arial, helvetica, sans-serif;
 }
 
+@media screen and (min-width: 481px) { 
+	body { background-image: url(../../../templates/2/images/top_bg_sides.jpg);
+		  background-position: left top;
+		  background-repeat: repeat-x;
+	}
+}
+
+@media screen and (min-width: 1281px){
+	body { background-image: url(../../../templates/2/images/top_bg_menu.jpg), url(../../../templates/2/images/top_bg_sides.jpg);
+	  background-position: left 220px, left top;
+	  background-repeat: repeat-x, repeat-x;}
+}
+
+@media screen and (min-width: 1920px) { 
+	body {	background-image: url(../../../templates/2/images/top_bg_left.jpg), url(../../../templates/2/images/top_bg_right.jpg);
+			background-position: left 2px, right 2px;
+			background-repeat: no-repeat, repeat-x;
+		 }
+}
+
+@media screen and (min-width: 1921px) { 
+	body { 	background-image: url(../../../templates/2/images/top_bg_sides.jpg), url(../../../templates/2/images/top_bg_menu.jpg), url(../../../templates/2/images/main_bg.png), url(../../../templates/2/images/main_bg.png); 
+			background-position: left top, left 220px, -3% 45%, 95% 125%, left top;
+			background-repeat: repeat-x, repeat-x, no-repeat, no-repeat;
+		}
+}
+
 img { display: block;
 }
 
@@ -36,10 +63,16 @@ footer, header, hgroup, menu, nav, section {
 ------------------------------------------------------------ */
 #wrapper {
 	width: 100%;	
+	max-width: 1920px;
+	margin: auto;
+} 
+
+#wrapper_header {
+	width: 100%;	
 	max-width: 1280px;
 	margin: auto;
 } 
- 
+
 #main {
 	width: 100%;
 	margin-right: 5%;
@@ -264,8 +297,7 @@ footer, header, hgroup, menu, nav, section {
         list-style: none;
     }
 	
-    #sidebar ul li { margin: 0;
-			background:transparent; }
+    #sidebar ul li { margin: 0;}
 	
     #sidebar ul li a {
         padding: 0;
@@ -353,7 +385,8 @@ footer, header, hgroup, menu, nav, section {
 			}
 	
 /*-----some code for the skin submenu-------*/
-	
+	#skin_side, #games_side,#menus_side,#demos_side,#links_side,#about_side,#music_side,#forum_main_side,#magazines_side{width:170px;}
+
 	.clearfix:after {
 		display:block;
 		clear:both;
@@ -362,6 +395,12 @@ footer, header, hgroup, menu, nav, section {
 	/*----- Menu Outline -----*/
 	.skin-wrap {
 		width:100%;
+	}
+	
+	@media screen and (max-width: 1919px) { 
+		.skin-wrap {
+			margin-top:30px;
+		}
 	}
 	 
 	.skin-menu {
@@ -426,6 +465,7 @@ footer, header, hgroup, menu, nav, section {
 	.sub-menu li a:hover, .sub-menu .current-item a {
 		background:#dbd7d1;
 		color:black;
+	    border: 1px solid black;
 	}
 
 
@@ -440,12 +480,15 @@ footer, header, hgroup, menu, nav, section {
 	#games_side{height: 40px; width: 113px; font-size: 14px;}
 	#menus_side{height: 40px; width: 113px; font-size: 14px;}
 	#demos_side{height: 40px; width: 113px; font-size: 14px;}
+	#forum_main_side{height: 40px; width: 113px; font-size: 14px;}
+	#magazines_side{height: 40px; width: 113px; font-size: 14px;}
+	#music_side{height: 40px; width: 113px; font-size: 14px;}
 	#about_side{height: 40px; width: 113px; font-size: 14px;}
 	#links_side{height: 40px; width: 113px; font-size: 14px;}
 	#skin_side{height: 37px; width: 113px; font-size: 14px;}
-	#search_side {height: 37px; width: 20px;}
-	#search_text_side{height: 24px; width: 70px;}
-	#searchbutton_side{height: 38px; width: 87px;}
+	#search_side {height: 37px; width: 39px;}
+	#search_text_side{height: 28px; width: 60px; margin-left:3px;}
+	#searchbutton_side{height: 37px; width: 70px;}
 	.container.open-sidebar { left: 113px;}
     #sidebar { left: -115px;
         width: 115px;
@@ -502,7 +545,7 @@ float:left;
 cursor: pointer;
 border:2px solid black;
 height: 30px;
-width: 170px;
+width: 183px;
 background: #161c71;
 font-family: robot, arial, sans-serif;
 color:white;
@@ -589,6 +632,7 @@ border:2px solid black;
   display: block;
   margin-left: auto;
   margin-right: auto;
+    margin-bottom: 30px;
   border:2px solid black;
   height: 30px;
   width: 170px;
@@ -631,18 +675,27 @@ border:2px solid black;
 	#about { display: none; }
 	#menus { display: none; }
 	#links { display: none; }
+	#forum_top { display: none; }
+	#magazines { display: none; }
+	#music { display: none; }
 }
 
 /* for the high resolutions, we only have the skin switch in the side menu */ 
 @media screen and (min-width: 1280px) {  	
 	#links_side { display: none; }
-	#search_side { display: none; } 
-	#search_text_side{ display: none; } 
 	#games_side { display: none; }
 	#demos_side { display: none; }
 	#about_side { display: none; }
 	#menus_side { display: none; }
+	#music_side{display: none; }
+	#magazines_side{display: none; }
+	#forum_main_side{display: none; }
 }
+
+@media screen and (min-width: 1920px) { 
+	#search_side { display: none; } 
+	#search_text_side{ display: none; } 
+}	
 
 /* This little fix was added because we had a weird menubar bug at 1280. */
 @media screen and (min-width: 1280px) and (max-width: 1296px) {  
@@ -650,6 +703,23 @@ border:2px solid black;
 	#home{ margin-left: 0px; }
 	#search{ margin-left: 0px; }
 	.searchbutton{ width: 278px; }
+}
+
+/* responsiveness of the top menu for resolutions from 1281 to 1920 */
+@media screen and (max-width: 1919px)
+{	
+	#search_text{display:none;}
+	#search{display:none;}
+}
+
+@media screen and (max-width: 1550px)
+{	
+	#home{display:none;}
+}
+
+@media screen and (max-width: 1480px)
+{	
+	.topbutton{width: 160px;}
 }
 
 /*---------------------------------------------------------- 
@@ -686,6 +756,10 @@ Standard tile settings
 	 margin-top:0;
 }
 
+.column-wide-right_1920 {display: none;	}
+.column-wide-left_1920 {display: none;}
+.column-wide-center_1920{display: none;}
+
 /* 2 tiles and background welcome image */
 @media screen and (min-width: 640px) and (max-width: 800px)
 {
@@ -717,6 +791,18 @@ Standard tile settings
 	.column-left-tab {display:none}
 }
 
+/*  4 tiles and background welcome image */
+@media screen and (min-width: 1495px){ 
+	.column-wide-left { width: 49%;}
+	.column-wide-center_1920 { display:inline; width: 100%;}
+	.column-wide-right_1920 { width: 24.75%; float: right; display:inline;}
+	.column-wide-left_1920 { width: 24.75%; float: left; display:inline;}
+	.column-wide-right {display: none;}
+	.column-left {display: none;}
+	.column-center{display: none;}
+	.column-right {display: none;}
+}
+
 .standard_tile  { width: 100%; 
 		/*background-color: #a6a6a6;*/
 		background: -webkit-linear-gradient(bottom, white , #a6a6a6); /* For Safari 5.1 to 6.0 */
@@ -725,6 +811,8 @@ Standard tile settings
 	    background: linear-gradient(to top, white, #a6a6a6); /* Standard syntax */
 		border-top: 10px solid #161c71;
 		border-bottom: 3px solid #161c71;
+		border-left : 1px solid #161c71;
+		border-right : 1px solid #161c71;
 	}
 
 .standard_tile_line{ border-bottom: 2px solid black;
@@ -771,28 +859,73 @@ Standard tile settings
 	    border-bottom: 2px solid #484c7b;
 }
 
-@media screen and (max-width: 1150px) { 
+@media screen and (max-width: 5501px) { 
+.standard_tile_title{ margin-top : 47.5%;
+	}
+}
+
+@media screen and (max-width: 1921px) { 
+.standard_tile_title{ margin-top : 48.5%;
+	}
+}
+
+@media screen and (max-width: 1801px) { 
+.standard_tile_title{ margin-top : 47%;
+	}
+}
+
+@media screen and (max-width: 1701px) { 
+.standard_tile_title{ margin-top : 46%;
+	}
+}
+
+@media screen and (max-width: 1601px) { 
+.standard_tile_title{ margin-top : 45%;
+	}
+}
+
+@media screen and (max-width: 1501px) { 
 .standard_tile_title{ margin-top : 44.5%;
 	}
 }
 
- @media screen and (max-width: 980px) { 
-.standard_tile_title{ margin-top : 42%;
+@media screen and (max-width: 1401px) { 
+.standard_tile_title{ margin-top : 47.5%;
 	}
 }
 
- @media screen and (max-width: 850px) { 
-.standard_tile_title{ margin-top : 38.5%;
+@media screen and (max-width: 1301px) { 
+.standard_tile_title{ margin-top : 46.5%;
+	}
+}
+
+@media screen and (max-width: 1201px) { 
+.standard_tile_title{ margin-top : 45.5%;
+	}
+}
+
+@media screen and (max-width: 1101px) { 
+.standard_tile_title{ margin-top : 44%;
+	}
+}
+
+ @media screen and (max-width: 1001px) { 
+.standard_tile_title{ margin-top : 42.5%;
+	}
+}
+
+ @media screen and (max-width: 900px) { 
+.standard_tile_title{ margin-top : 40.5%;
 	}
 }
 
 @media screen and (max-width: 800px) { 
-.standard_tile_title{ margin-top : 44.5%;
+.standard_tile_title{ margin-top : 45.5%;
 	}
 }
 
 @media screen and (max-width: 700px) { 
-.standard_tile_title{ margin-top : 43%;
+.standard_tile_title{ margin-top : 42%;
 	}
 }
 
@@ -806,23 +939,23 @@ Standard tile settings
 	}
 }
 
-@media screen and (max-width: 450px) { 
-.standard_tile_title{ margin-top : 47%;
+@media screen and (max-width: 480px) { 
+.standard_tile_title{ margin-top : 48	.5%;
 	}
 }
 
 @media screen and (max-width: 360px) { 
-.standard_tile_title{ margin-top : 45%;
+.standard_tile_title{ margin-top : 44%;
 	}
 }
 
-@media screen and (max-width: 300px) { 
-.standard_tile_title{ margin-top : 41%;
+@media screen and (max-width: 320px) { 
+.standard_tile_title{ margin-top : 42.5%;
 	}
 }
 
 @media screen and (max-width: 250px) { 
-.standard_tile_title{ margin-top : 39%;
+.standard_tile_title{ margin-top : 38%;
 	}
 }
 
@@ -966,7 +1099,7 @@ Standard tile settings
 
 .standard_tile_link_button:link { 
 		text-decoration: none;
-		color : black;
+		color : white;
 	} 
 
 .standard_tile_link_button:visited { text-decoration: none; }
@@ -1079,6 +1212,8 @@ Standard tile settings
 		margin-top: -10px;
 		border-top: 10px solid #161c71;
 		border-bottom: 3px solid #161c71;
+		border-left: 1px solid #161c71;
+		border-right: 1px solid #161c71;
 		margin-bottom:20px;
 		float: left;
 }
@@ -1102,7 +1237,7 @@ Standard tile settings
 		padding-right: 5%;
 	}	
 	
-#welcome_text { font-size : 11pt; 
+.welcome_text { font-size : 11pt; 
 		padding-bottom: 10px;	
 		padding-top: 10px;	
 		color : #161c71;
@@ -1129,7 +1264,7 @@ Standard tile settings
 /*---------------------------------------------------------- 
 logon tile --> front page
 ------------------------------------------------------------ */
-#logon { margin-top: -10px;
+.logon { margin-top: -10px;
 		float : right;
 		margin-bottom : 20px;
 		width: 100%;
@@ -1177,12 +1312,12 @@ logon tile --> front page
 
 /* 2 tiles and background welcome image */
 @media screen and (min-width: 640px) and (max-width: 800px) { 
-	#logon { margin-top: 0px;}
+	.logon { margin-top: 0px;}
 }
 
 /* 1 tile */
 @media screen and (max-width: 639px) { 
-	#logon  { width: 100%; 
+	.logon  { width: 100%; 
 	margin-top: 0px;	
 	margin-bottom: 20px;
 	}
@@ -1191,53 +1326,64 @@ logon tile --> front page
 /*---------------------------------------------------------- 
 latest news tile --> front page
 ------------------------------------------------------------ */
-#latest_news { margin-right: 20px;
-			margin-bottom: 20px;
-}
+.latest_news { margin-bottom: 20px;}
 
 @media screen and (min-width: 640px) and (max-width: 800px) { 
-	#latest_news { margin-top: 395px;
+	.latest_news { margin-top: 395px;
 	}
 }
+
+@media screen and (min-width: 1495px){ 
+	.latest_news   { float: left; width: 48%;} 
+}
+
 
 /*---------------------------------------------------------- 
 screenstar tile - front page
 ------------------------------------------------------------ */
-#screenstar_position_front { margin-bottom: 20px;}
+.screenstar_position_front { margin-bottom: 20px;}
 
+@media screen and (min-width: 1495px){ 
+	.screenstar_position_front  { float:left; width: 94%; margin-top: -10px;} 
+}
 
 /*---------------------------------------------------------- 
 datequote tile - front page
 ------------------------------------------------------------ */
-#datequote_position_front { 	margin-bottom: 20px; }
+.datequote_position_front { 	margin-bottom: 20px; }
 
-#datequote_bg { background: url(../../../templates/2/images/datequote_bg.jpg) ;}
+.datequote_bg { background: url(../../../templates/2/images/datequote_bg.jpg) ;}
 
 /* 1 and 2 tiles */
 @media screen and (max-width: 800px) { 
-	#datequote_position_front { margin-top: 0px;}
+	.datequote_position_front { margin-top: 0px;}
 }
 
+@media screen and (min-width: 1495px){ 
+	.datequote_position_front { float:left; width: 94%;} 
+}
 
-#datequote_day{ font-size : 85pt;
+.datequote_bg p {text-align: center;}
+
+.datequote_day{ font-size : 85pt;
 		color : white; 
 		margin-top: 0px;
 		margin-bottom: -20px;
 }
 
-#datequote_month { font-size : 30pt;
+.datequote_month { font-size : 30pt;
 		color : white;
 		margin-top: -10px;
 		margin-bottom: -10px;
 	}
 
-#datequote_year { font-size : 55pt;
+.datequote_year { font-size : 55pt;
 		text-align: center;
 		color : #cccccc; 
 		margin-top: -10px;
 	}
 
-#datequote_text { background: rgb(192, 193, 202) transparent;   /* Fallback for web browsers that doesn't support RGBa */
+.datequote_text { background: rgb(192, 193, 202) transparent;   /* Fallback for web browsers that doesn't support RGBa */
         background: rgba(192, 193, 202, 0.6);   /* RGBa with 0.6 opacity */
 		filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#c0c1ca, endColorstr=#c0c1ca);  /* For IE 5.5 - 7*/
 		-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#c0c1ca, endColorstr=#c0c1ca)";  /* For IE 8*/
@@ -1249,44 +1395,64 @@ datequote tile - front page
 /*---------------------------------------------------------- 
 Who is it - front page
 ------------------------------------------------------------ */
-#whoisit_position_front { margin-bottom: 20px; }
+.whoisit_position_front { margin-bottom: 20px; }
 
+@media screen and (min-width: 1495px){ 
+	.whoisit_position_front  { float:right;} 
+}
 
 /*---------------------------------------------------------- 
 Latest reviews tile - front page
 ------------------------------------------------------------ */
-#latest_reviews{ margin-bottom: 20px;}	
+.latest_reviews{ margin-bottom: 20px;}	
 		
+@media screen and (min-width: 1495px){ 
+	.latest_reviews  { width: 49%; float: right;} 
+}
 
 /*---------------------------------------------------------- 
 Did you know tile - front page
 ------------------------------------------------------------ */
-#didyouknow_position_front{ margin-bottom: 20px; }	
+.didyouknow_position_front{ margin-bottom: 20px; }	
 			
+@media screen and (min-width: 1495px){ 
+	.didyouknow_position_front  {float:left; width:100%;} 
+}	
 
 /*---------------------------------------------------------- 
 Statistics tile - front page
 ------------------------------------------------------------ */
-#statistics_position_front{ margin-bottom: 20px; }	
+.statistics_position_front{ margin-bottom: 20px; }	
 
 .statistics_dark { color: #161c71; }
+
+@media screen and (min-width: 1495px){ 
+	.statistics_position_front  {float:left; width:100%;} 
+}
 	
 /*---------------------------------------------------------- 
 Hotlinks tile - front page
 ------------------------------------------------------------ */
-#hotlinks_position_front{ margin-bottom: 20px; }	
+.hotlinks_position_front{ margin-bottom: 20px; }	
 				
+@media screen and (min-width: 1495px){ 
+	.hotlinks_position_front {width: 94%; float: left;} 
+}	
 
 /*---------------------------------------------------------- 
 contact tiles - front page
 ------------------------------------------------------------ */
-#contact_tiles { margin-bottom: 20px;
+.contact_tiles { margin-bottom: 20px;
 			background: none;
 			border: none;
 }
 
-#contact_tiles  img{ margin-bottom: 20px;
+.contact_tiles  img{ margin-bottom: 20px;
 			max-width: 100%;
+}
+	
+@media screen and (min-width: 1495px){ 
+	.contact_tiles { width: 49%; float: right;} 
 }
 			
 /*---------------------------------------------------------- 
@@ -1295,19 +1461,44 @@ contact tiles - front page
 .footer{ width: 100%;
 		float: left;	
 		border-top: 10px solid #161c71;
-		background: url(../images/footer_bg.jpg) 0 0 no-repeat;
 	}
 
 .footer_logo{ color: white;
 		font-size: 10pt;
 		text-align: center;
 		height : 120px;
+		background: url(../images/footer_bg.jpg) center 0 no-repeat;
 	}
 
 #footer_img {margin-left: auto;
 			margin-right: auto;
 			margin-bottom: 5px;	
 	}
+	
+/* Component containers
+----------------------------------*/
+.ui-widget-content {
+	border: 1px solid #161c71;
+	background: #000000;
+	color: #ffffff;
+	width: 245px;
+	font-family: robot;
+	font-size:13px;
+}
+
+/* Interaction states
+----------------------------------*/
+
+.ui-state-hover,
+.ui-widget-content .ui-state-hover,
+.ui-widget-header .ui-state-hover,
+.ui-state-focus,
+.ui-widget-content .ui-state-focus,
+.ui-widget-header .ui-state-focus {
+	border: 1px solid #4f4f4f;
+	background: #dbd7d1;
+	color: #000;
+}
 	
 /*************************************************************	
 /*******************CPANEL Specifics**************************
