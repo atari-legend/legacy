@@ -34,19 +34,25 @@
 		<script type="text/javascript" src="../../../templates/html/includes/js/jquery-2.1.4.min.js"></script> <!-- main jquery stuff -->
 		<script type="text/javascript" src="../../../templates/html/includes/js/jquery-ui.min.js"></script> <!-- main jqueryUI stuff -->
 		
-	<script type="text/javascript"> <!-- script needed for the autocompletion search engine -->
-		$(document).ready(function()
-		{
-			$('#auto').autocomplete(
+		<script type="text/javascript"> <!-- script needed for the autocompletion search engine -->
+			$(document).ready(function()
 			{
-				source: "../../../php/includes/autocomplete.php",
-				minLength: 2
+				$('#auto').autocomplete(
+				{
+					source: "../../../php/includes/autocomplete.php",
+					minLength: 2
+				});
+				
+				$('#search_text_side').autocomplete(
+				{
+					source: "../../../php/includes/autocomplete.php",
+					position: { my : "left top", at: "right top", of: $("#skin_side"), collision: "flipfit none" }
+				});
+			$(window).resize(function() {
+				$(".ui-autocomplete").css('display', 'none');
+				});
 			});
-		$(window).resize(function() {
-    		$(".ui-autocomplete").css('display', 'none');
-			});
-		});
-	</script>
+		</script>
 		<script type="text/javascript"> <!-- script needed for the side menu -->
 			//<![CDATA[ 
 			$(window).load(function(){
@@ -76,8 +82,8 @@
 							<li><button type="button" class="topbutton" id="about_side" onClick="">ABOUT</button></li>
 						  </ul>
 						  <ul id="search_ul">
-							  <li id="searchbutton_side"><input id="search_text_side" type="text" name="search_text" maxlength="11" /></li>
-							  <li><a href="#" title="search"><img id="search_side" src="{$img_dir}menu_search.png" alt="search" /></a></li>
+							  <li id="searchbutton_side"><input id="search_text_side" type="text" name="search_text" maxlength="11"></li>
+							  <li><a href="#" title="search"><img id="search_side" src="{$img_dir}menu_search.png" alt="search"></a></li>
 						  </ul>
 						  <div class="skin-wrap">
 							<nav class="skin-menu">

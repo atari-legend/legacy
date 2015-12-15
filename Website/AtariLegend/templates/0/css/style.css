@@ -34,8 +34,8 @@ body { background-color: #e1e1e1;
 }
 
 @media screen and (min-width: 1921px) { 
-	body { 	background-image: url(../../../templates/0/images/top_bg_sides.jpg), url(../../../templates/1/images/main_bg.png), url(../../../templates/1/images/main_bg.png); 
-			background-position: left top, 95% 125%, left top;
+	body { 	background-image: url(../../../templates/0/images/top_bg_sides.jpg), url(../../../templates/0/images/main_bg.png), url(../../../templates/0/images/main_bg.png); 
+			background-position: left top, 100% 100%, -10% 25%;
 			background-repeat: repeat-x, no-repeat, no-repeat;
 		}
 }
@@ -1338,6 +1338,8 @@ datequote tile - front page
 	.datequote_position_front { float:left; width: 94%;} 
 }
 
+.datequote_bg p {text-align: center;}
+
 .datequote_day{ font-size : 85pt;
 		color : white; 
 		margin-top: 0px;
@@ -1457,59 +1459,20 @@ contact tiles - front page
 /*---------------------------------------------------------- 
 /* JqueryUI Autocomplete section
 ------------------------------------------------------------ */
-.ui-state-disabled {
-	cursor: default !important;
-}
 
-.ui-helper-hidden-accessible {
-	display:none;
-}
-
-.ui-autocomplete {
-	position: absolute;
-	top: 0;
-	left: 0;
-	cursor: default;
-}
-.ui-menu {
-	list-style: none;
-	padding: 0;
-	margin: 0;
-	display: block;
-	outline: none;
-}
-.ui-menu .ui-menu {
-	position: absolute;
-}
-.ui-menu .ui-menu-item {
-	position: relative;
-	margin: 0;
-	padding: 3px 1em 3px .4em;
-	cursor: pointer;
-	min-height: 0; /* support: IE7 */
-	/* support: IE10, see #8844 */
-	list-style-image: url("data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7");
-}
-.ui-menu .ui-menu-divider {
-	margin: 5px 0;
-	height: 0;
-	font-size: 0;
-	line-height: 0;
-	border-width: 1px 0 0 0;
-}
-.ui-menu .ui-state-focus,
-.ui-menu .ui-state-active {
-	margin: -1px;
-}
-
+/* Component containers
+----------------------------------*/
 .ui-widget-content {
-	border: 1px solid #00d3d3;
+	border: 1px solid white;
 	background: #000000;
 	color: #ffffff;
 	width: 245px;
-	font-family: AtariST;
+	font-family: atarist;
 	font-size:13px;
 }
+
+/* Interaction states
+----------------------------------*/
 
 .ui-state-hover,
 .ui-widget-content .ui-state-hover,
@@ -1518,7 +1481,7 @@ contact tiles - front page
 .ui-widget-content .ui-state-focus,
 .ui-widget-header .ui-state-focus {
 	border: 1px solid #000000;
-	background: #00d3d3;
+	background: white;
 	color: #000;
 }
 

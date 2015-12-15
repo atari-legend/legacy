@@ -1,3 +1,12 @@
+<<<<<<< HEAD
+$ cat .gitignore 
+# exclude everything except directory foo/bar 
+Website/AtariLegend/data/* 
+
+$ cat .gitignore 
+# exclude everything except directory foo/bar 
+Website/AtariLegend/php/includes/smarty/templates_c/*
+=======
 Website/AtariLegend/data/images/article_screenshots/952.png
 
 $ cat .gitignore
@@ -8,3 +17,4 @@ $ cat .gitignore
 # exclude everything except directory foo/bar
 Website/AtariLegend/php/includes/smarty/templates_c/*
 
+>>>>>>> refs/remotes/origin/master
