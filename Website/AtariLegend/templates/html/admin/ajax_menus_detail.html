@@ -12,6 +12,31 @@
 					<tr>
 						<td colspan="4" style="border-top: solid 1px #b2b2b2;font-weight:normal;">
 						<br/>
+						<div class="interview_set" style="padding:3px;width:800px;">
+						
+						<div style="display:inline;vertical-align:top;"><b>Set State:</b></div>
+						<div style="display:inline;vertical-align:top;">
+						<select name="state_id" id="state_id" size="1" style="width:200px;background-color:white;margin:5px;" onchange="ChangeState(this.value,{$menus.menu_disk_id})">
+							<option value="" style="background-color:white;"> Set State</option>
+							{if isset($state_id)}
+							{html_options values=$state_id output=$menu_state selected=$menu_state_id}
+							{/if}
+						</select>
+						</div>
+						
+						
+						<div style="float:right;">
+						<div style="display:inline;vertical-align:top;"><b>Release Year:</b></div>
+						<div style="display:inline;vertical-align:top;">
+
+						{html_select_date start_year="1984" end_year="+1" display_days=false display_months=false prefix="" field_name="" name="year_id" size="1" style="width:200px;background-color:white;margin:5px;" onchange="ChangeYear(this.value,$menu_disk_id)"}
+							
+
+						</div>
+						</div>	
+						</div>
+						
+						<br/>
 						<div style="display:flex;justify-content:space-between;width:95%;">
 						<div class="game_set" style="display:inline-block;width:320px;margin-left:20px;">
 							tons of editing!!!<br/>
@@ -26,7 +51,7 @@
 						<br/>
 						</div>
 						
-						<div class="game_set" style="display:inline-block;width:450px;float:right;margin-right:20px;">
+						<div class="game_set" style="display:inline-block;width:450px;float:right;margin-left:10px;">
 			<div id="menu_credit_list">			
 							<table class="table_game_list" style="width:100%;float:right;">
 			<tr>
@@ -234,6 +259,7 @@
 			{if isset($osd_message)}
 			[BRK]{$osd_message}
 			{/if}
+			
 {/if}
 {* This is the Ind browse *}
 {if isset($smarty_action) and $smarty_action == "ind_gen_browse"}
