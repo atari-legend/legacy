@@ -399,7 +399,7 @@ footer, header, hgroup, menu, nav, section {
 	
 	@media screen and (max-width: 1919px) { 
 		.skin-wrap {
-			margin-top:41px;
+			margin-top:30px;
 		}
 	}
 	 
@@ -885,32 +885,32 @@ Standard tile settings
 }
 
 @media screen and (max-width: 1501px) { 
-.standard_tile_title{ margin-top : 46.2%;
-	}
-}
-
-@media screen and (max-width: 1401px) { 
-.standard_tile_title{ margin-top : 47%;
-	}
-}
-
-@media screen and (max-width: 1301px) { 
-.standard_tile_title{ margin-top : 46%;
-	}
-}
-
-@media screen and (max-width: 1201px) { 
 .standard_tile_title{ margin-top : 44.5%;
 	}
 }
 
+@media screen and (max-width: 1401px) { 
+.standard_tile_title{ margin-top : 47.5%;
+	}
+}
+
+@media screen and (max-width: 1301px) { 
+.standard_tile_title{ margin-top : 46.5%;
+	}
+}
+
+@media screen and (max-width: 1201px) { 
+.standard_tile_title{ margin-top : 45.5%;
+	}
+}
+
 @media screen and (max-width: 1101px) { 
-.standard_tile_title{ margin-top : 43%;
+.standard_tile_title{ margin-top : 44%;
 	}
 }
 
  @media screen and (max-width: 1001px) { 
-.standard_tile_title{ margin-top : 42%;
+.standard_tile_title{ margin-top : 42.5%;
 	}
 }
 
@@ -925,7 +925,7 @@ Standard tile settings
 }
 
 @media screen and (max-width: 700px) { 
-.standard_tile_title{ margin-top : 41.5%;
+.standard_tile_title{ margin-top : 42%;
 	}
 }
 
@@ -940,7 +940,7 @@ Standard tile settings
 }
 
 @media screen and (max-width: 480px) { 
-.standard_tile_title{ margin-top : 47.5%;
+.standard_tile_title{ margin-top : 48	.5%;
 	}
 }
 
@@ -950,7 +950,7 @@ Standard tile settings
 }
 
 @media screen and (max-width: 320px) { 
-.standard_tile_title{ margin-top : 41%;
+.standard_tile_title{ margin-top : 42.5%;
 	}
 }
 
@@ -1326,9 +1326,7 @@ logon tile --> front page
 /*---------------------------------------------------------- 
 latest news tile --> front page
 ------------------------------------------------------------ */
-.latest_news { margin-right: 20px;
-			margin-bottom: 20px;
-}
+.latest_news { margin-bottom: 20px;}
 
 @media screen and (min-width: 640px) and (max-width: 800px) { 
 	.latest_news { margin-top: 395px;
@@ -1346,7 +1344,7 @@ screenstar tile - front page
 .screenstar_position_front { margin-bottom: 20px;}
 
 @media screen and (min-width: 1495px){ 
-	.screenstar_position_front  { margin-top: 20px; width: 94%;} 
+	.screenstar_position_front  { float:left; width: 94%; margin-top: -10px;} 
 }
 
 /*---------------------------------------------------------- 
@@ -1359,6 +1357,10 @@ datequote tile - front page
 /* 1 and 2 tiles */
 @media screen and (max-width: 800px) { 
 	.datequote_position_front { margin-top: 0px;}
+}
+
+@media screen and (min-width: 1495px){ 
+	.datequote_position_front { float:left; width: 94%;} 
 }
 
 .datequote_bg p {text-align: center;}
