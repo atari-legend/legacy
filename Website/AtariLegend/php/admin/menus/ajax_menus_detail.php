@@ -38,6 +38,7 @@ include("../../includes/functions.php");
 						menu_disk.menu_disk_part,
 						crew.crew_id,
 						crew.crew_name,
+						menu_disk_state.state_id,
 						menu_disk_state.menu_state
 						FROM menu_disk 
 						LEFT JOIN menu_set ON (menu_disk.menu_sets_id = menu_set.menu_sets_id)
@@ -48,6 +49,8 @@ include("../../includes/functions.php");
 				
 				$result_menus= $mysqli->query($sql_menus);
 				$row=$result_menus->fetch_array(MYSQLI_BOTH);
+
+				$menu_disk_state = $row['state_id'];
 				
 				// Create Menu disk name
 				$menu_disk_name = "$row[menu_sets_name] ";
@@ -63,7 +66,7 @@ include("../../includes/functions.php");
 							}
 					}
 				if(isset($row['menu_disk_version']) and $row['menu_disk_version']!=='') {$menu_disk_name .= " v$row[menu_disk_version]";}
-
+					
 					$smarty->assign('menus',
 	   			 	 array('menu_sets_id' => $row['menu_sets_id'],
 						   'menu_sets_name' => $row['menu_sets_name'],
@@ -159,9 +162,19 @@ include("../../includes/functions.php");
 						  	  'ind_name' => $query['ind_name'],
 						  	  'menu_disk_id' => $menu_disk_id,
 						  	  'author_type_info' => $query['author_type_info']));
-				
 				}
 				
+				// Menu state dropdown
+				$query_menu_state = $mysqli->query("SELECT * FROM menu_disk_state ORDER BY state_id ASC");
+				
+				while  ($query = $query_menu_state->fetch_array(MYSQLI_BOTH)) 
+				{
+					// This smarty is used for for the menu_disk credits
+					$smarty->append('state_id', $query['state_id']);
+					$smarty->append('menu_state', $query['menu_state']);
+				}
+				 			
+				$smarty->assign('menu_state_id', $menu_disk_state);
 				
 				$smarty->assign('smarty_action', 'edit_disk_box');
 				$smarty->assign('menu_disk_id', $menu_disk_id);
@@ -343,9 +356,6 @@ if (isset($action) and $action=="ind_gen_search")
 			$smarty->assign('smarty_action', 'ind_gen_browse');
 }
 
-
-	
-	
 //Send all smarty variables to the templates
 $smarty->display('file:../../../templates/html/admin/ajax_menus_detail.html');
 ?>

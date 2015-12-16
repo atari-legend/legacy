@@ -463,3 +463,169 @@ if(isset($menu_disk_credits_id))
 }
 }
 
+//****************************************************************************************
+// UPDATE STATE
+//**************************************************************************************** 
+
+if(isset($action) and $action=="change_menu_disk_state")
+{
+if(isset($menu_disk_id)) 
+{
+		//Update state
+		$sql = $mysqli->query("UPDATE menu_disk SET state='$state_id' 
+					    WHERE menu_disk_id='$menu_disk_id'");
+		
+				$sql_menus = "SELECT menu_disk.menu_sets_id,
+						menu_set.menu_sets_name,
+						menu_disk.menu_disk_id,
+						menu_disk.menu_disk_number,
+						menu_disk.menu_disk_letter,
+						menu_disk.menu_disk_version,
+						menu_disk.menu_disk_part,
+						crew.crew_id,
+						crew.crew_name,
+						menu_disk_state.state_id,
+						menu_disk_state.menu_state
+						FROM menu_disk 
+						LEFT JOIN menu_set ON (menu_disk.menu_sets_id = menu_set.menu_sets_id)
+						LEFT JOIN crew_menu_prod ON (menu_set.menu_sets_id = crew_menu_prod.menu_sets_id)
+						LEFT JOIN crew ON (crew_menu_prod.crew_id = crew.crew_id)
+						LEFT JOIN menu_disk_state ON ( menu_disk.state = menu_disk_state.state_id)
+						WHERE menu_disk.menu_disk_id = '$menu_disk_id'";
+				
+				$result_menus= $mysqli->query($sql_menus);
+				$row=$result_menus->fetch_array(MYSQLI_BOTH);
+
+				$menu_disk_state = $row['state_id'];
+				
+				// Create Menu disk name
+				$menu_disk_name = "$row[menu_sets_name] ";
+				if(isset($row['menu_disk_number'])) {$menu_disk_name .= "$row[menu_disk_number]";}
+				if(isset($row['menu_disk_letter'])) {$menu_disk_name .= "$row[menu_disk_letter]";}
+				if(isset($row['menu_disk_part'])) 
+					{
+						if (is_numeric($row['menu_disk_part']))
+							{$menu_disk_name .= " part $row[menu_disk_part]";}
+							else 
+							{
+								$menu_disk_name .= "$row[menu_disk_part]";
+							}
+					}
+				if(isset($row['menu_disk_version']) and $row['menu_disk_version']!=='') {$menu_disk_name .= " v$row[menu_disk_version]";}
+					
+					$smarty->assign('menus',
+	   			 	 array('menu_sets_id' => $row['menu_sets_id'],
+						   'menu_sets_name' => $row['menu_sets_name'],
+						   'menu_disk_name' => $menu_disk_name,
+						   'menu_disk_id' => $row['menu_disk_id'],
+						   'menu_disk_number' => $row['menu_disk_number'],
+						   'menu_disk_letter' => $row['menu_disk_letter'],
+						   'menu_disk_version' => $row['menu_disk_version'],
+						   'menu_disk_part' => $row['menu_disk_part'],
+						   'crew_id' => $row['crew_id'],
+						   'crew_name' => $row['crew_name'],
+						   'menu_state' => $row['menu_state']));
+				
+				//list of games for the menu disk
+				$sql_games = "SELECT game.game_name AS 'software_name',
+								pub_dev.pub_dev_name AS 'developer_name',
+								game_year.game_year AS 'year',
+								menu_disk_title.menu_disk_title_id,
+								menu_types_main.menu_types_text
+								FROM menu_disk_title
+								LEFT JOIN menu_disk_title_game ON (menu_disk_title.menu_disk_title_id = menu_disk_title_game.menu_disk_title_id)
+								LEFT JOIN game ON (menu_disk_title_game.game_id = game.game_id)
+								LEFT JOIN game_developer ON (game.game_id = game_developer.game_id)
+								LEFT JOIN pub_dev ON (game_developer.dev_pub_id = pub_dev.pub_dev_id)
+								LEFT JOIN game_year ON (game.game_id = game_year.game_id)
+								LEFT JOIN menu_types_main ON (menu_disk_title.menu_types_main_id = menu_types_main.menu_types_main_id)
+								WHERE menu_disk_title.menu_disk_id = '$menu_disk_id' AND menu_disk_title.menu_types_main_id = '1' ORDER BY game.game_name ASC";
+				
+				$sql_demos = "SELECT demo.demo_name AS 'software_name',
+								crew.crew_name AS 'developer_name',
+								demo_year.demo_year AS 'year',
+								menu_disk_title.menu_disk_title_id,
+								menu_types_main.menu_types_text
+								FROM menu_disk_title
+								LEFT JOIN menu_disk_title_demo ON (menu_disk_title.menu_disk_title_id = menu_disk_title_demo.menu_disk_title_id)
+								LEFT JOIN demo ON (menu_disk_title_demo.demo_id = demo.demo_id)
+								LEFT JOIN demo_year ON (demo.demo_id = demo_year.demo_id)
+								LEFT JOIN crew_demo_prod ON (demo.demo_id = crew_demo_prod.demo_id)
+								LEFT JOIN crew ON (crew_demo_prod.crew_id = crew.crew_id)
+								LEFT JOIN menu_types_main ON (menu_disk_title.menu_types_main_id = menu_types_main.menu_types_main_id)
+								WHERE menu_disk_title.menu_disk_id = '$menu_disk_id' AND menu_disk_title.menu_types_main_id = '2' ORDER BY demo.demo_name ASC";				
+				
+				$sql_tools = "SELECT tools.tools_name AS 'software_name',
+								'' AS developer_name,
+								'' AS year,
+								menu_disk_title.menu_disk_title_id,
+								menu_types_main.menu_types_text
+								FROM menu_disk_title
+								LEFT JOIN menu_disk_title_tools ON (menu_disk_title.menu_disk_title_id = menu_disk_title_tools.menu_disk_title_id)
+								LEFT JOIN tools ON (menu_disk_title_tools.tools_id = tools.tools_id)
+								LEFT JOIN menu_types_main ON (menu_disk_title.menu_types_main_id = menu_types_main.menu_types_main_id)
+								WHERE menu_disk_title.menu_disk_id = '$menu_disk_id' AND menu_disk_title.menu_types_main_id = '3' ORDER BY tools.tools_name ASC";
+				
+				$temp_query = $mysqli->query("CREATE TEMPORARY TABLE temp ENGINE=MEMORY $sql_games") or die(mysqli_error());
+				$temp_query = $mysqli->query("INSERT INTO temp $sql_demos") or die(mysqli_error());
+				$temp_query = $mysqli->query("INSERT INTO temp $sql_tools") or die(mysqli_error());
+
+				$temp_query = $mysqli->query("SELECT * FROM temp GROUP BY menu_disk_title_id ORDER BY software_name ASC") or die("does not compute3");
+
+				
+				while  ($query = $temp_query->fetch_array(MYSQLI_BOTH)) 
+				{ 		
+					
+					// This smarty is used for creating the list of games
+						$smarty->append('game',
+	    				array('game_name' => $query['software_name'],
+						  	  'developer_name' => $query['developer_name'],
+						  	  'year' => $query['year'],
+						  	  'menu_disk_title_id' => $query['menu_disk_title_id'],
+						  	  'menu_types_text' => $query['menu_types_text']));
+				}
+				
+				// Get the menudisk credits
+				$sql_individuals = "SELECT 
+									individuals.ind_id,
+									individuals.ind_name,
+									menu_disk_credits.menu_disk_credits_id,
+									author_type.author_type_info
+									FROM individuals 
+									LEFT JOIN menu_disk_credits ON (individuals.ind_id = menu_disk_credits.ind_id)
+									LEFT JOIN author_type ON (menu_disk_credits.author_type_id = author_type.author_type_id)
+									WHERE menu_disk_credits.menu_disk_id = '$menu_disk_id'
+									ORDER BY individuals.ind_name ASC";
+				
+				$query_individual = $mysqli->query($sql_individuals);
+				
+				while  ($query = $query_individual->fetch_array(MYSQLI_BOTH)) 
+				{
+						// This smarty is used for for the menu_disk credits
+						$smarty->append('individuals',
+	    				array('menu_disk_credits_id' => $query['menu_disk_credits_id'],
+						  	  'ind_id' => $query['ind_id'],
+						  	  'ind_name' => $query['ind_name'],
+						  	  'menu_disk_id' => $menu_disk_id,
+						  	  'author_type_info' => $query['author_type_info']));
+				}
+				
+				// Menu state dropdown
+				$query_menu_state = $mysqli->query("SELECT * FROM menu_disk_state ORDER BY state_id ASC");
+				
+				while  ($query = $query_menu_state->fetch_array(MYSQLI_BOTH)) 
+				{
+					// This smarty is used for for the menu_disk credits
+					$smarty->append('state_id', $query['state_id']);
+					$smarty->append('menu_state', $query['menu_state']);
+				}
+				 			
+				$smarty->assign('menu_state_id', $menu_disk_state);
+				
+				$smarty->assign('smarty_action', 'edit_disk_box');
+				$smarty->assign('menu_disk_id', $menu_disk_id);
+
+				//Send to smarty for return value
+				$smarty->display('file:../../../templates/html/admin/ajax_menus_detail.html');
+}
+}
