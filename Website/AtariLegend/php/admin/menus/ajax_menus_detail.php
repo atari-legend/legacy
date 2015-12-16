@@ -20,10 +20,10 @@ Build game series page
 */
 extract($_REQUEST);
 include("../../includes/connect.php");
-include("../includes/config.php");
-include("../includes/config_smarty.php");
-include("../includes/constants.php");
-include("../includes/functions.php");
+include("../../includes/config.php");
+include("../../includes/config_smarty.php");
+include("../../includes/constants.php");
+include("../../includes/functions.php");
 	
 	// EDIT BOX FOR A MENU DISK!!!			
 	if (isset($action) and $action=="edit_disk_box" and $menu_disk_id!=='')
@@ -347,5 +347,5 @@ if (isset($action) and $action=="ind_gen_search")
 	
 	
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/ajax_menus_detail.html');
+$smarty->display('file:../../../templates/html/admin/ajax_menus_detail.html');
 ?>

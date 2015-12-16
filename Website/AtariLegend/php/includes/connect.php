@@ -12,5 +12,5 @@
 
 
 //make connection with MYSQL DB
-$mysqli = new mysqli("localhost", "root", "", "atarilegend");
+$mysqli = new mysqli("localhost", "root", "higher", "atarilegend");
 ?>

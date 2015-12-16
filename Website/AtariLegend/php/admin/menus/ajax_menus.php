@@ -20,10 +20,10 @@ Build game series page
 */
 extract($_REQUEST);
 include("../../includes/connect.php");
-include("../includes/config.php");
-include("../includes/config_smarty.php");
-include("../includes/constants.php");
-include("../includes/functions.php");
+include("../../includes/config.php");
+include("../../includes/config_smarty.php");
+include("../../includes/constants.php");
+include("../../includes/functions.php");
 	
 	// Crew browse function			
 	if (isset($action) and $action=="crew_browse")
@@ -69,5 +69,5 @@ include("../includes/functions.php");
 	}
 
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/ajax_menus.html');
+$smarty->display('file:../../../templates/html/admin/ajax_menus.html');
 ?>

@@ -11,7 +11,7 @@
 ***************************************************************************/
 
 //load all common functions
-include("../includes/common.php"); 
+include("../../includes/common.php");
 
 /*
 ************************************************************************************************
@@ -64,7 +64,7 @@ list($start2, $start3) = explode(":", exec('date +%N:%S'));
 				$smarty->assign("user_id",$_SESSION['user_id']);
 
 				//Send all smarty variables to the templates
-				$smarty->display('file:../templates/0/menus_list.html');
+				$smarty->display('file:../../../templates/html/admin/menus_list.html');
 
 				//close the connection
 				mysqli_free_result($numbermenus);	

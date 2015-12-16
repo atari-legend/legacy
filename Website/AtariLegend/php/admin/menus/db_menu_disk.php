@@ -11,7 +11,7 @@
 
 // We are using the action var to separate all the queries.
 
-include("../includes/common.php"); 
+include("../../includes/common.php"); 
 
 //****************************************************************************************
 // Add new menu set
@@ -281,7 +281,7 @@ if(isset($software_id) and isset($menu_disk_id))
 				$smarty->assign('menu_disk_id', $menu_disk_id);
 	
 	//Send to smarty for return value
-	$smarty->display('file:../templates/0/ajax_menus_detail.html');
+	$smarty->display('file:../../../templates/html/admin/ajax_menus_detail.html');
 	
 }
 
@@ -371,7 +371,7 @@ if(isset($action) and $action=="delete_from_menu_disk")
 				$smarty->assign('menu_disk_id', $menu_disk_id);
 	
 	//Send to smarty for return value
-	$smarty->display('file:../templates/0/ajax_menus_detail.html');
+	$smarty->display('file:../../../templates/html/admin/ajax_menus_detail.html');
 
 }
 
@@ -415,7 +415,7 @@ if(isset($ind_id) and isset($author_type_id) and isset($menu_disk_id))
 				
 				$smarty->assign('smarty_action', 'update_menu_disk_credits');
 				//Send to smarty for return value
-				$smarty->display('file:../templates/0/ajax_menus_detail.html');
+				$smarty->display('file:../../../templates/html/admin/ajax_menus_detail.html');
 }
 }
 
@@ -459,7 +459,7 @@ if(isset($menu_disk_credits_id))
 				
 				$smarty->assign('smarty_action', 'update_menu_disk_credits');
 				//Send to smarty for return value
-				$smarty->display('file:../templates/0/ajax_menus_detail.html');
+				$smarty->display('file:../../../templates/html/admin/ajax_menus_detail.html');
 }
 }
 
