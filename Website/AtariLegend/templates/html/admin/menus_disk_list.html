@@ -1,0 +1,610 @@
+{* 
+/***************************************************************************
+                              menu_disk_list.tpl
+*                            --------------------------
+*   begin                : Sunday, August 28, 2005
+*   copyright            : (C) 2005 Atari Legend
+*   email                : admin@atarilegend.com
+*
+*
+***************************************************************************/
+
+************************************************************************************************
+The main game page
+************************************************************************************************
+*}
+{extends file='html/admin/frontpage.html'}
+{block name=java_script}
+<script type="text/javascript">
+function browseCrew(str) {
+    if (str == "") {
+        document.getElementById("option_crew").innerHTML = "";
+        return;
+    } else { 
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) 
+            {
+                document.getElementById("option_crew").innerHTML = xmlhttp.responseText;
+            } 
+        }
+        xmlhttp.open("GET","../menus/ajax_menus.php?action=crew_browse&query="+str,true);
+        xmlhttp.send();
+    }
+}
+
+function addNewdisk(str) {
+    if (str == "") {
+        document.getElementById("new_disk").innerHTML = "";
+        return;
+    } else { 
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) 
+            {
+                document.getElementById("new_disk").innerHTML = xmlhttp.responseText;
+            } 
+        }
+        xmlhttp.open("GET","../menus/ajax_menus.php?menu_sets_id={$menu_set.menu_sets_id}&action=add_new_disk_box&query="+str,true);
+        xmlhttp.send();
+    }
+} 
+
+function CloseaddNewdisk() {
+        document.getElementById("new_disk").innerHTML = "";
+        return;
+} 
+
+function editDisk(str) {
+	
+	var str2 = "diskedit_ajax_";
+	var disk_edit_ajax = str2.concat(str);
+	
+    if (str == "") {
+        document.getElementById(disk_edit_ajax).innerHTML = "";
+        return;
+    } else { 
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) 
+            {
+                document.getElementById(disk_edit_ajax).innerHTML = xmlhttp.responseText;
+            } 
+        }
+        xmlhttp.open("GET","../menus/ajax_menus_detail.php?action=edit_disk_box&menu_disk_id="+str,true);
+        xmlhttp.send();
+    }
+} 
+
+function CloseeditDisk(str) {
+	
+	var str2 = "diskedit_ajax_";
+	var disk_edit_ajax = str2.concat(str);
+	
+    if (str == "") {
+        document.getElementById(disk_edit_ajax).innerHTML = "";
+        return;
+    } else { 
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) 
+            {
+                document.getElementById(disk_edit_ajax).innerHTML = xmlhttp.responseText;
+            } 
+        }
+        xmlhttp.open("GET","../menus/ajax_menus_detail.php?action=close_edit_disk_box&menu_disk_id="+str,true);
+        xmlhttp.send();
+    }
+} 
+function browseInd(str) {
+    if (str == "") {
+        document.getElementById("ind_member").innerHTML = "";
+        return;
+    } else { 
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("ind_member").innerHTML = xmlhttp.responseText;
+            }
+        }
+        xmlhttp.open("GET","../menus/ajax_menus_detail.php?action=ind_gen_browse&query="+str,true);
+        xmlhttp.send();
+    }
+}
+
+function searchInd(str) {
+    if (str == "") {
+        str = "empty";
+			xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("ind_member").innerHTML = xmlhttp.responseText;
+            }
+        }   
+
+    } else { 
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("ind_member").innerHTML = xmlhttp.responseText;
+            }
+        }
+        xmlhttp.open("GET","../menus/ajax_menus_detail.php?action=ind_gen_search&query="+str,true);
+        xmlhttp.send();
+    }
+}
+function CrewDelete(crew_select) 
+{ 
+            // CONFIRM REQUIRES ONE ARGUMENT 
+         var message = "Are you sure you want to delete this crew from this menu series ????"; 
+         // CONFIRM IS BOOLEAN. THAT MEANS THAT 
+         // IT RETURNS TRUE IF 'OK' IS CLICKED 
+         // OTHERWISE IT RETURN FALSE 
+         var return_value = confirm(message); 
+ 
+         if (return_value !="0") 
+         { 
+              url="db_menu_disk.php?menu_sets_id={$menu_set.menu_sets_id}&crew_id="+crew_select+"&action=delete_crew_from_menu_set"; 
+               location.href=url; 
+         }  
+} 
+function popAddIntroCred(str) {
+    if (str == "") {
+        document.getElementById("menu_detail_expand").innerHTML = "";
+        return;
+    } else { 
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("menu_detail_expand").innerHTML = xmlhttp.responseText;
+                document.getElementById("intro_credit_link").innerHTML = "<a onclick=\"closeAddIntroCred("+str+")\" style=\"cursor: pointer;\" class=\"MAINNAV\">Add intro credits</a>";
+            }
+        }
+        xmlhttp.open("GET","../menus/ajax_menus_detail.php?action=add_intro_credit&query="+str,true);
+        xmlhttp.send();
+    }
+}
+
+function closeAddIntroCred(str) {
+        document.getElementById("menu_detail_expand").innerHTML = "";
+        document.getElementById("intro_credit_link").innerHTML = "<a onclick=\"popAddIntroCred("+str+")\" style=\"cursor: pointer;\" class=\"MAINNAV\">Add intro credits</a>";
+        return;
+} 
+
+function popAddGames(str) {
+    if (str == "") {
+        document.getElementById("menu_detail_expand").innerHTML = "";
+        return;
+    } else { 
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("menu_detail_expand").innerHTML = xmlhttp.responseText;
+                document.getElementById("gameto_menu_link").innerHTML = "<a onclick=\"closeAddGames("+str+")\" style=\"cursor: pointer;\" class=\"MAINNAV\">Add Game/Tool/Demo to menu</a>";
+            }
+        }
+        xmlhttp.open("GET","../menus/ajax_addgames_menus.php?action=game_browse&list=full&query=num&menu_disk_id="+str,true);
+        xmlhttp.send();
+    }
+}
+
+function closeAddGames(str) {
+        document.getElementById("menu_detail_expand").innerHTML = "";
+        document.getElementById("gameto_menu_link").innerHTML = "<a onclick=\"popAddGames("+str+")\" style=\"cursor: pointer;\" class=\"MAINNAV\">Add Game/Tool/Demo to menu</a>";
+        return;
+} 
+
+function browseGame(str,menu_disk_id) {
+    if (str == "") {
+        document.getElementById("game_list").innerHTML = "";
+        return;
+    } else { 
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("game_list").innerHTML = xmlhttp.responseText;
+            }
+        }
+        xmlhttp.open("GET","../menus/ajax_addgames_menus.php?action=game_browse&list=inner&query="+str+"&menu_disk_id="+menu_disk_id,true);
+        xmlhttp.send();
+    }
+}
+
+function searchGame(str,menu_disk_id) {
+    if (str == "") {
+        str = "empty";
+			xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("game_list").innerHTML = xmlhttp.responseText;
+            }
+        }   
+
+    } else { 
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("game_list").innerHTML = xmlhttp.responseText;
+            }
+        }
+        if (str.length >= 3) {
+        xmlhttp.open("GET","../menus/ajax_addgames_menus.php?action=game_search&list=inner&query="+str+"&menu_disk_id="+menu_disk_id,true);
+        xmlhttp.send();
+	}
+    }
+}
+
+function addGametoMenu(software_id,menu_disk_id,software_type) {
+ if (software_id == "") {
+        document.getElementById("menu_software_list").innerHTML = "";
+        return;
+    } else { 
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+				
+				
+				data = xmlhttp.responseText.split ( "[BRK]" );
+				document.getElementById("menu_software_list").innerHTML = data[0];
+ 
+            $.notify_osd.create({
+				'text'        : data[1],             // notification message
+				'icon'        : '../templates/0/icons/star.png', // icon path, 48x48
+				'sticky'      : false,             // if true, timeout is ignored
+				'timeout'     : 4,                 // disappears after 6 seconds
+				'dismissable' : true               // can be dismissed manually
+				});
+            
+            document.getElementById("game_add_to_menu").reset();
+            }
+        }
+        xmlhttp.open("GET","../menus/db_menu_disk.php?action=add_title_to_menu&software_id="+software_id+"&menu_disk_id="+menu_disk_id+"&software_type="+software_type,true);
+        xmlhttp.send();
+    } 
+}
+function deleteGamefromMenu(str,menu_disk_id) {
+
+            // CONFIRM REQUIRES ONE ARGUMENT 
+         var message = "Are you sure you want to delete this title from this menu disk????"; 
+         // CONFIRM IS BOOLEAN. THAT MEANS THAT 
+         // IT RETURNS TRUE IF 'OK' IS CLICKED 
+         // OTHERWISE IT RETURN FALSE 
+         var return_value = confirm(message); 
+ 
+		document.getElementById("menu_disk_title_id"+str).checked = false;
+		
+         if (return_value !="0") 
+         { 
+
+			if (str == "") {
+        document.getElementById("menu_software_list").innerHTML = "";
+        return;
+    } else { 
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("menu_software_list").innerHTML = xmlhttp.responseText;
+                
+                 $.notify_osd.create({
+				'text'        : 'Title deleted from menudisk.',             // notification message
+				'icon'        : '../templates/0/icons/star.png', // icon path, 48x48
+				'sticky'      : false,             // if true, timeout is ignored
+				'timeout'     : 4,                 // disappears after 6 seconds
+				'dismissable' : true               // can be dismissed manually
+				});
+                
+            }
+        }
+        xmlhttp.open("GET","../menus/db_menu_disk.php?action=delete_from_menu_disk&menu_disk_title_id="+str+"&menu_disk_id="+menu_disk_id,true);
+        xmlhttp.send();
+			}		 
+         }  
+}
+
+function addCreditstoMenu(menu_disk_id) {
+ if (menu_disk_id == "") {
+        document.getElementById("menu_credit_list").innerHTML = "";
+        return;
+    } else { 
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("menu_credit_list").innerHTML = xmlhttp.responseText;
+            }
+        }
+        
+        var ind_id = document.getElementById("menu_credits_form").elements.namedItem("ind_id").value;
+        var author_type_id = document.getElementById("menu_credits_form").elements.namedItem("author_type_id").value;
+        
+        xmlhttp.open("GET","../menus/db_menu_disk.php?action=add_intro_credits&author_type_id="+author_type_id+"&menu_disk_id="+menu_disk_id+"&ind_id="+ind_id,true);
+        xmlhttp.send();
+    } 
+}
+
+function DeleteCredits(menu_disk_credits_id,menu_disk_id) {
+
+            // CONFIRM REQUIRES ONE ARGUMENT 
+         var message = "Are you sure you want to delete this person from the credit list????"; 
+         // CONFIRM IS BOOLEAN. THAT MEANS THAT 
+         // IT RETURNS TRUE IF 'OK' IS CLICKED 
+         // OTHERWISE IT RETURN FALSE 
+         var return_value = confirm(message); 
+ 
+         if (return_value !="0") 
+         { 
+
+			if (menu_disk_credits_id == "") {
+        document.getElementById("menu_credit_list").innerHTML = "";
+        return;
+    } else { 
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("menu_credit_list").innerHTML = xmlhttp.responseText;
+            }
+        }
+        xmlhttp.open("GET","../menus/db_menu_disk.php?action=delete_menu_disk_credits&menu_disk_credits_id="+menu_disk_credits_id+"&menu_disk_id="+menu_disk_id,true);
+        xmlhttp.send();
+			}		 
+         }  
+}
+
+function ChangeState(state_id,menu_disk_id) {
+	
+	var str2 = "diskedit_ajax_";
+	var disk_edit_ajax = str2.concat(menu_disk_id);
+	
+ if (menu_disk_id == "") {
+        document.getElementById(disk_edit_ajax).innerHTML = "";
+        return;
+    } else { 
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById(disk_edit_ajax).innerHTML = xmlhttp.responseText;
+                
+                 $.notify_osd.create({
+				'text'        : 'Update status of menudisk!.',             // notification message
+				'icon'        : '../templates/0/icons/star.png', // icon path, 48x48
+				'sticky'      : false,             // if true, timeout is ignored
+				'timeout'     : 4,                 // disappears after 4 seconds
+				'dismissable' : true               // can be dismissed manually
+				});
+                
+            }
+        }
+        
+      
+        xmlhttp.open("GET","../menus/db_menu_disk.php?action=change_menu_disk_state&state_id="+state_id+"&menu_disk_id="+menu_disk_id,true);
+        xmlhttp.send();
+    } 
+}
+
+</script>
+{/block}
+{block name=title}Menus Search results{/block}
+{block name=left_tile}
+		<br/>
+		<div style="display:flex;justify-content: space-around;">
+		<a href="../menus/menus_list.php" class="click_button_next">
+		Back to Menu Series</a>
+		</div>
+		<br/>
+		<hr>
+		<div class="quicklinkbox">
+			<form action="../menus/menus_disk_list.php" method="get" name="post" id="menu_set_change">
+				<select name="menu_sets_id" id="menu_sets_list" size="1" style="width:200px;background-color:white;margin:5px;" onchange="this.form.submit()">
+				<option value="" selected style="background-color:white;">Change Menu Series</option>
+
+			{foreach from=$menu_set_list item=line}	
+				{html_options values=$line.menu_sets_id output=$line.menu_sets_name}
+			{/foreach}
+		</select>
+		</form>	
+		</div>
+		<hr>
+		{* Name set *}
+		<div class="quicklinkbox">
+		<form action="../menus/db_menu_disk.php" method="post" name="post" id="menu_edit">
+		<b>Menu series Editor</b><br/><br/>
+		Change name of menu series:<br/> 
+		<input type="text" name="menu_sets_name" value="{$menu_set.menu_sets_name}" style="margin:5px; width:200px;"><br/>
+		<input type="hidden" name="menu_sets_id" value="{$menu_set.menu_sets_id}">
+		<input type="hidden" name="action" value="menu_set_name_update">
+		<input type="submit" value="Update">
+		</form>
+		</div>
+		<br/>
+		
+		{* Add crew section *}
+		<hr>
+		<div class="quicklinkbox">
+		<b>Crew Editor</b><br/>
+		<br/>
+		Set Crew for menudisk series:<br/>
+		<form action="../menus/db_menu_disk.php" method="post" name="post_menu_crew_set" id="menu_crew_set">
+		<select name="crew_browse" size="1" style="margin:5px;vertical-align:top;background-color:white;" onchange="browseCrew(this.value)">
+			{html_options values=$az_value output=$az_output}
+		</select>
+		{* Ajax *}
+		<div id="option_crew">
+		<select name="crew_id" id="CrewList" size="5" style="width:200px;">
+				<option value="" selected>-</option>
+
+			{foreach from=$crew item=line}	
+				{html_options values=$line.crew_id output=$line.crew_name}
+			{/foreach}
+		</select>
+		</div>
+		<input type="submit" value="Set" style="margin:5px;vertical-align:top;">
+		<input type="hidden" name="menu_sets_id" value="{$menu_set.menu_sets_id}">
+		<input type="hidden" name="action" value="menu_set_crew_set">
+		</form>
+		
+		
+		
+		<br/>
+		{if isset($connected_crew)}
+		{foreach from=$connected_crew item=line}	
+		 {$line.crew_name} - <a href="#" class="MAINNAV" onclick="CrewDelete({$line.crew_id});">Delete</a><br>
+		{/foreach}
+		{/if}
+		<hr>
+		
+		Quick add new Crew to db:
+		<form action="../menus/db_menu_disk.php" method="post" name="post_menu_crew_add" id="menu_crew_add">
+		<input type="text" name="new_crew_name" value="" style="margin:5px; width:200px;"><br/>
+		<input type="submit" value="Add new crew" style="margin:5px;vertical-align:top;">
+		<input type="hidden" name="menu_sets_id" value="{$menu_set.menu_sets_id}">
+		<input type="hidden" name="action" value="menu_set_crew_add">
+		</form>
+		</div>
+		<hr>
+		{* END crew section *}
+		<br/><br/> 
+{/block}
+{block name=main_tile}
+<div class="NEWMAINCELL">
+	<fieldset class="interview_set" style="width:88%;">
+		<legend class="links_legend">Menu Series Edit</legend>
+		
+		<div style="float:left;">
+		<b>{$menu_set.menu_sets_name} selected!</b><br/>
+		Edit Menu Series or select a disk.<br/>
+		<br/>
+		
+		<a class="MAINNAV" onclick="addNewdisk()" style="cursor: pointer;">Add New Disk</a> to series.<br/>
+		</div>
+		<div style="float:right;">
+			Publish Series: <br/>
+			<input type="radio" name="publish" value="online" checked> Online<br/>
+			<input type="radio" name="publish" value="offline" checked> Offline<br/>
+		</div>
+		
+		
+		<div id="new_disk"> </div>
+		
+	</fieldset> 
+<br/><br/>
+	<table class="table_game_list">
+			<tr>
+				<th style="width:40%;">Menu Disk</th>
+				<th style="width:30%;">Crew</th>
+				<th style="width:15%;">Release Year</th>
+				<th style="width:15%;">State</th>
+			</tr>
+					{if isset($menus)}
+					{foreach from=$menus item=line}
+			
+			<tr id="diskedit_ajax_{$line.menu_disk_id}">
+			
+				<td style="width:40%;">{if $line.menu_disk_id != ''}<a onclick="editDisk({$line.menu_disk_id})" style="cursor: pointer;" class="MAINNAV">{$line.menu_disk_name}</a>{else}<i>n/a</i>{/if}</td>
+				<td style="width:30%;">{if isset($line.crew_id)}{$line.crew_name}{else}<i>n/a</i>{/if}</td>
+				<td style="width:15%;"><i>n/a</i></td>				
+				<td style="width:15%;">{if isset($line.menu_state)}{$line.menu_state}{else}<i>n/a</i>{/if}</td>
+			</tr>
+			 
+					{/foreach}
+					{/if}
+			<tr>
+				<td class="game_list_footer" colspan="4">
+					{if $nr_of_entries == 1}1 menu disk found {else} {$nr_of_entries} menu disks found{/if} in {$querytime} sec
+				</td>
+			</tr>
+		</table>
+<br/>
+
+<br/>
+{if isset($message)}
+	<div class="message_box">{$message}</div>
+{/if}
+</div>
+{/block}
