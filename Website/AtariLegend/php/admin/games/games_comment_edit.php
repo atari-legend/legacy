@@ -18,7 +18,7 @@ This will compile the games comment edit page
 ***********************************************************************************
 */
 
-include("../includes/common.php"); 
+include("../../includes/common.php");
 
 if(empty($view)) {$view="comment";}
 if(empty($c_counter)) {$c_counter="";}
@@ -48,5 +48,5 @@ $date = convert_timestamp($query_comment['timestamp']);
 			  'v_counter' => $v_counter));
 
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/games_comment_edit.html');
+$smarty->display('file:../../../templates/html/admin/games_comment_edit.html');
 ?>
