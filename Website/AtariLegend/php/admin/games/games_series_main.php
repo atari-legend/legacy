@@ -19,7 +19,7 @@ Build game series page
 ***********************************************************************************
 */
 
-include("../includes/common.php");
+include("../../includes/common.php");
 
 	// SERIES LIST DROPDOWN
 				
@@ -34,5 +34,5 @@ include("../includes/common.php");
 				}
 
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/games_series_main.html');
+$smarty->display('file:../../../templates/html/admin/games_series_main.html');
 ?>
