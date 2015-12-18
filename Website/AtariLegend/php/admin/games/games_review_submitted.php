@@ -18,7 +18,7 @@ This is the submitted review page
 */
 
 //load all common functions
-include("../includes/common.php"); 
+include("../../includes/common.php"); 
 
 //get the submitted reviews
 $sql_submission =  $mysqli->query("SELECT * FROM review_main
@@ -48,4 +48,4 @@ $smarty->assign("submission_nr",$i);
 $smarty->assign("user_id",$_SESSION['user_id']);
 
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/games_review_submitted.html');
+$smarty->display('file:../../../templates/html/admin/games_review_submitted.html');

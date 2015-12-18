@@ -18,7 +18,7 @@ Display submissions
 ***********************************************************************************
 */
 
-include("../includes/common.php");
+include("../../includes/common.php");
 if (empty($list) or $list=='') {$list="current"; }
 // get the total nr of submissions in the DB
 $query_total_number = $mysqli->query("SELECT * FROM demo_submitinfo") or die ("Couldn't get the total number of submissions");
@@ -156,5 +156,5 @@ $v_counter = (isset($_GET["v_counter"]) ? $_GET["v_counter"] : 0);
 						  'num_sub' => $number_sub));
 
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/submission_demos.html');
+$smarty->display('file:../../../templates/html/admin/submission_demos.html');
 ?>

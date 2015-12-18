@@ -24,7 +24,7 @@
 //setcookie("last_visit_time",time(),time()+7776000);
 
 //Includes
-include("../includes/common.php"); 
+include("../../includes/common.php"); 
 
 //Send all smarty variables to the templates
 $smarty->display('file:../../../templates/html/admin/updates.html');

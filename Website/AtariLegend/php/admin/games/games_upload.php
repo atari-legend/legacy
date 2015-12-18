@@ -16,7 +16,7 @@
 //**************************************************************************************** 
 
 //load all common functions
-include("../includes/common.php"); 
+include("../../includes/common.php"); 
 
 //************************************************************************************************
 //Let's get the game info for the file name concatenation, and the download data for disks already
@@ -93,7 +93,7 @@ $smarty->assign('nr_downloads',$nr_downloads);
 $smarty->assign("user_id",$_SESSION['user_id']);
 
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/games_upload.html');
+$smarty->display('file:../../../templates/html/admin/games_upload.html');
 
 //close the connection
 mysqli_close($mysqli);

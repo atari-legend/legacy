@@ -17,7 +17,7 @@ This will compile the demos comment edit page
 ***********************************************************************************
 */
 
-include("../includes/common.php"); 
+include("../../includes/common.php"); 
 
 if (empty($view)) {$view="";}
 if (empty($c_counter)) {$c_counter="";}
@@ -46,5 +46,5 @@ $date = convert_timestamp($query_comment['timestamp']);
 			  'v_counter' => $v_counter));
 
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/demos_comment_edit.html');
+$smarty->display('file:../../../templates/html/admin/demos_comment_edit.html');
 ?>

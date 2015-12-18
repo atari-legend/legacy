@@ -15,7 +15,7 @@
 //********************************************************************************************* 
 
 //load all common functions
-include("../includes/common.php"); 
+include("../../includes/common.php"); 
 
 if (isset($action) and $action == 'delete_comment')
 {

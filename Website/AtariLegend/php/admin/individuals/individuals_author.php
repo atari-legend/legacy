@@ -14,7 +14,7 @@
 // The Author main page
 //**************************************************************************************** 
 
-include("../includes/common.php");
+include("../../includes/common.php");
 
 if ( isset($action) and $action == 'load' )
 {
@@ -46,7 +46,7 @@ while  ($author=$sql_author->fetch_array(MYSQLI_BOTH))
 $smarty->assign("user_id",$_SESSION['user_id']);
 
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/individuals_author.html');
+$smarty->display('file:../../../templates/html/admin/individuals_author.html');
 
 //close the connection
 mysqli_close($mysqli);

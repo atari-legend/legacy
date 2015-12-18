@@ -17,7 +17,7 @@ This is the crew page contructor
 */
 
 //load all common functions
-include("../includes/common.php"); 
+include("../../includes/common.php"); 
 
 if (isset($new_crew)) 
 {
@@ -119,7 +119,7 @@ $smarty->assign('tracking',
 				 	   'crewbrowse' => $crewbrowse));
 
 		//Send all smarty variables to the templates
-		$smarty->display('file:../templates/0/crew_editor.html');
+		$smarty->display('file:../../../templates/html/admin/crew_editor.html');
 
 //close the connection
 mysqli_close($mysqli);

@@ -15,12 +15,12 @@
 // This is the interview help page. 
 //**************************************************************************************** 
 
-include("../includes/common.php");
+include("../../includes/common.php");
 
 $smarty->assign("user_id",$_SESSION['user_id']);
 
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/interviews_help.html');
+$smarty->display('file:../../../templates/html/admin/interviews_help.html');
 
 //close the connection
 mysqli_close($mysqli);

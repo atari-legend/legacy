@@ -18,7 +18,7 @@ Edit Issues!
 ***********************************************************************************
 */
 
-include("../includes/common.php");
+include("../../includes/common.php");
 
 $sql_magazine = $mysqli->query("SELECT * FROM magazine WHERE magazine_id='$magazine_id'") or die ("Error retriving magazines info");
 			
@@ -44,5 +44,5 @@ list ($magazine_id,$magazine_name) = $sql_magazine->fetch_row();
 			}
 
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/magazine_edit.html');
+$smarty->display('file:../../../templates/html/admin/magazine_edit.html');
 ?>

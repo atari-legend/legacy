@@ -15,7 +15,7 @@
 // This is the image selection/upload screen for the interviews
 //**************************************************************************************** 
 
-include("../includes/common.php");
+include("../../includes/common.php");
 
 //Get the screenshots for this interview, if they exist
 $sql_screenshots = $mysqli->query("SELECT * FROM screenshot_interview
@@ -66,7 +66,7 @@ while ($interview = $sql_interview->fetch_array(MYSQLI_BOTH))
 $smarty->assign("user_id",$_SESSION['user_id']);
 
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/interviews_screenshots_add.html');
+$smarty->display('file:../../../templates/html/admin/interviews_screenshots_add.html');
 
 //close the connection
 mysqli_close($mysqli);

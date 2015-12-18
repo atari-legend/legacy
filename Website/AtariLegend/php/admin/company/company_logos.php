@@ -17,7 +17,7 @@
 A little logo preview page
 ***************************************************************************/
 
-include("../includes/common.php");
+include("../../includes/common.php");
 
 $sql_logos = $mysqli->query("SELECT *
 				  			FROM pub_dev 
@@ -43,7 +43,7 @@ while  ($logos=$sql_logos->fetch_array(MYSQLI_BOTH))
 $smarty->assign("user_id",$_SESSION['user_id']);
 
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/company_logos.html');
+$smarty->display('file:../../../templates/html/admin/company_logos.html');
 
 //close the connection
 mysqli_close($mysqli);

@@ -16,7 +16,7 @@ The main individual page
 ************************************************************************************************
 */
 
-include("../includes/common.php");
+include("../../includes/common.php");
 
 //Get the individuals
 $sql_individuals = "SELECT * FROM individuals ORDER BY ind_name ASC";
@@ -43,7 +43,7 @@ while  ($individuals=$query_temporary->fetch_array(MYSQLI_BOTH))
 $smarty->assign("user_id",$_SESSION['user_id']);
 
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/individuals_main.html');
+$smarty->display('file:../../../templates/html/admin/individuals_main.html');
 
 //close the connection
 mysqli_close($mysqli);

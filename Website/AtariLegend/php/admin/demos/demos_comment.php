@@ -12,7 +12,7 @@
 *
 ***************************************************************************/
 
-include("../includes/common.php");
+include("../../includes/common.php");
 
 $v_counter= (isset($_GET["v_counter"]) ? $_GET["v_counter"] : 0);
 
@@ -146,5 +146,5 @@ $smarty->assign('links',
 			   'c_counter' => $c_counter));
 
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/demos_comment.html');
+$smarty->display('file:../../../templates/html/admin/demos_comment.html');
 ?>

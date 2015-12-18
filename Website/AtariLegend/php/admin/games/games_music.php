@@ -12,7 +12,7 @@
 ***************************************************************************/
 
 //load all common functions
-include("../includes/common.php"); 
+include("../../includes/common.php"); 
 
 /*
 ************************************************************************************************
@@ -52,7 +52,7 @@ if (isset($action) and $action == 'search')
 		$smarty->assign("user_id",$_SESSION['user_id']);
 
 		//Send all smarty variables to the templates
-		$smarty->display('file:../templates/0/games_music.html');
+		$smarty->display('file:../../../templates/html/admin/games_music.html');
 
 		//close the connection
 		mysqli_free_result();
@@ -114,7 +114,7 @@ if (isset($action) and $action == 'search')
 				$smarty->assign("user_id",$_SESSION['user_id']);
 
 				//Send all smarty variables to the templates
-				$smarty->display('file:../templates/0/games_music_list.html');
+				$smarty->display('file:../../../templates/html/admin/games_music_list.html');
 
 				//close the connection
 				mysqli_free_result($numberzaks);	
@@ -126,7 +126,7 @@ if (isset($action) and $action == 'search')
 				$smarty->assign("user_id",$_SESSION['user_id']);
 
 				//Send all smarty variables to the templates
-				$smarty->display('file:../templates/0/games_music.html');
+				$smarty->display('file:../../../templates/html/admin/games_music.html');
 
 				//close the connection
 				mysqli_free_result();
@@ -139,7 +139,7 @@ else
 	$smarty->assign("user_id",$_SESSION['user_id']);
 
 	//Send all smarty variables to the templates
-	$smarty->display('file:../templates/0/games_music.html');
+	$smarty->display('file:../../../templates/html/admin/games_music.html');
 
 	//close the connection
 	mysqli_close($mysqli);

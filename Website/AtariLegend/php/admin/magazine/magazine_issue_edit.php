@@ -18,7 +18,7 @@ Add Magazine screens!
 ***********************************************************************************
 */
 
-include("../includes/common.php");
+include("../../includes/common.php");
 
 	$sql = $mysqli->query("SELECT * FROM magazine
 						LEFT JOIN magazine_issue ON (magazine.magazine_id = magazine_issue.magazine_id)
@@ -50,5 +50,5 @@ include("../includes/common.php");
 						'magazine_image' => $magazine_image));
  
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/magazine_issue_edit.html');
+$smarty->display('file:../../../templates/html/admin/magazine_issue_edit.html');
 ?>

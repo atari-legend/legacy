@@ -18,7 +18,7 @@ Add Magazine screens!
 ***********************************************************************************
 */
 
-include("../includes/common.php");
+include("../../includes/common.php");
 
 $sql_magazine = $mysqli->query("SELECT * FROM magazine ORDER BY magazine_name ASC") or die ("Error retriving magazines");
 			
@@ -34,5 +34,5 @@ while ( list ($magazine_id,$magazine_name) = $sql_magazine->fetch_row())
 $smarty->assign('magazine_add_tpl', '1');
 
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/magazine_add.html');
+$smarty->display('file:../../../templates/html/admin/magazine_add.html');
 ?>

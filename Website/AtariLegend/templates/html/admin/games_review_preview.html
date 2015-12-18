@@ -1,0 +1,55 @@
+{* 
+/***************************************************************************
+*                               games_review_preview.tpl
+*                            -------------------------------
+*   begin                : Saturday, December 03, 2005
+*   copyright            : (C) 2005 Atari Legend
+*   email                : admin@atarilegend.com
+*
+*   Id: games_review_preview.tpl,v 0.10 2005/12/03 17:40 ST Graveyard
+*
+***************************************************************************/
+//****************************************************************************************
+// this is the template file to generate a game review
+//**************************************************************************************** 
+*}
+{extends file='html/admin/frontpage.html'}
+{block name=title}
+<div style="float:left;">
+Written by {if $review.email != ''}<a href="mailto:{$review.email}?subject=Your review of {$review.game_name} at Atari Legend" class="MAINNAV_WHITE">{$review.user_name}</a>{else}{$review.user_name}{/if}
+</div>
+<div style="float:right;padding-right:5px;">{$review.date}</div>
+{/block}
+{block name=main_tile}
+<div class="NEWMAINCELL">
+<div style="display:table;width:95%;">
+	<div style="display:table-cell;width:70%;vertical-align:top;">
+		{$review.text}
+	</div>
+<div tyle="display:table-cell;width:30%;float:right;">
+	<div style="text-align:center;">
+			{foreach from=$screenshots item=line} 
+				<div style="width:280px;">
+					 	<img src="../includes/show_image.php?file={$line.screenshot}&amp;resize=270,null,null,null" alt="{$review.game_name}">
+				</div>
+				<div style="width:280px;text-align:center;">
+						{$line.comment}
+				</div>
+				<br/>
+				<br/>
+			{/foreach}
+	</div>
+</div>	
+	
+</div>	
+		<div class="review_score_box" style="">
+			<div style="display:table-cell;width:25%;">Graphics : <b>{$score.graphics}</b></div>
+			<div style="display:table-cell;width:25%;">Sound : <b>{$score.sound}</b></div>
+			<div style="display:table-cell;width:25%;">Gameplay : <b>{$score.gameplay}</b></div>
+			<div style="display:table-cell;width:25%;">Overall : <b>{$score.overall}</b></div>
+		</div>		
+		<br/>
+		© 2001 - 2005 by "Atari Legend". All rights reserved.
+</div>
+{/block}
+	

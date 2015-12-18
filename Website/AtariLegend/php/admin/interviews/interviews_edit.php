@@ -15,7 +15,7 @@
 // This is the interview edit page. Overhere you can edit an existing interview
 //**************************************************************************************** 
 
-include("../includes/common.php");
+include("../../includes/common.php");
 
 //Get the individuals
 $sql_individuals = $mysqli->query("SELECT * FROM individuals ORDER BY ind_name ASC")
@@ -100,7 +100,7 @@ while ($screenshots = $sql_screenshots->fetch_array(MYSQLI_BOTH))
 $smarty->assign("user_id",$_SESSION['user_id']);
 
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/interviews_edit.html');
+$smarty->display('file:../../../templates/html/admin/interviews_edit.html');
 
 //close the connection
 mysqli_close($mysqli);

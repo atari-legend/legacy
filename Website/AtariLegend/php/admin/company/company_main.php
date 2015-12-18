@@ -16,7 +16,7 @@ The main company (developer/publisher) page
 ************************************************************************************************
 */
 
-include("../includes/common.php");
+include("../../includes/common.php");
 
 //Get the companies
 $sql_company = $mysqli->query("SELECT * FROM pub_dev ORDER BY pub_dev_name ASC")
@@ -32,7 +32,7 @@ while  ($company=$sql_company->fetch_array(MYSQLI_BOTH))
 $smarty->assign("user_id",$_SESSION['user_id']);
 
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/company_main.html');
+$smarty->display('file:../../../templates/html/admin/company_main.html');
 
 //close the connection
 mysqli_close($mysqli);
