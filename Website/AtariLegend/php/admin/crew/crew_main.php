@@ -17,7 +17,7 @@ This is the crew page contructor
 */
 
 //load all common functions
-include("../includes/common.php"); 
+include("../../includes/common.php"); 
 
 
 if (isset($new_crew)) 
@@ -53,7 +53,7 @@ if (isset($message))
 				$smarty->assign('az_output', $az_output);
 
 		//Send all smarty variables to the templates
-		$smarty->display('file:../templates/0/crew_main.html');
+		$smarty->display('file:../../../templates/html/admin/crew_main.html');
 
 //close the connection
 mysqli_close($mysqli);

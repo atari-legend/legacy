@@ -16,7 +16,7 @@ The company edit page
 ************************************************************************************************
 */
 
-include("../includes/common.php");
+include("../../includes/common.php");
 
 if ($comp_id == '-')
 {
@@ -75,7 +75,7 @@ while  ($company=$sql_company->fetch_array(MYSQLI_BOTH))
 $smarty->assign("user_id",$_SESSION['user_id']);
 
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/company_edit.html');
+$smarty->display('file:../../../templates/html/admin/company_edit.html');
 }
 
 //close the connection

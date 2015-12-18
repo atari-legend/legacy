@@ -15,7 +15,7 @@
 // This is the image selection/upload screen for the games
 //**************************************************************************************** 
 
-include("../includes/common.php");
+include("../../includes/common.php");
 
 //Get the screenshots for this game, if they exist
 $sql_screenshots = $mysqli->query("SELECT * FROM screenshot_game
@@ -59,7 +59,7 @@ while ( $game=$sql_game->fetch_array(MYSQLI_BOTH))
 $smarty->assign("user_id",$_SESSION['user_id']);
 
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/games_screenshot_add.html');
+$smarty->display('file:../../../templates/html/admin/games_screenshot_add.html');
 
 //close the connection
 mysqli_close($mysqli);

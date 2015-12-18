@@ -1,0 +1,25 @@
+{extends file='html/admin/frontpage.html'}
+{block name=title}Set Review Score{/block}
+{block name=main_tile}
+<div class="NEWMAINCELL">
+		<br/>
+		{$game.magazine_name} issue {$game.magazine_issue_nr} Selected. <br/><br/>
+		
+<fieldset class="interview_set">
+	<legend class="links_legend">Set review score.</legend>
+	<br/>
+	{* Marty! Hi mate! here you need to add the search variables. Take care /Matt *}
+	<form action="../magazine/db_magazine.php?source=gameinfo&game_id={$game.game_id}" method="post" name="set_score" id="set_score">
+			
+	<label for="name">{$game.game_name} Overall score</label>
+	<input type="text" name="score" id="score" size="10" maxlength="10" class="links_input-box">
+	<input type="hidden" name="magazine_issue_id" value="{$game.magazine_issue_id}">
+	<input type="hidden" name="action" value="set_score">	
+	<input type="submit" value="Add">
+	</form>
+</fieldset>
+<br/>
+<div class="back_button"><a href="../magazine/magazine_review_score.php?game_id={$game.game_id}" class="MAINNAV">Back</a></div>
+</div>
+
+{/block}

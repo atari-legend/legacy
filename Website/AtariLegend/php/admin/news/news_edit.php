@@ -16,7 +16,7 @@
 // This is where we can edit submitted news threads
 //**************************************************************************************** 	
 
-include("../includes/common.php");
+include("../../includes/common.php");
 
 //This file deal with the editing of the still to approve news threads and the news threads online. 
 //When we are dealing with the news_id var, we're talking about newsthreads online, the news_submission_id
@@ -93,7 +93,7 @@ while ($newsimages = $sql_newsimage->fetch_array(MYSQLI_BOTH))
 $smarty->assign("user_id",$_SESSION['user_id']);
 
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/news_edit.html');
+$smarty->display('file:../../../templates/html/admin/news_edit.html');
 
 //close the connection
 mysqli_close($mysqli);

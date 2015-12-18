@@ -15,7 +15,7 @@
 // This is the interview add page. Overhere you can add a new interview
 //**************************************************************************************** 
 
-include("../includes/common.php");
+include("../../includes/common.php");
 
 //****************************************************************************************
 //first we check if there is an individual selected. This is done at the main page
@@ -40,7 +40,7 @@ if ( $individual_create == " " or $individual_create == '-' )
 	}
 
 	//Send all smarty variables to the templates
-	$smarty->display('file:../templates/0/interviews_main.html');
+	$smarty->display('file:../../../templates/html/admin/interviews_main.html');
 }
 //****************************************************************************************
 //This piece of code is used to open up a blank interview add canvas (before we actually 
@@ -82,7 +82,7 @@ while ( $authors=$sql_author->fetch_array(MYSQLI_BOTH) )
 $smarty->assign("user_id",$_SESSION['user_id']);
 
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/interviews_add.html');
+$smarty->display('file:../../../templates/html/admin/interviews_add.html');
 }
 
 //close the connection

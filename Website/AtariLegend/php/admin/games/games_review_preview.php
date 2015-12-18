@@ -15,7 +15,7 @@
 //********************************************************************************************* 
 
 //load all common functions
-include("../includes/common.php"); 
+include("../../includes/common.php"); 
 include("../includes/config.php"); 
 
 $sql_review = $mysqli->query("SELECT * FROM game
@@ -74,7 +74,7 @@ while ($sql_screenshots = $query_screenshots->fetch_array(MYSQLI_BOTH))
 $smarty->assign('game_id', $game_id);
 
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/games_review_preview.html');
+$smarty->display('file:../../../templates/html/admin/games_review_preview.html');
 
 //close the connection
 mysqli_close($mysqli);

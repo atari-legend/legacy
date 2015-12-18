@@ -1,0 +1,33 @@
+{extends file='html/admin/frontpage.html'}
+{block name=title}Magazine reviews{/block}
+{block name=main_tile}
+<div class="NEWMAINCELL">
+		<br/>
+	<fieldset class="game_set">
+	<legend class="links_legend">Reviewed games.</legend>
+	<br/>
+		<table class="table_game_list">
+			<tr>
+				<th style="width:80%;">Game Name</th>
+				<th style="width:20%;">Score</th>
+			</tr>
+					{foreach from=$magazine item=line}
+			<tr>
+				<td style="width:80%;">{if $line.game != ''}{$line.game}</a>{else}<i>n/a</i>{/if}</td>
+				<td style="width:20%;">{$line.score}</td>				
+			</tr>
+		{/foreach}
+			<tr>
+				<td class="game_list_footer" colspan="2">
+					&nbsp;&nbsp;&nbsp;
+				</td>
+			</tr>
+		</table>
+</fieldset>
+		
+		
+<br/>
+<br/><br/>
+<div class="back_button"><a href="../magazine/magazine_edit.php?magazine_id={$magazine_info.magazine_id}" class="MAINNAV">Back</a></div>
+</div>
+{/block}

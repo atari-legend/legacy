@@ -17,7 +17,7 @@ This is the demo browse page where you can navigate your way through the demo db
 */
 
 //load all common functions
-include("../includes/common.php"); 
+include("../../includes/common.php"); 
 
 $start1=gettimeofday();
 list($start2, $start3) = explode(":", exec('date +%N:%S'));
@@ -215,7 +215,7 @@ querystring for faster output
 				$smarty->assign("user_id",$_SESSION['user_id']);
 
 				//Send all smarty variables to the templates
-				$smarty->display('file:../templates/0/demos_list.html');
+				$smarty->display('file:../../../templates/html/admin/demos_list.html');
 			}
 			else
 			{

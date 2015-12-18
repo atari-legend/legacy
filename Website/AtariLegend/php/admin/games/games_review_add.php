@@ -18,7 +18,7 @@ This is the game review page where you add a review to the db
 */
 
 //load all common functions
-include("../includes/common.php"); 
+include("../../includes/common.php"); 
 
 //get the name of the game
 $sql_game = $mysqli->query("SELECT * FROM game WHERE game_id='$game_id'")
@@ -84,4 +84,4 @@ $smarty->assign("screenshots_nr",$i);
 $smarty->assign("user_id",$_SESSION['user_id']);
 
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/games_review_add.html');
+$smarty->display('file:../../../templates/html/admin/games_review_add.html');

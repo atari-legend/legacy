@@ -17,7 +17,7 @@ This is the demo browse page where you can navigate your way through the demo db
 */
 
 //load all common functions
-include("../includes/common.php"); 
+include("../../includes/common.php"); 
 
 $start1=gettimeofday();
 list($start2, $start3) = explode(":", exec('date +%N:%S'));
@@ -51,7 +51,7 @@ list($start2, $start3) = explode(":", exec('date +%N:%S'));
 		
 
 		//Send all smarty variables to the templates
-		$smarty->display('file:../templates/0/demos_main.html');
+		$smarty->display('file:../../../templates/html/admin/demos_main.html');
 //close the connection
 mysqli_close($mysqli);
 ?>

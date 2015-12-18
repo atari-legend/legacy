@@ -16,7 +16,7 @@
 // This is where we can edit all the news sections
 //**************************************************************************************** 	
 
-include("../includes/common.php");
+include("../../includes/common.php");
 
 if(empty($v_linkback)) {$v_linkback = '';}
 
@@ -99,7 +99,7 @@ $smarty->assign('links',
 $smarty->assign("user_id",$_SESSION['user_id']);
 
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/news_edit_all.html');
+$smarty->display('file:../../../templates/html/admin/news_edit_all.html');
 
 //close the connection
 mysqli_close($mysqli);

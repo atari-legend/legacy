@@ -19,7 +19,7 @@ Display submissions
 ***********************************************************************************
 */
 
-include("../includes/common.php");
+include("../../includes/common.php");
 
 // get the total nr of submissions in the DB
 $query_total_number = $mysqli->query("SELECT * FROM game_submitinfo") or die ("Couldn't get the total number of submissions");
@@ -171,5 +171,5 @@ $smarty->assign('total_nr_submissions', $v_rows_total);
 						  'num_sub' => $number_sub));
 
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/submission_games.html');
+$smarty->display('file:../../../templates/html/admin/submission_games.html');
 ?>
