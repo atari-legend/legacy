@@ -15,7 +15,7 @@
 // The main interview page
 //**************************************************************************************** 
 
-include("../includes/common.php");
+include("../../includes/common.php");
 
 //Get list of all individuals
 $sql_individuals = $mysqli->query("SELECT * FROM individuals ORDER BY ind_name ASC")
@@ -116,7 +116,7 @@ if ( $individual_search == " " or $individual_search == '-' )
 $smarty->assign("user_id",$_SESSION['user_id']);
 
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/interviews_main.html');
+$smarty->display('file:../../../templates/html/admin/interviews_main.html');
 
 //close the connection
 mysqli_close($mysqli);

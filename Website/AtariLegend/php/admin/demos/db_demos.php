@@ -15,7 +15,7 @@
 //**************************************************************************************** 
 
 //load all common functions
-include("../includes/common.php"); 
+include("../../includes/common.php"); 
 
 //***********************************************************************************
 //If we are adding a new demo
@@ -284,7 +284,7 @@ $smarty->assign("user_id",$_SESSION['user_id']);
 $smarty->assign('demo_detail_tpl', '1');
 
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/index.html');
+$smarty->display('file:../../../templates/html/admin/index.html');
 
 //close the connection
 mysqli_close($mysqli);

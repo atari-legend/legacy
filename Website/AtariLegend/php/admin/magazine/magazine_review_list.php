@@ -18,7 +18,7 @@ List of games reviewed in a particular magazine issue!
 ***********************************************************************************
 */
 
-include("../includes/common.php");
+include("../../includes/common.php");
 
 	$sql = $mysqli->query("SELECT * FROM magazine_game
 						LEFT JOIN game ON (magazine_game.game_id = game.game_id)
@@ -38,5 +38,5 @@ include("../includes/common.php");
 	   			  array('magazine_id' => $fetch_magazine['magazine_id']));
 
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/magazine_review_list.html');
+$smarty->display('file:../../../templates/html/admin/magazine_review_list.html');
 ?>

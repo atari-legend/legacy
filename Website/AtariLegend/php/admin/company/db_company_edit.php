@@ -16,7 +16,7 @@ The company edit page
 ************************************************************************************************
 */
 
-include("../includes/common.php");
+include("../../includes/common.php");
 
 // Here we delete the company logo image
 if ( isset($action) and $action == 'delete_logo' )

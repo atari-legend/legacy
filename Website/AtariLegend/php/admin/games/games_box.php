@@ -12,7 +12,7 @@
 ***************************************************************************/
 
 //load all common functions
-include("../includes/common.php"); 
+include("../../includes/common.php"); 
 /*
 ************************************************************************************************
 This is the game box main page
@@ -95,7 +95,7 @@ This is the game box main page
 	$smarty->assign('nr_back', $back);
 
 	//Send all smarty variables to the templates
-	$smarty->display('file:../templates/0/games_box.html');
+	$smarty->display('file:../../../templates/html/admin/games_box.html');
 
 	//close the connection
 	mysqli_close($mysqli);

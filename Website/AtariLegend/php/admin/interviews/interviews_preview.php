@@ -15,7 +15,7 @@
 //********************************************************************************************* 
 
 //load all common functions
-include("../includes/common.php"); 
+include("../../includes/common.php"); 
 
 $sql_interview = $mysqli->query("SELECT 
 								   interview_main.interview_id,
@@ -101,7 +101,7 @@ while ($sql_screenshots = $query_screenshots->fetch_array(MYSQLI_BOTH))
 }
 
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/interviews_preview.html');
+$smarty->display('file:../../../templates/html/admin/interviews_preview.html');
 
 //close the connection
 mysqli_close($mysqli);

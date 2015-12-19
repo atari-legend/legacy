@@ -17,7 +17,7 @@ This is the crew page contructor
 */
 
 //load all common functions
-include("../includes/common.php"); 
+include("../../includes/common.php"); 
 
 if (isset($action) and $action=="crew_browse")
 	{
@@ -49,7 +49,7 @@ if (isset($action) and $action=="crew_browse")
 	    				array('crew_id' => $query_crew['crew_id'],
 						  	  'crew_name' => $query_crew['crew_name']));
 		}
-		$smarty->display('file:../templates/0/ajax_crew_editor.html');
+		$smarty->display('file:../../../templates/html/admin/ajax_crew_editor.html');
 }
 
 if (isset($action) and $action=="crew_search")
@@ -71,7 +71,7 @@ if (isset($action) and $action=="crew_search")
 	    				array('crew_id' => $query_crew['crew_id'],
 						  	  'crew_name' => $query_crew['crew_name']));
 		}
-		$smarty->display('file:../templates/0/ajax_crew_editor.html');
+		$smarty->display('file:../../../templates/html/admin/ajax_crew_editor.html');
 }
 
 if (isset($action) and $action=="crew_gen_browse")
@@ -175,7 +175,7 @@ if (isset($action) and $action=="ind_gen_search")
 	/*	$smarty->assign('crew_main_tpl', '1');
 
 		//Send all smarty variables to the templates
-		$smarty->display('file:../templates/0/index.html');*/
+		$smarty->display('file:../../../templates/html/admin/index.html');*/
 
 //close the connection
 mysqli_close($mysqli);
