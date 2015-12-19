@@ -19,7 +19,7 @@ In this section we can delete/edit a newsimage
 ***********************************************************************************
 */
 
-include("../includes/common.php"); 
+include("../../includes/common.php"); 
 
 $sql_images = $mysqli->query("SELECT * FROM news_image ORDER BY news_image_name ASC");
 	
@@ -82,7 +82,7 @@ if (isset($action) and $action=="delete_image")
 }
 
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/news_edit_images.html');
+$smarty->display('file:../../../templates/html/admin/news_edit_images.html');
 
 //close the connection
 mysqli_close($mysqli);

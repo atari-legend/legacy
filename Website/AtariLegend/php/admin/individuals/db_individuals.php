@@ -16,7 +16,7 @@ The individuals edit page
 ************************************************************************************************
 */
 
-include("../includes/common.php");
+include("../../includes/common.php");
 
 // Here we delete the individual image
 if (isset($ind_id) and isset($action) and $action == 'delete_pic')

@@ -18,7 +18,7 @@ In this section of the site we can add game review score from magazines!
 ***********************************************************************************
 */
 
-include("../includes/common.php");
+include("../../includes/common.php");
 		
 		// Get issue info
 		$sql = $mysqli->query("SELECT * FROM magazine_issue
@@ -41,5 +41,5 @@ include("../includes/common.php");
 									'magazine_issue_id' => $magazine_issue_id));
 
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/magazine_setscore.html');
+$smarty->display('file:../../../templates/html/admin/magazine_setscore.html');
 ?>

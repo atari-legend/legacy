@@ -18,7 +18,7 @@ In this section we can approve a news update.
 ***********************************************************************************
 */
 
-include("../includes/common.php");
+include("../../includes/common.php");
 
 //********************************************************************************************
 // Get all the needed data to load the submission page!
@@ -71,7 +71,7 @@ else
 $smarty->assign("user_id",$_SESSION['user_id']);
 
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/news_approve.html');
+$smarty->display('file:../../../templates/html/admin/news_approve.html');
 
 //close the connection
 mysqli_close($mysqli);

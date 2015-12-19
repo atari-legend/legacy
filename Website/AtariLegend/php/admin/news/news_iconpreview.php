@@ -18,7 +18,7 @@ In this section we can preview the news icons
 ***********************************************************************************
 */
 
-include("../includes/common.php"); 
+include("../../includes/common.php"); 
 
 $count=1;
 
@@ -41,7 +41,7 @@ while ( $news_images = $sql_images->fetch_array(MYSQLI_BOTH) )
 }
 
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/news_iconpreview.html');
+$smarty->display('file:../../../templates/html/admin/news_iconpreview.html');
 
 //close the connection
 mysqli_close($mysqli);

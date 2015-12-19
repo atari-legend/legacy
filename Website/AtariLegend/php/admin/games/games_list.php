@@ -459,7 +459,7 @@ querystring for faster output
 				$smarty->assign('az_value', $az_value);
 				$smarty->assign('az_output', $az_output);	
 				
-				//$smarty->display('file:../templates/0/games_list.html');
+				//$smarty->display('file:../../../templates/html/admin/games_list.html');
 				$smarty->assign('quick_search_games', 'quick_search_games_list');
 				$smarty->assign('left_nav', 'leftnav_position_games_list');
 				

@@ -1,0 +1,53 @@
+{extends file='html/admin/frontpage.html'}
+{block name=java_script}
+<script type="text/javascript">
+function coverdelete(JSmagazine_issue_id)
+{ 
+	
+    	// CONFIRM REQUIRES ONE ARGUMENT
+    	var message = "Are you sure you want to DELETE this Coverscan??";
+    	// CONFIRM IS BOOLEAN. THAT MEANS THAT
+    	// IT RETURNS TRUE IF 'OK' IS CLICKED
+    	// OTHERWISE IT RETURN FALSE
+    	var return_value = confirm(message);
+
+    	if (return_value !="0")
+    	{ 
+    		url="../magazine/db_magazine.php?action=delete_coverscan&magazine_issue_id="+JSmagazine_issue_id+""
+			location.href=url;
+    	}  
+
+} 
+</script>
+{/block}
+{block name=title}{$magazine.magazine_name} issue {$magazine.magazine_issue_nr} selected.{/block}
+{block name=main_tile}
+<div class="NEWMAINCELL">
+		{if $magazine.scan eq "1"}
+		 coverscan preview<br/><br/>
+		 
+		<a onClick="coverdelete({$magazine.magazine_issue_id})" class="click_button" style="display:block;width:160px;">Delete Magazine Scan</a>
+		<br/><br/>
+		<img src="../includes/show_image.php?file={$magazine.magazine_image}&amp;resize=null,null,null,null&amp;crop=null,null,null,null" alt="{$magazine.magazine_name}">
+		{else}
+		 No coverscan has been uploaded, please upload one.<br/>
+		<br/>
+		<br/>
+		
+		<fieldset class="game_set">
+		<legend class="links_legend">New Coverscan.</legend>
+		<br/>
+		<form method="post" enctype="multipart/form-data" action="../magazine/db_magazine.php" name="magazinecoverscan">
+	
+		Coverscan: <input type="file" name="coverscan" accept="image/jpeg">
+		<input type="hidden" name="action" value="coverscan_upload">
+		<input type="hidden" name="magazine_issue_id" value="{$magazine.magazine_issue_id}">
+		<input type='submit' value='Upload'>
+		</form> <br/>
+
+</fieldset>
+		{/if}	
+<br/><br/><br/><br/>
+<div class="back_button"><a href="../magazine/magazine_edit.php?magazine_id={$magazine.magazine_id}" class="MAINNAV">Back</a></div>
+</div>
+{/block}

@@ -16,7 +16,7 @@
 // This document contain all the code needed to operate the website database.
 // We are using the action var to separate all the queries.
 
-include("../includes/common.php"); 
+include("../../includes/common.php"); 
 
 if ($action=="stop")
 {
@@ -334,7 +334,7 @@ elseif (isset($action) and $action == 'add_interview')
 		$smarty->assign("user_id",$_SESSION['user_id']);
 
 		//Send all smarty variables to the templates
-		$smarty->display('file:../templates/0/interviews_add.html');
+		$smarty->display('file:../../../templates/html/admin/interviews_add.html');
 		
 	}	
 	else

@@ -16,7 +16,7 @@
 // This document contain all the code needed to operate the website database.
 // We are using the action var to separate all the queries.
 
-include("../includes/common.php"); 
+include("../../includes/common.php"); 
 
 //****************************************************************************************
 // This is delete from series place

@@ -1,0 +1,55 @@
+{* 
+/***************************************************************************
+                              games_list.tpl
+*                            --------------------------
+*   begin                : Sunday, August 28, 2005
+*   copyright            : (C) 2005 Atari Legend
+*   email                : admin@atarilegend.com
+*
+*   Id: games_list.tpl,v 0.10 2005/08/28 22:02 Gatekeeper
+*
+***************************************************************************/
+
+************************************************************************************************
+The main game page
+************************************************************************************************
+*}
+{extends file='html/admin/frontpage.html'}
+{block name=title}Search results{/block}
+{block name=main_tile}
+<div class="NEWMAINCELL" style="text-align:center;">
+	<fieldset class="interview_set">
+		This is the search result page. Click a game to go to the main music page. 
+		If you want to do a new search query, click <a href="games_music.php" class="MAINNAV"><b>here</b></a>!
+	</fieldset> 
+<br/><br/>
+	<table class="table_game_list">
+			<tr>
+				<th style="width:40%;">Game Name</th>
+				<th style="width:30%;">Publisher</th>
+				<th style="width:20%;">Year</th>
+				<th style="width:10%;">Nr of zaks</th>
+			</tr>
+					{foreach from=$music item=line}
+			<tr>
+				<td style="width:40%;">{if $line.game_name != ''}<a href="games_music_detail.php?game_id={$line.game_id}" class="MAINNAV">{$line.game_name}</a>{else}<i>n/a</i>{/if}</td>
+				<td style="width:30%;">{if $line.game_publisher != ''}{$line.game_publisher}{else}<i>n/a</i>{/if}</td>
+				<td style="width:20%;">{if $line.game_year != ''}{$line.game_year}{else}<i>n/a</i>{/if}</td>				
+				<td style="width:10%;">{if $line.number_zaks != ''}{$line.number_zaks}{else}<i>0</i>{/if}</td>
+			</tr>
+		{/foreach}
+			<tr>
+				<td class="game_list_footer" colspan="4">
+					{if $nr_of_entries == 1}1 game found {else} {$nr_of_entries} games found{/if} in {$querytime} sec
+				</td>
+			</tr>
+		</table>
+<br/>
+<br/>		
+<div class="back_button"><a href="../games/games_music.php" class="MAINNAV">back</a></div>
+<br/>
+{if isset($message)}
+	<div class="message_box">{$message}</div>
+{/if}
+</div>
+{/block}

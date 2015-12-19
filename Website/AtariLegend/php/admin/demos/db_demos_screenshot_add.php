@@ -15,7 +15,7 @@
 // This is the image selection/upload screen for the demos
 //**************************************************************************************** 
 
-include("../includes/common.php");
+include("../../includes/common.php");
 
 //If we are uploading new screenshots
 if ( isset($action) and $action == 'add_screens' )

@@ -15,7 +15,7 @@
 // This is the image selection/upload screen for the demos
 //**************************************************************************************** 
 
-include("../includes/common.php");
+include("../../includes/common.php");
 
 //Get the screenshots for this demo, if they exist
 $sql_screenshots = $mysqli->query("SELECT * FROM screenshot_demo
@@ -56,7 +56,7 @@ while ( $demo=$sql_demo->fetch_array(MYSQLI_BOTH))
 $smarty->assign("user_id",$_SESSION['user_id']);
 
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/demos_screenshot_add.html');
+$smarty->display('file:../../../templates/html/admin/demos_screenshot_add.html');
 
 //close the connection
 mysqli_close($mysqli);

@@ -19,11 +19,11 @@ In this section we can add or delete a newsimage
 ***********************************************************************************
 */
 
-include("../includes/common.php");
+include("../../includes/common.php");
 
 $smarty->assign("user_id",$_SESSION['user_id']);
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/news_add_images.html');
+$smarty->display('file:../../../templates/html/admin/news_add_images.html');
 
 //close the connection
 mysqli_close($mysqli);

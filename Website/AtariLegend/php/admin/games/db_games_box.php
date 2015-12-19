@@ -16,7 +16,7 @@
 // This document contain all the code needed to operate the boxscans.
 
 
-include("../includes/common.php");
+include("../../includes/common.php");
 
 $filename = $_FILES['image'];
 

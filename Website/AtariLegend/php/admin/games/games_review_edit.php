@@ -15,7 +15,7 @@
 //********************************************************************************************* 
 
 //load all common functions
-include("../includes/common.php"); 
+include("../../includes/common.php"); 
 
 if (isset($reviewid) and isset($game_id))
 {
@@ -128,6 +128,6 @@ $smarty->assign("reviewid",$reviewid);
 $smarty->assign("user_id",$_SESSION['user_id']);
 
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/games_review_edit.html');
+$smarty->display('file:../../../templates/html/admin/games_review_edit.html');
 }
 ?>
