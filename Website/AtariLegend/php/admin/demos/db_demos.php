@@ -15,7 +15,8 @@
 //**************************************************************************************** 
 
 //load all common functions
-include("../../includes/common.php"); 
+include("../../includes/common.php");
+include("../../includes/admin.php");
 
 //***********************************************************************************
 //If we are adding a new demo

@@ -17,7 +17,8 @@ This is the crew page contructor
 */
 
 //load all common functions
-include("../../includes/common.php"); 
+include("../../includes/common.php");
+include("../../includes/admin.php");
 
 
 if (isset($new_crew)) 

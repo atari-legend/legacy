@@ -19,6 +19,7 @@ In this section we can approve a news update.
 */
 
 include("../../includes/common.php");
+include("../../includes/admin.php");
 
 //********************************************************************************************
 // Get all the needed data to load the submission page!

@@ -17,6 +17,7 @@
 //**************************************************************************************** 	
 
 include("../../includes/common.php");
+include("../../includes/admin.php");
 
 if(empty($v_linkback)) {$v_linkback = '';}
 

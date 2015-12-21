@@ -20,6 +20,7 @@ Manage our trivia quotes!
 */
 
 include("../../includes/common.php");
+include("../../includes/admin.php");
 
 		$sql_trivia = $mysqli->query("SELECT * FROM trivia_quotes ORDER BY trivia_quote_id");
 

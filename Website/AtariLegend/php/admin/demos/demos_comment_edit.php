@@ -17,7 +17,8 @@ This will compile the demos comment edit page
 ***********************************************************************************
 */
 
-include("../../includes/common.php"); 
+include("../../includes/common.php");
+include("../../includes/admin.php");
 
 if (empty($view)) {$view="";}
 if (empty($c_counter)) {$c_counter="";}

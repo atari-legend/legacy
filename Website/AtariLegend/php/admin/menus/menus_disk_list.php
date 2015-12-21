@@ -12,6 +12,7 @@
 
 //load all common functions
 include("../../includes/common.php");
+include("../../includes/admin.php");
 /*
 ************************************************************************************************
 This is the menus disk search list page

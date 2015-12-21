@@ -15,7 +15,8 @@
 //********************************************************************************************* 
 
 //load all common functions
-include("../../includes/common.php"); 
+include("../../includes/common.php");
+include("../../includes/admin.php"); 
 
 $sql_interview = $mysqli->query("SELECT 
 								   interview_main.interview_id,

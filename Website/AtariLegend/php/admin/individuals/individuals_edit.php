@@ -17,6 +17,7 @@ The individuals edit page
 */
 
 include("../../includes/common.php");
+include("../../includes/admin.php");
 
 if ($ind_id == '-')
 {

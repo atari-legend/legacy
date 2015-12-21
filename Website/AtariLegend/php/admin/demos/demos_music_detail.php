@@ -13,7 +13,8 @@
 
 
 //load all common functions
-include("../../includes/common.php"); 
+include("../../includes/common.php");
+include("../../includes/admin.php");
 
 /*
 ***********************************************************************************

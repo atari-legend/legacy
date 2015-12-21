@@ -18,7 +18,8 @@ This is the game browse page where you can navigate your way through the games d
 */
 
 //load all common functions
-include("../../includes/common.php"); 
+include("../../includes/common.php");
+include("../../includes/admin.php");
 
 date_default_timezone_set('UTC');
 $start = microtime(true);

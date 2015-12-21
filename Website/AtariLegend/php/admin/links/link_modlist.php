@@ -20,6 +20,7 @@ In this section we modify links
 */
 
 include("../../includes/common.php");
+include("../../includes/admin.php");
 
 if(empty($catpick)) 
 {

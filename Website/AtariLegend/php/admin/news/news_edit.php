@@ -17,6 +17,7 @@
 //**************************************************************************************** 	
 
 include("../../includes/common.php");
+include("../../includes/admin.php");
 
 //This file deal with the editing of the still to approve news threads and the news threads online. 
 //When we are dealing with the news_id var, we're talking about newsthreads online, the news_submission_id
