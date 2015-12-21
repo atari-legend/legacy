@@ -9,6 +9,7 @@
 *							
 *
 *   Id: user_detail.php,v 0.20 2015/08/22 ST Graveman
+*   Id: user_detail.php,v 0.30 2015/12/21 ST Graveman - Added right side
 *
 ***************************************************************************/
 
@@ -19,6 +20,7 @@ This is the user detail page
 */
 // include common variables and functions
 include("../../includes/common.php");
+include("../../includes/quick_search_games.php");
 
 //Lets get all the data of the selected user
 	$sql_users = $mysqli->query("SELECT * FROM users 
@@ -51,7 +53,8 @@ include("../../includes/common.php");
 							  'user_aim' => $query_users['user_aim']));
 	}
 	
-$smarty->assign('left_nav', 'leftnav_position_userdetails');	
+$smarty->assign('left_nav', 'leftnav_position_userdetails');
+$smarty->assign('quick_search_games', 'quick_search_games_position_userdetails');	
 
 //Send all smarty variables to the templates
 $smarty->display('file:../../../templates/html/admin/user_detail.html');
