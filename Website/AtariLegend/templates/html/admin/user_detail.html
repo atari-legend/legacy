@@ -8,7 +8,8 @@
 *	 actual update        : Creation of file
 *
 *   Id: User_detail.html,v 0.20 2015/08/22 23:43 ST Gravedigger
-*   Id: User_detail.html,v 0.30 2015/08/22 23:43 ST Gravedigger - HTML Validated/Flexbox added
+*   Id: User_detail.html,v 0.30 2015/12/03 23:10 ST Gravedigger - HTML Validated/Flexbox added
+*   Id: User_detail.html,v 0.40 2015/12/21 23:55 ST Gravedigger - Removed message var
 *
 ***************************************************************************/
 
@@ -111,7 +112,7 @@ function user_stats()
 		<fieldset>
 			<legend>Avatar</legend>
 			{if $users.avatar_ext !=''}
-				<form action="../user/user_detail.php?action=delete_avatar&amp;user_id_selected={$users.user_id}" method="post" name="delete_avatar">
+				<form action="../user/db_user.php?action=delete_avatar&amp;user_id_selected={$users.user_id}" method="post" name="delete_avatar">
 				Delete Image?
 				<div>
 					<br><img src="../../includes/show_image.php?file={$users.image}&amp;resize=160,null,null,null" alt="Avatar" class="user_stats_img" id="user_details_img_dark">
@@ -132,11 +133,8 @@ function user_stats()
 				</form>
 			{/if}
 		</fieldset>
-		<br><br>
-		{if isset($message)}	
-		<div class="left_nav_section">{$message}</div>
 		<br>
-		{/if}
+		<br>	
 		<div class="standard_table_center"><a href="../user/user_main.php" class="standard_tile_link">back</a></div>
 	</div>
 </div>

@@ -72,10 +72,10 @@ if (isset($action) and $action == 'avatar_upload')
 		}
 		else
 		{
-		$smarty->assign('message', 'Upload failed due to not confirming to specs.');
-		$mysqli->query("UPDATE users SET avatar_ext='' WHERE user_id='$user_id_selected'");
-		unlink ("$user_avatar_save_path$user_id_selected.$ext");
-		$_SESSION['edit_message'] = "Avatar added"
+			$smarty->assign('message', 'Upload failed due to not confirming to specs.');
+			$mysqli->query("UPDATE users SET avatar_ext='' WHERE user_id='$user_id_selected'");
+			unlink ("$user_avatar_save_path$user_id_selected.$ext");
+			$_SESSION['edit_message'] = "Avatar added";
 		}
 	}
 }
@@ -91,7 +91,7 @@ $sql = "SELECT avatar_ext FROM users WHERE user_id='$user_id_selected'";
 	list ($avatar_ext) = $avatar_query->fetch_array(MYSQLI_BOTH);
 	
 	$mysqli->query("UPDATE users SET avatar_ext='' WHERE user_id='$user_id_selected'");
-	$_SESSION['edit_message'] = "Avatar deleted"
+	$_SESSION['edit_message'] = "Avatar deleted";
 	unlink ("$user_avatar_save_path$user_id_selected.$avatar_ext");
 
 }
@@ -102,7 +102,7 @@ $sql = "SELECT avatar_ext FROM users WHERE user_id='$user_id_selected'";
 if (isset($action) and $action == 'reset_pwd')
 {
 	$mysqli->query("UPDATE users SET password='' WHERE user_id='$user_id_selected'");
-	$_SESSION['edit_message'] = "Password reset"
+	$_SESSION['edit_message'] = "Password reset";
 }
 
 //****************************************************************************************
@@ -114,12 +114,12 @@ if (isset($action) and $action == 'modify_user')
 	{
 			$md5pass = md5($user_pwd);
 			$mysqli->query("UPDATE users SET userid='$user_name', password='$md5pass', email='$user_email', permission='$user_permission', user_website='$user_website', user_icq='$user_icq', user_msnm='$user_msnm', user_aim='$user_aim' WHERE user_id='$user_id_selected'");
-			$_SESSION['edit_message'] = "User data modified"
+			$_SESSION['edit_message'] = "User data modified";
 	}
 	else
 	{
 			$mysqli->query("UPDATE users SET userid='$user_name', email='$user_email', permission='$user_permission', user_website='$user_website', user_icq='$user_icq', user_msnm='$user_msnm', user_aim='$user_aim' WHERE user_id='$user_id_selected'");
-			$_SESSION['edit_message'] = "User data modified"
+			$_SESSION['edit_message'] = "User data modified";
 	}
 }
 
@@ -137,8 +137,6 @@ if (isset($action) and $action == 'delete_user')
 	if ( get_rows($sql) > 0 )
 	{
 		$_SESSION['edit_message'] = 'Deletion failed - This user has submitted game comments - Delete it in the appropriate section';
-		
-		$smarty->assign('user_id_selected', $user_id_selected);
 	}
 	else
 	{
@@ -200,7 +198,7 @@ if (isset($action) and $action == 'delete_user')
 	}
 }
 
-header("Location: ../user/user_detail.php");
+header("Location: ../user/user_detail.php?user_id_selected=$user_id_selected");
 
 //close the connection
 mysqli_close($mysqli);
