@@ -2078,6 +2078,11 @@ Quick search games
 	height: 25px;
 }
 
+#quick_search_small_select{ 
+	width: 50px;
+	height: 25px;
+}
+
 @media screen and (max-width: 1099px) { 
 	#quick_search_options{margin-left:5%; width:100%; }
 }
@@ -2238,6 +2243,7 @@ User search
 User Karma
 ------------------------------------------------------------ */
 #leftnav_position_karma{ margin-top: 80px; margin-bottom: 30px; float: left;}
+#quick_search_games_position_karma{ margin-top: 80px; margin-bottom: 30px;}
 #karma{ margin-top: 80px; margin-bottom: 30px; float: left;}
 .karma_column{width:50%; text-align:center;}
 
