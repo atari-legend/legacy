@@ -36,27 +36,24 @@
 				$(toggle_el).toggleClass("open-sidebar_cpanel");
 			  });
 			});
-			//]]> 
-			
-	{if isset($edit_message)}
+			//]]> 		
+			{if isset($edit_message)}
 
-		$( document ).ready(function() {
-            $.notify_osd.create({
-				'text'        : '{$edit_message}',             // notification message
-				'icon'        : '../templates/0/icons/star.png', // icon path, 48x48
-				'sticky'      : false,             // if true, timeout is ignored
-				'timeout'     : 4,                 // disappears after 6 seconds
-				'dismissable' : true               // can be dismissed manually
+				$( document ).ready(function() {
+					$.notify_osd.create({
+						'text'        : '{$edit_message}',             // notification message
+						'icon'        : '../templates/0/icons/star.png', // icon path, 48x48
+						'sticky'      : false,             // if true, timeout is ignored
+						'timeout'     : 4,                 // disappears after 6 seconds
+						'dismissable' : true               // can be dismissed manually
+						});
 				});
-		});
-
-	{/if}
-			
+			{/if}
 		</script>
 		{block name=java_script}{/block}
 	</head>
 	<body id="body">
-		<div id="wrapper">
+		<div id="wrapper_header">
 			<header>
 				<div id="top_background">
 					<!-- This is the side menu only visible for smartphones (max resolution 480pc)-->				
@@ -205,7 +202,7 @@
 					<img id="animation_vert" src="{$img_dir}animations/animation_vert0{math equation='rand(1,2)'}.gif" alt="animation" />
 					{/if}
 				</div>			
-				<nav>
+				<nav id="main_nav">
 					<ul class="nav">
 						<li><button type="button" class="topbutton_cpanel" id="games">GAMES</button>
 							<ul>
@@ -279,15 +276,17 @@
 						</li>
 					</ul>
 				</nav>	
-			</header>	
-			{block name=main_body}{/block}
-			<footer class="footer">
-				<div class="footer_logo">
-					<br><br><br>
-					<img id="footer_img" src="{$img_dir}footer_logo.png" alt="logo">				
-					<h3>&copy; copyright 2004 - {'Y'|date} </h3>
-				</div>
-			</footer>
+			</header>
 		</div>
+		<div id="wrapper">			
+			{block name=main_body}{/block}
+		</div>
+		<footer class="footer">
+			<div class="footer_logo">
+				<br><br><br>
+				<img id="footer_img" src="{$img_dir}footer_logo.png" alt="logo">				
+				<h3>&copy; copyright 2004 - {'Y'|date} </h3>
+			</div>
+		</footer>
 	</body>
 </html>

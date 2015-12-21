@@ -62,7 +62,7 @@ footer, header, hgroup, menu, nav, section {
 	max-width: 1920px;
 	margin: auto;
 } 
-
+	
 #wrapper_header {
 	width: 100%;	
 	max-width: 1280px;
@@ -1426,7 +1426,6 @@ contact tiles - front page
 
 /* Interaction states
 ----------------------------------*/
-
 .ui-state-hover,
 .ui-widget-content .ui-state-hover,
 .ui-widget-header .ui-state-hover,
@@ -1641,7 +1640,7 @@ nav ul {
   font-family: Audiowide,Arial,helvetica,sans-serif;
   color: #182727;
   height: 60px;
-  width: 213px;
+  width: 211.3px;
   font-size: 20px;
   border-bottom: 3px solid #008b8b;
   border-left: 1px solid #007878;
@@ -1747,8 +1746,8 @@ nav ul {
 		border-bottom: 3px solid #008b8b;
 		padding:0px;
 }
-.centered_fieldset {
 
+.centered_fieldset {
 	text-align:center;
 	margin: auto;
 
