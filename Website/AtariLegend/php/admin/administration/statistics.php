@@ -12,10 +12,15 @@
 *   Id: statistics.php,v 0.10 2003/10/03 23:00 Silver Surfer
 *	Update: 2015/05/29 23:38 ST Graveyard 
 *			- Added logged on user details
+*			2015/12/21 19:29 ST Graveyard
+*			- Added right side quicksearch for 1920 width
 *
 ***************************************************************************/
 
 include("../../includes/common.php"); 
+
+//load the search fields of the quick search side menu
+include("../../includes/quick_search_games.php");  
 
 
 foreach (KarmaGood() as $key => $value)
@@ -62,6 +67,7 @@ while ($query_users = $sql_users->fetch_array(MYSQLI_BOTH))
 
 //Create the id's for dynamic positioning of the tiles
 $smarty->assign('left_nav', 'left_nav_position_front');
+$smarty->assign('quick_search_games', 'quick_search_position_front');
 $smarty->assign('main_stats', 'main_stats_position_front');
 		
 //Send all smarty variables to the templates
