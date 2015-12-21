@@ -19,7 +19,8 @@ In this section we can delete/edit a newsimage
 ***********************************************************************************
 */
 
-include("../../includes/common.php"); 
+include("../../includes/common.php");
+include("../../includes/admin.php");
 
 $sql_images = $mysqli->query("SELECT * FROM news_image ORDER BY news_image_name ASC");
 	

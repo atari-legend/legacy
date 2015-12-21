@@ -20,9 +20,9 @@ Build game series page
 */
 extract($_REQUEST);
 include("../../includes/connect.php");
-include("../includes/config.php");
-include("../includes/config_smarty.php");
-include("../includes/constants.php");
+include("../../includes/config.php");
+include("../../includes/config_smarty.php");
+include("../../includes/constants.php");
 				
 	if (isset($action) and $action=="game_browse")
 	{

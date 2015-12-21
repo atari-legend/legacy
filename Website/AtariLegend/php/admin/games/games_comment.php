@@ -13,6 +13,7 @@
 ***************************************************************************/
 
 include("../../includes/common.php");
+include("../../includes/admin.php");
 
 $v_counter= (isset($_GET["v_counter"]) ? $_GET["v_counter"] : 0);
 

@@ -20,6 +20,7 @@ Build game series page
 */
 
 include("../../includes/common.php");
+include("../../includes/admin.php");
 
 	// SERIES LIST DROPDOWN
 				

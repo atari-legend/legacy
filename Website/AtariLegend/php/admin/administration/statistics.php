@@ -15,7 +15,8 @@
 *
 ***************************************************************************/
 
-include("../../includes/common.php"); 
+include("../../includes/common.php");
+include("../../includes/admin.php"); 
 
 
 foreach (KarmaGood() as $key => $value)

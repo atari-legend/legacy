@@ -17,6 +17,7 @@ The main company (developer/publisher) page
 */
 
 include("../../includes/common.php");
+include("../../includes/admin.php");
 
 //Get the companies
 $sql_company = $mysqli->query("SELECT * FROM pub_dev ORDER BY pub_dev_name ASC")

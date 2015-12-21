@@ -20,6 +20,7 @@ Manage our Did you know? quotes!
 */
 
 include("../../includes/common.php");
+include("../../includes/admin.php");
 
 		$sql_trivia = $mysqli->query("SELECT * FROM trivia ORDER BY trivia_id");
 		

@@ -20,6 +20,7 @@ This is the user statistics page
 */
 // include common variables and functions
 include("../../includes/common.php");
+include("../../includes/admin.php");
 
 // START - NUMBER OF USERCOMMENTS
 $sql = $mysqli->query("SELECT * FROM comments

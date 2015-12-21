@@ -18,7 +18,8 @@ In this section we can preview the news icons
 ***********************************************************************************
 */
 
-include("../../includes/common.php"); 
+include("../../includes/common.php");
+include("../../includes/admin.php");
 
 $count=1;
 
