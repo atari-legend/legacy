@@ -110,7 +110,7 @@ $RESULTAKA = "SELECT
 	   WHERE ";
 
 
-if (empty($action)) {$action='';}
+if (empty($action_quick_search)) {$action_quick_search='';}
 /*
 ***********************************************************************************
 Firstly , we are gonna check which parts of the search functions are used in the main
@@ -118,7 +118,7 @@ screen and we're gonna fill some extra variables accordingly. These variables wi
 used to create the querystring later.
 ***********************************************************************************
 */
-	if (isset($action) and $action == "search" )
+	if (isset($action_quick_search) and $action_quick_search == "search" )
 	{		
 		if (isset($gamesearch))
 		{			

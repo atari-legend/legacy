@@ -38,7 +38,7 @@ function gameinsert()
 		
     	if (return_value !="0")
     	{
-    		url="db_games_detail.php?newgame="+JSnewgame+"&action=insert_game";
+    		url="../games/db_games_detail.php?newgame="+JSnewgame+"&action=insert_game";
 			location.href=url;
     	} 
 	}
@@ -64,7 +64,7 @@ function gameinsert()
 					<h3>Search for Game:</h3>	<br> 			
 					<div class="standard_table_center">
 						By name :<br>	
-						<select name="gamebrowse" id="small_select">
+						<select name="gamebrowse" id="quick_search_small_select">
 							<option value="" SELECTED>-</option>
 							{html_options values=$az_value output=$az_output}
 						</select>
@@ -169,7 +169,7 @@ function gameinsert()
 					<br><br>
 					<hr>
 				</div>
-				<input type="hidden" name="action" id="action" value="search">
+				<input type="hidden" name="action" id="action_quick_search" value="search">
 				<input type="hidden" name="user_id" id="user_id" value="{$user_id}">
 			</form>	
 		</div>
