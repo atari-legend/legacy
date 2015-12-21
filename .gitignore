@@ -24,6 +24,10 @@ $ cat .gitignore
 # exclude everything except directory foo/bar
 Website/AtariLegend/php/includes/smarty/templates_c/*
 
+$ cat .gitignore 
+# exclude everything except directory foo/bar 
+Website/AtariLegend/php/includes/connect.php
+
 <<<<<<< HEAD
 >>>>>>> refs/remotes/origin/master
 =======
