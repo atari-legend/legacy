@@ -18,7 +18,8 @@ This is the game review page where you add a review to the db
 */
 
 //load all common functions
-include("../../includes/common.php"); 
+include("../../includes/common.php");
+include("../../includes/admin.php");
 
 if (isset($action) and $action  == 'add_review' )
 {

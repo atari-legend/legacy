@@ -19,6 +19,7 @@ In this section of the site we can add game review score from magazines!
 */
 
 include("../../includes/common.php");
+include("../../includes/admin.php");
 		
 		// Get all the issues
 		$sql = $mysqli->query("SELECT * FROM magazine_issue

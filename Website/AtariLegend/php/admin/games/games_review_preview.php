@@ -15,8 +15,8 @@
 //********************************************************************************************* 
 
 //load all common functions
-include("../../includes/common.php"); 
-include("../includes/config.php"); 
+include("../../includes/common.php");
+include("../../includes/admin.php");
 
 $sql_review = $mysqli->query("SELECT * FROM game
 						   LEFT JOIN review_game ON (game.game_id = review_game.game_id)

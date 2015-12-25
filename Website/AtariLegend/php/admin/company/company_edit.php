@@ -17,6 +17,7 @@ The company edit page
 */
 
 include("../../includes/common.php");
+include("../../includes/admin.php");
 
 if ($comp_id == '-')
 {

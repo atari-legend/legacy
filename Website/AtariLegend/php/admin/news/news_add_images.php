@@ -20,6 +20,7 @@ In this section we can add or delete a newsimage
 */
 
 include("../../includes/common.php");
+include("../../includes/admin.php");
 
 $smarty->assign("user_id",$_SESSION['user_id']);
 //Send all smarty variables to the templates

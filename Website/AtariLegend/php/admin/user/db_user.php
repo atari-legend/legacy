@@ -18,6 +18,7 @@ This is the database modification area for the cpanel
 */
 // include common variables and functions
 include("../../includes/common.php");
+include("../../includes/admin.php");
 
 // Here we add the avatar image
 if (isset($action) and $action == 'avatar_upload')

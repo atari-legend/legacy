@@ -16,6 +16,7 @@
 //**************************************************************************************** 
 
 include("../../includes/common.php");
+include("../../includes/admin.php");
 
 //If we are uploading new screenshots
 if (isset($action) and $action == 'add_screens' )
