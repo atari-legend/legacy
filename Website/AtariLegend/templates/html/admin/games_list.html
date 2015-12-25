@@ -8,6 +8,7 @@
 *
 *   Id: games_list.tpl,v 0.10 2005/08/28 22:02 Gatekeeper
 *   Id: games_list.tpl,v 0.20 2015/10/31 10:01 Gatekeeper
+*   Id: games_list.tpl,v 0.30 2015/12/30 21:47 Gatekeeper - remove message var
 *
 ***************************************************************************/
 
@@ -45,7 +46,7 @@ function gameinsert()
 </script>
 {/block}
 {block name=left_tile}
-{include file='html/admin/quick_search_games.html'}
+{include file='html/admin/left_nav.html'}
 {/block}
 {block name=main_tile}
 <div class="standard_tile" id="games_list">
@@ -136,9 +137,6 @@ function gameinsert()
 		</table>
 	</div>
 	<br>
-	{if isset($message)}	
-		<br><br><div class="left_nav_section">{$message}</div>
-	{/if}	
 </div>	
 </div>
 <br>

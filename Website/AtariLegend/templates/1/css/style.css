@@ -19,7 +19,6 @@ body { background-color: black;
 	  font-family: Audiowide, Arial, helvetica, sans-serif;
 }
 
-
 @media screen and (min-width: 1281px){
 	body { background-image: url(../../../templates/1/images/top_bg_menu.png), url(../../../templates/1/images/top_bg_sides.jpg); 
 	  background-position: left 225px,left top;
@@ -40,9 +39,6 @@ body { background-color: black;
 		}
 }
  
-/*body { background: black; font-family: Audiowide, Arial, helvetica, sans-serif;
-}*/
-
 img { display: block;
 }
 
@@ -68,7 +64,6 @@ footer, header, hgroup, menu, nav, section {
 	max-width: 1280px;
 	margin: auto;
 } 
- 
  
 #main {
 	width: 100%;
@@ -1568,7 +1563,7 @@ contact tiles - front page
 	#users_side_cpanel{height: 40px; width: 113px; font-size: 14px;}
 	#admin_side_cpanel{height: 40px; width: 113px; font-size: 14px;}
 	#other_side_cpanel{height: 40px; width: 113px; font-size: 14px;}
-	#skin_side_cpanel{height: 40px; width: 113px; font-size: 14px;	}
+	#skin_side_cpanel{height: 40px; width: 113px; font-size: 14px;}
 	.container_cpanel.open-sidebar_cpanel { left: 225px;}
     #sidebar_cpanel { left: -225px;
         width: 225px;
@@ -1601,7 +1596,6 @@ contact tiles - front page
 }
 
 /* CPANEL menu below top*/ 
-
 #main_nav_cpanel { width: 100%;}
 
 nav ul {
@@ -2066,6 +2060,13 @@ Quick search games
 
 .quick_search_games_button:hover { color: white;}
 
+.quick_search_games_button:hover {
+  background: #00a9a9;
+  color: #182727;
+  text-decoration:none;
+  border-bottom: 3px solid #006f6f;
+}
+
 #quick_search_pub_select{ 
 	width: 185px;
 	margin-top: 0px;
@@ -2282,6 +2283,7 @@ Links addnew
 #leftnav_position_linkaddnew{ margin-top: 80px; margin-bottom: 30px; float: left;}
 #linkaddnew{ margin-top: 80px; margin-bottom: 30px; float: left;}
 #linkvalidate{ margin-bottom: 30px; float: left;}
+#quick_search_games_position_linkaddnew{margin-top: 80px; margin-bottom: 30px;}
 
 @media screen and (max-width: 1279px) { 
 	#leftnav_position_linkaddnew{ margin-top: 20px;}
@@ -2353,6 +2355,7 @@ Links Modify list
 					filter: alpha(opacity=40); /* For IE8 and earlier */}
 					
 #leftnav_position_linkmodlist {margin-top: 80px; margin-bottom: 30px; float: left;}
+#quick_search_games_linkmodlist{margin-top: 80px; margin-bottom: 30px;}
 #linkmodlist{ margin-top: 80px; margin-bottom: 30px; float: left;}
 
 .links_list_text{margin-right:1%;}
@@ -2389,8 +2392,10 @@ Links Modify list
 Links category
 ------------------------------------------------------------ */
 #leftnav_position_linkcat{margin-top: 80px; margin-bottom: 30px; float: left;}
+#quick_search_games_position_linkcat{margin-top: 80px; margin-bottom: 30px;}
 #linkcat{ margin-top: 80px; margin-bottom: 30px; float: left;}
 .link_cat_td { text-align:right;}
+
 @media screen and (max-width: 1279px) { 
 	#leftnav_position_linkcat{ margin-top: 20px;}
 	#linkcat{margin-top: 20px;}
@@ -2408,6 +2413,7 @@ Links category
 Links Modify
 ------------------------------------------------------------ */					
 #leftnav_position_linkmod {margin-top: 80px; margin-bottom: 30px; float: left;}
+#quick_search_games_position_linkmod{margin-top: 80px; margin-bottom: 30px;}
 #link_mod{ margin-top: 80px; margin-bottom: 30px; float: left;}
 
 @media screen and (max-width: 1279px) { 
@@ -2478,7 +2484,7 @@ Games list
 ------------------------------------------------------------ */	
 #games_list{margin-top: 80px; margin-bottom: 30px; float: left;}
 #quick_search_games_list{margin-top: 80px; margin-bottom: 00px; float: left;}
-#leftnav_position_games_list{margin-top: 20px; margin-bottom: 30px; float: left;}
+#leftnav_position_games_list{margin-top: 80px; margin-bottom: 30px; float: left;}
 
 
 @media screen and (max-width: 1279px) { 

@@ -10,6 +10,7 @@
 *
 *   Id: link_mod.php,v 0.10 2005/01/08 Silver Surfer
 *   Id: link_mod.php,v 0.20 2015/09/27 STG
+*   Id: link_mod.php,v 0.30 2015/12/24 ST Graveman - Added right side
 *
 ***************************************************************************/
 
@@ -20,6 +21,7 @@ In this section we modify links
 */
 
 include("../../includes/common.php");
+include("../../includes/quick_search_games.php");
 
 
 $LINKSQL = $mysqli->query("SELECT * FROM website
@@ -83,6 +85,7 @@ while ($rowlinkcat = $RESULT->fetch_array(MYSQLI_BOTH))
 } 
 
 $smarty->assign('left_nav', 'leftnav_position_linkmod');
+$smarty->assign('quick_search_games', 'quick_search_games_position_linkmod');
 
 //Send all smarty variables to the templates
 $smarty->display('file:../../../templates/html/admin/link_mod.html');
