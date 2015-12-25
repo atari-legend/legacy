@@ -23,26 +23,6 @@ In this section we modify links
 include("../../includes/common.php");
 include("../../includes/quick_search_games.php");
 
-//****************************************************************************************
-// Delete the categorie from the tables
-//**************************************************************************************** 
-if (isset($action) and $action=="del_cat")
-{
-	//check if the categorie has some websites linked to it
-	$website_count = $mysqli->query("SELECT website_id FROM website_category_cross WHERE website_category_id = '$category_id'");
-	$nr_of_links = get_rows($website_count);
-	
-	if ($nr_of_links == 0)
-	{
-		$sql = $mysqli->query("DELETE FROM website_category WHERE website_category_id = '$category_id'") or die("Failed to delete category");
-		$smarty->assign('message', 'Category deleted');
-	}
-	else
-	{
-		$smarty->assign('message', 'Category still has websites linked to it');
-	}	
-}
-
 $website = $mysqli->query("SELECT website_category_id, website_category_name FROM website_category ORDER by website_category_name");
 
 while($category_row = $website->fetch_array(MYSQLI_BOTH))
