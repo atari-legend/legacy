@@ -36,6 +36,7 @@ ini_set('max_execution_time', 300);
 
 // Include common files
 include("../../includes/common.php");
+include("../../includes/admin.php");
 
 // Set values
 $value_gamedownload = -5;

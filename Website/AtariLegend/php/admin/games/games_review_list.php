@@ -12,8 +12,8 @@
 ***************************************************************************/
 
 //load all common functions
-include("../../includes/common.php"); 
-
+include("../../includes/common.php");
+include("../../includes/admin.php");
 /*
 ************************************************************************************************
 This is the game review main page

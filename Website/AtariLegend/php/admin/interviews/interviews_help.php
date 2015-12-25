@@ -16,6 +16,7 @@
 //**************************************************************************************** 
 
 include("../../includes/common.php");
+include("../../includes/admin.php");
 
 $smarty->assign("user_id",$_SESSION['user_id']);
 

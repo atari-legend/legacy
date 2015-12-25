@@ -18,7 +18,8 @@ This is the submitted review page
 */
 
 //load all common functions
-include("../../includes/common.php"); 
+include("../../includes/common.php");
+include("../../includes/admin.php");
 
 //get the submitted reviews
 $sql_submission =  $mysqli->query("SELECT * FROM review_main

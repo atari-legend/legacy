@@ -19,6 +19,7 @@ In this section we can add a news update to the DB
 */
 
 include("../../includes/common.php");
+include("../../includes/admin.php");
 
 if (isset($action) and $action=="add_news")
 //****************************************************************************************

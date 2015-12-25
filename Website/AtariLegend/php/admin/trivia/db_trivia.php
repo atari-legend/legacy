@@ -16,7 +16,8 @@
 // This document contain all the code needed to operate the trivia database.
 // We are using the action var to separate all the queries.
 
-include("../../includes/common.php"); 
+include("../../includes/common.php");
+include("../../includes/admin.php"); 
 
 if(isset($action) and $action =="did_you_know_insert")
 

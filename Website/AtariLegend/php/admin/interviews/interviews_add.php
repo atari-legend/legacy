@@ -16,6 +16,7 @@
 //**************************************************************************************** 
 
 include("../../includes/common.php");
+include("../../includes/admin.php");
 
 //****************************************************************************************
 //first we check if there is an individual selected. This is done at the main page

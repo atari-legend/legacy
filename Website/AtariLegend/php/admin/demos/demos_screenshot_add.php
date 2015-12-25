@@ -16,6 +16,7 @@
 //**************************************************************************************** 
 
 include("../../includes/common.php");
+include("../../includes/admin.php");
 
 //Get the screenshots for this demo, if they exist
 $sql_screenshots = $mysqli->query("SELECT * FROM screenshot_demo

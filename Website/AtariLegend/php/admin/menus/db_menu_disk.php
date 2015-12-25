@@ -11,7 +11,8 @@
 
 // We are using the action var to separate all the queries.
 
-include("../../includes/common.php"); 
+include("../../includes/common.php");
+include("../../includes/admin.php"); 
 
 //****************************************************************************************
 // Add new menu set

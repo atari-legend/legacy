@@ -19,6 +19,7 @@ In this section we can add a news update to the DB
 */
 
 include("../../includes/common.php");
+include("../../includes/admin.php");
 				
 $sql_newsimage = $mysqli->query("SELECT news_image_id,news_image_name FROM news_image ORDER BY news_image_name");
 				

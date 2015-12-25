@@ -12,8 +12,8 @@
 *}
 {extends file='html/admin/frontpage.html'}
 {block name=java_script}
-<script src="../templates/0/js/lightbox.min.js"></script>
-<link href="../templates/0/css/lightbox.css" rel="stylesheet" />
+<script src="../../../templates/html/includes/js/lightbox.min.js"></script>
+<link href="../../../templates/html/includes/main_css/lightbox.css" rel="stylesheet" />
 <script type="text/javascript">
 function deletescreen(JSgameboxID,JSmode)
 {
@@ -76,7 +76,7 @@ function deletescreen(JSgameboxID,JSmode)
 						<a style="cursor:pointer;" class="MAINNAV" OnClick="deletescreen({$line.game_boxscan_id},'notback'); return false;">Delete</a>
 					</div>
 					<div style="display:inline-block;padding-top:8px;padding-bottom:8px;width:88px;">
-						<a href="../includes/show_image.php?file={$line.front_image}" data-lightbox="image-1" data-title="My caption">View</a>
+						<a href="../../includes/show_image.php?file={$line.front_image}" data-lightbox="image-1" data-title="My caption">View</a>
 					</div>
 					<div style="display:inline-block;padding-top:8px;padding-bottom:8px;width:220px;">
 						<a href="../games/games_box.php?game_id={$game_info.game_id}&amp;mode=back&amp;frontscan_id={$line.game_boxscan_id}" class="MAINNAV">Add Back</a>
@@ -102,7 +102,7 @@ function deletescreen(JSgameboxID,JSmode)
 						<a style="cursor:pointer;" class="MAINNAV" OnClick="deletescreen({$line.game_boxscan_id},back); return false;">Delete</a>
 					</div>
 					<div style="display:inline-block;padding-top:8px;padding-bottom:8px;width:88px;">
-						<a href="../includes/show_image.php?file={$line.back_image}" data-lightbox="image-1" data-title="My caption">View</a>
+						<a href="../../includes/show_image.php?file={$line.back_image}" data-lightbox="image-1" data-title="My caption">View</a>
 					</div>
 					<div style="display:inline-block;padding-top:8px;padding-bottom:8px;width:220px;">
 						{if $line.boxscan_cross_id neq ""}

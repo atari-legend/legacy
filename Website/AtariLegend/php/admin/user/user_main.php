@@ -20,6 +20,7 @@ User main
 */
 // Include common variables and functions
 include("../../includes/common.php");
+include("../../includes/admin.php");
 
 if (isset($action) and $action == 'delete_user')
 {
