@@ -21,6 +21,9 @@
 // will replace with this for now:
 extract($_REQUEST);
 
+// Report all PHP errors
+error_reporting(-1);
+
 include("../../includes/connect.php"); 
 include("../../includes/config_smarty.php");
 include("../../includes/functions.php"); 

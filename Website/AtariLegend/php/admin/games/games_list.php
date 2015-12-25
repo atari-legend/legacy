@@ -8,6 +8,7 @@
 *
 *   Id: games_main.php,v 0.10 2005/08/28 17:30 Gatekeeper
 *   Id: games_main.php,v 0.20 2015/10/31 10:13 Gatekeeper
+*   Id: games_main.php,v 0.30 2015/12/30 21:47 Gatekeeper - remove message var
 *
 ***************************************************************************/
 
@@ -19,6 +20,7 @@ This is the game browse page where you can navigate your way through the games d
 
 //load all common functions
 include("../../includes/common.php"); 
+include("../../includes/quick_search_games.php");
 
 date_default_timezone_set('UTC');
 $start = microtime(true);
@@ -110,7 +112,7 @@ $RESULTAKA = "SELECT
 	   WHERE ";
 
 
-if (empty($action_quick_search)) {$action_quick_search='';}
+if (empty($action)) {$action='';}
 /*
 ***********************************************************************************
 Firstly , we are gonna check which parts of the search functions are used in the main
@@ -118,7 +120,7 @@ screen and we're gonna fill some extra variables accordingly. These variables wi
 used to create the querystring later.
 ***********************************************************************************
 */
-	if (isset($action_quick_search) and $action_quick_search == "search" )
+	if (isset($action) and $action == "search" )
 	{		
 		if (isset($gamesearch))
 		{			
@@ -452,20 +454,12 @@ querystring for faster output
 		}
 				$smarty->assign("user_id",$_SESSION['user_id']);
 				
-				// Create dropdown values a-z
-				$az_value = az_dropdown_value(0);
-				$az_output = az_dropdown_output(0);
-						   
-				$smarty->assign('az_value', $az_value);
-				$smarty->assign('az_output', $az_output);	
-				
 				//$smarty->display('file:../../../templates/html/admin/games_list.html');
 				$smarty->assign('quick_search_games', 'quick_search_games_list');
 				$smarty->assign('left_nav', 'leftnav_position_games_list');
 				
 				//Send all smarty variables to the templates
 				$smarty->display('file:../../../templates/html/admin/games_list.html');
-
 			}
 			else
 			{
@@ -478,5 +472,4 @@ querystring for faster output
 			}
 		}
 	}
-
 ?>
