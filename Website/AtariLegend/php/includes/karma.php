@@ -27,11 +27,12 @@
 
 function UserKarma($user_id,$karma_action)
 {
+	global $mysqli;
 	if (empty($user_id)) {die("user_id wasn't passed properly");}
 	if (empty($karma_action)) {die("karma values wasn't passed properly");}
 	
-	$sql_karma = mysql_query("SELECT karma FROM users WHERE user_id = '$user_id'") or die("failed to query users");
-	list ($karma_value) = mysql_fetch_row($sql_karma);
+	$sql_karma = $mysqli->query("SELECT karma FROM users WHERE user_id = '$user_id'") or die("failed to query users");
+	list($karma_value) = $sql_karma->fetch_row();
 	
 	// For downloads
 	if ($karma_action == "game_downloads")
