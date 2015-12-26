@@ -21,17 +21,6 @@ include("../../includes/admin.php");
 
 if(empty($v_linkback)) {$v_linkback = '';}
 
-//Delete the selected news entrie
-if (isset($action) and $action=="delete")
-{
-	include("../includes/functions_search.php");
-
-	$mysqli->query("DELETE FROM news WHERE news_id ='$news_id'") 
-	or die("No Go with update!!");
-				
-	remove_search_post($news_id);
-}
-
 //get the number of news threads in the archive
 $query_number = $mysqli->query("SELECT * FROM news") or die("Couldn't get the number of news threads");
 $v_news = $query_number->num_rows;
