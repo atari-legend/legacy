@@ -49,8 +49,6 @@ if (isset($action) and $action == 'search')
 	if ( $gamebrowse_select == ""  and $gamesearch == "" )
 	{
 		$_SESSION['edit_message'] = "Please fill in one of the search fields!";
-		
-		$smarty->assign("user_id",$_SESSION['user_id']);
 
 		//Send back to the games_music.php if nothing have been searched
 		header("Location: ../games/games_music.php");
@@ -109,8 +107,6 @@ if (isset($action) and $action == 'search')
 
 				$smarty->assign('querytime', $totaltime1);
 				$smarty->assign('nr_of_entries', $i);
-				
-				$smarty->assign("user_id",$_SESSION['user_id']);
 
 				//Send all smarty variables to the templates
 				$smarty->display('file:../../../templates/html/admin/games_music_list.html');
@@ -122,7 +118,6 @@ if (isset($action) and $action == 'search')
 			{
 				
 				$_SESSION['edit_message'] = "No result for your search!";
-				$smarty->assign("user_id",$_SESSION['user_id']);
 
 				//Send back to the games_music.php if no results were generated
 				header("Location: ../games/games_music.php");
