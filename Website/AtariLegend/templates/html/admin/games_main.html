@@ -19,7 +19,7 @@ The main game page
 {extends file='html/admin/frontpage.html'}
 {block name=java_script}
 <script type="text/javascript">
-function gameinsert()
+function gameinsert_gm()
 {
     JSnewgame=document.getElementById("gm_newgame").value;
 	
@@ -177,7 +177,7 @@ function gameinsert()
 		<legend>Add games</legend>
 			<div class="standard_table_center">
 				<input type="text" name="newgame" id="gm_newgame" value="" class="standard_tile_input_small">
-				<input type="submit" value="Insert" onClick="gameinsert(); return false;" class="topbutton_cpanel_small"> 	
+				<input type="submit" value="Insert" onClick="gameinsert_gm(); return false;" class="topbutton_cpanel_small"> 	
 			</div>
 		</fieldset>
 		</form>
