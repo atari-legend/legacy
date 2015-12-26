@@ -33,7 +33,7 @@ $mysqli->query("INSERT INTO website (website_name, website_url, website_date, we
 
 $karma_action = "weblink";
 
-//UserKarma($user_id,$karma_action);
+UserKarma($user_id,$karma_action);
 			
 $RESULT=$mysqli->query("SELECT * FROM website WHERE website_name='$name' AND website_url='$url'")
 			or die("Unable to select website database");
