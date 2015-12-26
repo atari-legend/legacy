@@ -22,8 +22,6 @@ This is the game music main page
 ************************************************************************************************
 */
 
-	$smarty->assign("user_id",$_SESSION['user_id']);
-
 	//Send all smarty variables to the templates
 	$smarty->display('file:../../../templates/html/admin/games_music.html');
 
