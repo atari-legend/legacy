@@ -21,6 +21,23 @@ In this section we can add a news update to the DB
 include("../../includes/common.php");
 include("../../includes/admin.php");
 
+//Delete the selected news entrie
+if (isset($action) and $action=="delete_news")
+//****************************************************************************************
+// This is where we delete news posts
+//**************************************************************************************** 
+{
+
+		$mysqli->query("DELETE FROM news WHERE news_id ='$news_id'") 
+		or die("No Go with update!!");
+				
+		mysqli_close($mysqli);
+		$_SESSION['edit_message'] = "News post succesfully deleted";
+		header("Location: ../news/news_edit_all.php");
+}
+
+
+
 if (isset($action) and $action=="add_news")
 //****************************************************************************************
 // This is where we add the actual news to the submission table
@@ -41,12 +58,10 @@ if (isset($action) and $action=="add_news")
 							 VALUES ('$headline','$descr','$icon','$user_id','$news_date')")
 							 or die ("Error inserting news update");
 							 
-		$message = "News added correctly";
-					
+		$_SESSION['edit_message'] = "News added correctly";
 		mysqli_close($mysqli);
 	}
 	
-	$smarty->assign('message', $message);
 	header("Location: ../news/news_add.php");
 }
 
