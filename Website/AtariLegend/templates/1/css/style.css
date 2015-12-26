@@ -1784,7 +1784,7 @@ Standard table settings
 }
 
 .standard_table_list {
-	width: 90%;
+	width: 100%;
 	border: solid 1px black; 
 	background-color:#00d3d3;
 	margin-left:auto;
@@ -2114,8 +2114,8 @@ User details
 #user_details_img_dark{ box-shadow: 0 0 12px black; margin-left:1%;}
 
 @media screen and (max-width: 480px) { 
-#user_details{ margin-top: 20px;}	
-#leftnav_position_userdetails{ margin-top: 0px;}
+	#user_details{ margin-top: 20px;}	
+	#leftnav_position_userdetails{ margin-top: 0px;}
 }
 
 .user_details_container{
@@ -2440,44 +2440,77 @@ Games main
 ------------------------------------------------------------ */			
 #quick_search_games_main{margin-top: 80px; margin-bottom: 30px; float: left;}
 #games_main{ margin-top: 80px; margin-bottom: 30px; float: left;}
-#leftnav_position_games_main{ margin-bottom: 30px; float: left;}
+#leftnav_position_games_main{ margin-top: 80px; margin-bottom: 30px; float: left;}
 
-#games_main_options{ display:table; 
-	width:50%; 
-	margin-left:auto;
-	margin-right: auto;
-	text-align:left;
+@media screen and (max-width: 1279px) { 
+	#leftnav_position_games_main{ margin-top: 20px;}
+	#games_main{margin-top: 20px;}
 }
 
-@media screen and (max-width: 1199px) { 	
-	#games_main_options{ width:80%; 
-		margin-left:20%;
+.games_main_text{width:25%;display:table-cell;font-weight:bold;}
+.games_main_input{width:75%;display:table-cell;}
+.games_main_row{display:table;width:75%;margin-left:auto;}
+
+@media screen and (max-width: 1050px) { 
+.games_main_row{width:90%; }
+.games_main_text{width:40%;}
+.games_main_input{width:60%;}
+}
+
+@media screen and (max-width: 550px) { 
+	.games_main_text{width:35%;}
+	.games_main_input{width:65%;}
+}
+	
+
+@media screen and (max-width: 480px) { 
+	.games_main_text{width:50%;display:inline;}
+	.games_main_input{width:50%;display:inline;}
+	.games_main_row{width:50%;margin-left:10%}
+}
+
+.games_check_container{
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -moz-flex;
+  display: -webkit-flex;
+  display: flex; 
+  width: 50%;
+  margin:auto;
+ }
+ 
+#child_1, #child_2{width:50%; margin:auto;}
+.games_check_text{width:95%;display:table-cell;font-weight:bold;}
+.games_check_box{width:5%;display:table-cell;}
+.games_check_row{display:table;width:100%;}
+
+@media screen and (max-width: 1050px) { 
+	.games_check_container{
+		-webkit-flex-direction: column; 
+		flex-direction: column;
+		width: 100%;
 	}
+	#child_1, #child_2{width:100%; margin-left:10%;}
 }
 
-@media screen and (max-width: 999px) { 
-	#games_main_options{ margin-left:15%; }
+#games_main_pub_select{ 
+	width: 185px;
+	margin-top: 0px;
+	height: 25px;
 }
 
-@media screen and (max-width: 599px) { 
-	#games_main_two{ display: none;}
-	#games_main_options{ width:75%;
-		margin-left:25%;
-	}
+#games_main_dev_select{ 
+	width: 185px;
+	margin-top: 0px;
+	height: 25px;
 }
 
-@media screen and (max-width: 499px) { 
-	#games_main_options{ margin-left:5%; width: 100%;	
-	}
+#games_main_small_select{ 
+	width: 50px;
+	height: 25px;
 }
 
-@media screen and (max-width: 599px) { 
-	#games_main_two{ display: none;}
-}
-
-@media screen and (min-width: 600px) { 
-	#games_main_one{ display: none;}
-}
 
 /*---------------------------------------------------------- 
 Games list
@@ -2486,23 +2519,53 @@ Games list
 #quick_search_games_list{margin-top: 80px; margin-bottom: 00px; float: left;}
 #leftnav_position_games_list{margin-top: 80px; margin-bottom: 30px; float: left;}
 
-
 @media screen and (max-width: 1279px) { 
 	#quick_search_games_list{ margin-top: 20px;}
 	#games_list	{margin-top: 20px;}
 }
 
+#game_th{width:40%;text-align: left;}
+#pub_th,#dev_th{width:20%;text-align: left;}
+#year_th,#info_th{width:10%;text-align: left;}
+
+.game_td { color: white;
+		font-size: 10pt;
+		font-weight: 100;
+		text-align: left;
+		text-decoration: none; 
+		padding-left: 2px;
+		width:40%;
+}
+
+.pub_td,.dev_td { color: white;
+		font-size: 10pt;
+		font-weight: 100;
+		text-align: left;
+		text-decoration: none; 
+		padding-left: 2px;
+		width:20%;
+}
+
+.info_td,.year_td { color: white;
+		font-size: 10pt;
+		font-weight: 100;
+		text-align: left;
+		text-decoration: none; 
+		padding-left: 2px;
+		width:10%;
+}
+
 @media screen and (max-width: 1210px) { 
- #info_td,#year_td,#info_th,#year_th{display:none;}
+ .info_td,.year_td,#info_th,#year_th{display:none;}
 }
 
 @media screen and (max-width: 985px) { 
- #dev_td,#dev_th{display:none;}
+ .dev_td,#dev_th{display:none;}
 }
 
 @media screen and (max-width: 600px) { 
- #pub_td,#pub_th{display:none;}
- #game_th{text-align:center;}
+ .pub_td,#pub_th{display:none;}
+ #game_th,.game_td{text-align:center;}
 }
 
 #game_list_table{width: 100%;}
