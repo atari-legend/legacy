@@ -94,7 +94,7 @@ function add_year()
 
 function browseCompany(str) {
     if (str == "") {
-        document.getElementById("gd_pub_small_select").innerHTML = "";
+        document.getElementById("ajax_publisher_browse").innerHTML = "";
         return;
     } else { 
         if (window.XMLHttpRequest) {
@@ -106,10 +106,10 @@ function browseCompany(str) {
         }
         xmlhttp.onreadystatechange = function() {
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                document.getElementById("gd_pub_small_select").innerHTML = xmlhttp.responseText;
+                document.getElementById("ajax_publisher_browse").innerHTML = xmlhttp.responseText;
             }
         }
-        xmlhttp.open("GET","../games/ajax_games_detail.php?action=company_publisher_browse&amp;query="+str,true);
+        xmlhttp.open("GET","../games/ajax_games_detail.php?action=company_publisher_browse&query="+str,true);
         xmlhttp.send();
     }
 }
@@ -130,7 +130,7 @@ function browseDeveloper(str) {
                 document.getElementById("gd_dev_small_select").innerHTML = xmlhttp.responseText;
             }
         }
-        xmlhttp.open("GET","../games/ajax_games_detail.php?action=company_publisher_browse&amp;query="+str,true);
+        xmlhttp.open("GET","../games/ajax_games_detail.php?action=company_publisher_browse&query="+str,true);
         xmlhttp.send();
     }
 }
@@ -382,7 +382,7 @@ function browseDeveloper(str) {
 					<br>
 					<br>
 					<div>
-					<select name="companybrowse" onchange="browseDeveloper(this.value)" id="gd_dev_small_select">
+					<select name="developerbrowse" onchange="browseDeveloper(this.value)" id="gd_dev_small_select">
 						<option value="" SELECTED>-</option>
 						{html_options values=$az_value output=$az_output}
 					</select>
@@ -465,12 +465,14 @@ function browseDeveloper(str) {
 						<option value="" SELECTED>-</option>
 						{html_options values=$az_value output=$az_output}
 					</select>
+					<div id="ajax_publisher_browse">
 					<select name="company_id_pub" id="company_id_pub">
 						<option value="-" selected="selected">-</option>
 						{foreach from=$company item=line}
 							<option value="{$line.comp_id}">{$line.comp_name}</option>
 						{/foreach}
 					</select>
+					</div>
 					<input type="hidden" value="{$line.comp_name}" name="pub_name"/>
 					<b>Name</b>
 					</div>		
