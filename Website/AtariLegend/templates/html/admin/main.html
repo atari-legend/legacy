@@ -8,6 +8,7 @@
 *   actual update        : Creation of file
 *
 *   Id: main.html,v 0.1 2015/04/14 23:04 ST Graveyard
+*	Id: main.html,v 0.2 2015/12/21 16:16 ST Graveyard - 1920 compatible/HTML validated
 *
 ***************************************************************************/
 
@@ -36,27 +37,24 @@
 				$(toggle_el).toggleClass("open-sidebar_cpanel");
 			  });
 			});
-			//]]> 
-			
-	{if isset($edit_message)}
+			//]]> 		
+			{if isset($edit_message)}
 
-		$( document ).ready(function() {
-            $.notify_osd.create({
-				'text'        : '{$edit_message}',             // notification message
-				'icon'        : '../templates/0/icons/star.png', // icon path, 48x48
-				'sticky'      : false,             // if true, timeout is ignored
-				'timeout'     : 4,                 // disappears after 6 seconds
-				'dismissable' : true               // can be dismissed manually
+				$( document ).ready(function() {
+					$.notify_osd.create({
+						'text'        : '{$edit_message}',             // notification message
+						'icon'        : '../templates/0/icons/star.png', // icon path, 48x48
+						'sticky'      : false,             // if true, timeout is ignored
+						'timeout'     : 4,                 // disappears after 6 seconds
+						'dismissable' : true               // can be dismissed manually
+						});
 				});
-		});
-
-	{/if}
-			
+			{/if}
 		</script>
 		{block name=java_script}{/block}
 	</head>
 	<body id="body">
-		<div id="wrapper">
+		<div id="wrapper_header">
 			<header>
 				<div id="top_background">
 					<!-- This is the side menu only visible for smartphones (max resolution 480pc)-->				
@@ -65,7 +63,7 @@
 						    <div class="skin-wrap_cpanel">
 								<nav class="skin-menu_cpanel">
 								  <ul class="clearfix_cpanel">
-									<li><button type="button" class="topbutton_cpanel" id="games_side">GAMES</button>
+									<li><button type="button" class="topbutton_cpanel" id="games_side_cpanel">GAMES</button>
 										<ul class="sub-menu_cpanel">
 											<li><a href="../games/games_main.php" title="Game editor" class="sidebutton_cpanel" id="game_editor_side">GAME EDITOR</a></li>
 											<li><a href="#" title="Game comments" class="sidebutton_cpanel" id="game_comments_side">GAME COMMENTS</a></li>
@@ -88,7 +86,7 @@
 							 <div class="skin-wrap_cpanel">
 								<nav class="skin-menu_cpanel">
 								  <ul class="clearfix_cpanel">
-									<li><button type="button" class="topbutton_cpanel" id="menus_side">MENUS</button>
+									<li><button type="button" class="topbutton_cpanel" id="menus_side_cpanel">MENUS</button>
 										<ul class="sub-menu_cpanel">
 											<li><a href="../menus/menus_list.php" title="Menu editor" class="sidebutton_cpanel" id="menu_editor_side">MENU EDITOR</a></li>
 											<li><a href="#" title="Menu comments" class="sidebutton_cpanel" id="menu_comments_side">MENU COMMENTS</a></li>
@@ -104,7 +102,7 @@
 							 <div class="skin-wrap_cpanel">
 								<nav class="skin-menu_cpanel">
 								  <ul class="clearfix_cpanel">
-									<li><button type="button" class="topbutton_cpanel" id="demos_side">DEMOS</button>
+									<li><button type="button" class="topbutton_cpanel" id="demos_side_cpanel">DEMOS</button>
 										<ul class="sub-menu_cpanel">
 											<li><a href="#" title="Demo editor" class="sidebutton_cpanel" id="demo_editor_side">DEMO EDITOR</a></li>
 											<li><a href="#" title="Demo comments" class="sidebutton_cpanel" id="demo_comments_side">DEMO COMMENTS</a></li>
@@ -123,7 +121,7 @@
 							<div class="skin-wrap_cpanel">
 								<nav class="skin-menu_cpanel">
 								  <ul class="clearfix_cpanel">
-									<li><button type="button" class="topbutton_cpanel" id="users_side">USERS</button>
+									<li><button type="button" class="topbutton_cpanel" id="users_side_cpanel">USERS</button>
 										<ul class="sub-menu_cpanel">
 											<li><a href="../user/user_main.php" title="User admin" class="sidebutton_cpanel" id="user_admin_side">USER ADMIN</a></li>
 										</ul>
@@ -134,7 +132,7 @@
 							<div class="skin-wrap_cpanel">
 								<nav class="skin-menu_cpanel">
 								  <ul class="clearfix_cpanel">
-									<li><button type="button" class="topbutton_cpanel" id="admin_side">NEWS</button>
+									<li><button type="button" class="topbutton_cpanel" id="admin_side_cpanel">NEWS</button>
 										<ul class="sub-menu_cpanel">
 											<li><a href="#" title="Add news" class="sidebutton_cpanel" id="add_news_side">ADD NEWS</a></li>
 											<li><a href="#" title="Approve news" class="sidebutton_cpanel" id="approve_news_side">APPROVE NEWS</a></li>
@@ -147,7 +145,7 @@
 							<div class="skin-wrap_cpanel">
 								<nav class="skin-menu_cpanel">
 								  <ul class="clearfix_cpanel">
-									<li><button type="button" class="topbutton_cpanel" id="other_side">OTHER</button>
+									<li><button type="button" class="topbutton_cpanel" id="other_side_cpanel">OTHER</button>
 										<ul class="sub-menu_cpanel">
 											<li><a href="../index.php" title="Statistics" class="sidebutton_cpanel" id="Statistics_side">STATISTICS</a></li>
 											<li><a href="../trivia/did_you_know.php" title="Did you know" class="sidebutton_cpanel" id="did_you_know_side">DID YOU KNOW</a></li>
@@ -171,7 +169,7 @@
 								<nav class="skin-menu_cpanel">
 								  <ul class="clearfix_cpanel">
 									<li>	
-										<button type="button" class="topbutton_cpanel" id="skin_side">SKIN</button>
+										<button type="button" class="topbutton_cpanel" id="skin_side_cpanel">SKIN</button>
 										<ul class="sub-menu_cpanel">
 											<li><a href="{$skin_switch_1}" class="sidebutton_cpanel" id="legacy">LEGACY</a></li>
 											<li><a href="{$skin_switch_0}" class="sidebutton_cpanel" id="tos">TOS 2.07</a></li>
@@ -205,7 +203,7 @@
 					<img id="animation_vert" src="{$img_dir}animations/animation_vert0{math equation='rand(1,2)'}.gif" alt="animation" />
 					{/if}
 				</div>			
-				<nav>
+				<nav id="main_nav_cpanel">
 					<ul class="nav">
 						<li><button type="button" class="topbutton_cpanel" id="games">GAMES</button>
 							<ul>
@@ -279,15 +277,17 @@
 						</li>
 					</ul>
 				</nav>	
-			</header>	
-			{block name=main_body}{/block}
-			<footer class="footer">
-				<div class="footer_logo">
-					<br><br><br>
-					<img id="footer_img" src="{$img_dir}footer_logo.png" alt="logo">				
-					<h3>&copy; copyright 2004 - {'Y'|date} </h3>
-				</div>
-			</footer>
+			</header>
 		</div>
+		<div id="wrapper">			
+			{block name=main_body}{/block}
+		</div>
+		<footer class="footer">
+			<div class="footer_logo">
+				<br><br><br>
+				<img id="footer_img" src="{$img_dir}footer_logo.png" alt="logo">				
+				<h3>&copy; copyright 2004 - {'Y'|date} </h3>
+			</div>
+		</footer>
 	</body>
 </html>

@@ -10,6 +10,7 @@
 *
 *   Id: user_search.php,v 0.10 2005/05/01 Silver Surfer
 *   Id: user_search.php,v 0.20 2015/09/04 ST Graveyard
+*	Id: user_search.php,v 0.30 2015/12/21 ST Graveyard - added right side 
 *
 ***************************************************************************/
 
@@ -20,6 +21,7 @@ User search script
 */
 // include common variables and functions
 include("../../includes/common.php");
+include("../../includes/quick_search_games.php");
 include("../../includes/admin.php");
 
 // Build the query for the user search
@@ -83,14 +85,8 @@ while ($query_users = $sql_users->fetch_array(MYSQLI_BOTH))
 $smarty->assign('userbrowse', $userbrowse);
 $smarty->assign('usersearch', $usersearch);
 
-// Create dropdown values a-z
-$az_value = az_dropdown_value(0);
-$az_output = az_dropdown_output(0);
-		   
-$smarty->assign('az_value', $az_value);
-$smarty->assign('az_output', $az_output);	
-
 $smarty->assign('left_nav', 'leftnav_position_usersearch');
+$smarty->assign('quick_search_games', 'quick_search_games_position_usersearch');
 
 //Send all smarty variables to the templates
 $smarty->display('file:../../../templates/html/admin/user_search.html');
