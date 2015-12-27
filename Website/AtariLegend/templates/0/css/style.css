@@ -2582,9 +2582,9 @@ Games detail
 #gd_right { width: 32%; float:right;}
 #gd_development {width:100%; float:left; margin-top:20px;}
 #gd_basic_game_info{width:60%; float:left;}
-#gd_basic_game_info_row{display:table;width:65%;padding:2px; margin-left:5%}
-#gd_basic_game_info_row_check{display:table-cell;width:3%;}
-#gd_basic_game_info_row_checktxt{display:table-cell;width:45%;}
+.gd_basic_game_info_row{display:table;width:65%;padding:2px; margin-left:5%}
+.gd_basic_game_info_row_check{display:table-cell;width:3%;}
+.gd_basic_game_info_row_checktxt{display:table-cell;width:45%;}
 #gd_basic_game_info_category{float:right;width:40%;margin-top:-285px;}
 #gd_other_features{width:38%;float:right; }
 #gd_creator_info{margin-bottom:20px;}
@@ -2603,6 +2603,14 @@ Games detail
 	background: #666666;
 }
 #gd_text_area_big {height: 250px; background:#666666}
+
+#game_extra_info_pub,#continent_pub,#company_id_pub,#game_extra_info_dev,#continent_dev,
+#company_id_dev,#game_extra_info_year,#author_type_id,#ind_id{ 
+	width: 140px;
+	margin-top: 0px;
+	height: 25px;
+	background: #666666;
+}	
 
 @media screen and (min-width: 1280px) {
 	#gd_other_features_left{display:none;}

@@ -8,7 +8,8 @@
  *	 actual update        : Creation of file
  *
  *   Id: games_detail.php,v 0.10 2005/10/06 17:41 Zombieman
- *   Id: games_detail.php,v 0.10 2015/11/06 22:16 Zombieman
+ *   Id: games_detail.php,v 0.20 2015/11/06 22:16 Zombieman
+ *   Id: games_detail.php,v 0.30 2015/12/27 22:16 Zombieman - added messages
  *
  ***************************************************************************/
 
@@ -44,7 +45,8 @@ if ( isset($action) and $action == 'delete_aka' )
 	$sql_aka = $mysqli->query("DELETE FROM game_aka WHERE game_aka_id = '$game_aka_id' AND game_id = '$game_id'") 
  			   or die ("Couldn't delete aka");
 
-header("Location: ../games/games_detail.php?game_id=$game_id");
+	$_SESSION['edit_message'] = "AKA link has been deleted";
+	header("Location: ../games/games_detail.php?game_id=$game_id");
 }
 
 //***********************************************************************************
@@ -54,12 +56,13 @@ if ( isset($action) and $action == 'game_aka' )
 {
 	$sql_aka = $mysqli->query("INSERT INTO game_aka (game_id, aka_name) VALUES ('$game_id','$game_aka')")
  			   or die ("Couldn't insert aka games");
-
-header("Location: ../games/games_detail.php?game_id=$game_id");
+	
+	$_SESSION['edit_message'] = "AKA link has been added";
+	header("Location: ../games/games_detail.php?game_id=$game_id");
 }
 
 //***********************************************************************************
-//If delete publisher button has been pressed
+//If delete Creator button has been pressed
 //***********************************************************************************
 if ( isset($action) and $action == 'delete_creator' )
 {
@@ -67,14 +70,15 @@ if ( isset($action) and $action == 'delete_creator' )
 	{
 		foreach($game_author_id as $author) 
 		{
-			$mysqli->query("DELETE FROM game_author WHERE game_author_id = '$author' AND game_id = '$game_id'"); 
+			$mysqli->query("DELETE FROM game_author WHERE game_author_id = '$author' AND game_id = '$game_id'");
+			$_SESSION['edit_message'] = "Creator has been deleted";			
 		}
 	}
 	else
 	{
-		$smarty->assign("message",'Please choose a creator');
+		$_SESSION['edit_message'] = "Please choose a creator";
 	}
-header("Location: ../games/games_detail.php?game_id=$game_id");
+	header("Location: ../games/games_detail.php?game_id=$game_id");
 }
 
 //***********************************************************************************
@@ -85,12 +89,13 @@ if ( isset($action) and $action == 'add_creator' )
 	if ( $ind_id != '-' ) 
 	{
 		$sql = $mysqli->query("INSERT INTO game_author (game_id , ind_id, author_type_id) VALUES ('$game_id','$ind_id', '$author_type_id')") or die ("creator insertion failed");  
+		$_SESSION['edit_message'] = "Creator has been added";			
 	}
 	else
 	{
-		$smarty->assign("message",'Please choose a creator');
+		$_SESSION['edit_message'] = "Please choose a creator";			
 	}
-header("Location: ../games/games_detail.php?game_id=$game_id");
+	header("Location: ../games/games_detail.php?game_id=$game_id");
 }	
 
 //***********************************************************************************
@@ -103,11 +108,12 @@ if ( isset($action) and $action == 'delete_publisher' )
 		foreach($game_publisher_id as $publisher) 
 		{
 			$mysqli->query("DELETE FROM game_publisher WHERE pub_dev_id = '$publisher' AND game_id = '$game_id'"); 
+			$_SESSION['edit_message'] = "Publisher has been deleted";			
 		}
 	}
 	else
 	{
-		$smarty->assign("message",'Please choose a publisher');
+		$_SESSION['edit_message'] = "Please choose a publisher";			
 	}
 header("Location: ../games/games_detail.php?game_id=$game_id");
 }
@@ -120,12 +126,13 @@ if ( isset($action) and $action == 'add_publisher' )
 	if ( $company_id_pub != '-' ) 
 	{
 		$sql = $mysqli->query("INSERT INTO game_publisher (pub_dev_id ,game_id, continent_id, game_extra_info_id) VALUES ('$company_id_pub','$game_id','$continent_pub', '$game_extra_info_pub')") or die ("Publisher insertion failed");  
+		$_SESSION['edit_message'] = "Publisher has been added";			
 	}
 	else
 	{
-		$smarty->assign("message",'Please choose a publisher');
+		$_SESSION['edit_message'] = "Please choose a publisher";	
 	}
-header("Location: ../games/games_detail.php?game_id=$game_id");
+	header("Location: ../games/games_detail.php?game_id=$game_id");
 }	
 
 
@@ -139,13 +146,14 @@ if ( isset($action) and $action == 'delete_developer' )
 		foreach($game_developer_id as $developer) 
 		{
 			$mysqli->query("DELETE FROM game_developer WHERE dev_pub_id = '$developer' AND game_id = '$game_id'"); 
+			$_SESSION['edit_message'] = "Developer has been deleted";	
 		}
 	}
 	else
 	{
-		$smarty->assign("message",'Please choose a developer');
+			$_SESSION['edit_message'] = "Please choose a developer";	
 	}
-header("Location: ../games/games_detail.php?game_id=$game_id");
+	header("Location: ../games/games_detail.php?game_id=$game_id");
 }
 
 //***********************************************************************************
@@ -156,12 +164,13 @@ if ( isset($action) and $action == 'add_developer' )
 	if ( $company_id_dev != '-' ) 
 	{
 		$sql = $mysqli->query("INSERT INTO game_developer (dev_pub_id, game_id, continent_id, game_extra_info_id) VALUES ('$company_id_dev','$game_id','$continent_dev','$game_extra_info_dev')") or die ("Developer insertion failed");  
+		$_SESSION['edit_message'] = "Developer has been added";	
 	}
 	else
 	{
-		$smarty->assign("message",'Please choose a developer');
+		$_SESSION['edit_message'] = "Please choose a developer";	
 	}
-header("Location: ../games/games_detail.php?game_id=$game_id");
+	header("Location: ../games/games_detail.php?game_id=$game_id");
 }	
 
 
@@ -175,13 +184,14 @@ if ( isset($action) and $action == 'delete_year' )
 		foreach($game_year_id as $year) 
 		{
 			$mysqli->query("DELETE FROM game_year WHERE game_year_id = '$year' AND game_id = '$game_id'"); 
+			$_SESSION['edit_message'] = "Year has been deleted";	
 		}
 	}
 	else
 	{
-		$smarty->assign("message",'Please choose a release year');
+		$_SESSION['edit_message'] = "Please choose a release year";	
 	}
-header("Location: ../games/games_detail.php?game_id=$game_id");
+	header("Location: ../games/games_detail.php?game_id=$game_id");
 }
 
 //***********************************************************************************
@@ -190,7 +200,8 @@ header("Location: ../games/games_detail.php?game_id=$game_id");
 if ( isset($action) and $action == 'add_year' )
 {
 	$sql = $mysqli->query("INSERT INTO game_year (game_id, game_year, game_extra_info_id) VALUES ('$game_id','$Date_Year','$game_extra_info_year')") or die ("Release year insertion failed"); 
-header("Location: ../games/games_detail.php?game_id=$game_id"); 
+	$_SESSION['edit_message'] = "Year has been added";	
+	header("Location: ../games/games_detail.php?game_id=$game_id"); 
 }	
 
 //***********************************************************************************
@@ -354,7 +365,7 @@ header("Location: ../games/games_detail.php?game_id=$game_id");
 			$sdbquery = $mysqli->query("INSERT INTO game_stac (game_id,stac) VALUES ('$game_id','$stac')") or die("Couldn't insert stac tick box info");
 		}
 		
-		$smarty->assign("message",'Game has been modified correctly');
+		$_SESSION['edit_message'] = "Game has been modified";	
 	
 		header("Location: ../games/games_detail.php?game_id=$game_id");
 	}
@@ -471,7 +482,7 @@ header("Location: ../games/games_detail.php?game_id=$game_id");
 											$sdbquery = $mysqli->query("DELETE FROM game_series_cross WHERE game_id='$game_id'");
 											$sdbquery = $mysqli->query("DELETE FROM game_author WHERE game_id='$game_id'");				
 	
-											$smarty->assign("message",'Game succesfully deleted');
+											$_SESSION['edit_message'] = "Game has been deleted";	
 											
 											header("Location: ../games/games_main.php");
 
