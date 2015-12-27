@@ -19,6 +19,7 @@ This is the database modification area for the cpanel
 */
 // include common variables and functions
 include("../../includes/common.php");
+include("../../includes/admin.php");
 
 //****************************************************************************************
 // add avatar

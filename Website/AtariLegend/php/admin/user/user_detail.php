@@ -21,6 +21,7 @@ This is the user detail page
 // include common variables and functions
 include("../../includes/common.php");
 include("../../includes/quick_search_games.php");
+include("../../includes/admin.php");
 
 //Lets get all the data of the selected user
 	$sql_users = $mysqli->query("SELECT * FROM users 

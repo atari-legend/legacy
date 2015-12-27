@@ -17,6 +17,7 @@ The main individual page
 */
 
 include("../../includes/common.php");
+include("../../includes/admin.php");
 
 //Get the individuals
 $sql_individuals = "SELECT * FROM individuals ORDER BY ind_name ASC";

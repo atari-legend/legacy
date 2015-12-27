@@ -18,7 +18,8 @@ This is the game review page where you add a review to the db
 */
 
 //load all common functions
-include("../../includes/common.php"); 
+include("../../includes/common.php");
+include("../../includes/admin.php");
 
 //get the name of the game
 $sql_game = $mysqli->query("SELECT * FROM game WHERE game_id='$game_id'")

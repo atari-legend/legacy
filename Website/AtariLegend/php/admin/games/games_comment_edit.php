@@ -19,6 +19,7 @@ This will compile the games comment edit page
 */
 
 include("../../includes/common.php");
+include("../../includes/admin.php");
 
 if(empty($view)) {$view="comment";}
 if(empty($c_counter)) {$c_counter="";}

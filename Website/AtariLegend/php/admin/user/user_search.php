@@ -22,7 +22,7 @@ User search script
 // include common variables and functions
 include("../../includes/common.php");
 include("../../includes/quick_search_games.php");
-
+include("../../includes/admin.php");
 
 // Build the query for the user search
 if ($userbrowse == 'num' or empty($userbrowse) and empty($usersearch))

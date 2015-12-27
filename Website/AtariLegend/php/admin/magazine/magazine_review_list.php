@@ -19,6 +19,7 @@ List of games reviewed in a particular magazine issue!
 */
 
 include("../../includes/common.php");
+include("../../includes/admin.php");
 
 	$sql = $mysqli->query("SELECT * FROM magazine_game
 						LEFT JOIN game ON (magazine_game.game_id = game.game_id)

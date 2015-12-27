@@ -22,19 +22,20 @@ Manage our Did you know? quotes!
 
 include("../../includes/common.php");
 include("../../includes/quick_search_games.php");
+include("../../includes/admin.php");
 
-		$sql_trivia = $mysqli->query("SELECT * FROM trivia ORDER BY trivia_id");
-		
+$sql_trivia = $mysqli->query("SELECT * FROM trivia ORDER BY trivia_id");
 
-		while ($query_trivia = $sql_trivia->fetch_array(MYSQLI_BOTH))  
-		{
-				$trivia_text = nl2br($query_trivia['trivia_text']);
-				$trivia_text = stripslashes($trivia_text);
-		
-					$smarty->append('trivia',
-	    			array('trivia_id' => $query_trivia['trivia_id'],
-						  'trivia_text' => $trivia_text));
-		} 
+
+while ($query_trivia = $sql_trivia->fetch_array(MYSQLI_BOTH))  
+{
+		$trivia_text = nl2br($query_trivia['trivia_text']);
+		$trivia_text = stripslashes($trivia_text);
+
+			$smarty->append('trivia',
+			array('trivia_id' => $query_trivia['trivia_id'],
+				  'trivia_text' => $trivia_text));
+} 
 
 $smarty->assign('left_nav', 'leftnav_position_didyouknow');	
 $smarty->assign('quick_search_games', 'quick_search_games_position_didyouknow');	

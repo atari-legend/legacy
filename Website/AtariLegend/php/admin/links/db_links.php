@@ -19,6 +19,7 @@
 // We are using the action var to separate all the queries.
 
 include("../../includes/common.php");
+include("../../includes/admin.php");
 
 if(isset($action) and $action=="addnew_link")
 {
@@ -33,7 +34,7 @@ if(isset($action) and $action=="addnew_link")
 
 	$karma_action = "weblink";
 
-	//UserKarma($user_id,$karma_action);
+	UserKarma($user_id,$karma_action);
 				
 	$RESULT=$mysqli->query("SELECT * FROM website WHERE website_name='$name' AND website_url='$url'")
 				or die("Unable to select website database");

@@ -22,6 +22,7 @@ In this section we modify links
 
 include("../../includes/common.php");
 include("../../includes/quick_search_games.php");
+include("../../includes/admin.php");
 
 
 $LINKSQL = $mysqli->query("SELECT * FROM website

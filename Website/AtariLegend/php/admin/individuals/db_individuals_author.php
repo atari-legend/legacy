@@ -14,6 +14,7 @@
 //**************************************************************************************** 
 
 include("../../includes/common.php");
+include("../../includes/admin.php");
 
 if ( isset($action) and $action == 'insert' )
 {
