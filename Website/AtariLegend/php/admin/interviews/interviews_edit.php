@@ -16,6 +16,7 @@
 //**************************************************************************************** 
 
 include("../../includes/common.php");
+include("../../includes/admin.php");
 
 //Get the individuals
 $sql_individuals = $mysqli->query("SELECT * FROM individuals ORDER BY ind_name ASC")

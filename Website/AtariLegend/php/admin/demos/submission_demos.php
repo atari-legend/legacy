@@ -19,6 +19,7 @@ Display submissions
 */
 
 include("../../includes/common.php");
+include("../../includes/admin.php");
 if (empty($list) or $list=='') {$list="current"; }
 // get the total nr of submissions in the DB
 $query_total_number = $mysqli->query("SELECT * FROM demo_submitinfo") or die ("Couldn't get the total number of submissions");

@@ -212,12 +212,6 @@ function convert_timestamp($timestamp)
 		return $timestamp;
 	} 
 	
-function convert_timestamp_rss($timestamp)
-	{
-		$timestamp = date("r",$timestamp);
-		return $timestamp;
-	} 
-	
 function get_username_from_id($submitted)
 	{
 					$query = "SELECT userid FROM users WHERE user_id = $submitted";
@@ -231,103 +225,12 @@ function get_username_from_id($submitted)
 					}
 	}
 
-function get_user_id_from_name($submitted)
-	{
-					$query = "SELECT user_id FROM users WHERE userid = $submitted";
-					global $mysqli;
-					$result = $mysqli->query($query) or die("Query failed");
-					if(mysql_num_rows($result) == 0) return 0;
-					else
-					{
-						$query_data = $result->fetch_array(MYSQLI_BOTH);
-						return $query_data[user_id];
-					}
-	}
-	
 function get_rows ($result)
 	{
 		$num=$result->num_rows;
 		return $num;
 	}
-
-function mysqli_result($res,$row=0,$col=0){ 
-    $numrows = mysqli_num_rows($res); 
-    if ($numrows && $row <= ($numrows-1) && $row >=0){
-        mysqli_data_seek($res,$row);
-        $resrow = (is_numeric($col)) ? mysqli_fetch_row($res) : mysqli_fetch_assoc($res);
-        if (isset($resrow[$col])){
-            return $resrow[$col];
-        }
-    }
-    return false;
-}
 	
-function date_selector($inName, $useDate=0) 
-    { 
-        //create array so we can name months 
-        $monthName = array(1=> "January",  "February",  "March", 
-            "April",  "May",  "June",  "July",  "August", 
-            "September",  "October",  "November",  "December"); 
-
-        //if date invalid or not supplied, use current time 
-        if($useDate == 0) 
-        { 
-            $useDate = Time(); 
-        } 
-
-        /* 
-        ** make month selector 
-        */ 
-        print("<select name=" . $inName .  "Month>\n"); 
-        for($currentMonth = 1; $currentMonth <= 12; $currentMonth++) 
-        { 
-            print("<option value=\""); 
-            print(intval($currentMonth)); 
-            print("\""); 
-            if(intval(date( "m", $useDate))==$currentMonth) 
-            { 
-                print(" selected"); 
-            } 
-            print(">" . $monthName[$currentMonth] .  "\n"); 
-        } 
-        print("</select>"); 
-
-
-        /* 
-        ** make day selector 
-        */ 
-        print("<select name=" . $inName .  "Day>\n"); 
-        for($currentDay=1; $currentDay <= 31; $currentDay++) 
-        { 
-            print("<option value=\"$currentDay\""); 
-            if(intval(date( "d", $useDate))==$currentDay) 
-            { 
-                print(" selected"); 
-            } 
-            print(">$currentDay\n"); 
-        } 
-        print("</select>"); 
-
-
-        /* 
-        ** make year selector 
-        */ 
-        print("<select name=" . $inName .  "Year>\n"); 
-        $startYear = date( "Y", $useDate); 
-        for($currentYear = $startYear - 5; $currentYear <= $startYear+5;$currentYear++) 
-        { 
-            print("<option value=\"$currentYear\""); 
-            if(date( "Y", $useDate)==$currentYear) 
-            { 
-                print(" selected"); 
-            } 
-            print(">$currentYear\n"); 
-        } 
-        print("</select>"); 
-		
-		
-    } 
-
 function date_to_timestamp($date_Year,$date_Month,$date_Day)
 	{
 		$timestamp = mktime (0,0,0,$date_Month,$date_Day,$date_Year);

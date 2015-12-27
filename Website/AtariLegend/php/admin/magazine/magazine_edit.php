@@ -19,6 +19,7 @@ Edit Issues!
 */
 
 include("../../includes/common.php");
+include("../../includes/admin.php");
 
 $sql_magazine = $mysqli->query("SELECT * FROM magazine WHERE magazine_id='$magazine_id'") or die ("Error retriving magazines info");
 			

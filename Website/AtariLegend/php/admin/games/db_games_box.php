@@ -17,6 +17,7 @@
 
 
 include("../../includes/common.php");
+include("../../includes/admin.php");
 
 $filename = $_FILES['image'];
 

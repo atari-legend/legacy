@@ -20,6 +20,7 @@ Display submissions
 */
 
 include("../../includes/common.php");
+include("../../includes/admin.php");
 
 // get the total nr of submissions in the DB
 $query_total_number = $mysqli->query("SELECT * FROM game_submitinfo") or die ("Couldn't get the total number of submissions");

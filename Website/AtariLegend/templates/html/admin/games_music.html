@@ -1,6 +1,6 @@
 {* 
 /***************************************************************************
-*                                games_music.tpl
+*                                games_music.html
 *                            --------------------------
 *   begin                : Tuesday, November 15, 2005
 *   copyright            : (C) 2005 Atari Legend
@@ -8,6 +8,7 @@
 *						   Created file
 *						
 *   Id: games_music.tpl,v 0.10 2005/11/15 ST Graveyard
+*		v0.2 fixed user_id, messages and file split and pathsways
 *
 ***************************************************************************/
 
@@ -24,7 +25,7 @@ The main game music
 		and will also appear in the jukebox.
 	</fieldset> 
 <br/><br/>
-		<form action="../games/games_music.php" method="post" name="game_music">
+		<form action="../games/games_music_list.php" method="post" name="game_music">
 		<fieldset class="interview_set" style="margin-left:auto;margin-right:auto;">
 		<legend class="links_legend">Search music</legend>
 		<br/>
@@ -69,13 +70,8 @@ The main game music
 		<br/>
 		</fieldset>
 		<input type="hidden" name="action" id="action" value="search">
-		<input type="hidden" name="user_id" id="user_id" value="{$user_id}">
 		</form>	
 		<br/>
 		<br/>
 </div>
-
-{if isset($message)}
-	<div class="message_box">{$message}</div>
-{/if}
 {/block}

@@ -18,6 +18,7 @@ A little logo preview page
 ***************************************************************************/
 
 include("../../includes/common.php");
+include("../../includes/admin.php");
 
 $sql_logos = $mysqli->query("SELECT *
 				  			FROM pub_dev 

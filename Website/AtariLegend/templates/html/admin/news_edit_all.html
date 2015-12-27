@@ -39,14 +39,14 @@
 				<br/>
 				<br/>
 			<div style="display:inline-block;">
-				<img src="../includes/show_image.php?file={$line.edit_icon}&amp;resize=null,null,null,null" alt="newsbutton" style="float:left;margin-right:15px;">
+				<img src="../../includes/show_image.php?file={$line.edit_icon}&amp;resize=null,null,null,null" alt="newsbutton" style="float:left;margin-right:15px;">
 
 				<i>{$line.edit_text}</i>
 			</div>
 			<div style="text-align:center;">
 				<br/>
 				<a href="news_edit.php?news_id={$line.edit_id}" class="MAINNAV">EDIT</a> ::
-				<a href="news_edit_all.php?news_id={$line.edit_id}&amp;action=delete" class="MAINNAV">DELETE</a>
+				<a href="db_news.php?news_id={$line.edit_id}&amp;action=delete_news" class="MAINNAV">DELETE</a>
 			</div>
 		</fieldset> 
 		<br/>

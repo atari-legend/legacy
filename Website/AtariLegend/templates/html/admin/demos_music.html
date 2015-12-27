@@ -25,7 +25,7 @@ The main demo music
 <br/><br/>
 		<fieldset class="interview_set" style="text-align:center;">
 		<legend class="links_legend">Search music</legend>
-			<form action="../demos/demos_music.php" method="post" name="demo_music">
+			<form action="../demos/demos_music_list.php" method="post" name="demo_music">
 		<br/>
 
 				<b>By name :</b>
@@ -65,12 +65,7 @@ The main demo music
 		<input type="submit" value="Search">
 		<br/><br/>
 			<input type="hidden" name="action" id="action" value="search">
-			<input type="hidden" name="user_id" id="user_id" value="{$user_id}">
 			</form>	
 		</fieldset>
-
-{if isset($message)}
-	<div class="message_box">{$message}</div>
-{/if}
 </div>
 {/block}

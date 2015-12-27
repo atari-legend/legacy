@@ -19,6 +19,7 @@ Add Magazine screens!
 */
 
 include("../../includes/common.php");
+include("../../includes/admin.php");
 
 $sql_magazine = $mysqli->query("SELECT * FROM magazine ORDER BY magazine_name ASC") or die ("Error retriving magazines");
 			

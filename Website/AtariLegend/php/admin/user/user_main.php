@@ -24,6 +24,7 @@ User main
 // Include common variables and functions
 include("../../includes/common.php");
 include("../../includes/quick_search_games.php");
+include("../../includes/admin.php");
 
 //Do some stats
 foreach (KarmaGood() as $key => $value)

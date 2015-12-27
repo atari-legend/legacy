@@ -17,7 +17,8 @@ This is the demo browse page where you can navigate your way through the demo db
 */
 
 //load all common functions
-include("../../includes/common.php"); 
+include("../../includes/common.php");
+include("../../includes/admin.php");
 
 $start1=gettimeofday();
 list($start2, $start3) = explode(":", exec('date +%N:%S'));
