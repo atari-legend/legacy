@@ -6,10 +6,9 @@
 *   copyright            : (C) 2005 Atari Legend
 *   email                : silversurfer@atari-forum.com
 *   actual update        : re-creation of code from scratch into new file.
-*						  
-*							
-*
-*   Id: db_trivia.php,v 1.00 2005/05/01 Silver Surfer
+*						  						
+*   Id: db_trivia.php,v 1.00 2005/05/01 Silver Surferµ
+*   Id: db_trivia.php,v 1.00 2015/12/21 ST Graveyard - Added messages
 *
 ***************************************************************************/
 
@@ -28,7 +27,8 @@ if(isset($action) and $action =="did_you_know_insert")
 //**************************************************************************************** 
 
 	$sql = $mysqli->query("INSERT INTO trivia (trivia_text) VALUES ('$trivia_text')") or die("Couldn't insert trivia text");
-
+	$_SESSION['edit_message'] = "trivia quote added to the database";
+		
 	header("Location: ../trivia/did_you_know.php");
 
 	mysqli_close($mysqli);
@@ -44,7 +44,8 @@ if(isset($action) and $action=="did_you_know_delete")
 //**************************************************************************************** 
 
 	$sql = $mysqli->query("DELETE FROM trivia WHERE trivia_id = '$trivia_id'") or die("Couldn't delete trivia text");
-
+	$_SESSION['edit_message'] = "trivia quote has been deleted";
+	
 	header("Location: ../trivia/did_you_know.php");
 
 	mysqli_close($mysqli);
@@ -62,13 +63,11 @@ if (isset($action) and $action=="delete_trivia_quote")
 if (isset($trivia_quote_id))
 
 	{
-	
 	$sql = $mysqli->query("DELETE FROM trivia_quotes WHERE trivia_quote_id = '$trivia_quote_id'") or die("couldn't delete trivia quote");
 	
+	$_SESSION['edit_message'] = "trivia quote has been deleted";
 	header("Location: ../trivia/manage_trivia_quotes.php");
-	
 	}
-	
 }
 
 
@@ -83,13 +82,11 @@ if (isset($action) and $action=="add_trivia")
 if (isset($trivia_quote))
 
 	{
-	
 	$mysqli->query("INSERT INTO trivia_quotes (trivia_quote) VALUES ('$trivia_quote')") or die("couldn't add trivia quote");
+	$_SESSION['edit_message'] = "trivia quote added to the database";
 	
 	header("Location: ../trivia/manage_trivia_quotes.php");
-	
-	}
-	
+	}	
 }
 
 
@@ -139,7 +136,6 @@ foreach($image['tmp_name'] as $key=>$tmp_name)
 		 	{
 		 
 		// First we insert extension of the file... this also creates an autoinc number for us.
-		
 		$sdbquery = $mysqli->query("INSERT INTO trivia_screens (trivia_screens_id, imgext, skin_id) VALUES ('', '$ext', 'skin')")
 					or die ("Database error - inserting screenshots");
 		
@@ -160,8 +156,7 @@ foreach($image['tmp_name'] as $key=>$tmp_name)
 }
 
 mysqli_close($mysqli);
-
-	header("Location: ../trivia/manage_trivia_screens.php");
+header("Location: ../trivia/manage_trivia_screens.php");
 
 }
 
@@ -173,32 +168,28 @@ if (isset($action) and $action=="delete_trivia_screen")
 // Delete the trivia screenshot
 //**************************************************************************************** 
 
-if (isset($imageid))
-
+	if (isset($imageid))
 	{
-	
-	//get the extension 
+		//get the extension 
 		$SCREENSHOT = $mysqli->query("SELECT * FROM trivia_screens
-	   							   WHERE trivia_screens_id = '$imageid'")
-			 					 or die ("Database error - selecting screenshots");
+								   WHERE trivia_screens_id = '$imageid'")
+								 or die ("Database error - selecting screenshots");
 		
-			$screenshotrow = $SCREENSHOT->fetch_array(MYSQLI_BOTH);
-			$screenshot_ext = $screenshotrow['imgext'];
+		$screenshotrow = $SCREENSHOT->fetch_array(MYSQLI_BOTH);
+		$screenshot_ext = $screenshotrow['imgext'];
 
-			$sql = $mysqli->query("DELETE FROM trivia_screens WHERE trivia_screens_id = '$imageid' ");
+		$sql = $mysqli->query("DELETE FROM trivia_screens WHERE trivia_screens_id = '$imageid' ");
 
-			$new_path = $trivia_screenshot_path;
-			$new_path .= $imageid;
-			$new_path .= ".";
-			$new_path .= $screenshot_ext;
+		$new_path = $trivia_screenshot_path;
+		$new_path .= $imageid;
+		$new_path .= ".";
+		$new_path .= $screenshot_ext;
 
-			unlink ("$new_path");
+		unlink ("$new_path");
 
 		mysqli_close($mysqli); 
-	
-	header("Location: ../trivia/manage_trivia_screens.php");
-	
+		
+		header("Location: ../trivia/manage_trivia_screens.php");
 	}
-	
 }
 ?>

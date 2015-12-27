@@ -23,7 +23,6 @@ include("../../includes/admin.php");
 //***********************************************************************************
 //Insert new game
 //***********************************************************************************
-
 	if (isset($action) and $action == "insert_game" )
 	{
 		//Insert the game in the game table
@@ -34,7 +33,6 @@ include("../../includes/admin.php");
 		$new_game_id = $mysqli->insert_id;
 
 		header("Location: ../games/games_detail.php?game_id=$new_game_id");
-
 	}
 
 

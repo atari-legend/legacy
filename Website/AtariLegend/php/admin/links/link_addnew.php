@@ -10,6 +10,7 @@
 *
 *   Id: link_addnew.php,v 0.10 2005/01/08 Silver Surfer
 *   Id: link_addnew.php,v 0.20 2015/09/07 ST Graveyard
+*   Id: link_addnew.php,v 0.30 2015/12/24 ST Graveyard - Add right side in 1920
 *
 ***************************************************************************/
 
@@ -18,10 +19,9 @@
 In this section we can add a new link to the DB
 ***********************************************************************************
 */
-
 include("../../includes/common.php");
+include("../../includes/quick_search_games.php");
 include("../../includes/admin.php");
-
 
 $RESULT=$mysqli->query("SELECT * FROM website_category ORDER BY website_category_name");
 
@@ -75,6 +75,7 @@ else
 	}
 
 $smarty->assign('left_nav', 'leftnav_position_linkaddnew');
+$smarty->assign('quick_search_games', 'quick_search_games_position_linkaddnew');	
 
 //Send all smarty variables to the templates
 $smarty->display('file:../../../templates/html/admin/link_addnew.html');

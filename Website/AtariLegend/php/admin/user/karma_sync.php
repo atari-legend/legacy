@@ -7,6 +7,7 @@
 *   email                : atarizone@atarizone.com
 *
 *   Id: karma_sync.php,v 0.10 2005/11/13 23:30 Silver
+*   Id: karma_sync.php,v 0.20 2015/12/22 00:26 STG - Added right side
 *
 ********************************************************************************
 
@@ -130,6 +131,7 @@ $sql_user = $mysqli->query("SELECT user_id,userid,karma FROM users");
 	}
 
 $smarty->assign('left_nav', 'leftnav_position_karma');	
+$smarty->assign('quick_search_games', 'quick_search_games_position_karma');	
 	
 //Send all smarty variables to the templates
 $smarty->display('file:../../../templates/html/admin/user_karmasync.html');
