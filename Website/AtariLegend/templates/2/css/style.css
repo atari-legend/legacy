@@ -2764,6 +2764,71 @@ Games detail
 }
 
 /*---------------------------------------------------------- 
+Games comment
+------------------------------------------------------------ */	
+#quick_search_games_comment{margin-top: 50px; margin-bottom: 30px; float: left;}
+#leftnav_position_games_comment{margin-top: 50px; margin-bottom: 30px; float: left;}
+#games_comment{margin-top: 50px; margin-bottom: 30px; float: left;}
+
+@media screen and (max-width: 1279px) { 
+	#leftnav_position_games_comment{margin-top: 20px;}
+	#quick_search_games_comment{margin-top: 20px;}
+	#games_comment{margin-top: 20px;}
+}
+
+@media screen and (max-width: 640px) { 
+	.gc_left_head{display:none;}
+	.gc_left{display:none;}
+}
+
+.gc_table_list {
+	width: 100%;
+	border: solid 1px #b2b2b2; 
+	background-color:#f3f3f3;
+	margin-left:auto;
+	margin-right:auto;
+	border-spacing: 0;
+	text-align:left;
+}
+
+.gc_table_list tr:nth-child(even){
+	background-color:#f3f3f3;
+}
+
+.gc_table_list tr:nth-child(odd){
+	background-color:#EFEFEF;
+}
+
+.gc_table_list td {
+	border-bottom: solid 1px black;
+	padding: 5px;
+	margin:0px;
+}
+
+.gc_left_head{width:20%;font-size: 12pt;}
+.gc_center_head{width:80%;font-size: 12pt;}
+
+.gc_left{width:20%;font-size: 12pt;}
+.gc_center{width:80%;font-size: 12pt;}
+
+/*---------------------------------------------------------- 
+Games comment edit
+------------------------------------------------------------ */	
+#quick_search_games_comment_edit{margin-top: 50px; margin-bottom: 00px; float: left;}
+#leftnav_position_games_comment_edit{margin-top: 50px; margin-bottom: 30px; float: left;}
+#games_comment_edit{margin-top: 50px; margin-bottom: 30px; float: left;}
+
+@media screen and (max-width: 1279px) { 
+	#leftnav_position_games_comment_edit{margin-top: 20px;}
+	#quick_search_games_comment_edit{margin-top: 20px;}
+	#games_comment_edit{margin-top: 20px;}
+}
+
+#gce_button,#gce_button2{display:inline;}
+
+#gce_area { width: 100%;}
+
+/*---------------------------------------------------------- 
  resolutions tested!
 ------------------------------------------------------------ */
 /* smartphones, iPhone, portrait 480x320 phones */

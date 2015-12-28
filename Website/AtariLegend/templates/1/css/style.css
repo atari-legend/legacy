@@ -2617,6 +2617,7 @@ Games detail
 @media screen and (max-width: 1279px) { 
 	#games_detail{margin-top: 20px;}
 	#quick_search_games_detail{margin-top: 20px;}
+	#leftnav_position_games_detail{margin-top: 20px;}
 	#gd_basic_game_info{width:100%; margin-bottom: 20px;}
 	#gd_other_features{display:none}
 	#gd_other_features_left{float:left; width:49%;}
@@ -2639,6 +2640,70 @@ Games detail
 	#gd_publisher_info{margin-top:0px;}
 }
 
+/*---------------------------------------------------------- 
+Games comment
+------------------------------------------------------------ */	
+#quick_search_games_comment{margin-top: 80px; margin-bottom: 30px; float: left;}
+#leftnav_position_games_comment{margin-top: 80px; margin-bottom: 30px; float: left;}
+#games_comment{margin-top: 80px; margin-bottom: 30px; float: left;}
+
+@media screen and (max-width: 1279px) { 
+	#leftnav_position_games_comment{margin-top: 20px;}
+	#quick_search_games_comment{margin-top: 20px;}
+	#games_comment{margin-top: 20px;}
+}
+
+@media screen and (max-width: 640px) { 
+	.gc_left_head{display:none;}
+	.gc_left{display:none;}
+}
+
+.gc_table_list {
+	width: 100%;
+	border: solid 1px black; 
+	background-color:#00d3d3;
+	margin-left:auto;
+	margin-right:auto;
+	border-spacing: 0;
+	text-align:left;
+}
+
+.gc_table_list tr:nth-child(even){
+	background-color:#00d3d3;
+}
+
+.gc_table_list tr:nth-child(odd){
+	background-color:#006f6f;
+}
+
+.gc_table_list td {
+	border-bottom: solid 1px black;
+	padding: 5px;
+	margin:0px;
+}
+
+.gc_left_head{width:20%;font-size: 10pt;}
+.gc_center_head{width:80%;font-size: 10pt;}
+
+.gc_left{width:20%;font-size: 10pt;}
+.gc_center{width:80%;font-size: 10pt;}
+
+/*---------------------------------------------------------- 
+Games comment edit
+------------------------------------------------------------ */	
+#quick_search_games_comment_edit{margin-top: 80px; margin-bottom: 00px; float: left;}
+#leftnav_position_games_comment_edit{margin-top: 80px; margin-bottom: 30px; float: left;}
+#games_comment_edit{margin-top: 80px; margin-bottom: 30px; float: left;}
+
+@media screen and (max-width: 1279px) { 
+	#leftnav_position_games_comment_edit{margin-top: 20px;}
+	#quick_search_games_comment_edit{margin-top: 20px;}
+	#games_comment_edit{margin-top: 20px;}
+}
+
+#gce_button,#gce_button2{display:inline;}
+
+#gce_area { width: 100%;}
 
 /*---------------------------------------------------------- 
  resolutions tested!

@@ -1,15 +1,15 @@
 {* 
 /***************************************************************************
- *                                games_detail.tpl
+ *                                games_detail.html
  *                            ------------------------
  *   begin                : Tuesday, September 11, 2005
  *   copyright            : (C) 2005 Atari Legend
  *   email                : admin@atarilegend.com
  *	 actual update        : Creation of file
  *
- *   Id: games_detail.tpl,v 0.10 2005/10/11 15:03 Zombieman
- *   Id: games_detail.tpl,v 0.20 2015/11/02 21:26 STG
- *   Id: games_detail.tpl,v 0.30 2015/12/27 21:26 STG - 1920 width/HTML Valid/Messages -- NO FLEXBOX
+ *   Id: games_detail.html,v 0.10 2005/10/11 15:03 Zombieman
+ *   Id: games_detail.html,v 0.20 2015/11/02 21:26 STG
+ *   Id: games_detail.html,v 0.30 2015/12/27 21:26 STG - 1920 width/HTML Valid/Messages -- NO FLEXBOX
  *
  ***************************************************************************/
 
@@ -115,7 +115,7 @@ function browseCompany(str) {
 }
 function browseDeveloper(str) {
     if (str == "") {
-        document.getElementById("gd_dev_small_select").innerHTML = "";
+        document.getElementById("ajax_developer_browse").innerHTML = "";
         return;
     } else { 
         if (window.XMLHttpRequest) {
@@ -127,7 +127,7 @@ function browseDeveloper(str) {
         }
         xmlhttp.onreadystatechange = function() {
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                document.getElementById("gd_dev_small_select").innerHTML = xmlhttp.responseText;
+                document.getElementById("ajax_developer_browse").innerHTML = xmlhttp.responseText;
             }
         }
         xmlhttp.open("GET","../games/ajax_games_detail.php?action=company_publisher_browse&query="+str,true);
@@ -381,19 +381,29 @@ function browseDeveloper(str) {
 					{/if}
 					<br>
 					<br>
-					<div>
-					<select name="developerbrowse" onchange="browseDeveloper(this.value)" id="gd_dev_small_select">
-						<option value="" SELECTED>-</option>
-						{html_options values=$az_value output=$az_output}
-					</select>
-					<select name="company_id_dev" id="company_id_dev">
-						<option value="-" selected="selected">-</option>
-						{foreach from=$company item=line}
-							<option value="{$line.comp_id}">{$line.comp_name}</option>
-						{/foreach}
-					</select>
-					<b>Name</b>
-					</div>		
+					<table>
+					<tr>
+						<td>
+							<select name="developerbrowse" onchange="browseDeveloper(this.value)" id="gd_dev_small_select">
+								<option value="" SELECTED>-</option>
+								{html_options values=$az_value output=$az_output}
+							</select>
+						</td>
+						<td>
+							<div id="ajax_developer_browse">
+								<select name="company_id_dev" id="company_id_dev">
+									<option value="-" selected="selected">-</option>
+									{foreach from=$company item=line}
+										<option value="{$line.comp_id}">{$line.comp_name}</option>
+									{/foreach}
+								</select>
+							</div>
+						</td>
+						<td>
+							<b>Name</b>
+						</td>
+					</tr>
+					</table>	
 					<br>
 					<select name="continent_dev" id="continent_dev">
 						<option value="-" selected="selected">-</option>
@@ -460,22 +470,30 @@ function browseDeveloper(str) {
 					<input type="button" name="valider" value="Delete" onclick="delete_publisher()" class="topbutton_cpanel_small">
 					<br>
 					<br>
-					<div>
-					<select name="companybrowse" onchange="browseCompany(this.value)" id="gd_pub_small_select">
-						<option value="" SELECTED>-</option>
-						{html_options values=$az_value output=$az_output}
-					</select>
-					<div id="ajax_publisher_browse">
-					<select name="company_id_pub" id="company_id_pub">
-						<option value="-" selected="selected">-</option>
-						{foreach from=$company item=line}
-							<option value="{$line.comp_id}">{$line.comp_name}</option>
-						{/foreach}
-					</select>
-					</div>
-					<input type="hidden" value="{$line.comp_name}" name="pub_name"/>
-					<b>Name</b>
-					</div>		
+					<table>
+					<tr>
+						<td>
+							<select name="companybrowse" onchange="browseCompany(this.value)" id="gd_pub_small_select">
+								<option value="" SELECTED>-</option>
+								{html_options values=$az_value output=$az_output}
+							</select>
+						</td>
+						<td>
+							<div id="ajax_publisher_browse">
+								<select name="company_id_pub" id="company_id_pub">
+									<option value="-" selected="selected">-</option>
+									{foreach from=$company item=line}
+										<option value="{$line.comp_id}">{$line.comp_name}</option>
+									{/foreach}
+								</select>
+							</div>
+						</td>
+						<td>
+							<input type="hidden" value="{$line.comp_name}" name="pub_name"/>
+							<b>Name</b>
+						</td>
+					</tr>
+					</table>		
 					<br>
 					<select name="continent_pub" id="continent_pub">
 						<option value="-" selected="selected">-</option>
