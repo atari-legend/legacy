@@ -9,22 +9,23 @@
 *							
 *
 *   Id: games_comment.php,v 0.10 2005/09/17 Silver Surfer
+*   Id: games_comment.php,v 0.20 2015/12/27 STG - added left/right side
 *
 ***************************************************************************/
 
 include("../../includes/common.php");
 include("../../includes/admin.php");
 
-$v_counter= (isset($_GET["v_counter"]) ? $_GET["v_counter"] : 0);
+//load the search fields of the quick search side menu
+include("../../includes/quick_search_games.php"); 
 
+$v_counter= (isset($_GET["v_counter"]) ? $_GET["v_counter"] : 0);
 
 //********************************************************************************************* 
 // User comments
 //*********************************************************************************************  
 if(empty($view)) {$view="";}
 if(empty($users_comments)) {$users_comments="";}
-//
-//if(empty($v_counter)) {$v_counter="";}
 
 if ($view == "users_comments") 
 { 
@@ -32,18 +33,16 @@ if ($view == "users_comments")
 	
 	//Build next/back links, part for users_comments only
 	$users_comments = "&c_counter=$c_counter&users_id=$users_id&view=users_comments";
-
 }
 else { $where_clause = ""; $view = "latest_comments";}
 
-
 $sql_build = "SELECT *
-							FROM game_user_comments
-							LEFT JOIN comments ON ( game_user_comments.comment_id = comments.comments_id )
-							LEFT JOIN users ON ( comments.user_id = users.user_id )
-							LEFT JOIN game ON ( game_user_comments.game_id = game.game_id )
-							 " . $where_clause . "
-							ORDER BY comments.timestamp DESC LIMIT  " . $v_counter . ", 15";
+				FROM game_user_comments
+				LEFT JOIN comments ON ( game_user_comments.comment_id = comments.comments_id )
+				LEFT JOIN users ON ( comments.user_id = users.user_id )
+				LEFT JOIN game ON ( game_user_comments.game_id = game.game_id )
+				 " . $where_clause . "
+				ORDER BY comments.timestamp DESC LIMIT  " . $v_counter . ", 15";
 
 $sql_comment = $mysqli->query($sql_build);
 
@@ -51,7 +50,6 @@ $sql_comment = $mysqli->query($sql_build);
 $query_total_number = $mysqli->query("SELECT * FROM game_user_comments") or die ("Couldn't get the total number of comments");
 $v_rows_total = $query_total_number->num_rows;
 $smarty->assign('total_nr_comments', $v_rows_total);
-
 
 // count number of comments
 $query_number = $mysqli->query("SELECT * FROM game_user_comments
@@ -62,12 +60,11 @@ $v_rows = $query_number->num_rows;
 
 $smarty->assign('nr_comments', $v_rows);
 
-
 // lets put the comments in a smarty array
 while ($query_comment = $sql_comment->fetch_array(MYSQLI_BOTH)) 
 {
 	$query_game_id = $query_comment['game_id'];
-//Select a random screenshot record
+//	Select a random screenshot record
 	$query_game = $mysqli->query("SELECT 
 							   screenshot_game.game_id,
 							   screenshot_game.screenshot_id,
@@ -79,7 +76,7 @@ while ($query_comment = $sql_comment->fetch_array(MYSQLI_BOTH))
 							   
 	$sql_game = $query_game->fetch_array(MYSQLI_BOTH);  
 
-// Retrive userstats from database
+// 	Retrive userstats from database
 	$query_user = $mysqli->query("SELECT *
 							   FROM game_user_comments
 							   LEFT JOIN comments ON ( game_user_comments.comment_id = comments.comments_id )
@@ -90,7 +87,7 @@ while ($query_comment = $sql_comment->fetch_array(MYSQLI_BOTH))
 						or die ("Could not count user submissions");
 	$usersubmit_number = $query_submitinfo->num_rows;
 	
-	//Get the dataElements we want to place on screen
+//	Get the dataElements we want to place on screen
 	if (isset($sql_game['imgext'])) {
 	$v_game_image  = $game_screenshot_path;
 	$v_game_image .= $sql_game['screenshot_id'];
@@ -103,11 +100,12 @@ while ($query_comment = $sql_comment->fetch_array(MYSQLI_BOTH))
 	
 	$oldcomment = $query_comment['comment'];
 
-	$oldcomment = InsertALCode($oldcomment);
-	$oldcomment = InsertSmillies($oldcomment);
 	$oldcomment = nl2br($oldcomment);
+	$oldcomment = InsertALCode($oldcomment);
+	$oldcomment = trim($oldcomment);
+	$oldcomment = RemoveSmillies($oldcomment);
 	$oldcomment = stripslashes($oldcomment);
-	
+
 	if($query_comment['join_date']=="") {$user_joindate = "unknown";} else {$user_joindate = convert_timestamp($query_comment['join_date']);}
 	$date = convert_timestamp($query_comment['timestamp']);
 	
@@ -154,6 +152,7 @@ if($v_rows > ($v_counter + 15))
 
 if(empty($c_counter)) {$c_counter="";}
 if(empty($v_linkback)) {$v_linkback="";}
+if(empty($v_linknext)) {$v_linknext="";}
 
 $smarty->assign('links',
 	     array('linkback' => $v_linkback,
@@ -162,6 +161,9 @@ $smarty->assign('links',
 			   'view' => $view,
 			   'users_comments' => $users_comments,
 			   'c_counter' => $c_counter));
+			   
+$smarty->assign('quick_search_games', 'quick_search_games_comment');
+$smarty->assign('left_nav', 'leftnav_position_games_comment');
 
 //Send all smarty variables to the templates
 $smarty->display('file:../../../templates/html/admin/games_comment.html');

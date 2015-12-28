@@ -8,7 +8,8 @@
 *   actual update        : file creation
 *							
 *
-*   Id: games_comment_edit,v 0.10 2005/09/18 Silver Surfer
+*   Id: games_comment_edit.php,v 0.10 2005/09/18 Silver Surfer
+*   Id: games_comment_edit.php,v 0.20 2015/12/29 STG - added left/right side
 *
 ***************************************************************************/
 
@@ -20,6 +21,9 @@ This will compile the games comment edit page
 
 include("../../includes/common.php");
 include("../../includes/admin.php");
+
+//load the search fields of the quick search side menu
+include("../../includes/quick_search_games.php"); 
 
 if(empty($view)) {$view="comment";}
 if(empty($c_counter)) {$c_counter="";}
@@ -48,6 +52,9 @@ $date = convert_timestamp($query_comment['timestamp']);
 			  'comment_id' => $query_comment['comment_id'],
 			  'v_counter' => $v_counter));
 
+$smarty->assign('quick_search_games', 'quick_search_games_comment_edit');
+$smarty->assign('left_nav', 'leftnav_position_games_comment_edit');			  
+			  
 //Send all smarty variables to the templates
 $smarty->display('file:../../../templates/html/admin/games_comment_edit.html');
 ?>
