@@ -7,8 +7,6 @@
 *   email                : silversurfer@atari-forum.com
 *   actual update        : re-creation of code from scratch into new file.
 *						  
-*							
-*
 *   Id: db_games_comment.php,v 1.10 2005/09/19 Silver Surfer
 *
 ***************************************************************************/
@@ -27,7 +25,10 @@ if($action=="edit_games_comment")
 
 	if (isset($comment_text) and isset($comment_id))
 	{
-		$commentquery = $mysqli->query("UPDATE comments SET comment='$comment_text' WHERE comments_id='$comment_id'");
+		echo $comment_text; 
+		echo $comment_id;
+		echo $v_counter;
+		$commentquery = $mysqli->query("UPDATE comments SET comment='$comment_text' WHERE comments_id='$comment_id'") or die("couldn't update comments table");
 		$_SESSION['edit_message'] = "Comment edited";
 	}
 
