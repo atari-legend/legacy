@@ -293,6 +293,9 @@ footer, header, hgroup, menu, nav, section {
         background: black;
         width: 191px;
         height: 100%;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -ms-box-sizing: border-box;
         box-sizing: border-box;
     }
 	
@@ -319,14 +322,18 @@ footer, header, hgroup, menu, nav, section {
         width: 100%;
         height: 100%;
         padding: 1px;
-        box-sizing: border-box;
+        -webkit-box-sizing: border-box;
         -moz-box-sizing: border-box;
+        -ms-box-sizing: border-box;
+        box-sizing: border-box;
         position: absolute;
     }
 	
     .main-content .content{
-        box-sizing: border-box;
+        -webkit-box-sizing: border-box;
         -moz-box-sizing: border-box;
+        -ms-box-sizing: border-box;
+        box-sizing: border-box;
 		padding-left: 60px;
 		width: 100%;	
     }
@@ -975,7 +982,7 @@ Standard tile settings
 				font-family: AtariST;	
 }
 
-.standard_tile_input_small { background : black;
+.standard_tile_input_small { 
 				color: #ffffff;				
 				width: 185px;
 				height: 25px;
@@ -988,7 +995,7 @@ Standard tile settings
 				background: #666666;
 }
 
-.standard_tile_input_area { background : black;
+.standard_tile_input_area { 
 				color: #ffffff;				
 				width: 90%;
 				height: 40px;
@@ -1125,6 +1132,7 @@ a.standard_tile_link:hover, a.standard_tile_link:focus
   		padding: 0;
   		-moz-box-sizing: border-box;
   		-webkit-box-sizing: border-box;
+  		-ms-box-sizing: border-box;
   		box-sizing: border-box;
 
 		display: block;
@@ -1522,6 +1530,9 @@ contact tiles - front page
     #sidebar_cpanel {
 		z-index:1;
 		position: absolute;
+		-webkit-box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		-ms-box-sizing: border-box;
 		box-sizing: border-box;
     }
 	
