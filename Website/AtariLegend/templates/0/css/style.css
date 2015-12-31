@@ -1626,12 +1626,7 @@ contact tiles - front page
 
 /* for the lower resolutions, we don't have the menu bar below the top */ 
 @media screen and (max-width: 1279px) {  	
-	#games { display: none; }
-	#menus { display: none; } 
-	#demos { display: none; } 
-	#users { display: none; }
-	#admin { display: none; }
-	#other { display: none; }
+	#main_nav_cpanel { display: none; }
 }
 
 /* for the high resolutions, we only have the skin switch in the side menu */ 
