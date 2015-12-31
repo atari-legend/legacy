@@ -374,7 +374,7 @@ footer, header, hgroup, menu, nav, section {
 				width: 150px;
 				height: 17px;
 				border: 1px solid #007b7b;
-				margin: 4px 0px 0px 6px;
+				margin: 4px 0 0 6px;
 				padding: 0;
 				background: #000; 
 				text-align: center;
@@ -406,7 +406,7 @@ footer, header, hgroup, menu, nav, section {
 	}
 	 
 	.skin-menu li {
-		margin:0px;
+		margin:0;
 		list-style:none;
 	}
 	 
@@ -435,7 +435,7 @@ footer, header, hgroup, menu, nav, section {
 		padding:5px 0;
 		position:absolute;
 		top:100%;
-		left:0px;
+		left:0;
 		z-index:-1;
 		opacity:0;
 		transition:opacity linear 0.15s;
@@ -481,7 +481,7 @@ footer, header, hgroup, menu, nav, section {
 	vertical-align: 50%;
 }
 	#search_side {height: 29px; width: 30px;}
-	#search_text_side{height: 20px; width: 70px; margin: 4px 0px 0px 6px;}
+	#search_text_side{height: 20px; width: 70px; margin: 4px 0 0 6px;}
 	#searchbutton_side{height: 29px; width: 82px;}
 	.container.open-sidebar { left: 113px;}
     #sidebar { left: -113px;
@@ -553,7 +553,7 @@ header nav input{
 	width: 247px;
 	height: 20px;
 	border: 1px solid #007b7b;
-	margin: 3px 0px 0px 16px;
+	margin: 3px 0 0 16px;
 	padding: 0;
 	text-align: center;
 	display: block;
@@ -1576,7 +1576,7 @@ contact tiles - front page
 	}
 	 
 	.skin-menu_cpanel li {
-		margin:0px;
+		margin:0;
 		list-style:none;
 		display: inline;
 	}
@@ -1772,7 +1772,7 @@ nav ul {
 #demo_interviews_help, #menu_individuals, #menu_author_types, #menu_crew_editor{
 		height: 24px;
 		font-size: 16px;
-		padding:0px;
+		padding:0;
 		display:inline;
 		line-height:24px;
 		vertical-align:bottom;
@@ -1859,7 +1859,7 @@ Standard table settings
 	padding-top:3px;
 	padding-bottom:3px;
 	padding-left:3px;
-	margin:0px;
+	margin:0;
 	text-align: center;
 }
 
@@ -1879,7 +1879,7 @@ Standard table settings
 	padding-top:1px;
 	padding-bottom:1px;
 	padding-left:3px;
-	margin:0px;
+	margin:0;
 }
 
 .standard_table_center { color: black;
@@ -2065,7 +2065,7 @@ Left nav
 	padding-top:3px;
 	padding-bottom:3px;
 	padding-left:3px;
-	margin:0px;
+	margin:0;
 	text-align: center;
 	list-style-type: none;
 }
@@ -2339,7 +2339,7 @@ Links addnew
 	background: #666666;
 	border: 1px solid #b2b2b2;
 	color: #ffffff;				
-	margin-top:0px;
+	margin-top:0;
 	padding: 0;
 	padding-left: 5px;
 	font-family: AtariST;	
@@ -2639,7 +2639,7 @@ Games detail
 	#gd_left{float:left; width:100%;}
 	#gd_right{float:right; width:100%;}
 	#gd_center{float:right; width:100%;}
-	#gd_publisher_info{margin-top:0px;}
+	#gd_publisher_info{margin-top:0;}
 }
 
 /*---------------------------------------------------------- 
@@ -2675,7 +2675,7 @@ Games comment
 .gc_table_list td {
 	border-bottom: solid 1px black;
 	padding: 5px;
-	margin:0px;
+	margin:0;
 }
 
 .gc_left_head{width:20%;font-size: 12pt;}
