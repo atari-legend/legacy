@@ -7,8 +7,6 @@
 *   email                : silversurfer@atari-forum.com
 *   actual update        : re-creation of code from scratch into new file.
 *						  
-*							
-*
 *   Id: db_games_comment.php,v 1.10 2005/09/19 Silver Surfer
 *
 ***************************************************************************/
@@ -20,52 +18,51 @@ include("../../includes/common.php");
 include("../../includes/admin.php");
 
 if($action=="edit_games_comment")
-
 {
+	//****************************************************************************************
+	// This is the game comment edit place
+	//**************************************************************************************** 
 
-//****************************************************************************************
-// This is the game comment edit place
-//**************************************************************************************** 
+	if (isset($comment_text) and isset($comment_id))
+	{
+		echo $comment_text; 
+		echo $comment_id;
+		echo $v_counter;
+		$commentquery = $mysqli->query("UPDATE comments SET comment='$comment_text' WHERE comments_id='$comment_id'") or die("couldn't update comments table");
+		$_SESSION['edit_message'] = "Comment edited";
+	}
 
-if (isset($comment_text) and isset($comment_id))
-{
-		$commentquery = $mysqli->query("UPDATE comments SET comment='$comment_text' WHERE comments_id='$comment_id'");
-}
-
-
-if ($view == "users_comments")
-{
-header("Location: ../games/games_comment.php?v_counter=$v_counter&c_counter=$c_counter&users_id=$users_id&view=$view");
-}
-else
-{
-header("Location: ../games/games_comment.php?v_counter=$v_counter");
-}
+	if ($view == "users_comments")
+	{
+		header("Location: ../games/games_comment.php?v_counter=$v_counter&c_counter=$c_counter&users_id=$users_id&view=$view");
+	}
+	else
+	{
+		header("Location: ../games/games_comment.php?v_counter=$v_counter");
+	}
 }
 
 
 // Delete
 if($action=="delete_comment")
-
 {
-
-//****************************************************************************************
-// This is the game comment edit place
-//**************************************************************************************** 
+	//****************************************************************************************
+	// This is the game comment edit place
+	//**************************************************************************************** 
 
 	if (isset($comment_id))
 	{
 		$sql = $mysqli->query("DELETE FROM game_user_comments WHERE comment_id = '$comment_id'") or die("couldn't delete game_comment quote");
 		$sql = $mysqli->query("DELETE FROM comments WHERE comments_id = '$comment_id'") or die("couldn't delete comment quote");
+		$_SESSION['edit_message'] = "Comment deleted";
 	}
 
-
-if ($view == "users_comments")
-{
-header("Location: ../games/games_comment.php?v_counter=$v_counter&c_counter=$c_counter&users_id=$users_id&view=$view");
-}
-else
-{
-header("Location: ../games/games_comment.php?v_counter=$v_counter");
-}
+	if ($view == "users_comments")
+	{
+	header("Location: ../games/games_comment.php?v_counter=$v_counter&c_counter=$c_counter&users_id=$users_id&view=$view");
+	}
+	else
+	{
+	header("Location: ../games/games_comment.php?v_counter=$v_counter");
+	}
 }
