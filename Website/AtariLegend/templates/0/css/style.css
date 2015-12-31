@@ -1143,6 +1143,9 @@ a.standard_tile_link:hover, a.standard_tile_link:focus
     		line-height: 1.2;
   		-webkit-line-clamp: 5;
   		-webkit-box-orient: vertical;
+  		-moz-box-orient: vertical;
+  		-ms-box-orient: vertical;
+  		box-orient: vertical;
   		overflow: hidden;
   		text-overflow: ellipsis;		
 }
@@ -1934,7 +1937,6 @@ Standard table settings
   font-size: 11pt;
   border-bottom: 3px solid black;
   border-left: 1px solid black;
-  text-decoration:none;
   text-decoration:none;
   text-shadow: -1px 1px 5px white, 1px -1px 15px #acacac;
 }
