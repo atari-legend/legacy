@@ -56,7 +56,7 @@ function gameinsert()
 		<div class="left_nav_section">
 		This is the search result page. Click a game to go to the main page. Click a Publisher/Developer/Year to do a new search.
 		If you want to do a new search query or like to add a new game, click <a href="games_main.php" class="standard_tile_link_cpanel">here</a>!<br><br>
-		S - Screenshot | M - Msic | B - Boxscan | D - Download | E - STE Only | F - Falcom Only
+		S - Screenshot | M - Music | B - Boxscan | D - Download | E - STE Only | F - Falcom Only
 	</div> 
 	<br>
 	<br>
@@ -110,15 +110,23 @@ function gameinsert()
 				<td class="info_td">
 					{if isset($line.screenshot)}
 						<b>S</b>
+					{else}
+						<font color="red"><b>S</b></font>
 					{/if}
 					{if isset($line.music)}
 						<b>M</b>
+					{else}
+						<font color="red"><b>M</b></font>
 					{/if}
 					{if isset($line.boxscan)}
 						<b>B</b>
+					{else}
+						<font color="red"><b>B</b></font>
 					{/if}
 					{if isset($line.download)}
 						<b>D</b>
+					{else}
+						<font color="red"><b>D</b></font>
 					{/if}
 					{if isset($line.ste_enhan) or isset($line.ste_only)}
 						<b>E</b>
