@@ -101,12 +101,16 @@ footer, header, hgroup, menu, nav, section {
 #animation {
     position: relative;
 	-webkit-animation-name: STcharacters;
+	-moz-animation-name: STcharacters;
 	animation-name: STcharacters;
 	-webkit-animation-duration: 20s;
+	-moz-animation-duration: 20s;
 	animation-duration: 20s;
 	-webkit-animation-iteration-count: infinite;
+	-moz-animation-iteration-count: infinite;
 	animation-iteration-count: infinite;
 	-webkit-animation-timing-function: linear;
+	-moz-animation-timing-function: linear;
 	animation-timing-function: linear;
 }
 
@@ -144,12 +148,16 @@ footer, header, hgroup, menu, nav, section {
 
 #animation_vert{ position: relative;
 	-webkit-animation-name: STcharacters_vert;
+	-moz-animation-name: STcharacters_vert;
 	animation-name: STcharacters_vert;
 	-webkit-animation-duration: 10s;
+	-moz-animation-duration: 10s;
 	animation-duration: 10s;
 	-webkit-animation-iteration-count: infinite;
+	-moz-animation-iteration-count: infinite;
 	animation-iteration-count: infinite;
 	-webkit-animation-timing-function: linear;
+	-moz-animation-timing-function: linear;
 	animation-timing-function: linear;
 }
 
@@ -161,7 +169,7 @@ footer, header, hgroup, menu, nav, section {
 	
 	10% { opacity: 1;}
 	70% { opacity: 1;
-	left: 0%;}
+	left: 0;}
 	
 	100% {
         top:10px;
@@ -177,7 +185,7 @@ footer, header, hgroup, menu, nav, section {
 		
 	10% { opacity: 1;}
 	70% { opacity: 1;
-	left: 0%;}
+	left: 0;}
     	
     100% {
         top:10px;
@@ -202,11 +210,11 @@ footer, header, hgroup, menu, nav, section {
 			margin-bottom: 5px;		
 		}
 	#animation, #animation_vert{ display: none;}
-	#right { width: 0%;
+	#right { width: 0;
 		display: none;
 	}
-	#top_background  { border-top-width: 0px;
-			border-left-width: 0px;
+	#top_background  { border-top-width: 0;
+			border-left-width: 0;
 			border-bottom-width: 2px;
 			border-bottom-color: black;
 			border-style: solid;
@@ -228,7 +236,7 @@ footer, header, hgroup, menu, nav, section {
 	#animation, #animation_vert{ display: none;}
 	#logo_img_480{ display: none;}
 		
-	#right { width: 0%;
+	#right { width: 0;
 		display: none;
 	}
 }
@@ -285,6 +293,9 @@ footer, header, hgroup, menu, nav, section {
         background: black;
         width: 191px;
         height: 100%;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -ms-box-sizing: border-box;
         box-sizing: border-box;
     }
 	
@@ -311,14 +322,18 @@ footer, header, hgroup, menu, nav, section {
         width: 100%;
         height: 100%;
         padding: 1px;
-        box-sizing: border-box;
+        -webkit-box-sizing: border-box;
         -moz-box-sizing: border-box;
+        -ms-box-sizing: border-box;
+        box-sizing: border-box;
         position: absolute;
     }
 	
     .main-content .content{
-        box-sizing: border-box;
+        -webkit-box-sizing: border-box;
         -moz-box-sizing: border-box;
+        -ms-box-sizing: border-box;
+        box-sizing: border-box;
 		padding-left: 60px;
 		width: 100%;	
     }
@@ -359,14 +374,14 @@ footer, header, hgroup, menu, nav, section {
 		height: 27px;
 		width: 157px;
 		border-bottom: 3px solid black;
- 		padding-top: 0px;
+ 		padding-top: 0;
 	}
 	
 	#search_text_side{ color: #ffffff;				
 				width: 150px;
 				height: 17px;
 				border: 1px solid #007b7b;
-				margin: 4px 0px 0px 6px;
+				margin: 4px 0 0 6px;
 				padding: 0;
 				background: #000; 
 				text-align: center;
@@ -398,7 +413,7 @@ footer, header, hgroup, menu, nav, section {
 	}
 	 
 	.skin-menu li {
-		margin:0px;
+		margin:0;
 		list-style:none;
 	}
 	 
@@ -424,10 +439,10 @@ footer, header, hgroup, menu, nav, section {
 
 	.sub-menu {
 		width:75%;
-		padding:5px 0px;
+		padding:5px 0;
 		position:absolute;
 		top:100%;
-		left:0px;
+		left:0;
 		z-index:-1;
 		opacity:0;
 		transition:opacity linear 0.15s;
@@ -473,7 +488,7 @@ footer, header, hgroup, menu, nav, section {
 	vertical-align: 50%;
 }
 	#search_side {height: 29px; width: 30px;}
-	#search_text_side{height: 20px; width: 70px; margin: 4px 0px 0px 6px;}
+	#search_text_side{height: 20px; width: 70px; margin: 4px 0 0 6px;}
 	#searchbutton_side{height: 29px; width: 82px;}
 	.container.open-sidebar { left: 113px;}
     #sidebar { left: -113px;
@@ -524,7 +539,7 @@ footer, header, hgroup, menu, nav, section {
 @media screen and (min-width: 1280px){  	
 	.container { position: absolute;}
 	#sidebar {background-color: rgba(0, 0, 0, 0);}
-	header nav { position: absolute; margin-top: 0px;}
+	header nav { position: absolute; margin-top: 0;}
 	#main { position: relative; margin-top: 60px;}
 }
 
@@ -545,7 +560,7 @@ header nav input{
 	width: 247px;
 	height: 20px;
 	border: 1px solid #007b7b;
-	margin: 3px 0px 0px 16px;
+	margin: 3px 0 0 16px;
 	padding: 0;
 	text-align: center;
 	display: block;
@@ -557,7 +572,7 @@ header nav input{
   display: block;
   float:left;
   cursor: pointer;
-  border: 0px;
+  border: 0;
   background: white;
   font-family: AtariST,Arial,helvetica,sans-serif;
   color: #182727;
@@ -589,24 +604,24 @@ header nav input{
 {
   display: block;
   float:left;
-  border: 0px;
+  border: 0;
   background: white;
   font-family: AtariST,Arial,helvetica,sans-serif;
   color: #182727;
   height: 27px;
   width: 280px;
   font-size: 10px;
-  padding-top: 0px;
+  padding-top: 0;
   text-decoration:none;
 }
 
 #search:hover { background: url(../../../templates/0/images/menu_search_hover.png) 0 0 no-repeat;
-	           height: 0px;
+	           height: 0;
 			   padding-top: 30px;
 			   padding-left: 30px;}
 
 #home:hover { background: url(../../../templates/0/images/menu_home_hover.png) 0 0 no-repeat;
-				height: 0px;
+				height: 0;
 				padding-top: 30px;
 				padding-left: 30px;}
 
@@ -623,7 +638,7 @@ header nav input{
   margin-right: auto;
   margin-bottom: 25px;
   cursor: pointer;
-  border: 0px;
+  border: 0;
   background: #acacac;
   font-family: AtariST,Arial,helvetica,sans-serif;
   color: #182727;
@@ -729,7 +744,7 @@ Standard tile settings
 /* 1 tile and a simplified intro screen */
 @media screen and (max-width: 639px) { 
 	.column-left { width: 100%; } 
-	.column-center { width: 100%; margin-left: 0px;}
+	.column-center { width: 100%; margin-left: 0;}
 	.column-right { width: 100%; }	
 	.column-right-tab {display:none}
 	.column-left-tab {display:none}
@@ -967,7 +982,7 @@ Standard tile settings
 				font-family: AtariST;	
 }
 
-.standard_tile_input_small { background : black;
+.standard_tile_input_small { 
 				color: #ffffff;				
 				width: 185px;
 				height: 25px;
@@ -980,7 +995,7 @@ Standard tile settings
 				background: #666666;
 }
 
-.standard_tile_input_area { background : black;
+.standard_tile_input_area { 
 				color: #ffffff;				
 				width: 90%;
 				height: 40px;
@@ -1081,11 +1096,13 @@ a.standard_tile_link:hover, a.standard_tile_link:focus
  }
 
 .standard_list_entry_left{
-		left: 0px;
+		left: 0;
 		width: 50%;
 		position: absolute;
 		top: 50%;
 		-webkit-transform: translateY(-50%);
+		-moz-transform: translateY(-50%);
+		-o-transform: translateY(-50%);
 		-ms-transform: translateY(-50%);
 		transform: translateY(-50%);
 }
@@ -1105,6 +1122,8 @@ a.standard_tile_link:hover, a.standard_tile_link:focus
 		top: 50%;
 		-webkit-transform: translateY(-50%);
 		-ms-transform: translateY(-50%);
+		-moz-transform: translateY(-50%);
+		-o-transform: translateY(-50%);
 		transform: translateY(-50%);
 }
  
@@ -1113,6 +1132,7 @@ a.standard_tile_link:hover, a.standard_tile_link:focus
   		padding: 0;
   		-moz-box-sizing: border-box;
   		-webkit-box-sizing: border-box;
+  		-ms-box-sizing: border-box;
   		box-sizing: border-box;
 
 		display: block;
@@ -1123,6 +1143,9 @@ a.standard_tile_link:hover, a.standard_tile_link:focus
     		line-height: 1.2;
   		-webkit-line-clamp: 5;
   		-webkit-box-orient: vertical;
+  		-moz-box-orient: vertical;
+  		-ms-box-orient: vertical;
+  		box-orient: vertical;
   		overflow: hidden;
   		text-overflow: ellipsis;		
 }
@@ -1152,14 +1175,14 @@ a.standard_tile_link:hover, a.standard_tile_link:focus
 
 #medium_select{ 
 	width: 185px;
-	margin-top: 0px;
+	margin-top: 0;
 	background: #666666;
 	height: 27px;
 }
 
 #medium_select2{ 
 	width: 140px;
-	margin-top: 0px;
+	margin-top: 0;
 	height: 25px;
 	background: #666666;
 }
@@ -1180,8 +1203,8 @@ a.standard_tile_link:hover, a.standard_tile_link:focus
 
 .welcome_slides { cursor: move; 
 		position: absolute; 
-		left: 0px; 
-		top: 0px; 
+		left: 0; 
+		top: 0; 
 		width: 845px; 
 		height: 460px; 
 		overflow: hidden;
@@ -1242,7 +1265,7 @@ logon tile --> front page
  }
 
 .logon_left{position: absolute;
-		left: 0px;
+		left: 0;
 		width: 10%;
 }
 .logon_right{position: absolute;
@@ -1277,7 +1300,7 @@ logon tile --> front page
 
 /* 2 tiles and background welcome image */
 @media screen and (min-width: 640px) and (max-width: 800px) { 
-	.logon { margin-top: 0px; }
+	.logon { margin-top: 0; }
 }
 
 /* 1 tile */
@@ -1328,7 +1351,7 @@ datequote tile - front page
 
 /* 1 and 2 tiles */
 @media screen and (max-width: 800px) { 
-	.datequote_position_front { margin-top: 0px;}
+	.datequote_position_front { margin-top: 0;}
 }
 
 @media screen and (min-width: 1495px){ 
@@ -1339,7 +1362,7 @@ datequote tile - front page
 
 .datequote_day{ font-size : 85pt;
 		color : white; 
-		margin-top: 0px;
+		margin-top: 0;
 		margin-bottom: -20px;
 }
 
@@ -1510,6 +1533,9 @@ contact tiles - front page
     #sidebar_cpanel {
 		z-index:1;
 		position: absolute;
+		-webkit-box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		-ms-box-sizing: border-box;
 		box-sizing: border-box;
     }
 	
@@ -1568,7 +1594,7 @@ contact tiles - front page
 	}
 	 
 	.skin-menu_cpanel li {
-		margin:0px;
+		margin:0;
 		list-style:none;
 		display: inline;
 	}
@@ -1593,7 +1619,7 @@ contact tiles - front page
 
 	.sub-menu_cpanel {
 		width:75%;
-		padding:5px 0px;
+		padding:5px 0;
 		position:absolute;
 		top:100%;
 		left:20px;
@@ -1626,12 +1652,7 @@ contact tiles - front page
 
 /* for the lower resolutions, we don't have the menu bar below the top */ 
 @media screen and (max-width: 1279px) {  	
-	#games { display: none; }
-	#menus { display: none; } 
-	#demos { display: none; } 
-	#users { display: none; }
-	#admin { display: none; }
-	#other { display: none; }
+	#main_nav_cpanel { display: none; }
 }
 
 /* for the high resolutions, we only have the skin switch in the side menu */ 
@@ -1687,7 +1708,7 @@ nav ul {
   display: block;
   float:left;
   cursor: pointer;
-  border: 0px;
+  border: 0;
   background: white;
   font-family: AtariST,Arial,helvetica,sans-serif;
   color: #182727;
@@ -1715,7 +1736,7 @@ nav ul {
   display: block;
   float:left;
   cursor: pointer;
-  border: 0px;
+  border: 0;
   background: white;
   font-family: AtariST,Arial,helvetica,sans-serif;
   color: #182727;
@@ -1736,7 +1757,7 @@ nav ul {
 .sidebutton_cpanel
 {
   cursor: pointer;
-  border: 0px;
+  border: 0;
   font-family: AtariST,Arial,helvetica,sans-serif;
   background:white;
   color:black;
@@ -1769,7 +1790,7 @@ nav ul {
 #demo_interviews_help, #menu_individuals, #menu_author_types, #menu_crew_editor{
 		height: 24px;
 		font-size: 16px;
-		padding:0px;
+		padding:0;
 		display:inline;
 		line-height:24px;
 		vertical-align:bottom;
@@ -1827,10 +1848,9 @@ Standard table settings
 		 float:right;
 	}
 
-	#column-right-cpanel { display: none;)
-	}
-
+	#column-right-cpanel { display: none;}
 }
+
 
 .standard_table_list {
 	width: 100%;
@@ -1857,7 +1877,7 @@ Standard table settings
 	padding-top:3px;
 	padding-bottom:3px;
 	padding-left:3px;
-	margin:0px;
+	margin:0;
 	text-align: center;
 }
 
@@ -1877,7 +1897,7 @@ Standard table settings
 	padding-top:1px;
 	padding-bottom:1px;
 	padding-left:3px;
-	margin:0px;
+	margin:0;
 }
 
 .standard_table_center { color: black;
@@ -1908,7 +1928,7 @@ Standard table settings
 .topbutton_cpanel_small
 {
   cursor: pointer;
-  border: 0px;
+  border: 0;
   background: white;
   font-family: AtariST,Arial,helvetica,sans-serif;
   color: #182727;
@@ -1918,7 +1938,6 @@ Standard table settings
   border-bottom: 3px solid black;
   border-left: 1px solid black;
   text-decoration:none;
-  text-decoration:none;
   text-shadow: -1px 1px 5px white, 1px -1px 15px #acacac;
 }
 
@@ -1926,7 +1945,7 @@ Standard table settings
   background: black;
   color: white;
   text-decoration:none;
-  border-bottom: 3px solid #black;
+  border-bottom: 3px solid black;
 }
 
 .top_button_cpanel_small:visited {
@@ -1982,7 +2001,7 @@ legend {
 Front page
 ------------------------------------------------------------ */
 #user_stats{ float: right; width:48%; margin-bottom: 30px;}	
-#welcome_cpanel{ margin-top: 390x; float: left; width:48%; margin-bottom: 30px;}	
+#welcome_cpanel{ margin-top: 390px; float: left; width:48%; margin-bottom: 30px;}	
 #left_nav_position_front{ margin-top: 20px; margin-bottom: 20px; float: left;}
 #main_stats_position_front{ margin-top: 20px; margin-bottom: 20px;}
 #quick_search_position_front{ margin-top: 20px; margin-bottom: 20px; float: right;}
@@ -2063,7 +2082,7 @@ Left nav
 	padding-top:3px;
 	padding-bottom:3px;
 	padding-left:3px;
-	margin:0px;
+	margin:0;
 	text-align: center;
 	list-style-type: none;
 }
@@ -2095,7 +2114,7 @@ Quick search games
 
 .quick_search_games_button{  
 	  cursor: pointer;
-	  border: 0px;
+	  border: 0;
 	  background: white;
 	  font-family: AtariST,Arial,helvetica,sans-serif;
 	  color: #182727;
@@ -2118,14 +2137,14 @@ Quick search games
 #quick_search_pub_select{ 
 	background: #666666;
 	width: 185px;
-	margin-top: 0px;
+	margin-top: 0;
 	height: 25px;
 }
 
 #quick_search_dev_select{ 
 	background: #666666;
 	width: 185px;
-	margin-top: 0px;
+	margin-top: 0;
 	height: 25px;
 }
 
@@ -2166,7 +2185,7 @@ User details
 
 @media screen and (max-width: 480px) { 
 #user_details{ margin-top: 20px;}	
-#leftnav_position_userdetails{ margin-top: 0px;}
+#leftnav_position_userdetails{ margin-top: 0;}
 }
 
 .user_details_container{
@@ -2209,7 +2228,7 @@ User statistics
 #user_statistics{ margin-top: 20px; margin-bottom: 30px; float: left;}
 
 @media screen and (max-width: 480px) { 
-	#leftnav_position_userstatistics{ margin-top: 0px;}
+	#leftnav_position_userstatistics{ margin-top: 0;}
 }
 
 /*---------------------------------------------------------- 
@@ -2218,7 +2237,7 @@ User main
 #leftnav_position_usermain{ margin-top: 20px; margin-bottom: 30px; float: left;}
 #quick_search_position_usermain {margin-top: 20px; margin-bottom: 30px;}
 #user_main{ margin-top: 20px; margin-bottom: 30px; float: left;}
-#main_stats_position_usermain{ margin-top: 0px; margin-bottom: 30px; float: left;}
+#main_stats_position_usermain{ margin-top: 0; margin-bottom: 30px; float: left;}
 
 .user_main_container{
   display: -webkit-box;
@@ -2337,7 +2356,7 @@ Links addnew
 	background: #666666;
 	border: 1px solid #b2b2b2;
 	color: #ffffff;				
-	margin-top:0px;
+	margin-top:0;
 	padding: 0;
 	padding-left: 5px;
 	font-family: AtariST;	
@@ -2507,14 +2526,14 @@ Games main
 
 #games_main_pub_select{ 
 	width: 185px;
-	margin-top: 0px;
+	margin-top: 0;
 	height: 25px;
 	background: #666666;
 }
 
 #games_main_dev_select{ 
 	width: 185px;
-	margin-top: 0px;
+	margin-top: 0;
 	height: 25px;
 	background: #666666;
 }
@@ -2607,7 +2626,7 @@ Games detail
 #game_extra_info_pub,#continent_pub,#company_id_pub,#game_extra_info_dev,#continent_dev,
 #company_id_dev,#game_extra_info_year,#author_type_id,#ind_id{ 
 	width: 140px;
-	margin-top: 0px;
+	margin-top: 0;
 	height: 25px;
 	background: #666666;
 }	
@@ -2637,7 +2656,7 @@ Games detail
 	#gd_left{float:left; width:100%;}
 	#gd_right{float:right; width:100%;}
 	#gd_center{float:right; width:100%;}
-	#gd_publisher_info{margin-top:0px;}
+	#gd_publisher_info{margin-top:0;}
 }
 
 /*---------------------------------------------------------- 
@@ -2673,7 +2692,7 @@ Games comment
 .gc_table_list td {
 	border-bottom: solid 1px black;
 	padding: 5px;
-	margin:0px;
+	margin:0;
 }
 
 .gc_left_head{width:20%;font-size: 12pt;}

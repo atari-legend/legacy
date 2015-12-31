@@ -1641,12 +1641,7 @@ contact tiles - front page
 
 /* for the lower resolutions, we don't have the menu bar below the top */ 
 @media screen and (max-width: 1279px) {  	
-	#games { display: none; }
-	#menus { display: none; } 
-	#demos { display: none; } 
-	#users { display: none; }
-	#admin { display: none; }
-	#other { display: none; }
+	#main_nav_cpanel { display: none; }
 }
 
 /* for the high resolutions, we only have the skin switch in the side menu */ 
@@ -1791,20 +1786,6 @@ nav ul {
 
 .sidebutton_cpanel:link {
   text-decoration:none;
-}
-
-
-#game_editor, #game_comments, #game_series, #game_music, #game_submissions, #game_reviews, #submitted_reviews,
-#menu_editor, #menu_comments, #menu_submissions, #demo_editor, #demo_comments, #demo_music, #demo_submissions,
-#user_admin, #individuals, #author_types, #crew_editor, #companies, #company_logo, #add_news, #approve_news, 
-#submitted_news, #Statistics,#did_you_know, #trivia_screenshots, #trivia_quotes, #add_links, #validate_links,
-#modify_links, #link_categories, #articles, #article_types, #screenshots, #modify_links, 
-#link_categories, #articles, #article_types, #article_screenshots, #add_magazines, #manage_issues, #interviews, 
-#interviews_help, #forum, #logout, #demo_crew_editor, #demo_individuals, #demo_author_types, #demo_interviews, 
-#demo_interviews_help, #menu_individuals, #menu_author_types, #menu_crew_editor {
-
-		font-size: 16px;
-
 }
 
 #legacy, #tos, #picasso, #game_editor_side,
