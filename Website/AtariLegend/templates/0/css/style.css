@@ -161,7 +161,7 @@ footer, header, hgroup, menu, nav, section {
 	
 	10% { opacity: 1;}
 	70% { opacity: 1;
-	left: 0%;}
+	left: 0;}
 	
 	100% {
         top:10px;
@@ -177,7 +177,7 @@ footer, header, hgroup, menu, nav, section {
 		
 	10% { opacity: 1;}
 	70% { opacity: 1;
-	left: 0%;}
+	left: 0;}
     	
     100% {
         top:10px;
@@ -202,11 +202,11 @@ footer, header, hgroup, menu, nav, section {
 			margin-bottom: 5px;		
 		}
 	#animation, #animation_vert{ display: none;}
-	#right { width: 0%;
+	#right { width: 0;
 		display: none;
 	}
-	#top_background  { border-top-width: 0px;
-			border-left-width: 0px;
+	#top_background  { border-top-width: 0;
+			border-left-width: 0;
 			border-bottom-width: 2px;
 			border-bottom-color: black;
 			border-style: solid;
@@ -228,7 +228,7 @@ footer, header, hgroup, menu, nav, section {
 	#animation, #animation_vert{ display: none;}
 	#logo_img_480{ display: none;}
 		
-	#right { width: 0%;
+	#right { width: 0;
 		display: none;
 	}
 }
@@ -359,7 +359,7 @@ footer, header, hgroup, menu, nav, section {
 		height: 27px;
 		width: 157px;
 		border-bottom: 3px solid black;
- 		padding-top: 0px;
+ 		padding-top: 0;
 	}
 	
 	#search_text_side{ color: #ffffff;				
@@ -424,7 +424,7 @@ footer, header, hgroup, menu, nav, section {
 
 	.sub-menu {
 		width:75%;
-		padding:5px 0px;
+		padding:5px 0;
 		position:absolute;
 		top:100%;
 		left:0px;
@@ -524,7 +524,7 @@ footer, header, hgroup, menu, nav, section {
 @media screen and (min-width: 1280px){  	
 	.container { position: absolute;}
 	#sidebar {background-color: rgba(0, 0, 0, 0);}
-	header nav { position: absolute; margin-top: 0px;}
+	header nav { position: absolute; margin-top: 0;}
 	#main { position: relative; margin-top: 60px;}
 }
 
@@ -557,7 +557,7 @@ header nav input{
   display: block;
   float:left;
   cursor: pointer;
-  border: 0px;
+  border: 0;
   background: white;
   font-family: AtariST,Arial,helvetica,sans-serif;
   color: #182727;
@@ -589,24 +589,24 @@ header nav input{
 {
   display: block;
   float:left;
-  border: 0px;
+  border: 0;
   background: white;
   font-family: AtariST,Arial,helvetica,sans-serif;
   color: #182727;
   height: 27px;
   width: 280px;
   font-size: 10px;
-  padding-top: 0px;
+  padding-top: 0;
   text-decoration:none;
 }
 
 #search:hover { background: url(../../../templates/0/images/menu_search_hover.png) 0 0 no-repeat;
-	           height: 0px;
+	           height: 0;
 			   padding-top: 30px;
 			   padding-left: 30px;}
 
 #home:hover { background: url(../../../templates/0/images/menu_home_hover.png) 0 0 no-repeat;
-				height: 0px;
+				height: 0;
 				padding-top: 30px;
 				padding-left: 30px;}
 
@@ -623,7 +623,7 @@ header nav input{
   margin-right: auto;
   margin-bottom: 25px;
   cursor: pointer;
-  border: 0px;
+  border: 0;
   background: #acacac;
   font-family: AtariST,Arial,helvetica,sans-serif;
   color: #182727;
@@ -729,7 +729,7 @@ Standard tile settings
 /* 1 tile and a simplified intro screen */
 @media screen and (max-width: 639px) { 
 	.column-left { width: 100%; } 
-	.column-center { width: 100%; margin-left: 0px;}
+	.column-center { width: 100%; margin-left: 0;}
 	.column-right { width: 100%; }	
 	.column-right-tab {display:none}
 	.column-left-tab {display:none}
@@ -1081,7 +1081,7 @@ a.standard_tile_link:hover, a.standard_tile_link:focus
  }
 
 .standard_list_entry_left{
-		left: 0px;
+		left: 0;
 		width: 50%;
 		position: absolute;
 		top: 50%;
@@ -1152,14 +1152,14 @@ a.standard_tile_link:hover, a.standard_tile_link:focus
 
 #medium_select{ 
 	width: 185px;
-	margin-top: 0px;
+	margin-top: 0;
 	background: #666666;
 	height: 27px;
 }
 
 #medium_select2{ 
 	width: 140px;
-	margin-top: 0px;
+	margin-top: 0;
 	height: 25px;
 	background: #666666;
 }
@@ -1180,8 +1180,8 @@ a.standard_tile_link:hover, a.standard_tile_link:focus
 
 .welcome_slides { cursor: move; 
 		position: absolute; 
-		left: 0px; 
-		top: 0px; 
+		left: 0; 
+		top: 0; 
 		width: 845px; 
 		height: 460px; 
 		overflow: hidden;
@@ -1242,7 +1242,7 @@ logon tile --> front page
  }
 
 .logon_left{position: absolute;
-		left: 0px;
+		left: 0;
 		width: 10%;
 }
 .logon_right{position: absolute;
@@ -1277,7 +1277,7 @@ logon tile --> front page
 
 /* 2 tiles and background welcome image */
 @media screen and (min-width: 640px) and (max-width: 800px) { 
-	.logon { margin-top: 0px; }
+	.logon { margin-top: 0; }
 }
 
 /* 1 tile */
@@ -1328,7 +1328,7 @@ datequote tile - front page
 
 /* 1 and 2 tiles */
 @media screen and (max-width: 800px) { 
-	.datequote_position_front { margin-top: 0px;}
+	.datequote_position_front { margin-top: 0;}
 }
 
 @media screen and (min-width: 1495px){ 
@@ -1339,7 +1339,7 @@ datequote tile - front page
 
 .datequote_day{ font-size : 85pt;
 		color : white; 
-		margin-top: 0px;
+		margin-top: 0;
 		margin-bottom: -20px;
 }
 
@@ -1593,7 +1593,7 @@ contact tiles - front page
 
 	.sub-menu_cpanel {
 		width:75%;
-		padding:5px 0px;
+		padding:5px 0;
 		position:absolute;
 		top:100%;
 		left:20px;
@@ -1682,7 +1682,7 @@ nav ul {
   display: block;
   float:left;
   cursor: pointer;
-  border: 0px;
+  border: 0;
   background: white;
   font-family: AtariST,Arial,helvetica,sans-serif;
   color: #182727;
@@ -1710,7 +1710,7 @@ nav ul {
   display: block;
   float:left;
   cursor: pointer;
-  border: 0px;
+  border: 0;
   background: white;
   font-family: AtariST,Arial,helvetica,sans-serif;
   color: #182727;
@@ -1731,7 +1731,7 @@ nav ul {
 .sidebutton_cpanel
 {
   cursor: pointer;
-  border: 0px;
+  border: 0;
   font-family: AtariST,Arial,helvetica,sans-serif;
   background:white;
   color:black;
@@ -1902,7 +1902,7 @@ Standard table settings
 .topbutton_cpanel_small
 {
   cursor: pointer;
-  border: 0px;
+  border: 0;
   background: white;
   font-family: AtariST,Arial,helvetica,sans-serif;
   color: #182727;
@@ -2089,7 +2089,7 @@ Quick search games
 
 .quick_search_games_button{  
 	  cursor: pointer;
-	  border: 0px;
+	  border: 0;
 	  background: white;
 	  font-family: AtariST,Arial,helvetica,sans-serif;
 	  color: #182727;
@@ -2112,14 +2112,14 @@ Quick search games
 #quick_search_pub_select{ 
 	background: #666666;
 	width: 185px;
-	margin-top: 0px;
+	margin-top: 0;
 	height: 25px;
 }
 
 #quick_search_dev_select{ 
 	background: #666666;
 	width: 185px;
-	margin-top: 0px;
+	margin-top: 0;
 	height: 25px;
 }
 
@@ -2160,7 +2160,7 @@ User details
 
 @media screen and (max-width: 480px) { 
 #user_details{ margin-top: 20px;}	
-#leftnav_position_userdetails{ margin-top: 0px;}
+#leftnav_position_userdetails{ margin-top: 0;}
 }
 
 .user_details_container{
@@ -2203,7 +2203,7 @@ User statistics
 #user_statistics{ margin-top: 20px; margin-bottom: 30px; float: left;}
 
 @media screen and (max-width: 480px) { 
-	#leftnav_position_userstatistics{ margin-top: 0px;}
+	#leftnav_position_userstatistics{ margin-top: 0;}
 }
 
 /*---------------------------------------------------------- 
@@ -2212,7 +2212,7 @@ User main
 #leftnav_position_usermain{ margin-top: 20px; margin-bottom: 30px; float: left;}
 #quick_search_position_usermain {margin-top: 20px; margin-bottom: 30px;}
 #user_main{ margin-top: 20px; margin-bottom: 30px; float: left;}
-#main_stats_position_usermain{ margin-top: 0px; margin-bottom: 30px; float: left;}
+#main_stats_position_usermain{ margin-top: 0; margin-bottom: 30px; float: left;}
 
 .user_main_container{
   display: -webkit-box;
@@ -2501,14 +2501,14 @@ Games main
 
 #games_main_pub_select{ 
 	width: 185px;
-	margin-top: 0px;
+	margin-top: 0;
 	height: 25px;
 	background: #666666;
 }
 
 #games_main_dev_select{ 
 	width: 185px;
-	margin-top: 0px;
+	margin-top: 0;
 	height: 25px;
 	background: #666666;
 }
@@ -2601,7 +2601,7 @@ Games detail
 #game_extra_info_pub,#continent_pub,#company_id_pub,#game_extra_info_dev,#continent_dev,
 #company_id_dev,#game_extra_info_year,#author_type_id,#ind_id{ 
 	width: 140px;
-	margin-top: 0px;
+	margin-top: 0;
 	height: 25px;
 	background: #666666;
 }	
