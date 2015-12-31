@@ -1822,7 +1822,7 @@ Standard table settings
 		 float:right;
 	}
 
-	#column-right-cpanel { display: none;)
+	#column-right-cpanel { display: none;}
 	}
 
 }
@@ -1921,7 +1921,7 @@ Standard table settings
   background: black;
   color: white;
   text-decoration:none;
-  border-bottom: 3px solid #black;
+  border-bottom: 3px solid black;
 }
 
 .top_button_cpanel_small:visited {
@@ -1977,7 +1977,7 @@ legend {
 Front page
 ------------------------------------------------------------ */
 #user_stats{ float: right; width:48%; margin-bottom: 30px;}	
-#welcome_cpanel{ margin-top: 390x; float: left; width:48%; margin-bottom: 30px;}	
+#welcome_cpanel{ margin-top: 390px; float: left; width:48%; margin-bottom: 30px;}	
 #left_nav_position_front{ margin-top: 20px; margin-bottom: 20px; float: left;}
 #main_stats_position_front{ margin-top: 20px; margin-bottom: 20px;}
 #quick_search_position_front{ margin-top: 20px; margin-bottom: 20px; float: right;}
