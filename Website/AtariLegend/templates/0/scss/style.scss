@@ -1,18 +1,19 @@
 /*************************************************************/	
-/**********************LEGACY SKIN****************************/
+/**********************TOS 207 SKIN***************************/
 /*************************************************************/
 
 /****************SASS variable declaration *******************/
-$skin-name: "legacy";
-$bg-color: #00d3d3;
+$skin-name: "tos";
+$bg-color: white;
 
 
 
 /********************PART I : MAIN SITE***********************/
 
+/* load the main site font */
 @font-face {
-   font-family: Audiowide;
-   src: url(../font/Audiowide-Regular.ttf);
+   font-family: AtariST;
+   src: url(../font/AtariST.ttf);
 }
 
 * { 	margin: 0; padding: 0; 
@@ -22,33 +23,34 @@ html { overflow-y: scroll;
 	overflow-x: hidden;
 }
 
-body { background-color: black; 
-	  font-family: Audiowide, Arial, helvetica, sans-serif;
+body { background-color: #e1e1e1; 
+	  font-family: AtariST, Arial, helvetica, sans-serif;
 }
 
-@media screen and (min-width: 1281px){
-	body { background-image: url(../../../templates/1/images/top_bg_menu.png), url(../../../templates/1/images/top_bg_sides.jpg); 
-	  background-position: left 225px,left top;
-	  background-repeat: repeat-x,repeat-x;}
+@media screen and (min-width: 481px) { 
+	body { background-image: url(../../../templates/0/images/top_bg_sides.jpg);
+		  background-position: left top;
+		  background-repeat: repeat-x;
+	}
 }
 
 @media screen and (min-width: 1920px) { 
-	body {	background-image: url(../../../templates/1/images/top_bg_left.jpg), url(../../../templates/1/images/top_bg_right.jpg), url(../../../templates/1/images/top_bg_menu.png);
-			background-position: left 2px, right 2px, left 225px;
-			background-repeat: no-repeat, no-repeat, repeat-x;
+	body {	background-image: url(../../../templates/0/images/top_bg_left.jpg), url(../../../templates/0/images/top_bg_right.jpg), url(../../../templates/0/images/top_bg_sides.jpg);
+			background-position: left 2px, right 2px, left top;
+			background-repeat: no-repeat, repeat-x, repeat-x;
 		 }
 }
 
 @media screen and (min-width: 1921px) { 
-	body { 	background-image: url(../../../templates/1/images/top_bg_sides.jpg), url(../../../templates/1/images/top_bg_menu.png), url(../../../templates/1/images/main_bg.png), url(../../../templates/1/images/main_bg.png); 
-			background-position: left top, left 225px, -3% 45%, 95% 125%, left top;
-			background-repeat: repeat-x, repeat-x, no-repeat, no-repeat;
+	body { 	background-image: url(../../../templates/0/images/top_bg_sides.jpg), url(../../../templates/0/images/main_bg.png), url(../../../templates/0/images/main_bg.png); 
+			background-position: left top, 100% 100%, -10% 25%;
+			background-repeat: repeat-x, no-repeat, no-repeat;
 		}
 }
- 
+
 img { display: block;
 }
-
+	
 article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section { 
 	display: block;
@@ -56,7 +58,6 @@ footer, header, hgroup, menu, nav, section {
 
 .container { display: none; }
 
-	
 /*---------------------------------------------------------- 
  Main site width
 ------------------------------------------------------------ */
@@ -65,7 +66,7 @@ footer, header, hgroup, menu, nav, section {
 	max-width: 1920px;
 	margin: auto;
 } 
-	
+
 #wrapper_header {
 	width: 100%;	
 	max-width: 1280px;
@@ -86,10 +87,10 @@ footer, header, hgroup, menu, nav, section {
 	width: 100%;
 	float: left;
 	display: block;
-	background: url(../../../templates/1/images/top_bg.jpg) 0 0 no-repeat;
+	background: url(../../../templates/0/images/top_bg.jpg) 0 0 no-repeat;
 	height:100%;
+	border-bottom: 2px solid black;
 	}
-
 	
 /* logos */	
 #left { 	float: left;}
@@ -97,7 +98,8 @@ footer, header, hgroup, menu, nav, section {
 #logo_img_480 {	max-width: 100%;}	
 
 			
-#right { float: right;}
+#right { float: right;
+		margin-top: 30px;}
 	#right img {
 		max-width: 100%;
 		float: right;
@@ -107,18 +109,22 @@ footer, header, hgroup, menu, nav, section {
 #animation {
     position: relative;
 	-webkit-animation-name: STcharacters;
+	-moz-animation-name: STcharacters;
 	animation-name: STcharacters;
 	-webkit-animation-duration: 20s;
+	-moz-animation-duration: 20s;
 	animation-duration: 20s;
 	-webkit-animation-iteration-count: infinite;
+	-moz-animation-iteration-count: infinite;
 	animation-iteration-count: infinite;
 	-webkit-animation-timing-function: linear;
+	-moz-animation-timing-function: linear;
 	animation-timing-function: linear;
 }
 
 @-webkit-keyframes STcharacters {
     0% {
-        top: 145px;
+        top: 174px;
 		left: -20%;
 		opacity: 0;}	
 	
@@ -126,7 +132,7 @@ footer, header, hgroup, menu, nav, section {
 	70% { opacity: 1;}
 	
 	100% {
-        top: 145px;
+        top: 174px;
 		left: 45%;
 		opacity: 0;
     }
@@ -134,7 +140,7 @@ footer, header, hgroup, menu, nav, section {
 
 @keyframes STcharacters {
     0% {
-        top:145px;
+        top:174px;
 		left: -20%;
 		opacity: 0;}		
 		
@@ -142,7 +148,7 @@ footer, header, hgroup, menu, nav, section {
 	70% { opacity: 1;}
     	
     100% {
-        top:145px;
+        top:174px;
 		left: 45%;
 		opacity: 0;
     }
@@ -150,12 +156,16 @@ footer, header, hgroup, menu, nav, section {
 
 #animation_vert{ position: relative;
 	-webkit-animation-name: STcharacters_vert;
+	-moz-animation-name: STcharacters_vert;
 	animation-name: STcharacters_vert;
 	-webkit-animation-duration: 10s;
+	-moz-animation-duration: 10s;
 	animation-duration: 10s;
 	-webkit-animation-iteration-count: infinite;
+	-moz-animation-iteration-count: infinite;
 	animation-iteration-count: infinite;
 	-webkit-animation-timing-function: linear;
+	-moz-animation-timing-function: linear;
 	animation-timing-function: linear;
 }
 
@@ -167,7 +177,7 @@ footer, header, hgroup, menu, nav, section {
 	
 	10% { opacity: 1;}
 	70% { opacity: 1;
-	left: 0%;}
+	left: 0;}
 	
 	100% {
         top:10px;
@@ -183,7 +193,7 @@ footer, header, hgroup, menu, nav, section {
 		
 	10% { opacity: 1;}
 	70% { opacity: 1;
-	left: 0%;}
+	left: 0;}
     	
     100% {
         top:10px;
@@ -191,6 +201,8 @@ footer, header, hgroup, menu, nav, section {
 		opacity: 0;
     }
 }
+
+
 
 /* at a resolution of max 480 (smartphones) we want a smaller logo with border */		
 @media screen and (max-width: 480px) { 
@@ -206,19 +218,19 @@ footer, header, hgroup, menu, nav, section {
 			margin-bottom: 5px;		
 		}
 	#animation, #animation_vert{ display: none;}
-	#right { width: 0%;
+	#right { width: 0;
 		display: none;
 	}
-	#top_background  { border-top-width: 0px;
-			border-left-width: 0px;
-			border-bottom-width: 7px;
-			border-bottom-color: #00d3d3;
+	#top_background  { border-top-width: 0;
+			border-left-width: 0;
+			border-bottom-width: 2px;
+			border-bottom-color: black;
 			border-style: solid;
-			box-shadow: 0 0 7px #00d3d3;
-		    background: -webkit-linear-gradient(black, #01b5b5); /* For Safari 5.1 to 6.0 */
-			background: -o-linear-gradient(black, #01b5b5); /* For Opera 11.1 to 12.0 */
-			background: -moz-linear-gradient(black, #01b5b5); /* For Firefox 3.6 to 15 */
-			background: linear-gradient(#175f5f, black); /* Standard syntax (must be last) */
+			box-shadow: 3px 3px 5px #888888;
+		    background: -webkit-linear-gradient(black, #23f001); /* For Safari 5.1 to 6.0 */
+			background: -o-linear-gradient(black, #23f001); /* For Opera 11.1 to 12.0 */
+			background: -moz-linear-gradient(black, #23f001); /* For Firefox 3.6 to 15 */
+			background: linear-gradient(#175f5f, #23f001); /* Standard syntax (must be last) */
 		}
 }		
 
@@ -232,7 +244,7 @@ footer, header, hgroup, menu, nav, section {
 	#animation, #animation_vert{ display: none;}
 	#logo_img_480{ display: none;}
 		
-	#right { width: 0%;
+	#right { width: 0;
 		display: none;
 	}
 }
@@ -249,7 +261,7 @@ footer, header, hgroup, menu, nav, section {
 	
 /* ***************TOP and SIDE MENU************* */	
 @import '../../../templates/html/includes/main_scss/menu';
-	
+
 /* ---------the main menu below top--------*/
 
 /* This piece of code is used for higher res :
@@ -260,16 +272,16 @@ footer, header, hgroup, menu, nav, section {
 @media screen and (min-width: 1280px){  	
 	.container { position: absolute;}
 	#sidebar {background-color: rgba(0, 0, 0, 0);}
-	header nav { position: absolute; margin-top: 225px;}
+	header nav { position: absolute; margin-top: 0;}
 	#main { position: relative; margin-top: 60px;}
 }
 
-#main_nav { width: 100%; left: 0;}
+#main_nav { width: 100%; left: 0; background-color: white; border-bottom: 3px solid black;}
 
 #main_nav_ul { font-size: 0; text-align : center; width: 100%;
 }
 
-header nav img:hover{ opacity:0.8; 
+header nav img:hover{ opacity:1; 
 }
 
 header nav li {	display: inline-block;
@@ -279,13 +291,13 @@ header nav input{
 	background-color: #000;
 	color: #ffffff;
 	width: 247px;
-	height: 35px;
+	height: 20px;
 	border: 1px solid #007b7b;
-	margin: 11px 0px 0px 16px;
+	margin: 3px 0 0 16px;
 	padding: 0;
 	text-align: center;
 	display: block;
-	font-family: Audiowide;
+	font-family: AtariST;
 }
 
 .topbutton
@@ -293,47 +305,63 @@ header nav input{
   display: block;
   float:left;
   cursor: pointer;
-  border: 0px;
-  background: #00d3d3;
-  font-family: Audiowide,Arial,helvetica,sans-serif;
+  border: 0;
+  background: white;
+  font-family: AtariST,Arial,helvetica,sans-serif;
   color: #182727;
-  height: 60px;
-  width: 184px;
+  height: 30px;
+  width: 194.6px;
   font-size: 20px;
-  border-bottom: 3px solid #008b8b;
-  border-left: 1px solid #007878;
   padding-top: 3px;
   text-decoration:none;
+  text-shadow: -1px 1px 5px white, 1px -1px 15px #acacac;
 }
 
 .topbutton:hover {
-  background: #00a9a9;
-  color: #182727;
+  background: black;
+  color: white;
   text-decoration:none;
-  border-bottom: 3px solid #006f6f;
+}
+
+.topbutton:visited {
+  text-decoration:none;
+  color: #182727;
+}
+
+.topbutton:link {
+  text-decoration:none;
+  color: #182727;
 }
 
 .searchbutton
 {
   display: block;
   float:left;
-  border: 0px;
-  background: #00d3d3;
-  font-family: Audiowide,Arial,helvetica,sans-serif;
+  border: 0;
+  background: white;
+  font-family: AtariST,Arial,helvetica,sans-serif;
   color: #182727;
-  height: 57px;
+  height: 27px;
   width: 280px;
-  font-size: 20px;
-  border-bottom: 3px solid #008b8b;
-  border-left: 1px solid #007878;
-  padding-top: 0px;
+  font-size: 10px;
+  padding-top: 0;
   text-decoration:none;
 }
 
+#search:hover { background: url(../../../templates/0/images/menu_search_hover.png) 0 0 no-repeat;
+	           height: 0;
+			   padding-top: 30px;
+			   padding-left: 30px;}
+
+#home:hover { background: url(../../../templates/0/images/menu_home_hover.png) 0 0 no-repeat;
+				height: 0;
+				padding-top: 30px;
+				padding-left: 30px;}
+
 /* This little fix was added because we had a weird menubar bug at 1280. */
-@media screen and (min-width: 1280px) and (max-width: 1297px) {  
-	#search { width: 66px; height: 60px;}
-	#home  { width: 66px; height: 60px;}
+@media screen and (min-width: 1280px) and (max-width: 1296px) {  
+	#search { width: 21px; height: 30px;}
+	#home  { width: 22px; height: 30px;}
 }
 
 .signinbutton
@@ -341,25 +369,25 @@ header nav input{
   display: block;
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: 25px;
   cursor: pointer;
-  border: 0px;
-  background: #00d3d3;
-  font-family: Audiowide,Arial,helvetica,sans-serif;
+  border: 0;
+  background: #acacac;
+  font-family: AtariST,Arial,helvetica,sans-serif;
   color: #182727;
   height: 60px;
   width: 134px;
   font-size: 20px;
-  border-bottom: 3px solid #008b8b;
-  border-left: 1px solid #007878;
+  border-bottom: 3px solid black;
+  border-left: 1px solid black;
   padding-top: 3px;
   text-decoration:none;
 }
-
+	
 .signinbutton:hover {
-  background: #00a9a9;
-  color: #182727;
+  background: #6a6a6a;
+  color: white;
   text-decoration:none;
-  border-bottom: 3px solid #006f6f;
 }
 
 
@@ -376,17 +404,21 @@ header nav input{
 {	
 	#search_text{display:none;}
 	#search{display:none;}
-	#about{border-right: 1px solid #007878;}
 }
 
-@media screen and (max-width: 1550px)
+@media screen and (max-width: 1590px)
 {	
 	#home{display:none;}
 }
 
-@media screen and (max-width: 1475px)
+@media screen and (max-width: 1560px)
 {	
-	.topbutton{width: 160px;}
+	.topbutton{width: 165px;}
+}
+
+@media screen and (max-width: 1325px)
+{	
+	.topbutton{width: 155px;}
 }
 
 /*---------------------------------------------------------- 
@@ -445,7 +477,7 @@ Standard tile settings
 /* 1 tile and a simplified intro screen */
 @media screen and (max-width: 639px) { 
 	.column-left { width: 100%; } 
-	.column-center { width: 100%; margin-left: 0px;}
+	.column-center { width: 100%; margin-left: 0;}
 	.column-right { width: 100%; }	
 	.column-right-tab {display:none}
 	.column-left-tab {display:none}
@@ -471,13 +503,16 @@ Standard tile settings
 }
 
 .standard_tile  { width: 100%; 
-		background-color: #122323;
-		border-top: 10px solid #01b5b5;
-		border-bottom: 3px solid #01b5b5;
+		border: 2px solid black;
+		background: -webkit-linear-gradient(left, white , #23f001); /* For Safari 5.1 to 6.0 */
+	    background: -o-linear-gradient(right, white, #23f001); /* For Opera 11.1 to 12.0 */
+	    background: -moz-linear-gradient(right, white, #23f001); /* For Firefox 3.6 to 15 */
+	    background: linear-gradient(to right, white, #23f001); /* Standard syntax */
+		box-shadow: 3px 3px 5px #888888;
 	}
 
-.standard_tile_line{ border-bottom: 2px solid #000000;
-	}
+.standard_tile_line{ border-bottom: 2px solid #6a6a6a;
+	}	
 	
 .standard_tile_background{
 		position:relative;
@@ -491,130 +526,125 @@ Standard tile settings
 
 .standard_tile_subtext
 {
-	font-size:10pt; 
-	color:#bcbdbd;
+	font-size:11pt; 
+	color:white;
 }
 
 .standard_tile p { 
 		text-align: left;
-		border-right: 2px solid #01b5b5;
+		border-right: 2px solid #6a6a6a;
 		/*border-left: 2px solid #01b5b5;*/
 		padding-left: 4%;
 		padding-right: 4%;
 		width: 91.7%;
 }
 				
-.standard_tile_title{ 
-		background: rgb(0, 80, 80)	;   /* Fallback for web browsers that doesn't support RGBa */
-        background: rgba(0, 80, 80, 0.6);   /* RGBa with 0.6 opacity */
-		filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#005050, endColorstr=#005050);  /* For IE 5.5 - 7*/
-		-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#005050, endColorstr=#005050)";  /* For IE 8*/ 
+.standard_tile_title{	
+		background: rgb(172, 172, 172) transparent;   /* Fallback for web browsers that doesn't support RGBa */
+        background: rgba(172, 172, 172, 0.7);   /* RGBa with 0.6 opacity */
+		filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#42d403, endColorstr=#42d403);  /* For IE 5.5 - 7*/
+		-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#42d403, endColorstr=#42d403)";  /* For IE 8*/ 
 		padding-top:3%;
 		font-size : 17pt;
-		margin-top : 46%;
+		margin-top : 48.5%;
 		color : white; 	
 		z-index:1;
 		position:absolute;
-	    border-bottom: 2px solid #01b5b5;
+	    border-bottom: 2px solid #6a6a6a;
 }
 
 @media screen and (max-width: 5501px) { 
-.standard_tile_title{ margin-top : 48.5%;
-	}
-}
-
-@media screen and (max-width: 3501px) { 
-.standard_tile_title{ margin-top : 48%;
-	}
-}
-
-@media screen and (max-width: 1921px) { 
-.standard_tile_title{ margin-top : 47.5%;
-	}
-}
-
-@media screen and (max-width: 1801px) { 
-.standard_tile_title{ margin-top : 47%;
-	}
-}
-
-@media screen and (max-width: 1701px) { 
-.standard_tile_title{ margin-top : 46%;
-	}
-}
-
-@media screen and (max-width: 1601px) { 
-.standard_tile_title{ margin-top : 45%;
-	}
-}
-
-@media screen and (max-width: 1501px) { 
-.standard_tile_title{ margin-top : 46.2%;
-	}
-}
-
-@media screen and (max-width: 1401px) { 
-.standard_tile_title{ margin-top : 47%;
-	}
-}
-
-@media screen and (max-width: 1301px) { 
-.standard_tile_title{ margin-top : 46%;
-	}
-}
-
-@media screen and (max-width: 1201px) { 
-.standard_tile_title{ margin-top : 44.5%;
-	}
-}
-
-@media screen and (max-width: 1101px) { 
-.standard_tile_title{ margin-top : 43%;
-	}
-}
-
- @media screen and (max-width: 1001px) { 
-.standard_tile_title{ margin-top : 42%;
-	}
-}
-
- @media screen and (max-width: 850px) { 
-.standard_tile_title{ margin-top : 38.5%;
-	}
-}
-
-@media screen and (max-width: 800px) { 
-.standard_tile_title{ margin-top : 44.5%;
-	}
-}
-
-@media screen and (max-width: 700px) { 
-.standard_tile_title{ margin-top : 41.5%;
-	}
-}
-
-@media screen and (max-width: 639px) { 
-.standard_tile_title{ margin-top : 51%;
-	}
-}
-
-@media screen and (max-width: 525px) { 
 .standard_tile_title{ margin-top : 49%;
 	}
 }
 
+@media screen and (max-width: 1801px) { 
+.standard_tile_title{ margin-top : 48.2%;
+	}
+}
+
+@media screen and (max-width: 1701px) { 
+.standard_tile_title{ margin-top : 47.5%;
+	}
+}
+
+@media screen and (max-width: 1601px) { 
+.standard_tile_title{ margin-top : 46.5%;
+	}
+}
+
+@media screen and (max-width: 1501px) { 
+.standard_tile_title{ margin-top : 45.8%;
+	}
+}
+
+@media screen and (max-width: 1401px) { 
+.standard_tile_title{ margin-top : 48.5%;
+	}
+}
+
+@media screen and (max-width: 1301px) { 
+.standard_tile_title{ margin-top : 47.5%;
+	}
+}
+
+@media screen and (max-width: 1201px) { 
+.standard_tile_title{ margin-top : 46.5%;
+	}
+}
+
+@media screen and (max-width: 1101px) { 
+.standard_tile_title{ margin-top : 45.5%;
+	}
+}
+
+ @media screen and (max-width: 1001px) { 
+.standard_tile_title{ margin-top : 43%;
+	}
+}
+
+ @media screen and (max-width: 850px) { 
+.standard_tile_title{ margin-top : 41%;
+	}
+}
+
+@media screen and (max-width: 800px) { 
+.standard_tile_title{ margin-top : 46.5%;
+	}
+}
+
+@media screen and (max-width: 700px) { 
+.standard_tile_title{ margin-top : 44.5%;
+	}
+}
+
+@media screen and (max-width: 639px) { 
+.standard_tile_title{ margin-top : 52%;
+	}
+}
+
+@media screen and (max-width: 525px) { 
+.standard_tile_title{ margin-top : 50%;
+	}
+}
+
 @media screen and (max-width: 480px) { 
+.standard_tile_title{ margin-top : 49%;
+	}
+}
+
+@media screen and (max-width: 430px) { 
 .standard_tile_title{ margin-top : 47.5%;
 	}
 }
 
 @media screen and (max-width: 360px) { 
-.standard_tile_title{ margin-top : 44%;
+.standard_tile_title{ margin-top : 46%;
 	}
 }
 
 @media screen and (max-width: 320px) { 
-.standard_tile_title{ margin-top : 41%;
+.standard_tile_title{ margin-top : 44%;
 	}
 }
 
@@ -628,7 +658,8 @@ Standard tile settings
 					margin-bottom: 4%;
 					padding-left: 3%;
 					padding-right: 3%;
-					padding-bottom: 3%;}		
+					padding-bottom: 3%;}
+					
 
 .standard_tile h1 { color: white;
 			font-size: 18pt;
@@ -636,6 +667,7 @@ Standard tile settings
 			text-align: center;	
 			margin-top:20px;
 			margin-bottom:20px;
+			text-shadow: -1px 1px 8px #686868, 1px -1px 8px #515151;
 	}
 	
 .standard_tile h2 { color: #00d3d3;
@@ -646,7 +678,7 @@ Standard tile settings
 	}
 	
 .standard_tile h3 { color: white;
-			font-size: 10pt;
+			font-size: 13pt;
 			font-weight: 100;
 			text-align: center;
 	}
@@ -657,14 +689,14 @@ Standard tile settings
 			text-align: left;
 	}
  
-.standard_tile h5 { color: #9c9c9c;
+.standard_tile h5 { color: #3c3c3c;
 			font-size: 9pt;
 			font-weight: 100;
 			text-align: left;
 	}
 
-.standard_tile h6 { color: white;
-			font-size: 11pt;
+.standard_tile h6 { color: #3c3c3c;
+			font-size: 12pt;
 			font-weight: 100;
 			text-align: left;
 	}
@@ -680,77 +712,79 @@ Standard tile settings
 				text-align: left;
 				display: block;
 				background-size: 85% 44px;
-				font-family: Audiowide;	
+				font-family: AtariST;	
 }
 
-.standard_tile_input_small { background : black;
+.standard_tile_input_small { 
 				color: #ffffff;				
 				width: 185px;
 				height: 25px;
 				margin-top:0;
 				padding: 0;
-				padding-left: 5px;
-				border: 1px solid #008b8b;
+				padding-left: 7px;
+				border: 1px solid #b2b2b2;
 				text-align: left;
-				/*display: block;*/
-				font-family: Audiowide;	
+				font-family: AtariST;
+				background: #666666;
 }
 
-.standard_tile_input_area { background : black;
+.standard_tile_input_area { 
 				color: #ffffff;				
 				width: 90%;
 				height: 40px;
 				margin-top:0;
-				padding: 0;
-				padding-left: 5px;
-				border: 1px solid #008b8b;
+				padding: 2px;
+				padding-left: 7px;
+				border: 1px solid #b2b2b2;
 				text-align: left;
-				/*display: block;*/
-				font-family: Audiowide;	
+				font-family: AtariST;
+				background: #666666;
 }
 
 #text_area_big { height: 150px; }
 
-.standard_tile th { color: white;
-			font-size: 12pt;
-			font-weight: bold;
-			text-align: center;
-	}
-
-.standard_tile_link:link { text-decoration: none;
+a.standard_tile_link:link
+{ 	
 	color: white;
+	text-shadow: -1px 1px 8px #686868, 1px -1px 8px #515151;
+	text-decoration: none;
+	outline: 0 none;
+}
+
+a.standard_tile_link:hover, a.standard_tile_link:focus
+{
+	color: black;
+	text-shadow: -1px 1px 8px #686868, 1px -1px 8px #515151;
 }
 
 .standard_tile_link:visited { text-decoration: none;
 	color: white;
 }
 
-.standard_tile_link:hover { text-decoration: none;
-	color: #01b5b5;
-}
-
 .standard_tile_link_reverse:link { text-decoration: none;
-	color: #01b5b5;
+	color: black;
 }
 
 .standard_tile_link_reverse:visited { text-decoration: none;
-	color: #01b5b5;
+	color: black;
 }
 
 .standard_tile_link_reverse:hover { text-decoration: none;
 	color: white;
+	text-shadow: -1px 1px 8px #686868, 1px -1px 8px #515151;
 }
 
 .standard_tile_link_cpanel:link { text-decoration: none;
-	color: #01b5b5;
+	color: white;
 }
 
 .standard_tile_link_cpanel:visited { text-decoration: none;
-	color: #01b5b5;
+	color: white;
 }
 
 .standard_tile_link_cpanel:hover { text-decoration: none;
-	color: white;
+	color: black;
+	text-shadow: -1px 1px 8px #686868, 1px -1px 8px #515151;
 }
 
 .standard_tile_link_black:link { text-decoration: none;
@@ -763,7 +797,7 @@ Standard tile settings
 }
 
 .standard_tile_link_black:hover { text-decoration: none;
-	color: white;
+	color: #666666;
 }
 
 .standard_tile_link_button:link { 
@@ -778,28 +812,37 @@ Standard tile settings
 		width: 100%;
 		height: 140px;
 		display: table;
+		background: -webkit-linear-gradient(left, white, #23f001); /* For Safari 5.1 to 6.0 */
+		background: -o-linear-gradient(right, white, #23f001); /* For Opera 11.1 to 12.0 */
+		background: -moz-linear-gradient(right, white, #23f001); /* For Firefox 3.6 to 15 */
+		background: linear-gradient(to right, white, #23f001); /* Standard syntax */
  }
  
 .standard_list_entry_odd{position : relative;
 		width: 100%;
 		height: 140px;
 		display: table;
-		background: black;
+		background: -webkit-linear-gradient(left, white, #acacac); /* For Safari 5.1 to 6.0 */
+		background: -o-linear-gradient(right, white, #acacac); /* For Opera 11.1 to 12.0 */
+		background: -moz-linear-gradient(right, white, #acacac); /* For Firefox 3.6 to 15 */
+		background: linear-gradient(to right, white, #acacac); /* Standard syntax */
  }
 
 .standard_list_entry_left{
-		left: 0px;
+		left: 0;
 		width: 50%;
 		position: absolute;
 		top: 50%;
 		-webkit-transform: translateY(-50%);
+		-moz-transform: translateY(-50%);
+		-o-transform: translateY(-50%);
 		-ms-transform: translateY(-50%);
 		transform: translateY(-50%);
 }
 
 .standard_list_entry_left img { max-width: 100%;
 		width: 80%;
-		box-shadow: 0 0 7px #00d3d3;
+		box-shadow: 0 0 7px #2c8007;
 		margin-left: 15px;
 }
 
@@ -812,6 +855,8 @@ Standard tile settings
 		top: 50%;
 		-webkit-transform: translateY(-50%);
 		-ms-transform: translateY(-50%);
+		-moz-transform: translateY(-50%);
+		-o-transform: translateY(-50%);
 		transform: translateY(-50%);
 }
  
@@ -820,6 +865,7 @@ Standard tile settings
   		padding: 0;
   		-moz-box-sizing: border-box;
   		-webkit-box-sizing: border-box;
+  		-ms-box-sizing: border-box;
   		box-sizing: border-box;
 
 		display: block;
@@ -830,6 +876,9 @@ Standard tile settings
     		line-height: 1.2;
   		-webkit-line-clamp: 5;
   		-webkit-box-orient: vertical;
+  		-moz-box-orient: vertical;
+  		-ms-box-orient: vertical;
+  		box-orient: vertical;
   		overflow: hidden;
   		text-overflow: ellipsis;		
 }
@@ -842,32 +891,35 @@ Standard tile settings
 
 .standard_tile select  { 
 	background-color: black;
-	border: 1px solid #008b8b;
+	border: 1px solid #b2b2b2;
 	color: #ffffff;				
 	margin-top:5px;
 	padding: 0;
 	padding-left: 5px;
-	font-family: Audiowide;	
+	font-family: AtariST;		
 	width: 78%;
 	height: 20px;}
 
 #small_select{ 
 	width: 50px;
-	height: 25px;
+	height: 27px;
+	background: #666666;
 }
 
 #medium_select{ 
 	width: 185px;
-	margin-top: 0px;
-	height: 25px;
+	margin-top: 0;
+	background: #666666;
+	height: 27px;
 }
 
 #medium_select2{ 
 	width: 140px;
-	margin-top: 0px;
+	margin-top: 0;
 	height: 25px;
+	background: #666666;
 }
-	
+ 
 /*---------------------------------------------------------- 
  Welcome tile settings --> frontpage
 ------------------------------------------------------------ */
@@ -875,28 +927,28 @@ Standard tile settings
 		width: 845px; 
 		height: 460px; 
 		overflow: hidden;
-		margin-top: 20px;
-		border-top: 10px solid #01b5b5;
-		border-bottom: 3px solid #01b5b5;
-		margin-bottom:20px;
+		margin-top: -40px;
+		border: 2px solid black;
+		margin-bottom: 20px;
 		float: left;
+		box-shadow: 3px 3px 5px #888888;
 }
 
 .welcome_slides { cursor: move; 
 		position: absolute; 
-		left: 0px; 
-		top: 0px; 
+		left: 0; 
+		top: 0; 
 		width: 845px; 
 		height: 460px; 
 		overflow: hidden;
 }
 
-#welcome p { background: rgb(0, 80, 80);   /* Fallback for web browsers that doesn't support RGBa */
-        background: rgba(0, 80, 80, 0.6);   /* RGBa with 0.6 opacity */
+#welcome p { background: rgb(172, 172, 172) transparent;   /* Fallback for web browsers that doesn't support RGBa */
+        background: rgba(172, 172, 172, 0.8);   /* RGBa with 0.6 opacity */
 		filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#005050, endColorstr=#005050);  /* For IE 5.5 - 7*/
 		-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#005050, endColorstr=#005050)";  /* For IE 8*/
 		text-align: center;
-		border-right: 2px solid #01b5b5;
+		border-right: 2px solid #6a6a6a;
 		padding-left: 5%;
 		padding-right: 5%;
 	}	
@@ -904,16 +956,16 @@ Standard tile settings
 .welcome_text { font-size : 11pt; 
 		padding-bottom: 10px;	
 		padding-top: 10px;	
-		color : #bcbdbd;
-		border-bottom: 2px solid #01b5b5;	
+		color : #23f001;
+		border-bottom: 2px solid #6a6a6a;	
 		position: absolute;		
 		Margin-top: 130px;
 	}
-	
+
 .trivia_title { font-size:19pt; color:white;}
 .trivia_tag { font-size:13pt}
 .trivia_text{ font-size:12pt; color:white }
-
+	
 /* 1 tile and a simplified intro screen */
 @media screen and (max-width: 639px) { 
 	#welcome  { visibility : hidden; }	
@@ -925,13 +977,18 @@ Standard tile settings
 	}
 }
 
+@media screen and (max-width: 1279px) {
+	#welcome  { margin-top: 20px;
+	}
+} 
+
 /*---------------------------------------------------------- 
 logon tile --> front page
 ------------------------------------------------------------ */
-.logon { margin-top: 20px;
+.logon { margin-top: -40px;
 		float : right;
 		margin-bottom : 20px;
-		width: 100%;
+		width: 100%;	
 }
 	
 .logon_input_usn{position : relative;
@@ -941,7 +998,7 @@ logon tile --> front page
  }
 
 .logon_left{position: absolute;
-		left: 0px;
+		left: 0;
 		width: 10%;
 }
 .logon_right{position: absolute;
@@ -976,7 +1033,7 @@ logon tile --> front page
 
 /* 2 tiles and background welcome image */
 @media screen and (min-width: 640px) and (max-width: 800px) { 
-	.logon { margin-top: 0px;}
+	.logon { margin-top: 0; }
 }
 
 /* 1 tile */
@@ -987,10 +1044,17 @@ logon tile --> front page
 	}
 }
 
+@media screen and (min-width: 801px) and (max-width: 1279px) {
+	.logon  { margin-top: 20px;	
+	}
+} 
+
 /*---------------------------------------------------------- 
 latest news tile --> front page
 ------------------------------------------------------------ */
-.latest_news { margin-bottom: 20px;}
+.latest_news { margin-bottom: 20px;
+			border-bottom: 2px solid black;
+}
 
 @media screen and (min-width: 640px) and (max-width: 800px) { 
 	.latest_news { margin-top: 395px;
@@ -1001,26 +1065,26 @@ latest news tile --> front page
 	.latest_news   { float: left; width: 48%;} 
 }
 
+
 /*---------------------------------------------------------- 
 screenstar tile - front page
 ------------------------------------------------------------ */
 .screenstar_position_front { margin-bottom: 20px;}
 
 @media screen and (min-width: 1495px){ 
-	.screenstar_position_front  { margin-top: 20px; width: 94%;} 
+	.screenstar_position_front  { width: 94%;margin-top: -40px;} 
 }
-
 
 /*---------------------------------------------------------- 
 datequote tile - front page
 ------------------------------------------------------------ */
 .datequote_position_front { 	margin-bottom: 20px; }
 
-.datequote_bg { background: url(../../../templates/1/images/datequote_bg.jpg) ;}
+.datequote_bg { background: url(../../../templates/0/images/datequote_bg.jpg) ;}
 
 /* 1 and 2 tiles */
 @media screen and (max-width: 800px) { 
-	.datequote_position_front { margin-top: 0px;}
+	.datequote_position_front { margin-top: 0;}
 }
 
 @media screen and (min-width: 1495px){ 
@@ -1031,7 +1095,7 @@ datequote tile - front page
 
 .datequote_day{ font-size : 85pt;
 		color : white; 
-		margin-top: 0px;
+		margin-top: 0;
 		margin-bottom: -20px;
 }
 
@@ -1043,14 +1107,14 @@ datequote tile - front page
 
 .datequote_year { font-size : 55pt;
 		text-align: center;
-		color : #cccccc; 
+		color : black; 
 		margin-top: -10px;
 	}
 
-.datequote_text { background: rgb(0, 80, 80);   /* Fallback for web browsers that doesn't support RGBa */
-        background: rgba(0, 80, 80, 0.6);   /* RGBa with 0.6 opacity */
-		filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#005050, endColorstr=#005050);  /* For IE 5.5 - 7*/
-		-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#005050, endColorstr=#005050)";  /* For IE 8*/ 
+.datequote_text { background: rgb(172, 172, 172) transparent;   /* Fallback for web browsers that doesn't support RGBa */
+        background: rgba(172, 172, 172, 0.7);   /* RGBa with 0.6 opacity */
+		filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#42d403, endColorstr=#42d403);  /* For IE 5.5 - 7*/
+		-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#42d403, endColorstr=#42d403)";  /* For IE 8*/ 
 		color: white; 
 		padding-top: 10px;
 		padding-bottom: 10px;
@@ -1065,7 +1129,6 @@ Who is it - front page
 	.whoisit_position_front  { float:right;} 
 }
 
-
 /*---------------------------------------------------------- 
 Latest reviews tile - front page
 ------------------------------------------------------------ */
@@ -1075,23 +1138,22 @@ Latest reviews tile - front page
 	.latest_reviews  { width: 49%; float: right;} 
 }
 
-
 /*---------------------------------------------------------- 
 Did you know tile - front page
 ------------------------------------------------------------ */
 .didyouknow_position_front{ margin-bottom: 20px; }	
-
+			
 @media screen and (min-width: 1495px){ 
-	.didyouknow_position_front  {float:left; width:100%;} 
-}			
+	.didyouknow_position_front  {float:left; width:100%;	} 
+}	
 
 /*---------------------------------------------------------- 
 Statistics tile - front page
 ------------------------------------------------------------ */
 .statistics_position_front{ margin-bottom: 20px; }	
 
-.statistics_dark { color: #cccccc; }
-
+.statistics_dark { color: #6a6a6a;}
+	
 @media screen and (min-width: 1495px){ 
 	.statistics_position_front  {float:left; width:100%;} 
 }
@@ -1100,7 +1162,7 @@ Statistics tile - front page
 Hotlinks tile - front page
 ------------------------------------------------------------ */
 .hotlinks_position_front{ margin-bottom: 20px; }	
-
+				
 @media screen and (min-width: 1495px){ 
 	.hotlinks_position_front {width: 94%; float: left;} 
 }				
@@ -1108,34 +1170,37 @@ Hotlinks tile - front page
 /*---------------------------------------------------------- 
 contact tiles - front page
 ------------------------------------------------------------ */
-.contact_tiles { 
-			width: 100%; 
-			margin-bottom: 20px;
+.contact_tiles { margin-bottom: 20px;
 			background: none;
 			border: none;
+			box-shadow: none;
 }
 
 .contact_tiles  img{ margin-bottom: 20px;
 			max-width: 100%;
+			box-shadow: 3px 3px 5px #888888;
+			border: 2px solid black;
+			
 }
-	
+
 @media screen and (min-width: 1495px){ 
 	.contact_tiles { width: 49%; float: right;} 
-}
+}	
 		
 /*---------------------------------------------------------- 
  Footer
 ------------------------------------------------------------ */
 .footer{ width: 100%;
 		float: left;	
-		border-top: 10px solid #01b5b5;
-		background: url(../images/bottom_bg_sides.jpg) left 0 repeat-x;
+		box-shadow: 3px 3px 5px #888888;
+		background-color: #23ec00;
 	}
 
 .footer_logo{ color: white;
 		font-size: 10pt;
 		text-align: center;
 		height : 120px;
+		border-top: 2px solid black;	
 		background: url(../images/footer_bg.jpg) center 0 no-repeat;
 	}
 
@@ -1143,20 +1208,25 @@ contact tiles - front page
 			margin-right: auto;
 			margin-bottom: 5px;	
 	}
-	
+
+/*---------------------------------------------------------- 
+/* JqueryUI Autocomplete section
+------------------------------------------------------------ */
+
 /* Component containers
 ----------------------------------*/
 .ui-widget-content {
-	border: 1px solid #00d3d3;
+	border: 1px solid white;
 	background: #000000;
 	color: #ffffff;
 	width: 245px;
-	font-family: Audiowide;
+	font-family: atarist;
 	font-size:13px;
 }
 
 /* Interaction states
 ----------------------------------*/
+
 .ui-state-hover,
 .ui-widget-content .ui-state-hover,
 .ui-widget-header .ui-state-hover,
@@ -1164,15 +1234,17 @@ contact tiles - front page
 .ui-widget-content .ui-state-focus,
 .ui-widget-header .ui-state-focus {
 	border: 1px solid #000000;
-	background: #00d3d3;
+	background: white;
 	color: #000;
 }
 
 
 
 
-	
+
+
 /* *********************PART II : CPANEL*****************************/
+
 
 /* ---------the side menu--------*/
 
@@ -1190,10 +1262,17 @@ contact tiles - front page
         -o-transition:  left 0.4s ease-in-out;
         transition:  left 0.4s ease-in-out;
     }
+	
+	@media screen and (min-width: 1280px) and (max-width: 2304px){  
+		.container_cpanel{ margin-top: 33px; }
+	}
     
     #sidebar_cpanel {
 		z-index:1;
 		position: absolute;
+		-webkit-box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		-ms-box-sizing: border-box;
 		box-sizing: border-box;
     }
 	
@@ -1213,8 +1292,7 @@ contact tiles - front page
 	.sub-menu_cpanel li { font-size:20px; }
 	
     .main-content #sidebar_cpanel-toggle {
-        background: #01b5b5;
-        border-radius: 3px;
+        background: white;
         display: block;
         position: absolute;
         padding: 10px 7px;
@@ -1226,8 +1304,7 @@ contact tiles - front page
         width: 18px;
         margin-bottom: 3px;
         height: 2px;
-        background-color: #fff;
-        border-radius: 1px;   
+        background-color: black;   
     }
 	
     .main-content #sidebar_cpanel-toggle .bar:last-child{
@@ -1236,6 +1313,7 @@ contact tiles - front page
 
 	
 	/*-----some code for the skin submenu-------*/
+	#skin_side_cpanel, #games_side_cpanel, #menus_side_cpanel, #demos_side_cpanel, #users_side_cpanel, #admin_side_cpanel, #other_side_cpanel{width:188px; border-bottom: 3px solid black;}
 	
 	.clearfix_cpanel:after {
 		display:block;
@@ -1253,8 +1331,9 @@ contact tiles - front page
 	}
 	 
 	.skin-menu_cpanel li {
-		margin:0px;
+		margin:0;
 		list-style:none;
+		display: inline;
 	}
 	 
 	.skin-menu_cpanel a {
@@ -1277,14 +1356,13 @@ contact tiles - front page
 
 	.sub-menu_cpanel {
 		width:75%;
-		padding:5px 0px;
+		padding:5px 0;
 		position:absolute;
 		top:100%;
 		left:20px;
 		z-index:-1;
 		opacity:0;
 		transition:opacity linear 0.15s;
-		box-shadow:0px 2px 3px rgba(0,0,0,0.2);
 	}	 
 	
 /* 'position' is needed for smartphone view else the logo is covered by the sidemenu button */
@@ -1311,17 +1389,12 @@ contact tiles - front page
 
 /* for the lower resolutions, we don't have the menu bar below the top */ 
 @media screen and (max-width: 1279px) {  	
-	#games{ display: none; }
-	#menus{ display: none; } 
-	#demos{ display: none; } 
-	#users{ display: none; }
-	#admin{ display: none; }
-	#other{ display: none; }
+	#main_nav_cpanel { display: none; }
 }
 
 /* for the high resolutions, we only have the skin switch in the side menu */ 
 @media screen and (min-width: 1280px) {  	
-	#games_side_cpanel, #demos_side_cpanel, #users_side_cpanel , #menus_side_cpanel, #admin_side_cpanel, #other_side__cpanel, #game_editor_side,
+	#games_side_cpanel , #demos_side_cpanel, #users_side_cpanel, #menus_side_cpanel, #admin_side_cpanel, #other_side_cpanel, #game_editor_side,
 	#game_comments_side, #game_series_side,	#game_music_side, #game_submissions_side, #game_reviews_side,
 	#submitted_reviews_side, #menu_editor_side, #menu_comments_side, #menu_submissions_side, #demo_editor_side,
 	#demo_comments_side, #demo_music_side, #demo_submissions_side, #user_admin_side, #individuals_side,
@@ -1334,7 +1407,7 @@ contact tiles - front page
 }
 
 /* CPANEL menu below top*/ 
-#main_nav_cpanel { width: 100%;}
+#main_nav_cpanel { width: 100%;  background-color: white; border-bottom: 3px solid black; }
 
 nav ul {
   list-style: none;
@@ -1342,6 +1415,7 @@ nav ul {
 
 .nav li {
   position: relative;
+  display: inline;
 }
 .nav > li { 
   float: left; 
@@ -1357,7 +1431,7 @@ nav ul {
   position: absolute;
   z-index: 1;
   left: -99999em;
-  top: 61px;
+  top: 30px;
 }
 .nav > li:hover > ul {
   left: auto;
@@ -1369,93 +1443,98 @@ nav ul {
 .topbutton_cpanel
 {
   display: block;
+  float:left;
   cursor: pointer;
-  border: 0px;
-  background: #00d3d3;
-  font-family: Audiowide,Arial,helvetica,sans-serif;
+  border: 0;
+  background: white;
+  font-family: AtariST,Arial,helvetica,sans-serif;
   color: #182727;
-  height: 60px;
+  height: 30px;
   width: 213px;
   font-size: 20px;
-  border-bottom: 3px solid #008b8b;
-  border-left: 1px solid #007878;
   padding-top: 3px;
   text-decoration:none;
+  text-shadow: -1px 1px 5px white, 1px -1px 15px #acacac;
   text-align:center;
-  line-height:27px;
 }
 
 .topbutton_cpanel:hover {
-  background: #00a9a9;
+  background: black;
+  color: white;
+  text-decoration:none;
+}
+
+.top_button_cpanel:visited {
+  text-decoration:none;
   color: #182727;
-  text-decoration:none;
-  border-bottom: 3px solid #006f6f;
 }
-
-.topbutton_cpanel:visited {
-  text-decoration:none;
-}
-
 .subbutton_cpanel
 {
   display: block;
+  float:left;
   cursor: pointer;
-  border: 0px;
-  background: #00d3d3;
-  font-family: Audiowide,Arial,helvetica,sans-serif;
+  border: 0;
+  background: white;
+  font-family: AtariST,Arial,helvetica,sans-serif;
   color: #182727;
+  height: 24px;
   width: 213px;
-  font-size: 16px;
-  border-bottom: 3px solid #008b8b;
-  border-left: 1px solid #007878;
+  border-bottom: 3px solid black;
   padding-top: 3px;
   text-decoration:none;
+  text-shadow: -1px 1px 5px white, 1px -1px 15px #acacac;
   text-align:center;
-  line-height:30px;
 }
-
 
 .subbutton_cpanel:hover {
-  background: #00a9a9;
-  color: #182727;
+  background: black;
+  color: white;
   text-decoration:none;
-  border-bottom: 3px solid #006f6f;
 }
-
 .sidebutton_cpanel
 {
   cursor: pointer;
-  border: 0px;
-  background: #00d3d3;
-  font-family: Audiowide,Arial,helvetica,sans-serif;
-  color: #182727;
-  width: 213px;
+  border: 0;
+  font-family: AtariST,Arial,helvetica,sans-serif;
+  background:white;
+  color:black;
   font-size: 16px;
   vertical-align:middle;
   text-decoration:none;
   text-align:center;
-  border-bottom: 3px solid #008b8b;
-  border-left: 1px solid #007878;
-  line-height:30px;
-}
+  text-shadow: -1px 1px 5px white, 1px -1px 15px #acacac;
+  line-height:27px;
+  white-space: nowrap;
+  }
 
 .sidebutton_cpanel:hover {
-  background: #00a9a9;
-  color: #182727;
+  background: black;
+  color: white;
   text-decoration:none;
-  border-bottom: 3px solid #006f6f;
 }
 
 .sidebutton_cpanel:link {
   text-decoration:none;
 }
 
-#other{border-right: 1px solid #007878;}
+#game_editor, #game_comments, #game_series, #game_music, #game_submissions, #game_reviews, #submitted_reviews,
+#menu_editor, #menu_comments, #menu_submissions, #demo_editor, #demo_comments, #demo_music, #demo_submissions,
+#user_admin, #individuals, #author_types, #crew_editor, #companies, #company_logo, #add_news, #approve_news, 
+#submitted_news, #Statistics,#did_you_know, #trivia_screenshots, #trivia_quotes, #add_links, #validate_links,
+#modify_links, #link_categories, #articles, #article_types, #screenshots, #modify_links, 
+#link_categories, #articles, #article_types, #article_screenshots, #add_magazines, #manage_issues, #interviews, 
+#interviews_help, #forum, #logout, #demo_crew_editor, #demo_individuals, #demo_author_types, #demo_interviews, 
+#demo_interviews_help, #menu_individuals, #menu_author_types, #menu_crew_editor{
+		height: 24px;
+		font-size: 16px;
+		padding:0;
+		display:inline;
+		line-height:24px;
+		vertical-align:bottom;
+}
 
-
-
-#game_editor_side, #game_comments_side, #game_series_side,
-#game_music_side, #game_submissions_side, #game_reviews_side,
+#legacy, #tos, #picasso, #game_editor_side,
+#game_comments_side, #game_series_side,	#game_music_side, #game_submissions_side, #game_reviews_side,
 #submitted_reviews_side, #menu_editor_side, #menu_comments_side, #menu_submissions_side, #demo_editor_side,
 #demo_comments_side, #demo_music_side, #demo_submissions_side, #user_admin_side, #individuals_side,
 #author_types_side, #crew_editor_side, #companies_side, #company_logo_side, #add_news_side, #approve_news_side,
@@ -1464,18 +1543,21 @@ nav ul {
 #screenshots_side, #modify_links_side, #link_categories_side, #articles_side, #article_types_side,
 #article_screenshots_side, #add_magazines_side, #manage_issues_side, #interviews_side, #interviews_help_side,
 #forum_side, #logout_side, #menu_individuals_side, #menu_author_types_side, #demo_individuals_side, #demo_author_types_side,
-#menu_crew_editor_side, #demo_interviews_side, #demo_interviews_help_side, #legacy, #tos, #picasso {
+#menu_crew_editor_side, #demo_interviews_side, #demo_interviews_help_side {
 		height: 27px;
+		width: 213px;
 		font-size: 16px;
-		border-bottom: 3px solid #008b8b;
-		padding:0px;
+		vertical-align:middle;
+		border-bottom: 3px solid black;
 }
 
 .centered_fieldset {
+
 	text-align:center;
 	margin: auto;
 
 }
+
 /*------------------------------------------------------------
 Standard table settings 
 -------------------------------------------------------------*/
@@ -1503,15 +1585,14 @@ Standard table settings
 		 float:right;
 	}
 
-	#column-right-cpanel { display: none;
-	}
-
+	#column-right-cpanel { display: none;}
 }
+
 
 .standard_table_list {
 	width: 100%;
-	border: solid 1px black; 
-	background-color:#00d3d3;
+	border: solid 1px #b2b2b2; 
+	background-color:#f3f3f3;
 	margin-left:auto;
 	margin-right:auto;
 	border-spacing: 0;
@@ -1519,61 +1600,60 @@ Standard table settings
 }
 
 .standard_table_list  li {
-	color: white;
-	font-size: 10pt;
-	font-weight: 100;
+	color: black;
+	font-size: 12pt;
 	text-align: center;
 	text-decoration: none; 
 	list-style-type: none;
 }
 
 .standard_table_list th {
-	border-bottom: solid 1px black;
-	background-color:#006f6f;
+	border-bottom: solid 2px #b2b2b2;
+	background-color:#DBD7D1;
 	border-collapse: collapse;
 	padding-top:3px;
 	padding-bottom:3px;
 	padding-left:3px;
-	margin:0px;
+	margin:0;
+	text-align: center;
 }
 
 .standard_table_list tr:nth-child(even){
-	background-color:#00d3d3;
+	background-color:#f3f3f3;
 }
 
 .standard_table_list tr:nth-child(odd){
-	background-color:#006f6f;
+	background-color:#EFEFEF;
 }
 
 .standard_table_list tr:hover {
-	background-color:#294f4f;
+	background-color:#DBD7D1;
 }
 
-.standard_table_list td {
-	border-bottom: solid 1px black;
+.standard_table_list td {	
 	padding-top:1px;
 	padding-bottom:1px;
 	padding-left:3px;
-	margin:0px;
+	margin:0;
 }
 
-.standard_table_center { color: white;
-			font-size: 10pt;
+.standard_table_center { color: black;
+			font-size: 12pt;
 			font-weight: 100;
 			text-align: center;
 			text-decoration: none; 
 }
 
-.standard_table_left { color: white;
-			font-size: 10pt;
+.standard_table_left { color: black;
+			font-size: 12pt;
 			font-weight: 100;
 			text-align: left;
 			text-decoration: none; 
 			padding-left: 2px;
 }
 
-.standard_table_right { color: white;
-			font-size: 10pt;
+.standard_table_right { color: black;
+			font-size: 12pt;
 			font-weight: 100;
 			text-align: right;
 			text-decoration: none; 
@@ -1585,23 +1665,24 @@ Standard table settings
 .topbutton_cpanel_small
 {
   cursor: pointer;
-  border: 0px;
-  background: #122323;
-  font-family: Audiowide,Arial,helvetica,sans-serif;
-  color: white;
+  border: 0;
+  background: white;
+  font-family: AtariST,Arial,helvetica,sans-serif;
+  color: #182727;
   height: 25px;
   width: 80px;
-  font-size: 10pt;
-  border-bottom: 3px solid #122323;
-  border-left: 1px solid #122323;
+  font-size: 11pt;
+  border-bottom: 3px solid black;
+  border-left: 1px solid black;
   text-decoration:none;
+  text-shadow: -1px 1px 5px white, 1px -1px 15px #acacac;
 }
 
 .topbutton_cpanel_small:hover {
-  background:#006f6f;
+  background: black;
   color: white;
   text-decoration:none;
-  border-bottom: 3px solid #122323;
+  border-bottom: 3px solid black;
 }
 
 .top_button_cpanel_small:visited {
@@ -1627,6 +1708,7 @@ Standard table settings
 #column-center-cpanel { width:100%; float:left; margin:auto;  }
 #column-right-cpanel { width:100%; float:right; margin:auto; }
 
+
 .main_container_cpanel >div {
 	width:100%;
 	}
@@ -1638,27 +1720,28 @@ Standard table settings
 }
 
 fieldset { 
-	border: solid 1px black; 
-	background: #00d3d3; 
+	border: solid 1px #b2b2b2; 
+	background: #DBD7D1;
 	padding: 8px;
-	font-size: 11pt;
+	font-size: 12pt;
+	color: #122323;
 }
 
 legend {
-	border: black solid 1px;
+	border: solid 2px #b2b2b2;
 	padding: 1px 10px;
-	color: white;
-	background: #006f6f;
+	color: black;
+	background: #EFEFEF; 
 }
 
 /*---------------------------------------------------------- 
 Front page
 ------------------------------------------------------------ */
-#user_stats{ float: right; width:49%; margin-bottom: 20px;}	
-#welcome_cpanel{float: left; width:49%; margin-bottom: 20px;}	
-#left_nav_position_front{ margin-top: 80px; margin-bottom: 20px; float: left;}
-#main_stats_position_front{ margin-top: 80px; margin-bottom: 20px;}
-#quick_search_position_front{ margin-top: 80px; margin-bottom: 20px; float: right;}
+#user_stats{ float: right; width:48%; margin-bottom: 30px;}	
+#welcome_cpanel{ margin-top: 390px; float: left; width:48%; margin-bottom: 30px;}	
+#left_nav_position_front{ margin-top: 20px; margin-bottom: 20px; float: left;}
+#main_stats_position_front{ margin-top: 20px; margin-bottom: 20px;}
+#quick_search_position_front{ margin-top: 20px; margin-bottom: 20px; float: right;}
 	
 @media screen and (max-width: 1279px) {  
 #left_nav_position_front{ margin-top: 20px;}
@@ -1666,7 +1749,7 @@ Front page
 }
 
 .user_stats_img{ max-width: 100%;
-		box-shadow: 0 0 12px #cccccc;	
+		box-shadow: 0 0 12px black;	
 		opacity: 0.8;
 		filter: alpha(opacity=40); /* For IE8 and earlier */
 		margin-bottom: 10px;
@@ -1674,8 +1757,8 @@ Front page
 
 /* Make the table view responsive */
 @media screen and (max-width: 799px) { 
-	#welcome_cpanel{ width:100%; margin-top: 10px; }		
-	#user_stats{ width:100%; }	
+	#welcome_cpanel{ width:100%; margin-top: 20px; margin-bottom: 20px;}		
+	#user_stats{ width:100%; margin-bottom: 20px; }	
 	#main_stats_position_front{ width:100%; float: left;}
 	#left_nav_position_front{ width:100%;  float: left;}
 }
@@ -1691,7 +1774,7 @@ Front page
   display: -moz-flex;
   display: -webkit-flex;
   display: flex;
-  -webkit-align-items: flex-start;
+    -webkit-align-items: flex-start;
   align-items: flex-start; 
  }
   
@@ -1724,16 +1807,19 @@ Front page
 /*---------------------------------------------------------- 
 Left nav
 ------------------------------------------------------------ */
+#leftnav_position_front { margin-top: 20px; margin-bottom: 30px; float: lefft;
+}
+
 .left_nav_section{
-	background-color:#006f6f;
-	color: #FFFFDD;
-	border-bottom: solid 1px black;
-	background-color:#006f6f;
+	font-weight: bold;
+	border-bottom: solid 2px #b2b2b2;
+	border-top: solid 2px #b2b2b2;
+	background-color:#DBD7D1;
 	border-collapse: collapse;
 	padding-top:3px;
 	padding-bottom:3px;
 	padding-left:3px;
-	margin:0px;
+	margin:0;
 	text-align: center;
 	list-style-type: none;
 }
@@ -1747,17 +1833,14 @@ Left nav
 }
 
 .left_nav_link:hover { text-decoration: none;
-	color: white;
+	color: #6a6a6a;
 }
 
 /*---------------------------------------------------------- 
 Quick search games
 ------------------------------------------------------------ */
 .quick_search_check {margin-right: 5px;}
-
-@media screen and (max-width: 1279px) { 
-	#quick_search_games_main{ margin-top: 20px;}
-}	
+#quick_search_games_main{margin-top: 20px; margin-bottom: 00px; float: left;}
 
 #quick_search_options{display:table; 
 	width:75%; 
@@ -1766,45 +1849,44 @@ Quick search games
 	text-align:left;		
 }
 
-.quick_search_games_button{  height: 25px;
-	  width: 80px;
-	  font-size: 10pt;
-	  display: block;
-	  margin-left: auto;
-	  margin-right: auto;
+.quick_search_games_button{  
 	  cursor: pointer;
-	  border: 0px;
-	  background: #00d3d3;
-	  font-family: Audiowide,Arial,helvetica,sans-serif;
+	  border: 0;
+	  background: white;
+	  font-family: AtariST,Arial,helvetica,sans-serif;
 	  color: #182727;
-	  border-bottom: 3px solid #008b8b;
-	  border-left: 1px solid #007878;
+	  border-bottom: 3px solid black;
 	  padding-top: 3px;
 	  text-decoration:none;
+	  text-shadow: -1px 1px 5px white, 1px -1px 15px #acacac;
+	  height: 25px;
+	  width: 80px;
+	  font-size: 10pt;
 }
-
-.quick_search_games_button:hover { color: white;}
 
 .quick_search_games_button:hover {
-  background: #00a9a9;
-  color: #182727;
+  background: black;
+  color: white;
   text-decoration:none;
-  border-bottom: 3px solid #006f6f;
 }
 
+
 #quick_search_pub_select{ 
+	background: #666666;
 	width: 185px;
-	margin-top: 0px;
+	margin-top: 0;
 	height: 25px;
 }
 
 #quick_search_dev_select{ 
+	background: #666666;
 	width: 185px;
-	margin-top: 0px;
+	margin-top: 0;
 	height: 25px;
 }
 
 #quick_search_small_select{ 
+	background: #666666;
 	width: 50px;
 	height: 25px;
 }
@@ -1833,14 +1915,14 @@ Quick search games
 /*---------------------------------------------------------- 
 User details
 ------------------------------------------------------------ */
-#leftnav_position_userdetails{ margin-top: 80px; margin-bottom: 30px; float: left;}
-#quick_search_games_position_userdetails{ margin-top: 80px; margin-bottom: 30px;}
-#user_details{ margin-top: 80px; margin-bottom: 30px; float: left;}
+#leftnav_position_userdetails{ margin-top: 20px; margin-bottom: 30px; float: left;}
+#quick_search_games_position_userdetails{margin-top: 20px; margin-bottom: 30px;}
+#user_details{ margin-top: 20px; margin-bottom: 30px; float: left;}
 #user_details_img_dark{ box-shadow: 0 0 12px black; margin-left:1%;}
 
 @media screen and (max-width: 480px) { 
-	#user_details{ margin-top: 20px;}	
-	#leftnav_position_userdetails{ margin-top: 0px;}
+#user_details{ margin-top: 20px;}	
+#leftnav_position_userdetails{ margin-top: 0;}
 }
 
 .user_details_container{
@@ -1879,25 +1961,20 @@ User details
 /*---------------------------------------------------------- 
 User statistics
 ------------------------------------------------------------ */
-#leftnav_position_userstatistics{ margin-top: 80px; margin-bottom: 30px; float: left;}
-#user_statistics{ margin-top: 80px; margin-bottom: 30px; float: left;}
+#leftnav_position_userstatistics{ margin-top: 20px; margin-bottom: 30px; float: left;}
+#user_statistics{ margin-top: 20px; margin-bottom: 30px; float: left;}
 
 @media screen and (max-width: 480px) { 
-	#leftnav_position_userstatistics{ margin-top: 0px;}
-}
-
-@media screen and (max-width: 1279px) { 
-	#leftnav_position_userstatistics{ margin-top: 20px;}
-	#user_statistics{ margin-top: 20px;}
+	#leftnav_position_userstatistics{ margin-top: 0;}
 }
 
 /*---------------------------------------------------------- 
 User main
 ------------------------------------------------------------ */
-#leftnav_position_usermain{ margin-top: 80px; margin-bottom: 30px; float: left;}
-#user_main{ margin-top: 80px; margin-bottom: 30px; float: left;}
-#main_stats_position_usermain{ margin-top: 0px; margin-bottom: 30px; float: left;}
-#quick_search_position_usermain {margin-top: 80px; margin-bottom: 30px;}
+#leftnav_position_usermain{ margin-top: 20px; margin-bottom: 30px; float: left;}
+#quick_search_position_usermain {margin-top: 20px; margin-bottom: 30px;}
+#user_main{ margin-top: 20px; margin-bottom: 30px; float: left;}
+#main_stats_position_usermain{ margin-top: 0; margin-bottom: 30px; float: left;}
 
 .user_main_container{
   display: -webkit-box;
@@ -1924,20 +2001,20 @@ User main
 	#user_main_child_3{margin-top:5px;}
 }
 
-
 /*---------------------------------------------------------- 
 User search
 ------------------------------------------------------------ */
-#leftnav_position_usersearch{ margin-top: 80px; margin-bottom: 30px; float: left;}
-#quick_search_games_position_usersearch{ margin-top: 80px; margin-bottom: 30px; }
-#usersearch{ margin-top: 80px; margin-bottom: 30px; float: left;}
+#leftnav_position_usersearch{ margin-top: 20px; margin-bottom: 30px; float: left;}
+#quick_search_games_position_usersearch{ margin-top: 20px; margin-bottom: 30px; }
+#usersearch{ margin-top: 20px; margin-bottom: 30px; float: left;}
+
 #usersearch th {text-align:left;}
 .username_th,.joindate_th,.lastvisit_th{width:25%;}
-.username_td,.joindate_td,.lastvisit_td{width:25%;color: white; font-size: 10pt; font-weight: 100; padding-left: 2px;}
+.username_td,.joindate_td,.lastvisit_td{width:25%;color: black; font-size: 12pt; font-weight: 100; padding-left: 2px;}
 .email_th{width:10%;}
-.email_td{width:10%;color: white; font-size: 10pt; font-weight: 100; padding-left: 2px;}
+.email_td{width:10%;color: black; font-size: 12pt;  font-weight: 100; padding-left: 2px;}
 .website_th{width:15%;}
-.website_td{width:15%;color: white; font-size: 10pt; font-weight: 100; padding-left: 2px;}
+.website_td{width:15%;color: black; font-size: 12pt; ; font-weight: 100; padding-left: 2px;}
 #user_search_main_tabel{border:0; width:100%; margin-top:3px; margin-bottom:3px;}
 
 @media screen and (max-width: 1279px) { 
@@ -1966,92 +2043,76 @@ User search
 }
 
 /*---------------------------------------------------------- 
-User Karma
+User karma
 ------------------------------------------------------------ */
-#leftnav_position_karma{ margin-top: 80px; margin-bottom: 30px; float: left;}
-#quick_search_games_position_karma{ margin-top: 80px; margin-bottom: 30px;}
-#karma{ margin-top: 80px; margin-bottom: 30px; float: left;}
+#leftnav_position_karma{ margin-top: 20px; margin-bottom: 30px; float: left;}
+#quick_search_games_position_karma{ margin-top: 20px; margin-bottom: 30px;}
+#karma{ margin-top: 20px; margin-bottom: 30px; float: left;}
 .karma_column{width:50%; text-align:center;}
-
-@media screen and (max-width: 1279px) { 
-	#leftnav_position_karma{ margin-top: 20px;}
-	#karma{margin-top: 20px;}
-}
 
 /*---------------------------------------------------------- 
 Did you know
 ------------------------------------------------------------ */
-#leftnav_position_didyouknow{ margin-top: 80px; margin-bottom: 30px; float: left;}
-#didyouknow{ margin-top: 80px; margin-bottom: 30px; float: left;}
-#quick_search_games_position_didyouknow{ margin-top: 80px; margin-bottom: 30px; float: left;}
-
-@media screen and (max-width: 1279px) { 
-	#leftnav_position_didyouknow{ margin-top: 20px;}
-	#didyouknow{margin-top: 20px;}
-}
+#leftnav_position_didyouknow{ margin-top: 20px; margin-bottom: 30px; float: left;}
+#quick_search_games_position_didyouknow{ margin-top: 20px; margin-bottom: 30px; float: left;}
+#didyouknow{ margin-top: 20px; margin-bottom: 30px; float: left;}
 
 /*---------------------------------------------------------- 
 Trivia Quotes
 ------------------------------------------------------------ */
-#leftnav_position_triviaquotes{ margin-top: 80px; margin-bottom: 30px; float: left;}
-#triviaquotes{ margin-top: 80px; margin-bottom: 30px; float: left;}
-#quick_search_games_position_triviaquotes{ margin-top: 80px; margin-bottom: 30px; float: left;}
-
-@media screen and (max-width: 1279px) { 
-	#leftnav_position_triviaquotes{ margin-top: 20px;}
-	#triviaquotes{margin-top: 20px;}
-}
+#leftnav_position_triviaquotes{ margin-top: 20px; margin-bottom: 30px; float: left;}
+#quick_search_games_position_triviaquotes{ margin-top: 20px; margin-bottom: 30px; float: left;}
+#triviaquotes{ margin-top: 20px; margin-bottom: 30px; float: left;}
 
 /*---------------------------------------------------------- 
 Links addnew
 ------------------------------------------------------------ */
-#leftnav_position_linkaddnew{ margin-top: 80px; margin-bottom: 30px; float: left;}
-#linkaddnew{ margin-top: 80px; margin-bottom: 30px; float: left;}
+#leftnav_position_linkaddnew{ margin-top: 20px; margin-bottom: 30px; float: left;}
+#linkaddnew{ margin-top: 20px; margin-bottom: 30px; float: left;}
 #linkvalidate{ margin-bottom: 30px; float: left;}
-#quick_search_games_position_linkaddnew{margin-top: 80px; margin-bottom: 30px;}
+#quick_search_games_position_linkaddnew{margin-top: 20px; margin-bottom: 30px;}
 
 @media screen and (max-width: 1279px) { 
 	#leftnav_position_linkaddnew{ margin-top: 20px;}
 	#linkaddnew{margin-top: 20px;}
 }
 
-.links_addnew_area { background : black;
+.links_addnew_area { background: #666666;
 				color: #ffffff;				
 				width: 90%;
 				height: 150px;
 				margin-top:0;
 				padding: 0;
 				padding-left: 5px;
-				border: 1px solid #008b8b;
+				border: 1px solid #b2b2b2;
 				text-align: left;
-				font-family: Audiowide;	
+				font-family: AtariST;	
 }
 
 .links_addnew_row select  { 
-	background-color: black;
-	border: 1px solid #008b8b;
+	background: #666666;
+	border: 1px solid #b2b2b2;
 	color: #ffffff;				
-	margin-top:5px;
+	margin-top:0;
 	padding: 0;
 	padding-left: 5px;
-	font-family: Audiowide;	
+	font-family: AtariST;	
 	width: 185px;
 	height: 25px;
-	margin-top: 0px;
 }
 
 .links_addnew_text{width:25%;display:table-cell; vertical-align:top;}
 .links_addnew_input{width:75%;display:table-cell;}
 .links_addnew_row{display:table;width:100%;}
 
-.links_addnew_info { font-size: 10pt; color: black; padding: 5px;}
+.links_addnew_info { font-size: 12pt; color: black; padding: 5px;}
 
-.links_addnew_link:link { text-decoration: none;	
-	color: white;
+.links_addnew_link:link { text-decoration: none;
+	color: #6a6a6a;
 }
 
 .links_addnew_link:visited { text-decoration: none;
-	color: white;
+	color: #6a6a6a;
 }
 
 .links_addnew_link:hover { text-decoration: none;
@@ -2059,29 +2120,28 @@ Links addnew
 }
 
 @media screen and (max-width: 480px) { 
-.links_addnew_text{width:100%;display:block;}
-.links_addnew_input{width:100%;display:block;}
-.links_addnew_row{width:100%;}
+.links_addnew_text{width:50%;display:inline;}
+.links_addnew_input{width:50%;display:inline;}
+.links_addnew_row{width:50%;}
 }
 
 /*---------------------------------------------------------- 
 Links Modify list
 ------------------------------------------------------------ */
-.links_modlist_tdline { font-size: 10pt; color: black; padding: 5px;}
+.links_modlist_tdline { font-size: 12pt; color: black; padding: 5px; border-bottom: solid 1px #b2b2b2;}
 
-.user_stats_img_dark{ 
-					box-shadow: 0 0 12px black;
+.user_stats_img_dark{ box-shadow: 0 0 12px black;
 					margin-left : 5px;
 					margin-right : 5px;
 					margin-top : 10px;
 					margin-bottom : 10px;
+					filter: alpha(opacity=40); /* For IE8 and earlier */
 					max-width: 100%;
-					opacity: 0.8;
-					filter: alpha(opacity=40); /* For IE8 and earlier */}
-					
-#leftnav_position_linkmodlist {margin-top: 80px; margin-bottom: 30px; float: left;}
-#quick_search_games_linkmodlist{margin-top: 80px; margin-bottom: 30px;}
-#linkmodlist{ margin-top: 80px; margin-bottom: 30px; float: left;}
+					opacity: 0.8;}
+										
+#leftnav_position_linkmodlist {margin-top: 20px; margin-bottom: 30px; float: left;}
+#quick_search_games_linkmodlist{margin-top: 20px; margin-bottom: 30px;}
+#linkmodlist{ margin-top: 20px; margin-bottom: 30px; float: left;}
 
 .links_list_text{margin-right:1%;}
 .links_list_input{margin-left:1%;}
@@ -2104,27 +2164,18 @@ Links Modify list
 	}
 }
 
-@media screen and (max-width: 1279px) { 
-	#leftnav_position_linkmodlist{ margin-top: 20px;}
-	#linkmodlist{margin-top: 20px;}
-}
-
 @media screen and (max-width: 480px) { 
 	.user_stats_img_dark{display : none;}
 }	
 
+
 /*---------------------------------------------------------- 
 Links category
 ------------------------------------------------------------ */
-#leftnav_position_linkcat{margin-top: 80px; margin-bottom: 30px; float: left;}
-#quick_search_games_position_linkcat{margin-top: 80px; margin-bottom: 30px;}
-#linkcat{ margin-top: 80px; margin-bottom: 30px; float: left;}
+#leftnav_position_linkcat{margin-top: 20px; margin-bottom: 30px; float: left;}
+#quick_search_games_position_linkcat{margin-top: 20px; margin-bottom: 30px;}
+#linkcat{ margin-top: 20px; margin-bottom: 30px; float: left;}
 .link_cat_td { text-align:right;}
-
-@media screen and (max-width: 1279px) { 
-	#leftnav_position_linkcat{ margin-top: 20px;}
-	#linkcat{margin-top: 20px;}
-}
 
 @media screen and (max-width: 500px) { 
 #linkcat_wide{ display: none;}
@@ -2137,14 +2188,9 @@ Links category
 /*---------------------------------------------------------- 
 Links Modify
 ------------------------------------------------------------ */					
-#leftnav_position_linkmod {margin-top: 80px; margin-bottom: 30px; float: left;}
-#quick_search_games_position_linkmod{margin-top: 80px; margin-bottom: 30px;}
-#link_mod{ margin-top: 80px; margin-bottom: 30px; float: left;}
-
-@media screen and (max-width: 1279px) { 
-	#leftnav_position_linkmod{ margin-top: 20px;}
-	#link_mod{margin-top: 20px;}
-}
+#leftnav_position_linkmod {margin-top: 20px; margin-bottom: 30px; float: left;}
+#link_mod{margin-top: 20px; margin-bottom: 30px; float: left;}
+#quick_search_games_position_linkmod{margin-top: 20px; margin-bottom: 30px;}
 
 .links_mod_text{width:35%;display:table-cell; vertical-align:top;}
 .links_mod_input{width:65%;display:table-cell;}
@@ -2160,17 +2206,13 @@ Links Modify
 #user_stats_img_dark{display : none;}
 }
 
+	
 /*---------------------------------------------------------- 
 Games main
 ------------------------------------------------------------ */			
-#quick_search_games_main{margin-top: 80px; margin-bottom: 30px; float: left;}
-#games_main{ margin-top: 80px; margin-bottom: 30px; float: left;}
-#leftnav_position_games_main{ margin-top: 80px; margin-bottom: 30px; float: left;}
-
-@media screen and (max-width: 1279px) { 
-	#leftnav_position_games_main{ margin-top: 20px;}
-	#games_main{margin-top: 20px;}
-}
+#quick_search_games_main{margin-top: 20px; margin-bottom: 30px; float: left;}
+#games_main{ margin-top: 20px; margin-bottom: 30px; float: left;}
+#leftnav_position_games_main{ margin-top: 20px; margin-bottom: 30px; float: left;}
 
 .games_main_text{width:25%;display:table-cell;font-weight:bold;}
 .games_main_input{width:75%;display:table-cell;}
@@ -2221,70 +2263,58 @@ Games main
 
 #games_main_pub_select{ 
 	width: 185px;
-	margin-top: 0px;
+	margin-top: 0;
 	height: 25px;
+	background: #666666;
 }
 
 #games_main_dev_select{ 
 	width: 185px;
-	margin-top: 0px;
+	margin-top: 0;
 	height: 25px;
+	background: #666666;
 }
 
 #games_main_small_select{ 
 	width: 50px;
 	height: 25px;
+	background: #666666;
 }
-
 
 /*---------------------------------------------------------- 
 Games list
 ------------------------------------------------------------ */	
-#games_list{margin-top: 80px; margin-bottom: 30px; float: left;}
-#quick_search_games_list{margin-top: 80px; margin-bottom: 00px; float: left;}
-#leftnav_position_games_list{margin-top: 80px; margin-bottom: 30px; float: left;}
-
-@media screen and (max-width: 1279px) { 
-	#quick_search_games_list{ margin-top: 20px;}
-	#games_list	{margin-top: 20px;}
-}
+#games_list{margin-top: 20px; margin-bottom: 30px; float: left;}
+#quick_search_games_list{margin-top: 20px; margin-bottom: 00px; float: left;}
+#leftnav_position_games_list{margin-top: 20px; margin-bottom: 30px; float: left;}
 
 #game_th{width:40%;text-align: left;}
 #pub_th,#dev_th{width:20%;text-align: left;}
 #year_th,#info_th{width:10%;text-align: left;}
 
-.game_td { color: white;
-		font-size: 10pt;
-		font-weight: 100;
-		text-align: left;
+.game_td {text-align: left;
 		text-decoration: none; 
 		padding-left: 2px;
 		width:40%;
 }
 
-.pub_td,.dev_td { color: white;
-		font-size: 10pt;
-		font-weight: 100;
-		text-align: left;
+.pub_td,.dev_td {text-align: left;
 		text-decoration: none; 
 		padding-left: 2px;
 		width:20%;
 }
 
-.info_td,.year_td { color: white;
-		font-size: 10pt;
-		font-weight: 100;
-		text-align: left;
+.info_td,.year_td {text-align: left;
 		text-decoration: none; 
 		padding-left: 2px;
 		width:10%;
 }
 
-@media screen and (max-width: 1210px) { 
+@media screen and (max-width: 1280px) { 
  .info_td,.year_td,#info_th,#year_th{display:none;}
 }
 
-@media screen and (max-width: 985px) { 
+@media screen and (max-width: 1040px) { 
  .dev_td,#dev_th{display:none;}
 }
 
@@ -2295,12 +2325,13 @@ Games list
 
 #game_list_table{width: 100%;}
 
+
 /*---------------------------------------------------------- 
 Games detail
 ------------------------------------------------------------ */	
-#games_detail{margin-top: 80px; margin-bottom: 30px; float: left;}
-#quick_search_games_detail{margin-top: 80px; margin-bottom: 00px; float: left;}
-#leftnav_position_games_detail{margin-top: 80px; margin-bottom: 30px; float: left;}
+#games_detail{margin-top: 20px; margin-bottom: 30px; float: left;}
+#quick_search_games_detail{margin-top: 20px; margin-bottom: 30px; float: left;}
+#leftnav_position_games_detail{margin-top: 20px; margin-bottom: 30px; float: left;}
 
 #gd_left{width: 32%; float:left;}
 #gd_center { width: 32%; float:left; margin-left: 2%;}
@@ -2320,18 +2351,21 @@ Games detail
 #gd_dev_small_select{ 
 	width: 50px;
 	height: 27px;
+	background: #666666;
 }
 #gd_pub_small_select{ 
 	width: 50px;
 	height: 27px;
+	background: #666666;
 }
-#gd_text_area_big {height: 250px;}
+#gd_text_area_big {height: 250px; background:#666666}
 
 #game_extra_info_pub,#continent_pub,#company_id_pub,#game_extra_info_dev,#continent_dev,
 #company_id_dev,#game_extra_info_year,#author_type_id,#ind_id{ 
 	width: 140px;
-	margin-top: 0px;
+	margin-top: 0;
 	height: 25px;
+	background: #666666;
 }	
 
 @media screen and (min-width: 1280px) {
@@ -2340,9 +2374,6 @@ Games detail
 }
 
 @media screen and (max-width: 1279px) { 
-	#games_detail{margin-top: 20px;}
-	#quick_search_games_detail{margin-top: 20px;}
-	#leftnav_position_games_detail{margin-top: 20px;}
 	#gd_basic_game_info{width:100%; margin-bottom: 20px;}
 	#gd_other_features{display:none}
 	#gd_other_features_left{float:left; width:49%;}
@@ -2362,21 +2393,15 @@ Games detail
 	#gd_left{float:left; width:100%;}
 	#gd_right{float:right; width:100%;}
 	#gd_center{float:right; width:100%;}
-	#gd_publisher_info{margin-top:0px;}
+	#gd_publisher_info{margin-top:0;}
 }
 
 /*---------------------------------------------------------- 
 Games comment
 ------------------------------------------------------------ */	
-#quick_search_games_comment{margin-top: 80px; margin-bottom: 30px; float: left;}
-#leftnav_position_games_comment{margin-top: 80px; margin-bottom: 30px; float: left;}
-#games_comment{margin-top: 80px; margin-bottom: 30px; float: left;}
-
-@media screen and (max-width: 1279px) { 
-	#leftnav_position_games_comment{margin-top: 20px;}
-	#quick_search_games_comment{margin-top: 20px;}
-	#games_comment{margin-top: 20px;}
-}
+#quick_search_games_comment{margin-top: 20px; margin-bottom: 30px; float: left;}
+#leftnav_position_games_comment{margin-top: 20px; margin-bottom: 30px; float: left;}
+#games_comment{margin-top: 20px; margin-bottom: 30px; float: left;}
 
 @media screen and (max-width: 640px) { 
 	.gc_left_head{display:none;}
@@ -2385,8 +2410,8 @@ Games comment
 
 .gc_table_list {
 	width: 100%;
-	border: solid 1px black; 
-	background-color:#00d3d3;
+	border: solid 1px #b2b2b2; 
+	background-color:#f3f3f3;
 	margin-left:auto;
 	margin-right:auto;
 	border-spacing: 0;
@@ -2394,42 +2419,36 @@ Games comment
 }
 
 .gc_table_list tr:nth-child(even){
-	background-color:#00d3d3;
+	background-color:#f3f3f3;
 }
 
 .gc_table_list tr:nth-child(odd){
-	background-color:#006f6f;
+	background-color:#EFEFEF;
 }
 
 .gc_table_list td {
 	border-bottom: solid 1px black;
 	padding: 5px;
-	margin:0px;
+	margin:0;
 }
 
-.gc_left_head{width:20%;font-size: 10pt;}
-.gc_center_head{width:80%;font-size: 10pt;}
+.gc_left_head{width:20%;font-size: 12pt;}
+.gc_center_head{width:80%;font-size: 12pt;}
 
-.gc_left{width:20%;font-size: 10pt;}
-.gc_center{width:80%;font-size: 10pt;}
+.gc_left{width:20%;font-size: 12pt;}
+.gc_center{width:80%;font-size: 12pt;}
 
 /*---------------------------------------------------------- 
 Games comment edit
 ------------------------------------------------------------ */	
-#quick_search_games_comment_edit{margin-top: 80px; margin-bottom: 00px; float: left;}
-#leftnav_position_games_comment_edit{margin-top: 80px; margin-bottom: 30px; float: left;}
-#games_comment_edit{margin-top: 80px; margin-bottom: 30px; float: left;}
+#quick_search_games_comment_edit{margin-top: 20px; margin-bottom: 00px; float: left;}
+#leftnav_position_games_comment_edit{margin-top: 20px; margin-bottom: 30px; float: left;}
+#games_comment_edit{margin-top: 20px; margin-bottom: 30px; float: left;}
 
-@media screen and (max-width: 1279px) { 
-	#leftnav_position_games_comment_edit{margin-top: 20px;}
-	#quick_search_games_comment_edit{margin-top: 20px;}
-	#games_comment_edit{margin-top: 20px;}
-}
-
-#gce_button,#gce_button2{display:inline;}
+#gce_button,#gce_button2{display:inline; float:right; margin-bottom:20px; margin-left:5px;}
 
 #gce_area { width: 100%;}
-
+			
 /*---------------------------------------------------------- 
  resolutions tested!
 ------------------------------------------------------------ */
@@ -2449,4 +2468,4 @@ Games comment edit
 /* @media screen and (min-width: 1025px) { 
 
 /* hi-res laptops and desktops */
-/* @media screen and (min-width: 1281px) {  */
+/* @media screen and (min-width: 1281px) { */ 
