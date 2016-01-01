@@ -220,7 +220,7 @@
 			font-family: robot, arial;
 		}
 	}
-	@else
+	@else if $skin-name == tos
 	{
 		#search_side { width: 30px; height: 27px; border-bottom: 3px solid black;}
 	
@@ -248,7 +248,11 @@
 	{ 
 		#skin_side, #games_side,#menus_side,#demos_side,#links_side,#about_side,#music_side,#forum_main_side,#magazines_side{width:188px; border-bottom: 3px solid black;}
 	}
-	@else
+	@else if $skin-name == picasso
+	{
+		#skin_side, #games_side,#menus_side,#demos_side,#links_side,#about_side,#music_side,#forum_main_side,#magazines_side{width:170px;}
+	}
+	@else if $skin-name == legacy
 	{
 		#skin_side, #games_side,#menus_side,#demos_side,#links_side,#about_side,#music_side,#forum_main_side,#magazines_side{width:170px;}
 	}
