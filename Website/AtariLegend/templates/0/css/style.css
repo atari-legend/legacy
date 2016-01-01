@@ -5,8 +5,11 @@
 /********************PART I : MAIN SITE***********************/
 /* load the main site font */
 @font-face {
-  font-family: AtariST;
-  src: url(../font/AtariST.ttf); }
+  font-family: 'AtariST';
+  src: url("../font/AtariST.eot");
+  src: url("../font/AtariST.eot?#iefix") format("embedded-opentype"), url("../font/AtariST.woff2") format("woff2"), url("../font/AtariST.woff") format("woff"), url("../font/AtariST.ttf") format("truetype"), url("../font/AtariST.svg#AtariST") format("svg");
+  font-weight: normal;
+  font-style: normal; }
 * {
   margin: 0;
   padding: 0; }
