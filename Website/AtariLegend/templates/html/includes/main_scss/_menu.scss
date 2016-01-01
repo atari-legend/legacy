@@ -268,7 +268,7 @@
 	}
 	 
 	.skin-menu li {
-		margin:0px;
+		margin:0;
 		list-style:none;
 	}
 	 
@@ -343,7 +343,7 @@
 			border: 1px solid black;
 		}
 	}
-	@else
+	@else if $skin-name == tos
 	{
 		.sub-menu li a {
 			color: black;
@@ -391,7 +391,7 @@
 			}
 		}
 	}
-	@else
+	@else if $skin-name == tos
 	{
 		#games_side, #menus_side, #demos_side, #about_side, #links_side , #skin_side, #forum_main_side, #magazines_side, #music_side{
 			height: 32px; 

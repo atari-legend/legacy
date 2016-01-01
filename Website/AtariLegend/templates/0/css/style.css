@@ -418,7 +418,7 @@ body, html {
   margin: 0px auto; }
 
 .skin-menu li {
-  margin: 0px;
+  margin: 0;
   list-style: none; }
 
 .skin-menu a {
@@ -595,28 +595,29 @@ header nav input {
   float: left;
   cursor: pointer;
   border: 0;
-  background: white;
+  background-color: white;
   font-family: AtariST,Arial,helvetica,sans-serif;
-  color: #182727;
+  color: black;
   height: 30px;
   width: 194.6px;
   font-size: 20px;
-  padding-top: 3px;
   text-decoration: none;
-  text-shadow: -1px 1px 5px white, 1px -1px 15px #acacac; }
+  text-shadow: -1px 1px 5px white, 1px -1px 15px #acacac;
+  text-align: center;
+  line-height: 30px;
+  vertical-align: bottom; }
 
 .topbutton:hover {
-  background: black;
+  background-color: black;
   color: white;
   text-decoration: none; }
 
 .topbutton:visited {
-  text-decoration: none;
-  color: #182727; }
+  text-decoration: none; }
 
 .topbutton:link {
   text-decoration: none;
-  color: #182727; }
+  color: white; }
 
 .searchbutton {
   display: block;
