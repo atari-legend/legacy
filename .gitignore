@@ -9,3 +9,13 @@ Website/AtariLegend/php/includes/smarty/templates_c/*
 $ cat .gitignore 
 # exclude the connect.php file
 Website/AtariLegend/php/includes/connect.php
+
+$ cat .gitignore 
+# exclude the SASS cache
+Website/AtariLegend/templates/.sass-cache/*
+
+$ cat .gitignore 
+# exclude the SASS map file
+Website/AtariLegend/templates/0/css/*.map
+Website/AtariLegend/templates/1/css/*.map
+Website/AtariLegend/templates/2/css/*.map
