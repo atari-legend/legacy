@@ -261,6 +261,8 @@ footer, header, hgroup, menu, nav, section {
 /* the side menu for smartphones, tablets and old (laptop) screens */
 /* it is also used for the high res monitors, but then only the skin switch will be visible and */
 /* in certain resolutions the quick search field */
+/* This file contains the complete build code as well as the positioning of the side menu for all */
+/* resolutions - see the code at the bottom of the file */
 body, html {
   height: 100%;
   margin: 0; }
@@ -277,22 +279,28 @@ body, html {
   -o-transition: left 0.4s ease-in-out;
   transition: left 0.4s ease-in-out; }
 
+/* for the TOS skin, we want to side button to be lower not to interfere with the main menu */
 @media screen and (min-width: 1280px) and (max-width: 2304px) {
   .container {
     margin-top: 33px; } }
+/* this is the width of the side menu when it is pushed open */
 .container.open-sidebar {
   left: 189px; }
 
+/* the position of the side buttons when pushed open */
+#sidebar {
+  left: -191px;
+  width: 191px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box; }
+
+/* the side bar button options */
 #sidebar {
   z-index: 1;
   position: absolute;
-  left: -191px;
   background: black;
-  width: 191px;
   height: 100%;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -ms-box-sizing: border-box;
   box-sizing: border-box; }
 
 #sidebar ul {
@@ -300,10 +308,14 @@ body, html {
   padding: 0;
   list-style: none; }
 
+/* placement of the side menu buttons */
 #sidebar ul li {
-  margin: 0;
+  margin: 0px; }
+
+#sidebar ul li {
   background: white; }
 
+/* side menu button effect */
 #sidebar ul li a {
   padding: 0;
   display: block;
@@ -317,41 +329,40 @@ body, html {
   width: 100%;
   height: 100%;
   padding: 1px;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -ms-box-sizing: border-box;
-  box-sizing: border-box;
-  position: absolute; }
-
-.main-content .content {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -ms-box-sizing: border-box;
-  box-sizing: border-box;
-  padding-left: 60px;
-  width: 100%; }
-
-.main-content #sidebar-toggle {
-  background: white;
-  display: block;
   position: absolute;
-  padding: 10px 7px;
-  float: left; }
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -ms-box-sizing: border-box; }
+  .main-content .content {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+    padding-left: 60px;
+    width: 100%; }
+  .main-content #sidebar-toggle {
+    display: block;
+    position: absolute;
+    padding: 10px 7px;
+    float: left;
+    background: white; }
+    .main-content #sidebar-toggle .bar {
+      display: block;
+      width: 18px;
+      margin-bottom: 3px;
+      height: 2px; }
+  .main-content .content p {
+    width: 100%;
+    line-height: 160%; }
 
 .main-content #sidebar-toggle .bar {
-  display: block;
-  width: 18px;
-  margin-bottom: 3px;
-  height: 2px;
   background-color: black; }
-
-.main-content .content p {
-  width: 100%;
-  line-height: 160%; }
 
 .main-content #sidebar-toggle .bar:last-child {
   margin-bottom: 0; }
 
+/* search field and button code - this is very skin specific */
 #search_ul {
   width: 100%; }
 
@@ -382,7 +393,6 @@ body, html {
   text-align: center;
   font-family: AtariST; }
 
-/*-----some code for the skin submenu-------*/
 #skin_side, #games_side, #menus_side, #demos_side, #links_side, #about_side, #music_side, #forum_main_side, #magazines_side {
   width: 188px;
   border-bottom: 3px solid black; }
@@ -391,13 +401,6 @@ body, html {
   display: block;
   clear: both; }
 
-/*----- Menu Outline -----*/
-.skin-wrap {
-  width: 100%; }
-
-@media screen and (max-width: 1919px) {
-  .skin-wrap {
-    margin-top: 30px; } }
 .skin-menu {
   width: 100%;
   margin: 0px auto; }
@@ -410,14 +413,14 @@ body, html {
   transition: all linear 0.15s;
   color: #000000; }
 
-/*----- Top Level -----*/
+/*  Top Level */
 .skin-menu > ul > li {
   float: left;
   display: inline-block;
   position: relative;
   font-size: 19px; }
 
-/*----- Bottom Level -----*/
+/* Bottom Level - This is the skin switching part */
 .skin-menu li:hover .sub-menu {
   z-index: 1;
   opacity: 1; }
@@ -445,8 +448,10 @@ body, html {
   display: block;
   text-decoration: none;
   font-weight: normal;
-  color: black;
   background: white; }
+
+.sub-menu li a {
+  color: black; }
 
 .sub-menu li a:hover, .sub-menu .current-item a {
   background: black;

@@ -5,7 +5,9 @@
 /* ---------the side menu--------*/
 /* the side menu for smartphones, tablets and old (laptop) screens */
 /* it is also used for the high res monitors, but then only the skin switch will be visible and */
-/* in certain resolutions the quick search field */
+/* in certain resolutions the quick search field */	
+/* This file contains the complete build code as well as the positioning of the side menu for all */
+/* resolutions - see the code at the bottom of the file */
 
 	body, html {
         height: 100%;
@@ -27,60 +29,64 @@
 	
 	@if $skin-name == tos
 	{
+		/* for the TOS skin, we want to side button to be lower not to interfere with the main menu */
 		@media screen and (min-width: 1280px) and (max-width: 2304px){  
 			.container { margin-top: 33px; }
 		}
 		
+		/* this is the width of the side menu when it is pushed open */
 		 .container.open-sidebar {
 			left: 189px;
 		}
 		
+		/* the position of the side buttons when pushed open */
 		#sidebar {
-			z-index:1;
-			position: absolute;
 			left: -191px;	
-			background: black;
 			width: 191px;
-			height: 100%;
 			-webkit-box-sizing: border-box;
 			-moz-box-sizing: border-box;
 			-ms-box-sizing: border-box;
-			box-sizing: border-box;
 		}
 	}
 	@else
-	{ 	.container.open-sidebar {
+	{ 	
+		/* this is the width of the side menu when it is pushed open */
+		.container.open-sidebar {
 			left: 170px;
 		}
 		
+		/* the position of the side buttons when pushed open */
 		 #sidebar {
-			z-index:1;
-			position: absolute;
 			left: -172px;
-			background: black;
 			width: 170px;
-			height: 100%;
-			box-sizing: border-box;
 		}
 	}
-       
+	
+	/* the side bar button options */
+	#sidebar{
+		z-index:1;
+		position: absolute;
+		background: black;
+		height: 100%;
+		box-sizing: border-box;
+	}
  
+	
     #sidebar ul {
         margin: 0;
         padding: 0;
         list-style: none;
     }
 	
+	/* placement of the side menu buttons */
+	#sidebar ul li {margin: 0px;}
+	
 	@if ($skin-name == legacy) or ($skin-name == tos)
 	{
-		#sidebar ul li { margin: 0;
-				background:$bg-color;}
-	}
-	@else
-	{
-		#sidebar ul li { margin: 0; }
+		#sidebar ul li {background:$bg-color;}
 	}
 	
+	/* side menu button effect */
     #sidebar ul li a {
         padding: 0;
         display: block;
@@ -93,23 +99,19 @@
 	
 	@if $skin-name == legacy 
 	{
-		#sidebar ul li a img:hover { opacity:0.5;}
+		#sidebar ul li a img:hover {opacity:0.5;}
 	}
 	
-	@if $skin-name == tos
-	{
-		.main-content {
-			width: 100%;
-			height: 100%;
-			padding: 1px;
-			-webkit-box-sizing: border-box;
-			-moz-box-sizing: border-box;
-			-ms-box-sizing: border-box;
-			box-sizing: border-box;
-			position: absolute;
-		}
-		
-		.main-content .content{
+	.main-content {
+		width: 100%;
+		height: 100%;
+		padding: 1px;
+		position: absolute;
+		box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		-webkit-box-sizing: border-box;
+		-ms-box-sizing: border-box;
+		.content{
 			-webkit-box-sizing: border-box;
 			-moz-box-sizing: border-box;
 			-ms-box-sizing: border-box;
@@ -117,69 +119,47 @@
 			padding-left: 60px;
 			width: 100%;	
 		}
-		
-		.main-content #sidebar-toggle {
-			background: white;
+		#sidebar-toggle {
 			display: block;
 			position: absolute;
 			padding: 10px 7px;
 			float: left;
+			background: $bg-color;
+			.bar{
+				display: block;
+				width: 18px;
+				margin-bottom: 3px;
+				height: 2px;
+			}
 		}
-		
+		.content p{
+			width: 100%;
+			line-height: 160%;
+		}
+	}
+	
+	@if $skin-name == tos
+	{	
 		.main-content #sidebar-toggle .bar{
-			display: block;
-			width: 18px;
-			margin-bottom: 3px;
-			height: 2px;
 			background-color: black;  
 		}
 	}
 	@else
 	{
-		.main-content {
-			width: 100%;
-			height: 100%;
-			padding: 1px;
-			box-sizing: border-box;
-			-moz-box-sizing: border-box;
-			position: absolute;
-		}
-		
-		.main-content .content{
-			box-sizing: border-box;
-			-moz-box-sizing: border-box;
-			padding-left: 60px;
-			width: 100%;
-		}
-		
 		.main-content #sidebar-toggle {
-			background: $bg-color;
 			border-radius: 3px;
-			display: block;
-			position: absolute;
-			padding: 10px 7px;
-			float: left;
 		}
-		
 		.main-content #sidebar-toggle .bar{
-			display: block;
-			width: 18px;
-			margin-bottom: 3px;
-			height: 2px;
 			background-color: #fff;
 			border-radius: 1px;   
 		}
 	}
 	
-    .main-content .content p{
-        width: 100%;
-        line-height: 160%;
-    }
-	
     .main-content #sidebar-toggle .bar:last-child{
          margin-bottom: 0;   
     }
 	
+	/* search field and button code - this is very skin specific */
 	#search_ul{ width: 100%; }
 	
 	#search_ul li { display: inline; float: left; }
@@ -263,7 +243,6 @@
 		}
 	}
 	
-/*-----some code for the skin submenu-------*/
 	@if $skin-name == tos
 	{ 
 		#skin_side, #games_side,#menus_side,#demos_side,#links_side,#about_side,#music_side,#forum_main_side,#magazines_side{width:188px; border-bottom: 3px solid black;}
@@ -278,26 +257,6 @@
 		clear:both;
 	}
 
-	/*----- Menu Outline -----*/
-	.skin-wrap {
-		width:100%;	
-	}
-	
-	@media screen and (max-width: 1919px) { 
-		@if $skin-name == "legacy" 
-		{
-			.skin-wrap {
-				margin-top:41px;
-			}
-		}
-		@else
-		{
-			.skin-wrap {
-				margin-top:30px;
-			}
-		}
-	}
-	 
 	.skin-menu {
 		width:100%;
 		margin:0px auto;
@@ -314,7 +273,7 @@
 	}
 	 
 	 
-	/*----- Top Level -----*/
+	/*  Top Level */
 	.skin-menu > ul > li {
 		float:left;
 		display:inline-block;
@@ -322,7 +281,7 @@
 		font-size:19px;
 	}
 	 
-	/*----- Bottom Level -----*/
+	/* Bottom Level - This is the skin switching part */
 	.skin-menu li:hover .sub-menu {
 		z-index:1;
 		opacity:1;
@@ -348,15 +307,18 @@
 		border-top-color: #000000;
 		border-top-width: 1px;
 	}
+	
+	.sub-menu li a {
+		display:block;
+		text-decoration: none;
+		font-weight: normal;
+		background : $bg-color;
+	}
 	 
 	@if $skin-name == legacy 
 	{
 		.sub-menu li a {
-			display:block;
-			text-decoration: none;
-			font-weight: normal;
 			color: #182727;
-			background : $bg-color;
 		}
 		 
 		.sub-menu li a:hover, .sub-menu .current-item a {
@@ -367,14 +329,10 @@
 	@else if $skin-name == picasso
 	{
 		.sub-menu li a {
-			display:block;
-			text-decoration: none;
-			font-weight: normal;
 			color: white;
-			background : $bg-color;
 		}
 	 
-	.sub-menu li a:hover, .sub-menu .current-item a {
+		.sub-menu li a:hover, .sub-menu .current-item a {
 			background:#dbd7d1;
 			color:black;
 			border: 1px solid black;
@@ -383,16 +341,11 @@
 	@else
 	{
 		.sub-menu li a {
-			display:block;
-			text-decoration: none;
-			font-weight: normal;
 			color: black;
-			background : white;
 		}
-	 
-	.sub-menu li a:hover, .sub-menu .current-item a {
-		background:black;
-		color:white;
+		.sub-menu li a:hover, .sub-menu .current-item a {
+			background:black;
+			color:white;
 		}
 	}
 	
@@ -406,15 +359,11 @@
 @media screen and (max-width: 640px) { 
 	@if ($skin-name == legacy) or ($skin-name == picasso)
 	{
-		#games_side{height: 40px; width: 113px; font-size: 14px;}
-		#menus_side{height: 40px; width: 113px; font-size: 14px;}
-		#demos_side{height: 40px; width: 113px; font-size: 14px;}
-		#forum_main_side{height: 40px; width: 113px; font-size: 14px;}
-		#magazines_side{height: 40px; width: 113px; font-size: 14px;}
-		#music_side{height: 40px; width: 113px; font-size: 14px;}
-		#about_side{height: 40px; width: 113px; font-size: 14px;}
-		#links_side{height: 40px; width: 113px; font-size: 14px;}
-		#skin_side{height: 37px; width: 113px; font-size: 14px;}
+		#games_side, #menus_side, #demos_side, #about_side, #links_side , #skin_side, #forum_main_side, #magazines_side, #music_side{
+			height: 40px; 
+			width: 113px; 
+			font-size: 14px;
+		}
 		.sub-menu li { font-size:13px; }
 		@if $skin-name == legacy 
 		{
