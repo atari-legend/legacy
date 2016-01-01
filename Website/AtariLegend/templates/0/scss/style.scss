@@ -12,7 +12,7 @@ $bg-color: white;
 
 /* load the main site font */
 @font-face {
-    font-family: 'AtariST';
+    font-family: AtariST;
     src: url('../font/AtariST.eot');
     src: url('../font/AtariST.eot?#iefix') format('embedded-opentype'),
          url('../font/AtariST.woff2') format('woff2'),
@@ -235,6 +235,10 @@ footer, header, hgroup, menu, nav, section {
 			border-bottom-color: black;
 			border-style: solid;
 			box-shadow: 3px 3px 5px #888888;
+			background: -webkit-gradient(linear, black, #23f001); /* Chrome,Safari4+ */
+			filter:progid:DXImageTransform.Microsoft.gradient(GradientType=1, startColorstr=#000000, endColorstr=#23f001);  /* For IE 5.5 - 7*/
+			-ms-filter: "progid:DXImageTransform.Microsoft.gradient(GradientType=1, startColorstr=#000000, endColorstr=#23f001)";  /* For IE 8*/ 
+			background: -ms-linear-gradient(black, #23f001); /* IE10+ */
 		    background: -webkit-linear-gradient(black, #23f001); /* For Safari 5.1 to 6.0 */
 			background: -o-linear-gradient(black, #23f001); /* For Opera 11.1 to 12.0 */
 			background: -moz-linear-gradient(black, #23f001); /* For Firefox 3.6 to 15 */
@@ -512,10 +516,14 @@ Standard tile settings
 
 .standard_tile  { width: 100%; 
 		border: 2px solid black;
+		background: -webkit-gradient(linear, white, #23f001); /* Chrome,Safari4+ */
 		background: -webkit-linear-gradient(left, white , #23f001); /* For Safari 5.1 to 6.0 */
 	    background: -o-linear-gradient(right, white, #23f001); /* For Opera 11.1 to 12.0 */
+	    background: -ms-linear-gradient(right, white, #23f001); /* For IE10+ */
 	    background: -moz-linear-gradient(right, white, #23f001); /* For Firefox 3.6 to 15 */
 	    background: linear-gradient(to right, white, #23f001); /* Standard syntax */
+	    filter:progid:DXImageTransform.Microsoft.gradient(GradientType=1, startColorstr=#ffffff, endColorstr=#23f001);  /* For IE 5.5 - 7*/
+		-ms-filter: "progid:DXImageTransform.Microsoft.gradient(GradientType=1, startColorstr=#ffffff, endColorstr=#23f001)";  /* For IE 8*/ 
 		box-shadow: 3px 3px 5px #888888;
 	}
 
@@ -550,8 +558,6 @@ Standard tile settings
 .standard_tile_title{	
 		background: rgb(172, 172, 172) transparent;   /* Fallback for web browsers that doesn't support RGBa */
         background: rgba(172, 172, 172, 0.7);   /* RGBa with 0.6 opacity */
-		filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#42d403, endColorstr=#42d403);  /* For IE 5.5 - 7*/
-		-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#42d403, endColorstr=#42d403)";  /* For IE 8*/ 
 		padding-top:3%;
 		font-size : 17pt;
 		margin-top : 48.5%;
@@ -820,6 +826,10 @@ a.standard_tile_link:hover, a.standard_tile_link:focus
 		width: 100%;
 		height: 140px;
 		display: table;
+		background: -webkit-gradient(linear, white, #23f001); /* Chrome,Safari4+ */
+		filter:progid:DXImageTransform.Microsoft.gradient(GradientType=1, startColorstr=#ffffff, endColorstr=#23f001);  /* For IE 5.5 - 7*/
+		-ms-filter: "progid:DXImageTransform.Microsoft.gradient(GradientType=1, startColorstr=#ffffff, endColorstr=#23f001)";  /* For IE 8*/ 
+		background: -ms-linear-gradient(black, #23f001); /* IE10+ */
 		background: -webkit-linear-gradient(left, white, #23f001); /* For Safari 5.1 to 6.0 */
 		background: -o-linear-gradient(right, white, #23f001); /* For Opera 11.1 to 12.0 */
 		background: -moz-linear-gradient(right, white, #23f001); /* For Firefox 3.6 to 15 */
@@ -830,6 +840,10 @@ a.standard_tile_link:hover, a.standard_tile_link:focus
 		width: 100%;
 		height: 140px;
 		display: table;
+		background: -webkit-gradient(linear, white, #acacac); /* Chrome,Safari4+ */
+		filter:progid:DXImageTransform.Microsoft.gradient(GradientType=1, startColorstr=#ffffff, endColorstr=#acacac);  /* For IE 5.5 - 7*/
+		-ms-filter: "progid:DXImageTransform.Microsoft.gradient(GradientType=1, startColorstr=#ffffff, endColorstr=#acacac)";  /* For IE 8*/ 
+		background: -ms-linear-gradient(black, #acacac); /* IE10+ */
 		background: -webkit-linear-gradient(left, white, #acacac); /* For Safari 5.1 to 6.0 */
 		background: -o-linear-gradient(right, white, #acacac); /* For Opera 11.1 to 12.0 */
 		background: -moz-linear-gradient(right, white, #acacac); /* For Firefox 3.6 to 15 */
@@ -951,10 +965,9 @@ a.standard_tile_link:hover, a.standard_tile_link:focus
 		overflow: hidden;
 }
 
-#welcome p { background: rgb(172, 172, 172) transparent;   /* Fallback for web browsers that doesn't support RGBa */
+#welcome p { 
+		background: rgb(172, 172, 172) transparent;   /* Fallback for web browsers that doesn't support RGBa */
         background: rgba(172, 172, 172, 0.8);   /* RGBa with 0.6 opacity */
-		filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#005050, endColorstr=#005050);  /* For IE 5.5 - 7*/
-		-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#005050, endColorstr=#005050)";  /* For IE 8*/
 		text-align: center;
 		border-right: 2px solid #6a6a6a;
 		padding-left: 5%;
@@ -1119,10 +1132,9 @@ datequote tile - front page
 		margin-top: -10px;
 	}
 
-.datequote_text { background: rgb(172, 172, 172) transparent;   /* Fallback for web browsers that doesn't support RGBa */
+.datequote_text { 
+		background: rgb(172, 172, 172) transparent;   /* Fallback for web browsers that doesn't support RGBa */
         background: rgba(172, 172, 172, 0.7);   /* RGBa with 0.6 opacity */
-		filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#42d403, endColorstr=#42d403);  /* For IE 5.5 - 7*/
-		-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#42d403, endColorstr=#42d403)";  /* For IE 8*/ 
 		color: white; 
 		padding-top: 10px;
 		padding-bottom: 10px;
