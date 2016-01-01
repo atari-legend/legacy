@@ -481,37 +481,7 @@ body, html {
     width: 113px; } }
 /* for the lower resolutions, we don't have the menu bar below the top */
 @media screen and (max-width: 1279px) {
-  #home {
-    display: none; }
-
-  #search {
-    display: none; }
-
-  #search_text {
-    display: none; }
-
-  #games {
-    display: none; }
-
-  #demos {
-    display: none; }
-
-  #about {
-    display: none; }
-
-  #menus {
-    display: none; }
-
-  #links {
-    display: none; }
-
-  #forum_top {
-    display: none; }
-
-  #magazines {
-    display: none; }
-
-  #music {
+  #main_nav {
     display: none; } }
 /* for the high resolutions, we only have the skin switch in the side menu */
 @media screen and (min-width: 1280px) {
