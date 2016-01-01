@@ -401,7 +401,7 @@ body, html {
   margin: 0px auto; }
 
 .skin-menu li {
-  margin: 0px;
+  margin: 0;
   list-style: none; }
 
 .skin-menu a {
