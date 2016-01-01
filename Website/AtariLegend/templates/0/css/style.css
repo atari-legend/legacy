@@ -296,7 +296,8 @@ body, html {
   width: 191px;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
-  -ms-box-sizing: border-box; }
+  -ms-box-sizing: border-box;
+  box-sizing: border-box; }
 
 /* the side bar button options */
 #sidebar {
@@ -313,7 +314,7 @@ body, html {
 
 /* placement of the side menu buttons */
 #sidebar ul li {
-  margin: 0px; }
+  margin: 0; }
 
 #sidebar ul li {
   background: white; }
@@ -333,10 +334,10 @@ body, html {
   height: 100%;
   padding: 1px;
   position: absolute;
-  box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
-  -ms-box-sizing: border-box; }
+  -ms-box-sizing: border-box;
+  box-sizing: border-box; }
   .main-content .content {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;

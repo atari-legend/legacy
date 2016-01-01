@@ -301,7 +301,7 @@ body, html {
 
 /* placement of the side menu buttons */
 #sidebar ul li {
-  margin: 0px; }
+  margin: 0; }
 
 /* side menu button effect */
 #sidebar ul li a {
@@ -318,10 +318,10 @@ body, html {
   height: 100%;
   padding: 1px;
   position: absolute;
-  box-sizing: border-box;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
-  -ms-box-sizing: border-box; }
+  -ms-box-sizing: border-box;
+  box-sizing: border-box; }
   .main-content .content {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -376,7 +376,7 @@ body, html {
   width: 119px;
   border-bottom: 2px solid #161c71;
   border-left: 4px solid black;
-  padding-top: 0px; }
+  padding-top: 0; }
 
 #search_text_side {
   color: #ffffff;
