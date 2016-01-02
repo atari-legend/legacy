@@ -367,6 +367,35 @@ border:2px solid black;
   color: #182727;
 }
 
+.sidebutton
+{
+  cursor: pointer;
+	border:2px solid black;
+	line-height: 30px;
+	width: 205px;
+	background: #161c71;
+	font-family: robot, arial, sans-serif;
+	color:white;
+	font-size:19px;
+	font-weight: bold;
+	/*text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #fff;*/
+	/*give the corners a small curve*/ 
+	-webkit-border-radius: 0 15px 15px 0;
+	-moz-border-radius: 0 15px 15px 0;
+	border-radius: 0 15px 15px 0;
+	margin-left: 2px;
+	text-decoration:none;
+	  text-align:center;
+  line-height:30px;
+}
+
+.sidebutton:hover {
+  background: #dbd7d1;
+  color: black;
+  text-decoration:none;
+  border:2px solid #4f4f4f;
+}
+
 .searchbutton
 { 
 	display: block;
