@@ -385,7 +385,8 @@
 	}
 	@else if $skin-name == tos
 	{
-		#games_side, #menus_side, #demos_side, #about_side, #links_side , #skin_side, #forum_main_side, #magazines_side, #music_side{
+		#games_side, #menus_side, #demos_side, #about_side, #links_side , #skin_side, #forum_main_side, #magazines_side, #music_side {
+			
 			height: 32px; 
 			width: 113px; 
 			font-size: 14px;
