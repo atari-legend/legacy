@@ -293,16 +293,17 @@ header nav input{
   display: block;
   float:left;
   cursor: pointer;
-  border: 0px;
-  background: #00d3d3;
+  border: 0;
+  background-color: #00d3d3;
   font-family: Audiowide,Arial,helvetica,sans-serif;
   color: #182727;
-  height: 60px;
+  height: 57px;
+  line-height: 57px;
   width: 184px;
   font-size: 20px;
   border-bottom: 3px solid #008b8b;
   border-left: 1px solid #007878;
-  padding-top: 3px;
+  padding-top: 0px;
   text-decoration:none;
 }
 
