@@ -804,7 +804,7 @@ body, html {
 .sub-menu li a {
   color: white; }
 
-.sub-menu li a:hover, .sub-menu .current-item a {
+.sub-menu li a:hover {
   background: #dbd7d1;
   color: black;
   border: 1px solid black; }
@@ -849,15 +849,14 @@ body, html {
 @media screen and (max-width: 1279px) {
   #main_nav {
     display: none; } }
+/* for resolutions between 1280 and 1920 the search goes to the side menu */
+/* some re-placement of the skin button is needed here */
 /* for the high resolutions, we only have the skin switch in the side menu */
 @media screen and (min-width: 1280px) {
   .side_navigation {
     display: none; } }
 @media screen and (min-width: 1920px) {
-  #search_side {
-    display: none; }
-
-  #search_text_side {
+  #search_side, #search_text_side {
     display: none; } }
 /* ---------the main menu below top--------*/
 /* This piece of code is used for higher res :

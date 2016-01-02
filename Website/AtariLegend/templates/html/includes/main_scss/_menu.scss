@@ -246,11 +246,9 @@
 	}
 	@else if $skin-name == legacy
 	{
-		#skin_side, #games_side,#menus_side,#demos_side,#links_side,#about_side,#music_side,#forum_main_side,#magazines_side{width:170px;}
+		#skin_side, #games_side,#menus_side,#demos_side,#links_side,#about_side,#music_side,#forum_main_side,#magazines_side{width:168px;}
 	}
 		
-
-
 	.skin-menu {
 		width:100%;
 		margin:0px auto;
@@ -315,7 +313,7 @@
 			color: #182727;
 		}
 		 
-		.sub-menu li a:hover, .sub-menu .current-item a {
+		.sub-menu li a:hover {
 			background:#01b5b5;
 			color:#43635f;
 		}
@@ -326,7 +324,7 @@
 			color: white;
 		}
 	 
-		.sub-menu li a:hover, .sub-menu .current-item a {
+		.sub-menu li a:hover {
 			background:#dbd7d1;
 			color:black;
 			border: 1px solid black;
@@ -337,7 +335,7 @@
 		.sub-menu li a {
 			color: black;
 		}
-		.sub-menu li a:hover, .sub-menu .current-item a {
+		.sub-menu li a:hover {
 			background:black;
 			color:white;
 		}
@@ -405,12 +403,22 @@
 	#main_nav { display: none; }
 }
 
+/* for resolutions between 1280 and 1920 the search goes to the side menu */
+/* some re-placement of the skin button is needed here */
+@if $skin-name == legacy 
+{
+	@media screen and (max-width: 1919px) { 
+		.skin-wrap {
+			margin-top:40px;
+		}
+	}
+}
+
 /* for the high resolutions, we only have the skin switch in the side menu */ 
 @media screen and (min-width: 1280px) {  	
 	.side_navigation { display: none; }
 }
 
 @media screen and (min-width: 1920px) { 
-	#search_side { display: none; } 
-	#search_text_side{ display: none; } 
+	#search_side, #search_text_side { display: none; } 
 }

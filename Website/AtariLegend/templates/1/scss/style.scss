@@ -11,6 +11,8 @@ $support-for: (
   opera:   12,
   safari:  5,
 );
+
+@import "normalize/import-now";
 $skin-name: "legacy";
 $bg-color: #00d3d3;
 
@@ -337,6 +339,10 @@ header nav input{
   border-bottom: 3px solid #008b8b;
   border-left: 1px solid #007878;
   line-height:30px;
+}
+
+@media screen and (min-width: 1920px) {
+	  .sidebutton{line-height:40px;}
 }
 
 .sidebutton:hover {
