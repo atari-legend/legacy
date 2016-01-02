@@ -579,7 +579,8 @@ header nav input {
   float: left;
   cursor: pointer;
   border: 2px solid black;
-  height: 30px;
+  height: 26px;
+  line-height: 26px;
   width: 183px;
   background: #161c71;
   font-family: robot, arial, sans-serif;
@@ -615,10 +616,10 @@ header nav input {
   text-decoration: none;
   border: 2px solid #4f4f4f; }
 
-.top_button:visited {
+.topbutton:visited {
   text-decoration: none; }
 
-.top_button:link {
+.topbutton:link {
   text-decoration: none;
   color: #182727; }
 
