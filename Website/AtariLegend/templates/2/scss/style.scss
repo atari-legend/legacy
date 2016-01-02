@@ -3,6 +3,15 @@
 /*************************************************************/
 
 /****************SASS variable declaration *******************/
+$support-for: (
+  chrome:  29,
+  edge:    20,
+  firefox: 26,
+  ie:      10,
+  opera:   14,
+  safari:  5,
+);
+@import "normalize/import-now";
 $skin-name: "picasso";
 $bg-color: #161c71;
 
@@ -311,7 +320,7 @@ cursor: pointer;
 border:2px solid black;
 height: 26px;
 line-height: 26px;
-width: 183px;
+width: 180px;
 background: #161c71;
 font-family: robot, arial, sans-serif;
 color:white;
