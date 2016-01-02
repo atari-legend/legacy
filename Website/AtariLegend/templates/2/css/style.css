@@ -325,13 +325,6 @@ body, html {
   -webkit-box-sizing: border-box;
   -ms-box-sizing: border-box;
   box-sizing: border-box; }
-  .main-content .content {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    -ms-box-sizing: border-box;
-    box-sizing: border-box;
-    padding-left: 60px;
-    width: 100%; }
   .main-content #sidebar-toggle {
     display: block;
     position: absolute;
@@ -343,9 +336,6 @@ body, html {
       width: 18px;
       margin-bottom: 3px;
       height: 2px; }
-  .main-content .content p {
-    width: 100%;
-    line-height: 160%; }
 
 .main-content #sidebar-toggle {
   border-radius: 3px; }

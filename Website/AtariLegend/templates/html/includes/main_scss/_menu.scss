@@ -115,14 +115,7 @@
 		-webkit-box-sizing: border-box;
 		-ms-box-sizing: border-box;
 		box-sizing: border-box;
-		.content{
-			-webkit-box-sizing: border-box;
-			-moz-box-sizing: border-box;
-			-ms-box-sizing: border-box;
-			box-sizing: border-box;
-			padding-left: 60px;
-			width: 100%;	
-		}
+		
 		#sidebar-toggle {
 			display: block;
 			position: absolute;
@@ -135,10 +128,6 @@
 				margin-bottom: 3px;
 				height: 2px;
 			}
-		}
-		.content p{
-			width: 100%;
-			line-height: 160%;
 		}
 	}
 	
