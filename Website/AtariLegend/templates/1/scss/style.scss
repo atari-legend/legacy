@@ -3,6 +3,14 @@
 /*************************************************************/
 
 /****************SASS variable declaration *******************/
+$support-for: (
+  chrome:  29,
+  edge:    20,
+  firefox: 26,
+  ie:      10,
+  opera:   14,
+  safari:  5,
+);
 $skin-name: "legacy";
 $bg-color: #00d3d3;
 
@@ -299,7 +307,7 @@ header nav input{
   color: #182727;
   height: 57px;
   line-height: 57px;
-  width: 184px;
+  width: 183px;
   font-size: 20px;
   border-bottom: 3px solid #008b8b;
   border-left: 1px solid #007878;
