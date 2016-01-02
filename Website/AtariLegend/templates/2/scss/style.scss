@@ -11,6 +11,7 @@ $support-for: (
   opera:   12,
   safari:  5,
 );
+
 @import "normalize/import-now";
 $skin-name: "picasso";
 $bg-color: #161c71;
@@ -385,8 +386,8 @@ border:2px solid black;
 	border-radius: 0 15px 15px 0;
 	margin-left: 2px;
 	text-decoration:none;
-	  text-align:center;
-  line-height:30px;
+	text-align:center;
+	line-height:30px;
 }
 
 .sidebutton:hover {
