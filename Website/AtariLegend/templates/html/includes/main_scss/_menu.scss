@@ -178,7 +178,6 @@
 			padding: 0;
 			background: #000; 
 			text-align: center;
-			font-family: Audiowide;
 		}
 	}
 	@else if $skin-name == picasso
@@ -209,7 +208,6 @@
 			padding: 0;
 			background: #000; 
 			text-align: center;
-			font-family: robot, arial;
 		}
 	}
 	@else if $skin-name == tos
@@ -232,13 +230,12 @@
 			padding: 0;
 			background: #000; 
 			text-align: center;
-			font-family: AtariST;
 		}
 	}
 	
 	@if $skin-name == tos
 	{ 
-		#skin_side, #games_side,#menus_side,#demos_side,#links_side,#about_side,#music_side,#forum_main_side,#magazines_side{width:188px; border-bottom: 3px solid black;}
+		#skin_side, #games_side,#menus_side,#demos_side,#links_side,#about_side,#music_side,#forum_main_side,#magazines_side{width:186px; border-bottom: 3px solid black;}
 	}
 	@else if $skin-name == picasso
 	{
@@ -349,11 +346,14 @@
 
 /* resizing of buttons is done to get al info on screen in landscape for phones and tablets*/
 @media screen and (max-width: 640px) { 
+
+	.container.open-sidebar { left: 113px;}
+	
 	@if ($skin-name == legacy) or ($skin-name == picasso)
 	{
 		#games_side, #menus_side, #demos_side, #about_side, #links_side , #skin_side, #forum_main_side, #magazines_side, #music_side{
 			line-height: 40px; 
-			width: 113px; 
+			width: 112px; 
 			font-size: 14px;
 		}
 		.sub-menu li { font-size:13px; }
@@ -362,7 +362,6 @@
 			#search_side {height: 40px; width: 25px;}
 			#search_text_side{height: 20px; width: 70px;}
 			#searchbutton_side{height: 38px; width: 87px;}
-			.container.open-sidebar { left: 113px;}
 			#sidebar { left: -113px;
 				width: 113px;
 			}
@@ -372,7 +371,6 @@
 			#search_side {height: 37px; width: 39px;}
 			#search_text_side{height: 28px; width: 60px; margin-left:3px;}
 			#searchbutton_side{height: 37px; width: 70px;}
-			.container.open-sidebar { left: 113px;}
 			#sidebar { left: -115px;
 				width: 115px;
 			}
@@ -380,8 +378,7 @@
 	}
 	@else if $skin-name == tos
 	{
-		#games_side, #menus_side, #demos_side, #about_side, #links_side , #skin_side, #forum_main_side, #magazines_side, #music_side {
-			
+		#games_side, #menus_side, #demos_side, #about_side, #links_side , #skin_side, #forum_main_side, #magazines_side, #music_side {	
 			height: 32px; 
 			width: 113px; 
 			font-size: 14px;
@@ -390,7 +387,6 @@
 		#search_side {height: 29px; width: 30px;}
 		#search_text_side{height: 20px; width: 70px; margin: 4px 0 0 6px;}
 		#searchbutton_side{height: 29px; width: 82px;}
-		.container.open-sidebar { left: 113px;}
 		#sidebar { left: -113px;
 			width: 113px;
 			}
@@ -410,6 +406,14 @@
 	@media screen and (max-width: 1919px) { 
 		.skin-wrap {
 			margin-top:40px;
+		}
+	}
+}
+@else
+{
+	@media screen and (max-width: 1919px) { 
+		.skin-wrap {
+			margin-top: 30px;
 		}
 	}
 }

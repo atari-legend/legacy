@@ -746,8 +746,7 @@ body, html {
   margin: 4.5px 0px 0px 6px;
   padding: 0;
   background: #000;
-  text-align: center;
-  font-family: robot, arial; }
+  text-align: center; }
 
 #skin_side, #games_side, #menus_side, #demos_side, #links_side, #about_side, #music_side, #forum_main_side, #magazines_side {
   width: 170px; }
@@ -818,9 +817,12 @@ body, html {
     position: relative; } }
 /* resizing of buttons is done to get al info on screen in landscape for phones and tablets*/
 @media screen and (max-width: 640px) {
+  .container.open-sidebar {
+    left: 113px; }
+
   #games_side, #menus_side, #demos_side, #about_side, #links_side, #skin_side, #forum_main_side, #magazines_side, #music_side {
     line-height: 40px;
-    width: 113px;
+    width: 112px;
     font-size: 14px; }
 
   .sub-menu li {
@@ -839,9 +841,6 @@ body, html {
     height: 37px;
     width: 70px; }
 
-  .container.open-sidebar {
-    left: 113px; }
-
   #sidebar {
     left: -115px;
     width: 115px; } }
@@ -851,6 +850,9 @@ body, html {
     display: none; } }
 /* for resolutions between 1280 and 1920 the search goes to the side menu */
 /* some re-placement of the skin button is needed here */
+@media screen and (max-width: 1919px) {
+  .skin-wrap {
+    margin-top: 30px; } }
 /* for the high resolutions, we only have the skin switch in the side menu */
 @media screen and (min-width: 1280px) {
   .side_navigation {

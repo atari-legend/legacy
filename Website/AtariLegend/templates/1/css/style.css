@@ -738,8 +738,7 @@ body, html {
   margin: 7px 0px 0px 6px;
   padding: 0;
   background: #000;
-  text-align: center;
-  font-family: Audiowide; }
+  text-align: center; }
 
 #skin_side, #games_side, #menus_side, #demos_side, #links_side, #about_side, #music_side, #forum_main_side, #magazines_side {
   width: 168px; }
@@ -809,9 +808,12 @@ body, html {
     position: relative; } }
 /* resizing of buttons is done to get al info on screen in landscape for phones and tablets*/
 @media screen and (max-width: 640px) {
+  .container.open-sidebar {
+    left: 113px; }
+
   #games_side, #menus_side, #demos_side, #about_side, #links_side, #skin_side, #forum_main_side, #magazines_side, #music_side {
     line-height: 40px;
-    width: 113px;
+    width: 112px;
     font-size: 14px; }
 
   .sub-menu li {
@@ -828,9 +830,6 @@ body, html {
   #searchbutton_side {
     height: 38px;
     width: 87px; }
-
-  .container.open-sidebar {
-    left: 113px; }
 
   #sidebar {
     left: -113px;
