@@ -3,6 +3,12 @@
 /*************************************************************/
 
 /****************SASS variable declaration *******************/
+@import '../../../templates/html/includes/main_scss/normalize';
+$support-for: ( 
+  ie:  8, // Support IE 8 and alter
+  '*': -4 // Support the last 4 versions of all browsers.
+);
+
 $skin-name: "tos";
 $bg-color: white;
 

@@ -432,10 +432,10 @@ body, html {
 
 .sub-menu {
   width: 75%;
-  padding: 5px 0px;
+  padding: 5px 0;
   position: absolute;
   top: 100%;
-  left: 0px;
+  left: 0;
   z-index: -1;
   opacity: 0;
   transition: opacity linear 0.15s;
@@ -505,28 +505,7 @@ body, html {
     display: none; } }
 /* for the high resolutions, we only have the skin switch in the side menu */
 @media screen and (min-width: 1280px) {
-  #links_side {
-    display: none; }
-
-  #games_side {
-    display: none; }
-
-  #demos_side {
-    display: none; }
-
-  #about_side {
-    display: none; }
-
-  #menus_side {
-    display: none; }
-
-  #music_side {
-    display: none; }
-
-  #magazines_side {
-    display: none; }
-
-  #forum_main_side {
+  .side_navigation {
     display: none; } }
 @media screen and (min-width: 1920px) {
   #search_side {
