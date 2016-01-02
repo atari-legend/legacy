@@ -815,10 +815,6 @@ Standard tile settings
   /* Fallback for web browsers that doesn't support RGBa */
   background: rgba(0, 80, 80, 0.6);
   /* RGBa with 0.6 opacity */
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#005050, endColorstr=#005050);
-  /* For IE 5.5 - 7*/
-  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#005050, endColorstr=#005050)";
-  /* For IE 8*/
   padding-top: 3%;
   font-size: 17pt;
   margin-top: 46%;
@@ -1161,10 +1157,6 @@ Standard tile settings
   /* Fallback for web browsers that doesn't support RGBa */
   background: rgba(0, 80, 80, 0.6);
   /* RGBa with 0.6 opacity */
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#005050, endColorstr=#005050);
-  /* For IE 5.5 - 7*/
-  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#005050, endColorstr=#005050)";
-  /* For IE 8*/
   text-align: center;
   border-right: 2px solid #01b5b5;
   padding-left: 5%;
@@ -1326,10 +1318,6 @@ datequote tile - front page
   /* Fallback for web browsers that doesn't support RGBa */
   background: rgba(0, 80, 80, 0.6);
   /* RGBa with 0.6 opacity */
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#005050, endColorstr=#005050);
-  /* For IE 5.5 - 7*/
-  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#005050, endColorstr=#005050)";
-  /* For IE 8*/
   color: white;
   padding-top: 10px;
   padding-bottom: 10px; }

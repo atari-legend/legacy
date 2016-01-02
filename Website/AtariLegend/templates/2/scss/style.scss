@@ -963,8 +963,6 @@ Standard tile settings
 
 #welcome p { background: rgb(192, 193, 202) transparent;   /* Fallback for web browsers that doesn't support RGBa */
         background: rgba(192, 193, 202, 0.6);   /* RGBa with 0.6 opacity */
-		filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#c0c1ca, endColorstr=#c0c1ca);  /* For IE 5.5 - 7*/
-		-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#c0c1ca, endColorstr=#c0c1ca)";  /* For IE 8*/
 		text-align: center;
 		border-right: 2px solid #484c7b;
 		padding-left: 5%;
@@ -1119,8 +1117,6 @@ datequote tile - front page
 
 .datequote_text { background: rgb(192, 193, 202) transparent;   /* Fallback for web browsers that doesn't support RGBa */
         background: rgba(192, 193, 202, 0.6);   /* RGBa with 0.6 opacity */
-		filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#c0c1ca, endColorstr=#c0c1ca);  /* For IE 5.5 - 7*/
-		-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#c0c1ca, endColorstr=#c0c1ca)";  /* For IE 8*/
 		color: white; 
 		padding-top: 10px;
 		padding-bottom: 10px;
