@@ -954,6 +954,28 @@ header nav input {
   text-decoration: none;
   color: white; }
 
+.sidebutton {
+  cursor: pointer;
+  border: 0;
+  font-family: AtariST,Arial,helvetica,sans-serif;
+  background: white;
+  color: black;
+  font-size: 16px;
+  vertical-align: middle;
+  text-decoration: none;
+  text-align: center;
+  text-shadow: -1px 1px 5px white, 1px -1px 15px #acacac;
+  line-height: 27px;
+  white-space: nowrap; }
+
+.sidebutton:hover {
+  background: black;
+  color: white;
+  text-decoration: none; }
+
+.sidebutton:link {
+  text-decoration: none; }
+
 .searchbutton {
   display: block;
   float: left;
