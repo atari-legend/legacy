@@ -53,6 +53,8 @@ audio,
 canvas,
 progress,
 video {
+  display: inline-block;
+  /* 1 */
   vertical-align: baseline;
   /* 2 */ }
 
@@ -121,6 +123,13 @@ h1 {
   font-size: 2em;
   /* Set 1 unit of vertical rhythm on the top and bottom margins. */
   margin: 0.75em 0; }
+
+/**
+ * Address styling not present in IE 8/9.
+ */
+mark {
+  background: #ff0;
+  color: #000; }
 
 /**
  * Address inconsistent and variable font size in all browsers.
@@ -742,10 +751,6 @@ body, html {
 
 #skin_side, #games_side, #menus_side, #demos_side, #links_side, #about_side, #music_side, #forum_main_side, #magazines_side {
   width: 170px; }
-
-.clearfix:after {
-  display: block;
-  clear: both; }
 
 .skin-menu {
   width: 100%;

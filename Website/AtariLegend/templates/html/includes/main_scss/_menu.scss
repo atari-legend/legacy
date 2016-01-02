@@ -30,7 +30,7 @@
 	@if $skin-name == tos
 	{
 		/* for the TOS skin, we want to side button to be lower not to interfere with the main menu */
-		@media screen and (min-width: 1280px) and (max-width: 2304px){  
+		@media screen and (min-width: 1280px) and (max-width: 2304px) {  
 			.container { margin-top: 33px; }
 		}
 		
@@ -249,10 +249,7 @@
 		#skin_side, #games_side,#menus_side,#demos_side,#links_side,#about_side,#music_side,#forum_main_side,#magazines_side{width:170px;}
 	}
 		
-	.clearfix:after {
-		display:block;
-		clear:both;
-	}
+
 
 	.skin-menu {
 		width:100%;
