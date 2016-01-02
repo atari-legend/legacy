@@ -354,7 +354,7 @@
 	@if ($skin-name == legacy) or ($skin-name == picasso)
 	{
 		#games_side, #menus_side, #demos_side, #about_side, #links_side , #skin_side, #forum_main_side, #magazines_side, #music_side{
-			height: 40px; 
+			line-height: 40px; 
 			width: 113px; 
 			font-size: 14px;
 		}

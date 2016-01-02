@@ -819,7 +819,7 @@ body, html {
 /* resizing of buttons is done to get al info on screen in landscape for phones and tablets*/
 @media screen and (max-width: 640px) {
   #games_side, #menus_side, #demos_side, #about_side, #links_side, #skin_side, #forum_main_side, #magazines_side, #music_side {
-    height: 40px;
+    line-height: 40px;
     width: 113px;
     font-size: 14px; }
 
