@@ -762,11 +762,10 @@ body, html {
   margin: 4px 0 0 6px;
   padding: 0;
   background: #000;
-  text-align: center;
-  font-family: AtariST; }
+  text-align: center; }
 
 #skin_side, #games_side, #menus_side, #demos_side, #links_side, #about_side, #music_side, #forum_main_side, #magazines_side {
-  width: 188px;
+  width: 186px;
   border-bottom: 3px solid black; }
 
 .skin-menu {
@@ -834,6 +833,9 @@ body, html {
     position: relative; } }
 /* resizing of buttons is done to get al info on screen in landscape for phones and tablets*/
 @media screen and (max-width: 640px) {
+  .container.open-sidebar {
+    left: 113px; }
+
   #games_side, #menus_side, #demos_side, #about_side, #links_side, #skin_side, #forum_main_side, #magazines_side, #music_side {
     height: 32px;
     width: 113px;
@@ -853,9 +855,6 @@ body, html {
     height: 29px;
     width: 82px; }
 
-  .container.open-sidebar {
-    left: 113px; }
-
   #sidebar {
     left: -113px;
     width: 113px; }
@@ -868,6 +867,9 @@ body, html {
     display: none; } }
 /* for resolutions between 1280 and 1920 the search goes to the side menu */
 /* some re-placement of the skin button is needed here */
+@media screen and (max-width: 1919px) {
+  .skin-wrap {
+    margin-top: 30px; } }
 /* for the high resolutions, we only have the skin switch in the side menu */
 @media screen and (min-width: 1280px) {
   .side_navigation {
@@ -949,10 +951,6 @@ header nav input {
 .topbutton:visited {
   text-decoration: none; }
 
-.topbutton:link {
-  text-decoration: none;
-  color: white; }
-
 .sidebutton {
   cursor: pointer;
   border: 0;
@@ -984,7 +982,7 @@ header nav input {
   color: #182727;
   height: 27px;
   width: 280px;
-  font-size: 10px;
+  font-size: 15px;
   padding-top: 0;
   text-decoration: none; }
 
