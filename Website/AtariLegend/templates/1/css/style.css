@@ -377,10 +377,6 @@ body, html {
 #skin_side, #games_side, #menus_side, #demos_side, #links_side, #about_side, #music_side, #forum_main_side, #magazines_side {
   width: 170px; }
 
-.clearfix:after {
-  display: block;
-  clear: both; }
-
 .skin-menu {
   width: 100%;
   margin: 0px auto; }
