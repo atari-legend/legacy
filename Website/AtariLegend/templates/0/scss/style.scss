@@ -12,14 +12,13 @@ $support-for: (
   safari:  5,
 );
 
-@import "normalize/import-now";
 $skin-name: "tos";
 $bg-color: white;
 
 
 
 /* ---------------SASS includes---------------*/
-
+@import "normalize/import-now";										/* --> Normalize script
 @import '../../../templates/html/includes/main_scss/menu'; 			/* --> TOP and SIDE MENU */
 @import '../../../templates/html/includes/main_scss/top_animation'; /* --> TOP animation */
 
