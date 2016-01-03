@@ -868,7 +868,7 @@ body, html {
   color: white;
   text-decoration: none;
   border: 2px solid #4f4f4f;
-  border-bottom: 0; }
+  border-bottom: 2px solid #4f4f4f; }
 
 /* for the lower resolutions, we don't have the menu bar below the top */
 @media screen and (max-width: 1279px) {
@@ -961,8 +961,8 @@ header nav input {
   background: #dbd7d1;
   color: black;
   text-decoration: none;
-  border-bottom: 0;
-  border: 2px solid #4f4f4f; }
+  border: 2px solid #4f4f4f;
+  border-bottom: 2px solid #4f4f4f; }
 
 .topbutton:visited {
   text-decoration: none; }

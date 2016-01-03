@@ -954,8 +954,8 @@ header nav input {
   background: #00a9a9;
   color: #182727;
   text-decoration: none;
-  border-bottom: 3px solid #006f6f;
-  border: 0; }
+  border: 0;
+  border-bottom: 3px solid #006f6f; }
 
 .topbutton:visited {
   text-decoration: none; }
