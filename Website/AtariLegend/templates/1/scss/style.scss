@@ -2,7 +2,7 @@
 /**********************LEGACY SKIN****************************/
 /*************************************************************/
 
-/****************SASS variable declaration *******************/
+/* ---------SASS variables declaration--------*/
 $support-for: (
   chrome:  16,
   edge:    10,
@@ -15,6 +15,12 @@ $support-for: (
 @import "normalize/import-now";
 $skin-name: "legacy";
 $bg-color: #00d3d3;
+
+
+
+/* ---------------SASS includes---------------*/
+
+@import '../../../templates/html/includes/main_scss/menu'; /* --> TOP and SIDE MENU */
 
 
 
@@ -36,7 +42,7 @@ body { background-color: black;
 	  font-family: Audiowide, Arial, helvetica, sans-serif;
 }
 
-@media screen and (min-width: 1281px){
+@media screen and (min-width: 1280px){
 	body { background-image: url(../../../templates/1/images/top_bg_menu.png), url(../../../templates/1/images/top_bg_sides.jpg); 
 	  background-position: left 225px,left top;
 	  background-repeat: repeat-x,repeat-x;}
@@ -64,9 +70,6 @@ footer, header, hgroup, menu, nav, section {
 	display: block;
 }
 
-.container { display: none; }
-
-	
 /*---------------------------------------------------------- 
  Main site width
 ------------------------------------------------------------ */
@@ -257,33 +260,6 @@ footer, header, hgroup, menu, nav, section {
 		text-align: right;}
 	}	
 	
-/* ***************TOP and SIDE MENU************* */	
-@import '../../../templates/html/includes/main_scss/menu';
-
-/* This little fix was added because we had a weird menubar bug at 1280. */
-@media screen and (min-width: 1280px) and (max-width: 1297px) {  
-	#search { width: 66px; height: 60px;}
-	#home  { width: 66px; height: 60px;}
-}
-
-/* responsiveness of the top menu for resolutions from 1281 to 1920 */
-@media screen and (max-width: 1919px)
-{	
-	#search_text{display:none;}
-	#search{display:none;}
-	#about{border-right: 1px solid #007878;}
-}
-
-@media screen and (max-width: 1550px)
-{	
-	#home{display:none;}
-}
-
-@media screen and (max-width: 1475px)
-{	
-	.topbutton{width: 160px;}
-}
-
 /*---------------------------------------------------------- 
  Main site
 ------------------------------------------------------------ */	

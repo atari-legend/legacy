@@ -2,7 +2,7 @@
 /**********************PICASSO SKIN***************************/
 /*************************************************************/
 
-/****************SASS variable declaration *******************/
+/* ---------SASS variables declaration--------*/
 $support-for: (
   chrome:  16,
   edge:    10,
@@ -15,6 +15,13 @@ $support-for: (
 @import "normalize/import-now";
 $skin-name: "picasso";
 $bg-color: #161c71;
+
+
+
+/* ---------------SASS includes---------------*/
+
+@import '../../../templates/html/includes/main_scss/menu'; /* --> TOP and SIDE MENU */
+
 
 
 /********************PART I : MAIN SITE***********************/
@@ -44,7 +51,7 @@ body { background: #dbd7d1;
 	}
 }
 
-@media screen and (min-width: 1281px){
+@media screen and (min-width: 1280px){
 	body { background-image: url(../../../templates/2/images/top_bg_menu.jpg), url(../../../templates/2/images/top_bg_sides.jpg);
 	  background-position: left 220px, left top;
 	  background-repeat: repeat-x, repeat-x;}
@@ -72,9 +79,6 @@ footer, header, hgroup, menu, nav, section {
 	display: block;
 }
 
-.container { display: none; }
-
-	
 /*---------------------------------------------------------- 
  Main site width
 ------------------------------------------------------------ */
@@ -267,71 +271,6 @@ footer, header, hgroup, menu, nav, section {
 		display: block;
 		text-align: right;}
 	}	
-	
-/* ***************TOP and SIDE MENU************* */	
-@import '../../../templates/html/includes/main_scss/menu';
-
-/* ---------the main menu below top--------*/
-
-#home { 
-display: block;
--webkit-border-radius: 0 15px 15px 0;
--moz-border-radius: 0 15px 15px 0;
-border-radius: 0 15px 15px 0;
-height: 26px;
-border:2px solid black;
-}
-
-#home:hover { background: url(../../../templates/2/images/menu_home_hover.png) 0 0 no-repeat;
-	height: 0px;
-	padding-top: 26px;
-	padding-left: 60px;
-	border:2px solid #4f4f4f;
-}
-
-
-#search { 
-	display: block;
-	-webkit-border-radius: 0 15px 15px 0;
-	-moz-border-radius: 0 15px 15px 0;
-	border-radius: 0 15px 15px 0;
-	height: 26px;
-	border:2px solid black;
-	margin-left: 2px;
-}
-
-#search:hover { background: url(../../../templates/2/images/menu_search_hover.png) 0 0 no-repeat;
-	height: 0px;
-	padding-top: 26px;
-	padding-left: 60px;
-	border:2px solid #4f4f4f;
-}
-
-
-/* This little fix was added because we had a weird menubar bug at 1280. */
-@media screen and (min-width: 1280px) and (max-width: 1296px) {  
-	.topbutton{ margin-left: 0px; }
-	#home{ margin-left: 0px; }
-	#search{ margin-left: 0px; }
-	.searchbutton{ width: 278px; }
-}
-
-/* responsiveness of the top menu for resolutions from 1281 to 1920 */
-@media screen and (max-width: 1919px)
-{	
-	#search_text{display:none;}
-	#search{display:none;}
-}
-
-@media screen and (max-width: 1550px)
-{	
-	#home{display:none;}
-}
-
-@media screen and (max-width: 1480px)
-{	
-	.topbutton{width: 160px;}
-}
 
 /*---------------------------------------------------------- 
  Main site

@@ -2,8 +2,7 @@
 /**********************TOS 207 SKIN***************************/
 /*************************************************************/
 
-/****************SASS variable declaration *******************/
-
+/* ---------SASS variables declaration--------*/
 $support-for: (
   chrome:  16,
   edge:    10,
@@ -16,6 +15,12 @@ $support-for: (
 @import "normalize/import-now";
 $skin-name: "tos";
 $bg-color: white;
+
+
+
+/* ---------------SASS includes---------------*/
+
+@import '../../../templates/html/includes/main_scss/menu'; /* --> TOP and SIDE MENU */
 
 
 
@@ -74,8 +79,6 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section { 
 	display: block;
 }
-
-.container { display: none; }
 
 /*---------------------------------------------------------- 
  Main site width
@@ -282,47 +285,6 @@ footer, header, hgroup, menu, nav, section {
 		text-align: right;}
 	}	
 	
-/* ***************TOP and SIDE MENU************* */	
-@import '../../../templates/html/includes/main_scss/menu';
-
-#search:hover { background: url(../../../templates/0/images/menu_search_hover.png) 0 0 no-repeat;
-	           height: 0;
-			   padding-top: 30px;
-			   padding-left: 30px;}
-
-#home:hover { background: url(../../../templates/0/images/menu_home_hover.png) 0 0 no-repeat;
-				height: 0;
-				padding-top: 30px;
-				padding-left: 30px;}
-
-/* This little fix was added because we had a weird menubar bug at 1280. */
-@media screen and (min-width: 1280px) and (max-width: 1296px) {  
-	#search { width: 21px; height: 30px;}
-	#home  { width: 22px; height: 30px;}
-}
-
-/* responsiveness of the top menu for resolutions from 1281 to 1920 */
-@media screen and (max-width: 1919px)
-{	
-	#search_text{display:none;}
-	#search{display:none;}
-}
-
-@media screen and (max-width: 1590px)
-{	
-	#home{display:none;}
-}
-
-@media screen and (max-width: 1560px)
-{	
-	.topbutton{width: 165px;}
-}
-
-@media screen and (max-width: 1325px)
-{	
-	.topbutton{width: 155px;}
-}
-
 /*---------------------------------------------------------- 
  Main site
 ------------------------------------------------------------ */	
