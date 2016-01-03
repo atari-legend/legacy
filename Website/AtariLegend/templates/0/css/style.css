@@ -669,11 +669,7 @@ body, html {
 /* the position of the side buttons when pushed open */
 #sidebar {
   left: -191px;
-  width: 191px;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -ms-box-sizing: border-box;
-  box-sizing: border-box; }
+  width: 191px; }
 
 /* the side bar button options */
 #sidebar {
@@ -1224,7 +1220,7 @@ Standard tile settings
   top: 0; }
 
 .standard_tile_subtext {
-  font-size: 11pt;
+  font-size: 15px;
   color: white; }
 
 .standard_tile p {
@@ -1241,7 +1237,7 @@ Standard tile settings
   background: rgba(172, 172, 172, 0.7);
   /* RGBa with 0.6 opacity */
   padding-top: 3%;
-  font-size: 17pt;
+  font-size: 23px;
   margin-top: 48.5%;
   color: white;
   z-index: 1;
@@ -1318,7 +1314,7 @@ Standard tile settings
 
 .standard_tile h1 {
   color: white;
-  font-size: 18pt;
+  font-size: 24px;
   font-weight: 100;
   text-align: center;
   margin-top: 20px;
@@ -1327,32 +1323,32 @@ Standard tile settings
 
 .standard_tile h2 {
   color: #00d3d3;
-  font-size: 10pt;
+  font-size: 13px;
   font-weight: 100;
   font-style: italic;
   float: right; }
 
 .standard_tile h3 {
   color: white;
-  font-size: 13pt;
+  font-size: 17px;
   font-weight: 100;
   text-align: center; }
 
 .standard_tile h4 {
   color: white;
-  font-size: 12pt;
+  font-size: 16px;
   font-weight: 100;
   text-align: left; }
 
 .standard_tile h5 {
   color: #3c3c3c;
-  font-size: 9pt;
+  font-size: 12px;
   font-weight: 100;
   text-align: left; }
 
 .standard_tile h6 {
   color: #3c3c3c;
-  font-size: 12pt;
+  font-size: 16px;
   font-weight: 100;
   text-align: left; }
 
@@ -1624,7 +1620,7 @@ a.standard_tile_link:hover, a.standard_tile_link:focus {
   padding-right: 5%; }
 
 .welcome_text {
-  font-size: 11pt;
+  font-size: 15px;
   padding-bottom: 10px;
   padding-top: 10px;
   color: #23f001;
@@ -1633,14 +1629,14 @@ a.standard_tile_link:hover, a.standard_tile_link:focus {
   Margin-top: 130px; }
 
 .trivia_title {
-  font-size: 19pt;
+  font-size: 25px;
   color: white; }
 
 .trivia_tag {
-  font-size: 13pt; }
+  font-size: 17px; }
 
 .trivia_text {
-  font-size: 12pt;
+  font-size: 16px;
   color: white; }
 
 /* 1 tile and a simplified intro screen */
@@ -1764,19 +1760,19 @@ datequote tile - front page
   text-align: center; }
 
 .datequote_day {
-  font-size: 85pt;
+  font-size: 113px;
   color: white;
   margin-top: 0;
   margin-bottom: -20px; }
 
 .datequote_month {
-  font-size: 30pt;
+  font-size: 40px;
   color: white;
   margin-top: -10px;
   margin-bottom: -10px; }
 
 .datequote_year {
-  font-size: 55pt;
+  font-size: 73px;
   text-align: center;
   color: black;
   margin-top: -10px; }
@@ -1872,7 +1868,7 @@ contact tiles - front page
 
 .footer_logo {
   color: white;
-  font-size: 10pt;
+  font-size: 13px;
   text-align: center;
   height: 120px;
   border-top: 2px solid black;
@@ -2262,7 +2258,7 @@ Standard table settings
 
 .standard_table_list li {
   color: black;
-  font-size: 12pt;
+  font-size: 16px;
   text-align: center;
   text-decoration: none;
   list-style-type: none; }
@@ -2294,14 +2290,14 @@ Standard table settings
 
 .standard_table_center {
   color: black;
-  font-size: 12pt;
+  font-size: 16px;
   font-weight: 100;
   text-align: center;
   text-decoration: none; }
 
 .standard_table_left {
   color: black;
-  font-size: 12pt;
+  font-size: 16px;
   font-weight: 100;
   text-align: left;
   text-decoration: none;
@@ -2309,7 +2305,7 @@ Standard table settings
 
 .standard_table_right {
   color: black;
-  font-size: 12pt;
+  font-size: 16px;
   font-weight: 100;
   text-align: right;
   text-decoration: none;
@@ -2326,7 +2322,7 @@ Standard table settings
   color: #182727;
   height: 25px;
   width: 80px;
-  font-size: 11pt;
+  font-size: 15px;
   border-bottom: 3px solid black;
   border-left: 1px solid black;
   text-decoration: none;
@@ -2380,7 +2376,7 @@ fieldset {
   border: solid 1px #b2b2b2;
   background: #DBD7D1;
   padding: 8px;
-  font-size: 12pt;
+  font-size: 16px;
   color: #122323; }
 
 legend {
@@ -2561,7 +2557,7 @@ Quick search games
   text-shadow: -1px 1px 5px white, 1px -1px 15px #acacac;
   height: 25px;
   width: 80px;
-  font-size: 10pt; }
+  font-size: 13px; }
 
 .quick_search_games_button:hover {
   background: black;
@@ -2768,7 +2764,7 @@ User search
 .username_td, .joindate_td, .lastvisit_td {
   width: 25%;
   color: black;
-  font-size: 12pt;
+  font-size: 16px;
   font-weight: 100;
   padding-left: 2px; }
 
@@ -2778,7 +2774,7 @@ User search
 .email_td {
   width: 10%;
   color: black;
-  font-size: 12pt;
+  font-size: 16px;
   font-weight: 100;
   padding-left: 2px; }
 
@@ -2788,7 +2784,7 @@ User search
 .website_td {
   width: 15%;
   color: black;
-  font-size: 12pt;
+  font-size: 16px;
   font-weight: 100;
   padding-left: 2px; }
 
@@ -2958,7 +2954,7 @@ Links addnew
   width: 100%; }
 
 .links_addnew_info {
-  font-size: 12pt;
+  font-size: 16px;
   color: black;
   padding: 5px; }
 
@@ -2989,7 +2985,7 @@ Links addnew
 Links Modify list
 ------------------------------------------------------------ */
 .links_modlist_tdline {
-  font-size: 12pt;
+  font-size: 16px;
   color: black;
   padding: 5px;
   border-bottom: solid 1px #b2b2b2; }
@@ -3508,19 +3504,19 @@ Games comment
 
 .gc_left_head {
   width: 20%;
-  font-size: 12pt; }
+  font-size: 16px; }
 
 .gc_center_head {
   width: 80%;
-  font-size: 12pt; }
+  font-size: 16px; }
 
 .gc_left {
   width: 20%;
-  font-size: 12pt; }
+  font-size: 16px; }
 
 .gc_center {
   width: 80%;
-  font-size: 12pt; }
+  font-size: 16px; }
 
 /*---------------------------------------------------------- 
 Games comment edit
