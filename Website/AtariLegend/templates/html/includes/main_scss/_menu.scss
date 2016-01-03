@@ -369,7 +369,6 @@
 		.sub-menu li a:hover {
 			background:#dbd7d1;
 			color:black;
-			border: 1px solid black;
 		}
 	}
 	@else if $skin-name == tos
@@ -625,22 +624,97 @@ header nav input{
   text-decoration:none;
 }
 
+#home:hover,#search:hover {height: 0px;}
+
 @if $skin-name == picasso
 {
 	@media screen and (max-width: 1279px){ 
 		#main { margin-top: 25px;}
 	}
 	.signinbutton{margin-bottom: 30px; height: 30px;width: 170px; font-size: 18px;}
-	.signinbutton:hover {background: #dbd7d1; color: black; border:2px solid #4f4f4f; }
+	.signinbutton:hover {background: #dbd7d1; color: black; border:2px solid #4f4f4f;}
+	#home{display: block;
+		-webkit-border-radius: 0 15px 15px 0;
+		-moz-border-radius: 0 15px 15px 0;
+		border-radius: 0 15px 15px 0;
+		height: 26px;
+		border:2px solid black;
+	}
+	#home:hover { background: url(../../../templates/2/images/menu_home_hover.png) 0 0 no-repeat;
+		padding-top: 26px;
+		padding-left: 60px;
+		border:2px solid #4f4f4f;
+	}
+	#search { 
+		display: block;
+		-webkit-border-radius: 0 15px 15px 0;
+		-moz-border-radius: 0 15px 15px 0;
+		border-radius: 0 15px 15px 0;
+		height: 26px;
+		border:2px solid black;
+		margin-left: 2px;
+	}
+	#search:hover { background: url(../../../templates/2/images/menu_search_hover.png) 0 0 no-repeat;
+		padding-top: 26px;
+		padding-left: 60px;
+		border:2px solid #4f4f4f;
+	}
+	@media screen and (max-width: 1550px)
+	{	
+		#home{display:none;}
+	}
+	@media screen and (max-width: 1480px)
+	{	
+		.topbutton{width: 153.8px;}
+	}
 }
 @else if $skin-name == tos
 {
 	#main_nav {background-color: white; border-bottom: 3px solid black;}
 	.signinbutton{margin-bottom: 25px; height: 60px; width: 134px; font-size: 20px;border-bottom: 3px solid black;border-left: 1px solid black;}
 	.signinbutton:hover { background: #6a6a6a; color: white;}
+	#search:hover { background: url(../../../templates/0/images/menu_search_hover.png) 0 0 no-repeat;
+	    padding-top: 30px;
+	    padding-left: 30px;
+	}
+	#home:hover { background: url(../../../templates/0/images/menu_home_hover.png) 0 0 no-repeat;
+		padding-top: 30px;
+		padding-left: 30px;
+	}
+	@media screen and (max-width: 1590px)
+	{	
+		#home{display:none;}
+	}
+	@media screen and (max-width: 1560px)
+	{	
+		.topbutton{width: 165px;}
+	}
+	@media screen and (max-width: 1325px)
+	{	
+		.topbutton{width: 155px;}
+	}
 }
 @else if $skin-name == legacy
 {
 	.signinbutton{height: 60px; width: 134px; font-size: 20px;}	
 	.signinbutton:hover { background: #00a9a9; color: #182727; border-bottom: 3px solid #006f6f;}
+	@media screen and (max-width: 1919px)
+	{	
+		#about{border-right: 1px solid #007878;}
+	}
+	@media screen and (max-width: 1550px)
+	{	
+		#home{display:none;}
+	}
+	@media screen and (max-width: 1475px)
+	{	
+		.topbutton{width: 156.7px;}
+	}
+}
+
+/* responsiveness of the top menu for resolutions from 1281 to 1920 */
+@media screen and (max-width: 1919px)
+{	
+	#search_text{display:none;}
+	#search{display:none;}
 }
