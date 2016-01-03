@@ -348,6 +348,8 @@
 @media screen and (max-width: 640px) { 
 
 	.container.open-sidebar { left: 113px;}
+	.sub-menu li { font-size:13px; }
+	#sidebar { left: -113px; width: 113px;}
 	
 	@if ($skin-name == legacy) or ($skin-name == picasso)
 	{
@@ -356,24 +358,18 @@
 			width: 112px; 
 			font-size: 14px;
 		}
-		.sub-menu li { font-size:13px; }
+		
 		@if $skin-name == legacy 
 		{
 			#search_side {height: 40px; width: 25px;}
 			#search_text_side{height: 20px; width: 70px;}
 			#searchbutton_side{height: 38px; width: 87px;}
-			#sidebar { left: -113px;
-				width: 113px;
-			}
 		}
 		@else
 		{
 			#search_side {height: 37px; width: 39px;}
 			#search_text_side{height: 28px; width: 60px; margin-left:3px;}
 			#searchbutton_side{height: 37px; width: 70px;}
-			#sidebar { left: -115px;
-				width: 115px;
-			}
 		}
 	}
 	@else if $skin-name == tos
@@ -387,10 +383,6 @@
 		#search_side {height: 29px; width: 30px;}
 		#search_text_side{height: 20px; width: 70px; margin: 4px 0 0 6px;}
 		#searchbutton_side{height: 29px; width: 82px;}
-		#sidebar { left: -113px;
-			width: 113px;
-			}
-		.sub-menu li { font-size:13px; }
 	}
 }
 

@@ -811,13 +811,17 @@ body, html {
   .container.open-sidebar {
     left: 113px; }
 
+  .sub-menu li {
+    font-size: 13px; }
+
+  #sidebar {
+    left: -113px;
+    width: 113px; }
+
   #games_side, #menus_side, #demos_side, #about_side, #links_side, #skin_side, #forum_main_side, #magazines_side, #music_side {
     line-height: 40px;
     width: 112px;
     font-size: 14px; }
-
-  .sub-menu li {
-    font-size: 13px; }
 
   #search_side {
     height: 40px;
@@ -829,11 +833,7 @@ body, html {
 
   #searchbutton_side {
     height: 38px;
-    width: 87px; }
-
-  #sidebar {
-    left: -113px;
-    width: 113px; } }
+    width: 87px; } }
 /* for the lower resolutions, we don't have the menu bar below the top */
 @media screen and (max-width: 1279px) {
   #main_nav {
