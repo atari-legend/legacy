@@ -83,10 +83,6 @@
 		#sidebar {
 			left: -191px;	
 			width: 191px;
-			-webkit-box-sizing: border-box;
-			-moz-box-sizing: border-box;
-			-ms-box-sizing: border-box;
-			box-sizing: border-box;
 		}
 	}
 	@else
@@ -115,7 +111,6 @@
 		box-sizing: border-box;
 	}
  
-	
     #sidebar ul {
         margin: 0;
         padding: 0;
