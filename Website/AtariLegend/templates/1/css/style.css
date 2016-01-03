@@ -857,9 +857,12 @@ body, html {
   background: #00a9a9;
   color: #182727;
   text-decoration: none;
-  border-bottom: 3px solid #006f6f;
-  border: 0; }
+  border: 0;
+  border-bottom: 3px solid #006f6f; }
 
+@media screen and (min-width: 1920px) {
+  .sidebutton {
+    line-height: 40px; } }
 /* for the lower resolutions, we don't have the menu bar below the top */
 @media screen and (max-width: 1279px) {
   #main_nav {
@@ -957,23 +960,57 @@ header nav input {
 .topbutton:visited {
   text-decoration: none; }
 
-@media screen and (min-width: 1920px) {
-  .sidebutton {
-    line-height: 40px; } }
 .searchbutton {
   display: block;
   float: left;
-  border: 0px;
+  border: 0;
   background: #00d3d3;
-  font-family: Audiowide,Arial,helvetica,sans-serif;
   color: #182727;
   height: 57px;
   width: 280px;
   font-size: 20px;
   border-bottom: 3px solid #008b8b;
-  border-left: 1px solid #007878;
+  border-left: 1px solid #008b8b;
   padding-top: 0px;
+  text-decoration: none;
+  -webkit-border-radius: "";
+  -moz-border-radius: "";
+  border-radius: "";
+  margin-left: 0;
+  text-shadow: 0; }
+
+.signinbutton {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  cursor: pointer;
+  border: 0;
+  background: #00d3d3;
+  color: #182727;
+  font-weight: normal;
+  border-bottom: 3px solid #008b8b;
+  border-left: 1px solid #008b8b;
+  -webkit-border-radius: "";
+  -moz-border-radius: "";
+  border-radius: "";
+  padding-top: 3px;
   text-decoration: none; }
+
+.signinbutton:visited {
+  text-decoration: none; }
+
+.signinbutton:hover {
+  text-decoration: none; }
+
+.signinbutton {
+  height: 60px;
+  width: 134px;
+  font-size: 20px; }
+
+.signinbutton:hover {
+  background: #00a9a9;
+  color: #182727;
+  border-bottom: 3px solid #006f6f; }
 
 /* This little fix was added because we had a weird menubar bug at 1280. */
 @media screen and (min-width: 1280px) and (max-width: 1297px) {
@@ -984,35 +1021,6 @@ header nav input {
   #home {
     width: 66px;
     height: 60px; } }
-.signinbutton {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  cursor: pointer;
-  border: 0px;
-  background: #00d3d3;
-  font-family: Audiowide,Arial,helvetica,sans-serif;
-  color: #182727;
-  height: 60px;
-  width: 134px;
-  font-size: 20px;
-  border-bottom: 3px solid #008b8b;
-  border-left: 1px solid #007878;
-  padding-top: 3px;
-  text-decoration: none; }
-
-.signinbutton:hover {
-  background: #00a9a9;
-  color: #182727;
-  text-decoration: none;
-  border-bottom: 3px solid #006f6f; }
-
-.signinbutton:visited {
-  text-decoration: none; }
-
-.signinbutton:link {
-  text-decoration: none; }
-
 /* responsiveness of the top menu for resolutions from 1281 to 1920 */
 @media screen and (max-width: 1919px) {
   #search_text {

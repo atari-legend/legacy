@@ -28,23 +28,28 @@
 	$sidebutton-font: 0;
 	$sidebutton-height: 0;
 	$sidebutton-hoover-font: 0;
-	
+	$searchbutton-height: 0;
+	$searchbutton-font: 0;
+	$searchbutton-shadow: 0;
+		
 	@if $skin-name == tos 
 		{$menu-top: 0; $menu-opacity: 1; $menu-input-margin: 3px 0 0 16px; $menu-input-height: 20px; $menu-input-border: 1px solid #007b7b; 
 		 $menu-input-font: 12pt; $menu-top-button-color: black; $menu-top-button-height: 30px; $menu-top-button-width: 194.6px; $menu-top-button-font: 20px;
 		 $menu-top-button-shadow: -1px 1px 5px white, 1px -1px 15px #acacac; $menu-top-button-hover-bg: black; $menu-top-button-hover-color: white;
-		 $sidebutton-bg: white; $sidebutton-font: 16px; $sidebutton-height: 27px; $sidebutton-hoover-font:white;}
+		 $sidebutton-bg: white; $sidebutton-font: 16px; $sidebutton-height: 27px; $sidebutton-hoover-font:white; $searchbutton-height: 27px; $searchbutton-font: 15px;} 
 	@else if $skin-name == picasso 
 		{$menu-top: 220px; $menu-opacity: 1; $menu-input-margin: 2px 0px 0px 16px; $menu-input-height: 20px; $menu-input-border: 1px solid #4f4f4f; 
 		 $menu-input-font: 12pt; $menu-top-button-border: 2px solid black; $menu-top-button-color: white; $menu-top-button-height: 26px; $menu-top-button-width: 181.5px; 
 		 $menu-top-button-font: 19px; $menu-top-button-font-weight: bold; $menu-top-button-margin-left: 2px; $menu-top-button-radius: 0 15px 15px 0; $menu-top-button-border-left: 2px solid black;
 		 $menu-top-button-border-bottom: 2px solid black; $menu-top-button-hover-bg: #dbd7d1; $menu-top-button-hover-color: black; $menu-top-button-hover-border: 2px solid #4f4f4f;
-		 $sidebutton-bg: #161c71; $sidebutton-font: 19px; $sidebutton-height: 30px; $sidebutton-hoover-font: white;}
+		 $sidebutton-bg: #161c71; $sidebutton-font: 19px; $sidebutton-height: 30px; $sidebutton-hoover-font: white; $searchbutton-height: 26px; $searchbutton-font:20px;
+		 $searchbutton-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #fff;}
 	@else if $skin-name == legacy 
 		{$menu-top: 225px; $menu-opacity: 0.8; $menu-input-margin: 11px 0px 0px 16px; $menu-input-height: 35px; $menu-input-border: 1px solid #007b7b; 
 		 $menu-input-font: 15pt; $menu-top-button-color: #182727; $menu-top-button-height: 57px; $menu-top-button-width: 183px; $menu-top-button-font: 20px;
 		 $menu-top-button-border-bottom: 3px solid #008b8b; $menu-top-button-border-left: 1px solid #008b8b; $menu-top-button-hover-bg: #00a9a9; $menu-top-button-hover-color: #182727;
-		 $menu-top-button-hover-border-bottom: 3px solid #006f6f; $sidebutton-bg: #00d3d3; $sidebutton-font: 16px; $sidebutton-height: 30px; $sidebutton-hoover-font: #182727;}
+		 $menu-top-button-hover-border-bottom: 3px solid #006f6f; $sidebutton-bg: #00d3d3; $sidebutton-font: 16px; $sidebutton-height: 30px; $sidebutton-hoover-font: #182727;
+		 $searchbutton-height: 57px; $searchbutton-font: 20px;}
 
 
 
@@ -459,8 +464,15 @@
 	background: $menu-top-button-hover-bg;
 	color: $sidebutton-hoover-font;
 	text-decoration:none;
-	border-bottom: $menu-top-button-hover-border-bottom;
 	border: $menu-top-button-hover-border;
+	border-bottom: $menu-top-button-hover-border-bottom;
+}
+
+@if $skin-name == legacy 
+{
+	@media screen and (min-width: 1920px) {
+		  .sidebutton{line-height:40px;}
+	}
 }
 
 /* for the lower resolutions, we don't have the menu bar below the top */ 
@@ -565,14 +577,70 @@ header nav input{
 
 .topbutton:visited {text-decoration:none;}
 
+.searchbutton
+{
+	display: block;
+	float:left;
+	border: $menu-top-button-border;
+	background: $sidebutton-bg; 
+	color: $menu-top-button-color;
+	height: $searchbutton-height;
+	width: 280px;
+	font-size: $searchbutton-font;
+	border-bottom: $menu-top-button-border-bottom;
+	border-left: $menu-top-button-border-left;
+	padding-top: 0px;
+	text-decoration:none;
+	-webkit-border-radius: $menu-top-button-radius;
+	-moz-border-radius: $menu-top-button-radius;
+	border-radius: $menu-top-button-radius;
+	margin-left: $menu-top-button-margin-left;
+	text-shadow: $searchbutton-shadow;
+}
+
+.signinbutton
+{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	cursor: pointer;
+	border: $menu-top-button-border;
+	background: $sidebutton-bg; 
+	color: $menu-top-button-color; 
+	font-weight: $menu-top-button-font-weight;
+	border-bottom: $menu-top-button-border-bottom;
+	border-left: $menu-top-button-border-left;
+	-webkit-border-radius: $menu-top-button-radius;
+	-moz-border-radius: $menu-top-button-radius;
+	border-radius: $menu-top-button-radius;
+	padding-top: 3px;
+	text-decoration:none;
+}
+
+.signinbutton:visited {
+	text-decoration:none;
+}
+
+.signinbutton:hover {
+  text-decoration:none;
+}
 
 @if $skin-name == picasso
 {
 	@media screen and (max-width: 1279px){ 
 		#main { margin-top: 25px;}
 	}
+	.signinbutton{margin-bottom: 30px; height: 30px;width: 170px; font-size: 18px;}
+	.signinbutton:hover {background: #dbd7d1; color: black; border:2px solid #4f4f4f; }
 }
 @else if $skin-name == tos
 {
 	#main_nav {background-color: white; border-bottom: 3px solid black;}
+	.signinbutton{margin-bottom: 25px; height: 60px; width: 134px; font-size: 20px;border-bottom: 3px solid black;border-left: 1px solid black;}
+	.signinbutton:hover { background: #6a6a6a; color: white;}
+}
+@else if $skin-name == legacy
+{
+	.signinbutton{height: 60px; width: 134px; font-size: 20px;}	
+	.signinbutton:hover { background: #00a9a9; color: #182727; border-bottom: 3px solid #006f6f;}
 }

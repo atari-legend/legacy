@@ -867,8 +867,8 @@ body, html {
   background: #dbd7d1;
   color: white;
   text-decoration: none;
-  border-bottom: 0;
-  border: 2px solid #4f4f4f; }
+  border: 2px solid #4f4f4f;
+  border-bottom: 0; }
 
 /* for the lower resolutions, we don't have the menu bar below the top */
 @media screen and (max-width: 1279px) {
@@ -967,9 +967,62 @@ header nav input {
 .topbutton:visited {
   text-decoration: none; }
 
+.searchbutton {
+  display: block;
+  float: left;
+  border: 2px solid black;
+  background: #161c71;
+  color: white;
+  height: 26px;
+  width: 280px;
+  font-size: 20px;
+  border-bottom: 2px solid black;
+  border-left: 2px solid black;
+  padding-top: 0px;
+  text-decoration: none;
+  -webkit-border-radius: 0 15px 15px 0;
+  -moz-border-radius: 0 15px 15px 0;
+  border-radius: 0 15px 15px 0;
+  margin-left: 2px;
+  text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #fff; }
+
+.signinbutton {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  cursor: pointer;
+  border: 2px solid black;
+  background: #161c71;
+  color: white;
+  font-weight: bold;
+  border-bottom: 2px solid black;
+  border-left: 2px solid black;
+  -webkit-border-radius: 0 15px 15px 0;
+  -moz-border-radius: 0 15px 15px 0;
+  border-radius: 0 15px 15px 0;
+  padding-top: 3px;
+  text-decoration: none; }
+
+.signinbutton:visited {
+  text-decoration: none; }
+
+.signinbutton:hover {
+  text-decoration: none; }
+
 @media screen and (max-width: 1279px) {
   #main {
     margin-top: 25px; } }
+.signinbutton {
+  margin-bottom: 30px;
+  height: 30px;
+  width: 170px;
+  font-size: 18px; }
+
+.signinbutton:hover {
+  background: #dbd7d1;
+  color: black;
+  border: 2px solid #4f4f4f; }
+
 /* ---------the main menu below top--------*/
 #home {
   display: block;
@@ -986,22 +1039,6 @@ header nav input {
   padding-left: 60px;
   border: 2px solid #4f4f4f; }
 
-.searchbutton {
-  display: block;
-  float: left;
-  border: 2px solid black;
-  height: 26px;
-  width: 280px;
-  background: #161c71;
-  color: black;
-  font-size: 20px;
-  text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #fff;
-  /*give the corners a small curve*/
-  -webkit-border-radius: 0 15px 15px 0;
-  -moz-border-radius: 0 15px 15px 0;
-  border-radius: 0 15px 15px 0;
-  margin-left: 2px; }
-
 #search {
   display: block;
   -webkit-border-radius: 0 15px 15px 0;
@@ -1017,38 +1054,6 @@ header nav input {
   padding-top: 26px;
   padding-left: 60px;
   border: 2px solid #4f4f4f; }
-
-.signinbutton {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 30px;
-  border: 2px solid black;
-  height: 30px;
-  width: 170px;
-  background: #161c71;
-  color: white;
-  font-family: robot, arial, sans-serif;
-  font-size: 18px;
-  font-weight: bold;
-  /*text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #fff;*/
-  /*give the corners a small curve*/
-  -webkit-border-radius: 0 15px 15px 0;
-  -moz-border-radius: 0 15px 15px 0;
-  border-radius: 0 15px 15px 0;
-  text-decoration: none; }
-
-.signinbutton:hover {
-  background: #dbd7d1;
-  color: black;
-  text-decoration: none;
-  border: 2px solid #4f4f4f; }
-
-.signinbutton:visited {
-  text-decoration: none; }
-
-.signinbutton:link {
-  text-decoration: none; }
 
 /* This little fix was added because we had a weird menubar bug at 1280. */
 @media screen and (min-width: 1280px) and (max-width: 1296px) {

@@ -260,66 +260,10 @@ footer, header, hgroup, menu, nav, section {
 /* ***************TOP and SIDE MENU************* */	
 @import '../../../templates/html/includes/main_scss/menu';
 
-@media screen and (min-width: 1920px) {
-	  .sidebutton{line-height:40px;}
-}
-
-.searchbutton
-{
-  display: block;
-  float:left;
-  border: 0px;
-  background: #00d3d3;
-  font-family: Audiowide,Arial,helvetica,sans-serif;
-  color: #182727;
-  height: 57px;
-  width: 280px;
-  font-size: 20px;
-  border-bottom: 3px solid #008b8b;
-  border-left: 1px solid #007878;
-  padding-top: 0px;
-  text-decoration:none;
-}
-
 /* This little fix was added because we had a weird menubar bug at 1280. */
 @media screen and (min-width: 1280px) and (max-width: 1297px) {  
 	#search { width: 66px; height: 60px;}
 	#home  { width: 66px; height: 60px;}
-}
-
-.signinbutton
-{
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  cursor: pointer;
-  border: 0px;
-  background: #00d3d3;
-  font-family: Audiowide,Arial,helvetica,sans-serif;
-  color: #182727;
-  height: 60px;
-  width: 134px;
-  font-size: 20px;
-  border-bottom: 3px solid #008b8b;
-  border-left: 1px solid #007878;
-  padding-top: 3px;
-  text-decoration:none;
-}
-
-.signinbutton:hover {
-  background: #00a9a9;
-  color: #182727;
-  text-decoration:none;
-  border-bottom: 3px solid #006f6f;
-}
-
-
-.signinbutton:visited {
-  text-decoration:none;
-}
-
-.signinbutton:link {
-  text-decoration:none;
 }
 
 /* responsiveness of the top menu for resolutions from 1281 to 1920 */
