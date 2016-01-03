@@ -16,6 +16,6 @@ Website/AtariLegend/templates/.sass-cache/*
 
 $ cat .gitignore 
 # exclude the SASS map file
-Website/AtariLegend/templates/0/css/*.map
-Website/AtariLegend/templates/1/css/*.map
-Website/AtariLegend/templates/2/css/*.map
+Website/AtariLegend/templates/0/css/*
+Website/AtariLegend/templates/1/css/*
+Website/AtariLegend/templates/2/css/*
