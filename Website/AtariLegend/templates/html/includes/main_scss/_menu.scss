@@ -217,13 +217,13 @@
 		#searchbutton_side {
 			background: black;
 			height: 27px;
-			width: 157px;
+			width: 160px;
 			border-bottom: 3px solid black;
 			padding-top: 0;
 		}
 	
 		#search_text_side{ color: #ffffff;				
-			width: 150px;
+			width: 153px;
 			height: 17px;
 			border: 1px solid #007b7b;
 			margin: 4px 0 0 6px;
@@ -235,7 +235,7 @@
 	
 	@if $skin-name == tos
 	{ 
-		#skin_side, #games_side,#menus_side,#demos_side,#links_side,#about_side,#music_side,#forum_main_side,#magazines_side{width:186px; border-bottom: 3px solid black;}
+		#skin_side, #games_side,#menus_side,#demos_side,#links_side,#about_side,#music_side,#forum_main_side,#magazines_side{width:190px; border-bottom: 3px solid black;}
 	}
 	@else if $skin-name == picasso
 	{
@@ -379,7 +379,7 @@
 	@else if $skin-name == tos
 	{
 		#games_side, #menus_side, #demos_side, #about_side, #links_side , #skin_side, #forum_main_side, #magazines_side, #music_side {	
-			height: 32px; 
+			line-height: 32px; 
 			width: 113px; 
 			font-size: 14px;
 			vertical-align: 50%;

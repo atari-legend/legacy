@@ -955,10 +955,6 @@ header nav input {
 .topbutton:visited {
   text-decoration: none; }
 
-.topbutton:link {
-  text-decoration: none;
-  color: #182727; }
-
 .sidebutton {
   cursor: pointer;
   border: 2px solid black;
