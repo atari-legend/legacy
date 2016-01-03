@@ -29,7 +29,7 @@
 		{$menu-top: 220px; $menu-opacity: 1; $menu-input-margin: 2px 0px 0px 16px; $menu-input-height: 20px; $menu-input-border: 1px solid #4f4f4f; 
 		 $menu-input-font: 12pt; $menu-top-button-border: 2px solid black; $menu-top-button-color: white; $menu-top-button-height: 26px; $menu-top-button-width: 181.5px; 
 		 $menu-top-button-font: 19px; $menu-top-button-font-weight: bold; $menu-top-button-margin-left: 2px; $menu-top-button-radius: 0 15px 15px 0; $menu-top-button-border-left: 2px solid black;
-		 $menu-top-button-margin-left: 2px solid black;}
+		 $menu-top-button-border-bottom: 2px solid black;}
 	@else if $skin-name == legacy 
 		{$menu-top: 225px; $menu-opacity: 0.8; $menu-input-margin: 11px 0px 0px 16px; $menu-input-height: 35px; $menu-input-border: 1px solid #007b7b; 
 		 $menu-input-font: 15pt; $menu-top-button-color: #182727; $menu-top-button-height: 57px; $menu-top-button-width: 183px; $menu-top-button-font: 20px;
