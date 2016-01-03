@@ -446,7 +446,6 @@
 	font-size: $sidebutton-font;
 	width: 213px;
 	vertical-align:middle;
-	text-decoration:none;
 	-webkit-border-radius: $menu-top-button-radius;
 	-moz-border-radius: $menu-top-button-radius;
 	border-radius: $menu-top-button-radius;
@@ -461,7 +460,6 @@
 .sidebutton:hover {
 	background: $menu-top-button-hover-bg;
 	color: $sidebutton-hoover-font;
-	text-decoration:none;
 	border: $menu-top-button-hover-border;
 	border-bottom: $menu-top-button-hover-border-bottom;
 }
@@ -505,7 +503,6 @@
 @media screen and (min-width: 1920px) { 
 	#search_side, #search_text_side { display: none; } 
 }
-
 
 
 /* ---------the main menu--------*/
@@ -557,7 +554,6 @@ header nav input{
 	border-bottom: $menu-top-button-border-bottom;
 	border-left: $menu-top-button-border-left;
 	padding-top: 0;
-	text-decoration:none; 
 	vertical-align: bottom;
 	text-shadow: $menu-top-button-shadow;
 	-webkit-border-radius: $menu-top-button-radius; 
@@ -568,12 +564,10 @@ header nav input{
 .topbutton:hover {
 	background: $menu-top-button-hover-bg;
 	color: $menu-top-button-hover-color;
-	text-decoration: none;
+
 	border: $menu-top-button-hover-border;
 	border-bottom: $menu-top-button-hover-border-bottom;
 }
-
-.topbutton:visited {text-decoration:none;}
 
 .searchbutton
 {
@@ -588,7 +582,6 @@ header nav input{
 	border-bottom: $menu-top-button-border-bottom;
 	border-left: $menu-top-button-border-left;
 	padding-top: 0px;
-	text-decoration:none;
 	-webkit-border-radius: $menu-top-button-radius;
 	-moz-border-radius: $menu-top-button-radius;
 	border-radius: $menu-top-button-radius;
@@ -612,15 +605,6 @@ header nav input{
 	-moz-border-radius: $menu-top-button-radius;
 	border-radius: $menu-top-button-radius;
 	padding-top: 3px;
-	text-decoration:none;
-}
-
-.signinbutton:visited {
-	text-decoration:none;
-}
-
-.signinbutton:hover {
-  text-decoration:none;
 }
 
 #home:hover,#search:hover {height: 0px;}
