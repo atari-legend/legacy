@@ -931,6 +931,16 @@ header nav input {
   -moz-border-radius: 0 15px 15px 0;
   border-radius: 0 15px 15px 0; }
 
+.topbutton:hover {
+  background: #dbd7d1;
+  color: black;
+  text-decoration: none;
+  border-bottom: 0;
+  border: 2px solid #4f4f4f; }
+
+.topbutton:visited {
+  text-decoration: none; }
+
 @media screen and (max-width: 1279px) {
   #main {
     margin-top: 25px; } }
@@ -949,15 +959,6 @@ header nav input {
   padding-top: 26px;
   padding-left: 60px;
   border: 2px solid #4f4f4f; }
-
-.topbutton:hover {
-  background: #dbd7d1;
-  color: black;
-  text-decoration: none;
-  border: 2px solid #4f4f4f; }
-
-.topbutton:visited {
-  text-decoration: none; }
 
 .sidebutton {
   cursor: pointer;

@@ -20,20 +20,25 @@
 	$menu-top-button-margin-left: 0;
 	$menu-top-button-shadow: "";
 	$menu-top-button-radius: "";
-
+	$menu-top-button-hover-bg: 0; 
+	$menu-top-button-hover-color: 0;
+	$menu-top-button-hover-border: 0;
+	$menu-top-button-hover-border-bottom: 0;
+	
 	@if $skin-name == tos 
 		{$menu-top: 0; $menu-opacity: 1; $menu-input-margin: 3px 0 0 16px; $menu-input-height: 20px; $menu-input-border: 1px solid #007b7b; 
 		 $menu-input-font: 12pt; $menu-top-button-color: black; $menu-top-button-height: 30px; $menu-top-button-width: 194.6px; $menu-top-button-font: 20px;
-		 $menu-top-button-shadow: -1px 1px 5px white, 1px -1px 15px #acacac;}
+		 $menu-top-button-shadow: -1px 1px 5px white, 1px -1px 15px #acacac; $menu-top-button-hover-bg: black; $menu-top-button-hover-color: white;}
 	@else if $skin-name == picasso 
 		{$menu-top: 220px; $menu-opacity: 1; $menu-input-margin: 2px 0px 0px 16px; $menu-input-height: 20px; $menu-input-border: 1px solid #4f4f4f; 
 		 $menu-input-font: 12pt; $menu-top-button-border: 2px solid black; $menu-top-button-color: white; $menu-top-button-height: 26px; $menu-top-button-width: 181.5px; 
 		 $menu-top-button-font: 19px; $menu-top-button-font-weight: bold; $menu-top-button-margin-left: 2px; $menu-top-button-radius: 0 15px 15px 0; $menu-top-button-border-left: 2px solid black;
-		 $menu-top-button-border-bottom: 2px solid black;}
+		 $menu-top-button-border-bottom: 2px solid black; $menu-top-button-hover-bg: #dbd7d1; $menu-top-button-hover-color: black; $menu-top-button-hover-border: 2px solid #4f4f4f;}
 	@else if $skin-name == legacy 
 		{$menu-top: 225px; $menu-opacity: 0.8; $menu-input-margin: 11px 0px 0px 16px; $menu-input-height: 35px; $menu-input-border: 1px solid #007b7b; 
 		 $menu-input-font: 15pt; $menu-top-button-color: #182727; $menu-top-button-height: 57px; $menu-top-button-width: 183px; $menu-top-button-font: 20px;
-		 $menu-top-button-border-bottom: 3px solid #008b8b; $menu-top-button-border-left: 1px solid #008b8b;}
+		 $menu-top-button-border-bottom: 3px solid #008b8b; $menu-top-button-border-left: 1px solid #008b8b; $menu-top-button-hover-bg: #00a9a9; $menu-top-button-hover-color: #182727;
+		 $menu-top-button-hover-border-bottom: 3px solid #006f6f;}
 
 
 
@@ -519,6 +524,16 @@ header nav input{
 	-moz-border-radius : $menu-top-button-radius; 
 	border-radius : $menu-top-button-radius; 
 }
+
+.topbutton:hover {
+	background: $menu-top-button-hover-bg;
+	color: $menu-top-button-hover-color;
+	text-decoration: none;
+	border-bottom: $menu-top-button-hover-border-bottom;
+	border: $menu-top-button-hover-border;
+}
+
+.topbutton:visited {text-decoration:none;}
 
 
 @if $skin-name == picasso
