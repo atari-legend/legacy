@@ -46,6 +46,10 @@ body { background: #dbd7d1;
 	  font-family: robot, arial, helvetica, sans-serif;
 }
 
+body a {text-decoration:none;}
+body a:hover {text-decoration:none;}
+body a:visited {text-decoration:none;}
+
 @media screen and (min-width: 481px) { 
 	body { background-image: url(../../../templates/2/images/top_bg_sides.jpg);
 		  background-position: left top;
@@ -1165,7 +1169,6 @@ nav ul {
 	-moz-border-radius: 0 15px 15px 0;
 	border-radius: 0 15px 15px 0;
 	margin-left: 2px;
-	text-decoration:none;
 	text-align:center;
 	/*line-height:30px;*/
 }
@@ -1173,16 +1176,10 @@ nav ul {
 .topbutton_cpanel:hover {
   background: #dbd7d1;
   color: black;
-  text-decoration:none;
   border:2px solid #4f4f4f;
 }
 
-.topbutton_cpanel:visited {
-  text-decoration:none;
-}
-
 .topbutton_cpanel:link {
-  text-decoration:none;
  	color:white;
 }
 
@@ -1203,7 +1200,6 @@ nav ul {
 	-moz-border-radius: 0 15px 15px 0;
 	border-radius: 0 15px 15px 0;
 	margin-left: 2px;
-	text-decoration:none;
 	text-align:center;
 	line-height:26px;
 }
@@ -1211,7 +1207,6 @@ nav ul {
 .subbutton_cpanel:hover {
   background: #dbd7d1;
   color: black;
-  text-decoration:none;
   border:2px solid #4f4f4f;
 }
 .sidebutton_cpanel
@@ -1231,7 +1226,6 @@ nav ul {
 	-moz-border-radius: 0 15px 15px 0;
 	border-radius: 0 15px 15px 0;
 	margin-left: 2px;
-	text-decoration:none;
 	  text-align:center;
   line-height:30px;
 }
@@ -1239,12 +1233,7 @@ nav ul {
 .sidebutton_cpanel:hover {
   background: #dbd7d1;
   color: black;
-  text-decoration:none;
   border:2px solid #4f4f4f;
-}
-
-.sidebutton_cpanel:link {
-  text-decoration:none;
 }
 
 #legacy, #tos, #picasso, #game_editor_side,
@@ -1386,18 +1375,12 @@ Standard table settings
   -moz-border-radius: 0 15px 15px 0;
   border-radius: 0 15px 15px 0;
   margin-left: 2px;
-  text-decoration:none;
 }
 
 .topbutton_cpanel_small:hover {
   background: #161c71;
   color: white;
-  text-decoration:none;
   border:1px solid #4f4f4f;
-}
-
-.top_button_cpanel_small:visited {
-  text-decoration:none;
 }
 
 /* for lower resolutions put the left and right below eachother */
@@ -1577,7 +1560,6 @@ Quick search games
 	-moz-border-radius: 0 15px 15px 0;
 	border-radius: 0 15px 15px 0;
 	margin-left: 2px;
-	text-decoration:none;
 	height: 25px;
 	width: 80px;
 	font-size: 10pt;
@@ -1586,7 +1568,6 @@ Quick search games
 .quick_search_games_button:hover {
   background: #dbd7d1;
   color: black;
-  text-decoration:none;
   border:2px solid #4f4f4f;
 }
 
