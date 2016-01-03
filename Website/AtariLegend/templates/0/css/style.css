@@ -880,8 +880,8 @@ body, html {
   background: black;
   color: white;
   text-decoration: none;
-  border-bottom: 0;
-  border: 0; }
+  border: 0;
+  border-bottom: 0; }
 
 /* for the lower resolutions, we don't have the menu bar below the top */
 @media screen and (max-width: 1279px) {
@@ -980,22 +980,63 @@ header nav input {
 .topbutton:visited {
   text-decoration: none; }
 
-#main_nav {
-  background-color: white;
-  border-bottom: 3px solid black; }
-
 .searchbutton {
   display: block;
   float: left;
   border: 0;
   background: white;
-  font-family: AtariST,Arial,helvetica,sans-serif;
-  color: #182727;
+  color: black;
   height: 27px;
   width: 280px;
   font-size: 15px;
-  padding-top: 0;
+  border-bottom: 0;
+  border-left: 0;
+  padding-top: 0px;
+  text-decoration: none;
+  -webkit-border-radius: "";
+  -moz-border-radius: "";
+  border-radius: "";
+  margin-left: 0;
+  text-shadow: 0; }
+
+.signinbutton {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  cursor: pointer;
+  border: 0;
+  background: white;
+  color: black;
+  font-weight: normal;
+  border-bottom: 0;
+  border-left: 0;
+  -webkit-border-radius: "";
+  -moz-border-radius: "";
+  border-radius: "";
+  padding-top: 3px;
   text-decoration: none; }
+
+.signinbutton:visited {
+  text-decoration: none; }
+
+.signinbutton:hover {
+  text-decoration: none; }
+
+#main_nav {
+  background-color: white;
+  border-bottom: 3px solid black; }
+
+.signinbutton {
+  margin-bottom: 25px;
+  height: 60px;
+  width: 134px;
+  font-size: 20px;
+  border-bottom: 3px solid black;
+  border-left: 1px solid black; }
+
+.signinbutton:hover {
+  background: #6a6a6a;
+  color: white; }
 
 #search:hover {
   background: url(../../../templates/0/images/menu_search_hover.png) 0 0 no-repeat;
@@ -1018,35 +1059,6 @@ header nav input {
   #home {
     width: 22px;
     height: 30px; } }
-.signinbutton {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: 25px;
-  cursor: pointer;
-  border: 0;
-  background: #acacac;
-  font-family: AtariST,Arial,helvetica,sans-serif;
-  color: #182727;
-  height: 60px;
-  width: 134px;
-  font-size: 20px;
-  border-bottom: 3px solid black;
-  border-left: 1px solid black;
-  padding-top: 3px;
-  text-decoration: none; }
-
-.signinbutton:hover {
-  background: #6a6a6a;
-  color: white;
-  text-decoration: none; }
-
-.signinbutton:visited {
-  text-decoration: none; }
-
-.signinbutton:link {
-  text-decoration: none; }
-
 /* responsiveness of the top menu for resolutions from 1281 to 1920 */
 @media screen and (max-width: 1919px) {
   #search_text {
