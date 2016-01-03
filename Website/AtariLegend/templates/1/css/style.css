@@ -834,6 +834,32 @@ body, html {
   #sidebar {
     left: -113px;
     width: 113px; } }
+.sidebutton {
+  cursor: pointer;
+  border: 0;
+  background: #00d3d3;
+  color: #182727;
+  font-size: 16px;
+  width: 213px;
+  vertical-align: middle;
+  text-decoration: none;
+  -webkit-border-radius: "";
+  -moz-border-radius: "";
+  border-radius: "";
+  text-align: center;
+  text-shadow: "";
+  font-weight: normal;
+  margin-left: 0;
+  border-bottom: 3px solid #008b8b;
+  line-height: 30px; }
+
+.sidebutton:hover {
+  background: #00a9a9;
+  color: #182727;
+  text-decoration: none;
+  border-bottom: 3px solid #006f6f;
+  border: 0; }
+
 /* for the lower resolutions, we don't have the menu bar below the top */
 @media screen and (max-width: 1279px) {
   #main_nav {
@@ -931,33 +957,9 @@ header nav input {
 .topbutton:visited {
   text-decoration: none; }
 
-.sidebutton {
-  cursor: pointer;
-  border: 0px;
-  background: #00d3d3;
-  font-family: Audiowide,Arial,helvetica,sans-serif;
-  color: #182727;
-  width: 213px;
-  font-size: 16px;
-  vertical-align: middle;
-  text-decoration: none;
-  text-align: center;
-  border-bottom: 3px solid #008b8b;
-  border-left: 1px solid #007878;
-  line-height: 30px; }
-
 @media screen and (min-width: 1920px) {
   .sidebutton {
     line-height: 40px; } }
-.sidebutton:hover {
-  background: #00a9a9;
-  color: #182727;
-  text-decoration: none;
-  border-bottom: 3px solid #006f6f; }
-
-.sidebutton:link {
-  text-decoration: none; }
-
 .searchbutton {
   display: block;
   float: left;
