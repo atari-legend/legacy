@@ -948,17 +948,19 @@ header nav input {
   -moz-border-radius: "";
   border-radius: ""; }
 
-#main_nav {
-  background-color: white;
-  border-bottom: 3px solid black; }
-
 .topbutton:hover {
-  background-color: black;
+  background: black;
   color: white;
-  text-decoration: none; }
+  text-decoration: none;
+  border-bottom: 0;
+  border: 0; }
 
 .topbutton:visited {
   text-decoration: none; }
+
+#main_nav {
+  background-color: white;
+  border-bottom: 3px solid black; }
 
 .sidebutton {
   cursor: pointer;

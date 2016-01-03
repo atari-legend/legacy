@@ -285,16 +285,6 @@ footer, header, hgroup, menu, nav, section {
 /* ***************TOP and SIDE MENU************* */	
 @import '../../../templates/html/includes/main_scss/menu';
 
-.topbutton:hover {
-  background-color: black;
-  color: white;
-  text-decoration:none;
-}
-
-.topbutton:visited {
-  text-decoration:none;
-}
-
 .sidebutton
 {
   cursor: pointer;
