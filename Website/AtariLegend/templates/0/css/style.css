@@ -857,6 +857,32 @@ body, html {
 
   .sub-menu li {
     font-size: 13px; } }
+.sidebutton {
+  cursor: pointer;
+  border: 0;
+  background: white;
+  color: black;
+  font-size: 16px;
+  width: 213px;
+  vertical-align: middle;
+  text-decoration: none;
+  -webkit-border-radius: "";
+  -moz-border-radius: "";
+  border-radius: "";
+  text-align: center;
+  text-shadow: -1px 1px 5px white, 1px -1px 15px #acacac;
+  font-weight: normal;
+  margin-left: 0;
+  border-bottom: 0;
+  line-height: 27px; }
+
+.sidebutton:hover {
+  background: black;
+  color: white;
+  text-decoration: none;
+  border-bottom: 0;
+  border: 0; }
+
 /* for the lower resolutions, we don't have the menu bar below the top */
 @media screen and (max-width: 1279px) {
   #main_nav {
@@ -957,28 +983,6 @@ header nav input {
 #main_nav {
   background-color: white;
   border-bottom: 3px solid black; }
-
-.sidebutton {
-  cursor: pointer;
-  border: 0;
-  font-family: AtariST,Arial,helvetica,sans-serif;
-  background: white;
-  color: black;
-  font-size: 16px;
-  vertical-align: middle;
-  text-decoration: none;
-  text-align: center;
-  text-shadow: -1px 1px 5px white, 1px -1px 15px #acacac;
-  line-height: 27px;
-  white-space: nowrap; }
-
-.sidebutton:hover {
-  background: black;
-  color: white;
-  text-decoration: none; }
-
-.sidebutton:link {
-  text-decoration: none; }
 
 .searchbutton {
   display: block;
