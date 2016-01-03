@@ -260,63 +260,6 @@ footer, header, hgroup, menu, nav, section {
 /* ***************TOP and SIDE MENU************* */	
 @import '../../../templates/html/includes/main_scss/menu';
 	
-/* ---------the main menu below top--------*/
-
-/* This piece of code is used for higher res :
-/*	1) making the side menu go to the left of the screen  --> Container absolute
-/*  2) Side bar needs to be transparant for resolutions between 1281 and 16** or something --> #sidebar
-/*  3) header nav is switched to absolute, if this is not done, the hyperlinks won't work anymore becauwe of position of container
-/*  4) since header nav is absolute, the main part of the site needs to be repositioned */
-@media screen and (min-width: 1280px){  	
-	.container { position: absolute;}
-	#sidebar {background-color: rgba(0, 0, 0, 0);}
-	header nav { position: absolute; margin-top: 225px;}
-	#main { position: relative; margin-top: 60px;}
-}
-
-#main_nav { width: 100%; left: 0;}
-
-#main_nav_ul { font-size: 0; text-align : center; width: 100%;
-}
-
-header nav img:hover{ opacity:0.8; 
-}
-
-header nav li {	display: inline-block;
-}
-
-header nav input{
-	background-color: #000;
-	color: #ffffff;
-	width: 247px;
-	height: 35px;
-	border: 1px solid #007b7b;
-	margin: 11px 0px 0px 16px;
-	padding: 0;
-	text-align: center;
-	display: block;
-	font-family: Audiowide;
-}
-
-.topbutton
-{
-  display: block;
-  float:left;
-  cursor: pointer;
-  border: 0;
-  background-color: #00d3d3;
-  font-family: Audiowide,Arial,helvetica,sans-serif;
-  color: #182727;
-  height: 57px;
-  line-height: 57px;
-  width: 183px;
-  font-size: 20px;
-  border-bottom: 3px solid #008b8b;
-  border-left: 1px solid #007878;
-  padding-top: 0px;
-  text-decoration:none;
-}
-
 .topbutton:hover {
   background: #00a9a9;
   color: #182727;

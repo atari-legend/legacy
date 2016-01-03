@@ -2,6 +2,41 @@
 /**** This is the css code for the side menu and the top menu ****/ 
 /*****************************************************************/ 
 
+/* ---------SASS variables for menu--------*/
+	$menu-top: 0;
+	$menu-opacity: 0;
+	$menu-input-height: 0;
+	$menu-input-margin: 0;
+	$menu-input-border: 0;
+	$menu-input-font: 0;
+	$menu-top-button-border: 0;
+	$menu-top-button-color: 0;
+	$menu-top-button-height: 0;
+	$menu-top-button-width: 0;
+	$menu-top-button-font: 0;
+	$menu-top-button-font-weight: normal;
+	$menu-top-button-border-bottom: 0;
+	$menu-top-button-border-left: 0;
+	$menu-top-button-margin-left: 0;
+	$menu-top-button-shadow: "";
+	$menu-top-button-radius: "";
+
+	@if $skin-name == tos 
+		{$menu-top: 0; $menu-opacity: 1; $menu-input-margin: 3px 0 0 16px; $menu-input-height: 20px; $menu-input-border: 1px solid #007b7b; 
+		 $menu-input-font: 12pt; $menu-top-button-color: black; $menu-top-button-height: 30px; $menu-top-button-width: 194.6px; $menu-top-button-font: 20px;
+		 $menu-top-button-shadow: -1px 1px 5px white, 1px -1px 15px #acacac;}
+	@else if $skin-name == picasso 
+		{$menu-top: 220px; $menu-opacity: 1; $menu-input-margin: 2px 0px 0px 16px; $menu-input-height: 20px; $menu-input-border: 1px solid #4f4f4f; 
+		 $menu-input-font: 12pt; $menu-top-button-border: 2px solid black; $menu-top-button-color: white; $menu-top-button-height: 26px; $menu-top-button-width: 181.5px; 
+		 $menu-top-button-font: 19px; $menu-top-button-font-weight: bold; $menu-top-button-margin-left: 2px; $menu-top-button-radius: 0 15px 15px 0; $menu-top-button-border-left: 2px solid black;
+		 $menu-top-button-margin-left: 2px solid black;}
+	@else if $skin-name == legacy 
+		{$menu-top: 225px; $menu-opacity: 0.8; $menu-input-margin: 11px 0px 0px 16px; $menu-input-height: 35px; $menu-input-border: 1px solid #007b7b; 
+		 $menu-input-font: 15pt; $menu-top-button-color: #182727; $menu-top-button-height: 57px; $menu-top-button-width: 183px; $menu-top-button-font: 20px;
+		 $menu-top-button-border-bottom: 3px solid #008b8b; $menu-top-button-border-left: 1px solid #008b8b;}
+
+
+
 /* ---------the side menu--------*/
 /* the side menu for smartphones, tablets and old (laptop) screens */
 /* it is also used for the high res monitors, but then only the skin switch will be visible and */
@@ -239,7 +274,7 @@
 	}
 	@else if $skin-name == picasso
 	{
-		#skin_side, #games_side,#menus_side,#demos_side,#links_side,#about_side,#music_side,#forum_main_side,#magazines_side{width:170px;}
+		#skin_side, #games_side,#menus_side,#demos_side,#links_side,#about_side,#music_side,#forum_main_side,#magazines_side{width:165px;}
 	}
 	@else if $skin-name == legacy
 	{
@@ -258,7 +293,6 @@
 	 
 	.skin-menu a {
 		transition:all linear 0.15s;
-		color:#000000;
 	}
 	 
 	 
@@ -344,7 +378,7 @@
 	.main-content #sidebar-toggle {position: relative;}
 	}	
 
-/* resizing of buttons is done to get al info on screen in landscape for phones and tablets*/
+/* resizing of buttons and sidemenu is done to get al info on screen in landscape for phones and tablets*/
 @media screen and (max-width: 640px) { 
 
 	.container.open-sidebar { left: 113px;}
@@ -371,7 +405,7 @@
 			#search_side {height: 37px; width: 39px;}
 			#search_text_side{height: 28px; width: 60px; margin-left:3px;}
 			#searchbutton_side{height: 37px; width: 70px;}
-			#sidebar { left: -115px;
+			#sidebar { left: -118px;
 				width: 115px;
 			}
 		}
@@ -425,4 +459,75 @@
 
 @media screen and (min-width: 1920px) { 
 	#search_side, #search_text_side { display: none; } 
+}
+
+
+
+/* ---------the main menu--------*/
+/* this is the css code for the main menu and its buttons
+
+/* This piece of code is used for higher res :
+/*	1) making the side menu go to the left of the screen  --> Container absolute
+/*  2) Side bar needs to be transparant for resolutions between 1281 and 16** or something --> #sidebar
+/*  3) header nav is switched to absolute, if this is not done, the hyperlinks won't work anymore becauwe of position of container
+/*  4) since header nav is absolute, the main part of the site needs to be repositioned */
+@media screen and (min-width: 1280px){  	
+	.container { position: absolute;}
+	#sidebar {background-color: rgba(0, 0, 0, 0);}
+	header nav { position: absolute; margin-top: $menu-top;}
+	#main { position: relative; margin-top: 60px;}
+}
+
+#main_nav { width: 100%; left: 0; }
+#main_nav_ul { font-size: 0; text-align : center; width: 100%;}
+header nav img:hover{ opacity:$menu-opacity;}
+header nav li {	display: inline-block;}
+
+header nav input{
+	background-color: #000;
+	color: #ffffff;
+	width: 247px;
+	height: $menu-input-height;
+	border: $menu-input-border;
+	margin: $menu-input-margin;
+	padding: 0;
+	display: block;
+	text-align: center;
+	font-size: $menu-input-font;
+}
+
+.topbutton
+{
+  display: block;
+  float:left;
+  cursor: pointer;
+  border: $menu-top-button-border;
+  background-color: $bg-color;
+  color: $menu-top-button-color;
+  line-height: $menu-top-button-height;
+  width: $menu-top-button-width;
+  text-align: center; 
+  font-size: $menu-top-button-font;
+  font-weight: $menu-top-button-font-weight;
+  border-bottom: $menu-top-button-border-bottom;
+  border-left: $menu-top-button-border-left;
+  padding-top: 0;
+  text-decoration:none; 
+  vertical-align: bottom;
+  text-shadow: $menu-top-button-shadow;
+  -webkit-border-radius: $menu-top-button-radius; 
+  -moz-border-radius : $menu-top-button-radius; 
+  border-radius : $menu-top-button-radius; 
+}
+
+
+@if $skin-name == picasso
+{
+	@media screen and (max-width: 1279px){ 
+		#main { margin-top: 25px;}
+	}
+}
+@else if $skin-name == tos
+{
+	#main_nav {background-color: white; border-bottom: 3px solid black;}
 }

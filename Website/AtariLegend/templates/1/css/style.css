@@ -613,6 +613,7 @@ footer, header, hgroup, menu, nav, section {
 /*****************************************************************/
 /**** This is the css code for the side menu and the top menu ****/
 /*****************************************************************/
+/* ---------SASS variables for menu--------*/
 /* ---------the side menu--------*/
 /* the side menu for smartphones, tablets and old (laptop) screens */
 /* it is also used for the high res monitors, but then only the skin switch will be visible and */
@@ -752,8 +753,7 @@ body, html {
   list-style: none; }
 
 .skin-menu a {
-  transition: all linear 0.15s;
-  color: #000000; }
+  transition: all linear 0.15s; }
 
 /*  Top Level */
 .skin-menu > ul > li {
@@ -806,7 +806,7 @@ body, html {
 
   .main-content #sidebar-toggle {
     position: relative; } }
-/* resizing of buttons is done to get al info on screen in landscape for phones and tablets*/
+/* resizing of buttons and sidemenu is done to get al info on screen in landscape for phones and tablets*/
 @media screen and (max-width: 640px) {
   .container.open-sidebar {
     left: 113px; }
@@ -850,7 +850,9 @@ body, html {
 @media screen and (min-width: 1920px) {
   #search_side, #search_text_side {
     display: none; } }
-/* ---------the main menu below top--------*/
+/* ---------the main menu--------*/
+/* this is the css code for the main menu and its buttons
+
 /* This piece of code is used for higher res :
 /*	1) making the side menu go to the left of the screen  --> Container absolute
 /*  2) Side bar needs to be transparant for resolutions between 1281 and 16** or something --> #sidebar
@@ -893,9 +895,9 @@ header nav input {
   border: 1px solid #007b7b;
   margin: 11px 0px 0px 16px;
   padding: 0;
-  text-align: center;
   display: block;
-  font-family: Audiowide; }
+  text-align: center;
+  font-size: 15pt; }
 
 .topbutton {
   display: block;
@@ -903,16 +905,21 @@ header nav input {
   cursor: pointer;
   border: 0;
   background-color: #00d3d3;
-  font-family: Audiowide,Arial,helvetica,sans-serif;
   color: #182727;
-  height: 57px;
   line-height: 57px;
   width: 183px;
+  text-align: center;
   font-size: 20px;
+  font-weight: normal;
   border-bottom: 3px solid #008b8b;
-  border-left: 1px solid #007878;
-  padding-top: 0px;
-  text-decoration: none; }
+  border-left: 1px solid #008b8b;
+  padding-top: 0;
+  text-decoration: none;
+  vertical-align: bottom;
+  text-shadow: "";
+  -webkit-border-radius: "";
+  -moz-border-radius: "";
+  border-radius: ""; }
 
 .topbutton:hover {
   background: #00a9a9;

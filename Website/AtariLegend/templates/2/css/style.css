@@ -622,6 +622,7 @@ footer, header, hgroup, menu, nav, section {
 /*****************************************************************/
 /**** This is the css code for the side menu and the top menu ****/
 /*****************************************************************/
+/* ---------SASS variables for menu--------*/
 /* ---------the side menu--------*/
 /* the side menu for smartphones, tablets and old (laptop) screens */
 /* it is also used for the high res monitors, but then only the skin switch will be visible and */
@@ -749,7 +750,7 @@ body, html {
   text-align: center; }
 
 #skin_side, #games_side, #menus_side, #demos_side, #links_side, #about_side, #music_side, #forum_main_side, #magazines_side {
-  width: 170px; }
+  width: 165px; }
 
 .skin-menu {
   width: 100%;
@@ -760,8 +761,7 @@ body, html {
   list-style: none; }
 
 .skin-menu a {
-  transition: all linear 0.15s;
-  color: #000000; }
+  transition: all linear 0.15s; }
 
 /*  Top Level */
 .skin-menu > ul > li {
@@ -815,7 +815,7 @@ body, html {
 
   .main-content #sidebar-toggle {
     position: relative; } }
-/* resizing of buttons is done to get al info on screen in landscape for phones and tablets*/
+/* resizing of buttons and sidemenu is done to get al info on screen in landscape for phones and tablets*/
 @media screen and (max-width: 640px) {
   .container.open-sidebar {
     left: 113px; }
@@ -842,7 +842,7 @@ body, html {
     width: 70px; }
 
   #sidebar {
-    left: -115px;
+    left: -118px;
     width: 115px; } }
 /* for the lower resolutions, we don't have the menu bar below the top */
 @media screen and (max-width: 1279px) {
@@ -860,7 +860,9 @@ body, html {
 @media screen and (min-width: 1920px) {
   #search_side, #search_text_side {
     display: none; } }
-/* ---------the main menu below top--------*/
+/* ---------the main menu--------*/
+/* this is the css code for the main menu and its buttons
+
 /* This piece of code is used for higher res :
 /*	1) making the side menu go to the left of the screen  --> Container absolute
 /*  2) Side bar needs to be transparant for resolutions between 1281 and 16** or something --> #sidebar
@@ -889,9 +891,6 @@ body, html {
   text-align: center;
   width: 100%; }
 
-@media screen and (max-width: 1279px) {
-  #main {
-    margin-top: 25px; } }
 header nav img:hover {
   opacity: 1; }
 
@@ -906,31 +905,36 @@ header nav input {
   border: 1px solid #4f4f4f;
   margin: 2px 0px 0px 16px;
   padding: 0;
-  text-align: center;
   display: block;
-  font-family: robot, Arial, sans-serif; }
+  text-align: center;
+  font-size: 12pt; }
 
 .topbutton {
   display: block;
   float: left;
   cursor: pointer;
   border: 2px solid black;
-  height: 26px;
-  line-height: 26px;
-  width: 180px;
-  background: #161c71;
-  font-family: robot, arial, sans-serif;
+  background-color: #161c71;
   color: white;
+  line-height: 26px;
+  width: 181.5px;
+  text-align: center;
   font-size: 19px;
   font-weight: bold;
-  /*text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #fff;*/
-  /*give the corners a small curve*/
+  border-bottom: 0;
+  border-left: 2px solid black;
+  padding-top: 0;
+  text-decoration: none;
+  vertical-align: bottom;
+  text-shadow: "";
   -webkit-border-radius: 0 15px 15px 0;
   -moz-border-radius: 0 15px 15px 0;
-  border-radius: 0 15px 15px 0;
-  margin-left: 2px;
-  text-decoration: none; }
+  border-radius: 0 15px 15px 0; }
 
+@media screen and (max-width: 1279px) {
+  #main {
+    margin-top: 25px; } }
+/* ---------the main menu below top--------*/
 #home {
   display: block;
   -webkit-border-radius: 0 15px 15px 0;
