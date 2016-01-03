@@ -21,6 +21,8 @@ $bg-color: #161c71;
 /* ---------------SASS includes---------------*/
 
 @import '../../../templates/html/includes/main_scss/menu'; /* --> TOP and SIDE MENU */
+@import '../../../templates/html/includes/main_scss/top_animation'; /* --> TOP animation */
+
 
 
 
@@ -127,95 +129,6 @@ footer, header, hgroup, menu, nav, section {
 		margin-top: 10px;
 		}			
 
-/* animation */
-#animation {
-    position: relative;
-	-webkit-animation-name: STcharacters;
-	animation-name: STcharacters;
-	-webkit-animation-duration: 20s;
-	animation-duration: 20s;
-	-webkit-animation-iteration-count: infinite;
-	animation-iteration-count: infinite;
-	-webkit-animation-timing-function: linear;
-	animation-timing-function: linear;
-}
-
-@-webkit-keyframes STcharacters {
-    0% {
-        top: 156px;
-		left: -20%;
-		opacity: 0;}	
-	
-	10% { opacity: 1;}
-	70% { opacity: 1;}
-	
-	100% {
-        top: 156px;
-		left: 45%;
-		opacity: 0;
-    }
-}
-
-@keyframes STcharacters {
-    0% {
-        top:156px;
-		left: -20%;
-		opacity: 0;}		
-		
-	10% { opacity: 1;}
-	70% { opacity: 1;}
-    	
-    100% {
-        top:156px;
-		left: 45%;
-		opacity: 0;
-    }
-}
-
-#animation_vert{ position: relative;
-	-webkit-animation-name: STcharacters_vert;
-	animation-name: STcharacters_vert;
-	-webkit-animation-duration: 10s;
-	animation-duration: 10s;
-	-webkit-animation-iteration-count: infinite;
-	animation-iteration-count: infinite;
-	-webkit-animation-timing-function: linear;
-	animation-timing-function: linear;
-}
-
-@-webkit-keyframes STcharacters_vert {
-    0% {
-        top: 145px;
-		left: -5%;
-		opacity: 0;}	
-	
-	10% { opacity: 1;}
-	70% { opacity: 1;
-	left: 0%;}
-	
-	100% {
-        top:10px;
-		left: 5%;
-		opacity: 0;
-    }
-}
-@keyframes STcharacters_vert {
-    0% {
-        top:145px;
-		left: -5%;
-		opacity: 0;}		
-		
-	10% { opacity: 1;}
-	70% { opacity: 1;
-	left: 0%;}
-    	
-    100% {
-        top:10px;
-		left: 5%;
-		opacity: 0;
-    }
-}
-
 /* at a resolution of max 480 (smartphones) we want a smaller logo with border */		
 @media screen and (max-width: 480px) { 
 	.container { width: 15%; } 
@@ -229,7 +142,6 @@ footer, header, hgroup, menu, nav, section {
 			margin-right: auto;
 			margin-bottom: 5px;		
 		}
-	#animation, #animation_vert{ display: none;}
 	#right { width: 0%;
 		display: none;
 	}
@@ -254,7 +166,6 @@ footer, header, hgroup, menu, nav, section {
 			   margin-right: auto; 
 			   margin-top: 0px;
 		}
-	#animation, #animation_vert{ display: none;}
 	#logo_img_480{ display: none;}
 		
 	#right { width: 0%;
