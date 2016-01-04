@@ -15,12 +15,10 @@ $support-for: (
 $skin-name: "tos";
 $bg-color: white;
 
-
-
 /* ---------------SASS includes---------------*/
 @import "normalize/import-now";										/* --> Normalize script
-@import '../../../templates/html/includes/main_scss/menu'; 			/* --> TOP and SIDE MENU */
-@import '../../../templates/html/includes/main_scss/top_animation'; /* --> TOP animation */
+
+
 
 
 
@@ -51,6 +49,10 @@ html { overflow-y: scroll;
 body { background-color: #e1e1e1; 
 	  font-family: AtariST, Arial, helvetica, sans-serif;
 }
+
+body a {text-decoration:none;}
+body a:hover {text-decoration:none;}
+body a:visited {text-decoration:none;}
 
 @media screen and (min-width: 481px) { 
 	body { background-image: url(../../../templates/0/images/top_bg_sides.jpg);
@@ -128,6 +130,8 @@ footer, header, hgroup, menu, nav, section {
 		float: right;
 		}			
 
+@import '../../../templates/html/includes/main_scss/top_animation'; /* --> TOP animation */
+
 /* at a resolution of max 480 (smartphones) we want a smaller logo with border */		
 @media screen and (max-width: 480px) { 
 	.container { width: 15%; } 
@@ -184,6 +188,9 @@ footer, header, hgroup, menu, nav, section {
 		display: block;
 		text-align: right;}
 	}	
+	
+	
+@import '../../../templates/html/includes/main_scss/menu'; 			/* --> TOP and SIDE MENU */	
 	
 /*---------------------------------------------------------- 
  Main site
@@ -1226,7 +1233,7 @@ nav ul {
   width: 213px;
   font-size: 20px;
   padding-top: 3px;
-  text-decoration:none;
+
   text-shadow: -1px 1px 5px white, 1px -1px 15px #acacac;
   text-align:center;
 }
@@ -1234,11 +1241,11 @@ nav ul {
 .topbutton_cpanel:hover {
   background: black;
   color: white;
-  text-decoration:none;
+
 }
 
 .top_button_cpanel:visited {
-  text-decoration:none;
+
   color: #182727;
 }
 .subbutton_cpanel
@@ -1254,7 +1261,7 @@ nav ul {
   width: 213px;
   border-bottom: 3px solid black;
   padding-top: 3px;
-  text-decoration:none;
+
   text-shadow: -1px 1px 5px white, 1px -1px 15px #acacac;
   text-align:center;
 }
@@ -1262,7 +1269,6 @@ nav ul {
 .subbutton_cpanel:hover {
   background: black;
   color: white;
-  text-decoration:none;
 }
 .sidebutton_cpanel
 {
@@ -1273,7 +1279,6 @@ nav ul {
   color:black;
   font-size: 16px;
   vertical-align:middle;
-  text-decoration:none;
   text-align:center;
   text-shadow: -1px 1px 5px white, 1px -1px 15px #acacac;
   line-height:27px;
@@ -1283,12 +1288,8 @@ nav ul {
 .sidebutton_cpanel:hover {
   background: black;
   color: white;
-  text-decoration:none;
 }
 
-.sidebutton_cpanel:link {
-  text-decoration:none;
-}
 
 #game_editor, #game_comments, #game_series, #game_music, #game_submissions, #game_reviews, #submitted_reviews,
 #menu_editor, #menu_comments, #menu_submissions, #demo_editor, #demo_comments, #demo_music, #demo_submissions,
@@ -1447,20 +1448,15 @@ Standard table settings
   font-size: 15px;
   border-bottom: 3px solid black;
   border-left: 1px solid black;
-  text-decoration:none;
   text-shadow: -1px 1px 5px white, 1px -1px 15px #acacac;
 }
 
 .topbutton_cpanel_small:hover {
   background: black;
   color: white;
-  text-decoration:none;
   border-bottom: 3px solid black;
 }
 
-.top_button_cpanel_small:visited {
-  text-decoration:none;
-}
 
 /* for lower resolutions put the left and right below eachother */
 @media screen and (max-width: 799px) { 	
@@ -1630,7 +1626,6 @@ Quick search games
 	  color: #182727;
 	  border-bottom: 3px solid black;
 	  padding-top: 3px;
-	  text-decoration:none;
 	  text-shadow: -1px 1px 5px white, 1px -1px 15px #acacac;
 	  height: 25px;
 	  width: 80px;
@@ -1640,7 +1635,6 @@ Quick search games
 .quick_search_games_button:hover {
   background: black;
   color: white;
-  text-decoration:none;
 }
 
 
