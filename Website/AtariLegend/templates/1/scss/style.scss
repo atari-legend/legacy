@@ -19,8 +19,8 @@ $bg-color: #00d3d3;
 
 /* ---------------SASS includes---------------*/
 @import "normalize/import-now";										/* --> Normalize script
-@import '../../../templates/html/includes/main_scss/menu'; 			/* --> TOP and SIDE MENU */
-@import '../../../templates/html/includes/main_scss/top_animation'; /* --> TOP animation */
+
+
 
 
 
@@ -117,6 +117,8 @@ footer, header, hgroup, menu, nav, section {
 		float: right;
 		}			
 
+@import '../../../templates/html/includes/main_scss/top_animation'; /* --> TOP animation */
+
 /* at a resolution of max 480 (smartphones) we want a smaller logo with border */		
 @media screen and (max-width: 480px) { 
 	.container { width: 15%; } 
@@ -169,7 +171,9 @@ footer, header, hgroup, menu, nav, section {
 		display: block;
 		text-align: right;}
 	}	
-	
+
+@import '../../../templates/html/includes/main_scss/menu'; 			/* --> TOP and SIDE MENU */
+
 /*---------------------------------------------------------- 
  Main site
 ------------------------------------------------------------ */	
