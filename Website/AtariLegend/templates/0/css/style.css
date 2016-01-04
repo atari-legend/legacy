@@ -371,7 +371,106 @@ th {
   padding: 0; }
 
                                										/* --> Normalize script
-@import '../../../templates/html/includes/main_scss/menu'; 			/* --> TOP and SIDE MENU */
+
+/********************PART I : MAIN SITE***********************/
+/* load the main site font */
+@font-face {
+  font-family: AtariST;
+  src: url("../font/AtariST.eot");
+  src: url("../font/AtariST.eot?#iefix") format("embedded-opentype"), url("../font/AtariST.woff2") format("woff2"), url("../font/AtariST.woff") format("woff"), url("../font/AtariST.ttf") format("truetype"), url("../font/AtariST.svg#AtariST") format("svg");
+  font-weight: normal;
+  font-style: normal; }
+* {
+  margin: 0;
+  padding: 0; }
+
+html {
+  overflow-y: scroll;
+  overflow-x: hidden; }
+
+body {
+  background-color: #e1e1e1;
+  font-family: AtariST, Arial, helvetica, sans-serif; }
+
+body a {
+  text-decoration: none; }
+
+body a:hover {
+  text-decoration: none; }
+
+body a:visited {
+  text-decoration: none; }
+
+@media screen and (min-width: 481px) {
+  body {
+    background-image: url(../../../templates/0/images/top_bg_sides.jpg);
+    background-position: left top;
+    background-repeat: repeat-x; } }
+@media screen and (min-width: 1920px) {
+  body {
+    background-image: url(../../../templates/0/images/top_bg_left.jpg), url(../../../templates/0/images/top_bg_right.jpg), url(../../../templates/0/images/top_bg_sides.jpg);
+    background-position: left 2px, right 2px, left top;
+    background-repeat: no-repeat, repeat-x, repeat-x; } }
+@media screen and (min-width: 1921px) {
+  body {
+    background-image: url(../../../templates/0/images/top_bg_sides.jpg), url(../../../templates/0/images/main_bg.png), url(../../../templates/0/images/main_bg.png);
+    background-position: left top, 100% 100%, -10% 25%;
+    background-repeat: repeat-x, no-repeat, no-repeat; } }
+img {
+  display: block; }
+
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block; }
+
+/*---------------------------------------------------------- 
+ Main site width
+------------------------------------------------------------ */
+#wrapper {
+  width: 100%;
+  max-width: 1920px;
+  margin: auto; }
+
+#wrapper_header {
+  width: 100%;
+  max-width: 1280px;
+  margin: auto; }
+
+#main {
+  width: 100%;
+  margin-right: 5%;
+  float: left; }
+
+/*---------------------------------------------------------- 
+ Top
+------------------------------------------------------------ */
+/* background */
+#top_background {
+  width: 100%;
+  float: left;
+  display: block;
+  background: url(../../../templates/0/images/top_bg.jpg) 0 0 no-repeat;
+  height: 100%;
+  border-bottom: 2px solid black; }
+
+/* logos */
+#left {
+  float: left; }
+
+#logo_img {
+  max-width: 100%; }
+
+#logo_img_480 {
+  max-width: 100%; }
+
+#right {
+  float: right;
+  margin-top: 30px; }
+
+#right img {
+  max-width: 100%;
+  float: right; }
+
 /**************************************************************************/
 /**** This is the css code for the animations at the top of the screen ****/
 /**************************************************************************/
@@ -470,96 +569,6 @@ th {
   #animation, #animation_vert {
     display: none; } }
 /* --> TOP animation */
-/********************PART I : MAIN SITE***********************/
-/* load the main site font */
-@font-face {
-  font-family: AtariST;
-  src: url("../font/AtariST.eot");
-  src: url("../font/AtariST.eot?#iefix") format("embedded-opentype"), url("../font/AtariST.woff2") format("woff2"), url("../font/AtariST.woff") format("woff"), url("../font/AtariST.ttf") format("truetype"), url("../font/AtariST.svg#AtariST") format("svg");
-  font-weight: normal;
-  font-style: normal; }
-* {
-  margin: 0;
-  padding: 0; }
-
-html {
-  overflow-y: scroll;
-  overflow-x: hidden; }
-
-body {
-  background-color: #e1e1e1;
-  font-family: AtariST, Arial, helvetica, sans-serif; }
-
-@media screen and (min-width: 481px) {
-  body {
-    background-image: url(../../../templates/0/images/top_bg_sides.jpg);
-    background-position: left top;
-    background-repeat: repeat-x; } }
-@media screen and (min-width: 1920px) {
-  body {
-    background-image: url(../../../templates/0/images/top_bg_left.jpg), url(../../../templates/0/images/top_bg_right.jpg), url(../../../templates/0/images/top_bg_sides.jpg);
-    background-position: left 2px, right 2px, left top;
-    background-repeat: no-repeat, repeat-x, repeat-x; } }
-@media screen and (min-width: 1921px) {
-  body {
-    background-image: url(../../../templates/0/images/top_bg_sides.jpg), url(../../../templates/0/images/main_bg.png), url(../../../templates/0/images/main_bg.png);
-    background-position: left top, 100% 100%, -10% 25%;
-    background-repeat: repeat-x, no-repeat, no-repeat; } }
-img {
-  display: block; }
-
-article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
-  display: block; }
-
-/*---------------------------------------------------------- 
- Main site width
------------------------------------------------------------- */
-#wrapper {
-  width: 100%;
-  max-width: 1920px;
-  margin: auto; }
-
-#wrapper_header {
-  width: 100%;
-  max-width: 1280px;
-  margin: auto; }
-
-#main {
-  width: 100%;
-  margin-right: 5%;
-  float: left; }
-
-/*---------------------------------------------------------- 
- Top
------------------------------------------------------------- */
-/* background */
-#top_background {
-  width: 100%;
-  float: left;
-  display: block;
-  background: url(../../../templates/0/images/top_bg.jpg) 0 0 no-repeat;
-  height: 100%;
-  border-bottom: 2px solid black; }
-
-/* logos */
-#left {
-  float: left; }
-
-#logo_img {
-  max-width: 100%; }
-
-#logo_img_480 {
-  max-width: 100%; }
-
-#right {
-  float: right;
-  margin-top: 30px; }
-
-#right img {
-  max-width: 100%;
-  float: right; }
-
 /* at a resolution of max 480 (smartphones) we want a smaller logo with border */
 @media screen and (max-width: 480px) {
   .container {
@@ -638,6 +647,425 @@ footer, header, hgroup, menu, nav, section {
     width: 35%;
     display: block;
     text-align: right; } }
+/*****************************************************************/
+/**** This is the css code for the side menu and the top menu ****/
+/*****************************************************************/
+/* ---------SASS variables for menu--------*/
+/* ---------the side menu--------*/
+/* the side menu for smartphones, tablets and old (laptop) screens */
+/* it is also used for the high res monitors, but then only the skin switch will be visible and */
+/* in certain resolutions the quick search field */
+/* This file contains the complete build code as well as the positioning of the side menu for all */
+/* resolutions - see the code at the bottom of the file */
+body, html {
+  height: 100%; }
+
+.container {
+  display: block;
+  z-index: 3;
+  position: relative;
+  width: 100%;
+  left: 0;
+  -webkit-transition: left 0.4s ease-in-out;
+  -moz-transition: left 0.4s ease-in-out;
+  -ms-transition: left 0.4s ease-in-out;
+  -o-transition: left 0.4s ease-in-out;
+  transition: left 0.4s ease-in-out; }
+
+/* for the TOS skin, we want to side button to be lower not to interfere with the main menu */
+@media screen and (min-width: 1280px) and (max-width: 2304px) {
+  .container {
+    margin-top: 33px; } }
+/* this is the width of the side menu when it is pushed open */
+.container.open-sidebar {
+  left: 189px; }
+
+/* the position of the side buttons when pushed open */
+#sidebar {
+  left: -191px;
+  width: 191px; }
+
+/* the side bar button options */
+#sidebar {
+  z-index: 1;
+  position: absolute;
+  background: black;
+  height: 100%;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box; }
+
+#sidebar ul {
+  margin: 0;
+  padding: 0;
+  list-style: none; }
+
+/* placement of the side menu buttons */
+#sidebar ul li {
+  margin: 0; }
+
+#sidebar ul li {
+  background: white; }
+
+/* side menu button effect */
+#sidebar ul li a {
+  padding: 0;
+  display: block;
+  -webkit-transition: background 0.3s ease-in-out;
+  -moz-transition: background 0.3s ease-in-out;
+  -ms-transition: background 0.3s ease-in-out;
+  -o-transition: background 0.3s ease-in-out;
+  transition: background 0.3s ease-in-out; }
+
+.main-content {
+  width: 100%;
+  height: 100%;
+  padding: 1px;
+  position: absolute;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box; }
+  .main-content #sidebar-toggle {
+    display: block;
+    position: absolute;
+    padding: 10px 7px;
+    float: left;
+    background: white; }
+    .main-content #sidebar-toggle .bar {
+      display: block;
+      width: 18px;
+      margin-bottom: 3px;
+      height: 2px; }
+
+.main-content #sidebar-toggle .bar {
+  background-color: black; }
+
+.main-content #sidebar-toggle .bar:last-child {
+  margin-bottom: 0; }
+
+/* search field and button code - this is very skin specific */
+#search_ul {
+  width: 100%; }
+
+#search_ul li {
+  float: left; }
+
+#search_side {
+  width: 30px;
+  height: 27px;
+  border-bottom: 3px solid black; }
+
+#searchbutton_side {
+  background: black;
+  height: 27px;
+  width: 160px;
+  border-bottom: 3px solid black;
+  padding-top: 0; }
+
+#search_text_side {
+  color: #ffffff;
+  width: 153px;
+  height: 17px;
+  border: 1px solid #007b7b;
+  margin: 4px 0 0 6px;
+  padding: 0;
+  background: #000;
+  text-align: center; }
+
+#skin_side, #games_side, #menus_side, #demos_side, #links_side, #about_side, #music_side, #forum_main_side, #magazines_side {
+  width: 190px;
+  border-bottom: 3px solid black; }
+
+.skin-menu {
+  width: 100%;
+  margin: 0px auto; }
+
+.skin-menu li {
+  margin: 0;
+  list-style: none; }
+
+.skin-menu a {
+  transition: all linear 0.15s; }
+
+/*  Top Level */
+.skin-menu > ul > li {
+  float: left;
+  display: inline-block;
+  position: relative;
+  font-size: 19px; }
+
+/* Bottom Level - This is the skin switching part */
+.skin-menu li:hover .sub-menu {
+  z-index: 1;
+  opacity: 1; }
+
+.sub-menu {
+  width: 75%;
+  padding: 5px 0;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity linear 0.15s;
+  box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.2);
+  text-align: center; }
+
+.sub-menu li {
+  display: block;
+  font-size: 16px;
+  border-top-style: solid;
+  border-top-color: #000000;
+  border-top-width: 1px; }
+
+.sub-menu li a {
+  display: block;
+  text-decoration: none;
+  font-weight: normal;
+  background: white; }
+
+.sub-menu li a {
+  color: black; }
+
+.sub-menu li a:hover {
+  background: black;
+  color: white; }
+
+/* 'position' is needed for smartphone view else the logo is covered by the sidemenu button */
+@media screen and (max-width: 480px) {
+  .main-content {
+    position: relative; }
+
+  .main-content #sidebar-toggle {
+    position: relative; } }
+/* resizing of buttons and sidemenu is done to get al info on screen in landscape for phones and tablets*/
+@media screen and (max-width: 640px) {
+  .container.open-sidebar {
+    left: 113px; }
+
+  #games_side, #menus_side, #demos_side, #about_side, #links_side, #skin_side, #forum_main_side, #magazines_side, #music_side {
+    line-height: 32px;
+    width: 113px;
+    font-size: 14px;
+    vertical-align: 50%; }
+
+  #search_side {
+    height: 29px;
+    width: 30px; }
+
+  #search_text_side {
+    height: 20px;
+    width: 70px;
+    margin: 4px 0 0 6px; }
+
+  #searchbutton_side {
+    height: 29px;
+    width: 82px; }
+
+  #sidebar {
+    left: -113px;
+    width: 113px; }
+
+  .sub-menu li {
+    font-size: 13px; } }
+.sidebutton {
+  cursor: pointer;
+  border: 0;
+  background: white;
+  color: black;
+  font-size: 16px;
+  width: 213px;
+  vertical-align: middle;
+  -webkit-border-radius: "";
+  -moz-border-radius: "";
+  border-radius: "";
+  text-align: center;
+  text-shadow: -1px 1px 5px white, 1px -1px 15px #acacac;
+  font-weight: normal;
+  margin-left: 0;
+  border-bottom: 0;
+  line-height: 27px; }
+
+.sidebutton:hover {
+  background: black;
+  color: white;
+  border: 0;
+  border-bottom: 0; }
+
+/* for the lower resolutions, we don't have the menu bar below the top */
+@media screen and (max-width: 1279px) {
+  #main_nav {
+    display: none; } }
+/* for resolutions between 1280 and 1920 the search goes to the side menu */
+/* some re-placement of the skin button is needed here */
+@media screen and (max-width: 1919px) {
+  .skin-wrap {
+    margin-top: 30px; } }
+/* for the high resolutions, we only have the skin switch in the side menu */
+@media screen and (min-width: 1280px) {
+  .side_navigation {
+    display: none; } }
+@media screen and (min-width: 1920px) {
+  #search_side, #search_text_side {
+    display: none; } }
+/* ---------the main menu--------*/
+/* this is the css code for the main menu and its buttons
+
+/* This piece of code is used for higher res :
+/*	1) making the side menu go to the left of the screen  --> Container absolute
+/*  2) Side bar needs to be transparant for resolutions between 1281 and 16** or something --> #sidebar
+/*  3) header nav is switched to absolute, if this is not done, the hyperlinks won't work anymore becauwe of position of container
+/*  4) since header nav is absolute, the main part of the site needs to be repositioned */
+@media screen and (min-width: 1280px) {
+  .container {
+    position: absolute; }
+
+  #sidebar {
+    background-color: transparent; }
+
+  header nav {
+    position: absolute;
+    margin-top: 0; }
+
+  #main {
+    position: relative;
+    margin-top: 60px; } }
+#main_nav {
+  width: 100%;
+  left: 0; }
+
+#main_nav_ul {
+  font-size: 0;
+  text-align: center;
+  width: 100%; }
+
+header nav img:hover {
+  opacity: 1; }
+
+header nav li {
+  display: inline-block; }
+
+header nav input {
+  background-color: #000;
+  color: #ffffff;
+  width: 247px;
+  height: 20px;
+  border: 1px solid #007b7b;
+  margin: 3px 0 0 16px;
+  padding: 0;
+  display: block;
+  text-align: center;
+  font-size: 12pt; }
+
+.topbutton {
+  display: block;
+  float: left;
+  cursor: pointer;
+  border: 0;
+  background-color: white;
+  color: black;
+  line-height: 30px;
+  width: 194.6px;
+  text-align: center;
+  font-size: 20px;
+  font-weight: normal;
+  border-bottom: 0;
+  border-left: 0;
+  padding-top: 0;
+  vertical-align: bottom;
+  text-shadow: -1px 1px 5px white, 1px -1px 15px #acacac;
+  -webkit-border-radius: "";
+  -moz-border-radius: "";
+  border-radius: ""; }
+
+.topbutton:hover {
+  background: black;
+  color: white;
+  border: 0;
+  border-bottom: 0; }
+
+.searchbutton {
+  display: block;
+  float: left;
+  border: 0;
+  background: white;
+  color: black;
+  height: 27px;
+  width: 280px;
+  font-size: 15px;
+  border-bottom: 0;
+  border-left: 0;
+  padding-top: 0px;
+  -webkit-border-radius: "";
+  -moz-border-radius: "";
+  border-radius: "";
+  margin-left: 0;
+  text-shadow: 0; }
+
+.signinbutton {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  cursor: pointer;
+  border: 0;
+  background: white;
+  color: black;
+  font-weight: normal;
+  border-bottom: 0;
+  border-left: 0;
+  -webkit-border-radius: "";
+  -moz-border-radius: "";
+  border-radius: "";
+  padding-top: 3px; }
+
+#home:hover, #search:hover {
+  height: 0px; }
+
+#main_nav {
+  background-color: white;
+  border-bottom: 3px solid black; }
+
+.signinbutton {
+  margin-bottom: 25px;
+  height: 60px;
+  width: 134px;
+  font-size: 20px;
+  border-bottom: 3px solid black;
+  border-left: 1px solid black; }
+
+.signinbutton:hover {
+  background: #6a6a6a;
+  color: white; }
+
+#search:hover {
+  background: url(../../../templates/0/images/menu_search_hover.png) 0 0 no-repeat;
+  padding-top: 30px;
+  padding-left: 30px; }
+
+#home:hover {
+  background: url(../../../templates/0/images/menu_home_hover.png) 0 0 no-repeat;
+  padding-top: 30px;
+  padding-left: 30px; }
+
+@media screen and (max-width: 1590px) {
+  #home {
+    display: none; } }
+@media screen and (max-width: 1560px) {
+  .topbutton {
+    width: 165px; } }
+@media screen and (max-width: 1325px) {
+  .topbutton {
+    width: 155px; } }
+/* responsiveness of the top menu for resolutions from 1281 to 1920 */
+@media screen and (max-width: 1919px) {
+  #search_text {
+    display: none; }
+
+  #search {
+    display: none; } }
+/* --> TOP and SIDE MENU */
 /*---------------------------------------------------------- 
  Main site
 ------------------------------------------------------------ */
@@ -975,7 +1403,6 @@ Standard tile settings
 a.standard_tile_link:link {
   color: white;
   text-shadow: -1px 1px 8px #686868, 1px -1px 8px #515151;
-  text-decoration: none;
   outline: 0 none; }
 
 a.standard_tile_link:hover, a.standard_tile_link:focus {
@@ -983,57 +1410,40 @@ a.standard_tile_link:hover, a.standard_tile_link:focus {
   text-shadow: -1px 1px 8px #686868, 1px -1px 8px #515151; }
 
 .standard_tile_link:visited {
-  text-decoration: none;
   color: white; }
 
 .standard_tile_link_reverse:link {
-  text-decoration: none;
   color: black; }
 
 .standard_tile_link_reverse:visited {
-  text-decoration: none;
   color: black; }
 
 .standard_tile_link_reverse:hover {
-  text-decoration: none;
   color: white;
   text-shadow: -1px 1px 8px #686868, 1px -1px 8px #515151; }
 
 .standard_tile_link_cpanel:link {
-  text-decoration: none;
   color: white; }
 
 .standard_tile_link_cpanel:visited {
-  text-decoration: none;
   color: white; }
 
 .standard_tile_link_cpanel:hover {
-  text-decoration: none;
   color: black;
   text-shadow: -1px 1px 8px #686868, 1px -1px 8px #515151; }
 
 .standard_tile_link_black:link {
-  text-decoration: none;
   color: black;
   font-weight: bold; }
 
 .standard_tile_link_black:visited {
-  text-decoration: none;
   color: black; }
 
 .standard_tile_link_black:hover {
-  text-decoration: none;
   color: #666666; }
 
 .standard_tile_link_button:link {
-  text-decoration: none;
   color: black; }
-
-.standard_tile_link_button:visited {
-  text-decoration: none; }
-
-.standard_tile_link_button:hover {
-  text-decoration: none; }
 
 .standard_list_entry {
   position: relative;
@@ -1706,17 +2116,14 @@ nav ul {
   width: 213px;
   font-size: 20px;
   padding-top: 3px;
-  text-decoration: none;
   text-shadow: -1px 1px 5px white, 1px -1px 15px #acacac;
   text-align: center; }
 
 .topbutton_cpanel:hover {
   background: black;
-  color: white;
-  text-decoration: none; }
+  color: white; }
 
 .top_button_cpanel:visited {
-  text-decoration: none;
   color: #182727; }
 
 .subbutton_cpanel {
@@ -1731,14 +2138,12 @@ nav ul {
   width: 213px;
   border-bottom: 3px solid black;
   padding-top: 3px;
-  text-decoration: none;
   text-shadow: -1px 1px 5px white, 1px -1px 15px #acacac;
   text-align: center; }
 
 .subbutton_cpanel:hover {
   background: black;
-  color: white;
-  text-decoration: none; }
+  color: white; }
 
 .sidebutton_cpanel {
   cursor: pointer;
@@ -1748,7 +2153,6 @@ nav ul {
   color: black;
   font-size: 16px;
   vertical-align: middle;
-  text-decoration: none;
   text-align: center;
   text-shadow: -1px 1px 5px white, 1px -1px 15px #acacac;
   line-height: 27px;
@@ -1756,11 +2160,7 @@ nav ul {
 
 .sidebutton_cpanel:hover {
   background: black;
-  color: white;
-  text-decoration: none; }
-
-.sidebutton_cpanel:link {
-  text-decoration: none; }
+  color: white; }
 
 #game_editor, #game_comments, #game_series, #game_music, #game_submissions, #game_reviews, #submitted_reviews,
 #menu_editor, #menu_comments, #menu_submissions, #demo_editor, #demo_comments, #demo_music, #demo_submissions,
@@ -1839,7 +2239,6 @@ Standard table settings
   color: black;
   font-size: 16px;
   text-align: center;
-  text-decoration: none;
   list-style-type: none; }
 
 .standard_table_list th {
@@ -1871,15 +2270,13 @@ Standard table settings
   color: black;
   font-size: 16px;
   font-weight: 100;
-  text-align: center;
-  text-decoration: none; }
+  text-align: center; }
 
 .standard_table_left {
   color: black;
   font-size: 16px;
   font-weight: 100;
   text-align: left;
-  text-decoration: none;
   padding-left: 2px; }
 
 .standard_table_right {
@@ -1887,7 +2284,6 @@ Standard table settings
   font-size: 16px;
   font-weight: 100;
   text-align: right;
-  text-decoration: none;
   padding-right: 2px; }
 
 .standard_table_center img {
@@ -1904,17 +2300,12 @@ Standard table settings
   font-size: 15px;
   border-bottom: 3px solid black;
   border-left: 1px solid black;
-  text-decoration: none;
   text-shadow: -1px 1px 5px white, 1px -1px 15px #acacac; }
 
 .topbutton_cpanel_small:hover {
   background: black;
   color: white;
-  text-decoration: none;
   border-bottom: 3px solid black; }
-
-.top_button_cpanel_small:visited {
-  text-decoration: none; }
 
 /* for lower resolutions put the left and right below eachother */
 @media screen and (max-width: 799px) {
@@ -2095,15 +2486,12 @@ Left nav
   list-style-type: none; }
 
 .left_nav_link:link {
-  text-decoration: none;
   color: #122323; }
 
 .left_nav_link:visited {
-  text-decoration: none;
   color: #122323; }
 
 .left_nav_link:hover {
-  text-decoration: none;
   color: #6a6a6a; }
 
 /*---------------------------------------------------------- 
@@ -2132,7 +2520,6 @@ Quick search games
   color: #182727;
   border-bottom: 3px solid black;
   padding-top: 3px;
-  text-decoration: none;
   text-shadow: -1px 1px 5px white, 1px -1px 15px #acacac;
   height: 25px;
   width: 80px;
@@ -2140,8 +2527,7 @@ Quick search games
 
 .quick_search_games_button:hover {
   background: black;
-  color: white;
-  text-decoration: none; }
+  color: white; }
 
 #quick_search_pub_select {
   background: #666666;
@@ -2538,15 +2924,12 @@ Links addnew
   padding: 5px; }
 
 .links_addnew_link:link {
-  text-decoration: none;
   color: #6a6a6a; }
 
 .links_addnew_link:visited {
-  text-decoration: none;
   color: #6a6a6a; }
 
 .links_addnew_link:hover {
-  text-decoration: none;
   color: black; }
 
 @media screen and (max-width: 480px) {
@@ -2832,19 +3215,16 @@ Games list
 
 .game_td {
   text-align: left;
-  text-decoration: none;
   padding-left: 2px;
   width: 40%; }
 
 .pub_td, .dev_td {
   text-align: left;
-  text-decoration: none;
   padding-left: 2px;
   width: 20%; }
 
 .info_td, .year_td {
   text-align: left;
-  text-decoration: none;
   padding-left: 2px;
   width: 10%; }
 
