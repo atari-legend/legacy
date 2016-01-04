@@ -20,11 +20,6 @@ $bg-color: #00d3d3;
 /* ---------------SASS includes---------------*/
 @import "normalize/import-now";										/* --> Normalize script
 
-
-
-
-
-
 /********************PART I : MAIN SITE***********************/
 
 @font-face {
@@ -42,6 +37,10 @@ html { overflow-y: scroll;
 body { background-color: black; 
 	  font-family: Audiowide, Arial, helvetica, sans-serif;
 }
+
+body a {text-decoration:none;}
+body a:hover {text-decoration:none;}
+body a:visited {text-decoration:none;}
 
 @media screen and (min-width: 1280px){
 	body { background-image: url(../../../templates/1/images/top_bg_menu.png), url(../../../templates/1/images/top_bg_sides.jpg); 
