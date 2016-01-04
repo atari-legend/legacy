@@ -45,6 +45,10 @@ body { background: #dbd7d1;
 	  font-family: robot, arial, helvetica, sans-serif;
 }
 
+body a {text-decoration:none;}
+body a:hover {text-decoration:none;}
+body a:visited {text-decoration:none;}
+
 @media screen and (min-width: 481px) { 
 	body { background-image: url(../../../templates/2/images/top_bg_sides.jpg);
 		  background-position: left top;
@@ -128,8 +132,8 @@ footer, header, hgroup, menu, nav, section {
 		margin-top: 10px;
 		}			
 
-@import '../../../templates/html/includes/main_scss/top_animation'; /* --> TOP animation */		
-		
+@import '../../../templates/html/includes/main_scss/top_animation'; /* --> TOP animation */
+
 /* at a resolution of max 480 (smartphones) we want a smaller logo with border */		
 @media screen and (max-width: 480px) { 
 	.container { width: 15%; } 
@@ -184,7 +188,7 @@ footer, header, hgroup, menu, nav, section {
 		text-align: right;}
 	}	
 
-@import '../../../templates/html/includes/main_scss/menu'; /* --> TOP and SIDE MENU */	
+@import '../../../templates/html/includes/main_scss/menu'; /* --> TOP and SIDE MENU */
 
 /*---------------------------------------------------------- 
  Main site
