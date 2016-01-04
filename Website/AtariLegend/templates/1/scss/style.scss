@@ -2,7 +2,7 @@
 /**********************LEGACY SKIN****************************/
 /*************************************************************/
 
-/* ---------SASS variables declaration--------*/
+/* ---------SASS variables declaration--------*/ 
 $support-for: (
   chrome:  16,
   edge:    10,
@@ -19,8 +19,7 @@ $bg-color: #00d3d3;
 
 /* ---------------SASS includes---------------*/
 @import "normalize/import-now";										/* --> Normalize script
-@import '../../../templates/html/includes/main_scss/menu'; 			/* --> TOP and SIDE MENU */
-@import '../../../templates/html/includes/main_scss/top_animation'; /* --> TOP animation */
+
 
 
 
@@ -116,6 +115,8 @@ footer, header, hgroup, menu, nav, section {
 		max-width: 100%;
 		float: right;
 		}			
+		
+@import '../../../templates/html/includes/main_scss/top_animation'; /* --> TOP animation */
 
 /* at a resolution of max 480 (smartphones) we want a smaller logo with border */		
 @media screen and (max-width: 480px) { 
@@ -169,7 +170,9 @@ footer, header, hgroup, menu, nav, section {
 		display: block;
 		text-align: right;}
 	}	
-	
+
+@import '../../../templates/html/includes/main_scss/menu'; 			/* --> TOP and SIDE MENU */
+
 /*---------------------------------------------------------- 
  Main site
 ------------------------------------------------------------ */	
