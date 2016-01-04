@@ -188,7 +188,7 @@
 			border-radius: 3px;
 		}
 		.main-content #sidebar-toggle .bar{
-			background-color: #fff;
+			background-color: white;
 			border-radius: 1px;   
 		}
 	}
@@ -200,7 +200,7 @@
 	/* search field and button code - this is very skin specific */
 	#search_ul{ width: 100%; }
 	
-	#search_ul li { display: inline; float: left; }
+	#search_ul li { float: left; }
 	
 	@if $skin-name == legacy 
 	{
@@ -221,7 +221,7 @@
 			border: 1px solid #007b7b;
 			margin: 7px 0px 0px 6px;
 			padding: 0;
-			background: #000; 
+			background: black; 
 			text-align: center;
 		}
 	}
