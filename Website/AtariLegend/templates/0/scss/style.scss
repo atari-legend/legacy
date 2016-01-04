@@ -50,12 +50,7 @@ html { overflow-y: scroll;
 
 body { background-color: #e1e1e1; 
 	  font-family: AtariST, Arial, helvetica, sans-serif;
-	  
 }
-
-body a {text-decoration:none;}
-body a:hover {text-decoration:none;}
-body a:visited {text-decoration:none;}
 
 @media screen and (min-width: 481px) { 
 	body { background-image: url(../../../templates/0/images/top_bg_sides.jpg);
@@ -1231,7 +1226,7 @@ nav ul {
   width: 213px;
   font-size: 20px;
   padding-top: 3px;
-
+  text-decoration:none;
   text-shadow: -1px 1px 5px white, 1px -1px 15px #acacac;
   text-align:center;
 }
@@ -1239,11 +1234,11 @@ nav ul {
 .topbutton_cpanel:hover {
   background: black;
   color: white;
-
+  text-decoration:none;
 }
 
 .top_button_cpanel:visited {
-
+  text-decoration:none;
   color: #182727;
 }
 .subbutton_cpanel
@@ -1259,7 +1254,7 @@ nav ul {
   width: 213px;
   border-bottom: 3px solid black;
   padding-top: 3px;
-
+  text-decoration:none;
   text-shadow: -1px 1px 5px white, 1px -1px 15px #acacac;
   text-align:center;
 }
@@ -1267,7 +1262,7 @@ nav ul {
 .subbutton_cpanel:hover {
   background: black;
   color: white;
-
+  text-decoration:none;
 }
 .sidebutton_cpanel
 {
@@ -1278,7 +1273,7 @@ nav ul {
   color:black;
   font-size: 16px;
   vertical-align:middle;
-
+  text-decoration:none;
   text-align:center;
   text-shadow: -1px 1px 5px white, 1px -1px 15px #acacac;
   line-height:27px;
@@ -1288,7 +1283,11 @@ nav ul {
 .sidebutton_cpanel:hover {
   background: black;
   color: white;
+  text-decoration:none;
+}
 
+.sidebutton_cpanel:link {
+  text-decoration:none;
 }
 
 #game_editor, #game_comments, #game_series, #game_music, #game_submissions, #game_reviews, #submitted_reviews,
@@ -1448,19 +1447,19 @@ Standard table settings
   font-size: 15px;
   border-bottom: 3px solid black;
   border-left: 1px solid black;
-
+  text-decoration:none;
   text-shadow: -1px 1px 5px white, 1px -1px 15px #acacac;
 }
 
 .topbutton_cpanel_small:hover {
   background: black;
   color: white;
-
+  text-decoration:none;
   border-bottom: 3px solid black;
 }
 
 .top_button_cpanel_small:visited {
-
+  text-decoration:none;
 }
 
 /* for lower resolutions put the left and right below eachother */
@@ -1631,7 +1630,7 @@ Quick search games
 	  color: #182727;
 	  border-bottom: 3px solid black;
 	  padding-top: 3px;
-
+	  text-decoration:none;
 	  text-shadow: -1px 1px 5px white, 1px -1px 15px #acacac;
 	  height: 25px;
 	  width: 80px;
@@ -1641,7 +1640,7 @@ Quick search games
 .quick_search_games_button:hover {
   background: black;
   color: white;
-
+  text-decoration:none;
 }
 
 
