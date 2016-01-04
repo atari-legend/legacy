@@ -2,7 +2,7 @@
 /**********************LEGACY SKIN****************************/
 /*************************************************************/
 
-/* ---------SASS variables declaration--------*/ 
+/* ---------SASS variables declaration--------*/
 $support-for: (
   chrome:  16,
   edge:    10,
@@ -19,10 +19,6 @@ $bg-color: #00d3d3;
 
 /* ---------------SASS includes---------------*/
 @import "normalize/import-now";										/* --> Normalize script
-
-
-
-
 
 /********************PART I : MAIN SITE***********************/
 
@@ -41,6 +37,10 @@ html { overflow-y: scroll;
 body { background-color: black; 
 	  font-family: Audiowide, Arial, helvetica, sans-serif;
 }
+
+body a {text-decoration:none;}
+body a:hover {text-decoration:none;}
+body a:visited {text-decoration:none;}
 
 @media screen and (min-width: 1280px){
 	body { background-image: url(../../../templates/1/images/top_bg_menu.png), url(../../../templates/1/images/top_bg_sides.jpg); 
@@ -115,7 +115,7 @@ footer, header, hgroup, menu, nav, section {
 		max-width: 100%;
 		float: right;
 		}			
-		
+
 @import '../../../templates/html/includes/main_scss/top_animation'; /* --> TOP animation */
 
 /* at a resolution of max 480 (smartphones) we want a smaller logo with border */		
