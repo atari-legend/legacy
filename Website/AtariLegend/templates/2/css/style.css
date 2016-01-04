@@ -372,11 +372,6 @@ th {
 
                                										/* --> Normalize script
 
-
-
-
-
-
 /********************PART I : MAIN SITE***********************/
 /* load the main site font */
 @font-face {
@@ -393,6 +388,15 @@ html {
 body {
   background: #dbd7d1;
   font-family: robot, arial, helvetica, sans-serif; }
+
+body a {
+  text-decoration: none; }
+
+body a:hover {
+  text-decoration: none; }
+
+body a:visited {
+  text-decoration: none; }
 
 @media screen and (min-width: 481px) {
   body {

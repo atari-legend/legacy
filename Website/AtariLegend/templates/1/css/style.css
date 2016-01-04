@@ -372,10 +372,6 @@ th {
 
                                										/* --> Normalize script
 
-
-
-
-
 /********************PART I : MAIN SITE***********************/
 @font-face {
   font-family: Audiowide;
@@ -391,6 +387,15 @@ html {
 body {
   background-color: black;
   font-family: Audiowide, Arial, helvetica, sans-serif; }
+
+body a {
+  text-decoration: none; }
+
+body a:hover {
+  text-decoration: none; }
+
+body a:visited {
+  text-decoration: none; }
 
 @media screen and (min-width: 1280px) {
   body {
