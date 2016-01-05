@@ -69,13 +69,7 @@ body a:visited {text-decoration:none;}
 		}
 }
 
-img { display: block;
-}
-	
-article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section { 
-	display: block;
-}
+img { display: block;}
 
 /*---------------------------------------------------------- 
  Main site width
@@ -198,8 +192,7 @@ footer, header, hgroup, menu, nav, section {
 Standard tile settings 
 -------------------------------------------------------------*/
 .column-left { width: 32%; 
-	 float:left;
-}
+	 float:left;}
 
 .column-center { width: 32%; 
 	 float:left;
@@ -258,9 +251,9 @@ Standard tile settings
 /*  4 tiles and background welcome image */
 @media screen and (min-width: 1495px){ 
 	.column-wide-left { width: 49%;}
-	.column-wide-center_1920 { display:inline; width: 100%;}
-	.column-wide-right_1920 { width: 24.75%; float: right; display:inline;}
-	.column-wide-left_1920 { width: 24.75%; float: left; display:inline;}
+	.column-wide-center_1920 { display:inline;}
+	.column-wide-right_1920 { width: 24.75%; float: right; display:block;}
+	.column-wide-left_1920 { width: 24.75%; float: left; display:block;}
 	.column-wide-right {display: none;}
 	.column-left {display: none;}
 	.column-center{display: none;}
@@ -1681,8 +1674,8 @@ User details
 }
 
 @media screen and (max-width: 480px) { 
-.user_details_text{width:50%;display:inline;}
-.user_details_input{width:50%;display:inline;}
+.user_details_text{display:inline;}
+.user_details_input{display:inline;}
 .user_details_row{width:50%;}
 }
 
@@ -1842,8 +1835,8 @@ Links addnew
 .links_addnew_link:hover { color: black;}
 
 @media screen and (max-width: 480px) { 
-.links_addnew_text{width:50%;display:inline;}
-.links_addnew_input{width:50%;display:inline;}
+.links_addnew_text{display:inline;}
+.links_addnew_input{display:inline;}
 .links_addnew_row{width:50%;}
 }
 
@@ -1953,9 +1946,9 @@ Games main
 	
 
 @media screen and (max-width: 480px) { 
-	.games_main_text{width:50%;display:inline;}
-	.games_main_input{width:50%;display:inline;}
-	.games_main_row{width:50%;margin-left:10%}
+	.games_main_text{display:inline;}
+	.games_main_input{display:inline;}
+	.games_main_row{margin-left:10%}
 }
 
 .games_check_container{
@@ -2164,7 +2157,7 @@ Games comment edit
 #leftnav_position_games_comment_edit{margin-top: 20px; margin-bottom: 30px; float: left;}
 #games_comment_edit{margin-top: 20px; margin-bottom: 30px; float: left;}
 
-#gce_button,#gce_button2{display:inline; float:right; margin-bottom:20px; margin-left:5px;}
+#gce_button,#gce_button2{float:right; margin-bottom:20px; margin-left:5px;}
 
 #gce_area { width: 100%;}
 			
