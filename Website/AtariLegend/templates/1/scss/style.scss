@@ -63,11 +63,6 @@ body a:visited {text-decoration:none;}
 img { display: block;
 }
 
-article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section { 
-	display: block;
-}
-
 /*---------------------------------------------------------- 
  Main site width
 ------------------------------------------------------------ */
@@ -244,8 +239,8 @@ Standard tile settings
 @media screen and (min-width: 1495px){ 
 	.column-wide-left { width: 49%;}
 	.column-wide-center_1920 { display:inline; width: 100%;}
-	.column-wide-right_1920 { width: 24.75%; float: right; display:inline;}
-	.column-wide-left_1920 { width: 24.75%; float: left; display:inline;}
+	.column-wide-right_1920 { width: 24.75%; float: right; display:block;}
+	.column-wide-left_1920 { width: 24.75%; float: left; display:block;}
 	.column-wide-right {display: none;}
 	.column-left {display: none;}
 	.column-center{display: none;}
@@ -1898,8 +1893,8 @@ Games main
 	
 
 @media screen and (max-width: 480px) { 
-	.games_main_text{width:50%;display:inline;}
-	.games_main_input{width:50%;display:inline;}
+	.games_main_text{display:inline;}
+	.games_main_input{display:inline;}
 	.games_main_row{width:50%;margin-left:10%}
 }
 

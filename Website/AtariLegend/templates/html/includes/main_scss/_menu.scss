@@ -280,15 +280,15 @@
 	
 	@if $skin-name == tos
 	{ 
-		#skin_side, #games_side,#menus_side,#demos_side,#links_side,#about_side,#music_side,#forum_main_side,#magazines_side{width:190px; border-bottom: 3px solid black;}
+		#skin_side, .side_navigation * a { width:190px; border-bottom: 3px solid black;}
 	}
 	@else if $skin-name == picasso
 	{
-		#skin_side, #games_side,#menus_side,#demos_side,#links_side,#about_side,#music_side,#forum_main_side,#magazines_side{width:165px;}
+		#skin_side, .side_navigation * a {width:165px;}
 	}
 	@else if $skin-name == legacy
 	{
-		#skin_side, #games_side,#menus_side,#demos_side,#links_side,#about_side,#music_side,#forum_main_side,#magazines_side{width:168px;}
+		#skin_side, .side_navigation * a {width:168px;}
 	}
 		
 	.skin-menu {
@@ -342,7 +342,6 @@
 	
 	.sub-menu li a {
 		display:block;
-		text-decoration: none;
 		font-weight: normal;
 		background : $bg-color;
 	}
@@ -393,7 +392,7 @@
 	
 	@if ($skin-name == legacy) or ($skin-name == picasso)
 	{
-		#games_side, #menus_side, #demos_side, #about_side, #links_side , #skin_side, #forum_main_side, #magazines_side, #music_side{
+		#skin_side, .side_navigation * a {	
 			line-height: 40px; 
 			width: 112px; 
 			font-size: 14px;
@@ -420,11 +419,10 @@
 	}
 	@else if $skin-name == tos
 	{
-		#games_side, #menus_side, #demos_side, #about_side, #links_side , #skin_side, #forum_main_side, #magazines_side, #music_side {	
+		#skin_side, .side_navigation * a {	
 			line-height: 32px; 
 			width: 113px; 
 			font-size: 14px;
-			vertical-align: 50%;
 			}
 		#search_side {height: 29px; width: 30px;}
 		#search_text_side{height: 20px; width: 70px; margin: 4px 0 0 6px;}
@@ -444,7 +442,6 @@
 	color: $menu-top-button-color;
 	font-size: $sidebutton-font;
 	width: 213px;
-	vertical-align:middle;
 	-webkit-border-radius: $menu-top-button-radius;
 	-moz-border-radius: $menu-top-button-radius;
 	border-radius: $menu-top-button-radius;
@@ -553,7 +550,6 @@ header nav input{
 	border-bottom: $menu-top-button-border-bottom;
 	border-left: $menu-top-button-border-left;
 	padding-top: 0;
-	vertical-align: bottom;
 	text-shadow: $menu-top-button-shadow;
 	-webkit-border-radius: $menu-top-button-radius; 
 	-moz-border-radius : $menu-top-button-radius; 
@@ -580,7 +576,7 @@ header nav input{
 	font-size: $searchbutton-font;
 	border-bottom: $menu-top-button-border-bottom;
 	border-left: $menu-top-button-border-left;
-	padding-top: 0px;
+	padding-top: 0;
 	-webkit-border-radius: $menu-top-button-radius;
 	-moz-border-radius: $menu-top-button-radius;
 	border-radius: $menu-top-button-radius;
@@ -606,7 +602,7 @@ header nav input{
 	padding-top: 3px;
 }
 
-#home:hover,#search:hover {height: 0px;}
+#home:hover,#search:hover {height: 0;}
 
 @if $skin-name == picasso
 {
