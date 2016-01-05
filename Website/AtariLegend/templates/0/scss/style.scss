@@ -473,7 +473,6 @@ Standard tile settings
 				text-align: left;
 				display: block;
 				background-size: 85% 44px;
-				font-family: AtariST;	
 }
 
 .standard_tile_input_small { 
@@ -485,7 +484,6 @@ Standard tile settings
 				padding-left: 7px;
 				border: 1px solid #b2b2b2;
 				text-align: left;
-				font-family: AtariST;
 				background: #666666;
 }
 
@@ -498,7 +496,6 @@ Standard tile settings
 				padding-left: 7px;
 				border: 1px solid #b2b2b2;
 				text-align: left;
-				font-family: AtariST;
 				background: #666666;
 }
 
@@ -642,7 +639,6 @@ a.standard_tile_link:hover, a.standard_tile_link:focus
 	margin-top:5px;
 	padding: 0;
 	padding-left: 5px;
-	font-family: AtariST;		
 	width: 78%;
 	height: 20px;}
 
@@ -964,7 +960,6 @@ contact tiles - front page
 	background: #000000;
 	color: #ffffff;
 	width: 245px;
-	font-family: atarist;
 	font-size:13px;
 }
 
@@ -981,11 +976,6 @@ contact tiles - front page
 	background: white;
 	color: #000;
 }
-
-
-
-
-
 
 /* *********************PART II : CPANEL*****************************/
 
@@ -1197,7 +1187,6 @@ nav ul {
   width: 213px;
   font-size: 20px;
   padding-top: 3px;
-
   text-shadow: -1px 1px 5px white, 1px -1px 15px #acacac;
   text-align:center;
 }
@@ -1209,7 +1198,6 @@ nav ul {
 }
 
 .top_button_cpanel:visited {
-
   color: #182727;
 }
 .subbutton_cpanel
@@ -1225,7 +1213,6 @@ nav ul {
   width: 213px;
   border-bottom: 3px solid black;
   padding-top: 3px;
-
   text-shadow: -1px 1px 5px white, 1px -1px 15px #acacac;
   text-align:center;
 }
@@ -1253,7 +1240,6 @@ nav ul {
   background: black;
   color: white;
 }
-
 
 #game_editor, #game_comments, #game_series, #game_music, #game_submissions, #game_reviews, #submitted_reviews,
 #menu_editor, #menu_comments, #menu_submissions, #demo_editor, #demo_comments, #demo_music, #demo_submissions,
@@ -1290,10 +1276,8 @@ nav ul {
 }
 
 .centered_fieldset {
-
 	text-align:center;
 	margin: auto;
-
 }
 
 /*------------------------------------------------------------
