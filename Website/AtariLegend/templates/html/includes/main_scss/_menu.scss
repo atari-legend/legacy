@@ -456,8 +456,10 @@
 .sidebutton:hover {
 	background: $menu-top-button-hover-bg;
 	color: $sidebutton-hoover-font;
-	border: $menu-top-button-hover-border;
-	border-bottom: $menu-top-button-hover-border-bottom;
+	@if $skin-name == legacy or $skin-name == picasso {
+		border: $menu-top-button-hover-border;
+		border-bottom: $menu-top-button-hover-border-bottom;
+	}
 }
 
 @if $skin-name == legacy 
@@ -559,8 +561,7 @@ header nav input{
 .topbutton:hover {
 	background: $menu-top-button-hover-bg;
 	color: $menu-top-button-hover-color;
-
-	border: $menu-top-button-hover-border;
+	@if $skin-name == tos or $skin-name == picasso { border: $menu-top-button-hover-border; }
 	border-bottom: $menu-top-button-hover-border-bottom;
 }
 
@@ -602,7 +603,7 @@ header nav input{
 	padding-top: 3px;
 }
 
-#home:hover,#search:hover {height: 0;}
+@if $skin-name == tos or $skin-name == picasso { #home:hover,#search:hover {height: 0;} }
 
 @if $skin-name == picasso
 {

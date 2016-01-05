@@ -883,9 +883,7 @@ body, html {
 
 .sidebutton:hover {
   background: black;
-  color: white;
-  border: 0;
-  border-bottom: 0; }
+  color: white; }
 
 /* for the lower resolutions, we don't have the menu bar below the top */
 @media screen and (max-width: 1279px) {
