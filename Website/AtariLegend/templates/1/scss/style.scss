@@ -497,62 +497,35 @@ Standard tile settings
 			text-align: center;
 	}
 
-.standard_tile_link:link { text-decoration: none;
-	color: white;
-}
+.standard_tile_link:link { color: white;}
 
-.standard_tile_link:visited { text-decoration: none;
-	color: white;
-}
+.standard_tile_link:visited { color: white;}
 
-.standard_tile_link:hover { text-decoration: none;
-	color: #01b5b5;
-}
+.standard_tile_link:hover { color: #01b5b5;}
 
-.standard_tile_link_reverse:link { text-decoration: none;
-	color: #01b5b5;
-}
+.standard_tile_link_reverse:link { color: #01b5b5;}
 
-.standard_tile_link_reverse:visited { text-decoration: none;
-	color: #01b5b5;
-}
+.standard_tile_link_reverse:visited { color: #01b5b5;}
 
-.standard_tile_link_reverse:hover { text-decoration: none;
-	color: white;
-}
+.standard_tile_link_reverse:hover { color: white;}
 
-.standard_tile_link_cpanel:link { text-decoration: none;
-	color: #01b5b5;
-}
+.standard_tile_link_cpanel:link { color: #01b5b5;}
 
-.standard_tile_link_cpanel:visited { text-decoration: none;
-	color: #01b5b5;
-}
+.standard_tile_link_cpanel:visited { color: #01b5b5;}
 
-.standard_tile_link_cpanel:hover { text-decoration: none;
-	color: white;
-}
+.standard_tile_link_cpanel:hover { color: white;}
 
-.standard_tile_link_black:link { text-decoration: none;
-	color: black;
+.standard_tile_link_black:link { color: black;
 	font-weight:bold;
 }
 
-.standard_tile_link_black:visited { text-decoration: none;
-	color: black;
-}
+.standard_tile_link_black:visited { color: black;}
 
-.standard_tile_link_black:hover { text-decoration: none;
-	color: white;
-}
+.standard_tile_link_black:hover { color: white;}
 
 .standard_tile_link_button:link { 
-		text-decoration: none;
 		color : black;
-	} 
-
-.standard_tile_link_button:visited { text-decoration: none; }
-.standard_tile_link_button:hover { text-decoration: none; }
+} 
 
 .standard_list_entry{position : relative;
 		width: 100%;
@@ -1156,7 +1129,6 @@ nav ul {
   border-bottom: 3px solid #008b8b;
   border-left: 1px solid #007878;
   padding-top: 3px;
-  text-decoration:none;
   text-align:center;
   line-height:27px;
 }
@@ -1164,12 +1136,7 @@ nav ul {
 .topbutton_cpanel:hover {
   background: #00a9a9;
   color: #182727;
-  text-decoration:none;
   border-bottom: 3px solid #006f6f;
-}
-
-.topbutton_cpanel:visited {
-  text-decoration:none;
 }
 
 .subbutton_cpanel
@@ -1185,7 +1152,6 @@ nav ul {
   border-bottom: 3px solid #008b8b;
   border-left: 1px solid #007878;
   padding-top: 3px;
-  text-decoration:none;
   text-align:center;
   line-height:30px;
 }
@@ -1194,7 +1160,6 @@ nav ul {
 .subbutton_cpanel:hover {
   background: #00a9a9;
   color: #182727;
-  text-decoration:none;
   border-bottom: 3px solid #006f6f;
 }
 
@@ -1208,7 +1173,6 @@ nav ul {
   width: 213px;
   font-size: 16px;
   vertical-align:middle;
-  text-decoration:none;
   text-align:center;
   border-bottom: 3px solid #008b8b;
   border-left: 1px solid #007878;
@@ -1218,17 +1182,10 @@ nav ul {
 .sidebutton_cpanel:hover {
   background: #00a9a9;
   color: #182727;
-  text-decoration:none;
   border-bottom: 3px solid #006f6f;
 }
 
-.sidebutton_cpanel:link {
-  text-decoration:none;
-}
-
 #other{border-right: 1px solid #007878;}
-
-
 
 #game_editor_side, #game_comments_side, #game_series_side,
 #game_music_side, #game_submissions_side, #game_reviews_side,
@@ -1299,7 +1256,6 @@ Standard table settings
 	font-size: 10pt;
 	font-weight: 100;
 	text-align: center;
-	text-decoration: none; 
 	list-style-type: none;
 }
 
@@ -1337,14 +1293,12 @@ Standard table settings
 			font-size: 10pt;
 			font-weight: 100;
 			text-align: center;
-			text-decoration: none; 
 }
 
 .standard_table_left { color: white;
 			font-size: 10pt;
 			font-weight: 100;
 			text-align: left;
-			text-decoration: none; 
 			padding-left: 2px;
 }
 
@@ -1352,7 +1306,6 @@ Standard table settings
 			font-size: 10pt;
 			font-weight: 100;
 			text-align: right;
-			text-decoration: none; 
 			padding-right: 2px;
 }
 
@@ -1370,18 +1323,12 @@ Standard table settings
   font-size: 10pt;
   border-bottom: 3px solid #122323;
   border-left: 1px solid #122323;
-  text-decoration:none;
 }
 
 .topbutton_cpanel_small:hover {
   background:#006f6f;
   color: white;
-  text-decoration:none;
   border-bottom: 3px solid #122323;
-}
-
-.top_button_cpanel_small:visited {
-  text-decoration:none;
 }
 
 /* for lower resolutions put the left and right below eachother */
@@ -1514,17 +1461,11 @@ Left nav
 	list-style-type: none;
 }
 
-.left_nav_link:link { text-decoration: none;
-	color: #122323;
-}
+.left_nav_link:link { color: #122323;}
 
-.left_nav_link:visited { text-decoration: none;
-	color: #122323;
-}
+.left_nav_link:visited { color: #122323;}
 
-.left_nav_link:hover { text-decoration: none;
-	color: white;
-}
+.left_nav_link:hover { color: white;}
 
 /*---------------------------------------------------------- 
 Quick search games
@@ -1556,7 +1497,6 @@ Quick search games
 	  border-bottom: 3px solid #008b8b;
 	  border-left: 1px solid #007878;
 	  padding-top: 3px;
-	  text-decoration:none;
 }
 
 .quick_search_games_button:hover { color: white;}
@@ -1564,7 +1504,6 @@ Quick search games
 .quick_search_games_button:hover {
   background: #00a9a9;
   color: #182727;
-  text-decoration:none;
   border-bottom: 3px solid #006f6f;
 }
 
@@ -1822,17 +1761,11 @@ Links addnew
 
 .links_addnew_info { font-size: 10pt; color: black; padding: 5px;}
 
-.links_addnew_link:link { text-decoration: none;	
-	color: white;
-}
+.links_addnew_link:link { color: white;}
 
-.links_addnew_link:visited { text-decoration: none;
-	color: white;
-}
+.links_addnew_link:visited { color: white;}
 
-.links_addnew_link:hover { text-decoration: none;
-	color: black;
-}
+.links_addnew_link:hover { color: black;}
 
 @media screen and (max-width: 480px) { 
 .links_addnew_text{width:100%;display:block;}
@@ -2033,7 +1966,6 @@ Games list
 		font-size: 10pt;
 		font-weight: 100;
 		text-align: left;
-		text-decoration: none; 
 		padding-left: 2px;
 		width:40%;
 }
@@ -2042,7 +1974,6 @@ Games list
 		font-size: 10pt;
 		font-weight: 100;
 		text-align: left;
-		text-decoration: none; 
 		padding-left: 2px;
 		width:20%;
 }
@@ -2051,7 +1982,6 @@ Games list
 		font-size: 10pt;
 		font-weight: 100;
 		text-align: left;
-		text-decoration: none; 
 		padding-left: 2px;
 		width:10%;
 }
