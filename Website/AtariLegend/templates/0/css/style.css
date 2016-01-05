@@ -419,10 +419,6 @@ body a:visited {
 img {
   display: block; }
 
-article, aside, details, figcaption, figure,
-footer, header, hgroup, menu, nav, section {
-  display: block; }
-
 /*---------------------------------------------------------- 
  Main site width
 ------------------------------------------------------------ */
@@ -774,7 +770,7 @@ body, html {
   background: #000;
   text-align: center; }
 
-#skin_side, #games_side, #menus_side, #demos_side, #links_side, #about_side, #music_side, #forum_main_side, #magazines_side {
+#skin_side, .side_navigation * a {
   width: 190px;
   border-bottom: 3px solid black; }
 
@@ -822,7 +818,6 @@ body, html {
 
 .sub-menu li a {
   display: block;
-  text-decoration: none;
   font-weight: normal;
   background: white; }
 
@@ -845,11 +840,10 @@ body, html {
   .container.open-sidebar {
     left: 113px; }
 
-  #games_side, #menus_side, #demos_side, #about_side, #links_side, #skin_side, #forum_main_side, #magazines_side, #music_side {
+  #skin_side, .side_navigation * a {
     line-height: 32px;
     width: 113px;
-    font-size: 14px;
-    vertical-align: 50%; }
+    font-size: 14px; }
 
   #search_side {
     height: 29px;
@@ -877,7 +871,6 @@ body, html {
   color: black;
   font-size: 16px;
   width: 213px;
-  vertical-align: middle;
   -webkit-border-radius: "";
   -moz-border-radius: "";
   border-radius: "";
@@ -974,7 +967,6 @@ header nav input {
   border-bottom: 0;
   border-left: 0;
   padding-top: 0;
-  vertical-align: bottom;
   text-shadow: -1px 1px 5px white, 1px -1px 15px #acacac;
   -webkit-border-radius: "";
   -moz-border-radius: "";
@@ -997,7 +989,7 @@ header nav input {
   font-size: 15px;
   border-bottom: 0;
   border-left: 0;
-  padding-top: 0px;
+  padding-top: 0;
   -webkit-border-radius: "";
   -moz-border-radius: "";
   border-radius: "";
@@ -1021,7 +1013,7 @@ header nav input {
   padding-top: 3px; }
 
 #home:hover, #search:hover {
-  height: 0px; }
+  height: 0; }
 
 #main_nav {
   background-color: white;
@@ -1169,18 +1161,17 @@ Standard tile settings
     width: 49%; }
 
   .column-wide-center_1920 {
-    display: inline;
-    width: 100%; }
+    display: inline; }
 
   .column-wide-right_1920 {
     width: 24.75%;
     float: right;
-    display: inline; }
+    display: block; }
 
   .column-wide-left_1920 {
     width: 24.75%;
     float: left;
-    display: inline; }
+    display: block; }
 
   .column-wide-right {
     display: none; }
@@ -1370,8 +1361,7 @@ Standard tile settings
   border: 0;
   text-align: left;
   display: block;
-  background-size: 85% 44px;
-  font-family: AtariST; }
+  background-size: 85% 44px; }
 
 .standard_tile_input_small {
   color: #ffffff;
@@ -1382,7 +1372,6 @@ Standard tile settings
   padding-left: 7px;
   border: 1px solid #b2b2b2;
   text-align: left;
-  font-family: AtariST;
   background: #666666; }
 
 .standard_tile_input_area {
@@ -1394,7 +1383,6 @@ Standard tile settings
   padding-left: 7px;
   border: 1px solid #b2b2b2;
   text-align: left;
-  font-family: AtariST;
   background: #666666; }
 
 #text_area_big {
@@ -1554,7 +1542,6 @@ a.standard_tile_link:hover, a.standard_tile_link:focus {
   margin-top: 5px;
   padding: 0;
   padding-left: 5px;
-  font-family: AtariST;
   width: 78%;
   height: 20px; }
 
@@ -1878,7 +1865,6 @@ contact tiles - front page
   background: #000000;
   color: #ffffff;
   width: 245px;
-  font-family: atarist;
   font-size: 13px; }
 
 /* Interaction states
@@ -2630,11 +2616,9 @@ User details
     width: 100%; } }
 @media screen and (max-width: 480px) {
   .user_details_text {
-    width: 50%;
     display: inline; }
 
   .user_details_input {
-    width: 50%;
     display: inline; }
 
   .user_details_row {
@@ -2934,11 +2918,9 @@ Links addnew
 
 @media screen and (max-width: 480px) {
   .links_addnew_text {
-    width: 50%;
     display: inline; }
 
   .links_addnew_input {
-    width: 50%;
     display: inline; }
 
   .links_addnew_row {
@@ -3120,15 +3102,12 @@ Games main
     width: 65%; } }
 @media screen and (max-width: 480px) {
   .games_main_text {
-    width: 50%;
     display: inline; }
 
   .games_main_input {
-    width: 50%;
     display: inline; }
 
   .games_main_row {
-    width: 50%;
     margin-left: 10%; } }
 .games_check_container {
   display: -webkit-box;
@@ -3496,7 +3475,6 @@ Games comment edit
   float: left; }
 
 #gce_button, #gce_button2 {
-  display: inline;
   float: right;
   margin-bottom: 20px;
   margin-left: 5px; }
