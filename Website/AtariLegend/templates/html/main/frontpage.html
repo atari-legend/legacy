@@ -1,3 +1,4 @@
+{extends file='html/main/main.html'}
 {* 
 /***************************************************************************
 *                                frontpage.html
@@ -18,7 +19,7 @@
 *}
 {block name=main_body}
 	
-	<script type="text/javascript" src="../../../templates/html/includes/js/jquery-ui.js"></script><!-- This script is needed for the animation of all the tiles - slide effect -->
+<script type="text/javascript" src="../../../templates/html/includes/js/jquery-ui.js"></script><!-- This script is needed for the animation of all the tiles - slide effect -->
     <script type="text/javascript" src="../../../templates/html/includes/js/jssor.slider.mini.js"></script>  <!-- This script is needed for the animation in the welcome tile -->
 	
 	<script> <!-- This script is needed for the animation in the welcome tile -->
@@ -217,13 +218,19 @@
 		<!--this column is only visible with 4 columns-->
 		<div class="column-wide-left_1920">		
 			<!--Start logon tile - will only be used on the front page so no inheritance here -->
-			{block name=screenstar_tile}{/block}
+			{block name=screenstar_tile}
+			{include file='html/main/screenstar_tile.html'}
+			{/block}
 			
 			<!--Start date quote tile-->
-			{block name=date_quote_tile}{/block}
+			{block name=date_quote_tile}
+			{include file='html/main/date_quote_tile.html'}
+			{/block}
 			
 			<!--Start "hotlinks" tile-->
-			{block name=hotlinks_tile}{/block}	
+			{block name=hotlinks_tile}
+			{include file='html/main/hotlinks_tile.html'}
+			{/block}	
 		</div>
 	
 		<!--this column is only visible with 3 and 2 columns-->
@@ -252,10 +259,14 @@
 			<!--this column is only visible with 4 columns-->
 			<div class="column-wide-center_1920">
 				<!--Start latest news tile-->
-				{block name=latest_news_tile}{/block}
+				{block name=latest_news_tile}
+				{include file='html/main/latest_news_tile.html'}
+				{/block}
 				
 				<!--Start latest reviews tile-->
-				{block name=latest_reviews_tile}{/block}
+				{block name=latest_reviews_tile}
+				{include file='html/main/latest_reviews_tile.html'}
+				{/block}
 				
 				<div class="contact_tiles">
 					<a href="#"><img src="{$img_dir}email.png" alt="email"></a>
@@ -269,55 +280,81 @@
 		<!--this column is only visible with 4 columns-->
 		<div class="column-wide-right_1920">		
 			<!--Start logon tile - will only be used on the front page so no inheritance here -->
-			{block name=user_login_tile}{/block}
+			{block name=user_login_tile}
+			{include file='html/main/user_login_tile.html'}
+			{/block}
 			
 			<!--Start "Who is it" tile-->
-			{block name=who_is_it_tile}{/block}
+			{block name=who_is_it_tile}
+			{include file='html/main/who_is_it_tile.html'}
+			{/block}
 							
 			<!--Start "Did you know" tile-->
-			{block name=did_you_know_tile}{/block}	
+			{block name=did_you_know_tile}
+			{include file='html/main/did_you_know_tile.html'}
+			{/block}	
 						
 			<!--Start "statistics" tile-->
-			{block name=statistics_tile}{/block}
+			{block name=statistics_tile}
+			{include file='html/main/statistics_tile.html'}
+			{/block}
 		</div>		
 		
 		<!--this column is only visible with 3 columns-->
 		<div class="column-wide-right">		
 			<!--Start logon tile - will only be used on the front page so no inheritance here -->
-			{block name=user_login_tile}{/block}
+			{block name=user_login_tile}
+			{include file='html/main/user_login_tile.html'}
+			{/block}
 		</div>		
 			
 		<!--this column is only visible in the 3 colum mode and 1 column mode-->				
 		<div class="column-left">		
 			<!--Start latest news tile-->
-			{block name=latest_news_tile}{/block}
+			{block name=latest_news_tile}
+				{include file='html/main/latest_news_tile.html'}
+			{/block}
 			<!--Start "Who is it" tile-->
-			{block name=who_is_it_tile}{/block}
+			{block name=who_is_it_tile}
+			{include file='html/main/who_is_it_tile.html'}
+			{/block}
 		</div>
 		
 		<!--this column is only visible in the 3 colum mode and 1 column mode-->
 		<div class="column-center">			
 			<!--Start screenstar tile-->
-			{block name=screenstar_tile}{/block}
+			{block name=screenstar_tile}
+			{include file='html/main/screenstar_tile.html'}
+			{/block}
 			
 			<!--Start latest reviews tile-->
-			{block name=latest_reviews_tile}{/block}
+			{block name=latest_reviews_tile}
+			{include file='html/main/latest_reviews_tile.html'}
+			{/block}
 			
 			<!--Start "hotlinks" tile-->
-			{block name=hotlinks_tile}{/block}					
+			{block name=hotlinks_tile}
+			{include file='html/main/hotlinks_tile.html'}
+			{/block}					
 		</div>
 		
 		<!--this column is only visible in the 3 colum mode and 1 column mode-->
 		<div class="column-right">
 								
 			<!--Start date quote tile-->
-			{block name=date_quote_tile}{/block}		
+			{block name=date_quote_tile}
+			{include file='html/main/date_quote_tile.html'}
+			{/block}		
 			
 			<!--Start "Did you know" tile-->
-			{block name=did_you_know_tile}{/block}						
+			{block name=did_you_know_tile}
+			{include file='html/main/did_you_know_tile.html'}
+			{/block}						
 		
 			<!--Start "statistics" tile-->
-			{block name=statistics_tile}{/block}
+			{block name=statistics_tile}
+			{include file='html/main/statistics_tile.html'}
+			{/block}
 		
 			<!--Start contact tiles - will only be used on the front page so no inheritance here -->
 			<div class="contact_tiles">
@@ -332,10 +369,14 @@
 		<div class="column-left-tab">
 		
 			<!--Start date quote tile-->
-			{block name=date_quote_tile}{/block}
+			{block name=date_quote_tile}
+			{include file='html/main/date_quote_tile.html'}
+			{/block}		
 			
 			<!--Start "Did you know" tile-->
-			{block name=did_you_know_tile}{/block}
+			{block name=did_you_know_tile}
+			{include file='html/main/did_you_know_tile.html'}
+			{/block}
 
 			<!--Start contact tiles-->
 			<div class="contact_tiles">
@@ -348,7 +389,9 @@
 		<div class="column-right-tab">
 			
 			<!--Start "statistics" tile-->
-			{block name=statistics_tile}{/block}
+			{block name=statistics_tile}
+			{include file='html/main/statistics_tile.html'}
+			{/block}
 			
 			<!--Start contact tiles-->
 			<div class="contact_tiles">
