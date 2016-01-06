@@ -17,6 +17,8 @@
 
 //load all common functions
 include("../../includes/common.php"); 
+
+//Load all tiles
 include("../tiles/latest_news_tile.php"); 
 include("../tiles/trivia_tile.php"); 
 include("../tiles/did_you_know_tile.php"); 
@@ -36,7 +38,7 @@ $smarty->assign('statistics_tile', 'statistics_position_front');
 $smarty->assign('who_is_it_tile', 'whoisit_position_front');
 
 //Send all smarty variables to the templates
-$smarty->display('extends:../../../templates/html/main/main.html|../../../templates/html/main/frontpage.html|../../../templates/html/main/latest_news_tile.html|../../../templates/html/main/latest_reviews_tile.html|../../../templates/html/main/who_is_it_tile.html|../../../templates/html/main/screenstar_tile.html|../../../templates/html/main/hotlinks_tile.html|../../../templates/html/main/date_quote_tile.html|../../../templates/html/main/did_you_know_tile.html|../../../templates/html/main/statistics_tile.html|../../../templates/html/main/user_login_tile.html');
+$smarty->display('file:../../../templates/html/main/frontpage.html');
 
 //close the connection
 mysqli_close($mysqli)
