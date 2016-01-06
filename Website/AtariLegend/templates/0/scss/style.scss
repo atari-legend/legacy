@@ -23,12 +23,12 @@ $bg-color: white;
 /* load the main site font */
 @font-face {
     font-family: AtariST;
-    src: url('../font/AtariST.eot');
-    src: url('../font/AtariST.eot?#iefix') format('embedded-opentype'),
-         url('../font/AtariST.woff2') format('woff2'),
-         url('../font/AtariST.woff') format('woff'),
-         url('../font/AtariST.ttf') format('truetype'),
-         url('../font/AtariST.svg#AtariST') format('svg');
+    src: url('../font/atarist.eot');
+    src: url('../font/atarist.eot?#iefix') format('embedded-opentype'),
+         url('../font/atarist.woff2') format('woff2'),
+         url('../font/atarist.woff') format('woff'),
+         url('../font/atarist.ttf') format('truetype'),
+         url('../font/atarist.svg#AtariST') format('svg');
     font-weight: normal;
     font-style: normal;
 }
