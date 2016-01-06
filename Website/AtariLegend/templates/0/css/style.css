@@ -864,26 +864,33 @@ body, html {
 
   .sub-menu li {
     font-size: 13px; } }
-.sidebutton {
+.sidebutton, .sidebutton_cpanel {
   cursor: pointer;
   border: 0;
-  background: white;
   color: black;
-  font-size: 16px;
-  width: 213px;
   -webkit-border-radius: "";
   -moz-border-radius: "";
   border-radius: "";
   text-align: center;
   text-shadow: -1px 1px 5px white, 1px -1px 15px #acacac;
   font-weight: normal;
-  margin-left: 0;
   border-bottom: 0;
-  line-height: 27px; }
+  line-height: 27px;
+  margin-left: 0;
+  width: 213px;
+  font-size: 16px;
+  background: white; }
 
-.sidebutton:hover {
+.sidebutton:hover, .sidebutton_cpanel:hover {
   background: black;
   color: white; }
+
+.sidebutton_cpanel {
+  margin-left: 20px;
+  width: 180px;
+  font-size: 0;
+  border-left: 0;
+  background: 0; }
 
 /* for the lower resolutions, we don't have the menu bar below the top */
 @media screen and (max-width: 1279px) {
@@ -891,6 +898,10 @@ body, html {
     display: none; } }
 /* for resolutions between 1280 and 1920 the search goes to the side menu */
 /* some re-placement of the skin button is needed here */
+/* HOWEVER, this is not done for the CPANEL, to solve this id no-wrap is created */
+#no-wrap {
+  margin-top: 0; }
+
 @media screen and (max-width: 1919px) {
   .skin-wrap {
     margin-top: 30px; } }

@@ -34,12 +34,11 @@
 			$(window).load(function(){
 			  $("[data-toggle]").click(function() {
 				var toggle_el = $(this).data("toggle");
-				$(toggle_el).toggleClass("open-sidebar_cpanel");
+				$(toggle_el).toggleClass("open-sidebar");
 			  });
 			});
 			//]]> 		
 			{if isset($edit_message)}
-
 				$( document ).ready(function() {
 					$.notify_osd.create({
 						'text'        : '{$edit_message}',             // notification message
@@ -58,122 +57,122 @@
 			<header>
 				<div id="top_background">
 					<!-- This is the side menu only visible for smartphones (max resolution 480pc)-->				
-					<div class="container_cpanel" style="position: fixed;">
-					   <div id="sidebar_cpanel">
-						    <div class="skin-wrap_cpanel">
-								<nav class="skin-menu_cpanel">
-								  <ul class="clearfix_cpanel">
-									<li><button type="button" class="topbutton_cpanel" id="games_side_cpanel">GAMES</button>
-										<ul class="sub-menu_cpanel">
-											<li><a href="../games/games_main.php" title="Game editor" class="sidebutton_cpanel" id="game_editor_side">GAME EDITOR</a></li>
-											<li><a href="#" title="Game comments" class="sidebutton_cpanel" id="game_comments_side">GAME COMMENTS</a></li>
-											<li><a href="#" title="Game series" class="sidebutton_cpanel" id="game_series_side">GAME SERIES</a></li>
-											<li><a href="#" title="Game music" class="sidebutton_cpanel" id="game_music_side">GAME MUSIC</a></li>
-											<li><a href="#" title="Game submissions" class="sidebutton_cpanel" id="game_submissions_side">GAME SUBMISSIONS</a></li>
-											<li><a href="#" title="Game_reviews" class="sidebutton_cpanel" id="game_reviews_side">REVIEWS</a></li>
-											<li><a href="#" title="submitted_reviews" class="sidebutton_cpanel" id="submitted_reviews_side">REVIEW SUBMISSIONS</a></li>
-											<li><a href="#" title="Individuals" class="sidebutton_cpanel" id="individuals_side">INDIVIDIUALS</a></li>
-											<li><a href="#" title="Author types" class="sidebutton_cpanel" id="author_types_side">AUTHOR TYPES</a></li>
-											<li><a href="#" title="Companies" class="sidebutton_cpanel" id="companies_side">COMPANIES</a></li>
-											<li><a href="#" title="Company logo" class="sidebutton_cpanel" id="company_logo_side">COMPANY LOGO</a></li>
-											<li><a href="#" title="Interviews" class="sidebutton_cpanel" id="interviews_side">INTERVIEWS</a></li>
-											<li><a href="#" title="Interviews help" class="sidebutton_cpanel" id="interviews_help_side">INTERVIEWS HELP</a></li>
+					<div class="container" style="position: fixed;">
+					   <div id="sidebar">
+						    <div class="skin-wrap" id="no-wrap">
+								<nav class="skin-menu">
+								  <ul class="side_navigation">
+									<li><a href="" class="sidebutton" id="games_side">GAMES</a>
+										<ul class="sub-menu">
+											<li><a href="../games/games_main.php" title="Game editor" class="sidebutton_cpanel">GAME EDITOR</a></li>
+											<li><a href="#" title="Game comments" class="sidebutton_cpanel">GAME COMMENTS</a></li>
+											<li><a href="#" title="Game series" class="sidebutton_cpanel">GAME SERIES</a></li>
+											<li><a href="#" title="Game music" class="sidebutton_cpanel">GAME MUSIC</a></li>
+											<li><a href="#" title="Game submissions" class="sidebutton_cpanel">GAME SUBMISSIONS</a></li>
+											<li><a href="#" title="Game_reviews" class="sidebutton_cpanel">REVIEWS</a></li>
+											<li><a href="#" title="submitted_reviews" class="sidebutton_cpanel">REVIEW SUBMISSIONS</a></li>
+											<li><a href="#" title="Individuals" class="sidebutton_cpanel">INDIVIDIUALS</a></li>
+											<li><a href="#" title="Author types" class="sidebutton_cpanel">AUTHOR TYPES</a></li>
+											<li><a href="#" title="Companies" class="sidebutton_cpanel">COMPANIES</a></li>
+											<li><a href="#" title="Company logo" class="sidebutton_cpanel">COMPANY LOGO</a></li>
+											<li><a href="#" title="Interviews" class="sidebutton_cpanel">INTERVIEWS</a></li>
+											<li><a href="#" title="Interviews help" class="sidebutton_cpanel">INTERVIEWS HELP</a></li>
 										</ul>
 									</li>
 								  </ul>
 								</nav>
 						    </div>
-							 <div class="skin-wrap_cpanel">
-								<nav class="skin-menu_cpanel">
-								  <ul class="clearfix_cpanel">
-									<li><button type="button" class="topbutton_cpanel" id="menus_side_cpanel">MENUS</button>
-										<ul class="sub-menu_cpanel">
-											<li><a href="../menus/menus_list.php" title="Menu editor" class="sidebutton_cpanel" id="menu_editor_side">MENU EDITOR</a></li>
-											<li><a href="#" title="Menu comments" class="sidebutton_cpanel" id="menu_comments_side">MENU COMMENTS</a></li>
-											<li><a href="#" title="Menu submissions" class="sidebutton_cpanel" id="menu_submissions_side">MENU SUBMISSIONS</a></li>
-											<li><a href="#" title="Individuals" class="sidebutton_cpanel" id="menu_individuals_side">INDIVIDIUALS</a></li>
-											<li><a href="#" title="Author types" class="sidebutton_cpanel" id="menu_author_types_side">AUTHOR TYPES</a></li>
-											<li><a href="#" title="Crew editor" class="sidebutton_cpanel" id="menu_crew_editor_side">CREW EDITOR</a></li>
+							 <div class="skin-wrap" id="no-wrap">
+								<nav class="skin-menu">
+								  <ul class="side_navigation">
+									<li><a href="" class="sidebutton" id="menus_side">MENUS</a>
+										<ul class="sub-menu">
+											<li><a href="../menus/menus_list.php" title="Menu editor" class="sidebutton_cpanel">MENU EDITOR</a></li>
+											<li><a href="#" title="Menu comments" class="sidebutton_cpanel">MENU COMMENTS</a></li>
+											<li><a href="#" title="Menu submissions" class="sidebutton_cpanel">MENU SUBMISSIONS</a></li>
+											<li><a href="#" title="Individuals" class="sidebutton_cpanel">INDIVIDIUALS</a></li>
+											<li><a href="#" title="Author types" class="sidebutton_cpanel">AUTHOR TYPES</a></li>
+											<li><a href="#" title="Crew editor" class="sidebutton_cpanel">CREW EDITOR</a></li>
 										</ul>
 									</li>
 								  </ul>
 								</nav>
 						    </div>
-							 <div class="skin-wrap_cpanel">
-								<nav class="skin-menu_cpanel">
-								  <ul class="clearfix_cpanel">
-									<li><button type="button" class="topbutton_cpanel" id="demos_side_cpanel">DEMOS</button>
-										<ul class="sub-menu_cpanel">
-											<li><a href="#" title="Demo editor" class="sidebutton_cpanel" id="demo_editor_side">DEMO EDITOR</a></li>
-											<li><a href="#" title="Demo comments" class="sidebutton_cpanel" id="demo_comments_side">DEMO COMMENTS</a></li>
-											<li><a href="#" title="Demo music" class="sidebutton_cpanel" id="demo_music_side">DEMO MUSIC</a></li>
-											<li><a href="#" title="Demo submissions" class="sidebutton_cpanel" id="demo_submissions_side">DEMO SUBMISSIONS</a></li>
-											<li><a href="#" title="Individuals" class="sidebutton_cpanel" id="demo_individuals_side">INDIVIDIUALS</a></li>
-											<li><a href="#" title="Author types" class="sidebutton_cpanel" id="demo_author_types_side">AUTHOR TYPES</a></li>
-											<li><a href="#" title="Crew editor" class="sidebutton_cpanel" id="crew_editor_side">CREW EDITOR</a></li>
-											<li><a href="#" title="Interviews" class="sidebutton_cpanel" id="demo_interviews_side">INTERVIEWS</a></li>
-											<li><a href="#" title="Interviews help" class="sidebutton_cpanel" id="demo_interviews_help_side">INTERVIEWS HELP</a></li>
+							<div class="skin-wrap" id="no-wrap">
+								<nav class="skin-menu">
+								  <ul class="side_navigation">
+									<li><a href="" class="sidebutton" id="demos_side">DEMOS</a>
+										<ul class="sub-menu">
+											<li><a href="#" title="Demo editor" class="sidebutton_cpanel">DEMO EDITOR</a></li>
+											<li><a href="#" title="Demo comments" class="sidebutton_cpanel">DEMO COMMENTS</a></li>
+											<li><a href="#" title="Demo music" class="sidebutton_cpanel">DEMO MUSIC</a></li>
+											<li><a href="#" title="Demo submissions" class="sidebutton_cpanel">DEMO SUBMISSIONS</a></li>
+											<li><a href="#" title="Individuals" class="sidebutton_cpanel">INDIVIDIUALS</a></li>
+											<li><a href="#" title="Author types" class="sidebutton_cpanel">AUTHOR TYPES</a></li>
+											<li><a href="#" title="Crew editor" class="sidebutton_cpanel">CREW EDITOR</a></li>
+											<li><a href="#" title="Interviews" class="sidebutton_cpanel">INTERVIEWS</a></li>
+											<li><a href="#" title="Interviews help" class="sidebutton_cpanel">INTERVIEWS HELP</a></li>
 										</ul>
 									</li>
 								  </ul>
 								</nav>
 						    </div>
-							<div class="skin-wrap_cpanel">
-								<nav class="skin-menu_cpanel">
-								  <ul class="clearfix_cpanel">
-									<li><button type="button" class="topbutton_cpanel" id="users_side_cpanel">USERS</button>
-										<ul class="sub-menu_cpanel">
-											<li><a href="../user/user_main.php" title="User admin" class="sidebutton_cpanel" id="user_admin_side">USER ADMIN</a></li>
+							<div class="skin-wrap" id="no-wrap">
+								<nav class="skin-menu">
+								  <ul class="side_navigation">
+									<li><a href="" class="sidebutton" id="users_side">USERS</a>
+										<ul class="sub-menu">
+											<li><a href="../user/user_main.php" title="User admin" class="sidebutton_cpanel">USER ADMIN</a></li>
 										</ul>
 									</li>
 								  </ul>
 								</nav>
 						    </div>
-							<div class="skin-wrap_cpanel">
-								<nav class="skin-menu_cpanel">
-								  <ul class="clearfix_cpanel">
-									<li><button type="button" class="topbutton_cpanel" id="admin_side_cpanel">NEWS</button>
-										<ul class="sub-menu_cpanel">
-											<li><a href="#" title="Add news" class="sidebutton_cpanel" id="add_news_side">ADD NEWS</a></li>
-											<li><a href="#" title="Approve news" class="sidebutton_cpanel" id="approve_news_side">APPROVE NEWS</a></li>
-											<li><a href="#" title="Submitted news" class="sidebutton_cpanel" id="submitted_news_side">SUBMITTED NEWS</a></li>
+							<div class="skin-wrap" id="no-wrap">
+								<nav class="skin-menu">
+								  <ul class="side_navigation">
+									<li><a href="" class="sidebutton" id="admin_side">NEWS</a>
+										<ul class="sub-menu">
+											<li><a href="#" title="Add news" class="sidebutton_cpanel">ADD NEWS</a></li>
+											<li><a href="#" title="Approve news" class="sidebutton_cpanel">APPROVE NEWS</a></li>
+											<li><a href="#" title="Submitted news" class="sidebutton_cpanel">SUBMITTED NEWS</a></li>
 										</ul>
 									</li>
 								  </ul>
 								</nav>
 						    </div>
-							<div class="skin-wrap_cpanel">
-								<nav class="skin-menu_cpanel">
-								  <ul class="clearfix_cpanel">
-									<li><button type="button" class="topbutton_cpanel" id="other_side_cpanel">OTHER</button>
-										<ul class="sub-menu_cpanel">
-											<li><a href="../index.php" title="Statistics" class="sidebutton_cpanel" id="Statistics_side">STATISTICS</a></li>
-											<li><a href="../trivia/did_you_know.php" title="Did you know" class="sidebutton_cpanel" id="did_you_know_side">DID YOU KNOW</a></li>
-											<li><a href="../trivia/manage_trivia_quotes.php" title="Trivia quotes" class="sidebutton_cpanel" id="trivia_quotes_side">TRIVIA QUOTES</a></li>
-											<li><a href="../links/link_addnew.php" title="Add links" class="sidebutton_cpanel" id="add_links_side">ADD LINKS</a></li>
-											<li><a href="../links/link_modlist.php" title="Modify links" class="sidebutton_cpanel" id="modify_links_side">MODIFY LINKS</a></li>
-											<li><a href="../links/link_cat.php" title="Link categories" class="sidebutton_cpanel" id="link_categories_side">LINK CATEGORIES</a></li>
-											<li><a href="#" title="Articles" class="sidebutton_cpanel" id="articles_side">ARTICLES</a></li>
-											<li><a href="#" title="Article types" class="sidebutton_cpanel" id="article_types_side">ARTICLE TYPES</a></li>
-											<li><a href="#" title="Screenshots" class="sidebutton_cpanel" id="screenshots_side">SCREENSHOTS</a></li>
-											<li><a href="#" title="Add magazines" class="sidebutton_cpanel" id="add_magazines_side">ADD MAGAZINES</a></li>
-											<li><a href="#" title="Manage issues" class="sidebutton_cpanel" id="manage_issues_side">MANAGE ISSUES</a></li>
-											<li><a href="#" title="Forum" class="sidebutton_cpanel" id="forum_side">FORUM</a></li>
-											<li><a href="#" title="Log out" class="sidebutton_cpanel" id="logout_side">LOG OUT</a></li>
+							<div class="skin-wrap" id="no-wrap">
+								<nav class="skin-menu">
+								  <ul class="side_navigation">
+									<li><a href="" class="sidebutton" id="other_side">OTHER</a>
+										<ul class="sub-menu">
+											<li><a href="../index.php" title="Statistics" class="sidebutton_cpanel">STATISTICS</a></li>
+											<li><a href="../trivia/did_you_know.php" title="Did you know" class="sidebutton_cpanel">DID YOU KNOW</a></li>
+											<li><a href="../trivia/manage_trivia_quotes.php" title="Trivia quotes" class="sidebutton_cpanel">TRIVIA QUOTES</a></li>
+											<li><a href="../links/link_addnew.php" title="Add links" class="sidebutton_cpanel">ADD LINKS</a></li>
+											<li><a href="../links/link_modlist.php" title="Modify links" class="sidebutton_cpanel">MODIFY LINKS</a></li>
+											<li><a href="../links/link_cat.php" title="Link categories" class="sidebutton_cpanel">LINK CATEGORIES</a></li>
+											<li><a href="#" title="Articles" class="sidebutton_cpanel">ARTICLES</a></li>
+											<li><a href="#" title="Article types" class="sidebutton_cpanel">ARTICLE TYPES</a></li>
+											<li><a href="#" title="Screenshots" class="sidebutton_cpanel">SCREENSHOTS</a></li>
+											<li><a href="#" title="Add magazines" class="sidebutton_cpanel">ADD MAGAZINES</a></li>
+											<li><a href="#" title="Manage issues" class="sidebutton_cpanel">MANAGE ISSUES</a></li>
+											<li><a href="#" title="Forum" class="sidebutton_cpanel">FORUM</a></li>
+											<li><a href="#" title="Log out" class="sidebutton_cpanel">LOG OUT</a></li>
 										</ul>
 									</li>
 								  </ul>
 								</nav>
 						    </div>
-							<div class="skin-wrap_cpanel">
-								<nav class="skin-menu_cpanel">
-								  <ul class="clearfix_cpanel">
+							<div class="skin-wrap" id="no-wrap">
+								<nav class="skin-menu">
+								  <ul class="clearfix">
 									<li>	
-										<button type="button" class="topbutton_cpanel" id="skin_side_cpanel">SKIN</button>
-										<ul class="sub-menu_cpanel">
-											<li><a href="{$skin_switch_1}" class="sidebutton_cpanel" id="legacy">LEGACY</a></li>
-											<li><a href="{$skin_switch_0}" class="sidebutton_cpanel" id="tos">TOS 2.07</a></li>
-											<li><a href="{$skin_switch_2}" class="sidebutton_cpanel" id="picasso">PICASSO</a></li>
+										<a href="" class="sidebutton" id="skin_side">SKIN</a>
+										<ul class="sub-menu">
+											<li><a href="{$skin_switch_1}">LEGACY</a></li>
+											<li><a href="{$skin_switch_0}">TOS 2.07</a></li>
+											<li><a href="{$skin_switch_2}">PICASSO</a></li>
 										</ul>
 									</li>
 								  </ul>
@@ -181,7 +180,7 @@
 							</div>
 					   </div>
 					   <div class="main-content">
-						    <button type="button" data-toggle=".container_cpanel" id="sidebar_cpanel-toggle" style="border:none; cursor: pointer;">
+						    <button type="button" data-toggle=".container" id="sidebar-toggle" style="border:none; cursor: pointer;">
 								  <span class="bar"></span>
 								  <span class="bar"></span>
 								  <span class="bar"></span>
@@ -203,7 +202,7 @@
 					<img id="animation_vert" src="{$img_dir}animations/animation_vert0{math equation='rand(1,2)'}.gif" alt="animation" />
 					{/if}
 				</div>			
-				<nav id="main_nav_cpanel">
+				<nav id="main_nav">
 					<ul class="nav">
 						<li><button type="button" class="topbutton_cpanel" id="games">GAMES</button>
 							<ul>

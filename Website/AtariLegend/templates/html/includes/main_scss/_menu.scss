@@ -31,6 +31,9 @@
 	$searchbutton-height: 0;
 	$searchbutton-font: 0;
 	$searchbutton-shadow: 0;
+	$sidebutton-cpanel-font: 0;
+	$sidebutton-cpanel-left-border: 0;
+	$sidebutton-cpanel-bg :0;
 		
 	@if $skin-name == tos 
 		{$menu-top: 0; $menu-opacity: 1; $menu-input-margin: 3px 0 0 16px; $menu-input-height: 20px; $menu-input-border: 1px solid #007b7b; 
@@ -49,7 +52,7 @@
 		 $menu-input-font: 15pt; $menu-top-button-color: #182727; $menu-top-button-height: 57px; $menu-top-button-width: 183px; $menu-top-button-font: 20px;
 		 $menu-top-button-border-bottom: 3px solid #008b8b; $menu-top-button-border-left: 1px solid #008b8b; $menu-top-button-hover-bg: #00a9a9; $menu-top-button-hover-color: #182727;
 		 $menu-top-button-hover-border-bottom: 3px solid #006f6f; $sidebutton-bg: #00d3d3; $sidebutton-font: 16px; $sidebutton-height: 30px; $sidebutton-hoover-font: #182727;
-		 $searchbutton-height: 57px; $searchbutton-font: 20px;}
+		 $searchbutton-height: 57px; $searchbutton-font: 20px; $sidebutton-cpanel-font: 14px; $sidebutton-cpanel-left-border: 1px solid #008b8b; $sidebutton-cpanel-bg: #55b4b4;}
 
 
 
@@ -438,19 +441,19 @@
 {
 	cursor: pointer;
 	border: $menu-top-button-border;
-	background: $sidebutton-bg;
 	color: $menu-top-button-color;
-	font-size: $sidebutton-font;
-	width: 213px;
 	-webkit-border-radius: $menu-top-button-radius;
 	-moz-border-radius: $menu-top-button-radius;
 	border-radius: $menu-top-button-radius;
 	text-align: center;
 	text-shadow: $menu-top-button-shadow;
 	font-weight: $menu-top-button-font-weight;
-	margin-left: $menu-top-button-margin-left;
 	border-bottom: $menu-top-button-border-bottom;
 	line-height: $sidebutton-height;
+	margin-left: $menu-top-button-margin-left;
+	width: 213px;
+	font-size: $sidebutton-font;
+	background: $sidebutton-bg;
 }
 
 .sidebutton:hover {
@@ -460,6 +463,15 @@
 		border: $menu-top-button-hover-border;
 		border-bottom: $menu-top-button-hover-border-bottom;
 	}
+}
+
+.sidebutton_cpanel{
+	@extend .sidebutton;
+	margin-left: 20px; 
+	width: 180px; 
+	font-size: $sidebutton-cpanel-font; 
+	border-left: $sidebutton-cpanel-left-border;
+	background: $sidebutton-cpanel-bg;
 }
 
 @if $skin-name == legacy 
@@ -476,6 +488,9 @@
 
 /* for resolutions between 1280 and 1920 the search goes to the side menu */
 /* some re-placement of the skin button is needed here */
+/* HOWEVER, this is not done for the CPANEL, to solve this id no-wrap is created */
+#no-wrap{margin-top:0;}
+
 @if $skin-name == legacy 
 {
 	@media screen and (max-width: 1919px) { 
