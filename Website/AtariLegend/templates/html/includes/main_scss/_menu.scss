@@ -40,14 +40,15 @@
 		 $menu-input-font: 12pt; $menu-top-button-color: black; $menu-top-button-height: 30px; $menu-top-button-width: 194.6px; $menu-top-button-font: 20px;
 		 $menu-top-button-shadow: -1px 1px 5px white, 1px -1px 15px #acacac; $menu-top-button-hover-bg: black; $menu-top-button-hover-color: white;
 		 $sidebutton-bg: white; $sidebutton-font: 16px; $sidebutton-height: 27px; $sidebutton-hoover-font:white; $searchbutton-height: 27px; $searchbutton-font: 15px;
-		 $sidebutton-cpanel-bg : white;} 
+		 $sidebutton-cpanel-bg : #eeeeee; $sidebutton-cpanel-left-border: 1px solid black; $sidebutton-cpanel-font: 16px;} 
 	@else if $skin-name == picasso 
 		{$menu-top: 220px; $menu-opacity: 1; $menu-input-margin: 2px 0px 0px 16px; $menu-input-height: 20px; $menu-input-border: 1px solid #4f4f4f; 
 		 $menu-input-font: 12pt; $menu-top-button-border: 2px solid black; $menu-top-button-color: white; $menu-top-button-height: 26px; $menu-top-button-width: 181.5px; 
 		 $menu-top-button-font: 19px; $menu-top-button-font-weight: bold; $menu-top-button-margin-left: 2px; $menu-top-button-radius: 0 15px 15px 0; $menu-top-button-border-left: 2px solid black;
 		 $menu-top-button-border-bottom: 2px solid black; $menu-top-button-hover-bg: #dbd7d1; $menu-top-button-hover-color: black; $menu-top-button-hover-border: 2px solid #4f4f4f; 
 		 $sidebutton-bg: #161c71; $sidebutton-font: 19px; $sidebutton-height: 30px; $sidebutton-hoover-font: white; $searchbutton-height: 26px; $searchbutton-font:20px;
-		 $searchbutton-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #fff; $menu-top-button-hover-border-bottom: 2px solid #4f4f4f; $sidebutton-cpanel-bg: #161c71;}
+		 $searchbutton-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #fff; $menu-top-button-hover-border-bottom: 2px solid #4f4f4f; $sidebutton-cpanel-bg: #383b6f;
+		 $sidebutton-cpanel-font: 16px; $sidebutton-cpanel-left-border: 2px solid black;}
 	@else if $skin-name == legacy 
 		{$menu-top: 225px; $menu-opacity: 0.8; $menu-input-margin: 11px 0px 0px 16px; $menu-input-height: 35px; $menu-input-border: 1px solid #007b7b; 
 		 $menu-input-font: 15pt; $menu-top-button-color: #182727; $menu-top-button-height: 57px; $menu-top-button-width: 183px; $menu-top-button-font: 20px;
@@ -90,12 +91,12 @@
 		
 		/* this is the width of the side menu when it is pushed open */
 		 .container.open-sidebar {
-			left: 189px;
+			left: 209px;
 		}
 		
 		/* the position of the side buttons when pushed open */
 		#sidebar {
-			left: -191px;	
+			left: -209px;	
 			width: 191px;
 		}
 	}
@@ -103,12 +104,12 @@
 	{ 	
 		/* this is the width of the side menu when it is pushed open */
 		.container.open-sidebar {
-			left: 170px;
+			left: 190px;
 		}
 		
 		/* the position of the side buttons when pushed open */
 		 #sidebar {
-			left: -172px;
+			left: -192px;
 			width: 170px;
 		}
 	}
@@ -376,59 +377,10 @@
 	.main-content #sidebar-toggle {position: relative;}
 	}	
 
-/* resizing of buttons and sidemenu is done to get al info on screen in landscape for phones and tablets*/
-@media screen and (max-width: 640px) { 
-
-	.container.open-sidebar { left: 113px;}
-	
-	@if ($skin-name == legacy) or ($skin-name == picasso)
-	{
-		#skin_side, .side_navigation * a {	
-			line-height: 40px; 
-			width: 112px; 
-			font-size: 14px;
-		}
-		.sub-menu li { font-size:13px; }
-		@if $skin-name == legacy 
-		{
-			#search_side {height: 40px; width: 25px;}
-			#search_text_side{height: 20px; width: 70px;}
-			#searchbutton_side{height: 38px; width: 87px;}
-			#sidebar { left: -113px;
-				width: 113px;
-			}
-		}
-		@else
-		{
-			#search_side {height: 37px; width: 39px;}
-			#search_text_side{height: 28px; width: 60px; margin-left:3px;}
-			#searchbutton_side{height: 37px; width: 70px;}
-			#sidebar { left: -118px;
-				width: 115px;
-			}
-		}
-	}
-	@else if $skin-name == tos
-	{
-		#skin_side, .side_navigation * a {	
-			line-height: 32px; 
-			width: 113px; 
-			font-size: 14px;
-			}
-		#search_side {height: 29px; width: 30px;}
-		#search_text_side{height: 20px; width: 70px; margin: 4px 0 0 6px;}
-		#searchbutton_side{height: 29px; width: 82px;}
-		#sidebar { left: -113px;
-			width: 113px;
-			}
-		.sub-menu li { font-size:13px; }
-	}
-}
-
 .sidebutton_extra
 {
-	cursor: pointer;
 	border: $menu-top-button-border;
+	cursor: pointer;
 	color: $menu-top-button-color;
 	-webkit-border-radius: $menu-top-button-radius;
 	-moz-border-radius: $menu-top-button-radius;
@@ -470,7 +422,9 @@
 .sidebutton_cpanel:hover {
 	background: $menu-top-button-hover-bg;
 	color: $menu-top-button-color;
-	border-bottom: $menu-top-button-hover-border-bottom;
+	@if $skin-name == legacy or $skin-name == picasso {
+		border-bottom: $menu-top-button-hover-border-bottom;
+	}
 }
 
 @if $skin-name == legacy 
