@@ -21,8 +21,15 @@ $bg-color: #00d3d3;
 /********************PART I : MAIN SITE***********************/
 
 @font-face {
-   font-family: Audiowide;
-   src: url(../font/Audiowide-Regular.ttf);
+    font-family: 'Audiowide';
+    src: url('../font/audiowide-regular-webfont.eot');
+    src: url('../font/audiowide-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../font/audiowide-regular-webfont.woff2') format('woff2'),
+         url('../font/audiowide-regular-webfont.woff') format('woff'),
+         url('../font/audiowide-regular-webfont.ttf') format('truetype'),
+         url('../font/audiowide-regular-webfont.svg#audiowideregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
 }
 
 * { 	margin: 0; padding: 0; 
@@ -1311,7 +1318,6 @@ Standard table settings
   cursor: pointer;
   border: 0px;
   background: #122323;
-  font-family: Audiowide,Arial,helvetica,sans-serif;
   color: white;
   height: 25px;
   width: 80px;
@@ -1487,7 +1493,6 @@ Quick search games
 	  cursor: pointer;
 	  border: 0px;
 	  background: #00d3d3;
-	  font-family: Audiowide,Arial,helvetica,sans-serif;
 	  color: #182727;
 	  border-bottom: 3px solid #008b8b;
 	  border-left: 1px solid #007878;
@@ -1734,7 +1739,6 @@ Links addnew
 				padding-left: 5px;
 				border: 1px solid #008b8b;
 				text-align: left;
-				font-family: Audiowide;	
 }
 
 .links_addnew_row select  { 
@@ -1744,7 +1748,6 @@ Links addnew
 	margin-top:5px;
 	padding: 0;
 	padding-left: 5px;
-	font-family: Audiowide;	
 	width: 185px;
 	height: 25px;
 	margin-top: 0px;
