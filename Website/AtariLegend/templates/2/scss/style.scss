@@ -23,10 +23,9 @@ $bg-color: #161c71;
          url('ubuntu-webfont.svg#ubunturegular') format('svg');
     font-weight: normal;
     font-style: normal;
-
 }
 	
-* { 	margin: 0; padding: 0; 
+* { margin: 0; padding: 0; 
 }
 
 html { overflow-y: scroll; 
@@ -68,8 +67,7 @@ body a:visited {text-decoration:none;}
 		}
 }
 
-img { display: block;
-}
+img { display: block; }
 
 /*---------------------------------------------------------- 
  Main site width
@@ -134,18 +132,15 @@ img { display: block;
 			margin-right: auto;
 			margin-bottom: 5px;		
 		}
-	#right { width: 0%;
+	#right { width: 0;
 		display: none;
 	}
-	#top_background  { border-top-width: 0px;
-			border-left-width: 0px;
+	#top_background  { border-top-width: 0;
+			border-left-width: 0;
 			border-bottom-width: 7px;
 			border-bottom-color: #161c71;
 			border-style: solid;
 			box-shadow: 0 0 7px #161c71;
-		    background: -webkit-linear-gradient(black, #161c71); /* For Safari 5.1 to 6.0 */
-			background: -o-linear-gradient(black, #161c71); /* For Opera 11.1 to 12.0 */
-			background: -moz-linear-gradient(black, #161c71); /* For Firefox 3.6 to 15 */
 			background: linear-gradient(#161c71, black); /* Standard syntax (must be last) */
 		}
 }		
@@ -156,11 +151,11 @@ img { display: block;
 	#left { width: 100%; }
 	#logo_img{ margin-left: auto;
 			   margin-right: auto; 
-			   margin-top: 0px;
+			   margin-top: 0;
 		}
 	#logo_img_480{ display: none;}
 		
-	#right { width: 0%;
+	#right { width: 0;
 		display: none;
 	}
 }
@@ -233,7 +228,7 @@ Standard tile settings
 /* 1 tile and a simplified intro screen */
 @media screen and (max-width: 639px) { 
 	.column-left { width: 100%; } 
-	.column-center { width: 100%; margin-left: 0px;}
+	.column-center { width: 100%; margin-left: 0;}
 	.column-right { width: 100%; }	
 	.column-right-tab {display:none}
 	.column-left-tab {display:none}
@@ -259,10 +254,7 @@ Standard tile settings
 }
 
 .standard_tile  { width: 100%; 
-		/*background-color: #a6a6a6;*/
-		background: -webkit-linear-gradient(bottom, white , #a6a6a6); /* For Safari 5.1 to 6.0 */
-	    background: -o-linear-gradient(bottom, white, #a6a6a6); /* For Opera 11.1 to 12.0 */
-	    background: -moz-linear-gradient(bottom, white, #a6a6a6); /* For Firefox 3.6 to 15 */
+	    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr=#a6a6a6, endColorstr=#ffffff)";  /* For IE 8*/ 
 	    background: linear-gradient(to top, white, #a6a6a6); /* Standard syntax */
 		border-top: 10px solid #161c71;
 		border-bottom: 3px solid #161c71;
@@ -302,8 +294,6 @@ Standard tile settings
 .standard_tile_title{ 
 		background: rgb(192, 193, 202) transparent;   /* Fallback for web browsers that doesn't support RGBa */
         background: rgba(192, 193, 202, 0.6);   /* RGBa with 0.6 opacity */
-		filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#c0c1ca, endColorstr=#c0c1ca);  /* For IE 5.5 - 7*/
-		-ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#c0c1ca, endColorstr=#c0c1ca)";  /* For IE 8*/
 		padding-top:3%;
 		font-size : 17pt;
 		font-weight: 100;
@@ -473,7 +463,6 @@ Standard tile settings
 				text-align: left;
 				display: block;
 				background-size: 85% 42px;
-				font-family: Robot, Arial;	
 }
 
 .standard_tile_input_small { background : #666666;
@@ -485,7 +474,6 @@ Standard tile settings
 				padding-left:7px;
 				border: 1px solid #b2b2b2;
 				text-align: left;
-				font-family: Robot, Arial;	
 }
 
 .standard_tile_input_area { background : #666666;
@@ -497,7 +485,6 @@ Standard tile settings
 				padding-left:7px;
 				border: 1px solid #b2b2b2;
 				text-align: left;
-				font-family: Robot, Arial;	
 }
 
 #text_area_big { height: 150px; }
@@ -522,9 +509,7 @@ Standard tile settings
 	color:  black;
 }
 	
-.standard_tile_link_reverse:hover { 
-	color: white;
-}
+.standard_tile_link_reverse:hover { color: white; }
 
 .standard_tile_link_cpanel:link { 
 	color: #6a6a6a;
@@ -570,12 +555,10 @@ Standard tile settings
  }
 
 .standard_list_entry_left{
-		left: 0px;
+		left: 0;
 		width: 50%;
 		position: absolute;
 		top: 50%;
-		-webkit-transform: translateY(-50%);
-		-ms-transform: translateY(-50%);
 		transform: translateY(-50%);
 }
 
@@ -592,18 +575,13 @@ Standard tile settings
 		width: 50%;
 		position: absolute;
 		top: 50%;
-		-webkit-transform: translateY(-50%);
-		-ms-transform: translateY(-50%);
 		transform: translateY(-50%);
 }
  
 .standard_list_entry_right_news_text {
 		margin: 0;
   		padding: 0;
-  		-moz-box-sizing: border-box;
-  		-webkit-box-sizing: border-box;
   		box-sizing: border-box;
-
 		display: block;
   		/* Fallback for non-webkit */
   		display: -webkit-box;
@@ -629,25 +607,24 @@ Standard tile settings
 	margin-top:5px;
 	padding: 0;
 	padding-left: 5px;
-	font-family: Robot, Arial;	
 	width: 78%;
 	height: 20px;}
 
 #small_select{ background: #666666;
 	width: 50px;
 	height: 26px;	 
-	margin-top: 0px;
+	margin-top: 0;
 }
 
 #medium_select{ background: #666666;
 	width: 185px;
 	height: 28px;	 
-	margin-top: 0px;
+	margin-top: 0;
 }
 
 #medium_select2{ 
 	width: 140px;
-	margin-top: 0px;
+	margin-top: 0;
 	height: 25px;
 	background: #666666;
 }
@@ -670,8 +647,8 @@ Standard tile settings
 
 .welcome_slides { cursor: move; 
 		position: absolute; 
-		left: 0px; 
-		top: 0px; 
+		left: 0; 
+		top: 0; 
 		width: 845px; 
 		height: 460px; 
 		overflow: hidden;
@@ -725,7 +702,7 @@ logon tile --> front page
  }
 
 .logon_left{position: absolute;
-		left: 0px;
+		left: 0;
 		width: 10%;
 }
 .logon_right{position: absolute;
@@ -760,13 +737,13 @@ logon tile --> front page
 
 /* 2 tiles and background welcome image */
 @media screen and (min-width: 640px) and (max-width: 800px) { 
-	.logon { margin-top: 0px;}
+	.logon { margin-top: 0;}
 }
 
 /* 1 tile */
 @media screen and (max-width: 639px) { 
 	.logon  { width: 100%; 
-	margin-top: 0px;	
+	margin-top: 0;	
 	margin-bottom: 20px;
 	}
 }
@@ -804,7 +781,7 @@ datequote tile - front page
 
 /* 1 and 2 tiles */
 @media screen and (max-width: 800px) { 
-	.datequote_position_front { margin-top: 0px;}
+	.datequote_position_front { margin-top: 0;}
 }
 
 @media screen and (min-width: 1495px){ 
@@ -815,7 +792,7 @@ datequote tile - front page
 
 .datequote_day{ font-size : 85pt;
 		color : white; 
-		margin-top: 0px;
+		margin-top: 0;
 		margin-bottom: -20px;
 }
 
@@ -893,9 +870,11 @@ contact tiles - front page
 			border: none;
 }
 
-.contact_tiles  img{ margin-bottom: 20px;
+.contact_tiles img{ margin-bottom: 20px;
 			max-width: 100%;
 }
+
+.contact_tiles img:hover{ box-shadow: 0 0 7px white;}
 	
 @media screen and (min-width: 1495px){ 
 	.contact_tiles { width: 49%; float: right;} 
@@ -929,7 +908,6 @@ contact tiles - front page
 	background: #000000;
 	color: #ffffff;
 	width: 245px;
-	font-family: robot;
 	font-size:13px;
 }
 
@@ -963,10 +941,6 @@ contact tiles - front page
 		position: relative;
         width: 100%;
         left: 0;
-        -webkit-transition:  left 0.4s ease-in-out;
-        -moz-transition:  left 0.4s ease-in-out;
-        -ms-transition:  left 0.4s ease-in-out;
-        -o-transition:  left 0.4s ease-in-out;
         transition:  left 0.4s ease-in-out;
     }
     
@@ -978,10 +952,6 @@ contact tiles - front page
 	
     #sidebar_cpanel ul li a {
         display: block;
-        -webkit-transition:  background 0.3s ease-in-out;
-        -moz-transition:  background 0.3s ease-in-out;
-        -ms-transition:  background 0.3s ease-in-out;
-        -o-transition:  background 0.3s ease-in-out;
         transition:  background 0.3s ease-in-out;
     }
 
@@ -1028,11 +998,11 @@ contact tiles - front page
 	 
 	.skin-menu_cpanel {
 		width:100%;
-		margin:0px auto;
+		margin:0 auto;
 	}
 	 
 	.skin-menu_cpanel li {
-		margin:0px;
+		margin:0;
 		list-style:none;
 	}
 	 
@@ -1144,14 +1114,9 @@ nav ul {
 	height: 30px;
 	width: 205px;
 	background: #161c71;
-	font-family: robot, arial, sans-serif;
 	color:white;
 	font-size:19px;
 	font-weight: bold;
-	/*text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #fff;*/
-	/*give the corners a small curve*/ 
-	-webkit-border-radius: 0 15px 15px 0;
-	-moz-border-radius: 0 15px 15px 0;
 	border-radius: 0 15px 15px 0;
 	margin-left: 2px;
 	text-align:center;
@@ -1164,10 +1129,6 @@ nav ul {
   border:2px solid #4f4f4f;
 }
 
-.topbutton_cpanel:link {
- 	color:white;
-}
-
 .subbutton_cpanel
 {
     display: block;  
@@ -1175,14 +1136,10 @@ nav ul {
 	border:2px solid black;
 	width: 201px;
 	background: #161c71;
-	font-family: robot, arial, sans-serif;
 	color:white;
 	font-size:16px;
 	font-weight: bold;
-	/*text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #fff;*/
 	/*give the corners a small curve*/ 
-	-webkit-border-radius: 0 15px 15px 0;
-	-moz-border-radius: 0 15px 15px 0;
 	border-radius: 0 15px 15px 0;
 	margin-left: 2px;
 	text-align:center;
@@ -1201,14 +1158,10 @@ nav ul {
 	height: 30px;
 	width: 205px;
 	background: #161c71;
-	font-family: robot, arial, sans-serif;
 	color:white;
 	font-size:19px;
 	font-weight: bold;
-	/*text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #fff;*/
 	/*give the corners a small curve*/ 
-	-webkit-border-radius: 0 15px 15px 0;
-	-moz-border-radius: 0 15px 15px 0;
 	border-radius: 0 15px 15px 0;
 	margin-left: 2px;
 	  text-align:center;
@@ -1296,7 +1249,7 @@ Standard table settings
 	padding-top:3px;
 	padding-bottom:3px;
 	padding-left:3px;
-	margin:0px;
+	margin:0;
 }
 
 .standard_table_list tr:nth-child(even){
@@ -1315,7 +1268,7 @@ Standard table settings
 	padding-top:1px;
 	padding-bottom:1px;
 	padding-left:3px;
-	margin:0px;
+	margin:0;
 }
 
 .standard_table_center { color: black;
@@ -1345,13 +1298,10 @@ Standard table settings
   cursor: pointer;
   border:1px solid black;
   background: #dbd7d1;
-  font-family: robot, arial, sans-serif;
   color: black;
   height: 25px;
   width: 80px;
   font-size: 10pt;
-  -webkit-border-radius: 0 15px 15px 0;
-  -moz-border-radius: 0 15px 15px 0;
   border-radius: 0 15px 15px 0;
   margin-left: 2px;
 }
@@ -1365,13 +1315,7 @@ Standard table settings
 /* for lower resolutions put the left and right below eachother */
 @media screen and (max-width: 799px) { 	
 .main_container_cpanel {
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -moz-flex;
-  display: -webkit-flex;
   display: flex;
-  -webkit-flex-direction: column-reverse; 
   flex-direction: column-reverse; 
   float: left;
   width:100%;
@@ -1437,18 +1381,12 @@ Front page
 }
 
 @media screen and (max-width: 480px) { 
-	#welcome_cpanel{ width:100%; margin-top: 0px;}	
+	#welcome_cpanel{ width:100%; margin-top: 0;}	
 	#main_stats_position_front{ margin-top: -5px;}
 }
 
 .main_stats_container {
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -moz-flex;
-  display: -webkit-flex;
   display: flex;
-    -webkit-align-items: flex-start;
   align-items: flex-start; 
  }
   
@@ -1457,7 +1395,6 @@ Front page
 
 @media screen and (max-width: 1199px) { 
 	.main_stats_container {
-	  -webkit-flex-direction: column; 
 	  flex-direction: column; 
 	}	
 		
@@ -1493,7 +1430,7 @@ Left nav
 	padding-top:3px;
 	padding-bottom:3px;
 	padding-left:3px;
-	margin:0px;
+	margin:0;
 	text-align: center;
 	list-style-type: none;
 }
@@ -1532,11 +1469,8 @@ Quick search games
     cursor: pointer;
 	border:2px solid black;
 	background: #161c71;
-	font-family: robot, arial, sans-serif;
 	color:white;
 	font-weight: bold;
-	-webkit-border-radius: 0 15px 15px 0;
-	-moz-border-radius: 0 15px 15px 0;
 	border-radius: 0 15px 15px 0;
 	margin-left: 2px;
 	height: 25px;
@@ -1553,14 +1487,14 @@ Quick search games
 #quick_search_pub_select{ 
     background: #666666;
 	width: 185px;
-	margin-top: 0px;
+	margin-top: 0;
 	height: 25px;
 }
 
 #quick_search_dev_select{ 
 	background: #666666;
 	width: 185px;
-	margin-top: 0px;
+	margin-top: 0;
 	height: 25px;
 }
 
@@ -1600,11 +1534,6 @@ User details
 #user_details_img_dark{ box-shadow: 0 0 12px black; margin-left:1%;}
 
 .user_details_container{
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -moz-flex;
-  display: -webkit-flex;
   display: flex; 
  }
  
@@ -1615,7 +1544,6 @@ User details
 
 @media screen and (max-width: 1050px) { 
 	.user_details_container{
-		-webkit-flex-direction: column; 
 		flex-direction: column;
 	}
 }
@@ -1646,8 +1574,8 @@ User statistics
 }
 
 @media screen and (max-width: 480px) { 
-	#leftnav_position_userstatistics{ margin-top: 0px;}
-	#user_statistics{ margin-top: 0px;}
+	#leftnav_position_userstatistics{ margin-top: 0;}
+	#user_statistics{ margin-top: 0;}
 }
 
 /*---------------------------------------------------------- 
@@ -1656,14 +1584,9 @@ User main
 #leftnav_position_usermain{ margin-top: 50px; margin-bottom: 30px; float: left;}
 #quick_search_position_usermain {margin-top: 50px; margin-bottom: 30px;}
 #user_main{ margin-top: 50px; margin-bottom: 30px; float: left;}
-#main_stats_position_usermain{ margin-top: 0px; margin-bottom: 30px; float: left;}
+#main_stats_position_usermain{ margin-top: 0; margin-bottom: 30px; float: left;}
 
 .user_main_container{
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -moz-flex;
-  display: -webkit-flex;
   display: flex; 
   justify-content: center;
   align-items: center;
@@ -1677,7 +1600,6 @@ User main
 
 @media screen and (max-width: 500px) { 
 	.user_main_container{
-			-webkit-flex-direction: column; 
 			flex-direction: column;
 	}
 	#user_main_child_3{margin-top:5px;}
@@ -1748,7 +1670,7 @@ User karma
 }
 
 @media screen and (max-width: 480px) { 
-	#karma{ margin-top: 0px;}
+	#karma{ margin-top: 0;}
 }
 
 /*---------------------------------------------------------- 
@@ -1764,7 +1686,7 @@ Did you know
 }
 
 @media screen and (max-width: 480px) { 
-	#didyouknow{ margin-top: 0px;}
+	#didyouknow{ margin-top: 0;}
 }
 
 
@@ -1781,7 +1703,7 @@ Trivia Quotes
 }
 
 @media screen and (max-width: 480px) { 
-	#triviaquotes{ margin-top: 0px;}
+	#triviaquotes{ margin-top: 0;}
 }
 
 /*---------------------------------------------------------- 
@@ -1799,7 +1721,7 @@ Links addnew
 }
 
 @media screen and (max-width: 480px) { 
-	#linkaddnew{ margin-top: 0px;}
+	#linkaddnew{ margin-top: 0;}
 }
 
 .links_addnew_area { background: #666666;
@@ -1811,17 +1733,15 @@ Links addnew
 				padding-left: 5px;
 				border: 1px solid #b2b2b2;
 				text-align: left;
-				font-family: Robot, Arial;	
 }
 
 .links_addnew_row select  { 
 	background: #666666;
 	border: 1px solid #b2b2b2;
 	color: #ffffff;				
-	margin-top:0px;
+	margin-top:0;
 	padding: 0;
 	padding-left: 5px;
-	font-family: Robot, Arial;	
 	height: 25px;
 	width: 185px;
 }
@@ -1856,10 +1776,7 @@ Links Modify list
 .links_modlist_tdline{ font-size: 11pt; color: black; padding: 5px; border-bottom: solid 1px #b2b2b2; } 
 
 .user_stats_img_dark{ box-shadow: 0 0 12px black;
-					margin-left : 5px;
-					margin-right : 5px;
-					margin-top : 10px;
-					margin-bottom : 10px;
+					margin: 10px 5px 10px 5px;
 					max-width: 100%;
 					opacity: 0.8;
 					filter: alpha(opacity=40); /* For IE8 and earlier */}
@@ -1872,11 +1789,6 @@ Links Modify list
 .links_list_input{margin-left:1%;}
 
 .links_list_row{
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -moz-flex;
-  display: -webkit-flex;
   display: flex; 
   justify-content: center;
   align-items: center;
@@ -1884,7 +1796,6 @@ Links Modify list
  
 @media screen and (max-width: 500px) { 
 	.links_list_row{
-			-webkit-flex-direction: column; 
 			flex-direction: column;
 	}
 }
@@ -1912,7 +1823,7 @@ Links category
 }
 
 @media screen and (max-width: 480px) { 
-	#linkcat{ margin-top: 0px;}
+	#linkcat{ margin-top: 0;}
 }
 
 @media screen and (max-width: 500px) { 
@@ -1936,7 +1847,7 @@ Links Modify
 }
 
 @media screen and (max-width: 480px) { 
-	#link_mod{ margin-top: 0px;}
+	#link_mod{ margin-top: 0;}
 }
 
 .links_mod_text{width:35%;display:table-cell; vertical-align:top;}
@@ -1989,11 +1900,6 @@ Games main
 }
 
 .games_check_container{
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -moz-flex;
-  display: -webkit-flex;
   display: flex; 
   width: 50%;
   margin:auto;
@@ -2006,7 +1912,6 @@ Games main
 
 @media screen and (max-width: 1050px) { 
 	.games_check_container{
-		-webkit-flex-direction: column; 
 		flex-direction: column;
 		width: 100%;
 	}
@@ -2015,14 +1920,14 @@ Games main
 
 #games_main_pub_select{ 
 	width: 185px;
-	margin-top: 0px;
+	margin-top: 0;
 	height: 25px;
 	background: #666666;
 }
 
 #games_main_dev_select{ 
 	width: 185px;
-	margin-top: 0px;
+	margin-top: 0;
 	height: 25px;
 	background: #666666;
 }
@@ -2123,7 +2028,7 @@ Games detail
 #game_extra_info_pub,#continent_pub,#company_id_pub,#game_extra_info_dev,#continent_dev,
 #company_id_dev,#game_extra_info_year,#author_type_id,#ind_id{ 
 	width: 140px;
-	margin-top: 0px;
+	margin-top: 0;
 	height: 25px;
 	background: #666666;
 }	
@@ -2157,7 +2062,7 @@ Games detail
 	#gd_left{float:left; width:100%;}
 	#gd_right{float:right; width:100%;}
 	#gd_center{float:right; width:100%;}
-	#gd_publisher_info{margin-top:0px;}
+	#gd_publisher_info{margin-top:0;}
 }
 
 /*---------------------------------------------------------- 
@@ -2199,7 +2104,7 @@ Games comment
 .gc_table_list td {
 	border-bottom: solid 1px black;
 	padding: 5px;
-	margin:0px;
+	margin:0;
 }
 
 .gc_left_head{width:20%;font-size: 12pt;}
