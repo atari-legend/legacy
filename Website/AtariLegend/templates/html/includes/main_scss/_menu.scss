@@ -204,7 +204,7 @@
 		#searchbutton_side {
 			background: $bg-color;
 			height: 38px;
-			width: 119px;
+			width: 118px;
 			border-bottom: 2px solid #008b8b;
 			border-left : 1px solid #007878;
 			padding-top: 0;
@@ -410,19 +410,11 @@
 	@extend .sidebutton_extra;
 }
 
-.sidebutton:hover {
+.sidebutton:hover, .sidebutton_cpanel:hover {
 	background: $menu-top-button-hover-bg;
 	color: $sidebutton-hoover-font;
 	@if $skin-name == legacy or $skin-name == picasso {
 		border: $menu-top-button-hover-border;
-		border-bottom: $menu-top-button-hover-border-bottom;
-	}
-}
-
-.sidebutton_cpanel:hover {
-	background: $menu-top-button-hover-bg;
-	color: $menu-top-button-color;
-	@if $skin-name == legacy or $skin-name == picasso {
 		border-bottom: $menu-top-button-hover-border-bottom;
 	}
 }
@@ -488,6 +480,35 @@
 
 #main_nav { width: 100%; left: 0; }
 #main_nav_ul { font-size: 0; text-align : center; width: 100%;}
+
+/* this is some extra code for the cpanel sub menu at the main bar */
+#main_nav_ul li {
+  position: relative;
+}
+#main_nav_ul > li { 
+  float: left; 
+} 
+
+#main_nav_ul li a:first-child:nth-last-child(2):before { 
+  content: ""; 
+  position: absolute; 
+ }
+ 
+ /* submenu positioning*/
+#main_nav_ul ul {
+  position: absolute;
+  z-index: 1;
+  left: -99999em;
+  top: 61px;
+}
+#main_nav_ul > li:hover > ul {
+  left: auto;
+}
+#main_nav_ul > li li:hover > ul { 
+  left: 100%;
+}
+
+
 header nav img:hover{ opacity:$menu-opacity;}
 header nav li {	display: inline-block;}
 
