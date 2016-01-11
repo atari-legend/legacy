@@ -38,7 +38,7 @@ $animation-top: 0;
 	70% { opacity: 1;}
 	
 	100% {
-        top: 174px;
+        top: $animation-top;
 		left: 45%;
 		opacity: 0;
     }
@@ -54,7 +54,7 @@ $animation-top: 0;
 	70% { opacity: 1;}
     	
     100% {
-        top:174px;
+        top:$animation-top;
 		left: 45%;
 		opacity: 0;
     }

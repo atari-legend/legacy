@@ -18,6 +18,8 @@ $bg-color: #00d3d3;
 /* ---------------SASS includes---------------*/
 @import "normalize/import-now";										/* --> Normalize script
 
+
+
 /********************PART I : MAIN SITE***********************/
 
 @font-face {
@@ -925,165 +927,6 @@ contact tiles - front page
 	
 /* *********************PART II : CPANEL*****************************/
 
-/* ---------the side menu--------*/
-
-/* the side menu for smartphones, tablets and old (laptop) screens */
-/* it is also used for the high res monitors, but then only the skin switch will be visible */
-	.container_cpanel {
-		display : block;
-		z-index: 3;
-		position: relative;
-        width: 100%;
-        left: 0;
-        -webkit-transition:  left 0.4s ease-in-out;
-        -moz-transition:  left 0.4s ease-in-out;
-        -ms-transition:  left 0.4s ease-in-out;
-        -o-transition:  left 0.4s ease-in-out;
-        transition:  left 0.4s ease-in-out;
-    }
-    
-    #sidebar_cpanel {
-		z-index:1;
-		position: absolute;
-		box-sizing: border-box;
-    }
-	
-    #sidebar_cpanel ul li a {
-        display: block;
-        -webkit-transition:  background 0.3s ease-in-out;
-        -moz-transition:  background 0.3s ease-in-out;
-        -ms-transition:  background 0.3s ease-in-out;
-        -o-transition:  background 0.3s ease-in-out;
-        transition:  background 0.3s ease-in-out;
-    }
-
-	.container_cpanel.open-sidebar_cpanel{ left: 245px;}
-	#sidebar_cpanel{ left: -245px;
-        width: 245px;
-	}
-	.sub-menu_cpanel li { font-size:20px; }
-	
-    .main-content #sidebar_cpanel-toggle {
-        background: #01b5b5;
-        border-radius: 3px;
-        display: block;
-        position: absolute;
-        padding: 10px 7px;
-        float: left;
-    }
-	
-    .main-content #sidebar_cpanel-toggle .bar{
-        display: block;
-        width: 18px;
-        margin-bottom: 3px;
-        height: 2px;
-        background-color: #fff;
-        border-radius: 1px;   
-    }
-	
-    .main-content #sidebar_cpanel-toggle .bar:last-child{
-         margin-bottom: 0;  
-    }
-
-	
-	/*-----some code for the skin submenu-------*/
-	
-	.clearfix_cpanel:after {
-		display:block;
-		clear:both;
-	}
-
-	/*----- Menu Outline -----*/
-	.skin-wrap_cpanel {
-		width:100%;
-	}
-	 
-	.skin-menu_cpanel {
-		width:100%;
-		margin:0px auto;
-	}
-	 
-	.skin-menu_cpanel li {
-		margin:0px;
-		list-style:none;
-	}
-	 
-	.skin-menu_cpanel a {
-		transition:all linear 0.15s;
-	}
-	 
-	 
-	/*----- Top Level -----*/
-	.skin-menu_cpanel > ul > li {
-		float:left;
-		display:inline-block;
-		position:relative;
-	}
-	 
-	/*----- Bottom Level -----*/
-	.skin-menu_cpanel li:hover .sub-menu_cpanel {
-		z-index:1;
-		opacity:1;
-	}
-
-	.sub-menu_cpanel {
-		width:75%;
-		padding:5px 0px;
-		position:absolute;
-		top:100%;
-		left:20px;
-		z-index:-1;
-		opacity:0;
-		transition:opacity linear 0.15s;
-		box-shadow:0px 2px 3px rgba(0,0,0,0.2);
-	}	 
-	
-/* 'position' is needed for smartphone view else the logo is covered by the sidemenu button */
-@media screen and (max-width: 480px) { 
-	.main-content_cpanel {position: relative;}
-	.main-content_cpanel #sidebar-toggle_cpanel {position: relative;}
-	}	
-	
-/* resizing of buttons is done to get al info on screen in landscape for phones and tablets*/
-@media screen and (max-width: 640px) { 
-	#games_side_cpanel{height: 40px; width: 113px; font-size: 14px;}
-	#menus_side_cpanel{height: 40px; width: 113px; font-size: 14px;}
-	#demos_side_cpanel{height: 40px; width: 113px; font-size: 14px;}
-	#users_side_cpanel{height: 40px; width: 113px; font-size: 14px;}
-	#admin_side_cpanel{height: 40px; width: 113px; font-size: 14px;}
-	#other_side_cpanel{height: 40px; width: 113px; font-size: 14px;}
-	#skin_side_cpanel{height: 40px; width: 113px; font-size: 14px;}
-	.container_cpanel.open-sidebar_cpanel { left: 225px;}
-    #sidebar_cpanel { left: -225px;
-        width: 225px;
-	}
-	.sub-menu_cpanel li { font-size:13px; }
-}
-
-/* for the lower resolutions, we don't have the menu bar below the top */ 
-@media screen and (max-width: 1279px) {  	
-	#games{ display: none; }
-	#menus{ display: none; } 
-	#demos{ display: none; } 
-	#users{ display: none; }
-	#admin{ display: none; }
-	#other{ display: none; }
-}
-
-/* for the high resolutions, we only have the skin switch in the side menu */ 
-@media screen and (min-width: 1280px) {  	
-	#games_side_cpanel, #demos_side_cpanel, #users_side_cpanel , #menus_side_cpanel, #admin_side_cpanel, #other_side__cpanel, #game_editor_side,
-	#game_comments_side, #game_series_side,	#game_music_side, #game_submissions_side, #game_reviews_side,
-	#submitted_reviews_side, #menu_editor_side, #menu_comments_side, #menu_submissions_side, #demo_editor_side,
-	#demo_comments_side, #demo_music_side, #demo_submissions_side, #user_admin_side, #individuals_side,
-	#author_types_side, #crew_editor_side, #companies_side, #company_logo_side, #add_news_side, #approve_news_side,
-	#submitted_news_side, #Statistics_side, #did_you_know_side, #trivia_screenshots_side, #trivia_quotes_side,
-	#add_links_side, #validate_links_side, #modify_links_side, #link_categories_side, #articles_side, #article_types_side,
-	#screenshots_side, #modify_links_side, #link_categories_side, #articles_side, #article_types_side,
-	#article_screenshots_side, #add_magazines_side, #manage_issues_side, #interviews_side, #interviews_help_side,
-	#forum_side, #logout_side{ display: none; }
-}
-
 /* CPANEL menu below top*/ 
 #main_nav_cpanel { width: 100%;}
 
@@ -1165,46 +1008,7 @@ nav ul {
   border-bottom: 3px solid #006f6f;
 }
 
-.sidebutton_cpanel
-{
-  cursor: pointer;
-  border: 0px;
-  background: #00d3d3;
-  font-family: Audiowide,Arial,helvetica,sans-serif;
-  color: #182727;
-  width: 213px;
-  font-size: 16px;
-  vertical-align:middle;
-  text-align:center;
-  border-bottom: 3px solid #008b8b;
-  border-left: 1px solid #007878;
-  line-height:30px;
-}
-
-.sidebutton_cpanel:hover {
-  background: #00a9a9;
-  color: #182727;
-  border-bottom: 3px solid #006f6f;
-}
-
 #other{border-right: 1px solid #007878;}
-
-#game_editor_side, #game_comments_side, #game_series_side,
-#game_music_side, #game_submissions_side, #game_reviews_side,
-#submitted_reviews_side, #menu_editor_side, #menu_comments_side, #menu_submissions_side, #demo_editor_side,
-#demo_comments_side, #demo_music_side, #demo_submissions_side, #user_admin_side, #individuals_side,
-#author_types_side, #crew_editor_side, #companies_side, #company_logo_side, #add_news_side, #approve_news_side,
-#submitted_news_side, #Statistics_side, #did_you_know_side, #trivia_screenshots_side, #trivia_quotes_side,
-#add_links_side, #validate_links_side, #modify_links_side, #link_categories_side, #articles_side, #article_types_side,
-#screenshots_side, #modify_links_side, #link_categories_side, #articles_side, #article_types_side,
-#article_screenshots_side, #add_magazines_side, #manage_issues_side, #interviews_side, #interviews_help_side,
-#forum_side, #logout_side, #menu_individuals_side, #menu_author_types_side, #demo_individuals_side, #demo_author_types_side,
-#menu_crew_editor_side, #demo_interviews_side, #demo_interviews_help_side, #legacy, #tos, #picasso {
-		height: 27px;
-		font-size: 16px;
-		border-bottom: 3px solid #008b8b;
-		padding:0px;
-}
 
 .centered_fieldset {
 	text-align:center;
