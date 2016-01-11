@@ -372,6 +372,8 @@ th {
 
                                										/* --> Normalize script
 
+
+
 /********************PART I : MAIN SITE***********************/
 /* load the main site font */
 @font-face {
@@ -855,13 +857,9 @@ body, html {
   border-left: 1px solid black;
   background: #eeeeee; }
 
-.sidebutton:hover {
+.sidebutton:hover, .sidebutton_cpanel:hover {
   background: black;
   color: white; }
-
-.sidebutton_cpanel:hover {
-  background: black;
-  color: black; }
 
 /* for the lower resolutions, we don't have the menu bar below the top */
 @media screen and (max-width: 1279px) {
@@ -913,6 +911,30 @@ body, html {
   font-size: 0;
   text-align: center;
   width: 100%; }
+
+/* this is some extra code for the cpanel sub menu at the main bar */
+#main_nav_ul li {
+  position: relative; }
+
+#main_nav_ul > li {
+  float: left; }
+
+#main_nav_ul li a:first-child:nth-last-child(2):before {
+  content: "";
+  position: absolute; }
+
+/* submenu positioning*/
+#main_nav_ul ul {
+  position: absolute;
+  z-index: 1;
+  left: -99999em;
+  top: 61px; }
+
+#main_nav_ul > li:hover > ul {
+  left: auto; }
+
+#main_nav_ul > li li:hover > ul {
+  left: 100%; }
 
 header nav img:hover {
   opacity: 1; }
