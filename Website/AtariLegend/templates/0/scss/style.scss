@@ -3,22 +3,12 @@
 /*************************************************************/
 
 /* ---------SASS variables declaration--------*/
-$support-for: (
-  chrome:  16,
-  edge:    10,
-  firefox: 10,
-  ie:      9,
-  opera:   12,
-  safari:  5,
-);
 
 $skin-name: "tos";
 $bg-color: white;
 
 /* ---------------SASS includes---------------*/
-@import "normalize/import-now";										/* --> Normalize script
-
-
+@import "../../../templates/html/includes/main_scss/normalize/import-now";										/* --> Normalize script
 
 /********************PART I : MAIN SITE***********************/
 
@@ -144,13 +134,7 @@ img { display: block;}
 			border-bottom-color: black;
 			border-style: solid;
 			box-shadow: 3px 3px 5px #888888;
-			background: -webkit-gradient(linear, black, #23f001); /* Chrome,Safari4+ */
-			filter:progid:DXImageTransform.Microsoft.gradient(GradientType=1, startColorstr=#000000, endColorstr=#23f001);  /* For IE 5.5 - 7*/
 			-ms-filter: "progid:DXImageTransform.Microsoft.gradient(GradientType=1, startColorstr=#000000, endColorstr=#23f001)";  /* For IE 8*/ 
-			background: -ms-linear-gradient(black, #23f001); /* IE10+ */
-		    background: -webkit-linear-gradient(black, #23f001); /* For Safari 5.1 to 6.0 */
-			background: -o-linear-gradient(black, #23f001); /* For Opera 11.1 to 12.0 */
-			background: -moz-linear-gradient(black, #23f001); /* For Firefox 3.6 to 15 */
 			background: linear-gradient(#175f5f, #23f001); /* Standard syntax (must be last) */
 		}
 }		
@@ -264,13 +248,7 @@ Standard tile settings
 
 .standard_tile  { width: 100%; 
 		border: 2px solid black;
-		background: -webkit-gradient(linear, white, #23f001); /* Chrome,Safari4+ */
-		background: -webkit-linear-gradient(left, white , #23f001); /* For Safari 5.1 to 6.0 */
-	    background: -o-linear-gradient(right, white, #23f001); /* For Opera 11.1 to 12.0 */
-	    background: -ms-linear-gradient(right, white, #23f001); /* For IE10+ */
-	    background: -moz-linear-gradient(right, white, #23f001); /* For Firefox 3.6 to 15 */
 	    background: linear-gradient(to right, white, #23f001); /* Standard syntax */
-	    filter:progid:DXImageTransform.Microsoft.gradient(GradientType=1, startColorstr=#ffffff, endColorstr=#23f001);  /* For IE 5.5 - 7*/
 		-ms-filter: "progid:DXImageTransform.Microsoft.gradient(GradientType=1, startColorstr=#ffffff, endColorstr=#23f001)";  /* For IE 8*/ 
 		box-shadow: 3px 3px 5px #888888;
 	}
@@ -549,13 +527,7 @@ a.standard_tile_link:hover, a.standard_tile_link:focus
 		width: 100%;
 		height: 140px;
 		display: table;
-		background: -webkit-gradient(linear, white, #23f001); /* Chrome,Safari4+ */
-		filter:progid:DXImageTransform.Microsoft.gradient(GradientType=1, startColorstr=#ffffff, endColorstr=#23f001);  /* For IE 5.5 - 7*/
 		-ms-filter: "progid:DXImageTransform.Microsoft.gradient(GradientType=1, startColorstr=#ffffff, endColorstr=#23f001)";  /* For IE 8*/ 
-		background: -ms-linear-gradient(black, #23f001); /* IE10+ */
-		background: -webkit-linear-gradient(left, white, #23f001); /* For Safari 5.1 to 6.0 */
-		background: -o-linear-gradient(right, white, #23f001); /* For Opera 11.1 to 12.0 */
-		background: -moz-linear-gradient(right, white, #23f001); /* For Firefox 3.6 to 15 */
 		background: linear-gradient(to right, white, #23f001); /* Standard syntax */
  }
  
@@ -563,13 +535,7 @@ a.standard_tile_link:hover, a.standard_tile_link:focus
 		width: 100%;
 		height: 140px;
 		display: table;
-		background: -webkit-gradient(linear, white, #acacac); /* Chrome,Safari4+ */
-		filter:progid:DXImageTransform.Microsoft.gradient(GradientType=1, startColorstr=#ffffff, endColorstr=#acacac);  /* For IE 5.5 - 7*/
 		-ms-filter: "progid:DXImageTransform.Microsoft.gradient(GradientType=1, startColorstr=#ffffff, endColorstr=#acacac)";  /* For IE 8*/ 
-		background: -ms-linear-gradient(black, #acacac); /* IE10+ */
-		background: -webkit-linear-gradient(left, white, #acacac); /* For Safari 5.1 to 6.0 */
-		background: -o-linear-gradient(right, white, #acacac); /* For Opera 11.1 to 12.0 */
-		background: -moz-linear-gradient(right, white, #acacac); /* For Firefox 3.6 to 15 */
 		background: linear-gradient(to right, white, #acacac); /* Standard syntax */
  }
 
@@ -578,10 +544,6 @@ a.standard_tile_link:hover, a.standard_tile_link:focus
 		width: 50%;
 		position: absolute;
 		top: 50%;
-		-webkit-transform: translateY(-50%);
-		-moz-transform: translateY(-50%);
-		-o-transform: translateY(-50%);
-		-ms-transform: translateY(-50%);
 		transform: translateY(-50%);
 }
 
@@ -598,19 +560,12 @@ a.standard_tile_link:hover, a.standard_tile_link:focus
 		width: 50%;
 		position: absolute;
 		top: 50%;
-		-webkit-transform: translateY(-50%);
-		-ms-transform: translateY(-50%);
-		-moz-transform: translateY(-50%);
-		-o-transform: translateY(-50%);
 		transform: translateY(-50%);
 }
  
 .standard_list_entry_right_news_text {
 		margin: 0;
   		padding: 0;
-  		-moz-box-sizing: border-box;
-  		-webkit-box-sizing: border-box;
-  		-ms-box-sizing: border-box;
   		box-sizing: border-box;
 
 		display: block;
@@ -621,8 +576,6 @@ a.standard_tile_link:hover, a.standard_tile_link:focus
     		line-height: 1.2;
   		-webkit-line-clamp: 5;
   		-webkit-box-orient: vertical;
-  		-moz-box-orient: vertical;
-  		-ms-box-orient: vertical;
   		box-orient: vertical;
   		overflow: hidden;
   		text-overflow: ellipsis;		
@@ -1227,13 +1180,7 @@ Standard table settings
 /* for lower resolutions put the left and right below eachother */
 @media screen and (max-width: 799px) { 	
 .main_container_cpanel {
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -moz-flex;
-  display: -webkit-flex;
   display: flex;
-  -webkit-flex-direction: column-reverse; 
   flex-direction: column-reverse; 
   float: left;
   width:100%;
@@ -1303,13 +1250,7 @@ Front page
 }
 
 .main_stats_container {
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -moz-flex;
-  display: -webkit-flex;
   display: flex;
-    -webkit-align-items: flex-start;
   align-items: flex-start; 
  }
   
@@ -1318,7 +1259,6 @@ Front page
 
 @media screen and (max-width: 1199px) { 
 	.main_stats_container {
-	  -webkit-flex-direction: column; 
 	  flex-direction: column; 
 	}	
 		
@@ -1453,11 +1393,6 @@ User details
 }
 
 .user_details_container{
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -moz-flex;
-  display: -webkit-flex;
   display: flex; 
  }
  
@@ -1468,7 +1403,6 @@ User details
 
 @media screen and (max-width: 1050px) { 
 	.user_details_container{
-		-webkit-flex-direction: column; 
 		flex-direction: column;
 	}
 }
@@ -1504,11 +1438,6 @@ User main
 #main_stats_position_usermain{ margin-top: 0; margin-bottom: 30px; float: left;}
 
 .user_main_container{
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -moz-flex;
-  display: -webkit-flex;
   display: flex; 
   justify-content: center;
   align-items: center;
@@ -1522,7 +1451,6 @@ User main
 
 @media screen and (max-width: 500px) { 
 	.user_main_container{
-			-webkit-flex-direction: column; 
 			flex-direction: column;
 	}
 	#user_main_child_3{margin-top:5px;}
@@ -1668,11 +1596,6 @@ Links Modify list
 .links_list_input{margin-left:1%;}
 
 .links_list_row{
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -moz-flex;
-  display: -webkit-flex;
   display: flex; 
   justify-content: center;
   align-items: center;
@@ -1680,7 +1603,6 @@ Links Modify list
  
 @media screen and (max-width: 500px) { 
 	.links_list_row{
-			-webkit-flex-direction: column; 
 			flex-direction: column;
 	}
 }
@@ -1758,11 +1680,6 @@ Games main
 }
 
 .games_check_container{
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -moz-flex;
-  display: -webkit-flex;
   display: flex; 
   width: 50%;
   margin:auto;
@@ -1775,7 +1692,6 @@ Games main
 
 @media screen and (max-width: 1050px) { 
 	.games_check_container{
-		-webkit-flex-direction: column; 
 		flex-direction: column;
 		width: 100%;
 	}
