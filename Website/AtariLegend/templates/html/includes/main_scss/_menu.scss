@@ -75,10 +75,6 @@
 		position: relative;
         width: 100%;
         left: 0;
-        -webkit-transition:  left 0.4s ease-in-out;
-        -moz-transition:  left 0.4s ease-in-out;
-        -ms-transition:  left 0.4s ease-in-out;
-        -o-transition:  left 0.4s ease-in-out;
         transition:  left 0.4s ease-in-out;
     }
 	
@@ -120,9 +116,6 @@
 		position: absolute;
 		background: black;
 		height: 100%;
-		-moz-box-sizing: border-box;
-		-webkit-box-sizing: border-box;
-		-ms-box-sizing: border-box;
 		box-sizing: border-box;
 	}
  
@@ -139,10 +132,6 @@
     #sidebar ul li a {
         padding: 0;
         display: block;
-        -webkit-transition:  background 0.3s ease-in-out;
-        -moz-transition:  background 0.3s ease-in-out;
-        -ms-transition:  background 0.3s ease-in-out;
-        -o-transition:  background 0.3s ease-in-out;
         transition:  background 0.3s ease-in-out;
     }
 		
@@ -151,9 +140,6 @@
 		height: 100%;
 		padding: 1px;
 		position: absolute;
-		-moz-box-sizing: border-box;
-		-webkit-box-sizing: border-box;
-		-ms-box-sizing: border-box;
 		box-sizing: border-box;
 		
 		#sidebar-toggle {
@@ -225,8 +211,6 @@
 		#search_side { 
 			width: 45px; 
 			height: 28px;
-			-webkit-border-radius: 0 15px 15px 0;
-			-moz-border-radius: 0 15px 15px 0;
 			border-radius: 0 15px 15px 0;
 			border:1px solid black;
 		}
@@ -382,8 +366,6 @@
 	border: $menu-top-button-border;
 	cursor: pointer;
 	color: $menu-top-button-color;
-	-webkit-border-radius: $menu-top-button-radius;
-	-moz-border-radius: $menu-top-button-radius;
 	border-radius: $menu-top-button-radius;
 	text-align: center;
 	text-shadow: $menu-top-button-shadow;
@@ -542,8 +524,6 @@ header nav input{
 	border-left: $menu-top-button-border-left;
 	padding-top: 0;
 	text-shadow: $menu-top-button-shadow;
-	-webkit-border-radius: $menu-top-button-radius; 
-	-moz-border-radius : $menu-top-button-radius; 
 	border-radius : $menu-top-button-radius; 
 }
 
@@ -567,8 +547,6 @@ header nav input{
 	border-bottom: $menu-top-button-border-bottom;
 	border-left: $menu-top-button-border-left;
 	padding-top: 0;
-	-webkit-border-radius: $menu-top-button-radius;
-	-moz-border-radius: $menu-top-button-radius;
 	border-radius: $menu-top-button-radius;
 	margin-left: $menu-top-button-margin-left;
 	text-shadow: $searchbutton-shadow;
@@ -586,8 +564,6 @@ header nav input{
 	font-weight: $menu-top-button-font-weight;
 	border-bottom: $menu-top-button-border-bottom;
 	border-left: $menu-top-button-border-left;
-	-webkit-border-radius: $menu-top-button-radius;
-	-moz-border-radius: $menu-top-button-radius;
 	border-radius: $menu-top-button-radius;
 	padding-top: 3px;
 }
@@ -602,8 +578,6 @@ header nav input{
 	.signinbutton{margin-bottom: 30px; height: 30px;width: 170px; font-size: 18px;}
 	.signinbutton:hover {background: #dbd7d1; color: black; border:2px solid #4f4f4f;}
 	#home{display: block;
-		-webkit-border-radius: 0 15px 15px 0;
-		-moz-border-radius: 0 15px 15px 0;
 		border-radius: 0 15px 15px 0;
 		height: 26px;
 		border:2px solid black;
@@ -615,8 +589,6 @@ header nav input{
 	}
 	#search { 
 		display: block;
-		-webkit-border-radius: 0 15px 15px 0;
-		-moz-border-radius: 0 15px 15px 0;
 		border-radius: 0 15px 15px 0;
 		height: 26px;
 		border:2px solid black;
