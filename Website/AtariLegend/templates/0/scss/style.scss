@@ -692,6 +692,30 @@ logon tile --> front page
 			margin-top:20px;
 			margin-left: 10%;
  }
+ 
+.logon_username_icon:before {
+	display:block;
+	content: url("../../../templates/0/images/logon_usn.png");
+}
+
+.logon_password_icon:before {
+	display:block;
+	content: url("../../../templates/0/images/logon_pwd.png");
+}
+
+.logon_facebook_button:before {
+	display:block;
+	content: url("../../../templates/0/images/login-facebook.png");
+	width: auto; /*or your image's width*/
+	height: 50%; /*or your image's height*/
+}
+
+.logon_twitter_button:before {
+	display:block;
+	content: url("../../../templates/0/images/login_twitter.png");
+	width: auto; /*or your image's width*/
+	height: 50%; /*or your image's height*/
+}
 
 .logon_left{position: absolute;
 		left: 0;
@@ -720,12 +744,12 @@ logon tile --> front page
 .logon_socmed{ margin-top:10px; 
 }
 
-.logon_socmed img{ display:block;
+.logon_socmed { display:block;
     margin:auto;
-	width: 40%;	
+	width: 50%;	
 }
 
-.logon_socmed img:hover{ opacity:0.7;}
+.logon_socmed:hover{ opacity:0.7;}
 
 /* 2 tiles and background welcome image */
 @media screen and (min-width: 640px) and (max-width: 800px) { 
@@ -871,11 +895,62 @@ contact tiles - front page
 			box-shadow: none;
 }
 
-.contact_tiles  img{ margin-bottom: 20px;
+.contact_tiles >a >div{ margin-bottom: 20px;
 			max-width: 100%;
 			box-shadow: 3px 3px 5px #888888;
 			border: 2px solid black;
-			
+}
+
+.contact_email_button {
+	display:block;
+	background-image: url("../../../templates/0/images/email.png");
+	background-repeat: no-repeat;
+	background-size: contain;
+}
+
+.contact_email_button >a {
+	display:block;
+	height: 120px;
+	width:320px;
+}
+
+.contact_facebook_button {
+	display:block;
+	background-image: url("../../../templates/0/images/facebook.png");
+	background-repeat: no-repeat;
+	background-size: contain;
+}
+
+.contact_facebook_button >a {
+	display:block;
+	height: 120px;
+	width:240px;
+}
+
+.contact_jukebox_button {
+	display:block;
+	background-image: url("../../../templates/0/images/jukebox.png");
+	background-repeat: no-repeat;
+	background-size: contain;
+}
+
+.contact_jukebox_button >a {
+	display:block;
+	height: 120px;
+	width:240px;
+}
+
+.contact_chat_button {
+	display:block;
+	background-image: url("../../../templates/0/images/chat.png");
+	background-repeat: no-repeat;
+	background-size: contain;
+}
+
+.contact_chat_button >a {
+	display:block;
+	height: 120px;
+	width:240px;
 }
 
 @media screen and (min-width: 1495px){ 
