@@ -34,13 +34,15 @@
 	$sidebutton-cpanel-font: 0;
 	$sidebutton-cpanel-left-border: 0;
 	$sidebutton-cpanel-bg :0;
+	$menu-sub-button-font :0;
+	$menu-sub-button-height :0;
 		
 	@if $skin-name == tos 
 		{$menu-top: 0; $menu-opacity: 1; $menu-input-margin: 3px 0 0 16px; $menu-input-height: 20px; $menu-input-border: 1px solid #007b7b; 
 		 $menu-input-font: 12pt; $menu-top-button-color: black; $menu-top-button-height: 30px; $menu-top-button-width: 194.6px; $menu-top-button-font: 20px;
 		 $menu-top-button-shadow: -1px 1px 5px white, 1px -1px 15px #acacac; $menu-top-button-hover-bg: black; $menu-top-button-hover-color: white;
 		 $sidebutton-bg: white; $sidebutton-font: 16px; $sidebutton-height: 27px; $sidebutton-hoover-font:white; $searchbutton-height: 27px; $searchbutton-font: 15px;
-		 $sidebutton-cpanel-bg : #eeeeee; $sidebutton-cpanel-left-border: 1px solid black; $sidebutton-cpanel-font: 16px;} 
+		 $sidebutton-cpanel-bg : #eeeeee; $sidebutton-cpanel-left-border: 1px solid black; $sidebutton-cpanel-font: 16px; $menu-sub-button-font: 20px; $menu-sub-button-height :30px} 
 	@else if $skin-name == picasso 
 		{$menu-top: 220px; $menu-opacity: 1; $menu-input-margin: 2px 0px 0px 16px; $menu-input-height: 20px; $menu-input-border: 1px solid #4f4f4f; 
 		 $menu-input-font: 12pt; $menu-top-button-border: 2px solid black; $menu-top-button-color: white; $menu-top-button-height: 26px; $menu-top-button-width: 181.5px; 
@@ -48,13 +50,14 @@
 		 $menu-top-button-border-bottom: 2px solid black; $menu-top-button-hover-bg: #dbd7d1; $menu-top-button-hover-color: black; $menu-top-button-hover-border: 2px solid #4f4f4f; 
 		 $sidebutton-bg: #161c71; $sidebutton-font: 19px; $sidebutton-height: 30px; $sidebutton-hoover-font: white; $searchbutton-height: 26px; $searchbutton-font:20px;
 		 $searchbutton-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #fff; $menu-top-button-hover-border-bottom: 2px solid #4f4f4f; $sidebutton-cpanel-bg: #383b6f;
-		 $sidebutton-cpanel-font: 16px; $sidebutton-cpanel-left-border: 2px solid black;}
+		 $sidebutton-cpanel-font: 16px; $sidebutton-cpanel-left-border: 2px solid black; $menu-sub-button-font: 16px; $menu-sub-button-height :30px}
 	@else if $skin-name == legacy 
 		{$menu-top: 225px; $menu-opacity: 0.8; $menu-input-margin: 11px 0px 0px 16px; $menu-input-height: 35px; $menu-input-border: 1px solid #007b7b; 
 		 $menu-input-font: 15pt; $menu-top-button-color: #182727; $menu-top-button-height: 57px; $menu-top-button-width: 183px; $menu-top-button-font: 20px;
 		 $menu-top-button-border-bottom: 3px solid #008b8b; $menu-top-button-border-left: 1px solid #008b8b; $menu-top-button-hover-bg: #00a9a9; $menu-top-button-hover-color: #182727;
 		 $menu-top-button-hover-border-bottom: 3px solid #006f6f; $sidebutton-bg: #00d3d3; $sidebutton-font: 16px; $sidebutton-height: 30px; $sidebutton-hoover-font: #182727;
-		 $searchbutton-height: 57px; $searchbutton-font: 20px; $sidebutton-cpanel-font: 13px; $sidebutton-cpanel-left-border: 1px solid #008b8b; $sidebutton-cpanel-bg: #55b4b4;}
+		 $searchbutton-height: 57px; $searchbutton-font: 20px; $sidebutton-cpanel-font: 13px; $sidebutton-cpanel-left-border: 1px solid #008b8b; $sidebutton-cpanel-bg: #55b4b4;
+		 $menu-sub-button-font: 15px; $menu-sub-button-height :26px}
 
 
 
@@ -460,16 +463,12 @@
 	#main { position: relative; margin-top: 60px;}
 }
 
-#main_nav { width: 100%; left: 0; }
-#main_nav_ul { font-size: 0; text-align : center; width: 100%;}
+#main_nav { width: 100%;}
 
 /* this is some extra code for the cpanel sub menu at the main bar */
 #main_nav_ul li {
   position: relative;
 }
-#main_nav_ul > li { 
-  float: left; 
-} 
 
 #main_nav_ul li a:first-child:nth-last-child(2):before { 
   content: ""; 
@@ -490,7 +489,6 @@
   left: 100%;
 }
 
-
 header nav img:hover{ opacity:$menu-opacity;}
 header nav li {	display: inline-block;}
 
@@ -507,18 +505,15 @@ header nav input{
 	font-size: $menu-input-font;
 }
 
-.topbutton
+.top_button_extra
 {
 	display: block;
-	float:left;
 	cursor: pointer;
 	border: $menu-top-button-border;
 	background-color: $bg-color;
 	color: $menu-top-button-color;
-	line-height: $menu-top-button-height;
 	width: $menu-top-button-width;
 	text-align: center; 
-	font-size: $menu-top-button-font;
 	font-weight: $menu-top-button-font-weight;
 	border-bottom: $menu-top-button-border-bottom;
 	border-left: $menu-top-button-border-left;
@@ -527,7 +522,22 @@ header nav input{
 	border-radius : $menu-top-button-radius; 
 }
 
-.topbutton:hover {
+.topbutton
+{
+	@extend .top_button_extra;
+	font-size: $menu-top-button-font;
+	line-height: $menu-top-button-height;
+}
+
+.subbutton
+{
+	font-size: $menu-sub-button-font;
+	line-height: $menu-sub-button-height;
+	background: $sidebutton-cpanel-bg;
+	@extend .top_button_extra;
+}
+
+.topbutton:hover, .subbutton:hover {
 	background: $menu-top-button-hover-bg;
 	color: $menu-top-button-hover-color;
 	@if $skin-name == tos or $skin-name == picasso { border: $menu-top-button-hover-border; }
