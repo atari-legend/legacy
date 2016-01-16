@@ -180,7 +180,6 @@ figure {
  * Address differences between Firefox and other browsers.
  */
 hr {
-  -moz-box-sizing: content-box;
   box-sizing: content-box;
   height: 0; }
 
@@ -314,7 +313,6 @@ input[type="number"]::-webkit-outer-spin-button {
 input[type="search"] {
   -webkit-appearance: textfield;
   /* 1 */
-  -webkit-box-sizing: content-box;
   box-sizing: content-box;
   /* 2 */
   /**
@@ -370,9 +368,7 @@ td,
 th {
   padding: 0; }
 
-                               										/* --> Normalize script
-
-
+                                                                          										/* --> Normalize script
 
 /********************PART I : MAIN SITE***********************/
 /* load the main site font */
@@ -476,17 +472,9 @@ img {
 /* -------------SASS animation code-------------*/
 #animation {
   position: relative;
-  -webkit-animation-name: STcharacters;
-  -moz-animation-name: STcharacters;
   animation-name: STcharacters;
-  -webkit-animation-duration: 20s;
-  -moz-animation-duration: 20s;
   animation-duration: 20s;
-  -webkit-animation-iteration-count: infinite;
-  -moz-animation-iteration-count: infinite;
   animation-iteration-count: infinite;
-  -webkit-animation-timing-function: linear;
-  -moz-animation-timing-function: linear;
   animation-timing-function: linear; }
 
 @-webkit-keyframes STcharacters {
@@ -517,17 +505,9 @@ img {
     opacity: 0; } }
 #animation_vert {
   position: relative;
-  -webkit-animation-name: STcharacters_vert;
-  -moz-animation-name: STcharacters_vert;
   animation-name: STcharacters_vert;
-  -webkit-animation-duration: 10s;
-  -moz-animation-duration: 10s;
   animation-duration: 10s;
-  -webkit-animation-iteration-count: infinite;
-  -moz-animation-iteration-count: infinite;
   animation-iteration-count: infinite;
-  -webkit-animation-timing-function: linear;
-  -moz-animation-timing-function: linear;
   animation-timing-function: linear; }
 
 @-webkit-keyframes STcharacters_vert {
@@ -596,20 +576,8 @@ img {
     border-bottom-color: black;
     border-style: solid;
     box-shadow: 3px 3px 5px #888888;
-    background: -webkit-gradient(linear, black, #23f001);
-    /* Chrome,Safari4+ */
-    filter: progid:DXImageTransform.Microsoft.gradient(GradientType=1, startColorstr=#000000, endColorstr=#23f001);
-    /* For IE 5.5 - 7*/
     -ms-filter: "progid:DXImageTransform.Microsoft.gradient(GradientType=1, startColorstr=#000000, endColorstr=#23f001)";
     /* For IE 8*/
-    background: -ms-linear-gradient(black, #23f001);
-    /* IE10+ */
-    background: -webkit-linear-gradient(black, #23f001);
-    /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(black, #23f001);
-    /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(black, #23f001);
-    /* For Firefox 3.6 to 15 */
     background: linear-gradient(#175f5f, #23f001);
     /* Standard syntax (must be last) */ } }
 /* at a resolution of max 960 (Tablets & low res laptop) we want the original logo without the bee */
@@ -664,10 +632,6 @@ body, html {
   position: relative;
   width: 100%;
   left: 0;
-  -webkit-transition: left 0.4s ease-in-out;
-  -moz-transition: left 0.4s ease-in-out;
-  -ms-transition: left 0.4s ease-in-out;
-  -o-transition: left 0.4s ease-in-out;
   transition: left 0.4s ease-in-out; }
 
 /* for the TOS skin, we want to side button to be lower not to interfere with the main menu */
@@ -689,9 +653,6 @@ body, html {
   position: absolute;
   background: black;
   height: 100%;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  -ms-box-sizing: border-box;
   box-sizing: border-box; }
 
 #sidebar ul {
@@ -707,10 +668,6 @@ body, html {
 #sidebar ul li a {
   padding: 0;
   display: block;
-  -webkit-transition: background 0.3s ease-in-out;
-  -moz-transition: background 0.3s ease-in-out;
-  -ms-transition: background 0.3s ease-in-out;
-  -o-transition: background 0.3s ease-in-out;
   transition: background 0.3s ease-in-out; }
 
 .main-content {
@@ -718,9 +675,6 @@ body, html {
   height: 100%;
   padding: 1px;
   position: absolute;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  -ms-box-sizing: border-box;
   box-sizing: border-box; }
   .main-content #sidebar-toggle {
     display: block;
@@ -835,8 +789,6 @@ body, html {
   border: 0;
   cursor: pointer;
   color: black;
-  -webkit-border-radius: "";
-  -moz-border-radius: "";
   border-radius: "";
   text-align: center;
   text-shadow: -1px 1px 5px white, 1px -1px 15px #acacac;
@@ -904,20 +856,11 @@ body, html {
     position: relative;
     margin-top: 60px; } }
 #main_nav {
-  width: 100%;
-  left: 0; }
-
-#main_nav_ul {
-  font-size: 0;
-  text-align: center;
   width: 100%; }
 
 /* this is some extra code for the cpanel sub menu at the main bar */
 #main_nav_ul li {
   position: relative; }
-
-#main_nav_ul > li {
-  float: left; }
 
 #main_nav_ul li a:first-child:nth-last-child(2):before {
   content: "";
@@ -954,27 +897,31 @@ header nav input {
   text-align: center;
   font-size: 12pt; }
 
-.topbutton {
+.top_button_extra, .topbutton, .subbutton {
   display: block;
-  float: left;
   cursor: pointer;
   border: 0;
   background-color: white;
   color: black;
-  line-height: 30px;
   width: 194.6px;
   text-align: center;
-  font-size: 20px;
   font-weight: normal;
   border-bottom: 0;
   border-left: 0;
   padding-top: 0;
   text-shadow: -1px 1px 5px white, 1px -1px 15px #acacac;
-  -webkit-border-radius: "";
-  -moz-border-radius: "";
   border-radius: ""; }
 
-.topbutton:hover {
+.topbutton {
+  font-size: 20px;
+  line-height: 30px; }
+
+.subbutton {
+  font-size: 20px;
+  line-height: 30px;
+  background: #eeeeee; }
+
+.topbutton:hover, .subbutton:hover {
   background: black;
   color: white;
   border: 0;
@@ -992,8 +939,6 @@ header nav input {
   border-bottom: 0;
   border-left: 0;
   padding-top: 0;
-  -webkit-border-radius: "";
-  -moz-border-radius: "";
   border-radius: "";
   margin-left: 0;
   text-shadow: 0; }
@@ -1009,8 +954,6 @@ header nav input {
   font-weight: normal;
   border-bottom: 0;
   border-left: 0;
-  -webkit-border-radius: "";
-  -moz-border-radius: "";
   border-radius: "";
   padding-top: 3px; }
 
@@ -1189,20 +1132,8 @@ Standard tile settings
 .standard_tile {
   width: 100%;
   border: 2px solid black;
-  background: -webkit-gradient(linear, white, #23f001);
-  /* Chrome,Safari4+ */
-  background: -webkit-linear-gradient(left, white, #23f001);
-  /* For Safari 5.1 to 6.0 */
-  background: -o-linear-gradient(right, white, #23f001);
-  /* For Opera 11.1 to 12.0 */
-  background: -ms-linear-gradient(right, white, #23f001);
-  /* For IE10+ */
-  background: -moz-linear-gradient(right, white, #23f001);
-  /* For Firefox 3.6 to 15 */
   background: linear-gradient(to right, white, #23f001);
   /* Standard syntax */
-  filter: progid:DXImageTransform.Microsoft.gradient(GradientType=1, startColorstr=#ffffff, endColorstr=#23f001);
-  /* For IE 5.5 - 7*/
   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(GradientType=1, startColorstr=#ffffff, endColorstr=#23f001)";
   /* For IE 8*/
   box-shadow: 3px 3px 5px #888888; }
@@ -1440,20 +1371,8 @@ a.standard_tile_link:hover, a.standard_tile_link:focus {
   width: 100%;
   height: 140px;
   display: table;
-  background: -webkit-gradient(linear, white, #23f001);
-  /* Chrome,Safari4+ */
-  filter: progid:DXImageTransform.Microsoft.gradient(GradientType=1, startColorstr=#ffffff, endColorstr=#23f001);
-  /* For IE 5.5 - 7*/
   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(GradientType=1, startColorstr=#ffffff, endColorstr=#23f001)";
   /* For IE 8*/
-  background: -ms-linear-gradient(black, #23f001);
-  /* IE10+ */
-  background: -webkit-linear-gradient(left, white, #23f001);
-  /* For Safari 5.1 to 6.0 */
-  background: -o-linear-gradient(right, white, #23f001);
-  /* For Opera 11.1 to 12.0 */
-  background: -moz-linear-gradient(right, white, #23f001);
-  /* For Firefox 3.6 to 15 */
   background: linear-gradient(to right, white, #23f001);
   /* Standard syntax */ }
 
@@ -1462,20 +1381,8 @@ a.standard_tile_link:hover, a.standard_tile_link:focus {
   width: 100%;
   height: 140px;
   display: table;
-  background: -webkit-gradient(linear, white, #acacac);
-  /* Chrome,Safari4+ */
-  filter: progid:DXImageTransform.Microsoft.gradient(GradientType=1, startColorstr=#ffffff, endColorstr=#acacac);
-  /* For IE 5.5 - 7*/
   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(GradientType=1, startColorstr=#ffffff, endColorstr=#acacac)";
   /* For IE 8*/
-  background: -ms-linear-gradient(black, #acacac);
-  /* IE10+ */
-  background: -webkit-linear-gradient(left, white, #acacac);
-  /* For Safari 5.1 to 6.0 */
-  background: -o-linear-gradient(right, white, #acacac);
-  /* For Opera 11.1 to 12.0 */
-  background: -moz-linear-gradient(right, white, #acacac);
-  /* For Firefox 3.6 to 15 */
   background: linear-gradient(to right, white, #acacac);
   /* Standard syntax */ }
 
@@ -1484,10 +1391,6 @@ a.standard_tile_link:hover, a.standard_tile_link:focus {
   width: 50%;
   position: absolute;
   top: 50%;
-  -webkit-transform: translateY(-50%);
-  -moz-transform: translateY(-50%);
-  -o-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
   transform: translateY(-50%); }
 
 .standard_list_entry_left img {
@@ -1504,18 +1407,11 @@ a.standard_tile_link:hover, a.standard_tile_link:focus {
   width: 50%;
   position: absolute;
   top: 50%;
-  -webkit-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  -moz-transform: translateY(-50%);
-  -o-transform: translateY(-50%);
   transform: translateY(-50%); }
 
 .standard_list_entry_right_news_text {
   margin: 0;
   padding: 0;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  -ms-box-sizing: border-box;
   box-sizing: border-box;
   display: block;
   /* Fallback for non-webkit */
@@ -1525,8 +1421,6 @@ a.standard_tile_link:hover, a.standard_tile_link:focus {
   line-height: 1.2;
   -webkit-line-clamp: 5;
   -webkit-box-orient: vertical;
-  -moz-box-orient: vertical;
-  -ms-box-orient: vertical;
   box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis; }
@@ -1915,47 +1809,6 @@ nav ul {
 .nav > li li:hover > ul {
   left: 100%; }
 
-.topbutton_cpanel {
-  display: block;
-  float: left;
-  cursor: pointer;
-  border: 0;
-  background: white;
-  font-family: AtariST,Arial,helvetica,sans-serif;
-  color: #182727;
-  height: 30px;
-  width: 213px;
-  font-size: 20px;
-  padding-top: 3px;
-  text-shadow: -1px 1px 5px white, 1px -1px 15px #acacac;
-  text-align: center; }
-
-.topbutton_cpanel:hover {
-  background: black;
-  color: white; }
-
-.top_button_cpanel:visited {
-  color: #182727; }
-
-.subbutton_cpanel {
-  display: block;
-  float: left;
-  cursor: pointer;
-  border: 0;
-  background: white;
-  font-family: AtariST,Arial,helvetica,sans-serif;
-  color: #182727;
-  height: 24px;
-  width: 213px;
-  border-bottom: 3px solid black;
-  padding-top: 3px;
-  text-shadow: -1px 1px 5px white, 1px -1px 15px #acacac;
-  text-align: center; }
-
-.subbutton_cpanel:hover {
-  background: black;
-  color: white; }
-
 #game_editor, #game_comments, #game_series, #game_music, #game_submissions, #game_reviews, #submitted_reviews,
 #menu_editor, #menu_comments, #menu_submissions, #demo_editor, #demo_comments, #demo_music, #demo_submissions,
 #user_admin, #individuals, #author_types, #crew_editor, #companies, #company_logo, #add_news, #approve_news,
@@ -2104,13 +1957,7 @@ Standard table settings
 /* for lower resolutions put the left and right below eachother */
 @media screen and (max-width: 799px) {
   .main_container_cpanel {
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -moz-flex;
-    display: -webkit-flex;
     display: flex;
-    -webkit-flex-direction: column-reverse;
     flex-direction: column-reverse;
     float: left;
     width: 100%; }
@@ -2214,13 +2061,7 @@ Front page
     width: 100%;
     margin-top: 15px; } }
 .main_stats_container {
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -moz-flex;
-  display: -webkit-flex;
   display: flex;
-  -webkit-align-items: flex-start;
   align-items: flex-start; }
 
 #child_some_stats {
@@ -2233,7 +2074,6 @@ Front page
 
 @media screen and (max-width: 1199px) {
   .main_stats_container {
-    -webkit-flex-direction: column;
     flex-direction: column; }
 
   #child_some_stats, #child_good_karma, #child_bad_karma {
@@ -2386,11 +2226,6 @@ User details
   #leftnav_position_userdetails {
     margin-top: 0; } }
 .user_details_container {
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -moz-flex;
-  display: -webkit-flex;
   display: flex; }
 
 #child_1, #child_2 {
@@ -2411,7 +2246,6 @@ User details
 
 @media screen and (max-width: 1050px) {
   .user_details_container {
-    -webkit-flex-direction: column;
     flex-direction: column; } }
 @media screen and (max-width: 1280px) {
   #user_details {
@@ -2470,11 +2304,6 @@ User main
   float: left; }
 
 .user_main_container {
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -moz-flex;
-  display: -webkit-flex;
   display: flex;
   justify-content: center;
   align-items: center; }
@@ -2490,7 +2319,6 @@ User main
     margin-bottom: 10px; } }
 @media screen and (max-width: 500px) {
   .user_main_container {
-    -webkit-flex-direction: column;
     flex-direction: column; }
 
   #user_main_child_3 {
@@ -2774,18 +2602,12 @@ Links Modify list
   margin-left: 1%; }
 
 .links_list_row {
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -moz-flex;
-  display: -webkit-flex;
   display: flex;
   justify-content: center;
   align-items: center; }
 
 @media screen and (max-width: 500px) {
   .links_list_row {
-    -webkit-flex-direction: column;
     flex-direction: column; } }
 @media screen and (max-width: 480px) {
   .user_stats_img_dark {
@@ -2918,11 +2740,6 @@ Games main
   .games_main_row {
     margin-left: 10%; } }
 .games_check_container {
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -moz-flex;
-  display: -webkit-flex;
   display: flex;
   width: 50%;
   margin: auto; }
@@ -2946,7 +2763,6 @@ Games main
 
 @media screen and (max-width: 1050px) {
   .games_check_container {
-    -webkit-flex-direction: column;
     flex-direction: column;
     width: 100%; }
 

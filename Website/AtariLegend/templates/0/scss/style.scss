@@ -1048,54 +1048,6 @@ nav ul {
   left: 100%;
 }
 
-.topbutton_cpanel
-{
-  display: block;
-  float:left;
-  cursor: pointer;
-  border: 0;
-  background: white;
-  font-family: AtariST,Arial,helvetica,sans-serif;
-  color: #182727;
-  height: 30px;
-  width: 213px;
-  font-size: 20px;
-  padding-top: 3px;
-  text-shadow: -1px 1px 5px white, 1px -1px 15px #acacac;
-  text-align:center;
-}
-
-.topbutton_cpanel:hover {
-  background: black;
-  color: white;
-
-}
-
-.top_button_cpanel:visited {
-  color: #182727;
-}
-.subbutton_cpanel
-{
-  display: block;
-  float:left;
-  cursor: pointer;
-  border: 0;
-  background: white;
-  font-family: AtariST,Arial,helvetica,sans-serif;
-  color: #182727;
-  height: 24px;
-  width: 213px;
-  border-bottom: 3px solid black;
-  padding-top: 3px;
-  text-shadow: -1px 1px 5px white, 1px -1px 15px #acacac;
-  text-align:center;
-}
-
-.subbutton_cpanel:hover {
-  background: black;
-  color: white;
-}
-
 #game_editor, #game_comments, #game_series, #game_music, #game_submissions, #game_reviews, #submitted_reviews,
 #menu_editor, #menu_comments, #menu_submissions, #demo_editor, #demo_comments, #demo_music, #demo_submissions,
 #user_admin, #individuals, #author_types, #crew_editor, #companies, #company_logo, #add_news, #approve_news, 
