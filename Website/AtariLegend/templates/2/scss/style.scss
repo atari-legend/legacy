@@ -1042,52 +1042,6 @@ nav ul {
   left: 100%;
 }
 
-.topbutton_cpanel
-{
-    display: block;  
-    cursor: pointer;
-	border:2px solid black;
-	height: 30px;
-	width: 205px;
-	background: #161c71;
-	color:white;
-	font-size:19px;
-	font-weight: bold;
-	border-radius: 0 15px 15px 0;
-	margin-left: 2px;
-	text-align:center;
-	/*line-height:30px;*/
-}
-
-.topbutton_cpanel:hover {
-  background: #dbd7d1;
-  color: black;
-  border:2px solid #4f4f4f;
-}
-
-.subbutton_cpanel
-{
-    display: block;  
-    cursor: pointer;
-	border:2px solid black;
-	width: 201px;
-	background: #161c71;
-	color:white;
-	font-size:16px;
-	font-weight: bold;
-	/*give the corners a small curve*/ 
-	border-radius: 0 15px 15px 0;
-	margin-left: 2px;
-	text-align:center;
-	line-height:26px;
-}
-
-.subbutton_cpanel:hover {
-  background: #dbd7d1;
-  color: black;
-  border:2px solid #4f4f4f;
-}
-
 #legacy, #tos, #picasso, #game_editor_side,
 #game_comments_side, #game_series_side,	#game_music_side, #game_submissions_side, #game_reviews_side,
 #submitted_reviews_side, #menu_editor_side, #menu_comments_side, #menu_submissions_side, #demo_editor_side,

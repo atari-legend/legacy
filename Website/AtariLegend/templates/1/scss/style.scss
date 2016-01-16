@@ -12,6 +12,7 @@ $bg-color: #00d3d3;
 
 /********************PART I : MAIN SITE***********************/
 
+/* load the main site font */
 @font-face {
     font-family: 'Audiowide';
     src: url('../font/audiowide-regular-webfont.eot');
@@ -24,8 +25,7 @@ $bg-color: #00d3d3;
     font-style: normal;
 }
 
-* { 	margin: 0; padding: 0; 
-}
+* { margin: 0; padding: 0; }
 
 html { overflow-y: scroll; 
 	overflow-x: hidden;
@@ -988,87 +988,6 @@ contact tiles - front page
 
 	
 /* *********************PART II : CPANEL*****************************/
-
-/* CPANEL menu below top*/ 
-#main_nav_cpanel { width: 100%;}
-
-nav ul {
-  list-style: none;
-}
-
-.nav li {
-  position: relative;
-}
-.nav > li { 
-  float: left; 
-} 
-
-.nav li a:first-child:nth-last-child(2):before { 
-  content: ""; 
-  position: absolute; 
- }
- 
- /* submenu positioning*/
-.nav ul {
-  position: absolute;
-  z-index: 1;
-  left: -99999em;
-  top: 61px;
-}
-.nav > li:hover > ul {
-  left: auto;
-}
-.nav > li li:hover > ul { 
-  left: 100%;
-}
-
-.topbutton_cpanel
-{
-  display: block;
-  cursor: pointer;
-  border: 0;
-  background: #00d3d3;
-  font-family: Audiowide,Arial,helvetica,sans-serif;
-  color: #182727;
-  height: 60px;
-  width: 213px;
-  font-size: 20px;
-  border-bottom: 3px solid #008b8b;
-  border-left: 1px solid #007878;
-  padding-top: 3px;
-  text-align:center;
-  line-height:27px;
-}
-
-.topbutton_cpanel:hover {
-  background: #00a9a9;
-  color: #182727;
-  border-bottom: 3px solid #006f6f;
-}
-
-.subbutton_cpanel
-{
-  display: block;
-  cursor: pointer;
-  border: 0;
-  background: #00d3d3;
-  font-family: Audiowide,Arial,helvetica,sans-serif;
-  color: #182727;
-  width: 213px;
-  font-size: 16px;
-  border-bottom: 3px solid #008b8b;
-  border-left: 1px solid #007878;
-  padding-top: 3px;
-  text-align:center;
-  line-height:30px;
-}
-
-
-.subbutton_cpanel:hover {
-  background: #00a9a9;
-  color: #182727;
-  border-bottom: 3px solid #006f6f;
-}
 
 #other{border-right: 1px solid #007878;}
 
