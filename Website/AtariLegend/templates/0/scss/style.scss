@@ -401,7 +401,7 @@ Standard tile settings
 					padding-bottom: 3%;}
 					
 
-.standard_tile h1 { color: white;
+h1 { color: white;
 			font-size: 24px;
 			font-weight: 100;
 			text-align: center;	
@@ -410,7 +410,7 @@ Standard tile settings
 			text-shadow: -1px 1px 8px #686868, 1px -1px 8px #515151;
 	}
 	
-.standard_tile h2 { 
+h2 { 
 			color: #00d3d3;
 			font-size: 13px;
 			font-weight: 100;
@@ -418,25 +418,25 @@ Standard tile settings
 			float: right;	
 	}
 	
-.standard_tile h3 { color: white;
+h3 { color: white;
 			font-size: 17px;
 			font-weight: 100;
 			text-align: center;
 	}
 	
-.standard_tile h4 { color: white;
+h4 { color: white;
 			font-size: 16px;
 			font-weight: 100;
 			text-align: left;
 	}
  
-.standard_tile h5 { color: #3c3c3c;
+h5 { color: #3c3c3c;
 			font-size: 12px;
 			font-weight: 100;
 			text-align: left;
 	}
 
-.standard_tile h6 { color: #3c3c3c;
+h6 { color: #3c3c3c;
 			font-size: 16px;
 			font-weight: 100;
 			text-align: left;
@@ -1608,10 +1608,7 @@ Links Modify list
 .links_modlist_tdline { font-size: 16px; color: black; padding: 5px; border-bottom: solid 1px #b2b2b2;}
 
 .user_stats_img_dark{ box-shadow: 0 0 12px black;
-					margin-left : 5px;
-					margin-right : 5px;
-					margin-top : 10px;
-					margin-bottom : 10px;
+					margin: 10px 5px 10px 5px;
 					filter: alpha(opacity=40); /* For IE8 and earlier */
 					max-width: 100%;
 					opacity: 0.8;}
