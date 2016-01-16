@@ -949,7 +949,11 @@ contact tiles - front page
 		height : 120px;
 		background: url(../images/footer_bg.jpg) center 0 no-repeat;
 	}
-
+	
+.footer_logo_image:before {
+	display:block;
+	content: url("../../../templates/1/images/footer_logo.png");
+}
 #footer_img {margin-left: auto;
 			margin-right: auto;
 			margin-bottom: 5px;	
