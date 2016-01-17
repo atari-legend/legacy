@@ -549,10 +549,6 @@ a.standard_tile_link:hover, a.standard_tile_link:focus
 }
  
 .standard_list_entry_right_news_text {
-  		box-sizing: border-box;
-		display: block;
-  		/* Fallback for non-webkit */
-  		display: -webkit-box;
   		height: 70px;
   		/* Fallback for non-webkit */
     		line-height: 1.2;
