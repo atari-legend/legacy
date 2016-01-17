@@ -622,6 +622,9 @@ header nav input{
 	}
 	#search { 
 		display: block;
+		background: url(../../../templates/2/images/menu_search.png) 0 0 no-repeat;
+		padding-top: 26px;
+		padding-left: 60px;
 		border-radius: 0 15px 15px 0;
 		height: 26px;
 		border:2px solid black;
@@ -646,6 +649,11 @@ header nav input{
 	#main_nav {background-color: white; border-bottom: 3px solid black;}
 	.signinbutton{margin-bottom: 25px; height: 60px; width: 134px; font-size: 20px;border-bottom: 3px solid black;border-left: 1px solid black;}
 	.signinbutton:hover { background: #6a6a6a; color: white;}
+	
+	#search { background: url(../../../templates/0/images/menu_search.png) 0 0 no-repeat;
+	    padding-top: 30px;
+	    padding-left: 30px;
+	}	
 	#search:hover { background: url(../../../templates/0/images/menu_search_hover.png) 0 0 no-repeat;
 	    padding-top: 30px;
 	    padding-left: 30px;
@@ -678,12 +686,17 @@ header nav input{
 	.signinbutton:hover { background: #00a9a9; color: #182727; border-bottom: 3px solid #006f6f;}
 	
 		#home { display: block;
-		background: url(../../../templates/1/images/menu_home.png) 0 0 no-repeat;
+		background: url(../../../templates/1/images/menu_home.png) 60px 75px no-repeat;
 		padding-top: 60px;
 		padding-left: 75px;
 	}
 	
 	#home:hover { opacity:0.5;	}
+	
+	#search { background: url(../../../templates/1/images/menu_search.png) 0 0 no-repeat;
+	padding-top: 60px;
+	padding-left: 75px;
+	}
 	
 	@media screen and (max-width: 1919px)
 	{	
