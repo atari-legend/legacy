@@ -637,7 +637,7 @@ body, html {
 /* for the TOS skin, we want to side button to be lower not to interfere with the main menu */
 @media screen and (min-width: 1280px) and (max-width: 2304px) {
   .container {
-    margin-top: 33px; } }
+    margin-top: 34px; } }
 /* this is the width of the side menu when it is pushed open */
 .container.open-sidebar {
   left: 209px; }
@@ -807,7 +807,8 @@ body, html {
   width: 180px;
   font-size: 16px;
   border-left: 1px solid black;
-  background: #eeeeee; }
+  background: #eeeeee;
+  border-bottom: 3px solid black; }
 
 .sidebutton:hover, .sidebutton_cpanel:hover {
   background: black;
@@ -856,7 +857,12 @@ body, html {
     position: relative;
     margin-top: 60px; } }
 #main_nav {
-  width: 100%; }
+  width: 100%;
+  left: 0; }
+
+#main_nav_ul {
+  font-size: 0.1px;
+  text-align: center; }
 
 /* this is some extra code for the cpanel sub menu at the main bar */
 #main_nav_ul li {
@@ -871,7 +877,7 @@ body, html {
   position: absolute;
   z-index: 1;
   left: -99999em;
-  top: 61px; }
+  top: 34px; }
 
 #main_nav_ul > li:hover > ul {
   left: auto; }
@@ -1776,71 +1782,6 @@ contact tiles - front page
   color: #000; }
 
 /* *********************PART II : CPANEL*****************************/
-/* CPANEL menu below top*/
-#main_nav_cpanel {
-  width: 100%;
-  background-color: white;
-  border-bottom: 3px solid black; }
-
-nav ul {
-  list-style: none; }
-
-.nav li {
-  position: relative;
-  display: inline; }
-
-.nav > li {
-  float: left; }
-
-.nav li a:first-child:nth-last-child(2):before {
-  content: "";
-  position: absolute; }
-
-/* submenu positioning*/
-.nav ul {
-  position: absolute;
-  z-index: 1;
-  left: -99999em;
-  top: 30px; }
-
-.nav > li:hover > ul {
-  left: auto; }
-
-.nav > li li:hover > ul {
-  left: 100%; }
-
-#game_editor, #game_comments, #game_series, #game_music, #game_submissions, #game_reviews, #submitted_reviews,
-#menu_editor, #menu_comments, #menu_submissions, #demo_editor, #demo_comments, #demo_music, #demo_submissions,
-#user_admin, #individuals, #author_types, #crew_editor, #companies, #company_logo, #add_news, #approve_news,
-#submitted_news, #Statistics, #did_you_know, #trivia_screenshots, #trivia_quotes, #add_links, #validate_links,
-#modify_links, #link_categories, #articles, #article_types, #screenshots, #modify_links,
-#link_categories, #articles, #article_types, #article_screenshots, #add_magazines, #manage_issues, #interviews,
-#interviews_help, #forum, #logout, #demo_crew_editor, #demo_individuals, #demo_author_types, #demo_interviews,
-#demo_interviews_help, #menu_individuals, #menu_author_types, #menu_crew_editor {
-  height: 24px;
-  font-size: 16px;
-  padding: 0;
-  display: inline;
-  line-height: 24px;
-  vertical-align: bottom; }
-
-#legacy, #tos, #picasso, #game_editor_side,
-#game_comments_side, #game_series_side, #game_music_side, #game_submissions_side, #game_reviews_side,
-#submitted_reviews_side, #menu_editor_side, #menu_comments_side, #menu_submissions_side, #demo_editor_side,
-#demo_comments_side, #demo_music_side, #demo_submissions_side, #user_admin_side, #individuals_side,
-#author_types_side, #crew_editor_side, #companies_side, #company_logo_side, #add_news_side, #approve_news_side,
-#submitted_news_side, #Statistics_side, #did_you_know_side, #trivia_screenshots_side, #trivia_quotes_side,
-#add_links_side, #validate_links_side, #modify_links_side, #link_categories_side, #articles_side, #article_types_side,
-#screenshots_side, #modify_links_side, #link_categories_side, #articles_side, #article_types_side,
-#article_screenshots_side, #add_magazines_side, #manage_issues_side, #interviews_side, #interviews_help_side,
-#forum_side, #logout_side, #menu_individuals_side, #menu_author_types_side, #demo_individuals_side, #demo_author_types_side,
-#menu_crew_editor_side, #demo_interviews_side, #demo_interviews_help_side {
-  height: 27px;
-  width: 213px;
-  font-size: 16px;
-  vertical-align: middle;
-  border-bottom: 3px solid black; }
-
 .centered_fieldset {
   text-align: center;
   margin: auto; }
