@@ -25,7 +25,7 @@
 		<meta name="keywords" content="atari, atari st, games, game, demo, demos, reviews, articles, interviews, st">
 		<title> Atari Legend | Legends Never Die</title>
 		<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0" />
-		<link href="{$template_dir}css/style.css" type="text/css" rel="stylesheet">
+		<link href="{$template_dir}css/style.css" type="text/css" rel="stylesheet" id="main_stylesheet">
 		<link type="text/css" href="../../../templates/html/includes/main_css/jquery-ui.css" rel="Stylesheet" />
 		<script type='text/javascript' src='../../../templates/html/includes/js/respond.min.js'></script> <!-- script needed for the side menu -->
 		<script type='text/JavaScript' src='../../../templates/html/includes/js/sha512.js'></script> <!-- log on security script -->
@@ -51,6 +51,15 @@
 				$(".ui-autocomplete").css('display', 'none');
 				});
 			});
+			
+						
+			$(document).ready(function() { 
+					$(".sub-menu li a").click(function() { 
+						$("link#main_stylesheet").attr("href",$(this).attr('rel'));
+						return false;
+					});
+			});
+			
 		</script>
 		<script type="text/javascript"> <!-- script needed for the side menu -->
 			//<![CDATA[ 
@@ -61,6 +70,9 @@
 			  });
 			});
 			//]]> 
+
+			
+			
 		</script>
 		
 		{block name=javascript_slider} {/block}
@@ -93,9 +105,9 @@
 								<li>
 									<a href="" class="sidebutton" id="skin_side">SKIN</a>
 									<ul class="sub-menu">
-										<li><a href="{$skin_switch_1}">LEGACY</a></li>
-										<li><a href="{$skin_switch_0}">TOS 2.07</a></li>
-										<li><a href="{$skin_switch_2}">PICASSO</a></li>
+										<li><a href="#" rel="../../../templates/1/css/style.css">LEGACY</a></li>
+										<li><a href="#" rel="../../../templates/0/css/style.css">TOS 2.07</a></li>
+										<li><a href="#" rel="../../../templates/2/css/style.css">PICASSO</a></li>
 									</ul>
 								</li>
 							  </ul>
