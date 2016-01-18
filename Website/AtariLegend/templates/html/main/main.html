@@ -25,7 +25,7 @@
 		<meta name="keywords" content="atari, atari st, games, game, demo, demos, reviews, articles, interviews, st">
 		<title> Atari Legend | Legends Never Die</title>
 		<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0" />
-		<link href="{$css_file}" type="text/css" rel="stylesheet">
+		<link href="{$template_dir}css/style.css" type="text/css" rel="stylesheet" id="main_stylesheet">
 		<link type="text/css" href="../../../templates/html/includes/main_css/jquery-ui.css" rel="Stylesheet" />
 		<script type='text/javascript' src='../../../templates/html/includes/js/respond.min.js'></script> <!-- script needed for the side menu -->
 		<script type='text/JavaScript' src='../../../templates/html/includes/js/sha512.js'></script> <!-- log on security script -->
@@ -51,6 +51,15 @@
 				$(".ui-autocomplete").css('display', 'none');
 				});
 			});
+			
+						
+			$(document).ready(function() { 
+					$(".sub-menu li a").click(function() { 
+						$("link#main_stylesheet").attr("href",$(this).attr('rel'));
+						return false;
+					});
+			});
+			
 		</script>
 		<script type="text/javascript"> <!-- script needed for the side menu -->
 			//<![CDATA[ 
@@ -61,6 +70,9 @@
 			  });
 			});
 			//]]> 
+
+			
+			
 		</script>
 		
 		{block name=javascript_slider} {/block}
@@ -85,7 +97,7 @@
 						  </ul>
 						  <ul id="search_ul">
 							  <li id="searchbutton_side"><input id="search_text_side" type="text" name="search_text" maxlength="11"></li>
-							  <li><a href="#" title="search"><img id="search_side" src="{$img_dir}menu_search.png" alt="search"></a></li>
+							  <li><a href="#"><div id="search_side"> </div></a></li>
 						  </ul>
 						  <div class="skin-wrap">
 							<nav class="skin-menu">
@@ -93,9 +105,9 @@
 								<li>
 									<a href="" class="sidebutton" id="skin_side">SKIN</a>
 									<ul class="sub-menu">
-										<li><a href="{$skin_switch_1}" class="sidebutton_cpanel">LEGACY</a></li>
-										<li><a href="{$skin_switch_0}" class="sidebutton_cpanel">TOS 2.07</a></li>
-										<li><a href="{$skin_switch_2}" class="sidebutton_cpanel">PICASSO</a></li>
+										<li><a href="#" rel="../../../templates/1/css/style.css" class="sidebutton_cpanel">LEGACY</a></li>
+										<li><a href="#" rel="../../../templates/0/css/style.css" class="sidebutton_cpanel">TOS 2.07</a></li>
+										<li><a href="#" rel="../../../templates/2/css/style.css" class="sidebutton_cpanel">PICASSO</a></li>
 									</ul>
 								</li>
 							  </ul>
@@ -112,22 +124,22 @@
 					</div>		
 					<!-- end of side menu-->
 					<div id="left">
-						<img id="logo_img" src="{$img_dir}logos/top_logo0{math equation='rand(1,5)'}.png" alt="logo" />
-						<img id="logo_img_480" src="{$img_dir}logos/top_logo01_480.png" alt="logo_480" />
+						<img id="logo_img" src="{$template_dir}images/logos/top_logo0{math equation='rand(1,5)'}.png" alt="logo" />
+						<img id="logo_img_480" src="{$template_dir}images/logos/top_logo01_480.png" alt="logo_480" />
 					</div>
 					<div id="right">
-						<img src="{$img_dir}top_right0{math equation='rand(1,2)'}.png" alt="bee" />
+						<img src="{$template_dir}images/top_right0{math equation='rand(1,2)'}.png" alt="bee" />
 					</div>
 					{assign var='number' value=1|rand:5}
 					{if $number is odd}
-					<img id="animation" src="{$img_dir}animations/animation0{math equation='rand(1,5)'}.gif" alt="animation" />
+					<img id="animation" src="{$template_dir}images/animations/animation0{math equation='rand(1,5)'}.gif" alt="animation" />
 					{else}
-					<img id="animation_vert" src="{$img_dir}animations/animation_vert0{math equation='rand(1,2)'}.gif" alt="animation" />
+					<img id="animation_vert" src="{$template_dir}images/animations/animation_vert0{math equation='rand(1,2)'}.gif" alt="animation" />
 					{/if}
 				</div>			
 				<nav id="main_nav">
 					<ul id="main_nav_ul">
-						<li><img id="home" src="{$img_dir}menu_home.png" alt="home" onClick=""></li>
+						<li><a href="" id="home"></a></li>
 						<li><a href="" class="topbutton" id="games">GAMES</a></li>
 						<li><a href="" class="topbutton" id="menus">MENUS</a></li>
 						<li><a href="" class="topbutton" id="demos">DEMOS</a></li>
@@ -137,7 +149,7 @@
 						<li><a href="" class="topbutton" id="links">LINKS</a></li>
 						<li><a href="" class="topbutton" id="about">ABOUT</a></li>
 						<li><div class="searchbutton" id="search_text"><input type="text" id="auto"></div></li>
-						<li><img id="search" src="{$img_dir}menu_search.png" alt="search" onClick=""></li>
+						<li><div id="search"></div></li>
 					</ul>
 				</nav>	
 			</header>
@@ -148,7 +160,7 @@
 		<footer class="footer">
 			<div class="footer_logo">
 				<br><br><br>
-				<img id="footer_img" src="{$img_dir}footer_logo.png" alt="logo">
+				<div class="footer_logo_image"></div>
 				<h3>&copy; copyright 2004 - {'Y'|date}</h3>
 			</div>
 		</footer>

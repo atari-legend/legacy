@@ -53,8 +53,7 @@ if (isset($_SESSION['skin']))
 {	
 	if ($_SESSION['skin'] == '0')
 	{
-		$smarty->assign('css_file', '../../../templates/0/css/style.css');
-		$smarty->assign('img_dir', '../../../templates/0/images/');
+		$smarty->assign('template_dir', '../../../templates/0/');
 		
 		foreach (glob("../../../templates/0/images/trivia/*.*") as $filename) {
 			$filename = substr ($filename, 3);
@@ -64,8 +63,7 @@ if (isset($_SESSION['skin']))
 	}
 	elseif ($_SESSION['skin'] == '1')
 	{
-		$smarty->assign('css_file', '../../../templates/1/css/style.css');
-		$smarty->assign('img_dir', '../../../templates/1/images/');
+		$smarty->assign('template_dir', '../../../templates/1/');
 		
 		foreach (glob("../../../templates/1/images/trivia/*.*") as $filename) {
 			$filename = substr ($filename, 3);
@@ -75,9 +73,7 @@ if (isset($_SESSION['skin']))
 	}
 	else
 	{
-		$smarty->assign('css_file', '../../../templates/2/css/style.css');
-		$smarty->assign('img_dir', '../../../templates/2/images/');
-
+		$smarty->assign('template_dir', '../../../templates/2/');
 		
 		foreach (glob("../../../templates/2/images/trivia/*.*") as $filename) {
 			$filename = substr ($filename, 3);
@@ -89,8 +85,7 @@ if (isset($_SESSION['skin']))
 }
 else
 {
-	$smarty->assign('css_file', '../../../templates/1/css/style.css');
-	$smarty->assign('img_dir', '../../../templates/1/images/');
+	$smarty->assign('template_dir', '../../../templates/1/');
 	
 	foreach (glob("../../../templates/1/images/trivia/*.*") as $filename) {
 		$filename = substr ($filename, 3);
