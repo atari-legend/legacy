@@ -36,9 +36,11 @@ body { background-color: #e1e1e1;
 	  font-family: AtariST, Arial, helvetica, sans-serif;
 }
 
-body a {text-decoration:none;}
-body a:hover {text-decoration:none;}
+body a:link {text-decoration:none;}
+body a:active {text-decoration:none;}
 body a:visited {text-decoration:none;}
+body a:hover {text-decoration:none;}
+
 
 @media screen and (min-width: 481px) { 
 	body { background-image: url(../../../templates/0/images/top_bg_sides.jpg);
@@ -247,6 +249,7 @@ Standard tile settings
 		border: 2px solid black;
 	    background: linear-gradient(to right, white, #23f001); /* Standard syntax */
 		box-shadow: 3px 3px 5px #888888;
+		margin-bottom: 20px;
 	}
 
 .standard_tile_line{ border-bottom: 2px solid #6a6a6a;
@@ -258,8 +261,6 @@ Standard tile settings
 
 .standard_tile_image{ width: 100%; 	
 		position:absolute;
-		left:0;
-		top:0;
 }
 
 .standard_tile_subtext
@@ -661,7 +662,6 @@ logon tile --> front page
 ------------------------------------------------------------ */
 .logon { margin-top: -40px;
 		float : right;
-		margin-bottom : 20px;
 		width: 100%;	
 }
 	
@@ -738,21 +738,12 @@ logon tile --> front page
 @media screen and (max-width: 639px) { 
 	.logon  { width: 100%; 
 	margin-top: 20px;	
-	margin-bottom: 20px;
 	}
 }
-
-@media screen and (min-width: 801px) and (max-width: 1279px) {
-	.logon  { margin-top: 20px;	
-	}
-} 
 
 /*---------------------------------------------------------- 
 latest news tile --> front page
 ------------------------------------------------------------ */
-.latest_news { margin-bottom: 20px;
-			border-bottom: 2px solid black;
-}
 
 @media screen and (min-width: 640px) and (max-width: 800px) { 
 	.latest_news { margin-top: 395px;
@@ -767,7 +758,6 @@ latest news tile --> front page
 /*---------------------------------------------------------- 
 screenstar tile - front page
 ------------------------------------------------------------ */
-.screenstar_position_front { margin-bottom: 20px;}
 
 @media screen and (min-width: 1495px){ 
 	.screenstar_position_front  { width: 94%;margin-top: -40px;} 
@@ -776,7 +766,6 @@ screenstar tile - front page
 /*---------------------------------------------------------- 
 datequote tile - front page
 ------------------------------------------------------------ */
-.datequote_position_front { 	margin-bottom: 20px; }
 
 .datequote_bg { background: url(../../../templates/0/images/datequote_bg.jpg) ;}
 
@@ -820,7 +809,6 @@ datequote tile - front page
 /*---------------------------------------------------------- 
 Who is it - front page
 ------------------------------------------------------------ */
-.whoisit_position_front { margin-bottom: 20px; }
 
 @media screen and (min-width: 1495px){ 
 	.whoisit_position_front  { float:right;} 
@@ -829,7 +817,6 @@ Who is it - front page
 /*---------------------------------------------------------- 
 Latest reviews tile - front page
 ------------------------------------------------------------ */
-.latest_reviews{ margin-bottom: 20px;}	
 		
 @media screen and (min-width: 1495px){ 
 	.latest_reviews  { width: 49%; float: right;} 
@@ -838,7 +825,6 @@ Latest reviews tile - front page
 /*---------------------------------------------------------- 
 Did you know tile - front page
 ------------------------------------------------------------ */
-.didyouknow_position_front{ margin-bottom: 20px; }	
 			
 @media screen and (min-width: 1495px){ 
 	.didyouknow_position_front  {float:left; width:100%;	} 
@@ -847,7 +833,6 @@ Did you know tile - front page
 /*---------------------------------------------------------- 
 Statistics tile - front page
 ------------------------------------------------------------ */
-.statistics_position_front{ margin-bottom: 20px; }	
 
 .statistics_dark { color: #6a6a6a;}
 	
@@ -858,7 +843,6 @@ Statistics tile - front page
 /*---------------------------------------------------------- 
 Hotlinks tile - front page
 ------------------------------------------------------------ */
-.hotlinks_position_front{ margin-bottom: 20px; }	
 				
 @media screen and (min-width: 1495px){ 
 	.hotlinks_position_front {width: 94%; float: left;} 
@@ -1174,7 +1158,6 @@ Front page
 .user_stats_img{ max-width: 100%;
 		box-shadow: 0 0 12px black;	
 		opacity: 0.8;
-		filter: alpha(opacity=40); /* For IE8 and earlier */
 		margin-bottom: 10px;
 }
 
@@ -1519,7 +1502,6 @@ Links Modify list
 
 .user_stats_img_dark{ box-shadow: 0 0 12px black;
 					margin: 10px 5px 10px 5px;
-					filter: alpha(opacity=40); /* For IE8 and earlier */
 					max-width: 100%;
 					opacity: 0.8;}
 										
