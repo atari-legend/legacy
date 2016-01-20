@@ -52,10 +52,18 @@
 				});
 			});
 			
-						
 			$(document).ready(function() { 
 					$(".sub-menu li a").click(function() { 
-						$("link#main_stylesheet").attr("href",$(this).attr('rel'));
+						
+						var css_path = "../../../templates/" + $(this).attr('rel') + "/css/style.css";
+						var logo_img_path = "../../../templates/" + $(this).attr('rel') + "/images/logos/top_logo01.png";
+						var logo_img_480_path = "../../../templates/" + $(this).attr('rel') + "/images/logos/top_logo01_480.png";
+						var logo_bee_path = "../../../templates/" + $(this).attr('rel') + "/images/top_right01.png";
+						
+						$("link#main_stylesheet").attr("href",css_path);
+						$("#logo_img").attr("src",logo_img_path);
+						$("#logo_img_480").attr("src",logo_img_480_path);
+						$("#img_bee").attr("src",logo_bee_path);
 						return false;
 					});
 			});
@@ -105,9 +113,9 @@
 								<li>
 									<a href="" class="sidebutton" id="skin_side">SKIN</a>
 									<ul class="sub-menu">
-										<li><a href="#" rel="../../../templates/1/css/style.css" class="sidebutton_cpanel">LEGACY</a></li>
-										<li><a href="#" rel="../../../templates/0/css/style.css" class="sidebutton_cpanel">TOS 2.07</a></li>
-										<li><a href="#" rel="../../../templates/2/css/style.css" class="sidebutton_cpanel">PICASSO</a></li>
+										<li><a href="#" rel="1" class="sidebutton_cpanel">LEGACY</a></li>
+										<li><a href="#" rel="0" class="sidebutton_cpanel">TOS 2.07</a></li>
+										<li><a href="#" rel="2" class="sidebutton_cpanel">PICASSO</a></li>
 									</ul>
 								</li>
 							  </ul>
@@ -128,7 +136,7 @@
 						<img id="logo_img_480" src="{$template_dir}images/logos/top_logo01_480.png" alt="logo_480" />
 					</div>
 					<div id="right">
-						<img src="{$template_dir}images/top_right0{math equation='rand(1,2)'}.png" alt="bee" />
+						<img id="img_bee" src="{$template_dir}images/top_right0{math equation='rand(1,2)'}.png" alt="bee" />
 					</div>
 					{assign var='number' value=1|rand:5}
 					{if $number is odd}
