@@ -480,7 +480,7 @@
 }
 
 #main_nav { width: 100%; left: 0; }
-#main_nav_ul { font-size: 0.1px; text-align : center;}
+#main_nav_ul { font-size: 0.1px; text-align : center; display:flex; justify-content: center;}
 
 /* this is some extra code for the cpanel sub menu at the main bar */
 #main_nav_ul li {
@@ -687,15 +687,16 @@ header nav input{
 	.signinbutton{height: 60px; width: 134px; font-size: 20px;}	
 	.signinbutton:hover { background: #00a9a9; color: #182727; border-bottom: 3px solid #006f6f;}
 	
-		#home { display: block;
-		background: url(../../../templates/1/images/menu_home.png) 60px 75px no-repeat;
+		#home {	display: block;
+		background: url(../../../templates/1/images/menu_home.png) 0 0 no-repeat;
 		padding-top: 60px;
 		padding-left: 75px;
 	}
 	
 	#home:hover { opacity:0.5;	}
 	
-	#search { background: url(../../../templates/1/images/menu_search.png) 0 0 no-repeat;
+	#search { display: block;
+	background: url(../../../templates/1/images/menu_search.png) 0 0 no-repeat;
 	padding-top: 60px;
 	padding-left: 75px;
 	}

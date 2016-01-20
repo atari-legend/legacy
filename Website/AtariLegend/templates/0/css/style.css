@@ -576,8 +576,6 @@ img {
     border-bottom-color: black;
     border-style: solid;
     box-shadow: 3px 3px 5px #888888;
-    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(GradientType=1, startColorstr=#000000, endColorstr=#23f001)";
-    /* For IE 8*/
     background: linear-gradient(#175f5f, #23f001);
     /* Standard syntax (must be last) */ } }
 /* at a resolution of max 960 (Tablets & low res laptop) we want the original logo without the bee */
@@ -702,8 +700,11 @@ body, html {
   float: left; }
 
 #search_side {
-  width: 30px;
-  height: 27px;
+  background-image: url(../../../templates/0/images/menu_search.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding-left: 30px;
+  padding-top: 27px;
   border-bottom: 3px solid black; }
 
 #searchbutton_side {
@@ -862,7 +863,9 @@ body, html {
 
 #main_nav_ul {
   font-size: 0.1px;
-  text-align: center; }
+  text-align: center;
+  display: flex;
+  justify-content: center; }
 
 /* this is some extra code for the cpanel sub menu at the main bar */
 #main_nav_ul li {
@@ -982,14 +985,25 @@ header nav input {
   background: #6a6a6a;
   color: white; }
 
+#search {
+  background: url(../../../templates/0/images/menu_search.png) 0 0 no-repeat;
+  padding-top: 30px;
+  padding-left: 30px; }
+
 #search:hover {
   background: url(../../../templates/0/images/menu_search_hover.png) 0 0 no-repeat;
   padding-top: 30px;
   padding-left: 30px; }
 
+#home {
+  display: inline-block;
+  background: url(../../../templates/0/images/menu_home.png) 0 0 no-repeat;
+  padding-top: 22px;
+  padding-left: 30px; }
+
 #home:hover {
   background: url(../../../templates/0/images/menu_home_hover.png) 0 0 no-repeat;
-  padding-top: 30px;
+  padding-top: 22px;
   padding-left: 30px; }
 
 @media screen and (max-width: 1590px) {
@@ -1041,13 +1055,7 @@ Standard tile settings
   float: right;
   margin-top: 0; }
 
-.column-wide-right_1920 {
-  display: none; }
-
-.column-wide-left_1920 {
-  display: none; }
-
-.column-wide-center_1920 {
+.column-wide-right_1920, .column-wide-left_1920, .column-wide-center_1920 {
   display: none; }
 
 /* 2 tiles and background welcome image */
@@ -1140,8 +1148,6 @@ Standard tile settings
   border: 2px solid black;
   background: linear-gradient(to right, white, #23f001);
   /* Standard syntax */
-  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(GradientType=1, startColorstr=#ffffff, endColorstr=#23f001)";
-  /* For IE 8*/
   box-shadow: 3px 3px 5px #888888; }
 
 .standard_tile_line {
@@ -1157,13 +1163,10 @@ Standard tile settings
   top: 0; }
 
 .standard_tile_subtext {
-  font-size: 15px;
-  color: white; }
+  font-size: 15px; }
 
 .standard_tile p {
-  text-align: left;
   border-right: 2px solid #6a6a6a;
-  /*border-left: 2px solid #01b5b5;*/
   padding-left: 4%;
   padding-right: 4%;
   width: 91.7%; }
@@ -1242,14 +1245,13 @@ Standard tile settings
   .standard_tile_title {
     margin-top: 39%; } }
 .standard_tile_explanation {
-  position: relative;
   margin-top: 65%;
   margin-bottom: 4%;
   padding-left: 3%;
   padding-right: 3%;
   padding-bottom: 3%; }
 
-.standard_tile h1 {
+h1 {
   color: white;
   font-size: 24px;
   font-weight: 100;
@@ -1258,36 +1260,32 @@ Standard tile settings
   margin-bottom: 20px;
   text-shadow: -1px 1px 8px #686868, 1px -1px 8px #515151; }
 
-.standard_tile h2 {
-  color: #00d3d3;
+h2 {
   font-size: 13px;
   font-weight: 100;
   font-style: italic;
   float: right; }
 
-.standard_tile h3 {
+h3 {
   color: white;
   font-size: 17px;
   font-weight: 100;
   text-align: center; }
 
-.standard_tile h4 {
+h4 {
   color: white;
   font-size: 16px;
-  font-weight: 100;
-  text-align: left; }
+  font-weight: 100; }
 
-.standard_tile h5 {
+h5 {
   color: #3c3c3c;
   font-size: 12px;
-  font-weight: 100;
-  text-align: left; }
+  font-weight: 100; }
 
-.standard_tile h6 {
+h6 {
   color: #3c3c3c;
   font-size: 16px;
-  font-weight: 100;
-  text-align: left; }
+  font-weight: 100; }
 
 .standard_tile_input {
   background: url(../images/logon_input.png) 0 0 no-repeat;
@@ -1377,8 +1375,6 @@ a.standard_tile_link:hover, a.standard_tile_link:focus {
   width: 100%;
   height: 140px;
   display: table;
-  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(GradientType=1, startColorstr=#ffffff, endColorstr=#23f001)";
-  /* For IE 8*/
   background: linear-gradient(to right, white, #23f001);
   /* Standard syntax */ }
 
@@ -1386,14 +1382,10 @@ a.standard_tile_link:hover, a.standard_tile_link:focus {
   position: relative;
   width: 100%;
   height: 140px;
-  display: table;
-  -ms-filter: "progid:DXImageTransform.Microsoft.gradient(GradientType=1, startColorstr=#ffffff, endColorstr=#acacac)";
-  /* For IE 8*/
   background: linear-gradient(to right, white, #acacac);
   /* Standard syntax */ }
 
 .standard_list_entry_left {
-  left: 0;
   width: 50%;
   position: absolute;
   top: 50%;
@@ -1416,12 +1408,6 @@ a.standard_tile_link:hover, a.standard_tile_link:focus {
   transform: translateY(-50%); }
 
 .standard_list_entry_right_news_text {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  display: block;
-  /* Fallback for non-webkit */
-  display: -webkit-box;
   height: 70px;
   /* Fallback for non-webkit */
   line-height: 1.2;
@@ -1543,6 +1529,30 @@ logon tile --> front page
   margin-top: 20px;
   margin-left: 10%; }
 
+.logon_username_icon:before {
+  display: block;
+  content: url("../../../templates/0/images/logon_usn.png"); }
+
+.logon_password_icon:before {
+  display: block;
+  content: url("../../../templates/0/images/logon_pwd.png"); }
+
+.logon_facebook_button:before {
+  display: block;
+  content: url("../../../templates/0/images/login-facebook.png");
+  width: auto;
+  /*or your image's width*/
+  height: 50%;
+  /*or your image's height*/ }
+
+.logon_twitter_button:before {
+  display: block;
+  content: url("../../../templates/0/images/login_twitter.png");
+  width: auto;
+  /*or your image's width*/
+  height: 50%;
+  /*or your image's height*/ }
+
 .logon_left {
   position: absolute;
   left: 0;
@@ -1572,12 +1582,12 @@ logon tile --> front page
 .logon_socmed {
   margin-top: 10px; }
 
-.logon_socmed img {
+.logon_socmed {
   display: block;
   margin: auto;
-  width: 40%; }
+  width: 50%; }
 
-.logon_socmed img:hover {
+.logon_socmed:hover {
   opacity: 0.7; }
 
 /* 2 tiles and background welcome image */
@@ -1725,11 +1735,55 @@ contact tiles - front page
   border: none;
   box-shadow: none; }
 
-.contact_tiles img {
+.contact_tiles > a > div {
   margin-bottom: 20px;
   max-width: 100%;
   box-shadow: 3px 3px 5px #888888;
   border: 2px solid black; }
+
+.contact_email_button {
+  display: block;
+  background-image: url("../../../templates/0/images/email.png");
+  background-repeat: no-repeat;
+  background-size: contain; }
+
+.contact_email_button > a {
+  display: block;
+  height: 120px;
+  width: 320px; }
+
+.contact_facebook_button {
+  display: block;
+  background-image: url("../../../templates/0/images/facebook.png");
+  background-repeat: no-repeat;
+  background-size: contain; }
+
+.contact_facebook_button > a {
+  display: block;
+  height: 120px;
+  width: 240px; }
+
+.contact_jukebox_button {
+  display: block;
+  background-image: url("../../../templates/0/images/jukebox.png");
+  background-repeat: no-repeat;
+  background-size: contain; }
+
+.contact_jukebox_button > a {
+  display: block;
+  height: 120px;
+  width: 240px; }
+
+.contact_chat_button {
+  display: block;
+  background-image: url("../../../templates/0/images/chat.png");
+  background-repeat: no-repeat;
+  background-size: contain; }
+
+.contact_chat_button > a {
+  display: block;
+  height: 120px;
+  width: 240px; }
 
 @media screen and (min-width: 1495px) {
   .contact_tiles {
@@ -1751,6 +1805,10 @@ contact tiles - front page
   height: 120px;
   border-top: 2px solid black;
   background: url(../images/footer_bg.jpg) center 0 no-repeat; }
+
+.footer_logo_image:before {
+  display: block;
+  content: url("../../../templates/0/images/footer_logo.png"); }
 
 #footer_img {
   margin-left: auto;
@@ -1881,7 +1939,6 @@ Standard table settings
   cursor: pointer;
   border: 0;
   background: white;
-  font-family: AtariST,Arial,helvetica,sans-serif;
   color: #182727;
   height: 25px;
   width: 80px;
@@ -2091,7 +2148,6 @@ Quick search games
   cursor: pointer;
   border: 0;
   background: white;
-  font-family: AtariST,Arial,helvetica,sans-serif;
   color: #182727;
   border-bottom: 3px solid black;
   padding-top: 3px;
@@ -2452,8 +2508,7 @@ Links addnew
   padding: 0;
   padding-left: 5px;
   border: 1px solid #b2b2b2;
-  text-align: left;
-  font-family: AtariST; }
+  text-align: left; }
 
 .links_addnew_row select {
   background: #666666;
@@ -2462,7 +2517,6 @@ Links addnew
   margin-top: 0;
   padding: 0;
   padding-left: 5px;
-  font-family: AtariST;
   width: 185px;
   height: 25px; }
 
@@ -2513,10 +2567,7 @@ Links Modify list
 
 .user_stats_img_dark {
   box-shadow: 0 0 12px black;
-  margin-left: 5px;
-  margin-right: 5px;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin: 10px 5px 10px 5px;
   filter: alpha(opacity=40);
   /* For IE8 and earlier */
   max-width: 100%;
