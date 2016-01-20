@@ -703,24 +703,24 @@ logon tile --> front page
  
 .logon_username_icon:before {
 	display:block;
-	content: url("../../../templates/1/images/logon_usn.png");
+	content: url("../../../templates/2/images/logon_usn.png");
 }
 
 .logon_password_icon:before {
 	display:block;
-	content: url("../../../templates/1/images/logon_pwd.png");
+	content: url("../../../templates/2/images/logon_pwd.png");
 }
 
 .logon_facebook_button:before {
 	display:block;
-	content: url("../../../templates/1/images/login-facebook.png");
+	content: url("../../../templates/2/images/login-facebook.png");
 	width: auto; /*or your image's width*/
 	height: 50%; /*or your image's height*/
 }
 
 .logon_twitter_button:before {
 	display:block;
-	content: url("../../../templates/1/images/login_twitter.png");
+	content: url("../../../templates/2/images/login_twitter.png");
 	width: auto; /*or your image's width*/
 	height: 50%; /*or your image's height*/
 }
@@ -1013,49 +1013,6 @@ contact tiles - front page
 /* *********************PART II : CPANEL*****************************/
 
 /* CPANEL menu below top*/ 
-#main_nav_cpanel { width: 100%;}
-
-nav ul {
-  list-style: none;
-}
-
-.nav li {
-  position: relative;
-}
-
-.nav li a:first-child:nth-last-child(2):before { 
-  content: ""; 
-  position: absolute; 
- }
- 
- /* submenu positioning*/
-.nav ul {
-  position: absolute;
-  z-index: 1;
-  left: -99999em;
-  top: 31px;
-}
-.nav > li:hover > ul {
-  left: auto;
-}
-.nav > li li:hover > ul { 
-  left: 100%;
-}
-
-#legacy, #tos, #picasso, #game_editor_side,
-#game_comments_side, #game_series_side,	#game_music_side, #game_submissions_side, #game_reviews_side,
-#submitted_reviews_side, #menu_editor_side, #menu_comments_side, #menu_submissions_side, #demo_editor_side,
-#demo_comments_side, #demo_music_side, #demo_submissions_side, #user_admin_side, #individuals_side,
-#author_types_side, #crew_editor_side, #companies_side, #company_logo_side, #add_news_side, #approve_news_side,
-#submitted_news_side, #Statistics_side, #did_you_know_side, #trivia_screenshots_side, #trivia_quotes_side,
-#add_links_side, #validate_links_side, #modify_links_side, #link_categories_side, #articles_side, #article_types_side,
-#screenshots_side, #modify_links_side, #link_categories_side, #articles_side, #article_types_side,
-#article_screenshots_side, #add_magazines_side, #manage_issues_side, #interviews_side, #interviews_help_side,
-#forum_side, #logout_side, #menu_individuals_side, #menu_author_types_side, #demo_individuals_side, #demo_author_types_side,
-#menu_crew_editor_side, #demo_interviews_side, #demo_interviews_help_side {
-		height: 30px;
-		font-size: 16px;
-}
 
 .centered_fieldset {
 	text-align:center;
