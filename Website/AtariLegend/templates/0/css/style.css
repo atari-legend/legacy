@@ -929,9 +929,10 @@ header nav input {
   line-height: 30px; }
 
 .subbutton {
-  font-size: 20px;
+  font-size: 16px;
   line-height: 30px;
-  background: #eeeeee; }
+  background: #eeeeee;
+  border-bottom: 3px solid black; }
 
 .topbutton:hover, .subbutton:hover {
   background: black;
