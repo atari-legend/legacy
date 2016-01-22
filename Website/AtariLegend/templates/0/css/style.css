@@ -1,8 +1,12 @@
 /*************************************************************/
 /**********************TOS 207 SKIN***************************/
 /*************************************************************/
-/* ---------SASS variables declaration--------*/
-/* ---------------SASS includes---------------*/
+/*---------------------------------------------------------- 
+ SASS Variables
+------------------------------------------------------------ */
+/*---------------------------------------------------------- 
+ Normalization script
+------------------------------------------------------------ */
 /*! normalize-scss | MIT/GPLv2 License | bit.ly/normalize-scss */
 /**
  * 1. Set default font family to sans-serif.
@@ -368,10 +372,17 @@ td,
 th {
   padding: 0; }
 
-                                                                          										/* --> Normalize script
+                                                                          		/* --> Normalize script
 
-/********************PART I : MAIN SITE***********************/
-/* load the main site font */
+/*---------------------------------------------------------- 
+ General settings
+------------------------------------------------------------ */
+/*********************************************************************/
+/**** This is the css code for general skin specific css settings ****/
+/*********************************************************************/
+/*---------------------------------------------------------- 
+load the main font
+------------------------------------------------------------ */
 @font-face {
   font-family: AtariST;
   src: url("../font/atarist.eot");
@@ -402,6 +413,9 @@ body a:visited {
 body a:hover {
   text-decoration: none; }
 
+/*---------------------------------------------------------- 
+Background images
+------------------------------------------------------------ */
 @media screen and (min-width: 481px) {
   body {
     background-image: url(../../../templates/0/images/top_bg_sides.jpg);
@@ -438,603 +452,12 @@ img {
   margin-right: 5%;
   float: left; }
 
-/*---------------------------------------------------------- 
- Top
------------------------------------------------------------- */
-/* background */
-#top_background {
-  width: 100%;
-  float: left;
-  display: block;
-  background: url(../../../templates/0/images/top_bg.jpg) 0 0 no-repeat;
-  height: 100%;
-  border-bottom: 2px solid black; }
-
-/* logos */
-#left {
-  float: left; }
-
-#logo_img {
-  max-width: 100%; }
-
-#logo_img_480 {
-  max-width: 100%; }
-
-#right {
-  float: right;
-  margin-top: 30px; }
-
-#right img {
-  max-width: 100%;
-  float: right; }
-
-/**************************************************************************/
-/**** This is the css code for the animations at the top of the screen ****/
-/**************************************************************************/
-/* ---------SASS variables for animation--------*/
-/* -------------SASS animation code-------------*/
-#animation {
-  position: relative;
-  animation-name: STcharacters;
-  animation-duration: 20s;
-  animation-iteration-count: infinite;
-  animation-timing-function: linear; }
-
-@-webkit-keyframes STcharacters {
-  0% {
-    top: 174px;
-    left: -20%;
-    opacity: 0; }
-  10% {
-    opacity: 1; }
-  70% {
-    opacity: 1; }
-  100% {
-    top: 174px;
-    left: 45%;
-    opacity: 0; } }
-@keyframes STcharacters {
-  0% {
-    top: 174px;
-    left: -20%;
-    opacity: 0; }
-  10% {
-    opacity: 1; }
-  70% {
-    opacity: 1; }
-  100% {
-    top: 174px;
-    left: 45%;
-    opacity: 0; } }
-#animation_vert {
-  position: relative;
-  animation-name: STcharacters_vert;
-  animation-duration: 10s;
-  animation-iteration-count: infinite;
-  animation-timing-function: linear; }
-
-@-webkit-keyframes STcharacters_vert {
-  0% {
-    top: 145px;
-    left: -5%;
-    opacity: 0; }
-  10% {
-    opacity: 1; }
-  70% {
-    opacity: 1;
-    left: 0; }
-  100% {
-    top: 10px;
-    left: 5%;
-    opacity: 0; } }
-@keyframes STcharacters_vert {
-  0% {
-    top: 145px;
-    left: -5%;
-    opacity: 0; }
-  10% {
-    opacity: 1; }
-  70% {
-    opacity: 1;
-    left: 0; }
-  100% {
-    top: 10px;
-    left: 5%;
-    opacity: 0; } }
-/* at a resolution of max 480 (smartphones) we want a smaller logo with border */
-@media screen and (max-width: 480px) {
-  #animation, #animation_vert {
-    display: none; } }
-/* at a resolution of max 960 (Tablets & low res laptop) we want the original logo without the bee */
-@media screen and (min-width: 481px) and (max-width: 960px) {
-  #animation, #animation_vert {
-    display: none; } }
-/* --> TOP animation */
-/* at a resolution of max 480 (smartphones) we want a smaller logo with border */
-@media screen and (max-width: 480px) {
-  .container {
-    width: 15%; }
-
-  #left {
-    width: 85%; }
-
-  #logo_img {
-    margin-left: auto;
-    margin-right: auto;
-    display: none; }
-
-  #logo_img_480 {
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 5px; }
-
-  #right {
-    width: 0;
-    display: none; }
-
-  #top_background {
-    border-top-width: 0;
-    border-left-width: 0;
-    border-bottom-width: 2px;
-    border-bottom-color: black;
-    border-style: solid;
-    box-shadow: 3px 3px 5px #888888;
-    background: linear-gradient(#175f5f, #23f001);
-    /* Standard syntax (must be last) */ } }
-/* at a resolution of max 960 (Tablets & low res laptop) we want the original logo without the bee */
-@media screen and (min-width: 481px) and (max-width: 960px) {
-  .container {
-    width: 15%; }
-
-  #left {
-    width: 100%; }
-
-  #logo_img {
-    margin-left: auto;
-    margin-right: auto; }
-
-  #logo_img_480 {
-    display: none; }
-
-  #right {
-    width: 0;
-    display: none; } }
-/* For high res screens we want the full package - original logo and bee */
-@media screen and (min-width: 961px) {
-  .container {
-    width: 15%; }
-
-  #left {
-    width: 50%; }
-
-  #logo_img_480 {
-    display: none; }
-
-  #right {
-    width: 35%;
-    display: block;
-    text-align: right; } }
-/*****************************************************************/
-/**** This is the css code for the side menu and the top menu ****/
-/*****************************************************************/
-/* ---------SASS variables for menu--------*/
-/* ---------the side menu--------*/
-/* the side menu for smartphones, tablets and old (laptop) screens */
-/* it is also used for the high res monitors, but then only the skin switch will be visible and */
-/* in certain resolutions the quick search field */
-/* This file contains the complete build code as well as the positioning of the side menu for all */
-/* resolutions - see the code at the bottom of the file */
-body, html {
-  height: 100%; }
-
-.container {
-  display: block;
-  z-index: 3;
-  position: relative;
-  width: 100%;
-  left: 0;
-  transition: left 0.4s ease-in-out; }
-
-/* for the TOS skin, we want to side button to be lower not to interfere with the main menu */
-@media screen and (min-width: 1280px) and (max-width: 2304px) {
-  .container {
-    margin-top: 34px; } }
-/* this is the width of the side menu when it is pushed open */
-.container.open-sidebar {
-  left: 209px; }
-
-/* the position of the side buttons when pushed open */
-#sidebar {
-  left: -209px;
-  width: 191px; }
-
-/* the side bar button options */
-#sidebar {
-  z-index: 1;
-  position: absolute;
-  background: black;
-  height: 100%;
-  box-sizing: border-box; }
-
-#sidebar ul {
-  margin: 0;
-  padding: 0;
-  list-style: none; }
-
-/* placement of the side menu buttons */
-#sidebar ul li {
-  margin: 0; }
-
-/* side menu button effect */
-#sidebar ul li a {
-  padding: 0;
-  display: block;
-  transition: background 0.3s ease-in-out; }
-
-.main-content {
-  width: 100%;
-  height: 100%;
-  padding: 1px;
-  position: absolute;
-  box-sizing: border-box; }
-  .main-content #sidebar-toggle {
-    display: block;
-    position: absolute;
-    padding: 10px 7px;
-    float: left;
-    background: white; }
-    .main-content #sidebar-toggle .bar {
-      display: block;
-      width: 18px;
-      margin-bottom: 3px;
-      height: 2px; }
-
-.main-content #sidebar-toggle .bar {
-  background-color: black; }
-
-.main-content #sidebar-toggle .bar:last-child {
-  margin-bottom: 0; }
-
-/* search field and button code - this is very skin specific */
-#search_ul {
-  width: 100%; }
-
-#search_ul li {
-  float: left; }
-
-#search_side {
-  background-image: url(../../../templates/0/images/menu_search.png);
-  background-size: cover;
-  background-repeat: no-repeat;
-  padding-left: 30px;
-  padding-top: 27px;
-  border-bottom: 3px solid black; }
-
-#searchbutton_side {
-  background: white;
-  height: 27px;
-  width: 160px;
-  border-bottom: 3px solid black;
-  padding-top: 0; }
-
-#search_text_side {
-  color: #ffffff;
-  width: 153px;
-  height: 17px;
-  border: 1px solid #007b7b;
-  margin: 4px 0 0 6px;
-  padding: 0;
-  background: #000;
-  text-align: center; }
-
-#skin_side, .side_navigation * a {
-  width: 190px;
-  border-bottom: 3px solid black; }
-
-.skin-menu {
-  width: 100%;
-  margin: 0px auto; }
-
-.skin-menu li {
-  margin: 0;
-  list-style: none; }
-
-.skin-menu a {
-  transition: all linear 0.15s; }
-
-/*  Top Level */
-.skin-menu > ul > li {
-  float: left;
-  display: inline-block;
-  position: relative;
-  font-size: 19px; }
-
-/* Bottom Level - This is the skin switching part */
-.skin-menu li:hover .sub-menu {
-  z-index: 1;
-  opacity: 1; }
-
-.sub-menu {
-  width: 75%;
-  padding: 5px 0;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  z-index: -1;
-  opacity: 0;
-  transition: opacity linear 0.15s;
-  box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.2);
-  text-align: center; }
-
-.sub-menu li {
-  display: block;
-  font-size: 16px; }
-
-.sub-menu li a {
-  display: block;
-  font-weight: normal;
-  background: #eeeeee; }
-
-.sub-menu li a {
-  color: black; }
-
-.sub-menu li a:hover {
-  background: black;
-  color: white; }
-
-/* 'position' is needed for smartphone view else the logo is covered by the sidemenu button */
-@media screen and (max-width: 480px) {
-  .main-content {
-    position: relative; }
-
-  .main-content #sidebar-toggle {
-    position: relative; } }
-.sidebutton_extra, .sidebutton, .sidebutton_cpanel {
-  border: 0;
-  cursor: pointer;
-  color: black;
-  border-radius: "";
-  text-align: center;
-  text-shadow: -1px 1px 5px white, 1px -1px 15px #acacac;
-  font-weight: normal;
-  border-bottom: 0;
-  line-height: 27px; }
-
-.sidebutton {
-  margin-left: 0;
-  width: 213px;
-  font-size: 16px;
-  background: white; }
-
-.sidebutton_cpanel {
-  margin-left: 20px;
-  width: 180px;
-  font-size: 16px;
-  border-left: 1px solid black;
-  background: #eeeeee;
-  border-bottom: 3px solid black; }
-
-.sidebutton:hover, .sidebutton_cpanel:hover {
-  background: black;
-  color: white; }
-
-/* for the lower resolutions, we don't have the menu bar below the top */
-@media screen and (max-width: 1279px) {
-  #main_nav {
-    display: none; } }
-/* for resolutions between 1280 and 1920 the search goes to the side menu */
-/* some re-placement of the skin button is needed here */
-/* HOWEVER, this is not done for the CPANEL, to solve this id no-wrap is created */
-#no-wrap {
-  margin-top: 0; }
-
-@media screen and (max-width: 1919px) {
-  .skin-wrap {
-    margin-top: 30px; } }
-/* for the high resolutions, we only have the skin switch in the side menu */
-@media screen and (min-width: 1280px) {
-  .side_navigation {
-    display: none; } }
-@media screen and (min-width: 1920px) {
-  #search_side, #search_text_side {
-    display: none; } }
-/* ---------the main menu--------*/
-/* this is the css code for the main menu and its buttons
-
-/* This piece of code is used for higher res :
-/*	1) making the side menu go to the left of the screen  --> Container absolute
-/*  2) Side bar needs to be transparant for resolutions between 1281 and 16** or something --> #sidebar
-/*  3) header nav is switched to absolute, if this is not done, the hyperlinks won't work anymore becauwe of position of container
-/*  4) since header nav is absolute, the main part of the site needs to be repositioned */
-@media screen and (min-width: 1280px) {
-  .container {
-    position: absolute; }
-
-  #sidebar {
-    background-color: transparent; }
-
-  header nav {
-    position: absolute;
-    margin-top: 0; }
-
-  #main {
-    position: relative;
-    margin-top: 60px; } }
-#main_nav {
-  width: 100%;
-  left: 0; }
-
-#main_nav_ul {
-  font-size: 0.1px;
-  text-align: center;
-  display: flex;
-  justify-content: center; }
-
-/* this is some extra code for the cpanel sub menu at the main bar */
-#main_nav_ul li {
-  position: relative; }
-
-#main_nav_ul li a:first-child:nth-last-child(2):before {
-  content: "";
-  position: absolute; }
-
-/* submenu positioning*/
-#main_nav_ul ul {
-  position: absolute;
-  z-index: 1;
-  left: -99999em;
-  top: 34px; }
-
-#main_nav_ul > li:hover > ul {
-  left: auto; }
-
-#main_nav_ul > li li:hover > ul {
-  left: 100%; }
-
-header nav img:hover {
-  opacity: 1; }
-
-header nav li {
-  display: inline-block; }
-
-header nav input {
-  background-color: #000;
-  color: #ffffff;
-  width: 247px;
-  height: 20px;
-  border: 1px solid #007b7b;
-  margin: 3px 0 0 16px;
-  padding: 0;
-  display: block;
-  text-align: center;
-  font-size: 12pt; }
-
-.top_button_extra, .topbutton, .subbutton {
-  display: block;
-  cursor: pointer;
-  border: 0;
-  background-color: white;
-  color: black;
-  width: 194.6px;
-  text-align: center;
-  font-weight: normal;
-  border-bottom: 0;
-  border-left: 0;
-  padding-top: 0;
-  text-shadow: -1px 1px 5px white, 1px -1px 15px #acacac;
-  border-radius: ""; }
-
-.topbutton {
-  font-size: 20px;
-  line-height: 30px; }
-
-.subbutton {
-  font-size: 16px;
-  line-height: 30px;
-  background: #eeeeee;
-  border-bottom: 3px solid black; }
-
-.topbutton:hover, .subbutton:hover {
-  background: black;
-  color: white;
-  border: 0;
-  border-bottom: 0; }
-
-.searchbutton {
-  display: block;
-  float: left;
-  border: 0;
-  background: white;
-  color: black;
-  height: 27px;
-  width: 280px;
-  font-size: 15px;
-  border-bottom: 0;
-  border-left: 0;
-  padding-top: 0;
-  border-radius: "";
-  margin-left: 0;
-  text-shadow: 0; }
-
-.signinbutton {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  cursor: pointer;
-  border: 0;
-  background: white;
-  color: black;
-  font-weight: normal;
-  border-bottom: 0;
-  border-left: 0;
-  border-radius: "";
-  padding-top: 3px; }
-
-#home:hover, #search:hover {
-  height: 0; }
-
-#main_nav {
-  background-color: white;
-  border-bottom: 3px solid black; }
-
-.signinbutton {
-  margin-bottom: 25px;
-  height: 60px;
-  width: 134px;
-  font-size: 20px;
-  border-bottom: 3px solid black;
-  border-left: 1px solid black; }
-
-.signinbutton:hover {
-  background: #6a6a6a;
-  color: white; }
-
-#search {
-  background: url(../../../templates/0/images/menu_search.png) 0 0 no-repeat;
-  padding-top: 30px;
-  padding-left: 30px; }
-
-#search:hover {
-  background: url(../../../templates/0/images/menu_search_hover.png) 0 0 no-repeat;
-  padding-top: 30px;
-  padding-left: 30px; }
-
-#home {
-  display: inline-block;
-  background: url(../../../templates/0/images/menu_home.png) 0 0 no-repeat;
-  padding-top: 22px;
-  padding-left: 30px; }
-
-#home:hover {
-  background: url(../../../templates/0/images/menu_home_hover.png) 0 0 no-repeat;
-  padding-top: 22px;
-  padding-left: 30px; }
-
-@media screen and (max-width: 1590px) {
-  #home {
-    display: none; } }
-@media screen and (max-width: 1560px) {
-  .topbutton {
-    width: 165px; } }
-@media screen and (max-width: 1325px) {
-  .topbutton {
-    width: 155px; } }
-/* responsiveness of the top menu for resolutions from 1281 to 1920 */
-@media screen and (max-width: 1919px) {
-  #search_text {
-    display: none; }
-
-  #search {
-    display: none; } }
-/* --> TOP and SIDE MENU */
-/*---------------------------------------------------------- 
- Main site
------------------------------------------------------------- */
-/* Up until width of 639 we have 1 tile per rows
- from 640 to 800 we have 2 tiles.
- From a width of 801 we will be having rows of 3 tiles */
 /*------------------------------------------------------------
 Standard tile settings 
+
+Up until width of 639 we have 1 tile per rows
+From 640 to 800 we have 2 tiles.
+From a width of 801 we will be having rows of 3 tiles 
 -------------------------------------------------------------*/
 .column-left {
   width: 32%;
@@ -1453,6 +876,608 @@ a.standard_tile_link:hover, a.standard_tile_link:focus {
   height: 25px;
   background: #666666; }
 
+/* --> general skin specific css settings */
+/*---------------------------------------------------------- 
+ Top
+------------------------------------------------------------ */
+/*****************************************************************/
+/***** This is the css code for the top graphics of the site *****/
+/*****************************************************************/
+/* background */
+#top_background {
+  width: 100%;
+  float: left;
+  display: block;
+  height: 100%;
+  background: url(../../../templates/0/images/top_bg.jpg) 0 0 no-repeat;
+  border-bottom: 2px solid black; }
+
+/* logos */
+#left {
+  float: left; }
+
+#logo_img {
+  max-width: 100%; }
+
+#logo_img_480 {
+  max-width: 100%; }
+
+#right {
+  float: right; }
+
+#right img {
+  max-width: 100%;
+  float: right; }
+
+#right {
+  margin-top: 30px; }
+
+/* at a resolution of max 480 (smartphones) we want a smaller logo with border */
+@media screen and (max-width: 480px) {
+  .container {
+    width: 15%; }
+
+  #left {
+    width: 85%; }
+
+  #logo_img {
+    margin-left: auto;
+    margin-right: auto;
+    display: none; }
+
+  #logo_img_480 {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 5px; }
+
+  #right {
+    width: 0;
+    display: none; }
+
+  #top_background {
+    border-top-width: 0;
+    border-left-width: 0;
+    border-style: solid;
+    border-bottom-width: 2px;
+    border-bottom-color: black;
+    box-shadow: 3px 3px 5px #888888;
+    background: linear-gradient(#175f5f, #23f001);
+    /* Standard syntax (must be last) */ } }
+/* at a resolution of max 960 (Tablets & low res laptop) we want the original logo without the bee */
+@media screen and (min-width: 481px) and (max-width: 960px) {
+  .container {
+    width: 15%; }
+
+  #left {
+    width: 100%; }
+
+  #logo_img {
+    margin-left: auto;
+    margin-right: auto; }
+
+  #logo_img_480 {
+    display: none; }
+
+  #right {
+    width: 0;
+    display: none; } }
+/* For high res screens we want the full package - original logo and bee */
+@media screen and (min-width: 961px) {
+  .container {
+    width: 15%; }
+
+  #left {
+    width: 50%; }
+
+  #logo_img_480 {
+    display: none; }
+
+  #right {
+    width: 35%;
+    display: block;
+    text-align: right; } }
+/* --> TOP background & graphics */
+/**************************************************************************/
+/**** This is the css code for the animations at the top of the screen ****/
+/**************************************************************************/
+/* ---------SASS variables for animation--------*/
+/* -------------SASS animation code-------------*/
+#animation {
+  position: relative;
+  animation-name: STcharacters;
+  animation-duration: 20s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear; }
+
+@-webkit-keyframes STcharacters {
+  0% {
+    top: 174px;
+    left: -20%;
+    opacity: 0; }
+  10% {
+    opacity: 1; }
+  70% {
+    opacity: 1; }
+  100% {
+    top: 174px;
+    left: 45%;
+    opacity: 0; } }
+@keyframes STcharacters {
+  0% {
+    top: 174px;
+    left: -20%;
+    opacity: 0; }
+  10% {
+    opacity: 1; }
+  70% {
+    opacity: 1; }
+  100% {
+    top: 174px;
+    left: 45%;
+    opacity: 0; } }
+#animation_vert {
+  position: relative;
+  animation-name: STcharacters_vert;
+  animation-duration: 10s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear; }
+
+@-webkit-keyframes STcharacters_vert {
+  0% {
+    top: 145px;
+    left: -5%;
+    opacity: 0; }
+  10% {
+    opacity: 1; }
+  70% {
+    opacity: 1;
+    left: 0; }
+  100% {
+    top: 10px;
+    left: 5%;
+    opacity: 0; } }
+@keyframes STcharacters_vert {
+  0% {
+    top: 145px;
+    left: -5%;
+    opacity: 0; }
+  10% {
+    opacity: 1; }
+  70% {
+    opacity: 1;
+    left: 0; }
+  100% {
+    top: 10px;
+    left: 5%;
+    opacity: 0; } }
+/* at a resolution of max 480 (smartphones) we want a smaller logo with border */
+@media screen and (max-width: 480px) {
+  #animation, #animation_vert {
+    display: none; } }
+/* at a resolution of max 960 (Tablets & low res laptop) we want the original logo without the bee */
+@media screen and (min-width: 481px) and (max-width: 960px) {
+  #animation, #animation_vert {
+    display: none; } }
+/* --> TOP animation */
+/*****************************************************************/
+/**** This is the css code for the side menu and the top menu ****/
+/*****************************************************************/
+/* ---------SASS variables for menu--------*/
+/* ---------the side menu--------*/
+/* the side menu for smartphones, tablets and old (laptop) screens */
+/* it is also used for the high res monitors, but then only the skin switch will be visible and */
+/* in certain resolutions the quick search field */
+/* This file contains the complete build code as well as the positioning of the side menu for all */
+/* resolutions - see the code at the bottom of the file */
+body, html {
+  height: 100%; }
+
+.container {
+  display: block;
+  z-index: 3;
+  position: relative;
+  width: 100%;
+  left: 0;
+  transition: left 0.4s ease-in-out; }
+
+/* for the TOS skin, we want to side button to be lower not to interfere with the main menu */
+@media screen and (min-width: 1280px) and (max-width: 2304px) {
+  .container {
+    margin-top: 34px; } }
+/* this is the width of the side menu when it is pushed open */
+.container.open-sidebar {
+  left: 209px; }
+
+/* the position of the side buttons when pushed open */
+#sidebar {
+  left: -209px;
+  width: 191px; }
+
+/* the side bar button options */
+#sidebar {
+  z-index: 1;
+  position: absolute;
+  background: black;
+  height: 100%;
+  box-sizing: border-box; }
+
+#sidebar ul {
+  margin: 0;
+  padding: 0;
+  list-style: none; }
+
+/* placement of the side menu buttons */
+#sidebar ul li {
+  margin: 0; }
+
+/* side menu button effect */
+#sidebar ul li a {
+  padding: 0;
+  display: block;
+  transition: background 0.3s ease-in-out; }
+
+.main-content {
+  width: 100%;
+  height: 100%;
+  padding: 1px;
+  position: absolute;
+  box-sizing: border-box; }
+  .main-content #sidebar-toggle {
+    display: block;
+    position: absolute;
+    padding: 10px 7px;
+    float: left;
+    background: white; }
+    .main-content #sidebar-toggle .bar {
+      display: block;
+      width: 18px;
+      margin-bottom: 3px;
+      height: 2px; }
+
+.main-content #sidebar-toggle .bar {
+  background-color: black; }
+
+.main-content #sidebar-toggle .bar:last-child {
+  margin-bottom: 0; }
+
+/* search field and button code - this is very skin specific */
+#search_ul {
+  width: 100%; }
+
+#search_ul li {
+  float: left; }
+
+#search_side {
+  background-image: url(../../../templates/0/images/menu_search.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding-left: 30px;
+  padding-top: 27px;
+  border-bottom: 3px solid black; }
+
+#searchbutton_side {
+  background: white;
+  height: 27px;
+  width: 160px;
+  border-bottom: 3px solid black;
+  padding-top: 0; }
+
+#search_text_side {
+  color: #ffffff;
+  width: 153px;
+  height: 17px;
+  border: 1px solid #007b7b;
+  margin: 4px 0 0 6px;
+  padding: 0;
+  background: #000;
+  text-align: center; }
+
+#skin_side, .side_navigation * a {
+  width: 190px;
+  border-bottom: 3px solid black; }
+
+.skin-menu {
+  width: 100%;
+  margin: 0px auto; }
+
+.skin-menu li {
+  margin: 0;
+  list-style: none; }
+
+.skin-menu a {
+  transition: all linear 0.15s; }
+
+/*  Top Level */
+.skin-menu > ul > li {
+  float: left;
+  display: inline-block;
+  position: relative;
+  font-size: 19px; }
+
+/* Bottom Level - This is the skin switching part */
+.skin-menu li:hover .sub-menu {
+  z-index: 1;
+  opacity: 1; }
+
+.sub-menu {
+  width: 75%;
+  padding: 5px 0;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity linear 0.15s;
+  box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.2);
+  text-align: center; }
+
+.sub-menu li {
+  display: block;
+  font-size: 16px; }
+
+.sub-menu li a {
+  display: block;
+  font-weight: normal;
+  background: #eeeeee; }
+
+.sub-menu li a {
+  color: black; }
+
+.sub-menu li a:hover {
+  background: black;
+  color: white; }
+
+/* 'position' is needed for smartphone view else the logo is covered by the sidemenu button */
+@media screen and (max-width: 480px) {
+  .main-content {
+    position: relative; }
+
+  .main-content #sidebar-toggle {
+    position: relative; } }
+.sidebutton_extra, .sidebutton, .sidebutton_cpanel {
+  border: 0;
+  cursor: pointer;
+  color: black;
+  border-radius: "";
+  text-align: center;
+  text-shadow: -1px 1px 5px white, 1px -1px 15px #acacac;
+  font-weight: normal;
+  border-bottom: 0;
+  line-height: 27px; }
+
+.sidebutton {
+  margin-left: 0;
+  width: 213px;
+  font-size: 16px;
+  background: white; }
+
+.sidebutton_cpanel {
+  margin-left: 20px;
+  width: 180px;
+  font-size: 16px;
+  border-left: 1px solid black;
+  background: #eeeeee;
+  border-bottom: 3px solid black; }
+
+.sidebutton:hover, .sidebutton_cpanel:hover {
+  background: black;
+  color: white; }
+
+/* for the lower resolutions, we don't have the menu bar below the top */
+@media screen and (max-width: 1279px) {
+  #main_nav {
+    display: none; } }
+/* for resolutions between 1280 and 1920 the search goes to the side menu */
+/* some re-placement of the skin button is needed here */
+/* HOWEVER, this is not done for the CPANEL, to solve this id no-wrap is created */
+#no-wrap {
+  margin-top: 0; }
+
+@media screen and (max-width: 1919px) {
+  .skin-wrap {
+    margin-top: 30px; } }
+/* for the high resolutions, we only have the skin switch in the side menu */
+@media screen and (min-width: 1280px) {
+  .side_navigation {
+    display: none; } }
+@media screen and (min-width: 1920px) {
+  #search_side, #search_text_side {
+    display: none; } }
+/* ---------the main menu--------*/
+/* this is the css code for the main menu and its buttons
+
+/* This piece of code is used for higher res :
+/*	1) making the side menu go to the left of the screen  --> Container absolute
+/*  2) Side bar needs to be transparant for resolutions between 1281 and 16** or something --> #sidebar
+/*  3) header nav is switched to absolute, if this is not done, the hyperlinks won't work anymore becauwe of position of container
+/*  4) since header nav is absolute, the main part of the site needs to be repositioned */
+@media screen and (min-width: 1280px) {
+  .container {
+    position: absolute; }
+
+  #sidebar {
+    background-color: transparent; }
+
+  header nav {
+    position: absolute;
+    margin-top: 0; }
+
+  #main {
+    position: relative;
+    margin-top: 60px; } }
+#main_nav {
+  width: 100%;
+  left: 0; }
+
+#main_nav_ul {
+  font-size: 0.1px;
+  text-align: center;
+  display: flex;
+  justify-content: center; }
+
+/* this is some extra code for the cpanel sub menu at the main bar */
+#main_nav_ul li {
+  position: relative; }
+
+#main_nav_ul li a:first-child:nth-last-child(2):before {
+  content: "";
+  position: absolute; }
+
+/* submenu positioning*/
+#main_nav_ul ul {
+  position: absolute;
+  z-index: 1;
+  left: -99999em;
+  top: 34px; }
+
+#main_nav_ul > li:hover > ul {
+  left: auto; }
+
+#main_nav_ul > li li:hover > ul {
+  left: 100%; }
+
+header nav img:hover {
+  opacity: 1; }
+
+header nav li {
+  display: inline-block; }
+
+header nav input {
+  background-color: #000;
+  color: #ffffff;
+  width: 247px;
+  height: 20px;
+  border: 1px solid #007b7b;
+  margin: 3px 0 0 16px;
+  padding: 0;
+  display: block;
+  text-align: center;
+  font-size: 12pt; }
+
+.top_button_extra, .topbutton, .subbutton {
+  display: block;
+  cursor: pointer;
+  border: 0;
+  background-color: white;
+  color: black;
+  width: 194.6px;
+  text-align: center;
+  font-weight: normal;
+  border-bottom: 0;
+  border-left: 0;
+  padding-top: 0;
+  text-shadow: -1px 1px 5px white, 1px -1px 15px #acacac;
+  border-radius: ""; }
+
+.topbutton {
+  font-size: 20px;
+  line-height: 30px; }
+
+.subbutton {
+  font-size: 16px;
+  line-height: 30px;
+  background: #eeeeee;
+  border-bottom: 3px solid black; }
+
+.topbutton:hover, .subbutton:hover {
+  background: black;
+  color: white;
+  border: 0;
+  border-bottom: 0; }
+
+.searchbutton {
+  display: block;
+  float: left;
+  border: 0;
+  background: white;
+  color: black;
+  height: 27px;
+  width: 280px;
+  font-size: 15px;
+  border-bottom: 0;
+  border-left: 0;
+  padding-top: 0;
+  border-radius: "";
+  margin-left: 0;
+  text-shadow: 0; }
+
+.signinbutton {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  cursor: pointer;
+  border: 0;
+  background: white;
+  color: black;
+  font-weight: normal;
+  border-bottom: 0;
+  border-left: 0;
+  border-radius: "";
+  padding-top: 3px; }
+
+#home:hover, #search:hover {
+  height: 0; }
+
+#main_nav {
+  background-color: white;
+  border-bottom: 3px solid black; }
+
+.signinbutton {
+  margin-bottom: 25px;
+  height: 60px;
+  width: 134px;
+  font-size: 20px;
+  border-bottom: 3px solid black;
+  border-left: 1px solid black; }
+
+.signinbutton:hover {
+  background: #6a6a6a;
+  color: white; }
+
+#search {
+  background: url(../../../templates/0/images/menu_search.png) 0 0 no-repeat;
+  padding-top: 30px;
+  padding-left: 30px; }
+
+#search:hover {
+  background: url(../../../templates/0/images/menu_search_hover.png) 0 0 no-repeat;
+  padding-top: 30px;
+  padding-left: 30px; }
+
+#home {
+  display: inline-block;
+  background: url(../../../templates/0/images/menu_home.png) 0 0 no-repeat;
+  padding-top: 22px;
+  padding-left: 30px; }
+
+#home:hover {
+  background: url(../../../templates/0/images/menu_home_hover.png) 0 0 no-repeat;
+  padding-top: 22px;
+  padding-left: 30px; }
+
+@media screen and (max-width: 1590px) {
+  #home {
+    display: none; } }
+@media screen and (max-width: 1560px) {
+  .topbutton {
+    width: 165px; } }
+@media screen and (max-width: 1325px) {
+  .topbutton {
+    width: 155px; } }
+/* responsiveness of the top menu for resolutions from 1281 to 1920 */
+@media screen and (max-width: 1919px) {
+  #search_text {
+    display: none; }
+
+  #search {
+    display: none; } }
+/* --> TOP and SIDE MENU */
+/*---------------------------------------------------------- 
+ Main website
+------------------------------------------------------------ */
+/**************************************************************/
+/***This is the css code for the front page of the main site***/
+/**************************************************************/
 /*---------------------------------------------------------- 
  Welcome tile settings --> frontpage
 ------------------------------------------------------------ */
@@ -1812,6 +1837,7 @@ contact tiles - front page
   background: white;
   color: #000; }
 
+/* --> Front page */
 /* *********************PART II : CPANEL*****************************/
 .centered_fieldset {
   text-align: center;

@@ -1,0 +1,385 @@
+/**************************************************************/	
+/***This is the css code for the front page of the main site***/
+/**************************************************************/ 
+
+/*---------------------------------------------------------- 
+ Welcome tile settings --> frontpage
+------------------------------------------------------------ */
+#welcome { position: relative;
+		width: 845px; 
+		height: 460px; 
+		overflow: hidden;
+		margin-top: 20px;
+		border-top: 10px solid #01b5b5;
+		border-bottom: 3px solid #01b5b5;
+		margin-bottom:20px;
+		float: left;
+}
+
+.welcome_slides { cursor: move; 
+		position: absolute; 
+		left: 0; 
+		top: 0; 
+		width: 845px; 
+		height: 460px; 
+		overflow: hidden;
+}
+
+#welcome p { 
+		background: rgb(0, 80, 80);   /* Fallback for web browsers that doesn't support RGBa */
+        background: rgba(0, 80, 80, 0.6);   /* RGBa with 0.6 opacity */
+		text-align: center;
+		border-right: 2px solid #01b5b5;
+		padding-left: 5%;
+		padding-right: 5%;
+	}	
+	
+.welcome_text { font-size : 11pt; 
+		padding-bottom: 10px;	
+		padding-top: 10px;	
+		color : #bcbdbd;
+		border-bottom: 2px solid #01b5b5;	
+		position: absolute;		
+		Margin-top: 130px;
+	}
+	
+.trivia_title { font-size:19pt; color:white;}
+.trivia_tag { font-size:13pt}
+.trivia_text{ font-size:12pt; color:white }
+
+/* 1 tile and a simplified intro screen */
+@media screen and (max-width: 639px) { 
+	#welcome  { visibility : hidden; }	
+}
+
+/* 2 tiles and background welcome image */
+@media screen and (min-width: 640px) and (max-width: 800px) { 
+	#welcome  { margin-bottom: 20px;
+	}
+}
+
+/*---------------------------------------------------------- 
+logon tile --> front page
+------------------------------------------------------------ */
+.logon { margin-top: 20px;
+		float : right;
+		margin-bottom : 20px;
+		width: 100%;
+}
+	
+.logon_input_usn{position : relative;
+			width: 100%;
+			margin-top:20px;
+			margin-left: 10%;
+ }
+
+.logon_username_icon:before {
+	display:block;
+	content: url("../../../templates/1/images/logon_usn.png");
+}
+
+.logon_password_icon:before {
+	display:block;
+	content: url("../../../templates/1/images/logon_pwd.png");
+}
+
+.logon_facebook_button:before {
+	display:block;
+	content: url("../../../templates/1/images/login-facebook.png");
+	width: auto; /*or your image's width*/
+	height: 50%; /*or your image's height*/
+}
+
+.logon_twitter_button:before {
+	display:block;
+	content: url("../../../templates/1/images/login_twitter.png");
+	width: auto; /*or your image's width*/
+	height: 50%; /*or your image's height*/
+}
+
+.logon_left{position: absolute;
+		left: 0;
+		width: 10%;
+}
+.logon_right{position: absolute;
+		left: 45px;
+		width: 90%;
+}
+ 
+.logon_input_pwd{position : relative;
+			width: 100%;
+			margin-top:85px;
+			margin-left: 10%;
+ }
+ 
+.logon_signin{ margin-top:170px; 
+}
+
+.logon_signin img{ display:block;
+    margin:auto;
+}
+
+.logon_signin img:hover{ opacity:0.7;}
+
+.logon_socmed{ margin-top:10px; 
+}
+
+.logon_socmed{ display:block;
+    margin:auto;
+	width: 50%;	
+}
+
+.logon_socmed:hover{ opacity:0.7;}
+
+/* 2 tiles and background welcome image */
+@media screen and (min-width: 640px) and (max-width: 800px) { 
+	.logon { margin-top: 0;}
+}
+
+/* 1 tile */
+@media screen and (max-width: 639px) { 
+	.logon  { width: 100%; 
+	margin-top: 20px;	
+	margin-bottom: 20px;
+	}
+}
+
+/*---------------------------------------------------------- 
+latest news tile --> front page
+------------------------------------------------------------ */
+.latest_news { margin-bottom: 20px;}
+
+@media screen and (min-width: 640px) and (max-width: 800px) { 
+	.latest_news { margin-top: 395px;
+	}
+}
+
+@media screen and (min-width: 1495px){ 
+	.latest_news   { float: left; width: 48%;} 
+}
+
+/*---------------------------------------------------------- 
+screenstar tile - front page
+------------------------------------------------------------ */
+.screenstar_position_front { margin-bottom: 20px;}
+
+@media screen and (min-width: 1495px){ 
+	.screenstar_position_front  { margin-top: 20px; width: 94%;} 
+}
+
+
+/*---------------------------------------------------------- 
+datequote tile - front page
+------------------------------------------------------------ */
+.datequote_position_front { 	margin-bottom: 20px; }
+
+.datequote_bg { background: url(../../../templates/1/images/datequote_bg.jpg) ;}
+
+/* 1 and 2 tiles */
+@media screen and (max-width: 800px) { 
+	.datequote_position_front { margin-top: 0;}
+}
+
+@media screen and (min-width: 1495px){ 
+	.datequote_position_front { float:left; width: 94%;} 
+}
+
+.datequote_bg p {text-align: center;}
+
+.datequote_day{ font-size : 85pt;
+		color : white; 
+		margin-top: 0;
+		margin-bottom: -20px;
+}
+
+.datequote_month { font-size : 30pt;
+		color : white;
+		margin-top: -10px;
+		margin-bottom: -10px;
+	}
+
+.datequote_year { font-size : 55pt;
+		text-align: center;
+		color : #cccccc; 
+		margin-top: -10px;
+	}
+
+.datequote_text { background: rgb(0, 80, 80);   /* Fallback for web browsers that doesn't support RGBa */
+        background: rgba(0, 80, 80, 0.6);   /* RGBa with 0.6 opacity */
+		color: white; 
+		padding-top: 10px;
+		padding-bottom: 10px;
+	}	
+
+/*---------------------------------------------------------- 
+Who is it - front page
+------------------------------------------------------------ */
+.whoisit_position_front { margin-bottom: 20px; }
+
+@media screen and (min-width: 1495px){ 
+	.whoisit_position_front  { float:right;} 
+}
+
+
+/*---------------------------------------------------------- 
+Latest reviews tile - front page
+------------------------------------------------------------ */
+.latest_reviews{ margin-bottom: 20px;}	
+		
+@media screen and (min-width: 1495px){ 
+	.latest_reviews  { width: 49%; float: right;} 
+}
+
+
+/*---------------------------------------------------------- 
+Did you know tile - front page
+------------------------------------------------------------ */
+.didyouknow_position_front{ margin-bottom: 20px; }	
+
+@media screen and (min-width: 1495px){ 
+	.didyouknow_position_front  {float:left; width:100%;} 
+}			
+
+/*---------------------------------------------------------- 
+Statistics tile - front page
+------------------------------------------------------------ */
+.statistics_position_front{ margin-bottom: 20px; }	
+
+.statistics_dark { color: #cccccc; }
+
+@media screen and (min-width: 1495px){ 
+	.statistics_position_front  {float:left; width:100%;} 
+}
+	
+/*---------------------------------------------------------- 
+Hotlinks tile - front page
+------------------------------------------------------------ */
+.hotlinks_position_front{ margin-bottom: 20px; }	
+
+@media screen and (min-width: 1495px){ 
+	.hotlinks_position_front {width: 94%; float: left;} 
+}				
+
+/*---------------------------------------------------------- 
+contact tiles - front page
+------------------------------------------------------------ */
+.contact_tiles { 
+			width: 100%; 
+			margin-bottom: 20px;
+			background: none;
+			border: none;
+}
+
+.contact_tiles >a >div{ margin-bottom: 20px;
+			max-width: 100%;
+}
+	
+@media screen and (min-width: 1495px){ 
+	.contact_tiles { width: 49%; float: right;} 
+}
+
+.contact_email_button {
+	display:block;
+	background-image: url("../../../templates/1/images/email.png");
+	background-repeat: no-repeat;
+	background-size: contain;
+}
+
+.contact_email_button >a {
+	display:block;
+	height: 120px;
+	width:320px;
+}
+
+.contact_facebook_button {
+	display:block;
+	background-image: url("../../../templates/1/images/facebook.png");
+	background-repeat: no-repeat;
+	background-size: contain;
+}
+
+.contact_facebook_button >a {
+	display:block;
+	height: 120px;
+	width:240px;
+}
+
+.contact_jukebox_button {
+	display:block;
+	background-image: url("../../../templates/1/images/jukebox.png");
+	background-repeat: no-repeat;
+	background-size: contain;
+}
+
+.contact_jukebox_button >a {
+	display:block;
+	height: 120px;
+	width:240px;
+}
+
+.contact_chat_button {
+	display:block;
+	background-image: url("../../../templates/1/images/chat.png");
+	background-repeat: no-repeat;
+	background-size: contain;
+}
+
+.contact_chat_button >a {
+	display:block;
+	height: 120px;
+	width:240px;
+}
+		
+/*---------------------------------------------------------- 
+ Footer
+------------------------------------------------------------ */
+.footer{ width: 100%;
+		float: left;	
+		border-top: 10px solid #01b5b5;
+		background: url(../images/bottom_bg_sides.jpg) left 0 repeat-x;
+	}
+
+.footer_logo{ color: white;
+		font-size: 10pt;
+		text-align: center;
+		height : 120px;
+		background: url(../images/footer_bg.jpg) center 0 no-repeat;
+	}
+	
+.footer_logo_image:before {
+	display:block;
+	content: url("../../../templates/1/images/footer_logo.png");
+}
+#footer_img {margin-left: auto;
+			margin-right: auto;
+			margin-bottom: 5px;	
+	}
+
+
+/*---------------------------------------------------------- 
+ Skin specific code for the search results
+------------------------------------------------------------ */	
+
+/* Component containers
+----------------------------------*/
+.ui-widget-content {
+	border: 1px solid #00d3d3;
+	background: #000000;
+	color: #ffffff;
+	width: 245px;
+	font-family: Audiowide;
+	font-size:13px;
+}
+
+/* Interaction states
+----------------------------------*/
+.ui-state-hover,
+.ui-widget-content .ui-state-hover,
+.ui-widget-header .ui-state-hover,
+.ui-state-focus,
+.ui-widget-content .ui-state-focus,
+.ui-widget-header .ui-state-focus {
+	border: 1px solid #000000;
+	background: #00d3d3;
+	color: #000;
+}
