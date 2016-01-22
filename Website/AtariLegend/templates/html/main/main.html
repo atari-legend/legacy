@@ -59,11 +59,13 @@
 						var logo_img_path = "../../../templates/" + $(this).attr('rel') + "/images/logos/top_logo01.png";
 						var logo_img_480_path = "../../../templates/" + $(this).attr('rel') + "/images/logos/top_logo01_480.png";
 						var logo_bee_path = "../../../templates/" + $(this).attr('rel') + "/images/top_right01.png";
+						var skin = $(this).attr('rel');
 						
 						$("link#main_stylesheet").attr("href",css_path);
 						$("#logo_img").attr("src",logo_img_path);
 						$("#logo_img_480").attr("src",logo_img_480_path);
 						$("#img_bee").attr("src",logo_bee_path);
+						$.post( "../../../php/main/front/skin_switcher.php?action=skinswitch&skin="+skin);
 						return false;
 					});
 			});
