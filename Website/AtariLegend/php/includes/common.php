@@ -39,7 +39,7 @@ if (login_check($mysqli) == true) {
 		   'permission' => $_SESSION['permission']));
 }
 
-include("../../includes/skin_switcher.php");
+include("../../includes/template_config.php");
 
 //transfer edit messages to template
 if( isset($_SESSION['edit_message']) )
