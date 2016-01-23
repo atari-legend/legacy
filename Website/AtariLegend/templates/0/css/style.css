@@ -378,6 +378,9 @@ th {
  General settings
 ------------------------------------------------------------ */
 /*********************************************************************/
+/****************************TOS 207 SKIN*****************************/
+/*********************************************************************/
+/*********************************************************************/
 /**** This is the css code for general skin specific css settings ****/
 /*********************************************************************/
 /*---------------------------------------------------------- 
@@ -875,6 +878,160 @@ a.standard_tile_link:hover, a.standard_tile_link:focus {
   margin-top: 0;
   height: 25px;
   background: #666666; }
+
+.centered_fieldset {
+  text-align: center;
+  margin: auto; }
+
+/*------------------------------------------------------------
+Standard table settings 
+-------------------------------------------------------------*/
+#column-left-cpanel {
+  width: 20%;
+  float: left;
+  margin-right: 1%; }
+
+#column-center-cpanel {
+  width: 58%;
+  float: left; }
+
+#column-right-cpanel {
+  width: 20%;
+  float: right;
+  margin-left: 1%; }
+
+@media screen and (max-width: 1280px) {
+  #column-left-cpanel {
+    width: 25%;
+    float: left; }
+
+  #column-center-cpanel {
+    width: 73%;
+    float: right; }
+
+  #column-right-cpanel {
+    display: none; } }
+.standard_table_list {
+  width: 100%;
+  border: solid 1px #b2b2b2;
+  background-color: #f3f3f3;
+  margin-left: auto;
+  margin-right: auto;
+  border-spacing: 0;
+  text-align: left; }
+
+.standard_table_list li {
+  color: black;
+  font-size: 16px;
+  text-align: center;
+  list-style-type: none; }
+
+.standard_table_list th {
+  border-bottom: solid 2px #b2b2b2;
+  background-color: #DBD7D1;
+  border-collapse: collapse;
+  padding-top: 3px;
+  padding-bottom: 3px;
+  padding-left: 3px;
+  margin: 0;
+  text-align: center; }
+
+.standard_table_list tr:nth-child(even) {
+  background-color: #f3f3f3; }
+
+.standard_table_list tr:nth-child(odd) {
+  background-color: #EFEFEF; }
+
+.standard_table_list tr:hover {
+  background-color: #DBD7D1; }
+
+.standard_table_list td {
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: 3px;
+  margin: 0; }
+
+.standard_table_center {
+  color: black;
+  font-size: 16px;
+  font-weight: 100;
+  text-align: center; }
+
+.standard_table_left {
+  color: black;
+  font-size: 16px;
+  font-weight: 100;
+  text-align: left;
+  padding-left: 2px; }
+
+.standard_table_right {
+  color: black;
+  font-size: 16px;
+  font-weight: 100;
+  text-align: right;
+  padding-right: 2px; }
+
+.standard_table_center img {
+  display: inline; }
+
+.topbutton_cpanel_small {
+  cursor: pointer;
+  border: 0;
+  background: white;
+  color: #182727;
+  height: 25px;
+  width: 80px;
+  font-size: 15px;
+  border-bottom: 3px solid black;
+  border-left: 1px solid black;
+  text-shadow: -1px 1px 5px white, 1px -1px 15px #acacac; }
+
+.topbutton_cpanel_small:hover {
+  background: black;
+  color: white;
+  border-bottom: 3px solid black; }
+
+/* for lower resolutions put the left and right below eachother */
+@media screen and (max-width: 799px) {
+  .main_container_cpanel {
+    display: flex;
+    flex-direction: column-reverse;
+    float: left;
+    width: 100%; }
+
+  #column-left-cpanel {
+    width: 100%;
+    float: left;
+    margin: auto; }
+
+  #column-center-cpanel {
+    width: 100%;
+    float: left;
+    margin: auto; }
+
+  #column-right-cpanel {
+    width: 100%;
+    float: right;
+    margin: auto; }
+
+  .main_container_cpanel > div {
+    width: 100%; }
+
+  .content_box_cpanel {
+    display: block;
+    margin: 0 auto; } }
+fieldset {
+  border: solid 1px #b2b2b2;
+  background: #DBD7D1;
+  padding: 8px;
+  font-size: 16px;
+  color: #122323; }
+
+legend {
+  border: solid 2px #b2b2b2;
+  padding: 1px 10px;
+  color: black;
+  background: #EFEFEF; }
 
 /* --> general skin specific css settings */
 /*---------------------------------------------------------- 
@@ -1476,6 +1633,9 @@ header nav input {
  Main website
 ------------------------------------------------------------ */
 /**************************************************************/
+/**********************TOS 207 SKIN****************************/
+/**************************************************************/
+/**************************************************************/
 /***This is the css code for the front page of the main site***/
 /**************************************************************/
 /*---------------------------------------------------------- 
@@ -1839,160 +1999,6 @@ contact tiles - front page
 
 /* --> Front page */
 /* *********************PART II : CPANEL*****************************/
-.centered_fieldset {
-  text-align: center;
-  margin: auto; }
-
-/*------------------------------------------------------------
-Standard table settings 
--------------------------------------------------------------*/
-#column-left-cpanel {
-  width: 20%;
-  float: left;
-  margin-right: 1%; }
-
-#column-center-cpanel {
-  width: 58%;
-  float: left; }
-
-#column-right-cpanel {
-  width: 20%;
-  float: right;
-  margin-left: 1%; }
-
-@media screen and (max-width: 1280px) {
-  #column-left-cpanel {
-    width: 25%;
-    float: left; }
-
-  #column-center-cpanel {
-    width: 73%;
-    float: right; }
-
-  #column-right-cpanel {
-    display: none; } }
-.standard_table_list {
-  width: 100%;
-  border: solid 1px #b2b2b2;
-  background-color: #f3f3f3;
-  margin-left: auto;
-  margin-right: auto;
-  border-spacing: 0;
-  text-align: left; }
-
-.standard_table_list li {
-  color: black;
-  font-size: 16px;
-  text-align: center;
-  list-style-type: none; }
-
-.standard_table_list th {
-  border-bottom: solid 2px #b2b2b2;
-  background-color: #DBD7D1;
-  border-collapse: collapse;
-  padding-top: 3px;
-  padding-bottom: 3px;
-  padding-left: 3px;
-  margin: 0;
-  text-align: center; }
-
-.standard_table_list tr:nth-child(even) {
-  background-color: #f3f3f3; }
-
-.standard_table_list tr:nth-child(odd) {
-  background-color: #EFEFEF; }
-
-.standard_table_list tr:hover {
-  background-color: #DBD7D1; }
-
-.standard_table_list td {
-  padding-top: 1px;
-  padding-bottom: 1px;
-  padding-left: 3px;
-  margin: 0; }
-
-.standard_table_center {
-  color: black;
-  font-size: 16px;
-  font-weight: 100;
-  text-align: center; }
-
-.standard_table_left {
-  color: black;
-  font-size: 16px;
-  font-weight: 100;
-  text-align: left;
-  padding-left: 2px; }
-
-.standard_table_right {
-  color: black;
-  font-size: 16px;
-  font-weight: 100;
-  text-align: right;
-  padding-right: 2px; }
-
-.standard_table_center img {
-  display: inline; }
-
-.topbutton_cpanel_small {
-  cursor: pointer;
-  border: 0;
-  background: white;
-  color: #182727;
-  height: 25px;
-  width: 80px;
-  font-size: 15px;
-  border-bottom: 3px solid black;
-  border-left: 1px solid black;
-  text-shadow: -1px 1px 5px white, 1px -1px 15px #acacac; }
-
-.topbutton_cpanel_small:hover {
-  background: black;
-  color: white;
-  border-bottom: 3px solid black; }
-
-/* for lower resolutions put the left and right below eachother */
-@media screen and (max-width: 799px) {
-  .main_container_cpanel {
-    display: flex;
-    flex-direction: column-reverse;
-    float: left;
-    width: 100%; }
-
-  #column-left-cpanel {
-    width: 100%;
-    float: left;
-    margin: auto; }
-
-  #column-center-cpanel {
-    width: 100%;
-    float: left;
-    margin: auto; }
-
-  #column-right-cpanel {
-    width: 100%;
-    float: right;
-    margin: auto; }
-
-  .main_container_cpanel > div {
-    width: 100%; }
-
-  .content_box_cpanel {
-    display: block;
-    margin: 0 auto; } }
-fieldset {
-  border: solid 1px #b2b2b2;
-  background: #DBD7D1;
-  padding: 8px;
-  font-size: 16px;
-  color: #122323; }
-
-legend {
-  border: solid 2px #b2b2b2;
-  padding: 1px 10px;
-  color: black;
-  background: #EFEFEF; }
-
 /*---------------------------------------------------------- 
 Front page
 ------------------------------------------------------------ */
