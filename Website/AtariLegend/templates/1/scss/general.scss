@@ -1,3 +1,7 @@
+/*********************************************************************/	
+/**************************LEGACY SKIN********************************/
+/*********************************************************************/
+
 /*********************************************************************/ 
 /**** This is the css code for general skin specific css settings ****/
 /*********************************************************************/ 
@@ -322,7 +326,7 @@ From a width of 801 we will be having rows of 3 tiles
 			margin-bottom:20px;
 	}
 	
-.standard_tile h2 { color: #00d3d3;
+.standard_tile h2 { color: $bg-color;
 			font-size: 10pt;
 			font-weight: 100;
 			font-style: italic;
@@ -454,7 +458,7 @@ From a width of 801 we will be having rows of 3 tiles
 
 .standard_list_entry_left img { max-width: 100%;
 		width: 80%;
-		box-shadow: 0 0 7px #00d3d3;
+		box-shadow: 0 0 7px $bg-color;
 		margin-left: 15px;
 }
 
@@ -518,3 +522,168 @@ From a width of 801 we will be having rows of 3 tiles
 	margin-top: 0;
 	height: 25px;
 }	
+
+#other{border-right: 1px solid #007878;}
+
+.centered_fieldset {
+	text-align:center;
+	margin: auto;
+
+}
+
+/*------------------------------------------------------------
+Standard table settings 
+-------------------------------------------------------------*/
+#column-left-cpanel { width: 20%; 
+	 float:left;
+	 margin-right: 1%;
+}
+
+#column-center-cpanel { width: 58%; 
+	 float:left;
+}	 
+
+#column-right-cpanel { width: 20%; 
+	 float:right;
+	 margin-left: 1%;
+}
+
+@media screen and (max-width: 1280px) { 	
+	#column-left-cpanel { width: 25%; 
+		 float:left;
+	}
+
+	#column-center-cpanel { width: 73%; 
+		 float:right;
+	}
+
+	#column-right-cpanel { display: none;
+	}
+
+}
+
+.standard_table_list {
+	width: 100%;
+	border: solid 1px black; 
+	background-color:#00d3d3;
+	margin-left:auto;
+	margin-right:auto;
+	border-spacing: 0;
+	text-align:left;
+}
+
+.standard_table_list  li {
+	color: white;
+	font-size: 10pt;
+	font-weight: 100;
+	text-align: center;
+	list-style-type: none;
+}
+
+.standard_table_list th {
+	border-bottom: solid 1px black;
+	background-color:#006f6f;
+	border-collapse: collapse;
+	padding-top:3px;
+	padding-bottom:3px;
+	padding-left:3px;
+	margin:0px;
+}
+
+.standard_table_list tr:nth-child(even){
+	background-color:#00d3d3;
+}
+
+.standard_table_list tr:nth-child(odd){
+	background-color:#006f6f;
+}
+
+.standard_table_list tr:hover {
+	background-color:#294f4f;
+}
+
+.standard_table_list td {
+	border-bottom: solid 1px black;
+	padding-top:1px;
+	padding-bottom:1px;
+	padding-left:3px;
+	margin:0px;
+}
+
+.standard_table_center { color: white;
+			font-size: 10pt;
+			font-weight: 100;
+			text-align: center;
+}
+
+.standard_table_left { color: white;
+			font-size: 10pt;
+			font-weight: 100;
+			text-align: left;
+			padding-left: 2px;
+}
+
+.standard_table_right { color: white;
+			font-size: 10pt;
+			font-weight: 100;
+			text-align: right;
+			padding-right: 2px;
+}
+
+.standard_table_center img {display: inline;}
+
+.topbutton_cpanel_small
+{
+  cursor: pointer;
+  border: 0;
+  background: #122323;
+  color: white;
+  height: 25px;
+  width: 80px;
+  font-size: 10pt;
+  border-bottom: 3px solid #122323;
+  border-left: 1px solid #122323;
+}
+
+.topbutton_cpanel_small:hover {
+  background:#006f6f;
+  color: white;
+  border-bottom: 3px solid #122323;
+}
+
+/* for lower resolutions put the left and right below eachother */
+@media screen and (max-width: 799px) { 	
+.main_container_cpanel {
+  display: flex;
+  flex-direction: column-reverse; 
+  float: left;
+  width:100%;
+}	
+	
+#column-left-cpanel { width:100%; float:left; margin:auto;  }
+#column-center-cpanel { width:100%; float:left; margin:auto;  }
+#column-right-cpanel { width:100%; float:right; margin:auto; }
+
+.main_container_cpanel >div {
+	width:100%;
+	}
+	
+.content_box_cpanel {
+		display: block;
+		margin: 0 auto;
+	}
+}
+
+fieldset { 
+	border: solid 1px black; 
+	background: $bg-color; 
+	padding: 8px;
+	font-size: 11pt;
+}
+
+legend{
+	border: black solid 1px;
+	padding: 1px 10px;
+	color: white;
+	background: #006f6f;
+}
