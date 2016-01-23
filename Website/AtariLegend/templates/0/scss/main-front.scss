@@ -51,21 +51,7 @@
 .trivia_tag { font-size:17px}
 .trivia_text{ font-size:16px; color:white }
 	
-/* 1 tile and a simplified intro screen */
-@media screen and (max-width: 639px) { 
-	#welcome  { visibility : hidden; }	
-}
 
-/* 2 tiles and background welcome image */
-@media screen and (min-width: 640px) and (max-width: 800px) { 
-	#welcome  { margin-bottom: 20px;
-	}
-}
-
-@media screen and (max-width: 1279px) {
-	#welcome  { margin-top: 20px;
-	}
-} 
 
 /*---------------------------------------------------------- 
 logon tile --> front page
@@ -139,39 +125,7 @@ logon tile --> front page
 
 .logon_socmed:hover{ opacity:0.7;}
 
-/* 2 tiles and background welcome image */
-@media screen and (min-width: 640px) and (max-width: 800px) { 
-	.logon { margin-top: 0; }
-}
 
-/* 1 tile */
-@media screen and (max-width: 639px) { 
-	.logon  { width: 100%; 
-	margin-top: 20px;	
-	}
-}
-
-/*---------------------------------------------------------- 
-latest news tile --> front page
------------------------------------------------------------- */
-
-@media screen and (min-width: 640px) and (max-width: 800px) { 
-	.latest_news { margin-top: 395px;
-	}
-}
-
-@media screen and (min-width: 1495px){ 
-	.latest_news   { float: left; width: 48%;} 
-}
-
-
-/*---------------------------------------------------------- 
-screenstar tile - front page
------------------------------------------------------------- */
-
-@media screen and (min-width: 1495px){ 
-	.screenstar_position_front  { width: 94%;margin-top: -40px;} 
-}
 
 /*---------------------------------------------------------- 
 datequote tile - front page
@@ -179,14 +133,6 @@ datequote tile - front page
 
 .datequote_bg { background: url(../../../templates/0/images/datequote_bg.jpg) ;}
 
-/* 1 and 2 tiles */
-@media screen and (max-width: 800px) { 
-	.datequote_position_front { margin-top: 0;}
-}
-
-@media screen and (min-width: 1495px){ 
-	.datequote_position_front { float:left; width: 94%;} 
-}
 
 .datequote_bg p {text-align: center;}
 
@@ -217,46 +163,10 @@ datequote tile - front page
 	}	
 
 /*---------------------------------------------------------- 
-Who is it - front page
------------------------------------------------------------- */
-
-@media screen and (min-width: 1495px){ 
-	.whoisit_position_front  { float:right;} 
-}
-
-/*---------------------------------------------------------- 
-Latest reviews tile - front page
------------------------------------------------------------- */
-		
-@media screen and (min-width: 1495px){ 
-	.latest_reviews  { width: 49%; float: right;} 
-}
-
-/*---------------------------------------------------------- 
-Did you know tile - front page
------------------------------------------------------------- */
-			
-@media screen and (min-width: 1495px){ 
-	.didyouknow_position_front  {float:left; width:100%;	} 
-}	
-
-/*---------------------------------------------------------- 
 Statistics tile - front page
 ------------------------------------------------------------ */
 
 .statistics_dark { color: #6a6a6a;}
-	
-@media screen and (min-width: 1495px){ 
-	.statistics_position_front  {float:left; width:100%;} 
-}
-	
-/*---------------------------------------------------------- 
-Hotlinks tile - front page
------------------------------------------------------------- */
-				
-@media screen and (min-width: 1495px){ 
-	.hotlinks_position_front {width: 94%; float: left;} 
-}				
 
 /*---------------------------------------------------------- 
 contact tiles - front page
@@ -324,10 +234,6 @@ contact tiles - front page
 	height: 120px;
 	width:240px;
 }
-
-@media screen and (min-width: 1495px){ 
-	.contact_tiles { width: 49%; float: right;} 
-}	
 		
 /*---------------------------------------------------------- 
  Footer
