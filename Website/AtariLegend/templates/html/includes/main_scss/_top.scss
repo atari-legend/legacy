@@ -6,18 +6,19 @@
 #top_background {
 	width: 100%;
 	float: left;
-	display: block;
-	height:100%;
 	@if $skin-name == legacy {
 		background: url(../../../templates/1/images/top_bg.jpg) 0 0 no-repeat;
 	}	
 	@else if $skin-name == tos { 
 		background: url(../../../templates/0/images/top_bg.jpg) 0 0 no-repeat;
 		border-bottom: 2px solid black;
+		display: block;
+		height:100%;
 	}
 	@else{ 
 		background: url(../../../templates/2/images/top_bg.jpg) 0 0 no-repeat;
 		height:100%;
+		display: block;
 	}
 }
 	
