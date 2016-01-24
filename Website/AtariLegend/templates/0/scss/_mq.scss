@@ -36,6 +36,34 @@
 	#user_stats{ width:100%; margin-bottom: 20px; }	
 	#main_stats_position_front{ width:100%; float: left;}
 	#left_nav_position_front{ width:100%;  float: left;}
+	
+	#quick_search_options{
+	display:table; 
+	width:50%; 
+	margin-left:40%;
+	margin-right: auto;
+	text-align:left;	
+	}
+	
+	.main_container_cpanel {
+	display: flex;
+	flex-direction: column-reverse; 
+	float: left;
+	width:100%;
+}	
+	
+#column-left-cpanel { width:100%; float:left; margin:auto;  }
+#column-center-cpanel { width:100%; float:left; margin:auto;  }
+#column-right-cpanel { width:100%; float:right; margin:auto; }
+
+.main_container_cpanel >div {
+	width:100%;
+	}
+	
+.content_box_cpanel {
+		display: block;
+		margin: 0 auto;
+	}
 }
 
 @media screen and (max-width: 1199px) { 
@@ -60,15 +88,6 @@
 	#quick_search_options{margin-left:5%; width:100%; }
 }
 
-@media screen and (max-width: 799px) { 
-	#quick_search_options{display:table; 
-		width:50%; 
-		margin-left:40%;
-		margin-right: auto;
-		text-align:left;	
-	}
-}
-
 @media screen and (max-width: 599px) { 
 	#quick_search_options { margin-left:30%;}
 }
@@ -88,6 +107,14 @@
 	#user_details{ margin-top: 20px;}	
 	#leftnav_position_userdetails{ margin-top: 20px;}
 	#child_1, #child_2{ width:100%;}
+	
+	.info_td,.year_td,#info_th,#year_th{display:none;}
+	
+	#column-left-cpanel { width: 25%; float:left;}
+
+	#column-center-cpanel { width: 73%; float:right;}
+
+	#column-right-cpanel { display: none;}
 }
  
 @media screen and (max-width: 1279px) { 
@@ -176,11 +203,6 @@
 		width: 100%;
 	}
 	#child_1, #child_2{width:100%; margin-left:10%;}
-}
-
-
-@media screen and (max-width: 1280px) { 
- .info_td,.year_td,#info_th,#year_th{display:none;}
 }
 
 @media screen and (max-width: 1040px) { 
@@ -398,41 +420,7 @@ Background images
 	.standard_list_entry{height: 180px;}
 }
 
-@media screen and (max-width: 1280px) { 	
-	#column-left-cpanel { width: 25%; 
-		 float:left;
-	}
-
-	#column-center-cpanel { width: 73%; 
-		 float:right;
-	}
-
-	#column-right-cpanel { display: none;}
-}
-
 /* for lower resolutions put the left and right below eachother */
-@media screen and (max-width: 799px) { 	
-.main_container_cpanel {
-  display: flex;
-  flex-direction: column-reverse; 
-  float: left;
-  width:100%;
-}	
-	
-#column-left-cpanel { width:100%; float:left; margin:auto;  }
-#column-center-cpanel { width:100%; float:left; margin:auto;  }
-#column-right-cpanel { width:100%; float:right; margin:auto; }
-
-
-.main_container_cpanel >div {
-	width:100%;
-	}
-	
-.content_box_cpanel {
-		display: block;
-		margin: 0 auto;
-	}
-} 
 			
 /*---------------------------------------------------------- 
  resolutions tested!

@@ -397,8 +397,7 @@ load the main font
   font-style: normal; }
 
 * {
-  margin: 0;
-  padding: 0; }
+  margin: 0; }
 
 html {
   overflow-y: scroll;
@@ -748,7 +747,8 @@ Standard table settings
   margin-left: auto;
   margin-right: auto;
   border-spacing: 0;
-  text-align: left; }
+  text-align: left;
+  padding: 0; }
 
 .standard_table_list li {
   color: black;
@@ -847,7 +847,6 @@ legend {
   float: left;
   background: url(../images/top_bg.jpg) 0 0 no-repeat;
   border-bottom: 2px solid black;
-  display: block;
   height: 100%; }
 
 /* logos */
@@ -1218,10 +1217,11 @@ body, html {
   position: absolute;
   z-index: 1;
   left: -99999em;
-  top: 34px; }
+  padding: 0; }
 
 #main_nav_ul > li:hover > ul {
-  left: auto; }
+  left: auto;
+  border-top: 3px black solid; }
 
 #main_nav_ul > li li:hover > ul {
   left: 100%; }
@@ -2273,7 +2273,7 @@ Games list
 
 #quick_search_games_list {
   margin-top: 20px;
-  margin-bottom: 00px;
+  margin-bottom: 30px;
   float: left; }
 
 #leftnav_position_games_list {
@@ -2471,7 +2471,7 @@ Games comment edit
 ------------------------------------------------------------ */
 #quick_search_games_comment_edit {
   margin-top: 20px;
-  margin-bottom: 00px;
+  margin-bottom: 30px;
   float: left; }
 
 #leftnav_position_games_comment_edit {
@@ -2550,7 +2550,6 @@ Background images
 /*  4 tiles and background welcome image */
 
 /* for lower resolutions put the left and right below eachother */
-
 /*---------------------------------------------------------- 
  resolutions tested!
 ------------------------------------------------------------ */
@@ -2655,9 +2654,7 @@ Background images
   #logo_img_480 {
     display: none; }
   #right {
-    width: 35%;
-    display: block;
-    text-align: right; } }
+    width: 35%; } }
 @media screen and (min-width: 1280px) and (max-width: 2304px) {
   .container {
     margin-top: 34px; } }
