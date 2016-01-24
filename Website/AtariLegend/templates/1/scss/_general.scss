@@ -172,11 +172,7 @@ From a width of 801 we will be having rows of 3 tiles
 		position:relative;
 }
 
-.standard_tile_image{ width: 100%; 	
-		position:absolute;
-		left:0;
-		top:0;
-}
+.standard_tile_image{ width: 100%; }
 
 .standard_tile_subtext
 {
@@ -198,120 +194,15 @@ From a width of 801 we will be having rows of 3 tiles
         background: rgba(0, 80, 80, 0.6);   /* RGBa with 0.6 opacity */
 		padding-top:3%;
 		font-size : 17pt;
-		margin-top : 46%;
+		bottom: 0;
 		color : white; 	
 		z-index:1;
 		position:absolute;
 	    border-bottom: 2px solid #01b5b5;
 }
 
-@media screen and (max-width: 5501px) { 
-.standard_tile_title{ margin-top : 48.5%;
-	}
-}
-
-@media screen and (max-width: 3501px) { 
-.standard_tile_title{ margin-top : 48%;
-	}
-}
-
-@media screen and (max-width: 1921px) { 
-.standard_tile_title{ margin-top : 47.5%;
-	}
-}
-
-@media screen and (max-width: 1801px) { 
-.standard_tile_title{ margin-top : 47%;
-	}
-}
-
-@media screen and (max-width: 1701px) { 
-.standard_tile_title{ margin-top : 46%;
-	}
-}
-
-@media screen and (max-width: 1601px) { 
-.standard_tile_title{ margin-top : 45%;
-	}
-}
-
-@media screen and (max-width: 1501px) { 
-.standard_tile_title{ margin-top : 46.2%;
-	}
-}
-
-@media screen and (max-width: 1401px) { 
-.standard_tile_title{ margin-top : 47%;
-	}
-}
-
-@media screen and (max-width: 1301px) { 
-.standard_tile_title{ margin-top : 46%;
-	}
-}
-
-@media screen and (max-width: 1201px) { 
-.standard_tile_title{ margin-top : 44.5%;
-	}
-}
-
-@media screen and (max-width: 1101px) { 
-.standard_tile_title{ margin-top : 43%;
-	}
-}
-
- @media screen and (max-width: 1001px) { 
-.standard_tile_title{ margin-top : 42%;
-	}
-}
-
- @media screen and (max-width: 850px) { 
-.standard_tile_title{ margin-top : 38.5%;
-	}
-}
-
-@media screen and (max-width: 800px) { 
-.standard_tile_title{ margin-top : 44.5%;
-	}
-}
-
-@media screen and (max-width: 700px) { 
-.standard_tile_title{ margin-top : 41.5%;
-	}
-}
-
-@media screen and (max-width: 639px) { 
-.standard_tile_title{ margin-top : 51%;
-	}
-}
-
-@media screen and (max-width: 525px) { 
-.standard_tile_title{ margin-top : 49%;
-	}
-}
-
-@media screen and (max-width: 480px) { 
-.standard_tile_title{ margin-top : 47.5%;
-	}
-}
-
-@media screen and (max-width: 360px) { 
-.standard_tile_title{ margin-top : 44%;
-	}
-}
-
-@media screen and (max-width: 320px) { 
-.standard_tile_title{ margin-top : 41%;
-	}
-}
-
-@media screen and (max-width: 250px) { 
-.standard_tile_title{ margin-top : 39%;
-	}
-}
-
-.standard_tile_explanation { position: relative;
-					margin-top: 65%;
+.standard_tile_explanation { 
+					position: relative;
 					margin-bottom: 4%;
 					padding-left: 3%;
 					padding-right: 3%;

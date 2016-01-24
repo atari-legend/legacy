@@ -499,11 +499,13 @@
   z-index: 1;
   left: -99999em;
   @if $skin-name == legacy {top: 61px;}
-  @else if $skin-name == tos {top: 34px;}
+  @else if $skin-name == tos {padding:0;}
   @else {}
 }
 #main_nav_ul > li:hover > ul {
   left: auto;
+  @if $skin-name == tos {border-top: 3px black solid;}
+  
 }
 #main_nav_ul > li li:hover > ul { 
   left: 100%;
