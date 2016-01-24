@@ -1,0 +1,181 @@
+/*************************************************************/	
+/**********************PICASSO SKIN***************************/
+/*************************************************************/ 
+
+/*************************************************************/	
+/********CPanel MAIN structure and LEFT and RIGHT css*********/
+/*************************************************************/ 
+
+/*---------------------------------------------------------- 
+Front page
+------------------------------------------------------------ */
+#user_stats{ float:right; width:48%; margin-bottom: 20px;}	
+#welcome_cpanel{ margin-top: 390x; float: left; width:48%; margin-bottom: 20px;}	
+#left_nav_position_front{ margin-top: 50px; margin-bottom: 20px; float: left;}
+#main_stats_position_front{ margin-top: 50px; margin-bottom: 20px;}
+#quick_search_position_front{ margin-top: 50px; margin-bottom: 20px; float: right;}
+	
+@media screen and (max-width: 1279px) {  
+#left_nav_position_front{ margin-top: 20px;}
+#main_stats_position_front{ margin-top: 20px;}
+}
+
+.user_stats_img{ max-width: 100%;
+		box-shadow: 0 0 12px black;	
+		opacity: 0.8;
+		filter: alpha(opacity=40); /* For IE8 and earlier */
+		margin-bottom: 10px;
+}
+
+/* Make the table view responsive */
+@media screen and (max-width: 799px) { 
+	#welcome_cpanel{ width:100%; margin-top: 10px; }		
+	#user_stats{ width:100%; }	
+	#main_stats_position_front{ width:100%; float: left; }
+	#left_nav_position_front{ width:100%;  float: left;}
+}
+
+@media screen and (max-width: 480px) { 
+	#welcome_cpanel{ width:100%; margin-top: 0;}	
+	#main_stats_position_front{ margin-top: -5px;}
+}
+
+.main_stats_container {
+  display: flex;
+  align-items: flex-start; 
+ }
+  
+#child_some_stats { width:45%; float:left;}
+#child_good_karma,#child_bad_karma{ width:27%; float:left;}
+
+@media screen and (max-width: 1199px) { 
+	.main_stats_container {
+	  flex-direction: column; 
+	}	
+		
+	#child_some_stats,#child_good_karma,#child_bad_karma{width:100%; float:left;}
+	#child_good_karma,#child_bad_karma{margin-top:20px}
+
+	.main_stats_container >div {
+		width:100%;
+		}
+		
+	.main_stats_child {
+			display: block;
+			margin: 0 auto;
+		}
+}
+
+.main_stats_child  table { width:98%;}
+#user_stats table { width:100%;}
+#welcome_cpanel table { width:100%;}
+
+/*---------------------------------------------------------- 
+Left nav
+------------------------------------------------------------ */
+#leftnav_position_front { margin-top: 20px; margin-bottom: 30px; float: left;
+}
+
+.left_nav_section{
+	font-weight: bold;
+	border-bottom: solid 2px #b2b2b2;
+	border-top: solid 2px #b2b2b2;
+	background-color:#DBD7D1;
+	border-collapse: collapse;
+	padding-top:3px;
+	padding-bottom:3px;
+	padding-left:3px;
+	margin:0;
+	text-align: center;
+	list-style-type: none;
+}
+
+.left_nav_link:link { 
+	color: #122323;
+	font-size: 11pt;
+}
+
+.left_nav_link:visited { 
+	color: #122323;
+}
+
+.left_nav_link:hover { 
+	color: #6a6a6a;
+}
+
+/*---------------------------------------------------------- 
+Quick search games
+------------------------------------------------------------ */
+.quick_search_check {margin-right: 5px;}
+
+@media screen and (max-width: 1279px) { 
+	#quick_search_games_main{ margin-top: 20px;}
+}	
+
+#quick_search_options{display:table; 
+	width:75%; 
+	margin-left:auto;
+	margin-right: auto;
+	text-align:left;		
+}
+
+.quick_search_games_button
+{
+    cursor: pointer;
+	border:2px solid black;
+	background: #161c71;
+	color:white;
+	font-weight: bold;
+	border-radius: 0 15px 15px 0;
+	margin-left: 2px;
+	height: 25px;
+	width: 80px;
+	font-size: 10pt;
+}
+
+.quick_search_games_button:hover {
+  background: #dbd7d1;
+  color: black;
+  border:2px solid #4f4f4f;
+}
+
+#quick_search_pub_select{ 
+    background: #666666;
+	width: 185px;
+	margin-top: 0;
+	height: 25px;
+}
+
+#quick_search_dev_select{ 
+	background: #666666;
+	width: 185px;
+	margin-top: 0;
+	height: 25px;
+}
+
+#quick_search_small_select{
+    background: #666666; 
+	width: 50px;
+	height: 25px;
+}
+
+@media screen and (max-width: 1099px) { 
+	#quick_search_options{margin-left:5%; width:100%; }
+}
+
+@media screen and (max-width: 799px) { 
+	#quick_search_options{display:table; 
+		width:50%; 
+		margin-left:40%;
+		margin-right: auto;
+		text-align:left;	
+	}
+}
+
+@media screen and (max-width: 599px) { 
+	#quick_search_options { margin-left:30%;}
+}
+
+@media screen and (max-width: 399px) { 
+	#quick_search_options { width:75%; margin-left:15%;}
+}
