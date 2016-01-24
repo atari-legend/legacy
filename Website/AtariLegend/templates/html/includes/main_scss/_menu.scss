@@ -504,7 +504,7 @@
 }
 #main_nav_ul > li:hover > ul {
   left: auto;
-  if $skin-name == tos {border-top: 3px black solid;}
+  @if $skin-name == tos {border-top: 3px black solid;}
   
 }
 #main_nav_ul > li li:hover > ul { 

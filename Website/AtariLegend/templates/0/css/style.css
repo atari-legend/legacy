@@ -847,7 +847,6 @@ legend {
   float: left;
   background: url(../images/top_bg.jpg) 0 0 no-repeat;
   border-bottom: 2px solid black;
-  display: block;
   height: 100%; }
 
 /* logos */
@@ -2274,7 +2273,7 @@ Games list
 
 #quick_search_games_list {
   margin-top: 20px;
-  margin-bottom: 00px;
+  margin-bottom: 30px;
   float: left; }
 
 #leftnav_position_games_list {
@@ -2472,7 +2471,7 @@ Games comment edit
 ------------------------------------------------------------ */
 #quick_search_games_comment_edit {
   margin-top: 20px;
-  margin-bottom: 00px;
+  margin-bottom: 30px;
   float: left; }
 
 #leftnav_position_games_comment_edit {
@@ -2551,7 +2550,6 @@ Background images
 /*  4 tiles and background welcome image */
 
 /* for lower resolutions put the left and right below eachother */
-
 /*---------------------------------------------------------- 
  resolutions tested!
 ------------------------------------------------------------ */
