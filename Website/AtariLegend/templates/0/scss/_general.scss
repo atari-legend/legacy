@@ -21,8 +21,7 @@ load the main font
     font-style: normal;
 }
 
-* { 	margin: 0; padding: 0; 
-}
+* { margin: 0;}
 
 html { overflow-y: scroll; 
 	overflow-x: hidden;
@@ -366,6 +365,7 @@ Standard table settings
 	margin-right:auto;
 	border-spacing: 0;
 	text-align:left;
+	padding:0;
 }
 
 .standard_table_list  li {

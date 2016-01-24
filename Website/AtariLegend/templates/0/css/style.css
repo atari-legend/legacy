@@ -397,8 +397,7 @@ load the main font
   font-style: normal; }
 
 * {
-  margin: 0;
-  padding: 0; }
+  margin: 0; }
 
 html {
   overflow-y: scroll;
@@ -748,7 +747,8 @@ Standard table settings
   margin-left: auto;
   margin-right: auto;
   border-spacing: 0;
-  text-align: left; }
+  text-align: left;
+  padding: 0; }
 
 .standard_table_list li {
   color: black;
@@ -1218,10 +1218,11 @@ body, html {
   position: absolute;
   z-index: 1;
   left: -99999em;
-  top: 34px; }
+  padding: 0; }
 
 #main_nav_ul > li:hover > ul {
-  left: auto; }
+  left: auto;
+  border-top: 3px black solid; }
 
 #main_nav_ul > li li:hover > ul {
   left: 100%; }
@@ -2655,9 +2656,7 @@ Background images
   #logo_img_480 {
     display: none; }
   #right {
-    width: 35%;
-    display: block;
-    text-align: right; } }
+    width: 35%; } }
 @media screen and (min-width: 1280px) and (max-width: 2304px) {
   .container {
     margin-top: 34px; } }
