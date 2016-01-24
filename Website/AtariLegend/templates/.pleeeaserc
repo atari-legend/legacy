@@ -1,6 +1,6 @@
 {
-    "in": "0/scss/style.scss",
-    "out": "0/css/style.css",
+    "in": "1/scss/style.scss",
+    "out": "1/css/style.css",
     "sourcemaps": false,
      "sass": true,
      "minifier": false,
