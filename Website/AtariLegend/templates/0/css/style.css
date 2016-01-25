@@ -9,10 +9,10 @@
 ------------------------------------------------------------ */
 /*! normalize-scss | MIT/GPLv2 License | bit.ly/normalize-scss */
 /**
-     * 1. Set default font family to sans-serif.
-     * 2. Prevent iOS and IE text size adjust after device orientation change,
-     *    without disabling user zoom.
-     */
+ * 1. Set default font family to sans-serif.
+ * 2. Prevent iOS and IE text size adjust after device orientation change,
+ *    without disabling user zoom.
+ */
 html {
   font-family: sans-serif;
   /* 1 */
@@ -22,19 +22,19 @@ html {
   /* 2 */ }
 
 /**
-     * Remove default margin.
-     */
+ * Remove default margin.
+ */
 body {
   margin: 0; }
 
 /* HTML5 display definitions
-       ========================================================================== */
+   ========================================================================== */
 /**
-     * Correct `block` display not defined for any HTML5 element in IE 8/9.
-     * Correct `block` display not defined for `details` or `summary` in IE 10/11
-     * and Firefox.
-     * Correct `block` display not defined for `main` in IE 11.
-     */
+ * Correct `block` display not defined for any HTML5 element in IE 8/9.
+ * Correct `block` display not defined for `details` or `summary` in IE 10/11
+ * and Firefox.
+ * Correct `block` display not defined for `main` in IE 11.
+ */
 article,
 aside,
 details,
@@ -51,9 +51,9 @@ summary {
   display: block; }
 
 /**
-     * 1. Correct `inline-block` display not defined in IE 8/9.
-     * 2. Normalize vertical alignment of `progress` in Chrome, Firefox, and Opera.
-     */
+ * 1. Correct `inline-block` display not defined in IE 8/9.
+ * 2. Normalize vertical alignment of `progress` in Chrome, Firefox, and Opera.
+ */
 audio,
 canvas,
 progress,
@@ -64,87 +64,87 @@ video {
   /* 2 */ }
 
 /**
-     * Prevent modern browsers from displaying `audio` without controls.
-     * Remove excess height in iOS 5 devices.
-     */
+ * Prevent modern browsers from displaying `audio` without controls.
+ * Remove excess height in iOS 5 devices.
+ */
 audio:not([controls]) {
   display: none;
   height: 0; }
 
 /**
-       * Address `[hidden]` styling not present in IE 8/9/10.
-       */
+ * Address `[hidden]` styling not present in IE 8/9/10.
+ */
 [hidden] {
   display: none; }
 
 /**
-     * Hide the `template` element in IE 8/9/10/11, Safari, and Firefox < 22.
-     */
+ * Hide the `template` element in IE 8/9/10/11, Safari, and Firefox < 22.
+ */
 template {
   display: none; }
 
 /* Links
-       ========================================================================== */
+   ========================================================================== */
 /**
-       * Remove the gray background color from active links in IE 10.
-       */
+ * Remove the gray background color from active links in IE 10.
+ */
 a {
   background-color: transparent; }
 
 /**
-     * Improve readability of focused elements when they are also in an
-     * active/hover state.
-     */
+ * Improve readability of focused elements when they are also in an
+ * active/hover state.
+ */
 a:active,
 a:hover {
   outline: 0; }
 
 /* Text-level semantics
-       ========================================================================== */
+   ========================================================================== */
 /**
-     * Address styling not present in IE 8/9/10/11, Safari, and Chrome.
-     */
+ * Address styling not present in IE 8/9/10/11, Safari, and Chrome.
+ */
 abbr[title] {
   border-bottom: 1px dotted; }
 
 /**
-     * Address style set to `bolder` in Firefox 4+, Safari, and Chrome.
-     */
+ * Address style set to `bolder` in Firefox 4+, Safari, and Chrome.
+ */
 b,
 strong {
   font-weight: bold; }
 
 /**
-     * Address styling not present in Safari and Chrome.
-     */
+ * Address styling not present in Safari and Chrome.
+ */
 dfn {
   font-style: italic; }
 
 /**
-     * Address variable `h1` font-size and margin within `section` and `article`
-     * contexts in Firefox 4+, Safari, and Chrome.
-     */
+ * Address variable `h1` font-size and margin within `section` and `article`
+ * contexts in Firefox 4+, Safari, and Chrome.
+ */
 h1 {
   font-size: 2em;
   /* Set 1 unit of vertical rhythm on the top and bottom margins. */
   margin: 0.75em 0; }
 
 /**
-       * Address styling not present in IE 8/9.
-       */
+ * Address styling not present in IE 8/9.
+ */
 mark {
   background: #ff0;
   color: #000; }
 
 /**
-     * Address inconsistent and variable font size in all browsers.
-     */
+ * Address inconsistent and variable font size in all browsers.
+ */
 small {
   font-size: 80%; }
 
 /**
-     * Prevent `sub` and `sup` affecting `line-height` in all browsers.
-     */
+ * Prevent `sub` and `sup` affecting `line-height` in all browsers.
+ */
 sub,
 sup {
   font-size: 75%;
@@ -159,44 +159,43 @@ sub {
   bottom: -0.25em; }
 
 /* Embedded content
-       ========================================================================== */
+   ========================================================================== */
 /**
-       * Remove border when inside `a` element in IE 8/9/10.
-       */
+ * Remove border when inside `a` element in IE 8/9/10.
+ */
 img {
   border: 0; }
 
 /**
-     * Correct overflow not hidden in IE 9/10/11.
-     */
+ * Correct overflow not hidden in IE 9/10/11.
+ */
 svg:not(:root) {
   overflow: hidden; }
 
 /* Grouping content
-       ========================================================================== */
+   ========================================================================== */
 /**
-       * Address margin not present in IE 8/9 and Safari.
-       */
+ * Address margin not present in IE 8/9 and Safari.
+ */
 figure {
   margin: 1.5em 40px; }
 
 /**
-     * Address differences between Firefox and other browsers.
-     */
+ * Address differences between Firefox and other browsers.
+ */
 hr {
-  -moz-box-sizing: content-box;
-       box-sizing: content-box;
+  box-sizing: content-box;
   height: 0; }
 
 /**
-     * Contain overflow in all browsers.
-     */
+ * Contain overflow in all browsers.
+ */
 pre {
   overflow: auto; }
 
 /**
-     * Address odd `em`-unit font size rendering in all browsers.
-     */
+ * Address odd `em`-unit font size rendering in all browsers.
+ */
 code,
 kbd,
 pre,
@@ -205,19 +204,19 @@ samp {
   font-size: 1em; }
 
 /* Forms
-       ========================================================================== */
+   ========================================================================== */
 /**
-     * Known limitation: by default, Chrome and Safari on OS X allow very limited
-     * styling of `select`, unless a `border` property is set.
-     */
+ * Known limitation: by default, Chrome and Safari on OS X allow very limited
+ * styling of `select`, unless a `border` property is set.
+ */
 /**
-     * 1. Correct color not being inherited.
-     *    Known issue: affects color of disabled elements.
-     * 2. Correct font properties not being inherited.
-     * 3. Address margins set differently in Firefox 4+, Safari, and Chrome.
-     * 4. Address `font-family` inconsistency between `textarea` and other form in IE 7
-     * 5. Improve appearance and consistency with IE 6/7.
-     */
+ * 1. Correct color not being inherited.
+ *    Known issue: affects color of disabled elements.
+ * 2. Correct font properties not being inherited.
+ * 3. Address margins set differently in Firefox 4+, Safari, and Chrome.
+ * 4. Address `font-family` inconsistency between `textarea` and other form in IE 7
+ * 5. Improve appearance and consistency with IE 6/7.
+ */
 button,
 input,
 optgroup,
@@ -231,30 +230,30 @@ textarea {
   /* 3 */ }
 
 /**
-     * Address `overflow` set to `hidden` in IE 8/9/10/11.
-     */
+ * Address `overflow` set to `hidden` in IE 8/9/10/11.
+ */
 button {
   overflow: visible; }
 
 /**
-     * Address inconsistent `text-transform` inheritance for `button` and `select`.
-     * All other form control elements do not inherit `text-transform` values.
-     * Correct `button` style inheritance in Firefox, IE 8/9/10/11, and Opera.
-     * Correct `select` style inheritance in Firefox.
-     */
+ * Address inconsistent `text-transform` inheritance for `button` and `select`.
+ * All other form control elements do not inherit `text-transform` values.
+ * Correct `button` style inheritance in Firefox, IE 8/9/10/11, and Opera.
+ * Correct `select` style inheritance in Firefox.
+ */
 button,
 select {
   text-transform: none; }
 
 /**
-     * 1. Avoid the WebKit bug in Android 4.0.* where (2) destroys native `audio`
-     *    and `video` controls.
-     * 2. Correct inability to style clickable `input` types in iOS.
-     * 3. Improve usability and consistency of cursor style between image-type
-     *    `input` and others.
-     * 4. Remove inner spacing in IE 7 without affecting normal text inputs.
-     *    Known issue: inner spacing remains in IE 6.
-     */
+ * 1. Avoid the WebKit bug in Android 4.0.* where (2) destroys native `audio`
+ *    and `video` controls.
+ * 2. Correct inability to style clickable `input` types in iOS.
+ * 3. Improve usability and consistency of cursor style between image-type
+ *    `input` and others.
+ * 4. Remove inner spacing in IE 7 without affecting normal text inputs.
+ *    Known issue: inner spacing remains in IE 6.
+ */
 button,
 html input[type="button"],
 input[type="reset"],
@@ -265,84 +264,82 @@ input[type="submit"] {
   /* 3 */ }
 
 /**
-     * Re-set default cursor for disabled elements.
-     */
+ * Re-set default cursor for disabled elements.
+ */
 button[disabled],
 html input[disabled] {
   cursor: default; }
 
 /**
-     * Remove inner padding and border in Firefox 4+.
-     */
+ * Remove inner padding and border in Firefox 4+.
+ */
 button::-moz-focus-inner,
 input::-moz-focus-inner {
   border: 0;
   padding: 0; }
 
 /**
-     * Address Firefox 4+ setting `line-height` on `input` using `!important` in
-     * the UA stylesheet.
-     */
+ * Address Firefox 4+ setting `line-height` on `input` using `!important` in
+ * the UA stylesheet.
+ */
 input {
   line-height: normal; }
 
 /**
-       * It's recommended that you don't attempt to style these elements.
-       * Firefox's implementation doesn't respect box-sizing, padding, or width.
-       *
-       * 1. Address box sizing set to `content-box` in IE 8/9/10.
-       * 2. Remove excess padding in IE 8/9/10.
-       * 3. Remove excess padding in IE 7.
-       *    Known issue: excess padding remains in IE 6.
-       */
+ * It's recommended that you don't attempt to style these elements.
+ * Firefox's implementation doesn't respect box-sizing, padding, or width.
+ *
+ * 1. Address box sizing set to `content-box` in IE 8/9/10.
+ * 2. Remove excess padding in IE 8/9/10.
+ * 3. Remove excess padding in IE 7.
+ *    Known issue: excess padding remains in IE 6.
+ */
 input[type="checkbox"],
 input[type="radio"] {
-  -moz-box-sizing: border-box;
-       box-sizing: border-box;
+  box-sizing: border-box;
   /* 1 */
   padding: 0;
   /* 2 */ }
 
 /**
-     * Fix the cursor style for Chrome's increment/decrement buttons. For certain
-     * `font-size` values of the `input`, it causes the cursor style of the
-     * decrement button to change from `default` to `text`.
-     */
+ * Fix the cursor style for Chrome's increment/decrement buttons. For certain
+ * `font-size` values of the `input`, it causes the cursor style of the
+ * decrement button to change from `default` to `text`.
+ */
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
   height: auto; }
 
 /**
-     * 1. Address `appearance` set to `searchfield` in Safari and Chrome.
-     * 2. Address `box-sizing` set to `border-box` in Safari and Chrome.
-     */
+ * 1. Address `appearance` set to `searchfield` in Safari and Chrome.
+ * 2. Address `box-sizing` set to `border-box` in Safari and Chrome.
+ */
 input[type="search"] {
   -webkit-appearance: textfield;
   /* 1 */
-  -moz-box-sizing: content-box;
-       box-sizing: content-box;
+  box-sizing: content-box;
   /* 2 */
   /**
-       * Remove inner padding and search cancel button in Safari and Chrome on OS X.
-       * Safari (but not Chrome) clips the cancel button when the search input has
-       * padding (and `textfield` appearance).
-       */ }
+   * Remove inner padding and search cancel button in Safari and Chrome on OS X.
+   * Safari (but not Chrome) clips the cancel button when the search input has
+   * padding (and `textfield` appearance).
+   */ }
   input[type="search"]::-webkit-search-cancel-button, input[type="search"]::-webkit-search-decoration {
     -webkit-appearance: none; }
 
 /**
-     * Define consistent border, margin, and padding.
-     */
+ * Define consistent border, margin, and padding.
+ */
 fieldset {
   border: 1px solid #c0c0c0;
   margin: 0 2px;
   padding: 0.35em 0.625em 0.75em; }
 
 /**
-     * 1. Correct `color` not being inherited in IE 8/9/10/11.
-     * 2. Remove padding so people aren't caught out if they zero out fieldsets.
-     * 3. Correct alignment displayed oddly in IE 6/7.
-     */
+ * 1. Correct `color` not being inherited in IE 8/9/10/11.
+ * 2. Remove padding so people aren't caught out if they zero out fieldsets.
+ * 3. Correct alignment displayed oddly in IE 6/7.
+ */
 legend {
   border: 0;
   /* 1 */
@@ -350,23 +347,23 @@ legend {
   /* 2 */ }
 
 /**
-     * Remove default vertical scrollbar in IE 8/9/10/11.
-     */
+ * Remove default vertical scrollbar in IE 8/9/10/11.
+ */
 textarea {
   overflow: auto; }
 
 /**
-     * Don't inherit the `font-weight` (applied by a rule above).
-     * NOTE: the default cannot safely be changed in Chrome and Safari on OS X.
-     */
+ * Don't inherit the `font-weight` (applied by a rule above).
+ * NOTE: the default cannot safely be changed in Chrome and Safari on OS X.
+ */
 optgroup {
   font-weight: bold; }
 
 /* Tables
-       ========================================================================== */
+   ========================================================================== */
 /**
-     * Remove most spacing between table cells.
-     */
+ * Remove most spacing between table cells.
+ */
 table {
   border-collapse: collapse;
   border-spacing: 0; }
@@ -375,7 +372,7 @@ td,
 th {
   padding: 0; }
 
-/* --> Normalize script
+                                                                          		/* --> Normalize script
 
 /*---------------------------------------------------------- 
  General settings
@@ -395,7 +392,6 @@ load the main font
   src: url("../font/atarist.eot?#iefix") format("embedded-opentype"), url("../font/atarist.woff2") format("woff2"), url("../font/atarist.woff") format("woff"), url("../font/atarist.ttf") format("truetype"), url("../font/atarist.svg#AtariST") format("svg");
   font-weight: normal;
   font-style: normal; }
-
 * {
   margin: 0; }
 
@@ -476,7 +472,6 @@ From a width of 801 we will be having rows of 3 tiles
 .standard_tile {
   width: 100%;
   border: 2px solid black;
-  background: -webkit-linear-gradient(left, white, #23f001);
   background: linear-gradient(to right, white, #23f001);
   /* Standard syntax */
   box-shadow: 3px 3px 5px #888888;
@@ -643,7 +638,6 @@ a.standard_tile_link:hover, a.standard_tile_link:focus {
   width: 100%;
   height: 140px;
   display: table;
-  background: -webkit-linear-gradient(left, white, #23f001);
   background: linear-gradient(to right, white, #23f001);
   /* Standard syntax */ }
 
@@ -651,7 +645,6 @@ a.standard_tile_link:hover, a.standard_tile_link:focus {
   position: relative;
   width: 100%;
   height: 140px;
-  background: -webkit-linear-gradient(left, white, #acacac);
   background: linear-gradient(to right, white, #acacac);
   /* Standard syntax */ }
 
@@ -659,8 +652,7 @@ a.standard_tile_link:hover, a.standard_tile_link:focus {
   width: 50%;
   position: absolute;
   top: 50%;
-  -webkit-transform: translateY(-50%);
-          transform: translateY(-50%); }
+  transform: translateY(-50%); }
 
 .standard_list_entry_left img {
   max-width: 100%;
@@ -676,8 +668,7 @@ a.standard_tile_link:hover, a.standard_tile_link:focus {
   width: 50%;
   position: absolute;
   top: 50%;
-  -webkit-transform: translateY(-50%);
-          transform: translateY(-50%); }
+  transform: translateY(-50%); }
 
 .standard_list_entry_right_news_text {
   height: 70px;
@@ -845,7 +836,7 @@ legend {
 #top_background {
   width: 100%;
   float: left;
-  background: url(../images/top_bg.jpg) 0 0 no-repeat;
+  background: url(../../../templates/0/images/top_bg.jpg) 0 0 no-repeat;
   border-bottom: 2px solid black;
   height: 100%; }
 
@@ -870,11 +861,67 @@ legend {
   margin-top: 30px; }
 
 /* at a resolution of max 480 (smartphones) we want a smaller logo with border */
+@media screen and (max-width: 480px) {
+  .container {
+    width: 15%; }
 
+  #left {
+    width: 85%; }
+
+  #logo_img {
+    margin-left: auto;
+    margin-right: auto;
+    display: none; }
+
+  #logo_img_480 {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 5px; }
+
+  #right {
+    width: 0;
+    display: none; }
+
+  #top_background {
+    border-top-width: 0;
+    border-left-width: 0;
+    border-style: solid;
+    border-bottom-width: 2px;
+    border-bottom-color: black;
+    box-shadow: 3px 3px 5px #888888;
+    background: linear-gradient(#175f5f, #23f001);
+    /* Standard syntax (must be last) */ } }
 /* at a resolution of max 960 (Tablets & low res laptop) we want the original logo without the bee */
+@media screen and (min-width: 481px) and (max-width: 960px) {
+  .container {
+    width: 15%; }
 
+  #left {
+    width: 100%; }
+
+  #logo_img {
+    margin-left: auto;
+    margin-right: auto; }
+
+  #logo_img_480 {
+    display: none; }
+
+  #right {
+    width: 0;
+    display: none; } }
 /* For high res screens we want the full package - original logo and bee */
+@media screen and (min-width: 961px) {
+  .container {
+    width: 15%; }
 
+  #left {
+    width: 50%; }
+
+  #logo_img_480 {
+    display: none; }
+
+  #right {
+    width: 35%; } }
 /* --> TOP background & graphics */
 /**************************************************************************/
 /**** This is the css code for the animations at the top of the screen ****/
@@ -883,14 +930,10 @@ legend {
 /* -------------SASS animation code-------------*/
 #animation {
   position: relative;
-  -webkit-animation-name: STcharacters;
-          animation-name: STcharacters;
-  -webkit-animation-duration: 20s;
-          animation-duration: 20s;
-  -webkit-animation-iteration-count: infinite;
-          animation-iteration-count: infinite;
-  -webkit-animation-timing-function: linear;
-          animation-timing-function: linear; }
+  animation-name: STcharacters;
+  animation-duration: 20s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear; }
 
 @-webkit-keyframes STcharacters {
   0% {
@@ -905,7 +948,6 @@ legend {
     top: 174px;
     left: 45%;
     opacity: 0; } }
-
 @keyframes STcharacters {
   0% {
     top: 174px;
@@ -919,17 +961,12 @@ legend {
     top: 174px;
     left: 45%;
     opacity: 0; } }
-
 #animation_vert {
   position: relative;
-  -webkit-animation-name: STcharacters_vert;
-          animation-name: STcharacters_vert;
-  -webkit-animation-duration: 10s;
-          animation-duration: 10s;
-  -webkit-animation-iteration-count: infinite;
-          animation-iteration-count: infinite;
-  -webkit-animation-timing-function: linear;
-          animation-timing-function: linear; }
+  animation-name: STcharacters_vert;
+  animation-duration: 10s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear; }
 
 @-webkit-keyframes STcharacters_vert {
   0% {
@@ -945,7 +982,6 @@ legend {
     top: 10px;
     left: 5%;
     opacity: 0; } }
-
 @keyframes STcharacters_vert {
   0% {
     top: 145px;
@@ -960,11 +996,14 @@ legend {
     top: 10px;
     left: 5%;
     opacity: 0; } }
-
 /* at a resolution of max 480 (smartphones) we want a smaller logo with border */
-
+@media screen and (max-width: 480px) {
+  #animation, #animation_vert {
+    display: none; } }
 /* at a resolution of max 960 (Tablets & low res laptop) we want the original logo without the bee */
-
+@media screen and (min-width: 481px) and (max-width: 960px) {
+  #animation, #animation_vert {
+    display: none; } }
 /* --> TOP animation */
 /*****************************************************************/
 /**** This is the css code for the side menu and the top menu ****/
@@ -985,11 +1024,12 @@ body, html {
   position: relative;
   width: 100%;
   left: 0;
-  -webkit-transition: left 0.4s ease-in-out;
-          transition: left 0.4s ease-in-out; }
+  transition: left 0.4s ease-in-out; }
 
 /* for the TOS skin, we want to side button to be lower not to interfere with the main menu */
-
+@media screen and (min-width: 1280px) and (max-width: 2304px) {
+  .container {
+    margin-top: 34px; } }
 /* this is the width of the side menu when it is pushed open */
 .container.open-sidebar {
   left: 209px; }
@@ -1005,8 +1045,7 @@ body, html {
   position: absolute;
   background: black;
   height: 100%;
-  -moz-box-sizing: border-box;
-       box-sizing: border-box; }
+  box-sizing: border-box; }
 
 #sidebar ul {
   margin: 0;
@@ -1021,16 +1060,14 @@ body, html {
 #sidebar ul li a {
   padding: 0;
   display: block;
-  -webkit-transition: background 0.3s ease-in-out;
-          transition: background 0.3s ease-in-out; }
+  transition: background 0.3s ease-in-out; }
 
 .main-content {
   width: 100%;
   height: 100%;
   padding: 1px;
   position: absolute;
-  -moz-box-sizing: border-box;
-       box-sizing: border-box; }
+  box-sizing: border-box; }
   .main-content #sidebar-toggle {
     display: block;
     position: absolute;
@@ -1057,7 +1094,7 @@ body, html {
   float: left; }
 
 #search_side {
-  background-image: url(../images/menu_search.png);
+  background-image: url(../../../templates/0/images/menu_search.png);
   background-size: cover;
   background-repeat: no-repeat;
   padding-left: 30px;
@@ -1094,8 +1131,7 @@ body, html {
   list-style: none; }
 
 .skin-menu a {
-  -webkit-transition: all linear 0.15s;
-          transition: all linear 0.15s; }
+  transition: all linear 0.15s; }
 
 /*  Top Level */
 .skin-menu > ul > li {
@@ -1117,8 +1153,7 @@ body, html {
   left: 0;
   z-index: -1;
   opacity: 0;
-  -webkit-transition: opacity linear 0.15s;
-          transition: opacity linear 0.15s;
+  transition: opacity linear 0.15s;
   box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.2);
   text-align: center; }
 
@@ -1139,7 +1174,12 @@ body, html {
   color: white; }
 
 /* 'position' is needed for smartphone view else the logo is covered by the sidemenu button */
+@media screen and (max-width: 480px) {
+  .main-content {
+    position: relative; }
 
+  .main-content #sidebar-toggle {
+    position: relative; } }
 .sidebutton_extra, .sidebutton, .sidebutton_cpanel {
   border: 0;
   cursor: pointer;
@@ -1170,15 +1210,25 @@ body, html {
   color: white; }
 
 /* for the lower resolutions, we don't have the menu bar below the top */
-
+@media screen and (max-width: 1279px) {
+  #main_nav {
+    display: none; } }
 /* for resolutions between 1280 and 1920 the search goes to the side menu */
 /* some re-placement of the skin button is needed here */
 /* HOWEVER, this is not done for the CPANEL, to solve this id no-wrap is created */
 #no-wrap {
   margin-top: 0; }
 
+@media screen and (max-width: 1919px) {
+  .skin-wrap {
+    margin-top: 30px; } }
 /* for the high resolutions, we only have the skin switch in the side menu */
-
+@media screen and (min-width: 1280px) {
+  .side_navigation {
+    display: none; } }
+@media screen and (min-width: 1920px) {
+  #search_side, #search_text_side {
+    display: none; } }
 /* ---------the main menu--------*/
 /* this is the css code for the main menu and its buttons
 
@@ -1187,21 +1237,28 @@ body, html {
 /*  2) Side bar needs to be transparant for resolutions between 1281 and 16** or something --> #sidebar
 /*  3) header nav is switched to absolute, if this is not done, the hyperlinks won't work anymore becauwe of position of container
 /*  4) since header nav is absolute, the main part of the site needs to be repositioned */
+@media screen and (min-width: 1280px) {
+  .container {
+    position: absolute; }
 
+  #sidebar {
+    background-color: transparent; }
+
+  header nav {
+    position: absolute;
+    margin-top: 0; }
+
+  #main {
+    position: relative;
+    margin-top: 60px; } }
 #main_nav {
   width: 100%;
   left: 0; }
 
 #main_nav_ul {
   font-size: 0.1px;
-  display: -webkit-flex;
-  display: -moz-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-justify-content: center;
-     -moz-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  justify-content: center;
   padding: 0; }
 
 /* this is some extra code for the cpanel sub menu at the main bar */
@@ -1325,28 +1382,42 @@ header nav input {
   color: white; }
 
 #search {
-  background: url(../images/menu_search.png) 0 0 no-repeat;
+  background: url(../../../templates/0/images/menu_search.png) 0 0 no-repeat;
   padding-top: 30px;
   padding-left: 30px; }
 
 #search:hover {
-  background: url(../images/menu_search_hover.png) 0 0 no-repeat;
+  background: url(../../../templates/0/images/menu_search_hover.png) 0 0 no-repeat;
   padding-top: 30px;
   padding-left: 30px; }
 
 #home {
   display: inline-block;
-  background: url(../images/menu_home.png) 0 0 no-repeat;
+  background: url(../../../templates/0/images/menu_home.png) 0 0 no-repeat;
   padding-top: 22px;
   padding-left: 30px; }
 
 #home:hover {
-  background: url(../images/menu_home_hover.png) 0 0 no-repeat;
+  background: url(../../../templates/0/images/menu_home_hover.png) 0 0 no-repeat;
   padding-top: 22px;
   padding-left: 30px; }
 
+@media screen and (max-width: 1590px) {
+  #home {
+    display: none; } }
+@media screen and (max-width: 1560px) {
+  .topbutton {
+    width: 165px; } }
+@media screen and (max-width: 1325px) {
+  .topbutton {
+    width: 155px; } }
 /* responsiveness of the top menu for resolutions from 1281 to 1920 */
+@media screen and (max-width: 1919px) {
+  #search_text {
+    display: none; }
 
+  #search {
+    display: none; } }
 /* --> TOP and SIDE MENU */
 /*---------------------------------------------------------- 
  Main website
@@ -1426,15 +1497,15 @@ logon tile --> front page
 
 .logon_username_icon:before {
   display: block;
-  content: url("../images/logon_usn.png"); }
+  content: url("../../../templates/0/images/logon_usn.png"); }
 
 .logon_password_icon:before {
   display: block;
-  content: url("../images/logon_pwd.png"); }
+  content: url("../../../templates/0/images/logon_pwd.png"); }
 
 .logon_facebook_button:before {
   display: block;
-  content: url("../images/login-facebook.png");
+  content: url("../../../templates/0/images/login-facebook.png");
   width: auto;
   /*or your image's width*/
   height: 50%;
@@ -1442,7 +1513,7 @@ logon tile --> front page
 
 .logon_twitter_button:before {
   display: block;
-  content: url("../images/login_twitter.png");
+  content: url("../../../templates/0/images/login_twitter.png");
   width: auto;
   /*or your image's width*/
   height: 50%;
@@ -1489,7 +1560,7 @@ logon tile --> front page
 datequote tile - front page
 ------------------------------------------------------------ */
 .datequote_bg {
-  background: url(../images/datequote_bg.jpg); }
+  background: url(../../../templates/0/images/datequote_bg.jpg); }
 
 .datequote_bg p {
   text-align: center; }
@@ -1544,7 +1615,7 @@ contact tiles - front page
 
 .contact_email_button {
   display: block;
-  background-image: url("../images/email.png");
+  background-image: url("../../../templates/0/images/email.png");
   background-repeat: no-repeat;
   background-size: contain; }
 
@@ -1555,7 +1626,7 @@ contact tiles - front page
 
 .contact_facebook_button {
   display: block;
-  background-image: url("../images/facebook.png");
+  background-image: url("../../../templates/0/images/facebook.png");
   background-repeat: no-repeat;
   background-size: contain; }
 
@@ -1566,7 +1637,7 @@ contact tiles - front page
 
 .contact_jukebox_button {
   display: block;
-  background-image: url("../images/jukebox.png");
+  background-image: url("../../../templates/0/images/jukebox.png");
   background-repeat: no-repeat;
   background-size: contain; }
 
@@ -1577,7 +1648,7 @@ contact tiles - front page
 
 .contact_chat_button {
   display: block;
-  background-image: url("../images/chat.png");
+  background-image: url("../../../templates/0/images/chat.png");
   background-repeat: no-repeat;
   background-size: contain; }
 
@@ -1605,7 +1676,7 @@ contact tiles - front page
 
 .footer_logo_image:before {
   display: block;
-  content: url("../images/footer_logo.png"); }
+  content: url("../../../templates/0/images/footer_logo.png"); }
 
 #footer_img {
   margin-left: auto;
@@ -1655,7 +1726,6 @@ Front page
   margin-bottom: 30px; }
 
 #welcome_cpanel {
-  margin-top: 390px;
   float: left;
   width: 48%;
   margin-bottom: 30px; }
@@ -1681,14 +1751,8 @@ Front page
   margin-bottom: 10px; }
 
 .main_stats_container {
-  display: -webkit-flex;
-  display: -moz-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-align-items: flex-start;
-     -moz-box-align: start;
-      -ms-flex-align: start;
-          align-items: flex-start; }
+  align-items: flex-start; }
 
 #child_some_stats {
   width: 45%;
@@ -1817,9 +1881,6 @@ User details
   margin-left: 1%; }
 
 .user_details_container {
-  display: -webkit-flex;
-  display: -moz-box;
-  display: -ms-flexbox;
   display: flex; }
 
 #child_1, #child_2 {
@@ -1874,18 +1935,9 @@ User main
   float: left; }
 
 .user_main_container {
-  display: -webkit-flex;
-  display: -moz-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-justify-content: center;
-     -moz-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-align-items: center;
-     -moz-box-align: center;
-      -ms-flex-align: center;
-          align-items: center; }
+  justify-content: center;
+  align-items: center; }
 
 /*---------------------------------------------------------- 
 User search
@@ -2119,18 +2171,9 @@ Links Modify list
   margin-left: 1%; }
 
 .links_list_row {
-  display: -webkit-flex;
-  display: -moz-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-justify-content: center;
-     -moz-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-align-items: center;
-     -moz-box-align: center;
-      -ms-flex-align: center;
-          align-items: center; }
+  justify-content: center;
+  align-items: center; }
 
 /*---------------------------------------------------------- 
 Links category
@@ -2222,9 +2265,6 @@ Games main
   margin-left: auto; }
 
 .games_check_container {
-  display: -webkit-flex;
-  display: -moz-box;
-  display: -ms-flexbox;
   display: flex;
   width: 50%;
   margin: auto; }
@@ -2502,53 +2542,543 @@ Games comment edit
 /*---------------------------------------------------------- 
  media queries
 ------------------------------------------------------------ */
+@media screen and (max-width: 480px) {
+  #welcome_cpanel {
+    width: 100%;
+    margin-top: 15px; }
 
+  .user_details_text {
+    display: inline; }
+
+  .user_details_input {
+    display: inline; }
+
+  .user_details_row {
+    width: 50%; }
+
+  #user_details {
+    margin-top: 20px; }
+
+  #leftnav_position_userdetails {
+    margin-top: 0; }
+
+  .links_addnew_text {
+    display: inline; }
+
+  .links_addnew_input {
+    display: inline; }
+
+  .links_addnew_row {
+    width: 50%; }
+
+  .user_stats_img_dark {
+    display: none; }
+
+  .games_main_text {
+    display: inline; }
+
+  .games_main_input {
+    display: inline; }
+
+  .games_main_row {
+    margin-left: 10%; }
+
+  #leftnav_position_userstatistics {
+    margin-top: 0; } }
+@media screen and (max-width: 1279px) {
+  #left_nav_position_front {
+    margin-top: 20px; }
+
+  #main_stats_position_front {
+    margin-top: 20px; } }
 /* Make the table view responsive */
+@media screen and (max-width: 799px) {
+  #welcome_cpanel {
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px; }
 
+  #user_stats {
+    width: 100%;
+    margin-bottom: 20px; }
+
+  #main_stats_position_front {
+    width: 100%;
+    float: left; }
+
+  #left_nav_position_front {
+    width: 100%;
+    float: left; }
+
+  #quick_search_options {
+    display: table;
+    width: 50%;
+    margin-left: 40%;
+    margin-right: auto;
+    text-align: left; }
+
+  .main_container_cpanel {
+    display: flex;
+    flex-direction: column-reverse;
+    float: left;
+    width: 100%; }
+
+  #column-left-cpanel {
+    width: 100%;
+    float: left;
+    margin: auto; }
+
+  #column-center-cpanel {
+    width: 100%;
+    float: left;
+    margin: auto; }
+
+  #column-right-cpanel {
+    width: 100%;
+    float: right;
+    margin: auto; }
+
+  .main_container_cpanel > div {
+    width: 100%; }
+
+  .content_box_cpanel {
+    display: block;
+    margin: 0 auto; } }
+@media screen and (max-width: 1199px) {
+  .main_stats_container {
+    flex-direction: column; }
+
+  #child_some_stats, #child_good_karma, #child_bad_karma {
+    width: 100%;
+    float: left; }
+
+  #child_good_karma, #child_bad_karma {
+    margin-top: 20px; }
+
+  .main_stats_container > div {
+    width: 100%; }
+
+  .main_stats_child {
+    display: block;
+    margin: 0 auto; } }
+@media screen and (max-width: 1099px) {
+  #quick_search_options {
+    margin-left: 5%;
+    width: 100%; } }
+@media screen and (max-width: 599px) {
+  #quick_search_options {
+    margin-left: 30%; } }
+@media screen and (max-width: 399px) {
+  #quick_search_options {
+    width: 75%;
+    margin-left: 15%; } }
+@media screen and (max-width: 1050px) {
+  .user_details_container {
+    flex-direction: column; } }
+@media screen and (max-width: 1280px) {
+  #user_details {
+    margin-top: 20px; }
+
+  #leftnav_position_userdetails {
+    margin-top: 20px; }
+
+  #child_1, #child_2 {
+    width: 100%; }
+
+  .info_td, .year_td, #info_th, #year_th {
+    display: none; }
+
+  #column-left-cpanel {
+    width: 25%;
+    float: left; }
+
+  #column-center-cpanel {
+    width: 73%;
+    float: right; }
+
+  #column-right-cpanel {
+    display: none; } }
+@media screen and (max-width: 1279px) {
+  #leftnav_position_usermain {
+    margin-top: 20px; }
+
+  #user_main {
+    margin-top: 20px; }
+
+  #main_stats_position_usermain {
+    margin-bottom: 10px; } }
+@media screen and (max-width: 500px) {
+  .user_main_container {
+    flex-direction: column; }
+
+  #user_main_child_3 {
+    margin-top: 5px; } }
+@media screen and (max-width: 1279px) {
+  #leftnav_position_usersearch {
+    margin-top: 20px; }
+
+  #usersearch {
+    margin-top: 20px; } }
+@media screen and (max-width: 1150px) {
+  .email_th {
+    display: none; }
+
+  .email_td {
+    display: none; }
+
+  .website_th {
+    display: none; }
+
+  .website_td {
+    display: none; } }
+@media screen and (max-width: 600px) {
+  .lastvisit_th {
+    display: none; }
+
+  .lastvisit_td {
+    display: none; }
+
+  .joindate_td {
+    display: none; }
+
+  .joindate_th {
+    display: none; }
+
+  #usersearch td {
+    text-align: center; }
+
+  #usersearch th {
+    text-align: center; } }
+@media screen and (max-width: 500px) {
+  #usersearch {
+    margin-bottom: 20px; } }
+@media screen and (max-width: 1279px) {
+  #leftnav_position_linkaddnew {
+    margin-top: 20px; }
+
+  #linkaddnew {
+    margin-top: 20px; } }
+@media screen and (max-width: 500px) {
+  .links_list_row {
+    flex-direction: column; } }
+@media screen and (max-width: 500px) {
+  #linkcat_wide {
+    display: none; } }
+@media screen and (min-width: 499px) {
+  #linkcat_small {
+    display: none; } }
+@media screen and (max-width: 550px) {
+  .links_mod_text {
+    width: 100%;
+    display: block; }
+
+  .links_mod_input {
+    width: 100%;
+    display: block; }
+
+  .links_mod_row {
+    width: 100%;
+    margin-bottom: 10px; } }
+@media screen and (max-width: 600px) {
+  #user_stats_img_dark {
+    display: none; } }
+@media screen and (max-width: 1050px) {
+  .games_main_row {
+    width: 90%; }
+
+  .games_main_text {
+    width: 40%; }
+
+  .games_main_input {
+    width: 60%; } }
+@media screen and (max-width: 550px) {
+  .games_main_text {
+    width: 35%; }
+
+  .games_main_input {
+    width: 65%; } }
+@media screen and (max-width: 1050px) {
+  .games_check_container {
+    flex-direction: column;
+    width: 100%; }
+
+  #child_1, #child_2 {
+    width: 100%;
+    margin-left: 10%; } }
+@media screen and (max-width: 1040px) {
+  .dev_td, #dev_th {
+    display: none; } }
+@media screen and (max-width: 600px) {
+  .pub_td, #pub_th {
+    display: none; }
+
+  #game_th, .game_td {
+    text-align: center; } }
+@media screen and (min-width: 1280px) {
+  #gd_other_features_left {
+    display: none; }
+
+  #gd_other_features_right {
+    display: none; } }
+@media screen and (max-width: 1279px) {
+  #gd_basic_game_info {
+    width: 100%;
+    margin-bottom: 20px; }
+
+  #gd_other_features {
+    display: none; }
+
+  #gd_other_features_left {
+    float: left;
+    width: 49%; }
+
+  #gd_other_features_right {
+    float: right;
+    width: 49%; }
+
+  #gd_left {
+    float: left;
+    width: 49%; }
+
+  #gd_right {
+    float: right;
+    width: 49%; }
+
+  #gd_center {
+    float: right;
+    width: 49%; }
+
+  #gd_back {
+    margin-top: 20px; }
+
+  #gd_publisher_info {
+    margin-top: 20px; } }
+@media screen and (max-width: 600px) {
+  #gd_basic_game_info_category {
+    width: 100%;
+    float: left;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 5%; }
+
+  #gd_other_features_left {
+    float: left;
+    width: 100%;
+    margin-bottom: 20px; }
+
+  #gd_game_aka {
+    margin-bottom: 20px; }
+
+  #gd_other_features_right {
+    float: right;
+    width: 100%; }
+
+  #gd_left {
+    float: left;
+    width: 100%; }
+
+  #gd_right {
+    float: right;
+    width: 100%; }
+
+  #gd_center {
+    float: right;
+    width: 100%; }
+
+  #gd_publisher_info {
+    margin-top: 0; } }
+@media screen and (max-width: 640px) {
+  .gc_left_head {
+    display: none; }
+
+  .gc_left {
+    display: none; } }
 /* 1 tile and a simplified intro screen */
-
+@media screen and (max-width: 639px) {
+  #welcome {
+    visibility: hidden; } }
 /* 2 tiles and background welcome image */
-
+@media screen and (min-width: 640px) and (max-width: 800px) {
+  #welcome {
+    margin-bottom: 20px; } }
+@media screen and (max-width: 1279px) {
+  #welcome {
+    margin-top: 20px; } }
 /* 2 tiles and background welcome image */
-
+@media screen and (min-width: 640px) and (max-width: 800px) {
+  .logon {
+    margin-top: 0; } }
 /* 1 tile */
-
+@media screen and (max-width: 639px) {
+  .logon {
+    width: 100%;
+    margin-top: 20px; } }
 /*---------------------------------------------------------- 
 latest news tile --> front page
 ------------------------------------------------------------ */
-
+@media screen and (min-width: 640px) and (max-width: 800px) {
+  .latest_news {
+    margin-top: 395px; } }
+@media screen and (min-width: 1495px) {
+  .latest_news {
+    float: left;
+    width: 48%; } }
 /*---------------------------------------------------------- 
 screenstar tile - front page
 ------------------------------------------------------------ */
-
+@media screen and (min-width: 1495px) {
+  .screenstar_position_front {
+    width: 94%;
+    margin-top: -40px; } }
 /* 1 and 2 tiles */
-
+@media screen and (max-width: 800px) {
+  .datequote_position_front {
+    margin-top: 0; } }
+@media screen and (min-width: 1495px) {
+  .datequote_position_front {
+    float: left;
+    width: 94%; } }
 /*---------------------------------------------------------- 
 Who is it - front page
 ------------------------------------------------------------ */
-
+@media screen and (min-width: 1495px) {
+  .whoisit_position_front {
+    float: right; } }
 /*---------------------------------------------------------- 
 Latest reviews tile - front page
 ------------------------------------------------------------ */
-
+@media screen and (min-width: 1495px) {
+  .latest_reviews {
+    width: 49%;
+    float: right; } }
 /*---------------------------------------------------------- 
 Did you know tile - front page
 ------------------------------------------------------------ */
-
+@media screen and (min-width: 1495px) {
+  .didyouknow_position_front {
+    float: left;
+    width: 100%; } }
+@media screen and (min-width: 1495px) {
+  .statistics_position_front {
+    float: left;
+    width: 100%; } }
 /*---------------------------------------------------------- 
 Hotlinks tile - front page
 ------------------------------------------------------------ */
-
+@media screen and (min-width: 1495px) {
+  .hotlinks_position_front {
+    width: 94%;
+    float: left; } }
+@media screen and (min-width: 1495px) {
+  .contact_tiles {
+    width: 49%;
+    float: right; } }
 /*---------------------------------------------------------- 
 Background images
 ------------------------------------------------------------ */
-
+@media screen and (min-width: 481px) {
+  body {
+    background-image: url(../../../templates/0/images/top_bg_sides.jpg);
+    background-position: left top;
+    background-repeat: repeat-x; } }
+@media screen and (min-width: 1920px) {
+  body {
+    background-image: url(../../../templates/0/images/top_bg_left.jpg), url(../../../templates/0/images/top_bg_right.jpg), url(../../../templates/0/images/top_bg_sides.jpg);
+    background-position: left 2px, right 2px, left top;
+    background-repeat: no-repeat, repeat-x, repeat-x; } }
+@media screen and (min-width: 1921px) {
+  body {
+    background-image: url(../../../templates/0/images/top_bg_sides.jpg), url(../../../templates/0/images/main_bg.png), url(../../../templates/0/images/main_bg.png);
+    background-position: left top, 100% 100%, -10% 25%;
+    background-repeat: repeat-x, no-repeat, no-repeat; } }
 /* 2 tiles and background welcome image */
+@media screen and (min-width: 640px) and (max-width: 800px) {
+  .column-left {
+    width: 48%;
+    margin-top: -395px; }
 
+  .column-center {
+    width: 48%;
+    float: right; }
+
+  .column-right {
+    display: none; }
+
+  .column-left-tab {
+    width: 48%;
+    float: left; }
+
+  .column-right-tab {
+    width: 48%;
+    float: right; }
+
+  .column-wide-right {
+    width: 48%;
+    float: right; }
+
+  .column-wide-left {
+    width: 100%; } }
 /* 1 tile and a simplified intro screen */
+@media screen and (max-width: 639px) {
+  .column-left {
+    width: 100%; }
 
+  .column-center {
+    width: 100%;
+    margin-left: 0; }
+
+  .column-right {
+    width: 100%; }
+
+  .column-right-tab {
+    display: none; }
+
+  .column-left-tab {
+    display: none; }
+
+  .column-wide-right {
+    width: 100%; }
+
+  .column-wide-left {
+    display: none; } }
+@media screen and (min-width: 801px) {
+  .column-right-tab {
+    display: none; }
+
+  .column-left-tab {
+    display: none; } }
 /*  4 tiles and background welcome image */
+@media screen and (min-width: 1495px) {
+  .column-wide-left {
+    width: 49%; }
 
+  .column-wide-center_1920 {
+    display: inline; }
+
+  .column-wide-right_1920 {
+    width: 24.75%;
+    float: right;
+    display: block; }
+
+  .column-wide-left_1920 {
+    width: 24.75%;
+    float: left;
+    display: block; }
+
+  .column-wide-right {
+    display: none; }
+
+  .column-left {
+    display: none; }
+
+  .column-center {
+    display: none; }
+
+  .column-right {
+    display: none; } }
+@media screen and (min-width: 450px) and (max-width: 639px) {
+  .standard_list_entry {
+    height: 180px; } }
 /* for lower resolutions put the left and right below eachother */
 /*---------------------------------------------------------- 
  resolutions tested!
@@ -2571,507 +3101,5 @@ Background images
 /* hi-res laptops and desktops */
 /* @media screen and (min-width: 1281px) { */
 /* --> media queries css settings */
-@media screen and (max-width: 480px) {
-  .container {
-    width: 15%; }
-  #left {
-    width: 85%; }
-  #logo_img {
-    margin-left: auto;
-    margin-right: auto;
-    display: none; }
-  #logo_img_480 {
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 5px; }
-  #right {
-    width: 0;
-    display: none; }
-  #top_background {
-    border-top-width: 0;
-    border-left-width: 0;
-    border-style: solid;
-    border-bottom-width: 2px;
-    border-bottom-color: black;
-    box-shadow: 3px 3px 5px #888888;
-    background: -webkit-linear-gradient(#175f5f, #23f001);
-    background: linear-gradient(#175f5f, #23f001);/* Standard syntax (must be last) */ }
-  #animation, #animation_vert {
-    display: none; }
-  .main-content {
-    position: relative; }
-  .main-content #sidebar-toggle {
-    position: relative; }
-  #welcome_cpanel {
-    width: 100%;
-    margin-top: 15px; }
-  .user_details_text {
-    display: inline; }
-  .user_details_input {
-    display: inline; }
-  .user_details_row {
-    width: 50%; }
-  #user_details {
-    margin-top: 20px; }
-  #leftnav_position_userdetails {
-    margin-top: 0; }
-  .links_addnew_text {
-    display: inline; }
-  .links_addnew_input {
-    display: inline; }
-  .links_addnew_row {
-    width: 50%; }
-  .user_stats_img_dark {
-    display: none; }
-  .games_main_text {
-    display: inline; }
-  .games_main_input {
-    display: inline; }
-  .games_main_row {
-    margin-left: 10%; }
-  #leftnav_position_userstatistics {
-    margin-top: 0; } }
-@media screen and (min-width: 481px) and (max-width: 960px) {
-  .container {
-    width: 15%; }
-  #left {
-    width: 100%; }
-  #logo_img {
-    margin-left: auto;
-    margin-right: auto; }
-  #logo_img_480 {
-    display: none; }
-  #right {
-    width: 0;
-    display: none; }
-  #animation, #animation_vert {
-    display: none; } }
-@media screen and (min-width: 961px) {
-  .container {
-    width: 15%; }
-  #left {
-    width: 50%; }
-  #logo_img_480 {
-    display: none; }
-  #right {
-    width: 35%; } }
-@media screen and (min-width: 1280px) and (max-width: 2304px) {
-  .container {
-    margin-top: 34px; } }
-@media screen and (max-width: 1279px) {
-  #main_nav {
-    display: none; }
-  #left_nav_position_front {
-    margin-top: 20px; }
-  #main_stats_position_front {
-    margin-top: 20px; }
-  #leftnav_position_usermain {
-    margin-top: 20px; }
-  #user_main {
-    margin-top: 20px; }
-  #main_stats_position_usermain {
-    margin-bottom: 10px; }
-  #leftnav_position_usersearch {
-    margin-top: 20px; }
-  #usersearch {
-    margin-top: 20px; }
-  #leftnav_position_linkaddnew {
-    margin-top: 20px; }
-  #linkaddnew {
-    margin-top: 20px; }
-  #gd_basic_game_info {
-    width: 100%;
-    margin-bottom: 20px; }
-  #gd_other_features {
-    display: none; }
-  #gd_other_features_left {
-    float: left;
-    width: 49%; }
-  #gd_other_features_right {
-    float: right;
-    width: 49%; }
-  #gd_left {
-    float: left;
-    width: 49%; }
-  #gd_right {
-    float: right;
-    width: 49%; }
-  #gd_center {
-    float: right;
-    width: 49%; }
-  #gd_back {
-    margin-top: 20px; }
-  #gd_publisher_info {
-    margin-top: 20px; }
-  #welcome {
-    margin-top: 20px; } }
-@media screen and (max-width: 1919px) {
-  .skin-wrap {
-    margin-top: 30px; }
-  #search_text {
-    display: none; }
-  #search {
-    display: none; } }
-@media screen and (min-width: 1280px) {
-  .side_navigation {
-    display: none; }
-  .container {
-    position: absolute; }
-  #sidebar {
-    background-color: transparent; }
-  header nav {
-    position: absolute;
-    margin-top: 0; }
-  #main {
-    position: relative;
-    margin-top: 60px; }
-  #gd_other_features_left {
-    display: none; }
-  #gd_other_features_right {
-    display: none; } }
-@media screen and (min-width: 1920px) {
-  #search_side, #search_text_side {
-    display: none; }
-  body {
-    background-image: url(../images/top_bg_left.jpg), url(../images/top_bg_right.jpg), url(../images/top_bg_sides.jpg);
-    background-position: left 2px, right 2px, left top;
-    background-repeat: no-repeat, repeat-x, repeat-x; } }
-@media screen and (max-width: 1590px) {
-  #home {
-    display: none; } }
-@media screen and (max-width: 1560px) {
-  .topbutton {
-    width: 165px; } }
-@media screen and (max-width: 1325px) {
-  .topbutton {
-    width: 155px; } }
-@media screen and (max-width: 799px) {
-  #welcome_cpanel {
-    width: 100%;
-    margin-top: 20px;
-    margin-bottom: 20px; }
-  #user_stats {
-    width: 100%;
-    margin-bottom: 20px; }
-  #main_stats_position_front {
-    width: 100%;
-    float: left; }
-  #left_nav_position_front {
-    width: 100%;
-    float: left; }
-  #quick_search_options {
-    display: table;
-    width: 50%;
-    margin-left: 40%;
-    margin-right: auto;
-    text-align: left; }
-  .main_container_cpanel {
-    display: -webkit-flex;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-flex-direction: column-reverse;
-       -moz-box-orient: vertical;
-       -moz-box-direction: reverse;
-        -ms-flex-direction: column-reverse;
-            flex-direction: column-reverse;
-    float: left;
-    width: 100%; }
-  #column-left-cpanel {
-    width: 100%;
-    float: left;
-    margin: auto; }
-  #column-center-cpanel {
-    width: 100%;
-    float: left;
-    margin: auto; }
-  #column-right-cpanel {
-    width: 100%;
-    float: right;
-    margin: auto; }
-  .main_container_cpanel > div {
-    width: 100%; }
-  .content_box_cpanel {
-    display: block;
-    margin: 0 auto; } }
-@media screen and (max-width: 1199px) {
-  .main_stats_container {
-    -webkit-flex-direction: column;
-       -moz-box-orient: vertical;
-       -moz-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column; }
-  #child_some_stats, #child_good_karma, #child_bad_karma {
-    width: 100%;
-    float: left; }
-  #child_good_karma, #child_bad_karma {
-    margin-top: 20px; }
-  .main_stats_container > div {
-    width: 100%; }
-  .main_stats_child {
-    display: block;
-    margin: 0 auto; } }
-@media screen and (max-width: 1099px) {
-  #quick_search_options {
-    margin-left: 5%;
-    width: 100%; } }
-@media screen and (max-width: 599px) {
-  #quick_search_options {
-    margin-left: 30%; } }
-@media screen and (max-width: 399px) {
-  #quick_search_options {
-    width: 75%;
-    margin-left: 15%; } }
-@media screen and (max-width: 1050px) {
-  .user_details_container {
-    -webkit-flex-direction: column;
-       -moz-box-orient: vertical;
-       -moz-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column; }
-  .games_main_row {
-    width: 90%; }
-  .games_main_text {
-    width: 40%; }
-  .games_main_input {
-    width: 60%; }
-  .games_check_container {
-    -webkit-flex-direction: column;
-       -moz-box-orient: vertical;
-       -moz-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column;
-    width: 100%; }
-  #child_1, #child_2 {
-    width: 100%;
-    margin-left: 10%; } }
-@media screen and (max-width: 1280px) {
-  #user_details {
-    margin-top: 20px; }
-  #leftnav_position_userdetails {
-    margin-top: 20px; }
-  #child_1, #child_2 {
-    width: 100%; }
-  .info_td, .year_td, #info_th, #year_th {
-    display: none; }
-  #column-left-cpanel {
-    width: 25%;
-    float: left; }
-  #column-center-cpanel {
-    width: 73%;
-    float: right; }
-  #column-right-cpanel {
-    display: none; } }
-@media screen and (max-width: 500px) {
-  .user_main_container {
-    -webkit-flex-direction: column;
-       -moz-box-orient: vertical;
-       -moz-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column; }
-  #user_main_child_3 {
-    margin-top: 5px; }
-  #usersearch {
-    margin-bottom: 20px; }
-  .links_list_row {
-    -webkit-flex-direction: column;
-       -moz-box-orient: vertical;
-       -moz-box-direction: normal;
-        -ms-flex-direction: column;
-            flex-direction: column; }
-  #linkcat_wide {
-    display: none; } }
-@media screen and (max-width: 1150px) {
-  .email_th {
-    display: none; }
-  .email_td {
-    display: none; }
-  .website_th {
-    display: none; }
-  .website_td {
-    display: none; } }
-@media screen and (max-width: 600px) {
-  .lastvisit_th {
-    display: none; }
-  .lastvisit_td {
-    display: none; }
-  .joindate_td {
-    display: none; }
-  .joindate_th {
-    display: none; }
-  #usersearch td {
-    text-align: center; }
-  #usersearch th {
-    text-align: center; }
-  #user_stats_img_dark {
-    display: none; }
-  .pub_td, #pub_th {
-    display: none; }
-  #game_th, .game_td {
-    text-align: center; }
-  #gd_basic_game_info_category {
-    width: 100%;
-    float: left;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    margin-left: 5%; }
-  #gd_other_features_left {
-    float: left;
-    width: 100%;
-    margin-bottom: 20px; }
-  #gd_game_aka {
-    margin-bottom: 20px; }
-  #gd_other_features_right {
-    float: right;
-    width: 100%; }
-  #gd_left {
-    float: left;
-    width: 100%; }
-  #gd_right {
-    float: right;
-    width: 100%; }
-  #gd_center {
-    float: right;
-    width: 100%; }
-  #gd_publisher_info {
-    margin-top: 0; } }
-@media screen and (min-width: 499px) {
-  #linkcat_small {
-    display: none; } }
-@media screen and (max-width: 550px) {
-  .links_mod_text {
-    width: 100%;
-    display: block; }
-  .links_mod_input {
-    width: 100%;
-    display: block; }
-  .links_mod_row {
-    width: 100%;
-    margin-bottom: 10px; }
-  .games_main_text {
-    width: 35%; }
-  .games_main_input {
-    width: 65%; } }
-@media screen and (max-width: 1040px) {
-  .dev_td, #dev_th {
-    display: none; } }
-@media screen and (max-width: 640px) {
-  .gc_left_head {
-    display: none; }
-  .gc_left {
-    display: none; } }
-@media screen and (max-width: 639px) {
-  #welcome {
-    visibility: hidden; }
-  .logon {
-    width: 100%;
-    margin-top: 20px; }
-  .column-left {
-    width: 100%; }
-  .column-center {
-    width: 100%;
-    margin-left: 0; }
-  .column-right {
-    width: 100%; }
-  .column-right-tab {
-    display: none; }
-  .column-left-tab {
-    display: none; }
-  .column-wide-right {
-    width: 100%; }
-  .column-wide-left {
-    display: none; } }
-@media screen and (min-width: 640px) and (max-width: 800px) {
-  #welcome {
-    margin-bottom: 20px; }
-  .logon {
-    margin-top: 0; }
-  .latest_news {
-    margin-top: 395px; }
-  .column-left {
-    width: 48%;
-    margin-top: -395px; }
-  .column-center {
-    width: 48%;
-    float: right; }
-  .column-right {
-    display: none; }
-  .column-left-tab {
-    width: 48%;
-    float: left; }
-  .column-right-tab {
-    width: 48%;
-    float: right; }
-  .column-wide-right {
-    width: 48%;
-    float: right; }
-  .column-wide-left {
-    width: 100%; } }
-@media screen and (min-width: 1495px) {
-  .latest_news {
-    float: left;
-    width: 48%; }
-  .screenstar_position_front {
-    width: 94%;
-    margin-top: -40px; }
-  .datequote_position_front {
-    float: left;
-    width: 94%; }
-  .whoisit_position_front {
-    float: right; }
-  .latest_reviews {
-    width: 49%;
-    float: right; }
-  .didyouknow_position_front {
-    float: left;
-    width: 100%; }
-  .statistics_position_front {
-    float: left;
-    width: 100%; }
-  .hotlinks_position_front {
-    width: 94%;
-    float: left; }
-  .contact_tiles {
-    width: 49%;
-    float: right; }
-  .column-wide-left {
-    width: 49%; }
-  .column-wide-center_1920 {
-    display: inline; }
-  .column-wide-right_1920 {
-    width: 24.75%;
-    float: right;
-    display: block; }
-  .column-wide-left_1920 {
-    width: 24.75%;
-    float: left;
-    display: block; }
-  .column-wide-right {
-    display: none; }
-  .column-left {
-    display: none; }
-  .column-center {
-    display: none; }
-  .column-right {
-    display: none; } }
-@media screen and (max-width: 800px) {
-  .datequote_position_front {
-    margin-top: 0; } }
-@media screen and (min-width: 481px) {
-  body {
-    background-image: url(../images/top_bg_sides.jpg);
-    background-position: left top;
-    background-repeat: repeat-x; } }
-@media screen and (min-width: 1921px) {
-  body {
-    background-image: url(../images/top_bg_sides.jpg), url(../images/main_bg.png), url(../images/main_bg.png);
-    background-position: left top, 100% 100%, -10% 25%;
-    background-repeat: repeat-x, no-repeat, no-repeat; } }
-@media screen and (min-width: 801px) {
-  .column-right-tab {
-    display: none; }
-  .column-left-tab {
-    display: none; } }
-@media screen and (min-width: 450px) and (max-width: 639px) {
-  .standard_list_entry {
-    height: 180px; } }
+
+/*# sourceMappingURL=style.css.map */

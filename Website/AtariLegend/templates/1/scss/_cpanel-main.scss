@@ -15,28 +15,11 @@ Front page
 #main_stats_position_front{ margin-top: 80px; margin-bottom: 20px;}
 #quick_search_position_front{ margin-top: 80px; margin-bottom: 20px; float: right;}
 	
-@media screen and (max-width: 1279px) {  
-#left_nav_position_front{ margin-top: 20px;}
-#main_stats_position_front{ margin-top: 20px;}
-}
-
 .user_stats_img{ max-width: 100%;
 		box-shadow: 0 0 12px #cccccc;	
 		opacity: 0.8;
 		filter: alpha(opacity=40); /* For IE8 and earlier */
 		margin-bottom: 10px;
-}
-
-/* Make the table view responsive */
-@media screen and (max-width: 799px) { 
-	#welcome_cpanel{ width:100%; margin-top: 10px; }		
-	#user_stats{ width:100%; }	
-	#main_stats_position_front{ width:100%; float: left;}
-	#left_nav_position_front{ width:100%;  float: left;}
-}
-
-@media screen and (max-width: 480px) { 
-	#welcome_cpanel{ width:100%; margin-top: 15px; }	
 }
 
 .main_stats_container {
@@ -46,24 +29,6 @@ Front page
   
 #child_some_stats { width:45%; float:left;}
 #child_good_karma,#child_bad_karma{ width:27%; float:left;}
-
-@media screen and (max-width: 1199px) { 
-	.main_stats_container {
-	  flex-direction: column; 
-	}	
-		
-	#child_some_stats,#child_good_karma,#child_bad_karma{width:100%; float:left;}
-	#child_good_karma,#child_bad_karma{margin-top:20px}
-
-	.main_stats_container >div {
-		width:100%;
-		}
-		
-	.main_stats_child {
-			display: block;
-			margin: 0 auto;
-		}
-}
 
 .main_stats_child  table { width:98%;}
 #user_stats table { width:100%;}
@@ -96,10 +61,6 @@ Left nav
 Quick search games
 ------------------------------------------------------------ */
 .quick_search_check {margin-right: 5px;}
-
-@media screen and (max-width: 1279px) { 
-	#quick_search_games_main{ margin-top: 20px;}
-}	
 
 #quick_search_options{display:table; 
 	width:75%; 
@@ -146,25 +107,4 @@ Quick search games
 #quick_search_small_select{ 
 	width: 50px;
 	height: 25px;
-}
-
-@media screen and (max-width: 1099px) { 
-	#quick_search_options{margin-left:5%; width:100%; }
-}
-
-@media screen and (max-width: 799px) { 
-	#quick_search_options{display:table; 
-		width:50%; 
-		margin-left:40%;
-		margin-right: auto;
-		text-align:left;	
-	}
-}
-
-@media screen and (max-width: 599px) { 
-	#quick_search_options { margin-left:30%;}
-}
-
-@media screen and (max-width: 399px) { 
-	#quick_search_options { width:75%; margin-left:15%;}
 }

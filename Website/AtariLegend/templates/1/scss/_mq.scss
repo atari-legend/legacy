@@ -1,0 +1,515 @@
+/*************************************************************/	
+/**********************LEGACY SKIN***************************/
+/*************************************************************/ 
+
+/*---------------------------------------------------------- 
+ media queries
+------------------------------------------------------------ */
+
+/*---------------------------------------------------------- 
+ Main website
+------------------------------------------------------------ */
+/*---------------------------------------------------------- 
+ Welcome tile settings --> frontpage
+------------------------------------------------------------ */
+/* 1 tile and a simplified intro screen */
+@media screen and (max-width: 639px) { 
+	#welcome  { visibility : hidden; }	
+}
+
+/* 2 tiles and background welcome image */
+@media screen and (min-width: 640px) and (max-width: 800px) { 
+	#welcome  { margin-bottom: 20px;
+	}
+}
+
+
+/*---------------------------------------------------------- 
+logon tile --> front page
+------------------------------------------------------------ */
+/* 2 tiles and background welcome image */
+@media screen and (min-width: 640px) and (max-width: 800px) { 
+	.logon { margin-top: 0;}
+}
+
+/* 1 tile */
+@media screen and (max-width: 639px) { 
+	.logon  { width: 100%; 
+	margin-top: 20px;	
+	margin-bottom: 20px;
+	}
+}
+
+
+/*---------------------------------------------------------- 
+latest news tile --> front page
+------------------------------------------------------------ */
+@media screen and (min-width: 640px) and (max-width: 800px) { 
+	.latest_news { margin-top: 395px;
+	}
+}
+
+@media screen and (min-width: 1495px){ 
+	.latest_news{ float: left; width: 48%;} 
+}
+
+
+/*---------------------------------------------------------- 
+screenstar tile - front page
+------------------------------------------------------------ */
+@media screen and (min-width: 1495px){ 
+	.screenstar_position_front  { margin-top: 20px; width: 94%;} 
+}
+
+
+/*---------------------------------------------------------- 
+datequote tile - front page
+------------------------------------------------------------ */
+/* 1 and 2 tiles */
+@media screen and (max-width: 800px) { 
+	.datequote_position_front { margin-top: 0;}
+}
+
+@media screen and (min-width: 1495px){ 
+	.datequote_position_front { float:left; width: 94%;} 
+}
+
+
+/*---------------------------------------------------------- 
+Who is it - front page
+------------------------------------------------------------ */
+@media screen and (min-width: 1495px){ 
+	.whoisit_position_front  { float:right;} 
+}
+
+
+/*---------------------------------------------------------- 
+Latest reviews tile - front page
+------------------------------------------------------------ */
+@media screen and (min-width: 1495px){ 
+	.latest_reviews  { width: 49%; float: right;} 
+}
+
+
+/*---------------------------------------------------------- 
+Did you know tile - front page
+------------------------------------------------------------ */
+@media screen and (min-width: 1495px){ 
+	.didyouknow_position_front  {float:left; width:100%;} 
+}
+
+
+/*---------------------------------------------------------- 
+Statistics tile - front page
+------------------------------------------------------------ */
+@media screen and (min-width: 1495px){ 
+	.statistics_position_front  {float:left; width:100%;} 
+}
+
+
+/*---------------------------------------------------------- 
+Hotlinks tile - front page
+------------------------------------------------------------ */
+@media screen and (min-width: 1495px){ 
+	.hotlinks_position_front {width: 94%; float: left;} 
+}
+
+
+/*---------------------------------------------------------- 
+contact tiles - front page
+------------------------------------------------------------ */
+@media screen and (min-width: 1495px){ 
+	.contact_tiles { width: 49%; float: right;} 
+}
+
+
+
+/*---------------------------------------------------------- 
+ CPanel
+------------------------------------------------------------ */
+/*---------------------------------------------------------- 
+Front page
+------------------------------------------------------------ */
+@media screen and (max-width: 1279px) {  
+	#left_nav_position_front{ margin-top: 20px;}
+	#main_stats_position_front{ margin-top: 20px;}
+}
+
+/* Make the table view responsive */
+@media screen and (max-width: 799px) { 
+	#welcome_cpanel{ width:100%; margin-top: 10px; }		
+	#user_stats{ width:100%; }	
+	#main_stats_position_front{ width:100%; float: left;}
+	#left_nav_position_front{ width:100%;  float: left;}
+}
+
+@media screen and (max-width: 480px) { 
+	#welcome_cpanel{ width:100%; margin-top: 15px; }	
+}
+
+@media screen and (max-width: 1199px) { 
+	.main_stats_container {
+	  flex-direction: column; 
+	}	
+		
+	#child_some_stats,#child_good_karma,#child_bad_karma{width:100%; float:left;}
+	#child_good_karma,#child_bad_karma{margin-top:20px}
+
+	.main_stats_container >div {
+		width:100%;
+		}
+		
+	.main_stats_child {
+			display: block;
+			margin: 0 auto;
+		}
+}
+
+/*---------------------------------------------------------- 
+Quick search games
+------------------------------------------------------------ */
+@media screen and (max-width: 1279px) { 
+	#quick_search_games_main{ margin-top: 20px;}
+}	
+
+@media screen and (max-width: 1099px) { 
+	#quick_search_options{margin-left:5%; width:100%; }
+}
+
+@media screen and (max-width: 799px) { 
+	#quick_search_options{display:table; 
+		width:50%; 
+		margin-left:40%;
+		margin-right: auto;
+		text-align:left;	
+	}
+}
+
+@media screen and (max-width: 599px) { 
+	#quick_search_options { margin-left:30%;}
+}
+
+@media screen and (max-width: 399px) { 
+	#quick_search_options { width:75%; margin-left:15%;}
+}
+
+
+/*---------------------------------------------------------- 
+User details
+------------------------------------------------------------ */
+@media screen and (max-width: 480px) { 
+	#user_details{ margin-top: 20px;}	
+	#leftnav_position_userdetails{ margin-top: 0;}
+}
+
+@media screen and (max-width: 1050px) { 
+	.user_details_container{
+		flex-direction: column;
+	}
+}
+	
+@media screen and (max-width: 1280px) { 	
+	#user_details{ margin-top: 20px;}	
+	#leftnav_position_userdetails{ margin-top: 20px;}
+	#child_1, #child_2{ width:100%;}
+}
+
+@media screen and (max-width: 480px) { 
+	.user_details_text{width:50%;display:inline;}
+	.user_details_input{width:50%;display:inline;}
+	.user_details_row{width:50%;}
+}
+
+
+/*---------------------------------------------------------- 
+User statistics
+------------------------------------------------------------ */
+@media screen and (max-width: 480px) { 
+	#leftnav_position_userstatistics{ margin-top: 0;}
+}
+
+@media screen and (max-width: 1279px) { 
+	#leftnav_position_userstatistics{ margin-top: 20px;}
+	#user_statistics{ margin-top: 20px;}
+}
+
+
+/*---------------------------------------------------------- 
+User main
+------------------------------------------------------------ */
+@media screen and (max-width: 1279px) { 
+	#leftnav_position_usermain{ margin-top: 20px;}
+	#user_main{margin-top: 20px;}
+	#main_stats_position_usermain{margin-bottom: 10px;}		
+}
+
+@media screen and (max-width: 500px) { 
+	.user_main_container{
+			flex-direction: column;
+	}
+	#user_main_child_3{margin-top:5px;}
+}
+
+
+/*---------------------------------------------------------- 
+User search
+------------------------------------------------------------ */
+@media screen and (max-width: 1279px) { 
+	#leftnav_position_usersearch{ margin-top: 20px;}
+	#usersearch{margin-top: 20px;}
+}
+
+@media screen and (max-width: 1150px) { 
+	.email_th{display: none;}
+	.email_td{display: none;}
+	.website_th{display: none;}
+	.website_td{display: none;}
+}
+
+@media screen and (max-width: 600px) { 
+	.lastvisit_th{display: none;}
+	.lastvisit_td{display: none;}
+	.joindate_td{display: none;}
+	.joindate_th{display: none;}
+	#usersearch td {text-align:center;}
+	#usersearch th {text-align:center;}
+}
+
+@media screen and (max-width: 500px) { 
+#usersearch{margin-bottom: 20px;}
+}
+
+
+/*---------------------------------------------------------- 
+User Karma
+------------------------------------------------------------ */
+@media screen and (max-width: 1279px) { 
+	#leftnav_position_karma{ margin-top: 20px;}
+	#karma{margin-top: 20px;}
+}
+
+
+/*---------------------------------------------------------- 
+Did you know
+------------------------------------------------------------ */
+@media screen and (max-width: 1279px) { 
+	#leftnav_position_didyouknow{ margin-top: 20px;}
+	#didyouknow{margin-top: 20px;}
+}
+
+
+/*---------------------------------------------------------- 
+Trivia Quotes
+------------------------------------------------------------ */
+@media screen and (max-width: 1279px) { 
+	#leftnav_position_triviaquotes{ margin-top: 20px;}
+	#triviaquotes{margin-top: 20px;}
+}
+
+
+/*---------------------------------------------------------- 
+Links addnew
+------------------------------------------------------------ */
+@media screen and (max-width: 1279px) { 
+	#leftnav_position_linkaddnew{ margin-top: 20px;}
+	#linkaddnew{margin-top: 20px;}
+}
+
+@media screen and (max-width: 480px) { 
+	.links_addnew_text{width:100%;display:block;}
+	.links_addnew_input{width:100%;display:block;}
+	.links_addnew_row{width:100%;}
+}
+
+
+/*---------------------------------------------------------- 
+Links Modify list
+------------------------------------------------------------ */
+@media screen and (max-width: 500px) { 
+	.links_list_row{
+			flex-direction: column;
+	}
+}
+
+@media screen and (max-width: 1279px) { 
+	#leftnav_position_linkmodlist{ margin-top: 20px;}
+	#linkmodlist{margin-top: 20px;}
+}
+
+@media screen and (max-width: 480px) { 
+	.user_stats_img_dark{display : none;}
+}	
+
+
+/*---------------------------------------------------------- 
+Links category
+------------------------------------------------------------ */
+@media screen and (max-width: 1279px) { 
+	#leftnav_position_linkcat{ margin-top: 20px;}
+	#linkcat{margin-top: 20px;}
+}
+
+@media screen and (max-width: 500px) { 
+	#linkcat_wide{ display: none;}
+}
+
+@media screen and (min-width: 499px) { 
+	#linkcat_small{ display: none;}
+}
+
+
+/*---------------------------------------------------------- 
+Links Modify
+------------------------------------------------------------ */
+@media screen and (max-width: 1279px) { 
+	#leftnav_position_linkmod{ margin-top: 20px;}
+	#link_mod{margin-top: 20px;}
+}
+
+@media screen and (max-width: 550px) { 
+	.links_mod_text{width:100%;display:block;}
+	.links_mod_input{width:100%;display:block;}
+	.links_mod_row{width:100%;margin-bottom:10px;}
+}
+
+@media screen and (max-width: 600px) { 
+	#user_stats_img_dark{display : none;}
+}
+
+
+/*---------------------------------------------------------- 
+Games main
+------------------------------------------------------------ */	
+@media screen and (max-width: 1279px) { 
+	#leftnav_position_games_main{ margin-top: 20px;}
+	#games_main{margin-top: 20px;}
+}
+
+@media screen and (max-width: 1050px) { 
+	.games_main_row{width:90%; }
+	.games_main_text{width:40%;}
+	.games_main_input{width:60%;}
+}
+
+@media screen and (max-width: 550px) { 
+	.games_main_text{width:35%;}
+	.games_main_input{width:65%;}
+}
+	
+@media screen and (max-width: 480px) { 
+	.games_main_text{display:inline;}
+	.games_main_input{display:inline;}
+	.games_main_row{width:50%;margin-left:10%}
+}
+
+@media screen and (max-width: 1050px) { 
+	.games_check_container{
+		flex-direction: column;
+		width: 100%;
+	}
+	#child_1, #child_2{width:100%; margin-left:10%;}
+}
+
+
+/*---------------------------------------------------------- 
+Games list
+------------------------------------------------------------ */	
+@media screen and (max-width: 1279px) { 
+	#quick_search_games_list{ margin-top: 20px;}
+	#games_list	{margin-top: 20px;}
+}
+
+@media screen and (max-width: 1210px) { 
+	.info_td,.year_td,#info_th,#year_th{display:none;}
+}
+
+@media screen and (max-width: 985px) { 
+	.dev_td,#dev_th{display:none;}
+}
+
+@media screen and (max-width: 600px) { 
+	 .pub_td,#pub_th{display:none;}
+	 #game_th,.game_td{text-align:center;}
+}
+
+
+/*---------------------------------------------------------- 
+Games detail
+------------------------------------------------------------ */	
+@media screen and (min-width: 1280px) {
+	#gd_other_features_left{display:none;}
+	#gd_other_features_right{display:none;}
+}
+
+@media screen and (max-width: 1279px) { 
+	#games_detail{margin-top: 20px;}
+	#quick_search_games_detail{margin-top: 20px;}
+	#leftnav_position_games_detail{margin-top: 20px;}
+	#gd_basic_game_info{width:100%; margin-bottom: 20px;}
+	#gd_other_features{display:none}
+	#gd_other_features_left{float:left; width:49%;}
+	#gd_other_features_right{float:right; width:49%;}
+	#gd_left{float:left; width:49%;}
+	#gd_right{float:right; width:49%;}
+	#gd_center{float:right; width:49%;}
+	#gd_back{margin-top:20px;}
+	#gd_publisher_info{margin-top:20px;}
+}
+
+@media screen and (max-width: 600px) { 
+	#gd_basic_game_info_category{width:100%; float:left; margin-top:20px; margin-bottom:20px; margin-left:5%}
+	#gd_other_features_left{float:left; width:100%; margin-bottom:20px;}
+	#gd_game_aka{margin-bottom:20px;}
+	#gd_other_features_right{float:right; width:100%;}
+	#gd_left{float:left; width:100%;}
+	#gd_right{float:right; width:100%;}
+	#gd_center{float:right; width:100%;}
+	#gd_publisher_info{margin-top:0px;}
+}
+
+
+/*---------------------------------------------------------- 
+Games comment
+------------------------------------------------------------ */	
+@media screen and (max-width: 1279px) { 
+	#leftnav_position_games_comment{margin-top: 20px;}
+	#quick_search_games_comment{margin-top: 20px;}
+	#games_comment{margin-top: 20px;}
+}
+
+@media screen and (max-width: 640px) { 
+	.gc_left_head{display:none;}
+	.gc_left{display:none;}
+}
+
+
+/*---------------------------------------------------------- 
+Games comment edit
+------------------------------------------------------------ */	
+@media screen and (max-width: 1279px) { 
+	#leftnav_position_games_comment_edit{margin-top: 20px;}
+	#quick_search_games_comment_edit{margin-top: 20px;}
+	#games_comment_edit{margin-top: 20px;}
+}
+
+
+/*---------------------------------------------------------- 
+ resolutions tested!
+------------------------------------------------------------ */
+/* smartphones, iPhone, portrait 480x320 phones */
+/* @media screen and (max-width: 320px) {  
+
+/* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */
+/* @media screen and (min-width: 481px) { 
+
+/* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */
+/* @media screen and (min-width: 641px) {  
+
+/* tablet, landscape iPad, lo-res laptops ands desktops */
+/* @media screen and (min-width: 961px) { 
+
+/* big landscape tablets, laptops, and desktops */
+/* @media screen and (min-width: 1025px) { 
+
+/* hi-res laptops and desktops */
+/* @media screen and (min-width: 1281px) {  */
