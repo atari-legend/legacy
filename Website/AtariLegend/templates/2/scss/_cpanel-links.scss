@@ -14,16 +14,6 @@ Links addnew
 #linkvalidate{ margin-bottom: 30px; float: left;}
 #quick_search_games_position_linkaddnew{margin-top: 50px; margin-bottom: 30px;}
 
-
-@media screen and (max-width: 1279px) { 
-	#leftnav_position_linkaddnew{ margin-top: 20px;}
-	#linkaddnew{margin-top: 20px;}
-}
-
-@media screen and (max-width: 480px) { 
-	#linkaddnew{ margin-top: 0;}
-}
-
 .links_addnew_area { background: #666666;
 				color: #ffffff;				
 				width: 90%;
@@ -64,12 +54,6 @@ Links addnew
 	color: black;
 }
 
-@media screen and (max-width: 480px) { 
-.links_addnew_text{width:50%;display:inline;}
-.links_addnew_input{width:50%;display:inline;}
-.links_addnew_row{width:50%;}
-}
-
 /*---------------------------------------------------------- 
 Links Modify list
 ------------------------------------------------------------ */
@@ -94,20 +78,6 @@ Links Modify list
   align-items: center;
  }
  
-@media screen and (max-width: 500px) { 
-	.links_list_row{
-			flex-direction: column;
-	}
-}
-	
-@media screen and (max-width: 1279px) { 
-	#leftnav_position_linkmodlist{ margin-top: 20px;}
-	#linkmodlist{margin-top: 20px;}
-}
-
-@media screen and (max-width: 480px) { 
-	.user_stats_img_dark{display : none;}
-}	
 
 /*---------------------------------------------------------- 
 Links category
@@ -117,22 +87,6 @@ Links category
 #quick_search_games_position_linkcat{margin-top: 50px; margin-bottom: 30px;}
 .link_cat_td { text-align:right;}
 
-@media screen and (max-width: 1279px) { 
-	#leftnav_position_linkcat{ margin-top: 20px;}
-	#linkcat{margin-top: 20px;}
-}
-
-@media screen and (max-width: 480px) { 
-	#linkcat{ margin-top: 0;}
-}
-
-@media screen and (max-width: 500px) { 
-#linkcat_wide{ display: none;}
-}
-
-@media screen and (min-width: 499px) { 
-#linkcat_small{ display: none;}
-}
 
 /*---------------------------------------------------------- 
 Links Modify
@@ -141,25 +95,6 @@ Links Modify
 #link_mod{margin-top: 50px; margin-bottom: 30px; float: left;}
 #quick_search_games_position_linkmod{margin-top: 50px; margin-bottom: 30px;}
 
-@media screen and (max-width: 1279px) { 
-	#leftnav_position_linkmod{ margin-top: 20px;}
-	#link_mod{margin-top: 20px;}
-}
-
-@media screen and (max-width: 480px) { 
-	#link_mod{ margin-top: 0;}
-}
-
 .links_mod_text{width:35%;display:table-cell; vertical-align:top;}
 .links_mod_input{width:65%;display:table-cell;}
 .links_mod_row{display:table;width:100%;}
-
-@media screen and (max-width: 550px) { 
-.links_mod_text{width:100%;display:block;}
-.links_mod_input{width:100%;display:block;}
-.links_mod_row{width:100%;margin-bottom:10px;}
-}
-
-@media screen and (max-width: 600px) { 
-#user_stats_img_dark{display : none;}
-}

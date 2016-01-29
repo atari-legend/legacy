@@ -13,32 +13,9 @@ Games main
 #games_main{ margin-top: 50px; margin-bottom: 30px; float: left;}
 #leftnav_position_games_main{ margin-top: 50px; margin-bottom: 30px; float: left;}
 
-@media screen and (max-width: 1279px) { 
-	#leftnav_position_games_main{ margin-top: 20px;}
-	#games_main{margin-top: 20px;}
-}
-
 .games_main_text{width:25%;display:table-cell;font-weight:bold;}
 .games_main_input{width:75%;display:table-cell;}
 .games_main_row{display:table;width:75%;margin-left:auto;}
-
-@media screen and (max-width: 1050px) { 
-.games_main_row{width:90%; }
-.games_main_text{width:40%;}
-.games_main_input{width:60%;}
-}
-
-@media screen and (max-width: 550px) { 
-	.games_main_text{width:35%;}
-	.games_main_input{width:65%;}
-}
-	
-
-@media screen and (max-width: 480px) { 
-	.games_main_text{display:inline;}
-	.games_main_input{display:inline;}
-	.games_main_row{width:50%;margin-left:10%}
-}
 
 .games_check_container{
   display: flex; 
@@ -50,14 +27,6 @@ Games main
 .games_check_text{width:95%;display:table-cell;font-weight:bold;}
 .games_check_box{width:5%;display:table-cell;}
 .games_check_row{display:table;width:100%;}
-
-@media screen and (max-width: 1050px) { 
-	.games_check_container{
-		flex-direction: column;
-		width: 100%;
-	}
-	#child_1, #child_2{width:100%; margin-left:10%;}
-}
 
 #games_main_pub_select{ 
 	width: 185px;
@@ -86,12 +55,6 @@ Games list
 #quick_search_games_list{margin-top: 50px; margin-bottom: 00px; float: left;}
 #leftnav_position_games_list{margin-top: 50px; margin-bottom: 30px; float: left;}
 
-
-@media screen and (max-width: 1279px) { 
-	#quick_search_games_list{ margin-top: 20px;}
-	#games_list	{margin-top: 20px;}
-}
-
 #game_th{width:40%;text-align: left;}
 #pub_th,#dev_th{width:20%;text-align: left;}
 #year_th,#info_th{width:10%;text-align: left;}
@@ -115,19 +78,6 @@ Games list
 		text-align: left;
 		padding-left: 2px;
 		width:10%;
-}
-
-@media screen and (max-width: 1174px) { 
- .info_td,.year_td,#info_th,#year_th{display:none;}
-}
-
-@media screen and (max-width: 949px) { 
- .dev_td,#dev_th{display:none;}
-}
-
-@media screen and (max-width: 600px) { 
- .pub_td,#pub_th{display:none;}
- #game_th,.game_td{text-align:center;}
 }
 
 #game_list_table{width: 100%;}
@@ -175,54 +125,12 @@ Games detail
 }	
 
 
-@media screen and (min-width: 1280px) {
-	#gd_other_features_left{display:none;}
-	#gd_other_features_right{display:none;}
-}
-
-@media screen and (max-width: 1279px) { 
-	#games_detail{margin-top: 20px;}
-	#leftnav_position_games_detail{margin-top: 20px;}
-	#quick_search_games_detail{margin-top: 20px;}
-	#gd_basic_game_info{width:100%; margin-bottom: 20px;}
-	#gd_other_features{display:none}
-	#gd_other_features_left{float:left; width:49%;}
-	#gd_other_features_right{float:right; width:49%;}
-	#gd_left{float:left; width:49%;}
-	#gd_right{float:right; width:49%;}
-	#gd_center{float:right; width:49%;}
-	#gd_back{margin-top:20px;}
-	#gd_publisher_info{margin-top:20px;}
-}
-
-@media screen and (max-width: 600px) { 
-	#gd_basic_game_info_category{width:100%; float:left; margin-top:20px; margin-bottom:20px; margin-left:5%}
-	#gd_other_features_left{float:left; width:100%; margin-bottom:20px;}
-	#gd_game_aka{margin-bottom:20px;}
-	#gd_other_features_right{float:right; width:100%;}
-	#gd_left{float:left; width:100%;}
-	#gd_right{float:right; width:100%;}
-	#gd_center{float:right; width:100%;}
-	#gd_publisher_info{margin-top:0;}
-}
-
 /*---------------------------------------------------------- 
 Games comment
 ------------------------------------------------------------ */	
 #quick_search_games_comment{margin-top: 50px; margin-bottom: 30px; float: left;}
 #leftnav_position_games_comment{margin-top: 50px; margin-bottom: 30px; float: left;}
 #games_comment{margin-top: 50px; margin-bottom: 30px; float: left;}
-
-@media screen and (max-width: 1279px) { 
-	#leftnav_position_games_comment{margin-top: 20px;}
-	#quick_search_games_comment{margin-top: 20px;}
-	#games_comment{margin-top: 20px;}
-}
-
-@media screen and (max-width: 640px) { 
-	.gc_left_head{display:none;}
-	.gc_left{display:none;}
-}
 
 .gc_table_list {
 	width: 100%;
@@ -260,12 +168,6 @@ Games comment edit
 #quick_search_games_comment_edit{margin-top: 50px; margin-bottom: 00px; float: left;}
 #leftnav_position_games_comment_edit{margin-top: 50px; margin-bottom: 30px; float: left;}
 #games_comment_edit{margin-top: 50px; margin-bottom: 30px; float: left;}
-
-@media screen and (max-width: 1279px) { 
-	#leftnav_position_games_comment_edit{margin-top: 20px;}
-	#quick_search_games_comment_edit{margin-top: 20px;}
-	#games_comment_edit{margin-top: 20px;}
-}
 
 #gce_button,#gce_button2{display:inline;}
 
