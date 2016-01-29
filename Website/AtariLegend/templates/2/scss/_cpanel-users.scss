@@ -23,25 +23,6 @@ User details
 .user_details_input{width:50%;display:table-cell;}
 .user_details_row{display:table;width:100%;}
 
-@media screen and (max-width: 1050px) { 
-	.user_details_container{
-		flex-direction: column;
-	}
-}
-	
-@media screen and (max-width: 1280px) { 	
-	#user_details{ margin-top: 20px;}	
-	#leftnav_position_userdetails{ margin-top: 20px;}
-	#child_1, #child_2{ width:100%;}
-}
-
-@media screen and (max-width: 480px) { 
-.user_details_text{width:50%;display:inline;}
-.user_details_input{width:50%;display:inline;}
-.user_details_row{width:50%;}
-#user_details{ width:100%; margin-top: -10px;}	
-#leftnav_position_userdetails{ margin-top: -5px;}
-}
 
 /*---------------------------------------------------------- 
 User statistics
@@ -49,15 +30,6 @@ User statistics
 #leftnav_position_userstatistics{ margin-top: 50px; margin-bottom: 30px; float: left;}
 #user_statistics{ margin-top: 50px; margin-bottom: 30px; float: left;}
 
-@media screen and (max-width: 1279px) { 
-	#leftnav_position_userstatistics{ margin-top: 20px;}
-	#user_statistics{ margin-top: 20px;}
-}
-
-@media screen and (max-width: 480px) { 
-	#leftnav_position_userstatistics{ margin-top: 0;}
-	#user_statistics{ margin-top: 0;}
-}
 
 /*---------------------------------------------------------- 
 User main
@@ -72,24 +44,7 @@ User main
   justify-content: center;
   align-items: center;
  }
- 
-@media screen and (max-width: 1279px) { 
-	#leftnav_position_usermain{ margin-top: 20px;}
-	#user_main{margin-top: 20px;}
-	#main_stats_position_usermain{margin-bottom: 10px;}		
-}
 
-@media screen and (max-width: 500px) { 
-	.user_main_container{
-			flex-direction: column;
-	}
-	#user_main_child_3{margin-top:5px;}
-}
-
-@media screen and (max-width: 480px) { 
-	#user_main{ width:100%; margin-top: -10px;}	
-	#leftnav_position_usermain{ margin-top: 20px;}
-}
 
 /*---------------------------------------------------------- 
 User search
@@ -106,35 +61,6 @@ User search
 .website_td{width:15%;color: black; font-size: 12pt; padding-left: 2px;}
 #user_search_main_tabel{border:0; width:100%; margin-top:3px; margin-bottom:3px;}
 
-@media screen and (max-width: 1279px) { 
-	#leftnav_position_usersearch{ margin-top: 20px;}
-	#usersearch{margin-top: 20px;}
-}
-
-@media screen and (max-width: 1150px) { 
-	.email_th{display: none;}
-	.email_td{display: none;}
-	.website_th{display: none;}
-	.website_td{display: none;}
-}
-
-@media screen and (max-width: 600px) { 
-	.lastvisit_th{display: none;}
-	.lastvisit_td{display: none;}
-	.joindate_td{display: none;}
-	.joindate_th{display: none;}
-	#usersearch td {text-align:center;}
-	#usersearch th {text-align:center;}
-}
-
-@media screen and (max-width: 500px) { 
-#usersearch{margin-bottom: 20px;}
-}
-
-@media screen and (max-width: 480px) { 
-	#usersearch{ width:100%; margin-top: -10px;}	
-	#leftnav_position_usersearch{ margin-top: 20px;}
-}
 
 /*---------------------------------------------------------- 
 User karma
@@ -143,13 +69,3 @@ User karma
 #quick_search_games_position_karma{ margin-top: 50px; margin-bottom: 30px;}
 #karma{ margin-top: 50px; margin-bottom: 30px; float: left;}
 .karma_column{width:50%; text-align:center;}
-
-
-@media screen and (max-width: 1279px) { 
-	#leftnav_position_karma{ margin-top: 20px;}
-	#karma{margin-top: 20px;}
-}
-
-@media screen and (max-width: 480px) { 
-	#karma{ margin-top: 0;}
-}

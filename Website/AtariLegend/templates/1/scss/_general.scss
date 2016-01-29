@@ -35,31 +35,7 @@ body a {text-decoration:none;}
 body a:hover {text-decoration:none;}
 body a:visited {text-decoration:none;}
 
-/*---------------------------------------------------------- 
-Background images
------------------------------------------------------------- */
-@media screen and (min-width: 1280px){
-	body { background-image: url(../../../templates/1/images/top_bg_menu.png), url(../../../templates/1/images/top_bg_sides.jpg); 
-	  background-position: left 225px,left top;
-	  background-repeat: repeat-x,repeat-x;}
-}
-
-@media screen and (min-width: 1920px) { 
-	body {	background-image: url(../../../templates/1/images/top_bg_left.jpg), url(../../../templates/1/images/top_bg_right.jpg), url(../../../templates/1/images/top_bg_menu.png);
-			background-position: left 2px, right 2px, left 225px;
-			background-repeat: no-repeat, no-repeat, repeat-x;
-		 }
-}
-
-@media screen and (min-width: 1921px) { 
-	body { 	background-image: url(../../../templates/1/images/top_bg_sides.jpg), url(../../../templates/1/images/top_bg_menu.png), url(../../../templates/1/images/main_bg.png), url(../../../templates/1/images/main_bg.png); 
-			background-position: left top, left 225px, -3% 45%, 95% 125%, left top;
-			background-repeat: repeat-x, repeat-x, no-repeat, no-repeat;
-		}
-}
- 
-img { display: block;
-}
+img { display: block;}
 
 /*---------------------------------------------------------- 
  Main site width
@@ -115,49 +91,6 @@ From a width of 801 we will be having rows of 3 tiles
 .column-wide-right_1920 {display: none;	}
 .column-wide-left_1920 {display: none;}
 .column-wide-center_1920{display: none;}
-
-/* 2 tiles and background welcome image */
-@media screen and (min-width: 640px) and (max-width: 800px)
-{
-	.column-left { width: 48%; 
-			margin-top: -395px;
-	}
-	.column-center { width: 48%; float:right;
-	}
-	.column-right{display : none;}
-	.column-left-tab { width: 48%; float: left;}
-	.column-right-tab { width: 48%; float: right}
-	.column-wide-right {width: 48%; float: right}
-	.column-wide-left {width: 100%; }
-}
-
-/* 1 tile and a simplified intro screen */
-@media screen and (max-width: 639px) { 
-	.column-left { width: 100%; } 
-	.column-center { width: 100%; margin-left: 0;}
-	.column-right { width: 100%; }	
-	.column-right-tab {display:none}
-	.column-left-tab {display:none}
-	.column-wide-right { width: 100%;}
-	.column-wide-left {display:none}
-}
-
-@media screen and (min-width: 801px) { 
-	.column-right-tab {display:none}
-	.column-left-tab {display:none}
-}
-
-/*  4 tiles and background welcome image */
-@media screen and (min-width: 1495px){ 
-	.column-wide-left { width: 49%;}
-	.column-wide-center_1920 { display:inline; width: 100%;}
-	.column-wide-right_1920 { width: 24.75%; float: right; display:block;}
-	.column-wide-left_1920 { width: 24.75%; float: left; display:block;}
-	.column-wide-right {display: none;}
-	.column-left {display: none;}
-	.column-center{display: none;}
-	.column-right {display: none;}
-}
 
 .standard_tile  { width: 100%; 
 		background-color: #122323;
@@ -379,10 +312,6 @@ From a width of 801 we will be having rows of 3 tiles
   		text-overflow: ellipsis;		
 }
 
-@media screen and (min-width: 450px) and (max-width: 639px) { 
-	.standard_list_entry{height: 180px;}
-} 
- 
 .standard_tile_text { padding : 20px;}
 
 .standard_tile select  { 
@@ -436,20 +365,6 @@ Standard table settings
 #column-right-cpanel { width: 20%; 
 	 float:right;
 	 margin-left: 1%;
-}
-
-@media screen and (max-width: 1280px) { 	
-	#column-left-cpanel { width: 25%; 
-		 float:left;
-	}
-
-	#column-center-cpanel { width: 73%; 
-		 float:right;
-	}
-
-	#column-right-cpanel { display: none;
-	}
-
 }
 
 .standard_table_list {
@@ -540,29 +455,6 @@ Standard table settings
   background:#006f6f;
   color: white;
   border-bottom: 3px solid #122323;
-}
-
-/* for lower resolutions put the left and right below eachother */
-@media screen and (max-width: 799px) { 	
-.main_container_cpanel {
-  display: flex;
-  flex-direction: column-reverse; 
-  float: left;
-  width:100%;
-}	
-	
-#column-left-cpanel { width:100%; float:left; margin:auto;  }
-#column-center-cpanel { width:100%; float:left; margin:auto;  }
-#column-right-cpanel { width:100%; float:right; margin:auto; }
-
-.main_container_cpanel >div {
-	width:100%;
-	}
-	
-.content_box_cpanel {
-		display: block;
-		margin: 0 auto;
-	}
 }
 
 fieldset { 

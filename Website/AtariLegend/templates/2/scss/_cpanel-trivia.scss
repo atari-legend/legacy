@@ -13,15 +13,6 @@ Did you know
 #quick_search_games_position_didyouknow{ margin-top: 50px; margin-bottom: 30px; float: left;}
 #didyouknow{ margin-top: 50px; margin-bottom: 30px; float: left;}
 
-@media screen and (max-width: 1279px) { 
-	#leftnav_position_didyouknow{ margin-top: 20px;}
-	#didyouknow{margin-top: 20px;}
-}
-
-@media screen and (max-width: 480px) { 
-	#didyouknow{ margin-top: 0;}
-}
-
 
 /*---------------------------------------------------------- 
 Trivia Quotes
@@ -29,12 +20,3 @@ Trivia Quotes
 #leftnav_position_triviaquotes{ margin-top: 50px; margin-bottom: 30px; float: left;}
 #quick_search_games_position_triviaquotes{ margin-top: 50px; margin-bottom: 30px; float: left;}
 #triviaquotes{ margin-top: 50px; margin-bottom: 30px; float: left;}
-
-@media screen and (max-width: 1279px) { 
-	#leftnav_position_triviaquotes{ margin-top: 20px;}
-	#triviaquotes{margin-top: 20px;}
-}
-
-@media screen and (max-width: 480px) { 
-	#triviaquotes{ margin-top: 0;}
-}

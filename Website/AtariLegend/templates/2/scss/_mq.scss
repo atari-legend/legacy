@@ -1,5 +1,5 @@
 /*************************************************************/	
-/**********************LEGACY SKIN***************************/
+/**********************PICASSO SKIN***************************/
 /*************************************************************/ 
 
 /*---------------------------------------------------------- 
@@ -23,7 +23,6 @@
 	}
 }
 
-
 /*---------------------------------------------------------- 
 logon tile --> front page
 ------------------------------------------------------------ */
@@ -35,11 +34,10 @@ logon tile --> front page
 /* 1 tile */
 @media screen and (max-width: 639px) { 
 	.logon  { width: 100%; 
-	margin-top: 20px;	
+	margin-top: 0;	
 	margin-bottom: 20px;
 	}
 }
-
 
 /*---------------------------------------------------------- 
 latest news tile --> front page
@@ -50,15 +48,14 @@ latest news tile --> front page
 }
 
 @media screen and (min-width: 1495px){ 
-	.latest_news{ float: left; width: 48%;} 
+	.latest_news   { float: left; width: 48%;} 
 }
-
 
 /*---------------------------------------------------------- 
 screenstar tile - front page
 ------------------------------------------------------------ */
 @media screen and (min-width: 1495px){ 
-	.screenstar_position_front  { margin-top: 20px; width: 94%;} 
+	.screenstar_position_front  { float:left; width: 94%; margin-top: -10px;} 
 }
 
 
@@ -112,7 +109,7 @@ Hotlinks tile - front page
 ------------------------------------------------------------ */
 @media screen and (min-width: 1495px){ 
 	.hotlinks_position_front {width: 94%; float: left;} 
-}
+}	
 
 
 /*---------------------------------------------------------- 
@@ -121,7 +118,6 @@ contact tiles - front page
 @media screen and (min-width: 1495px){ 
 	.contact_tiles { width: 49%; float: right;} 
 }
-
 
 
 /*---------------------------------------------------------- 
@@ -139,12 +135,13 @@ Front page
 @media screen and (max-width: 799px) { 
 	#welcome_cpanel{ width:100%; margin-top: 10px; }		
 	#user_stats{ width:100%; }	
-	#main_stats_position_front{ width:100%; float: left;}
+	#main_stats_position_front{ width:100%; float: left; }
 	#left_nav_position_front{ width:100%;  float: left;}
 }
 
 @media screen and (max-width: 480px) { 
-	#welcome_cpanel{ width:100%; margin-top: 15px; }	
+	#welcome_cpanel{ width:100%; margin-top: 0;}	
+	#main_stats_position_front{ margin-top: -5px;}
 }
 
 @media screen and (max-width: 1199px) { 
@@ -164,6 +161,7 @@ Front page
 			margin: 0 auto;
 		}
 }
+
 
 /*---------------------------------------------------------- 
 Quick search games
@@ -197,11 +195,6 @@ Quick search games
 /*---------------------------------------------------------- 
 User details
 ------------------------------------------------------------ */
-@media screen and (max-width: 480px) { 
-	#user_details{ margin-top: 20px;}	
-	#leftnav_position_userdetails{ margin-top: 0;}
-}
-
 @media screen and (max-width: 1050px) { 
 	.user_details_container{
 		flex-direction: column;
@@ -218,19 +211,22 @@ User details
 	.user_details_text{width:50%;display:inline;}
 	.user_details_input{width:50%;display:inline;}
 	.user_details_row{width:50%;}
+	#user_details{ width:100%; margin-top: -10px;}	
+	#leftnav_position_userdetails{ margin-top: -5px;}
 }
 
 
 /*---------------------------------------------------------- 
 User statistics
 ------------------------------------------------------------ */
-@media screen and (max-width: 480px) { 
-	#leftnav_position_userstatistics{ margin-top: 0;}
-}
-
 @media screen and (max-width: 1279px) { 
 	#leftnav_position_userstatistics{ margin-top: 20px;}
 	#user_statistics{ margin-top: 20px;}
+}
+
+@media screen and (max-width: 480px) { 
+	#leftnav_position_userstatistics{ margin-top: 0;}
+	#user_statistics{ margin-top: 0;}
 }
 
 
@@ -248,6 +244,11 @@ User main
 			flex-direction: column;
 	}
 	#user_main_child_3{margin-top:5px;}
+}
+
+@media screen and (max-width: 480px) { 
+	#user_main{ width:100%; margin-top: -10px;}	
+	#leftnav_position_usermain{ margin-top: 20px;}
 }
 
 
@@ -276,16 +277,25 @@ User search
 }
 
 @media screen and (max-width: 500px) { 
-#usersearch{margin-bottom: 20px;}
+	#usersearch{margin-bottom: 20px;}
+}
+
+@media screen and (max-width: 480px) { 
+	#usersearch{ width:100%; margin-top: -10px;}	
+	#leftnav_position_usersearch{ margin-top: 20px;}
 }
 
 
 /*---------------------------------------------------------- 
-User Karma
+User karma
 ------------------------------------------------------------ */
 @media screen and (max-width: 1279px) { 
 	#leftnav_position_karma{ margin-top: 20px;}
 	#karma{margin-top: 20px;}
+}
+
+@media screen and (max-width: 480px) { 
+	#karma{ margin-top: 0;}
 }
 
 
@@ -297,6 +307,10 @@ Did you know
 	#didyouknow{margin-top: 20px;}
 }
 
+@media screen and (max-width: 480px) { 
+	#didyouknow{ margin-top: 0;}
+}
+
 
 /*---------------------------------------------------------- 
 Trivia Quotes
@@ -304,6 +318,10 @@ Trivia Quotes
 @media screen and (max-width: 1279px) { 
 	#leftnav_position_triviaquotes{ margin-top: 20px;}
 	#triviaquotes{margin-top: 20px;}
+}
+
+@media screen and (max-width: 480px) { 
+	#triviaquotes{ margin-top: 0;}
 }
 
 
@@ -316,9 +334,13 @@ Links addnew
 }
 
 @media screen and (max-width: 480px) { 
-	.links_addnew_text{width:100%;display:block;}
-	.links_addnew_input{width:100%;display:block;}
-	.links_addnew_row{width:100%;}
+	#linkaddnew{ margin-top: 0;}
+}
+
+@media screen and (max-width: 480px) { 
+	.links_addnew_text{width:50%;display:inline;}
+	.links_addnew_input{width:50%;display:inline;}
+	.links_addnew_row{width:50%;}
 }
 
 
@@ -330,7 +352,7 @@ Links Modify list
 			flex-direction: column;
 	}
 }
-
+	
 @media screen and (max-width: 1279px) { 
 	#leftnav_position_linkmodlist{ margin-top: 20px;}
 	#linkmodlist{margin-top: 20px;}
@@ -349,6 +371,10 @@ Links category
 	#linkcat{margin-top: 20px;}
 }
 
+@media screen and (max-width: 480px) { 
+	#linkcat{ margin-top: 0;}
+}
+
 @media screen and (max-width: 500px) { 
 	#linkcat_wide{ display: none;}
 }
@@ -360,10 +386,14 @@ Links category
 
 /*---------------------------------------------------------- 
 Links Modify
------------------------------------------------------------- */
+------------------------------------------------------------ */	
 @media screen and (max-width: 1279px) { 
 	#leftnav_position_linkmod{ margin-top: 20px;}
 	#link_mod{margin-top: 20px;}
+}
+
+@media screen and (max-width: 480px) { 
+	#link_mod{ margin-top: 0;}
 }
 
 @media screen and (max-width: 550px) { 
@@ -386,9 +416,9 @@ Games main
 }
 
 @media screen and (max-width: 1050px) { 
-	.games_main_row{width:90%; }
-	.games_main_text{width:40%;}
-	.games_main_input{width:60%;}
+.games_main_row{width:90%; }
+.games_main_text{width:40%;}
+.games_main_input{width:60%;}
 }
 
 @media screen and (max-width: 550px) { 
@@ -396,6 +426,7 @@ Games main
 	.games_main_input{width:65%;}
 }
 	
+
 @media screen and (max-width: 480px) { 
 	.games_main_text{display:inline;}
 	.games_main_input{display:inline;}
@@ -419,17 +450,17 @@ Games list
 	#games_list	{margin-top: 20px;}
 }
 
-@media screen and (max-width: 1210px) { 
-	.info_td,.year_td,#info_th,#year_th{display:none;}
+@media screen and (max-width: 1174px) { 
+ .info_td,.year_td,#info_th,#year_th{display:none;}
 }
 
-@media screen and (max-width: 985px) { 
-	.dev_td,#dev_th{display:none;}
+@media screen and (max-width: 949px) { 
+ .dev_td,#dev_th{display:none;}
 }
 
 @media screen and (max-width: 600px) { 
-	 .pub_td,#pub_th{display:none;}
-	 #game_th,.game_td{text-align:center;}
+ .pub_td,#pub_th{display:none;}
+ #game_th,.game_td{text-align:center;}
 }
 
 
@@ -443,8 +474,8 @@ Games detail
 
 @media screen and (max-width: 1279px) { 
 	#games_detail{margin-top: 20px;}
-	#quick_search_games_detail{margin-top: 20px;}
 	#leftnav_position_games_detail{margin-top: 20px;}
+	#quick_search_games_detail{margin-top: 20px;}
 	#gd_basic_game_info{width:100%; margin-bottom: 20px;}
 	#gd_other_features{display:none}
 	#gd_other_features_left{float:left; width:49%;}
@@ -464,7 +495,7 @@ Games detail
 	#gd_left{float:left; width:100%;}
 	#gd_right{float:right; width:100%;}
 	#gd_center{float:right; width:100%;}
-	#gd_publisher_info{margin-top:0px;}
+	#gd_publisher_info{margin-top:0;}
 }
 
 
@@ -493,32 +524,40 @@ Games comment edit
 }
 
 
+
 /*---------------------------------------------------------- 
 General settings
 ------------------------------------------------------------ */
-
 /*---------------------------------------------------------- 
 Background images
 ------------------------------------------------------------ */
+@media screen and (min-width: 481px) { 
+	body { background-image: url(../../../templates/2/images/top_bg_sides.jpg);
+		  background-position: left top;
+		  background-repeat: repeat-x;
+	}
+}
+
 @media screen and (min-width: 1280px){
-	body { background-image: url(../../../templates/1/images/top_bg_menu.png), url(../../../templates/1/images/top_bg_sides.jpg); 
-	  background-position: left 225px,left top;
-	  background-repeat: repeat-x,repeat-x;}
+	body { background-image: url(../../../templates/2/images/top_bg_menu.jpg), url(../../../templates/2/images/top_bg_sides.jpg);
+	  background-position: left 220px, left top;
+	  background-repeat: repeat-x, repeat-x;}
 }
 
 @media screen and (min-width: 1920px) { 
-	body {	background-image: url(../../../templates/1/images/top_bg_left.jpg), url(../../../templates/1/images/top_bg_right.jpg), url(../../../templates/1/images/top_bg_menu.png);
-			background-position: left 2px, right 2px, left 225px;
-			background-repeat: no-repeat, no-repeat, repeat-x;
+	body {	background-image: url(../../../templates/2/images/top_bg_left.jpg), url(../../../templates/2/images/top_bg_right.jpg), url(../../../templates/2/images/top_bg_menu.jpg);
+			background-position: left 2px, right 2px, left 220px;
+			background-repeat: no-repeat, repeat-x, repeat-x;
 		 }
 }
 
 @media screen and (min-width: 1921px) { 
-	body { 	background-image: url(../../../templates/1/images/top_bg_sides.jpg), url(../../../templates/1/images/top_bg_menu.png), url(../../../templates/1/images/main_bg.png), url(../../../templates/1/images/main_bg.png); 
-			background-position: left top, left 225px, -3% 45%, 95% 125%, left top;
+	body { 	background-image: url(../../../templates/2/images/top_bg_sides.jpg), url(../../../templates/2/images/top_bg_menu.jpg), url(../../../templates/2/images/main_bg.png), url(../../../templates/2/images/main_bg.png); 
+			background-position: left top, left 220px, -3% 45%, 110% 135%, left top;
 			background-repeat: repeat-x, repeat-x, no-repeat, no-repeat;
 		}
 }
+
 
 /*------------------------------------------------------------
 Standard tile settings 
@@ -570,6 +609,107 @@ From a width of 801 we will be having rows of 3 tiles
 	.column-right {display: none;}
 }
 
+
+@media screen and (max-width: 5501px) { 
+.standard_tile_title{ margin-top : 47.5%;
+	}
+}
+
+@media screen and (max-width: 1921px) { 
+.standard_tile_title{ margin-top : 48.5%;
+	}
+}
+
+@media screen and (max-width: 1801px) { 
+.standard_tile_title{ margin-top : 47%;
+	}
+}
+
+@media screen and (max-width: 1701px) { 
+.standard_tile_title{ margin-top : 46%;
+	}
+}
+
+@media screen and (max-width: 1601px) { 
+.standard_tile_title{ margin-top : 45%;
+	}
+}
+
+@media screen and (max-width: 1501px) { 
+.standard_tile_title{ margin-top : 44.5%;
+	}
+}
+
+@media screen and (max-width: 1401px) { 
+.standard_tile_title{ margin-top : 47.5%;
+	}
+}
+
+@media screen and (max-width: 1301px) { 
+.standard_tile_title{ margin-top : 46.5%;
+	}
+}
+
+@media screen and (max-width: 1201px) { 
+.standard_tile_title{ margin-top : 45.5%;
+	}
+}
+
+@media screen and (max-width: 1101px) { 
+.standard_tile_title{ margin-top : 44%;
+	}
+}
+
+ @media screen and (max-width: 1001px) { 
+.standard_tile_title{ margin-top : 42.5%;
+	}
+}
+
+ @media screen and (max-width: 900px) { 
+.standard_tile_title{ margin-top : 40.5%;
+	}
+}
+
+@media screen and (max-width: 800px) { 
+.standard_tile_title{ margin-top : 45.5%;
+	}
+}
+
+@media screen and (max-width: 700px) { 
+.standard_tile_title{ margin-top : 42%;
+	}
+}
+
+@media screen and (max-width: 639px) { 
+.standard_tile_title{ margin-top : 51%;
+	}
+}
+
+@media screen and (max-width: 525px) { 
+.standard_tile_title{ margin-top : 49%;
+	}
+}
+
+@media screen and (max-width: 480px) { 
+.standard_tile_title{ margin-top : 48	.5%;
+	}
+}
+
+@media screen and (max-width: 360px) { 
+.standard_tile_title{ margin-top : 44%;
+	}
+}
+
+@media screen and (max-width: 320px) { 
+.standard_tile_title{ margin-top : 42.5%;
+	}
+}
+
+@media screen and (max-width: 250px) { 
+.standard_tile_title{ margin-top : 38%;
+	}
+}
+
 @media screen and (min-width: 450px) and (max-width: 639px) { 
 	.standard_list_entry{height: 180px;}
 } 
@@ -594,26 +734,26 @@ Standard table settings
 
 /* for lower resolutions put the left and right below eachother */
 @media screen and (max-width: 799px) { 	
-.main_container_cpanel {
-  display: flex;
-  flex-direction: column-reverse; 
-  float: left;
-  width:100%;
-}	
-	
-#column-left-cpanel { width:100%; float:left; margin:auto;  }
-#column-center-cpanel { width:100%; float:left; margin:auto;  }
-#column-right-cpanel { width:100%; float:right; margin:auto; }
+	.main_container_cpanel {
+	  display: flex;
+	  flex-direction: column-reverse; 
+	  float: left;
+	  width:100%;
+	}	
+	#column-left-cpanel { width:100%; float:left; margin:auto;  }
+	#column-center-cpanel { width:100%; float:left; margin:auto;  }
+	#column-right-cpanel { width:100%; float:right; margin:auto; }
 
-.main_container_cpanel >div {
-	width:100%;
-	}
-	
-.content_box_cpanel {
-		display: block;
-		margin: 0 auto;
-	}
-}	
+
+	.main_container_cpanel >div {
+		width:100%;
+		}
+		
+	.content_box_cpanel {
+			display: block;
+			margin: 0 auto;
+		}
+}
 
 
 /*---------------------------------------------------------- 
@@ -636,3 +776,5 @@ Standard table settings
 
 /* hi-res laptops and desktops */
 /* @media screen and (min-width: 1281px) {  */
+
+
