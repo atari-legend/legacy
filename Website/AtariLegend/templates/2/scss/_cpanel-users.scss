@@ -9,9 +9,9 @@
 /*---------------------------------------------------------- 
 User details
 ------------------------------------------------------------ */
-#leftnav_position_userdetails{margin-top: 50px; margin-bottom: 30px; float: left;}
-#quick_search_games_position_userdetails{margin-top: 50px; margin-bottom: 30px;}
-#user_details{ margin-top: 50px; margin-bottom: 30px; float: left;}
+#leftnav_position_userdetails{margin-top: 0; margin-bottom: 30px; float: left;}
+#quick_search_games_position_userdetails{margin-top: 0; margin-bottom: 30px;}
+#user_details{ margin-top: 0; margin-bottom: 30px; float: left;}
 #user_details_img_dark{ box-shadow: 0 0 12px black; margin-left:1%;}
 
 .user_details_container{
@@ -27,16 +27,16 @@ User details
 /*---------------------------------------------------------- 
 User statistics
 ------------------------------------------------------------ */
-#leftnav_position_userstatistics{ margin-top: 50px; margin-bottom: 30px; float: left;}
-#user_statistics{ margin-top: 50px; margin-bottom: 30px; float: left;}
+#leftnav_position_userstatistics{ margin-top: 0; margin-bottom: 30px; float: left;}
+#user_statistics{ margin-top: 0; margin-bottom: 30px; float: left;}
 
 
 /*---------------------------------------------------------- 
 User main
 ------------------------------------------------------------ */
-#leftnav_position_usermain{ margin-top: 50px; margin-bottom: 30px; float: left;}
-#quick_search_position_usermain {margin-top: 50px; margin-bottom: 30px;}
-#user_main{ margin-top: 50px; margin-bottom: 30px; float: left;}
+#leftnav_position_usermain{ margin-top: 0; margin-bottom: 30px; float: left;}
+#quick_search_position_usermain {margin-top: 0; margin-bottom: 30px;}
+#user_main{ margin-top: 0; margin-bottom: 30px; float: left;}
 #main_stats_position_usermain{ margin-top: 0; margin-bottom: 30px; float: left;}
 
 .user_main_container{
@@ -49,9 +49,9 @@ User main
 /*---------------------------------------------------------- 
 User search
 ------------------------------------------------------------ */
-#leftnav_position_usersearch{ margin-top: 50px; margin-bottom: 30px; float: left;}
-#quick_search_games_position_usersearch{ margin-top: 50px; margin-bottom: 30px; }
-#usersearch{ margin-top: 50px; margin-bottom: 30px; float: left;}
+#leftnav_position_usersearch{ margin-top: 0; margin-bottom: 30px; float: left;}
+#quick_search_games_position_usersearch{ margin-top: 0; margin-bottom: 30px; }
+#usersearch{ margin-top: 0; margin-bottom: 30px; float: left;}
 #usersearch th {text-align:left;}
 .username_th,.joindate_th,.lastvisit_th{width:25%;}
 .username_td,.joindate_td,.lastvisit_td{width:25%;color: black; font-size: 12pt; padding-left: 2px;}
@@ -65,7 +65,7 @@ User search
 /*---------------------------------------------------------- 
 User karma
 ------------------------------------------------------------ */
-#leftnav_position_karma{ margin-top: 50px; margin-bottom: 30px; float: left;}
-#quick_search_games_position_karma{ margin-top: 50px; margin-bottom: 30px;}
-#karma{ margin-top: 50px; margin-bottom: 30px; float: left;}
+#leftnav_position_karma{ margin-top: 0; margin-bottom: 30px; float: left;}
+#quick_search_games_position_karma{ margin-top: 0; margin-bottom: 30px;}
+#karma{ margin-top: 0; margin-bottom: 30px; float: left;}
 .karma_column{width:50%; text-align:center;}
