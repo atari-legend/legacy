@@ -9,9 +9,9 @@
 /*---------------------------------------------------------- 
 Games main
 ------------------------------------------------------------ */			
-#quick_search_games_main{margin-top: 50px; margin-bottom: 30px; float: left;}
-#games_main{ margin-top: 50px; margin-bottom: 30px; float: left;}
-#leftnav_position_games_main{ margin-top: 50px; margin-bottom: 30px; float: left;}
+#quick_search_games_main{margin-top: 0; margin-bottom: 30px; float: left;}
+#games_main{ margin-top: 0; margin-bottom: 30px; float: left;}
+#leftnav_position_games_main{ margin-top: 0; margin-bottom: 30px; float: left;}
 
 .games_main_text{width:25%;display:table-cell;font-weight:bold;}
 .games_main_input{width:75%;display:table-cell;}
@@ -51,9 +51,9 @@ Games main
 /*---------------------------------------------------------- 
 Games list
 ------------------------------------------------------------ */	
-#games_list{margin-top: 50px; margin-bottom: 30px; float: left;}
-#quick_search_games_list{margin-top: 50px; margin-bottom: 00px; float: left;}
-#leftnav_position_games_list{margin-top: 50px; margin-bottom: 30px; float: left;}
+#games_list{margin-top: 0; margin-bottom: 30px; float: left;}
+#quick_search_games_list{margin-top: 0; margin-bottom: 00px; float: left;}
+#leftnav_position_games_list{margin-top: 0; margin-bottom: 30px; float: left;}
 
 #game_th{width:40%;text-align: left;}
 #pub_th,#dev_th{width:20%;text-align: left;}
@@ -85,9 +85,9 @@ Games list
 /*---------------------------------------------------------- 
 Games detail
 ------------------------------------------------------------ */	
-#games_detail{margin-top: 50px; margin-bottom: 30px; float: left;}
-#quick_search_games_detail{margin-top: 50px; margin-bottom: 00px; float: left;}
-#leftnav_position_games_detail{margin-top: 50px; margin-bottom: 30px; float: left;}
+#games_detail{margin-top: 0; margin-bottom: 30px; float: left;}
+#quick_search_games_detail{margin-top: 0; margin-bottom: 00px; float: left;}
+#leftnav_position_games_detail{margin-top: 0; margin-bottom: 30px; float: left;}
 
 #gd_left{width: 32%; float:left;}
 #gd_center { width: 32%; float:left; margin-left: 2%;}
@@ -128,9 +128,9 @@ Games detail
 /*---------------------------------------------------------- 
 Games comment
 ------------------------------------------------------------ */	
-#quick_search_games_comment{margin-top: 50px; margin-bottom: 30px; float: left;}
-#leftnav_position_games_comment{margin-top: 50px; margin-bottom: 30px; float: left;}
-#games_comment{margin-top: 50px; margin-bottom: 30px; float: left;}
+#quick_search_games_comment{margin-top: 0; margin-bottom: 30px; float: left;}
+#leftnav_position_games_comment{margin-top: 0; margin-bottom: 30px; float: left;}
+#games_comment{margin-top: 0; margin-bottom: 30px; float: left;}
 
 .gc_table_list {
 	width: 100%;
@@ -165,9 +165,9 @@ Games comment
 /*---------------------------------------------------------- 
 Games comment edit
 ------------------------------------------------------------ */	
-#quick_search_games_comment_edit{margin-top: 50px; margin-bottom: 00px; float: left;}
-#leftnav_position_games_comment_edit{margin-top: 50px; margin-bottom: 30px; float: left;}
-#games_comment_edit{margin-top: 50px; margin-bottom: 30px; float: left;}
+#quick_search_games_comment_edit{margin-top: 0; margin-bottom: 00px; float: left;}
+#leftnav_position_games_comment_edit{margin-top: 0; margin-bottom: 30px; float: left;}
+#games_comment_edit{margin-top: 0; margin-bottom: 30px; float: left;}
 
 #gce_button,#gce_button2{display:inline;}
 

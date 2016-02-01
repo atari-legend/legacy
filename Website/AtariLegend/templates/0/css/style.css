@@ -1731,16 +1731,16 @@ Front page
   margin-bottom: 30px; }
 
 #left_nav_position_front {
-  margin-top: 20px;
+  margin-top: -40px;
   margin-bottom: 20px;
   float: left; }
 
 #main_stats_position_front {
-  margin-top: 20px;
+  margin-top: -40px;
   margin-bottom: 20px; }
 
 #quick_search_position_front {
-  margin-top: 20px;
+  margin-top: -40px;
   margin-bottom: 20px;
   float: right; }
 
@@ -1863,16 +1863,16 @@ Quick search games
 User details
 ------------------------------------------------------------ */
 #leftnav_position_userdetails {
-  margin-top: 20px;
+  margin-top: -40px;
   margin-bottom: 30px;
   float: left; }
 
 #quick_search_games_position_userdetails {
-  margin-top: 20px;
+  margin-top: -40px;
   margin-bottom: 30px; }
 
 #user_details {
-  margin-top: 20px;
+  margin-top: -40px;
   margin-bottom: 30px;
   float: left; }
 
@@ -1903,12 +1903,12 @@ User details
 User statistics
 ------------------------------------------------------------ */
 #leftnav_position_userstatistics {
-  margin-top: 20px;
+  margin-top: -40px;
   margin-bottom: 30px;
   float: left; }
 
 #user_statistics {
-  margin-top: 20px;
+  margin-top: -40px;
   margin-bottom: 30px;
   float: left; }
 
@@ -1916,16 +1916,16 @@ User statistics
 User main
 ------------------------------------------------------------ */
 #leftnav_position_usermain {
-  margin-top: 20px;
+  margin-top: -40px;
   margin-bottom: 30px;
   float: left; }
 
 #quick_search_position_usermain {
-  margin-top: 20px;
+  margin-top: -40px;
   margin-bottom: 30px; }
 
 #user_main {
-  margin-top: 20px;
+  margin-top: -40px;
   margin-bottom: 30px;
   float: left; }
 
@@ -1943,16 +1943,16 @@ User main
 User search
 ------------------------------------------------------------ */
 #leftnav_position_usersearch {
-  margin-top: 20px;
+  margin-top: -40px;
   margin-bottom: 30px;
   float: left; }
 
 #quick_search_games_position_usersearch {
-  margin-top: 20px;
+  margin-top: -40px;
   margin-bottom: 30px; }
 
 #usersearch {
-  margin-top: 20px;
+  margin-top: -40px;
   margin-bottom: 30px;
   float: left; }
 
@@ -1999,16 +1999,16 @@ User search
 User karma
 ------------------------------------------------------------ */
 #leftnav_position_karma {
-  margin-top: 20px;
+  margin-top: -40px;
   margin-bottom: 30px;
   float: left; }
 
 #quick_search_games_position_karma {
-  margin-top: 20px;
+  margin-top: -40px;
   margin-bottom: 30px; }
 
 #karma {
-  margin-top: 20px;
+  margin-top: -40px;
   margin-bottom: 30px;
   float: left; }
 
@@ -2027,17 +2027,17 @@ User karma
 Did you know
 ------------------------------------------------------------ */
 #leftnav_position_didyouknow {
-  margin-top: 20px;
+  margin-top: -40px;
   margin-bottom: 30px;
   float: left; }
 
 #quick_search_games_position_didyouknow {
-  margin-top: 20px;
+  margin-top: -40px;
   margin-bottom: 30px;
   float: left; }
 
 #didyouknow {
-  margin-top: 20px;
+  margin-top: -40px;
   margin-bottom: 30px;
   float: left; }
 
@@ -2045,17 +2045,17 @@ Did you know
 Trivia Quotes
 ------------------------------------------------------------ */
 #leftnav_position_triviaquotes {
-  margin-top: 20px;
+  margin-top: -40px;
   margin-bottom: 30px;
   float: left; }
 
 #quick_search_games_position_triviaquotes {
-  margin-top: 20px;
+  margin-top: -40px;
   margin-bottom: 30px;
   float: left; }
 
 #triviaquotes {
-  margin-top: 20px;
+  margin-top: -40px;
   margin-bottom: 30px;
   float: left; }
 
@@ -2070,12 +2070,12 @@ Trivia Quotes
 Links addnew
 ------------------------------------------------------------ */
 #leftnav_position_linkaddnew {
-  margin-top: 20px;
+  margin-top: -40px;
   margin-bottom: 30px;
   float: left; }
 
 #linkaddnew {
-  margin-top: 20px;
+  margin-top: -40px;
   margin-bottom: 30px;
   float: left; }
 
@@ -2084,7 +2084,7 @@ Links addnew
   float: left; }
 
 #quick_search_games_position_linkaddnew {
-  margin-top: 20px;
+  margin-top: -40px;
   margin-bottom: 30px; }
 
 .links_addnew_area {
@@ -2151,16 +2151,16 @@ Links Modify list
   opacity: 0.8; }
 
 #leftnav_position_linkmodlist {
-  margin-top: 20px;
+  margin-top: -40px;
   margin-bottom: 30px;
   float: left; }
 
 #quick_search_games_linkmodlist {
-  margin-top: 20px;
+  margin-top: -40px;
   margin-bottom: 30px; }
 
 #linkmodlist {
-  margin-top: 20px;
+  margin-top: -40px;
   margin-bottom: 30px;
   float: left; }
 
@@ -2179,16 +2179,16 @@ Links Modify list
 Links category
 ------------------------------------------------------------ */
 #leftnav_position_linkcat {
-  margin-top: 20px;
+  margin-top: -40px;
   margin-bottom: 30px;
   float: left; }
 
 #quick_search_games_position_linkcat {
-  margin-top: 20px;
+  margin-top: -40px;
   margin-bottom: 30px; }
 
 #linkcat {
-  margin-top: 20px;
+  margin-top: -40px;
   margin-bottom: 30px;
   float: left; }
 
@@ -2236,17 +2236,17 @@ Links Modify
 Games main
 ------------------------------------------------------------ */
 #quick_search_games_main {
-  margin-top: 20px;
+  margin-top: -40px;
   margin-bottom: 30px;
   float: left; }
 
 #games_main {
-  margin-top: 20px;
+  margin-top: -40px;
   margin-bottom: 30px;
   float: left; }
 
 #leftnav_position_games_main {
-  margin-top: 20px;
+  margin-top: -40px;
   margin-bottom: 30px;
   float: left; }
 
@@ -2307,17 +2307,17 @@ Games main
 Games list
 ------------------------------------------------------------ */
 #games_list {
-  margin-top: 20px;
+  margin-top: -40px;
   margin-bottom: 30px;
   float: left; }
 
 #quick_search_games_list {
-  margin-top: 20px;
+  margin-top: -40px;
   margin-bottom: 30px;
   float: left; }
 
 #leftnav_position_games_list {
-  margin-top: 20px;
+  margin-top: -40px;
   margin-bottom: 30px;
   float: left; }
 
@@ -2355,17 +2355,17 @@ Games list
 Games detail
 ------------------------------------------------------------ */
 #games_detail {
-  margin-top: 20px;
+  margin-top: -40px;
   margin-bottom: 30px;
   float: left; }
 
 #quick_search_games_detail {
-  margin-top: 20px;
+  margin-top: -40px;
   margin-bottom: 30px;
   float: left; }
 
 #leftnav_position_games_detail {
-  margin-top: 20px;
+  margin-top: -40px;
   margin-bottom: 30px;
   float: left; }
 
@@ -2456,17 +2456,17 @@ Games detail
 Games comment
 ------------------------------------------------------------ */
 #quick_search_games_comment {
-  margin-top: 20px;
+  margin-top: -40px;
   margin-bottom: 30px;
   float: left; }
 
 #leftnav_position_games_comment {
-  margin-top: 20px;
+  margin-top: -40px;
   margin-bottom: 30px;
   float: left; }
 
 #games_comment {
-  margin-top: 20px;
+  margin-top: -40px;
   margin-bottom: 30px;
   float: left; }
 
@@ -2510,17 +2510,17 @@ Games comment
 Games comment edit
 ------------------------------------------------------------ */
 #quick_search_games_comment_edit {
-  margin-top: 20px;
+  margin-top: -40px;
   margin-bottom: 30px;
   float: left; }
 
 #leftnav_position_games_comment_edit {
-  margin-top: 20px;
+  margin-top: -40px;
   margin-bottom: 30px;
   float: left; }
 
 #games_comment_edit {
-  margin-top: 20px;
+  margin-top: -40px;
   margin-bottom: 30px;
   float: left; }
 
@@ -2903,6 +2903,10 @@ Games comment edit
     margin-bottom: 20px; } }
 @media screen and (max-width: 1279px) {
   #welcome {
+    margin-top: 20px; } }
+/* 3 tiles and background welcome image */
+@media screen and (min-width: 800px) and (max-width: 1279px) {
+  .logon {
     margin-top: 20px; } }
 /* 2 tiles and background welcome image */
 @media screen and (min-width: 640px) and (max-width: 800px) {

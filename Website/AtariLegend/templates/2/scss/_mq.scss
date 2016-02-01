@@ -127,8 +127,8 @@ contact tiles - front page
 Front page
 ------------------------------------------------------------ */
 @media screen and (max-width: 1279px) {  
-	#left_nav_position_front{ margin-top: 20px;}
-	#main_stats_position_front{ margin-top: 20px;}
+	#left_nav_position_front{ margin-top: 0;}
+	#main_stats_position_front{ margin-top: 0;}
 }
 
 /* Make the table view responsive */
@@ -167,7 +167,7 @@ Front page
 Quick search games
 ------------------------------------------------------------ */
 @media screen and (max-width: 1279px) { 
-	#quick_search_games_main{ margin-top: 20px;}
+	#quick_search_games_main{ margin-top: 0;}
 }	
 
 @media screen and (max-width: 1099px) { 
@@ -202,8 +202,8 @@ User details
 }
 	
 @media screen and (max-width: 1280px) { 	
-	#user_details{ margin-top: 20px;}	
-	#leftnav_position_userdetails{ margin-top: 20px;}
+	#user_details{ margin-top: 0;}	
+	#leftnav_position_userdetails{ margin-top: 0;}
 	#child_1, #child_2{ width:100%;}
 }
 
@@ -220,8 +220,8 @@ User details
 User statistics
 ------------------------------------------------------------ */
 @media screen and (max-width: 1279px) { 
-	#leftnav_position_userstatistics{ margin-top: 20px;}
-	#user_statistics{ margin-top: 20px;}
+	#leftnav_position_userstatistics{ margin-top:0;}
+	#user_statistics{ margin-top: 0;}
 }
 
 @media screen and (max-width: 480px) { 
@@ -234,8 +234,8 @@ User statistics
 User main
 ------------------------------------------------------------ */
 @media screen and (max-width: 1279px) { 
-	#leftnav_position_usermain{ margin-top: 20px;}
-	#user_main{margin-top: 20px;}
+	#leftnav_position_usermain{ margin-top: 0;}
+	#user_main{margin-top: 0;}
 	#main_stats_position_usermain{margin-bottom: 10px;}		
 }
 
@@ -256,8 +256,8 @@ User main
 User search
 ------------------------------------------------------------ */
 @media screen and (max-width: 1279px) { 
-	#leftnav_position_usersearch{ margin-top: 20px;}
-	#usersearch{margin-top: 20px;}
+	#leftnav_position_usersearch{ margin-top: 0;}
+	#usersearch{margin-top: 0;}
 }
 
 @media screen and (max-width: 1150px) { 
@@ -290,8 +290,8 @@ User search
 User karma
 ------------------------------------------------------------ */
 @media screen and (max-width: 1279px) { 
-	#leftnav_position_karma{ margin-top: 20px;}
-	#karma{margin-top: 20px;}
+	#leftnav_position_karma{ margin-top: 0;}
+	#karma{margin-top: 0;}
 }
 
 @media screen and (max-width: 480px) { 
@@ -303,8 +303,8 @@ User karma
 Did you know
 ------------------------------------------------------------ */
 @media screen and (max-width: 1279px) { 
-	#leftnav_position_didyouknow{ margin-top: 20px;}
-	#didyouknow{margin-top: 20px;}
+	#leftnav_position_didyouknow{ margin-top: 0;}
+	#didyouknow{margin-top: 0;}
 }
 
 @media screen and (max-width: 480px) { 
@@ -316,8 +316,8 @@ Did you know
 Trivia Quotes
 ------------------------------------------------------------ */
 @media screen and (max-width: 1279px) { 
-	#leftnav_position_triviaquotes{ margin-top: 20px;}
-	#triviaquotes{margin-top: 20px;}
+	#leftnav_position_triviaquotes{ margin-top: 0;}
+	#triviaquotes{margin-top: 0;}
 }
 
 @media screen and (max-width: 480px) { 
@@ -329,8 +329,8 @@ Trivia Quotes
 Links addnew
 ------------------------------------------------------------ */
 @media screen and (max-width: 1279px) { 
-	#leftnav_position_linkaddnew{ margin-top: 20px;}
-	#linkaddnew{margin-top: 20px;}
+	#leftnav_position_linkaddnew{ margin-top: 0;}
+	#linkaddnew{margin-top: 0;}
 }
 
 @media screen and (max-width: 480px) { 
@@ -354,8 +354,8 @@ Links Modify list
 }
 	
 @media screen and (max-width: 1279px) { 
-	#leftnav_position_linkmodlist{ margin-top: 20px;}
-	#linkmodlist{margin-top: 20px;}
+	#leftnav_position_linkmodlist{ margin-top: 0;}
+	#linkmodlist{margin-top: 0;}
 }
 
 @media screen and (max-width: 480px) { 
@@ -367,8 +367,8 @@ Links Modify list
 Links category
 ------------------------------------------------------------ */
 @media screen and (max-width: 1279px) { 
-	#leftnav_position_linkcat{ margin-top: 20px;}
-	#linkcat{margin-top: 20px;}
+	#leftnav_position_linkcat{ margin-top: 0;}
+	#linkcat{margin-top: 0;}
 }
 
 @media screen and (max-width: 480px) { 
@@ -388,8 +388,8 @@ Links category
 Links Modify
 ------------------------------------------------------------ */	
 @media screen and (max-width: 1279px) { 
-	#leftnav_position_linkmod{ margin-top: 20px;}
-	#link_mod{margin-top: 20px;}
+	#leftnav_position_linkmod{ margin-top: 0;}
+	#link_mod{margin-top: 0;}
 }
 
 @media screen and (max-width: 480px) { 
@@ -411,8 +411,8 @@ Links Modify
 Games main
 ------------------------------------------------------------ */	
 @media screen and (max-width: 1279px) { 
-	#leftnav_position_games_main{ margin-top: 20px;}
-	#games_main{margin-top: 20px;}
+	#leftnav_position_games_main{ margin-top: 0;}
+	#games_main{margin-top: 0;}
 }
 
 @media screen and (max-width: 1050px) { 
@@ -446,8 +446,8 @@ Games main
 Games list
 ------------------------------------------------------------ */	
 @media screen and (max-width: 1279px) { 
-	#quick_search_games_list{ margin-top: 20px;}
-	#games_list	{margin-top: 20px;}
+	#quick_search_games_list{ margin-top: 0;}
+	#games_list	{margin-top: 0;}
 }
 
 @media screen and (max-width: 1174px) { 
@@ -473,9 +473,9 @@ Games detail
 }
 
 @media screen and (max-width: 1279px) { 
-	#games_detail{margin-top: 20px;}
-	#leftnav_position_games_detail{margin-top: 20px;}
-	#quick_search_games_detail{margin-top: 20px;}
+	#games_detail{margin-top: 0;}
+	#leftnav_position_games_detail{margin-top: 0;}
+	#quick_search_games_detail{margin-top: 0;}
 	#gd_basic_game_info{width:100%; margin-bottom: 20px;}
 	#gd_other_features{display:none}
 	#gd_other_features_left{float:left; width:49%;}
@@ -503,9 +503,9 @@ Games detail
 Games comment
 ------------------------------------------------------------ */	
 @media screen and (max-width: 1279px) { 
-	#leftnav_position_games_comment{margin-top: 20px;}
-	#quick_search_games_comment{margin-top: 20px;}
-	#games_comment{margin-top: 20px;}
+	#leftnav_position_games_comment{margin-top: 0;}
+	#quick_search_games_comment{margin-top: 0;}
+	#games_comment{margin-top: 0;}
 }
 
 @media screen and (max-width: 640px) { 
@@ -518,9 +518,9 @@ Games comment
 Games comment edit
 ------------------------------------------------------------ */	
 @media screen and (max-width: 1279px) { 
-	#leftnav_position_games_comment_edit{margin-top: 20px;}
-	#quick_search_games_comment_edit{margin-top: 20px;}
-	#games_comment_edit{margin-top: 20px;}
+	#leftnav_position_games_comment_edit{margin-top: 0;}
+	#quick_search_games_comment_edit{margin-top: 0;}
+	#games_comment_edit{margin-top: 0;}
 }
 
 
@@ -607,107 +607,6 @@ From a width of 801 we will be having rows of 3 tiles
 	.column-left {display: none;}
 	.column-center{display: none;}
 	.column-right {display: none;}
-}
-
-
-@media screen and (max-width: 5501px) { 
-.standard_tile_title{ margin-top : 47.5%;
-	}
-}
-
-@media screen and (max-width: 1921px) { 
-.standard_tile_title{ margin-top : 48.5%;
-	}
-}
-
-@media screen and (max-width: 1801px) { 
-.standard_tile_title{ margin-top : 47%;
-	}
-}
-
-@media screen and (max-width: 1701px) { 
-.standard_tile_title{ margin-top : 46%;
-	}
-}
-
-@media screen and (max-width: 1601px) { 
-.standard_tile_title{ margin-top : 45%;
-	}
-}
-
-@media screen and (max-width: 1501px) { 
-.standard_tile_title{ margin-top : 44.5%;
-	}
-}
-
-@media screen and (max-width: 1401px) { 
-.standard_tile_title{ margin-top : 47.5%;
-	}
-}
-
-@media screen and (max-width: 1301px) { 
-.standard_tile_title{ margin-top : 46.5%;
-	}
-}
-
-@media screen and (max-width: 1201px) { 
-.standard_tile_title{ margin-top : 45.5%;
-	}
-}
-
-@media screen and (max-width: 1101px) { 
-.standard_tile_title{ margin-top : 44%;
-	}
-}
-
- @media screen and (max-width: 1001px) { 
-.standard_tile_title{ margin-top : 42.5%;
-	}
-}
-
- @media screen and (max-width: 900px) { 
-.standard_tile_title{ margin-top : 40.5%;
-	}
-}
-
-@media screen and (max-width: 800px) { 
-.standard_tile_title{ margin-top : 45.5%;
-	}
-}
-
-@media screen and (max-width: 700px) { 
-.standard_tile_title{ margin-top : 42%;
-	}
-}
-
-@media screen and (max-width: 639px) { 
-.standard_tile_title{ margin-top : 51%;
-	}
-}
-
-@media screen and (max-width: 525px) { 
-.standard_tile_title{ margin-top : 49%;
-	}
-}
-
-@media screen and (max-width: 480px) { 
-.standard_tile_title{ margin-top : 48	.5%;
-	}
-}
-
-@media screen and (max-width: 360px) { 
-.standard_tile_title{ margin-top : 44%;
-	}
-}
-
-@media screen and (max-width: 320px) { 
-.standard_tile_title{ margin-top : 42.5%;
-	}
-}
-
-@media screen and (max-width: 250px) { 
-.standard_tile_title{ margin-top : 38%;
-	}
 }
 
 @media screen and (min-width: 450px) and (max-width: 639px) { 

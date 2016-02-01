@@ -109,11 +109,7 @@ From a width of 801 we will be having rows of 3 tiles
 		position:relative;
 }
 
-.standard_tile_image{ width: 100%; 	
-		position:absolute;
-		left:0;
-		top:0;
-}
+.standard_tile_image{ width: 100%;}
 
 .standard_tile_subtext
 {
@@ -137,15 +133,14 @@ From a width of 801 we will be having rows of 3 tiles
 		padding-top:3%;
 		font-size : 17pt;
 		font-weight: 100;
-		margin-top : 47%;
 		color : white; 	
 		z-index:1;
 		position:absolute;
 	    border-bottom: 2px solid #484c7b;
+		bottom: 0;
 }
 
 .standard_tile_explanation { position: relative;
-					margin-top: 65%;
 					margin-bottom: 4%;
 					padding-left: 3%;
 					padding-right: 3%;
