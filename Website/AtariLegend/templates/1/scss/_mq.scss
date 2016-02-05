@@ -197,11 +197,6 @@ Quick search games
 /*---------------------------------------------------------- 
 User details
 ------------------------------------------------------------ */
-@media screen and (max-width: 480px) { 
-	#user_details{ margin-top: 20px;}	
-	#leftnav_position_userdetails{ margin-top: 0;}
-}
-
 @media screen and (max-width: 1050px) { 
 	.user_details_container{
 		flex-direction: column;
@@ -218,6 +213,8 @@ User details
 	.user_details_text{width:50%;display:inline;}
 	.user_details_input{width:50%;display:inline;}
 	.user_details_row{width:50%;}
+	#user_details{ margin-top: 20px;}	
+	#leftnav_position_userdetails{ margin-top: 0;}
 }
 
 
@@ -276,7 +273,7 @@ User search
 }
 
 @media screen and (max-width: 500px) { 
-#usersearch{margin-bottom: 20px;}
+	#usersearch{margin-bottom: 20px;}
 }
 
 
