@@ -1,0 +1,13 @@
+{
+    "in": "1/scss/style.scss",
+    "out": "1/css/style.css",
+    "sourcemaps": false,
+     "sass": true,
+     "minifier": false,
+     "mqpacker": true,
+	"autoprefixer": {"browsers": ["Last 2 versions", "Firefox 18", "Chrome 24", "Safari 7", "ie >=11", "ios 7", "Opera >=12.1", "Android >=4.4"]},
+	"filters": false,
+	 "opacity": false,
+	 "filters": { "oldIE": false }
+	  
+}

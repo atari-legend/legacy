@@ -16,9 +16,7 @@
 // This is the user login tile
 //**************************************************************************************** 
 *}
-
 	{block name=user_login_tile}
-	
 	{if ! isset($user_session.userid)}
 		<div class="logon">
 			<div class="standard_tile">
@@ -27,7 +25,7 @@
 				<div class="standard_tile_line"></div>
 				<div class="logon_input_usn">
 					<div class="logon_left">
-						<img src="{$img_dir}logon_usn.png" alt="username">
+						<div class="logon_username_icon"></div>
 					</div>
 					<div class="logon_right">
 						<input class="standard_tile_input" type="text" name="userid" maxlength="30">
@@ -35,7 +33,7 @@
 				</div>
 				<div class="logon_input_pwd">
 					<div class="logon_left">
-						<img src="{$img_dir}logon_pwd.png" alt="password">
+						<div class="logon_password_icon"></div>
 					</div>
 					<div class="logon_right">
 						<input class="standard_tile_input" type="password" name="password" maxlength="30">
@@ -51,10 +49,10 @@
 				<h3><a href="#" class="standard_tile_link">Forgot user name or password?</a></h3>
 				<br>
 				<div class="logon_socmed">
-					<img src="{$img_dir}login-facebook.png" alt="Facebook">
+					<div class="logon_facebook_button"></div>
 				</div>
 				<div class="logon_socmed">
-					<img src="{$img_dir}login_twitter.png" alt="Twitter">
+					<div class="logon_twitter_button"></div>
 				</div>
 				<br>
 				<br>
@@ -68,7 +66,7 @@
 				<div class="standard_tile_line"></div>
 				<div class="logon_input_usn">
 					<div class="logon_left">
-						<img src="{$img_dir}logon_usn.png" alt="username">
+						<div class="logon_username_icon"></div>
 					</div>
 					<div class="logon_right">
 						<input class="standard_tile_input" type="text" name="userid" maxlength="30">
@@ -76,7 +74,7 @@
 				</div>
 				<div class="logon_input_pwd">
 					<div class="logon_left">
-						<img src="{$img_dir}logon_pwd.png" alt="password">
+						<div class="logon_password_icon"></div>
 					</div>
 					<div class="logon_right">
 						<input class="standard_tile_input" type="password" name="password" maxlength="30">
