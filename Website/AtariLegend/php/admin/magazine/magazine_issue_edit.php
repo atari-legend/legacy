@@ -51,5 +51,5 @@ include("../../includes/admin.php");
 						'magazine_image' => $magazine_image));
  
 //Send all smarty variables to the templates
-$smarty->display('file:../../../templates/html/admin/magazine_issue_edit.html');
+$smarty->display("file:".$cpanel_template_folder."magazine_issue_edit.html");
 ?>

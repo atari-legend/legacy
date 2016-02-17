@@ -1,0 +1,728 @@
+/*****************************************************************/ 
+/**** This is the css code for the side menu and the top menu ****/  
+/*****************************************************************/ 
+
+/* ---------SASS variables for menu--------*/
+	$menu-top: 0;
+	$menu-opacity: 0;
+	$menu-input-height: 0;
+	$menu-input-margin: 0;
+	$menu-input-border: 0;
+	$menu-input-font: 0;
+	$menu-top-button-border: 0;
+	$menu-top-button-color: 0;
+	$menu-top-button-height: 0;
+	$menu-top-button-width: 0;
+	$menu-top-button-font: 0;
+	$menu-top-button-font-weight: normal;
+	$menu-top-button-border-bottom: 0;
+	$menu-top-button-border-left: 0;
+	$menu-top-button-margin-left: 0;
+	$menu-top-button-shadow: "";
+	$menu-top-button-radius: "";
+	$menu-top-button-hover-bg: 0; 
+	$menu-top-button-hover-color: 0;
+	$menu-top-button-hover-border: 0;
+	$menu-top-button-hover-border-bottom: 0;
+	$sidebutton-bg: 0;
+	$sidebutton-font: 0;
+	$sidebutton-height: 0;
+	$sidebutton-hoover-font: 0;
+	$searchbutton-height: 0;
+	$searchbutton-font: 0;
+	$searchbutton-shadow: 0;
+	$sidebutton-cpanel-font: 0;
+	$sidebutton-cpanel-left-border: 0;
+	$sidebutton-cpanel-bg :0;
+	$menu-sub-button-font :0;
+	$menu-sub-button-height :0;
+		
+	@if $skin-name == tos 
+		{$menu-top: 0; $menu-opacity: 1; $menu-input-margin: 3px 0 0 16px; $menu-input-height: 20px; $menu-input-border: 1px solid #007b7b; 
+		 $menu-input-font: 12pt; $menu-top-button-color: black; $menu-top-button-height: 30px; $menu-top-button-width: 194.6px; $menu-top-button-font: 20px;
+		 $menu-top-button-shadow: -1px 1px 5px white, 1px -1px 15px #acacac; $menu-top-button-hover-bg: black; $menu-top-button-hover-color: white;
+		 $sidebutton-bg: white; $sidebutton-font: 16px; $sidebutton-height: 27px; $sidebutton-hoover-font:white; $searchbutton-height: 27px; $searchbutton-font: 15px;
+		 $sidebutton-cpanel-bg : #eeeeee; $sidebutton-cpanel-left-border: 1px solid black; $sidebutton-cpanel-font: 16px; $menu-sub-button-font: 16px; $menu-sub-button-height :30px;} 
+	@else if $skin-name == picasso 
+		{$menu-top: 220px; $menu-opacity: 1; $menu-input-margin: 2px 0px 0px 16px; $menu-input-height: 20px; $menu-input-border: 1px solid #4f4f4f; 
+		 $menu-input-font: 12pt; $menu-top-button-border: 2px solid black; $menu-top-button-color: white; $menu-top-button-height: 26px; $menu-top-button-width: 181.5px; 
+		 $menu-top-button-font: 19px; $menu-top-button-font-weight: bold; $menu-top-button-margin-left: 2px; $menu-top-button-radius: 0 15px 15px 0; $menu-top-button-border-left: 2px solid black;
+		 $menu-top-button-border-bottom: 2px solid black; $menu-top-button-hover-bg: #dbd7d1; $menu-top-button-hover-color: black; $menu-top-button-hover-border: 2px solid #4f4f4f; 
+		 $sidebutton-bg: #161c71; $sidebutton-font: 19px; $sidebutton-height: 30px; $sidebutton-hoover-font: white; $searchbutton-height: 26px; $searchbutton-font:20px;
+		 $searchbutton-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #fff; $menu-top-button-hover-border-bottom: 2px solid #4f4f4f; $sidebutton-cpanel-bg: #383b6f;
+		 $sidebutton-cpanel-font: 15px; $sidebutton-cpanel-left-border: 2px solid black; $menu-sub-button-font: 16px; $menu-sub-button-height :30px}
+	@else if $skin-name == legacy 
+		{$menu-top: 225px; $menu-opacity: 0.8; $menu-input-margin: 11px 0px 0px 16px; $menu-input-height: 35px; $menu-input-border: 1px solid #007b7b; 
+		 $menu-input-font: 15pt; $menu-top-button-color: #182727; $menu-top-button-height: 57px; $menu-top-button-width: 183px; $menu-top-button-font: 20px;
+		 $menu-top-button-border-bottom: 3px solid #008b8b; $menu-top-button-border-left: 1px solid #008b8b; $menu-top-button-hover-bg: #00a9a9; $menu-top-button-hover-color: #182727;
+		 $menu-top-button-hover-border-bottom: 3px solid #006f6f; $sidebutton-bg: #00d3d3; $sidebutton-font: 16px; $sidebutton-height: 30px; $sidebutton-hoover-font: #182727;
+		 $searchbutton-height: 57px; $searchbutton-font: 20px; $sidebutton-cpanel-font: 13px; $sidebutton-cpanel-left-border: 1px solid #008b8b; $sidebutton-cpanel-bg: #55b4b4;
+		 $menu-sub-button-font: 15px; $menu-sub-button-height :26px}
+
+
+
+/* ---------the side menu--------*/
+/* the side menu for smartphones, tablets and old (laptop) screens */
+/* it is also used for the high res monitors, but then only the skin switch will be visible and */
+/* in certain resolutions the quick search field */	
+/* This file contains the complete build code as well as the positioning of the side menu for all */
+/* resolutions - see the code at the bottom of the file */
+
+	body, html {
+        height: 100%;
+     }
+
+	.container {
+		display : block;
+		z-index: 3;
+		position: relative;
+        width: 100%;
+        left: 0;
+        transition:  left 0.4s ease-in-out;
+    }
+	
+	@if $skin-name == tos
+	{
+		/* for the TOS skin, we want to side button to be lower not to interfere with the main menu */
+		@media screen and (min-width: 1280px) and (max-width: 2304px) {  
+			.container { margin-top: 34px; }
+		}
+		
+		/* this is the width of the side menu when it is pushed open */
+		 .container.open-sidebar {
+			left: 209px;
+		}
+		
+		/* the position of the side buttons when pushed open */
+		#sidebar {
+			left: -209px;	
+			width: 191px;
+		}
+	}
+	@else
+	{ 	
+		/* this is the width of the side menu when it is pushed open */
+		.container.open-sidebar {
+			left: 190px;
+		}
+		
+		/* the position of the side buttons when pushed open */
+		 #sidebar {
+			left: -192px;
+			width: 170px;
+		}
+	}
+	
+	/* the side bar button options */
+	#sidebar{
+		z-index:1;
+		position: absolute;
+		background: black;
+		height: 100%;
+		box-sizing: border-box;
+	}
+ 
+    #sidebar ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+	
+	/* placement of the side menu buttons */
+	#sidebar ul li {margin: 0;}
+	
+	/* side menu button effect */
+    #sidebar ul li a {
+        padding: 0;
+        display: block;
+        transition:  background 0.3s ease-in-out;
+    }
+		
+	.main-content {
+		width: 100%;
+		height: 100%;
+		padding: 1px;
+		position: absolute;
+		box-sizing: border-box;
+		
+		#sidebar-toggle {
+			display: block;
+			position: absolute;
+			padding: 10px 7px;
+			float: left;
+			background: $bg-color;
+			.bar{
+				display: block;
+				width: 18px;
+				margin-bottom: 3px;
+				height: 2px;
+			}
+		}
+	}
+	
+	@if $skin-name == tos
+	{	
+		.main-content #sidebar-toggle .bar{
+			background-color: black;  
+		}
+	}
+	@else
+	{
+		.main-content #sidebar-toggle {
+			border-radius: 3px;
+		}
+		.main-content #sidebar-toggle .bar{
+			background-color: white;
+			border-radius: 1px;   
+		}
+	}
+	
+    .main-content #sidebar-toggle .bar:last-child{
+         margin-bottom: 0;   
+    }
+	
+	/* search field and button code - this is very skin specific */
+	#search_ul{ width: 100%; }
+	
+	#search_ul li { float: left; }
+	
+	@if $skin-name == legacy 
+	{
+
+		#search_side { 
+		background-image: url(../images/menu_search.png);
+		background-size: cover;
+		background-repeat: no-repeat;
+		padding-left: 50px; 
+		padding-top: 40px; 
+		}
+		
+		#searchbutton_side {
+			background: $bg-color;
+			height: 38px;
+			width: 118px;
+			border-bottom: 2px solid #008b8b;
+			border-left : 1px solid #007878;
+			padding-top: 0;
+		}
+		
+		#search_text_side{ color: #ffffff;				
+			width: 105px;
+			height: 23px;
+			border: 1px solid #007b7b;
+			margin: 7px 0px 0px 6px;
+			padding: 0;
+			background: black; 
+			text-align: center;
+		}
+	}
+	@else if $skin-name == picasso
+	{
+		#search_side {
+			background-image: url(../images/menu_search.png);
+			background-position: center center; 
+			background-size: cover;
+			background-repeat: no-repeat;
+			padding-left: 45px; 
+			padding-top: 28px; 
+			border-radius: 0 15px 15px 0;
+			border:1px solid black;
+		}
+		
+		#searchbutton_side {
+			background: $bg-color;
+			height: 28px;
+			width: 119px;
+			border-bottom: 2px solid #161c71;
+			border-left : 4px solid black;
+			padding-top: 0;
+		}
+		
+		#search_text_side{ color: #ffffff;				
+			width: 105px;
+			height: 18px;
+			border: 1px solid #161c71;
+			margin: 4.5px 0px 0px 6px;
+			padding: 0;
+			background: #000; 
+			text-align: center;
+		}
+	}
+	@else if $skin-name == tos
+	{
+		#search_side { 
+		background-image: url(../images/menu_search.png);
+		background-size: cover;
+		background-repeat: no-repeat;
+		padding-left: 30px; 
+		padding-top: 27px; 
+		border-bottom: 3px solid black;
+		}
+	
+		#searchbutton_side {
+			background: $bg-color;
+			height: 27px;
+			width: 160px;
+			border-bottom: 3px solid black;
+			padding-top: 0;
+		}
+	
+		#search_text_side{ color: #ffffff;				
+			width: 153px;
+			height: 17px;
+			border: 1px solid #007b7b;
+			margin: 4px 0 0 6px;
+			padding: 0;
+			background: #000; 
+			text-align: center;
+		}
+	}
+	
+	@if $skin-name == tos
+	{ 
+		#skin_side, .side_navigation * a { width:190px; border-bottom: 3px solid black;}
+	}
+	@else if $skin-name == picasso
+	{
+		#skin_side, .side_navigation * a {width:165px;}
+	}
+	@else if $skin-name == legacy
+	{
+		#skin_side, .side_navigation * a {width:168px;}
+	}
+		
+	.skin-menu {
+		width:100%;
+		margin:0px auto;
+	}
+	 
+	.skin-menu li {
+		margin:0;
+		list-style:none;
+	}
+	 
+	.skin-menu a {
+		transition:all linear 0.15s;
+	}
+	 
+	/*  Top Level */
+	.skin-menu > ul > li {
+		float:left;
+		display:inline-block;
+		position:relative;
+		font-size:19px;
+	}
+	 
+	/* Bottom Level - This is the skin switching part */
+	.skin-menu li:hover .sub-menu {
+		z-index:1;
+		opacity:1;
+	}
+
+	.sub-menu {
+		width:75%;
+		padding:5px 0;
+		position:absolute;
+		top:100%;
+		left:0;
+		z-index:-1;
+		opacity:0;
+		transition:opacity linear 0.15s;
+		box-shadow:0px 2px 3px rgba(0,0,0,0.2);
+		text-align:center;
+	}
+	 
+	.sub-menu li {
+		display:block;
+		font-size:16px;
+	}
+	
+	.sub-menu li a {
+		display:block;
+		font-weight: normal;
+		background : $sidebutton-cpanel-bg;
+	}
+	 
+	@if $skin-name == legacy 
+	{
+		.sub-menu li a {
+			color: #182727;
+		}
+		 
+		.sub-menu li a:hover {
+			background:#01b5b5;
+			color:#43635f;
+		}
+	}
+	@else if $skin-name == picasso
+	{
+		.sub-menu li a {
+			color: white;
+		}
+	 
+		.sub-menu li a:hover {
+			background:#dbd7d1;
+			color:black;
+		}
+	}
+	@else if $skin-name == tos
+	{
+		.sub-menu li a {
+			color: black;
+		}
+		.sub-menu li a:hover {
+			background:black;
+			color:white;
+		}
+	}
+	
+/* 'position' is needed for smartphone view else the logo is covered by the sidemenu button */
+@media screen and (max-width: 480px) { 
+	.main-content {position: relative;}
+	.main-content #sidebar-toggle {position: relative;}
+	}	
+
+.sidebutton_extra
+{
+	border: $menu-top-button-border;
+	cursor: pointer;
+	color: $menu-top-button-color;
+	border-radius: $menu-top-button-radius;
+	text-align: center;
+	text-shadow: $menu-top-button-shadow;
+	font-weight: $menu-top-button-font-weight;
+	border-bottom: $menu-top-button-border-bottom;
+	line-height: $sidebutton-height;
+}
+
+.sidebutton
+{
+	@extend .sidebutton_extra;	
+	margin-left: $menu-top-button-margin-left;
+	width: 213px;
+	font-size: $sidebutton-font;
+	background: $sidebutton-bg;
+}
+
+.sidebutton_cpanel{ 
+	margin-left: 20px; 
+	width: 180px; 
+	font-size: $sidebutton-cpanel-font; 
+	border-left: $sidebutton-cpanel-left-border;
+	background: $sidebutton-cpanel-bg;
+	@if $skin-name == tos { border-bottom: 3px solid black; }
+	@extend .sidebutton_extra;
+}
+
+.sidebutton:hover, .sidebutton_cpanel:hover {
+	background: $menu-top-button-hover-bg;
+	color: $sidebutton-hoover-font;
+	@if $skin-name == legacy or $skin-name == picasso {	border-bottom: $menu-top-button-hover-border-bottom;}
+	@if $skin-name == picasso {border: $menu-top-button-hover-border;}
+}
+
+@if $skin-name == legacy 
+{
+	@media screen and (min-width: 1920px) {
+		  .sidebutton{line-height:40px;}
+	}
+}
+
+/* for the lower resolutions, we don't have the menu bar below the top */ 
+@media screen and (max-width: 1279px) {  	
+	#main_nav { display: none; }
+}
+
+/* for resolutions between 1280 and 1920 the search goes to the side menu */
+/* some re-placement of the skin button is needed here */
+/* HOWEVER, this is not done for the CPANEL, to solve this id no-wrap is created */
+#no-wrap{margin-top:0;}
+
+@if $skin-name == legacy 
+{
+	@media screen and (max-width: 1919px) { 
+		.skin-wrap {
+			margin-top:40px;
+		}
+	}
+}
+@else
+{
+	@media screen and (max-width: 1919px) { 
+		.skin-wrap {
+			margin-top: 30px;
+		}
+	}
+}
+
+/* for the high resolutions, we only have the skin switch in the side menu */ 
+@media screen and (min-width: 1280px) {  	
+	.side_navigation { display: none; }
+}
+
+@media screen and (min-width: 1920px) { 
+	#search_side, #search_text_side { display: none; } 
+}
+
+
+/* ---------the main menu--------*/
+/* this is the css code for the main menu and its buttons
+
+/* This piece of code is used for higher res :
+/*	1) making the side menu go to the left of the screen  --> Container absolute
+/*  2) Side bar needs to be transparant for resolutions between 1281 and 16** or something --> #sidebar
+/*  3) header nav is switched to absolute, if this is not done, the hyperlinks won't work anymore becauwe of position of container
+/*  4) since header nav is absolute, the main part of the site needs to be repositioned */
+@media screen and (min-width: 1280px){  	
+	.container { position: absolute;}
+	#sidebar {background-color: rgba(0, 0, 0, 0);}
+	header nav { position: absolute; margin-top: $menu-top;}
+	#main { position: relative; margin-top: 60px;}
+}
+
+#main_nav { width: 100%; left: 0; }
+#main_nav_ul { font-size: 0.1px; display:flex; justify-content: center; padding: 0;}
+
+/* this is some extra code for the cpanel sub menu at the main bar */
+#main_nav_ul li {
+  position: relative;
+}
+
+#main_nav_ul li a:first-child:nth-last-child(2):before { 
+  content: ""; 
+  position: absolute; 
+ }
+ 
+ /* submenu positioning*/
+#main_nav_ul ul {
+  position: absolute;
+  z-index: 1;
+  left: -99999em;
+  @if $skin-name == legacy {top: 61px;}
+  @else if $skin-name == tos {padding:0;}
+  @else {}
+}
+#main_nav_ul > li:hover > ul {
+  left: auto;
+  @if $skin-name == tos {border-top: 3px black solid;}
+  
+}
+#main_nav_ul > li li:hover > ul { 
+  left: 100%;
+}
+
+header nav img:hover{ opacity:$menu-opacity;}
+header nav li {	display: inline-block;}
+
+header nav input{
+	background-color: #000;
+	color: #ffffff;
+	width: 247px;
+	height: $menu-input-height;
+	border: $menu-input-border;
+	margin: $menu-input-margin;
+	padding: 0;
+	display: block;
+	text-align: center;
+	font-size: $menu-input-font;
+}
+
+.top_button_extra
+{
+	display: block;
+	cursor: pointer;
+	border: $menu-top-button-border;
+	background-color: $bg-color;
+	color: $menu-top-button-color;
+	width: $menu-top-button-width;
+	text-align: center; 
+	font-weight: $menu-top-button-font-weight;
+	border-bottom: $menu-top-button-border-bottom;
+	border-left: $menu-top-button-border-left;
+	padding-top: 0;
+	text-shadow: $menu-top-button-shadow;
+	border-radius : $menu-top-button-radius; 
+}
+
+.topbutton
+{
+	@extend .top_button_extra;
+	font-size: $menu-top-button-font;
+	line-height: $menu-top-button-height;
+}
+
+.subbutton
+{
+	font-size: $menu-sub-button-font;
+	line-height: $menu-sub-button-height;
+	background: $sidebutton-cpanel-bg;
+	@if $skin-name == tos {border-bottom: 3px solid black;}
+	@extend .top_button_extra;
+}
+
+.topbutton:hover, .subbutton:hover {
+	background: $menu-top-button-hover-bg;
+	color: $menu-top-button-hover-color;
+	@if $skin-name == tos or $skin-name == picasso { border: $menu-top-button-hover-border; }
+	border-bottom: $menu-top-button-hover-border-bottom;
+}
+
+.searchbutton
+{
+	display: block;
+	float:left;
+	border: $menu-top-button-border;
+	background: $sidebutton-bg; 
+	color: $menu-top-button-color;
+	height: $searchbutton-height;
+	width: 280px;
+	font-size: $searchbutton-font;
+	border-bottom: $menu-top-button-border-bottom;
+	border-left: $menu-top-button-border-left;
+	padding-top: 0;
+	border-radius: $menu-top-button-radius;
+	margin-left: $menu-top-button-margin-left;
+	text-shadow: $searchbutton-shadow;
+}
+
+.signinbutton
+{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	cursor: pointer;
+	border: $menu-top-button-border;
+	background: $sidebutton-bg; 
+	color: $menu-top-button-color; 
+	font-weight: $menu-top-button-font-weight;
+	border-bottom: $menu-top-button-border-bottom;
+	border-left: $menu-top-button-border-left;
+	border-radius: $menu-top-button-radius;
+	padding-top: 3px;
+}
+
+@if $skin-name == tos or $skin-name == picasso { #home:hover,#search:hover {height: 0;} }
+
+@if $skin-name == picasso
+{
+	@media screen and (max-width: 1279px){ 
+		#main { margin-top: 25px;}
+	}
+	.signinbutton{margin-bottom: 30px; height: 30px;width: 170px; font-size: 18px;}
+	.signinbutton:hover {background: #dbd7d1; color: black; border:2px solid #4f4f4f;}
+	#home{display: block;
+		border-radius: 0 15px 15px 0;
+		height: 26px;
+		border:2px solid black;
+	}
+	#home { display:block;
+		background: url(../images/menu_home.png) 0 0 no-repeat;
+		padding-left: 60px;
+		border:2px solid #4f4f4f;	
+	}
+	
+	#home:hover { background: url(../images/menu_home_hover.png) 0 0 no-repeat;
+		padding-top: 26px;
+		padding-left: 60px;
+		border:2px solid #4f4f4f;
+	}
+	#search { 
+		display: block;
+		background: url(../images/menu_search.png) 0 0 no-repeat;
+		padding-left: 60px;
+		border-radius: 0 15px 15px 0;
+		height: 26px;
+		border:2px solid black;
+		margin-left: 2px;
+	}
+	#search:hover { background: url(../images/menu_search_hover.png) 0 0 no-repeat;
+		padding-top: 26px;
+		padding-left: 60px;
+		border:2px solid #4f4f4f;
+	}
+	@media screen and (max-width: 1550px)
+	{	
+		#home{display:none;}
+	}
+	@media screen and (max-width: 1480px)
+	{	
+		.topbutton{width: 153.8px;}
+	}
+}
+@else if $skin-name == tos
+{
+	#main_nav {background-color: white; border-bottom: 3px solid black;}
+	.signinbutton{margin-bottom: 25px; height: 60px; width: 134px; font-size: 20px;border-bottom: 3px solid black;border-left: 1px solid black;}
+	.signinbutton:hover { background: #6a6a6a; color: white;}
+	
+	#search { background: url(../images/menu_search.png) 0 0 no-repeat;
+	    padding-top: 30px;
+	    padding-left: 30px;
+	}	
+	#search:hover { background: url(../images/menu_search_hover.png) 0 0 no-repeat;
+	    padding-top: 30px;
+	    padding-left: 30px;
+	}
+	#home { display: inline-block;
+		background: url(../images/menu_home.png) 0 0 no-repeat;
+		padding-top: 22px;
+		padding-left: 30px;
+	}
+	#home:hover { background: url(../images/menu_home_hover.png) 0 0 no-repeat;
+		padding-top: 22px;
+		padding-left: 30px;
+	}
+	@media screen and (max-width: 1590px)
+	{	
+		#home{display:none;}
+	}
+	@media screen and (max-width: 1560px)
+	{	
+		.topbutton{width: 165px;}
+	}
+	@media screen and (max-width: 1325px)
+	{	
+		.topbutton{width: 155px;}
+	}
+}
+@else if $skin-name == legacy
+{
+	.signinbutton{height: 60px; width: 134px; font-size: 20px;}	
+	.signinbutton:hover { background: #00a9a9; color: #182727; border-bottom: 3px solid #006f6f;}
+	
+		#home {	display: block;
+		background: url(../images/menu_home.png) 0 0 no-repeat;
+		padding-top: 60px;
+		padding-left: 75px;
+	}
+	
+	#home:hover { opacity:0.5;	}
+	
+	#search { display: block;
+	background: url(../images/menu_search.png) 0 0 no-repeat;
+	padding-top: 60px;
+	padding-left: 75px;
+	}
+	
+	#search:hover { opacity:0.5;	}
+	
+	@media screen and (max-width: 1919px)
+	{	
+		#about{border-right: 1px solid #007878;}
+	}
+	@media screen and (max-width: 1550px)
+	{	
+		#home{display:none;}
+	}
+	@media screen and (max-width: 1475px)
+	{	
+		.topbutton{width: 156.7px;}
+	}
+}
+
+/* responsiveness of the top menu for resolutions from 1281 to 1920 */
+@media screen and (max-width: 1919px)
+{	
+	#search_text{display:none;}
+	#search{display:none;}
+}

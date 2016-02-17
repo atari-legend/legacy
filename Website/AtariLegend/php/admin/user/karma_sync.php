@@ -134,7 +134,7 @@ $smarty->assign('left_nav', 'leftnav_position_karma');
 $smarty->assign('quick_search_games', 'quick_search_games_position_karma');	
 	
 //Send all smarty variables to the templates
-$smarty->display('file:../../../templates/html/admin/user_karmasync.html');
+$smarty->display("file:".$cpanel_template_folder."user_karmasync.html");
 
 //close the connection
 mysqli_close($mysqli);

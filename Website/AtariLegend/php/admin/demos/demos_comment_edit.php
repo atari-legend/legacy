@@ -47,5 +47,5 @@ $date = convert_timestamp($query_comment['timestamp']);
 			  'v_counter' => $v_counter));
 
 //Send all smarty variables to the templates
-$smarty->display('file:../../../templates/html/admin/demos_comment_edit.html');
+$smarty->display("file:".$cpanel_template_folder."demos_comment_edit.html");
 ?>

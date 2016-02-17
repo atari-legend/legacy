@@ -41,6 +41,6 @@ $smarty->assign('left_nav', 'leftnav_position_didyouknow');
 $smarty->assign('quick_search_games', 'quick_search_games_position_didyouknow');	
 		
 //Send all smarty variables to the templates
-$smarty->display('file:../../../templates/html/admin/did_you_know.html');
+$smarty->display("file:".$cpanel_template_folder."did_you_know.html");
 
 ?>

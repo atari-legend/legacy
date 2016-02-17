@@ -1,0 +1,143 @@
+{* 
+/***************************************************************************
+                              user_main.html
+*                            --------------------------
+*   begin                : Thursday, Septembre 29, 2005
+*   copyright            : (C) 2005 Atari Legend
+*   email                : admin@atarilegend.com
+*
+*   Id: user_main.html,v 0.10 2005/09/29 Silver
+*   Id: user_main.html,v 0.20 2015/09/07 Grave - AL 2.0
+*   Id: user_main.html,v 0.30 2015/11/12 Grave - Validated HTML/Flex box
+*   Id: user_main.html,v 0.40 2015/12/21 Grave - Removed the $message var
+*
+***************************************************************************/
+
+************************************************************************************************
+The main Users page
+************************************************************************************************
+*}
+{extends file='1/admin/frontpage.html'}
+{block name=java_script}
+<script type="text/javascript">
+function SyncKarma()
+{ 
+    // CONFIRM REQUIRES ONE ARGUMENT
+    var message = "Are you sure you want to do this? Resyncing Karma takes a minute you know...";
+    // CONFIRM IS BOOLEAN. THAT MEANS THAT
+    // IT RETURNS TRUE IF 'OK' IS CLICKED
+    // OTHERWISE IT RETURN FALSE
+    var return_value = confirm(message);
+
+    if (return_value !="0")
+    {
+    	url="../user/karma_sync.php";
+		location.href=url;
+    } 
+}
+</script>
+{/block}
+{block name=main_tile}
+<div class="standard_tile" id="user_main">
+	<h1>USER ADMIN</h1>
+	<div class="standard_tile_line"></div>
+	<div class="standard_tile_text">
+		<div class="left_nav_section">
+			This is the user area. Overhere you can maintain user accounts of the AL website! There are currently 
+			<b>{$nr_users}</b> users in the DB.
+		</div> 
+		<br><br>
+		<form action="../user/user_search.php" method="get" name="user_search">
+			<fieldset>
+			<legend>User Search</legend>
+				<div class="user_main_container">
+					<div class="user_main_child" id="user_main_child_1">
+						By name : &nbsp;
+					</div>
+					<div class="user_main_child" id="user_main_child_2">
+						<select name="userbrowse" id="small_select">
+							<option value="" SELECTED>-</option>
+							{html_options values=$az_value output=$az_output}
+						</select>
+						<input type="text" name="usersearch" value="" class="standard_tile_input_small">&nbsp;
+					</div>
+					<div class="user_main_child" id="user_main_child_3">
+						<input type="submit" value="Search" class="topbutton_cpanel_small">
+						<input type="hidden" name="action" id="action" value="search">
+					</div>
+				</div>
+			<br>
+			</fieldset>
+		</form>
+		<br>
+		<br>
+		<div class="centered_fieldset"><a href="../user/karma_sync.php" class="standard_tile_link_cpanel" onclick="SyncKarma(); return false;">Karma Re-Sync</a></div>
+	</div>
+</div>
+{/block}
+{block name=main_stats}	
+<div class="standard_tile" id="{$main_stats}">
+	<h1>MAIN STATS</h1>
+	<div class="standard_tile_line"></div>
+	<div class="standard_tile_text">
+		<div class="main_stats_container">
+			<div class="main_stats_child" id="child_some_stats">
+				<table>
+				<tr>
+					<td>
+						<table class="standard_table_list">
+						<tr>
+							<th>Some Stats</th>
+						</tr>
+							{foreach from=$statistics item=line}
+						<tr>
+							<td class="standard_table_center">{if $line.value != ''}{$line.value}{/if}</td>
+						</tr>
+							{/foreach}
+						</table>	
+					</td>
+				</tr>
+				</table>
+			</div>
+			<div class="main_stats_child" id="child_good_karma">
+				<table>
+				<tr>
+					<td>
+						<table class="standard_table_list">
+						<tr>
+							<th colspan="2" id="good_karma">Good Karma</th>
+						</tr>
+							{foreach from=$karma_good item=line}
+						<tr>
+							<td><a href="../user/user_detail.php?user_id_selected={$line.user_id}" class="standard_table_left">{$line.user_name}</a></td>
+							<td class="standard_table_right">{$line.karma}</td>
+						</tr>
+							{/foreach}
+						</table>						
+					</td>
+				</tr>
+				</table>
+			</div>
+			<div class="main_stats_child" id="child_bad_karma">
+				<table>
+				<tr>
+					<td>
+						<table class="standard_table_list">
+						<tr>
+							<th colspan="2" id="bad_voodoo">Bad Voodoo</th>
+						</tr>
+							{foreach from=$karma_bad item=line}
+						<tr>
+							<td><a href="../user/user_detail.php?user_id_selected={$line.user_id}" class="standard_table_left">{$line.user_name}</a></td>
+							<td class="standard_table_right">{$line.karma}</td>
+						</tr>
+							{/foreach}
+						</table>	
+					</td>
+				</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+{/block}

@@ -1,0 +1,89 @@
+{* 
+/***************************************************************************
+                              user_search.html
+*                            --------------------------
+*   begin                : Sept 29, 2005
+*   copyright            : (C) 2005 Atari Legend
+*   email                : admin@atarilegend.com
+*
+*   Id: user_search.html,v 0.10 2005/09/29 Silver
+*   Id: user_search.html,v 0.20 2015/09/04 ST Graveyard - AL 2.0
+*   Id: user_search.html,v 0.20 2015/11/13 ST Graveyard - Flexbox/HTML validated
+*
+***************************************************************************/
+
+************************************************************************************************
+User search result
+************************************************************************************************
+*}
+{extends file='1/admin/frontpage.html'}
+{block name=main_tile}
+<div class="standard_tile" id="usersearch">
+	<h1>USER SEARCH RESULTS</h1>
+	<div class="standard_tile_line"></div>
+	<div class="standard_tile_text">	
+		<form action="../user/user_search.php" method="get" name="user_search">
+			<fieldset>
+			<legend>User Search</legend>
+				<div class="user_main_container">
+					<div class="user_main_child" id="user_main_child_1">
+						By name : &nbsp;
+					</div>
+					<div class="user_main_child" id="user_main_child_2">
+						<select name="userbrowse" id="small_select">
+							<option value="" SELECTED>-</option>
+							{html_options values=$az_value output=$az_output}
+						</select>
+						<input type="text" name="usersearch" value="" class="standard_tile_input_small">&nbsp;
+					</div>
+					<div class="user_main_child" id="user_main_child_3">
+						<input type="submit" value="Search" class="topbutton_cpanel_small">
+						<input type="hidden" name="action" id="action" value="search">
+					</div>
+				</div>
+			<br>
+			</fieldset>
+		</form>
+		<br>
+		<br>
+		<table id="user_search_main_tabel">
+		<tr>
+			<td>
+				{if isset($users)}
+				<table class="standard_table_list">
+				<tr>
+					<th class="username_th">User Name</th>
+					<th class="joindate_th">Join Date</th>
+					<th class="lastvisit_th">Last Visit</th>
+					<th class="email_th">Email</th>
+					<th class="website_th">Website</th>
+				</tr>
+					{foreach from=$users item=line}
+					<tr>
+						<td class="username_td">{if $line.user_name != ''}<a href="../user/user_detail.php?user_id_selected={$line.user_id}" class="standard_table_center">{$line.user_name}</a>{else}<i>n/a</i>{/if}</td>
+						<td class="joindate_td">{if $line.join_date != ''}{$line.join_date}{else}<i>n/a</i>{/if}</td>
+						<td class="lastvisit_td">{if $line.last_visit != ''}{$line.last_visit}{else}<i>n/a</i>{/if}</td>				
+						<td class="email_td">{if $line.email != ''}<a href="mailto:{$line.email}" class="standard_tile_link_black">M</a>{else}<i>n/a</i>{/if}</td>
+						<td class="website_td">{if $line.user_website != ''}<a href="http://{$line.user_website}" class="standard_tile_link_black">WWW</a>{else}<i>n/a</i>{/if}</td>
+					</tr>
+					{/foreach}
+				{else}
+					<div class="left_nav_section">No users found</div>
+				{/if}
+				{if isset($nr_users)}
+				<tr>
+					<td class="standard_table_center" colspan="5">						
+						<br>Found {if $nr_users != ''}{$nr_users}{else}0{/if} users for this query
+					</td>
+				</tr>
+				{/if}
+				</table>
+			</td>
+		</tr>
+		</table>
+		<br>
+		<br>
+		<div class="standard_table_center"><a href="javascript:history.go(-1)" class="standard_tile_link">back</a></div>
+	</div>
+</div>
+{/block}

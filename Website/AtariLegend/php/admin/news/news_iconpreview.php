@@ -42,7 +42,7 @@ while ( $news_images = $sql_images->fetch_array(MYSQLI_BOTH) )
 }
 
 //Send all smarty variables to the templates
-$smarty->display('file:../../../templates/html/admin/news_iconpreview.html');
+$smarty->display("file:".$cpanel_template_folder."news_iconpreview.html");
 
 //close the connection
 mysqli_close($mysqli);

@@ -1,0 +1,51 @@
+{* 
+***************************************************************************
+*                                news_images.php
+*                            -----------------------
+*   begin                : Sunday, May 1, 2005
+*   copyright            : (C) 2003 Atari Legend
+*   email                : maarten.martens@freebel.net
+*   actual update        : File creation
+*							 
+*   Id: news_images.php,v 0.10 2004/05/01 ST Graveyard
+*
+***************************************************************************/
+//****************************************************************************************
+// This is the sub template file to generate the newsimages page
+//**************************************************************************************** 
+*}
+{extends file='1/admin/frontpage.html'}
+{block name=title}Add a News Image{/block}
+{block name=main_tile}
+<div class="NEWMAINCELL">
+		<a href="../news/news_add_images.php" class="MAINNAV"><b>Add images</b></a> / 
+		<a href="../news/news_edit_images.php" class="MAINNAV"><b>Edit images</b></a>
+	<br/>	<br/>	<br/>
+	<fieldset class="interview_set">
+		Here you can add news images to go with a news update, add a name to describe the 
+		image and to what kind of news it should be used. You can use either jpg, 
+		png or gif images but png images are prefered. Keep the size to a minimun, we are talking icons here, no 300Kb images.
+	</fieldset> 
+	<br/>
+	<br/>
+	<br/>
+	<form  enctype="multipart/form-data" action="../news/db_news.php" method="post" name="imageadd" id="imageadd">
+	<label for="name">Image Name</label>
+	<input type="text" name="image_name" id="image_name" size='50' maxlength='64' class="links_input-box">
+	<br/>
+	<label for="icon">Image File</label>
+	<input type="file" name="news_image" id="news_image">
+	<br/>
+	<br/>
+	<br/>
+	<br/>
+	<input type="hidden" name="action" id="action" value="image_upload">
+	<input type="hidden" name="user_id" id="user_id" value="{$user_id}">
+	<input type="submit" value="Submit">
+	<input type="reset">
+	</form>	
+</div>
+{if isset($message)}
+	<div class="message_box">{$message}</div>
+{/if}
+{/block}

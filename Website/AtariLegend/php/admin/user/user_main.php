@@ -63,5 +63,5 @@ $smarty->assign('quick_search_games', 'quick_search_position_usermain');
 $smarty->assign('main_stats', 'main_stats_position_usermain');			
 		
 //Send all smarty variables to the templates
-$smarty->display('file:../../../templates/html/admin/user_main.html');
+$smarty->display("file:".$cpanel_template_folder."user_main.html");
 ?>

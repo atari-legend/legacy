@@ -188,5 +188,5 @@ include("../../includes/functions.php");
 				}
 
 //Send all smarty variables to the templates
-$smarty->display('file:../../../templates/html/admin/ajax_menus_add_games.html');
+$smarty->display("file:".$cpanel_template_folder."ajax_menus_add_games.html");
 ?>

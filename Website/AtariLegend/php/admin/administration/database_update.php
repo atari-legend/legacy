@@ -225,5 +225,5 @@ $smarty->assign('main_stats', 'main_stats_position_front');
 		
 //Send all smarty variables to the templates
 
-$smarty->display('file:html/admin/database_update.html');
+$smarty->display("file:".$cpanel_template_folder."database_update.html");
 ?>

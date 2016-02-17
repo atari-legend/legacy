@@ -1,0 +1,69 @@
+{* 
+/***************************************************************************
+*                                individuals_author.tpl
+*                            -----------------------------
+*   begin                : Saturday, August 6, 2005
+*   copyright            : (C) 2005 Atari Legend
+*   email                : maarten.martens@freebel.net
+*   actual update        : Creation of file
+*   Id: individuals_auhtor.php,v 0.10 2005/08/06 19:07 Gatekeeper
+*
+***************************************************************************/
+
+//****************************************************************************************
+// The Author main page
+//**************************************************************************************** 
+*}
+{extends file='1/admin/frontpage.html'}
+{block name=title}Add/Edit Author types{/block}
+{block name=main_tile}
+
+<div class="NEWMAINCELL" style="display:block; margin-left:auto;margin-right: auto;">
+	<fieldset class="interview_set">
+		Here you can add, edit or delete an author type. These groupings are used in the actual game section
+		to connect them to a certain genre. 		
+	</fieldset> 
+<br/><br/>
+		{if isset($load) and $load == '1'}
+			<form action="../individuals/db_individuals_author.php" method="post" name="post">
+			<fieldset class="game_set">
+			<legend class="links_legend">Modify type</legend>
+			<input type="text" name="newtype" value="{$author_types_load.author_type}">
+			<input type="hidden" name="action" value="edit">
+			<input type="hidden" name="type_id" value="{$author_types_load.author_type_id}">
+			<input type="submit" value="Edit">
+			</fieldset>
+			</form>
+		{else}
+			<form action="../individuals/db_individuals_author.php" method="post" name="post">
+			<fieldset class="game_set" style="width:250px;">
+			<legend class="links_legend">Add a new type</legend>
+			<input type="text" name="newtype">
+			<input type="hidden" name="action" value="insert">
+			<input type="submit" value="Insert">
+			</fieldset>
+			</form>
+		{/if}
+<br/><br/>
+		<fieldset class="game_set" style="width:250px;">
+		<legend class="links_legend">Current types</legend>
+		
+		{foreach from=$author_types item=line} 
+		<ul style="display:block;width:100%;padding:0px;margin:0px;">
+			<li style="display:table-cell;width:70%;">{$line.author_type}</li>
+			<li style="display:table-cell;width:15%;"><a href="../individuals/individuals_author.php?type_id={$line.author_type_id}&amp;action=load" class=MAINNAV>Edit</a></li>
+			<li style="display:table-cell;width:15%;"><a href="../individuals/db_individuals_author.php?type_id={$line.author_type_id}&amp;action=delete" class=MAINNAV>Delete</a></li>
+		</ul>
+		
+		{/foreach}
+		
+		</fieldset>
+<br/>	
+<br/>
+<div class="back_button"><a href="javascript:history.go(-1)" class="MAINNAV">back</a></div>
+<br/>
+</div>
+{if isset($message)}
+	<div class="message_box">{$message}</div>
+{/if}
+{/block}

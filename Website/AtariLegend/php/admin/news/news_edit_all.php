@@ -89,7 +89,7 @@ $smarty->assign('links',
 $smarty->assign("user_id",$_SESSION['user_id']);
 
 //Send all smarty variables to the templates
-$smarty->display('file:../../../templates/html/admin/news_edit_all.html');
+$smarty->display("file:".$cpanel_template_folder."news_edit_all.html");
 
 //close the connection
 mysqli_close($mysqli);

@@ -89,6 +89,6 @@ $smarty->assign('left_nav', 'leftnav_position_usersearch');
 $smarty->assign('quick_search_games', 'quick_search_games_position_usersearch');
 
 //Send all smarty variables to the templates
-$smarty->display('file:../../../templates/html/admin/user_search.html');
+$smarty->display("file:".$cpanel_template_folder."user_search.html");
 
 ?>
