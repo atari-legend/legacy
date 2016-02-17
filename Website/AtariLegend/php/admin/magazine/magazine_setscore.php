@@ -42,5 +42,5 @@ include("../../includes/admin.php");
 									'magazine_issue_id' => $magazine_issue_id));
 
 //Send all smarty variables to the templates
-$smarty->display('file:../../../templates/html/admin/magazine_setscore.html');
+$smarty->display("file:".$cpanel_template_folder."magazine_setscore.html");
 ?>

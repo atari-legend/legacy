@@ -1,0 +1,76 @@
+{* 
+/***************************************************************************
+*                               user_statistics.html
+*                            -----------------------
+*   begin                : friday, November 11, 2005
+*   copyright            : (C) 2005 Atari Legend
+*   email                : maarten.martens@freebel.net
+*   actual update        : file creation
+*							
+*
+*   Id: user_statistics.html,v 0.10 2005/05/01 ST Graveman
+*		user_statistics.html,v 0.20 2015/09/01 ST Graveman - AL 2.0
+*		user_statistics.html,v 0.30 2015/09/01 ST Graveman - HTML validated
+*
+***************************************************************************/
+
+************************************************************************************************
+The the user stats page
+************************************************************************************************
+*}
+{extends file='1/admin/frontpage.html'}
+{block name=main_tile}
+<div class="standard_tile" id="user_statistics">
+	<h1>USER STATISTICS</h1>
+	<div class="standard_tile_line"></div>
+	<div class="standard_tile_text">	
+		<ul class="standard_table_list">
+
+		<li class="left_nav_section">This user has posted <b>{if $nr_comments ==! ''}{$nr_comments}{else}0{/if}</b> game comments.</li>				
+		{if $nr_comments ==! ''}	
+		{foreach from=$users_comments item=line}
+			<li><a href="../games/games_detail.php?game_id={$line.game_id}" class="left_nav_link">{$line.game_name}</a></li>
+		{/foreach}		
+		{/if}
+			
+		<li class="left_nav_section">This user has posted <b>{if $nr_reviews ==! ''}{$nr_reviews}{else}0{/if}</b> game reviews.</li>	
+		{if $nr_reviews ==! ''}
+		{foreach from=$users_reviews item=line}
+			<li><a href="../administration/construction.php" class="left_nav_link">{$line.game_name}</a></li>
+		{/foreach}	
+		{/if}	
+
+		<li class="left_nav_section">This user has posted <b>{if $nr_submission ==! ''}{$nr_submission}{else}0{/if}</b> game submissions.</li>	
+		{if $nr_submission ==! ''}
+		{foreach from=$users_submission item=line}
+			<li><a href="../administration/construction.php" class="left_nav_link">{$line.game_name}</a></li>
+		{/foreach}		
+		{/if}
+
+		<li class="left_nav_section">This user has posted <b>{if $nr_links ==! ''}{$nr_links}{else}0{/if}</b> links.</li>
+		{if $nr_links ==! ''}
+		{foreach from=$users_website item=line}
+			<li><a href="../links/link_mod.php?website_id={$line.website_id}" class="left_nav_link">{$line.website_name}</a></li>
+		{/foreach}		
+		{/if}
+
+		<li class="left_nav_section">This user has posted <b>{if $nr_news ==! ''}{$nr_news}{else}0{/if}</b> news updates.</li>
+		{if $nr_news ==! ''}
+		{foreach from=$users_news item=line}
+			<li><a href="../news/news_edit.php?news_id={$line.news_id}" class="left_nav_link">{$line.news_headline}</a></li>
+		{/foreach}
+		{/if}	
+
+		<li class="left_nav_section">This user has downloaded <b>{if $nr_downloads ==! ''}{$nr_downloads}{else}0{/if}</b> games.</li>
+		
+		</ul>
+	</div>	
+	
+	<div class="standard_table_center"><a href="../user/user_detail.php?user_id_selected={$user_id_selected}" class="standard_tile_link">back</a></div>
+	<br>
+	{if isset($message)}
+		<div class="message_box">{$message}</div>
+	{/if}
+
+</div>
+{/block}

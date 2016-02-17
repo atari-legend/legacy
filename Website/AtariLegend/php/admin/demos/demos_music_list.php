@@ -112,7 +112,7 @@ if (isset($action) and $action == 'search')
 				$smarty->assign('nr_of_entries', $i);
 				
 				//Send all smarty variables to the templates
-				$smarty->display('file:../../../templates/html/admin/demos_music_list.html');
+				$smarty->display("file:".$cpanel_template_folder."demos_music_list.html");
 
 				//close the connection
 				mysqli_close($mysqli);	

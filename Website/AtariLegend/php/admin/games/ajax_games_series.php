@@ -143,5 +143,5 @@ include("../../includes/constants.php");
 
 
 //Send all smarty variables to the templates
-$smarty->display('file:../../../templates/html/admin/ajax_games_series.html');
+$smarty->display("file:".$cpanel_template_folder."ajax_games_series.html");
 ?>

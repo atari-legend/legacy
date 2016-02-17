@@ -216,7 +216,7 @@ querystring for faster output
 				$smarty->assign("user_id",$_SESSION['user_id']);
 
 				//Send all smarty variables to the templates
-				$smarty->display('file:../../../templates/html/admin/demos_list.html');
+				$smarty->display("file:".$cpanel_template_folder."demos_list.html");
 			}
 			else
 			{

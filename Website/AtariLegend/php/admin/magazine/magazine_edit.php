@@ -45,5 +45,5 @@ list ($magazine_id,$magazine_name) = $sql_magazine->fetch_row();
 			}
 
 //Send all smarty variables to the templates
-$smarty->display('file:../../../templates/html/admin/magazine_edit.html');
+$smarty->display("file:".$cpanel_template_folder."magazine_edit.html");
 ?>

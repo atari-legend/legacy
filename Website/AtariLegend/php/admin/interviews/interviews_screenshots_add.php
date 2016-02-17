@@ -67,7 +67,7 @@ while ($interview = $sql_interview->fetch_array(MYSQLI_BOTH))
 $smarty->assign("user_id",$_SESSION['user_id']);
 
 //Send all smarty variables to the templates
-$smarty->display('file:../../../templates/html/admin/interviews_screenshots_add.html');
+$smarty->display("file:".$cpanel_template_folder."interviews_screenshots_add.html");
 
 //close the connection
 mysqli_close($mysqli);

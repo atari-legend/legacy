@@ -1,0 +1,58 @@
+{* 
+/***************************************************************************
+*                                company_main.tpl
+*                            --------------------------
+*   begin                : Sunday, August 7, 2005
+*   copyright            : (C) 2005 Atari Legend
+*   email                : maarten.martens@freebel.net
+*   actual update        : Creation of file
+*   Id: company_main.tpl,v 0.10 2005/08/07 14:29 Gatekeeper
+*
+***************************************************************************/
+
+************************************************************************************************
+The main company (developer/publisher) page
+************************************************************************************************
+*}
+{extends file='1/admin/frontpage.html'}
+{block name=title}Add/Edit a company (publisher/developer){/block}
+{block name=main_tile}
+<div class="NEWMAINCELL" style="text-align:center;">
+	<fieldset class="interview_set" style="width:75%;">
+		In this section you can add or edit a publisher or developer. To edit an existing entry, look up the name
+		in the dropdown box and press the 'Edit' button. To add a new entry, use the input field and press 'add'
+	</fieldset> 
+<br/>
+	<div style="display:inline;">
+	<fieldset class="interview_set" style="width:400px;display:inline;float:left;">
+			<legend class="links_legend">Edit a company</legend>
+			<form action="../company/company_edit.php" method="post" name="comp_edit" id="comp_edit">
+
+	<select name="comp_id">
+		<option value="-">-</option>
+		{foreach from=$company item=line}
+			<option value="{$line.comp_id}">{$line.comp_name}</option>
+		{/foreach}	
+	</select>
+	<input type="submit" value="Edit">
+		<input type="hidden" name="action" id="action" value="search_comp">
+	<input type="hidden" name="user_id" id="user_id" value="{$user_id}">
+	</form>	
+	</fieldset>
+
+	<form action="../company/company_main.php" method="post" name="comp_add" id="comp_add">
+	<fieldset class="interview_set" style="width:400px;display:inline;float:right;">
+	<legend class="links_legend">Add a company</legend>
+	<input type="text" name="comp_name">
+	<input type="submit" value="Add">
+	</fieldset>
+	<input type="hidden" name="action" id="action" value="insert_comp">
+	<input type="hidden" name="user_id" id="user_id" value="{$user_id}">
+	</form>	
+	</div>
+
+{if isset($message)}
+	<div class="message_box">{$message}</div>
+{/if}
+</div>
+{/block}

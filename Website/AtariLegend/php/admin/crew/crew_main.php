@@ -54,7 +54,7 @@ if (isset($message))
 				$smarty->assign('az_output', $az_output);
 
 		//Send all smarty variables to the templates
-		$smarty->display('file:../../../templates/html/admin/crew_main.html');
+		$smarty->display("file:".$cpanel_template_folder."crew_main.html");
 
 //close the connection
 mysqli_close($mysqli);

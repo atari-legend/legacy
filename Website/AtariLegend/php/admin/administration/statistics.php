@@ -73,5 +73,5 @@ $smarty->assign('main_stats', 'main_stats_position_front');
 		
 //Send all smarty variables to the templates
 
-$smarty->display('file:html/admin/start_page.html');
+$smarty->display("file:".$cpanel_template_folder."start_page.html");
 ?>

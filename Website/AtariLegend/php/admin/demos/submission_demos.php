@@ -157,5 +157,5 @@ $v_counter = (isset($_GET["v_counter"]) ? $_GET["v_counter"] : 0);
 						  'num_sub' => $number_sub));
 
 //Send all smarty variables to the templates
-$smarty->display('file:../../../templates/html/admin/submission_demos.html');
+$smarty->display("file:".$cpanel_template_folder."submission_demos.html");
 ?>
