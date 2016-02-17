@@ -38,7 +38,7 @@ if ($ind_id == '-')
 		$smarty->assign("user_id",$_SESSION['user_id']);
 
 		//Send all smarty variables to the templates
-		$smarty->display('file:../../../templates/html/admin/individuals_main.html');
+		$smarty->display("file:".$cpanel_template_folder."individuals_main.html");
 }
 else
 {
@@ -88,7 +88,7 @@ while ( $ind_nicks=$sql_individuals->fetch_array(MYSQLI_BOTH) )
 $smarty->assign("user_id",$_SESSION['user_id']);
 
 //Send all smarty variables to the templates
-$smarty->display('file:../../../templates/html/admin/individuals_edit.html');
+$smarty->display("file:".$cpanel_template_folder."individuals_edit.html");
 }
 
 //close the connection

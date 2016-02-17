@@ -12,10 +12,11 @@ Website/AtariLegend/php/includes/connect.php
 
 $ cat .gitignore 
 # exclude the SASS cache
-Website/AtariLegend/templates/.sass-cache/*
+Website/AtariLegend/themes/.sass-cache/*
+Website/AtariLegend/themes/.pleeeaserc
 
 $ cat .gitignore 
 # exclude the SASS map file
-Website/AtariLegend/templates/0/css/*
-Website/AtariLegend/templates/1/css/*
-Website/AtariLegend/templates/2/css/*
+Website/AtariLegend/themes/styles/1/css/*
+Website/AtariLegend/themes/styles/2/css/*
+Website/AtariLegend/themes/styles/3/css/*

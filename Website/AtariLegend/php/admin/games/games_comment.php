@@ -166,5 +166,5 @@ $smarty->assign('quick_search_games', 'quick_search_games_comment');
 $smarty->assign('left_nav', 'leftnav_position_games_comment');
 
 //Send all smarty variables to the templates
-$smarty->display('file:../../../templates/html/admin/games_comment.html');
+$smarty->display("file:".$cpanel_template_folder."games_comment.html");
 ?>

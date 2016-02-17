@@ -1,0 +1,443 @@
+{* 
+/***************************************************************************
+                              crew_search.tpl
+*                            --------------------------
+*   begin                : Sunday, August 28, 2005
+*   copyright            : (C) 2005 Atari Legend
+*   email                : admin@atarilegend.com
+*
+*   Id: crew_search.tpl,v 0.10 2005/10/29 Silver
+*
+***************************************************************************/
+
+************************************************************************************************
+The main game page
+************************************************************************************************
+*}
+{extends file='1/admin/frontpage.html'}
+{block name=java_script}
+<script type="text/javascript">
+function crewinsert()
+{
+    JSnewcrew=document.forms["insertcrew"].newcrew.value;
+	
+	if (JSnewcrew=='')
+	{
+		alert('Please fill in a crew name');
+	}
+	else
+	{
+    	// CONFIRM REQUIRES ONE ARGUMENT
+    	var message = "Are you sure you want to insert this crew into the database?";
+    	// CONFIRM IS BOOLEAN. THAT MEANS THAT
+    	// IT RETURNS TRUE IF 'OK' IS CLICKED
+    	// OTHERWISE IT RETURN FALSE
+    	var return_value = confirm(message);
+		
+    	if (return_value !="0")
+    	{
+    		url="db_crew.php?new_crew="+JSnewcrew+"&action=insert_crew";
+			location.href=url;
+    	} 
+	}
+}
+function browseSubCrew(str2) {
+    if (str2 == "") {
+        document.getElementById("sub_crew").innerHTML = "";
+        return;
+    } else { 
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) 
+            {
+                document.getElementById("sub_crew").innerHTML = xmlhttp.responseText;
+            } 
+        }
+        xmlhttp.open("GET","../crew/ajax_crew_search.php?crewsearch={$tracking.crewsearch}&crewbrowse={$tracking.crewbrowse}&action=crew_gen_browse&query="+str2,true);
+        xmlhttp.send();
+    }
+}
+
+function searchSubCrew(str) {
+    if (str == "") {
+        str = "empty";
+			xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("sub_crew").innerHTML = xmlhttp.responseText;
+            }
+        }   
+
+    } else { 
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("sub_crew").innerHTML = xmlhttp.responseText;
+            }
+        }
+        xmlhttp.open("GET","../crew/ajax_crew_search.php?crewsearch={$tracking.crewsearch}&crewbrowse={$tracking.crewbrowse}&action=crew_search&query="+str,true);
+        xmlhttp.send();
+    }
+}
+
+
+function browseCrew(str) {
+    if (str == "") {
+        document.getElementById("crew_list").innerHTML = "";
+        return;
+    } else { 
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("crew_list").innerHTML = xmlhttp.responseText;
+            }
+        }
+        xmlhttp.open("GET","../crew/ajax_crew_search.php?crewsearch={$tracking.crewsearch}&crewbrowse={$tracking.crewbrowse}&action=crew_browse&query="+str,true);
+        xmlhttp.send();
+    }
+}
+
+function searchCrew(str) {
+    if (str == "") {
+        str = "empty";
+			xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("crew_list").innerHTML = xmlhttp.responseText;
+            }
+        }   
+
+    } else { 
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("crew_list").innerHTML = xmlhttp.responseText;
+            }
+        }
+        xmlhttp.open("GET","../crew/ajax_crew_search.php?crewsearch={$tracking.crewsearch}&crewbrowse={$tracking.crewbrowse}&action=crew_search&query="+str,true);
+        xmlhttp.send();
+    }
+}
+
+function browseInd(str) {
+    if (str == "") {
+        document.getElementById("ind_member").innerHTML = "";
+        return;
+    } else { 
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("ind_member").innerHTML = xmlhttp.responseText;
+            }
+        }
+        xmlhttp.open("GET","../crew/ajax_crew_search.php?crewsearch={$tracking.crewsearch}&crewbrowse={$tracking.crewbrowse}&action=ind_gen_browse&query="+str,true);
+        xmlhttp.send();
+    }
+}
+
+function searchInd(str) {
+    if (str == "") {
+        str = "empty";
+			xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("ind_member").innerHTML = xmlhttp.responseText;
+            }
+        }   
+
+    } else { 
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("ind_member").innerHTML = xmlhttp.responseText;
+            }
+        }
+        xmlhttp.open("GET","../crew/ajax_crew_search.php?crewsearch={$tracking.crewsearch}&crewbrowse={$tracking.crewbrowse}&action=ind_gen_search&query="+str,true);
+        xmlhttp.send();
+    }
+}
+</script>
+{/block}
+{block name=left_tile}
+		<br/>
+		
+		{* Add crew section *}
+		<div class="quicklinkbox">
+		<b>Crew Editor</b><br/>
+		<br/>
+		Search for crew:<br/>
+		<form action="../crew/crew_editor.php" method="get" name="post_menu_crew_set" id="menu_crew_set">
+		<select name="crew_browse" class="quicklinks_crew_browse" onchange="browseCrew(this.value)">
+			{html_options values=$az_value output=$az_output}
+		</select>
+		<input type="text" name="crewsearch" value="" onkeyup="searchCrew(this.value)" class="quicklinks_crew_search">
+		{* Ajax *}
+		<div id="crew_list">
+		<select name="crew_select" id="CrewList" size="8" style="width:200px;">
+			{foreach from=$crew item=line}	
+				{html_options values=$line.crew_id output=$line.crew_name}
+			{/foreach}
+		</select>
+		</div>
+		<input type="submit" value="Select" style="margin:5px;vertical-align:top;">
+		<input type="hidden" name="crewsearch" value="{$tracking.crewsearch}">
+		<input type="hidden" name="crewbrowse" value="{$tracking.crewbrowse}">
+		</form>
+		
+		
+		<br/>
+
+		<hr>
+		<br/>
+		Add new Crew to db:
+		<form method="post" name="insertcrew">
+		<input type="text" name="newcrew" value="" style="margin:5px; width:200px;"><br/>
+		<input type="submit" value="Insert" style="margin:5px;vertical-align:top;" onClick="crewinsert(); return false;">
+		</form>
+		</div>
+		<hr>
+		{* END crew section *}
+		<br/><br/> 
+{/block}
+{block name=title}Crew editor - Genealogy{/block}
+{block name=main_tile}
+<div class="NEWMAINCELL" style="text-align:center;">
+
+
+
+	<br/><br/>
+
+	<div style="width:80%;display:table-cell;">
+	{* Start crew editing table	*}
+
+				<div style="display:flex;justify-content: space-around;">
+				<a href="../crew/crew_editor.php?crew_select={if isset($crew_select.crew_id)}{$crew_select.crew_id}{/if}&amp;crewsearch={$tracking.crewsearch}&amp;crewbrowse={$tracking.crewbrowse}" class="click_button">
+				Main Edit</a>
+				<a href="../crew/crew_genealogy.php?action=genealogy&amp;crew_select={if isset($crew_select.crew_id)}{$crew_select.crew_id}{/if}&amp;crewsearch={$tracking.crewsearch}&amp;crewbrowse={$tracking.crewbrowse}" class="click_button">
+				Genealogy</a>
+				<a href="#?action=statistics&amp;crew_select={if isset($crew_select.crew_id)}{$crew_select.crew_id}{/if}&amp;crewsearch={$tracking.crewsearch}&amp;crewbrowse={$tracking.crewbrowse}" class="click_button">
+				Statistics</a>
+				<a href="#?action=comments&amp;crew_select={if isset($crew_select.crew_id)}{$crew_select.crew_id}{/if}&amp;crewsearch={$tracking.crewsearch}&amp;crewbrowse={$tracking.crewbrowse}" class="click_button">
+				Comments/Submissions</a>
+				</div>
+
+
+			{* START THE CREW GENEALOGY EDIT *}
+<br/><br/>
+
+	<fieldset class="interview_set" style="margin-left: 5%;margin-right: 5%; width:90%;">
+		This is the scene genealogy page where we can add members to crews. We can add both indiviual members and subcrews.
+	</fieldset> 
+	<br/><br/>
+		<div style="display:table-row;">
+		<div style="width:50%;display:table-cell;">
+			<div style="float:left;padding-left:55px;">
+			<form action="../crew/db_crew.php" method="post" name="crew_gene2" id="crew_gene2">
+				<select id="crewbrowse2" onchange="browseSubCrew(this.value)" class="quicklinks_crew_browse">
+					{html_options values=$az_value output=$az_output}
+				</select>
+			<input type="text" name="crewsearch" value="" onkeyup="searchSubCrew(this.value)" class="quicklinks_crew_search">
+
+
+			
+			
+			
+			<div id="sub_crew">
+			<select name="sub_crew[]" id="subCrewList" size="10" multiple style="width:200px;">
+				
+				
+					
+				<option value="" selected>-</option>
+			
+					{foreach from=$crew_gene item=line}
+						{if $line.crew_id <> $crew_select.crew_id}
+							<option value="{$line.crew_id}">{$line.crew_name}</option>
+						{/if}
+					{/foreach}	
+				
+			</select>
+			</div>
+			<br/>
+			<input type="hidden" name="action" value="parent_crew">
+			<input type="hidden" name="parent_id" value="{if isset($crew_select.crew_id)}{$crew_select.crew_id}{/if}">
+			<input type="hidden" name="crew_select" id="crew_select8" value="{if isset($crew_select.crew_id)}{$crew_select.crew_id}{/if}">
+			<input type="hidden" name="crewsearch" id="crewsearch8" value="{$tracking.crewsearch}">
+			<input type="hidden" name="crewbrowse" id="crewbrowse8" value="{$tracking.crewbrowse}">
+			<input type="submit" value="Add Subcrew">
+			
+			</form>
+			</div>
+			</div>
+			<div style="width:50%;display:inline-block;float:right;">
+
+
+					<div style="display:table-cell;vertical-align:top;">
+					
+					 <FORM action="../crew/db_crew.php" method="post">
+						<SELECT id="m1" name="m1" onchange="browseInd(this.value)" class="quicklinks_crew_browse">
+
+						{html_options values=$az_value output=$az_output}
+
+        				</SELECT>
+
+						<input type="text" onkeyup="searchInd(this.value)" class="quicklinks_crew_search">
+
+      				
+					
+
+					
+							
+							<div id="ind_member">   
+								<SELECT id="ind_id" name="ind_id" size="10" style="width:200px;">
+								{foreach from=$ind_gene item=line}
+								<option value="{$line.ind_id}">{$line.ind_name}</option>
+								{/foreach}	
+								</SELECT>
+							</div>	      
+							<br/>
+							<input type="hidden" name="action" value="add_member">
+							<input type="hidden" name="parent_id" value="{if isset($crew_select.crew_id)}{$crew_select.crew_id}{/if}">
+							<input type="hidden" name="crew_select" id="crew_select8" value="{if isset($crew_select.crew_id)}{$crew_select.crew_id}{/if}">
+							<input type="hidden" name="crewsearch" id="crewsearch8" value="{$tracking.crewsearch}">
+							<input type="hidden" name="crewbrowse" id="crewbrowse8" value="{$tracking.crewbrowse}">
+							<INPUT type="submit" value="Add Crewmember">
+							</FORM>
+					
+					</div>
+
+			</div>
+			</div>
+			<div style="display:table;width:100%;">
+			<div style="width:100%;display:table-cell;">
+
+				{* MEMBERS OF CREW *}
+			<br/>
+			<fieldset style="width:100%;padding:5px;">
+			<legend class="links_legend">Members</legend>
+			
+			<div style="width:49%;float:left;">
+
+					<table class="table_game_list" style="width:100%;">
+						<tr>
+							<th style="width:75%;">SubCrews</th>
+							<th style="width:25%;"></th>
+						</tr>
+						{if isset($subcrew)}					
+						{foreach from=$subcrew item=line}
+						<tr>
+							<td style="width:75%;">{$line.crew_name}</td>
+							<td style="width:25%;"><a href="../crew/db_crew.php?action=delete_subcrew&amp;crew_select={if isset($crew_select.crew_id)}{$crew_select.crew_id}{/if}&amp;crewsearch={$tracking.crewsearch}&amp;crewbrowse={$tracking.crewbrowse}&amp;sub_crew_id={$line.sub_crew_id}" class="MAINNAV">Delete</a>
+							</td>
+						</tr>
+							{/foreach}
+							{/if}
+						<tr>
+							<td class="game_list_footer" colspan="2">
+								&nbsp;&nbsp;&nbsp;
+							</td>
+						</tr>
+					</table>
+
+					</div>
+					<div style="width:49%;float:right;">
+					
+	
+	
+	<table class="table_game_list" style="width:100%;">
+			<tr>
+				<th style="width:30%;">"Sceners"</th>
+				<th style="width:30%;">Used nick</th>
+				<th style="width:30%;"></th>
+				<th style="width:10%;"></th>
+			</tr>
+					{if isset($crew_individuals)}
+					{foreach name=outer item=individual from=$crew_individuals}	
+			<tr>
+				<td style="width:30%;">{$individual.ind_name}</td>
+				<form action="../crew/db_crew.php" method="post" name="nick_edit{$individual.ind_id}" id="nick_edit{$individual.ind_id}">
+				<td style="width:30%;">
+					<select name="individual_nicks_id" id="individual_nicks_id" size="1">
+									<option value="-" {if $individual.individual_nicks_id <> ''} {else}SELECTED{/if}>None</option>
+
+									{if isset($nick_names)}
+									{foreach name=inner item=line from=$nick_names}
+									{if (isset($individual.ind_id) and $individual.ind_id eq $line.ind_id)}
+									<option value="{$line.individual_nicks_id}" {if $individual.individual_nicks_id eq $line.individual_nicks_id}SELECTED{/if}>{$line.nick}</option>
+									{/if}
+									{/foreach}
+									{/if}
+
+						</select>
+					</td>
+				<td style="width:30%;">
+						<input type="hidden" name="action" value="update_nick">
+						<input type="hidden" name="crew_individual_id" value="{$individual.crew_individual_id}">
+						<input type="hidden" name="parent_id" value="{if isset($crew_select.crew_id)}{$crew_select.crew_id}{/if}">
+						<input type="hidden" name="crew_select" id="crew_select8" value="{if isset($crew_select.crew_id)}{$crew_select.crew_id}{/if}">
+						<input type="hidden" name="crewsearch" id="crewsearch8" value="{$tracking.crewsearch}">
+						<input type="hidden" name="crewbrowse" id="crewbrowse8" value="{$tracking.crewbrowse}">		
+						<input type="submit" name="inserter" value="Update" style="margin: 0 auto;">
+						</form>
+					</td>				
+				<td style="width:10%">
+				<a href="../crew/db_crew.php?action=delete_crew_member&amp;crew_select={if isset($crew_select.crew_id)}{$crew_select.crew_id}{/if}&amp;crewsearch={$tracking.crewsearch}&amp;crewbrowse={$tracking.crewbrowse}&amp;crew_individual_id={$individual.crew_individual_id}" class="MAINNAV">Delete</a>
+				</td>
+			</tr>
+					{/foreach}
+					{/if}
+			<tr>
+				<td class="game_list_footer" colspan="4">
+					&nbsp;&nbsp;&nbsp;
+				</td>
+			</tr>
+		</table>
+
+					</div>
+		
+			</fieldset>
+
+		</div>
+		</div>
+</div>
+			{* END THE CREW GENEALOGY EDIT *}
+
+	{* End crew editing table	*}
+
+{if isset($message)}
+	<div class="message_box">{$message}</div>
+{/if}
+</div>
+{/block}

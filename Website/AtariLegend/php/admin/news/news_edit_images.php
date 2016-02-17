@@ -83,7 +83,7 @@ if (isset($action) and $action=="delete_image")
 }
 
 //Send all smarty variables to the templates
-$smarty->display('file:../../../templates/html/admin/news_edit_images.html');
+$smarty->display("file:".$cpanel_template_folder."news_edit_images.html");
 
 //close the connection
 mysqli_close($mysqli);

@@ -285,7 +285,7 @@ $smarty->assign("user_id",$_SESSION['user_id']);
 $smarty->assign('demo_detail_tpl', '1');
 
 //Send all smarty variables to the templates
-$smarty->display('file:../../../templates/html/admin/index.html');
+$smarty->display("file:".$cpanel_template_folder."index.html");
 
 //close the connection
 mysqli_close($mysqli);

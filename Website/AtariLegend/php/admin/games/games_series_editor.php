@@ -82,5 +82,5 @@ include("../../includes/admin.php");
 				}
 
 //Send all smarty variables to the templates
-$smarty->display('file:../../../templates/html/admin/games_series_editor.html');
+$smarty->display("file:".$cpanel_template_folder."games_series_editor.html");
 ?>

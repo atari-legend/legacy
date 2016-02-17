@@ -19,19 +19,23 @@ if (isset($_SESSION['skin']))
 		
 		$set_skin = $_SESSION['skin'];
 		
-		$smarty->assign("template_dir", "../../../templates/$set_skin/");
+		$cpanel_template_folder = "../../../themes/templates/1/admin/";
+		$mainsite_template_folder = "../../../themes/templates/1/main/";
+		$smarty->assign("template_dir", "../../../themes/styles/$set_skin/");
 		
-		foreach (glob("../../../templates/$set_skin/images/trivia/*.*") as $filename) {
+		foreach (glob("../../../themes/styles/$set_skin/images/trivia/*.*") as $filename) {
 			$filename = substr ($filename, 3);
 			$smarty->append('image',
 				array('image_name' => $filename ));
 		}
 }
 else
-{
-	$smarty->assign('template_dir', '../../../templates/1/');
+{	
+	$cpanel_template_folder = "../../../themes/templates/1/admin/";
+	$mainsite_template_folder = "../../../themes/templates/1/main/";
+	$smarty->assign('template_dir', '../../../themes/styles/1/');
 	
-	foreach (glob("../../../templates/1/images/trivia/*.*") as $filename) {
+	foreach (glob("../../../themes/styles/1/images/trivia/*.*") as $filename) {
 		$filename = substr ($filename, 3);
 		$smarty->append('image',
 			array('image_name' => $filename ));

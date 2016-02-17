@@ -38,6 +38,6 @@ $smarty->assign('left_nav', 'leftnav_position_triviaquotes');
 $smarty->assign('quick_search_games', 'quick_search_games_position_triviaquotes');	
 		
 //Send all smarty variables to the templates
-$smarty->display('file:../../../templates/html/admin/manage_trivia_quotes.html');
+$smarty->display("file:".$cpanel_template_folder."manage_trivia_quotes.html");
 
 ?>

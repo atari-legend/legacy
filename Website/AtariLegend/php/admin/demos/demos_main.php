@@ -52,7 +52,7 @@ list($start2, $start3) = explode(":", exec('date +%N:%S'));
 		
 
 		//Send all smarty variables to the templates
-		$smarty->display('file:../../../templates/html/admin/demos_main.html');
+		$smarty->display("file:".$cpanel_template_folder."demos_main.html");
 //close the connection
 mysqli_close($mysqli);
 ?>

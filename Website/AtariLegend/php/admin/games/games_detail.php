@@ -413,7 +413,7 @@ $smarty->assign('quick_search_games', 'quick_search_games_detail');
 $smarty->assign('left_nav', 'leftnav_position_games_detail');
 
 //Send all smarty variables to the templates
-$smarty->display('file:../../../templates/html/admin/games_detail.html');
+$smarty->display("file:".$cpanel_template_folder."games_detail.html");
 
 
 //close the connection
