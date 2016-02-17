@@ -58,7 +58,7 @@ $smarty->assign('left_nav', 'leftnav_position_userdetails');
 $smarty->assign('quick_search_games', 'quick_search_games_position_userdetails');	
 
 //Send all smarty variables to the templates
-$smarty->display('file:../../../templates/html/admin/user_detail.html');
+$smarty->display("file:".$cpanel_template_folder."user_detail.html");
 
 
 //close the connection

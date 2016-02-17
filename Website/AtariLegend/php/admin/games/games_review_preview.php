@@ -74,7 +74,7 @@ while ($sql_screenshots = $query_screenshots->fetch_array(MYSQLI_BOTH))
 $smarty->assign('game_id', $game_id);
 
 //Send all smarty variables to the templates
-$smarty->display('file:../../../templates/html/admin/games_review_preview.html');
+$smarty->display("file:".$cpanel_template_folder."games_review_preview.html");
 
 //close the connection
 mysqli_close($mysqli);

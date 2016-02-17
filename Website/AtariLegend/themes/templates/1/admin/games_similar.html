@@ -1,0 +1,61 @@
+{* 
+/***************************************************************************
+                              games_similar.tpl
+*                            --------------------------
+*   begin                : April 2006
+*   copyright            : (C) 2006 Atari Legend
+*   email                : admin@atarilegend.com
+*
+*   Id: games_similar.tpl,v 0.10 2006-04 Silver
+*
+***************************************************************************/
+
+************************************************************************************************
+The main game page
+************************************************************************************************
+*}
+{extends file='1/admin/frontpage.html'}
+{block name=title}Similar Games{/block}
+{block name=main_tile}
+<div class="NEWMAINCELL" style="text-align:center;">
+	<fieldset class="interview_set">
+		Select a game from the dropdown field and hit the "Add" button.
+	</fieldset>
+	<br/><br/>
+			<form action="../games/db_games_similar.php" method="post" name="similar">
+		<fieldset class="interview_set">
+		<legend class="links_legend">Games Similar to {$game_info.game_name}</legend>
+			<b>Similar game :</b> 
+			<br/>
+			<select name="game_similar" class="authorSelects2">
+				<option value="-" selected>-</option>
+				{foreach from=$similar_games item=line}
+					<option value="{$line.game_id}">{$line.game_name}</option>
+				{/foreach}			
+			</select>	
+			<br/>
+			<input type="submit" name="valider" value="Add">
+			<input type="hidden" name="action" value="add_game_similar">	
+			<input type="hidden" name="game_id" value="{$game_info.game_id}">	
+			<br/>
+			<br/>
+			{if $nr_similar <> 0}
+				<b>Current Similar games</b>
+				<br/>
+				<br/>
+				{foreach from=$similar item=line}
+					<a href="../games/games_detail.php?game_id={$line.game_id}" class="MAINNAV">{$line.game_name}</a> - <b><a href="../games/db_games_similar.php?game_similar_id={$line.game_similar_id}&action=delete_similar&game_id={$game_info.game_id}" class="MAINNAV">delete</a></b> 
+					<br/>
+				{/foreach}
+			{/if}
+		</fieldset>
+		</form>
+
+		<br/>
+		<br/>
+<div class="back_button"><a href="../games/games_detail.php?game_id={$game_info.game_id}" class="MAINNAV">Back to Detail</a></div>
+{if isset($message)}
+	<div class="message_box">{$message}</div>
+{/if}
+</div>
+{/block}

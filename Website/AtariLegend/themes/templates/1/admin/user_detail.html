@@ -1,0 +1,141 @@
+{* 
+***************************************************************************
+*                                User_detail.html
+*                            ------------------------
+*   begin                : Tuesday, november 9, 2005
+*   copyright            : (C) 2005 Atari Legend
+*   email                : admin@atarilegend.com
+*	 actual update        : Creation of file
+*
+*   Id: User_detail.html,v 0.20 2015/08/22 23:43 ST Gravedigger
+*   Id: User_detail.html,v 0.30 2015/12/03 23:10 ST Gravedigger - HTML Validated/Flexbox added
+*   Id: User_detail.html,v 0.40 2015/12/21 23:55 ST Gravedigger - Removed message var
+*
+***************************************************************************/
+
+*********************************************************************************************************
+User detail page. Overhere you can maintain the log on data of a user and have a look at his activities.
+*********************************************************************************************************
+*}
+{extends file='1/admin/frontpage.html'}
+{block name=java_script}
+<script type="text/javascript">
+function delete_user() 
+{
+	document.getElementById('user').method="post";
+	document.getElementById('user').action="../user/db_user.php?action=delete_user";
+   	document.getElementById('user').submit();
+}
+
+function reset_pwd() 
+{
+	document.getElementById('user').method="post";
+	document.getElementById('user').action="../user/db_user.php?action=reset_pwd&user_id_selected={$users.user_id}";
+   	document.getElementById('user').submit();
+}
+
+function user_stats() 
+{
+	document.getElementById('user').method="post";
+	document.getElementById('user').action="../user/user_statistics.php?user_id_selected={$users.user_id}";
+   	document.getElementById('user').submit();
+}
+</script>
+{/block}
+{block name=main_tile}
+<div class="standard_tile" id="user_details">
+	<h1>USER DETAILS</h1>
+	<div class="standard_tile_line"></div>
+	<div class="standard_tile_text">
+		<div class="left_nav_section">
+			Overhere you can maintain the log on data of a user and have a look at his activities. Press 'modify' to change certain
+			data. 'Delete' will completely remove the account. You are also able to reset the password of the user. After resetting, you are
+			able to enter and save a new password for the account. Finally, press 'statistics' to see what this user has done at AL so far.
+		</div> 
+		<br><br>
+		<fieldset>
+			<legend>User details</legend>
+			<form action="../user/db_user.php?action=modify_user&amp;user_id_selected={$users.user_id}" method="post" name="user" id="user">
+			<div class="user_details_container">
+				<div class="user_details_child" id="child_1">
+					<div class="user_details_row">
+						<div class="user_details_text">User name :</div>
+						<div class="user_details_input"><input type="text" name="user_name"  maxlength="60" value="{$users.user_name}" class="standard_tile_input_small"></div>
+					</div>
+					<div class="user_details_row">
+						<div class="user_details_text">User email :</div>
+						<div class="user_details_input"><input type="text" name="user_email"  maxlength="255" value="{$users.user_email}" class="standard_tile_input_small"></div>
+					</div>
+					<div class="user_details_row">
+						<div class="user_details_text">User website :</div>
+						<div class="user_details_input"><input type="text" name="user_website"  maxlength="255" value="{$users.user_website}" class="standard_tile_input_small"></div>
+					</div>
+					<div class="user_details_row">
+						<div class="user_details_text">User MSNM :</div>
+						<div class="user_details_input"><input type="text" name="user_msnm"  maxlength="255" value="{$users.user_msnm}" class="standard_tile_input_small"></div>
+					</div>
+				</div>
+				<div class="user_details_child" id="child_2">
+					<div class="user_details_row">
+						<div class="user_details_text">User pwd :</div>
+						{if $users.user_pwd ==! ''}
+							<div class="user_details_input"><input type="button" value="reset" class="topbutton_cpanel_small" onClick="reset_pwd();"></div>
+						{else}
+							<div class="user_details_input"><input type="text" name="user_pwd"  maxlength="255" class="standard_tile_input_small"></div>
+						{/if}
+					</div>
+					<div class="user_details_row">	
+						<div class="user_details_text">User permission :</div>
+						<div class="user_details_input"><input type="text" name="user_permission"  maxlength="60" value="{$users.user_permission}" class="standard_tile_input_small"></div>
+					</div>
+					<div class="user_details_row">	
+						<div class="user_details_text">User ICQ :</div>
+						<div class="user_details_input"><input type="text" name="user_icq"  maxlength="255" value="{$users.user_icq}" class="standard_tile_input_small"></div>
+					</div>
+					<div class="user_details_row">
+						<div class="user_details_text">User AIM :</div>
+						<div class="user_details_input"><input type="text" name="user_aim"  maxlength="255" value="{$users.user_aim}" class="standard_tile_input_small"></div>
+					</div>
+				</div>
+			</div>
+			<table>	
+			<tr>
+				<td><br><br><input type="submit" value="Modify" class="topbutton_cpanel_small"></td>
+				<td><br><br><input type="button" value="Delete" onClick="delete_user();" class="topbutton_cpanel_small"></td>
+				<td><br><br><input type="button" value="Statistics" onClick="user_stats();" class="topbutton_cpanel_small"></td>
+				<td><br><br><input type="hidden" name="user_id_selected" value="{$users.user_id}" class="topbutton_cpanel_small"></td>
+			</tr>
+			</table>
+			</form>
+		</fieldset>
+		<br/><br/>
+		<fieldset>
+			<legend>Avatar</legend>
+			{if $users.avatar_ext !=''}
+				<form action="../user/db_user.php?action=delete_avatar&amp;user_id_selected={$users.user_id}" method="post" name="delete_avatar">
+				Delete Image?
+				<div>
+					<br><img src="../../includes/show_image.php?file={$users.image}&amp;resize=160,null,null,null" alt="Avatar" class="user_stats_img" id="user_details_img_dark">
+				</div>
+				<br><br>
+				<input type="hidden" name="user_id_selected" value="{$users.user_id}">
+				<input type="submit" value="Delete" class="topbutton_cpanel_small">
+				</form>
+			{else}
+				<form enctype="multipart/form-data" action="../user/db_user.php?user_id_selected={$users.user_id}" method="post" name="avatar" id="avatar">
+					Attach image
+				<br><br>
+				<input type="file" name="image">
+				<input type="submit" name="Modify" value="Upload" class="topbutton_cpanel_small">
+				<input type="hidden" name="MAX_FILE_SIZE" value="50000">
+				<input type="hidden" name="user_id_selected" value="{$users.user_id}">
+				<input type="hidden" name="action" value="avatar_upload">
+				</form>
+			{/if}
+		</fieldset>
+		<br>
+		<br>	
+		<div class="standard_table_center"><a href="../user/user_main.php" class="standard_tile_link">back</a></div>
+	</div>
+</div>
+{/block}

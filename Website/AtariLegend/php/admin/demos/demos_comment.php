@@ -147,5 +147,5 @@ $smarty->assign('links',
 			   'c_counter' => $c_counter));
 
 //Send all smarty variables to the templates
-$smarty->display('file:../../../templates/html/admin/demos_comment.html');
+$smarty->display("file:".$cpanel_template_folder."demos_comment.html");
 ?>

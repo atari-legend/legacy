@@ -26,7 +26,7 @@ $smarty->assign('error_msg',
 $smarty->assign('error_message_tpl', '1');
 
 //Send all smarty variables to the templates
-$smarty->display('file:../../../templates/html/admin/index.html');
+$smarty->display("file:".$cpanel_template_folder."index.html");
 
 //close the connection
 mysql_close();

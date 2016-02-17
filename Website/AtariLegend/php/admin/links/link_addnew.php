@@ -78,5 +78,5 @@ $smarty->assign('left_nav', 'leftnav_position_linkaddnew');
 $smarty->assign('quick_search_games', 'quick_search_games_position_linkaddnew');	
 
 //Send all smarty variables to the templates
-$smarty->display('file:../../../templates/html/admin/link_addnew.html');
+$smarty->display("file:".$cpanel_template_folder."link_addnew.html");
 ?>

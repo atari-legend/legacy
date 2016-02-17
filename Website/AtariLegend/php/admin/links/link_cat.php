@@ -42,5 +42,5 @@ $smarty->assign('left_nav', 'leftnav_position_linkcat');
 $smarty->assign('quick_search_games', 'quick_search_games_position_linkcat');
 
 //Send all smarty variables to the templates
-$smarty->display('file:../../../templates/html/admin/link_cat.html');
+$smarty->display("file:".$cpanel_template_folder."link_cat.html");
 ?>

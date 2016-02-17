@@ -76,7 +76,7 @@ while  ($company=$sql_company->fetch_array(MYSQLI_BOTH))
 $smarty->assign("user_id",$_SESSION['user_id']);
 
 //Send all smarty variables to the templates
-$smarty->display('file:../../../templates/html/admin/company_edit.html');
+$smarty->display("file:".$cpanel_template_folder."company_edit.html");
 }
 
 //close the connection

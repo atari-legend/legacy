@@ -23,7 +23,7 @@ This is the game music main page
 */
 
 	//Send all smarty variables to the templates
-	$smarty->display('file:../../../templates/html/admin/games_music.html');
+	$smarty->display("file:".$cpanel_template_folder."games_music.html");
 
 	//close the connection
 	mysqli_close($mysqli);

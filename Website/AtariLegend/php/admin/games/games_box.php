@@ -96,7 +96,7 @@ This is the game box main page
 	$smarty->assign('nr_back', $back);
 
 	//Send all smarty variables to the templates
-	$smarty->display('file:../../../templates/html/admin/games_box.html');
+	$smarty->display("file:".$cpanel_template_folder."games_box.html");
 
 	//close the connection
 	mysqli_close($mysqli);

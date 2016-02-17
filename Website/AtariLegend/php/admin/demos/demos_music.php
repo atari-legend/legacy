@@ -21,7 +21,7 @@ This is the demo music main page
 ************************************************************************************************
 */
 //Send all smarty variables to the templates
-$smarty->display('file:../../../templates/html/admin/demos_music.html');
+$smarty->display("file:".$cpanel_template_folder."demos_music.html");
 
 //close the connection
 mysqli_close($mysqli);

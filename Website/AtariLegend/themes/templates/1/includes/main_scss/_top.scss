@@ -1,0 +1,111 @@
+/*****************************************************************/ 
+/***** This is the css code for the top graphics of the site *****/  
+/*****************************************************************/  
+
+/* background */
+#top_background {
+	width: 100%;
+	float: left;
+	@if $skin-name == legacy {
+		background: url(../images/top_bg.jpg) 0 0 no-repeat;
+	}	
+	@else if $skin-name == tos { 
+		background: url(../images/top_bg.jpg) 0 0 no-repeat;
+		border-bottom: 2px solid black;
+		height:100%;
+	}
+	@else{ 
+		background: url(../images/top_bg.jpg) 0 0 no-repeat;
+		height:100%;
+		display: block;
+	}
+}
+	
+/* logos */	
+#left {float: left;}
+#logo_img {max-width: 100%;}
+#logo_img_480 {max-width: 100%;}	
+		
+#right { float: right;}
+	#right img {
+		max-width: 100%;
+		float: right;
+		}
+
+@if $skin-name == tos { 
+	#right {margin-top: 30px;}
+}	
+
+@if $skin-name == picasso {
+	#right img {
+		margin-right: 35px;
+		margin-top: 10px;
+	}
+}	
+		
+/* at a resolution of max 480 (smartphones) we want a smaller logo with border */		
+@media screen and (max-width: 480px) { 
+	.container { width: 15%; } 
+	#left { width: 85%;
+		}	
+	#logo_img { margin-left: auto;
+			margin-right: auto;
+			display: none;
+		}
+	#logo_img_480  { margin-left: auto;
+			margin-right: auto;
+			margin-bottom: 5px;		
+		}
+	#right { width: 0;
+		display: none;
+	}
+	#top_background  { border-top-width: 0;
+			border-left-width: 0;
+			border-style: solid;			
+			
+		@if $skin-name == legacy { 
+			border-bottom-width: 7px;
+			border-bottom-color: #00d3d3;
+			box-shadow: 0 0 7px #00d3d3;
+			background: linear-gradient(#175f5f, black); /* Standard syntax (must be last) */
+		}	
+		@else if $skin-name == tos { 
+				border-bottom-width: 2px;
+				border-bottom-color: black;
+				box-shadow: 3px 3px 5px #888888;
+				background: linear-gradient(#175f5f, #23f001); /* Standard syntax (must be last) */
+		}
+		@else {
+			border-bottom-width: 7px;
+			border-bottom-color: #161c71;
+			box-shadow: 0 0 7px #161c71;
+			background: linear-gradient(#161c71, black); /* Standard syntax (must be last) */
+		}
+	}
+}	
+
+/* at a resolution of max 960 (Tablets & low res laptop) we want the original logo without the bee */				
+@media screen and (min-width: 481px) and (max-width: 960px){  
+	.container { width: 15%; } 
+	#left { width: 100%; }
+	#logo_img{ margin-left: auto;
+			   margin-right: auto; 
+		}
+	#logo_img_480{ display: none;}
+		
+	#right { width: 0;
+		display: none;
+	}
+	
+	@if $skin-name == picasso{
+		#logo_img{margin-top: 0;}
+	}
+}
+
+/* For high res screens we want the full package - original logo and bee */
+@media screen and (min-width: 961px) { 
+	.container { width: 15%; } 
+	#left { width: 50%;}
+	#logo_img_480{ display: none;}	
+	#right{ width: 35%; }
+}	

@@ -172,5 +172,5 @@ $smarty->assign('total_nr_submissions', $v_rows_total);
 						  'num_sub' => $number_sub));
 
 //Send all smarty variables to the templates
-$smarty->display('file:../../../templates/html/admin/submission_games.html');
+$smarty->display("file:".$cpanel_template_folder."submission_games.html");
 ?>

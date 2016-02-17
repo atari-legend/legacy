@@ -61,5 +61,5 @@ include("../../includes/admin.php");
 	   			 			  array('game_id' => $game_id));
 
 //Send all smarty variables to the templates
-$smarty->display('file:../../../templates/html/admin/magazine_review_score.html');
+$smarty->display("file:".$cpanel_template_folder."magazine_review_score.html");
 ?>
