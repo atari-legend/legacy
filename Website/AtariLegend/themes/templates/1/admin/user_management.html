@@ -1,0 +1,258 @@
+{* 
+/***************************************************************************
+*                                site_admin.html
+*                            --------------------------
+*   begin                : 2016-02-13
+*   copyright            : (C) 2015 Atari Legend
+*   email                : admin@atarilegend.com
+*
+*   Id: site_admin.html,v 0.1 Silver Surfer
+*
+***************************************************************************/
+*}
+{extends file='1/admin/frontpage.html'}
+{block name=left_tile}
+
+<div class="standard_tile" id="{$left_nav}">
+	<h1>ADMIN NAVIGATION</h1>
+		<div class="standard_tile_line"></div>
+		<div class="standard_list_entry">
+			<div class="standard_tile_text">
+				<ul class="standard_table_list">
+					<li class="left_nav_section">Administration Sections</li>
+
+					<li><a href="../administration/database_update.php" class="left_nav_link">Database Update</a></li>
+					<li><a href="../administration/construction.php" class="left_nav_link">Website Settings</a></li>
+					<li><a href="../administration/construction.php" class="left_nav_link">Website Themes</a></li>
+					<li><a href="../administration/user_management.php" class="left_nav_link">User Management</a></li>
+					
+				</ul>
+			</div>			
+		</div>
+	<div class="standard_tile_line"></div>
+</div>
+
+{/block}
+{block name=java_script}
+<script type="text/javascript">
+$(document).ready(function() {
+	
+function UserSearch() {
+	
+	var form_values = $( "#user_search" ).serialize();
+	
+	$.ajax({
+ 
+    // The URL for the request
+    url: "ajax_user_management.php",
+ 
+    // The data to send (will be converted to a query string)
+    data: form_values,
+ 
+    // Whether this is a POST or GET request
+    type: "GET",
+ 
+    // The type of data we expect back
+    dataType : "html",
+ 
+    // Code to run if the request succeeds;
+    // the response is passed to the function
+    success: function( html ) {
+        $( "#ajax_usersearch" ).html( html );
+    }
+	});
+}
+	
+	
+	
+	
+	$( "#quick_search_small_select" ).change(function () { UserSearch(); });
+	$( "#no_comments" ).change(function () {
+		if ($(this).is(':checked')) { $("#with_comments").prop("checked", false);}
+		 UserSearch();
+	});
+	$( "#with_comments" ).change(function () {
+		if ($(this).is(':checked')) { $("#no_comments").prop("checked", false);}
+		 UserSearch();
+	});
+	$( "#no_submissions" ).change(function () {
+		if ($(this).is(':checked')) { $("#with_submissions").prop("checked", false);}
+		 UserSearch();
+	});
+	$( "#with_submissions" ).change(function () {
+		if ($(this).is(':checked')) { $("#no_submissions").prop("checked", false);}
+		 UserSearch();
+	});
+	$( "#no_email" ).change(function () {
+		if ($(this).is(':checked')) { $("#with_email").prop("checked", false);}
+		 UserSearch();
+	});
+	$( "#with_email" ).change(function () {
+		if ($(this).is(':checked')) { $("#no_email").prop("checked", false);}
+		UserSearch();
+	});
+	$( "#no_news" ).change(function () {
+		if ($(this).is(':checked')) { $("#with_news").prop("checked", false);}
+		 UserSearch();
+	});
+	$( "#with_news" ).change(function () {
+		if ($(this).is(':checked')) { $("#no_news").prop("checked", false);}
+		 UserSearch();
+	});
+	$( "#no_links" ).change(function () {
+		if ($(this).is(':checked')) { $("#with_links").prop("checked", false);}
+		 UserSearch();
+	});
+	$( "#with_links" ).change(function () {
+		if ($(this).is(':checked')) { $("#no_links").prop("checked", false);}
+		 UserSearch();
+	});
+});
+</script>
+{/block}
+{block name=right_tile}
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="standard_tile" id="{$quick_search_games}">
+	<h1>SEARCH</h1>
+		<div class="standard_tile_line"></div>
+			<br>
+			<form action="test" method="post" name="user_search" id="user_search">
+				<div class="standard_table_center">
+					<h3>User search options:</h3>	<br> 			
+					<div class="standard_table_center">
+						By name :<br>	
+						<select name="userbrowse" id="quick_search_small_select">
+							<option value="-">-</option>
+							{html_options values=$az_value output=$az_output selected=$az_select}
+						</select>
+						<input type="text" name="usersearch" value="" class="standard_tile_input_small">
+					</div>
+					<br>
+					<br>
+					<br>
+					<div id="quick_search_options" class="standard_table_left">
+						<div style="display:table-row;">
+							<div style="display:table-cell;font-weight:bold;vertical-align:middle;"><input type="checkbox" name="no_comments"  id="no_comments" value="1" class="quick_search_check">
+								No Comments&nbsp;
+							</div>
+						</div>
+						<div style="display:table-row;">	
+							<div style="display:table-cell;font-weight:bold;vertical-align:middle;"><input type="checkbox" name="no_submissions" id="no_submissions" value="1" class="quick_search_check">
+								No Submissions&nbsp;
+							</div>
+						</div>
+						<div style="display:table-row;">
+							<div style="display:table-cell;font-weight:bold;vertical-align:middle;"><input type="checkbox" name="no_email" id="no_email" value="1" class="quick_search_check">
+								No Email
+							</div>
+						</div>
+						<div style="display:table-row;">	
+							<div style="display:table-cell;font-weight:bold;vertical-align:middle;"><input type="checkbox" name="no_news" id="no_news" value="1" class="quick_search_check">
+								No News posts&nbsp;
+							</div>
+						</div>	
+						<div style="display:table-row;">	
+							<div style="display:table-cell;font-weight:bold;vertical-align:middle;"><input type="checkbox" name="no_links" id="no_links" value="1" class="quick_search_check">
+								No Link submissions&nbsp;
+							</div>
+						</div>	
+						<div style="display:table-row;">
+							<div style="display:table-cell;font-weight:bold;vertical-align:middle;"><input type="checkbox" name="with_comments" id="with_comments" value="1" class="quick_search_check">
+								With Comments&nbsp;
+							</div>
+						</div>
+						<div style="display:table-row;">	
+							<div style="display:table-cell;font-weight:bold;vertical-align:middle;"><input type="checkbox" name="with_submissions" id="with_submissions" value="1" class="quick_search_check">
+								With Submissions&nbsp;
+							</div>
+						</div>		
+						<div style="display:table-row;">
+							<div style="display:table-cell;font-weight:bold;vertical-align:middle;"><input type="checkbox" name="with_email" id="with_email" value="1" class="quick_search_check">
+								With Email&nbsp;
+							</div>
+						</div>
+						<div style="display:table-row;">	
+							<div style="display:table-cell;font-weight:bold;vertical-align:middle;"><input type="checkbox" name="with_news" id="with_news" value="1" class="quick_search_check">
+								With News posts&nbsp;
+							</div>
+						</div>
+						<div style="display:table-row;">	
+							<div style="display:table-cell;font-weight:bold;vertical-align:middle;"><input type="checkbox" name="with_links" id="with_links" value="1" class="quick_search_check">
+								With Link Submissions&nbsp;
+							</div>
+						</div>			
+					</div>
+					<br>
+					<input type="hidden" name="action" id="action_ajax_search" value="users">
+					<br><br>
+					<hr>
+				</div>
+			</form>	
+		</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{/block}
+
+{block name=main_tile}
+{block name=main_stats}	
+<div class="standard_tile" id="{$main_stats}">
+	<h1>USER MANAGEMENT</h1>
+	<div class="standard_tile_line"></div>
+	<div class="standard_tile_text">
+		<div class="main_stats_container" id="ajax_usersearch">
+						
+						{if isset($users)}
+						<table class="standard_table_list">
+						<tr>
+							<th>ID</th>
+							<th>User Name</th>
+							<th>Join Date</th>
+							<th>Last Visit</th>
+							<th>Email</th>
+
+						</tr>
+						{foreach from=$users item=line}
+						<tr>
+							<td class="standard_table_center">{$line.user_id}</td>
+							<td class="standard_table_center">{$line.user_name}</td>
+							<td class="standard_table_center">{if $line.join_date != ''}{$line.join_date}{else}<i>n/a</i>{/if}</td>
+							<td class="standard_table_center">{if $line.last_visit != ''}{$line.last_visit}{else}<i>n/a</i>{/if}</td>
+							<td class="standard_table_center">{if $line.email != ''}<a href="mailto:{$line.email}" class="standard_tile_link_black">email</a>{else}<i>n/a</i>{/if}</td>
+						</tr>
+						{/foreach}
+						</table>
+						{else}
+						<div class="left_nav_section">No users found</div>
+						{/if}	
+
+		</div>
+	</div>
+</div>
+{/block}
+{/block}
