@@ -1,0 +1,35 @@
+{* Ajax User Management *}
+		
+						{if isset($users)}
+						<table class="standard_table_list">
+						<tr>
+							<th>ID</th>
+							<th>User Name</th>
+							<th>Join Date</th>
+							<th>Last Visit</th>
+							<th>Email</th>
+
+						</tr>
+						{foreach from=$users item=line}
+						<tr>
+							<td class="standard_table_center">{$line.user_id}</td>
+							<td class="standard_table_center">{$line.user_name}</td>
+							<td class="standard_table_center">{if $line.join_date != ''}{$line.join_date}{else}<i>n/a</i>{/if}</td>
+							<td class="standard_table_center">{if $line.last_visit != ''}{$line.last_visit}{else}<i>n/a</i>{/if}</td>
+							<td class="standard_table_center">{if $line.email != ''}<a href="mailto:{$line.email}" class="standard_tile_link_black">email</a>{else}<i>n/a</i>{/if}</td>
+						</tr>
+						{/foreach}
+						{else}
+						<div class="left_nav_section">No users found</div>
+						{/if}	
+						{if isset($nr_users)}
+						<tr>
+							<td class="standard_table_center" colspan="5">						
+								<br>Found {if $nr_users != ''}{$nr_users}{else}0{/if} users for this query
+							</td>
+						</tr>
+						{/if}
+						</table>
+
+
+
