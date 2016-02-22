@@ -10,7 +10,11 @@
 *
 ***************************************************************************/
 
+$db_username = "root";
+$db_password = "";
+$db_databasename = "atarilegend";
+
 
 //make connection with MYSQL DB
-$mysqli = new mysqli("localhost", "root", "", "atarilegend");
+$mysqli = new mysqli("localhost", $db_username, $db_password, $db_databasename); 
 ?>
