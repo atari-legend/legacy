@@ -24,7 +24,7 @@ $execute_condition = "test_fail";
 
 //This is the test query, the query should be made to get an either true or false result.
 $test_condition = "SELECT * FROM information_schema.tables 
-WHERE table_schema = 'atarilegend' AND table_name = 'theme' LIMIT 1";
+WHERE table_schema = '$db_databasename' AND table_name = 'theme' LIMIT 1";
 
 // Database change 
 $database_update_sql = "CREATE TABLE IF NOT EXISTS `theme` (
