@@ -246,10 +246,17 @@ function UserSearch() {
 							<td class="standard_table_center">{if $line.email != ''}<a href="mailto:{$line.email}" class="standard_tile_link_black">email</a>{else}<i>n/a</i>{/if}</td>
 						</tr>
 						{/foreach}
-						</table>
 						{else}
 						<div class="left_nav_section">No users found</div>
 						{/if}	
+						{if isset($nr_users)}
+						<tr>
+							<td class="standard_table_left" colspan="5">						
+								<br><b>Found {if $nr_users != ''}{$nr_users}{else}0{/if} users in {$query_time} sec</b>
+							</td>
+						</tr>
+						{/if}
+						</table>	
 
 		</div>
 	</div>
