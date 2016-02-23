@@ -29,6 +29,10 @@ if ((isset($with_submissions) and $with_submissions=="1") || (isset($no_submissi
 		$sql_query .= " LEFT JOIN demo_submitinfo ON (users.user_id = demo_submitinfo.user_id)"; 
 		
 	}
+if ((isset($with_interviews) and $with_interviews=="1") || (isset($no_interviews) and $no_interviews=="1"))
+	{
+		$sql_query .= " LEFT JOIN interview_main ON (users.user_id = interview_main.user_id)"; 
+	}
 
 // Start Where clause 
 
@@ -44,6 +48,8 @@ if (isset($with_news) and $with_news=="1") {$sql_query .= " AND news.user_id IS 
 if (isset($no_news) and $no_news=="1") {$sql_query .= " AND news.user_id IS NULL"; }
 if (isset($with_links) and $with_links=="1") {$sql_query .= " AND website.website_id IS NOT NULL"; }
 if (isset($no_links) and $no_links=="1") {$sql_query .= " AND website.website_id IS NULL"; }
+if (isset($with_interviews) and $with_interviews=="1") {$sql_query .= " AND interview_main.interview_id IS NOT NULL"; }
+if (isset($no_interviews) and $no_interviews=="1") {$sql_query .= " AND interview_main.interview_id IS NULL"; }
 if (isset($with_submissions) and $with_submissions=="1") 
 	{
 		$sql_query .= " AND game_submitinfo.game_submitinfo_id OR demo_submitinfo.demo_submitinfo_id IS NOT NULL"; 

@@ -107,6 +107,14 @@ function UserSearch() {
 		if ($(this).is(':checked')) { $("#no_links").prop("checked", false);}
 		 UserSearch();
 	});
+	$( "#no_interviews" ).change(function () {
+		if ($(this).is(':checked')) { $("#with_interviews").prop("checked", false);}
+		 UserSearch();
+	});
+	$( "#with_interviews" ).change(function () {
+		if ($(this).is(':checked')) { $("#no_interviews").prop("checked", false);}
+		 UserSearch();
+	});
 });
 </script>
 {/block}
@@ -166,6 +174,11 @@ function UserSearch() {
 							<div style="display:table-cell;font-weight:bold;vertical-align:middle;"><input type="checkbox" name="no_links" id="no_links" value="1" class="quick_search_check">
 								No Link submissions&nbsp;
 							</div>
+						</div>
+						<div style="display:table-row;">	
+							<div style="display:table-cell;font-weight:bold;vertical-align:middle;"><input type="checkbox" name="no_interviews" id="no_interviews" value="1" class="quick_search_check">
+								No Interviews&nbsp;
+							</div>
 						</div>	
 						<div style="display:table-row;">
 							<div style="display:table-cell;font-weight:bold;vertical-align:middle;"><input type="checkbox" name="with_comments" id="with_comments" value="1" class="quick_search_check">
@@ -190,6 +203,11 @@ function UserSearch() {
 						<div style="display:table-row;">	
 							<div style="display:table-cell;font-weight:bold;vertical-align:middle;"><input type="checkbox" name="with_links" id="with_links" value="1" class="quick_search_check">
 								With Link Submissions&nbsp;
+							</div>
+						</div>
+						<div style="display:table-row;">	
+							<div style="display:table-cell;font-weight:bold;vertical-align:middle;"><input type="checkbox" name="with_interviews" id="with_interviews" value="1" class="quick_search_check">
+								With Interviews&nbsp;
 							</div>
 						</div>			
 					</div>
