@@ -16,6 +16,8 @@
 include("../../includes/common.php");
 include("../../includes/admin.php"); 
 
+$start = microtime(true);
+
 $sql_users = $mysqli->query("SELECT * FROM users 
 						  WHERE userid REGEXP '^[0-9].*' ORDER BY users.userid")
 						  or die ("Couldn't query users Database");	
@@ -64,7 +66,10 @@ $az_output = az_dropdown_output(0);
 		   
 $smarty->assign('az_value', $az_value);
 $smarty->assign('az_output', $az_output);
-$smarty->assign('az_select', "num");	
+$smarty->assign('az_select', "num");
+
+				$time_elapsed_secs = microtime(true) - $start;
+				$smarty->assign("query_time",$time_elapsed_secs);	
 
 //Create the id's for dynamic positioning of the tiles
 $smarty->assign('left_nav', 'left_nav_position_front');

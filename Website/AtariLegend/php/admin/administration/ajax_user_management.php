@@ -16,7 +16,7 @@
 include("../../includes/common.php");
 include("../../includes/admin.php"); 
 
-
+$start = microtime(true);
 $sql_query = "SELECT users.user_id, users.userid, users.email, users.join_date, users.last_visit FROM users";
 
 if (isset($with_comments) and $with_comments=="1") {$sql_query .= " LEFT JOIN comments ON (users.user_id = comments.user_id)"; }
@@ -101,7 +101,8 @@ while ($query_users = $sql_users->fetch_array(MYSQLI_BOTH))
 	$smarty->assign('nr_users', $nr_users);
 }
 
-
+				$time_elapsed_secs = microtime(true) - $start;
+				$smarty->assign("query_time",$time_elapsed_secs);
 
 		
 //Send all smarty variables to the templates
