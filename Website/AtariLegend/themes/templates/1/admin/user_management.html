@@ -62,9 +62,11 @@ function UserSearch() {
     }
 	});
 }
-	
-	
-	
+
+
+
+
+
 	
 	$( "#quick_search_small_select" ).change(function () { UserSearch(); });
 	$( "#no_comments" ).change(function () {
@@ -115,21 +117,118 @@ function UserSearch() {
 		if ($(this).is(':checked')) { $("#no_interviews").prop("checked", false);}
 		 UserSearch();
 	});
+	$( "#no_review" ).change(function () {
+		if ($(this).is(':checked')) { $("#with_review").prop("checked", false);}
+		 UserSearch();
+	});
+	$( "#with_review" ).change(function () {
+		if ($(this).is(':checked')) { $("#no_review").prop("checked", false);}
+		 UserSearch();
+	});
+		
+		
+
 });
+
+$( document ).ajaxComplete(function() {
+  UserlistFunction();
+
+});
+
+$(document).ready(function() {
+	UserlistFunction();
+
+});
+
+function UserlistFunction() {
+	
+			// select all checkboxes in list
+	$( '#user_select_all' ).click(function () {
+		 $('.user_checkbox').prop('checked', $(this).prop('checked'));
+	});
+	
+	
+		// Are you sure question Delete
+	$( "#user_list_action" ).change(function () {
+		 
+		 if ($(this).val() == "delete_user") {
+			     $( "#dialog_confirm_delete" ).dialog({
+					resizable: false,
+					height:140,
+					modal: true,
+					buttons: {
+						"Delete user(s)": function() {
+						$( this ).dialog( "close" );
+						UserModify();
+						},
+						Cancel: function() {
+						$( this ).dialog( "close" );
+						}			
+					}
+				});
+		}
+		 if ($(this).val() == "deactivate_user") {
+			     $( "#dialog_confirm_deactivate" ).dialog({
+					resizable: false,
+					height:140,
+					modal: true,
+					buttons: {
+						"Deactivate user(s)": function() {
+						$( this ).dialog( "close" );
+						},
+						Cancel: function() {
+						$( this ).dialog( "close" );
+						}			
+					}
+				});
+		}
+	});
+
+
+}
+
+function UserModify() {
+	
+	var form_values = $( "#user_list" ).serialize();
+	
+	$.ajax({
+ 
+    // The URL for the request
+    url: "db_user_management.php",
+ 
+    // The data to send (will be converted to a query string)
+    data: form_values,
+ 
+    // Whether this is a POST or GET request
+    type: "POST",
+ 
+    // The type of data we expect back
+    dataType : "text",
+ 
+    // Code to run if the request succeeds;
+    // the response is passed to the function
+    success: function( text ) {
+        
+        $.notify_osd.create({
+				'text'        : text,             // notification message
+				'icon'        : '../templates/0/icons/star.png', // icon path, 48x48
+				'sticky'      : false,             // if true, timeout is ignored
+				'timeout'     : 4,                 // disappears after 6 seconds
+				'dismissable' : true               // can be dismissed manually
+				});
+				
+        UserSearch();
+    }
+	});
+}
+
+
+
+
+
 </script>
 {/block}
 {block name=right_tile}
-
-
-
-
-
-
-
-
-
-
-
 
 <div class="standard_tile" id="{$quick_search_games}">
 	<h1>SEARCH</h1>
@@ -179,6 +278,11 @@ function UserSearch() {
 							<div style="display:table-cell;font-weight:bold;vertical-align:middle;"><input type="checkbox" name="no_interviews" id="no_interviews" value="1" class="quick_search_check">
 								No Interviews&nbsp;
 							</div>
+						</div>
+						<div style="display:table-row;">	
+							<div style="display:table-cell;font-weight:bold;vertical-align:middle;"><input type="checkbox" name="no_review" id="no_review" value="1" class="quick_search_check">
+								No Review&nbsp;
+							</div>
 						</div>	
 						<div style="display:table-row;">
 							<div style="display:table-cell;font-weight:bold;vertical-align:middle;"><input type="checkbox" name="with_comments" id="with_comments" value="1" class="quick_search_check">
@@ -209,6 +313,11 @@ function UserSearch() {
 							<div style="display:table-cell;font-weight:bold;vertical-align:middle;"><input type="checkbox" name="with_interviews" id="with_interviews" value="1" class="quick_search_check">
 								With Interviews&nbsp;
 							</div>
+						</div>
+						<div style="display:table-row;">	
+							<div style="display:table-cell;font-weight:bold;vertical-align:middle;"><input type="checkbox" name="with_review" id="with_review" value="1" class="quick_search_check">
+								With Review&nbsp;
+							</div>
 						</div>			
 					</div>
 					<br>
@@ -217,7 +326,7 @@ function UserSearch() {
 					<hr>
 				</div>
 			</form>	
-		</div>
+
 </div>
 
 
@@ -239,16 +348,25 @@ function UserSearch() {
 
 {block name=main_tile}
 {block name=main_stats}	
+<div id="dialog_confirm_delete" title="Delete Users?" style="display:none;">
+  <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
+  These users will be permanently deleted. Are you sure?</p>
+</div>
+<div id="dialog_confirm_deactivate" title="Deactivate Users?" style="display:none;">
+  <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
+  These users will be deactivated. Are you sure?</p>
+</div>
 <div class="standard_tile" id="{$main_stats}">
 	<h1>USER MANAGEMENT</h1>
 	<div class="standard_tile_line"></div>
 	<div class="standard_tile_text">
+		<form action="test" method="post" name="user_list" id="user_list">
 		<div class="main_stats_container" id="ajax_usersearch">
 						
 						{if isset($users)}
 						<table class="standard_table_list">
 						<tr>
-							<th>ID</th>
+							<th><input type="checkbox" name="user_select_all" id="user_select_all" class="quick_search_check"> Select</th>
 							<th>User Name</th>
 							<th>Join Date</th>
 							<th>Last Visit</th>
@@ -257,7 +375,7 @@ function UserSearch() {
 						</tr>
 						{foreach from=$users item=line}
 						<tr>
-							<td class="standard_table_center">{$line.user_id}</td>
+							<td class="standard_table_center"><input type="checkbox" name="user_id[]" value="{$line.user_id}" class="user_checkbox"></td>
 							<td class="standard_table_center">{$line.user_name}</td>
 							<td class="standard_table_center">{if $line.join_date != ''}{$line.join_date}{else}<i>n/a</i>{/if}</td>
 							<td class="standard_table_center">{if $line.last_visit != ''}{$line.last_visit}{else}<i>n/a</i>{/if}</td>
@@ -269,14 +387,21 @@ function UserSearch() {
 						{/if}	
 						{if isset($nr_users)}
 						<tr>
-							<td class="standard_table_left" colspan="5">						
-								<br><b>Found {if $nr_users != ''}{$nr_users}{else}0{/if} users in {$query_time} sec</b>
+							<td class="standard_table_left" colspan="5">
+								<img width="38" height="22" style="float:left;" alt="" src="../templates/0/images/arrow_ltr.gif">	
+								<select name="action" id="user_list_action">					
+									<option value="-" selected>Select Action</option>
+									<option value="deactivate_user">Deactivate User</option>
+									<option value="delete_user">Delete User</option>
+								</select>
+								<b>Found {if $nr_users != ''}{$nr_users}{else}0{/if} users in {$query_time} sec</b>
 							</td>
 						</tr>
 						{/if}
 						</table>	
 
 		</div>
+		</form>
 	</div>
 </div>
 {/block}
