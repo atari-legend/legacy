@@ -13,7 +13,7 @@
 						{foreach from=$users item=line}
 						<tr>
 							<td class="standard_table_center"><input type="checkbox" name="user_id[]" value="{$line.user_id}" class="user_checkbox"></td>
-							<td class="standard_table_center">{$line.user_name}</td>
+							<td class="standard_table_center"><a class="user_popup fancybox.ajax" href="../administration/user_detail.php?user_id_selected={$line.user_id}">{$line.user_name}</a></td>
 							<td class="standard_table_center">{if $line.join_date != ''}{$line.join_date}{else}<i>n/a</i>{/if}</td>
 							<td class="standard_table_center">{if $line.last_visit != ''}{$line.last_visit}{else}<i>n/a</i>{/if}</td>
 							<td class="standard_table_center">{if $line.email != ''}<a href="mailto:{$line.email}" class="standard_tile_link_black">email</a>{else}<i>n/a</i>{/if}</td>
