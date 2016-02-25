@@ -125,20 +125,29 @@ function UserSearch() {
 		if ($(this).is(':checked')) { $("#no_review").prop("checked", false);}
 		 UserSearch();
 	});
-		
+	$( "#not_admin" ).change(function () {
+		if ($(this).is(':checked')) { $("#is_admin").prop("checked", false);}
+		 UserSearch();
+	});
+	$( "#is_admin" ).change(function () {
+		if ($(this).is(':checked')) { $("#not_admin").prop("checked", false);}
+		 UserSearch();
+	});	
 		
 
 });
 
 $( document ).ajaxComplete(function() {
   UserlistFunction();
-
+	UserSearch();
 });
 
 $(document).ready(function() {
 	UserlistFunction();
 
 });
+
+
 
 function UserlistFunction() {
 	
@@ -216,8 +225,30 @@ function UserModify() {
 				'timeout'     : 4,                 // disappears after 6 seconds
 				'dismissable' : true               // can be dismissed manually
 				});
-				
-        UserSearch();
+		
+		//Reload userlist
+        	var form_values = $( "#user_search" ).serialize();
+	
+		$.ajax({
+ 
+		// The URL for the request
+		url: "ajax_user_management.php",
+ 
+		// The data to send (will be converted to a query string)
+		data: form_values,
+ 
+		// Whether this is a POST or GET request
+		type: "GET",
+ 
+		// The type of data we expect back
+		dataType : "html",
+ 
+		// Code to run if the request succeeds;
+		// the response is passed to the function
+		success: function( html ) {
+        $( "#ajax_usersearch" ).html( html );
+		}
+			});
     }
 	});
 }
@@ -283,6 +314,11 @@ function UserModify() {
 							<div style="display:table-cell;font-weight:bold;vertical-align:middle;"><input type="checkbox" name="no_review" id="no_review" value="1" class="quick_search_check">
 								No Review&nbsp;
 							</div>
+						</div>
+						<div style="display:table-row;">	
+							<div style="display:table-cell;font-weight:bold;vertical-align:middle;"><input type="checkbox" name="not_admin" id="not_admin" value="1" class="quick_search_check">
+								Not AL Administrator&nbsp;
+							</div>
 						</div>	
 						<div style="display:table-row;">
 							<div style="display:table-cell;font-weight:bold;vertical-align:middle;"><input type="checkbox" name="with_comments" id="with_comments" value="1" class="quick_search_check">
@@ -318,7 +354,12 @@ function UserModify() {
 							<div style="display:table-cell;font-weight:bold;vertical-align:middle;"><input type="checkbox" name="with_review" id="with_review" value="1" class="quick_search_check">
 								With Review&nbsp;
 							</div>
-						</div>			
+						</div>
+						<div style="display:table-row;">	
+							<div style="display:table-cell;font-weight:bold;vertical-align:middle;"><input type="checkbox" name="is_admin" id="is_admin" value="1" class="quick_search_check">
+								Is AL Administrator&nbsp;
+							</div>
+						</div>				
 					</div>
 					<br>
 					<input type="hidden" name="action" id="action_ajax_search" value="users">
@@ -391,6 +432,7 @@ function UserModify() {
 								<img width="38" height="22" style="float:left;" alt="" src="../templates/0/images/arrow_ltr.gif">	
 								<select name="action" id="user_list_action">					
 									<option value="-" selected>Select Action</option>
+									<option value="email_user">Send Email</option>
 									<option value="deactivate_user">Deactivate User</option>
 									<option value="delete_user">Delete User</option>
 								</select>

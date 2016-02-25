@@ -46,6 +46,8 @@ else {$sql_query .= " WHERE userid LIKE '$userbrowse%'";}
 
 if (isset($with_email) and $with_email=="1") {$sql_query .= " AND email IS NOT NULL AND TRIM(email)<>''"; }
 if (isset($no_email) and $no_email=="1") {$sql_query .= " AND TRIM(email) = ''"; }
+if (isset($is_admin) and $is_admin=="1") {$sql_query .= " AND permission='1'"; }
+if (isset($not_admin) and $not_admin=="1") {$sql_query .= " AND permission='2'"; }
 if (isset($with_comments) and $with_comments=="1") {$sql_query .= " AND comments.user_id IS NOT NULL"; }
 if (isset($no_comments) and $no_comments=="1") {$sql_query .= " AND comments.comments_id IS NULL"; }
 if (isset($with_news) and $with_news=="1") {$sql_query .= " AND news.user_id IS NOT NULL"; }
