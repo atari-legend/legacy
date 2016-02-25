@@ -17,6 +17,9 @@ include("../../includes/common.php");
 include("../../includes/admin.php"); 
 
 $start = microtime(true);
+
+$last_visit_timestamp = date_to_timestamp($Date_Year,$Date_Month,$Date_Day);
+
 $sql_query = "SELECT users.user_id, users.userid, users.email, users.join_date, users.last_visit FROM users";
 
 if (isset($with_comments) and $with_comments=="1") {$sql_query .= " LEFT JOIN comments ON (users.user_id = comments.user_id)"; }
@@ -58,6 +61,7 @@ if (isset($with_interviews) and $with_interviews=="1") {$sql_query .= " AND inte
 if (isset($no_interviews) and $no_interviews=="1") {$sql_query .= " AND interview_main.interview_id IS NULL"; }
 if (isset($with_review) and $with_review=="1") {$sql_query .= " AND review_main.review_id IS NOT NULL"; }
 if (isset($no_review) and $no_review=="1") {$sql_query .= " AND review_main.review_id IS NULL"; }
+if (isset($last_visit) and $last_visit=="1") {$sql_query .= " AND users.last_visit < '$last_visit_timestamp'"; }
 if (isset($with_submissions) and $with_submissions=="1") 
 	{
 		$sql_query .= " AND game_submitinfo.game_submitinfo_id OR demo_submitinfo.demo_submitinfo_id IS NOT NULL"; 
