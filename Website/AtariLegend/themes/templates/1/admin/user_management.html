@@ -133,13 +133,16 @@ function UserSearch() {
 		if ($(this).is(':checked')) { $("#not_admin").prop("checked", false);}
 		 UserSearch();
 	});	
+	$( "#last_visit" ).change(function () {
+		 UserSearch();
+	});	
 		
 
 });
 
 $( document ).ajaxComplete(function() {
   UserlistFunction();
-	UserSearch();
+
 });
 
 $(document).ready(function() {
@@ -359,7 +362,11 @@ function UserModify() {
 							<div style="display:table-cell;font-weight:bold;vertical-align:middle;"><input type="checkbox" name="is_admin" id="is_admin" value="1" class="quick_search_check">
 								Is AL Administrator&nbsp;
 							</div>
-						</div>				
+						</div>	
+						<div style="display:flex;">
+						<input type="checkbox" name="last_visit" id="last_visit" value="1" class="quick_search_check">
+						Last visit before	{html_select_date start_year='2003' end_year='+1'}
+						</div>			
 					</div>
 					<br>
 					<input type="hidden" name="action" id="action_ajax_search" value="users">
