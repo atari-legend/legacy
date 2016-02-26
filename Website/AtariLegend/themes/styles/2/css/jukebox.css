@@ -1,0 +1,85 @@
+ul {
+	padding: 0px;
+	margin: 0px;
+}
+
+ul li {
+	display: block;
+	padding: 0px;
+	margin: 0px;
+}
+
+ul li a {
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	text-decoration: none;
+	color: #000000;
+	font-size: 11px;
+}
+ul li a:hover {
+	background: #a0a0c0;
+	color: #ffffff;
+}
+
+div.infoDiv {
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	text-decoration: none;
+	color: #000000;
+	font-size: 11px;
+}
+
+div.infoDiv a {
+	text-decoration: none;
+	color: #04579B;
+	font-weight: bold;
+}
+
+div.infoDiv a:hover { 
+ 	background: #a0a0c0;
+	color: #ffffff;
+}
+
+div.DisJava {
+	position: absolute;
+	top: 2px;
+	left: 550px;
+	z-index: 1;
+}
+
+div.DisJava a {
+	text-decoration: none;
+	color: #FBF2B5;
+	font-weight: bold;
+	font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+	font-size: 9px;
+}
+
+div.DisJava a:hover {
+ 	background: #a0a0c0;
+	color: #ffffff;
+}
+
+div.EnJava {
+
+}
+
+div.EnJava a {
+		text-decoration: none;
+	color: #04579B;
+	font-weight: bold;
+}
+
+div.EnJava a:hover {
+ 	background: #a0a0c0;
+	color: #ffffff;
+}
+
+div.DisJavaMZ {
+	position: absolute;
+	top: 2px;
+	left: 550px;
+	z-index: 1;
+}
+
+div.EnJava a {
+	border: thin none Black;
+}
