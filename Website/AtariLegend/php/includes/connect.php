@@ -11,8 +11,8 @@
 ***************************************************************************/
 
 $db_username = "root";
-$db_password = "";
-$db_databasename = "atarilegend";
+$db_password = "higher";
+$db_databasename = "atarilegend3";
 
 
 //make connection with MYSQL DB
