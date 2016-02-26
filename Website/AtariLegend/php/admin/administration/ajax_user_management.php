@@ -25,7 +25,7 @@ $sql_query = "SELECT users.user_id, users.userid, users.email, users.join_date, 
 if (isset($with_comments) and $with_comments=="1") {$sql_query .= " LEFT JOIN comments ON (users.user_id = comments.user_id)"; }
 if (isset($no_comments) and $no_comments=="1") {$sql_query .= " LEFT JOIN comments ON (users.user_id = comments.user_id)"; }
 if ((isset($with_news) and $with_news=="1") || (isset($no_news) and $no_news=="1")) {$sql_query .= " LEFT JOIN news ON (users.user_id = news.user_id)"; }
-if ((isset($with_links) and $with_links=="1") || (isset($no_links) and $no_links=="1")) {$sql_query .= " LEFT JOIN website ON (users.user_id = website.website_user_sub)"; }
+if ((isset($with_links) and $with_links=="1") || (isset($no_links) and $no_links=="1")) {$sql_query .= " LEFT JOIN website ON (users.user_id = website.user_id)"; }
 if ((isset($with_submissions) and $with_submissions=="1") || (isset($no_submissions) and $no_submissions=="1"))
 	{
 		$sql_query .= " LEFT JOIN game_submitinfo ON (users.user_id = game_submitinfo.user_id)"; 
