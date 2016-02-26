@@ -17,6 +17,9 @@ Website/AtariLegend/themes/.pleeeaserc
 
 $ cat .gitignore 
 # exclude the SASS map file
-Website/AtariLegend/themes/styles/1/css/*
-Website/AtariLegend/themes/styles/2/css/*
-Website/AtariLegend/themes/styles/3/css/*
+Website/AtariLegend/themes/styles/1/css/style.css
+Website/AtariLegend/themes/styles/1/css/style.css.map
+Website/AtariLegend/themes/styles/2/css/style.css
+Website/AtariLegend/themes/styles/2/css/style.css.map
+Website/AtariLegend/themes/styles/3/css/style.css
+Website/AtariLegend/themes/styles/3/css/style.css.map
