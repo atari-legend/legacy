@@ -25,14 +25,14 @@
 		<meta name="keywords" content="atari, atari st, games, game, demo, demos, reviews, articles, interviews, st">
 		<title> Atari Legend | Legends Never Die</title>
 		<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0" />
-		<link href="{$template_dir}css/style.css" type="text/css" rel="stylesheet" id="main_stylesheet">
+		<link href="{$style_dir}css/style.css" type="text/css" rel="stylesheet" id="main_stylesheet">
 		<link type="text/css" href="../../../themes/templates/1/includes/main_css/jquery-ui.css" rel="Stylesheet" />
 		<link type="text/css" href="../../../themes/templates/1/includes/main_css/jquery.fancybox.css" rel="Stylesheet" />
 		<link href="../../../themes/templates/1/includes/main_css/notify-osd.css" hreflang="en" rel="stylesheet" type="text/css">
-		<script type="text/javascript" src="../../../themes/templates/1/includes/js/jquery-2.1.4.min.js"></script> <!-- main jquery stuff -->
-		<script type="text/javascript" src="../../../themes/templates/1/includes/js/jquery-ui.js"></script> <!-- main jqueryUI stuff -->
-		<script type="text/javascript" src="../../../themes/templates/1/includes/js/jquery.fancybox.pack.js"></script>
-		<script src="../../../themes/templates/1/includes/js/notify-osd.js"></script>
+		<script type="text/javascript" src="{$template_dir}includes/js/jquery-2.1.4.min.js"></script> <!-- main jquery stuff -->
+		<script type="text/javascript" src="{$template_dir}includes/js/jquery-ui.js"></script> <!-- main jqueryUI stuff -->
+		<script type="text/javascript" src="{$template_dir}includes/js/jquery.fancybox.pack.js"></script>
+		<script type="text/javascript" src="{$template_dir}includes/js/notify-osd.js"></script>
 		<script type="text/javascript"> <!-- script needed for the side menu -->
 			//<![CDATA[ 
 			$(window).load(function(){
@@ -214,17 +214,17 @@
 					</div>		
 					<!-- end of side menu-->
 					<div id="left">
-						<img id="logo_img" src="{$template_dir}images/logos/top_logo0{math equation='rand(1,5)'}.png" alt="logo" />
-						<img id="logo_img_480" src="{$template_dir}images/logos/top_logo01_480.png" alt="logo_480" />
+						<img id="logo_img" src="{$style_dir}images/logos/top_logo0{math equation='rand(1,5)'}.png" alt="logo" />
+						<img id="logo_img_480" src="{$style_dir}images/logos/top_logo01_480.png" alt="logo_480" />
 					</div>
 					<div id="right">
-						<img id="img_bee" src="{$template_dir}images/top_right0{math equation='rand(1,2)'}.png" alt="bee" />
+						<img id="img_bee" src="{$style_dir}images/top_right0{math equation='rand(1,2)'}.png" alt="bee" />
 					</div>
 					{assign var='number' value=1|rand:5}
 					{if $number is odd}
-					<img id="animation" src="{$template_dir}images/animations/animation0{math equation='rand(1,5)'}.gif" alt="animation" />
+					<img id="animation" src="{$style_dir}images/animations/animation0{math equation='rand(1,5)'}.gif" alt="animation" />
 					{else}
-					<img id="animation_vert" src="{$template_dir}images/animations/animation_vert0{math equation='rand(1,2)'}.gif" alt="animation" />
+					<img id="animation_vert" src="{$style_dir}images/animations/animation_vert0{math equation='rand(1,2)'}.gif" alt="animation" />
 					{/if}
 				</div>			
 				<nav id="main_nav">
