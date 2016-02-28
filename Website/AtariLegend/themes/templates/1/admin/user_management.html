@@ -1,4 +1,4 @@
-{* 
+{*
 /***************************************************************************
 *                                site_admin.html
 *                            --------------------------
@@ -25,9 +25,9 @@
 					<li><a href="../administration/construction.php" class="left_nav_link">Website Settings</a></li>
 					<li><a href="../administration/construction.php" class="left_nav_link">Website Themes</a></li>
 					<li><a href="../administration/user_management.php" class="left_nav_link">User Management</a></li>
-					
+
 				</ul>
-			</div>			
+			</div>
 		</div>
 	<div class="standard_tile_line"></div>
 </div>
@@ -36,25 +36,25 @@
 {block name=java_script}
 <script type="text/javascript">
 $(document).ready(function() {
-	
+
 function UserSearch() {
-	
+
 	var form_values = $( "#user_search" ).serialize();
-	
+
 	$.ajax({
- 
+
     // The URL for the request
     url: "ajax_user_management.php",
- 
+
     // The data to send (will be converted to a query string)
     data: form_values,
- 
+
     // Whether this is a POST or GET request
     type: "GET",
- 
+
     // The type of data we expect back
     dataType : "html",
- 
+
     // Code to run if the request succeeds;
     // the response is passed to the function
     success: function( html ) {
@@ -67,27 +67,27 @@ function UserSearch() {
 
 
 
-	
+
 	$( "#quick_search_small_select" ).change(function () { UserSearch(); });
 	$( "#no_comments" ).change(function () {
 		if ($(this).is(':checked')) { $("#with_comments").prop("checked", false);}
-		 UserSearch();
+		UserSearch();
 	});
 	$( "#with_comments" ).change(function () {
 		if ($(this).is(':checked')) { $("#no_comments").prop("checked", false);}
-		 UserSearch();
+		UserSearch();
 	});
 	$( "#no_submissions" ).change(function () {
 		if ($(this).is(':checked')) { $("#with_submissions").prop("checked", false);}
-		 UserSearch();
+		UserSearch();
 	});
 	$( "#with_submissions" ).change(function () {
 		if ($(this).is(':checked')) { $("#no_submissions").prop("checked", false);}
-		 UserSearch();
+		UserSearch();
 	});
 	$( "#no_email" ).change(function () {
 		if ($(this).is(':checked')) { $("#with_email").prop("checked", false);}
-		 UserSearch();
+		UserSearch();
 	});
 	$( "#with_email" ).change(function () {
 		if ($(this).is(':checked')) { $("#no_email").prop("checked", false);}
@@ -95,48 +95,48 @@ function UserSearch() {
 	});
 	$( "#no_news" ).change(function () {
 		if ($(this).is(':checked')) { $("#with_news").prop("checked", false);}
-		 UserSearch();
+		UserSearch();
 	});
 	$( "#with_news" ).change(function () {
 		if ($(this).is(':checked')) { $("#no_news").prop("checked", false);}
-		 UserSearch();
+		UserSearch();
 	});
 	$( "#no_links" ).change(function () {
 		if ($(this).is(':checked')) { $("#with_links").prop("checked", false);}
-		 UserSearch();
+		UserSearch();
 	});
 	$( "#with_links" ).change(function () {
 		if ($(this).is(':checked')) { $("#no_links").prop("checked", false);}
-		 UserSearch();
+		UserSearch();
 	});
 	$( "#no_interviews" ).change(function () {
 		if ($(this).is(':checked')) { $("#with_interviews").prop("checked", false);}
-		 UserSearch();
+		UserSearch();
 	});
 	$( "#with_interviews" ).change(function () {
 		if ($(this).is(':checked')) { $("#no_interviews").prop("checked", false);}
-		 UserSearch();
+		UserSearch();
 	});
 	$( "#no_review" ).change(function () {
 		if ($(this).is(':checked')) { $("#with_review").prop("checked", false);}
-		 UserSearch();
+		UserSearch();
 	});
 	$( "#with_review" ).change(function () {
 		if ($(this).is(':checked')) { $("#no_review").prop("checked", false);}
-		 UserSearch();
+		UserSearch();
 	});
 	$( "#not_admin" ).change(function () {
 		if ($(this).is(':checked')) { $("#is_admin").prop("checked", false);}
-		 UserSearch();
+		UserSearch();
 	});
 	$( "#is_admin" ).change(function () {
 		if ($(this).is(':checked')) { $("#not_admin").prop("checked", false);}
-		 UserSearch();
-	});	
+		UserSearch();
+	});
 	$( "#last_visit" ).change(function () {
-		 UserSearch();
-	});	
-		
+		UserSearch();
+	});
+
 
 });
 
@@ -153,16 +153,16 @@ $(document).ready(function() {
 
 
 function UserlistFunction() {
-	
+
 			// select all checkboxes in list
 	$( '#user_select_all' ).click(function () {
 		 $('.user_checkbox').prop('checked', $(this).prop('checked'));
 	});
-	
-	
+
+
 		// Are you sure question Delete
 	$( "#user_list_action" ).change(function () {
-		 
+
 		 if ($(this).val() == "delete_user") {
 			     $( "#dialog_confirm_delete" ).dialog({
 					resizable: false,
@@ -175,7 +175,7 @@ function UserlistFunction() {
 						},
 						Cancel: function() {
 						$( this ).dialog( "close" );
-						}			
+						}
 					}
 				});
 		}
@@ -190,7 +190,7 @@ function UserlistFunction() {
 						},
 						Cancel: function() {
 						$( this ).dialog( "close" );
-						}			
+						}
 					}
 				});
 		}
@@ -200,52 +200,52 @@ function UserlistFunction() {
 }
 
 function UserModify() {
-	
+
 	var form_values = $( "#user_list" ).serialize();
-	
+
 	$.ajax({
- 
+
     // The URL for the request
     url: "db_user_management.php",
- 
+
     // The data to send (will be converted to a query string)
     data: form_values,
- 
+
     // Whether this is a POST or GET request
     type: "POST",
- 
+
     // The type of data we expect back
     dataType : "text",
- 
+
     // Code to run if the request succeeds;
     // the response is passed to the function
     success: function( text ) {
-        
+
         $.notify_osd.create({
 				'text'        : text,             // notification message
-				'icon'        : '../templates/0/icons/star.png', // icon path, 48x48
+				'icon'        : '{$style_dir}/images/osd_icons/star.png', // icon path, 48x48
 				'sticky'      : false,             // if true, timeout is ignored
 				'timeout'     : 4,                 // disappears after 6 seconds
 				'dismissable' : true               // can be dismissed manually
 				});
-		
+
 		//Reload userlist
         	var form_values = $( "#user_search" ).serialize();
-	
+
 		$.ajax({
- 
+
 		// The URL for the request
 		url: "ajax_user_management.php",
- 
+
 		// The data to send (will be converted to a query string)
 		data: form_values,
- 
+
 		// Whether this is a POST or GET request
 		type: "GET",
- 
+
 		// The type of data we expect back
 		dataType : "html",
- 
+
 		// Code to run if the request succeeds;
 		// the response is passed to the function
 		success: function( html ) {
@@ -282,9 +282,9 @@ $(document).ready(function() {
 			<br>
 			<form action="test" method="post" name="user_search" id="user_search">
 				<div class="standard_table_center">
-					<h3>User search options:</h3>	<br> 			
+					<h3>User search options:</h3>	<br>
 					<div class="standard_table_center">
-						By name :<br>	
+						By name :<br>
 						<select name="userbrowse" id="quick_search_small_select">
 							<option value="-">-</option>
 							{html_options values=$az_value output=$az_output selected=$az_select}
@@ -300,7 +300,7 @@ $(document).ready(function() {
 								No Comments&nbsp;
 							</div>
 						</div>
-						<div style="display:table-row;">	
+						<div style="display:table-row;">
 							<div style="display:table-cell;font-weight:bold;vertical-align:middle;"><input type="checkbox" name="no_submissions" id="no_submissions" value="1" class="quick_search_check">
 								No Submissions&nbsp;
 							</div>
@@ -310,95 +310,84 @@ $(document).ready(function() {
 								No Email
 							</div>
 						</div>
-						<div style="display:table-row;">	
+						<div style="display:table-row;">
 							<div style="display:table-cell;font-weight:bold;vertical-align:middle;"><input type="checkbox" name="no_news" id="no_news" value="1" class="quick_search_check">
 								No News posts&nbsp;
 							</div>
-						</div>	
-						<div style="display:table-row;">	
+						</div>
+						<div style="display:table-row;">
 							<div style="display:table-cell;font-weight:bold;vertical-align:middle;"><input type="checkbox" name="no_links" id="no_links" value="1" class="quick_search_check">
 								No Link submissions&nbsp;
 							</div>
 						</div>
-						<div style="display:table-row;">	
+						<div style="display:table-row;">
 							<div style="display:table-cell;font-weight:bold;vertical-align:middle;"><input type="checkbox" name="no_interviews" id="no_interviews" value="1" class="quick_search_check">
 								No Interviews&nbsp;
 							</div>
 						</div>
-						<div style="display:table-row;">	
+						<div style="display:table-row;">
 							<div style="display:table-cell;font-weight:bold;vertical-align:middle;"><input type="checkbox" name="no_review" id="no_review" value="1" class="quick_search_check">
 								No Review&nbsp;
 							</div>
 						</div>
-						<div style="display:table-row;">	
+						<div style="display:table-row;">
 							<div style="display:table-cell;font-weight:bold;vertical-align:middle;"><input type="checkbox" name="not_admin" id="not_admin" value="1" class="quick_search_check">
 								Not AL Administrator&nbsp;
 							</div>
-						</div>	
+						</div>
 						<div style="display:table-row;">
 							<div style="display:table-cell;font-weight:bold;vertical-align:middle;"><input type="checkbox" name="with_comments" id="with_comments" value="1" class="quick_search_check">
 								With Comments&nbsp;
 							</div>
 						</div>
-						<div style="display:table-row;">	
+						<div style="display:table-row;">
 							<div style="display:table-cell;font-weight:bold;vertical-align:middle;"><input type="checkbox" name="with_submissions" id="with_submissions" value="1" class="quick_search_check">
 								With Submissions&nbsp;
 							</div>
-						</div>		
+						</div>
 						<div style="display:table-row;">
 							<div style="display:table-cell;font-weight:bold;vertical-align:middle;"><input type="checkbox" name="with_email" id="with_email" value="1" class="quick_search_check">
 								With Email&nbsp;
 							</div>
 						</div>
-						<div style="display:table-row;">	
+						<div style="display:table-row;">
 							<div style="display:table-cell;font-weight:bold;vertical-align:middle;"><input type="checkbox" name="with_news" id="with_news" value="1" class="quick_search_check">
 								With News posts&nbsp;
 							</div>
 						</div>
-						<div style="display:table-row;">	
+						<div style="display:table-row;">
 							<div style="display:table-cell;font-weight:bold;vertical-align:middle;"><input type="checkbox" name="with_links" id="with_links" value="1" class="quick_search_check">
 								With Link Submissions&nbsp;
 							</div>
 						</div>
-						<div style="display:table-row;">	
+						<div style="display:table-row;">
 							<div style="display:table-cell;font-weight:bold;vertical-align:middle;"><input type="checkbox" name="with_interviews" id="with_interviews" value="1" class="quick_search_check">
 								With Interviews&nbsp;
 							</div>
 						</div>
-						<div style="display:table-row;">	
+						<div style="display:table-row;">
 							<div style="display:table-cell;font-weight:bold;vertical-align:middle;"><input type="checkbox" name="with_review" id="with_review" value="1" class="quick_search_check">
 								With Review&nbsp;
 							</div>
 						</div>
-						<div style="display:table-row;">	
+						<div style="display:table-row;">
 							<div style="display:table-cell;font-weight:bold;vertical-align:middle;"><input type="checkbox" name="is_admin" id="is_admin" value="1" class="quick_search_check">
 								Is AL Administrator&nbsp;
 							</div>
-						</div>	
+						</div>
 						<div style="display:flex;">
 						<input type="checkbox" name="last_visit" id="last_visit" value="1" class="quick_search_check">
 						Last visit before	{html_select_date start_year='2003' end_year='+1'}
-						</div>			
+						</div>
 					</div>
 					<br>
 					<input type="hidden" name="action" id="action_ajax_search" value="users">
 					<br><br>
 					<hr>
 				</div>
-			</form>	
+			</form>
 
 </div>
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -407,7 +396,7 @@ $(document).ready(function() {
 {/block}
 
 {block name=main_tile}
-{block name=main_stats}	
+{block name=main_stats}
 <div id="dialog_confirm_delete" title="Delete Users?" style="display:none;">
   <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
   These users will be permanently deleted. Are you sure?</p>
@@ -422,7 +411,7 @@ $(document).ready(function() {
 	<div class="standard_tile_text">
 		<form action="test" method="post" name="user_list" id="user_list">
 		<div class="main_stats_container" id="ajax_usersearch">
-						
+
 						{if isset($users)}
 						<table class="standard_table_list">
 						<tr>
@@ -444,12 +433,12 @@ $(document).ready(function() {
 						{/foreach}
 						{else}
 						<div class="left_nav_section">No users found</div>
-						{/if}	
+						{/if}
 						{if isset($nr_users)}
 						<tr>
 							<td class="standard_table_left" colspan="5">
-								<img width="38" height="22" style="float:left;" alt="" src="../templates/0/images/arrow_ltr.gif">	
-								<select name="action" id="user_list_action">					
+								<img width="38" height="22" style="float:left;" alt="" src="../templates/0/images/arrow_ltr.gif">
+								<select name="action" id="user_list_action">
 									<option value="-" selected>Select Action</option>
 									<option value="email_user">Send Email</option>
 									<option value="deactivate_user">Deactivate User</option>
@@ -459,7 +448,7 @@ $(document).ready(function() {
 							</td>
 						</tr>
 						{/if}
-						</table>	
+						</table>
 
 		</div>
 		</form>
