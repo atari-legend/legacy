@@ -1,5 +1,5 @@
 {extends file='1/main/main.html'}
-{* 
+{*
 /***************************************************************************
 *                                frontpage.html
 *                            ----------------
@@ -15,12 +15,12 @@
 
 //****************************************************************************************
 // This is the top of the site
-//**************************************************************************************** 
+//****************************************************************************************
 *}
 
-{block name=javascript_slider}	
-    <script type="text/javascript" src="../../../themes/templates/1/includes/js/jssor.slider.mini.js"></script>  <!-- This script is needed for the animation in the welcome tile -->
-	
+{block name=javascript_slider}
+    <script type="text/javascript" src="{$template_dir}includes/js/jssor.slider.mini.js"></script>  <!-- This script is needed for the animation in the welcome tile -->
+
 	<script> <!-- This script is needed for the animation in the welcome tile -->
 		    jQuery(document).ready(function ($) {
 
@@ -71,14 +71,14 @@
                     $Steps: 1                                       //[Optional] Steps to go for each navigation request, default value is 1
                 }
             };
-			
+
 			var jssor_slider1 = new $JssorSlider$("welcome", options);
-					
+
 			//responsive code begin
             //you can remove responsive code if you don't want the slider scales while window resizes
             function ScaleSlider() {
 
-                if ($(window).width() < 1495)  
+                if ($(window).width() < 1495)
 				{
 					var paddingWidth = -20;
 				}
@@ -87,7 +87,7 @@
 					//reserve blank width for margin+padding: margin+padding-left (10) + margin+padding-right (10)
 					var paddingWidth = -0;
 				}
-					
+
                 //minimum width should reserve for text
                 var minReserveWidth = 300;
 
@@ -100,13 +100,13 @@
 
                     //exclude blank width
                     var availableWidth = parentWidth - paddingWidth;
-					
+
 					//calculate slider width as 70% of available width
 					var sliderWidth = availableWidth * 0.7;
-					
+
 					//slider width is maximum 600
 					sliderWidth = Math.min(sliderWidth, 845);
-					
+
                     //slider width is minimum 200
                     sliderWidth = Math.max(sliderWidth, 200);
                     var clearFix = "none";
@@ -137,15 +137,15 @@
             $(window).bind("resize", ScaleSlider);
             $(window).bind("orientationchange", ScaleSlider);
             //responsive code end
- 
-        }); 
+
+        });
 	</script>
-	<script><!-- This script is needed for the animation of all the tiles - slide effect -->
+	<script type="text/javascript"><!-- This script is needed for the animation of all the tiles - slide effect -->
 	  $(function() {
 
 		// run the currently selected effect
 		function runEffect() {
-				
+
 			if ($(window).width() > 1494)
 			{
 				$( ".latest_news" ).effect("slide", { direction: "down" }, 1000 );
@@ -172,7 +172,7 @@
 				$( ".contact_tiles" ).effect("slide", { direction: "right" }, 1000 );
 				$( ".screenstar_position_front" ).effect("slide", { direction: "down" }, 1000 );
 				$( ".latest_reviews" ).effect("slide", { direction: "down" }, 1000 );
-				$( ".hotlinks_position_front" ).effect("slide", { direction: "down" }, 1000 );	
+				$( ".hotlinks_position_front" ).effect("slide", { direction: "down" }, 1000 );
 			}
 			else if ($(window).width() > 640)
 			{
@@ -200,7 +200,7 @@
 				$( ".contact_tiles" ).effect("slide", { direction: "right" }, 1000 );
 				$( ".screenstar_position_front" ).effect("slide", { direction: "right" }, 1000 );
 				$( ".latest_reviews" ).effect("slide", { direction: "left" }, 1000 );
-				$( ".hotlinks_position_front" ).effect("slide", { direction: "right" }, 1000 );		  
+				$( ".hotlinks_position_front" ).effect("slide", { direction: "right" }, 1000 );
 			}
 		};
 
@@ -217,29 +217,29 @@
 
 
 	<div id="main">
-	
+
 		<!--this column is only visible with 4 columns-->
-		<div class="column-wide-left_1920">		
+		<div class="column-wide-left_1920">
 			<!--Start logon tile - will only be used on the front page so no inheritance here -->
 			{block name=screenstar_tile}
 			{include file='1/main/screenstar_tile.html'}
 			{/block}
-			
+
 			<!--Start date quote tile-->
 			{block name=date_quote_tile}
 			{include file='1/main/date_quote_tile.html'}
 			{/block}
-			
+
 			<!--Start "hotlinks" tile-->
 			{block name=hotlinks_tile}
 			{include file='1/main/hotlinks_tile.html'}
-			{/block}	
+			{/block}
 		</div>
-	
+
 		<!--this column is only visible with 3 and 2 columns-->
-		<div class="column-wide-left">	
+		<div class="column-wide-left">
 			<!-- Jssor Slider Begin -->
-			<!-- To move inline styles to css file/block, please specify a class name for each element. --> 
+			<!-- To move inline styles to css file/block, please specify a class name for each element. -->
 			<div id="welcome">
 				<!-- Slides Container -->
 				<div data-u="slides" class="welcome_slides">
@@ -248,8 +248,8 @@
 							<p class="welcome_text">
 								<span class="trivia_title"> <!--style='font-size:19pt; color:white;'-->{$trivia_quote}</span>
 								<span class="trivia_tag"> <!--style='font-size:13pt;'--><br>Your number 1 Atari ST resource on the net!</span>
-								<span class="trivia_text" > <!--style='font-size:12pt; color:white' --><br><br>Atari Legend is a living and breathing webproject, designed by sceners. 
-									We like to involve as many people as possible to make it fresh and up to date. We offer a nostalgic trip down the Atari ST memory lane, focussing on exciting game related content. 
+								<span class="trivia_text" > <!--style='font-size:12pt; color:white' --><br><br>Atari Legend is a living and breathing webproject, designed by sceners.
+									We like to involve as many people as possible to make it fresh and up to date. We offer a nostalgic trip down the Atari ST memory lane, focussing on exciting game related content.
 									Details on all the classics, in-depth reviews, interviews with the creators of yesterday’s gems and much more.
 								</span>
 							</p>
@@ -265,54 +265,54 @@
 				{block name=latest_news_tile}
 				{include file='1/main/latest_news_tile.html'}
 				{/block}
-				
+
 				<!--Start latest reviews tile-->
 				{block name=latest_reviews_tile}
 				{include file='1/main/latest_reviews_tile.html'}
 				{/block}
-				
+
 				<div class="contact_tiles">
 					<div class="contact_email_button"><a href="#"> </a></div>
 					<div class="contact_facebook_button"><a href="#"> </a></div>
 					<div class="contact_jukebox_button"><a href="#"> </a></div>
 					<div class="contact_chat_button"><a href="#"> </a></div>
-				</div>	
-			</div>			
-		</div>	
+				</div>
+			</div>
+		</div>
 
 		<!--this column is only visible with 4 columns-->
-		<div class="column-wide-right_1920">		
+		<div class="column-wide-right_1920">
 			<!--Start logon tile - will only be used on the front page so no inheritance here -->
 			{block name=user_login_tile}
 			{include file='1/main/user_login_tile.html'}
 			{/block}
-			
+
 			<!--Start "Who is it" tile-->
 			{block name=who_is_it_tile}
 			{include file='1/main/who_is_it_tile.html'}
 			{/block}
-							
+
 			<!--Start "Did you know" tile-->
 			{block name=did_you_know_tile}
 			{include file='1/main/did_you_know_tile.html'}
-			{/block}	
-						
+			{/block}
+
 			<!--Start "statistics" tile-->
 			{block name=statistics_tile}
 			{include file='1/main/statistics_tile.html'}
 			{/block}
-		</div>		
-		
+		</div>
+
 		<!--this column is only visible with 3 columns-->
-		<div class="column-wide-right">		
+		<div class="column-wide-right">
 			<!--Start logon tile - will only be used on the front page so no inheritance here -->
 			{block name=user_login_tile}
 			{include file='1/main/user_login_tile.html'}
 			{/block}
-		</div>		
-			
-		<!--this column is only visible in the 3 colum mode and 1 column mode-->				
-		<div class="column-left">		
+		</div>
+
+		<!--this column is only visible in the 3 colum mode and 1 column mode-->
+		<div class="column-left">
 			<!--Start latest news tile-->
 			{block name=latest_news_tile}
 				{include file='1/main/latest_news_tile.html'}
@@ -322,60 +322,60 @@
 			{include file='1/main/who_is_it_tile.html'}
 			{/block}
 		</div>
-		
+
 		<!--this column is only visible in the 3 colum mode and 1 column mode-->
-		<div class="column-center">			
+		<div class="column-center">
 			<!--Start screenstar tile-->
 			{block name=screenstar_tile}
 			{include file='1/main/screenstar_tile.html'}
 			{/block}
-			
+
 			<!--Start latest reviews tile-->
 			{block name=latest_reviews_tile}
 			{include file='1/main/latest_reviews_tile.html'}
 			{/block}
-			
+
 			<!--Start "hotlinks" tile-->
 			{block name=hotlinks_tile}
 			{include file='1/main/hotlinks_tile.html'}
-			{/block}					
+			{/block}
 		</div>
-		
+
 		<!--this column is only visible in the 3 colum mode and 1 column mode-->
 		<div class="column-right">
-								
+
 			<!--Start date quote tile-->
 			{block name=date_quote_tile}
 			{include file='1/main/date_quote_tile.html'}
-			{/block}		
-			
+			{/block}
+
 			<!--Start "Did you know" tile-->
 			{block name=did_you_know_tile}
 			{include file='1/main/did_you_know_tile.html'}
-			{/block}						
-		
+			{/block}
+
 			<!--Start "statistics" tile-->
 			{block name=statistics_tile}
 			{include file='1/main/statistics_tile.html'}
 			{/block}
-		
+
 			<!--Start contact tiles - will only be used on the front page so no inheritance here -->
 			<div class="contact_tiles">
 					<div class="contact_email_button"><a href="#"> </a></div>
 					<div class="contact_facebook_button"><a href="#"> </a></div>
 					<div class="contact_jukebox_button"><a href="#"> </a></div>
 					<div class="contact_chat_button"><a href="#"> </a></div>
-				</div>	
+				</div>
 		</div>
-		
+
 		<!--this column is only visible in the 2 colum mode -->
 		<div class="column-left-tab">
-		
+
 			<!--Start date quote tile-->
 			{block name=date_quote_tile}
 			{include file='1/main/date_quote_tile.html'}
-			{/block}		
-			
+			{/block}
+
 			<!--Start "Did you know" tile-->
 			{block name=did_you_know_tile}
 			{include file='1/main/did_you_know_tile.html'}
@@ -385,22 +385,22 @@
 			<div class="contact_tiles">
 				<div class="contact_jukebox_button"><a href="#"> </a></div>
 					<div class="contact_chat_button"><a href="#"> </a></div>
-			</div>	
+			</div>
 		</div>
-		
+
 		<!--this column is only visible in the 2 colum mode -->
 		<div class="column-right-tab">
-			
+
 			<!--Start "statistics" tile-->
 			{block name=statistics_tile}
 			{include file='1/main/statistics_tile.html'}
 			{/block}
-			
+
 			<!--Start contact tiles-->
 			<div class="contact_tiles">
 				<div class="contact_email_button"><a href="#"> </a></div>
 					<div class="contact_facebook_button"><a href="#"> </a></div>
-			</div>	
+			</div>
 		</div>
-	</div>		
+	</div>
 {/block}
