@@ -27,7 +27,7 @@ $query_interview = $mysqli->query("SELECT
 						LEFT JOIN interview_text ON (interview_main.interview_id = interview_text.interview_id) 
 						LEFT JOIN individuals ON (interview_main.ind_id = individuals.ind_id) 
 						LEFT JOIN individual_text ON (individuals.ind_id = individual_text.ind_id)
-						LEFT JOIN users ON (interview_main.member_id = users.user_id)
+						LEFT JOIN users ON (interview_main.user_id = users.user_id)
 						WHERE individual_text.ind_imgext <> ' '
 						ORDER BY RAND() LIMIT 1") or die("query error, who_is_it");  
 
