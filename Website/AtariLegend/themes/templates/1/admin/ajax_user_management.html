@@ -1,0 +1,42 @@
+{* Ajax User Management *}
+		
+						{if isset($users)}
+						<table class="standard_table_list">
+						<tr>
+							<th><input type="checkbox" name="user_select_all" id="user_select_all"> Select</th>
+							<th>User Name</th>
+							<th>Join Date</th>
+							<th>Last Visit</th>
+							<th>Email</th>
+
+						</tr>
+						{foreach from=$users item=line}
+						<tr>
+							<td class="standard_table_center"><input type="checkbox" name="user_id[]" value="{$line.user_id}" class="user_checkbox"></td>
+							<td class="standard_table_center"><a class="user_popup fancybox.ajax" href="../administration/user_detail.php?user_id_selected={$line.user_id}">{$line.user_name}</a></td>
+							<td class="standard_table_center">{if $line.join_date != ''}{$line.join_date}{else}<i>n/a</i>{/if}</td>
+							<td class="standard_table_center">{if $line.last_visit != ''}{$line.last_visit}{else}<i>n/a</i>{/if}</td>
+							<td class="standard_table_center">{if $line.email != ''}<a href="mailto:{$line.email}" class="standard_tile_link_black">email</a>{else}<i>n/a</i>{/if}</td>
+						</tr>
+						{/foreach}
+						{else}
+						<div class="left_nav_section">No users found</div>
+						{/if}	
+						{if isset($nr_users)}
+						<tr>
+							<td class="standard_table_left" colspan="5">
+								<img width="38" height="22" style="float:left;" alt="" src="../templates/0/images/arrow_ltr.gif">	
+								<select name="action" id="user_list_action">					
+									<option value="-" selected>Select Action</option>
+									<option value="email_user">Send Email</option>
+									<option value="deactivate_user">Deactivate User</option>
+									<option value="delete_user">Delete User</option>
+								</select>
+								<b>Found {if $nr_users != ''}{$nr_users}{else}0{/if} users in {$query_time} sec</b>
+							</td>
+						</tr>
+						{/if}
+						</table>
+
+
+
