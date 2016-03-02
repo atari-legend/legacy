@@ -1,4 +1,4 @@
-{* 
+{*
 /***************************************************************************
 *                                main.html
 *                            -----------------------
@@ -14,7 +14,7 @@
 
 //****************************************************************************************
 // This is the part of the site which is called in all other html files
-//**************************************************************************************** 
+//****************************************************************************************
 *}
 
 <!DOCTYPE html>
@@ -25,12 +25,16 @@
 		<meta name="keywords" content="atari, atari st, games, game, demo, demos, reviews, articles, interviews, st">
 		<title> Atari Legend | Legends Never Die</title>
 		<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0" />
-		<link href="{$template_dir}css/style.css" type="text/css" rel="stylesheet" id="main_stylesheet">
-		<link href="../../../themes/templates/1/includes/main_css/notify-osd.css" hreflang="en" rel="stylesheet" type="text/css">
-		<script type="text/javascript" src="../../../themes/templates/1/includes/js/jquery-2.1.4.min.js"></script> <!-- main jquery stuff -->
-		<script src="../../../themes/templates/1/includes/js/notify-osd.js"></script>
+		<link type="text/css" href="{$style_dir}css/style.css" rel="stylesheet" id="main_stylesheet">
+		<link type="text/css" href="{$style_dir}css/jquery-ui.css" rel="Stylesheet" />
+		<link type="text/css" href="{$style_dir}css/jquery.fancybox.css" rel="Stylesheet" />
+		<link type="text/css" href="{$style_dir}css/notify-osd.css" hreflang="en" rel="stylesheet">
+		<script type="text/javascript" src="{$template_dir}includes/js/jquery-2.1.4.min.js"></script> <!-- main jquery stuff -->
+		<script type="text/javascript" src="{$template_dir}includes/js/jquery-ui.js"></script> <!-- main jqueryUI stuff -->
+		<script type="text/javascript" src="{$template_dir}includes/js/jquery.fancybox.pack.js"></script>
+		<script type="text/javascript" src="{$template_dir}includes/js/notify-osd.js"></script>
 		<script type="text/javascript"> <!-- script needed for the side menu -->
-			//<![CDATA[ 
+			//<![CDATA[
 			$(window).load(function(){
 			  $("[data-toggle]").click(function() {
 				var toggle_el = $(this).data("toggle");
@@ -38,16 +42,16 @@
 			  });
 			});
 			//]]>
-			
-			$(document).ready(function() { 
-					$(".sub-menu li a").click(function() { 
-						
+
+			$(document).ready(function() {
+					$(".sub-menu li a").click(function() {
+
 						var css_path = "../../../themes/styles/" + $(this).attr('rel') + "/css/style.css";
 						var logo_img_path = "../../../themes/styles/" + $(this).attr('rel') + "/images/logos/top_logo01.png";
 						var logo_img_480_path = "../../../themes/styles/" + $(this).attr('rel') + "/images/logos/top_logo01_480.png";
 						var logo_bee_path = "../../../themes/styles/" + $(this).attr('rel') + "/images/top_right01.png";
 						var skin = $(this).attr('rel');
-						
+
 						$("link#main_stylesheet").attr("href",css_path);
 						$("#logo_img").attr("src",logo_img_path);
 						$("#logo_img_480").attr("src",logo_img_480_path);
@@ -56,13 +60,13 @@
 						return false;
 					});
 			});
-			
-			 		
+
+
 			{if isset($edit_message)}
 				$( document ).ready(function() {
 					$.notify_osd.create({
 						'text'        : '{$edit_message}',             // notification message
-						'icon'        : '../templates/0/icons/star.png', // icon path, 48x48
+						'icon'        : '{$style_dir}/images/osd_icons/star.png', // icon path, 48x48
 						'sticky'      : false,             // if true, timeout is ignored
 						'timeout'     : 4,                 // disappears after 6 seconds
 						'dismissable' : true               // can be dismissed manually
@@ -76,7 +80,7 @@
 		<div id="wrapper_header">
 			<header>
 				<div id="top_background">
-					<!-- This is the side menu only visible for smartphones (max resolution 480pc)-->				
+					<!-- This is the side menu only visible for smartphones (max resolution 480pc)-->
 					<div class="container">
 					   <div id="sidebar">
 						    <div class="skin-wrap" id="no-wrap">
@@ -188,7 +192,7 @@
 							<div class="skin-wrap" id="no-wrap">
 								<nav class="skin-menu">
 								  <ul class="clearfix">
-									<li>	
+									<li>
 										<a href="" class="sidebutton" id="skin_side">SKIN</a>
 										<ul class="sub-menu">
 											<li><a href="#" rel="1" class="sidebutton_cpanel">LEGACY</a></li>
@@ -207,22 +211,22 @@
 								  <span class="bar"></span>
 							</button>
 					   </div>
-					</div>		
+					</div>
 					<!-- end of side menu-->
 					<div id="left">
-						<img id="logo_img" src="{$template_dir}images/logos/top_logo0{math equation='rand(1,5)'}.png" alt="logo" />
-						<img id="logo_img_480" src="{$template_dir}images/logos/top_logo01_480.png" alt="logo_480" />
+						<img id="logo_img" src="{$style_dir}images/logos/top_logo0{math equation='rand(1,5)'}.png" alt="logo" />
+						<img id="logo_img_480" src="{$style_dir}images/logos/top_logo01_480.png" alt="logo_480" />
 					</div>
 					<div id="right">
-						<img id="img_bee" src="{$template_dir}images/top_right0{math equation='rand(1,2)'}.png" alt="bee" />
+						<img id="img_bee" src="{$style_dir}images/top_right0{math equation='rand(1,2)'}.png" alt="bee" />
 					</div>
 					{assign var='number' value=1|rand:5}
 					{if $number is odd}
-					<img id="animation" src="{$template_dir}images/animations/animation0{math equation='rand(1,5)'}.gif" alt="animation" />
+					<img id="animation" src="{$style_dir}images/animations/animation0{math equation='rand(1,5)'}.gif" alt="animation" />
 					{else}
-					<img id="animation_vert" src="{$template_dir}images/animations/animation_vert0{math equation='rand(1,2)'}.gif" alt="animation" />
+					<img id="animation_vert" src="{$style_dir}images/animations/animation_vert0{math equation='rand(1,2)'}.gif" alt="animation" />
 					{/if}
-				</div>			
+				</div>
 				<nav id="main_nav">
 					<ul id="main_nav_ul">
 						<li><button type="button" class="topbutton" id="games">GAMES</button>
@@ -240,7 +244,7 @@
 								<li><a href="#" title="Company logo" class="subbutton" id="company_logo">COMPANY LOGO</a></li>
 								<li><a href="#" title="Interviews" class="subbutton" id="interviews">INTERVIEWS</a></li>
 								<li><a href="#" title="Interviews help" class="subbutton" id="interviews_help">INTERVIEWS HELP</a></li>
-								
+
 							</ul>
 						</li>
 						<li><button type="button" class="topbutton" id="menus">MENUS</button>
@@ -272,7 +276,7 @@
 							</ul>
 						</li>
 						<li><button type="button" class="topbutton" id="admin">NEWS</button>
-							<ul>	
+							<ul>
 								<li><a href="#" title="Add news" class="subbutton" id="add_news">ADD NEWS</a></li>
 								<li><a href="#" title="Approve news" class="subbutton" id="approve_news">APPROVE NEWS</a></li>
 								<li><a href="#" title="Submitted news" class="subbutton" id="submitted_news">SUBMITTED NEWS</a></li>
@@ -297,16 +301,16 @@
 							</ul>
 						</li>
 					</ul>
-				</nav>	
+				</nav>
 			</header>
 		</div>
-		<div id="wrapper">			
+		<div id="wrapper">
 			{block name=main_body}{/block}
 		</div>
 		<footer class="footer">
 			<div class="footer_logo">
 				<br><br><br>
-				<div class="footer_logo_image"></div>				
+				<div class="footer_logo_image"></div>
 				<h3>&copy; copyright 2004 - {'Y'|date} </h3>
 			</div>
 		</footer>

@@ -21,7 +21,8 @@ if (isset($_SESSION['skin']))
 		
 		$cpanel_template_folder = "../../../themes/templates/1/admin/";
 		$mainsite_template_folder = "../../../themes/templates/1/main/";
-		$smarty->assign("template_dir", "../../../themes/styles/$set_skin/");
+		$smarty->assign("template_dir", "../../../themes/templates/1/");
+		$smarty->assign("style_dir", "../../../themes/styles/$set_skin/");
 		
 		foreach (glob("../../../themes/styles/$set_skin/images/trivia/*.*") as $filename) {
 			$filename = substr ($filename, 3);
@@ -33,7 +34,8 @@ else
 {	
 	$cpanel_template_folder = "../../../themes/templates/1/admin/";
 	$mainsite_template_folder = "../../../themes/templates/1/main/";
-	$smarty->assign('template_dir', '../../../themes/styles/1/');
+	$smarty->assign("template_dir", "../../../themes/templates/1/");
+	$smarty->assign("style_dir", "../../../themes/styles/1/");
 	
 	foreach (glob("../../../themes/styles/1/images/trivia/*.*") as $filename) {
 		$filename = substr ($filename, 3);
