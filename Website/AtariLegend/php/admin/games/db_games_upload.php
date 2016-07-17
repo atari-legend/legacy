@@ -25,7 +25,7 @@ include("../../includes/admin.php");
 //**************************************************************************************** 
 if (isset($action) and $action == 'add_download' )
 {
-	require_once('../includes/pclzip.lib.php');
+	require_once('../../includes/pclzip.lib.php');
 	
 	$game_download_name = $_FILES['game_download_name'];
 
@@ -114,6 +114,8 @@ if (isset($action) and $action == 'add_download' )
 		// Delete the unzipped file in the temporary directory
 		unlink ("$game_file_temp_path$gamedownrow[0].$ext");
 		
+		$_SESSION['edit_message'] = "game uploaded";
+		
 		header("Location: ../games/games_upload.php?game_id=$game_id");
 	}
 }
@@ -163,6 +165,7 @@ if (isset($version)) {
 if (isset($tos)) {
 	$mysqli->query("UPDATE game_download SET tos='$tos' WHERE game_download_id='$game_download_id'");
 }
+		$_SESSION['edit_message'] = "file updated";
 		header("Location: ../games/games_upload.php?game_id=$game_id");
 }
 
@@ -173,7 +176,8 @@ if (isset($action) and $action == "delete_download")
 {
 	$mysqli->query("DELETE from game_download WHERE game_download_id='$game_download_id'");
 	unlink ("$game_file_path$game_download_id.zip");
-		header("Location: ../games/games_upload.php?game_id=$game_id");
+	$_SESSION['edit_message'] = "file deleted";
+	header("Location: ../games/games_upload.php?game_id=$game_id");
 }
 
 //close the connection

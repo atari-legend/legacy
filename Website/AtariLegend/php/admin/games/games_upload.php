@@ -18,6 +18,7 @@
 //load all common functions
 include("../../includes/common.php");
 include("../../includes/admin.php");
+include("../../includes/quick_search_games.php");
 
 //************************************************************************************************
 //Let's get the game info for the file name concatenation, and the download data for disks already
@@ -92,6 +93,9 @@ while ($downloads=$SQL_DOWNLOADS->fetch_array(MYSQLI_BOTH))
 $smarty->assign('nr_downloads',$nr_downloads);
 
 $smarty->assign("user_id",$_SESSION['user_id']);
+
+$smarty->assign('quick_search_games', 'quick_search_game_upload');
+$smarty->assign('left_nav', 'leftnav_position_game_upload');
 
 //Send all smarty variables to the templates
 $smarty->display("file:".$cpanel_template_folder."games_upload.html");

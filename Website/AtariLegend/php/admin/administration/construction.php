@@ -1,4 +1,4 @@
-<?
+<?php
 /***************************************************************************
 *                               construction.php
 *                            --------------------------
@@ -7,27 +7,18 @@
 *   email                : admin@atarilegend.com
 *
 *   Id: construction.php,v 0.10 2005/07/21 17:51 ST Graveyard
+*   Id: construction.php,v 0.20 2016/07/12 19:37 ST Graveyard
 *
 ***************************************************************************/
 
 //load all common functions
 include("../../includes/common.php");
 include("../../includes/admin.php"); 
-include("../includes/config.php"); 
+include("../../includes/config.php"); 
 
-
-$message = 'This is page is under construction - Patience is a virtue!';
-$section = 'Under construction';
-
-$smarty->assign('error_msg',
-	    array('message' => $message,
-		      'section' => $section ));
-
-$smarty->assign('error_message_tpl', '1');
-
-//Send all smarty variables to the templates
-$smarty->display("file:".$cpanel_template_folder."index.html");
+$_SESSION['edit_message'] = "This is page is under construction - Patience is a virtue!";
+header("Location: ../index.php");
 
 //close the connection
-mysql_close();
+//mysql_close();
 ?>

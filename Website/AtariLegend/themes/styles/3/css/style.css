@@ -810,7 +810,7 @@ Standard table settings
 .standard_table_center img {
   display: inline; }
 
-.topbutton_cpanel_small {
+.topbutton_cpanel_small, .topbutton_cpanel {
   cursor: pointer;
   border: 1px solid black;
   background: #dbd7d1;
@@ -821,10 +821,13 @@ Standard table settings
   border-radius: 0 15px 15px 0;
   margin-left: 2px; }
 
-.topbutton_cpanel_small:hover {
+.topbutton_cpanel_small:hover, .topbutton_cpanel:hover {
   background: #161c71;
   color: white;
   border: 1px solid #4f4f4f; }
+
+.topbutton_cpanel {
+  width: 120px; }
 
 fieldset {
   border: solid 1px #b2b2b2;
@@ -2082,6 +2085,22 @@ User karma
   width: 50%;
   text-align: center; }
 
+/*---------------------------------------------------------- 
+User management
+------------------------------------------------------------ */
+#user_management {
+  margin-top: 0;
+  margin-bottom: 30px;
+  float: left; }
+
+#user_management th {
+  text-align: left; }
+
+#user_list_action {
+  width: 185px;
+  margin-top: 0;
+  height: 25px; }
+
 /* --> Users section */
 /*************************************************************/
 /**********************PICASSO SKIN***************************/
@@ -2585,7 +2604,7 @@ Games comment edit
 ------------------------------------------------------------ */
 #quick_search_games_comment_edit {
   margin-top: 0;
-  margin-bottom: 00px;
+  margin-bottom: 0px;
   float: left; }
 
 #leftnav_position_games_comment_edit {
@@ -2604,7 +2623,99 @@ Games comment edit
 #gce_area {
   width: 100%; }
 
+/*---------------------------------------------------------- 
+Games upload
+------------------------------------------------------------ */
+#quick_search_game_upload {
+  margin-top: 0;
+  margin-bottom: 0px;
+  float: left; }
+
+#game_upload {
+  margin-top: 0;
+  margin-bottom: 20px;
+  float: left; }
+
+#leftnav_position_game_upload {
+  margin-top: 0;
+  margin-bottom: 20px;
+  float: left; }
+
+.game_upload_container {
+  display: flex; }
+
+#gu_child_1, #gu_child_2 {
+  width: 50%;
+  margin-left: 2%; }
+
+#gu_select {
+  width: 197px;
+  margin-top: 0;
+  height: 25px;
+  background: #666666; }
+
+/*---------------------------------------------------------- 
+Games screenshots add
+------------------------------------------------------------ */
+#games_screenshot_add {
+  margin-top: 0;
+  margin-bottom: 20px;
+  float: left; }
+
+#quick_search_game_screenshot_add {
+  margin-top: 0;
+  margin-bottom: 20px;
+  float: left; }
+
+#leftnav_position_game_screenshot_add {
+  margin-top: 0;
+  margin-bottom: 20px;
+  float: left; }
+
 /* --> Games section */
+/*************************************************************/
+/**********************PICASSO SKIN***************************/
+/*************************************************************/
+/*************************************************************/
+/**************CPanel Magazine section css********************/
+/*************************************************************/
+/*---------------------------------------------------------- 
+Magazine review score
+------------------------------------------------------------ */
+#magazine_review_score {
+  margin-top: 0;
+  margin-bottom: 20px;
+  float: left; }
+
+#quick_search_magazine_review_score {
+  margin-top: 0;
+  margin-bottom: 20px;
+  float: left; }
+
+#leftnav_position_magazine_review_score {
+  margin-top: 0;
+  margin-bottom: 20px;
+  float: left; }
+
+/*---------------------------------------------------------- 
+Magazine set score
+------------------------------------------------------------ */
+#magazine_set_score {
+  margin-top: 0;
+  margin-bottom: 20px;
+  float: left; }
+
+#quick_search_magazine_set_score {
+  margin-top: 0;
+  margin-bottom: 20px;
+  float: left; }
+
+#leftnav_position_magazine_set_score {
+  margin-top: 0;
+  margin-bottom: 20px;
+  float: left; }
+
+/* --> magazines section */
 /*---------------------------------------------------------- 
  Media Queries Main & CPanel 
 ------------------------------------------------------------ */
@@ -3206,6 +3317,42 @@ Games comment edit
 
   #games_comment_edit {
     margin-top: 0; } }
+/*---------------------------------------------------------- 
+Games Upload
+------------------------------------------------------------ */
+@media screen and (max-width: 1050px) {
+  .game_upload_container {
+    flex-direction: column; } }
+@media screen and (max-width: 1280px) {
+  #gu_child_1, #gu_child_2 {
+    width: 100%; } }
+@media screen and (max-width: 480px) {
+  #leftnav_position_game_upload {
+    margin-top: 20px;
+    margin-bottom: 20px; } }
+/*---------------------------------------------------------- 
+Games screenshots add
+------------------------------------------------------------ */
+@media screen and (max-width: 480px) {
+  #leftnav_position_game_screenshot_add {
+    margin-bottom: 20px; } }
+/*---------------------------------------------------------- 
+Admin - DB updates
+------------------------------------------------------------ */
+@media screen and (max-width: 500px) {
+  #td_db_result, #th_db_result, #th_db_state, #td_db_state,
+  #td_db_id, #th_db_id, #th_db_exe, #td_db_exe {
+    display: none; } }
+@media screen and (max-width: 600px) {
+  #td_db_result, #th_db_result, #th_db_state, #td_db_state,
+  #td_db_id, #th_db_id {
+    display: none; } }
+@media screen and (max-width: 900px) {
+  #td_db_result, #th_db_result, #th_db_state, #td_db_state {
+    display: none; } }
+@media screen and (max-width: 1279px) {
+  #td_db_result, #th_db_result {
+    display: none; } }
 /*---------------------------------------------------------- 
 General settings
 ------------------------------------------------------------ */

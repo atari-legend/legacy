@@ -8,6 +8,8 @@
  *	 actual update        : Creation of file
  *
  *   Id: games_screenshots_add.php,v 0.10 2005/11/09 23:02 ST Gravedigger
+ *   Id: games_screenshots_add.php,v 0.20 2016/07/16 23:21 ST Gravedigger
+ *									-AL 2.0
  *
  *********************************************************************************/
 
@@ -17,6 +19,7 @@
 
 include("../../includes/common.php");
 include("../../includes/admin.php");
+include("../../includes/quick_search_games.php");
 
 //If we are uploading new screenshots
 if (isset($action) and $action == 'add_screens' )
@@ -28,7 +31,6 @@ $image = $_FILES['image'];
 foreach($image['tmp_name'] as $key=>$tmp_name)
 {
 	if ($tmp_name!=='none')
-	
 	{
 	// Check what extention the file has and if it is allowed.
 	
@@ -58,32 +60,32 @@ foreach($image['tmp_name'] as $key=>$tmp_name)
 		 if ($ext!=="")
 		 	{
 			
-		// First we insert the directory path of where the file will be stored... this also creates an autoinc number for us.
-		
-		$sdbquery = $mysqli->query("INSERT INTO screenshot_main (screenshot_id,imgext) VALUES ('','$ext')")
-					or die ("Database error - inserting screenshots");
+			// First we insert the directory path of where the file will be stored... this also creates an autoinc number for us.
+			$sdbquery = $mysqli->query("INSERT INTO screenshot_main (screenshot_id,imgext) VALUES ('','$ext')")
+						or die ("Database error - inserting screenshots");
 
-		//select the newly entered screenshot_id from the main table
-		$SCREENSHOT = $mysqli->query("SELECT screenshot_id FROM screenshot_main
-	   					   		   ORDER BY screenshot_id desc")
-					  or die ("Database error - selecting screenshots");
-		
-		$screenshotrow = $SCREENSHOT->fetch_row();
-		$screenshot_id = $screenshotrow[0];
-		
-		$sdbquery = $mysqli->query("INSERT INTO screenshot_game (game_id, screenshot_id) VALUES ($game_id, $screenshot_id)")
-					or die ("Database error - inserting screenshots2");
-		
-		// Rename the uploaded file to its autoincrement number and move it to its proper place.
-		$file_data = rename($image['tmp_name'][$key], "$game_screenshot_path$screenshotrow[0].$ext");
-		
-		chmod("$game_screenshot_path$screenshotrow[0].$ext", 0777);
+			//select the newly entered screenshot_id from the main table
+			$SCREENSHOT = $mysqli->query("SELECT screenshot_id FROM screenshot_main
+									   ORDER BY screenshot_id desc")
+						  or die ("Database error - selecting screenshots");
+			
+			$screenshotrow = $SCREENSHOT->fetch_row();
+			$screenshot_id = $screenshotrow[0];
+			
+			$sdbquery = $mysqli->query("INSERT INTO screenshot_game (game_id, screenshot_id) VALUES ($game_id, $screenshot_id)")
+						or die ("Database error - inserting screenshots2");
+			
+			// Rename the uploaded file to its autoincrement number and move it to its proper place.
+			$file_data = rename($image['tmp_name'][$key], "$game_screenshot_save_path$screenshotrow[0].$ext");
+			
+			chmod("$game_screenshot_save_path$screenshotrow[0].$ext", 0777);
+			
+			$_SESSION['edit_message'] = "screenshot uploaded";
 
-		header("Location: ../games/games_screenshot_add.php?game_id=$game_id");
-		
+			header("Location: ../games/games_screenshot_add.php?game_id=$game_id");
+			}
 		}
 	}
-}
 }
 
 //If we pressed the delete screenshot link
@@ -108,17 +110,16 @@ if ( isset($action) and $action == 'delete_screen' )
 	$sql = $mysqli->query("DELETE FROM screenshot_main WHERE screenshot_id = '$screenshot_id' ");
 	$sql = $mysqli->query("DELETE FROM screenshot_game WHERE screenshot_id = '$screenshot_id' ");
 
-	$new_path = $game_screenshot_path;;
+	$new_path = $game_screenshot_save_path;;
 	$new_path .= $screenshot_id;
 	$new_path .= ".";
 	$new_path .= $screenshot_ext;
 
 	unlink ("$new_path");
 	
-	$message = 'Screenshot deleted succesfully';
-	$smarty->assign("message",$message);
-
-		header("Location: ../games/games_screenshot_add.php?game_id=$game_id");
+	$_SESSION['edit_message'] = "Screenshot deleted succesfully";
+	
+	header("Location: ../games/games_screenshot_add.php?game_id=$game_id");
 }
 
 //close the connection

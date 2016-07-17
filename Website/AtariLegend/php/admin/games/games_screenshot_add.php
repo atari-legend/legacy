@@ -8,6 +8,8 @@
  *	 actual update        : Creation of file
  *
  *   Id: games_screenshots_add.php,v 0.10 2005/11/09 23:02 ST Gravedigger
+ *   Id: games_screenshots_add.php,v 0.20 2016/07/16 22:25 ST Gravedigger 
+ *											- update to AL 2.0
  *
  *********************************************************************************/
 
@@ -17,6 +19,7 @@
 
 include("../../includes/common.php");
 include("../../includes/admin.php");
+include("../../includes/quick_search_games.php");
 
 //Get the screenshots for this game, if they exist
 $sql_screenshots = $mysqli->query("SELECT * FROM screenshot_game
@@ -28,7 +31,6 @@ $count = 1;
 $v_screenshots =1;
 while ( $screenshots=$sql_screenshots->fetch_array(MYSQLI_BOTH)) 
 {
-
 	//Ready screenshots path and filename
 	$screenshot_image  = $game_screenshot_path;
 	$screenshot_image .= $screenshots['screenshot_id'];
@@ -58,6 +60,11 @@ while ( $game=$sql_game->fetch_array(MYSQLI_BOTH))
 }
 
 $smarty->assign("user_id",$_SESSION['user_id']);
+
+$smarty->assign('quick_search_games', 'quick_search_game_screenshot_add');
+$smarty->assign('left_nav', 'leftnav_position_game_screenshot_add');
+						   
+
 
 //Send all smarty variables to the templates
 $smarty->display("file:".$cpanel_template_folder."games_screenshot_add.html");

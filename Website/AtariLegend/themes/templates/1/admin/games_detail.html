@@ -135,8 +135,8 @@ function browseDeveloper(str) {
     }
 }
 </script>
-
 {/block}
+
 {block name=main_tile}
 <div class="standard_tile" id="games_detail">
 	<h1>{$game_info.game_name}</h1>
@@ -236,7 +236,7 @@ function browseDeveloper(str) {
 			<fieldset>
 			<legend>Other Features</legend>
 				<a href="../games/games_upload.php?game_id={$game_info.game_id}" class="left_nav_link">Add file download</a><br>
-				<a href="../administration/construction.php" class="left_nav_link">Image Gallery</a><br>					
+				<!--<a href="../administration/construction.php" class="left_nav_link">Image Gallery</a><br>-->					
 				<a href="../games/games_screenshot_add.php?game_id={$game_info.game_id}&amp;game_name={$game_info.game_name}" class="left_nav_link">Add screenshots</a><br>
 				<a href="../magazine/magazine_review_score.php?game_id={$game_info.game_id}&amp;game_name={$game_info.game_name}" class="left_nav_link">Add Mag review score</a><br>
 				<a href="../games/games_box.php?game_id={$game_info.game_id}&amp;game_name={$game_info.game_name}" class="left_nav_link">Add boxscans</a><br>
@@ -305,7 +305,7 @@ function browseDeveloper(str) {
 									<br>
 									<br>
 								{/foreach}
-								<img src="../templates/0/images/arrow_ltr.gif" alt="" width="38" height="22">		
+								<img src="../../../themes/templates/1/includes/img/arrow_ltr.gif" alt="" width="38" height="22">		
 								<input type="button" name="valider" value="Delete" onclick="delete_creator()" class="topbutton_cpanel_small">
 							{/if}
 							<br>
@@ -341,7 +341,7 @@ function browseDeveloper(str) {
 							<br>
 							<br>
 						{/foreach}
-						<img src="../templates/0/images/arrow_ltr.gif" alt="" width="38" height="22">		
+						<img src="../../../themes/templates/1/includes/img/arrow_ltr.gif" alt="" width="38" height="22">		
 						<input type="button" name="valider" value="Delete" onclick="delete_year()" class="topbutton_cpanel_small">
 						{/if}
 						<br>
@@ -376,7 +376,7 @@ function browseDeveloper(str) {
 						<br>
 						<br>
 					{/foreach}
-					<img src="../templates/0/images/arrow_ltr.gif" alt="" width="38" height="22">		
+					<img src="../../../themes/templates/1/includes/img/arrow_ltr.gif" alt="" width="38" height="22">		
 					<input type="button" name="valider" value="Delete" onclick="delete_developer()" class="topbutton_cpanel_small">
 					{/if}
 					<br>
@@ -466,7 +466,7 @@ function browseDeveloper(str) {
 							<br>
 						{/foreach}
 					{/if}					
-					<img src="../templates/0/images/arrow_ltr.gif" alt="" width="38" height="22"/>		
+					<img src="../../../themes/templates/1/includes/img/arrow_ltr.gif" alt="" width="38" height="22"/>		
 					<input type="button" name="valider" value="Delete" onclick="delete_publisher()" class="topbutton_cpanel_small">
 					<br>
 					<br>

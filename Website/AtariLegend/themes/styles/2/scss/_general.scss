@@ -447,6 +447,17 @@ Standard table settings
   border-bottom: 3px solid black;
 }
 
+.topbutton_cpanel
+{
+	@extend .topbutton_cpanel_small;
+	width: 120px;
+}
+
+.topbutton_cpanel:hover
+{
+	@extend .topbutton_cpanel_small:hover;
+}
+
 fieldset { 
 	border: solid 1px #b2b2b2; 
 	background: #DBD7D1;
