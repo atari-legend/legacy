@@ -76,7 +76,7 @@ $sqldel = $mysqli->query("SELECT * FROM magazine_issue WHERE magazine_issue_id='
 		
 				unlink ("$magazine_scan_path$magazine_issue_id.$fetchdel[magazine_issue_imgext]");
 			}
-
+		
 // Redirect back to previous page
 header("Location: ../magazine/magazine_edit.php?magazine_id=$magazine_id");
 }
@@ -151,6 +151,8 @@ if(isset($action) and $action=="score_delete")
 
 $do_delete = $mysqli->query("DELETE FROM magazine_game WHERE magazine_game_id='$magazine_game_id'") or die("couldn't delete score!");
 
+$_SESSION['edit_message'] = "magazine link and score deleted";
+			
 mysqli_close($mysqli);
 
 // Redirect back to previous page
@@ -172,6 +174,8 @@ if (isset($score))
 		or die("Couldn't update the magazine table");
 		}
 
+$_SESSION['edit_message'] = "magazine link and score added";		
+		
 mysqli_close($mysqli);
 
 // Redirect back to previous page

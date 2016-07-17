@@ -214,15 +214,15 @@ function convert_timestamp($timestamp)
 	
 function get_username_from_id($submitted)
 	{
-					$query = "SELECT userid FROM users WHERE user_id = $submitted";
-					global $mysqli;
-					$result = $mysqli->query($query) or die("Query failed");
-					if(get_rows($result) == 0) return 0;
-					else
-					{
-						$query_data = $result->fetch_array(MYSQLI_BOTH);
-					return $query_data['userid'];
-					}
+		$query = "SELECT userid FROM users WHERE user_id = $submitted";
+		global $mysqli;
+		$result = $mysqli->query($query) or die("Query failed");
+		if(get_rows($result) == 0) return 0;
+		else
+		{
+			$query_data = $result->fetch_array(MYSQLI_BOTH);
+		return $query_data['userid'];
+		}
 	}
 
 function get_rows ($result)

@@ -816,7 +816,7 @@ Standard table settings
 .standard_table_center img {
   display: inline; }
 
-.topbutton_cpanel_small {
+.topbutton_cpanel_small, .topbutton_cpanel {
   cursor: pointer;
   border: 0;
   background: #122323;
@@ -827,10 +827,13 @@ Standard table settings
   border-bottom: 3px solid #122323;
   border-left: 1px solid #122323; }
 
-.topbutton_cpanel_small:hover {
+.topbutton_cpanel_small:hover, .topbutton_cpanel:hover {
   background: #006f6f;
   color: white;
   border-bottom: 3px solid #122323; }
+
+.topbutton_cpanel {
+  width: 120px; }
 
 fieldset {
   border: solid 1px black;
@@ -2054,6 +2057,38 @@ User Karma
   width: 50%;
   text-align: center; }
 
+/*---------------------------------------------------------- 
+User management
+------------------------------------------------------------ */
+#user_management {
+  margin-top: 20px;
+  margin-bottom: 30px;
+  float: left; }
+
+#user_management th {
+  text-align: left; }
+
+.select_th {
+  width: 10%; }
+
+.select_td {
+  width: 10%;
+  color: white;
+  font-size: 10pt;
+  font-weight: 100;
+  padding-left: 2px; }
+
+#leftnav_position_um {
+  margin-top: 20px; }
+
+#quick_search_um {
+  margin-top: 20px; }
+
+#user_list_action {
+  width: 185px;
+  margin-top: 0;
+  height: 25px; }
+
 /* --> Users section */
 /*************************************************************/
 /**********************LEGACY SKIN****************************/
@@ -2556,7 +2591,7 @@ Games comment edit
 ------------------------------------------------------------ */
 #quick_search_games_comment_edit {
   margin-top: 20px;
-  margin-bottom: 00px;
+  margin-bottom: 0px;
   float: left; }
 
 #leftnav_position_games_comment_edit {
@@ -2575,7 +2610,86 @@ Games comment edit
 #gce_area {
   width: 100%; }
 
+/*---------------------------------------------------------- 
+Games upload
+------------------------------------------------------------ */
+#quick_search_game_upload {
+  margin-top: 20px;
+  margin-bottom: 20px; }
+
+#game_upload {
+  margin-top: 20px;
+  margin-bottom: 20px; }
+
+#leftnav_position_game_upload {
+  margin-top: 20px;
+  margin-bottom: 20px; }
+
+.game_upload_container {
+  display: flex; }
+
+#gu_child_1, #gu_child_2 {
+  width: 50%;
+  margin-left: 2%; }
+
+#gu_select {
+  width: 192px;
+  margin-top: 0;
+  height: 25px; }
+
+/*---------------------------------------------------------- 
+Games screenshots add
+------------------------------------------------------------ */
+#games_screenshot_add {
+  margin-top: 20px;
+  margin-bottom: 20px; }
+
+#quick_search_game_screenshot_add {
+  margin-top: 20px;
+  margin-bottom: 20px; }
+
+#leftnav_position_game_screenshot_add {
+  margin-top: 20px;
+  margin-bottom: 20px; }
+
 /* --> Games section */
+/*************************************************************/
+/**********************LEGACY SKIN****************************/
+/*************************************************************/
+/*************************************************************/
+/**************CPanel Magazine section css********************/
+/*************************************************************/
+/*---------------------------------------------------------- 
+Magazine review score
+------------------------------------------------------------ */
+#magazine_review_score {
+  margin-top: 20px;
+  margin-bottom: 20px; }
+
+#quick_search_magazine_review_score {
+  margin-top: 20px;
+  margin-bottom: 20px; }
+
+#leftnav_position_magazine_review_score {
+  margin-top: 20px;
+  margin-bottom: 20px; }
+
+/*---------------------------------------------------------- 
+Magazine set score
+------------------------------------------------------------ */
+#magazine_set_score {
+  margin-top: 20px;
+  margin-bottom: 20px; }
+
+#quick_search_magazine_set_score {
+  margin-top: 20px;
+  margin-bottom: 20px; }
+
+#leftnav_position_magazine_set_score {
+  margin-top: 20px;
+  margin-bottom: 20px; }
+
+/* --> Magazine section */
 /*---------------------------------------------------------- 
  Media Queries Main & CPanel 
 ------------------------------------------------------------ */
@@ -3137,6 +3251,41 @@ Games comment edit
 
   #games_comment_edit {
     margin-top: 20px; } }
+/*---------------------------------------------------------- 
+Games Upload
+------------------------------------------------------------ */
+@media screen and (max-width: 1050px) {
+  .game_upload_container {
+    flex-direction: column; } }
+@media screen and (max-width: 1280px) {
+  #gu_child_1, #gu_child_2 {
+    width: 100%; } }
+@media screen and (max-width: 480px) {
+  #leftnav_position_game_upload {
+    margin-top: 0; } }
+/*---------------------------------------------------------- 
+Games screenshots add
+------------------------------------------------------------ */
+@media screen and (max-width: 480px) {
+  #leftnav_position_game_screenshot_add {
+    margin-top: 0; } }
+/*---------------------------------------------------------- 
+Admin - DB updates
+------------------------------------------------------------ */
+@media screen and (max-width: 500px) {
+  #td_db_result, #th_db_result, #th_db_state, #td_db_state,
+  #td_db_id, #th_db_id, #th_db_exe, #td_db_exe {
+    display: none; } }
+@media screen and (max-width: 600px) {
+  #td_db_result, #th_db_result, #th_db_state, #td_db_state,
+  #td_db_id, #th_db_id {
+    display: none; } }
+@media screen and (max-width: 900px) {
+  #td_db_result, #th_db_result, #th_db_state, #td_db_state {
+    display: none; } }
+@media screen and (max-width: 1279px) {
+  #td_db_result, #th_db_result {
+    display: none; } }
 /*---------------------------------------------------------- 
 General settings
 ------------------------------------------------------------ */

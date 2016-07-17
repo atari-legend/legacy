@@ -68,15 +68,12 @@ $smarty->assign('az_value', $az_value);
 $smarty->assign('az_output', $az_output);
 $smarty->assign('az_select', "num");
 
-				$time_elapsed_secs = microtime(true) - $start;
-				$smarty->assign("query_time",$time_elapsed_secs);	
+$time_elapsed_secs = microtime(true) - $start;
+$smarty->assign("query_time",$time_elapsed_secs);	
 
 //Create the id's for dynamic positioning of the tiles
-$smarty->assign('left_nav', 'left_nav_position_front');
-$smarty->assign('quick_search_games', 'quick_search_position_front');
-$smarty->assign('main_stats', 'main_stats_position_front');
+$smarty->assign('left_nav', 'leftnav_position_um');
 		
 //Send all smarty variables to the templates
-
 $smarty->display("file:".$cpanel_template_folder."user_management.html");
 ?>

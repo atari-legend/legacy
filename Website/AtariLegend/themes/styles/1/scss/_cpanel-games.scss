@@ -162,10 +162,37 @@ Games comment
 /*---------------------------------------------------------- 
 Games comment edit
 ------------------------------------------------------------ */	
-#quick_search_games_comment_edit{margin-top: 20px; margin-bottom: 00px; float: left;}
+#quick_search_games_comment_edit{margin-top: 20px; margin-bottom: 0px; float: left;}
 #leftnav_position_games_comment_edit{margin-top: 20px; margin-bottom: 30px; float: left;}
 #games_comment_edit{margin-top: 20px; margin-bottom: 30px; float: left;}
 
 #gce_button,#gce_button2{display:inline;}
 
 #gce_area { width: 100%;}
+
+
+/*---------------------------------------------------------- 
+Games upload
+------------------------------------------------------------ */	
+#quick_search_game_upload{ margin-top: 20px; margin-bottom: 20px;}
+#game_upload{ margin-top: 20px; margin-bottom: 20px;}	
+#leftnav_position_game_upload{ margin-top: 20px; margin-bottom: 20px;}
+
+.game_upload_container{
+  display: flex; 
+ }
+ 
+#gu_child_1, #gu_child_2{ width:50%; margin-left:2%;}
+
+#gu_select{ 
+	width: 192px;
+	margin-top: 0;
+	height: 25px;
+}
+
+/*---------------------------------------------------------- 
+Games screenshots add
+------------------------------------------------------------ */	
+#games_screenshot_add{ margin-top: 20px; margin-bottom: 20px;}
+#quick_search_game_screenshot_add{ margin-top: 20px; margin-bottom: 20px;}
+#leftnav_position_game_screenshot_add{ margin-top: 20px; margin-bottom: 20px;}

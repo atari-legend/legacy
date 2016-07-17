@@ -27,9 +27,10 @@ $individual_screenshot_path="../../data/images/individual_screenshots/";
 $game_boxscan_path="../../data/images/game_boxscans/";
 $game_file_path="../../data/zips/games/";
 $game_file_temp_path="../../../data/zips/temp/";
-$game_file_path="../../data/zips/games/";
+$game_file_path="../../../data/zips/games/";
 $game_gallery_path="../../data/images/game_gallery/"; 
 $game_screenshot_path="../../data/images/game_screenshots/";
+$game_screenshot_save_path="../../../data/images/game_screenshots/";
 $music_game_path="../../data/music/games/";
 
 //interview

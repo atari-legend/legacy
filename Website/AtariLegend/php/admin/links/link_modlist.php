@@ -77,7 +77,7 @@ $LINKSQL = $mysqli->query("SELECT * FROM website
 while  ($rowlink = $LINKSQL->fetch_array(MYSQLI_BOTH)) 
 {  
 	$timestamp = convert_timestamp($rowlink['website_date']); 
-	$submitted = get_username_from_id($rowlink['website_user_sub']);
+	$submitted = get_username_from_id($rowlink['user_id']);
 	$website_image = $website_image_path;
 	$website_image .= $rowlink['website_id'];
 	$website_image .= ".";

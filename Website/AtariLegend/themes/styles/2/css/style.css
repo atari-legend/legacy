@@ -795,7 +795,7 @@ Standard table settings
 .standard_table_center img {
   display: inline; }
 
-.topbutton_cpanel_small {
+.topbutton_cpanel_small, .topbutton_cpanel {
   cursor: pointer;
   border: 0;
   background: white;
@@ -807,10 +807,13 @@ Standard table settings
   border-left: 1px solid black;
   text-shadow: -1px 1px 5px white, 1px -1px 15px #acacac; }
 
-.topbutton_cpanel_small:hover {
+.topbutton_cpanel_small:hover, .topbutton_cpanel:hover {
   background: black;
   color: white;
   border-bottom: 3px solid black; }
+
+.topbutton_cpanel {
+  width: 120px; }
 
 fieldset {
   border: solid 1px #b2b2b2;
@@ -2016,6 +2019,28 @@ User karma
   width: 50%;
   text-align: center; }
 
+/*---------------------------------------------------------- 
+User management
+------------------------------------------------------------ */
+#user_management {
+  margin-top: -40px;
+  margin-bottom: 30px;
+  float: left; }
+
+#user_management th {
+  text-align: left; }
+
+#leftnav_position_um {
+  margin-top: -40px; }
+
+#quick_search_um {
+  margin-top: -40px; }
+
+#user_list_action {
+  width: 185px;
+  margin-top: 0;
+  height: 25px; }
+
 /* --> Users section */
 /*************************************************************/
 /**********************TOS 207 SKIN***************************/
@@ -2532,7 +2557,99 @@ Games comment edit
 #gce_area {
   width: 100%; }
 
+/*---------------------------------------------------------- 
+Games upload
+------------------------------------------------------------ */
+#quick_search_game_upload {
+  margin-top: -40px;
+  margin-bottom: 30px;
+  float: left; }
+
+#game_upload {
+  margin-top: -40px;
+  margin-bottom: 30px;
+  float: left; }
+
+#leftnav_position_game_upload {
+  margin-top: -40px;
+  margin-bottom: 30px;
+  float: left; }
+
+.game_upload_container {
+  display: flex; }
+
+#gu_child_1, #gu_child_2 {
+  width: 50%;
+  margin-left: 2%; }
+
+#gu_select {
+  width: 194px;
+  margin-top: 0;
+  height: 25px;
+  background: #666666; }
+
+/*---------------------------------------------------------- 
+Games screenshots add
+------------------------------------------------------------ */
+#games_screenshot_add {
+  margin-top: -40px;
+  margin-bottom: 30px;
+  float: left; }
+
+#quick_search_game_screenshot_add {
+  margin-top: -40px;
+  margin-bottom: 30px;
+  float: left; }
+
+#leftnav_position_game_screenshot_add {
+  margin-top: -40px;
+  margin-bottom: 30px;
+  float: left; }
+
 /* --> Games section */
+/*************************************************************/
+/**********************TOS 207 SKIN***************************/
+/*************************************************************/
+/*************************************************************/
+/**************CPanel Magazine section css********************/
+/*************************************************************/
+/*---------------------------------------------------------- 
+Magazine review score
+------------------------------------------------------------ */
+#magazine_review_score {
+  margin-top: -40px;
+  margin-bottom: 30px;
+  float: left; }
+
+#quick_search_magazine_review_score {
+  margin-top: -40px;
+  margin-bottom: 30px;
+  float: left; }
+
+#leftnav_position_magazine_review_score {
+  margin-top: -40px;
+  margin-bottom: 30px;
+  float: left; }
+
+/*---------------------------------------------------------- 
+Magazine set score
+------------------------------------------------------------ */
+#magazine_set_score {
+  margin-top: -40px;
+  margin-bottom: 30px;
+  float: left; }
+
+#quick_search_magazine_set_score {
+  margin-top: -40px;
+  margin-bottom: 30px;
+  float: left; }
+
+#leftnav_position_magazine_set_score {
+  margin-top: -40px;
+  margin-bottom: 30px;
+  float: left; }
+
+/* --> magezines section */
 /*---------------------------------------------------------- 
  Media Queries Main & CPanel 
 ------------------------------------------------------------ */
@@ -2814,6 +2931,18 @@ User search
   #usersearch {
     margin-bottom: 20px; } }
 /*---------------------------------------------------------- 
+User management
+------------------------------------------------------------ */
+@media screen and (max-width: 1279px) {
+  #leftnav_position_um {
+    margin-top: 20px; }
+
+  #user_management {
+    margin-top: 20px; }
+
+  #quick_search_um {
+    margin-top: 20px; } }
+/*---------------------------------------------------------- 
 User Karma
 ------------------------------------------------------------ */
 @media screen and (max-width: 1279px) {
@@ -3067,6 +3196,89 @@ Games comment
     display: none; }
 
   .gc_left {
+    display: none; } }
+/*---------------------------------------------------------- 
+Games Upload
+------------------------------------------------------------ */
+@media screen and (max-width: 1050px) {
+  .game_upload_container {
+    flex-direction: column; } }
+@media screen and (max-width: 1280px) {
+  #gu_child_1, #gu_child_2 {
+    width: 100%; } }
+@media screen and (max-width: 1279px) {
+  #leftnav_position_game_upload {
+    margin-top: 20px; }
+
+  #quick_search_game_upload {
+    margin-top: 20px; }
+
+  #game_upload {
+    margin-top: 20px; } }
+@media screen and (max-width: 480px) {
+  #leftnav_position_game_upload {
+    margin-top: 0; } }
+/*---------------------------------------------------------- 
+Games screenshots add
+------------------------------------------------------------ */
+@media screen and (max-width: 1279px) {
+  #leftnav_position_game_screenshot_add {
+    margin-top: 20px; }
+
+  #quick_search_game_screenshot_add {
+    margin-top: 20px; }
+
+  #games_screenshot_add {
+    margin-top: 20px; } }
+@media screen and (max-width: 480px) {
+  #leftnav_position_game_screenshot_add {
+    margin-top: 0; } }
+/*---------------------------------------------------------- 
+Magazine review score
+------------------------------------------------------------ */
+@media screen and (max-width: 1279px) {
+  #leftnav_position_magazine_review_score {
+    margin-top: 20px; }
+
+  #quick_search_magazine_review_score {
+    margin-top: 20px; }
+
+  #magazine_review_score {
+    margin-top: 20px; } }
+@media screen and (max-width: 480px) {
+  #leftnav_position_magazine_review_score {
+    margin-top: 0; } }
+/*---------------------------------------------------------- 
+Magazine set score
+------------------------------------------------------------ */
+@media screen and (max-width: 1279px) {
+  #leftnav_position_magazine_set_score {
+    margin-top: 20px; }
+
+  #quick_search_magazine_set_score {
+    margin-top: 20px; }
+
+  #magazine_set_score {
+    margin-top: 20px; } }
+@media screen and (max-width: 480px) {
+  #leftnav_position_magazine_set_score {
+    margin-top: 0; } }
+/*---------------------------------------------------------- 
+Admin - DB updates
+------------------------------------------------------------ */
+@media screen and (max-width: 500px) {
+  #td_db_result, #th_db_result, #th_db_state, #td_db_state,
+  #td_db_id, #th_db_id, #th_db_exe, #td_db_exe {
+    display: none; } }
+@media screen and (max-width: 600px) {
+  #td_db_result, #th_db_result, #th_db_state, #td_db_state,
+  #td_db_id, #th_db_id {
+    display: none; } }
+@media screen and (max-width: 900px) {
+  #td_db_result, #th_db_result, #th_db_state, #td_db_state {
+    display: none; } }
+@media screen and (max-width: 1279px) {
+  #td_db_result, #th_db_result {
     display: none; } }
 /*---------------------------------------------------------- 
 General settings

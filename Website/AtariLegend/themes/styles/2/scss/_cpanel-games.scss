@@ -165,3 +165,30 @@ Games comment edit
 #gce_button,#gce_button2{float:right; margin-bottom:20px; margin-left:5px;}
 
 #gce_area { width: 100%;}
+
+/*---------------------------------------------------------- 
+Games upload
+------------------------------------------------------------ */	
+#quick_search_game_upload{ margin-top: -40px; margin-bottom: 30px; float: left;}
+#game_upload{ margin-top: -40px; margin-bottom: 30px; float: left;}	
+#leftnav_position_game_upload{ margin-top: -40px; margin-bottom: 30px; float: left;}
+
+.game_upload_container{
+  display: flex; 
+ }
+ 
+#gu_child_1, #gu_child_2{ width:50%; margin-left:2%;}
+
+#gu_select{ 
+	width: 194px;
+	margin-top: 0;
+	height: 25px;
+	background: #666666;
+}
+
+/*---------------------------------------------------------- 
+Games screenshots add
+------------------------------------------------------------ */	
+#games_screenshot_add{ margin-top: -40px; margin-bottom: 30px; float: left;}
+#quick_search_game_screenshot_add{ margin-top: -40px; margin-bottom: 30px; float: left;}
+#leftnav_position_game_screenshot_add{ margin-top: -40px; margin-bottom: 30px; float: left;}

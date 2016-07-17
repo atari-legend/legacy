@@ -285,7 +285,6 @@ User search
 	#leftnav_position_usersearch{ margin-top: 20px;}
 }
 
-
 /*---------------------------------------------------------- 
 User karma
 ------------------------------------------------------------ */
@@ -523,6 +522,51 @@ Games comment edit
 	#games_comment_edit{margin-top: 0;}
 }
 
+/*---------------------------------------------------------- 
+Games Upload
+------------------------------------------------------------ */
+@media screen and (max-width: 1050px) { 
+	.game_upload_container{
+		flex-direction: column;
+	}
+}
+	
+@media screen and (max-width: 1280px) { 	
+	#gu_child_1, #gu_child_2{ width:100%;}
+}
+
+@media screen and (max-width: 480px) { 
+	#leftnav_position_game_upload{ margin-top: 20px; margin-bottom: 20px;}
+}
+
+
+/*---------------------------------------------------------- 
+Games screenshots add
+------------------------------------------------------------ */
+@media screen and (max-width: 480px) { 
+	#leftnav_position_game_screenshot_add{ margin-bottom: 20px;}
+}
+
+/*---------------------------------------------------------- 
+Admin - DB updates
+------------------------------------------------------------ */	
+@media screen and (max-width: 500px) { 
+	#td_db_result, #th_db_result,#th_db_state,#td_db_state,
+	#td_db_id,#th_db_id,#th_db_exe,#td_db_exe{display:none;}
+}
+
+@media screen and (max-width: 600px) { 
+	#td_db_result, #th_db_result,#th_db_state,#td_db_state, 
+	#td_db_id, #th_db_id{display:none;}
+}
+
+@media screen and (max-width: 900px) { 
+	#td_db_result, #th_db_result,#th_db_state,#td_db_state{display:none;}
+}
+
+@media screen and (max-width: 1279px) { 
+	#td_db_result, #th_db_result{display:none;}
+}
 
 
 /*---------------------------------------------------------- 
