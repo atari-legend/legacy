@@ -34,6 +34,11 @@ if ($view == "users_comments")
 	//Build next/back links, part for users_comments only
 	$users_comments = "&c_counter=$c_counter&users_id=$users_id&view=users_comments";
 }
+elseif ($view == "game_comments") 
+{
+	$where_clause = "WHERE game.game_id = $game_id"; 
+	$view = "game_comments";
+}
 else { $where_clause = ""; $view = "latest_comments";}
 
 $sql_build = "SELECT *
@@ -54,7 +59,8 @@ $smarty->assign('total_nr_comments', $v_rows_total);
 // count number of comments
 $query_number = $mysqli->query("SELECT * FROM game_user_comments
 							 LEFT JOIN comments ON ( game_user_comments.comment_id = comments.comments_id )
-							 LEFT JOIN users ON ( comments.user_id = users.user_id ) " . $where_clause) or die("Couldn't get the number of comments");
+							 LEFT JOIN game ON ( game_user_comments.game_id = game.game_id )
+							 LEFT JOIN users ON ( comments.user_id = users.user_id ) " . $where_clause) or die("Couldn't get the number of comments - count");
 
 $v_rows = $query_number->num_rows;
 
@@ -69,10 +75,10 @@ while ($query_comment = $sql_comment->fetch_array(MYSQLI_BOTH))
 							   screenshot_game.game_id,
 							   screenshot_game.screenshot_id,
 							   screenshot_main.imgext
-						   	   FROM screenshot_game 
-						       LEFT JOIN screenshot_main ON (screenshot_game.screenshot_id = screenshot_main.screenshot_id) 
+							   FROM screenshot_game 
+							   LEFT JOIN screenshot_main ON (screenshot_game.screenshot_id = screenshot_main.screenshot_id) 
 							   WHERE screenshot_game.game_id = $query_game_id						   	   
-						   	   ORDER BY RAND() LIMIT 1"); 
+							   ORDER BY RAND() LIMIT 1"); 
 							   
 	$sql_game = $query_game->fetch_array(MYSQLI_BOTH);  
 
@@ -119,7 +125,7 @@ while ($query_comment = $sql_comment->fetch_array(MYSQLI_BOTH))
 	else {$avatar_image ='';}
 	
 	 $smarty->append('comments',
-	    array('comment' => $oldcomment,
+		array('comment' => $oldcomment,
 			  'date' => $date,
 			  'game' => $query_comment['game_name'],
 			  'game_id' => $query_comment['game_id'],
@@ -155,7 +161,7 @@ if(empty($v_linkback)) {$v_linkback="";}
 if(empty($v_linknext)) {$v_linknext="";}
 
 $smarty->assign('links',
-	     array('linkback' => $v_linkback,
+		 array('linkback' => $v_linkback,
 			   'linknext' => $v_linknext,
 			   'v_counter' => $v_counter,
 			   'view' => $view,

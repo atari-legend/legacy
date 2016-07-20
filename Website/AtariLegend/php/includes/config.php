@@ -25,6 +25,7 @@ $individual_screenshot_path="../../data/images/individual_screenshots/";
 
 //games
 $game_boxscan_path="../../data/images/game_boxscans/";
+$game_boxscan_save_path="../../../data/images/game_boxscans/";
 $game_file_path="../../data/zips/games/";
 $game_file_temp_path="../../../data/zips/temp/";
 $game_file_path="../../../data/zips/games/";

@@ -9,6 +9,7 @@
 *   Id: link_modlist.html,v 0.10 2005 Silver Surfer
 *   Id: link_modlist.html,v 0.20 12/09/2015 ST Graveyard
 *   Id: link_modlist.html,v 0.30 25/11/2015 ST Graveyard - Flexbox/HTML validated
+*   Id: link_modlist.html,v 0.35 21/07/2016 ST Graveyard - Layout change + user detail link
 ***************************************************************************/
 *}
 {extends file='1/admin/frontpage.html'}
@@ -53,7 +54,7 @@
 				<br>
 				<a href="{$line.website_url}" class="links_addnew_link" target="_blank">{$line.website_name}</a>
 				<a href="link_mod.php?website_id={$line.website_id}" class="links_addnew_link">(Click to modify)</a><br>
-				<sup>added on {$line.timestamp} by {$line.submitted}</sup><br>
+				added on {$line.timestamp} by <a href="../user/user_detail.php?user_id_selected={$line.user_id}" class="left_nav_link">{$line.submitted}</a><br><br>
 				{$line.website_description}
 				<br><br>	
 				</td>

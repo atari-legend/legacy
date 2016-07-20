@@ -65,43 +65,44 @@ function commentdelete(JScomID,JSusers_id)
 					<a href="../games/games_detail.php?game_id={$line.game_id}" class="links_addnew_link">{$line.game}</a> 
 					posted by <a href="../user/user_detail.php?user_id_selected={$line.users_id}" class="links_addnew_link">{$line.user_name}</a> on {$line.date}
 				</td>
+			</tr>
 			<tr>
-			<td class="gc_left">
-				{if isset($line.image) and $line.image != ''}
-					<a href="../games/games_detail.php?game_id={$line.game_id}" class="links_addnew_link">
-					<img src="../../includes/show_image.php?file={$line.image}&amp;resize=160,null,null,null" alt="{$line.game}" class="user_stats_img_dark">
-					</a>
-				{/if}
-				<br>
-				Joined: {$line.user_joindate}
-				<br>
-				Game Comments: <a href="../games/games_comment.php?c_counter={$links.v_counter}&amp;users_id={$line.users_id}&amp;view=users_comments" class="links_addnew_link">{$line.user_comment_nr}</a>
-				<br>
-				Game Submissions: {$line.usersubmit_number}
-				<br>
-				Karma: {$line.karma}
-			</td>
-			<td class="gc_center">
-				{$line.comment}
-				<br>
-				<br>
-				{if $line.email != ''}
+				<td class="gc_left">
+					{if isset($line.image) and $line.image != ''}
+						<a href="../games/games_detail.php?game_id={$line.game_id}" class="links_addnew_link">
+						<img src="../../includes/show_image.php?file={$line.image}&amp;resize=160,null,null,null" alt="{$line.game}" class="user_stats_img_dark">
+						</a>
+					{/if}
+					<br>
+					Joined: {$line.user_joindate}
+					<br>
+					Game Comments: <a href="../games/games_comment.php?c_counter={$links.v_counter}&amp;users_id={$line.users_id}&amp;view=users_comments" class="links_addnew_link">{$line.user_comment_nr}</a>
+					<br>
+					Game Submissions: {$line.usersubmit_number}
+					<br>
+					Karma: {$line.karma}
+				</td>
+				<td class="gc_center">
+					{$line.comment}
+					<br>
+					<br>
+					{if $line.email != ''}
 					<a href="mailto:{$line.email}?subject=Comment%20of%20{$line.game|escape:'url'}%20at%20Atari%20Legend" class="links_addnew_link">
 					<b>EMAIL</b>
 					</a>
 					 ---
-				{/if}
-				<a href="../games/games_comment_edit.php?game_user_comments_id={$line.game_user_comments_id}{$links.users_comments}&amp;v_counter={$links.v_counter}" class="links_addnew_link">
-					<b>EDIT</b>
-				</a>
-				 ---
-				<a href="#" onClick="commentdelete({$line.comment_id},{$line.users_id})" style="cursor: pointer;" class="links_addnew_link">
-					<b>DELETE</b>
-				</a>
-				---
-				<a href="#top" class="links_addnew_link"><b>BACK TO TOP</b></a>
-			</td>
-			</tr>
+					{/if}
+					<a href="../games/games_comment_edit.php?game_user_comments_id={$line.game_user_comments_id}{$links.users_comments}&amp;v_counter={$links.v_counter}" class="links_addnew_link">
+						<b>EDIT</b>
+					</a>
+					 ---
+					<a href="#" onClick="commentdelete({$line.comment_id},{$line.users_id})" style="cursor: pointer;" class="links_addnew_link">
+						<b>DELETE</b>
+					</a>
+					---
+					<a href="#top" class="links_addnew_link"><b>BACK TO TOP</b></a>
+				</td>
+			</tr>		
 		{/foreach}
 		</table>
 		{* END NEW COMMENT BOX *}
@@ -113,6 +114,11 @@ function commentdelete(JScomID,JSusers_id)
 		{if $links.linknext != ''}
 			<a href="../games/games_comment.php{$links.linknext}" class="standard_tile_link">Next Comments</a>
 		{/if}
+	</div>	
+	<br>
+	<br>
+	<div class="standard_table_center">
+		<div class="standard_table_center"><a href="javascript:history.go(-1)" class="standard_tile_link">back</a></div>
 	</div>	
 	<br>	
 </div>				

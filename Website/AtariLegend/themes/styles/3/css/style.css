@@ -2672,6 +2672,42 @@ Games screenshots add
   margin-bottom: 20px;
   float: left; }
 
+/*---------------------------------------------------------- 
+Games boxscans add
+------------------------------------------------------------ */
+#games_boxscan {
+  margin-top: 0;
+  margin-bottom: 20px;
+  float: left; }
+
+#quick_search_game_box_add {
+  margin-top: 0;
+  margin-bottom: 20px;
+  float: left; }
+
+#leftnav_position_game_box_add {
+  margin-top: 0;
+  margin-bottom: 20px;
+  float: left; }
+
+/*---------------------------------------------------------- 
+Games similar add
+------------------------------------------------------------ */
+#games_similar {
+  margin-top: 0;
+  margin-bottom: 20px;
+  float: left; }
+
+#quick_search_game_similar_add {
+  margin-top: 0;
+  margin-bottom: 20px;
+  float: left; }
+
+#leftnav_position_game_similar_add {
+  margin-top: 0;
+  margin-bottom: 20px;
+  float: left; }
+
 /* --> Games section */
 /*************************************************************/
 /**********************PICASSO SKIN***************************/
@@ -3335,6 +3371,18 @@ Games screenshots add
 ------------------------------------------------------------ */
 @media screen and (max-width: 480px) {
   #leftnav_position_game_screenshot_add {
+    margin-bottom: 20px; } }
+/*---------------------------------------------------------- 
+Games boxscans add
+------------------------------------------------------------ */
+@media screen and (max-width: 480px) {
+  #leftnav_position_game_box_add {
+    margin-bottom: 20px; } }
+/*---------------------------------------------------------- 
+Games similar add
+------------------------------------------------------------ */
+@media screen and (max-width: 480px) {
+  #leftnav_position_game_similar_add {
     margin-bottom: 20px; } }
 /*---------------------------------------------------------- 
 Admin - DB updates

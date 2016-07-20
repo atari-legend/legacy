@@ -8,7 +8,9 @@
  *	 actual update        : Creation of file
  *
  *   Id: games_detail.php,v 0.10 2005/10/06 17:41 Zombieman
- *   Id: games_detail.php,v 0.10 2015/11/01 11:11 STG
+ *   Id: games_detail.php,v 0.20 2015/11/01 11:11 STG
+ *   Id: games_detail.php,v 0.21 2016/07/20 22:49 STG
+ *					- added nr of comments check
  *
  ***************************************************************************/
 
@@ -352,6 +354,14 @@ $numbermag = $mysqli->query("SELECT count(*) as count FROM magazine_game WHERE g
 $array = $numbermag->fetch_array(MYSQLI_BOTH);
 
 $smarty->assign("nr_magazines",$array['count']); 
+
+$number_comments = $mysqli->query("SELECT count(*) as count FROM game_user_comments WHERE game_id = '$game_id'")
+				or die ("couldn't get number of comments");
+
+$array = $number_comments->fetch_array(MYSQLI_BOTH);
+
+$smarty->assign("nr_comments",$array['count']); 
+
 
 $smarty->assign("game_id",$game_id);
 $smarty->assign("user_id",$_SESSION['user_id']);
