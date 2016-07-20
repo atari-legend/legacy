@@ -242,8 +242,10 @@ function browseDeveloper(str) {
 				<a href="../games/games_box.php?game_id={$game_info.game_id}&amp;game_name={$game_info.game_name}" class="left_nav_link">Add boxscans</a><br>
 				<a href="../games/games_similar.php?game_id={$game_info.game_id}&amp;game_name={$game_info.game_name}" class="left_nav_link">Add Similar Games</a><br>
 				<a href="../administration/construction.php" class="left_nav_link">Write a review</a><br>
-				<br/>
-				<a href="../administration/construction.php" class="left_nav_link">Moderate comments</a>
+				{if $nr_comments > 0}		
+					<br>
+					<a href="../games/games_comment.php?game_id={$game_info.game_id}&amp;view=game_comments" class="left_nav_link">Moderate comments</a>
+				{/if}
 			</fieldset>
 			<br>
 			<fieldset>
@@ -266,8 +268,10 @@ function browseDeveloper(str) {
 				<a href="../games/games_box.php?game_id={$game_info.game_id}&amp;game_name={$game_info.game_name}" class="left_nav_link">Add boxscans</a><br>
 				<a href="../games/games_similar.php?game_id={$game_info.game_id}&amp;game_name={$game_info.game_name}" class="left_nav_link">Add Similar Games</a><br>
 				<a href="../administration/construction.php" class="left_nav_link">Write a review</a><br>
-				<br/>
-				<a href="../administration/construction.php" class="left_nav_link">Moderate comments</a>
+				{if $nr_comments > 0}		
+					<br>
+					<a href="../administration/construction.php" class="left_nav_link">Moderate comments</a>
+				{/if}
 			</fieldset>
 		</div>
 		<div id="gd_other_features_right">
@@ -519,7 +523,7 @@ function browseDeveloper(str) {
 		</div>
 		<div id="gd_bottom">
 			<div id="gd_back">
-				<div class="standard_table_center"><a href="../games/games_main.php" class="standard_tile_link">back</a></div>
+				<div class="standard_table_center"><a href="javascript:history.go(-1)" class="standard_tile_link">back</a></div>
 			</div>
 		</div>
 	</div>

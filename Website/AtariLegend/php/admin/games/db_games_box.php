@@ -6,10 +6,11 @@
 *   copyright            : (C) 2005 Atari Legend
 *   email                : silversurfer@atari-forum.com
 *   actual update        : re-creation of code from scratch into new file.
-*						  
-*							
+*						  				
 *
 *   Id: db_games_box.php,v 1.10 2005/11/19 Silver Surfer
+*   Id: db_games_box.php,v 1.20 2016/07/20 ST Graveyard
+*							- AL 2.0
 *
 ***************************************************************************/
 
@@ -60,7 +61,9 @@ for($i=1; $i <= 1; $i++)
 			 $sdbquery = $mysqli->query("INSERT INTO game_box_couples (game_boxscan_id, game_boxscan_cross) VALUES ('$frontscan_id', '$backbox_id')");
 			 // @Dal, notice I use $filename instead of $file_data
 			 // Rename the uploaded file to its autoincrement number and move it to its proper place.
-			 $file_data = rename("$filename", "$game_boxscan_path$backbox[0].jpg");
+			 $file_data = rename("$filename", "$game_boxscan_save_path$backbox[0].jpg");
+			 
+			 $_SESSION['edit_message'] = "Back scan uploaded";
 	
 			chmod("$game_boxscan_path$backbox[0].jpg", 0777);
 		}
@@ -79,7 +82,9 @@ for($i=1; $i <= 1; $i++)
 			$box_id = $boxCover[0];
 			// @Dal, notice I use $filename instead of $file_data
 			 // Rename the uploaded file to its autoincrement number and move it to its proper place.
-			 $file_data = rename("$filename", "$game_boxscan_path$boxCover[0].jpg");
+			 $file_data = rename("$filename", "$game_boxscan_save_path$boxCover[0].jpg");
+			 
+			 $_SESSION['edit_message'] = "Front scan uploaded";
 			 
 			 chmod("$game_boxscan_path$boxCover[0].jpg", 0777);
 	
@@ -111,7 +116,8 @@ else
 	$sql = $mysqli->query("DELETE FROM game_box_couples WHERE game_boxscan_id = '$game_boxscan_id'");
 }
 
-unlink ("$game_boxscan_path$game_boxscan_id.jpg");
+unlink ("$game_boxscan_save_path$game_boxscan_id.jpg");
+$_SESSION['edit_message'] = "Scan deleted";
 
 mysqli_free_result(); 
 header("Location: ../games/games_box.php?game_id=$game_id");

@@ -2606,6 +2606,42 @@ Games screenshots add
   margin-bottom: 30px;
   float: left; }
 
+/*---------------------------------------------------------- 
+Games boxscans add
+------------------------------------------------------------ */
+#games_boxscan {
+  margin-top: -40px;
+  margin-bottom: 30px;
+  float: left; }
+
+#quick_search_game_box_add {
+  margin-top: -40px;
+  margin-bottom: 30px;
+  float: left; }
+
+#leftnav_position_game_box_add {
+  margin-top: -40px;
+  margin-bottom: 30px;
+  float: left; }
+
+/*---------------------------------------------------------- 
+Games similar add
+------------------------------------------------------------ */
+#games_similar {
+  margin-top: -40px;
+  margin-bottom: 30px;
+  float: left; }
+
+#quick_search_game_similar_add {
+  margin-top: -40px;
+  margin-bottom: 30px;
+  float: left; }
+
+#leftnav_position_game_similar_add {
+  margin-top: -40px;
+  margin-bottom: 30px;
+  float: left; }
+
 /* --> Games section */
 /*************************************************************/
 /**********************TOS 207 SKIN***************************/
@@ -3232,6 +3268,36 @@ Games screenshots add
     margin-top: 20px; } }
 @media screen and (max-width: 480px) {
   #leftnav_position_game_screenshot_add {
+    margin-top: 0; } }
+/*---------------------------------------------------------- 
+Games boxscans add
+------------------------------------------------------------ */
+@media screen and (max-width: 1279px) {
+  #leftnav_position_game_box_add {
+    margin-top: 20px; }
+
+  #quick_search_game_box_add {
+    margin-top: 20px; }
+
+  #games_boxscan {
+    margin-top: 20px; } }
+@media screen and (max-width: 480px) {
+  #leftnav_position_game_box_add {
+    margin-top: 0; } }
+/*---------------------------------------------------------- 
+Games similar add
+------------------------------------------------------------ */
+@media screen and (max-width: 1279px) {
+  #leftnav_position_game_similar_add {
+    margin-top: 20px; }
+
+  #quick_search_game_similar_add {
+    margin-top: 20px; }
+
+  #games_similar {
+    margin-top: 20px; } }
+@media screen and (max-width: 480px) {
+  #leftnav_position_game_similar_add {
     margin-top: 0; } }
 /*---------------------------------------------------------- 
 Magazine review score

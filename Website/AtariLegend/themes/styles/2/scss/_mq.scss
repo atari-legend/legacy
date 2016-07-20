@@ -520,6 +520,35 @@ Games screenshots add
 	#leftnav_position_game_screenshot_add{ margin-top: 0;}
 }
 
+
+/*---------------------------------------------------------- 
+Games boxscans add
+------------------------------------------------------------ */
+@media screen and (max-width: 1279px) { 
+	#leftnav_position_game_box_add{margin-top: 20px;}
+	#quick_search_game_box_add{margin-top: 20px;}
+	#games_boxscan{margin-top: 20px;}
+}
+
+@media screen and (max-width: 480px) { 
+	#leftnav_position_game_box_add{ margin-top: 0;}
+}
+
+
+/*---------------------------------------------------------- 
+Games similar add
+------------------------------------------------------------ */
+@media screen and (max-width: 1279px) { 
+	#leftnav_position_game_similar_add{margin-top: 20px;}
+	#quick_search_game_similar_add{margin-top: 20px;}
+	#games_similar{margin-top: 20px;}
+}
+
+@media screen and (max-width: 480px) { 
+	#leftnav_position_game_similar_add{ margin-top: 0;}
+}
+
+
 /*---------------------------------------------------------- 
 Magazine review score
 ------------------------------------------------------------ */

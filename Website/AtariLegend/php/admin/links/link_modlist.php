@@ -91,6 +91,7 @@ while  ($rowlink = $LINKSQL->fetch_array(MYSQLI_BOTH))
 				  'website_image' => $website_image,
 				  'timestamp' => $timestamp,
 				  'submitted' => $submitted,
+				  'user_id' => $rowlink['user_id'],
 				  'website_imgext' => $rowlink['website_imgext']));
 }
 
