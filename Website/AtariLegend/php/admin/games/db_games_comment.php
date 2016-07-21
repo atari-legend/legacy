@@ -8,6 +8,8 @@
 *   actual update        : re-creation of code from scratch into new file.
 *						  
 *   Id: db_games_comment.php,v 1.10 2005/09/19 Silver Surfer
+*   Id: db_games_comment.php,v 1.15 2016/07/21 STG
+*				- AL 2.0 : added messages
 *
 ***************************************************************************/
 
@@ -24,11 +26,8 @@ if($action=="edit_games_comment")
 	//**************************************************************************************** 
 
 	if (isset($comment_text) and isset($comment_id))
-	{
-		echo $comment_text; 
-		echo $comment_id;
-		echo $v_counter;
-		$commentquery = $mysqli->query("UPDATE comments SET comment='$comment_text' WHERE comments_id='$comment_id'") or die("couldn't update comments table");
+	{	
+		$mysqli->query("UPDATE comments SET comment='$comment_text' WHERE comments_id='$comment_id'") or die("couldn't update comments table");
 		$_SESSION['edit_message'] = "Comment edited";
 	}
 
