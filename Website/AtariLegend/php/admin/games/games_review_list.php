@@ -1,13 +1,15 @@
 <?php
 /***************************************************************************
-*                                games_review.php
+*                                games_review_list.php
 *                            --------------------------
 *   begin                : Sunday, November 27, 2005
 *   copyright            : (C) 2005 Atari Legend
 *   email                : admin@atarilegend.com
 *						   Created file
 *						
-*   Id: games_review.php,v 0.10 2005/11/27 ST Graveyard
+*   Id: games_review_list.php,v 0.10 2005/11/27 ST Graveyard
+*   Id: games_review_list.php,v 0.20 2016/07/24 ST Graveyard
+*						- AL 2.0
 *
 ***************************************************************************/
 
@@ -115,6 +117,9 @@ if (isset($action) and $action == 'search')
 				
 				$smarty->assign("user_id",$_SESSION['user_id']);
 				
+				$smarty->assign('quick_search_games', 'quick_search_game_review_list');
+				$smarty->assign('left_nav', 'leftnav_position_game_review_list');
+				
 				//Send all smarty variables to the templates
 				$smarty->display("file:".$cpanel_template_folder."games_review_list.html");
 
@@ -123,9 +128,12 @@ if (isset($action) and $action == 'search')
 			}	
 			else
 			{
-				$smarty->assign("message","No entries for your query!");
+				$_SESSION['edit_message'] = "No entries for your query!";
 		
 				$smarty->assign("user_id",$_SESSION['user_id']);
+				
+				$smarty->assign('quick_search_games', 'quick_search_game_review_list');
+				$smarty->assign('left_nav', 'leftnav_position_game_review_list');
 
 				//Send all smarty variables to the templates
 				$smarty->display("file:".$cpanel_template_folder."games_review.html");

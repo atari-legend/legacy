@@ -527,6 +527,77 @@ Games similar add
 	#leftnav_position_game_similar_add{ margin-top: 0;}
 }
 
+/*---------------------------------------------------------- 
+Games review main
+------------------------------------------------------------ */
+@media screen and (max-width: 480px) { 
+	#leftnav_position_game_review{ margin-top: 0;}
+}
+
+@media screen and (max-width: 500px) { 
+	#nrreviews_gr_th, .nrreviews_gr_td{ display: none;}
+}
+
+@media screen and (max-width: 600px) { 
+	#username_gr_th, .username_gr_td{ display: none;}
+}
+
+@media screen and (max-width: 1100px) { 
+	#reviewdate_gr_th, .reviewdate_gr_td{ display: none;}
+}
+
+@media screen and (max-width: 1750px) { 
+	#gamepub_gr_th, .gamepub_gr_td{ display: none;}
+}
+
+/*---------------------------------------------------------- 
+Games review add
+------------------------------------------------------------ */
+@media screen and (max-width: 480px) { 
+	#leftnav_position_game_review_add{ margin-top: 0;}
+}
+
+/*---------------------------------------------------------- 
+Games review edit
+------------------------------------------------------------ */
+@media screen and (max-width: 480px) { 
+	#leftnav_position_game_review_edit{ margin-top: 0;}
+}
+
+/*---------------------------------------------------------- 
+Games review preview
+------------------------------------------------------------ */
+@media screen and (max-width: 480px) { 
+	#leftnav_position_game_review_preview{ margin-top: 0;}
+}
+
+
+@media screen and (max-width: 1199px) { 
+	.review_container {
+	  flex-direction: column; 
+	}	
+		
+	#review_screenshots,#review_text{width:100%; float:left;}
+
+	.review_container >div {
+		width:100%;
+		}
+		
+	.review_child {
+			display: block;
+			margin: 0 auto;
+		}
+		
+	.review_screenshot_order{display:inline-block; vertical-align:top;}
+}
+
+
+/*---------------------------------------------------------- 
+Games review list
+------------------------------------------------------------ */
+@media screen and (max-width: 480px) { 
+	#leftnav_position_game_review_list{ margin-top: 0;}
+}
 
 
 /*---------------------------------------------------------- 

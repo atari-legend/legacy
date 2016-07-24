@@ -591,7 +591,7 @@ From a width of 801 we will be having rows of 3 tiles
   border: 1px solid #b2b2b2;
   text-align: left; }
 
-.standard_tile_input_area {
+.standard_tile_input_area, #game_review_textfield, #game_review_screenshot_text {
   background: #666666;
   color: #ffffff;
   width: 90%;
@@ -701,7 +701,7 @@ From a width of 801 we will be having rows of 3 tiles
   padding: 20px; }
 
 .standard_tile select {
-  background-color: black;
+  background-color: #666666;
   border: 1px solid #b2b2b2;
   color: #ffffff;
   margin-top: 5px;
@@ -2708,6 +2708,152 @@ Games similar add
   margin-bottom: 20px;
   float: left; }
 
+/*---------------------------------------------------------- 
+Games review main
+------------------------------------------------------------ */
+#games_review {
+  margin-top: 0;
+  margin-bottom: 20px;
+  float: left; }
+
+#quick_search_game_review {
+  margin-top: 0;
+  margin-bottom: 20px;
+  float: left; }
+
+#leftnav_position_game_review {
+  margin-top: 0;
+  margin-bottom: 20px;
+  float: left; }
+
+#gamename_gr_th {
+  width: 35%;
+  text-align: left; }
+
+#username_gr_th, #gamepub_gr_th, #reviewdate_gr_th {
+  width: 20%;
+  text-align: left; }
+
+#nrreviews_gr_th {
+  width: 5%;
+  text-align: left; }
+
+.gamename_gr_td {
+  width: 35%;
+  padding-left: 2px; }
+
+.username_gr_td, .gamepub_gr_td, .reviewdate_gr_td {
+  width: 20%;
+  padding-left: 2px; }
+
+.nrreviews_gr_td {
+  width: 5%;
+  padding-left: 2px; }
+
+/*---------------------------------------------------------- 
+Games review add
+------------------------------------------------------------ */
+#game_review_textfield {
+  width: 99%;
+  height: 450px; }
+
+#game_review_screenshot_text {
+  width: 75%;
+  height: 75px; }
+
+#games_review_add {
+  margin-top: 0;
+  margin-bottom: 20px;
+  float: left; }
+
+#quick_search_game_review_add {
+  margin-top: 0;
+  margin-bottom: 20px;
+  float: left; }
+
+#leftnav_position_game_review_add {
+  margin-top: 0;
+  margin-bottom: 20px;
+  float: left; }
+
+/*---------------------------------------------------------- 
+Games review edit
+------------------------------------------------------------ */
+#games_review_edit {
+  margin-top: 0;
+  margin-bottom: 20px;
+  float: left; }
+
+#quick_search_game_review_edit {
+  margin-top: 0;
+  margin-bottom: 20px;
+  float: left; }
+
+#leftnav_position_game_review_edit {
+  margin-top: 0;
+  margin-bottom: 20px;
+  float: left; }
+
+/*---------------------------------------------------------- 
+Games review preview
+------------------------------------------------------------ */
+#games_review_preview {
+  margin-top: 0;
+  margin-bottom: 20px;
+  float: left; }
+
+#quick_search_game_review_preview {
+  margin-top: 0;
+  margin-bottom: 20px;
+  float: left; }
+
+#leftnav_position_game_review_preview {
+  margin-top: 0;
+  margin-bottom: 20px;
+  float: left; }
+
+.review_container {
+  display: flex;
+  align-items: flex-start;
+  display: table;
+  width: 100%; }
+
+.review_child table {
+  width: 98%; }
+
+#review_text {
+  display: table-cell;
+  width: 70%;
+  vertical-align: top; }
+
+#review_screenshots {
+  display: table-cell;
+  width: 30%;
+  text-align: center; }
+
+.review_screenshot_order {
+  width: 170px;
+  margin: auto;
+  font-size: 9pt; }
+
+/*---------------------------------------------------------- 
+Games review list
+------------------------------------------------------------ */
+#games_review_list {
+  margin-top: 0;
+  margin-bottom: 20px;
+  float: left; }
+
+#quick_search_game_review_list {
+  margin-top: 0;
+  margin-bottom: 20px;
+  float: left; }
+
+#leftnav_position_game_review_list {
+  margin-top: 0;
+  margin-bottom: 20px;
+  float: left; }
+
 /* --> Games section */
 /*************************************************************/
 /**********************PICASSO SKIN***************************/
@@ -3383,6 +3529,66 @@ Games similar add
 ------------------------------------------------------------ */
 @media screen and (max-width: 480px) {
   #leftnav_position_game_similar_add {
+    margin-bottom: 20px; } }
+/*---------------------------------------------------------- 
+Games review main
+------------------------------------------------------------ */
+@media screen and (max-width: 480px) {
+  #leftnav_position_game_review {
+    margin-bottom: 20px; } }
+@media screen and (max-width: 500px) {
+  #nrreviews_gr_th, .nrreviews_gr_td {
+    display: none; } }
+@media screen and (max-width: 600px) {
+  #username_gr_th, .username_gr_td {
+    display: none; } }
+@media screen and (max-width: 1100px) {
+  #reviewdate_gr_th, .reviewdate_gr_td {
+    display: none; } }
+@media screen and (max-width: 1750px) {
+  #gamepub_gr_th, .gamepub_gr_td {
+    display: none; } }
+/*---------------------------------------------------------- 
+Games review add
+------------------------------------------------------------ */
+@media screen and (max-width: 480px) {
+  #leftnav_position_game_review_add {
+    margin-bottom: 20px; } }
+/*---------------------------------------------------------- 
+Games review edit
+------------------------------------------------------------ */
+@media screen and (max-width: 480px) {
+  #leftnav_position_game_review_edit {
+    margin-bottom: 20px; } }
+/*---------------------------------------------------------- 
+Games review preview
+------------------------------------------------------------ */
+@media screen and (max-width: 480px) {
+  #leftnav_position_game_review_preview {
+    margin-top: 20; } }
+@media screen and (max-width: 1199px) {
+  .review_container {
+    flex-direction: column; }
+
+  #review_screenshots, #review_text {
+    width: 100%;
+    float: left; }
+
+  .review_container > div {
+    width: 100%; }
+
+  .review_child {
+    display: block;
+    margin: 0 auto; }
+
+  .review_screenshot_order {
+    display: inline-block;
+    vertical-align: top; } }
+/*---------------------------------------------------------- 
+Games review list
+------------------------------------------------------------ */
+@media screen and (max-width: 480px) {
+  #leftnav_position_game_review_list {
     margin-bottom: 20px; } }
 /*---------------------------------------------------------- 
 Admin - DB updates

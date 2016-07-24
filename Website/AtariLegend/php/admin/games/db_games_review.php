@@ -8,6 +8,8 @@
 *   actual update        : created this page
 *
 *   Id: games_review_add.php,v 0.10 2005/11/27 Gatekeeper
+*   Id: games_review_add.php,v 0.15 2016/07/24 Gatekeeper
+*				- AL 2.0
 *
 ***************************************************************************/
 
@@ -27,7 +29,7 @@ if (isset($action) and $action  == 'add_review' )
 	
 	$date = date_to_timestamp($Date_Year,$Date_Month,$Date_Day);
 
-	$sdbquery = $mysqli->query("INSERT INTO review_main (member_id, review_text, review_date) VALUES ($members, '$textfield', '$date')")
+	$sdbquery = $mysqli->query("INSERT INTO review_main (user_id, review_text, review_date) VALUES ($members, '$textfield', '$date')")
 				or die("Couldn't insert into review_main");
 	
 	//get the id of the inserted review
@@ -82,6 +84,8 @@ if (isset($action) and $action  == 'add_review' )
 			}
 			$i++;
 		}
+		$_SESSION['edit_message'] = "Review added to DB";
+		
 		header("Location: ../games/games_review_add.php?game_id=$game_id");
 }
 

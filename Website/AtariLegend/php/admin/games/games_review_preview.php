@@ -7,6 +7,8 @@
 *   email                : admin@atarilegend.com
 *
 *   Id: games_review_preview.php,v 0.10 2005/12/03 17:40 ST Graveyard
+*   Id: games_review_preview.php,v 0.15 2016/07/24 00:02 ST Graveyard
+*				-AL 2.0
 *
 ***************************************************************************/
 
@@ -18,11 +20,14 @@
 include("../../includes/common.php");
 include("../../includes/admin.php");
 
+//load the search fields of the quick search side menu
+include("../../includes/quick_search_games.php"); 
+
 $sql_review = $mysqli->query("SELECT * FROM game
 						   LEFT JOIN review_game ON (game.game_id = review_game.game_id)
 						   LEFT JOIN review_main ON (review_game.review_id = review_main.review_id)
 						   LEFT JOIN review_score ON (review_main.review_id = review_score.review_id)
-						   LEFT JOIN users ON (review_main.member_id = users.user_id)
+						   LEFT JOIN users ON (review_main.user_id = users.user_id)
 						   WHERE game.game_id = '$game_id' AND review_game.review_id = '$review_id' 
 						   AND review_main.review_edit = '0'") 
 			  or die("Error - Couldn't query review data");
@@ -58,6 +63,8 @@ $query_screenshots = $mysqli->query("SELECT * FROM review_main
 								LEFT JOIN review_comments ON (screenshot_review.screenshot_review_id = review_comments.screenshot_review_id)
 								WHERE review_main.review_id = '$review_id' AND review_main.review_edit = '0'");
 
+$count = 1;
+
 while ($sql_screenshots = $query_screenshots->fetch_array(MYSQLI_BOTH))
 {
 	$new_path = $game_screenshot_path;
@@ -68,10 +75,15 @@ while ($sql_screenshots = $query_screenshots->fetch_array(MYSQLI_BOTH))
 	
 	$smarty->append('screenshots',
 	    		  array('screenshot' => $new_path,
+						'count' => $count,
 			 		    'comment' => $sql_screenshots['comment_text'])); 
+	$count++;
 }
 
 $smarty->assign('game_id', $game_id);
+
+$smarty->assign('quick_search_games', 'quick_search_game_review_preview');
+$smarty->assign('left_nav', 'leftnav_position_game_review_preview');
 
 //Send all smarty variables to the templates
 $smarty->display("file:".$cpanel_template_folder."games_review_preview.html");
