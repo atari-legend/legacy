@@ -8,6 +8,8 @@
 *   actual update        : created this page
 *
 *   Id: games_review_add.php,v 0.10 2005/11/27 Gatekeeper
+*   Id: games_review_add.php,v 0.20 2016/07/23 ST Graveyard
+*						- AL 2.0 update
 *
 ***************************************************************************/
 
@@ -20,6 +22,7 @@ This is the game review page where you add a review to the db
 //load all common functions
 include("../../includes/common.php");
 include("../../includes/admin.php");
+include("../../includes/quick_search_games.php");
 
 //get the name of the game
 $sql_game = $mysqli->query("SELECT * FROM game WHERE game_id='$game_id'")
@@ -46,10 +49,10 @@ while ( $authors=$sql_author->fetch_array(MYSQLI_BOTH) )
 //get the reviews of the game	
 $sql_review = $mysqli->query("SELECT * FROM review_game 
  					  	   LEFT JOIN review_main ON (review_game.review_id = review_main.review_id)
-	   					   LEFT JOIN users ON (review_main.member_id = users.user_id)
+	   					   LEFT JOIN users ON (review_main.user_id = users.user_id)
 	   					   WHERE review_game.game_id='$game_id' ORDER BY review_game.review_id")
 			  or die ("Database error - selecting review");
-$i=1;
+$i=0;
 while ($review=$sql_review->fetch_array(MYSQLI_BOTH)) 
 {
 	$i++;
@@ -81,6 +84,9 @@ while ($screenshots=$sql_screenshots->fetch_array(MYSQLI_BOTH))
 }
 
 $smarty->assign("screenshots_nr",$i);
+
+$smarty->assign('quick_search_games', 'quick_search_game_review_add');
+$smarty->assign('left_nav', 'leftnav_position_game_review_add');
 
 $smarty->assign("user_id",$_SESSION['user_id']);
 

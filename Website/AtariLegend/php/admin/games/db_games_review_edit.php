@@ -7,6 +7,8 @@
 *   email                : maarten.martens@freebel.net
 *
 *   Id: games_review_edit.php,v 0.10 2004/12/04 23:34 ST Graveyard
+*   Id: games_review_edit.php,v 0.15 2016/07/23 23:56 ST Graveyard
+*					- AL 2.0
 *
 ***************************************************************************/
 
@@ -33,8 +35,10 @@ if (isset($action) and $action == 'delete_comment')
 	
 	//delete the screenshot linked to the review
 	$sdbquery = $mysqli->query("DELETE FROM screenshot_review WHERE review_id = $reviewid AND screenshot_id = $screenshot_id") or die ("failed deleting screenshot_review");
+	
+	$_SESSION['edit_message'] = "Comment deleted";
 
-header("Location: ../games/games_review_edit.php?reviewid=$reviewid&game_id=$game_id");
+	header("Location: ../games/games_review_edit.php?reviewid=$reviewid&game_id=$game_id");
 }
 
 if (isset($action) and $action == 'delete_review')
@@ -53,8 +57,10 @@ if (isset($action) and $action == 'delete_review')
 	}
 
 	$sql = $mysqli->query("DELETE FROM screenshot_review WHERE review_id = '$reviewid' ") or die ("deletion screenshot failed");
+	
+	$_SESSION['edit_message'] = "Review deleted";
 
-header("Location: ../games/games_review_add.php?game_id=$game_id");
+	header("Location: ../games/games_review_add.php?game_id=$game_id");
 }
 
 if ($action == 'edit_review')
@@ -65,7 +71,7 @@ if ($action == 'edit_review')
 
 	$textfield = addslashes($textfield);
 
-	$sdbquery = $mysqli->query("UPDATE review_main set member_id = '$members', review_text = '$textfield', review_date = '$date', review_edit = '0'
+	$sdbquery = $mysqli->query("UPDATE review_main set user_id = '$members', review_text = '$textfield', review_date = '$date', review_edit = '0'
 				 			 WHERE review_id = '$reviewid'") or die("Couldn't update review_main");
 
 	//check if comment already exists for this shot
@@ -153,21 +159,24 @@ if ($action == 'edit_review')
 			}
 			$i++;
 		}
-header("Location: ../games/games_review_edit.php?reviewid=$reviewid&game_id=$game_id");
+		
+		$_SESSION['edit_message'] = "Review updated";
+	
+		header("Location: ../games/games_review_edit.php?reviewid=$reviewid&game_id=$game_id");
 }
 
 if (isset($action) and $action == 'move_to_comment')
 {
 
-$sql_edit_REVIEW = $mysqli->query("SELECT * FROM review_main WHERE review_id = $reviewid")
+	$sql_edit_REVIEW = $mysqli->query("SELECT * FROM review_main WHERE review_id = $reviewid")
 				   or die ("Database error - selecting review data");
 
 	$edit_review=$sql_edit_REVIEW->fetch_array(MYSQLI_BOTH); 
 
-	
-	$review_text = $mysqli->mysqli_real_escape_string($edit_review['review_text']);
+		
+	$review_text = $mysqli->real_escape_string($edit_review['review_text']);
 	$review_timestamp = $edit_review['review_date'];
-	$review_user_id = $edit_review['member_id'];
+	$review_user_id = $edit_review['user_id'];
 
 		$sql = $mysqli->query("INSERT INTO comments (comment,timestamp,user_id) VALUES ('$review_text','$review_timestamp','$review_user_id')") 
 					or die("something is wrong with INSERT mysql3");
@@ -188,8 +197,10 @@ $sql_edit_REVIEW = $mysqli->query("SELECT * FROM review_main WHERE review_id = $
 	}
 
 	$sql = $mysqli->query("DELETE FROM screenshot_review WHERE review_id = '$reviewid' ") or die ("deletion screenshot failed");
+	
+	$_SESSION['edit_message'] = "Review converted to comment";
 
-header("Location: ../games/games_review_add.php?game_id=$game_id");
+	header("Location: ../games/games_review_add.php?game_id=$game_id");
 }
 
 ?>

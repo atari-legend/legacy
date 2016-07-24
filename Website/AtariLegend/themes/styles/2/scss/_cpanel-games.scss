@@ -204,3 +204,67 @@ Games similar add
 #games_similar{ margin-top: -40px; margin-bottom: 30px; float: left;}
 #quick_search_game_similar_add{ margin-top: -40px; margin-bottom: 30px; float: left;}
 #leftnav_position_game_similar_add{ margin-top: -40px; margin-bottom: 30px; float: left;}
+
+/*---------------------------------------------------------- 
+Games review main
+------------------------------------------------------------ */	
+#games_review{ margin-top: -40px; margin-bottom: 30px; float: left;}
+#quick_search_game_review{ margin-top: -40px; margin-bottom: 30px; float: left;}
+#leftnav_position_game_review{ margin-top: -40px; margin-bottom: 30px; float: left;}
+
+#gamename_gr_th{width:35%; text-align: left;}
+#username_gr_th,#gamepub_gr_th, #reviewdate_gr_th{width:20%; text-align: left;}
+#nrreviews_gr_th{width:5%; text-align: left;}
+
+.gamename_gr_td{width:35%; padding-left: 2px;}
+.username_gr_td,.gamepub_gr_td, .reviewdate_gr_td{width:20%; padding-left: 2px;}
+.nrreviews_gr_td{width:5%; padding-left: 2px;}
+
+
+/*---------------------------------------------------------- 
+Games review add
+------------------------------------------------------------ */	
+#game_review_textfield { @extend .standard_tile_input_area;
+							width: 99%; height: 450px;}
+							
+#game_review_screenshot_text { @extend .standard_tile_input_area;
+							width: 75%; height: 75px;}
+							
+#games_review_add{ margin-top: -40px; margin-bottom: 30px; float: left;}
+#quick_search_game_review_add{ margin-top: -40px; margin-bottom: 30px; float: left;}
+#leftnav_position_game_review_add{ margin-top: -40px; margin-bottom: 30px; float: left;}
+
+/*---------------------------------------------------------- 
+Games review edit
+------------------------------------------------------------ */								
+#games_review_edit{ margin-top: -40px; margin-bottom: 30px; float: left;}
+#quick_search_game_review_edit{ margin-top: -40px; margin-bottom: 30px; float: left;}
+#leftnav_position_game_review_edit{ margin-top: -40px; margin-bottom: 30px; float: left;}
+
+/*---------------------------------------------------------- 
+Games review preview
+------------------------------------------------------------ */	
+#games_review_preview{ margin-top: -40px; margin-bottom: 30px; float: left;}
+#quick_search_game_review_preview{ margin-top: -40px; margin-bottom: 30px; float: left;}
+#leftnav_position_game_review_preview{ margin-top: -40px; margin-bottom: 30px; float: left;}
+
+.review_container {
+  display: flex;
+  align-items: flex-start; 
+  display:table;
+  width:100%;
+ }
+ 
+.review_child  table { width:98%;}
+ 
+#review_text{display:table-cell;width:70%;vertical-align:top;}
+#review_screenshots{display:table-cell;width:30%;text-align:center;}
+
+.review_screenshot_order{width:170px;margin:auto;font-size:10.5pt;}
+
+/*---------------------------------------------------------- 
+Games review list
+------------------------------------------------------------ */								
+#games_review_list{ margin-top: -40px; margin-bottom: 30px; float: left;}
+#quick_search_game_review_list{ margin-top: -40px; margin-bottom: 30px; float: left;}
+#leftnav_position_game_review_list{ margin-top: -40px; margin-bottom: 30px; float: left;}

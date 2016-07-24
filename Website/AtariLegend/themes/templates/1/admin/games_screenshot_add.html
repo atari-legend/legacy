@@ -35,8 +35,8 @@ function delete_screenshot(screenshot_id, game_id)
     }
 }
 </script>
-<script src="../templates/0/js/lightbox.min.js"></script>
-<link href="../templates/0/css/lightbox.css" rel="stylesheet" />
+<script type="text/javascript" src="{$template_dir}includes/js/lightbox.min.js"></script>
+<link type="text/css" href="{$style_dir}css/lightbox.css" hreflang="en" rel="stylesheet">
 {/block}
 
 {block name=title}Game screenshots - <a href="../games/games_detail.php?game_id={$game_id}" class="left_nav_link">{$game_name}</a>{/block}
@@ -57,7 +57,7 @@ function delete_screenshot(screenshot_id, game_id)
 				{foreach from=$screenshots item=line name=screen}
 					<div style="display:inline-block;text-align:center;">
 						Image {$line.count}<br>
-						<a href="../../includes/show_image.php?file={$line.screenshot_image}&amp;resize=410,null,null,null" data-lightbox="image-1" data-title="{$game_name} - 	{$line.count}" class="left_nav_link">
+						<a href="../../includes/show_image.php?file={$line.screenshot_image}&amp;resize=410,null,null,null" data-lightbox="image-1" data-title="{$game_name} - 	{$line.count}">
 						<img src="../../includes/show_image.php?file={$line.screenshot_image}&amp;resize=75,null,null,null" width="75" alt="Click to enlarge!" class="user_stats_img" id="user_details_img_dark"></a>
 						<a href="javascript:delete_screenshot({$line.id},{$game_id})" class="standard_tile_link_black">Delete</a>  
 						<br>

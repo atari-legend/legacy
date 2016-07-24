@@ -15,6 +15,10 @@
 include("../../includes/common.php");
 include("../../includes/admin.php");
 
+
+//load the search fields of the quick search side menu
+include("../../includes/quick_search_games.php"); 
+
 /*
 ************************************************************************************************
 This is the game review main page
@@ -33,13 +37,16 @@ list($start2, $start3) = explode(":", exec('date +%N:%S'));
 					game.game_name, 
 					pub_dev.pub_dev_name, 
 					pub_dev.pub_dev_id, 
-					game_year.game_year
+					game_year.game_year,
+					users.userid,
+					review_main.review_date
 					FROM game
 					LEFT JOIN game_publisher ON ( game.game_id = game_publisher.game_id ) 
 					LEFT JOIN pub_dev ON ( game_publisher.pub_dev_id = pub_dev.pub_dev_id ) 
 					LEFT JOIN game_year ON ( game_year.game_id = game.game_id ) 
 					LEFT JOIN review_game ON ( review_game.game_id = game.game_id )
 					LEFT JOIN review_main ON ( review_main.review_id = review_game.review_id)
+					LEFT JOIN users ON ( review_main.user_id = users.user_id)
 					WHERE review_game.game_id IS NOT NULL ORDER BY review_main.review_date DESC";
 
 		
@@ -52,6 +59,7 @@ list($start2, $start3) = explode(":", exec('date +%N:%S'));
 				while ( $row = $games->fetch_array(MYSQLI_BOTH) ) 
 				{  
 					$i++;
+					$review_date = convert_timestamp($row['review_date']);
 				
 					//check how many reviews there are for the game
 					$number_revs = $mysqli->query("SELECT * FROM review_game WHERE game_id='$row[game_id]'")
@@ -63,7 +71,8 @@ list($start2, $start3) = explode(":", exec('date +%N:%S'));
 	   			 	 array('game_id' => $row['game_id'],
 						   'game_name' => $row['game_name'],
 						   'game_publisher' => $row['pub_dev_name'],
-						   'game_year' => $row['game_year'],
+						   'review_date' => $review_date,
+						   'username' => $row['userid'],
 						   'number_reviews' => $array_number));	
 				}
 			}
@@ -79,6 +88,9 @@ list($start2, $start3) = explode(":", exec('date +%N:%S'));
 	$smarty->assign('review_nr', $v_reviews);
 								  
 	$smarty->assign("user_id",$_SESSION['user_id']);
+	
+	$smarty->assign('quick_search_games', 'quick_search_game_review');
+	$smarty->assign('left_nav', 'leftnav_position_game_review');
 
 	//Send all smarty variables to the templates
 	$smarty->display("file:".$cpanel_template_folder."games_review.html");
