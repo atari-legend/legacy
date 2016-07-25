@@ -1,5 +1,26 @@
+{* 
+/***************************************************************************
+*                                games_series_main.html
+*                            -------------------------------
+*   begin                : ?
+*   copyright            : (C) 2005 Atari Legend
+*   email                : maarten.martens@freebel.net
+*   actual update        : created this page
+*
+*   Id: games_series_main.html,v 0.10 ? Silver Surfer
+*   Id: games_series_main.html,v 0.15 2016/07/24 STG
+*					- AL 2.0
+*
+***************************************************************************/
+
+************************************************************************************************
+The game series editor page
+************************************************************************************************
+*}
+
 {extends file='1/admin/frontpage.html'}
-{block name=javascript}
+
+{block name=java_script}
 <script type="text/javascript">
 function deleteseries()
 { 
@@ -18,127 +39,108 @@ function deleteseries()
 	} 
 </script>
 {/block}
+
 {block name=title}Game Series{/block}
+
 {block name=main_tile}
-<div class="NEWMAINCELL" style="display:block; margin-left:auto;margin-right: auto;">
-<div style="display:inline;">
-    	<div style="float:left;margin-right:30px;">
-			
-			<span class="LEFTNAV"><strong>{$series_info.game_series_name} selected</strong></span>
-		</div>
-		<ul class="game_series_nav">
-				<li><a href="../games/games_series_add_series.php?series_page=add_series" class="click_button">
-					new series
-				</a> </li>
-				<li><a style="cursor: pointer;" onClick="deleteseries(); return false;" class="click_button">
-				del. series
-				</a> </li>
-				<li><a href="../games/games_series_add_games.php?series_page=addgames_series&amp;game_series_id={if isset($series_info.game_series_id)}{$series_info.game_series_id}{/if}" class="click_button">
-				add games
-				</a> </li>
-		</ul>
-</div>
-	
-	<br/>
-	
-	<div style="width:20%;display:table-cell;">
-					<ul class="NEWNAVCELL">
-
-						<li class="NEWHEADERBAR">Game Series</li>
-						{foreach from=$game_series item=line}
-							<li class="leftnav_list">
-								<a href="../games/games_series_editor.php?series_page=series_editor&amp;game_series_id={$line.game_series_id}" class="LEFTNAV">{$line.game_series_name}</a>
-							</li>
-						{/foreach}	
-					</ul>
-				</div>
-				<div style="width:80%;display:table-cell;">
-				
-				{if (isset($series_info.sql_series_link_nr) and $series_info.sql_series_link_nr ==0)}
-				
+<div class="standard_tile" id="games_series_edit">
+	<h1>{$series_info.game_series_name} selected</h1>
+	<div class="standard_tile_line"></div>
+	<div class="standard_tile_text">
+		<div class="left_nav_section">
+			Over here you can edit/delete a series or add/remove games to/from it.
+		</div> 	
+		<br>
+		<br>
+		<fieldset>
+		<legend>Series options</legend>
+			<a style="cursor: pointer;" onClick="deleteseries(); return false;" class="left_nav_link">
+				Delete series
+			</a>
+			<br>
+			<a href="../games/games_series_add_games.php?series_page=addgames_series&amp;game_series_id={if isset($series_info.game_series_id)}{$series_info.game_series_id}{/if}&amp;action=main" class="left_nav_link">
+				Add games
+			</a>
+		</fieldset>
+		<br>
+		<br>
+		<fieldset>	
+			<legend>Edit Series name</legend>
+			{if (isset($series_info.sql_series_link_nr) and $series_info.sql_series_link_nr ==0)}
 				No games hooked to this series yet.
-				
-				{else}
-
-					<br/>
-					<br/>
-					<form action="../games/db_games_series.php" method="post" name="edit_series" id="edit_series">
-					<fieldset class="interview_set">
-					<legend class="links_legend">Edit Series name</legend>
-					Here you can change the name of the game series.<br/><br/>
-					<div style="display: flex;align-items:center;margin: 0 auto;text-align:center;">
+				</fieldset>
+			{else}
+				<form action="../games/db_games_series.php" method="post" name="edit_series" id="edit_series">
+				Here you can change the name of the game series.
+				<br>
+				<br>
+				<div style="display: inline;align-items:center;margin: 0 auto;text-align:center;">
 					<span style="margin-right:10px;float:left;">New name:</span>
-					<input type="text" name="game_series_name" id="game_series_name" value="{$series_info.game_series_name}" size="40" maxlength="64" style="display:inline;float:left;"><br/>
+					<input type="text" name="game_series_name" id="game_series_name" value="{$series_info.game_series_name}" class="standard_tile_input_small"><br>
 					<input type="hidden" name="action" value="edit_series">
 					<input type="hidden" name="game_series_id" value="{$series_info.game_series_id}">
-					<input type="submit" name="inserter" value="Change" style="display:inline;float:left;"></div>
-					</fieldset>
-					</form>
-
-					<br/>
-					<br/>
-					<form action="../games/db_games_series.php" method="post" name="delete_from_series" id="delete_from_series">	
-				
-		
-		
-		
-		<table class="table_game_list" style="width:95%;">
-			<tr>
-				<th style="width:5%;">Info</th>
-				<th style="width:30%,">Game Name</th>
-				<th style="width:20%;">Publisher</th>
-				<th style="width:20%;">Developer</th>
-				<th style="width:15%;">Year</th>
-			</tr>
-					{foreach from=$series_link item=line}
-			<tr>
-				<td style="width:5%;">
-					<input type="checkbox" name="game_series_cross_id[]" value="{$line.game_series_cross_id}">
-				</td>
-				<td style="width:30%;">{if $line.game_name != ''}<a href="games_detail.php?game_id={$line.game_id}" class="MAINNAV">{$line.game_name}</a>
-						{else}<i>n/a</i>{/if}
-				</td>
-				<td style="width:20%;">{if $line.publisher_name != ''}
-						<a href="games_main.php?publisher={$line.publisher_id}&amp;action=search" class="MAINNAV">
-							{$line.publisher_name}
-					</a>
-						{else}
-							<i>n/a</i>
-						{/if}</td>
-				<td style="width:20%;">{if $line.developer_name != ''}
-						<a href="games_main.php?developer={$line.developer_id}&amp;action=search" class="MAINNAV">
-							{$line.developer_name}
-						</a>
-						{else}
-							<i>n/a</i>
-						{/if}</td>				
-				<td style="width:15%;">
-					{if $line.year != ''}
-						<a href="games_main.php?year={$line.year}&amp;action=search" class="MAINNAV">
-							{$line.year}
-						</a>
-						{else}
-							<i>n/a</i>
-						{/if}
-					</td>
-			</tr>
-		{/foreach}
-			<tr>
-				<td class="game_list_footer" colspan="5" style="width:100%;">
-				<input type="hidden" name="series_page" value="series_editor">
-				<input type="hidden" name="action" value="delete_from_series">
-				<input type="hidden" name="game_series_id" value="{if isset($series_info.game_series_id)}{$series_info.game_series_id}{/if}">
-					<img src="../templates/0/images/arrow_ltr.gif" alt="" width="38" height="22" style="float:left;">
-					<input type="submit" value="Delete from series" style="float:left;">
-				</td>
-			</tr>
-		</table>
-		</form>
-		
-				{/if}
-								
-
+					<input type="submit" name="inserter" value="Change" class="topbutton_cpanel_small">
+				</div>
+				</form>
+				</fieldset>
+				<br>	
+				<br>
+				<form action="../games/db_games_series.php" method="post" name="delete_from_series" id="delete_from_series">	
+					<table class="standard_table_list">
+						<tr>
+							<th style="width:5%; text-align:left;">Info</th>
+							<th id="game_th">Game Name</th>
+							<th id="pub_th">Publisher</th>
+							<th id="dev_th">Developer</th>
+							<th id="year_th">Year</th>
+						</tr>
+						{foreach from=$series_link item=line}
+							<tr>
+								<td style="width:5%;">
+									<input type="checkbox" name="game_series_cross_id[]" value="{$line.game_series_cross_id}" id="user_select_all" class="quick_search_check">
+								</td>
+								<td class="game_td">{if $line.game_name != ''}<a href="games_detail.php?game_id={$line.game_id}" class="standard_table_left">{$line.game_name}</a>
+										{else}<i>n/a</i>{/if}
+								</td>
+								<td class="pub_td">{if $line.publisher_name != ''}
+										<a href="games_list.php?publisher={$line.publisher_id}&amp;action=search" class="standard_table_left">
+											{$line.publisher_name}
+									</a>
+										{else}
+											<i>n/a</i>
+										{/if}</td>
+								<td class="dev_td">{if $line.developer_name != ''}
+										<a href="games_list.php?developer={$line.developer_id}&amp;action=search" class="standard_table_left">
+											{$line.developer_name}
+										</a>
+										{else}
+											<i>n/a</i>
+										{/if}</td>				
+								<td class="year_td">
+									{if $line.year != ''}
+										<a href="games_list.php?year={$line.year}&amp;action=search" class="standard_table_left">
+											{$line.year}
+										</a>
+										{else}
+											<i>n/a</i>
+										{/if}
+									</td>
+							</tr>
+						{/foreach}
+						<tr>
+							<td class="game_list_footer" colspan="5" style="width:100%;">
+								<input type="hidden" name="series_page" value="series_editor">
+								<input type="hidden" name="action" value="delete_from_series">
+								<input type="hidden" name="game_series_id" value="{if isset($series_info.game_series_id)}{$series_info.game_series_id}{/if}">
+								<img src="../../../themes/templates/1/includes/img/arrow_ltr.gif" alt="" width="38" height="22" style="float:left;">
+								<input type="submit" value="Delete" class="topbutton_cpanel_small">
+							</td>
+						</tr>
+					</table>
+				</form>
+			{/if}
+		<br>
+		<div class="standard_table_center"><a href="../games/games_series_main.php" class="standard_tile_link">back</a></div>
 	</div>
 </div>
-
 {/block}

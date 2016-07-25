@@ -262,7 +262,7 @@ function browseDeveloper(str) {
 			<fieldset>
 			<legend>Other Features</legend>
 				<a href="../games/games_upload.php?game_id={$game_info.game_id}" class="left_nav_link">Add file download</a><br>
-				<a href="../administration/construction.php" class="left_nav_link">Image Gallery</a><br>					
+				<!--<a href="../administration/construction.php" class="left_nav_link">Image Gallery</a><br>-->						
 				<a href="../games/games_screenshot_add.php?game_id={$game_info.game_id}&amp;game_name={$game_info.game_name}" class="left_nav_link">Add screenshots</a><br>
 				<a href="../magazine/magazine_review_score.php?game_id={$game_info.game_id}&amp;game_name={$game_info.game_name}" class="left_nav_link">Add Mag review score</a><br>
 				<a href="../games/games_box.php?game_id={$game_info.game_id}&amp;game_name={$game_info.game_name}" class="left_nav_link">Add boxscans</a><br>
@@ -270,7 +270,7 @@ function browseDeveloper(str) {
 				<a href="../administration/construction.php" class="left_nav_link">Write a review</a><br>
 				{if $nr_comments > 0}		
 					<br>
-					<a href="../administration/construction.php" class="left_nav_link">Moderate comments</a>
+					<a href="../games/games_comment.php?game_id={$game_info.game_id}&amp;view=game_comments" class="left_nav_link">Moderate comments</a>
 				{/if}
 			</fieldset>
 		</div>

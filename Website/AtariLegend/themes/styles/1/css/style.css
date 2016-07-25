@@ -2822,6 +2822,66 @@ Games review list
   margin-top: 20px;
   margin-bottom: 20px; }
 
+/*---------------------------------------------------------- 
+Games review submitted
+------------------------------------------------------------ */
+#games_review_submitted {
+  margin-top: 20px;
+  margin-bottom: 20px; }
+
+#quick_search_game_review_submitted {
+  margin-top: 20px;
+  margin-bottom: 20px; }
+
+#leftnav_position_game_review_submitted {
+  margin-top: 20px;
+  margin-bottom: 20px; }
+
+/*---------------------------------------------------------- 
+Games series main
+------------------------------------------------------------ */
+#games_series_main {
+  margin-top: 20px;
+  margin-bottom: 20px; }
+
+#quick_search_game_series_main {
+  margin-top: 20px;
+  margin-bottom: 20px; }
+
+#leftnav_position_game_series_main {
+  margin-top: 20px;
+  margin-bottom: 20px; }
+
+/*---------------------------------------------------------- 
+Games series editor
+------------------------------------------------------------ */
+#games_series_edit {
+  margin-top: 20px;
+  margin-bottom: 20px; }
+
+#quick_search_game_series_edit {
+  margin-top: 20px;
+  margin-bottom: 20px; }
+
+#leftnav_position_game_series_edit {
+  margin-top: 20px;
+  margin-bottom: 20px; }
+
+/*---------------------------------------------------------- 
+Games series add games
+------------------------------------------------------------ */
+#games_series_add_games {
+  margin-top: 20px;
+  margin-bottom: 20px; }
+
+#quick_search_game_series_add_games {
+  margin-top: 20px;
+  margin-bottom: 20px; }
+
+#leftnav_position_game_series_add_games {
+  margin-top: 20px;
+  margin-bottom: 20px; }
+
 /* --> Games section */
 /*************************************************************/
 /**********************LEGACY SKIN****************************/
@@ -3510,6 +3570,30 @@ Games review list
 ------------------------------------------------------------ */
 @media screen and (max-width: 480px) {
   #leftnav_position_game_review_list {
+    margin-top: 0; } }
+/*---------------------------------------------------------- 
+Games review submitted
+------------------------------------------------------------ */
+@media screen and (max-width: 480px) {
+  #leftnav_position_game_review_submitted {
+    margin-top: 0; } }
+/*---------------------------------------------------------- 
+Games series main
+------------------------------------------------------------ */
+@media screen and (max-width: 480px) {
+  #leftnav_position_game_series_main {
+    margin-top: 0; } }
+/*---------------------------------------------------------- 
+Games series editor
+------------------------------------------------------------ */
+@media screen and (max-width: 480px) {
+  #leftnav_position_game_series_edit {
+    margin-top: 0; } }
+/*---------------------------------------------------------- 
+Games series add games
+------------------------------------------------------------ */
+@media screen and (max-width: 480px) {
+  #leftnav_position_game_series_add_games {
     margin-top: 0; } }
 /*---------------------------------------------------------- 
 Admin - DB updates

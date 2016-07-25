@@ -2854,6 +2854,78 @@ Games review list
   margin-bottom: 20px;
   float: left; }
 
+/*---------------------------------------------------------- 
+Games review submitted
+------------------------------------------------------------ */
+#games_review_submitted {
+  margin-top: 0;
+  margin-bottom: 20px;
+  float: left; }
+
+#quick_search_game_review_submitted {
+  margin-top: 0;
+  margin-bottom: 20px;
+  float: left; }
+
+#leftnav_position_game_review_submitted {
+  margin-top: 0;
+  margin-bottom: 20px;
+  float: left; }
+
+/*---------------------------------------------------------- 
+Games series main
+------------------------------------------------------------ */
+#games_series_main {
+  margin-top: 0;
+  margin-bottom: 20px;
+  float: left; }
+
+#quick_search_game_series_main {
+  margin-top: 0;
+  margin-bottom: 20px;
+  float: left; }
+
+#leftnav_position_game_series_main {
+  margin-top: 0;
+  margin-bottom: 20px;
+  float: left; }
+
+/*---------------------------------------------------------- 
+Games series editor
+------------------------------------------------------------ */
+#games_series_edit {
+  margin-top: 0;
+  margin-bottom: 20px;
+  float: left; }
+
+#quick_search_game_series_edit {
+  margin-top: 0;
+  margin-bottom: 20px;
+  float: left; }
+
+#leftnav_position_game_series_edit {
+  margin-top: 0;
+  margin-bottom: 20px;
+  float: left; }
+
+/*---------------------------------------------------------- 
+Games series add games
+------------------------------------------------------------ */
+#games_series_add_games {
+  margin-top: 0;
+  margin-bottom: 20px;
+  float: left; }
+
+#quick_search_game_series_add_games {
+  margin-top: 0;
+  margin-bottom: 20px;
+  float: left; }
+
+#leftnav_position_game_series_add_games {
+  margin-top: 0;
+  margin-bottom: 20px;
+  float: left; }
+
 /* --> Games section */
 /*************************************************************/
 /**********************PICASSO SKIN***************************/
@@ -3590,6 +3662,30 @@ Games review list
 @media screen and (max-width: 480px) {
   #leftnav_position_game_review_list {
     margin-bottom: 20px; } }
+/*---------------------------------------------------------- 
+Games review submitted
+------------------------------------------------------------ */
+@media screen and (max-width: 480px) {
+  #leftnav_position_game_review_submitted {
+    margin-top: 20px; } }
+/*---------------------------------------------------------- 
+Games series main
+------------------------------------------------------------ */
+@media screen and (max-width: 480px) {
+  #leftnav_position_game_series_main {
+    margin-top: 20px; } }
+/*---------------------------------------------------------- 
+Games series editor
+------------------------------------------------------------ */
+@media screen and (max-width: 480px) {
+  #leftnav_position_game_series_edit {
+    margin-top: 20px; } }
+/*---------------------------------------------------------- 
+Games series add games
+------------------------------------------------------------ */
+@media screen and (max-width: 480px) {
+  #leftnav_position_game_series_add_games {
+    margin-top: 20px; } }
 /*---------------------------------------------------------- 
 Admin - DB updates
 ------------------------------------------------------------ */

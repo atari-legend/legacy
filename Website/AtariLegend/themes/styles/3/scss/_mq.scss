@@ -634,6 +634,34 @@ Games review list
 }
 
 /*---------------------------------------------------------- 
+Games review submitted
+------------------------------------------------------------ */
+@media screen and (max-width: 480px) { 
+	#leftnav_position_game_review_submitted{ margin-top: 20px;}
+}
+
+/*---------------------------------------------------------- 
+Games series main
+------------------------------------------------------------ */
+@media screen and (max-width: 480px) { 
+	#leftnav_position_game_series_main{ margin-top: 20px;}
+}
+
+/*---------------------------------------------------------- 
+Games series editor
+------------------------------------------------------------ */
+@media screen and (max-width: 480px) { 
+	#leftnav_position_game_series_edit{ margin-top: 20px;}
+}
+
+/*---------------------------------------------------------- 
+Games series add games
+------------------------------------------------------------ */
+@media screen and (max-width: 480px) { 
+	#leftnav_position_game_series_add_games{ margin-top: 20px;}
+}
+
+/*---------------------------------------------------------- 
 Admin - DB updates
 ------------------------------------------------------------ */	
 @media screen and (max-width: 500px) { 

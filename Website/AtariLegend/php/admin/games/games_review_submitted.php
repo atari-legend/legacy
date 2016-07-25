@@ -8,6 +8,8 @@
 *   actual update        : created this page
 *
 *   Id: games_review_submitted.php,v 0.10 2005/12/04 Gatekeeper
+*   Id: games_review_submitted.php,v 0.15 2016/07/24 Gatekeeper
+*					- AL 2.0
 *
 ***************************************************************************/
 
@@ -21,11 +23,14 @@ This is the submitted review page
 include("../../includes/common.php");
 include("../../includes/admin.php");
 
+//load the search fields of the quick search side menu
+include("../../includes/quick_search_games.php"); 
+
 //get the submitted reviews
 $sql_submission =  $mysqli->query("SELECT * FROM review_main
 							    LEFT JOIN review_game ON (review_main.review_id = review_game.review_id)
 								LEFT JOIN game ON (review_game.game_id = game.game_id)
-								LEFT JOIN users ON (review_main.member_id = users.user_id)
+								LEFT JOIN users ON (review_main.user_id = users.user_id)
 								WHERE review_main.review_edit = '1'");
 
 $i = 0;
@@ -47,6 +52,9 @@ while ($review=$sql_submission->fetch_array(MYSQLI_BOTH))
 $smarty->assign("submission_nr",$i);
 
 $smarty->assign("user_id",$_SESSION['user_id']);
+
+$smarty->assign('quick_search_games', 'quick_search_game_review_submitted');
+$smarty->assign('left_nav', 'leftnav_position_game_review_submitted');
 
 //Send all smarty variables to the templates
 $smarty->display("file:".$cpanel_template_folder."games_review_submitted.html");
