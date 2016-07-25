@@ -16,6 +16,10 @@
 //load all common functions
 include("../../includes/common.php");
 include("../../includes/admin.php");
+
+//load the search fields of the quick search side menu
+include("../../includes/quick_search_games.php"); 
+
 /*
 ************************************************************************************************
 This is the game review main page

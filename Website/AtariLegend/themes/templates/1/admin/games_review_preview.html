@@ -22,7 +22,7 @@
 
 {block name=title}
 <div style="float:left;">
-	Written by {if $review.email != ''}<a href="mailto:{$review.email}?subject=Your review of {$review.game_name} at Atari Legend" class="MAINNAV_WHITE">{$review.user_name}</a>{else}{$review.user_name}{/if}
+	Written by {if $review.email != ''}<a href="mailto:{$review.email}?subject=Your review of {$review.game_name} at Atari Legend">{$review.user_name}</a>{else}{$review.user_name}{/if}
 </div>
 <div style="float:right;padding-right:5px;">{$review.date}</div>
 {/block}

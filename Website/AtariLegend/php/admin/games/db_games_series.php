@@ -10,6 +10,8 @@
 *							
 *
 *   Id: db_games_series.php,v 1.10 2005/09/24 Silver Surfer
+*   Id: db_games_series.php,v 1.15 2016/07/24 STG
+*			- AL 2.0 adding messages
 *
 ***************************************************************************/
 
@@ -35,6 +37,8 @@ if(isset($game_series_cross_id))
 	mysqli_free_result(); 
 }
 
+$_SESSION['edit_message'] = "game removed to series";
+
 header("Location: ../games/games_series_editor.php?series_page=$series_page&game_series_id=$game_series_id");
 
 }
@@ -50,6 +54,8 @@ if(isset($new_series))
 	$sql = $mysqli->query("INSERT INTO game_series (game_series_name) VALUES ('$new_series')");  
 	mysqli_free_result(); 
 }
+
+$_SESSION['edit_message'] = "new series added";
 
 header("Location: ../games/games_series_main.php");
 
@@ -68,6 +74,8 @@ if(isset($game_series_name))
 	mysqli_free_result(); 
 }
 
+$_SESSION['edit_message'] = "series updated";
+
 header("Location: ../games/games_series_editor.php?series_page=series_editor&game_series_id=$game_series_id");
 
 }
@@ -85,6 +93,8 @@ if(isset($game_series_id))
 	mysqli_free_result(); 
 }
 
+$_SESSION['edit_message'] = "series deleted";
+
 header("Location: ../games/games_series_main.php");
 
 }
@@ -100,9 +110,11 @@ if(isset($game_id))
 	foreach($game_id as $game) 
 	{
 		$mysqli->query("INSERT INTO game_series_cross (game_id,game_series_id) VALUES ('$game','$game_series_id')"); 
+		$_SESSION['edit_message'] = "game added to series";
 	}
 	mysqli_free_result(); 
 }
+
 header("Location: ../games/games_series_editor.php?game_series_id=$game_series_id&series_page=$series_page");
 
 }
