@@ -2855,6 +2855,92 @@ Games series add games
   margin-bottom: 30px;
   float: left; }
 
+/*---------------------------------------------------------- 
+Games music
+------------------------------------------------------------ */
+#games_music {
+  margin-top: -40px;
+  margin-bottom: 30px;
+  float: left; }
+
+#quick_search_game_music {
+  margin-top: -40px;
+  margin-bottom: 30px;
+  float: left; }
+
+#leftnav_position_game_music {
+  margin-top: -40px;
+  margin-bottom: 30px;
+  float: left; }
+
+/*---------------------------------------------------------- 
+Games music list
+------------------------------------------------------------ */
+#games_music_list {
+  margin-top: -40px;
+  margin-bottom: 30px;
+  float: left; }
+
+#quick_search_game_music_list {
+  margin-top: -40px;
+  margin-bottom: 30px;
+  float: left; }
+
+#leftnav_position_game_music_list {
+  margin-top: -40px;
+  margin-bottom: 30px;
+  float: left; }
+
+#game_gm_th {
+  width: 50%;
+  text-align: left; }
+
+#pub_gm_th {
+  width: 25%;
+  text-align: left; }
+
+#year_gm_th {
+  width: 15%;
+  text-align: left; }
+
+#zaks_gm_th {
+  width: 10%;
+  text-align: left; }
+
+.game_gm_td {
+  width: 50%;
+  padding-left: 2px; }
+
+.pub_gm_td {
+  width: 25%;
+  padding-left: 2px; }
+
+.year_gm_td {
+  width: 15%;
+  padding-left: 2px; }
+
+.zaks_gm_td {
+  width: 10%;
+  padding-left: 2px; }
+
+/*---------------------------------------------------------- 
+Games music detail
+------------------------------------------------------------ */
+#games_music_detail {
+  margin-top: -40px;
+  margin-bottom: 30px;
+  float: left; }
+
+#quick_search_game_music_detail {
+  margin-top: -40px;
+  margin-bottom: 30px;
+  float: left; }
+
+#leftnav_position_game_music_detail {
+  margin-top: -40px;
+  margin-bottom: 30px;
+  float: left; }
+
 /* --> Games section */
 /*************************************************************/
 /**********************TOS 207 SKIN***************************/
@@ -3676,6 +3762,60 @@ Games series add games
     margin-top: 20px; } }
 @media screen and (max-width: 480px) {
   #leftnav_position_game_series_add_games {
+    margin-top: 0; } }
+/*---------------------------------------------------------- 
+Games music
+------------------------------------------------------------ */
+@media screen and (max-width: 1279px) {
+  #leftnav_position_game_music {
+    margin-top: 20px; }
+
+  #quick_search_game_music {
+    margin-top: 20px; }
+
+  #games_music {
+    margin-top: 20px; } }
+@media screen and (max-width: 480px) {
+  #leftnav_position_game_music {
+    margin-top: 0; } }
+/*---------------------------------------------------------- 
+Games music list
+------------------------------------------------------------ */
+@media screen and (max-width: 480px) {
+  #leftnav_position_game_music_list {
+    margin-top: 0; } }
+@media screen and (max-width: 550px) {
+  #zaks_gm_th, .zaks_gm_td {
+    display: none; } }
+@media screen and (max-width: 1000px) {
+  #pub_gm_th, .pub_gm_td {
+    display: none; } }
+@media screen and (max-width: 1279px) {
+  #leftnav_position_game_music_list {
+    margin-top: 20px; }
+
+  #quick_search_game_music_list {
+    margin-top: 20px; }
+
+  #games_music_list {
+    margin-top: 20px; } }
+@media screen and (max-width: 1450px) {
+  #year_gm_th, .year_gm_td {
+    display: none; } }
+/*---------------------------------------------------------- 
+Games music detail
+------------------------------------------------------------ */
+@media screen and (max-width: 1279px) {
+  #leftnav_position_game_music_detail {
+    margin-top: 20px; }
+
+  #quick_search_game_music_detail {
+    margin-top: 20px; }
+
+  #games_music_detail {
+    margin-top: 20px; } }
+@media screen and (max-width: 480px) {
+  #leftnav_position_game_music_detail {
     margin-top: 0; } }
 /*---------------------------------------------------------- 
 Magazine review score

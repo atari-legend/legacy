@@ -16,11 +16,17 @@
 include("../../includes/common.php");
 include("../../includes/admin.php");
 
+//load the search fields of the quick search side menu
+include("../../includes/quick_search_games.php"); 
+
 /*
 ************************************************************************************************
 This is the game music main page
 ************************************************************************************************
 */
+
+	$smarty->assign('quick_search_games', 'quick_search_game_music');
+	$smarty->assign('left_nav', 'leftnav_position_game_music');
 
 	//Send all smarty variables to the templates
 	$smarty->display("file:".$cpanel_template_folder."games_music.html");

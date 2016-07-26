@@ -8,7 +8,8 @@
 *   actual update        : re-creation of code from scratch into new file.
 *						  
 *							
-*
+*	Id: db_games_music.php,v 0.20 2016/07/26 ST Graveyard
+*			- AL 2.0
 *
 ***************************************************************************/
 
@@ -42,7 +43,7 @@ if(isset($music_id))
 		$sql = $mysqli->query("DELETE FROM music_author WHERE music_id = '$music' ")  or die ("error deleting music_author");
 		$sql = $mysqli->query("DELETE FROM music_types WHERE music_id = '$music' ")  or die ("error deleting music_types");
 
-		$new_path = $music_game_path;
+		$new_path = $music_game_save_path;
 		$new_path .= $music;
 		$new_path .= ".";
 		$new_path .= $music_ext;
@@ -50,6 +51,8 @@ if(isset($music_id))
 		unlink ("$new_path");
 	}
 }
+
+$_SESSION['edit_message'] = "Music file deleted";
 header("Location: ../games/games_music_detail.php?game_id=$game_id");
 }
 
@@ -115,14 +118,15 @@ foreach($image['tmp_name'] as $key=>$tmp_name)
 					or die ("Database error - inserting type id");
 		
 		// Rename the uploaded file to its autoincrement number and move it to its proper place.
-		$file_data = rename($image['tmp_name'][$key], "$music_game_path$music_id.$ext") or die("couldn't rename and move file");
+		$file_data = rename($image['tmp_name'][$key], "$music_game_save_path$music_id.$ext") or die("couldn't rename and move file");
 		
-		chmod("$music_game_path$music_id.$ext", 0777) or die("couldn't chmod file");
-		
+		chmod("$music_game_save_path$music_id.$ext", 0777) or die("couldn't chmod file");
+		$_SESSION['edit_message'] = "Music file uploaded";
 		}
 		else
 		{
-			$smarty->assign('message', 'Please use extension ym, mod, mp3 or snd');
+			$_SESSION['edit_message'] = "Please use extension ym, mod, mp3 or snd";
+			//$smarty->assign('message', 'Please use extension ym, mod, mp3 or snd');
 		}
 			
 	}          

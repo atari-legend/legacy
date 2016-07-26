@@ -8,12 +8,17 @@
 *						   Created file
 *						
 *   Id: games_music_detail.php,v 0.10 2005/11/15 ST Graveyard
+*   Id: games_music_detail.php,v 0.20 2016/07/26 ST Graveyard
+*			- AL 2.0
 *
 ***************************************************************************/
 
 //load all common functions
 include("../../includes/common.php");
 include("../../includes/admin.php");
+
+//load the search fields of the quick search side menu
+include("../../includes/quick_search_games.php");
 
 /*
 ***********************************************************************************
@@ -59,7 +64,7 @@ if (isset($action) and $action == 'pick_composer')
 {
 	if ( $individuals == '-' )
 	{
-		$smarty->assign('message', 'Please pick a composer or add one in the detail page');
+		$_SESSION['edit_message'] = "Please pick a composer or add one in the detail page";
 	}
 	else
 	{
@@ -137,16 +142,18 @@ while ( $MUSICIAN=$SQL_MUSICIAN->fetch_array(MYSQLI_BOTH) )
 
 if (isset($i) and $i == 0 )
 {
-	$message = "No musician attached to this game, go to the detail pages to add a musician first";
-	$smarty->assign("message",$message);
+	$_SESSION['edit_message'] =  "No musician attached to this game, go to the detail pages to add a musician first";
+	header("Location: ../games/games_music.php");
 }
 else
 {
-	$message = "To add more musicians, just click the game name in the header to go to the detail pages of this game";
-	$smarty->assign("message",$message);
+	$_SESSION['edit_message'] =  "To add more musicians, just click the game name in the header to go to the detail pages of this game";
 }
 
 $smarty->assign("user_id",$_SESSION['user_id']);
+
+$smarty->assign('quick_search_games', 'quick_search_game_music_detail');
+$smarty->assign('left_nav', 'leftnav_position_game_music_detail');
 
 //Send all smarty variables to the templates
 $smarty->display("file:".$cpanel_template_folder."games_music_detail.html");
