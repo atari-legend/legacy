@@ -8,12 +8,17 @@
 *						   Created file
 *						
 *   Id: v 0.10 New Page,split from games_music.php
+*   Id: v 0.20 games_music_list.php ST Graveyard 26/07/2016
+*				- AL 2.0
 *
 ***************************************************************************/
 
 //load all common functions
 include("../../includes/common.php");
 include("../../includes/admin.php");
+
+//load the search fields of the quick search side menu
+include("../../includes/quick_search_games.php");
 
 /*
 ************************************************************************************************
@@ -107,6 +112,9 @@ if (isset($action) and $action == 'search')
 
 				$smarty->assign('querytime', $totaltime1);
 				$smarty->assign('nr_of_entries', $i);
+				
+				$smarty->assign('quick_search_games', 'quick_search_game_music_list');
+				$smarty->assign('left_nav', 'leftnav_position_game_music_list');
 
 				//Send all smarty variables to the templates
 				$smarty->display("file:".$cpanel_template_folder."games_music_list.html");

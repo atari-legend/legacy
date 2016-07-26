@@ -627,6 +627,38 @@ Games series add games
 	#leftnav_position_game_series_add_games{ margin-top: 0;}
 }
 
+/*---------------------------------------------------------- 
+Games music
+------------------------------------------------------------ */
+@media screen and (max-width: 480px) { 
+	#leftnav_position_game_music{ margin-top: 0;}
+}
+
+/*---------------------------------------------------------- 
+Games music list
+------------------------------------------------------------ */
+@media screen and (max-width: 480px) { 
+	#leftnav_position_game_music_list{ margin-top: 0;}
+}
+
+@media screen and (max-width: 550px) { 
+	#zaks_gm_th, .zaks_gm_td{ display: none;}
+}
+@media screen and (max-width: 1000px) { 
+	#pub_gm_th, .pub_gm_td{ display: none;}
+}
+
+@media screen and (max-width: 1450px) { 
+	#year_gm_th, .year_gm_td{ display: none;}
+}
+
+/*---------------------------------------------------------- 
+Games music detail
+------------------------------------------------------------ */
+@media screen and (max-width: 480px) { 
+	#leftnav_position_game_music_detail{ margin-top: 0;}
+}
+
 
 /*---------------------------------------------------------- 
 Admin - DB updates
