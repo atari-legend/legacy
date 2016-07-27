@@ -690,9 +690,22 @@ Games music list
 Games music detail
 ------------------------------------------------------------ */
 @media screen and (max-width: 480px) { 
-	#leftnav_position_game_music_detail{ margin-top: 20px;}
+	#leftnav_position_game_music_detail{ margin-top: 20px; margin-bottom: 20px;}
 }
 
+/*---------------------------------------------------------- 
+Games submissions
+------------------------------------------------------------ */
+@media screen and (max-width: 480px) { 
+	#leftnav_position_game_submissions{ margin-top: 20px;}
+}
+
+/*---------------------------------------------------------- 
+News Add
+------------------------------------------------------------ */
+@media screen and (max-width: 480px) { 
+	#leftnav_position_news_add{ margin-top: 20px;}
+}
 
 /*---------------------------------------------------------- 
 Admin - DB updates

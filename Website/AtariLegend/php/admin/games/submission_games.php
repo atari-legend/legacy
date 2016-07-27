@@ -6,10 +6,11 @@
 *   copyright            : (C) 2003 Atari Legend
 *   email                : silversurfer@atari-forum.com
 *   actual update        : Fixed counting bug
-						   Fixed switch bug
-*							
+*						   Fixed switch bug							
 *
 *   Id: submission_games.php,v 0.12 2005/04/28 Silver Surfer
+*   Id: submission_games.php,v 0.13 2016/07/27 STG
+*				- AL 2.0
 *
 ***************************************************************************/
 
@@ -21,6 +22,9 @@ Display submissions
 
 include("../../includes/common.php");
 include("../../includes/admin.php");
+
+//load the search fields of the quick search side menu
+include("../../includes/quick_search_games.php");
 
 // get the total nr of submissions in the DB
 $query_total_number = $mysqli->query("SELECT * FROM game_submitinfo") or die ("Couldn't get the total number of submissions");
@@ -171,6 +175,9 @@ $smarty->assign('total_nr_submissions', $v_rows_total);
 						  'forward_arrow' => $forward_arrow,
 						  'num_sub' => $number_sub));
 
+$smarty->assign('quick_search_games', 'quick_search_game_submissions');
+$smarty->assign('left_nav', 'leftnav_position_game_submissions');						  
+						  
 //Send all smarty variables to the templates
 $smarty->display("file:".$cpanel_template_folder."submission_games.html");
 ?>

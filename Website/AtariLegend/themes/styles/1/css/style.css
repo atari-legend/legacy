@@ -2971,6 +2971,21 @@ Games music detail
   margin-top: 20px;
   margin-bottom: 20px; }
 
+/*---------------------------------------------------------- 
+Games submissions
+------------------------------------------------------------ */
+#game_submissions {
+  margin-top: 20px;
+  margin-bottom: 20px; }
+
+#quick_search_game_submissions {
+  margin-top: 20px;
+  margin-bottom: 20px; }
+
+#leftnav_position_game_submissions {
+  margin-top: 20px;
+  margin-bottom: 20px; }
+
 /* --> Games section */
 /*************************************************************/
 /**********************LEGACY SKIN****************************/
@@ -3009,6 +3024,31 @@ Magazine set score
   margin-bottom: 20px; }
 
 /* --> Magazine section */
+/*************************************************************/
+/**********************LEGACY SKIN****************************/
+/*************************************************************/
+/*************************************************************/
+/*****************CPanel NEWS section css********************/
+/*************************************************************/
+/*---------------------------------------------------------- 
+News add
+------------------------------------------------------------ */
+#quick_search_game_news_add {
+  margin-top: 20px;
+  margin-bottom: 30px;
+  float: left; }
+
+#news_add {
+  margin-top: 20px;
+  margin-bottom: 30px;
+  float: left; }
+
+#leftnav_position_news_add {
+  margin-top: 20px;
+  margin-bottom: 30px;
+  float: left; }
+
+/* --> News section */
 /*---------------------------------------------------------- 
  Media Queries Main & CPanel 
 ------------------------------------------------------------ */
@@ -3710,6 +3750,18 @@ Games music detail
 ------------------------------------------------------------ */
 @media screen and (max-width: 480px) {
   #leftnav_position_game_music_detail {
+    margin-top: 0; } }
+/*---------------------------------------------------------- 
+Games submissions
+------------------------------------------------------------ */
+@media screen and (max-width: 480px) {
+  #leftnav_position_game_submissions {
+    margin-top: 0; } }
+/*---------------------------------------------------------- 
+News Add
+------------------------------------------------------------ */
+@media screen and (max-width: 480px) {
+  #leftnav_position_news_add {
     margin-top: 0; } }
 /*---------------------------------------------------------- 
 Admin - DB updates

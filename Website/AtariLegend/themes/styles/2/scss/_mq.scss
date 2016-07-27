@@ -755,6 +755,18 @@ Games music detail
 	#leftnav_position_game_music_detail{ margin-top: 0;}
 }
 
+/*---------------------------------------------------------- 
+Games submissions
+------------------------------------------------------------ */
+@media screen and (max-width: 1279px) { 
+	#leftnav_position_game_submissions{margin-top: 20px;}
+	#quick_search_game_submissions{margin-top: 20px;}
+	#game_submissions{margin-top: 20px;}
+}
+
+@media screen and (max-width: 480px) { 
+	#leftnav_position_game_submissions{ margin-top: 0;}
+}
 
 /*---------------------------------------------------------- 
 Magazine review score
@@ -781,6 +793,21 @@ Magazine set score
 @media screen and (max-width: 480px) { 
 	#leftnav_position_magazine_set_score{ margin-top: 0;}
 }
+
+
+/*---------------------------------------------------------- 
+News Add
+------------------------------------------------------------ */
+@media screen and (max-width: 1279px) { 
+	#leftnav_position_news_add{margin-top: 20px;}
+	#quick_search_game_news_add{margin-top: 20px;}
+	#news_add{margin-top: 20px;}
+}
+
+@media screen and (max-width: 480px) { 
+	#leftnav_position_news_add{ margin-top: 0;}
+}
+
 
 /*---------------------------------------------------------- 
 Admin - DB updates

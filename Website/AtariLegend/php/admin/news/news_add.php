@@ -8,7 +8,8 @@
 *   actual update        : creation of file
 *							 
 *							
-*
+*   Id:  news_add.php,v 0.12 2016/07/27 ST Graveyard
+*			-AL 2.0
 *
 ***************************************************************************/
 
@@ -20,6 +21,9 @@ In this section we can add a news update to the DB
 
 include("../../includes/common.php");
 include("../../includes/admin.php");
+
+//load the search fields of the quick search side menu
+include("../../includes/quick_search_games.php");
 				
 $sql_newsimage = $mysqli->query("SELECT news_image_id,news_image_name FROM news_image ORDER BY news_image_name");
 				
@@ -29,6 +33,9 @@ while ($newsimages = $sql_newsimage->fetch_array(MYSQLI_BOTH))
 	    	 array('image_id' => $newsimages['news_image_id'],
 				   'image_name' => $newsimages['news_image_name']));
 }
+
+$smarty->assign('quick_search_games', 'quick_search_game_news_add');
+$smarty->assign('left_nav', 'leftnav_position_news_add');	
 
 $smarty->assign("user_id",$_SESSION['user_id']);
 

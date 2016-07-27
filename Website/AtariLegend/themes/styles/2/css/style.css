@@ -2941,6 +2941,24 @@ Games music detail
   margin-bottom: 30px;
   float: left; }
 
+/*---------------------------------------------------------- 
+Games submissions
+------------------------------------------------------------ */
+#game_submissions {
+  margin-top: -40px;
+  margin-bottom: 30px;
+  float: left; }
+
+#quick_search_game_submissions {
+  margin-top: -40px;
+  margin-bottom: 30px;
+  float: left; }
+
+#leftnav_position_game_submissions {
+  margin-top: -40px;
+  margin-bottom: 30px;
+  float: left; }
+
 /* --> Games section */
 /*************************************************************/
 /**********************TOS 207 SKIN***************************/
@@ -2980,6 +2998,31 @@ Magazine set score
   float: left; }
 
 #leftnav_position_magazine_set_score {
+  margin-top: -40px;
+  margin-bottom: 30px;
+  float: left; }
+
+/* --> magezines section */
+/*************************************************************/
+/**********************TOS 207 SKIN***************************/
+/*************************************************************/
+/*************************************************************/
+/*****************CPanel NEWS section css********************/
+/*************************************************************/
+/*---------------------------------------------------------- 
+News add
+------------------------------------------------------------ */
+#quick_search_game_news_add {
+  margin-top: -40px;
+  margin-bottom: 30px;
+  float: left; }
+
+#news_add {
+  margin-top: -40px;
+  margin-bottom: 30px;
+  float: left; }
+
+#leftnav_position_news_add {
   margin-top: -40px;
   margin-bottom: 30px;
   float: left; }
@@ -3818,6 +3861,21 @@ Games music detail
   #leftnav_position_game_music_detail {
     margin-top: 0; } }
 /*---------------------------------------------------------- 
+Games submissions
+------------------------------------------------------------ */
+@media screen and (max-width: 1279px) {
+  #leftnav_position_game_submissions {
+    margin-top: 20px; }
+
+  #quick_search_game_submissions {
+    margin-top: 20px; }
+
+  #game_submissions {
+    margin-top: 20px; } }
+@media screen and (max-width: 480px) {
+  #leftnav_position_game_submissions {
+    margin-top: 0; } }
+/*---------------------------------------------------------- 
 Magazine review score
 ------------------------------------------------------------ */
 @media screen and (max-width: 1279px) {
@@ -3846,6 +3904,21 @@ Magazine set score
     margin-top: 20px; } }
 @media screen and (max-width: 480px) {
   #leftnav_position_magazine_set_score {
+    margin-top: 0; } }
+/*---------------------------------------------------------- 
+News Add
+------------------------------------------------------------ */
+@media screen and (max-width: 1279px) {
+  #leftnav_position_news_add {
+    margin-top: 20px; }
+
+  #quick_search_game_news_add {
+    margin-top: 20px; }
+
+  #news_add {
+    margin-top: 20px; } }
+@media screen and (max-width: 480px) {
+  #leftnav_position_news_add {
     margin-top: 0; } }
 /*---------------------------------------------------------- 
 Admin - DB updates

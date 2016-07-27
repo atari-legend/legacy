@@ -7,9 +7,9 @@
 *   email                : silversurfer@atari-forum.com
 *   actual update        : re-creation of code from scratch into new file.
 *						  
-*							
-*
 *   Id: db_games_submissions.php,v 1.10 2005/09/19 Silver Surfer
+*   Id: db_games_submissions.php,v 1.10 2016/07/27 STG
+*		- AL 2.0 : added messages
 *
 ***************************************************************************/
 
@@ -26,7 +26,6 @@ if($action=="update_submission")
 //****************************************************************************************
 // This is where the submissions get "sent" to "done"
 //**************************************************************************************** 
-
 if (isset($submit_id))
 {
 		$commentquery = $mysqli->query("UPDATE game_submitinfo SET game_done = '1' WHERE game_submitinfo_id='$submit_id'");
@@ -39,6 +38,8 @@ if (isset($submit_id))
 		UserKarma($user_id,$karma_action);
 }
 
+$_SESSION['edit_message'] = "Submission set to done status - transferred to done list";
+
 header("Location: ../games/submission_games.php?v_counter=$v_counter");
 }
 
@@ -46,7 +47,6 @@ header("Location: ../games/submission_games.php?v_counter=$v_counter");
 
 // Delete
 if($action=="delete_submission")
-
 {
 
 //****************************************************************************************
@@ -58,22 +58,22 @@ if($action=="delete_submission")
 		$sql = $mysqli->query("DELETE FROM game_submitinfo WHERE game_submitinfo_id = '$submit_id'") or die("couldn't delete game_submissions quote");
 	}
 
+	$_SESSION['edit_message'] = "Submission deleted";
 
-if ($list == "done")
-{
-header("Location: ../games/submission_games.php?v_counter=$v_counter&list=$list");
-}
-else
-{
-header("Location: ../games/submission_games.php?v_counter=$v_counter");
-}
+	if ($list == "done")
+	{
+	header("Location: ../games/submission_games.php?v_counter=$v_counter&list=$list");
+	}
+	else
+	{
+	header("Location: ../games/submission_games.php?v_counter=$v_counter");
+	}
 }
 
 // Move
 if($action=="move_submission_tocomment")
 
 {
-
 //****************************************************************************************
 // This is the move to comments place
 //**************************************************************************************** 
@@ -85,7 +85,7 @@ if($action=="move_submission_tocomment")
 		$sql_submit = $query_submit->fetch_array(MYSQLI_BOTH) or die("something is wrong with mysqli2");
 		
 		$submit_text = $sql_submit['submit_text'];
-		$submit_text = $mysqli->mysqli_real_escape_string($submit_text);
+		$submit_text = $mysqli->real_escape_string($submit_text);
 		$sub_timestamp = $sql_submit['timestamp']; 
 		$sub_user_id = $sql_submit['user_id'];
 		$sub_game_id = $sql_submit['game_id'];
@@ -97,14 +97,15 @@ if($action=="move_submission_tocomment")
 		$sql = $mysqli->query("DELETE FROM game_submitinfo WHERE game_submitinfo_id = ".$submit_id."") or die("couldn't delete game_submissions quote");
 	}
 
+	$_SESSION['edit_message'] = "Submission converted to game comment";
 
-if ($list == "done")
-{
-header("Location: ../games/submission_games.php?v_counter=$v_counter&list=$list");
-}
-else
-{
-header("Location: ../games/submission_games.php?v_counter=$v_counter");
-}
+	if ($list == "done")
+	{
+	header("Location: ../games/submission_games.php?v_counter=$v_counter&list=$list");
+	}
+	else
+	{
+	header("Location: ../games/submission_games.php?v_counter=$v_counter");
+	}
 }
 ?>
