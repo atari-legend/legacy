@@ -7,9 +7,9 @@
 *   email                : maarten.martens@freebel.net
 *   actual update        : added 2 columns to the list
 *							 
-*							
-*
 *   Id: news_iconpreview.php,v 0.11 2004/05/07 Silver
+*   Id: news_iconpreview.php,v 0.12 2016/07/28 STG
+*			-AL 2.0
 *
 ***************************************************************************/
 /*
@@ -20,6 +20,9 @@ In this section we can preview the news icons
 
 include("../../includes/common.php");
 include("../../includes/admin.php");
+
+//load the search fields of the quick search side menu
+include("../../includes/quick_search_games.php"); 
 
 $count=1;
 
@@ -40,6 +43,9 @@ while ( $news_images = $sql_images->fetch_array(MYSQLI_BOTH) )
 				   
 	if ($count==3) { $count=1; } else { $count = $count+1; }
 }
+
+$smarty->assign('quick_search_games', 'quick_search_news_icon_preview');
+$smarty->assign('left_nav', 'leftnav_position_news_icon_preview');
 
 //Send all smarty variables to the templates
 $smarty->display("file:".$cpanel_template_folder."news_iconpreview.html");

@@ -8,8 +8,9 @@
 *   actual update        : File creation
 *							 
 *							
-*
-*   Id: news_approve.php,v 0.10 2004/05/05 ST Graveyard
+*	Id: news_approve.php,v 0.10 2004/05/05 ST Graveyard
+*	Id: news_approve.php,v 0.20 2016/07/28 ST Graveyard 
+*			- AL 2.0 
 *
 ***************************************************************************/
 /*
@@ -20,6 +21,9 @@ In this section we can approve a news update.
 
 include("../../includes/common.php");
 include("../../includes/admin.php");
+
+//load the search fields of the quick search side menu
+include("../../includes/quick_search_games.php"); 
 
 //********************************************************************************************
 // Get all the needed data to load the submission page!
@@ -49,7 +53,7 @@ else
 		$user_name = get_username_from_id($submission['user_id']);
 		$news_date = convert_timestamp($submission['news_date']);
 		$news_text = InsertALCode($submission['news_text']);
-		$news_text = InsertSmillies($news_text);
+		//$news_text = InsertSmillies($news_text);
 		$news_text = nl2br($news_text);
 		
 		$v_image  = $news_images_path;
@@ -70,6 +74,9 @@ else
 }
 
 $smarty->assign("user_id",$_SESSION['user_id']);
+
+$smarty->assign('quick_search_games', 'quick_search_news_approve');
+$smarty->assign('left_nav', 'leftnav_position_news_approve');
 
 //Send all smarty variables to the templates
 $smarty->display("file:".$cpanel_template_folder."news_approve.html");

@@ -2974,7 +2974,7 @@ Games music detail
 /*---------------------------------------------------------- 
 Games submissions
 ------------------------------------------------------------ */
-#game_submissions {
+#games_submissions {
   margin-top: 20px;
   margin-bottom: 20px; }
 
@@ -3047,6 +3047,134 @@ News add
   margin-top: 20px;
   margin-bottom: 30px;
   float: left; }
+
+/*---------------------------------------------------------- 
+News Icon Preview
+------------------------------------------------------------ */
+#quick_search_news_icon_preview {
+  margin-top: 20px;
+  margin-bottom: 30px;
+  float: left; }
+
+#news_icon_preview {
+  margin-top: 20px;
+  margin-bottom: 30px;
+  float: left; }
+
+#leftnav_position_news_icon_preview {
+  margin-top: 20px;
+  margin-bottom: 30px;
+  float: left; }
+
+/*---------------------------------------------------------- 
+News Approve
+------------------------------------------------------------ */
+#quick_search_news_approve {
+  margin-top: 20px;
+  margin-bottom: 30px;
+  float: left; }
+
+#news_approve {
+  margin-top: 20px;
+  margin-bottom: 30px;
+  float: left; }
+
+#leftnav_position_news_approve {
+  margin-top: 20px;
+  margin-bottom: 30px;
+  float: left; }
+
+/*---------------------------------------------------------- 
+News Edit all
+------------------------------------------------------------ */
+#quick_search_news_edit_all {
+  margin-top: 20px;
+  margin-bottom: 30px;
+  float: left; }
+
+#news_edit_all {
+  margin-top: 20px;
+  margin-bottom: 30px;
+  float: left; }
+
+#leftnav_position_news_edit_all {
+  margin-top: 20px;
+  margin-bottom: 30px;
+  float: left; }
+
+/*---------------------------------------------------------- 
+News Edit
+------------------------------------------------------------ */
+#quick_search_news_edit {
+  margin-top: 20px;
+  margin-bottom: 30px;
+  float: left; }
+
+#news_edit {
+  margin-top: 20px;
+  margin-bottom: 30px;
+  float: left; }
+
+#leftnav_position_news_edit {
+  margin-top: 20px;
+  margin-bottom: 30px;
+  float: left; }
+
+/*---------------------------------------------------------- 
+News Add Image
+------------------------------------------------------------ */
+#quick_search_news_add_image {
+  margin-top: 20px;
+  margin-bottom: 30px;
+  float: left; }
+
+#news_add_image {
+  margin-top: 20px;
+  margin-bottom: 30px;
+  float: left; }
+
+#leftnav_position_news_add_image {
+  margin-top: 20px;
+  margin-bottom: 30px;
+  float: left; }
+
+/*---------------------------------------------------------- 
+News Edit Image
+------------------------------------------------------------ */
+#quick_search_news_edit_image {
+  margin-top: 20px;
+  margin-bottom: 30px;
+  float: left; }
+
+#news_edit_image {
+  margin-top: 20px;
+  margin-bottom: 30px;
+  float: left; }
+
+#leftnav_position_news_edit_image {
+  margin-top: 20px;
+  margin-bottom: 30px;
+  float: left; }
+
+.news_images_container {
+  display: table;
+  vertical-align: middle; }
+
+.news_images_check {
+  display: table-cell;
+  width: 5%;
+  vertical-align: middle; }
+
+.news_images_display {
+  display: table-cell;
+  width: 25%;
+  vertical-align: middle; }
+
+.news_images_name {
+  display: table-cell;
+  width: 70%;
+  vertical-align: middle;
+  padding-left: 15px; }
 
 /* --> News section */
 /*---------------------------------------------------------- 
@@ -3763,6 +3891,54 @@ News Add
 @media screen and (max-width: 480px) {
   #leftnav_position_news_add {
     margin-top: 0; } }
+/*---------------------------------------------------------- 
+News Icon Preview
+------------------------------------------------------------ */
+@media screen and (max-width: 480px) {
+  #leftnav_position_news_icon_preview {
+    margin-top: 0; } }
+/*---------------------------------------------------------- 
+News approve
+------------------------------------------------------------ */
+@media screen and (max-width: 480px) {
+  #leftnav_position_news_approve {
+    margin-top: 0; }
+
+  #news_approve_icon {
+    display: none; } }
+/*---------------------------------------------------------- 
+News edit all
+------------------------------------------------------------ */
+@media screen and (max-width: 480px) {
+  #leftnav_position_news_edit_all {
+    margin-top: 0; }
+
+  #news_approve_icon {
+    display: none; } }
+/*---------------------------------------------------------- 
+News edit
+------------------------------------------------------------ */
+@media screen and (max-width: 480px) {
+  #leftnav_position_news_edit {
+    margin-top: 0; } }
+/*---------------------------------------------------------- 
+News add image
+------------------------------------------------------------ */
+@media screen and (max-width: 480px) {
+  #leftnav_position_news_add_image {
+    margin-top: 0; } }
+/*---------------------------------------------------------- 
+News edit image
+------------------------------------------------------------ */
+@media screen and (max-width: 480px) {
+  #leftnav_position_news_edit_image {
+    margin-top: 0; } }
+@media screen and (max-width: 600px) {
+  .news_images_name {
+    display: none; }
+
+  .news_images_container {
+    text-align: center; } }
 /*---------------------------------------------------------- 
 Admin - DB updates
 ------------------------------------------------------------ */
