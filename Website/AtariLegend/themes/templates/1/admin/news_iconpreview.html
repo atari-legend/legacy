@@ -1,12 +1,14 @@
 {* 
 /***************************************************************************
-*                                news_iconpreview.tpl
+*                                news_iconpreview.html
 *                            --------------------------
 *   begin                : Sunday may 1, 2005
 *   copyright            : (C) 2005 Atari Legend
 *   email                : maarten.martens@freebel.net
 *
-*   Id: news_iconpreview.tpl,v 0.10 2005/05/01 ST Graveyard
+*   Id: news_iconpreview.html,v 0.10 2005/05/01 ST Graveyard
+*   Id: news_iconpreview.html,v 0.20 2016/07/28 ST Graveyard
+*		- AL 2.0
 *
 ***************************************************************************/
 //****************************************************************************************
@@ -15,27 +17,33 @@
 
 *}
 {extends file='1/admin/frontpage.html'}
+
 {block name=title}Preview news icons{/block}
+
 {block name=main_tile}
-<div class="NEWMAINCELL" style="text-align:center;">
-		<div style="display:table;">
-		{foreach from=$news_images item=line name=line}
-			{if $line.count=="1"}
-				<div style="display:table-row;">
-			{/if}
-					<div style="display:table-cell;">
-						<img src="../includes/show_image.php?file={$line.image_link}&amp;resize=310,null,null,null&amp;crop=left,top,310,260&amp;minimum_size=310,260" alt="newsbutton">
-						<br/>
-						{$line.image_name}
-					</div>
-						{if $smarty.foreach.line.last}
-							{if $line.count=="2" or $line.count=="1"}</div>{/if}
-						{/if}
-					{if $line.count=="3"}
+<div class="standard_tile" id="news_icon_preview">
+	<h1>NEWS ICON PREVIEWS</h1>
+	<div class="standard_tile_line"></div>
+	<div class="standard_tile_text">
+		<div class="left_nav_section">
+			These are all the available news icons
+		</div>
+		<br>
+		<br>
+		<fieldset class="centered_fieldset">
+			<legend>Icons</legend>
+			{foreach from=$news_images item=line name=line}
+				<div style="display:inline-block;text-align:center;margin-left:10px;margin-right:10px;">
+					<img src="../../includes/show_image.php?file={$line.image_link}&amp;resize=150,null,null,null" width="150" alt="Click to enlarge!" class="user_stats_img" id="user_details_img_dark" style="display:inline;">
+					<br>
+					{$line.image_name}
+					<br>
+					<br>
 				</div>
-			{/if}
-		{/foreach}
-		</div>			
-<div class="back_button"><a href="javascript:history.go(-1)" class="MAINNAV">back</a></div>
+			{/foreach}
+		</fieldset>	
+		<br>	
+		<div class="standard_table_center"><a href="javascript:history.go(-1)" class="standard_tile_link">back</a></div>
+	</div>
 </div>		
 {/block}

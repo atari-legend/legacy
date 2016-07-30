@@ -43,6 +43,7 @@ $menu_screenshot_path="../../data/images/menu_screenshots/";
 
 //news
 $news_images_path="../../data/images/news_images/";
+$news_images_save_path="../../../data/images/news_images/";
 
 //links
 $website_image_path="../../data/images/website_images/";

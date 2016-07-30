@@ -673,6 +673,56 @@ News Add
 	#leftnav_position_news_add{ margin-top: 0;}
 }
 
+/*---------------------------------------------------------- 
+News Icon Preview
+------------------------------------------------------------ */
+@media screen and (max-width: 480px) { 
+	#leftnav_position_news_icon_preview{ margin-top: 0;}
+}
+
+/*---------------------------------------------------------- 
+News approve
+------------------------------------------------------------ */
+@media screen and (max-width: 480px) { 
+	#leftnav_position_news_approve{ margin-top: 0;}
+	#news_approve_icon{display:none;}
+}
+
+/*---------------------------------------------------------- 
+News edit all
+------------------------------------------------------------ */
+@media screen and (max-width: 480px) { 
+	#leftnav_position_news_edit_all{ margin-top: 0;}
+	#news_approve_icon{display:none;}
+}
+
+/*---------------------------------------------------------- 
+News edit
+------------------------------------------------------------ */
+@media screen and (max-width: 480px) { 
+	#leftnav_position_news_edit{ margin-top: 0;}
+}
+
+/*---------------------------------------------------------- 
+News add image
+------------------------------------------------------------ */
+@media screen and (max-width: 480px) { 
+	#leftnav_position_news_add_image{ margin-top: 0;}
+}
+
+/*---------------------------------------------------------- 
+News edit image
+------------------------------------------------------------ */
+@media screen and (max-width: 480px) { 
+	#leftnav_position_news_edit_image{ margin-top: 0;}
+}
+
+@media screen and (max-width: 600px) { 
+	.news_images_name{ display:none;}
+	.news_images_container{text-align:center;}
+}
+
+
 
 /*---------------------------------------------------------- 
 Admin - DB updates

@@ -7,9 +7,9 @@
 *   email                : maarten.martens@freebel.net
 *   actual update        : File creation
 *							 
-*							
-*
 *   Id: news_add_images.php,v 0.10 2004/05/01 ST Graveyard
+*   Id: news_add_images.php,v 0.20 2016/07/29 ST Graveyard
+*		-AL 2.0
 *
 ***************************************************************************/
 
@@ -18,11 +18,17 @@
 In this section we can add or delete a newsimage
 ***********************************************************************************
 */
-
 include("../../includes/common.php");
 include("../../includes/admin.php");
 
+//load the search fields of the quick search side menu
+include("../../includes/quick_search_games.php"); 
+
 $smarty->assign("user_id",$_SESSION['user_id']);
+
+$smarty->assign('quick_search_games', 'quick_search_news_add_image');
+$smarty->assign('left_nav', 'leftnav_position_news_add_image');
+
 //Send all smarty variables to the templates
 $smarty->display("file:".$cpanel_template_folder."news_add_images.html");
 

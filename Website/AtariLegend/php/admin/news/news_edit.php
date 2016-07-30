@@ -7,9 +7,9 @@
 *   email                : maarten.martens@freebel.net
 *   actual update        : File creation
 *							 
-*							
-*
 *   Id: news_edit.php,v 0.10 2004/05/05 ST Graveyard
+*   Id: news_edit.php,v 0.20 2016/07/29 ST Graveyard
+*			- AL 2.0
 *
 ***************************************************************************/
 //****************************************************************************************
@@ -18,6 +18,9 @@
 
 include("../../includes/common.php");
 include("../../includes/admin.php");
+
+//load the search fields of the quick search side menu
+include("../../includes/quick_search_games.php"); 
 
 //This file deal with the editing of the still to approve news threads and the news threads online. 
 //When we are dealing with the news_id var, we're talking about newsthreads online, the news_submission_id
@@ -92,6 +95,9 @@ while ($newsimages = $sql_newsimage->fetch_array(MYSQLI_BOTH))
 }
 
 $smarty->assign("user_id",$_SESSION['user_id']);
+
+$smarty->assign('quick_search_games', 'quick_search_news_edit');
+$smarty->assign('left_nav', 'leftnav_position_news_edit');
 
 //Send all smarty variables to the templates
 $smarty->display("file:".$cpanel_template_folder."news_edit.html");

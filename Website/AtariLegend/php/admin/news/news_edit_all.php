@@ -7,9 +7,9 @@
 *   email                : maarten.martens@freebel.net
 *   actual update        : File creation
 *							 
-*							
-*
 *   Id: news_edit_all.php,v 0.10 2004/05/05 ST Graveyard
+*   Id: news_edit_all.php,v 0.20 2016/07/29 ST Graveyard
+*			- AL 2.0
 *
 ***************************************************************************/
 //****************************************************************************************
@@ -18,6 +18,10 @@
 
 include("../../includes/common.php");
 include("../../includes/admin.php");
+
+//load the search fields of the quick search side menu
+include("../../includes/quick_search_games.php"); 
+
 
 if(empty($v_linkback)) {$v_linkback = '';}
 
@@ -48,7 +52,7 @@ while ($news = $sql_news->fetch_array(MYSQLI_BOTH))
 	$user_name = get_username_from_id($news['user_id']);
 	$news_date = convert_timestamp($news['news_date']);
 	$news_text = InsertALCode($news['news_text']);
-	$news_text = InsertSmillies($news_text);
+	//$news_text = InsertSmillies($news_text);
 	$news_text = nl2br($news_text);
 	$email_headline = rawurlencode($news['news_headline']);
 	
@@ -87,6 +91,9 @@ $smarty->assign('links',
 			   'linknext' => $v_linknext));
 
 $smarty->assign("user_id",$_SESSION['user_id']);
+
+$smarty->assign('quick_search_games', 'quick_search_news_edit_all');
+$smarty->assign('left_nav', 'leftnav_position_news_edit_all');
 
 //Send all smarty variables to the templates
 $smarty->display("file:".$cpanel_template_folder."news_edit_all.html");

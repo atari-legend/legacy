@@ -1,13 +1,14 @@
 <?php
 /***************************************************************************
-*                                db_news_add.php
+*                                db_news.php
 *                            -----------------------
 *   begin                : Sunday, may 1 2005
 *   copyright            : (C) 2005 Atari Legend
 *   email                : maarten.martens@freebel.net
 *   actual update        : creation of file
 *							 
-*							
+*	Id:  db_news.php,v 0.10 2016/07/29 ST Graveyard 
+*			- AL 2.0 adding messages + bug fixes							
 *
 *
 ***************************************************************************/
@@ -20,6 +21,7 @@ In this section we can add a news update to the DB
 
 include("../../includes/common.php");
 include("../../includes/admin.php");
+
 
 //Delete the selected news entrie
 if (isset($action) and $action=="delete_news")
@@ -52,6 +54,8 @@ if (isset($action) and $action=="add_news")
 	}
 	else
 	{	
+		$descr = $mysqli->real_escape_string($descr);
+
 		// Insert the description and the image into the news_image table.
 		$sdbquery = $mysqli->query("INSERT INTO news_submission 
 							(news_headline,news_text,news_image_id,user_id,news_date)
@@ -71,9 +75,8 @@ if (isset($action) and $action=="add_news")
 //**************************************************************************************** 	
 
 if (isset($action) and $action=="approve_submission")
-{
-
-	include("../includes/functions_search.php");
+{	
+	include("../../includes/functions_search.php");
 
 	$sql_submission = "SELECT
 					  news_headline,
@@ -105,6 +108,7 @@ if (isset($action) and $action=="approve_submission")
 	$mode="post";
 		
 	add_search_words($mode, $newsid[0], $news_text, $news_headline);
+	$_SESSION['edit_message'] = "Submission approved";
 
 	header("Location: ../news/news_edit_all.php");
 }
@@ -121,7 +125,8 @@ if (isset($action) and $action=="delete_submission")
 	  			 news_submission 
 				 WHERE news_submission_id='$news_submission_id'")
 	or die("Deletion of the unapproved news update failed!");
-
+	
+	$_SESSION['edit_message'] = "Submission deleted";
 	header("Location: ../news/news_approve.php");	
 }
 
@@ -129,20 +134,22 @@ if (isset($action) and $action=="delete_submission")
 if (isset($action) and $action=="update_news")
 {
 
-		$news_text = addslashes($news_text);
-		$news_headline = addslashes($news_headline);
+	$news_text = addslashes($news_text);
+	$news_headline = addslashes($news_headline);
 
-		//Actual news thread change
-		$mysqli->query("UPDATE 
-					news SET 
-					news_headline='$news_headline', 
-					news_text='$news_text',
-					news_image_id='$news_image_id'
-					WHERE news_id='$news_id'")
-		 	or die("The update failed news");
-	
-		$message = "News thread updated correctly";
-		$smarty->assign('message', $message );
+	//Actual news thread change
+	$mysqli->query("UPDATE 
+				news SET 
+				news_headline='$news_headline', 
+				news_text='$news_text',
+				news_image_id='$news_image_id'
+				WHERE news_id='$news_id'")
+		or die("The update failed news");
+
+	$message = "News thread updated correctly";
+	$smarty->assign('message', $message );
+		
+	$_SESSION['edit_message'] = "News updated";
 
 	header("Location: ../news/news_edit.php?news_id=$news_id");
 }
@@ -151,20 +158,18 @@ if (isset($action) and $action=="update_news")
 if (isset($action) and $action=="update_submission")
 {
 
-		$news_text = addslashes($news_text);
+	$news_text = addslashes($news_text);
 
-		//Its a submission
-		$mysqli->query("UPDATE 
-					news_submission SET 
-					news_headline='$news_headline', 
-					news_text='$news_text',
-					news_image_id='$news_image_id'
-					WHERE news_submission_id='$news_submission_id'")
-		 	or die("The update failed submission");
+	//Its a submission
+	$mysqli->query("UPDATE 
+				news_submission SET 
+				news_headline='$news_headline', 
+				news_text='$news_text',
+				news_image_id='$news_image_id'
+				WHERE news_submission_id='$news_submission_id'")
+		or die("The update failed submission");
 	
-		$message = "News submission updated correctly";
-		$smarty->assign('message', $message );
-
+	$_SESSION['edit_message'] = "Submission updated";
 
 	header("Location: ../news/news_edit.php?news_submission_id=$news_submission_id");
 }
@@ -174,9 +179,12 @@ if (isset($action) and $action=="image_upload")
 //****************************************************************************************
 // This is where we handle the uploaded images and rename them and save them to db and hd
 //**************************************************************************************** 
+$news_image = $_FILES['news_image'];
 
 if(isset($news_image))
 {
+	$_SESSION['edit_message'] = "You forgot to add an image comment!";
+	
 	$file_ext=$_FILES['news_image']['type'];
 
 	if ($file_ext=='image/jpeg')
@@ -200,8 +208,7 @@ if(isset($news_image))
 	{
 		if ($image_name=='')
 		{
-			$message = "You forgot to add an image comment!";
-			$smarty->assign('message', $message);
+			$_SESSION['edit_message'] = "You forgot to add an image name!";
 		}
 		else
 		{
@@ -224,15 +231,17 @@ if(isset($news_image))
 			$newsimagerow = $NEWS->fetch_row();
 		
 			// Rename the uploaded file to its autoincrement number and move it to its proper place.
-			$file_data = rename("$file_name_tmp", "$news_images_path$newsimagerow[0].$ext");
-		
-			chmod("$news_images_path$newsimagerow[0].$ext", 0777);
+			$file_data = rename("$file_name_tmp", "$news_images_save_path$newsimagerow[0].$ext");
+			
+			$_SESSION['edit_message'] = "News image uploaded";
+						
+			chmod("$news_images_save_path$newsimagerow[0].$ext", 0777);
+			
 		}
 	}
 	else
 	{
-		$message = "Filetype not supported";
-		$smarty->assign('message', $message);
+		$_SESSION['edit_message'] = "Filetype not supported";
 	}
 
 	mysqli_close($mysqli);

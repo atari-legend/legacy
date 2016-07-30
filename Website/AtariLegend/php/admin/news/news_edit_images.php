@@ -6,10 +6,10 @@
 *   copyright            : (C) 2003 Atari Legend
 *   email                : maarten.martens@freebel.net
 *   actual update        : File creation
-*							 
-*							
-*
+*							 					
 *   Id: news_edit_images.php,v 0.10 2004/05/01 ST Graveyard
+*   Id: news_edit_images.php,v 0.20 2016/07/29 ST Graveyard
+*			- AL 2.0
 *
 ***************************************************************************/
 
@@ -21,6 +21,9 @@ In this section we can delete/edit a newsimage
 
 include("../../includes/common.php");
 include("../../includes/admin.php");
+
+//load the search fields of the quick search side menu
+include("../../includes/quick_search_games.php"); 
 
 $sql_images = $mysqli->query("SELECT * FROM news_image ORDER BY news_image_name ASC");
 	
@@ -36,8 +39,6 @@ while ( $news_images = $sql_images->fetch_array(MYSQLI_BOTH) )
 	$query = $mysqli->query($sql);
 	$imagecount = $query->fetch_array(MYSQLI_BOTH);	
 
-
-	
 	$smarty->append('news_images',
 	    	 array('image_id' => $news_images['news_image_id'],
 				   'image_name' => $news_images['news_image_name'],
@@ -69,11 +70,11 @@ if (isset($action) and $action=="delete_image")
 		{
 			$sql=$mysqli->query("SELECT news_image_ext FROM news_image WHERE news_image_id='$image'") or die("Couldn't query images");
 		
-			list($news_image_ext) = $sql->fetch_array(MYSQLI_BOTH);
+			list($news_image_ext) = $sql->fetch_array(MYSQLI_BOTH)	;
 		
 			$mysqli->query("DELETE FROM news_image WHERE news_image_id='$image'") or die("Couldn't delete image$news_image_id"); 
 			
-			unlink ("$news_images_path$image.$news_image_ext") or die("Couldn't delete image$news_image_id from server");
+			unlink ("$news_images_save_path$image.$news_image_ext") or die("Couldn't delete image$news_image_id from server");
 		}
 	}
 	else
@@ -81,6 +82,9 @@ if (isset($action) and $action=="delete_image")
 		$message="something is wrong with the image id";
 	}
 }
+
+$smarty->assign('quick_search_games', 'quick_search_news_edit_image');
+$smarty->assign('left_nav', 'leftnav_position_news_edit_image');
 
 //Send all smarty variables to the templates
 $smarty->display("file:".$cpanel_template_folder."news_edit_images.html");
