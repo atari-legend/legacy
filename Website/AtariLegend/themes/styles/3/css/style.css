@@ -3226,7 +3226,79 @@ News Edit Image
   vertical-align: middle;
   padding-left: 15px; }
 
-/* --> magazines section */
+/* --> news section */
+/*************************************************************/
+/**********************PICASSO SKIN***************************/
+/*************************************************************/
+/*************************************************************/
+/*****************CPanel COMPANY section css*********************/
+/*************************************************************/
+/*---------------------------------------------------------- 
+Company main
+------------------------------------------------------------ */
+#leftnav_position_company_main {
+  margin-top: 0;
+  margin-bottom: 30px;
+  float: left; }
+
+#quick_search_games_company_main {
+  margin-top: 0;
+  margin-bottom: 30px;
+  float: left; }
+
+#company_main {
+  margin-top: 0;
+  margin-bottom: 30px;
+  float: left; }
+
+.main_company_container {
+  display: flex;
+  align-items: flex-start; }
+
+.main_company_child {
+  text-align: center; }
+
+#child_edit_company, #child_add_company {
+  width: 85%;
+  float: left; }
+
+/*---------------------------------------------------------- 
+Company edit
+------------------------------------------------------------ */
+#leftnav_position_company_edit {
+  margin-top: 0;
+  margin-bottom: 30px;
+  float: left; }
+
+#quick_search_games_company_edit {
+  margin-top: 0;
+  margin-bottom: 30px;
+  float: left; }
+
+#company_edit {
+  margin-top: 0;
+  margin-bottom: 30px;
+  float: left; }
+
+/*---------------------------------------------------------- 
+Company edit
+------------------------------------------------------------ */
+#leftnav_position_company_logos {
+  margin-top: 0;
+  margin-bottom: 30px;
+  float: left; }
+
+#quick_search_games_company_logos {
+  margin-top: 0;
+  margin-bottom: 30px;
+  float: left; }
+
+#company_logos {
+  margin-top: 0;
+  margin-bottom: 30px;
+  float: left; }
+
+/* --> company section */
 /*---------------------------------------------------------- 
  Media Queries Main & CPanel 
 ------------------------------------------------------------ */
@@ -4031,6 +4103,38 @@ News edit image
 
   .news_images_container {
     text-align: center; } }
+/*---------------------------------------------------------- 
+Company Main
+------------------------------------------------------------ */
+@media screen and (max-width: 480px) {
+  #leftnav_position_company_main {
+    margin-top: 20px; } }
+@media screen and (max-width: 1549px) {
+  .main_company_container {
+    flex-direction: column; }
+
+  #child_edit_company, #child_add_company {
+    float: left;
+    margin-bottom: 30px; }
+
+  .main_company_container > div {
+    width: 100%; }
+
+  .main_company_child {
+    display: block;
+    margin: 0 auto; } }
+/*---------------------------------------------------------- 
+Company edit
+------------------------------------------------------------ */
+@media screen and (max-width: 480px) {
+  #leftnav_position_company_edit {
+    margin-top: 20px; } }
+/*---------------------------------------------------------- 
+Company logos
+------------------------------------------------------------ */
+@media screen and (max-width: 480px) {
+  #leftnav_position_company_logos {
+    margin-top: 20px; } }
 /*---------------------------------------------------------- 
 Admin - DB updates
 ------------------------------------------------------------ */

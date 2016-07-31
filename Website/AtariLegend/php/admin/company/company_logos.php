@@ -10,6 +10,8 @@
 *							
 *
 *   Id: company_logos.php,v 0.10 2005/08/07 Grave
+*   Id: company_logos.php,v 0.20 2016/07/31 Grave
+*		- AL 2.0
 *
 ***************************************************************************
 
@@ -19,6 +21,9 @@ A little logo preview page
 
 include("../../includes/common.php");
 include("../../includes/admin.php");
+
+//load the search fields of the quick search side menu
+include("../../includes/quick_search_games.php"); 
 
 $sql_logos = $mysqli->query("SELECT *
 				  			FROM pub_dev 
@@ -42,6 +47,9 @@ while  ($logos=$sql_logos->fetch_array(MYSQLI_BOTH))
 }
 
 $smarty->assign("user_id",$_SESSION['user_id']);
+
+$smarty->assign('quick_search_games', 'quick_search_games_company_logos');
+$smarty->assign('left_nav', 'leftnav_position_company_logos');
 
 //Send all smarty variables to the templates
 $smarty->display("file:".$cpanel_template_folder."company_logos.html");

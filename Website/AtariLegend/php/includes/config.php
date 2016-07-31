@@ -21,6 +21,7 @@ $article_screenshot_path="../../data/images/article_screenshots/";
 
 //company
 $company_screenshot_path="../../data/images/company_logos/";
+$company_screenshot_save_path="../../../data/images/company_logos/";
 $individual_screenshot_path="../../data/images/individual_screenshots/";
 
 //games

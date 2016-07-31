@@ -7,6 +7,8 @@
 *   email                : maarten.martens@freebel.net
 *   actual update        : Creation of file
 *   Id: company_edit.php,v 0.10 2005/08/07 14:40 Gatekeeper
+*   Id: company_edit.php,v 0.20 2016/07/31 14:40 Gatekeeper
+*		- AL 2.0 - adding messages
 *
 ***************************************************************************/
 
@@ -28,15 +30,16 @@ if ( isset($action) and $action == 'delete_logo' )
 	list ($pub_dev_imgext) = $pub_dev_query->fetch_array(MYSQLI_BOTH); 
 
 	$mysqli->query("UPDATE pub_dev_text SET pub_dev_imgext='' WHERE pub_dev_id='$comp_id'");
-	unlink ("$company_screenshot_path$comp_id.$pub_dev_imgext");
-
-header("Location: ../company/company_edit.php?comp_id=$comp_id");
+	unlink ("$company_screenshot_save_path$comp_id.$pub_dev_imgext");
+	
+	$_SESSION['edit_message'] = "Company logo deleted";
+	
+	header("Location: ../company/company_edit.php?comp_id=$comp_id");
 }
 
 //If we want to upload a logo
 if ( isset($action) and $action == 'add_logo' )
 {
-	
 	$image = $_FILES['company_pic'];
 
 	$tmp_name=$image['tmp_name']; 
@@ -44,7 +47,6 @@ if ( isset($action) and $action == 'add_logo' )
 	if ($tmp_name!=='none')
 	{
 	// Check what extention the file has and if it is allowed.
-	
 		$ext="";
 		$type_image = $image['type'];
 		
@@ -63,13 +65,14 @@ if ( isset($action) and $action == 'add_logo' )
 			{
 				$ext='gif';
 			} 
-		elseif ( $type_image=='image/pjpeg')
+		elseif ( $type_image=='image/jpeg')
 			{
 				$ext='jpg';
 			} 
 		
 		 if ($ext!=="")
 		 	{
+					
 			
        			// Rename the uploaded file to its autoincrement number and move it to its proper place.
 	  			 $query = $mysqli->query("SELECT * FROM pub_dev_text WHERE pub_dev_id='$comp_id'");
@@ -85,9 +88,11 @@ if ( isset($action) and $action == 'add_logo' )
 	  	 			 $mysqli->query("UPDATE pub_dev_text SET pub_dev_imgext='$ext' WHERE pub_dev_id='$comp_id'");
 	   			  }
 	   
-	  			  $file_data = rename("$tmp_name", "$company_screenshot_path$comp_id.$ext");
+	  			  $file_data = rename("$tmp_name", "$company_screenshot_save_path$comp_id.$ext");
 	
-				  chmod("$company_screenshot_path$comp_id.$ext", 0777);
+				  chmod("$company_screenshot_save_path$comp_id.$ext", 0777);
+				  
+				  $_SESSION['edit_message'] = "Company logo succesfully uploaded";
 			}
 	}
 
@@ -117,11 +122,10 @@ if ( isset($action) and $action == 'update' )
 		$sdbquery = $mysqli->query("UPDATE pub_dev_text SET pub_dev_profile = '$textfield' WHERE pub_dev_id = $comp_id")
 					or die("Couldn't Update into pub_dev_text");
 	}
-	
-	$message = 'Company succesfully updated';
-	$smarty->assign("message",$message);
+		
+	$_SESSION['edit_message'] = "Company succesfully updated";
 
-header("Location: ../company/company_edit.php?comp_id=$comp_id");
+	header("Location: ../company/company_edit.php?comp_id=$comp_id");
 
 }
 
@@ -142,11 +146,10 @@ if ( $action == 'delete_comp' )
 	$sql = $mysqli->query("DELETE FROM pub_dev_text WHERE pub_dev_id = '$comp_id'");
 	$sql = $mysqli->query("DELETE FROM game_developer WHERE dev_pub_id = '$comp_id'");
 	$sql = $mysqli->query("DELETE FROM game_publisher WHERE pub_dev_id = '$comp_id'");
+	
+	$_SESSION['edit_message'] = "Company succesfully deleted";
 
-	$message = "Company succesfully deleted";
-	$smarty->assign("message",$message);
-
-header("Location: ../company/company_main.php");
+	header("Location: ../company/company_main.php");
 
 }
 
@@ -155,8 +158,7 @@ if ( $action == "insert_comp" )
 {	
 	if ( $comp_name == '' )
 	{
-		$message = "Please fill in a company name";
-		$smarty->assign("message",$message);
+		$_SESSION['edit_message'] = "Please fill in a company name";
 		header("Location: ../company/company_main.php");
 	}
 	else
@@ -174,14 +176,12 @@ if ( $action == "insert_comp" )
 
 		$sdbquery = $mysqli->query("INSERT INTO pub_dev_text (pub_dev_id, pub_dev_profile) VALUES ($id, '$textfield')") 
 					or die("Couldn't insert into pub_dev_text");
-
-		$message = "Company succesfully inserted";
-		$smarty->assign("message",$message);
+	
+		$_SESSION['edit_message'] = "Company succesfully inserted";
+		
 		header("Location: ../company/company_edit.php?comp_id=$id");
 	}
 }
-
-
 
 //close the connection
 mysqli_close($mysqli);
