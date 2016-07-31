@@ -7,6 +7,8 @@
 *   email                : maarten.martens@freebel.net
 *   actual update        : Creation of file
 *   Id: company_main.php,v 0.10 2005/08/07 14:29 Gatekeeper
+*   Id: company_main.php,v 0.20 2016/07/31 22:49 Gatekeeper
+*			- AL 2.0
 *
 ***************************************************************************/
 
@@ -18,6 +20,9 @@ The main company (developer/publisher) page
 
 include("../../includes/common.php");
 include("../../includes/admin.php");
+
+//load the search fields of the quick search side menu
+include("../../includes/quick_search_games.php"); 
 
 //Get the companies
 $sql_company = $mysqli->query("SELECT * FROM pub_dev ORDER BY pub_dev_name ASC")
@@ -31,6 +36,9 @@ while  ($company=$sql_company->fetch_array(MYSQLI_BOTH))
 }
 
 $smarty->assign("user_id",$_SESSION['user_id']);
+
+$smarty->assign('quick_search_games', 'quick_search_games_company_main');
+$smarty->assign('left_nav', 'leftnav_position_company_main');
 
 //Send all smarty variables to the templates
 $smarty->display("file:".$cpanel_template_folder."company_main.html");
