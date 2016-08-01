@@ -761,6 +761,28 @@ Company logos
 }
 
 /*---------------------------------------------------------- 
+Individuals Main
+------------------------------------------------------------ */
+@media screen and (max-width: 480px) { 
+	#leftnav_position_individuals_main{ margin-top: 0;}
+}
+
+/*---------------------------------------------------------- 
+Individuals edit
+------------------------------------------------------------ */
+@media screen and (max-width: 480px) { 
+	#leftnav_position_individuals_edit{ margin-top: 0;}
+}
+
+/*---------------------------------------------------------- 
+Author types
+------------------------------------------------------------ */
+@media screen and (max-width: 480px) { 
+	#leftnav_position_author_types{ margin-top: 0;}
+}
+
+
+/*---------------------------------------------------------- 
 Admin - DB updates
 ------------------------------------------------------------ */	
 @media screen and (max-width: 500px) { 

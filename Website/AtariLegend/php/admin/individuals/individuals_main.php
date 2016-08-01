@@ -7,6 +7,8 @@
 *   email                : maarten.martens@freebel.net
 *   actual update        : Creation of file
 *   Id: Individuals_main.php,v 0.10 2005/08/06 15:04 Gatekeeper
+*   Id: Individuals_main.php,v 0.20 2016/08/01 23:04 Gatekeeper
+*		- AL 2.0
 *
 ***************************************************************************/
 
@@ -18,6 +20,9 @@ The main individual page
 
 include("../../includes/common.php");
 include("../../includes/admin.php");
+
+//load the search fields of the quick search side menu
+include("../../includes/quick_search_games.php"); 
 
 //Get the individuals
 $sql_individuals = "SELECT * FROM individuals ORDER BY ind_name ASC";
@@ -42,6 +47,9 @@ while  ($individuals=$query_temporary->fetch_array(MYSQLI_BOTH))
 }
 
 $smarty->assign("user_id",$_SESSION['user_id']);
+
+$smarty->assign('quick_search_games', 'quick_search_games_individuals_main');
+$smarty->assign('left_nav', 'leftnav_position_individuals_main');
 
 //Send all smarty variables to the templates
 $smarty->display("file:".$cpanel_template_folder."individuals_main.html");

@@ -3228,6 +3228,78 @@ Company logos
   float: left; }
 
 /* --> company section */
+/*************************************************************/
+/**********************TOS 207 SKIN***************************/
+/*************************************************************/
+/*************************************************************/
+/***************CPanel INDIVIDUALS section css****************/
+/*************************************************************/
+/*---------------------------------------------------------- 
+Individuals main
+------------------------------------------------------------ */
+#leftnav_position_individuals_main {
+  margin-top: -40px;
+  margin-bottom: 30px;
+  float: left; }
+
+#quick_search_games_individuals_main {
+  margin-top: -40px;
+  margin-bottom: 30px;
+  float: left; }
+
+#individuals_main {
+  margin-top: -40px;
+  margin-bottom: 30px;
+  float: left; }
+
+.main_company_container {
+  display: flex;
+  align-items: flex-start; }
+
+.main_company_child {
+  text-align: center; }
+
+#child_edit_company, #child_add_company {
+  width: 85%;
+  float: left; }
+
+/*---------------------------------------------------------- 
+Individuals edit
+------------------------------------------------------------ */
+#leftnav_position_individuals_edit {
+  margin-top: -40px;
+  margin-bottom: 30px;
+  float: left; }
+
+#quick_search_games_individuals_edit {
+  margin-top: -40px;
+  margin-bottom: 30px;
+  float: left; }
+
+#individuals_edit {
+  margin-top: -40px;
+  margin-bottom: 30px;
+  float: left; }
+
+/*---------------------------------------------------------- 
+author types
+------------------------------------------------------------ */
+#leftnav_position_author_types {
+  margin-top: -40px;
+  margin-bottom: 30px;
+  float: left; }
+
+#quick_search_games_author_types {
+  margin-top: -40px;
+  margin-bottom: 30px;
+  float: left; }
+
+#individuals_author {
+  margin-top: -40px;
+  margin-bottom: 30px;
+  float: left; }
+
+/* --> individuals section */
 /*---------------------------------------------------------- 
  Media Queries Main & CPanel 
 ------------------------------------------------------------ */
@@ -4286,6 +4358,51 @@ Company logos
     margin-top: 20px; } }
 @media screen and (max-width: 480px) {
   #leftnav_position_company_logos {
+    margin-top: 20px; } }
+/*---------------------------------------------------------- 
+Individuals Main
+------------------------------------------------------------ */
+@media screen and (max-width: 1279px) {
+  #leftnav_position_individuals_main {
+    margin-top: 20px; }
+
+  #quick_search_games_individuals_main {
+    margin-top: 20px; }
+
+  #individuals_main {
+    margin-top: 20px; } }
+@media screen and (max-width: 480px) {
+  #leftnav_position_individuals_main {
+    margin-top: 20px; } }
+/*---------------------------------------------------------- 
+Individuals Edit
+------------------------------------------------------------ */
+@media screen and (max-width: 1279px) {
+  #leftnav_position_individuals_edit {
+    margin-top: 20px; }
+
+  #quick_search_games_individuals_edit {
+    margin-top: 20px; }
+
+  #individuals_edit {
+    margin-top: 20px; } }
+@media screen and (max-width: 480px) {
+  #leftnav_position_individuals_edit {
+    margin-top: 20px; } }
+/*---------------------------------------------------------- 
+Author types
+------------------------------------------------------------ */
+@media screen and (max-width: 1279px) {
+  #leftnav_position_author_types {
+    margin-top: 20px; }
+
+  #quick_search_games_author_types {
+    margin-top: 20px; }
+
+  #individuals_author {
+    margin-top: 20px; } }
+@media screen and (max-width: 480px) {
+  #leftnav_position_author_types {
     margin-top: 20px; } }
 /*---------------------------------------------------------- 
 Admin - DB updates

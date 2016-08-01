@@ -23,6 +23,7 @@ $article_screenshot_path="../../data/images/article_screenshots/";
 $company_screenshot_path="../../data/images/company_logos/";
 $company_screenshot_save_path="../../../data/images/company_logos/";
 $individual_screenshot_path="../../data/images/individual_screenshots/";
+$individual_screenshot_save_path="../../../data/images/individual_screenshots/";
 
 //games
 $game_boxscan_path="../../data/images/game_boxscans/";
