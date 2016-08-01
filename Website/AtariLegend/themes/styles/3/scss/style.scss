@@ -21,8 +21,8 @@ $bg-color: #161c71;
 /*---------------------------------------------------------- 
  Top
 ------------------------------------------------------------ */
-@import '../../../templates/1/includes/main_scss/top'; 			/* --> TOP background & graphics */	
-@import '../../../templates/1/includes/main_scss/top_animation'; /* --> TOP animation */
+@import '../../../templates/1/includes/main_scss/top'; 				/* --> TOP background & graphics */	
+@import '../../../templates/1/includes/main_scss/top_animation'; 	/* --> TOP animation */
 @import '../../../templates/1/includes/main_scss/menu'; 			/* --> TOP and SIDE MENU */
 
 /*---------------------------------------------------------- 
@@ -33,14 +33,15 @@ $bg-color: #161c71;
 /*---------------------------------------------------------- 
  CPanel
 ------------------------------------------------------------ */
-@import '../../../styles/3/scss/cpanel-main';		/* --> Main structure, left and right side */ 
-@import '../../../styles/3/scss/cpanel-users';		/* --> Users section */ 
-@import '../../../styles/3/scss/cpanel-trivia';		/* --> Trivia section */ 
-@import '../../../styles/3/scss/cpanel-links';		/* --> Links section */ 
-@import '../../../styles/3/scss/cpanel-games';		/* --> Games section */	
-@import '../../../styles/3/scss/cpanel-magazines';	/* --> magazines section */	
-@import '../../../styles/3/scss/cpanel-news';		/* --> news section */	
-@import '../../../styles/3/scss/cpanel-company';	/* --> company section */	
+@import '../../../styles/3/scss/cpanel-main';			/* --> Main structure, left and right side */ 
+@import '../../../styles/3/scss/cpanel-users';			/* --> Users section */ 
+@import '../../../styles/3/scss/cpanel-trivia';			/* --> Trivia section */ 
+@import '../../../styles/3/scss/cpanel-links';			/* --> Links section */ 
+@import '../../../styles/3/scss/cpanel-games';			/* --> Games section */	
+@import '../../../styles/3/scss/cpanel-magazines';		/* --> magazines section */	
+@import '../../../styles/3/scss/cpanel-news';			/* --> news section */	
+@import '../../../styles/3/scss/cpanel-company';		/* --> company section */	
+@import '../../../styles/3/scss/cpanel-individuals';	/* --> individuals section */	
 
 /*---------------------------------------------------------- 
  Media Queries Main & CPanel 

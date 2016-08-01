@@ -33,14 +33,15 @@ $bg-color: #00d3d3;
 /*---------------------------------------------------------- 
  CPanel
 ------------------------------------------------------------ */
-@import '../../../styles/1/scss/cpanel-main';		/* --> Main structure, left and right side */ 
-@import '../../../styles/1/scss/cpanel-users';		/* --> Users section */ 
-@import '../../../styles/1/scss/cpanel-trivia';		/* --> Trivia section */ 	
-@import '../../../styles/1/scss/cpanel-links';		/* --> Links section */ 
-@import '../../../styles/1/scss/cpanel-games';		/* --> Games section */ 
-@import '../../../styles/1/scss/cpanel-magazines';	/* --> Magazine section */ 
-@import '../../../styles/1/scss/cpanel-news';		/* --> News section */ 
-@import '../../../styles/1/scss/cpanel-company';	/* --> company section */ 
+@import '../../../styles/1/scss/cpanel-main';			/* --> Main structure, left and right side */ 
+@import '../../../styles/1/scss/cpanel-users';			/* --> Users section */ 
+@import '../../../styles/1/scss/cpanel-trivia';			/* --> Trivia section */ 	
+@import '../../../styles/1/scss/cpanel-links';			/* --> Links section */ 
+@import '../../../styles/1/scss/cpanel-games';			/* --> Games section */ 
+@import '../../../styles/1/scss/cpanel-magazines';		/* --> Magazine section */ 
+@import '../../../styles/1/scss/cpanel-news';			/* --> News section */ 
+@import '../../../styles/1/scss/cpanel-company';		/* --> company section */ 
+@import '../../../styles/1/scss/cpanel-individuals';	/* --> individuals section */ 
 
 /*---------------------------------------------------------- 
  Media Queries Main & CPanel 

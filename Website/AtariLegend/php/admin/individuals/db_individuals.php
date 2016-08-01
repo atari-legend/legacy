@@ -6,7 +6,10 @@
 *   copyright            : (C) 2005 Atari Legend
 *   email                : maarten.martens@freebel.net
 *   actual update        : Creation of file
+*
 *   Id: Individuals_edit.php,v 0.10 2005/08/06 15:25 Gatekeeper
+*   Id: Individuals_edit.php,v 0.20 2016/08/01 23:36 Gatekeeper
+*		- AL 2.0 - adding messages
 *
 ***************************************************************************/
 
@@ -28,8 +31,11 @@ if (isset($ind_id) and isset($action) and $action == 'delete_pic')
 	list ($ind_imgext) = $photo->fetch_row();
 
 	$mysqli->query("UPDATE individual_text SET ind_imgext='' WHERE ind_id='$ind_id'");
-	unlink ("$individual_screenshot_path$ind_id.$ind_imgext");
-		header("Location: ../individuals/individuals_edit.php?ind_id=$ind_id");
+	unlink ("$individual_screenshot_save_path$ind_id.$ind_imgext");
+	
+	$_SESSION['edit_message'] = "Individual picture deleted";
+	
+	header("Location: ../individuals/individuals_edit.php?ind_id=$ind_id");
 }
 
 //If we want to upload a photo
@@ -61,7 +67,7 @@ if (isset($ind_id) and isset($action) and $action == 'add_photo')
 			{
 				$ext='gif';
 			} 
-		elseif ( $type_image=='image/pjpeg')
+		elseif ( $type_image=='image/jpeg')
 			{
 				$ext='jpg';
 			} 
@@ -70,9 +76,12 @@ if (isset($ind_id) and isset($action) and $action == 'add_photo')
 		 	{
 		   	    // Rename the uploaded file to its autoincrement number and move it to its proper place.
 	   			$mysqli->query("UPDATE individual_text SET ind_imgext='$ext' WHERE ind_id='$ind_id'");
-	  			$file_data = rename("$tmp_name", "$individual_screenshot_path$ind_id.$ext");
+	  			$file_data = rename("$tmp_name", "$individual_screenshot_save_path$ind_id.$ext");
 	   
-	  			chmod("$individual_screenshot_path$ind_id.$ext", 0777);
+	  			chmod("$individual_screenshot_save_path$ind_id.$ext", 0777);
+				
+				$_SESSION['edit_message'] = "Individual picture uploaded";
+				
 				header("Location: ../individuals/individuals_edit.php?ind_id=$ind_id");
 			}
 	}
@@ -101,23 +110,21 @@ if (isset($ind_id) and isset($action) and $action == 'update')
 					or die("Couldn't Update into individual_text (profile,email)");
 	}
 
-	$message = 'Individual succesfully updated';
-	$smarty->assign("message",$message);
+	$_SESSION['edit_message'] = "Individual succesfully updated";
+	
 	header("Location: ../individuals/individuals_edit.php?ind_id=$ind_id");
 }
 
 // Add nicknames
 if (isset($ind_id) and isset($action) and $action == "add_nick")
 {
-
 	if ($ind_nick !='')
 	{
-
 		$sdbquery = $mysqli->query("INSERT INTO individual_nicks (ind_id, nick) VALUES ($ind_id, '$ind_nick')") 
 			        	or die("Couldn't insert into individual_nicks");
-						
-			$message = 'Individual succesfully updated';
-			$smarty->assign("message",$message);
+			
+			$_SESSION['edit_message'] = "Individual nick added";
+			
 			header("Location: ../individuals/individuals_edit.php?ind_id=$ind_id");
 	}
 }
@@ -130,9 +137,9 @@ if (isset($ind_id) and isset($action) and $action == "delete_nick")
 	{
 		$mysqli->query("DELETE FROM individual_nicks WHERE individual_nicks_id='$nick_id'")
 			or die("Failed to delete nickname");
-		
-			$message = 'Nickname succesfully deleted';
-			$smarty->assign("message",$message);
+			
+			$_SESSION['edit_message'] = "Nickname succesfully deleted";
+			
 			header("Location: ../individuals/individuals_edit.php?ind_id=$ind_id");
 	}
 }
@@ -147,14 +154,14 @@ if (isset($ind_id) and isset($action) and $action == 'delete_ind')
 	
 	if ( $ind_imgext <> '' )
 	{
-		unlink ("$individual_screenshot_path$ind_id.$ind_imgext");
+		unlink ("$individual_screenshot_save_path$ind_id.$ind_imgext");
 	}
 	
 	$sdbquery = $mysqli->query("SELECT * FROM interview_main WHERE ind_id='$ind_id'")
 				or die ("Error getting interview info");
 	if ( $sdbquery->num_rows > 0 )
 	{
-		$smarty->assign("message",'Deletion failed - This individual is interviewed - Delete it in the appropriate section');
+		$_SESSION['edit_message'] = "Deletion failed - This individual is interviewed - Delete it in the appropriate section";
 	}
 	else
 	{
@@ -162,7 +169,7 @@ if (isset($ind_id) and isset($action) and $action == 'delete_ind')
 					or die ("Error getting interview info");
 		if ( $sdbquery->num_rows > 0 )
 		{
-			$smarty->assign("message",'Deletion failed - This individual is linked to a game - Delete it in the appropriate section');
+			$_SESSION['edit_message'] = "Deletion failed - This individual is linked to a game - Delete it in the appropriate section";
 		}
 		else
 		{
@@ -170,22 +177,18 @@ if (isset($ind_id) and isset($action) and $action == 'delete_ind')
 			$sql = $mysqli->query("DELETE FROM individuals WHERE ind_id = $ind_id");
 			$sql = $mysqli->query("DELETE FROM individual_text WHERE ind_id = $ind_id");
 			$sql = $mysqli->query("DELETE FROM individual_nicks WHERE ind_id = $ind_id");
-		    $smarty->assign("message",'individual succesfully deleted');
+			$_SESSION['edit_message'] = "individual succesfully deleted";
 			header("Location: ../individuals/individuals_main.php");
 		}
 	}
 }
-
-
-
 
 //Insert a new individual
 if (isset($action) and $action == 'insert_ind')
 {	
 	if ( $ind_name == '' )
 	{
-		$message = "Please fill in an individual name";
-		$smarty->assign("message",$message);
+		$_SESSION['edit_message'] = "Please fill in an individual name";
 		header("Location: ../individuals/individuals_main.php");
 	}
 	else
@@ -203,10 +206,10 @@ if (isset($action) and $action == 'insert_ind')
 
 		$sdbquery = $mysqli->query("INSERT INTO individual_text (ind_id, ind_profile) VALUES ($id, '$textfield')") 
 					or die("Couldn't insert into individual_text");
-				
-		$message = "individual succesfully inserted";
-		$smarty->assign("message",$message);
-			header("Location: ../individuals/individuals_edit.php?ind_id=$id");
+			
+		$_SESSION['edit_message'] = "individual succesfully inserted";	
+
+		header("Location: ../individuals/individuals_edit.php?ind_id=$id");
 	}
 }
 

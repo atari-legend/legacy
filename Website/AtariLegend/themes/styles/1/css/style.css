@@ -3246,6 +3246,75 @@ Company logos
   float: left; }
 
 /* --> company section */
+/*************************************************************/
+/**********************LEGACY SKIN****************************/
+/*************************************************************/
+/*************************************************************/
+/***************CPanel INDIVIDUALS section css****************/
+/*************************************************************/
+/*---------------------------------------------------------- 
+Individuals main
+------------------------------------------------------------ */
+#leftnav_position_individuals_main {
+  margin-top: 20px;
+  margin-bottom: 30px;
+  float: left; }
+
+#quick_search_games_individuals_main {
+  margin-top: 20px;
+  margin-bottom: 30px; }
+
+#individuals_main {
+  margin-top: 20px;
+  margin-bottom: 30px;
+  float: left; }
+
+.main_company_container {
+  display: flex;
+  align-items: flex-start; }
+
+.main_company_child {
+  text-align: center; }
+
+#child_edit_company, #child_add_company {
+  width: 85%;
+  float: left; }
+
+/*---------------------------------------------------------- 
+Individuals edit
+------------------------------------------------------------ */
+#leftnav_position_individuals_edit {
+  margin-top: 20px;
+  margin-bottom: 30px;
+  float: left; }
+
+#quick_search_games_individuals_edit {
+  margin-top: 20px;
+  margin-bottom: 30px; }
+
+#individuals_edit {
+  margin-top: 20px;
+  margin-bottom: 30px;
+  float: left; }
+
+/*---------------------------------------------------------- 
+Author types
+------------------------------------------------------------ */
+#leftnav_position_author_types {
+  margin-top: 20px;
+  margin-bottom: 30px;
+  float: left; }
+
+#quick_search_games_author_types {
+  margin-top: 20px;
+  margin-bottom: 30px; }
+
+#individuals_author {
+  margin-top: 20px;
+  margin-bottom: 30px;
+  float: left; }
+
+/* --> individuals section */
 /*---------------------------------------------------------- 
  Media Queries Main & CPanel 
 ------------------------------------------------------------ */
@@ -4039,6 +4108,24 @@ Company logos
 ------------------------------------------------------------ */
 @media screen and (max-width: 480px) {
   #leftnav_position_company_logos {
+    margin-top: 0; } }
+/*---------------------------------------------------------- 
+Individuals Main
+------------------------------------------------------------ */
+@media screen and (max-width: 480px) {
+  #leftnav_position_individuals_main {
+    margin-top: 0; } }
+/*---------------------------------------------------------- 
+Individuals edit
+------------------------------------------------------------ */
+@media screen and (max-width: 480px) {
+  #leftnav_position_individuals_edit {
+    margin-top: 0; } }
+/*---------------------------------------------------------- 
+Author types
+------------------------------------------------------------ */
+@media screen and (max-width: 480px) {
+  #leftnav_position_author_types {
     margin-top: 0; } }
 /*---------------------------------------------------------- 
 Admin - DB updates

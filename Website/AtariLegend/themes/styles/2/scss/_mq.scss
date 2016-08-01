@@ -955,6 +955,44 @@ Company logos
 	#leftnav_position_company_logos{ margin-top: 20px;}
 }
 
+/*---------------------------------------------------------- 
+Individuals Main
+------------------------------------------------------------ */
+@media screen and (max-width: 1279px) { 
+	#leftnav_position_individuals_main{margin-top: 20px;}
+	#quick_search_games_individuals_main{margin-top: 20px;}
+	#individuals_main{margin-top: 20px;}
+}
+
+@media screen and (max-width: 480px) { 
+	#leftnav_position_individuals_main{ margin-top: 20px;}
+}
+
+/*---------------------------------------------------------- 
+Individuals Edit
+------------------------------------------------------------ */
+@media screen and (max-width: 1279px) { 
+	#leftnav_position_individuals_edit{margin-top: 20px;}
+	#quick_search_games_individuals_edit{margin-top: 20px;}
+	#individuals_edit{margin-top: 20px;}
+}
+
+@media screen and (max-width: 480px) { 
+	#leftnav_position_individuals_edit{ margin-top: 20px;}
+}
+
+/*---------------------------------------------------------- 
+Author types
+------------------------------------------------------------ */
+@media screen and (max-width: 1279px) { 
+	#leftnav_position_author_types{margin-top: 20px;}
+	#quick_search_games_author_types{margin-top: 20px;}
+	#individuals_author{margin-top: 20px;}
+}
+
+@media screen and (max-width: 480px) { 
+	#leftnav_position_author_types{ margin-top: 20px;}
+}
 
 
 /*---------------------------------------------------------- 
