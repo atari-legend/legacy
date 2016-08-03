@@ -8,6 +8,8 @@
 *   actual update        : Start of creation file
 *
 *   Id: interviews_main.php,v 0.10 21/07/2005 22:17 Gatekeeper
+*   Id: interviews_main.php,v 0.20 02/08/2016 22:34 Gatekeeper
+*		- AL 2.0
 *
 ***************************************************************************/
 
@@ -17,6 +19,9 @@
 
 include("../../includes/common.php");
 include("../../includes/admin.php");
+
+//load the search fields of the quick search side menu
+include("../../includes/quick_search_games.php"); 
 
 //Get list of all individuals
 $sql_individuals = $mysqli->query("SELECT * FROM individuals ORDER BY ind_name ASC")
@@ -50,7 +55,7 @@ if ( $individual_search == " " or $individual_search == '-' )
 	//show all
 	$sql_interview = $mysqli->query("SELECT * FROM interview_main 
 								  LEFT JOIN interview_text on (interview_main.interview_id = interview_text.interview_id)
-								  LEFT JOIN users on ( interview_main.member_id = users.user_id )
+								  LEFT JOIN users on ( interview_main.user_id = users.user_id )
 								  LEFT JOIN individuals on ( interview_main.ind_id = individuals.ind_id )
 								  LEFT JOIN individual_text on (interview_main.ind_id = individual_text.ind_id)
 								  ORDER BY individuals.ind_name ASC")
@@ -60,7 +65,7 @@ if ( $individual_search == " " or $individual_search == '-' )
 	{
 	$sql_interview = $mysqli->query("SELECT * FROM interview_main 
 								  LEFT JOIN interview_text on (interview_main.interview_id = interview_text.interview_id)
-								  LEFT JOIN users on ( interview_main.member_id = users.user_id )
+								  LEFT JOIN users on ( interview_main.user_id = users.user_id )
 								  LEFT JOIN individuals on ( interview_main.ind_id = individuals.ind_id )
 								  LEFT JOIN individual_text on (interview_main.ind_id = individual_text.ind_id)
 								  WHERE individuals.ind_id = '$individual_search'
@@ -113,6 +118,8 @@ if ( $individual_search == " " or $individual_search == '-' )
 				   'interview_text' => $interview_text));
 }
 }
+$smarty->assign('quick_search_games', 'quick_search_games_interviews_main');
+$smarty->assign('left_nav', 'leftnav_position_interviews_main');
 
 $smarty->assign("user_id",$_SESSION['user_id']);
 

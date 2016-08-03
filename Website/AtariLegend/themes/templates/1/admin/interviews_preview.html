@@ -6,7 +6,9 @@
 *   copyright            : (C) 2004 Atari Legend
 *   email                : admin@atarilegend.com
 *
-*   Id: interviews_preview.tpl,v 0.10 2005/07/21 1647 ST Graveyard
+*   Id: interviews_preview.tpl,v 0.10 2005/07/21 16:47 ST Graveyard
+*   Id: interviews_preview.tpl,v 0.10 2016/08/03 16:34 ST Graveyard
+*					- AL 2.0
 *
 ***************************************************************************/
 
@@ -15,51 +17,66 @@
 //**************************************************************************************** 
 *}
 {extends file='1/admin/frontpage.html'}
+
+{block name=java_script}
+<script type="text/javascript" src="{$template_dir}includes/js/lightbox.min.js"></script>
+<link type="text/css" href="{$style_dir}css/lightbox.css" hreflang="en" rel="stylesheet">
+{/block}
+
 {block name=title}
 <div style="float:left;">
-Interview by <a href="mailto:{if isset($interview.interview_email)}{$interview.interview_email}{/if}?subject=Your interview with {$interview.interview_author} at Atari Legend" class="MAINNAV_WHITE">{$interview.interview_author}</a>
+	Interview by <a href="mailto:{if isset($interview.interview_email)}{$interview.interview_email}{/if}?subject=Your interview with {$interview.interview_author} at Atari Legend" >{$interview.interview_author}</a>
 </div>
 <div style="float:right;padding-right:5px;">{$interview.interview_date}</div>
 {/block}
+
 {block name=main_tile}
-<div class="NEWMAINCELL">	
-
-<div style="display:inline-block;width:680px;">
-		{if $interview.interview_img != 'none'}
-			<span style="float:right;"><img src="../includes/show_image.php?file={$interview.interview_img}" alt="{$interview.individual_name}"></span>
-		{/if}
-		{$interview.interview_chapters}
-<br><br>	
-		{$interview.interview_text}
-	
-		<br/><br/>
-		<span style="display:block;text-align:center;">© 2001 - 2015 by "Atari Legend". All rights reserved.</span>
-		<br/>
-
-</div>	
-		{* test *}
-<div class="MAINHEADERBAR" style="display:inline;width: 300px;float:right;vertical-align:top;">
-	<div class="MAINHEADING">&nbsp;Screenshots</div>
-
-		<div class="NEWMAINCELL">	
-			{foreach from=$screenshots item=line} 
-				<div style="text-align:center;">
-					 	<img src="../includes/show_image.php?file={$line.screenshot}&amp;resize=240,null,null,null">
-					</div>
-					<div class="LEFTNAV" style="text-align:center;">
-						{$line.comment}
-					</div>
-				<br/>
-				<br/>
-			{/foreach}
+<div class="standard_tile" id="games_review_preview">
+	<h1>{$interview.individual_name}</h1>
+	<div class="standard_tile_line"></div>
+	<div class="standard_tile_text">
+		<div class="left_nav_section">
+			Interview by <a href="mailto:{if isset($interview.interview_email)}{$interview.interview_email}{/if}?subject=Your interview with {$interview.interview_author} at Atari Legend" class="left_nav_link">{$interview.interview_author}</a> on {$interview.interview_date}
 		</div>
-</div>
-		{* test *}
-				
-
-
-<br/>
-<div class="back_button"><a href="javascript:history.go(-1)" class="MAINNAV">back</a></div>
-<br/>
+		<br>
+		<br>
+		<fieldset>
+			<legend>Preview</legend>
+			<div class="review_container">
+				<div class="review_child" id="review_text">
+					{if $interview.interview_img != 'none'}
+						<span style="float:right; margin-left: 10px;" id="interview_preview_photo"><img src="../../includes/show_image.php?file={$interview.interview_img}&amp;resize=200,null,null,null" alt="{$interview.individual_name}" style="display:inline;" class="user_stats_img" id="user_details_img_dark"></span>
+					{/if}
+					{$interview.interview_chapters}
+					<br>
+					<br>	
+					{$interview.interview_text}
+					<br>
+					<br>
+				</div>	
+				<div class="review_child" id="review_screenshots">
+					<div class="review_screenshot_space">
+						<br>
+						<br>
+						<br>
+					</div>
+					{foreach from=$screenshots item=line} 
+						<div class="review_screenshot_order">
+							<a href="../../includes/show_image.php?file={$line.screenshot}&amp;resize=410,null,null,null" data-lightbox="image-1" data-title="{$interview.individual_name} - {$line.count}">
+								<img src="../../includes/show_image.php?file={$line.screenshot}&amp;resize=170,null,null,null" alt="Click to enlarge!" style="display:inline;" class="user_stats_img" id="user_details_img_dark">
+							</a>
+							<br><b>{$line.comment}</b>
+							<br>
+							<br>
+							<br>
+						</div>
+					{/foreach}
+				</div>		
+			</div>	
+			<br>
+		</fieldset>
+		<br>
+		<div class="standard_table_center"><a href="../interviews/interviews_edit.php?interview_id={$interview.interview_id}" class="standard_tile_link">back</a></div>
+	</div>
 </div>
 {/block}

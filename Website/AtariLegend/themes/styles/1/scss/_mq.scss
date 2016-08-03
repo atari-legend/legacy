@@ -781,6 +781,54 @@ Author types
 	#leftnav_position_author_types{ margin-top: 0;}
 }
 
+/*---------------------------------------------------------- 
+Interviews main
+------------------------------------------------------------ */
+@media screen and (max-width: 480px) { 
+	#leftnav_position_interviews_main{ margin-top: 0;}
+	.interviews_main_photo{display:none;}
+}
+
+/*---------------------------------------------------------- 
+Interviews edit
+------------------------------------------------------------ */
+@media screen and (max-width: 480px) { 
+	#leftnav_position_interviews_edit{ margin-top: 0;}
+}
+
+/*---------------------------------------------------------- 
+Interviews preview
+------------------------------------------------------------ */
+@media screen and (max-width: 480px) { 
+	#leftnav_position_interviews_preview{ margin-top: 0;}
+}
+
+@media screen and (max-width: 650px) { 
+	#interview_preview_photo{display:none;}
+}
+
+/*---------------------------------------------------------- 
+Interviews add
+------------------------------------------------------------ */
+@media screen and (max-width: 480px) { 
+	#leftnav_position_interviews_add{ margin-top: 0;}
+}
+
+/*---------------------------------------------------------- 
+Interviews add screenshot
+------------------------------------------------------------ */
+@media screen and (max-width: 480px) { 
+	#leftnav_position_interviews_add_screenshot{ margin-top: 0;}
+}
+
+/*---------------------------------------------------------- 
+Interviews help
+------------------------------------------------------------ */
+@media screen and (max-width: 480px) { 
+	#leftnav_position_interviews_help{ margin-top: 0;}
+}
+
+
 
 /*---------------------------------------------------------- 
 Admin - DB updates

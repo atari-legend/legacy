@@ -7,9 +7,9 @@
 *   email                : silversurfer@atari-forum.com
 *   actual update        : New section.
 *						  
-*							
-*
 *   Id: db_crew.php,v 1.10 2005/10/29 Silver Surfer
+*   Id: db_crew.php,v 1.20 2016/08/02 STG
+*		- AL 2.0
 *
 ***************************************************************************/
 
@@ -36,6 +36,8 @@ if (isset($action) and $action == 'add_screens')
 //Here we'll be looping on each of the inputs on the page that are filled in with an image!
 $image = $_FILES['image'];
 
+echo $image;
+
 foreach($image['tmp_name'] as $key=>$tmp_name)
 {
 	if ($tmp_name!=='none')
@@ -61,7 +63,7 @@ foreach($image['tmp_name'] as $key=>$tmp_name)
 			{
 				$ext='gif';
 			} 
-		elseif ( $type_image=='image/pjpeg')
+		elseif ( $type_image=='image/jpeg')
 			{
 				$ext='jpg';
 			} 
@@ -86,9 +88,9 @@ foreach($image['tmp_name'] as $key=>$tmp_name)
 					or die ("Database error - inserting screenshots2");
 		
 		// Rename the uploaded file to its autoincrement number and move it to its proper place.
-		$file_data = rename($image['tmp_name'][$key], "$interview_screenshot_path$screenshotrow[0].$ext");
+		$file_data = rename($image['tmp_name'][$key], "$interview_screenshot_save_path$screenshotrow[0].$ext");
 		
-		chmod("$interview_screenshot_path$screenshotrow[0].$ext", 0777);
+		chmod("$interview_screenshot_save_path$screenshotrow[0].$ext", 0777);
 		
 		}
 	}
@@ -124,15 +126,14 @@ if (isset($action) and $action == 'delete_screen')
 	$sql = $mysqli->query("DELETE FROM screenshot_main WHERE screenshot_id = '$screenshot_id' ");
 	$sql = $mysqli->query("DELETE FROM screenshot_interview WHERE screenshot_id = '$screenshot_id' ");
 
-	$new_path = $interview_screenshot_path;;
+	$new_path = $interview_screenshot_save_path;
 	$new_path .= $screenshot_id;
 	$new_path .= ".";
 	$new_path .= $screenshot_ext;
 
 	unlink ("$new_path");
 	
-	$message = 'Screenshot (and comment) deleted succesfully';
-	$smarty->assign("message",$message);
+	$_SESSION['edit_message'] = 'Screenshot (and comment) deleted succesfully';
 	
 	header("Location: ../interviews/interviews_screenshots_add.php?interview_id=$interview_id");
 }
@@ -171,7 +172,7 @@ $sql = $mysqli->query("DELETE FROM interview_text WHERE interview_id = '$intervi
 						
 			$sql = $mysqli->query("DELETE FROM screenshot_main WHERE screenshot_id = $screenshotrow[2] ");
 
-			$new_path = $interview_screenshot_path;
+			$new_path = $interview_screenshot_save_path;
 			$new_path .= $screenshotrow[2];
 			$new_path .= ".";
 			$new_path .= $screenshot_ext_type;
@@ -179,7 +180,9 @@ $sql = $mysqli->query("DELETE FROM interview_text WHERE interview_id = '$intervi
 			unlink ("$new_path");
 		}
 		
-$sql = $mysqli->query("DELETE FROM screenshot_interview WHERE interview_id = '$interview_id' ");
+	$sql = $mysqli->query("DELETE FROM screenshot_interview WHERE interview_id = '$interview_id' ");
+	
+	$_SESSION['edit_message'] = 'interview deleted';
 
 	header("Location: ../interviews/interviews_main.php");
 }
@@ -214,15 +217,14 @@ if ( isset($action) and $action == 'delete_screenshot_comment' )
 	$sql = $mysqli->query("DELETE FROM screenshot_main WHERE screenshot_id = '$screenshot_id' ");
 	$sql = $mysqli->query("DELETE FROM screenshot_interview WHERE screenshot_id = '$screenshot_id' ");
 
-	$new_path = $interview_screenshot_path;;
+	$new_path = $interview_screenshot_save_path;
 	$new_path .= $screenshot_id;
 	$new_path .= ".";
 	$new_path .= $screenshot_ext;
 
 	unlink ("$new_path");
 	
-	$message = 'Screenshot and comment deleted succesfully';
-	$smarty->assign("message",$message);
+	$_SESSION['edit_message'] = 'Screenshot and comment deleted succesfully';
 	
 	header("Location: ../interviews/interviews_edit.php?interview_id=$interview_id");
 }
@@ -235,12 +237,18 @@ if ( isset($action) and $action == 'delete_screenshot_comment' )
 if ( isset($action) and $action == 'update_interview' )
 {
 	//First, we'll be filling up the main interview table
-	$sdbquery = $mysqli->query("UPDATE interview_main SET member_id = $members, ind_id = $individual
+	$sdbquery = $mysqli->query("UPDATE interview_main SET user_id = $members, ind_id = $individual
 							 WHERE interview_id = $interview_id")
 				or die("Couldn't Update into interview_main");
 	
 	// first we have to convert the date vars into a time stamp to be inserted to review_date
 	$date = date_to_timestamp($Date_Year,$Date_Month,$Date_Day);
+	
+	$textfield = $mysqli->real_escape_string($textfield);
+	$textintro = $mysqli->real_escape_string($textintro);
+	$textchapters = $mysqli->real_escape_string($textchapters);
+	
+	//$textfield = addslashes($textfield);
 	
 	$sdbquery = $mysqli->query("UPDATE interview_text SET interview_text = '$textfield', interview_date = '$date', interview_intro = '$textintro', interview_chapters = '$textchapters' WHERE interview_id = $interview_id") 
 				or die("Couldn't update into interview_text");
@@ -259,6 +267,8 @@ if ( isset($action) and $action == 'update_interview' )
 			//fill the comments table
 			$screenid = $screenrow[0];
 			$comment = $inputfield[$i];
+			$comment = $mysqli->real_escape_string($comment);
+			//$comment = addslashes($comment);
 			
 			$interviewshotid = $screenrow[0];
 					
@@ -282,9 +292,9 @@ if ( isset($action) and $action == 'update_interview' )
 		}
 		$i++;
 	}
-
-	$message = "Interview updated succesfully";
-	$smarty->assign("message",$message);
+	
+	$_SESSION['edit_message'] = 'Interview updated succesfully';
+	
 	header("Location: ../interviews/interviews_edit.php?interview_id=$interview_id");
 }
 
@@ -298,12 +308,12 @@ elseif (isset($action) and $action == 'add_interview')
 {
 	if ( $members == '' or $members == '-' or $individual == '' or $individual == "-"  )
 	{
-		$message = "Some required info is not filled in. Make sure the 'author' and 'individual' fields are completed";
-		$smarty->assign("message",$message);
 		
+		$_SESSION['edit_message'] = "Some required info is not filled in. Make sure the 'author' and 'individual' fields are completed";
+	
 		//Get the individuals
 		$sql_individuals = $mysqli->query("SELECT * FROM individuals ORDER BY ind_name ASC")
-				  		   or die ("Couldn't query indiciduals database");
+				  		   or die ("Couldn't query individuals database");
 		
 		while ($individuals = $sql_individuals->fetch_array(MYSQLI_BOTH))
 		{
@@ -340,7 +350,7 @@ elseif (isset($action) and $action == 'add_interview')
 	}	
 	else
 	{
-		$sdbquery = $mysqli->query("INSERT INTO interview_main (member_id, ind_id) VALUES ($members, $individual)")
+		$sdbquery = $mysqli->query("INSERT INTO interview_main (user_id, ind_id) VALUES ($members, $individual)")
 					or die("Couldn't insert into interview_main");
 	
 		//get the id of the inserted interview
@@ -352,8 +362,7 @@ elseif (isset($action) and $action == 'add_interview')
 		$sdbquery = $mysqli->query("INSERT INTO interview_text (interview_id, interview_text, interview_date, interview_intro, interview_chapters) VALUES ($id, '$textfield', '$date', '$textintro','$textchapters')") 
 					or die("Couldn't insert into interview_text");
 		
-		$message = "Interview added succesfully";
-		$smarty->assign("message",$message);
+		$_SESSION['edit_message'] = 'Interview added succesfully';
 		
 		$smarty->assign("user_id",$_SESSION['user_id']);
 
