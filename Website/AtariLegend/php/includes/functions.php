@@ -40,7 +40,7 @@ $alcode = str_replace("[list]", "<ul>", $alcode);
 $alcode = str_replace("[/list]", "</ul>", $alcode);
 $alcode = preg_replace("#\[email\=(.*)\](.*)\[\/email\]#Ui", "<a href=\"mailto: $1\">$2</a>", $alcode);
 $alcode = preg_replace("#\[email\](.*)\[\/email\]#Ui", "<a href=\"mailto: $1\">$1</a>", $alcode);
-$alcode = preg_replace("#\[hotspot\](.*)\[\/hotspot\]#Ui", "<a name=\"$1\">$1</a>", $alcode);
+$alcode = preg_replace("#\[hotspot\=(.*)\](.*)\[\/hotspot\]#Ui", "<a name=\"$1\">$2</a>", $alcode);
 $alcode = str_replace("[quote]", "<blockquote><span class=\"12px\">quote:</span><hr>", $alcode);
 $alcode = str_replace("[/quote]", "<hr></blockquote>", $alcode);
 $alcode = str_replace("[code]","<blockquote><pre>",$alcode);
@@ -49,7 +49,7 @@ $alcode = preg_replace("#\[url\](www\..+)\[\/url\]#i", "[url=http://$1]$1[/url]"
 $alcode = preg_replace("#\[url\=(www\..+)\](.*)\[\/url\]#i", "[url=http://$1]$2[/url]", $alcode);
 $alcode = preg_replace("#\[url\=(.*)\](.*)\[\/url\]#Ui", "<a href=\"$1\" class=\"standard_tile_link\">$2</a>", $alcode);
 $alcode = preg_replace("#\[url\](.*)\[\/url\]#Ui", "<a href=\"$1\" class=\"standard_tile_link\">$1</a>", $alcode);
-$alcode = preg_replace("#\[hotspotUrl\](.*)\[\/hotspotUrl\]#Ui", "<a href=\"$1\" class=\"standard_tile_link\">$1</a>", $alcode);
+$alcode = preg_replace("#\[hotspotUrl\=(.*)\](.*)\[\/hotspotUrl\]#Ui", "<a href=\"$1\" class=\"standard_tile_link_black\">$2</a>", $alcode);
 $alcode = preg_replace("#(^|[\n ])([\w]+?://.*?[^ \"\n\r\t<]*)#is", "\\1<a href=\"\\2\" target=\"_blank\" class=\"standard_tile_link\">\\2</a>", $alcode);
 $alcode = preg_replace("#(^|[\n ])((www|ftp)\.[\w\-]+\.[\w\-.\~]+(?:/[^ \"\t\n\r<]*)?)#is", "\\1<a href=\"http://\\2\" target=\"_blank\" class=\"standard_tile_link\">\\2</a>", $alcode);
 

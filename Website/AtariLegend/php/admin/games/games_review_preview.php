@@ -40,7 +40,6 @@ $query_review = $sql_review->fetch_array(MYSQLI_BOTH);
 	$review_text = nl2br($review_text);
 
 	$review_text = InsertALCode($review_text);
-	$review_text = InsertSmillies($review_text);
 	
 	$smarty->assign('review',
 	 array('user_name' => $query_review['userid'],

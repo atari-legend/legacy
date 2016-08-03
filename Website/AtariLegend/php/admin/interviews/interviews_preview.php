@@ -6,7 +6,9 @@
 *   copyright            : (C) 2004 Atari Legend
 *   email                : admin@atarilegend.com
 *
-*   Id: interviews_preview.php,v 0.10 2005/07/21 1647 ST Graveyard
+*   Id: interviews_preview.php,v 0.10 2005/07/21 16:47 ST Graveyard
+*   Id: interviews_preview.php,v 0.20 2016/08/03 16:33 ST Graveyard
+*		- AL 2.0
 *
 ***************************************************************************/
 
@@ -18,9 +20,12 @@
 include("../../includes/common.php");
 include("../../includes/admin.php"); 
 
+//load the search fields of the quick search side menu
+include("../../includes/quick_search_games.php"); 
+
 $sql_interview = $mysqli->query("SELECT 
 								   interview_main.interview_id,
-								   interview_main.member_id,
+								   interview_main.user_id,
 								   interview_main.ind_id,
 								   interview_text.interview_text,
 								   interview_text.interview_chapters,
@@ -42,15 +47,13 @@ $query_interview = $sql_interview->fetch_array(MYSQLI_BOTH);
 	$interview_text = $query_interview['interview_text'];
 	$interview_text = nl2br($interview_text);
 	$interview_text = InsertALCode($interview_text);
-	$interview_text = InsertSmillies($interview_text);
 	
 	$interview_chapters = $query_interview['interview_chapters'];
 	$interview_chapters = nl2br($interview_chapters);
 	$interview_chapters = InsertALCode($interview_chapters);
-	$interview_chapters = InsertSmillies($interview_chapters);
 	
 	//get the author of the interview
-	$query_author = $mysqli->query("SELECT userid, email FROM users WHERE user_id = $query_interview[member_id]")
+	$query_author = $mysqli->query("SELECT userid, email FROM users WHERE user_id = $query_interview[user_id]")
 					or die ("couldn't get author of interview");
 	$sql_author = $query_author->fetch_array(MYSQLI_BOTH);
 	
@@ -88,6 +91,8 @@ $query_screenshots = $mysqli->query("SELECT * FROM interview_main
 								WHERE interview_main.interview_id = '$interview_id'
 								ORDER BY screenshot_main.screenshot_id");
 
+$count = 1;
+								
 while ($sql_screenshots = $query_screenshots->fetch_array(MYSQLI_BOTH))
 {
 	$new_path = $interview_screenshot_path;
@@ -95,11 +100,16 @@ while ($sql_screenshots = $query_screenshots->fetch_array(MYSQLI_BOTH))
 	$new_path .= ".";
 	$new_path .= $sql_screenshots['imgext'];
 		
-	
 	$smarty->append('screenshots',
 	    		  array('screenshot' => $new_path,
+						'count' => $count,
 			 		    'comment' => $sql_screenshots['comment_text'])); 
+	
+	$count++;
 }
+
+$smarty->assign('quick_search_games', 'quick_search_games_interviews_preview');
+$smarty->assign('left_nav', 'leftnav_position_interviews_preview');
 
 //Send all smarty variables to the templates
 $smarty->display("file:".$cpanel_template_folder."interviews_preview.html");

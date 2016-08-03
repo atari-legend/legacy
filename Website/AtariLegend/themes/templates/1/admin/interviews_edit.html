@@ -1,13 +1,15 @@
 {* 
 /***************************************************************************
-*                                interviews_edit.tpl
+*                                interviews_edit.html
 *                            --------------------------
 *   begin                : Saturday, July 22 2005
 *   copyright            : (C) 2005 Atari Legend
 *   email                : maarten.martens@freebel.net
 *   actual update        : created this page
 *
-*   Id: interviews_edit.tpl,v 0.10 2005/07/22 13:40 Gatekeeper
+*   Id: interviews_edit.html,v 0.10 2005/07/22 13:40 Gatekeeper
+*   Id: interviews_edit.html,v 0.20 2016/08/02 23:03 Gatekeeper
+*		- AL 2.0 
 *
 ***************************************************************************/
 
@@ -16,9 +18,8 @@
 //**************************************************************************************** 
 *}
 {extends file='1/admin/frontpage.html'}
-{block name=java_script}
-<script src="../templates/0/js/game_comment.js"></script>
-<script src="../templates/0/js/overlib.js"></script>	
+
+{block name=java_script}	
 <script type="text/javascript">
 function deletecomment(screenshot_id, interview_id)
 {	
@@ -30,7 +31,7 @@ function deletecomment(screenshot_id, interview_id)
     var return_value = confirm(message);
 	if (return_value !="0")
     {
-      	url="interviews_edit.php?interview_id="+interview_id+"&screenshot_id="+screenshot_id+"&action=delete_screenshot_comment";
+      	url="db_interview.php?interview_id="+interview_id+"&screenshot_id="+screenshot_id+"&action=delete_screenshot_comment";
 		location.href=url;
     }
 }
@@ -49,191 +50,263 @@ function deleteinterview(interview_id)
 		location.href=url;
     }
 }
+
+var clientPC = navigator.userAgent.toLowerCase(); // Get client info
+var clientVer = parseInt(navigator.appVersion); // Get browser version
+
+var is_ie = ((clientPC.indexOf("msie") != -1) && (clientPC.indexOf("opera") == -1));
+var is_nav = ((clientPC.indexOf('mozilla')!=-1) && (clientPC.indexOf('spoofer')==-1)
+                && (clientPC.indexOf('compatible') == -1) && (clientPC.indexOf('opera')==-1)
+                && (clientPC.indexOf('webtv')==-1) && (clientPC.indexOf('hotjava')==-1));
+var is_moz = 0;
+
+var is_win = ((clientPC.indexOf("win")!=-1) || (clientPC.indexOf("16bit") != -1));
+var is_mac = (clientPC.indexOf("mac")!=-1);
+
+// Helpline messages
+b_help = "Bold text: [b]text[/b]  (alt+b)";
+i_help = "Italic text: [i]text[/i]  (alt+i)";
+u_help = "Underline text: [u]text[/u]  (alt+u)";
+q_help = "Quote text: [quote]text[/quote]  (alt+q)";
+h_help = "Insert URL: [url]http://url[/url] or [url=http://url]URL text[/url]";
+e_help = "Insert email: [@]email address[/@] or [@=email]email text[/@]";
+s_help = "Insert Hotspot Source: [hotspotUrl=#]";
+t_help = "Insert Hotspot Target: [hotspot=#]";
+x_help = "Set Smiley";
+
+// Define the bbCode tags
+bbtags = new Array('[b]','[/b]','[i]','[/i]','[u]','[/u]','[url]','[/url]','[mail]','[/mail]', '[hotspotUrl=#]', '[/hotspotUrl]', '[hotspot=]', '[/hotspot]');
+bbcode = new Array();
+imageTag = false;
+
+// Shows the help messages in the helpline window
+function helpline(help) {
+	document.post.helpbox.value = eval(help + "_help");
+}
+
+function bbstyle(bbnumber, bbname) {
+
+	var txtarea = eval('document.post.' + bbname);
+
+	txtarea.focus();
+	donotinsert = false;
+	theSelection = false;
+	bblast = 0;
+
+	if (bbnumber == -1) { // Close all open tags & default button names
+		while (bbcode[0]) {
+			butnumber = arraypop(bbcode) - 1;
+			txtarea.value += bbtags[butnumber + 1];
+			buttext = eval('document.post.addbbcode' + butnumber + '.value');
+			eval('document.post.addbbcode' + butnumber + '.value ="' + buttext.substr(0,(buttext.length - 1)) + '"');
+		}
+		imageTag = false; // All tags are closed including image tags :D
+		txtarea.focus();
+		return;
+	}
+
+	if ((clientVer >= 4) && is_ie && is_win)
+	{
+		theSelection = document.selection.createRange().text; // Get text selection
+		if (theSelection) {
+			// Add tags around selection
+			document.selection.createRange().text = bbtags[bbnumber] + theSelection + bbtags[bbnumber+1];
+			txtarea.focus();
+			theSelection = '';
+			return;
+		}
+	}
+	else if (txtarea.selectionEnd && (txtarea.selectionEnd - txtarea.selectionStart > 0))
+	{
+		mozWrap(txtarea, bbtags[bbnumber], bbtags[bbnumber+1]);
+		return;
+	}
+
+	// Find last occurance of an open tag the same as the one just clicked
+	for (i = 0; i < bbcode.length; i++) {
+		if (bbcode[i] == bbnumber+1) {
+			bblast = i;
+			donotinsert = true;
+		}
+	}
+
+	if (donotinsert) {		// Close all open tags up to the one just clicked & default button names
+		while (bbcode[bblast]) {
+				butnumber = arraypop(bbcode) - 1;
+				txtarea.value += bbtags[butnumber + 1];
+				buttext = eval('document.post.addbbcode' + butnumber + '.value');
+				eval('document.post.addbbcode' + butnumber + '.value ="' + buttext.substr(0,(buttext.length - 1)) + '"');
+				imageTag = false;
+			}
+			txtarea.focus();
+			return;
+	} else { // Open tags
+
+		if (imageTag && (bbnumber != 14)) {		// Close image tag before adding another
+			txtarea.value += bbtags[15];
+			lastValue = arraypop(bbcode) - 1;	// Remove the close image tag from the list
+			document.post.addbbcode14.value = "Img";	// Return button back to normal state
+			imageTag = false;
+		}
+
+		// Open tag
+		txtarea.value += bbtags[bbnumber];
+		if ((bbnumber == 14) && (imageTag == false)) imageTag = 1; // Check to stop additional tags after an unclosed image tag
+		arraypush(bbcode,bbnumber+1);
+		eval('document.post.addbbcode'+bbnumber+'.value += "*"');
+		txtarea.focus();
+		return;
+	}
+	storeCaret(txtarea);
+}
+
+// From http://www.massless.org/mozedit/
+function mozWrap(txtarea, open, close)
+{
+	var selLength = txtarea.textLength;
+	var selStart = txtarea.selectionStart;
+	var selEnd = txtarea.selectionEnd;
+	if (selEnd == 1 || selEnd == 2)
+		selEnd = selLength;
+
+	var s1 = (txtarea.value).substring(0,selStart);
+	var s2 = (txtarea.value).substring(selStart, selEnd)
+	var s3 = (txtarea.value).substring(selEnd, selLength);
+	txtarea.value = s1 + open + s2 + close + s3;
+	return;
+}
+
+// Insert at Claret position. Code from
+// http://www.faqts.com/knowledge_base/view.phtml/aid/1052/fid/130
+function storeCaret(textEl) {
+	if (textEl.createTextRange) textEl.caretPos = document.selection.createRange().duplicate();
+}
 </script>	
 {/block}
-{block name=title}Edit Interviews - <a href="../individuals/individuals_edit.php?ind_id={$interview.interview_ind_id}" class="MAINNAV_WHITE">{$interview.interview_ind_name}</a>{/block}
+
+{block name=title}Edit Interviews - <a href="../individuals/individuals_edit.php?ind_id={$interview.interview_ind_id}" class="left_nav_links">{$interview.interview_ind_name}</a>{/block}
+
 {block name=main_tile}
-
-<div class="NEWMAINCELL" style="margin-left:auto;margin-right:auto;">
-<form action="../interviews/db_interview.php" method="post" name="post">
-	<fieldset class="game_set">
-		At this page you can change an existing interview in the AL database. the screen might seem a little complex,
-		therefor I suggest you first read the <b><a href="../interviews/interviews_help.php" class="LEFTNAV">help</a></b> provided with this section!
-	</fieldset> 
-	<br/>
-	<br/>
-
-			<div style="width:100px;display:inline-block;"><b>Written by :</b></div>
-
-			<select name="members" id="members" class="links_input-box" >
-				<option value="-">-</option>
-				{foreach from=$authors item=line}
-					{if $line.user_id == $interview.interview_author}
-						<option value="{$line.user_id}" selected>{$line.user_name}</option>
-					{else}
-						<option value="{$line.user_id}">{$line.user_name}</option>
-					{/if}
-				{/foreach}	
-			</select>
-
-<br/>
-			<div style="width:100px;display:inline-block;"><b>Individual :</b></div>
-
-			<select name="individual" id="individual" class="links_input-box">
-				<option value="-">-</option>
-				{foreach from=$individuals item=line}
-					{if $line.ind_id == $interview.interview_ind_id}
-						<option value="{$line.ind_id}" selected>{$line.ind_name}</option>
-					{else}
-						<option value="{$line.ind_id}">{$line.ind_name}</option>
-					{/if}
-				{/foreach}	
-			</select>
-
-			<br/>
-			<div style="width:100px;display:inline-block;"><b>Date :</b></div>
-
-
-			{html_select_date time=$interview.interview_date start_year="2000"}
-
-
-			<br/><br/>
-			<b>Intro :</b>
-
-			<br/><br/>
-			<div class="smileybox">
-			<input type="button" accesskey= "b" name="addbbcode0" value="B" onclick="bbstyle(0,'textintro')" onMouseOver="helpline('b')" />
-			<input type="button" accesskey= "u" name="addbbcode4" value="U" onclick="bbstyle(4,'textintro')" onMouseOver="helpline('u')" />
-			<input type="button" accesskey= "i" name="addbbcode2" value="I" onclick="bbstyle(2,'textintro')" onMouseOver="helpline('i')" />
-			<input type="button" accesskey="w" name="addbbcode6" value="URL" onClick="bbstyle(6,'textintro')" onMouseOver="helpline('h')" />			  
-			<input type="button" accesskey="x" name="addbbcode8" value="@" onClick="bbstyle(8,'textintro')" onMouseOver="helpline('e')" />			  			
-			&nbsp;
-			&nbsp;
-			<a href="javascript:setsmileyn2(' :-D ')"><img src="../templates/0/emoticons/icon_biggrin.gif" alt="Very Happy" onMouseOver="helpline('x')"></a>
-			<a href="javascript:setsmileyn2(' :) ')"><img src="../templates/0/emoticons/icon_smile.gif" alt="Smile" onMouseOver="helpline('x')"></a>
-			<a href="javascript:setsmileyn2(' :( ')"><img src="../templates/0/emoticons/icon_sad.gif" alt="sad" onMouseOver="helpline('x')"></a> 
-			<a href="javascript:setsmileyn2(' 8O ')"><img src="../templates/0/emoticons/icon_eek.gif" alt="shocked" onMouseOver="helpline('x')"></a>
-			<a href="javascript:setsmileyn2(' :? ')"><img src="../templates/0/emoticons/icon_confused.gif" alt="confused" onMouseOver="helpline('x')"></a>
-			<a href="javascript:setsmileyn2(' 8)')"><img src="../templates/0/emoticons/icon_cool.gif" alt="Cool" onMouseOver="helpline('x')"></a>
-			<a href="javascript:setsmileyn2(' :x ')"><img src="../templates/0/emoticons/icon_mad.gif" alt="Mad" onMouseOver="helpline('x')"></a>
-			<a href="javascript:setsmileyn2(' :P ')"><img src="../templates/0/emoticons/icon_razz.gif" alt="Razz" onMouseOver="helpline('x')"></a>
-			<a href="javascript:setsmileyn2(' :oops: ')"><img src="../templates/0/emoticons/icon_redface.gif" alt="Embarassed" onMouseOver="helpline('x')"></a>
-			<a href="javascript:setsmileyn2(' :evil: ')"><img src="../templates/0/emoticons/icon_evil.gif" alt="Evil or Very mad" onMouseOver="helpline('x')"></a>
-			<a href="javascript:setsmileyn2(' :twisted: ')"><img src="../templates/0/emoticons/icon_twisted.gif" alt="Twisted Evil" onMouseOver="helpline('x')"></a>
-			<a href="javascript:setsmileyn2(' :roll: ')"><img src="../templates/0/emoticons/icon_rolleyes.gif" alt="Rolling eyes" onMouseOver="helpline('x')"></a>
-			<a href="javascript:setsmileyn2(' :frown: ')"><img src="../templates/0/emoticons/icon_frown.gif" alt="Frowning" onMouseOver="helpline('x')"></a>
-			<a href="javascript:setsmileyn2(' :| ')"><img src="../templates/0/emoticons/icon_neutral.gif" alt="Neutral" onMouseOver="helpline('x')"></a>
-			<a href="javascript:setsmileyn2(' :mrgreen: ')"><img src="../templates/0/emoticons/icon_mrgreen.gif" alt="Mr. Green" onMouseOver="helpline('x')"></a>
-			<a href="javascript:setsmileyn2(' :o ')"><img src="../templates/0/emoticons/icon_surprised.gif" alt="Surprised" onMouseOver="helpline('x')"></a>
-			<a href="javascript:setsmileyn2(' :lol: ')"><img src="../templates/0/emoticons/icon_lol.gif" alt="Laughing" onMouseOver="helpline('x')"></a>
-			<a href="javascript:setsmileyn2(' :cry: ')"><img src="../templates/0/emoticons/icon_cry.gif" alt="Crying or Very sad" onMouseOver="helpline('x')"></a>
-			<a href="javascript:setsmileyn2(' :wink: ')"><img src="../templates/0/emoticons/icon_wink.gif" alt="Wink" onMouseOver="helpline('x')"></a>
-			<a href="javascript:setsmileyn2(' :!: ')"><img src="../templates/0/emoticons/icon_exclaim.gif" alt="Exclamation" onMouseOver="helpline('x')"></a>
-			<a href="javascript:setsmileyn2(' :arrow: ')"><img src="../templates/0/emoticons/icon_arrow.gif" alt="smilie" onMouseOver="helpline('x')"></a>
-			<a href="javascript:setsmileyn2(' :?: ')"><img src="../templates/0/emoticons/icon_question.gif" alt="Question" onMouseOver="helpline('x')"></a>
-			<a href="javascript:setsmileyn2(' :idea: ')"><img src="../templates/0/emoticons/icon_idea.gif" alt="Idea" onMouseOver="helpline('x')"></a>
-			&nbsp;<input type="text" size="60" name="helpbox" maxlength="100" style="float:right;vertical-align:middle;font-size:10px; border=0px; background-color:#D0D1DF" value="Tip: Styles can be applied quickly to selected text." />
-			</div>
-
-			<textarea name="textintro" ONSELECT="javascript:storeCaret(this);" ONCLICK="javascript:storeCaret(this);" ONKEYUP="javascript:storeCaret(this);" ONCHANGE="javascript:storeCaret(this);" rows="5" >{$interview.interview_intro}</textarea>
-
-
-
-			<br/>
-			<br/>
-			<b>Chapters :</b>
-
-			<br/><br/>
-			<div class="smileybox">
-			<input type="button" accesskey= "b" name="addbbcode0" value="B" onclick="bbstyle(0,'textchapters')" onMouseOver="helpline('b')" />
-			<input type="button" accesskey= "u" name="addbbcode4" value="U" onclick="bbstyle(4,'textchapters')" onMouseOver="helpline('u')" />
-			<input type="button" accesskey= "i" name="addbbcode2" value="I" onclick="bbstyle(2,'textchapters')" onMouseOver="helpline('i')" />
-			<input type="button" accesskey="w" name="addbbcode6" value="URL" onClick="bbstyle(6,'textchapters')" onMouseOver="helpline('h')" />			  
-			<input type="button" accesskey="x" name="addbbcode8" value="@" onClick="bbstyle(8,'textchapters')" onMouseOver="helpline('e')" />			  			
-			<input type="button" accesskey= "s" name="addbbcode10" value="Hotspot Source" onclick="bbstyle(10,'textchapters')"  onMouseOver="helpline('s')" />
-			</div>
-
-			<textarea name="textchapters" ONSELECT="javascript:storeCaret(this);" ONCLICK="javascript:storeCaret(this);" ONKEYUP="javascript:storeCaret(this);" ONCHANGE="javascript:storeCaret(this);" rows="5" >{$interview.interview_chapters}</textarea>
-
-			<br/>
-			<br/>
-			<b>Interview :</b>
-
-			<br/><br/>
-			<div class="smileybox">
-			<input type="button" accesskey= "b" name="addbbcode0" value="B" onclick="bbstyle(0,'textfield')" onMouseOver="helpline('b')" />
-			<input type="button" accesskey= "u" name="addbbcode4" value="U" onclick="bbstyle(4,'textfield')" onMouseOver="helpline('u')" />
-			<input type="button" accesskey= "i" name="addbbcode2" value="I" onclick="bbstyle(2,'textfield')" onMouseOver="helpline('i')" />
-			<input type="button" accesskey="w" name="addbbcode6" value="URL" onClick="bbstyle(6,'textfield')" onMouseOver="helpline('h')" />			  
-			<input type="button" accesskey="x" name="addbbcode8" value="@" onClick="bbstyle(8,'textfield')" onMouseOver="helpline('e')" />			  			
-			<input type="button" accesskey= "t" name="addbbcode12" value="Hotspot Target" onclick="bbstyle(12,'textfield')" onMouseOver="helpline('t')" />		 
-			&nbsp;
-			&nbsp;
-			<a href="javascript:setsmileyn(' :-D ')"><img src="../templates/0/emoticons/icon_biggrin.gif" alt="Very Happy" onMouseOver="helpline('x')"></a>
-			<a href="javascript:setsmileyn(' :) ')"><img src="../templates/0/emoticons/icon_smile.gif" alt="Smile" onMouseOver="helpline('x')"></a>
-			<a href="javascript:setsmileyn(' :( ')"><img src="../templates/0/emoticons/icon_sad.gif" alt="sad" onMouseOver="helpline('x')"></a> 
-			<a href="javascript:setsmileyn(' 8O ')"><img src="../templates/0/emoticons/icon_eek.gif" alt="shocked" onMouseOver="helpline('x')"></a>
-			<a href="javascript:setsmileyn(' :? ')"><img src="../templates/0/emoticons/icon_confused.gif" alt="confused" onMouseOver="helpline('x')"></a>
-			<a href="javascript:setsmileyn(' 8)')"><img src="../templates/0/emoticons/icon_cool.gif" alt="Cool" onMouseOver="helpline('x')"></a>
-			<a href="javascript:setsmileyn(' :x ')"><img src="../templates/0/emoticons/icon_mad.gif" alt="Mad" onMouseOver="helpline('x')"></a>
-			<a href="javascript:setsmileyn(' :P ')"><img src="../templates/0/emoticons/icon_razz.gif" alt="Razz" onMouseOver="helpline('x')"></a>
-			<a href="javascript:setsmileyn(' :oops: ')"><img src="../templates/0/emoticons/icon_redface.gif" alt="Embarassed" onMouseOver="helpline('x')"></a>
-			<a href="javascript:setsmileyn(' :evil: ')"><img src="../templates/0/emoticons/icon_evil.gif" alt="Evil or Very mad" onMouseOver="helpline('x')"></a>
-			<a href="javascript:setsmileyn(' :twisted: ')"><img src="../templates/0/emoticons/icon_twisted.gif" alt="Twisted Evil" onMouseOver="helpline('x')"></a>
-			<a href="javascript:setsmileyn(' :roll: ')"><img src="../templates/0/emoticons/icon_rolleyes.gif" alt="Rolling eyes" onMouseOver="helpline('x')"></a>
-			<a href="javascript:setsmileyn(' :frown: ')"><img src="../templates/0/emoticons/icon_frown.gif" alt="Frowning" onMouseOver="helpline('x')"></a>
-			<a href="javascript:setsmileyn(' :| ')"><img src="../templates/0/emoticons/icon_neutral.gif" alt="Neutral" onMouseOver="helpline('x')"></a>
-			<a href="javascript:setsmileyn(' :mrgreen: ')"><img src="../templates/0/emoticons/icon_mrgreen.gif" alt="Mr. Green" onMouseOver="helpline('x')"></a>
-			<a href="javascript:setsmileyn(' :o ')"><img src="../templates/0/emoticons/icon_surprised.gif" alt="Surprised" onMouseOver="helpline('x')"></a>
-			<a href="javascript:setsmileyn(' :lol: ')"><img src="../templates/0/emoticons/icon_lol.gif" alt="Laughing" onMouseOver="helpline('x')"></a>
-			<a href="javascript:setsmileyn(' :cry: ')"><img src="../templates/0/emoticons/icon_cry.gif" alt="Crying or Very sad" onMouseOver="helpline('x')"></a>
-			<a href="javascript:setsmileyn(' :wink: ')"><img src="../templates/0/emoticons/icon_wink.gif" alt="Wink" onMouseOver="helpline('x')"></a>
-			<a href="javascript:setsmileyn(' :!: ')"><img src="../templates/0/emoticons/icon_exclaim.gif" alt="Exclamation" onMouseOver="helpline('x')"></a>
-			<a href="javascript:setsmileyn(' :arrow: ')"><img src="../templates/0/emoticons/icon_arrow.gif" alt="smilie" onMouseOver="helpline('x')"></a>
-			<a href="javascript:setsmileyn(' :?: ')"><img src="../templates/0/emoticons/icon_question.gif" alt="Question" onMouseOver="helpline('x')"></a>
-			<a href="javascript:setsmileyn(' :idea: ')"><img src="../templates/0/emoticons/icon_idea.gif" alt="Idea" onMouseOver="helpline('x')"></a>
-			</div>
-
-			<textarea name="textfield" ONSELECT="javascript:storeCaret(this);" ONCLICK="javascript:storeCaret(this);" ONKEYUP="javascript:storeCaret(this);" ONCHANGE="javascript:storeCaret(this);" rows="15" >{$interview.interview_text}</textarea>
-
-		<br/>
-		<br/>
-		<fieldset class="interview_set_screenshot" style="padding:20px;padding-left:50px;margin-left:auto;margin-right:auto;">
-		<legend class="links_legend" style="text-align:center;">Screenshots</legend>
-		{if $screenshots_nr <> ''}
-			{foreach from=$screenshots item=line} 
-			<div class="smileybox">
-				<img src="../includes/show_image.php?file={$line.interview_screenshot}&amp;resize=50,null,null,null&amp;crop=null,null,null,null" alt="screenshot">
-				<input class="review_input" type="text" name="inputfield[]" value="{$line.interview_screenshot_comment}">
-				<a href="javascript:deletecomment({$line.interview_screenshot_id},{$interview.interview_id})" class="MAINNAV">Delete Shot</a>
+<div class="standard_tile" id="interviews_edit">
+	<h1>{$interview.interview_ind_name}</h1>
+	<div class="standard_tile_line"></div>
+	<div class="standard_tile_text">
+		<div class="left_nav_section">
+			At this page you can change an existing interview in the AL database. the screen might seem a little complex,
+			therefor I suggest you first read the <b><a href="../interviews/interviews_help.php" class="left_nav_link">help</a></b> provided with this section!
+		</div>
+		<br>
+		<br>
+		<form action="../interviews/db_interview.php" method="post" name="post">
+			<fieldset>
+				<legend>Other interviews</legend>
+					<b>
+					<a href="../interviews/interviews_preview.php?interview_id={$interview.interview_id}" class="left_nav_link"> Preview </a> this interview<br>
+			</fieldset>
+			<br>
+			<fieldset>
+				<legend>Edit review</legend>
+				<br>	
+				<div style="display:inline-block;">
+					<b>Written by : </b>
+					<br>
+					<select name="members" id="quick_search_pub_select">
+						<option value="-">-</option>
+						{foreach from=$authors item=line}
+							{if $line.user_id == $interview.interview_author}
+								<option value="{$line.user_id}" selected>{$line.user_name}</option>
+							{else}
+								<option value="{$line.user_id}">{$line.user_name}</option>
+							{/if}
+						{/foreach}	
+					</select>
 				</div>
-				<br/>
-				<br/>
-			{/foreach}
-		{else}
-			There are currently no screenshots attached to this interview. Go to the <a href="interviews_screenshots_add.php?interview_id={$interview.interview_id}" class="MAINNAV">screenshot adding</a>
-			page to link specific screenshots to this interview. Remember that you have to create an interview first before actually uploading screenshots!			
-		{/if}
-		</fieldset> 
-
-
-			<br/>
-			<br/>
-			<input type="hidden" name="interview_id" value="{$interview.interview_id}">
-			<input type="hidden" name="action" value="update_interview">
-			<input type="submit" name="update" value="Update interview">
-			<input type="button" name="delete" value="Delete interview" onclick="deleteinterview({$interview.interview_id})">
-			</form>
-
-
-<br/>
-			<br/>
-<br/>
-<div class="back_button"><a href="javascript:history.go(-1)" class="MAINNAV">back</a></div>
-<br/>
-{if isset($message)}
-	<div class="message_box">{$message}</div>
-{/if}
+				<br>
+				<br>
+				<div style="display:inline-block;">
+					<b>Individual :</b>
+					<br>
+					<select name="individual" id="quick_search_pub_select">
+						<option value="-">-</option>
+						{foreach from=$individuals item=line}
+							{if $line.ind_id == $interview.interview_ind_id}
+								<option value="{$line.ind_id}" selected>{$line.ind_name}</option>
+							{else}
+								<option value="{$line.ind_id}">{$line.ind_name}</option>
+							{/if}
+						{/foreach}	
+					</select>
+					<br>
+					<br>
+				</div>
+				<div style="width:100%;">
+					<div style="width:20%;"><b>Date :</b></div>
+					<div style="width:200px;">{html_select_date time=$interview.interview_date start_year="2000"}</div>
+				</div>
+				<br>
+				<br>
+				<b>Intro :</b>
+				<br>
+				<input type="button" accesskey= "b" name="addbbcode0" value="B" onclick="bbstyle(0,'textintro')">
+				<input type="button" accesskey= "u" name="addbbcode4" value="U" onclick="bbstyle(4,'textintro')">
+				<input type="button" accesskey= "i" name="addbbcode2" value="I" onclick="bbstyle(2,'textintro')">
+				<input type="button" accesskey="w" name="addbbcode6" value="URL" onClick="bbstyle(6,'textintro')">			  
+				<input type="button" accesskey="x" name="addbbcode8" value="@" onClick="bbstyle(8,'textintro')">			  			
+				<textarea name="textintro" id="game_review_textfield" ONSELECT="javascript:storeCaret(this);" ONCLICK="javascript:storeCaret(this);" ONKEYUP="javascript:storeCaret(this);" ONCHANGE="javascript:storeCaret(this);" rows="5" style="padding-left:0px;">{$interview.interview_intro}</textarea>
+				<br>
+				<br>
+				<b>Chapters :</b>
+				<br>
+				<input type="button" accesskey= "b" name="addbbcode0" value="B" onclick="bbstyle(0,'textchapters')">
+				<input type="button" accesskey= "u" name="addbbcode4" value="U" onclick="bbstyle(4,'textchapters')">
+				<input type="button" accesskey= "i" name="addbbcode2" value="I" onclick="bbstyle(2,'textchapters')">
+				<input type="button" accesskey="w" name="addbbcode6" value="URL" onClick="bbstyle(6,'textchapters')">			  
+				<input type="button" accesskey="x" name="addbbcode8" value="@" onClick="bbstyle(8,'textchapters')">		
+				<input type="button" accesskey= "s" name="addbbcode10" value="Hotspot Source" onclick="bbstyle(10,'textchapters')"/>
+				<textarea name="textchapters" id="game_review_textfield" ONSELECT="javascript:storeCaret(this);" ONCLICK="javascript:storeCaret(this);" ONKEYUP="javascript:storeCaret(this);" ONCHANGE="javascript:storeCaret(this);" rows="5" style="padding-left:0px;">{$interview.interview_chapters}</textarea>
+				<br>
+				<br>
+				<b>Interview :</b>
+				<br>
+				<input type="button" accesskey= "b" name="addbbcode0" value="B" onclick="bbstyle(0,'textfield')">
+				<input type="button" accesskey= "u" name="addbbcode4" value="U" onclick="bbstyle(4,'textfield')">
+				<input type="button" accesskey= "i" name="addbbcode2" value="I" onclick="bbstyle(2,'textfield')">
+				<input type="button" accesskey="w" name="addbbcode6" value="URL" onClick="bbstyle(6,'textfield')">			  
+				<input type="button" accesskey="x" name="addbbcode8" value="@" onClick="bbstyle(8,'textfield')"/>			  			
+				<input type="button" accesskey= "t" name="addbbcode12" value="Hotspot Target" onclick="bbstyle(12,'textfield')">		 
+				<textarea name="textfield" id="game_review_textfield" ONSELECT="javascript:storeCaret(this);" ONCLICK="javascript:storeCaret(this);" ONKEYUP="javascript:storeCaret(this);" ONCHANGE="javascript:storeCaret(this);" rows="15" style="padding-left:0px;">{$interview.interview_text}</textarea>
+			</fieldset>
+			<br>
+			<fieldset class="centered_fieldset">
+				<legend>Screenshots</legend>
+				<br>
+				{if $screenshots_nr <> ''}
+					{foreach from=$screenshots item=line} 
+						<img src="../../includes/show_image.php?file={$line.interview_screenshot}&amp;resize=200,null,null,null&amp;crop=null,null,null,null" alt="screenshot" style="display:inline;" class="user_stats_img" id="user_details_img_dark">
+						<br>
+						<br>
+						<input id="game_review_screenshot_text" type="text" name="inputfield[]" value="{$line.interview_screenshot_comment}">
+						<br>
+						<a href="javascript:deletecomment({$line.interview_screenshot_id},{$interview.interview_id})" class="left_nav_link">Delete Shot</a>
+						<br>
+						<br>
+						<br>
+					{/foreach}
+				{else}
+					There are currently no screenshots attached to this interview. Go to the <a href="interviews_screenshots_add.php?interview_id={$interview.interview_id}" class="left_nav_link">screenshot adding</a>
+					page to link specific screenshots to this interview. Remember that you have to create an interview first before actually uploading screenshots!			
+				{/if}
+				<br>
+				<br>
+				<input type="hidden" name="interview_id" value="{$interview.interview_id}">
+				<input type="hidden" name="action" value="update_interview">
+				<input type="submit" name="update" value="Update" class="topbutton_cpanel_small">
+				<input type="button" name="delete" value="Delete" onclick="deleteinterview({$interview.interview_id})" class="topbutton_cpanel_small">
+			</fieldset> 
+		</form>
+		<br>
+		<div class="standard_table_center"><a href="../interviews/interviews_main.php" class="standard_tile_link">back</a></div>
+	</div>
 </div>
-
 {/block}
+

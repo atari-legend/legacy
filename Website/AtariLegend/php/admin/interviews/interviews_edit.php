@@ -8,6 +8,8 @@
 *   actual update        : created this page
 *
 *   Id: interviews_edit.php,v 0.10 2005/07/22 13:40 Gatekeeper
+*   Id: interviews_edit.php,v 0.20 2016/08/02 23:01 Gatekeeper
+*		- AL 2.0
 *
 ***************************************************************************/
 
@@ -17,6 +19,9 @@
 
 include("../../includes/common.php");
 include("../../includes/admin.php");
+
+//load the search fields of the quick search side menu
+include("../../includes/quick_search_games.php"); 
 
 //Get the individuals
 $sql_individuals = $mysqli->query("SELECT * FROM individuals ORDER BY ind_name ASC")
@@ -48,7 +53,7 @@ $sql_interview = $mysqli->query("SELECT * FROM interview_main
 						   	  LEFT JOIN individuals on ( interview_main.ind_id = individuals.ind_id )
 							  WHERE interview_main.interview_id = '$interview_id'")
 				  or die ("Database error - selecting interview data");
-
+				  
 while ($interview = $sql_interview->fetch_array(MYSQLI_BOTH))
 {	
 	$smarty->assign('interview',
@@ -58,7 +63,7 @@ while ($interview = $sql_interview->fetch_array(MYSQLI_BOTH))
 				   'interview_chapters' => $interview['interview_chapters'],
 				   'interview_text' => $interview['interview_text'],
 				   'interview_ind_name' => $interview['ind_name'],
-				   'interview_author' => $interview['member_id'],
+				   'interview_author' => $interview['user_id'],
 				   'interview_ind_id' => $interview['ind_id']));
 }
 
@@ -97,6 +102,9 @@ while ($screenshots = $sql_screenshots->fetch_array(MYSQLI_BOTH))
 				   
 	$count=$count+1;
 }
+
+$smarty->assign('quick_search_games', 'quick_search_games_interviews_edit');
+$smarty->assign('left_nav', 'leftnav_position_interviews_edit');
 
 $smarty->assign("user_id",$_SESSION['user_id']);
 

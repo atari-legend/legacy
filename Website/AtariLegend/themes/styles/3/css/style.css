@@ -3371,6 +3371,139 @@ author types
   float: left; }
 
 /* --> individuals section */
+/*************************************************************/
+/**********************PICASSO SKIN***************************/
+/*************************************************************/
+/*************************************************************/
+/***************CPanel INTERVIEWS section css*****************/
+/*************************************************************/
+/*---------------------------------------------------------- 
+Interviews main
+------------------------------------------------------------ */
+#leftnav_position_interviews_main {
+  margin-top: 0;
+  margin-bottom: 30px;
+  float: left; }
+
+#quick_search_games_interviews_main {
+  margin-top: 0;
+  margin-bottom: 30px;
+  float: left; }
+
+#interviews_main {
+  margin-top: 0;
+  margin-bottom: 30px;
+  float: left; }
+
+.interviews_main_table {
+  display: table;
+  width: 100%; }
+
+.interviews_main_photo {
+  display: table-cell;
+  width: 20%; }
+
+.interviews_main_preview {
+  display: table-cell;
+  width: 80%;
+  vertical-align: middle; }
+
+.interviews_main_preview_100 {
+  display: table-cell;
+  width: 100%;
+  vertical-align: middle; }
+
+/*---------------------------------------------------------- 
+Interviews edit
+------------------------------------------------------------ */
+#leftnav_position_interviews_edit {
+  margin-top: 0;
+  margin-bottom: 30px;
+  float: left; }
+
+#quick_search_games_interviews_edit {
+  margin-top: 0;
+  margin-bottom: 30px;
+  float: left; }
+
+#interviews_edit {
+  margin-top: 0;
+  margin-bottom: 30px;
+  float: left; }
+
+/*---------------------------------------------------------- 
+Interviews preview
+------------------------------------------------------------ */
+#leftnav_position_interviews_preview {
+  margin-top: 0;
+  margin-bottom: 30px;
+  float: left; }
+
+#quick_search_games_interviews_preview {
+  margin-top: 0;
+  margin-bottom: 30px;
+  float: left; }
+
+#interviews_preview {
+  margin-top: 0;
+  margin-bottom: 30px;
+  float: left; }
+
+/*---------------------------------------------------------- 
+Interviews add
+------------------------------------------------------------ */
+#leftnav_position_interviews_add {
+  margin-top: 0;
+  margin-bottom: 30px;
+  float: left; }
+
+#quick_search_games_interviews_add {
+  margin-top: 0;
+  margin-bottom: 30px;
+  float: left; }
+
+#interviews_add {
+  margin-top: 0;
+  margin-bottom: 30px;
+  float: left; }
+
+/*---------------------------------------------------------- 
+Interviews add screenshot
+------------------------------------------------------------ */
+#leftnav_position_interviews_add_screenshot {
+  margin-top: 0;
+  margin-bottom: 30px;
+  float: left; }
+
+#quick_search_games_interviews_add_screenshot {
+  margin-top: 0;
+  margin-bottom: 30px;
+  float: left; }
+
+#interviews_add_screenshot {
+  margin-top: 0;
+  margin-bottom: 30px;
+  float: left; }
+
+/*---------------------------------------------------------- 
+Interviews help
+------------------------------------------------------------ */
+#leftnav_position_interviews_help {
+  margin-top: 0;
+  margin-bottom: 30px;
+  float: left; }
+
+#quick_search_games_interviews_help {
+  margin-top: 0;
+  margin-bottom: 30px;
+  float: left; }
+
+#interviews_help {
+  margin-top: 0;
+  margin-bottom: 30px;
+  float: left; }
+
+/* --> iterviews section */
 /*---------------------------------------------------------- 
  Media Queries Main & CPanel 
 ------------------------------------------------------------ */
@@ -4225,6 +4358,48 @@ Author types
 ------------------------------------------------------------ */
 @media screen and (max-width: 480px) {
   #leftnav_position_author_types {
+    margin-top: 20px; } }
+/*---------------------------------------------------------- 
+Interviews main
+------------------------------------------------------------ */
+@media screen and (max-width: 480px) {
+  #leftnav_position_interviews_main {
+    margin-top: 20px; }
+
+  .interviews_main_photo {
+    display: none; } }
+/*---------------------------------------------------------- 
+Interviews edit
+------------------------------------------------------------ */
+@media screen and (max-width: 480px) {
+  #leftnav_position_interviews_edit {
+    margin-top: 20px; } }
+/*---------------------------------------------------------- 
+Interviews preview
+------------------------------------------------------------ */
+@media screen and (max-width: 480px) {
+  #leftnav_position_interviews_preview {
+    margin-top: 20px; } }
+@media screen and (max-width: 650px) {
+  #interview_preview_photo {
+    display: none; } }
+/*---------------------------------------------------------- 
+Interviews add
+------------------------------------------------------------ */
+@media screen and (max-width: 480px) {
+  #leftnav_position_interviews_add {
+    margin-top: 20px; } }
+/*---------------------------------------------------------- 
+Interviews add screenshots
+------------------------------------------------------------ */
+@media screen and (max-width: 480px) {
+  #leftnav_position_interviews_add_screenshot {
+    margin-top: 20px; } }
+/*---------------------------------------------------------- 
+Interviews help
+------------------------------------------------------------ */
+@media screen and (max-width: 480px) {
+  #leftnav_position_interviews_help {
     margin-top: 20px; } }
 /*---------------------------------------------------------- 
 Admin - DB updates

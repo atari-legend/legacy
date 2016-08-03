@@ -994,6 +994,89 @@ Author types
 	#leftnav_position_author_types{ margin-top: 20px;}
 }
 
+/*---------------------------------------------------------- 
+Interviews main
+------------------------------------------------------------ */
+@media screen and (max-width: 1279px) { 
+	#leftnav_position_interviews_main{margin-top: 20px;}
+	#quick_search_games_interviews_main{margin-top: 20px;}
+	#interviews_main{margin-top: 20px;}
+}
+
+@media screen and (max-width: 480px) { 
+	#leftnav_position_interviews_main{ margin-top: 20px;}
+	.interviews_main_photo{display:none;}
+}
+
+/*---------------------------------------------------------- 
+Interviews Edit
+------------------------------------------------------------ */
+@media screen and (max-width: 1279px) { 
+	#leftnav_position_interviews_edit{margin-top: 20px;}
+	#quick_search_games_interviews_edit{margin-top: 20px;}
+	#interviews_edit{margin-top: 20px;}
+}
+
+@media screen and (max-width: 480px) { 
+	#leftnav_position_interviews_edit{ margin-top: 20px;}
+}
+
+/*---------------------------------------------------------- 
+Interviews preview
+------------------------------------------------------------ */
+@media screen and (max-width: 1279px) { 
+	#leftnav_position_interviews_preview{margin-top: 20px;}
+	#quick_search_games_interviews_preview{margin-top: 20px;}
+	#interviews_preview{margin-top: 20px;}
+}
+
+@media screen and (max-width: 480px) { 
+	#leftnav_position_interviews_preview{ margin-top: 20px;}
+}
+
+@media screen and (max-width: 650px) { 
+	#interview_preview_photo{display:none;}
+}
+
+/*---------------------------------------------------------- 
+Interviews add
+------------------------------------------------------------ */
+@media screen and (max-width: 1279px) { 
+	#leftnav_position_interviews_add{margin-top: 20px;}
+	#quick_search_games_interviews_add{margin-top: 20px;}
+	#interviews_add{margin-top: 20px;}
+}
+
+@media screen and (max-width: 480px) { 
+	#leftnav_position_interviews_add{ margin-top: 20px;}
+}
+
+/*---------------------------------------------------------- 
+Interviews add screenshot
+------------------------------------------------------------ */
+@media screen and (max-width: 1279px) { 
+	#leftnav_position_interviews_add_screenshot{margin-top: 20px;}
+	#quick_search_games_interviews_add_screenshot{margin-top: 20px;}
+	#interviews_add_screenshot{margin-top: 20px;}
+}
+
+@media screen and (max-width: 480px) { 
+	#leftnav_position_interviews_add_screenshot{ margin-top: 20px;}
+}
+
+/*---------------------------------------------------------- 
+Interviews help
+------------------------------------------------------------ */
+@media screen and (max-width: 1279px) { 
+	#leftnav_position_interviews_help{margin-top: 20px;}
+	#quick_search_games_interviews_help{margin-top: 20px;}
+	#interviews_help{margin-top: 20px;}
+}
+
+@media screen and (max-width: 480px) { 
+	#leftnav_position_interviews_help{ margin-top: 20px;}
+}
+
 
 /*---------------------------------------------------------- 
 Admin - DB updates

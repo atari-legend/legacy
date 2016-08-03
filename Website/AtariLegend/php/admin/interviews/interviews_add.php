@@ -8,6 +8,8 @@
 *   actual update        : created this page
 *
 *   Id: interviews_add.php,v 0.10 2005/07/30 23:07 Gatekeeper
+*   Id: interviews_add.php,v 0.20 2016/08/03 20:58 Gatekeeper
+*		- AL 2.0
 *
 ***************************************************************************/
 
@@ -17,6 +19,9 @@
 
 include("../../includes/common.php");
 include("../../includes/admin.php");
+
+//load the search fields of the quick search side menu
+include("../../includes/quick_search_games.php"); 
 
 //****************************************************************************************
 //first we check if there is an individual selected. This is done at the main page
@@ -78,7 +83,10 @@ while ( $authors=$sql_author->fetch_array(MYSQLI_BOTH) )
 	$smarty->append('authors',
 	    	 array('user_id' => $authors['user_id'],
 				   'user_name' => $authors['userid']));
-}				   
+}		
+
+$smarty->assign('quick_search_games', 'quick_search_games_interviews_add');
+$smarty->assign('left_nav', 'leftnav_position_interviews_add');		   
 
 $smarty->assign("user_id",$_SESSION['user_id']);
 

@@ -39,6 +39,7 @@ $music_game_save_path="../../../data/music/games/";
 
 //interview
 $interview_screenshot_path="../../data/images/interview_screenshots/";
+$interview_screenshot_save_path="../../../data/images/interview_screenshots/";
 
 //menu
 $menu_screenshot_path="../../data/images/menu_screenshots/";
