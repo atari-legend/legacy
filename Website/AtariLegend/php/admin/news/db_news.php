@@ -248,6 +248,34 @@ if(isset($news_image))
 	}
 	header("Location: ../news/news_add_images.php");	
 }
+
+//****************************************************************************************
+// This is where we delete a news image
+//**************************************************************************************** 
+if (isset($action) and $action=="delete_image")
+{
+	if(isset($news_image_id)) 
+	{
+		foreach($news_image_id as $image) 
+		{
+			$sql=$mysqli->query("SELECT news_image_ext FROM news_image WHERE news_image_id='$image'") or die("Couldn't query images");
+		
+			list($news_image_ext) = $sql->fetch_array(MYSQLI_BOTH)	;
+		
+			$mysqli->query("DELETE FROM news_image WHERE news_image_id='$image'") or die("Couldn't delete image$news_image_id"); 
+			
+			unlink ("$news_images_save_path$image.$news_image_ext") or die("Couldn't delete image$news_image_id from server");
+			
+			$_SESSION['edit_message'] = "news image deleted";
+		}
+	}
+	else
+	{
+		$_SESSION['edit_message'] = "something is wrong with the image id";
+	}
+	header("Location: ../news/news_edit_images.php");	
+}
+
 //close the connection
 mysqli_close($mysqli);
 ?>

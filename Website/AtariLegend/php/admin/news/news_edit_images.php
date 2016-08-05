@@ -61,28 +61,6 @@ while ($news = $sql_news->fetch_array(MYSQLI_BOTH))
 			  		  'news_image_id' => $news['news_image_id']));	
 }
 
-
-if (isset($action) and $action=="delete_image")
-{
-	if(isset($news_image_id)) 
-	{
-		foreach($news_image_id as $image) 
-		{
-			$sql=$mysqli->query("SELECT news_image_ext FROM news_image WHERE news_image_id='$image'") or die("Couldn't query images");
-		
-			list($news_image_ext) = $sql->fetch_array(MYSQLI_BOTH)	;
-		
-			$mysqli->query("DELETE FROM news_image WHERE news_image_id='$image'") or die("Couldn't delete image$news_image_id"); 
-			
-			unlink ("$news_images_save_path$image.$news_image_ext") or die("Couldn't delete image$news_image_id from server");
-		}
-	}
-	else
-	{
-		$message="something is wrong with the image id";
-	}
-}
-
 $smarty->assign('quick_search_games', 'quick_search_news_edit_image');
 $smarty->assign('left_nav', 'leftnav_position_news_edit_image');
 
