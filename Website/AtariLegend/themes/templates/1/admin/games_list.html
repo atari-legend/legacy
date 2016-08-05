@@ -109,24 +109,24 @@ function gameinsert()
 				</td>				
 				<td class="info_td">
 					{if isset($line.screenshot)}
-						<b>S</b>
+						<a href="games_screenshot_add.php?game_id={$line.game_id}" class="standard_table_left"><b>S</b></a>
 					{else}
-						<font color="red"><b>S</b></font>
+						<a href="games_screenshot_add.php?game_id={$line.game_id}" class="standard_table_left"><font color="red"><b>S</b></font></a>
 					{/if}
 					{if isset($line.music)}
-						<b>M</b>
+						<a href="games_music_detail.php?game_id={$line.game_id}" class="standard_table_left"><b>M</b></a>
 					{else}
-						<font color="red"><b>M</b></font>
+						<a href="games_music_detail.php?game_id={$line.game_id}" class="standard_table_left"><font color="red"><b>M</b></font></a>
 					{/if}
 					{if isset($line.boxscan)}
-						<b>B</b>
+						<a href="games_box.php?game_id={$line.game_id}" class="standard_table_left"><b>B</b></a>
 					{else}
-						<font color="red"><b>B</b></font>
+						<a href="games_box.php?game_id={$line.game_id}" class="standard_table_left"><font color="red"><b>B</b></font></a>
 					{/if}
 					{if isset($line.download)}
-						<b>D</b>
+						<a href="games_upload.php?game_id={$line.game_id}" class="standard_table_left"><b>D</b></a>
 					{else}
-						<font color="red"><b>D</b></font>
+						<a href="games_upload.php?game_id={$line.game_id}" class="standard_table_left"><font color="red"><b>D</b></font></a>
 					{/if}
 					{if isset($line.ste_enhan) or isset($line.ste_only)}
 						<b>E</b>
