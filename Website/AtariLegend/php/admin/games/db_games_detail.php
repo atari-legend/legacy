@@ -32,6 +32,8 @@ include("../../includes/admin.php");
 		$_SESSION['edit_message'] = "The game $newgame has been inserted into the database";
 		
 		$new_game_id = $mysqli->insert_id;
+		
+		//create_log_entry('Games', $new_game_id, 'Game', $new_game_id, 'Insert', $_SESSION['user_id']);
 
 		header("Location: ../games/games_detail.php?game_id=$new_game_id");
 	}

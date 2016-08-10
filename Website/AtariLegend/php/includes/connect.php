@@ -14,6 +14,9 @@ $db_username = "root";
 $db_password = "";
 $db_databasename = "atarilegend";
 
+//$db_username = "atarilegend.com";
+//$db_password = "4t4r1l3g3nd";
+//$db_databasename = "atarilegend.com_devatarilegend";
 
 //make connection with MYSQL DB
 $mysqli = new mysqli("localhost", $db_username, $db_password, $db_databasename); 
