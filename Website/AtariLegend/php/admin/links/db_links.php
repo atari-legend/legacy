@@ -12,6 +12,7 @@
 *   Id: db_links.php,v 1.00 2005/01/08 Silver Surfer
 *	Id: db_links.php,v 2.00 2015/10/21 Grave
 *	Id: db_links.php,v 3.00 2015/12/24 Grave - messages added
+*	Id: db_links.php,v 3.01 2016/08/19 Grave - change log added
 *
 ***************************************************************************/
 
@@ -29,7 +30,7 @@ if(isset($action) and $action=="addnew_link")
 	$timestamp = time();
 	$name = trim($name);
 
-	$mysqli->query("INSERT INTO website (website_name, website_url, website_date, website_user_sub) VALUES ('$name', '$url','$timestamp','$user_id')")
+	$mysqli->query("INSERT INTO website (website_name, website_url, website_date, user_id) VALUES ('$name', '$url','$timestamp','$user_id')")
 				or die("Unable to insert website into database");  
 
 	$karma_action = "weblink";
@@ -53,6 +54,9 @@ if(isset($action) and $action=="addnew_link")
 	}
 
 	$_SESSION['edit_message'] = "Link added to the database";
+	
+	create_log_entry('Links', $rowlink['website_id'], 'Link', $rowlink['website_id'], 'Insert', $_SESSION['user_id']);
+	
 	header("Location: ../links/link_modlist.php?catpick=$category");
 }
 
@@ -67,6 +71,9 @@ if (isset($action) and $action=="add_cat")
 		$mysqli->query("INSERT INTO website_category_cross (website_id, website_category_id) VALUES ('$website_id', '$cat_id')")
 			or die("Unable to insert category into database");  
 	}
+	
+	create_log_entry('Links', $website_id, 'Category', $cat_id, 'Insert', $_SESSION['user_id']);
+	
 	$_SESSION['edit_message'] = "Link added to category";
 	header("Location: ../links/link_mod.php?website_id=$website_id");
 }
@@ -80,6 +87,8 @@ if (isset($action) and $action=="delete_category")
 //**************************************************************************************** 	
 	if(category_id!=='') 
 	{
+		create_log_entry('Links', $website_id, 'Category', $category_id, 'Delete', $_SESSION['user_id']);
+		
 		$sql = $mysqli->query("DELETE FROM website_category_cross WHERE website_category_id = '$category_id' and website_id = '$website_id'") or die("Failed to delete category");
 	}
 	
@@ -103,7 +112,9 @@ if (isset($action) and $action=="link_delete")
 		list ($website_imgext) = $website_query->fetch_array(MYSQLI_BOTH);
 		
 		unlink ("$website_image_path$website_id.$website_imgext");
-
+	
+	create_log_entry('Links', $website_id, 'Link', $website_id, 'Delete', $_SESSION['user_id']);
+	
 	$sql = $mysqli->query("DELETE FROM website WHERE website_id = '$website_id'") or die("Failed to delete website");
 	$sql = $mysqli->query("DELETE FROM website_description WHERE website_id = '$website_id'") or die("Failed to delete website");
 	$sql = $mysqli->query("DELETE FROM website_category_cross WHERE website_id = '$website_id'") or die("Failed to delete website");
@@ -206,10 +217,13 @@ if(isset($action) and $action=='modify_link')
 			
 			}
 		}
+		
+		create_log_entry('Links', $website_id, 'Link', $website_id, 'Update', $_SESSION['user_id']);
 
 		mysqli_close($mysqli); 
 
 		$_SESSION['edit_message'] = "Link modified";
+		
 		header("Location: ../links/link_mod.php?website_id=$website_id");
 }
 
@@ -245,6 +259,8 @@ if(isset($action) and $action=="approve_link")
 	}
 
 	$sql = $mysqli->query("DELETE FROM website_validate WHERE website_id = '$validate_website_id'");
+	
+	create_log_entry('Links', $rowlink[website_id], 'Link', $rowlink[website_id], 'Insert', $_SESSION['user_id']);
 
 	mysqli_close(); 
 
@@ -258,7 +274,8 @@ if(isset($action) and $action=="val_delete")
 	//**************************************************************************************************************************
 	// This is where we delete links that has been submitted that we don't want.
 	//**************************************************************************************************************************
-
+	create_log_entry('Links', $website_id, 'Link', $website_id, 'Delete', $_SESSION['user_id']);
+	
 	$sql = $mysqli->query("DELETE FROM website_validate WHERE website_id = '$website_id'");
 
 	mysqli_close(); 
@@ -274,7 +291,10 @@ if(isset($action) and $action=="new_cat")
 	//**************************************************************************************************************************
 
 	$sql = $mysqli->query("INSERT INTO website_category (website_category_name) VALUES ('$newcat')"); 
-
+	
+	$new_cat_id = $mysqli->insert_id;
+	create_log_entry('Links cat', $new_cat_id, 'Category', $new_cat_id, 'Insert', $_SESSION['user_id']);
+	
 	mysqli_close(); 
 
 	$_SESSION['edit_message'] = "Link category added to the database"; 
@@ -284,7 +304,7 @@ if(isset($action) and $action=="new_cat")
 if(isset($action) and $action=='mod_cat')
 {
 	//****************************************************************************************
-	// Modify category
+	// Modify category - THIS IS NOT USED ANYMORE IN AL2.0 ?? 
 	//**************************************************************************************** 
 
 	$sql = $mysqli->query("UPDATE website_category SET website_category_name='$category_name',parent_category='$category' WHERE website_category_id='$category_id'");
@@ -298,7 +318,7 @@ if(isset($action) and $action=='mod_cat')
 if(isset($action) and $action=='del_cat')
 {
 	//****************************************************************************************
-	// delete category
+	// delete category - THIS IS NOT USED ANYMORE AT AL2.0???
 	//**************************************************************************************** 
 
 	if ($move=="yes") // move the links connected to a category before killing the category.
@@ -328,9 +348,14 @@ if (isset($action) and $action=="del_category")
 	
 	if ($nr_of_links == 0)
 	{
+		create_log_entry('Links cat', $category_id, 'Category', $category_id, 'Delete', $_SESSION['user_id']);
 		$sql = $mysqli->query("DELETE FROM website_category WHERE website_category_id = '$category_id'") or die("Failed to delete category");
+		$_SESSION['edit_message'] = "Link category deleted";
+	}
+	else
+	{
+		$_SESSION['edit_message'] = "deletion failed - Category has websites linked to it";
 	}
 	
-	$_SESSION['edit_message'] = "Link category deleted";
 	header("Location: ../links/link_cat.php");
 }

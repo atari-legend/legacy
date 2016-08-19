@@ -61,6 +61,7 @@ function addcat()
 <h1>MODIFY LINK</h1>
 	<div class="standard_tile_line"></div>
 	<div class="standard_tile_text">
+		{if (isset($website.website_name))}
 		<div class="left_nav_section">
 			Make the changes you want, then hit the submit button to modify.<br>
 			Should you want to delete the link, click the delete button. The effects are immediate.<br>
@@ -136,6 +137,11 @@ function addcat()
 			</div>
 		</fieldset>
 	</form>
+	{else}
+		<div class="left_nav_section">
+			Link does not exist.
+		</div> 
+	{/if}
 	<br>
 	</div>
 	<div class="standard_table_center"><a href="../links/link_modlist.php" class="standard_tile_link">back</a></div> 

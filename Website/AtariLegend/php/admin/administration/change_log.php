@@ -132,6 +132,61 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH))
 		}
 	}
 	
+	//	the TRIVIA SECTION
+	if ($log['section'] == 'Trivia')
+	{	
+		if ($log['sub_section'] == 'DYK' )
+		{
+			$section_link = ( "../trivia/did_you_know.php");
+			$subsection_link = ( "../trivia/did_you_know.php");
+		}
+		
+		if ($log['sub_section'] == 'Quote' )
+		{
+			$section_link = ( "../trivia/manage_trivia_quotes.php");
+			$subsection_link = ( "../trivia/manage_trivia_quotes.php");
+		}
+	}
+	
+	//	the USER SECTION
+	if ($log['section'] == 'Users')
+	{
+		if ($log['sub_section'] == 'Avatar' OR $log['sub_section'] == 'User')
+		{
+			$section_link = ( "../user/user_detail.php" . '?user_id_selected=' . $log['section_id'] );
+			$subsection_link = ( "../user/user_detail.php" . '?user_id_selected=' . $log['sub_section_id'] );
+		}
+	}
+	
+	//	the LINKS SECTION
+	if ($log['section'] == 'Links')
+	{
+		$section_link = ( "../links/link_mod.php" . '?website_id=' . $log['section_id'] );
+		
+		if ($log['sub_section'] == 'Link' OR $log['sub_section'] == 'Category')
+		{
+			$subsection_link = ( "../links/link_mod.php" . '?website_id=' . $log['section_id'] );
+		}
+	}
+	
+	//	the LINKS CATEGORRY SECTION
+	if ($log['section'] == 'Links cat')
+	{
+		$section_link = ( "../links/link_cat.php" );
+		$subsection_link = ( "../links/link_cat.php" );
+	}
+	
+	//	the COMPANY SECTION
+	if ($log['section'] == 'Company')
+	{	
+		$section_link = ( "../company/company_edit.php" . '?comp_id=' . $log['section_id'] );
+		
+		if ($log['sub_section'] == 'Company' OR $log['sub_section'] == 'Logo')
+		{
+			$subsection_link = $section_link;
+		}
+	}
+		
 		
 	$smarty->append('log',
  		 		array('log_user_name' => $user_name,

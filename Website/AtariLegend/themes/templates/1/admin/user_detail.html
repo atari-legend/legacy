@@ -47,6 +47,7 @@ function user_stats()
 	<h1>USER DETAILS</h1>
 	<div class="standard_tile_line"></div>
 	<div class="standard_tile_text">
+		{if (isset($users.user_name))}
 		<div class="left_nav_section">
 			Overhere you can maintain the log on data of a user and have a look at his activities. Press 'modify' to change certain
 			data. 'Delete' will completely remove the account. You are also able to reset the password of the user. After resetting, you are
@@ -133,6 +134,11 @@ function user_stats()
 				</form>
 			{/if}
 		</fieldset>
+		{else}
+		<div class="left_nav_section">
+			User does not exist.
+		</div> 
+		{/if}
 		<br>
 		<br>	
 		<div class="standard_table_center"><a href="javascript:history.go(-1)" class="standard_tile_link">back</a></div>
