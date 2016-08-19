@@ -11,6 +11,8 @@
 *   Id: db_games_box.php,v 1.10 2005/11/19 Silver Surfer
 *   Id: db_games_box.php,v 1.20 2016/07/20 ST Graveyard
 *							- AL 2.0
+*   Id: db_games_box.php,v 1.25 2016/08/19 ST Graveyard
+*							- added change log
 *
 ***************************************************************************/
 
@@ -63,6 +65,8 @@ for($i=1; $i <= 1; $i++)
 			 // Rename the uploaded file to its autoincrement number and move it to its proper place.
 			 $file_data = rename("$filename", "$game_boxscan_save_path$backbox[0].jpg");
 			 
+			 create_log_entry('Games', $game_id, 'Box back', $game_id, 'Insert', $_SESSION['user_id']);
+			 
 			 $_SESSION['edit_message'] = "Back scan uploaded";
 	
 			chmod("$game_boxscan_path$backbox[0].jpg", 0777);
@@ -84,6 +88,8 @@ for($i=1; $i <= 1; $i++)
 			 // Rename the uploaded file to its autoincrement number and move it to its proper place.
 			 $file_data = rename("$filename", "$game_boxscan_save_path$boxCover[0].jpg");
 			 
+			 create_log_entry('Games', $game_id, 'Box front', $game_id, 'Insert', $_SESSION['user_id']);
+			 
 			 $_SESSION['edit_message'] = "Front scan uploaded";
 			 
 			 chmod("$game_boxscan_path$boxCover[0].jpg", 0777);
@@ -103,17 +109,19 @@ if(isset($action) and $action=="boxscan_delete")
 // This is where the boxscans get deleted
 //****************************************************************************************
 
-
-
 $sql = $mysqli->query("DELETE FROM game_boxscan WHERE game_boxscan_id = '$game_boxscan_id'");
 
 if ($mode == "back") 
 {
 	$sql = $mysqli->query("DELETE FROM game_box_couples WHERE game_boxscan_cross = '$game_boxscan_id'");
+	
+	create_log_entry('Games', $game_id, 'Box back', $game_id, 'Delete', $_SESSION['user_id']);
 }
 else
 {
 	$sql = $mysqli->query("DELETE FROM game_box_couples WHERE game_boxscan_id = '$game_boxscan_id'");
+	
+	create_log_entry('Games', $game_id, 'Box front', $game_id, 'Delete', $_SESSION['user_id']);
 }
 
 unlink ("$game_boxscan_save_path$game_boxscan_id.jpg");

@@ -8,6 +8,7 @@
  *	 actual update        : Creation of file
  *
  *   Id: games_upload.php,v 0.10 2005/11/09 15:10 ST Gravedigger
+ *   Id: games_upload.php,v 0.20 2016/08/18 23:15 ST Gravedigger - added change log
  *
  ***************************************************************************/
 
@@ -105,14 +106,15 @@ if (isset($action) and $action == 'add_download' )
 				or die("Couldn't insert md5hash");
 		
 		// Add entry to search table for search purposes
-		
-		$mysqli->query("UPDATE game_search SET download='1' WHERE game_id='$game_id'");
+		// $mysqli->query("UPDATE game_search SET download='1' WHERE game_id='$game_id'");
 		
 		// Chmod file so that we can backup/delete files through ftp.
 		chmod("$game_file_path$gamedownrow[0].zip", 0777);
 		
 		// Delete the unzipped file in the temporary directory
 		unlink ("$game_file_temp_path$gamedownrow[0].$ext");
+		
+		create_log_entry('Games', $game_id, 'File', $game_id, 'Insert', $_SESSION['user_id']);
 		
 		$_SESSION['edit_message'] = "game uploaded";
 		
@@ -165,6 +167,8 @@ if (isset($version)) {
 if (isset($tos)) {
 	$mysqli->query("UPDATE game_download SET tos='$tos' WHERE game_download_id='$game_download_id'");
 }
+		create_log_entry('Games', $game_id, 'File', $game_id, 'Update', $_SESSION['user_id']);
+
 		$_SESSION['edit_message'] = "file updated";
 		header("Location: ../games/games_upload.php?game_id=$game_id");
 }
@@ -174,6 +178,8 @@ if (isset($tos)) {
 //**************************************************************************************** 
 if (isset($action) and $action == "delete_download")
 {
+	create_log_entry('Games', $game_id, 'File', $game_id, 'Delete', $_SESSION['user_id']);
+	
 	$mysqli->query("DELETE from game_download WHERE game_download_id='$game_download_id'");
 	unlink ("$game_file_path$game_download_id.zip");
 	$_SESSION['edit_message'] = "file deleted";
