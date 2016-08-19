@@ -1,15 +1,17 @@
 <?php
 /***************************************************************************
-*                                games_review_add.php
+*                                db_games_review.php
 *                            --------------------------
 *   begin                : Sunday, November 27, 2005
 *   copyright            : (C) 2005 Atari Legend
 *   email                : maarten.martens@freebel.net
 *   actual update        : created this page
 *
-*   Id: games_review_add.php,v 0.10 2005/11/27 Gatekeeper
-*   Id: games_review_add.php,v 0.15 2016/07/24 Gatekeeper
+*   Id: db_games_review.php,v 0.10 2005/11/27 Gatekeeper
+*   Id: db_games_review.php,v 0.15 2016/07/24 Gatekeeper
 *				- AL 2.0
+*   Id: db_games_review.php,v 0.16 2016/08/19 ST Graveyard
+*				- Added change log
 *
 ***************************************************************************/
 
@@ -25,8 +27,7 @@ include("../../includes/admin.php");
 
 if (isset($action) and $action  == 'add_review' )
 {
-	// first we have to convert the date vars into a time stamp to be inserted to review_date
-	
+	// first we have to convert the date vars into a time stamp to be inserted to review_date	
 	$date = date_to_timestamp($Date_Year,$Date_Month,$Date_Day);
 
 	$sdbquery = $mysqli->query("INSERT INTO review_main (user_id, review_text, review_date) VALUES ($members, '$textfield', '$date')")
@@ -84,11 +85,11 @@ if (isset($action) and $action  == 'add_review' )
 			}
 			$i++;
 		}
+		
+		create_log_entry('Games', $game_id, 'Review', $reviewid, 'Insert', $_SESSION['user_id']);
+		
 		$_SESSION['edit_message'] = "Review added to DB";
 		
 		header("Location: ../games/games_review_add.php?game_id=$game_id");
 }
-
-
-
 ?>

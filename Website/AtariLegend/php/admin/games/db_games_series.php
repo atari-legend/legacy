@@ -7,11 +7,11 @@
 *   email                : silversurfer@atari-forum.com
 *   actual update        : re-creation of code from scratch into new file.
 *						  
-*							
-*
 *   Id: db_games_series.php,v 1.10 2005/09/24 Silver Surfer
 *   Id: db_games_series.php,v 1.15 2016/07/24 STG
 *			- AL 2.0 adding messages
+*   Id: db_games_series.php,v 1.16 2016/08/19 STG
+*			- add change log
 *
 ***************************************************************************/
 
@@ -31,6 +31,8 @@ if(isset($game_series_cross_id))
 
 	foreach($game_series_cross_id as $game_series_cross_id_sql) 
 	{
+		create_log_entry('Game series', $game_series_cross_id_sql, 'Game', $game_series_cross_id_sql, 'Delete', $_SESSION['user_id']);
+		
 		$mysqli->query("DELETE FROM game_series_cross WHERE game_series_cross_id='$game_series_cross_id_sql'"); 
 	}
 
@@ -55,6 +57,10 @@ if(isset($new_series))
 	mysqli_free_result(); 
 }
 
+$new_series_id = $mysqli->insert_id;
+
+create_log_entry('Game series', $new_series_id, 'Series', $new_series_id, 'Insert', $_SESSION['user_id']);
+
 $_SESSION['edit_message'] = "new series added";
 
 header("Location: ../games/games_series_main.php");
@@ -76,6 +82,8 @@ if(isset($game_series_name))
 
 $_SESSION['edit_message'] = "series updated";
 
+create_log_entry('Game series', $game_series_id, 'Series', $game_series_id, 'Update', $_SESSION['user_id']);
+
 header("Location: ../games/games_series_editor.php?series_page=series_editor&game_series_id=$game_series_id");
 
 }
@@ -88,6 +96,8 @@ if($action=="delete_gameseries")
 {
 if(isset($game_series_id)) 
 {
+	create_log_entry('Game series', $game_series_id, 'Series', $game_series_id, 'Delete', $_SESSION['user_id']);
+	
 	$mysqli->query("DELETE FROM game_series WHERE game_series_id='$game_series_id'"); 
 	$mysqli->query("DELETE FROM game_series_cross WHERE game_series_id='$game_series_id'"); 
 	mysqli_free_result(); 
@@ -109,6 +119,8 @@ if(isset($game_id))
 {
 	foreach($game_id as $game) 
 	{
+		create_log_entry('Game series', $game_series_id, 'Game', $game, 'Insert', $_SESSION['user_id']);
+		
 		$mysqli->query("INSERT INTO game_series_cross (game_id,game_series_id) VALUES ('$game','$game_series_id')"); 
 		$_SESSION['edit_message'] = "game added to series";
 	}

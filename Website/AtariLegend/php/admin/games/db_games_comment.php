@@ -10,6 +10,8 @@
 *   Id: db_games_comment.php,v 1.10 2005/09/19 Silver Surfer
 *   Id: db_games_comment.php,v 1.15 2016/07/21 STG
 *				- AL 2.0 : added messages
+*   Id: db_games_comment.php,v 1.16 2016/08/19 STG
+*				- Change log added
 *
 ***************************************************************************/
 
@@ -28,6 +30,9 @@ if($action=="edit_games_comment")
 	if (isset($comment_text) and isset($comment_id))
 	{	
 		$mysqli->query("UPDATE comments SET comment='$comment_text' WHERE comments_id='$comment_id'") or die("couldn't update comments table");
+		
+		create_log_entry('Games', $comment_id, 'Comment', $comment_id, 'Update', $_SESSION['user_id']);
+		
 		$_SESSION['edit_message'] = "Comment edited";
 	}
 
@@ -51,6 +56,8 @@ if($action=="delete_comment")
 
 	if (isset($comment_id))
 	{
+		create_log_entry('Games', $comment_id, 'Comment', $comment_id, 'Delete', $_SESSION['user_id']);
+		
 		$sql = $mysqli->query("DELETE FROM game_user_comments WHERE comment_id = '$comment_id'") or die("couldn't delete game_comment quote");
 		$sql = $mysqli->query("DELETE FROM comments WHERE comments_id = '$comment_id'") or die("couldn't delete comment quote");
 		$_SESSION['edit_message'] = "Comment deleted";

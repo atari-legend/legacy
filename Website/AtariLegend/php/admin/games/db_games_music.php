@@ -6,10 +6,11 @@
 *   copyright            : (C) 2005 Atari Legend
 *   email                : silversurfer@atari-forum.com
 *   actual update        : re-creation of code from scratch into new file.
-*						  
-*							
+*						  							
 *	Id: db_games_music.php,v 0.20 2016/07/26 ST Graveyard
 *			- AL 2.0
+*	Id: db_games_music.php,v 0.21 2016/08/19 ST Graveyard
+*			- added change log
 *
 ***************************************************************************/
 
@@ -52,8 +53,9 @@ if(isset($music_id))
 	}
 }
 
-$_SESSION['edit_message'] = "Music file deleted";
-header("Location: ../games/games_music_detail.php?game_id=$game_id");
+	$_SESSION['edit_message'] = "Music file deleted";
+	create_log_entry('Games', $game_id, 'Music', $game_id, 'Delete', $_SESSION['user_id']);
+	header("Location: ../games/games_music_detail.php?game_id=$game_id");
 }
 
 //****************************************************************************************
@@ -122,6 +124,9 @@ foreach($image['tmp_name'] as $key=>$tmp_name)
 		
 		chmod("$music_game_save_path$music_id.$ext", 0777) or die("couldn't chmod file");
 		$_SESSION['edit_message'] = "Music file uploaded";
+		
+		create_log_entry('Games', $game_id, 'Music', $game_id, 'Insert', $_SESSION['user_id']);
+		
 		}
 		else
 		{
@@ -133,6 +138,4 @@ foreach($image['tmp_name'] as $key=>$tmp_name)
 }
 header("Location: ../games/games_music_detail.php?game_id=$game_id");
 }
-
-
 ?>

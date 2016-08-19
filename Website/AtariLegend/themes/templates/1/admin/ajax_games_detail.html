@@ -17,9 +17,20 @@
 //**************************************************************************************** 
 *}
 
-{if isset($smarty_action) and $smarty_action == "company_list"}
+{if isset($smarty_action) and $smarty_action == "company_publisher_browse"}
 	{if isset($company)}
 		<select name="company_id_pub" id="company_id_pub">
+			<option value="-" selected>-</option>
+			{foreach from=$company item=line}
+				<option value="{$line.company_id}">{$line.company_name}</option>
+			{/foreach}
+		</select>
+	{/if}
+{/if}
+
+{if isset($smarty_action) and $smarty_action == "company_developer_browse"}
+	{if isset($company)}
+		<select name="company_id_dev" id="company_id_dev">
 			<option value="-" selected>-</option>
 			{foreach from=$company item=line}
 				<option value="{$line.company_id}">{$line.company_name}</option>

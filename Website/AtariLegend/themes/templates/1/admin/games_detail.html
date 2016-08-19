@@ -130,7 +130,7 @@ function browseDeveloper(str) {
                 document.getElementById("ajax_developer_browse").innerHTML = xmlhttp.responseText;
             }
         }
-        xmlhttp.open("GET","../games/ajax_games_detail.php?action=company_publisher_browse&query="+str,true);
+        xmlhttp.open("GET","../games/ajax_games_detail.php?action=company_developer_browse&query="+str,true);
         xmlhttp.send();
     }
 }
@@ -139,6 +139,7 @@ function browseDeveloper(str) {
 
 {block name=main_tile}
 <div class="standard_tile" id="games_detail">
+	{if isset ($game_info)}			
 	<h1>{$game_info.game_name}</h1>
 	<div class="standard_tile_line"></div>
 	<div class="standard_tile_text">
@@ -341,7 +342,7 @@ function browseDeveloper(str) {
 					<legend>Release Year</legend>
 						{if isset($game_year)}	
 						{foreach from=$game_year item=line}
-							<input type="checkbox" name="game_year_id[]" value="{$line.game_year_id}"/>{$line.game_year} {if  $line.game_extra_info <> ''}<b>({$line.game_extra_info})</b>{/if}
+							<input type="checkbox" name="game_year_id[]" value="{$line.game_year_id}">{$line.game_year} {if  $line.game_extra_info <> ''}<b>({$line.game_extra_info})</b>{/if}
 							<br>
 							<br>
 						{/foreach}
@@ -391,7 +392,7 @@ function browseDeveloper(str) {
 							<select name="developerbrowse" onchange="browseDeveloper(this.value)" id="gd_dev_small_select">
 								<option value="" SELECTED>-</option>
 								{html_options values=$az_value output=$az_output}
-							</select>
+							</select>						
 						</td>
 						<td>
 							<div id="ajax_developer_browse">
@@ -493,7 +494,6 @@ function browseDeveloper(str) {
 							</div>
 						</td>
 						<td>
-							<input type="hidden" value="{$line.comp_name}" name="pub_name"/>
 							<b>Name</b>
 						</td>
 					</tr>
@@ -528,5 +528,18 @@ function browseDeveloper(str) {
 		</div>
 	</div>
 	</div>
+	{else}
+	<div class="standard_tile_line"></div>
+	<div class="standard_tile_text">
+		<div class="left_nav_section">
+			Game not available
+		</div>
+	</div>
+	<div id="gd_bottom">
+		<div id="gd_back">
+			<div class="standard_table_center"><a href="javascript:history.go(-1)" class="standard_tile_link">back</a></div>
+		</div>
+	</div>
+	{/if}
 </div>
 {/block}

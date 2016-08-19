@@ -44,6 +44,7 @@ function deleteseries()
 
 {block name=main_tile}
 <div class="standard_tile" id="games_series_edit">
+	{if (isset($series_info.game_series_name)) }
 	<h1>{$series_info.game_series_name} selected</h1>
 	<div class="standard_tile_line"></div>
 	<div class="standard_tile_text">
@@ -142,5 +143,14 @@ function deleteseries()
 		<br>
 		<div class="standard_table_center"><a href="../games/games_series_main.php" class="standard_tile_link">back</a></div>
 	</div>
+	{else}
+		<h1>Game series</h1>
+		<div class="standard_tile_line"></div>
+		<div class="standard_tile_text">
+			<div class="left_nav_section">
+				Game series does not exist
+			</div>
+		</div>
+	{/if}
 </div>
 {/block}

@@ -9,7 +9,9 @@
  *
  *   Id: games_screenshots_add.php,v 0.10 2005/11/09 23:02 ST Gravedigger
  *   Id: games_screenshots_add.php,v 0.20 2016/07/16 23:21 ST Gravedigger
- *									-AL 2.0
+ *									- AL 2.0
+ *   Id: games_screenshots_add.php,v 0.30 2016/08/19 9:31 ST Gravedigger 
+ *									- Change log
  *
  *********************************************************************************/
 
@@ -80,6 +82,8 @@ foreach($image['tmp_name'] as $key=>$tmp_name)
 			
 			chmod("$game_screenshot_save_path$screenshotrow[0].$ext", 0777);
 			
+			create_log_entry('Games', $game_id, 'Screenshot', $game_id, 'Insert', $_SESSION['user_id']);
+			
 			$_SESSION['edit_message'] = "screenshot uploaded";
 
 			header("Location: ../games/games_screenshot_add.php?game_id=$game_id");
@@ -116,6 +120,8 @@ if ( isset($action) and $action == 'delete_screen' )
 	$new_path .= $screenshot_ext;
 
 	unlink ("$new_path");
+	
+	create_log_entry('Games', $game_id, 'Screenshot', $game_id, 'Delete', $_SESSION['user_id']);
 	
 	$_SESSION['edit_message'] = "Screenshot deleted succesfully";
 	

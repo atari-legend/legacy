@@ -8,6 +8,7 @@
 *   actual update        : 
 *						   						  			   
 *   Id: functions.php,v 0.10 2004/01/26 00:55 silver
+*   Id: functions.php,v 0.20 2016/08/17 STG - Added change log function
 *
 ***************************************************************************/
 
@@ -461,10 +462,162 @@ function statistics_stack() {
 
 function create_log_entry($section, $section_id, $subsection, $subsection_id, $action, $user_id) {
 	
-		include("../../includes/connect.php"); 
+	global $mysqli;
+	
+	$log_time = date_to_timestamp(date('Y'),date('m'),date('d'));
+	
+//	Everything we do for the GAMES SECTION	
+	If ( $section == 'Games' )
+	{
+		if ( $subsection == 'Submission' )
+		{
+			// get game id
+			$query_game_id = "SELECT game_id FROM game_submitinfo WHERE game_submitinfo_id = '$section_id'";
+			$result = $mysqli->query($query_game_id) or die("getting game name failed");
+			$query_data = $result->fetch_array(MYSQLI_BOTH);
+			$section_id = $query_data['game_id'];
+			
+		}
 		
-		$log_time = date_to_timestamp(date('Y'),date('m'),date('d'));
-					
-		$sql_log = $mysqli->query("INSERT INTO change_log (section, section_id, sub_section, sub_section_id, user_id, action, timestamp) VALUES ('$section','$section_id','$subsection', '$subsection_id', '$user_id', '$action', '$log_time')") or die ("Couldn't insert change log into database");  
+		//  get the game name
+			$query_game = "SELECT game_name FROM game WHERE game_id = '$section_id'";
+			$result = $mysqli->query($query_game) or die("getting game name failed");
+			$query_data = $result->fetch_array(MYSQLI_BOTH);
+			$section_name = $query_data['game_name'];
+	
+	
+		If ( $subsection == 'Game' OR $subsection == 'File' OR $subsection == 'Screenshot' OR  $subsection == 'Mag score' OR
+			 $subsection == 'Box back' OR $subsection == 'Box front' OR $subsection == 'Review' OR $subsection == 'Review comment' OR 
+			 $subsection == 'Music' OR $subsection == 'Submission' )
+		{
+			$subsection_name = $section_name;
+		}
+		
+		If ( $subsection == 'AKA' )
+		{
+			//  get the AKA name
+				$query_aka = "SELECT aka_name FROM game_aka WHERE game_aka_id = '$subsection_id'";
+				$result = $mysqli->query($query_aka) or die("getting aka name failed");
+				$query_data = $result->fetch_array(MYSQLI_BOTH);
+				$subsection_name = $query_data['aka_name'];
+				$subsection_id = $section_id;
+		}
+		
+		If ( $subsection == 'Creator' )
+		{
+			if ($action == 'Delete')
+			{
+				//  get the ind name & id
+				$query_ind = "SELECT individuals.ind_id, 
+									 individuals.ind_name FROM individuals 
+														  LEFT JOIN game_author ON ( individuals.ind_id = game_author.ind_id ) 
+														  WHERE game_author.game_author_id = '$subsection_id'";
+				$result = $mysqli->query($query_ind) or die("getting ind name failed");
+				$query_data = $result->fetch_array(MYSQLI_BOTH);
+				$subsection_name = $query_data['ind_name'];
+				$subsection_id = $query_data['ind_id'];
+			}
+			else
+			{
+			//  get the ind name
+				$query_ind = "SELECT ind_name FROM individuals WHERE ind_id = '$subsection_id'";
+				$result = $mysqli->query($query_ind) or die("getting ind name failed");
+				$query_data = $result->fetch_array(MYSQLI_BOTH);
+				$subsection_name = $query_data['ind_name'];
+			}
+		}
+		
+		If ( $subsection == 'Publisher' OR $subsection == 'Developer' )
+		{
+			//  get the pub/dev name
+				$query_pubdev = "SELECT pub_dev_name FROM pub_dev WHERE pub_dev_id = '$subsection_id'";
+				$result = $mysqli->query($query_pubdev) or die("getting pub/dev name failed");
+				$query_data = $result->fetch_array(MYSQLI_BOTH);
+				$subsection_name = $query_data['pub_dev_name'];
+		}
+		
+		If ( $subsection == 'Year' )
+		{
+			//  get the game year
+				$query_gameyear = "SELECT game_year FROM game_year WHERE game_year_id = '$subsection_id'";
+				$result = $mysqli->query($query_gameyear) or die("getting gameyear failed");
+				$query_data = $result->fetch_array(MYSQLI_BOTH);
+				$subsection_name = $query_data['game_year'];
+				$subsection_id = $section_id;
+		}
+		
+		If ( $subsection == 'Similar' )
+		{
+			if ($action == 'Delete')
+			{
+				// get the cross id
+				$query_cross = "SELECT game_similar_cross FROM game_similar WHERE game_similar_id = '$subsection_id'";
+				$result = $mysqli->query($query_cross) or die("getting cross failed");
+				$query_data = $result->fetch_array(MYSQLI_BOTH);
+				$subsection_id = $query_data['game_similar_cross'];
+			}
+		//  get the game name
+			$query_game = "SELECT game_name FROM game WHERE game_id = '$subsection_id'";
+			$result = $mysqli->query($query_game) or die("getting game name failed");
+			$query_data = $result->fetch_array(MYSQLI_BOTH);
+			$subsection_name = $query_data['game_name'];
+			$subsection_id = $section_id;
+		}
+		
+		If ( $subsection == 'Comment' )
+		{
+			//get game_id and game_user_comments_id
+			$query_user_comment = "SELECT game_user_comments.game_id, 
+										  game_user_comments.game_user_comments_id,
+										  game.game_name 
+										  FROM game_user_comments 
+										  LEFT JOIN game ON ( game.game_id = game_user_comments.game_id )
+										  WHERE game_user_comments.comment_id = '$subsection_id'";
+										  
+			$result = $mysqli->query($query_user_comment) or die("getting user comments id failed");
+			$query_data = $result->fetch_array(MYSQLI_BOTH);
+			$subsection_id = $query_data['game_user_comments_id'];
+			$section_id = $query_data['game_id'];
+			$section_name = $query_data['game_name'];
+			$subsection_name = $query_data['game_name'];
+		}
+	}
+	
+//	Everything we do for the GAMES SERIES SECTION	
+	If ( $section == 'Game series' )
+	{	
+		If ( $subsection == 'Game' )
+		{
+			if ( $action == 'Delete' )
+			{
+				//get the game_id and game_series_id
+				$query_series = "SELECT game_id, game_series_id FROM game_series_cross WHERE game_series_cross_id = '$subsection_id'";
+				$result = $mysqli->query($query_series) or die("getting series info failed");
+				$query_data = $result->fetch_array(MYSQLI_BOTH);
+				$subsection_id = $query_data['game_id'];
+				$section_id = $query_data['game_series_id'];
+			}
+			
+			//  get the game name
+			$query_game = "SELECT game_name FROM game WHERE game_id = '$subsection_id'";
+			$result = $mysqli->query($query_game) or die("getting game name failed");
+			$query_data = $result->fetch_array(MYSQLI_BOTH);
+			$subsection_name = $query_data['game_name'];
+		}
+		
+		//  get the name of the series 
+		$query_series = "SELECT game_series_name FROM game_series WHERE game_series_id = '$section_id'";
+		$result = $mysqli->query($query_series) or die("getting series name failed");
+		$query_data = $result->fetch_array(MYSQLI_BOTH);
+		$section_name = $query_data['game_series_name'];
+		
+		If ( $subsection == 'Series' )
+		{
+			$subsection_name = $section_name;
+		}
+	}
+				
+	$sql_log = $mysqli->query("INSERT INTO change_log (section, section_id, section_name, sub_section, sub_section_id, sub_section_name, user_id, action, timestamp) VALUES ('$section', '$section_id', '$section_name', '$subsection', '$subsection_id', '$subsection_name', '$user_id', '$action', '$log_time')") 
+								or die ("Couldn't insert change log into database");  
 }
 ?>

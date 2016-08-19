@@ -10,6 +10,8 @@
 *   Id: db_games_submissions.php,v 1.10 2005/09/19 Silver Surfer
 *   Id: db_games_submissions.php,v 1.10 2016/07/27 STG
 *		- AL 2.0 : added messages
+*   Id: db_games_submissions.php,v 1.11 2016/08/19 STG
+*		- added change log
 *
 ***************************************************************************/
 
@@ -22,7 +24,6 @@ include("../../includes/admin.php");
 if($action=="update_submission")
 
 {
-
 //****************************************************************************************
 // This is where the submissions get "sent" to "done"
 //**************************************************************************************** 
@@ -40,6 +41,8 @@ if (isset($submit_id))
 
 $_SESSION['edit_message'] = "Submission set to done status - transferred to done list";
 
+create_log_entry('Games', $submit_id, 'Submission', $submit_id, 'Update', $_SESSION['user_id']);
+
 header("Location: ../games/submission_games.php?v_counter=$v_counter");
 }
 
@@ -48,13 +51,14 @@ header("Location: ../games/submission_games.php?v_counter=$v_counter");
 // Delete
 if($action=="delete_submission")
 {
-
 //****************************************************************************************
-// This is the game comment edit place
+// This is the delete submission
 //**************************************************************************************** 
 
 	if (isset($submit_id))
 	{
+		create_log_entry('Games', $submit_id, 'Submission', $submit_id, 'Delete', $_SESSION['user_id']);
+		
 		$sql = $mysqli->query("DELETE FROM game_submitinfo WHERE game_submitinfo_id = '$submit_id'") or die("couldn't delete game_submissions quote");
 	}
 
@@ -90,14 +94,18 @@ if($action=="move_submission_tocomment")
 		$sub_user_id = $sql_submit['user_id'];
 		$sub_game_id = $sql_submit['game_id'];
 
-
 		$sql = $mysqli->query("INSERT INTO comments (comment,timestamp,user_id) VALUES ('$submit_text','$sub_timestamp','$sub_user_id')") or die("something is wrong with INSERT mysql3");
+		
+		$new_comment_id = $mysqli->insert_id;
+				
 		$sql = $mysqli->query("INSERT INTO game_user_comments (game_id,comment_id) VALUES ('$sub_game_id',LAST_INSERT_ID())") or die("something is wrong with INSERT mysql4");
 
 		$sql = $mysqli->query("DELETE FROM game_submitinfo WHERE game_submitinfo_id = ".$submit_id."") or die("couldn't delete game_submissions quote");
 	}
 
 	$_SESSION['edit_message'] = "Submission converted to game comment";
+	
+	create_log_entry('Games', $new_comment_id, 'Comment', $new_comment_id, 'Insert', $_SESSION['user_id']);
 
 	if ($list == "done")
 	{

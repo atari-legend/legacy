@@ -28,7 +28,7 @@ $sql_screenshots = $mysqli->query("SELECT * FROM screenshot_game
 				   		or die ("Database error - selecting screenshots");
 
 $count = 1;
-$v_screenshots =1;
+$v_screenshots =0;
 while ( $screenshots=$sql_screenshots->fetch_array(MYSQLI_BOTH)) 
 {
 	//Ready screenshots path and filename

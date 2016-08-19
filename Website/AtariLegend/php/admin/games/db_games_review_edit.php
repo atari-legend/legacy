@@ -1,14 +1,16 @@
 <?php
 /***************************************************************************
-*                                games_review_edit.php
-*                            --------------------------
+*                                db_games_review_edit.php
+*                            ------------------------------
 *   begin                : saturday, December 4, 2004
 *   copyright            : (C) 2004 Atari Legend
 *   email                : maarten.martens@freebel.net
 *
-*   Id: games_review_edit.php,v 0.10 2004/12/04 23:34 ST Graveyard
-*   Id: games_review_edit.php,v 0.15 2016/07/23 23:56 ST Graveyard
+*   Id: db_games_review_edit.php,v 0.10 2004/12/04 23:34 ST Graveyard
+*   Id: db_games_review_edit.php,v 0.15 2016/07/23 23:56 ST Graveyard
 *					- AL 2.0
+*   Id: db_games_review_edit.php,v 0.16 2016/08/19 12:34 ST Graveyard
+*					- Added change log
 *
 ***************************************************************************/
 
@@ -37,6 +39,8 @@ if (isset($action) and $action == 'delete_comment')
 	$sdbquery = $mysqli->query("DELETE FROM screenshot_review WHERE review_id = $reviewid AND screenshot_id = $screenshot_id") or die ("failed deleting screenshot_review");
 	
 	$_SESSION['edit_message'] = "Comment deleted";
+	
+	create_log_entry('Games', $game_id, 'Review comment', $reviewid, 'Delete', $_SESSION['user_id']);
 
 	header("Location: ../games/games_review_edit.php?reviewid=$reviewid&game_id=$game_id");
 }
@@ -59,6 +63,8 @@ if (isset($action) and $action == 'delete_review')
 	$sql = $mysqli->query("DELETE FROM screenshot_review WHERE review_id = '$reviewid' ") or die ("deletion screenshot failed");
 	
 	$_SESSION['edit_message'] = "Review deleted";
+	
+	create_log_entry('Games', $game_id, 'Review', $reviewid, 'Delete', $_SESSION['user_id']);
 
 	header("Location: ../games/games_review_add.php?game_id=$game_id");
 }
@@ -161,27 +167,32 @@ if ($action == 'edit_review')
 		}
 		
 		$_SESSION['edit_message'] = "Review updated";
+		
+		create_log_entry('Games', $game_id, 'Review', $reviewid, 'Update', $_SESSION['user_id']);
 	
 		header("Location: ../games/games_review_edit.php?reviewid=$reviewid&game_id=$game_id");
 }
 
 if (isset($action) and $action == 'move_to_comment')
 {
-
 	$sql_edit_REVIEW = $mysqli->query("SELECT * FROM review_main WHERE review_id = $reviewid")
 				   or die ("Database error - selecting review data");
 
 	$edit_review=$sql_edit_REVIEW->fetch_array(MYSQLI_BOTH); 
 
-		
 	$review_text = $mysqli->real_escape_string($edit_review['review_text']);
 	$review_timestamp = $edit_review['review_date'];
 	$review_user_id = $edit_review['user_id'];
 
-		$sql = $mysqli->query("INSERT INTO comments (comment,timestamp,user_id) VALUES ('$review_text','$review_timestamp','$review_user_id')") 
-					or die("something is wrong with INSERT mysql3");
-		$sql = $mysqli->query("INSERT INTO game_user_comments (game_id,comment_id) VALUES ('$game_id',LAST_INSERT_ID())") 
-					or die("something is wrong with INSERT mysql4");
+	$sql = $mysqli->query("INSERT INTO comments (comment,timestamp,user_id) VALUES ('$review_text','$review_timestamp','$review_user_id')") 
+				or die("something is wrong with INSERT mysql3");
+	
+	$new_comment_id = $mysqli->insert_id;
+	
+	$sql = $mysqli->query("INSERT INTO game_user_comments (game_id,comment_id) VALUES ('$game_id',LAST_INSERT_ID())") 
+				or die("something is wrong with INSERT mysql4");
+
+	create_log_entry('Games', $new_comment_id, 'Comment', $new_comment_id, 'Insert', $_SESSION['user_id']);
 
 	$sql = $mysqli->query("DELETE FROM review_main WHERE review_id = '$reviewid' ") or die ("deletion review_main failed");
 	$sql = $mysqli->query("DELETE FROM review_game WHERE review_id = '$reviewid' AND game_id = '$game_id' ") or die ("deletion review_game failed");
@@ -202,5 +213,4 @@ if (isset($action) and $action == 'move_to_comment')
 
 	header("Location: ../games/games_review_add.php?game_id=$game_id");
 }
-
 ?>
