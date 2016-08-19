@@ -190,6 +190,7 @@ function storeCaret(textEl) {
 {block name=main_tile}
 
 <div class="standard_tile" id="company_logos">
+	{if (isset($company.comp_name))}
 	<h1>{$company.comp_name}</h1>
 	<div class="standard_tile_line"></div>
 	<div class="standard_tile_text">
@@ -251,5 +252,14 @@ function storeCaret(textEl) {
 		<br>	
 		<div class="standard_table_center"><a href="javascript:history.go(-1)" class="standard_tile_link">back</a></div>
 	</div>
+	{else}
+		<h1>COMPANY EDIT</h1>
+		<div class="standard_tile_line"></div>
+		<div class="standard_tile_text">
+			<div class="left_nav_section">
+				Company does not exist.
+			</div> 
+		</div>
+	{/if}
 </div>
 {/block}

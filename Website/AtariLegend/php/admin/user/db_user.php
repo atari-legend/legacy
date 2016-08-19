@@ -9,6 +9,7 @@
 *							
 *   Id: db_user.php,v 1.01 2015/12/21 ST Graveyard - Added messages
 *												   - Added more SQL statements
+*   Id: db_user.php,v 1.02 2016/08/19 ST Graveyard - Added Change log
 *
 ***************************************************************************/
 
@@ -69,14 +70,14 @@ if (isset($action) and $action == 'avatar_upload')
 		
 		if ($width<101 and $height<101)
 		{
-		
+			$_SESSION['edit_message'] = "Avatar added";
+			create_log_entry('Users', $user_id_selected, 'Avatar', $user_id_selected, 'Insert', $_SESSION['user_id']);
 		}
 		else
 		{
-			$smarty->assign('message', 'Upload failed due to not confirming to specs.');
+			$_SESSION['edit_message'] = "Upload failed due to not confirming to specs.";
 			$mysqli->query("UPDATE users SET avatar_ext='' WHERE user_id='$user_id_selected'");
-			unlink ("$user_avatar_save_path$user_id_selected.$ext");
-			$_SESSION['edit_message'] = "Avatar added";
+			unlink ("$user_avatar_save_path$user_id_selected.$ext");	
 		}
 	}
 }
@@ -94,6 +95,8 @@ $sql = "SELECT avatar_ext FROM users WHERE user_id='$user_id_selected'";
 	$mysqli->query("UPDATE users SET avatar_ext='' WHERE user_id='$user_id_selected'");
 	$_SESSION['edit_message'] = "Avatar deleted";
 	unlink ("$user_avatar_save_path$user_id_selected.$avatar_ext");
+	
+	create_log_entry('Users', $user_id_selected, 'Avatar', $user_id_selected, 'Delete', $_SESSION['user_id']);
 
 }
 
@@ -104,6 +107,8 @@ if (isset($action) and $action == 'reset_pwd')
 {
 	$mysqli->query("UPDATE users SET password='' WHERE user_id='$user_id_selected'");
 	$_SESSION['edit_message'] = "Password reset";
+	
+	create_log_entry('Users', $user_id_selected, 'User', $user_id_selected, 'Update', $_SESSION['user_id']);
 }
 
 //****************************************************************************************
@@ -116,11 +121,15 @@ if (isset($action) and $action == 'modify_user')
 			$md5pass = md5($user_pwd);
 			$mysqli->query("UPDATE users SET userid='$user_name', password='$md5pass', email='$user_email', permission='$user_permission', user_website='$user_website', user_icq='$user_icq', user_msnm='$user_msnm', user_aim='$user_aim' WHERE user_id='$user_id_selected'");
 			$_SESSION['edit_message'] = "User data modified";
+			
+			create_log_entry('Users', $user_id_selected, 'User', $user_id_selected, 'Update', $_SESSION['user_id']);
 	}
 	else
 	{
 			$mysqli->query("UPDATE users SET userid='$user_name', email='$user_email', permission='$user_permission', user_website='$user_website', user_icq='$user_icq', user_msnm='$user_msnm', user_aim='$user_aim' WHERE user_id='$user_id_selected'");
 			$_SESSION['edit_message'] = "User data modified";
+			
+			create_log_entry('Users', $user_id_selected, 'User', $user_id_selected, 'Update', $_SESSION['user_id']);
 	}
 }
 
@@ -144,7 +153,7 @@ if (isset($action) and $action == 'delete_user')
 		$sql = $mysqli->query("SELECT * FROM review_main
 							LEFT JOIN review_game ON (review_main.review_id = review_game.review_id)
 							LEFT JOIN game ON ( review_game.game_id = game.game_id )
-							WHERE review_main.member_id = '$user_id_selected'") or die ("error selecting game reviews");
+							WHERE review_main.user_id = '$user_id_selected'") or die ("error selecting game reviews");
 		
 		if ( get_rows($sql) > 0 )
 		{
@@ -161,7 +170,7 @@ if (isset($action) and $action == 'delete_user')
 			}
 			else
 			{
-				$sql = $mysqli->query("SELECT * FROM website WHERE website_user_sub = '$user_id_selected'") or die ("error selecting links");
+				$sql = $mysqli->query("SELECT * FROM website WHERE user_id = '$user_id_selected'") or die ("error selecting links");
 				
 				if ( get_rows($sql) > 0 )
 				{
@@ -188,6 +197,8 @@ if (isset($action) and $action == 'delete_user')
 						}
 						else
 						{
+							create_log_entry('Users', $user_id_selected, 'User', $user_id_selected, 'Delete', $_SESSION['user_id']);
+							
 							$mysqli->query("DELETE from users WHERE user_id='$user_id_selected'") or die ('deleting user failed');
 	
 							$_SESSION['edit_message'] = 'User deleted succesfully';
@@ -199,7 +210,8 @@ if (isset($action) and $action == 'delete_user')
 	}
 }
 
-header("Location: ../user/user_detail.php?user_id_selected=$user_id_selected");
+header("Location: ../user/user_detail.php?user_id_selected=$user_id_selected");	
+
 
 //close the connection
 mysqli_close($mysqli);

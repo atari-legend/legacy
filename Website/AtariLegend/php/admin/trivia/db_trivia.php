@@ -9,6 +9,7 @@
 *						  						
 *   Id: db_trivia.php,v 1.00 2005/05/01 Silver Surferµ
 *   Id: db_trivia.php,v 1.00 2015/12/21 ST Graveyard - Added messages
+*   Id: db_trivia.php,v 1.00 2016/08/19 ST Graveyard - Added change log
 *
 ***************************************************************************/
 
@@ -19,14 +20,18 @@ include("../../includes/common.php");
 include("../../includes/admin.php"); 
 
 if(isset($action) and $action =="did_you_know_insert")
-
 {
-
 //****************************************************************************************
 // Insert did you know quote!
 //**************************************************************************************** 
-
+	$trivia_text = $mysqli->real_escape_string($trivia_text);
+	
 	$sql = $mysqli->query("INSERT INTO trivia (trivia_text) VALUES ('$trivia_text')") or die("Couldn't insert trivia text");
+	
+	$new_trivia_id = $mysqli->insert_id;
+	
+	create_log_entry('Trivia', $new_trivia_id, 'DYK', $new_trivia_id, 'Insert', $_SESSION['user_id']);
+	
 	$_SESSION['edit_message'] = "trivia quote added to the database";
 		
 	header("Location: ../trivia/did_you_know.php");
@@ -42,7 +47,9 @@ if(isset($action) and $action=="did_you_know_delete")
 //****************************************************************************************
 // Delete did you know quote!
 //**************************************************************************************** 
-
+	
+	create_log_entry('Trivia', $trivia_id, 'DYK', $trivia_id, 'Delete', $_SESSION['user_id']);
+	
 	$sql = $mysqli->query("DELETE FROM trivia WHERE trivia_id = '$trivia_id'") or die("Couldn't delete trivia text");
 	$_SESSION['edit_message'] = "trivia quote has been deleted";
 	
@@ -63,6 +70,8 @@ if (isset($action) and $action=="delete_trivia_quote")
 if (isset($trivia_quote_id))
 
 	{
+	create_log_entry('Trivia', $trivia_quote_id, 'Quote', $trivia_quote_id, 'Delete', $_SESSION['user_id']);
+	
 	$sql = $mysqli->query("DELETE FROM trivia_quotes WHERE trivia_quote_id = '$trivia_quote_id'") or die("couldn't delete trivia quote");
 	
 	$_SESSION['edit_message'] = "trivia quote has been deleted";
@@ -82,7 +91,14 @@ if (isset($action) and $action=="add_trivia")
 if (isset($trivia_quote))
 
 	{
+		
+	$trivia_quote = $mysqli->real_escape_string($trivia_quote);
+	
 	$mysqli->query("INSERT INTO trivia_quotes (trivia_quote) VALUES ('$trivia_quote')") or die("couldn't add trivia quote");
+	
+	$new_trivia_id = $mysqli->insert_id;
+	create_log_entry('Trivia', $new_trivia_id, 'Quote', $new_trivia_id, 'Insert', $_SESSION['user_id']);
+	
 	$_SESSION['edit_message'] = "trivia quote added to the database";
 	
 	header("Location: ../trivia/manage_trivia_quotes.php");
@@ -95,7 +111,7 @@ if (isset($action) and $action=="trivia_upload")
 {
 
 //****************************************************************************************
-// Upload trivia and add to db
+// Upload trivia and add to db - THIS IS NOT USED AT AL2.0 (WAS AL 1.0)
 //**************************************************************************************** 
 
 //Here we'll be looping on each of the inputs on the page that are filled in with an image!
@@ -165,7 +181,7 @@ if (isset($action) and $action=="delete_trivia_screen")
 {
 
 //****************************************************************************************
-// Delete the trivia screenshot
+// Delete the trivia screenshot - THIS IS NOT USED AT AL2.0 (WAS AL 1.0)
 //**************************************************************************************** 
 
 	if (isset($imageid))

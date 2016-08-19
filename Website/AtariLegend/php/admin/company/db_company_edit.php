@@ -1,14 +1,16 @@
 <?php
 /***************************************************************************
-*                                company_edit.php
+*                                db_company_edit.php
 *                            --------------------------
 *   begin                : Sunday, August 7, 2005
 *   copyright            : (C) 2005 Atari Legend
 *   email                : maarten.martens@freebel.net
 *   actual update        : Creation of file
-*   Id: company_edit.php,v 0.10 2005/08/07 14:40 Gatekeeper
-*   Id: company_edit.php,v 0.20 2016/07/31 14:40 Gatekeeper
+*   Id: db_company_edit,v 0.10 2005/08/07 14:40 Gatekeeper
+*   Id: db_company_edit,v 0.20 2016/07/31 14:40 Gatekeeper
 *		- AL 2.0 - adding messages
+*   Id: db_company_edit,v 0.21 2016/08/19 22:57 Gatekeeper
+*		- adding change log
 *
 ***************************************************************************/
 
@@ -33,6 +35,8 @@ if ( isset($action) and $action == 'delete_logo' )
 	unlink ("$company_screenshot_save_path$comp_id.$pub_dev_imgext");
 	
 	$_SESSION['edit_message'] = "Company logo deleted";
+	
+	create_log_entry('Company', $comp_id, 'Logo', $comp_id, 'Delete', $_SESSION['user_id']);
 	
 	header("Location: ../company/company_edit.php?comp_id=$comp_id");
 }
@@ -92,6 +96,8 @@ if ( isset($action) and $action == 'add_logo' )
 	
 				  chmod("$company_screenshot_save_path$comp_id.$ext", 0777);
 				  
+				  create_log_entry('Company', $comp_id, 'Logo', $comp_id, 'Insert', $_SESSION['user_id']);
+				  
 				  $_SESSION['edit_message'] = "Company logo succesfully uploaded";
 			}
 	}
@@ -122,7 +128,9 @@ if ( isset($action) and $action == 'update' )
 		$sdbquery = $mysqli->query("UPDATE pub_dev_text SET pub_dev_profile = '$textfield' WHERE pub_dev_id = $comp_id")
 					or die("Couldn't Update into pub_dev_text");
 	}
-		
+	
+	create_log_entry('Company', $comp_id, 'Company', $comp_id, 'Update', $_SESSION['user_id']);
+	
 	$_SESSION['edit_message'] = "Company succesfully updated";
 
 	header("Location: ../company/company_edit.php?comp_id=$comp_id");
@@ -141,6 +149,8 @@ if ( $action == 'delete_comp' )
 	{
 		unlink ("$company_screenshot_path$comp_id.$pub_dev_imgext");
 	}
+	
+	create_log_entry('Company', $comp_id, 'Company', $comp_id, 'Delete', $_SESSION['user_id']);
 	
 	$sql = $mysqli->query("DELETE FROM pub_dev WHERE pub_dev_id = '$comp_id'");
 	$sql = $mysqli->query("DELETE FROM pub_dev_text WHERE pub_dev_id = '$comp_id'");
@@ -176,6 +186,8 @@ if ( $action == "insert_comp" )
 
 		$sdbquery = $mysqli->query("INSERT INTO pub_dev_text (pub_dev_id, pub_dev_profile) VALUES ($id, '$textfield')") 
 					or die("Couldn't insert into pub_dev_text");
+					
+		create_log_entry('Company', $id, 'Company', $id, 'Insert', $_SESSION['user_id']);
 	
 		$_SESSION['edit_message'] = "Company succesfully inserted";
 		

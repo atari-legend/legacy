@@ -616,6 +616,86 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
 			$subsection_name = $section_name;
 		}
 	}
+
+//	Everything we do for the Trivia SECTION		
+	If ( $section == 'Trivia' )
+	{
+		if ( $subsection == 'DYK' OR $subsection == 'Quote' )
+		{
+			$subsection_name = ( "Trivia ID " . $subsection_id );
+			$section_name = ( "Trivia ID " . $subsection_id );
+		}
+	}
+
+//	Everything we do for the USERS SECTION			
+	If ( $section == 'Users' )
+	{
+		// Get the username
+		$query_username = "SELECT userid FROM users WHERE user_id = '$section_id'";
+		$result = $mysqli->query($query_username) or die("getting user name failed");
+		$query_data = $result->fetch_array(MYSQLI_BOTH);
+		$section_name = $query_data['userid'];
+		
+		if ( $subsection == 'Avatar' OR $subsection == 'User' )
+		{
+			$subsection_name = $section_name;
+		}
+	
+	}
+	
+	//	Everything we do for the LINKS section			
+	If ( $section == 'Links' )
+	{		
+		// Get the website name
+		$query_website = "SELECT website_name FROM website WHERE website_id = '$section_id'";
+		$result = $mysqli->query($query_website) or die("getting website name failed");
+		$query_data = $result->fetch_array(MYSQLI_BOTH);
+		$section_name = $query_data['website_name'];
+		
+		if ( $subsection == 'Link' )
+		{
+			$subsection_name = $section_name;
+		}
+		
+		if ( $subsection == 'Category' )
+		{
+			// Get the category name
+			$query_cat = "SELECT website_category_name FROM website_category WHERE website_category_id = '$subsection_id'";
+			$result = $mysqli->query($query_cat) or die("getting category name failed");
+			$query_data = $result->fetch_array(MYSQLI_BOTH);
+			$subsection_name = $query_data['website_category_name'];
+		}	
+	}
+	
+	//	Everything we do for the LINKS CATEGORY section			
+	If ( $section == 'Links cat' )
+	{
+		// Get the category name
+		$query_cat = "SELECT website_category_name FROM website_category WHERE website_category_id = '$section_id'";
+		$result = $mysqli->query($query_cat) or die("getting category name failed");
+		$query_data = $result->fetch_array(MYSQLI_BOTH);
+		$section_name = $query_data['website_category_name'];
+		
+		if ( $subsection == 'Category' )
+		{
+			$subsection_name = $section_name;
+		}
+	}	
+
+	//	Everything we do for the COMPANY section			
+	If ( $section == 'Company' )
+	{
+		// Get the company name
+		$query_comp = "SELECT pub_dev_name FROM pub_dev WHERE pub_dev_id = '$section_id'";
+		$result = $mysqli->query($query_comp) or die("getting comp name failed");
+		$query_data = $result->fetch_array(MYSQLI_BOTH);
+		$section_name = $query_data['pub_dev_name'];
+		
+		if ( $subsection == 'Company' OR $subsection == 'Logo')
+		{
+			$subsection_name = $section_name;
+		}
+	}
 				
 	$sql_log = $mysqli->query("INSERT INTO change_log (section, section_id, section_name, sub_section, sub_section_id, sub_section_name, user_id, action, timestamp) VALUES ('$section', '$section_id', '$section_name', '$subsection', '$subsection_id', '$subsection_name', '$user_id', '$action', '$log_time')") 
 								or die ("Couldn't insert change log into database");  

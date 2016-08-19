@@ -7,9 +7,9 @@
 *   email                : silversurfer@atari-forum.com
 *   actual update        : 	
 *							 
-*							
-*
 *   Id: ajax_user_management.php,v 0.10 2016-02-21 Silver Surfer
+*   Id: ajax_user_management.php,v 0.11 2016-08-19 STG
+*			- user search field now working
 *
 ***************************************************************************/
 
@@ -46,6 +46,8 @@ if ((isset($with_review) and $with_review=="1") || (isset($no_review) and $no_re
 if (isset($userbrowse) and $userbrowse=="num") {$sql_query .= "	WHERE userid REGEXP '^[0-9].*'";}
 elseif (isset($userbrowse) and $userbrowse=="-") {$sql_query .= " WHERE userid LIKE '%'";}
 else {$sql_query .= " WHERE userid LIKE '$userbrowse%'";}
+
+if (!empty($usersearch)) {$sql_query .= " AND userid LIKE '%$usersearch%'";}else{$sql_query .= "AND userid LIKE '%'";} 
 
 if (isset($with_email) and $with_email=="1") {$sql_query .= " AND email IS NOT NULL AND TRIM(email)<>''"; }
 if (isset($no_email) and $no_email=="1") {$sql_query .= " AND TRIM(email) = ''"; }
