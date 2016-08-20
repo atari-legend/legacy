@@ -188,6 +188,7 @@ function storeCaret(textEl) {
 
 {block name=main_tile}
 <div class="standard_tile" id="interviews_edit">
+	{if isset($interview.interview_ind_name)}
 	<h1>{$interview.interview_ind_name}</h1>
 	<div class="standard_tile_line"></div>
 	<div class="standard_tile_text">
@@ -292,6 +293,7 @@ function storeCaret(textEl) {
 						<br>
 						<br>
 					{/foreach}
+					Want to add more screenshots? Go <a href="interviews_screenshots_add.php?interview_id={$interview.interview_id}" class="left_nav_link">here</a>!
 				{else}
 					There are currently no screenshots attached to this interview. Go to the <a href="interviews_screenshots_add.php?interview_id={$interview.interview_id}" class="left_nav_link">screenshot adding</a>
 					page to link specific screenshots to this interview. Remember that you have to create an interview first before actually uploading screenshots!			
@@ -305,7 +307,17 @@ function storeCaret(textEl) {
 			</fieldset> 
 		</form>
 		<br>
+		{else}
+			<h1>Interview edit</h1>
+			<div class="standard_tile_line"></div>
+			<div class="standard_tile_text">
+				<div class="left_nav_section">
+					Interview does not exist.
+				</div>
+			</div>
+		{/if}
 		<div class="standard_table_center"><a href="../interviews/interviews_main.php" class="standard_tile_link">back</a></div>
+		<br>
 	</div>
 </div>
 {/block}

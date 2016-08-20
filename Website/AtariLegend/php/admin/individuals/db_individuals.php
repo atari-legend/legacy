@@ -10,6 +10,8 @@
 *   Id: Individuals_edit.php,v 0.10 2005/08/06 15:25 Gatekeeper
 *   Id: Individuals_edit.php,v 0.20 2016/08/01 23:36 Gatekeeper
 *		- AL 2.0 - adding messages
+*   Id: Individuals_edit.php,v 0.21 2016/08/20 23:36 Gatekeeper
+*		- adding change log
 *
 ***************************************************************************/
 
@@ -34,6 +36,8 @@ if (isset($ind_id) and isset($action) and $action == 'delete_pic')
 	unlink ("$individual_screenshot_save_path$ind_id.$ind_imgext");
 	
 	$_SESSION['edit_message'] = "Individual picture deleted";
+	
+	create_log_entry('Individuals', $ind_id, 'Image', $ind_id, 'Delete', $_SESSION['user_id']);
 	
 	header("Location: ../individuals/individuals_edit.php?ind_id=$ind_id");
 }
@@ -82,6 +86,8 @@ if (isset($ind_id) and isset($action) and $action == 'add_photo')
 				
 				$_SESSION['edit_message'] = "Individual picture uploaded";
 				
+				create_log_entry('Individuals', $ind_id, 'Image', $ind_id, 'Insert', $_SESSION['user_id']);
+				
 				header("Location: ../individuals/individuals_edit.php?ind_id=$ind_id");
 			}
 	}
@@ -112,6 +118,8 @@ if (isset($ind_id) and isset($action) and $action == 'update')
 
 	$_SESSION['edit_message'] = "Individual succesfully updated";
 	
+	create_log_entry('Individuals', $ind_id, 'Individual', $ind_id, 'Update', $_SESSION['user_id']);
+	
 	header("Location: ../individuals/individuals_edit.php?ind_id=$ind_id");
 }
 
@@ -125,6 +133,8 @@ if (isset($ind_id) and isset($action) and $action == "add_nick")
 			
 			$_SESSION['edit_message'] = "Individual nick added";
 			
+			create_log_entry('Individuals', $ind_id, 'Nickname', $ind_id, 'Insert', $_SESSION['user_id']);
+			
 			header("Location: ../individuals/individuals_edit.php?ind_id=$ind_id");
 	}
 }
@@ -132,15 +142,16 @@ if (isset($ind_id) and isset($action) and $action == "add_nick")
 // Delete Nickname
 if (isset($ind_id) and isset($action) and $action == "delete_nick")
 {
-
 	if (isset($nick_id))
 	{
+		create_log_entry('Individuals', $nick_id, 'Nickname', $nick_id, 'Delete', $_SESSION['user_id']);
+		
 		$mysqli->query("DELETE FROM individual_nicks WHERE individual_nicks_id='$nick_id'")
 			or die("Failed to delete nickname");
-			
-			$_SESSION['edit_message'] = "Nickname succesfully deleted";
-			
-			header("Location: ../individuals/individuals_edit.php?ind_id=$ind_id");
+		
+		$_SESSION['edit_message'] = "Nickname succesfully deleted";
+		
+		header("Location: ../individuals/individuals_edit.php?ind_id=$ind_id");
 	}
 }
 
@@ -173,7 +184,9 @@ if (isset($ind_id) and isset($action) and $action == 'delete_ind')
 		}
 		else
 		{
-			//then delete the rest
+			create_log_entry('Individuals', $ind_id, 'Individual', $ind_id, 'Delete', $_SESSION['user_id']);
+			
+			//then delete the rest		
 			$sql = $mysqli->query("DELETE FROM individuals WHERE ind_id = $ind_id");
 			$sql = $mysqli->query("DELETE FROM individual_text WHERE ind_id = $ind_id");
 			$sql = $mysqli->query("DELETE FROM individual_nicks WHERE ind_id = $ind_id");
@@ -206,6 +219,8 @@ if (isset($action) and $action == 'insert_ind')
 
 		$sdbquery = $mysqli->query("INSERT INTO individual_text (ind_id, ind_profile) VALUES ($id, '$textfield')") 
 					or die("Couldn't insert into individual_text");
+					
+		create_log_entry('Individuals', $id, 'Individual', $id, 'Insert', $_SESSION['user_id']);
 			
 		$_SESSION['edit_message'] = "individual succesfully inserted";	
 

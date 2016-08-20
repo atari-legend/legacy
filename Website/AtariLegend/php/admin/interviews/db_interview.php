@@ -7,9 +7,11 @@
 *   email                : silversurfer@atari-forum.com
 *   actual update        : New section.
 *						  
-*   Id: db_crew.php,v 1.10 2005/10/29 Silver Surfer
-*   Id: db_crew.php,v 1.20 2016/08/02 STG
+*   Id: db_interview,v 1.10 2005/10/29 Silver Surfer
+*   Id: db_interview,v 1.20 2016/08/02 STG
 *		- AL 2.0
+*   Id: db_interview,v 1.21 2016/08/20 STG
+*		- Added the change log
 *
 ***************************************************************************/
 
@@ -90,6 +92,10 @@ foreach($image['tmp_name'] as $key=>$tmp_name)
 		// Rename the uploaded file to its autoincrement number and move it to its proper place.
 		$file_data = rename($image['tmp_name'][$key], "$interview_screenshot_save_path$screenshotrow[0].$ext");
 		
+		$_SESSION['edit_message'] = 'Screenshots added';
+		
+		create_log_entry('Interviews', $interview_id, 'Screenshots', $interview_id, 'Insert', $_SESSION['user_id']);
+		
 		chmod("$interview_screenshot_save_path$screenshotrow[0].$ext", 0777);
 		
 		}
@@ -110,6 +116,8 @@ if (isset($action) and $action == 'delete_screen')
 						
 	$interviewshot = $sql_interviewshot->fetch_row();
 	$interviewshotid = $interviewshot[0];
+	
+	create_log_entry('Interviews', $interview_id, 'Screenshots', $interview_id, 'Delete', $_SESSION['user_id']);
 	
 	//delete the screenshot comment from the DB table
 	$sdbquery = $mysqli->query("DELETE FROM interview_comments WHERE screenshot_interview_id = $interviewshotid") 
@@ -143,6 +151,8 @@ if (isset($action) and $action == 'delete_screen')
 //*************************************************************************
 if (isset($action) and $action=="delete_interview")
 {
+
+create_log_entry('Interviews', $interview_id, 'Interview', $interview_id, 'Delete', $_SESSION['user_id']);
 
 $sql = $mysqli->query("DELETE FROM interview_main WHERE interview_id = '$interview_id' ");
 $sql = $mysqli->query("DELETE FROM interview_text WHERE interview_id = '$interview_id' ");
@@ -201,6 +211,8 @@ if ( isset($action) and $action == 'delete_screenshot_comment' )
 						
 	$interviewshot = $sql_interviewshot->fetch_row();
 	$interviewshotid = $interviewshot[0];
+	
+	create_log_entry('Interviews', $interview_id, 'Screenshots', $interview_id, 'Delete', $_SESSION['user_id']);
 	
 	//delete the screenshot comment from the DB table
 	$sdbquery = $mysqli->query("DELETE FROM interview_comments WHERE screenshot_interview_id = $interviewshotid") 
@@ -292,6 +304,7 @@ if ( isset($action) and $action == 'update_interview' )
 		}
 		$i++;
 	}
+	create_log_entry('Interviews', $interview_id, 'Interview', $interview_id, 'Update', $_SESSION['user_id']);
 	
 	$_SESSION['edit_message'] = 'Interview updated succesfully';
 	
@@ -361,6 +374,8 @@ elseif (isset($action) and $action == 'add_interview')
 	
 		$sdbquery = $mysqli->query("INSERT INTO interview_text (interview_id, interview_text, interview_date, interview_intro, interview_chapters) VALUES ($id, '$textfield', '$date', '$textintro','$textchapters')") 
 					or die("Couldn't insert into interview_text");
+		
+		create_log_entry('Interviews', $individual, 'Interview', $id, 'Insert', $_SESSION['user_id']);
 		
 		$_SESSION['edit_message'] = 'Interview added succesfully';
 		
