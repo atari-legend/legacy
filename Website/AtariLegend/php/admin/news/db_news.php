@@ -9,7 +9,8 @@
 *							 
 *	Id:  db_news.php,v 0.10 2016/07/29 ST Graveyard 
 *			- AL 2.0 adding messages + bug fixes							
-*
+*	Id:  db_news.php,v 0.11 2016/08/20 ST Graveyard 
+*			- Added change log	
 *
 ***************************************************************************/
 
@@ -29,7 +30,8 @@ if (isset($action) and $action=="delete_news")
 // This is where we delete news posts
 //**************************************************************************************** 
 {
-
+		create_log_entry('News', $news_id, 'News item', $news_id, 'Delete', $_SESSION['user_id']);
+		
 		$mysqli->query("DELETE FROM news WHERE news_id ='$news_id'") 
 		or die("No Go with update!!");
 				
@@ -50,7 +52,7 @@ if (isset($action) and $action=="add_news")
 	// Check if form is filled.
 	if ($headline=='' or $descr=='')
 	{
-		$message = "Please fill in the necessary fields";
+		$_SESSION['edit_message'] = "Please fill in the necessary fields";
 	}
 	else
 	{	
@@ -63,6 +65,11 @@ if (isset($action) and $action=="add_news")
 							 or die ("Error inserting news update");
 							 
 		$_SESSION['edit_message'] = "News added correctly";
+		
+		$new_news_id = $mysqli->insert_id;
+		
+		create_log_entry('News', $new_news_id, 'News submit', $new_news_id, 'Insert', $_SESSION['user_id']);
+		
 		mysqli_close($mysqli);
 	}
 	
@@ -108,6 +115,9 @@ if (isset($action) and $action=="approve_submission")
 	$mode="post";
 		
 	add_search_words($mode, $newsid[0], $news_text, $news_headline);
+	
+	create_log_entry('News', $newsid[0], 'News item', $newsid[0], 'Insert', $_SESSION['user_id']);
+	
 	$_SESSION['edit_message'] = "Submission approved";
 
 	header("Location: ../news/news_edit_all.php");
@@ -121,12 +131,15 @@ if (isset($action) and $action=="approve_submission")
 if (isset($action) and $action=="delete_submission")
 	
 {
+	create_log_entry('News', $news_submission_id, 'News submit', $news_submission_id, 'Delete', $_SESSION['user_id']);
+	
 	$mysqli->query("delete from
 	  			 news_submission 
 				 WHERE news_submission_id='$news_submission_id'")
 	or die("Deletion of the unapproved news update failed!");
 	
 	$_SESSION['edit_message'] = "Submission deleted";
+	
 	header("Location: ../news/news_approve.php");	
 }
 
@@ -148,6 +161,8 @@ if (isset($action) and $action=="update_news")
 
 	$message = "News thread updated correctly";
 	$smarty->assign('message', $message );
+	
+	create_log_entry('News', $news_id, 'News item', $news_id, 'Update', $_SESSION['user_id']);
 		
 	$_SESSION['edit_message'] = "News updated";
 
@@ -170,6 +185,8 @@ if (isset($action) and $action=="update_submission")
 		or die("The update failed submission");
 	
 	$_SESSION['edit_message'] = "Submission updated";
+	
+	create_log_entry('News', $news_submission_id, 'News submit', $news_submission_id, 'Update', $_SESSION['user_id']);
 
 	header("Location: ../news/news_edit.php?news_submission_id=$news_submission_id");
 }
@@ -234,6 +251,8 @@ if(isset($news_image))
 			$file_data = rename("$file_name_tmp", "$news_images_save_path$newsimagerow[0].$ext");
 			
 			$_SESSION['edit_message'] = "News image uploaded";
+			
+			create_log_entry('News', $newsimagerow[0], 'Image', $newsimagerow[0], 'Insert', $_SESSION['user_id']);
 						
 			chmod("$news_images_save_path$newsimagerow[0].$ext", 0777);
 			
@@ -261,6 +280,8 @@ if (isset($action) and $action=="delete_image")
 			$sql=$mysqli->query("SELECT news_image_ext FROM news_image WHERE news_image_id='$image'") or die("Couldn't query images");
 		
 			list($news_image_ext) = $sql->fetch_array(MYSQLI_BOTH)	;
+			
+			create_log_entry('News', $image, 'Image', $image, 'Delete', $_SESSION['user_id']);
 		
 			$mysqli->query("DELETE FROM news_image WHERE news_image_id='$image'") or die("Couldn't delete image$news_image_id"); 
 			

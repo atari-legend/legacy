@@ -186,6 +186,61 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH))
 			$subsection_link = $section_link;
 		}
 	}
+	
+	//	the INDIVIDUALS SECTION
+	if ($log['section'] == 'Individuals')
+	{	
+		$section_link = ( "../individuals/individuals_edit.php" . '?ind_id=' . $log['section_id'] );
+		
+		if ($log['sub_section'] == 'Individual' OR $log['sub_section'] == 'Image' OR $log['sub_section'] == 'Nickname')
+		{
+			$subsection_link = $section_link;
+		}
+	}
+	
+	//	the AUTHOR TYPE SECTION
+	if ($log['section'] == 'Author type')
+	{	
+		$section_link = ( "../individuals/individuals_author.php" );
+		
+		if ($log['sub_section'] == 'Author type' )
+		{
+			$subsection_link = $section_link;
+		}
+	}
+	
+	//	the INTERVIEW SECTION
+	if ($log['section'] == 'Interviews')
+	{	
+		$section_link = ( "../interviews/interviews_edit.php" . '?interview_id=' . $log['sub_section_id'] );
+		
+		if ($log['sub_section'] == 'Interview' OR $log['sub_section'] == 'Screenshots' )
+		{
+			$subsection_link = $section_link;
+		}
+	}
+	
+	//	the NEWS SECTION
+	if ($log['section'] == 'News')
+	{	
+		if ($log['sub_section'] == 'News submit')
+		{
+			$section_link = ( "../news/news_approve.php");
+			$subsection_link = $section_link;
+		}
+		
+		if ($log['sub_section'] == 'News item')
+		{
+			$section_link = ( "../news/news_edit.php" . '?news_id=' . $log['sub_section_id']);
+			$subsection_link = $section_link;
+		}
+		
+		if ($log['sub_section'] == 'Image')
+		{
+			$section_link = ( "../news/news_edit_images.php" );
+			$subsection_link = $section_link;
+		}
+	}
 		
 		
 	$smarty->append('log',

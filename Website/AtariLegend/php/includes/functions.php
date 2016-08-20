@@ -696,6 +696,125 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
 			$subsection_name = $section_name;
 		}
 	}
+	
+	//	Everything we do for the Individual section			
+	If ( $section == 'Individuals' )
+	{
+		if ( $subsection == 'Nickname' )
+		{
+			if ( $action == 'Delete' )
+			{
+				// we need to get the ind id
+				$query_ind = "SELECT ind_id FROM individual_nicks WHERE individual_nicks_id = '$section_id'";
+				$result = $mysqli->query($query_ind) or die("getting individual id failed");
+				$query_data = $result->fetch_array(MYSQLI_BOTH);
+				$section_id = $query_data['ind_id'];
+				$subsection_id = $query_data['ind_id'];
+			}
+		}	
+			
+		// Get the individual name
+		$query_ind = "SELECT ind_name FROM individuals WHERE ind_id = '$section_id'";
+		$result = $mysqli->query($query_ind) or die("getting individual name failed");
+		$query_data = $result->fetch_array(MYSQLI_BOTH);
+		$section_name = $query_data['ind_name'];
+		
+		if ( $subsection == 'Individual' OR $subsection == 'Image' OR $subsection == 'Nickname')
+		{
+			$subsection_name = $section_name;
+		}
+	}
+	
+	//	Everything we do for the AUTHOR TYPE section			
+	If ( $section == 'Author type' )
+	{
+		// get the author type name
+		$query_author = "SELECT author_type_info FROM author_type WHERE author_type_id = '$section_id'";
+		$result = $mysqli->query($query_author) or die("getting author type name failed");
+		$query_data = $result->fetch_array(MYSQLI_BOTH);
+		$section_name = $query_data['author_type_info'];
+		
+		if ( $subsection == 'Author type' )
+		{
+			$subsection_name = $section_name;
+		}
+	}
+	
+	//	Everything we do for the INTERVIEW section			
+	If ( $section == 'Interviews' )
+	{	
+		if ( $subsection == 'Interview' )
+		{
+			If ( $action == 'Update' OR $action == 'Delete' )
+			{
+				//we need to get the individual id
+				$query_ind = "SELECT ind_id FROM interview_main WHERE interview_id = '$section_id'";
+				$result = $mysqli->query($query_ind) or die("getting ind id failed");
+				$query_data = $result->fetch_array(MYSQLI_BOTH);
+				$section_id = $query_data['ind_id'];	
+			}
+		}
+		
+		if ( $subsection == 'Screenshots' )
+		{
+			If ( $action == 'Insert' OR $action == 'Delete')
+			{
+				//we need to get the individual id
+				$query_ind = "SELECT ind_id FROM interview_main WHERE interview_id = '$section_id'";
+				$result = $mysqli->query($query_ind) or die("getting ind id failed");
+				$query_data = $result->fetch_array(MYSQLI_BOTH);
+				$section_id = $query_data['ind_id'];	
+			}
+		}
+
+		// get the name of the person that is interviewed
+		$query_ind = "SELECT ind_name FROM individuals WHERE ind_id = '$section_id'";
+		$result = $mysqli->query($query_ind) or die("getting ind name failed");
+		$query_data = $result->fetch_array(MYSQLI_BOTH);
+		$section_name = $query_data['ind_name'];
+		
+		if ( $subsection == 'Interview' or $subsection == 'Screenshots' )
+		{
+			$subsection_name = $section_name;
+		}
+	}
+	
+	//	Everything we do for the AUTHOR TYPE section			
+	If ( $section == 'News' )
+	{
+		if ( $subsection == 'News submit' )
+		{
+			// get the headline
+			$query_news = "SELECT news_headline FROM news_submission WHERE news_submission_id = '$section_id'";
+			$result = $mysqli->query($query_news) or die("getting headline failed");
+			$query_data = $result->fetch_array(MYSQLI_BOTH);
+			$section_name = $query_data['news_headline'];
+			
+			$subsection_name = $section_name;
+		}
+		
+		if ( $subsection == 'News item' )
+		{
+			// get the headline
+			$query_news = "SELECT news_headline FROM news WHERE news_id = '$section_id'";
+			$result = $mysqli->query($query_news) or die("getting headline failed");
+			$query_data = $result->fetch_array(MYSQLI_BOTH);
+			$section_name = $query_data['news_headline'];
+			
+			$subsection_name = $section_name;
+		}
+		
+		if ( $subsection == 'Image' )
+		{
+			// get the image name
+			$query_image = "SELECT news_image_name FROM news_image WHERE news_image_id = '$section_id'";
+			$result = $mysqli->query($query_image) or die("getting image name failed");
+			$query_data = $result->fetch_array(MYSQLI_BOTH);
+			$section_name = $query_data['news_image_name'];
+			
+			$subsection_name = $section_name;
+		}
+	}
 				
 	$sql_log = $mysqli->query("INSERT INTO change_log (section, section_id, section_name, sub_section, sub_section_id, sub_section_name, user_id, action, timestamp) VALUES ('$section', '$section_id', '$section_name', '$subsection', '$subsection_id', '$subsection_name', '$user_id', '$action', '$log_time')") 
 								or die ("Couldn't insert change log into database");  
