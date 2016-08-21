@@ -219,9 +219,8 @@ foreach ($database_update as $key)
 }
 
 //Create the id's for dynamic positioning of the tiles
-$smarty->assign('left_nav', 'left_nav_position_front');
-$smarty->assign('quick_search_games', 'quick_search_position_front');
-$smarty->assign('main_stats', 'main_stats_position_front');
+$smarty->assign('left_nav', 'left_nav_position_db_updates');
+$smarty->assign('quick_search_games', 'quick_search_db_updates');
 		
 //Send all smarty variables to the templates
 

@@ -18,11 +18,13 @@ include("../../includes/admin.php");
 //load the search fields of the quick search side menu
 include("../../includes/quick_search_games.php"); 
 
-
-if(empty($v_linkback)) {$v_linkback = '';}
-if(empty($v_linknext)) {$v_linknext = '';}
-
-$v_counter= (isset($_GET["v_counter"]) ? $_GET["v_counter"] : 0);
+if (isset ($action))
+{
+}
+else
+{
+	$action="";
+}
 
 //get the number of log entries
 $query_number = $mysqli->query("SELECT * FROM change_log") or die("Couldn't get the number of changes");
@@ -30,14 +32,36 @@ $v_log = $query_number->num_rows;
 
 $smarty->assign('log_nr', $v_log);
 
-$sql_log = $mysqli->query("SELECT * 
-						 FROM change_log
-						 ORDER BY change_log_id DESC LIMIT  " . $v_counter . ", 25");
+
+if(empty($v_linkback)) {$v_linkback = '';}
+if(empty($v_linknext)) {$v_linknext = '';}
+
+$v_counter= (isset($_GET["v_counter"]) ? $_GET["v_counter"] : 0);
+
+// if we are dealing with a log search, build the query
+if ( $action == 'log_search' )
+{	
+	$log_timestamp = date_to_timestamp($Date_Year,$Date_Month,$Date_Day);
+	$sql_log = $mysqli->query("SELECT * FROM change_log WHERE timestamp < '$log_timestamp'
+							   ORDER BY change_log_id DESC LIMIT  " . $v_counter . ", 25");
+							   
+	$v_number = $sql_log->num_rows;
+	$smarty->assign('rec_nr', $v_number);
+}
+else
+{
+	$sql_log = $mysqli->query("SELECT * 
+							 FROM change_log
+							 ORDER BY change_log_id DESC LIMIT  " . $v_counter . ", 25");
+	
+	$v_number = $sql_log->num_rows;
+	$smarty->assign('rec_nr', $v_number);
+}
 
 while ($log = $sql_log->fetch_array(MYSQLI_BOTH))
 {
 	$user_name = get_username_from_id($log['user_id']);
-	$log_date = convert_timestamp($log['timestamp']);
+	$log_date = convert_timestamp_small($log['timestamp']);
 	
 //  create the section link and the subsection link	
 //	the GAMES SECTION
@@ -259,15 +283,29 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH))
 //Check if back arrow is needed 
 if($v_counter > 0)
 {
-// Build the link
-	$v_linkback =("change_log.php" . '?v_counter=' . ($v_counter - 25));
+	// Build the link
+	if ( $action == 'log_search' )
+	{
+		$v_linkback =("change_log.php?action=log_search" . '&v_counter=' . ($v_counter - 25));
+	}
+    else
+	{
+		$v_linkback =("change_log.php" . '?v_counter=' . ($v_counter - 25));
+	}
 }
 
 //Check if we need to place a next arrow
 if($v_log > ($v_counter + 25))
 {
-//Build the link
-	$v_linknext =("change_log.php" . '?v_counter=' . ($v_counter + 25));
+	// Build the link
+	if ( $action == 'log_search' )
+	{
+		$v_linknext =("change_log.php?action=log_search" . '&Date_Year=' . ($Date_Year) . '&Date_Month=' . ($Date_Month) . '&Date_Day=' . ($Date_Day) . '&v_counter=' . ($v_counter + 25));
+	}
+	else
+	{
+		$v_linknext =("change_log.php" . '?v_counter=' . ($v_counter + 25));
+	}
 }
 
 $smarty->assign('links',

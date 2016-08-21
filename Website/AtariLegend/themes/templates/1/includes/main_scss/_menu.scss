@@ -280,15 +280,15 @@
 	
 	@if $skin-name == tos
 	{ 
-		#skin_side, .side_navigation * a { width:190px; border-bottom: 3px solid black;}
+		#skin_side, #other_side, #games_side, #menus_side, #demos_side, #users_side, #admin_side, .side_navigation * a { width:190px; border-bottom: 3px solid black;}
 	}
 	@else if $skin-name == picasso
 	{
-		#skin_side, .side_navigation * a {width:165px;}
+		#skin_side, #other_side, #games_side, #menus_side, #demos_side, #users_side, #admin_side, .side_navigation * a {width:165px;}
 	}
 	@else if $skin-name == legacy
 	{
-		#skin_side, .side_navigation * a {width:168px;}
+		#skin_side, #other_side, #games_side, #menus_side, #demos_side, #users_side, #admin_side, .side_navigation * a {width:168px;}
 	}
 		
 	.skin-menu {
