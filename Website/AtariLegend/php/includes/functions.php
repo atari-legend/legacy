@@ -212,6 +212,12 @@ function convert_timestamp($timestamp)
 	$timestamp = date("F j, Y",$timestamp);
 	return $timestamp;
 } 
+
+function convert_timestamp_small($timestamp)
+{
+	$timestamp = date("j-m-y",$timestamp);
+	return $timestamp;
+} 
 	
 function get_username_from_id($submitted)
 {
@@ -460,6 +466,8 @@ function statistics_stack() {
 	return $stack;	
 }
 
+//This function will create a change log table entry according to its parameters. In the db* files, with every DB transaction, 
+//this function is called. The table is used for the change log section of the cpanel.
 function create_log_entry($section, $section_id, $subsection, $subsection_id, $action, $user_id) {
 	
 	global $mysqli;

@@ -829,10 +829,13 @@ Interviews help
 }
 
 
-
 /*---------------------------------------------------------- 
 Admin - DB updates
 ------------------------------------------------------------ */	
+@media screen and (max-width: 480px) { 
+	#left_nav_position_db_updates{ margin-top: 0;}
+}
+
 @media screen and (max-width: 500px) { 
 	#td_db_result, #th_db_result,#th_db_state,#td_db_state,
 	#td_db_id,#th_db_id,#th_db_exe,#td_db_exe{display:none;}
@@ -851,6 +854,28 @@ Admin - DB updates
 	#td_db_result, #th_db_result{display:none;}
 }
 
+/*---------------------------------------------------------- 
+Admin - Change log
+------------------------------------------------------------ */	
+@media screen and (max-width: 480px) { 
+	#leftnav_position_change_log{ margin-top: 0;}
+}
+
+@media screen and (max-width: 450px) { 
+	#log_subsection_th, #log_date_th, .log_subsection_td, .log_date_td{display:none;}
+}
+
+@media screen and (max-width: 525px) { 
+	#log_subsection_th, .log_subsection_td{display:none;}
+}
+
+@media screen and (max-width: 725px) { 
+	#log_name_th, .log_name_td{display:none;}
+}
+
+@media screen and (max-width: 1200px) { 
+	#log_sub_name_th, .log_subname_td{display:none;}
+}
 
 
 /*---------------------------------------------------------- 

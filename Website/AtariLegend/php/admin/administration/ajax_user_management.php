@@ -121,8 +121,17 @@ while ($query_users = $sql_users->fetch_array(MYSQLI_BOTH))
 	$smarty->assign('nr_users', $nr_users);
 }
 
-				$time_elapsed_secs = microtime(true) - $start;
-				$smarty->assign("query_time",$time_elapsed_secs);
+$time_elapsed_secs = microtime(true) - $start;
+$smarty->assign("query_time",$time_elapsed_secs);
+
+//See if we can mass delete - this is a extra measurement not to mass delete a population
+if ((isset($no_comments) and $no_comments=="1") AND (isset($no_review) and $no_review=="1") AND (isset($no_submissions) and $no_submissions=="1") AND
+   (isset($no_links) and $no_links=="1") AND (isset($no_news) and $no_news=="1") AND (isset($no_interviews) and $no_interviews=="1") AND
+   (isset($not_admin) and $not_admin=="1"))
+   {
+	   $smarty->assign("delete_link","1");
+   }
+
 
 // Create dropdown values a-z
 $az_value = az_dropdown_value(0);

@@ -312,6 +312,10 @@ function UserModify() {
 	<h1>USER MANAGEMENT</h1>
 	<div class="standard_tile_line"></div>
 	<div class="standard_tile_text">
+		<div class="left_nav_section">
+			As a failsave, you can only delete users in search results with all the 'No' checks activated! Otherwise the delete option is not available.
+		</div> 
+		<br>
 		<form action="test" method="post" name="user_list" id="user_list">
 		<div class="main_stats_container" id="ajax_usersearch">
 			{if isset($users)}
@@ -344,7 +348,9 @@ function UserModify() {
 							<option value="-" selected>Select Action</option>
 							<option value="email_user">Send Email</option>
 							<option value="deactivate_user">Deactivate User</option>
-							<option value="delete_user">Delete User</option>
+							{if isset($delete_link)}
+								<option value="delete_user">Delete User</option>
+							{/if}
 						</select>
 						<b>Found {if $nr_users != ''}{$nr_users}{else}0{/if} users in {$query_time} sec</b>
 					</td>

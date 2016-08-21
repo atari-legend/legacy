@@ -19,12 +19,37 @@ The change log page
 	<div class="standard_tile_line"></div>
 	<div class="standard_tile_text">
 		<div class="left_nav_section">
-			Welcome to the change log. On this page you will find every change made on the database and the person who is responsible. 
-			The 'Section' contains the part of the DB that was effected, eg. Games, Demos, Menus...
-			'Name' is the name of the actual game, demo, menu or ... 
-			The 'Subsection' is the more specific part of the DB eg. Boxscans, Gamefile, Screenshots ... 
+			Welcome to the change log. On this page you will find every change made on the database. Below you can find the latest log changes, you can also use the search function. 
+			The logs are divided in 'SECTIONS' and 'SUBSECTIONS'. A section can be a 'Game', 'Demo', 'Links', 'Menu'...The subsection goes in more detail eg. 'File', 'Screenshot', 'Boxscan' ...
+			The 'ACTIONS' depict which action was performed on the table, more precies an 'Insert', 'Delete' or 'Update'. Lastly you will also find the USER and DATE.
 		</div> 
 		<br>
+		<br>
+		<form action="../administration/change_log.php" method="get" name="user_search" >
+		<div>
+			<fieldset class="centered_fieldset">
+				<legend>Search log</legend>
+				<br>
+				<div>
+					<div id="changelog_select">
+						Log entries until <br>
+						{html_select_date start_year='2003' end_year='+1'}
+					</div>
+				</div>
+				<br>
+				<div>
+					<div>
+						<input type="hidden" name="action" id="log_search" value="log_search">
+						<input type="submit" value="Search" class="topbutton_cpanel_small">
+					</div>
+				</div>
+				<br>
+				<br>
+				<a href="../administration/change_log.php" class="left_nav_link">Latest log entries</a>
+			</fieldset>
+		</div>
+		<br><br>
+		{if $rec_nr <> '0'}
 		<div>
 			<table class="standard_table_list">
 				<tr>
@@ -87,6 +112,11 @@ The change log page
 				<a href="{$links.linknext}" class="standard_tile_link" style="float:right;">Next</a>
 			{/if}
 		</div>
+		{else}
+			<div class="left_nav_section">
+				No log entries found
+			</div>
+		{/if}
 		<br>
 	</div>	
 </div>

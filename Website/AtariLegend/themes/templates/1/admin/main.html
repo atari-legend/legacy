@@ -44,7 +44,7 @@
 			//]]>
 
 			$(document).ready(function() {
-					$(".sub-menu li a").click(function() {
+					$(".clearfix li a").click(function() {
 
 						var css_path = "../../../themes/styles/" + $(this).attr('rel') + "/css/style.css";
 						var logo_img_path = "../../../themes/styles/" + $(this).attr('rel') + "/images/logos/top_logo01.png";
@@ -86,7 +86,7 @@
 						    <div class="skin-wrap" id="no-wrap">
 								<nav class="skin-menu">
 								  <ul class="side_navigation">
-									<li><a href="" class="sidebutton" id="games_side">GAMES</a>
+									<li><button class="sidebutton" id="games_side">GAMES</button>
 										<ul class="sub-menu">
 											<li><a href="../games/games_main.php" title="Game editor" class="sidebutton_cpanel">GAME EDITOR</a></li>
 											<li><a href="../games/games_comment.php" title="Game comments" class="sidebutton_cpanel">GAME COMMENTS</a></li>
@@ -95,12 +95,12 @@
 											<li><a href="../games/submission_games.php" title="Game submissions" class="sidebutton_cpanel">GAME SUBMISSIONS</a></li>
 											<li><a href="../games/games_review.php" title="Game_reviews" class="sidebutton_cpanel">REVIEWS</a></li>
 											<li><a href="../games/games_review_submitted.php" title="submitted_reviews" class="sidebutton_cpanel">REVIEW SUBMISSIONS</a></li>
-											<li><a href="../games/individuals_main.php" title="Individuals" class="sidebutton_cpanel">INDIVIDIUALS</a></li>
-											<li><a href="../games/individuals_author.php" title="Author types" class="sidebutton_cpanel">AUTHOR TYPES</a></li>
-											<li><a href="../games/company_main.php" title="Companies" class="sidebutton_cpanel">COMPANIES</a></li>
-											<li><a href="../games/company_logos.php" title="Company logo" class="sidebutton_cpanel">COMPANY LOGO</a></li>
-											<li><a href="../games/interviews_main.php" title="Interviews" class="sidebutton_cpanel">INTERVIEWS</a></li>
-											<li><a href="../games/interviews_help.php" title="Interviews help" class="sidebutton_cpanel">INTERVIEWS HELP</a></li>
+											<li><a href="../individuals/individuals_main.php" title="Individuals" class="sidebutton_cpanel">INDIVIDIUALS</a></li>
+											<li><a href="../individuals/individuals_author.php" title="Author types" class="sidebutton_cpanel">AUTHOR TYPES</a></li>
+											<li><a href="../company/company_main.php" title="Companies" class="sidebutton_cpanel">COMPANIES</a></li>
+											<li><a href="../company/company_logos.php" title="Company logo" class="sidebutton_cpanel">COMPANY LOGO</a></li>
+											<li><a href="../interviews/interviews_main.php" title="Interviews" class="sidebutton_cpanel">INTERVIEWS</a></li>
+											<li><a href="../interviews/interviews_help.php" title="Interviews help" class="sidebutton_cpanel">INTERVIEWS HELP</a></li>
 										</ul>
 									</li>
 								  </ul>
@@ -109,9 +109,9 @@
 							 <div class="skin-wrap" id="no-wrap">
 								<nav class="skin-menu">
 								  <ul class="side_navigation">
-									<li><a href="" class="sidebutton" id="menus_side">MENUS</a>
+									<li><button class="sidebutton" id="menus_side">MENUS</button>
 										<ul class="sub-menu">
-											<li><a href="../menus/menus_list.php" title="Menu editor" class="sidebutton_cpanel">MENU EDITOR</a></li>
+											<li><a href="#" title="Menu editor" class="sidebutton_cpanel">MENU EDITOR</a></li>
 											<li><a href="#" title="Menu comments" class="sidebutton_cpanel">MENU COMMENTS</a></li>
 											<li><a href="#" title="Menu submissions" class="sidebutton_cpanel">MENU SUBMISSIONS</a></li>
 											<li><a href="#" title="Individuals" class="sidebutton_cpanel">INDIVIDIUALS</a></li>
@@ -125,7 +125,7 @@
 							<div class="skin-wrap" id="no-wrap">
 								<nav class="skin-menu">
 								  <ul class="side_navigation">
-									<li><a href="" class="sidebutton" id="demos_side">DEMOS</a>
+									<li><button class="sidebutton" id="demos_side">DEMOS</button>
 										<ul class="sub-menu">
 											<li><a href="#" title="Demo editor" class="sidebutton_cpanel">DEMO EDITOR</a></li>
 											<li><a href="#" title="Demo comments" class="sidebutton_cpanel">DEMO COMMENTS</a></li>
@@ -144,7 +144,7 @@
 							<div class="skin-wrap" id="no-wrap">
 								<nav class="skin-menu">
 								  <ul class="side_navigation">
-									<li><a href="" class="sidebutton" id="users_side">USERS</a>
+									<li><button class="sidebutton" id="users_side">USERS</button>
 										<ul class="sub-menu">
 											<li><a href="../administration/user_management.php" class="sidebutton_cpanel">USER MANAGEMENT</a></li>
 											<li><a href="../user/user_main.php" class="sidebutton_cpanel">USER SEARCH</a></li>
@@ -156,7 +156,7 @@
 							<div class="skin-wrap" id="no-wrap">
 								<nav class="skin-menu">
 								  <ul class="side_navigation">
-									<li><a href="" class="sidebutton" id="admin_side">NEWS</a>
+									<li><button class="sidebutton" id="admin_side">NEWS</button>
 										<ul class="sub-menu">
 											<li><a href="../news/news_add.php" title="Add news" class="sidebutton_cpanel">ADD NEWS</a></li>
 											<li><a href="../news/news_approve.php" title="Approve news" class="sidebutton_cpanel">APPROVE NEWS</a></li>
@@ -170,7 +170,7 @@
 							<div class="skin-wrap" id="no-wrap">
 								<nav class="skin-menu">
 								  <ul class="side_navigation">
-									<li><a href="" class="sidebutton" id="other_side">OTHER</a>
+									<li><button class="sidebutton" id="other_side">OTHER</button>
 										<ul class="sub-menu">
 											<li><a href="../index.php" title="Statistics" class="sidebutton_cpanel">STATISTICS</a></li>
 											<li><a href="../administration/site_admin.php" title="Administration" class="sidebutton_cpanel">DB UPDATES</a></li>
@@ -182,7 +182,6 @@
 											<li><a href="../links/link_cat.php" title="Link categories" class="sidebutton_cpanel">LINK CATEGORIES</a></li>
 											<li><a href="#" title="Articles" class="sidebutton_cpanel">ARTICLES</a></li>
 											<li><a href="#" title="Article types" class="sidebutton_cpanel">ARTICLE TYPES</a></li>
-											<li><a href="#" title="Screenshots" class="sidebutton_cpanel">SCREENSHOTS</a></li>
 											<li><a href="#" title="Add magazines" class="sidebutton_cpanel">ADD MAGAZINES</a></li>
 											<li><a href="#" title="Manage issues" class="sidebutton_cpanel">MANAGE ISSUES</a></li>
 											<li><a href="#" title="Forum" class="sidebutton_cpanel">FORUM</a></li>
@@ -196,7 +195,7 @@
 								<nav class="skin-menu">
 								  <ul class="clearfix">
 									<li>
-										<a href="" class="sidebutton" id="skin_side">SKIN</a>
+										<button class="sidebutton" id="skin_side">SKIN</button>
 										<ul class="sub-menu">
 											<li><a href="#" rel="1" class="sidebutton_cpanel">LEGACY</a></li>
 											<li><a href="#" rel="2" class="sidebutton_cpanel">TOS 2.07</a></li>
@@ -241,12 +240,12 @@
 								<li><a href="../games/submission_games.php" title="Game submissions" class="subbutton" id="game_submissions">GAME SUBMISSIONS</a></li>
 								<li><a href="../games/games_review.php" title="Game_reviews" class="subbutton" id="game_reviews">REVIEWS</a></li>
 								<li><a href="../games/games_review_submitted.php" title="submitted_reviews" class="subbutton" id="submitted_reviews">REVIEW SUBMISSIONS</a></li>
-								<li><a href="../games/individuals_main.php" title="Individuals" class="subbutton" id="individuals">INDIVIDIUALS</a></li>
-								<li><a href="../games/individuals_author.php" title="Author types" class="subbutton" id="author_types">AUTHOR TYPES</a></li>
-								<li><a href="../games/company_main.php" title="Companies" class="subbutton" id="companies">COMPANIES</a></li>
-								<li><a href="../games/company_logos.php" title="Company logo" class="subbutton" id="company_logo">COMPANY LOGO</a></li>
-								<li><a href="../games/interviews_main.php" title="Interviews" class="subbutton" id="interviews">INTERVIEWS</a></li>
-								<li><a href="../games/interviews_help.php" title="Interviews help" class="subbutton" id="interviews_help">INTERVIEWS HELP</a></li>
+								<li><a href="../individuals/individuals_main.php" title="Individuals" class="subbutton" id="individuals">INDIVIDIUALS</a></li>
+								<li><a href="../individuals/individuals_author.php" title="Author types" class="subbutton" id="author_types">AUTHOR TYPES</a></li>
+								<li><a href="../company/company_main.php" title="Companies" class="subbutton" id="companies">COMPANIES</a></li>
+								<li><a href="../company/company_logos.php" title="Company logo" class="subbutton" id="company_logo">COMPANY LOGO</a></li>
+								<li><a href="../interviews/interviews_main.php" title="Interviews" class="subbutton" id="interviews">INTERVIEWS</a></li>
+								<li><a href="../interviews/interviews_help.php" title="Interviews help" class="subbutton" id="interviews_help">INTERVIEWS HELP</a></li>
 							</ul>
 						</li>
 						<li><button type="button" class="topbutton" id="menus">MENUS</button>
@@ -298,7 +297,6 @@
 								<li><a href="../links/link_cat.php" title="Link categories" class="subbutton" id="link_categories">LINK CATEGORIES</a></li>
 								<li><a href="#" title="Articles" class="subbutton" id="articles">ARTICLES</a></li>
 								<li><a href="#" title="Article types" class="subbutton" id="article_types">ARTICLE TYPES</a></li>
-								<li><a href="#" title="Screenshots" class="subbutton" id="screenshots">SCREENSHOTS</a></li>
 								<li><a href="#" title="Add magazines" class="subbutton" id="add_magazines">ADD MAGAZINES</a></li>
 								<li><a href="#" title="Manage issues" class="subbutton" id="manage_issues">MANAGE ISSUES</a></li>
 								<li><a href="#" title="Forum" class="subbutton" id="forum">FORUM</a></li>

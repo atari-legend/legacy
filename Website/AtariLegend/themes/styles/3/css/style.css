@@ -1142,7 +1142,7 @@ body, html {
   background: #000;
   text-align: center; }
 
-#skin_side, .side_navigation * a {
+#skin_side, #other_side, #games_side, #menus_side, #demos_side, #users_side, #admin_side, .side_navigation * a {
   width: 165px; }
 
 .skin-menu {
@@ -3511,6 +3511,24 @@ Interviews help
 /*****************CPanel ADMIN section css*********************/
 /*************************************************************/
 /*---------------------------------------------------------- 
+DB updates
+------------------------------------------------------------ */
+#left_nav_position_db_updates {
+  margin-top: 0;
+  margin-bottom: 30px;
+  float: left; }
+
+#db_updates {
+  margin-top: 0;
+  margin-bottom: 30px;
+  float: left; }
+
+#quick_search_db_updates {
+  margin-top: 0;
+  margin-bottom: 30px;
+  float: left; }
+
+/*---------------------------------------------------------- 
 Change log
 ------------------------------------------------------------ */
 #leftnav_position_change_log {
@@ -3528,15 +3546,11 @@ Change log
   margin-bottom: 30px;
   float: left; }
 
-#log_action_th, #log_section_th, #log_subsection_th {
+#log_date_th, #log_action_th, #log_section_th, #log_subsection_th {
   width: 10%;
   text-align: left; }
 
-#log_date_th, #log_user_th {
-  width: 15%;
-  text-align: left; }
-
-#log_name_th, #log_sub_name_th {
+#log_name_th, #log_sub_name_th, #log_user_th {
   width: 20%;
   text-align: left; }
 
@@ -3544,21 +3558,14 @@ Change log
   text-align: right;
   padding-right: 5px; }
 
-.log_action_td, .log_section_td, .log_subsection_td {
+.log_date_td, .log_action_td, .log_section_td, .log_subsection_td {
   width: 10%;
   color: black;
   font-size: 11pt;
   font-weight: 100;
   padding-left: 2px; }
 
-.log_date_td, .log_user_td {
-  width: 15%;
-  color: black;
-  font-size: 11pt;
-  font-weight: 100;
-  padding-left: 2px; }
-
-.log_name_td, log_subname_td {
+.log_user_td, .log_name_td, log_subname_td {
   width: 20%;
   color: black;
   font-size: 11pt;
@@ -3568,6 +3575,9 @@ Change log
 .log_subname_td {
   text-align: right;
   padding-right: 5px; }
+
+#changelog_select select {
+  width: 50%; }
 
 /* --> admin section */
 /*---------------------------------------------------------- 
@@ -4470,6 +4480,9 @@ Interviews help
 /*---------------------------------------------------------- 
 Admin - DB updates
 ------------------------------------------------------------ */
+@media screen and (max-width: 480px) {
+  #left_nav_position_db_updates {
+    margin-top: 20px; } }
 @media screen and (max-width: 500px) {
   #td_db_result, #th_db_result, #th_db_state, #td_db_state,
   #td_db_id, #th_db_id, #th_db_exe, #td_db_exe {
@@ -4483,6 +4496,24 @@ Admin - DB updates
     display: none; } }
 @media screen and (max-width: 1279px) {
   #td_db_result, #th_db_result {
+    display: none; } }
+/*---------------------------------------------------------- 
+Admin - Change log
+------------------------------------------------------------ */
+@media screen and (max-width: 480px) {
+  #leftnav_position_change_log {
+    margin-top: 20px; } }
+@media screen and (max-width: 450px) {
+  #log_subsection_th, #log_date_th, .log_subsection_td, .log_date_td {
+    display: none; } }
+@media screen and (max-width: 525px) {
+  #log_subsection_th, .log_subsection_td {
+    display: none; } }
+@media screen and (max-width: 725px) {
+  #log_name_th, .log_name_td {
+    display: none; } }
+@media screen and (max-width: 1200px) {
+  #log_sub_name_th, .log_subname_td {
     display: none; } }
 /*---------------------------------------------------------- 
 General settings
