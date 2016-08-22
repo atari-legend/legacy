@@ -24,15 +24,24 @@
 		<meta name="description" content="Atari Legend : The number 1 Atari ST resource on the web">
 		<meta name="keywords" content="atari, atari st, games, game, demo, demos, reviews, articles, interviews, st">
 		<title> Atari Legend | Legends Never Die</title>
-		<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0" />
+		<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
 		<link type="text/css" href="{$style_dir}css/style.css" rel="stylesheet" id="main_stylesheet">
-		<link type="text/css" href="{$style_dir}css/jquery-ui.css" rel="Stylesheet" />
-		<link type="text/css" href="{$style_dir}css/jquery.fancybox.css" rel="Stylesheet" />
+		<link type="text/css" href="{$style_dir}css/jquery-ui.css" rel="Stylesheet">
+		<link type="text/css" href="{$style_dir}css/jquery.fancybox.css" rel="Stylesheet">
 		<link type="text/css" href="{$style_dir}css/notify-osd.css" hreflang="en" rel="stylesheet">
+		<link rel="icon" href="{$template_dir}includes/icons/favicon.png"> <!-- fav icon -->
+		<!-- start - get the icons used for mobile devices -->
+		<link rel="apple-touch-icon-precomposed" sizes="57x57" href="{$template_dir}includes/icons/icon-57x57.png">
+		<link rel="apple-touch-icon-precomposed" sizes="72x72" href="{$template_dir}includes/icons/icon-72x72.png">
+		<link rel="apple-touch-icon-precomposed" sizes="114x114" href="{$template_dir}includes/icons/icon-114x114.png">
+		<link rel="apple-touch-icon-precomposed" sizes="144x144" href="{$template_dir}includes/icons/icon-144x144.png">
+		<link rel="stylesheet" type="text/css" href="{$style_dir}css/addtohomescreen.css"> <!-- message add to homescreen for mobile devices -->
+		<!-- end - get the icons used for mobile devices -->
 		<script type="text/javascript" src="{$template_dir}includes/js/jquery-2.1.4.min.js"></script> <!-- main jquery stuff -->
 		<script type="text/javascript" src="{$template_dir}includes/js/jquery-ui.js"></script> <!-- main jqueryUI stuff -->
 		<script type="text/javascript" src="{$template_dir}includes/js/jquery.fancybox.pack.js"></script>
 		<script type="text/javascript" src="{$template_dir}includes/js/notify-osd.js"></script>
+		<script src="{$template_dir}includes/js/addtohomescreen.js"></script> <!-- message add to homescreen for mobile devices -->
 		<script type="text/javascript"> <!-- script needed for the side menu -->
 			//<![CDATA[
 			$(window).load(function(){
@@ -73,6 +82,9 @@
 						});
 				});
 			{/if}
+		</script>
+		<script>
+			addToHomescreen();
 		</script>
 		{block name=java_script}{/block}
 	</head>
