@@ -25,6 +25,10 @@
 		<meta name="keywords" content="atari, atari st, games, game, demo, demos, reviews, articles, interviews, st">
 		<title> Atari Legend | Legends Never Die</title>
 		<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
+		<!-- start - let the site behave like a mobile app on phone -->
+		<meta name="mobile-web-app-capable" content="yes"><!-- Chrome-->
+		<meta name="apple-mobile-web-app-capable" content="yes"><!-- apple -->
+		<!-- End - let the site behave like a mobile app on phone -->
 		<link type="text/css" href="{$style_dir}css/style.css" type="text/css" rel="stylesheet" id="main_stylesheet">
 		<link type="text/css" href="{$style_dir}css/jquery-ui.css" rel="Stylesheet">
 		<link rel="icon" href="{$template_dir}includes/icons/favicon.png"> <!-- fav icon -->
@@ -33,7 +37,6 @@
 		<link rel="apple-touch-icon-precomposed" sizes="72x72" href="{$template_dir}includes/icons/icon-72x72.png">
 		<link rel="apple-touch-icon-precomposed" sizes="114x114" href="{$template_dir}includes/icons/icon-114x114.png">
 		<link rel="apple-touch-icon-precomposed" sizes="144x144" href="{$template_dir}includes/icons/icon-144x144.png">
-		<link rel="stylesheet" type="text/css" href="{$style_dir}css/addtohomescreen.css"> <!-- message add to homescreen for mobile devices -->
 		<!-- end - get the icons used for mobile devices -->
 		<script type='text/javascript' src="{$template_dir}includes/js/respond.min.js"></script> <!-- script needed for the side menu -->
 		<script type='text/JavaScript' src="{$template_dir}includes/js/sha512.js"></script> <!-- log on security script -->
@@ -41,7 +44,6 @@
         <script type='text/JavaScript' src="{$template_dir}includes/js/forms.js"></script> <!-- log on security script -->
 		<script type="text/javascript" src="{$template_dir}includes/js/jquery-1.11.3.min.js"></script> <!-- main jquery stuff -->
 		<script type="text/javascript" src="{$template_dir}includes/js/jquery-ui.js"></script> <!-- main jqueryUI stuff -->
-		<script src="{$template_dir}includes/js/addtohomescreen.js"></script> <!-- message add to homescreen for mobile devices -->
 		<script type="text/javascript"> <!-- script needed for the autocompletion search engine -->
 			$(document).ready(function()
 			{
@@ -89,9 +91,6 @@
 			  });
 			});
 			//]]> 	
-		</script>
-		<script>
-			addToHomescreen();
 		</script>
 		{block name=javascript_slider} {/block}
 	</head>

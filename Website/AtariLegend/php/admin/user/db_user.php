@@ -119,14 +119,14 @@ if (isset($action) and $action == 'modify_user')
 	if ( isset($user_pwd) && $user_pwd != '' )
 	{
 			$md5pass = md5($user_pwd);
-			$mysqli->query("UPDATE users SET userid='$user_name', password='$md5pass', email='$user_email', permission='$user_permission', user_website='$user_website', user_icq='$user_icq', user_msnm='$user_msnm', user_aim='$user_aim' WHERE user_id='$user_id_selected'");
+			$mysqli->query("UPDATE users SET userid='$user_name', password='$md5pass', email='$user_email', permission='$user_permission', user_website='$user_website', user_icq='$user_icq', user_msnm='$user_msnm', user_aim='$user_aim', inactive='$user_inactive' WHERE user_id='$user_id_selected'");
 			$_SESSION['edit_message'] = "User data modified";
 			
 			create_log_entry('Users', $user_id_selected, 'User', $user_id_selected, 'Update', $_SESSION['user_id']);
 	}
 	else
 	{
-			$mysqli->query("UPDATE users SET userid='$user_name', email='$user_email', permission='$user_permission', user_website='$user_website', user_icq='$user_icq', user_msnm='$user_msnm', user_aim='$user_aim' WHERE user_id='$user_id_selected'");
+			$mysqli->query("UPDATE users SET userid='$user_name', email='$user_email', permission='$user_permission', user_website='$user_website', user_icq='$user_icq', user_msnm='$user_msnm', user_aim='$user_aim', inactive='$user_inactive' WHERE user_id='$user_id_selected'");
 			$_SESSION['edit_message'] = "User data modified";
 			
 			create_log_entry('Users', $user_id_selected, 'User', $user_id_selected, 'Update', $_SESSION['user_id']);
