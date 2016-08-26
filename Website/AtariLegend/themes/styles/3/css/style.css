@@ -2088,6 +2088,16 @@ User karma
 /*---------------------------------------------------------- 
 User management
 ------------------------------------------------------------ */
+#leftnav_position_um {
+  margin-top: 0;
+  margin-bottom: 30px;
+  float: left; }
+
+#quick_search_um {
+  margin-top: 0;
+  margin-bottom: 30px;
+  float: left; }
+
 #user_management {
   margin-top: 0;
   margin-bottom: 30px;

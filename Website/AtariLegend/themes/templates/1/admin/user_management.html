@@ -193,20 +193,23 @@ function UserlistFunction() {
 		}
 		
 		if ($(this).val() == "email_user") {
-			     $( "#dialog_confirm_email" ).dialog({
-					resizable: false,
-					height:140,
-					modal: true,
-					buttons: {
-						"Email user(s)": function() {
-						$( this ).dialog( "close" );
-						UserModify();
-						},
-						Cancel: function() {
-						$( this ).dialog( "close" );
-						}
-					}
-				});
+		
+			    // $( "#dialog_confirm_email" ).dialog({
+				//	resizable: false,
+				//	height:140,
+				//	modal: true,
+				//	buttons: {
+				//		"Email user(s)": function() {
+				//		$( this ).dialog( "close" );
+				//		UserModify();
+				//		},
+				//		Cancel: function() {
+				//		$( this ).dialog( "close" );
+				//		}
+				//	}
+				//});
+				 document.getElementById('email_fields').style.visibility = 'visible';
+
 		}
 	});
 
@@ -287,7 +290,26 @@ function UserModify() {
 //		closeEffect	: 'elastic'
 //	});
 //});
-
+</script>
+<script>
+function EmailSent(){
+   $( "#dialog_confirm_email" ).dialog({
+		resizable: false,
+		height:140,
+		modal: true,
+		buttons: {
+			"Email user(s)": function() {
+			$( this ).dialog( "close" );
+			document.getElementById('user_list').method="post";
+			document.getElementById('user_list').action="../administration/db_user_management.php?action=email_user";
+			document.getElementById('user_list').submit();
+			},
+			Cancel: function() {
+			$( this ).dialog( "close" );
+			}
+		}
+	});
+}
 </script>
 {/block}
 
@@ -313,7 +335,8 @@ function UserModify() {
 	<div class="standard_tile_line"></div>
 	<div class="standard_tile_text">
 		<div class="left_nav_section">
-			As a failsave, you can only delete users in search results with all the 'No' checks activated! Otherwise the delete option is not available.
+			Deleting users - You can only delete users if all the 'No' checks are activated in your search.<br>
+			Email users - You can only email users if the 'with email' check is activated in your search.	
 		</div> 
 		<br>
 		<form action="test" method="post" name="user_list" id="user_list">
@@ -346,7 +369,9 @@ function UserModify() {
 						<img width="38" height="22" style="float:left;" alt="" src="../../../themes/templates/1/includes/img/arrow_ltr.gif">
 						<select name="action" id="user_list_action">
 							<option value="-" selected>Select Action</option>
-							<option value="email_user">Send Email</option>
+							{if isset($mail_link)}
+								<option value="email_user">Send Email</option>
+							{/if}
 							<option value="deactivate_user">Deactivate User</option>
 							{if isset($delete_link)}
 								<option value="delete_user">Delete User</option>
@@ -358,7 +383,18 @@ function UserModify() {
 			{/if}
 			</table>
 		</div>
-		</form>
 	</div>
 </div>
+<div class="standard_tile_text" id="email_fields" style="visibility:hidden">
+	<fieldset>
+		<legend>Create email</legend>
+		<input type="text" name="email_head" id="email_head" class="standard_tile_input_small" Value="Email title">
+		<br>
+		<textarea name="email_descr" id="email_descr" class="links_addnew_area">Email description</textarea>	
+		<br>
+		<br>
+		<input type="button" onclick="EmailSent()" name="email_sent" value="Sent" class="topbutton_cpanel_small">
+	</fieldset>
+</div>
+</form>
 {/block}

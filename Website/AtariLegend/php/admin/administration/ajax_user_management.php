@@ -132,6 +132,10 @@ if ((isset($no_comments) and $no_comments=="1") AND (isset($no_review) and $no_r
 	   $smarty->assign("delete_link","1");
    }
 
+if (isset($with_email) and $with_email=="1") 
+{
+	$smarty->assign("mail_link","1");
+}
 
 // Create dropdown values a-z
 $az_value = az_dropdown_value(0);

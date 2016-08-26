@@ -25,23 +25,25 @@
 		<meta name="keywords" content="atari, atari st, games, game, demo, demos, reviews, articles, interviews, st">
 		<title> Atari Legend | Legends Never Die</title>
 		<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
+		<!-- start - let the site behave like a mobile app on phone -->
+		<meta name="mobile-web-app-capable" content="yes"><!-- Chrome-->
+		<meta name="apple-mobile-web-app-capable" content="yes"><!-- apple -->
+		<!-- End - let the site behave like a mobile app on phone -->
 		<link type="text/css" href="{$style_dir}css/style.css" rel="stylesheet" id="main_stylesheet">
 		<link type="text/css" href="{$style_dir}css/jquery-ui.css" rel="Stylesheet">
 		<link type="text/css" href="{$style_dir}css/jquery.fancybox.css" rel="Stylesheet">
 		<link type="text/css" href="{$style_dir}css/notify-osd.css" hreflang="en" rel="stylesheet">
-		<link rel="icon" href="{$template_dir}includes/icons/favicon.png"> <!-- fav icon -->
 		<!-- start - get the icons used for mobile devices -->
+		<link rel="icon" href="{$template_dir}includes/icons/favicon.png"> <!-- fav icon & Chrome mobile icon-->
 		<link rel="apple-touch-icon-precomposed" sizes="57x57" href="{$template_dir}includes/icons/icon-57x57.png">
 		<link rel="apple-touch-icon-precomposed" sizes="72x72" href="{$template_dir}includes/icons/icon-72x72.png">
 		<link rel="apple-touch-icon-precomposed" sizes="114x114" href="{$template_dir}includes/icons/icon-114x114.png">
 		<link rel="apple-touch-icon-precomposed" sizes="144x144" href="{$template_dir}includes/icons/icon-144x144.png">
-		<link rel="stylesheet" type="text/css" href="{$style_dir}css/addtohomescreen.css"> <!-- message add to homescreen for mobile devices -->
 		<!-- end - get the icons used for mobile devices -->
 		<script type="text/javascript" src="{$template_dir}includes/js/jquery-2.1.4.min.js"></script> <!-- main jquery stuff -->
 		<script type="text/javascript" src="{$template_dir}includes/js/jquery-ui.js"></script> <!-- main jqueryUI stuff -->
 		<script type="text/javascript" src="{$template_dir}includes/js/jquery.fancybox.pack.js"></script>
 		<script type="text/javascript" src="{$template_dir}includes/js/notify-osd.js"></script>
-		<script src="{$template_dir}includes/js/addtohomescreen.js"></script> <!-- message add to homescreen for mobile devices -->
 		<script type="text/javascript"> <!-- script needed for the side menu -->
 			//<![CDATA[
 			$(window).load(function(){
@@ -83,9 +85,6 @@
 				});
 			{/if}
 		</script>
-		<script>
-			addToHomescreen();
-		</script>
 		{block name=java_script}{/block}
 	</head>
 	<body id="body">
@@ -123,12 +122,12 @@
 								  <ul class="side_navigation">
 									<li><button class="sidebutton" id="menus_side">MENUS</button>
 										<ul class="sub-menu">
-											<li><a href="#" title="Menu editor" class="sidebutton_cpanel">MENU EDITOR</a></li>
-											<li><a href="#" title="Menu comments" class="sidebutton_cpanel">MENU COMMENTS</a></li>
-											<li><a href="#" title="Menu submissions" class="sidebutton_cpanel">MENU SUBMISSIONS</a></li>
-											<li><a href="#" title="Individuals" class="sidebutton_cpanel">INDIVIDIUALS</a></li>
-											<li><a href="#" title="Author types" class="sidebutton_cpanel">AUTHOR TYPES</a></li>
-											<li><a href="#" title="Crew editor" class="sidebutton_cpanel">CREW EDITOR</a></li>
+											<li><a href="../administration/construction.php" title="Menu editor" class="sidebutton_cpanel">MENU EDITOR</a></li>
+											<li><a href="../administration/construction.php" title="Menu comments" class="sidebutton_cpanel">MENU COMMENTS</a></li>
+											<li><a href="../administration/construction.php" title="Menu submissions" class="sidebutton_cpanel">MENU SUBMISSIONS</a></li>
+											<li><a href="../administration/construction.php" title="Individuals" class="sidebutton_cpanel">INDIVIDIUALS</a></li>
+											<li><a href="../administration/construction.php" title="Author types" class="sidebutton_cpanel">AUTHOR TYPES</a></li>
+											<li><a href="../administration/construction.php" title="Crew editor" class="sidebutton_cpanel">CREW EDITOR</a></li>
 										</ul>
 									</li>
 								  </ul>
@@ -139,15 +138,15 @@
 								  <ul class="side_navigation">
 									<li><button class="sidebutton" id="demos_side">DEMOS</button>
 										<ul class="sub-menu">
-											<li><a href="#" title="Demo editor" class="sidebutton_cpanel">DEMO EDITOR</a></li>
-											<li><a href="#" title="Demo comments" class="sidebutton_cpanel">DEMO COMMENTS</a></li>
-											<li><a href="#" title="Demo music" class="sidebutton_cpanel">DEMO MUSIC</a></li>
-											<li><a href="#" title="Demo submissions" class="sidebutton_cpanel">DEMO SUBMISSIONS</a></li>
-											<li><a href="#" title="Individuals" class="sidebutton_cpanel">INDIVIDIUALS</a></li>
-											<li><a href="#" title="Author types" class="sidebutton_cpanel">AUTHOR TYPES</a></li>
-											<li><a href="#" title="Crew editor" class="sidebutton_cpanel">CREW EDITOR</a></li>
-											<li><a href="#" title="Interviews" class="sidebutton_cpanel">INTERVIEWS</a></li>
-											<li><a href="#" title="Interviews help" class="sidebutton_cpanel">INTERVIEWS HELP</a></li>
+											<li><a href="../administration/construction.php" title="Demo editor" class="sidebutton_cpanel">DEMO EDITOR</a></li>
+											<li><a href="../administration/construction.php" title="Demo comments" class="sidebutton_cpanel">DEMO COMMENTS</a></li>
+											<li><a href="../administration/construction.php" title="Demo music" class="sidebutton_cpanel">DEMO MUSIC</a></li>
+											<li><a href="../administration/construction.php" title="Demo submissions" class="sidebutton_cpanel">DEMO SUBMISSIONS</a></li>
+											<li><a href="../administration/construction.php" title="Individuals" class="sidebutton_cpanel">INDIVIDIUALS</a></li>
+											<li><a href="../administration/construction.php" title="Author types" class="sidebutton_cpanel">AUTHOR TYPES</a></li>
+											<li><a href="../administration/construction.php" title="Crew editor" class="sidebutton_cpanel">CREW EDITOR</a></li>
+											<li><a href="../administration/construction.php" title="Interviews" class="sidebutton_cpanel">INTERVIEWS</a></li>
+											<li><a href="../administration/construction.php" title="Interviews help" class="sidebutton_cpanel">INTERVIEWS HELP</a></li>
 										</ul>
 									</li>
 								  </ul>
@@ -192,12 +191,12 @@
 											<li><a href="../links/link_addnew.php" title="Add links" class="sidebutton_cpanel">ADD LINKS</a></li>
 											<li><a href="../links/link_modlist.php" title="Modify links" class="sidebutton_cpanel">MODIFY LINKS</a></li>
 											<li><a href="../links/link_cat.php" title="Link categories" class="sidebutton_cpanel">LINK CATEGORIES</a></li>
-											<li><a href="#" title="Articles" class="sidebutton_cpanel">ARTICLES</a></li>
-											<li><a href="#" title="Article types" class="sidebutton_cpanel">ARTICLE TYPES</a></li>
-											<li><a href="#" title="Add magazines" class="sidebutton_cpanel">ADD MAGAZINES</a></li>
-											<li><a href="#" title="Manage issues" class="sidebutton_cpanel">MANAGE ISSUES</a></li>
-											<li><a href="#" title="Forum" class="sidebutton_cpanel">FORUM</a></li>
-											<li><a href="#" title="Log out" class="sidebutton_cpanel">LOG OUT</a></li>
+											<li><a href="../administration/construction.php" title="Articles" class="sidebutton_cpanel">ARTICLES</a></li>
+											<li><a href="../administration/construction.php" title="Article types" class="sidebutton_cpanel">ARTICLE TYPES</a></li>
+											<li><a href="../administration/construction.php" title="Add magazines" class="sidebutton_cpanel">ADD MAGAZINES</a></li>
+											<li><a href="../administration/construction.php" title="Manage issues" class="sidebutton_cpanel">MANAGE ISSUES</a></li>
+											<li><a href="http://www.atari-forum.com" title="Forum" class="sidebutton_cpanel">FORUM</a></li>
+											<li><a href="../administration/construction.php" title="Log out" class="sidebutton_cpanel">LOG OUT</a></li>
 										</ul>
 									</li>
 								  </ul>
@@ -262,25 +261,25 @@
 						</li>
 						<li><button type="button" class="topbutton" id="menus">MENUS</button>
 							<ul>
-								<li><a href="../menus/menus_list.php" title="Menu editor" class="subbutton" id="menu_editor">MENU EDITOR</a></li>
-								<li><a href="#" title="Menu comments" class="subbutton" id="menu_comments">MENU COMMENTS</a></li>
-								<li><a href="#" title="Menu submissions" class="subbutton" id="menu_submissions">MENU SUBMISSIONS</a></li>
-								<li><a href="#" title="Individuals" class="subbutton" id="menu_individuals">INDIVIDIUALS</a></li>
-								<li><a href="#" title="Author types" class="subbutton" id="menu_author_types">AUTHOR TYPES</a></li>
-								<li><a href="#" title="Crew editor" class="subbutton" id="menu_crew_editor">CREW EDITOR</a></li>
+								<li><a href="../administration/construction.php" title="Menu editor" class="subbutton" id="menu_editor">MENU EDITOR</a></li>
+								<li><a href="../administration/construction.php" title="Menu comments" class="subbutton" id="menu_comments">MENU COMMENTS</a></li>
+								<li><a href="../administration/construction.php" title="Menu submissions" class="subbutton" id="menu_submissions">MENU SUBMISSIONS</a></li>
+								<li><a href="../administration/construction.php" title="Individuals" class="subbutton" id="menu_individuals">INDIVIDIUALS</a></li>
+								<li><a href="../administration/construction.php" title="Author types" class="subbutton" id="menu_author_types">AUTHOR TYPES</a></li>
+								<li><a href="../administration/construction.php" title="Crew editor" class="subbutton" id="menu_crew_editor">CREW EDITOR</a></li>
 							</ul>
 						</li>
 						<li><button type="button" class="topbutton" id="demos">DEMOS</button>
 							<ul>
-								<li><a href="#" title="Demo editor" class="subbutton" id="demo_editor">DEMO EDITOR</a></li>
-								<li><a href="#" title="Demo comments" class="subbutton" id="demo_comments">DEMO COMMENTS</a></li>
-								<li><a href="#" title="Demo music" class="subbutton" id="demo_music">DEMO MUSIC</a></li>
-								<li><a href="#" title="Demo submissions" class="subbutton" id="demo_submissions">DEMO SUBMISSIONS</a></li>
-								<li><a href="#" title="Individuals" class="subbutton" id="demo_individuals">INDIVIDIUALS</a></li>
-								<li><a href="#" title="Author types" class="subbutton" id="demo_author_types">AUTHOR TYPES</a></li>
-								<li><a href="#" title="Crew editor" class="subbutton" id="crew_editor">CREW EDITOR</a></li>
-								<li><a href="#" title="Interviews" class="subbutton" id="demo_interviews">INTERVIEWS</a></li>
-								<li><a href="#" title="Interviews help" class="subbutton" id="demo_interviews_help">INTERVIEWS HELP</a></li>
+								<li><a href="../administration/construction.php" title="Demo editor" class="subbutton" id="demo_editor">DEMO EDITOR</a></li>
+								<li><a href="../administration/construction.php" title="Demo comments" class="subbutton" id="demo_comments">DEMO COMMENTS</a></li>
+								<li><a href="../administration/construction.php" title="Demo music" class="subbutton" id="demo_music">DEMO MUSIC</a></li>
+								<li><a href="../administration/construction.php" title="Demo submissions" class="subbutton" id="demo_submissions">DEMO SUBMISSIONS</a></li>
+								<li><a href="../administration/construction.php" title="Individuals" class="subbutton" id="demo_individuals">INDIVIDIUALS</a></li>
+								<li><a href="../administration/construction.php" title="Author types" class="subbutton" id="demo_author_types">AUTHOR TYPES</a></li>
+								<li><a href="../administration/construction.php" title="Crew editor" class="subbutton" id="crew_editor">CREW EDITOR</a></li>
+								<li><a href="../administration/construction.php" title="Interviews" class="subbutton" id="demo_interviews">INTERVIEWS</a></li>
+								<li><a href="../administration/construction.php" title="Interviews help" class="subbutton" id="demo_interviews_help">INTERVIEWS HELP</a></li>
 							</ul>
 						</li>
 						<li><button type="button" class="topbutton" id="users">USERS</button>
@@ -307,12 +306,12 @@
 								<li><a href="../links/link_addnew.php" title="Add links" class="subbutton" id="add_links">ADD LINKS</a></li>
 								<li><a href="../links/link_modlist.php" title="Modify links" class="subbutton" id="modify_links">MODIFY LINKS</a></li>
 								<li><a href="../links/link_cat.php" title="Link categories" class="subbutton" id="link_categories">LINK CATEGORIES</a></li>
-								<li><a href="#" title="Articles" class="subbutton" id="articles">ARTICLES</a></li>
-								<li><a href="#" title="Article types" class="subbutton" id="article_types">ARTICLE TYPES</a></li>
-								<li><a href="#" title="Add magazines" class="subbutton" id="add_magazines">ADD MAGAZINES</a></li>
-								<li><a href="#" title="Manage issues" class="subbutton" id="manage_issues">MANAGE ISSUES</a></li>
-								<li><a href="#" title="Forum" class="subbutton" id="forum">FORUM</a></li>
-								<li><a href="#" title="Log out" class="subbutton" id="logout">LOG OUT</a></li>
+								<li><a href="../administration/construction.php" title="Articles" class="subbutton" id="articles">ARTICLES</a></li>
+								<li><a href="../administration/construction.php" title="Article types" class="subbutton" id="article_types">ARTICLE TYPES</a></li>
+								<li><a href="../administration/construction.php" title="Add magazines" class="subbutton" id="add_magazines">ADD MAGAZINES</a></li>
+								<li><a href="../administration/construction.php" title="Manage issues" class="subbutton" id="manage_issues">MANAGE ISSUES</a></li>
+								<li><a href="http://www.atari-forum.com" title="Forum" class="subbutton" id="forum">FORUM</a></li>
+								<li><a href="../administration/construction.php" title="Log out" class="subbutton" id="logout">LOG OUT</a></li>
 							</ul>
 						</li>
 					</ul>
