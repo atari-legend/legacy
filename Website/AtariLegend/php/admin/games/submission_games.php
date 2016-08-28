@@ -173,10 +173,7 @@ $smarty->assign('total_nr_submissions', $v_rows_total);
 						  'v_counter' => $v_counter,
 						  'back_arrow' => $back_arrow,
 						  'forward_arrow' => $forward_arrow,
-						  'num_sub' => $number_sub));
-
-$smarty->assign('quick_search_games', 'quick_search_game_submissions');
-$smarty->assign('left_nav', 'leftnav_position_game_submissions');						  
+						  'num_sub' => $number_sub));			  
 						  
 //Send all smarty variables to the templates
 $smarty->display("file:".$cpanel_template_folder."submission_games.html");

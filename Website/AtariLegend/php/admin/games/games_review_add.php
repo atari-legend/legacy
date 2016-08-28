@@ -85,9 +85,6 @@ while ($screenshots=$sql_screenshots->fetch_array(MYSQLI_BOTH))
 
 $smarty->assign("screenshots_nr",$i);
 
-$smarty->assign('quick_search_games', 'quick_search_game_review_add');
-$smarty->assign('left_nav', 'leftnav_position_game_review_add');
-
 $smarty->assign("user_id",$_SESSION['user_id']);
 
 //Send all smarty variables to the templates

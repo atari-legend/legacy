@@ -118,8 +118,6 @@ if ( $individual_search == " " or $individual_search == '-' )
 				   'interview_text' => $interview_text));
 }
 }
-$smarty->assign('quick_search_games', 'quick_search_games_interviews_main');
-$smarty->assign('left_nav', 'leftnav_position_interviews_main');
 
 $smarty->assign("user_id",$_SESSION['user_id']);
 

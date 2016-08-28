@@ -94,9 +94,6 @@ $smarty->assign('nr_downloads',$nr_downloads);
 
 $smarty->assign("user_id",$_SESSION['user_id']);
 
-$smarty->assign('quick_search_games', 'quick_search_game_upload');
-$smarty->assign('left_nav', 'leftnav_position_game_upload');
-
 //Send all smarty variables to the templates
 $smarty->display("file:".$cpanel_template_folder."games_upload.html");
 

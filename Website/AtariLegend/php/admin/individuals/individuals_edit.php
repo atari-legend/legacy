@@ -91,9 +91,6 @@ while ( $ind_nicks=$sql_individuals->fetch_array(MYSQLI_BOTH) )
 
 $smarty->assign("user_id",$_SESSION['user_id']);
 
-$smarty->assign('quick_search_games', 'quick_search_games_individuals_edit');
-$smarty->assign('left_nav', 'leftnav_position_individuals_edit');
-
 //Send all smarty variables to the templates
 $smarty->display("file:".$cpanel_template_folder."individuals_edit.html");
 }

@@ -53,8 +53,5 @@ $smarty->assign("submission_nr",$i);
 
 $smarty->assign("user_id",$_SESSION['user_id']);
 
-$smarty->assign('quick_search_games', 'quick_search_game_review_submitted');
-$smarty->assign('left_nav', 'leftnav_position_game_review_submitted');
-
 //Send all smarty variables to the templates
 $smarty->display("file:".$cpanel_template_folder."games_review_submitted.html");

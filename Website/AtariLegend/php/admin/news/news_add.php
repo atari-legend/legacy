@@ -1,4 +1,4 @@
-<?php
+	<?php
 /***************************************************************************
 *                                news_add.php
 *                            -----------------------
@@ -33,9 +33,6 @@ while ($newsimages = $sql_newsimage->fetch_array(MYSQLI_BOTH))
 	    	 array('image_id' => $newsimages['news_image_id'],
 				   'image_name' => $newsimages['news_image_name']));
 }
-
-$smarty->assign('quick_search_games', 'quick_search_game_news_add');
-$smarty->assign('left_nav', 'leftnav_position_news_add');	
 
 $smarty->assign("user_id",$_SESSION['user_id']);
 

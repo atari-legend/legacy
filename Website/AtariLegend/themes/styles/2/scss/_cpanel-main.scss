@@ -9,8 +9,8 @@
 /*---------------------------------------------------------- 
 Front page
 ------------------------------------------------------------ */
-#user_stats{ float: right; width:48%; margin-bottom: 30px;}	
-#welcome_cpanel{ float: left; width:48%; margin-bottom: 30px;}	
+#user_stats{ float: right; width:48%;}	
+#welcome_cpanel{ float: left; width:48%;}	
 #left_nav_position_front{ margin-top: -40px; margin-bottom: 20px; float: left;}
 #main_stats_position_front{ margin-top: -40px; margin-bottom: 20px;}
 #quick_search_position_front{ margin-top: -40px; margin-bottom: 20px; float: right;}
@@ -35,7 +35,7 @@ Front page
 /*---------------------------------------------------------- 
 Left nav
 ------------------------------------------------------------ */
-#leftnav_position_front { margin-top: 20px; margin-bottom: 30px; float: left;
+#leftnav_position_front {float: left;
 }
 
 .left_nav_section{

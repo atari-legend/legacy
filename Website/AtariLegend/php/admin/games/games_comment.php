@@ -168,9 +168,6 @@ $smarty->assign('links',
 			   'users_comments' => $users_comments,
 			   'c_counter' => $c_counter));
 			   
-$smarty->assign('quick_search_games', 'quick_search_games_comment');
-$smarty->assign('left_nav', 'leftnav_position_games_comment');
-
 //Send all smarty variables to the templates
 $smarty->display("file:".$cpanel_template_folder."games_comment.html");
 ?>

@@ -42,9 +42,6 @@ $fetchgame =  $mysqli->query("SELECT * FROM game WHERE game_id='$game_id'")->fet
 							'magazine_issue_nr' => $fetch['magazine_issue_nr'],
 							'magazine_issue_id' => $magazine_issue_id));
 
-$smarty->assign('quick_search_games', 'quick_search_magazine_set_score');
-$smarty->assign('left_nav', 'leftnav_position_magazine_set_score');
-
 //Send all smarty variables to the templates
 $smarty->display("file:".$cpanel_template_folder."magazine_setscore.html");
 ?>

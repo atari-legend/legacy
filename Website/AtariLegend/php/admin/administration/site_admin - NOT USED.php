@@ -9,6 +9,9 @@
 *							
 *
 *   Id: site_admin.php,v 0.10 2016-02-13 Silver Surfer
+*   
+*   We may use this again when I figure out what Mattias had in 
+*	mind with the template and themes stuff
 *
 ***************************************************************************/
 

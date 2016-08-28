@@ -108,9 +108,6 @@ while ($sql_screenshots = $query_screenshots->fetch_array(MYSQLI_BOTH))
 	$count++;
 }
 
-$smarty->assign('quick_search_games', 'quick_search_games_interviews_preview');
-$smarty->assign('left_nav', 'leftnav_position_interviews_preview');
-
 //Send all smarty variables to the templates
 $smarty->display("file:".$cpanel_template_folder."interviews_preview.html");
 

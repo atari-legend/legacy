@@ -139,8 +139,6 @@ $smarty->assign('nr_news', $nr_news);
 
 mysqli_free_result($sql);
 
-$smarty->assign('left_nav', 'leftnav_position_userstatistics');
-
 $smarty->assign('user_id_selected', $user_id_selected);
 
 //Send all smarty variables to the templates

@@ -217,12 +217,7 @@ foreach ($database_update as $key)
 						  'file_name' => $file_name,
 						  'test_result' => $test_result));
 }
-
-//Create the id's for dynamic positioning of the tiles
-$smarty->assign('left_nav', 'left_nav_position_db_updates');
-$smarty->assign('quick_search_games', 'quick_search_db_updates');
-		
+	
 //Send all smarty variables to the templates
-
 $smarty->display("file:".$cpanel_template_folder."database_update.html");
 ?>

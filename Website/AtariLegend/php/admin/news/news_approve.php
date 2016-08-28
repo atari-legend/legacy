@@ -75,9 +75,6 @@ else
 
 $smarty->assign("user_id",$_SESSION['user_id']);
 
-$smarty->assign('quick_search_games', 'quick_search_news_approve');
-$smarty->assign('left_nav', 'leftnav_position_news_approve');
-
 //Send all smarty variables to the templates
 $smarty->display("file:".$cpanel_template_folder."news_approve.html");
 

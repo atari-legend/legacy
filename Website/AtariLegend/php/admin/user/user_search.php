@@ -85,9 +85,6 @@ while ($query_users = $sql_users->fetch_array(MYSQLI_BOTH))
 $smarty->assign('userbrowse', $userbrowse);
 $smarty->assign('usersearch', $usersearch);
 
-$smarty->assign('left_nav', 'leftnav_position_usersearch');
-$smarty->assign('quick_search_games', 'quick_search_games_position_usersearch');
-
 //Send all smarty variables to the templates
 $smarty->display("file:".$cpanel_template_folder."user_search.html");
 

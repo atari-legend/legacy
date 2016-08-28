@@ -6,13 +6,17 @@
 *   copyright            : (C) 2015 Atari Legend
 *   email                : admin@atarilegend.com
 *						   Created file
-*						
+* 	id : menus_list.php ,v 0.10 2016/08/26 ST Graveyard 23:22
+*			- AL 2.0
 *
 ***************************************************************************/
 
 //load all common functions
 include("../../includes/common.php");
 include("../../includes/admin.php");
+
+//load the search fields of the quick search side menu
+include("../../includes/quick_search_games.php"); 
 
 /*
 ************************************************************************************************

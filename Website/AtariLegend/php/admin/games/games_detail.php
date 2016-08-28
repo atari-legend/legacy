@@ -366,12 +366,8 @@ $smarty->assign("nr_comments",$array['count']);
 $smarty->assign("game_id",$game_id);
 $smarty->assign("user_id",$_SESSION['user_id']);
 
-$smarty->assign('quick_search_games', 'quick_search_games_detail');
-$smarty->assign('left_nav', 'leftnav_position_games_detail');
-
 //Send all smarty variables to the templates
 $smarty->display("file:".$cpanel_template_folder."games_detail.html");
-
 
 //close the connection
 mysqli_close($mysqli);

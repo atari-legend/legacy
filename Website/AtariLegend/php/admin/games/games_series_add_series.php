@@ -1,7 +1,7 @@
 <?php
 /***************************************************************************
-*                             games_series_main.php
-*                            -----------------------
+*                             games_series_add_series.php
+*                            -------------------------------
 *   begin                : Saturday, Sept 24, 2005
 *   copyright            : (C) 2003 Atari Legend
 *   email                : silversurfer@atari-forum.com
@@ -9,7 +9,7 @@
 						   
 *							
 *
-*   Id: games_series_main.php,v 0.2 2005/09/24 Silver Surfer
+*   Id: games_series_add_series.php,v 0.2 2005/09/24 Silver Surfer
 *
 ***************************************************************************/
 

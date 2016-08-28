@@ -37,10 +37,6 @@ while  ($query_series = $sql_series->fetch_array(MYSQLI_BOTH))
 		  'game_series_name' => $query_series['game_series_name']));
 }
 
-$smarty->assign('quick_search_games', 'quick_search_game_series_main');
-$smarty->assign('left_nav', 'leftnav_position_game_series_main');
-
-
 //Send all smarty variables to the templates
 $smarty->display("file:".$cpanel_template_folder."games_series_main.html");
 ?>

@@ -19,7 +19,6 @@
 Manage our trivia quotes!
 ***********************************************************************************
 */
-
 include("../../includes/common.php");
 include("../../includes/quick_search_games.php");
 include("../../includes/admin.php");
@@ -33,11 +32,7 @@ while ($query_trivia = $sql_trivia->fetch_array(MYSQLI_BOTH))
 			array('trivia_quote_id' => $query_trivia['trivia_quote_id'],
 				  'trivia_quote' => $query_trivia['trivia_quote']));
 } 
-
-$smarty->assign('left_nav', 'leftnav_position_triviaquotes');	
-$smarty->assign('quick_search_games', 'quick_search_games_position_triviaquotes');	
 		
 //Send all smarty variables to the templates
 $smarty->display("file:".$cpanel_template_folder."manage_trivia_quotes.html");
-
 ?>
