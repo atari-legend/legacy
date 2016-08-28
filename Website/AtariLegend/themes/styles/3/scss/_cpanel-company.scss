@@ -9,10 +9,6 @@
 /*---------------------------------------------------------- 
 Company main
 ------------------------------------------------------------ */
-#leftnav_position_company_main{margin-top: 0; margin-bottom: 30px; float: left;}
-#quick_search_games_company_main{margin-top: 0; margin-bottom: 30px; float: left;}
-#company_main{margin-top: 0; margin-bottom: 30px; float: left;}
-
 .main_company_container {
   display: flex;
   align-items: flex-start; 
@@ -21,18 +17,3 @@ Company main
 .main_company_child {text-align:center;}
  
 #child_edit_company, #child_add_company {width: 85%;float:left;}
-
-/*---------------------------------------------------------- 
-Company edit
------------------------------------------------------------- */
-#leftnav_position_company_edit{margin-top: 0; margin-bottom: 30px; float: left;}
-#quick_search_games_company_edit{margin-top: 0; margin-bottom: 30px; float: left;}
-#company_edit{margin-top: 0; margin-bottom: 30px; float: left;}
-
-/*---------------------------------------------------------- 
-Company edit
------------------------------------------------------------- */
-#leftnav_position_company_logos{margin-top: 0; margin-bottom: 30px; float: left;}
-#quick_search_games_company_logos{margin-top: 0; margin-bottom: 30px; float: left;}
-#company_logos{margin-top: 0; margin-bottom: 30px; float: left;}
-

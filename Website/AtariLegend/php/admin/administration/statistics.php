@@ -65,13 +65,7 @@ while ($query_users = $sql_users->fetch_array(MYSQLI_BOTH))
 						  'user_name' => $query_users['userid'],
 						  'image' => "$user_avatar_path$query_users[user_id].$query_users[avatar_ext]"));
 }
-
-//Create the id's for dynamic positioning of the tiles
-$smarty->assign('left_nav', 'left_nav_position_front');
-$smarty->assign('quick_search_games', 'quick_search_position_front');
-$smarty->assign('main_stats', 'main_stats_position_front');
-		
+	
 //Send all smarty variables to the templates
-
 $smarty->display("file:".$cpanel_template_folder."start_page.html");
 ?>

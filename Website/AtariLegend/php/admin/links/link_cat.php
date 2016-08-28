@@ -38,9 +38,6 @@ while($category_row = $website->fetch_array(MYSQLI_BOTH))
 		  'category_count' => $nr_of_links));
 } 
 
-$smarty->assign('left_nav', 'leftnav_position_linkcat');
-$smarty->assign('quick_search_games', 'quick_search_games_position_linkcat');
-
 //Send all smarty variables to the templates
 $smarty->display("file:".$cpanel_template_folder."link_cat.html");
 ?>

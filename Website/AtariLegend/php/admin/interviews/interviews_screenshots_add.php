@@ -69,9 +69,6 @@ while ($interview = $sql_interview->fetch_array(MYSQLI_BOTH))
 				   'interview_ind_id' => $interview['ind_id']));
 }
 
-$smarty->assign('quick_search_games', 'quick_search_games_interviews_add_screenshot');
-$smarty->assign('left_nav', 'leftnav_position_interviews_add_screenshot');		
-
 $smarty->assign("user_id",$_SESSION['user_id']);
 
 //Send all smarty variables to the templates

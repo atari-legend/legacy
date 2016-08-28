@@ -81,9 +81,6 @@ while ($sql_screenshots = $query_screenshots->fetch_array(MYSQLI_BOTH))
 
 $smarty->assign('game_id', $game_id);
 
-$smarty->assign('quick_search_games', 'quick_search_game_review_preview');
-$smarty->assign('left_nav', 'leftnav_position_game_review_preview');
-
 //Send all smarty variables to the templates
 $smarty->display("file:".$cpanel_template_folder."games_review_preview.html");
 

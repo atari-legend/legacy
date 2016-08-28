@@ -71,9 +71,6 @@ $smarty->assign('az_select', "num");
 $time_elapsed_secs = microtime(true) - $start;
 $smarty->assign("query_time",$time_elapsed_secs);	
 
-//Create the id's for dynamic positioning of the tiles
-$smarty->assign('left_nav', 'leftnav_position_um');
-		
 //Send all smarty variables to the templates
 $smarty->display("file:".$cpanel_template_folder."user_management.html");
 ?>

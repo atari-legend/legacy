@@ -313,8 +313,14 @@ function EmailSent(){
 </script>
 {/block}
 
-{block name=right_tile}
+{block name=left_tile}
 	{include file='1/admin/quick_search_users.html'}
+	<br>
+	{include file='1/admin/left_nav.html'}
+{/block}
+
+{block name=right_tile}
+	{include file='1/admin/quick_search_games.html'}
 {/block}
 
 {block name=main_tile}
@@ -385,16 +391,18 @@ function EmailSent(){
 		</div>
 	</div>
 </div>
-<div class="standard_tile_text" id="email_fields" style="visibility:hidden">
-	<fieldset>
-		<legend>Create email</legend>
-		<input type="text" name="email_head" id="email_head" class="standard_tile_input_small" Value="Email title">
-		<br>
-		<textarea name="email_descr" id="email_descr" class="links_addnew_area">Email description</textarea>	
-		<br>
-		<br>
-		<input type="button" onclick="EmailSent()" name="email_sent" value="Sent" class="topbutton_cpanel_small">
-	</fieldset>
-</div>
+{if isset($mail_link)}
+	<div class="standard_tile_text" id="email_fields" style="visibility:hidden">
+		<fieldset>
+			<legend>Create email</legend>
+			<input type="text" name="email_head" id="email_head" class="standard_tile_input_small" Value="Email title">
+			<br>
+			<textarea name="email_descr" id="email_descr" class="links_addnew_area">Email description</textarea>	
+			<br>
+			<br>
+			<input type="button" onclick="EmailSent()" name="email_sent" value="Sent" class="topbutton_cpanel_small">
+		</fieldset>
+	</div>
+{/if}
 </form>
 {/block}

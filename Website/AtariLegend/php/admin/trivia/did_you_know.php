@@ -36,10 +36,7 @@ while ($query_trivia = $sql_trivia->fetch_array(MYSQLI_BOTH))
 			array('trivia_id' => $query_trivia['trivia_id'],
 				  'trivia_text' => $trivia_text));
 } 
-
-$smarty->assign('left_nav', 'leftnav_position_didyouknow');	
-$smarty->assign('quick_search_games', 'quick_search_games_position_didyouknow');	
-		
+	
 //Send all smarty variables to the templates
 $smarty->display("file:".$cpanel_template_folder."did_you_know.html");
 

@@ -126,14 +126,9 @@ contact tiles - front page
 /*---------------------------------------------------------- 
 Front page
 ------------------------------------------------------------ */
-@media screen and (max-width: 1279px) {  
-	#left_nav_position_front{ margin-top: 0;}
-	#main_stats_position_front{ margin-top: 0;}
-}
-
 /* Make the table view responsive */
 @media screen and (max-width: 799px) { 
-	#welcome_cpanel{ width:100%; margin-top: 10px; }		
+	#welcome_cpanel{ width:100%; margin-bottom: 15px;}		
 	#user_stats{ width:100%; }	
 	#main_stats_position_front{ width:100%; float: left; }
 	#left_nav_position_front{ width:100%;  float: left;}
@@ -166,10 +161,6 @@ Front page
 /*---------------------------------------------------------- 
 Quick search games
 ------------------------------------------------------------ */
-@media screen and (max-width: 1279px) { 
-	#quick_search_games_main{ margin-top: 0;}
-}	
-
 @media screen and (max-width: 1099px) { 
 	#quick_search_options{margin-left:5%; width:100%; }
 }
@@ -202,8 +193,6 @@ User details
 }
 	
 @media screen and (max-width: 1280px) { 	
-	#user_details{ margin-top: 0;}	
-	#leftnav_position_userdetails{ margin-top: 0;}
 	#child_1, #child_2{ width:100%;}
 }
 
@@ -211,34 +200,12 @@ User details
 	.user_details_text{width:50%;display:inline;}
 	.user_details_input{width:50%;display:inline;}
 	.user_details_row{width:50%;}
-	#user_details{ width:100%; margin-top: -10px;}	
-	#leftnav_position_userdetails{ margin-top: -5px;}
-}
-
-
-/*---------------------------------------------------------- 
-User statistics
------------------------------------------------------------- */
-@media screen and (max-width: 1279px) { 
-	#leftnav_position_userstatistics{ margin-top:0;}
-	#user_statistics{ margin-top: 0;}
-}
-
-@media screen and (max-width: 480px) { 
-	#leftnav_position_userstatistics{ margin-top: 0;}
-	#user_statistics{ margin-top: 0;}
 }
 
 
 /*---------------------------------------------------------- 
 User main
 ------------------------------------------------------------ */
-@media screen and (max-width: 1279px) { 
-	#leftnav_position_usermain{ margin-top: 0;}
-	#user_main{margin-top: 0;}
-	#main_stats_position_usermain{margin-bottom: 10px;}		
-}
-
 @media screen and (max-width: 500px) { 
 	.user_main_container{
 			flex-direction: column;
@@ -255,11 +222,6 @@ User main
 /*---------------------------------------------------------- 
 User search
 ------------------------------------------------------------ */
-@media screen and (max-width: 1279px) { 
-	#leftnav_position_usersearch{ margin-top: 0;}
-	#usersearch{margin-top: 0;}
-}
-
 @media screen and (max-width: 1150px) { 
 	.email_th{display: none;}
 	.email_td{display: none;}
@@ -276,66 +238,9 @@ User search
 	#usersearch th {text-align:center;}
 }
 
-@media screen and (max-width: 500px) { 
-	#usersearch{margin-bottom: 20px;}
-}
-
-@media screen and (max-width: 480px) { 
-	#usersearch{ width:100%; margin-top: -10px;}	
-	#leftnav_position_usersearch{ margin-top: 20px;}
-}
-
-/*---------------------------------------------------------- 
-User karma
------------------------------------------------------------- */
-@media screen and (max-width: 1279px) { 
-	#leftnav_position_karma{ margin-top: 0;}
-	#karma{margin-top: 0;}
-}
-
-@media screen and (max-width: 480px) { 
-	#karma{ margin-top: 0;}
-}
-
-
-/*---------------------------------------------------------- 
-Did you know
------------------------------------------------------------- */
-@media screen and (max-width: 1279px) { 
-	#leftnav_position_didyouknow{ margin-top: 0;}
-	#didyouknow{margin-top: 0;}
-}
-
-@media screen and (max-width: 480px) { 
-	#didyouknow{ margin-top: 0;}
-}
-
-
-/*---------------------------------------------------------- 
-Trivia Quotes
------------------------------------------------------------- */
-@media screen and (max-width: 1279px) { 
-	#leftnav_position_triviaquotes{ margin-top: 0;}
-	#triviaquotes{margin-top: 0;}
-}
-
-@media screen and (max-width: 480px) { 
-	#triviaquotes{ margin-top: 0;}
-}
-
-
 /*---------------------------------------------------------- 
 Links addnew
 ------------------------------------------------------------ */
-@media screen and (max-width: 1279px) { 
-	#leftnav_position_linkaddnew{ margin-top: 0;}
-	#linkaddnew{margin-top: 0;}
-}
-
-@media screen and (max-width: 480px) { 
-	#linkaddnew{ margin-top: 0;}
-}
-
 @media screen and (max-width: 480px) { 
 	.links_addnew_text{width:50%;display:inline;}
 	.links_addnew_input{width:50%;display:inline;}
@@ -352,11 +257,6 @@ Links Modify list
 	}
 }
 	
-@media screen and (max-width: 1279px) { 
-	#leftnav_position_linkmodlist{ margin-top: 0;}
-	#linkmodlist{margin-top: 0;}
-}
-
 @media screen and (max-width: 480px) { 
 	.user_stats_img_dark{display : none;}
 }	
@@ -365,15 +265,6 @@ Links Modify list
 /*---------------------------------------------------------- 
 Links category
 ------------------------------------------------------------ */
-@media screen and (max-width: 1279px) { 
-	#leftnav_position_linkcat{ margin-top: 0;}
-	#linkcat{margin-top: 0;}
-}
-
-@media screen and (max-width: 480px) { 
-	#linkcat{ margin-top: 0;}
-}
-
 @media screen and (max-width: 500px) { 
 	#linkcat_wide{ display: none;}
 }
@@ -386,15 +277,6 @@ Links category
 /*---------------------------------------------------------- 
 Links Modify
 ------------------------------------------------------------ */	
-@media screen and (max-width: 1279px) { 
-	#leftnav_position_linkmod{ margin-top: 0;}
-	#link_mod{margin-top: 0;}
-}
-
-@media screen and (max-width: 480px) { 
-	#link_mod{ margin-top: 0;}
-}
-
 @media screen and (max-width: 550px) { 
 	.links_mod_text{width:100%;display:block;}
 	.links_mod_input{width:100%;display:block;}
@@ -409,11 +291,6 @@ Links Modify
 /*---------------------------------------------------------- 
 Games main
 ------------------------------------------------------------ */	
-@media screen and (max-width: 1279px) { 
-	#leftnav_position_games_main{ margin-top: 0;}
-	#games_main{margin-top: 0;}
-}
-
 @media screen and (max-width: 1050px) { 
 .games_main_row{width:90%; }
 .games_main_text{width:40%;}
@@ -444,11 +321,6 @@ Games main
 /*---------------------------------------------------------- 
 Games list
 ------------------------------------------------------------ */	
-@media screen and (max-width: 1279px) { 
-	#quick_search_games_list{ margin-top: 0;}
-	#games_list	{margin-top: 0;}
-}
-
 @media screen and (max-width: 1174px) { 
  .info_td,.year_td,#info_th,#year_th{display:none;}
 }
@@ -472,9 +344,6 @@ Games detail
 }
 
 @media screen and (max-width: 1279px) { 
-	#games_detail{margin-top: 0;}
-	#leftnav_position_games_detail{margin-top: 0;}
-	#quick_search_games_detail{margin-top: 0;}
 	#gd_basic_game_info{width:100%; margin-bottom: 20px;}
 	#gd_other_features{display:none}
 	#gd_other_features_left{float:left; width:49%;}
@@ -501,25 +370,9 @@ Games detail
 /*---------------------------------------------------------- 
 Games comment
 ------------------------------------------------------------ */	
-@media screen and (max-width: 1279px) { 
-	#leftnav_position_games_comment{margin-top: 0;}
-	#quick_search_games_comment{margin-top: 0;}
-	#games_comment{margin-top: 0;}
-}
-
 @media screen and (max-width: 640px) { 
 	.gc_left_head{display:none;}
 	.gc_left{display:none;}
-}
-
-
-/*---------------------------------------------------------- 
-Games comment edit
------------------------------------------------------------- */	
-@media screen and (max-width: 1279px) { 
-	#leftnav_position_games_comment_edit{margin-top: 0;}
-	#quick_search_games_comment_edit{margin-top: 0;}
-	#games_comment_edit{margin-top: 0;}
 }
 
 /*---------------------------------------------------------- 
@@ -535,39 +388,9 @@ Games Upload
 	#gu_child_1, #gu_child_2{ width:100%;}
 }
 
-@media screen and (max-width: 480px) { 
-	#leftnav_position_game_upload{ margin-top: 20px; margin-bottom: 20px;}
-}
-
-
-/*---------------------------------------------------------- 
-Games screenshots add
------------------------------------------------------------- */
-@media screen and (max-width: 480px) { 
-	#leftnav_position_game_screenshot_add{ margin-bottom: 20px;}
-}
-
-/*---------------------------------------------------------- 
-Games boxscans add
------------------------------------------------------------- */
-@media screen and (max-width: 480px) { 
-	#leftnav_position_game_box_add{ margin-bottom: 20px;}
-}
-
-/*---------------------------------------------------------- 
-Games similar add
------------------------------------------------------------- */
-@media screen and (max-width: 480px) { 
-	#leftnav_position_game_similar_add{ margin-bottom: 20px;}
-}
-
 /*---------------------------------------------------------- 
 Games review main
 ------------------------------------------------------------ */
-@media screen and (max-width: 480px) { 
-	#leftnav_position_game_review{ margin-bottom: 20px;}
-}
-
 @media screen and (max-width: 500px) { 
 	#nrreviews_gr_th, .nrreviews_gr_td{ display: none;}
 }
@@ -585,27 +408,8 @@ Games review main
 }
 
 /*---------------------------------------------------------- 
-Games review add
------------------------------------------------------------- */
-@media screen and (max-width: 480px) { 
-	#leftnav_position_game_review_add{ margin-bottom: 20px;}
-}
-
-/*---------------------------------------------------------- 
-Games review edit
------------------------------------------------------------- */
-@media screen and (max-width: 480px) { 
-	#leftnav_position_game_review_edit{ margin-bottom: 20px;}
-}
-
-/*---------------------------------------------------------- 
 Games review preview
 ------------------------------------------------------------ */
-@media screen and (max-width: 480px) { 
-	#leftnav_position_game_review_preview{ margin-top: 20;}
-}
-
-
 @media screen and (max-width: 1199px) { 
 	.review_container {
 	  flex-direction: column; 
@@ -627,54 +431,8 @@ Games review preview
 }
 
 /*---------------------------------------------------------- 
-Games review list
------------------------------------------------------------- */
-@media screen and (max-width: 480px) { 
-	#leftnav_position_game_review_list{ margin-bottom: 20px;}
-}
-
-/*---------------------------------------------------------- 
-Games review submitted
------------------------------------------------------------- */
-@media screen and (max-width: 480px) { 
-	#leftnav_position_game_review_submitted{ margin-top: 20px;}
-}
-
-/*---------------------------------------------------------- 
-Games series main
------------------------------------------------------------- */
-@media screen and (max-width: 480px) { 
-	#leftnav_position_game_series_main{ margin-top: 20px;}
-}
-
-/*---------------------------------------------------------- 
-Games series editor
------------------------------------------------------------- */
-@media screen and (max-width: 480px) { 
-	#leftnav_position_game_series_edit{ margin-top: 20px;}
-}
-
-/*---------------------------------------------------------- 
-Games series add games
------------------------------------------------------------- */
-@media screen and (max-width: 480px) { 
-	#leftnav_position_game_series_add_games{ margin-top: 20px;}
-}
-
-/*---------------------------------------------------------- 
-Games music
------------------------------------------------------------- */
-@media screen and (max-width: 480px) { 
-	#leftnav_position_game_music{ margin-top: 20px;}
-}
-
-/*---------------------------------------------------------- 
 Games music list
 ------------------------------------------------------------ */
-@media screen and (max-width: 480px) { 
-	#leftnav_position_game_music_list{ margin-top: 20px;}
-}
-
 @media screen and (max-width: 550px) { 
 	#zaks_gm_th, .zaks_gm_td{ display: none;}
 }
@@ -686,39 +444,11 @@ Games music list
 	#year_gm_th, .year_gm_td{ display: none;}
 }
 
-/*---------------------------------------------------------- 
-Games music detail
------------------------------------------------------------- */
-@media screen and (max-width: 480px) { 
-	#leftnav_position_game_music_detail{ margin-top: 20px; margin-bottom: 20px;}
-}
-
-/*---------------------------------------------------------- 
-Games submissions
------------------------------------------------------------- */
-@media screen and (max-width: 480px) { 
-	#leftnav_position_game_submissions{ margin-top: 20px;}
-}
-
-/*---------------------------------------------------------- 
-News Add
------------------------------------------------------------- */
-@media screen and (max-width: 480px) { 
-	#leftnav_position_news_add{ margin-top: 20px;}
-}
-
-/*---------------------------------------------------------- 
-News Icon preview
------------------------------------------------------------- */
-@media screen and (max-width: 480px) { 
-	#leftnav_position_news_icon_preview{ margin-top: 20px;}
-}
 
 /*---------------------------------------------------------- 
 News approve
 ------------------------------------------------------------ */
 @media screen and (max-width: 480px) { 
-	#leftnav_position_news_approve{ margin-top: 20px;}
 	#news_approve_icon{display:none;}
 }
 
@@ -726,31 +456,13 @@ News approve
 News edit all
 ------------------------------------------------------------ */
 @media screen and (max-width: 480px) { 
-	#leftnav_position_news_edit_all{ margin-top: 20px;}
 	#news_approve_icon{display:none;}
 }
 
-/*---------------------------------------------------------- 
-News edit
------------------------------------------------------------- */
-@media screen and (max-width: 480px) { 
-	#leftnav_position_news_edit{ margin-top: 20px;} 
-}
-
-/*---------------------------------------------------------- 
-News add image
------------------------------------------------------------- */
-@media screen and (max-width: 480px) { 
-	#leftnav_position_news_add_image{ margin-top: 20px;} 
-}
 
 /*---------------------------------------------------------- 
 News edit image
 ------------------------------------------------------------ */
-@media screen and (max-width: 480px) { 
-	#leftnav_position_news_edit_image{ margin-top: 20px;}
-}
-
 @media screen and (max-width: 600px) { 
 	.news_images_name{ display:none;}
 	.news_images_container{text-align:center;}
@@ -759,10 +471,6 @@ News edit image
 /*---------------------------------------------------------- 
 Company Main
 ------------------------------------------------------------ */
-@media screen and (max-width: 480px) { 
-	#leftnav_position_company_main{ margin-top: 20px;}
-}
-
 @media screen and (max-width: 1549px) { 
 	.main_company_container {
 	  flex-direction: column; 
@@ -781,95 +489,23 @@ Company Main
 }
 
 /*---------------------------------------------------------- 
-Company edit
------------------------------------------------------------- */
-@media screen and (max-width: 480px) { 
-	#leftnav_position_company_edit{ margin-top: 20px;}
-}
-
-/*---------------------------------------------------------- 
-Company logos
------------------------------------------------------------- */
-@media screen and (max-width: 480px) { 
-	#leftnav_position_company_logos{ margin-top: 20px;}
-}
-
-/*---------------------------------------------------------- 
-Individuals Main
------------------------------------------------------------- */
-@media screen and (max-width: 480px) { 
-	#leftnav_position_individuals_main{ margin-top: 20px; margin-bottom: 20px;}
-}
-
-/*---------------------------------------------------------- 
-Individuals edit
------------------------------------------------------------- */
-@media screen and (max-width: 480px) { 
-	#leftnav_position_individuals_edit{ margin-top: 20px;}
-}
-
-/*---------------------------------------------------------- 
-Author types
------------------------------------------------------------- */
-@media screen and (max-width: 480px) { 
-	#leftnav_position_author_types{ margin-top: 20px;}
-}
-
-/*---------------------------------------------------------- 
 Interviews main
 ------------------------------------------------------------ */
 @media screen and (max-width: 480px) { 
-	#leftnav_position_interviews_main{ margin-top: 20px;}
 	.interviews_main_photo{display:none;}
-}
-
-/*---------------------------------------------------------- 
-Interviews edit
------------------------------------------------------------- */
-@media screen and (max-width: 480px) { 
-	#leftnav_position_interviews_edit{ margin-top: 20px;}
 }
 
 /*---------------------------------------------------------- 
 Interviews preview
 ------------------------------------------------------------ */
-@media screen and (max-width: 480px) { 
-	#leftnav_position_interviews_preview{ margin-top: 20px;}
-}
-
 @media screen and (max-width: 650px) { 
 	#interview_preview_photo{display:none;}
-}
-
-/*---------------------------------------------------------- 
-Interviews add
------------------------------------------------------------- */
-@media screen and (max-width: 480px) { 
-	#leftnav_position_interviews_add{ margin-top: 20px;}
-}
-
-/*---------------------------------------------------------- 
-Interviews add screenshots
------------------------------------------------------------- */
-@media screen and (max-width: 480px) { 
-	#leftnav_position_interviews_add_screenshot{ margin-top: 20px;}
-}
-
-/*---------------------------------------------------------- 
-Interviews help
------------------------------------------------------------- */
-@media screen and (max-width: 480px) { 
-	#leftnav_position_interviews_help{ margin-top: 20px;}
 }
 
 
 /*---------------------------------------------------------- 
 Admin - DB updates
 ------------------------------------------------------------ */	
-@media screen and (max-width: 480px) { 
-	#left_nav_position_db_updates{ margin-top: 20px;}
-}
-
 @media screen and (max-width: 500px) { 
 	#td_db_result, #th_db_result,#th_db_state,#td_db_state,
 	#td_db_id,#th_db_id,#th_db_exe,#td_db_exe{display:none;}
@@ -891,10 +527,6 @@ Admin - DB updates
 /*---------------------------------------------------------- 
 Admin - Change log
 ------------------------------------------------------------ */	
-@media screen and (max-width: 480px) { 
-	#leftnav_position_change_log{ margin-top: 20px;}
-}
-
 @media screen and (max-width: 450px) { 
 	#log_subsection_th, #log_date_th, .log_subsection_td, .log_date_td{display:none;}
 }

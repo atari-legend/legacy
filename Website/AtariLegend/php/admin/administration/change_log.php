@@ -314,9 +314,6 @@ $smarty->assign('links',
 
 $smarty->assign("user_id",$_SESSION['user_id']);
 
-$smarty->assign('quick_search_games', 'quick_search_change_log');
-$smarty->assign('left_nav', 'leftnav_position_change_log');
-
 //Send all smarty variables to the templates
 $smarty->display("file:".$cpanel_template_folder."change_log.html");
 

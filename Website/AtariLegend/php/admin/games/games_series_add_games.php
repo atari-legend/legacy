@@ -198,9 +198,6 @@ $smarty->assign('az_value', $az_value);
 $smarty->assign('az_output', $az_output);
 $smarty->assign('mySelect', 'num');
 
-$smarty->assign('quick_search_games', 'quick_search_game_series_add_games');
-$smarty->assign('left_nav', 'leftnav_position_game_series_add_games');
-
 //Send all smarty variables to the templates
 $smarty->display("file:".$cpanel_template_folder."games_series_add_games.html");
 ?>

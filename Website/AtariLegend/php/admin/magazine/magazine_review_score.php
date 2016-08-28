@@ -58,9 +58,6 @@ $sql_game = $mysqli->query("SELECT * FROM magazine_game
 		  'magazine_game_id' => $fetch_game['magazine_game_id']));	
 }
 
-$smarty->assign('quick_search_games', 'quick_search_magazine_review_score');
-$smarty->assign('left_nav', 'leftnav_position_magazine_review_score');
-
 $sql_game_name = $mysqli->query("SELECT * FROM game 
 				 WHERE game_id='$game_id'");
 while ($fetch_game_name = $sql_game_name->fetch_array(MYSQLI_BOTH)) 

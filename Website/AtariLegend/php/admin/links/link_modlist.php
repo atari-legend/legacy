@@ -95,9 +95,6 @@ while  ($rowlink = $LINKSQL->fetch_array(MYSQLI_BOTH))
 				  'website_imgext' => $rowlink['website_imgext']));
 }
 
-$smarty->assign('left_nav', 'leftnav_position_linkmodlist');
-$smarty->assign('quick_search_games', 'quick_search_games_linkmodlist');	
-
 //Send all smarty variables to the templates
 $smarty->display("file:".$cpanel_template_folder."link_modlist.html");
 ?>

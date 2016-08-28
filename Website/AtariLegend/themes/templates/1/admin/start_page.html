@@ -13,7 +13,7 @@
 {extends file='1/admin/frontpage.html'}
 {block name=main_tile}
 {block name=main_stats}	
-<div class="standard_tile" id="{$main_stats}">
+<div class="standard_tile">
 	<h1>MAIN STATS</h1>
 	<div class="standard_tile_line"></div>
 	<div class="standard_tile_text">
@@ -60,6 +60,7 @@
 		</div>
 	</div>
 </div>
+<br>
 {/block}
 
 {block name=welcome}
@@ -101,7 +102,6 @@
 					<td class="standard_table_center">Your <a href="../../admin/user/user_detail.php?user_id_selected={$users.user_id}" class="standard_tile_link_cpanel">detail page</a></td>
 				</tr>
 				</table>
-
 			</div>			
 		</div>
 	<div class="standard_tile_line"></div>

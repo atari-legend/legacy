@@ -95,9 +95,6 @@ This is the game box main page
 	if (empty($back)) {$back="";}	
 	$smarty->assign('nr_front', $front);
 	$smarty->assign('nr_back', $back);
-	
-	$smarty->assign('quick_search_games', 'quick_search_game_box_add');
-	$smarty->assign('left_nav', 'leftnav_position_game_box_add');
 
 	//Send all smarty variables to the templates
 	$smarty->display("file:".$cpanel_template_folder."games_box.html");

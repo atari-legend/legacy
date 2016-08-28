@@ -9,10 +9,6 @@
 /*---------------------------------------------------------- 
 Games main
 ------------------------------------------------------------ */			
-#quick_search_games_main{margin-top: 0; margin-bottom: 30px; float: left;}
-#games_main{ margin-top: 0; margin-bottom: 30px; float: left;}
-#leftnav_position_games_main{ margin-top: 0; margin-bottom: 30px; float: left;}
-
 .games_main_text{width:25%;display:table-cell;font-weight:bold;}
 .games_main_input{width:75%;display:table-cell;}
 .games_main_row{display:table;width:75%;margin-left:auto;}
@@ -51,10 +47,6 @@ Games main
 /*---------------------------------------------------------- 
 Games list
 ------------------------------------------------------------ */	
-#games_list{margin-top: 0; margin-bottom: 30px; float: left;}
-#quick_search_games_list{margin-top: 0; margin-bottom: 00px; float: left;}
-#leftnav_position_games_list{margin-top: 0; margin-bottom: 30px; float: left;}
-
 #game_th{width:40%;text-align: left;}
 #pub_th,#dev_th{width:20%;text-align: left;}
 #year_th,#info_th{width:10%;text-align: left;}
@@ -85,9 +77,7 @@ Games list
 /*---------------------------------------------------------- 
 Games detail
 ------------------------------------------------------------ */	
-#games_detail{margin-top: 0; margin-bottom: 30px; float: left;}
-#quick_search_games_detail{margin-top: 0; margin-bottom: 00px; float: left;}
-#leftnav_position_games_detail{margin-top: 0; margin-bottom: 30px; float: left;}
+#games_detail{float: left;}
 
 #gd_left{width: 32%; float:left;}
 #gd_center { width: 32%; float:left; margin-left: 2%;}
@@ -128,10 +118,6 @@ Games detail
 /*---------------------------------------------------------- 
 Games comment
 ------------------------------------------------------------ */	
-#quick_search_games_comment{margin-top: 0; margin-bottom: 30px; float: left;}
-#leftnav_position_games_comment{margin-top: 0; margin-bottom: 30px; float: left;}
-#games_comment{margin-top: 0; margin-bottom: 30px; float: left;}
-
 .gc_table_list {
 	width: 100%;
 	border: solid 1px #b2b2b2; 
@@ -165,21 +151,12 @@ Games comment
 /*---------------------------------------------------------- 
 Games comment edit
 ------------------------------------------------------------ */	
-#quick_search_games_comment_edit{margin-top: 0; margin-bottom: 0px; float: left;}
-#leftnav_position_games_comment_edit{margin-top: 0; margin-bottom: 30px; float: left;}
-#games_comment_edit{margin-top: 0; margin-bottom: 30px; float: left;}
-
 #gce_button,#gce_button2{display:inline;}
-
 #gce_area { width: 100%;}
 
 /*---------------------------------------------------------- 
 Games upload
 ------------------------------------------------------------ */	
-#quick_search_game_upload{margin-top: 0; margin-bottom: 0px; float: left;}
-#game_upload{margin-top: 0; margin-bottom: 20px; float: left;}
-#leftnav_position_game_upload{margin-top: 0; margin-bottom: 20px; float: left;}
-
 .game_upload_container{
   display: flex; 
  }
@@ -194,33 +171,8 @@ Games upload
 }
 
 /*---------------------------------------------------------- 
-Games screenshots add
------------------------------------------------------------- */	
-#games_screenshot_add{margin-top: 0; margin-bottom: 20px; float: left;}
-#quick_search_game_screenshot_add{margin-top: 0; margin-bottom: 20px; float: left;}
-#leftnav_position_game_screenshot_add{margin-top: 0; margin-bottom: 20px; float: left;}
-
-/*---------------------------------------------------------- 
-Games boxscans add
------------------------------------------------------------- */	
-#games_boxscan{margin-top: 0; margin-bottom: 20px; float: left;}
-#quick_search_game_box_add{margin-top: 0; margin-bottom: 20px; float: left;}
-#leftnav_position_game_box_add{margin-top: 0; margin-bottom: 20px; float: left;}
-
-/*---------------------------------------------------------- 
-Games similar add
------------------------------------------------------------- */	
-#games_similar{margin-top: 0; margin-bottom: 20px; float: left;}
-#quick_search_game_similar_add{margin-top: 0; margin-bottom: 20px; float: left;}
-#leftnav_position_game_similar_add{margin-top: 0; margin-bottom: 20px; float: left;}
-
-/*---------------------------------------------------------- 
 Games review main
 ------------------------------------------------------------ */	
-#games_review{ margin-top: 0; margin-bottom: 20px; float: left;}
-#quick_search_game_review{ margin-top: 0; margin-bottom: 20px; float: left;}
-#leftnav_position_game_review{ margin-top: 0; margin-bottom: 20px; float: left;}
-
 #gamename_gr_th{width:35%; text-align: left;}
 #username_gr_th,#gamepub_gr_th, #reviewdate_gr_th{width:20%; text-align: left;}
 #nrreviews_gr_th{width:5%; text-align: left;}
@@ -238,24 +190,10 @@ Games review add
 #game_review_screenshot_text { @extend .standard_tile_input_area;
 							width: 75%; height: 75px;}
 							
-#games_review_add{ margin-top: 0; margin-bottom: 20px; float: left;}
-#quick_search_game_review_add{ margin-top: 0; margin-bottom: 20px; float: left;}
-#leftnav_position_game_review_add{ margin-top: 0; margin-bottom: 20px; float: left;}
-
-/*---------------------------------------------------------- 
-Games review edit
------------------------------------------------------------- */						
-#games_review_edit{ margin-top: 0; margin-bottom: 20px; float: left;}
-#quick_search_game_review_edit{ margin-top: 0; margin-bottom: 20px; float: left;}
-#leftnav_position_game_review_edit{ margin-top: 0; margin-bottom: 20px; float: left;}
 
 /*---------------------------------------------------------- 
 Games review preview
 ------------------------------------------------------------ */	
-#games_review_preview{ margin-top: 0; margin-bottom: 20px; float: left;}
-#quick_search_game_review_preview{ margin-top: 0; margin-bottom: 20px; float: left;}
-#leftnav_position_game_review_preview{ margin-top: 0; margin-bottom: 20px; float: left;}
-
 .review_container {
   display: flex;
   align-items: flex-start; 
@@ -271,54 +209,8 @@ Games review preview
 .review_screenshot_order{width:170px;margin:auto;font-size:9pt;}
 
 /*---------------------------------------------------------- 
-Games review list
------------------------------------------------------------- */						
-#games_review_list{ margin-top: 0; margin-bottom: 20px; float: left;}
-#quick_search_game_review_list{ margin-top: 0; margin-bottom: 20px; float: left;}
-#leftnav_position_game_review_list{ margin-top: 0; margin-bottom: 20px; float: left;}
-
-/*---------------------------------------------------------- 
-Games review submitted
------------------------------------------------------------- */							
-#games_review_submitted{margin-top: 0; margin-bottom: 20px; float: left;}
-#quick_search_game_review_submitted{margin-top: 0; margin-bottom: 20px; float: left;}
-#leftnav_position_game_review_submitted{margin-top: 0; margin-bottom: 20px; float: left;}
-
-/*---------------------------------------------------------- 
-Games series main
------------------------------------------------------------- */							
-#games_series_main{margin-top: 0; margin-bottom: 20px; float: left;}
-#quick_search_game_series_main{margin-top: 0; margin-bottom: 20px; float: left;}
-#leftnav_position_game_series_main{margin-top: 0; margin-bottom: 20px; float: left;}
-
-/*---------------------------------------------------------- 
-Games series editor
------------------------------------------------------------- */							
-#games_series_edit{margin-top: 0; margin-bottom: 20px; float: left;}
-#quick_search_game_series_edit{margin-top: 0; margin-bottom: 20px; float: left;}
-#leftnav_position_game_series_edit{margin-top: 0; margin-bottom: 20px; float: left;}
-
-/*---------------------------------------------------------- 
-Games series add games
------------------------------------------------------------- */							
-#games_series_add_games{margin-top: 0; margin-bottom: 20px; float: left;}
-#quick_search_game_series_add_games{margin-top: 0; margin-bottom: 20px; float: left;}
-#leftnav_position_game_series_add_games{margin-top: 0; margin-bottom: 20px; float: left;}
-
-/*---------------------------------------------------------- 
-Games music
------------------------------------------------------------- */							
-#games_music{margin-top: 0; margin-bottom: 20px; float: left;}
-#quick_search_game_music{margin-top: 0; margin-bottom: 20px; float: left;}
-#leftnav_position_game_music{margin-top: 0; margin-bottom: 20px; float: left;}
-
-/*---------------------------------------------------------- 
 Games music list
 ------------------------------------------------------------ */	
-#games_music_list{margin-top: 0; margin-bottom: 20px; float: left;}
-#quick_search_game_music_list{margin-top: 0; margin-bottom: 20px; float: left;}
-#leftnav_position_game_music_list{margin-top: 0; margin-bottom: 20px; float: left;}
-
 #game_gm_th{width:50%; text-align: left;}
 #pub_gm_th{width:25%; text-align: left;}
 #year_gm_th{width:15%; text-align: left;}
@@ -328,17 +220,3 @@ Games music list
 .pub_gm_td{width:25%; padding-left: 2px;}
 .year_gm_td{width:15%; padding-left: 2px;}
 .zaks_gm_td{width:10%; padding-left: 2px;}
-
-/*---------------------------------------------------------- 
-Games music detail
------------------------------------------------------------- */	
-#games_music_detail{margin-top: 0; margin-bottom: 20px; float: left;}
-#quick_search_game_music_detail{margin-top: 0; margin-bottom: 20px; float: left;}
-#leftnav_position_game_music_detail{margin-top: 0; margin-bottom: 20px; float: left;}
-
-/*---------------------------------------------------------- 
-Games submissions
------------------------------------------------------------- */	
-#games_submissions{margin-top: 0; margin-bottom: 20px; float: left;}
-#quick_search_game_submissions{margin-top: 0; margin-bottom: 20px; float: left;}
-#leftnav_position_game_submissions{margin-top: 0; margin-bottom: 20px; float: left;}

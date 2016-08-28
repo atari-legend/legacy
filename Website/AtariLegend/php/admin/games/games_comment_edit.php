@@ -50,10 +50,7 @@ $date = convert_timestamp($query_comment['timestamp']);
 			  'game_user_comments_id' => $game_user_comments_id,
 			  'c_counter' => $c_counter,
 			  'comment_id' => $query_comment['comment_id'],
-			  'v_counter' => $v_counter));
-
-$smarty->assign('quick_search_games', 'quick_search_games_comment_edit');
-$smarty->assign('left_nav', 'leftnav_position_games_comment_edit');			  
+			  'v_counter' => $v_counter)); 
 			  
 //Send all smarty variables to the templates
 $smarty->display("file:".$cpanel_template_folder."games_comment_edit.html");

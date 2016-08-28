@@ -103,9 +103,6 @@ while ($screenshots = $sql_screenshots->fetch_array(MYSQLI_BOTH))
 	$count=$count+1;
 }
 
-$smarty->assign('quick_search_games', 'quick_search_games_interviews_edit');
-$smarty->assign('left_nav', 'leftnav_position_interviews_edit');
-
 $smarty->assign("user_id",$_SESSION['user_id']);
 
 //Send all smarty variables to the templates

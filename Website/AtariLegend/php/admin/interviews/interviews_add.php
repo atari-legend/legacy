@@ -83,10 +83,7 @@ while ( $authors=$sql_author->fetch_array(MYSQLI_BOTH) )
 	$smarty->append('authors',
 	    	 array('user_id' => $authors['user_id'],
 				   'user_name' => $authors['userid']));
-}		
-
-$smarty->assign('quick_search_games', 'quick_search_games_interviews_add');
-$smarty->assign('left_nav', 'leftnav_position_interviews_add');		   
+}		   
 
 $smarty->assign("user_id",$_SESSION['user_id']);
 

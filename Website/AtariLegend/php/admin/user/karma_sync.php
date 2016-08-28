@@ -73,7 +73,7 @@ $sql_user = $mysqli->query("SELECT user_id,userid,karma FROM users");
 	$sql_gamereview = $mysqli->query("SELECT * FROM review_main
 					LEFT JOIN review_game ON (review_main.review_id = review_game.review_id)
 					LEFT JOIN game ON ( review_game.game_id = game.game_id )
-					WHERE review_main.member_id = $user_id");
+					WHERE review_main.user_id = $user_id");
 	
 	$nr_gamereviews = $sql_gamereview->num_rows;
 	mysqli_free_result($sql_gamereview);
@@ -94,7 +94,7 @@ $sql_user = $mysqli->query("SELECT user_id,userid,karma FROM users");
 	mysqli_free_result($sql_submissions);
 	
 	// Submitted links
-	$sql_links = $mysqli->query("SELECT * FROM website WHERE website_user_sub = $user_id");
+	$sql_links = $mysqli->query("SELECT * FROM website WHERE user_id = $user_id");
 	
 	$nr_links = $sql_links->num_rows;
 	mysqli_free_result($sql_links);
@@ -129,9 +129,6 @@ $sql_user = $mysqli->query("SELECT user_id,userid,karma FROM users");
 					'karma_value' => $user_info['karma']));
 	
 	}
-
-$smarty->assign('left_nav', 'leftnav_position_karma');	
-$smarty->assign('quick_search_games', 'quick_search_games_position_karma');	
 	
 //Send all smarty variables to the templates
 $smarty->display("file:".$cpanel_template_folder."user_karmasync.html");

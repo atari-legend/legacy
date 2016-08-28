@@ -25,13 +25,10 @@ This is the game music main page
 ************************************************************************************************
 */
 
-	$smarty->assign('quick_search_games', 'quick_search_game_music');
-	$smarty->assign('left_nav', 'leftnav_position_game_music');
+//Send all smarty variables to the templates
+$smarty->display("file:".$cpanel_template_folder."games_music.html");
 
-	//Send all smarty variables to the templates
-	$smarty->display("file:".$cpanel_template_folder."games_music.html");
-
-	//close the connection
-	mysqli_close($mysqli);
+//close the connection
+mysqli_close($mysqli);
 
 ?>

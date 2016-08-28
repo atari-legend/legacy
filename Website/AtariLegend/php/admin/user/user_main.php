@@ -57,10 +57,6 @@ foreach ($stack as $value) {
 $query_number = $mysqli->query("SELECT email FROM users") or die ("Couldn't get the total number of users");
 $v_rows = $query_number->num_rows;
 $smarty->assign('nr_users', $v_rows);
-
-$smarty->assign('left_nav', 'leftnav_position_usermain');
-$smarty->assign('quick_search_games', 'quick_search_position_usermain');
-$smarty->assign('main_stats', 'main_stats_position_usermain');			
 		
 //Send all smarty variables to the templates
 $smarty->display("file:".$cpanel_template_folder."user_main.html");

@@ -55,12 +55,8 @@ include("../../includes/admin.php");
 							  'user_aim' => $query_users['user_aim']));
 	}
 	
-$smarty->assign('left_nav', 'leftnav_position_userdetails');
-$smarty->assign('quick_search_games', 'quick_search_games_position_userdetails');	
-
 //Send all smarty variables to the templates
 $smarty->display("file:".$cpanel_template_folder."user_detail.html");
-
 
 //close the connection
 mysqli_close($mysqli);

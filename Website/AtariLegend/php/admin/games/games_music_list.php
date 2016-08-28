@@ -113,9 +113,6 @@ if (isset($action) and $action == 'search')
 				$smarty->assign('querytime', $totaltime1);
 				$smarty->assign('nr_of_entries', $i);
 				
-				$smarty->assign('quick_search_games', 'quick_search_game_music_list');
-				$smarty->assign('left_nav', 'leftnav_position_game_music_list');
-
 				//Send all smarty variables to the templates
 				$smarty->display("file:".$cpanel_template_folder."games_music_list.html");
 

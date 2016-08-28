@@ -84,9 +84,6 @@ while  ($query_series_link = $sql_series_link->fetch_array(MYSQLI_BOTH))
 			  'year' => $query_series_link['game_year']));
 }
 
-$smarty->assign('quick_search_games', 'quick_search_game_series_edit');
-$smarty->assign('left_nav', 'leftnav_position_game_series_edit');
-
 //Send all smarty variables to the templates
 $smarty->display("file:".$cpanel_template_folder."games_series_editor.html");
 ?>

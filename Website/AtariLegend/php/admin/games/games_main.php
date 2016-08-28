@@ -35,9 +35,6 @@ if (isset ($_SESSION['edit_message']))
 	$smarty->assign("message",$_SESSION['edit_message']);
 }
 
-$smarty->assign('quick_search_games', 'quick_search_games_main');
-$smarty->assign('left_nav', 'leftnav_position_games_main');
-
 //Send all smarty variables to the templates
 $smarty->display("file:".$cpanel_template_folder."games_main.html");
 

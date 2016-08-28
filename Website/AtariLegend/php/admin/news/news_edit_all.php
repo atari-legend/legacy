@@ -92,9 +92,6 @@ $smarty->assign('links',
 
 $smarty->assign("user_id",$_SESSION['user_id']);
 
-$smarty->assign('quick_search_games', 'quick_search_news_edit_all');
-$smarty->assign('left_nav', 'leftnav_position_news_edit_all');
-
 //Send all smarty variables to the templates
 $smarty->display("file:".$cpanel_template_folder."news_edit_all.html");
 

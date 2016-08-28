@@ -85,9 +85,6 @@ while ($rowlinkcat = $RESULT->fetch_array(MYSQLI_BOTH))
 						  'selected' => $sel));
 } 
 
-$smarty->assign('left_nav', 'leftnav_position_linkmod');
-$smarty->assign('quick_search_games', 'quick_search_games_position_linkmod');
-
 //Send all smarty variables to the templates
 $smarty->display("file:".$cpanel_template_folder."link_mod.html");
 
