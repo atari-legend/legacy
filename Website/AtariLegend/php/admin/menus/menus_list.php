@@ -27,14 +27,18 @@ $start1=gettimeofday();
 list($start2, $start3) = explode(":", exec('date +%N:%S'));
 				
 		//In all cases we search we start searching through the menu_set table
-		//first
+		//first. We look for menus released by crews/individuals
 		$sql_menus = "SELECT menu_set.menu_sets_id,
 						menu_set.menu_sets_name,
 						crew.crew_id,
-						crew.crew_name
+						crew.crew_name,
+						individuals.ind_id,
+						individuals.ind_name
 						FROM menu_set 
 						LEFT JOIN crew_menu_prod ON (menu_set.menu_sets_id = crew_menu_prod.menu_sets_id)
 						LEFT JOIN crew ON (crew_menu_prod.crew_id = crew.crew_id)
+						LEFT JOIN ind_menu_prod ON (menu_set.menu_sets_id = ind_menu_prod.menu_sets_id)
+						LEFT JOIN individuals ON (ind_menu_prod.ind_id = individuals.ind_id)
 						ORDER BY menu_sets_name ASC";
 		
 		$result_menus= $mysqli->query($sql_menus);
@@ -57,6 +61,8 @@ list($start2, $start3) = explode(":", exec('date +%N:%S'));
 						   'menu_sets_name' => $row['menu_sets_name'],
 						   'crew_id' => $row['crew_id'],
 						   'crew_name' => $row['crew_name'],
+						   'ind_id' => $row['ind_id'],
+						   'ind_name' => $row['ind_name'],
 						   'numbermenus' => $array['count']));	
 				}	
 				

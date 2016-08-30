@@ -1,40 +1,40 @@
 {* Crew browse for the crew pick list *}
 {if isset($smarty_action) and $smarty_action == "crew_list"}
-		<select name="crew_id" id="CrewList" size="5" style="width:200px;">
-				<option value="" selected>-</option>
-						{foreach from=$crew item=line}
-							<option value="{$line.crew_id}">{$line.crew_name}</option>
-						{/foreach}
-		</select>
+	<select name="crew_id" id="quick_search_pub_select">
+		<option value="" selected>-</option>
+		{foreach from=$crew item=line}
+			<option value="{$line.crew_id}">{$line.crew_name}</option>
+		{/foreach}
+	</select>
 {/if}
+
 {* The Add new menu disk box *}
 {if isset($smarty_action) and $smarty_action == "add_new_disk_box"}
-		<br/>
-		<hr/>
-		<div class="quicklinkbox" style="float:left;">
-		<form action="../menus/db_menu_disk.php" method="post" name="post" id="menu_disk_add">
-		<b>Add new Menu disk</b><br/><br/>
-		
-		<div style="display:inline-block;width:100px;">Disk number: </div><input type="text" name="menu_disk_number" value="" style="margin:5px;width:30px;"><br/>
-		<div style="display:inline-block;width:100px;">Disk letter: </div><input type="text" name="menu_disk_letter" value="" style="margin:5px;width:30px;"><br/>
-		<div style="display:inline-block;width:100px;">Disk part: </div><input type="text" name="menu_disk_part" value="" style="margin:5px;width:30px;"><br/>
-		<div style="display:inline-block;width:100px;">Disk version: </div><input type="text" name="menu_disk_version" value="" style="margin:5px;width:30px;"><br/>
-		<input type="hidden" name="menu_sets_id" value="{$menu_sets_id}">
-		<input type="hidden" name="action" value="add_new_menu_disk">
-		<input type="submit" value="Add new"> <button type="button" onclick="CloseaddNewdisk()" style="margin-left:5px;">Cancel</button>
-		</form>
-		</div>
-		
-		<div class="quicklinkbox" style="float:left;border-left: 1px solid #B8C1CA; height:100%;">
-		<b>Add multiple new Menu disks</b><br/><br/>	<br/>
-		<form action="../menus/db_menu_disk.php" method="post" name="post" id="menu_multi_disk_add">
-		<div style="display:inline-block;width:100px;">First number: </div><input type="text" name="first_disk" value="" style="margin:5px;width:30px;"><br/>
-		<div style="display:inline-block;width:100px;">Last number: </div><input type="text" name="last_disk" value="" style="margin:5px;width:30px;"><br/>
-		<input type="hidden" name="menu_sets_id" value="{$menu_sets_id}">
-		<input type="hidden" name="action" value="multi_add_new_menu_disk">
-		Here you can add a ton of menus in one go.		<br/><br/>
-		<input type="submit" value="Add new"> <button type="button" onclick="CloseaddNewdisk()" style="margin-left:5px;">Cancel</button>
-		</form>
-		</div>
-		
+	<br/>
+	<hr/>
+	<div class="quicklinkbox" style="float:left;">
+	<form action="../menus/db_menu_disk.php" method="post" name="post" id="menu_disk_add">
+	<b>Add new Menu disk</b><br/><br/>
+	
+	<div style="display:inline-block;width:100px;">Disk number: </div><input type="text" name="menu_disk_number" value="" style="margin:5px;width:30px;"><br/>
+	<div style="display:inline-block;width:100px;">Disk letter: </div><input type="text" name="menu_disk_letter" value="" style="margin:5px;width:30px;"><br/>
+	<div style="display:inline-block;width:100px;">Disk part: </div><input type="text" name="menu_disk_part" value="" style="margin:5px;width:30px;"><br/>
+	<div style="display:inline-block;width:100px;">Disk version: </div><input type="text" name="menu_disk_version" value="" style="margin:5px;width:30px;"><br/>
+	<input type="hidden" name="menu_sets_id" value="{$menu_sets_id}">
+	<input type="hidden" name="action" value="add_new_menu_disk">
+	<input type="submit" value="Add new"> <button type="button" onclick="CloseaddNewdisk()" style="margin-left:5px;">Cancel</button>
+	</form>
+	</div>
+	
+	<div class="quicklinkbox" style="float:left;border-left: 1px solid #B8C1CA; height:100%;">
+	<b>Add multiple new Menu disks</b><br/><br/>	<br/>
+	<form action="../menus/db_menu_disk.php" method="post" name="post" id="menu_multi_disk_add">
+	<div style="display:inline-block;width:100px;">First number: </div><input type="text" name="first_disk" value="" style="margin:5px;width:30px;"><br/>
+	<div style="display:inline-block;width:100px;">Last number: </div><input type="text" name="last_disk" value="" style="margin:5px;width:30px;"><br/>
+	<input type="hidden" name="menu_sets_id" value="{$menu_sets_id}">
+	<input type="hidden" name="action" value="multi_add_new_menu_disk">
+	Here you can add a ton of menus in one go.		<br/><br/>
+	<input type="submit" value="Add new"> <button type="button" onclick="CloseaddNewdisk()" style="margin-left:5px;">Cancel</button>
+	</form>
+	</div>
 {/if}

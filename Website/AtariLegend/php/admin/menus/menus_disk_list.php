@@ -1,13 +1,13 @@
 <?php
 /***************************************************************************
-*                                menus_list.php
+*                                menus_disk_list.php
 *                            --------------------------
 *   begin                : June 05, 2015
 *   copyright            : (C) 2015 Atari Legend
 *   email                : admin@atarilegend.com
 *						   Created file - Silver Surfer
 *						
-* 	id : menus_list.php ,v 0.10 2016/08/26 ST Graveyard 23:22
+* 	id : menus_disk_list.php ,v 0.10 2016/08/26 ST Graveyard 23:22
 *			- AL 2.0
 *
 ***************************************************************************/
@@ -107,8 +107,7 @@ list($start2, $start3) = explode(":", exec('date +%N:%S'));
 					 	 	    'crew_name' => $crew_result['crew_name']));
 				}
 
-				//Get data for crew editor box, what crews are connected to this menu_set
-				
+				//Get data for crew editor box, what crews are connected to this menu_set	
 				$sql_crew = $mysqli->query("SELECT 
 						crew.crew_id,
 						crew.crew_name
@@ -140,9 +139,6 @@ list($start2, $start3) = explode(":", exec('date +%N:%S'));
 						   'menu_sets_name' => $row['menu_sets_name']));	
 				}
 				
-				
-				
-
 				// Create dropdown values a-z
 				$az_value = az_dropdown_value(0);
 				$az_output = az_dropdown_output(0);
