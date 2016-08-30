@@ -265,6 +265,33 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH))
 			$subsection_link = $section_link;
 		}
 	}
+	
+	//	the MENU SET SECTION
+	if ($log['section'] == 'Menu set')
+	{			
+		$section_link = ( "../menus/menus_disk_list.php" . '?menu_sets_id=' . $log['sub_section_id'] );
+	
+		if ($log['sub_section'] == 'Menu set' )
+		{
+			$subsection_link = ( "../menus/menus_disk_list.php" . '?menu_sets_id=' . $log['sub_section_id'] );
+		}
+		
+		if ($log['sub_section'] == 'Crew' )
+		{
+			$subsection_link = ""; //TO DO
+		}
+	}
+	
+	//	the CREW SECTION
+	if ($log['section'] == 'Crew')
+	{			
+		$section_link = ""; //TO DO
+		
+		if ($log['sub_section'] == 'Crew' )
+		{
+			$subsection_link = ""; //TO DO
+		}
+	}
 		
 		
 	$smarty->append('log',

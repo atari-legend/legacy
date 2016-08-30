@@ -7,6 +7,9 @@
 *   email                : silversurfer@atari-forum.com
 *   actual update        : re-creation of code from scratch into new file.
 *
+*	id : db_menu_disk.php, v 1.10 2016/08/29 STG
+*				- adding the change log
+*
 ***************************************************************************/
 
 // We are using the action var to separate all the queries.
@@ -20,12 +23,16 @@ include("../../includes/admin.php");
 
 if($action=="menu_set_new")
 {
-if(isset($menu_sets_name)) 
-{
-	$sql = $mysqli->query("INSERT INTO menu_set (menu_sets_name) VALUES ('$menu_sets_name')");  
-	mysqli_free_result($sql); 
-	$_SESSION['edit_message'] = "New Menu Series added";
-}
+	if(isset($menu_sets_name)) 
+	{
+		$sql = $mysqli->query("INSERT INTO menu_set (menu_sets_name) VALUES ('$menu_sets_name')");  
+		$new_menu_set_id = $mysqli->insert_id;
+		
+		create_log_entry('Menu set', $new_menu_set_id, 'Menu set', $new_menu_set_id, 'Insert', $_SESSION['user_id']);
+		
+		mysqli_free_result($sql); 
+		$_SESSION['edit_message'] = "New Menu Set added";
+	}
 
 header("Location: ../menus/menus_list.php");
 
@@ -111,7 +118,6 @@ header("Location: ../menus/menus_disk_list.php?menu_sets_id=$menu_sets_id");
 //****************************************************************************************
 // Edit menu_set name
 //**************************************************************************************** 
-
 if($action=="menu_set_name_update")
 {
 if(isset($menu_sets_id) and $menu_sets_name!=="") 
@@ -119,7 +125,10 @@ if(isset($menu_sets_id) and $menu_sets_name!=="")
 	$sql = $mysqli->query("UPDATE menu_set SET menu_sets_name='$menu_sets_name' 
 					    WHERE menu_sets_id='$menu_sets_id'");  
 	mysqli_free_result($sql); 
-	$_SESSION['edit_message'] = "Menu Series Name updated!";
+	
+	create_log_entry('Menu set', $menu_sets_id, 'Menu set', $menu_sets_id, 'Update', $_SESSION['user_id']);
+	
+	$_SESSION['edit_message'] = "Menu Set Name updated!";
 }
 header("Location: ../menus/menus_disk_list.php?menu_sets_id=$menu_sets_id");
 }
@@ -128,12 +137,14 @@ header("Location: ../menus/menus_disk_list.php?menu_sets_id=$menu_sets_id");
 //****************************************************************************************
 // Connect crew to menu set
 //**************************************************************************************** 
-
 if($action=="menu_set_crew_set")
 {
 if(isset($crew_id) and isset($menu_sets_id)) 
 {
 	$sql = $mysqli->query("INSERT INTO crew_menu_prod (crew_id,menu_sets_id) VALUES ('$crew_id','$menu_sets_id')");  
+	
+	create_log_entry('Menu set', $menu_sets_id, 'Crew', $crew_id, 'Insert', $_SESSION['user_id']);
+	
 	mysqli_free_result($sql); 
 }
 $_SESSION['edit_message'] = "Crew hooked to this Menu disk series";
@@ -144,12 +155,15 @@ header("Location: ../menus/menus_disk_list.php?menu_sets_id=$menu_sets_id");
 //****************************************************************************************
 // Quick add new crew
 //**************************************************************************************** 
-
 if($action=="menu_set_crew_add")
 {
 if(isset($new_crew_name) and isset($menu_sets_id)) 
 {
 	$sql = $mysqli->query("INSERT INTO crew (crew_name) VALUES ('$new_crew_name')");  
+	$new_crew_id = $mysqli->insert_id;
+	
+	create_log_entry('Crew', $new_crew_id, 'Crew', $new_crew_id, 'Insert', $_SESSION['user_id']);
+	
 	mysqli_free_result($sql); 
 }
 $_SESSION['edit_message'] = "$new_crew_name added to the crew database";
@@ -163,6 +177,7 @@ if($action=="delete_crew_from_menu_set")
 {
 if(isset($crew_id) and isset($menu_sets_id)) 
 {
+		create_log_entry('Menu set', $menu_sets_id, 'Crew', $crew_id, 'Delete', $_SESSION['user_id']);
 		$mysqli->query("DELETE FROM crew_menu_prod WHERE crew_id='$crew_id' AND menu_sets_id='$menu_sets_id'"); 
 }
 
@@ -174,7 +189,6 @@ header("Location: ../menus/menus_disk_list.php?menu_sets_id=$menu_sets_id");
 //****************************************************************************************
 // Add game to menu disk AJAX DB job
 //**************************************************************************************** 
-
 if(isset($action) and $action=="add_title_to_menu")
 {
 if(isset($software_id) and isset($menu_disk_id)) 
@@ -291,7 +305,6 @@ if(isset($software_id) and isset($menu_disk_id))
 //****************************************************************************************
 // DELETE TITLE FROM MENU DISK
 //**************************************************************************************** 
-
 if(isset($action) and $action=="delete_from_menu_disk")
 {
 

@@ -2642,6 +2642,61 @@ Change log
   width: 50%; }
 
 /* --> admin section */
+/*************************************************************/
+/**********************PICASSO SKIN****************************/
+/*************************************************************/
+/*************************************************************/
+/****************CPanel MENUS section css****************/
+/*************************************************************/
+/*---------------------------------------------------------- 
+Menus editor
+------------------------------------------------------------ */
+#menu_disk_set_th, #menu_crew_th, #menu_individual_th {
+  width: 30%;
+  text-align: left; }
+
+#nr_menus_th {
+  width: 10%;
+  text-align: left; }
+
+.menu_disk_set_td, .menu_crew_td, .menu_individual_td {
+  width: 30%;
+  padding-left: 2px; }
+
+.nr_menus_td {
+  width: 10%;
+  padding-left: 2px; }
+
+/*---------------------------------------------------------- 
+Menu set edit
+------------------------------------------------------------ */
+#menu_year_th {
+  width: 15%;
+  text-align: left; }
+
+#menu_state_th {
+  width: 25%;
+  text-align: right;
+  padding-right: 5px; }
+
+#menu_list_crew_th, #menu_disk_list_th {
+  width: 30%;
+  text-align: left; }
+
+.menu_list_crew_td, .menu_disk_list_td {
+  width: 30%;
+  padding-left: 2px; }
+
+.menu_year_td {
+  width: 15%;
+  padding-left: 2px; }
+
+.menu_state_td {
+  width: 25%;
+  padding-right: 5px;
+  text-align: right; }
+
+/* --> menus section */
 /*---------------------------------------------------------- 
  Media Queries Main & CPanel 
 ------------------------------------------------------------ */
@@ -3208,6 +3263,36 @@ Admin - Change log
     display: none; } }
 @media screen and (max-width: 1200px) {
   #log_sub_name_th, .log_subname_td {
+    display: none; } }
+/*---------------------------------------------------------- 
+Menu editor - Menu list
+------------------------------------------------------------ */
+@media screen and (max-width: 500px) {
+  #menu_crew_th, .menu_crew_td {
+    display: none; }
+
+  #menu_disk_set_th, .menu_disk_set_td {
+    text-align: center; } }
+@media screen and (max-width: 600px) {
+  #nr_menus_th, .nr_menus_td {
+    display: none; } }
+@media screen and (max-width: 1050px) {
+  #menu_individual_th, .menu_individual_td {
+    display: none; } }
+/*---------------------------------------------------------- 
+Menu set edit
+------------------------------------------------------------ */
+@media screen and (max-width: 400px) {
+  #menu_list_crew_th, .menu_list_crew_td {
+    display: none; }
+
+  #menu_disk_list_th, .menu_disk_list_td {
+    text-align: center; } }
+@media screen and (max-width: 500px) {
+  #menu_year_th, .menu_year_td {
+    display: none; } }
+@media screen and (max-width: 600px) {
+  #menu_state_th, .menu_state_td {
     display: none; } }
 /*---------------------------------------------------------- 
 General settings

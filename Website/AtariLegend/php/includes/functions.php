@@ -823,6 +823,47 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
 			$subsection_name = $section_name;
 		}
 	}
+	
+	//	Everything we do for the GAMES SECTION	
+	If ( $section == 'Menu set' )
+	{
+		//  get the menu set name
+			$query_menu_Set = "SELECT menu_sets_name FROM menu_set WHERE menu_sets_id = '$section_id'";
+			$result = $mysqli->query($query_menu_Set) or die("getting menu set name failed");
+			$query_data = $result->fetch_array(MYSQLI_BOTH);
+			$section_name = $query_data['menu_sets_name'];
+	
+	
+		If ( $subsection == 'Menu set' )
+		{
+			$subsection_name = $section_name;
+		}
+		
+		if ( $subsection == 'Crew' )
+		{
+			// get the name of the crew
+			$query_crew = "SELECT crew_name FROM crew WHERE crew_id = '$subsection_id'";
+			$result = $mysqli->query($query_crew) or die("getting crew name failed");
+			$query_data = $result->fetch_array(MYSQLI_BOTH);
+			$subsection_name = $query_data['crew_name'];
+		}
+		
+	}
+	
+	//	Everything we do for the CREW SECTION	
+	If ( $section == 'Crew' )
+	{
+		// get the name of the crew
+		$query_crew = "SELECT crew_name FROM crew WHERE crew_id = '$section_id'";
+		$result = $mysqli->query($query_crew) or die("getting crew name failed");
+		$query_data = $result->fetch_array(MYSQLI_BOTH);
+		$section_name = $query_data['crew_name'];
+		
+		If ( $subsection == 'Crew' )
+		{
+			$subsection_name = $section_name;
+		}
+	}
 				
 	$sql_log = $mysqli->query("INSERT INTO change_log (section, section_id, section_name, sub_section, sub_section_id, sub_section_name, user_id, action, timestamp) VALUES ('$section', '$section_id', '$section_name', '$subsection', '$subsection_id', '$subsection_name', '$user_id', '$action', '$log_time')") 
 								or die ("Couldn't insert change log into database");  

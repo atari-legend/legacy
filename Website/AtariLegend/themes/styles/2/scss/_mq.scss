@@ -552,6 +552,37 @@ Admin - Change log
 	#log_sub_name_th, .log_subname_td{display:none;}
 }
 
+/*---------------------------------------------------------- 
+Menu editor - Menu list
+------------------------------------------------------------ */	
+@media screen and (max-width: 500px) { 
+	#menu_crew_th, .menu_crew_td{display:none;}
+	#menu_disk_set_th, .menu_disk_set_td {text-align:center;}
+}
+
+@media screen and (max-width: 600px) { 
+	#nr_menus_th, .nr_menus_td{display:none;}
+}
+
+@media screen and (max-width: 1050px) { 
+	#menu_individual_th, .menu_individual_td{display:none;}
+}
+
+/*---------------------------------------------------------- 
+Menu set edit
+------------------------------------------------------------ */	
+@media screen and (max-width: 400px) { 
+	#menu_list_crew_th, .menu_list_crew_td{display:none;}
+	#menu_disk_list_th, .menu_disk_list_td{text-align:center;}
+}
+
+@media screen and (max-width: 500px) { 
+	#menu_year_th, .menu_year_td{display:none;}
+}
+
+@media screen and (max-width: 600px) { 
+	#menu_state_th, .menu_state_td{display:none;}
+}
 
 
 /*---------------------------------------------------------- 

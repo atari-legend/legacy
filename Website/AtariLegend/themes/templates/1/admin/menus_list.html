@@ -21,13 +21,13 @@ The main game page
 
 {block name=left_tile}
 <div class="standard_tile">
-	<h1>MENU SERIES</h1>
+	<h1>MENU SET</h1>
 	<div class="standard_tile_line"></div>
 	<div class="standard_list_entry">
 		<div class="standard_table_center">
 			<form action="../menus/db_menu_disk.php" method="post" name="post" id="menu_edit">
 				<br>
-				Add new Menu Series:
+				Add new Menu Set:
 				<br> 
 				<input type="text" name="menu_sets_name" value="" class="standard_tile_input_small">
 				<br>
@@ -54,22 +54,22 @@ The main game page
 		<br>
 		<table class="standard_table_list" id="game_list_table">
 			<tr>
-				<th style="width:40%;">Menu Disk Set</th>
-				<th style="width:30%;">Crew</th>
-				<th style="width:15%;">Start Year</th>
-				<th style="width:15%;">Nr of menu disks</th>
+				<th id="menu_disk_set_th">Menu Disk Set</th>
+				<th id="menu_crew_th">Crew</th>
+				<th id="menu_individual_th">Indvidual</th>
+				<th id="nr_menus_th">Nr</th>
 			</tr>
 			{foreach from=$menus item=line}
 				<tr>
-					<td style="width:40%;">{if $line.menu_sets_name != ''}<a href="../menus/menus_disk_list.php?menu_sets_id={$line.menu_sets_id}" class="standard_table_left">{$line.menu_sets_name}</a>{else}<i>n/a</i>{/if}</td>
-					<td style="width:30%;">{if $line.crew_name != ''}{$line.crew_name}{else}<i>n/a</i>{/if}</td>
-					<td style="width:15%;"><i>n/a</i></td>				
-					<td style="width:15%;">{if $line.numbermenus != ''}{$line.numbermenus}{else}<i>0</i>{/if}</td>
+					<td class="menu_disk_set_td">{if $line.menu_sets_name != ''}<a href="../menus/menus_disk_list.php?menu_sets_id={$line.menu_sets_id}" class="standard_table_left">{$line.menu_sets_name}</a>{else}<i>n/a</i>{/if}</td>
+					<td class="menu_crew_td">{if $line.crew_name != ''}{$line.crew_name}{else}<i>n/a</i>{/if}</td>
+					<td class="menu_individual_td">{if $line.ind_name != ''}{$line.ind_name}{else}<i>n/a</i>{/if}</td>	
+					<td class="nr_menus_td">{if $line.numbermenus != ''}{$line.numbermenus}{else}<i>0</i>{/if}</td>
 				</tr>
 			{/foreach}
 			<tr>
-				<td class="game_list_footer" colspan="4">
-					{if $nr_of_entries == 1}1 menus set found {else} {$nr_of_entries} menus sets found{/if} in {$querytime} sec
+				<td class="standard_table_left" colspan="4">
+					<br><b>{if $nr_of_entries == 1}1 menus set found {else} {$nr_of_entries} menus sets found{/if} in {$querytime} sec</b>
 				</td>
 			</tr>
 		</table>

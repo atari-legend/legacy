@@ -1,0 +1,27 @@
+/*************************************************************/	
+/**********************TOS SKIN****************************/
+/*************************************************************/ 
+
+/*************************************************************/	
+/****************CPanel MENUS section css****************/
+/*************************************************************/ 
+
+/*---------------------------------------------------------- 
+Menus editor
+------------------------------------------------------------ */
+#menu_disk_set_th,#menu_crew_th,#menu_individual_th{width:30%; text-align: left;}
+#nr_menus_th{width:10%; text-align: left;}
+
+.menu_disk_set_td,.menu_crew_td,.menu_individual_td{width:30%; padding-left: 2px;}
+.nr_menus_td{width:10%; padding-left: 2px;}
+
+/*---------------------------------------------------------- 
+Menu set edit
+------------------------------------------------------------ */
+#menu_year_th{width:15%; text-align: left;}
+#menu_state_th{width:25%; text-align: right; padding-right: 5px;}
+#menu_list_crew_th, #menu_disk_list_th{width:30%; text-align: left;}
+
+.menu_list_crew_td,.menu_disk_list_td{width:30%; padding-left: 2px;}
+.menu_year_td{width:15%; padding-left: 2px;}
+.menu_state_td{width:25%; padding-right: 5px; text-align: right; }
