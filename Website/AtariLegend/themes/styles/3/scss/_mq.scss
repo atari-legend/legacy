@@ -567,14 +567,22 @@ Menu set edit
 	#menu_disk_list_th, .menu_disk_list_td{text-align:center;}
 }
 
+@media screen and (max-width: 450px) { 
+	#menu_cred_th, .menu_cred_td{display:none;}
+}
+
 @media screen and (max-width: 500px) { 
 	#menu_year_th, .menu_year_td{display:none;}
 }
 
-@media screen and (max-width: 600px) { 
-	#menu_state_th, .menu_state_td{display:none;}
+@media screen and (max-width: 550px) { 
+	#menu_nick_th, #menu_update_th, .menu_nick_td, .menu_update_td,
+	#menu_state_th, .menu_state_td, #menu_gamedev_th, .menu_gamedev_td{display:none;}
 }
 
+@media screen and (max-width: 700px) { 
+	#menu_gameyear_th, #menu_gameinfo_th, .menu_gameyear_td, .menu_gameinfo_td{display:none;}
+}
 
 
 /*---------------------------------------------------------- 

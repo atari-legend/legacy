@@ -5,11 +5,11 @@
 *   begin                : Saturday, Sept 24, 2005
 *   copyright            : (C) 2003 Atari Legend
 *   email                : silversurfer@atari-forum.com
-*   actual update        : Creation from scratch for smarty usage
-						   
+*   actual update        : Creation from scratch for smarty usage				   
 *							
 *
-*   Id: games_series_main.php,v 0.2 2005/09/24 Silver Surfer
+*   Id: ajax_menus.php,v 0.2 2016/08/31 STG 19:55
+*			- Add logs
 *
 ***************************************************************************/
 

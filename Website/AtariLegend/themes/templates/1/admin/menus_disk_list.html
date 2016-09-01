@@ -216,7 +216,7 @@ function closeAddIntroCred(str) {
 
 function popAddGames(str) {
     if (str == "") {
-        document.getElementById("menu_detail_expand").innerHTML = "";
+        document.getElementById("menu_detail_expand_games").innerHTML = "";
         return;
     } else { 
         if (window.XMLHttpRequest) {
@@ -228,7 +228,7 @@ function popAddGames(str) {
         }
         xmlhttp.onreadystatechange = function() {
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                document.getElementById("menu_detail_expand").innerHTML = xmlhttp.responseText;
+                document.getElementById("menu_detail_expand_games").innerHTML = xmlhttp.responseText;
                 document.getElementById("gameto_menu_link").innerHTML = "<a onclick=\"closeAddGames("+str+")\" style=\"cursor: pointer;\" class=\"MAINNAV\">Add Game/Tool/Demo to menu</a>";
             }
         }
@@ -238,7 +238,7 @@ function popAddGames(str) {
 }
 
 function closeAddGames(str) {
-        document.getElementById("menu_detail_expand").innerHTML = "";
+        document.getElementById("menu_detail_expand_games").innerHTML = "";
         document.getElementById("gameto_menu_link").innerHTML = "<a onclick=\"popAddGames("+str+")\" style=\"cursor: pointer;\" class=\"MAINNAV\">Add Game/Tool/Demo to menu</a>";
         return;
 } 
@@ -589,7 +589,7 @@ function ChangeState(state_id,menu_disk_id) {
 			{if isset($menus)}
 				{foreach from=$menus item=line}
 					<tr id="diskedit_ajax_{$line.menu_disk_id}">
-						<td class="menu_disk_list_td">{if $line.menu_disk_id != ''}<a onclick="editDisk({$line.menu_disk_id})" style="cursor: pointer;" class="MAINNAV">{$line.menu_disk_name}</a>{else}<i>n/a</i>{/if}</td>
+						<td class="menu_disk_list_td">{if $line.menu_disk_id != ''}<a onclick="editDisk({$line.menu_disk_id})" style="cursor: pointer;">{$line.menu_disk_name}</a>{else}<i>n/a</i>{/if}</td>
 						<td class="menu_list_crew_td">{if isset($line.crew_id)}{$line.crew_name}{else}<i>n/a</i>{/if}</td>
 						<td class="menu_year_td"><i>n/a</i></td>				
 						<td class="menu_state_td">{if isset($line.menu_state)}{$line.menu_state}{else}<i>n/a</i>{/if}</td>
