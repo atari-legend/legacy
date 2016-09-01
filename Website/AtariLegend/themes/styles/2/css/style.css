@@ -2616,6 +2616,81 @@ Menu set edit
   padding-right: 5px;
   text-align: right; }
 
+#menu_cred_th, #menu_scene_th {
+  width: 30%;
+  text-align: left; }
+
+#menu_nick_th {
+  width: 20%;
+  text-align: left; }
+
+#menu_update_th, menu_delete_th {
+  width: 10%;
+  text-align: left; }
+
+.menu_cred_td, .menu_scene_td {
+  width: 30%;
+  text-align: left;
+  padding-right: 5px; }
+
+.menu_nick_td {
+  width: 20%;
+  text-align: left;
+  padding-right: 5px; }
+
+.menu_update_td, menu_delete_td {
+  width: 10%;
+  text-align: left;
+  padding-right: 5px; }
+
+#menu_mark_th {
+  width: 5%;
+  text-align: left; }
+
+#menu_gamename_th {
+  width: 40%;
+  text-align: left; }
+
+#menu_gamedev_th {
+  width: 35%;
+  text-align: left; }
+
+#menu_gameyear_th, #menu_gameinfo_th {
+  width: 10%;
+  text-align: left; }
+
+.menu_mark_td {
+  width: 5%;
+  text-align: left;
+  padding-right: 5px; }
+
+.menu_gamename_td {
+  width: 40%;
+  text-align: left;
+  padding-right: 5px; }
+
+.menu_gamedev_td {
+  width: 35%;
+  text-align: left;
+  padding-right: 5px; }
+
+.menu_gameyear_td, .menu_gameinfo_td {
+  width: 10%;
+  padding-right: 5px; }
+
+#menu_list_table {
+  width: 100%;
+  background-color: #294f4f; }
+
+#menu_list_table tr:hover {
+  background-color: #DBD7D1; }
+
+#menu_list_table tr:nth-child(even) {
+  background-color: #DBD7D1; }
+
+#menu_list_table tr:nth-child(odd) {
+  background-color: #EFEFEF; }
+
 /* --> menus section */
 /*---------------------------------------------------------- 
  Media Queries Main & CPanel 
@@ -3204,11 +3279,18 @@ Menu set edit
 
   #menu_disk_list_th, .menu_disk_list_td {
     text-align: center; } }
+@media screen and (max-width: 450px) {
+  #menu_cred_th, .menu_cred_td {
+    display: none; } }
 @media screen and (max-width: 500px) {
   #menu_year_th, .menu_year_td {
     display: none; } }
-@media screen and (max-width: 600px) {
-  #menu_state_th, .menu_state_td {
+@media screen and (max-width: 550px) {
+  #menu_nick_th, #menu_update_th, .menu_nick_td, .menu_update_td,
+  #menu_state_th, .menu_state_td, #menu_gamedev_th, .menu_gamedev_td {
+    display: none; } }
+@media screen and (max-width: 700px) {
+  #menu_gameyear_th, #menu_gameinfo_th, .menu_gameyear_td, .menu_gameinfo_td {
     display: none; } }
 /*---------------------------------------------------------- 
 General settings

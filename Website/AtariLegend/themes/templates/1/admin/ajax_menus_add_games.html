@@ -1,152 +1,156 @@
+{*
+/***************************************************************************
+*                             ajax_menu_add_games.html
+*                            --------------------------
+*   begin                : 
+*   copyright            : (C) 2016 Atari Legend
+*   email                : admin@atarilegend.com
+*
+*   Id: ajax_menu_add_games.html,v 0.10 2016/09/01 22:01 STG
+*			- AL 2.0
+*
+***************************************************************************/
+*}
 
 {* Full search list *}
 {if isset($smarty_action) and $smarty_action == "full_list"}					
-					<form action="" method="post" name="game_search" id="game_search">
-					<div style="display:block;width:95%;margin-left:auto;margin-right:auto;text-align:center;">
-					<fieldset class="game_set" style="display:inline; text-align:center;width:92%;">
-					<legend class="links_legend">Search games</legend>
-					
-					<div style="display: inline;align-items:center;margin: 0 auto;text-align:center;">
-					<span style="margin-right:10px;"><strong>By name :</strong></span>
-					<select name="gamebrowse" onchange="browseGame(this.value,{$menu_disk_id})">
-					{html_options values=$az_value output=$az_output selected=$mySelect}
-					</select>
-					<input type="text" name="gamesearch" onkeyup="searchGame(this.value,{$menu_disk_id})">
-					<br/>
-					</div>
-					</fieldset>
-					</div>
-					</form>
-					<br/>
-					<br/>
-					<form action="" method="get" name="game_add_to_menu" id="game_add_to_menu">	
+	<form action="" method="post" name="game_search" id="game_search">
+		<div class="standard_tile_text">
+			<fieldset class="centered_fieldset">
+			<legend>Search</legend>
+				By name : 
+				<select name="gamebrowse" onchange="browseGame(this.value,{$menu_disk_id})" id="quick_search_small_select">
+				{html_options values=$az_value output=$az_output selected=$mySelect}
+				</select>
+				<input type="text" name="gamesearch" onkeyup="searchGame(this.value,{$menu_disk_id})" class="standard_tile_input_small">
+				<br/>
+			</fieldset>
+		</div>
+	</form>
+	<br>
+	<form action="" method="get" name="game_add_to_menu" id="game_add_to_menu">	
 		<div id="game_list">		
-		<table class="table_game_list" style="width:95%;">
-			<tr>
-				<th style="width:5%;">Add</th>
-				<th style="width:30%;">Game Name</th>
-				<th style="width:20%;">Publisher</th>
-				<th style="width:20%;">Developer</th>
-				<th style="width:7%;">Year</th>
-				<th style="width:8%;">Info</th>
-			</tr>
-			{foreach from=$series_link item=line}
-			<tr>
-				<td style="width:5%;">
-					<input type="checkbox" name="game_id[]" value="{$line.game_id}" style="margin-left:4px;" onchange="addGametoMenu(this.value,{$menu_disk_id},'{$line.software_type}')">
-				</td>
-				<td style="width:30%;">{if $line.game_name != ''}<a href="games_detail.php?game_id={$line.game_id}" class="MAINNAV">{$line.game_name}</a>
-						{else}<i>n/a</i>{/if}
-				</td>
-				<td style="width:20%;">{if $line.publisher_name != ''}
-						<a href="games_main.php?publisher={$line.publisher_id}&amp;action=search" class="MAINNAV">
-							{$line.publisher_name}
-					</a>
-						{else}
-							<i>n/a</i>
-						{/if}</td>
-				<td style="width:20%;">{if $line.developer_name != ''}
-						<a href="games_main.php?developer={$line.developer_id}&amp;action=search" class="MAINNAV">
-							{$line.developer_name}
-						</a>
-						{else}
-							<i>n/a</i>
-						{/if}</td>				
-				<td style="width:7%;">
-					{if $line.year != ''}
-						<a href="games_main.php?year={$line.year}&amp;action=search" class="MAINNAV">
-							{$line.year}
-						</a>
-						{else}
-							<i>n/a</i>
-						{/if}
-				</td>
-				<td style="width:8%;">
-					{if $line.software_type != ''}
-							{$line.software_type}
-						{else}
-							<i>n/a</i>
-						{/if}
-				</td>
-			</tr>
-			{/foreach}
-			
+			<table class="table_game_list" style="width:95%;border: solid 1px black;margin:auto;">
 				<tr>
+					<th id="menu_mark_th">Add</th>
+					<th id="game_th">Game Name</th>
+					<th id="pub_th">Publisher</th>
+					<th id="dev_th">Developer</th>
+					<th id="year_th">Year</th>
+					<th id="info_th">Info</th>
+				</tr>
+				{foreach from=$series_link item=line}
+				<tr>
+					<td class="menu_mark_td">
+						<input type="checkbox" name="game_id[]" value="{$line.game_id}" style="margin-left:4px;" onchange="addGametoMenu(this.value,{$menu_disk_id},'{$line.software_type}')">
+					</td>
+					<td class="game_td">{if $line.game_name != ''}<a href="../games/games_detail.php?game_id={$line.game_id}" class="standard_table_left">{$line.game_name}</a>
+							{else}<i>n/a</i>{/if}
+					</td>
+					<td class="pub_td">{if $line.publisher_name != ''}
+							<a href="../games/games_main.php?publisher={$line.publisher_id}&amp;action=search" class="standard_table_left">
+								{$line.publisher_name}
+						</a>
+							{else}
+								<i>n/a</i>
+							{/if}</td>
+					<td class="dev_td">{if $line.developer_name != ''}
+							<a href="../games/games_main.php?developer={$line.developer_id}&amp;action=search" class="standard_table_left">
+								{$line.developer_name}
+							</a>
+							{else}
+								<i>n/a</i>
+							{/if}</td>				
+					<td class="year_td">
+						{if $line.year != ''}
+							<a href="../games/games_main.php?year={$line.year}&amp;action=search" class="standard_table_left">
+								{$line.year}
+							</a>
+							{else}
+								<i>n/a</i>
+							{/if}
+					</td>
+					<td class="info_td">
+						{if $line.software_type != ''}
+								{$line.software_type}
+							{else}
+								<i>n/a</i>
+							{/if}
+					</td>
+				</tr>
+				{/foreach}
+				<tr class="table_game_list">
 					<td class="game_list_footer" colspan="6">
 						<input type="hidden" name="action" value="add_game_to_menu">
-						<img src="../templates/0/images/arrow_ltr.gif" alt="" width="38" height="22" style="float:left;">
-						<input type="button" value="Add to menu" style="float:left;padding:2px;" onclick="addGametoMenu(this.form)">
+						<img src="../../../themes/templates/1/includes/img/arrow_ltr.gif" alt="" width="38" height="22">
+						<input type="button" value="Add" class="quick_search_games_button" style="display:inline;" onclick="addGametoMenu(this.form)">
 					</td>
 				</tr>
 			</table>
-				</div>
-				
-				
-				</form>
+		</div>			
+	</form>
+	<br>
 {/if}
+
 {* INNER SEARCH LIST *}
 {if isset($smarty_action) and $smarty_action == "inner_list"}
-
-		<table class="table_game_list" style="width:95%;">
+	<table class="table_game_list" style="width:95%;border: solid 1px black;margin:auto;">
+		<tr>
+			<th id="menu_mark_th">Add</th>
+			<th id="game_th">Game Name</th>
+			<th id="pub_th">Publisher</th>
+			<th id="dev_th">Developer</th>
+			<th id="year_th">Year</th>
+			<th id="info_th">Info</th>
+		</tr>
+		{foreach from=$series_link item=line}
 			<tr>
-				<th style="width:5%;">Add</th>
-				<th style="width:30%;">Game Name</th>
-				<th style="width:20%;">Publisher</th>
-				<th style="width:20%;">Developer</th>
-				<th style="width:15%;">Year</th>
-				<th style="width:8%;">Info</th>
-			</tr>
-
-			{foreach from=$series_link item=line}
-			<tr>
-				<td style="width:5%;">
+				<td class="menu_mark_td">
 					<input type="checkbox" name="game_id[]" value="{$line.game_id}" style="margin-left:4px;" onchange="addGametoMenu(this.value,{$menu_disk_id},'{$line.software_type}')">
 				</td>
-				<td style="width:30%;">{if $line.game_name != ''}<a href="games_detail.php?game_id={$line.game_id}" class="MAINNAV">{$line.game_name}</a>
+				<td class="game_td">{if $line.game_name != ''}<a href="../games/games_detail.php?game_id={$line.game_id}" class="standard_table_left">{$line.game_name}</a>
 						{else}<i>n/a</i>{/if}
 				</td>
-				<td style="width:20%;">{if $line.publisher_name != ''}
-						<a href="games_main.php?publisher={$line.publisher_id}&amp;action=search" class="MAINNAV">
+				<td class="pub_td">{if $line.publisher_name != ''}
+						<a href="../games/games_main.php?publisher={$line.publisher_id}&amp;action=search" class="standard_table_left">
 							{$line.publisher_name}
 					</a>
 						{else}
 							<i>n/a</i>
 						{/if}</td>
-				<td style="width:20%;">{if $line.developer_name != ''}
-						<a href="games_main.php?developer={$line.developer_id}&amp;action=search" class="MAINNAV">
+				<td class="dev_td">{if $line.developer_name != ''}
+						<a href="../games/games_main.php?developer={$line.developer_id}&amp;action=search" class="standard_table_left">
 							{$line.developer_name}
 						</a>
 						{else}
 							<i>n/a</i>
 						{/if}</td>				
-				<td style="width:7%;">
+				<td class="year_td">
 					{if $line.year != ''}
-						<a href="games_main.php?year={$line.year}&amp;action=search" class="MAINNAV">
+						<a href="../games/games_main.php?year={$line.year}&amp;action=search" class="standard_table_left">
 							{$line.year}
 						</a>
-						{else}
-							<i>n/a</i>
-						{/if}
-					</td>
-					<td style="width:8%;">
-						{if $line.software_type != ''}
-							{$line.software_type}
-						{else}
-							<i>n/a</i>
-						{/if}
+					{else}
+						<i>n/a</i>
+					{/if}
+				</td>
+				<td class="info_td">
+					{if $line.software_type != ''}
+						{$line.software_type}
+					{else}
+						<i>n/a</i>
+					{/if}
 				</td>
 			</tr>
-			{/foreach}
-			
-				<tr>
-					<td class="game_list_footer" colspan="6">
-						<input type="hidden" name="action" value="add_game_to_menu">
-						<img src="../templates/0/images/arrow_ltr.gif" alt="" width="38" height="22" style="float:left;">
-						<input type="button" value="Add to menu" style="float:left;padding:2px;">
-					</td>
-				</tr>
-			</table>
-
+		{/foreach}
+		<tr class="table_game_list">
+			<td class="game_list_footer" colspan="6">
+				<input type="hidden" name="action" value="add_game_to_menu">
+				<img src="../../../themes/templates/1/includes/img/arrow_ltr.gif" alt="" width="38" height="22">
+				<input type="button" value="Add" class="quick_search_games_button" style="display:inline;" onclick="addGametoMenu(this.form)">
+			</td>
+		</tr>
+	</table>
 {/if}
 
 	
