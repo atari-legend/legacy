@@ -269,7 +269,7 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH))
 	//	the MENU SET SECTION
 	if ($log['section'] == 'Menu set')
 	{			
-		$section_link = ( "../menus/menus_disk_list.php" . '?menu_sets_id=' . $log['sub_section_id'] );
+		$section_link = ( "../menus/menus_disk_list.php" . '?menu_sets_id=' . $log['section_id'] );
 	
 		if ($log['sub_section'] == 'Menu set' )
 		{
@@ -279,6 +279,11 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH))
 		if ($log['sub_section'] == 'Crew' )
 		{
 			$subsection_link = ""; //TO DO
+		}
+		
+		if ($log['sub_section'] == 'Individual' )
+		{
+			$subsection_link = ( "../individuals/individuals_edit.php" . '?ind_id=' . $log['sub_section_id'] );
 		}
 	}
 	

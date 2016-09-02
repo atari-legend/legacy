@@ -41,6 +41,29 @@ function browseCrew(str) {
     }
 }
 
+function browseIndividual(str) {
+    if (str == "") {
+        document.getElementById("option_ind").innerHTML = "";
+        return;
+    } else { 
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) 
+            {
+                document.getElementById("option_ind").innerHTML = xmlhttp.responseText;
+            } 
+        }
+        xmlhttp.open("GET","../menus/ajax_menus.php?action=ind_browse&query="+str,true);
+        xmlhttp.send();
+    }
+}
+
 function addNewdisk(str) {
     if (str == "") {
         document.getElementById("new_disk").innerHTML = "";
@@ -57,17 +80,20 @@ function addNewdisk(str) {
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) 
             {
                 document.getElementById("new_disk").innerHTML = xmlhttp.responseText;
+				document.getElementById("close_new_disk").innerHTML = "<a onclick=\"CloseaddNewdisk("+str+")\" style=\"cursor: pointer;\" class=\"MAINNAV\">Add New Disk</a>";
             } 
         }
-        xmlhttp.open("GET","../menus/ajax_menus.php?menu_sets_id={$menu_set.menu_sets_id}&action=add_new_disk_box&query="+str,true);
+        xmlhttp.open("GET","../menus/ajax_menus.php?action=add_new_disk_box&menu_sets_id="+str,true);
         xmlhttp.send();
     }
 } 
 
-function CloseaddNewdisk() {
+function CloseaddNewdisk(str) {
         document.getElementById("new_disk").innerHTML = "";
+		document.getElementById("close_new_disk").innerHTML = "<a onclick=\"addNewdisk("+str+")\" style=\"cursor: pointer;\" class=\"MAINNAV\">Add New Disk</a>";
         return;
 } 
+
 
 function editDisk(str) {
 	
@@ -170,10 +196,26 @@ function searchInd(str) {
         xmlhttp.send();
     }
 }
+function IndDelete(ind_select) 
+{ 
+            // CONFIRM REQUIRES ONE ARGUMENT 
+         var message = "Are you sure you want to delete this individual from this menu set?"; 
+         // CONFIRM IS BOOLEAN. THAT MEANS THAT 
+         // IT RETURNS TRUE IF 'OK' IS CLICKED 
+         // OTHERWISE IT RETURN FALSE 
+         var return_value = confirm(message); 
+ 
+         if (return_value !="0") 
+         { 
+              url="db_menu_disk.php?menu_sets_id={$menu_set.menu_sets_id}&ind_id="+ind_select+"&action=delete_ind_from_menu_set"; 
+              location.href=url; 
+         }  
+} 
+
 function CrewDelete(crew_select) 
 { 
             // CONFIRM REQUIRES ONE ARGUMENT 
-         var message = "Are you sure you want to delete this crew from this menu series?"; 
+         var message = "Are you sure you want to delete this crew from this menu set?"; 
          // CONFIRM IS BOOLEAN. THAT MEANS THAT 
          // IT RETURNS TRUE IF 'OK' IS CLICKED 
          // OTHERWISE IT RETURN FALSE 
@@ -185,6 +227,7 @@ function CrewDelete(crew_select)
               location.href=url; 
          }  
 } 
+
 function popAddIntroCred(str) {
     if (str == "") {
         document.getElementById("menu_detail_expand").innerHTML = "";
@@ -534,6 +577,37 @@ function ChangeState(state_id,menu_disk_id) {
 		<br>
 		<div class="standard_tile_line"></div>
 		<br>
+		{* Add Individual section *}
+		<b>Individual Editor</b><br>
+		<br>
+		Set individual for menu set:<br>
+		<form action="../menus/db_menu_disk.php" method="post" name="post_menu_ind_set" id="menu_ind_set">
+			<select name="ind_browse" size="1" id="quick_search_small_select" onchange="browseIndividual(this.value)">
+				{html_options values=$az_value output=$az_output}
+			</select>
+			{* Ajax *}
+			<div id="option_ind">
+				<select name="ind_id" id="quick_search_pub_select">
+					<option value="" selected>-</option>
+					{foreach from=$ind item=line}	
+						{html_options values=$line.ind_id output=$line.ind_name}
+					{/foreach}
+				</select>
+			</div>
+			<br>
+			<input type="submit" value="Set" class="quick_search_games_button">
+			<input type="hidden" name="menu_sets_id" value="{$menu_set.menu_sets_id}">
+			<input type="hidden" name="action" value="menu_set_ind_set">
+		</form>
+		<br>
+		{if isset($connected_ind)}
+		{foreach from=$connected_ind item=line}	
+		 {$line.ind_name} - <a href="#" class="standard_tile_link" onclick="IndDelete({$line.ind_id});">Delete</a><br>
+		{/foreach}
+		{/if}
+		<br>
+		<div class="standard_tile_line"></div>
+		<br>
 		Quick add new Crew to db:
 		<form action="../menus/db_menu_disk.php" method="post" name="post_menu_crew_add" id="menu_crew_add">
 			<input type="text" name="new_crew_name" value="" class="standard_tile_input_small">
@@ -543,7 +617,18 @@ function ChangeState(state_id,menu_disk_id) {
 			<input type="hidden" name="menu_sets_id" value="{$menu_set.menu_sets_id}">
 			<input type="hidden" name="action" value="menu_set_crew_add">
 		</form>
-		{* END crew section *}
+		<br>
+		<div class="standard_tile_line"></div>
+		<br>
+		Quick add new individual to db:
+		<form action="../menus/db_menu_disk.php" method="post" name="post_menu_ind_add" id="menu_ind_add">
+			<input type="text" name="new_ind_name" value="" class="standard_tile_input_small">
+			<br>
+			<br>
+			<input type="submit" value="Add" class="quick_search_games_button">
+			<input type="hidden" name="menu_sets_id" value="{$menu_set.menu_sets_id}">
+			<input type="hidden" name="action" value="menu_set_ind_add">
+		</form>
 		<br>
 	</div>
 </div>
@@ -564,8 +649,7 @@ function ChangeState(state_id,menu_disk_id) {
 			<div class="main_company_child" id="child_edit_company" style="text-align:left;">
 				<fieldset>
 					<legend>More options</legend>
-						<a class="left_nav_link" onclick="addNewdisk()" style="cursor: pointer;">Add New Disk</a> to set
-						<br>
+						<div id="close_new_disk"><a onclick="addNewdisk({$menu_set.menu_sets_id})" style="cursor: pointer;" class="left_nav_link" >Add New Disk</a><br></div>
 						<a class="left_nav_link" onclick="" style="cursor: pointer;">Delete set</a>
 				</fieldset> 
 			</div>
@@ -578,6 +662,7 @@ function ChangeState(state_id,menu_disk_id) {
 			</div>
 		</div>
 		<br>
+		<div id="new_disk"></div>	
 		<br>
 		<table class="standard_table_list" id="game_list_table">
 			<tr>
