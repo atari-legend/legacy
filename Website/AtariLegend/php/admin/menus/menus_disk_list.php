@@ -122,6 +122,33 @@ list($start2, $start3) = explode(":", exec('date +%N:%S'));
 					 	 	    'crew_name' => $crew_result['crew_name']));
 				}
 				
+				// ind data for ind editor
+				$sql_ind = $mysqli->query("SELECT * FROM individuals WHERE ind_name REGEXP '^[0-9].*' 
+											ORDER BY ind_name")
+												or die ("Couldn't query individuals database");
+					   
+				while  ($ind_result=$sql_ind->fetch_array(MYSQLI_BOTH)) 
+				{  
+				$smarty->append('ind',
+	    				  array('ind_id' => $ind_result['ind_id'],
+					 	 	    'ind_name' => $ind_result['ind_name']));
+				}
+
+				//Get data for individuals box, what individuals are connected to this menu_set	
+				$sql_ind = $mysqli->query("SELECT 
+						individuals.ind_id,
+						individuals.ind_name
+						FROM ind_menu_prod 
+						LEFT JOIN individuals ON (ind_menu_prod.ind_id = individuals.ind_id)
+						WHERE ind_menu_prod.menu_sets_id = '$menu_sets_id' ORDER BY individuals.ind_name ASC") or die ("Couldn't query individuals database for ind connection");
+
+				while  ($ind_result=$sql_ind->fetch_array(MYSQLI_BOTH)) 
+				{  
+				$smarty->append('connected_ind',
+	    				  array('ind_id' => $ind_result['ind_id'],
+					 	 	    'ind_name' => $ind_result['ind_name']));
+				}
+				
 				//get the menu sets for the quick changer
 				$sql_menus = "SELECT menu_set.menu_sets_id,
 								menu_set.menu_sets_name

@@ -848,6 +848,15 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
 			$subsection_name = $query_data['crew_name'];
 		}
 		
+		if ( $subsection == 'Individual' )
+		{
+			// get the name of the crew
+			$query_ind = "SELECT ind_name FROM individuals WHERE ind_id = '$subsection_id'";
+			$result = $mysqli->query($query_ind) or die("getting individual name failed");
+			$query_data = $result->fetch_array(MYSQLI_BOTH);
+			$subsection_name = $query_data['ind_name'];
+		}
+		
 	}
 	
 	//	Everything we do for the CREW SECTION	
