@@ -546,7 +546,7 @@ Menu editor - Menu list
 }
 
 @media screen and (max-width: 600px) { 
-	#nr_menus_th, .nr_menus_td{display:none;}
+	#nr_menus_th, #menu_type_th, .nr_menus_td, .menu_type_td{display:none;}
 }
 
 @media screen and (max-width: 1050px) { 
@@ -567,7 +567,7 @@ Menu set edit
 }
 
 @media screen and (max-width: 500px) { 
-	#menu_year_th, .menu_year_td{display:none;}
+	#menu_list_ind_th, .menu_list_ind_td{display:none;}
 }
 
 @media screen and (max-width: 550px) { 

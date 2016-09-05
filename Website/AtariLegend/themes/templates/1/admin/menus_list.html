@@ -57,6 +57,7 @@ The main game page
 				<th id="menu_disk_set_th">Menu Disk Set</th>
 				<th id="menu_crew_th">Crew</th>
 				<th id="menu_individual_th">Indvidual</th>
+				<th id="menu_type_th">type</th>
 				<th id="nr_menus_th">Nr</th>
 			</tr>
 			{foreach from=$menus item=line}
@@ -64,6 +65,7 @@ The main game page
 					<td class="menu_disk_set_td">{if $line.menu_sets_name != ''}<a href="../menus/menus_disk_list.php?menu_sets_id={$line.menu_sets_id}" class="standard_table_left">{$line.menu_sets_name}</a>{else}<i>n/a</i>{/if}</td>
 					<td class="menu_crew_td">{if $line.crew_name != ''}{$line.crew_name}{else}<i>n/a</i>{/if}</td>
 					<td class="menu_individual_td">{if $line.ind_name != ''}{$line.ind_name}{else}<i>n/a</i>{/if}</td>	
+					<td class="menu_type_td">{if $line.menu_type != ''}{$line.menu_type}{else}<i>n/a</i>{/if}</td>	
 					<td class="nr_menus_td">{if $line.numbermenus != ''}{$line.numbermenus}{else}<i>0</i>{/if}</td>
 				</tr>
 			{/foreach}

@@ -49,8 +49,9 @@ if($action=="add_new_menu_disk")
 		//first we start with if this is numbered menu disk
 		if($menu_disk_number!=='' and $menu_disk_letter=='')
 			{
-				$sql = $mysqli->query("INSERT INTO menu_disk (menu_sets_id,menu_disk_number) VALUES ('$menu_sets_id','$menu_disk_number')");
+				$sql = $mysqli->query("INSERT INTO menu_disk (menu_sets_id,menu_disk_number) VALUES ('$menu_sets_id','$menu_disk_number')") or die ("Insert of menu disk failed");
 				$last_id = $mysqli->insert_id;
+				
 				if($menu_disk_part!=='') 
 					{
 					$sql = $mysqli->query("UPDATE menu_disk SET menu_disk_part='$menu_disk_part' 
@@ -139,15 +140,20 @@ header("Location: ../menus/menus_disk_list.php?menu_sets_id=$menu_sets_id");
 //**************************************************************************************** 
 if($action=="menu_set_crew_set")
 {
-if(isset($crew_id) and isset($menu_sets_id)) 
-{
-	$sql = $mysqli->query("INSERT INTO crew_menu_prod (crew_id,menu_sets_id) VALUES ('$crew_id','$menu_sets_id')");  
+	if(isset($crew_id) and ($crew_id ==! "") and isset($menu_sets_id)) 
+	{
+		$sql = $mysqli->query("INSERT INTO crew_menu_prod (crew_id,menu_sets_id) VALUES ('$crew_id','$menu_sets_id')");  
+		$_SESSION['edit_message'] = "Crew hooked to this Menu disk series";
+		create_log_entry('Menu set', $menu_sets_id, 'Crew', $crew_id, 'Insert', $_SESSION['user_id']);
+		
+		mysqli_free_result($sql); 
+	}
 	
-	create_log_entry('Menu set', $menu_sets_id, 'Crew', $crew_id, 'Insert', $_SESSION['user_id']);
-	
-	mysqli_free_result($sql); 
-}
-$_SESSION['edit_message'] = "Crew hooked to this Menu disk series";
+	if ($crew_id == "")
+	{
+		$_SESSION['edit_message'] = "Please select a crew";
+	}
+
 header("Location: ../menus/menus_disk_list.php?menu_sets_id=$menu_sets_id");
 
 }
@@ -157,18 +163,44 @@ header("Location: ../menus/menus_disk_list.php?menu_sets_id=$menu_sets_id");
 //**************************************************************************************** 
 if($action=="menu_set_ind_set")
 {
-if(isset($ind_id) and isset($menu_sets_id)) 
-{
-	$sql = $mysqli->query("INSERT INTO ind_menu_prod (ind_id,menu_sets_id) VALUES ('$ind_id','$menu_sets_id')");  
-	
-	create_log_entry('Menu set', $menu_sets_id, 'Individual', $ind_id, 'Insert', $_SESSION['user_id']);
-	
-	mysqli_free_result($sql); 
-}
-$_SESSION['edit_message'] = "Individual hooked to this Menu disk series";
+	if(isset($ind_id) and ($ind_id ==! "") and isset($menu_sets_id)) 
+	{
+		$sql = $mysqli->query("INSERT INTO ind_menu_prod (ind_id,menu_sets_id) VALUES ('$ind_id','$menu_sets_id')");  
+		$_SESSION['edit_message'] = "Individual hooked to this Menu disk series";
+		create_log_entry('Menu set', $menu_sets_id, 'Individual', $ind_id, 'Insert', $_SESSION['user_id']);
+		
+		mysqli_free_result($sql); 
+	}
+
+	if ($ind_id == "")
+	{
+		$_SESSION['edit_message'] = "Please select an individual";
+	}
+
 header("Location: ../menus/menus_disk_list.php?menu_sets_id=$menu_sets_id");
 
 }
+
+//****************************************************************************************
+// Connect menu type to menu set
+//**************************************************************************************** 
+if($action=="menu_set_type_set")
+{
+	if(isset($menu_type_browse) and ($menu_type_browse ==! "")  and isset($menu_sets_id)) 
+	{
+		$sql = $mysqli->query("INSERT INTO menu_type (menu_types_main_id,menu_sets_id) VALUES ('$menu_type_browse','$menu_sets_id')");  
+		$_SESSION['edit_message'] = "Menu set hooked to this Menu disk series";
+		mysqli_free_result($sql); 
+	}
+	
+	if ($menu_type_browse == "")
+	{
+		$_SESSION['edit_message'] = "Please select a menu set";
+	}
+header("Location: ../menus/menus_disk_list.php?menu_sets_id=$menu_sets_id");
+
+}
+
 
 //****************************************************************************************
 // Quick add new crew
@@ -218,10 +250,26 @@ if(isset($crew_id) and isset($menu_sets_id))
 		$mysqli->query("DELETE FROM crew_menu_prod WHERE crew_id='$crew_id' AND menu_sets_id='$menu_sets_id'"); 
 }
 
-$_SESSION['edit_message'] = "Crew removed from Menu Disk series.";
+$_SESSION['edit_message'] = "Crew removed from Menu set";
 header("Location: ../menus/menus_disk_list.php?menu_sets_id=$menu_sets_id");
 
 }
+
+//****************************************************************************************
+// This is the delete menu type from menu series
+//**************************************************************************************** 
+if($action=="delete_menu_type_from_menu_set")
+{
+if(isset($menu_type_id) and isset($menu_sets_id)) 
+{
+		$mysqli->query("DELETE FROM menu_type WHERE menu_types_main_id='$menu_type_id' AND menu_sets_id='$menu_sets_id'"); 
+}
+
+$_SESSION['edit_message'] = "Menu type removed from Menu set";
+header("Location: ../menus/menus_disk_list.php?menu_sets_id=$menu_sets_id");
+
+}
+
 
 //****************************************************************************************
 // This is delete individuel from menu series
@@ -234,7 +282,7 @@ if(isset($ind_id) and isset($menu_sets_id))
 		$mysqli->query("DELETE FROM ind_menu_prod WHERE ind_id='$ind_id' AND menu_sets_id='$menu_sets_id'"); 
 }
 
-$_SESSION['edit_message'] = "Individual removed from Menu Disk series.";
+$_SESSION['edit_message'] = "Individual removed from Menu set";
 header("Location: ../menus/menus_disk_list.php?menu_sets_id=$menu_sets_id");
 
 }

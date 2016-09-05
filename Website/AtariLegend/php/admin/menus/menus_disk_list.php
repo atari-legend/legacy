@@ -38,11 +38,15 @@ list($start2, $start3) = explode(":", exec('date +%N:%S'));
 						menu_disk.menu_disk_part,
 						crew.crew_id,
 						crew.crew_name,
+						individuals.ind_id,
+						individuals.ind_name,
 						menu_disk_state.menu_state
 						FROM menu_disk 
 						LEFT JOIN menu_set ON (menu_disk.menu_sets_id = menu_set.menu_sets_id)
 						LEFT JOIN crew_menu_prod ON (menu_set.menu_sets_id = crew_menu_prod.menu_sets_id)
 						LEFT JOIN crew ON (crew_menu_prod.crew_id = crew.crew_id)
+						LEFT JOIN ind_menu_prod ON (menu_set.menu_sets_id = ind_menu_prod.menu_sets_id)
+						LEFT JOIN individuals ON (ind_menu_prod.ind_id = individuals.ind_id)
 						LEFT JOIN menu_disk_state ON ( menu_disk.state = menu_disk_state.state_id)
 						WHERE menu_disk.menu_sets_id = '$menu_sets_id' ORDER BY menu_disk_number, menu_disk_letter, menu_disk_part, menu_disk_version ASC";
 		
@@ -80,6 +84,8 @@ list($start2, $start3) = explode(":", exec('date +%N:%S'));
 						   'menu_disk_part' => $row['menu_disk_part'],
 						   'crew_id' => $row['crew_id'],
 						   'crew_name' => $row['crew_name'],
+						   'ind_id' => $row['ind_id'],
+						   'ind_name' => $row['ind_name'],
 						   'menu_state' => $row['menu_state']));	
 				}	
 				
@@ -147,6 +153,31 @@ list($start2, $start3) = explode(":", exec('date +%N:%S'));
 				$smarty->append('connected_ind',
 	    				  array('ind_id' => $ind_result['ind_id'],
 					 	 	    'ind_name' => $ind_result['ind_name']));
+				}
+				
+				//get the menu types for the types dropdown
+				$sql_menu_types = $mysqli->query("SELECT * FROM menu_types_main") or die ("Couldn't query menu types main database");
+				
+				while  ($menu_types_result=$sql_menu_types->fetch_array(MYSQLI_BOTH)) 
+				{  
+				$smarty->append('menu_types',
+	    				  array('menu_types_id' => $menu_types_result['menu_types_main_id'],
+					 	 	    'menu_types_text' => $menu_types_result['menu_types_text']));
+				}
+				
+				//the the connected menu type
+				$sql_menu_types_connection = $mysqli->query("SELECT 
+						menu_types_main.menu_types_main_id,
+						menu_types_main.menu_types_text
+						FROM menu_types_main
+						LEFT JOIN menu_type ON ( menu_type.menu_types_main_id =  menu_types_main.menu_types_main_id)
+						WHERE menu_type.menu_sets_id = '$menu_sets_id'") or die ("Couldn't query menu types database for type connection");
+
+				while  ($menu_types_connection_result=$sql_menu_types_connection->fetch_array(MYSQLI_BOTH)) 
+				{  
+				$smarty->append('connected_menu_types',
+	    				  array('menu_types_main_id' => $menu_types_connection_result['menu_types_main_id'],
+					 	 	    'menu_types_text' => $menu_types_connection_result['menu_types_text']));
 				}
 				
 				//get the menu sets for the quick changer

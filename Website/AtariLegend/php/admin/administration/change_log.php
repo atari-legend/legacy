@@ -297,6 +297,17 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH))
 			$subsection_link = ""; //TO DO
 		}
 	}
+	
+	//	the MENU TYPE SECTION
+	if ($log['section'] == 'Menu type')
+	{			
+		$section_link = ( "../menus/menus_type_edit.php" . '?menu_type_id=' . $log['section_id'] );
+		
+		if ($log['sub_section'] == 'Menu type' )
+		{
+			$subsection_link = ( "../menus/menus_type_edit.php" . '?menu_type_id=' . $log['section_id'] );
+		}
+	}
 		
 		
 	$smarty->append('log',

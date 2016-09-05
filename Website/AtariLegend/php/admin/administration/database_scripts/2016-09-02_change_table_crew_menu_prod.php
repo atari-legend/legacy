@@ -15,7 +15,7 @@
 $database_update_id = 6; 
 
 // Description of what the change will do.
-$update_description = "Add primary key and auto increment to id field of crew_menu_prod"; 
+$update_description = "Add primary key id field of crew_menu_prod"; 
 
 // Should the database change query execute if test is "test_fail" or "test_success"
 $execute_condition = "test_success"; 
