@@ -228,6 +228,22 @@ function CrewDelete(crew_select)
          }  
 } 
 
+function MenuTypeDelete(menu_type_select) 
+{ 
+            // CONFIRM REQUIRES ONE ARGUMENT 
+         var message = "Are you sure you want to delete this menu type from this menu set?"; 
+         // CONFIRM IS BOOLEAN. THAT MEANS THAT 
+         // IT RETURNS TRUE IF 'OK' IS CLICKED 
+         // OTHERWISE IT RETURN FALSE 
+         var return_value = confirm(message); 
+ 
+         if (return_value !="0") 
+         { 
+              url="db_menu_disk.php?menu_sets_id={$menu_set.menu_sets_id}&menu_type_id="+menu_type_select+"&action=delete_menu_type_from_menu_set"; 
+              location.href=url; 
+         }  
+} 
+
 function popAddIntroCred(str) {
     if (str == "") {
         document.getElementById("menu_detail_expand").innerHTML = "";
@@ -542,7 +558,29 @@ function ChangeState(state_id,menu_disk_id) {
 			<input type="hidden" name="action" value="menu_set_name_update">
 			<br>
 			<input type="submit" value="Update" class="quick_search_games_button">
-			</form>
+		</form>
+		<br>
+		<div class="standard_tile_line"></div>
+		<br>
+		<form action="../menus/db_menu_disk.php" method="post" name="post" id="menu_edit">
+			Menu type:<br>
+			<select name="menu_type_browse" size="1" id="quick_search_pub_select">
+				<option value="" selected>-</option>
+				{foreach from=$menu_types item=line}	
+					{html_options values=$line.menu_types_id output=$line.menu_types_text}
+				{/foreach}
+			</select>
+			<input type="hidden" name="menu_sets_id" value="{$menu_set.menu_sets_id}">
+			<input type="hidden" name="action" value="menu_set_type_set">
+			<br><br>
+			<input type="submit" value="Set" class="quick_search_games_button">
+		</form>
+		<br>
+		{if isset($connected_menu_types)}
+			{foreach from=$connected_menu_types item=line}	
+			 {$line.menu_types_text} - <a href="#" class="standard_tile_link" onclick="MenuTypeDelete({$line.menu_types_main_id});">Delete</a><br>
+			{/foreach}
+		{/if}
 		<br>
 		<div class="standard_tile_line"></div>
 		<br>
@@ -668,7 +706,7 @@ function ChangeState(state_id,menu_disk_id) {
 			<tr>
 				<th id="menu_disk_list_th">Menu Disk</th>
 				<th id="menu_list_crew_th">Crew</th>
-				<th id="menu_year_th">Year</th>
+				<th id="menu_list_ind_th">Individual</th>
 				<th id="menu_state_th">State</th>
 			</tr>
 			{if isset($menus)}
@@ -676,7 +714,7 @@ function ChangeState(state_id,menu_disk_id) {
 					<tr id="diskedit_ajax_{$line.menu_disk_id}">
 						<td class="menu_disk_list_td">{if $line.menu_disk_id != ''}<a onclick="editDisk({$line.menu_disk_id})" style="cursor: pointer;">{$line.menu_disk_name}</a>{else}<i>n/a</i>{/if}</td>
 						<td class="menu_list_crew_td">{if isset($line.crew_id)}{$line.crew_name}{else}<i>n/a</i>{/if}</td>
-						<td class="menu_year_td"><i>n/a</i></td>				
+						<td class="menu_list_ind_td">{if isset($line.ind_id)}{$line.ind_name}{else}<i>n/a</i>{/if}</td>			
 						<td class="menu_state_td">{if isset($line.menu_state)}{$line.menu_state}{else}<i>n/a</i>{/if}</td>
 					</tr>
 				{/foreach}

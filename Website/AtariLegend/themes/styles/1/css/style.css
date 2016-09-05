@@ -2650,22 +2650,33 @@ Change log
 /*---------------------------------------------------------- 
 Menu set search
 ------------------------------------------------------------ */
-#menu_disk_set_th, #menu_crew_th, #menu_individual_th {
+#menu_disk_set_th {
   width: 30%;
   text-align: left; }
 
-#nr_menus_th {
+#menu_crew_th, #menu_individual_th {
+  width: 25%;
+  text-align: left; }
+
+#nr_menus_th, #menu_type_th {
   width: 10%;
   text-align: left; }
 
-.menu_disk_set_td, .menu_crew_td, .menu_individual_td {
+.menu_disk_set_td {
   width: 30%;
   color: white;
   font-size: 10pt;
   font-weight: 100;
   padding-left: 2px; }
 
-.nr_menus_td {
+.menu_crew_td, .menu_individual_td {
+  width: 25%;
+  color: white;
+  font-size: 10pt;
+  font-weight: 100;
+  padding-left: 2px; }
+
+.nr_menus_td, .menu_type_td {
   width: 10%;
   color: white;
   font-size: 10pt;
@@ -2675,12 +2686,12 @@ Menu set search
 /*---------------------------------------------------------- 
 Menu set edit
 ------------------------------------------------------------ */
-#menu_year_th {
-  width: 15%;
+#menu_list_ind_th {
+  width: 20%;
   text-align: left; }
 
 #menu_state_th {
-  width: 25%;
+  width: 20%;
   text-align: right;
   padding-right: 5px; }
 
@@ -2695,8 +2706,8 @@ Menu set edit
   font-weight: 100;
   padding-left: 2px; }
 
-.menu_year_td {
-  width: 15%;
+.menu_list_ind_td {
+  width: 20%;
   text-align: left;
   color: white;
   font-size: 10pt;
@@ -2704,7 +2715,7 @@ Menu set edit
   padding-left: 2px; }
 
 .menu_state_td {
-  width: 25%;
+  width: 20%;
   text-align: right;
   color: white;
   font-size: 10pt;
@@ -3378,7 +3389,7 @@ Menu editor - Menu list
   #menu_disk_set_th, .menu_disk_set_td {
     text-align: center; } }
 @media screen and (max-width: 600px) {
-  #nr_menus_th, .nr_menus_td {
+  #nr_menus_th, #menu_type_th, .nr_menus_td, .menu_type_td {
     display: none; } }
 @media screen and (max-width: 1050px) {
   #menu_individual_th, .menu_individual_td {
@@ -3396,7 +3407,7 @@ Menu set edit
   #menu_cred_th, .menu_cred_td {
     display: none; } }
 @media screen and (max-width: 500px) {
-  #menu_year_th, .menu_year_td {
+  #menu_list_ind_th, .menu_list_ind_td {
     display: none; } }
 @media screen and (max-width: 550px) {
   #menu_nick_th, #menu_update_th, .menu_nick_td, .menu_update_td,

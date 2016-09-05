@@ -15,7 +15,7 @@
 $database_update_id = 10; 
 
 // Description of what the change will do.
-$update_description = "Change field type to int(11)"; 
+$update_description = "Change field type to int(11) for table ind_menu_prod"; 
 
 // Should the database change query execute if test is "test_fail" or "test_success"
 $execute_condition = "test_success"; 
