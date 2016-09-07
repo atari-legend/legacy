@@ -28,13 +28,32 @@ if (isset($menus_type_id) and isset($action) and $action == 'update')
 
 if (isset($menus_type_id) and isset($action) and $action == 'delete_menus_type')
 {
-	create_log_entry('Menu type', $menus_type_id, 'Menu type', $menus_type_id, 'Delete', $_SESSION['user_id']);
-	
-	$mysqli->query("DELETE FROM menu_types_main WHERE menu_types_main_id = $menus_type_id")
-			or die("Failed to delete menu type");
-	
-	$_SESSION['edit_message'] = "Menu type succesfully deleted";
-	
+	// first see if this menu type is used for a menu set or menu disk
+	$sql = $mysqli->query("SELECT * FROM menu_disk_title
+						WHERE menu_types_main_id = '$menus_type_id'") or die ("error selecting menu disks");
+	if ( get_rows($sql) > 0 )
+	{
+		$_SESSION['edit_message'] = 'Deletion failed - This menu type is linked to menu disks';
+	}
+	else
+	{
+		$sql = $mysqli->query("SELECT * FROM menu_type
+							WHERE menu_types_main_id = '$menus_type_id'") or die ("error selecting menu sets");
+		if ( get_rows($sql) > 0 )
+		{
+			$_SESSION['edit_message'] = 'Deletion failed - This menu type is linked to a menu set';
+		}
+		else
+		{	
+			create_log_entry('Menu type', $menus_type_id, 'Menu type', $menus_type_id, 'Delete', $_SESSION['user_id']);
+			
+			$mysqli->query("DELETE FROM menu_types_main WHERE menu_types_main_id = $menus_type_id")
+					or die("Failed to delete menu type");
+			
+			$_SESSION['edit_message'] = "Menu type succesfully deleted";
+		}
+	}
+		
 	header("Location: ../menus/menus_type.php");
 }
 
