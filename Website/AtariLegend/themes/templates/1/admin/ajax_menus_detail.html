@@ -19,7 +19,7 @@
 			<tr>
 				<td class="menu_disk_list_td"><a onclick="CloseeditDisk({$menus.menu_disk_id})" style="cursor: pointer;">{$menus.menu_disk_name}</a></td>
 				<td class="menu_list_crew_td">{if isset($menus.crew_id)}{$menus.crew_name}{else}<i>n/a</i>{/if}</td>
-				<td class="menu_year_td"><i>n/a</i></td>				
+				<td class="menu_list_ind_td">{if isset($menus.ind_id)}{$menus.ind_name}{else}<i>n/a</i>{/if}</td>						
 				<td class="menu_state_td">{if isset($menus.menu_state)}{$menus.menu_state}{else}<i>n/a</i>{/if}</td>
 			</tr>
 			<tr>
@@ -45,14 +45,19 @@
 						</div>
 						<div class="main_company_child" id="child_add_company">
 							<b>Release Year:</b><br>
-							{html_select_date start_year="1984" end_year="+1" display_days=false display_months=false prefix="" field_name="" style="width:100px;height:25px;" name="year_id" onchange="ChangeYear(this.value,$menu_disk_id)"}
+							{html_select_date start_year="1984" end_year="+1" display_days=false display_months=false prefix="" field_name="" style="width:100px;height:25px;" name="year_id" selected=$menus.menu_year onchange="ChangeYear(this.value,$menu_disk_id)"}
+							{if isset($menus.menu_year)}
+							<div class="standard_table_center">Saved year - <b>{$menus.menu_year}</b></div>
+							{else}
+								<div class="standard_table_center">No release year linked</div>
+							{/if}
 							<br>
 							<br>
 							<div id="menu_detail_expand"></div>
 						</div>
 					</div>
 					<br>
-					<br>
+					<br>	
 					<div id="menu_credit_list">	
 						{if isset($individuals)}
 							<table class="table_game_list" id="game_list_table" style="width:95%;border: solid 1px black;margin:auto;">
@@ -106,7 +111,7 @@
 									</td>
 									<td class="menu_gamename_td">
 										{if $line.game_name != ''}
-											<a href="../games/games_detail.php?game_id={$line.menu_disk_title_id}" class="standard_table_left">{$line.game_name}</a>
+											{if $line.menu_types_text == 'Game'}<a href="../games/games_detail.php?game_id={$line.game_id}" class="standard_table_left">{$line.game_name}</a>{else}<a href="../administration/construction.php" class="standard_table_left">{$line.game_name}</a>{/if}
 										{else}
 											<i>n/a</i>
 										{/if}
@@ -156,7 +161,7 @@
 {if isset($smarty_action) and $smarty_action == "close_edit_disk_box"}
 	<td class="menu_disk_list_td"><a onclick="editDisk({$menus.menu_disk_id})" style="cursor: pointer;">{$menus.menu_disk_name}</a></td>
 	<td class="menu_list_crew_td">{if isset($menus.crew_id)}{$menus.crew_name}{else}<i>n/a</i>{/if}</td>
-	<td class="menu_year_td"><i>n/a</i></td>				
+	<td class="menu_list_ind_td">{if isset($menus.ind_id)}{$menus.ind_name}{else}<i>n/a</i>{/if}</td>				
 	<td class="menu_state_td">{if isset($menus.menu_state)}{$menus.menu_state}{else}<i>n/a</i>{/if}</td>
 {/if}
 

@@ -34,13 +34,20 @@ include("../../includes/admin.php");
 						menu_disk.menu_disk_part,
 						crew.crew_id,
 						crew.crew_name,
+						individuals.ind_id,
+						individuals.ind_name,
 						menu_disk_state.state_id,
-						menu_disk_state.menu_state
+						menu_disk_state.menu_state,
+						menu_disk_year.menu_disk_year_id,
+						menu_disk_year.menu_year
 						FROM menu_disk 
 						LEFT JOIN menu_set ON (menu_disk.menu_sets_id = menu_set.menu_sets_id)
 						LEFT JOIN crew_menu_prod ON (menu_set.menu_sets_id = crew_menu_prod.menu_sets_id)
 						LEFT JOIN crew ON (crew_menu_prod.crew_id = crew.crew_id)
+						LEFT JOIN ind_menu_prod ON (menu_set.menu_sets_id = ind_menu_prod.menu_sets_id)
+						LEFT JOIN individuals ON (ind_menu_prod.ind_id = individuals.ind_id)
 						LEFT JOIN menu_disk_state ON ( menu_disk.state = menu_disk_state.state_id)
+						LEFT JOIN menu_disk_year ON ( menu_disk.menu_disk_id = menu_disk_year.menu_disk_id)
 						WHERE menu_disk.menu_disk_id = '$menu_disk_id'";
 				
 				$result_menus= $mysqli->query($sql_menus);
@@ -74,10 +81,14 @@ include("../../includes/admin.php");
 						   'menu_disk_part' => $row['menu_disk_part'],
 						   'crew_id' => $row['crew_id'],
 						   'crew_name' => $row['crew_name'],
+						   'ind_id' => $row['ind_id'],
+						   'ind_name' => $row['ind_name'],
+						   'menu_year' => $row['menu_year'],
 						   'menu_state' => $row['menu_state']));
 				
 				//list of games for the menu disk
 				$sql_games = "SELECT game.game_name AS 'software_name',
+								game.game_id AS 'software_id',
 								pub_dev.pub_dev_name AS 'developer_name',
 								game_year.game_year AS 'year',
 								menu_disk_title.menu_disk_title_id,
@@ -92,6 +103,7 @@ include("../../includes/admin.php");
 								WHERE menu_disk_title.menu_disk_id = '$menu_disk_id' AND menu_disk_title.menu_types_main_id = '1' ORDER BY game.game_name ASC";
 				
 				$sql_demos = "SELECT demo.demo_name AS 'software_name',
+								demo.demo_id AS 'software_id',
 								crew.crew_name AS 'developer_name',
 								demo_year.demo_year AS 'year',
 								menu_disk_title.menu_disk_title_id,
@@ -106,6 +118,7 @@ include("../../includes/admin.php");
 								WHERE menu_disk_title.menu_disk_id = '$menu_disk_id' AND menu_disk_title.menu_types_main_id = '2' ORDER BY demo.demo_name ASC";				
 				
 				$sql_tools = "SELECT tools.tools_name AS 'software_name',
+								tools.tools_id AS 'software_id',
 								'' AS developer_name,
 								'' AS year,
 								menu_disk_title.menu_disk_title_id,
@@ -129,6 +142,7 @@ include("../../includes/admin.php");
 					// This smarty is used for creating the list of games
 						$smarty->append('game',
 	    				array('game_name' => $query['software_name'],
+							  'game_id' => $query['software_id'],
 						  	  'developer_name' => $query['developer_name'],
 						  	  'year' => $query['year'],
 						  	  'menu_disk_title_id' => $query['menu_disk_title_id'],
@@ -189,11 +203,15 @@ include("../../includes/admin.php");
 						menu_disk.menu_disk_part,
 						crew.crew_id,
 						crew.crew_name,
+						individuals.ind_id,
+						individuals.ind_name,
 						menu_disk_state.menu_state
 						FROM menu_disk 
 						LEFT JOIN menu_set ON (menu_disk.menu_sets_id = menu_set.menu_sets_id)
 						LEFT JOIN crew_menu_prod ON (menu_set.menu_sets_id = crew_menu_prod.menu_sets_id)
 						LEFT JOIN crew ON (crew_menu_prod.crew_id = crew.crew_id)
+						LEFT JOIN ind_menu_prod ON (menu_set.menu_sets_id = ind_menu_prod.menu_sets_id)
+						LEFT JOIN individuals ON (ind_menu_prod.ind_id = individuals.ind_id)
 						LEFT JOIN menu_disk_state ON ( menu_disk.state = menu_disk_state.state_id)
 						WHERE menu_disk.menu_disk_id = '$menu_disk_id'";
 				
@@ -226,6 +244,8 @@ include("../../includes/admin.php");
 						   'menu_disk_part' => $row['menu_disk_part'],
 						   'crew_id' => $row['crew_id'],
 						   'crew_name' => $row['crew_name'],
+						   'ind_id' => $row['ind_id'],
+						   'ind_name' => $row['ind_name'],
 						   'menu_state' => $row['menu_state']));
 		
 		

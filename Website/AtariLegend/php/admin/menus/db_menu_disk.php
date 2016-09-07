@@ -582,13 +582,32 @@ if(isset($menu_disk_credits_id))
 // UPDATE STATE
 //**************************************************************************************** 
 
-if(isset($action) and $action=="change_menu_disk_state")
+if(isset($action) and ( $action=="change_menu_disk_state" or $action=="change_menu_disk_year" ))
 {
 if(isset($menu_disk_id)) 
 {
+		if ( $action=="change_menu_disk_state" )
+		{
 		//Update state
 		$sql = $mysqli->query("UPDATE menu_disk SET state='$state_id' 
 					    WHERE menu_disk_id='$menu_disk_id'");
+		}
+		else
+		{
+			// first check if the menu has already a year entry
+			$sql = $mysqli->query("SELECT * FROM menu_disk_year
+						WHERE menu_disk_id = '$menu_disk_id'") or die ("error selecting menu disk");
+			if ( get_rows($sql) > 0 )
+			{		
+				//Update year
+				$sql = $mysqli->query("UPDATE menu_disk_year SET menu_year='$year_id' 
+					    WHERE menu_disk_id='$menu_disk_id'");
+			}
+			else
+			{
+				$sql_menu_year = $mysqli->query("INSERT INTO menu_disk_year (menu_year, menu_disk_id) VALUES ('$year_id','$menu_disk_id')") or die ("error inserting menu year"); 
+			}
+		}
 		
 				$sql_menus = "SELECT menu_disk.menu_sets_id,
 						menu_set.menu_sets_name,
@@ -599,19 +618,27 @@ if(isset($menu_disk_id))
 						menu_disk.menu_disk_part,
 						crew.crew_id,
 						crew.crew_name,
+						individuals.ind_id,
+						individuals.ind_name,
 						menu_disk_state.state_id,
-						menu_disk_state.menu_state
+						menu_disk_state.menu_state,
+						menu_disk_year.menu_disk_year_id,
+						menu_disk_year.menu_year
 						FROM menu_disk 
 						LEFT JOIN menu_set ON (menu_disk.menu_sets_id = menu_set.menu_sets_id)
 						LEFT JOIN crew_menu_prod ON (menu_set.menu_sets_id = crew_menu_prod.menu_sets_id)
 						LEFT JOIN crew ON (crew_menu_prod.crew_id = crew.crew_id)
+						LEFT JOIN ind_menu_prod ON (menu_set.menu_sets_id = ind_menu_prod.menu_sets_id)
+						LEFT JOIN individuals ON (ind_menu_prod.ind_id = individuals.ind_id)
 						LEFT JOIN menu_disk_state ON ( menu_disk.state = menu_disk_state.state_id)
+						LEFT JOIN menu_disk_year ON ( menu_disk.menu_disk_id = menu_disk_year.menu_disk_id)
 						WHERE menu_disk.menu_disk_id = '$menu_disk_id'";
 				
-				$result_menus= $mysqli->query($sql_menus);
+				$result_menus= $mysqli->query($sql_menus) or die ('error in query');
 				$row=$result_menus->fetch_array(MYSQLI_BOTH);
 
 				$menu_disk_state = $row['state_id'];
+				$menu_disk_year = $row['menu_year'];
 				
 				// Create Menu disk name
 				$menu_disk_name = "$row[menu_sets_name] ";
@@ -639,6 +666,9 @@ if(isset($menu_disk_id))
 						   'menu_disk_part' => $row['menu_disk_part'],
 						   'crew_id' => $row['crew_id'],
 						   'crew_name' => $row['crew_name'],
+						   'ind_id' => $row['ind_id'],
+						   'ind_name' => $row['ind_name'],
+						   'menu_year' => $row['menu_year'],
 						   'menu_state' => $row['menu_state']));
 				
 				//list of games for the menu disk
@@ -736,6 +766,7 @@ if(isset($menu_disk_id))
 				}
 				 			
 				$smarty->assign('menu_state_id', $menu_disk_state);
+				$smarty->assign('menu_year_id', $menu_disk_year);
 				
 				$smarty->assign('smarty_action', 'edit_disk_box');
 				$smarty->assign('menu_disk_id', $menu_disk_id);
