@@ -44,38 +44,43 @@
 					<td class="menu_mark_td">
 						<input type="checkbox" name="game_id[]" value="{$line.game_id}" style="margin-left:4px;" onchange="addGametoMenu(this.value,{$menu_disk_id},'{$line.software_type}')">
 					</td>
-					<td class="game_td">{if $line.game_name != ''}{if $line.software_type == 'Game'}<a href="../games/games_detail.php?game_id={$line.game_id}" class="standard_table_left">{$line.game_name}</a>{else}<a href="../administration/construction.php" class="standard_table_left">{$line.game_name}</a>{/if}
+					<td class="game_td">
+						{if $line.game_name != ''}{if $line.software_type == 'Game'}<a href="../games/games_detail.php?game_id={$line.game_id}" class="standard_table_left">{$line.game_name}</a>{else}<a href="../administration/construction.php" class="standard_table_left">{$line.game_name}</a>{/if}
 							{else}<i>n/a</i>{/if}
 					</td>
-					<td class="pub_td">{if $line.publisher_name != ''}
-							<a href="../games/games_main.php?publisher={$line.publisher_id}&amp;action=search" class="standard_table_left">
+					<td class="pub_td">
+						{if $line.publisher_name != ''}
+							<a href="../games/games_list.php?publisher={$line.publisher_id}&amp;action=search" class="standard_table_left">
 								{$line.publisher_name}
-						</a>
-							{else}
-								<i>n/a</i>
-							{/if}</td>
-					<td class="dev_td">{if $line.developer_name != ''}
-							<a href="../games/games_main.php?developer={$line.developer_id}&amp;action=search" class="standard_table_left">
+							</a>
+						{else}
+							<i>n/a</i>
+						{/if}
+					</td>
+					<td class="dev_td">
+						{if $line.developer_name != ''}
+							<a href="../games/games_list.php?developer={$line.developer_id}&amp;action=search" class="standard_table_left">
 								{$line.developer_name}
 							</a>
-							{else}
-								<i>n/a</i>
-							{/if}</td>				
+						{else}
+							<i>n/a</i>
+						{/if}
+					</td>				
 					<td class="year_td">
 						{if $line.year != ''}
 							<a href="../games/games_main.php?year={$line.year}&amp;action=search" class="standard_table_left">
 								{$line.year}
 							</a>
-							{else}
-								<i>n/a</i>
-							{/if}
+						{else}
+							<i>n/a</i>
+						{/if}
 					</td>
 					<td class="info_td">
 						{if $line.software_type != ''}
 								{$line.software_type}
-							{else}
-								<i>n/a</i>
-							{/if}
+						{else}
+							<i>n/a</i>
+						{/if}
 					</td>
 				</tr>
 				{/foreach}
@@ -111,20 +116,24 @@
 				<td class="game_td">{if $line.game_name != ''}{if $line.software_type == 'Game'}<a href="../games/games_detail.php?game_id={$line.game_id}" class="standard_table_left">{$line.game_name}</a>{else}{$line.game_name}{/if}
 						{else}<i>n/a</i>{/if}
 				</td>
-				<td class="pub_td">{if $line.publisher_name != ''}
+				<td class="pub_td">
+					{if $line.publisher_name != ''}
 						<a href="../games/games_main.php?publisher={$line.publisher_id}&amp;action=search" class="standard_table_left">
 							{$line.publisher_name}
-					</a>
-						{else}
-							<i>n/a</i>
-						{/if}</td>
-				<td class="dev_td">{if $line.developer_name != ''}
+						</a>
+					{else}
+						<i>n/a</i>
+					{/if}
+				</td>
+				<td class="dev_td">
+					{if $line.developer_name != ''}
 						<a href="../games/games_main.php?developer={$line.developer_id}&amp;action=search" class="standard_table_left">
 							{$line.developer_name}
 						</a>
-						{else}
-							<i>n/a</i>
-						{/if}</td>				
+					{else}
+						<i>n/a</i>
+					{/if}
+				</td>				
 				<td class="year_td">
 					{if $line.year != ''}
 						<a href="../games/games_main.php?year={$line.year}&amp;action=search" class="standard_table_left">

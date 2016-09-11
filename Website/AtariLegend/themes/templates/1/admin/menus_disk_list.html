@@ -302,6 +302,35 @@ function closeAddGames(str) {
         return;
 } 
 
+function popAddScreenshots(str) {
+    if (str == "") {
+        document.getElementById("menu_detail_expand_screenshots").innerHTML = "";
+        return;
+    } else { 
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("menu_detail_expand_screenshots").innerHTML = xmlhttp.responseText;
+                document.getElementById("screenshot_link").innerHTML = "<a onclick=\"closeAddScreenshots("+str+")\" style=\"cursor: pointer;\" class=\"MAINNAV\">Add Screenshots to menu</a>";
+            }
+        }
+        xmlhttp.open("GET","../menus/ajax_addscreenshots_menus.php?action=game_addscreenshots&menu_disk_id="+str,true);
+        xmlhttp.send();
+    }
+}
+
+function closeAddScreenshots(str) {
+        document.getElementById("menu_detail_expand_screenshots").innerHTML = "";
+        document.getElementById("screenshot_link").innerHTML = "<a onclick=\"popAddScreenshots("+str+")\" style=\"cursor: pointer;\" class=\"MAINNAV\">Add Screenshots to menu</a>";
+        return;
+} 
+
 function browseGame(str,menu_disk_id) {
     if (str == "") {
         document.getElementById("game_list").innerHTML = "";
@@ -374,7 +403,6 @@ function addGametoMenu(software_id,menu_disk_id,software_type) {
  
             $.notify_osd.create({
 				'text'        : data[1],             // notification message
-				'icon'        : '../templates/0/icons/star.png', // icon path, 48x48
 				'sticky'      : false,             // if true, timeout is ignored
 				'timeout'     : 4,                 // disappears after 6 seconds
 				'dismissable' : true               // can be dismissed manually
@@ -387,6 +415,43 @@ function addGametoMenu(software_id,menu_disk_id,software_type) {
         xmlhttp.send();
     } 
 }
+
+
+function addScreenshottoMenu(menu_disk_id) {
+ if (menu_disk_id == "") {
+        document.getElementById("menu_screenshot_list").innerHTML = "";
+        return;
+    } else { 
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+				
+				
+				data = xmlhttp.responseText.split ( "[BRK]" );
+				document.getElementById("menu_screenshot_list").innerHTML = data[0];
+ 
+            $.notify_osd.create({
+				'text'        : data[1],             // notification message
+				'sticky'      : false,             // if true, timeout is ignored
+				'timeout'     : 4,                 // disappears after 6 seconds
+				'dismissable' : true               // can be dismissed manually
+				});
+            
+            document.getElementById("screenshot_add_to_menu").reset();
+            }
+        }
+        xmlhttp.open("POST","../menus/db_menu_disk.php",true);
+		//Send the proper header information along with the request
+        xmlhttp.send();
+    } 
+}
+
 function deleteGamefromMenu(str,menu_disk_id) {
 
             // CONFIRM REQUIRES ONE ARGUMENT 
@@ -417,8 +482,7 @@ function deleteGamefromMenu(str,menu_disk_id) {
                 document.getElementById("menu_software_list").innerHTML = xmlhttp.responseText;
                 
                  $.notify_osd.create({
-				'text'        : 'Title deleted from menudisk.',             // notification message
-				'icon'        : '../templates/0/icons/star.png', // icon path, 48x48
+				'text'        : 'Title deleted from menudisk', // notification message
 				'sticky'      : false,             // if true, timeout is ignored
 				'timeout'     : 4,                 // disappears after 6 seconds
 				'dismissable' : true               // can be dismissed manually
@@ -513,7 +577,7 @@ function ChangeState(state_id,menu_disk_id) {
                 document.getElementById(disk_edit_ajax).innerHTML = xmlhttp.responseText;
                 
                  $.notify_osd.create({
-				'text'        : 'Update status of menudisk!.',             // notification message
+				'text'        : 'Update status of menudisk',             // notification message
 				'sticky'      : false,             // if true, timeout is ignored
 				'timeout'     : 4,                 // disappears after 4 seconds
 				'dismissable' : true               // can be dismissed manually
@@ -547,7 +611,7 @@ function ChangeYear(year_id,menu_disk_id) {
                 document.getElementById(disk_edit_ajax).innerHTML = xmlhttp.responseText;
                 
                  $.notify_osd.create({
-				'text'        : 'Update release year of menudisk!.',             // notification message
+				'text'        : 'Update release year of menudisk',             // notification message
 				'sticky'      : false,             // if true, timeout is ignored
 				'timeout'     : 4,                 // disappears after 4 seconds
 				'dismissable' : true               // can be dismissed manually
