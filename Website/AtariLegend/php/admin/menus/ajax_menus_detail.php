@@ -90,6 +90,7 @@ include("../../includes/admin.php");
 				$sql_games = "SELECT game.game_name AS 'software_name',
 								game.game_id AS 'software_id',
 								pub_dev.pub_dev_name AS 'developer_name',
+								pub_dev.pub_dev_id AS 'developer_id',
 								game_year.game_year AS 'year',
 								menu_disk_title.menu_disk_title_id,
 								menu_types_main.menu_types_text
@@ -105,6 +106,7 @@ include("../../includes/admin.php");
 				$sql_demos = "SELECT demo.demo_name AS 'software_name',
 								demo.demo_id AS 'software_id',
 								crew.crew_name AS 'developer_name',
+								crew.crew_id AS 'developer_id',
 								demo_year.demo_year AS 'year',
 								menu_disk_title.menu_disk_title_id,
 								menu_types_main.menu_types_text
@@ -120,6 +122,7 @@ include("../../includes/admin.php");
 				$sql_tools = "SELECT tools.tools_name AS 'software_name',
 								tools.tools_id AS 'software_id',
 								'' AS developer_name,
+								'' AS developer_id,
 								'' AS year,
 								menu_disk_title.menu_disk_title_id,
 								menu_types_main.menu_types_text
@@ -144,6 +147,7 @@ include("../../includes/admin.php");
 	    				array('game_name' => $query['software_name'],
 							  'game_id' => $query['software_id'],
 						  	  'developer_name' => $query['developer_name'],
+							  'developer_id' => $query['developer_id'],
 						  	  'year' => $query['year'],
 						  	  'menu_disk_title_id' => $query['menu_disk_title_id'],
 						  	  'menu_types_text' => $query['menu_types_text']));
@@ -165,13 +169,13 @@ include("../../includes/admin.php");
 				
 				while  ($query = $query_individual->fetch_array(MYSQLI_BOTH)) 
 				{
-						// This smarty is used for for the menu_disk credits
-						$smarty->append('individuals',
-	    				array('menu_disk_credits_id' => $query['menu_disk_credits_id'],
-						  	  'ind_id' => $query['ind_id'],
-						  	  'ind_name' => $query['ind_name'],
-						  	  'menu_disk_id' => $menu_disk_id,
-						  	  'author_type_info' => $query['author_type_info']));
+					// This smarty is used for for the menu_disk credits
+					$smarty->append('individuals',
+					array('menu_disk_credits_id' => $query['menu_disk_credits_id'],
+						  'ind_id' => $query['ind_id'],
+						  'ind_name' => $query['ind_name'],
+						  'menu_disk_id' => $menu_disk_id,
+						  'author_type_info' => $query['author_type_info']));
 				}
 				
 				// Menu state dropdown
@@ -183,6 +187,34 @@ include("../../includes/admin.php");
 					$smarty->append('state_id', $query['state_id']);
 					$smarty->append('menu_state', $query['menu_state']);
 				}
+				
+				//Get the screenshots for this menu if they exist
+				$sql_screenshots = $mysqli->query("SELECT * FROM screenshot_menu
+									LEFT JOIN screenshot_main ON (screenshot_menu.screenshot_id = screenshot_main.screenshot_id)
+									WHERE screenshot_menu.menu_disk_id = '$menu_disk_id' ORDER BY screenshot_menu.screenshot_id")
+										or die ("Database error - selecting screenshots");
+
+				$count = 1;
+				$v_screenshots =0;
+				while ( $screenshots=$sql_screenshots->fetch_array(MYSQLI_BOTH)) 
+				{
+					//Ready screenshots path and filename
+					$screenshot_image  = $menu_screenshot_path;
+					$screenshot_image .= $screenshots['screenshot_id'];
+					$screenshot_image .= '.';
+					$screenshot_image .= $screenshots['imgext'];
+								
+					$smarty->append('screenshots',
+							 array('count' => $count,
+								   'path' => $game_screenshot_path,
+								   'screenshot_image' => $screenshot_image,
+								   'id' => $screenshots['screenshot_id']));
+
+					$count++;
+					$v_screenshots++;
+				}
+
+				$smarty->assign("screenshots_nr",$v_screenshots);
 				 			
 				$smarty->assign('menu_state_id', $menu_disk_state);
 				

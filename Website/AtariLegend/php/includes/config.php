@@ -43,6 +43,7 @@ $interview_screenshot_save_path="../../../data/images/interview_screenshots/";
 
 //menu
 $menu_screenshot_path="../../data/images/menu_screenshots/";
+$menu_screenshot_save_path="../../../data/images/menu_screenshots/";
 
 //news
 $news_images_path="../../data/images/news_images/";
