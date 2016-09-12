@@ -17,6 +17,9 @@ The main game page
 *}
 {extends file='1/admin/frontpage.html'}
 {block name=java_script}
+<script type="text/javascript" src="{$template_dir}includes/js/lightbox.min.js"></script>
+<link type="text/css" href="{$style_dir}css/lightbox.css" hreflang="en" rel="stylesheet">
+
 <script type="text/javascript">
 function browseCrew(str) {
     if (str == "") {
@@ -403,6 +406,7 @@ function addGametoMenu(software_id,menu_disk_id,software_type) {
  
             $.notify_osd.create({
 				'text'        : data[1],             // notification message
+				'icon'        : '{$style_dir}images/osd_icons/star.png', // icon path, 48x48
 				'sticky'      : false,             // if true, timeout is ignored
 				'timeout'     : 4,                 // disappears after 6 seconds
 				'dismissable' : true               // can be dismissed manually
@@ -437,7 +441,8 @@ function addScreenshottoMenu(menu_disk_id) {
 				document.getElementById("menu_screenshot_list").innerHTML = data[0];
  
             $.notify_osd.create({
-				'text'        : data[1],             // notification message
+				'text'        : 'Screenshot added to menu disk', // notification message
+				'icon'        : '{$style_dir}images/osd_icons/star.png', // icon path, 48x48
 				'sticky'      : false,             // if true, timeout is ignored
 				'timeout'     : 4,                 // disappears after 6 seconds
 				'dismissable' : true               // can be dismissed manually
@@ -446,16 +451,67 @@ function addScreenshottoMenu(menu_disk_id) {
             document.getElementById("screenshot_add_to_menu").reset();
             }
         }
+		
+		var formData = new FormData( document.getElementById("screenshot_add_to_menu") );
+
         xmlhttp.open("POST","../menus/db_menu_disk.php",true);
-		//Send the proper header information along with the request
-        xmlhttp.send();
+        xmlhttp.send(formData);
     } 
 }
 
+function deleteScreenshotfromMenu(str,menu_disk_id) {
+
+         // CONFIRM REQUIRES ONE ARGUMENT 
+         var message = "Are you sure you want to delete this screenshot from this menu disk?"; 
+         // CONFIRM IS BOOLEAN. THAT MEANS THAT 
+         // IT RETURNS TRUE IF 'OK' IS CLICKED 
+         // OTHERWISE IT RETURN FALSE 
+         var return_value = confirm(message); 
+		
+        if (return_value =="0") 
+        { 
+			return;
+		} 
+		else 
+		{ 
+			if (window.XMLHttpRequest) 
+			{
+				// code for IE7+, Firefox, Chrome, Opera, Safari
+				xmlhttp = new XMLHttpRequest();
+			} 
+			else 
+			{
+				// code for IE6, IE5
+				xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+					
+			xmlhttp.onreadystatechange = function() 
+			{
+				if (xmlhttp.readyState == 4 && xmlhttp.status == 200) 
+				{
+					document.getElementById("menu_screenshot_list").innerHTML = xmlhttp.responseText;
+					
+					 $.notify_osd.create({
+					'text'        : 'Screenshot deleted from menudisk', // notification message
+					'icon'        : '{$style_dir}images/osd_icons/star.png', // icon path, 48x48
+					'sticky'      : false,             // if true, timeout is ignored
+					'timeout'     : 4,                 // disappears after 6 seconds
+					'dismissable' : true               // can be dismissed manually
+					});
+					
+				}
+			}
+        
+			xmlhttp.open("GET","../menus/db_menu_disk.php?action=delete_screen_from_menu_disk&screenshot_id="+str+"&menu_disk_id="+menu_disk_id,true);
+			xmlhttp.send();
+			
+		}		 
+}  
+
 function deleteGamefromMenu(str,menu_disk_id) {
 
-            // CONFIRM REQUIRES ONE ARGUMENT 
-         var message = "Are you sure you want to delete this title from this menu disk????"; 
+         // CONFIRM REQUIRES ONE ARGUMENT 
+         var message = "Are you sure you want to delete this title from this menu disk?"; 
          // CONFIRM IS BOOLEAN. THAT MEANS THAT 
          // IT RETURNS TRUE IF 'OK' IS CLICKED 
          // OTHERWISE IT RETURN FALSE 
@@ -483,6 +539,7 @@ function deleteGamefromMenu(str,menu_disk_id) {
                 
                  $.notify_osd.create({
 				'text'        : 'Title deleted from menudisk', // notification message
+				'icon'        : '{$style_dir}images/osd_icons/star.png', // icon path, 48x48
 				'sticky'      : false,             // if true, timeout is ignored
 				'timeout'     : 4,                 // disappears after 6 seconds
 				'dismissable' : true               // can be dismissed manually
@@ -578,6 +635,7 @@ function ChangeState(state_id,menu_disk_id) {
                 
                  $.notify_osd.create({
 				'text'        : 'Update status of menudisk',             // notification message
+				'icon'        : '{$style_dir}images/osd_icons/star.png', // icon path, 48x48
 				'sticky'      : false,             // if true, timeout is ignored
 				'timeout'     : 4,                 // disappears after 4 seconds
 				'dismissable' : true               // can be dismissed manually
@@ -612,6 +670,7 @@ function ChangeYear(year_id,menu_disk_id) {
                 
                  $.notify_osd.create({
 				'text'        : 'Update release year of menudisk',             // notification message
+				'icon'        : '{$style_dir}images/osd_icons/star.png', // icon path, 48x48
 				'sticky'      : false,             // if true, timeout is ignored
 				'timeout'     : 4,                 // disappears after 4 seconds
 				'dismissable' : true               // can be dismissed manually
@@ -623,10 +682,11 @@ function ChangeYear(year_id,menu_disk_id) {
         xmlhttp.send();
     } 
 }
-
 </script>
 {/block}
+
 {block name=title}Menus Search results{/block}
+
 {block name=left_tile}
 <div class="standard_tile">
 	<h1>SET OPTIONS</h1>
