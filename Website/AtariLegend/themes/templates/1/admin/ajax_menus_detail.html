@@ -171,9 +171,9 @@
 									{foreach from=$screenshots item=line name=screen}
 										<div style="display:inline-block;text-align:center;">
 											Image {$line.count}<br>
-											<a href="../../includes/show_image.php?file={$line.screenshot_image}&amp;resize=410,null,null,null" data-lightbox="image-1" data-title="{$game_name} - 	{$line.count}">
+											<a href="../../includes/show_image.php?file={$line.screenshot_image}&amp;resize=410,null,null,null" data-lightbox="image-1" data-title="image - {$line.count}">
 											<img src="../../includes/show_image.php?file={$line.screenshot_image}&amp;resize=75,null,null,null" width="75" alt="Click to enlarge!" class="user_stats_img" id="user_details_img_dark"></a>
-											<a href="javascript:delete_screenshot({$line.id},{$game_id})" class="standard_tile_link_black">Delete</a>  
+											<a href="javascript:deleteScreenshotfromMenu({$line.id},{$menu_disk_id})" class="standard_tile_link_black">Delete</a>  
 											<br>
 											<br>
 										</div>
@@ -308,9 +308,9 @@
 				{foreach from=$screenshots item=line name=screen}
 					<div style="display:inline-block;text-align:center;">
 						Image {$line.count}<br>
-						<a href="../../includes/show_image.php?file={$line.screenshot_image}&amp;resize=410,null,null,null" data-lightbox="image-1" data-title="{$game_name} - 	{$line.count}">
+						<a href="../../includes/show_image.php?file={$line.screenshot_image}&amp;resize=410,null,null,null" data-lightbox="image-1" data-title="image - {$line.count}">
 						<img src="../../includes/show_image.php?file={$line.screenshot_image}&amp;resize=75,null,null,null" width="75" alt="Click to enlarge!" class="user_stats_img" id="user_details_img_dark"></a>
-						<a href="javascript:delete_screenshot({$line.id},{$game_id})" class="standard_tile_link_black">Delete</a>  
+						<a href="javascript:deleteScreenshotfromMenu({$line.id},{$menu_disk_id})" class="standard_tile_link_black">Delete</a>  
 						<br>
 						<br>
 					</div>
