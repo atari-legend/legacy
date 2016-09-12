@@ -529,7 +529,6 @@ if (isset($action) and $action=="add_screens")
 			
 			if ($ext!=="")
 			{
-				
 				// First we insert the directory path of where the file will be stored... this also creates an autoinc number for us.
 				$sdbquery = $mysqli->query("INSERT INTO screenshot_main (screenshot_id,imgext) VALUES ('','$ext')")
 							or die ("Database error - inserting screenshots");
@@ -589,6 +588,74 @@ if (isset($action) and $action=="add_screens")
 	//Send to smarty for return value
 	$smarty->display("file:".$cpanel_template_folder."ajax_menus_detail.html");
 }
+
+//****************************************************************************************
+// delete screenshots from a menudisk
+//**************************************************************************************** 
+if (isset($action) and $action=="delete_screen_from_menu_disk")
+{
+	$sql_menushot = $mysqli->query("SELECT * FROM screenshot_menu
+	   					   			  WHERE menu_disk_id = $menu_disk_id 
+									  AND screenshot_id = $screenshot_id")
+	     		  or die ("Database error - selecting screenshots game");
+						
+	$menushot = $sql_menushot->fetch_row();
+	$menushotid = $menushot[0];
+	
+	//get the extension 
+	$SCREENSHOT = $mysqli->query("SELECT * FROM screenshot_main
+	   					  	  WHERE screenshot_id = '$screenshot_id'")
+				  or die ("Database error - selecting screenshots");
+		
+	$screenshotrow = $SCREENSHOT->fetch_array(MYSQLI_BOTH);
+	$screenshot_ext = $screenshotrow['imgext'];
+
+	$sql = $mysqli->query("DELETE FROM screenshot_main WHERE screenshot_id = '$screenshot_id' ");
+	$sql = $mysqli->query("DELETE FROM screenshot_menu WHERE screenshot_id = '$screenshot_id' ");
+
+	$new_path = $menu_screenshot_save_path;;
+	$new_path .= $screenshot_id;
+	$new_path .= ".";
+	$new_path .= $screenshot_ext;
+
+	unlink ("$new_path");
+	
+	//Get the screenshots for this menu if they exist
+	$sql_screenshots = $mysqli->query("SELECT * FROM screenshot_menu
+						LEFT JOIN screenshot_main ON (screenshot_menu.screenshot_id = screenshot_main.screenshot_id)
+						WHERE screenshot_menu.menu_disk_id = '$menu_disk_id' ORDER BY screenshot_menu.screenshot_id")
+							or die ("Database error - selecting screenshots");
+
+	$count = 1;
+	$v_screenshots =0;
+	while ( $screenshots=$sql_screenshots->fetch_array(MYSQLI_BOTH)) 
+	{
+		//Ready screenshots path and filename
+		$screenshot_image  = $menu_screenshot_path;
+		$screenshot_image .= $screenshots['screenshot_id'];
+		$screenshot_image .= '.';
+		$screenshot_image .= $screenshots['imgext'];
+					
+		$smarty->append('screenshots',
+				 array('count' => $count,
+					   'path' => $game_screenshot_path,
+					   'screenshot_image' => $screenshot_image,
+					   'id' => $screenshots['screenshot_id']));
+
+		$count++;
+		$v_screenshots++;
+	}
+
+	$smarty->assign("screenshots_nr",$v_screenshots);
+	
+	$smarty->assign('smarty_action', 'add_screen_to_menu_return');
+	$smarty->assign('menu_disk_id', $menu_disk_id);
+	
+	//Send to smarty for return value
+	$smarty->display("file:".$cpanel_template_folder."ajax_menus_detail.html");
+	
+}
+
 
 //****************************************************************************************
 // ADD MENU CREDITS!
