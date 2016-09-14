@@ -215,7 +215,65 @@ include("../../includes/admin.php");
 				}
 
 				$smarty->assign("screenshots_nr",$v_screenshots);
-				 			
+				
+				
+				//************************************************************************************************
+				//Let's get the menu info for the file name concatenation, and the download data for disks already
+				//uploaded
+				//************************************************************************************************
+				//get the existing downloads
+				$SQL_DOWNLOADS = $mysqli->query("SELECT * FROM menu_disk_download WHERE menu_disk_id='$menu_disk_id'")
+								 or die ("Error getting download info");		
+
+				$nr_downloads = 0;
+				while ($downloads=$SQL_DOWNLOADS->fetch_array(MYSQLI_BOTH)) 
+				{					
+					$filepath = $menu_file_path;
+									
+					//start filling the smarty object
+					$smarty->append('downloads',
+							 array('menu_disk_download_id' => $downloads['menu_disk_download_id'],
+								   'filename' => $downloads['menu_disk_download_id'],
+								   'filepath' => $filepath));
+
+					$nr_downloads++;
+				}
+				
+				//In all cases we search we start searching through the menu_set table
+				//first
+				$sql_menus = "SELECT menu_disk.menu_sets_id,
+								menu_set.menu_sets_name,
+								menu_disk.menu_disk_number,
+								menu_disk.menu_disk_letter,
+								menu_disk.menu_disk_version,
+								menu_disk.menu_disk_part
+								FROM menu_disk 
+								LEFT JOIN menu_set ON (menu_disk.menu_sets_id = menu_set.menu_sets_id)
+								WHERE menu_disk.menu_disk_id = '$menu_disk_id'";
+				
+				$result_menus= $mysqli->query($sql_menus) or die ("error in query disk name");
+				
+				while ( $row=$result_menus->fetch_array(MYSQLI_BOTH) ) 
+				{  
+					// Create Menu disk name
+					$menu_disk_name = "$row[menu_sets_name] ";
+					if(isset($row['menu_disk_number'])) {$menu_disk_name .= "$row[menu_disk_number]";}
+					if(isset($row['menu_disk_letter'])) {$menu_disk_name .= "$row[menu_disk_letter]";}
+					if(isset($row['menu_disk_part'])) 
+					{
+						if (is_numeric($row['menu_disk_part']))
+							{$menu_disk_name .= " part $row[menu_disk_part]";}
+							else 
+							{
+								$menu_disk_name .= "$row[menu_disk_part]";
+							}
+					}
+				}
+				
+				$smarty->assign('menu_disk_name',$menu_disk_name);			
+
+				$smarty->assign('download_nr',$nr_downloads);			
+											
 				$smarty->assign('menu_state_id', $menu_disk_state);
 				
 				$smarty->assign('smarty_action', 'edit_disk_box');

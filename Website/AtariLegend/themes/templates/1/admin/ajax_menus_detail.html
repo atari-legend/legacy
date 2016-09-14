@@ -41,6 +41,7 @@
 							<div id="intro_credit_link"><a onclick="popAddIntroCred({$menus.menu_disk_id})" style="cursor: pointer;" class="standard_tile_link">Add intro credits</a><br></div>
 							<div id="gameto_menu_link"><a onclick="popAddGames({$menus.menu_disk_id})" style="cursor: pointer;" class="standard_tile_link">Add Game/Tool/Demo to menu</a><br></div>
 							<div id="screenshot_link"><a onclick="popAddScreenshots({$menus.menu_disk_id})" style="cursor: pointer;" class="standard_tile_link">Add Screenshots to menu</a><br></div>
+							<div id="file_link"><a onclick="popAddFile({$menus.menu_disk_id})" style="cursor: pointer;" class="standard_tile_link">Add File to menu</a><br></div>
 							<a onclick="CloseeditDisk({$menus.menu_disk_id})" style="cursor: pointer;" class="standard_tile_link">Add Game Doc to menu</a><br>
 							<a onclick="CloseeditDisk({$menus.menu_disk_id})" style="cursor: pointer;" class="standard_tile_link">Add Tool Doc to menu</a><br>
 						</div>
@@ -187,6 +188,27 @@
 					</div>
 					<br>
 					<div id="menu_detail_expand_screenshots"></div>
+					<br>
+					<div id="menu_file_list">
+						{if isset( $downloads)}
+						<div class="standard_tile_text">
+							<fieldset class="centered_fieldset">
+								<legend>File</legend>
+								{if $download_nr <> ''}
+									{foreach from=$downloads item=line}
+										<a href="{$line.filepath}{$line.filename}.zip" class="left_nav_link"><b>{$menu_disk_name}</b></a> - 
+										<a href="javascript:deleteDownload({$line.menu_disk_download_id},{$menu_disk_id});" class="standard_tile_link_black">Delete</a>
+										<br>
+									{/foreach}
+								{else}
+									No downloads attached to this menu
+								{/if}
+							</fieldset>
+						</div>
+						{/if}
+					</div>
+					<br>
+					<div id="menu_detail_expand_file"></div>
 				</td>
 			</tr>
 		</table>
@@ -317,6 +339,28 @@
 				{/foreach}
 			{else}
 				No screenshots attached to this menu
+			{/if}
+		</fieldset>
+	</div>
+	
+   {if isset($osd_message)}
+		[BRK]{$osd_message}
+	{/if}
+	
+{/if}
+
+{if isset($smarty_action) and $smarty_action == "add_file_to_menu_return"}
+	<div class="standard_tile_text">
+		<fieldset class="centered_fieldset">
+			<legend>File</legend>
+			{if $download_nr <> ''}
+				{foreach from=$downloads item=line}
+					<a href="{$line.filepath}{$line.filename}.zip" class="left_nav_link"><b>{$menu_disk_name}</b></a> - 
+					<a href="javascript:deleteDownload({$line.menu_disk_download_id},{$menu_disk_id});" class="standard_tile_link_black">Delete</a>
+					<br>
+				{/foreach}
+			{else}
+				No downloads attached to this menu
 			{/if}
 		</fieldset>
 	</div>
