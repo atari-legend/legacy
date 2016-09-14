@@ -323,7 +323,7 @@ function popAddScreenshots(str) {
                 document.getElementById("screenshot_link").innerHTML = "<a onclick=\"closeAddScreenshots("+str+")\" style=\"cursor: pointer;\" class=\"MAINNAV\">Add Screenshots to menu</a>";
             }
         }
-        xmlhttp.open("GET","../menus/ajax_addscreenshots_menus.php?action=game_addscreenshots&menu_disk_id="+str,true);
+        xmlhttp.open("GET","../menus/ajax_addscreenshots_menus.php?menu_disk_id="+str,true);
         xmlhttp.send();
     }
 }
@@ -331,6 +331,35 @@ function popAddScreenshots(str) {
 function closeAddScreenshots(str) {
         document.getElementById("menu_detail_expand_screenshots").innerHTML = "";
         document.getElementById("screenshot_link").innerHTML = "<a onclick=\"popAddScreenshots("+str+")\" style=\"cursor: pointer;\" class=\"MAINNAV\">Add Screenshots to menu</a>";
+        return;
+} 
+
+function popAddFile(str) {
+    if (str == "") {
+        document.getElementById("menu_detail_expand_file").innerHTML = "";
+        return;
+    } else { 
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("menu_detail_expand_file").innerHTML = xmlhttp.responseText;
+                document.getElementById("file_link").innerHTML = "<a onclick=\"closeAddFile("+str+")\" style=\"cursor: pointer;\" class=\"MAINNAV\">Add File to menu</a>";
+            }
+        }
+        xmlhttp.open("GET","../menus/ajax_addfile_menus.php?menu_disk_id="+str,true);
+        xmlhttp.send();
+    }
+}
+
+function closeAddFile(str) {
+        document.getElementById("menu_detail_expand_file").innerHTML = "";
+        document.getElementById("file_link").innerHTML = "<a onclick=\"popAddFile("+str+")\" style=\"cursor: pointer;\" class=\"MAINNAV\">Add File to menu</a>";
         return;
 } 
 
@@ -399,8 +428,7 @@ function addGametoMenu(software_id,menu_disk_id,software_type) {
         }
         xmlhttp.onreadystatechange = function() {
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-				
-				
+
 				data = xmlhttp.responseText.split ( "[BRK]" );
 				document.getElementById("menu_software_list").innerHTML = data[0];
  
@@ -435,13 +463,12 @@ function addScreenshottoMenu(menu_disk_id) {
         }
         xmlhttp.onreadystatechange = function() {
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-				
-				
+
 				data = xmlhttp.responseText.split ( "[BRK]" );
 				document.getElementById("menu_screenshot_list").innerHTML = data[0];
  
             $.notify_osd.create({
-				'text'        : 'Screenshot added to menu disk', // notification message
+				'text'        : data[1],             // notification message
 				'icon'        : '{$style_dir}images/osd_icons/star.png', // icon path, 48x48
 				'sticky'      : false,             // if true, timeout is ignored
 				'timeout'     : 4,                 // disappears after 6 seconds
@@ -458,6 +485,44 @@ function addScreenshottoMenu(menu_disk_id) {
         xmlhttp.send(formData);
     } 
 }
+
+function addFiletoMenu(menu_disk_id) {
+ if (menu_disk_id == "") {
+        document.getElementById("menu_file_list").innerHTML = "";
+        return;
+    } else { 
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+
+				data = xmlhttp.responseText.split ( "[BRK]" );
+				document.getElementById("menu_file_list").innerHTML = data[0];
+ 
+            $.notify_osd.create({
+				'text'        : data[1],             // notification message
+				'icon'        : '{$style_dir}images/osd_icons/star.png', // icon path, 48x48
+				'sticky'      : false,             // if true, timeout is ignored
+				'timeout'     : 4,                 // disappears after 6 seconds
+				'dismissable' : true               // can be dismissed manually
+				});
+            
+            document.getElementById("File_add_to_menu").reset();
+            }
+        }
+		
+		var formData = new FormData( document.getElementById("file_add_to_menu") );
+
+        xmlhttp.open("POST","../menus/db_menu_disk.php",true);
+        xmlhttp.send(formData);
+    } 
+}
+
 
 function deleteScreenshotfromMenu(str,menu_disk_id) {
 
@@ -505,6 +570,53 @@ function deleteScreenshotfromMenu(str,menu_disk_id) {
 			xmlhttp.open("GET","../menus/db_menu_disk.php?action=delete_screen_from_menu_disk&screenshot_id="+str+"&menu_disk_id="+menu_disk_id,true);
 			xmlhttp.send();
 			
+		}		 
+}  
+
+function deleteDownload(str,menu_disk_id) {
+
+         // CONFIRM REQUIRES ONE ARGUMENT 
+         var message = "Are you sure you want to delete this download from this menu disk?"; 
+         // CONFIRM IS BOOLEAN. THAT MEANS THAT 
+         // IT RETURNS TRUE IF 'OK' IS CLICKED 
+         // OTHERWISE IT RETURN FALSE 
+         var return_value = confirm(message); 
+		
+        if (return_value =="0") 
+        { 
+			return;
+		} 
+		else 
+		{ 
+			if (window.XMLHttpRequest) 
+			{
+				// code for IE7+, Firefox, Chrome, Opera, Safari
+				xmlhttp = new XMLHttpRequest();
+			} 
+			else 
+			{
+				// code for IE6, IE5
+				xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+			}
+					
+			xmlhttp.onreadystatechange = function() 
+			{
+				if (xmlhttp.readyState == 4 && xmlhttp.status == 200) 
+				{
+					document.getElementById("menu_file_list").innerHTML = xmlhttp.responseText;
+					
+					 $.notify_osd.create({
+					'text'        : 'Download deleted from menudisk', // notification message
+					'icon'        : '{$style_dir}images/osd_icons/star.png', // icon path, 48x48
+					'sticky'      : false,             // if true, timeout is ignored
+					'timeout'     : 4,                 // disappears after 6 seconds
+					'dismissable' : true               // can be dismissed manually
+					});
+					
+				}
+			}
+			xmlhttp.open("GET","../menus/db_menu_disk.php?action=delete_download_from_menu_disk&menu_disk_download_id="+str+"&menu_disk_id="+menu_disk_id,true);
+			xmlhttp.send();	
 		}		 
 }  
 

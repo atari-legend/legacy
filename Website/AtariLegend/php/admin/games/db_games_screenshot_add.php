@@ -54,7 +54,7 @@ foreach($image['tmp_name'] as $key=>$tmp_name)
 			{
 				$ext='gif';
 			} 
-		elseif ( $type_image=='image/pjpeg')
+		elseif ( $type_image=='image/jpeg')
 			{
 				$ext='jpg';
 			} 

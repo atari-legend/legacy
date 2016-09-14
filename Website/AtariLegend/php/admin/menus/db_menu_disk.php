@@ -479,9 +479,7 @@ if(isset($action) and $action=="delete_from_menu_disk")
 						  	  'menu_disk_title_id' => $query['menu_disk_title_id'],
 						  	  'menu_types_text' => $query['menu_types_text']));
 				}
-				
-
-				
+							
 				$smarty->assign('smarty_action', 'add_game_to_menu_return');
 				$smarty->assign('menu_disk_id', $menu_disk_id);
 	
@@ -497,13 +495,14 @@ if (isset($action) and $action=="add_screens")
 {
 	//Here we'll be looping on each of the inputs on the page that are filled in with an image!
 	$image = $_FILES['image'];
-
+	
+	$osd_message = "";
+	
 	foreach($image['tmp_name'] as $key=>$tmp_name)
-	{
-		if ($tmp_name!=='none')
+	{		
+		if ($tmp_name!=="")
 		{
 		// Check what extention the file has and if it is allowed.
-		
 			$ext="";
 			$type_image = $image['type'][$key];
 			
@@ -522,10 +521,10 @@ if (isset($action) and $action=="add_screens")
 				{
 					$ext='gif';
 				} 
-			elseif ( $type_image=='image/pjpeg')
+			elseif ( $type_image=='image/jpeg')
 				{
 					$ext='jpg';
-				} 
+				} 				
 			
 			if ($ext!=="")
 			{
@@ -549,9 +548,14 @@ if (isset($action) and $action=="add_screens")
 				
 				chmod("$menu_screenshot_save_path$screenshotrow[0].$ext", 0777);
 				
-				$_SESSION['edit_message'] = "screenshot uploaded";
+				$osd_message = "Screenshot uploaded";
 			}
 		}
+	}
+	
+	If ($osd_message=='')
+	{
+		$osd_message = "No screenshot uploaded";
 	}
 	
 	//Get the screenshots for this menu if they exist
@@ -572,7 +576,7 @@ if (isset($action) and $action=="add_screens")
 					
 		$smarty->append('screenshots',
 				 array('count' => $count,
-					   'path' => $game_screenshot_path,
+					   'path' => $menu_screenshot_path,
 					   'screenshot_image' => $screenshot_image,
 					   'id' => $screenshots['screenshot_id']));
 
@@ -581,7 +585,7 @@ if (isset($action) and $action=="add_screens")
 	}
 
 	$smarty->assign("screenshots_nr",$v_screenshots);
-	
+	$smarty->assign('osd_message', $osd_message);
 	$smarty->assign('smarty_action', 'add_screen_to_menu_return');
 	$smarty->assign('menu_disk_id', $menu_disk_id);
 	
@@ -597,7 +601,7 @@ if (isset($action) and $action=="delete_screen_from_menu_disk")
 	$sql_menushot = $mysqli->query("SELECT * FROM screenshot_menu
 	   					   			  WHERE menu_disk_id = $menu_disk_id 
 									  AND screenshot_id = $screenshot_id")
-	     		  or die ("Database error - selecting screenshots game");
+	     		  or die ("Database error - selecting screenshots menu");
 						
 	$menushot = $sql_menushot->fetch_row();
 	$menushotid = $menushot[0];
@@ -638,7 +642,7 @@ if (isset($action) and $action=="delete_screen_from_menu_disk")
 					
 		$smarty->append('screenshots',
 				 array('count' => $count,
-					   'path' => $game_screenshot_path,
+					   'path' => $menu_screenshot_path,
 					   'screenshot_image' => $screenshot_image,
 					   'id' => $screenshots['screenshot_id']));
 
@@ -654,6 +658,234 @@ if (isset($action) and $action=="delete_screen_from_menu_disk")
 	//Send to smarty for return value
 	$smarty->display("file:".$cpanel_template_folder."ajax_menus_detail.html");
 	
+}
+
+//****************************************************************************************
+// delete download from a menudisk
+//**************************************************************************************** 
+if (isset($action) and $action=="delete_download_from_menu_disk")
+{
+	$mysqli->query("DELETE from menu_disk_download WHERE menu_disk_download_id='$menu_disk_download_id'");
+	unlink ("$menu_file_path$menu_disk_download_id.zip");
+	
+	//************************************************************************************************
+	//Let's get the menu info for the file name concatenation, and the download data for disks already
+	//uploaded
+	//************************************************************************************************
+	//get the existing downloads
+	$SQL_DOWNLOADS = $mysqli->query("SELECT * FROM menu_disk_download WHERE menu_disk_id='$menu_disk_id'")
+					 or die ("Error getting download info");		
+
+	$nr_downloads = 0;
+	while ($downloads=$SQL_DOWNLOADS->fetch_array(MYSQLI_BOTH)) 
+	{					
+		$filepath = $menu_file_path;
+						
+		//start filling the smarty object
+		$smarty->append('downloads',
+				 array('menu_disk_download_id' => $downloads['menu_disk_download_id'],
+					   'filename' => $downloads['menu_disk_download_id'],
+					   'filepath' => $filepath));
+
+		$nr_downloads++;
+	}
+	
+	//In all cases we search we start searching through the menu_set table
+	//first
+	$sql_menus = "SELECT menu_disk.menu_sets_id,
+					menu_set.menu_sets_name,
+					menu_disk.menu_disk_number,
+					menu_disk.menu_disk_letter,
+					menu_disk.menu_disk_version,
+					menu_disk.menu_disk_part
+					FROM menu_disk 
+					LEFT JOIN menu_set ON (menu_disk.menu_sets_id = menu_set.menu_sets_id)
+					WHERE menu_disk.menu_disk_id = '$menu_disk_id'";
+	
+	$result_menus= $mysqli->query($sql_menus) or die ("error in query disk name");
+	
+	while ( $row=$result_menus->fetch_array(MYSQLI_BOTH) ) 
+	{  
+		// Create Menu disk name
+		$menu_disk_name = "$row[menu_sets_name] ";
+		if(isset($row['menu_disk_number'])) {$menu_disk_name .= "$row[menu_disk_number]";}
+		if(isset($row['menu_disk_letter'])) {$menu_disk_name .= "$row[menu_disk_letter]";}
+		if(isset($row['menu_disk_part'])) 
+		{
+			if (is_numeric($row['menu_disk_part']))
+				{$menu_disk_name .= " part $row[menu_disk_part]";}
+				else 
+				{
+					$menu_disk_name .= "$row[menu_disk_part]";
+				}
+		}
+	}
+	
+	$smarty->assign('menu_disk_name',$menu_disk_name);	
+	$smarty->assign('download_nr',$nr_downloads);		
+	
+	$smarty->assign('smarty_action', 'add_file_to_menu_return');
+	$smarty->assign('menu_disk_id', $menu_disk_id);
+	
+	//Send to smarty for return value
+	$smarty->display("file:".$cpanel_template_folder."ajax_menus_detail.html");
+}
+
+//****************************************************************************************
+// We wanna add a new download to a menu
+//**************************************************************************************** 
+if (isset($action) and $action == 'add_file' )
+{
+	require_once('../../includes/pclzip.lib.php');
+	
+	$menu_download_name = $_FILES['menu_download_name'];
+
+	if(isset($menu_download_name))
+	{	
+		
+		$file_name=$_FILES['menu_download_name']['name'];
+		
+		$tempfilename = $_FILES['menu_download_name']['tmp_name'];
+		
+		// Time for zip magic
+		$zip = new PclZip("$tempfilename");
+  			
+			// Obtain the contentlist of the zip file.
+  			if (($list = $zip->listContent()) == 0) {
+   	 		die("Error : ".$zip->errorInfo(true));
+  			}
+  		
+		// Get the filename from the returned array
+		$filename = $list[0]['filename'];
+
+  		// Split the filename to get the extention
+  		$ext = strrchr ( $filename, "." );
+  
+  		// Get rid of the . in the extention
+  		$ext = explode ( ".", $ext );
+  
+  		// convert to lowercase just incase....  
+  		$ext = strtolower ( $ext[1] );
+		
+		// check if the extention is valid.
+		if ($ext=="stx" || $ext=="msa" || $ext=="st") 
+		
+		{} // pretty isn't it? ;)
+		
+		else
+		
+		{ exit ("Try uploading a diskimage type that is allowed, like stx or msa not $ext"); }
+			
+		// Insert the ext,timestamp and the menu id into the menu download table.
+		$sdbquery = $mysqli->query("INSERT INTO menu_disk_download (menu_disk_id,fileext) VALUES ('$menu_disk_id','$ext')")
+		or die("ERROR! Couldn't insert date, ext and menu id");
+		
+		//select the newly created menu_download_id from the menu_download table
+		$MENUDOWN = $mysqli->query("SELECT menu_disk_download_id FROM menu_disk_download
+	   					   		 ORDER BY menu_disk_download_id desc")
+					or die ("Database error - selecting menu_download");
+		
+		$menudownrow = $MENUDOWN->fetch_row();
+		
+		// Time to unzip the file to the temporary directory
+		$archive = new PclZip("$tempfilename");
+  
+			if ($archive->extract(PCLZIP_OPT_PATH, "$menu_file_temp_path") == 0) {
+    		die("Error : ".$archive->errorInfo(true));
+  			}
+
+		// rename diskimage to increment number
+		rename("$menu_file_temp_path$filename", "$menu_file_temp_path$menudownrow[0].$ext") or die("couldn't rename the file");
+		
+		//Time to rezip file and place it in the proper location.
+		$archive = new PclZip("$menu_file_path$menudownrow[0].zip");
+  		$v_list = $archive->create("$menu_file_temp_path$menudownrow[0].$ext",
+       		                      PCLZIP_OPT_REMOVE_ALL_PATH);
+  			if ($v_list == 0) {
+    		die("Error : ".$archive->errorInfo(true));
+  			}
+		
+		// Time to do the safeties, here we do a sha512 file hash that we later enter into the database, this will be used in the download
+		// function to check everytime the file is being downloaded... if the hashes don't match, then datacorruption have changed the file.
+		$crc = openssl_digest("$menu_file_path$menudownrow[0].zip", 'sha512');
+
+		//$crc = md5_file ( "$game_file_path$gamedownrow[0].zip");
+		
+		$sdbquery = $mysqli->query("UPDATE menu_disk_download SET sha512 = '$crc' WHERE menu_disk_download_id = '$menudownrow[0]'")
+				or die("Couldn't insert sha512hash");
+		
+		// Chmod file so that we can backup/delete files through ftp.
+		chmod("$menu_file_path$menudownrow[0].zip", 0777);
+		
+		// Delete the unzipped file in the temporary directory
+		unlink ("$menu_file_temp_path$menudownrow[0].$ext");
+		
+		$osd_message = "menu uploaded";
+		
+		$smarty->assign('osd_message', $osd_message);
+		
+		//************************************************************************************************
+		//Let's get the menu info for the file name concatenation, and the download data for disks already
+		//uploaded
+		//************************************************************************************************
+		//get the existing downloads
+		$SQL_DOWNLOADS = $mysqli->query("SELECT * FROM menu_disk_download WHERE menu_disk_id='$menu_disk_id'")
+						 or die ("Error getting download info");		
+
+		$nr_downloads = 0;
+		while ($downloads=$SQL_DOWNLOADS->fetch_array(MYSQLI_BOTH)) 
+		{					
+			$filepath = $menu_file_path;
+							
+			//start filling the smarty object
+			$smarty->append('downloads',
+					 array('menu_disk_download_id' => $downloads['menu_disk_download_id'],
+						   'filename' => $downloads['menu_disk_download_id'],
+						   'filepath' => $filepath));
+
+			$nr_downloads++;
+		}
+		
+		//In all cases we search we start searching through the menu_set table
+		//first
+		$sql_menus = "SELECT menu_disk.menu_sets_id,
+						menu_set.menu_sets_name,
+						menu_disk.menu_disk_number,
+						menu_disk.menu_disk_letter,
+						menu_disk.menu_disk_version,
+						menu_disk.menu_disk_part
+						FROM menu_disk 
+						LEFT JOIN menu_set ON (menu_disk.menu_sets_id = menu_set.menu_sets_id)
+						WHERE menu_disk.menu_disk_id = '$menu_disk_id'";
+		
+		$result_menus= $mysqli->query($sql_menus) or die ("error in query disk name");
+		
+		while ( $row=$result_menus->fetch_array(MYSQLI_BOTH) ) 
+		{  
+			// Create Menu disk name
+			$menu_disk_name = "$row[menu_sets_name] ";
+			if(isset($row['menu_disk_number'])) {$menu_disk_name .= "$row[menu_disk_number]";}
+			if(isset($row['menu_disk_letter'])) {$menu_disk_name .= "$row[menu_disk_letter]";}
+			if(isset($row['menu_disk_part'])) 
+			{
+				if (is_numeric($row['menu_disk_part']))
+					{$menu_disk_name .= " part $row[menu_disk_part]";}
+					else 
+					{
+						$menu_disk_name .= "$row[menu_disk_part]";
+					}
+			}
+		}
+		
+		$smarty->assign('menu_disk_name',$menu_disk_name);	
+		$smarty->assign('download_nr',$nr_downloads);	
+		
+		$smarty->assign('smarty_action', 'add_file_to_menu_return');
+		$smarty->assign('menu_disk_id', $menu_disk_id);
+		
+		//Send to smarty for return value
+		$smarty->display("file:".$cpanel_template_folder."ajax_menus_detail.html");
+	}
 }
 
 

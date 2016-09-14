@@ -1,0 +1,30 @@
+{*
+/***************************************************************************
+*                             ajax_menus_add_file.html
+*                            ---------------------------------
+*   begin                : Tuesday, September 13, 2016
+*   copyright            : (C) 2016 Atari Legend
+*   email                : admin@atarilegend.com
+*
+*   Id:  ajax_menus_add_file.html,v 0.10 2016/09/13 23:03 STG
+*			- creation of file
+*
+***************************************************************************/
+*}
+
+<div class="standard_tile_text">
+	<form action="" enctype="multipart/form-data" method="post" name="file_add_to_menu" id="file_add_to_menu">
+	<fieldset>
+		<legend>Add a new download</legend>
+		<br>
+		<b>Filename :</b> 
+		<input type="file" name="menu_download_name" accept="application/x-zip-compressed,application/x-zip-compressed,application/x-zip-compressed">
+		<input type="button" class="topbutton_cpanel_small" value="Upload" style="padding:2px;" onclick="addFiletoMenu({$menu_disk_id})">
+		<input type="hidden" name="menu_disk_id" value="{$menu_disk_id}">
+		<input type="hidden" name="action" value="add_file">
+		<br>
+		<br>
+	</fieldset>
+	</form>
+</div>
+</br>

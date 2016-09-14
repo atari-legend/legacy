@@ -44,6 +44,8 @@ $interview_screenshot_save_path="../../../data/images/interview_screenshots/";
 //menu
 $menu_screenshot_path="../../data/images/menu_screenshots/";
 $menu_screenshot_save_path="../../../data/images/menu_screenshots/";
+$menu_file_path="../../../data/zips/menus/";
+$menu_file_temp_path="../../../data/zips/temp/";
 
 //news
 $news_images_path="../../data/images/news_images/";
