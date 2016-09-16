@@ -54,6 +54,7 @@ include("../../includes/admin.php");
 				$row=$result_menus->fetch_array(MYSQLI_BOTH);
 
 				$menu_disk_state = $row['state_id'];
+				$menu_disk_year = $row['menu_disk_year_id'];
 				
 				// Create Menu disk name
 				$menu_disk_name = "$row[menu_sets_name] ";
@@ -158,6 +159,7 @@ include("../../includes/admin.php");
 									individuals.ind_id,
 									individuals.ind_name,
 									menu_disk_credits.menu_disk_credits_id,
+									menu_disk_credits.individual_nicks_id,
 									author_type.author_type_info
 									FROM individuals 
 									LEFT JOIN menu_disk_credits ON (individuals.ind_id = menu_disk_credits.ind_id)
@@ -167,15 +169,40 @@ include("../../includes/admin.php");
 				
 				$query_individual = $mysqli->query($sql_individuals);
 				
+				$query_ind_id = "";
+				
 				while  ($query = $query_individual->fetch_array(MYSQLI_BOTH)) 
 				{
+					if ( $query_ind_id <> $query['ind_id'] )
+					{					
+						$sql_ind_nick = "SELECT 
+										individual_nicks.individual_nicks_id,
+										individual_nicks.nick
+										FROM individuals 
+										LEFT JOIN individual_nicks ON (individuals.ind_id = individual_nicks.ind_id)
+										WHERE individuals.ind_id = '$query[ind_id]'";
+						
+						$query_ind_nick = $mysqli->query($sql_ind_nick) or die ("error in the nickname query");	
+
+						while  ($query_nick = $query_ind_nick->fetch_array(MYSQLI_BOTH)) 
+						{
+							$smarty->append('ind_nick',
+							array('ind_id' => $query['ind_id'],
+								  'individual_nicks_id' => $query_nick['individual_nicks_id'],
+								  'nick' => $query_nick['nick']));
+						}
+					}
+										
 					// This smarty is used for for the menu_disk credits
 					$smarty->append('individuals',
 					array('menu_disk_credits_id' => $query['menu_disk_credits_id'],
 						  'ind_id' => $query['ind_id'],
 						  'ind_name' => $query['ind_name'],
 						  'menu_disk_id' => $menu_disk_id,
+						  'individual_nicks_id' => $query['individual_nicks_id'],
 						  'author_type_info' => $query['author_type_info']));
+					
+					$query_ind_id = $query['ind_id'];
 				}
 				
 				// Menu state dropdown
@@ -275,6 +302,7 @@ include("../../includes/admin.php");
 				$smarty->assign('download_nr',$nr_downloads);			
 											
 				$smarty->assign('menu_state_id', $menu_disk_state);
+				$smarty->assign('menu_year_id', $menu_disk_year);
 				
 				$smarty->assign('smarty_action', 'edit_disk_box');
 				$smarty->assign('menu_disk_id', $menu_disk_id);

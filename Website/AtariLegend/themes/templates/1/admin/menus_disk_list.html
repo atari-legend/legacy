@@ -703,7 +703,7 @@ function DeleteCredits(menu_disk_credits_id,menu_disk_id) {
          if (return_value !="0") 
          { 
 
-			if (menu_disk_credits_id == "") {
+		if (menu_disk_credits_id == "") {
         document.getElementById("menu_credit_list").innerHTML = "";
         return;
     } else { 
@@ -756,6 +756,38 @@ function ChangeState(state_id,menu_disk_id) {
             }
         } 
         xmlhttp.open("GET","../menus/db_menu_disk.php?action=change_menu_disk_state&state_id="+state_id+"&menu_disk_id="+menu_disk_id,true);
+        xmlhttp.send();
+    } 
+}
+
+function ChangeNick(individual_nicks_id,menu_disk_credits_id,menu_disk_id) {
+	
+ if (menu_disk_credits_id == "") {
+        document.getElementById("menu_credit_list").innerHTML = "";
+        return;
+    } else { 
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("menu_credit_list").innerHTML = xmlhttp.responseText;
+                
+                 $.notify_osd.create({
+				'text'        : 'Nickname changed',             // notification message
+				'icon'        : '{$style_dir}images/osd_icons/star.png', // icon path, 48x48
+				'sticky'      : false,             // if true, timeout is ignored
+				'timeout'     : 4,                 // disappears after 4 seconds
+				'dismissable' : true               // can be dismissed manually
+				});
+                
+            }
+        } 
+        xmlhttp.open("GET","../menus/db_menu_disk.php?action=change_nickname&individual_nicks_id="+individual_nicks_id+"&menu_disk_credits_id="+menu_disk_credits_id+"&menu_disk_id="+menu_disk_id,true);
         xmlhttp.send();
     } 
 }
