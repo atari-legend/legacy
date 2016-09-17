@@ -36,8 +36,16 @@
 							</select>
 							<br>
 							<br>
+							<b>Set parent menu:</b><br>
+							<select name="parent_id" id="quick_search_pub_select" onchange="ChangeParent(this.value,{$menus.menu_disk_id})">
+								<option value="">Set parent</option>
+								{foreach from=$parent item=line}	
+									{html_options values=$line.parent_id output=$line.parent_name selected=$menu_parent_id}
+								{/foreach}
+							</select>
 							<br>
-							<b>Menu disk options :</b><br><br>
+							<br>
+							<b>Menu disk options :</b><br>
 							<div id="intro_credit_link"><a onclick="popAddIntroCred({$menus.menu_disk_id})" style="cursor: pointer;" class="standard_tile_link">Add intro credits</a><br></div>
 							<div id="gameto_menu_link"><a onclick="popAddGames({$menus.menu_disk_id})" style="cursor: pointer;" class="standard_tile_link">Add Game/Tool/Demo to menu</a><br></div>
 							<div id="screenshot_link"><a onclick="popAddScreenshots({$menus.menu_disk_id})" style="cursor: pointer;" class="standard_tile_link">Add Screenshots to menu</a><br></div>
@@ -221,6 +229,8 @@
 {* POP FOR ADD INTRO CRED *}
 {if isset($smarty_action) and $smarty_action == "add_intro_credit"}
 	{* Start Individual add box *}
+	<br>
+	<br>
 	<form action="" method="post" id="menu_credits_form">
 		<b>Add intro credits:</b><br>
 		<Select class="saveHistory" id="m1" name="m1" onchange="browseInd(this.value)" style="width:50px;height:25px;">
@@ -266,7 +276,7 @@
 					<input type="checkbox" id="menu_disk_title_id{$line.menu_disk_title_id}" name="menu_disk_title_id[]" value="{$line.menu_disk_title_id}" onchange="deleteGamefromMenu({$line.menu_disk_title_id},{$menu_disk_id})">
 				</td>
 				<td class="menu_gamename_td">
-					{if $line.game_name != ''}<a href="../games/games_detail.php?menu_disk_title_id={$line.menu_disk_title_id}" class="standard_table_left">{$line.game_name}</a>
+					{if $line.game_name != ''}<a href="../games/games_detail.php?game_id={$line.game_id}" class="standard_table_left">{$line.game_name}</a>
 						{else}<i>n/a</i>{/if}
 				</td>
 				<td class="menu_gamedev_td">
