@@ -826,6 +826,41 @@ function ChangeYear(year_id,menu_disk_id) {
         xmlhttp.send();
     } 
 }
+
+function ChangeParent(parent_id,menu_disk_id) {
+	
+	var str2 = "diskedit_ajax_";
+	var disk_edit_ajax = str2.concat(menu_disk_id);
+	
+ if (menu_disk_id == "") {
+        document.getElementById(disk_edit_ajax).innerHTML = "";
+        return;
+    } else { 
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById(disk_edit_ajax).innerHTML = xmlhttp.responseText;
+                
+                 $.notify_osd.create({
+				'text'        : 'Parent disk updated',             // notification message
+				'icon'        : '{$style_dir}images/osd_icons/star.png', // icon path, 48x48
+				'sticky'      : false,             // if true, timeout is ignored
+				'timeout'     : 4,                 // disappears after 4 seconds
+				'dismissable' : true               // can be dismissed manually
+				});
+                
+            }
+        }
+        xmlhttp.open("GET","../menus/db_menu_disk.php?action=change_menu_disk_parent&parent_id="+parent_id+"&menu_disk_id="+menu_disk_id,true);
+        xmlhttp.send();
+    } 
+}
 </script>
 {/block}
 

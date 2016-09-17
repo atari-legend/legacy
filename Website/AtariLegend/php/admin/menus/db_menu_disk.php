@@ -332,7 +332,9 @@ if(isset($software_id) and isset($menu_disk_id))
 		// ok, insert done. Now this is a ajax job so we need a return value.
 		//
 			//list of games for the menu disk
-				$sql_games = "SELECT game.game_name AS 'software_name',
+				$sql_games = "SELECT game.game_id AS 'software_id', 
+								game.game_name AS 'software_name',
+								pub_dev.pub_dev_id AS 'developer_id',
 								pub_dev.pub_dev_name AS 'developer_name',
 								game_year.game_year AS 'year',
 								menu_disk_title.menu_disk_title_id,
@@ -346,7 +348,9 @@ if(isset($software_id) and isset($menu_disk_id))
 								LEFT JOIN menu_types_main ON (menu_disk_title.menu_types_main_id = menu_types_main.menu_types_main_id)
 								WHERE menu_disk_title.menu_disk_id = '$menu_disk_id' AND menu_disk_title.menu_types_main_id = '1' ORDER BY game.game_name ASC";
 				
-				$sql_demos = "SELECT demo.demo_name AS 'software_name',
+				$sql_demos = "SELECT demo.demo_id AS 'software_id', 
+								demo.demo_name AS 'software_name',
+								crew.crew_id AS 'developer_id',
 								crew.crew_name AS 'developer_name',
 								demo_year.demo_year AS 'year',
 								menu_disk_title.menu_disk_title_id,
@@ -360,7 +364,9 @@ if(isset($software_id) and isset($menu_disk_id))
 								LEFT JOIN menu_types_main ON (menu_disk_title.menu_types_main_id = menu_types_main.menu_types_main_id)
 								WHERE menu_disk_title.menu_disk_id = '$menu_disk_id' AND menu_disk_title.menu_types_main_id = '2' ORDER BY demo.demo_name ASC";				
 				
-				$sql_tools = "SELECT tools.tools_name AS 'software_name',
+				$sql_tools = "SELECT tools.tools_id AS 'software_id',
+								tools.tools_name AS 'software_name',
+								'' AS developer_id,
 								'' AS developer_name,
 								'' AS year,
 								menu_disk_title.menu_disk_title_id,
@@ -383,7 +389,9 @@ if(isset($software_id) and isset($menu_disk_id))
 					
 					// This smarty is used for creating the list of games
 						$smarty->append('game',
-	    				array('game_name' => $query['software_name'],
+	    				array('game_id' => $query['software_id'],
+							  'game_name' => $query['software_name'],
+							  'developer_id' => $query['developer_id'],
 						  	  'developer_name' => $query['developer_name'],
 						  	  'year' => $query['year'],
 						  	  'menu_disk_title_id' => $query['menu_disk_title_id'],
@@ -422,7 +430,9 @@ if(isset($action) and $action=="delete_from_menu_disk")
 		// ok, delete done. Now this is a ajax job so we need a return value.
 		//
 			//list of games for the menu disk
-				$sql_games = "SELECT game.game_name AS 'software_name',
+				$sql_games = "SELECT game.game_id AS 'software_id',
+								game.game_name AS 'software_name',
+								pub_dev.pub_dev_id AS 'developer_id',
 								pub_dev.pub_dev_name AS 'developer_name',
 								game_year.game_year AS 'year',
 								menu_disk_title.menu_disk_title_id,
@@ -436,7 +446,9 @@ if(isset($action) and $action=="delete_from_menu_disk")
 								LEFT JOIN menu_types_main ON (menu_disk_title.menu_types_main_id = menu_types_main.menu_types_main_id)
 								WHERE menu_disk_title.menu_disk_id = '$menu_disk_id' AND menu_disk_title.menu_types_main_id = '1' ORDER BY game.game_name ASC";
 				
-				$sql_demos = "SELECT demo.demo_name AS 'software_name',
+				$sql_demos = "SELECT demo.demo_id AS 'software_id',
+								demo.demo_name AS 'software_name',
+								crew.crew_id AS 'developer_id',
 								crew.crew_name AS 'developer_name',
 								demo_year.demo_year AS 'year',
 								menu_disk_title.menu_disk_title_id,
@@ -450,7 +462,9 @@ if(isset($action) and $action=="delete_from_menu_disk")
 								LEFT JOIN menu_types_main ON (menu_disk_title.menu_types_main_id = menu_types_main.menu_types_main_id)
 								WHERE menu_disk_title.menu_disk_id = '$menu_disk_id' AND menu_disk_title.menu_types_main_id = '2' ORDER BY demo.demo_name ASC";				
 				
-				$sql_tools = "SELECT tools.tools_name AS 'software_name',
+				$sql_tools = "SELECT tools.tools_id AS 'software_id',
+								tools.tools_name AS 'software_name',
+								'' AS developer_id,
 								'' AS developer_name,
 								'' AS year,
 								menu_disk_title.menu_disk_title_id,
@@ -473,7 +487,9 @@ if(isset($action) and $action=="delete_from_menu_disk")
 					
 					// This smarty is used for creating the list of games
 						$smarty->append('game',
-	    				array('game_name' => $query['software_name'],
+	    				array('game_id' => $query['software_id'],
+							  'game_name' => $query['software_name'],
+							  'developer_id' => $query['developer_id'],
 						  	  'developer_name' => $query['developer_name'],
 						  	  'year' => $query['year'],
 						  	  'menu_disk_title_id' => $query['menu_disk_title_id'],
@@ -1028,9 +1044,9 @@ if(isset($action) and $action=="delete_menu_disk_credits")
 }
 
 //****************************************************************************************
-// UPDATE STATE
+// UPDATE STATE/YEAR/PARENT
 //**************************************************************************************** 
-if(isset($action) and ( $action=="change_menu_disk_state" or $action=="change_menu_disk_year" ))
+if(isset($action) and ( $action=="change_menu_disk_state" or $action=="change_menu_disk_year" or $action=="change_menu_disk_parent") )
 {
 	if(isset($menu_disk_id)) 
 	{
@@ -1039,6 +1055,22 @@ if(isset($action) and ( $action=="change_menu_disk_state" or $action=="change_me
 			//Update state
 			$sql = $mysqli->query("UPDATE menu_disk SET state='$state_id' 
 							WHERE menu_disk_id='$menu_disk_id'");
+		}
+		elseif ( $action=="change_menu_disk_parent" )
+		{
+			// first check if the menu has already a parent entry
+			$sql = $mysqli->query("SELECT * FROM menu_disk_submenu
+						WHERE menu_disk_id = '$menu_disk_id'") or die ("error selecting menu disk parent");
+			if ( get_rows($sql) > 0 )
+			{		
+				//Update state
+				$sql = $mysqli->query("UPDATE menu_disk_submenu SET parent_id='$parent_id' 
+							WHERE menu_disk_id='$menu_disk_id'");
+			}
+			else
+			{
+				$sql_menu_parent = $mysqli->query("INSERT INTO menu_disk_submenu (parent_id, menu_disk_id) VALUES ('$parent_id','$menu_disk_id')") or die ("error inserting menu parent"); 
+			}
 		}
 		else
 		{
@@ -1071,7 +1103,8 @@ if(isset($action) and ( $action=="change_menu_disk_state" or $action=="change_me
 				menu_disk_state.state_id,
 				menu_disk_state.menu_state,
 				menu_disk_year.menu_disk_year_id,
-				menu_disk_year.menu_year
+				menu_disk_year.menu_year,
+				menu_disk_submenu.parent_id
 				FROM menu_disk 
 				LEFT JOIN menu_set ON (menu_disk.menu_sets_id = menu_set.menu_sets_id)
 				LEFT JOIN crew_menu_prod ON (menu_set.menu_sets_id = crew_menu_prod.menu_sets_id)
@@ -1080,6 +1113,7 @@ if(isset($action) and ( $action=="change_menu_disk_state" or $action=="change_me
 				LEFT JOIN individuals ON (ind_menu_prod.ind_id = individuals.ind_id)
 				LEFT JOIN menu_disk_state ON ( menu_disk.state = menu_disk_state.state_id)
 				LEFT JOIN menu_disk_year ON ( menu_disk.menu_disk_id = menu_disk_year.menu_disk_id)
+				LEFT JOIN menu_disk_submenu ON ( menu_disk.menu_disk_id = menu_disk_submenu.menu_disk_id)
 				WHERE menu_disk.menu_disk_id = '$menu_disk_id'";
 		
 		$result_menus= $mysqli->query($sql_menus) or die ('error in query');
@@ -1087,6 +1121,7 @@ if(isset($action) and ( $action=="change_menu_disk_state" or $action=="change_me
 
 		$menu_disk_state = $row['state_id'];
 		$menu_disk_year = $row['menu_disk_year_id'];
+		$menu_disk_parent = $row['parent_id'];
 		
 		// Create Menu disk name
 		$menu_disk_name = "$row[menu_sets_name] ";
@@ -1120,7 +1155,9 @@ if(isset($action) and ( $action=="change_menu_disk_state" or $action=="change_me
 				   'menu_state' => $row['menu_state']));
 		
 		//list of games for the menu disk
-		$sql_games = "SELECT game.game_name AS 'software_name',
+		$sql_games = "SELECT game.game_id AS 'software_id',
+						game.game_name AS 'software_name',
+						pub_dev.pub_dev_id AS 'developer_id',
 						pub_dev.pub_dev_name AS 'developer_name',
 						game_year.game_year AS 'year',
 						menu_disk_title.menu_disk_title_id,
@@ -1134,7 +1171,9 @@ if(isset($action) and ( $action=="change_menu_disk_state" or $action=="change_me
 						LEFT JOIN menu_types_main ON (menu_disk_title.menu_types_main_id = menu_types_main.menu_types_main_id)
 						WHERE menu_disk_title.menu_disk_id = '$menu_disk_id' AND menu_disk_title.menu_types_main_id = '1' ORDER BY game.game_name ASC";
 		
-		$sql_demos = "SELECT demo.demo_name AS 'software_name',
+		$sql_demos = "SELECT demo.demo_id AS 'software_id',
+						demo.demo_name AS 'software_name',
+						crew.crew_id AS 'developer_id',
 						crew.crew_name AS 'developer_name',
 						demo_year.demo_year AS 'year',
 						menu_disk_title.menu_disk_title_id,
@@ -1148,7 +1187,9 @@ if(isset($action) and ( $action=="change_menu_disk_state" or $action=="change_me
 						LEFT JOIN menu_types_main ON (menu_disk_title.menu_types_main_id = menu_types_main.menu_types_main_id)
 						WHERE menu_disk_title.menu_disk_id = '$menu_disk_id' AND menu_disk_title.menu_types_main_id = '2' ORDER BY demo.demo_name ASC";				
 		
-		$sql_tools = "SELECT tools.tools_name AS 'software_name',
+		$sql_tools = "SELECT tools.tools_id AS 'software_id',
+						tools.tools_name AS 'software_name',
+						'' AS developer_id,
 						'' AS developer_name,
 						'' AS year,
 						menu_disk_title.menu_disk_title_id,
@@ -1171,7 +1212,9 @@ if(isset($action) and ( $action=="change_menu_disk_state" or $action=="change_me
 			
 			// This smarty is used for creating the list of games
 				$smarty->append('game',
-				array('game_name' => $query['software_name'],
+				array('game_id' => $query['software_id'],
+					  'game_name' => $query['software_name'],
+					  'developer_id' => $query['developer_id'],
 					  'developer_name' => $query['developer_name'],
 					  'year' => $query['year'],
 					  'menu_disk_title_id' => $query['menu_disk_title_id'],
@@ -1229,6 +1272,44 @@ if(isset($action) and ( $action=="change_menu_disk_state" or $action=="change_me
 			$query_ind_id = $query['ind_id'];
 		}
 		
+		// Parent dropdown
+		$sql_parent = "SELECT menu_disk.menu_sets_id,
+						menu_set.menu_sets_name,
+						menu_disk.menu_disk_id,
+						menu_disk.menu_disk_number,
+						menu_disk.menu_disk_letter,
+						menu_disk.menu_disk_version,
+						menu_disk.menu_disk_part
+						FROM menu_disk 
+						LEFT JOIN menu_set ON (menu_disk.menu_sets_id = menu_set.menu_sets_id)";
+		
+		$result_parent= $mysqli->query($sql_parent) or die ("problem with parent query");
+		while ($row = $result_parent->fetch_array(MYSQLI_BOTH))
+		{
+			// Create Menu disk name
+			$menu_disk_name = "$row[menu_sets_name] ";
+			if(isset($row['menu_disk_number'])) {$menu_disk_name .= "$row[menu_disk_number]";}
+			if(isset($row['menu_disk_letter'])) {$menu_disk_name .= "$row[menu_disk_letter]";}
+			if(isset($row['menu_disk_part'])) 
+			{
+				if (is_numeric($row['menu_disk_part']))
+					{$menu_disk_name .= " part $row[menu_disk_part]";}
+					else 
+					{
+						$menu_disk_name .= "$row[menu_disk_part]";
+					}
+			}
+			
+			if(isset($row['menu_disk_version']) and $row['menu_disk_version']!=='') 
+			{
+				$menu_disk_name .= " v$row[menu_disk_version]";
+			}
+			
+			$smarty->append('parent',
+			array('parent_id' => $row['menu_disk_id'],
+				  'parent_name' => $menu_disk_name));
+		}
+		
 		// Menu state dropdown
 		$query_menu_state = $mysqli->query("SELECT * FROM menu_disk_state ORDER BY state_id ASC");
 		
@@ -1241,6 +1322,7 @@ if(isset($action) and ( $action=="change_menu_disk_state" or $action=="change_me
 					
 		$smarty->assign('menu_state_id', $menu_disk_state);
 		$smarty->assign('menu_year_id', $menu_disk_year);
+		$smarty->assign('menu_parent_id', $menu_disk_parent);
 		
 		$smarty->assign('smarty_action', 'edit_disk_box');
 		$smarty->assign('menu_disk_id', $menu_disk_id);
