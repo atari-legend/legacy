@@ -1,15 +1,15 @@
 <?php
 /***************************************************************************
-*                             games_series_main.php
+*                             ajax_addgames_menus.php
 *                            -----------------------
-*   begin                : Saturday, Sept 24, 2005
-*   copyright            : (C) 2003 Atari Legend
+*   begin                : 2016
+*   copyright            : (C) 2016 Atari Legend
 *   email                : silversurfer@atari-forum.com
 *   actual update        : Creation from scratch for smarty usage
 						   
 *							
 *
-*   Id: games_series_main.php,v 0.2 2005/09/24 Silver Surfer
+*   Id: ajax_addgames_menus.php,v 0.2 2005/09/24 Silver Surfer
 *
 ***************************************************************************/
 

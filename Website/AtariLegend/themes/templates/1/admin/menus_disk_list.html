@@ -363,6 +363,47 @@ function closeAddFile(str) {
         return;
 } 
 
+function addslashes( str ) {
+    return (str + '').replace(/[\\"']/g, '\\$&').replace(/\u0000/g, '\\0');
+}
+
+function popAddSet(str, menu_disk_id, title_name) {
+    if (str == "") {
+        document.getElementById("menu_detail_expand_set").innerHTML = "";
+        return;
+    } else { 
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("menu_detail_expand_set").innerHTML = xmlhttp.responseText;
+				var title = addslashes(title_name);
+                document.getElementById(str).innerHTML = "<a onclick=\"closeAddSet("+str+","+menu_disk_id+",'"+title+"')\" style=\"cursor: pointer;\" class=\"standard_tile_link\">Add</a>";
+            }
+        }
+		
+		var elementExists = document.getElementById("set_chain_update");
+		if (typeof(elementExists) != 'undefined' && elementExists != null)
+		{
+			document.getElementById("set_chain_update").innerHTML = "";
+		}
+        xmlhttp.open("GET","../menus/ajax_addset_menus.php?menu_disk_title_id="+str+"&menu_disk_id="+menu_disk_id+"&title_name="+title_name,true);
+        xmlhttp.send();
+    }
+}
+
+function closeAddSet(str, menu_disk_id, title_name) {
+		var title = addslashes(title_name);
+        document.getElementById("menu_detail_expand_set").innerHTML = "";
+        document.getElementById(str).innerHTML = "<a onclick=\"popAddSet("+str+","+menu_disk_id+",'"+title+"')\" style=\"cursor: pointer;\" class=\"standard_tile_link\">Add</a>";
+        return;
+} 
+
 function browseGame(str,menu_disk_id) {
     if (str == "") {
         document.getElementById("game_list").innerHTML = "";
@@ -523,6 +564,115 @@ function addFiletoMenu(menu_disk_id) {
     } 
 }
 
+function LinkChain(menu_disk_title_id,menu_disk_id) {
+ if (menu_disk_title_id == "") {
+        document.getElementById("menu_software_list").innerHTML = "";
+        return;
+    } else { 
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+
+				data = xmlhttp.responseText.split ( "[BRK]" );
+				document.getElementById("menu_software_list").innerHTML = data[0];
+ 
+            $.notify_osd.create({
+				'text'        : data[1],             // notification message
+				'icon'        : '{$style_dir}images/osd_icons/star.png', // icon path, 48x48
+				'sticky'      : false,             // if true, timeout is ignored
+				'timeout'     : 4,                 // disappears after 6 seconds
+				'dismissable' : true               // can be dismissed manually
+				});
+            
+             //document.getElementById("link_game_to_set").reset();
+			document.getElementById("menu_detail_expand_set").innerHTML = "";
+            }
+        }
+		
+		var formData = new FormData( document.getElementById("link_game_to_set") );
+
+        xmlhttp.open("POST","../menus/db_menu_disk.php",true);
+        xmlhttp.send(formData);
+    } 
+}
+
+function DeleteChain(menu_disk_title_id,menu_disk_id,title_name) {
+ if (menu_disk_title_id == "") {
+        document.getElementById("menu_software_list").innerHTML = "";
+        return;
+    } else { 
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+
+				data = xmlhttp.responseText.split ( "[BRK]" );
+				document.getElementById("menu_software_list").innerHTML = data[0];
+ 
+            $.notify_osd.create({
+				'text'        : data[1],             // notification message
+				'icon'        : '{$style_dir}images/osd_icons/star.png', // icon path, 48x48
+				'sticky'      : false,             // if true, timeout is ignored
+				'timeout'     : 4,                 // disappears after 6 seconds
+				'dismissable' : true               // can be dismissed manually
+				});
+            
+            //document.getElementById("link_game_to_set").reset();
+			document.getElementById("menu_detail_expand_set").innerHTML = "";
+            }
+        }
+	    xmlhttp.open("GET","../menus/db_menu_disk.php?action=delete_game_from_set&menu_disk_title_id="+menu_disk_title_id+"&menu_disk_id="+menu_disk_id+"&title_name="+title_name,true);
+        xmlhttp.send();
+    } 
+}
+
+
+
+function CreateChain(str,menu_disk_id) {
+ if (str == "") {
+        document.getElementById("menu_software_list").innerHTML = "";
+        return;
+    } else { 
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+
+				data = xmlhttp.responseText.split ( "[BRK]" );
+				document.getElementById("menu_software_list").innerHTML = data[0];
+ 
+            $.notify_osd.create({
+				'text'        : data[1],             // notification message
+				'icon'        : '{$style_dir}images/osd_icons/star.png', // icon path, 48x48
+				'sticky'      : false,             // if true, timeout is ignored
+				'timeout'     : 4,                 // disappears after 6 seconds
+				'dismissable' : true               // can be dismissed manually
+				});
+            
+            //document.getElementById("link_game_to_set").reset();
+			document.getElementById("menu_detail_expand_set").innerHTML = "";
+            }
+        }
+        xmlhttp.open("GET","../menus/db_menu_disk.php?action=add_set_to_menu&menu_disk_title_id="+str+"&menu_disk_id="+menu_disk_id,true);
+        xmlhttp.send();
+    } 
+}
 
 function deleteScreenshotfromMenu(str,menu_disk_id) {
 
@@ -629,38 +779,45 @@ function deleteGamefromMenu(str,menu_disk_id) {
          // OTHERWISE IT RETURN FALSE 
          var return_value = confirm(message); 
  
-		document.getElementById("menu_disk_title_id"+str).checked = false;
+		 document.getElementById("menu_disk_title_id"+str).checked = false;
 		
          if (return_value !="0") 
          { 
-
-			if (str == "") {
-        document.getElementById("menu_software_list").innerHTML = "";
-        return;
-    } else { 
-        if (window.XMLHttpRequest) {
-            // code for IE7+, Firefox, Chrome, Opera, Safari
-            xmlhttp = new XMLHttpRequest();
-        } else {
-            // code for IE6, IE5
-            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-        }
-        xmlhttp.onreadystatechange = function() {
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                document.getElementById("menu_software_list").innerHTML = xmlhttp.responseText;
+			if (str == "") 
+			{
+				document.getElementById("menu_software_list").innerHTML = "";
+				return;
+			} 
+			else 
+			{ 
+				if (window.XMLHttpRequest) 
+				{
+					// code for IE7+, Firefox, Chrome, Opera, Safari
+					xmlhttp = new XMLHttpRequest();
+				} 
+				else 
+				{
+					// code for IE6, IE5
+					xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+				}
+				xmlhttp.onreadystatechange = function() 
+				{
+					if (xmlhttp.readyState == 4 && xmlhttp.status == 200) 
+					{
+						data = xmlhttp.responseText.split ( "[BRK]" );
+						document.getElementById("menu_software_list").innerHTML = data[0];
                 
-                 $.notify_osd.create({
-				'text'        : 'Title deleted from menudisk', // notification message
-				'icon'        : '{$style_dir}images/osd_icons/star.png', // icon path, 48x48
-				'sticky'      : false,             // if true, timeout is ignored
-				'timeout'     : 4,                 // disappears after 6 seconds
-				'dismissable' : true               // can be dismissed manually
-				});
-                
-            }
-        }
-        xmlhttp.open("GET","../menus/db_menu_disk.php?action=delete_from_menu_disk&menu_disk_title_id="+str+"&menu_disk_id="+menu_disk_id,true);
-        xmlhttp.send();
+						 $.notify_osd.create({
+						'text'        : data[1], 			// notification message
+						'icon'        : '{$style_dir}images/osd_icons/star.png', // icon path, 48x48
+						'sticky'      : false,             // if true, timeout is ignored
+						'timeout'     : 4,                 // disappears after 6 seconds
+						'dismissable' : true               // can be dismissed manually
+											});
+					}
+				}
+				xmlhttp.open("GET","../menus/db_menu_disk.php?action=delete_from_menu_disk&menu_disk_title_id="+str+"&menu_disk_id="+menu_disk_id,true);
+				xmlhttp.send();
 			}		 
          }  
 }
