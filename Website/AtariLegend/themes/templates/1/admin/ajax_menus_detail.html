@@ -23,8 +23,17 @@
 				<td class="menu_state_td">{if isset($menus.menu_state)}{$menus.menu_state}{else}<i>n/a</i>{/if}</td>
 			</tr>
 			<tr>
-				<td colspan="4" style="border-top: solid 1px #b2b2b2;width:100%;">
+				<td colspan="4" style="border-top: solid 1px #b2b2b2;width:100%;">	
 					<br>
+					<fieldset style="width:93%; margin:auto;">
+						<legend>Menu disk HELP</legend>
+							<div class="help_text">
+								Most of the options in here are self explanatory, however here is some info for the less common options :<br><br>
+								<b>Set State</b> : The current state of the menu disk<br><br>
+								<b>Set parent menu</b> : It sometimes happens that a menu can be a sub menu of a completely different menu/menu set. Overhere you select to which menu the active menu belongs.<br><br>
+							</div>
+					</fieldset>		
+					<br>					
 					<div class="main_company_container">
 						<div class="main_company_child" id="child_edit_company">
 							<b>Set state:</b><br>
@@ -65,6 +74,13 @@
 					<br>	
 					<div id="menu_credit_list">	
 						{if isset($individuals)}
+							<fieldset style="width:93%; margin:auto;">
+							<legend>Intro Credits HELP</legend>
+								<div class="help_text">
+									The intro of a menu disk was a lot of times coded by different people than the actual menu itself. You can add them by pressing the 'add intro credits' above. Once an individual is added, you can select his/her nickname. As some people used different nicks for different menu's.
+								</div>
+							</fieldset>		
+							<br>								
 							<table class="table_game_list" id="game_list_table" style="width:95%;border: solid 1px black;margin:auto;">
 							<tr>
 								<th id="menu_cred_th">Credits</th>
@@ -100,6 +116,13 @@
 					<br>
 					<div id="menu_software_list">
 						{if isset($game)}
+							<fieldset style="width:93%; margin:auto;">
+							<legend>Menu titles HELP</legend>
+								<div class="help_text">
+									Overhere you have an overview of the software titles on the menu disk. When pressing the 'add game/tool/demo' button above, a list with search options will appear. Use this list to add titles to the menu. With the 'add' link in the 'set' column, you can CHAIN titles.
+								</div>
+							</fieldset>		
+							<br>			
 							<table class="table_game_list" style="width:95%;border: solid 1px black;margin:auto;">
 							<tr>
 								<th id="menu_mark_th"></th>
@@ -107,6 +130,7 @@
 								<th id="menu_gamedev_th">Developer</th>
 								<th id="menu_gameyear_th">Year</th>
 								<th id="menu_gameinfo_th">Info</th>
+								<th id="menu_gameset_th">Set</th>
 							</tr>
 							{foreach from=$game item=line}
 								<tr class="table_game_list">
@@ -116,7 +140,7 @@
 									</td>
 									<td class="menu_gamename_td">
 										{if $line.game_name != ''}
-											{if $line.menu_types_text == 'Game'}<a href="../games/games_detail.php?game_id={$line.game_id}" class="standard_table_left">{$line.game_name}</a>{else}<a href="../administration/construction.php" class="standard_table_left">{$line.game_name}</a>{/if}
+											{if $line.menu_types_text == 'Game'}<a href="../games/games_detail.php?game_id={$line.game_id}" class="standard_table_left">{$line.game_name}{if $line.set_chain != ''} - <a onclick="popAddSet({$line.menu_disk_title_id},{$menus.menu_disk_id},'{$line.game_name|escape:'quotes'}')" style="cursor: pointer;" class="standard_tile_link"><i>Part {$line.set_chain}</i></a>{/if}</a>{else}<a href="../administration/construction.php" class="standard_table_left">{$line.game_name}</a>{/if}
 										{else}
 											<i>n/a</i>
 										{/if}
@@ -150,10 +174,13 @@
 									<td class="menu_gameinfo_td">
 										{$line.menu_types_text}
 									</td>
+									<td class="menu_gameset_td">
+										<div id="{$line.menu_disk_title_id}"><a onclick="popAddSet({$line.menu_disk_title_id},{$menus.menu_disk_id},'{$line.game_name|escape:'quotes'}')" style="cursor: pointer;" class="standard_tile_link">Add</a></div>
+									</td>
 								</tr>
 							{/foreach}
 							<tr class="table_game_list">
-								<td class="game_list_footer" colspan="5">
+								<td class="game_list_footer" colspan="6">
 									<img src="../../../themes/templates/1/includes/img/arrow_ltr.gif" alt="" width="38" height="22">		
 									<input type="hidden" name="action" value="delete_from_menu_disk">
 									<input type="button" value="Delete" class="quick_search_games_button" style="display:inline;">
@@ -161,11 +188,11 @@
 								</td>
 							</tr>
 							</table>
-						{/if}			
-					</div>	
+						{/if}								
+					</div>
 					<br>
+					<div id="menu_detail_expand_set"></div>	
 					<div id="menu_detail_expand_games"></div>
-					<br>
 					<div id="menu_screenshot_list">
 						{if isset( $screenshots)}
 						<div class="standard_tile_text">
@@ -189,9 +216,7 @@
 						</div>
 						{/if}
 					</div>
-					<br>
 					<div id="menu_detail_expand_screenshots"></div>
-					<br>
 					<div id="menu_file_list">
 						{if isset( $downloads)}
 						<div class="standard_tile_text">
@@ -210,7 +235,6 @@
 						</div>
 						{/if}
 					</div>
-					<br>
 					<div id="menu_detail_expand_file"></div>
 				</td>
 			</tr>
@@ -268,6 +292,7 @@
 			<th id="menu_gamedev_th">Developer</th>
 			<th id="menu_gameyear_th">Year</th>
 			<th id="menu_gameinfo_th">Info</th>
+			<th id="menu_gameset_th">Set</th>
 		</tr>
 		{foreach from=$game item=line}
 			<tr class="table_game_list">
@@ -276,8 +301,11 @@
 					<input type="checkbox" id="menu_disk_title_id{$line.menu_disk_title_id}" name="menu_disk_title_id[]" value="{$line.menu_disk_title_id}" onchange="deleteGamefromMenu({$line.menu_disk_title_id},{$menu_disk_id})">
 				</td>
 				<td class="menu_gamename_td">
-					{if $line.game_name != ''}<a href="../games/games_detail.php?game_id={$line.game_id}" class="standard_table_left">{$line.game_name}</a>
-						{else}<i>n/a</i>{/if}
+					{if $line.game_name != ''}
+						{if $line.menu_types_text == 'Game'}<a href="../games/games_detail.php?game_id={$line.game_id}" class="standard_table_left">{$line.game_name}{if $line.set_chain != ''} - <a onclick="popAddSet({$line.menu_disk_title_id},{$menu_disk_id})" style="cursor: pointer;" class="standard_tile_link"><i>Part {$line.set_chain}</i></a>{/if}</a>{else}<a href="../administration/construction.php" class="standard_table_left">{$line.game_name}</a>{/if}
+					{else}
+						<i>n/a</i>
+					{/if}
 				</td>
 				<td class="menu_gamedev_td">
 					{if $line.developer_name != ''}	
@@ -307,10 +335,13 @@
 				<td class="menu_gameinfo_td">
 					{$line.menu_types_text}
 				</td>
+				<td class="menu_gameset_td">
+					<div id="set_link"><a onclick="popAddSet({$line.menu_disk_title_id},{$menu_disk_id},'{$line.game_name|escape:'quotes'}')" style="cursor: pointer;" class="standard_tile_link">Add</a></div>
+				</td>
 			</tr>
 		{/foreach}
 		<tr>
-			<td class="game_list_footer" colspan="5">
+			<td class="game_list_footer" colspan="6">
 				<img src="../../../themes/templates/1/includes/img/arrow_ltr.gif" alt="" width="38" height="22">	
 				<input type="hidden" name="action" value="delete_from_menu_disk">
 				<input type="button" value="Delete" class="quick_search_games_button" style="display:inline;">
@@ -418,4 +449,124 @@
 			{/foreach}
 		{/if}
 	</table>
+{/if}
+
+
+{if isset($smarty_action) and $smarty_action == "add_chain_to_menu_return"}
+	{if isset($game)}
+	<div id="menu_software_list">
+		<table class="table_game_list" style="width:95%;border: solid 1px black;margin:auto;">
+		<tr>
+			<th id="menu_mark_th"></th>
+			<th id="menu_gamename_th">Software Name</th>
+			<th id="menu_gamedev_th">Developer</th>
+			<th id="menu_gameyear_th">Year</th>
+			<th id="menu_gameinfo_th">Info</th>
+			<th id="menu_gameset_th">Set</th>
+		</tr>
+		{foreach from=$game item=line}
+			<tr class="table_game_list">
+				<td class="menu_mark_td">
+					<form name="MenuDiskContent" id="MenuDiskContent">
+					<input type="checkbox" id="menu_disk_title_id{$line.menu_disk_title_id}" name="menu_disk_title_id[]" value="{$line.menu_disk_title_id}" onchange="deleteGamefromMenu({$line.menu_disk_title_id},{$menu_disk_id})">
+				</td>
+				<td class="menu_gamename_td">
+					{if $line.game_name != ''}
+						{if $line.menu_types_text == 'Game'}<a href="../games/games_detail.php?game_id={$line.game_id}" class="standard_table_left">{$line.game_name}{if $line.set_chain != ''} - <a onclick="popAddSet({$line.menu_disk_title_id},{$menu_disk_id},'{$line.game_name|escape:'quotes'}')" style="cursor: pointer;" class="standard_tile_link"><i>Part {$line.set_chain}</i></a>{/if}</a>{else}<a href="../administration/construction.php" class="standard_table_left">{$line.game_name}</a>{/if}
+					{else}
+						<i>n/a</i>
+					{/if}
+				</td>
+				<td class="menu_gamedev_td">
+					{if $line.developer_name != ''}	
+						{if $line.menu_types_text == 'Game'}					
+							<a href="../company/company_edit.php?comp_id={$line.developer_id}" class="standard_table_left">{$line.developer_name}</a>
+						{else}
+							<a href="../administration/construction.php" class="standard_table_left">{$line.developer_name}</a>
+						{/if}
+					{else}
+						<i>n/a</i>
+					{/if}</td>				
+				<td class="menu_gameyear_td">
+					{if $line.year != ''}
+						{if $line.menu_types_text == 'Game'}
+							<a href="../games/games_list.php?year={$line.year}&amp;action=search" class="standard_table_left">
+								{$line.year}
+							</a>
+						{else}
+							<a href="../administration/construction.php" class="standard_table_left">
+								{$line.year}
+							</a>
+						{/if}
+					{else}
+						<i>n/a</i>
+					{/if}
+				</td>
+				<td class="menu_gameinfo_td">
+					{$line.menu_types_text}
+				</td>
+				<td class="menu_gameset_td">
+					<div id="{$line.menu_disk_title_id}"><a onclick="popAddSet({$line.menu_disk_title_id},{$menu_disk_id},'{$line.game_name|escape:'quotes'}')" style="cursor: pointer;" class="standard_tile_link">Add</a></div>
+				</td>
+			</tr>
+		{/foreach}
+		<tr>
+			<td class="game_list_footer" colspan="6">
+				<img src="../../../themes/templates/1/includes/img/arrow_ltr.gif" alt="" width="38" height="22">	
+				<input type="hidden" name="action" value="delete_from_menu_disk">
+				<input type="button" value="Delete" class="quick_search_games_button" style="display:inline;">
+				</form>
+			</td>
+		</tr>
+		</table>
+	{/if}
+	</div>
+	<br>
+	<div id="set_chain_update">
+	<div class="standard_tile_text">
+		<div class="main_company_container">
+			<div class="main_company_child" id="child_edit_company">
+				<form action="" method="post" name="link_game_to_set" id="link_game_to_set">	
+					<fieldset>
+					<legend>Select chain {if isset($title_name)}for {$title_name}{/if}</legend>
+						<select name="chainbrowse" id="quick_search_pub_select">
+							<option value="" selected>-</option>
+							{foreach from=$chain_data item=line}	
+								{html_options values=$line.menu_disk_title_set_nr output=$line.menu_disk_name selected=$select_chain_data}
+							{/foreach}
+						</select>
+						<input type="text" name="menu_disk_title_set_chain" value="{if isset($select_chain_nr)}{$select_chain_nr}{else}Nr{/if}" class="standard_tile_input_small" style="width:5%">
+						<input type="button" onclick="LinkChain({$menu_disk_title_id},{$menu_disk_id})" class="topbutton_cpanel_small" value="Link">
+						{if isset($select_chain_data)}
+							<input type="button" onclick="DeleteChain({$menu_disk_title_id},{$menu_disk_id},'{{$title_name}|escape:'quotes'}')" class="topbutton_cpanel_small" value="Delete">
+						{/if}
+						<input type="hidden" name="menu_disk_id" value="{$menu_disk_id}">
+						<input type="hidden" name="menu_disk_title_id" value="{$menu_disk_title_id}">
+						<input type="hidden" name="action" value="link_game_to_set">
+						<br>
+						{if isset($selected_chain_data)}
+							<br>
+							<b>Titles linked to this chain :</b><br>
+							{foreach from=$selected_chain_data item=line}
+								{$line.menu_disk_name}<br>
+							{/foreach}
+						{/if}
+					</fieldset>
+				</form>
+			</div>
+			<div class="main_company_child" id="child_edit_company">
+				<form action="" method="get" name="set_add_to_menu" id="set_add_to_menu">	
+					<fieldset>
+					<legend>Create chain {if isset($title_name)}for {$title_name}{/if}</legend>
+						<input type="button" onclick="CreateChain({$menu_disk_title_id},{$menu_disk_id})" class="topbutton_cpanel_small" value="Create">
+					</fieldset>
+				</form>
+			</div>
+		</div>
+	</div>
+	</div>
+	{if isset($osd_message)}
+		[BRK]{$osd_message}
+	{/if}
+			
 {/if}

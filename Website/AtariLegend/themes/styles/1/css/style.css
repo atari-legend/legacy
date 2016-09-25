@@ -2683,6 +2683,12 @@ Menu set search
   font-weight: 100;
   padding-left: 2px; }
 
+.help_text {
+  color: black;
+  text-align: left;
+  font-size: 12pt;
+  border: 0; }
+
 /*---------------------------------------------------------- 
 Menu set edit
 ------------------------------------------------------------ */
@@ -2758,7 +2764,7 @@ Menu set edit
   font-weight: 100;
   padding-right: 5px; }
 
-#menu_mark_th {
+#menu_mark_th, #menu_gameinfo_th, #menu_gameset_th {
   width: 5%;
   text-align: left; }
 
@@ -2770,11 +2776,11 @@ Menu set edit
   width: 35%;
   text-align: left; }
 
-#menu_gameyear_th, #menu_gameinfo_th {
+#menu_gameyear_th {
   width: 10%;
   text-align: left; }
 
-.menu_mark_td {
+.menu_mark_td, .menu_gameinfo_td, .menu_gameset_td {
   width: 5%;
   text-align: left;
   color: white;
@@ -2798,7 +2804,7 @@ Menu set edit
   font-weight: 100;
   padding-right: 5px; }
 
-.menu_gameyear_td, .menu_gameinfo_td {
+.menu_gameyear_td {
   width: 10%;
   text-align: left;
   color: white;
@@ -3414,7 +3420,7 @@ Menu set edit
   #menu_state_th, .menu_state_td, #menu_gamedev_th, .menu_gamedev_td {
     display: none; } }
 @media screen and (max-width: 700px) {
-  #menu_gameyear_th, #menu_gameinfo_th, .menu_gameyear_td, .menu_gameinfo_td {
+  #menu_gameyear_th, #menu_gameinfo_th, #menu_gameset_th, .menu_gameyear_td, .menu_gameinfo_td, .menu_gameset_td {
     display: none; } }
 /*---------------------------------------------------------- 
 General settings

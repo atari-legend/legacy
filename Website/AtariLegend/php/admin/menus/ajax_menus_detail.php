@@ -97,8 +97,10 @@ include("../../includes/admin.php");
 								pub_dev.pub_dev_id AS 'developer_id',
 								game_year.game_year AS 'year',
 								menu_disk_title.menu_disk_title_id,
-								menu_types_main.menu_types_text
+								menu_types_main.menu_types_text,
+								menu_disk_title_set.menu_disk_title_set_chain
 								FROM menu_disk_title
+								LEFT JOIN menu_disk_title_set ON (menu_disk_title_set.menu_disk_title_id = menu_disk_title.menu_disk_title_id)
 								LEFT JOIN menu_disk_title_game ON (menu_disk_title.menu_disk_title_id = menu_disk_title_game.menu_disk_title_id)
 								LEFT JOIN game ON (menu_disk_title_game.game_id = game.game_id)
 								LEFT JOIN game_developer ON (game.game_id = game_developer.game_id)
@@ -113,8 +115,10 @@ include("../../includes/admin.php");
 								crew.crew_id AS 'developer_id',
 								demo_year.demo_year AS 'year',
 								menu_disk_title.menu_disk_title_id,
-								menu_types_main.menu_types_text
+								menu_types_main.menu_types_text,
+								menu_disk_title_set.menu_disk_title_set_chain
 								FROM menu_disk_title
+								LEFT JOIN menu_disk_title_set ON (menu_disk_title_set.menu_disk_title_id = menu_disk_title.menu_disk_title_id)
 								LEFT JOIN menu_disk_title_demo ON (menu_disk_title.menu_disk_title_id = menu_disk_title_demo.menu_disk_title_id)
 								LEFT JOIN demo ON (menu_disk_title_demo.demo_id = demo.demo_id)
 								LEFT JOIN demo_year ON (demo.demo_id = demo_year.demo_id)
@@ -129,8 +133,10 @@ include("../../includes/admin.php");
 								'' AS developer_id,
 								'' AS year,
 								menu_disk_title.menu_disk_title_id,
-								menu_types_main.menu_types_text
+								menu_types_main.menu_types_text,
+								menu_disk_title_set.menu_disk_title_set_chain
 								FROM menu_disk_title
+								LEFT JOIN menu_disk_title_set ON (menu_disk_title_set.menu_disk_title_id = menu_disk_title.menu_disk_title_id)
 								LEFT JOIN menu_disk_title_tools ON (menu_disk_title.menu_disk_title_id = menu_disk_title_tools.menu_disk_title_id)
 								LEFT JOIN tools ON (menu_disk_title_tools.tools_id = tools.tools_id)
 								LEFT JOIN menu_types_main ON (menu_disk_title.menu_types_main_id = menu_types_main.menu_types_main_id)
@@ -145,11 +151,11 @@ include("../../includes/admin.php");
 				
 				while  ($query = $temp_query->fetch_array(MYSQLI_BOTH)) 
 				{ 		
-					
 					// This smarty is used for creating the list of games
 						$smarty->append('game',
 	    				array('game_name' => $query['software_name'],
 							  'game_id' => $query['software_id'],
+							  'set_chain' => $query['menu_disk_title_set_chain'],
 						  	  'developer_name' => $query['developer_name'],
 							  'developer_id' => $query['developer_id'],
 						  	  'year' => $query['year'],
