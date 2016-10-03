@@ -824,7 +824,7 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
 		}
 	}
 	
-	//	Everything we do for the GAMES SECTION	
+	//	Everything we do for the Menu Set SECTION	
 	If ( $section == 'Menu set' )
 	{
 		//  get the menu set name
@@ -834,7 +834,7 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
 			$section_name = $query_data['menu_sets_name'];
 	
 	
-		If ( $subsection == 'Menu set' )
+		If ( $subsection == 'Menu set' or $subsection == 'Menu disk (multiple)' )
 		{
 			$subsection_name = $section_name;
 		}
@@ -857,6 +857,48 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
 			$subsection_name = $query_data['ind_name'];
 		}
 		
+		If ( $subsection == 'Menu type' )
+		{
+			// get the name of the menu type
+			$query_menu_type = "SELECT menu_types_text FROM menu_types_main WHERE menu_types_main_id = '$subsection_id'";
+			$result = $mysqli->query($query_menu_type) or die("getting menu type name failed");
+			$query_data = $result->fetch_array(MYSQLI_BOTH);
+			$subsection_name = $query_data['menu_types_text'];
+		}
+		
+		If ( $subsection == 'Menu disk' )
+		{
+			// get the name of the menu disk
+			$sql_menus = "SELECT menu_disk.menu_sets_id,
+								menu_set.menu_sets_name,
+								menu_disk.menu_disk_number,
+								menu_disk.menu_disk_letter,
+								menu_disk.menu_disk_version,
+								menu_disk.menu_disk_part
+								FROM menu_disk 
+								LEFT JOIN menu_set ON (menu_disk.menu_sets_id = menu_set.menu_sets_id)
+								WHERE menu_disk.menu_disk_id = '$subsection_id'";
+				
+			$result_menus= $mysqli->query($sql_menus) or die ("error in query disk name");
+			
+			while ( $row=$result_menus->fetch_array(MYSQLI_BOTH) ) 
+			{  
+				// Create Menu disk name
+				$menu_disk_name = "$row[menu_sets_name] ";
+				if(isset($row['menu_disk_number'])) {$menu_disk_name .= "$row[menu_disk_number]";}
+				if(isset($row['menu_disk_letter'])) {$menu_disk_name .= "$row[menu_disk_letter]";}
+				if(isset($row['menu_disk_part'])) 
+				{
+					if (is_numeric($row['menu_disk_part']))
+						{$menu_disk_name .= " part $row[menu_disk_part]";}
+						else 
+						{
+							$menu_disk_name .= "$row[menu_disk_part]";
+						}
+				}
+			}
+			$subsection_name = $menu_disk_name;
+		}
 	}
 	
 	//	Everything we do for the CREW SECTION	
@@ -874,7 +916,7 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
 		}
 	}
 	
-	//	Everything we do for the MENUT TYPE SECTION	
+	//	Everything we do for the MENU TYPE SECTION	
 	If ( $section == 'Menu type' )
 	{
 		// get the name of the menu type
@@ -887,6 +929,225 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
 		{
 			$subsection_name = $section_name;
 		}
+	}
+	
+	//	Everything we do for the MENU DISK	
+	If ( $section == 'Menu disk' )
+	{
+		// get the name of the menu disk
+		$sql_menus = "SELECT menu_disk.menu_sets_id,
+							menu_set.menu_sets_name,
+							menu_disk.menu_disk_number,
+							menu_disk.menu_disk_letter,
+							menu_disk.menu_disk_version,
+							menu_disk.menu_disk_part
+							FROM menu_disk 
+							LEFT JOIN menu_set ON (menu_disk.menu_sets_id = menu_set.menu_sets_id)
+							WHERE menu_disk.menu_disk_id = '$section_id'";
+			
+		$result_menus= $mysqli->query($sql_menus) or die ("error in query disk name");
+		
+		while ( $row=$result_menus->fetch_array(MYSQLI_BOTH) ) 
+		{  
+			$section_id = $row['menu_sets_id'];
+									
+			// Create Menu disk name
+			$menu_disk_name = "$row[menu_sets_name] ";
+			if(isset($row['menu_disk_number'])) {$menu_disk_name .= "$row[menu_disk_number]";}
+			if(isset($row['menu_disk_letter'])) {$menu_disk_name .= "$row[menu_disk_letter]";}
+			if(isset($row['menu_disk_part'])) 
+			{
+				if (is_numeric($row['menu_disk_part']))
+					{$menu_disk_name .= " part $row[menu_disk_part]";}
+					else 
+					{
+						$menu_disk_name .= "$row[menu_disk_part]";
+					}
+			}
+		}
+		
+		$section_name = $menu_disk_name;
+		
+		If ( $subsection == 'State' )
+		{
+			// get the name of the menu type
+			$query_menu_state = "SELECT menu_state FROM menu_disk_state WHERE state_id = '$subsection_id'";
+			$result = $mysqli->query($query_menu_state) or die("getting menu state name failed");
+			$query_data = $result->fetch_array(MYSQLI_BOTH);
+			$subsection_name = $query_data['menu_state'];
+		}
+		
+		If ( $subsection == 'Parent' )
+		{
+			// get the name of the parent
+			$sql_menus = "SELECT menu_disk.menu_sets_id,
+								menu_set.menu_sets_name,
+								menu_disk.menu_disk_number,
+								menu_disk.menu_disk_letter,
+								menu_disk.menu_disk_version,
+								menu_disk.menu_disk_part
+								FROM menu_disk 
+								LEFT JOIN menu_set ON (menu_disk.menu_sets_id = menu_set.menu_sets_id)
+								WHERE menu_disk.menu_disk_id = '$subsection_id'";
+				
+			$result_menus= $mysqli->query($sql_menus) or die ("error in query disk name");
+			
+			while ( $row=$result_menus->fetch_array(MYSQLI_BOTH) ) 
+			{  
+				// Create Menu disk name
+				$menu_disk_name = "$row[menu_sets_name] ";
+				if(isset($row['menu_disk_number'])) {$menu_disk_name .= "$row[menu_disk_number]";}
+				if(isset($row['menu_disk_letter'])) {$menu_disk_name .= "$row[menu_disk_letter]";}
+				if(isset($row['menu_disk_part'])) 
+				{
+					if (is_numeric($row['menu_disk_part']))
+						{$menu_disk_name .= " part $row[menu_disk_part]";}
+						else 
+						{
+							$menu_disk_name .= "$row[menu_disk_part]";
+						}
+				}
+			}
+		$subsection_name = $menu_disk_name;
+		}
+		
+		If ( $subsection == 'Year')
+		{
+			$subsection_name = $subsection_id;
+		}
+		
+		If ( $subsection == 'Menu disk' or $subsection == 'Screenshots'  or $subsection == 'File' )
+		{
+			$subsection_name = $section_name ;
+		}
+		
+		If ( $subsection == 'Credits')
+		{
+			if ($action == 'Delete')
+			{
+				//get the ind id
+				$query_ind = "SELECT ind_id FROM menu_disk_credits WHERE menu_disk_credits_id = '$subsection_id'";
+				$result = $mysqli->query($query_ind) or die("getting individual name failed");
+				$query_data = $result->fetch_array(MYSQLI_BOTH);
+				$subsection_id = $query_data['ind_id'];
+			}
+			
+			// get the name of the individual
+			$query_ind = "SELECT ind_name FROM individuals WHERE ind_id = '$subsection_id'";
+			$result = $mysqli->query($query_ind) or die("getting individual name failed");
+			$query_data = $result->fetch_array(MYSQLI_BOTH);
+			$subsection_name = $query_data['ind_name'];
+		}
+		
+		If ( $subsection == 'Nickname')
+		{
+			// get the individual id
+			$query_ind = "SELECT ind_id FROM menu_disk_credits WHERE individual_nicks_id = '$subsection_id'";
+			$result = $mysqli->query($query_ind) or die("getting individual name failed");
+			$query_data = $result->fetch_array(MYSQLI_BOTH);
+			$ind_id = $query_data['ind_id'];
+			
+			//now get the individual name
+			$query_ind = "SELECT ind_name FROM individuals WHERE ind_id = '$ind_id'";
+			$result = $mysqli->query($query_ind) or die("getting individual name failed");
+			$query_data = $result->fetch_array(MYSQLI_BOTH);
+			$subsection_name = $query_data['ind_name'];
+		}
+		
+		If ( $subsection == 'Game')
+		{
+			//  get the game name
+			$query_game = "SELECT game_name FROM game WHERE game_id = '$subsection_id'";
+			$result = $mysqli->query($query_game) or die("getting game name failed");
+			$query_data = $result->fetch_array(MYSQLI_BOTH);
+			$subsection_name = $query_data['game_name'];
+		}
+		
+		If ( $subsection == 'Demo')
+		{
+			//  get the demo name
+			$query_demo = "SELECT demo_name FROM demo WHERE demo_id = '$subsection_id'";
+			$result = $mysqli->query($query_demo) or die("getting demo name failed");
+			$query_data = $result->fetch_array(MYSQLI_BOTH);
+			$subsection_name = $query_data['demo_name'];
+		}
+		
+		If ( $subsection == 'Tool')
+		{
+			//  get the tool name
+			$query_tool = "SELECT tools_name FROM tools WHERE tools_id = '$subsection_id'";
+			$result = $mysqli->query($query_tool) or die("getting tool name failed");
+			$query_data = $result->fetch_array(MYSQLI_BOTH);
+			$subsection_name = $query_data['tools_name'];
+		}
+		
+		If ( $subsection == 'Software' or $subsection == 'Chain')
+		{
+			//get the type of software
+			$query_soft = "SELECT menu_types_main_id FROM menu_disk_title WHERE menu_disk_title_id = '$subsection_id'";
+			$result = $mysqli->query($query_soft) or die("getting menu_type failed");
+			$query_data = $result->fetch_array(MYSQLI_BOTH);
+			$type = $query_data['menu_types_main_id'];
+			
+			//get the name of the software
+			if ($type == '1')
+			{
+				//get the id of the game
+				$query_game = "SELECT game_id FROM menu_disk_title_game WHERE menu_disk_title_id = '$subsection_id'";
+				$result = $mysqli->query($query_game) or die("getting game id failed");
+				$query_data = $result->fetch_array(MYSQLI_BOTH);
+				$subsection_id = $query_data['game_id'];
+				
+				//  get the game name
+				$query_game = "SELECT game_name FROM game WHERE game_id = '$subsection_id'";
+				$result = $mysqli->query($query_game) or die("getting game name failed");
+				$query_data = $result->fetch_array(MYSQLI_BOTH);
+				$subsection_name = $query_data['game_name'];
+				if ($subsection <> 'Chain')
+				{
+					$subsection = 'Game';
+				}
+			}	
+			
+			if ($type == '2')
+			{
+				//get the id of the demo
+				$query_demo = "SELECT demo_id FROM menu_disk_title_demo WHERE menu_disk_title_id = '$subsection_id'";
+				$result = $mysqli->query($query_demo) or die("getting demo id failed");
+				$query_data = $result->fetch_array(MYSQLI_BOTH);
+				$subsection_id = $query_data['demo_id'];
+				
+				//  get the demo name
+				$query_demo = "SELECT demo_name FROM demo WHERE demo_id = '$subsection_id'";
+				$result = $mysqli->query($query_demo) or die("getting demo name failed");
+				$query_data = $result->fetch_array(MYSQLI_BOTH);
+				$subsection_name = $query_data['demo_name'];
+				if ($subsection <> 'Chain')
+				{
+					$subsection = 'Demo';
+				}
+			}	
+			
+			if ($type == '3')
+			{
+				//get the id of the tool
+				$query_tool = "SELECT tools_id FROM menu_disk_title_tools WHERE menu_disk_title_id = '$subsection_id'";
+				$result = $mysqli->query($query_tool) or die("getting toold id failed");
+				$query_data = $result->fetch_array(MYSQLI_BOTH);
+				$subsection_id = $query_data['tools_id'];
+				
+				//  get the tool name
+				$query_tool = "SELECT tools_name FROM tools WHERE tools_id = '$subsection_id'";
+				$result = $mysqli->query($query_tool) or die("getting tool name failed");
+				$query_data = $result->fetch_array(MYSQLI_BOTH);
+				$subsection_name = $query_data['tools_name'];
+				if ($subsection <> 'Chain')
+				{
+					$subsection = 'Tool';
+				}
+			}	
+		}
+			
 	}
 				
 	$sql_log = $mysqli->query("INSERT INTO change_log (section, section_id, section_name, sub_section, sub_section_id, sub_section_name, user_id, action, timestamp) VALUES ('$section', '$section_id', '$section_name', '$subsection', '$subsection_id', '$subsection_name', '$user_id', '$action', '$log_time')") 

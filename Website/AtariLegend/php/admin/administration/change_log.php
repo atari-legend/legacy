@@ -271,14 +271,15 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH))
 	{			
 		$section_link = ( "../menus/menus_disk_list.php" . '?menu_sets_id=' . $log['section_id'] );
 	
-		if ($log['sub_section'] == 'Menu set' )
+		if ($log['sub_section'] == 'Menu set' or $log['sub_section'] == 'Menu disk (multiple)' or $log['sub_section'] == 'Menu type'
+			or $log['sub_section'] == 'Menu disk' )
 		{
-			$subsection_link = ( "../menus/menus_disk_list.php" . '?menu_sets_id=' . $log['sub_section_id'] );
+			$subsection_link = $section_link;
 		}
 		
 		if ($log['sub_section'] == 'Crew' )
 		{
-			$subsection_link = ""; //TO DO
+			$subsection_link = "../administration/construction.php"; //TO DO
 		}
 		
 		if ($log['sub_section'] == 'Individual' )
@@ -290,11 +291,11 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH))
 	//	the CREW SECTION
 	if ($log['section'] == 'Crew')
 	{			
-		$section_link = ""; //TO DO
+		$section_link = "../administration/construction.php"; //TO DO
 		
 		if ($log['sub_section'] == 'Crew' )
 		{
-			$subsection_link = ""; //TO DO
+			$subsection_link = "../administration/construction.php"; //TO DO
 		}
 	}
 	
@@ -307,6 +308,28 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH))
 		{
 			$subsection_link = ( "../menus/menus_type_edit.php" . '?menu_type_id=' . $log['section_id'] );
 		}
+	}
+	
+	//	the MENU DISK SECTION
+	if ($log['section'] == 'Menu disk')
+	{			
+		$section_link = ( "../menus/menus_disk_list.php" . '?menu_sets_id=' . $log['section_id'] );
+		$subsection_link = $section_link;
+	}
+	
+	if ($log['sub_section'] == 'Credits' or $log['sub_section'] == 'Nickname')
+	{			
+		$subsection_link = ( "../individuals/individuals_edit.php" . '?ind_id=' . $log['sub_section_id'] );
+	}
+	
+	if ($log['sub_section'] == 'Game')
+	{			
+		$subsection_link = ( "../games/games_detail.php" . '?game_id=' . $log['sub_section_id'] );
+	}
+	
+	if ($log['sub_section'] == 'Demo' or $log['sub_section'] == 'Tool')
+	{			
+		$subsection_link = "../administration/construction.php"; //TO DO
 	}
 		
 		
