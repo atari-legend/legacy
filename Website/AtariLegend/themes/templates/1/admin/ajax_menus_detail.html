@@ -55,6 +55,7 @@
 							<br>
 							<br>
 							<b>Menu disk options :</b><br>
+							<a onclick="DeleteMenuDisk({$menus.menu_disk_id})" style="cursor: pointer;" class="standard_tile_link">Delete menu disk</a><br>
 							<div id="intro_credit_link"><a onclick="popAddIntroCred({$menus.menu_disk_id})" style="cursor: pointer;" class="standard_tile_link">Add intro credits</a><br></div>
 							<div id="gameto_menu_link"><a onclick="popAddGames({$menus.menu_disk_id})" style="cursor: pointer;" class="standard_tile_link">Add Game/Tool/Demo to menu</a><br></div>
 							<div id="screenshot_link"><a onclick="popAddScreenshots({$menus.menu_disk_id})" style="cursor: pointer;" class="standard_tile_link">Add Screenshots to menu</a><br></div>
@@ -240,6 +241,11 @@
 			</tr>
 		</table>
 	</td>
+	
+	{if isset($osd_message)}
+		[BRK]{$osd_message}
+	{/if}
+	
 {/if}
 
 {* CLOSE EDIT BOX FOR MENU DISKS *}

@@ -413,7 +413,7 @@ if ( isset($action) and $action == 'add_year' )
 		$rows = get_rows($sdbquery);			
 		if ( $rows > 0 )
 		{
-			$smarty->assign("message",'Deletion failed - This game has downloads - Delete it in the appropriate section');
+			$_SESSION['edit_message'] = "Deletion failed - This game has downloads - Delete it in the appropriate section";
 		}
 		else
 		{
@@ -422,7 +422,7 @@ if ( isset($action) and $action == 'add_year' )
 			$rows = get_rows($sdbquery);	
 			if ( $rows > 0 )
 			{
-				$smarty->assign("message",'Deletion failed - This game has a diskscan - Delete it in the appropriate section');
+				$_SESSION['edit_message'] = "Deletion failed - This game has a diskscan - Delete it in the appropriate section";
 			}
 			else
 			{
@@ -431,7 +431,7 @@ if ( isset($action) and $action == 'add_year' )
 				$rows = get_rows($sdbquery);	
 				if ( $rows > 0 )
 				{
-					$smarty->assign("message",'Deletion failed - This game has a images in the gallery table - Delete it in the appropriate section');
+					$_SESSION['edit_message'] = "Deletion failed - This game has a images in the gallery table - Delete it in the appropriate section";
 				}
 				else
 				{
@@ -440,7 +440,7 @@ if ( isset($action) and $action == 'add_year' )
 					$rows = get_rows($sdbquery);	
 					if ( $rows > 0 )
 					{
-						$smarty->assign("message",'Deletion failed - This game has (a) boxscan(s) - Delete it in the appropriate section');
+						$_SESSION['edit_message'] = "Deletion failed - This game has (a) boxscan(s) - Delete it in the appropriate section";
 					}
 					else
 					{
@@ -449,7 +449,7 @@ if ( isset($action) and $action == 'add_year' )
 						$rows = get_rows($sdbquery);	
 						if ( $rows > 0 )
 						{
-							$smarty->assign("message",'Deletion failed - This game has user comments - Delete it in the appropriate section');
+							$_SESSION['edit_message'] = "Deletion failed - This game has user comments - Delete it in the appropriate section";
 						}
 						else
 						{
@@ -458,7 +458,7 @@ if ( isset($action) and $action == 'add_year' )
 							$rows = get_rows($sdbquery);	
 							if ( $rows > 0 )
 							{
-								$smarty->assign("message",'Deletion failed - This game has info submitted from visitors - Delete it in the appropriate section');
+								$_SESSION['edit_message'] = "Deletion failed - This game has info submitted from visitors - Delete it in the appropriate section";
 							}
 							else
 							{
@@ -467,7 +467,7 @@ if ( isset($action) and $action == 'add_year' )
 								$rows = get_rows($sdbquery);	
 								if ( $rows > 0 )
 								{
-									$smarty->assign("message",'Deletion failed - This game has screenshots - Delete it in the appropriate section');
+									$_SESSION['edit_message'] = "Deletion failed - This game has screenshots - Delete it in the appropriate section";
 								}
 								else
 								{
@@ -476,7 +476,7 @@ if ( isset($action) and $action == 'add_year' )
 									$rows = get_rows($sdbquery);	
 									if ( $rows > 0 )
 									{
-										$smarty->assign("message",'Deletion failed - This game has reviews - Delete it in the appropriate section');
+										$_SESSION['edit_message'] = "Deletion failed - This game has reviews - Delete it in the appropriate section";
 									}
 									else
 									{
@@ -485,7 +485,7 @@ if ( isset($action) and $action == 'add_year' )
 										$rows = get_rows($sdbquery);	
 										if ( $rows > 0 )
 										{
-											$smarty->assign("message",'Deletion failed - This game has music files attached - Delete it in the appropriate section');
+											$_SESSION['edit_message'] = "Deletion failed - This game has music files attached - Delete it in the appropriate section";
 										}
 										else
 										{
