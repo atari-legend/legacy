@@ -99,6 +99,7 @@ list($start2, $start3) = explode(":", exec('date +%N:%S'));
 					
 					$smarty->assign('menu_set',
 	   			 	 array('menu_sets_id' => $row['menu_sets_id'],
+						   'online' => $row['publish'],
 						   'menu_sets_name' => $row['menu_sets_name']));
 
 				// Crew data for crew editor

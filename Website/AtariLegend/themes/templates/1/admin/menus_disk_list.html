@@ -894,6 +894,21 @@ function DeleteSet(str) {
     }  	 
 } 
 
+function PublishSet(str,action) {
+	// CONFIRM REQUIRES ONE ARGUMENT
+    var message = "Change status of this set?";
+    // CONFIRM IS BOOLEAN. THAT MEANS THAT
+    // IT RETURNS TRUE IF 'OK' IS CLICKED
+    // OTHERWISE IT RETURN FALSE
+    var return_value = confirm(message);
+
+    if (return_value !="0")
+    {
+		url="../menus/db_menu_disk.php?action=publish_set&online="+action+"&menu_sets_id="+str;
+		location.href=url;  	 
+	}
+} 
+
 function addCreditstoMenu(menu_disk_id) {
  if (menu_disk_id == "") {
         document.getElementById("menu_credit_list").innerHTML = "";
@@ -1257,8 +1272,8 @@ function ChangeParent(parent_id,menu_disk_id) {
 			<div class="main_company_child" id="child_add_company" style="text-align:left;">
 				<fieldset>
 					<legend>Publish Set</legend>
-						<input type="radio" name="publish" value="online" checked> Online<br>
-						<input type="radio" name="publish" value="offline" checked> Offline<br>
+						<input onchange="PublishSet({$menu_set.menu_sets_id},'online')" type="radio" name="publish" value="online" {if ({$menu_set.online}=='1')}checked{/if}> Online<br>
+						<input onchange="PublishSet({$menu_set.menu_sets_id},'offline')" type="radio" name="publish" value="offline" {if ({$menu_set.online}=='0')}checked{/if}> Offline<br>
 				</fieldset> 
 			</div>
 		</div>

@@ -2060,3 +2060,28 @@ if(isset($action) and ( $action=="delete_set" ))
 		header("Location: ../menus/menus_list.php");				
 	}
 }
+
+	
+//****************************************************************************************
+// Publish menu set
+//**************************************************************************************** 
+if(isset($action) and ( $action=="publish_set" ))
+{	
+	if ( $online == 'online' )
+	{	
+		$sql = $mysqli->query("UPDATE menu_set SET publish='1' 
+						WHERE menu_sets_id='$menu_sets_id'");
+		
+		$_SESSION['edit_message'] = "Menu set online";
+		header("Location: ../menus/menus_disk_list.php?menu_sets_id=$menu_sets_id");	
+	}
+	else
+	{
+		$sql = $mysqli->query("UPDATE menu_set SET publish='0' 
+						WHERE menu_sets_id='$menu_sets_id'");
+		
+		$_SESSION['edit_message'] = "Menu set offline";
+		header("Location: ../menus/menus_disk_list.php?menu_sets_id=$menu_sets_id");	
+	}
+
+}
