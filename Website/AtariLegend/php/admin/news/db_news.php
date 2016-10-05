@@ -255,7 +255,6 @@ if(isset($news_image))
 			create_log_entry('News', $newsimagerow[0], 'Image', $newsimagerow[0], 'Insert', $_SESSION['user_id']);
 						
 			chmod("$news_images_save_path$newsimagerow[0].$ext", 0777);
-			
 		}
 	}
 	else

@@ -7,9 +7,9 @@
 *   email                : silversurfer@atari-forum.com
 *   actual update        : New section.
 *						  
-*							
-*
 *   Id: db_crew.php,v 1.10 2005/10/29 Silver Surfer
+*   Id: db_crew.php,v 1.20 2016/10/05 STG
+*		AL 2.0 (logging)
 *
 ***************************************************************************/
 
@@ -25,255 +25,250 @@ echo "test";
 exit;
 }
 
-if($action=="insert_crew")
-
-{
-
 //****************************************************************************************
 // Adding a new crew
 //**************************************************************************************** 
-
-if(isset($new_crew)) 
+if($action=="insert_crew")
 {
-
+	if(isset($new_crew)) 
+	{
 		$mysqli->query("INSERT INTO crew (crew_name) VALUES ('$new_crew')"); 
-
-
-	mysqli_free_result(); 
+		
+		$_SESSION['edit_message'] = "New crew has been added";
+		
+		$new_crew_id = $mysqli->insert_id;
+		
+		create_log_entry('Crew', $new_crew_id, 'Crew', $new_crew_id, 'Insert', $_SESSION['user_id']);
+		
+		mysqli_free_result(); 
+	}
+	// we are sending the $new_crew value to the main page again to place that one 
+	// in the search field would the user want to edit the crew right away.
+	header("Location: ../crew/crew_main.php?new_crew=$new_crew");
 }
-// we are sending the $new_crew value to the main page again to place that one 
-// in the search field would the user want to edit the crew right away.
-header("Location: ../crew/crew_main.php?new_crew=$new_crew");
-
-}
-
-if($action=="add_logo")
-
-{
 
 //****************************************************************************************
 // Adding logo to crew
 //**************************************************************************************** 
-
-	
+if($action=="add_logo")
+{
 	$image = $_FILES['crew_pic'];
 
 	$tmp_name=$image['tmp_name']; 
 
 	if ($tmp_name!=='none')
 	{
-	// Check what extention the file has and if it is allowed.
-	
+		// Check what extention the file has and if it is allowed.
 		$ext="";
 		$type_image = $image['type'];
 		
 		// set extension
 		if ( $type_image=='image/x-png')
-			{
-				$ext='png';
-			}
-		
+		{
+			$ext='png';
+		}
 		elseif ( $type_image=='image/png')
-			{
-				$ext='png';
-			}
-			
+		{
+			$ext='png';
+		}	
 		elseif ( $type_image=='image/gif')
-			{
-				$ext='gif';
-			} 
-		elseif ( $type_image=='image/pjpeg')
-			{
-				$ext='jpg';
-			} 
-		
-		 if ($ext!=="")
-		 	{
+		{
+			$ext='gif';
+		} 
+		elseif ( $type_image=='image/jpeg')
+		{
+			$ext='jpg';
+		} 
+
+		if ($ext!=="")
+		{
+			// Rename the uploaded file to its autoincrement number and move it to its proper place.
+			$mysqli->query("UPDATE crew SET crew_logo='$ext' WHERE crew_id='$crew_select'");
 			
-       			// Rename the uploaded file to its autoincrement number and move it to its proper place.
-	  			 $mysqli->query("UPDATE crew SET crew_logo='$ext' WHERE crew_id='$crew_select'");
-	   			
-	   
-	  			 $file_data = rename("$tmp_name", "$crew_logo_path$crew_select.$ext");
-	
-				 chmod("$crew_logo_path$crew_select.$ext", 0777);
-			}
+			$_SESSION['edit_message'] = "Crew logo added";
+			create_log_entry('Crew', $crew_select, 'Logo', $crew_select, 'Insert', $_SESSION['user_id']);
+   
+			$file_data = rename("$tmp_name", "$crew_logo_save_path$crew_select.$ext");
+
+		    chmod("$crew_logo_save_path$crew_select.$ext", 0777);
+		}
+		else
+		{
+			$_SESSION['edit_message'] = "please use correct file extension";
+		}
 	}
 header("Location: ../crew/crew_editor.php?crew_select=$crew_select&crewsearch=$crewsearch&crewbrowse=$crewbrowse");
 
 }
 
-if($action=="delete_logo")
-
-{
-
 //****************************************************************************************
 // Delete Logo
 //**************************************************************************************** 
-			
-       			$sql_crew = $mysqli->query("SELECT crew_logo FROM crew
-						WHERE crew_id = '$crew_select'")
-			    	   or die ("Couldn't query Crew database");
-					   
-				$crew=$sql_crew->fetch_array(MYSQLI_BOTH);		
-				
-				
-	  			 $mysqli->query("UPDATE crew SET crew_logo='' WHERE crew_id='$crew_select'");
-	   			
-				 unlink ("$crew_logo_path$crew_select.$crew[crew_logo]");
+if($action=="delete_logo")
+{	
+	$sql_crew = $mysqli->query("SELECT crew_logo FROM crew
+			WHERE crew_id = '$crew_select'")
+		   or die ("Couldn't query Crew database");
+		   
+	$crew=$sql_crew->fetch_array(MYSQLI_BOTH);		
 
-header("Location: ../crew/crew_editor.php?crew_select=$crew_select&crewsearch=$crew_search&crewbrowse=$crewbrowse&action=main");
+	$mysqli->query("UPDATE crew SET crew_logo='' WHERE crew_id='$crew_select'");
+	
+	unlink ("$crew_logo_save_path$crew_select.$crew[crew_logo]");
+	
+	$_SESSION['edit_message'] = "Crew logo deleted";
+	create_log_entry('Crew', $crew_select, 'Logo', $crew_select, 'Delete', $_SESSION['user_id']);
+
+	header("Location: ../crew/crew_editor.php?crew_select=$crew_select&crewsearch=$crew_search&crewbrowse=$crewbrowse&action=main");
 
 }
-
-if($action=="delete_crew")
-
-{
 
 //****************************************************************************************
 // Delete Crew... keep track of this one, it will need updating as often as we add functionality.
 //**************************************************************************************** 
-			
+if($action=="delete_crew")
+{
 	if (isset($crew_select))
 	{
-	
 		$sql_crew = $mysqli->query("SELECT crew_logo FROM crew
 						WHERE crew_id = '$crew_select'")
 			    	   or die ("Couldn't query Crew database");
 					   
 		$crew=$sql_crew->fetch_array(MYSQLI_BOTH);
-	
+		
+		$_SESSION['edit_message'] = "Crew deleted";
+		create_log_entry('Crew', $crew_select, 'Crew', $crew_select, 'Delete', $_SESSION['user_id']);
 	
 		$mysqli->query("DELETE FROM crew WHERE crew_id='$crew_select'");
 		$mysqli->query("DELETE FROM sub_crew WHERE crew_id='$crew_select'");
 		$mysqli->query("DELETE FROM sub_crew WHERE parent_id='$crew_select'");
 		$mysqli->query("DELETE FROM crew_individual WHERE crew_id='$crew_select'");
 	   			
-				 unlink ("$crew_logo_path$crew_select.$crew[crew_logo]");
+		unlink ("$crew_logo_path$crew_select.$crew[crew_logo]");
 	}
-
-header("Location: ../crew/crew_main.php");
-
+	
+	header("Location: ../crew/crew_main.php");
 }
-
-if($action=="update_main_info")
-
-{
 
 //****************************************************************************************
 // update main crew info
 //**************************************************************************************** 
-			
-       			$sql_crew = $mysqli->query("SELECT * FROM crew
-						WHERE crew_id = '$crew_select'")
-			    	   or die ("Couldn't query Crew database");
-					   
-				$crew=$sql_crew->fetch_array(MYSQLI_BOTH);		
-				
-				if ($crew_name !='')
-				{
-				$mysqli->query("UPDATE crew SET crew_name='$crew_name' WHERE crew_id='$crew_select'");
-				}
-				
-				$textfield = trim($textfield);
-				
-				if ($textfield !='')
-				{
-				$textfield = addslashes($textfield);
-				$mysqli->query("UPDATE crew SET crew_history='$textfield' WHERE crew_id='$crew_select'");
-				
-				}
-
-header("Location: ../crew/crew_editor.php?crew_select=$crew_select&crewsearch=$crewsearch&crewbrowse=$crewbrowse&action=main");
-}
-
-if($action=="parent_crew")
-
+if($action=="update_main_info")
 {
+	$sql_crew = $mysqli->query("SELECT * FROM crew
+			WHERE crew_id = '$crew_select'")
+		   or die ("Couldn't query Crew database");
+		   
+	$crew=$sql_crew->fetch_array(MYSQLI_BOTH);		
+	
+	if ($crew_name !='')
+	{
+	$mysqli->query("UPDATE crew SET crew_name='$crew_name' WHERE crew_id='$crew_select'");
+	}
+	
+	$textfield = trim($textfield);
+	
+	if ($textfield !='')
+	{
+	$textfield = addslashes($textfield);
+	$mysqli->query("UPDATE crew SET crew_history='$textfield' WHERE crew_id='$crew_select'");
+	
+	}
+	
+	$_SESSION['edit_message'] = "Crew updated";
+	create_log_entry('Crew', $crew_select, 'Crew', $crew_select, 'Update', $_SESSION['user_id']);
+
+	header("Location: ../crew/crew_editor.php?crew_select=$crew_select&crewsearch=$crewsearch&crewbrowse=$crewbrowse&action=main");
+}
 
 //****************************************************************************************
 // add subcrews
 //**************************************************************************************** 
-
-foreach($sub_crew as $value)
+if($action=="parent_crew")
 {
+	foreach($sub_crew as $value)
+	{
 		$mysqli->query("INSERT INTO sub_crew (parent_id,crew_id) VALUES ('$crew_select','$value')");
+		
+		$_SESSION['edit_message'] = "Subcrew added";
+		create_log_entry('Crew', $crew_select, 'Subcrew', $value, 'Insert', $_SESSION['user_id']);
+	}
+
+	header("Location: ../crew/crew_genealogy.php?crew_select=$crew_select&crewsearch=$crewsearch&crewbrowse=$crewbrowse&action=genealogy");
 }
-
-header("Location: ../crew/crew_genealogy.php?crew_select=$crew_select&crewsearch=$crewsearch&crewbrowse=$crewbrowse&action=genealogy");
-}
-
-if($action=="add_member")
-
-{
 
 //****************************************************************************************
 // add individual members to crew
 //**************************************************************************************** 
-
-if(isset($ind_id))
+if($action=="add_member")
 {
+	if(isset($ind_id))
+	{
 		$mysqli->query("INSERT INTO crew_individual (crew_id,ind_id) VALUES ('$crew_select','$ind_id')");
+		
+		$_SESSION['edit_message'] = "Individual member added";
+		create_log_entry('Crew',$crew_select, 'Member', $ind_id, 'Insert', $_SESSION['user_id']);
+	}
+
+	header("Location: ../crew/crew_genealogy.php?crew_select=$crew_select&crewsearch=$crewsearch&crewbrowse=$crewbrowse&action=genealogy");
 }
 
-header("Location: ../crew/crew_genealogy.php?crew_select=$crew_select&crewsearch=$crewsearch&crewbrowse=$crewbrowse&action=genealogy");
-}
-
-if($action=="delete_crew_member")
-
-{
 
 //****************************************************************************************
 // delete individual members
 //**************************************************************************************** 
-
-if(isset($crew_individual_id))
+if($action=="delete_crew_member")
 {
+	if(isset($crew_individual_id))
+	{
+		$_SESSION['edit_message'] = "Individual member deleted";
+		create_log_entry('Crew',$crew_individual_id, 'Member', $crew_individual_id, 'Delete', $_SESSION['user_id']);
+		
 		$mysqli->query("DELETE FROM crew_individual WHERE crew_individual_id='$crew_individual_id'");
+	}
 
+	header("Location: ../crew/crew_genealogy.php?crew_select=$crew_select&crewsearch=$crewsearch&crewbrowse=$crewbrowse&action=genealogy");
 }
-
-header("Location: ../crew/crew_genealogy.php?crew_select=$crew_select&crewsearch=$crewsearch&crewbrowse=$crewbrowse&action=genealogy");
-}
-
-if($action=="delete_subcrew")
-
-{
 
 //****************************************************************************************
 // Delete Subcrew
 //**************************************************************************************** 
-
-if(isset($sub_crew_id))
+if($action=="delete_subcrew")
 {
+	if(isset($sub_crew_id))
+	{
+		$_SESSION['edit_message'] = "Subcrew deleted";
+		create_log_entry('Crew', $sub_crew_id, 'Subcrew', $sub_crew_id, 'Delete', $_SESSION['user_id']);
+		
 		$mysqli->query("DELETE FROM sub_crew WHERE sub_crew_id='$sub_crew_id'");
+	}
 
+	header("Location: ../crew/crew_genealogy.php?crew_select=$crew_select&crewsearch=$crewsearch&crewbrowse=$crewbrowse&action=genealogy");
 }
-
-header("Location: ../crew/crew_genealogy.php?crew_select=$crew_select&crewsearch=$crewsearch&crewbrowse=$crewbrowse&action=genealogy");
-}
-
-
-if($action=="update_nick")
-
-{
 
 //****************************************************************************************
 // Update nicknames for crew members
 //**************************************************************************************** 
-
-if(isset($individual_nicks_id) and isset($crew_individual_id))
+if($action=="update_nick")
 {
-	if ($individual_nicks_id == "-")
+	if(isset($individual_nicks_id) and isset($crew_individual_id))
 	{
-		$mysqli->query("UPDATE crew_individual SET individual_nicks_id='' WHERE crew_individual_id='$crew_individual_id'") or die("Failed to remove nickname");
+		if ($individual_nicks_id == "-")
+		{
+			$mysqli->query("UPDATE crew_individual SET individual_nicks_id='' WHERE crew_individual_id='$crew_individual_id'") or die("Failed to remove nickname");
+			
+			$_SESSION['edit_message'] = "Nickname removed";
+			create_log_entry('Crew', $crew_individual_id, 'Nickname', $crew_individual_id, 'Delete', $_SESSION['user_id']);
+		}
+		else
+		{
+			$mysqli->query("UPDATE crew_individual SET individual_nicks_id='$individual_nicks_id' WHERE crew_individual_id='$crew_individual_id'") or die("Failed to update nickname information");
+			
+			$_SESSION['edit_message'] = "Nickname added";
+			create_log_entry('Crew', $crew_individual_id, 'Nickname', $crew_individual_id, 'Insert', $_SESSION['user_id']);
+		}
 	}
-	else
-	{
-		$mysqli->query("UPDATE crew_individual SET individual_nicks_id='$individual_nicks_id' WHERE crew_individual_id='$crew_individual_id'") or die("Failed to update nickname information");
-	}
-}
 
-header("Location: ../crew/crew_genealogy.php?crew_select=$crew_select&crewsearch=$crewsearch&crewbrowse=$crewbrowse&action=genealogy");
+	header("Location: ../crew/crew_genealogy.php?crew_select=$crew_select&crewsearch=$crewsearch&crewbrowse=$crewbrowse&action=genealogy");
 }?>
 

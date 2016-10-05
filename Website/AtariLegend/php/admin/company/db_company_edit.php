@@ -76,8 +76,6 @@ if ( isset($action) and $action == 'add_logo' )
 		
 		 if ($ext!=="")
 		 	{
-					
-			
        			// Rename the uploaded file to its autoincrement number and move it to its proper place.
 	  			 $query = $mysqli->query("SELECT * FROM pub_dev_text WHERE pub_dev_id='$comp_id'");
 	   

@@ -29,6 +29,19 @@ function deletelink(JSid)
 	  location.href=url;
     } 
 }
+
+function TestURL() {
+	var url = document.getElementById('website_url').value 
+	
+	if (url != 'http://' && url != '')
+	{
+		window.open(url);
+	}
+	else
+	{
+		window.alert("Please add an URL");
+	}
+}
 </script>
 {/block}
 {block name=main_tile}
@@ -53,7 +66,10 @@ function deletelink(JSid)
 			</div>
 			<div class="links_addnew_row">
 				<div class="links_addnew_text">URL</div>
-				<div class="links_addnew_input"><input type="text" name="url" id="url" value="http://" class="standard_tile_input_small"></div>
+				<div class="links_addnew_input">
+					<input type="text" name="url" id="website_url" value="http://" class="standard_tile_input_small">
+					<input type="button" onclick="TestURL()" class="topbutton_cpanel_small" value="Test" style="margin-left:1px;">
+				</div>
 			</div>
 			<div class="links_addnew_row">
 				<div class="links_addnew_text">Category</div>

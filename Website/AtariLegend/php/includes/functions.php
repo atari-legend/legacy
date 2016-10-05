@@ -910,9 +910,80 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
 		$query_data = $result->fetch_array(MYSQLI_BOTH);
 		$section_name = $query_data['crew_name'];
 		
-		If ( $subsection == 'Crew' )
+		If ( $subsection == 'Crew' or $subsection == 'Logo')
 		{
 			$subsection_name = $section_name;
+		}
+		
+		If ( $subsection == 'Subcrew' )
+		{
+			if ($action == 'Delete')
+			{
+				// get the id's
+				$query_crew = "SELECT * FROM sub_crew WHERE sub_crew_id = '$subsection_id'";
+				$result = $mysqli->query($query_crew) or die("getting crew ids failed");
+				$query_data = $result->fetch_array(MYSQLI_BOTH);
+				$subsection_id = $query_data['crew_id'];
+				$section_id = $query_data['parent_id'];
+				
+				// get the name of the crew
+				$query_crew = "SELECT crew_name FROM crew WHERE crew_id = '$section_id'";
+				$result = $mysqli->query($query_crew) or die("getting crew name failed");
+				$query_data = $result->fetch_array(MYSQLI_BOTH);
+				$section_name = $query_data['crew_name'];	
+			}
+	
+			// get the name of the subcrew
+			$query_crew = "SELECT crew_name FROM crew WHERE crew_id = '$subsection_id'";
+			$result = $mysqli->query($query_crew) or die("getting crew name failed");
+			$query_data = $result->fetch_array(MYSQLI_BOTH);
+			$subsection_name = $query_data['crew_name'];
+		}
+		
+		If ( $subsection == 'Member' )
+		{
+			if ($action == 'Delete')
+			{
+				// get the id's
+				$query_crew = "SELECT * FROM crew_individual WHERE crew_individual_id = '$subsection_id'";
+				$result = $mysqli->query($query_crew) or die("getting crew ids failed");
+				$query_data = $result->fetch_array(MYSQLI_BOTH);
+				$subsection_id = $query_data['ind_id'];
+				$section_id = $query_data['crew_id'];
+				
+				// get the name of the crew
+				$query_crew = "SELECT crew_name FROM crew WHERE crew_id = '$section_id'";
+				$result = $mysqli->query($query_crew) or die("getting crew name failed");
+				$query_data = $result->fetch_array(MYSQLI_BOTH);
+				$section_name = $query_data['crew_name'];		
+			}
+			
+			$query_ind = "SELECT ind_name FROM individuals WHERE ind_id = '$subsection_id'";
+			$result = $mysqli->query($query_ind) or die("getting ind name failed");
+			$query_data = $result->fetch_array(MYSQLI_BOTH);
+			$subsection_name = $query_data['ind_name'];
+		}
+		
+		If ( $subsection == 'Nickname' )
+		{
+			// get the id's
+			$query_crew = "SELECT * FROM crew_individual WHERE crew_individual_id = '$subsection_id'";
+			$result = $mysqli->query($query_crew) or die("getting crew ids failed");
+			$query_data = $result->fetch_array(MYSQLI_BOTH);
+			$subsection_id = $query_data['ind_id'];
+			$section_id = $query_data['crew_id'];
+			
+			// get the name of the crew
+			$query_crew = "SELECT crew_name FROM crew WHERE crew_id = '$section_id'";
+			$result = $mysqli->query($query_crew) or die("getting crew name failed");
+			$query_data = $result->fetch_array(MYSQLI_BOTH);
+			$section_name = $query_data['crew_name'];	
+			
+			// get the name of the member
+			$query_ind = "SELECT ind_name FROM individuals WHERE ind_id = '$subsection_id'";
+			$result = $mysqli->query($query_ind) or die("getting ind name failed");
+			$query_data = $result->fetch_array(MYSQLI_BOTH);
+			$subsection_name = $query_data['ind_name'];
 		}
 	}
 	
