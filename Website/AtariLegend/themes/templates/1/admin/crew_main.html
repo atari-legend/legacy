@@ -1,12 +1,14 @@
 {* 
 /***************************************************************************
-                              crew_main.tpl
+                              crew_main.html
 *                            --------------------------
 *   begin                : Sunday, August 28, 2005
 *   copyright            : (C) 2005 Atari Legend
 *   email                : admin@atarilegend.com
 *
-*   Id: crew_main.tpl,v 0.10 2005/10/29 Silver
+*   Id: crew_main.html,v 0.10 2005/10/29 Silver
+*   Id: crew_main.html,v 0.20 2016/10/04 STG
+*			- CPANEL 2.0
 *
 ***************************************************************************/
 
@@ -41,6 +43,7 @@ function crewinsert()
     	} 
 	}
 }
+
 function browseCrew(str) {
     if (str == "") {
         document.getElementById("crew_list").innerHTML = "";
@@ -62,6 +65,7 @@ function browseCrew(str) {
         xmlhttp.send();
     }
 }
+
 function searchCrew(str) {
     if (str == "") {
         str = "empty";
@@ -90,60 +94,71 @@ function searchCrew(str) {
 }
 </script>
 {/block}
-{block name=title}Crew editor{/block}
-{block name=left_tile}
-		<br/>
-		
-		{* Search crew section *}
-		<div class="quicklinkbox">
-		<b>Crew Editor</b><br/>
-		<br/>
-		Search for crew:<br/>
-		<form action="../crew/crew_editor.php" method="get" name="post_menu_crew_set" id="menu_crew_set">
-		<select name="crewbrowse" size="1" style="margin-top:5px;margin-bottom:5px;vertical-align:top;background-color:white;" onchange="browseCrew(this.value)">
-			{html_options values=$az_value output=$az_output}
-		</select>
-		<input type="text" name="crewsearch" value="" onkeyup="searchCrew(this.value)" style="margin-top:5px;margin-bottom:5px;vertical-align:top;background-color:white;width:147px;">
-		{* Ajax *}
-		<div id="crew_list">
-		<select name="crew_select" id="CrewList" size="8" style="width:200px;">
-			{foreach from=$crew item=line}	
-				{html_options values=$line.crew_id output=$line.crew_name}
-			{/foreach}
-		</select>
-		</div>
-		<input type="submit" value="Select" style="margin:5px;vertical-align:top;">
-		</form>
-		
-		
-		<br/>
 
-		<hr>
-		<br/>
+{block name=title}Crew editor{/block}
+
+{block name=left_tile}
+
+{* Search crew section *}
+<div class="standard_tile">
+	<h1>CREW EDITOR	</h1>
+	<div class="standard_tile_line"></div>
+	<div class="standard_table_center">
+		<br>
+		Search for crew:<br>
+		<form action="../crew/crew_editor.php" method="get" name="post_menu_crew_set" id="menu_crew_set">
+			<select name="crewbrowse" size="1" id="quick_search_small_select" onchange="browseCrew(this.value)">
+				<option value="" SELECTED>-</option>
+				{html_options values=$az_value output=$az_output}
+			</select>
+			<input type="text" name="crewsearch" value="" onkeyup="searchCrew(this.value)" class="standard_tile_input_small">
+			<br>
+			<br>
+			{* Ajax *}
+			<div id="crew_list">
+				<select name="crew_select" id="quick_search_pub_select">
+					<option value="" SELECTED>-</option>
+					{foreach from=$crew item=line}	
+						{html_options values=$line.crew_id output=$line.crew_name}
+					{/foreach}
+				</select>
+			</div>
+			<br>
+			<br>
+			<input type="submit" value="Select" class="quick_search_games_button">
+		</form>
+		<br>
+		<div class="standard_tile_line"></div>
+		<br>
 		{* Add crew section *}
 		Add new Crew to db:
 		<form method="post" name="insertcrew">
-		<input type="text" name="newcrew" value="" style="margin:5px; width:200px;"><br/>
-		<input type="submit" value="Insert" style="margin:5px;vertical-align:top;" onClick="crewinsert(); return false;">
+			<input type="text" name="newcrew" value="" class="standard_tile_input_small">
+			<br>
+			<br>
+			<input type="submit" value="Insert" class="quick_search_games_button" onClick="crewinsert(); return false;">
 		</form>
-		</div>
-		<hr>
-		{* END crew section *}
-		<br/><br/> 
+	</div>
+	<br> 
+</div>
+<br>
+{include file='1/admin/left_nav.html'}
+{* END crew section *}
 {/block}
-{block name=main_tile}
-<div class="NEWMAINCELL" style="text-align:center;">
-	<fieldset class="interview_set">
-		In this section you can add or edit a crew. Search for a crew by using any of the 
-		functionalities below. 
-	</fieldset> 
-<br/><br/>
-	
-	{if (isset($new_crew) and $new_crew <> '')}<div class="message_box">{$new_crew} added to the database!</div><br/>{/if}
-	<br/><br/>
 
-{if isset($message)}
-	<div class="message_box">{$message}</div>
-{/if}
+{block name=main_tile}
+<div class="standard_tile">
+	<h1>EDIT CREW</h1>
+	<div class="standard_tile_line"></div>
+	<div class="standard_tile_text">
+		<div class="left_nav_section">
+			In this section you can add or edit a crew. Search for a crew by using any of the 
+			functionalities on the left. 
+		</div>
+	<br>
+	<br>
+	<div class="standard_table_center">{if (isset($new_crew) and $new_crew <> '')}{$new_crew} added to the database!{/if}</div>
+	<br>
+	</div>
 </div>
 {/block}

@@ -24,6 +24,7 @@ include("../../includes/common.php");
 include("../../includes/quick_search_games.php");
 include("../../includes/admin.php");
 
+$smarty->assign('website_id', $website_id);
 
 $LINKSQL = $mysqli->query("SELECT * FROM website
 				LEFT JOIN website_description ON (website.website_id = website_description.website_id)

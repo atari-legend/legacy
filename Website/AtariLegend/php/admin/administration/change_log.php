@@ -279,7 +279,7 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH))
 		
 		if ($log['sub_section'] == 'Crew' )
 		{
-			$subsection_link = "../administration/construction.php"; //TO DO
+			$subsection_link = "../crew/crew_editor.php?crewbrowse=&crewsearch=&crew_select=" .  $log['sub_section_id']; 
 		}
 		
 		if ($log['sub_section'] == 'Individual' )
@@ -291,11 +291,23 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH))
 	//	the CREW SECTION
 	if ($log['section'] == 'Crew')
 	{			
-		$section_link = "../administration/construction.php"; //TO DO
+		$section_link = "../crew/crew_editor.php?crewbrowse=&crewsearch=&crew_select=" .  $log['section_id']; 
 		
-		if ($log['sub_section'] == 'Crew' )
+		if ($log['sub_section'] == 'Crew' or $log['sub_section'] == 'Logo')
 		{
-			$subsection_link = "../administration/construction.php"; //TO DO
+			$subsection_link = "../crew/crew_editor.php?crewbrowse=&crewsearch=&crew_select=" .  $log['sub_section_id']; 
+		}
+		
+		if  ($log['sub_section'] == 'Subcrew')
+		{
+			$subsection_link = "../crew/crew_editor.php?crewbrowse=&crewsearch=&crew_select=" .  $log['sub_section_id']; 
+			$section_link = "../crew/crew_genealogy.php?action=genealogy&crewbrowse=&crewsearch=&crew_select=" .  $log['section_id']; 
+		}
+		
+		if ($log['sub_section'] == 'Member' or $log['sub_section'] == 'Nickname')
+		{
+			$subsection_link = ( "../individuals/individuals_edit.php" . '?ind_id=' . $log['sub_section_id'] );
+			$section_link = "../crew/crew_genealogy.php?action=genealogy&crewbrowse=&crewsearch=&crew_select=" .  $log['section_id']; 
 		}
 	}
 	

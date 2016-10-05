@@ -40,6 +40,8 @@ if(isset($action) and $action=="addnew_link")
 	$RESULT=$mysqli->query("SELECT * FROM website WHERE website_name='$name' AND website_url='$url'")
 				or die("Unable to select website database");
 	$rowlink= $RESULT->fetch_array(MYSQLI_BOTH);
+	
+	$descr = mysql_real_escape_string($descr);
 
 	if($descr!=='') 
 	{
@@ -172,6 +174,7 @@ if(isset($action) and $action=='modify_link')
 			}
 		}
 	}
+	
 	// Here we delete the website image
 	if ($delete_image=='yes')
 	{
@@ -186,45 +189,46 @@ if(isset($action) and $action=='modify_link')
 	}
 
 	// Do the website updating
-
 	$mysqli->query("UPDATE website SET website_name='$website_name', website_url='$website_url' WHERE website_id='$website_id'");
 	//$mysqli->query("UPDATE website_category_cross SET website_category_id='$category' WHERE website_id='$website_id'"); 
 
 	$sql_desc = $mysqli->query("SELECT * FROM website_description WHERE website_id='$website_id'");
 
 	$num_desc = get_rows ($sql_desc);
+	
+	$website_description_text = mysql_real_escape_string($website_description_text);
 
-		if ($num_desc==0) {
+	if ($num_desc==0) {
 
-			if (isset($website_description_text)) {
+		if (isset($website_description_text)) {
+		
+			$mysqli->query("INSERT INTO website_description (website_id, website_description_text) VALUES ('$website_id', '$website_description_text')");
+		
+		}
+	}
+	
+	if ($num_desc==1) {
+		
+		if (isset($website_description_text)) {
+		
+			$mysqli->query("UPDATE website_description SET website_description_text='$website_description_text' WHERE website_id='$website_id'");
 			
-				$mysqli->query("INSERT INTO website_description (website_id, website_description_text) VALUES ('$website_id', '$website_description_text')");
-			
-			}
 		}
 		
-		if ($num_desc==1) {
-			
-			if (isset($website_description_text)) {
-			
-				$mysqli->query("UPDATE website_description SET website_description_text='$website_description_text' WHERE website_id='$website_id'");
-				
-			}
-			
-			if (!isset($website_description_text)) {
-			
-				$mysqli->query("DELETE FROM website_description WHERE website_id = '$website_id'");
-			
-			}
+		if (!isset($website_description_text)) {
+		
+			$mysqli->query("DELETE FROM website_description WHERE website_id = '$website_id'");
+		
 		}
-		
-		create_log_entry('Links', $website_id, 'Link', $website_id, 'Update', $_SESSION['user_id']);
+	}
+	
+	create_log_entry('Links', $website_id, 'Link', $website_id, 'Update', $_SESSION['user_id']);
 
-		mysqli_close($mysqli); 
+	mysqli_close($mysqli); 
 
-		$_SESSION['edit_message'] = "Link modified";
-		
-		header("Location: ../links/link_mod.php?website_id=$website_id");
+	$_SESSION['edit_message'] = "Link modified";
+	
+	header("Location: ../links/link_mod.php?website_id=$website_id");
 }
 
 if(isset($action) and $action=="approve_link")

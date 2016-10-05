@@ -60,10 +60,13 @@ $trivia_screenshot_path="../../data/images/trivia_screens/";
 
 //demos
 $demo_screenshot_path="../../data/images/demo_screenshots/";
-$crew_logo_path="../../data/images/crew_logos/";
 $demo_file_path="../../data/zips/demos/";
 $demo_file_temp_path="../../data/zips/temp/";
 $music_demo_path="../../data/music/demos/";
+
+//Crews
+$crew_logo_path="../../data/images/crew_logos/";
+$crew_logo_save_path="../../../data/images/crew_logos/";
 
 //magazine
 $magazine_scan_path="../../data/images/magazine_scans/";
