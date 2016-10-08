@@ -1,0 +1,73 @@
+{* 
+/***************************************************************************
+*                                articles_preview.html
+*                            --------------------------
+*   begin                : friday, October 8, 2016
+*   copyright            : (C) 2016 Atari Legend
+*   email                : martens_maarten@hotmail.com
+*
+*   Id: articles_preview.html,v 0.10 2016/10/08 20:14 ST Graveyard
+*					- AL 2.0
+*
+***************************************************************************/
+
+//****************************************************************************************
+// this is the template file to generate an article preview
+//**************************************************************************************** 
+*}
+{extends file='1/admin/frontpage.html'}
+
+{block name=java_script}
+<script type="text/javascript" src="{$template_dir}includes/js/lightbox.min.js"></script>
+<link type="text/css" href="{$style_dir}css/lightbox.css" hreflang="en" rel="stylesheet">
+{/block}
+
+{block name=title}
+<div style="float:left;">
+	Article by <a href="mailto:{if isset($article.article_email)}{$article.article_email}{/if}?subject=Your article '{$article.article_title}' at Atari Legend" >{$article.article_author}</a>
+</div>
+<div style="float:right;padding-right:5px;">{$article.article_date}</div>
+{/block}
+
+{block name=main_tile}
+<div class="standard_tile" id="interview_preview">
+	<h1>{$article.article_title}</h1>
+	<div class="standard_tile_line"></div>
+	<div class="standard_tile_text">
+		<div class="left_nav_section">
+			Article by <a href="mailto:{if isset($article.article_email)}{$article.article_email}{/if}?subject=Your article '{$article.article_title}' at Atari Legend"  class="left_nav_link">{$article.article_author}</a> on {$article.article_date}
+		</div>
+		<br>
+		<br>
+		<fieldset>
+			<legend>Preview</legend>
+			<div class="review_container">
+				<div class="review_child" id="review_text">	
+					{$article.article_text}
+				</div>	
+				<div class="review_child" id="review_screenshots">
+					<div class="review_screenshot_space">
+						<br>
+						<br>
+						<br>
+					</div>
+					{foreach from=$screenshots item=line} 
+						<div class="review_screenshot_order">
+							<a href="../../includes/show_image.php?file={$line.screenshot}&amp;resize=410,null,null,null" data-lightbox="image-1" data-title="{$article.article_title} - {$line.count}">
+								<img src="../../includes/show_image.php?file={$line.screenshot}&amp;resize=170,null,null,null" alt="Click to enlarge!" style="display:inline;" class="user_stats_img" id="user_details_img_dark">
+							</a>
+							<br><b>{$line.comment}</b>
+							<br>
+							<br>
+							<br>
+						</div>
+					{/foreach}
+				</div>		
+			</div>	
+			<br>
+		</fieldset>
+		<br>
+		<div class="standard_table_center"><a href="../articles/articles_edit.php?article_id={$article.article_id}" class="standard_tile_link">back</a></div>
+	</div>
+</div>
+{/block}

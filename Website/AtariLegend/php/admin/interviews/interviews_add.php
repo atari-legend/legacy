@@ -27,26 +27,14 @@ include("../../includes/quick_search_games.php");
 //first we check if there is an individual selected. This is done at the main page
 //****************************************************************************************
 
-if ( $individual_create == " " or $individual_create == '-' )
+if ( $individual_create == '' or $individual_create == '-' )
 {
-	$message = 'Please choose an individual to interview';
-	$smarty->assign("message",$message);
-		
+	$_SESSION['edit_message'] = 'Please choose an individual to interview';
+	
 	$smarty->assign("user_id",$_SESSION['user_id']);
 	
-	//Get the individuals
-	$sql_individuals = $mysqli->query("SELECT * FROM individuals ORDER BY ind_name ASC")
-			  		   or die ("Couldn't query indiciduals database");
-		
-	while ($individuals = $sql_individuals->fetch_array(MYSQLI_BOTH))
-	{
-		$smarty->append('individuals',
-	    		 array('ind_id' => $individuals['ind_id'],
-					   'ind_name' => $individuals['ind_name']));
-	}
-
 	//Send all smarty variables to the templates
-	$smarty->display("file:".$cpanel_template_folder."interviews_main.html");
+	header("Location: ../interviews/interviews_main.php");
 }
 //****************************************************************************************
 //This piece of code is used to open up a blank interview add canvas (before we actually 

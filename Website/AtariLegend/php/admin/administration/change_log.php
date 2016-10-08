@@ -327,21 +327,33 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH))
 	{			
 		$section_link = ( "../menus/menus_disk_list.php" . '?menu_sets_id=' . $log['section_id'] );
 		$subsection_link = $section_link;
+	
+	
+		if ($log['sub_section'] == 'Credits' or $log['sub_section'] == 'Nickname')
+		{			
+			$subsection_link = ( "../individuals/individuals_edit.php" . '?ind_id=' . $log['sub_section_id'] );
+		}
+		
+		if ($log['sub_section'] == 'Game')
+		{			
+			$subsection_link = ( "../games/games_detail.php" . '?game_id=' . $log['sub_section_id'] );
+		}
+		
+		if ($log['sub_section'] == 'Demo' or $log['sub_section'] == 'Tool')
+		{			
+			$subsection_link = "../administration/construction.php"; //TO DO
+		}
 	}
 	
-	if ($log['sub_section'] == 'Credits' or $log['sub_section'] == 'Nickname')
-	{			
-		$subsection_link = ( "../individuals/individuals_edit.php" . '?ind_id=' . $log['sub_section_id'] );
-	}
-	
-	if ($log['sub_section'] == 'Game')
-	{			
-		$subsection_link = ( "../games/games_detail.php" . '?game_id=' . $log['sub_section_id'] );
-	}
-	
-	if ($log['sub_section'] == 'Demo' or $log['sub_section'] == 'Tool')
-	{			
-		$subsection_link = "../administration/construction.php"; //TO DO
+	//	the ARTICLES SECTION
+	if ($log['section'] == 'Articles')
+	{	
+		$section_link = ( "../articles/articles_edit.php" . '?article_id=' . $log['sub_section_id'] );
+		
+		if ($log['sub_section'] == 'Article' OR $log['sub_section'] == 'Screenshots' )
+		{
+			$subsection_link = $section_link;
+		}
 	}
 		
 		
