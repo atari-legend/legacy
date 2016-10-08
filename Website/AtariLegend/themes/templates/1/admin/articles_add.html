@@ -1,20 +1,18 @@
 {* 
 /***************************************************************************
-*                                interviews_add.html
-*                            --------------------------
-*   begin                : Saturday, July 22 2005
-*   copyright            : (C) 2005 Atari Legend
-*   email                : maarten.martens@freebel.net
-*   actual update        : created this page
+*                               articles_add.html
+*                            ----------------------------
+*   begin                : friday, October 8, 2016
+*   copyright            : (C) 2016 Atari Legend
+*   email                : martens_maarten@hotmail.com
 *
-*   Id: interviews_add.html,v 0.10 2005/07/30 23:12 Gatekeeper
-*   Id: interviews_add.html,v 0.20 2016/08/03 20:58 Gatekeeper
-*		-  AL 2.0
+*   Id: articles_add.html,v 0.10 2016/10/08 22:52 ST Graveyard
+*					- AL 2.0
 *
 ***************************************************************************/
 
 ///****************************************************************************************
-// This is the sub template file to generate the interviews add page
+// This is the sub template file to generate the articles add page
 //**************************************************************************************** 
 *}
 {extends file='1/admin/frontpage.html'}
@@ -22,7 +20,7 @@
 {block name=java_script}
 <script src="../templates/0/js/game_comment.js"></script>
 <script type="text/javascript">
-function deletecomment(screenshot_id, interview_id)
+function deletecomment(screenshot_id, article_id)
 {	
 	// CONFIRM REQUIRES ONE ARGUMENT
     var message = "Are you sure you want to delete the screenshot with its comment?";
@@ -32,7 +30,7 @@ function deletecomment(screenshot_id, interview_id)
     var return_value = confirm(message);
 	if (return_value !="0")
     {
-      	url="db_interviews.php?interview_id="+interview_id+"&screenshot_id="+screenshot_id+"&action=delete_comment";
+      	url="db_articles.php?article_id="+interview_id+"&screenshot_id="+screenshot_id+"&action=delete_comment";
 		location.href=url;
     }
 }
@@ -170,25 +168,28 @@ function storeCaret(textEl) {
 </script>
 {/block}
 
-{block name=title}Add Interviews - <a href="../administration/construction.php" class="left_nav_link">{$selected_individual.ind_name}</a>{/block}
+{block name=title}Add articles{/block}
 
 {block name=main_tile}
 <div class="standard_tile" id="interviews_add">
-	<h1>{$selected_individual.ind_name}</h1>
+	<h1>{$article_title}</h1>
 	<div class="standard_tile_line"></div>
 	<div class="standard_tile_text">
 		<div class="left_nav_section">
-			At this page you can add a new existing interview in the AL database. the screen might seem a little complex,
-			therefor I suggest you first read the <b><a href="../interviews/interviews_help.php" class="left_nav_link">help</a></b> provided with this section!
+			At this page you can add a new existing article in the AL database.
 		</div> 
 		<br>
 		<br>
-		<form action="../interviews/db_interview.php" method="post" name="post">
+		<form action="../articles/db_articles.php" method="post" name="post">
 			<fieldset>
-				<legend>Add Interview</legend>
-				<br>	
+				<legend>Add article</legend>
 				<div style="display:inline-block;">
-					<b>Written by : </b>
+					<b>Title</b>
+					<br>
+					<input type="text" name="article_title" class="standard_tile_input_small" value="{$article_title}">
+					<br>
+					<br>	
+					<b>Written by : </b><br>
 					<select name="members" id="quick_search_pub_select">
 						<option value="-" selected>-</option>
 						{foreach from=$authors item=line}
@@ -199,15 +200,15 @@ function storeCaret(textEl) {
 				<br>
 				<br>
 				<div style="display:inline-block;">
-					<b>Individual :</b>
+					<b>Type :</b>
 					<br>
-					<select name="individual" id="quick_search_pub_select">
+					<select name="article_type" id="quick_search_pub_select">
 						<option value="-" selected>-</option>
-						{foreach from=$individuals item=line}
-							{if $line.ind_id == $selected_individual.ind_id}
-								<option value="{$line.ind_id}" selected>{$line.ind_name}</option>
+						{foreach from=$article_types item=line}
+							{if $line.article_type_id == $selected_article_type.article_type_id}
+								<option value="{$line.article_type_id}" selected>{$line.article_type}</option>
 							{else}
-								<option value="{$line.ind_id}">{$line.ind_name}</option>
+								<option value="{$line.article_type_id}">{$line.article_type}</option>
 							{/if}
 						{/foreach}	
 					</select>
@@ -232,33 +233,20 @@ function storeCaret(textEl) {
 				</textarea>
 				<br>
 				<br>
-				<b>Chapters :</b>
-				<br>
-				<input type="button" accesskey= "b" name="addbbcode0" value="B" onclick="bbstyle(0,'textchapters')">
-				<input type="button" accesskey= "u" name="addbbcode4" value="U" onclick="bbstyle(4,'textchapters')">
-				<input type="button" accesskey= "i" name="addbbcode2" value="I" onclick="bbstyle(2,'textchapters')">
-				<input type="button" accesskey="w" name="addbbcode6" value="URL" onClick="bbstyle(6,'textchapters')">			  
-				<input type="button" accesskey="x" name="addbbcode8" value="@" onClick="bbstyle(8,'textchapters')">			  			
-				<input type="button" accesskey= "s" name="addbbcode10" value="Hotspot Source" onclick="bbstyle(10,'textchapters')">
-				<textarea name="textchapters" id="game_review_textfield" ONSELECT="javascript:storeCaret(this);" ONCLICK="javascript:storeCaret(this);" ONKEYUP="javascript:storeCaret(this);" ONCHANGE="javascript:storeCaret(this);" rows="5" style="padding-left:0px;">
-				</textarea>
-				<br>
-				<br>
-				<b>Interview :</b>
+				<b>Article :</b>
 				<br>
 				<input type="button" accesskey= "b" name="addbbcode0" value="B" onclick="bbstyle(0,'textfield')">
 				<input type="button" accesskey= "u" name="addbbcode4" value="U" onclick="bbstyle(4,'textfield')">
 				<input type="button" accesskey= "i" name="addbbcode2" value="I" onclick="bbstyle(2,'textfield')">
 				<input type="button" accesskey="w" name="addbbcode6" value="URL" onClick="bbstyle(6,'textfield')">			  
-				<input type="button" accesskey="x" name="addbbcode8" value="@" onClick="bbstyle(8,'textfield')">			  			
-				<input type="button" accesskey= "t" name="addbbcode12" value="Hotspot Target" onclick="bbstyle(12,'textfield')">		 
+				<input type="button" accesskey="x" name="addbbcode8" value="@" onClick="bbstyle(8,'textfield')">			  				 
 				<textarea name="textfield" id="game_review_textfield" ONSELECT="javascript:storeCaret(this);" ONCLICK="javascript:storeCaret(this);" ONKEYUP="javascript:storeCaret(this);" ONCHANGE="javascript:storeCaret(this);" rows="15" style="padding-left:0px;">
 				</textarea>
 				<br>
 				<br>
-				<input type="hidden" name="interview_id" value="{if isset($interview.interview_id)}{$interview.interview_id}{/if}">
-				<input type="hidden" name="action" value="add_interview">
-				<input type="submit" name="Create Interview" value="Create" class="topbutton_cpanel_small">
+				<input type="hidden" name="article_id" value="{if isset($article.article_id)}{$article.article_id}{/if}">
+				<input type="hidden" name="action" value="add_article">
+				<input type="submit" name="Create article" value="Create" class="topbutton_cpanel_small">
 			</fieldset>
 		</form>
 		<br>

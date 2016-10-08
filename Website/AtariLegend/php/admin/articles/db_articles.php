@@ -1,17 +1,13 @@
 <?php
 /***************************************************************************
-*                                db_interview.php
-*                            -----------------------
-*   begin                : Saturday, Sept 24, 2005
-*   copyright            : (C) 2005 Atari Legend
-*   email                : silversurfer@atari-forum.com
-*   actual update        : New section.
-*						  
-*   Id: db_interview,v 1.10 2005/10/29 Silver Surfer
-*   Id: db_interview,v 1.20 2016/08/02 STG
-*		- AL 2.0
-*   Id: db_interview,v 1.21 2016/08/20 STG
-*		- Added the change log
+*                               db_articles.php
+*                            --------------------------
+*   begin                : friday, October 8, 2016
+*   copyright            : (C) 2016 Atari Legend
+*   email                : martens_maarten@hotmail.com
+*
+*   Id:  db_articles.php,v 0.10 2016/10/08 20:14 ST Graveyard
+*					- AL 2.0
 *
 ***************************************************************************/
 
@@ -28,7 +24,7 @@ exit;
 }
 
 //****************************************************************************************
-// This is the image selection/upload screen for the interviews
+// This is the image selection/upload screen for the articles
 //**************************************************************************************** 
 
 //If we are uploading new screenshots
@@ -86,41 +82,41 @@ foreach($image['tmp_name'] as $key=>$tmp_name)
 		$screenshotrow = $SCREENSHOT->fetch_row();
 		$screenshot_id = $screenshotrow[0];
 		
-		$sdbquery = $mysqli->query("INSERT INTO screenshot_interview (interview_id, screenshot_id) VALUES ($interview_id, $screenshot_id)")
+		$sdbquery = $mysqli->query("INSERT INTO screenshot_article (article_id, screenshot_id) VALUES ($article_id, $screenshot_id)")
 					or die ("Database error - inserting screenshots2");
 		
 		// Rename the uploaded file to its autoincrement number and move it to its proper place.
-		$file_data = rename($image['tmp_name'][$key], "$interview_screenshot_save_path$screenshotrow[0].$ext");
+		$file_data = rename($image['tmp_name'][$key], "$article_screenshot_save_path$screenshotrow[0].$ext");
 		
 		$_SESSION['edit_message'] = 'Screenshots added';
 		
-		create_log_entry('Interviews', $interview_id, 'Screenshots', $interview_id, 'Insert', $_SESSION['user_id']);
+		create_log_entry('Articles', $article_id, 'Screenshots', $article_id, 'Insert', $_SESSION['user_id']);
 		
-		chmod("$interview_screenshot_save_path$screenshotrow[0].$ext", 0777);
+		chmod("$article_screenshot_save_path$screenshotrow[0].$ext", 0777);
 		
 		}
 	}
 }
 
-header("Location: ../interviews/interviews_screenshots_add.php?interview_id=$interview_id");
+header("Location: ../articles/articles_screenshots_add.php?article_id=$article_id");
 
 }
 
 //If we pressed the delete screenshot link
 if (isset($action) and $action == 'delete_screen')
 {
-	$sql_interviewshot = $mysqli->query("SELECT * FROM screenshot_interview
-	   					   			  WHERE interview_id = $interview_id 
+	$sql_articleshot = $mysqli->query("SELECT * FROM screenshot_article
+	   					   			  WHERE article_id = $article_id 
 									  AND screenshot_id = $screenshot_id")
-	     		  or die ("Database error - selecting screenshots interview");
+	     		  or die ("Database error - selecting screenshots article");
 						
-	$interviewshot = $sql_interviewshot->fetch_row();
-	$interviewshotid = $interviewshot[0];
+	$articleshot = $sql_articleshot->fetch_row();
+	$articleshotid = $articleshot[0];
 	
-	create_log_entry('Interviews', $interview_id, 'Screenshots', $interview_id, 'Delete', $_SESSION['user_id']);
+	create_log_entry('Articles', $article_id, 'Screenshots', $article_id, 'Delete', $_SESSION['user_id']);
 	
 	//delete the screenshot comment from the DB table
-	$sdbquery = $mysqli->query("DELETE FROM interview_comments WHERE screenshot_interview_id = $interviewshotid") 
+	$sdbquery = $mysqli->query("DELETE FROM article_comments WHERE screenshot_article_id = $articleshotid") 
 				or die ("Error deleting comment");
 				
 	//get the extension 
@@ -132,9 +128,9 @@ if (isset($action) and $action == 'delete_screen')
 	$screenshot_ext = $screenshotrow['imgext'];
 
 	$sql = $mysqli->query("DELETE FROM screenshot_main WHERE screenshot_id = '$screenshot_id' ");
-	$sql = $mysqli->query("DELETE FROM screenshot_interview WHERE screenshot_id = '$screenshot_id' ");
+	$sql = $mysqli->query("DELETE FROM screenshot_article WHERE screenshot_id = '$screenshot_id' ");
 
-	$new_path = $interview_screenshot_save_path;
+	$new_path = $article_screenshot_save_path;
 	$new_path .= $screenshot_id;
 	$new_path .= ".";
 	$new_path .= $screenshot_ext;
@@ -143,31 +139,31 @@ if (isset($action) and $action == 'delete_screen')
 	
 	$_SESSION['edit_message'] = 'Screenshot (and comment) deleted succesfully';
 	
-	header("Location: ../interviews/interviews_screenshots_add.php?interview_id=$interview_id");
+	header("Location: ../articles/articles_screenshots_add.php?article_id=$article_id");
 }
 
 //*************************************************************************
 // Delete the interview and return to the interview page
 //*************************************************************************
-if (isset($action) and $action=="delete_interview")
+if (isset($action) and $action=="delete_article")
 {
 
-create_log_entry('Interviews', $interview_id, 'Interview', $interview_id, 'Delete', $_SESSION['user_id']);
+create_log_entry('Articles', $article_id, 'Article', $article_id, 'Delete', $_SESSION['user_id']);
 
-$sql = $mysqli->query("DELETE FROM interview_main WHERE interview_id = '$interview_id' ");
-$sql = $mysqli->query("DELETE FROM interview_text WHERE interview_id = '$interview_id' ");
+$sql = $mysqli->query("DELETE FROM article_main WHERE article_id = '$article_id' ");
+$sql = $mysqli->query("DELETE FROM article_text WHERE article_id = '$article_id' ");
 
 //delete the comments at every screenshot for this review
-	$SCREENSHOT = $mysqli->query("SELECT * FROM screenshot_interview where interview_id = '$interview_id' ")
+	$SCREENSHOT = $mysqli->query("SELECT * FROM screenshot_article where article_id = '$article_id' ")
 			      or die ("Database error - getting screenshots");
         
 		while ($screenshotrow=$SCREENSHOT->fetch_row())
 		{
-			$sql = $mysqli->query("DELETE FROM interview_comments WHERE screenshot_interview_id = $screenshotrow[0] ");
+			$sql = $mysqli->query("DELETE FROM article_comments WHERE screenshot_article_id = $screenshotrow[0] ");
 		}
 
 //delete the screenshots
-	$SCREENSHOT2 = $mysqli->query("SELECT * FROM screenshot_interview where interview_id = '$interview_id' ")
+	$SCREENSHOT2 = $mysqli->query("SELECT * FROM screenshot_article where article_id = '$article_id' ")
 			  	   or die ("Database error - getting screenshots");
         
 		while ( $screenshotrow=$SCREENSHOT2->fetch_row() )
@@ -182,7 +178,7 @@ $sql = $mysqli->query("DELETE FROM interview_text WHERE interview_id = '$intervi
 						
 			$sql = $mysqli->query("DELETE FROM screenshot_main WHERE screenshot_id = $screenshotrow[2] ");
 
-			$new_path = $interview_screenshot_save_path;
+			$new_path = $article_screenshot_save_path;
 			$new_path .= $screenshotrow[2];
 			$new_path .= ".";
 			$new_path .= $screenshot_ext_type;
@@ -190,11 +186,11 @@ $sql = $mysqli->query("DELETE FROM interview_text WHERE interview_id = '$intervi
 			unlink ("$new_path");
 		}
 		
-	$sql = $mysqli->query("DELETE FROM screenshot_interview WHERE interview_id = '$interview_id' ");
+	$sql = $mysqli->query("DELETE FROM screenshot_article WHERE article_id = '$article_id' ");
 	
-	$_SESSION['edit_message'] = 'interview deleted';
+	$_SESSION['edit_message'] = 'article deleted';
 
-	header("Location: ../interviews/interviews_main.php");
+	header("Location: ../articles/articles_main.php");
 }
 
 //*************************************************************************
@@ -204,18 +200,18 @@ $sql = $mysqli->query("DELETE FROM interview_text WHERE interview_id = '$intervi
 //If the delete comment has been triggered
 if ( isset($action) and $action == 'delete_screenshot_comment' )
 {
-	$sql_interviewshot = $mysqli->query("SELECT * FROM screenshot_interview
-	   					   			  	WHERE interview_id = $interview_id 
+	$sql_articleshot = $mysqli->query("SELECT * FROM screenshot_article
+	   					   			  	WHERE article_id = $article_id 
 										AND screenshot_id = $screenshot_id")
-	     		  or die ("Database error - selecting screenshots interview");
+	     		  or die ("Database error - selecting screenshots article");
 						
-	$interviewshot = $sql_interviewshot->fetch_row();
-	$interviewshotid = $interviewshot[0];
+	$articleshot = $sql_articleshot->fetch_row();
+	$articleshotid = $articleshot[0];
 	
-	create_log_entry('Interviews', $interview_id, 'Screenshots', $interview_id, 'Delete', $_SESSION['user_id']);
+	create_log_entry('Articles', $article_id, 'Screenshots', $article_id, 'Delete', $_SESSION['user_id']);
 	
 	//delete the screenshot comment from the DB table
-	$sdbquery = $mysqli->query("DELETE FROM interview_comments WHERE screenshot_interview_id = $interviewshotid") 
+	$sdbquery = $mysqli->query("DELETE FROM article_comments WHERE screenshot_article_id = $articleshotid") 
 				or die ("Error deleting comment");
 				
 	//get the extension 
@@ -227,9 +223,9 @@ if ( isset($action) and $action == 'delete_screenshot_comment' )
 	$screenshot_ext = $screenshotrow['imgext'];
 
 	$sql = $mysqli->query("DELETE FROM screenshot_main WHERE screenshot_id = '$screenshot_id' ");
-	$sql = $mysqli->query("DELETE FROM screenshot_interview WHERE screenshot_id = '$screenshot_id' ");
+	$sql = $mysqli->query("DELETE FROM screenshot_article WHERE screenshot_id = '$screenshot_id' ");
 
-	$new_path = $interview_screenshot_save_path;
+	$new_path = $article_screenshot_save_path;
 	$new_path .= $screenshot_id;
 	$new_path .= ".";
 	$new_path .= $screenshot_ext;
@@ -238,37 +234,34 @@ if ( isset($action) and $action == 'delete_screenshot_comment' )
 	
 	$_SESSION['edit_message'] = 'Screenshot and comment deleted succesfully';
 	
-	header("Location: ../interviews/interviews_edit.php?interview_id=$interview_id");
+	header("Location: ../articles/articles_edit.php?article_id=$article_id");
 }
 
 //*************************************************************************
-// UPDATE INTERVIEW AND RETURN TO THE INTERVIEW EDIT PAGE
+// UPDATE ARTICLE AND RETURN TO THE INTERVIEW EDIT PAGE
 //*************************************************************************
 
-//If the Update interview has been triggered
-if ( isset($action) and $action == 'update_interview' )
+//If the Update article has been triggered
+if ( isset($action) and $action == 'update_article' )
 {
-	//First, we'll be filling up the main interview table
-	$sdbquery = $mysqli->query("UPDATE interview_main SET user_id = $members, ind_id = $individual
-							 WHERE interview_id = $interview_id")
-				or die("Couldn't Update into interview_main");
+	//First, we'll be filling up the main article table
+	$sdbquery = $mysqli->query("UPDATE article_main SET user_id = $members, article_type_id = $article_type
+							 WHERE article_id = $article_id")
+				or die("Couldn't Update into article_main");
 	
-	// first we have to convert the date vars into a time stamp to be inserted to review_date
+	// first we have to convert the date vars into a time stamp to be inserted to article_date
 	$date = date_to_timestamp($Date_Year,$Date_Month,$Date_Day);
 	
 	$textfield = $mysqli->real_escape_string($textfield);
 	$textintro = $mysqli->real_escape_string($textintro);
-	$textchapters = $mysqli->real_escape_string($textchapters);
 	
-	//$textfield = addslashes($textfield);
-	
-	$sdbquery = $mysqli->query("UPDATE interview_text SET interview_text = '$textfield', interview_date = '$date', interview_intro = '$textintro', interview_chapters = '$textchapters' WHERE interview_id = $interview_id") 
-				or die("Couldn't update into interview_text");
+	$sdbquery = $mysqli->query("UPDATE article_text SET article_text = '$textfield', article_date = '$date', article_intro = '$textintro', article_title = '$article_title' WHERE article_id = $article_id") 
+				or die("Couldn't update into article_text");
 
-	//we're gonna add the screenhots into the screenshot_interview table and fill up the interview_comment table.
+	//we're gonna add the screenhots into the screenshot_article table and fill up the article_comment table.
 	//We need to loop on the screenshot table to check the shots used. If a comment field is filled,
 	//the screenshot was used!
-	$SCREEN = $mysqli->query("SELECT * FROM screenshot_interview where interview_id = '$interview_id' ORDER BY screenshot_id ASC")
+	$SCREEN = $mysqli->query("SELECT * FROM screenshot_article where article_id = '$article_id' ORDER BY screenshot_id ASC")
 	   		  or die ("Database error - getting screenshots");
 				
     $i=0;
@@ -282,33 +275,34 @@ if ( isset($action) and $action == 'update_interview' )
 			$comment = $mysqli->real_escape_string($comment);
 			//$comment = addslashes($comment);
 			
-			$interviewshotid = $screenrow[0];
+			$articleshotid = $screenrow[0];
 					
 			//check if comment already exists for this shot
-			$INTERVIEWCOMMENT = $mysqli->query("SELECT * FROM interview_comments where screenshot_interview_id = $interviewshotid")
-						        or die ("Database error - selecting screenshot interview comment");
+			$articleCOMMENT = $mysqli->query("SELECT * FROM article_comments where screenshot_article_id = $articleshotid")
+						        or die ("Database error - selecting screenshot article comment");
 					
-			$number = $INTERVIEWCOMMENT->num_rows;
+			$number = $articleCOMMENT->num_rows;
 					
 			if ($number > 0)
 			{
-				$sdbquery = $mysqli->query("UPDATE interview_comments SET comment_text = '$comment'
-										 WHERE screenshot_interview_id = $interviewshotid")
-							or die("Couldn't update interview_comments");
+				$sdbquery = $mysqli->query("UPDATE article_comments SET comment_text = '$comment'
+										 WHERE screenshot_article_id = $articleshotid")
+							or die("Couldn't update article_comments");
 			}
 			else
 			{
-				$sdbquery = $mysqli->query("INSERT INTO interview_comments (screenshot_interview_id, comment_text) VALUES ($interviewshotid, '$comment')")
-							or die("Couldn't insert into interview_comments");
+				$sdbquery = $mysqli->query("INSERT INTO article_comments (screenshot_article_id, comment_text) VALUES ($articleshotid, '$comment')")
+							or die("Couldn't insert into article_comments");
 			}
 		}
 		$i++;
 	}
-	create_log_entry('Interviews', $interview_id, 'Interview', $interview_id, 'Update', $_SESSION['user_id']);
 	
-	$_SESSION['edit_message'] = 'Interview updated succesfully';
+	create_log_entry('Articles', $article_id, 'Article', $article_id, 'Update', $_SESSION['user_id']);
 	
-	header("Location: ../interviews/interviews_edit.php?interview_id=$interview_id");
+	$_SESSION['edit_message'] = 'Article updated succesfully';
+	
+	header("Location: ../articles/articles_edit.php?article_id=$article_id");
 }
 
 
@@ -317,31 +311,32 @@ if ( isset($action) and $action == 'update_interview' )
 //page
 //****************************************************************************************
 
-elseif (isset($action) and $action == 'add_interview')
+elseif (isset($action) and $action == 'add_article')
 {
-	if ( $members == '' or $members == '-' or $individual == '' or $individual == "-"  )
+	if ( $members == '' or $members == '-' or $article_type == '' or $article_type == "-"  )
 	{
-		
-		$_SESSION['edit_message'] = 'Some required info is not filled in. Make sure the -author- and -individual- fields are completed';
-	
-		//Get the individuals
-		$sql_individuals = $mysqli->query("SELECT * FROM individuals ORDER BY ind_name ASC")
-				  		   or die ("Couldn't query individuals database");
-		
-		while ($individuals = $sql_individuals->fetch_array(MYSQLI_BOTH))
+		$_SESSION['edit_message'] = 'Some required info is not filled in. Make sure the -author- and -article_type- fields are completed';
+				
+		//Get the article types
+		$sql_types = $mysqli->query("SELECT article_type_id,article_type FROM article_type")
+			  or die ("Database error - getting the article types");
+        
+		while ( $article_types=$sql_types->fetch_array(MYSQLI_BOTH) )
 		{
 	
-			//Get the selected individual data
-			if ( $individuals['ind_id'] == $individual )
+			//Get the selected article types
+			if ( $article_types['article_type_id'] == $article_type )
 			{
-				$smarty->assign('selected_individual',
-	    	 		array('ind_id' => $individuals['ind_id'],
-				 		  'ind_name' => $individuals['ind_name']));
+				$smarty->assign('selected_article_type',
+	    	 		array('article_type_id' => $article_types['$article_type_id'],
+				 		  'article_type' => $article_types['$article_type']));
 			}
-	
-			$smarty->append('individuals',
-	    		 array('ind_id' => $individuals['ind_id'],
-					   'ind_name' => $individuals['ind_name']));	
+			else
+			{
+				$smarty->append('article_types',
+					 array('article_type_id' => $article_types['article_type_id'],
+						   'article_type' => $article_types['article_type']));
+			}
 		}
 
 		//Get the authors for the interview
@@ -356,15 +351,16 @@ elseif (isset($action) and $action == 'add_interview')
 		}				   
 
 		$smarty->assign("user_id",$_SESSION['user_id']);
+		$smarty->assign("article_title",$article_title);
 
 		//Send all smarty variables to the templates
-		$smarty->display("file:".$cpanel_template_folder."interviews_add.html");
+		$smarty->display("file:".$cpanel_template_folder."articles_add.html");
 		
 	}	
 	else
 	{
-		$sdbquery = $mysqli->query("INSERT INTO interview_main (user_id, ind_id) VALUES ($members, $individual)")
-					or die("Couldn't insert into interview_main");
+		$sdbquery = $mysqli->query("INSERT INTO article_main (user_id, article_type_id) VALUES ($members, $article_type)")
+					or die("Couldn't insert into article_main");
 	
 		//get the id of the inserted interview
 		$id = $mysqli->insert_id;
@@ -374,19 +370,18 @@ elseif (isset($action) and $action == 'add_interview')
 		
 		$textfield = $mysqli->real_escape_string($textfield);
 		$textintro = $mysqli->real_escape_string($textintro);
-		$textchapters = $mysqli->real_escape_string($textchapters);
 	
-		$sdbquery = $mysqli->query("INSERT INTO interview_text (interview_id, interview_text, interview_date, interview_intro, interview_chapters) VALUES ($id, '$textfield', '$date', '$textintro','$textchapters')") 
-					or die("Couldn't insert into interview_text");
+		$sdbquery = $mysqli->query("INSERT INTO article_text (article_id, article_text, article_date, article_intro, article_title) VALUES ($id, '$textfield', '$date', '$textintro', '$article_title')") 
+					or die("Couldn't insert into article_text");
 		
-		create_log_entry('Interviews', $individual, 'Interview', $id, 'Insert', $_SESSION['user_id']);
+		create_log_entry('Articles', $id, 'Article', $id, 'Insert', $_SESSION['user_id']);
 		
-		$_SESSION['edit_message'] = 'Interview added succesfully';
+		$_SESSION['edit_message'] = 'Article added succesfully';
 		
 		$smarty->assign("user_id",$_SESSION['user_id']);
 
 		//Send all smarty variables to the templates
-	header("Location: ../interviews/interviews_edit.php?interview_id=$id");
+		header("Location: ../articles/articles_edit.php?article_id=$id");
 	}
 }
 

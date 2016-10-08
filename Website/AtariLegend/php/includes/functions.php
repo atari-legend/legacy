@@ -48,11 +48,11 @@ function InsertALCode($alcode){
 	$alcode = str_replace("[/code]","</pre></blockquote>",$alcode);
 	$alcode = preg_replace("#\[url\](www\..+)\[\/url\]#i", "[url=http://$1]$1[/url]", $alcode);
 	$alcode = preg_replace("#\[url\=(www\..+)\](.*)\[\/url\]#i", "[url=http://$1]$2[/url]", $alcode);
-	$alcode = preg_replace("#\[url\=(.*)\](.*)\[\/url\]#Ui", "<a href=\"$1\" class=\"standard_tile_link\">$2</a>", $alcode);
-	$alcode = preg_replace("#\[url\](.*)\[\/url\]#Ui", "<a href=\"$1\" class=\"standard_tile_link\">$1</a>", $alcode);
+	$alcode = preg_replace("#\[url\=(.*)\](.*)\[\/url\]#Ui", "<a href=\"$1\" class=\"standard_tile_link_black\">$2</a>", $alcode);
+	$alcode = preg_replace("#\[url\](.*)\[\/url\]#Ui", "<a href=\"$1\" class=\"standard_tile_link_black\">$1</a>", $alcode);
 	$alcode = preg_replace("#\[hotspotUrl\=(.*)\](.*)\[\/hotspotUrl\]#Ui", "<a href=\"$1\" class=\"standard_tile_link_black\">$2</a>", $alcode);
-	$alcode = preg_replace("#(^|[\n ])([\w]+?://.*?[^ \"\n\r\t<]*)#is", "\\1<a href=\"\\2\" target=\"_blank\" class=\"standard_tile_link\">\\2</a>", $alcode);
-	$alcode = preg_replace("#(^|[\n ])((www|ftp)\.[\w\-]+\.[\w\-.\~]+(?:/[^ \"\t\n\r<]*)?)#is", "\\1<a href=\"http://\\2\" target=\"_blank\" class=\"standard_tile_link\">\\2</a>", $alcode);
+	$alcode = preg_replace("#(^|[\n ])([\w]+?://.*?[^ \"\n\r\t<]*)#is", "\\1<a href=\"\\2\" target=\"_blank\" class=\"standard_tile_link_black\">\\2</a>", $alcode);
+	$alcode = preg_replace("#(^|[\n ])((www|ftp)\.[\w\-]+\.[\w\-.\~]+(?:/[^ \"\t\n\r<]*)?)#is", "\\1<a href=\"http://\\2\" target=\"_blank\" class=\"standard_tile_link_black\">\\2</a>", $alcode);
 
 	return $alcode;
 }
@@ -70,8 +70,8 @@ function BBCode($Text)
 	$MAILSearchString = $URLSearchString . " a-zA-Z0-9\.@";
 
 	// Perform URL Search
-	$Text = preg_replace("/\[url\]([$URLSearchString]*)\[\/url\]/", '<a href="$1" target="_blank" class="standard_tile_link">$1</a>', $Text);
-	$Text = preg_replace("(\[url\=([$URLSearchString]*)\](.+?)\[/url\])", '<a href="$1" target="_blank" class="standard_tile_link">$2</a>', $Text);
+	$Text = preg_replace("/\[url\]([$URLSearchString]*)\[\/url\]/", '<a href="$1" target="_blank" class="standard_tile_link_black">$1</a>', $Text);
+	$Text = preg_replace("(\[url\=([$URLSearchString]*)\](.+?)\[/url\])", '<a href="$1" target="_blank" class="standard_tile_link_black">$2</a>', $Text);
 	//$Text = preg_replace("(\[url\=([$URLSearchString]*)\]([$URLSearchString]*)\[/url\])", '<a href="$1" target="_blank" class="main_links">$2</a>', $Text);
 
 	// Perform MAIL Search
@@ -1217,10 +1217,44 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
 					$subsection = 'Tool';
 				}
 			}	
-		}
-			
+		}	
 	}
-				
+	
+	//	Everything we do for the Articles section			
+	If ( $section == 'Articles' )
+	{	
+		if ( $subsection == 'Article' )
+		{
+			If ( $action == 'Update' or $action == 'Delete' or $action == 'Insert')
+			{
+				//we need to get the title
+				$query_title = "SELECT article_title FROM article_text WHERE article_id = '$section_id'";
+				$result = $mysqli->query($query_title) or die("getting title failed");
+				$query_data = $result->fetch_array(MYSQLI_BOTH);
+				$section_name = $query_data['article_title'];	
+			}
+		}
+		
+		if ( $subsection == 'Screenshots' )
+		{
+			If ( $action == 'Insert' OR $action == 'Delete')
+			{
+				//we need to get the title
+				$query_title = "SELECT article_title FROM article_text WHERE article_id = '$section_id'";
+				$result = $mysqli->query($query_title) or die("getting title failed");
+				$query_data = $result->fetch_array(MYSQLI_BOTH);
+				$section_name = $query_data['article_title'];		
+			}
+		}
+		
+		if ( $subsection == 'Article' or $subsection == 'Screenshots' )
+		{
+			$subsection_name = $section_name;
+		} 
+	}
+	
+	echo $section;
+	
 	$sql_log = $mysqli->query("INSERT INTO change_log (section, section_id, section_name, sub_section, sub_section_id, sub_section_name, user_id, action, timestamp) VALUES ('$section', '$section_id', '$section_name', '$subsection', '$subsection_id', '$subsection_name', '$user_id', '$action', '$log_time')") 
 								or die ("Couldn't insert change log into database");  
 }
