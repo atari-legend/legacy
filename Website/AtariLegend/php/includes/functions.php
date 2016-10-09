@@ -1253,6 +1253,21 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
 		} 
 	}
 	
+	//	Everything we do for the ARTICLE TYPE SECTION	
+	If ( $section == 'Article type' )
+	{
+		// get the name of the article type
+		$query_article_type = "SELECT article_type FROM article_type WHERE article_type_id = '$section_id'";
+		$result = $mysqli->query($query_article_type) or die("getting article type name failed");
+		$query_data = $result->fetch_array(MYSQLI_BOTH);
+		$section_name = $query_data['article_type'];
+		
+		If ( $subsection == 'Article type' )
+		{
+			$subsection_name = $section_name;
+		}
+	}
+	
 	echo $section;
 	
 	$sql_log = $mysqli->query("INSERT INTO change_log (section, section_id, section_name, sub_section, sub_section_id, sub_section_name, user_id, action, timestamp) VALUES ('$section', '$section_id', '$section_name', '$subsection', '$subsection_id', '$subsection_name', '$user_id', '$action', '$log_time')") 

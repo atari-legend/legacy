@@ -355,6 +355,17 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH))
 			$subsection_link = $section_link;
 		}
 	}
+	
+	//	the ARTICLE TYPE SECTION
+	if ($log['section'] == 'Article type')
+	{			
+		$section_link = ( "../articles/article_type_edit.php" . '?article_type_id=' . $log['section_id'] );
+		
+		if ($log['sub_section'] == 'Article type' )
+		{
+			$subsection_link = ( "../articles/article_type_edit.php" . '?article_type_id=' . $log['section_id'] );
+		}
+	}
 		
 		
 	$smarty->append('log',
