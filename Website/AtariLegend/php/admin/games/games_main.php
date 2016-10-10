@@ -28,7 +28,12 @@ include("../../includes/quick_search_games.php");
 date_default_timezone_set('UTC');
 $start = microtime(true);
 
+$result = $mysqli->query("SELECT * FROM game");
+$games_nr = $result->num_rows;
+
 $smarty->assign("user_id",$_SESSION['user_id']);
+
+$smarty->assign("games_nr",$games_nr);
 
 if (isset ($_SESSION['edit_message']))
 {

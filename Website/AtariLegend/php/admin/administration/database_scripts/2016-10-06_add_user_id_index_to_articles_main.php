@@ -18,7 +18,7 @@ $database_update_id = 30;
 $update_description = "Change field member_id to user_id in table articles_main"; 
 
 // Should the database change query execute if test is "test_fail" or "test_success"
-$execute_condition = "test_fail";
+$execute_condition = "test_succes";
 
 //This is the test query, the query should be made to get an either true or false result.
 $test_condition = "SELECT * FROM information_schema.columns 
