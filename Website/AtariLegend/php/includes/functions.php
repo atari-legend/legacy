@@ -1262,8 +1262,6 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
         }
     }
 
-    echo $section;
-
     $sql_log = $mysqli->query("INSERT INTO change_log (section, section_id, section_name, sub_section, sub_section_id, sub_section_name, user_id, action, timestamp) VALUES ('$section', '$section_id', '$section_name', '$subsection', '$subsection_id', '$subsection_name', '$user_id', '$action', '$log_time')")
                                 or die ("Couldn't insert change log into database");
 }
