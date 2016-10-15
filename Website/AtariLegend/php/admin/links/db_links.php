@@ -9,10 +9,10 @@
 *
 *
 *
-*   Id: db_links.php,v 1.00 2005/01/08 Silver Surfer
-* Id: db_links.php,v 2.00 2015/10/21 Grave
-* Id: db_links.php,v 3.00 2015/12/24 Grave - messages added
-* Id: db_links.php,v 3.01 2016/08/19 Grave - change log added
+*           Id: db_links.php,v 1.00 2005/01/08 Silver Surfer
+*           Id: db_links.php,v 2.00 2015/10/21 Grave
+*           Id: db_links.php,v 3.00 2015/12/24 Grave - messages added
+*           Id: db_links.php,v 3.01 2016/08/19 Grave - change log added
 *
 ***************************************************************************/
 
@@ -24,42 +24,42 @@ include("../../includes/admin.php");
 
 if(isset($action) and $action=="addnew_link")
 {
-  //****************************************************************************************
-  // This is where the actual links will be inserted into the DB!!
-  //****************************************************************************************
-  $timestamp = time();
-  $name = trim($name);
+    //****************************************************************************************
+    // This is where the actual links will be inserted into the DB!!
+    //****************************************************************************************
+    $timestamp = time();
+    $name = trim($name);
 
-  $mysqli->query("INSERT INTO website (website_name, website_url, website_date, user_id) VALUES ('$name', '$url','$timestamp','$user_id')")
+    $mysqli->query("INSERT INTO website (website_name, website_url, website_date, user_id) VALUES ('$name', '$url','$timestamp','$user_id')")
         or die("Unable to insert website into database");
 
-  $karma_action = "weblink";
+    $karma_action = "weblink";
 
-  UserKarma($user_id,$karma_action);
+    UserKarma($user_id,$karma_action);
 
-  $RESULT=$mysqli->query("SELECT * FROM website WHERE website_name='$name' AND website_url='$url'")
-        or die("Unable to select website database");
-  $rowlink= $RESULT->fetch_array(MYSQLI_BOTH);
+    $RESULT=$mysqli->query("SELECT * FROM website WHERE website_name='$name' AND website_url='$url'")
+          or die("Unable to select website database");
+    $rowlink= $RESULT->fetch_array(MYSQLI_BOTH);
 
-  $descr = mysql_real_escape_string($descr);
+    $descr = $mysqli->real_escape_string($descr);
 
-  if($descr!=='')
-  {
-    $mysqli->query("INSERT INTO website_description (website_id, website_description_text) VALUES ('$rowlink[website_id]', '$descr')")
-          or die("Unable to insert website description into database");
-  }
+    if($descr!=='')
+    {
+      $mysqli->query("INSERT INTO website_description (website_id, website_description_text) VALUES ('$rowlink[website_id]', '$descr')")
+            or die("Unable to insert website description into database");
+    }
 
-  if($category!=='')
-  {
-    $mysqli->query("INSERT INTO website_category_cross (website_id, website_category_id) VALUES ('$rowlink[website_id]', '$category')")
+    if($category!=='')
+    {
+      $mysqli->query("INSERT INTO website_category_cross (website_id, website_category_id) VALUES ('$rowlink[website_id]', '$category')")
             or die("Unable to insert website category into database");
-  }
+    }
 
-  $_SESSION['edit_message'] = "Link added to the database";
+    $_SESSION['edit_message'] = "Link added to the database";
 
-  create_log_entry('Links', $rowlink['website_id'], 'Link', $rowlink['website_id'], 'Insert', $_SESSION['user_id']);
+    create_log_entry('Links', $rowlink['website_id'], 'Link', $rowlink['website_id'], 'Insert', $_SESSION['user_id']);
 
-  header("Location: ../links/link_modlist.php?catpick=$category");
+    header("Location: ../links/link_modlist.php?catpick=$category");
 }
 
 //add category
@@ -196,7 +196,7 @@ if(isset($action) and $action=='modify_link')
 
   $num_desc = $sql_desc->num_rows;
 
-  $website_description_text = mysql_real_escape_string($website_description_text);
+  $website_description_text = $mysqli->real_escape_string($website_description_text);
 
   if ($num_desc==0) {
 
