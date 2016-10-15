@@ -1276,6 +1276,21 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
             $subsection_name = $section_name;
         }
     }
+	
+	//  Everything we do for the DOC CATEGORY SECTION
+    If ( $section == 'Doc category' )
+    {
+        // get the name of the doc type
+        $query_category_type = "SELECT doc_category_name FROM doc_category WHERE doc_category_id = '$section_id'";
+        $result = $mysqli->query($query_category_type) or die("getting doc category name failed");
+        $query_data = $result->fetch_array(MYSQLI_BOTH);
+        $section_name = $query_data['doc_category_name'];
+
+        If ( $subsection == 'Doc category' )
+        {
+            $subsection_name = $section_name;
+        }
+    }
 
 
     $sql_log = $mysqli->query("INSERT INTO change_log (section, section_id, section_name, sub_section, sub_section_id, sub_section_name, user_id, action, timestamp) VALUES ('$section', '$section_id', '$section_name', '$subsection', '$subsection_id', '$subsection_name', '$user_id', '$action', '$log_time')")

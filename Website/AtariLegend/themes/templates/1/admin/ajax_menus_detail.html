@@ -60,8 +60,7 @@
 							<div id="gameto_menu_link"><a onclick="popAddGames({$menus.menu_disk_id})" style="cursor: pointer;" class="standard_tile_link">Add Game/Tool/Demo to menu</a><br></div>
 							<div id="screenshot_link"><a onclick="popAddScreenshots({$menus.menu_disk_id})" style="cursor: pointer;" class="standard_tile_link">Add Screenshots to menu</a><br></div>
 							<div id="file_link"><a onclick="popAddFile({$menus.menu_disk_id})" style="cursor: pointer;" class="standard_tile_link">Add File to menu</a><br></div>
-							<a onclick="CloseeditDisk({$menus.menu_disk_id})" style="cursor: pointer;" class="standard_tile_link">Add Game Doc to menu</a><br>
-							<a onclick="CloseeditDisk({$menus.menu_disk_id})" style="cursor: pointer;" class="standard_tile_link">Add Tool Doc to menu</a><br>
+							<div id="docto_menu_link"><a onclick="popAddDocs({$menus.menu_disk_id})" style="cursor: pointer;" class="standard_tile_link">Add Doc to menu</a><br></div>
 						</div>
 						<div class="main_company_child" id="child_add_company">
 							<b>Release Year:</b><br>
@@ -194,6 +193,83 @@
 					<br>
 					<div id="menu_detail_expand_set"></div>	
 					<div id="menu_detail_expand_games"></div>
+					<div id="menu_doc_list">
+						{if isset($doc_game)}
+							<fieldset style="width:93%; margin:auto;">
+							<legend>Menu docs HELP</legend>
+								<div class="help_text">
+									Overhere you have an overview of the docs on the menu disk. When pressing the 'add doc' button above, a list with search options will appear. Use this list to add docs to the menu. Make sure to save the doc type as well!.
+								</div>
+							</fieldset>		
+							<br>			
+							<table class="table_game_list" style="width:95%;border: solid 1px black;margin:auto;">
+							<tr>
+								<th id="menu_mark_th"></th>
+								<th id="menu_gamename_th">Software Name</th>
+								<th id="menu_gamedev_th">Developer</th>
+								<th id="menu_gameyear_th">Year</th>
+								<th id="menu_gameinfo_th">Info</th>
+								<th id="menu_gameset_th">Set</th>
+							</tr>
+							{foreach from=$doc_game item=line}
+								<tr class="table_game_list">
+									<td class="menu_mark_td">
+										<form name="MenuDiskContent" id="MenuDiskContent">
+										<input type="checkbox" id="menu_disk_title_id{$line.menu_disk_title_id}" name="menu_disk_title_id[]" value="{$line.menu_disk_title_id}" onchange="deleteGamefromMenu({$line.menu_disk_title_id},{$menu_disk_id})">
+									</td>
+									<td class="menu_gamename_td">
+										{if $line.game_name != ''}
+											{if $line.menu_types_text == 'Game'}<a href="../games/games_detail.php?game_id={$line.game_id}" class="standard_table_left">{$line.game_name}{if $line.set_chain != ''} - <a onclick="popAddSet({$line.menu_disk_title_id},{$menus.menu_disk_id},'{$line.game_name|escape:'quotes'}')" style="cursor: pointer;" class="standard_tile_link"><i>Part {$line.set_chain}</i></a>{/if}</a>{else}<a href="../administration/construction.php" class="standard_table_left">{$line.game_name}</a>{/if}
+										{else}
+											<i>n/a</i>
+										{/if}
+									</td>
+									<td class="menu_gamedev_td">
+										{if $line.developer_name != ''}
+											{if $line.menu_types_text == 'Game'}					
+												<a href="../company/company_edit.php?comp_id={$line.developer_id}" class="standard_table_left">{$line.developer_name}</a>
+											{else}
+												<a href="../administration/construction.php" class="standard_table_left">{$line.developer_name}</a>
+											{/if}
+										{else}
+											<i>n/a</i>	
+										{/if}
+									</td>				
+									<td class="menu_gameyear_td">
+										{if $line.year != ''}
+											{if $line.menu_types_text == 'Game'}
+												<a href="../games/games_list.php?year={$line.year}&amp;action=search" class="standard_table_left">
+													{$line.year}
+												</a>
+											{else}
+												<a href="../administration/construction.php" class="standard_table_left">
+													{$line.year}
+												</a>
+											{/if}
+										{else}
+											<i>n/a</i>
+										{/if}
+									</td>
+									<td class="menu_gameinfo_td">
+										{$line.menu_types_text}
+									</td>
+									<td class="menu_gameset_td">
+										<div id="{$line.menu_disk_title_id}"><a onclick="popAddSet({$line.menu_disk_title_id},{$menus.menu_disk_id},'{$line.game_name|escape:'quotes'}')" style="cursor: pointer;" class="standard_tile_link">Add</a></div>
+									</td>
+								</tr>
+							{/foreach}
+							<tr class="table_game_list">
+								<td class="game_list_footer" colspan="6">
+									<img src="../../../themes/templates/1/includes/img/arrow_ltr.gif" alt="" width="38" height="22">		
+									<input type="hidden" name="action" value="delete_from_menu_disk">
+									<input type="button" value="Delete" class="quick_search_games_button" style="display:inline;">
+									</form>
+								</td>
+							</tr>
+							</table>
+						{/if}								
+					</div>
+					<div id="menu_detail_expand_docs"></div>
 					<div id="menu_screenshot_list">
 						{if isset( $screenshots)}
 						<div class="standard_tile_text">
@@ -308,6 +384,88 @@
 			<th id="menu_gameset_th">Set</th>
 		</tr>
 		{foreach from=$game item=line}
+			<tr class="table_game_list">
+				<td class="menu_mark_td">
+					<form name="MenuDiskContent" id="MenuDiskContent">
+					<input type="checkbox" id="menu_disk_title_id{$line.menu_disk_title_id}" name="menu_disk_title_id[]" value="{$line.menu_disk_title_id}" onchange="deleteGamefromMenu({$line.menu_disk_title_id},{$menu_disk_id})">
+				</td>
+				<td class="menu_gamename_td">
+					{if $line.game_name != ''}
+						{if $line.menu_types_text == 'Game'}<a href="../games/games_detail.php?game_id={$line.game_id}" class="standard_table_left">{$line.game_name}{if $line.set_chain != ''} - <a onclick="popAddSet({$line.menu_disk_title_id},{$menu_disk_id})" style="cursor: pointer;" class="standard_tile_link"><i>Part {$line.set_chain}</i></a>{/if}</a>{else}<a href="../administration/construction.php" class="standard_table_left">{$line.game_name}</a>{/if}
+					{else}
+						<i>n/a</i>
+					{/if}
+				</td>
+				<td class="menu_gamedev_td">
+					{if $line.developer_name != ''}	
+						{if $line.menu_types_text == 'Game'}					
+							<a href="../company/company_edit.php?comp_id={$line.developer_id}" class="standard_table_left">{$line.developer_name}</a>
+						{else}
+							<a href="../administration/construction.php" class="standard_table_left">{$line.developer_name}</a>
+						{/if}
+					{else}
+						<i>n/a</i>
+					{/if}</td>				
+				<td class="menu_gameyear_td">
+					{if $line.year != ''}
+						{if $line.menu_types_text == 'Game'}
+							<a href="../games/games_list.php?year={$line.year}&amp;action=search" class="standard_table_left">
+								{$line.year}
+							</a>
+						{else}
+							<a href="../administration/construction.php" class="standard_table_left">
+								{$line.year}
+							</a>
+						{/if}
+					{else}
+						<i>n/a</i>
+					{/if}
+				</td>
+				<td class="menu_gameinfo_td">
+					{$line.menu_types_text}
+				</td>
+				<td class="menu_gameset_td">
+					<div id="set_link"><a onclick="popAddSet({$line.menu_disk_title_id},{$menu_disk_id},'{$line.game_name|escape:'quotes'}')" style="cursor: pointer;" class="standard_tile_link">Add</a></div>
+				</td>
+			</tr>
+		{/foreach}
+		<tr>
+			<td class="game_list_footer" colspan="6">
+				<img src="../../../themes/templates/1/includes/img/arrow_ltr.gif" alt="" width="38" height="22">	
+				<input type="hidden" name="action" value="delete_from_menu_disk">
+				<input type="button" value="Delete" class="quick_search_games_button" style="display:inline;">
+				</form>
+			</td>
+		</tr>
+		</table>
+	{/if}
+
+	{if isset($osd_message)}
+		[BRK]{$osd_message}
+	{/if}
+			
+{/if}
+
+
+{if isset($smarty_action) and $smarty_action == "add_doc_to_menu_return"}
+	{if isset($doc_game)}
+		<fieldset style="width:93%; margin:auto;">
+		<legend>Menu titles HELP</legend>
+			<div class="help_text">
+				Overhere you have an overview of the docs on the menu disk. When pressing the 'add doc' button above, a list with search options will appear. Use this list to add docs to the menu.
+			</div>
+		</fieldset>		
+		<br>			
+		<table class="table_game_list" style="width:95%;border: solid 1px black;margin:auto;">
+		<tr>
+			<th id="menu_mark_th"></th>
+			<th id="menu_gamename_th">Software Name</th>
+			<th id="menu_gamedev_th">Developer</th>
+			<th id="menu_gameyear_th">Year</th>
+			<th id="menu_gameinfo_th">Info</th>
+			<th id="menu_gameset_th">Set</th>
+		</tr>
+		{foreach from=$doc_game item=line}
 			<tr class="table_game_list">
 				<td class="menu_mark_td">
 					<form name="MenuDiskContent" id="MenuDiskContent">

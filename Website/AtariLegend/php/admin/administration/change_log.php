@@ -377,7 +377,17 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH))
 			$subsection_link = ( "../docs/doc_type_edit.php" . '?doc_type_id=' . $log['section_id'] );
 		}
 	}
+	
+	//	the DOC CATEGORRY SECTION
+	if ($log['section'] == 'Doc category')
+	{			
+		$section_link = ( "../docs/doc_category_edit.php" . '?doc_category_id=' . $log['section_id'] );
 		
+		if ($log['sub_section'] == 'Doc category' )
+		{
+			$subsection_link = ( "../docs/doc_category_edit.php" . '?doc_category_id=' . $log['section_id'] );
+		}
+	}
 		
 	$smarty->append('log',
  		 		array('log_user_name' => $user_name,
