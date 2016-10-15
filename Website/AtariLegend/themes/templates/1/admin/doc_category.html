@@ -1,8 +1,8 @@
 {* 
 /***************************************************************************
-*                                menus_type.html
+*                                doc_category.html
 *                            --------------------------
-*   begin                : Sunday, September 04, 2016
+*   begin                : October 14, 2016
 *   copyright            : (C) 2016 Atari Legend
 *   email                : maarten.martens@freebel.net
 *   actual update        : Creation of file
@@ -10,40 +10,33 @@
 ***************************************************************************/
 
 ************************************************************************************************
-The main menus type page
+The main doc category page
 ************************************************************************************************
 *}
 {extends file='1/admin/frontpage.html'}
 
-{block name=title}Add/Edit a menu type{/block}
+{block name=title}Add/Edit a doc category{/block}
 
 {block name=main_tile}
 <div class="standard_tile" id="individuals_main">
-	<h1>MENU TYPE</h1>
+	<h1>DOC CATEGORY</h1>
 	<div class="standard_tile_line"></div>
 	<div class="standard_tile_text">
 		<div class="left_nav_section">
-			In this section you can add or edit a menu type which can be linked to a menu set. To edit an existing menu type, look up the name
-			in the dropdown box. To add a new menu type, use the input field and press 'add'. The following types should be setup (with these ID's) for this section to work properly :
-			<br>
-			<br> 1 - Game
-			<br> 2 - Demo
-			<br> 3 - Tool
-			<br> 4 - Music
-			<br> 5 - Picture
-			<br> 6 - E-zin/doc
+			In this section you can add or edit a doc category which can be linked to a document. To edit an existing doc category, look up the name
+			in the dropdown box. To add a new doc category, use the input field and press 'add'
 		</div> 
 		<br>
 		<br>
 		<div class="main_company_container">
 			<div class="main_company_child" id="child_edit_company">
 				<fieldset>
-					<legend>Edit a menu type</legend>		
-					<form action="../menus/menus_type_edit.php" method="post" name="ind_edit" id="ind_edit">
-						<select name="menu_type_id" id="quick_search_pub_select">
+					<legend>Edit a doc category</legend>		
+					<form action="../docs/doc_category_edit.php" method="post" name="ind_edit" id="ind_edit">
+						<select name="doc_category_id" id="quick_search_pub_select">
 							<option value="-">-</option>
-							{foreach from=$menus_type item=line}
-								<option value="{$line.menu_types_main_id}">{$line.menu_type_text}</option>
+							{foreach from=$doc_category item=line}
+								<option value="{$line.doc_category_id}">{$line.doc_category_name}</option>
 							{/foreach}	
 						</select>
 						<input type="hidden" name="user_id" id="user_id" value="{$user_id}">
@@ -53,11 +46,11 @@ The main menus type page
 			</div>
 			<div class="main_company_child" id="child_add_company">
 				<fieldset>
-					<legend>Add a menu type</legend>
-					<form action="../menus/db_menus_type.php" method="post" name="ind_add" id="ind_add">
-						<input type="text" name="type_name" class="standard_tile_input_small">
+					<legend>Add a doc category</legend>
+					<form action="../docs/db_doc_category.php" method="post" name="ind_add" id="ind_add">
+						<input type="text" name="category_name" class="standard_tile_input_small">
 						<input type="submit" value="Add" class="topbutton_cpanel_small">
-						<input type="hidden" name="action" id="action" value="insert_type">
+						<input type="hidden" name="action" id="action" value="insert_category">
 						<input type="hidden" name="user_id" id="user_id" value="{$user_id}">
 					</form>	
 				</fieldset>

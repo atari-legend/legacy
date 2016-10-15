@@ -28,34 +28,23 @@ if (isset($doc_type_id) and isset($action) and $action == 'update')
 
 if (isset($doc_type_id) and isset($action) and $action == 'delete_doc_type')
 {
-  // first see if this doc type is used for a menu set or menu disk
-  $sql = $mysqli->query("SELECT * FROM menu_disk_title_doc_games
-			LEFT JOIN doc_game ON (doc_game.doc_games_id = menu_disk_title_doc_games.doc_games_id)
-            WHERE doc_game.doc_type_id = '$doc_type_id'") or die ("error selecting menu disks");
+  // first see if this doc type is on a document
+  $sql = $mysqli->query("SELECT * FROM doc
+			LEFT JOIN doc_type ON (doc.doc_type_id = doc_type.doc_type_id)
+            WHERE doc_type.doc_type_id = '$doc_type_id'") or die ("error selecting doc");
   if ( $sql->num_rows > 0 )
   {
-    $_SESSION['edit_message'] = 'Deletion failed - This doc type is linked to menu disks';
+    $_SESSION['edit_message'] = 'Deletion failed - This doc type is linked to a document';
   }
   else
   {
-    // first see if this doc type is used for a menu set or menu disk
-	  $sql = $mysqli->query("SELECT * FROM menu_disk_title_doc_tools
-				LEFT JOIN doc_tools ON (doc_tools.doc_tools_id = menu_disk_title_doc_tools.doc_tools_id)
-				WHERE doc_tools.doc_type_id = '$doc_type_id'") or die ("error selecting menu disks");
-	  if ( $sql->num_rows > 0 )
-	  {
-		$_SESSION['edit_message'] = 'Deletion failed - This doc type is linked to menu disks';
-	  }
-	  else
-	  {	
-		  create_log_entry('Doc type', $doc_type_id, 'Doc type', $doc_type_id, 'Delete', $_SESSION['user_id']);
+	  create_log_entry('Doc type', $doc_type_id, 'Doc type', $doc_type_id, 'Delete', $_SESSION['user_id']);
 
-		  $mysqli->query("DELETE FROM doc_type WHERE doc_type_id = $doc_type_id")
-			  or die("Failed to delete doc type");
+	  $mysqli->query("DELETE FROM doc_type WHERE doc_type_id = $doc_type_id")
+		  or die("Failed to delete doc type");
 
-		  $_SESSION['edit_message'] = "Doc type succesfully deleted";
-	  }  
-   }
+	  $_SESSION['edit_message'] = "Doc type succesfully deleted";
+  }  
   header("Location: ../docs/doc_type.php");
 }
 
@@ -68,7 +57,7 @@ if (isset($action) and $action == 'insert_type')
   }
   else
   {
-    $sql_doctype = $mysqli->query("INSERT INTO  doc_type (doc_type_name) VALUES ('$type_name')") or die ("error inserting doc type");
+    $sql_doctype = $mysqli->query("INSERT INTO doc_type (doc_type_name) VALUES ('$type_name')") or die ("error inserting doc type");
 
     $new_doc_type_id = $mysqli->insert_id;
 
