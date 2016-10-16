@@ -171,11 +171,13 @@ include("../../includes/admin.php");
 										 pub_dev.pub_dev_name AS 'developer_name',
 										 pub_dev.pub_dev_id AS 'developer_id',
 										 doc_disk_game.doc_id AS 'doc_id',
+										 doc.doc_type_id,
 										 menu_types_main.menu_types_text,
 										 menu_disk_title.menu_disk_title_id AS 'menu_disk_title_id'
 										 FROM menu_disk_title
 										 LEFT JOIN menu_disk_title_doc_games ON (menu_disk_title.menu_disk_title_id = menu_disk_title_doc_games.menu_disk_title_id)
 										 LEFT JOIN doc_disk_game ON (menu_disk_title_doc_games.doc_games_id = doc_disk_game.doc_disk_game_id)
+										 LEFT JOIN doc ON (doc_disk_game.doc_id = doc.doc_id)
 										 LEFT JOIN game ON (game.game_id = doc_disk_game.game_id)
 										 LEFT JOIN game_developer ON (game.game_id = game_developer.game_id)
 										 LEFT JOIN pub_dev ON (game_developer.dev_pub_id = pub_dev.pub_dev_id)
@@ -189,11 +191,13 @@ include("../../includes/admin.php");
 										 '' AS developer_name,
 										 '' AS developer_id,
 										 doc_disk_tool.doc_id AS 'doc_id',
+										 doc.doc_type_id,
 										 menu_types_main.menu_types_text,
 										 menu_disk_title.menu_disk_title_id AS 'menu_disk_title_id'
 										 FROM menu_disk_title
 										 LEFT JOIN menu_disk_title_doc_tools ON (menu_disk_title.menu_disk_title_id = menu_disk_title_doc_tools.menu_disk_title_id)
 										 LEFT JOIN doc_disk_tool ON (menu_disk_title_doc_tools.doc_tools_id = doc_disk_tool.doc_disk_tool_id)
+										 LEFT JOIN doc ON (doc_disk_tool.doc_id = doc.doc_id)
 										 LEFT JOIN tools ON (tools.tools_id = doc_disk_tool.tools_id)
 										 LEFT JOIN menu_types_main ON (menu_disk_title.menu_types_main_id = menu_types_main.menu_types_main_id)
 										 WHERE menu_disk_title.menu_disk_id = '$menu_disk_id' AND menu_disk_title.menu_types_main_id = '6' ORDER BY tools.tools_name ASC";
@@ -213,8 +217,20 @@ include("../../includes/admin.php");
 						  'developer_name' => $query['developer_name'],
 						  'developer_id' => $query['developer_id'],
 						  'doc_id' => $query['doc_id'],
+						  'doc_type_id' => $query['doc_type_id'],
 						  'menu_types_text' => $query['menu_types_text'],
 						  'menu_disk_title_id' => $query['menu_disk_title_id']));
+				}
+				
+				//get the doc types
+				$sql_doc_type = "SELECT * from doc_type";
+				$query_doc_type = $mysqli->query($sql_doc_type) or die ("error in the doc_type query");	
+
+				while  ($query_type = $query_doc_type->fetch_array(MYSQLI_BOTH)) 
+				{
+					$smarty->append('doc_type',
+					array('doc_type_id' => $query_type['doc_type_id'],
+						  'doc_type_name' => $query_type['doc_type_name']));
 				}
 				
 				
