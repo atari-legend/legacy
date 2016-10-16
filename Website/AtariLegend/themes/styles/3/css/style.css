@@ -2789,6 +2789,22 @@ Menu set edit
   display: inline-block;
   width: 50%; }
 
+#menu_docname_th {
+  width: 55%;
+  text-align: left; }
+
+#menu_doctype_th, #menu_docinfo_th {
+  width: 20%;
+  text-align: left; }
+
+.menu_docname_td, .menu_doctype_td, .menu_docinfo_td {
+  width: 55%;
+  text-align: left;
+  padding-right: 5px; }
+
+.menu_doctype_td, .menu_docinfo_td {
+  width: 20%; }
+
 /* --> menus section */
 /*---------------------------------------------------------- 
  Media Queries Main & CPanel 
@@ -3392,7 +3408,7 @@ Menu set edit
   #menu_state_th, .menu_state_td, #menu_gamedev_th, .menu_gamedev_td {
     display: none; } }
 @media screen and (max-width: 700px) {
-  #menu_gameyear_th, #menu_gameinfo_th, #menu_gameset_th, .menu_gameyear_td, .menu_gameinfo_td, .menu_gameset_td {
+  #menu_gameyear_th, #menu_gameinfo_th, #menu_gameset_th, .menu_gameyear_td, .menu_gameinfo_td, .menu_gameset_td, .menu_docinfo_td, #menu_docinfo_th {
     display: none; } }
 /*---------------------------------------------------------- 
 General settings
