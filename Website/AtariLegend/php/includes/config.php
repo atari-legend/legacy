@@ -1,4 +1,4 @@
-<?php 
+<?php
 /***************************************************************************
 *                                config.php
 *                            -----------------------
@@ -11,10 +11,48 @@
 ***************************************************************************/
 
 //***************************************************************
-//This is the config file which is called within certain pages
+//This is the config file for the project
 //***************************************************************
 
-// Set variables 
+//***************************************************************
+// Set overall variables
+//***************************************************************
+
+// Set timezone
+date_default_timezone_set('UTC');
+
+// Report all PHP errors
+error_reporting(-1);
+
+//Is the site online or not - we use this for updates
+define("SITESTATUS", "online");
+
+// This is the url of the site
+define("SITEURL", "http://www.atarilegend.com/");
+
+//***************************************************************
+// Setup the Smarty Templating framework
+//***************************************************************
+
+$smarty = new Smarty;
+
+$smarty->template_dir = '../../../themes/templates/';
+$smarty->compile_dir = '../../../php/includes/smarty/templates_c/';
+$smarty->config_dir = '../../../php/includes/smarty/configs/';
+$smarty->cache_dir = '../../../php/includes/smarty/cache/';
+
+//***************************************************************
+// Some configs for the user management
+//***************************************************************
+
+define("CAN_REGISTER", "any");
+define("DEFAULT_ROLE", "member");
+
+define("SECURE", FALSE);    // FOR DEVELOPMENT ONLY!!!!
+
+//***************************************************************
+// Setup filepath variables
+//***************************************************************
 
 //articles
 $article_screenshot_path="../../data/images/article_screenshots/";
@@ -32,7 +70,7 @@ $game_boxscan_save_path="../../../data/images/game_boxscans/";
 $game_file_path="../../data/zips/games/";
 $game_file_temp_path="../../../data/zips/temp/";
 $game_file_path="../../../data/zips/games/";
-$game_gallery_path="../../data/images/game_gallery/"; 
+$game_gallery_path="../../data/images/game_gallery/";
 $game_screenshot_path="../../data/images/game_screenshots/";
 $game_screenshot_save_path="../../../data/images/game_screenshots/";
 $music_game_path="../../data/music/games/";
