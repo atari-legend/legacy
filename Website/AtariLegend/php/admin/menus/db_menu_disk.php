@@ -444,7 +444,7 @@ if(isset($action) and ($action=="add_title_to_menu") )
 
 
 //****************************************************************************************
-// Add game to menu disk AJAX DB job
+// Add doc to menu disk AJAX DB job
 //****************************************************************************************
 if(isset($action) and $action=="add_doc_to_menu")
 {
@@ -483,7 +483,7 @@ if(isset($action) and $action=="add_doc_to_menu")
 		//insert the doc in the doc table first - category = doc_disk_tool
 		$mysqli->query("INSERT INTO doc (doc_category_id) VALUES ('2')") or die("error inserting doc");
 		$doc_id = $mysqli->insert_id; // Get Last autoinc id	
-		  
+
 		//insert in doc_disk_tool
 		$mysqli->query("INSERT INTO doc_disk_tool (tools_id, doc_id) VALUES ('$software_id','$doc_id')") or die("error inserting doc_disk_tool");;
 		$doc_disk_tool_id = $mysqli->insert_id; // Get Last autoinc id	
@@ -533,7 +533,7 @@ if(isset($action) and $action=="add_doc_to_menu")
 							 LEFT JOIN tools ON (tools.tools_id = doc_disk_tool.tools_id)
 							 LEFT JOIN menu_types_main ON (menu_disk_title.menu_types_main_id = menu_types_main.menu_types_main_id)
 							 WHERE menu_disk_title.menu_disk_id = '$menu_disk_id' AND menu_disk_title.menu_types_main_id = '6' ORDER BY tools.tools_name ASC";
-							 
+	
 	$temp_query2 = $mysqli->query("CREATE TEMPORARY TABLE temp2 ENGINE=MEMORY $sql_doc_games") or die(mysqli_error());
 	$temp_query2 = $mysqli->query("INSERT INTO temp2 $sql_doc_tools") or die(mysqli_error());
 
@@ -678,6 +678,113 @@ if(isset($action) and $action=="delete_from_menu_disk")
   //Send to smarty for return value
   $smarty->display("file:".$cpanel_template_folder."ajax_menus_detail.html");
 
+}
+
+
+//****************************************************************************************
+// DELETE DOC FROM MENU DISK
+//****************************************************************************************
+if(isset($action) and $action=="delete_doc_from_menu_disk")
+{
+	create_log_entry('Menu disk', $menu_disk_id, 'Doc', $menu_disk_title_id, 'Delete', $_SESSION['user_id']);
+	
+	//get the doc cross id
+	$query_doc_game_id = "SELECT doc_games_id FROM menu_disk_title_doc_games WHERE menu_disk_title_id='$menu_disk_title_id'";	
+	$result = $mysqli->query($query_doc_game_id) or die ("Database error - selecting menu_disk_title_doc_games_id");
+	$query_data = $result->fetch_array(MYSQLI_BOTH);
+	$doc_game_id = $query_data['doc_games_id'];
+	
+	$query_doc_tool_id = "SELECT * FROM menu_disk_title_doc_tools WHERE menu_disk_title_id='$menu_disk_title_id'";
+	$result = $mysqli->query($query_doc_tool_id) or die ("Database error - selecting menu_disk_title_doc_tools_id");
+	$query_data = $result->fetch_array(MYSQLI_BOTH);
+	$doc_tool_id = $query_data['doc_tools_id'];
+		
+	//get the doc id
+	$query_doc_id = "SELECT * FROM doc_disk_game WHERE doc_disk_game_id='$doc_game_id'";
+	$result = $mysqli->query($query_doc_id) or die ("Database error - selecting doc_id");
+	$query_data = $result->fetch_array(MYSQLI_BOTH);
+	$doc_id = $query_data['doc_id'];
+	
+	if ( $doc_id == '' )
+	{
+		$query_doc_id = "SELECT * FROM doc_disk_tool WHERE doc_disk_tool_id='$doc_tool_id'";
+		$result = $mysqli->query($query_doc_id) or die ("Database error - selecting doc_id from tool table");
+		$query_data = $result->fetch_array(MYSQLI_BOTH);
+		$doc_id = $query_data['doc_id'];
+	}
+	
+	$mysqli->query("DELETE FROM menu_disk_title WHERE menu_disk_title_id='$menu_disk_title_id'") or die ("deleting menu_disk_title table");
+	$mysqli->query("DELETE FROM doc_disk_game WHERE doc_disk_game_id='$doc_game_id'") or die ("deleting doc_disk_game table");
+	$mysqli->query("DELETE FROM menu_disk_title_doc_games WHERE menu_disk_title_id='$menu_disk_title_id'") or die ("deleting menu_disk_title_doc_games");
+	$mysqli->query("DELETE FROM doc_disk_tool WHERE doc_disk_tool_id='$doc_tool_id'") or die ("deleting doc_disk_game table");
+	$mysqli->query("DELETE FROM menu_disk_title_doc_tools WHERE menu_disk_title_id='$menu_disk_title_id'") or die ("deleting menu_disk_title_doc_games");
+	$mysqli->query("DELETE FROM doc WHERE doc_id='$doc_id'") or die ("deleting doc table");
+	
+	$osd_message = "Game doc deleted from menu disk";
+ 
+
+  // ok, delete done. Now this is a ajax job so we need a return value.
+  // Get the doc disks
+	//list of games for the menu disk
+	$sql_doc_games = "SELECT game.game_name AS 'software_name',
+							 game.game_id AS 'software_id',
+							 game_year.game_year AS 'year',
+							 pub_dev.pub_dev_name AS 'developer_name',
+							 pub_dev.pub_dev_id AS 'developer_id',
+							 doc_disk_game.doc_id AS 'doc_id',
+							 menu_types_main.menu_types_text,
+							 menu_disk_title.menu_disk_title_id AS 'menu_disk_title_id'
+							 FROM menu_disk_title
+							 LEFT JOIN menu_disk_title_doc_games ON (menu_disk_title.menu_disk_title_id = menu_disk_title_doc_games.menu_disk_title_id)
+							 LEFT JOIN doc_disk_game ON (menu_disk_title_doc_games.doc_games_id = doc_disk_game.doc_disk_game_id)
+							 LEFT JOIN game ON (game.game_id = doc_disk_game.game_id)
+							 LEFT JOIN game_developer ON (game.game_id = game_developer.game_id)
+							 LEFT JOIN pub_dev ON (game_developer.dev_pub_id = pub_dev.pub_dev_id)
+							 LEFT JOIN game_year ON (game.game_id = game_year.game_id)
+							 LEFT JOIN menu_types_main ON (menu_disk_title.menu_types_main_id = menu_types_main.menu_types_main_id)
+							 WHERE menu_disk_title.menu_disk_id = '$menu_disk_id' AND menu_disk_title.menu_types_main_id = '6' ORDER BY game.game_name ASC";
+										 
+	$sql_doc_tools = "SELECT tools.tools_name AS 'software_name',
+							 tools.tools_id AS 'software_id',
+							 '' AS year,
+							 '' AS developer_name,
+							 '' AS developer_id,
+							 doc_disk_tool.doc_id AS 'doc_id',
+							 menu_types_main.menu_types_text,
+							 menu_disk_title.menu_disk_title_id AS 'menu_disk_title_id'
+							 FROM menu_disk_title
+							 LEFT JOIN menu_disk_title_doc_tools ON (menu_disk_title.menu_disk_title_id = menu_disk_title_doc_tools.menu_disk_title_id)
+							 LEFT JOIN doc_disk_tool ON (menu_disk_title_doc_tools.doc_tools_id = doc_disk_tool.doc_disk_tool_id)
+							 LEFT JOIN tools ON (tools.tools_id = doc_disk_tool.tools_id)
+							 LEFT JOIN menu_types_main ON (menu_disk_title.menu_types_main_id = menu_types_main.menu_types_main_id)
+							 WHERE menu_disk_title.menu_disk_id = '$menu_disk_id' AND menu_disk_title.menu_types_main_id = '6' ORDER BY tools.tools_name ASC";
+	
+	$temp_query2 = $mysqli->query("CREATE TEMPORARY TABLE temp2 ENGINE=MEMORY $sql_doc_games") or die(mysqli_error());
+	$temp_query2 = $mysqli->query("INSERT INTO temp2 $sql_doc_tools") or die(mysqli_error());
+
+	$temp_query2 = $mysqli->query("SELECT * FROM temp2 GROUP BY menu_disk_title_id ORDER BY software_name ASC") or die("does not compute4");
+
+	while  ($query = $temp_query2->fetch_array(MYSQLI_BOTH)) 
+	{
+		// This smarty is used for creating the list of games
+			$smarty->append('doc_game',
+					array('game_name' => $query['software_name'],
+						  'game_id' => $query['software_id'],
+						  'year' => $query['year'],
+						  'developer_name' => $query['developer_name'],
+						  'developer_id' => $query['developer_id'],
+						  'doc_id' => $query['doc_id'],
+						  'menu_types_text' => $query['menu_types_text'],
+						  'menu_disk_title_id' => $query['menu_disk_title_id']));
+	}
+
+  $smarty->assign('smarty_action', 'add_doc_to_menu_return');
+  $smarty->assign('menu_disk_id', $menu_disk_id);
+
+  $smarty->assign('osd_message', $osd_message);
+
+  //Send to smarty for return value
+  $smarty->display("file:".$cpanel_template_folder."ajax_menus_detail.html");
 }
 
 //****************************************************************************************

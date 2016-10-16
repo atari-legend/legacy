@@ -58,9 +58,9 @@
 							<a onclick="DeleteMenuDisk({$menus.menu_disk_id})" style="cursor: pointer;" class="standard_tile_link">Delete menu disk</a><br>
 							<div id="intro_credit_link"><a onclick="popAddIntroCred({$menus.menu_disk_id})" style="cursor: pointer;" class="standard_tile_link">Add intro credits</a><br></div>
 							<div id="gameto_menu_link"><a onclick="popAddGames({$menus.menu_disk_id})" style="cursor: pointer;" class="standard_tile_link">Add Game/Tool/Demo to menu</a><br></div>
-							<div id="screenshot_link"><a onclick="popAddScreenshots({$menus.menu_disk_id})" style="cursor: pointer;" class="standard_tile_link">Add Screenshots to menu</a><br></div>
-							<div id="file_link"><a onclick="popAddFile({$menus.menu_disk_id})" style="cursor: pointer;" class="standard_tile_link">Add File to menu</a><br></div>
 							<div id="docto_menu_link"><a onclick="popAddDocs({$menus.menu_disk_id})" style="cursor: pointer;" class="standard_tile_link">Add Doc to menu</a><br></div>
+							<div id="screenshot_link"><a onclick="popAddScreenshots({$menus.menu_disk_id})" style="cursor: pointer;" class="standard_tile_link">Add Screenshots to menu</a><br></div>
+							<div id="file_link"><a onclick="popAddFile({$menus.menu_disk_id})" style="cursor: pointer;" class="standard_tile_link">Add File to menu</a><br></div>						
 						</div>
 						<div class="main_company_child" id="child_add_company">
 							<b>Release Year:</b><br>
@@ -215,11 +215,11 @@
 								<tr class="table_game_list">
 									<td class="menu_mark_td">
 										<form name="MenuDiskContent" id="MenuDiskContent">
-										<input type="checkbox" id="menu_disk_title_id{$line.menu_disk_title_id}" name="menu_disk_title_id[]" value="{$line.menu_disk_title_id}" onchange="deleteGamefromMenu({$line.menu_disk_title_id},{$menu_disk_id})">
+										<input type="checkbox" id="menu_disk_title_id{$line.menu_disk_title_id}" name="menu_disk_title_id[]" value="{$line.menu_disk_title_id}" onchange="deleteDocfromMenu({$line.menu_disk_title_id},{$menu_disk_id})">
 									</td>
 									<td class="menu_gamename_td">
 										{if $line.game_name != ''}
-											{if $line.menu_types_text == 'Game'}<a href="../games/games_detail.php?game_id={$line.game_id}" class="standard_table_left">{$line.game_name}{if $line.set_chain != ''} - <a onclick="popAddSet({$line.menu_disk_title_id},{$menus.menu_disk_id},'{$line.game_name|escape:'quotes'}')" style="cursor: pointer;" class="standard_tile_link"><i>Part {$line.set_chain}</i></a>{/if}</a>{else}<a href="../administration/construction.php" class="standard_table_left">{$line.game_name}</a>{/if}
+											{if $line.menu_types_text == 'Game'}<a href="../games/games_detail.php?game_id={$line.game_id}" class="standard_table_left">{$line.game_name}</a>{else}<a href="../administration/construction.php" class="standard_table_left">{$line.game_name}</a>{/if}
 										{else}
 											<i>n/a</i>
 										{/if}
@@ -450,7 +450,7 @@
 {if isset($smarty_action) and $smarty_action == "add_doc_to_menu_return"}
 	{if isset($doc_game)}
 		<fieldset style="width:93%; margin:auto;">
-		<legend>Menu titles HELP</legend>
+		<legend>Menu docs HELP</legend>
 			<div class="help_text">
 				Overhere you have an overview of the docs on the menu disk. When pressing the 'add doc' button above, a list with search options will appear. Use this list to add docs to the menu.
 			</div>
@@ -469,11 +469,11 @@
 			<tr class="table_game_list">
 				<td class="menu_mark_td">
 					<form name="MenuDiskContent" id="MenuDiskContent">
-					<input type="checkbox" id="menu_disk_title_id{$line.menu_disk_title_id}" name="menu_disk_title_id[]" value="{$line.menu_disk_title_id}" onchange="deleteGamefromMenu({$line.menu_disk_title_id},{$menu_disk_id})">
+					<input type="checkbox" id="menu_disk_title_id{$line.menu_disk_title_id}" name="menu_disk_title_id[]" value="{$line.menu_disk_title_id}" onchange="deleteDocfromMenu({$line.menu_disk_title_id},{$menu_disk_id})">
 				</td>
 				<td class="menu_gamename_td">
 					{if $line.game_name != ''}
-						{if $line.menu_types_text == 'Game'}<a href="../games/games_detail.php?game_id={$line.game_id}" class="standard_table_left">{$line.game_name}{if $line.set_chain != ''} - <a onclick="popAddSet({$line.menu_disk_title_id},{$menu_disk_id})" style="cursor: pointer;" class="standard_tile_link"><i>Part {$line.set_chain}</i></a>{/if}</a>{else}<a href="../administration/construction.php" class="standard_table_left">{$line.game_name}</a>{/if}
+						{if $line.menu_types_text == 'Game'}<a href="../games/games_detail.php?game_id={$line.game_id}" class="standard_table_left">{$line.game_name}</a>{else}<a href="../administration/construction.php" class="standard_table_left">{$line.game_name}</a>{/if}
 					{else}
 						<i>n/a</i>
 					{/if}

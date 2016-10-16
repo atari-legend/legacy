@@ -334,7 +334,7 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH))
 			$subsection_link = ( "../individuals/individuals_edit.php" . '?ind_id=' . $log['sub_section_id'] );
 		}
 		
-		if ($log['sub_section'] == 'Game')
+		if ($log['sub_section'] == 'Game' or $log['sub_section'] == 'Game doc')
 		{			
 			$subsection_link = ( "../games/games_detail.php" . '?game_id=' . $log['sub_section_id'] );
 		}
