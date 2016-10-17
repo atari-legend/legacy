@@ -58,3 +58,8 @@ Menu set edit
   background-color: #EFEFEF; }
 
 .add_new_disk_space{display:inline-block;width:50%;}
+
+#menu_docname_th{width:55%; text-align: left;}
+#menu_doctype_th, #menu_docinfo_th{width:20%; text-align: left;}
+.menu_docname_td,.menu_doctype_td,.menu_docinfo_td{width:55%; text-align: left; padding-right: 5px;}
+.menu_doctype_td,.menu_docinfo_td{width:20%;}

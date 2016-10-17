@@ -1867,6 +1867,98 @@ if(isset($action) and ( $action=="change_nickname" ))
   $smarty->display("file:".$cpanel_template_folder."ajax_menus_detail.html");
 }
 
+
+//****************************************************************************************
+// Update doctype
+//****************************************************************************************
+if(isset($action) and ( $action=="change_doctype" ))
+{ 
+  if (isset($doc_type_id))
+  {
+    //Update nickname
+    $sql = $mysqli->query("UPDATE doc SET doc_type_id='$doc_type_id'
+            WHERE doc_id='$doc_id'") or die ("error updating doc type");
+
+    create_log_entry('Menu disk', $menu_disk_id, 'Doc type', $doc_type_id, 'Insert', $_SESSION['user_id']);
+
+  }
+
+  // Get the doc disks
+	//list of games for the menu disk
+	$sql_doc_games = "SELECT game.game_name AS 'software_name',
+							 game.game_id AS 'software_id',
+							 game_year.game_year AS 'year',
+							 pub_dev.pub_dev_name AS 'developer_name',
+							 pub_dev.pub_dev_id AS 'developer_id',
+							 doc_disk_game.doc_id AS 'doc_id',
+							 doc.doc_type_id,
+							 menu_types_main.menu_types_text,
+							 menu_disk_title.menu_disk_title_id AS 'menu_disk_title_id'
+							 FROM menu_disk_title
+							 LEFT JOIN menu_disk_title_doc_games ON (menu_disk_title.menu_disk_title_id = menu_disk_title_doc_games.menu_disk_title_id)
+							 LEFT JOIN doc_disk_game ON (menu_disk_title_doc_games.doc_games_id = doc_disk_game.doc_disk_game_id)
+							 LEFT JOIN doc ON (doc_disk_game.doc_id = doc.doc_id)
+							 LEFT JOIN game ON (game.game_id = doc_disk_game.game_id)
+							 LEFT JOIN game_developer ON (game.game_id = game_developer.game_id)
+							 LEFT JOIN pub_dev ON (game_developer.dev_pub_id = pub_dev.pub_dev_id)
+							 LEFT JOIN game_year ON (game.game_id = game_year.game_id)
+							 LEFT JOIN menu_types_main ON (menu_disk_title.menu_types_main_id = menu_types_main.menu_types_main_id)
+							 WHERE menu_disk_title.menu_disk_id = '$menu_disk_id' AND menu_disk_title.menu_types_main_id = '6' ORDER BY game.game_name ASC";
+							 
+	$sql_doc_tools = "SELECT tools.tools_name AS 'software_name',
+							 tools.tools_id AS 'software_id',
+							 '' AS year,
+							 '' AS developer_name,
+							 '' AS developer_id,
+							 doc_disk_tool.doc_id AS 'doc_id',
+							 doc.doc_type_id,
+							 menu_types_main.menu_types_text,
+							 menu_disk_title.menu_disk_title_id AS 'menu_disk_title_id'
+							 FROM menu_disk_title
+							 LEFT JOIN menu_disk_title_doc_tools ON (menu_disk_title.menu_disk_title_id = menu_disk_title_doc_tools.menu_disk_title_id)
+							 LEFT JOIN doc_disk_tool ON (menu_disk_title_doc_tools.doc_tools_id = doc_disk_tool.doc_disk_tool_id)
+							 LEFT JOIN doc ON (doc_disk_tool.doc_id = doc.doc_id)
+							 LEFT JOIN tools ON (tools.tools_id = doc_disk_tool.tools_id)
+							 LEFT JOIN menu_types_main ON (menu_disk_title.menu_types_main_id = menu_types_main.menu_types_main_id)
+							 WHERE menu_disk_title.menu_disk_id = '$menu_disk_id' AND menu_disk_title.menu_types_main_id = '6' ORDER BY tools.tools_name ASC";
+		 
+	$temp_query2 = $mysqli->query("CREATE TEMPORARY TABLE temp2 ENGINE=MEMORY $sql_doc_games") or die(mysqli_error());
+	$temp_query2 = $mysqli->query("INSERT INTO temp2 $sql_doc_tools") or die(mysqli_error());
+
+	$temp_query2 = $mysqli->query("SELECT * FROM temp2 GROUP BY menu_disk_title_id ORDER BY software_name ASC") or die("does not compute4");
+
+	while  ($query = $temp_query2->fetch_array(MYSQLI_BOTH)) 
+	{
+		// This smarty is used for creating the list of games
+		$smarty->append('doc_game',
+		array('game_name' => $query['software_name'],
+			  'game_id' => $query['software_id'],
+			  'year' => $query['year'],
+			  'developer_name' => $query['developer_name'],
+			  'developer_id' => $query['developer_id'],
+			  'doc_id' => $query['doc_id'],
+			  'doc_type_id' => $query['doc_type_id'],
+			  'menu_types_text' => $query['menu_types_text'],
+			  'menu_disk_title_id' => $query['menu_disk_title_id']));
+	}
+
+	//get the doc types
+	$sql_doc_type = "SELECT * from doc_type";
+	$query_doc_type = $mysqli->query($sql_doc_type) or die ("error in the doc_type query");	
+
+	while  ($query_type = $query_doc_type->fetch_array(MYSQLI_BOTH)) 
+	{
+		$smarty->append('doc_type',
+		array('doc_type_id' => $query_type['doc_type_id'],
+			  'doc_type_name' => $query_type['doc_type_name']));
+	}
+  
+  $smarty->assign('menu_disk_id', $menu_disk_id);
+  $smarty->assign('smarty_action', 'add_doc_to_menu_return');
+  //Send to smarty for return value
+  $smarty->display("file:".$cpanel_template_folder."ajax_menus_detail.html");
+}
+
 //****************************************************************************************
 // Create set chain for game
 //****************************************************************************************

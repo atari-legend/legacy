@@ -205,11 +205,9 @@
 							<table class="table_game_list" style="width:95%;border: solid 1px black;margin:auto;">
 							<tr>
 								<th id="menu_mark_th"></th>
-								<th id="menu_gamename_th">Software Name</th>
-								<th id="menu_gamedev_th">Developer</th>
-								<th id="menu_gameyear_th">Year</th>
-								<th id="menu_gameinfo_th">Info</th>
-								<th id="menu_gameset_th">Set</th>
+								<th id="menu_docname_th">Doc Name</th>
+								<th id="menu_doctype_th">Doc Type</th>
+								<th id="menu_docinfo_th">Info</th>
 							</tr>
 							{foreach from=$doc_game item=line}
 								<tr class="table_game_list">
@@ -217,49 +215,34 @@
 										<form name="MenuDiskContent" id="MenuDiskContent">
 										<input type="checkbox" id="menu_disk_title_id{$line.menu_disk_title_id}" name="menu_disk_title_id[]" value="{$line.menu_disk_title_id}" onchange="deleteDocfromMenu({$line.menu_disk_title_id},{$menu_disk_id})">
 									</td>
-									<td class="menu_gamename_td">
+									<td class="menu_docname_td">
 										{if $line.game_name != ''}
-											{if $line.menu_types_text == 'Game'}<a href="../games/games_detail.php?game_id={$line.game_id}" class="standard_table_left">{$line.game_name}</a>{else}<a href="../administration/construction.php" class="standard_table_left">{$line.game_name}</a>{/if}
+											<a href="../administration/construction.php" class="standard_table_left">{$line.game_name}</a>
 										{else}
 											<i>n/a</i>
 										{/if}
 									</td>
-									<td class="menu_gamedev_td">
-										{if $line.developer_name != ''}
-											{if $line.menu_types_text == 'Game'}					
-												<a href="../company/company_edit.php?comp_id={$line.developer_id}" class="standard_table_left">{$line.developer_name}</a>
-											{else}
-												<a href="../administration/construction.php" class="standard_table_left">{$line.developer_name}</a>
-											{/if}
-										{else}
-											<i>n/a</i>	
-										{/if}
+									<td class="menu_doctype_td">
+										<form action="#" method="post" name="doc_type_edit{$line.doc_id}" id="doc_type_edit{$line.doc_id}">
+											<select name="doc_type_id" id="quick_search_small_select" style="width:125px;" onchange="ChangeDoctype(this.value,{$line.doc_id},{$menus.menu_disk_id})">
+											<option value="" selected>-</option>
+												{foreach from=$doc_type item=doc_types}	
+													{if $doc_types.doc_type_id == $line.doc_type_id}
+														{html_options values=$doc_types.doc_type_id output=$doc_types.doc_type_name selected=$line.doc_type_id}
+													{else}
+														{html_options values=$doc_types.doc_type_id output=$doc_types.doc_type_name}
+													{/if}
+												{/foreach}
+											</select>
+										</form>				
 									</td>				
-									<td class="menu_gameyear_td">
-										{if $line.year != ''}
-											{if $line.menu_types_text == 'Game'}
-												<a href="../games/games_list.php?year={$line.year}&amp;action=search" class="standard_table_left">
-													{$line.year}
-												</a>
-											{else}
-												<a href="../administration/construction.php" class="standard_table_left">
-													{$line.year}
-												</a>
-											{/if}
-										{else}
-											<i>n/a</i>
-										{/if}
-									</td>
-									<td class="menu_gameinfo_td">
+									<td class="menu_docinfo_td">
 										{$line.menu_types_text}
-									</td>
-									<td class="menu_gameset_td">
-										<div id="{$line.menu_disk_title_id}"><a onclick="popAddSet({$line.menu_disk_title_id},{$menus.menu_disk_id},'{$line.game_name|escape:'quotes'}')" style="cursor: pointer;" class="standard_tile_link">Add</a></div>
 									</td>
 								</tr>
 							{/foreach}
 							<tr class="table_game_list">
-								<td class="game_list_footer" colspan="6">
+								<td class="game_list_footer" colspan="3">
 									<img src="../../../themes/templates/1/includes/img/arrow_ltr.gif" alt="" width="38" height="22">		
 									<input type="hidden" name="action" value="delete_from_menu_disk">
 									<input type="button" value="Delete" class="quick_search_games_button" style="display:inline;">
@@ -269,6 +252,7 @@
 							</table>
 						{/if}								
 					</div>
+					<br>
 					<div id="menu_detail_expand_docs"></div>
 					<div id="menu_screenshot_list">
 						{if isset( $screenshots)}
@@ -459,11 +443,9 @@
 		<table class="table_game_list" style="width:95%;border: solid 1px black;margin:auto;">
 		<tr>
 			<th id="menu_mark_th"></th>
-			<th id="menu_gamename_th">Software Name</th>
-			<th id="menu_gamedev_th">Developer</th>
-			<th id="menu_gameyear_th">Year</th>
-			<th id="menu_gameinfo_th">Info</th>
-			<th id="menu_gameset_th">Set</th>
+			<th id="menu_docname_th">Doc Name</th>
+			<th id="menu_doctype_th">Doc Type</th>
+			<th id="menu_docinfo_th">Info</th>
 		</tr>
 		{foreach from=$doc_game item=line}
 			<tr class="table_game_list">
@@ -471,49 +453,35 @@
 					<form name="MenuDiskContent" id="MenuDiskContent">
 					<input type="checkbox" id="menu_disk_title_id{$line.menu_disk_title_id}" name="menu_disk_title_id[]" value="{$line.menu_disk_title_id}" onchange="deleteDocfromMenu({$line.menu_disk_title_id},{$menu_disk_id})">
 				</td>
-				<td class="menu_gamename_td">
+				<td class="menu_docname_td">
 					{if $line.game_name != ''}
-						{if $line.menu_types_text == 'Game'}<a href="../games/games_detail.php?game_id={$line.game_id}" class="standard_table_left">{$line.game_name}</a>{else}<a href="../administration/construction.php" class="standard_table_left">{$line.game_name}</a>{/if}
+						<a href="../administration/construction.php" class="standard_table_left">{$line.game_name}</a>
 					{else}
 						<i>n/a</i>
 					{/if}
 				</td>
-				<td class="menu_gamedev_td">
-					{if $line.developer_name != ''}	
-						{if $line.menu_types_text == 'Game'}					
-							<a href="../company/company_edit.php?comp_id={$line.developer_id}" class="standard_table_left">{$line.developer_name}</a>
-						{else}
-							<a href="../administration/construction.php" class="standard_table_left">{$line.developer_name}</a>
-						{/if}
-					{else}
-						<i>n/a</i>
-					{/if}</td>				
-				<td class="menu_gameyear_td">
-					{if $line.year != ''}
-						{if $line.menu_types_text == 'Game'}
-							<a href="../games/games_list.php?year={$line.year}&amp;action=search" class="standard_table_left">
-								{$line.year}
-							</a>
-						{else}
-							<a href="../administration/construction.php" class="standard_table_left">
-								{$line.year}
-							</a>
-						{/if}
-					{else}
-						<i>n/a</i>
-					{/if}
-				</td>
-				<td class="menu_gameinfo_td">
+				<td class="menu_doctype_td">
+					<form action="#" method="post" name="doc_type_edit{$line.doc_id}" id="doc_type_edit{$line.doc_id}">
+						<select name="doc_type_id" id="quick_search_small_select" style="width:125px;" onchange="ChangeDoctype(this.value,{$line.doc_id},{$menu_disk_id})">
+						<option value="" selected>-</option>
+							{foreach from=$doc_type item=doc_types}	
+								{if $doc_types.doc_type_id == $line.doc_type_id}
+									{html_options values=$doc_types.doc_type_id output=$doc_types.doc_type_name selected=$line.doc_type_id}
+								{else}
+									{html_options values=$doc_types.doc_type_id output=$doc_types.doc_type_name}
+								{/if}
+							{/foreach}
+						</select>
+					</form>				
+				</td>				
+				<td class="menu_docinfo_td">
 					{$line.menu_types_text}
-				</td>
-				<td class="menu_gameset_td">
-					<div id="set_link"><a onclick="popAddSet({$line.menu_disk_title_id},{$menu_disk_id},'{$line.game_name|escape:'quotes'}')" style="cursor: pointer;" class="standard_tile_link">Add</a></div>
 				</td>
 			</tr>
 		{/foreach}
-		<tr>
-			<td class="game_list_footer" colspan="6">
-				<img src="../../../themes/templates/1/includes/img/arrow_ltr.gif" alt="" width="38" height="22">	
+		<tr class="table_game_list">
+			<td class="game_list_footer" colspan="3">
+				<img src="../../../themes/templates/1/includes/img/arrow_ltr.gif" alt="" width="38" height="22">		
 				<input type="hidden" name="action" value="delete_from_menu_disk">
 				<input type="button" value="Delete" class="quick_search_games_button" style="display:inline;">
 				</form>
