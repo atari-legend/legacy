@@ -1145,6 +1145,15 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
             $query_data = $result->fetch_array(MYSQLI_BOTH);
             $subsection_name = $query_data['tools_name'];
         }
+		
+		If ( $subsection == 'Doc type' )
+		{
+			// get the name of the doc type
+			$query_doc_type = "SELECT doc_type_name FROM doc_type WHERE doc_type_id = '$subsection_id'";
+			$result = $mysqli->query($query_doc_type) or die("getting doc type name failed");
+			$query_data = $result->fetch_array(MYSQLI_BOTH);
+			$subsection_name = $query_data['doc_type_name'];
+		}
 
         If ( $subsection == 'Software' or $subsection == 'Chain' or $subsection == 'Doc')
         {
@@ -1168,7 +1177,7 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
                 $result = $mysqli->query($query_game) or die("getting game name failed");
                 $query_data = $result->fetch_array(MYSQLI_BOTH);
                 $subsection_name = $query_data['game_name'];
-				echo $subsection_name;
+				
                 if ($subsection <> 'Chain' )
                 {
                     $subsection = 'Game';
@@ -1196,7 +1205,6 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
 
             if ($type == '3')
             {
-	
 				//get the id of the tool
 				$query_tool = "SELECT tools_id FROM menu_disk_title_tools WHERE menu_disk_title_id = '$subsection_id'";
 				$result = $mysqli->query($query_tool) or die("getting toold id failed");
@@ -1216,7 +1224,47 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
 			
 			if ($type == '6')
 			{
-				 
+				//get the doc cross id
+				$query_game_doc = "SELECT doc_games_id FROM menu_disk_title_doc_games WHERE menu_disk_title_id = '$subsection_id'";
+				$result = $mysqli->query($query_game_doc) or die("getting doc_game_id failed");
+				$query_data = $result->fetch_array(MYSQLI_BOTH);
+				$subsection_id = $query_data['doc_games_id'];
+
+				//  get the game id
+				$query_game_id = "SELECT game_id FROM doc_disk_game WHERE doc_disk_game_id = '$subsection_id'";
+				$result = $mysqli->query($query_game_id) or die("getting game id failed");
+				$query_data = $result->fetch_array(MYSQLI_BOTH);
+				$subsection_id = $query_data['game_id'];
+				
+				//  get the game name
+                $query_game = "SELECT game_name FROM game WHERE game_id = '$subsection_id'";
+                $result = $mysqli->query($query_game) or die("getting game name failed");
+                $query_data = $result->fetch_array(MYSQLI_BOTH);
+                $subsection_name = $query_data['game_name'];
+				$subsection = 'Game doc';
+				
+				if ( $subsection_name == '' )
+				{
+					//get the doc cross id
+					$query_tool_doc = "SELECT doc_tools_id FROM menu_disk_title_doc_tools WHERE menu_disk_title_id = '$subsection_id'";
+					$result = $mysqli->query($query_tool_doc) or die("getting doc_tools_id failed");
+					$query_data = $result->fetch_array(MYSQLI_BOTH);
+					$subsection_id = $query_data['doc_tools_id'];
+					
+					//get the id of the tool
+					$query_tool = "SELECT tools_id FROM menu_disk_title_tools WHERE menu_disk_title_id = '$subsection_id'";
+					$result = $mysqli->query($query_tool) or die("getting toold id failed");
+					$query_data = $result->fetch_array(MYSQLI_BOTH);
+					$subsection_id = $query_data['tools_id'];
+
+					//  get the tool name
+					$query_tool = "SELECT tools_name FROM tools WHERE tools_id = '$subsection_id'";
+					$result = $mysqli->query($query_tool) or die("getting tool name failed");
+					$query_data = $result->fetch_array(MYSQLI_BOTH);
+					$subsection_name = $query_data['tools_name'];
+					$subsection = 'Tool doc';
+				}
+				
 			}
         }
     }
@@ -1298,8 +1346,10 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
             $subsection_name = $section_name;
         }
     }
-
-
+	
+	$section_name = $mysqli->real_escape_string($section_name);
+	$subsection_name = $mysqli->real_escape_string($subsection_name);
+	
     $sql_log = $mysqli->query("INSERT INTO change_log (section, section_id, section_name, sub_section, sub_section_id, sub_section_name, user_id, action, timestamp) VALUES ('$section', '$section_id', '$section_name', '$subsection', '$subsection_id', '$subsection_name', '$user_id', '$action', '$log_time')")
                                 or die ("Couldn't insert change log into database");
 }

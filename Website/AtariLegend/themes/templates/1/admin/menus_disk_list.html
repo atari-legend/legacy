@@ -1202,6 +1202,38 @@ function ChangeNick(individual_nicks_id,menu_disk_credits_id,menu_disk_id) {
     } 
 }
 
+function ChangeDoctype(doc_type_id,doc_id,menu_disk_id) {
+	
+ if (doc_type_id == "") {
+        document.getElementById("menu_doc_list").innerHTML = "";
+        return;
+    } else { 
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("menu_doc_list").innerHTML = xmlhttp.responseText;
+                
+                 $.notify_osd.create({
+				'text'        : 'Doctype changed',             // notification message
+				'icon'        : '{$style_dir}images/osd_icons/star.png', // icon path, 48x48
+				'sticky'      : false,             // if true, timeout is ignored
+				'timeout'     : 4,                 // disappears after 4 seconds
+				'dismissable' : true               // can be dismissed manually
+				});
+                
+            }
+        } 
+        xmlhttp.open("GET","../menus/db_menu_disk.php?action=change_doctype&doc_type_id="+doc_type_id+"&doc_id="+doc_id+"&menu_disk_id="+menu_disk_id,true);
+        xmlhttp.send();
+    } 
+}
+
 function ChangeYear(year_id,menu_disk_id) {
 	
 	var str2 = "diskedit_ajax_";

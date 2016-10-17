@@ -343,6 +343,11 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH))
 		{			
 			$subsection_link = "../administration/construction.php"; //TO DO
 		}
+		
+		if ($log['sub_section'] == 'Doc type' )
+		{
+			$subsection_link = ( "../docs/doc_type_edit.php" . '?doc_type_id=' . $log['sub_section_id'] );
+		}
 	}
 	
 	//	the ARTICLES SECTION
