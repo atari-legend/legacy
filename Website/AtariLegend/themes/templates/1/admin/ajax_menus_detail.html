@@ -24,50 +24,55 @@
 			</tr>
 			<tr>
 				<td colspan="4" style="border-top: solid 1px #b2b2b2;width:100%;">	
+					<div class="help-tip">
+						<p style="width:250px;right:243px;">
+						<b>Set State</b> : The current state of the menu disk. Is this menu disk fully functional, missing ...<br><br>
+						<b>Set parent menu</b> : It sometimes happens that a menu can be a sub menu of a completely different menu/menu set. Overhere you select to which menu the active menu belongs.<br><br>
+						<b>Delete menu disk</b> : Completely delete the menu disk from the DB. You can only do this when all atachements like screenshots, files...have been removed.<br><br>
+						<b>Add Intro Credits</b> : Apart from the crew of individual who released the menu set/disk, lots of menu disk have seperate crackers, intro coders, graphics artists ... this is where you hook these individuals with the menu disk.<br><br>
+						<b>Add game/tool/demo</b> : Add the actual menu disk titles (the software) to the menu disk<br><br>
+						<b>Add doc</b> : Are we dealing with a doc disk? Or does this menu disk contain docs? Add them using this link<br><br>
+						<b>Add screenshot</b> : Add screenshots to the menu disk entry<br><br>
+						<b>Add file</b> : Add the actual menudisk file (for download) to this menu disk entry<br><br>
+						</p>
+					</div>
 					<br>
-					<fieldset style="width:93%; margin:auto;">
-						<legend>Menu disk HELP</legend>
-							<div class="help_text">
-								Most of the options in here are self explanatory, however here is some info for the less common options :<br><br>
-								<b>Set State</b> : The current state of the menu disk<br><br>
-								<b>Set parent menu</b> : It sometimes happens that a menu can be a sub menu of a completely different menu/menu set. Overhere you select to which menu the active menu belongs.<br><br>
+					<div style="margin-left:20px;">					
+						<div class="main_company_container">
+							<div class="main_company_child" id="child_edit_company">
+								<b>Set state:</b><br>
+								<select name="state_id" id="quick_search_pub_select" onchange="ChangeState(this.value,{$menus.menu_disk_id})">
+									<option value="">Set State</option>
+									{if isset($state_id)}
+										{html_options values=$state_id output=$menu_state selected=$menu_state_id}
+									{/if}
+								</select>
+								<br>
+								<br>
+								<b>Set parent menu:</b><br>
+								<select name="parent_id" id="quick_search_pub_select" onchange="ChangeParent(this.value,{$menus.menu_disk_id})">
+									<option value="">Set parent</option>
+									{foreach from=$parent item=line}	
+										{html_options values=$line.parent_id output=$line.parent_name selected=$menu_parent_id}
+									{/foreach}
+								</select>
+								<br>
+								<br>
+								<b>Menu disk options :</b><br>
+								<a onclick="DeleteMenuDisk({$menus.menu_disk_id})" style="cursor: pointer;" class="standard_tile_link">Delete menu disk</a><br>
+								<div id="intro_credit_link"><a onclick="popAddIntroCred({$menus.menu_disk_id})" style="cursor: pointer;" class="standard_tile_link">Add intro credits</a><br></div>
+								<div id="gameto_menu_link"><a onclick="popAddGames({$menus.menu_disk_id})" style="cursor: pointer;" class="standard_tile_link">Add Game/Tool/Demo to menu</a><br></div>
+								<div id="docto_menu_link"><a onclick="popAddDocs({$menus.menu_disk_id})" style="cursor: pointer;" class="standard_tile_link">Add Doc to menu</a><br></div>
+								<div id="screenshot_link"><a onclick="popAddScreenshots({$menus.menu_disk_id})" style="cursor: pointer;" class="standard_tile_link">Add Screenshots to menu</a><br></div>
+								<div id="file_link"><a onclick="popAddFile({$menus.menu_disk_id})" style="cursor: pointer;" class="standard_tile_link">Add File to menu</a><br></div>						
 							</div>
-					</fieldset>		
-					<br>					
-					<div class="main_company_container">
-						<div class="main_company_child" id="child_edit_company">
-							<b>Set state:</b><br>
-							<select name="state_id" id="quick_search_pub_select" onchange="ChangeState(this.value,{$menus.menu_disk_id})">
-								<option value="">Set State</option>
-								{if isset($state_id)}
-									{html_options values=$state_id output=$menu_state selected=$menu_state_id}
-								{/if}
-							</select>
-							<br>
-							<br>
-							<b>Set parent menu:</b><br>
-							<select name="parent_id" id="quick_search_pub_select" onchange="ChangeParent(this.value,{$menus.menu_disk_id})">
-								<option value="">Set parent</option>
-								{foreach from=$parent item=line}	
-									{html_options values=$line.parent_id output=$line.parent_name selected=$menu_parent_id}
-								{/foreach}
-							</select>
-							<br>
-							<br>
-							<b>Menu disk options :</b><br>
-							<a onclick="DeleteMenuDisk({$menus.menu_disk_id})" style="cursor: pointer;" class="standard_tile_link">Delete menu disk</a><br>
-							<div id="intro_credit_link"><a onclick="popAddIntroCred({$menus.menu_disk_id})" style="cursor: pointer;" class="standard_tile_link">Add intro credits</a><br></div>
-							<div id="gameto_menu_link"><a onclick="popAddGames({$menus.menu_disk_id})" style="cursor: pointer;" class="standard_tile_link">Add Game/Tool/Demo to menu</a><br></div>
-							<div id="docto_menu_link"><a onclick="popAddDocs({$menus.menu_disk_id})" style="cursor: pointer;" class="standard_tile_link">Add Doc to menu</a><br></div>
-							<div id="screenshot_link"><a onclick="popAddScreenshots({$menus.menu_disk_id})" style="cursor: pointer;" class="standard_tile_link">Add Screenshots to menu</a><br></div>
-							<div id="file_link"><a onclick="popAddFile({$menus.menu_disk_id})" style="cursor: pointer;" class="standard_tile_link">Add File to menu</a><br></div>						
-						</div>
-						<div class="main_company_child" id="child_add_company">
-							<b>Release Year:</b><br>
-							{html_select_date start_year="1984" end_year="+1" display_days=false display_months=false prefix="" field_name="" style="width:100px;height:25px;" name="year_id" time="{$menus.menu_year}-01-01" onchange="ChangeYear(this.value,$menu_disk_id)"}
-							<br>
-							<br>
-							<div id="menu_detail_expand"></div>
+							<div class="main_company_child" id="child_add_company">
+								<b>Release Year:</b><br>
+								{html_select_date start_year="1984" end_year="+1" display_days=false display_months=false prefix="" field_name="" style="width:100px;height:25px;" name="year_id" time="{$menus.menu_year}-01-01" onchange="ChangeYear(this.value,$menu_disk_id)"}
+								<br>
+								<br>
+								<div id="menu_detail_expand"></div>
+							</div>
 						</div>
 					</div>
 					<br>
@@ -242,7 +247,7 @@
 								</tr>
 							{/foreach}
 							<tr class="table_game_list">
-								<td class="game_list_footer" colspan="3">
+								<td class="game_list_footer" colspan="4">
 									<img src="../../../themes/templates/1/includes/img/arrow_ltr.gif" alt="" width="38" height="22">		
 									<input type="hidden" name="action" value="delete_from_menu_disk">
 									<input type="button" value="Delete" class="quick_search_games_button" style="display:inline;">
@@ -480,7 +485,7 @@
 			</tr>
 		{/foreach}
 		<tr class="table_game_list">
-			<td class="game_list_footer" colspan="3">
+			<td class="game_list_footer" colspan="4">
 				<img src="../../../themes/templates/1/includes/img/arrow_ltr.gif" alt="" width="38" height="22">		
 				<input type="hidden" name="action" value="delete_from_menu_disk">
 				<input type="button" value="Delete" class="quick_search_games_button" style="display:inline;">

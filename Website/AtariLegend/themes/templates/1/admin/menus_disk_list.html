@@ -1337,9 +1337,15 @@ function ChangeParent(parent_id,menu_disk_id) {
 		</form>
 		<br>
 		<div class="standard_tile_line"></div>
+		<div class="help-tip">
+			<p>This is the overal type of the menu disk. Eg. The "Adrenaline UK" set is considered to be a game set. The "Sewer Doc Disk" set is an E-zine/doc set. However, this does not
+			   mean a game set can not contain anything else. Each menu disk title in the database has its own menu disk title TYPE attribute. Please see the general HELP of this section for more details.</p>
+		</div>
 		<br>
 		<form action="../menus/db_menu_disk.php" method="post" name="post" id="menu_edit">
-			Menu type:<br>
+			<div style="margin-left:20px;">
+				Menu type:<br>
+			</div>
 			<select name="menu_type_browse" size="1" id="quick_search_pub_select">
 				<option value="" selected>-</option>
 				{foreach from=$menu_types item=line}	
@@ -1359,9 +1365,14 @@ function ChangeParent(parent_id,menu_disk_id) {
 		{/if}
 		<br>
 		<div class="standard_tile_line"></div>
+		<div class="help-tip">
+			<p>Most Menu Sets are released by a certain crew, a group of people. This is where you set the crew of this menu set</p>
+		</div>
 		<br>
 		{* Add crew section *}
-		<b>Crew Editor</b><br>
+		<div style="margin-left:20px;">
+			<b>Crew Editor</b><br>
+		</div>
 		<br>
 		Set Crew for menu set:<br>
 		<form action="../menus/db_menu_disk.php" method="post" name="post_menu_crew_set" id="menu_crew_set">
@@ -1390,9 +1401,14 @@ function ChangeParent(parent_id,menu_disk_id) {
 		{/if}
 		<br>
 		<div class="standard_tile_line"></div>
+		<div class="help-tip">
+			<p>Some Menu Sets were released by one individual. These sets are not common, but do exist.</p>
+		</div>
 		<br>
 		{* Add Individual section *}
-		<b>Individual Editor</b><br>
+		<div style="margin-left:20px;">
+			<b>Individual Editor</b><br>
+		</div>
 		<br>
 		Set individual for menu set:<br>
 		<form action="../menus/db_menu_disk.php" method="post" name="post_menu_ind_set" id="menu_ind_set">

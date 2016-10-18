@@ -1137,7 +1137,7 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
             $subsection_name = $query_data['demo_name'];
         }
 
-        If ( $subsection == 'Tool')
+        If ( $subsection == 'Tool' or $subsection == 'Tool doc' )
         {
             //  get the tool name
             $query_tool = "SELECT tools_name FROM tools WHERE tools_id = '$subsection_id'";

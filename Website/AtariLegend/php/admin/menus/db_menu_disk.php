@@ -552,6 +552,17 @@ if(isset($action) and $action=="add_doc_to_menu")
 						  'menu_types_text' => $query['menu_types_text'],
 						  'menu_disk_title_id' => $query['menu_disk_title_id']));
 	}
+	
+	//get the doc types
+	$sql_doc_type = "SELECT * from doc_type";
+	$query_doc_type = $mysqli->query($sql_doc_type) or die ("error in the doc_type query");	
+
+	while  ($query_type = $query_doc_type->fetch_array(MYSQLI_BOTH)) 
+	{
+		$smarty->append('doc_type',
+		array('doc_type_id' => $query_type['doc_type_id'],
+			  'doc_type_name' => $query_type['doc_type_name']));
+	}
 
     $osd_message = "$software_name added to menu disk!";
 
@@ -776,6 +787,17 @@ if(isset($action) and $action=="delete_doc_from_menu_disk")
 						  'doc_id' => $query['doc_id'],
 						  'menu_types_text' => $query['menu_types_text'],
 						  'menu_disk_title_id' => $query['menu_disk_title_id']));
+	}
+	
+	//get the doc types
+	$sql_doc_type = "SELECT * from doc_type";
+	$query_doc_type = $mysqli->query($sql_doc_type) or die ("error in the doc_type query");	
+
+	while  ($query_type = $query_doc_type->fetch_array(MYSQLI_BOTH)) 
+	{
+		$smarty->append('doc_type',
+		array('doc_type_id' => $query_type['doc_type_id'],
+			  'doc_type_name' => $query_type['doc_type_name']));
 	}
 
   $smarty->assign('smarty_action', 'add_doc_to_menu_return');
