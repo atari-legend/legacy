@@ -339,7 +339,7 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH))
 			$subsection_link = ( "../games/games_detail.php" . '?game_id=' . $log['sub_section_id'] );
 		}
 		
-		if ($log['sub_section'] == 'Demo' or $log['sub_section'] == 'Tool')
+		if ($log['sub_section'] == 'Demo' or $log['sub_section'] == 'Tool' or $log['sub_section'] == 'Tool doc')
 		{			
 			$subsection_link = "../administration/construction.php"; //TO DO
 		}
