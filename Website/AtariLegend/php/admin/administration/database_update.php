@@ -49,7 +49,7 @@ foreach ($database_update as $key)
   if ($key['database_update_id']==1)
   {
     // Run the test condition query
-      $test_query = $mysqli->query("$key[test_condition]");
+      $test_query = $mysqli->query("$key[test_condition]") or die("Database update $key[database_update_id] Test condition failed");
 
       // check if the condition query returns true or false
       if ($test_query->fetch_row()==true)
@@ -60,7 +60,7 @@ foreach ($database_update as $key)
         // if the execute condition is met, execute update
         if ($key['execute_condition']==$test_result)
           {
-            $mysqli->query("$key[database_update_sql]");
+            $mysqli->query("$key[database_update_sql]") or die("Database update $key[database_update_id] failed!");
 
             // Add info to the database_change table
             // Set the timestamp
@@ -95,7 +95,7 @@ foreach ($database_update as $key)
   // We begin with any script that is set to autoexecute
   if ($key['database_autoexecute']=="yes")
     { // Run the test condition query
-      $test_query = $mysqli->query("$key[test_condition]");
+      $test_query = $mysqli->query("$key[test_condition]") or die("Database update $key[database_update_id] Test condition failed");
 
       // check if the condition query returns true or false
       if ($test_query->fetch_row()==true)
@@ -106,7 +106,7 @@ foreach ($database_update as $key)
         // if the execute condition is met, execute update
         if ($key['execute_condition']==$test_result)
           {
-            $mysqli->query("$key[database_update_sql]");
+            $mysqli->query("$key[database_update_sql]") or die("Database update $key[database_update_id] failed!");
 
             // Add info to the database_change table
             // Set the timestamp
@@ -133,7 +133,7 @@ foreach ($database_update as $key)
     // the query. I would suggest caution when using this.
 
       // Run the test condition query
-      $test_query = $mysqli->query("$key[test_condition]");
+      $test_query = $mysqli->query("$key[test_condition]") or die("Database update $key[database_update_id] Test condition failed");
 
       // check if the condition query returns true or false
       if ($test_query->fetch_row()==true)
@@ -188,7 +188,7 @@ foreach ($database_update as $key)
         $implementation_state = "pending";
 
         // Do condition test
-        $test_query = $mysqli->query("$key[test_condition]");
+        $test_query = $mysqli->query("$key[test_condition]") or die("Database update $key[database_update_id] Test condition failed");
 
         if ($test_query->fetch_row()==true)
           { $test_result="test_success";}
