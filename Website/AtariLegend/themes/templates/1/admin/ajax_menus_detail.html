@@ -29,9 +29,9 @@
 						<b>Set State</b> : The current state of the menu disk. Is this menu disk fully functional, missing ...<br><br>
 						<b>Set parent menu</b> : It sometimes happens that a menu can be a sub menu of a completely different menu/menu set. Overhere you select to which menu the active menu belongs.<br><br>
 						<b>Delete menu disk</b> : Completely delete the menu disk from the DB. You can only do this when all atachements like screenshots, files...have been removed.<br><br>
-						<b>Add Intro Credits</b> : Apart from the crew of individual who released the menu set/disk, lots of menu disk have seperate crackers, intro coders, graphics artists ... this is where you hook these individuals with the menu disk.<br><br>
-						<b>Add game/tool/demo</b> : Add the actual menu disk titles (the software) to the menu disk<br><br>
-						<b>Add doc</b> : Are we dealing with a doc disk? Or does this menu disk contain docs? Add them using this link<br><br>
+						<b>Add Intro Credits</b> : Apart from the crew or individual who released the menu set/disk, lots of menu disk have seperate coders and artists for the intro screen ... this is where you hook these individuals with the menu disk.<br><br>
+						<b>Add game/tool/demo</b> : Add the actual menu disk titles (the software) to the menu disk.<br><br>
+						<b>Add doc</b> : Are we dealing with a doc disk? Or does this menu disk contain docs? Add them using this link. All games and tools in the AL DB can be turned into a doc using this option.<br><br>
 						<b>Add screenshot</b> : Add screenshots to the menu disk entry<br><br>
 						<b>Add file</b> : Add the actual menudisk file (for download) to this menu disk entry<br><br>
 						</p>
@@ -79,19 +79,16 @@
 					<br>	
 					<div id="menu_credit_list">	
 						{if isset($individuals)}
-							<fieldset style="width:93%; margin:auto;">
-							<legend>Intro Credits HELP</legend>
-								<div class="help_text">
-									The intro of a menu disk was a lot of times coded by different people than the actual menu itself. You can add them by pressing the 'add intro credits' above. Once an individual is added, you can select his/her nickname. As some people used different nicks for different menu's.
-								</div>
-							</fieldset>		
-							<br>								
 							<table class="table_game_list" id="game_list_table" style="width:95%;border: solid 1px black;margin:auto;">
 							<tr>
 								<th id="menu_cred_th">Credits</th>
 								<th id="menu_scene_th">"Sceners"</th>
 								<th id="menu_nick_th">Nick</th>
-								<th id="menu_delete_th"></th>
+								<th id="menu_delete_th">
+									<div class="help-tip">
+										<p style="right:260px;">The intro of a menu disk was a lot of times coded by different people than the actual menu itself. You can add them by pressing the 'add intro credits' above. Once an individual is added, you can select his/her nickname. As some people used different nicks for different menu's.</p>
+									</div>
+								</th>
 							</tr>	
 							{foreach name=outer item=individual from=$individuals}	
 								<tr>
@@ -120,14 +117,7 @@
 					<br>
 					<br>
 					<div id="menu_software_list">
-						{if isset($game)}
-							<fieldset style="width:93%; margin:auto;">
-							<legend>Menu titles HELP</legend>
-								<div class="help_text">
-									Overhere you have an overview of the software titles on the menu disk. When pressing the 'add game/tool/demo' button above, a list with search options will appear. Use this list to add titles to the menu. With the 'add' link in the 'set' column, you can CHAIN titles.
-								</div>
-							</fieldset>		
-							<br>			
+						{if isset($game)}			
 							<table class="table_game_list" style="width:95%;border: solid 1px black;margin:auto;">
 							<tr>
 								<th id="menu_mark_th"></th>
@@ -189,6 +179,10 @@
 									<img src="../../../themes/templates/1/includes/img/arrow_ltr.gif" alt="" width="38" height="22">		
 									<input type="hidden" name="action" value="delete_from_menu_disk">
 									<input type="button" value="Delete" class="quick_search_games_button" style="display:inline;">
+									<div class="help-tip" style="margin-bottom:2px;">
+										<p style="right:260px;">Overhere you have an overview of the software titles on the menu disk. When pressing the 'add game/tool/demo' button above, a 
+										list with search options will appear. Use this list to add titles to the menu. With the 'add' link in the 'set' column, you can CHAIN titles.</p>
+									</div>
 									</form>
 								</td>
 							</tr>
@@ -200,13 +194,6 @@
 					<div id="menu_detail_expand_games"></div>
 					<div id="menu_doc_list">
 						{if isset($doc_game)}
-							<fieldset style="width:93%; margin:auto;">
-							<legend>Menu docs HELP</legend>
-								<div class="help_text">
-									Overhere you have an overview of the docs on the menu disk. When pressing the 'add doc' button above, a list with search options will appear. Use this list to add docs to the menu. Make sure to save the doc type as well!.
-								</div>
-							</fieldset>		
-							<br>			
 							<table class="table_game_list" style="width:95%;border: solid 1px black;margin:auto;">
 							<tr>
 								<th id="menu_mark_th"></th>
@@ -251,6 +238,10 @@
 									<img src="../../../themes/templates/1/includes/img/arrow_ltr.gif" alt="" width="38" height="22">		
 									<input type="hidden" name="action" value="delete_from_menu_disk">
 									<input type="button" value="Delete" class="quick_search_games_button" style="display:inline;">
+									<div class="help-tip" style="margin-bottom:2px;">
+										<p style="right:260px;">Overhere you have an overview of the docs on the menu disk. When pressing the 'add doc' button above, a list with search options will appear. 
+										Use this list to add docs to the menu. Make sure to save the doc type as well!</p>
+									</div>
 									</form>
 								</td>
 							</tr>
@@ -356,13 +347,6 @@
 
 {if isset($smarty_action) and $smarty_action == "add_game_to_menu_return"}
 	{if isset($game)}
-		<fieldset style="width:93%; margin:auto;">
-		<legend>Menu titles HELP</legend>
-			<div class="help_text">
-				Overhere you have an overview of the software titles on the menu disk. When pressing the 'add game/tool/demo' button above, a list with search options will appear. Use this list to add titles to the menu. With the 'add' link in the 'set' column, you can CHAIN titles.
-			</div>
-		</fieldset>		
-		<br>			
 		<table class="table_game_list" style="width:95%;border: solid 1px black;margin:auto;">
 		<tr>
 			<th id="menu_mark_th"></th>
@@ -423,6 +407,10 @@
 				<img src="../../../themes/templates/1/includes/img/arrow_ltr.gif" alt="" width="38" height="22">	
 				<input type="hidden" name="action" value="delete_from_menu_disk">
 				<input type="button" value="Delete" class="quick_search_games_button" style="display:inline;">
+				<div class="help-tip" style="margin-bottom:2px;">
+					<p style="right:260px;">Overhere you have an overview of the software titles on the menu disk. When pressing the 'add game/tool/demo' button above, a 
+					list with search options will appear. Use this list to add titles to the menu. With the 'add' link in the 'set' column, you can CHAIN titles.</p>
+				</div>
 				</form>
 			</td>
 		</tr>
@@ -437,14 +425,7 @@
 
 
 {if isset($smarty_action) and $smarty_action == "add_doc_to_menu_return"}
-	{if isset($doc_game)}
-		<fieldset style="width:93%; margin:auto;">
-		<legend>Menu docs HELP</legend>
-			<div class="help_text">
-				Overhere you have an overview of the docs on the menu disk. When pressing the 'add doc' button above, a list with search options will appear. Use this list to add docs to the menu.
-			</div>
-		</fieldset>		
-		<br>			
+	{if isset($doc_game)}		
 		<table class="table_game_list" style="width:95%;border: solid 1px black;margin:auto;">
 		<tr>
 			<th id="menu_mark_th"></th>
@@ -489,6 +470,10 @@
 				<img src="../../../themes/templates/1/includes/img/arrow_ltr.gif" alt="" width="38" height="22">		
 				<input type="hidden" name="action" value="delete_from_menu_disk">
 				<input type="button" value="Delete" class="quick_search_games_button" style="display:inline;">
+				<div class="help-tip" style="margin-bottom:2px;">
+					<p style="right:260px;">Overhere you have an overview of the docs on the menu disk. When pressing the 'add doc' button above, a list with search options will appear. 
+					Use this list to add docs to the menu. Make sure to save the doc type as well!</p>
+				</div>
 				</form>
 			</td>
 		</tr>
@@ -567,7 +552,11 @@
 			<th id="menu_cred_th">Credits</th>
 			<th id="menu_scene_th">"Sceners"</th>
 			<th id="menu_nick_th">Nick</th>
-			<th id="menu_delete_th"></th>
+			<th id="menu_delete_th">
+				<div class="help-tip">
+					<p style="right:260px;">The intro of a menu disk was a lot of times coded by different people than the actual menu itself. You can add them by pressing the 'add intro credits' above. Once an individual is added, you can select his/her nickname. As some people used different nicks for different menu's.</p>
+				</div>
+			</th>
 		</tr>
 		{if isset($individuals)}
 			{foreach name=outer item=individual from=$individuals}	
@@ -659,6 +648,10 @@
 				<img src="../../../themes/templates/1/includes/img/arrow_ltr.gif" alt="" width="38" height="22">	
 				<input type="hidden" name="action" value="delete_from_menu_disk">
 				<input type="button" value="Delete" class="quick_search_games_button" style="display:inline;">
+				<div class="help-tip" style="margin-bottom:2px;">
+					<p style="right:260px;">Overhere you have an overview of the software titles on the menu disk. When pressing the 'add game/tool/demo' button above, a 
+					list with search options will appear. Use this list to add titles to the menu. With the 'add' link in the 'set' column, you can CHAIN titles.</p>
+				</div>
 				</form>
 			</td>
 		</tr>
@@ -687,6 +680,10 @@
 						<input type="hidden" name="menu_disk_id" value="{$menu_disk_id}">
 						<input type="hidden" name="menu_disk_title_id" value="{$menu_disk_title_id}">
 						<input type="hidden" name="action" value="link_game_to_set">
+						<div class="help-tip">
+							<p style="right:230px;">Overhere you can select an existing CHAIN for this title (on this menu set). If the chain for this title does not yet exist, press the 'CREATE' button in the 'create chain' section.
+							If the chain exist, fill in the correct 'part nr' in the NR field and hit 'LINK'. Once a title is linked to a chain, the part nr will appear in the list above.</p>
+						</div>
 						<br>
 						{if isset($selected_chain_data)}
 							<br>
@@ -703,6 +700,10 @@
 					<fieldset>
 					<legend>Create chain {if isset($title_name)}for {$title_name}{/if}</legend>
 						<input type="button" onclick="CreateChain({$menu_disk_title_id},{$menu_disk_id})" class="topbutton_cpanel_small" value="Create">
+						<div class="help-tip">
+							<p style="right:220px;">In this box you create a CHAIN for this title. <b>BE AWARE</b>, before creating a new chain for a title, make sure the chain 
+							does not already exist for this menu set. Check the dropdown in the 'select chain' section before creating a new one.</p>
+						</div>
 					</fieldset>
 				</form>
 			</div>

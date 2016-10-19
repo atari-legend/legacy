@@ -32,6 +32,10 @@
 					<input type="hidden" name="menu_disk_id" value="{$menu_disk_id}">
 					<input type="hidden" name="menu_disk_title_id" value="{$menu_disk_title_id}">
 					<input type="hidden" name="action" value="link_game_to_set">
+					<div class="help-tip">
+						<p style="right:230px;">Overhere you can select an existing CHAIN for this title (on this menu set). If the chain for this title does not yet exist, press the 'CREATE' button in the 'create chain' section.
+						If the chain exist, fill in the correct 'part nr' in the NR field and hit 'LINK'. Once a title is linked to a chain, the part nr will appear in the list above.</p>
+					</div>
 					<br>
 					{if isset($selected_chain_data)}
 						<br>
@@ -49,20 +53,12 @@
 				<fieldset>
 				<legend>Create chain {if isset($title_name)}for {$title_name}{/if}</legend>
 					<input type="button" onclick="CreateChain({$menu_disk_title_id},{$menu_disk_id})" class="topbutton_cpanel_small" value="Create">
+					<div class="help-tip">
+						<p style="right:220px;">In this box you create a CHAIN for this title. <b>BE AWARE</b>, before creating a new chain for a title, make sure the chain 
+						does not already exist for this menu set. Check the dropdown in the 'select chain' section before creating a new one.</p>
+					</div>
 				</fieldset>
 			</form>
 		</div>
 	</div>
-	<br>
-	<fieldset>
-		<legend>Select chain HELP</legend>
-			<div class="help_text">
-				<b>Select chain</b> - Overhere you can select an existing CHAIN for this title (on this menu set). If the chain for this title does not yet exist, press the 'CREATE' button in the 'create chain' section.
-				If the chain exist, fill in the correct 'part nr' in the NR field and hit 'LINK'. Once a title is linked to a chain, the part nr will appear in the list above.
-			</div>
-			<br>
-			<div class="help_text">
-				<b>Create chain</b> - In this box you create a CHAIN for this title. <b>BE AWARE</b>, before creating a new chain for a title, make sure the chain does not already exist for this menu set. Check the dropdown in the 'select chain' section before creating a new one.
-			</div>
-	</fieldset>		
 </div>
