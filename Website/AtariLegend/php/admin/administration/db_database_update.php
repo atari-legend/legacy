@@ -49,7 +49,7 @@ if(isset($action) and $action=="update_database")
       if ($key['database_update_id']==$update_script_id)
       {
     // Run the test condition query
-      $test_query = $mysqli->query("$key[test_condition]");
+      $test_query = $mysqli->query("$key[test_condition]") or die("Database update $key[database_update_id] Test condition failed");
 
       // check if the condition query returns true or false
       if ($test_query->fetch_row()==true)
@@ -60,7 +60,7 @@ if(isset($action) and $action=="update_database")
         // if the execute condition is met, execute update
         if ($key['execute_condition']==$test_result)
           {
-            $mysqli->query("$key[database_update_sql]");
+            $mysqli->query("$key[database_update_sql]") or die("Database update $key[database_update_id] failed!");
 
             // Add info to the database_change table
             // Set the timestamp
