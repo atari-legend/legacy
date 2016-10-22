@@ -48,13 +48,11 @@ list($start2, $start3) = explode(":", exec('date +%N:%S'));
                     LEFT JOIN users ON ( review_main.user_id = users.user_id)
                     WHERE review_game.game_id IS NOT NULL ORDER BY review_main.review_date DESC";
 
-
         $games = $mysqli->query($RESULTGAME);
-
 
             $rows = $games->num_rows;
             if ( $rows > 0 )
-            {   if (empty($i)) {$i = 0;}
+            {   if ( empty($i) ) {$i = 0;}
                 while ( $row = $games->fetch_array(MYSQLI_BOTH) )
                 {
                     $i++;
@@ -66,8 +64,8 @@ list($start2, $start3) = explode(":", exec('date +%N:%S'));
 
                     $array_number = $number_revs->num_rows;
 
-                    $smarty->append('review',
-                     array('game_id' => $row['game_id'],
+                    $smarty->append('review', array(
+                            'game_id' => $row['game_id'],
                            'game_name' => $row['game_name'],
                            'game_publisher' => $row['pub_dev_name'],
                            'review_date' => $review_date,
