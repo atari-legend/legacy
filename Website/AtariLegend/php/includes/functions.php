@@ -207,18 +207,6 @@ function RemoveSmillies($alcode){
     return $alcode;
 }
 
-function convert_timestamp($timestamp)
-{
-    $timestamp = date("F j, Y",$timestamp);
-    return $timestamp;
-}
-
-function convert_timestamp_small($timestamp)
-{
-    $timestamp = date("j-m-y",$timestamp);
-    return $timestamp;
-}
-
 function get_username_from_id($submitted)
 {
     global $mysqli;

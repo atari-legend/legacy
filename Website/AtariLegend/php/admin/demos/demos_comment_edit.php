@@ -6,7 +6,7 @@
 *   copyright            : (C) 2003 Atari Legend
 *   email                : silversurfer@atari-forum.com
 *   actual update        : file creation
-*							
+*
 *
 *   Id: demos_comment_edit.php,v 0.10 2005/11/13 Silver Surfer
 *
@@ -22,29 +22,29 @@ include("../../includes/admin.php");
 
 if (empty($view)) {$view="";}
 if (empty($c_counter)) {$c_counter="";}
-	$sql_build = "SELECT *	FROM demo_user_comments
-							LEFT JOIN comments ON ( demo_user_comments.comments_id = comments.comments_id )
-							LEFT JOIN users ON ( comments.user_id = users.user_id )
-							LEFT JOIN demo ON ( demo_user_comments.demo_id = demo.demo_id ) 
-							WHERE demo_user_comments_id = '$demo_user_comments_id'";
+    $sql_build = "SELECT *  FROM demo_user_comments
+                            LEFT JOIN comments ON ( demo_user_comments.comments_id = comments.comments_id )
+                            LEFT JOIN users ON ( comments.user_id = users.user_id )
+                            LEFT JOIN demo ON ( demo_user_comments.demo_id = demo.demo_id )
+                            WHERE demo_user_comments_id = '$demo_user_comments_id'";
 
 $sql_comment = $mysqli->query($sql_build) or die("couldn't build query");
 $query_comment = $sql_comment->fetch_array(MYSQLI_BOTH) or die("couldn't build query");
 
-$date = convert_timestamp($query_comment['timestamp']);
-	
-		$smarty->assign('comments',
-	    array('comment' => $query_comment['comment'],
-			  'date' => $date,
-			  'demo' => $query_comment['demo_name'],
-			  'demo_id' => $query_comment['demo_id'],
-			  'view' => $view,
-			  'user_name' => $query_comment['userid'],
-			  'users_id' => $query_comment['user_id'],
-			  'demo_user_comments_id' => $demo_user_comments_id,
-			  'c_counter' => $c_counter,
-			  'comment_id' => $query_comment['comments_id'],
-			  'v_counter' => $v_counter));
+$date = date("F j, Y",$query_comment['timestamp']);
+
+        $smarty->assign('comments',
+        array('comment' => $query_comment['comment'],
+              'date' => $date,
+              'demo' => $query_comment['demo_name'],
+              'demo_id' => $query_comment['demo_id'],
+              'view' => $view,
+              'user_name' => $query_comment['userid'],
+              'users_id' => $query_comment['user_id'],
+              'demo_user_comments_id' => $demo_user_comments_id,
+              'c_counter' => $c_counter,
+              'comment_id' => $query_comment['comments_id'],
+              'v_counter' => $v_counter));
 
 //Send all smarty variables to the templates
 $smarty->display("file:".$cpanel_template_folder."demos_comment_edit.html");
