@@ -99,7 +99,6 @@ if ( $individual_search == " " or $individual_search == '-' )
   }
 
   $interview_date = date("F j, Y",$interview['interview_date']);
-
   $interview_text = $interview['interview_intro'];
   $interview_text = nl2br($interview_text);
   $interview_text = InsertALCode($interview_text);
