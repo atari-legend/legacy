@@ -1,12 +1,12 @@
 <?php
 /***************************************************************************
-*                                skin_switcher.php
-*                            --------------------------
-*   copyright            : (C) 2015 Atari Legend
-*   email                : silversurfer@atari-forum.com
-*
-*
-***************************************************************************/
+ *                                skin_switcher.php
+ *                            --------------------------
+ *   copyright            : (C) 2015 Atari Legend
+ *   email                : silversurfer@atari-forum.com
+ *
+ *
+ ***************************************************************************/
 
 //Skin Switching functions
 
@@ -26,12 +26,9 @@ sec_session_start();
 //using the filter command, this should be a safe way of using PHP_SELF
 
 //Let's see if the user has choosen a skin and set the skin in session
-if (isset($action) and $action == "skinswitch")
-{
-    if (isset($skin))
-    {
+if (isset($action) and $action == "skinswitch") {
+    if (isset($skin)) {
         $_SESSION['skin'] = $skin;
     }
 }
-
 ?>
