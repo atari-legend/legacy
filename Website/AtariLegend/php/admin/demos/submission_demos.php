@@ -109,8 +109,8 @@ $v_counter = (isset($_GET["v_counter"]) ? $_GET["v_counter"] : 0);
       $v_demo_image .= '.';
       $v_demo_image .= $sql_demo['imgext'];
 
-      $converted_date = convert_timestamp($query_submission['timestamp']);
-      $user_joindate = convert_timestamp($query_submission['join_date']);
+      $converted_date = date("F j, Y",$query_submission['timestamp']);
+      $user_joindate = date("F j, Y",$query_submission['join_date']);
         $comment = InsertALCode($query_submission['submit_text']);
         $comment = InsertSmillies($comment);
         $comment = nl2br($comment);

@@ -52,7 +52,7 @@ if ($result->num_rows < 1) {
     while ($valrow = $result->fetch_array(MYSQLI_BOTH)) {
         $link_sub = $mysqli->query("SELECT website_user_sub FROM website WHERE website_user_sub='$valrow[user_id]'")->num_rows;
 
-        $website_date = convert_timestamp($valrow['website_date']);
+        $website_date = date("F j, Y",$valrow['website_date']);
         $user_name    = get_username_from_id($valrow['user_id']);
 
         $smarty->append('validate', array(

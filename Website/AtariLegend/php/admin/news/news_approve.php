@@ -51,7 +51,7 @@ else
   while ($submission = $sql_submissions->fetch_array(MYSQLI_BOTH))
   {
     $user_name = get_username_from_id($submission['user_id']);
-    $news_date = convert_timestamp($submission['news_date']);
+    $news_date = date("F j, Y",$submission['news_date']);
     $news_text = InsertALCode($submission['news_text']);
     //$news_text = InsertSmillies($news_text);
     $news_text = nl2br($news_text);
