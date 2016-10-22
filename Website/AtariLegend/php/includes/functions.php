@@ -221,14 +221,13 @@ function convert_timestamp_small($timestamp)
 
 function get_username_from_id($submitted)
 {
-    $query = "SELECT userid FROM users WHERE user_id = $submitted";
     global $mysqli;
-    $result = $mysqli->query($query) or die("Query failed");
-    if($result->num_rows == 0) return 0;
-    else
-    {
+    $result = $mysqli->query("SELECT userid FROM users WHERE user_id = $submitted") or die("Query failed");
+    if ($result->num_rows == 0)
+        return 0;
+    else {
         $query_data = $result->fetch_array(MYSQLI_BOTH);
-    return $query_data['userid'];
+        return $query_data['userid'];
     }
 }
 
@@ -281,7 +280,8 @@ function az_dropdown_output($entry) {
     return $entry;
 }
 
-function statistics_stack() {
+function statistics_stack()
+{
 
     global $mysqli;
 
@@ -290,39 +290,35 @@ function statistics_stack() {
     //**************************
 
     // START - NUMBER OF GAMES IN ARCHIVE
-    $sql = "SELECT COUNT(*) AS count FROM game";
-    $query = $mysqli->query($sql);
+    $query     = $mysqli->query("SELECT COUNT(*) AS count FROM game");
     $gamecount = $query->fetch_array(MYSQLI_BOTH);
-    $stack[] = "$gamecount[count] games in archive";
+    $stack[]   = "$gamecount[count] games in archive";
 
     // END - NUMBER OF GAMES IN ARCHIVE
 
     mysqli_free_result($query);
 
     // START - COUNT GAME SCREENSHOTS IN ARCHIVE
-    $sql = "SELECT COUNT(*) AS count FROM screenshot_game";
-    $query = $mysqli->query($sql);
+    $query           = $mysqli->query("SELECT COUNT(*) AS count FROM screenshot_game");
     $gamescreencount = $query->fetch_array(MYSQLI_BOTH);
-    $stack[] = "$gamescreencount[count] game screenshots in archive";
+    $stack[]         = "$gamescreencount[count] game screenshots in archive";
 
     // END - COUNT GAME SCREENSHOTS IN ARCHIVE
 
     mysqli_free_result($query);
 
     // START - COUNT HOW MANY GAMES HAS SCREENSHOT
-    $sql = "SELECT COUNT(DISTINCT game_id) AS count FROM screenshot_game";
-    $query = $mysqli->query($sql);
+    $query       = $mysqli->query("SELECT COUNT(DISTINCT game_id) AS count FROM screenshot_game");
     $screencount = $query->fetch_array(MYSQLI_BOTH);
-    $stack[] = "$screencount[count] games have screenshots";
+    $stack[]     = "$screencount[count] games have screenshots";
 
     // END - COUNT HOW MANY GAMES HAS SCREENSHOT
 
     mysqli_free_result($query);
 
-        // START - COUNT COMPANIES IN ARCHIVE
-    $sql = "SELECT COUNT(*) AS count FROM pub_dev";
-    $query = $mysqli->query($sql);
-    $pubdev = $query->fetch_array(MYSQLI_BOTH);
+    // START - COUNT COMPANIES IN ARCHIVE
+    $query   = $mysqli->query("SELECT COUNT(*) AS count FROM pub_dev");
+    $pubdev  = $query->fetch_array(MYSQLI_BOTH);
     $stack[] = "$pubdev[count] companies in the archive";
 
     // END - COUNT COMPANIES IN ARCHIVE
@@ -330,28 +326,25 @@ function statistics_stack() {
     mysqli_free_result($query);
 
     // START - COUNT HOW MANY GAMES HAS PUBLISHER ASSIGNED
-    $sql = "SELECT COUNT(DISTINCT game_id) AS count FROM game_publisher";
-    $query = $mysqli->query($sql);
+    $query     = $mysqli->query("SELECT COUNT(DISTINCT game_id) AS count FROM game_publisher");
     $publisher = $query->fetch_array(MYSQLI_BOTH);
-    $stack[] = "$publisher[count] games have a publisher assigned";
+    $stack[]   = "$publisher[count] games have a publisher assigned";
 
     // END - COUNT HOW MANY GAMES HAS PUBLISHER ASSIGNED
 
     mysqli_free_result($query);
 
-        // START - COUNT HOW MANY GAMES HAS DEVELOPER ASSIGNED
-    $sql = "SELECT COUNT(DISTINCT game_id) AS count FROM game_developer";
-    $query = $mysqli->query($sql);
+    // START - COUNT HOW MANY GAMES HAS DEVELOPER ASSIGNED
+    $query     = $mysqli->query("SELECT COUNT(DISTINCT game_id) AS count FROM game_developer");
     $developer = $query->fetch_array(MYSQLI_BOTH);
-    $stack[] = "$developer[count] games have a developer assigned";
+    $stack[]   = "$developer[count] games have a developer assigned";
 
     // END - COUNT HOW MANY GAMES HAS DEVELOPER ASSIGNED
 
     mysqli_free_result($query);
 
     // START - COUNT HOW MANY GAMES HAS BOXSCANS
-    $sql = "SELECT COUNT(DISTINCT game_id) AS count FROM game_boxscan";
-    $query = $mysqli->query($sql);
+    $query   = $mysqli->query("SELECT COUNT(DISTINCT game_id) AS count FROM game_boxscan");
     $boxscan = $query->fetch_array(MYSQLI_BOTH);
     $stack[] = "$boxscan[count] games have boxscans assigned";
 
@@ -359,79 +352,71 @@ function statistics_stack() {
 
     mysqli_free_result($query);
 
-        // START - COUNT HOW MANY GAMES HAS CATEGORIES SET
-    $sql = "SELECT COUNT(DISTINCT game_id) AS count FROM game_cat_cross";
-    $query = $mysqli->query($sql);
+    // START - COUNT HOW MANY GAMES HAS CATEGORIES SET
+    $query         = $mysqli->query("SELECT COUNT(DISTINCT game_id) AS count FROM game_cat_cross");
     $game_category = $query->fetch_array(MYSQLI_BOTH);
-    $stack[] = "$game_category[count] games have category set";
+    $stack[]       = "$game_category[count] games have category set";
 
     // END - COUNT HOW MANY GAMES HAS CATEGORIES SET
 
     mysqli_free_result($query);
 
     // START - COUNT NUMBER OF DOWNLOADABLE FILES
-    $sql = "SELECT COUNT(game_id) AS count FROM game_download";
-    $query = $mysqli->query($sql);
+    $query      = $mysqli->query("SELECT COUNT(game_id) AS count FROM game_download");
     $game_files = $query->fetch_array(MYSQLI_BOTH);
-    $stack[] = "$game_files[count] files for download";
+    $stack[]    = "$game_files[count] files for download";
 
     // END - COUNT NUMBER OF DOWNLOADABLE FILES
 
     mysqli_free_result($query);
 
-        // START - COUNT HOW MANY GAMES HAS DOWNLOAD
-    $sql = "SELECT COUNT(DISTINCT game_id) AS count FROM game_download";
-    $query = $mysqli->query($sql);
+    // START - COUNT HOW MANY GAMES HAS DOWNLOAD
+    $query         = $mysqli->query("SELECT COUNT(DISTINCT game_id) AS count FROM game_download");
     $game_download = $query->fetch_array(MYSQLI_BOTH);
-    $stack[] = "$game_download[count] games have download";
+    $stack[]       = "$game_download[count] games have download";
 
     // END - COUNT HOW MANY GAMES HAS DOWNLOAD
 
     mysqli_free_result($query);
 
-        // START - RELEASE YEAR STATS
-    $sql = "SELECT COUNT(game_id) AS count FROM game_year";
-    $query = $mysqli->query($sql);
+    // START - RELEASE YEAR STATS
+    $query     = $mysqli->query("SELECT COUNT(game_id) AS count FROM game_year");
     $game_year = $query->fetch_array(MYSQLI_BOTH);
-    $stack[] = "$game_year[count] games have a release year set";
+    $stack[]   = "$game_year[count] games have a release year set";
 
     // END - RELEASE YEAR STATS
 
     mysqli_free_result($query);
 
-        // START - GAME REVIEW STATS
-    $sql = "SELECT COUNT(DISTINCT game_id) AS count FROM review_game";
-    $query = $mysqli->query($sql);
+    // START - GAME REVIEW STATS
+    $query       = $mysqli->query("SELECT COUNT(DISTINCT game_id) AS count FROM review_game");
     $review_game = $query->fetch_array(MYSQLI_BOTH);
-    $stack[] = "$review_game[count] games have been reviewed";
+    $stack[]     = "$review_game[count] games have been reviewed";
 
     // END - GAME REVIEW STATS
 
     mysqli_free_result($query);
 
-        // START - USER STATS
-    $sql = "SELECT COUNT(user_id) AS count FROM users";
-    $query = $mysqli->query($sql);
-    $users = $query->fetch_array(MYSQLI_BOTH);
+    // START - USER STATS
+    $query   = $mysqli->query("SELECT COUNT(user_id) AS count FROM users");
+    $users   = $query->fetch_array(MYSQLI_BOTH);
     $stack[] = "$users[count] registered users";
 
     // END - USER STATS
 
     mysqli_free_result($query);
 
-        // START - ARTICLE STATS
-    $sql = "SELECT COUNT(DISTINCT article_id) AS count FROM article_main";
-    $query = $mysqli->query($sql);
+    // START - ARTICLE STATS
+    $query        = $mysqli->query("SELECT COUNT(DISTINCT article_id) AS count FROM article_main");
     $article_main = $query->fetch_array(MYSQLI_BOTH);
-    $stack[] = "$article_main[count] articles in archive";
+    $stack[]      = "$article_main[count] articles in archive";
 
     // END - ARTICLE STATS
 
     mysqli_free_result($query);
 
-        // START - LINKS STATS
-    $sql = "SELECT COUNT(website_id) AS count FROM website";
-    $query = $mysqli->query($sql);
+    // START - LINKS STATS
+    $query   = $mysqli->query("SELECT COUNT(website_id) AS count FROM website");
     $website = $query->fetch_array(MYSQLI_BOTH);
     $stack[] = "$website[count] links in archive";
 
@@ -439,20 +424,18 @@ function statistics_stack() {
 
     mysqli_free_result($query);
 
-        // START - music STATS
-    $sql = "SELECT COUNT(DISTINCT game_id) AS count FROM game_music";
-    $query = $mysqli->query($sql);
-    $music = $query->fetch_array(MYSQLI_BOTH);
+    // START - music STATS
+    $query   = $mysqli->query("SELECT COUNT(DISTINCT game_id) AS count FROM game_music");
+    $music   = $query->fetch_array(MYSQLI_BOTH);
     $stack[] = "$music[count] games have music attached";
 
     // END - music STATS
 
     mysqli_free_result($query);
 
-        // START - music STATS
-    $sql = "SELECT COUNT(music_id) AS count FROM game_music";
-    $query = $mysqli->query($sql);
-    $music = $query->fetch_array(MYSQLI_BOTH);
+    // START - music STATS
+    $query   = $mysqli->query("SELECT COUNT(music_id) AS count FROM game_music");
+    $music   = $query->fetch_array(MYSQLI_BOTH);
     $stack[] = "$music[count] gamemusic files are uploaded";
 
     // END - music STATS
@@ -512,8 +495,8 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
                 //  get the ind name & id
                 $query_ind = "SELECT individuals.ind_id,
                                      individuals.ind_name FROM individuals
-                                                          LEFT JOIN game_author ON ( individuals.ind_id = game_author.ind_id )
-                                                          WHERE game_author.game_author_id = '$subsection_id'";
+                                     LEFT JOIN game_author ON ( individuals.ind_id = game_author.ind_id )
+                                     WHERE game_author.game_author_id = '$subsection_id'";
                 $result = $mysqli->query($query_ind) or die("getting ind name failed");
                 $query_data = $result->fetch_array(MYSQLI_BOTH);
                 $subsection_name = $query_data['ind_name'];
@@ -1145,15 +1128,15 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
             $query_data = $result->fetch_array(MYSQLI_BOTH);
             $subsection_name = $query_data['tools_name'];
         }
-		
-		If ( $subsection == 'Doc type' )
-		{
-			// get the name of the doc type
-			$query_doc_type = "SELECT doc_type_name FROM doc_type WHERE doc_type_id = '$subsection_id'";
-			$result = $mysqli->query($query_doc_type) or die("getting doc type name failed");
-			$query_data = $result->fetch_array(MYSQLI_BOTH);
-			$subsection_name = $query_data['doc_type_name'];
-		}
+
+        If ( $subsection == 'Doc type' )
+        {
+            // get the name of the doc type
+            $query_doc_type = "SELECT doc_type_name FROM doc_type WHERE doc_type_id = '$subsection_id'";
+            $result = $mysqli->query($query_doc_type) or die("getting doc type name failed");
+            $query_data = $result->fetch_array(MYSQLI_BOTH);
+            $subsection_name = $query_data['doc_type_name'];
+        }
 
         If ( $subsection == 'Software' or $subsection == 'Chain' or $subsection == 'Doc')
         {
@@ -1177,7 +1160,7 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
                 $result = $mysqli->query($query_game) or die("getting game name failed");
                 $query_data = $result->fetch_array(MYSQLI_BOTH);
                 $subsection_name = $query_data['game_name'];
-				
+
                 if ($subsection <> 'Chain' )
                 {
                     $subsection = 'Game';
@@ -1205,67 +1188,67 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
 
             if ($type == '3')
             {
-				//get the id of the tool
-				$query_tool = "SELECT tools_id FROM menu_disk_title_tools WHERE menu_disk_title_id = '$subsection_id'";
-				$result = $mysqli->query($query_tool) or die("getting toold id failed");
-				$query_data = $result->fetch_array(MYSQLI_BOTH);
-				$subsection_id = $query_data['tools_id'];
+                //get the id of the tool
+                $query_tool = "SELECT tools_id FROM menu_disk_title_tools WHERE menu_disk_title_id = '$subsection_id'";
+                $result = $mysqli->query($query_tool) or die("getting toold id failed");
+                $query_data = $result->fetch_array(MYSQLI_BOTH);
+                $subsection_id = $query_data['tools_id'];
 
-				//  get the tool name
-				$query_tool = "SELECT tools_name FROM tools WHERE tools_id = '$subsection_id'";
-				$result = $mysqli->query($query_tool) or die("getting tool name failed");
-				$query_data = $result->fetch_array(MYSQLI_BOTH);
-				$subsection_name = $query_data['tools_name'];
-				if ($subsection <> 'Chain')
-				{
-					$subsection = 'Tool';
-				}
+                //  get the tool name
+                $query_tool = "SELECT tools_name FROM tools WHERE tools_id = '$subsection_id'";
+                $result = $mysqli->query($query_tool) or die("getting tool name failed");
+                $query_data = $result->fetch_array(MYSQLI_BOTH);
+                $subsection_name = $query_data['tools_name'];
+                if ($subsection <> 'Chain')
+                {
+                    $subsection = 'Tool';
+                }
             }
-			
-			if ($type == '6')
-			{
-				//get the doc cross id
-				$query_game_doc = "SELECT doc_games_id FROM menu_disk_title_doc_games WHERE menu_disk_title_id = '$subsection_id'";
-				$result = $mysqli->query($query_game_doc) or die("getting doc_game_id failed");
-				$query_data = $result->fetch_array(MYSQLI_BOTH);
-				$subsection_id = $query_data['doc_games_id'];
 
-				//  get the game id
-				$query_game_id = "SELECT game_id FROM doc_disk_game WHERE doc_disk_game_id = '$subsection_id'";
-				$result = $mysqli->query($query_game_id) or die("getting game id failed");
-				$query_data = $result->fetch_array(MYSQLI_BOTH);
-				$subsection_id = $query_data['game_id'];
-				
-				//  get the game name
+            if ($type == '6')
+            {
+                //get the doc cross id
+                $query_game_doc = "SELECT doc_games_id FROM menu_disk_title_doc_games WHERE menu_disk_title_id = '$subsection_id'";
+                $result = $mysqli->query($query_game_doc) or die("getting doc_game_id failed");
+                $query_data = $result->fetch_array(MYSQLI_BOTH);
+                $subsection_id = $query_data['doc_games_id'];
+
+                //  get the game id
+                $query_game_id = "SELECT game_id FROM doc_disk_game WHERE doc_disk_game_id = '$subsection_id'";
+                $result = $mysqli->query($query_game_id) or die("getting game id failed");
+                $query_data = $result->fetch_array(MYSQLI_BOTH);
+                $subsection_id = $query_data['game_id'];
+
+                //  get the game name
                 $query_game = "SELECT game_name FROM game WHERE game_id = '$subsection_id'";
                 $result = $mysqli->query($query_game) or die("getting game name failed");
                 $query_data = $result->fetch_array(MYSQLI_BOTH);
                 $subsection_name = $query_data['game_name'];
-				$subsection = 'Game doc';
-				
-				if ( $subsection_name == '' )
-				{
-					//get the doc cross id
-					$query_tool_doc = "SELECT doc_tools_id FROM menu_disk_title_doc_tools WHERE menu_disk_title_id = '$subsection_id'";
-					$result = $mysqli->query($query_tool_doc) or die("getting doc_tools_id failed");
-					$query_data = $result->fetch_array(MYSQLI_BOTH);
-					$subsection_id = $query_data['doc_tools_id'];
-					
-					//get the id of the tool
-					$query_tool = "SELECT tools_id FROM menu_disk_title_tools WHERE menu_disk_title_id = '$subsection_id'";
-					$result = $mysqli->query($query_tool) or die("getting toold id failed");
-					$query_data = $result->fetch_array(MYSQLI_BOTH);
-					$subsection_id = $query_data['tools_id'];
+                $subsection = 'Game doc';
 
-					//  get the tool name
-					$query_tool = "SELECT tools_name FROM tools WHERE tools_id = '$subsection_id'";
-					$result = $mysqli->query($query_tool) or die("getting tool name failed");
-					$query_data = $result->fetch_array(MYSQLI_BOTH);
-					$subsection_name = $query_data['tools_name'];
-					$subsection = 'Tool doc';
-				}
-				
-			}
+                if ( $subsection_name == '' )
+                {
+                    //get the doc cross id
+                    $query_tool_doc = "SELECT doc_tools_id FROM menu_disk_title_doc_tools WHERE menu_disk_title_id = '$subsection_id'";
+                    $result = $mysqli->query($query_tool_doc) or die("getting doc_tools_id failed");
+                    $query_data = $result->fetch_array(MYSQLI_BOTH);
+                    $subsection_id = $query_data['doc_tools_id'];
+
+                    //get the id of the tool
+                    $query_tool = "SELECT tools_id FROM menu_disk_title_tools WHERE menu_disk_title_id = '$subsection_id'";
+                    $result = $mysqli->query($query_tool) or die("getting toold id failed");
+                    $query_data = $result->fetch_array(MYSQLI_BOTH);
+                    $subsection_id = $query_data['tools_id'];
+
+                    //  get the tool name
+                    $query_tool = "SELECT tools_name FROM tools WHERE tools_id = '$subsection_id'";
+                    $result = $mysqli->query($query_tool) or die("getting tool name failed");
+                    $query_data = $result->fetch_array(MYSQLI_BOTH);
+                    $subsection_name = $query_data['tools_name'];
+                    $subsection = 'Tool doc';
+                }
+
+            }
         }
     }
 
@@ -1316,8 +1299,8 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
             $subsection_name = $section_name;
         }
     }
-	
-	//  Everything we do for the DOC TYPE SECTION
+
+    //  Everything we do for the DOC TYPE SECTION
     If ( $section == 'Doc type' )
     {
         // get the name of the doc type
@@ -1331,8 +1314,8 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
             $subsection_name = $section_name;
         }
     }
-	
-	//  Everything we do for the DOC CATEGORY SECTION
+
+    //  Everything we do for the DOC CATEGORY SECTION
     If ( $section == 'Doc category' )
     {
         // get the name of the doc type
@@ -1346,10 +1329,10 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
             $subsection_name = $section_name;
         }
     }
-	
-	$section_name = $mysqli->real_escape_string($section_name);
-	$subsection_name = $mysqli->real_escape_string($subsection_name);
-	
+
+    $section_name = $mysqli->real_escape_string($section_name);
+    $subsection_name = $mysqli->real_escape_string($subsection_name);
+
     $sql_log = $mysqli->query("INSERT INTO change_log (section, section_id, section_name, sub_section, sub_section_id, sub_section_name, user_id, action, timestamp) VALUES ('$section', '$section_id', '$section_name', '$subsection', '$subsection_id', '$subsection_name', '$user_id', '$action', '$log_time')")
                                 or die ("Couldn't insert change log into database");
 }
