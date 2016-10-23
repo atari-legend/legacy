@@ -80,8 +80,8 @@ foreach ($database_update as $key) {
 
 
     // Checking if the database_update_id already exist in the database to avoid issues later on.
-    $query         = "SELECT * from database_change WHERE database_update_id=$key[database_update_id]";
-    $result_change = $mysqli->query($query);
+
+    $result_change = $mysqli->query("SELECT * from database_change WHERE database_update_id=$key[database_update_id]");
     $row_change    = $result_change->fetch_array(MYSQLI_ASSOC);
 
     $row_cnt = $result_change->num_rows;
@@ -164,8 +164,7 @@ foreach ($database_update as $key) {
     } // End if statement for rowcount nothing in database
 
     // Lets do some matching against the database
-    $query         = "SELECT * from database_change WHERE database_update_id=$key[database_update_id]";
-    $result_change = $mysqli->query($query);
+    $result_change = $mysqli->query("SELECT * from database_change WHERE database_update_id=$key[database_update_id]");
     $row_change    = $result_change->fetch_array(MYSQLI_ASSOC);
 
     $row_cnt = $result_change->num_rows;
