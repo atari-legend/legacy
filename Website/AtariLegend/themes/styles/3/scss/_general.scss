@@ -544,16 +544,18 @@ The CSS for the help tips
 	line-height: 1.4;
 }
 
-.help-tip p:before{ /* The pointer of the tooltip */
-	position: absolute;
-	content: '';
-	width:0;
-	height: 0;
-	border:6px solid transparent;
-	border-bottom-color:#1E2021;
-	right:10px;
-	top:-12px;
-}
+//I am removing the pointer as the alignment of the text box changes from '?' to '?' - this is done the be compliant with a resolution of 320 width. 
+//Test it for yourself to see what I mean
+//.help-tip p:before{ /* The pointer of the tooltip */
+//	position: absolute;
+//	content: '';
+//	width:0;
+//	height: 0;
+//	border:6px solid transparent;
+//	border-bottom-color:#1E2021;
+//	right:10px;
+//	top:-12px;
+//}
 
 .help-tip p:after{ /* Prevents the tooltip from being hidden */
 	width:100%;

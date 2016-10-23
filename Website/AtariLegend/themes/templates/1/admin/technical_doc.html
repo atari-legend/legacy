@@ -1,0 +1,176 @@
+{* 
+/***************************************************************************
+                              technical_doc.html
+*                            --------------------------
+*   begin                : Friday, October 21, 2016
+*   copyright            : (C) 2016 Atari Legend
+*   email                : admin@atarilegend.com
+*
+* 	id : technical_doc.html ,v 0.10 2016/10/21 ST Graveyard 14:23
+*			- AL 2.0
+*
+***************************************************************************/
+
+************************************************************************************************
+The main doc page
+************************************************************************************************
+*}
+{extends file='1/admin/frontpage.html'}
+
+{block name=java_script}
+<script type="text/javascript" src="{$template_dir}includes/js/lightbox.min.js"></script>
+<link type="text/css" href="{$style_dir}css/lightbox.css" hreflang="en" rel="stylesheet">
+{/block}
+
+{block name=title}Technical Documentation{/block}
+
+{block name=left_tile}
+{include file='1/admin/left_nav.html'}
+{/block}
+
+{block name=main_tile}
+<div class="standard_tile">
+	<h1>TECHNICAL DOC</h1>
+	<div class="standard_tile_line"></div>
+	<div class="standard_tile_text">
+		<div class="left_nav_section">
+			This is the technical documentation of Atarilegend. You can find the database structure and more info to give you a better insight of the project.
+		</div>
+		<br>
+		<br>
+		<fieldset class="centered_fieldset" style="width:50%">
+			<legend>Contents</legend>
+			<a href="#menu_section" class="left_nav_link">Menu section</a>
+		</fieldset> 
+		<br>
+		<br>
+		<a name="menu section"></a> 
+		<div class="left_nav_section" style="padding-right:10px;font-weight:normal;">
+			<h1>Menu section</h1>
+			<br>
+			<a href="../../includes/show_image.php?file=../../themes/templates/1/includes/technical_doc/img/menus.png" data-lightbox="image-1" data-title="The Menudisk DB tables">
+				<img style="display:inline;" src="../../includes/show_image.php?file=../../themes/templates/1/includes/technical_doc/img/menus.png&amp;resize=450,null,null,null" alt="Click to enlarge!" class="user_stats_img" id="user_details_img_dark" style="margin:5px;">
+			</a>
+			<br>
+			<br>
+			This screenshot is a visual representation of the current table structure used for the menu section. This ER diagram shows exactly how all tables are connected to each other. 
+			This section is ofcourse linked to the other sections of the database. Check the other ER diagrams to get a better idea. Below you will find a complete description of each table
+			used here.
+			<br>
+			<br>
+			<u>Layout of tables :</u>
+			<br>
+			<br>
+			<table class="standard_table_list" id="menu_list_table" style="border:none;text-align:left;width:85%;">
+			<tr>
+				<td>
+					<table class="table_game_list" id="game_list_table" style="width:100%;border: solid 1px black;margin:auto;">
+					<tr>
+						<td>
+							<b>menu_type</b> : This table connects all menu sets and even menu disks to a certain type of menu
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<b>menu_types_main</b> : This table contains the actual menu types eg. demo menu, game menu, tool menu…
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<b>menu_set</b> : Many crews made different "sets" of menu disks. One example would be the Pompey Pirates, they had 2 sets, the actual 'Pompey Pirates' set and another one named "Krappy Compacts".
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<b>menu_sets_order</b> : This table is needed specifically for putting the discs in the correct way on screen. We need to know how many discs are released, which number they start and end, gaps, how they are ordered ... 
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<b>menu_disk</b> : This is the main table for the menu disks. Every menu disk belongs to a set, hence the set id.
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<b>menu_disk_title</b> : Menu disks can contain all kinds of software titles. These titles are stored in the menu_disk_title table and are linked to the actual menu disk using the menu_disk_id field. This title table also contains menu_disk_title_type field. 
+								This means that, even if a menu disk is linked to a 'game' type, each title individually has its own type. So, a game menu disk, can also contain a doc for example.
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<b>menu_disk_title_game</b> : All the game titles are contained in this table. We have seperate table for each type of title so we can enhance search features on the site and for data consistency.
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<b>menu_disk_title_tools</b> : All the tool titles are contained in this table. We have seperate table for each type of title so we can enhance search features on the site and for data consistency.
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<b>menu_disk_title_demo</b> : All the demo titles are contained in this table. We have seperate table for each type of title so we can enhance search features on the site and for data consistency.
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<b>menu_disk_title_music</b> : All the music titles are contained in this table. We have seperate table for each type of title so we can enhance search features on the site and for data consistency.
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<b>menu_disk_title_doc_games</b> : All the (doc discs with) game docs are contained in this table. We have seperate table for each type of title so we can enhance search features on the site and for data consistency.
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<b>menu_disk_title_doc_games</b> : All the (doc discs with) tool docs are contained in this table. We have seperate table for each type of title so we can enhance search features on the site and for data consistency.
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<b>menu_disk_title_various</b> : All titles not belonging to any type of the above are contained in this table. We have seperate table for each type of title so we can enhance search features on the site and for data consistency.
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<b>menu_disk_title_set</b> : This table contains the sets of titles. For example, let's say a menu disk contains the game title 'Gods'. However, this title is normally spread over 2 disks. Using this 'set' table, we can link a title over 2 discs. 
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<b>screenshot_menu</b> : This is the screenshot cross table linking the menu disks to the screenshot main table (for more detail, see the screenshots section).
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<b>menu_user_comments</b> : This is the comments cross table linking the menu disks to the user comments main table (for more detail, see the comments section).
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<b>menu_disk_download</b> : This table contains the actual files for download of each menu disk.
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<b>menu_disk_submenu</b> : It sometimes happens that a menudisk is some kind of submenu of a totally different other menu disk. Using the cross table we can link menu disks to other menu disks.
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<b>menu_disk_state</b> : The main states table containing info like 'corrupt', 'complete' ... 
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<b>menu_disk_credits</b> : This table contains the individual id's of the people who were responsible for the intro of the menudisk. This is a cross table between the menu disk and the individuals table.
+						</td>
+					</tr>
+					</table>
+				</td>
+			</tr>
+			</table>
+		</div>
+	</div>
+</div>
+{/block}
