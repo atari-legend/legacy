@@ -51,7 +51,7 @@ else
   while ($submission = $sql_submissions->fetch_array(MYSQLI_BOTH))
   {
     $user_name = get_username_from_id($submission['user_id']);
-    $news_date = convert_timestamp($submission['news_date']);
+    $news_date = date("F j, Y",$submission['news_date']);
     $news_text = InsertALCode($submission['news_text']);
     //$news_text = InsertSmillies($news_text);
     $news_text = nl2br($news_text);
@@ -61,13 +61,13 @@ else
     $v_image .= '.';
     $v_image .= $submission['news_image_ext'];
 
-    $smarty->append('news_submissions',
-          array('news_userid' => $user_name,
+    $smarty->append('news_submissions', array(
+            'news_userid' => $user_name,
             'news_submission_id' => $submission['news_submission_id'],
             'news_headline' => $submission['news_headline'],
-              'news_date' => $news_date,
+            'news_date' => $news_date,
             'news_text' => $news_text,
-              'news_icon' => $v_image ));
+            'news_icon' => $v_image ));
   }
 
   $smarty->assign("nr_submissions",$num_submissions);

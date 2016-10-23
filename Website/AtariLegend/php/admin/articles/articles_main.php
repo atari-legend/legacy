@@ -68,7 +68,7 @@ if ( isset($action) and $action == 'search' )
     while ($article = $sql_articles->fetch_array(MYSQLI_BOTH))
     {
 
-      $article_date = convert_timestamp($article['article_date']);
+      $article_date = date("F j, Y",$article['article_date']);
 
       $article_text = $article['article_intro'];
       $article_text = nl2br($article_text);
