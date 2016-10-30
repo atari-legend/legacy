@@ -1,65 +1,186 @@
-/*************************************************************/	
-/**********************PICASSO SKIN****************************/
-/*************************************************************/ 
+//*************************************************************/
+//**********************PICASSO SKIN****************************/
+//*************************************************************/
+//*************************************************************/
+//****************CPanel MENUS section css****************/
+//*************************************************************/
+//*---------------------Menus editor------------------------- */
 
-/*************************************************************/	
-/****************CPanel MENUS section css****************/
-/*************************************************************/ 
+#menu_disk_set_th {
+    width: 30%;
+    text-align: left;
+}
 
-/*---------------------------------------------------------- 
-Menus editor
------------------------------------------------------------- */
-#menu_disk_set_th{width:30%; text-align: left;}
-#menu_crew_th,#menu_individual_th{width:25%; text-align: left;}
-#nr_menus_th,#menu_type_th{width:10%; text-align: left;}
+#menu_crew_th,#menu_individual_th {
+    width: 25%;
+    text-align: left;
+}
 
+#nr_menus_th,#menu_type_th {
+    width: 10%;
+    text-align: left;
+}
 
-.menu_disk_set_td{width:30%; padding-left: 2px;}
-.menu_crew_td,.menu_individual_td{width:25%; padding-left: 2px;}
-.nr_menus_td,.menu_type_td{width:10%; padding-left: 2px;}
+.menu_disk_set_td {
+    width: 30%;
+    padding-left: 2px;
+}
 
-.help_text{color:black;text-align:left;font-size:12pt;border:0;}
+.menu_crew_td,.menu_individual_td {
+    width: 25%;
+    padding-left: 2px;
+}
 
-/*---------------------------------------------------------- 
-Menu set edit
------------------------------------------------------------- */
-#menu_list_ind_th{width:20%; text-align: left;}
-#menu_state_th{width:20%; text-align: right; padding-right: 5px;}
-#menu_list_crew_th, #menu_disk_list_th{width:30%; text-align: left;}
+.nr_menus_td,.menu_type_td {
+    width: 10%;
+    padding-left: 2px;
+}
 
-.menu_list_crew_td,.menu_disk_list_td{width:30%; padding-left: 2px;}
-.menu_list_ind_td{width:20%; padding-left: 2px;}
-.menu_state_td{width:20%; padding-right: 5px; text-align: right; }
+.help_text {
+    font-size: 12pt;
+    color: black;
+    text-align: left;
+    border: 0;
+}
 
-#menu_cred_th, #menu_scene_th{width:30%; text-align: left;}
-#menu_nick_th{width:20%; text-align: left;}
-#menu_update_th,menu_delete_th{width:10%; text-align: left;}
+//*----------------------------------------------------------
+//Menu set edit
+//------------------------------------------------------------ */
+#menu_list_ind_th {
+    width: 20%;
+    text-align: left;
+}
 
-.menu_cred_td, .menu_scene_td{width:30%; text-align: left; padding-right: 5px;}
-.menu_nick_td{width:20%; text-align: left; padding-right: 5px;}
-.menu_update_td,menu_delete_td{width:10%; text-align: left; padding-right: 5px;}
+#menu_state_th {
+    width: 20%;
+    padding-right: 5px;
+    text-align: right;
+}
 
-#menu_mark_th,#menu_gameinfo_th,#menu_gameset_th{width:5%; text-align: left;}
-#menu_gamename_th{width:40%; text-align: left;}
-#menu_gamedev_th{width:35%; text-align: left;}
-#menu_gameyear_th{width:10%; text-align: left;}
+#menu_list_crew_th, #menu_disk_list_th {
+    width: 30%;
+    text-align: left;
+}
 
-.menu_mark_td,.menu_gameinfo_td,.menu_gameset_td{width:5%; text-align: left; padding-right: 5px;}
-.menu_gamename_td{width:40%; text-align: left; padding-right: 5px;}
-.menu_gamedev_td{width:35%; text-align: left; padding-right: 5px;}
-.menu_gameyear_td{width:10%; padding-right: 5px;}
+.menu_list_crew_td,.menu_disk_list_td {
+    width: 30%;
+    padding-left: 2px;
+}
 
-#menu_list_table{width: 100%; background-color: #294f4f;}
-#menu_list_table tr:hover {
-  background-color: #DBD7D1; }
-#menu_list_table tr:nth-child(even) {
-  background-color: #DBD7D1; }
-  #menu_list_table tr:nth-child(odd) {
-  background-color: #EFEFEF; }
+.menu_list_ind_td {
+    width: 20%;
+    padding-left: 2px;
+}
 
-.add_new_disk_space{display:inline-block;width:50%;}
+.menu_state_td {
+    width: 20%;
+    padding-right: 5px;
+    text-align: right;
+}
 
-#menu_docname_th{width:55%; text-align: left;}
-#menu_doctype_th, #menu_docinfo_th{width:20%; text-align: left;}
-.menu_docname_td,.menu_doctype_td,.menu_docinfo_td{width:55%; text-align: left; padding-right: 5px;}
-.menu_doctype_td,.menu_docinfo_td{width:20%;}
+#menu_cred_th, #menu_scene_th {
+    width: 30%;
+    text-align: left;
+}
+
+#menu_nick_th {
+    width: 20%;
+    text-align: left;
+}
+
+#menu_update_th,menu_delete_th {
+    width: 10%;
+    text-align: left;
+}
+
+.menu_cred_td, .menu_scene_td {
+    width: 30%;
+    padding-right: 5px;
+    text-align: left;
+}
+
+.menu_nick_td {
+    width: 20%;
+    padding-right: 5px;
+    text-align: left;
+}
+
+.menu_update_td,menu_delete_td {
+    width: 10%;
+    padding-right: 5px;
+    text-align: left;
+}
+
+#menu_mark_th,#menu_gameinfo_th,#menu_gameset_th {
+    width: 5%;
+    text-align: left;
+}
+
+#menu_gamename_th {
+    width: 40%;
+    text-align: left;
+}
+
+#menu_gamedev_th {
+    width: 35%;
+    text-align: left;
+}
+
+#menu_gameyear_th {
+    width: 10%;
+    text-align: left;
+}
+
+.menu_mark_td,.menu_gameinfo_td,.menu_gameset_td {
+    width: 5%;
+    padding-right: 5px;
+    text-align: left;
+}
+
+.menu_gamename_td {
+    width: 40%;
+    padding-right: 5px;
+    text-align: left;
+}
+
+.menu_gamedev_td {
+    width: 35%;
+    padding-right: 5px;
+    text-align: left;
+}
+
+.menu_gameyear_td {
+    width: 10%;
+    padding-right: 5px;
+}
+
+#menu_list_table {
+    width: 100%;
+    background-color: #294f4f;
+}
+
+#menu_list_table tr:hover { background-color: #DBD7D1; }
+#menu_list_table tr:nth-child(even) { background-color: #DBD7D1; }
+#menu_list_table tr:nth-child(odd) { background-color: #EFEFEF; }
+.add_new_disk_space {
+    display: inline-block;
+    width: 50%;
+}
+
+#menu_docname_th {
+    width: 55%;
+    text-align: left;
+}
+
+#menu_doctype_th, #menu_docinfo_th {
+    width: 20%;
+    text-align: left;
+}
+
+.menu_docname_td,.menu_doctype_td,.menu_docinfo_td {
+    width: 55%;
+    padding-right: 5px;
+    text-align: left;
+}
+
+.menu_doctype_td,.menu_docinfo_td { width: 20%; }

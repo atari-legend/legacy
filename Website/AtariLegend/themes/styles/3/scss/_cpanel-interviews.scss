@@ -1,15 +1,29 @@
-/*************************************************************/	
-/**********************PICASSO SKIN***************************/
-/*************************************************************/ 
+//*************************************************************/
+//**********************PICASSO SKIN***************************/
+//*************************************************************/
+//*************************************************************/
+//***************CPanel INTERVIEWS section css*****************/
+//*************************************************************/
+//*----------------------Interviews main--------------------- */
 
-/*************************************************************/	
-/***************CPanel INTERVIEWS section css*****************/
-/*************************************************************/ 
+.interviews_main_table {
+    display: table;
+    width: 100%;
+}
 
-/*---------------------------------------------------------- 
-Interviews main
------------------------------------------------------------- */
-.interviews_main_table{display:table; width:100%;}
-.interviews_main_photo{display:table-cell;width:20%;}
-.interviews_main_preview{display:table-cell;width:80%;vertical-align:middle;}
-.interviews_main_preview_100{display:table-cell;width:100%;vertical-align:middle;}
+.interviews_main_photo {
+    display: table-cell;
+    width: 20%;
+}
+
+.interviews_main_preview {
+    display: table-cell;
+    width: 80%;
+    vertical-align: middle;
+}
+
+.interviews_main_preview_100 {
+    display: table-cell;
+    width: 100%;
+    vertical-align: middle;
+}
