@@ -1,16 +1,32 @@
-/*************************************************************/	
-/**********************LEGACY SKIN****************************/
-/*************************************************************/ 
+//*************************************************************/
+//**********************LEGACY SKIN****************************/
+//*************************************************************/
+//*************************************************************/
+//*****************CPanel NEWS section css********************/
+//*************************************************************/
+//*----------------------------------------------------------
+//News Edit Image
+//------------------------------------------------------------ */
+.news_images_container {
+    display: table;
+    vertical-align: middle;
+}
 
-/*************************************************************/	
-/*****************CPanel NEWS section css********************/
-/*************************************************************/ 
+.news_images_check {
+    display: table-cell;
+    width: 5%;
+    vertical-align: middle;
+}
 
+.news_images_display {
+    display: table-cell;
+    width: 25%;
+    vertical-align: middle;
+}
 
-/*---------------------------------------------------------- 
-News Edit Image
------------------------------------------------------------- */	
-.news_images_container{display:table;vertical-align:middle;}
-.news_images_check{display:table-cell;width:5%;vertical-align:middle;}
-.news_images_display{display:table-cell;width:25%;vertical-align:middle;}
-.news_images_name{display:table-cell;width:70%;vertical-align:middle;padding-left:15px;}
+.news_images_name {
+    display: table-cell;
+    width: 70%;
+    padding-left: 15px;
+    vertical-align: middle;
+}

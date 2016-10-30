@@ -1,85 +1,108 @@
-/*************************************************************/	
-/**********************LEGACY SKIN****************************/
-/*************************************************************/ 
-
-/*************************************************************/	
-/*****************CPanel LINKS section css********************/
-/*************************************************************/ 
-
-/*---------------------------------------------------------- 
-Links addnew
------------------------------------------------------------- */
-.links_addnew_area { background : black;
-				color: #ffffff;				
-				width: 90%;
-				height: 150px;
-				margin-top:0;
-				padding: 0;
-				padding-left: 5px;
-				border: 1px solid #008b8b;
-				text-align: left;
+//*************************************************************/
+//**********************LEGACY SKIN****************************/
+//*************************************************************/
+//*************************************************************/
+//*****************CPanel LINKS section css********************/
+//*************************************************************/
+//*----------------------------------------------------------
+//Links addnew
+//------------------------------------------------------------ */
+.links_addnew_area {
+    width: 90%;
+    height: 150px;
+    padding: 0;
+    padding-left: 5px;
+    margin-top: 0;
+    color: #ffffff;
+    text-align: left;
+    background: black;
+    border: 1px solid #008b8b;
 }
 
-.links_addnew_row select  { 
-	background-color: black;
-	border: 1px solid #008b8b;
-	color: #ffffff;				
-	margin-top:5px;
-	padding: 0;
-	padding-left: 5px;
-	width: 185px;
-	height: 25px;
-	margin-top: 0;
+.links_addnew_row select {
+    width: 185px;
+    height: 25px;
+    padding: 0;
+    padding-left: 5px;
+    margin-top: 5px;
+    margin-top: 0;
+    background-color: black;
+    color: #ffffff;
+    border: 1px solid #008b8b;
 }
 
-.links_addnew_text{width:25%;display:table-cell; vertical-align:top;}
-.links_addnew_input{width:75%;display:table-cell;}
-.links_addnew_row{display:table;width:100%;}
+.links_addnew_text {
+    display: table-cell;
+    width: 25%;
+    vertical-align: top;
+}
 
-.links_addnew_info { font-size: 10pt; color: black; padding: 5px;}
+.links_addnew_input {
+    display: table-cell;
+    width: 75%;
+}
 
-.links_addnew_link:link { color: white;}
+.links_addnew_row {
+    display: table;
+    width: 100%;
+}
 
-.links_addnew_link:visited { color: white;}
+.links_addnew_info {
+    padding: 5px;
+    font-size: 10pt;
+    color: black;
+}
 
-.links_addnew_link:hover { color: black;}
+.links_addnew_link:link { color: white; }
+.links_addnew_link:visited { color: white; }
+.links_addnew_link:hover { color: black; }
+//*----------------------------------------------------------
+//Links Modify list
+//------------------------------------------------------------ */
+.links_modlist_tdline {
+    padding: 5px;
+    font-size: 10pt;
+    color: black;
+}
 
+.user_stats_img_dark {
+    max-width: 100%;
+    margin-top: 10px;
+    margin-right: 5px;
+    margin-bottom: 10px;
+    margin-left: 5px;
+    opacity: 0.8;
+    filter: alpha(opacity=40);
+    box-shadow: 0 0 12px black;
+}
 
-/*---------------------------------------------------------- 
-Links Modify list
------------------------------------------------------------- */
-.links_modlist_tdline { font-size: 10pt; color: black; padding: 5px;}
+.links_list_text { margin-right: 1%; }
+.links_list_input { margin-left: 1%; }
+.links_list_row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
-.user_stats_img_dark{ 
-					box-shadow: 0 0 12px black;
-					margin-left : 5px;
-					margin-right : 5px;
-					margin-top : 10px;
-					margin-bottom : 10px;
-					max-width: 100%;
-					opacity: 0.8;
-					filter: alpha(opacity=40); /* For IE8 and earlier */}
-					
-.links_list_text{margin-right:1%;}
-.links_list_input{margin-left:1%;}
+//*----------------------------------------------------------
+//Links category
+//------------------------------------------------------------ */
+.link_cat_td { text-align: right; }
+//*----------------------------------------------------------
+//Links Modify
+//------------------------------------------------------------ */
+.links_mod_text {
+    display: table-cell;
+    width: 35%;
+    vertical-align: top;
+}
 
-.links_list_row{
+.links_mod_input {
+    display: table-cell;
+    width: 65%;
+}
 
-  display: flex; 
-  justify-content: center;
-  align-items: center;
- }
- 
-
-/*---------------------------------------------------------- 
-Links category
------------------------------------------------------------- */
-.link_cat_td { text-align:right;}
-
-
-/*---------------------------------------------------------- 
-Links Modify
------------------------------------------------------------- */					
-.links_mod_text{width:35%;display:table-cell; vertical-align:top;}
-.links_mod_input{width:65%;display:table-cell;}
-.links_mod_row{display:table;width:100%;}
+.links_mod_row {
+    display: table;
+    width: 100%;
+}

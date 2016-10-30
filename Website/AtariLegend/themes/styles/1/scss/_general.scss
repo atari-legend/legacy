@@ -1,576 +1,557 @@
-/*********************************************************************/	
-/**************************LEGACY SKIN********************************/
-/*********************************************************************/
-
-/*********************************************************************/ 
-/**** This is the css code for general skin specific css settings ****/
-/*********************************************************************/ 
-
-/*---------------------------------------------------------- 
-load the main font
------------------------------------------------------------- */
+//*********************************************************************/
+//**************************LEGACY SKIN********************************/
+//*********************************************************************/
+//*********************************************************************/
+//**** This is the css code for general skin specific css settings ****/
+//*********************************************************************/
+//*----------------------------------------------------------
+//load the main font
+//------------------------------------------------------------ */
 @font-face {
     font-family: 'Audiowide';
+    font-style: normal;
+    font-weight: normal;
     src: url('../font/audiowide-regular-webfont.eot');
     src: url('../font/audiowide-regular-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../font/audiowide-regular-webfont.woff2') format('woff2'),
-         url('../font/audiowide-regular-webfont.woff') format('woff'),
-         url('../font/audiowide-regular-webfont.ttf') format('truetype'),
-         url('../font/audiowide-regular-webfont.svg#audiowideregular') format('svg');
-    font-weight: normal;
-    font-style: normal;
+                   url('../font/audiowide-regular-webfont.woff2') format('woff2'),
+                   url('../font/audiowide-regular-webfont.woff') format('woff'),
+                   url('../font/audiowide-regular-webfont.ttf') format('truetype'),
+                   url('../font/audiowide-regular-webfont.svg#audiowideregular') format('svg');
 }
 
-* { margin: 0; padding: 0; }
-
-html { overflow-y: scroll; 
-	overflow-x: hidden;
+* {
+    padding: 0;
+    margin: 0;
 }
 
-body { background-color: black; 
-	  font-family: Audiowide, Arial, helvetica, sans-serif;
+html {
+    overflow-x: hidden;
+    overflow-y: scroll;
 }
 
-body a {text-decoration:none;}
-body a:hover {text-decoration:none;}
-body a:visited {text-decoration:none;}
+body {
+    font-family: Audiowide, Arial, helvetica, sans-serif;
+    background-color: black;
+}
 
-img { display: block;}
-
-/*---------------------------------------------------------- 
- Main site width
------------------------------------------------------------- */
+body a { text-decoration: none; }
+body a:hover { text-decoration: none; }
+body a:visited { text-decoration: none; }
+img { display: block; }
+//*----------------------------------------------------------
+// Main site width
+//------------------------------------------------------------ */
 #wrapper {
-	width: 100%;	
-	max-width: 1920px;
-	margin: auto;
-} 
-	
+    width: 100%;
+    max-width: 1920px;
+    margin: auto;
+}
+
 #wrapper_header {
-	width: 100%;	
-	max-width: 1280px;
-	margin: auto;
-} 
- 
+    width: 100%;
+    max-width: 1280px;
+    margin: auto;
+}
+
 #main {
-	width: 100%;
-	margin-right: 5%;
-	float: left;
-}		
-	
-/*------------------------------------------------------------
-Standard tile settings 
-
-Up until width of 639 we have 1 tile per rows
-From 640 to 800 we have 2 tiles.
-From a width of 801 we will be having rows of 3 tiles 
--------------------------------------------------------------*/
-.column-left { width: 32%; 
-	 float:left;
+    float: left;
+    width: 100%;
+    margin-right: 5%;
 }
 
-.column-center { width: 32%; 
-	 float:left;
-	 margin-left: 2%;
+//*------------------------------------------------------------
+//Standard tile settings
+//
+//Up until width of 639 we have 1 tile per rows
+//From 640 to 800 we have 2 tiles.
+//From a width of 801 we will be having rows of 3 tiles
+//-------------------------------------------------------------*/
+.column-left {
+    float: left;
+    width: 32%;
 }
 
-.column-right { width: 32%; 
-	 float:right;
+.column-center {
+    float: left;
+    width: 32%;
+    margin-left: 2%;
 }
 
-.column-wide-left { width: 64%; 
-	 float:left;
-	 margin-top:0;
+.column-right {
+    float: right;
+    width: 32%;
 }
 
-.column-wide-right { width: 32%; 
-	 float:right;
-	 margin-top:0;
+.column-wide-left {
+    float: left;
+    width: 64%;
+    margin-top: 0;
 }
 
-.column-wide-right_1920 {display: none;	}
-.column-wide-left_1920 {display: none;}
-.column-wide-center_1920{display: none;}
-
-.standard_tile  { width: 100%; 
-		background-color: #122323;
-		border-top: 10px solid #01b5b5;
-		border-bottom: 3px solid #01b5b5;
-	}
-
-.standard_tile_line{ border-bottom: 2px solid #000000;
-	}
-	
-.standard_tile_background{
-		position:relative;
+.column-wide-right {
+    float: right;
+    width: 32%;
+    margin-top: 0;
 }
 
-.standard_tile_image{ width: 100%; }
-
-.standard_tile_subtext
-{
-	font-size:10pt; 
-	color:#bcbdbd;
+.column-wide-right_1920 { display: none; }
+.column-wide-left_1920 { display: none; }
+.column-wide-center_1920 { display: none; }
+.standard_tile {
+    width: 100%;
+    background-color: #122323;
+    border-top: 10px solid #01b5b5;
+    border-bottom: 3px solid #01b5b5;
 }
 
-.standard_tile p { 
-		text-align: left;
-		border-right: 2px solid #01b5b5;
-		/*border-left: 2px solid #01b5b5;*/
-		padding-left: 4%;
-		padding-right: 4%;
-		width: 91.7%;
-}
-				
-.standard_tile_title{ 
-		background: rgb(0, 80, 80)	;   /* Fallback for web browsers that doesn't support RGBa */
-        background: rgba(0, 80, 80, 0.6);   /* RGBa with 0.6 opacity */
-		padding-top:3%;
-		font-size : 17pt;
-		bottom: 0;
-		color : white; 	
-		z-index:1;
-		position:absolute;
-	    border-bottom: 2px solid #01b5b5;
+.standard_tile_line { border-bottom: 2px solid #000000; }
+.standard_tile_background { position: relative; }
+.standard_tile_image { width: 100%; }
+.standard_tile_subtext {
+    font-size: 10pt;
+    color: #bcbdbd;
 }
 
-.standard_tile_explanation { 
-					position: relative;
-					margin-bottom: 4%;
-					padding-left: 3%;
-					padding-right: 3%;
-					padding-bottom: 3%;}		
-
-.standard_tile h1 { color: white;
-			font-size: 18pt;
-			font-weight: 100;
-			text-align: center;	
-			margin-top:20px;
-			margin-bottom:20px;
-	}
-	
-.standard_tile h2 { color: $bg-color; 
-			font-size: 10pt;
-			font-weight: 100;
-			font-style: italic;
-			float: right;	
-	}
-	
-.standard_tile h3 { color: white;
-			font-size: 10pt;
-			font-weight: 100;
-			text-align: center;
-	}
-	
-.standard_tile h4 { color: white;
-			font-size: 12pt;
-			font-weight: 100;
-			text-align: left;
-	}
- 
-.standard_tile h5 { color: #9c9c9c;
-			font-size: 9pt;
-			font-weight: 100;
-			text-align: left;
-	}
-
-.standard_tile h6 { color: white;
-			font-size: 11pt;
-			font-weight: 100;
-			text-align: left;
-	}
-	
-.standard_tile_input { background : url(../images/logon_input.png) 0 0 no-repeat; 
-				color: #ffffff;				
-				width: 85%;
-				height: 44px;
-				margin-top:0;
-				padding: 0;
-				padding-left: 5px;
-				border: 0;
-				text-align: left;
-				display: block;
-				background-size: 85% 44px;
-				font-family: Audiowide;	
+.standard_tile p {
+    width: 91.7%;
+    padding-right: 4%;
+    text-align: left;
+    border-right: 2px solid #01b5b5;
+    /*border-left: 2px solid #01b5b5;
+    */padding-left: 4%;
 }
 
-.standard_tile_input_small { background : black;
-				color: #ffffff;				
-				width: 185px;
-				height: 25px;
-				margin-top:0;
-				padding: 0;
-				padding-left: 5px;
-				border: 1px solid #008b8b;
-				text-align: left;
-				/*display: block;*/
-				font-family: Audiowide;	
+.standard_tile_title {
+    position: absolute;
+    bottom: 0;
+    z-index: 1;
+    /* RGBa with 0.6 opacity */
+    padding-top: 3%;
+    font-size: 17pt;
+    color: white;
+    background: rgb(0, 80, 80);
+    /* Fallback for web browsers that doesn't support RGBa */
+    background: rgba(0, 80, 80, 0.6);
+    border-bottom: 2px solid #01b5b5;
 }
 
-.standard_tile_input_area { 
-				background : black;
-				color: #ffffff;				
-				width: 90%;
-				height: 40px;
-				margin-top:0;
-				padding: 0;
-				padding-left: 5px;
-				border: 1px solid #008b8b;
-				text-align: left;
-				/*display: block;*/
-				font-family: Audiowide;	
+.standard_tile_explanation {
+    position: relative;
+    padding-right: 3%;
+    padding-bottom: 3%;
+    padding-left: 3%;
+    margin-bottom: 4%;
+}
+
+.standard_tile h1 {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 18pt;
+    font-weight: 100;
+    color: white;
+    text-align: center;
+}
+
+.standard_tile h2 {
+    float: right;
+    font-size: 10pt;
+    font-style: italic;
+    font-weight: 100;
+    color: $bg-color;
+}
+
+.standard_tile h3 {
+    font-size: 10pt;
+    font-weight: 100;
+    color: white;
+    text-align: center;
+}
+
+.standard_tile h4 {
+    font-size: 12pt;
+    font-weight: 100;
+    color: white;
+    text-align: left;
+}
+
+.standard_tile h5 {
+    font-size: 9pt;
+    font-weight: 100;
+    color: #9c9c9c;
+    text-align: left;
+}
+
+.standard_tile h6 {
+    font-size: 11pt;
+    font-weight: 100;
+    color: white;
+    text-align: left;
+}
+
+.standard_tile_input {
+    display: block;
+    width: 85%;
+    height: 44px;
+    padding: 0;
+    padding-left: 5px;
+    margin-top: 0;
+    font-family: Audiowide;
+    color: #ffffff;
+    text-align: left;
+    background: url(../images/logon_input.png) 0 0 no-repeat;
+    background-size: 85% 44px;
+    border: 0;
+}
+
+.standard_tile_input_small {
+    width: 185px;
+    height: 25px;
+    padding: 0;
+    padding-left: 5px;
+    margin-top: 0;
+    color: #ffffff;
+    text-align: left;
+    background: black;
+    border: 1px solid #008b8b;
+    /*display: block;
+    */font-family: Audiowide;
+}
+
+.standard_tile_input_area {
+    width: 90%;
+    height: 40px;
+    padding: 0;
+    padding-left: 5px;
+    margin-top: 0;
+    color: #ffffff;
+    text-align: left;
+    background: black;
+    border: 1px solid #008b8b;
+    /*display: block;
+    */font-family: Audiowide;
 }
 
 #text_area_big { height: 150px; }
-
-.standard_tile th { color: white;
-			font-size: 12pt;
-			font-weight: bold;
-			text-align: center;
-	}
-
-.standard_tile_link:link { color: white;}
-
-.standard_tile_link:visited { color: white;}
-
-.standard_tile_link:hover { color: #01b5b5;}
-
-.standard_tile_link_reverse:link { color: #01b5b5;}
-
-.standard_tile_link_reverse:visited { color: #01b5b5;}
-
-.standard_tile_link_reverse:hover { color: white;}
-
-.standard_tile_link_cpanel:link { color: #01b5b5;}
-
-.standard_tile_link_cpanel:visited { color: #01b5b5;}
-
-.standard_tile_link_cpanel:hover { color: white;}
-
-.standard_tile_link_black:link { color: black;
-	font-weight:bold;
+.standard_tile th {
+    font-size: 12pt;
+    font-weight: bold;
+    color: white;
+    text-align: center;
 }
 
-.standard_tile_link_black:visited { color: black;}
-
-.standard_tile_link_black:hover { color: white;}
-
-.standard_tile_link_button:link { 
-		color : black;
-} 
-
-.standard_list_entry{position : relative;
-		width: 100%;
-		height: 140px;
-		display: table;
- }
- 
-.standard_list_entry_odd{position : relative;
-		width: 100%;
-		height: 140px;
-		display: table;
-		background: black;
- }
-
-.standard_list_entry_left{
-		left: 0;
-		width: 50%;
-		position: absolute;
-		top: 50%;
-		transform: translateY(-50%);
+.standard_tile_link:link { color: white; }
+.standard_tile_link:visited { color: white; }
+.standard_tile_link:hover { color: #01b5b5; }
+.standard_tile_link_reverse:link { color: #01b5b5; }
+.standard_tile_link_reverse:visited { color: #01b5b5; }
+.standard_tile_link_reverse:hover { color: white; }
+.standard_tile_link_cpanel:link { color: #01b5b5; }
+.standard_tile_link_cpanel:visited { color: #01b5b5; }
+.standard_tile_link_cpanel:hover { color: white; }
+.standard_tile_link_black:link {
+    font-weight: bold;
+    color: black;
 }
 
-.standard_list_entry_left img { max-width: 100%;
-		width: 80%;
-		box-shadow: 0 0 7px $bg-color;
-		margin-left: 15px;
+.standard_tile_link_black:visited { color: black; }
+.standard_tile_link_black:hover { color: white; }
+.standard_tile_link_button:link { color: black; }
+.standard_list_entry {
+    position: relative;
+    display: table;
+    width: 100%;
+    height: 140px;
 }
 
-.standard_list_entry_left img:hover{ box-shadow: 0 0 7px white;}
-
-.standard_list_entry_right{
-		left: 48%;
-		width: 50%;
-		position: absolute;
-		top: 50%;
-		transform: translateY(-50%);
+.standard_list_entry_odd {
+    position: relative;
+    display: table;
+    width: 100%;
+    height: 140px;
+    background: black;
 }
- 
+
+.standard_list_entry_left {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 50%;
+    transform: translateY(-50%);
+}
+
+.standard_list_entry_left img {
+    max-width: 100%;
+    width: 80%;
+    margin-left: 15px;
+    box-shadow: 0 0 7px $bg-color;
+}
+
+.standard_list_entry_left img:hover { box-shadow: 0 0 7px white; }
+.standard_list_entry_right {
+    position: absolute;
+    top: 50%;
+    left: 48%;
+    width: 50%;
+    transform: translateY(-50%);
+}
+
 .standard_list_entry_right_news_text {
-		margin: 0;
-  		padding: 0;
-  		box-sizing: border-box;
-
-		display: block;
-  		/* Fallback for non-webkit */
-  		display: -webkit-box;
-  		height: 70px;
-  		/* Fallback for non-webkit */
-    		line-height: 1.2;
-  		-webkit-line-clamp: 5;
-  		-webkit-box-orient: vertical;
-  		overflow: hidden;
-  		text-overflow: ellipsis;		
+    display: block;
+    /* Fallback for non-webkit */
+    display: -webkit-box;
+    height: 70px;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    /* Fallback for non-webkit */
+    line-height: 1.2;
+    text-overflow: ellipsis;
+    box-sizing: border-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
 }
 
-.standard_tile_text { padding : 20px;}
-
-.standard_tile select  { 
-	background-color: black;
-	border: 1px solid #008b8b;
-	color: #ffffff;				
-	margin-top:5px;
-	padding: 0;
-	padding-left: 5px;
-	font-family: Audiowide;	
-	width: 78%;
-	height: 20px;}
-
-#small_select{ 
-	width: 50px;
-	height: 25px;
+.standard_tile_text { padding: 20px; }
+.standard_tile select {
+    width: 78%;
+    height: 20px;
+    padding: 0;
+    padding-left: 5px;
+    margin-top: 5px;
+    font-family: Audiowide;
+    background-color: black;
+    color: #ffffff;
+    border: 1px solid #008b8b;
 }
 
-#medium_select{ 
-	width: 185px;
-	margin-top: 0;
-	height: 25px;
+#small_select {
+    width: 50px;
+    height: 25px;
 }
 
-#medium_select2{ 
-	width: 140px;
-	margin-top: 0;
-	height: 25px;
-}	
+#medium_select {
+    width: 185px;
+    height: 25px;
+    margin-top: 0;
+}
 
-#other{border-right: 1px solid #007878;}
+#medium_select2 {
+    width: 140px;
+    height: 25px;
+    margin-top: 0;
+}
 
+#other { border-right: 1px solid #007878; }
 .centered_fieldset {
-	text-align:center;
-	margin: auto;
-
+    margin: auto;
+    text-align: center;
 }
 
-/*------------------------------------------------------------
-Standard table settings 
--------------------------------------------------------------*/
-#column-left-cpanel { width: 20%; 
-	 float:left;
-	 margin-right: 1%;
+//*------------------------------------------------------------
+//Standard table settings
+//-------------------------------------------------------------*/
+#column-left-cpanel {
+    float: left;
+    width: 20%;
+    margin-right: 1%;
 }
 
-#column-center-cpanel { width: 58%; 
-	 float:left;
-}	 
+#column-center-cpanel {
+    float: left;
+    width: 58%;
+}
 
-#column-right-cpanel { width: 20%; 
-	 float:right;
-	 margin-left: 1%;
+#column-right-cpanel {
+    float: right;
+    width: 20%;
+    margin-left: 1%;
 }
 
 .standard_table_list {
-	width: 100%;
-	border: solid 1px black; 
-	background-color:#00d3d3;
-	margin-left:auto;
-	margin-right:auto;
-	border-spacing: 0;
-	text-align:left;
-	padding:0;
+    width: 100%;
+    padding: 0;
+    margin-right: auto;
+    margin-left: auto;
+    text-align: left;
+    background-color: #00d3d3;
+    border: solid 1px black;
+    border-spacing: 0;
 }
 
 .standard_table_list  li {
-	color: white;
-	font-size: 10pt;
-	font-weight: 100;
-	text-align: center;
-	list-style-type: none;
+    font-size: 10pt;
+    font-weight: 100;
+    color: white;
+    text-align: center;
+    list-style-type: none;
 }
 
 .standard_table_list th {
-	border-bottom: solid 1px black;
-	background-color:#006f6f;
-	border-collapse: collapse;
-	padding-top:3px;
-	padding-bottom:3px;
-	padding-left:3px;
-	margin:0px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-left: 3px;
+    margin: 0;
+    background-color: #006f6f;
+    border-collapse: collapse;
+    border-bottom: solid 1px black;
 }
 
-.standard_table_list tr:nth-child(even){
-	background-color:#00d3d3;
-}
-
-.standard_table_list tr:nth-child(odd){
-	background-color:#006f6f;
-}
-
-.standard_table_list tr:hover {
-	background-color:#294f4f;
-}
-
+.standard_table_list tr:nth-child(even) { background-color: #00d3d3; }
+.standard_table_list tr:nth-child(odd) { background-color: #006f6f; }
+.standard_table_list tr:hover { background-color: #294f4f; }
 .standard_table_list td {
-	border-bottom: solid 1px black;
-	padding-top:1px;
-	padding-bottom:1px;
-	padding-left:3px;
-	margin:0px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    padding-left: 3px;
+    margin: 0;
+    border-bottom: solid 1px black;
 }
 
-.standard_table_center { color: white;
-			font-size: 10pt;
-			font-weight: 100;
-			text-align: center;
+.standard_table_center {
+    font-size: 10pt;
+    font-weight: 100;
+    color: white;
+    text-align: center;
 }
 
-.standard_table_left { color: white;
-			font-size: 10pt;
-			font-weight: 100;
-			text-align: left;
-			padding-left: 2px;
+.standard_table_left {
+    padding-left: 2px;
+    font-size: 10pt;
+    font-weight: 100;
+    color: white;
+    text-align: left;
 }
 
-.standard_table_right { color: white;
-			font-size: 10pt;
-			font-weight: 100;
-			text-align: right;
-			padding-right: 2px;
+.standard_table_right {
+    padding-right: 2px;
+    font-size: 10pt;
+    font-weight: 100;
+    color: white;
+    text-align: right;
 }
 
-.standard_table_center img {display: inline;}
-
-.topbutton_cpanel_small
-{
-  cursor: pointer;
-  border: 0;
-  background: #122323;
-  color: white;
-  height: 25px;
-  width: 80px;
-  font-size: 10pt;
-  border-bottom: 3px solid #122323;
-  border-left: 1px solid #122323;
+.standard_table_center img { display: inline; }
+.topbutton_cpanel_small {
+    width: 80px;
+    height: 25px;
+    font-size: 10pt;
+    color: white;
+    cursor: pointer;
+    background: #122323;
+    border: 0;
+    border-bottom: 3px solid #122323;
+    border-left: 1px solid #122323;
 }
 
 .topbutton_cpanel_small:hover {
-  background:#006f6f;
-  color: white;
-  border-bottom: 3px solid #122323;
+    color: white;
+    background: #006f6f;
+    border-bottom: 3px solid #122323;
 }
 
-.topbutton_cpanel
-{
-	@extend .topbutton_cpanel_small;
-	width: 120px;
+.topbutton_cpanel {
+    @extend .topbutton_cpanel_small;
+    width: 120px;
 }
 
-.topbutton_cpanel:hover
-{
-	@extend .topbutton_cpanel_small:hover;
+.topbutton_cpanel:hover { @extend .topbutton_cpanel_small:hover; }
+fieldset {
+    padding: 8px;
+    font-size: 11pt;
+    background: $bg-color;
+    border: solid 1px black;
 }
 
-fieldset { 
-	border: solid 1px black; 
-	background: $bg-color; 
-	padding: 8px;
-	font-size: 11pt;
+legend {
+    padding: 1px 10px;
+    color: white;
+    background: #006f6f;
+    border: black solid 1px;
 }
 
-legend{
-	border: black solid 1px;
-	padding: 1px 10px;
-	color: white;
-	background: #006f6f;
+//*------------------------------------------------------------
+//The CSS for the help tips
+//-------------------------------------------------------------*/
+.help-tip {
+    float: right;
+    width: 20px;
+    height: 20px;
+    margin-top: 5px;
+    margin-right: 5px;
+    font-size: 14px;
+    line-height: 22px;
+    text-align: center;
+    cursor: default;
+    background-color: black;
+    border: #00d3d3 solid 1px;
+    border-radius: 50%;
 }
 
-
-/*------------------------------------------------------------
-The CSS for the help tips
--------------------------------------------------------------*/
-.help-tip{
-	float: right;
-	margin-top: 5px;
-	margin-right: 5px;
-	text-align: center;
-	background-color: black;
-	border: #00d3d3 solid 1px;
-	border-radius: 50%;
-	width: 20px;
-	height: 20px;
-	font-size: 14px;
-	line-height: 22px;
-	cursor: default;
+.help-tip:before {
+    font-weight: bold;
+    color: #fff;
+    content: '?';
 }
 
-.help-tip:before{
-	content:'?';
-	font-weight: bold;
-	color:#fff;
+.help-tip:hover p {
+    display: block;
+    transform-origin: 100% 0;
+    -webkit-animation: fadeIn 0.3s ease-in-out;
+    animation: fadeIn 0.3s ease-in-out;
 }
 
-.help-tip:hover p{
-	display:block;
-	transform-origin: 100% 0%;
-
-	-webkit-animation: fadeIn 0.3s ease-in-out;
-	animation: fadeIn 0.3s ease-in-out;
-
+.help-tip p {
+    position: relative;
+    right: 290px;
+    //* The tooltip */
+    display: none;
+    width: 300px;
+    padding: 5px;
+    font-size: 13px;
+    line-height: 1.4;
+    text-align: left;
+    background-color: black;
+    color: #FFF;
+    border: #00d3d3 solid 1px;
+    border-radius: 3px;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
 }
 
-.help-tip p{	/* The tooltip */
-	display: none;
-	border: #00d3d3 solid 1px;
-	text-align: left;
-	background-color: black;
-	padding: 5px;
-	width: 300px;
-	position:relative;
-	border-radius: 3px;
-	box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
-	right: 290px;
-	color: #FFF;
-	font-size: 13px;
-	line-height: 1.4;
-}
-
-//I am removing the pointer as the alignment of the text box changes from '?' to '?' - this is done the be compliant with a resolution of 320 width. 
-//Test it for yourself to see what I mean
-//.help-tip p:before{ /* The pointer of the tooltip */
-//	position: absolute;
-//	content: '';
-//	width:0;
-//	height: 0;
-//	border:6px solid transparent;
-//	border-bottom-color:#1E2021;
-//	right:10px;
-//	top:-12px;
+// I am removing the pointer as the alignment of the text box changes from '?' to '?' - this is done the be compliant with a resolution of 320 width.// Test it for yourself to see what I mean// .help-tip p:before {
+//* The pointer of the tooltip */: //  position: absolute;
+//  content: '';
+//  width: 0;
+//  height: 0;
+//  border: 6px solid transparent;
+//  border-bottom-color: #1E2021;
+//  right: 10px;
+//  top: -12px;
 //}
 
-
-.help-tip p:after{ /* Prevents the tooltip from being hidden */
-	width:100%;
-	height:40px;
-	content:'';
-	position: absolute;
-	top:-40px;
-	left:0;
+.help-tip p:after {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    //* Prevents the tooltip from being hidden */
+    width: 100%;
+    height: 40px;
+    content: '';
 }
 
-/* CSS animation */
-
+//* CSS animation */
 @-webkit-keyframes fadeIn {
-	0% { 
-		opacity:0; 
-		transform: scale(0.6);
-	}
+    0% {
+        opacity: 0;
+        transform: scale(0.6);
+    }
 
-	100% {
-		opacity:100%;
-		transform: scale(1);
-	}
+    100% {
+        opacity: 100%;
+        transform: scale(1);
+    }
 }
 
 @keyframes fadeIn {
-	0% { opacity:0; }
-	100% { opacity:100%; }
+    0% { opacity: 0; }
+    100% { opacity: 100%; }
 }
