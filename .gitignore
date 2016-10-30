@@ -1,21 +1,25 @@
-$ cat .gitignore 
-# exclude everything except directory data 
-Website/AtariLegend/data/* 
+$ cat .gitignore
+# exclude everything except directory data
+Website/AtariLegend/data/*
 
-$ cat .gitignore 
+$ cat .gitignore
 # exclude everything except directory templates_c
 Website/AtariLegend/php/includes/smarty/templates_c/*
 
-$ cat .gitignore 
+$ cat .gitignore
 # exclude the connect.php file
 Website/AtariLegend/php/includes/connect.php
 
-$ cat .gitignore 
+$ cat .gitignore
 # exclude the SASS cache
 Website/AtariLegend/themes/.sass-cache/*
 Website/AtariLegend/themes/.pleeeaserc
+.sass-cache/*
+result/*
+node_modules
+scss-lint-report.xml
 
-$ cat .gitignore 
+$ cat .gitignore
 # exclude the SASS map file
 Website/AtariLegend/themes/styles/1/css/style.css
 Website/AtariLegend/themes/styles/1/css/style.css.map
@@ -23,3 +27,5 @@ Website/AtariLegend/themes/styles/2/css/style.css
 Website/AtariLegend/themes/styles/2/css/style.css.map
 Website/AtariLegend/themes/styles/3/css/style.css
 Website/AtariLegend/themes/styles/3/css/style.css.map
+style.css
+style.css.map
