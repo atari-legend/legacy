@@ -1,4 +1,4 @@
-{* 
+{*
 /***************************************************************************
                               crew_main.html
 *                            --------------------------
@@ -8,7 +8,7 @@
 *
 *   Id: crew_main.html,v 0.10 2005/10/29 Silver
 *   Id: crew_main.html,v 0.20 2016/10/04 STG
-*			- CPANEL 2.0
+*           - CPANEL 2.0
 *
 ***************************************************************************/
 
@@ -22,33 +22,33 @@ The main game page
 function crewinsert()
 {
     JSnewcrew=document.forms["insertcrew"].newcrew.value;
-	
-	if (JSnewcrew=='')
-	{
-		alert('Please fill in a crew name');
-	}
-	else
-	{
-    	// CONFIRM REQUIRES ONE ARGUMENT
-    	var message = "Are you sure you want to insert this crew into the database?";
-    	// CONFIRM IS BOOLEAN. THAT MEANS THAT
-    	// IT RETURNS TRUE IF 'OK' IS CLICKED
-    	// OTHERWISE IT RETURN FALSE
-    	var return_value = confirm(message);
-		
-    	if (return_value !="0")
-    	{
-    		url="db_crew.php?new_crew="+JSnewcrew+"&action=insert_crew";
-			location.href=url;
-    	} 
-	}
+
+    if (JSnewcrew=='')
+    {
+        alert('Please fill in a crew name');
+    }
+    else
+    {
+        // CONFIRM REQUIRES ONE ARGUMENT
+        var message = "Are you sure you want to insert this crew into the database?";
+        // CONFIRM IS BOOLEAN. THAT MEANS THAT
+        // IT RETURNS TRUE IF 'OK' IS CLICKED
+        // OTHERWISE IT RETURN FALSE
+        var return_value = confirm(message);
+
+        if (return_value !="0")
+        {
+            url="db_crew.php?new_crew="+JSnewcrew+"&action=insert_crew";
+            location.href=url;
+        }
+    }
 }
 
 function browseCrew(str) {
     if (str == "") {
         document.getElementById("crew_list").innerHTML = "";
         return;
-    } else { 
+    } else {
         if (window.XMLHttpRequest) {
             // code for IE7+, Firefox, Chrome, Opera, Safari
             xmlhttp = new XMLHttpRequest();
@@ -69,13 +69,13 @@ function browseCrew(str) {
 function searchCrew(str) {
     if (str == "") {
         str = "empty";
-			xmlhttp.onreadystatechange = function() {
+            xmlhttp.onreadystatechange = function() {
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
                 document.getElementById("crew_list").innerHTML = xmlhttp.responseText;
             }
-        }   
+        }
 
-    } else { 
+    } else {
         if (window.XMLHttpRequest) {
             // code for IE7+, Firefox, Chrome, Opera, Safari
             xmlhttp = new XMLHttpRequest();
@@ -101,64 +101,64 @@ function searchCrew(str) {
 
 {* Search crew section *}
 <div class="standard_tile">
-	<h1>CREW EDITOR	</h1>
-	<div class="standard_tile_line"></div>
-	<div class="standard_table_center">
-		<br>
-		Search for crew:<br>
-		<form action="../crew/crew_editor.php" method="get" name="post_menu_crew_set" id="menu_crew_set">
-			<select name="crewbrowse" size="1" id="quick_search_small_select" onchange="browseCrew(this.value)">
-				<option value="" SELECTED>-</option>
-				{html_options values=$az_value output=$az_output}
-			</select>
-			<input type="text" name="crewsearch" value="" onkeyup="searchCrew(this.value)" class="standard_tile_input_small">
-			<br>
-			<br>
-			{* Ajax *}
-			<div id="crew_list">
-				<select name="crew_select" id="quick_search_pub_select">
-					<option value="" SELECTED>-</option>
-					{foreach from=$crew item=line}	
-						{html_options values=$line.crew_id output=$line.crew_name}
-					{/foreach}
-				</select>
-			</div>
-			<br>
-			<br>
-			<input type="submit" value="Select" class="quick_search_games_button">
-		</form>
-		<br>
-		<div class="standard_tile_line"></div>
-		<br>
-		{* Add crew section *}
-		Add new Crew to db:
-		<form method="post" name="insertcrew">
-			<input type="text" name="newcrew" value="" class="standard_tile_input_small">
-			<br>
-			<br>
-			<input type="submit" value="Insert" class="quick_search_games_button" onClick="crewinsert(); return false;">
-		</form>
-	</div>
-	<br> 
+    <h1>CREW EDITOR </h1>
+    <div class="standard_tile_line"></div>
+    <div class="standard_table_center">
+        <br>
+        Search for crew:<br>
+        <form action="../crew/crew_editor.php" method="get" name="post_menu_crew_set" id="menu_crew_set">
+            <select name="crewbrowse" size="1" id="quick_search_small_select" onchange="browseCrew(this.value)">
+                <option value="" SELECTED>-</option>
+                {html_options values=$az_value output=$az_output}
+            </select>
+            <input type="text" name="crewsearch" value="" onkeyup="searchCrew(this.value)" class="standard_tile_input_small">
+            <br>
+            <br>
+            {* Ajax *}
+            <div id="crew_list">
+                <select name="crew_select" id="quick_search_pub_select">
+                    <option value="" SELECTED>-</option>
+                    {foreach from=$crew item=line}
+                        {html_options values=$line.crew_id output=$line.crew_name}
+                    {/foreach}
+                </select>
+            </div>
+            <br>
+            <br>
+            <input type="submit" value="Select" class="quick_search_games_button">
+        </form>
+        <br>
+        <div class="standard_tile_line"></div>
+        <br>
+        {* Add crew section *}
+        Add new Crew to db:
+        <form method="post" name="insertcrew">
+            <input type="text" name="newcrew" value="" class="standard_tile_input_small">
+            <br>
+            <br>
+            <input type="submit" value="Insert" class="quick_search_games_button" onClick="crewinsert(); return false;">
+        </form>
+    </div>
+    <br>
 </div>
 <br>
-{include file='1/admin/left_nav.html'}
+
 {* END crew section *}
 {/block}
 
 {block name=main_tile}
 <div class="standard_tile">
-	<h1>EDIT CREW</h1>
-	<div class="standard_tile_line"></div>
-	<div class="standard_tile_text">
-		<div class="left_nav_section">
-			In this section you can add or edit a crew. Search for a crew by using any of the 
-			functionalities on the left. 
-		</div>
-	<br>
-	<br>
-	<div class="standard_table_center">{if (isset($new_crew) and $new_crew <> '')}{$new_crew} added to the database!{/if}</div>
-	<br>
-	</div>
+    <h1>EDIT CREW</h1>
+    <div class="standard_tile_line"></div>
+    <div class="standard_tile_text">
+        <div class="left_nav_section">
+            In this section you can add or edit a crew. Search for a crew by using any of the
+            functionalities on the left.
+        </div>
+    <br>
+    <br>
+    <div class="standard_table_center">{if (isset($new_crew) and $new_crew <> '')}{$new_crew} added to the database!{/if}</div>
+    <br>
+    </div>
 </div>
 {/block}
