@@ -1,4 +1,4 @@
-{* 
+{*
 /***************************************************************************
 *                                frontpage.html
 *                            --------------------
@@ -14,26 +14,26 @@
 
 //****************************************************************************************
 // This is the front page of the cpanel (statistics)
-//**************************************************************************************** 
+//****************************************************************************************
 *}
 {extends file='1/admin/main.html'}
 {block name=main_body}
-	<div id="main" class="main_container_cpanel">
-		<div class="content_box_cpanel" id="column-left-cpanel">	
-			<br>
-			{block name=left_tile}
-				{include file='1/admin/left_nav.html'}
-			{/block}
-		</div>
-		<div class="content_box_cpanel" id="column-center-cpanel">
-			<br>
-			{block name=main_tile}{/block}
-		</div>
-		<div class="content_box_cpanel" id="column-right-cpanel">	
-			<br>
-			{block name=right_tile}
-				{include file='1/admin/quick_search_games.html'}
-			{/block}
-		</div>
-	</div>
+    <div id="main" class="main_container_cpanel">
+        <div class="content_box_cpanel" id="column_left_cpanel">
+            <br>
+            {block name=left_tile}
+                {include file='1/admin/left_nav.html'}
+            {/block}
+        </div>
+        <div class="content_box_cpanel" id="column_center_cpanel">
+            <br>
+            {block name=main_tile}{/block}
+        </div>
+        <div class="content_box_cpanel" id="column_right_cpanel">
+            <br>
+            {block name=right_tile}
+                {include file='1/admin/quick_search_games.html'}
+            {/block}
+        </div>
+    </div>
 {/block}

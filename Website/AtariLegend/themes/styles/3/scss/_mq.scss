@@ -55,7 +55,7 @@
 //screenstar tile - front page
 //------------------------------------------------------------ */
 @media screen and (min-width: 1495px){
-    .screenstar_position_front  { float:left; width: 94%; margin-top: -10px;}
+    .screenstar_position_front  { float: left; width: 94%; margin-top: -10px;}
 }
 
 
@@ -68,7 +68,7 @@
 }
 
 @media screen and (min-width: 1495px){
-    .datequote_position_front { float:left; width: 94%;}
+    .datequote_position_front { float: left; width: 94%;}
 }
 
 
@@ -76,7 +76,7 @@
 //Who is it - front page
 //------------------------------------------------------------ */
 @media screen and (min-width: 1495px){
-    .whoisit_position_front  { float:right;}
+    .whoisit_position_front  { float: right;}
 }
 
 
@@ -92,7 +92,7 @@
 //Did you know tile - front page
 //------------------------------------------------------------ */
 @media screen and (min-width: 1495px){
-    .didyouknow_position_front  {float:left; width:100%;}
+    .didyouknow_position_front  {float: left; width: 100%;}
 }
 
 
@@ -100,7 +100,7 @@
 //Statistics tile - front page
 //------------------------------------------------------------ */
 @media screen and (min-width: 1495px){
-    .statistics_position_front  {float:left; width:100%;}
+    .statistics_position_front  {float: left; width: 100%;}
 }
 
 
@@ -128,14 +128,14 @@
 //------------------------------------------------------------ */
 //* Make the table view responsive */
 @media screen and (max-width: 799px) {
-    #welcome_cpanel{ width:100%; margin-bottom: 15px;}
-    #user_stats{ width:100%; }
-    #main_stats_position_front{ width:100%; float: left; }
-    #left_nav_position_front{ width:100%;  float: left;}
+    #welcome_cpanel{ width: 100%; margin-bottom: 15px;}
+    #user_stats{ width: 100%; }
+    #main_stats_position_front{ width: 100%; float: left; }
+    #left_nav_position_front{ width: 100%;  float: left;}
 }
 
 @media screen and (max-width: 480px) {
-    #welcome_cpanel{ width:100%; margin-top: 0;}
+    #welcome_cpanel{ width: 100%; margin-top: 0;}
     #main_stats_position_front{ margin-top: -5px;}
 }
 
@@ -144,11 +144,11 @@
       flex-direction: column;
     }
 
-    #child_some_stats,#child_good_karma,#child_bad_karma{width:100%; float:left;}
-    #child_good_karma,#child_bad_karma{margin-top:20px}
+    #child_some_stats,#child_good_karma,#child_bad_karma{width: 100%; float: left;}
+    #child_good_karma,#child_bad_karma{margin-top: 20px}
 
     .main_stats_container >div {
-        width:100%;
+        width: 100%;
         }
 
     .main_stats_child {
@@ -162,24 +162,24 @@
 //Quick search games
 //------------------------------------------------------------ */
 @media screen and (max-width: 1099px) {
-    #quick_search_options{margin-left:5%; width:100%; }
+    #quick_search_options{margin-left: 5%; width: 100%; }
 }
 
 @media screen and (max-width: 799px) {
-    #quick_search_options{display:table;
-        width:50%;
-        margin-left:40%;
+    #quick_search_options{display: table;
+        width: 50%;
+        margin-left: 40%;
         margin-right: auto;
-        text-align:left;
+        text-align: left;
     }
 }
 
 @media screen and (max-width: 599px) {
-    #quick_search_options { margin-left:30%;}
+    #quick_search_options { margin-left: 30%;}
 }
 
 @media screen and (max-width: 399px) {
-    #quick_search_options { width:75%; margin-left:15%;}
+    #quick_search_options { width: 75%; margin-left: 15%;}
 }
 
 
@@ -193,13 +193,13 @@
 }
 
 @media screen and (max-width: 1280px) {
-    #child_1, #child_2{ width:100%;}
+    #child_1, #child_2{ width: 100%;}
 }
 
 @media screen and (max-width: 480px) {
-    .user_details_text{width:50%;display:inline;}
-    .user_details_input{width:50%;display:inline;}
-    .user_details_row{width:50%;}
+    .user_details_text{width: 50%;display: inline;}
+    .user_details_input{width: 50%;display: inline;}
+    .user_details_row{width: 50%;}
 }
 
 
@@ -210,11 +210,11 @@
     .user_main_container{
             flex-direction: column;
     }
-    #user_main_child_3{margin-top:5px;}
+    #user_main_child_3{margin-top: 5px;}
 }
 
 @media screen and (max-width: 480px) {
-    #user_main{ width:100%; margin-top: -10px;}
+    #user_main{ width: 100%; margin-top: -10px;}
     #leftnav_position_usermain{ margin-top: 20px;}
 }
 
@@ -234,17 +234,17 @@
     .lastvisit_td{display: none;}
     .joindate_td{display: none;}
     .joindate_th{display: none;}
-    #usersearch td {text-align:center;}
-    #usersearch th {text-align:center;}
+    #usersearch td {text-align: center;}
+    #usersearch th {text-align: center;}
 }
 
 //*----------------------------------------------------------
 //Links addnew
 //------------------------------------------------------------ */
 @media screen and (max-width: 480px) {
-    .links_addnew_text{width:50%;display:inline;}
-    .links_addnew_input{width:50%;display:inline;}
-    .links_addnew_row{width:50%;}
+    .links_addnew_text{width: 50%;display: inline;}
+    .links_addnew_input{width: 50%;display: inline;}
+    .links_addnew_row{width: 50%;}
 }
 
 
@@ -258,7 +258,7 @@
 }
 
 @media screen and (max-width: 480px) {
-    .user_stats_img_dark{display : none;}
+    .user_stats_img_dark{display: none;}
 }
 
 
@@ -278,9 +278,9 @@
 //Links Modify
 //------------------------------------------------------------ */
 @media screen and (max-width: 550px) {
-    .links_mod_text{width:100%;display:block;}
-    .links_mod_input{width:100%;display:block;}
-    .links_mod_row{width:100%;margin-bottom:10px;}
+    .links_mod_text{width: 100%;display: block;}
+    .links_mod_input{width: 100%;display: block;}
+    .links_mod_row{width: 100%;margin-bottom: 10px;}
 }
 
 @media screen and (max-width: 600px) {
@@ -292,21 +292,21 @@
 //Games main
 //------------------------------------------------------------ */
 @media screen and (max-width: 1050px) {
-.games_main_row{width:90%; }
-.games_main_text{width:40%;}
-.games_main_input{width:60%;}
+.games_main_row{width: 90%; }
+.games_main_text{width: 40%;}
+.games_main_input{width: 60%;}
 }
 
 @media screen and (max-width: 550px) {
-    .games_main_text{width:35%;}
-    .games_main_input{width:65%;}
+    .games_main_text{width: 35%;}
+    .games_main_input{width: 65%;}
 }
 
 
 @media screen and (max-width: 480px) {
-    .games_main_text{display:inline;}
-    .games_main_input{display:inline;}
-    .games_main_row{width:50%;margin-left:10%}
+    .games_main_text{display: inline;}
+    .games_main_input{display: inline;}
+    .games_main_row{width: 50%;margin-left: 10%}
 }
 
 @media screen and (max-width: 1050px) {
@@ -314,7 +314,7 @@
         flex-direction: column;
         width: 100%;
     }
-    #child_1, #child_2{width:100%; margin-left:10%;}
+    #child_1, #child_2{width: 100%; margin-left: 10%;}
 }
 
 
@@ -322,16 +322,16 @@
 //Games list
 //------------------------------------------------------------ */
 @media screen and (max-width: 1174px) {
- .info_td,.year_td,#info_th,#year_th{display:none;}
+ .info_td,.year_td,#info_th,#year_th{display: none;}
 }
 
 @media screen and (max-width: 949px) {
- .dev_td,#dev_th{display:none;}
+ .dev_td,#dev_th{display: none;}
 }
 
 @media screen and (max-width: 600px) {
- .pub_td,#pub_th{display:none;}
- #game_th,.game_td{text-align:center;}
+ .pub_td,#pub_th{display: none;}
+ #game_th,.game_td{text-align: center;}
 }
 
 
@@ -339,31 +339,31 @@
 //Games detail
 //------------------------------------------------------------ */
 @media screen and (min-width: 1280px) {
-    #gd_other_features_left{display:none;}
-    #gd_other_features_right{display:none;}
+    #gd_other_features_left{display: none;}
+    #gd_other_features_right{display: none;}
 }
 
 @media screen and (max-width: 1279px) {
-    #gd_basic_game_info{width:100%; margin-bottom: 20px;}
-    #gd_other_features{display:none}
-    #gd_other_features_left{float:left; width:49%;}
-    #gd_other_features_right{float:right; width:49%;}
-    #gd_left{float:left; width:49%;}
-    #gd_right{float:right; width:49%;}
-    #gd_center{float:right; width:49%;}
-    #gd_back{margin-top:20px;}
-    #gd_publisher_info{margin-top:20px;}
+    #gd_basic_game_info{width: 100%; margin-bottom: 20px;}
+    #gd_other_features{display: none;}
+    #gd_other_features_left{float: left; width: 49%;}
+    #gd_other_features_right{float: right; width: 49%;}
+    #gd_left{float: left; width: 49%;}
+    #gd_right{float: right; width: 49%;}
+    #gd_center{float: right; width: 49%;}
+    #gd_back{margin-top: 20px;}
+    #gd_publisher_info{margin-top: 20px;}
 }
 
 @media screen and (max-width: 600px) {
-    #gd_basic_game_info_category{width:100%; float:left; margin-top:20px; margin-bottom:20px; margin-left:5%}
-    #gd_other_features_left{float:left; width:100%; margin-bottom:20px;}
-    #gd_game_aka{margin-bottom:20px;}
-    #gd_other_features_right{float:right; width:100%;}
-    #gd_left{float:left; width:100%;}
-    #gd_right{float:right; width:100%;}
-    #gd_center{float:right; width:100%;}
-    #gd_publisher_info{margin-top:0;}
+    #gd_basic_game_info_category{width: 100%; float: left; margin-top: 20px; margin-bottom: 20px; margin-left: 5%}
+    #gd_other_features_left{float: left; width: 100%; margin-bottom: 20px;}
+    #gd_game_aka{margin-bottom: 20px;}
+    #gd_other_features_right{float: right; width: 100%;}
+    #gd_left{float: left; width: 100%;}
+    #gd_right{float: right; width: 100%;}
+    #gd_center{float: right; width: 100%;}
+    #gd_publisher_info{margin-top: 0;}
 }
 
 
@@ -371,8 +371,8 @@
 //Games comment
 //------------------------------------------------------------ */
 @media screen and (max-width: 640px) {
-    .gc_left_head{display:none;}
-    .gc_left{display:none;}
+    .gc_left_head{display: none;}
+    .gc_left{display: none;}
 }
 
 //*----------------------------------------------------------
@@ -385,7 +385,7 @@
 }
 
 @media screen and (max-width: 1280px) {
-    #gu_child_1, #gu_child_2{ width:100%;}
+    #gu_child_1, #gu_child_2{ width: 100%;}
 }
 
 //*----------------------------------------------------------
@@ -415,10 +415,10 @@
       flex-direction: column;
     }
 
-    #review_screenshots,#review_text{width:100%; float:left;}
+    #review_screenshots,#review_text{width: 100%; float: left;}
 
     .review_container >div {
-        width:100%;
+        width: 100%;
         }
 
     .review_child {
@@ -426,7 +426,7 @@
             margin: 0 auto;
         }
 
-    .review_screenshot_order{display:inline-block; vertical-align:top;}
+    .review_screenshot_order{display: inline-block; vertical-align: top;}
 
 }
 
@@ -449,14 +449,14 @@
 //News approve
 //------------------------------------------------------------ */
 @media screen and (max-width: 480px) {
-    #news_approve_icon{display:none;}
+    #news_approve_icon{display: none;}
 }
 
 //*----------------------------------------------------------
 //News edit all
 //------------------------------------------------------------ */
 @media screen and (max-width: 480px) {
-    #news_approve_icon{display:none;}
+    #news_approve_icon{display: none;}
 }
 
 
@@ -464,8 +464,8 @@
 //News edit image
 //------------------------------------------------------------ */
 @media screen and (max-width: 600px) {
-    .news_images_name{ display:none;}
-    .news_images_container{text-align:center;}
+    .news_images_name{ display: none;}
+    .news_images_container{text-align: center;}
 }
 
 //*----------------------------------------------------------
@@ -476,10 +476,10 @@
       flex-direction: column;
     }
 
-    #child_edit_company, #child_add_company {float:left; margin-bottom: 30px;}
+    #child_edit_company, #child_add_company {float: left; margin-bottom: 30px;}
 
     .main_company_container >div {
-        width:100%;
+        width: 100%;
         }
 
     .main_company_child {
@@ -492,14 +492,14 @@
 //Interviews main
 //------------------------------------------------------------ */
 @media screen and (max-width: 480px) {
-    .interviews_main_photo{display:none;}
+    .interviews_main_photo{display: none;}
 }
 
 //*----------------------------------------------------------
 //Interviews preview
 //------------------------------------------------------------ */
 @media screen and (max-width: 650px) {
-    #interview_preview_photo{display:none;}
+    #interview_preview_photo{display: none;}
 }
 
 
@@ -507,81 +507,162 @@
 //Admin - DB updates
 //------------------------------------------------------------ */
 @media screen and (max-width: 500px) {
-    #td_db_result, #th_db_result,#th_db_state,#td_db_state,
-    #td_db_id,#th_db_id,#th_db_exe,#td_db_exe{display:none;}
+    #td_db_result,
+    #th_db_result,
+    #th_db_state,
+    #td_db_state,
+    #td_db_id,
+    #th_db_id,
+    #th_db_exe,
+    #td_db_exe {
+        display: none;
+    }
 }
 
 @media screen and (max-width: 600px) {
-    #td_db_result, #th_db_result,#th_db_state,#td_db_state,
-    #td_db_id, #th_db_id{display:none;}
+    #td_db_result,
+    #th_db_result,
+    #th_db_state,
+    #td_db_state,
+    #td_db_id,
+    #th_db_id {
+        display: none;
+    }
 }
 
 @media screen and (max-width: 900px) {
-    #td_db_result, #th_db_result,#th_db_state,#td_db_state{display:none;}
+    #td_db_result,
+    #th_db_result,
+    #th_db_state,
+    #td_db_state {
+        display: none;
+    }
 }
 
 @media screen and (max-width: 1279px) {
-    #td_db_result, #th_db_result{display:none;}
+    #td_db_result,
+    #th_db_result {
+        display: none;
+    }
 }
 
 //*----------------------------------------------------------
 //Admin - Change log
 //------------------------------------------------------------ */
 @media screen and (max-width: 450px) {
-    #log_subsection_th, #log_date_th, .log_subsection_td, .log_date_td{display:none;}
+    #log_subsection_th,
+    #log_date_th,
+    .log_subsection_td,
+    .log_date_td {
+        display: none;
+    }
 }
 
 @media screen and (max-width: 525px) {
-    #log_subsection_th, .log_subsection_td{display:none;}
+    #log_subsection_th,
+    .log_subsection_td {
+        display: none;
+    }
 }
 
 @media screen and (max-width: 725px) {
-    #log_name_th, .log_name_td{display:none;}
+    #log_name_th,
+    .log_name_td {
+        display: none;
+    }
 }
 
 @media screen and (max-width: 1200px) {
-    #log_sub_name_th, .log_subname_td{display:none;}
+    #log_sub_name_th,
+    .log_subname_td {
+        display: none;
+    }
 }
 
 //*----------------------------------------------------------
 //Menu editor - Menu list
 //------------------------------------------------------------ */
 @media screen and (max-width: 500px) {
-    #menu_crew_th, .menu_crew_td{display: none;}
-    #menu_disk_set_th, .menu_disk_set_td {text-align: center;}
+    #menu_crew_th,
+    .menu_crew_td {
+        display: none;
+    }
+
+    #menu_disk_set_th,
+    .menu_disk_set_td {
+        text-align: center;
+    }
 }
 
 @media screen and (max-width: 600px) {
-    #nr_menus_th, #menu_type_th, .nr_menus_td, .menu_type_td{display: none;}
+    #nr_menus_th,
+    #menu_type_th,
+    .nr_menus_td,
+    .menu_type_td {
+        display: none;
+    }
 }
 
 @media screen and (max-width: 1050px) {
-    #menu_individual_th, .menu_individual_td{display: none;}
+    #menu_individual_th,
+    .menu_individual_td {
+        display: none;
+    }
 }
 
 //*----------------------------------------------------------
 //Menu set edit
 //------------------------------------------------------------ */
 @media screen and (max-width: 400px) {
-    #menu_list_crew_th, .menu_list_crew_td{display: none;}
-    #menu_disk_list_th, .menu_disk_list_td{text-align: center;}
+    #menu_list_crew_th,
+    .menu_list_crew_td {
+        display: none;
+    }
+
+    #menu_disk_list_th,
+    .menu_disk_list_td {
+        text-align: center;
+    }
 }
 
 @media screen and (max-width: 450px) {
-    #menu_cred_th, .menu_cred_td{display: none;}
+    #menu_cred_th,
+    .menu_cred_td {
+        display: none;
+    }
 }
 
 @media screen and (max-width: 500px) {
-    #menu_list_ind_th, .menu_list_ind_td{display: none;}
+    #menu_list_ind_th,
+    .menu_list_ind_td {
+        display: none;
+    }
 }
 
 @media screen and (max-width: 550px) {
-    #menu_nick_th, #menu_update_th, .menu_nick_td, .menu_update_td,
-    #menu_state_th, .menu_state_td, #menu_gamedev_th, .menu_gamedev_td{display:none;}
+    #menu_nick_th,
+    #menu_update_th,
+    .menu_nick_td,
+    .menu_update_td,
+    #menu_state_th,
+    .menu_state_td,
+    #menu_gamedev_th,
+    .menu_gamedev_td {
+        display: none;
+    }
 }
 
 @media screen and (max-width: 700px) {
-    #menu_gameyear_th, #menu_gameinfo_th, #menu_gameset_th, .menu_gameyear_td, .menu_gameinfo_td, .menu_gameset_td, .menu_docinfo_td, #menu_docinfo_th{display: none;}
+    #menu_gameyear_th,
+    #menu_gameinfo_th,
+    #menu_gameset_th,
+    .menu_gameyear_td,
+    .menu_gameinfo_td,
+    .menu_gameset_td,
+    .menu_docinfo_td,
+    #menu_docinfo_th {
+        display: none;
+    }
 }
 
 
@@ -592,15 +673,16 @@
 //Background images
 //------------------------------------------------------------ */
 @media screen and (min-width: 481px) {
-    body { background-image: url(../images/top_bg_sides.jpg);
-          background-position: left top;
-          background-repeat: repeat-x;
+    body {
+        background-image: url('../images/top_bg_sides.jpg');
+        background-position: left top;
+        background-repeat: repeat-x;
     }
 }
 
 @media screen and (min-width: 1280px){
     body {
-        background-image: url(../images/top_bg_menu.jpg), url(../images/top_bg_sides.jpg);
+        background-image: url('../images/top_bg_menu.jpg'), url('../images/top_bg_sides.jpg');
         background-position: left 220px, left top;
         background-repeat: repeat-x, repeat-x;
     }
@@ -608,17 +690,18 @@
 
 @media screen and (min-width: 1920px) {
     body {
-        background-image: url(../images/top_bg_left.jpg), url(../images/top_bg_right.jpg), url(../images/top_bg_menu.jpg);
+        background-image: url('../images/top_bg_left.jpg'), url('../images/top_bg_right.jpg'), url('../images/top_bg_menu.jpg');
         background-position: left 2px, right 2px, left 220px;
         background-repeat: no-repeat, repeat-x, repeat-x;
     }
 }
 
 @media screen and (min-width: 1921px) {
-    body {  background-image: url(../images/top_bg_sides.jpg), url(../images/top_bg_menu.jpg), url(../images/main_bg.png), url(../images/main_bg.png);
-            background-position: left top, left 220px, -3% 45%, 110% 135%, left top;
-            background-repeat: repeat-x, repeat-x, no-repeat, no-repeat;
-        }
+    body {
+        background-image: url('../images/top_bg_sides.jpg'), url('../images/top_bg_menu.jpg'), url('../images/main_bg.png'), url('../images/main_bg.png');
+        background-position: left top, left 220px, -3% 45%, 110% 135%, left top;
+        background-repeat: repeat-x, repeat-x, no-repeat, no-repeat;
+    }
 }
 
 
@@ -630,46 +713,50 @@
 //From a width of 801 we will be having rows of 3 tiles
 //-------------------------------------------------------------*/
 //* 2 tiles and background welcome image */
-@media screen and (min-width: 640px) and (max-width: 800px)
-{
-    .column-left { width: 48%;
-            margin-top: -395px;
+@media screen and (min-width: 640px) and (max-width: 800px) {
+    .column_left {
+        width: 48%;
+        margin-top: -395px;
     }
-    .column-center { width: 48%; float: right;
+
+    .column_center {
+        width: 48%;
+        float: right;
     }
-    .column-right {display : none;}
-    .column-left-tab { width: 48%; float: left;}
-    .column-right-tab { width: 48%; float: right}
-    .column-wide-right {width: 48%; float: right}
-    .column-wide-left {width: 100%; }
+
+    .column_right {display: none;}
+    .column_left_tab { width: 48%; float: left;}
+    .column_right_tab { width: 48%; float: right;}
+    .column_wide_right {width: 48%; float: right;}
+    .column_wide_left {width: 100%; }
 }
 
 //* 1 tile and a simplified intro screen */
 @media screen and (max-width: 639px) {
-    .column-left { width: 100%; }
-    .column-center { width: 100%; margin-left: 0;}
-    .column-right { width: 100%; }
-    .column-right-tab {display: none}
-    .column-left-tab {display: none}
-    .column-wide-right { width: 100%;}
-    .column-wide-left {display: none}
+    .column_left { width: 100%; }
+    .column_center { width: 100%; margin-left: 0;}
+    .column_right { width: 100%; }
+    .column_right_tab {display: none;}
+    .column_left_tab {display: none;}
+    .column_wide_right { width: 100%;}
+    .column_wide_left {display: none;}
 }
 
 @media screen and (min-width: 801px) {
-    .column-right-tab {display: none}
-    .column-left-tab {display: none}
+    .column_right_tab {display: none;}
+    .column_left_tab {display: none;}
 }
 
 //*  4 tiles and background welcome image */
 @media screen and (min-width: 1495px){
-    .column-wide-left { width: 49%;}
-    .column-wide-center_1920 { display: inline; width: 100%;}
-    .column-wide-right_1920 { width: 24.75%; float: right; display: block;}
-    .column-wide-left_1920 { width: 24.75%; float: left; display: block;}
-    .column-wide-right {display: none;}
-    .column-left {display: none;}
-    .column-center {display: none;}
-    .column-right {display: none;}
+    .column_wide_left { width: 49%;}
+    .column_wide_center_1920 { display: inline; width: 100%;}
+    .column_wide_right_1920 { width: 24.75%; float: right; display: block;}
+    .column_wide_left_1920 { width: 24.75%; float: left; display: block;}
+    .column_wide_right {display: none;}
+    .column_left {display: none;}
+    .column_center {display: none;}
+    .column_right {display: none;}
 }
 
 @media screen and (min-width: 450px) and (max-width: 639px) {
@@ -681,17 +768,17 @@
 //Standard table settings
 //-------------------------------------------------------------*/
 @media screen and (max-width: 1280px) {
-    #column-left-cpanel {
+    #column_left_cpanel {
         width: 25%;
         float: left;
     }
 
-    #column-center-cpanel {
+    #column_center_cpanel {
         width: 73%;
         float: right;
     }
 
-    #column-right-cpanel { display: none;
+    #column_right_cpanel { display: none;
     }
 
 }
@@ -704,19 +791,20 @@
         float: left;
         width: 100%;
     }
-    #column-left-cpanel { width: 100%; float: left; margin: auto;  }
-    #column-center-cpanel { width: 100%; float: left; margin: auto;  }
-    #column-right-cpanel { width: 100%; float: right; margin: auto; }
+
+    #column_left_cpanel { width: 100%; float: left; margin: auto;  }
+    #column_center_cpanel { width: 100%; float: left; margin: auto;  }
+    #column_right_cpanel { width: 100%; float: right; margin: auto; }
 
 
     .main_container_cpanel >div {
         width: 100%;
-        }
+    }
 
     .content_box_cpanel {
-            display: block;
-            margin: 0 auto;
-        }
+        display: block;
+        margin: 0 auto;
+    }
 }
 
 
