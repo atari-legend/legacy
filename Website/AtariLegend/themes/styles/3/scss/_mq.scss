@@ -116,9 +116,11 @@
 //contact tiles - front page
 //------------------------------------------------------------ */
 @media screen and (min-width: 1495px) {
-    .contact_tiles { width: 49%; float: right;}
+    .contact_tiles {
+        width: 49%;
+        float: right;
+    }
 }
-
 
 //*----------------------------------------------------------
 // CPanel
@@ -128,10 +130,10 @@
 //------------------------------------------------------------ */
 //* Make the table view responsive */
 @media screen and (max-width: 799px) {
-    #welcome_cpanel { width: 100%; margin-bottom: 15px;}
-    #user_stats { width: 100%; }
-    #main_stats_position_front { width: 100%; float: left; }
-    #left_nav_position_front { width: 100%;  float: left;}
+    #welcome_cpanel {width: 100%; margin-bottom: 15px;}
+    #user_stats {width: 100%;}
+    #main_stats_position_front {width: 100%; float: left; }
+    #left_nav_position_front {width: 100%;  float: left;}
 }
 
 @media screen and (max-width: 480px) {

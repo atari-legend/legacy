@@ -623,111 +623,110 @@ Background images
 }
 
 
-/*------------------------------------------------------------
-Standard tile settings
-
-Up until width of 639 we have 1 tile per rows
-From 640 to 800 we have 2 tiles.
-From a width of 801 we will be having rows of 3 tiles
--------------------------------------------------------------*/
-/* 2 tiles and background welcome image */
-@media screen and (min-width: 640px) and (max-width: 800px)
-{
-    .column_left { width: 48%;
-            margin-top: -395px;
+//*------------------------------------------------------------
+//Standard tile settings
+//
+//Up until width of 639 we have 1 tile per rows
+//From 640 to 800 we have 2 tiles.
+//From a width of 801 we will be having rows of 3 tiles
+//-------------------------------------------------------------*/
+//* 2 tiles and background welcome image */
+@media screen and (min-width: 640px) and (max-width: 800px) {
+    .column_left {
+        width: 48%;
+        margin-top: -395px;
     }
-    .column_center { width: 48%; float:right;
-    }
-    .column_right{display : none;}
-    .column_left_tab { width: 48%; float: left;}
-    .column_right_tab { width: 48%; float: right}
-    .column_wide_right {width: 48%; float: right}
+    .column_center {width: 48%; float: right;}
+    .column_right {display: none;}
+    .column_left_tab {width: 48%; float: left;}
+    .column_right_tab {width: 48%; float: right;}
+    .column_wide_right {width: 48%; float: right;}
     .column_wide_left {width: 100%; }
 }
 
-/* 1 tile and a simplified intro screen */
+//* 1 tile and a simplified intro screen */
 @media screen and (max-width: 639px) {
-    .column_left { width: 100%; }
-    .column_center { width: 100%; margin-left: 0;}
-    .column_right { width: 100%; }
-    .column_right_tab {display:none}
-    .column_left_tab {display:none}
+    .column_left { width: 100%;}
+    .column_center {width: 100%; margin-left: 0;}
+    .column_right {width: 100%;}
+    .column_right_tab {display: none;}
+    .column_left_tab {display: none;}
     .column_wide_right { width: 100%;}
-    .column_wide_left {display:none}
+    .column_wide_left {display: none;}
 }
 
 @media screen and (min-width: 801px) {
-    .column_right_tab {display:none}
-    .column_left_tab {display:none}
+    .column_right_tab {display: none;}
+    .column_left_tab {display: none;}
 }
 
-/*  4 tiles and background welcome image */
+//*  4 tiles and background welcome image */
 @media screen and (min-width: 1495px){
-    .column_wide_left { width: 49%;}
-    .column_wide_center_1920 { display:inline;}
-    .column_wide_right_1920 { width: 24.75%; float: right; display:block;}
-    .column_wide_left_1920 { width: 24.75%; float: left; display:block;}
+    .column_wide_left {width: 49%;}
+    .column_wide_center_1920 {display: inline;}
+    .column_wide_right_1920 {width: 24.75%; float: right; display: block;}
+    .column_wide_left_1920 {width: 24.75%; float: left; display: block;}
     .column_wide_right {display: none;}
     .column_left {display: none;}
-    .column_center{display: none;}
+    .column_center {display: none;}
     .column_right {display: none;}
 }
 
 @media screen and (min-width: 450px) and (max-width: 639px) {
-    .standard_list_entry{height: 180px;}
+    .standard_list_entry {height: 180px;}
 }
 
 
-/*------------------------------------------------------------
-Standard table settings
--------------------------------------------------------------*/
+//*------------------------------------------------------------
+//Standard table settings
+//-------------------------------------------------------------*/
 @media screen and (max-width: 1280px) {
-    #column_left_cpanel { width: 25%; float:left;}
-    #column_center_cpanel { width: 73%; float:right;}
+    #column_left_cpanel { width: 25%; float: left;}
+    #column_center_cpanel { width: 73%; float: right;}
     #column_right_cpanel { display: none;}
 }
 
-/* for lower resolutions put the left and right below eachother */
-/* Make the table view responsive */
+//* for lower resolutions put the left and right below eachother */
+//* Make the table view responsive */
 @media screen and (max-width: 799px) {
     .main_container_cpanel {
         display: flex;
         flex-direction: column-reverse;
         float: left;
-        width:100%;
+        width: 100%;
     }
 
-    #column_left_cpanel { width:100%; float:left; margin:auto;  }
-    #column_center_cpanel { width:100%; float:left; margin:auto;  }
-    #column_right_cpanel { width:100%; float:right; margin:auto; }
+    #column_left_cpanel { width: 100%; float: left; margin: auto;  }
+    #column_center_cpanel { width: 100%; float: left; margin: auto;  }
+    #column_right_cpanel { width: 100%; float: right; margin: auto; }
 
     .main_container_cpanel >div {
-        width:100%;
+        width: 100%;
         }
 
     .content_box_cpanel {
-            display: block;
-            margin: 0 auto;
-        }
+        display: block;
+        margin: 0 auto;
+    }
 }
 
-/*----------------------------------------------------------
- resolutions tested!
------------------------------------------------------------- */
-/* smartphones, iPhone, portrait 480x320 phones */
-/* @media screen and (max-width: 320px) {
-
-/* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */
-/* @media screen and (min-width: 481px) {
-
-/* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */
-/* @media screen and (min-width: 641px) {
-
-/* tablet, landscape iPad, lo-res laptops ands desktops */
-/* @media screen and (min-width: 961px) {
-
-/* big landscape tablets, laptops, and desktops */
-/* @media screen and (min-width: 1025px) {
-
-/* hi-res laptops and desktops */
-/* @media screen and (min-width: 1281px) { */
+//*----------------------------------------------------------
+// resolutions tested!
+//------------------------------------------------------------ */
+//* smartphones, iPhone, portrait 480x320 phones */
+//* @media screen and (max-width: 320px) {
+//
+//* portrait e-readers (Nook/Kindle), smaller tablets @ 600 or @ 640 wide. */
+//* @media screen and (min-width: 481px) {
+//
+//* portrait tablets, portrait iPad, landscape e-readers, landscape 800x480 or 854x480 phones */
+//* @media screen and (min-width: 641px) {
+//
+//* tablet, landscape iPad, lo-res laptops ands desktops */
+//* @media screen and (min-width: 961px) {
+//
+//* big landscape tablets, laptops, and desktops */
+//* @media screen and (min-width: 1025px) {
+//
+//* hi-res laptops and desktops */
+//* @media screen and (min-width: 1281px) { */
