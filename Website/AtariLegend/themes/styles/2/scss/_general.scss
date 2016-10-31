@@ -65,35 +65,35 @@ img { display: block; }
 //From 640 to 800 we have 2 tiles.
 //From a width of 801 we will be having rows of 3 tiles
 //-------------------------------------------------------------*/
-.column-left {
+.column_left {
     float: left;
     width: 32%;
 }
 
-.column-center {
+.column_center {
     float: left;
     width: 32%;
     margin-left: 2%;
 }
 
-.column-right {
+.column_right {
     float: right;
     width: 32%;
 }
 
-.column-wide-left {
+.column_wide_left {
     float: left;
     width: 64%;
     margin-top: 0;
 }
 
-.column-wide-right {
+.column_wide_right {
     float: right;
     width: 32%;
     margin-top: 0;
 }
 
-.column-wide-right_1920, .column-wide-left_1920, .column-wide-center_1920 { display: none; }
+.column_wide_right_1920, .column_wide_left_1920, .column_wide_center_1920 { display: none; }
 .standard_tile {
     width: 100%;
     background: linear-gradient(to right, white, #23f001);
@@ -338,18 +338,18 @@ a.standard_tile_link:hover, a.standard_tile_link:focus {
 //*------------------------------------------------------------
 //Standard table settings
 //-------------------------------------------------------------*/
-#column-left-cpanel {
+#column_left_cpanel {
     float: left;
     width: 20%;
     margin-right: 1%;
 }
 
-#column-center-cpanel {
+#column_center_cpanel {
     float: left;
     width: 58%;
 }
 
-#column-right-cpanel {
+#column_right_cpanel {
     float: right;
     width: 20%;
     margin-left: 1%;
