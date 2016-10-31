@@ -1,10 +1,10 @@
-/*************************************************************/
-/**********************PICASSO SKIN***************************/
-/*************************************************************/
-/**************************************************************/
-/***This is the css code for the front page of the main site***/
-/**************************************************************/
-/*------------Welcome tile settings --> frontpage------------ */
+//*************************************************************/
+//**********************PICASSO SKIN***************************/
+//*************************************************************/
+//**************************************************************/
+//***This is the css code for the front page of the main site***/
+//**************************************************************/
+//*------------Welcome tile settings --> frontpage------------ */
 
 #welcome {
     position: relative;
@@ -81,28 +81,28 @@
 
 .logon_username_icon:before {
     display: block;
-    content: url("../images/logon_usn.png");
+    content: url('../images/logon_usn.png');
 }
 
 .logon_password_icon:before {
     display: block;
-    content: url("../images/logon_pwd.png");
+    content: url('../images/logon_pwd.png');
 }
 
 .logon_facebook_button:before {
     display: block;
     width: auto;
-    /*or your image's width*/
+    //*or your image's width*/
     height: 50%;
-    content: url("../images/login-facebook.png");
+    content: url('../images/login-facebook.png');
 }
 
 .logon_twitter_button:before {
     display: block;
     width: auto;
-    /*or your image's width*/
+    //*or your image's width*/
     height: 50%;
-    content: url("../images/login_twitter.png");
+    content: url('../images/login_twitter.png');
 }
 
 .logon_left {
@@ -151,8 +151,8 @@
 //datequote tile - front page
 //------------------------------------------------------------ */
 .datequote_position_front { margin-bottom: 20px; }
-.datequote_bg { background: url(../images/datequote_bg.jpg); }
-.datequote_bg p { text-align: center; }
+.datequote_bg { background: url('../images/datequote_bg.jpg'); }
+.datequote_bg p {text-align: center;}
 .datequote_day {
     margin-top: 0;
     margin-bottom: -20px;
@@ -177,34 +177,34 @@
 .datequote_text {
     padding-top: 10px;
     padding-bottom: 10px;
-    /* RGBa with 0.6 opacity */
+    //* RGBa with 0.6 opacity */
     color: white;
     background: rgb(192, 193, 202) transparent;
-    /* Fallback for web browsers that doesn't support RGBa */
+    //* Fallback for web browsers that doesn't support RGBa */
     background: rgba(192, 193, 202, 0.6);
 }
 
 //*----------------------------------------------------------
 //Who is it - front page
 //------------------------------------------------------------ */
-.whoisit_position_front { margin-bottom: 20px; }
+.whoisit_position_front {margin-bottom: 20px;}
 //*----------------------------------------------------------
 //Latest reviews tile - front page
 //------------------------------------------------------------ */
-.latest_reviews { margin-bottom: 20px; }
+.latest_reviews {margin-bottom: 20px;}
 //*----------------------------------------------------------
 //Did you know tile - front page
 //------------------------------------------------------------ */
-.didyouknow_position_front { margin-bottom: 20px; }
+.didyouknow_position_front {margin-bottom: 20px;}
 //*----------------------------------------------------------
 //Statistics tile - front page
 //------------------------------------------------------------ */
-.statistics_position_front { margin-bottom: 20px; }
-.statistics_dark { color: #161c71; }
+.statistics_position_front {margin-bottom: 20px;}
+.statistics_dark {color: #161c71;}
 //*----------------------------------------------------------
 //Hotlinks tile - front page
 //------------------------------------------------------------ */
-.hotlinks_position_front { margin-bottom: 20px; }
+.hotlinks_position_front {margin-bottom: 20px;}
 //*----------------------------------------------------------
 //contact tiles - front page
 //------------------------------------------------------------ */
@@ -221,7 +221,7 @@
 
 .contact_email_button {
     display: block;
-    background-image: url("../images/email.png");
+    background-image: url('../images/email.png');
     background-repeat: no-repeat;
     background-size: contain;
 }
@@ -234,7 +234,7 @@
 
 .contact_facebook_button {
     display: block;
-    background-image: url("../images/facebook.png");
+    background-image: url('../images/facebook.png');
     background-repeat: no-repeat;
     background-size: contain;
 }
@@ -247,7 +247,7 @@
 
 .contact_jukebox_button {
     display: block;
-    background-image: url("../images/jukebox.png");
+    background-image: url('../images/jukebox.png');
     background-repeat: no-repeat;
     background-size: contain;
 }
@@ -260,7 +260,7 @@
 
 .contact_chat_button {
     display: block;
-    background-image: url("../images/chat.png");
+    background-image: url('../images/chat.png');
     background-repeat: no-repeat;
     background-size: contain;
 }
@@ -271,7 +271,7 @@
     height: 120px;
 }
 
-.contact_tiles img:hover { box-shadow: 0 0 7px white; }
+.contact_tiles img:hover {box-shadow: 0 0 7px white;}
 
 //*----------------------------------------------------------
 // Footer
@@ -280,7 +280,7 @@
     float: left;
     width: 100%;
     margin-top: 15px;
-    background: url(../images/bottom_bg_sides.jpg) left 0 repeat-x;
+    background: url('../images/bottom_bg_sides.jpg') left 0 repeat-x;
     border-top: 10px solid #161c71;
 }
 
@@ -289,12 +289,12 @@
     font-size: 10pt;
     color: white;
     text-align: center;
-    background: url(../images/footer_bg.jpg) center 0 no-repeat;
+    background: url('../images/footer_bg.jpg') center 0 no-repeat;
 }
 
 .footer_logo_image:before {
     display: block;
-    content: url("../images/footer_logo.png");
+    content: url('../images/footer_logo.png');
 }
 
 #footer_img {
@@ -315,9 +315,14 @@
     border: 1px solid #161c71;
 }
 
-//* Interaction states
+// Interaction states
 
-.ui-state-hover,.ui-widget-content .ui-state-hover,.ui-widget-header .ui-state-hover,.ui-state-focus,.ui-widget-content .ui-state-focus,.ui-widget-header .ui-state-focus {
+.ui-state-hover,
+.ui-widget-content .ui-state-hover,
+.ui-widget-header .ui-state-hover,
+.ui-state-focus,
+.ui-widget-content .ui-state-focus,
+.ui-widget-header .ui-state-focus {
     color: #000;
     background: #dbd7d1;
     border: 1px solid #4f4f4f;

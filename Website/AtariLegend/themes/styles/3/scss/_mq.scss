@@ -144,8 +144,17 @@
         flex-direction: column;
     }
 
-    #child_some_stats,#child_good_karma,#child_bad_karma {width: 100%; float: left;}
-    #child_good_karma,#child_bad_karma {margin-top: 20px;}
+    #child_some_stats,
+    #child_good_karma,
+    #child_bad_karma {
+        width: 100%;
+        float: left;
+    }
+
+    #child_good_karma,
+    #child_bad_karma {
+        margin-top: 20px;
+    }
 
     .main_stats_container >div {
         width: 100%;
