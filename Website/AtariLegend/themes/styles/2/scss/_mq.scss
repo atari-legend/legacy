@@ -1,625 +1,793 @@
-/*************************************************************/
-/**********************TOS 207 SKIN***************************/
-/*************************************************************/
+//*************************************************************/
+//**********************TOS 207 SKIN***************************/
+//*************************************************************/
 
-/*----------------------------------------------------------
- media queries
------------------------------------------------------------- */
+//*----------------------------------------------------------
+// media queries
+//------------------------------------------------------------ */
 
-/*----------------------------------------------------------
- Main website
------------------------------------------------------------- */
-/*----------------------------------------------------------
- Welcome tile settings --> frontpage
------------------------------------------------------------- */
-/* 1 tile and a simplified intro screen */
+//*----------------------------------------------------------
+// Main website
+//------------------------------------------------------------ */
+//*----------------------------------------------------------
+// Welcome tile settings --> frontpage
+//------------------------------------------------------------ */
+//* 1 tile and a simplified intro screen */
 @media screen and (max-width: 639px) {
-    #welcome  { visibility : hidden; }
+    #welcome {visibility: hidden;}
 }
 
-/* 2 tiles and background welcome image */
+//* 2 tiles and background welcome image */
 @media screen and (min-width: 640px) and (max-width: 800px) {
-    #welcome  { margin-bottom: 20px;
-    }
+    #welcome {margin-bottom: 20px;}
 }
 
 @media screen and (max-width: 1279px) {
-    #welcome  { margin-top: 20px;
-    }
+    #welcome {margin-top: 20px;}
 }
 
-
-/*----------------------------------------------------------
-logon tile --> front page
------------------------------------------------------------- */
-/* 3 tiles and background welcome image */
+//*----------------------------------------------------------
+//logon tile --> front page
+//------------------------------------------------------------ */
+//* 3 tiles and background welcome image */
 @media screen and (min-width: 800px) and (max-width: 1279px) {
-    .logon { margin-top: 20px; }
+    .logon {margin-top: 20px;}
 }
 
-/* 2 tiles and background welcome image */
+//* 2 tiles and background welcome image */
 @media screen and (min-width: 640px) and (max-width: 800px) {
-    .logon { margin-top: 0; }
+    .logon {margin-top: 0;}
 }
 
-/* 1 tile */
+//* 1 tile */
 @media screen and (max-width: 639px) {
-    .logon  { width: 100%;
-    margin-top: 20px;
+    .logon {
+        width: 100%;
+        margin-top: 20px;
     }
 }
 
 
-/*----------------------------------------------------------
-latest news tile --> front page
------------------------------------------------------------- */
+//*----------------------------------------------------------
+//latest news tile --> front page
+//------------------------------------------------------------ */
 @media screen and (min-width: 640px) and (max-width: 800px) {
-    .latest_news { margin-top: 395px;}
+    .latest_news {margin-top: 395px;}
 }
 
-@media screen and (min-width: 1495px){
-    .latest_news   { float: left; width: 48%;}
-}
-
-
-/*----------------------------------------------------------
-screenstar tile - front page
------------------------------------------------------------- */
-@media screen and (min-width: 1495px){
-    .screenstar_position_front  { width: 94%;margin-top: -40px;}
+@media screen and (min-width: 1495px) {
+    .latest_news {
+        float: left;
+        width: 48%;
+    }
 }
 
 
-/*----------------------------------------------------------
-datequote tile - front page
------------------------------------------------------------- */
-/* 1 and 2 tiles */
+//*----------------------------------------------------------
+//screenstar tile - front page
+//------------------------------------------------------------ */
+@media screen and (min-width: 1495px) {
+    .screenstar_position_front {width: 94%;margin-top: -40px;}
+}
+
+
+//*----------------------------------------------------------
+//datequote tile - front page
+//------------------------------------------------------------ */
+//* 1 and 2 tiles */
 @media screen and (max-width: 800px) {
-    .datequote_position_front { margin-top: 0;}
+    .datequote_position_front {margin-top: 0;}
 }
 
-@media screen and (min-width: 1495px){
-    .datequote_position_front { float:left; width: 94%;}
+@media screen and (min-width: 1495px) {
+    .datequote_position_front {float: left; width: 94%;}
 }
 
 
-/*----------------------------------------------------------
-Who is it - front page
------------------------------------------------------------- */
+//*----------------------------------------------------------
+//Who is it - front page
+//------------------------------------------------------------ */
 
-@media screen and (min-width: 1495px){
-    .whoisit_position_front  { float:right;}
+@media screen and (min-width: 1495px) {
+    .whoisit_position_front {float: right;}
 }
 
-/*----------------------------------------------------------
-Latest reviews tile - front page
------------------------------------------------------------- */
-@media screen and (min-width: 1495px){
-    .latest_reviews  { width: 49%; float: right;}
+//*----------------------------------------------------------
+//Latest reviews tile - front page
+//------------------------------------------------------------ */
+@media screen and (min-width: 1495px) {
+    .latest_reviews {
+        width: 49%;
+        float: right;
+    }
 }
 
-/*----------------------------------------------------------
-Did you know tile - front page
------------------------------------------------------------- */
-@media screen and (min-width: 1495px){
-    .didyouknow_position_front  {float:left; width:100%;    }
+//*----------------------------------------------------------
+//Did you know tile - front page
+//------------------------------------------------------------ */
+@media screen and (min-width: 1495px) {
+    .didyouknow_position_front {
+        float: left;
+        width: 100%;
+    }
 }
 
-/*----------------------------------------------------------
-Statistics tile - front page
------------------------------------------------------------- */
-@media screen and (min-width: 1495px){
-    .statistics_position_front  {float:left; width:100%;}
+//*----------------------------------------------------------
+//Statistics tile - front page
+//------------------------------------------------------------ */
+@media screen and (min-width: 1495px) {
+    .statistics_position_front {
+        float: left;
+        width: 100%;
+    }
 }
 
-/*----------------------------------------------------------
-Hotlinks tile - front page
------------------------------------------------------------- */
-@media screen and (min-width: 1495px){
+//*----------------------------------------------------------
+/Hotlinks tile - front page
+//------------------------------------------------------------ */
+@media screen and (min-width: 1495px) {
     .hotlinks_position_front {width: 94%; float: left;}
 }
 
-/*----------------------------------------------------------
-contact tiles - front page
------------------------------------------------------------- */
+//*----------------------------------------------------------
+//contact tiles - front page
+//------------------------------------------------------------ */
 @media screen and (min-width: 1495px){
-    .contact_tiles { width: 49%; float: right;}
+    .contact_tiles {width: 49%; float: right;}
 }
 
 
 
 
-/*----------------------------------------------------------
- CPanel
------------------------------------------------------------- */
-/*----------------------------------------------------------
-Front page
------------------------------------------------------------- */
-/* Make the table view responsive */
+//*----------------------------------------------------------
+// CPanel
+//------------------------------------------------------------ */
+//*----------------------------------------------------------
+//Front page
+//------------------------------------------------------------ */
+//* Make the table view responsive */
 @media screen and (max-width: 799px) {
-    #welcome_cpanel{ width:100%; margin-bottom: 20px;}
-    #user_stats{ width:100%;}
-    #main_stats_position_front{ width:100%; float: left;}
-    #left_nav_position_front{ width:100%;  float: left;}
+    #welcome_cpanel {width: 100%; margin-bottom: 20px;}
+    #user_stats {width: 100%;}
+    #main_stats_position_front {width: 100%; float: left;}
+    #left_nav_position_front {width: 100%; float: left;}
 }
 
 @media screen and (max-width: 480px) {
-    #welcome_cpanel{ width:100%;}
+    #welcome_cpanel {width: 100%;}
 }
 
 @media screen and (max-width: 1199px) {
-    .main_stats_container {
-      flex-direction: column;
+
+    .main_stats_container {flex-direction: column;}
+
+    #child_some_stats,
+    #child_good_karma,
+    #child_bad_karma {
+        width: 100%;
+        float: left;
     }
 
-    #child_some_stats,#child_good_karma,#child_bad_karma{width:100%; float:left;}
-    #child_good_karma,#child_bad_karma{margin-top:20px}
+    #child_good_karma,
+    #child_bad_karma {
+        margin-top: 20px;
+    }
 
     .main_stats_container >div {
-        width:100%;
-        }
-
-    .main_stats_child {
-            display: block;
-            margin: 0 auto;
-        }
-}
-
-
-/*----------------------------------------------------------
-Quick search games
------------------------------------------------------------- */
-@media screen and (max-width: 1099px) {
-    #quick_search_options{margin-left:5%; width:100%; }
-}
-
-/* Make the table view responsive */
-@media screen and (max-width: 799px) {
-        #quick_search_options{
-        display:table;
-        width:50%;
-        margin-left:40%;
-        margin-right: auto;
-        text-align:left;
-        }
+        width: 100%;
     }
 
+    .main_stats_child {
+        display: block;
+        margin: 0 auto;
+    }
+}
+
+
+//*----------------------------------------------------------
+//Quick search games
+//------------------------------------------------------------ */
+@media screen and (max-width: 1099px) {
+    #quick_search_options {
+        margin-left: 5%;
+        width: 100%;
+    }
+}
+
+//* Make the table view responsive */
+@media screen and (max-width: 799px) {
+    #quick_search_options {
+        display: table;
+        width: 50%;
+        margin-left: 40%;
+        margin-right: auto;
+        text-align: left;
+    }
+}
+
 @media screen and (max-width: 599px) {
-    #quick_search_options { margin-left:30%;}
+    #quick_search_options {margin-left: 30%;}
 }
 
 @media screen and (max-width: 399px) {
-    #quick_search_options { width:75%; margin-left:15%;}
+    #quick_search_options {
+        width: 75%;
+        margin-left: 15%;
+    }
 }
 
 
-/*----------------------------------------------------------
-User details
------------------------------------------------------------- */
+//*----------------------------------------------------------
+//User details
+//------------------------------------------------------------ */
 @media screen and (max-width: 1050px) {
-    .user_details_container{
-        flex-direction: column;
-    }
+    .user_details_container {flex-direction: column;}
 }
 
 @media screen and (max-width: 1280px) {
-    #child_1, #child_2{ width:100%;}
+    #child_1,
+    #child_2 {
+        width: 100%;
+    }
 }
 
 @media screen and (max-width: 480px) {
-    .user_details_text{display:inline;}
-    .user_details_input{display:inline;}
-    .user_details_row{width:50%;}
+    .user_details_text {display: inline;}
+    .user_details_input {display: inline;}
+    .user_details_row {width: 50%;}
 }
 
-/*----------------------------------------------------------
-User main
------------------------------------------------------------- */
+//*----------------------------------------------------------
+//User main
+//------------------------------------------------------------ */
 @media screen and (max-width: 500px) {
-    .user_main_container{
-            flex-direction: column;
-    }
-    #user_main_child_3{margin-top:5px;}
+    .user_main_container {flex-direction: column;}
+    #user_main_child_3 {margin-top: 5px;}
 }
 
 
-/*----------------------------------------------------------
-User search
------------------------------------------------------------- */
+//*----------------------------------------------------------
+//User search
+//------------------------------------------------------------ */
 @media screen and (max-width: 1150px) {
-    .email_th{display: none;}
-    .email_td{display: none;}
-    .website_th{display: none;}
-    .website_td{display: none;}
+    .email_th {display: none;}
+    .email_td {display: none;}
+    .website_th {display: none;}
+    .website_td {display: none;}
 }
 
 @media screen and (max-width: 600px) {
-    .lastvisit_th{display: none;}
-    .lastvisit_td{display: none;}
-    .joindate_td{display: none;}
-    .joindate_th{display: none;}
-    #usersearch td {text-align:center;}
-    #usersearch th {text-align:center;}
+    .lastvisit_th {display: none;}
+    .lastvisit_td {display: none;}
+    .joindate_td {display: none;}
+    .joindate_th {display: none;}
+    #usersearch td {text-align: center;}
+    #usersearch th {text-align: center;}
 }
 
-/*----------------------------------------------------------
-Links addnew
------------------------------------------------------------- */
+//*----------------------------------------------------------
+//Links addnew
+//------------------------------------------------------------ */
 @media screen and (max-width: 480px) {
-    .links_addnew_text{display:inline;}
-    .links_addnew_input{display:inline;}
-    .links_addnew_row{width:50%;}
+    .links_addnew_text {display: inline;}
+    .links_addnew_input {display: inline;}
+    .links_addnew_row {width: 50%;}
 }
 
 
-/*----------------------------------------------------------
-Links Modify list
------------------------------------------------------------- */
+//*----------------------------------------------------------
+//Links Modify list
+//------------------------------------------------------------ */
 @media screen and (max-width: 500px) {
-    .links_list_row{
-            flex-direction: column;
-    }
+    .links_list_row {flex-direction: column;}
 }
 
 @media screen and (max-width: 480px) {
-    .user_stats_img_dark{display : none;}
+    .user_stats_img_dark {display: none;}
 }
 
 
-/*----------------------------------------------------------
-Links category
------------------------------------------------------------- */
+//*----------------------------------------------------------
+//Links category
+//------------------------------------------------------------ */
 @media screen and (max-width: 500px) {
-    #linkcat_wide{ display: none;}
+    #linkcat_wide {display: none;}
 }
 
 @media screen and (min-width: 499px) {
-    #linkcat_small{ display: none;}
+    #linkcat_small {display: none;}
 }
 
 
-/*----------------------------------------------------------
-Links Modify
------------------------------------------------------------- */
+//*----------------------------------------------------------
+//Links Modify
+//------------------------------------------------------------ */
 @media screen and (max-width: 550px) {
-    .links_mod_text{width:100%;display:block;}
-    .links_mod_input{width:100%;display:block;}
-    .links_mod_row{width:100%;margin-bottom:10px;}
+    .links_mod_text {width: 100%;display: block;}
+    .links_mod_input {width: 100%;display: block;}
+    .links_mod_row {width: 100%;margin-bottom: 10px;}
 }
 
 @media screen and (max-width: 600px) {
-    #user_stats_img_dark{display : none;}
+    #user_stats_img_dark {display: none;}
 }
 
 
-/*----------------------------------------------------------
-Games main
------------------------------------------------------------- */
+//*----------------------------------------------------------
+//Games main
+//------------------------------------------------------------ */
 @media screen and (max-width: 1050px) {
-    .games_main_row{width:90%; }
-    .games_main_text{width:40%;}
-    .games_main_input{width:60%;}
+    .games_main_row {width: 90%;}
+    .games_main_text {width: 40%;}
+    .games_main_input {width: 60%;}
 }
 
 @media screen and (max-width: 550px) {
-    .games_main_text{width:35%;}
-    .games_main_input{width:65%;}
+    .games_main_text {width: 35%;}
+    .games_main_input {width: 65%;}
 }
 
 @media screen and (max-width: 480px) {
-    .games_main_text{display:inline;}
-    .games_main_input{display:inline;}
-    .games_main_row{margin-left:10%}
+    .games_main_text {display: inline;}
+    .games_main_input {display: inline;}
+    .games_main_row {margin-left: 10%;}
 
 }
 
 @media screen and (max-width: 1050px) {
-    .games_check_container{
+    .games_check_container {
         flex-direction: column;
         width: 100%;
     }
-    #child_1, #child_2{width:100%; margin-left:10%;}
+
+    #child_1,
+    #child_2 {
+        width: 100%;
+        margin-left: 10%;
+    }
 }
 
 
-/*----------------------------------------------------------
-Games list
------------------------------------------------------------- */
+//*----------------------------------------------------------
+//Games list
+//------------------------------------------------------------ */
 @media screen and (max-width: 1280px) {
-    .info_td,.year_td,#info_th,#year_th{display:none;}
+    .info_td,
+    .year_td,
+    #info_th,
+    #year_th {
+        display: none;
+    }
 }
 
 @media screen and (max-width: 1040px) {
- .dev_td,#dev_th{display:none;}
+    .dev_td,
+    #dev_th {
+        display: none;
+    }
 }
 
 @media screen and (max-width: 600px) {
- .pub_td,#pub_th{display:none;}
- #game_th,.game_td{text-align:center;}
+
+    .pub_td,
+    #pub_th {
+        display: none;
+    }
+
+    #game_th,
+    .game_td {
+        text-align: center;
+    }
 }
 
 
-/*----------------------------------------------------------
-Games detail
------------------------------------------------------------- */
+//*----------------------------------------------------------
+//Games detail
+//------------------------------------------------------------ */
 @media screen and (min-width: 1280px) {
-    #gd_other_features_left{display:none;}
-    #gd_other_features_right{display:none;}
+    #gd_other_features_left {display: none;}
+    #gd_other_features_right {display: none;}
 }
 
 @media screen and (max-width: 1279px) {
-    #gd_basic_game_info{width:100%; margin-bottom: 20px;}
-    #gd_other_features{display:none}
-    #gd_other_features_left{float:left; width:49%;}
-    #gd_other_features_right{float:right; width:49%;}
-    #gd_left{float:left; width:49%;}
-    #gd_right{float:right; width:49%;}
-    #gd_center{float:right; width:49%;}
-    #gd_back{margin-top:20px;}
-    #gd_publisher_info{margin-top:20px;}
+    #gd_basic_game_info {width: 100%; margin-bottom: 20px;}
+    #gd_other_features {display: none;}
+    #gd_other_features_left {float: left; width: 49%;}
+    #gd_other_features_right {float: right; width: 49%;}
+    #gd_left {float: left; width: 49%;}
+    #gd_right {float: right; width: 49%;}
+    #gd_center {float: right; width: 49%;}
+    #gd_back {margin-top: 20px;}
+    #gd_publisher_info {margin-top: 20px;}
 }
 
 @media screen and (max-width: 600px) {
-    #gd_basic_game_info_category{width:100%; float:left; margin-top:20px; margin-bottom:20px; margin-left:5%}
-    #gd_other_features_left{float:left; width:100%; margin-bottom:20px;}
-    #gd_game_aka{margin-bottom:20px;}
-    #gd_other_features_right{float:right; width:100%;}
-    #gd_left{float:left; width:100%;}
-    #gd_right{float:right; width:100%;}
-    #gd_center{float:right; width:100%;}
-    #gd_publisher_info{margin-top:0;}
+    #gd_basic_game_info_category {width: 100%; float: left; margin-top: 20px; margin-bottom: 20px; margin-left: 5%;}
+    #gd_other_features_left {float: left; width: 100%; margin-bottom: 20px;}
+    #gd_game_aka {margin-bottom: 20px;}
+    #gd_other_features_right {float: right; width: 100%;}
+    #gd_left {float: left; width: 100%;}
+    #gd_right {float: right; width: 100%;}
+    #gd_center {float: right; width: 100%;}
+    #gd_publisher_info {margin-top: 0;}
 }
 
 
-/*----------------------------------------------------------
-Games comment
------------------------------------------------------------- */
+//*----------------------------------------------------------
+//Games comment
+//------------------------------------------------------------ */
 @media screen and (max-width: 640px) {
-    .gc_left_head{display:none;}
-    .gc_left{display:none;}
+    .gc_left_head {display: none;}
+    .gc_left {display: none;}
 }
 
-/*----------------------------------------------------------
-Games Upload
------------------------------------------------------------- */
+//*----------------------------------------------------------
+//Games Upload
+//------------------------------------------------------------ */
 @media screen and (max-width: 1050px) {
-    .game_upload_container{
-        flex-direction: column;
-    }
+    .game_upload_container {flex-direction: column;}
 }
 
 @media screen and (max-width: 1280px) {
-    #gu_child_1, #gu_child_2{ width:100%;}
+    #gu_child_1,
+    #gu_child_2 {
+        width: 100%;
+    }
 }
 
-/*----------------------------------------------------------
-Games review main
------------------------------------------------------------- */
+//*----------------------------------------------------------
+//Games review main
+//------------------------------------------------------------ */
 @media screen and (max-width: 500px) {
-    #nrreviews_gr_th, .nrreviews_gr_td{ display: none;}
+    #nrreviews_gr_th,
+    .nrreviews_gr_td {
+        display: none;
+    }
 }
 
 @media screen and (max-width: 600px) {
-    #username_gr_th, .username_gr_td{ display: none;}
+    #username_gr_th,
+    .username_gr_td {
+        display: none;
+    }
 }
 
 @media screen and (max-width: 1100px) {
-    #reviewdate_gr_th, .reviewdate_gr_td{ display: none;}
+    #reviewdate_gr_th,
+    .reviewdate_gr_td {
+        display: none;
+    }
 }
 
 @media screen and (max-width: 1750px) {
-    #gamepub_gr_th, .gamepub_gr_td{ display: none;}
+    #gamepub_gr_th,
+    .gamepub_gr_td {
+        display: none;
+    }
 }
 
-/*----------------------------------------------------------
-Games review preview
------------------------------------------------------------- */
+//*----------------------------------------------------------
+//Games review preview
+//------------------------------------------------------------ */
 @media screen and (max-width: 1199px) {
-    .review_container {
-      flex-direction: column;
+
+    .review_container {flex-direction: column;}
+
+    #review_screenshots,
+    #review_text {
+        width: 100%;
+        float: left;
     }
 
-    #review_screenshots,#review_text{width:100%; float:left;}
-
     .review_container >div {
-        width:100%;
-        }
+        width: 100%;
+    }
 
     .review_child {
-            display: block;
-            margin: 0 auto;
-        }
+        display: block;
+        margin: 0 auto;
+    }
 
-    .review_screenshot_order{display:inline-block; vertical-align:top;}
+    .review_screenshot_order {
+        display: inline-block;
+        vertical-align: top;
+    }
 }
 
-/*----------------------------------------------------------
-Games music list
------------------------------------------------------------- */
+//*----------------------------------------------------------
+//Games music list
+//------------------------------------------------------------ */
+
 @media screen and (max-width: 550px) {
-    #zaks_gm_th, .zaks_gm_td{ display: none;}
+
+    #zaks_gm_th,
+    .zaks_gm_td {
+        display: none;
+    }
 }
+
 @media screen and (max-width: 1000px) {
-    #pub_gm_th, .pub_gm_td{ display: none;}
+
+    #pub_gm_th, .
+    pub_gm_td {
+        display: none;
+    }
 }
 
 @media screen and (max-width: 1450px) {
-    #year_gm_th, .year_gm_td{ display: none;}
+
+    #year_gm_th,
+    .year_gm_td {
+        display: none;
+    }
 }
 
-/*----------------------------------------------------------
-News approve
------------------------------------------------------------- */
+//*----------------------------------------------------------
+//News approve
+//------------------------------------------------------------ */
+
 @media screen and (max-width: 480px) {
-    #news_approve_icon{display:none;}
+    #news_approve_icon {display: none;}
 }
 
-/*----------------------------------------------------------
-News edit all
------------------------------------------------------------- */
+//*----------------------------------------------------------
+//News edit all
+//------------------------------------------------------------ */
+
 @media screen and (max-width: 480px) {
-    #news_approve_icon{display:none;}
+    #news_approve_icon {display: none;}
 }
 
-/*----------------------------------------------------------
-News edit image
------------------------------------------------------------- */
+//*----------------------------------------------------------
+//News edit image
+//------------------------------------------------------------ */
+
 @media screen and (max-width: 600px) {
-    .news_images_name{ display:none;}
-    .news_images_container{text-align:center;}
+    .news_images_name {display: none;}
+    .news_images_container {text-align: center;}
 }
 
-/*----------------------------------------------------------
-Company Main
------------------------------------------------------------- */
+//*----------------------------------------------------------
+//Company Main
+//------------------------------------------------------------ */
+
 @media screen and (max-width: 1549px) {
-    .main_company_container {
-      flex-direction: column;
+    .main_company_container {flex-direction: column;}
+
+    #child_edit_company,
+    #child_add_company {
+        float: left;
+        margin-bottom: 30px;
     }
 
-    #child_edit_company, #child_add_company {float:left; margin-bottom: 30px;}
-
-    .main_company_container >div {
-        width:100%;
-        }
+    .main_company_container >div {width: 100%;}
 
     .main_company_child {
-            display: block;
-            margin: 0 auto;
-        }
+        display: block;
+        margin: 0 auto;
+    }
 }
 
-/*----------------------------------------------------------
-Interviews main
------------------------------------------------------------- */
+//*----------------------------------------------------------
+//Interviews main
+//------------------------------------------------------------ */
+
 @media screen and (max-width: 480px) {
-    .interviews_main_photo{display:none;}
+    .interviews_main_photo {display: none;}
 }
 
-/*----------------------------------------------------------
-Interviews preview
------------------------------------------------------------- */
+//*----------------------------------------------------------
+//Interviews preview
+//------------------------------------------------------------ */
+
 @media screen and (max-width: 650px) {
-    #interview_preview_photo{display:none;}
+    #interview_preview_photo {display: none;}
 }
 
 
-/*----------------------------------------------------------
-Admin - DB updates
------------------------------------------------------------- */
+//*----------------------------------------------------------
+//Admin - DB updates
+//------------------------------------------------------------ */
+
 @media screen and (max-width: 480px) {
-    #left_nav_position_db_updates{ margin-top: 20px;}
+    #left_nav_position_db_updates {margin-top: 20px;}
 }
 
 @media screen and (max-width: 500px) {
-    #td_db_result, #th_db_result,#th_db_state,#td_db_state,
-    #td_db_id,#th_db_id,#th_db_exe,#td_db_exe{display:none;}
+    #td_db_result,
+    #th_db_result,
+    #th_db_state,
+    #td_db_state,
+    #td_db_id,
+    #th_db_id,
+    #th_db_exe,
+    #td_db_exe {
+        display: none;
+    }
 }
 
 @media screen and (max-width: 600px) {
-    #td_db_result, #th_db_result,#th_db_state,#td_db_state,
-    #td_db_id, #th_db_id{display:none;}
+    #td_db_result,
+    #th_db_result,
+    #th_db_state,
+    #td_db_state,
+    #td_db_id,
+    #th_db_id {
+        display: none;
+    }
 }
 
 @media screen and (max-width: 900px) {
-    #td_db_result, #th_db_result,#th_db_state,#td_db_state{display:none;}
+    #td_db_result,
+    #th_db_result,
+    #th_db_state,
+    #td_db_state {
+        display: none;
+    }
 }
 
 @media screen and (max-width: 1279px) {
-    #td_db_result, #th_db_result{display:none;}
+    #td_db_result,
+    #th_db_result {
+        display: none;
+    }
 }
 
-/*----------------------------------------------------------
-Admin - Change log
------------------------------------------------------------- */
+//*----------------------------------------------------------
+//Admin - Change log
+//------------------------------------------------------------ */
 @media screen and (max-width: 480px) {
-    #leftnav_position_change_log{ margin-top: 20px;}
+    #leftnav_position_change_log {margin-top: 20px;}
 }
 
 @media screen and (max-width: 450px) {
-    #log_subsection_th, #log_date_th, .log_subsection_td, .log_date_td{display:none;}
+    #log_subsection_th,
+    #log_date_th,
+    .log_subsection_td,
+    .log_date_td {
+        display: none;
+    }
 }
 
 @media screen and (max-width: 525px) {
-    #log_subsection_th, .log_subsection_td{display:none;}
+    #log_subsection_th,
+    .log_subsection_td {
+        display: none;
+    }
 }
 
 @media screen and (max-width: 725px) {
-    #log_name_th, .log_name_td{display:none;}
+    #log_name_th,
+    .log_name_td {
+        display: none;
+    }
 }
 
 @media screen and (max-width: 1200px) {
-    #log_sub_name_th, .log_subname_td{display:none;}
+    #log_sub_name_th,
+    .log_subname_td {
+        display: none;
+    }
 }
 
-/*----------------------------------------------------------
-Menu editor - Menu list
------------------------------------------------------------- */
+//*----------------------------------------------------------
+//Menu editor - Menu list
+//------------------------------------------------------------ */
+
 @media screen and (max-width: 500px) {
-    #menu_crew_th, .menu_crew_td{display:none;}
-    #menu_disk_set_th, .menu_disk_set_td {text-align:center;}
+    #menu_crew_th,
+    .menu_crew_td {
+        display: none;
+    }
+
+    #menu_disk_set_th,
+    .menu_disk_set_td {
+        text-align: center;
+    }
 }
 
 @media screen and (max-width: 600px) {
-    #nr_menus_th, #menu_type_th, .nr_menus_td, .menu_type_td{display:none;}
+    #nr_menus_th,
+    #menu_type_th,
+    .nr_menus_td,
+    .menu_type_td {
+        display: none;
+    }
 }
 
 @media screen and (max-width: 1050px) {
-    #menu_individual_th, .menu_individual_td{display:none;}
+    #menu_individual_th,
+    .menu_individual_td {
+        display: none;
+    }
 }
 
-/*----------------------------------------------------------
-Menu set edit
------------------------------------------------------------- */
+//*----------------------------------------------------------
+//Menu set edit
+//------------------------------------------------------------ */
+
 @media screen and (max-width: 400px) {
-    #menu_list_crew_th, .menu_list_crew_td{display:none;}
-    #menu_disk_list_th, .menu_disk_list_td{text-align:center;}
+    #menu_list_crew_th,
+    .menu_list_crew_td {
+        display: none;
+    }
+
+    #menu_disk_list_th,
+    .menu_disk_list_td {
+        text-align: center;
+    }
 }
 
 @media screen and (max-width: 450px) {
-    #menu_cred_th, .menu_cred_td{display:none;}
+    #menu_cred_th,
+    .menu_cred_td {
+        display: none;
+    }
 }
 
 @media screen and (max-width: 500px) {
-    #menu_list_ind_th, .menu_list_ind_td{display:none;}
+    #menu_list_ind_th,
+    .menu_list_ind_td {
+        display: none;
+    }
 }
 
 @media screen and (max-width: 550px) {
-    #menu_nick_th, #menu_update_th, .menu_nick_td, .menu_update_td,
-    #menu_state_th, .menu_state_td, #menu_gamedev_th, .menu_gamedev_td{display:none;}
+    #menu_nick_th,
+    #menu_update_th,
+    .menu_nick_td,
+    .menu_update_td,
+    #menu_state_th,
+    .menu_state_td,
+    #menu_gamedev_th,
+    .menu_gamedev_td {
+        display: none;
+    }
 }
 
 @media screen and (max-width: 700px) {
-    #menu_gameyear_th, #menu_gameinfo_th, #menu_gameset_th, .menu_gameyear_td, .menu_gameinfo_td, .menu_gameset_td, .menu_docinfo_td, #menu_docinfo_th{display:none;}
+    #menu_gameyear_th,
+    #menu_gameinfo_th,
+    #menu_gameset_th,
+    .menu_gameyear_td,
+    .menu_gameinfo_td,
+    .menu_gameset_td,
+    .menu_docinfo_td,
+    #menu_docinfo_th {
+        display: none;
+    }
 }
 
 
-/*----------------------------------------------------------
-General settings
------------------------------------------------------------- */
+//*----------------------------------------------------------
+//General settings
+//------------------------------------------------------------ */
 
-/*----------------------------------------------------------
-Background images
------------------------------------------------------------- */
+//*----------------------------------------------------------
+//Background images
+//------------------------------------------------------------ */
 @media screen and (min-width: 481px) {
-    body { background-image: url(../images/top_bg_sides.jpg);
-          background-position: left top;
-          background-repeat: repeat-x;
+    body {
+        background-image: url('../images/top_bg_sides.jpg');
+        background-position: left top;
+        background-repeat: repeat-x;
     }
 }
 
 @media screen and (min-width: 1920px) {
-    body {  background-image: url(../images/top_bg_left.jpg), url(../images/top_bg_right.jpg), url(../images/top_bg_sides.jpg);
-            background-position: left 2px, right 2px, left top;
-            background-repeat: no-repeat, repeat-x, repeat-x;
-         }
+    body {
+        background-image: url('../images/top_bg_left.jpg'), url('../images/top_bg_right.jpg'), url('../images/top_bg_sides.jpg');
+        background-position: left 2px, right 2px, left top;
+        background-repeat: no-repeat, repeat-x, repeat-x;
+    }
 }
 
 @media screen and (min-width: 1921px) {
-    body {  background-image: url(../images/top_bg_sides.jpg), url(../images/main_bg.png), url(../images/main_bg.png);
-            background-position: left top, 100% 100%, -10% 25%;
-            background-repeat: repeat-x, no-repeat, no-repeat;
-        }
+    body {
+        background-image: url('../images/top_bg_sides.jpg'), url('../images/main_bg.png'), url('../images/main_bg.png');
+        background-position: left top, 100% 100%, -10% 25%;
+        background-repeat: repeat-x, no-repeat, no-repeat;
+    }
 }
 
 
@@ -636,6 +804,7 @@ Background images
         width: 48%;
         margin-top: -395px;
     }
+
     .column_center {width: 48%; float: right;}
     .column_right {display: none;}
     .column_left_tab {width: 48%; float: left;}

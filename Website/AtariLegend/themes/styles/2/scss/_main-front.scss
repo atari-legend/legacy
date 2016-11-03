@@ -10,7 +10,7 @@
 // * frontpage
 // * ------------------------------------------------------------ */
 
- #welcome {
+#welcome {
     position: relative;
     float: left;
     width: 845px;
@@ -35,11 +35,11 @@
 #welcome p {
     padding-right: 5%;
     padding-left: 5%;
-    /* RGBa with 0.6 opacity */
+    //* RGBa with 0.6 opacity */
     text-align: center;
     background: rgb(172, 172, 172) transparent;
-    /* Fallback for web browsers that doesn't support RGBa */
-    background: rgba(172, 172, 172, 0.8);
+    //* Fallback for web browsers that doesn't support RGBa */
+    background: rgba(172, 172, 172, .8);
     border-right: 2px solid #6a6a6a;
 }
 
@@ -50,21 +50,21 @@
     font-size: 15px;
     color: #23f001;
     border-bottom: 2px solid #6a6a6a;
-    Margin-top: 130px;
+    margin-top: 130px;
 }
 
 .trivia_title {
     font-size: 25px;
-    color: white;
+    color: #fff;
 }
 
 .trivia_tag {
 }
 
 .trivia_text { font-size: 16px; }
-/*----------------------------------------------------------
-logon tile --> front page
------------------------------------------------------------- */
+//*----------------------------------------------------------
+//logon tile --> front page
+//------------------------------------------------------------ */
 .logon {
     float: right;
     width: 100%;
@@ -78,30 +78,30 @@ logon tile --> front page
     margin-left: 10%;
 }
 
-.logon_username_icon:before {
+.logon_username_icon::before {
     display: block;
-    content: url("../images/logon_usn.png");
+    content: url('../images/logon_usn.png');
 }
 
-.logon_password_icon:before {
+.logon_password_icon::before {
     display: block;
-    content: url("../images/logon_pwd.png");
+    content: url('../images/logon_pwd.png');
 }
 
-.logon_facebook_button:before {
+.logon_facebook_button::before {
     display: block;
     width: auto;
-    /*or your image's width*/
+    //*or your image's width*/
     height: 50%;
-    content: url("../images/login-facebook.png");
+    content: url('../images/login-facebook.png');
 }
 
-.logon_twitter_button:before {
+.logon_twitter_button::before {
     display: block;
     width: auto;
-    /*or your image's width*/
+    //*or your image's width*/
     height: 50%;
-    content: url("../images/login_twitter.png");
+    content: url('../images/login_twitter.png');
 }
 
 .logon_left {
@@ -123,13 +123,13 @@ logon tile --> front page
     margin-left: 10%;
 }
 
-.logon_signin { margin-top: 170px; }
+.logon_signin {margin-top: 170px;}
 .logon_signin img {
     display: block;
     margin: auto;
 }
 
-.logon_signin img:hover { opacity: 0.7; }
+.logon_signin img:hover {opacity: .7;}
 .logon_socmed {
     display: block;
     width: 50%;
@@ -137,50 +137,50 @@ logon tile --> front page
     margin: auto;
 }
 
-.logon_socmed:hover { opacity: 0.7; }
-/*----------------------------------------------------------
-datequote tile - front page
------------------------------------------------------------- */
-.datequote_bg { background: url(../images/datequote_bg.jpg); }
+.logon_socmed:hover {opacity: .7;}
+//*----------------------------------------------------------
+//datequote tile - front page
+//------------------------------------------------------------ */
+.datequote_bg { background: url('../images/datequote_bg.jpg'); }
 .datequote_bg p { text-align: center; }
 .datequote_day {
     margin-top: 0;
     margin-bottom: -20px;
     font-size: 113px;
-    color: white;
+    color: #fff;
 }
 
 .datequote_month {
     margin-top: -10px;
     margin-bottom: -10px;
     font-size: 40px;
-    color: white;
+    color: #fff;
 }
 
 .datequote_year {
     margin-top: -10px;
     font-size: 73px;
-    color: black;
+    color: #000;
     text-align: center;
 }
 
 .datequote_text {
     padding-top: 10px;
     padding-bottom: 10px;
-    /* RGBa with 0.6 opacity */
-    color: white;
+    //* RGBa with 0.6 opacity */
+    color: #fff;
     background: rgb(172, 172, 172) transparent;
-    /* Fallback for web browsers that doesn't support RGBa */
-    background: rgba(172, 172, 172, 0.7);
+    //* Fallback for web browsers that doesn't support RGBa */
+    background: rgba(172, 172, 172, .7);
 }
 
-/*----------------------------------------------------------
-Statistics tile - front page
------------------------------------------------------------- */
+//*----------------------------------------------------------
+//Statistics tile - front page
+//------------------------------------------------------------ */
 .statistics_dark { color: #6a6a6a; }
-/*----------------------------------------------------------
-contact tiles - front page
------------------------------------------------------------- */
+//*----------------------------------------------------------
+//contact tiles - front page
+//------------------------------------------------------------ */
 .contact_tiles {
     margin-bottom: 20px;
     background: none;
@@ -191,13 +191,13 @@ contact tiles - front page
 .contact_tiles >a >div {
     max-width: 100%;
     margin-bottom: 20px;
-    border: 2px solid black;
-    box-shadow: 3px 3px 5px #888888;
+    border: 2px solid #000;
+    box-shadow: 3px 3px 5px #888;
 }
 
 .contact_email_button {
     display: block;
-    background-image: url("../images/email.png");
+    background-image: url('../images/email.png');
     background-repeat: no-repeat;
     background-size: contain;
 }
@@ -210,7 +210,7 @@ contact tiles - front page
 
 .contact_facebook_button {
     display: block;
-    background-image: url("../images/facebook.png");
+    background-image: url('../images/facebook.png');
     background-repeat: no-repeat;
     background-size: contain;
 }
@@ -223,7 +223,7 @@ contact tiles - front page
 
 .contact_jukebox_button {
     display: block;
-    background-image: url("../images/jukebox.png");
+    background-image: url('../images/jukebox.png');
     background-repeat: no-repeat;
     background-size: contain;
 }
@@ -236,7 +236,7 @@ contact tiles - front page
 
 .contact_chat_button {
     display: block;
-    background-image: url("../images/chat.png");
+    background-image: url('../images/chat.png');
     background-repeat: no-repeat;
     background-size: contain;
 }
@@ -247,29 +247,29 @@ contact tiles - front page
     height: 120px;
 }
 
-/*----------------------------------------------------------
- Footer
------------------------------------------------------------- */
+//*----------------------------------------------------------
+// Footer
+//------------------------------------------------------------ */
 .footer {
     float: left;
     width: 100%;
     margin-top: 20px;
     background-color: #23ec00;
-    box-shadow: 3px 3px 5px #888888;
+    box-shadow: 3px 3px 5px #888;
 }
 
 .footer_logo {
     height: 120px;
     font-size: 13px;
-    color: white;
+    color: #fff;
     text-align: center;
-    background: url(../images/footer_bg.jpg) center 0 no-repeat;
-    border-top: 2px solid black;
+    background: url('../images/footer_bg.jpg') center 0 no-repeat;
+    border-top: 2px solid #000;
 }
 
-.footer_logo_image:before {
+.footer_logo_image::before {
     display: block;
-    content: url("../images/footer_logo.png");
+    content: url('../images/footer_logo.png');
 }
 
 #footer_img {
@@ -278,22 +278,27 @@ contact tiles - front page
     margin-left: auto;
 }
 
-/*----------------------------------------------------------
-/* JqueryUI Autocomplete section
------------------------------------------------------------- */
-/* Component containers----------------------------------*/
+//*----------------------------------------------------------
+//* JqueryUI Autocomplete section
+//------------------------------------------------------------ */
+//* Component containers----------------------------------*/
 .ui-widget-content {
     width: 245px;
     font-size: 13px;
-    color: #ffffff;
-    background: #000000;
-    border: 1px solid white;
+    color: #fff;
+    background: #000;
+    border: 1px solid #fff;
 }
 
-/* Interaction states
-----------------------------------*/
-.ui-state-hover,.ui-widget-content .ui-state-hover,.ui-widget-header .ui-state-hover,.ui-state-focus,.ui-widget-content .ui-state-focus,.ui-widget-header .ui-state-focus {
+//* Interaction states
+//----------------------------------*/
+.ui-state-hover,
+.ui-widget-content .ui-state-hover,
+.ui-widget-header .ui-state-hover,
+.ui-state-focus,
+.ui-widget-content .ui-state-focus,
+.ui-widget-header .ui-state-focus {
     color: #000;
-    background: white;
-    border: 1px solid #000000;
+    background: #fff;
+    border: 1px solid #000;
 }
