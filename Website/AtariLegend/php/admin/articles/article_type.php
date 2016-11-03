@@ -26,7 +26,7 @@ $result_article_type = $mysqli->query("SELECT * FROM article_type");
 
 $rows = $result_article_type->num_rows;
 while ($row = $result_article_type->fetch_array(MYSQLI_BOTH)) {
-        $smarty->append('article_type', array(
+    $smarty->append('article_type', array(
         'article_type_id' => $row['article_type_id'],
         'article_type' => $row['article_type']
     ));

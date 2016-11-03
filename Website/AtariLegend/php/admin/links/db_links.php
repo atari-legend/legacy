@@ -169,26 +169,18 @@ if (isset($action) and $action == 'modify_link') {
     $website_description_text = $mysqli->real_escape_string($website_description_text);
 
     if ($sql_desc->num_rows == 0) {
-
         if (isset($website_description_text)) {
-
             $mysqli->query("INSERT INTO website_description (website_id, website_description_text) VALUES ('$website_id', '$website_description_text')");
-
         }
     }
 
     if ($sql_desc->num_rows == 1) {
-
         if (isset($website_description_text)) {
-
             $mysqli->query("UPDATE website_description SET website_description_text='$website_description_text' WHERE website_id='$website_id'");
-
         }
 
         if (!isset($website_description_text)) {
-
             $mysqli->query("DELETE FROM website_description WHERE website_id = '$website_id'");
-
         }
     }
 
@@ -305,7 +297,6 @@ if (isset($action) and $action == 'del_cat') {
 // Delete the categorie from the tables
 //****************************************************************************************
 if (isset($action) and $action == "del_category") {
-
     //check if the categorie has some websites linked to it
     $website_count = $mysqli->query("SELECT website_id FROM website_category_cross WHERE website_category_id = '$category_id'");
 
@@ -319,4 +310,3 @@ if (isset($action) and $action == "del_category") {
 
     header("Location: ../links/link_cat.php");
 }
-?>

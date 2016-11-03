@@ -1,110 +1,134 @@
-/*************************************************************/	
-/**********************LEGACY SKIN****************************/
-/*************************************************************/ 
+//*************************************************************/
+//**********************LEGACY SKIN****************************/
+//*************************************************************/
+//*************************************************************/
+//********CPanel MAIN structure and LEFT and RIGHT css*********/
+//*************************************************************/
+//*----------------------------------------------------------
+//Front page
+//------------------------------------------------------------ */
+#user_stats {
+    float: right;
+    width: 49%;
+}
 
-/*************************************************************/	
-/********CPanel MAIN structure and LEFT and RIGHT css*********/
-/*************************************************************/ 
+#welcome_cpanel {
+    float: left;
+    width: 49%;
+}
 
-/*---------------------------------------------------------- 
-Front page
------------------------------------------------------------- */
-#user_stats{ float: right; width:49%;}	
-#welcome_cpanel{float: left; width:49%;}	
-#left_nav_position_front{ margin-top: 20px; margin-bottom: 20px; float: left;}
-#main_stats_position_front{ margin-top: 20px; margin-bottom: 20px;}
-#quick_search_position_front{ margin-top: 20px; margin-bottom: 20px; float: right;}
-	
-.user_stats_img{ max-width: 100%;
-		box-shadow: 0 0 12px #cccccc;	
-		opacity: 0.8;
-		filter: alpha(opacity=40); /* For IE8 and earlier */
-		margin-bottom: 10px;
+#left_nav_position_front {
+    float: left;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#main_stats_position_front {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#quick_search_position_front {
+    float: right;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.user_stats_img {
+    max-width: 100%;
+    /* For IE8 and earlier */
+    margin-bottom: 10px;
+    opacity: 0.8;
+    filter: alpha(opacity=40);
+    box-shadow: 0 0 12px #cccccc;
 }
 
 .main_stats_container {
-  display: flex;
-  align-items: flex-start; 
- }
-  
-#child_some_stats { width:45%; float:left;}
-#child_good_karma,#child_bad_karma{ width:27%; float:left;}
-
-.main_stats_child  table { width:98%;}
-#user_stats table { width:100%;}
-#welcome_cpanel table { width:100%;}
-
-/*---------------------------------------------------------- 
-Left nav
------------------------------------------------------------- */
-.left_nav_section{
-	background-color:#006f6f;
-	color: #FFFFDD;
-	border-bottom: solid 1px black;
-	background-color:#006f6f;
-	border-collapse: collapse;
-	padding-top:3px;
-	padding-bottom:3px;
-	padding-left:3px;
-	margin:0px;
-	text-align: center;
-	list-style-type: none;
+    display: flex;
+    align-items: flex-start;
 }
 
-.left_nav_link:link { color: #122323;}
-
-.left_nav_link:visited { color: #122323;}
-
-.left_nav_link:hover { color: white;}
-
-/*---------------------------------------------------------- 
-Quick search games
------------------------------------------------------------- */
-.quick_search_check {margin-right: 5px;}
-
-#quick_search_options{display:table; 
-	width:75%; 
-	margin-left:auto;
-	margin-right: auto;
-	text-align:left;		
+#child_some_stats {
+    float: left;
+    width: 45%;
 }
 
-.quick_search_games_button{  height: 25px;
-	  width: 80px;
-	  font-size: 10pt;
-	  display: block;
-	  margin-left: auto;
-	  margin-right: auto;
-	  cursor: pointer;
-	  border: 0;
-	  background: #00d3d3;
-	  color: #182727;
-	  border-bottom: 3px solid #008b8b;
-	  border-left: 1px solid #007878;
-	  padding-top: 3px;
+#child_good_karma,#child_bad_karma {
+    float: left;
+    width: 27%;
 }
 
-.quick_search_games_button:hover { color: white;}
+.main_stats_child  table { width: 98%; }
+#user_stats table { width: 100%; }
+#welcome_cpanel table { width: 100%; }
+//*----------------------------------------------------------
+//Left nav
+//------------------------------------------------------------ */
+.left_nav_section {
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-left: 3px;
+    margin: 0;
+    color: #FFFFDD;
+    text-align: center;
+    list-style-type: none;
+    background-color: #006f6f;
+    background-color: #006f6f;
+    border-collapse: collapse;
+    border-bottom: solid 1px black;
+}
+
+.left_nav_link:link { color: #122323; }
+.left_nav_link:visited { color: #122323; }
+.left_nav_link:hover { color: white; }
+//*----------------------------------------------------------
+//Quick search games
+//------------------------------------------------------------ */
+.quick_search_check { margin-right: 5px; }
+#quick_search_options {
+    display: table;
+    width: 75%;
+    margin-right: auto;
+    margin-left: auto;
+    text-align: left;
+}
+
+.quick_search_games_button {
+    display: block;
+    width: 80px;
+    height: 25px;
+    padding-top: 3px;
+    margin-right: auto;
+    margin-left: auto;
+    font-size: 10pt;
+    color: #182727;
+    cursor: pointer;
+    background: #00d3d3;
+    border: 0;
+    border-bottom: 3px solid #008b8b;
+    border-left: 1px solid #007878;
+}
 
 .quick_search_games_button:hover {
-  background: #00a9a9;
-  color: #182727;
-  border-bottom: 3px solid #006f6f;
+    color: white;
+    color: #182727;
+    background: #00a9a9;
+    border-bottom: 3px solid #006f6f;
 }
 
-#quick_search_pub_select{ 
-	width: 185px;
-	margin-top: 0;
-	height: 25px;
+#quick_search_pub_select {
+    width: 185px;
+    height: 25px;
+    margin-top: 0;
 }
 
-#quick_search_dev_select{ 
-	width: 185px;
-	margin-top: 0;
-	height: 25px;
+#quick_search_dev_select {
+    width: 185px;
+    height: 25px;
+    margin-top: 0;
 }
 
-#quick_search_small_select{ 
-	width: 50px;
-	height: 25px;
+#quick_search_small_select {
+    width: 50px;
+    height: 25px;
 }

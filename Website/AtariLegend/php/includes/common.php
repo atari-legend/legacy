@@ -11,7 +11,7 @@
  ********************************************************************************
 
  *********************************************************************************
- *In here we call all comon includes and variables ... We also check on sessions!
+ *In here we call all common includes and variables ... We also check on sessions!
  *********************************************************************************/
 
 extract($_REQUEST);
