@@ -37,7 +37,7 @@
     text-align: center;
     background: rgb(192, 193, 202) transparent;
     //* Fallback for web browsers that doesn't support RGBa */
-    background: rgba(192, 193, 202, 0.6);
+    background: rgba(192, 193, 202, .6);
     border-right: 2px solid #484c7b;
 }
 
@@ -53,13 +53,13 @@
 
 .trivia_title {
     font-size: 20pt;
-    color: black;
+    color: #000;
 }
 
 .trivia_tag { font-size: 13pt; }
 .trivia_text {
     font-size: 13pt;
-    color: black;
+    color: #000;
 }
 
 //*----------------------------------------------------------
@@ -79,17 +79,17 @@
     margin-left: 10%;
 }
 
-.logon_username_icon:before {
+.logon_username_icon::before {
     display: block;
     content: url('../images/logon_usn.png');
 }
 
-.logon_password_icon:before {
+.logon_password_icon::before {
     display: block;
     content: url('../images/logon_pwd.png');
 }
 
-.logon_facebook_button:before {
+.logon_facebook_button::before {
     display: block;
     width: auto;
     //*or your image's width*/
@@ -97,7 +97,7 @@
     content: url('../images/login-facebook.png');
 }
 
-.logon_twitter_button:before {
+.logon_twitter_button::before {
     display: block;
     width: auto;
     //*or your image's width*/
@@ -124,13 +124,13 @@
     margin-left: 10%;
 }
 
-.logon_signin { margin-top: 170px; }
+.logon_signin {margin-top: 170px;}
 .logon_signin img {
     display: block;
     margin: auto;
 }
 
-.logon_signin img:hover { opacity: 0.7; }
+.logon_signin img:hover {opacity: .7; }
 .logon_socmed {
     display: block;
     width: 50%;
@@ -138,7 +138,7 @@
     margin: auto;
 }
 
-.logon_socmed:hover {opacity: 0.7;}
+.logon_socmed:hover {opacity: .7;}
 //*----------------------------------------------------------
 //latest news tile --> front page
 //------------------------------------------------------------ */
@@ -157,20 +157,20 @@
     margin-top: 0;
     margin-bottom: -20px;
     font-size: 85pt;
-    color: white;
+    color: #fff;
 }
 
 .datequote_month {
     margin-top: -10px;
     margin-bottom: -10px;
     font-size: 30pt;
-    color: white;
+    color: #fff;
 }
 
 .datequote_year {
     margin-top: -10px;
     font-size: 55pt;
-    color: #cccccc;
+    color: #ccc;
     text-align: center;
 }
 
@@ -178,10 +178,10 @@
     padding-top: 10px;
     padding-bottom: 10px;
     //* RGBa with 0.6 opacity */
-    color: white;
+    color: #fff;
     background: rgb(192, 193, 202) transparent;
     //* Fallback for web browsers that doesn't support RGBa */
-    background: rgba(192, 193, 202, 0.6);
+    background: rgba(192, 193, 202, .6);
 }
 
 //*----------------------------------------------------------
@@ -271,7 +271,7 @@
     height: 120px;
 }
 
-.contact_tiles img:hover {box-shadow: 0 0 7px white;}
+.contact_tiles img:hover {box-shadow: 0 0 7px #fff;}
 
 //*----------------------------------------------------------
 // Footer
@@ -287,12 +287,12 @@
 .footer_logo {
     height: 120px;
     font-size: 10pt;
-    color: white;
+    color: #fff;
     text-align: center;
     background: url('../images/footer_bg.jpg') center 0 no-repeat;
 }
 
-.footer_logo_image:before {
+.footer_logo_image::before {
     display: block;
     content: url('../images/footer_logo.png');
 }
@@ -310,8 +310,8 @@
 .ui-widget-content {
     width: 245px;
     font-size: 13px;
-    color: #ffffff;
-    background: #000000;
+    color: #fff;
+    background: #000;
     border: 1px solid #161c71;
 }
 
