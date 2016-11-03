@@ -24,8 +24,7 @@ include("../../includes/common.php");
 include("../../includes/quick_search_games.php");
 include("../../includes/admin.php");
 
-if(empty($catpick))
-{
+if (empty($catpick)) {
     $catpick=1;
 }
 
@@ -34,36 +33,28 @@ $linkcategorysql = $mysqli->query($SQL) or die("Couldn't query categories");
 
 list($website_category_id,$website_category_name) = $linkcategorysql->fetch_array(MYSQLI_BOTH);
 
-mysqli_data_seek($linkcategorysql,0) or die("what happend?");
-while (list($category_id,$category_name) = $linkcategorysql->fetch_array(MYSQLI_BOTH))
-{
-    if ($category_id==$website_category_id)
-    {
+mysqli_data_seek($linkcategorysql, 0) or die("what happend?");
+while (list($category_id,$category_name) = $linkcategorysql->fetch_array(MYSQLI_BOTH)) {
+    if ($category_id==$website_category_id) {
         $selected="SELECTED";
-    }
-    else
-    {
+    } else {
         $selected="";
     }
 
-    if ($catpick==$category_id)
-    {
+    if ($catpick==$category_id) {
         $selected="SELECTED";
-    }
-    else
-    {
+    } else {
         $selected="";
     }
 
-    $smarty->append('category',
-        array('category_id' => $category_id,
-            'category_name' => $category_name,
-            'selected' => $selected));
+    $smarty->append('category', array(
+        'category_id' => $category_id,
+        'category_name' => $category_name,
+        'selected' => $selected));
 }
 
 
-if(isset($catpick))
-{
+if (isset($catpick)) {
     $website_category_id=$catpick;
 }
 
@@ -71,30 +62,27 @@ $LINKSQL = $mysqli->query("SELECT * FROM website
                         LEFT JOIN website_description ON (website.website_id = website_description.website_id)
                         LEFT JOIN website_category_cross ON (website.website_id = website_category_cross.website_id)
                         WHERE website_category_cross.website_category_id=$website_category_id ORDER by website.website_name")
-           or die ("Couldn't query website and website description");
+                        or die("Couldn't query website and website description");
 
-
-while  ($rowlink = $LINKSQL->fetch_array(MYSQLI_BOTH))
-{
-    $timestamp = date("F j, Y",$rowlink['website_date']);
+while ($rowlink = $LINKSQL->fetch_array(MYSQLI_BOTH)) {
+    $timestamp = date("F j, Y", $rowlink['website_date']);
     $submitted = get_username_from_id($rowlink['user_id']);
     $website_image = $website_image_path;
     $website_image .= $rowlink['website_id'];
     $website_image .= ".";
     $website_image .= $rowlink['website_imgext'];
 
-    $smarty->append('link_list',
-            array('website_id' => $rowlink['website_id'],
-                  'website_name' => $rowlink['website_name'],
-                  'website_url' => $rowlink['website_url'],
-                  'website_description' => $rowlink['website_description_text'],
-                  'website_image' => $website_image,
-                  'timestamp' => $timestamp,
-                  'submitted' => $submitted,
-                  'user_id' => $rowlink['user_id'],
-                  'website_imgext' => $rowlink['website_imgext']));
+    $smarty->append('link_list', array(
+        'website_id' => $rowlink['website_id'],
+        'website_name' => $rowlink['website_name'],
+        'website_url' => $rowlink['website_url'],
+        'website_description' => $rowlink['website_description_text'],
+        'website_image' => $website_image,
+        'timestamp' => $timestamp,
+        'submitted' => $submitted,
+        'user_id' => $rowlink['user_id'],
+        'website_imgext' => $rowlink['website_imgext']));
 }
 
 //Send all smarty variables to the templates
 $smarty->display("file:".$cpanel_template_folder."link_modlist.html");
-?>

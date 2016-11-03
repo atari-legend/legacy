@@ -29,7 +29,7 @@ $smarty->assign('website_id', $website_id);
 $LINKSQL = $mysqli->query("SELECT * FROM website
         LEFT JOIN website_description ON (website.website_id = website_description.website_id)
         WHERE website.website_id='$website_id'")
-       or die ("Error while querying the links database");
+       or die("Error while querying the links database");
 
 $rowlink= $LINKSQL->fetch_array(MYSQLI_BOTH);
 
@@ -38,13 +38,11 @@ $rowlink= $LINKSQL->fetch_array(MYSQLI_BOTH);
   $website_image .= ".";
   $website_image .= $rowlink['website_imgext'];
 
-
-
-$smarty->assign('website',
-array('website_name' => $rowlink['website_name'],
+$smarty->assign('website', array(
+    'website_name' => $rowlink['website_name'],
     'website_url' => $rowlink['website_url'],
     'website_id' => $rowlink['website_id'],
-//    'category_id' => $rowlink['website_category_id'],
+//  'category_id' => $rowlink['website_category_id'],
     'website_description_text' => $rowlink['website_description_text'],
     'website_imgext' => $rowlink['website_imgext'],
     'website_image' => $website_image));
@@ -54,11 +52,10 @@ $website = $mysqli->query("SELECT * FROM website_category_cross
           LEFT JOIN website_category ON (website_category_cross.website_category_id = website_category.website_category_id)
           WHERE website_category_cross.website_id = '$website_id'");
 
-while($category_row = $website->fetch_array(MYSQLI_BOTH))
-{
-  $smarty->append('website_category',
-  array('category_name' => $category_row['website_category_name'],
-      'category_id' => $category_row['website_category_id']));
+while ($category_row = $website->fetch_array(MYSQLI_BOTH)) {
+    $smarty->append('website_category', array(
+        'category_name' => $category_row['website_category_name'],
+        'category_id' => $category_row['website_category_id']));
 }
 
 //check if the categorie has some websites linked to it
@@ -72,21 +69,18 @@ $RESULT=$mysqli->query("SELECT * FROM website_category ORDER BY website_category
 
 $sel='';
 
-while ($rowlinkcat = $RESULT->fetch_array(MYSQLI_BOTH))
-{
+while ($rowlinkcat = $RESULT->fetch_array(MYSQLI_BOTH)) {
 /*  $sel='';
     if($rowlink['website_category_id']==$rowlinkcat['website_category_id'])
     {
       $sel="SELECTED";
     } */
 
-  $smarty->append('category',
-        array('category_id' => $rowlinkcat['website_category_id'],
-            'category_name' => $rowlinkcat['website_category_name'],
-              'selected' => $sel));
+    $smarty->append('category', array(
+        'category_id' => $rowlinkcat['website_category_id'],
+        'category_name' => $rowlinkcat['website_category_name'],
+        'selected' => $sel));
 }
 
 //Send all smarty variables to the templates
 $smarty->display("file:".$cpanel_template_folder."link_mod.html");
-
-?>

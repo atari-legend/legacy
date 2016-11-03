@@ -119,8 +119,7 @@ while ($author = $sql_author->fetch_array(MYSQLI_BOTH)) {
 $sql_demoauthors = $mysqli->query("SELECT * FROM demo_author
                                    LEFT JOIN individuals ON (demo_author.ind_id = individuals.ind_id)
                                    LEFT JOIN author_type ON (demo_author.author_type_id = author_type.author_type_id)
-                                   WHERE demo_author.demo_id='$demo_id' ORDER BY author_type.author_type_id, individuals.ind_name")
-                                   or die("Error loading authors");
+                                   WHERE demo_author.demo_id='$demo_id' ORDER BY author_type.author_type_id, individuals.ind_name") or die("Error loading authors");
 
 while ($demo_author = $sql_demoauthors->fetch_array(MYSQLI_BOTH)) {
     $smarty->append('demo_author', array(
