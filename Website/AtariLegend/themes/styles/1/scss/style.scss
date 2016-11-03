@@ -1,51 +1,61 @@
-/*************************************************************/	
-/**********************LEGACY SKIN****************************/
-/*************************************************************/ 
-
-/*---------------------------------------------------------- 
- SASS Variables
------------------------------------------------------------- */
-$skin-name: "legacy";
+//*************************************************************/
+//**********************LEGACY SKIN****************************/
+//*************************************************************/
+//*----------------------------------------------------------
+// SASS Variables
+//------------------------------------------------------------ */
+$skin-name: 'legacy';
 $bg-color: #00d3d3;
-
-/*---------------------------------------------------------- 
- Normalization script
------------------------------------------------------------- */
-@import "../../../templates/1/includes/main_scss/normalize/import-now";		/* --> Normalize script
-
-/*---------------------------------------------------------- 
- General settings
------------------------------------------------------------- */
-@import "../../../styles/1/scss/general"; 	/* --> general skin specific css settings */
-
-/*---------------------------------------------------------- 
- Top
------------------------------------------------------------- */
-@import '../../../templates/1/includes/main_scss/top'; 				/* --> TOP background & graphics */
-@import '../../../templates/1/includes/main_scss/top_animation'; 	/* --> TOP animation */
-@import '../../../templates/1/includes/main_scss/menu'; 				/* --> TOP and SIDE MENU */
-
-/*---------------------------------------------------------- 
- Main website
------------------------------------------------------------- */
-@import '../../../styles/1/scss/main-front';		/* --> Front page */ 	
-
-/*---------------------------------------------------------- 
- CPanel
------------------------------------------------------------- */
-@import '../../../styles/1/scss/cpanel-main';			/* --> Main structure, left and right side */ 
-@import '../../../styles/1/scss/cpanel-users';			/* --> Users section */ 
-@import '../../../styles/1/scss/cpanel-links';			/* --> Links section */ 
-@import '../../../styles/1/scss/cpanel-games';			/* --> Games section */ 
-@import '../../../styles/1/scss/cpanel-magazines';		/* --> Magazine section */ 
-@import '../../../styles/1/scss/cpanel-news';			/* --> News section */ 
-@import '../../../styles/1/scss/cpanel-company';		/* --> company section */ 
-@import '../../../styles/1/scss/cpanel-individuals';	/* --> individuals section */ 
-@import '../../../styles/1/scss/cpanel-interviews';		/* --> interviews section */ 
-@import '../../../styles/1/scss/cpanel-admin';			/* --> admin section */ 
-@import '../../../styles/1/scss/cpanel-menus';			/* --> menus section */ 
-
-/*---------------------------------------------------------- 
- Media Queries Main & CPanel 
------------------------------------------------------------- */
-@import '../../../styles/1/scss/mq'; 	/* --> media queries css settings */
+//*----------------------------------------------------------
+// Normalization script
+//------------------------------------------------------------ */
+//* --> Normalize script
+@import '../../../templates/1/includes/main_scss/normalize/import-now';
+//*----------------------------------------------------------
+// General settings
+//------------------------------------------------------------ */
+//* --> general skin specific css settings */
+@import '../../../styles/1/scss/general';
+//*----------------------------------------------------------
+// Top
+//------------------------------------------------------------ */
+@import '../../../templates/1/includes/main_scss/top';
+//* --> TOP background & graphics */
+@import '../../../templates/1/includes/main_scss/top_animation';
+//* --> TOP animation */
+@import '../../../templates/1/includes/main_scss/menu';
+//* --> TOP and SIDE MENU */
+//*----------------------------------------------------------
+// Main website
+//------------------------------------------------------------ */
+@import '../../../styles/1/scss/main-front';
+//* --> Front page */
+//*----------------------------------------------------------
+// CPanel
+//------------------------------------------------------------ */
+@import '../../../styles/1/scss/cpanel-main';
+//* --> Main structure, left and right side */
+@import '../../../styles/1/scss/cpanel-users';
+//* --> Users section */
+@import '../../../styles/1/scss/cpanel-links';
+//* --> Links section */
+@import '../../../styles/1/scss/cpanel-games';
+//* --> Games section */
+@import '../../../styles/1/scss/cpanel-magazines';
+//* --> Magazine section */
+@import '../../../styles/1/scss/cpanel-news';
+//* --> News section */
+@import '../../../styles/1/scss/cpanel-company';
+//* --> company section */
+@import '../../../styles/1/scss/cpanel-individuals';
+//* --> individuals section */
+@import '../../../styles/1/scss/cpanel-interviews';
+//* --> interviews section */
+@import '../../../styles/1/scss/cpanel-admin';
+//* --> admin section */
+@import '../../../styles/1/scss/cpanel-menus';
+//* --> menus section */
+//*----------------------------------------------------------
+// Media Queries Main & CPanel
+//------------------------------------------------------------ */
+@import '../../../styles/1/scss/mq';

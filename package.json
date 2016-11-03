@@ -1,0 +1,36 @@
+{
+  "name": "atarilegend",
+  "version": "0.1.0",
+  "devDependencies": {
+    "grunt": "~0.4.5",
+    "grunt-contrib-jshint": "~0.10.0",
+    "grunt-contrib-nodeunit": "~0.4.1",
+    "grunt-contrib-uglify": "~0.5.0",
+    "grunt-contrib-watch": "^1.0.0",
+    "grunt-pleeease": "^1.4.0",
+    "grunt-sass": "^1.2.1",
+    "grunt-scss-lint": "^0.5.0",
+    "grunt-scss-stylize": "^0.6.0"
+  },
+  "description": "The Atarilegend project",
+  "main": "Gruntfile.js",
+  "dependencies": {
+    "phplint": "^1.7.1"
+  },
+  "scripts": {
+    "test": "tap test/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stgraveyard/AtariLegend.git"
+  },
+  "keywords": [
+    "atari"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/stgraveyard/AtariLegend/issues"
+  },
+  "homepage": "https://github.com/stgraveyard/AtariLegend#readme"
+}

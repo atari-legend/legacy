@@ -25,13 +25,11 @@ $sql_publisher = $mysqli->query("SELECT pub_dev.pub_dev_id,
                    ORDER BY pub_dev.pub_dev_name ASC")
                 or die("Problems retriving values from publishers.");
 
-while ($company_publisher = $sql_publisher->fetch_array(MYSQLI_BOTH))
-{
+while ($company_publisher = $sql_publisher->fetch_array(MYSQLI_BOTH)) {
 
-  $smarty->append('company_publisher',
-     array('comp_id' => $company_publisher['pub_dev_id'],
-         'comp_name' => $company_publisher['pub_dev_name']));
-
+  $smarty->append('company_publisher', array(
+                    'comp_id' => $company_publisher['pub_dev_id'],
+                    'comp_name' => $company_publisher['pub_dev_name']));
 }
 
 //Get Developer values to fill the searchfield
@@ -43,13 +41,11 @@ $sql_developer = $mysqli->query("SELECT pub_dev.pub_dev_id,
                    ORDER BY pub_dev.pub_dev_name ASC")
                 or die("Problems retriving values from developers.");
 
-while ($company_developer = $sql_developer->fetch_array(MYSQLI_BOTH))
-{
+while ($company_developer = $sql_developer->fetch_array(MYSQLI_BOTH)) {
 
-  $smarty->append('company_developer',
-     array('comp_id' => $company_developer['pub_dev_id'],
-         'comp_name' => $company_developer['pub_dev_name']));
-
+  $smarty->append('company_developer', array(
+            'comp_id' => $company_developer['pub_dev_id'],
+            'comp_name' => $company_developer['pub_dev_name']));
 }
 
 // Create dropdown values a-z
