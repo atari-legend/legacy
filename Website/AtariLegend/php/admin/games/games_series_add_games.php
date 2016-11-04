@@ -184,4 +184,3 @@ $smarty->assign('mySelect', 'num');
 
 //Send all smarty variables to the templates
 $smarty->display("file:" . $cpanel_template_folder . "games_series_add_games.html");
-?>

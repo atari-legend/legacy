@@ -28,7 +28,6 @@ if ($action == "stop") {
 
 //If we are uploading new screenshots
 if (isset($action) and $action == 'add_screens') {
-
     //Here we'll be looping on each of the inputs on the page that are filled in with an image!
     $image = $_FILES['image'];
 
@@ -48,16 +47,13 @@ if (isset($action) and $action == 'add_screens') {
 
             if ($type_image == 'image/x-png') {
                 $ext = 'png';
-            }
-
-            elseif ($type_image == 'image/gif') {
+            } elseif ($type_image == 'image/gif') {
                 $ext = 'gif';
             } elseif ($type_image == 'image/jpeg') {
                 $ext = 'jpg';
             }
 
             if ($ext !== "") {
-
                 // First we insert the directory path of where the file will be stored... this also creates an autoinc number for us.
 
                 $sdbquery = $mysqli->query("INSERT INTO screenshot_main (screenshot_id,imgext) VALUES ('','$ext')") or die("Database error - inserting screenshots");
@@ -79,13 +75,11 @@ if (isset($action) and $action == 'add_screens') {
                 create_log_entry('Articles', $article_id, 'Screenshots', $article_id, 'Insert', $_SESSION['user_id']);
 
                 chmod("$article_screenshot_save_path$screenshotrow[0].$ext", 0777);
-
             }
         }
     }
 
     header("Location: ../articles/articles_screenshots_add.php?article_id=$article_id");
-
 }
 
 //If we pressed the delete screenshot link
@@ -128,7 +122,6 @@ if (isset($action) and $action == 'delete_screen') {
 // Delete the interview and return to the interview page
 //*************************************************************************
 if (isset($action) and $action == "delete_article") {
-
     create_log_entry('Articles', $article_id, 'Article', $article_id, 'Delete', $_SESSION['user_id']);
 
     $sql = $mysqli->query("DELETE FROM article_main WHERE article_id = '$article_id' ");
@@ -262,15 +255,12 @@ if (isset($action) and $action == 'update_article') {
     $_SESSION['edit_message'] = 'Article updated succesfully';
 
     header("Location: ../articles/articles_edit.php?article_id=$article_id");
-}
+} elseif (isset($action) and $action == 'add_article') {
+    //****************************************************************************************
+    //This is what happens when we press the create interview button in the interview creation
+    //page
+    //****************************************************************************************
 
-
-//****************************************************************************************
-//This is what happens when we press the create interview button in the interview creation
-//page
-//****************************************************************************************
-
-elseif (isset($action) and $action == 'add_article') {
     if ($members == '' or $members == '-' or $article_type == '' or $article_type == "-") {
         $_SESSION['edit_message'] = 'Some required info is not filled in. Make sure the -author- and -article_type- fields are completed';
 
@@ -278,7 +268,6 @@ elseif (isset($action) and $action == 'add_article') {
         $sql_types = $mysqli->query("SELECT article_type_id,article_type FROM article_type") or die("Database error - getting the article types");
 
         while ($article_types = $sql_types->fetch_array(MYSQLI_BOTH)) {
-
             //Get the selected article types
             if ($article_types['article_type_id'] == $article_type) {
                 $smarty->assign('selected_article_type', array(
@@ -308,7 +297,6 @@ elseif (isset($action) and $action == 'add_article') {
 
         //Send all smarty variables to the templates
         $smarty->display("file:" . $cpanel_template_folder . "articles_add.html");
-
     } else {
         $sdbquery = $mysqli->query("INSERT INTO article_main (user_id, article_type_id) VALUES ($members, $article_type)") or die("Couldn't insert into article_main");
 
@@ -333,6 +321,3 @@ elseif (isset($action) and $action == 'add_article') {
         header("Location: ../articles/articles_edit.php?article_id=$id");
     }
 }
-
-?>
-

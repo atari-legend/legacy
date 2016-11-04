@@ -32,8 +32,6 @@ $sql_logos = $mysqli->query("SELECT *
                             ORDER BY pub_dev.pub_dev_name");
 
 while ($logos = $sql_logos->fetch_array(MYSQLI_BOTH)) {
-
-
     $company_image = $company_screenshot_path;
     $company_image .= $logos['pub_dev_id'];
     $company_image .= '.';

@@ -13,12 +13,7 @@
 
 //load all common functions
 include("../../includes/common.php");
-include("../../includes/admin.php"); 
-include("../../includes/config.php"); 
+include("../../includes/admin.php");
 
 $_SESSION['edit_message'] = "This is page is under construction - Patience is a virtue!";
 header("Location: ../index.php");
-
-//close the connection
-//mysql_close();
-?>

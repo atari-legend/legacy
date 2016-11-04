@@ -20,7 +20,6 @@ include("../../includes/admin.php");
 
 //If we are uploading new screenshots
 if (isset($action) and $action == 'add_screens') {
-
     //Here we'll be looping on each of the inputs on the page that are filled in with an image!
     $image = $_FILES['image'];
 
@@ -38,16 +37,13 @@ if (isset($action) and $action == 'add_screens') {
 
             if ($type_image == 'image/x-png') {
                 $ext = 'png';
-            }
-
-            elseif ($type_image == 'image/gif') {
+            } elseif ($type_image == 'image/gif') {
                 $ext = 'gif';
             } elseif ($type_image == 'image/pjpeg') {
                 $ext = 'jpg';
             }
 
             if ($ext !== "") {
-
                 // First we insert the directory path of where the file will be stored... this also creates an autoinc number for us.
 
                 $sdbquery = $mysqli->query("INSERT INTO screenshot_main (screenshot_id,imgext) VALUES ('','$ext')") or die("Database error - inserting screenshots");
@@ -65,7 +61,6 @@ if (isset($action) and $action == 'add_screens') {
                 $file_data = rename($image['tmp_name'][$key], "$demo_screenshot_path$screenshotrow[0].$ext");
 
                 chmod("$demo_screenshot_path$screenshotrow[0].$ext", 0777);
-
             }
         }
     }
@@ -103,8 +98,5 @@ if (isset($action) and $action == 'delete_screen') {
     header("Location: ../demos/demos_screenshot_add.php?demo_id=$demo_id");
 }
 
-
-
 //close the connection
 mysqli_close($mysqli);
-?>

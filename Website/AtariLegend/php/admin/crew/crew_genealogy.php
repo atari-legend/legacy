@@ -38,9 +38,7 @@ if ($crewsearch != '' and $crewbrowse == '') {
             'crew_name' => $crew['crew_name']
         ));
     }
-}
-
-elseif ($crewbrowse != '' and $crewsearch == '') {
+} elseif ($crewbrowse != '' and $crewsearch == '') {
     $sql_crew = $mysqli->query("SELECT * FROM crew
                 WHERE crew_name LIKE '$crewbrowse%'
                 ORDER BY crew_name ASC") or die("Couldn't query Crew database");
@@ -146,8 +144,8 @@ if (isset($action) and $action == "genealogy") {
                                   FROM individual_nicks
                                   LEFT JOIN crew_individual ON (individual_nicks.ind_id = crew_individual.ind_id)
                                   WHERE crew_individual.crew_id = '$crew_select'") or die("Couldn't retrieve nick names");
-    while ($fetch_ind_nicks = $sql_ind_nicks->fetch_array(MYSQLI_BOTH)) {
 
+    while ($fetch_ind_nicks = $sql_ind_nicks->fetch_array(MYSQLI_BOTH)) {
         $smarty->append('nick_names', array(
             'individual_nicks_id' => $fetch_ind_nicks['individual_nicks_id'],
             'ind_id' => $fetch_ind_nicks['ind_id'],

@@ -21,7 +21,6 @@ include("../../includes/admin.php");
 // This is the delete demo music section
 //****************************************************************************************
 if (isset($action) and $action == 'delete_music') {
-
     if (isset($music_id)) {
         foreach ($music_id_selected as $music) {
             //get the extension
@@ -102,14 +101,10 @@ if (isset($action) and $action == 'upload_zaks') {
                 $file_data = rename($image['tmp_name'][$key], "$music_demo_path$music_id.$ext") or die("couldn't rename and move file");
 
                 chmod("$music_demo_path$music_id.$ext", 0777) or die("couldn't chmod file");
-
             } else {
                 $smarty->assign('message', 'Please use extension ym, mod, mp3 or snd');
             }
-
         }
     }
     header("Location: ../demos/demos_music_detail.php?demo_id=$demo_id");
 }
-
-?>

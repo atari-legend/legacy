@@ -49,8 +49,6 @@ if (isset($reviewid) and isset($game_id)) {
                            WHERE review_game.game_id='$game_id' ORDER BY review_game.review_id") or die("Database error - selecting review");
     $i = 1;
     while ($review = $sql_review->fetch_array(MYSQLI_BOTH)) {
-
-
         $smarty->append('review', array(
             'review_id' => $review['review_id'],
             'user_name' => $review['userid'],
@@ -77,7 +75,6 @@ if (isset($reviewid) and isset($game_id)) {
                                ORDER BY review_game.review_id") or die("Database error - selecting review data");
 
     while ($edit_review = $sql_edit_REVIEW->fetch_array(MYSQLI_BOTH)) {
-
         $review_text = stripslashes($edit_review['review_text']);
 
         $smarty->assign('edit_review', array(
@@ -127,4 +124,3 @@ if (isset($reviewid) and isset($game_id)) {
     //Send all smarty variables to the templates
     $smarty->display("file:" . $cpanel_template_folder . "games_review_edit.html");
 }
-?>

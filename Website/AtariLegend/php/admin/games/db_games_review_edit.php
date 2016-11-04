@@ -94,7 +94,6 @@ if ($action == 'edit_review') {
     $i = 0;
 
     while ($screenrow = $SCREEN->fetch_row()) {
-
         if ($inputfield[$i] != "") {
             //fill the review_screenshot table
 
@@ -108,9 +107,7 @@ if ($action == 'edit_review') {
             $number = $REVIEWSCREEN->num_rows;
 
             if ($number > 0) {
-            }
-            //else insert it
-            else {
+            } else { //else insert it
                 $sdbquery = $mysqli->query("INSERT INTO screenshot_review (review_id, screenshot_id) VALUES ('$reviewid', '$screenid')") or die("Couldn't insert into screenshot_review");
             }
 
@@ -127,14 +124,11 @@ if ($action == 'edit_review') {
             $number = $REVIEWCOMMENT->num_rows;
 
             if ($number > 0) {
-
                 $comment = $mysqli->real_escape_string($comment);
 
                 $sdbquery = $mysqli->query("UPDATE review_comments SET comment_text = '$comment'
                        WHERE screenshot_review_id = '$reviewshotid'") or die("Couldn't update review_comments");
-            }
-            //else insert it
-            else {
+            } else { //else insert it
                 $comment = $mysqli->real_escape_string($comment);
                 $sdbquery = $mysqli->query("INSERT INTO review_comments (screenshot_review_id, comment_text) VALUES ('$reviewshotid', '$comment')") or die("Couldn't insert into review_comments");
             }
@@ -183,4 +177,3 @@ if (isset($action) and $action == 'move_to_comment') {
 
     header("Location: ../games/games_review_add.php?game_id=$game_id");
 }
-?>

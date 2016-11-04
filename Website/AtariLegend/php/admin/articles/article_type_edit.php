@@ -1,4 +1,4 @@
- <?php
+<?php
 /***************************************************************************
  *                                article_type_eit.php
  *                            --------------------------
@@ -54,4 +54,3 @@ if ($article_type_id == '-' or $article_type_id == ' ') {
 
 //close the connection
 mysqli_free_result($result_menus_type);
-?>

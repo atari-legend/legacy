@@ -24,7 +24,6 @@ include("../../includes/admin.php");
 include("../../includes/quick_search_games.php");
 
 if (isset($action) and $action == 'load') {
-
     $sql_author = $mysqli->query("SELECT * FROM author_type WHERE author_type_id = '$type_id'
                                ORDER BY author_type_info ASC") or die("Couldn't query author_types");
 
