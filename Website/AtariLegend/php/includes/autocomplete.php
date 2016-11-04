@@ -1,4 +1,4 @@
- <?php
+<?php
 /*******************************************************************************
  *                                autocomplete.php
  *                            -----------------------
@@ -44,4 +44,3 @@ while ($row = $result->fetch_assoc()) {
 $json .= ']';
 $mysqli->query("DROP TABLE temp");
 echo $json;
-?>

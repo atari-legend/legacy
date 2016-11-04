@@ -64,4 +64,3 @@ $smarty->display("file:" . $cpanel_template_folder . "news_edit_images.html");
 
 //close the connection
 mysqli_close($mysqli);
-?>

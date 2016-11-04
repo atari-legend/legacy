@@ -50,7 +50,6 @@ $value_gamereview     = 50;
 $sql_user = $mysqli->query("SELECT user_id,userid,karma FROM users");
 
 while (list($user_id, $user_name, $karma_value) = $sql_user->fetch_array(MYSQLI_BOTH)) {
-
     $nr_gamecomments    = 0;
     $nr_gamereviews     = 0;
     $nr_downloads       = 0;
@@ -82,7 +81,7 @@ while (list($user_id, $user_name, $karma_value) = $sql_user->fetch_array(MYSQLI_
     $gamecount     = $sql_downloads->fetch_array(MYSQLI_BOTH);
     //$nr_downloads = $gamecount[count];
     $nr_downloads  = $sql_downloads->num_rows;
-    ;
+
     mysqli_free_result($sql_downloads);
 
     // gamesubmissions
@@ -115,19 +114,16 @@ while (list($user_id, $user_name, $karma_value) = $sql_user->fetch_array(MYSQLI_
     $karma_value = $karma_value + ($nr_downloads * $value_gamedownload);
 
     $update = $mysqli->query("UPDATE users SET karma='$karma_value' WHERE user_id='$user_id'") or die("Failed to update karma");
-
 }
 
 $sql_user2 = $mysqli->query("SELECT user_id,userid,karma FROM users ORDER BY karma DESC");
 
 while ($user_info = $sql_user2->fetch_array(MYSQLI_BOTH)) {
-
     $smarty->append('sync', array(
         'user_id' => $user_info['user_id'],
         'user_name' => $user_info['userid'],
         'karma_value' => $user_info['karma']
     ));
-
 }
 
 //Send all smarty variables to the templates
@@ -135,4 +131,3 @@ $smarty->display("file:" . $cpanel_template_folder . "user_karmasync.html");
 
 //close the connection
 mysqli_close($mysqli);
-?>
