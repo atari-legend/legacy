@@ -21,7 +21,6 @@ include("../../includes/quick_search_games.php");
 
 // use glob and a foreach loop to search the database_scripts folder for update files
 foreach (glob("../../admin/administration/database_scripts/*.php") as $filename) {
-
     // import update script
     require_once("$filename");
 
@@ -36,14 +35,12 @@ foreach (glob("../../admin/administration/database_scripts/*.php") as $filename)
         "update_filename" => $filename,
         "force_insert" => $force_insert
     );
-
 }
 
 // Sort array
 asort($database_update);
 
 foreach ($database_update as $key) {
-
     //No way around hardcoding database_update table itself...
     if ($key['database_update_id'] == 1) {
         // Run the test condition query
@@ -78,17 +75,14 @@ foreach ($database_update as $key) {
         }
     } //end hardcode database update table.
 
-
     // Checking if the database_update_id already exist in the database to avoid issues later on.
 
     $result_change = $mysqli->query("SELECT * from database_change WHERE database_update_id=$key[database_update_id]");
     $row_change    = $result_change->fetch_array(MYSQLI_ASSOC);
 
     $row_cnt = $result_change->num_rows;
-    if ($row_cnt < 1)
+    if ($row_cnt < 1) {
     // What should happend if the script is not in the database
-        {
-
         // We begin with any script that is set to autoexecute
         if ($key['database_autoexecute'] == "yes") { // Run the test condition query
             $test_query = $mysqli->query("$key[test_condition]") or die("Database update $key[database_update_id] Test condition failed");
@@ -160,7 +154,6 @@ foreach ($database_update as $key) {
               VALUES ('$key[database_update_id]', '$update_description','$timestamp', 'implemented', '$key[update_filename]', '$script_string')") or die("Unable to insert corner cases into database_change table");
             }
         }
-
     } // End if statement for rowcount nothing in database
 
     // Lets do some matching against the database
@@ -208,4 +201,3 @@ foreach ($database_update as $key) {
 
 //Send all smarty variables to the templates
 $smarty->display("file:" . $cpanel_template_folder . "database_update.html");
-?>

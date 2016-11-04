@@ -108,4 +108,3 @@ $smarty->display("file:" . $cpanel_template_folder . "interviews_preview.html");
 
 //close the connection
 mysqli_close($mysqli);
-?>

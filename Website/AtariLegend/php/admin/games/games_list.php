@@ -443,12 +443,10 @@ if (isset($action) and $action == "search") {
               ORDER BY pub_dev.pub_dev_name ASC") or die("Problems retriving values from publishers.") or die("error publisher");
 
                 while ($company_publisher = $sql_publisher->fetch_array(MYSQLI_BOTH)) {
-
                     $smarty->append('company_publisher', array(
                         'comp_id' => $company_publisher['pub_dev_id'],
                         'comp_name' => $company_publisher['pub_dev_name']
                     ));
-
                 }
 
                 //Get Developer values to fill the searchfield
@@ -460,12 +458,10 @@ if (isset($action) and $action == "search") {
               ORDER BY pub_dev.pub_dev_name ASC") or die("Problems retriving values from developers.");
 
                 while ($company_developer = $sql_developer->fetch_array(MYSQLI_BOTH)) {
-
                     $smarty->append('company_developer', array(
                         'comp_id' => $company_developer['pub_dev_id'],
                         'comp_name' => $company_developer['pub_dev_name']
                     ));
-
                 }
                 $smarty->assign("user_id", $_SESSION['user_id']);
 
@@ -481,5 +477,3 @@ if (isset($action) and $action == "search") {
         }
     }
 }
-?>
-

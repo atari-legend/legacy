@@ -54,4 +54,3 @@ if (isset($action) and $action == 'delete') {
 
 //close the connection
 mysqli_close($mysqli);
-?>

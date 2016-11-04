@@ -1,4 +1,4 @@
- <?php
+<?php
 /***************************************************************************
  *                                Individuals_main.php
  *                            --------------------------
@@ -51,4 +51,3 @@ $smarty->display("file:" . $cpanel_template_folder . "individuals_main.html");
 
 //close the connection
 mysqli_close($mysqli);
-?>

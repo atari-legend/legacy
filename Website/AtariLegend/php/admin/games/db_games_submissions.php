@@ -43,9 +43,6 @@ if ($action == "update_submission") {
     header("Location: ../games/submission_games.php?v_counter=$v_counter");
 }
 
-
-
-// Delete
 if ($action == "delete_submission") {
     //****************************************************************************************
     // This is the delete submission
@@ -73,7 +70,6 @@ if ($action == "move_submission_tocomment") {
     //****************************************************************************************
 
     if (isset($submit_id)) {
-
         $query_submit = $mysqli->query("SELECT * FROM game_submitinfo WHERE game_submitinfo_id = " . $submit_id . "") or die("something is wrong with mysqli");
         $sql_submit = $query_submit->fetch_array(MYSQLI_BOTH) or die("something is wrong with mysqli2");
 
@@ -102,4 +98,3 @@ if ($action == "move_submission_tocomment") {
         header("Location: ../games/submission_games.php?v_counter=$v_counter");
     }
 }
-?>

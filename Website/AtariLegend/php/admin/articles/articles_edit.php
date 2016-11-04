@@ -114,4 +114,3 @@ $smarty->display("file:" . $cpanel_template_folder . "articles_edit.html");
 
 //close the connection
 mysqli_close($mysqli);
-?>

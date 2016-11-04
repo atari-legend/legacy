@@ -18,10 +18,7 @@
 include("../../includes/common.php");
 include("../../includes/admin.php");
 
-echo $action;
-
 if ($action == "edit_demos_comment") {
-
     //****************************************************************************************
     // This is the game comment edit place
     //****************************************************************************************
@@ -37,10 +34,7 @@ if ($action == "edit_demos_comment") {
     }
 }
 
-
-// Delete
 if ($action == "delete_comment") {
-
     //****************************************************************************************
     // This is the demo comment edit place
     //****************************************************************************************
@@ -49,7 +43,6 @@ if ($action == "delete_comment") {
         $sql = $mysqli->query("DELETE FROM demo_user_comments WHERE comments_id = '$comment_id'") or die("couldn't delete demo_comment quote");
         $sql = $mysqli->query("DELETE FROM comments WHERE comments_id = '$comment_id'") or die("couldn't delete comment quote");
     }
-
 
     if ($view == "users_comments") {
         header("Location: ../demos/demos_comment.php?v_counter=$v_counter&c_counter=$c_counter&users_id=$users_id&view=$view");

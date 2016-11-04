@@ -32,12 +32,12 @@ if ($article_title == '') {
 
     //Send all smarty variables to the templates
     header("Location: ../articles/articles_main.php");
-}
+} else {
 //****************************************************************************************
 //This piece of code is used to open up a blank article add canvas (before we actually
 //add it to the DB)
 //****************************************************************************************
-else {
+
     //get the types
     $sql_types = $mysqli->query("SELECT article_type_id,article_type FROM article_type") or die("Database error - getting the article types");
 

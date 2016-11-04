@@ -19,7 +19,6 @@ include("../../includes/common.php");
 include("../../includes/admin.php");
 
 if (isset($action) and $action == "insert_magazine") {
-
     //****************************************************************************************
     // This is where we insert the magazine name into the database
     //****************************************************************************************
@@ -30,15 +29,12 @@ if (isset($action) and $action == "insert_magazine") {
     header("Location: ../magazine/magazine_add.php");
 }
 
-
 if (isset($action) and $action == "add_issue") {
-
     //****************************************************************************************
     // This is where we insert new issues
     //****************************************************************************************
 
     if (isset($newissue) and isset($magazine_id)) {
-
         $mysqli->query("INSERT INTO magazine_issue (magazine_issue_nr,magazine_id) VALUES ('$newissue','$magazine_id')");
 
         mysqli_close($mysqli);
@@ -48,9 +44,7 @@ if (isset($action) and $action == "add_issue") {
     header("Location: ../magazine/magazine_edit.php?magazine_id=$magazine_id");
 }
 
-
 if (isset($action) and $action == "delete_issue") {
-
     //****************************************************************************************
     // This is where we delete issue
     //****************************************************************************************
@@ -64,7 +58,6 @@ if (isset($action) and $action == "delete_issue") {
     //remove potential coverscan
 
     if ($fetchdel[magazine_issue_imgext] !== '') {
-
         unlink("$magazine_scan_path$magazine_issue_id.$fetchdel[magazine_issue_imgext]");
     }
 
@@ -73,7 +66,6 @@ if (isset($action) and $action == "delete_issue") {
 }
 
 if (isset($action) and $action == "coverscan_upload") {
-
     //****************************************************************************************
     // This is where we upload coverscans
     //****************************************************************************************
@@ -90,7 +82,6 @@ if (isset($action) and $action == "coverscan_upload") {
         $file_data = rename($_FILES['coverscan']['tmp_name'], "$magazine_scan_path$magazine_issue_id.$imgext") or die("ERROR couldn't upload and move file!!");
 
         chmod("$magazine_scan_path$magazine_issue_id.$imgext", 0777);
-
     }
 
     mysqli_close($mysqli);
@@ -100,7 +91,6 @@ if (isset($action) and $action == "coverscan_upload") {
 }
 
 if (isset($action) and $action == "delete_coverscan") {
-
     //****************************************************************************************
     // This is where we delete coverscans
     //****************************************************************************************
@@ -122,6 +112,7 @@ if (isset($action) and $action == "delete_coverscan") {
     // Redirect back to previous page
     header("Location: ../magazine/magazine_issue_edit.php?magazine_issue_id=$magazine_issue_id");
 }
+
 if (isset($action) and $action == "score_delete") {
     //****************************************************************************************
     // This is where we delete review scores

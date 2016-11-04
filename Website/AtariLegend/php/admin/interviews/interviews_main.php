@@ -73,7 +73,6 @@ if (isset($action) and $action == 'search') {
     $smarty->assign("message", $message);
 
     while ($interview = $sql_interview->fetch_array(MYSQLI_BOTH)) {
-
         //The interviewed person's picture
         if ($interview['ind_imgext'] == 'png' or $interview['ind_imgext'] == 'jpg' or $interview['ind_imgext'] == 'gif') {
             $v_ind_image = $individual_screenshot_path;

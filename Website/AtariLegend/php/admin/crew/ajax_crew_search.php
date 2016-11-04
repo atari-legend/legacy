@@ -123,7 +123,6 @@ if (isset($action) and $action == "ind_gen_search") {
 
         $query_temporary = $mysqli->query("SELECT * FROM temp WHERE ind_name LIKE '%$query%' ORDER BY ind_name ASC") or die("Failed to query temporary table");
         $mysqli->query("DROP TABLE temp");
-
     } elseif ($query == "empty") {
         $sql_individuals = "SELECT ind_id,ind_name FROM individuals ORDER BY ind_name ASC";
         $sql_aka         = "SELECT ind_id,nick FROM individual_nicks ORDER BY nick ASC";

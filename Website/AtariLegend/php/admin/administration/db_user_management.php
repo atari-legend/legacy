@@ -88,7 +88,6 @@ if (isset($action) and $action == "email_user") {
     }
 }
 
-
 if ((isset($action) and $action == "deactivate_user")) {
     if (isset($user_id)) {
         $start = microtime(true);
@@ -107,5 +106,3 @@ if ((isset($action) and $action == "deactivate_user")) {
 }
 
 header("Location: ../administration/user_management.php");
-
-?>

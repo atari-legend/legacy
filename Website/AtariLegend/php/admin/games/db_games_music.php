@@ -111,14 +111,11 @@ if (isset($action) and $action == 'upload_zaks') {
                 $_SESSION['edit_message'] = "Music file uploaded";
 
                 create_log_entry('Games', $game_id, 'Music', $game_id, 'Insert', $_SESSION['user_id']);
-
             } else {
                 $_SESSION['edit_message'] = "Please use extension ym, mod, mp3 or snd";
                 //$smarty->assign('message', 'Please use extension ym, mod, mp3 or snd');
             }
-
         }
     }
     header("Location: ../games/games_music_detail.php?game_id=$game_id");
 }
-?>

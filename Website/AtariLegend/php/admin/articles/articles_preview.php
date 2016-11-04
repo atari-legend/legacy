@@ -79,7 +79,6 @@ while ($sql_screenshots = $query_screenshots->fetch_array(MYSQLI_BOTH)) {
         'count' => $count,
         'comment' => $sql_screenshots['comment_text']
     ));
-
     $count++;
 }
 
@@ -88,4 +87,3 @@ $smarty->display("file:" . $cpanel_template_folder . "articles_preview.html");
 
 //close the connection
 mysqli_close($mysqli);
-?>

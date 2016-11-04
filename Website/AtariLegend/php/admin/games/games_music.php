@@ -5,10 +5,10 @@
 *   begin                : Tuesday, November 15, 2005
 *   copyright            : (C) 2005 Atari Legend
 *   email                : admin@atarilegend.com
-*						   Created file
-*						
+*                          Created file
+*
 *   Id: games_music.php,v 0.10 2005/11/15 ST Graveyard
-* 		v 0.2 clean up 2015-12-26 Mattias
+*       v 0.2 clean up 2015-12-26 Mattias
 *
 ***************************************************************************/
 
@@ -17,7 +17,7 @@ include("../../includes/common.php");
 include("../../includes/admin.php");
 
 //load the search fields of the quick search side menu
-include("../../includes/quick_search_games.php"); 
+include("../../includes/quick_search_games.php");
 
 /*
 ************************************************************************************************
@@ -30,5 +30,3 @@ $smarty->display("file:".$cpanel_template_folder."games_music.html");
 
 //close the connection
 mysqli_close($mysqli);
-
-?>
