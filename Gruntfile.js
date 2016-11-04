@@ -26,9 +26,9 @@ module.exports = function(grunt) {
 
       scsslint: {
     allFiles: [
-      'Website/AtariLegend/themes/styles/1/scss/*.scss',
-      'Website/AtariLegend/themes/styles/2/scss/*.scss',
-      //'Website/AtariLegend/themes/styles/3/scss/*.scss'
+      //'Website/AtariLegend/themes/styles/1/scss/*.scss',
+      //'Website/AtariLegend/themes/styles/2/scss/*.scss',
+      'Website/AtariLegend/themes/styles/3/scss/*.scss'
     ],
     options: {
       bundleExec: false,
@@ -69,6 +69,22 @@ module.exports = function(grunt) {
       },
     },
 
+    phpcs: {
+    application: {
+        src: [
+                //'Website/AtariLegend/php/admin/menus/ajax_adddocs_menus.php',
+                'Website/AtariLegend/php/main/**/*.php'
+        ]
+    },
+    options: {
+        bin: '/usr/bin/phpcs -d memory_limit=128M',
+        standard: 'PSR2',
+        reportFile: 'result/report.txt',
+        verbose: true,
+        maxBuffer: 10000000000*2048,
+    }
+    },
+
   stylizeSCSS: {
     target: {
       options: {
@@ -98,9 +114,11 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-scss-stylize');
     grunt.loadNpmTasks('grunt-pleeease');
     grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-phpcs');
 
     // Default task(s).
     grunt.registerTask('default', ['sass','pleeease']);
     grunt.registerTask('lint', ['scsslint']);
     grunt.registerTask('beauty', ['stylizeSCSS']);
+    grunt.registerTask('phpcheck', ['phpcs']);
 };
