@@ -174,7 +174,6 @@ $sql_menu_types_connection = $mysqli->query("SELECT
                         WHERE menu_type.menu_sets_id = '$menu_sets_id'") or die("Couldn't query menu types database for type connection");
 
 while ($menu_types_connection_result = $sql_menu_types_connection->fetch_array(MYSQLI_BOTH)) {
-
     $smarty->append('connected_menu_types', array(
         'menu_types_main_id' => $menu_types_connection_result['menu_types_main_id'],
         'menu_types_text' => $menu_types_connection_result['menu_types_text']
@@ -185,7 +184,6 @@ while ($menu_types_connection_result = $sql_menu_types_connection->fetch_array(M
 $result_menus = $mysqli->query("SELECT * FROM menu_set ORDER BY menu_sets_name ASC");
 
 while ($row = $result_menus->fetch_array(MYSQLI_BOTH)) {
-
     $smarty->append('menu_set_list', array(
         'menu_sets_id' => $row['menu_sets_id'],
         'menu_sets_name' => $row['menu_sets_name']
@@ -209,4 +207,3 @@ $smarty->display("file:" . $cpanel_template_folder . "menus_disk_list.html");
 
 //close the connection
 mysqli_free_result($result_menus);
-?>

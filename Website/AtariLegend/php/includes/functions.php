@@ -1,24 +1,24 @@
 <?php
 /***************************************************************************
-*                                functions.php
-*                            --------------------------
-*   begin                : Monday, 26 January, 2004
-*   copyright            : (C) 2003 Atari Legend
-*   email                : maarten.martens@freebel.net
-*   actual update        :
-*
-*   Id: functions.php,v 0.10 2004/01/26 00:55 silver
-*   Id: functions.php,v 0.20 2016/08/17 STG - Added change log function
-*
-***************************************************************************/
+ *                                functions.php
+ *                            --------------------------
+ *   begin                : Monday, 26 January, 2004
+ *   copyright            : (C) 2003 Atari Legend
+ *   email                : maarten.martens@freebel.net
+ *   actual update        :
+ *
+ *   Id: functions.php,v 0.10 2004/01/26 00:55 silver
+ *   Id: functions.php,v 0.20 2016/08/17 STG - Added change log function
+ *
+ ***************************************************************************/
 
 //this is a test
 
-function InsertALCode($alcode){
+function InsertALCode($alcode) {
     $alcode = preg_replace("#\[color\=(\#[0-9A-F]{0,6}|[A-z]+)\](.*)\[\/color\]#Ui", "<span style=\"color: $1;\">$2</span>", $alcode);
     //$alcode = eregi_replace("\\[style=([^\\[]*)\\]","<span class=\"\\1\">",$alcode);
     //$alcode = str_replace("[/style]", "</span>", $alcode);
-    $alcode = preg_replace("(\[size=(.+?)\](.+?)\[\/size\])is","<span style=\"font-size: $1px\">$2</span>",$alcode);
+    $alcode = preg_replace("(\[size=(.+?)\](.+?)\[\/size\])is", "<span style=\"font-size: $1px\">$2</span>", $alcode);
     $alcode = preg_replace("#\[font\=(.*)\](.*)\[\/font\]#Ui", "<span style=\"font-family: $1;\">$2</span>", $alcode);
     $alcode = preg_replace("#\[align\=(.*)\](.*)\[\/align\]#Ui", "<span style=\" $1;\">$2</span>", $alcode);
     $alcode = str_replace("[move]", "<marquee>", $alcode);
@@ -32,10 +32,10 @@ function InsertALCode($alcode){
     $alcode = str_replace("[/tt]", "</tt>", $alcode);
     $alcode = str_replace("[sup]", "<sup>", $alcode);
     $alcode = str_replace("[/sup]", "</sup>", $alcode);
-    $alcode = preg_replace( "#\[b\](.+?)\[/b\]#is", "<b>\\1</b>", $alcode );
-    $alcode = preg_replace( "#\[i\](.+?)\[/i\]#is", "<i>\\1</i>", $alcode );
-    $alcode = preg_replace( "#\[u\](.+?)\[/u\]#is", "<u>\\1</u>", $alcode );
-    $alcode = preg_replace( "#\[s\](.+?)\[/s\]#is", "<s>\\1</s>", $alcode );
+    $alcode = preg_replace("#\[b\](.+?)\[/b\]#is", "<b>\\1</b>", $alcode);
+    $alcode = preg_replace("#\[i\](.+?)\[/i\]#is", "<i>\\1</i>", $alcode);
+    $alcode = preg_replace("#\[u\](.+?)\[/u\]#is", "<u>\\1</u>", $alcode);
+    $alcode = preg_replace("#\[s\](.+?)\[/s\]#is", "<s>\\1</s>", $alcode);
     $alcode = str_replace("[*]", "<li>", $alcode);
     $alcode = str_replace("[list]", "<ul>", $alcode);
     $alcode = str_replace("[/list]", "</ul>", $alcode);
@@ -44,8 +44,8 @@ function InsertALCode($alcode){
     $alcode = preg_replace("#\[hotspot\=(.*)\](.*)\[\/hotspot\]#Ui", "<a name=\"$1\">$2</a>", $alcode);
     $alcode = str_replace("[quote]", "<blockquote><span class=\"12px\">quote:</span><hr>", $alcode);
     $alcode = str_replace("[/quote]", "<hr></blockquote>", $alcode);
-    $alcode = str_replace("[code]","<blockquote><pre>",$alcode);
-    $alcode = str_replace("[/code]","</pre></blockquote>",$alcode);
+    $alcode = str_replace("[code]", "<blockquote><pre>", $alcode);
+    $alcode = str_replace("[/code]", "</pre></blockquote>", $alcode);
     $alcode = preg_replace("#\[url\](www\..+)\[\/url\]#i", "[url=http://$1]$1[/url]", $alcode);
     $alcode = preg_replace("#\[url\=(www\..+)\](.*)\[\/url\]#i", "[url=http://$1]$2[/url]", $alcode);
     $alcode = preg_replace("#\[url\=(.*)\](.*)\[\/url\]#Ui", "<a href=\"$1\" class=\"standard_tile_link_black\">$2</a>", $alcode);
@@ -57,15 +57,14 @@ function InsertALCode($alcode){
     return $alcode;
 }
 
-function BBCode($Text)
-{
+function BBCode($Text) {
     // Replace any html brackets with HTML Entities to prevent executing HTML or script
     // Don't use strip_tags here because it breaks [url] search by replacing & with amp
     $Text = str_replace("<", "&lt", $Text);
     $Text = str_replace(">", "&gt", $Text);
 
     // Set up the parameters for a URL search string
-    $URLSearchString = " a-zA-Z0-9\:\/\-\?\&\.\=\_\~\#\'";
+    $URLSearchString  = " a-zA-Z0-9\:\/\-\?\&\.\=\_\~\#\'";
     // Set up the parameters for a MAIL search string
     $MAILSearchString = $URLSearchString . " a-zA-Z0-9\.@";
 
@@ -79,37 +78,37 @@ function BBCode($Text)
     $Text = preg_replace("/\[mail\=([$MAILSearchString]*)\](.+?)\[\/mail\]/", '<a href="mailto:$1">$2</a>', $Text);
 
     // Check for bold text
-    $Text = preg_replace("(\[b\](.+?)\[\/b])is",'<span style="font-weight:bold;">$1</span>',$Text);
+    $Text = preg_replace("(\[b\](.+?)\[\/b])is", '<span style="font-weight:bold;">$1</span>', $Text);
 
     // Check for Italics text
-    $Text = preg_replace("(\[i\](.+?)\[\/i\])is",'<span style="font-style: italic;">$1</span>',$Text);
+    $Text = preg_replace("(\[i\](.+?)\[\/i\])is", '<span style="font-style: italic;">$1</span>', $Text);
 
     // Check for Underline text
-    $Text = preg_replace("(\[u\](.+?)\[\/u\])is",'<span style="text-decoration: underline;">$1</span>',$Text);
+    $Text = preg_replace("(\[u\](.+?)\[\/u\])is", '<span style="text-decoration: underline;">$1</span>', $Text);
 
     // Check for strike-through text
-    $Text = preg_replace("(\[s\](.+?)\[\/s\])is",'<span class="strikethrough">$1</span>',$Text);
+    $Text = preg_replace("(\[s\](.+?)\[\/s\])is", '<span class="strikethrough">$1</span>', $Text);
 
     // Check for over-line text
-    $Text = preg_replace("(\[o\](.+?)\[\/o\])is",'<span class="overline">$1</span>',$Text);
+    $Text = preg_replace("(\[o\](.+?)\[\/o\])is", '<span class="overline">$1</span>', $Text);
 
     // Check for colored text
-    $Text = preg_replace("(\[color=(.+?)\](.+?)\[\/color\])is","<span style=\"color: $1\">$2</span>",$Text);
+    $Text = preg_replace("(\[color=(.+?)\](.+?)\[\/color\])is", "<span style=\"color: $1\">$2</span>", $Text);
 
     // Check for sized text
-    $Text = preg_replace("(\[size=(.+?)\](.+?)\[\/size\])is","<span style=\"font-size: $1px\">$2</span>",$Text);
+    $Text = preg_replace("(\[size=(.+?)\](.+?)\[\/size\])is", "<span style=\"font-size: $1px\">$2</span>", $Text);
 
     // Check for list text
-    $Text = preg_replace("/\[list\](.+?)\[\/list\]/is", '<ul class="listbullet">$1</ul>' ,$Text);
-    $Text = preg_replace("/\[list=1\](.+?)\[\/list\]/is", '<ul class="listdecimal">$1</ul>' ,$Text);
-    $Text = preg_replace("/\[list=i\](.+?)\[\/list\]/s", '<ul class="listlowerroman">$1</ul>' ,$Text);
-    $Text = preg_replace("/\[list=I\](.+?)\[\/list\]/s", '<ul class="listupperroman">$1</ul>' ,$Text);
-    $Text = preg_replace("/\[list=a\](.+?)\[\/list\]/s", '<ul class="listloweralpha">$1</ul>' ,$Text);
-    $Text = preg_replace("/\[list=A\](.+?)\[\/list\]/s", '<ul class="listupperalpha">$1</ul>' ,$Text);
+    $Text = preg_replace("/\[list\](.+?)\[\/list\]/is", '<ul class="listbullet">$1</ul>', $Text);
+    $Text = preg_replace("/\[list=1\](.+?)\[\/list\]/is", '<ul class="listdecimal">$1</ul>', $Text);
+    $Text = preg_replace("/\[list=i\](.+?)\[\/list\]/s", '<ul class="listlowerroman">$1</ul>', $Text);
+    $Text = preg_replace("/\[list=I\](.+?)\[\/list\]/s", '<ul class="listupperroman">$1</ul>', $Text);
+    $Text = preg_replace("/\[list=a\](.+?)\[\/list\]/s", '<ul class="listloweralpha">$1</ul>', $Text);
+    $Text = preg_replace("/\[list=A\](.+?)\[\/list\]/s", '<ul class="listupperalpha">$1</ul>', $Text);
     $Text = str_replace("[*]", "<li>", $Text);
 
     // Check for font change text
-    $Text = preg_replace("(\[font=(.+?)\](.+?)\[\/font\])","<span style=\"font-family: $1;\">$2</span>",$Text);
+    $Text = preg_replace("(\[font=(.+?)\](.+?)\[\/font\])", "<span style=\"font-family: $1;\">$2</span>", $Text);
 
     // Declare the format for [code] layout
     $CodeLayout = '<table width="90%" border="0" align="center" cellpadding="0" cellspacing="0">
@@ -121,7 +120,7 @@ function BBCode($Text)
                         </tr>
                    </table>';
     // Check for [code] text
-    $Text = preg_replace("/\[code\](.+?)\[\/code\]/is","$CodeLayout", $Text);
+    $Text       = preg_replace("/\[code\](.+?)\[\/code\]/is", "$CodeLayout", $Text);
 
     // Declare the format for [quote] layout
     $QuoteLayout = '<table width="90%" border="0" align="center" cellpadding="0" cellspacing="0">
@@ -134,7 +133,7 @@ function BBCode($Text)
                    </table>';
 
     // Check for [code] text
-    $Text = preg_replace("/\[quote\](.+?)\[\/quote\]/is","$QuoteLayout", $Text);
+    $Text = preg_replace("/\[quote\](.+?)\[\/quote\]/is", "$QuoteLayout", $Text);
 
     // Images
     // [img]pathtoimage[/img]
@@ -151,7 +150,7 @@ function BBCode($Text)
     return $Text;
 }
 
-function InsertSmillies($alcode){
+function InsertSmillies($alcode) {
     $alcode = str_replace(":-D", "<img style=\"vertical-align: middle;\" src=\"../templates/0/emoticons/icon_biggrin.gif\">", $alcode);
     $alcode = str_replace(":)", "<img style=\"vertical-align: middle;\" src=\"../templates/0/emoticons/icon_smile.gif\">", $alcode);
     $alcode = str_replace(":(", "<img style=\"vertical-align: middle;\" src=\"../templates/0/emoticons/icon_sad.gif\">", $alcode);
@@ -179,7 +178,7 @@ function InsertSmillies($alcode){
     return $alcode;
 }
 
-function RemoveSmillies($alcode){
+function RemoveSmillies($alcode) {
     $alcode = str_replace(":-D", "", $alcode);
     $alcode = str_replace(":)", "", $alcode);
     $alcode = str_replace(":(", "", $alcode);
@@ -207,47 +206,42 @@ function RemoveSmillies($alcode){
     return $alcode;
 }
 
-function get_username_from_id($submitted)
-{
+function get_username_from_id($submitted) {
     global $mysqli;
     $result = $mysqli->query("SELECT userid FROM users WHERE user_id = $submitted") or die("Query failed");
-    if ($result->num_rows == 0)
+    if ($result->num_rows == 0) {
         return 0;
-    else {
+    } else {
         $query_data = $result->fetch_array(MYSQLI_BOTH);
         return $query_data['userid'];
     }
 }
 
-function date_to_timestamp($date_Year,$date_Month,$date_Day)
-{
-    $timestamp = mktime (0,0,0,$date_Month,$date_Day,$date_Year);
+function date_to_timestamp($date_Year, $date_Month, $date_Day) {
+    $timestamp = mktime(0, 0, 0, $date_Month, $date_Day, $date_Year);
     return $timestamp;
 }
 
 
-function filter($entry){
-// Filter out strange characters like ^, $, &, change "it's" to "its"
-    static $drop_char_match =   array('^', '$', '&', '(', ')', '<', '>', '`', '"', '|', ',', '@', '_', '?', '%', '-', '~', '+', '.', '[', ']', '{', '}', ':', '\\', '/', '=', '#', '\'', ';', '!');
-    static $drop_char_replace = array('', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '' , '', '', '', '', '', '');
+function filter($entry) {
+    // Filter out strange characters like ^, $, &, change "it's" to "its"
+    static $drop_char_match = array('^', '$', '&', '(', ')', '<', '>', '`', '"', '|', ',', '@', '_', '?', '%', '-', '~', '+', '.', '[', ']', '{', '}', ':', '\\', '/', '=', '#', '\'', ';', '!');
+    static $drop_char_replace = array('', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
 
-    for($i = 0; $i < count($drop_char_match); $i++)
-    {
-        $entry =  str_replace($drop_char_match[$i], $drop_char_replace[$i], $entry);
+    for ($i = 0; $i < count($drop_char_match); $i++) {
+        $entry = str_replace($drop_char_match[$i], $drop_char_replace[$i], $entry);
     }
     return $entry;
 }
 
-function search($entry){
-// search for strange characters like ^, $, &, change "it's" to "its"
-    static $drop_char_match =   array('^', '$', '&', '(', ')', '<', '>', '`', '"', '|', ',', '@', '_', '?', '%', '-', '~', '+', '.', '[', ']', '{', '}', ':', '\\', '/', '=', '#', '\'', ';', '!');
+function search($entry) {
+    // search for strange characters like ^, $, &, change "it's" to "its"
+    static $drop_char_match = array('^', '$', '&', '(', ')', '<', '>', '`', '"', '|', ',', '@', '_', '?', '%', '-', '~', '+', '.', '[', ']', '{', '}', ':', '\\', '/', '=', '#', '\'', ';', '!');
 
     $count = 0;
 
-    for($i = 0; $i < count($drop_char_match); $i++)
-    {
-        if ($count == 0)
-        {
+    for ($i = 0; $i < count($drop_char_match); $i++) {
+        if ($count == 0) {
             $count = substr_count($entry, $drop_char_match[$i]);
         }
     }
@@ -255,22 +249,74 @@ function search($entry){
 }
 
 function az_dropdown_value($entry) {
-
-        $entry = array('num','a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z');
+    $entry = array(
+        'num',
+        'a',
+        'b',
+        'c',
+        'd',
+        'e',
+        'f',
+        'g',
+        'h',
+        'i',
+        'j',
+        'k',
+        'l',
+        'm',
+        'n',
+        'o',
+        'p',
+        'q',
+        'r',
+        's',
+        't',
+        'u',
+        'v',
+        'w',
+        'x',
+        'y',
+        'z'
+    );
 
     return $entry;
 }
 
 function az_dropdown_output($entry) {
-
-        $entry = array('0-9','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z');
+    $entry = array(
+        '0-9',
+        'A',
+        'B',
+        'C',
+        'D',
+        'E',
+        'F',
+        'G',
+        'H',
+        'I',
+        'J',
+        'K',
+        'L',
+        'M',
+        'N',
+        'O',
+        'P',
+        'Q',
+        'R',
+        'S',
+        'T',
+        'U',
+        'V',
+        'W',
+        'X',
+        'Y',
+        'Z'
+    );
 
     return $entry;
 }
 
-function statistics_stack()
-{
-
+function statistics_stack() {
     global $mysqli;
 
     //**************************
@@ -434,111 +480,94 @@ function statistics_stack()
 //This function will create a change log table entry according to its parameters. In the db* files, with every DB transaction,
 //this function is called. The table is used for the change log section of the cpanel.
 function create_log_entry($section, $section_id, $subsection, $subsection_id, $action, $user_id) {
-
     global $mysqli;
 
-    $log_time = date_to_timestamp(date('Y'),date('m'),date('d'));
+    $log_time = date_to_timestamp(date('Y'), date('m'), date('d'));
 
-//  Everything we do for the GAMES SECTION
-    If ( $section == 'Games' )
-    {
-        if ( $subsection == 'Submission' )
-        {
+    //  Everything we do for the GAMES SECTION
+    if ($section == 'Games') {
+        if ($subsection == 'Submission') {
             // get game id
             $query_game_id = "SELECT game_id FROM game_submitinfo WHERE game_submitinfo_id = '$section_id'";
             $result = $mysqli->query($query_game_id) or die("getting game name failed");
             $query_data = $result->fetch_array(MYSQLI_BOTH);
             $section_id = $query_data['game_id'];
-
         }
 
         //  get the game name
-            $query_game = "SELECT game_name FROM game WHERE game_id = '$section_id'";
-            $result = $mysqli->query($query_game) or die("getting game name failed");
-            $query_data = $result->fetch_array(MYSQLI_BOTH);
-            $section_name = $query_data['game_name'];
+        $query_game = "SELECT game_name FROM game WHERE game_id = '$section_id'";
+        $result = $mysqli->query($query_game) or die("getting game name failed");
+        $query_data   = $result->fetch_array(MYSQLI_BOTH);
+        $section_name = $query_data['game_name'];
 
 
-        If ( $subsection == 'Game' OR $subsection == 'File' OR $subsection == 'Screenshot' OR  $subsection == 'Mag score' OR
-             $subsection == 'Box back' OR $subsection == 'Box front' OR $subsection == 'Review' OR $subsection == 'Review comment' OR
-             $subsection == 'Music' OR $subsection == 'Submission' )
-        {
+        if ($subsection == 'Game' or $subsection == 'File' or $subsection == 'Screenshot' or $subsection == 'Mag score' or $subsection == 'Box back' or $subsection == 'Box front' or $subsection == 'Review' or $subsection == 'Review comment' or $subsection == 'Music' or $subsection == 'Submission') {
             $subsection_name = $section_name;
         }
 
-        If ( $subsection == 'AKA' )
-        {
+        if ($subsection == 'AKA') {
             //  get the AKA name
-                $query_aka = "SELECT aka_name FROM game_aka WHERE game_aka_id = '$subsection_id'";
-                $result = $mysqli->query($query_aka) or die("getting aka name failed");
-                $query_data = $result->fetch_array(MYSQLI_BOTH);
-                $subsection_name = $query_data['aka_name'];
-                $subsection_id = $section_id;
+            $query_aka = "SELECT aka_name FROM game_aka WHERE game_aka_id = '$subsection_id'";
+            $result = $mysqli->query($query_aka) or die("getting aka name failed");
+            $query_data      = $result->fetch_array(MYSQLI_BOTH);
+            $subsection_name = $query_data['aka_name'];
+            $subsection_id   = $section_id;
         }
 
-        If ( $subsection == 'Creator' )
-        {
-            if ($action == 'Delete')
-            {
+        if ($subsection == 'Creator') {
+            if ($action == 'Delete') {
                 //  get the ind name & id
                 $query_ind = "SELECT individuals.ind_id,
                                      individuals.ind_name FROM individuals
                                      LEFT JOIN game_author ON ( individuals.ind_id = game_author.ind_id )
                                      WHERE game_author.game_author_id = '$subsection_id'";
                 $result = $mysqli->query($query_ind) or die("getting ind name failed");
-                $query_data = $result->fetch_array(MYSQLI_BOTH);
+                $query_data      = $result->fetch_array(MYSQLI_BOTH);
                 $subsection_name = $query_data['ind_name'];
-                $subsection_id = $query_data['ind_id'];
-            }
-            else
-            {
-            //  get the ind name
+                $subsection_id   = $query_data['ind_id'];
+            } else {
+                //  get the ind name
                 $query_ind = "SELECT ind_name FROM individuals WHERE ind_id = '$subsection_id'";
                 $result = $mysqli->query($query_ind) or die("getting ind name failed");
-                $query_data = $result->fetch_array(MYSQLI_BOTH);
+                $query_data      = $result->fetch_array(MYSQLI_BOTH);
                 $subsection_name = $query_data['ind_name'];
             }
         }
 
-        If ( $subsection == 'Publisher' OR $subsection == 'Developer' )
-        {
+        if ($subsection == 'Publisher' or $subsection == 'Developer') {
             //  get the pub/dev name
-                $query_pubdev = "SELECT pub_dev_name FROM pub_dev WHERE pub_dev_id = '$subsection_id'";
-                $result = $mysqli->query($query_pubdev) or die("getting pub/dev name failed");
-                $query_data = $result->fetch_array(MYSQLI_BOTH);
-                $subsection_name = $query_data['pub_dev_name'];
+            $query_pubdev = "SELECT pub_dev_name FROM pub_dev WHERE pub_dev_id = '$subsection_id'";
+            $result = $mysqli->query($query_pubdev) or die("getting pub/dev name failed");
+            $query_data      = $result->fetch_array(MYSQLI_BOTH);
+            $subsection_name = $query_data['pub_dev_name'];
         }
 
-        If ( $subsection == 'Year' )
-        {
+        if ($subsection == 'Year') {
             //  get the game year
-                $query_gameyear = "SELECT game_year FROM game_year WHERE game_year_id = '$subsection_id'";
-                $result = $mysqli->query($query_gameyear) or die("getting gameyear failed");
-                $query_data = $result->fetch_array(MYSQLI_BOTH);
-                $subsection_name = $query_data['game_year'];
-                $subsection_id = $section_id;
+            $query_gameyear = "SELECT game_year FROM game_year WHERE game_year_id = '$subsection_id'";
+            $result = $mysqli->query($query_gameyear) or die("getting gameyear failed");
+            $query_data      = $result->fetch_array(MYSQLI_BOTH);
+            $subsection_name = $query_data['game_year'];
+            $subsection_id   = $section_id;
         }
 
-        If ( $subsection == 'Similar' )
-        {
-            if ($action == 'Delete')
-            {
+        if ($subsection == 'Similar') {
+            if ($action == 'Delete') {
                 // get the cross id
                 $query_cross = "SELECT game_similar_cross FROM game_similar WHERE game_similar_id = '$subsection_id'";
                 $result = $mysqli->query($query_cross) or die("getting cross failed");
-                $query_data = $result->fetch_array(MYSQLI_BOTH);
+                $query_data    = $result->fetch_array(MYSQLI_BOTH);
                 $subsection_id = $query_data['game_similar_cross'];
             }
-        //  get the game name
+            //  get the game name
             $query_game = "SELECT game_name FROM game WHERE game_id = '$subsection_id'";
             $result = $mysqli->query($query_game) or die("getting game name failed");
-            $query_data = $result->fetch_array(MYSQLI_BOTH);
+            $query_data      = $result->fetch_array(MYSQLI_BOTH);
             $subsection_name = $query_data['game_name'];
-            $subsection_id = $section_id;
+            $subsection_id   = $section_id;
         }
 
-        If ( $subsection == 'Comment' )
-        {
+        if ($subsection == 'Comment') {
             //get game_id and game_user_comments_id
             $query_user_comment = "SELECT game_user_comments.game_id,
                                           game_user_comments.game_user_comments_id,
@@ -548,140 +577,121 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
                                           WHERE game_user_comments.comment_id = '$subsection_id'";
 
             $result = $mysqli->query($query_user_comment) or die("getting user comments id failed");
-            $query_data = $result->fetch_array(MYSQLI_BOTH);
-            $subsection_id = $query_data['game_user_comments_id'];
-            $section_id = $query_data['game_id'];
-            $section_name = $query_data['game_name'];
+            $query_data      = $result->fetch_array(MYSQLI_BOTH);
+            $subsection_id   = $query_data['game_user_comments_id'];
+            $section_id      = $query_data['game_id'];
+            $section_name    = $query_data['game_name'];
             $subsection_name = $query_data['game_name'];
         }
     }
 
-//  Everything we do for the GAMES SERIES SECTION
-    If ( $section == 'Game series' )
-    {
-        If ( $subsection == 'Game' )
-        {
-            if ( $action == 'Delete' )
-            {
+    //  Everything we do for the GAMES SERIES SECTION
+    if ($section == 'Game series') {
+        if ($subsection == 'Game') {
+            if ($action == 'Delete') {
                 //get the game_id and game_series_id
                 $query_series = "SELECT game_id, game_series_id FROM game_series_cross WHERE game_series_cross_id = '$subsection_id'";
                 $result = $mysqli->query($query_series) or die("getting series info failed");
-                $query_data = $result->fetch_array(MYSQLI_BOTH);
+                $query_data    = $result->fetch_array(MYSQLI_BOTH);
                 $subsection_id = $query_data['game_id'];
-                $section_id = $query_data['game_series_id'];
+                $section_id    = $query_data['game_series_id'];
             }
 
             //  get the game name
             $query_game = "SELECT game_name FROM game WHERE game_id = '$subsection_id'";
             $result = $mysqli->query($query_game) or die("getting game name failed");
-            $query_data = $result->fetch_array(MYSQLI_BOTH);
+            $query_data      = $result->fetch_array(MYSQLI_BOTH);
             $subsection_name = $query_data['game_name'];
         }
 
         //  get the name of the series
         $query_series = "SELECT game_series_name FROM game_series WHERE game_series_id = '$section_id'";
         $result = $mysqli->query($query_series) or die("getting series name failed");
-        $query_data = $result->fetch_array(MYSQLI_BOTH);
+        $query_data   = $result->fetch_array(MYSQLI_BOTH);
         $section_name = $query_data['game_series_name'];
 
-        If ( $subsection == 'Series' )
-        {
+        if ($subsection == 'Series') {
             $subsection_name = $section_name;
         }
     }
 
-//  Everything we do for the Trivia SECTION
-    If ( $section == 'Trivia' )
-    {
-        if ( $subsection == 'DYK' OR $subsection == 'Quote' )
-        {
-            $subsection_name = ( "Trivia ID " . $subsection_id );
-            $section_name = ( "Trivia ID " . $subsection_id );
+    //  Everything we do for the Trivia SECTION
+    if ($section == 'Trivia') {
+        if ($subsection == 'DYK' or $subsection == 'Quote') {
+            $subsection_name = ("Trivia ID " . $subsection_id);
+            $section_name    = ("Trivia ID " . $subsection_id);
         }
     }
 
-//  Everything we do for the USERS SECTION
-    If ( $section == 'Users' )
-    {
+    //  Everything we do for the USERS SECTION
+    if ($section == 'Users') {
         // Get the username
         $query_username = "SELECT userid FROM users WHERE user_id = '$section_id'";
         $result = $mysqli->query($query_username) or die("getting user name failed");
-        $query_data = $result->fetch_array(MYSQLI_BOTH);
+        $query_data   = $result->fetch_array(MYSQLI_BOTH);
         $section_name = $query_data['userid'];
 
-        if ( $subsection == 'Avatar' OR $subsection == 'User' )
-        {
+        if ($subsection == 'Avatar' or $subsection == 'User') {
             $subsection_name = $section_name;
         }
-
     }
 
     //  Everything we do for the LINKS section
-    If ( $section == 'Links' )
-    {
+    if ($section == 'Links') {
         // Get the website name
         $query_website = "SELECT website_name FROM website WHERE website_id = '$section_id'";
         $result = $mysqli->query($query_website) or die("getting website name failed");
-        $query_data = $result->fetch_array(MYSQLI_BOTH);
+        $query_data   = $result->fetch_array(MYSQLI_BOTH);
         $section_name = $query_data['website_name'];
 
-        if ( $subsection == 'Link' )
-        {
+        if ($subsection == 'Link') {
             $subsection_name = $section_name;
         }
 
-        if ( $subsection == 'Category' )
-        {
+        if ($subsection == 'Category') {
             // Get the category name
             $query_cat = "SELECT website_category_name FROM website_category WHERE website_category_id = '$subsection_id'";
             $result = $mysqli->query($query_cat) or die("getting category name failed");
-            $query_data = $result->fetch_array(MYSQLI_BOTH);
+            $query_data      = $result->fetch_array(MYSQLI_BOTH);
             $subsection_name = $query_data['website_category_name'];
         }
     }
 
     //  Everything we do for the LINKS CATEGORY section
-    If ( $section == 'Links cat' )
-    {
+    if ($section == 'Links cat') {
         // Get the category name
         $query_cat = "SELECT website_category_name FROM website_category WHERE website_category_id = '$section_id'";
         $result = $mysqli->query($query_cat) or die("getting category name failed");
-        $query_data = $result->fetch_array(MYSQLI_BOTH);
+        $query_data   = $result->fetch_array(MYSQLI_BOTH);
         $section_name = $query_data['website_category_name'];
 
-        if ( $subsection == 'Category' )
-        {
+        if ($subsection == 'Category') {
             $subsection_name = $section_name;
         }
     }
 
     //  Everything we do for the COMPANY section
-    If ( $section == 'Company' )
-    {
+    if ($section == 'Company') {
         // Get the company name
         $query_comp = "SELECT pub_dev_name FROM pub_dev WHERE pub_dev_id = '$section_id'";
         $result = $mysqli->query($query_comp) or die("getting comp name failed");
-        $query_data = $result->fetch_array(MYSQLI_BOTH);
+        $query_data   = $result->fetch_array(MYSQLI_BOTH);
         $section_name = $query_data['pub_dev_name'];
 
-        if ( $subsection == 'Company' OR $subsection == 'Logo')
-        {
+        if ($subsection == 'Company' or $subsection == 'Logo') {
             $subsection_name = $section_name;
         }
     }
 
     //  Everything we do for the Individual section
-    If ( $section == 'Individuals' )
-    {
-        if ( $subsection == 'Nickname' )
-        {
-            if ( $action == 'Delete' )
-            {
+    if ($section == 'Individuals') {
+        if ($subsection == 'Nickname') {
+            if ($action == 'Delete') {
                 // we need to get the ind id
                 $query_ind = "SELECT ind_id FROM individual_nicks WHERE individual_nicks_id = '$section_id'";
                 $result = $mysqli->query($query_ind) or die("getting individual id failed");
-                $query_data = $result->fetch_array(MYSQLI_BOTH);
-                $section_id = $query_data['ind_id'];
+                $query_data    = $result->fetch_array(MYSQLI_BOTH);
+                $section_id    = $query_data['ind_id'];
                 $subsection_id = $query_data['ind_id'];
             }
         }
@@ -689,37 +699,31 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
         // Get the individual name
         $query_ind = "SELECT ind_name FROM individuals WHERE ind_id = '$section_id'";
         $result = $mysqli->query($query_ind) or die("getting individual name failed");
-        $query_data = $result->fetch_array(MYSQLI_BOTH);
+        $query_data   = $result->fetch_array(MYSQLI_BOTH);
         $section_name = $query_data['ind_name'];
 
-        if ( $subsection == 'Individual' OR $subsection == 'Image' OR $subsection == 'Nickname')
-        {
+        if ($subsection == 'Individual' or $subsection == 'Image' or $subsection == 'Nickname') {
             $subsection_name = $section_name;
         }
     }
 
-    //  Everything we do for the AUTHOR TYPE section
-    If ( $section == 'Author type' )
-    {
+    //  Everything we do for the AUTHor TYPE section
+    if ($section == 'Author type') {
         // get the author type name
         $query_author = "SELECT author_type_info FROM author_type WHERE author_type_id = '$section_id'";
         $result = $mysqli->query($query_author) or die("getting author type name failed");
-        $query_data = $result->fetch_array(MYSQLI_BOTH);
+        $query_data   = $result->fetch_array(MYSQLI_BOTH);
         $section_name = $query_data['author_type_info'];
 
-        if ( $subsection == 'Author type' )
-        {
+        if ($subsection == 'Author type') {
             $subsection_name = $section_name;
         }
     }
 
     //  Everything we do for the INTERVIEW section
-    If ( $section == 'Interviews' )
-    {
-        if ( $subsection == 'Interview' )
-        {
-            If ( $action == 'Update' OR $action == 'Delete' )
-            {
+    if ($section == 'Interviews') {
+        if ($subsection == 'Interview') {
+            if ($action == 'Update' or $action == 'Delete') {
                 //we need to get the individual id
                 $query_ind = "SELECT ind_id FROM interview_main WHERE interview_id = '$section_id'";
                 $result = $mysqli->query($query_ind) or die("getting ind id failed");
@@ -728,10 +732,8 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
             }
         }
 
-        if ( $subsection == 'Screenshots' )
-        {
-            If ( $action == 'Insert' OR $action == 'Delete')
-            {
+        if ($subsection == 'Screenshots') {
+            if ($action == 'Insert' or $action == 'Delete') {
                 //we need to get the individual id
                 $query_ind = "SELECT ind_id FROM interview_main WHERE interview_id = '$section_id'";
                 $result = $mysqli->query($query_ind) or die("getting ind id failed");
@@ -743,46 +745,41 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
         // get the name of the person that is interviewed
         $query_ind = "SELECT ind_name FROM individuals WHERE ind_id = '$section_id'";
         $result = $mysqli->query($query_ind) or die("getting ind name failed");
-        $query_data = $result->fetch_array(MYSQLI_BOTH);
+        $query_data   = $result->fetch_array(MYSQLI_BOTH);
         $section_name = $query_data['ind_name'];
 
-        if ( $subsection == 'Interview' or $subsection == 'Screenshots' )
-        {
+        if ($subsection == 'Interview' or $subsection == 'Screenshots') {
             $subsection_name = $section_name;
         }
     }
 
-    //  Everything we do for the AUTHOR TYPE section
-    If ( $section == 'News' )
-    {
-        if ( $subsection == 'News submit' )
-        {
+    //  Everything we do for the AUTHor TYPE section
+    if ($section == 'News') {
+        if ($subsection == 'News submit') {
             // get the headline
             $query_news = "SELECT news_headline FROM news_submission WHERE news_submission_id = '$section_id'";
             $result = $mysqli->query($query_news) or die("getting headline failed");
-            $query_data = $result->fetch_array(MYSQLI_BOTH);
+            $query_data   = $result->fetch_array(MYSQLI_BOTH);
             $section_name = $query_data['news_headline'];
 
             $subsection_name = $section_name;
         }
 
-        if ( $subsection == 'News item' )
-        {
+        if ($subsection == 'News item') {
             // get the headline
             $query_news = "SELECT news_headline FROM news WHERE news_id = '$section_id'";
             $result = $mysqli->query($query_news) or die("getting headline failed");
-            $query_data = $result->fetch_array(MYSQLI_BOTH);
+            $query_data   = $result->fetch_array(MYSQLI_BOTH);
             $section_name = $query_data['news_headline'];
 
             $subsection_name = $section_name;
         }
 
-        if ( $subsection == 'Image' )
-        {
+        if ($subsection == 'Image') {
             // get the image name
             $query_image = "SELECT news_image_name FROM news_image WHERE news_image_id = '$section_id'";
             $result = $mysqli->query($query_image) or die("getting image name failed");
-            $query_data = $result->fetch_array(MYSQLI_BOTH);
+            $query_data   = $result->fetch_array(MYSQLI_BOTH);
             $section_name = $query_data['news_image_name'];
 
             $subsection_name = $section_name;
@@ -790,49 +787,43 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
     }
 
     //  Everything we do for the Menu Set SECTION
-    If ( $section == 'Menu set' )
-    {
+    if ($section == 'Menu set') {
         //  get the menu set name
-            $query_menu_Set = "SELECT menu_sets_name FROM menu_set WHERE menu_sets_id = '$section_id'";
-            $result = $mysqli->query($query_menu_Set) or die("getting menu set name failed");
-            $query_data = $result->fetch_array(MYSQLI_BOTH);
-            $section_name = $query_data['menu_sets_name'];
+        $query_menu_Set = "SELECT menu_sets_name FROM menu_set WHERE menu_sets_id = '$section_id'";
+        $result = $mysqli->query($query_menu_Set) or die("getting menu set name failed");
+        $query_data   = $result->fetch_array(MYSQLI_BOTH);
+        $section_name = $query_data['menu_sets_name'];
 
 
-        If ( $subsection == 'Menu set' or $subsection == 'Menu disk (multiple)' )
-        {
+        if ($subsection == 'Menu set' or $subsection == 'Menu disk (multiple)') {
             $subsection_name = $section_name;
         }
 
-        if ( $subsection == 'Crew' )
-        {
+        if ($subsection == 'Crew') {
             // get the name of the crew
             $query_crew = "SELECT crew_name FROM crew WHERE crew_id = '$subsection_id'";
             $result = $mysqli->query($query_crew) or die("getting crew name failed");
-            $query_data = $result->fetch_array(MYSQLI_BOTH);
+            $query_data      = $result->fetch_array(MYSQLI_BOTH);
             $subsection_name = $query_data['crew_name'];
         }
 
-        if ( $subsection == 'Individual' )
-        {
+        if ($subsection == 'Individual') {
             // get the name of the crew
             $query_ind = "SELECT ind_name FROM individuals WHERE ind_id = '$subsection_id'";
             $result = $mysqli->query($query_ind) or die("getting individual name failed");
-            $query_data = $result->fetch_array(MYSQLI_BOTH);
+            $query_data      = $result->fetch_array(MYSQLI_BOTH);
             $subsection_name = $query_data['ind_name'];
         }
 
-        If ( $subsection == 'Menu type' )
-        {
+        if ($subsection == 'Menu type') {
             // get the name of the menu type
             $query_menu_type = "SELECT menu_types_text FROM menu_types_main WHERE menu_types_main_id = '$subsection_id'";
             $result = $mysqli->query($query_menu_type) or die("getting menu type name failed");
-            $query_data = $result->fetch_array(MYSQLI_BOTH);
+            $query_data      = $result->fetch_array(MYSQLI_BOTH);
             $subsection_name = $query_data['menu_types_text'];
         }
 
-        If ( $subsection == 'Menu disk' )
-        {
+        if ($subsection == 'Menu disk') {
             // get the name of the menu disk
             $sql_menus = "SELECT menu_disk.menu_sets_id,
                                 menu_set.menu_sets_name,
@@ -844,22 +835,23 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
                                 LEFT JOIN menu_set ON (menu_disk.menu_sets_id = menu_set.menu_sets_id)
                                 WHERE menu_disk.menu_disk_id = '$subsection_id'";
 
-            $result_menus= $mysqli->query($sql_menus) or die ("error in query disk name");
+            $result_menus = $mysqli->query($sql_menus) or die("error in query disk name");
 
-            while ( $row=$result_menus->fetch_array(MYSQLI_BOTH) )
-            {
+            while ($row = $result_menus->fetch_array(MYSQLI_BOTH)) {
                 // Create Menu disk name
                 $menu_disk_name = "$row[menu_sets_name] ";
-                if(isset($row['menu_disk_number'])) {$menu_disk_name .= "$row[menu_disk_number]";}
-                if(isset($row['menu_disk_letter'])) {$menu_disk_name .= "$row[menu_disk_letter]";}
-                if(isset($row['menu_disk_part']))
-                {
-                    if (is_numeric($row['menu_disk_part']))
-                        {$menu_disk_name .= " part $row[menu_disk_part]";}
-                        else
-                        {
-                            $menu_disk_name .= "$row[menu_disk_part]";
-                        }
+                if (isset($row['menu_disk_number'])) {
+                    $menu_disk_name .= "$row[menu_disk_number]";
+                }
+                if (isset($row['menu_disk_letter'])) {
+                    $menu_disk_name .= "$row[menu_disk_letter]";
+                }
+                if (isset($row['menu_disk_part'])) {
+                    if (is_numeric($row['menu_disk_part'])) {
+                        $menu_disk_name .= " part $row[menu_disk_part]";
+                    } else {
+                        $menu_disk_name .= "$row[menu_disk_part]";
+                    }
                 }
             }
             $subsection_name = $menu_disk_name;
@@ -867,109 +859,99 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
     }
 
     //  Everything we do for the CREW SECTION
-    If ( $section == 'Crew' )
-    {
+    if ($section == 'Crew') {
         // get the name of the crew
         $query_crew = "SELECT crew_name FROM crew WHERE crew_id = '$section_id'";
         $result = $mysqli->query($query_crew) or die("getting crew name failed");
-        $query_data = $result->fetch_array(MYSQLI_BOTH);
+        $query_data   = $result->fetch_array(MYSQLI_BOTH);
         $section_name = $query_data['crew_name'];
 
-        If ( $subsection == 'Crew' or $subsection == 'Logo')
-        {
+        if ($subsection == 'Crew' or $subsection == 'Logo') {
             $subsection_name = $section_name;
         }
 
-        If ( $subsection == 'Subcrew' )
-        {
-            if ($action == 'Delete')
-            {
+        if ($subsection == 'Subcrew') {
+            if ($action == 'Delete') {
                 // get the id's
                 $query_crew = "SELECT * FROM sub_crew WHERE sub_crew_id = '$subsection_id'";
                 $result = $mysqli->query($query_crew) or die("getting crew ids failed");
-                $query_data = $result->fetch_array(MYSQLI_BOTH);
+                $query_data    = $result->fetch_array(MYSQLI_BOTH);
                 $subsection_id = $query_data['crew_id'];
-                $section_id = $query_data['parent_id'];
+                $section_id    = $query_data['parent_id'];
 
                 // get the name of the crew
                 $query_crew = "SELECT crew_name FROM crew WHERE crew_id = '$section_id'";
                 $result = $mysqli->query($query_crew) or die("getting crew name failed");
-                $query_data = $result->fetch_array(MYSQLI_BOTH);
+                $query_data   = $result->fetch_array(MYSQLI_BOTH);
                 $section_name = $query_data['crew_name'];
             }
 
             // get the name of the subcrew
             $query_crew = "SELECT crew_name FROM crew WHERE crew_id = '$subsection_id'";
             $result = $mysqli->query($query_crew) or die("getting crew name failed");
-            $query_data = $result->fetch_array(MYSQLI_BOTH);
+            $query_data      = $result->fetch_array(MYSQLI_BOTH);
             $subsection_name = $query_data['crew_name'];
         }
 
-        If ( $subsection == 'Member' )
-        {
-            if ($action == 'Delete')
-            {
+        if ($subsection == 'Member') {
+            if ($action == 'Delete') {
                 // get the id's
                 $query_crew = "SELECT * FROM crew_individual WHERE crew_individual_id = '$subsection_id'";
                 $result = $mysqli->query($query_crew) or die("getting crew ids failed");
-                $query_data = $result->fetch_array(MYSQLI_BOTH);
+                $query_data    = $result->fetch_array(MYSQLI_BOTH);
                 $subsection_id = $query_data['ind_id'];
-                $section_id = $query_data['crew_id'];
+                $section_id    = $query_data['crew_id'];
 
                 // get the name of the crew
                 $query_crew = "SELECT crew_name FROM crew WHERE crew_id = '$section_id'";
                 $result = $mysqli->query($query_crew) or die("getting crew name failed");
-                $query_data = $result->fetch_array(MYSQLI_BOTH);
+                $query_data   = $result->fetch_array(MYSQLI_BOTH);
                 $section_name = $query_data['crew_name'];
             }
 
             $query_ind = "SELECT ind_name FROM individuals WHERE ind_id = '$subsection_id'";
             $result = $mysqli->query($query_ind) or die("getting ind name failed");
-            $query_data = $result->fetch_array(MYSQLI_BOTH);
+            $query_data      = $result->fetch_array(MYSQLI_BOTH);
             $subsection_name = $query_data['ind_name'];
         }
 
-        If ( $subsection == 'Nickname' )
-        {
+        if ($subsection == 'Nickname') {
             // get the id's
             $query_crew = "SELECT * FROM crew_individual WHERE crew_individual_id = '$subsection_id'";
             $result = $mysqli->query($query_crew) or die("getting crew ids failed");
-            $query_data = $result->fetch_array(MYSQLI_BOTH);
+            $query_data    = $result->fetch_array(MYSQLI_BOTH);
             $subsection_id = $query_data['ind_id'];
-            $section_id = $query_data['crew_id'];
+            $section_id    = $query_data['crew_id'];
 
             // get the name of the crew
             $query_crew = "SELECT crew_name FROM crew WHERE crew_id = '$section_id'";
             $result = $mysqli->query($query_crew) or die("getting crew name failed");
-            $query_data = $result->fetch_array(MYSQLI_BOTH);
+            $query_data   = $result->fetch_array(MYSQLI_BOTH);
             $section_name = $query_data['crew_name'];
 
             // get the name of the member
             $query_ind = "SELECT ind_name FROM individuals WHERE ind_id = '$subsection_id'";
             $result = $mysqli->query($query_ind) or die("getting ind name failed");
-            $query_data = $result->fetch_array(MYSQLI_BOTH);
+            $query_data      = $result->fetch_array(MYSQLI_BOTH);
             $subsection_name = $query_data['ind_name'];
         }
     }
 
     //  Everything we do for the MENU TYPE SECTION
-    If ( $section == 'Menu type' )
-    {
+    if ($section == 'Menu type') {
         // get the name of the menu type
         $query_menu_type = "SELECT menu_types_text FROM menu_types_main WHERE menu_types_main_id = '$section_id'";
         $result = $mysqli->query($query_menu_type) or die("getting menu type name failed");
-        $query_data = $result->fetch_array(MYSQLI_BOTH);
+        $query_data   = $result->fetch_array(MYSQLI_BOTH);
         $section_name = $query_data['menu_types_text'];
 
-        If ( $subsection == 'Menu type' )
-        {
+        if ($subsection == 'Menu type') {
             $subsection_name = $section_name;
         }
     }
 
     //  Everything we do for the MENU DISK
-    If ( $section == 'Menu disk' )
-    {
+    if ($section == 'Menu disk') {
         // get the name of the menu disk
         $sql_menus = "SELECT menu_disk.menu_sets_id,
                             menu_set.menu_sets_name,
@@ -981,40 +963,39 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
                             LEFT JOIN menu_set ON (menu_disk.menu_sets_id = menu_set.menu_sets_id)
                             WHERE menu_disk.menu_disk_id = '$section_id'";
 
-        $result_menus= $mysqli->query($sql_menus) or die ("error in query disk name");
+        $result_menus = $mysqli->query($sql_menus) or die("error in query disk name");
 
-        while ( $row=$result_menus->fetch_array(MYSQLI_BOTH) )
-        {
+        while ($row = $result_menus->fetch_array(MYSQLI_BOTH)) {
             $section_id = $row['menu_sets_id'];
 
             // Create Menu disk name
             $menu_disk_name = "$row[menu_sets_name] ";
-            if(isset($row['menu_disk_number'])) {$menu_disk_name .= "$row[menu_disk_number]";}
-            if(isset($row['menu_disk_letter'])) {$menu_disk_name .= "$row[menu_disk_letter]";}
-            if(isset($row['menu_disk_part']))
-            {
-                if (is_numeric($row['menu_disk_part']))
-                    {$menu_disk_name .= " part $row[menu_disk_part]";}
-                    else
-                    {
-                        $menu_disk_name .= "$row[menu_disk_part]";
-                    }
+            if (isset($row['menu_disk_number'])) {
+                $menu_disk_name .= "$row[menu_disk_number]";
+            }
+            if (isset($row['menu_disk_letter'])) {
+                $menu_disk_name .= "$row[menu_disk_letter]";
+            }
+            if (isset($row['menu_disk_part'])) {
+                if (is_numeric($row['menu_disk_part'])) {
+                    $menu_disk_name .= " part $row[menu_disk_part]";
+                } else {
+                    $menu_disk_name .= "$row[menu_disk_part]";
+                }
             }
         }
 
         $section_name = $menu_disk_name;
 
-        If ( $subsection == 'State' )
-        {
+        if ($subsection == 'State') {
             // get the name of the menu type
             $query_menu_state = "SELECT menu_state FROM menu_disk_state WHERE state_id = '$subsection_id'";
             $result = $mysqli->query($query_menu_state) or die("getting menu state name failed");
-            $query_data = $result->fetch_array(MYSQLI_BOTH);
+            $query_data      = $result->fetch_array(MYSQLI_BOTH);
             $subsection_name = $query_data['menu_state'];
         }
 
-        If ( $subsection == 'Parent' )
-        {
+        if ($subsection == 'Parent') {
             // get the name of the parent
             $sql_menus = "SELECT menu_disk.menu_sets_id,
                                 menu_set.menu_sets_name,
@@ -1026,302 +1007,270 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
                                 LEFT JOIN menu_set ON (menu_disk.menu_sets_id = menu_set.menu_sets_id)
                                 WHERE menu_disk.menu_disk_id = '$subsection_id'";
 
-            $result_menus= $mysqli->query($sql_menus) or die ("error in query disk name");
+            $result_menus = $mysqli->query($sql_menus) or die("error in query disk name");
 
-            while ( $row=$result_menus->fetch_array(MYSQLI_BOTH) )
-            {
+            while ($row = $result_menus->fetch_array(MYSQLI_BOTH)) {
                 // Create Menu disk name
                 $menu_disk_name = "$row[menu_sets_name] ";
-                if(isset($row['menu_disk_number'])) {$menu_disk_name .= "$row[menu_disk_number]";}
-                if(isset($row['menu_disk_letter'])) {$menu_disk_name .= "$row[menu_disk_letter]";}
-                if(isset($row['menu_disk_part']))
-                {
-                    if (is_numeric($row['menu_disk_part']))
-                        {$menu_disk_name .= " part $row[menu_disk_part]";}
-                        else
-                        {
-                            $menu_disk_name .= "$row[menu_disk_part]";
-                        }
+                if (isset($row['menu_disk_number'])) {
+                    $menu_disk_name .= "$row[menu_disk_number]";
+                }
+                if (isset($row['menu_disk_letter'])) {
+                    $menu_disk_name .= "$row[menu_disk_letter]";
+                }
+                if (isset($row['menu_disk_part'])) {
+                    if (is_numeric($row['menu_disk_part'])) {
+                        $menu_disk_name .= " part $row[menu_disk_part]";
+                    } else {
+                        $menu_disk_name .= "$row[menu_disk_part]";
+                    }
                 }
             }
-        $subsection_name = $menu_disk_name;
+            $subsection_name = $menu_disk_name;
         }
 
-        If ( $subsection == 'Year')
-        {
+        if ($subsection == 'Year') {
             $subsection_name = $subsection_id;
         }
 
-        If ( $subsection == 'Menu disk' or $subsection == 'Screenshots'  or $subsection == 'File' )
-        {
-            $subsection_name = $section_name ;
+        if ($subsection == 'Menu disk' or $subsection == 'Screenshots' or $subsection == 'File') {
+            $subsection_name = $section_name;
         }
 
-        If ( $subsection == 'Credits')
-        {
-            if ($action == 'Delete')
-            {
+        if ($subsection == 'Credits') {
+            if ($action == 'Delete') {
                 //get the ind id
                 $query_ind = "SELECT ind_id FROM menu_disk_credits WHERE menu_disk_credits_id = '$subsection_id'";
                 $result = $mysqli->query($query_ind) or die("getting individual name failed");
-                $query_data = $result->fetch_array(MYSQLI_BOTH);
+                $query_data    = $result->fetch_array(MYSQLI_BOTH);
                 $subsection_id = $query_data['ind_id'];
             }
 
             // get the name of the individual
             $query_ind = "SELECT ind_name FROM individuals WHERE ind_id = '$subsection_id'";
             $result = $mysqli->query($query_ind) or die("getting individual name failed");
-            $query_data = $result->fetch_array(MYSQLI_BOTH);
+            $query_data      = $result->fetch_array(MYSQLI_BOTH);
             $subsection_name = $query_data['ind_name'];
         }
 
-        If ( $subsection == 'Nickname')
-        {
+        if ($subsection == 'Nickname') {
             // get the individual id
             $query_ind = "SELECT ind_id FROM menu_disk_credits WHERE individual_nicks_id = '$subsection_id'";
             $result = $mysqli->query($query_ind) or die("getting individual name failed");
             $query_data = $result->fetch_array(MYSQLI_BOTH);
-            $ind_id = $query_data['ind_id'];
+            $ind_id     = $query_data['ind_id'];
 
             //now get the individual name
             $query_ind = "SELECT ind_name FROM individuals WHERE ind_id = '$ind_id'";
             $result = $mysqli->query($query_ind) or die("getting individual name failed");
-            $query_data = $result->fetch_array(MYSQLI_BOTH);
+            $query_data      = $result->fetch_array(MYSQLI_BOTH);
             $subsection_name = $query_data['ind_name'];
         }
 
-        If ( $subsection == 'Game' or $subsection == 'Game doc' )
-        {
+        if ($subsection == 'Game' or $subsection == 'Game doc') {
             //  get the game name
             $query_game = "SELECT game_name FROM game WHERE game_id = '$subsection_id'";
             $result = $mysqli->query($query_game) or die("getting game name failed");
-            $query_data = $result->fetch_array(MYSQLI_BOTH);
+            $query_data      = $result->fetch_array(MYSQLI_BOTH);
             $subsection_name = $query_data['game_name'];
         }
 
-        If ( $subsection == 'Demo')
-        {
+        if ($subsection == 'Demo') {
             //  get the demo name
             $query_demo = "SELECT demo_name FROM demo WHERE demo_id = '$subsection_id'";
             $result = $mysqli->query($query_demo) or die("getting demo name failed");
-            $query_data = $result->fetch_array(MYSQLI_BOTH);
+            $query_data      = $result->fetch_array(MYSQLI_BOTH);
             $subsection_name = $query_data['demo_name'];
         }
 
-        If ( $subsection == 'Tool' or $subsection == 'Tool doc' )
-        {
+        if ($subsection == 'Tool' or $subsection == 'Tool doc') {
             //  get the tool name
             $query_tool = "SELECT tools_name FROM tools WHERE tools_id = '$subsection_id'";
             $result = $mysqli->query($query_tool) or die("getting tool name failed");
-            $query_data = $result->fetch_array(MYSQLI_BOTH);
+            $query_data      = $result->fetch_array(MYSQLI_BOTH);
             $subsection_name = $query_data['tools_name'];
         }
 
-        If ( $subsection == 'Doc type' )
-        {
+        if ($subsection == 'Doc type') {
             // get the name of the doc type
             $query_doc_type = "SELECT doc_type_name FROM doc_type WHERE doc_type_id = '$subsection_id'";
             $result = $mysqli->query($query_doc_type) or die("getting doc type name failed");
-            $query_data = $result->fetch_array(MYSQLI_BOTH);
+            $query_data      = $result->fetch_array(MYSQLI_BOTH);
             $subsection_name = $query_data['doc_type_name'];
         }
 
-        If ( $subsection == 'Software' or $subsection == 'Chain' or $subsection == 'Doc')
-        {
+        if ($subsection == 'Software' or $subsection == 'Chain' or $subsection == 'Doc') {
             //get the type of software
             $query_soft = "SELECT menu_types_main_id FROM menu_disk_title WHERE menu_disk_title_id = '$subsection_id'";
             $result = $mysqli->query($query_soft) or die("getting menu_type failed");
             $query_data = $result->fetch_array(MYSQLI_BOTH);
-            $type = $query_data['menu_types_main_id'];
+            $type       = $query_data['menu_types_main_id'];
 
             //get the name of the software
-            if ($type == '1')
-            {
+            if ($type == '1') {
                 //get the id of the game
                 $query_game = "SELECT game_id FROM menu_disk_title_game WHERE menu_disk_title_id = '$subsection_id'";
                 $result = $mysqli->query($query_game) or die("getting game id failed");
-                $query_data = $result->fetch_array(MYSQLI_BOTH);
+                $query_data    = $result->fetch_array(MYSQLI_BOTH);
                 $subsection_id = $query_data['game_id'];
 
                 //  get the game name
                 $query_game = "SELECT game_name FROM game WHERE game_id = '$subsection_id'";
                 $result = $mysqli->query($query_game) or die("getting game name failed");
-                $query_data = $result->fetch_array(MYSQLI_BOTH);
+                $query_data      = $result->fetch_array(MYSQLI_BOTH);
                 $subsection_name = $query_data['game_name'];
 
-                if ($subsection <> 'Chain' )
-                {
+                if ($subsection <> 'Chain') {
                     $subsection = 'Game';
                 }
             }
 
-            if ($type == '2')
-            {
+            if ($type == '2') {
                 //get the id of the demo
                 $query_demo = "SELECT demo_id FROM menu_disk_title_demo WHERE menu_disk_title_id = '$subsection_id'";
                 $result = $mysqli->query($query_demo) or die("getting demo id failed");
-                $query_data = $result->fetch_array(MYSQLI_BOTH);
+                $query_data    = $result->fetch_array(MYSQLI_BOTH);
                 $subsection_id = $query_data['demo_id'];
 
                 //  get the demo name
                 $query_demo = "SELECT demo_name FROM demo WHERE demo_id = '$subsection_id'";
                 $result = $mysqli->query($query_demo) or die("getting demo name failed");
-                $query_data = $result->fetch_array(MYSQLI_BOTH);
+                $query_data      = $result->fetch_array(MYSQLI_BOTH);
                 $subsection_name = $query_data['demo_name'];
-                if ($subsection <> 'Chain' )
-                {
+                if ($subsection <> 'Chain') {
                     $subsection = 'Demo';
                 }
             }
 
-            if ($type == '3')
-            {
+            if ($type == '3') {
                 //get the id of the tool
                 $query_tool = "SELECT tools_id FROM menu_disk_title_tools WHERE menu_disk_title_id = '$subsection_id'";
                 $result = $mysqli->query($query_tool) or die("getting toold id failed");
-                $query_data = $result->fetch_array(MYSQLI_BOTH);
+                $query_data    = $result->fetch_array(MYSQLI_BOTH);
                 $subsection_id = $query_data['tools_id'];
 
                 //  get the tool name
                 $query_tool = "SELECT tools_name FROM tools WHERE tools_id = '$subsection_id'";
                 $result = $mysqli->query($query_tool) or die("getting tool name failed");
-                $query_data = $result->fetch_array(MYSQLI_BOTH);
+                $query_data      = $result->fetch_array(MYSQLI_BOTH);
                 $subsection_name = $query_data['tools_name'];
-                if ($subsection <> 'Chain')
-                {
+                if ($subsection <> 'Chain') {
                     $subsection = 'Tool';
                 }
             }
 
-            if ($type == '6')
-            {
+            if ($type == '6') {
                 //get the doc cross id
                 $query_game_doc = "SELECT doc_games_id FROM menu_disk_title_doc_games WHERE menu_disk_title_id = '$subsection_id'";
                 $result = $mysqli->query($query_game_doc) or die("getting doc_game_id failed");
-                $query_data = $result->fetch_array(MYSQLI_BOTH);
+                $query_data    = $result->fetch_array(MYSQLI_BOTH);
                 $subsection_id = $query_data['doc_games_id'];
 
                 //  get the game id
                 $query_game_id = "SELECT game_id FROM doc_disk_game WHERE doc_disk_game_id = '$subsection_id'";
                 $result = $mysqli->query($query_game_id) or die("getting game id failed");
-                $query_data = $result->fetch_array(MYSQLI_BOTH);
+                $query_data    = $result->fetch_array(MYSQLI_BOTH);
                 $subsection_id = $query_data['game_id'];
 
                 //  get the game name
                 $query_game = "SELECT game_name FROM game WHERE game_id = '$subsection_id'";
                 $result = $mysqli->query($query_game) or die("getting game name failed");
-                $query_data = $result->fetch_array(MYSQLI_BOTH);
+                $query_data      = $result->fetch_array(MYSQLI_BOTH);
                 $subsection_name = $query_data['game_name'];
-                $subsection = 'Game doc';
+                $subsection      = 'Game doc';
 
-                if ( $subsection_name == '' )
-                {
+                if ($subsection_name == '') {
                     //get the doc cross id
                     $query_tool_doc = "SELECT doc_tools_id FROM menu_disk_title_doc_tools WHERE menu_disk_title_id = '$subsection_id'";
                     $result = $mysqli->query($query_tool_doc) or die("getting doc_tools_id failed");
-                    $query_data = $result->fetch_array(MYSQLI_BOTH);
+                    $query_data    = $result->fetch_array(MYSQLI_BOTH);
                     $subsection_id = $query_data['doc_tools_id'];
 
                     //get the id of the tool
                     $query_tool = "SELECT tools_id FROM menu_disk_title_tools WHERE menu_disk_title_id = '$subsection_id'";
                     $result = $mysqli->query($query_tool) or die("getting toold id failed");
-                    $query_data = $result->fetch_array(MYSQLI_BOTH);
+                    $query_data    = $result->fetch_array(MYSQLI_BOTH);
                     $subsection_id = $query_data['tools_id'];
 
                     //  get the tool name
                     $query_tool = "SELECT tools_name FROM tools WHERE tools_id = '$subsection_id'";
                     $result = $mysqli->query($query_tool) or die("getting tool name failed");
-                    $query_data = $result->fetch_array(MYSQLI_BOTH);
+                    $query_data      = $result->fetch_array(MYSQLI_BOTH);
                     $subsection_name = $query_data['tools_name'];
-                    $subsection = 'Tool doc';
+                    $subsection      = 'Tool doc';
                 }
-
             }
         }
     }
 
     //  Everything we do for the Articles section
-    If ( $section == 'Articles' )
-    {
-        if ( $subsection == 'Article' )
-        {
-            If ( $action == 'Update' or $action == 'Delete' or $action == 'Insert')
-            {
+    if ($section == 'Articles') {
+        if ($subsection == 'Article') {
+            if ($action == 'Update' or $action == 'Delete' or $action == 'Insert') {
                 //we need to get the title
                 $query_title = "SELECT article_title FROM article_text WHERE article_id = '$section_id'";
                 $result = $mysqli->query($query_title) or die("getting title failed");
-                $query_data = $result->fetch_array(MYSQLI_BOTH);
+                $query_data   = $result->fetch_array(MYSQLI_BOTH);
                 $section_name = $query_data['article_title'];
             }
         }
 
-        if ( $subsection == 'Screenshots' )
-        {
-            If ( $action == 'Insert' OR $action == 'Delete')
-            {
+        if ($subsection == 'Screenshots') {
+            if ($action == 'Insert' or $action == 'Delete') {
                 //we need to get the title
                 $query_title = "SELECT article_title FROM article_text WHERE article_id = '$section_id'";
                 $result = $mysqli->query($query_title) or die("getting title failed");
-                $query_data = $result->fetch_array(MYSQLI_BOTH);
+                $query_data   = $result->fetch_array(MYSQLI_BOTH);
                 $section_name = $query_data['article_title'];
             }
         }
 
-        if ( $subsection == 'Article' or $subsection == 'Screenshots' )
-        {
+        if ($subsection == 'Article' or $subsection == 'Screenshots') {
             $subsection_name = $section_name;
         }
     }
 
     //  Everything we do for the ARTICLE TYPE SECTION
-    If ( $section == 'Article type' )
-    {
+    if ($section == 'Article type') {
         // get the name of the article type
         $query_article_type = "SELECT article_type FROM article_type WHERE article_type_id = '$section_id'";
         $result = $mysqli->query($query_article_type) or die("getting article type name failed");
-        $query_data = $result->fetch_array(MYSQLI_BOTH);
+        $query_data   = $result->fetch_array(MYSQLI_BOTH);
         $section_name = $query_data['article_type'];
 
-        If ( $subsection == 'Article type' )
-        {
+        if ($subsection == 'Article type') {
             $subsection_name = $section_name;
         }
     }
 
     //  Everything we do for the DOC TYPE SECTION
-    If ( $section == 'Doc type' )
-    {
+    if ($section == 'Doc type') {
         // get the name of the doc type
         $query_doc_type = "SELECT doc_type_name FROM doc_type WHERE doc_type_id = '$section_id'";
         $result = $mysqli->query($query_doc_type) or die("getting doc type name failed");
-        $query_data = $result->fetch_array(MYSQLI_BOTH);
+        $query_data   = $result->fetch_array(MYSQLI_BOTH);
         $section_name = $query_data['doc_type_name'];
 
-        If ( $subsection == 'Doc type' )
-        {
+        if ($subsection == 'Doc type') {
             $subsection_name = $section_name;
         }
     }
 
     //  Everything we do for the DOC CATEGORY SECTION
-    If ( $section == 'Doc category' )
-    {
+    if ($section == 'Doc category') {
         // get the name of the doc type
         $query_category_type = "SELECT doc_category_name FROM doc_category WHERE doc_category_id = '$section_id'";
         $result = $mysqli->query($query_category_type) or die("getting doc category name failed");
-        $query_data = $result->fetch_array(MYSQLI_BOTH);
+        $query_data   = $result->fetch_array(MYSQLI_BOTH);
         $section_name = $query_data['doc_category_name'];
 
-        If ( $subsection == 'Doc category' )
-        {
+        if ($subsection == 'Doc category') {
             $subsection_name = $section_name;
         }
     }
 
-    $section_name = $mysqli->real_escape_string($section_name);
+    $section_name    = $mysqli->real_escape_string($section_name);
     $subsection_name = $mysqli->real_escape_string($subsection_name);
 
-    $sql_log = $mysqli->query("INSERT INTO change_log (section, section_id, section_name, sub_section, sub_section_id, sub_section_name, user_id, action, timestamp) VALUES ('$section', '$section_id', '$section_name', '$subsection', '$subsection_id', '$subsection_name', '$user_id', '$action', '$log_time')")
-                                or die ("Couldn't insert change log into database");
+    $sql_log = $mysqli->query("INSERT INTO change_log (section, section_id, section_name, sub_section, sub_section_id, sub_section_name, user_id, action, timestamp) VALUES ('$section', '$section_id', '$section_name', '$subsection', '$subsection_id', '$subsection_name', '$user_id', '$action', '$log_time')") or die("Couldn't insert change log into database");
 }
-?>

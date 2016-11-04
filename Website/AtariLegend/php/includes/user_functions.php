@@ -1,41 +1,36 @@
 <?php
-
 /*******************************************************************************
-*                                user_functions.php
-*                            -----------------------
-*   begin                : 2015-04-28
-*   copyright            : (C) 2015 Atari Legend
-*   email                : silversurfer@atari-forum.com
-*
-*   Id: user_functions.php,v 0.10 2015-04-28
-*
-********************************************************************************
+ *                                user_functions.php
+ *                            -----------------------
+ *   begin                : 2015-04-28
+ *   copyright            : (C) 2015 Atari Legend
+ *   email                : silversurfer@atari-forum.com
+ *
+ *   Id: user_functions.php,v 0.10 2015-04-28
+ *
+ ********************************************************************************
 
-*********************************************************************************
-* User management functions
-*********************************************************************************/
+ *********************************************************************************
+ * User management functions
+ *********************************************************************************/
 
 function sec_session_start() {
-    $session_name = 'sec_session_id';   // Set a custom session name
-    $secure = SECURE;
+    $session_name = 'sec_session_id'; // Set a custom session name
+    $secure       = SECURE;
     // This stops JavaScript being able to access the session id.
-    $httponly = true;
+    $httponly     = true;
     // Forces sessions to only use cookies.
-    if (ini_set('session.use_only_cookies', 1) === FALSE) {
+    if (ini_set('session.use_only_cookies', 1) === false) {
         header("Location: ../error.php?err=Could not initiate a safe session (ini_set)");
         exit();
     }
     // Gets current cookies params.
     $cookieParams = session_get_cookie_params();
-    session_set_cookie_params($cookieParams["lifetime"],
-        $cookieParams["path"],
-        $cookieParams["domain"],
-        $secure,
-        $httponly);
+    session_set_cookie_params($cookieParams["lifetime"], $cookieParams["path"], $cookieParams["domain"], $secure, $httponly);
     // Sets the session name to the one set above.
     session_name($session_name);
-    session_start();            // Start the PHP session
-    session_regenerate_id(true);    // regenerated the session, delete the old one.
+    session_start(); // Start the PHP session
+    session_regenerate_id(true); // regenerated the session, delete the old one.
 }
 
 function md5_test($userid, $md5_password, $password, $mysqli) {
@@ -44,8 +39,8 @@ function md5_test($userid, $md5_password, $password, $mysqli) {
         FROM users
        WHERE userid = ? AND sha512_password IS NULL AND password IS NOT NULL
         LIMIT 1")) {
-        $stmt->bind_param('s', $userid);  // Bind "$userid" to parameter.
-        $stmt->execute();    // Execute the prepared query.
+        $stmt->bind_param('s', $userid); // Bind "$userid" to parameter.
+        $stmt->execute(); // Execute the prepared query.
         $stmt->store_result();
 
         // get variables from result.
@@ -64,22 +59,21 @@ function md5_test($userid, $md5_password, $password, $mysqli) {
                 // Check if the password in the database matches
                 // the password the user submitted.
                 if ($db_md5_password == $md5_password) {
+                    // Password is correct!
+                    // Insert the new user into the database
+                    // Create a random salt
+                    $random_salt = hash('sha512', uniqid(mt_rand(1, mt_getrandmax()), true));
 
-            // Password is correct!
-            // Insert the new user into the database
-            // Create a random salt
-            $random_salt = hash('sha512', uniqid(mt_rand(1, mt_getrandmax()), true));
+                    // Create salted password
+                    $update_password = hash('sha512', $password . $random_salt);
 
-            // Create salted password
-                $update_password = hash('sha512', $password . $random_salt);
-
-                if ($update_stmt = $mysqli->prepare("UPDATE users SET password=NULL, sha512_password=?, salt=? WHERE user_id=?")) {
+                    if ($update_stmt = $mysqli->prepare("UPDATE users SET password=NULL, sha512_password=?, salt=? WHERE user_id=?")) {
                         $update_stmt->bind_param('sss', $update_password, $random_salt, $user_id);
                         // Execute the prepared query.
-                        if (! $update_stmt->execute()) {
-                        header('Location: ../error.php?err=md5 failure: UPDATE');
+                        if (!$update_stmt->execute()) {
+                            header('Location: ../error.php?err=md5 failure: UPDATE');
                         }
-                }
+                    }
                     // Login successful.
                     return true;
                 } else {
@@ -104,8 +98,8 @@ function login($userid, $password, $mysqli) {
         FROM users
        WHERE userid = ?
         LIMIT 1")) {
-        $stmt->bind_param('s', $userid);  // Bind "$userid" to parameter.
-        $stmt->execute();    // Execute the prepared query.
+        $stmt->bind_param('s', $userid); // Bind "$userid" to parameter.
+        $stmt->execute(); // Execute the prepared query.
         $stmt->store_result();
 
         // get variables from result.
@@ -127,18 +121,15 @@ function login($userid, $password, $mysqli) {
                 if ($db_password == $password) {
                     // Password is correct!
                     // Get the user-agent string of the user.
-                    $user_browser = $_SERVER['HTTP_USER_AGENT'];
+                    $user_browser             = $_SERVER['HTTP_USER_AGENT'];
                     // XSS protection as we might print this value
-                    $user_id = preg_replace("/[^0-9]+/", "", $user_id);
-                    $_SESSION['user_id'] = $user_id;
+                    $user_id                  = preg_replace("/[^0-9]+/", "", $user_id);
+                    $_SESSION['user_id']      = $user_id;
                     // XSS protection as we might print this value
-                    $userid = preg_replace("/[^a-zA-Z0-9_\-]+/",
-                                                                "",
-                                                                $userid);
-                    $_SESSION['userid'] = $userid;
-            $_SESSION['permission'] = $permission;
-                    $_SESSION['login_string'] = hash('sha512',
-                              $password . $user_browser);
+                    $userid                   = preg_replace("/[^a-zA-Z0-9_\-]+/", "", $userid);
+                    $_SESSION['userid']       = $userid;
+                    $_SESSION['permission']   = $permission;
+                    $_SESSION['login_string'] = hash('sha512', $password . $user_browser);
                     // Login successful.
                     return true;
                 } else {
@@ -186,14 +177,11 @@ function checkbrute($user_id, $mysqli) {
 
 function login_check($mysqli) {
     // Check if all session variables are set
-    if (isset($_SESSION['user_id'],
-                        $_SESSION['userid'],
-                        $_SESSION['login_string'],$_SESSION['permission'])) {
-
-        $user_id = $_SESSION['user_id'];
+    if (isset($_SESSION['user_id'], $_SESSION['userid'], $_SESSION['login_string'], $_SESSION['permission'])) {
+        $user_id      = $_SESSION['user_id'];
         $login_string = $_SESSION['login_string'];
-        $userid = $_SESSION['userid'];
-    $permission = $_SESSION['permission'];
+        $userid       = $_SESSION['userid'];
+        $permission   = $_SESSION['permission'];
 
         // Get the user-agent string of the user.
         $user_browser = $_SERVER['HTTP_USER_AGENT'];
@@ -203,7 +191,7 @@ function login_check($mysqli) {
                                       WHERE user_id = ? LIMIT 1")) {
             // Bind "$user_id" to parameter.
             $stmt->bind_param('i', $user_id);
-            $stmt->execute();   // Execute the prepared query.
+            $stmt->execute(); // Execute the prepared query.
             $stmt->store_result();
 
             if ($stmt->num_rows == 1) {
@@ -214,15 +202,15 @@ function login_check($mysqli) {
 
                 if ($login_check == $login_string) {
                     // Logged In!!!!
-        // update last visit
-        $now = time();
-        if ($update_stmt = $mysqli->prepare("UPDATE users SET last_visit=? WHERE user_id=?")) {
+                    // update last visit
+                    $now = time();
+                    if ($update_stmt = $mysqli->prepare("UPDATE users SET last_visit=? WHERE user_id=?")) {
                         $update_stmt->bind_param('ss', $now, $user_id);
                         // Execute the prepared query.
-                        if (! $update_stmt->execute()) {
-                        header('Location: ../error.php?err=time failure: UPDATE');
+                        if (!$update_stmt->execute()) {
+                            header('Location: ../error.php?err=time failure: UPDATE');
                         }
-                }
+                    }
                     return true;
                 } else {
                     // Not logged in
@@ -250,8 +238,13 @@ function esc_url($url) {
 
     $url = preg_replace('|[^a-z0-9-~+_.?#=!&;,/:%@$\|*\'()\\x80-\\xff]|i', '', $url);
 
-    $strip = array('%0d', '%0a', '%0D', '%0A');
-    $url = (string) $url;
+    $strip = array(
+        '%0d',
+        '%0a',
+        '%0D',
+        '%0A'
+    );
+    $url   = (string) $url;
 
     $count = 1;
     while ($count) {
@@ -272,5 +265,3 @@ function esc_url($url) {
         return $url;
     }
 }
-
-?>

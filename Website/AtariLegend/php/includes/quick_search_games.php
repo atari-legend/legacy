@@ -26,8 +26,7 @@ $sql_publisher = $mysqli->query("SELECT pub_dev.pub_dev_id,
                 or die("Problems retriving values from publishers.");
 
 while ($company_publisher = $sql_publisher->fetch_array(MYSQLI_BOTH)) {
-
-  $smarty->append('company_publisher', array(
+    $smarty->append('company_publisher', array(
                     'comp_id' => $company_publisher['pub_dev_id'],
                     'comp_name' => $company_publisher['pub_dev_name']));
 }
@@ -42,8 +41,7 @@ $sql_developer = $mysqli->query("SELECT pub_dev.pub_dev_id,
                 or die("Problems retriving values from developers.");
 
 while ($company_developer = $sql_developer->fetch_array(MYSQLI_BOTH)) {
-
-  $smarty->append('company_developer', array(
+    $smarty->append('company_developer', array(
             'comp_id' => $company_developer['pub_dev_id'],
             'comp_name' => $company_developer['pub_dev_name']));
 }
@@ -54,4 +52,3 @@ $az_output = az_dropdown_output(0);
 
 $smarty->assign('az_value', $az_value);
 $smarty->assign('az_output', $az_output);
-?>

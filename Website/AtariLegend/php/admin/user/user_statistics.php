@@ -144,4 +144,3 @@ $smarty->display("file:" . $cpanel_template_folder . "user_statistics.html");
 
 //close the connection
 mysqli_close($mysqli);
-?>
