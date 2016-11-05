@@ -5,15 +5,15 @@
 *   begin                : saturday, November 19, 2005
 *   copyright            : (C) 2005 Atari Legend
 *   email                : admin@atarilegend.com
-*						   Created file
-*						
+*                          Created file
+*
 *   Id: demos_music.php,v 0.10 2005/11/19 ST Graveyard
 *
 ***************************************************************************/
 
 //load all common functions
-include("../../includes/common.php"); 
-include("../../includes/admin.php"); 
+include("../../includes/common.php");
+include("../../includes/admin.php");
 
 /*
 ************************************************************************************************
@@ -25,4 +25,3 @@ $smarty->display("file:".$cpanel_template_folder."demos_music.html");
 
 //close the connection
 mysqli_close($mysqli);
-?>

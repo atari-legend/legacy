@@ -28,7 +28,6 @@ if (isset($action) and $action == 'add_download') {
     $demo_download_name = $_FILES['demo_download_name'];
 
     if (isset($demo_download_name)) {
-
         $file_name = $_FILES['demo_download_name']['name'];
 
         $tempfilename = $_FILES['demo_download_name']['tmp_name'];
@@ -112,7 +111,6 @@ if (isset($action) and $action == 'add_download') {
 // When the update button has been pressed, the file name and comments get updated
 //****************************************************************************************
 if (isset($action) and $action == 'update_download') {
-
     if (isset($cracker)) {
         $mysqli->query("UPDATE demo_download SET cracker='$cracker' WHERE demo_download_id='$demo_download_id'");
     }
@@ -161,7 +159,5 @@ if (isset($action) and $action == "delete_download") {
     header("Location: ../demos/demos_upload.php?demo_id=$demo_id");
 }
 
-
 //close the connection
 mysqli_close($mysqli);
-?>

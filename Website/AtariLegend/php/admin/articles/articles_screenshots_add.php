@@ -46,7 +46,6 @@ while ($screenshots = $sql_screenshots->fetch_array(MYSQLI_BOTH)) {
         'image_path' => $image_path,
         'id' => $screenshots['screenshot_id']
     ));
-
     $count++;
 }
 
@@ -72,4 +71,3 @@ $smarty->display("file:" . $cpanel_template_folder . "articles_screenshots_add.h
 
 //close the connection
 mysqli_close($mysqli);
-?>

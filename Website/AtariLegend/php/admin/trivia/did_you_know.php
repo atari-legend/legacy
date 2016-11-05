@@ -26,7 +26,6 @@ include("../../includes/admin.php");
 
 $sql_trivia = $mysqli->query("SELECT * FROM trivia ORDER BY trivia_id");
 
-
 while ($query_trivia = $sql_trivia->fetch_array(MYSQLI_BOTH)) {
     $trivia_text = nl2br($query_trivia['trivia_text']);
     $trivia_text = stripslashes($trivia_text);
@@ -39,5 +38,3 @@ while ($query_trivia = $sql_trivia->fetch_array(MYSQLI_BOTH)) {
 
 //Send all smarty variables to the templates
 $smarty->display("file:" . $cpanel_template_folder . "did_you_know.html");
-
-?>

@@ -74,4 +74,3 @@ $smarty->display("file:" . $cpanel_template_folder . "interviews_screenshots_add
 
 //close the connection
 mysqli_close($mysqli);
-?>

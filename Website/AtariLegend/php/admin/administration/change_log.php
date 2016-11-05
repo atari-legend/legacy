@@ -66,7 +66,7 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH)) {
         $section_link = ("../games/games_detail.php" . '?game_id=' . $log['section_id']);
 
 
-        if ($log['sub_section'] == 'Game' OR $log['sub_section'] == 'AKA' OR $log['sub_section'] == 'Year' OR $log['sub_section'] == 'Submission') {
+        if ($log['sub_section'] == 'Game' or $log['sub_section'] == 'AKA' or $log['sub_section'] == 'Year' or $log['sub_section'] == 'Submission') {
             $subsection_link = ("../games/games_detail.php" . '?game_id=' . $log['sub_section_id']);
         }
 
@@ -74,7 +74,7 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH)) {
             $subsection_link = ("../individuals/individuals_edit.php" . '?ind_id=' . $log['sub_section_id']);
         }
 
-        if ($log['sub_section'] == 'Publisher' OR $log['sub_section'] == 'Developer') {
+        if ($log['sub_section'] == 'Publisher' or $log['sub_section'] == 'Developer') {
             $subsection_link = ("../company/company_edit.php" . '?comp_id=' . $log['sub_section_id']);
         }
 
@@ -90,7 +90,7 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH)) {
             $subsection_link = ("../magazine/magazine_review_score.php" . '?game_id=' . $log['sub_section_id'] . '&game_name=' . $log['section_name']);
         }
 
-        if ($log['sub_section'] == 'Box back' OR $log['sub_section'] == 'Box front') {
+        if ($log['sub_section'] == 'Box back' or $log['sub_section'] == 'Box front') {
             $subsection_link = ("../games/games_box.php" . '?game_id=' . $log['sub_section_id'] . '&game_name=' . $log['section_name']);
         }
 
@@ -106,7 +106,7 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH)) {
             }
         }
 
-        if ($log['sub_section'] == 'Review' OR $log['sub_section'] == 'Review comment') {
+        if ($log['sub_section'] == 'Review' or $log['sub_section'] == 'Review comment') {
             if ($log['action'] == 'Delete') {
                 $subsection_link = ("../games/games_review_add.php" . '?game_id=' . $log['section_id']);
             } else {
@@ -147,7 +147,7 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH)) {
 
     //  the USER SECTION
     if ($log['section'] == 'Users') {
-        if ($log['sub_section'] == 'Avatar' OR $log['sub_section'] == 'User') {
+        if ($log['sub_section'] == 'Avatar' or $log['sub_section'] == 'User') {
             $section_link    = ("../user/user_detail.php" . '?user_id_selected=' . $log['section_id']);
             $subsection_link = ("../user/user_detail.php" . '?user_id_selected=' . $log['sub_section_id']);
         }
@@ -157,7 +157,7 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH)) {
     if ($log['section'] == 'Links') {
         $section_link = ("../links/link_mod.php" . '?website_id=' . $log['section_id']);
 
-        if ($log['sub_section'] == 'Link' OR $log['sub_section'] == 'Category') {
+        if ($log['sub_section'] == 'Link' or $log['sub_section'] == 'Category') {
             $subsection_link = ("../links/link_mod.php" . '?website_id=' . $log['section_id']);
         }
     }
@@ -172,7 +172,7 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH)) {
     if ($log['section'] == 'Company') {
         $section_link = ("../company/company_edit.php" . '?comp_id=' . $log['section_id']);
 
-        if ($log['sub_section'] == 'Company' OR $log['sub_section'] == 'Logo') {
+        if ($log['sub_section'] == 'Company' or $log['sub_section'] == 'Logo') {
             $subsection_link = $section_link;
         }
     }
@@ -181,7 +181,7 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH)) {
     if ($log['section'] == 'Individuals') {
         $section_link = ("../individuals/individuals_edit.php" . '?ind_id=' . $log['section_id']);
 
-        if ($log['sub_section'] == 'Individual' OR $log['sub_section'] == 'Image' OR $log['sub_section'] == 'Nickname') {
+        if ($log['sub_section'] == 'Individual' or $log['sub_section'] == 'Image' or $log['sub_section'] == 'Nickname') {
             $subsection_link = $section_link;
         }
     }
@@ -199,7 +199,7 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH)) {
     if ($log['section'] == 'Interviews') {
         $section_link = ("../interviews/interviews_edit.php" . '?interview_id=' . $log['sub_section_id']);
 
-        if ($log['sub_section'] == 'Interview' OR $log['sub_section'] == 'Screenshots') {
+        if ($log['sub_section'] == 'Interview' or $log['sub_section'] == 'Screenshots') {
             $subsection_link = $section_link;
         }
     }
@@ -294,7 +294,7 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH)) {
     if ($log['section'] == 'Articles') {
         $section_link = ("../articles/articles_edit.php" . '?article_id=' . $log['sub_section_id']);
 
-        if ($log['sub_section'] == 'Article' OR $log['sub_section'] == 'Screenshots') {
+        if ($log['sub_section'] == 'Article' or $log['sub_section'] == 'Screenshots') {
             $subsection_link = $section_link;
         }
     }
@@ -372,4 +372,3 @@ $smarty->display("file:" . $cpanel_template_folder . "change_log.html");
 
 //close the connection
 mysqli_close($mysqli);
-?>

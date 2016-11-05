@@ -41,4 +41,3 @@ $smarty->display("file:" . $cpanel_template_folder . "company_main.html");
 
 //close the connection
 mysqli_close($mysqli);
-?>

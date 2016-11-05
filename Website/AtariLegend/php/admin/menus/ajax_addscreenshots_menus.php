@@ -5,13 +5,13 @@
  *   begin                : Saturday, September 10, 2016
  *   copyright            : (C) 2016 Atari Legend
  *   email                : martens_maarten@hotmail.com
- *	 actual update        : Creation of file
+ *   actual update        : Creation of file
  *
  *********************************************************************************/
 
 //****************************************************************************************
 // Add screenshots to a menu
-//**************************************************************************************** 
+//****************************************************************************************
 
 include("../../includes/common.php");
 include("../../includes/admin.php");

@@ -26,20 +26,17 @@ include("../../includes/admin.php");
 //****************************************************************************************
 if ($action == "delete_from_series") {
     if (isset($game_series_cross_id)) {
-
         foreach ($game_series_cross_id as $game_series_cross_id_sql) {
             create_log_entry('Game series', $game_series_cross_id_sql, 'Game', $game_series_cross_id_sql, 'Delete', $_SESSION['user_id']);
 
             $mysqli->query("DELETE FROM game_series_cross WHERE game_series_cross_id='$game_series_cross_id_sql'");
         }
-
         mysqli_free_result();
     }
 
     $_SESSION['edit_message'] = "game removed to series";
 
     header("Location: ../games/games_series_editor.php?series_page=$series_page&game_series_id=$game_series_id");
-
 }
 
 //****************************************************************************************
@@ -59,7 +56,6 @@ if ($action == "addnew_series") {
     $_SESSION['edit_message'] = "new series added";
 
     header("Location: ../games/games_series_main.php");
-
 }
 
 //****************************************************************************************
@@ -78,7 +74,6 @@ if ($action == "edit_series") {
     create_log_entry('Game series', $game_series_id, 'Series', $game_series_id, 'Update', $_SESSION['user_id']);
 
     header("Location: ../games/games_series_editor.php?series_page=series_editor&game_series_id=$game_series_id");
-
 }
 
 //****************************************************************************************
@@ -97,7 +92,6 @@ if ($action == "delete_gameseries") {
     $_SESSION['edit_message'] = "series deleted";
 
     header("Location: ../games/games_series_main.php");
-
 }
 
 //****************************************************************************************
@@ -116,5 +110,4 @@ if ($action == "add_to_series") {
     }
 
     header("Location: ../games/games_series_editor.php?game_series_id=$game_series_id&series_page=$series_page");
-
 }

@@ -1,4 +1,4 @@
- <?php
+<?php
 /***************************************************************************
  *                                user_management.php
  *                            -----------------------
@@ -64,4 +64,3 @@ $smarty->assign("query_time", $time_elapsed_secs);
 
 //Send all smarty variables to the templates
 $smarty->display("file:" . $cpanel_template_folder . "user_management.html");
-?>

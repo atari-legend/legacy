@@ -1,4 +1,4 @@
- <?php
+<?php
 /***************************************************************************
  *                                demos_detail.php
  *                            ------------------------
@@ -152,7 +152,6 @@ $sql_crew = $mysqli->query("SELECT * FROM crew
                             WHERE crew_demo_prod.demo_id = '$demo_id' ORDER BY crew_name ASC") or die("Couldn't query publishers");
 
 while ($crew = $sql_crew->fetch_array(MYSQLI_BOTH)) {
-
     $url_crew_name = rawurlencode($crew['crew_name']);
 
     $smarty->append('demo_crew', array(
@@ -183,7 +182,6 @@ while ($aka = $sql_aka->fetch_array(MYSQLI_BOTH)) {
 
 $smarty->assign("nr_aka", $nr_aka);
 
-
 //***********************************************************************************
 //The game statistics below on the page
 //***********************************************************************************
@@ -212,4 +210,3 @@ $smarty->display("file:" . $cpanel_template_folder . "demos_detail.html");
 
 //close the connection
 mysqli_close($mysqli);
-?>

@@ -59,7 +59,6 @@ if (isset($action) and $action == 'search') {
     $smarty->assign("message", $message);
 
     while ($article = $sql_articles->fetch_array(MYSQLI_BOTH)) {
-
         $article_date = date("F j, Y", $article['article_date']);
 
         $article_text  = $article['article_intro'];
@@ -87,4 +86,3 @@ $smarty->display("file:" . $cpanel_template_folder . "articles_main.html");
 
 //close the connection
 mysqli_close($mysqli);
-?>

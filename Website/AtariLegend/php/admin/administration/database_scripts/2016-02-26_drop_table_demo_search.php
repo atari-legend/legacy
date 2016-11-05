@@ -36,4 +36,3 @@ $database_autoexecute = "yes";
 // the database change has already been done in some other way and we only want to update the
 // change database.
 $force_insert = "no";
-?>

@@ -23,7 +23,6 @@ include("../../includes/admin.php");
 
 // EDIT BOX FOR A MENU DISK!!!
 if (isset($action) and $action == "edit_disk_box" and $menu_disk_id !== '') {
-
     $sql_menus = "SELECT menu_disk.menu_sets_id,
                         menu_set.menu_sets_name,
                         menu_disk.menu_disk_id,
@@ -334,9 +333,7 @@ if (isset($action) and $action == "edit_disk_box" and $menu_disk_id !== '') {
             'parent_id' => $row['menu_disk_id'],
             'parent_name' => $menu_disk_name
         ));
-
     }
-
 
     //Get the screenshots for this menu if they exist
     $sql_screenshots = $mysqli->query("SELECT * FROM screenshot_menu
@@ -364,7 +361,6 @@ if (isset($action) and $action == "edit_disk_box" and $menu_disk_id !== '') {
     }
 
     $smarty->assign("screenshots_nr", $v_screenshots);
-
 
     //************************************************************************************************
     //Let's get the menu info for the file name concatenation, and the download data for disks already
@@ -433,7 +429,6 @@ if (isset($action) and $action == "edit_disk_box" and $menu_disk_id !== '') {
 
 // CLOSE EDIT BOX FOR A MENU DISK!
 if (isset($action) and $action == "close_edit_disk_box" and $menu_disk_id !== '') {
-
     $sql_menus = "SELECT menu_disk.menu_sets_id,
                         menu_set.menu_sets_name,
                         menu_disk.menu_disk_id,
@@ -493,14 +488,12 @@ if (isset($action) and $action == "close_edit_disk_box" and $menu_disk_id !== ''
         'menu_state' => $row['menu_state']
     ));
 
-
     $smarty->assign('smarty_action', 'close_edit_disk_box');
     $smarty->assign('menu_disk_id', $menu_disk_id);
 }
 
 // POP ADD INTRO CREDITS
 if (isset($action) and $action == "add_intro_credit") {
-
     // Create individuals array
     $menu_disk_id = $query;
 
@@ -514,13 +507,11 @@ if (isset($action) and $action == "add_intro_credit") {
     $query_temporary = $mysqli->query("SELECT * FROM temp WHERE ind_name LIKE 'a%' ORDER BY ind_name ASC") or die("Failed to query temporary table");
     $mysqli->query("DROP TABLE temp");
 
-
     while ($genealogy_ind = $query_temporary->fetch_array(MYSQLI_BOTH)) {
         $smarty->append('ind', array(
             'ind_id' => $genealogy_ind['ind_id'],
             'ind_name' => $genealogy_ind['ind_name']
         ));
-
     }
 
     // Get Author types for
@@ -561,7 +552,6 @@ if (isset($action) and $action == "ind_gen_browse") {
             $query_temporary = $mysqli->query("SELECT * FROM temp WHERE ind_name LIKE '$query%' ORDER BY ind_name ASC") or die("Failed to query temporary table");
         }
         $mysqli->query("DROP TABLE temp");
-
     }
     while ($genealogy_ind = $query_temporary->fetch_array(MYSQLI_BOTH)) {
         $smarty->append('author_type', array(
@@ -569,7 +559,6 @@ if (isset($action) and $action == "ind_gen_browse") {
             'ind_name' => $genealogy_ind['ind_name']
         ));
     }
-
     $smarty->assign('smarty_action', 'ind_gen_browse');
 }
 
@@ -584,7 +573,6 @@ if (isset($action) and $action == "ind_gen_search") {
 
         $query_temporary = $mysqli->query("SELECT * FROM temp WHERE ind_name LIKE '%$query%' ORDER BY ind_name ASC") or die("Failed to query temporary table");
         $mysqli->query("DROP TABLE temp");
-
     } elseif ($query == "empty") {
         $sql_individuals = "SELECT ind_id,ind_name FROM individuals ORDER BY ind_name ASC";
         $sql_aka         = "SELECT ind_id,nick FROM individual_nicks ORDER BY nick ASC";
@@ -609,4 +597,3 @@ if (isset($action) and $action == "ind_gen_search") {
 
 //Send all smarty variables to the templates
 $smarty->display("file:" . $cpanel_template_folder . "ajax_menus_detail.html");
-?>

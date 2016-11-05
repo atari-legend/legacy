@@ -25,7 +25,6 @@ include("../../includes/admin.php");
 
 // Here we delete the company logo image
 if (isset($action) and $action == 'delete_logo') {
-
     $pub_dev_query = $mysqli->query("SELECT pub_dev_imgext FROM pub_dev_text WHERE pub_dev_id='$comp_id'");
     list($pub_dev_imgext) = $pub_dev_query->fetch_array(MYSQLI_BOTH);
 
@@ -53,9 +52,7 @@ if (isset($action) and $action == 'add_logo') {
         // set extension
         if ($type_image == 'image/x-png') {
             $ext = 'png';
-        }
-
-        elseif ($type_image == 'image/png') {
+        } elseif ($type_image == 'image/png') {
             $ext = 'png';
         } elseif ($type_image == 'image/gif') {
             $ext = 'gif';
@@ -84,9 +81,7 @@ if (isset($action) and $action == 'add_logo') {
             $_SESSION['edit_message'] = "Company logo succesfully uploaded";
         }
     }
-
     header("Location: ../company/company_edit.php?comp_id=$comp_id");
-
 }
 
 //update the info of the individual
@@ -109,7 +104,6 @@ if (isset($action) and $action == 'update') {
     $_SESSION['edit_message'] = "Company succesfully updated";
 
     header("Location: ../company/company_edit.php?comp_id=$comp_id");
-
 }
 
 //if we want to delete the company (from the edit page)
@@ -133,7 +127,6 @@ if ($action == 'delete_comp') {
     $_SESSION['edit_message'] = "Company succesfully deleted";
 
     header("Location: ../company/company_main.php");
-
 }
 
 //Insert a new individual
@@ -164,4 +157,3 @@ if ($action == "insert_comp") {
 
 //close the connection
 mysqli_close($mysqli);
-?>

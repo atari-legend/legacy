@@ -1,58 +1,60 @@
 <?php
-/***************************************************************************
-*                                demos_main.php
-*                            --------------------------
-*   begin                : Sunday, October 30, 2005
-*   copyright            : (C) 2005 Atari Legend
-*   email                : admin@atarilegend.com
-*
-*   Id: demos_main.php,v 0.10 2005/10/30 12.30 Gatekeeper
-*
-***************************************************************************/
+/********************************************************************************
+ *                                demos_screenshots_add.php
+ *                            ---------------------------------
+ *   begin                : wednesday, november 10, 2005
+ *   copyright            : (C) 2005 Atari Legend
+ *   email                : admin@atarilegend.com
+ *   actual update        : Creation of file
+ *
+ *   Id: demos_screenshots_add.php,v 0.10 2005/11/10 13:26 ST Gravegrinder
+ *
+ *********************************************************************************/
 
-/*
-***********************************************************************************
-This is the demo browse page where you can navigate your way through the demo db
-***********************************************************************************
-*/
+//****************************************************************************************
+// This is the image selection/upload screen for the demos
+//****************************************************************************************
 
-//load all common functions
 include("../../includes/common.php");
 include("../../includes/admin.php");
 
-$start1=gettimeofday();
-list($start2, $start3) = explode(":", exec('date +%N:%S'));
+//Get the screenshots for this demo, if they exist
+$sql_screenshots = $mysqli->query("SELECT * FROM screenshot_demo
+                                LEFT JOIN screenshot_main ON (screenshot_demo.screenshot_id = screenshot_main.screenshot_id)
+                                WHERE screenshot_demo.demo_id = '$demo_id' ORDER BY screenshot_demo.screenshot_id") or die("Database error - selecting screenshots");
 
+$count         = 1;
+$v_screenshots = 1;
+while ($screenshots = $sql_screenshots->fetch_array(MYSQLI_BOTH)) {
+    $demo_screenshot_image = $demo_screenshot_path;
+    $demo_screenshot_image .= $screenshots['screenshot_id'];
+    $demo_screenshot_image .= ".";
+    $demo_screenshot_image .= $screenshots['imgext'];
 
-		//let's get all the crews in the DB
-		$sql_crew = $mysqli->query("SELECT * FROM crew ORDER BY crew_name ASC")
-				     or die ("Couldn't query crew database");
-		
-		while  ($crew=$sql_crew->fetch_array(MYSQLI_BOTH)) 
-		{  
-			$smarty->append('crew',
-	   			 	 array('crew_id' => $crew['crew_id'],
-						   'crew_name' => $crew['crew_name']));
-		}
-		
-		//get the number of demos in the archive
-		$query_number = $mysqli->query("SELECT * FROM demo") or die("Couldn't get the number of demos");
-		$v_rows = $query_number->num_rows;
+    $smarty->append('screenshots', array(
+        'count' => $count,
+        'demo_screenshot_image' => $demo_screenshot_image,
+        'id' => $screenshots['screenshot_id']
+    ));
 
-		$smarty->assign('demos_nr', $v_rows); 
-		
-		$smarty->assign("user_id",$_SESSION['user_id']);
-		
-				// Create dropdown values a-z
-				$az_value = az_dropdown_value(0);
-				$az_output = az_dropdown_output(0);
-						   
-				$smarty->assign('az_value', $az_value);
-				$smarty->assign('az_output', $az_output);	
-		
+    $count++;
+    $v_screenshots++;
+}
 
-		//Send all smarty variables to the templates
-		$smarty->display("file:".$cpanel_template_folder."demos_main.html");
+$smarty->assign("screenshots_nr", $v_screenshots);
+
+//Get the demo data
+$sql_demo = $mysqli->query("SELECT * FROM demo WHERE demo_id = '$demo_id'") or die("Database error - selecting demo");
+
+while ($demo = $sql_demo->fetch_array(MYSQLI_BOTH)) {
+    $smarty->assign("demo_id", $demo['demo_id']);
+    $smarty->assign("demo_name", $demo['demo_name']);
+}
+
+$smarty->assign("user_id", $_SESSION['user_id']);
+
+//Send all smarty variables to the templates
+$smarty->display("file:" . $cpanel_template_folder . "demos_screenshot_add.html");
+
 //close the connection
 mysqli_close($mysqli);
-?>

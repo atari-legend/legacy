@@ -1,4 +1,4 @@
- <?php
+<?php
 /***************************************************************************
  *                                doc_category_edit.php
  *                            --------------------------
@@ -53,4 +53,3 @@ if ($doc_category_id == '-' or $doc_category_id == ' ') {
 
 //close the connection
 mysqli_free_result($result_doc_category);
-?>

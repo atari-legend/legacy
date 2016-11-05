@@ -14,7 +14,6 @@
 
 //Set which template is going to be used
 if (isset($_SESSION['skin'])) {
-
     $set_skin = $_SESSION['skin'];
 
     $cpanel_template_folder   = "../../../themes/templates/1/admin/";
@@ -41,5 +40,3 @@ if (isset($_SESSION['skin'])) {
         ));
     }
 }
-
-?>

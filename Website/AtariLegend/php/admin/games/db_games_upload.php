@@ -30,7 +30,6 @@ if (isset($action) and $action == 'add_download') {
     $game_download_name = $_FILES['game_download_name'];
 
     if (isset($game_download_name)) {
-
         $file_name = $_FILES['game_download_name']['name'];
 
         $tempfilename = $_FILES['game_download_name']['tmp_name'];
@@ -56,11 +55,9 @@ if (isset($action) and $action == 'add_download') {
         $ext = strtolower($ext[1]);
 
         // check if the extention is valid.
-        if ($ext == "stx" || $ext == "msa" || $ext == "st") {
-        } // pretty isn't it? ;)
-
-        else {
-            exit("Try uploading a diskimage type that is allowed, like stx or msa not $ext");
+        if ($ext == "stx" || $ext == "msa" || $ext == "st") { // pretty isn't it? ;)
+        } else {
+              exit("Try uploading a diskimage type that is allowed, like stx or msa not $ext");
         }
 
         // create a timestamp for the date of upload
@@ -119,7 +116,6 @@ if (isset($action) and $action == 'add_download') {
 // When the update button has been pressed, the file name and comments get updated
 //****************************************************************************************
 if (isset($action) and $action == 'update_download') {
-
     if (isset($cracker)) {
         $mysqli->query("UPDATE game_download SET cracker='$cracker' WHERE game_download_id='$game_download_id'");
     }

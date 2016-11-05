@@ -23,15 +23,10 @@
 include("../../includes/common.php");
 include("../../includes/admin.php");
 
-
-//Delete the selected news entrie
-if (isset($action) and $action == "delete_news")
 //****************************************************************************************
-
 // This is where we delete news posts
-
 //****************************************************************************************
-    {
+if (isset($action) and $action == "delete_news") {
     create_log_entry('News', $news_id, 'News item', $news_id, 'Delete', $_SESSION['user_id']);
 
     $mysqli->query("DELETE FROM news WHERE news_id ='$news_id'") or die("No Go with update!!");
@@ -41,15 +36,10 @@ if (isset($action) and $action == "delete_news")
     header("Location: ../news/news_edit_all.php");
 }
 
-
-
-if (isset($action) and $action == "add_news")
 //****************************************************************************************
-
 // This is where we add the actual news to the submission table
-
 //****************************************************************************************
-    {
+if (isset($action) and $action == "add_news") {
     $news_date = time();
 
     // Check if form is filled.
@@ -118,7 +108,6 @@ if (isset($action) and $action == "approve_submission") {
     header("Location: ../news/news_edit_all.php");
 }
 
-
 //********************************************************************************************
 // This is where we will delete unapproved news. It will be deleted from the submission table
 //********************************************************************************************
@@ -137,7 +126,6 @@ if (isset($action) and $action == "delete_submission") {
 
 //Edit news posts
 if (isset($action) and $action == "update_news") {
-
     $news_text     = $mysqli->real_escape_string($news_text);
     $news_headline = $mysqli->real_escape_string($news_headline);
 
@@ -161,7 +149,6 @@ if (isset($action) and $action == "update_news") {
 
 //Edit news submissions
 if (isset($action) and $action == "update_submission") {
-
     $news_text = $mysqli->real_escape_string($news_text);
 
     //Its a submission
@@ -264,4 +251,3 @@ if (isset($action) and $action == "delete_image") {
 
 //close the connection
 mysqli_close($mysqli);
-?>
