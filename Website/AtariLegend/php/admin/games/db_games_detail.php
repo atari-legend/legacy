@@ -38,7 +38,6 @@ if (isset($action) and $action == "insert_game") {
     header("Location: ../games/games_detail.php?game_id=$new_game_id");
 }
 
-
 //***********************************************************************************
 //If delete aka link has been pressed
 //***********************************************************************************
@@ -130,7 +129,6 @@ if (isset($action) and $action == 'add_publisher') {
     header("Location: ../games/games_detail.php?game_id=$game_id");
 }
 
-
 //***********************************************************************************
 //If delete developer button has been pressed
 //***********************************************************************************
@@ -163,7 +161,6 @@ if (isset($action) and $action == 'add_developer') {
     }
     header("Location: ../games/games_detail.php?game_id=$game_id");
 }
-
 
 //***********************************************************************************
 //If delete year button has been pressed
@@ -347,7 +344,6 @@ if (isset($action) and $action == 'modify_game') {
     header("Location: ../games/games_detail.php?game_id=$game_id");
 }
 
-
 //***********************************************************************************
 //If the delete button has been pressed, delete the necesarry records from the tables
 //***********************************************************************************
@@ -426,7 +422,6 @@ if (isset($action) and $action == 'delete_game') {
                                         $_SESSION['edit_message'] = "Game has been deleted";
 
                                         header("Location: ../games/games_main.php");
-
                                         $smarty->assign("user_id", $_SESSION['user_id']);
 
                                         //close the connection
@@ -440,8 +435,6 @@ if (isset($action) and $action == 'delete_game') {
             }
         }
     }
-
 }
 //close the connection
 mysqli_close($mysqli);
-?>

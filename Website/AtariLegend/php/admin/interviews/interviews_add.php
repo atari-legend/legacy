@@ -34,17 +34,15 @@ if ($individual_create == '' or $individual_create == '-') {
 
     //Send all smarty variables to the templates
     header("Location: ../interviews/interviews_main.php");
-}
+} else {
 //****************************************************************************************
 //This piece of code is used to open up a blank interview add canvas (before we actually
 //add it to the DB)
 //****************************************************************************************
-else {
     //Get the individuals
     $sql_individuals = $mysqli->query("SELECT * FROM individuals ORDER BY ind_name ASC") or die("Couldn't query indiciduals database");
 
     while ($individuals = $sql_individuals->fetch_array(MYSQLI_BOTH)) {
-
         //Get the selected individual data
         if ($individuals['ind_id'] == $individual_create) {
             $smarty->assign('selected_individual', array(

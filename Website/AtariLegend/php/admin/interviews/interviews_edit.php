@@ -33,7 +33,6 @@ while ($individuals = $sql_individuals->fetch_array(MYSQLI_BOTH)) {
     ));
 }
 
-
 //Get the authors for the interview
 $sql_author = $mysqli->query("SELECT user_id,userid FROM users") or die("Database error - getting members name");
 
@@ -43,7 +42,6 @@ while ($authors = $sql_author->fetch_array(MYSQLI_BOTH)) {
         'user_name' => $authors['userid']
     ));
 }
-
 
 //we need to get the data of the loaded interview
 $sql_interview = $mysqli->query("SELECT * FROM interview_main
@@ -76,7 +74,6 @@ $smarty->assign("screenshots_nr", $v_screeshots);
 $count = 1;
 
 while ($screenshots = $sql_screenshots->fetch_array(MYSQLI_BOTH)) {
-
     $v_int_image = $interview_screenshot_path;
     $v_int_image .= $screenshots['screenshot_id'];
     $v_int_image .= '.';
@@ -94,7 +91,6 @@ while ($screenshots = $sql_screenshots->fetch_array(MYSQLI_BOTH)) {
         'interview_screenshot_count' => $count,
         'interview_screenshot_comment' => $comments['comment_text']
     ));
-
     $count = $count + 1;
 }
 
@@ -105,5 +101,3 @@ $smarty->display("file:" . $cpanel_template_folder . "interviews_edit.html");
 
 //close the connection
 mysqli_close($mysqli);
-
-?>

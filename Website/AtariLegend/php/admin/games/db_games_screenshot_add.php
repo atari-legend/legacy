@@ -25,7 +25,6 @@ include("../../includes/quick_search_games.php");
 
 //If we are uploading new screenshots
 if (isset($action) and $action == 'add_screens') {
-
     //Here we'll be looping on each of the inputs on the page that are filled in with an image!
     $image = $_FILES['image'];
 
@@ -43,16 +42,13 @@ if (isset($action) and $action == 'add_screens') {
 
             if ($type_image == 'image/x-png') {
                 $ext = 'png';
-            }
-
-            elseif ($type_image == 'image/gif') {
+            } elseif ($type_image == 'image/gif') {
                 $ext = 'gif';
             } elseif ($type_image == 'image/jpeg') {
                 $ext = 'jpg';
             }
 
             if ($ext !== "") {
-
                 // First we insert the directory path of where the file will be stored... this also creates an autoinc number for us.
                 $sdbquery = $mysqli->query("INSERT INTO screenshot_main (screenshot_id,imgext) VALUES ('','$ext')") or die("Database error - inserting screenshots");
 

@@ -81,7 +81,6 @@ if (isset($action) and $action == "delete_avatar") {
     unlink("$user_avatar_save_path$user_id_selected.$avatar_ext");
 
     create_log_entry('Users', $user_id_selected, 'Avatar', $user_id_selected, 'Delete', $_SESSION['user_id']);
-
 }
 
 //****************************************************************************************
@@ -174,4 +173,3 @@ header("Location: ../user/user_detail.php?user_id_selected=$user_id_selected");
 
 //close the connection
 mysqli_close($mysqli);
-?>

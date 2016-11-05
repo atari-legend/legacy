@@ -33,7 +33,6 @@ foreach (KarmaGood() as $key => $value) {
         'user_name' => $value[1],
         'user_id' => $value[2]
     ));
-
 }
 
 foreach (KarmaBad() as $key => $value) {
@@ -42,7 +41,6 @@ foreach (KarmaBad() as $key => $value) {
         'user_name' => $value[1],
         'user_id' => $value[2]
     ));
-
 }
 
 $stack = statistics_stack();
@@ -61,4 +59,3 @@ $smarty->assign('nr_users', $v_rows);
 
 //Send all smarty variables to the templates
 $smarty->display("file:" . $cpanel_template_folder . "user_main.html");
-?>

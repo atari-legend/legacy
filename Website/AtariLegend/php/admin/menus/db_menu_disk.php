@@ -33,7 +33,6 @@ if ($action == "menu_set_new") {
     }
 
     header("Location: ../menus/menus_list.php");
-
 }
 
 //****************************************************************************************
@@ -57,10 +56,8 @@ if ($action == "add_new_menu_disk") {
             }
             $_SESSION['edit_message'] = "New Menu disk added";
             create_log_entry('Menu set', $menu_sets_id, 'Menu disk', $last_id, 'Insert', $_SESSION['user_id']);
-
-        }
+        } elseif ($menu_disk_number == '' and $menu_disk_letter !== '') {
         //Ok, but if it is not a numbered disk but instead it is one of those horrible alphabetic disks
-        elseif ($menu_disk_number == '' and $menu_disk_letter !== '') {
             $sql      = $mysqli->query("INSERT INTO menu_disk (menu_sets_id,menu_disk_letter) VALUES ('$menu_sets_id','$menu_disk_letter')");
             $last_id2 = $mysqli->insert_id;
             if ($menu_disk_part !== '') {
@@ -77,11 +74,8 @@ if ($action == "add_new_menu_disk") {
             $_SESSION['edit_message'] = "Please use a correct combination - numbered OR alphabetic";
         }
     }
-
     header("Location: ../menus/menus_disk_list.php?menu_sets_id=$menu_sets_id");
-
 }
-
 
 //****************************************************************************************
 // MULTI Add new menu disk
@@ -97,16 +91,12 @@ if (isset($action) and $action == "multi_add_new_menu_disk") {
                 $sql = $mysqli->query("INSERT INTO menu_disk (menu_sets_id,menu_disk_number) VALUES ('$menu_sets_id','$i')");
                 $i++;
             }
-
         }
-
         create_log_entry('Menu set', $menu_sets_id, 'Menu disk (multiple)', $menu_sets_id, 'Insert', $_SESSION['user_id']);
 
         $_SESSION['edit_message'] = "New Menu disks added";
     }
-
     header("Location: ../menus/menus_disk_list.php?menu_sets_id=$menu_sets_id");
-
 }
 
 //****************************************************************************************
@@ -144,7 +134,6 @@ if ($action == "menu_set_crew_set") {
     }
 
     header("Location: ../menus/menus_disk_list.php?menu_sets_id=$menu_sets_id");
-
 }
 
 //****************************************************************************************
@@ -165,7 +154,6 @@ if ($action == "menu_set_ind_set") {
     }
 
     header("Location: ../menus/menus_disk_list.php?menu_sets_id=$menu_sets_id");
-
 }
 
 //****************************************************************************************
@@ -185,7 +173,6 @@ if ($action == "menu_set_type_set") {
         $_SESSION['edit_message'] = "Please select a menu set";
     }
     header("Location: ../menus/menus_disk_list.php?menu_sets_id=$menu_sets_id");
-
 }
 
 
@@ -203,7 +190,6 @@ if ($action == "menu_set_crew_add") {
     }
     $_SESSION['edit_message'] = "$new_crew_name added to the crew database";
     header("Location: ../menus/menus_disk_list.php?menu_sets_id=$menu_sets_id");
-
 }
 
 //****************************************************************************************
@@ -234,7 +220,6 @@ if ($action == "delete_crew_from_menu_set") {
 
     $_SESSION['edit_message'] = "Crew removed from Menu set";
     header("Location: ../menus/menus_disk_list.php?menu_sets_id=$menu_sets_id");
-
 }
 
 //****************************************************************************************
@@ -249,7 +234,6 @@ if ($action == "delete_menu_type_from_menu_set") {
 
     $_SESSION['edit_message'] = "Menu type removed from Menu set";
     header("Location: ../menus/menus_disk_list.php?menu_sets_id=$menu_sets_id");
-
 }
 
 
@@ -265,7 +249,6 @@ if ($action == "delete_ind_from_menu_set") {
 
     $_SESSION['edit_message'] = "Individual removed from Menu set";
     header("Location: ../menus/menus_disk_list.php?menu_sets_id=$menu_sets_id");
-
 }
 
 //****************************************************************************************
@@ -371,9 +354,7 @@ if (isset($action) and ($action == "add_title_to_menu")) {
 
         $temp_query = $mysqli->query("SELECT * FROM temp GROUP BY menu_disk_title_id ORDER BY software_name ASC") or die("does not compute3");
 
-
         while ($query = $temp_query->fetch_array(MYSQLI_BOTH)) {
-
             // This smarty is used for creating the list of games
             $smarty->append('game', array(
                 'game_id' => $query['software_id'],
@@ -395,11 +376,8 @@ if (isset($action) and ($action == "add_title_to_menu")) {
 
         //Send to smarty for return value
         $smarty->display("file:" . $cpanel_template_folder . "ajax_menus_detail.html");
-
     }
-
 }
-
 
 //****************************************************************************************
 // Add doc to menu disk AJAX DB job
@@ -529,16 +507,13 @@ if (isset($action) and $action == "add_doc_to_menu") {
 
         //Send to smarty for return value
         $smarty->display("file:" . $cpanel_template_folder . "ajax_menus_detail.html");
-
     }
 }
-
 
 //****************************************************************************************
 // DELETE TITLE FROM MENU DISK
 //****************************************************************************************
 if (isset($action) and $action == "delete_from_menu_disk") {
-
     /* let's check if the game is linked to a chain first */
     $sql = $mysqli->query("SELECT * FROM menu_disk_title_set
         WHERE menu_disk_title_id = '$menu_disk_title_id'") or die("error selecting title chain");
@@ -620,7 +595,6 @@ if (isset($action) and $action == "delete_from_menu_disk") {
 
 
     while ($query = $temp_query->fetch_array(MYSQLI_BOTH)) {
-
         // This smarty is used for creating the list of games
         $smarty->append('game', array(
             'game_id' => $query['software_id'],
@@ -641,9 +615,7 @@ if (isset($action) and $action == "delete_from_menu_disk") {
 
     //Send to smarty for return value
     $smarty->display("file:" . $cpanel_template_folder . "ajax_menus_detail.html");
-
 }
-
 
 //****************************************************************************************
 // DELETE DOC FROM MENU DISK
@@ -782,9 +754,7 @@ if (isset($action) and $action == "add_screens") {
 
             if ($type_image == 'image/x-png') {
                 $ext = 'png';
-            }
-
-            elseif ($type_image == 'image/gif') {
+            } elseif ($type_image == 'image/gif') {
                 $ext = 'gif';
             } elseif ($type_image == 'image/jpeg') {
                 $ext = 'jpg';
@@ -815,7 +785,7 @@ if (isset($action) and $action == "add_screens") {
         }
     }
 
-    If ($osd_message == '') {
+    if ($osd_message == '') {
         $osd_message = "No screenshot uploaded";
     }
 
@@ -916,7 +886,6 @@ if (isset($action) and $action == "delete_screen_from_menu_disk") {
 
     //Send to smarty for return value
     $smarty->display("file:" . $cpanel_template_folder . "ajax_menus_detail.html");
-
 }
 
 //****************************************************************************************
@@ -1000,7 +969,6 @@ if (isset($action) and $action == 'add_file') {
     $menu_download_name = $_FILES['menu_download_name'];
 
     if (isset($menu_download_name)) {
-
         $file_name = $_FILES['menu_download_name']['name'];
 
         $tempfilename = $_FILES['menu_download_name']['tmp_name'];
@@ -1291,9 +1259,8 @@ if (isset($action) and ($action == "change_menu_disk_state" or $action == "chang
               WHERE menu_disk_id='$menu_disk_id'");
 
             create_log_entry('Menu disk', $menu_disk_id, 'State', $state_id, 'Update', $_SESSION['user_id']);
-
+        // first check if the menu has already a parent entry
         } elseif ($action == "change_menu_disk_parent") {
-            // first check if the menu has already a parent entry
             $sql = $mysqli->query("SELECT * FROM menu_disk_submenu
             WHERE menu_disk_id = '$menu_disk_id'") or die("error selecting menu disk parent");
             if ($sql->num_rows > 0) {
@@ -1502,9 +1469,7 @@ if (isset($action) and ($action == "change_menu_disk_state" or $action == "chang
 
         $temp_query = $mysqli->query("SELECT * FROM temp GROUP BY menu_disk_title_id ORDER BY software_name ASC") or die("does not compute3");
 
-
         while ($query = $temp_query->fetch_array(MYSQLI_BOTH)) {
-
             // This smarty is used for creating the list of games
             $smarty->append('game', array(
                 'game_id' => $query['software_id'],
@@ -1726,7 +1691,6 @@ if (isset($action) and ($action == "change_nickname")) {
             WHERE menu_disk_credits_id='$menu_disk_credits_id'");
 
         create_log_entry('Menu disk', $menu_disk_id, 'Nickname', $individual_nicks_id, 'Insert', $_SESSION['user_id']);
-
     }
 
     // Get the menudisk credits
@@ -1795,7 +1759,6 @@ if (isset($action) and ($action == "change_doctype")) {
             WHERE doc_id='$doc_id'") or die("error updating doc type");
 
         create_log_entry('Menu disk', $menu_disk_id, 'Doc type', $doc_type_id, 'Insert', $_SESSION['user_id']);
-
     }
 
     // Get the doc disks
@@ -1916,7 +1879,7 @@ if (isset($action) and ($action == "add_set_to_menu" or $action == "link_game_to
         } elseif ($action == "link_game_to_set") {
             if ($menu_disk_title_set_chain == 'Nr' or $menu_disk_title_set_chain == '') {
                 $osd_message = "Please add a correct part nr";
-            } elseif ($chainbrowse == '' OR $chainbrowse == '-') {
+            } elseif ($chainbrowse == '' or $chainbrowse == '-') {
                 $osd_message = "Please select a set";
             } else {
                 //check if the title is already linked
@@ -2222,7 +2185,6 @@ if (isset($action) and ($action == "add_set_to_menu" or $action == "link_game_to
     $temp_query = $mysqli->query("SELECT * FROM temp2 GROUP BY menu_disk_title_id ORDER BY software_name ASC") or die("does not compute3");
 
     while ($query = $temp_query->fetch_array(MYSQLI_BOTH)) {
-
         // This smarty is used for creating the list of games
         $smarty->append('game', array(
             'game_id' => $query['software_id'],
@@ -2282,5 +2244,4 @@ if (isset($action) and ($action == "publish_set")) {
         $_SESSION['edit_message'] = "Menu set offline";
         header("Location: ../menus/menus_disk_list.php?menu_sets_id=$menu_sets_id");
     }
-
 }

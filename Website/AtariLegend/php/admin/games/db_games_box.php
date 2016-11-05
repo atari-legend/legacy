@@ -32,7 +32,6 @@ $filename = $filename['tmp_name'][1];
 //exit;
 
 if (isset($action) and $action == "boxscan_upload") {
-
     //****************************************************************************************
     // This is where the boxscans get their upload treatment
     //****************************************************************************************
@@ -65,8 +64,6 @@ if (isset($action) and $action == "boxscan_upload") {
 
                 chmod("$game_boxscan_path$backbox[0].jpg", 0777);
             } else {
-
-
                 $sdbquery = $mysqli->query("INSERT INTO game_boxscan (game_id,game_boxscan_side,imgext) VALUES ('$game_id','0','jpg')") or die("Whats wrong???");
 
                 //get the id of the inserted front cover
@@ -84,7 +81,6 @@ if (isset($action) and $action == "boxscan_upload") {
                 $_SESSION['edit_message'] = "Front scan uploaded";
 
                 chmod("$game_boxscan_path$boxCover[0].jpg", 0777);
-
             }
         }
     }
@@ -93,7 +89,6 @@ if (isset($action) and $action == "boxscan_upload") {
 }
 
 if (isset($action) and $action == "boxscan_delete") {
-
     //****************************************************************************************
     // This is where the boxscans get deleted
     //****************************************************************************************
@@ -116,4 +111,3 @@ if (isset($action) and $action == "boxscan_delete") {
     mysqli_free_result();
     header("Location: ../games/games_box.php?game_id=$game_id");
 }
-?>

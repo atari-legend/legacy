@@ -82,7 +82,6 @@ if (isset($action) and $action == 'add_crew') {
     header("Location: ../demos/demos_detail.php?demo_id=$demo_id");
 }
 
-
 //***********************************************************************************
 //If the add creator button has been pressed
 //***********************************************************************************
@@ -91,7 +90,6 @@ if (isset($action) and $action == 'add_author') {
 
     header("Location: ../demos/demos_detail.php?demo_id=$demo_id");
 }
-
 
 //***********************************************************************************
 //If the modify button has been pressed, update the necesarry tables
@@ -167,7 +165,6 @@ if (isset($action) and $action == 'modify_demo') {
     header("Location: ../demos/demos_detail.php?demo_id=$demo_id");
 }
 
-
 //***********************************************************************************
 //If the delete button has been pressed, delete the necesarry records from the tables
 //***********************************************************************************
@@ -224,7 +221,6 @@ if (isset($action) and $action == 'delete_demo') {
                         header("Location: ../demos/demos_main.php");
                         //close the connection
                         mysqli_free_result();
-
                     }
                 }
             }
@@ -246,4 +242,3 @@ $smarty->display("file:" . $cpanel_template_folder . "index.html");
 
 //close the connection
 mysqli_close($mysqli);
-?>

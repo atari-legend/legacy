@@ -142,4 +142,3 @@ $smarty->display("file:" . $cpanel_template_folder . "games_music_detail.html");
 
 //close the connection
 mysqli_close($mysqli);
-

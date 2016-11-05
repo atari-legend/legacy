@@ -1,4 +1,4 @@
- <?php
+<?php
 /***************************************************************************
  *                                article_type.php
  *                            --------------------------
@@ -38,4 +38,3 @@ $smarty->display("file:" . $cpanel_template_folder . "article_type.html");
 
 //close the connection
 mysqli_free_result($result_menus_type);
-?>

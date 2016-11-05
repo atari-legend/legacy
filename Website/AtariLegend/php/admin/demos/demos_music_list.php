@@ -111,4 +111,3 @@ if (isset($action) and $action == 'search') {
         }
     }
 }
-?>

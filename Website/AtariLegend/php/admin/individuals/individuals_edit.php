@@ -42,7 +42,6 @@ if ($ind_id == '-') {
     //Send all smarty variables to the templates
     $smarty->display("file:" . $cpanel_template_folder . "individuals_main.html");
 } else {
-
     //Get the individual data
     $sql_individuals = $mysqli->query("SELECT * FROM individuals
                     LEFT JOIN individual_text ON (individuals.ind_id = individual_text.ind_id )
@@ -73,7 +72,6 @@ if ($ind_id == '-') {
     $sql_individuals = $mysqli->query("SELECT * FROM individual_nicks WHERE ind_id=$ind_id");
 
     while ($ind_nicks = $sql_individuals->fetch_array(MYSQLI_BOTH)) {
-
         $smarty->append('nicks', array(
             'nick_id' => $ind_nicks['individual_nicks_id'],
             'nick_name' => $ind_nicks['nick']
@@ -88,4 +86,3 @@ if ($ind_id == '-') {
 
 //close the connection
 mysqli_close($mysqli);
-?>

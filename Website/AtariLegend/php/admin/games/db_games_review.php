@@ -53,7 +53,6 @@ if (isset($action) and $action == 'add_review') {
     $i = 0;
 
     while ($screenrow = $SCREEN->fetch_row()) {
-
         if ($inputfield[$i] != "") {
             //fill the review_screenshot table
 
@@ -81,4 +80,3 @@ if (isset($action) and $action == 'add_review') {
 
     header("Location: ../games/games_review_add.php?game_id=$game_id");
 }
-?>

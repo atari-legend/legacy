@@ -32,7 +32,6 @@ if ($action == "stop") {
 
 //If we are uploading new screenshots
 if (isset($action) and $action == 'add_screens') {
-
     //Here we'll be looping on each of the inputs on the page that are filled in with an image!
     $image = $_FILES['image'];
 
@@ -52,18 +51,14 @@ if (isset($action) and $action == 'add_screens') {
 
             if ($type_image == 'image/x-png') {
                 $ext = 'png';
-            }
-
-            elseif ($type_image == 'image/gif') {
+            } elseif ($type_image == 'image/gif') {
                 $ext = 'gif';
             } elseif ($type_image == 'image/jpeg') {
                 $ext = 'jpg';
             }
 
             if ($ext !== "") {
-
                 // First we insert the directory path of where the file will be stored... this also creates an autoinc number for us.
-
                 $sdbquery = $mysqli->query("INSERT INTO screenshot_main (screenshot_id,imgext) VALUES ('','$ext')") or die("Database error - inserting screenshots");
 
                 //select the newly entered screenshot_id from the main table
@@ -83,13 +78,11 @@ if (isset($action) and $action == 'add_screens') {
                 create_log_entry('Interviews', $interview_id, 'Screenshots', $interview_id, 'Insert', $_SESSION['user_id']);
 
                 chmod("$interview_screenshot_save_path$screenshotrow[0].$ext", 0777);
-
             }
         }
     }
 
     header("Location: ../interviews/interviews_screenshots_add.php?interview_id=$interview_id");
-
 }
 
 //If we pressed the delete screenshot link
@@ -132,7 +125,6 @@ if (isset($action) and $action == 'delete_screen') {
 // Delete the interview and return to the interview page
 //*************************************************************************
 if (isset($action) and $action == "delete_interview") {
-
     create_log_entry('Interviews', $interview_id, 'Interview', $interview_id, 'Delete', $_SESSION['user_id']);
 
     $sql = $mysqli->query("DELETE FROM interview_main WHERE interview_id = '$interview_id' ");
@@ -266,24 +258,18 @@ if (isset($action) and $action == 'update_interview') {
     $_SESSION['edit_message'] = 'Interview updated succesfully';
 
     header("Location: ../interviews/interviews_edit.php?interview_id=$interview_id");
-}
-
-
+} elseif (isset($action) and $action == 'add_interview') {
 //****************************************************************************************
 //This is what happens when we press the create interview button in the interview creation
 //page
 //****************************************************************************************
-
-elseif (isset($action) and $action == 'add_interview') {
     if ($members == '' or $members == '-' or $individual == '' or $individual == "-") {
-
         $_SESSION['edit_message'] = 'Some required info is not filled in. Make sure the -author- and -individual- fields are completed';
 
         //Get the individuals
         $sql_individuals = $mysqli->query("SELECT * FROM individuals ORDER BY ind_name ASC") or die("Couldn't query individuals database");
 
         while ($individuals = $sql_individuals->fetch_array(MYSQLI_BOTH)) {
-
             //Get the selected individual data
             if ($individuals['ind_id'] == $individual) {
                 $smarty->assign('selected_individual', array(
@@ -312,7 +298,6 @@ elseif (isset($action) and $action == 'add_interview') {
 
         //Send all smarty variables to the templates
         $smarty->display("file:" . $cpanel_template_folder . "interviews_add.html");
-
     } else {
         $sdbquery = $mysqli->query("INSERT INTO interview_main (user_id, ind_id) VALUES ($members, $individual)") or die("Couldn't insert into interview_main");
 
@@ -338,6 +323,3 @@ elseif (isset($action) and $action == 'add_interview') {
         header("Location: ../interviews/interviews_edit.php?interview_id=$id");
     }
 }
-
-?>
-

@@ -72,7 +72,6 @@ if (isset($action) and $action == "search") {
         $smarty->assign("message", $message);
 
         header("Location: ../demos/demos_main.php");
-
     } else {
         /*
          ***********************************************************************************
@@ -82,7 +81,6 @@ if (isset($action) and $action == "search") {
          querystring for faster output
          ***********************************************************************************
          */
-
 
         $RESULTDEMO = "SELECT  demo.demo_id,
                                demo.demo_name,
@@ -105,9 +103,6 @@ if (isset($action) and $action == "search") {
                        LEFT JOIN demo_ste_enhan ON (demo_ste_enhan.demo_id = demo.demo_id)
                        WHERE ";
 
-
-
-
         $RESULTDEMO .= $demobrowse_select;
         $RESULTDEMO .= "demo_name LIKE '%$demosearch%'";
         $RESULTDEMO .= $crew_select;
@@ -128,7 +123,6 @@ if (isset($action) and $action == "search") {
         } else {
             $rows = $demos->num_rows;
             if ($rows > 0) {
-
                 $RESULTAKA = "SELECT
                                demo_aka.demo_id,
                                demo_aka.aka_name,
@@ -207,7 +201,5 @@ if (isset($action) and $action == "search") {
         }
     }
 }
-
 //close the connection
 mysqli_close($mysqli);
-?>

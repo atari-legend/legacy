@@ -66,9 +66,7 @@ if ($imagenum_rows > 0) {
                 'game_boxscan_id' => $rowimage['game_boxscan_id'],
                 'front_image' => $front_image_filename
             ));
-        }
-        // Else back covers
-        else {
+        } else { // Else back covers
             $back++;
 
             $couple = $mysqli->query("SELECT game_boxscan_id FROM game_box_couples WHERE game_boxscan_cross=$rowimage[game_boxscan_id]") or die("Database error - selecting gamebox scan");
@@ -100,4 +98,3 @@ $smarty->display("file:" . $cpanel_template_folder . "games_box.html");
 
 //close the connection
 mysqli_close($mysqli);
-?>

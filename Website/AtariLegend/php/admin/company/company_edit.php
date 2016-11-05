@@ -77,4 +77,3 @@ if ($comp_id == '-') {
 
 //close the connection
 mysqli_close($mysqli);
-?>

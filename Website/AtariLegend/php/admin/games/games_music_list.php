@@ -48,7 +48,6 @@ if (isset($action) and $action == 'search') {
 
         //Send back to the games_music.php if nothing have been searched
         header("Location: ../games/games_music.php");
-
     } else {
         //In all cases we search we start searching through the game table
         //first
@@ -104,7 +103,6 @@ if (isset($action) and $action == 'search') {
                 //close the connection
                 mysqli_free_result($numberzaks);
             } else {
-
                 $_SESSION['edit_message'] = "No result for your search!";
 
                 //Send back to the games_music.php if no results were generated
@@ -116,5 +114,3 @@ if (isset($action) and $action == 'search') {
         }
     }
 }
-?>
-

@@ -41,7 +41,6 @@ if (isset($ind_id) and isset($action) and $action == 'delete_pic') {
 
 //If we want to upload a photo
 if (isset($ind_id) and isset($action) and $action == 'add_photo') {
-
     $image = $_FILES['individual_pic'];
 
     $tmp_name = $image['tmp_name'];
@@ -183,4 +182,3 @@ if (isset($action) and $action == 'insert_ind') {
 
 //close the connection
 mysqli_close($mysqli);
-?>
