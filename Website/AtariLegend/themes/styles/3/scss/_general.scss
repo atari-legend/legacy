@@ -33,10 +33,10 @@ body {
     background: #dbd7d1;
 }
 
-body a { text-decoration: none; }
-body a:hover { text-decoration: none; }
-body a:visited { text-decoration: none; }
-img { display: block; }
+body a {text-decoration: none; }
+body a:hover {text-decoration: none; }
+body a:visited {text-decoration: none; }
+img {display: block; }
 //*----------------------------------------------------------
 // Main site width
 //------------------------------------------------------------ */
@@ -122,14 +122,14 @@ img { display: block; }
     padding-right: 4%;
     text-align: left;
     border-right: 2px solid #484c7b;
-    //*border-left: 2px solid #01b5b5;
-    padding-left: 4%;
+    //border-left: 2px solid #01b5b5;
+    //padding-left: 4%;
 }
 
 .standard_tile_title {
     position: absolute;
     z-index: 1;
-    /* RGBa with 0.6 opacity */
+    //* RGBa with 0.6 opacity */
     padding-top: 3%;
     font-size: 17pt;
     font-weight: 100;
@@ -479,7 +479,7 @@ legend {
     line-height: 22px;
     text-align: center;
     cursor: default;
-    background-color: #666666;
+    background-color: #666;
     border: white solid 1px;
     border-radius: 50%;
 }
@@ -493,30 +493,30 @@ legend {
 .help-tip:hover p {
     display: block;
     transform-origin: 100% 0;
-    -webkit-animation: fadeIn 0.3s ease-in-out;
-    animation: fadeIn 0.3s ease-in-out;
+    -webkit-animation: fadeIn .3s ease-in-out;
+    animation: fadeIn .3s ease-in-out;
 }
 
 .help-tip p {
     position: relative;
     right: 290px;
-    /* The tooltip */
+    //* The tooltip */
     display: none;
     width: 300px;
     padding: 5px;
     font-size: 13px;
     line-height: 1.4;
     text-align: left;
-    background-color: #666666;
+    background-color: #666;
     color: #FFF;
     border: black solid 1px;
     border-radius: 3px;
-    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, .2);
 }
 
 //I am removing the pointer as the alignment of the text box changes from '?' to '?' - this is done the be compliant with a resolution of 320 width.
 //Test it for yourself to see what I mean
-//.help-tip p:before {
+//.help-tip p::before {
 //* The pointer of the tooltip */:
 //  position: absolute;
 //  content: '';
@@ -528,11 +528,11 @@ legend {
 //  top: -12px;
 //}
 
-.help-tip p:after {
+.help-tip p::after {
     position: absolute;
     top: -40px;
     left: 0;
-    /* Prevents the tooltip from being hidden */
+    //* Prevents the tooltip from being hidden */
     width: 100%;
     height: 40px;
     content: '';
@@ -542,7 +542,7 @@ legend {
 @-webkit-keyframes fadeIn {
     0% {
         opacity: 0;
-        transform: scale(0.6);
+        transform: scale(.6);
     }
 
     100% {
