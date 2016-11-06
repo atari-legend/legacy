@@ -36,7 +36,7 @@
 .user_stats_img {
     max-width: 100%;
     margin-bottom: 10px;
-    opacity: 0.8;
+    opacity: .8;
     box-shadow: 0 0 12px black;
 }
 
@@ -50,7 +50,8 @@
     width: 45%;
 }
 
-#child_good_karma,#child_bad_karma {
+#child_good_karma,
+#child_bad_karma {
     float: left;
     width: 27%;
 }
@@ -70,7 +71,7 @@
     font-weight: bold;
     text-align: center;
     list-style-type: none;
-    background-color: #DBD7D1;
+    background-color: #dbd7d1;
     border-collapse: collapse;
     border-top: solid 2px #b2b2b2;
     border-bottom: solid 2px #b2b2b2;
@@ -119,18 +120,18 @@
     width: 185px;
     height: 25px;
     margin-top: 0;
-    background: #666666;
+    background: #666;
 }
 
 #quick_search_dev_select {
     width: 185px;
     height: 25px;
     margin-top: 0;
-    background: #666666;
+    background: #666;
 }
 
 #quick_search_small_select {
     width: 50px;
     height: 25px;
-    background: #666666;
+    background: #666;
 }

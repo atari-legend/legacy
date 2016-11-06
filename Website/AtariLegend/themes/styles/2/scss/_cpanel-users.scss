@@ -11,7 +11,9 @@
 }
 
 .user_details_container { display: flex; }
-#child_1, #child_2 {
+
+#child_1,
+#child_2 {
     width: 50%;
     margin-left: 2%;
 }
@@ -50,8 +52,14 @@
 //User search
 //------------------------------------------------------------ */
 #usersearch th { text-align: left; }
-.username_th,.joindate_th,.lastvisit_th { width: 25%; }
-.username_td,.joindate_td,.lastvisit_td {
+
+.username_th,
+.joindate_th,
+.lastvisit_th { width: 25%; }
+
+.username_td,
+.joindate_td,
+.lastvisit_td {
     width: 25%;
     padding-left: 2px;
     font-size: 16px;

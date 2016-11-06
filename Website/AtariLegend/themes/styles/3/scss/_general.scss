@@ -98,14 +98,12 @@ img {display: block; }
 .column_wide_center_1920 { display: none; }
 .standard_tile {
     width: 100%;
-    //* For IE 8*/
     background: linear-gradient(to top, white, #a6a6a6);
-    //* Standard syntax */
     border-top: 10px solid $bg-color;
     border-right: 1px solid $bg-color;
     border-bottom: 3px solid $bg-color;
     border-left: 1px solid $bg-color;
-    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr=#a6a6a6, endColorstr=#ffffff)";
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr=#a6a6a6, endColorstr=#fff)";
 }
 
 .standard_tile_line { border-bottom: 2px solid black; }
@@ -136,7 +134,7 @@ img {display: block; }
     color: white;
     background: rgb(192, 193, 202) transparent;
     //* Fallback for web browsers that doesn't support RGBa */
-    background: rgba(192, 193, 202, 0.6);
+    background: rgba(192, 193, 202, .6);
     border-bottom: 2px solid #484c7b;
     bottom: 0;
 }
@@ -201,9 +199,9 @@ img {display: block; }
     padding: 0;
     padding-left: 5px;
     margin-top: 0;
-    color: #ffffff;
+    color: #fff;
     text-align: left;
-    background: url(../images/logon_input.png) 0 0 no-repeat;
+    background: url('../images/logon_input.png') 0 0 no-repeat;
     background-size: 85% 42px;
     border: 0;
 }
@@ -214,9 +212,9 @@ img {display: block; }
     padding: 3px;
     padding-left: 7px;
     margin-top: 0;
-    color: #ffffff;
+    color: #fff;
     text-align: left;
-    background: #666666;
+    background: #666;
     border: 1px solid #b2b2b2;
 }
 
@@ -226,9 +224,9 @@ img {display: block; }
     padding: 3px;
     padding-left: 7px;
     margin-top: 0;
-    color: #ffffff;
+    color: #fff;
     text-align: left;
-    background: #666666;
+    background: #666;
     border: 1px solid #b2b2b2;
 }
 
@@ -316,8 +314,8 @@ img {display: block; }
     padding: 0;
     padding-left: 5px;
     margin-top: 5px;
-    background-color: #666666;
-    color: #ffffff;
+    background-color: #666;
+    color: #fff;
     border: 1px solid #b2b2b2;
 }
 
@@ -325,21 +323,21 @@ img {display: block; }
     width: 50px;
     height: 26px;
     margin-top: 0;
-    background: #666666;
+    background: #666;
 }
 
 #medium_select {
     width: 185px;
     height: 28px;
     margin-top: 0;
-    background: #666666;
+    background: #666;
 }
 
 #medium_select2 {
     width: 140px;
     height: 25px;
     margin-top: 0;
-    background: #666666;
+    background: #666;
 }
 
 .centered_fieldset {
@@ -388,14 +386,14 @@ img {display: block; }
     padding-bottom: 3px;
     padding-left: 3px;
     margin: 0;
-    background-color: #DBD7D1;
+    background-color: #dbd7d1;
     border-collapse: collapse;
     border-bottom: solid 2px #b2b2b2;
 }
 
 .standard_table_list tr:nth-child(even) { background-color: #f3f3f3; }
-.standard_table_list tr:nth-child(odd) { background-color: #EFEFEF; }
-.standard_table_list tr:hover { background-color: #DBD7D1; }
+.standard_table_list tr:nth-child(odd) { background-color: #efefef; }
+.standard_table_list tr:hover { background-color: #dbd7d1; }
 .standard_table_list td {
     padding-top: 1px;
     padding-bottom: 1px;
@@ -454,7 +452,7 @@ img {display: block; }
 fieldset {
     padding: 8px;
     font-size: 11pt;
-    background: #EFEFEF;
+    background: #efefef;
     border: solid 1px #b2b2b2;
 }
 
@@ -462,7 +460,7 @@ legend {
     padding: 1px 10px;
     font-weight: bold;
     color: #122323;
-    background: #DBD7D1;
+    background: #dbd7d1;
     border: solid 2px #b2b2b2;
 }
 
@@ -484,7 +482,7 @@ legend {
     border-radius: 50%;
 }
 
-.help-tip:before {
+.help-tip::before {
     font-weight: bold;
     color: white;
     content: '?';
@@ -508,7 +506,7 @@ legend {
     line-height: 1.4;
     text-align: left;
     background-color: #666;
-    color: #FFF;
+    color: #fff;
     border: black solid 1px;
     border-radius: 3px;
     box-shadow: 1px 1px 1px rgba(0, 0, 0, .2);
