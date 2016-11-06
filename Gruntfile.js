@@ -26,9 +26,9 @@ module.exports = function(grunt) {
 
       scsslint: {
     allFiles: [
-      //'Website/AtariLegend/themes/styles/1/scss/*.scss',
-      //'Website/AtariLegend/themes/styles/2/scss/*.scss',
-      'Website/AtariLegend/themes/styles/3/scss/*.scss'
+      'Website/AtariLegend/themes/styles/1/scss/*.scss',
+      'Website/AtariLegend/themes/styles/2/scss/*.scss',
+      'Website/AtariLegend/themes/styles/3/scss/*.scss',
     ],
     options: {
       bundleExec: false,

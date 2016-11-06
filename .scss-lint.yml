@@ -1,12 +1,8 @@
-scss_files: 'Website/AtariLegend/themes/styles/**/scss/*.css.scss'
-
 linters:
     BorderZero:
         enabled: false
-
     Indentation:
         width: 4
-
     SelectorFormat:
         enabled: true
         convention: snake_case
@@ -14,3 +10,4 @@ linters:
         enabled: false
     PropertySortOrder:
         enabled: false
+
