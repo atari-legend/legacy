@@ -104,7 +104,7 @@ img { display: block; }
     border-bottom: 3px solid #01b5b5;
 }
 
-.standard_tile_line { border-bottom: 2px solid #000000; }
+.standard_tile_line { border-bottom: 2px solid #000; }
 .standard_tile_background { position: relative; }
 .standard_tile_image { width: 100%; }
 .standard_tile_subtext {
@@ -117,21 +117,21 @@ img { display: block; }
     padding-right: 4%;
     text-align: left;
     border-right: 2px solid #01b5b5;
-    /*border-left: 2px solid #01b5b5;
-    */padding-left: 4%;
+//  border-left: 2px solid #01b5b5;
+    padding-left: 4%;
 }
 
 .standard_tile_title {
     position: absolute;
     bottom: 0;
     z-index: 1;
-    /* RGBa with 0.6 opacity */
+    //* RGBa with 0.6 opacity */
     padding-top: 3%;
     font-size: 17pt;
     color: white;
     background: rgb(0, 80, 80);
-    /* Fallback for web browsers that doesn't support RGBa */
-    background: rgba(0, 80, 80, 0.6);
+    //* Fallback for web browsers that doesn't support RGBa */
+    background: rgba(0, 80, 80, .6);
     border-bottom: 2px solid #01b5b5;
 }
 
@@ -196,9 +196,9 @@ img { display: block; }
     padding-left: 5px;
     margin-top: 0;
     font-family: Audiowide;
-    color: #ffffff;
+    color: #fff;
     text-align: left;
-    background: url(../images/logon_input.png) 0 0 no-repeat;
+    background: url('../images/logon_input.png') 0 0 no-repeat;
     background-size: 85% 44px;
     border: 0;
 }
@@ -209,12 +209,11 @@ img { display: block; }
     padding: 0;
     padding-left: 5px;
     margin-top: 0;
-    color: #ffffff;
+    color: #fff;
     text-align: left;
     background: black;
     border: 1px solid #008b8b;
-    /*display: block;
-    */font-family: Audiowide;
+    font-family: Audiowide;
 }
 
 .standard_tile_input_area {
@@ -223,12 +222,11 @@ img { display: block; }
     padding: 0;
     padding-left: 5px;
     margin-top: 0;
-    color: #ffffff;
+    color: #fff;
     text-align: left;
     background: black;
     border: 1px solid #008b8b;
-    /*display: block;
-    */font-family: Audiowide;
+    font-family: Audiowide;
 }
 
 #text_area_big { height: 150px; }
@@ -297,13 +295,13 @@ img { display: block; }
 
 .standard_list_entry_right_news_text {
     display: block;
-    /* Fallback for non-webkit */
+    //* Fallback for non-webkit */
     display: -webkit-box;
     height: 70px;
     padding: 0;
     margin: 0;
     overflow: hidden;
-    /* Fallback for non-webkit */
+    //* Fallback for non-webkit */
     line-height: 1.2;
     text-overflow: ellipsis;
     box-sizing: border-box;
@@ -320,7 +318,7 @@ img { display: block; }
     margin-top: 5px;
     font-family: Audiowide;
     background-color: black;
-    color: #ffffff;
+    color: #fff;
     border: 1px solid #008b8b;
 }
 
@@ -487,7 +485,7 @@ legend {
     border-radius: 50%;
 }
 
-.help-tip:before {
+.help-tip::before {
     font-weight: bold;
     color: #fff;
     content: '?';
@@ -496,8 +494,7 @@ legend {
 .help-tip:hover p {
     display: block;
     transform-origin: 100% 0;
-    -webkit-animation: fadeIn 0.3s ease-in-out;
-    animation: fadeIn 0.3s ease-in-out;
+    animation: fadeIn .3s ease-in-out;
 }
 
 .help-tip p {
@@ -511,14 +508,17 @@ legend {
     line-height: 1.4;
     text-align: left;
     background-color: black;
-    color: #FFF;
+    color: #fff;
     border: #00d3d3 solid 1px;
     border-radius: 3px;
-    box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, .2);
 }
 
-// I am removing the pointer as the alignment of the text box changes from '?' to '?' - this is done the be compliant with a resolution of 320 width.// Test it for yourself to see what I mean// .help-tip p:before {
-//* The pointer of the tooltip */: //  position: absolute;
+// I am removing the pointer as the alignment of the text box changes from '?' to '?' - this is done the be compliant with a resolution of 320 width.
+// Test it for yourself to see what I mean
+// .help-tip p::before {
+// The pointer of the tooltip
+//  position: absolute;
 //  content: '';
 //  width: 0;
 //  height: 0;
@@ -528,7 +528,7 @@ legend {
 //  top: -12px;
 //}
 
-.help-tip p:after {
+.help-tip p::after {
     position: absolute;
     top: -40px;
     left: 0;
@@ -542,7 +542,7 @@ legend {
 @-webkit-keyframes fadeIn {
     0% {
         opacity: 0;
-        transform: scale(0.6);
+        transform: scale(.6);
     }
 
     100% {

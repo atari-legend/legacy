@@ -29,7 +29,8 @@
     margin: auto;
 }
 
-#child_1, #child_2 {
+#child_1,
+#child_2 {
     width: 50%;
     margin: auto;
 }
@@ -54,20 +55,20 @@
     width: 185px;
     height: 25px;
     margin-top: 0;
-    background: #666666;
+    background: #666;
 }
 
 #games_main_dev_select {
     width: 185px;
     height: 25px;
     margin-top: 0;
-    background: #666666;
+    background: #666;
 }
 
 #games_main_small_select {
     width: 50px;
     height: 25px;
-    background: #666666;
+    background: #666;
 }
 
 //*----------------------------------------------------------
@@ -78,12 +79,14 @@
     text-align: left;
 }
 
-#pub_th,#dev_th {
+#pub_th,
+#dev_th {
     width: 20%;
     text-align: left;
 }
 
-#year_th,#info_th {
+#year_th,
+#info_th {
     width: 10%;
     text-align: left;
 }
@@ -94,13 +97,15 @@
     text-align: left;
 }
 
-.pub_td,.dev_td {
+.pub_td,
+.dev_td {
     width: 20%;
     padding-left: 2px;
     text-align: left;
 }
 
-.info_td,.year_td {
+.info_td,
+.year_td {
     width: 10%;
     padding-left: 2px;
     text-align: left;
@@ -183,22 +188,29 @@
 #gd_dev_small_select {
     width: 50px;
     height: 27px;
-    background: #666666;
+    background: #666;
 }
 
 #gd_pub_small_select {
     width: 50px;
     height: 27px;
-    background: #666666;
+    background: #666;
 }
 
 #gd_text_area_big { height: 250px; }
-#game_extra_info_pub,#continent_pub,#company_id_pub,#game_extra_info_dev,#continent_dev,
-#company_id_dev,#game_extra_info_year,#author_type_id,#ind_id {
+#game_extra_info_pub,
+#continent_pub,
+#company_id_pub,
+#game_extra_info_dev,
+#continent_dev,
+#company_id_dev,
+#game_extra_info_year,
+#author_type_id,
+#ind_id {
     width: 140px;
     height: 25px;
     margin-top: 0;
-    background: #666666;
+    background: #666;
 }
 
 //*----------------------------------------------------------
@@ -215,7 +227,7 @@
 }
 
 .gc_table_list tr:nth-child(even) { background-color: #f3f3f3; }
-.gc_table_list tr:nth-child(odd) { background-color: #EFEFEF; }
+.gc_table_list tr:nth-child(odd) { background-color: #efefef; }
 .gc_table_list td {
     padding: 5px;
     margin: 0;
@@ -250,7 +262,9 @@
 //Games upload
 //------------------------------------------------------------ */
 .game_upload_container { display: flex; }
-#gu_child_1, #gu_child_2 {
+
+#gu_child_1,
+#gu_child_2 {
     width: 50%;
     margin-left: 2%;
 }
@@ -259,7 +273,7 @@
     width: 194px;
     height: 25px;
     margin-top: 0;
-    background: #666666;
+    background: #666;
 }
 
 //*----------------------------------------------------------
@@ -270,7 +284,9 @@
     text-align: left;
 }
 
-#username_gr_th,#gamepub_gr_th, #reviewdate_gr_th {
+#username_gr_th,
+#gamepub_gr_th,
+#reviewdate_gr_th {
     width: 20%;
     text-align: left;
 }
@@ -285,7 +301,9 @@
     padding-left: 2px;
 }
 
-.username_gr_td,.gamepub_gr_td, .reviewdate_gr_td {
+.username_gr_td,
+.gamepub_gr_td,
+.reviewdate_gr_td {
     width: 20%;
     padding-left: 2px;
 }

@@ -2,7 +2,10 @@
 //**************************LEGACY SKIN*************************/
 //**************************************************************/
 //**************************************************************/
-/***This is the css code for the front page of the main site***//**************************************************************///*----------------------------------------------------------
+//***This is the css code for the front page of the main site***/
+
+//**************************************************************/
+//*----------------------------------------------------------
 // Welcome tile settings --> frontpage
 //------------------------------------------------------------ */
 #welcome {
@@ -30,11 +33,11 @@
 #welcome p {
     padding-right: 5%;
     padding-left: 5%;
-    /* RGBa with 0.6 opacity */
+    //* RGBa with 0.6 opacity */
     text-align: center;
     background: rgb(0, 80, 80);
-    /* Fallback for web browsers that doesn't support RGBa */
-    background: rgba(0, 80, 80, 0.6);
+    //* Fallback for web browsers that doesn't support RGBa */
+    background: rgba(0, 80, 80, .6);
     border-right: 2px solid #01b5b5;
 }
 
@@ -45,7 +48,7 @@
     font-size: 11pt;
     color: #bcbdbd;
     border-bottom: 2px solid #01b5b5;
-    Margin-top: 130px;
+    margin-top: 130px;
 }
 
 .trivia_title {
@@ -74,30 +77,30 @@
     margin-left: 10%;
 }
 
-.logon_username_icon:before {
+.logon_username_icon::before {
     display: block;
-    content: url("../images/logon_usn.png");
+    content: url('../images/logon_usn.png');
 }
 
-.logon_password_icon:before {
+.logon_password_icon::before {
     display: block;
-    content: url("../images/logon_pwd.png");
+    content: url('../images/logon_pwd.png');
 }
 
-.logon_facebook_button:before {
+.logon_facebook_button::before {
     display: block;
     width: auto;
-    /*or your image's width*/
+    //*or your image's width*/
     height: 50%;
-    content: url("../images/login-facebook.png");
+    content: url('../images/login-facebook.png');
 }
 
-.logon_twitter_button:before {
+.logon_twitter_button::before {
     display: block;
     width: auto;
-    /*or your image's width*/
+    //*or your image's width*/
     height: 50%;
-    content: url("../images/login_twitter.png");
+    content: url('../images/login_twitter.png');
 }
 
 .logon_left {
@@ -125,7 +128,7 @@
     margin: auto;
 }
 
-.logon_signin img:hover { opacity: 0.7; }
+.logon_signin img:hover { opacity: .7; }
 .logon_socmed {
     display: block;
     width: 50%;
@@ -133,7 +136,7 @@
     margin: auto;
 }
 
-.logon_socmed:hover { opacity: 0.7; }
+.logon_socmed:hover { opacity: .7; }
 //*----------------------------------------------------------
 //latest news tile --> front page
 //------------------------------------------------------------ */
@@ -146,7 +149,7 @@
 //datequote tile - front page
 //------------------------------------------------------------ */
 .datequote_position_front { margin-bottom: 20px; }
-.datequote_bg { background: url(../images/datequote_bg.jpg); }
+.datequote_bg { background: url('../images/datequote_bg.jpg'); }
 .datequote_bg p { text-align: center; }
 .datequote_day {
     margin-top: 0;
@@ -165,18 +168,18 @@
 .datequote_year {
     margin-top: -10px;
     font-size: 55pt;
-    color: #cccccc;
+    color: #ccc;
     text-align: center;
 }
 
 .datequote_text {
     padding-top: 10px;
     padding-bottom: 10px;
-    /* RGBa with 0.6 opacity */
+    //* RGBa with 0.6 opacity */
     color: white;
     background: rgb(0, 80, 80);
-    /* Fallback for web browsers that doesn't support RGBa */
-    background: rgba(0, 80, 80, 0.6);
+    //* Fallback for web browsers that doesn't support RGBa */
+    background: rgba(0, 80, 80, .6);
 }
 
 //*----------------------------------------------------------
@@ -195,7 +198,7 @@
 //Statistics tile - front page
 //------------------------------------------------------------ */
 .statistics_position_front { margin-bottom: 20px; }
-.statistics_dark { color: #cccccc; }
+.statistics_dark { color: #ccc; }
 //*----------------------------------------------------------
 //Hotlinks tile - front page
 //------------------------------------------------------------ */
@@ -217,7 +220,7 @@
 
 .contact_email_button {
     display: block;
-    background-image: url("../images/email.png");
+    background-image: url('../images/email.png');
     background-repeat: no-repeat;
     background-size: contain;
 }
@@ -230,7 +233,7 @@
 
 .contact_facebook_button {
     display: block;
-    background-image: url("../images/facebook.png");
+    background-image: url('../images/facebook.png');
     background-repeat: no-repeat;
     background-size: contain;
 }
@@ -243,7 +246,7 @@
 
 .contact_jukebox_button {
     display: block;
-    background-image: url("../images/jukebox.png");
+    background-image: url('../images/jukebox.png');
     background-repeat: no-repeat;
     background-size: contain;
 }
@@ -256,7 +259,7 @@
 
 .contact_chat_button {
     display: block;
-    background-image: url("../images/chat.png");
+    background-image: url('../images/chat.png');
     background-repeat: no-repeat;
     background-size: contain;
 }
@@ -274,7 +277,7 @@
     float: left;
     width: 100%;
     margin-top: 20px;
-    background: url(../images/bottom_bg_sides.jpg) left 0 repeat-x;
+    background: url('../images/bottom_bg_sides.jpg') left 0 repeat-x;
     border-top: 10px solid #01b5b5;
 }
 
@@ -283,12 +286,12 @@
     font-size: 10pt;
     color: white;
     text-align: center;
-    background: url(../images/footer_bg.jpg) center 0 no-repeat;
+    background: url('../images/footer_bg.jpg') center 0 no-repeat;
 }
 
-.footer_logo_image:before {
+.footer_logo_image::before {
     display: block;
-    content: url("../images/footer_logo.png");
+    content: url('../images/footer_logo.png');
 }
 
 #footer_img {
@@ -306,15 +309,20 @@
     width: 245px;
     font-family: Audiowide;
     font-size: 13px;
-    color: #ffffff;
-    background: #000000;
+    color: #fff;
+    background: #000;
     border: 1px solid #00d3d3;
 }
 
 //* Interaction states
 //----------------------------------*/
-.ui-state-hover,.ui-widget-content .ui-state-hover,.ui-widget-header .ui-state-hover,.ui-state-focus,.ui-widget-content .ui-state-focus,.ui-widget-header .ui-state-focus {
+.ui-state-hover,
+.ui-widget-content .ui-state-hover,
+.ui-widget-header .ui-state-hover,
+.ui-state-focus,
+.ui-widget-content .ui-state-focus,
+.ui-widget-header .ui-state-focus {
     color: #000;
     background: #00d3d3;
-    border: 1px solid #000000;
+    border: 1px solid #000;
 }

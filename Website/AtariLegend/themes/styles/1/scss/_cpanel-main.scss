@@ -36,11 +36,11 @@
 
 .user_stats_img {
     max-width: 100%;
-    /* For IE8 and earlier */
+    //* For IE8 and earlier */
     margin-bottom: 10px;
-    opacity: 0.8;
-    filter: alpha(opacity=40);
-    box-shadow: 0 0 12px #cccccc;
+    opacity: .8;
+    filter: alpha(opacity = 40);
+    box-shadow: 0 0 12px #ccc;
 }
 
 .main_stats_container {
@@ -53,7 +53,8 @@
     width: 45%;
 }
 
-#child_good_karma,#child_bad_karma {
+#child_good_karma,
+#child_bad_karma {
     float: left;
     width: 27%;
 }
@@ -69,7 +70,7 @@
     padding-bottom: 3px;
     padding-left: 3px;
     margin: 0;
-    color: #FFFFDD;
+    color: #ffd;
     text-align: center;
     list-style-type: none;
     background-color: #006f6f;
