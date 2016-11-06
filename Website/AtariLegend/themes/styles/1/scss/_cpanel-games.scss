@@ -30,7 +30,8 @@
     margin: auto;
 }
 
-#child_1, #child_2 {
+#child_1,
+#child_2 {
     width: 50%;
     margin: auto;
 }
@@ -76,12 +77,14 @@
     text-align: left;
 }
 
-#pub_th,#dev_th {
+#pub_th,
+#dev_th {
     width: 20%;
     text-align: left;
 }
 
-#year_th,#info_th {
+#year_th,
+#info_th {
     width: 10%;
     text-align: left;
 }
@@ -95,7 +98,8 @@
     text-align: left;
 }
 
-.pub_td,.dev_td {
+.pub_td,
+.dev_td {
     width: 20%;
     padding-left: 2px;
     font-size: 10pt;
@@ -104,7 +108,8 @@
     text-align: left;
 }
 
-.info_td,.year_td {
+.info_td,
+.year_td {
     width: 10%;
     padding-left: 2px;
     font-size: 10pt;
@@ -196,8 +201,15 @@
 }
 
 #gd_text_area_big { height: 250px; }
-#game_extra_info_pub,#continent_pub,#company_id_pub,#game_extra_info_dev,#continent_dev,
-#company_id_dev,#game_extra_info_year,#author_type_id,#ind_id {
+#game_extra_info_pub,
+#continent_pub,
+#company_id_pub,
+#game_extra_info_dev,
+#continent_dev,
+#company_id_dev,
+#game_extra_info_year,
+#author_type_id,
+#ind_id {
     width: 140px;
     height: 25px;
     margin-top: 0;
@@ -247,13 +259,16 @@
 //*----------------------------------------------------------
 //Games comment edit
 //------------------------------------------------------------ */
-#gce_button,#gce_button2 { display: inline; }
+#gce_button,
+#gce_button2 {display: inline; }
+
 #gce_area { width: 100%; }
 //*----------------------------------------------------------
 //Games upload
 //------------------------------------------------------------ */
 .game_upload_container { display: flex; }
-#gu_child_1, #gu_child_2 {
+#gu_child_1,
+#gu_child_2 {
     width: 50%;
     margin-left: 2%;
 }
@@ -272,7 +287,9 @@
     text-align: left;
 }
 
-#username_gr_th,#gamepub_gr_th, #reviewdate_gr_th {
+#username_gr_th,
+#gamepub_gr_th,
+#reviewdate_gr_th {
     width: 20%;
     text-align: left;
 }
@@ -290,7 +307,9 @@
     color: white;
 }
 
-.username_gr_td,.gamepub_gr_td, .reviewdate_gr_td {
+.username_gr_td,
+.gamepub_gr_td,
+.reviewdate_gr_td {
     width: 20%;
     padding-left: 2px;
     font-size: 10pt;
