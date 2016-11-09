@@ -37,4 +37,4 @@ $smarty->assign("user_id", $_SESSION['user_id']);
 $smarty->display("file:" . $cpanel_template_folder . "doc_category.html");
 
 //close the connection
-mysqli_free_result($result_category_type);
+mysqli_free_result($result_doc_category);
