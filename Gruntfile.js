@@ -46,8 +46,8 @@ module.exports = function(grunt) {
         autoprefixer: {'browsers': ['last 4 versions', 'ios 6']},
         filters: {'oldIE': true},
         rem: ['12px'],
-        minifier: true,
-        mqpacker: true,
+        minifier: false,
+        mqpacker: false,
         pseudoElements: true,
       },
       files: {
