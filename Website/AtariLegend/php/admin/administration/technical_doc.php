@@ -17,10 +17,6 @@ include("../../includes/admin.php");
 //load the search fields of the quick search side menu
 include("../../includes/quick_search_games.php");
 
-if (isset($action) && $action == 'menus') {
-    //Send all smarty variables to the templates
-    $smarty->display("file:".$cpanel_template_folder."technical_doc_menus.html");
-} else {
-    //Send all smarty variables to the templates
-    $smarty->display("file:".$cpanel_template_folder."technical_doc.html");
-}
+//Send all smarty variables to the templates
+$smarty->display("file:".$cpanel_template_folder."technical_doc.html");
+
