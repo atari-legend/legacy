@@ -25,7 +25,7 @@ $test_condition = "SELECT * FROM information_schema.columns
 WHERE table_schema = '$db_databasename' AND table_name = 'doc_category' LIMIT 1";
 
 // Database change
-$database_update_sql = "CREATE TABLE IF NOT EXISTS `doc_category` (
+$database_update_sql = "DROP TABLE IF EXISTS `doc_category`; CREATE TABLE IF NOT EXISTS `doc_category` (
 				  `doc_category_id` int(11) NOT NULL AUTO_INCREMENT,
 				  `doc_category_name` varchar(255) DEFAULT NULL,
 				  PRIMARY KEY (`doc_category_id`)

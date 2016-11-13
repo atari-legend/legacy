@@ -15,7 +15,7 @@
 $database_update_id = 42;
 
 // Description of what the change will do.
-$update_description = "create doc_type table";
+$update_description = "Create doc_type table";
 
 // Should the database change query execute if test is "test_fail" or "test_success"
 $execute_condition = "test_success";
@@ -25,7 +25,7 @@ $test_condition = "SELECT * FROM information_schema.columns
 WHERE table_schema = '$db_databasename' AND table_name = 'doc_type' LIMIT 1";
 
 // Database change
-$database_update_sql = "CREATE TABLE IF NOT EXISTS `doc_type` (
+$database_update_sql = "DROP TABLE IF EXISTS `doc_type`; CREATE TABLE IF NOT EXISTS `doc_type` (
 					  `doc_type_id` int(11) NOT NULL AUTO_INCREMENT,
 					  `doc_type_name` varchar(255) DEFAULT NULL,
 					  PRIMARY KEY (`doc_type_id`)
