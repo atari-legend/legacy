@@ -1,35 +1,36 @@
 <?php
 /***************************************************************************
-*                                2016-09-02_change_table_crew_menu_prod.php
-*                            -------------------------------------------------
-*   begin                : 2016-09-02
+*                                2016-11-13_create_menu_disk_title_doc_tools_table.php
+*                            ------------------------------------------
+*   begin                : 2016-11-13
 *   copyright            : (C) 2016 Atari Legend
 *   email                : martens_maarten@hotmail.com
 *   actual update        : creation of file
 *
-*   Id: 2016-09-02_change_table_crew_menu_prod.php,v 0.10 2016-09-02 ST Graveyard
+*   Id: 2016-11-13_create_menu_disk_title_doc_tools_table.php,v 0.10 2016-11-13 ST Graveyard
 *
 ***************************************************************************/
 
 // Unique identifier set by developer.
-$database_update_id = 6;
+$database_update_id = 64;
 
 // Description of what the change will do.
-$update_description = "Change crew_menu_prod table";
+$update_description = "Create menu_disk_title_doc_tools table";
 
 // Should the database change query execute if test is "test_fail" or "test_success"
 $execute_condition = "test_success";
 
 //This is the test query, the query should be made to get an either true or false result.
 $test_condition = "SELECT * FROM information_schema.tables
-WHERE table_schema = '$db_databasename' AND table_name = 'crew_menu_prod' LIMIT 1";
+WHERE table_schema = '$db_databasename' AND table_name = 'menu_disk_title_doc_tools' LIMIT 1";
 
 // Database change
-$database_update_sql = "ALTER TABLE  `crew_menu_prod` CHANGE  `crew_menu_prod_id`  `crew_menu_prod_id` INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
-						CHANGE  `crew_id`  `crew_id` INT( 11 ) NULL DEFAULT NULL ,
-						CHANGE  `menu_sets_id`  `menu_sets_id` INT( 11 ) NULL DEFAULT NULL";
-
-//ALTER TABLE `crew_menu_prod` ADD PRIMARY KEY(`crew_menu_prod_id`);";
+$database_update_sql = "CREATE TABLE IF NOT EXISTS `menu_disk_title_doc_tools` (
+  `menu_disk_title_doc_id` int(11) NOT NULL AUTO_INCREMENT,
+  `menu_disk_title_id` int(11) DEFAULT NULL,
+  `doc_tools_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`menu_disk_title_doc_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;";
 
 // If the update should auto execute without user interaction set to "yes".
 $database_autoexecute = "yes";

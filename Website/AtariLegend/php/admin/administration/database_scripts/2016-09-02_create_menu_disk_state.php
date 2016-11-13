@@ -1,13 +1,13 @@
 <?php
 /***************************************************************************
-*                                2016-09-02_crew_menu_prod_auto_increment
+*                                2016-09-02_create_menu_disk_state.php
 *                            -------------------------------------------------
 *   begin                : 2016-09-02
 *   copyright            : (C) 2016 Atari Legend
 *   email                : martens_maarten@hotmail.com
 *   actual update        : creation of file
 *
-*   Id: 2016-09-02_crew_menu_prod_auto_increment,v 0.10 2016-09-02 ST Graveyard
+*   Id: 2016-09-02_create_menu_disk_state.php,v 0.10 2016-09-02 ST Graveyard
 *
 ***************************************************************************/
 
@@ -15,17 +15,21 @@
 $database_update_id = 8;
 
 // Description of what the change will do.
-$update_description = "auto increment to id field of crew_menu_prod";
+$update_description = "Create the menu_disk_state table";
 
 // Should the database change query execute if test is "test_fail" or "test_success"
 $execute_condition = "test_success";
 
 //This is the test query, the query should be made to get an either true or false result.
 $test_condition = "SELECT * FROM information_schema.tables
-WHERE table_schema = '$db_databasename' AND table_name = 'crew_menu_prod' LIMIT 1";
+WHERE table_schema = '$db_databasename' AND table_name = 'menu_disk_state' LIMIT 1";
 
 // Database change
-$database_update_sql = "ALTER TABLE `crew_menu_prod` CHANGE `crew_menu_prod_id` `crew_menu_prod_id` INT(11) NOT NULL AUTO_INCREMENT;";
+$database_update_sql = "CREATE TABLE IF NOT EXISTS `menu_disk_state` (
+									`state_id` int(11) NOT NULL AUTO_INCREMENT,
+									`menu_state` text NOT NULL,
+										UNIQUE KEY `id_state` (`state_id`)
+						) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5;";
 
 // If the update should auto execute without user interaction set to "yes".
 $database_autoexecute = "yes";
