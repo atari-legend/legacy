@@ -1,31 +1,37 @@
 <?php
 /***************************************************************************
-*                                2016-10-14_rename_tabel_doc_game.php
-*                            ----------------------------------------------
-*   begin                : 2016-10-14
+*                                2016-11-13_add_menu_disk_state_values.php
+*                            ------------------------------------------
+*   begin                : 2016-11-13
 *   copyright            : (C) 2016 Atari Legend
 *   email                : martens_maarten@hotmail.com
-*   actual update        :
+*   actual update        : creation of file
 *
-*   Id: 2016-10-14_rename_tabel_doc_game.php,v 0.10 2016-10-14 STG
+*   Id: 2016-11-13_add_menu_disk_state_values.php,v 0.10 2016-11-13 ST Graveyard
 *
 ***************************************************************************/
 
 // Unique identifier set by developer.
-$database_update_id = 32;
+$database_update_id = 58;
 
 // Description of what the change will do.
-$update_description = "Rename table doc_game to doc_disk_game";
+$update_description = "Add values in the menu_disk_state_table";
 
 // Should the database change query execute if test is "test_fail" or "test_success"
 $execute_condition = "test_success";
 
 //This is the test query, the query should be made to get an either true or false result.
-$test_condition = "SELECT * FROM information_schema.columns
-WHERE table_schema = '$db_databasename' AND table_name = 'doc_game' LIMIT 1";
+$test_condition = "SELECT * FROM information_schema.tables
+WHERE table_schema = '$db_databasename' AND table_name = 'menu_disk_state' LIMIT 1";
 
 // Database change
-$database_update_sql = "RENAME TABLE $db_databasename.`doc_game` TO $db_databasename.`doc_disk_game`;";
+$database_update_sql = "INSERT INTO `menu_disk_state` (`state_id`, `menu_state`) VALUES
+														(1, 'missing'),
+														(2, 'intro only or partially damaged'),
+														(3, 'slightly damaged'),
+														(4, 'fully working');
+														";
+
 // If the update should auto execute without user interaction set to "yes".
 $database_autoexecute = "yes";
 

@@ -1,31 +1,37 @@
 <?php
 /***************************************************************************
-*                                2016-10-14_change_fields_doc_disk_game.php
-*                            ----------------------------------------------
-*   begin                : 2016-10-14
+*                                2016-11-13_create_tools_table.php
+*                            ------------------------------------------
+*   begin                : 2016-11-13
 *   copyright            : (C) 2016 Atari Legend
 *   email                : martens_maarten@hotmail.com
-*   actual update        :
+*   actual update        : creation of file
 *
-*   Id: 2016-10-14_change_fields_doc_disk_game.php,v 0.10 2016-10-14 STG
+*   Id: 2016-11-13_create_tools_table.php,v 0.10 2016-11-13 ST Graveyard
 *
 ***************************************************************************/
 
 // Unique identifier set by developer.
-$database_update_id = 40;
+$database_update_id = 60;
 
 // Description of what the change will do.
-$update_description = "Change id fields of doc_disk_game";
+$update_description = "Create the tools table";
 
 // Should the database change query execute if test is "test_fail" or "test_success"
 $execute_condition = "test_success";
 
 //This is the test query, the query should be made to get an either true or false result.
-$test_condition = "SELECT * FROM information_schema.columns
-WHERE table_schema = '$db_databasename' AND table_name = 'doc_disk_game' LIMIT 1";
+$test_condition = "SELECT * FROM information_schema.tables
+WHERE table_schema = '$db_databasename' AND table_name = 'tools' LIMIT 1";
 
 // Database change
-$database_update_sql = "ALTER TABLE `doc_disk_game` CHANGE `doc_games_id` `doc_disk_game_id` INT(11) NOT NULL AUTO_INCREMENT, CHANGE `doc_type_id` `doc_id` INT(11) NULL DEFAULT NULL; ";
+$database_update_sql = "CREATE TABLE IF NOT EXISTS `tools` (
+						  `tools_id` int(11) NOT NULL AUTO_INCREMENT,
+						  `tools_name` varchar(255) NOT NULL,
+						  `stonish_id` int(11) NOT NULL,
+						  PRIMARY KEY (`tools_id`)
+						) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;";
+
 // If the update should auto execute without user interaction set to "yes".
 $database_autoexecute = "yes";
 
