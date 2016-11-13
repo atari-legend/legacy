@@ -1,0 +1,51 @@
+//*************************************************************/
+//**********************TOS 207 SKIN***************************/
+//*************************************************************/
+
+//*----------------------------------------------------------
+// SASS Variables
+//------------------------------------------------------------ */
+$skin-name: 'tos';
+$bg-color: #fff;
+
+//*----------------------------------------------------------
+// Normalization script
+//------------------------------------------------------------ */
+@import '../../common/main_scss/normalize/import-now';     //* --> Normalize script
+
+//*----------------------------------------------------------
+// General settings
+//------------------------------------------------------------ */
+@import '../../2/scss/general';   //* --> general skin specific css settings */
+
+//*----------------------------------------------------------
+// Top
+//------------------------------------------------------------ */
+@import '../../common/main_scss/top';              //* --> TOP background & graphics */
+@import '../../common/main_scss/top_animation';    //* --> TOP animation */
+@import '../../common/main_scss/menu';                 //* --> TOP and SIDE MENU */
+
+//*----------------------------------------------------------
+// Main website
+//------------------------------------------------------------ */
+@import '../../2/scss/main-front';        //* --> Front page */
+
+//*----------------------------------------------------------
+// CPanel
+//------------------------------------------------------------ */
+@import '../../2/scss/cpanel-main';           //* --> Main structure, left and right side */
+@import '../../2/scss/cpanel-users';          //* --> Users section */
+@import '../../2/scss/cpanel-links';          //* --> Links section */
+@import '../../2/scss/cpanel-games';          //* --> Games section */
+@import '../../2/scss/cpanel-magazines';      //* --> Magazine section */
+@import '../../2/scss/cpanel-news';           //* --> news section */
+@import '../../2/scss/cpanel-company';        //* --> company section */
+@import '../../2/scss/cpanel-individuals';    //* --> individuals section */
+@import '../../2/scss/cpanel-interviews';     //* --> interviews section */
+@import '../../2/scss/cpanel-admin';          //* --> admin section */
+@import '../../2/scss/cpanel-menus';          //* --> menus section */
+
+//*----------------------------------------------------------
+// Media Queries Main & CPanel
+//------------------------------------------------------------ */
+@import '../../2/scss/mq';    //* --> media queries css settings */
