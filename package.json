@@ -11,8 +11,11 @@
     "grunt-phpcs": "^0.4.0",
     "grunt-pleeease": "^1.4.0",
     "grunt-sass": "^1.2.1",
+    "grunt-sass-lint": "^0.2.0",
     "grunt-scss-lint": "^0.5.0",
-    "grunt-scss-stylize": "^0.6.0"
+    "grunt-scss-stylize": "^0.6.0",
+    "grunt-stylefmt": "^2.0.0",
+    "grunt-stylelint": "^0.6.0"
   },
   "description": "The Atarilegend project",
   "main": "Gruntfile.js",
