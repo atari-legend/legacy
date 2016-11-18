@@ -211,7 +211,7 @@ img { display: block; }
     margin-top: 0;
     color: #fff;
     text-align: left;
-    background: black;
+    background: #000;
     border: 1px solid #008b8b;
     font-family: Audiowide;
 }
@@ -224,7 +224,7 @@ img { display: block; }
     margin-top: 0;
     color: #fff;
     text-align: left;
-    background: black;
+    background: #000;
     border: 1px solid #008b8b;
     font-family: Audiowide;
 }
@@ -266,7 +266,7 @@ img { display: block; }
     display: table;
     width: 100%;
     height: 140px;
-    background: black;
+    background: #000;
 }
 
 .standard_list_entry_left {
@@ -372,7 +372,7 @@ img { display: block; }
     margin-left: auto;
     text-align: left;
     background-color: #00d3d3;
-    border: solid 1px black;
+    border: solid 1px #000;
     border-spacing: 0;
 }
 
@@ -391,7 +391,7 @@ img { display: block; }
     margin: 0;
     background-color: #006f6f;
     border-collapse: collapse;
-    border-bottom: solid 1px black;
+    border-bottom: solid 1px #000;
 }
 
 .standard_table_list tr:nth-child(even) { background-color: #00d3d3; }
@@ -402,7 +402,7 @@ img { display: block; }
     padding-bottom: 1px;
     padding-left: 3px;
     margin: 0;
-    border-bottom: solid 1px black;
+    border-bottom: solid 1px #000;
 }
 
 .standard_table_center {
@@ -457,14 +457,14 @@ fieldset {
     padding: 8px;
     font-size: 11pt;
     background: $bg-color;
-    border: solid 1px black;
+    border: solid 1px #000;
 }
 
 legend {
     padding: 1px 10px;
     color: #fff;
     background: #006f6f;
-    border: black solid 1px;
+    border: #000 solid 1px;
 }
 
 //*------------------------------------------------------------

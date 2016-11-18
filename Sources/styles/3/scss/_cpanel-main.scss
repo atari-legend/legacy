@@ -40,7 +40,7 @@
     margin-bottom: 10px;
     opacity: .8;
     filter: alpha(opacity = 40);
-    box-shadow: 0 0 12px black;
+    box-shadow: 0 0 12px #000;
 }
 
 .main_stats_container {
@@ -113,7 +113,7 @@
     color: #fff;
     cursor: pointer;
     background: #161c71;
-    border: 2px solid black;
+    border: 2px solid #000;
     border-radius: 0 15px 15px 0;
 }
 
