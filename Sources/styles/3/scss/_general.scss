@@ -98,7 +98,7 @@ img {display: block; }
 .column_wide_center_1920 { display: none; }
 .standard_tile {
     width: 100%;
-    background: linear-gradient(to top, white, #a6a6a6);
+    background: linear-gradient(to top, #fff, #a6a6a6);
     border-top: 10px solid $bg-color;
     border-right: 1px solid $bg-color;
     border-bottom: 3px solid $bg-color;
@@ -130,7 +130,7 @@ img {display: block; }
     padding-top: 3%;
     font-size: 17pt;
     font-weight: 100;
-    color: white;
+    color: #fff;
     background: rgb(192, 193, 202) transparent;
     //* Fallback for web browsers that doesn't support RGBa */
     background: rgba(192, 193, 202, .6);
@@ -173,7 +173,7 @@ img {display: block; }
 .standard_tile h4 {
     font-size: 13pt;
     font-weight: 100;
-    color: black;
+    color: #000;
     text-align: left;
 }
 
@@ -235,7 +235,7 @@ img {display: block; }
 .standard_tile_link:hover { color: $bg-color; }
 .standard_tile_link_reverse:link { color: #000; }
 .standard_tile_link_reverse:visited { color: #000; }
-.standard_tile_link_reverse:hover { color: white; }
+.standard_tile_link_reverse:hover { color: #fff; }
 .standard_tile_link_cpanel:link {
     font-size: 11pt;
     color: #6a6a6a;
@@ -250,7 +250,7 @@ img {display: block; }
 
 .standard_tile_link_black:visited { color: #000; }
 .standard_tile_link_black:hover { color: #6a6a6a; }
-.standard_tile_link_button:link { color: white; }
+.standard_tile_link_button:link { color: #fff; }
 .standard_list_entry {
     position: relative;
     display: table;
@@ -281,7 +281,7 @@ img {display: block; }
     box-shadow: 0 0 7px #484c7b;
 }
 
-.standard_list_entry_left img:hover { box-shadow: 0 0 7px white; }
+.standard_list_entry_left img:hover { box-shadow: 0 0 7px #fff; }
 .standard_list_entry_right {
     position: absolute;
     top: 50%;
@@ -437,7 +437,7 @@ img {display: block; }
 }
 
 .topbutton_cpanel_small:hover {
-    color: white;
+    color: #fff;
     background: $bg-color;
     border: 1px solid #4f4f4f;
 }
@@ -477,13 +477,13 @@ legend {
     text-align: center;
     cursor: default;
     background-color: #666;
-    border: white solid 1px;
+    border: #fff solid 1px;
     border-radius: 50%;
 }
 
 .help-tip::before {
     font-weight: bold;
-    color: white;
+    color: #fff;
     content: '?';
 }
 
