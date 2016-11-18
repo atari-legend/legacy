@@ -31,7 +31,7 @@ html {
 
 body {
     font-family: Audiowide, Arial, helvetica, sans-serif;
-    background-color: black;
+    background-color: #000;
 }
 
 body a { text-decoration: none; }
@@ -128,7 +128,7 @@ img { display: block; }
     //* RGBa with 0.6 opacity */
     padding-top: 3%;
     font-size: 17pt;
-    color: white;
+    color: #fff;
     background: rgb(0, 80, 80);
     //* Fallback for web browsers that doesn't support RGBa */
     background: rgba(0, 80, 80, .6);
@@ -148,7 +148,7 @@ img { display: block; }
     margin-bottom: 20px;
     font-size: 18pt;
     font-weight: 100;
-    color: white;
+    color: #fff;
     text-align: center;
 }
 
@@ -163,14 +163,14 @@ img { display: block; }
 .standard_tile h3 {
     font-size: 10pt;
     font-weight: 100;
-    color: white;
+    color: #fff;
     text-align: center;
 }
 
 .standard_tile h4 {
     font-size: 12pt;
     font-weight: 100;
-    color: white;
+    color: #fff;
     text-align: left;
 }
 
@@ -184,7 +184,7 @@ img { display: block; }
 .standard_tile h6 {
     font-size: 11pt;
     font-weight: 100;
-    color: white;
+    color: #fff;
     text-align: left;
 }
 
@@ -233,27 +233,27 @@ img { display: block; }
 .standard_tile th {
     font-size: 12pt;
     font-weight: bold;
-    color: white;
+    color: #fff;
     text-align: center;
 }
 
-.standard_tile_link:link { color: white; }
-.standard_tile_link:visited { color: white; }
+.standard_tile_link:link { color: #fff; }
+.standard_tile_link:visited { color: #fff; }
 .standard_tile_link:hover { color: #01b5b5; }
 .standard_tile_link_reverse:link { color: #01b5b5; }
 .standard_tile_link_reverse:visited { color: #01b5b5; }
-.standard_tile_link_reverse:hover { color: white; }
+.standard_tile_link_reverse:hover { color: #fff; }
 .standard_tile_link_cpanel:link { color: #01b5b5; }
 .standard_tile_link_cpanel:visited { color: #01b5b5; }
-.standard_tile_link_cpanel:hover { color: white; }
+.standard_tile_link_cpanel:hover { color: #fff; }
 .standard_tile_link_black:link {
     font-weight: bold;
-    color: black;
+    color: #000;
 }
 
-.standard_tile_link_black:visited { color: black; }
-.standard_tile_link_black:hover { color: white; }
-.standard_tile_link_button:link { color: black; }
+.standard_tile_link_black:visited { color: #000; }
+.standard_tile_link_black:hover { color: #fff; }
+.standard_tile_link_button:link { color: #000; }
 .standard_list_entry {
     position: relative;
     display: table;
@@ -284,7 +284,7 @@ img { display: block; }
     box-shadow: 0 0 7px $bg-color;
 }
 
-.standard_list_entry_left img:hover { box-shadow: 0 0 7px white; }
+.standard_list_entry_left img:hover { box-shadow: 0 0 7px #fff; }
 .standard_list_entry_right {
     position: absolute;
     top: 50%;
@@ -317,7 +317,7 @@ img { display: block; }
     padding-left: 5px;
     margin-top: 5px;
     font-family: Audiowide;
-    background-color: black;
+    background-color: #000;
     color: #fff;
     border: 1px solid #008b8b;
 }
@@ -379,7 +379,7 @@ img { display: block; }
 .standard_table_list  li {
     font-size: 10pt;
     font-weight: 100;
-    color: white;
+    color: #fff;
     text-align: center;
     list-style-type: none;
 }
@@ -408,7 +408,7 @@ img { display: block; }
 .standard_table_center {
     font-size: 10pt;
     font-weight: 100;
-    color: white;
+    color: #fff;
     text-align: center;
 }
 
@@ -416,7 +416,7 @@ img { display: block; }
     padding-left: 2px;
     font-size: 10pt;
     font-weight: 100;
-    color: white;
+    color: #fff;
     text-align: left;
 }
 
@@ -424,7 +424,7 @@ img { display: block; }
     padding-right: 2px;
     font-size: 10pt;
     font-weight: 100;
-    color: white;
+    color: #fff;
     text-align: right;
 }
 
@@ -433,7 +433,7 @@ img { display: block; }
     width: 80px;
     height: 25px;
     font-size: 10pt;
-    color: white;
+    color: #fff;
     cursor: pointer;
     background: #122323;
     border: 0;
@@ -442,7 +442,7 @@ img { display: block; }
 }
 
 .topbutton_cpanel_small:hover {
-    color: white;
+    color: #fff;
     background: #006f6f;
     border-bottom: 3px solid #122323;
 }
@@ -462,7 +462,7 @@ fieldset {
 
 legend {
     padding: 1px 10px;
-    color: white;
+    color: #fff;
     background: #006f6f;
     border: black solid 1px;
 }
@@ -480,7 +480,7 @@ legend {
     line-height: 22px;
     text-align: center;
     cursor: default;
-    background-color: black;
+    background-color: #000;
     border: #00d3d3 solid 1px;
     border-radius: 50%;
 }
@@ -507,7 +507,7 @@ legend {
     font-size: 13px;
     line-height: 1.4;
     text-align: left;
-    background-color: black;
+    background-color: #000;
     color: #fff;
     border: #00d3d3 solid 1px;
     border-radius: 3px;

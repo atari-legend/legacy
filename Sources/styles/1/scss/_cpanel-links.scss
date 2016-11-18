@@ -26,7 +26,7 @@
     padding-left: 5px;
     margin-top: 5px;
     margin-top: 0;
-    background-color: black;
+    background-color: #000;
     color: #fff;
     border: 1px solid #008b8b;
 }
@@ -50,19 +50,19 @@
 .links_addnew_info {
     padding: 5px;
     font-size: 10pt;
-    color: black;
+    color: #000;
 }
 
-.links_addnew_link:link { color: white; }
-.links_addnew_link:visited { color: white; }
-.links_addnew_link:hover { color: black; }
+.links_addnew_link:link { color: #fff; }
+.links_addnew_link:visited { color: #fff; }
+.links_addnew_link:hover { color: #000; }
 //*----------------------------------------------------------
 //Links Modify list
 //------------------------------------------------------------ */
 .links_modlist_tdline {
     padding: 5px;
     font-size: 10pt;
-    color: black;
+    color: #000;
 }
 
 .user_stats_img_dark {

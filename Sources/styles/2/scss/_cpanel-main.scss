@@ -104,15 +104,15 @@
     padding-top: 3px;
     font-size: 13px;
     color: #182727;
-    text-shadow: -1px 1px 5px white, 1px -1px 15px #acacac;
+    text-shadow: -1px 1px 5px #fff, 1px -1px 15px #acacac;
     cursor: pointer;
-    background: white;
+    background: #fff;
     border: 0;
     border-bottom: 3px solid black;
 }
 
 .quick_search_games_button:hover {
-    color: white;
+    color: #fff;
     background: black;
 }
 
