@@ -100,7 +100,7 @@ img { display: block; }
 .standard_tile {
     width: 100%;
     background: linear-gradient(to right, #fff, #23f001);
-    border: 2px solid black;
+    border: 2px solid #000;
     //* Standard syntax */
     box-shadow: 3px 3px 5px #888;
 }
@@ -431,14 +431,14 @@ a.standard_tile_link:focus {
     cursor: pointer;
     background: #fff;
     border: 0;
-    border-bottom: 3px solid black;
-    border-left: 1px solid black;
+    border-bottom: 3px solid #000;
+    border-left: 1px solid #000;
 }
 
 .topbutton_cpanel_small:hover {
     color: #fff;
-    background: black;
-    border-bottom: 3px solid black;
+    background: #000;
+    border-bottom: 3px solid #000;
 }
 
 .topbutton_cpanel {

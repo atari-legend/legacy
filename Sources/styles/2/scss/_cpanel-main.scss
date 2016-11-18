@@ -37,7 +37,7 @@
     max-width: 100%;
     margin-bottom: 10px;
     opacity: .8;
-    box-shadow: 0 0 12px black;
+    box-shadow: 0 0 12px #000;
 }
 
 .main_stats_container {
@@ -108,12 +108,12 @@
     cursor: pointer;
     background: #fff;
     border: 0;
-    border-bottom: 3px solid black;
+    border-bottom: 3px solid #000;
 }
 
 .quick_search_games_button:hover {
     color: #fff;
-    background: black;
+    background: #000;
 }
 
 #quick_search_pub_select {
