@@ -53,7 +53,7 @@
 
 .trivia_title {
     font-size: 19pt;
-    color: white;
+    color: #fff;
 }
 
 .trivia_tag {
@@ -155,14 +155,14 @@
     margin-top: 0;
     margin-bottom: -20px;
     font-size: 85pt;
-    color: white;
+    color: #fff;
 }
 
 .datequote_month {
     margin-top: -10px;
     margin-bottom: -10px;
     font-size: 30pt;
-    color: white;
+    color: #fff;
 }
 
 .datequote_year {
@@ -176,7 +176,7 @@
     padding-top: 10px;
     padding-bottom: 10px;
     //* RGBa with 0.6 opacity */
-    color: white;
+    color: #fff;
     background: rgb(0, 80, 80);
     //* Fallback for web browsers that doesn't support RGBa */
     background: rgba(0, 80, 80, .6);
@@ -284,7 +284,7 @@
 .footer_logo {
     height: 120px;
     font-size: 10pt;
-    color: white;
+    color: #fff;
     text-align: center;
     background: url('../images/footer_bg.jpg') center 0 no-repeat;
 }

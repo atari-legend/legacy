@@ -1,99 +1,131 @@
-/**************************************************************************/ 
-/**** This is the css code for the animations at the top of the screen ****/ 
-/**************************************************************************/ 
+//**************************************************************************/
+//**** This is the css code for the animations at the top of the screen ****/
+//**************************************************************************/
 
-/* ---------SASS variables for animation--------*/
+//* ---------SASS variables for animation--------*/
+
 $animation-top: 0;
+@if $skin-name == legacy {
+    $animation-top: 145px;
+} @else if $skin-name == picasso {
+    $animation-top: 156px;
+} @else if $skin-name == tos {
+    $animation-top: 174px;
+}
 
-@if $skin-name == legacy{$animation-top: 145px;}
-@else if $skin-name == picasso{$animation-top: 156px;}
-@else if $skin-name == tos{$animation-top: 174px;}
 
+//* -------------SASS animation code-------------*/
 
-
-/* -------------SASS animation code-------------*/
 #animation {
     position: relative;
-	animation-name: STcharacters;
-	animation-duration: 20s;
-	animation-iteration-count: infinite;
-	animation-timing-function: linear;
+    animation-name: STcharacters;
+    animation-duration: 20s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
 }
 
 @-webkit-keyframes STcharacters {
     0% {
         top: $animation-top;
-		left: -20%;
-		opacity: 0;}	
-	
-	10% { opacity: 1;}
-	70% { opacity: 1;}
-	
-	100% {
+        left: -20%;
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    70% {
+        opacity: 1;
+    }
+    100% {
         top: $animation-top;
-		left: 45%;
-		opacity: 0;
+        left: 45%;
+        opacity: 0;
     }
 }
 
 @keyframes STcharacters {
     0% {
-        top:$animation-top;
-		left: -20%;
-		opacity: 0;}		
-		
-	10% { opacity: 1;}
-	70% { opacity: 1;}
-    	
+        top: $animation-top;
+        left: -20%;
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    70% {
+        opacity: 1;
+    }
     100% {
-        top:$animation-top;
-		left: 45%;
-		opacity: 0;
+        top: $animation-top;
+        left: 45%;
+        opacity: 0;
     }
 }
 
-#animation_vert{ position: relative;
-	animation-name: STcharacters_vert;
-	animation-duration: 10s;
-	animation-iteration-count: infinite;
-	animation-timing-function: linear;
+#animation_vert {
+    position: relative;
+    animation-name: STcharacters_vert;
+    animation-duration: 10s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
 }
 
 @-webkit-keyframes STcharacters_vert {
     0% {
         top: 145px;
-		left: -5%;
-		opacity: 0;}	
-	
-	10% { opacity: 1;}
-	70% { opacity: 1;
-	left: 0;}
-	
-	100% {
-        top:10px;
-		left: 5%;
-		opacity: 0;
+        left: -5%;
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    70% {
+        opacity: 1;
+        left: 0;
+    }
+    100% {
+        top: 10px;
+        left: 5%;
+        opacity: 0;
     }
 }
+
 @keyframes STcharacters_vert {
     0% {
-        top:145px;
-		left: -5%;
-		opacity: 0;}		
-		
-	10% { opacity: 1;}
-	70% { opacity: 1;
-	left: 0;}
-    	
+        top: 145px;
+        left: -5%;
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    70% {
+        opacity: 1;
+        left: 0;
+    }
     100% {
-        top:10px;
-		left: 5%;
-		opacity: 0;
+        top: 10px;
+        left: 5%;
+        opacity: 0;
     }
 }
 
-/* at a resolution of max 480 (smartphones) we want a smaller logo with border */		
-@media screen and (max-width: 480px) { #animation, #animation_vert{ display: none;} }
 
-/* at a resolution of max 960 (Tablets & low res laptop) we want the original logo without the bee */	
-@media screen and (min-width: 481px) and (max-width: 960px){ #animation, #animation_vert{ display: none;} } 
+//* at a resolution of max 480 (smartphones) we want a smaller logo with border */
+
+@media screen and (max-width: 480px) {
+    #animation,
+    #animation_vert {
+        display: none;
+    }
+}
+
+
+//* at a resolution of max 960 (Tablets & low res laptop) we want the original logo without the bee */
+
+@media screen and (min-width: 481px) and (max-width: 960px) {
+    #animation,
+    #animation_vert {
+        display: none;
+    }
+}

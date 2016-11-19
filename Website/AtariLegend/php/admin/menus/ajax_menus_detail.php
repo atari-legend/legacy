@@ -18,8 +18,8 @@
  Build game series page
  ***********************************************************************************
  */
-include("../../includes/common.php");
-include("../../includes/admin.php");
+include("../../config/common.php");
+include("../../config/admin.php");
 
 // EDIT BOX FOR A MENU DISK!!!
 if (isset($action) and $action == "edit_disk_box" and $menu_disk_id !== '') {

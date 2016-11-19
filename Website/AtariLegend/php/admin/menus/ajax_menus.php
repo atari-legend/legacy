@@ -14,8 +14,8 @@
  Build game series page
  ***********************************************************************************
  */
-include("../../includes/common.php");
-include("../../includes/admin.php");
+include("../../config/common.php");
+include("../../config/admin.php");
 
 // Crew browse function
 if (isset($action) and $action == "crew_browse") {

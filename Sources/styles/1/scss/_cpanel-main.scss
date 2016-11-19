@@ -76,12 +76,12 @@
     background-color: #006f6f;
     background-color: #006f6f;
     border-collapse: collapse;
-    border-bottom: solid 1px black;
+    border-bottom: solid 1px #000;
 }
 
 .left_nav_link:link { color: #122323; }
 .left_nav_link:visited { color: #122323; }
-.left_nav_link:hover { color: white; }
+.left_nav_link:hover { color: #fff; }
 //*----------------------------------------------------------
 //Quick search games
 //------------------------------------------------------------ */
@@ -111,7 +111,7 @@
 }
 
 .quick_search_games_button:hover {
-    color: white;
+    color: #fff;
     color: #182727;
     background: #00a9a9;
     border-bottom: 3px solid #006f6f;

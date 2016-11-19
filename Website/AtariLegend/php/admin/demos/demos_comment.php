@@ -12,8 +12,8 @@
  *
  ***************************************************************************/
 
-include("../../includes/common.php");
-include("../../includes/admin.php");
+include("../../config/common.php");
+include("../../config/admin.php");
 
 $v_counter = (isset($_GET["v_counter"]) ? $_GET["v_counter"] : 0);
 

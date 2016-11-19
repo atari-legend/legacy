@@ -14,7 +14,7 @@
  * This is the autocompletion script used on the search on the frontpage
  *********************************************************************************/
 
-include("../includes/connect.php");
+include("../../config/connect.php");
 $text = $mysqli->real_escape_string($_GET['term']);
 
 //Set up queries

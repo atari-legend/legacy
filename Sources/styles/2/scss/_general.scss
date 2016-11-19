@@ -99,8 +99,8 @@ img { display: block; }
 
 .standard_tile {
     width: 100%;
-    background: linear-gradient(to right, white, #23f001);
-    border: 2px solid black;
+    background: linear-gradient(to right, #fff, #23f001);
+    border: 2px solid #000;
     //* Standard syntax */
     box-shadow: 3px 3px 5px #888;
 }
@@ -122,7 +122,7 @@ img { display: block; }
     //* RGBa with 0.6 opacity */
     padding-top: 3%;
     font-size: 23px;
-    color: white;
+    color: #fff;
     background: rgb(172, 172, 172) transparent;
     //* Fallback for web browsers that doesn't support RGBa */
     background: rgba(172, 172, 172, .7);
@@ -142,7 +142,7 @@ h1 {
     margin-bottom: 20px;
     font-size: 24px;
     font-weight: 100;
-    color: white;
+    color: #fff;
     text-align: center;
     text-shadow: -1px 1px 8px #686868, 1px -1px 8px #515151;
 }
@@ -157,14 +157,14 @@ h2 {
 h3 {
     font-size: 17px;
     font-weight: 100;
-    color: white;
+    color: #fff;
     text-align: center;
 }
 
 h4 {
     font-size: 16px;
     font-weight: 100;
-    color: white;
+    color: #fff;
 }
 
 h5 {
@@ -219,53 +219,53 @@ h6 {
 
 #text_area_big { height: 150px; }
 a.standard_tile_link:link {
-    color: white;
+    color: #fff;
     text-shadow: -1px 1px 8px #686868, 1px -1px 8px #515151;
     outline: 0 none;
 }
 
 a.standard_tile_link:hover,
 a.standard_tile_link:focus {
-    color: black;
+    color: #000;
     text-shadow: -1px 1px 8px #686868, 1px -1px 8px #515151;
 }
 
-.standard_tile_link:visited { color: white; }
-.standard_tile_link_reverse:link { color: black; }
-.standard_tile_link_reverse:visited { color: black; }
+.standard_tile_link:visited { color: #fff; }
+.standard_tile_link_reverse:link { color: #000; }
+.standard_tile_link_reverse:visited { color: #000; }
 .standard_tile_link_reverse:hover {
-    color: white;
+    color: #fff;
     text-shadow: -1px 1px 8px #686868, 1px -1px 8px #515151;
 }
 
-.standard_tile_link_cpanel:link { color: white; }
-.standard_tile_link_cpanel:visited { color: white; }
+.standard_tile_link_cpanel:link { color: #fff; }
+.standard_tile_link_cpanel:visited { color: #fff; }
 .standard_tile_link_cpanel:hover {
-    color: black;
+    color: #000;
     text-shadow: -1px 1px 8px #686868, 1px -1px 8px #515151;
 }
 
 .standard_tile_link_black:link {
     font-weight: bold;
-    color: black;
+    color: #000;
 }
 
-.standard_tile_link_black:visited { color: black; }
+.standard_tile_link_black:visited { color: #000; }
 .standard_tile_link_black:hover { color: #666; }
-.standard_tile_link_button:link { color: black; }
+.standard_tile_link_button:link { color: #000; }
 .standard_list_entry {
     position: relative;
     display: table;
     width: 100%;
     height: 140px;
-    background: linear-gradient(to right, white, #23f001);
+    background: linear-gradient(to right, #fff, #23f001);
 }
 
 .standard_list_entry_odd {
     position: relative;
     width: 100%;
     height: 140px;
-    background: linear-gradient(to right, white, #acacac);
+    background: linear-gradient(to right, #fff, #acacac);
 }
 
 .standard_list_entry_left {
@@ -282,7 +282,7 @@ a.standard_tile_link:focus {
     box-shadow: 0 0 7px #2c8007;
 }
 
-.standard_list_entry_left img:hover { box-shadow: 0 0 7px white; }
+.standard_list_entry_left img:hover { box-shadow: 0 0 7px #fff; }
 .standard_list_entry_right {
     position: absolute;
     top: 50%;
@@ -372,7 +372,7 @@ a.standard_tile_link:focus {
 
 .standard_table_list  li {
     font-size: 16px;
-    color: black;
+    color: #000;
     text-align: center;
     list-style-type: none;
 }
@@ -401,7 +401,7 @@ a.standard_tile_link:focus {
 .standard_table_center {
     font-size: 16px;
     font-weight: 100;
-    color: black;
+    color: #000;
     text-align: center;
 }
 
@@ -409,7 +409,7 @@ a.standard_tile_link:focus {
     padding-left: 2px;
     font-size: 16px;
     font-weight: 100;
-    color: black;
+    color: #000;
     text-align: left;
 }
 
@@ -417,7 +417,7 @@ a.standard_tile_link:focus {
     padding-right: 2px;
     font-size: 16px;
     font-weight: 100;
-    color: black;
+    color: #000;
     text-align: right;
 }
 
@@ -427,18 +427,18 @@ a.standard_tile_link:focus {
     height: 25px;
     font-size: 15px;
     color: #182727;
-    text-shadow: -1px 1px 5px white, 1px -1px 15px #acacac;
+    text-shadow: -1px 1px 5px #fff, 1px -1px 15px #acacac;
     cursor: pointer;
-    background: white;
+    background: #fff;
     border: 0;
-    border-bottom: 3px solid black;
-    border-left: 1px solid black;
+    border-bottom: 3px solid #000;
+    border-left: 1px solid #000;
 }
 
 .topbutton_cpanel_small:hover {
-    color: white;
-    background: black;
-    border-bottom: 3px solid black;
+    color: #fff;
+    background: #000;
+    border-bottom: 3px solid #000;
 }
 
 .topbutton_cpanel {
@@ -457,7 +457,7 @@ fieldset {
 
 legend {
     padding: 1px 10px;
-    color: black;
+    color: #000;
     background: #dbd7d1;
     border: solid 2px #b2b2b2;
 }
@@ -482,7 +482,7 @@ legend {
 
 .help-tip::before {
     font-weight: bold;
-    color: black;
+    color: #000;
     content: '?';
 }
 
@@ -504,7 +504,7 @@ legend {
     text-align: left;
     background-color: #666;
     color: #fff;
-    border: white solid 1px;
+    border: #fff solid 1px;
     border-radius: 3px;
     box-shadow: 1px 1px 1px rgba(0, 0, 0, .2);
 }

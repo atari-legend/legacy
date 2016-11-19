@@ -8,7 +8,7 @@
 
 #user_details_img_dark {
     margin-left: 1%;
-    box-shadow: 0 0 12px black;
+    box-shadow: 0 0 12px #000;
 }
 
 .user_details_container { display: flex; }
@@ -64,7 +64,7 @@
     width: 25%;
     padding-left: 2px;
     font-size: 12pt;
-    color: black;
+    color: #000;
 }
 
 .email_th { width: 10%; }
@@ -72,7 +72,7 @@
     width: 10%;
     padding-left: 2px;
     font-size: 12pt;
-    color: black;
+    color: #000;
 }
 
 .website_th { width: 15%; }
@@ -80,7 +80,7 @@
     width: 15%;
     padding-left: 2px;
     font-size: 12pt;
-    color: black;
+    color: #000;
 }
 
 #user_search_main_tabel {

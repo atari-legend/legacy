@@ -13,8 +13,8 @@
 // Add file to a menu
 //****************************************************************************************
 
-include("../../includes/common.php");
-include("../../includes/admin.php");
+include("../../config/common.php");
+include("../../config/admin.php");
 
 $smarty->assign('menu_disk_id', $menu_disk_id);
 

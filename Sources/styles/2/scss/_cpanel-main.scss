@@ -37,7 +37,7 @@
     max-width: 100%;
     margin-bottom: 10px;
     opacity: .8;
-    box-shadow: 0 0 12px black;
+    box-shadow: 0 0 12px #000;
 }
 
 .main_stats_container {
@@ -104,16 +104,16 @@
     padding-top: 3px;
     font-size: 13px;
     color: #182727;
-    text-shadow: -1px 1px 5px white, 1px -1px 15px #acacac;
+    text-shadow: -1px 1px 5px #fff, 1px -1px 15px #acacac;
     cursor: pointer;
-    background: white;
+    background: #fff;
     border: 0;
-    border-bottom: 3px solid black;
+    border-bottom: 3px solid #000;
 }
 
 .quick_search_games_button:hover {
-    color: white;
-    background: black;
+    color: #fff;
+    background: #000;
 }
 
 #quick_search_pub_select {

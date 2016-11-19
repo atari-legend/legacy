@@ -126,11 +126,14 @@ module.exports = function(grunt) {
 },
     stylefmt: {
     format: {
+        options: {
+            syntax: 'scss'
+        },
         files: {
              'result/fix/scss/': ['Sources/styles/1/scss/*.scss']
       }
     },
-  }
+  },
 
 
     });

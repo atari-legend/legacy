@@ -18,8 +18,8 @@
  ***********************************************************************************
  */
 
-include("../../includes/common.php");
-include("../../includes/admin.php");
+include("../../config/common.php");
+include("../../config/admin.php");
 
 $sql_magazine = $mysqli->query("SELECT * FROM magazine ORDER BY magazine_name ASC") or die("Error retriving magazines");
 

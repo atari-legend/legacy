@@ -18,8 +18,8 @@
  ***********************************************************************************
  */
 
-include("../../includes/common.php");
-include("../../includes/admin.php");
+include("../../config/common.php");
+include("../../config/admin.php");
 
 $sql = $mysqli->query("SELECT * FROM magazine
                         LEFT JOIN magazine_issue ON (magazine.magazine_id = magazine_issue.magazine_id)
