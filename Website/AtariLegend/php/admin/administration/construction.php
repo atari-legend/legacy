@@ -12,8 +12,8 @@
 ***************************************************************************/
 
 //load all common functions
-include("../../includes/common.php");
-include("../../includes/admin.php");
+include("../../config/common.php");
+include("../../config/admin.php");
 
 $_SESSION['edit_message'] = "This is page is under construction - Patience is a virtue!";
 header("Location: ../index.php");

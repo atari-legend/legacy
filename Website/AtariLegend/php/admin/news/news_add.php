@@ -17,8 +17,8 @@
  In this section we can add a news update to the DB
 ************************************************************************************/
 
-include("../../includes/common.php");
-include("../../includes/admin.php");
+include("../../config/common.php");
+include("../../config/admin.php");
 
 //load the search fields of the quick search side menu
 include("../../includes/quick_search_games.php");

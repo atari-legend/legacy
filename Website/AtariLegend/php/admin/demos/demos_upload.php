@@ -16,8 +16,8 @@
 //****************************************************************************************
 
 //load all common functions
-include("../../includes/common.php");
-include("../../includes/admin.php");
+include("../../config/common.php");
+include("../../config/admin.php");
 
 //************************************************************************************************
 //Let's get the demo info for the file name concatenation, and the download data for disks already
