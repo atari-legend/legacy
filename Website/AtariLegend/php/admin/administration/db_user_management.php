@@ -13,8 +13,8 @@
  *
  ***************************************************************************/
 
-include("../../includes/common.php");
-include("../../includes/admin.php");
+include("../../config/common.php");
+include("../../config/admin.php");
 include("../../includes/PHPMailerAutoload.php");
 
 // Ajax driven delete user query

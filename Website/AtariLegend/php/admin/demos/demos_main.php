@@ -15,8 +15,8 @@
 // This is the image selection/upload screen for the demos
 //****************************************************************************************
 
-include("../../includes/common.php");
-include("../../includes/admin.php");
+include("../../config/common.php");
+include("../../config/admin.php");
 
 //Get the screenshots for this demo, if they exist
 $sql_screenshots = $mysqli->query("SELECT * FROM screenshot_demo

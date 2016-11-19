@@ -178,24 +178,22 @@ html {
     background: #000;
     height: 100%;
     box-sizing: border-box;
-}
 
-#sidebar ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-
-//* placement of the side menu buttons */
-#sidebar ul li {
-    margin: 0;
-}
-
-//* side menu button effect */
-#sidebar ul li a {
-    padding: 0;
-    display: block;
-    transition: background .3s ease-in-out;
+    ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        //* placement of the side menu buttons */
+        li {
+            margin: 0;
+            //* side menu button effect */
+            a {
+                padding: 0;
+                display: block;
+                transition: background .3s ease-in-out;
+            }
+        }
+    }
 }
 
 .main-content {

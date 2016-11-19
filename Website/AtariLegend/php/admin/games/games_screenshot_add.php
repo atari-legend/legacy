@@ -17,8 +17,8 @@
 // This is the image selection/upload screen for the games
 //****************************************************************************************
 
-include("../../includes/common.php");
-include("../../includes/admin.php");
+include("../../config/common.php");
+include("../../config/admin.php");
 include("../../includes/quick_search_games.php");
 
 //Get the screenshots for this game, if they exist

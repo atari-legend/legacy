@@ -17,8 +17,8 @@
  */
 
 //load all common functions
-include("../../includes/common.php");
-include("../../includes/admin.php");
+include("../../config/common.php");
+include("../../config/admin.php");
 
 $start1 = gettimeofday();
 list($start2, $start3) = explode(":", exec('date +%N:%S'));

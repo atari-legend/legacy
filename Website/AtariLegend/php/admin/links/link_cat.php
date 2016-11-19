@@ -20,9 +20,9 @@ In this section we modify links
 ***********************************************************************************
 */
 
-include("../../includes/common.php");
+include("../../config/common.php");
 include("../../includes/quick_search_games.php");
-include("../../includes/admin.php");
+include("../../config/admin.php");
 
 $website = $mysqli->query("SELECT website_category_id, website_category_name FROM website_category ORDER by website_category_name");
 

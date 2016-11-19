@@ -19,9 +19,9 @@
  Manage our trivia quotes!
  ***********************************************************************************
  */
-include("../../includes/common.php");
+include("../../config/common.php");
 include("../../includes/quick_search_games.php");
-include("../../includes/admin.php");
+include("../../config/admin.php");
 
 $sql_trivia = $mysqli->query("SELECT * FROM trivia_quotes ORDER BY trivia_quote_id");
 

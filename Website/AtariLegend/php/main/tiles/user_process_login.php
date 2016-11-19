@@ -15,7 +15,7 @@
 * User login process
 *********************************************************************************/
 
-include("../../includes/common.php"); 
+include("../../config/common.php");
 
 //Do the md5 stuff first
 if (isset($_POST['userid'], $_POST['pmd5'])) {
@@ -23,28 +23,28 @@ if (isset($_POST['userid'], $_POST['pmd5'])) {
     $md5_password = $_POST['pmd5']; // The md5 hashed password.
     $password = $_POST['p']; // The hashed password.
 
-	if(md5_test($userid, $md5_password, $password, $mysqli) == true) {
-        // md5 success 
+    if(md5_test($userid, $md5_password, $password, $mysqli) == true) {
+        // md5 success
         //echo "<br>All went good";
-    	} else {
-        // md5 failed 
+        } else {
+        // md5 failed
         //echo "<br>Something went wrong";
-    	}
+        }
 }
 
 if (isset($_POST['userid'], $_POST['p'])) {
     $userid = $_POST['userid'];
     $password = $_POST['p']; // The hashed password.
- 
+
     if (login($userid, $password, $mysqli) == true) {
-        // Login success 
+        // Login success
         header('Location: ../front/front.php');
     } else {
-        // Login failed 
+        // Login failed
         header('Location: ../index.php?error=1');
     }
 } else {
-    // The correct POST variables were not sent to this page. 
+    // The correct POST variables were not sent to this page.
     echo 'Invalid Request';
 }
 ?>

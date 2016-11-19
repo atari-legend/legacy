@@ -16,9 +16,9 @@
 
 extract($_REQUEST);
 
-include("../../includes/connect.php");
+include("../../config/connect.php");
 include("../../../php/includes/smarty/libs/Smarty.class.php");
-include("../../includes/config.php");
+include("../../config/config.php");
 include("../../includes/user_functions.php");
 include("../../includes/functions.php");
 include("../../includes/karma.php");
@@ -34,7 +34,7 @@ if (login_check($mysqli) == true) {
     ));
 }
 
-include("../../includes/template_config.php");
+include("../../config/template_config.php");
 
 //transfer edit messages to template
 if (isset($_SESSION['edit_message'])) {

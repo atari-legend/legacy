@@ -15,8 +15,8 @@
 
 /* here we will add a game set/chain for a set */
 
-include("../../includes/common.php");
-include("../../includes/admin.php");
+include("../../config/common.php");
+include("../../config/admin.php");
 
 //get all the title chains to fill the dropdown
 $sql_games_chain = "SELECT game.game_id AS 'software_id',
