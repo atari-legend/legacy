@@ -15,8 +15,8 @@
 // This script does database queries for the database update facility.
 // We are using the action var to separate all the queries.
 
-include("../../includes/common.php");
-include("../../includes/admin.php");
+include("../../config/common.php");
+include("../../config/admin.php");
 
 //****************************************************************************************
 // Start with getting the update script and do tests

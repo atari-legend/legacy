@@ -19,8 +19,8 @@
  */
 
 //load all common functions
-include("../../includes/common.php");
-include("../../includes/admin.php");
+include("../../config/common.php");
+include("../../config/admin.php");
 
 if (isset($action) and $action == "crew_browse") {
     if ($query == "num") {

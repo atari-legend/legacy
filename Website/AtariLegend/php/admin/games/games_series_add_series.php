@@ -19,8 +19,8 @@
  ***********************************************************************************
  */
 
-include("../../includes/common.php");
-include("../../includes/admin.php");
+include("../../config/common.php");
+include("../../config/admin.php");
 
 // SERIES LIST DROPDOWN
 $sql_series = $mysqli->query("SELECT * FROM game_series ORDER BY game_series_name ASC") or die("Couldn't query Game Series Database1");

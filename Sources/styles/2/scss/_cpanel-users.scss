@@ -7,7 +7,7 @@
 //*------------User details-----------------------------------*/
 #user_details_img_dark {
     margin-left: 1%;
-    box-shadow: 0 0 12px black;
+    box-shadow: 0 0 12px #000;
 }
 
 .user_details_container { display: flex; }
@@ -64,7 +64,7 @@
     padding-left: 2px;
     font-size: 16px;
     font-weight: 100;
-    color: black;
+    color: #000;
 }
 
 .email_th { width: 10%; }
@@ -73,7 +73,7 @@
     padding-left: 2px;
     font-size: 16px;
     font-weight: 100;
-    color: black;
+    color: #000;
 }
 
 .website_th { width: 15%; }
@@ -82,7 +82,7 @@
     padding-left: 2px;
     font-size: 16px;
     font-weight: 100;
-    color: black;
+    color: #000;
 }
 
 #user_search_main_tabel {

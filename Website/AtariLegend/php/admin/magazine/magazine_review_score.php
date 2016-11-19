@@ -20,8 +20,8 @@
  ***********************************************************************************
  */
 
-include("../../includes/common.php");
-include("../../includes/admin.php");
+include("../../config/common.php");
+include("../../config/admin.php");
 include("../../includes/quick_search_games.php");
 
 // Get all the issues

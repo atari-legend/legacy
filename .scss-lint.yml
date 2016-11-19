@@ -12,4 +12,8 @@ linters:
         enabled: false
     EmptyLineBetweenBlocks:
         enabled: false
+    ColorVariable:
+        enabled: false
+    SelectorFormat:
+        enabled: false
 

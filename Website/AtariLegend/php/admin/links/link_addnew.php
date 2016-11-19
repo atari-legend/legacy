@@ -19,9 +19,9 @@
  In this section we can add a new link to the DB
  ***********************************************************************************
  */
-include("../../includes/common.php");
+include("../../config/common.php");
 include("../../includes/quick_search_games.php");
-include("../../includes/admin.php");
+include("../../config/admin.php");
 
 $RESULT = $mysqli->query("SELECT * FROM website_category ORDER BY website_category_name");
 

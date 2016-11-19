@@ -18,8 +18,8 @@
  ***********************************************************************************
  */
 
-include("../../includes/common.php");
-include("../../includes/admin.php");
+include("../../config/common.php");
+include("../../config/admin.php");
 
 $sql = $mysqli->query("SELECT * FROM magazine_game
                         LEFT JOIN game ON (magazine_game.game_id = game.game_id)

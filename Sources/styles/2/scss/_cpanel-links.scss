@@ -48,12 +48,12 @@
 .links_addnew_info {
     padding: 5px;
     font-size: 16px;
-    color: black;
+    color: #000;
 }
 
 .links_addnew_link:link { color: #6a6a6a; }
 .links_addnew_link:visited { color: #6a6a6a; }
-.links_addnew_link:hover { color: black; }
+.links_addnew_link:hover { color: #000; }
 
 //*----------------------------------------------------------
 //Links Modify list
@@ -62,7 +62,7 @@
 .links_modlist_tdline {
     padding: 5px;
     font-size: 16px;
-    color: black;
+    color: #000;
     border-bottom: solid 1px #b2b2b2;
 }
 
@@ -70,7 +70,7 @@
     max-width: 100%;
     margin: 10px 5px 10px 5px;
     opacity: .8;
-    box-shadow: 0 0 12px black;
+    box-shadow: 0 0 12px #000;
 }
 
 .links_list_text { margin-right: 1%; }

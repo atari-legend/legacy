@@ -16,8 +16,8 @@
 Build game series page
 ***********************************************************************************
 */
-include("../../includes/common.php");
-include("../../includes/admin.php");
+include("../../config/common.php");
+include("../../config/admin.php");
 
         //set base sqls
             $sql_build = "SELECT game.game_id AS 'software_id',

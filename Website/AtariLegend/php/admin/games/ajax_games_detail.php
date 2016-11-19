@@ -19,12 +19,8 @@
  Build game series page
  ***********************************************************************************
  */
-extract($_REQUEST);
-include("../../includes/connect.php");
-include("../../includes/config.php");
-include("../../includes/config_smarty.php");
-include("../../includes/constants.php");
-include("../../includes/template_config.php");
+include("../../config/common.php");
+include("../../config/admin.php");
 
 if ((isset($action) and $action == "company_publisher_browse") or (isset($action) and $action == "company_developer_browse")) {
     // Do a simple gamesearch... no aka's or the likes of that.

@@ -18,8 +18,8 @@
  ***********************************************************************************
  */
 
-include("../../includes/common.php");
-include("../../includes/admin.php");
+include("../../config/common.php");
+include("../../config/admin.php");
 
 if (empty($list) or $list == '') {
     $list = "current";

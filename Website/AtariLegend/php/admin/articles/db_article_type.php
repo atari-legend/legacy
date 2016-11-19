@@ -10,8 +10,8 @@
  ***************************************************************************/
 
 // We are using the action var to separate all the queries.
-include("../../includes/common.php");
-include("../../includes/admin.php");
+include("../../config/common.php");
+include("../../config/admin.php");
 
 //update the article type
 if (isset($article_type_id) and isset($action) and $action == 'update') {

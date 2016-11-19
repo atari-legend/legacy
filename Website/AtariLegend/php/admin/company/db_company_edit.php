@@ -20,8 +20,8 @@
  ************************************************************************************************
  */
 
-include("../../includes/common.php");
-include("../../includes/admin.php");
+include("../../config/common.php");
+include("../../config/admin.php");
 
 // Here we delete the company logo image
 if (isset($action) and $action == 'delete_logo') {

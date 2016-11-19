@@ -9,7 +9,7 @@
 //------------------------------------------------------------ */
 #user_details_img_dark {
     margin-left: 1%;
-    box-shadow: 0 0 12px black;
+    box-shadow: 0 0 12px #000;
 }
 
 .user_details_container { display: flex; }
@@ -66,7 +66,7 @@
     padding-left: 2px;
     font-size: 10pt;
     font-weight: 100;
-    color: white;
+    color: #fff;
 }
 
 .email_th { width: 10%; }
@@ -75,7 +75,7 @@
     padding-left: 2px;
     font-size: 10pt;
     font-weight: 100;
-    color: white;
+    color: #fff;
 }
 
 .website_th { width: 15%; }
@@ -84,7 +84,7 @@
     padding-left: 2px;
     font-size: 10pt;
     font-weight: 100;
-    color: white;
+    color: #fff;
 }
 
 #user_search_main_tabel {
@@ -112,7 +112,7 @@
     padding-left: 2px;
     font-size: 10pt;
     font-weight: 100;
-    color: white;
+    color: #fff;
 }
 
 #user_list_action {
