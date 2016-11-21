@@ -29,7 +29,7 @@ if (isset($action) and $action == "delete_user") {
             $i++;
         }
         $time_elapsed_secs        = microtime(true) - $start;
-        $_SESSION['edit_message'] = 'User(s) deleted succesfully';
+        $_SESSION['edit_message'] = "$i User(s) deleted succesfully";
     } else {
         $_SESSION['edit_message'] = 'Please SELECT a user you want to delete';
     }
