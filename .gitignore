@@ -5,7 +5,7 @@
 /Website/AtariLegend/php/includes/smarty/templates_c/
 
 # exclude the connect.php file
-/Website/AtariLegend/php/includes/connect.php
+/Website/AtariLegend/php/config/connect.php
 
 # exclude the SASS cache
 /Website/AtariLegend/themes/.sass-cache/
@@ -24,3 +24,4 @@ scss-lint-report.xml
 /Website/AtariLegend/themes/styles/3/css/style.css.map
 style.css
 style.css.map
+connect.php
