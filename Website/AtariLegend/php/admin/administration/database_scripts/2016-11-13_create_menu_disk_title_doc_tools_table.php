@@ -12,7 +12,7 @@
 ***************************************************************************/
 
 // Unique identifier set by developer.
-$database_update_id = 64;
+$database_update_id = 62;
 
 // Description of what the change will do.
 $update_description = "Create menu_disk_title_doc_tools table";
