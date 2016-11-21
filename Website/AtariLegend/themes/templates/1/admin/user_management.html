@@ -67,6 +67,12 @@ function UserSearch() {
 }
 
     $( "#quick_search_small_select" ).change(function () { UserSearch(); });
+    $( "#js_user_search" ).keyup(function () {
+        var value = $(this).val();
+        if (value.length >= 3 || value == "") {
+            UserSearch();
+        }
+    });
     $( "#no_comments" ).change(function () {
         if ($(this).is(':checked')) { $("#with_comments").prop("checked", false);}
         UserSearch();
