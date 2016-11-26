@@ -105,7 +105,7 @@ img { display: block; }
     box-shadow: 3px 3px 5px #888;
 }
 
-.standard_tile_line { border-bottom: 2px solid #6a6a6a; }
+.standard_tile_line { border-bottom: 2px solid #666; }
 .standard_tile_background { position: relative; }
 .standard_tile_image { width: 100%; }
 .standard_tile_subtext { font-size: 15px; }
@@ -113,7 +113,7 @@ img { display: block; }
     width: 91.7%;
     padding-right: 4%;
     padding-left: 4%;
-    border-right: 2px solid #6a6a6a;
+    border-right: 2px solid #666;
 }
 
 .standard_tile_title {
@@ -126,7 +126,7 @@ img { display: block; }
     background: rgb(172, 172, 172) transparent;
     //* Fallback for web browsers that doesn't support RGBa */
     background: rgba(172, 172, 172, .7);
-    border-bottom: 2px solid #6a6a6a;
+    border-bottom: 2px solid #666;
     bottom: 0;
 }
 
@@ -144,7 +144,7 @@ h1 {
     font-weight: 100;
     color: #fff;
     text-align: center;
-    text-shadow: -1px 1px 8px #686868, 1px -1px 8px #515151;
+    text-shadow: -1px 1px 8px #666, 1px -1px 8px #515151;
 }
 
 h2 {
@@ -220,14 +220,14 @@ h6 {
 #text_area_big { height: 150px; }
 a.standard_tile_link:link {
     color: #fff;
-    text-shadow: -1px 1px 8px #686868, 1px -1px 8px #515151;
+    text-shadow: -1px 1px 8px #666, 1px -1px 8px #515151;
     outline: 0 none;
 }
 
 a.standard_tile_link:hover,
 a.standard_tile_link:focus {
     color: #000;
-    text-shadow: -1px 1px 8px #686868, 1px -1px 8px #515151;
+    text-shadow: -1px 1px 8px #666, 1px -1px 8px #515151;
 }
 
 .standard_tile_link:visited { color: #fff; }
@@ -235,14 +235,14 @@ a.standard_tile_link:focus {
 .standard_tile_link_reverse:visited { color: #000; }
 .standard_tile_link_reverse:hover {
     color: #fff;
-    text-shadow: -1px 1px 8px #686868, 1px -1px 8px #515151;
+    text-shadow: -1px 1px 8px #666, 1px -1px 8px #515151;
 }
 
 .standard_tile_link_cpanel:link { color: #fff; }
 .standard_tile_link_cpanel:visited { color: #fff; }
 .standard_tile_link_cpanel:hover {
     color: #000;
-    text-shadow: -1px 1px 8px #686868, 1px -1px 8px #515151;
+    text-shadow: -1px 1px 8px #666, 1px -1px 8px #515151;
 }
 
 .standard_tile_link_black:link {
@@ -389,7 +389,7 @@ a.standard_tile_link:focus {
 }
 
 .standard_table_list tr:nth-child(even) { background-color: #f3f3f3; }
-.standard_table_list tr:nth-child(odd) { background-color: #efefef; }
+.standard_table_list tr:nth-child(odd) { background-color: #eee; }
 .standard_table_list tr:hover { background-color: #dbd7d1; }
 .standard_table_list td {
     padding-top: 1px;
@@ -450,8 +450,8 @@ a.standard_tile_link:focus {
 fieldset {
     padding: 8px;
     font-size: 16px;
-    color: #122323;
-    background: #efefef;
+    color: #182727;
+    background: #eee;
     border: solid 1px #b2b2b2;
 }
 
