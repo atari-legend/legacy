@@ -18,18 +18,18 @@ $database_update_id = 40;
 $update_description = "Create doc_category table";
 
 // Should the database change query execute if test is "test_fail" or "test_success"
-$execute_condition = "test_success";
+$execute_condition = "test_fail";
 
 //This is the test query, the query should be made to get an either true or false result.
 $test_condition = "SELECT * FROM information_schema.columns
 WHERE table_schema = '$db_databasename' AND table_name = 'doc_category' LIMIT 1";
 
 // Database change
-$database_update_sql = "DROP TABLE IF EXISTS `doc_category`; CREATE TABLE IF NOT EXISTS `doc_category` (
+$database_update_sql = "CREATE TABLE IF NOT EXISTS `doc_category` (
 				  `doc_category_id` int(11) NOT NULL AUTO_INCREMENT,
 				  `doc_category_name` varchar(255) DEFAULT NULL,
 				  PRIMARY KEY (`doc_category_id`)
-				) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;";
+				) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1";
 
 // If the update should auto execute without user interaction set to "yes".
 $database_autoexecute = "yes";

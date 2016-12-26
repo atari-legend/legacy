@@ -18,18 +18,18 @@ $database_update_id = 34;
 $update_description = "create doc_disk_tool table";
 
 // Should the database change query execute if test is "test_fail" or "test_success"
-$execute_condition = "test_success";
+$execute_condition = "test_fail";
 
 //This is the test query, the query should be made to get an either true or false result.
 $test_condition = "SELECT * FROM information_schema.columns
 WHERE table_schema = '$db_databasename' AND table_name = 'doc_disk_tool' LIMIT 1";
 
 // Database change
-$database_update_sql = "CREATE TABLE IF NOT EXISTS `doc_disk_tools` (
+$database_update_sql = "CREATE TABLE IF NOT EXISTS `doc_disk_tool` (
   `doc_disk_tool_id` int(11) NOT NULL AUTO_INCREMENT,
   `tools_id` int(11) DEFAULT NULL,
-  `doc_type_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`doc_tools_id`)
+  `doc_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`doc_disk_tool_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;";
 // If the update should auto execute without user interaction set to "yes".
 $database_autoexecute = "yes";

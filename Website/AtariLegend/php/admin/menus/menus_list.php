@@ -74,7 +74,7 @@ if ($rows > 0) {
 
     $smarty->assign('querytime', $totaltime1);
     $smarty->assign('nr_of_entries', $i);
-
+}
     $smarty->assign("user_id", $_SESSION['user_id']);
 
     //Send all smarty variables to the templates
@@ -82,4 +82,4 @@ if ($rows > 0) {
 
     //close the connection
     mysqli_free_result($numbermenus);
-}
+

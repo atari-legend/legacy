@@ -1,33 +1,31 @@
 <?php
 /***************************************************************************
-*                                2016-02-26_change__column_name_website.php
-*                            -----------------------
-*   begin                : 2016-02-26
+*                                2016-12-26_drop_menu_disk_title_doc_tools_table.php
+*                            ------------------------------------------
+*   begin                : 2016-12-26
 *   copyright            : (C) 2016 Atari Legend
-*   email                : silversurfer@atari-forum.com
-*   actual update        :
+*   email                : martens_maarten@hotmail.com
+*   actual update        : creation of file
 *
-*
-*
-*   Id: 2016-02-26_change__column_name_website.php,v 0.10 2016-02-26 Silver Surfer
+*   Id: 2016-12-26_drop_menu_disk_title_doc_tools_table.php,v 0.10 2016-12-26 ST Graveyard
 *
 ***************************************************************************/
 
 // Unique identifier set by developer.
-$database_update_id = 33;
+$database_update_id = 62;
 
 // Description of what the change will do.
-$update_description = "Change field website_user_sub to user_id in website - part of go live script - test fail possible";
+$update_description = "Drop menu_disk_title_doc_tools table";
 
 // Should the database change query execute if test is "test_fail" or "test_success"
 $execute_condition = "test_success";
 
 //This is the test query, the query should be made to get an either true or false result.
-$test_condition = "SELECT * FROM information_schema.columns
-WHERE table_schema = '$db_databasename' AND table_name = 'website' AND column_name = 'website_user_sub' LIMIT 1";
+$test_condition = "SELECT * FROM information_schema.tables
+WHERE table_schema = '$db_databasename' AND table_name = 'menu_disk_title_doc_tools' LIMIT 1";
 
 // Database change
-$database_update_sql = "ALTER TABLE `website` CHANGE `website_user_sub` `user_id`INT( 11 )";
+$database_update_sql = "DROP TABLE IF EXISTS `menu_disk_title_doc_tools`;";
 
 // If the update should auto execute without user interaction set to "yes".
 $database_autoexecute = "yes";
