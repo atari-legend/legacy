@@ -1,33 +1,37 @@
 <?php
 /***************************************************************************
-*                                2016-02-26_change__column_name_website.php
-*                            -----------------------
-*   begin                : 2016-02-26
+*                                2016-12-26_create_menu_disk_download.php
+*                            ----------------------------------------------
+*   begin                : 2016-12-26
 *   copyright            : (C) 2016 Atari Legend
-*   email                : silversurfer@atari-forum.com
+*   email                : martens_maarten@hotmail.com
 *   actual update        :
 *
-*
-*
-*   Id: 2016-02-26_change__column_name_website.php,v 0.10 2016-02-26 Silver Surfer
+*   Id: 2016-12-26_create_menu_disk_download.php,v 0.10 2016-12-26 STG
 *
 ***************************************************************************/
 
 // Unique identifier set by developer.
-$database_update_id = 33;
+$database_update_id = 47;
 
 // Description of what the change will do.
-$update_description = "Change field website_user_sub to user_id in website - part of go live script - test fail possible";
+$update_description = "create menu_disk_download table";
 
 // Should the database change query execute if test is "test_fail" or "test_success"
-$execute_condition = "test_success";
+$execute_condition = "test_fail";
 
 //This is the test query, the query should be made to get an either true or false result.
 $test_condition = "SELECT * FROM information_schema.columns
-WHERE table_schema = '$db_databasename' AND table_name = 'website' AND column_name = 'website_user_sub' LIMIT 1";
+WHERE table_schema = '$db_databasename' AND table_name = 'menu_disk_download' LIMIT 1";
 
 // Database change
-$database_update_sql = "ALTER TABLE `website` CHANGE `website_user_sub` `user_id`INT( 11 )";
+$database_update_sql = "CREATE TABLE IF NOT EXISTS `menu_disk_download` (
+  `menu_disk_download_id` int(11) NOT NULL AUTO_INCREMENT,
+  `menu_disk_id` int(11) NOT NULL,
+  `sha512` char(128) NOT NULL,
+  `fileext` varchar(128) DEFAULT NULL,
+  PRIMARY KEY (`menu_disk_download_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;";
 
 // If the update should auto execute without user interaction set to "yes".
 $database_autoexecute = "yes";
