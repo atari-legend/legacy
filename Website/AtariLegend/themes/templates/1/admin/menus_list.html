@@ -39,6 +39,7 @@ The main game page
     </div>
 </div>
 <br>
+{include file='1/admin/left_nav.html'}
 {/block}
 
 {block name=main_tile}
@@ -49,34 +50,40 @@ The main game page
     <div style="margin-left:20px;"><h1>MENU SEARCH</h1></div>
     <div class="standard_tile_line"></div>
     <div class="standard_tile_text">
-        <div class="left_nav_section">
-            This is the Menus search page. Select a menu set to browse its menu disks or start adding them.
-        </div>
-        <br>
-        <br>
-        <table class="standard_table_list" id="game_list_table">
-            <tr>
-                <th id="menu_disk_set_th">Menu Disk Set</th>
-                <th id="menu_crew_th">Crew</th>
-                <th id="menu_individual_th">Indvidual</th>
-                <th id="menu_type_th">type</th>
-                <th id="nr_menus_th">Nr</th>
-            </tr>
-            {foreach from=$menus item=line}
+        {if (isset($nr_of_entries))}
+            <div class="left_nav_section">
+                This is the Menus search page. Select a menu set to browse its menu disks or start adding them.
+            </div>
+            <br>
+            <br>
+            <table class="standard_table_list" id="game_list_table">
                 <tr>
-                    <td class="menu_disk_set_td">{if $line.menu_sets_name != ''}<a href="../menus/menus_disk_list.php?menu_sets_id={$line.menu_sets_id}" class="standard_table_left">{$line.menu_sets_name}</a>{else}<i>n/a</i>{/if}</td>
-                    <td class="menu_crew_td">{if $line.crew_name != ''}{$line.crew_name}{else}<i>n/a</i>{/if}</td>
-                    <td class="menu_individual_td">{if $line.ind_name != ''}{$line.ind_name}{else}<i>n/a</i>{/if}</td>
-                    <td class="menu_type_td">{if $line.menu_type != ''}{$line.menu_type}{else}<i>n/a</i>{/if}</td>
-                    <td class="nr_menus_td">{if $line.numbermenus != ''}{$line.numbermenus}{else}<i>0</i>{/if}</td>
+                    <th id="menu_disk_set_th">Menu Disk Set</th>
+                    <th id="menu_crew_th">Crew</th>
+                    <th id="menu_individual_th">Indvidual</th>
+                    <th id="menu_type_th">type</th>
+                    <th id="nr_menus_th">Nr</th>
                 </tr>
-            {/foreach}
-            <tr>
-                <td class="standard_table_left" colspan="5">
-                    <br><b>{if $nr_of_entries == 1}1 menus set found {else} {$nr_of_entries} menus sets found{/if} in {$querytime} sec</b>
-                </td>
-            </tr>
-        </table>
+                {foreach from=$menus item=line}
+                    <tr>
+                        <td class="menu_disk_set_td">{if $line.menu_sets_name != ''}<a href="../menus/menus_disk_list.php?menu_sets_id={$line.menu_sets_id}" class="standard_table_left">{$line.menu_sets_name}</a>{else}<i>n/a</i>{/if}</td>
+                        <td class="menu_crew_td">{if $line.crew_name != ''}{$line.crew_name}{else}<i>n/a</i>{/if}</td>
+                        <td class="menu_individual_td">{if $line.ind_name != ''}{$line.ind_name}{else}<i>n/a</i>{/if}</td>
+                        <td class="menu_type_td">{if $line.menu_type != ''}{$line.menu_type}{else}<i>n/a</i>{/if}</td>
+                        <td class="nr_menus_td">{if $line.numbermenus != ''}{$line.numbermenus}{else}<i>0</i>{/if}</td>
+                    </tr>
+                {/foreach}
+                <tr>
+                    <td class="standard_table_left" colspan="5">
+                        <br><b>{if $nr_of_entries == 1}1 menus set found {else} {$nr_of_entries} menus sets found{/if} in {$querytime} sec</b>
+                    </td>
+                </tr>
+            </table>
+        {else}
+            <div class="left_nav_section">
+                There are no menu sets in the DB. Please create one.
+            </div>
+        {/if}
     </div>
 </div>
 {/block}

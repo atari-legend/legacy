@@ -50,7 +50,7 @@ $sql_menus = "SELECT menu_disk.menu_sets_id,
                         LEFT JOIN menu_disk_state ON ( menu_disk.state = menu_disk_state.state_id)
                         WHERE menu_disk.menu_sets_id = '$menu_sets_id' ORDER BY menu_disk_number, menu_disk_letter, menu_disk_part, menu_disk_version ASC";
 
-$result_menus = $mysqli->query($sql_menus);
+$result_menus = $mysqli->query($sql_menus) or die ("error in select");
 
 $rows = $result_menus->num_rows;
 $i    = 0;
