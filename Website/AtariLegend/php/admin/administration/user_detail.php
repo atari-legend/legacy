@@ -41,6 +41,7 @@ while ($query_users = $sql_users->fetch_array(MYSQLI_BOTH)) {
         'user_msnm' => $query_users['user_msnm'],
         'avatar_ext' => $query_users['avatar_ext'],
         'image' => "$user_avatar_path$query_users[user_id].$query_users[avatar_ext]",
+        'inactive' => $query_users['inactive'],
         'user_aim' => $query_users['user_aim']
     ));
 }

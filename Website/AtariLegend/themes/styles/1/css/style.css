@@ -1,141 +1,80 @@
-/*! normalize-scss | MIT/GPLv2 License | bit.ly/normalize-scss */
-/**
-     * 1. Set default font family to sans-serif.
-     * 2. Prevent iOS and IE text size adjust after device orientation change,
-     *    without disabling user zoom.
-     */
 html {
   font-family: sans-serif;
-  /* 1 */
+  line-height: 1.15;
   -ms-text-size-adjust: 100%;
-  /* 2 */
-  -webkit-text-size-adjust: 100%;
-  /* 2 */ }
+  -webkit-text-size-adjust: 100%; }
 
-/**
-     * Remove default margin.
-     */
 body {
   margin: 0; }
 
-/* HTML5 display definitions
-       ========================================================================== */
-/**
-     * Correct `block` display not defined for any HTML5 element in IE 8/9.
-     * Correct `block` display not defined for `details` or `summary` in IE 10/11
-     * and Firefox.
-     * Correct `block` display not defined for `main` in IE 11.
-     */
 article,
 aside,
-details,
-figcaption,
-figure,
 footer,
 header,
-hgroup,
-main,
-menu,
 nav,
-section,
-summary {
+section {
   display: block; }
 
-/**
-     * 1. Correct `inline-block` display not defined in IE 8/9.
-     * 2. Normalize vertical alignment of `progress` in Chrome, Firefox, and Opera.
-     */
-audio,
-canvas,
-progress,
-video {
-  display: inline-block;
-  /* 1 */
-  vertical-align: baseline;
-  /* 2 */ }
+h1 {
+  font-size: 2em;
+  margin: .67em 0; }
 
-/**
-     * Prevent modern browsers from displaying `audio` without controls.
-     * Remove excess height in iOS 5 devices.
-     */
-audio:not([controls]) {
-  display: none;
-  height: 0; }
+figcaption,
+figure {
+  display: block; }
 
-/**
-       * Address `[hidden]` styling not present in IE 8/9/10.
-       */
-[hidden] {
-  display: none; }
+figure {
+  margin: 1em 40px; }
 
-/**
-     * Hide the `template` element in IE 8/9/10/11, Safari, and Firefox < 22.
-     */
-template {
-  display: none; }
+hr {
+  box-sizing: content-box;
+  height: 0;
+  overflow: visible; }
 
-/* Links
-       ========================================================================== */
-/**
-       * Remove the gray background color from active links in IE 10.
-       */
+main {
+  display: block; }
+
+pre {
+  font-family: monospace, monospace;
+  font-size: 1em; }
+
 a {
-  background-color: transparent; }
+  background-color: transparent;
+  -webkit-text-decoration-skip: objects; }
 
-/**
-     * Improve readability of focused elements when they are also in an
-     * active/hover state.
-     */
 a:active,
 a:hover {
-  outline: 0; }
+  outline-width: 0; }
 
-/* Text-level semantics
-       ========================================================================== */
-/**
-     * Address styling not present in IE 8/9/10/11, Safari, and Chrome.
-     */
 abbr[title] {
-  border-bottom: 1px dotted; }
+  border-bottom: none;
+  text-decoration: underline;
+  text-decoration: underline dotted; }
 
-/**
-     * Address style set to `bolder` in Firefox 4+, Safari, and Chrome.
-     */
 b,
 strong {
-  font-weight: bold; }
+  font-weight: inherit; }
 
-/**
-     * Address styling not present in Safari and Chrome.
-     */
+b,
+strong {
+  font-weight: bolder; }
+
+code,
+kbd,
+samp {
+  font-family: monospace, monospace;
+  font-size: 1em; }
+
 dfn {
   font-style: italic; }
 
-/**
-     * Address variable `h1` font-size and margin within `section` and `article`
-     * contexts in Firefox 4+, Safari, and Chrome.
-     */
-h1 {
-  font-size: 2em;
-  /* Set 1 unit of vertical rhythm on the top and bottom margins. */
-  margin: 0.75em 0; }
-
-/**
-       * Address styling not present in IE 8/9.
-       */
 mark {
-  background: #ff0;
+  background-color: #ff0;
   color: #000; }
 
-/**
-     * Address inconsistent and variable font size in all browsers.
-     */
 small {
   font-size: 80%; }
 
-/**
-     * Prevent `sub` and `sup` affecting `line-height` in all browsers.
-     */
 sub,
 sup {
   font-size: 75%;
@@ -143,225 +82,121 @@ sup {
   position: relative;
   vertical-align: baseline; }
 
-sup {
-  top: -0.5em; }
-
 sub {
-  bottom: -0.25em; }
+  bottom: -.25em; }
 
-/* Embedded content
-       ========================================================================== */
-/**
-       * Remove border when inside `a` element in IE 8/9/10.
-       */
+sup {
+  top: -.5em; }
+
+audio,
+video {
+  display: inline-block; }
+
+audio:not([controls]) {
+  display: none;
+  height: 0; }
+
 img {
-  border: 0; }
+  border-style: none; }
 
-/**
-     * Correct overflow not hidden in IE 9/10/11.
-     */
 svg:not(:root) {
   overflow: hidden; }
 
-/* Grouping content
-       ========================================================================== */
-/**
-       * Address margin not present in IE 8/9 and Safari.
-       */
-figure {
-  margin: 1.5em 40px; }
-
-/**
-     * Address differences between Firefox and other browsers.
-     */
-hr {
-  box-sizing: content-box;
-  height: 0; }
-
-/**
-     * Contain overflow in all browsers.
-     */
-pre {
-  overflow: auto; }
-
-/**
-     * Address odd `em`-unit font size rendering in all browsers.
-     */
-code,
-kbd,
-pre,
-samp {
-  font-family: monospace, monospace;
-  font-size: 1em; }
-
-/* Forms
-       ========================================================================== */
-/**
-     * Known limitation: by default, Chrome and Safari on OS X allow very limited
-     * styling of `select`, unless a `border` property is set.
-     */
-/**
-     * 1. Correct color not being inherited.
-     *    Known issue: affects color of disabled elements.
-     * 2. Correct font properties not being inherited.
-     * 3. Address margins set differently in Firefox 4+, Safari, and Chrome.
-     * 4. Address `font-family` inconsistency between `textarea` and other form in IE 7
-     * 5. Improve appearance and consistency with IE 6/7.
-     */
 button,
 input,
 optgroup,
 select,
 textarea {
-  color: inherit;
-  /* 1 */
-  font: inherit;
-  /* 2 */
-  margin: 0;
-  /* 3 */ }
+  font-family: inherit;
+  font-size: 100%;
+  line-height: 1.15;
+  margin: 0; }
 
-/**
-     * Address `overflow` set to `hidden` in IE 8/9/10/11.
-     */
 button {
   overflow: visible; }
 
-/**
-     * Address inconsistent `text-transform` inheritance for `button` and `select`.
-     * All other form control elements do not inherit `text-transform` values.
-     * Correct `button` style inheritance in Firefox, IE 8/9/10/11, and Opera.
-     * Correct `select` style inheritance in Firefox.
-     */
 button,
 select {
   text-transform: none; }
 
-/**
-     * 1. Avoid the WebKit bug in Android 4.0.* where (2) destroys native `audio`
-     *    and `video` controls.
-     * 2. Correct inability to style clickable `input` types in iOS.
-     * 3. Improve usability and consistency of cursor style between image-type
-     *    `input` and others.
-     * 4. Remove inner spacing in IE 7 without affecting normal text inputs.
-     *    Known issue: inner spacing remains in IE 6.
-     */
 button,
-html input[type="button"],
-input[type="reset"],
-input[type="submit"] {
-  -webkit-appearance: button;
-  /* 2 */
-  cursor: pointer;
-  /* 3 */ }
+html [type="button"],
+[type="reset"],
+[type="submit"] {
+  -webkit-appearance: button; }
 
-/**
-     * Re-set default cursor for disabled elements.
-     */
-button[disabled],
-html input[disabled] {
-  cursor: default; }
-
-/**
-     * Remove inner padding and border in Firefox 4+.
-     */
 button::-moz-focus-inner,
-input::-moz-focus-inner {
-  border: 0;
+[type="button"]::-moz-focus-inner,
+[type="reset"]::-moz-focus-inner,
+[type="submit"]::-moz-focus-inner {
+  border-style: none;
   padding: 0; }
 
-/**
-     * Address Firefox 4+ setting `line-height` on `input` using `!important` in
-     * the UA stylesheet.
-     */
+button:-moz-focusring,
+[type="button"]:-moz-focusring,
+[type="reset"]:-moz-focusring,
+[type="submit"]:-moz-focusring {
+  outline: 1px dotted ButtonText; }
+
 input {
-  line-height: normal; }
+  overflow: visible; }
 
-/**
-       * It's recommended that you don't attempt to style these elements.
-       * Firefox's implementation doesn't respect box-sizing, padding, or width.
-       *
-       * 1. Address box sizing set to `content-box` in IE 8/9/10.
-       * 2. Remove excess padding in IE 8/9/10.
-       * 3. Remove excess padding in IE 7.
-       *    Known issue: excess padding remains in IE 6.
-       */
-input[type="checkbox"],
-input[type="radio"] {
+[type="checkbox"],
+[type="radio"] {
   box-sizing: border-box;
-  /* 1 */
-  padding: 0;
-  /* 2 */ }
+  padding: 0; }
 
-/**
-     * Fix the cursor style for Chrome's increment/decrement buttons. For certain
-     * `font-size` values of the `input`, it causes the cursor style of the
-     * decrement button to change from `default` to `text`.
-     */
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
+[type="number"]::-webkit-inner-spin-button,
+[type="number"]::-webkit-outer-spin-button {
   height: auto; }
 
-/**
-     * 1. Address `appearance` set to `searchfield` in Safari and Chrome.
-     * 2. Address `box-sizing` set to `border-box` in Safari and Chrome.
-     */
-input[type="search"] {
+[type="search"] {
   -webkit-appearance: textfield;
-  /* 1 */
-  box-sizing: content-box;
-  /* 2 */
-  /**
-       * Remove inner padding and search cancel button in Safari and Chrome on OS X.
-       * Safari (but not Chrome) clips the cancel button when the search input has
-       * padding (and `textfield` appearance).
-       */ }
-  input[type="search"]::-webkit-search-cancel-button, input[type="search"]::-webkit-search-decoration {
+  outline-offset: -2px; }
+  [type="search"]::-webkit-search-cancel-button, [type="search"]::-webkit-search-decoration {
     -webkit-appearance: none; }
 
-/**
-     * Define consistent border, margin, and padding.
-     */
+::-webkit-file-upload-button {
+  -webkit-appearance: button;
+  font: inherit; }
+
 fieldset {
   border: 1px solid #c0c0c0;
   margin: 0 2px;
-  padding: 0.35em 0.625em 0.75em; }
+  padding: .35em .625em .75em; }
 
-/**
-     * 1. Correct `color` not being inherited in IE 8/9/10/11.
-     * 2. Remove padding so people aren't caught out if they zero out fieldsets.
-     * 3. Correct alignment displayed oddly in IE 6/7.
-     */
 legend {
-  border: 0;
-  /* 1 */
+  box-sizing: border-box;
+  display: table;
+  max-width: 100%;
   padding: 0;
-  /* 2 */ }
+  color: inherit;
+  white-space: normal; }
 
-/**
-     * Remove default vertical scrollbar in IE 8/9/10/11.
-     */
+progress {
+  display: inline-block;
+  vertical-align: baseline; }
+
 textarea {
   overflow: auto; }
 
-/**
-     * Don't inherit the `font-weight` (applied by a rule above).
-     * NOTE: the default cannot safely be changed in Chrome and Safari on OS X.
-     */
-optgroup {
-  font-weight: bold; }
+details {
+  display: block; }
 
-/* Tables
-       ========================================================================== */
-/**
-     * Remove most spacing between table cells.
-     */
-table {
-  border-collapse: collapse;
-  border-spacing: 0; }
+summary {
+  display: list-item; }
 
-td,
-th {
-  padding: 0; }
+menu {
+  display: block; }
+
+canvas {
+  display: inline-block; }
+
+template {
+  display: none; }
+
+[hidden] {
+  display: none; }
 
 @font-face {
   font-family: 'Audiowide';
@@ -380,7 +215,7 @@ html {
 
 body {
   font-family: Audiowide, Arial, helvetica, sans-serif;
-  background-color: black; }
+  background-color: #000; }
 
 body a {
   text-decoration: none; }
@@ -473,7 +308,7 @@ img {
   z-index: 1;
   padding-top: 3%;
   font-size: 17pt;
-  color: white;
+  color: #fff;
   background: #005050;
   background: rgba(0, 80, 80, 0.6);
   border-bottom: 2px solid #01b5b5; }
@@ -490,7 +325,7 @@ img {
   margin-bottom: 20px;
   font-size: 18pt;
   font-weight: 100;
-  color: white;
+  color: #fff;
   text-align: center; }
 
 .standard_tile h2 {
@@ -503,13 +338,13 @@ img {
 .standard_tile h3 {
   font-size: 10pt;
   font-weight: 100;
-  color: white;
+  color: #fff;
   text-align: center; }
 
 .standard_tile h4 {
   font-size: 12pt;
   font-weight: 100;
-  color: white;
+  color: #fff;
   text-align: left; }
 
 .standard_tile h5 {
@@ -521,7 +356,7 @@ img {
 .standard_tile h6 {
   font-size: 11pt;
   font-weight: 100;
-  color: white;
+  color: #fff;
   text-align: left; }
 
 .standard_tile_input {
@@ -546,7 +381,7 @@ img {
   margin-top: 0;
   color: #fff;
   text-align: left;
-  background: black;
+  background: #000;
   border: 1px solid #008b8b;
   font-family: Audiowide; }
 
@@ -558,7 +393,7 @@ img {
   margin-top: 0;
   color: #fff;
   text-align: left;
-  background: black;
+  background: #000;
   border: 1px solid #008b8b;
   font-family: Audiowide; }
 
@@ -568,14 +403,14 @@ img {
 .standard_tile th {
   font-size: 12pt;
   font-weight: bold;
-  color: white;
+  color: #fff;
   text-align: center; }
 
 .standard_tile_link:link {
-  color: white; }
+  color: #fff; }
 
 .standard_tile_link:visited {
-  color: white; }
+  color: #fff; }
 
 .standard_tile_link:hover {
   color: #01b5b5; }
@@ -587,7 +422,7 @@ img {
   color: #01b5b5; }
 
 .standard_tile_link_reverse:hover {
-  color: white; }
+  color: #fff; }
 
 .standard_tile_link_cpanel:link {
   color: #01b5b5; }
@@ -596,20 +431,20 @@ img {
   color: #01b5b5; }
 
 .standard_tile_link_cpanel:hover {
-  color: white; }
+  color: #fff; }
 
 .standard_tile_link_black:link {
   font-weight: bold;
-  color: black; }
+  color: #000; }
 
 .standard_tile_link_black:visited {
-  color: black; }
+  color: #000; }
 
 .standard_tile_link_black:hover {
-  color: white; }
+  color: #fff; }
 
 .standard_tile_link_button:link {
-  color: black; }
+  color: #000; }
 
 .standard_list_entry {
   position: relative;
@@ -622,7 +457,7 @@ img {
   display: table;
   width: 100%;
   height: 140px;
-  background: black; }
+  background: #000; }
 
 .standard_list_entry_left {
   position: absolute;
@@ -640,7 +475,7 @@ img {
   box-shadow: 0 0 7px #00d3d3; }
 
 .standard_list_entry_left img:hover {
-  box-shadow: 0 0 7px white; }
+  box-shadow: 0 0 7px #fff; }
 
 .standard_list_entry_right {
   position: absolute;
@@ -674,7 +509,7 @@ img {
   padding-left: 5px;
   margin-top: 5px;
   font-family: Audiowide;
-  background-color: black;
+  background-color: #000;
   color: #fff;
   border: 1px solid #008b8b; }
 
@@ -720,13 +555,13 @@ img {
   margin-left: auto;
   text-align: left;
   background-color: #00d3d3;
-  border: solid 1px black;
+  border: solid 1px #000;
   border-spacing: 0; }
 
 .standard_table_list li {
   font-size: 10pt;
   font-weight: 100;
-  color: white;
+  color: #fff;
   text-align: center;
   list-style-type: none; }
 
@@ -737,7 +572,7 @@ img {
   margin: 0;
   background-color: #006f6f;
   border-collapse: collapse;
-  border-bottom: solid 1px black; }
+  border-bottom: solid 1px #000; }
 
 .standard_table_list tr:nth-child(even) {
   background-color: #00d3d3; }
@@ -753,26 +588,26 @@ img {
   padding-bottom: 1px;
   padding-left: 3px;
   margin: 0;
-  border-bottom: solid 1px black; }
+  border-bottom: solid 1px #000; }
 
 .standard_table_center {
   font-size: 10pt;
   font-weight: 100;
-  color: white;
+  color: #fff;
   text-align: center; }
 
 .standard_table_left {
   padding-left: 2px;
   font-size: 10pt;
   font-weight: 100;
-  color: white;
+  color: #fff;
   text-align: left; }
 
 .standard_table_right {
   padding-right: 2px;
   font-size: 10pt;
   font-weight: 100;
-  color: white;
+  color: #fff;
   text-align: right; }
 
 .standard_table_center img {
@@ -782,7 +617,7 @@ img {
   width: 80px;
   height: 25px;
   font-size: 10pt;
-  color: white;
+  color: #fff;
   cursor: pointer;
   background: #122323;
   border: 0;
@@ -790,7 +625,7 @@ img {
   border-left: 1px solid #122323; }
 
 .topbutton_cpanel_small:hover, .topbutton_cpanel:hover {
-  color: white;
+  color: #fff;
   background: #006f6f;
   border-bottom: 3px solid #122323; }
 
@@ -801,13 +636,13 @@ fieldset {
   padding: 8px;
   font-size: 11pt;
   background: #00d3d3;
-  border: solid 1px black; }
+  border: solid 1px #000; }
 
 legend {
   padding: 1px 10px;
-  color: white;
+  color: #fff;
   background: #006f6f;
-  border: black solid 1px; }
+  border: #000 solid 1px; }
 
 .help-tip {
   float: right;
@@ -819,7 +654,7 @@ legend {
   line-height: 22px;
   text-align: center;
   cursor: default;
-  background-color: black;
+  background-color: #000;
   border: #00d3d3 solid 1px;
   border-radius: 50%; }
 
@@ -845,7 +680,7 @@ legend {
   font-size: 13px;
   line-height: 1.4;
   text-align: left;
-  background-color: black;
+  background-color: #000;
   color: #fff;
   border: #00d3d3 solid 1px;
   border-radius: 3px;
@@ -879,16 +714,11 @@ legend {
     opacity: 100%;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=NaN)"; } }
 
-/*****************************************************************/
-/***** This is the css code for the top graphics of the site *****/
-/*****************************************************************/
-/* background */
 #top_background {
   width: 100%;
   float: left;
-  background: url(../images/top_bg.jpg) 0 0 no-repeat; }
+  background: url("../images/top_bg.jpg") 0 0 no-repeat; }
 
-/* logos */
 #left {
   float: left; }
 
@@ -905,7 +735,6 @@ legend {
   max-width: 100%;
   float: right; }
 
-/* at a resolution of max 480 (smartphones) we want a smaller logo with border */
 @media screen and (max-width: 480px) {
   .container {
     width: 15%; }
@@ -929,11 +758,9 @@ legend {
     border-bottom-width: 7px;
     border-bottom-color: #00d3d3;
     box-shadow: 0 0 7px #00d3d3;
-    background: -webkit-linear-gradient(#175f5f, black);
-    background: linear-gradient(#175f5f, black);
-    /* Standard syntax (must be last) */ } }
+    background: -webkit-linear-gradient(#175f5f, #000);
+    background: linear-gradient(#175f5f, #000); } }
 
-/* at a resolution of max 960 (Tablets & low res laptop) we want the original logo without the bee */
 @media screen and (min-width: 481px) and (max-width: 960px) {
   .container {
     width: 15%; }
@@ -948,7 +775,6 @@ legend {
     width: 0;
     display: none; } }
 
-/* For high res screens we want the full package - original logo and bee */
 @media screen and (min-width: 961px) {
   .container {
     width: 15%; }
@@ -959,11 +785,6 @@ legend {
   #right {
     width: 35%; } }
 
-/**************************************************************************/
-/**** This is the css code for the animations at the top of the screen ****/
-/**************************************************************************/
-/* ---------SASS variables for animation--------*/
-/* -------------SASS animation code-------------*/
 #animation {
   position: relative;
   -webkit-animation-name: STcharacters;
@@ -1060,27 +881,18 @@ legend {
     opacity: 0;
     -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"; } }
 
-/* at a resolution of max 480 (smartphones) we want a smaller logo with border */
 @media screen and (max-width: 480px) {
-  #animation, #animation_vert {
+  #animation,
+  #animation_vert {
     display: none; } }
 
-/* at a resolution of max 960 (Tablets & low res laptop) we want the original logo without the bee */
 @media screen and (min-width: 481px) and (max-width: 960px) {
-  #animation, #animation_vert {
+  #animation,
+  #animation_vert {
     display: none; } }
 
-/*****************************************************************/
-/**** This is the css code for the side menu and the top menu ****/
-/*****************************************************************/
-/* ---------SASS variables for menu--------*/
-/* ---------the side menu--------*/
-/* the side menu for smartphones, tablets and old (laptop) screens */
-/* it is also used for the high res monitors, but then only the skin switch will be visible and */
-/* in certain resolutions the quick search field */
-/* This file contains the complete build code as well as the positioning of the side menu for all */
-/* resolutions - see the code at the bottom of the file */
-body, html {
+body,
+html {
   height: 100%; }
 
 .container {
@@ -1089,41 +901,33 @@ body, html {
   position: relative;
   width: 100%;
   left: 0;
-  -webkit-transition: left 0.4s ease-in-out;
-  transition: left 0.4s ease-in-out; }
+  -webkit-transition: left .4s ease-in-out;
+  transition: left .4s ease-in-out; }
 
-/* this is the width of the side menu when it is pushed open */
 .container.open-sidebar {
   left: 190px; }
 
-/* the position of the side buttons when pushed open */
 #sidebar {
   left: -192px;
   width: 170px; }
 
-/* the side bar button options */
 #sidebar {
   z-index: 1;
   position: absolute;
-  background: black;
+  background: #000;
   height: 100%;
   box-sizing: border-box; }
-
-#sidebar ul {
-  margin: 0;
-  padding: 0;
-  list-style: none; }
-
-/* placement of the side menu buttons */
-#sidebar ul li {
-  margin: 0; }
-
-/* side menu button effect */
-#sidebar ul li a {
-  padding: 0;
-  display: block;
-  -webkit-transition: background 0.3s ease-in-out;
-  transition: background 0.3s ease-in-out; }
+  #sidebar ul {
+    margin: 0;
+    padding: 0;
+    list-style: none; }
+    #sidebar ul li {
+      margin: 0; }
+      #sidebar ul li a {
+        padding: 0;
+        display: block;
+        -webkit-transition: background .3s ease-in-out;
+        transition: background .3s ease-in-out; }
 
 .main-content {
   width: 100%;
@@ -1147,13 +951,12 @@ body, html {
   border-radius: 3px; }
 
 .main-content #sidebar-toggle .bar {
-  background-color: white;
+  background-color: #fff;
   border-radius: 1px; }
 
 .main-content #sidebar-toggle .bar:last-child {
   margin-bottom: 0; }
 
-/* search field and button code - this is very skin specific */
 #search_ul {
   width: 100%; }
 
@@ -1161,7 +964,7 @@ body, html {
   float: left; }
 
 #search_side {
-  background-image: url(../images/menu_search.png);
+  background-image: url("../images/menu_search.png");
   background-size: cover;
   background-repeat: no-repeat;
   padding-left: 50px;
@@ -1176,38 +979,43 @@ body, html {
   padding-top: 0; }
 
 #search_text_side {
-  color: #ffffff;
+  color: #fff;
   width: 105px;
   height: 23px;
   border: 1px solid #007b7b;
-  margin: 7px 0px 0px 6px;
+  margin: 7px 0 0 6px;
   padding: 0;
-  background: black;
+  background: #000;
   text-align: center; }
 
-#skin_side, #other_side, #games_side, #menus_side, #demos_side, #users_side, #admin_side, .side_navigation * a {
+#skin_side,
+#other_side,
+#games_side,
+#menus_side,
+#demos_side,
+#users_side,
+#admin_side,
+.side_navigation * a {
   width: 168px; }
 
 .skin-menu {
   width: 100%;
-  margin: 0px auto; }
+  margin: 0 auto; }
 
 .skin-menu li {
   margin: 0;
   list-style: none; }
 
 .skin-menu a {
-  -webkit-transition: all linear 0.15s;
-  transition: all linear 0.15s; }
+  -webkit-transition: all linear .15s;
+  transition: all linear .15s; }
 
-/*  Top Level */
 .skin-menu > ul > li {
   float: left;
   display: inline-block;
   position: relative;
   font-size: 19px; }
 
-/* Bottom Level - This is the skin switching part */
 .skin-menu li:hover .sub-menu {
   z-index: 1;
   opacity: 1;
@@ -1222,9 +1030,9 @@ body, html {
   z-index: -1;
   opacity: 0;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
-  -webkit-transition: opacity linear 0.15s;
-  transition: opacity linear 0.15s;
-  box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.2);
+  -webkit-transition: opacity linear .15s;
+  transition: opacity linear .15s;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
   text-align: center; }
 
 .sub-menu li {
@@ -1243,7 +1051,6 @@ body, html {
   background: #01b5b5;
   color: #43635f; }
 
-/* 'position' is needed for smartphone view else the logo is covered by the sidemenu button */
 @media screen and (max-width: 480px) {
   .main-content {
     position: relative; }
@@ -1274,7 +1081,8 @@ body, html {
   border-left: 1px solid #008b8b;
   background: #55b4b4; }
 
-.sidebutton:hover, .sidebutton_cpanel:hover {
+.sidebutton:hover,
+.sidebutton_cpanel:hover {
   background: #00a9a9;
   color: #182727;
   border-bottom: 3px solid #006f6f; }
@@ -1283,14 +1091,10 @@ body, html {
   .sidebutton {
     line-height: 40px; } }
 
-/* for the lower resolutions, we don't have the menu bar below the top */
 @media screen and (max-width: 1279px) {
   #main_nav {
     display: none; } }
 
-/* for resolutions between 1280 and 1920 the search goes to the side menu */
-/* some re-placement of the skin button is needed here */
-/* HOWEVER, this is not done for the CPANEL, to solve this id no-wrap is created */
 #no-wrap {
   margin-top: 0; }
 
@@ -1298,23 +1102,15 @@ body, html {
   .skin-wrap {
     margin-top: 40px; } }
 
-/* for the high resolutions, we only have the skin switch in the side menu */
 @media screen and (min-width: 1280px) {
   .side_navigation {
     display: none; } }
 
 @media screen and (min-width: 1920px) {
-  #search_side, #search_text_side {
+  #search_side,
+  #search_text_side {
     display: none; } }
 
-/* ---------the main menu--------*/
-/* this is the css code for the main menu and its buttons
-
-/* This piece of code is used for higher res :
-/*	1) making the side menu go to the left of the screen  --> Container absolute
-/*  2) Side bar needs to be transparant for resolutions between 1281 and 16** or something --> #sidebar
-/*  3) header nav is switched to absolute, if this is not done, the hyperlinks won't work anymore becauwe of position of container
-/*  4) since header nav is absolute, the main part of the site needs to be repositioned */
 @media screen and (min-width: 1280px) {
   .container {
     position: absolute; }
@@ -1332,7 +1128,7 @@ body, html {
   left: 0; }
 
 #main_nav_ul {
-  font-size: 0.1px;
+  font-size: .1px;
   display: -webkit-box;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -1343,7 +1139,6 @@ body, html {
           justify-content: center;
   padding: 0; }
 
-/* this is some extra code for the cpanel sub menu at the main bar */
 #main_nav_ul li {
   position: relative; }
 
@@ -1351,7 +1146,6 @@ body, html {
   content: "";
   position: absolute; }
 
-/* submenu positioning*/
 #main_nav_ul ul {
   position: absolute;
   z-index: 1;
@@ -1373,11 +1167,11 @@ header nav li {
 
 header nav input {
   background-color: #000;
-  color: #ffffff;
+  color: #fff;
   width: 247px;
   height: 35px;
   border: 1px solid #007b7b;
-  margin: 11px 0px 0px 16px;
+  margin: 11px 0 0 16px;
   padding: 0;
   display: block;
   text-align: center;
@@ -1407,7 +1201,8 @@ header nav input {
   line-height: 26px;
   background: #55b4b4; }
 
-.topbutton:hover, .subbutton:hover {
+.topbutton:hover,
+.subbutton:hover {
   background: #00a9a9;
   color: #182727;
   border-bottom: 3px solid #006f6f; }
@@ -1454,22 +1249,22 @@ header nav input {
 
 #home {
   display: block;
-  background: url(../images/menu_home.png) 0 0 no-repeat;
+  background: url("../images/menu_home.png") 0 0 no-repeat;
   padding-top: 60px;
   padding-left: 75px; }
 
 #home:hover {
-  opacity: 0.5;
+  opacity: .5;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)"; }
 
 #search {
   display: block;
-  background: url(../images/menu_search.png) 0 0 no-repeat;
+  background: url("../images/menu_search.png") 0 0 no-repeat;
   padding-top: 60px;
   padding-left: 75px; }
 
 #search:hover {
-  opacity: 0.5;
+  opacity: .5;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)"; }
 
 @media screen and (max-width: 1919px) {
@@ -1484,7 +1279,6 @@ header nav input {
   .topbutton {
     width: 156.7px; } }
 
-/* responsiveness of the top menu for resolutions from 1281 to 1920 */
 @media screen and (max-width: 1919px) {
   #search_text {
     display: none; }
@@ -1530,10 +1324,14 @@ header nav input {
 
 .trivia_title {
   font-size: 19pt;
-  color: white; }
+  color: #fff; }
+
+.trivia_tag {
+  font-size: 13pt; }
 
 .trivia_text {
-  font-size: 12pt; }
+  font-size: 12pt;
+  color: #fff; }
 
 .logon {
   float: right;
@@ -1623,13 +1421,13 @@ header nav input {
   margin-top: 0;
   margin-bottom: -20px;
   font-size: 85pt;
-  color: white; }
+  color: #fff; }
 
 .datequote_month {
   margin-top: -10px;
   margin-bottom: -10px;
   font-size: 30pt;
-  color: white; }
+  color: #fff; }
 
 .datequote_year {
   margin-top: -10px;
@@ -1640,7 +1438,7 @@ header nav input {
 .datequote_text {
   padding-top: 10px;
   padding-bottom: 10px;
-  color: white;
+  color: #fff;
   background: #005050;
   background: rgba(0, 80, 80, 0.6); }
 
@@ -1726,7 +1524,7 @@ header nav input {
 .footer_logo {
   height: 120px;
   font-size: 10pt;
-  color: white;
+  color: #fff;
   text-align: center;
   background: url("../images/footer_bg.jpg") center 0 no-repeat; }
 
@@ -1826,7 +1624,7 @@ header nav input {
   background-color: #006f6f;
   background-color: #006f6f;
   border-collapse: collapse;
-  border-bottom: solid 1px black; }
+  border-bottom: solid 1px #000; }
 
 .left_nav_link:link {
   color: #122323; }
@@ -1835,7 +1633,7 @@ header nav input {
   color: #122323; }
 
 .left_nav_link:hover {
-  color: white; }
+  color: #fff; }
 
 .quick_search_check {
   margin-right: 5px; }
@@ -1863,7 +1661,7 @@ header nav input {
   border-left: 1px solid #007878; }
 
 .quick_search_games_button:hover {
-  color: white;
+  color: #fff;
   color: #182727;
   background: #00a9a9;
   border-bottom: 3px solid #006f6f; }
@@ -1884,7 +1682,7 @@ header nav input {
 
 #user_details_img_dark {
   margin-left: 1%;
-  box-shadow: 0 0 12px black; }
+  box-shadow: 0 0 12px #000; }
 
 .user_details_container {
   display: -webkit-box;
@@ -1943,7 +1741,7 @@ header nav input {
   padding-left: 2px;
   font-size: 10pt;
   font-weight: 100;
-  color: white; }
+  color: #fff; }
 
 .email_th {
   width: 10%; }
@@ -1953,7 +1751,7 @@ header nav input {
   padding-left: 2px;
   font-size: 10pt;
   font-weight: 100;
-  color: white; }
+  color: #fff; }
 
 .website_th {
   width: 15%; }
@@ -1963,7 +1761,7 @@ header nav input {
   padding-left: 2px;
   font-size: 10pt;
   font-weight: 100;
-  color: white; }
+  color: #fff; }
 
 #user_search_main_tabel {
   width: 100%;
@@ -1986,7 +1784,7 @@ header nav input {
   padding-left: 2px;
   font-size: 10pt;
   font-weight: 100;
-  color: white; }
+  color: #fff; }
 
 #user_list_action {
   width: 185px;
@@ -2001,7 +1799,7 @@ header nav input {
   margin-top: 0;
   color: #fff;
   text-align: left;
-  background: black;
+  background: #000;
   border: 1px solid #008b8b; }
 
 .links_addnew_row select {
@@ -2011,7 +1809,7 @@ header nav input {
   padding-left: 5px;
   margin-top: 5px;
   margin-top: 0;
-  background-color: black;
+  background-color: #000;
   color: #fff;
   border: 1px solid #008b8b; }
 
@@ -2031,21 +1829,21 @@ header nav input {
 .links_addnew_info {
   padding: 5px;
   font-size: 10pt;
-  color: black; }
+  color: #000; }
 
 .links_addnew_link:link {
-  color: white; }
+  color: #fff; }
 
 .links_addnew_link:visited {
-  color: white; }
+  color: #fff; }
 
 .links_addnew_link:hover {
-  color: black; }
+  color: #000; }
 
 .links_modlist_tdline {
   padding: 5px;
   font-size: 10pt;
-  color: black; }
+  color: #000; }
 
 .user_stats_img_dark {
   max-width: 100%;
@@ -2056,7 +1854,7 @@ header nav input {
   opacity: .8;
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
   filter: alpha(opacity=40);
-  box-shadow: 0 0 12px black; }
+  box-shadow: 0 0 12px #000; }
 
 .links_list_text {
   margin-right: 1%; }
@@ -2167,7 +1965,7 @@ header nav input {
   padding-left: 2px;
   font-size: 10pt;
   font-weight: 100;
-  color: white;
+  color: #fff;
   text-align: left; }
 
 .pub_td,
@@ -2176,7 +1974,7 @@ header nav input {
   padding-left: 2px;
   font-size: 10pt;
   font-weight: 100;
-  color: white;
+  color: #fff;
   text-align: left; }
 
 .info_td,
@@ -2185,7 +1983,7 @@ header nav input {
   padding-left: 2px;
   font-size: 10pt;
   font-weight: 100;
-  color: white;
+  color: #fff;
   text-align: left; }
 
 #game_list_table {
@@ -2285,7 +2083,7 @@ header nav input {
   margin-left: auto;
   text-align: left;
   background-color: #00d3d3;
-  border: solid 1px black;
+  border: solid 1px #000;
   border-spacing: 0; }
 
 .gc_table_list tr:nth-child(even) {
@@ -2297,7 +2095,7 @@ header nav input {
 .gc_table_list td {
   padding: 5px;
   margin: 0;
-  border-bottom: solid 1px black; }
+  border-bottom: solid 1px #000; }
 
 .gc_left_head {
   width: 20%;
@@ -2357,7 +2155,7 @@ header nav input {
   padding-left: 2px;
   font-size: 10pt;
   font-weight: 100;
-  color: white; }
+  color: #fff; }
 
 .username_gr_td,
 .gamepub_gr_td,
@@ -2366,14 +2164,14 @@ header nav input {
   padding-left: 2px;
   font-size: 10pt;
   font-weight: 100;
-  color: white; }
+  color: #fff; }
 
 .nrreviews_gr_td {
   width: 5%;
   padding-left: 2px;
   font-size: 10pt;
   font-weight: 100;
-  color: white; }
+  color: #fff; }
 
 #game_review_textfield {
   width: 99%;
@@ -2434,28 +2232,28 @@ header nav input {
   padding-left: 2px;
   font-size: 10pt;
   font-weight: 100;
-  color: white; }
+  color: #fff; }
 
 .pub_gm_td {
   width: 25%;
   padding-left: 2px;
   font-size: 10pt;
   font-weight: 100;
-  color: white; }
+  color: #fff; }
 
 .year_gm_td {
   width: 15%;
   padding-left: 2px;
   font-size: 10pt;
   font-weight: 100;
-  color: white; }
+  color: #fff; }
 
 .zaks_gm_td {
   width: 10%;
   padding-left: 2px;
   font-size: 10pt;
   font-weight: 100;
-  color: white; }
+  color: #fff; }
 
 .news_images_container {
   display: table;
@@ -2556,7 +2354,7 @@ header nav input {
   padding-left: 2px;
   font-size: 10pt;
   font-weight: 100;
-  color: white; }
+  color: #fff; }
 
 .log_user_td,
 .log_name_td, log_subname_td {
@@ -2564,7 +2362,7 @@ header nav input {
   padding-left: 2px;
   font-size: 10pt;
   font-weight: 100;
-  color: white; }
+  color: #fff; }
 
 .log_subname_td {
   padding-right: 5px;
@@ -2592,7 +2390,7 @@ header nav input {
   padding-left: 2px;
   font-size: 10pt;
   font-weight: 100;
-  color: white; }
+  color: #fff; }
 
 .menu_crew_td,
 .menu_individual_td {
@@ -2600,7 +2398,7 @@ header nav input {
   padding-left: 2px;
   font-size: 10pt;
   font-weight: 100;
-  color: white; }
+  color: #fff; }
 
 .nr_menus_td,
 .menu_type_td {
@@ -2608,11 +2406,11 @@ header nav input {
   padding-left: 2px;
   font-size: 10pt;
   font-weight: 100;
-  color: white; }
+  color: #fff; }
 
 .help_text {
   font-size: 12pt;
-  color: black;
+  color: #000;
   text-align: left;
   border: 0; }
 
@@ -2636,14 +2434,14 @@ header nav input {
   padding-left: 2px;
   font-size: 10pt;
   font-weight: 100;
-  color: white; }
+  color: #fff; }
 
 .menu_list_ind_td {
   width: 20%;
   padding-left: 2px;
   font-size: 10pt;
   font-weight: 100;
-  color: white;
+  color: #fff;
   text-align: left; }
 
 .menu_state_td {
@@ -2651,7 +2449,7 @@ header nav input {
   padding-right: 5px;
   font-size: 10pt;
   font-weight: 100;
-  color: white;
+  color: #fff;
   text-align: right; }
 
 #menu_cred_th,
@@ -2673,7 +2471,7 @@ header nav input {
   padding-right: 5px;
   font-size: 10pt;
   font-weight: 100;
-  color: white;
+  color: #fff;
   text-align: left; }
 
 .menu_nick_td {
@@ -2681,7 +2479,7 @@ header nav input {
   padding-right: 5px;
   font-size: 10pt;
   font-weight: 100;
-  color: white;
+  color: #fff;
   text-align: left; }
 
 .menu_update_td, menu_delete_td {
@@ -2689,7 +2487,7 @@ header nav input {
   padding-right: 5px;
   font-size: 10pt;
   font-weight: 100;
-  color: white;
+  color: #fff;
   text-align: left; }
 
 #menu_mark_th,
@@ -2717,7 +2515,7 @@ header nav input {
   padding-right: 5px;
   font-size: 10pt;
   font-weight: 100;
-  color: white;
+  color: #fff;
   text-align: left; }
 
 .menu_gamename_td {
@@ -2725,7 +2523,7 @@ header nav input {
   padding-right: 5px;
   font-size: 10pt;
   font-weight: 100;
-  color: white;
+  color: #fff;
   text-align: left; }
 
 .menu_gamedev_td {
@@ -2733,7 +2531,7 @@ header nav input {
   padding-right: 5px;
   font-size: 10pt;
   font-weight: 100;
-  color: white;
+  color: #fff;
   text-align: left; }
 
 .menu_gameyear_td {
@@ -2741,7 +2539,7 @@ header nav input {
   padding-right: 5px;
   font-size: 10pt;
   font-weight: 100;
-  color: white;
+  color: #fff;
   text-align: left; }
 
 #menu_list_table {
@@ -2777,7 +2575,7 @@ header nav input {
   padding-right: 5px;
   font-size: 10pt;
   font-weight: 100;
-  color: white;
+  color: #fff;
   text-align: left; }
 
 .menu_doctype_td, .menu_docinfo_td {

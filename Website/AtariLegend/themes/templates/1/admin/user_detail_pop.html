@@ -47,6 +47,10 @@ User detail page. Overhere you can maintain the log on data of a user and have a
                         <div class="user_details_text">User MSNM :</div>
                         <div class="user_details_input"><input type="text" name="user_msnm"  maxlength="255" value="{$users.user_msnm}" class="standard_tile_input_small"></div>
                     </div>
+                    <div class="user_details_row">
+						<div class="user_details_text">Inactive :</div>
+						<div class="user_details_input"><input type="checkbox" name="user_inactive" value="1" maxlength="255" class="quick_search_check" {if $users.inactive == '1'} checked {/if}></div>
+					</div>
                 </div>
                 <div class="user_details_child" id="child_2">
                     <div class="user_details_row">

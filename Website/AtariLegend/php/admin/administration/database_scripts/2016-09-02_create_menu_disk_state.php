@@ -18,7 +18,7 @@ $database_update_id = 8;
 $update_description = "Create the menu_disk_state table";
 
 // Should the database change query execute if test is "test_fail" or "test_success"
-$execute_condition = "test_success";
+$execute_condition = "test_fail";
 
 //This is the test query, the query should be made to get an either true or false result.
 $test_condition = "SELECT * FROM information_schema.tables

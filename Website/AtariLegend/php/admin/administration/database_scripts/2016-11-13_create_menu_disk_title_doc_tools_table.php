@@ -12,20 +12,20 @@
 ***************************************************************************/
 
 // Unique identifier set by developer.
-$database_update_id = 62;
+$database_update_id = 64;
 
 // Description of what the change will do.
 $update_description = "Create menu_disk_title_doc_tools table";
 
 // Should the database change query execute if test is "test_fail" or "test_success"
-$execute_condition = "test_success";
+$execute_condition = "test_fail";
 
 //This is the test query, the query should be made to get an either true or false result.
 $test_condition = "SELECT * FROM information_schema.tables
 WHERE table_schema = '$db_databasename' AND table_name = 'menu_disk_title_doc_tools' LIMIT 1";
 
 // Database change
-$database_update_sql = "DROP TABLE IF EXISTS `menu_disk_title_doc_tools`; CREATE TABLE IF NOT EXISTS `menu_disk_title_doc_tools` (
+$database_update_sql = "CREATE TABLE IF NOT EXISTS `menu_disk_title_doc_tools` (
   `menu_disk_title_doc_id` int(11) NOT NULL AUTO_INCREMENT,
   `menu_disk_title_id` int(11) DEFAULT NULL,
   `doc_tools_id` int(11) DEFAULT NULL,

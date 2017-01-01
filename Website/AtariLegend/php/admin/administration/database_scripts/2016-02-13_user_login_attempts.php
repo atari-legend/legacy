@@ -27,14 +27,14 @@ $test_condition = "SELECT * FROM information_schema.tables
 WHERE table_schema = '$db_databasename' AND table_name = 'users_login_attempts' LIMIT 1";
 
 // Database change
-$database_update_sql = "CREATE TABLE `users_login_attempts`
+$database_update_sql = "CREATE TABLE IF NOT EXISTS `users_login_attempts` (
     `user_id` INT(11) NOT NULL,
-    `time` VARCHAR(30) NOT NULL";
+    `time` VARCHAR(30) NOT NULL)";
 
 // If the update should auto execute without user interaction set to "yes".
-$database_autoexecute = "no";
+$database_autoexecute = "yes";
 
 // This var should almost allways be set to "no", it is only used for certain corner cases where
 // the database change has already been done in some other way and we only want to update the
 // change database.
-$force_insert = "yes";
+$force_insert = "yes ";
