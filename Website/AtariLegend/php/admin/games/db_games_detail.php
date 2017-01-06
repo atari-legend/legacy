@@ -1,16 +1,17 @@
 <?php
 /***************************************************************************
- *                                games_detail.php
+ *                                db_games_detail.php
  *                            ------------------------
  *   begin                : Tuesday, September 6, 2005
  *   copyright            : (C) 2005 Atari Legend
  *   email                : admin@atarilegend.com
  *   actual update        : Creation of file
  *
- *   Id: games_detail.php,v 0.10 2005/10/06 17:41 Zombieman
- *   Id: games_detail.php,v 0.20 2015/11/06 22:16 Zombieman
- *   Id: games_detail.php,v 0.30 2015/12/27 22:16 Zombieman - added messages
- *   Id: games_detail.php,v 0.40 2016/08/19 STG - added change log
+ *   Id: db_games_detail.php,v 0.10 2005/10/06 17:41 Zombieman
+ *   Id: db_games_detail.php,v 0.20 2015/11/06 22:16 Zombieman
+ *   Id: db_games_detail.php,v 0.30 2015/12/27 22:16 Zombieman - added messages
+ *   Id: db_games_detail.php,v 0.40 2016/08/19 STG - added change log
+ *   Id: db_games_detail.php,v 0.41 2017/01/06 STG - added falcon vga and rgb option
  *
  ***************************************************************************/
 
@@ -272,6 +273,24 @@ if (isset($action) and $action == 'modify_game') {
     if (isset($falcon_enhanced)) {
         $sdbquery = $mysqli->query("INSERT INTO game_falcon_enhan (game_id,falcon_enhanced) VALUES ('$game_id','$falcon_enhanced')");
     }
+    
+    // Update the FALCON RGB tick box info
+    // Start off by deleting previos value
+    $sdbquery = $mysqli->query("DELETE FROM game_falcon_rgb WHERE game_id='$game_id'");
+
+    // then insert the new value if it has been passed.
+    if (isset($falcon_rgb)) {
+        $sdbquery = $mysqli->query("INSERT INTO game_falcon_rgb (game_id,falcon_rgb) VALUES ('$game_id','$falcon_rgb')");
+    }
+    
+    // Update the FALCON VGA tick box info
+    // Start off by deleting previos value
+    $sdbquery = $mysqli->query("DELETE FROM game_falcon_vga WHERE game_id='$game_id'");
+
+    // then insert the new value if it has been passed.
+    if (isset($falcon_vga)) {
+        $sdbquery = $mysqli->query("INSERT INTO game_falcon_vga (game_id,falcon_vga) VALUES ('$game_id','$falcon_vga')");
+    }
 
     // Update the GAME UNFINISHED tick box info
     // Start off by deleting previos value
@@ -411,6 +430,8 @@ if (isset($action) and $action == 'delete_game') {
                                         $sdbquery = $mysqli->query("DELETE FROM game_unfinished WHERE game_id='$game_id'");
                                         $sdbquery = $mysqli->query("DELETE FROM game_falcon_enhan WHERE game_id='$game_id'");
                                         $sdbquery = $mysqli->query("DELETE FROM game_falcon_only WHERE game_id='$game_id'");
+                                        $sdbquery = $mysqli->query("DELETE FROM game_falcon_rgb WHERE game_id='$game_id'");
+                                        $sdbquery = $mysqli->query("DELETE FROM game_falcon_vga WHERE game_id='$game_id'");
                                         $sdbquery = $mysqli->query("DELETE FROM game_ste_enhan WHERE game_id='$game_id'");
                                         $sdbquery = $mysqli->query("DELETE FROM game_ste_only WHERE game_id='$game_id'");
                                         $sdbquery = $mysqli->query("DELETE FROM game_aka WHERE game_id='$game_id'");

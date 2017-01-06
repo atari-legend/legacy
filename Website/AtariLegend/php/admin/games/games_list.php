@@ -1,14 +1,15 @@
 <?php
 /***************************************************************************
- *                                games_main.php
+ *                                games_list.php
  *                            --------------------------
  *   begin                : Sunday, August 28, 2005
  *   copyright            : (C) 2005 Atari Legend
  *   email                : admin@atarilegend.com
  *
- *   Id: games_main.php,v 0.10 2005/08/28 17:30 Gatekeeper
- *   Id: games_main.php,v 0.20 2015/10/31 10:13 Gatekeeper
- *   Id: games_main.php,v 0.30 2015/12/30 21:47 Gatekeeper - remove message var
+ *   Id: games_list.php,v 0.10 2005/08/28 17:30 Gatekeeper
+ *   Id: games_list.php,v 0.20 2015/10/31 10:13 Gatekeeper
+ *   Id: games_list.php,v 0.30 2015/12/30 21:47 Gatekeeper - remove message var
+ *   Id: games_list.php,v 0.31 2017/01/06 17:37 Gatekeeper - Falcon vga & rgb
  *
  ***************************************************************************/
 
@@ -36,6 +37,8 @@ $RESULTGAME = "SELECT game.game_id,
         game_download.game_download_id,
         game_falcon_only.falcon_only,
         game_falcon_enhan.falcon_enhanced,
+        game_falcon_rgb.falcon_rgb,
+        game_falcon_vga.falcon_vga,
         game_ste_enhan.ste_enhanced,
         game_ste_only.ste_only,
         pd1.pub_dev_name as 'publisher_name',
@@ -50,6 +53,8 @@ $RESULTGAME = "SELECT game.game_id,
         LEFT JOIN game_download ON (game_download.game_id = game.game_id)
         LEFT JOIN game_falcon_only ON (game_falcon_only.game_id = game.game_id)
         LEFT JOIN game_falcon_enhan ON (game.game_id = game_falcon_enhan.game_id)
+        LEFT JOIN game_falcon_rgb ON (game_falcon_rgb.game_id = game.game_id)
+        LEFT JOIN game_falcon_vga ON (game.game_id = game_falcon_vga.game_id)
         LEFT JOIN game_ste_enhan ON (game.game_id = game_ste_enhan.game_id)
         LEFT JOIN game_ste_only ON (game.game_id = game_ste_only.game_id)
         LEFT JOIN game_free ON (game.game_id = game_free.game_id)
@@ -78,6 +83,8 @@ $RESULTAKA = "SELECT
          game_download.game_download_id,
          game_falcon_only.falcon_only,
          game_falcon_enhan.falcon_enhanced,
+         game_falcon_rgb.falcon_rgb,
+         game_falcon_vga.falcon_vga,
          game_ste_enhan.ste_enhanced,
          game_ste_only.ste_only,
          pd1.pub_dev_name as 'publisher_name',
@@ -93,6 +100,8 @@ $RESULTAKA = "SELECT
       LEFT JOIN game_download ON (game_download.game_id = game.game_id)
       LEFT JOIN game_falcon_only ON (game_falcon_only.game_id = game.game_id)
       LEFT JOIN game_falcon_enhan ON (game.game_id = game_falcon_enhan.game_id)
+      LEFT JOIN game_falcon_rgb ON (game_falcon_rgb.game_id = game.game_id)
+      LEFT JOIN game_falcon_vga ON (game.game_id = game_falcon_vga.game_id)
       LEFT JOIN game_ste_enhan ON (game.game_id = game_ste_enhan.game_id)
       LEFT JOIN game_ste_only ON (game.game_id = game_ste_only.game_id)
       LEFT JOIN game_free ON (game.game_id = game_free.game_id)
@@ -177,6 +186,16 @@ if (isset($action) and $action == "search") {
         $falcon_enhanced_select = " AND game_falcon_enhan.falcon_enhanced =$falcon_enhanced";
         $smarty->assign('games_falcon_enhanced', '1');
     }
+    
+    if (isset($falcon_rgb) and $falcon_rgb == "1") {
+        $falcon_rgb_select = " AND game_falcon_rgb.falcon_rgb =$falcon_rgb";
+        $smarty->assign('games_falcon_rgb', '1');
+    }
+
+    if (isset($falcon_vga) and $falcon_vga == "1") {
+        $falcon_vga_select = " AND game_falcon_vga.falcon_vga =$falcon_vga";
+        $smarty->assign('games_falcon_vga', '1');
+    }
 
     if (isset($ste_only) and $ste_only == "1") {
         $ste_only_select = " AND game_ste_only.ste_only =$ste_only";
@@ -235,7 +254,7 @@ if (isset($action) and $action == "search") {
     //Before we start the build the query, we check if there is at least
     //one search field filled in or used!
 
-    if ($publisher_select == "" and $gamebrowse_select == "" and $gamesearch == "" and $developer_select == "" and empty($year_select) and empty($falcon_only_select) and empty($falcon_enhanced_select) and empty($ste_only_select) and empty($ste_enhanced_select) and empty($unreleased_select) and empty($development_select) and empty($arcade_select) and empty($wanted_select) and empty($monochrome_select) and empty($stos_select) and empty($unfinished_select) and empty($seuck_select) and empty($stac_select)) {
+    if ($publisher_select == "" and $gamebrowse_select == "" and $gamesearch == "" and $developer_select == "" and empty($year_select) and empty($falcon_only_select) and empty($falcon_enhanced_select) and empty($falcon_rgb_select) and empty($falcon_vga_select) and empty($ste_only_select) and empty($ste_enhanced_select) and empty($unreleased_select) and empty($development_select) and empty($arcade_select) and empty($wanted_select) and empty($monochrome_select) and empty($stos_select) and empty($unfinished_select) and empty($seuck_select) and empty($stac_select)) {
         $edit_message             = "Please fill in one of the fields";
         $_SESSION['edit_message'] = $edit_message;
 
@@ -265,6 +284,12 @@ if (isset($action) and $action == "search") {
         }
         if (isset($falcon_enhanced) and $falcon_enhanced == "1") {
             $RESULTGAME .= $falcon_enhanced_select;
+        }
+        if (isset($falcon_rgb) and $falcon_rgb == "1") {
+            $RESULTGAME .= $falcon_rgb_select;
+        }
+        if (isset($falcon_vga) and $falcon_vga == "1") {
+            $RESULTGAME .= $falcon_vga_select;
         }
         if (isset($ste_only) and $ste_only == "1") {
             $RESULTGAME .= $ste_only_select;
@@ -333,6 +358,12 @@ if (isset($action) and $action == "search") {
                 }
                 if (isset($falcon_enhanced) and $falcon_enhanced == "1") {
                     $RESULTAKA .= $falcon_enhanced_select;
+                }
+                if (isset($falcon_rgb) and $falcon_rgb == "1") {
+                    $RESULTAKA .= $falcon_rgb_select;
+                }
+                if (isset($falcon_vga) and $falcon_vga == "1") {
+                    $RESULTAKA .= $falcon_vga_select;
                 }
                 if (isset($ste_only) and $ste_only == "1") {
                     $RESULTAKA .= $ste_only_select;
@@ -423,6 +454,8 @@ if (isset($action) and $action == "search") {
                         'screenshot' => $sql_game_search['screenshot_id'],
                         'falcon_only' => $sql_game_search['falcon_only'],
                         'falcon_enhan' => $sql_game_search['falcon_enhanced'],
+                        'falcon_rgb' => $sql_game_search['falcon_rgb'],
+                        'falcon_vga' => $sql_game_search['falcon_vga'],
                         'ste_enhanced' => $sql_game_search['ste_enhanced'],
                         'ste_only' => $sql_game_search['ste_only']
                     ));
