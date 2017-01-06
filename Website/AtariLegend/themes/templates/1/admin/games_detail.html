@@ -10,6 +10,7 @@
  *   Id: games_detail.html,v 0.10 2005/10/11 15:03 Zombieman
  *   Id: games_detail.html,v 0.20 2015/11/02 21:26 STG
  *   Id: games_detail.html,v 0.30 2015/12/27 21:26 STG - 1920 width/HTML Valid/Messages -- NO FLEXBOX
+ *   Id: games_detail.html,v 0.31 2017/01/06 STG - added falcon vga and rgb option
  *
  ***************************************************************************/
 
@@ -185,6 +186,14 @@ function browseDeveloper(str) {
 				<div class="gd_basic_game_info_row">
 					<div class="gd_basic_game_info_row_check"><input type="checkbox" name="falcon_enhanced" value="1"{if $game_info.game_falcon_enhan == 1} checked{/if}/></div>
 					<div class="gd_basic_game_info_row_checktxt">Falcon Enhanced&nbsp;</div>
+				</div>
+                <div class="gd_basic_game_info_row">
+					<div class="gd_basic_game_info_row_check"><input type="checkbox" name="falcon_rgb" value="1"{if $game_info.game_falcon_rgb == 1} checked{/if}/></div>
+					<div class="gd_basic_game_info_row_checktxt">Falcon RGB&nbsp;</div>
+				</div>
+                <div class="gd_basic_game_info_row">
+					<div class="gd_basic_game_info_row_check"><input type="checkbox" name="falcon_vga" value="1"{if $game_info.game_falcon_vga == 1} checked{/if}/></div>
+					<div class="gd_basic_game_info_row_checktxt">Falcon VGA&nbsp;</div>
 				</div>
 				<div class="gd_basic_game_info_row">
 					<div class="gd_basic_game_info_row_check"><input type="checkbox" name="unfinished" value="1"{if $game_info.game_unfinished == 1} checked{/if}/></div>
