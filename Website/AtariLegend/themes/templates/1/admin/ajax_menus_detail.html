@@ -34,6 +34,7 @@
 						<b>Add doc</b> : Are we dealing with a doc disk? Or does this menu disk contain docs? Add them using this link. All games and tools in the AL DB can be turned into a doc using this option.<br><br>
 						<b>Add screenshot</b> : Add screenshots to the menu disk entry<br><br>
 						<b>Add file</b> : Add the actual menudisk file (for download) to this menu disk entry<br><br>
+                        <b>Release Year</b> : If it says 'not set', this means this menudisk is not yet linked to a release year!<br><br>
 						</p>
 					</div>
 					<br>
@@ -69,6 +70,8 @@
 							<div class="main_company_child" id="child_add_company">
 								<b>Release Year:</b><br>
 								{html_select_date start_year="1984" end_year="+1" display_days=false display_months=false prefix="" field_name="" style="width:100px;height:25px;" name="year_id" time="{$menus.menu_year}-01-01" onchange="ChangeYear(this.value,$menu_disk_id)"}
+                                <br><img src="../../../themes/templates/1/includes/img/arrow_ltr.gif" alt="" width="38" height="22" style="display:inline;">		
+                                <h3 style="text-align:center;display:inline;">{if (isset($menus.menu_year))} {$menus.menu_year} set {else} Not set{/if}</h3>
 								<br>
 								<br>
 								<div id="menu_detail_expand"></div>
@@ -235,7 +238,7 @@
 							{/foreach}
 							<tr class="table_game_list">
 								<td class="game_list_footer" colspan="4">
-									<img src="../../../themes/templates/1/includes/img/arrow_ltr.gif" alt="" width="38" height="22">		
+									<img src="../../../themes/templates/1/includes/img/arrow_ltr.gif" alt="" width="38" height="22" style="display:inline;">		
 									<input type="hidden" name="action" value="delete_from_menu_disk">
 									<input type="button" value="Delete" class="quick_search_games_button" style="display:inline;">
 									<div class="help-tip" style="margin-bottom:2px;">
@@ -404,7 +407,7 @@
 		{/foreach}
 		<tr>
 			<td class="game_list_footer" colspan="6">
-				<img src="../../../themes/templates/1/includes/img/arrow_ltr.gif" alt="" width="38" height="22">	
+				<img src="../../../themes/templates/1/includes/img/arrow_ltr.gif" alt="" width="38" height="22" style="display:inline;">	
 				<input type="hidden" name="action" value="delete_from_menu_disk">
 				<input type="button" value="Delete" class="quick_search_games_button" style="display:inline;">
 				<div class="help-tip" style="margin-bottom:2px;">
@@ -467,7 +470,7 @@
 		{/foreach}
 		<tr class="table_game_list">
 			<td class="game_list_footer" colspan="4">
-				<img src="../../../themes/templates/1/includes/img/arrow_ltr.gif" alt="" width="38" height="22">		
+				<img src="../../../themes/templates/1/includes/img/arrow_ltr.gif" alt="" width="38" height="22"  style="display:inline;">		
 				<input type="hidden" name="action" value="delete_from_menu_disk">
 				<input type="button" value="Delete" class="quick_search_games_button" style="display:inline;">
 				<div class="help-tip" style="margin-bottom:2px;">
@@ -645,7 +648,7 @@
 		{/foreach}
 		<tr>
 			<td class="game_list_footer" colspan="6">
-				<img src="../../../themes/templates/1/includes/img/arrow_ltr.gif" alt="" width="38" height="22">	
+				<img src="../../../themes/templates/1/includes/img/arrow_ltr.gif" alt="" width="38" height="22"  style="display:inline;">	
 				<input type="hidden" name="action" value="delete_from_menu_disk">
 				<input type="button" value="Delete" class="quick_search_games_button" style="display:inline;">
 				<div class="help-tip" style="margin-bottom:2px;">
