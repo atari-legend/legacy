@@ -322,16 +322,17 @@
 	<br>
 	<form action="" method="post" id="menu_credits_form">
 		<b>Add intro credits:</b><br>
-		<Select class="saveHistory" id="m1" name="m1" onchange="browseInd(this.value)" style="width:50px;height:25px;">
+		<Select class="saveHistory" id="m1" name="m1" onchange="browseInd(this.value)" style="width:70px;height:25px;display:inline;">
 			{html_options values=$az_value output=$az_output}
 		</select>
-		<div id="ind_member">   
+		<div id="ind_member" style="display:inline;">   
 			<select id="ind_id" name="ind_id">
 				{foreach from=$ind item=line}
 					<option value="{$line.ind_id}">{$line.ind_name}</option>
 				{/foreach}	
 			</select>
-		</div>	
+		</div>
+        <br>
 		<input type="text" onkeyup="searchInd(this.value)" class="standard_tile_input_small" value="search">
 		<select id="author_type_id" name="author_type_id" size="1" style="margin:5px;margin-top:0px;width:200px;">
 		<option value="">-</option>	
