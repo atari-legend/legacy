@@ -1377,6 +1377,7 @@ function ChangeParent(parent_id,menu_disk_id) {
         Set Crew for menu set:<br>
         <form action="../menus/db_menu_disk.php" method="post" name="post_menu_crew_set" id="menu_crew_set">
             <select name="crew_browse" size="1" id="quick_search_small_select" onchange="browseCrew(this.value)">
+                <option value="" SELECTED>-</option>
                 {html_options values=$az_value output=$az_output}
             </select>
             {* Ajax *}
@@ -1413,6 +1414,7 @@ function ChangeParent(parent_id,menu_disk_id) {
         Set individual for menu set:<br>
         <form action="../menus/db_menu_disk.php" method="post" name="post_menu_ind_set" id="menu_ind_set">
             <select name="ind_browse" size="1" id="quick_search_small_select" onchange="browseIndividual(this.value)">
+                <option value="" SELECTED>-</option>
                 {html_options values=$az_value output=$az_output}
             </select>
             {* Ajax *}
