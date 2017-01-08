@@ -78,10 +78,11 @@
 							</div>
 						</div>
 					</div>
-					<br>
-					<br>	
+					
 					<div id="menu_credit_list">	
 						{if isset($individuals)}
+                            <br>
+                            <br>	
 							<table class="table_game_list" id="game_list_table" style="width:95%;border: solid 1px black;margin:auto;">
 							<tr>
 								<th id="menu_cred_th">Credits</th>
@@ -117,10 +118,10 @@
 							</table>
 						{/if}
 					</div>			
-					<br>
-					<br>
 					<div id="menu_software_list">
-						{if isset($game)}			
+						{if isset($game)}
+                            <br>
+                            <br>
 							<table class="table_game_list" style="width:95%;border: solid 1px black;margin:auto;">
 							<tr>
 								<th id="menu_mark_th"></th>
@@ -197,6 +198,7 @@
 					<div id="menu_detail_expand_games"></div>
 					<div id="menu_doc_list">
 						{if isset($doc_game)}
+                            <br>
 							<table class="table_game_list" style="width:95%;border: solid 1px black;margin:auto;">
 							<tr>
 								<th id="menu_mark_th"></th>
@@ -351,6 +353,8 @@
 
 {if isset($smarty_action) and $smarty_action == "add_game_to_menu_return"}
 	{if isset($game)}
+        <br>
+        <br>
 		<table class="table_game_list" style="width:95%;border: solid 1px black;margin:auto;">
 		<tr>
 			<th id="menu_mark_th"></th>
@@ -430,6 +434,7 @@
 
 {if isset($smarty_action) and $smarty_action == "add_doc_to_menu_return"}
 	{if isset($doc_game)}		
+        <br>
 		<table class="table_game_list" style="width:95%;border: solid 1px black;margin:auto;">
 		<tr>
 			<th id="menu_mark_th"></th>
@@ -551,6 +556,8 @@
 
 				
 {if isset($smarty_action) and $smarty_action == "update_menu_disk_credits"}
+    <br>
+    <br>
 	<table class="table_game_list" style="width:95%;border: solid 1px black;margin:auto;">
 		<tr>
 			<th id="menu_cred_th">Credits</th>
