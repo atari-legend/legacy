@@ -20,7 +20,8 @@
 			<legend>Search</legend>
 				By name : 
 				<select name="gamebrowse" onchange="browseGame(this.value,{$menu_disk_id})" id="quick_search_small_select">
-				{html_options values=$az_value output=$az_output selected=$mySelect}
+                    <option value="" SELECTED>-</option>
+                    {html_options values=$az_value output=$az_output}
 				</select>
 				<input type="text" name="gamesearch" onkeyup="searchGame(this.value,{$menu_disk_id})" class="standard_tile_input_small">
 				<br/>

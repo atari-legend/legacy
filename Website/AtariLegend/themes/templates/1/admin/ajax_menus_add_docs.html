@@ -20,7 +20,8 @@
 			<legend>Search (to add a doc)</legend>
 				By name : 
 				<select name="gamebrowse" onchange="browseDoc(this.value,{$menu_disk_id})" id="quick_search_small_select">
-				{html_options values=$az_value output=$az_output selected=$mySelect}
+                    <option value="" SELECTED>-</option>
+                    {html_options values=$az_value output=$az_output}
 				</select>
 				<input type="text" name="gamesearch" onkeyup="searchDoc(this.value,{$menu_disk_id})" class="standard_tile_input_small">
 				<br/>
