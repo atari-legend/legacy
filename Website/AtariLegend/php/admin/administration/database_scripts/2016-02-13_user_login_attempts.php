@@ -37,4 +37,4 @@ $database_autoexecute = "yes";
 // This var should almost allways be set to "no", it is only used for certain corner cases where
 // the database change has already been done in some other way and we only want to update the
 // change database.
-$force_insert = "yes ";
+$force_insert = "no";
