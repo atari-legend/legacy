@@ -17,7 +17,7 @@
 $database_update_id = 33;
 
 // Description of what the change will do.
-$update_description = "Change field website_user_sub to user_id in website - part of go live script - test fail possible";
+$update_description = "Change field website_user_sub to user_id in website";
 
 // Should the database change query execute if test is "test_fail" or "test_success"
 $execute_condition = "test_success";
