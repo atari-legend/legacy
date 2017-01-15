@@ -26,10 +26,10 @@ WHERE table_schema = '$db_databasename' AND table_name = 'game_falcon_vga' LIMIT
 
 // Database change
 $database_update_sql = "CREATE TABLE IF NOT EXISTS `game_falcon_vga` (
-  `game_id` int(11) NOT NULL AUTO_INCREMENT,
+  `game_id` int(11) NOT NULL,
   `falcon_vga` int(1) NOT NULL,
   PRIMARY KEY (`game_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;";
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;";
 
 // If the update should auto execute without user interaction set to "yes".
 $database_autoexecute = "yes";
