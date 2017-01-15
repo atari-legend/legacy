@@ -23,6 +23,7 @@ include("../../includes/user_functions.php");
 include("../../includes/functions.php");
 include("../../includes/karma.php");
 
+if (file_exists("../../config/database_upgrade.php")==true) { exit("Upgrade mode");}
 
 //Check if the user is logged on to the site
 sec_session_start();
