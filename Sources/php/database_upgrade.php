@@ -12,6 +12,8 @@
 
  // This file should when used be placed in the php/config/ directory.
  // When not used we keep a copy in the /Sources/php/ folder
+ // This file is used when going live. it will close down the site. It needs to be ran 
+ // from the config folder. It will create all the necessary changes and run all the db scripts.
 
 include("connect.php");
 
