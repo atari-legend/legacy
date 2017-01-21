@@ -964,7 +964,7 @@ if (isset($action) and $action == "delete_download_from_menu_disk") {
 // We wanna add a new download to a menu
 //****************************************************************************************
 if (isset($action) and $action == 'add_file') {
-    require_once('../../includes/pclzip.lib.php');
+    require_once('../vendor/pclzip/pclzip/pclzip.lib.php');
 
     $menu_download_name = $_FILES['menu_download_name'];
 
