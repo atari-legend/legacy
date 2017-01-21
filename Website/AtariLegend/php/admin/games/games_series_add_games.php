@@ -23,7 +23,7 @@ include("../../config/common.php");
 include("../../config/admin.php");
 
 //load the search fields of the quick search side menu
-include("../../includes/quick_search_games.php");
+include("../../admin/games/quick_search_games.php");
 
 // SERIES LIST DROPDOWN
 $sql_series = $mysqli->query("SELECT * FROM game_series ORDER BY game_series_name ASC") or die("Couldn't query Game Series Database1");

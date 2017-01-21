@@ -21,7 +21,7 @@
 
 //load all common functions
 include("../../config/common.php");
-include("../../includes/quick_search_games.php");
+include("../../admin/games/quick_search_games.php");
 include("../../config/admin.php");
 
 date_default_timezone_set('UTC');

@@ -2,7 +2,7 @@
 /Website/AtariLegend/data/
 
 # exclude everything except directory templates_c
-/Website/AtariLegend/php/includes/smarty/templates_c/
+/Website/AtariLegend/php/temp/smarty/templates_c/
 
 # exclude the connect.php file
 /Website/AtariLegend/php/config/connect.php
@@ -24,4 +24,4 @@ scss-lint-report.xml
 /Website/AtariLegend/themes/styles/3/css/style.css.map
 style.css
 style.css.map
-connect.php
+composer.phar
