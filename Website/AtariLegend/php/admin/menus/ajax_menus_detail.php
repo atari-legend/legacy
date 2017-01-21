@@ -206,9 +206,9 @@ if (isset($action) and $action == "edit_disk_box" and $menu_disk_id !== '') {
                                          WHERE menu_disk_title.menu_disk_id = '$menu_disk_id' AND menu_disk_title.menu_types_main_id = '6' ORDER BY tools.tools_name ASC";
 
     $temp_query2 = $mysqli->query("CREATE TEMPORARY TABLE temp2 ENGINE=MEMORY $sql_doc_games") or die('Error: ' . mysqli_error($mysqli));
-    $temp_query2 = $mysqli->query("INSERT INTO temp2 $sql_doc_tools") or die(mysqli_error());
+    $temp_query2 = $mysqli->query("INSERT INTO temp2 $sql_doc_tools") or die('Error: ' . mysqli_error($mysqli));
 
-    $temp_query2 = $mysqli->query("SELECT * FROM temp2 GROUP BY menu_disk_title_id ORDER BY software_name ASC") or die("does not compute4");
+    $temp_query2 = $mysqli->query("SELECT * FROM temp2 GROUP BY menu_disk_title_id ORDER BY software_name ASC") or die('Error: ' . mysqli_error($mysqli));
 
     while ($query = $temp_query2->fetch_array(MYSQLI_BOTH)) {
         // This smarty is used for creating the list of games
@@ -227,7 +227,7 @@ if (isset($action) and $action == "edit_disk_box" and $menu_disk_id !== '') {
 
     //get the doc types
     $sql_doc_type = "SELECT * from doc_type";
-    $query_doc_type = $mysqli->query($sql_doc_type) or die("error in the doc_type query");
+    $query_doc_type = $mysqli->query($sql_doc_type) or die('Error: ' . mysqli_error($mysqli));
 
     while ($query_type = $query_doc_type->fetch_array(MYSQLI_BOTH)) {
         $smarty->append('doc_type', array(
@@ -263,7 +263,7 @@ if (isset($action) and $action == "edit_disk_box" and $menu_disk_id !== '') {
                                         LEFT JOIN individual_nicks ON (individuals.ind_id = individual_nicks.ind_id)
                                         WHERE individuals.ind_id = '$query[ind_id]'";
 
-            $query_ind_nick = $mysqli->query($sql_ind_nick) or die("error in the nickname query");
+            $query_ind_nick = $mysqli->query($sql_ind_nick) or die('Error: ' . mysqli_error($mysqli));
 
             while ($query_nick = $query_ind_nick->fetch_array(MYSQLI_BOTH)) {
                 $smarty->append('ind_nick', array(
@@ -307,7 +307,7 @@ if (isset($action) and $action == "edit_disk_box" and $menu_disk_id !== '') {
                                 FROM menu_disk
                                 LEFT JOIN menu_set ON (menu_disk.menu_sets_id = menu_set.menu_sets_id)";
 
-    $result_parent = $mysqli->query($sql_parent) or die("problem with parent query");
+    $result_parent = $mysqli->query($sql_parent) or die('Error: ' . mysqli_error($mysqli));
     while ($row = $result_parent->fetch_array(MYSQLI_BOTH)) {
         // Create Menu disk name
         $menu_disk_name = "$row[menu_sets_name] ";
@@ -338,7 +338,7 @@ if (isset($action) and $action == "edit_disk_box" and $menu_disk_id !== '') {
     //Get the screenshots for this menu if they exist
     $sql_screenshots = $mysqli->query("SELECT * FROM screenshot_menu
                                     LEFT JOIN screenshot_main ON (screenshot_menu.screenshot_id = screenshot_main.screenshot_id)
-                                    WHERE screenshot_menu.menu_disk_id = '$menu_disk_id' ORDER BY screenshot_menu.screenshot_id") or die("Database error - selecting screenshots");
+                                    WHERE screenshot_menu.menu_disk_id = '$menu_disk_id' ORDER BY screenshot_menu.screenshot_id") or die('Error: ' . mysqli_error($mysqli));
 
     $count         = 1;
     $v_screenshots = 0;
@@ -367,7 +367,7 @@ if (isset($action) and $action == "edit_disk_box" and $menu_disk_id !== '') {
     //uploaded
     //************************************************************************************************
     //get the existing downloads
-    $SQL_DOWNLOADS = $mysqli->query("SELECT * FROM menu_disk_download WHERE menu_disk_id='$menu_disk_id'") or die("Error getting download info");
+    $SQL_DOWNLOADS = $mysqli->query("SELECT * FROM menu_disk_download WHERE menu_disk_id='$menu_disk_id'") or die('Error: ' . mysqli_error($mysqli));
 
     $nr_downloads = 0;
     while ($downloads = $SQL_DOWNLOADS->fetch_array(MYSQLI_BOTH)) {
@@ -395,7 +395,7 @@ if (isset($action) and $action == "edit_disk_box" and $menu_disk_id !== '') {
                                 LEFT JOIN menu_set ON (menu_disk.menu_sets_id = menu_set.menu_sets_id)
                                 WHERE menu_disk.menu_disk_id = '$menu_disk_id'";
 
-    $result_menus = $mysqli->query($sql_menus) or die("error in query disk name");
+    $result_menus = $mysqli->query($sql_menus) or die('Error: ' . mysqli_error($mysqli));
 
     while ($row = $result_menus->fetch_array(MYSQLI_BOTH)) {
         // Create Menu disk name
@@ -501,10 +501,10 @@ if (isset($action) and $action == "add_intro_credit") {
     $sql_aka         = "SELECT ind_id,nick FROM individual_nicks ORDER BY nick ASC";
 
     //Create a temporary table to build an array with both names and nicknames
-    $mysqli->query("CREATE TEMPORARY TABLE temp ENGINE=MEMORY $sql_individuals") or die("failed to create temporary table");
-    $mysqli->query("INSERT INTO temp $sql_aka") or die("failed to insert akas into temporary table");
+    $mysqli->query("CREATE TEMPORARY TABLE temp ENGINE=MEMORY $sql_individuals") or die('Error: ' . mysqli_error($mysqli));
+    $mysqli->query("INSERT INTO temp $sql_aka") or die('Error: ' . mysqli_error($mysqli));
 
-    $query_temporary = $mysqli->query("SELECT * FROM temp WHERE ind_name LIKE 'a%' ORDER BY ind_name ASC") or die("Failed to query temporary table");
+    $query_temporary = $mysqli->query("SELECT * FROM temp WHERE ind_name LIKE 'a%' ORDER BY ind_name ASC") or die('Error: ' . mysqli_error($mysqli));
     $mysqli->query("DROP TABLE temp");
 
     while ($genealogy_ind = $query_temporary->fetch_array(MYSQLI_BOTH)) {
@@ -517,7 +517,7 @@ if (isset($action) and $action == "add_intro_credit") {
     // Get Author types for
 
     $sql_author_types = "SELECT * FROM author_type ORDER BY author_type_info ASC";
-    $query_author = $mysqli->query($sql_author_types) or die("Failed to query author_type table");
+    $query_author = $mysqli->query($sql_author_types) or die('Error: ' . mysqli_error($mysqli));
 
     while ($author_ind = $query_author->fetch_array(MYSQLI_BOTH)) {
         $smarty->append('author_type', array(
@@ -543,13 +543,13 @@ if (isset($action) and $action == "ind_gen_browse") {
         $sql_aka         = "SELECT ind_id,nick FROM individual_nicks ORDER BY nick ASC";
 
         //Create a temporary table to build an array with both names and nicknames
-        $mysqli->query("CREATE TEMPORARY TABLE temp ENGINE=MEMORY $sql_individuals") or die("failed to create temporary table");
-        $mysqli->query("INSERT INTO temp $sql_aka") or die("failed to insert akas into temporary table");
+        $mysqli->query("CREATE TEMPORARY TABLE temp ENGINE=MEMORY $sql_individuals") or die('Error: ' . mysqli_error($mysqli));
+        $mysqli->query("INSERT INTO temp $sql_aka") or die('Error: ' . mysqli_error($mysqli));
 
         if ($query == "num") {
-            $query_temporary = $mysqli->query("SELECT * FROM temp WHERE ind_name REGEXP '^[0-9].*' ORDER BY ind_name ASC") or die("Failed to query temporary table");
+            $query_temporary = $mysqli->query("SELECT * FROM temp WHERE ind_name REGEXP '^[0-9].*' ORDER BY ind_name ASC") or die('Error: ' . mysqli_error($mysqli));
         } else {
-            $query_temporary = $mysqli->query("SELECT * FROM temp WHERE ind_name LIKE '$query%' ORDER BY ind_name ASC") or die("Failed to query temporary table");
+            $query_temporary = $mysqli->query("SELECT * FROM temp WHERE ind_name LIKE '$query%' ORDER BY ind_name ASC") or die('Error: ' . mysqli_error($mysqli));
         }
         $mysqli->query("DROP TABLE temp");
     }
@@ -568,10 +568,10 @@ if (isset($action) and $action == "ind_gen_search") {
         $sql_aka         = "SELECT ind_id,nick FROM individual_nicks ORDER BY nick ASC";
 
         //Create a temporary table to build an array with both names and nicknames
-        $mysqli->query("CREATE TEMPORARY TABLE temp ENGINE=MEMORY $sql_individuals") or die("failed to create temporary table");
-        $mysqli->query("INSERT INTO temp $sql_aka") or die("failed to insert akas into temporary table");
+        $mysqli->query("CREATE TEMPORARY TABLE temp ENGINE=MEMORY $sql_individuals") or die('Error: ' . mysqli_error($mysqli));
+        $mysqli->query("INSERT INTO temp $sql_aka") or die('Error: ' . mysqli_error($mysqli));
 
-        $query_temporary = $mysqli->query("SELECT * FROM temp WHERE ind_name LIKE '%$query%' ORDER BY ind_name ASC") or die("Failed to query temporary table");
+        $query_temporary = $mysqli->query("SELECT * FROM temp WHERE ind_name LIKE '%$query%' ORDER BY ind_name ASC") or die('Error: ' . mysqli_error($mysqli));
         $mysqli->query("DROP TABLE temp");
     } elseif ($query == "empty") {
         $sql_individuals = "SELECT ind_id,ind_name FROM individuals ORDER BY ind_name ASC";
