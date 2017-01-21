@@ -25,3 +25,4 @@ scss-lint-report.xml
 style.css
 style.css.map
 composer.phar
+composer.json
