@@ -21,7 +21,7 @@ include("../../config/common.php");
 include("../../config/admin.php");
 
 //load the search fields of the quick search side menu
-include("../../includes/quick_search_games.php");
+include("../../admin/games/quick_search_games.php");
 
 foreach (KarmaGood() as $key => $value) {
     $smarty->append('karma_good', array(

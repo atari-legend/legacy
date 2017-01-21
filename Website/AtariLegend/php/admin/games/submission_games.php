@@ -24,7 +24,7 @@ include("../../config/common.php");
 include("../../config/admin.php");
 
 //load the search fields of the quick search side menu
-include("../../includes/quick_search_games.php");
+include("../../admin/games/quick_search_games.php");
 
 // get the total nr of submissions in the DB
 $query_total_number = $mysqli->query("SELECT * FROM game_submitinfo") or die("Couldn't get the total number of submissions");

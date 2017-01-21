@@ -19,7 +19,7 @@
 
 include("../../config/common.php");
 include("../../config/admin.php");
-include("../../includes/quick_search_games.php");
+include("../../admin/games/quick_search_games.php");
 
 //Get the screenshots for this game, if they exist
 $sql_screenshots = $mysqli->query("SELECT * FROM screenshot_game

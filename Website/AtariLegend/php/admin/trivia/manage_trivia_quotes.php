@@ -20,7 +20,7 @@
  ***********************************************************************************
  */
 include("../../config/common.php");
-include("../../includes/quick_search_games.php");
+include("../../admin/games/quick_search_games.php");
 include("../../config/admin.php");
 
 $sql_trivia = $mysqli->query("SELECT * FROM trivia_quotes ORDER BY trivia_quote_id");
