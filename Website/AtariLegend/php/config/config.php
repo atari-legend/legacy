@@ -37,9 +37,9 @@ define("SITEURL", "http://www.atarilegend.com/");
 $smarty = new Smarty;
 
 $smarty->template_dir = '../../../themes/templates/';
-$smarty->compile_dir = '../../../php/includes/smarty/templates_c/';
-$smarty->config_dir = '../../../php/includes/smarty/configs/';
-$smarty->cache_dir = '../../../php/includes/smarty/cache/';
+$smarty->compile_dir = '../../../php/temp/smarty/templates_c/';
+$smarty->config_dir = '../../../php/temp/smarty/configs/';
+$smarty->cache_dir = '../../../php/temp/smarty/cache/';
 
 //***************************************************************
 // Some configs for the user management

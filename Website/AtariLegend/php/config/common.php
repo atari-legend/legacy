@@ -17,7 +17,7 @@
 extract($_REQUEST);
 
 include("../../config/connect.php");
-include("../../../php/includes/smarty/libs/Smarty.class.php");
+include("../../../php/vendor/smarty/smarty/libs/Smarty.class.php");
 include("../../config/config.php");
 include("../../includes/user_functions.php");
 include("../../includes/functions.php");
