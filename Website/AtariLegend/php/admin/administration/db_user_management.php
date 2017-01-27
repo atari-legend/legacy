@@ -15,7 +15,7 @@
 
 include("../../config/common.php");
 include("../../config/admin.php");
-include("../../includes/PHPMailerAutoload.php");
+include("../../vendor/phpmailer/phpmailer/PHPMailerAutoload.php");
 
 // Ajax driven delete user query
 if (isset($action) and $action == "delete_user") {

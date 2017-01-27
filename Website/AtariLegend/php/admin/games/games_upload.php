@@ -18,7 +18,7 @@
 //load all common functions
 include("../../config/common.php");
 include("../../config/admin.php");
-include("../../includes/quick_search_games.php");
+include("../../admin/games/quick_search_games.php");
 
 //************************************************************************************************
 //Let's get the game info for the file name concatenation, and the download data for disks already

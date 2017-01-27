@@ -21,7 +21,7 @@
 //load all common functions
 include("../../config/common.php");
 include("../../config/admin.php");
-include("../../includes/quick_search_games.php");
+include("../../admin/games/quick_search_games.php");
 
 if (isset($new_crew)) {
     $smarty->assign('new_crew', $new_crew);
