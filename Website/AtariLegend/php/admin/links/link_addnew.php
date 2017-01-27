@@ -20,7 +20,7 @@
  ***********************************************************************************
  */
 include("../../config/common.php");
-include("../../includes/quick_search_games.php");
+include("../../admin/games/quick_search_games.php");
 include("../../config/admin.php");
 
 $RESULT = $mysqli->query("SELECT * FROM website_category ORDER BY website_category_name");

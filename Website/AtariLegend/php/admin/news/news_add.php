@@ -21,7 +21,7 @@ include("../../config/common.php");
 include("../../config/admin.php");
 
 //load the search fields of the quick search side menu
-include("../../includes/quick_search_games.php");
+include("../../admin/games/quick_search_games.php");
 
 $sql_newsimage = $mysqli->query("SELECT news_image_id,news_image_name FROM news_image ORDER BY news_image_name");
 

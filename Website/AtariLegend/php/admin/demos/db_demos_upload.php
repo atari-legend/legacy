@@ -23,7 +23,7 @@ include("../../config/admin.php");
 // We wanna add a new download
 //****************************************************************************************
 if (isset($action) and $action == 'add_download') {
-    require_once('../includes/pclzip.lib.php');
+    require_once('../vendor/pclzip/pclzip/pclzip.lib.php');
 
     $demo_download_name = $_FILES['demo_download_name'];
 

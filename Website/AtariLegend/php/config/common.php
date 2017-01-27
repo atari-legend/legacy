@@ -17,11 +17,11 @@
 extract($_REQUEST);
 
 include("../../config/connect.php");
-include("../../../php/includes/smarty/libs/Smarty.class.php");
+include("../../../php/vendor/smarty/smarty/libs/Smarty.class.php");
 include("../../config/config.php");
-include("../../includes/user_functions.php");
-include("../../includes/functions.php");
-include("../../includes/karma.php");
+include("../../lib/user_functions.php");
+include("../../lib/functions.php");
+include("../../lib/karma.php");
 
 if (file_exists("../../config/database_upgrade.php")==true) { exit("Upgrade mode");}
 
