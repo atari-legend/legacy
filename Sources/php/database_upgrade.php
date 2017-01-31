@@ -7,6 +7,8 @@
  *   email                : silversurfer@atari-forum.com
  *   actual update        :
  *   Id: database_ugrade.php,v 0.10 2016-02-13 Silver Surfer
+ *   Id: database_ugrade.php,v 0.10 2016-02-31 STG
+ *          Added functionalities for php scripting
  *
  ***************************************************************************/
 
@@ -19,20 +21,29 @@ include("connect.php");
 
 // use glob and a foreach loop to search the database_scripts folder for update files
 foreach (glob("../admin/administration/database_scripts/*.php") as $filename) {
-    // import update script
-    require_once("$filename");
+    
+     //we don't want to execute additions just yet
+    if (strpos($filename, 'addition') !== false) 
+    {
+        //do nothing
+    }
+    else
+    {      
+        // import update script
+        require_once("$filename");
 
-    // take all variables from the update script and place in an array
-    $database_update[] = array(
-        "database_update_id" => $database_update_id,
-        "update_description" => $update_description,
-        "execute_condition" => $execute_condition,
-        "test_condition" => $test_condition,
-        "database_update_sql" => $database_update_sql,
-        "database_autoexecute" => $database_autoexecute,
-        "update_filename" => $filename,
-        "force_insert" => $force_insert
-    );
+        // take all variables from the update script and place in an array
+        $database_update[] = array(
+            "database_update_id" => $database_update_id,
+            "update_description" => $update_description,
+            "execute_condition" => $execute_condition,
+            "test_condition" => $test_condition,
+            "database_update_sql" => $database_update_sql,
+            "database_autoexecute" => $database_autoexecute,
+            "update_filename" => $filename,
+            "force_insert" => $force_insert
+        );
+    }
 }
 
 // Sort array
@@ -53,8 +64,18 @@ foreach ($database_update as $key) {
 
         // if the execute condition is met, execute update
         if ($key['execute_condition'] == $test_result) {
-            $mysqli->query("$key[database_update_sql]") or die("Database update $key[database_update_id] failed!");
-
+            
+            //overhere we check if we are dealing with an addition - a script containing more than just SQL
+            if (strncmp($key['database_update_sql'], "..", 2) === 0)
+            {
+                $include = substr($key['database_update_sql'], 3); 
+                include $include;
+            }
+            else  
+            {
+                $mysqli->query("$key[database_update_sql]") or die("Database update $key[database_update_id] failed!");
+            }
+            
             // Add info to the database_change table
             // Set the timestamp
             $timestamp = time();
@@ -94,8 +115,17 @@ foreach ($database_update as $key) {
 
             // if the execute condition is met, execute update
             if ($key['execute_condition'] == $test_result) {
-                $mysqli->query("$key[database_update_sql]") or die("Database update $key[database_update_id] failed!");
-
+                 //overhere we check if we are dealing with an addition - a script containing more than just SQL
+                if (strncmp($key['database_update_sql'], "..", 2) === 0)
+                {
+                    $include = substr($key['database_update_sql'], 3); 
+                    include $include;
+                }
+                else  
+                {
+                    $mysqli->query("$key[database_update_sql]") or die("Database update $key[database_update_id] failed!");
+                }
+                
                 // Add info to the database_change table
                 // Set the timestamp
                 $timestamp = time();
