@@ -10,7 +10,7 @@
 ***************************************************************************/
 
 // Unique identifier set by developer.
-$database_update_id = 57;
+$database_update_id = 66;
 
 // Description of what the change will do.
 $update_description = "Add game_id index to game_arcade";

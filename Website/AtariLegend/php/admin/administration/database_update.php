@@ -7,11 +7,17 @@
  *   email                : silversurfer@atari-forum.com
  *   actual update        :
  *
- *
- *
  *   Id: database_update.php,v 0.10 2016-02-13 Silver Surfer
  *
- ***************************************************************************/
+ ****************************************************************************/
+//The database update section was designed to run simple db table scripts.
+//A script is created. This script contains a var called $database_update_sql which contains the SQL statement.
+//However, sometimes it is need to run more complex scripts. Therefor I have 'raped' this php file a little. 
+//To run a more complex script containing php code, we need to do 2 things : 
+// 1) create a normal script file with the database update variables, however, this time the $database_update_sql variable
+//    should contain a link to the more complex script file. 
+// 2) the actual script file must be place in the database_scripts folder as well, and its filename should contain the word 'addition'.
+// a example of this way of working can be found in files 2017-01-30_merge_nicknames_into_individuals.php and 2017-01-30_merge_nicknames_into_individuals-addition.php 
 
 include("../../config/common.php");
 include("../../config/admin.php");
@@ -22,19 +28,28 @@ include("../../admin/games/quick_search_games.php");
 // use glob and a foreach loop to search the database_scripts folder for update files
 foreach (glob("../../admin/administration/database_scripts/*.php") as $filename) {
     // import update script
-    require_once("$filename");
+    
+    //we don't want to execute additions just yet
+    if (strpos($filename, 'addition') !== false) 
+    {
+        //do nothing
+    }
+    else
+    {
+        require_once("$filename");
 
-    // take all variables from the update script and place in an array
-    $database_update[] = array(
-        "database_update_id" => $database_update_id,
-        "update_description" => $update_description,
-        "execute_condition" => $execute_condition,
-        "test_condition" => $test_condition,
-        "database_update_sql" => $database_update_sql,
-        "database_autoexecute" => $database_autoexecute,
-        "update_filename" => $filename,
-        "force_insert" => $force_insert
-    );
+        // take all variables from the update script and place in an array
+        $database_update[] = array(
+            "database_update_id" => $database_update_id,
+            "update_description" => $update_description,
+            "execute_condition" => $execute_condition,
+            "test_condition" => $test_condition,
+            "database_update_sql" => $database_update_sql,
+            "database_autoexecute" => $database_autoexecute,
+            "update_filename" => $filename,
+            "force_insert" => $force_insert
+        );
+    }
 }
 
 // Sort array
@@ -55,8 +70,17 @@ foreach ($database_update as $key) {
 
         // if the execute condition is met, execute update
         if ($key['execute_condition'] == $test_result) {
-            $mysqli->query("$key[database_update_sql]") or die("Database update $key[database_update_id] failed!");
-
+            
+             //overhere we check if we are dealing with an addition - a script containing more than just SQL
+            if (strncmp($key['database_update_sql'], "..", 2) === 0)
+            {
+                include $key['database_update_sql'];
+            }
+            else  
+            {
+                $mysqli->query("$key[database_update_sql]") or die("Database update $key[database_update_id] failed!");
+            }
+            
             // Add info to the database_change table
             // Set the timestamp
             $timestamp = time();
@@ -96,8 +120,17 @@ foreach ($database_update as $key) {
 
             // if the execute condition is met, execute update
             if ($key['execute_condition'] == $test_result) {
-                $mysqli->query("$key[database_update_sql]") or die("Database update $key[database_update_id] failed!");
-
+                
+                 //overhere we check if we are dealing with an addition - a script containing more than just SQL
+                if (strncmp($key['database_update_sql'], "..", 2) === 0)
+                {
+                    include $key['database_update_sql'];
+                }
+                else  
+                {
+                    $mysqli->query("$key[database_update_sql]") or die("Database update $key[database_update_id] failed!");
+                }
+                    
                 // Add info to the database_change table
                 // Set the timestamp
                 $timestamp = time();
