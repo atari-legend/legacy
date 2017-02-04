@@ -262,8 +262,8 @@ function ChangeNick(individual_nicks_id,crew_individual_id,crew_select)
         <div style="display:flex;justify-content: space-around;flex-wrap: wrap;">
             <b><a href="../crew/crew_editor.php?crew_select={if isset($crew_select.crew_id)}{$crew_select.crew_id}{/if}&amp;crewsearch={$tracking.crewsearch}&amp;crewbrowse={$tracking.crewbrowse}" class="standard_tile_link">Main Edit</a></b>
             <b><a href="../crew/crew_genealogy.php?action=genealogy&amp;crew_select={if isset($crew_select.crew_id)}{$crew_select.crew_id}{/if}&amp;crewsearch={$tracking.crewsearch}&amp;crewbrowse={$tracking.crewbrowse}" class="standard_tile_link">Genealogy</a></b>
-            <b><a href="#?action=statistics&amp;crew_select={if isset($crew_select.crew_id)}{$crew_select.crew_id}{/if}&amp;crewsearch={$tracking.crewsearch}&amp;crewbrowse={$tracking.crewbrowse}" class="standard_tile_link">Statistics</a></b>
-            <b><a href="#?action=comments&amp;crew_select={if isset($crew_select.crew_id)}{$crew_select.crew_id}{/if}&amp;crewsearch={$tracking.crewsearch}&amp;crewbrowse={$tracking.crewbrowse}" class="standard_tile_link">Comments/Submissions</a></b>
+            <b><a href="../crew/crew_genealogy.php?action=stats" class="standard_tile_link">Statistics</a></b>
+            <b><a href="../crew/crew_genealogy.php?action=comment" class="standard_tile_link">Comments/Submissions</a></b>
         </div>
         {* START THE CREW GENEALOGY EDIT *}
         <br>

@@ -1142,7 +1142,26 @@ if (isset($action) and $action == "add_intro_credits") {
 
         while ($query = $query_individual->fetch_array(MYSQLI_BOTH)) {
             if ($query_ind_id <> $query['ind_id']) {
-                $sql_ind_nick = "SELECT
+                
+                $sql_ind_nicks = $mysqli->query("SELECT nick_id FROM individual_nicks WHERE ind_id = '$query[ind_id]'");
+            
+                while ($fetch_ind_nicks = $sql_ind_nicks->fetch_array(MYSQLI_BOTH)) {
+                 
+                    $nick_id = $fetch_ind_nicks['nick_id'];
+                   
+                    $sql_nick_names = $mysqli->query("SELECT ind_name from individuals WHERE ind_id = '$nick_id'") or die('Error: ' . mysqli_error($mysqli));
+                
+                    while ($fetch_nick_names = $sql_nick_names->fetch_array(MYSQLI_BOTH)) {
+
+                        $smarty->append('ind_nick', array(
+                            'ind_id' => $query['ind_id'],
+                            'individual_nicks_id' => $nick_id,
+                            'nick' => $fetch_nick_names['ind_name']
+                        ));
+                    }
+                }   
+                
+               /*  $sql_ind_nick = "SELECT
                 individual_nicks.individual_nicks_id,
                 individual_nicks.nick
                 FROM individuals
@@ -1157,7 +1176,7 @@ if (isset($action) and $action == "add_intro_credits") {
                         'individual_nicks_id' => $query_nick['individual_nicks_id'],
                         'nick' => $query_nick['nick']
                     ));
-                }
+                } */
             }
 
             // This smarty is used for for the menu_disk credits
@@ -1210,7 +1229,26 @@ if (isset($action) and $action == "delete_menu_disk_credits") {
 
         while ($query = $query_individual->fetch_array(MYSQLI_BOTH)) {
             if ($query_ind_id <> $query['ind_id']) {
-                $sql_ind_nick = "SELECT
+                
+                $sql_ind_nicks = $mysqli->query("SELECT nick_id FROM individual_nicks WHERE ind_id = '$query[ind_id]'");
+            
+                while ($fetch_ind_nicks = $sql_ind_nicks->fetch_array(MYSQLI_BOTH)) {
+                 
+                    $nick_id = $fetch_ind_nicks['nick_id'];
+                   
+                    $sql_nick_names = $mysqli->query("SELECT ind_name from individuals WHERE ind_id = '$nick_id'") or die('Error: ' . mysqli_error($mysqli));
+                
+                    while ($fetch_nick_names = $sql_nick_names->fetch_array(MYSQLI_BOTH)) {
+
+                        $smarty->append('ind_nick', array(
+                            'ind_id' => $query['ind_id'],
+                            'individual_nicks_id' => $nick_id,
+                            'nick' => $fetch_nick_names['ind_name']
+                        ));
+                    }
+                }   
+            
+               /*  $sql_ind_nick = "SELECT
                 individual_nicks.individual_nicks_id,
                 individual_nicks.nick
                 FROM individuals
@@ -1225,7 +1263,7 @@ if (isset($action) and $action == "delete_menu_disk_credits") {
                         'individual_nicks_id' => $query_nick['individual_nicks_id'],
                         'nick' => $query_nick['nick']
                     ));
-                }
+                } */
             }
 
             // This smarty is used for for the menu_disk credits
@@ -1502,7 +1540,26 @@ if (isset($action) and ($action == "change_menu_disk_state" or $action == "chang
 
         while ($query = $query_individual->fetch_array(MYSQLI_BOTH)) {
             if ($query_ind_id <> $query['ind_id']) {
-                $sql_ind_nick = "SELECT
+                
+                $sql_ind_nicks = $mysqli->query("SELECT nick_id FROM individual_nicks WHERE ind_id = '$query[ind_id]'");
+            
+                while ($fetch_ind_nicks = $sql_ind_nicks->fetch_array(MYSQLI_BOTH)) {
+                 
+                    $nick_id = $fetch_ind_nicks['nick_id'];
+                   
+                    $sql_nick_names = $mysqli->query("SELECT ind_name from individuals WHERE ind_id = '$nick_id'") or die('Error: ' . mysqli_error($mysqli));
+                
+                    while ($fetch_nick_names = $sql_nick_names->fetch_array(MYSQLI_BOTH)) {
+
+                        $smarty->append('ind_nick', array(
+                            'ind_id' => $query['ind_id'],
+                            'individual_nicks_id' => $nick_id,
+                            'nick' => $fetch_nick_names['ind_name']
+                        ));
+                    }
+                }   
+            
+              /*   $sql_ind_nick = "SELECT
                 individual_nicks.individual_nicks_id,
                 individual_nicks.nick
                 FROM individuals
@@ -1517,7 +1574,7 @@ if (isset($action) and ($action == "change_menu_disk_state" or $action == "chang
                         'individual_nicks_id' => $query_nick['individual_nicks_id'],
                         'nick' => $query_nick['nick']
                     ));
-                }
+                } */
             }
 
             // This smarty is used for for the menu_disk credits
@@ -1712,7 +1769,26 @@ if (isset($action) and ($action == "change_nickname")) {
 
     while ($query = $query_individual->fetch_array(MYSQLI_BOTH)) {
         if ($query_ind_id <> $query['ind_id']) {
-            $sql_ind_nick = "SELECT
+            
+           $sql_ind_nicks = $mysqli->query("SELECT nick_id FROM individual_nicks WHERE ind_id = '$query[ind_id]'");
+            
+            while ($fetch_ind_nicks = $sql_ind_nicks->fetch_array(MYSQLI_BOTH)) {
+             
+                $nick_id = $fetch_ind_nicks['nick_id'];
+               
+                $sql_nick_names = $mysqli->query("SELECT ind_name from individuals WHERE ind_id = '$nick_id'") or die('Error: ' . mysqli_error($mysqli));
+            
+                while ($fetch_nick_names = $sql_nick_names->fetch_array(MYSQLI_BOTH)) {
+
+                    $smarty->append('ind_nick', array(
+                        'ind_id' => $query['ind_id'],
+                        'individual_nicks_id' => $nick_id,
+                        'nick' => $fetch_nick_names['ind_name']
+                    ));
+                }
+            }    
+            
+           /*  $sql_ind_nick = "SELECT
               individual_nicks.individual_nicks_id,
               individual_nicks.nick
               FROM individuals
@@ -1727,7 +1803,7 @@ if (isset($action) and ($action == "change_nickname")) {
                     'individual_nicks_id' => $query_nick['individual_nicks_id'],
                     'nick' => $query_nick['nick']
                 ));
-            }
+            } */
         }
 
         // This smarty is used for for the menu_disk credits
