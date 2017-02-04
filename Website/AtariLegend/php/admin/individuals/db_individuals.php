@@ -102,7 +102,13 @@ if (isset($ind_id) and isset($action) and $action == 'update') {
 // Add nicknames
 if (isset($ind_id) and isset($action) and $action == "add_nick") {
     if ($ind_nick != '') {
-        $sdbquery = $mysqli->query("INSERT INTO individual_nicks (ind_id, nick) VALUES ($ind_id, '$ind_nick')") or die("Couldn't insert into individual_nicks");
+        
+        //First add an entry in the individuals table
+        $sdbquery = $mysqli->query("INSERT INTO individuals (ind_name) VALUES ('$ind_nick')") or die("Couldn't insert into individuals");
+        $ind_nick_id = $mysqli->insert_id;
+
+        //Now update the nick table       
+        $sdbquery = $mysqli->query("INSERT INTO individual_nicks (ind_id, nick_id) VALUES ($ind_id, '$ind_nick_id')") or die("Couldn't insert into individual_nicks");
 
         $_SESSION['edit_message'] = "Individual nick added";
 
@@ -117,8 +123,9 @@ if (isset($ind_id) and isset($action) and $action == "delete_nick") {
     if (isset($nick_id)) {
         create_log_entry('Individuals', $nick_id, 'Nickname', $nick_id, 'Delete', $_SESSION['user_id']);
 
-        $mysqli->query("DELETE FROM individual_nicks WHERE individual_nicks_id='$nick_id'") or die("Failed to delete nickname");
-
+        $mysqli->query("DELETE FROM individual_nicks WHERE nick_id='$nick_id'") or die("Failed to delete nickname - indvidual_nicks table");
+        $mysqli->query("DELETE FROM individuals WHERE ind_id='$nick_id'") or die("Failed to delete nickname - indviduals table");
+        
         $_SESSION['edit_message'] = "Nickname succesfully deleted";
 
         header("Location: ../individuals/individuals_edit.php?ind_id=$ind_id");
@@ -144,11 +151,20 @@ if (isset($ind_id) and isset($action) and $action == 'delete_ind') {
             $_SESSION['edit_message'] = "Deletion failed - This individual is linked to a game - Delete it in the appropriate section";
         } else {
             create_log_entry('Individuals', $ind_id, 'Individual', $ind_id, 'Delete', $_SESSION['user_id']);
+            
+            //Let's get all the nicknames
+            $nickname = $mysqli->query("SELECT * FROM individual_nicks where ind_id = '$ind_id'") or die ("error getting nicknames");
 
+            while ($name = mysqli_fetch_assoc($nickname)) 
+            {
+                $nick_id = $name['nick_id'];
+                $sql = $mysqli->query("DELETE FROM individuals WHERE ind_id = $nick_id") or die ("Failed to delete the nicks from this person");;
+            }
+            
             //then delete the rest
-            $sql                      = $mysqli->query("DELETE FROM individuals WHERE ind_id = $ind_id");
-            $sql                      = $mysqli->query("DELETE FROM individual_text WHERE ind_id = $ind_id");
-            $sql                      = $mysqli->query("DELETE FROM individual_nicks WHERE ind_id = $ind_id");
+            $sql                      = $mysqli->query("DELETE FROM individuals WHERE ind_id = $ind_id") or die ("Failed to delete individual");;
+            $sql                      = $mysqli->query("DELETE FROM individual_text WHERE ind_id = $ind_id") or die ("Failed to delete ind text");;
+            $sql                      = $mysqli->query("DELETE FROM individual_nicks WHERE ind_id = $ind_id") or die ("Failed to delete nickname");
             $_SESSION['edit_message'] = "individual succesfully deleted";
             header("Location: ../individuals/individuals_main.php");
         }

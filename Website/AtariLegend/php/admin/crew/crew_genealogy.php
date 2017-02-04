@@ -83,8 +83,20 @@ if (isset($action) and $action == "genealogy") {
             'crew_name' => $genealogy['crew_name']
         ));
     }
+    
+    //Get the individuals
+    $sql_individuals = $mysqli->query("SELECT * FROM individuals ORDER BY ind_name ASC");
 
-    $sql_individuals = "SELECT ind_id,ind_name FROM individuals ORDER BY ind_name ASC";
+    while ($individuals = $sql_individuals->fetch_array(MYSQLI_BOTH)) {
+        if ($individuals['ind_name'] != '') {
+            $smarty->append('ind_gene', array(
+                'ind_id' => $individuals['ind_id'],
+                'ind_name' => $individuals['ind_name']
+            ));
+        }
+    }
+
+   /*  $sql_individuals = "SELECT ind_id,ind_name FROM individuals ORDER BY ind_name ASC";
     $sql_aka         = "SELECT ind_id,nick FROM individual_nicks ORDER BY nick ASC";
 
     //Create a temporary table to build an array with both names and nicknames
@@ -100,7 +112,7 @@ if (isset($action) and $action == "genealogy") {
             'ind_id' => $genealogy_ind['ind_id'],
             'ind_name' => $genealogy_ind['ind_name']
         ));
-    }
+    } */
 
     // member of crew - subcrew query
     $sql_subcrew = $mysqli->query("SELECT * FROM sub_crew
@@ -135,28 +147,43 @@ if (isset($action) and $action == "genealogy") {
     }
     $smarty->assign('crew_individuals', $crew_individuals);
 
-
     //Build a list of known nicknames for the crew members
     $sql_ind_nicks = $mysqli->query("SELECT
-                                  individual_nicks.individual_nicks_id,
-                                  individual_nicks.ind_id,
-                                  individual_nicks.nick
+                                  individual_nicks.nick_id,
+                                  individual_nicks.ind_id
                                   FROM individual_nicks
                                   LEFT JOIN crew_individual ON (individual_nicks.ind_id = crew_individual.ind_id)
-                                  WHERE crew_individual.crew_id = '$crew_select'") or die("Couldn't retrieve nick names");
+                                  WHERE crew_individual.crew_id = '$crew_select'") or die("Couldn't retrieve nick ids");
 
     while ($fetch_ind_nicks = $sql_ind_nicks->fetch_array(MYSQLI_BOTH)) {
-        $smarty->append('nick_names', array(
-            'individual_nicks_id' => $fetch_ind_nicks['individual_nicks_id'],
-            'ind_id' => $fetch_ind_nicks['ind_id'],
-            'nick' => $fetch_ind_nicks['nick']
-        ));
+        
+        $nick_id = $fetch_ind_nicks['nick_id'];
+        
+        $sql_nick_names = $mysqli->query("SELECT ind_name from individuals WHERE ind_id = '$nick_id'") or die("Couldn't retrieve nick names");
+        
+        while ($fetch_nick_names = $sql_nick_names->fetch_array(MYSQLI_BOTH)) {
+            $smarty->append('nick_names', array(
+                'individual_nicks_id' => $fetch_ind_nicks['nick_id'],
+                'ind_id' => $fetch_ind_nicks['ind_id'],
+                'nick' => $fetch_nick_names['ind_name']
+            ));
+        }
     }
 } else {
     if ($crewsearch == '' and $crewbrowse == '') {
         $_SESSION['edit_message'] = "Please select a crew";
         header("Location: ../crew/crew_main.php?message=$message");
     }
+}
+
+if (isset($action) and $action == "stats") {
+     $_SESSION['edit_message'] = "Under construction - Patience is a virtue";
+     header("Location: ../crew/crew_main.php");
+}
+
+if (isset($action) and $action == "comment") {
+     $_SESSION['edit_message'] = "Under construction - Patience is a virtue";
+     header("Location: ../crew/crew_main.php");
 }
 
 // If no choice has been made but a crew has been selected we should be brought to the crew main edit regardless

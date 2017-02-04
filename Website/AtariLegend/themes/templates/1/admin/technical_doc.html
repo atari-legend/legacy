@@ -54,6 +54,11 @@ The main doc page
 								<li><a href="#crews" class="left_nav_link">Crews</a></li>
 							</ul>
 						</li>
+                        <li><a href="#individuals" class="left_nav_link">Individuals</a>
+							<ul style="margin-left:1em;">
+								<li><a href="#individuals" class="left_nav_link">Individuals and Nicknames</a></li>
+							</ul>
+						</li>
 					</ul>
 					</li>
 				</ul>
@@ -284,13 +289,51 @@ The main doc page
 					</tr>
 					<tr>
 						<td>
-							<b>individuals</b> : The main individual page.
+							<b>individuals</b> : The main individual table.
 						</td>
 					</tr>
 					<tr>
 						<td>
 							<b>crew_menu_prod, crew_demo_prod, ind_demo_prod, ind_menu_prod</b> : The cross tables linking the crews and individuals to their work. Every crew or individual has got their own productions, 
 							these are always demos or menus. Games are dealt with in the game tables structure.
+						</td>
+					</tr>
+					</table>
+				</td>
+			</tr>
+			</table>
+			<br>
+			<br>
+            <h1 id="individuals">Individual section</h1>
+			<br>
+			<a href="../../includes/show_image.php?file=../../themes/templates/1/includes/technical_doc/img/individuals.png" data-lightbox="image-1" data-title="The individual DB tables">
+				<img style="display:inline;" src="../../includes/show_image.php?file=../../themes/templates/1/includes/technical_doc/img/individuals.png&amp;resize=450,null,null,null" alt="Click to enlarge!" class="user_stats_img" id="user_details_img_dark" style="margin:5px;">
+			</a>
+			<br>
+			<br>
+			The following tables will stock the individuals. Sceners, game/demo creators, musicians … These tables are used in various structures all over the DB. 
+			<br>
+			<br>
+			<u>Layout of tables :</u>
+			<br>
+			<br>
+			<table class="standard_table_list" id="menu_list_table" style="border:none;text-align:left;width:85%;">
+			<tr>
+				<td>
+					<table class="table_game_list" id="game_list_table" style="width:100%;border: solid 1px black;margin:auto;">
+					<tr>
+						<td>
+							<b>individuals</b> : The main individuals table will hold the individual names AND nicknames.
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<b>individual_nicks</b> : A cross table linking the individual with its nick name(s).
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<b>individual_text</b> : This table contains extra details of the individual. eg history, email ...
 						</td>
 					</tr>
 					</table>
