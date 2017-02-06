@@ -2321,3 +2321,24 @@ if (isset($action) and ($action == "publish_set")) {
         header("Location: ../menus/menus_disk_list.php?menu_sets_id=$menu_sets_id");
     }
 }
+
+
+//****************************************************************************************
+// Add an author to a menu_disk_title
+//****************************************************************************************
+if ($action == 'add_author')
+{
+     //Insert author into the menu_disk_title_author table
+    $mysqli->query("INSERT INTO menu_disk_title_author (menu_disk_title_id,ind_id,author_type_id) VALUES ('$menu_disk_title_id','$ind_id','$author_type_id')") or die("error inserting menu_disk_title_author"); ;
+
+    // Create dropdown values a-z
+    $az_value  = az_dropdown_value(0);
+    $az_output = az_dropdown_output(0);
+
+    $smarty->assign('az_value', $az_value);
+    $smarty->assign('az_output', $az_output);
+
+    //Send all smarty variables to the templates
+    $smarty->display("file:" . $cpanel_template_folder . "menus_disk_title_author.html");
+    
+}
