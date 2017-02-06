@@ -139,7 +139,7 @@
 									</td>
 									<td class="menu_gamename_td">
 										{if $line.game_name != ''}
-											{if $line.menu_types_text == 'Game'}<a href="../games/games_detail.php?game_id={$line.game_id}" class="standard_table_left">{$line.game_name}{if $line.set_chain != ''} - <a onclick="popAddSet({$line.menu_disk_title_id},{$menus.menu_disk_id},'{$line.game_name|escape:'quotes'}')" style="cursor: pointer;" class="standard_tile_link"><i>Part {$line.set_chain}</i></a>{/if}</a>{else}<a href="../administration/construction.php" class="standard_table_left">{$line.game_name}</a>{/if}
+											{if $line.menu_types_text == 'Game'}<a class="standard_table_center user_popup fancybox.ajax" href="../menus/menus_disk_title_author.php?menu_disk_title_id={$line.menu_disk_title_id}&game_id={$line.game_id}&action=game_load">{$line.game_name}{if $line.set_chain != ''} - <a onclick="popAddSet({$line.menu_disk_title_id},{$menus.menu_disk_id},'{$line.game_name|escape:'quotes'}')" style="cursor: pointer;" class="standard_tile_link"><i>Part {$line.set_chain}</i></a>{/if}</a>{else}<a href="../administration/construction.php" class="standard_table_left">{$line.game_name}</a>{/if}
 										{else}
 											<i>n/a</i>
 										{/if}
@@ -372,7 +372,7 @@
 				</td>
 				<td class="menu_gamename_td">
 					{if $line.game_name != ''}
-						{if $line.menu_types_text == 'Game'}<a href="../games/games_detail.php?game_id={$line.game_id}" class="standard_table_left">{$line.game_name}{if $line.set_chain != ''} - <a onclick="popAddSet({$line.menu_disk_title_id},{$menu_disk_id})" style="cursor: pointer;" class="standard_tile_link"><i>Part {$line.set_chain}</i></a>{/if}</a>{else}<a href="../administration/construction.php" class="standard_table_left">{$line.game_name}</a>{/if}
+						{if $line.menu_types_text == 'Game'}<a class="standard_table_center user_popup fancybox.ajax" href="">{$line.game_name}{if $line.set_chain != ''} - <a onclick="popAddSet({$line.menu_disk_title_id},{$menu_disk_id})" style="cursor: pointer;" class="standard_tile_link"><i>Part {$line.set_chain}</i></a>{/if}</a>{else}<a href="../administration/construction.php" class="standard_table_left">{$line.game_name}</a>{/if}
 					{else}
 						<i>n/a</i>
 					{/if}
@@ -616,7 +616,7 @@
 				</td>
 				<td class="menu_gamename_td">
 					{if $line.game_name != ''}
-						{if $line.menu_types_text == 'Game'}<a href="../games/games_detail.php?game_id={$line.game_id}" class="standard_table_left">{$line.game_name}{if $line.set_chain != ''} - <a onclick="popAddSet({$line.menu_disk_title_id},{$menu_disk_id},'{$line.game_name|escape:'quotes'}')" style="cursor: pointer;" class="standard_tile_link"><i>Part {$line.set_chain}</i></a>{/if}</a>{else}<a href="../administration/construction.php" class="standard_table_left">{$line.game_name}</a>{/if}
+						{if $line.menu_types_text == 'Game'}<a class="standard_table_center user_popup fancybox.ajax" href="">{$line.game_name}{if $line.set_chain != ''} - <a onclick="popAddSet({$line.menu_disk_title_id},{$menu_disk_id},'{$line.game_name|escape:'quotes'}')" style="cursor: pointer;" class="standard_tile_link"><i>Part {$line.set_chain}</i></a>{/if}</a>{else}<a href="../administration/construction.php" class="standard_table_left">{$line.game_name}</a>{/if}
 					{else}
 						<i>n/a</i>
 					{/if}
