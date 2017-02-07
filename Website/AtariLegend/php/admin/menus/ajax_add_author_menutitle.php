@@ -1,13 +1,13 @@
 <?php
 /***************************************************************************
- *                                menus_disk_title_author.php
+ *                                ajax_add_author_menutitle.php
  *                            ----------------------------------
  *   begin                : 05 February 2017
  *   copyright            : (C) 2017 Atari Legend
  *   email                : admin@atarilegend.com
  *                         Created file - STG
  *
- *  id : menus_disk_title_author.php ,v 0.10 2017/02/05 ST Graveyard 22:38
+ *  id : ajax_add_author_menutitle.php ,v 0.10 2017/02/05 ST Graveyard 22:38
  *          - AL 2.0
  *
  ***************************************************************************
@@ -82,26 +82,19 @@ while ($author_ind = $query_author->fetch_array(MYSQLI_BOTH)) {
         'author_type_info' => $author_ind['author_type_info']
     ));
 }
-
-$smarty->assign('menu_disk_title_id', $menu_disk_title_id);
-
-if ($action == 'game_load')
-{
-    //get the game name
-    $sql_game_name = $mysqli->query("SELECT * FROM game WHERE game_id=$game_id");
-    $rowgame= $sql_game_name->fetch_array(MYSQLI_BOTH);
-    $smarty->assign('title_name', $rowgame['game_name']);  
-}
     
 // Create dropdown values a-z
 $az_value  = az_dropdown_value(0);
 $az_output = az_dropdown_output(0);
 
+$smarty->assign('menu_disk_title_id', $menu_disk_title_id);
+$smarty->assign('title_name', $game_name);
+
 $smarty->assign('az_value', $az_value);
 $smarty->assign('az_output', $az_output);
 
 //Send all smarty variables to the templates
-$smarty->display("file:" . $cpanel_template_folder . "menus_disk_title_author.html");
+$smarty->display("file:" . $cpanel_template_folder . "ajax_menus_add_author_title.html");
 
 //close the connection
 mysqli_close($mysqli);
