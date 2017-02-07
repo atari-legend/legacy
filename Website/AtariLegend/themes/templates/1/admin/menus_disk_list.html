@@ -8,7 +8,8 @@
 *
 *   id : menus_list.html ,v 0.10 2016/08/29 ST Graveyard 22:41
 *           - AL 2.0
-*
+*   Id : menus_list.html ,v 0.20 2017/02/07 STG
+*           - adding authors
 ***************************************************************************/
 
 ************************************************************************************************
@@ -305,6 +306,35 @@ function closeAddGames(str) {
         return;
 }
 
+function popAddAuthorMenutitle(menu_disk_title_id, game_id, game_name) {
+    if (menu_disk_title_id == "") {
+        document.getElementById("menu_detail_expand_author_title").innerHTML = "";
+        return;
+    } else {
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("menu_detail_expand_author_title").innerHTML = xmlhttp.responseText;
+                document.getElementById("author_to_menu_title"+game_id+"").innerHTML = "<a onclick=\"closeAddAuthor("+menu_disk_title_id+","+game_id+",'"+game_name+"')\" style=\"cursor: pointer;\" class=\"standard_tile_link\">"+game_name+"</a>";
+            }
+        }
+        xmlhttp.open("GET","../menus/ajax_add_author_menutitle.php?menu_disk_title_id="+menu_disk_title_id+"&game_name="+game_name+"&game_id="+game_id,true);
+        xmlhttp.send();
+    }
+}
+
+function closeAddAuthor(menu_disk_title_id, game_id, game_name) {
+        document.getElementById("menu_detail_expand_author_title").innerHTML = "";
+        document.getElementById("author_to_menu_title"+game_id+"").innerHTML = "<a onclick=\"popAddAuthorMenutitle("+menu_disk_title_id+","+game_id+",'"+game_name+"')\" style=\"cursor: pointer;\" class=\"standard_tile_link\">"+game_name+"</a>";
+        return;
+}
+
 function popAddDocs(str) {
     if (str == "") {
         document.getElementById("menu_detail_expand_docs").innerHTML = "";
@@ -566,6 +596,43 @@ function addGametoMenu(software_id,menu_disk_id,software_type) {
         }
         xmlhttp.open("GET","../menus/db_menu_disk.php?action=add_title_to_menu&software_id="+software_id+"&menu_disk_id="+menu_disk_id+"&software_type="+software_type,true);
         xmlhttp.send();
+    }
+}
+
+function addAuthorstoMenutitle(menu_disk_title_id) {
+ if (menu_disk_title_id == "") {
+        document.getElementById("author_list").innerHTML = "";
+        return;
+    } else {
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+
+                data = xmlhttp.responseText.split ( "[BRK]" );
+                document.getElementById("author_list").innerHTML = data[0];
+
+            $.notify_osd.create({
+                'text'        : data[1],             // notification message
+                'icon'        : '{$style_dir}images/osd_icons/star.png', // icon path, 48x48
+                'sticky'      : false,             // if true, timeout is ignored
+                'timeout'     : 4,                 // disappears after 6 seconds
+                'dismissable' : true               // can be dismissed manually
+                });
+
+            document.getElementById("authors_form").reset();
+            }
+        }
+        
+        var formData = new FormData( document.getElementById("authors_form") );
+
+        xmlhttp.open("POST","../menus/db_menu_disk.php",true);
+        xmlhttp.send(formData);
     }
 }
 
@@ -1309,7 +1376,7 @@ function ChangeParent(parent_id,menu_disk_id) {
       maxWidth    : 900,
       maxHeight   : 600,
       fitToView   : true,
-      width       : '70%',
+      width       : '100%',
       height      : '70%',
       autoSize    : true,
       closeClick  : false,
