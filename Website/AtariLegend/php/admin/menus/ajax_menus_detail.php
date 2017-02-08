@@ -101,8 +101,10 @@ if (isset($action) and $action == "edit_disk_box" and $menu_disk_id !== '') {
                                 game_year.game_year AS 'year',
                                 menu_disk_title.menu_disk_title_id,
                                 menu_types_main.menu_types_text,
+                                menu_disk_title_author.menu_disk_title_author_id,
                                 menu_disk_title_set.menu_disk_title_set_chain
                                 FROM menu_disk_title
+                                LEFT JOIN menu_disk_title_author ON (menu_disk_title_author.menu_disk_title_id = menu_disk_title.menu_disk_title_id)
                                 LEFT JOIN menu_disk_title_set ON (menu_disk_title_set.menu_disk_title_id = menu_disk_title.menu_disk_title_id)
                                 LEFT JOIN menu_disk_title_game ON (menu_disk_title.menu_disk_title_id = menu_disk_title_game.menu_disk_title_id)
                                 LEFT JOIN game ON (menu_disk_title_game.game_id = game.game_id)
@@ -118,9 +120,11 @@ if (isset($action) and $action == "edit_disk_box" and $menu_disk_id !== '') {
                                 crew.crew_id AS 'developer_id',
                                 demo_year.demo_year AS 'year',
                                 menu_disk_title.menu_disk_title_id,
+                                menu_disk_title_author.menu_disk_title_author_id,
                                 menu_types_main.menu_types_text,
                                 menu_disk_title_set.menu_disk_title_set_chain
                                 FROM menu_disk_title
+                                LEFT JOIN menu_disk_title_author ON (menu_disk_title_author.menu_disk_title_id = menu_disk_title.menu_disk_title_id)
                                 LEFT JOIN menu_disk_title_set ON (menu_disk_title_set.menu_disk_title_id = menu_disk_title.menu_disk_title_id)
                                 LEFT JOIN menu_disk_title_demo ON (menu_disk_title.menu_disk_title_id = menu_disk_title_demo.menu_disk_title_id)
                                 LEFT JOIN demo ON (menu_disk_title_demo.demo_id = demo.demo_id)
@@ -137,8 +141,10 @@ if (isset($action) and $action == "edit_disk_box" and $menu_disk_id !== '') {
                                 '' AS year,
                                 menu_disk_title.menu_disk_title_id,
                                 menu_types_main.menu_types_text,
+                                menu_disk_title_author.menu_disk_title_author_id,
                                 menu_disk_title_set.menu_disk_title_set_chain
                                 FROM menu_disk_title
+                                LEFT JOIN menu_disk_title_author ON (menu_disk_title_author.menu_disk_title_id = menu_disk_title.menu_disk_title_id)
                                 LEFT JOIN menu_disk_title_set ON (menu_disk_title_set.menu_disk_title_id = menu_disk_title.menu_disk_title_id)
                                 LEFT JOIN menu_disk_title_tools ON (menu_disk_title.menu_disk_title_id = menu_disk_title_tools.menu_disk_title_id)
                                 LEFT JOIN tools ON (menu_disk_title_tools.tools_id = tools.tools_id)
@@ -162,6 +168,7 @@ if (isset($action) and $action == "edit_disk_box" and $menu_disk_id !== '') {
             'developer_id' => $query['developer_id'],
             'year' => $query['year'],
             'menu_disk_title_id' => $query['menu_disk_title_id'],
+            'menu_disk_title_author_id' => $query['menu_disk_title_author_id'],
             'menu_types_text' => $query['menu_types_text']
         ));
     }
@@ -176,8 +183,10 @@ if (isset($action) and $action == "edit_disk_box" and $menu_disk_id !== '') {
                                          doc_disk_game.doc_id AS 'doc_id',
                                          doc.doc_type_id,
                                          menu_types_main.menu_types_text,
+                                         menu_disk_title_author.menu_disk_title_author_id,
                                          menu_disk_title.menu_disk_title_id AS 'menu_disk_title_id'
                                          FROM menu_disk_title
+                                         LEFT JOIN menu_disk_title_author ON (menu_disk_title_author.menu_disk_title_id = menu_disk_title.menu_disk_title_id)
                                          LEFT JOIN menu_disk_title_doc_games ON (menu_disk_title.menu_disk_title_id = menu_disk_title_doc_games.menu_disk_title_id)
                                          LEFT JOIN doc_disk_game ON (menu_disk_title_doc_games.doc_games_id = doc_disk_game.doc_disk_game_id)
                                          LEFT JOIN doc ON (doc_disk_game.doc_id = doc.doc_id)
@@ -196,8 +205,10 @@ if (isset($action) and $action == "edit_disk_box" and $menu_disk_id !== '') {
                                          doc_disk_tool.doc_id AS 'doc_id',
                                          doc.doc_type_id,
                                          menu_types_main.menu_types_text,
+                                         menu_disk_title_author.menu_disk_title_author_id,
                                          menu_disk_title.menu_disk_title_id AS 'menu_disk_title_id'
                                          FROM menu_disk_title
+                                         LEFT JOIN menu_disk_title_author ON (menu_disk_title_author.menu_disk_title_id = menu_disk_title.menu_disk_title_id)
                                          LEFT JOIN menu_disk_title_doc_tools ON (menu_disk_title.menu_disk_title_id = menu_disk_title_doc_tools.menu_disk_title_id)
                                          LEFT JOIN doc_disk_tool ON (menu_disk_title_doc_tools.doc_tools_id = doc_disk_tool.doc_disk_tool_id)
                                          LEFT JOIN doc ON (doc_disk_tool.doc_id = doc.doc_id)
@@ -221,6 +232,7 @@ if (isset($action) and $action == "edit_disk_box" and $menu_disk_id !== '') {
             'doc_id' => $query['doc_id'],
             'doc_type_id' => $query['doc_type_id'],
             'menu_types_text' => $query['menu_types_text'],
+            'menu_disk_title_author_id' => $query['menu_disk_title_author_id'],
             'menu_disk_title_id' => $query['menu_disk_title_id']
         ));
     }

@@ -335,6 +335,35 @@ function closeAddAuthor(menu_disk_title_id, game_id, game_name) {
         return;
 }
 
+function popAddAuthorMenutitleDoc(menu_disk_title_id, game_id, game_name) {
+    if (menu_disk_title_id == "") {
+        document.getElementById("menu_detail_expand_author_title_doc").innerHTML = "";
+        return;
+    } else {
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("menu_detail_expand_author_title_doc").innerHTML = xmlhttp.responseText;
+                document.getElementById("author_to_menu_title_doc"+game_id+"").innerHTML = "<a onclick=\"closeAddAuthorDoc("+menu_disk_title_id+","+game_id+",'"+game_name+"')\" style=\"cursor: pointer;\" class=\"standard_tile_link\">"+game_name+"</a>";
+            }
+        }
+        xmlhttp.open("GET","../menus/ajax_add_author_menutitle.php?menu_disk_title_id="+menu_disk_title_id+"&game_name="+game_name+"&game_id="+game_id,true);
+        xmlhttp.send();
+    }
+}
+
+function closeAddAuthorDoc(menu_disk_title_id, game_id, game_name) {
+        document.getElementById("menu_detail_expand_author_title_doc").innerHTML = "";
+        document.getElementById("author_to_menu_title_doc"+game_id+"").innerHTML = "<a onclick=\"popAddAuthorMenutitleDoc("+menu_disk_title_id+","+game_id+",'"+game_name+"')\" style=\"cursor: pointer;\" class=\"standard_tile_link\">"+game_name+"</a>";
+        return;
+}
+
 function popAddDocs(str) {
     if (str == "") {
         document.getElementById("menu_detail_expand_docs").innerHTML = "";
@@ -616,14 +645,6 @@ function addAuthorstoMenutitle(menu_disk_title_id) {
 
                 data = xmlhttp.responseText.split ( "[BRK]" );
                 document.getElementById("author_list").innerHTML = data[0];
-
-            $.notify_osd.create({
-                'text'        : data[1],             // notification message
-                'icon'        : '{$style_dir}images/osd_icons/star.png', // icon path, 48x48
-                'sticky'      : false,             // if true, timeout is ignored
-                'timeout'     : 4,                 // disappears after 6 seconds
-                'dismissable' : true               // can be dismissed manually
-                });
 
             document.getElementById("authors_form").reset();
             }
@@ -1171,7 +1192,7 @@ function addCreditstoMenu(menu_disk_id) {
 function DeleteCredits(menu_disk_credits_id,menu_disk_id) {
 
             // CONFIRM REQUIRES ONE ARGUMENT
-         var message = "Are you sure you want to delete this person from the credit list????";
+         var message = "Are you sure you want to delete this person from the credit list?";
          // CONFIRM IS BOOLEAN. THAT MEANS THAT
          // IT RETURNS TRUE IF 'OK' IS CLICKED
          // OTHERWISE IT RETURN FALSE
@@ -1197,6 +1218,40 @@ function DeleteCredits(menu_disk_credits_id,menu_disk_id) {
             }
         }
         xmlhttp.open("GET","../menus/db_menu_disk.php?action=delete_menu_disk_credits&menu_disk_credits_id="+menu_disk_credits_id+"&menu_disk_id="+menu_disk_id,true);
+        xmlhttp.send();
+            }
+         }
+}
+
+function DeleteTitleCredits(menu_disk_title_id,ind_id,author_type_id) {
+
+            // CONFIRM REQUIRES ONE ARGUMENT
+         var message = "Are you sure you want to delete this person from the title credit list?";
+         // CONFIRM IS BOOLEAN. THAT MEANS THAT
+         // IT RETURNS TRUE IF 'OK' IS CLICKED
+         // OTHERWISE IT RETURN FALSE
+         var return_value = confirm(message);
+
+         if (return_value !="0")
+         {
+
+        if (menu_disk_title_id == "") {
+        document.getElementById("author_list").innerHTML = "";
+        return;
+    } else {
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("author_list").innerHTML = xmlhttp.responseText;
+            }
+        }
+        xmlhttp.open("GET","../menus/db_menu_disk.php?action=delete_menu_disk_title_credits&menu_disk_title_id="+menu_disk_title_id+"&author_type_id="+author_type_id+"+&ind_id="+ind_id,true);
         xmlhttp.send();
             }
          }

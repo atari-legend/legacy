@@ -35,7 +35,8 @@ while ($individuals = $sql_individuals->fetch_array(MYSQLI_BOTH)) {
 //load the authors for this title
 $sql_author_info = "SELECT  individuals.ind_id,
                             individuals.ind_name,
-                            author_type.author_type_info
+                            author_type.author_type_info,
+                            author_type.author_type_id
                             FROM menu_disk_title_author
                             LEFT JOIN individuals ON (individuals.ind_id = menu_disk_title_author.ind_id)
                             LEFT JOIN author_type ON (menu_disk_title_author.author_type_id = author_type.author_type_id)
@@ -68,6 +69,7 @@ while ($query = $query_author_info->fetch_array(MYSQLI_BOTH)) {
     $smarty->append('title_credits', array(
         'ind_id' => $query['ind_id'],
         'ind_name' => $query['ind_name'],
+        'author_type_id' => $query['author_type_id'],
         'author_type_info' => $query['author_type_info']
     ));
 }

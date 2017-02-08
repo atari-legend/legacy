@@ -481,10 +481,22 @@ legend {
     border-radius: 50%;
 }
 
+#help-tip2 {
+    width: 10px;
+    height: 10px;
+    font-size: 10px;
+    line-height: 10px;
+    display: inline;
+}
+
 .help-tip::before {
     font-weight: bold;
     color: #fff;
     content: '?';
+}
+
+#help-tip2::before {
+    content: '-';
 }
 
 .help-tip:hover p {
