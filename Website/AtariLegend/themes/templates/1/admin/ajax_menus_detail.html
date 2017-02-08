@@ -127,7 +127,12 @@
 							<table class="table_game_list" style="width:95%;border: solid 1px black;margin:auto;">
 							<tr>
 								<th id="menu_mark_th"></th>
-								<th id="menu_gamename_th">Software Name</th>
+								<th id="menu_gamename_th">
+                                    Software Name
+                                    <div class="help-tip">
+										<p style="right:260px;">Press the actual software title to add author credits to this particular title on this menu disk</p>
+									</div>
+                                </th>
 								<th id="menu_gamedev_th">Developer</th>
 								<th id="menu_gameyear_th">Year</th>
 								<th id="menu_gameinfo_th">Info</th>
@@ -141,7 +146,7 @@
 									</td>
 									<td class="menu_gamename_td">
 										{if $line.game_name != ''}
-											<div id="author_to_menu_title{$line.game_id}"><a onclick="popAddAuthorMenutitle({$line.menu_disk_title_id},{$line.game_id},'{$line.game_name}')" style="cursor: pointer;" class="standard_tile_link">{$line.game_name}</a></div>{if $line.set_chain != ''} - <a onclick="popAddSet({$line.menu_disk_title_id},{$menus.menu_disk_id},'{$line.game_name|escape:'quotes'}')" style="cursor: pointer;" class="standard_tile_link"><i>Part {$line.set_chain}</i></a>{/if}
+											<div id="author_to_menu_title{$line.game_id}" style="display:inline;"><a onclick="popAddAuthorMenutitle({$line.menu_disk_title_id},{$line.game_id},'{$line.game_name|escape:'quotes'}')" style="cursor: pointer;" class="standard_tile_link">{$line.game_name}</a></div><div style="display:inline;">{if $line.set_chain != ''} - <b><i>Part {$line.set_chain}</i></b></div>{/if}{if $line.menu_disk_title_author_id != ''}<div class="help-tip" id="help-tip2"><p style="right:260px;">This title contains authors</p></div>{/if}</div>
 										{else}
 											<i>n/a</i>
 										{/if}
@@ -205,7 +210,11 @@
 							<table class="table_game_list" style="width:95%;border: solid 1px black;margin:auto;">
 							<tr>
 								<th id="menu_mark_th"></th>
-								<th id="menu_docname_th">Doc Name</th>
+								<th id="menu_docname_th">Doc Name
+                                    <div class="help-tip">
+										<p style="right:260px;">Press the actual doc title to add author credits to this particular doc on this menu disk</p>
+									</div>
+                                </th>
 								<th id="menu_doctype_th">Doc Type</th>
 								<th id="menu_docinfo_th">Info</th>
 							</tr>
@@ -217,7 +226,7 @@
 									</td>
 									<td class="menu_docname_td">
 										{if $line.game_name != ''}
-											<a href="../administration/construction.php" class="standard_table_left">{$line.game_name}</a>
+											<div id="author_to_menu_title_doc{$line.game_id}" style="display:inline;"><a onclick="popAddAuthorMenutitleDoc({$line.menu_disk_title_id},{$line.game_id},'{$line.game_name|escape:'quotes'}')" style="cursor: pointer;" class="standard_tile_link">{$line.game_name}</a></div>{if $line.menu_disk_title_author_id != ''}<div class="help-tip" id="help-tip2"><p style="right:260px;">This title contains authors</p></div>{/if}</div>
 										{else}
 											<i>n/a</i>
 										{/if}
@@ -257,6 +266,7 @@
 						{/if}								
 					</div>
 					<br>
+                    <div id="menu_detail_expand_author_title_doc"></div>
 					<div id="menu_detail_expand_docs"></div>
 					<div id="menu_screenshot_list">
 						{if isset( $screenshots)}
@@ -361,7 +371,11 @@
 		<table class="table_game_list" style="width:95%;border: solid 1px black;margin:auto;">
 		<tr>
 			<th id="menu_mark_th"></th>
-			<th id="menu_gamename_th">Software Name</th>
+			<th id="menu_gamename_th">Software Name
+                <div class="help-tip">
+                    <p style="right:260px;">Press the actual software title to add author credits to this particular title on this menu disk</p>
+                </div>
+            </th>
 			<th id="menu_gamedev_th">Developer</th>
 			<th id="menu_gameyear_th">Year</th>
 			<th id="menu_gameinfo_th">Info</th>
@@ -375,8 +389,8 @@
 				</td>
 				<td class="menu_gamename_td">
 					{if $line.game_name != ''}
-						{if $line.menu_types_text == 'Game'}<a class="standard_table_center user_popup fancybox.ajax" href="">{$line.game_name}{if $line.set_chain != ''} - <a onclick="popAddSet({$line.menu_disk_title_id},{$menu_disk_id})" style="cursor: pointer;" class="standard_tile_link"><i>Part {$line.set_chain}</i></a>{/if}</a>{else}<a href="../administration/construction.php" class="standard_table_left">{$line.game_name}</a>{/if}
-					{else}
+           				<div id="author_to_menu_title{$line.game_id}" style="display:inline;"><a onclick="popAddAuthorMenutitle({$line.menu_disk_title_id},{$line.game_id},'{$line.game_name|escape:'quotes'}')" style="cursor: pointer;" class="standard_tile_link">{$line.game_name}</a></div><div style="display:inline;">{if $line.set_chain != ''} - <b><i>Part {$line.set_chain}</i></b></div>{/if}{if $line.menu_disk_title_author_id != ''}<div class="help-tip" id="help-tip2"><p style="right:260px;">This title contains authors</p></div>{/if}</div>
+				    {else}
 						<i>n/a</i>
 					{/if}
 				</td>
@@ -441,7 +455,11 @@
 		<table class="table_game_list" style="width:95%;border: solid 1px black;margin:auto;">
 		<tr>
 			<th id="menu_mark_th"></th>
-			<th id="menu_docname_th">Doc Name</th>
+			<th id="menu_docname_th">Doc Name
+            <div class="help-tip">
+                <p style="right:260px;">Press the actual doc title to add author credits to this particular doc on this menu disk</p>
+            </div>
+            </th>
 			<th id="menu_doctype_th">Doc Type</th>
 			<th id="menu_docinfo_th">Info</th>
 		</tr>
@@ -453,7 +471,7 @@
 				</td>
 				<td class="menu_docname_td">
 					{if $line.game_name != ''}
-						<a href="../administration/construction.php" class="standard_table_left">{$line.game_name}</a>
+						<div id="author_to_menu_title_doc{$line.game_id}" style="display:inline;"><a onclick="popAddAuthorMenutitleDoc({$line.menu_disk_title_id},{$line.game_id},'{$line.game_name|escape:'quotes'}')" style="cursor: pointer;" class="standard_tile_link">{$line.game_name}</a></div>{if $line.menu_disk_title_author_id != ''}<div class="help-tip" id="help-tip2"><p style="right:260px;">This title contains authors</p></div>{/if}</div>							
 					{else}
 						<i>n/a</i>
 					{/if}
@@ -601,11 +619,17 @@
 
 {if isset($smarty_action) and $smarty_action == "add_chain_to_menu_return"}
 	{if isset($game)}
+    <br>
+    <br>
 	<div id="menu_software_list">
 		<table class="table_game_list" style="width:95%;border: solid 1px black;margin:auto;">
 		<tr>
 			<th id="menu_mark_th"></th>
-			<th id="menu_gamename_th">Software Name</th>
+			<th id="menu_gamename_th">Software Name
+                <div class="help-tip">
+                    <p style="right:260px;">Press the actual software title to add author credits to this particular title on this menu disk</p>
+                </div>
+            </th>
 			<th id="menu_gamedev_th">Developer</th>
 			<th id="menu_gameyear_th">Year</th>
 			<th id="menu_gameinfo_th">Info</th>
@@ -619,7 +643,7 @@
 				</td>
 				<td class="menu_gamename_td">
 					{if $line.game_name != ''}
-						{if $line.menu_types_text == 'Game'}<a class="standard_table_center user_popup fancybox.ajax" href="">{$line.game_name}{if $line.set_chain != ''} - <a onclick="popAddSet({$line.menu_disk_title_id},{$menu_disk_id},'{$line.game_name|escape:'quotes'}')" style="cursor: pointer;" class="standard_tile_link"><i>Part {$line.set_chain}</i></a>{/if}</a>{else}<a href="../administration/construction.php" class="standard_table_left">{$line.game_name}</a>{/if}
+						<div id="author_to_menu_title{$line.game_id}" style="display:inline;"><a onclick="popAddAuthorMenutitle({$line.menu_disk_title_id},{$line.game_id},'{$line.game_name|escape:'quotes'}')" style="cursor: pointer;" class="standard_tile_link">{$line.game_name}</a></div><div style="display:inline;">{if $line.set_chain != ''} - <b><i>Part {$line.set_chain}</i></b></div>{/if}{if $line.menu_disk_title_author_id != ''}<div class="help-tip" id="help-tip2"><p style="right:260px;">This title contains authors</p></div>{/if}</div>
 					{else}
 						<i>n/a</i>
 					{/if}
@@ -760,7 +784,7 @@
                         </td>
                     </form>				
                     <td class="menu_delete_td" style="text-align:right;">
-                        <input type="button" onclick="DeleteCredits({$individual.menu_disk_credits_id},{$individual.menu_disk_id})" class="quick_search_games_button" value="delete" style="margin-right:5px;">
+                        <input type="button" onclick="DeleteTitleCredits({$menu_disk_title_id},{$individual.ind_id},{$individual.author_type_id})" class="quick_search_games_button" value="delete" style="margin-right:5px;">
                     </td>
                 </tr>
             {/foreach}

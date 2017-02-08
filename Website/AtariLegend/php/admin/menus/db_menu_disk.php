@@ -306,8 +306,10 @@ if (isset($action) and ($action == "add_title_to_menu")) {
             game_year.game_year AS 'year',
             menu_disk_title.menu_disk_title_id,
             menu_types_main.menu_types_text,
+            menu_disk_title_author.menu_disk_title_author_id,
             menu_disk_title_set.menu_disk_title_set_chain
             FROM menu_disk_title
+            LEFT JOIN menu_disk_title_author ON (menu_disk_title_author.menu_disk_title_id = menu_disk_title.menu_disk_title_id)
             LEFT JOIN menu_disk_title_set ON (menu_disk_title_set.menu_disk_title_id = menu_disk_title.menu_disk_title_id)
             LEFT JOIN menu_disk_title_game ON (menu_disk_title.menu_disk_title_id = menu_disk_title_game.menu_disk_title_id)
             LEFT JOIN game ON (menu_disk_title_game.game_id = game.game_id)
@@ -324,8 +326,10 @@ if (isset($action) and ($action == "add_title_to_menu")) {
             demo_year.demo_year AS 'year',
             menu_disk_title.menu_disk_title_id,
             menu_types_main.menu_types_text,
+            menu_disk_title_author.menu_disk_title_author_id,
             menu_disk_title_set.menu_disk_title_set_chain
             FROM menu_disk_title
+            LEFT JOIN menu_disk_title_author ON (menu_disk_title_author.menu_disk_title_id = menu_disk_title.menu_disk_title_id)
             LEFT JOIN menu_disk_title_set ON (menu_disk_title_set.menu_disk_title_id = menu_disk_title.menu_disk_title_id)
             LEFT JOIN menu_disk_title_demo ON (menu_disk_title.menu_disk_title_id = menu_disk_title_demo.menu_disk_title_id)
             LEFT JOIN demo ON (menu_disk_title_demo.demo_id = demo.demo_id)
@@ -342,8 +346,10 @@ if (isset($action) and ($action == "add_title_to_menu")) {
             '' AS year,
             menu_disk_title.menu_disk_title_id,
             menu_types_main.menu_types_text,
+            menu_disk_title_author.menu_disk_title_author_id,
             menu_disk_title_set.menu_disk_title_set_chain
             FROM menu_disk_title
+            LEFT JOIN menu_disk_title_author ON (menu_disk_title_author.menu_disk_title_id = menu_disk_title.menu_disk_title_id)
             LEFT JOIN menu_disk_title_set ON (menu_disk_title_set.menu_disk_title_id = menu_disk_title.menu_disk_title_id)
             LEFT JOIN menu_disk_title_tools ON (menu_disk_title.menu_disk_title_id = menu_disk_title_tools.menu_disk_title_id)
             LEFT JOIN tools ON (menu_disk_title_tools.tools_id = tools.tools_id)
@@ -366,6 +372,7 @@ if (isset($action) and ($action == "add_title_to_menu")) {
                 'set_chain' => $query['menu_disk_title_set_chain'],
                 'year' => $query['year'],
                 'menu_disk_title_id' => $query['menu_disk_title_id'],
+                'menu_disk_title_author_id' => $query['menu_disk_title_author_id'],
                 'menu_types_text' => $query['menu_types_text']
             ));
         }
@@ -445,8 +452,10 @@ if (isset($action) and $action == "add_doc_to_menu") {
                              pub_dev.pub_dev_id AS 'developer_id',
                              doc_disk_game.doc_id AS 'doc_id',
                              menu_types_main.menu_types_text,
+                             menu_disk_title_author.menu_disk_title_author_id,
                              menu_disk_title.menu_disk_title_id AS 'menu_disk_title_id'
                              FROM menu_disk_title
+                             LEFT JOIN menu_disk_title_author ON (menu_disk_title_author.menu_disk_title_id = menu_disk_title.menu_disk_title_id)
                              LEFT JOIN menu_disk_title_doc_games ON (menu_disk_title.menu_disk_title_id = menu_disk_title_doc_games.menu_disk_title_id)
                              LEFT JOIN doc_disk_game ON (menu_disk_title_doc_games.doc_games_id = doc_disk_game.doc_disk_game_id)
                              LEFT JOIN game ON (game.game_id = doc_disk_game.game_id)
@@ -463,8 +472,10 @@ if (isset($action) and $action == "add_doc_to_menu") {
                              '' AS developer_id,
                              doc_disk_tool.doc_id AS 'doc_id',
                              menu_types_main.menu_types_text,
+                             menu_disk_title_author.menu_disk_title_author_id,
                              menu_disk_title.menu_disk_title_id AS 'menu_disk_title_id'
                              FROM menu_disk_title
+                             LEFT JOIN menu_disk_title_author ON (menu_disk_title_author.menu_disk_title_id = menu_disk_title.menu_disk_title_id)
                              LEFT JOIN menu_disk_title_doc_tools ON (menu_disk_title.menu_disk_title_id = menu_disk_title_doc_tools.menu_disk_title_id)
                              LEFT JOIN doc_disk_tool ON (menu_disk_title_doc_tools.doc_tools_id = doc_disk_tool.doc_disk_tool_id)
                              LEFT JOIN tools ON (tools.tools_id = doc_disk_tool.tools_id)
@@ -485,6 +496,7 @@ if (isset($action) and $action == "add_doc_to_menu") {
                 'developer_name' => $query['developer_name'],
                 'developer_id' => $query['developer_id'],
                 'doc_id' => $query['doc_id'],
+                'menu_disk_title_author_id' => $query['menu_disk_title_author_id'],
                 'menu_types_text' => $query['menu_types_text'],
                 'menu_disk_title_id' => $query['menu_disk_title_id']
             ));
@@ -519,21 +531,33 @@ if (isset($action) and $action == "delete_from_menu_disk") {
     /* let's check if the game is linked to a chain first */
     $sql = $mysqli->query("SELECT * FROM menu_disk_title_set
         WHERE menu_disk_title_id = '$menu_disk_title_id'") or die("error selecting title chain");
-    if ($sql->num_rows > 0) {
+    if ($sql->num_rows > 0) 
+    {
         $osd_message = "This title is still chained to another title - remove the chain first";
-    } else {
-        create_log_entry('Menu disk', $menu_disk_id, 'Software', $menu_disk_title_id, 'Delete', $_SESSION['user_id']);
+    } 
+    else 
+    {
+        /* let's see if the title contains authors */
+        $sql = $mysqli->query("SELECT * FROM menu_disk_title_author WHERE menu_disk_title_id = '$menu_disk_title_id'") or die("error selecting menu disk title authors");
+        if ($sql->num_rows > 0) 
+        {
+            $osd_message = "This title still contains authors - remove them first";
+        } 
+        else 
+        {
+            create_log_entry('Menu disk', $menu_disk_id, 'Software', $menu_disk_title_id, 'Delete', $_SESSION['user_id']);
 
-        $mysqli->query("DELETE FROM menu_disk_title_various WHERE menu_disk_title_id='$menu_disk_title_id'");
-        $mysqli->query("DELETE FROM menu_disk_title_tools WHERE menu_disk_title_id='$menu_disk_title_id'");
-        $mysqli->query("DELETE FROM menu_disk_title_music WHERE menu_disk_title_id='$menu_disk_title_id'");
-        $mysqli->query("DELETE FROM menu_disk_title_game WHERE menu_disk_title_id='$menu_disk_title_id'");
-        $mysqli->query("DELETE FROM menu_disk_title_doc_tools WHERE menu_disk_title_id='$menu_disk_title_id'");
-        $mysqli->query("DELETE FROM menu_disk_title_doc_games WHERE menu_disk_title_id='$menu_disk_title_id'");
-        $mysqli->query("DELETE FROM menu_disk_title_demo WHERE menu_disk_title_id='$menu_disk_title_id'");
-        $mysqli->query("DELETE FROM menu_disk_title WHERE menu_disk_title_id='$menu_disk_title_id'");
+            $mysqli->query("DELETE FROM menu_disk_title_various WHERE menu_disk_title_id='$menu_disk_title_id'");
+            $mysqli->query("DELETE FROM menu_disk_title_tools WHERE menu_disk_title_id='$menu_disk_title_id'");
+            $mysqli->query("DELETE FROM menu_disk_title_music WHERE menu_disk_title_id='$menu_disk_title_id'");
+            $mysqli->query("DELETE FROM menu_disk_title_game WHERE menu_disk_title_id='$menu_disk_title_id'");
+            $mysqli->query("DELETE FROM menu_disk_title_doc_tools WHERE menu_disk_title_id='$menu_disk_title_id'");
+            $mysqli->query("DELETE FROM menu_disk_title_doc_games WHERE menu_disk_title_id='$menu_disk_title_id'");
+            $mysqli->query("DELETE FROM menu_disk_title_demo WHERE menu_disk_title_id='$menu_disk_title_id'");
+            $mysqli->query("DELETE FROM menu_disk_title WHERE menu_disk_title_id='$menu_disk_title_id'");
 
-        $osd_message = "Title deleted from menu disk";
+            $osd_message = "Title deleted from menu disk";
+        }
     }
 
     // ok, delete done. Now this is a ajax job so we need a return value.
@@ -545,8 +569,10 @@ if (isset($action) and $action == "delete_from_menu_disk") {
           game_year.game_year AS 'year',
           menu_disk_title.menu_disk_title_id,
           menu_types_main.menu_types_text,
+          menu_disk_title_author.menu_disk_title_author_id,
           menu_disk_title_set.menu_disk_title_set_chain
           FROM menu_disk_title
+          LEFT JOIN menu_disk_title_author ON (menu_disk_title_author.menu_disk_title_id = menu_disk_title.menu_disk_title_id)
           LEFT JOIN menu_disk_title_set ON (menu_disk_title_set.menu_disk_title_id = menu_disk_title.menu_disk_title_id)
           LEFT JOIN menu_disk_title_game ON (menu_disk_title.menu_disk_title_id = menu_disk_title_game.menu_disk_title_id)
           LEFT JOIN game ON (menu_disk_title_game.game_id = game.game_id)
@@ -563,8 +589,10 @@ if (isset($action) and $action == "delete_from_menu_disk") {
           demo_year.demo_year AS 'year',
           menu_disk_title.menu_disk_title_id,
           menu_types_main.menu_types_text,
+          menu_disk_title_author.menu_disk_title_author_id,
           menu_disk_title_set.menu_disk_title_set_chain
           FROM menu_disk_title
+          LEFT JOIN menu_disk_title_author ON (menu_disk_title_author.menu_disk_title_id = menu_disk_title.menu_disk_title_id)
           LEFT JOIN menu_disk_title_set ON (menu_disk_title_set.menu_disk_title_id = menu_disk_title.menu_disk_title_id)
           LEFT JOIN menu_disk_title_demo ON (menu_disk_title.menu_disk_title_id = menu_disk_title_demo.menu_disk_title_id)
           LEFT JOIN demo ON (menu_disk_title_demo.demo_id = demo.demo_id)
@@ -581,8 +609,10 @@ if (isset($action) and $action == "delete_from_menu_disk") {
           '' AS year,
           menu_disk_title.menu_disk_title_id,
           menu_types_main.menu_types_text,
+          menu_disk_title_author.menu_disk_title_author_id,
           menu_disk_title_set.menu_disk_title_set_chain
           FROM menu_disk_title
+          LEFT JOIN menu_disk_title_author ON (menu_disk_title_author.menu_disk_title_id = menu_disk_title.menu_disk_title_id)
           LEFT JOIN menu_disk_title_set ON (menu_disk_title_set.menu_disk_title_id = menu_disk_title.menu_disk_title_id)
           LEFT JOIN menu_disk_title_tools ON (menu_disk_title.menu_disk_title_id = menu_disk_title_tools.menu_disk_title_id)
           LEFT JOIN tools ON (menu_disk_title_tools.tools_id = tools.tools_id)
@@ -606,6 +636,7 @@ if (isset($action) and $action == "delete_from_menu_disk") {
             'set_chain' => $query['menu_disk_title_set_chain'],
             'year' => $query['year'],
             'menu_disk_title_id' => $query['menu_disk_title_id'],
+            'menu_disk_title_author_id' => $query['menu_disk_title_author_id'],
             'menu_types_text' => $query['menu_types_text']
         ));
     }
@@ -623,40 +654,50 @@ if (isset($action) and $action == "delete_from_menu_disk") {
 // DELETE DOC FROM MENU DISK
 //****************************************************************************************
 if (isset($action) and $action == "delete_doc_from_menu_disk") {
-    create_log_entry('Menu disk', $menu_disk_id, 'Doc', $menu_disk_title_id, 'Delete', $_SESSION['user_id']);
+    
+    /* let's see if the title contains authors */
+    $sql = $mysqli->query("SELECT * FROM menu_disk_title_author WHERE menu_disk_title_id = '$menu_disk_title_id'") or die("error selecting menu disk title authors");
+    if ($sql->num_rows > 0) 
+    {
+        $osd_message = "This title still contains authors - remove them first";
+    } 
+    else 
+    {
+        create_log_entry('Menu disk', $menu_disk_id, 'Doc', $menu_disk_title_id, 'Delete', $_SESSION['user_id']);
 
-    //get the doc cross id
-    $query_doc_game_id = "SELECT doc_games_id FROM menu_disk_title_doc_games WHERE menu_disk_title_id='$menu_disk_title_id'";
-    $result = $mysqli->query($query_doc_game_id) or die("Database error - selecting menu_disk_title_doc_games_id");
-    $query_data  = $result->fetch_array(MYSQLI_BOTH);
-    $doc_game_id = $query_data['doc_games_id'];
+        //get the doc cross id
+        $query_doc_game_id = "SELECT doc_games_id FROM menu_disk_title_doc_games WHERE menu_disk_title_id='$menu_disk_title_id'";
+        $result = $mysqli->query($query_doc_game_id) or die("Database error - selecting menu_disk_title_doc_games_id");
+        $query_data  = $result->fetch_array(MYSQLI_BOTH);
+        $doc_game_id = $query_data['doc_games_id'];
 
-    $query_doc_tool_id = "SELECT * FROM menu_disk_title_doc_tools WHERE menu_disk_title_id='$menu_disk_title_id'";
-    $result = $mysqli->query($query_doc_tool_id) or die("Database error - selecting menu_disk_title_doc_tools_id");
-    $query_data  = $result->fetch_array(MYSQLI_BOTH);
-    $doc_tool_id = $query_data['doc_tools_id'];
+        $query_doc_tool_id = "SELECT * FROM menu_disk_title_doc_tools WHERE menu_disk_title_id='$menu_disk_title_id'";
+        $result = $mysqli->query($query_doc_tool_id) or die("Database error - selecting menu_disk_title_doc_tools_id");
+        $query_data  = $result->fetch_array(MYSQLI_BOTH);
+        $doc_tool_id = $query_data['doc_tools_id'];
 
-    //get the doc id
-    $query_doc_id = "SELECT * FROM doc_disk_game WHERE doc_disk_game_id='$doc_game_id'";
-    $result = $mysqli->query($query_doc_id) or die("Database error - selecting doc_id");
-    $query_data = $result->fetch_array(MYSQLI_BOTH);
-    $doc_id     = $query_data['doc_id'];
-
-    if ($doc_id == '') {
-        $query_doc_id = "SELECT * FROM doc_disk_tool WHERE doc_disk_tool_id='$doc_tool_id'";
-        $result = $mysqli->query($query_doc_id) or die("Database error - selecting doc_id from tool table");
+        //get the doc id
+        $query_doc_id = "SELECT * FROM doc_disk_game WHERE doc_disk_game_id='$doc_game_id'";
+        $result = $mysqli->query($query_doc_id) or die("Database error - selecting doc_id");
         $query_data = $result->fetch_array(MYSQLI_BOTH);
         $doc_id     = $query_data['doc_id'];
+
+        if ($doc_id == '') {
+            $query_doc_id = "SELECT * FROM doc_disk_tool WHERE doc_disk_tool_id='$doc_tool_id'";
+            $result = $mysqli->query($query_doc_id) or die("Database error - selecting doc_id from tool table");
+            $query_data = $result->fetch_array(MYSQLI_BOTH);
+            $doc_id     = $query_data['doc_id'];
+        }
+
+        $mysqli->query("DELETE FROM menu_disk_title WHERE menu_disk_title_id='$menu_disk_title_id'") or die("deleting menu_disk_title table");
+        $mysqli->query("DELETE FROM doc_disk_game WHERE doc_disk_game_id='$doc_game_id'") or die("deleting doc_disk_game table");
+        $mysqli->query("DELETE FROM menu_disk_title_doc_games WHERE menu_disk_title_id='$menu_disk_title_id'") or die("deleting menu_disk_title_doc_games");
+        $mysqli->query("DELETE FROM doc_disk_tool WHERE doc_disk_tool_id='$doc_tool_id'") or die("deleting doc_disk_game table");
+        $mysqli->query("DELETE FROM menu_disk_title_doc_tools WHERE menu_disk_title_id='$menu_disk_title_id'") or die("deleting menu_disk_title_doc_games");
+        $mysqli->query("DELETE FROM doc WHERE doc_id='$doc_id'") or die("deleting doc table");
+
+        $osd_message = "Game doc deleted from menu disk";
     }
-
-    $mysqli->query("DELETE FROM menu_disk_title WHERE menu_disk_title_id='$menu_disk_title_id'") or die("deleting menu_disk_title table");
-    $mysqli->query("DELETE FROM doc_disk_game WHERE doc_disk_game_id='$doc_game_id'") or die("deleting doc_disk_game table");
-    $mysqli->query("DELETE FROM menu_disk_title_doc_games WHERE menu_disk_title_id='$menu_disk_title_id'") or die("deleting menu_disk_title_doc_games");
-    $mysqli->query("DELETE FROM doc_disk_tool WHERE doc_disk_tool_id='$doc_tool_id'") or die("deleting doc_disk_game table");
-    $mysqli->query("DELETE FROM menu_disk_title_doc_tools WHERE menu_disk_title_id='$menu_disk_title_id'") or die("deleting menu_disk_title_doc_games");
-    $mysqli->query("DELETE FROM doc WHERE doc_id='$doc_id'") or die("deleting doc table");
-
-    $osd_message = "Game doc deleted from menu disk";
 
 
     // ok, delete done. Now this is a ajax job so we need a return value.
@@ -669,8 +710,10 @@ if (isset($action) and $action == "delete_doc_from_menu_disk") {
                              pub_dev.pub_dev_id AS 'developer_id',
                              doc_disk_game.doc_id AS 'doc_id',
                              menu_types_main.menu_types_text,
+                             menu_disk_title_author.menu_disk_title_author_id,
                              menu_disk_title.menu_disk_title_id AS 'menu_disk_title_id'
                              FROM menu_disk_title
+                             LEFT JOIN menu_disk_title_author ON (menu_disk_title_author.menu_disk_title_id = menu_disk_title.menu_disk_title_id)
                              LEFT JOIN menu_disk_title_doc_games ON (menu_disk_title.menu_disk_title_id = menu_disk_title_doc_games.menu_disk_title_id)
                              LEFT JOIN doc_disk_game ON (menu_disk_title_doc_games.doc_games_id = doc_disk_game.doc_disk_game_id)
                              LEFT JOIN game ON (game.game_id = doc_disk_game.game_id)
@@ -686,9 +729,11 @@ if (isset($action) and $action == "delete_doc_from_menu_disk") {
                              '' AS developer_name,
                              '' AS developer_id,
                              doc_disk_tool.doc_id AS 'doc_id',
+                             menu_disk_title_author.menu_disk_title_author_id,
                              menu_types_main.menu_types_text,
                              menu_disk_title.menu_disk_title_id AS 'menu_disk_title_id'
                              FROM menu_disk_title
+                             LEFT JOIN menu_disk_title_author ON (menu_disk_title_author.menu_disk_title_id = menu_disk_title.menu_disk_title_id)
                              LEFT JOIN menu_disk_title_doc_tools ON (menu_disk_title.menu_disk_title_id = menu_disk_title_doc_tools.menu_disk_title_id)
                              LEFT JOIN doc_disk_tool ON (menu_disk_title_doc_tools.doc_tools_id = doc_disk_tool.doc_disk_tool_id)
                              LEFT JOIN tools ON (tools.tools_id = doc_disk_tool.tools_id)
@@ -710,6 +755,7 @@ if (isset($action) and $action == "delete_doc_from_menu_disk") {
             'developer_id' => $query['developer_id'],
             'doc_id' => $query['doc_id'],
             'menu_types_text' => $query['menu_types_text'],
+            'menu_disk_title_author_id' => $query['menu_disk_title_author_id'],
             'menu_disk_title_id' => $query['menu_disk_title_id']
         ));
     }
@@ -1351,7 +1397,8 @@ if (isset($action) and ($action == "change_menu_disk_state" or $action == "chang
                         $mysqli->query("DELETE from menu_disk_title_doc_games WHERE menu_disk_title_id='$menu_disk_title_id'") or die("error deleting entries from menu_disk_title_doc_games table");
                         $mysqli->query("DELETE from menu_disk_title_doc_tools WHERE menu_disk_title_id='$menu_disk_title_id'") or die("error deleting entries from menu_disk_title_doc_tools table");
                         $mysqli->query("DELETE from menu_disk_title_set WHERE menu_disk_title_id='$menu_disk_title_id'") or die("error deleting entries from menu_disk_title_set");
-
+                        $mysqli->query("DELETE from menu_disk_title_authors WHERE menu_disk_title_id='$menu_disk_title_id'") or die("error deleting entries from menu_disk_title_authors table");
+                        
                         // menu disk tables
                         $mysqli->query("DELETE from menu_disk_year WHERE menu_disk_id='$menu_disk_id'") or die("error deleting entries from menu_disk_year");
                         $mysqli->query("DELETE from menu_disk_submenu WHERE menu_disk_id='$menu_disk_id'") or die("error deleting entries from menu_disk_submenu");
@@ -1459,8 +1506,10 @@ if (isset($action) and ($action == "change_menu_disk_state" or $action == "chang
             game_year.game_year AS 'year',
             menu_disk_title.menu_disk_title_id,
             menu_types_main.menu_types_text,
+            menu_disk_title_author.menu_disk_title_author_id,
             menu_disk_title_set.menu_disk_title_set_chain
             FROM menu_disk_title
+            LEFT JOIN menu_disk_title_author ON (menu_disk_title_author.menu_disk_title_id = menu_disk_title.menu_disk_title_id)
             LEFT JOIN menu_disk_title_set ON (menu_disk_title_set.menu_disk_title_id = menu_disk_title.menu_disk_title_id)
             LEFT JOIN menu_disk_title_game ON (menu_disk_title.menu_disk_title_id = menu_disk_title_game.menu_disk_title_id)
             LEFT JOIN game ON (menu_disk_title_game.game_id = game.game_id)
@@ -1477,8 +1526,10 @@ if (isset($action) and ($action == "change_menu_disk_state" or $action == "chang
             demo_year.demo_year AS 'year',
             menu_disk_title.menu_disk_title_id,
             menu_types_main.menu_types_text,
+            menu_disk_title_author.menu_disk_title_author_id,
             menu_disk_title_set.menu_disk_title_set_chain
             FROM menu_disk_title
+            LEFT JOIN menu_disk_title_author ON (menu_disk_title_author.menu_disk_title_id = menu_disk_title.menu_disk_title_id)
             LEFT JOIN menu_disk_title_set ON (menu_disk_title_set.menu_disk_title_id = menu_disk_title.menu_disk_title_id)
             LEFT JOIN menu_disk_title_demo ON (menu_disk_title.menu_disk_title_id = menu_disk_title_demo.menu_disk_title_id)
             LEFT JOIN demo ON (menu_disk_title_demo.demo_id = demo.demo_id)
@@ -1495,8 +1546,10 @@ if (isset($action) and ($action == "change_menu_disk_state" or $action == "chang
             '' AS year,
             menu_disk_title.menu_disk_title_id,
             menu_types_main.menu_types_text,
+            menu_disk_title_author.menu_disk_title_author_id,
             menu_disk_title_set.menu_disk_title_set_chain
             FROM menu_disk_title
+            LEFT JOIN menu_disk_title_author ON (menu_disk_title_author.menu_disk_title_id = menu_disk_title.menu_disk_title_id)
             LEFT JOIN menu_disk_title_set ON (menu_disk_title_set.menu_disk_title_id = menu_disk_title.menu_disk_title_id)
             LEFT JOIN menu_disk_title_tools ON (menu_disk_title.menu_disk_title_id = menu_disk_title_tools.menu_disk_title_id)
             LEFT JOIN tools ON (menu_disk_title_tools.tools_id = tools.tools_id)
@@ -1519,6 +1572,7 @@ if (isset($action) and ($action == "change_menu_disk_state" or $action == "chang
                 'set_chain' => $query['menu_disk_title_set_chain'],
                 'year' => $query['year'],
                 'menu_disk_title_id' => $query['menu_disk_title_id'],
+                'menu_disk_title_author_id' => $query['menu_disk_title_author_id'],
                 'menu_types_text' => $query['menu_types_text']
             ));
         }
@@ -1849,8 +1903,10 @@ if (isset($action) and ($action == "change_doctype")) {
                              doc_disk_game.doc_id AS 'doc_id',
                              doc.doc_type_id,
                              menu_types_main.menu_types_text,
+                             menu_disk_title_author.menu_disk_title_author_id,
                              menu_disk_title.menu_disk_title_id AS 'menu_disk_title_id'
                              FROM menu_disk_title
+                             LEFT JOIN menu_disk_title_author ON (menu_disk_title_author.menu_disk_title_id = menu_disk_title.menu_disk_title_id)
                              LEFT JOIN menu_disk_title_doc_games ON (menu_disk_title.menu_disk_title_id = menu_disk_title_doc_games.menu_disk_title_id)
                              LEFT JOIN doc_disk_game ON (menu_disk_title_doc_games.doc_games_id = doc_disk_game.doc_disk_game_id)
                              LEFT JOIN doc ON (doc_disk_game.doc_id = doc.doc_id)
@@ -1869,8 +1925,10 @@ if (isset($action) and ($action == "change_doctype")) {
                              doc_disk_tool.doc_id AS 'doc_id',
                              doc.doc_type_id,
                              menu_types_main.menu_types_text,
+                             menu_disk_title_author.menu_disk_title_author_id,
                              menu_disk_title.menu_disk_title_id AS 'menu_disk_title_id'
                              FROM menu_disk_title
+                             LEFT JOIN menu_disk_title_author ON (menu_disk_title_author.menu_disk_title_id = menu_disk_title.menu_disk_title_id)
                              LEFT JOIN menu_disk_title_doc_tools ON (menu_disk_title.menu_disk_title_id = menu_disk_title_doc_tools.menu_disk_title_id)
                              LEFT JOIN doc_disk_tool ON (menu_disk_title_doc_tools.doc_tools_id = doc_disk_tool.doc_disk_tool_id)
                              LEFT JOIN doc ON (doc_disk_tool.doc_id = doc.doc_id)
@@ -1893,6 +1951,7 @@ if (isset($action) and ($action == "change_doctype")) {
             'developer_id' => $query['developer_id'],
             'doc_id' => $query['doc_id'],
             'doc_type_id' => $query['doc_type_id'],
+            'menu_disk_title_author_id' => $query['menu_disk_title_author_id'],
             'menu_types_text' => $query['menu_types_text'],
             'menu_disk_title_id' => $query['menu_disk_title_id']
         ));
@@ -2212,8 +2271,10 @@ if (isset($action) and ($action == "add_set_to_menu" or $action == "link_game_to
           game_year.game_year AS 'year',
           menu_disk_title.menu_disk_title_id,
           menu_types_main.menu_types_text,
+          menu_disk_title_author.menu_disk_title_author_id,
           menu_disk_title_set.menu_disk_title_set_chain
           FROM menu_disk_title
+          LEFT JOIN menu_disk_title_author ON (menu_disk_title_author.menu_disk_title_id = menu_disk_title.menu_disk_title_id)
           LEFT JOIN menu_disk_title_set ON (menu_disk_title_set.menu_disk_title_id = menu_disk_title.menu_disk_title_id)
           LEFT JOIN menu_disk_title_game ON (menu_disk_title.menu_disk_title_id = menu_disk_title_game.menu_disk_title_id)
           LEFT JOIN game ON (menu_disk_title_game.game_id = game.game_id)
@@ -2230,8 +2291,10 @@ if (isset($action) and ($action == "add_set_to_menu" or $action == "link_game_to
           demo_year.demo_year AS 'year',
           menu_disk_title.menu_disk_title_id,
           menu_types_main.menu_types_text,
+          menu_disk_title_author.menu_disk_title_author_id,
           menu_disk_title_set.menu_disk_title_set_chain
           FROM menu_disk_title
+          LEFT JOIN menu_disk_title_author ON (menu_disk_title_author.menu_disk_title_id = menu_disk_title.menu_disk_title_id)
           LEFT JOIN menu_disk_title_set ON (menu_disk_title_set.menu_disk_title_id = menu_disk_title.menu_disk_title_id)
           LEFT JOIN menu_disk_title_demo ON (menu_disk_title.menu_disk_title_id = menu_disk_title_demo.menu_disk_title_id)
           LEFT JOIN demo ON (menu_disk_title_demo.demo_id = demo.demo_id)
@@ -2248,8 +2311,10 @@ if (isset($action) and ($action == "add_set_to_menu" or $action == "link_game_to
           '' AS year,
           menu_disk_title.menu_disk_title_id,
           menu_types_main.menu_types_text,
+          menu_disk_title_author.menu_disk_title_author_id,
           menu_disk_title_set.menu_disk_title_set_chain
           FROM menu_disk_title
+          LEFT JOIN menu_disk_title_author ON (menu_disk_title_author.menu_disk_title_id = menu_disk_title.menu_disk_title_id)
           LEFT JOIN menu_disk_title_set ON (menu_disk_title_set.menu_disk_title_id = menu_disk_title.menu_disk_title_id)
           LEFT JOIN menu_disk_title_tools ON (menu_disk_title.menu_disk_title_id = menu_disk_title_tools.menu_disk_title_id)
           LEFT JOIN tools ON (menu_disk_title_tools.tools_id = tools.tools_id)
@@ -2272,6 +2337,7 @@ if (isset($action) and ($action == "add_set_to_menu" or $action == "link_game_to
             'set_chain' => $query['menu_disk_title_set_chain'],
             'year' => $query['year'],
             'menu_disk_title_id' => $query['menu_disk_title_id'],
+            'menu_disk_title_author_id' => $query['menu_disk_title_author_id'],
             'menu_types_text' => $query['menu_types_text']
         ));
     }
@@ -2328,20 +2394,31 @@ if (isset($action) and ($action == "publish_set")) {
 //****************************************************************************************
 // Add an author to a menu_disk_title
 //****************************************************************************************
-if ($action == 'add_author')
+if ($action == 'add_author' OR $action == 'delete_menu_disk_title_credits' )
 {   
-     //Insert author into the menu_disk_title_author table
-    $mysqli->query("INSERT INTO menu_disk_title_author (menu_disk_title_id,ind_id,author_type_id) VALUES ('$menu_disk_title_id','$ind_id','$author_type_id')") or die("error inserting menu_disk_title_author"); ;
-       
     //Get the menu_disk_id
     $sql_menu_disk_id = $mysqli->query("SELECT menu_disk_id FROM menu_disk_title WHERE menu_disk_title_id ='$menu_disk_title_id'");   
     
     while ($query = $sql_menu_disk_id->fetch_array(MYSQLI_BOTH)) {    
         $menu_disk_id = $query['menu_disk_id'];
     }
-     
-    create_log_entry('Menu disk', $menu_disk_id, 'Authors', $menu_disk_title_id, 'Insert', $_SESSION['user_id']); 
-       
+
+    if ($action == 'add_author')
+    {
+        //Insert author into the menu_disk_title_author table
+        $mysqli->query("INSERT INTO menu_disk_title_author (menu_disk_title_id,ind_id,author_type_id) VALUES ('$menu_disk_title_id','$ind_id','$author_type_id')") or die("error inserting menu_disk_title_author"); ; 
+    
+         create_log_entry('Menu disk', $menu_disk_id, 'Authors', $menu_disk_title_id, 'Insert', $_SESSION['user_id']); 
+    }
+    else
+    {
+        //delete author from the menu_disk_title_author table
+        $mysqli->query("DELETE FROM menu_disk_title_author WHERE menu_disk_title_id='$menu_disk_title_id' and ind_id ='$ind_id' and author_type_id ='$author_type_id'") or die("error deleting menu disk title credit");
+    
+         create_log_entry('Menu disk', $menu_disk_id, 'Authors', $menu_disk_title_id, 'Delete', $_SESSION['user_id']); 
+    }
+    
+  
     //Get the individuals
     $sql_individuals = $mysqli->query("SELECT * FROM individuals ORDER BY ind_name ASC");
 
@@ -2357,7 +2434,8 @@ if ($action == 'add_author')
     //load the authors for this title
     $sql_author_info = "SELECT  individuals.ind_id,
                                 individuals.ind_name,
-                                author_type.author_type_info
+                                author_type.author_type_info,
+                                author_type.author_type_id
                                 FROM menu_disk_title_author
                                 LEFT JOIN individuals ON (individuals.ind_id = menu_disk_title_author.ind_id)
                                 LEFT JOIN author_type ON (menu_disk_title_author.author_type_id = author_type.author_type_id)
@@ -2390,6 +2468,7 @@ if ($action == 'add_author')
         $smarty->append('title_credits', array(
             'ind_id' => $query['ind_id'],
             'ind_name' => $query['ind_name'],
+            'author_type_id' => $query['author_type_id'],
             'author_type_info' => $query['author_type_info']
         ));
     }
@@ -2406,9 +2485,6 @@ if ($action == 'add_author')
     }
 
     $smarty->assign('menu_disk_title_id', $menu_disk_title_id);
-  
-    $osd_message = "Credit added to title";
-    $smarty->assign('osd_message', $osd_message);
   
     // Create dropdown values a-z
     $az_value  = az_dropdown_value(0);
