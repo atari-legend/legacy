@@ -1794,7 +1794,7 @@ if (isset($action) and ($action == "change_menu_disk_state" or $action == "chang
     }
 }
 
-//****************************************************************************************
+/* //****************************************************************************************
 // Update nickname
 //****************************************************************************************
 if (isset($action) and ($action == "change_nickname")) {
@@ -1859,11 +1859,11 @@ if (isset($action) and ($action == "change_nickname")) {
                     'individual_nicks_id' => $query_nick['individual_nicks_id'],
                     'nick' => $query_nick['nick']
                 ));
-            } */
-        }
+            } 
+        }*/
 
         // This smarty is used for for the menu_disk credits
-        $smarty->append('individuals', array(
+       /* $smarty->append('individuals', array(
             'menu_disk_credits_id' => $query['menu_disk_credits_id'],
             'ind_id' => $query['ind_id'],
             'ind_name' => $query['ind_name'],
@@ -1878,7 +1878,7 @@ if (isset($action) and ($action == "change_nickname")) {
     $smarty->assign('smarty_action', 'update_menu_disk_credits');
     //Send to smarty for return value
     $smarty->display("file:" . $cpanel_template_folder . "ajax_menus_detail.html");
-}
+} */
 
 
 //****************************************************************************************
