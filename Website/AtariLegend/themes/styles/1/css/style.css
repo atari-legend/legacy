@@ -658,10 +658,20 @@ legend {
   border: #00d3d3 solid 1px;
   border-radius: 50%; }
 
+#help-tip2 {
+  width: 10px;
+  height: 10px;
+  font-size: 10px;
+  line-height: 10px;
+  display: inline; }
+
 .help-tip:before {
   font-weight: bold;
   color: #fff;
   content: '?'; }
+
+#help-tip2:before {
+  content: '-'; }
 
 .help-tip:hover p {
   display: block;
@@ -685,6 +695,10 @@ legend {
   border: #00d3d3 solid 1px;
   border-radius: 3px;
   box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2); }
+
+#help-tip2 p {
+  right: 200px;
+  width: 200px; }
 
 .help-tip p:after {
   position: absolute;
@@ -2454,7 +2468,7 @@ header nav input {
 
 #menu_cred_th,
 #menu_scene_th {
-  width: 30%;
+  width: 45%;
   text-align: left; }
 
 #menu_nick_th {
