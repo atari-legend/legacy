@@ -1358,18 +1358,6 @@ if (isset($action) and ($action == "change_menu_disk_state" or $action == "chang
             }
             create_log_entry('Menu disk', $menu_disk_id, 'Parent', $parent_id, 'Update', $_SESSION['user_id']);
         } elseif ($action == "delete_menu_disk") {
-            //get the menu set id
-            $query_menu_sets_id = "SELECT menu_sets_id FROM menu_disk WHERE menu_disk_id = '$menu_disk_id'";
-            $result = $mysqli->query($query_menu_sets_id) or die("getting menu_set_id failed");
-            $query_id     = $result->fetch_array(MYSQLI_BOTH);
-            $menu_sets_id = $query_id['menu_sets_id'];
-
-            //get the menu disk title id
-            $query_menu_disk_title_id = "SELECT menu_disk_title_id FROM menu_disk_title WHERE menu_disk_id = '$menu_disk_id'";
-            $result = $mysqli->query($query_menu_disk_title_id) or die("getting menu_disk_title_id failed");
-            $query_id           = $result->fetch_array(MYSQLI_BOTH);
-            $menu_disk_title_id = $query_id['menu_disk_title_id'];
-
             // first let's check if this menu disk has user comments
             $sql = $mysqli->query("SELECT * FROM menu_user_comments WHERE menu_disk_id = '$menu_disk_id'") or die("error selecting menu comments");
             if ($sql->num_rows > 0) {
@@ -1384,27 +1372,76 @@ if (isset($action) and ($action == "change_menu_disk_state" or $action == "chang
                     $sql = $mysqli->query("SELECT * FROM screenshot_menu WHERE menu_disk_id='$menu_disk_id'") or die("error selecting menu screenshots");
                     if ($sql->num_rows > 0) {
                         $osd_message = "This menu still has screenshots, please remove them first";
-                    } else {
-                        create_log_entry('Menu disk', $menu_disk_id, 'Menu disk', $menu_disk_id, 'Delete', $_SESSION['user_id']);
+                    } else {  
 
-                        //Lets do all the menu disk title stuff
-                        $mysqli->query("DELETE from menu_disk_title WHERE menu_disk_title_id='$menu_disk_title_id'") or die("error deleting entries from menu_disk_title table");
-                        $mysqli->query("DELETE from menu_disk_title_game WHERE menu_disk_title_id='$menu_disk_title_id'") or die("error deleting entries from menu_disk_title_game table");
-                        $mysqli->query("DELETE from menu_disk_title_tools WHERE menu_disk_title_id='$menu_disk_title_id'") or die("error deleting entries from menu_disk_title_tools table");
-                        $mysqli->query("DELETE from menu_disk_title_demo WHERE menu_disk_title_id='$menu_disk_title_id'") or die("error deleting entries from menu_disk_title_demo table");
-                        $mysqli->query("DELETE from menu_disk_title_music WHERE menu_disk_title_id='$menu_disk_title_id'") or die("error deleting entries from menu_disk_title_music table");
-                        $mysqli->query("DELETE from menu_disk_title_various WHERE menu_disk_title_id='$menu_disk_title_id'") or die("error deleting entries from menu_disk_title_various table");
-                        $mysqli->query("DELETE from menu_disk_title_doc_games WHERE menu_disk_title_id='$menu_disk_title_id'") or die("error deleting entries from menu_disk_title_doc_games table");
-                        $mysqli->query("DELETE from menu_disk_title_doc_tools WHERE menu_disk_title_id='$menu_disk_title_id'") or die("error deleting entries from menu_disk_title_doc_tools table");
-                        $mysqli->query("DELETE from menu_disk_title_set WHERE menu_disk_title_id='$menu_disk_title_id'") or die("error deleting entries from menu_disk_title_set");
-                        $mysqli->query("DELETE from menu_disk_title_authors WHERE menu_disk_title_id='$menu_disk_title_id'") or die("error deleting entries from menu_disk_title_authors table");
+                        create_log_entry('Menu disk', $menu_disk_id, 'Menu disk', $menu_disk_id, 'Delete', $_SESSION['user_id']);
+                        
+                         //get the menu set id
+                        $query_menu_sets_id = "SELECT menu_sets_id FROM menu_disk WHERE menu_disk_id = '$menu_disk_id'";
+                        $result = $mysqli->query($query_menu_sets_id) or die("getting menu_set_id failed");
+                        $query_id     = $result->fetch_array(MYSQLI_BOTH);
+                        $menu_sets_id = $query_id['menu_sets_id'];
+                        
+                        echo $menu_disk_id;
+                        echo "-";
+
+                        //get the menu disk title id
+                        $query_menu_disk_title_id = "SELECT menu_disk_title_id FROM menu_disk_title WHERE menu_disk_id = '$menu_disk_id'";
+                        $result = $mysqli->query($query_menu_disk_title_id) or die("getting menu_disk_title_id failed");
+                        
+                        while ($query_id = $result->fetch_array(MYSQLI_BOTH)) {
+                        
+                            $menu_disk_title_id = $query_id['menu_disk_title_id'];   
+                            echo $menu_disk_title_id;
+                          
+                            //get the doc cross id
+                            $query_doc_game_id = "SELECT doc_games_id FROM menu_disk_title_doc_games WHERE menu_disk_title_id='$menu_disk_title_id'";
+                            $result = $mysqli->query($query_doc_game_id) or die("Database error - selecting menu_disk_title_doc_games_id");
+                            $query_data  = $result->fetch_array(MYSQLI_BOTH);
+                            $doc_game_id = $query_data['doc_games_id'];
+
+                            $query_doc_tool_id = "SELECT * FROM menu_disk_title_doc_tools WHERE menu_disk_title_id='$menu_disk_title_id'";
+                            $result = $mysqli->query($query_doc_tool_id) or die("Database error - selecting menu_disk_title_doc_tools_id");
+                            $query_data  = $result->fetch_array(MYSQLI_BOTH);
+                            $doc_tool_id = $query_data['doc_tools_id'];
+
+                            //get the doc id
+                            $query_doc_id = "SELECT * FROM doc_disk_game WHERE doc_disk_game_id='$doc_game_id'";
+                            $result = $mysqli->query($query_doc_id) or die("Database error - selecting doc_id");
+                            $query_data = $result->fetch_array(MYSQLI_BOTH);
+                            $doc_id     = $query_data['doc_id'];
+
+                            if ($doc_id == '') {
+                                $query_doc_id = "SELECT * FROM doc_disk_tool WHERE doc_disk_tool_id='$doc_tool_id'";
+                                $result = $mysqli->query($query_doc_id) or die("Database error - selecting doc_id from tool table");
+                                $query_data = $result->fetch_array(MYSQLI_BOTH);
+                                $doc_id     = $query_data['doc_id'];
+                            }
+                            
+                            //Lets do all the menu disk title stuff
+                            $mysqli->query("DELETE from menu_disk_title WHERE menu_disk_title_id='$menu_disk_title_id'") or die("error deleting entries from menu_disk_title table");
+                            $mysqli->query("DELETE from menu_disk_title_game WHERE menu_disk_title_id='$menu_disk_title_id'") or die("error deleting entries from menu_disk_title_game table");
+                            $mysqli->query("DELETE from menu_disk_title_tools WHERE menu_disk_title_id='$menu_disk_title_id'") or die("error deleting entries from menu_disk_title_tools table");
+                            $mysqli->query("DELETE from menu_disk_title_demo WHERE menu_disk_title_id='$menu_disk_title_id'") or die("error deleting entries from menu_disk_title_demo table");
+                            $mysqli->query("DELETE from menu_disk_title_music WHERE menu_disk_title_id='$menu_disk_title_id'") or die("error deleting entries from menu_disk_title_music table");
+                            $mysqli->query("DELETE from menu_disk_title_various WHERE menu_disk_title_id='$menu_disk_title_id'") or die("error deleting entries from menu_disk_title_various table");
+                            $mysqli->query("DELETE from menu_disk_title_doc_games WHERE menu_disk_title_id='$menu_disk_title_id'") or die("error deleting entries from menu_disk_title_doc_games table");
+                            $mysqli->query("DELETE from menu_disk_title_doc_tools WHERE menu_disk_title_id='$menu_disk_title_id'") or die("error deleting entries from menu_disk_title_doc_tools table");
+                            $mysqli->query("DELETE from menu_disk_title_set WHERE menu_disk_title_id='$menu_disk_title_id'") or die("error deleting entries from menu_disk_title_set");
+                            $mysqli->query("DELETE from menu_disk_title_author WHERE menu_disk_title_id='$menu_disk_title_id'") or die("error deleting entries from menu_disk_title_authors table");
+                            
+                             //Lets do all the doc disk stuff
+                            $mysqli->query("DELETE FROM doc_disk_game WHERE doc_disk_game_id='$doc_game_id'") or die("deleting doc_disk_game table");                        
+                            $mysqli->query("DELETE FROM doc_disk_tool WHERE doc_disk_tool_id='$doc_tool_id'") or die("deleting doc_disk_game table");
+                            $mysqli->query("DELETE FROM doc WHERE doc_id='$doc_id'") or die("deleting doc table");
+                        }
                         
                         // menu disk tables
                         $mysqli->query("DELETE from menu_disk_year WHERE menu_disk_id='$menu_disk_id'") or die("error deleting entries from menu_disk_year");
                         $mysqli->query("DELETE from menu_disk_submenu WHERE menu_disk_id='$menu_disk_id'") or die("error deleting entries from menu_disk_submenu");
                         $mysqli->query("DELETE from menu_disk_credits WHERE menu_disk_id='$menu_disk_id'") or die("error deleting entries from menu_disk_credits");
                         $mysqli->query("DELETE from menu_disk WHERE menu_disk_id='$menu_disk_id'") or die("error deleting entries from menu_disk");
-
+                    
                         $osd_message = "Menudisk completely removed";
                         $smarty->assign('osd_message', $osd_message);
                         $smarty->assign('menu_sets_id', $menu_sets_id);
@@ -1574,6 +1611,81 @@ if (isset($action) and ($action == "change_menu_disk_state" or $action == "chang
                 'menu_disk_title_id' => $query['menu_disk_title_id'],
                 'menu_disk_title_author_id' => $query['menu_disk_title_author_id'],
                 'menu_types_text' => $query['menu_types_text']
+            ));
+        }
+        
+        
+        // Get the doc disks
+        $sql_doc_games = "SELECT game.game_name AS 'software_name',
+                                 game.game_id AS 'software_id',
+                                 game_year.game_year AS 'year',
+                                 pub_dev.pub_dev_name AS 'developer_name',
+                                 pub_dev.pub_dev_id AS 'developer_id',
+                                 doc_disk_game.doc_id AS 'doc_id',
+                                 doc.doc_type_id,
+                                 menu_types_main.menu_types_text,
+                                 menu_disk_title_author.menu_disk_title_author_id,
+                                 menu_disk_title.menu_disk_title_id AS 'menu_disk_title_id'
+                                 FROM menu_disk_title
+                                 LEFT JOIN menu_disk_title_author ON (menu_disk_title_author.menu_disk_title_id = menu_disk_title.menu_disk_title_id)
+                                 LEFT JOIN menu_disk_title_doc_games ON (menu_disk_title.menu_disk_title_id = menu_disk_title_doc_games.menu_disk_title_id)
+                                 LEFT JOIN doc_disk_game ON (menu_disk_title_doc_games.doc_games_id = doc_disk_game.doc_disk_game_id)
+                                 LEFT JOIN doc ON (doc_disk_game.doc_id = doc.doc_id)
+                                 LEFT JOIN game ON (game.game_id = doc_disk_game.game_id)
+                                 LEFT JOIN game_developer ON (game.game_id = game_developer.game_id)
+                                 LEFT JOIN pub_dev ON (game_developer.dev_pub_id = pub_dev.pub_dev_id)
+                                 LEFT JOIN game_year ON (game.game_id = game_year.game_id)
+                                 LEFT JOIN menu_types_main ON (menu_disk_title.menu_types_main_id = menu_types_main.menu_types_main_id)
+                                 WHERE menu_disk_title.menu_disk_id = '$menu_disk_id' AND menu_disk_title.menu_types_main_id = '6' ORDER BY game.game_name ASC";
+
+        $sql_doc_tools = "SELECT tools.tools_name AS 'software_name',
+                                 tools.tools_id AS 'software_id',
+                                 '' AS year,
+                                 '' AS developer_name,
+                                 '' AS developer_id,
+                                 doc_disk_tool.doc_id AS 'doc_id',
+                                 doc.doc_type_id,
+                                 menu_types_main.menu_types_text,
+                                 menu_disk_title_author.menu_disk_title_author_id,
+                                 menu_disk_title.menu_disk_title_id AS 'menu_disk_title_id'
+                                 FROM menu_disk_title
+                                 LEFT JOIN menu_disk_title_author ON (menu_disk_title_author.menu_disk_title_id = menu_disk_title.menu_disk_title_id)
+                                 LEFT JOIN menu_disk_title_doc_tools ON (menu_disk_title.menu_disk_title_id = menu_disk_title_doc_tools.menu_disk_title_id)
+                                 LEFT JOIN doc_disk_tool ON (menu_disk_title_doc_tools.doc_tools_id = doc_disk_tool.doc_disk_tool_id)
+                                 LEFT JOIN doc ON (doc_disk_tool.doc_id = doc.doc_id)
+                                 LEFT JOIN tools ON (tools.tools_id = doc_disk_tool.tools_id)
+                                 LEFT JOIN menu_types_main ON (menu_disk_title.menu_types_main_id = menu_types_main.menu_types_main_id)
+                                 WHERE menu_disk_title.menu_disk_id = '$menu_disk_id' AND menu_disk_title.menu_types_main_id = '6' ORDER BY tools.tools_name ASC";
+
+        $temp_query2 = $mysqli->query("CREATE TEMPORARY TABLE temp2 ENGINE=MEMORY $sql_doc_games") or die(mysqli_error());
+        $temp_query2 = $mysqli->query("INSERT INTO temp2 $sql_doc_tools") or die(mysqli_error());
+
+        $temp_query2 = $mysqli->query("SELECT * FROM temp2 GROUP BY menu_disk_title_id ORDER BY software_name ASC") or die("does not compute4");
+
+        while ($query = $temp_query2->fetch_array(MYSQLI_BOTH)) {
+            // This smarty is used for creating the list of games
+            $smarty->append('doc_game', array(
+                'game_name' => $query['software_name'],
+                'game_id' => $query['software_id'],
+                'year' => $query['year'],
+                'developer_name' => $query['developer_name'],
+                'developer_id' => $query['developer_id'],
+                'doc_id' => $query['doc_id'],
+                'doc_type_id' => $query['doc_type_id'],
+                'menu_disk_title_author_id' => $query['menu_disk_title_author_id'],
+                'menu_types_text' => $query['menu_types_text'],
+                'menu_disk_title_id' => $query['menu_disk_title_id']
+            ));
+        }
+        
+         //get the doc types
+        $sql_doc_type = "SELECT * from doc_type";
+        $query_doc_type = $mysqli->query($sql_doc_type) or die("error in the doc_type query");
+
+        while ($query_type = $query_doc_type->fetch_array(MYSQLI_BOTH)) {
+            $smarty->append('doc_type', array(
+                'doc_type_id' => $query_type['doc_type_id'],
+                'doc_type_name' => $query_type['doc_type_name']
             ));
         }
 
@@ -2408,14 +2520,14 @@ if ($action == 'add_author' OR $action == 'delete_menu_disk_title_credits' )
         //Insert author into the menu_disk_title_author table
         $mysqli->query("INSERT INTO menu_disk_title_author (menu_disk_title_id,ind_id,author_type_id) VALUES ('$menu_disk_title_id','$ind_id','$author_type_id')") or die("error inserting menu_disk_title_author"); ; 
     
-         create_log_entry('Menu disk', $menu_disk_id, 'Authors', $menu_disk_title_id, 'Insert', $_SESSION['user_id']); 
+        create_log_entry('Menu disk', $menu_disk_id, 'Authors', $menu_disk_title_id, 'Insert', $_SESSION['user_id']); 
     }
     else
     {
         //delete author from the menu_disk_title_author table
         $mysqli->query("DELETE FROM menu_disk_title_author WHERE menu_disk_title_id='$menu_disk_title_id' and ind_id ='$ind_id' and author_type_id ='$author_type_id'") or die("error deleting menu disk title credit");
     
-         create_log_entry('Menu disk', $menu_disk_id, 'Authors', $menu_disk_title_id, 'Delete', $_SESSION['user_id']); 
+        create_log_entry('Menu disk', $menu_disk_id, 'Authors', $menu_disk_title_id, 'Delete', $_SESSION['user_id']); 
     }
     
   
