@@ -1139,7 +1139,7 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
                 $result = $mysqli->query($query_demo) or die("getting demo name failed");
                 $query_data      = $result->fetch_array(MYSQLI_BOTH);
                 $subsection_name = $query_data['demo_name'];
-                if ($subsection <> 'Chain') {
+                if ($subsection <> 'Chain' and $subsection <> 'Authors') {
                     $subsection = 'Demo';
                 }
             }
@@ -1156,7 +1156,7 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
                 $result = $mysqli->query($query_tool) or die("getting tool name failed");
                 $query_data      = $result->fetch_array(MYSQLI_BOTH);
                 $subsection_name = $query_data['tools_name'];
-                if ($subsection <> 'Chain') {
+                if ($subsection <> 'Chain' and $subsection <> 'Authors') {
                     $subsection = 'Tool';
                 }
             }
@@ -1179,7 +1179,12 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
                 $result = $mysqli->query($query_game) or die("getting game name failed");
                 $query_data      = $result->fetch_array(MYSQLI_BOTH);
                 $subsection_name = $query_data['game_name'];
-                $subsection      = 'Game doc';
+                                
+                if ($subsection == 'Authors') {
+                }
+                else{
+                   $subsection      = 'Game doc';
+                }
 
                 if ($subsection_name == '') {
                     //get the doc cross id
@@ -1199,7 +1204,12 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
                     $result = $mysqli->query($query_tool) or die("getting tool name failed");
                     $query_data      = $result->fetch_array(MYSQLI_BOTH);
                     $subsection_name = $query_data['tools_name'];
-                    $subsection      = 'Tool doc';
+                    
+                    if ($subsection == 'Authors') {
+                    }
+                    else{
+                       $subsection      = 'Tool doc';
+                    } 
                 }
             }
         }

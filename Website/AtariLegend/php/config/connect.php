@@ -12,7 +12,7 @@
 
 $db_username = "root";
 $db_password = "";
-$db_databasename = "atarilegend";
+$db_databasename = "alprod_clone";
 
 //$db_username = "atarilegend.com";
 //$db_password = "4t4r1l3g3nd";
