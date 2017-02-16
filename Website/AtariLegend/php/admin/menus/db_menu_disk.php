@@ -1382,39 +1382,35 @@ if (isset($action) and ($action == "change_menu_disk_state" or $action == "chang
                         $query_id     = $result->fetch_array(MYSQLI_BOTH);
                         $menu_sets_id = $query_id['menu_sets_id'];
                         
-                        echo $menu_disk_id;
-                        echo "-";
-
                         //get the menu disk title id
-                        $query_menu_disk_title_id = "SELECT menu_disk_title_id FROM menu_disk_title WHERE menu_disk_id = '$menu_disk_id'";
-                        $result = $mysqli->query($query_menu_disk_title_id) or die("getting menu_disk_title_id failed");
+                        $sql_menu_disk_title_id = "SELECT menu_disk_title_id FROM menu_disk_title WHERE menu_disk_id = '$menu_disk_id'";
+                        $result = $mysqli->query($sql_menu_disk_title_id) or die("getting menu_disk_title_id failed");
                         
                         while ($query_id = $result->fetch_array(MYSQLI_BOTH)) {
                         
                             $menu_disk_title_id = $query_id['menu_disk_title_id'];   
-                            echo $menu_disk_title_id;
                           
                             //get the doc cross id
                             $query_doc_game_id = "SELECT doc_games_id FROM menu_disk_title_doc_games WHERE menu_disk_title_id='$menu_disk_title_id'";
-                            $result = $mysqli->query($query_doc_game_id) or die("Database error - selecting menu_disk_title_doc_games_id");
-                            $query_data  = $result->fetch_array(MYSQLI_BOTH);
+                            $result_doc_game = $mysqli->query($query_doc_game_id) or die("Database error - selecting menu_disk_title_doc_games_id");
+                            $query_data  = $result_doc_game->fetch_array(MYSQLI_BOTH);
                             $doc_game_id = $query_data['doc_games_id'];
 
                             $query_doc_tool_id = "SELECT * FROM menu_disk_title_doc_tools WHERE menu_disk_title_id='$menu_disk_title_id'";
-                            $result = $mysqli->query($query_doc_tool_id) or die("Database error - selecting menu_disk_title_doc_tools_id");
-                            $query_data  = $result->fetch_array(MYSQLI_BOTH);
+                            $result_doc_tool = $mysqli->query($query_doc_tool_id) or die("Database error - selecting menu_disk_title_doc_tools_id");
+                            $query_data  = $result_doc_tool->fetch_array(MYSQLI_BOTH);
                             $doc_tool_id = $query_data['doc_tools_id'];
 
                             //get the doc id
                             $query_doc_id = "SELECT * FROM doc_disk_game WHERE doc_disk_game_id='$doc_game_id'";
-                            $result = $mysqli->query($query_doc_id) or die("Database error - selecting doc_id");
-                            $query_data = $result->fetch_array(MYSQLI_BOTH);
+                            $result_doc_id = $mysqli->query($query_doc_id) or die("Database error - selecting doc_id");
+                            $query_data = $result_doc_id->fetch_array(MYSQLI_BOTH);
                             $doc_id     = $query_data['doc_id'];
 
                             if ($doc_id == '') {
                                 $query_doc_id = "SELECT * FROM doc_disk_tool WHERE doc_disk_tool_id='$doc_tool_id'";
-                                $result = $mysqli->query($query_doc_id) or die("Database error - selecting doc_id from tool table");
-                                $query_data = $result->fetch_array(MYSQLI_BOTH);
+                                $result_doc_id = $mysqli->query($query_doc_id) or die("Database error - selecting doc_id from tool table");
+                                $query_data =  $result_doc_id->fetch_array(MYSQLI_BOTH);
                                 $doc_id     = $query_data['doc_id'];
                             }
                             
@@ -1430,7 +1426,7 @@ if (isset($action) and ($action == "change_menu_disk_state" or $action == "chang
                             $mysqli->query("DELETE from menu_disk_title_set WHERE menu_disk_title_id='$menu_disk_title_id'") or die("error deleting entries from menu_disk_title_set");
                             $mysqli->query("DELETE from menu_disk_title_author WHERE menu_disk_title_id='$menu_disk_title_id'") or die("error deleting entries from menu_disk_title_authors table");
                             
-                             //Lets do all the doc disk stuff
+                            //Lets do all the doc disk stuff
                             $mysqli->query("DELETE FROM doc_disk_game WHERE doc_disk_game_id='$doc_game_id'") or die("deleting doc_disk_game table");                        
                             $mysqli->query("DELETE FROM doc_disk_tool WHERE doc_disk_tool_id='$doc_tool_id'") or die("deleting doc_disk_game table");
                             $mysqli->query("DELETE FROM doc WHERE doc_id='$doc_id'") or die("deleting doc table");
