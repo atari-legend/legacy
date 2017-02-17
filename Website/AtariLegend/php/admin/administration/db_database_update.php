@@ -24,18 +24,27 @@ include("../../config/admin.php");
 if (isset($action) and $action == "update_database") {
     // use glob and a foreach loop to search the database_scripts folder for update files
     foreach (glob("../../admin/administration/database_scripts/*.php") as $filename) {
-        // import update script
-        require_once("$filename");
+        
+        //we don't want to execute additions just yet
+        if (strpos($filename, 'addition') !== false) 
+        {
+            //do nothing
+        }
+        else
+        {
+            // import update script
+            require_once("$filename");
 
-        // take all variables from the update script and place in an array
-        $database_update[] = array(
-            "database_update_id" => $database_update_id,
-            "update_description" => $update_description,
-            "execute_condition" => $execute_condition,
-            "test_condition" => $test_condition,
-            "database_update_sql" => $database_update_sql,
-            "update_filename" => $filename
-        );
+            // take all variables from the update script and place in an array
+            $database_update[] = array(
+                "database_update_id" => $database_update_id,
+                "update_description" => $update_description,
+                "execute_condition" => $execute_condition,
+                "test_condition" => $test_condition,
+                "database_update_sql" => $database_update_sql,
+                "update_filename" => $filename
+            );
+        }
     }
     // Sort array
     asort($database_update);
@@ -54,7 +63,16 @@ if (isset($action) and $action == "update_database") {
 
             // if the execute condition is met, execute update
             if ($key['execute_condition'] == $test_result) {
-                $mysqli->query("$key[database_update_sql]") or die("Database update $key[database_update_id] failed!");
+                
+                //overhere we check if we are dealing with an addition - a script containing more than just SQL
+                if (strncmp($key['database_update_sql'], "..", 2) === 0)
+                {
+                    include $key['database_update_sql'];
+                }
+                else  
+                {
+                    $mysqli->query("$key[database_update_sql]") or die("Database update $key[database_update_id] failed!");
+                }
 
                 // Add info to the database_change table
                 // Set the timestamp

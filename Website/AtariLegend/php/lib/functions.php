@@ -952,6 +952,7 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
 
     //  Everything we do for the MENU DISK
     if ($section == 'Menu disk') {
+        
         // get the name of the menu disk
         $sql_menus = "SELECT menu_disk.menu_sets_id,
                             menu_set.menu_sets_name,
@@ -1099,7 +1100,8 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
             $subsection_name = $query_data['doc_type_name'];
         }
 
-        if ($subsection == 'Software' or $subsection == 'Chain' or $subsection == 'Doc') {
+        if ($subsection == 'Software' or $subsection == 'Chain' or $subsection == 'Doc' or $subsection == 'Authors') {
+                        
             //get the type of software
             $query_soft = "SELECT menu_types_main_id FROM menu_disk_title WHERE menu_disk_title_id = '$subsection_id'";
             $result = $mysqli->query($query_soft) or die("getting menu_type failed");
@@ -1120,7 +1122,7 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
                 $query_data      = $result->fetch_array(MYSQLI_BOTH);
                 $subsection_name = $query_data['game_name'];
 
-                if ($subsection <> 'Chain') {
+                if ($subsection <> 'Chain' and $subsection <> 'Authors') {
                     $subsection = 'Game';
                 }
             }
@@ -1137,7 +1139,7 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
                 $result = $mysqli->query($query_demo) or die("getting demo name failed");
                 $query_data      = $result->fetch_array(MYSQLI_BOTH);
                 $subsection_name = $query_data['demo_name'];
-                if ($subsection <> 'Chain') {
+                if ($subsection <> 'Chain' and $subsection <> 'Authors') {
                     $subsection = 'Demo';
                 }
             }
@@ -1154,7 +1156,7 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
                 $result = $mysqli->query($query_tool) or die("getting tool name failed");
                 $query_data      = $result->fetch_array(MYSQLI_BOTH);
                 $subsection_name = $query_data['tools_name'];
-                if ($subsection <> 'Chain') {
+                if ($subsection <> 'Chain' and $subsection <> 'Authors') {
                     $subsection = 'Tool';
                 }
             }
@@ -1177,7 +1179,12 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
                 $result = $mysqli->query($query_game) or die("getting game name failed");
                 $query_data      = $result->fetch_array(MYSQLI_BOTH);
                 $subsection_name = $query_data['game_name'];
-                $subsection      = 'Game doc';
+                                
+                if ($subsection == 'Authors') {
+                }
+                else{
+                   $subsection      = 'Game doc';
+                }
 
                 if ($subsection_name == '') {
                     //get the doc cross id
@@ -1197,7 +1204,12 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
                     $result = $mysqli->query($query_tool) or die("getting tool name failed");
                     $query_data      = $result->fetch_array(MYSQLI_BOTH);
                     $subsection_name = $query_data['tools_name'];
-                    $subsection      = 'Tool doc';
+                    
+                    if ($subsection == 'Authors') {
+                    }
+                    else{
+                       $subsection      = 'Tool doc';
+                    } 
                 }
             }
         }

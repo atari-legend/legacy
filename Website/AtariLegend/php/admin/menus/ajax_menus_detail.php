@@ -101,8 +101,10 @@ if (isset($action) and $action == "edit_disk_box" and $menu_disk_id !== '') {
                                 game_year.game_year AS 'year',
                                 menu_disk_title.menu_disk_title_id,
                                 menu_types_main.menu_types_text,
+                                menu_disk_title_author.menu_disk_title_author_id,
                                 menu_disk_title_set.menu_disk_title_set_chain
                                 FROM menu_disk_title
+                                LEFT JOIN menu_disk_title_author ON (menu_disk_title_author.menu_disk_title_id = menu_disk_title.menu_disk_title_id)
                                 LEFT JOIN menu_disk_title_set ON (menu_disk_title_set.menu_disk_title_id = menu_disk_title.menu_disk_title_id)
                                 LEFT JOIN menu_disk_title_game ON (menu_disk_title.menu_disk_title_id = menu_disk_title_game.menu_disk_title_id)
                                 LEFT JOIN game ON (menu_disk_title_game.game_id = game.game_id)
@@ -118,9 +120,11 @@ if (isset($action) and $action == "edit_disk_box" and $menu_disk_id !== '') {
                                 crew.crew_id AS 'developer_id',
                                 demo_year.demo_year AS 'year',
                                 menu_disk_title.menu_disk_title_id,
+                                menu_disk_title_author.menu_disk_title_author_id,
                                 menu_types_main.menu_types_text,
                                 menu_disk_title_set.menu_disk_title_set_chain
                                 FROM menu_disk_title
+                                LEFT JOIN menu_disk_title_author ON (menu_disk_title_author.menu_disk_title_id = menu_disk_title.menu_disk_title_id)
                                 LEFT JOIN menu_disk_title_set ON (menu_disk_title_set.menu_disk_title_id = menu_disk_title.menu_disk_title_id)
                                 LEFT JOIN menu_disk_title_demo ON (menu_disk_title.menu_disk_title_id = menu_disk_title_demo.menu_disk_title_id)
                                 LEFT JOIN demo ON (menu_disk_title_demo.demo_id = demo.demo_id)
@@ -137,8 +141,10 @@ if (isset($action) and $action == "edit_disk_box" and $menu_disk_id !== '') {
                                 '' AS year,
                                 menu_disk_title.menu_disk_title_id,
                                 menu_types_main.menu_types_text,
+                                menu_disk_title_author.menu_disk_title_author_id,
                                 menu_disk_title_set.menu_disk_title_set_chain
                                 FROM menu_disk_title
+                                LEFT JOIN menu_disk_title_author ON (menu_disk_title_author.menu_disk_title_id = menu_disk_title.menu_disk_title_id)
                                 LEFT JOIN menu_disk_title_set ON (menu_disk_title_set.menu_disk_title_id = menu_disk_title.menu_disk_title_id)
                                 LEFT JOIN menu_disk_title_tools ON (menu_disk_title.menu_disk_title_id = menu_disk_title_tools.menu_disk_title_id)
                                 LEFT JOIN tools ON (menu_disk_title_tools.tools_id = tools.tools_id)
@@ -162,6 +168,7 @@ if (isset($action) and $action == "edit_disk_box" and $menu_disk_id !== '') {
             'developer_id' => $query['developer_id'],
             'year' => $query['year'],
             'menu_disk_title_id' => $query['menu_disk_title_id'],
+            'menu_disk_title_author_id' => $query['menu_disk_title_author_id'],
             'menu_types_text' => $query['menu_types_text']
         ));
     }
@@ -176,8 +183,10 @@ if (isset($action) and $action == "edit_disk_box" and $menu_disk_id !== '') {
                                          doc_disk_game.doc_id AS 'doc_id',
                                          doc.doc_type_id,
                                          menu_types_main.menu_types_text,
+                                         menu_disk_title_author.menu_disk_title_author_id,
                                          menu_disk_title.menu_disk_title_id AS 'menu_disk_title_id'
                                          FROM menu_disk_title
+                                         LEFT JOIN menu_disk_title_author ON (menu_disk_title_author.menu_disk_title_id = menu_disk_title.menu_disk_title_id)
                                          LEFT JOIN menu_disk_title_doc_games ON (menu_disk_title.menu_disk_title_id = menu_disk_title_doc_games.menu_disk_title_id)
                                          LEFT JOIN doc_disk_game ON (menu_disk_title_doc_games.doc_games_id = doc_disk_game.doc_disk_game_id)
                                          LEFT JOIN doc ON (doc_disk_game.doc_id = doc.doc_id)
@@ -196,8 +205,10 @@ if (isset($action) and $action == "edit_disk_box" and $menu_disk_id !== '') {
                                          doc_disk_tool.doc_id AS 'doc_id',
                                          doc.doc_type_id,
                                          menu_types_main.menu_types_text,
+                                         menu_disk_title_author.menu_disk_title_author_id,
                                          menu_disk_title.menu_disk_title_id AS 'menu_disk_title_id'
                                          FROM menu_disk_title
+                                         LEFT JOIN menu_disk_title_author ON (menu_disk_title_author.menu_disk_title_id = menu_disk_title.menu_disk_title_id)
                                          LEFT JOIN menu_disk_title_doc_tools ON (menu_disk_title.menu_disk_title_id = menu_disk_title_doc_tools.menu_disk_title_id)
                                          LEFT JOIN doc_disk_tool ON (menu_disk_title_doc_tools.doc_tools_id = doc_disk_tool.doc_disk_tool_id)
                                          LEFT JOIN doc ON (doc_disk_tool.doc_id = doc.doc_id)
@@ -205,10 +216,10 @@ if (isset($action) and $action == "edit_disk_box" and $menu_disk_id !== '') {
                                          LEFT JOIN menu_types_main ON (menu_disk_title.menu_types_main_id = menu_types_main.menu_types_main_id)
                                          WHERE menu_disk_title.menu_disk_id = '$menu_disk_id' AND menu_disk_title.menu_types_main_id = '6' ORDER BY tools.tools_name ASC";
 
-    $temp_query2 = $mysqli->query("CREATE TEMPORARY TABLE temp2 ENGINE=MEMORY $sql_doc_games") or die(mysqli_error());
-    $temp_query2 = $mysqli->query("INSERT INTO temp2 $sql_doc_tools") or die(mysqli_error());
+    $temp_query2 = $mysqli->query("CREATE TEMPORARY TABLE temp2 ENGINE=MEMORY $sql_doc_games") or die('Error: ' . mysqli_error($mysqli));
+    $temp_query2 = $mysqli->query("INSERT INTO temp2 $sql_doc_tools") or die('Error: ' . mysqli_error($mysqli));
 
-    $temp_query2 = $mysqli->query("SELECT * FROM temp2 GROUP BY menu_disk_title_id ORDER BY software_name ASC") or die("does not compute4");
+    $temp_query2 = $mysqli->query("SELECT * FROM temp2 GROUP BY menu_disk_title_id ORDER BY software_name ASC") or die('Error: ' . mysqli_error($mysqli));
 
     while ($query = $temp_query2->fetch_array(MYSQLI_BOTH)) {
         // This smarty is used for creating the list of games
@@ -221,13 +232,14 @@ if (isset($action) and $action == "edit_disk_box" and $menu_disk_id !== '') {
             'doc_id' => $query['doc_id'],
             'doc_type_id' => $query['doc_type_id'],
             'menu_types_text' => $query['menu_types_text'],
+            'menu_disk_title_author_id' => $query['menu_disk_title_author_id'],
             'menu_disk_title_id' => $query['menu_disk_title_id']
         ));
     }
 
     //get the doc types
     $sql_doc_type = "SELECT * from doc_type";
-    $query_doc_type = $mysqli->query($sql_doc_type) or die("error in the doc_type query");
+    $query_doc_type = $mysqli->query($sql_doc_type) or die('Error: ' . mysqli_error($mysqli));
 
     while ($query_type = $query_doc_type->fetch_array(MYSQLI_BOTH)) {
         $smarty->append('doc_type', array(
@@ -256,22 +268,24 @@ if (isset($action) and $action == "edit_disk_box" and $menu_disk_id !== '') {
 
     while ($query = $query_individual->fetch_array(MYSQLI_BOTH)) {
         if ($query_ind_id <> $query['ind_id']) {
-            $sql_ind_nick = "SELECT
-                                        individual_nicks.individual_nicks_id,
-                                        individual_nicks.nick
-                                        FROM individuals
-                                        LEFT JOIN individual_nicks ON (individuals.ind_id = individual_nicks.ind_id)
-                                        WHERE individuals.ind_id = '$query[ind_id]'";
+         
+            $sql_ind_nicks = $mysqli->query("SELECT nick_id FROM individual_nicks WHERE ind_id = '$query[ind_id]'");
+            
+            while ($fetch_ind_nicks = $sql_ind_nicks->fetch_array(MYSQLI_BOTH)) {
+             
+                $nick_id = $fetch_ind_nicks['nick_id'];
+                
+                $sql_nick_names = $mysqli->query("SELECT ind_name from individuals WHERE ind_id = '$nick_id'") or die('Error: ' . mysqli_error($mysqli));
+            
+                while ($fetch_nick_names = $sql_nick_names->fetch_array(MYSQLI_BOTH)) {
 
-            $query_ind_nick = $mysqli->query($sql_ind_nick) or die("error in the nickname query");
-
-            while ($query_nick = $query_ind_nick->fetch_array(MYSQLI_BOTH)) {
-                $smarty->append('ind_nick', array(
-                    'ind_id' => $query['ind_id'],
-                    'individual_nicks_id' => $query_nick['individual_nicks_id'],
-                    'nick' => $query_nick['nick']
-                ));
-            }
+                    $smarty->append('ind_nick', array(
+                        'ind_id' => $query['ind_id'],
+                        'individual_nicks_id' => $nick_id,
+                        'nick' => $fetch_nick_names['ind_name']
+                    ));
+                }
+            }   
         }
 
         // This smarty is used for for the menu_disk credits
@@ -307,7 +321,7 @@ if (isset($action) and $action == "edit_disk_box" and $menu_disk_id !== '') {
                                 FROM menu_disk
                                 LEFT JOIN menu_set ON (menu_disk.menu_sets_id = menu_set.menu_sets_id)";
 
-    $result_parent = $mysqli->query($sql_parent) or die("problem with parent query");
+    $result_parent = $mysqli->query($sql_parent) or die('Error: ' . mysqli_error($mysqli));
     while ($row = $result_parent->fetch_array(MYSQLI_BOTH)) {
         // Create Menu disk name
         $menu_disk_name = "$row[menu_sets_name] ";
@@ -338,7 +352,7 @@ if (isset($action) and $action == "edit_disk_box" and $menu_disk_id !== '') {
     //Get the screenshots for this menu if they exist
     $sql_screenshots = $mysqli->query("SELECT * FROM screenshot_menu
                                     LEFT JOIN screenshot_main ON (screenshot_menu.screenshot_id = screenshot_main.screenshot_id)
-                                    WHERE screenshot_menu.menu_disk_id = '$menu_disk_id' ORDER BY screenshot_menu.screenshot_id") or die("Database error - selecting screenshots");
+                                    WHERE screenshot_menu.menu_disk_id = '$menu_disk_id' ORDER BY screenshot_menu.screenshot_id") or die('Error: ' . mysqli_error($mysqli));
 
     $count         = 1;
     $v_screenshots = 0;
@@ -367,7 +381,7 @@ if (isset($action) and $action == "edit_disk_box" and $menu_disk_id !== '') {
     //uploaded
     //************************************************************************************************
     //get the existing downloads
-    $SQL_DOWNLOADS = $mysqli->query("SELECT * FROM menu_disk_download WHERE menu_disk_id='$menu_disk_id'") or die("Error getting download info");
+    $SQL_DOWNLOADS = $mysqli->query("SELECT * FROM menu_disk_download WHERE menu_disk_id='$menu_disk_id'") or die('Error: ' . mysqli_error($mysqli));
 
     $nr_downloads = 0;
     while ($downloads = $SQL_DOWNLOADS->fetch_array(MYSQLI_BOTH)) {
@@ -395,7 +409,7 @@ if (isset($action) and $action == "edit_disk_box" and $menu_disk_id !== '') {
                                 LEFT JOIN menu_set ON (menu_disk.menu_sets_id = menu_set.menu_sets_id)
                                 WHERE menu_disk.menu_disk_id = '$menu_disk_id'";
 
-    $result_menus = $mysqli->query($sql_menus) or die("error in query disk name");
+    $result_menus = $mysqli->query($sql_menus) or die('Error: ' . mysqli_error($mysqli));
 
     while ($row = $result_menus->fetch_array(MYSQLI_BOTH)) {
         // Create Menu disk name
@@ -498,13 +512,13 @@ if (isset($action) and $action == "add_intro_credit") {
     $menu_disk_id = $query;
 
     $sql_individuals = "SELECT ind_id,ind_name FROM individuals ORDER BY ind_name ASC";
-    $sql_aka         = "SELECT ind_id,nick FROM individual_nicks ORDER BY nick ASC";
+    //$sql_aka         = "SELECT ind_id,nick FROM individual_nicks ORDER BY nick ASC";
 
     //Create a temporary table to build an array with both names and nicknames
-    $mysqli->query("CREATE TEMPORARY TABLE temp ENGINE=MEMORY $sql_individuals") or die("failed to create temporary table");
-    $mysqli->query("INSERT INTO temp $sql_aka") or die("failed to insert akas into temporary table");
+    $mysqli->query("CREATE TEMPORARY TABLE temp ENGINE=MEMORY $sql_individuals") or die('Error: ' . mysqli_error($mysqli));
+    //$mysqli->query("INSERT INTO temp $sql_aka") or die('Error: ' . mysqli_error($mysqli));
 
-    $query_temporary = $mysqli->query("SELECT * FROM temp WHERE ind_name LIKE 'a%' ORDER BY ind_name ASC") or die("Failed to query temporary table");
+    $query_temporary = $mysqli->query("SELECT * FROM temp WHERE ind_name LIKE 'a%' ORDER BY ind_name ASC") or die('Error: ' . mysqli_error($mysqli));
     $mysqli->query("DROP TABLE temp");
 
     while ($genealogy_ind = $query_temporary->fetch_array(MYSQLI_BOTH)) {
@@ -515,9 +529,8 @@ if (isset($action) and $action == "add_intro_credit") {
     }
 
     // Get Author types for
-
     $sql_author_types = "SELECT * FROM author_type ORDER BY author_type_info ASC";
-    $query_author = $mysqli->query($sql_author_types) or die("Failed to query author_type table");
+    $query_author = $mysqli->query($sql_author_types) or die('Error: ' . mysqli_error($mysqli));
 
     while ($author_ind = $query_author->fetch_array(MYSQLI_BOTH)) {
         $smarty->append('author_type', array(
@@ -540,16 +553,16 @@ if (isset($action) and $action == "add_intro_credit") {
 if (isset($action) and $action == "ind_gen_browse") {
     if (isset($query)) {
         $sql_individuals = "SELECT ind_id,ind_name FROM individuals ORDER BY ind_name ASC";
-        $sql_aka         = "SELECT ind_id,nick FROM individual_nicks ORDER BY nick ASC";
+        //$sql_aka         = "SELECT ind_id,nick FROM individual_nicks ORDER BY nick ASC";
 
         //Create a temporary table to build an array with both names and nicknames
-        $mysqli->query("CREATE TEMPORARY TABLE temp ENGINE=MEMORY $sql_individuals") or die("failed to create temporary table");
-        $mysqli->query("INSERT INTO temp $sql_aka") or die("failed to insert akas into temporary table");
+        $mysqli->query("CREATE TEMPORARY TABLE temp ENGINE=MEMORY $sql_individuals") or die('Error: ' . mysqli_error($mysqli));
+        //$mysqli->query("INSERT INTO temp $sql_aka") or die('Error: ' . mysqli_error($mysqli));
 
         if ($query == "num") {
-            $query_temporary = $mysqli->query("SELECT * FROM temp WHERE ind_name REGEXP '^[0-9].*' ORDER BY ind_name ASC") or die("Failed to query temporary table");
+            $query_temporary = $mysqli->query("SELECT * FROM temp WHERE ind_name REGEXP '^[0-9].*' ORDER BY ind_name ASC") or die('Error: ' . mysqli_error($mysqli));
         } else {
-            $query_temporary = $mysqli->query("SELECT * FROM temp WHERE ind_name LIKE '$query%' ORDER BY ind_name ASC") or die("Failed to query temporary table");
+            $query_temporary = $mysqli->query("SELECT * FROM temp WHERE ind_name LIKE '$query%' ORDER BY ind_name ASC") or die('Error: ' . mysqli_error($mysqli));
         }
         $mysqli->query("DROP TABLE temp");
     }
@@ -565,21 +578,21 @@ if (isset($action) and $action == "ind_gen_browse") {
 if (isset($action) and $action == "ind_gen_search") {
     if (isset($query) and $query !== "empty") {
         $sql_individuals = "SELECT ind_id,ind_name FROM individuals ORDER BY ind_name ASC";
-        $sql_aka         = "SELECT ind_id,nick FROM individual_nicks ORDER BY nick ASC";
+        //$sql_aka         = "SELECT ind_id,nick FROM individual_nicks ORDER BY nick ASC";
 
         //Create a temporary table to build an array with both names and nicknames
-        $mysqli->query("CREATE TEMPORARY TABLE temp ENGINE=MEMORY $sql_individuals") or die("failed to create temporary table");
-        $mysqli->query("INSERT INTO temp $sql_aka") or die("failed to insert akas into temporary table");
+        $mysqli->query("CREATE TEMPORARY TABLE temp ENGINE=MEMORY $sql_individuals") or die('Error: ' . mysqli_error($mysqli));
+        //$mysqli->query("INSERT INTO temp $sql_aka") or die('Error: ' . mysqli_error($mysqli));
 
-        $query_temporary = $mysqli->query("SELECT * FROM temp WHERE ind_name LIKE '%$query%' ORDER BY ind_name ASC") or die("Failed to query temporary table");
+        $query_temporary = $mysqli->query("SELECT * FROM temp WHERE ind_name LIKE '%$query%' ORDER BY ind_name ASC") or die('Error: ' . mysqli_error($mysqli));
         $mysqli->query("DROP TABLE temp");
     } elseif ($query == "empty") {
         $sql_individuals = "SELECT ind_id,ind_name FROM individuals ORDER BY ind_name ASC";
-        $sql_aka         = "SELECT ind_id,nick FROM individual_nicks ORDER BY nick ASC";
+        //$sql_aka         = "SELECT ind_id,nick FROM individual_nicks ORDER BY nick ASC";
 
         //Create a temporary table to build an array with both names and nicknames
         $mysqli->query("CREATE TEMPORARY TABLE temp ENGINE=MEMORY $sql_individuals") or die("failed to create temporary table");
-        $mysqli->query("INSERT INTO temp $sql_aka") or die("failed to insert akas into temporary table");
+        //$mysqli->query("INSERT INTO temp $sql_aka") or die("failed to insert akas into temporary table");
 
         $query_temporary = $mysqli->query("SELECT * FROM temp WHERE ind_name LIKE '%a%' ORDER BY ind_name ASC") or die("Failed to query temporary table");
         $mysqli->query("DROP TABLE temp");

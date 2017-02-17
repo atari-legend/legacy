@@ -22,7 +22,7 @@ include("../../config/common.php");
 include("../../config/admin.php");
 
 //load the search fields of the quick search side menu
-include("../../includes/quick_search_games.php");
+include("../../admin/games/quick_search_games.php");
 
 //Get the companies
 $sql_company = $mysqli->query("SELECT * FROM pub_dev ORDER BY pub_dev_name ASC") or die("Couldn't query Publisher and Developer database");

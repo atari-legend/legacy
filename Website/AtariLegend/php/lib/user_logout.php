@@ -14,7 +14,7 @@
  * user logout script
  *********************************************************************************/
 
-include_once("../includes/user_functions.php");
+include_once("../lib/user_functions.php");
 
 sec_session_start();
 

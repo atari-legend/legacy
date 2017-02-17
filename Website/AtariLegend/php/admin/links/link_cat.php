@@ -21,7 +21,7 @@ In this section we modify links
 */
 
 include("../../config/common.php");
-include("../../includes/quick_search_games.php");
+include("../../admin/games/quick_search_games.php");
 include("../../config/admin.php");
 
 $website = $mysqli->query("SELECT website_category_id, website_category_name FROM website_category ORDER by website_category_name");
