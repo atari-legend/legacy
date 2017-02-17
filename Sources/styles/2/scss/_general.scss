@@ -8,7 +8,7 @@
 //*----------------------------------------------------------
 // * load the main font
 // * ------------------------------------------------------------ */
-
+ 
 @font-face {
     font-family: AtariST;
     font-style: normal;
@@ -480,10 +480,22 @@ legend {
     border-radius: 50%;
 }
 
+#help-tip2 {
+    width: 10px;
+    height: 10px;
+    font-size: 10px;
+    line-height: 10px;
+    display: inline;
+}
+
 .help-tip::before {
     font-weight: bold;
     color: #000;
     content: '?';
+}
+
+#help-tip2::before {
+    content: '-';
 }
 
 .help-tip:hover p {
@@ -509,6 +521,11 @@ legend {
     box-shadow: 1px 1px 1px rgba(0, 0, 0, .2);
 }
 
+#help-tip2 p { 
+    right: 200px;
+    width: 200px;
+}
+    
 // I am removing the pointer as the alignment of the text box changes from '?' to '?' - this is done the be compliant with a resolution of 320 width.
 // Test it for yourself to see what I mean
 //  .help-tip p:before {

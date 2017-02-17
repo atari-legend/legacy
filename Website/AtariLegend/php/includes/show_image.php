@@ -1,6 +1,6 @@
 <?php
 extract($_REQUEST);
-include "../includes/wideimage/WideImage.php";
+include "../vendor/smottt/wideimage/WideImage.php";
 
 //Set image quality
 

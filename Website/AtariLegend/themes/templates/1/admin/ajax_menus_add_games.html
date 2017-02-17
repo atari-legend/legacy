@@ -20,7 +20,8 @@
 			<legend>Search</legend>
 				By name : 
 				<select name="gamebrowse" onchange="browseGame(this.value,{$menu_disk_id})" id="quick_search_small_select">
-				{html_options values=$az_value output=$az_output selected=$mySelect}
+                    <option value="" SELECTED>-</option>
+                    {html_options values=$az_value output=$az_output}
 				</select>
 				<input type="text" name="gamesearch" onkeyup="searchGame(this.value,{$menu_disk_id})" class="standard_tile_input_small">
 				<br/>
@@ -87,7 +88,7 @@
 				<tr class="table_game_list">
 					<td class="game_list_footer" colspan="6">
 						<input type="hidden" name="action" value="add_game_to_menu">
-						<img src="../../../themes/templates/1/includes/img/arrow_ltr.gif" alt="" width="38" height="22">
+						<img src="../../../themes/templates/1/includes/img/arrow_ltr.gif" alt="" width="38" height="22" style="display:inline;">
 						<input type="button" value="Add" class="quick_search_games_button" style="display:inline;" onclick="addGametoMenu(this.form)">
 					</td>
 				</tr>
@@ -155,7 +156,7 @@
 		<tr class="table_game_list">
 			<td class="game_list_footer" colspan="6">
 				<input type="hidden" name="action" value="add_game_to_menu">
-				<img src="../../../themes/templates/1/includes/img/arrow_ltr.gif" alt="" width="38" height="22">
+				<img src="../../../themes/templates/1/includes/img/arrow_ltr.gif" alt="" width="38" height="22" style="display:inline;">
 				<input type="button" value="Add" class="quick_search_games_button" style="display:inline;" onclick="addGametoMenu(this.form)">
 			</td>
 		</tr>

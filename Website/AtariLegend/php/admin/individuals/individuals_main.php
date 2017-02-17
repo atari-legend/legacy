@@ -9,6 +9,8 @@
  *   Id: Individuals_main.php,v 0.10 2005/08/06 15:04 Gatekeeper
  *   Id: Individuals_main.php,v 0.20 2016/08/01 23:04 Gatekeeper
  *        - AL 2.0
+ *   Id: Individuals_main.php,v 0.30 2017/02/02 00:22 Gatekeeper
+ *          - Converting to the new way of individual nicks storage
  *
  ***************************************************************************/
 
@@ -22,20 +24,12 @@ include("../../config/common.php");
 include("../../config/admin.php");
 
 //load the search fields of the quick search side menu
-include("../../includes/quick_search_games.php");
+include("../../admin/games/quick_search_games.php");
 
 //Get the individuals
-$sql_individuals = "SELECT * FROM individuals ORDER BY ind_name ASC";
-$sql_aka         = "SELECT ind_id,nick FROM individual_nicks ORDER BY nick ASC";
+$sql_individuals = $mysqli->query("SELECT * FROM individuals ORDER BY ind_name ASC");
 
-//Create a temporary table to build an array with both names and nicknames
-$mysqli->query("CREATE TEMPORARY TABLE temp ENGINE = MEMORY $sql_individuals") or die("failed to create temporary table");
-$mysqli->query("INSERT INTO temp $sql_aka") or die("failed to insert akas into temporary table");
-
-$query_temporary = $mysqli->query("SELECT * FROM temp ORDER BY ind_name ASC") or die("Failed to query temporary table");
-$mysqli->query("DROP TABLE temp");
-
-while ($individuals = $query_temporary->fetch_array(MYSQLI_BOTH)) {
+while ($individuals = $sql_individuals->fetch_array(MYSQLI_BOTH)) {
     if ($individuals['ind_name'] != '') {
         $smarty->append('individuals', array(
             'ind_id' => $individuals['ind_id'],

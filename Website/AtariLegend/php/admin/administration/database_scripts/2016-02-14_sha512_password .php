@@ -30,9 +30,9 @@ WHERE table_schema = '$db_databasename' AND table_name = 'users' AND column_name
 $database_update_sql = "ALTER TABLE  `users` ADD  `sha512_password` CHAR( 128 ) NULL AFTER `password`";
 
 // If the update should auto execute without user interaction set to "yes".
-$database_autoexecute = "no";
+$database_autoexecute = "yes";
 
 // This var should almost allways be set to "no", it is only used for certain corner cases where
 // the database change has already been done in some other way and we only want to update the
 // change database.
-$force_insert = "yes";
+$force_insert = "no";

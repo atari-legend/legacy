@@ -11,6 +11,7 @@
  *   Id: games_detail.php,v 0.20 2015/11/01 11:11 STG
  *   Id: games_detail.php,v 0.21 2016/07/20 22:49 STG
  *          - added nr of comments check
+ *   Id: games_detail.php,v 0.22 2017/01/06 STG - added falcon vga and rgb option
  *
  ***************************************************************************/
 
@@ -21,7 +22,7 @@
 //load all common functions
 include("../../config/common.php");
 include("../../config/admin.php");
-include("../../includes/quick_search_games.php");
+include("../../admin/games/quick_search_games.php");
 
 //***********************************************************************************
 //Let's get the general game info first.
@@ -36,6 +37,8 @@ $sql_game = $mysqli->query("SELECT game_name,
                game_ste_enhan.ste_enhanced,
                game_falcon_only.falcon_only,
                game_falcon_enhan.falcon_enhanced,
+               game_falcon_rgb.falcon_rgb,
+               game_falcon_vga.falcon_vga,
                game_unfinished.unfinished,
                game_mono.monochrome,
                game_wanted.game_wanted_id,
@@ -44,13 +47,15 @@ $sql_game = $mysqli->query("SELECT game_name,
                game_stos.stos,
                game_stac.stac
                FROM game
-                 LEFT JOIN game_free ON (game.game_id = game_free.game_id)
+               LEFT JOIN game_free ON (game.game_id = game_free.game_id)
                LEFT JOIN game_unreleased ON (game.game_id = game_unreleased.game_id)
                LEFT JOIN game_development ON (game.game_id = game_development.game_id)
                LEFT JOIN game_ste_only ON (game.game_id = game_ste_only.game_id)
                LEFT JOIN game_ste_enhan ON (game.game_id = game_ste_enhan.game_id)
                LEFT JOIN game_falcon_only ON (game.game_id = game_falcon_only.game_id)
                LEFT JOIN game_falcon_enhan ON (game.game_id = game_falcon_enhan.game_id)
+               LEFT JOIN game_falcon_rgb ON (game.game_id = game_falcon_rgb.game_id)
+               LEFT JOIN game_falcon_vga ON (game.game_id = game_falcon_vga.game_id)
                LEFT JOIN game_arcade ON (game.game_id = game_arcade.game_id)
                LEFT JOIN game_seuck ON (game.game_id = game_seuck.game_id)
                LEFT JOIN game_stos ON (game.game_id = game_stos.game_id)
@@ -72,6 +77,8 @@ while ($game_info = $sql_game->fetch_array(MYSQLI_BOTH)) {
         'game_ste_enhan' => $game_info['ste_enhanced'],
         'game_falcon_only' => $game_info['falcon_only'],
         'game_falcon_enhan' => $game_info['falcon_enhanced'],
+        'game_falcon_rgb' => $game_info['falcon_rgb'],
+        'game_falcon_vga' => $game_info['falcon_vga'],
         'game_unfinished' => $game_info['unfinished'],
         'game_mono' => $game_info['monochrome'],
         'game_wanted' => $game_info['game_wanted_id'],

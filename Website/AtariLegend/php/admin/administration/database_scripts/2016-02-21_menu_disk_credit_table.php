@@ -31,7 +31,6 @@ $database_update_sql = "CREATE TABLE IF NOT EXISTS `menu_disk_credits` (
   `menu_disk_credits_id` int(11) NOT NULL AUTO_INCREMENT,
   `menu_disk_id` int(11) DEFAULT NULL,
   `ind_id` int(11) DEFAULT NULL,
-  `individual_nicks_id` int(11) DEFAULT NULL,
   `author_type_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`menu_disk_credits_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4";

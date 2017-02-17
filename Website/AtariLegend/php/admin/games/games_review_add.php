@@ -22,7 +22,7 @@
 //load all common functions
 include("../../config/common.php");
 include("../../config/admin.php");
-include("../../includes/quick_search_games.php");
+include("../../admin/games/quick_search_games.php");
 
 //get the name of the game
 $sql_game = $mysqli->query("SELECT * FROM game WHERE game_id='$game_id'") or die("Database error - getting game name");

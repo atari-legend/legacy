@@ -1,4 +1,4 @@
-{* 
+{*
 /***************************************************************************
 *                               user_login_tile.html
 *                            ---------------------------
@@ -14,7 +14,7 @@
 
 //****************************************************************************************
 // This is the user login tile
-//**************************************************************************************** 
+//****************************************************************************************
 *}
 	{block name=user_login_tile}
 	{if ! isset($user_session.userid)}
@@ -38,14 +38,14 @@
 					<div class="logon_right">
 						<input class="standard_tile_input" type="password" name="password" maxlength="30">
 					</div>
-				</div> 
+				</div>
 				<div class="logon_signin">
 				<button type="button" value="Login" class="signinbutton" onclick="formhash(this.form, this.form.password);">
 					SIGN IN
 				</button>
 				</div>
 				<br>
-				<br>			
+				<br>
 				<h3><a href="#" class="standard_tile_link">Forgot user name or password?</a></h3>
 				<br>
 				<div class="logon_socmed">
@@ -79,17 +79,17 @@
 					<div class="logon_right">
 						<input class="standard_tile_input" type="password" name="password" maxlength="30">
 					</div>
-				</div> 
+				</div>
 				<div class="logon_signin">
 				<button type="button" value="Login" class="signinbutton">
-					<a href="../includes/user_logout.php" class="standard_tile_link_button">LOG OUT</a>
+					<a href="../lib/user_logout.php" class="standard_tile_link_button">LOG OUT</a>
 				</button>
 				</div>
 				<br>
-				
+
 				{if $user_session.permission eq 1}
 				<h3><a href="../../admin/" class="standard_tile_link">Go to Cpanel</a></h3>
-				<br>	
+				<br>
 				{/if}
 				<h3><a href="#" class="standard_tile_link">Forgot user name or password?</a></h3>
 				<br>
@@ -102,7 +102,4 @@
 			</div>
 		</div>
 	{/if}
-{/block}	
-
-             
-        
+{/block}
