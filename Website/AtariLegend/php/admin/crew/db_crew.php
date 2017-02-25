@@ -9,8 +9,11 @@
  *
  *   Id: db_crew.php,v 1.10 2005/10/29 Silver Surfer
  *   Id: db_crew.php,v 1.20 2016/10/05 STG
- *   AL 2.0 (logging)
- *
+ *       - AL 2.0 (logging)
+ *   id : db_menu_disk.php, v 1.21 2017/02/26 STG
+ *       - It seems mysqli_free_result is not used for insert or update statements
+ *         from the manual : Returns FALSE on failure. For successful SELECT, SHOW, DESCRIBE or EXPLAIN queries mysqli_query() 
+ *         will return a mysqli_result object. For other successful queries mysqli_query() will return TRUE. 
  ***************************************************************************/
 
 // This document contain all the code needed to operate the website database.
@@ -37,7 +40,7 @@ if ($action == "insert_crew") {
 
         create_log_entry('Crew', $new_crew_id, 'Crew', $new_crew_id, 'Insert', $_SESSION['user_id']);
 
-        mysqli_free_result();
+//      mysqli_free_result();
     }
     // we are sending the $new_crew value to the main page again to place that one
     // in the search field would the user want to edit the crew right away.
@@ -101,6 +104,8 @@ if ($action == "delete_logo") {
     $_SESSION['edit_message'] = "Crew logo deleted";
     create_log_entry('Crew', $crew_select, 'Logo', $crew_select, 'Delete', $_SESSION['user_id']);
 
+    $crew_search = '';
+    
     header("Location: ../crew/crew_editor.php?crew_select=$crew_select&crewsearch=$crew_search&crewbrowse=$crewbrowse&action=main");
 }
 

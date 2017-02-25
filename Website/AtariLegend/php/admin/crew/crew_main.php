@@ -23,6 +23,24 @@ include("../../config/common.php");
 include("../../config/admin.php");
 include("../../admin/games/quick_search_games.php");
 
+if (isset($crewsearch)){
+}
+else{
+    $crewsearch='';
+}
+
+if (isset($crewbrowse)){
+}
+else{
+    $crewbrowse='';
+}
+
+if (isset($message)){
+}
+else{
+    $message='';
+}
+
 if (isset($new_crew)) {
     $smarty->assign('new_crew', $new_crew);
 }
