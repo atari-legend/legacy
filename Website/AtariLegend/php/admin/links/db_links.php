@@ -7,12 +7,12 @@
  *   email                : silversurfer@atari-forum.com
  *   actual update        : re-creation of code from scratch into new file.
  *
- *
- *
  *           Id: db_links.php,v 1.00 2005/01/08 Silver Surfer
  *           Id: db_links.php,v 2.00 2015/10/21 Grave
  *           Id: db_links.php,v 3.00 2015/12/24 Grave - messages added
  *           Id: db_links.php,v 3.01 2016/08/19 Grave - change log added
+ *           id: db_links.php,v 3.02 2017/02/26 22:19 STG
+ *                          - fix sql warnings stonish server
  *
  ***************************************************************************/
 
@@ -76,7 +76,7 @@ if (isset($action) and $action == "delete_category") {
     //****************************************************************************************
     // delete category from the tables
     //****************************************************************************************
-    if (category_id !== '') {
+    if ($category_id !== '') {
         create_log_entry('Links', $website_id, 'Category', $category_id, 'Delete', $_SESSION['user_id']);
 
         $sql = $mysqli->query("DELETE FROM website_category_cross WHERE website_category_id = '$category_id' and website_id = '$website_id'") or die("Failed to delete category");
@@ -150,7 +150,7 @@ if (isset($action) and $action == 'modify_link') {
     }
 
     // Here we delete the website image
-    if ($delete_image == 'yes') {
+    if ( isset($delete_image) and $delete_image == 'yes') {
         $website_query = $mysqli->query("SELECT website_imgext FROM website WHERE website_id='$website_id'");
         list($website_imgext) = $website_query->fetch_array(MYSQLI_BOTH);
         $full_filename = "$website_image_save_path$website_id.$website_imgext";

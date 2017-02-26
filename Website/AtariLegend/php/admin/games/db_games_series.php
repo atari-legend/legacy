@@ -12,7 +12,10 @@
  *          - AL 2.0 adding messages
  *   Id: db_games_series.php,v 1.16 2016/08/19 STG
  *          - add change log
- *
+ *   id: db_games_series.php,v 1.17 2017/02/26 22:19 STG
+ *       - It seems mysqli_free_result is not used for insert or update statements
+ *         from the manual : Returns FALSE on failure. For successful SELECT, SHOW, DESCRIBE or EXPLAIN queries mysqli_query() 
+ *         will return a mysqli_result object. For other successful queries mysqli_query() will return TRUE. 
  ***************************************************************************/
 
 // This document contain all the code needed to operate the website database.
@@ -31,7 +34,7 @@ if ($action == "delete_from_series") {
 
             $mysqli->query("DELETE FROM game_series_cross WHERE game_series_cross_id='$game_series_cross_id_sql'");
         }
-        mysqli_free_result();
+//        mysqli_free_result();
     }
 
     $_SESSION['edit_message'] = "game removed to series";
@@ -46,7 +49,7 @@ if ($action == "delete_from_series") {
 if ($action == "addnew_series") {
     if (isset($new_series)) {
         $sql = $mysqli->query("INSERT INTO game_series (game_series_name) VALUES ('$new_series')");
-        mysqli_free_result();
+//        mysqli_free_result();
     }
 
     $new_series_id = $mysqli->insert_id;
@@ -66,7 +69,7 @@ if ($action == "edit_series") {
     if (isset($game_series_name)) {
         $sql = $mysqli->query("UPDATE game_series SET game_series_name='$game_series_name'
                         WHERE game_series_id='$game_series_id'");
-        mysqli_free_result();
+//        mysqli_free_result();
     }
 
     $_SESSION['edit_message'] = "series updated";
@@ -86,7 +89,7 @@ if ($action == "delete_gameseries") {
 
         $mysqli->query("DELETE FROM game_series WHERE game_series_id='$game_series_id'");
         $mysqli->query("DELETE FROM game_series_cross WHERE game_series_id='$game_series_id'");
-        mysqli_free_result();
+//        mysqli_free_result();
     }
 
     $_SESSION['edit_message'] = "series deleted";
@@ -106,7 +109,7 @@ if ($action == "add_to_series") {
             $mysqli->query("INSERT INTO game_series_cross (game_id,game_series_id) VALUES ('$game','$game_series_id')");
             $_SESSION['edit_message'] = "game added to series";
         }
-        mysqli_free_result();
+//        mysqli_free_result();
     }
 
     header("Location: ../games/games_series_editor.php?game_series_id=$game_series_id&series_page=$series_page");

@@ -11,6 +11,7 @@
  *   Id: games_detail.html,v 0.20 2015/11/02 21:26 STG
  *   Id: games_detail.html,v 0.30 2015/12/27 21:26 STG - 1920 width/HTML Valid/Messages -- NO FLEXBOX
  *   Id: games_detail.html,v 0.31 2017/01/06 STG - added falcon vga and rgb option
+ *   id: games_detail.html,v 0.32 2017/02/26 22:19 STG - fixed 'write a review link'
  *
  ***************************************************************************/
 
@@ -251,7 +252,7 @@ function browseDeveloper(str) {
 				<a href="../magazine/magazine_review_score.php?game_id={$game_info.game_id}&amp;game_name={$game_info.game_name}" class="left_nav_link">Add Mag review score</a><br>
 				<a href="../games/games_box.php?game_id={$game_info.game_id}&amp;game_name={$game_info.game_name}" class="left_nav_link">Add boxscans</a><br>
 				<a href="../games/games_similar.php?game_id={$game_info.game_id}&amp;game_name={$game_info.game_name}" class="left_nav_link">Add Similar Games</a><br>
-				<a href="../administration/construction.php" class="left_nav_link">Write a review</a><br>
+				<a href="../games/games_review_add.php?game_id={$game_info.game_id}" class="left_nav_link">Write a review</a><br>
 				{if $nr_comments > 0}		
 					<br>
 					<a href="../games/games_comment.php?game_id={$game_info.game_id}&amp;view=game_comments" class="left_nav_link">Moderate comments</a>
@@ -277,7 +278,7 @@ function browseDeveloper(str) {
 				<a href="../magazine/magazine_review_score.php?game_id={$game_info.game_id}&amp;game_name={$game_info.game_name}" class="left_nav_link">Add Mag review score</a><br>
 				<a href="../games/games_box.php?game_id={$game_info.game_id}&amp;game_name={$game_info.game_name}" class="left_nav_link">Add boxscans</a><br>
 				<a href="../games/games_similar.php?game_id={$game_info.game_id}&amp;game_name={$game_info.game_name}" class="left_nav_link">Add Similar Games</a><br>
-				<a href="../administration/construction.php" class="left_nav_link">Write a review</a><br>
+				<a href="../games/games_review_add.php?game_id={$game_info.game_id}" class="left_nav_link">Write a review</a><br>
 				{if $nr_comments > 0}		
 					<br>
 					<a href="../games/games_comment.php?game_id={$game_info.game_id}&amp;view=game_comments" class="left_nav_link">Moderate comments</a>

@@ -11,7 +11,9 @@
  *          - AL 2.0
  *  Id: db_games_music.php,v 0.21 2016/08/19 ST Graveyard
  *          - added change log
- *
+ *  id: db_games_music.php,v 0.22 2017/02/26 22:19 STG
+ *         - fix sql warnings stonish server
+ *         - game music deletion did not work!
  ***************************************************************************/
 
 // This document contain all the code needed to operate the website database.
@@ -26,9 +28,9 @@ include("../../config/admin.php");
 
 if (isset($action) and $action == 'delete_music') {
     if (isset($music_id)) {
-        foreach ($music_id_selected as $music) {
+       
+       foreach ((array) $music_id_selected as $music) {
             //get the extension
-
             $MUSIC = $mysqli->query("SELECT * FROM music
                               WHERE music_id = '$music'") or die("Database error - selecting screenshots");
 

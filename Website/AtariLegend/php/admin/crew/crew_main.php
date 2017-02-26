@@ -26,13 +26,13 @@ include("../../admin/games/quick_search_games.php");
 if (isset($crewsearch)){
 }
 else{
-    $crewsearch='';
+    $crewsearch='-';
 }
 
 if (isset($crewbrowse)){
 }
 else{
-    $crewbrowse='';
+    $crewbrowse='-';
 }
 
 if (isset($message)){
