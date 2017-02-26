@@ -27,7 +27,7 @@ if (isset($new_crew)) {
     $smarty->assign('new_crew', $new_crew);
 }
 
-if ($crewsearch != '' and $crewbrowse == '') {
+if ($crewsearch != '-' and $crewbrowse == '-') {
     $sql_crew = $mysqli->query("SELECT * FROM crew
                     WHERE crew_name LIKE '%$crewsearch%'
                     ORDER BY crew_name ASC") or die("Couldn't query Crew database");
@@ -38,7 +38,7 @@ if ($crewsearch != '' and $crewbrowse == '') {
             'crew_name' => $crew['crew_name']
         ));
     }
-} elseif ($crewbrowse != '' and $crewsearch == '') {
+} elseif ($crewbrowse != '-' and $crewsearch == '-') {
     $sql_crew = $mysqli->query("SELECT * FROM crew
                 WHERE crew_name LIKE '$crewbrowse%'
                 ORDER BY crew_name ASC") or die("Couldn't query Crew database");
@@ -49,7 +49,17 @@ if ($crewsearch != '' and $crewbrowse == '') {
             'crew_name' => $crew['crew_name']
         ));
     }
+} else {
+    $sql_crew = $mysqli->query("SELECT * FROM crew WHERE crew_name REGEXP '^[0-9].*' ORDER BY crew_name ASC") or die("Couldn't query Crew database");
+
+    while ($crew = $sql_crew->fetch_array(MYSQLI_BOTH)) {
+        $smarty->append('crew', array(
+            'crew_id' => $crew['crew_id'],
+            'crew_name' => $crew['crew_name']
+        ));
+    }
 }
+
 
 if (isset($crew_select)) {
     // Do query for crew data
@@ -95,7 +105,6 @@ $az_output = az_dropdown_output(0);
 
 $smarty->assign('az_value', $az_value);
 $smarty->assign('az_output', $az_output);
-
 
 // Search variables that got to be sent with the headers all through this module or else the code will dump the user back to the crew_main.php
 $smarty->assign('tracking', array(

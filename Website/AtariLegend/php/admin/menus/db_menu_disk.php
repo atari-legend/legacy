@@ -17,6 +17,7 @@
  *       - It seems mysqli_free_result is not used for insert or update statements
  *         from the manual : Returns FALSE on failure. For successful SELECT, SHOW, DESCRIBE or EXPLAIN queries mysqli_query() 
  *         will return a mysqli_result object. For other successful queries mysqli_query() will return TRUE. 
+ *       - When deleting a menu set, also delete from crew_menu_prod table and ind_menu_prod
  ***************************************************************************/
 
 // We are using the action var to separate all the queries.
@@ -2473,6 +2474,8 @@ if (isset($action) and ($action == "delete_set")) {
         create_log_entry('Menu set', $menu_sets_id, 'Menu set', $menu_sets_id, 'Delete', $_SESSION['user_id']);
 
         $mysqli->query("DELETE from menu_set WHERE menu_sets_id='$menu_sets_id'") or die("error deleting menu set");
+        $mysqli->query("DELETE from crew_menu_prod WHERE menu_sets_id='$menu_sets_id'") or die("error deleting crew_menu_prod");
+        $mysqli->query("DELETE from ind_menu_prod WHERE menu_sets_id='$menu_sets_id'") or die("error deleting ind_menu_prod");
         $_SESSION['edit_message'] = "Menuset completely removed";
 
         //Send all smarty variables to the templates

@@ -8,6 +8,8 @@
  *
  *   Id:  db_articles.php,v 0.10 2016/10/08 20:14 ST Graveyard
  *         - AL 2.0
+ *   id:  db_articles.php,v 0.11 2017/02/26 22:19 STG
+ *         - fix sql warnings stonish server
  *
  ***************************************************************************/
 
@@ -30,8 +32,6 @@ if ($action == "stop") {
 if (isset($action) and $action == 'add_screens') {
     //Here we'll be looping on each of the inputs on the page that are filled in with an image!
     $image = $_FILES['image'];
-
-    echo $image;
 
     foreach ($image['tmp_name'] as $key => $tmp_name) {
         if ($tmp_name !== 'none') {
