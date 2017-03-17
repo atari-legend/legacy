@@ -1,36 +1,31 @@
 <?php
 /***************************************************************************
-*                                2017-03-02_create_game_download_intro.php
+*                                2017-03-16_change_lingo_table.php
 *                            ----------------------------------------------
-*   begin                : 2017-03-02
+*   begin                : 2017-03-16
 *   copyright            : (C) 2017 Atari Legend
 *   email                : martens_maarten@hotmail.com
 *   actual update        :
 *
-*   Id: 2017-03-02_create_game_download_intro.php,v 0.10 2017-03-02 STG
+*   Id: 2017-03-16_change_lingo_table.php,v 0.10 2017-03-16 STG
 *
 ***************************************************************************/
 
 // Unique identifier set by developer.
-$database_update_id = 86;
+$database_update_id = 93;
 
 // Description of what the change will do.
-$update_description = "Create game download intro table";
+$update_description = "Change lingo table - adding short field";
 
 // Should the database change query execute if test is "test_fail" or "test_success"
-$execute_condition = "test_fail";
+$execute_condition = "test_success";
 
 //This is the test query, the query should be made to get an either true or false result.
 $test_condition = "SELECT * FROM information_schema.columns
-WHERE table_schema = '$db_databasename' AND table_name = 'game_download_intro' LIMIT 1";
+WHERE table_schema = '$db_databasename' AND table_name = 'lingo' LIMIT 1";
 
 // Database change
-$database_update_sql = "CREATE TABLE IF NOT EXISTS `game_download_intro` (
-  `game_download_intro_id` int(11) NOT NULL AUTO_INCREMENT,
-  `game_download_id` int(11),
-  `demo_id` int(11),
-  PRIMARY KEY (`game_download_intro_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;"; 
+$database_update_sql = "ALTER TABLE lingo ADD lingo_short VARCHAR(3)";
 
 // If the update should auto execute without user interaction set to "yes".
 $database_autoexecute = "yes";
