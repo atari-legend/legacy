@@ -180,5 +180,4 @@ $smarty->assign("query_time", $time_elapsed_secs);
 $smarty->assign('left_nav', 'leftnav_position_um');
 
 //Send all smarty variables to the templates
-
 $smarty->display("file:" . $cpanel_template_folder . "ajax_user_management.html");

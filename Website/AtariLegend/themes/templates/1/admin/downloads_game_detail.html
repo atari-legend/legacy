@@ -1,0 +1,127 @@
+{*
+/***************************************************************************
+*                            downloads_game_detail.html
+*                            --------------------------
+*
+*   begin                : Sunday, March 12, 2017
+*   copyright            : (C) 2017 Atari Legend
+*   email                : martens_maarten@hotmail.com
+*
+*   Id: downloads_game_detail.html,v 0.1 2017/03/12 STG 19:55
+*		
+***************************************************************************/
+*}
+
+{extends file='1/admin/frontpage.html'}
+
+{block name=java_script}
+<script type="text/javascript">
+function editDownload(str, game_id) {
+
+    var str2 = "downloadedit_ajax_";
+    var download_edit_ajax = str2.concat(str);
+
+    if (str == "") {
+        document.getElementById(download_edit_ajax).innerHTML = "";
+        return;
+    } else {
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
+            {
+                document.getElementById(download_edit_ajax).innerHTML = xmlhttp.responseText;
+            }
+        }
+        xmlhttp.open("GET","../downloads/ajax_gamedownloads_detail.php?action=edit_download_box&game_download_id="+str+"&game_id="+game_id,true);
+        xmlhttp.send();
+    }
+}
+
+function CloseeditDisk(str) {
+
+    var str2 = "downloadedit_ajax_";
+    var download_edit_ajax = str2.concat(str);
+
+    if (str == "") {
+        document.getElementById(download_edit_ajax).innerHTML = "";
+        return;
+    } else {
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
+            {
+                document.getElementById(download_edit_ajax).innerHTML = xmlhttp.responseText;
+            }
+        }
+        xmlhttp.open("GET","../menus/ajax_gamedownloads_detail.php?action=close_edit_download_box&game_download_id="+str,true);
+        xmlhttp.send();
+    }
+}
+</script>
+{/block}
+
+
+{block name=left_tile}
+    {include file='1/admin/left_nav.html'}
+{/block}
+
+{block name=main_tile}
+<div class="standard_tile" id="game_upload">
+	<h1>{$game.game_name}</h1>
+	<div class="standard_tile_line"></div>
+	<div class="standard_tile_text">
+        <div class="left_nav_section">
+            In this section you can upload a download for <b><a href="../games/games_detail.php?game_id={$game.game_id}" class="standard_tile_link_cpanel">{$game.game_name}</a></b>.	
+        </div> 
+        <br>
+        <div class="standard_tile_text">
+            <form action="../downloads/db_downloads_game.php?action=add_download" enctype="multipart/form-data" method="post" name="add_file">
+            <fieldset>
+                <legend>Add a new download</legend>
+                <br>
+                <b>Filename :</b> 
+                <input type="file" name="game_download_name" accept="application/x-zip-compressed,application/x-zip-compressed,application/x-zip-compressed">
+                <input type="submit" class="topbutton_cpanel_small" value="Upload" style="padding:2px;">
+                <input type="hidden" name="game_id" value="{$game.game_id}">
+                <br>
+                <br>
+            </fieldset>
+            </form>
+        </div>
+        <br>        
+        <table class="standard_table_list" id="game_list_table">
+            <tr>
+                <th id="menu_disk_list_th">Filename</th>
+                <th id="menu_list_crew_th" style="text-align:right; padding-right:5px;">Date</th>
+            </tr>
+            {if isset($downloads)}
+                {foreach from=$downloads item=line}
+                    <tr id="downloadedit_ajax_{$line.game_download_id}">
+                        <td class="menu_disk_list_td">{if $line.filename != ''}<a onclick="editDownload({$line.game_download_id},{$game.game_id})" style="cursor: pointer;">{$line.filename}</a>{else}<i>n/a</i>{/if}</td>
+                        <td class="menu_list_crew_td" style="text-align:right; padding-right:5px;">{if isset($line.date)}{$line.date}{else}<i>n/a</i>{/if}</td>
+                    </tr>
+                {/foreach}
+            {/if}
+            <tr>
+                <td class="standard_table_left" colspan="4">
+                    <br><b>{if $nr_downloads == 1}1 download found {else} {$nr_downloads} downloads found{/if}</b>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="standard_table_center"><a href="javascript:history.go(-1)" class="standard_tile_link">back</a></div>
+    <br>         
+ </div>   
+{/block}   

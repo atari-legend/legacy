@@ -79,7 +79,7 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH)) {
         }
 
         if ($log['sub_section'] == 'File') {
-            $subsection_link = ("../games/games_upload.php" . '?game_id=' . $log['sub_section_id']);
+            $subsection_link = ("../downloads/downloads_game_detail.php" . '?game_id=' . $log['sub_section_id']);
         }
 
         if ($log['sub_section'] == 'Screenshot') {
@@ -325,7 +325,52 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH)) {
             $subsection_link = ("../docs/doc_category_edit.php" . '?doc_category_id=' . $log['section_id']);
         }
     }
+    
+    //  the DOWNLOAD FORMAT SECTION
+    if ($log['section'] == 'Format') {
+        $section_link = ("../downloads/download_format_edit.php" . '?format_id=' . $log['section_id']);
 
+        if ($log['sub_section'] == 'Format') {
+            $subsection_link = ("../downloads/download_format_edit.php" . '?format_id=' . $log['section_id']);
+        }
+    }
+    
+    //  the DOWNLOAD LINGO SECTION
+    if ($log['section'] == 'Lingo') {
+        $section_link = ("../downloads/download_lingo_edit.php" . '?lingo_id=' . $log['section_id']);
+
+        if ($log['sub_section'] == 'Lingo') {
+            $subsection_link = ("../downloads/download_lingo_edit.php" . '?lingo_id=' . $log['section_id']);
+        }
+    }
+
+    //  the DOWNLOAD OPTIONS SECTION
+    if ($log['section'] == 'Option') {
+        $section_link = ("../downloads/download_options_edit.php" . '?option_id=' . $log['section_id']);
+
+        if ($log['sub_section'] == 'Option') {
+            $subsection_link = ("../downloads/download_options_edit.php" . '?option_id=' . $log['section_id']);
+        }
+    }
+    
+    //  the TOS VERSION SECTION
+    if ($log['section'] == 'TOS') {
+        $section_link = ("../downloads/download_tos_edit.php" . '?tos_id=' . $log['section_id']);
+
+        if ($log['sub_section'] == 'TOS') {
+            $subsection_link = ("../downloads/download_tos_edit.php" . '?tos_id=' . $log['section_id']);
+        }
+    }
+    
+    //  the TRAINER OPTION SECTION
+    if ($log['section'] == 'Trainer') {
+        $section_link = ("../downloads/download_trainer_edit.php" . '?trainer_id=' . $log['section_id']);
+
+        if ($log['sub_section'] == 'Trainer') {
+            $subsection_link = ("../downloads/download_trainer_edit.php" . '?trainer_id=' . $log['section_id']);
+        }
+    }
+    
     $smarty->append('log', array(
         'log_user_name' => $user_name,
         'log_user_id' => $log['user_id'],

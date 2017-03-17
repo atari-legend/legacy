@@ -1280,6 +1280,71 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
             $subsection_name = $section_name;
         }
     }
+    
+     //  Everything we do for the DOWNLOAD FORMAT SECTION
+    if ($section == 'Format') {
+        // get the name of the format
+        $query_format = "SELECT format FROM format WHERE format_id = '$section_id'";
+        $result = $mysqli->query($query_format) or die("getting format name failed");
+        $query_data   = $result->fetch_array(MYSQLI_BOTH);
+        $section_name = $query_data['format'];
+
+        if ($subsection == 'Format') {
+            $subsection_name = $section_name;
+        }
+    }
+    
+     //  Everything we do for the DOWNLOAD LINGO SECTION
+    if ($section == 'Lingo') {
+        // get the name of the lingo
+        $query_lingo = "SELECT lingo_name FROM lingo WHERE lingo_id = '$section_id'";
+        $result = $mysqli->query($query_lingo) or die("getting lingo name failed");
+        $query_data   = $result->fetch_array(MYSQLI_BOTH);
+        $section_name = $query_data['lingo_name'];
+
+        if ($subsection == 'Lingo') {
+            $subsection_name = $section_name;
+        }
+    }
+    
+    //  Everything we do for the DOWNLOAD OPTION SECTION
+    if ($section == 'Option') {
+        // get the name of the lingo
+        $query_option = "SELECT download_option FROM download_options WHERE download_options_id = '$section_id'";
+        $result = $mysqli->query($query_option) or die("getting option name failed");
+        $query_data   = $result->fetch_array(MYSQLI_BOTH);
+        $section_name = $query_data['download_option'];
+
+        if ($subsection == 'Option') {
+            $subsection_name = $section_name;
+        }
+    }
+    
+    //  Everything we do for the TOS VERSION SECTION
+    if ($section == 'TOS') {
+        // get the name of the lingo
+        $query_tos = "SELECT tos_version FROM tos_version WHERE tos_version_id = '$section_id'";
+        $result = $mysqli->query($query_tos) or die("getting tos name failed");
+        $query_data   = $result->fetch_array(MYSQLI_BOTH);
+        $section_name = $query_data['tos_version'];
+
+        if ($subsection == 'TOS') {
+            $subsection_name = $section_name;
+        }
+    }
+    
+    //  Everything we do for the TOS VERSION SECTION
+    if ($section == 'Trainer') {
+        // get the name of the trainer option
+        $query_trainer = "SELECT trainer_options FROM trainer_options WHERE trainer_options_id = '$section_id'";
+        $result = $mysqli->query($query_trainer) or die("getting trainer optione failed");
+        $query_data   = $result->fetch_array(MYSQLI_BOTH);
+        $section_name = $query_data['trainer_options'];
+
+        if ($subsection == 'Trainer') {
+            $subsection_name = $section_name;
+        }
+    }
 
     $section_name    = $mysqli->real_escape_string($section_name);
     $subsection_name = $mysqli->real_escape_string($subsection_name);
