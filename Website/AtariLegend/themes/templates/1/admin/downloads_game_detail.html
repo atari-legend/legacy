@@ -43,7 +43,7 @@ function editDownload(str, game_id) {
     }
 }
 
-function CloseeditDisk(str) {
+function closeEditDownload(str, game_id) {
 
     var str2 = "downloadedit_ajax_";
     var download_edit_ajax = str2.concat(str);
@@ -65,10 +65,60 @@ function CloseeditDisk(str) {
                 document.getElementById(download_edit_ajax).innerHTML = xmlhttp.responseText;
             }
         }
-        xmlhttp.open("GET","../menus/ajax_gamedownloads_detail.php?action=close_edit_download_box&game_download_id="+str,true);
+        xmlhttp.open("GET","../downloads/ajax_gamedownloads_detail.php?action=closeedit_download_box&game_download_id="+str+"&game_id="+game_id,true);
         xmlhttp.send();
     }
 }
+
+function addOption(game_download_id, game_id) {
+ if (game_download_id == "") {
+        document.getElementById("linked_options").innerHTML = "";
+        return;
+    } else {
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("linked_options").innerHTML = xmlhttp.responseText;
+            }
+        }
+
+        var JSid=document.getElementById("gu_download_option");
+        var download_options_id = JSid.value
+
+        xmlhttp.open("GET","../downloads/db_downloads_game.php?action=add_option&game_id="+game_id+"&game_download_id="+game_download_id+"&download_options_id="+download_options_id,true);
+        xmlhttp.send();
+    }
+}
+
+function delOption(download_options_id, game_download_id, game_id) {
+ if (game_download_id == "") {
+        document.getElementById("linked_options").innerHTML = "";
+        return;
+    } else {
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("linked_options").innerHTML = xmlhttp.responseText;
+            }
+        }
+
+        xmlhttp.open("GET","../downloads/db_downloads_game.php?action=delete_option&game_id="+game_id+"&game_download_id="+game_download_id+"&download_options_id="+download_options_id,true);
+        xmlhttp.send();
+    }
+}
+
 </script>
 {/block}
 

@@ -18,7 +18,6 @@
 include("../../config/common.php");
 include("../../config/admin.php");
 
-
 //****************************************************************************************
 // We wanna add a new download
 //****************************************************************************************
@@ -165,7 +164,7 @@ if (isset($action) and $action == 'update_download') {
 }
 
 //****************************************************************************************
-// This is where the file name and comments get deleted
+// This is where we delete the download
 //****************************************************************************************
 if (isset($action) and $action == "delete_download") {
     create_log_entry('Games', $game_id, 'File', $game_id, 'Delete', $_SESSION['user_id']);
@@ -176,5 +175,87 @@ if (isset($action) and $action == "delete_download") {
     header("Location: ../games/games_upload.php?game_id=$game_id");
 }
 
+//****************************************************************************************
+// This is where we add an option to the download
+//****************************************************************************************
+if (isset($action) and $action == "add_option") {
+
+    if ($download_options_id == '-' or $download_options_id == '')
+    {
+        $_SESSION['edit_message'] = "Please select a download option";
+        
+        
+        $smarty->assign('smarty_action', 'update_options');
+        //Send to smarty for return value
+        $smarty->display("file:" . $cpanel_template_folder . "ajax_gamedownloads_detail.html");
+    }
+    else
+    {
+        // Insert this option into game_download_options table.
+        $sdbquery = $mysqli->query("INSERT INTO game_download_options (game_download_id,download_options_id) VALUES ('$game_download_id','$download_options_id')") or die("ERROR! Couldn't insert ids in game_download_options");
+        
+        $_SESSION['edit_message'] = "Option inserted";
+        
+        create_log_entry('Downloads', $game_id, 'Options', $download_options_id, 'Insert', $_SESSION['user_id']);  
+        
+        // get the download options
+        $sql_options = "SELECT *
+                        FROM game_download_options
+                        LEFT JOIN download_options ON (game_download_options.download_options_id = download_options.download_options_id)
+                        WHERE game_download_options.game_download_id = '$game_download_id'";
+                        
+        $query_options = $mysqli->query($sql_options) or die('Error: ' . mysqli_error($mysqli));
+        
+        while ($query = $query_options->fetch_array(MYSQLI_BOTH)) {
+             $smarty->append('download_options', array(
+                            'download_options_id' => $query['download_options_id'],
+                            'download_option' => $query['download_option']
+                        )); 
+        } 
+        
+        $smarty->assign('game_download_id', $game_download_id);
+        $smarty->assign('game_id', $game_id);
+        
+        $smarty->assign('smarty_action', 'update_options');
+        //Send to smarty for return value
+        $smarty->display("file:" . $cpanel_template_folder . "ajax_gamedownloads_detail.html");
+    }
+}
+
+//****************************************************************************************
+// This is where we delete an option from the download
+//****************************************************************************************
+if (isset($action) and $action == "delete_option") {
+
+        // Insert this option into game_download_options table.
+        $mysqli->query("DELETE from game_download_options WHERE game_download_id='$game_download_id' AND download_options_id='$download_options_id'") or die('Error: ' . mysqli_error($mysqli));
+         
+        $_SESSION['edit_message'] = "Option deleted";
+        
+        create_log_entry('Downloads', $game_id, 'Options', $download_options_id, 'Delete', $_SESSION['user_id']);  
+        
+         // get the download options
+        $sql_options = "SELECT *
+                        FROM game_download_options
+                        LEFT JOIN download_options ON (game_download_options.download_options_id = download_options.download_options_id)
+                        WHERE game_download_options.game_download_id = '$game_download_id'";
+                        
+        $query_options = $mysqli->query($sql_options) or die('Error: ' . mysqli_error($mysqli));
+        
+        while ($query = $query_options->fetch_array(MYSQLI_BOTH)) {
+             $smarty->append('download_options', array(
+                            'download_options_id' => $query['download_options_id'],
+                            'download_option' => $query['download_option']
+                        )); 
+        } 
+        
+        $smarty->assign('game_download_id', $game_download_id);
+        $smarty->assign('game_id', $game_id);
+        
+        $smarty->assign('smarty_action', 'update_options');
+        //Send to smarty for return value
+        $smarty->display("file:" . $cpanel_template_folder . "ajax_gamedownloads_detail.html");
+}
+  
 //close the connection
 mysqli_close($mysqli);
