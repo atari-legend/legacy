@@ -256,6 +256,90 @@ if (isset($action) and $action == "delete_option") {
         //Send to smarty for return value
         $smarty->display("file:" . $cpanel_template_folder . "ajax_gamedownloads_detail.html");
 }
+
+//****************************************************************************************
+// This is where we add an non compatible TOS to the download
+//****************************************************************************************
+if (isset($action) and $action == "add_tos") {
+
+    if ($download_tos_id == '-' or $download_tos_id == '')
+    {
+        $_SESSION['edit_message'] = "Please select a TOS version";
+        
+        
+        $smarty->assign('smarty_action', 'update_tos');
+        //Send to smarty for return value
+        $smarty->display("file:" . $cpanel_template_folder . "ajax_gamedownloads_detail.html");
+    }
+    else
+    {
+        // Insert this option into game_download_options table.
+        $sdbquery = $mysqli->query("INSERT INTO game_download_tos (game_download_id,tos_version_id) VALUES ('$game_download_id','$download_tos_id')") or die("ERROR! Couldn't insert ids in game_download_tos");
+        
+        $_SESSION['edit_message'] = "TOS version inserted";
+        
+        create_log_entry('Downloads', $game_id, 'TOS', $download_tos_id, 'Insert', $_SESSION['user_id']);  
+        
+        // get the download tos
+        $sql_tos = "SELECT *
+                        FROM game_download_tos
+                        LEFT JOIN tos_version ON (game_download_tos.tos_version_id = tos_version.tos_version_id)
+                        WHERE game_download_tos.game_download_id = '$game_download_id'";
+                        
+        $query_tos = $mysqli->query($sql_tos) or die('Error: ' . mysqli_error($mysqli));
+        
+        while ($query = $query_tos->fetch_array(MYSQLI_BOTH)) {
+             $smarty->append('download_tos', array(
+                            'download_tos_id' => $query['tos_version_id'],
+                            'download_tos' => $query['tos_version']
+                        )); 
+        } 
+         
+        $smarty->assign('game_download_id', $game_download_id);
+        $smarty->assign('game_id', $game_id);
+        
+        $smarty->assign('smarty_action', 'update_tos');
+        //Send to smarty for return value
+        $smarty->display("file:" . $cpanel_template_folder . "ajax_gamedownloads_detail.html");
+    }
+}
+
+
+//****************************************************************************************
+// This is where we delete a TOS version from the download
+//****************************************************************************************
+if (isset($action) and $action == "delete_tos") {
+
+        // Insert this option into game_download_options table.
+        $mysqli->query("DELETE from game_download_tos WHERE game_download_id='$game_download_id' AND tos_version_id='$download_tos_id'") or die('Error: ' . mysqli_error($mysqli));
+         
+        $_SESSION['edit_message'] = "TOS version deleted";
+        
+        create_log_entry('Downloads', $game_id, 'TOS', $download_tos_id, 'Delete', $_SESSION['user_id']);  
+        
+         // get the download tos
+        $sql_tos = "SELECT *
+                        FROM game_download_tos
+                        LEFT JOIN tos_version ON (game_download_tos.tos_version_id = tos_version.tos_version_id)
+                        WHERE game_download_tos.game_download_id = '$game_download_id'";
+                        
+        $query_tos = $mysqli->query($sql_tos) or die('Error: ' . mysqli_error($mysqli));
+        
+        while ($query = $query_tos->fetch_array(MYSQLI_BOTH)) {
+             $smarty->append('download_tos', array(
+                            'download_tos_id' => $query['tos_version_id'],
+                            'download_tos' => $query['tos_version']
+                        )); 
+        } 
+        
+        $smarty->assign('game_download_id', $game_download_id);
+        $smarty->assign('game_id', $game_id);
+        
+        $smarty->assign('smarty_action', 'update_tos');
+        //Send to smarty for return value
+        $smarty->display("file:" . $cpanel_template_folder . "ajax_gamedownloads_detail.html");
+}
+
   
 //close the connection
 mysqli_close($mysqli);

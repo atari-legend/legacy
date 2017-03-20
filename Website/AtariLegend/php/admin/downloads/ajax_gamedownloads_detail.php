@@ -143,6 +143,23 @@ if (isset($action) and $action == "edit_download_box" and $game_download_id !== 
                     )); 
     } 
     
+    
+     // get the download tos
+    $sql_tos = "SELECT *
+                    FROM game_download_tos
+                    LEFT JOIN tos_version ON (game_download_tos.tos_version_id = tos_version.tos_version_id)
+                    WHERE game_download_tos.game_download_id = '$game_download_id'";
+                    
+    $query_tos = $mysqli->query($sql_tos) or die('Error: ' . mysqli_error($mysqli));
+    
+    while ($query = $query_tos->fetch_array(MYSQLI_BOTH)) {
+         $smarty->append('download_tos', array(
+                        'download_tos_id' => $query['tos_version_id'],
+                        'download_tos' => $query['tos_version']
+                    )); 
+    } 
+    
+    
     // Get the download credits
     $sql_individuals = "SELECT      individuals.ind_id,
                                     individuals.ind_name,
@@ -216,6 +233,16 @@ if (isset($action) and $action == "edit_download_box" and $game_download_id !== 
          $smarty->append('options', array(
                         'options_id' => $query['download_options_id'],
                         'option' => $query['download_option']
+                    )); 
+    }
+    
+    // download TOS dropdown
+    $query_tos = $mysqli->query("SELECT * FROM tos_version ORDER BY tos_version_id ASC");
+
+    while ($query = $query_tos->fetch_array(MYSQLI_BOTH)) {
+         $smarty->append('tos', array(
+                        'tos_id' => $query['tos_version_id'],
+                        'tos' => $query['tos_version']
                     )); 
     }
 

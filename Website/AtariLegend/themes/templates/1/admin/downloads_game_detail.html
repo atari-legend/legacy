@@ -119,6 +119,55 @@ function delOption(download_options_id, game_download_id, game_id) {
     }
 }
 
+function addTos(game_download_id, game_id) {
+ if (game_download_id == "") {
+        document.getElementById("linked_tos").innerHTML = "";
+        return;
+    } else {
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("linked_tos").innerHTML = xmlhttp.responseText;
+            }
+        }
+
+        var JSid=document.getElementById("gu_download_tos");
+        var download_tos_id = JSid.value
+
+        xmlhttp.open("GET","../downloads/db_downloads_game.php?action=add_tos&game_id="+game_id+"&game_download_id="+game_download_id+"&download_tos_id="+download_tos_id,true);
+        xmlhttp.send();
+    }
+}
+
+function delTos(download_tos_id, game_download_id, game_id) {
+ if (game_download_id == "") {
+        document.getElementById("linked_tos").innerHTML = "";
+        return;
+    } else {
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("linked_tos").innerHTML = xmlhttp.responseText;
+            }
+        }
+
+        xmlhttp.open("GET","../downloads/db_downloads_game.php?action=delete_tos&game_id="+game_id+"&game_download_id="+game_download_id+"&download_tos_id="+download_tos_id,true);
+        xmlhttp.send();
+    }
+}
+
 </script>
 {/block}
 
