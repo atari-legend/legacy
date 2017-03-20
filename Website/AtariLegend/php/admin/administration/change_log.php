@@ -371,6 +371,16 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH)) {
         }
     }
     
+     //  the DOWNLOAD EDIT SECTION
+    if ($log['section'] == 'Downloads') {
+        $section_link = ("../downloads/downloads_game_detail.php" . '?game_id=' . $log['section_id']);
+
+        if ($log['sub_section'] == 'Options') {
+            $subsection_link = ("../downloads/download_options_edit.php" . '?option_id=' . $log['sub_section_id']);
+        }
+    }
+  
+    
     $smarty->append('log', array(
         'log_user_name' => $user_name,
         'log_user_id' => $log['user_id'],

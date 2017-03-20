@@ -1333,7 +1333,7 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
         }
     }
     
-    //  Everything we do for the TOS VERSION SECTION
+    //  Everything we do for the TRAINER SECTION
     if ($section == 'Trainer') {
         // get the name of the trainer option
         $query_trainer = "SELECT trainer_options FROM trainer_options WHERE trainer_options_id = '$section_id'";
@@ -1343,6 +1343,26 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
 
         if ($subsection == 'Trainer') {
             $subsection_name = $section_name;
+        }
+    }
+    
+     //  Everything we do for the DOWNLOADS EDIT SECTION
+    if ($section == 'Downloads') {
+        // get the name of the game
+        $query_game = "SELECT * FROM game WHERE game_id = '$section_id'";
+        $result = $mysqli->query($query_game) or die("getting game_name failed yooohoo");
+        $query_data   = $result->fetch_array(MYSQLI_BOTH);
+        $section_name = $query_data['game_name'];
+
+        if ($subsection == 'Options') {
+            // get the name of the option
+            $query_option = "SELECT * FROM download_options
+                             LEFT JOIN game_download_options ON (game_download_options.download_options_id = download_options.download_options_id)     
+                             WHERE download_options.download_options_id = '$subsection_id'";
+            $result = $mysqli->query($query_option) or die("getting option failed");
+            $query_data   = $result->fetch_array(MYSQLI_BOTH);
+            $subsection_name = $query_data['download_option'];
+            $subsection_id = $query_data['download_options_id'];
         }
     }
 
