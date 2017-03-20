@@ -378,6 +378,10 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH)) {
         if ($log['sub_section'] == 'Options') {
             $subsection_link = ("../downloads/download_options_edit.php" . '?option_id=' . $log['sub_section_id']);
         }
+        
+        if ($log['sub_section'] == 'TOS') {
+            $subsection_link = ("../downloads/download_tos_edit.php" . '?tos_id=' . $log['sub_section_id']);
+        }
     }
   
     

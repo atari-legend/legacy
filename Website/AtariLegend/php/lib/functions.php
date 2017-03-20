@@ -1364,6 +1364,17 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
             $subsection_name = $query_data['download_option'];
             $subsection_id = $query_data['download_options_id'];
         }
+        
+        if ($subsection == 'TOS') {
+            // get the name of the option
+            $query_tos = "SELECT * FROM tos_version
+                             LEFT JOIN game_download_tos ON (game_download_tos.tos_version_id = tos_version.tos_version_id)     
+                             WHERE tos_version.tos_version_id = '$subsection_id'";
+            $result = $mysqli->query($query_tos) or die("getting tos failed");
+            $query_data   = $result->fetch_array(MYSQLI_BOTH);
+            $subsection_name = $query_data['tos_version'];
+            $subsection_id = $query_data['tos_version_id'];
+        }
     }
 
     $section_name    = $mysqli->real_escape_string($section_name);

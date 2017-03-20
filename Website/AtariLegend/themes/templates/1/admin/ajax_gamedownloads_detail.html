@@ -30,7 +30,7 @@
                     <br>
                     <div class="standard_tile_text">
                         <fieldset>
-                            <legend>Main options</legend>
+                            <legend>Download details</legend>
                                 <div class="game_upload_container">
                                     <div class="game_upload_child" id="gu_child_1">
                                         <div class="user_details_row">
@@ -41,39 +41,49 @@
                                             <div class="user_details_text">info :</div>
                                             <div class="user_details_input"><input type="text" name="info" class="standard_tile_input_small" value="{$download_details.info}"></div>
                                         </div>
-                                        <div class="user_details_row">
-                                            <div class="user_details_text">Options :</div>
-                                            <div class="user_details_input">
-                                                <select name="download_options_id" id="gu_download_option">
-                                                    <option value="-">-</option>
-                                                    {foreach from=$options item=line}
-                                                        <option value="{$line.options_id}">{$line.option}</option>
-                                                    {/foreach}
-                                                </select>
-                                                <input type="button" name="add_option" value="Add" onClick="addOption({$downloads.game_download_id},{$game.game_id}); return false;" class="topbutton_cpanel_small">
-                                            </div>
-                                        </div>
-                                        <div id="linked_options">
-                                            {if isset($download_options)}	
-                                                <div class="user_details_row">
-                                                    <div class="user_details_text">Linked options</div>	
-                                                    <div class="user_details_input">
-                                                        <table>
-                                                        {foreach from=$download_options item=line}
-                                                        <tr>
-                                                            <td>
-                                                                <b>{$line.download_option}</b> 
-                                                            </td>
-                                                            <td>
-                                                                 <a href="#" onClick="delOption({$line.download_options_id},{$downloads.game_download_id},{$game.game_id}); return false;"  class="links_addnew_link">Delete</a> 							
-                                                            </td>
-                                                        </tr>
+                                        <br>
+                                        <br>
+                                        <div style="padding-right:20px;">
+                                        <fieldset>
+                                            <legend>Label details</legend>
+                                            <div class="user_details_row">
+                                                <div class="user_details_text">Options :</div>
+                                                <div class="user_details_input">
+                                                    <select name="download_options_id" id="gu_download_option">
+                                                        <option value="-">-</option>
+                                                        {foreach from=$options item=line}
+                                                            <option value="{$line.options_id}">{$line.option}</option>
                                                         {/foreach}
-                                                        </table>
-                                                    </div>
+                                                    </select>
+                                                    <input type="button" name="add_option" value="Add" onClick="addOption({$downloads.game_download_id},{$game.game_id}); return false;" class="topbutton_cpanel_small">
                                                 </div>
-                                            {/if}
-                                        </div>
+                                            </div>
+                                            <br>
+                                            <div id="linked_options">
+                                                {if isset($download_options)}	
+                                                    <div class="user_details_row">
+                                                        <div class="user_details_text">Linked options</div>	
+                                                        <div class="user_details_input">
+                                                            <table>
+                                                            {foreach from=$download_options item=line}
+                                                            <tr>
+                                                                <td>
+                                                                    <b>{$line.download_option}</b> 
+                                                                </td>
+                                                                <td>
+                                                                     <a href="#" onClick="delOption({$line.download_options_id},{$downloads.game_download_id},{$game.game_id}); return false;"  class="links_addnew_link">Delete</a> 							
+                                                                </td>
+                                                            </tr>
+                                                            {/foreach}
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                {/if}
+                                            </div>
+                                         </fieldset>
+                                         </div>
+                                        <br>
+                                        <br>
                                     </div>
                                     <div class="game_upload_child" id="gu_child_2">		
                                         <div class="user_details_row">
@@ -98,6 +108,49 @@
                                                 </select>
                                             </div>
                                         </div>
+                                        <br>
+                                        <br>
+                                        <div style="padding-right:20px;">
+                                        <fieldset>
+                                            <legend>Tos details</legend>
+                                            <div class="user_details_row">
+                                                <div class="user_details_text">TOS :</div>
+                                                <div class="user_details_input">
+                                                    <select name="download_tos_id" id="gu_download_tos">
+                                                        <option value="-">-</option>
+                                                        {foreach from=$tos item=line}
+                                                            <option value="{$line.tos_id}">{$line.tos}</option>
+                                                        {/foreach}
+                                                    </select>
+                                                    <input type="button" name="add_tos" value="Add" onClick="addTos({$downloads.game_download_id},{$game.game_id}); return false;" class="topbutton_cpanel_small">
+                                                </div>
+                                            </div>
+                                            <br>
+                                            <div id="linked_tos">
+                                                {if isset($download_tos)}	
+                                                    <div class="user_details_row">
+                                                        <div class="user_details_text">Linked TOS</div>	
+                                                        <div class="user_details_input">
+                                                            <table>
+                                                            {foreach from=$download_tos item=line}
+                                                            <tr>
+                                                                <td>
+                                                                    <b>{$line.download_tos}</b> 
+                                                                </td>
+                                                                <td>
+                                                                     <a href="#" onClick="delTos({$line.download_tos_id},{$downloads.game_download_id},{$game.game_id}); return false;"  class="links_addnew_link">Delete</a> 							
+                                                                </td>
+                                                            </tr>
+                                                            {/foreach}
+                                                            </table>
+                                                        </div>
+                                                    </div>
+                                                {/if}
+                                            </div>
+                                        </fieldset>
+                                        </div>
+                                        <br>
+                                        <br>
                                     </div>
                                 </div>
                         </fieldset>
@@ -136,6 +189,29 @@
                 </td>
                 <td>
                     <a href="#" onClick="delOption({$line.download_options_id},{$game_download_id},{$game_id}); return false;"  class="links_addnew_link">Delete</a> 	
+                </td>
+            </tr>
+            {/foreach}
+            </table>
+        </div>
+    </div>
+    {/if}   
+{/if}
+
+{* POP FOR TOS UPDATE *}
+{if isset($smarty_action) and $smarty_action == "update_tos"}
+	{if isset($download_tos)}	
+    <div class="user_details_row">
+        <div class="user_details_text">Linked TOS</div>	
+        <div class="user_details_input">
+            <table>
+            {foreach from=$download_tos item=line}
+            <tr>
+                <td>
+                    <b>{$line.download_tos}</b> 
+                </td>
+                <td>
+                    <a href="#" onClick="delTos({$line.download_tos_id},{$game_download_id},{$game_id}); return false;"  class="links_addnew_link">Delete</a> 	
                 </td>
             </tr>
             {/foreach}
