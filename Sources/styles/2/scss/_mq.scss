@@ -758,6 +758,16 @@
     }
 }
 
+//*----------------------------------------------------------
+//download edit
+//------------------------------------------------------------ */
+@media screen and (max-width: 480px) {
+    #download_details_row {width: 100%;}
+    #download_details_text {display: table-cell;}
+    #download_details_input {display: table-cell;}
+}
+
+
 
 //*----------------------------------------------------------
 //General settings

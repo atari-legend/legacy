@@ -340,6 +340,121 @@ if (isset($action) and $action == "delete_tos") {
         $smarty->display("file:" . $cpanel_template_folder . "ajax_gamedownloads_detail.html");
 }
 
+//****************************************************************************************
+// This is where we add/modify the main download options
+//****************************************************************************************
+if (isset($action) and $action == "mod_download") {
+
+    //check if we need to add or modify the game_download_details table
+    $sql_nr_details = "SELECT * FROM game_download_details WHERE game_download_id ='$game_download_id'";
+    $query_nr_details = $mysqli->query($sql_nr_details) or die("problem getting download details");
+    if ($query_nr_details->num_rows > 0) {
+        $sdbquery = $mysqli->query("UPDATE game_download_details SET version='$download_version', info= '$download_info' WHERE  game_download_id ='$game_download_id'") or die("ERROR! Couldn't update game_download_details");
+    }else{
+       // Insert into game_download_details table.
+       $sdbquery = $mysqli->query("INSERT INTO game_download_details (game_download_id,version,info) VALUES ('$game_download_id','$download_version', '$download_info')") or die("ERROR! Couldn't insert into game_download_details");
+    }
+    
+    //check if we need to add or modify the game_download_lingo table
+    if ( $download_language  == '-' ){}
+    else
+    {    
+        $sql_nr_lingo = "SELECT * FROM game_download_lingo WHERE game_download_id ='$game_download_id'";
+        $query_nr_lingo = $mysqli->query($sql_nr_lingo) or die("problem getting download lingo");
+        if ($query_nr_lingo->num_rows > 0) {
+            $sdbquery = $mysqli->query("UPDATE game_download_lingo SET lingo_id='$download_language' WHERE game_download_id ='$game_download_id'") or die("ERROR! Couldn't update game_download_lingo");
+        }else{
+           // Insert this option into game_download_lingo table.
+           $sdbquery = $mysqli->query("INSERT INTO game_download_lingo (game_download_id,lingo_id) VALUES ('$game_download_id','$download_language')") or die("ERROR! Couldn't insert into game_download_lingo");
+        }
+    }
+    
+    //check if we need to add or modify the download format table
+    if ( $download_format == '-' ){}
+    else
+    {    
+        //let's get the download id
+        $sql_download_id = $mysqli->query("SELECT download_id FROM game_download WHERE game_download_id='$game_download_id'")
+                                  or die("Database error - selecting download_main");
+        $download_row = $sql_download_id->fetch_row();
+        $download_id = $download_row[0];
+          
+        $sql_nr_format = "SELECT * FROM download_format WHERE download_id ='$download_id'";
+        $query_nr_format = $mysqli->query($sql_nr_format) or die("problem getting download format");
+        if ($query_nr_format->num_rows > 0) {
+            $sdbquery = $mysqli->query("UPDATE download_format SET format_id='$download_format' WHERE download_id ='$download_id'") or die("ERROR! Couldn't update download_format");
+        }else{
+           // Insert this option into game_download_lingo table.
+           $sdbquery = $mysqli->query("INSERT INTO download_format (download_id,format_id) VALUES ('$download_id','$download_format')") or die("ERROR! Couldn't insert into download_format");
+        }
+    }
+    
+    $_SESSION['edit_message'] = "Download details updated";
+    create_log_entry('Downloads', $game_id, 'Details', $game_id, 'Update', $_SESSION['user_id']);  
+    
+    //  First we get all the data of this download        
+    $sql_downloads = "SELECT *
+                        FROM game_download
+                        LEFT JOIN download_main ON (game_download.download_id = download_main.download_id)
+                        LEFT JOIN download_format ON (download_main.download_id = download_format.download_id)
+                        LEFT JOIN format ON (download_format.format_id = format.format_id)
+                        LEFT JOIN game_download_lingo ON (game_download_lingo.game_download_id = game_download.game_download_id)
+                        LEFT JOIN lingo ON ( lingo.lingo_id = game_download_lingo.lingo_id)
+                        LEFT JOIN game_download_details ON ( game_download_details.game_download_id = game_download.game_download_id)
+                        WHERE game_download.game_download_id = '$game_download_id'";
+
+    $result_downloads = $mysqli->query($sql_downloads) or die(mysqli_error());
+    $row              = $result_downloads->fetch_array(MYSQLI_BOTH);
+    
+    $download_format  = $row['format_id'];
+    $smarty->assign('download_format', $download_format);
+    
+    $download_lingo   = $row['lingo_id'];
+    $smarty->assign('download_lingo', $download_lingo);
+    
+    $user_id          = $row['user_id'];
+    $download_date = date("F j, Y", $row['date']);
+    
+    //get the username
+    $query_usn = $mysqli->query("SELECT userid FROM users WHERE user_id = '$user_id'") or die("couldn't get usn of the download");
+    $sql_usn = $query_usn->fetch_array(MYSQLI_BOTH);
+       
+    $smarty->assign('download_details', array(
+        'download_id' => $row['download_id'],
+        'download_ext' => $row['download_ext'],
+        'user_id' => $user_id,
+        'username' => $sql_usn['userid'],
+        'date' => $download_date,
+        'disable' => $row['disable'],
+        'game_download_id' => $row['game_download_id'],
+        'version' => $row['version'],
+        'info' => $row['info']
+    ));
+    
+    // download format dropdown
+    $query_download_format = $mysqli->query("SELECT * FROM format ORDER BY format_id ASC");
+
+    while ($query = $query_download_format->fetch_array(MYSQLI_BOTH)) {
+        $smarty->append('format_id', $query['format_id']);
+        $smarty->append('format', $query['format']);
+    }
+    
+    // lingo dropdown
+    $query_lingo = $mysqli->query("SELECT * FROM lingo ORDER BY lingo_id ASC");
+
+    while ($query = $query_lingo->fetch_array(MYSQLI_BOTH)) {
+        $smarty->append('lingo_id', $query['lingo_id']);
+        $smarty->append('lingo_name', $query['lingo_name']);
+    }
+
+    $smarty->assign('game_download_id', $game_download_id);
+    $smarty->assign('game_id', $game_id);
+    
+    $smarty->assign('smarty_action', 'update_details');
+    //Send to smarty for return value
+    $smarty->display("file:" . $cpanel_template_folder . "ajax_gamedownloads_detail.html");
+}
+
   
 //close the connection
 mysqli_close($mysqli);

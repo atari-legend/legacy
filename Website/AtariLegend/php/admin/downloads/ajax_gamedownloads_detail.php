@@ -86,9 +86,7 @@ if (isset($action) and $action == "edit_download_box" and $game_download_id !== 
             'date' => $date
         ));
     }    
-    
-    
-    
+     
 //  First we get all the data of this download        
     $sql_downloads = "SELECT *
                         FROM game_download
