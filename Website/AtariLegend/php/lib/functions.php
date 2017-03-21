@@ -1375,6 +1375,10 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
             $subsection_name = $query_data['tos_version'];
             $subsection_id = $query_data['tos_version_id'];
         }
+        
+         if ($subsection == 'Details') {
+            $subsection_name = $section_name;
+        }
     }
 
     $section_name    = $mysqli->real_escape_string($section_name);

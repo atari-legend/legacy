@@ -70,6 +70,41 @@ function closeEditDownload(str, game_id) {
     }
 }
 
+function modDownload(game_download_id, game_id) {
+ if (game_download_id == "") {
+        document.getElementById("mod_download").innerHTML = "";
+        return;
+    } else {
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("mod_download").innerHTML = xmlhttp.responseText;
+            }
+        }
+
+        var JSid=document.getElementById("download_version");
+        var download_version = JSid.value
+        
+        var JSid=document.getElementById("download_info");
+        var download_info = JSid.value
+        
+        var JSid=document.getElementById("download_format");
+        var download_format = JSid.value
+        
+        var JSid=document.getElementById("download_language");
+        var download_language = JSid.value
+        
+        xmlhttp.open("GET","../downloads/db_downloads_game.php?action=mod_download&game_id="+game_id+"&game_download_id="+game_download_id+"&download_language="+download_language+"&download_version="+download_version+"&download_info="+download_info+"&download_format="+download_format+"&download_options_id="+download_options_id,true);
+        xmlhttp.send();
+    }
+}
+
 function addOption(game_download_id, game_id) {
  if (game_download_id == "") {
         document.getElementById("linked_options").innerHTML = "";
