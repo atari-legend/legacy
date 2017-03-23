@@ -13,3 +13,17 @@
 
 #download_language
 { @extend #quick_search_pub_select;}
+
+#download_trainer
+{ @extend #quick_search_pub_select;}
+
+#download_option {
+    @extend #small_select;
+}
+
+#download_tos {
+    @extend #small_select;
+}
+
+#download_crew
+{ @extend #quick_search_pub_select;}

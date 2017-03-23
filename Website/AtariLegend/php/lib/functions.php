@@ -1376,8 +1376,28 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
             $subsection_id = $query_data['tos_version_id'];
         }
         
-         if ($subsection == 'Details') {
+        if ($subsection == 'Details') {
             $subsection_name = $section_name;
+        }
+        
+         if ($subsection == 'Trainer') {
+            // get the name of the trainer option
+            $query_trainer = "SELECT * FROM trainer_options
+                             LEFT JOIN game_download_trainer ON (game_download_trainer.trainer_options_id = trainer_options.trainer_options_id)     
+                             WHERE trainer_options.trainer_options_id = '$subsection_id'";
+            $result = $mysqli->query($query_trainer) or die("getting trainer failed");
+            $query_data   = $result->fetch_array(MYSQLI_BOTH);
+            $subsection_name = $query_data['trainer_options'];
+            $subsection_id = $query_data['trainer_options_id'];
+        }
+        
+        if ($subsection == 'Crew') {
+            // get the name of the trainer option
+            $query_crew = "SELECT * FROM crew WHERE
+                            crew_id = '$subsection_id'";
+            $result = $mysqli->query($query_crew) or die("getting crew failed");
+            $query_data   = $result->fetch_array(MYSQLI_BOTH);
+            $subsection_name = $query_data['crew_name'];
         }
     }
 

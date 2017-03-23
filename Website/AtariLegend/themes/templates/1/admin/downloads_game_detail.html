@@ -123,7 +123,7 @@ function addOption(game_download_id, game_id) {
             }
         }
 
-        var JSid=document.getElementById("gu_download_option");
+        var JSid=document.getElementById("download_option");
         var download_options_id = JSid.value
 
         xmlhttp.open("GET","../downloads/db_downloads_game.php?action=add_option&game_id="+game_id+"&game_download_id="+game_download_id+"&download_options_id="+download_options_id,true);
@@ -172,7 +172,7 @@ function addTos(game_download_id, game_id) {
             }
         }
 
-        var JSid=document.getElementById("gu_download_tos");
+        var JSid=document.getElementById("download_tos");
         var download_tos_id = JSid.value
 
         xmlhttp.open("GET","../downloads/db_downloads_game.php?action=add_tos&game_id="+game_id+"&game_download_id="+game_download_id+"&download_tos_id="+download_tos_id,true);
@@ -203,6 +203,103 @@ function delTos(download_tos_id, game_download_id, game_id) {
     }
 }
 
+function addTrainer(game_download_id, game_id) {
+ if (game_download_id == "") {
+        document.getElementById("linked_trainer").innerHTML = "";
+        return;
+    } else {
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("linked_trainer").innerHTML = xmlhttp.responseText;
+            }
+        }
+
+        var JSid=document.getElementById("download_trainer");
+        var download_trainer_id = JSid.value
+
+        xmlhttp.open("GET","../downloads/db_downloads_game.php?action=add_trainer&game_id="+game_id+"&game_download_id="+game_download_id+"&download_trainer_id="+download_trainer_id,true);
+        xmlhttp.send();
+    }
+}
+
+function delTrainer(download_trainer_id, game_download_id, game_id) {
+ if (game_download_id == "") {
+        document.getElementById("linked_trainer").innerHTML = "";
+        return;
+    } else {
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("linked_trainer").innerHTML = xmlhttp.responseText;
+            }
+        }
+
+        xmlhttp.open("GET","../downloads/db_downloads_game.php?action=delete_trainer&game_id="+game_id+"&game_download_id="+game_download_id+"&download_trainer_id="+download_trainer_id,true);
+        xmlhttp.send();
+    }
+}
+
+function addCrew(game_download_id, game_id) {
+ if (game_download_id == "") {
+        document.getElementById("linked_crew").innerHTML = "";
+        return;
+    } else {
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("linked_crew").innerHTML = xmlhttp.responseText;
+            }
+        }
+
+        var JSid=document.getElementById("download_crew");
+        var download_crew_id = JSid.value
+
+        xmlhttp.open("GET","../downloads/db_downloads_game.php?action=add_crew&game_id="+game_id+"&game_download_id="+game_download_id+"&download_crew_id="+download_crew_id,true);
+        xmlhttp.send();
+    }
+}
+
+function delCrew(download_crew_id, game_download_id, game_id) {
+ if (game_download_id == "") {
+        document.getElementById("linked_crew").innerHTML = "";
+        return;
+    } else {
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("linked_crew").innerHTML = xmlhttp.responseText;
+            }
+        }
+
+        xmlhttp.open("GET","../downloads/db_downloads_game.php?action=delete_crew&game_id="+game_id+"&game_download_id="+game_download_id+"&download_crew_id="+download_crew_id,true);
+        xmlhttp.send();
+    }
+}
 </script>
 {/block}
 
