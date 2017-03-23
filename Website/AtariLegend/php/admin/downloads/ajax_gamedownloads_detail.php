@@ -157,6 +157,36 @@ if (isset($action) and $action == "edit_download_box" and $game_download_id !== 
                     )); 
     } 
     
+     // get the download trainers
+    $sql_trainer = "SELECT *
+                    FROM game_download_trainer
+                    LEFT JOIN trainer_options ON (game_download_trainer.trainer_options_id = trainer_options.trainer_options_id)
+                    WHERE game_download_trainer.game_download_id = '$game_download_id'";
+                    
+    $query_trainer = $mysqli->query($sql_trainer) or die('Error: ' . mysqli_error($mysqli));
+    
+    while ($query = $query_trainer->fetch_array(MYSQLI_BOTH)) {
+         $smarty->append('download_trainer', array(
+                        'download_trainer_id' => $query['trainer_options_id'],
+                        'download_trainer' => $query['trainer_options']
+                    )); 
+    } 
+    
+    // get the linked crews
+    $sql_crew = "SELECT *
+                    FROM game_download_crew
+                    LEFT JOIN crew ON (game_download_crew.crew_id = crew.crew_id)
+                    WHERE game_download_crew.game_download_id = '$game_download_id'";
+                    
+    $query_crew = $mysqli->query($sql_crew) or die('Error: ' . mysqli_error($mysqli));
+    
+    while ($query = $query_crew->fetch_array(MYSQLI_BOTH)) {
+         $smarty->append('download_crew', array(
+                        'download_crew_id' => $query['crew_id'],
+                        'download_crew' => $query['crew_name']
+                    )); 
+    } 
+    
     
     // Get the download credits
     $sql_individuals = "SELECT      individuals.ind_id,
@@ -241,6 +271,26 @@ if (isset($action) and $action == "edit_download_box" and $game_download_id !== 
          $smarty->append('tos', array(
                         'tos_id' => $query['tos_version_id'],
                         'tos' => $query['tos_version']
+                    )); 
+    }
+    
+     // download TRAINER dropdown
+    $query_trainer = $mysqli->query("SELECT * FROM trainer_options ORDER BY trainer_options_id ASC");
+
+    while ($query = $query_trainer->fetch_array(MYSQLI_BOTH)) {
+         $smarty->append('trainer', array(
+                        'trainer_id' => $query['trainer_options_id'],
+                        'trainer' => $query['trainer_options']
+                    )); 
+    }
+    
+    // crew dropdown
+    $query_crew = $mysqli->query("SELECT * FROM crew ORDER BY crew_name ASC");
+
+    while ($query = $query_crew->fetch_array(MYSQLI_BOTH)) {
+         $smarty->append('crew', array(
+                        'crew_id' => $query['crew_id'],
+                        'crew' => $query['crew_name']
                     )); 
     }
 
