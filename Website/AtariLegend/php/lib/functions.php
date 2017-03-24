@@ -1356,9 +1356,7 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
 
         if ($subsection == 'Options') {
             // get the name of the option
-            $query_option = "SELECT * FROM download_options
-                             LEFT JOIN game_download_options ON (game_download_options.download_options_id = download_options.download_options_id)     
-                             WHERE download_options.download_options_id = '$subsection_id'";
+            $query_option = "SELECT * FROM download_options WHERE download_options_id = '$subsection_id'";
             $result = $mysqli->query($query_option) or die("getting option failed");
             $query_data   = $result->fetch_array(MYSQLI_BOTH);
             $subsection_name = $query_data['download_option'];
@@ -1368,8 +1366,7 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
         if ($subsection == 'TOS') {
             // get the name of the option
             $query_tos = "SELECT * FROM tos_version
-                             LEFT JOIN game_download_tos ON (game_download_tos.tos_version_id = tos_version.tos_version_id)     
-                             WHERE tos_version.tos_version_id = '$subsection_id'";
+                             WHERE tos_version_id = '$subsection_id'";
             $result = $mysqli->query($query_tos) or die("getting tos failed");
             $query_data   = $result->fetch_array(MYSQLI_BOTH);
             $subsection_name = $query_data['tos_version'];
@@ -1380,11 +1377,14 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
             $subsection_name = $section_name;
         }
         
+        if ($subsection == 'Menudisk') {
+            $subsection_name = $section_name;
+        }
+        
          if ($subsection == 'Trainer') {
             // get the name of the trainer option
             $query_trainer = "SELECT * FROM trainer_options
-                             LEFT JOIN game_download_trainer ON (game_download_trainer.trainer_options_id = trainer_options.trainer_options_id)     
-                             WHERE trainer_options.trainer_options_id = '$subsection_id'";
+                             WHERE trainer_options_id = '$subsection_id'";
             $result = $mysqli->query($query_trainer) or die("getting trainer failed");
             $query_data   = $result->fetch_array(MYSQLI_BOTH);
             $subsection_name = $query_data['trainer_options'];

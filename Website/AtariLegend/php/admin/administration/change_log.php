@@ -387,6 +387,10 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH)) {
             $subsection_link = $section_link;
         }
         
+        if ($log['sub_section'] == 'Menudisk') {
+            $subsection_link = $section_link;
+        }
+        
         if ($log['sub_section'] == 'Trainer') {
             $subsection_link = ("../downloads/download_trainer_edit.php" . '?trainer_id=' . $log['sub_section_id']);
         }

@@ -69,6 +69,17 @@
                                                         </select>
                                                     </div>
                                                 </div>
+                                                <div class="user_details_row">
+                                                    <div class="user_details_text">Set Intro :</div>		
+                                                    <div class="user_details_input">
+                                                        <select name="demo_id" id="download_intro">
+                                                            <option value="-">-</option>
+                                                            {if isset($demo_id)}
+                                                                {html_options values=$demo_id output=$demo_name selected=$download_demo}
+                                                            {/if}
+                                                        </select>
+                                                    </div>
+                                                </div>
                                                 <br>
                                                 <br>
                                                 <div class="user_details_row">
@@ -260,6 +271,54 @@
                                 </div>
                             </div>
                             <br>
+                            <div class="game_upload_container">
+                                <div class="game_upload_child" id="gu_child_1">
+                                    <div style="padding-right:20px;">
+                                    <fieldset>
+                                        <legend>Menudisk details</legend>
+                                        <div class="user_details_row" id="download_details_row">
+                                            <div class="user_details_text" id="download_details_text">Menudisk :</div>
+                                            <div class="user_details_input" id="download_details_input">
+                                                <select name="download_menudisk_title_game_id" id="download_menu">
+                                                    <option value="-">-</option>
+                                                    {foreach from=$menudisk item=line}
+                                                        <option value="{$line.menudisk_id}">{$line.menudisk_name}</option>
+                                                    {/foreach}
+                                                </select>
+                                                <input type="button" name="add_menudisk" value="Add" onClick="addMenu({$downloads.game_download_id},{$game.game_id}); return false;" class="topbutton_cpanel_small">
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div id="linked_menudisk">
+                                            {if isset($download_menudisk)}	
+                                                <div class="user_details_row" id="download_details_row">
+                                                    <div class="user_details_text" id="download_details_text">Linked menudisks</div>	
+                                                    <div class="user_details_input" id="download_details_input">
+                                                        <table>
+                                                        {foreach from=$download_menudisk item=line}
+                                                        <tr>
+                                                            <td>
+                                                                <b><a href="../menus/menus_disk_list.php?menu_sets_id={$line.menu_sets_id}" class="left_nav_link">{$line.download_menudisk_name}</a></b>  
+                                                            </td>
+                                                            <td>
+                                                                 <a href="#" onClick="delMenu({$line.menu_disk_title_game_id},{$downloads.game_download_id},{$game.game_id}); return false;"  class="links_addnew_link">Delete</a> 							
+                                                            </td>
+                                                        </tr>
+                                                        {/foreach}
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            {/if}
+                                        </div>
+                                     </fieldset>
+                                     </div>
+                                    <br>
+                                    <br>
+                                </div>
+                                <div class="game_upload_child" id="gu_child_1">
+                                   
+                                </div>
+                            </div>
                         </fieldset>
                     </div>
 				</td>
@@ -302,7 +361,12 @@
             </table>
         </div>
     </div>
-    {/if}   
+    {/if}
+
+    {if isset($osd_message)}
+		[BRK]{$osd_message}
+	{/if}
+    
 {/if}
 
 {* POP FOR TOS UPDATE *}
@@ -325,7 +389,12 @@
             </table>
         </div>
     </div>
-    {/if}   
+    {/if}  
+    
+    {if isset($osd_message)}
+		[BRK]{$osd_message}
+	{/if}
+    
 {/if}
 
 {* POP FOR TRAINER UPDATE *}
@@ -349,6 +418,11 @@
         </div>
     </div>
     {/if}   
+    
+    {if isset($osd_message)}
+		[BRK]{$osd_message}
+	{/if}
+    
 {/if}
 
 {* POP FOR CREW UPDATE *}
@@ -372,7 +446,41 @@
         </div>
     </div>
     {/if}   
+    
+    {if isset($osd_message)}
+		[BRK]{$osd_message}
+	{/if}
+    
 {/if}
+
+{* POP FOR MENUDISK UPDATE *}
+{if isset($smarty_action) and $smarty_action == "update_menudisk"}
+    {if isset($download_menudisk)}	
+        <div class="user_details_row" id="download_details_row">
+            <div class="user_details_text" id="download_details_text">Linked menudisks</div>	
+            <div class="user_details_input" id="download_details_input">
+                <table>
+                {foreach from=$download_menudisk item=line}
+                <tr>
+                    <td>
+                        <b><a href="../menus/menus_disk_list.php?menu_sets_id={$line.menu_sets_id}" class="left_nav_link">{$line.download_menudisk_name}</a></b> 
+                    </td>
+                    <td>
+                        <a href="#" onClick="delMenu({$line.menu_disk_title_game_id},{$game_download_id},{$game_id}); return false;"  class="links_addnew_link">Delete</a> 									
+                    </td>
+                </tr>
+                {/foreach}
+                </table>
+            </div>
+        </div>
+    {/if}
+    
+    {if isset($osd_message)}
+		[BRK]{$osd_message}
+	{/if}
+    
+{/if}
+
 
 {* POP FOR DOWNLOAD DETAILS *}
 {if isset($smarty_action) and $smarty_action == "update_details"}
@@ -410,6 +518,17 @@
                     </select>
                 </div>
             </div>
+            <div class="user_details_row">
+                <div class="user_details_text">Set Intro :</div>		
+                <div class="user_details_input">
+                    <select name="demo_id" id="download_intro">
+                        <option value="-">-</option>
+                        {if isset($demo_id)}
+                            {html_options values=$demo_id output=$demo_name selected=$download_demo}
+                        {/if}
+                    </select>
+                </div>
+            </div>
             <br>
             <br>
             <div class="user_details_row">
@@ -422,4 +541,9 @@
             </div>
         </div>
     </div>
+    
+    {if isset($osd_message)}
+		[BRK]{$osd_message}
+	{/if}
+    
 {/if}
