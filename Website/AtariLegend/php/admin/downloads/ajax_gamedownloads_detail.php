@@ -96,6 +96,8 @@ if (isset($action) and $action == "edit_download_box" and $game_download_id !== 
                         LEFT JOIN game_download_lingo ON (game_download_lingo.game_download_id = game_download.game_download_id)
                         LEFT JOIN lingo ON ( lingo.lingo_id = game_download_lingo.lingo_id)
                         LEFT JOIN game_download_details ON ( game_download_details.game_download_id = game_download.game_download_id)
+                        LEFT JOIN game_download_intro ON (game_download_intro.game_download_id = game_download.game_download_id)
+                        LEFT JOIN demo ON (game_download_intro.demo_id = demo.demo_id)
                         WHERE game_download.game_download_id = '$game_download_id'";
 
     $result_downloads = $mysqli->query($sql_downloads) or die(mysqli_error());
@@ -106,6 +108,9 @@ if (isset($action) and $action == "edit_download_box" and $game_download_id !== 
     
     $download_lingo   = $row['lingo_id'];
     $smarty->assign('download_lingo', $download_lingo);
+    
+    $download_demo   = $row['demo_id'];
+    $smarty->assign('download_demo', $download_demo);
     
     $user_id          = $row['user_id'];
     $download_date = date("F j, Y", $row['date']);
@@ -187,6 +192,43 @@ if (isset($action) and $action == "edit_download_box" and $game_download_id !== 
                     )); 
     } 
     
+    // get the linked menudisks
+    $sql_menudisks = "SELECT *
+                        FROM game_download_menu 
+                        LEFT JOIN menu_disk_title_game ON (game_download_menu.menu_disk_title_game_id = menu_disk_title_game.menu_disk_title_game_id)
+                        LEFT JOIN menu_disk_title ON (menu_disk_title_game.menu_disk_title_id = menu_disk_title.menu_disk_title_id)
+                        LEFT JOIN menu_disk ON (menu_disk_title.menu_disk_id = menu_disk.menu_disk_id)
+                        LEFT JOIN menu_set ON (menu_disk.menu_sets_id = menu_set.menu_sets_id)
+                        WHERE game_download_menu.game_download_id = '$game_download_id'";
+                        
+    $query_menudisks = $mysqli->query($sql_menudisks) or die('Error: ' . mysqli_error($mysqli));
+    
+    while ($row = $query_menudisks->fetch_array(MYSQLI_BOTH)) {
+         // Create Menu disk name
+        $menu_disk_name = "$row[menu_sets_name] ";
+        if (isset($row['menu_disk_number'])) {
+            $menu_disk_name .= "$row[menu_disk_number]";
+        }
+        if (isset($row['menu_disk_letter'])) {
+            $menu_disk_name .= "$row[menu_disk_letter]";
+        }
+        if (isset($row['menu_disk_part'])) {
+            if (is_numeric($row['menu_disk_part'])) {
+                $menu_disk_name .= " part $row[menu_disk_part]";
+            } else {
+                $menu_disk_name .= "$row[menu_disk_part]";
+            }
+        }
+        if (isset($row['menu_disk_version']) and $row['menu_disk_version'] !== '') {
+            $menu_disk_name .= " v$row[menu_disk_version]";
+        }
+       
+        $smarty->append('download_menudisk', array(
+                        'menu_disk_title_game_id' => $row['menu_disk_title_game_id'],
+                        'menu_sets_id' => $row['menu_sets_id'],
+                        'download_menudisk_name' => $menu_disk_name,                       
+                        'download_menudisk_id' => $row['menu_disk_id'] )); 
+    } 
     
     // Get the download credits
     $sql_individuals = "SELECT      individuals.ind_id,
@@ -254,6 +296,14 @@ if (isset($action) and $action == "edit_download_box" and $game_download_id !== 
         $smarty->append('lingo_name', $query['lingo_name']);
     }
     
+     // download intro dropdown
+    $query_download_demo = $mysqli->query("SELECT * FROM demo ORDER BY demo_name ASC");
+
+    while ($query = $query_download_demo->fetch_array(MYSQLI_BOTH)) {
+        $smarty->append('demo_id', $query['demo_id']);
+        $smarty->append('demo_name', $query['demo_name']);
+    }
+    
     // download options dropdown
     $query_options = $mysqli->query("SELECT * FROM download_options ORDER BY download_options_id ASC");
 
@@ -293,7 +343,40 @@ if (isset($action) and $action == "edit_download_box" and $game_download_id !== 
                         'crew' => $query['crew_name']
                     )); 
     }
+    
+    //menudisk dropdown
+    $sql_menus = "SELECT * 
+                  FROM menu_disk
+                  LEFT JOIN menu_set ON (menu_disk.menu_sets_id = menu_set.menu_sets_id)
+                  ORDER BY menu_set.menu_sets_name ASC";
 
+    $result_menus = $mysqli->query($sql_menus) or die('Error: ' . mysqli_error($mysqli));
+    while ($row = $result_menus->fetch_array(MYSQLI_BOTH)) {
+
+        // Create Menu disk name
+        $menu_disk_name = "$row[menu_sets_name] ";
+        if (isset($row['menu_disk_number'])) {
+            $menu_disk_name .= "$row[menu_disk_number]";
+        }
+        if (isset($row['menu_disk_letter'])) {
+            $menu_disk_name .= "$row[menu_disk_letter]";
+        }
+        if (isset($row['menu_disk_part'])) {
+            if (is_numeric($row['menu_disk_part'])) {
+                $menu_disk_name .= " part $row[menu_disk_part]";
+            } else {
+                $menu_disk_name .= "$row[menu_disk_part]";
+            }
+        }
+        if (isset($row['menu_disk_version']) and $row['menu_disk_version'] !== '') {
+            $menu_disk_name .= " v$row[menu_disk_version]";
+        }
+       
+        $smarty->append('menudisk', array(
+                        'menudisk_name' => $menu_disk_name,
+                        'menudisk_id' => $row['menu_disk_id'] )); 
+    }
+    
     $smarty->assign('smarty_action', 'edit_download_box');
     $smarty->assign('game_download_id', $game_download_id);
 }
