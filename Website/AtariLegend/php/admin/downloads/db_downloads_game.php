@@ -571,6 +571,264 @@ if (isset($action) and $action == "delete_menudisk") {
 }
 
 //****************************************************************************************
+// Create set chain for download
+//****************************************************************************************
+if (isset($action) and ($action == "create_set" OR $action == "delete_set" OR $action == "link_set")) {
+
+    if (isset($download_set_id)) {
+       
+       if ($action == "create_set")
+        {
+            /* first see if this title is already chained */
+            $sql = $mysqli->query("SELECT * FROM game_download_set
+            WHERE game_download_id = '$game_download_id'") or die("error selecting chain");
+            if ($sql->num_rows > 0) {
+                echo "This download is already chained - delete chain first<br><br>";
+            } else {
+                //check if the title is already linked
+                $sql_set_nr = "SELECT game_download_set_nr FROM game_download_set WHERE game_download_id = '$game_download_id'";
+                $query_ser_nr = $mysqli->query($sql_set_nr) or die("problem with set nr query");
+                $query_data = $query_ser_nr->fetch_array(MYSQLI_BOTH);
+                $set_nr     = $query_data['menu_disk_title_set_nr'];
+
+                //if not linked
+                if ($set_nr == 0 or $set_nr = '') {
+                    /*We need to get the highest set nr */
+                    $sql_set_nr = "SELECT game_download_set_nr FROM game_download_set order by game_download_set_nr DESC";
+                    $query_set_nr = $mysqli->query($sql_set_nr) or die("problem with set nr query");
+                    if ($query_set_nr->num_rows > 0) {
+                        while ($row = $query_set_nr->fetch_array(MYSQLI_BOTH)) {
+                            $set_nr = $row['game_download_set_nr'];
+                            $set_nr++;
+                            break;
+                        }
+                    } else {
+                        $set_nr = 1;
+                    }
+                }
+
+                $sql_download_set = $mysqli->query("INSERT INTO game_download_set (game_download_set_nr, game_download_set_chain, game_download_id) VALUES ('$set_nr','1', $game_download_id)") or die("error inserting download chain");
+                $osd_message = "Chain created for this download";
+
+                create_log_entry('Downloads', $game_id, 'Chain', $game_id, 'Insert', $_SESSION['user_id']);  
+            }
+        }
+        
+        if ($action == "delete_set")
+        {
+            $mysqli->query("DELETE from game_download_set WHERE game_download_id='$game_download_id' AND game_download_set_id='$download_set_id'") or die('Error: ' . mysqli_error($mysqli));
+             
+            $_SESSION['edit_message'] = "Set deleted";
+            
+            create_log_entry('Downloads', $game_id, 'Chain', $game_id, 'Delete', $_SESSION['user_id']);             
+        }
+    
+        if ($action == "link_set")
+        {
+             if ($download_chain == 'Nr' or $download_chain == '') {
+                echo "Please add a correct part nr<br><br>";
+            } elseif ($download_set_id == '' or $download_set_id == '-') {
+                echo "Please select a set";
+            } else {
+                //check if the title is already linked
+                $sql = $mysqli->query("SELECT * FROM game_download_set
+              WHERE game_download_id = '$game_download_id'") or die("error selecting chain");
+                if ($sql->num_rows > 0) {
+                    echo "This title is already chained - delete chain first";
+                } else {
+                    $sql_download_set = $mysqli->query("INSERT INTO game_download_set (game_download_set_nr, game_download_set_chain, game_download_id) VALUES ('$download_set_id','$download_chain', $game_download_id)") or die("error inserting download chain");
+                    $osd_message = "Chain created for this download";
+
+                    create_log_entry('Downloads', $game_id, 'Chain', $game_id, 'Insert', $_SESSION['user_id']);
+                }
+            }
+        }
+   
+   }
+    
+    //  get the chain/set linked to this download
+    $SQL_sets = $mysqli->query("SELECT * FROM game_download_set 
+                                              LEFT JOIN game_download ON (game_download.game_download_id = game_download_set.game_download_id)
+                                              LEFT JOIN download_main ON (game_download.download_id = download_main.download_id)   
+                                              LEFT JOIN game ON (game_download.game_id = game.game_id)
+                                              LEFT JOIN game_publisher ON (game.game_id = game_publisher.game_id)
+                                              LEFT JOIN pub_dev ON (game_publisher.pub_dev_id = pub_dev.pub_dev_id)
+                                              LEFT JOIN game_year ON (game.game_id = game_year.game_id)
+                                              WHERE game_download.game_download_id='$game_download_id'") or die("Error getting set info");
+
+    while ($sets = $SQL_sets->fetch_array(MYSQLI_BOTH)) {
+        // first lets create the filenames
+        $filename = "$sets[game_name]";
+
+        if ($sets['game_year'] == '') {
+            $filename .= " (19xx)";
+        } else {
+            $filename .= " ($sets[game_year])";
+        }
+        if ($sets['pub_dev_id'] !== '') {
+            $filename .= "($sets[pub_dev_name])";
+        }
+        if ($sets['download_ext'] == "stx") {
+            $filename .= "[pasti]";
+        }
+        if ($sets['download_ext'] == "msa") {
+            $filename .= "[MSA]";
+        }
+        
+        if ($sets['download_ext'] == "st") {
+            $filename .= "[ST]";
+        }
+        
+        $filename .= ".zip";
+        
+        $smarty->assign('set_chain', $sets['game_download_set_chain']);
+
+        //start filling the smarty object
+        $smarty->append('download_set', array(
+            'game_download_id' => $sets['game_download_id'],
+            'set_id' => $sets['game_download_set_id'],
+            'chain_nr' => $sets['game_download_set_chain'],
+            'set_nr' => $sets['game_download_set_nr'],
+            'set_name' => $filename
+        ));
+    }         
+    
+     //  chain/set dropdown
+    $SQL_sets = $mysqli->query("SELECT * FROM game_download_set 
+                                              LEFT JOIN game_download ON (game_download.game_download_id = game_download_set.game_download_id)
+                                              LEFT JOIN download_main ON (game_download.download_id = download_main.download_id)   
+                                              LEFT JOIN game ON (game_download.game_id = game.game_id)
+                                              LEFT JOIN game_publisher ON (game.game_id = game_publisher.game_id)
+                                              LEFT JOIN pub_dev ON (game_publisher.pub_dev_id = pub_dev.pub_dev_id)
+                                              LEFT JOIN game_year ON (game.game_id = game_year.game_id)
+                                              ORDER BY game.game_name") or die("Error getting set info");
+
+    while ($sets = $SQL_sets->fetch_array(MYSQLI_BOTH)) {
+        // first lets create the filenames
+        $filename = "$sets[game_name]";
+
+        if ($sets['game_year'] == '') {
+            $filename .= " (19xx)";
+        } else {
+            $filename .= " ($sets[game_year])";
+        }
+        if ($sets['pub_dev_id'] !== '') {
+            $filename .= "($sets[pub_dev_name])";
+        }
+        if ($sets['download_ext'] == "stx") {
+            $filename .= "[pasti]";
+        }
+        if ($sets['download_ext'] == "msa") {
+            $filename .= "[MSA]";
+        }
+        
+        if ($sets['download_ext'] == "st") {
+            $filename .= "[ST]";
+        }
+        
+        $filename .= ".zip";
+
+        //start filling the smarty object
+        $smarty->append('set', array(
+            'game_download_id' => $sets['game_download_id'],
+            'set_id' => $sets['game_download_set_id'],
+            'set_nr' => $sets['game_download_set_nr'],
+            'set_name' => $filename
+        ));
+    }         
+    
+    $smarty->assign('game_download_id', $game_download_id);
+    $smarty->assign('game_id', $game_id);
+    
+    $smarty->assign('smarty_action', 'update_set');
+    //Send to smarty for return value
+    $smarty->display("file:" . $cpanel_template_folder . "ajax_gamedownloads_detail.html");
+}
+
+
+//****************************************************************************************
+// ADD AUTHORS TO DOWNLOAD
+//****************************************************************************************
+if (isset($action) and ( $action == "add_author" or $action == "delete_download_authors")) {
+    
+    if ($action == "add_author")
+    {
+        if (isset($ind_id) and isset($author_type_id) and isset($game_download_id)) {
+            //Insert individual into the game_download_individual table
+            $mysqli->query("INSERT INTO game_download_individual (game_download_id,ind_id,author_type_id) VALUES ('$game_download_id','$ind_id','$author_type_id')");
+
+            create_log_entry('Downloads', $game_id, 'Authors', $ind_id, 'Insert', $_SESSION['user_id']);
+        }
+    }
+    
+    if ($action == "delete_download_authors")
+    {
+        create_log_entry('Downloads', $game_id, 'Authors', $ind_id, 'Delete', $_SESSION['user_id']);
+        
+        $mysqli->query("DELETE FROM game_download_individual WHERE game_download_ind_id = '$game_download_ind_id'");        
+    }
+    
+    // Get the download authors
+    $sql_individuals = "SELECT
+          individuals.ind_id,
+          individuals.ind_name,
+          game_download_individual.game_download_ind_id,
+          author_type.author_type_info
+          FROM individuals
+          LEFT JOIN game_download_individual ON (individuals.ind_id = game_download_individual.ind_id)
+          LEFT JOIN author_type ON (game_download_individual.author_type_id = author_type.author_type_id)
+          WHERE game_download_individual.game_download_id = '$game_download_id'
+          ORDER BY individuals.ind_name ASC";
+
+    $query_individual = $mysqli->query($sql_individuals);
+
+    $query_ind_id = "";
+
+    while ($query = $query_individual->fetch_array(MYSQLI_BOTH)) {
+        if ($query_ind_id <> $query['ind_id']) {
+            
+            $sql_ind_nicks = $mysqli->query("SELECT nick_id FROM individual_nicks WHERE ind_id = '$query[ind_id]'");
+        
+            while ($fetch_ind_nicks = $sql_ind_nicks->fetch_array(MYSQLI_BOTH)) {
+             
+                $nick_id = $fetch_ind_nicks['nick_id'];
+               
+                $sql_nick_names = $mysqli->query("SELECT ind_name from individuals WHERE ind_id = '$nick_id'") or die('Error: ' . mysqli_error($mysqli));
+            
+                while ($fetch_nick_names = $sql_nick_names->fetch_array(MYSQLI_BOTH)) {
+
+                    $smarty->append('ind_nick', array(
+                        'ind_id' => $query['ind_id'],
+                        'individual_nicks_id' => $nick_id,
+                        'nick' => $fetch_nick_names['ind_name']
+                    ));
+                }
+            }   
+        }
+
+        // This smarty is used for for the game_download_individuals
+        $smarty->append('individuals', array(
+            'game_download_ind_id' => $query['game_download_ind_id'],
+            'ind_id' => $query['ind_id'],
+            'ind_name' => $query['ind_name'],
+            'author_type_info' => $query['author_type_info']
+        ));
+        
+        $query_ind_id = $query['ind_id'];
+    }
+    
+    $smarty->assign('game_download_id', $game_download_id);
+    $smarty->assign('game_id', $game_id);
+    
+    $smarty->assign('smarty_action', 'update_individuals');
+    //Send to smarty for return value
+    $smarty->display("file:" . $cpanel_template_folder . "ajax_gamedownloads_detail.html");
+
+}
+
+
+        
+//****************************************************************************************
 // This is where we add/modify the main download options
 //****************************************************************************************
 if (isset($action) and $action == "mod_download") {

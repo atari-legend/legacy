@@ -85,7 +85,7 @@ if (isset($action) and $action == "edit_download_box" and $game_download_id !== 
             'filepath' => $filepath,
             'date' => $date
         ));
-    }    
+    }
      
 //  First we get all the data of this download        
     $sql_downloads = "SELECT *
@@ -230,54 +230,101 @@ if (isset($action) and $action == "edit_download_box" and $game_download_id !== 
                         'download_menudisk_id' => $row['menu_disk_id'] )); 
     } 
     
-    // Get the download credits
-    $sql_individuals = "SELECT      individuals.ind_id,
-                                    individuals.ind_name,
-                                    game_download_individual.game_download_id,
-                                    author_type.author_type_info
-                                    FROM individuals
-                                    LEFT JOIN game_download_individual ON (individuals.ind_id = game_download_individual.ind_id)
-                                    LEFT JOIN author_type ON (game_download_individual.author_type_id = author_type.author_type_id)
-                                    WHERE game_download_individual.game_download_id = '$game_download_id'
-                                    ORDER BY individuals.ind_name ASC";
+    // Get the download authors
+    $sql_individuals = "SELECT
+          individuals.ind_id,
+          individuals.ind_name,
+          game_download_individual.game_download_ind_id,
+          author_type.author_type_info
+          FROM individuals
+          LEFT JOIN game_download_individual ON (individuals.ind_id = game_download_individual.ind_id)
+          LEFT JOIN author_type ON (game_download_individual.author_type_id = author_type.author_type_id)
+          WHERE game_download_individual.game_download_id = '$game_download_id'
+          ORDER BY individuals.ind_name ASC";
 
-    $query_individual = $mysqli->query($sql_individuals) or die('Error: ' . mysqli_error($mysqli));
+    $query_individual = $mysqli->query($sql_individuals);
 
     $query_ind_id = "";
 
     while ($query = $query_individual->fetch_array(MYSQLI_BOTH)) {
         if ($query_ind_id <> $query['ind_id']) {
-         
-            $sql_ind_nicks = $mysqli->query("SELECT nick_id FROM individual_nicks WHERE ind_id = '$query[ind_id]'");
             
+            $sql_ind_nicks = $mysqli->query("SELECT nick_id FROM individual_nicks WHERE ind_id = '$query[ind_id]'");
+        
             while ($fetch_ind_nicks = $sql_ind_nicks->fetch_array(MYSQLI_BOTH)) {
              
                 $nick_id = $fetch_ind_nicks['nick_id'];
-                
+               
                 $sql_nick_names = $mysqli->query("SELECT ind_name from individuals WHERE ind_id = '$nick_id'") or die('Error: ' . mysqli_error($mysqli));
             
                 while ($fetch_nick_names = $sql_nick_names->fetch_array(MYSQLI_BOTH)) {
 
                     $smarty->append('ind_nick', array(
                         'ind_id' => $query['ind_id'],
-                        'individual_nicks_id' => $nick_id, 
+                        'individual_nicks_id' => $nick_id,
                         'nick' => $fetch_nick_names['ind_name']
                     ));
                 }
             }   
         }
 
-        // This smarty is used for the download credits
+        // This smarty is used for for the game_download_individuals
         $smarty->append('individuals', array(
-            'menu_disk_credits_id' => $query['menu_disk_credits_id'],
+            'game_download_ind_id' => $query['game_download_ind_id'],
             'ind_id' => $query['ind_id'],
             'ind_name' => $query['ind_name'],
-            'menu_disk_id' => $menu_disk_id,
             'author_type_info' => $query['author_type_info']
         ));
 
         $query_ind_id = $query['ind_id'];
     }
+    
+    //  get the chain/set linked to this download
+    $SQL_sets = $mysqli->query("SELECT * FROM game_download_set 
+                                              LEFT JOIN game_download ON (game_download.game_download_id = game_download_set.game_download_id)
+                                              LEFT JOIN download_main ON (game_download.download_id = download_main.download_id)   
+                                              LEFT JOIN game ON (game_download.game_id = game.game_id)
+                                              LEFT JOIN game_publisher ON (game.game_id = game_publisher.game_id)
+                                              LEFT JOIN pub_dev ON (game_publisher.pub_dev_id = pub_dev.pub_dev_id)
+                                              LEFT JOIN game_year ON (game.game_id = game_year.game_id)
+                                              WHERE game_download.game_download_id='$game_download_id'") or die("Error getting set info");
+
+    while ($sets = $SQL_sets->fetch_array(MYSQLI_BOTH)) {
+        // first lets create the filenames
+        $filename = "$sets[game_name]";
+
+        if ($sets['game_year'] == '') {
+            $filename .= " (19xx)";
+        } else {
+            $filename .= " ($sets[game_year])";
+        }
+        if ($sets['pub_dev_id'] !== '') {
+            $filename .= "($sets[pub_dev_name])";
+        }
+        if ($sets['download_ext'] == "stx") {
+            $filename .= "[pasti]";
+        }
+        if ($sets['download_ext'] == "msa") {
+            $filename .= "[MSA]";
+        }
+        
+        if ($sets['download_ext'] == "st") {
+            $filename .= "[ST]";
+        }
+        
+        $filename .= ".zip";
+        
+        $smarty->assign('set_chain', $sets['game_download_set_chain']);
+
+        //start filling the smarty object
+        $smarty->append('download_set', array(
+            'game_download_id' => $sets['game_download_id'],
+            'set_id' => $sets['game_download_set_id'],
+            'chain_nr' => $sets['game_download_set_chain'],
+            'set_nr' => $sets['game_download_set_nr'],
+            'set_name' => $filename
+        ));
+    }         
     
     
     // download format dropdown
@@ -377,6 +424,80 @@ if (isset($action) and $action == "edit_download_box" and $game_download_id !== 
                         'menudisk_id' => $row['menu_disk_id'] )); 
     }
     
+    //  chain/set dropdown
+    $SQL_sets = $mysqli->query("SELECT * FROM game_download_set 
+                                              LEFT JOIN game_download ON (game_download.game_download_id = game_download_set.game_download_id)
+                                              LEFT JOIN download_main ON (game_download.download_id = download_main.download_id)   
+                                              LEFT JOIN game ON (game_download.game_id = game.game_id)
+                                              LEFT JOIN game_publisher ON (game.game_id = game_publisher.game_id)
+                                              LEFT JOIN pub_dev ON (game_publisher.pub_dev_id = pub_dev.pub_dev_id)
+                                              LEFT JOIN game_year ON (game.game_id = game_year.game_id)
+                                              ORDER BY game.game_name") or die("Error getting set info");
+
+    while ($sets = $SQL_sets->fetch_array(MYSQLI_BOTH)) {
+        // first lets create the filenames
+        $filename = "$sets[game_name]";
+
+        if ($sets['game_year'] == '') {
+            $filename .= " (19xx)";
+        } else {
+            $filename .= " ($sets[game_year])";
+        }
+        if ($sets['pub_dev_id'] !== '') {
+            $filename .= "($sets[pub_dev_name])";
+        }
+        if ($sets['download_ext'] == "stx") {
+            $filename .= "[pasti]";
+        }
+        if ($sets['download_ext'] == "msa") {
+            $filename .= "[MSA]";
+        }
+        
+        if ($sets['download_ext'] == "st") {
+            $filename .= "[ST]";
+        }
+        
+        $filename .= ".zip";
+
+        //start filling the smarty object
+        $smarty->append('set', array(
+            'game_download_id' => $sets['game_download_id'],
+            'set_id' => $sets['game_download_set_id'],
+            'set_nr' => $sets['game_download_set_nr'],
+            'set_name' => $filename
+        ));
+    }         
+    
+    //Get the individuals
+    $sql_individuals = $mysqli->query("SELECT * FROM individuals ORDER BY ind_name ASC") or die('Error: ' . mysqli_error($mysqli));
+   
+    while ($individuals = $sql_individuals->fetch_array(MYSQLI_BOTH)) {
+        if ($individuals['ind_name'] != '') {
+            $smarty->append('ind_gene', array(
+                'ind_id' => $individuals['ind_id'],
+                'ind_name' => $individuals['ind_name']
+            ));
+        }
+    }
+    
+    // Get Author types for
+    $sql_author_types = "SELECT * FROM author_type ORDER BY author_type_info ASC";
+    $query_author = $mysqli->query($sql_author_types) or die('Error: ' . mysqli_error($mysqli));
+
+    while ($author_ind = $query_author->fetch_array(MYSQLI_BOTH)) {
+        $smarty->append('author_type', array(
+            'author_type_id' => $author_ind['author_type_id'],
+            'author_type_info' => $author_ind['author_type_info']
+        ));
+    }
+        
+    // Create dropdown values a-z
+    $az_value  = az_dropdown_value(0);
+    $az_output = az_dropdown_output(0);
+    
+    $smarty->assign('az_value', $az_value);
+    $smarty->assign('az_output', $az_output);
+    
     $smarty->assign('smarty_action', 'edit_download_box');
     $smarty->assign('game_download_id', $game_download_id);
 }
@@ -447,6 +568,32 @@ if (isset($action) and $action == "closeedit_download_box" and $game_download_id
 
     $smarty->assign('smarty_action', 'closeedit_download_box');
     $smarty->assign('game_download_id', $game_download_id);
+}
+
+
+if (isset($action) and $action == "ind_gen_browse") {
+    if (isset($query)) {
+        $sql_individuals = "SELECT ind_id,ind_name FROM individuals ORDER BY ind_name ASC";
+        //$sql_aka         = "SELECT ind_id,nick FROM individual_nicks ORDER BY nick ASC";
+
+        //Create a temporary table to build an array with both names and nicknames
+        $mysqli->query("CREATE TEMPORARY TABLE temp ENGINE=MEMORY $sql_individuals") or die('Error: ' . mysqli_error($mysqli));
+        //$mysqli->query("INSERT INTO temp $sql_aka") or die('Error: ' . mysqli_error($mysqli));
+
+        if ($query == "num") {
+            $query_temporary = $mysqli->query("SELECT * FROM temp WHERE ind_name REGEXP '^[0-9].*' ORDER BY ind_name ASC") or die('Error: ' . mysqli_error($mysqli));
+        } else {
+            $query_temporary = $mysqli->query("SELECT * FROM temp WHERE ind_name LIKE '$query%' ORDER BY ind_name ASC") or die('Error: ' . mysqli_error($mysqli));
+        }
+        $mysqli->query("DROP TABLE temp");
+    }
+    while ($genealogy_ind = $query_temporary->fetch_array(MYSQLI_BOTH)) {
+        $smarty->append('author_type', array(
+            'ind_id' => $genealogy_ind['ind_id'],
+            'ind_name' => $genealogy_ind['ind_name']
+        ));
+    }
+    $smarty->assign('smarty_action', 'ind_gen_browse');
 }
 
 
