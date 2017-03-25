@@ -391,12 +391,20 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH)) {
             $subsection_link = $section_link;
         }
         
+        if ($log['sub_section'] == 'Chain') {
+            $subsection_link = $section_link;
+        }
+        
         if ($log['sub_section'] == 'Trainer') {
             $subsection_link = ("../downloads/download_trainer_edit.php" . '?trainer_id=' . $log['sub_section_id']);
         }
                
         if ($log['sub_section'] == 'Crew') {
              $subsection_link = ("../crew/crew_editor.php?crewbrowse=&crewsearch=&crew_select=" . $log['sub_section_id']);
+        }
+        
+        if ($log['sub_section'] == 'Authors') {
+             $subsection_link = ("../individuals/individuals_edit.php" . '?ind_id=' . $log['sub_section_id']);
         }
     }
   

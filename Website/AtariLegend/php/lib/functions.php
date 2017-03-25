@@ -1381,6 +1381,10 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
             $subsection_name = $section_name;
         }
         
+        if ($subsection == 'Chain') {
+            $subsection_name = $section_name;
+        }
+        
          if ($subsection == 'Trainer') {
             // get the name of the trainer option
             $query_trainer = "SELECT * FROM trainer_options
@@ -1398,6 +1402,15 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
             $result = $mysqli->query($query_crew) or die("getting crew failed");
             $query_data   = $result->fetch_array(MYSQLI_BOTH);
             $subsection_name = $query_data['crew_name'];
+        }
+        
+        if ($subsection == 'Authors') {
+            // get the name of the author option
+            $query_ind = "SELECT ind_name FROM individuals WHERE
+                            ind_id = '$subsection_id'";
+            $result = $mysqli->query($query_ind) or die("getting ind failed");
+            $query_data   = $result->fetch_array(MYSQLI_BOTH);
+            $subsection_name = $query_data['ind_name'];
         }
     }
 
