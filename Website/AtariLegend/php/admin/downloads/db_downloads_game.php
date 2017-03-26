@@ -826,7 +826,110 @@ if (isset($action) and ( $action == "add_author" or $action == "delete_download_
 
 }
 
+//****************************************************************************************
+// Quick add format
+//****************************************************************************************
+if (isset($action) and $action == "game_download_format_add") {
 
+    if ( $new_format_name == '' ) {
+        $_SESSION['edit_message'] = "Please enter a format";
+    }
+    else
+    {
+        $sql            = $mysqli->query("INSERT INTO format (format) VALUES ('$new_format_name')") or die('Error: ' . mysqli_error($mysqli));
+        $new_format_id  = $mysqli->insert_id;
+
+        create_log_entry('Format', $new_format_id, 'Format', $new_format_id, 'Insert', $_SESSION['user_id']);
+        
+        $_SESSION['edit_message'] = "$new_format_name added to the format table";
+    }
+    
+    header("Location: ../downloads/downloads_game_detail.php?game_id=$game_id");   
+}
+
+//****************************************************************************************
+// Quick add option
+//****************************************************************************************
+if (isset($action) and $action == "game_download_option_add") {
+
+    if ( $new_option_name == '' ) {
+        $_SESSION['edit_message'] = "Please enter an option";
+    }
+    else
+    {
+        $sql            = $mysqli->query("INSERT INTO download_options (download_option) VALUES ('$new_option_name')") or die('Error: ' . mysqli_error($mysqli));
+        $new_option_id  = $mysqli->insert_id;
+
+        create_log_entry('Option', $new_option_id, 'Option', $new_option_id, 'Insert', $_SESSION['user_id']);
+        
+        $_SESSION['edit_message'] = "$new_option_name added to the download_options table";
+    }
+    
+    header("Location: ../downloads/downloads_game_detail.php?game_id=$game_id"); 
+}
+
+//****************************************************************************************
+// Quick add lingo
+//****************************************************************************************
+if (isset($action) and $action == "game_download_lingo_add") {
+
+    if ( $new_lingo_name == '' or $lingo_short == '') {
+        $_SESSION['edit_message'] = "Please enter a language and abbrevation";
+    }
+    else
+    {
+        $sql           = $mysqli->query("INSERT INTO  lingo (lingo_name, lingo_short) VALUES ('$new_lingo_name', '$lingo_short')") or die("error inserting lingo");
+        $new_lingo_id  = $mysqli->insert_id;
+
+        create_log_entry('Lingo', $new_lingo_id, 'Lingo', $new_lingo_id, 'Insert', $_SESSION['user_id']);
+        
+        $_SESSION['edit_message'] = "$new_lingo_name added to the download_lingo table";
+    }
+    
+    header("Location: ../downloads/downloads_game_detail.php?game_id=$game_id"); 
+}
+
+//****************************************************************************************
+// Quick add TOS
+//****************************************************************************************
+if (isset($action) and $action == "game_download_tos_add") {
+
+    if ( $new_tos_name == '' ) {
+        $_SESSION['edit_message'] = "Please enter a TOS version";
+    }
+    else
+    {
+        $sql         = $mysqli->query("INSERT INTO  tos_version (tos_version) VALUES ('$new_tos_name')") or die("error inserting tos");
+        $new_tos_id  = $mysqli->insert_id;
+
+        create_log_entry('TOS', $new_tos_id, 'TOS', $new_tos_id, 'Insert', $_SESSION['user_id']);
+        
+        $_SESSION['edit_message'] = "$new_tos_name added to the tos_version table";
+    }
+    
+    header("Location: ../downloads/downloads_game_detail.php?game_id=$game_id"); 
+}
+
+//****************************************************************************************
+// Quick add trainer
+//****************************************************************************************
+if (isset($action) and $action == "game_download_trainer_add") {
+
+    if ( $new_trainer_name == '' ) {
+        $_SESSION['edit_message'] = "Please enter a trainer option";
+    }
+    else
+    {
+        $sql         = $mysqli->query("INSERT INTO  trainer_options (trainer_options) VALUES ('$new_trainer_name')") or die("error inserting trainer option");
+        $new_trainer_id  = $mysqli->insert_id;
+
+        create_log_entry('Trainer', $new_trainer_id, 'Trainer', $new_trainer_id, 'Insert', $_SESSION['user_id']);
+        
+        $_SESSION['edit_message'] = "$new_trainer_name added to the trainer_options table";
+    }
+    
+    header("Location: ../downloads/downloads_game_detail.php?game_id=$game_id"); 
+}
         
 //****************************************************************************************
 // This is where we add/modify the main download options

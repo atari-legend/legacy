@@ -523,6 +523,73 @@ function addslashes( str ) {
 
 
 {block name=left_tile}
+    <div class="standard_tile">
+        <h1>OPTIONS</h1>
+        <div class="standard_tile_line"></div>
+        <div class="standard_table_center">
+            <br>
+            Quick add new format to db:
+            <form action="../downloads/db_downloads_game.php" method="post" name="post_download_format_add" id="download_format_add">
+                <input type="text" name="new_format_name" value="" class="standard_tile_input_small">
+                <br>
+                <br>
+                <input type="submit" value="Add" class="quick_search_games_button">
+                <input type="hidden" name="game_id" value="{$game.game_id}">
+                <input type="hidden" name="action" value="game_download_format_add">
+            </form>
+            <br>
+            <div class="standard_tile_line"></div>
+            <br>
+            Quick add new option to db:
+            <form action="../downloads/db_downloads_game.php" method="post" name="post_download_option_add" id="download_option_add">
+                <input type="text" name="new_option_name" value="" class="standard_tile_input_small">
+                <br>
+                <br>
+                <input type="submit" value="Add" class="quick_search_games_button">
+                <input type="hidden" name="game_id" value="{$game.game_id}">
+                <input type="hidden" name="action" value="game_download_option_add">
+            </form>
+            <br>
+            <div class="standard_tile_line"></div>
+            <br>
+            Quick add new language to db:
+            <form action="../downloads/db_downloads_game.php" method="post" name="post_download_lingo_add" id="download_lingo_add">
+                <input type="text" name="new_lingo_name" value="" class="standard_tile_input_small">
+                <input type="text" name="lingo_short" class="standard_tile_input_small" id="small_select">
+                <br>
+                <br>
+                <input type="submit" value="Add" class="quick_search_games_button">
+                <input type="hidden" name="game_id" value="{$game.game_id}">
+                <input type="hidden" name="action" value="game_download_lingo_add">
+            </form>
+            <br>
+            <div class="standard_tile_line"></div>
+            <br>
+            Quick add new TOS to db:
+            <form action="../downloads/db_downloads_game.php" method="post" name="post_download_tos_add" id="download_tos_add">
+                <input type="text" name="new_tos_name_name" value="" class="standard_tile_input_small">
+                <br>
+                <br>
+                <input type="submit" value="Add" class="quick_search_games_button">
+                <input type="hidden" name="game_id" value="{$game.game_id}">
+                <input type="hidden" name="action" value="game_download_tos_add">
+            </form>
+            <br>
+            <div class="standard_tile_line"></div>
+            <br>
+            Quick add new trainer to db:
+            <form action="../downloads/db_downloads_game.php" method="post" name="post_download_trainer_add" id="download_trainer_add">
+                <input type="text" name="new_trainer_name" value="" class="standard_tile_input_small">
+                <br>
+                <br>
+                <input type="submit" value="Add" class="quick_search_games_button">
+                <input type="hidden" name="game_id" value="{$game.game_id}">
+                <input type="hidden" name="action" value="game_download_trainer_add">
+            </form>
+            <br>
+        </div>
+    </div>
+    <br>
     {include file='1/admin/left_nav.html'}
 {/block}
 

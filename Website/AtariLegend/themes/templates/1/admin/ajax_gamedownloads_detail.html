@@ -120,7 +120,7 @@
                                                 <div class="user_details_row" id="download_details_row">
                                                     <div class="user_details_text" id="download_details_text">Linked options</div>	
                                                     <div class="user_details_input" id="download_details_input">
-                                                        <table>
+                                                        <table class="table_game_list" id="game_list_table" style="width:100%;border: solid 1px black;margin:auto;">
                                                         {foreach from=$download_options item=line}
                                                         <tr>
                                                             <td>
@@ -163,7 +163,7 @@
                                                 <div class="user_details_row" id="download_details_row">
                                                     <div class="user_details_text" id="download_details_text">Linked TOS</div>	
                                                     <div class="user_details_input" id="download_details_input">
-                                                        <table>
+                                                        <table class="table_game_list" id="game_list_table" style="width:100%;border: solid 1px black;margin:auto;">
                                                         {foreach from=$download_tos item=line}
                                                         <tr>
                                                             <td>
@@ -207,7 +207,7 @@
                                                 <div class="user_details_row" id="download_details_row">
                                                     <div class="user_details_text" id="download_details_text">Linked trainers</div>	
                                                     <div class="user_details_input" id="download_details_input">
-                                                        <table>
+                                                        <table class="table_game_list" id="game_list_table" style="width:100%;border: solid 1px black;margin:auto;">
                                                         {foreach from=$download_trainer item=line}
                                                         <tr>
                                                             <td>
@@ -250,7 +250,7 @@
                                                 <div class="user_details_row" id="download_details_row">
                                                     <div class="user_details_text" id="download_details_text">Linked crews</div>	
                                                     <div class="user_details_input" id="download_details_input">
-                                                        <table>
+                                                        <table class="table_game_list" id="game_list_table" style="width:100%;border: solid 1px black;margin:auto;">
                                                         {foreach from=$download_crew item=line}
                                                         <tr>
                                                             <td>
@@ -294,7 +294,7 @@
                                                 <div class="user_details_row" id="download_details_row">
                                                     <div class="user_details_text" id="download_details_text">Linked menudisks</div>	
                                                     <div class="user_details_input" id="download_details_input">
-                                                        <table>
+                                                        <table class="table_game_list" id="game_list_table" style="width:100%;border: solid 1px black;margin:auto;">
                                                         {foreach from=$download_menudisk item=line}
                                                         <tr>
                                                             <td>
@@ -341,11 +341,11 @@
                                                     <div class="user_details_text" id="download_details_text">Linked downloads :<br><br></div>	 
                                                 </div>
                                                 <div class="user_details_row" id="download_details_row">
-                                                    <table>
+                                                    <table class="table_game_list" id="game_list_table" style="width:100%;border: solid 1px black;margin:auto;">
                                                     {foreach from=$download_set item=line}
                                                     <tr>
                                                         <td>
-                                                            <b>{$line.set_name} - part {$line.chain_nr}</b>  
+                                                            <b>{$line.set_name}</b>  
                                                         </td>
                                                         <td>
                                                              <a href="#" onClick="delSet({$line.set_id},{$downloads.game_download_id},{$game.game_id}); return false;"  class="links_addnew_link">Delete</a> 							
@@ -407,7 +407,7 @@
                                             <fieldset>
                                                 <legend>Linked authors</legend>
                                                 <div id="author_list">	
-                                                    <table class="table_game_list" id="game_list_table" style="width:95%;border: solid 1px black;margin:auto;">
+                                                    <table class="table_game_list" id="game_list_table" style="width:100%;border: solid 1px black;margin:auto;">
                                                     <tr>
                                                         <th id="menu_cred_th">Credits</th>
                                                         <th id="menu_scene_th">"Sceners"</th>
@@ -458,7 +458,7 @@
     <div class="user_details_row" id="download_details_row">
         <div class="user_details_text" id="download_details_text">Linked options</div>	
         <div class="user_details_input" id="download_details_input">
-            <table>
+            <table class="table_game_list" id="game_list_table" style="width:100%;border: solid 1px black;margin:auto;">
             {foreach from=$download_options item=line}
             <tr>
                 <td>
@@ -486,7 +486,7 @@
     <div class="user_details_row" id="download_details_row">
         <div class="user_details_text" id="download_details_text">Linked TOS</div>	
         <div class="user_details_input" id="download_details_input">
-            <table>
+            <table class="table_game_list" id="game_list_table" style="width:100%;border: solid 1px black;margin:auto;">
             {foreach from=$download_tos item=line}
             <tr>
                 <td>
@@ -514,7 +514,7 @@
     <div class="user_details_row" id="download_details_row">
         <div class="user_details_text" id="download_details_text">Linked trainers</div>	
         <div class="user_details_input" id="download_details_input">
-            <table>
+            <table class="table_game_list" id="game_list_table" style="width:100%;border: solid 1px black;margin:auto;">
             {foreach from=$download_trainer item=line}
             <tr>
                 <td>
@@ -542,7 +542,7 @@
     <div class="user_details_row" id="download_details_row">
         <div class="user_details_text" id="download_details_text">Linked crews</div>	
         <div class="user_details_input" id="download_details_input">
-            <table>
+            <table class="table_game_list" id="game_list_table" style="width:100%;border: solid 1px black;margin:auto;">
             {foreach from=$download_crew item=line}
             <tr>
                 <td>
@@ -570,7 +570,7 @@
         <div class="user_details_row" id="download_details_row">
             <div class="user_details_text" id="download_details_text">Linked menudisks</div>	
             <div class="user_details_input" id="download_details_input">
-                <table>
+                <table class="table_game_list" id="game_list_table" style="width:100%;border: solid 1px black;margin:auto;">
                 {foreach from=$download_menudisk item=line}
                 <tr>
                     <td>
@@ -599,11 +599,11 @@
             <div class="user_details_text" id="download_details_text">Linked downloads :<br><br></div>	 
         </div>
         <div class="user_details_row" id="download_details_row">
-            <table>
+            <table class="table_game_list" id="game_list_table" style="width:100%;border: solid 1px black;margin:auto;">
             {foreach from=$download_set item=line}
             <tr>
                 <td>
-                    <b>{$line.set_name} - part {$line.chain_nr}</b>  
+                    <b>{$line.set_name}</b>  
                 </td>
                 <td>
                      <a href="#" onClick="delSet({$line.set_id},{$game_download_id},{$game_id}); return false;"  class="links_addnew_link">Delete</a> 							
@@ -627,7 +627,7 @@
         <fieldset>
             <legend>Linked authors</legend>
             <div id="author_list">	
-                <table class="table_game_list" id="game_list_table" style="width:95%;border: solid 1px black;margin:auto;">
+                <table class="table_game_list" id="game_list_table" style="width:100%;border: solid 1px black;margin:auto;">
                 <tr>
                     <th id="menu_cred_th">Credits</th>
                     <th id="menu_scene_th">"Sceners"</th>

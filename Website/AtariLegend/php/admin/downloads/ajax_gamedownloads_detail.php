@@ -42,11 +42,13 @@ if (isset($action) and $action == "edit_download_box" and $game_download_id !== 
     ));
 
     //get the existing downloads
-    $SQL_DOWNLOADS = $mysqli->query("SELECT * FROM game_download 
-                                              LEFT JOIN download_main ON (game_download.download_id = download_main.download_id)
-                                              WHERE game_download.game_download_id='$game_download_id'") or die("Error getting download info");
+    $sql_downloads = $mysqli->query("SELECT * FROM game_download 
+                                          LEFT JOIN download_main ON (game_download.download_id = download_main.download_id)                                         
+                                          WHERE game_download.game_download_id='$game_download_id'") or die("Error getting download info");
 
-    while ($downloads = $SQL_DOWNLOADS->fetch_array(MYSQLI_BOTH)) {
+    $nr_downloads = 0;
+    while ($downloads = $sql_downloads->fetch_array(MYSQLI_BOTH)) {
+           
         // first lets create the filenames
         $filename = "$game_info[game_name]";
 
@@ -58,6 +60,50 @@ if (isset($action) and $action == "edit_download_box" and $game_download_id !== 
         if ($game_info['pub_dev_id'] !== '') {
             $filename .= "($game_info[pub_dev_name])";
         }
+        
+        //let's get the detail download table
+        $sql_download_details = $mysqli->query("SELECT * FROM game_download 
+                                                 LEFT JOIN game_download_details ON (game_download.game_download_id = game_download_details.game_download_id)
+                                                 WHERE game_download.game_download_id='$downloads[game_download_id]'") or die("Error getting download details");
+        while ($details = $sql_download_details->fetch_array(MYSQLI_BOTH)) {
+            
+            if ($details['version'] == '') {
+                $filename .= "(v xx)";
+            } else {
+                $filename .= "($details[version])";
+            }
+        }
+        
+        //let's get the format
+        $sql_format = $mysqli->query("SELECT * FROM game_download 
+                                      LEFT JOIN download_main ON (game_download.download_id = download_main.download_id)
+                                      LEFT JOIN download_format ON (download_main.download_id = download_format.download_id)
+                                      LEFT JOIN format ON (download_format.format_id = format.format_id)
+                                      WHERE game_download.game_download_id='$downloads[game_download_id]'") or die("Error getting download format");
+        while ($format = $sql_format->fetch_array(MYSQLI_BOTH)) {                                 
+        
+            if ($format['format'] == '') {
+                $filename .= "(format)";
+            } else {
+                $filename .= "($format[format])";
+            }
+        }
+        
+        // let's get the language
+        $sql_lingo = $mysqli->query("SELECT * FROM game_download 
+                                      LEFT JOIN game_download_lingo ON (game_download.game_download_id = game_download_lingo.game_download_id)
+                                      LEFT JOIN lingo ON (game_download_lingo.lingo_id = lingo.lingo_id)
+                                      WHERE game_download.game_download_id='$downloads[game_download_id]'") or die("Error getting download lingo");
+        while ($lingo = $sql_lingo->fetch_array(MYSQLI_BOTH)) {                                 
+        
+            if ($lingo['lingo_name'] == '') {
+                $filename .= "(lingo)";
+            } else {
+                $filename .= "($lingo[lingo_name])";
+            }
+        }
+        
+        
         if ($downloads['download_ext'] == "stx") {
             $filename .= "[pasti]";
         }
@@ -65,10 +111,18 @@ if (isset($action) and $action == "edit_download_box" and $game_download_id !== 
             $filename .= "[MSA]";
         }
         
-        if ($downloads['download_ext'] == "st") {
-            $filename .= "[ST]";
+        $sql_set = $mysqli->query("SELECT * FROM game_download   
+                                   LEFT JOIN game_download_set ON (game_download.game_download_id = game_download_set.game_download_id)
+                                   WHERE game_download.game_download_id='$downloads[game_download_id]'") or die("Error getting download set");
+        while ($set = $sql_set->fetch_array(MYSQLI_BOTH)) {                                 
+                                   
+            if ($set['game_download_set_chain'] == '') {
+               
+            } else {
+                $filename .= " - part $set[game_download_set_chain]";
+            }
         }
-        
+         
         $filename .= ".zip";
 
         $filepath = $game_file_path;
@@ -85,6 +139,8 @@ if (isset($action) and $action == "edit_download_box" and $game_download_id !== 
             'filepath' => $filepath,
             'date' => $date
         ));
+
+        $nr_downloads++;
     }
      
 //  First we get all the data of this download        
@@ -301,6 +357,49 @@ if (isset($action) and $action == "edit_download_box" and $game_download_id !== 
         if ($sets['pub_dev_id'] !== '') {
             $filename .= "($sets[pub_dev_name])";
         }
+        
+        //let's get the detail download table
+        $sql_download_details = $mysqli->query("SELECT * FROM game_download 
+                                                 LEFT JOIN game_download_details ON (game_download.game_download_id = game_download_details.game_download_id)
+                                                 WHERE game_download.game_download_id='$game_download_id'") or die("Error getting download details");
+        while ($details = $sql_download_details->fetch_array(MYSQLI_BOTH)) {
+            
+            if ($details['version'] == '') {
+                $filename .= "(v xx)";
+            } else {
+                $filename .= "($details[version])";
+            }
+        }
+        
+        //let's get the format
+        $sql_format = $mysqli->query("SELECT * FROM game_download 
+                                      LEFT JOIN download_main ON (game_download.download_id = download_main.download_id)
+                                      LEFT JOIN download_format ON (download_main.download_id = download_format.download_id)
+                                      LEFT JOIN format ON (download_format.format_id = format.format_id)
+                                      WHERE game_download.game_download_id='$game_download_id'") or die("Error getting download format");
+        while ($format = $sql_format->fetch_array(MYSQLI_BOTH)) {                                 
+        
+            if ($format['format'] == '') {
+                $filename .= "(format)";
+            } else {
+                $filename .= "($format[format])";
+            }
+        }
+        
+        // let's get the language
+        $sql_lingo = $mysqli->query("SELECT * FROM game_download 
+                                      LEFT JOIN game_download_lingo ON (game_download.game_download_id = game_download_lingo.game_download_id)
+                                      LEFT JOIN lingo ON (game_download_lingo.lingo_id = lingo.lingo_id)
+                                      WHERE game_download.game_download_id='$game_download_id'") or die("Error getting download lingo");
+        while ($lingo = $sql_lingo->fetch_array(MYSQLI_BOTH)) {                                 
+        
+            if ($lingo['lingo_name'] == '') {
+                $filename .= "(lingo)";
+            } else {
+                $filename .= "($lingo[lingo_name])";
+            }
+        }
+    
         if ($sets['download_ext'] == "stx") {
             $filename .= "[pasti]";
         }
@@ -310,6 +409,18 @@ if (isset($action) and $action == "edit_download_box" and $game_download_id !== 
         
         if ($sets['download_ext'] == "st") {
             $filename .= "[ST]";
+        }
+        
+        $sql_set = $mysqli->query("SELECT * FROM game_download   
+                               LEFT JOIN game_download_set ON (game_download.game_download_id = game_download_set.game_download_id)
+                               WHERE game_download.game_download_id='$game_download_id'") or die("Error getting download set");
+        while ($set = $sql_set->fetch_array(MYSQLI_BOTH)) {                                 
+                                   
+            if ($set['game_download_set_chain'] == '') {
+               
+            } else {
+                $filename .= " - part $set[game_download_set_chain]";
+            }
         }
         
         $filename .= ".zip";
@@ -433,39 +544,89 @@ if (isset($action) and $action == "edit_download_box" and $game_download_id !== 
                                               LEFT JOIN pub_dev ON (game_publisher.pub_dev_id = pub_dev.pub_dev_id)
                                               LEFT JOIN game_year ON (game.game_id = game_year.game_id)
                                               ORDER BY game.game_name") or die("Error getting set info");
-
+    $set_nr = 0; 
+    
     while ($sets = $SQL_sets->fetch_array(MYSQLI_BOTH)) {
-        // first lets create the filenames
-        $filename = "$sets[game_name]";
-
-        if ($sets['game_year'] == '') {
-            $filename .= " (19xx)";
-        } else {
-            $filename .= " ($sets[game_year])";
-        }
-        if ($sets['pub_dev_id'] !== '') {
-            $filename .= "($sets[pub_dev_name])";
-        }
-        if ($sets['download_ext'] == "stx") {
-            $filename .= "[pasti]";
-        }
-        if ($sets['download_ext'] == "msa") {
-            $filename .= "[MSA]";
-        }
         
-        if ($sets['download_ext'] == "st") {
-            $filename .= "[ST]";
-        }
-        
-        $filename .= ".zip";
+        if ($set_nr <> $sets['game_download_set_nr'])
+        {    
+            // first lets create the filenames
+            $filename = "$sets[game_name]";
 
-        //start filling the smarty object
-        $smarty->append('set', array(
-            'game_download_id' => $sets['game_download_id'],
-            'set_id' => $sets['game_download_set_id'],
-            'set_nr' => $sets['game_download_set_nr'],
-            'set_name' => $filename
-        ));
+            if ($sets['game_year'] == '') {
+                $filename .= " (19xx)";
+            } else {
+                $filename .= " ($sets[game_year])";
+            }
+            if ($sets['pub_dev_id'] !== '') {
+                $filename .= "($sets[pub_dev_name])";
+            }
+            
+            //let's get the detail download table
+            $sql_download_details = $mysqli->query("SELECT * FROM game_download 
+                                                     LEFT JOIN game_download_details ON (game_download.game_download_id = game_download_details.game_download_id)
+                                                     WHERE game_download.game_download_id='$sets[game_download_id]'") or die("Error getting download details");
+            while ($details = $sql_download_details->fetch_array(MYSQLI_BOTH)) {
+                
+                if ($details['version'] == '') {
+                    $filename .= "(v xx)";
+                } else {
+                    $filename .= "($details[version])";
+                }
+            }
+            
+            //let's get the format
+            $sql_format = $mysqli->query("SELECT * FROM game_download 
+                                          LEFT JOIN download_main ON (game_download.download_id = download_main.download_id)
+                                          LEFT JOIN download_format ON (download_main.download_id = download_format.download_id)
+                                          LEFT JOIN format ON (download_format.format_id = format.format_id)
+                                          WHERE game_download.game_download_id='$sets[game_download_id]'") or die("Error getting download format");
+            while ($format = $sql_format->fetch_array(MYSQLI_BOTH)) {                                 
+            
+                if ($format['format'] == '') {
+                    $filename .= "(format)";
+                } else {
+                    $filename .= "($format[format])";
+                }
+            }
+            
+            // let's get the language
+            $sql_lingo = $mysqli->query("SELECT * FROM game_download 
+                                          LEFT JOIN game_download_lingo ON (game_download.game_download_id = game_download_lingo.game_download_id)
+                                          LEFT JOIN lingo ON (game_download_lingo.lingo_id = lingo.lingo_id)
+                                          WHERE game_download.game_download_id='$sets[game_download_id]'") or die("Error getting download lingo");
+            while ($lingo = $sql_lingo->fetch_array(MYSQLI_BOTH)) {                                 
+            
+                if ($lingo['lingo_name'] == '') {
+                    $filename .= "(lingo)";
+                } else {
+                    $filename .= "($lingo[lingo_name])";
+                }
+            }
+    
+            if ($sets['download_ext'] == "stx") {
+                $filename .= "[pasti]";
+            }
+            if ($sets['download_ext'] == "msa") {
+                $filename .= "[MSA]";
+            }
+            
+            if ($sets['download_ext'] == "st") {
+                $filename .= "[ST]";
+            }
+            
+            $filename .= ".zip";
+
+            //start filling the smarty object
+            $smarty->append('set', array(
+                'game_download_id' => $sets['game_download_id'],
+                'set_id' => $sets['game_download_set_id'],
+                'set_nr' => $sets['game_download_set_nr'],
+                'set_name' => $filename
+            ));
+            
+            $set_nr = $sets['game_download_set_nr'];
+        }
     }         
     
     //Get the individuals
@@ -520,51 +681,107 @@ if (isset($action) and $action == "closeedit_download_box" and $game_download_id
     ));
     
     //get the existing downloads
-    $SQL_DOWNLOADS = "SELECT * FROM game_download 
-                               LEFT JOIN download_main ON (game_download.download_id = download_main.download_id)
-                               WHERE game_download.game_download_id='$game_download_id'";
+    $sql_downloads = $mysqli->query("SELECT * FROM game_download 
+                                          LEFT JOIN download_main ON (game_download.download_id = download_main.download_id)                                         
+                                          WHERE game_download.game_download_id='$game_download_id'") or die("Error getting download info");
 
-    $result_downloads = $mysqli->query($SQL_DOWNLOADS) or die('Error: ' . mysqli_error($mysqli));
-    $downloads        = $result_downloads->fetch_array(MYSQLI_BOTH);
-       
-     // first lets create the filenames
-    $filename = "$game_info[game_name]";
+    $nr_downloads = 0;
+    while ($downloads = $sql_downloads->fetch_array(MYSQLI_BOTH)) {
+           
+        // first lets create the filenames
+        $filename = "$game_info[game_name]";
 
-    if ($game_info['game_year'] == '') {
-        $filename .= " (19xx)";
-    } else {
-        $filename .= " ($game_info[game_year])";
+        if ($game_info['game_year'] == '') {
+            $filename .= " (19xx)";
+        } else {
+            $filename .= " ($game_info[game_year])";
+        }
+        if ($game_info['pub_dev_id'] !== '') {
+            $filename .= "($game_info[pub_dev_name])";
+        }
+        
+        //let's get the detail download table
+        $sql_download_details = $mysqli->query("SELECT * FROM game_download 
+                                                 LEFT JOIN game_download_details ON (game_download.game_download_id = game_download_details.game_download_id)
+                                                 WHERE game_download.game_download_id='$downloads[game_download_id]'") or die("Error getting download details");
+        while ($details = $sql_download_details->fetch_array(MYSQLI_BOTH)) {
+            
+            if ($details['version'] == '') {
+                $filename .= "(v xx)";
+            } else {
+                $filename .= "($details[version])";
+            }
+        }
+        
+        //let's get the format
+        $sql_format = $mysqli->query("SELECT * FROM game_download 
+                                      LEFT JOIN download_main ON (game_download.download_id = download_main.download_id)
+                                      LEFT JOIN download_format ON (download_main.download_id = download_format.download_id)
+                                      LEFT JOIN format ON (download_format.format_id = format.format_id)
+                                      WHERE game_download.game_download_id='$downloads[game_download_id]'") or die("Error getting download format");
+        while ($format = $sql_format->fetch_array(MYSQLI_BOTH)) {                                 
+        
+            if ($format['format'] == '') {
+                $filename .= "(format)";
+            } else {
+                $filename .= "($format[format])";
+            }
+        }
+        
+        // let's get the language
+        $sql_lingo = $mysqli->query("SELECT * FROM game_download 
+                                      LEFT JOIN game_download_lingo ON (game_download.game_download_id = game_download_lingo.game_download_id)
+                                      LEFT JOIN lingo ON (game_download_lingo.lingo_id = lingo.lingo_id)
+                                      WHERE game_download.game_download_id='$downloads[game_download_id]'") or die("Error getting download lingo");
+        while ($lingo = $sql_lingo->fetch_array(MYSQLI_BOTH)) {                                 
+        
+            if ($lingo['lingo_name'] == '') {
+                $filename .= "(lingo)";
+            } else {
+                $filename .= "($lingo[lingo_name])";
+            }
+        }
+        
+        
+        if ($downloads['download_ext'] == "stx") {
+            $filename .= "[pasti]";
+        }
+        if ($downloads['download_ext'] == "msa") {
+            $filename .= "[MSA]";
+        }
+        
+        $sql_set = $mysqli->query("SELECT * FROM game_download   
+                                   LEFT JOIN game_download_set ON (game_download.game_download_id = game_download_set.game_download_id)
+                                   WHERE game_download.game_download_id='$downloads[game_download_id]'") or die("Error getting download set");
+        while ($set = $sql_set->fetch_array(MYSQLI_BOTH)) {                                 
+                                   
+            if ($set['game_download_set_chain'] == '') {
+               
+            } else {
+                $filename .= " - part $set[game_download_set_chain]";
+            }
+        }
+         
+        $filename .= ".zip";
+
+        $filepath = $game_file_path;
+        $filepath .= $downloads['game_download_id'];
+
+        //convert the date
+        $date = date("F j, Y", $downloads['date']);
+
+        //start filling the smarty object
+        $smarty->assign('downloads', array(
+            'game_download_id' => $downloads['game_download_id'],
+            'game_id' => $downloads['game_id'],
+            'disable' => $downloads['disable'],
+            'filename' => $filename,
+            'filepath' => $filepath,
+            'date' => $date
+        ));
+
+        $nr_downloads++;
     }
-    if ($game_info['pub_dev_id'] !== '') {
-        $filename .= "($game_info[pub_dev_name])";
-    }
-    if ($downloads['download_ext'] == "stx") {
-        $filename .= "[pasti]";
-    }
-    if ($downloads['download_ext'] == "msa") {
-        $filename .= "[MSA]";
-    }     
-    if ($downloads['download_ext'] == "st") {
-        $filename .= "[ST]";
-    }
-    
-    $filename .= ".zip";
-
-    $filepath = $game_file_path;
-    $filepath .= $downloads['game_download_id'];
-
-    //convert the date
-    $date = date("F j, Y", $downloads['date']);
-
-    //start filling the smarty object
-    $smarty->assign('downloads', array(
-        'game_download_id' => $downloads['game_download_id'],
-        'game_id' => $game_id,
-        'disable' => $downloads['disable'],
-        'filename' => $filename,
-        'filepath' => $filepath,
-        'date' => $date
-    ));
 
     $smarty->assign('smarty_action', 'closeedit_download_box');
     $smarty->assign('game_download_id', $game_download_id);
