@@ -518,6 +518,22 @@ function deleteAuthors(game_download_ind_id,game_download_id,game_id,ind_id) {
 function addslashes( str ) {
     return (str + '').replace(/[\\"']/g, '\\$&').replace(/\u0000/g, '\\0');
 }
+
+function deleteDownload(str, game_id) {
+
+    // CONFIRM REQUIRES ONE ARGUMENT
+    var message = "Are you sure you want to completely remove this download?";
+    // CONFIRM IS BOOLEAN. THAT MEANS THAT
+    // IT RETURNS TRUE IF 'OK' IS CLICKED
+    // OTHERWISE IT RETURN FALSE
+    var return_value = confirm(message);
+
+    if (return_value !="0")
+    {
+        url="../downloads/db_downloads_game.php?action=delete_download&game_id="+game_id+"&game_download_id="+str;
+        location.href=url;
+    }
+}
 </script>
 {/block}
 
@@ -631,7 +647,7 @@ function addslashes( str ) {
                 {/foreach}
             {/if}
             <tr>
-                <td class="standard_table_left" colspan="4">
+                <td class="standard_table_left" colspan="2">
                     <br><b>{if $nr_downloads == 1}1 download found {else} {$nr_downloads} downloads found{/if}</b>
                 </td>
             </tr>

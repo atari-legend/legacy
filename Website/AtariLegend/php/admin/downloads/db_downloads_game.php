@@ -1075,6 +1075,39 @@ if (isset($action) and $action == "mod_download") {
     $smarty->display("file:" . $cpanel_template_folder . "ajax_gamedownloads_detail.html");
 }
 
+
+//****************************************************************************************
+// This is where we completely delete the download
+//****************************************************************************************
+if (isset($action) and $action == "delete_download") {
+    create_log_entry('Games', $game_id, 'File', $game_id, 'Delete', $_SESSION['user_id']);
+
+    // let's get the download id
+    $sql_download_id = $mysqli->query("SELECT download_id FROM game_download WHERE game_download_id = '$game_download_id'") 
+                                        or die("Database error - selecting download_id");
+    $download_row = $sql_download_id->fetch_row();
+    $download_id = $download_row[0];
+    
+    //lets start deleting everything from this download
+    $mysqli->query("DELETE from download_main WHERE download_id='$download_id'") or die('Error: ' . mysqli_error($mysqli));
+    $mysqli->query("DELETE from download_format WHERE download_id='$download_id'") or die('Error: ' . mysqli_error($mysqli));
+    $mysqli->query("DELETE from game_download WHERE game_download_id='$game_download_id'") or die('Error: ' . mysqli_error($mysqli));
+    $mysqli->query("DELETE from game_download_set WHERE game_download_id='$game_download_id'") or die('Error: ' . mysqli_error($mysqli));
+    $mysqli->query("DELETE from game_download_lingo WHERE game_download_id='$game_download_id'") or die('Error: ' . mysqli_error($mysqli));
+    $mysqli->query("DELETE from game_download_details WHERE game_download_id='$game_download_id'") or die('Error: ' . mysqli_error($mysqli));
+    $mysqli->query("DELETE from game_download_options WHERE game_download_id='$game_download_id'") or die('Error: ' . mysqli_error($mysqli));
+    $mysqli->query("DELETE from game_download_menu WHERE game_download_id='$game_download_id'") or die('Error: ' . mysqli_error($mysqli));
+    $mysqli->query("DELETE from game_download_tos WHERE game_download_id='$game_download_id'") or die('Error: ' . mysqli_error($mysqli));
+    $mysqli->query("DELETE from game_download_intro WHERE game_download_id='$game_download_id'") or die('Error: ' . mysqli_error($mysqli));
+    $mysqli->query("DELETE from game_download_trainer WHERE game_download_id='$game_download_id'") or die('Error: ' . mysqli_error($mysqli));
+    $mysqli->query("DELETE from game_download_individual WHERE game_download_id='$game_download_id'") or die('Error: ' . mysqli_error($mysqli));
+    $mysqli->query("DELETE from game_download_crew WHERE game_download_id='$game_download_id'") or die('Error: ' . mysqli_error($mysqli));
+    
+    unlink("$game_file_path$download_id.zip");
+    $_SESSION['edit_message'] = "file deleted";
+    header("Location: ../downloads/downloads_game_detail.php?game_id=$game_id");
+}
+
   
 //close the connection
 mysqli_close($mysqli);

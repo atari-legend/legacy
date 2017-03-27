@@ -23,8 +23,21 @@
 				<td colspan="4" style="border-top: solid 1px #b2b2b2;width:100%;">	
 					<div class="help-tip">
 						<p style="width:250px;right:243px;">
-						<b>Dummy</b> : Dummy text ahoy...
-						</p>
+						<b>Download details</b> : The main details of the download<br>
+                        <u>Version</u> : Version of the download<br>
+                        <u>Info</u> : Free text field for extra information<br>
+                        <u>Format</u> : Choose the format of the download<br>
+                        <u>Lingo</u> : What is the language of the game? Is it translated?<br>
+                        <u>Intro</u> : Does it contain a special intro? Link it to this intro/demo<br><br>
+						<b>Label details</b> : Add all kind of info specific to this download. Create new label subjects in the appropriate section<br><br>
+						<b>TOS details</b> : This download is NOT compatible with certain versions of TOS?<br><br>
+						<b>Trainer details</b> : Is this game trained? Which kind of trainers are available?<br><br>
+						<b>Crew details</b> : Is this a Crew release?<br><br>
+						<b>Menudisk details</b> : Is this download featured on a menudisk? You can only link this download if it really is available on a menudisk in the database!<br><br>
+						<b>Set details</b> : Is this a multiple disk release? How does it work? First create a SET by pressing the 'create' button. If the SET for this game already exists (disk 1 was already created), select it in the dropdown and add the correct disk nr in the nr field, than press link to link this download to an existing chain.<br><br>
+						<b>Author details</b> : Add info regarding the individuals responsible for this release<br><br>
+                        <b>DELETE</b> : Completely remove this download (including all its info) from the DB and the file from the server<br><br>
+                        </p>
 					</div>
 					<div style="text-align:center;"><br> Game uploaded by <b>{$download_details.username}</b> on <b>{$download_details.date}</b></div>
                     <br>
@@ -328,8 +341,8 @@
                                                         <option value="{$line.set_nr}">{$line.set_name}</option>
                                                     {/foreach}
                                                 </select>
-                                                <input type="text" name="download_chain" id="download_chain" value="Nr" class="standard_tile_input_small" style="width:10%">
                                                 <br>
+                                                <input type="text" name="download_chain" id="download_chain" value="Nr" class="standard_tile_input_small" style="width:10%">
                                                 <input type="button" name="link_set" value="Link" onClick="linkSet({$downloads.game_download_id},{$game.game_id}); return false;" class="topbutton_cpanel_small">
                                                 <input type="button" name="create_set" value="Create" onClick="createSet({$downloads.game_download_id},{$game.game_id}); return false;" class="topbutton_cpanel_small">
                                             </div>
@@ -430,6 +443,10 @@
                                     </div>
                                 </div>
                             </div>
+                            <br>
+                            <div>
+                               <input type="button" onclick="deleteDownload({$downloads.game_download_id},{$game.game_id})" class="topbutton_cpanel_small" value="delete">
+                            </div>                  
                         </fieldset>
                     </div>
 				</td>
@@ -627,7 +644,7 @@
         <fieldset>
             <legend>Linked authors</legend>
             <div id="author_list">	
-                <table class="table_game_list" id="game_list_table" style="width:100%;border: solid 1px black;margin:auto;">
+                <table class="table_game_list" id="game_list_table" style="width:100    %;border: solid 1px black;margin:auto;">
                 <tr>
                     <th id="menu_cred_th">Credits</th>
                     <th id="menu_scene_th">"Sceners"</th>
