@@ -811,6 +811,15 @@
 }
 
 //*----------------------------------------------------------
+//download edit
+//------------------------------------------------------------ */
+@media screen and (max-width: 480px) {
+    #download_details_row {width: 100%;}
+    #download_details_text {display: inline;}
+    #download_details_input {display: inline; }
+}
+
+//*----------------------------------------------------------
 //General settings
 //------------------------------------------------------------ */
 

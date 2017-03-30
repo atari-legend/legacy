@@ -254,7 +254,6 @@ if (isset($action) and $action == "edit_disk_box" and $menu_disk_id !== '') {
                                     individuals.ind_id,
                                     individuals.ind_name,
                                     menu_disk_credits.menu_disk_credits_id,
-                                    menu_disk_credits.individual_nicks_id,
                                     author_type.author_type_info
                                     FROM individuals
                                     LEFT JOIN menu_disk_credits ON (individuals.ind_id = menu_disk_credits.ind_id)
@@ -262,7 +261,7 @@ if (isset($action) and $action == "edit_disk_box" and $menu_disk_id !== '') {
                                     WHERE menu_disk_credits.menu_disk_id = '$menu_disk_id'
                                     ORDER BY individuals.ind_name ASC";
 
-    $query_individual = $mysqli->query($sql_individuals);
+    $query_individual = $mysqli->query($sql_individuals) or die('Error: ' . mysqli_error($mysqli));
 
     $query_ind_id = "";
 
@@ -281,7 +280,7 @@ if (isset($action) and $action == "edit_disk_box" and $menu_disk_id !== '') {
 
                     $smarty->append('ind_nick', array(
                         'ind_id' => $query['ind_id'],
-                        'individual_nicks_id' => $nick_id,
+                        'individual_nicks_id' => $nick_id, 
                         'nick' => $fetch_nick_names['ind_name']
                     ));
                 }
@@ -294,7 +293,6 @@ if (isset($action) and $action == "edit_disk_box" and $menu_disk_id !== '') {
             'ind_id' => $query['ind_id'],
             'ind_name' => $query['ind_name'],
             'menu_disk_id' => $menu_disk_id,
-            'individual_nicks_id' => $query['individual_nicks_id'],
             'author_type_info' => $query['author_type_info']
         ));
 

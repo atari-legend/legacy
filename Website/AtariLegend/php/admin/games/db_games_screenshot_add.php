@@ -12,7 +12,8 @@
  *                                  - AL 2.0
  *   Id: games_screenshots_add.php,v 0.30 2016/08/19 9:31 ST Gravedigger
  *                                  - Change log
- *
+ *   id: games_screenshots_add.php,v 0.31 2017/02/26 22:19 STG
+ *                          - fix sql warnings stonish server
  *********************************************************************************/
 
 //****************************************************************************************
@@ -90,7 +91,7 @@ if (isset($action) and $action == 'delete_screen') {
                               WHERE screenshot_id = '$screenshot_id'") or die("Database error - selecting screenshots");
 
     $screenshotrow  = $SCREENSHOT->fetch_array(MYSQLI_BOTH);
-    $screenshot_ext = $screenshotrow[imgext];
+    $screenshot_ext = $screenshotrow['imgext'];
 
     $sql = $mysqli->query("DELETE FROM screenshot_main WHERE screenshot_id = '$screenshot_id' ");
     $sql = $mysqli->query("DELETE FROM screenshot_game WHERE screenshot_id = '$screenshot_id' ");

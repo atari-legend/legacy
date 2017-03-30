@@ -12,6 +12,12 @@
  *
  * id : db_menu_disk.php, v 1.20 2017/02/07 STG
  *       - adding authors
+ * 
+ * id : db_menu_disk.php, v 1.21 2017/02/26 STG
+ *       - It seems mysqli_free_result is not used for insert or update statements
+ *         from the manual : Returns FALSE on failure. For successful SELECT, SHOW, DESCRIBE or EXPLAIN queries mysqli_query() 
+ *         will return a mysqli_result object. For other successful queries mysqli_query() will return TRUE. 
+ *       - When deleting a menu set, also delete from crew_menu_prod table and ind_menu_prod
  ***************************************************************************/
 
 // We are using the action var to separate all the queries.
@@ -30,7 +36,7 @@ if ($action == "menu_set_new") {
 
         create_log_entry('Menu set', $new_menu_set_id, 'Menu set', $new_menu_set_id, 'Insert', $_SESSION['user_id']);
 
-        mysqli_free_result($sql);
+//        mysqli_free_result($sql);
         $_SESSION['edit_message'] = "New Menu Set added";
     }
 
@@ -108,7 +114,7 @@ if ($action == "menu_set_name_update") {
     if (isset($menu_sets_id) and $menu_sets_name !== "") {
         $sql = $mysqli->query("UPDATE menu_set SET menu_sets_name='$menu_sets_name'
               WHERE menu_sets_id='$menu_sets_id'") or die('Error: ' . mysqli_error($mysqli));
-        mysqli_free_result($sql);
+//        mysqli_free_result($sql);
 
         create_log_entry('Menu set', $menu_sets_id, 'Menu set', $menu_sets_id, 'Update', $_SESSION['user_id']);
 
@@ -128,7 +134,7 @@ if ($action == "menu_set_crew_set") {
 
         create_log_entry('Menu set', $menu_sets_id, 'Crew', $crew_id, 'Insert', $_SESSION['user_id']);
 
-        mysqli_free_result($sql);
+//        mysqli_free_result($sql);
     }
 
     if ($crew_id == "") {
@@ -148,7 +154,7 @@ if ($action == "menu_set_ind_set") {
 
         create_log_entry('Menu set', $menu_sets_id, 'Individual', $ind_id, 'Insert', $_SESSION['user_id']);
 
-        mysqli_free_result($sql);
+//        mysqli_free_result($sql);
     }
 
     if ($ind_id == "") {
@@ -163,12 +169,14 @@ if ($action == "menu_set_ind_set") {
 //****************************************************************************************
 if ($action == "menu_set_type_set") {
     if (isset($menu_type_browse) and ($menu_type_browse == !"") and isset($menu_sets_id)) {
-        $sql                      = $mysqli->query("INSERT INTO menu_type (menu_types_main_id,menu_sets_id) VALUES ('$menu_type_browse','$menu_sets_id')");
+        $sql = $mysqli->query("INSERT INTO menu_type (menu_types_main_id,menu_sets_id) VALUES ('$menu_type_browse','$menu_sets_id')") or die('Error: ' . mysqli_error($mysqli));
         $_SESSION['edit_message'] = "Menu set hooked to this Menu disk series";
 
         create_log_entry('Menu set', $menu_sets_id, 'Menu type', $menu_type_browse, 'Insert', $_SESSION['user_id']);
 
-        mysqli_free_result($sql);
+//        mysqli_free_result($sql);  
+//  Returns FALSE on failure. For successful SELECT, SHOW, DESCRIBE or EXPLAIN queries mysqli_query() will return a mysqli_result object. 
+//  For other successful queries mysqli_query() will return TRUE. 
     }
 
     if ($menu_type_browse == "") {
@@ -188,7 +196,7 @@ if ($action == "menu_set_crew_add") {
 
         create_log_entry('Crew', $new_crew_id, 'Crew', $new_crew_id, 'Insert', $_SESSION['user_id']);
 
-        mysqli_free_result($sql);
+        //mysqli_free_result($sql);
     }
     $_SESSION['edit_message'] = "$new_crew_name added to the crew database";
     header("Location: ../menus/menus_disk_list.php?menu_sets_id=$menu_sets_id");
@@ -204,7 +212,7 @@ if ($action == "menu_set_ind_add") {
 
         create_log_entry('Individuals', $new_ind_id, 'Individual', $new_ind_id, 'Insert', $_SESSION['user_id']);
 
-        mysqli_free_result($sql);
+        //mysqli_free_result($sql);
     }
     $_SESSION['edit_message'] = "$new_ind_name added to the individuals database";
     header("Location: ../menus/menus_disk_list.php?menu_sets_id=$menu_sets_id");
@@ -1012,7 +1020,7 @@ if (isset($action) and $action == "delete_download_from_menu_disk") {
 // We wanna add a new download to a menu
 //****************************************************************************************
 if (isset($action) and $action == 'add_file') {
-    require_once('../vendor/pclzip/pclzip/pclzip.lib.php');
+    require_once('../../vendor/pclzip/pclzip/pclzip.lib.php');
 
     $menu_download_name = $_FILES['menu_download_name'];
 
@@ -1176,7 +1184,6 @@ if (isset($action) and $action == "add_intro_credits") {
               individuals.ind_id,
               individuals.ind_name,
               menu_disk_credits.menu_disk_credits_id,
-              menu_disk_credits.individual_nicks_id,
               author_type.author_type_info
               FROM individuals
               LEFT JOIN menu_disk_credits ON (individuals.ind_id = menu_disk_credits.ind_id)
@@ -1233,7 +1240,6 @@ if (isset($action) and $action == "add_intro_credits") {
                 'ind_id' => $query['ind_id'],
                 'ind_name' => $query['ind_name'],
                 'menu_disk_id' => $menu_disk_id,
-                'individual_nicks_id' => $query['individual_nicks_id'],
                 'author_type_info' => $query['author_type_info']
             ));
 
@@ -1263,7 +1269,6 @@ if (isset($action) and $action == "delete_menu_disk_credits") {
               individuals.ind_id,
               individuals.ind_name,
               menu_disk_credits.menu_disk_credits_id,
-              menu_disk_credits.individual_nicks_id,
               author_type.author_type_info
               FROM individuals
               LEFT JOIN menu_disk_credits ON (individuals.ind_id = menu_disk_credits.ind_id)
@@ -1320,7 +1325,6 @@ if (isset($action) and $action == "delete_menu_disk_credits") {
                 'ind_id' => $query['ind_id'],
                 'ind_name' => $query['ind_name'],
                 'menu_disk_id' => $menu_disk_id,
-                'individual_nicks_id' => $query['individual_nicks_id'],
                 'author_type_info' => $query['author_type_info']
             ));
 
@@ -1690,7 +1694,6 @@ if (isset($action) and ($action == "change_menu_disk_state" or $action == "chang
               individuals.ind_id,
               individuals.ind_name,
               menu_disk_credits.menu_disk_credits_id,
-              menu_disk_credits.individual_nicks_id,
               author_type.author_type_info
               FROM individuals
               LEFT JOIN menu_disk_credits ON (individuals.ind_id = menu_disk_credits.ind_id)
@@ -1698,14 +1701,14 @@ if (isset($action) and ($action == "change_menu_disk_state" or $action == "chang
               WHERE menu_disk_credits.menu_disk_id = '$menu_disk_id'
               ORDER BY individuals.ind_name ASC";
 
-        $query_individual = $mysqli->query($sql_individuals);
+        $query_individual = $mysqli->query($sql_individuals)  or die('Error: ' . mysqli_error($mysqli));;
 
         $query_ind_id = "";
 
         while ($query = $query_individual->fetch_array(MYSQLI_BOTH)) {
             if ($query_ind_id <> $query['ind_id']) {
                 
-                $sql_ind_nicks = $mysqli->query("SELECT nick_id FROM individual_nicks WHERE ind_id = '$query[ind_id]'");
+                $sql_ind_nicks = $mysqli->query("SELECT nick_id FROM individual_nicks WHERE ind_id = '$query[ind_id]'")  or die('Error: ' . mysqli_error($mysqli));;
             
                 while ($fetch_ind_nicks = $sql_ind_nicks->fetch_array(MYSQLI_BOTH)) {
                  
@@ -1747,7 +1750,6 @@ if (isset($action) and ($action == "change_menu_disk_state" or $action == "chang
                 'ind_id' => $query['ind_id'],
                 'ind_name' => $query['ind_name'],
                 'menu_disk_id' => $menu_disk_id,
-                'individual_nicks_id' => $query['individual_nicks_id'],
                 'author_type_info' => $query['author_type_info']
             ));
 
@@ -2472,6 +2474,8 @@ if (isset($action) and ($action == "delete_set")) {
         create_log_entry('Menu set', $menu_sets_id, 'Menu set', $menu_sets_id, 'Delete', $_SESSION['user_id']);
 
         $mysqli->query("DELETE from menu_set WHERE menu_sets_id='$menu_sets_id'") or die("error deleting menu set");
+        $mysqli->query("DELETE from crew_menu_prod WHERE menu_sets_id='$menu_sets_id'") or die("error deleting crew_menu_prod");
+        $mysqli->query("DELETE from ind_menu_prod WHERE menu_sets_id='$menu_sets_id'") or die("error deleting ind_menu_prod");
         $_SESSION['edit_message'] = "Menuset completely removed";
 
         //Send all smarty variables to the templates
