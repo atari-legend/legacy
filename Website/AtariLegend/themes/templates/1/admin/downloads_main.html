@@ -1,0 +1,77 @@
+{*
+/***************************************************************************
+                              downloads_main.html
+*                            --------------------------
+*   begin                : Saturday, March 11, 2017
+*   copyright            : (C) 2017 Atari Legend
+*   email                : martens_maarten@hotmail.com
+*
+*   Id: downloads_main.html,v 0.10 2017/03/11 22:23 Gatekeeper
+*
+***************************************************************************/
+
+************************************************************************************************
+The main downloads page
+************************************************************************************************
+*}
+{extends file='1/admin/frontpage.html'}
+
+{block name=right_tile}
+	{include file='1/admin/quick_search_games.html'}
+{/block}
+
+{block name=main_tile}
+<div class="standard_tile" id="games_main">
+    <div class="help-tip">
+		<p>First search for a title to add a download. Use the 'type' dropdown to select the type of download you want to add</p>
+	</div>
+	<h1>ADD/EDIT A DOWNLOAD</h1>
+	<div class="standard_tile_line"></div>
+	<div class="standard_tile_text">
+		<div class="left_nav_section">
+			In this section you can add or edit a download. Search for a game/demo/menudisk by using any of the
+			functionalities below. There are currently <b>{$download_nr}</b> downloads in the DB.
+		</div>
+		<br>
+		<br>
+		<form action="../downloads/downloads_list.php" method="get" name="game_search">
+		<div id="games_main_parent">
+			<fieldset>
+			<legend>Search</legend>
+			<br>
+			<div class="games_main_row">
+				<div class="games_main_text">By Name :</div>
+				<div class="games_main_input">
+					<select name="gamebrowse" id="games_main_small_select">
+						<option value="-" SELECTED>-</option>
+						{html_options values=$az_value output=$az_output}
+					</select>
+					<input type="text" name="gamesearch" value="" class="standard_tile_input_small">
+				</div>
+			</div>
+			<div class="games_main_row">
+				<div class="games_main_text">Type :</div>
+				<div class="games_main_input">
+					<select name="download_type" id="games_main_pub_select">
+						<option value="-" SELECTED>-</option>
+                            <option value="Game">Game</option>
+							<option value="Demo">Demo</option>
+                            <option value="Menu">Menudisk</option>
+					</select>
+				</div>
+			</div>
+			<br>
+			<br>
+			<div class="standard_table_center">
+				<input type="submit" value="Search" class="topbutton_cpanel_small">
+			</div>
+			<br>
+			<br>
+			</fieldset>
+			<input type="hidden" name="action" id="action" value="search">
+			<input type="hidden" name="user_id" id="user_id" value="{$user_id}">
+		</div>
+		</form>
+	</div>
+</div>
+{/block}

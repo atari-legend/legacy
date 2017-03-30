@@ -7,6 +7,9 @@
  *   email                : martens_maarten@hotmail.com
  *                           Created file
  *
+ *             id: db_article_type.php,v 0.22 2017/02/26 22:19 STG
+ *              - fix sql warnings stonish server
+ *      
  ***************************************************************************/
 
 // We are using the action var to separate all the queries.
@@ -25,7 +28,7 @@ if (isset($article_type_id) and isset($action) and $action == 'update') {
 }
 
 if (isset($article_type_id) and isset($action) and $action == 'delete_article_type') {
-    // first see if this menu type is used for a menu set or menu disk
+    // first see if this article type is used
     $sql = $mysqli->query("SELECT * FROM article_main
                           WHERE article_type_id = '$article_type_id'") or die("error selecting article");
     if ($sql->num_rows > 0) {
@@ -49,8 +52,8 @@ if (isset($action) and $action == 'insert_type') {
         $sql_article_type = $mysqli->query("INSERT INTO article_type (article_type) VALUES ('$type_name')") or die("error inserting article type");
 
         $new_article_type_id = $mysqli->insert_id;
-
-        create_log_entry('Article type', $new_article_type_id, 'Article type', $new_Article_type_id, 'Insert', $_SESSION['user_id']);
+        
+        create_log_entry('Article type', $new_article_type_id, 'Article type', $new_article_type_id, 'Insert', $_SESSION['user_id']);
 
         $_SESSION['edit_message'] = "article type succesfully inserted";
         header("Location: ../articles/article_type.php");

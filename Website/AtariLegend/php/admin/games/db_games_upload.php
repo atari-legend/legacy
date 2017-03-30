@@ -9,7 +9,8 @@
  *
  *   Id: games_upload.php,v 0.10 2005/11/09 15:10 ST Gravedigger
  *   Id: games_upload.php,v 0.20 2016/08/18 23:15 ST Gravedigger - added change log
- *
+ *   id: games_upload.php,v 0.21 2017/02/26 22:19 STG
+ *                          - fixed vendor link
  ***************************************************************************/
 
 //****************************************************************************************
@@ -25,7 +26,7 @@ include("../../config/admin.php");
 // We wanna add a new download
 //****************************************************************************************
 if (isset($action) and $action == 'add_download') {
-    require_once('../vendor/pclzip/pclzip/pclzip.lib.php');
+    require_once('../../vendor/pclzip/pclzip/pclzip.lib.php');
 
     $game_download_name = $_FILES['game_download_name'];
 

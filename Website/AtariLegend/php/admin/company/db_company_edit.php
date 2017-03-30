@@ -11,6 +11,9 @@
  *              - AL 2.0 - adding messages
  *          Id: db_company_edit,v 0.21 2016/08/19 22:57 Gatekeeper
  *              - adding change log
+ *          id: db_company_edit,v 0.22 2017/02/26 22:19 STG
+ *              - fix sql warnings stonish server
+ *              - Extra checks when deleting a company
  *
  ***************************************************************************/
 
@@ -108,33 +111,58 @@ if (isset($action) and $action == 'update') {
 
 //if we want to delete the company (from the edit page)
 if ($action == 'delete_comp') {
-    // Here we delete the company image
+    // let's first check if this company is still used!
+    /* let's see if the title contains authors */
+    $sql = $mysqli->query("SELECT * FROM game_developer WHERE dev_pub_id = '$comp_id'") or die("error selecting game_developer table");
+    if ($sql->num_rows > 0) 
+    {
+        $_SESSION['edit_message'] = "This company is still linked to one or more games";
+        header("Location: ../company/company_main.php");
+    } 
+    else 
+    {
+        $sql = $mysqli->query("SELECT * FROM game_publisher WHERE pub_dev_id = '$comp_id'") or die("error selecting game_publisher table");
+        if ($sql->num_rows > 0) 
+        {
+            $_SESSION['edit_message'] = "This company is still linked to one or more games";
+            header("Location: ../company/company_main.php");
+        } 
+        else 
+        {
+            // Here we delete the company image
+            $pub_dev_query = $mysqli->query("SELECT pub_dev_imgext FROM pub_dev_text WHERE pub_dev_id='$comp_id'");
+            list($pub_dev_imgext) = $pub_dev_query->fetch_array(MYSQLI_BOTH);
 
-    $pub_dev_query = $mysqli->query("SELECT pub_dev_imgext FROM pub_dev_text WHERE pub_dev_id='$comp_id'");
-    list($pub_dev_imgext) = $pub_dev_query->fetch_array(MYSQLI_BOTH);
+            if ($pub_dev_imgext <> '') {
+                unlink("$company_screenshot_save_path$comp_id.$pub_dev_imgext");
+            }
 
-    if ($pub_dev_imgext <> '') {
-        unlink("$company_screenshot_path$comp_id.$pub_dev_imgext");
+            create_log_entry('Company', $comp_id, 'Company', $comp_id, 'Delete', $_SESSION['user_id']);
+
+            $sql = $mysqli->query("DELETE FROM pub_dev WHERE pub_dev_id = '$comp_id'");
+            $sql = $mysqli->query("DELETE FROM pub_dev_text WHERE pub_dev_id = '$comp_id'");
+            $sql = $mysqli->query("DELETE FROM game_developer WHERE dev_pub_id = '$comp_id'");
+            $sql = $mysqli->query("DELETE FROM game_publisher WHERE pub_dev_id = '$comp_id'");
+
+            $_SESSION['edit_message'] = "Company succesfully deleted";
+
+            header("Location: ../company/company_main.php");
+        }
     }
-
-    create_log_entry('Company', $comp_id, 'Company', $comp_id, 'Delete', $_SESSION['user_id']);
-
-    $sql = $mysqli->query("DELETE FROM pub_dev WHERE pub_dev_id = '$comp_id'");
-    $sql = $mysqli->query("DELETE FROM pub_dev_text WHERE pub_dev_id = '$comp_id'");
-    $sql = $mysqli->query("DELETE FROM game_developer WHERE dev_pub_id = '$comp_id'");
-    $sql = $mysqli->query("DELETE FROM game_publisher WHERE pub_dev_id = '$comp_id'");
-
-    $_SESSION['edit_message'] = "Company succesfully deleted";
-
-    header("Location: ../company/company_main.php");
 }
 
-//Insert a new individual
+//Insert a new company
 if ($action == "insert_comp") {
     if ($comp_name == '') {
         $_SESSION['edit_message'] = "Please fill in a company name";
         header("Location: ../company/company_main.php");
     } else {
+        
+        if (isset($textfield)){
+        }else{
+            $textfield = '';
+        }
+        
         $sql = $mysqli->query("INSERT INTO pub_dev (pub_dev_name) VALUES ('$comp_name')");
 
         //get the id of the inserted individual

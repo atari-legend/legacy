@@ -1,0 +1,746 @@
+{*
+/***************************************************************************
+*                            ajax_gamedownloads_detail.html
+*                            --------------------------
+*   begin                : 
+*   copyright            : (C) 2017 Atari Legend
+*   email                : admin@atarilegend.com
+*
+*   Id: ajax_gamedownloads_detail.html,v 0.10 2017/03/17 22:16 STG
+*
+***************************************************************************/
+*}
+
+{* EDIT BOX FOR GAME DOWNLOADS*}
+{if isset($smarty_action) and $smarty_action == "edit_download_box"}	
+	<td colspan="2" style="width:100%;margin:0px;padding:0px;">
+		<table class="standard_table_list" id="menu_list_table">
+            <tr>
+				<td class="menu_disk_list_td">{if $downloads.filename != ''}<a onclick="closeEditDownload({$downloads.game_download_id},{$game.game_id})" style="cursor: pointer;">{$downloads.filename}</a>{else}<i>n/a</i>{/if}</td>
+                <td class="menu_list_crew_td" style="text-align:right; padding-right:5px;">{if isset($downloads.date)}{$downloads.date}{else}<i>n/a</i>{/if}</td>
+			</tr>
+			<tr>
+				<td colspan="4" style="border-top: solid 1px #b2b2b2;width:100%;">	
+					<div class="help-tip">
+						<p style="width:250px;right:243px;">
+						<b>Download details</b> : The main details of the download<br>
+                        <u>Version</u> : Version of the download<br>
+                        <u>Info</u> : Free text field for extra information<br>
+                        <u>Format</u> : Choose the format of the download<br>
+                        <u>Lingo</u> : What is the language of the game? Is it translated?<br>
+                        <u>Intro</u> : Does it contain a special intro? Link it to this intro/demo<br><br>
+						<b>Label details</b> : Add all kind of info specific to this download. Create new label subjects in the appropriate section<br><br>
+						<b>TOS details</b> : This download is NOT compatible with certain versions of TOS?<br><br>
+						<b>Trainer details</b> : Is this game trained? Which kind of trainers are available?<br><br>
+						<b>Crew details</b> : Is this a Crew release?<br><br>
+						<b>Menudisk details</b> : Is this download featured on a menudisk? You can only link this download if it really is available on a menudisk in the database!<br><br>
+						<b>Set details</b> : Is this a multiple disk release? How does it work? First create a SET by pressing the 'create' button. If the SET for this game already exists (disk 1 was already created), select it in the dropdown and add the correct disk nr in the nr field, than press link to link this download to an existing chain.<br><br>
+						<b>Author details</b> : Add info regarding the individuals responsible for this release<br><br>
+                        <b>DELETE</b> : Completely remove this download (including all its info) from the DB and the file from the server<br><br>
+                        </p>
+					</div>
+					<div style="text-align:center;"><br> Game uploaded by <b>{$download_details.username}</b> on <b>{$download_details.date}</b></div>
+                    <br>
+                    <div class="standard_tile_text">
+                        <fieldset>
+                            <div style="padding-right:20px;padding-left:20px;">
+                                <br>
+                                <fieldset>
+                                    <legend>Download details</legend>
+                                    <div id="mod_download">
+                                        <div class="game_upload_container">       
+                                            <div class="game_upload_child" id="gu_child_1">
+                                                <div class="user_details_row">
+                                                    <div class="user_details_text">Version :</div>
+                                                    <div class="user_details_input"><input type="text" name="version" class="standard_tile_input_small" value="{$download_details.version}" id="download_version"></div>
+                                                </div>
+                                                <div class="user_details_row">
+                                                    <div class="user_details_text" style="vertical-align:top;">info :</div>
+                                                    <div class="user_details_input"><textarea class="standard_tile_input_area" name="info" id="download_info" style="width:185px;height:80px;">{$download_details.info}</textarea></div>
+                                                </div>
+                                            </div>
+                                             <div class="game_upload_child" id="gu_child_2">		
+                                                <div class="user_details_row">
+                                                    <div class="user_details_text">Set Format :</div>		
+                                                    <div class="user_details_input">
+                                                        <select name="format_id" id="download_format">
+                                                            <option value="-">-</option>
+                                                            {if isset($format_id)}
+                                                                {html_options values=$format_id output=$format selected=$download_format}
+                                                            {/if}
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="user_details_row">
+                                                    <div class="user_details_text">Set lingo :</div>		
+                                                    <div class="user_details_input">
+                                                        <select name="language_id" id="download_language">
+                                                            <option value="-">-</option>
+                                                            {if isset($lingo_id)}
+                                                                {html_options values=$lingo_id output=$lingo_name selected=$download_lingo}
+                                                            {/if}
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="user_details_row">
+                                                    <div class="user_details_text">Set Intro :</div>		
+                                                    <div class="user_details_input">
+                                                        <select name="demo_id" id="download_intro">
+                                                            <option value="-">-</option>
+                                                            {if isset($demo_id)}
+                                                                {html_options values=$demo_id output=$demo_name selected=$download_demo}
+                                                            {/if}
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <br>
+                                                <div class="user_details_row">
+                                                    <div class="user_details_text"></div>	
+                                                    <div style="text-align:right">
+                                                    <div class="user_details_input">
+                                                        <input type="button" name="modify_download" value="Modify" onClick="modDownload ({$downloads.game_download_id},{$game.game_id}); return false;" class="topbutton_cpanel_small">
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </fieldset>  
+                            </div>
+                            <br>
+                            <br>
+                            <div class="game_upload_container">
+                                <div class="game_upload_child" id="gu_child_1">
+                                    <div style="padding-right:20px;">
+                                    <fieldset>
+                                        <legend>Label details</legend>
+                                        <div class="user_details_row" id="download_details_row">
+                                            <div class="user_details_text" id="download_details_text">Options :</div>
+                                            <div class="user_details_input" id="download_details_input">
+                                                <select name="download_options_id" id="download_option">
+                                                    <option value="-">-</option>
+                                                    {foreach from=$options item=line}
+                                                        <option value="{$line.options_id}">{$line.option}</option>
+                                                    {/foreach}
+                                                </select>
+                                                <input type="button" name="add_option" value="Add" onClick="addOption({$downloads.game_download_id},{$game.game_id}); return false;" class="topbutton_cpanel_small">
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div id="linked_options">
+                                            {if isset($download_options)}	
+                                                <div class="user_details_row" id="download_details_row">
+                                                    <div class="user_details_text" id="download_details_text">Linked options</div>	
+                                                    <div class="user_details_input" id="download_details_input">
+                                                        <table class="table_game_list" id="game_list_table" style="width:100%;border: solid 1px black;margin:auto;">
+                                                        {foreach from=$download_options item=line}
+                                                        <tr>
+                                                            <td>
+                                                                <b><a href="../downloads/download_options_edit.php?option_id='{$line.download_options_id}'" class="left_nav_link">{$line.download_option}</a></b> 
+                                                            </td>
+                                                            <td>
+                                                                 <a href="#" onClick="delOption({$line.download_options_id},{$downloads.game_download_id},{$game.game_id}); return false;"  class="links_addnew_link">Delete</a> 							
+                                                            </td>
+                                                        </tr>
+                                                        {/foreach}
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            {/if}
+                                        </div>
+                                     </fieldset>
+                                     </div>
+                                    <br>
+                                    <br>
+                                </div>
+                                <div class="game_upload_child" id="gu_child_1">
+                                    <div style="padding-right:20px;">
+                                    <fieldset>
+                                        <legend>Tos details</legend>
+                                        <div class="user_details_row" id="download_details_row">
+                                            <div class="user_details_text" id="download_details_text">TOS :</div>
+                                            <div class="user_details_input" id="download_details_input">
+                                                <select name="download_tos_id" id="download_tos">
+                                                    <option value="-">-</option>
+                                                    {foreach from=$tos item=line}
+                                                        <option value="{$line.tos_id}">{$line.tos}</option>
+                                                    {/foreach}
+                                                </select>
+                                                <input type="button" name="add_tos" value="Add" onClick="addTos({$downloads.game_download_id},{$game.game_id}); return false;" class="topbutton_cpanel_small">
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div id="linked_tos">
+                                            {if isset($download_tos)}	
+                                                <div class="user_details_row" id="download_details_row">
+                                                    <div class="user_details_text" id="download_details_text">Linked TOS</div>	
+                                                    <div class="user_details_input" id="download_details_input">
+                                                        <table class="table_game_list" id="game_list_table" style="width:100%;border: solid 1px black;margin:auto;">
+                                                        {foreach from=$download_tos item=line}
+                                                        <tr>
+                                                            <td>
+                                                                <b><a href="../downloads/download_tos_edit.php?tos_id='{$line.download_tos_id}'" class="left_nav_link">{$line.download_tos}</a></b> 
+                                                            </td>
+                                                            <td>
+                                                                 <a href="#" onClick="delTos({$line.download_tos_id},{$downloads.game_download_id},{$game.game_id}); return false;"  class="links_addnew_link">Delete</a> 							
+                                                            </td>
+                                                        </tr>
+                                                        {/foreach}
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            {/if}
+                                        </div>
+                                    </fieldset>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                             <div class="game_upload_container">
+                                <div class="game_upload_child" id="gu_child_1">
+                                    <div style="padding-right:20px;">
+                                    <fieldset>
+                                        <legend>Trainer details</legend>
+                                        <div class="user_details_row" id="download_details_row">
+                                            <div class="user_details_text" id="download_details_text">Trainer :</div>
+                                            <div class="user_details_input" id="download_details_input">
+                                                <select name="download_trainer_id" id="download_trainer">
+                                                    <option value="-">-</option>
+                                                    {foreach from=$trainer item=line}
+                                                        <option value="{$line.trainer_id}">{$line.trainer}</option>
+                                                    {/foreach}
+                                                </select>
+                                                <input type="button" name="add_trainer" value="Add" onClick="addTrainer({$downloads.game_download_id},{$game.game_id}); return false;" class="topbutton_cpanel_small">
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div id="linked_trainer">
+                                            {if isset($download_trainer)}	
+                                                <div class="user_details_row" id="download_details_row">
+                                                    <div class="user_details_text" id="download_details_text">Linked trainers</div>	
+                                                    <div class="user_details_input" id="download_details_input">
+                                                        <table class="table_game_list" id="game_list_table" style="width:100%;border: solid 1px black;margin:auto;">
+                                                        {foreach from=$download_trainer item=line}
+                                                        <tr>
+                                                            <td>
+                                                                <b><a href="../downloads/download_trainer_edit.php?trainer_id='{$line.download_trainer_id}'" class="left_nav_link">{$line.download_trainer}</a></b> 
+                                                            </td>
+                                                            <td>
+                                                                 <a href="#" onClick="delTrainer({$line.download_trainer_id},{$downloads.game_download_id},{$game.game_id}); return false;"  class="links_addnew_link">Delete</a> 							
+                                                            </td>
+                                                        </tr>
+                                                        {/foreach}
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            {/if}
+                                        </div>
+                                     </fieldset>
+                                     </div>
+                                    <br>
+                                    <br>
+                                </div>
+                                <div class="game_upload_child" id="gu_child_1">
+                                    <div style="padding-right:20px;">
+                                    <fieldset>
+                                        <legend>Crew details</legend>
+                                        <div class="user_details_row" id="download_details_row">
+                                            <div class="user_details_text" id="download_details_text">Crew :</div>
+                                            <div class="user_details_input" id="download_details_input">
+                                                <select name="crew_id" id="download_crew">
+                                                    <option value="-">-</option>
+                                                    {foreach from=$crew item=line}
+                                                        <option value="{$line.crew_id}">{$line.crew}</option>
+                                                    {/foreach}
+                                                </select>
+                                                <input type="button" name="add_crew" value="Add" onClick="addCrew({$downloads.game_download_id},{$game.game_id}); return false;" class="topbutton_cpanel_small">
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div id="linked_crew">
+                                            {if isset($download_crew)}	
+                                                <div class="user_details_row" id="download_details_row">
+                                                    <div class="user_details_text" id="download_details_text">Linked crews</div>	
+                                                    <div class="user_details_input" id="download_details_input">
+                                                        <table class="table_game_list" id="game_list_table" style="width:100%;border: solid 1px black;margin:auto;">
+                                                        {foreach from=$download_crew item=line}
+                                                        <tr>
+                                                            <td>
+                                                               <b><a href="../crew/crew_editor.php?crewbrowse=&crewsearch=&crew_select={$line.download_crew_id}" class="left_nav_link">{$line.download_crew}</b></a> 
+                                                            </td>
+                                                            <td>
+                                                                 <a href="#" onClick="delCrew({$line.download_crew_id},{$downloads.game_download_id},{$game.game_id}); return false;"  class="links_addnew_link">Delete</a> 							
+                                                            </td>
+                                                        </tr>
+                                                        {/foreach}
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            {/if}
+                                        </div>
+                                    </fieldset>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="game_upload_container">
+                                <div class="game_upload_child" id="gu_child_1">
+                                    <div style="padding-right:20px;">
+                                    <fieldset>
+                                        <legend>Menudisk details</legend>
+                                        <div class="user_details_row" id="download_details_row">
+                                            <div class="user_details_text" id="download_details_text">Menudisk :</div>
+                                            <div class="user_details_input" id="download_details_input">
+                                                <select name="download_menudisk_title_game_id" id="download_menu">
+                                                    <option value="-">-</option>
+                                                    {foreach from=$menudisk item=line}
+                                                        <option value="{$line.menudisk_id}">{$line.menudisk_name}</option>
+                                                    {/foreach}
+                                                </select>
+                                                <input type="button" name="add_menudisk" value="Add" onClick="addMenu({$downloads.game_download_id},{$game.game_id}); return false;" class="topbutton_cpanel_small">
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div id="linked_menudisk">
+                                            {if isset($download_menudisk)}	
+                                                <div class="user_details_row" id="download_details_row">
+                                                    <div class="user_details_text" id="download_details_text">Linked menudisks</div>	
+                                                    <div class="user_details_input" id="download_details_input">
+                                                        <table class="table_game_list" id="game_list_table" style="width:100%;border: solid 1px black;margin:auto;">
+                                                        {foreach from=$download_menudisk item=line}
+                                                        <tr>
+                                                            <td>
+                                                                <b><a href="../menus/menus_disk_list.php?menu_sets_id={$line.menu_sets_id}" class="left_nav_link">{$line.download_menudisk_name}</a></b>  
+                                                            </td>
+                                                            <td>
+                                                                 <a href="#" onClick="delMenu({$line.menu_disk_title_game_id},{$downloads.game_download_id},{$game.game_id}); return false;"  class="links_addnew_link">Delete</a> 							
+                                                            </td>
+                                                        </tr>
+                                                        {/foreach}
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            {/if}
+                                        </div>
+                                     </fieldset>
+                                     </div>
+                                    <br>
+                                    <br>
+                                </div>
+                                <div class="game_upload_child" id="gu_child_1">
+                                   <div style="padding-right:20px;">
+                                    <fieldset>
+                                        <legend>Set details</legend>
+                                        <div class="user_details_row" id="download_details_row">
+                                            <div class="user_details_text" id="download_details_text">Set :</div>
+                                            <div class="user_details_input" id="download_details_input">
+                                                <select name="download_set_id" id="download_set">
+                                                    <option value="-">-</option>
+                                                    {foreach from=$set item=line}
+                                                        <option value="{$line.set_nr}">{$line.set_name}</option>
+                                                    {/foreach}
+                                                </select>
+                                                <br>
+                                                <input type="text" name="download_chain" id="download_chain" value="Nr" class="standard_tile_input_small" style="width:10%">
+                                                <input type="button" name="link_set" value="Link" onClick="linkSet({$downloads.game_download_id},{$game.game_id}); return false;" class="topbutton_cpanel_small">
+                                                <input type="button" name="create_set" value="Create" onClick="createSet({$downloads.game_download_id},{$game.game_id}); return false;" class="topbutton_cpanel_small">
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div id="linked_set">
+                                            {if isset($download_set)}	
+                                                <div class="user_details_row" id="download_details_row">
+                                                    <div class="user_details_text" id="download_details_text">Linked downloads :<br><br></div>	 
+                                                </div>
+                                                <div class="user_details_row" id="download_details_row">
+                                                    <table class="table_game_list" id="game_list_table" style="width:100%;border: solid 1px black;margin:auto;">
+                                                    {foreach from=$download_set item=line}
+                                                    <tr>
+                                                        <td>
+                                                            <b>{$line.set_name}</b>  
+                                                        </td>
+                                                        <td>
+                                                             <a href="#" onClick="delSet({$line.set_id},{$downloads.game_download_id},{$game.game_id}); return false;"  class="links_addnew_link">Delete</a> 							
+                                                        </td>
+                                                    </tr>
+                                                    {/foreach}
+                                                    </table>
+                                                </div>
+                                            {/if}
+                                        </div>
+                                     </fieldset>
+                                     </div>
+                                </div>
+                            </div>
+                            <br>
+                            <div class="game_upload_container">
+                                <div class="game_upload_child" id="gu_child_1">
+                                    <div style="padding-right:20px;">
+                                    <fieldset>
+                                        <legend>Author details</legend>
+                                        <div class="user_details_row" id="download_details_row">
+                                            <form action="" method="post" id="authors_form">
+                                                <div class="user_details_text" id="download_details_text">Individual :</div>
+                                                <div class="user_details_input" id="download_details_input">
+                                                    <select id="quick_search_small_select" name="m1" onchange="browseInd(this.value)">
+                                                        <option value="" SELECTED>-</option>
+                                                        {html_options values=$az_value output=$az_output}
+                                                    </select>
+                                                    <div id="ind_member">
+                                                        <select name="ind_id" id="quick_search_pub_select">
+                                                            <option value="" SELECTED>-</option>
+                                                            {foreach from=$ind_name item=line}
+                                                                <option value="{$line.ind_id}">{$line.ind_name}</option>
+                                                            {/foreach}
+                                                        </select>
+                                                    </div>
+                                                    <select id="author_type_id" name="author_type_id" size="1" style="margin-top:0px;width:185px;">
+                                                        <option value="">-</option>	
+                                                        {foreach from=$author_type item=line}
+                                                            <option value="{$line.author_type_id}">{$line.author_type_info}</option>
+                                                        {/foreach}	
+                                                    </select>
+                                                </div>
+                                                <br>
+                                                <input type="hidden" value="add_author" name="action">
+                                                <input type="hidden" value="{$game_download_id}" name="game_download_id">
+                                                <input type="button" value="Add" onclick="addAuthorstoDownload({$downloads.game_download_id},{$game.game_id})" class="topbutton_cpanel_small">
+                                            </form>
+                                        </div>
+                                     </fieldset>
+                                     </div>
+                                    <br>
+                                    <br>
+                                </div>
+                                <div class="game_upload_child" id="gu_child_1">
+                                   <div style="padding-right:20px;">
+                                        <div id="download_credit_list">	
+                                        {if isset($individuals)}	
+                                            <fieldset>
+                                                <legend>Linked authors</legend>
+                                                <div id="author_list">	
+                                                    <table class="table_game_list" id="game_list_table" style="width:100%;border: solid 1px black;margin:auto;">
+                                                    <tr>
+                                                        <th id="menu_cred_th">Credits</th>
+                                                        <th id="menu_scene_th">"Sceners"</th>
+                                                        <th id="menu_delete_th"></th>
+                                                    </tr>	
+                                                    {foreach name=outer item=individual from=$individuals}	
+                                                        <tr>
+                                                            <td class="menu_cred_td">{$individual.author_type_info}</td>
+                                                            <td class="menu_scene_td"><a href="../individuals/individuals_edit.php?ind_id={$individual.ind_id}" class="standard_table_left">{$individual.ind_name}</a></td>
+                                                            <td class="menu_delete_td" style="text-align:right;">
+                                                                <input type="button" onclick="deleteAuthors({$individual.game_download_ind_id},{$downloads.game_download_id},{$game.game_id},{$individual.ind_id})" class="quick_search_games_button" value="delete" style="margin-right:5px;">
+                                                            </td>
+                                                        </tr>
+                                                    {/foreach}
+                                                    </table>
+                                                </div>
+                                            </fieldset>
+                                        {/if} 
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <div>
+                               <input type="button" onclick="deleteDownload({$downloads.game_download_id},{$game.game_id})" class="topbutton_cpanel_small" value="delete">
+                            </div>                  
+                        </fieldset>
+                    </div>
+				</td>
+			</tr>
+		</table>
+	</td>
+	
+	{if isset($osd_message)}
+		[BRK]{$osd_message}
+	{/if}
+	
+{/if}
+
+
+{* CLOSE EDIT BOX FOR MENU DISKS *}
+{if isset($smarty_action) and $smarty_action == "closeedit_download_box"}
+	<tr id="downloadedit_ajax_{$line.game_download_id}">
+        <td class="menu_disk_list_td">{if $downloads.filename != ''}<a onclick="editDownload({$downloads.game_download_id},{$downloads.game_id})" style="cursor: pointer;">{$downloads.filename}</a>{else}<i>n/a</i>{/if}</td>
+        <td class="menu_list_crew_td" style="text-align:right; padding-right:5px;">{if isset($downloads.date)}{$downloads.date}{else}<i>n/a</i>{/if}</td>
+    </tr>
+{/if}
+
+{* POP FOR OPTIONS UPDATE *}
+{if isset($smarty_action) and $smarty_action == "update_options"}
+	{if isset($download_options)}	
+    <div class="user_details_row" id="download_details_row">
+        <div class="user_details_text" id="download_details_text">Linked options</div>	
+        <div class="user_details_input" id="download_details_input">
+            <table class="table_game_list" id="game_list_table" style="width:100%;border: solid 1px black;margin:auto;">
+            {foreach from=$download_options item=line}
+            <tr>
+                <td>
+                    <b><a href="../downloads/download_options_edit.php?option_id='{$line.download_options_id}'" class="left_nav_link">{$line.download_option}</a></b> 
+                </td>
+                <td>
+                    <a href="#" onClick="delOption({$line.download_options_id},{$game_download_id},{$game_id}); return false;"  class="links_addnew_link">Delete</a> 	
+                </td>
+            </tr>
+            {/foreach}
+            </table>
+        </div>
+    </div>
+    {/if}
+
+    {if isset($osd_message)}
+		[BRK]{$osd_message}
+	{/if}
+    
+{/if}
+
+{* POP FOR TOS UPDATE *}
+{if isset($smarty_action) and $smarty_action == "update_tos"}
+	{if isset($download_tos)}	
+    <div class="user_details_row" id="download_details_row">
+        <div class="user_details_text" id="download_details_text">Linked TOS</div>	
+        <div class="user_details_input" id="download_details_input">
+            <table class="table_game_list" id="game_list_table" style="width:100%;border: solid 1px black;margin:auto;">
+            {foreach from=$download_tos item=line}
+            <tr>
+                <td>
+                     <b><a href="../downloads/download_tos_edit.php?tos_id='{$line.download_tos_id}'" class="left_nav_link">{$line.download_tos}</a></b> 
+                </td>
+                <td>
+                    <a href="#" onClick="delTos({$line.download_tos_id},{$game_download_id},{$game_id}); return false;"  class="links_addnew_link">Delete</a> 	
+                </td>
+            </tr>
+            {/foreach}
+            </table>
+        </div>
+    </div>
+    {/if}  
+    
+    {if isset($osd_message)}
+		[BRK]{$osd_message}
+	{/if}
+    
+{/if}
+
+{* POP FOR TRAINER UPDATE *}
+{if isset($smarty_action) and $smarty_action == "update_trainer"}
+	{if isset($download_trainer)}	
+    <div class="user_details_row" id="download_details_row">
+        <div class="user_details_text" id="download_details_text">Linked trainers</div>	
+        <div class="user_details_input" id="download_details_input">
+            <table class="table_game_list" id="game_list_table" style="width:100%;border: solid 1px black;margin:auto;">
+            {foreach from=$download_trainer item=line}
+            <tr>
+                <td>
+                    <b><a href="../downloads/download_trainer_edit.php?trainer_id='{$line.download_trainer_id}'" class="left_nav_link">{$line.download_trainer}</a></b> 
+                </td>
+                <td>
+                     <a href="#" onClick="delTrainer({$line.download_trainer_id},{$game_download_id},{$game_id}); return false;"  class="links_addnew_link">Delete</a> 							
+                </td>
+            </tr>
+            {/foreach}
+            </table>
+        </div>
+    </div>
+    {/if}   
+    
+    {if isset($osd_message)}
+		[BRK]{$osd_message}
+	{/if}
+    
+{/if}
+
+{* POP FOR CREW UPDATE *}
+{if isset($smarty_action) and $smarty_action == "update_crew"}
+	{if isset($download_crew)}	
+    <div class="user_details_row" id="download_details_row">
+        <div class="user_details_text" id="download_details_text">Linked crews</div>	
+        <div class="user_details_input" id="download_details_input">
+            <table class="table_game_list" id="game_list_table" style="width:100%;border: solid 1px black;margin:auto;">
+            {foreach from=$download_crew item=line}
+            <tr>
+                <td>
+                    <b><a href="../crew/crew_editor.php?crewbrowse=&crewsearch=&crew_select={$line.download_crew_id}" class="left_nav_link">{$line.download_crew}</a></b>
+                </td>
+                <td>
+                     <a href="#" onClick="delCrew({$line.download_crew_id},{$game_download_id},{$game_id}); return false;"  class="links_addnew_link">Delete</a> 							
+                </td>
+            </tr>
+            {/foreach}
+            </table>
+        </div>
+    </div>
+    {/if}   
+    
+    {if isset($osd_message)}
+		[BRK]{$osd_message}
+	{/if}
+    
+{/if}
+
+{* POP FOR MENUDISK UPDATE *}
+{if isset($smarty_action) and $smarty_action == "update_menudisk"}
+    {if isset($download_menudisk)}	
+        <div class="user_details_row" id="download_details_row">
+            <div class="user_details_text" id="download_details_text">Linked menudisks</div>	
+            <div class="user_details_input" id="download_details_input">
+                <table class="table_game_list" id="game_list_table" style="width:100%;border: solid 1px black;margin:auto;">
+                {foreach from=$download_menudisk item=line}
+                <tr>
+                    <td>
+                        <b><a href="../menus/menus_disk_list.php?menu_sets_id={$line.menu_sets_id}" class="left_nav_link">{$line.download_menudisk_name}</a></b> 
+                    </td>
+                    <td>
+                        <a href="#" onClick="delMenu({$line.menu_disk_title_game_id},{$game_download_id},{$game_id}); return false;"  class="links_addnew_link">Delete</a> 									
+                    </td>
+                </tr>
+                {/foreach}
+                </table>
+            </div>
+        </div>
+    {/if}
+    
+    {if isset($osd_message)}
+		[BRK]{$osd_message}
+	{/if}
+    
+{/if}
+
+{* POP FOR SET UPDATE *}
+{if isset($smarty_action) and $smarty_action == "update_set"}
+    {if isset($download_set)}	
+        <div class="user_details_row" id="download_details_row">
+            <div class="user_details_text" id="download_details_text">Linked downloads :<br><br></div>	 
+        </div>
+        <div class="user_details_row" id="download_details_row">
+            <table class="table_game_list" id="game_list_table" style="width:100%;border: solid 1px black;margin:auto;">
+            {foreach from=$download_set item=line}
+            <tr>
+                <td>
+                    <b>{$line.set_name}</b>  
+                </td>
+                <td>
+                     <a href="#" onClick="delSet({$line.set_id},{$game_download_id},{$game_id}); return false;"  class="links_addnew_link">Delete</a> 							
+                </td>
+            </tr>
+            {/foreach}
+            </table>
+        </div>
+    {/if}
+    
+    {if isset($osd_message)}
+		[BRK]{$osd_message}
+	{/if}
+    
+{/if}
+
+
+{* POP FOR SET INDIVIDUALS *}
+{if isset($smarty_action) and $smarty_action == "update_individuals"}
+    {if isset($individuals)}	
+        <fieldset>
+            <legend>Linked authors</legend>
+            <div id="author_list">	
+                <table class="table_game_list" id="game_list_table" style="width:100    %;border: solid 1px black;margin:auto;">
+                <tr>
+                    <th id="menu_cred_th">Credits</th>
+                    <th id="menu_scene_th">"Sceners"</th>
+                    <th id="menu_delete_th"></th>
+                </tr>	
+                {foreach name=outer item=individual from=$individuals}	
+                    <tr>
+                        <td class="menu_cred_td">{$individual.author_type_info}</td>
+                        <td class="menu_scene_td"><a href="../individuals/individuals_edit.php?ind_id={$individual.ind_id}" class="standard_table_left">{$individual.ind_name}</a></td>
+                        <td class="menu_delete_td" style="text-align:right;">
+                            <input type="button" onclick="deleteAuthors({$individual.game_download_ind_id},{$game_download_id},{$game_id},{$individual.ind_id})" class="quick_search_games_button" value="delete" style="margin-right:5px;">
+                        </td>
+                    </tr>
+                {/foreach}
+                </table>
+            </div>
+        </fieldset>
+    {/if} 
+    {if isset($osd_message)}
+		[BRK]{$osd_message}
+	{/if}
+{/if}
+
+
+{* This is the Ind browse *}
+{if isset($smarty_action) and $smarty_action == "ind_gen_browse"}
+	<select id="ind_id" name="ind_id">
+		{foreach from=$author_type item=line}
+			<option value="{$line.ind_id}">{$line.ind_name}</option>
+		{/foreach}
+	</select>
+{/if}
+
+
+{* POP FOR DOWNLOAD DETAILS *}
+{if isset($smarty_action) and $smarty_action == "update_details"}
+    <div class="game_upload_container">       
+        <div class="game_upload_child" id="gu_child_1">
+            <div class="user_details_row">
+                <div class="user_details_text">Version :</div>
+                <div class="user_details_input"><input type="text" name="version" class="standard_tile_input_small" value="{$download_details.version}" id="download_version"></div>
+            </div>
+            <div class="user_details_row">
+                <div class="user_details_text" style="vertical-align:top;">info :</div>
+                <div class="user_details_input"><textarea class="standard_tile_input_area" name="info" id="download_info" style="width:185px;height:80px;">{$download_details.info}</textarea></div>
+            </div>
+        </div>
+         <div class="game_upload_child" id="gu_child_2">		
+            <div class="user_details_row">
+                <div class="user_details_text">Set Format :</div>		
+                <div class="user_details_input">
+                    <select name="format_id" id="download_format">
+                        <option value="">-</option>
+                        {if isset($format_id)}
+                            {html_options values=$format_id output=$format selected=$download_format}
+                        {/if}
+                    </select>
+                </div>
+            </div>
+            <div class="user_details_row">
+                <div class="user_details_text">Set lingo :</div>		
+                <div class="user_details_input">
+                    <select name="language_id" id="download_language">
+                        <option value="">-</option>
+                        {if isset($lingo_id)}
+                            {html_options values=$lingo_id output=$lingo_name selected=$download_lingo}
+                        {/if}
+                    </select>
+                </div>
+            </div>
+            <div class="user_details_row">
+                <div class="user_details_text">Set Intro :</div>		
+                <div class="user_details_input">
+                    <select name="demo_id" id="download_intro">
+                        <option value="-">-</option>
+                        {if isset($demo_id)}
+                            {html_options values=$demo_id output=$demo_name selected=$download_demo}
+                        {/if}
+                    </select>
+                </div>
+            </div>
+            <br>
+            <br>
+            <div class="user_details_row">
+                <div class="user_details_text"></div>	
+                <div style="text-align:right">
+                <div class="user_details_input">
+                    <input type="button" name="modify_download" value="Modify" onClick="modDownload ({$downloads.game_download_id},{$game.game_id}); return false;" class="topbutton_cpanel_small">
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    {if isset($osd_message)}
+		[BRK]{$osd_message}
+	{/if}
+    
+{/if}

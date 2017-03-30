@@ -1,0 +1,39 @@
+//*************************************************************/
+//**********************TOS SKIN****************************/
+//*************************************************************/
+//*************************************************************/
+//****************CPanel DOWNLOAD section css****************/
+//*************************************************************/
+
+// DOWNLOAD edit section
+// *********************
+
+#download_format
+{ @extend #quick_search_pub_select;}
+
+#download_language
+{ @extend #quick_search_pub_select;}
+
+#download_trainer
+{ @extend #quick_search_pub_select;}
+
+#download_option {
+    @extend #small_select;
+}
+
+#download_tos {
+    @extend #small_select;
+}
+
+#download_crew
+{ @extend #quick_search_pub_select;}
+
+#download_intro
+{ @extend #quick_search_pub_select;}
+
+#download_menu
+{ @extend #quick_search_pub_select;}
+
+#download_set
+{ @extend #quick_search_pub_select; 
+  width:100%;}
