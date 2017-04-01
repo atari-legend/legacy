@@ -20,7 +20,7 @@
     <h1>USER SEARCH</h1>
     <div class="standard_tile_line"></div>
     <br>
-    <form action="" id="user_search" name="user_search" >
+    <form id="user_search" name="user_search" action="../administration/user_management.php">
         <div class="standard_table_center">
             <h3>User search options:</h3>   <br>
             <div class="standard_table_center">
@@ -122,7 +122,8 @@
                 </div>
             </div>
             <br>
-            <input type="hidden" name="action" id="action_ajax_search" value="users">
+            <input type="hidden" name="action" id="action_ajax_search" value="quick_search_users">
+            <input type="submit" value="Search" class="quick_search_games_button">
             <br><br>
             <hr>
         </div>

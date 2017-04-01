@@ -75,9 +75,9 @@ mysqli_free_result($query);
 
 
 // START - NUMBER OF SUBMISSIONS BY USER
-$sql           = $mysqli->query("SELECT * FROM game_submitinfo
-                    LEFT JOIN game ON (game_submitinfo.game_id = game.game_id)
-                    WHERE user_id = $user_id_selected");
+$sql = $mysqli->query("SELECT * FROM game_submitinfo
+                       LEFT JOIN game ON (game_submitinfo.game_id = game.game_id)
+                       WHERE user_id = $user_id_selected");
 $nr_submission = 0;
 while ($query = $sql->fetch_array(MYSQLI_BOTH)) {
     $nr_submission++;
