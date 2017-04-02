@@ -143,7 +143,7 @@ if ( isset($action) and $action == 'quick_search_users' )
         } else {
             $last_visit = "Unknown";
         }
-
+                  
         $smarty->append('users', array(
             'user_id' => $query_users['user_id'],
             'user_name' => $query_users['userid'],
@@ -225,6 +225,11 @@ else
     $time_elapsed_secs = microtime(true) - $start;
     $smarty->assign("query_time", $time_elapsed_secs);
 }
+
+//get all the user accounts
+$query_number = $mysqli->query("SELECT email FROM users") or die("Couldn't get the total number of users");
+$v_rows = $query_number->num_rows;
+$smarty->assign('nr_users_total', $v_rows);
 
 //Send all smarty variables to the templates
 $smarty->display("file:" . $cpanel_template_folder . "user_management.html");

@@ -105,4 +105,4 @@ if ((isset($action) and $action == "deactivate_user")) {
     }
 }
 
-header("Location: ../administration/user_management.php");
+header("Location: ../user/user_management.php");

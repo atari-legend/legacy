@@ -198,23 +198,26 @@
 //*----------------------------------------------------------
 //User details
 //------------------------------------------------------------ */
-@media screen and (max-width: 1050px) {
-    .user_details_container {
-        flex-direction: column;
+@media screen and (max-width: 1280px) {
+    #child_1_user,
+    #child_2_user {
+        width: 100%;
     }
 }
 
-@media screen and (max-width: 1280px) {
-    #child_1,
-    #child_2 {
-        width: 100%;
-    }
+@media screen and (max-width: 1050px) {
+    .user_details_container {flex-direction: column;}
+    #user_details_input{width: 75%;}
+    #child_1_user, #child_2_user {margin-left: 5%;}
+    #child_1_user{margin-bottom: 5px;}
 }
 
 @media screen and (max-width: 480px) {
     .user_details_text {width: 50%;display: inline;}
     .user_details_input {width: 50%;display: inline;}
-    .user_details_row {width: 50%;}
+    .user_details_row {width: 100%;}
+    #user_details_input{width: 90%;}
+    #child_1_user{margin-bottom: 5px;}
 }
 
 //*----------------------------------------------------------
@@ -247,10 +250,13 @@
 @media screen and (max-width: 600px) {
     .lastvisit_th {display: none;}
     .lastvisit_td {display: none;}
-    .joindate_td {display: none;}
-    .joindate_th {display: none;}
     #usersearch td {text-align: center;}
     #usersearch th {text-align: center;}
+}
+
+@media screen and (max-width: 450px) {
+    .joindate_th {display: none;}
+    .joindate_td {display: none;}
 }
 
 //*----------------------------------------------------------

@@ -58,48 +58,49 @@ function user_stats()
 			<legend>User details</legend>
 			<form action="../user/db_user.php?action=modify_user&amp;user_id_selected={$users.user_id}" method="post" name="user" id="user">
 			<div class="user_details_container">
-				<div class="user_details_child" id="child_1">
+				<div class="user_details_child" id="child_1_user">
 					<div class="user_details_row">
 						<div class="user_details_text">User name :</div>
-						<div class="user_details_input"><input type="text" name="user_name"  maxlength="60" value="{$users.user_name}" class="standard_tile_input_small"></div>
+						<div class="user_details_input"><input type="text" name="user_name"  maxlength="60" value="{$users.user_name}" class="standard_tile_input_small" id="user_details_input"></div>
 					</div>
 					<div class="user_details_row">
 						<div class="user_details_text">User email :</div>
-						<div class="user_details_input"><input type="text" name="user_email"  maxlength="255" value="{$users.user_email}" class="standard_tile_input_small"></div>
+						<div class="user_details_input"><input type="text" name="user_email"  maxlength="255" value="{$users.user_email}" class="standard_tile_input_small" id="user_details_input"></div>
 					</div>
 					<div class="user_details_row">
 						<div class="user_details_text">User website :</div>
-						<div class="user_details_input"><input type="text" name="user_website"  maxlength="255" value="{$users.user_website}" class="standard_tile_input_small"></div>
+						<div class="user_details_input"><input type="text" name="user_website"  maxlength="255" value="{$users.user_website}" class="standard_tile_input_small" id="user_details_input"></div>
 					</div>
 					<div class="user_details_row">
 						<div class="user_details_text">User MSNM :</div>
-						<div class="user_details_input"><input type="text" name="user_msnm"  maxlength="255" value="{$users.user_msnm}" class="standard_tile_input_small"></div>
+						<div class="user_details_input"><input type="text" name="user_msnm"  maxlength="255" value="{$users.user_msnm}" class="standard_tile_input_small" id="user_details_input"></div>
 					</div>
 					<div class="user_details_row">
 						<div class="user_details_text">Inactive :</div>
 						<div class="user_details_input"><input type="checkbox" name="user_inactive" value="1" maxlength="255" class="quick_search_check" {if $users.inactive == '1'} checked {/if}></div>
 					</div>
 				</div>
-				<div class="user_details_child" id="child_2">
+                <div class="user_details_child" id="child_3_user"></div>
+				<div class="user_details_child" id="child_2_user">
 					<div class="user_details_row">
 						<div class="user_details_text">User pwd :</div>
 						{if $users.user_pwd ==! ''}
 							<div class="user_details_input"><input type="button" value="reset" class="topbutton_cpanel_small" onClick="reset_pwd();"></div>
 						{else}
-							<div class="user_details_input"><input type="text" name="user_pwd"  maxlength="255" class="standard_tile_input_small"></div>
+							<div class="user_details_input"><input type="text" name="user_pwd"  maxlength="255" class="standard_tile_input_small" id="user_details_input"></div>
 						{/if}
 					</div>
 					<div class="user_details_row">	
 						<div class="user_details_text">User permission :</div>
-						<div class="user_details_input"><input type="text" name="user_permission"  maxlength="60" value="{$users.user_permission}" class="standard_tile_input_small"></div>
+						<div class="user_details_input"><input type="text" name="user_permission"  maxlength="60" value="{$users.user_permission}" class="standard_tile_input_small" id="user_details_input"></div>
 					</div>
 					<div class="user_details_row">	
 						<div class="user_details_text">User ICQ :</div>
-						<div class="user_details_input"><input type="text" name="user_icq"  maxlength="255" value="{$users.user_icq}" class="standard_tile_input_small"></div>
+						<div class="user_details_input"><input type="text" name="user_icq"  maxlength="255" value="{$users.user_icq}" class="standard_tile_input_small" id="user_details_input"></div>
 					</div>
 					<div class="user_details_row">
 						<div class="user_details_text">User AIM :</div>
-						<div class="user_details_input"><input type="text" name="user_aim"  maxlength="255" value="{$users.user_aim}" class="standard_tile_input_small"></div>
+						<div class="user_details_input"><input type="text" name="user_aim"  maxlength="255" value="{$users.user_aim}" class="standard_tile_input_small" id="user_details_input"></div>
 					</div>
 				</div>
 			</div>
