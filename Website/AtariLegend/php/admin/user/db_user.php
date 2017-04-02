@@ -10,6 +10,7 @@
  *   Id: db_user.php,v 1.01 2015/12/21 ST Graveyard - Added messages
  *                          - Added more SQL statements
  *   Id: db_user.php,v 1.02 2016/08/19 ST Graveyard - Added Change log
+ *   Id: db_user.php,v 1.03 2017/04/02 ST Graveyard - Added real escape when updating username
  *
  ***************************************************************************/
 
@@ -99,7 +100,10 @@ if (isset($action) and $action == 'reset_pwd') {
 if (isset($action) and $action == 'modify_user') {
 
     if (isset($user_pwd) && $user_pwd != '') {
+        
         $md5pass = md5($user_pwd);
+        $user_name = $mysqli->real_escape_string($user_name);
+        
         if (isset ($user_inactive))
         {
             $mysqli->query("UPDATE users SET userid='$user_name', password='$md5pass', email='$user_email', permission='$user_permission', user_website='$user_website', user_icq='$user_icq', user_msnm='$user_msnm', user_aim='$user_aim', inactive='$user_inactive' WHERE user_id='$user_id_selected'");
@@ -112,6 +116,9 @@ if (isset($action) and $action == 'modify_user') {
 
         create_log_entry('Users', $user_id_selected, 'User', $user_id_selected, 'Update', $_SESSION['user_id']);
     } else {
+        
+        $user_name = $mysqli->real_escape_string($user_name);
+        
         if (isset ($user_inactive))
         {
             $mysqli->query("UPDATE users SET userid='$user_name', email='$user_email', permission='$user_permission', user_website='$user_website', user_icq='$user_icq', user_msnm='$user_msnm', user_aim='$user_aim', inactive='$user_inactive' WHERE user_id='$user_id_selected'");

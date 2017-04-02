@@ -279,7 +279,7 @@ function UserModify() {
     // });
 
     document.getElementById('user_list').method="post";
-    document.getElementById('user_list').action="../administration/db_user_management.php?action=delete_user";
+    document.getElementById('user_list').action="../user/db_user_management.php?action=delete_user";
     document.getElementById('user_list').submit();
 }
 
@@ -307,7 +307,7 @@ function EmailSent(){
             "Email user(s)": function() {
             $( this ).dialog( "close" );
             document.getElementById('user_list').method="post";
-            document.getElementById('user_list').action="../administration/db_user_management.php?action=email_user";
+            document.getElementById('user_list').action="../user/db_user_management.php?action=email_user";
             document.getElementById('user_list').submit();
             },
             Cancel: function() {
@@ -343,12 +343,32 @@ function EmailSent(){
   Email users?</p>
 </div>
 <div class="standard_tile" id="user_management">
+    <div class="help-tip">
+		<p> 
+            Use the search tile on the left to make a user query. You also have the following 'mass' options : <br>
+            <b><u>Deleting users</u></b> - You can only delete users if all the 'No' checks are activated in your search.<br>
+            <b><u>Email users</u></b> - You can only email users if the 'with email' check is activated in your search.
+            <br><br>
+            Each user gets KARMA points. This is a system to check which people are actually usefull to AL, and which just created an account to download stuff. 
+            When somebody adds a comment, a review, a hint ... Karma points are rewarded. When somebody downloads stuff from the site, you will loose karma. To update the user
+            db karma points, press the link below. Keep in mind this can take some time.
+            This is the current Karma system : 
+            <br>- 5pts / game downloads
+            <br>+ 5pts / game comment
+            <br>+ 10pts / game submission
+            <br>+ 3pts / weblink
+            <br>+ 15pts / news update
+            <br>+ 50pts / game review
+        </p>
+	</div>
     <h1>USER MANAGEMENT</h1>
     <div class="standard_tile_line"></div>
     <div class="standard_tile_text">
         <div class="left_nav_section">
-            Deleting users - You can only delete users if all the 'No' checks are activated in your search.<br>
-            Email users - You can only email users if the 'with email' check is activated in your search.
+            This is the user area. Overhere you can maintain user accounts of the AL website! There are currently 
+			<b>{$nr_users_total}</b> users in the DB.
+            <br><br>      
+            <div class="centered_fieldset"><a href="../user/karma_sync.php" class="standard_tile_link_cpanel" onclick="SyncKarma(); return false;">Karma Re-Sync</a></div>
         </div>
         <br>
         <form action="test" name="user_list" id="user_list">
@@ -373,7 +393,7 @@ function EmailSent(){
                 </tr>
                 {/foreach}
                 {else}
-                <div class="left_nav_section">No users found</div>
+                    <div class="left_nav_section">No users found</div>
                 {/if}
                 {if isset($nr_users)}
                 <tr>
