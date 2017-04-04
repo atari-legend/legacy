@@ -345,6 +345,33 @@ img { display: block; }
     text-align: center;
 }
 
+#file-upload{
+    display: none;
+}
+
+.file_upload {
+    width: 80px;
+    height: 25px;
+    font-size: 10pt;
+    color: #fff;
+    cursor: pointer;
+    background: #122323;
+    border: 0;
+    border-bottom: 3px solid #122323;
+    border-left: 1px solid #122323;
+    padding: 3px 10px; 
+}
+
+.file_upload:hover {
+    color: #fff;
+    background: #006f6f;
+    border-bottom: 3px solid #122323;
+}
+
+.selected{
+    font-weight:bold;
+}
+
 //*------------------------------------------------------------
 //Standard table settings
 //-------------------------------------------------------------*/

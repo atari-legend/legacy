@@ -20,6 +20,16 @@ User detail page. Overhere you can maintain the log on data of a user and have a
 {extends file='1/admin/frontpage.html'}
 {block name=java_script}
 <script type="text/javascript">
+$(function() {    
+    $but = $('#file-upload-value');
+    
+    $("input:file[id=file-upload]").change(function() {
+        document.getElementById('file-upload-value').firstChild.data = 'File selected';
+       
+        $but.addClass('selected');
+    });
+});
+
 function delete_user() 
 {
 	document.getElementById('user').method="post";
@@ -44,6 +54,9 @@ function user_stats()
 {/block}
 {block name=main_tile}
 <div class="standard_tile" id="user_details">
+    <div class="help-tip">
+        <p>Tip : To upload an avatar, click on 'select file'. Once the file is selected, just press the upload button.</p>
+    </div>
 	<h1>USER DETAILS</h1>
 	<div class="standard_tile_line"></div>
 	<div class="standard_tile_text">
@@ -117,13 +130,14 @@ function user_stats()
 		<br/><br/>
 		<fieldset>
 			<legend>Avatar</legend>
+                
 			{if $users.avatar_ext !=''}
 				<form action="../user/db_user.php?action=delete_avatar&amp;user_id_selected={$users.user_id}" method="post" name="delete_avatar">
 				Delete Image?
 				<div>
 					<br><img src="../../includes/show_image.php?file={$users.image}&amp;resize=160,null,null,null" alt="Avatar" class="user_stats_img" id="user_details_img_dark">
 				</div>
-				<br><br>
+				<br>
 				<input type="hidden" name="user_id_selected" value="{$users.user_id}">
 				<input type="submit" value="Delete" class="topbutton_cpanel_small">
 				</form>
@@ -131,7 +145,10 @@ function user_stats()
 				<form enctype="multipart/form-data" action="../user/db_user.php?user_id_selected={$users.user_id}" method="post" name="avatar" id="avatar">
 					Attach image
 				<br><br>
-				<input type="file" name="image">
+				<label for="file-upload" class="file_upload">Select file</label>
+                <input id="file-upload" type="file" name="image">
+                <span id="file-upload-value">&nbsp;</span>
+                <br><br>
 				<input type="submit" name="Modify" value="Upload" class="topbutton_cpanel_small">
 				<input type="hidden" name="MAX_FILE_SIZE" value="50000">
 				<input type="hidden" name="user_id_selected" value="{$users.user_id}">

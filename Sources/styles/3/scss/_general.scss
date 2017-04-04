@@ -344,6 +344,33 @@ img {display: block; }
     text-align: center;
 }
 
+#file-upload{
+    display: none;
+}
+
+.file_upload {
+    width: 80px;
+    height: 25px;
+    margin-left: 2px;
+    font-size: 10pt;
+    color: #000;
+    cursor: pointer;
+    background: #dbd7d1;
+    border: 1px solid #000;
+    border-radius: 0 15px 15px 0;
+    padding: 4px 10px; 
+}
+
+.file_upload:hover {
+    color: #fff;
+    background: $bg-color;
+    border: 1px solid #4f4f4f;
+}
+
+.selected{
+    font-weight:bold;
+}
+
 //*------------------------------------------------------------
 //Standard table settings
 //-------------------------------------------------------------*/
@@ -401,7 +428,7 @@ img {display: block; }
 }
 
 .standard_table_center {
-    font-size: 11pt;
+    font-size: 12pt;
     font-weight: 100;
     color: #000;
     text-align: center;
@@ -409,7 +436,7 @@ img {display: block; }
 
 .standard_table_left {
     padding-left: 2px;
-    font-size: 11pt;
+    font-size: 12pt;
     font-weight: 100;
     color: #000;
     text-align: left;
@@ -417,7 +444,7 @@ img {display: block; }
 
 .standard_table_right {
     padding-right: 2px;
-    font-size: 11pt;
+    font-size: 12pt;
     font-weight: 100;
     color: #000;
     text-align: right;
