@@ -339,6 +339,34 @@ a.standard_tile_link:focus {
     text-align: center;
 }
 
+#file-upload{
+    display: none;
+}
+
+.file_upload {
+    width: 80px;
+    height: 25px;
+    font-size: 15px;
+    color: #182727;
+    text-shadow: -1px 1px 5px #fff, 1px -1px 15px #acacac;
+    cursor: pointer;
+    background: #fff;
+    border: 0;
+    border-bottom: 3px solid #000;
+    border-left: 1px solid #000;
+    padding: 4px 10px; 
+}
+
+.file_upload:hover {
+    color: #fff;
+    background: #000;
+    border-bottom: 3px solid #000;
+}
+
+.selected{
+    font-weight:bold;
+}
+
 //*------------------------------------------------------------
 //Standard table settings
 //-------------------------------------------------------------*/

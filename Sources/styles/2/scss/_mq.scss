@@ -230,7 +230,7 @@
 @media screen and (max-width: 1050px) {
     .user_details_container {flex-direction: column;}
     #user_details_input{width: 75%;}
-    #child_1_user, #child_2_user {margin-left: 5%;}
+    #child_1_user, #child_2_user {margin-left: 3%;}
     #child_1_user{margin-bottom: 5px;}
 }
 
@@ -277,9 +277,17 @@
 //Links addnew
 //------------------------------------------------------------ */
 @media screen and (max-width: 480px) {
-    .links_addnew_text {display: inline;}
-    .links_addnew_input {display: inline;}
-    .links_addnew_row {width: 50%;}
+    .links_addnew_text {
+        width: 100%;
+        display: block;
+    }
+
+    .links_addnew_input {
+        width: 100%;
+        display: block;
+    }
+
+    .links_addnew_row {width: 100%;}
 }
 
 

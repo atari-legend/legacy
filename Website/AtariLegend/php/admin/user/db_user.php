@@ -52,20 +52,24 @@ if (isset($action) and $action == 'avatar_upload') {
             $mysqli->query("UPDATE users SET avatar_ext='$ext' WHERE user_id='$user_id_selected'");
             $file_data = rename("$tmp_name", "$user_avatar_save_path$user_id_selected.$ext");
             chmod("$user_avatar_save_path$user_id_selected.$ext", 0777);
+            
+             // check for size specs
+            $imginfo = getimagesize("$user_avatar_save_path$user_id_selected.$ext") or die("getimagesize not working");
+            $width  = $imginfo[0];
+            $height = $imginfo[1];
+
+            if ($width < 101 and $height < 101) {
+                $_SESSION['edit_message'] = "Avatar added";
+                create_log_entry('Users', $user_id_selected, 'Avatar', $user_id_selected, 'Insert', $_SESSION['user_id']);
+            } else {
+                $_SESSION['edit_message'] = "Upload failed due to not confirming to specs - width and height must be 100px wide max";
+                $mysqli->query("UPDATE users SET avatar_ext='' WHERE user_id='$user_id_selected'");
+                unlink("$user_avatar_save_path$user_id_selected.$ext");
+            }
         }
-
-        // check for size specs
-        $imginfo = getimagesize("$user_avatar_save_path$user_id_selected.$ext") or die("getimagesize not working");
-        $width  = $imginfo[0];
-        $height = $imginfo[1];
-
-        if ($width < 101 and $height < 101) {
-            $_SESSION['edit_message'] = "Avatar added";
-            create_log_entry('Users', $user_id_selected, 'Avatar', $user_id_selected, 'Insert', $_SESSION['user_id']);
-        } else {
-            $_SESSION['edit_message'] = "Upload failed due to not confirming to specs.";
-            $mysqli->query("UPDATE users SET avatar_ext='' WHERE user_id='$user_id_selected'");
-            unlink("$user_avatar_save_path$user_id_selected.$ext");
+        else
+        {
+            $_SESSION['edit_message'] = "Please upload only files with extension png, jpg or gif";
         }
     }
 }
