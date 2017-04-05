@@ -119,7 +119,13 @@ function user_stats()
 			</div>
 			<table>	
 			<tr>
-				<td><br><br><input type="submit" value="Modify" class="topbutton_cpanel_small"></td>
+				<td><br><br>
+                {if $users.user_pwd ==! ''}
+                    <input type="submit" value="Modify" class="topbutton_cpanel_small">
+                {else}
+                   <input type="button" value="Modify" class="topbutton_cpanel_small" onclick="formhash(this.form, this.form.user_pwd);">
+                {/if}
+                </td>
 				<td><br><br><input type="button" value="Delete" onClick="delete_user();" class="topbutton_cpanel_small"></td>
 				<td><br><br><input type="button" value="Statistics" onClick="user_stats();" class="topbutton_cpanel_small"></td>
 				<td><br><br><input type="hidden" name="user_id_selected" value="{$users.user_id}" class="topbutton_cpanel_small"></td>
