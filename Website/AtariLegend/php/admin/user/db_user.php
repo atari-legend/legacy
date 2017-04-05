@@ -92,7 +92,7 @@ if (isset($action) and $action == "delete_avatar") {
 // reset pwd
 //****************************************************************************************
 if (isset($action) and $action == 'reset_pwd') {
-    $mysqli->query("UPDATE users SET password='' WHERE user_id='$user_id_selected'");
+    $mysqli->query("UPDATE users SET password='', sha512_password = '', salt = '' WHERE user_id='$user_id_selected'");
     $_SESSION['edit_message'] = "Password reset";
 
     create_log_entry('Users', $user_id_selected, 'User', $user_id_selected, 'Update', $_SESSION['user_id']);
@@ -102,19 +102,22 @@ if (isset($action) and $action == 'reset_pwd') {
 // modify user
 //****************************************************************************************
 if (isset($action) and $action == 'modify_user') {
-
-    if (isset($user_pwd) && $user_pwd != '') {
-        
-        $md5pass = md5($user_pwd);
+    
+    if (isset($_POST['pmd5']) &&  $_POST['pmd5'] != '' && isset($_POST['p']) && $_POST['p'] != '' ) {
+      
         $user_name = $mysqli->real_escape_string($user_name);
-        
+        $md5pass = $_POST['pmd5']; // The md5 hashed password.
+        $sha512 = $_POST['p']; // The hashed password.
+        $random_salt = hash('sha512', uniqid(mt_rand(1, mt_getrandmax()), true));//create random salt
+        $update_password = hash('sha512', $sha512 . $random_salt); // Create salted password
+    
         if (isset ($user_inactive))
         {
-            $mysqli->query("UPDATE users SET userid='$user_name', password='$md5pass', email='$user_email', permission='$user_permission', user_website='$user_website', user_icq='$user_icq', user_msnm='$user_msnm', user_aim='$user_aim', inactive='$user_inactive' WHERE user_id='$user_id_selected'");
+            $mysqli->query("UPDATE users SET userid='$user_name', password='$md5pass', sha512_password='$update_password', salt='$random_salt', email='$user_email', permission='$user_permission', user_website='$user_website', user_icq='$user_icq', user_msnm='$user_msnm', user_aim='$user_aim', inactive='$user_inactive' WHERE user_id='$user_id_selected'");
         }
         else
         {
-            $mysqli->query("UPDATE users SET userid='$user_name', password='$md5pass', email='$user_email', permission='$user_permission', user_website='$user_website', user_icq='$user_icq', user_msnm='$user_msnm', user_aim='$user_aim', inactive=' ' WHERE user_id='$user_id_selected'");
+            $mysqli->query("UPDATE users SET userid='$user_name', password='$md5pass', sha512_password='$update_password', salt='$random_salt', email='$user_email', permission='$user_permission', user_website='$user_website', user_icq='$user_icq', user_msnm='$user_msnm', user_aim='$user_aim', inactive=' ' WHERE user_id='$user_id_selected'");
         }
         $_SESSION['edit_message'] = "User data modified";
 
