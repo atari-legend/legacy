@@ -77,6 +77,7 @@ if (isset($action) and ($action=="game_browse" xor $action=="game_search")) {
                 // Create WHERE clause for search field
     if ($action=="game_search") {
         if (isset($query) and $query!=="empty") {
+            $query = $mysqli->real_escape_string($query);
             $sql_build .= " WHERE game_name LIKE '%$query%'";
             $sql_build_aka .= " WHERE aka_name LIKE '%$query%'";
             $sql_build_tool .= " WHERE tools_name LIKE '%$query%'";

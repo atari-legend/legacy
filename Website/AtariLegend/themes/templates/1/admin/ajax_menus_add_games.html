@@ -23,13 +23,14 @@
                     <option value="" SELECTED>-</option>
                     {html_options values=$az_value output=$az_output}
 				</select>
-				<input type="text" name="gamesearch" onkeyup="searchGame(this.value,{$menu_disk_id})" class="standard_tile_input_small">
-				<br/>
+				<input type="text" name="gamesearch" id="gamesearch_menudisk" class="standard_tile_input_small"><input type="button" class="topbutton_cpanel_small" value="Search" onclick="searchGame({$menu_disk_id})">
+				<br>
 			</fieldset>
 		</div>
 	</form>
 	<br>
 	<form action="" method="get" name="game_add_to_menu" id="game_add_to_menu">	
+        {if isset($series_link) }
 		<div id="game_list">		
 			<table class="table_game_list" style="width:95%;border: solid 1px black;margin:auto;">
 				<tr>
@@ -93,13 +94,21 @@
 					</td>
 				</tr>
 			</table>
-		</div>			
+		</div>	
+        {else}
+            <div class="standard_tile_text">
+                <div class="left_nav_section">
+                    No titles found for your query
+                </div>
+            </div>
+        {/if}
 	</form>
 	<br>
 {/if}
 
 {* INNER SEARCH LIST *}
 {if isset($smarty_action) and $smarty_action == "inner_list"}
+    {if isset($series_link) }
 	<table class="table_game_list" style="width:95%;border: solid 1px black;margin:auto;">
 		<tr>
 			<th id="menu_mark_th">Add</th>
@@ -161,6 +170,13 @@
 			</td>
 		</tr>
 	</table>
+    {else}
+        <div class="standard_tile_text">
+            <div class="left_nav_section">
+                No titles found for your query
+            </div>
+        </div>
+    {/if}
 {/if}
 
 	

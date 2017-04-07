@@ -536,7 +536,11 @@ function browseDoc(str,menu_disk_id) {
     }
 }
 
-function searchGame(str,menu_disk_id) {
+function searchGame(menu_disk_id) {
+            
+    var JSid=document.getElementById("gamesearch_menudisk");
+    var str = JSid.value
+        
     if (str == "") {
         str = "empty";
             xmlhttp.onreadystatechange = function() {
@@ -557,15 +561,19 @@ function searchGame(str,menu_disk_id) {
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
                 document.getElementById("game_list").innerHTML = xmlhttp.responseText;
             }
-        }
-        if (str.length >= 3) {
+        }    
+ //       if (str.length >= 3) {
         xmlhttp.open("GET","../menus/ajax_addgames_menus.php?action=game_search&list=inner&query="+str+"&menu_disk_id="+menu_disk_id,true);
         xmlhttp.send();
-    }
+//    }
     }
 }
 
-function searchDoc(str,menu_disk_id) {
+function searchDoc(menu_disk_id) {
+
+    var JSid=document.getElementById("docsearch_menudisk");
+    var str = JSid.value
+    
     if (str == "") {
         str = "empty";
             xmlhttp.onreadystatechange = function() {
@@ -587,10 +595,10 @@ function searchDoc(str,menu_disk_id) {
                 document.getElementById("doc_list").innerHTML = xmlhttp.responseText;
             }
         }
-        if (str.length >= 3) {
+//       if (str.length >= 3) {
         xmlhttp.open("GET","../menus/ajax_adddocs_menus.php?action=game_search&list=inner&query="+str+"&menu_disk_id="+menu_disk_id,true);
         xmlhttp.send();
-    }
+//    }
     }
 }
 
