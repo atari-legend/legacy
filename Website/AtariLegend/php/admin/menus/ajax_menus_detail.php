@@ -155,7 +155,7 @@ if (isset($action) and $action == "edit_disk_box" and $menu_disk_id !== '') {
     $temp_query = $mysqli->query("INSERT INTO temp $sql_demos") or die(mysqli_error());
     $temp_query = $mysqli->query("INSERT INTO temp $sql_tools") or die(mysqli_error());
 
-    $temp_query = $mysqli->query("SELECT * FROM temp GROUP BY menu_disk_title_id ORDER BY software_name ASC") or die("does not compute3");
+    $temp_query = $mysqli->query("SELECT * FROM temp GROUP BY menu_disk_title_id ORDER BY menu_disk_title_id ASC") or die("does not compute3");
 
 
     while ($query = $temp_query->fetch_array(MYSQLI_BOTH)) {
@@ -219,7 +219,7 @@ if (isset($action) and $action == "edit_disk_box" and $menu_disk_id !== '') {
     $temp_query2 = $mysqli->query("CREATE TEMPORARY TABLE temp2 ENGINE=MEMORY $sql_doc_games") or die('Error: ' . mysqli_error($mysqli));
     $temp_query2 = $mysqli->query("INSERT INTO temp2 $sql_doc_tools") or die('Error: ' . mysqli_error($mysqli));
 
-    $temp_query2 = $mysqli->query("SELECT * FROM temp2 GROUP BY menu_disk_title_id ORDER BY software_name ASC") or die('Error: ' . mysqli_error($mysqli));
+    $temp_query2 = $mysqli->query("SELECT * FROM temp2 GROUP BY menu_disk_title_id ORDER BY menu_disk_title_id ASC") or die('Error: ' . mysqli_error($mysqli));
 
     while ($query = $temp_query2->fetch_array(MYSQLI_BOTH)) {
         // This smarty is used for creating the list of games
