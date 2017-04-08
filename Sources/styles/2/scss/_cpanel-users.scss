@@ -32,11 +32,15 @@
 }
 
 #user_details_input{width: 90%;}
+#file-upload-value{width: 60%;}
 
 .user_details_row {
     display: table;
     width: 100%;
 }
+
+#checkbox_user_detail label {
+    	border:1px solid #666;}
 
 //*----------------------------------------------------------
 //User main

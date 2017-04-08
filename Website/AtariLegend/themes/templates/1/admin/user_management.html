@@ -345,8 +345,8 @@ function EmailSent(){
 <div class="standard_tile" id="user_management">
     <div class="help-tip">
 		<p> 
-            Use the search tile on the left to make a user query. You also have the following 'mass' options : <br>
-            <b><u>Deleting users</u></b> - You can only delete users if all the 'No' checks are activated in your search.<br>
+            Use the search tile on the left to make a user query. You also have the following 'mass' options : <br><br>
+            <b><u>Deleting users</u></b> - You can only delete users if all the 'No' checks are activated in your search.<br><br>
             <b><u>Email users</u></b> - You can only email users if the 'with email' check is activated in your search.
             <br><br>
             Each user gets KARMA points. This is a system to check which people are actually usefull to AL, and which just created an account to download stuff. 
@@ -376,7 +376,13 @@ function EmailSent(){
             {if isset($users)}
             <table class="standard_table_list">
                 <tr>
-                    <th><input type="checkbox" name="user_select_all" id="user_select_all" class="quick_search_check">All</th>
+                    <th>
+                        <!--<input type="checkbox" name="user_select_all" id="user_select_all" class="quick_search_check"> -->
+                        <div class="checkbox">
+                            <input type="checkbox" value="{$line.user_id}" id="user_select_all" name="user_select_all">&nbsp; All</input>
+                            <label for="user_select_all"></label>
+                        </div>
+                    </th>
                     <th class="username_th">User Name</th>
                     <th class="joindate_th">Join Date</th>
                     <th class="lastvisit_th">Last Visit</th>
@@ -384,7 +390,13 @@ function EmailSent(){
                 </tr>
                 {foreach from=$users item=line}
                 <tr>
-                    <td class="select_td"><input type="checkbox" name="user_id[]" value="{$line.user_id}" class="user_checkbox"></td>
+                    <td class="select_td">
+                        <!--<input type="checkbox" name="user_id[]" value="{$line.user_id}" class="user_checkbox">-->
+                        <div class="checkbox">
+                            <input type="checkbox" value="{$line.user_id}" id="checkboxInput[{$line.user_id}]" name="user_id[]" class="user_checkbox">
+                            <label for="checkboxInput[{$line.user_id}]"></label>
+                        </div>
+                    </td>
                     <!-- <td class="username_td"><a class="standard_table_center user_popup fancybox.ajax" href="../administration/user_detail.php?user_id_selected={$line.user_id}">{$line.user_name}</a></td> -->
                     <td class="username_td">{if $line.user_name != ''}<a href="../user/user_detail.php?user_id_selected={$line.user_id}" class="standard_table_center">{$line.user_name}</a>{else}<i>n/a</i>{/if}</td> 
                     <td class="joindate_td">{if $line.join_date != ''}{$line.join_date}{else}<i>n/a</i>{/if}</td>
