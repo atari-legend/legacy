@@ -345,6 +345,8 @@ img { display: block; }
     text-align: center;
 }
 
+
+//*** input type file css ****//
 #file-upload{
     display: none;
 }
@@ -366,11 +368,52 @@ img { display: block; }
     color: #fff;
     background: #006f6f;
     border-bottom: 3px solid #122323;
+}   
+
+//*** checkbox css ****//
+.checkbox {
+	width: 100%;
+	margin: 2px 0px;
+	position: relative;
 }
 
-.selected{
-    font-weight:bold;
+.checkbox label {
+	cursor: pointer;
+	position: absolute;
+	width: 15px;
+	height: 15px;
+	top: 0;
+  	left: 0;
+	background: black;
+	border:1px solid white;
 }
+
+.checkbox label:after {
+	opacity: 0.2;
+	content: '';
+	position: absolute;
+	width: 9px;
+	height: 5px;
+	background: transparent;
+	top: 2px;
+	left: 2px;
+	border: 3px solid white;
+	border-top: none;
+	border-right: none;
+
+	transform: rotate(-45deg);
+}
+
+.checkbox label:hover::after {
+	opacity: 0.5;
+}
+
+.checkbox input[type=checkbox]:checked + label:after {
+	opacity: 1;
+}
+
+#checkbox_alt label {
+    	border:1px solid #008b8b;}
 
 //*------------------------------------------------------------
 //Standard table settings
