@@ -105,3 +105,6 @@
     display: table;
     width: 100%;
 }
+
+#website_name, #website_url{width: 50%;}
+#website_category_select { @extend #medium_select;width: 51.3%; }

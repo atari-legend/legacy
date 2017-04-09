@@ -22,10 +22,10 @@ User detail page. Overhere you can maintain the log on data of a user and have a
 {block name=java_script}
 <script type="text/javascript">
 $(function() {    
-    $but = $('#file-upload-value');
+    $but = $('#file_upload_user_detail');
     
-    $("input:file[id=file-upload]").change(function() {
-        document.getElementById('file-upload-value').value = $(this).val();
+    $("input:file[id=file_upload]").change(function() {
+        document.getElementById('file_upload_user_detail').value = $(this).val();
     });
 });
 
@@ -156,9 +156,9 @@ function user_stats()
 				<form enctype="multipart/form-data" action="../user/db_user.php?user_id_selected={$users.user_id}" method="post" name="avatar" id="avatar">
 					Attach image
 				<br><br>
-				<label for="file-upload" class="file_upload">Select file</label>
-                <input id="file-upload" type="file" name="image">
-                <input type="text" class="standard_tile_input_small" id="file-upload-value">&nbsp;</span>
+				<label for="file_upload" class="file_upload">Select file</label>
+                <input id="file_upload" type="file" name="image">
+                <input type="text" class="standard_tile_input_small" id="file_upload_user_detail">&nbsp;</span>
                 <br><br>
 				<input type="submit" name="Modify" value="Upload" class="topbutton_cpanel_small">
 				<input type="hidden" name="MAX_FILE_SIZE" value="50000">
