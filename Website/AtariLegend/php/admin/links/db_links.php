@@ -97,16 +97,19 @@ if (isset($action) and $action == "link_delete") {
 
     $website_query = $mysqli->query("SELECT website_imgext FROM website WHERE website_id='$website_id'");
     list($website_imgext) = $website_query->fetch_array(MYSQLI_BOTH);
-
-    unlink("$website_image_path$website_id.$website_imgext");
-
+    
+    if ( $website_imgext !== '' )
+    {
+        unlink("$website_image_save_path$website_id.$website_imgext");
+    }
+    
     create_log_entry('Links', $website_id, 'Link', $website_id, 'Delete', $_SESSION['user_id']);
 
     $sql = $mysqli->query("DELETE FROM website WHERE website_id = '$website_id'") or die("Failed to delete website");
     $sql = $mysqli->query("DELETE FROM website_description WHERE website_id = '$website_id'") or die("Failed to delete website");
     $sql = $mysqli->query("DELETE FROM website_category_cross WHERE website_id = '$website_id'") or die("Failed to delete website");
 
-    mysqli_close();
+    //mysqli_close();
 
     $_SESSION['edit_message'] = "Link deleted";
     header("Location: ../links/link_modlist.php?catpick=$rowcat[website_category_id]");

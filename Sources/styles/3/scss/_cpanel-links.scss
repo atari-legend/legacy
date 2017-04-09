@@ -54,6 +54,7 @@
 .links_addnew_link:link { color: #161c71; }
 .links_addnew_link:visited { color: #161c71; }
 .links_addnew_link:hover { color: #000; }
+
 //*----------------------------------------------------------
 //Links Modify list
 //------------------------------------------------------------ */
@@ -105,3 +106,6 @@
     display: table;
     width: 100%;
 }
+
+#website_name, #website_url{width: 50%;}
+#website_category_select { @extend #medium_select;width: 51.7%; }

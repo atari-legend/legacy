@@ -218,6 +218,7 @@
     .user_details_row {width: 100%;}
     #user_details_input{width: 90%;}
     #child_1_user{margin-bottom: 5px;}
+    #file_upload_user_detail{width: 55%;}
 }
 
 //*----------------------------------------------------------
@@ -310,6 +311,9 @@
     .links_mod_text {width: 100%;display: block;}
     .links_mod_input {width: 100%;display: block;}
     .links_mod_row {width: 100%;margin-bottom: 10px;}
+    #website_name, #website_url{width: 62%;}
+    #website_category_select {width: 63.7%;}
+    .links_mod_container{margin-left: 3.5%;}
 }
 
 @media screen and (max-width: 600px) {
