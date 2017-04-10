@@ -164,7 +164,15 @@ if (isset($action) and $action == 'modify_link') {
     }
 
     // Do the website updating
-    $mysqli->query("UPDATE website SET website_name='$website_name', website_url='$website_url' WHERE website_id='$website_id'");
+    if (isset ($website_inactive))
+    {
+        $mysqli->query("UPDATE website SET website_name='$website_name', website_url='$website_url', inactive='$website_inactive' WHERE website_id='$website_id'");
+    }
+    else
+    {
+        $mysqli->query("UPDATE website SET website_name='$website_name', website_url='$website_url', inactive=' ' WHERE website_id='$website_id'");
+    }
+    
     //$mysqli->query("UPDATE website_category_cross SET website_category_id='$category' WHERE website_id='$website_id'");
 
     $sql_desc = $mysqli->query("SELECT * FROM website_description WHERE website_id='$website_id'");
@@ -241,7 +249,7 @@ if (isset($action) and $action == "val_delete") {
 
     $sql = $mysqli->query("DELETE FROM website_validate WHERE website_id = '$website_id'");
 
-    mysqli_close();
+    //mysqli_close();
 
     $_SESSION['edit_message'] = "Link deleted from the database";
     header("Location: ../links/link_addnew.php");
@@ -257,7 +265,7 @@ if (isset($action) and $action == "new_cat") {
     $new_cat_id = $mysqli->insert_id;
     create_log_entry('Links cat', $new_cat_id, 'Category', $new_cat_id, 'Insert', $_SESSION['user_id']);
 
-    mysqli_close();
+    //mysqli_close();
 
     $_SESSION['edit_message'] = "Link category added to the database";
     header("Location: ../links/link_cat.php");
@@ -270,7 +278,7 @@ if (isset($action) and $action == 'mod_cat') {
 
     $sql = $mysqli->query("UPDATE website_category SET website_category_name='$category_name',parent_category='$category' WHERE website_category_id='$category_id'");
 
-    mysqli_close();
+    //mysqli_close();
 
     $_SESSION['edit_message'] = "Link category modified";
     header("Location: ../links/link_cat.php");
@@ -290,7 +298,7 @@ if (isset($action) and $action == 'del_cat') {
     $sql = $mysqli->query("DELETE FROM website_category_cross WHERE website_category_id = '$category_id'");
     $sql = $mysqli->query("DELETE FROM website_category WHERE website_category_id = '$category_id'");
 
-    mysqli_close();
+    //mysqli_close();
 
     $_SESSION['edit_message'] = "Link category deleted";
     header("Location: ../links/link_cat.php");
