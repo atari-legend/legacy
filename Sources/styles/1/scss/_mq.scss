@@ -151,6 +151,59 @@
 //Front page
 //------------------------------------------------------------ */
 //* Make the table view responsive */
+@media screen and (max-width: 1449px) {
+    .good_karma_chart,
+    .bad_karma_chart,
+    .bar_changelog,
+    .line_changelog{
+        width: 100%;
+        height : 100%;
+    }
+}
+
+@media screen and (min-width: 1450px) {
+    .good_karma_chart,
+    .bad_karma_chart{
+        width: 400px;
+        height : 425px;
+    }
+    
+    .bar_changelog,
+    .line_changelog{
+        width: 100%;
+        height : 100%;
+    }
+}
+
+@media screen and (max-width: 1199px) {
+    .main_stats_container {flex-direction: column-reverse;}
+
+    #child_some_stats,
+    #child_good_karma_chart,
+    #child_bad_karma_chart,
+    #child_good_karma,
+    #child_bad_karma {
+        width: 75%;
+        float: left;
+    }
+
+    #child_good_karma,
+    #child_good_karma_chart,
+    #child_bad_karma_chart,
+    #child_bad_karma {
+        margin-top: 20px;
+    }
+
+    .main_stats_container >div {
+        width: 100%;
+    }
+
+    .main_stats_child {
+        display: block;
+        margin: 0 auto;
+    }
+}
+
 @media screen and (max-width: 799px) {
     #welcome_cpanel {
         width: 100%;
@@ -171,32 +224,23 @@
 
 @media screen and (max-width: 480px) {
     #welcome_cpanel {width: 100%;}
-}
-
-@media screen and (max-width: 1199px) {
-    .main_stats_container {flex-direction: column;}
-
+    
     #child_some_stats,
+    #child_good_karma_chart,
+    #child_bad_karma_chart,
     #child_good_karma,
     #child_bad_karma {
         width: 100%;
         float: left;
     }
-
-    #child_good_karma,
-    #child_bad_karma {
-        margin-top: 20px;
-    }
-
-    .main_stats_container >div {
+    
+    .good_karma_chart,
+    .bad_karma_chart{
         width: 100%;
-    }
-
-    .main_stats_child {
-        display: block;
-        margin: 0 auto;
+        height : 100%;
     }
 }
+
 
 //*----------------------------------------------------------
 //Quick search games

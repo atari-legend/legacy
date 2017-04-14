@@ -7,104 +7,213 @@
 *   email                : admin@atarilegend.com
 *
 *   Id: start_page.html,v 0.1 2015-11-21 Silver Surfer
+*   Id: start_page.html,v 0.2 2017/04/15 00:46 ST Graveyard
+*               - Complete re-write with charts
 *
 ***************************************************************************/
 *}
+
 {extends file='1/admin/frontpage.html'}
+
+{block name=java_script}
+<script type="text/javascript" src="{$template_dir}includes/js/Chart.js"></script> <!-- chart creation -->
+<script>
+window.onload = function () {
+    var ctx_good = document.getElementById('karma_good_chart').getContext("2d");
+    var data_good = {$karma_good_value|escape:'javascript'};
+    var labels_good = {$karma_good_label};
+    var bg = {$karma_bg};
+    var bg_hover = {$karma_hover};
+    var border = {$karma_border};
+    var border_width = {$karma_border_width};
+    
+    var myChart = new Chart(ctx_good, {
+        responsive: true,
+        type: 'pie',
+        data: {
+            labels: labels_good,
+        datasets: [
+            {
+                data: data_good,
+                backgroundColor: bg,
+                borderColor: border,
+                borderWidth: border_width,
+                hoverBackgroundColor: bg_hover
+            }]
+        }
+    })
+    
+    var ctx_bad = document.getElementById('karma_bad_chart').getContext("2d");
+    var data_bad = {$karma_bad_value|escape:'javascript'};
+    var labels_bad = {$karma_bad_label};
+    
+    var myChart = new Chart(ctx_bad, {
+        responsive: true,
+        type: 'pie',
+        data: {
+            labels: labels_bad,
+        datasets: [
+            {
+                data: data_bad,
+                backgroundColor: bg,
+                borderColor: border,
+                borderWidth: border_width,
+                hoverBackgroundColor: bg_hover
+            }]
+        }
+    })
+    
+    var data_cl_bar = {$change_log_data|escape:'javascript'};
+    var data_cl_labels = {$change_log_label};
+    var ctx_change_bar = document.getElementById('changelog_bar').getContext("2d");
+    var bg_cl = {$change_log_bg};
+    var border_width_cl = {$change_log_border_width};
+    var border_cl = {$change_log_border};
+    
+    var myBarChart = new Chart(ctx_change_bar, {
+        responsive: true,
+        type: 'bar',
+        data: {
+            labels: data_cl_labels,
+            datasets: [
+                {
+                    label: "# of changes/section",
+                    backgroundColor: bg_cl,
+                    borderColor: border_cl,
+                    borderWidth: border_width_cl,
+                    data: data_cl_bar,
+                }
+            ]
+        }
+    })
+    
+    var data_cl_monthly = {$change_log_monthly_data};
+    var labels_cl_monthly = {$change_log_monthly_label};
+    var ctx_change_line = document.getElementById('changelog_line').getContext("2d");
+    
+    var myLineChart = new Chart(ctx_change_line, {
+        responsive: true,
+        type: 'line',
+        data: {
+            labels: labels_cl_monthly,
+            datasets: [
+                {
+                    label: "Changes per month",
+                    backgroundColor: bg_cl,
+                    borderColor: border_cl,
+                    borderWidth: border_width_cl,
+                    data: data_cl_monthly,
+                }
+            ]
+        }
+    })
+
+};
+</script>
+{/block}
+
+{block name=left_tile}
+    {include file='1/admin/tile_stats.html'}
+    <br>
+    {include file='1/admin/left_nav.html'}
+{/block}
+            
 {block name=main_tile}
-{block name=main_stats}	
 <div class="standard_tile">
-	<h1>MAIN STATS</h1>
-	<div class="standard_tile_line"></div>
-	<div class="standard_tile_text">
-		<div class="main_stats_container">
-			<div class="main_stats_child" id="child_some_stats">
-						<table class="standard_table_list">
-						<tr>
-							<th>Some Stats</th>
-						</tr>
-							{foreach from=$statistics item=line}
-						<tr>
-							<td class="standard_table_center">{if $line.value != ''}{$line.value}{/if}</td>
-						</tr>
-							{/foreach}
-						</table>	
-			</div>
-			<div class="main_stats_child" id="child_good_karma">
-						<table class="standard_table_list">
-						<tr>
-							<th colspan="2" id="good_karma">Good Karma</th>
-						</tr>
-							{foreach from=$karma_good item=line}
-						<tr>
-							<td><a href="../user/user_detail.php?user_id_selected={$line.user_id}" class="standard_table_left">{$line.user_name}</a></td>
-							<td class="standard_table_right">{$line.karma}</td>
-						</tr>
-							{/foreach}
-						</table>						
-			</div>
-			<div class="main_stats_child" id="child_bad_karma">
-
-						<table class="standard_table_list">
-						<tr>
-							<th colspan="2" id="bad_voodoo">Bad Voodoo</th>
-						</tr>
-							{foreach from=$karma_bad item=line}
-						<tr>
-							<td><a href="../user/user_detail.php?user_id_selected={$line.user_id}" class="standard_table_left">{$line.user_name}</a></td>
-							<td class="standard_table_right">{$line.karma}</td>
-						</tr>
-							{/foreach}
-						</table>	
-			</div>
-		</div>
-	</div>
+    <h1>CPANEL</h1>
+    <div class="standard_tile_line"></div>
+    <div class="standard_tile_text">
+        <div class="left_nav_section">
+            Welcome <b><a href="../../admin/user/user_detail.php?user_id_selected={$users.user_id}" class="standard_tile_link_cpanel">{$users.user_name}</a></b> to the heart of AtariLegend. This screen will give you a quick overview of all the various statistics of the atarilegend website. 
+            The links on the left hand side of this screen and at the top allow you to control every aspect of your cpanel experience. 
+            Each page will have instructions on how to use the tools. If you have remarks or questions, please use the private 
+            <a href="http://www.atari-forum.com/viewforum.php?f=36" class="standard_tile_link_cpanel">AtariLegend</a> forum over at 
+            <a href="http://www.atari-forum.com/" class="standard_tile_link_cpanel">Atari-Forum.</a>
+        </div>
+        <br>
+    </div>
+    <div class="standard_tile_line"></div>
+    <h1>KARMA STATS</h1>
+    <div class="standard_tile_line"></div>
+    <div class="standard_tile_text">      
+        <br>        
+        <div class="main_stats_container">
+            <div class="main_stats_child" id="child_good_karma_chart">
+                <div class="good_karma_chart">
+                    <canvas id="karma_good_chart"></canvas>
+                </div>
+                
+                <!--<table class="standard_table_list">
+                <tr>
+                    <th>Some Stats</th>
+                </tr>
+                    {foreach from=$statistics item=line}
+                <tr>
+                    <td class="standard_table_center">{if $line.value != ''}{$line.value}{/if}</td>
+                </tr>
+                    {/foreach}
+                </table>-->	
+            </div>
+            <div class="main_stats_child" id="child_good_karma">
+                <table class="standard_table_list">
+                <tr>
+                    <th colspan="2" id="good_karma">Good Karma</th>
+                </tr>
+                    {foreach from=$karma_good item=line}
+                <tr>
+                    <td><a href="../user/user_detail.php?user_id_selected={$line.user_id}" class="standard_table_left">{$line.user_name}</a></td>
+                    <td class="standard_table_right">{$line.karma}</td>
+                </tr>
+                    {/foreach}
+                </table>						
+            </div>
+        </div>
+        <br>
+        <br>
+        <div class="main_stats_container">
+            <div class="main_stats_child" id="child_bad_karma_chart">
+                <div class="bad_karma_chart">
+                    <canvas id="karma_bad_chart"></canvas>
+                </div>                
+            </div>
+            <div class="main_stats_child" id="child_bad_karma">
+                <table class="standard_table_list">
+                <tr>
+                    <th colspan="2" id="bad_voodoo">Bad Voodoo</th>
+                </tr>
+                    {foreach from=$karma_bad item=line}
+                <tr>
+                    <td><a href="../user/user_detail.php?user_id_selected={$line.user_id}" class="standard_table_left">{$line.user_name}</a></td>
+                    <td class="standard_table_right">{$line.karma}</td>
+                </tr>
+                    {/foreach}
+                </table>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="standard_tile_line"></div>
+    <h1>LATEST CHANGES</h1>
+    <div class="standard_tile_line"></div>
+    <div class="standard_tile_text">   
+        <div class="left_nav_section">
+            Here are some latest changes charts. For all the details of the changes made, please visit the <a href="../../admin/administration/change_log.php" class="standard_tile_link_cpanel">change log</a> section.
+            <br>The pie chart below represents in which sections of the db the most changes are done. The line chart shows the nr of changes of the last 6 months.
+        </div>
+        <br>
+        <br>        
+        <div class="main_stats_container">
+            <div class="main_stats_child" id="child_good_karma">
+                <div class="bar_changelog">
+                    <canvas id="changelog_bar"></canvas>
+                </div>
+            </div>
+            <div class="main_stats_child" id="child_good_karma">
+                <div class="line_changelog">
+                    <canvas id="changelog_line"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<br>
-{/block}
-
-{block name=welcome}
-<div class="standard_tile" id="welcome_cpanel">
-	<h1>WELCOME</h1>
-		<div class="standard_tile_line"></div>
-		<div class="standard_list_entry">
-			<div class="standard_tile_text">
-				<table>
-				<tr>
-					<td class="standard_table_center">This screen will give you a quick overview of all the various statistics of the atarilegend website. 
-						The links on the left hand side of this screen allow you to control every aspect of your cpanel experience. 
-						Each page will have instructions on how to use the tools. If you have remarks or questions, please use the private 
-						<a href="http://www.atari-forum.com/viewforum.php?f=36" class="standard_tile_link_cpanel">AtariLegend</a> forum over at 
-						<a href="http://www.atari-forum.com/" class="standard_tile_link_cpanel">Atari-Forum.</a></td>
-				</tr>
-				</table>
-				<br>
-			</div>			
-		</div>
-	<div class="standard_tile_line"></div>
-</div>
-{/block}
-
-{block name=user_stats}
-<div class="standard_tile" id="user_stats">
-	<h1>ADMIN STATS</h1>
-		<div class="standard_tile_line"></div>
-		<div class="standard_list_entry">
-			<div class="standard_tile_text">
-				<table>
-				<tr>
-					<td class="standard_table_center"><img class="user_stats_img" src="../../includes/show_image.php?file={$users.image}&amp;crop=164,null,null,null&amp;crop=left,top,164,120" alt="avatar"><br></td>
-				</tr>
-				<tr>
-					<td class="standard_table_center">Welcome {$users.user_name}</td>
-				</tr>
-				<tr>
-					<td class="standard_table_center">Your <a href="../../admin/user/user_detail.php?user_id_selected={$users.user_id}" class="standard_tile_link_cpanel">detail page</a></td>
-				</tr>
-				</table>
-			</div>			
-		</div>
-	<div class="standard_tile_line"></div>
-</div>
-{/block}
 {/block}

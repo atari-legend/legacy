@@ -77,8 +77,8 @@ while (list($user_id, $user_name, $karma_value) = $sql_user->fetch_array(MYSQLI_
     mysqli_free_result($sql_gamereview);
 
     // START - NUMBER OF DOWNLOADS BY USER
-    $sql_downloads = $mysqli->query("SELECT COUNT(*) AS count FROM game_download_info WHERE user_id = $user_id");
-    $gamecount     = $sql_downloads->fetch_array(MYSQLI_BOTH);
+    $sql_downloads = $mysqli->query("SELECT * FROM game_download_info WHERE user_id = $user_id");
+    //$gamecount     = $sql_downloads->fetch_array(MYSQLI_BOTH);
     //$nr_downloads = $gamecount[count];
     $nr_downloads  = $sql_downloads->num_rows;
 

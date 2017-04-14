@@ -1,0 +1,37 @@
+{*
+/***************************************************************************
+*                                tile_stats.html
+*                            -----------------------
+*   begin                : Friday, april 15, 2017
+*   copyright            : (C) 2017 Atari Legend
+*   email                : martens_maarten@hotmail.com
+*   actual update        : Creation of file
+*
+*   Id: tile_stats.html,v 0.1 2017/04/15 00:46 ST Graveyard
+*
+***************************************************************************/
+
+//****************************************************************************************
+// This is a small statistics tile
+//****************************************************************************************
+*}
+
+<div class="standard_tile">
+	<h1>STATS</h1>
+		<div class="standard_tile_line"></div>
+		<div class="standard_list_entry">
+			<div class="standard_tile_text">    
+                <table class="standard_table_list">
+                <tr>
+                    <th>Some Stats</th>
+                </tr>
+                    {foreach from=$statistics item=line}
+                <tr>
+                    <td class="standard_table_center">{if $line.value != ''}{$line.value}{/if}</td>
+                </tr>
+                    {/foreach}
+                </table>
+			</div>
+		</div>
+	<div class="standard_tile_line"></div>
+</div>
