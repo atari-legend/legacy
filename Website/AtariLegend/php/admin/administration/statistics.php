@@ -222,22 +222,59 @@ $smarty->assign('change_log_label', json_encode($change_log_label));
 //**************************************
 // nr of changes in the past 12 months
 //**************************************
-$current_month = date("m");
-$last_month = $current_month - 1; 
-$last_year = date("Y");
-$current_year = date("Y");
+
+$current_month = date("m") + 3;
+$last_month = date("m") + 2;
+$last_year = date("Y") - 1;
+$current_year = date("Y") - 1;
 $current_day = 01;
 $months = array (1=>'Jan',2=>'Feb',3=>'Mar',4=>'Apr',5=>'May',6=>'Jun',7=>'Jul',8=>'Aug',9=>'Sep',10=>'Oct',11=>'Nov',12=>'Dec');
 $i = 0;
 
+if ($current_month == 13)
+{
+    $current_month = 1; 
+    $current_year = $current_year + 1;  
+}
+
+if ($last_month == 13)
+{
+    $$last_month = 1; 
+    $$last_year = $$last_year + 1;  
+}
+
+if ($current_month == 14)
+{
+    $current_month = 2; 
+    $current_year = $current_year + 1;  
+}
+
+if ($last_month == 14)
+{
+    $last_month = 2; 
+    $last_year = $last_year + 1;  
+}
+
+if ($current_month == 15)
+{
+    $current_month = 3; 
+    $current_year = $current_year + 1;  
+}    
+
 for ($k = 1 ; $k <= 12; $k++)
 {   
-    if ($last_month == 0)
+    if ($current_month == 13)
     {
-        $last_month = 12; 
-        $last_year = $current_year - 1;  
+        $current_month = 1; 
+        $current_year = $current_year + 1;  
     }
-    
+
+    if ($last_month == 13)
+    {
+        $last_month = 1; 
+        $last_year = $last_year + 1;  
+    }
+
     $date_high = date_to_timestamp($current_year, $current_month, $current_day );
     $date_low = date_to_timestamp($last_year, $last_month, $current_day );
     
@@ -251,8 +288,8 @@ for ($k = 1 ; $k <= 12; $k++)
     $change_log_border_width[$i] = "1";
     $change_log_border[$i] = "#000000";
     
-    $last_month = $last_month - 1;
-    $current_month = $current_month - 1;
+    $last_month = $last_month + 1;
+    $current_month = $current_month + 1;
     $i = $i + 1;
 }
 
