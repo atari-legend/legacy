@@ -25,6 +25,9 @@ include("../../config/admin.php");
 //load the search fields of the quick search side menu
 include("../../admin/games/quick_search_games.php");
 
+//load the screenstar tile
+include("../../common/tiles/screenstar.php");
+
 date_default_timezone_set('UTC');
 $start = microtime(true);
 

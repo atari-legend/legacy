@@ -20,10 +20,14 @@ $bg-color: #00d3d3;
 //*----------------------------------------------------------
 // Top
 //------------------------------------------------------------ */
-@import '../../common/main_scss/top';                       //* --> TOP background & graphics */
+@import '../../common/main_scss/top';                       //* --> TOP background & graphics */ 
 @import '../../common/main_scss/top_animation';             //* --> TOP animation */
 @import '../../common/main_scss/menu';                      //* --> TOP and SIDE MENU */
 
+//*----------------------------------------------------------
+// Tiles
+//------------------------------------------------------------ */
+@import '../../common/main_scss/tiles';                     //* --> Tiles */
 
 //*----------------------------------------------------------
 // Main website
