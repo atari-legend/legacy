@@ -342,6 +342,7 @@ function EmailSent(){
   <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
   Email users?</p>
 </div>
+<form action="test" name="user_list" id="user_list">
 <div class="standard_tile" id="user_management">
     <div class="help-tip">
 		<p> 
@@ -371,7 +372,6 @@ function EmailSent(){
             <div class="centered_fieldset"><a href="../user/karma_sync.php" class="standard_tile_link_cpanel" onclick="SyncKarma(); return false;">Karma Re-Sync</a></div>
         </div>
         <br>
-        <form action="test" name="user_list" id="user_list">
         <div class="main_stats_container" id="ajax_usersearch">
             {if isset($users)}
             <table class="standard_table_list">
@@ -379,7 +379,7 @@ function EmailSent(){
                     <th>
                         <!--<input type="checkbox" name="user_select_all" id="user_select_all" class="quick_search_check"> -->
                         <div class="checkbox">
-                            <input type="checkbox" value="{$line.user_id}" id="user_select_all" name="user_select_all">&nbsp; All</input>
+                            <input type="checkbox" id="user_select_all" name="user_select_all">&nbsp; All
                             <label for="user_select_all"></label>
                         </div>
                     </th>

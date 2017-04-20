@@ -109,10 +109,13 @@ img {display: block; }
 .standard_tile_background { position: relative; }
 .standard_tile_image { width: 100%; }
 .standard_tile_subtext {
-    font-size: 10pt;
-    font-weight: bold;
+    font-size: 11pt;
     color: #161c71;
+    font-weight: bold;
 }
+
+.standard_tile_subtext a{color: #161c71;}
+.standard_tile_subtext a:hover{color: black;}
 
 .standard_tile p {
     width: 91.7%;
@@ -412,6 +415,8 @@ img {display: block; }
 .checkbox input[type=checkbox]:checked + label:after {
 	opacity: 1;
 }
+
+.checkbox_alt{@extend .checkbox;}
 
 //*------------------------------------------------------------
 //Standard table settings

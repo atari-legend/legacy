@@ -13,7 +13,9 @@
  *
  ***************************************************************************/
 
+// include common variables and functions
 include("../../config/common.php");
+include("../../admin/games/quick_search_games.php");
 include("../../config/admin.php");
 
 $start = microtime(true);

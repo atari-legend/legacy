@@ -73,19 +73,19 @@ function user_stats()
 				<div class="user_details_child" id="child_1_user">
 					<div class="user_details_row">
 						<div class="user_details_text">User name :</div>
-						<div class="user_details_input"><input type="text" name="user_name"  maxlength="60" value="{$users.user_name}" class="standard_tile_input_small" id="user_details_input"></div>
+						<div class="user_details_input"><input type="text" name="user_name"  maxlength="60" value="{$users.user_name}" class="user_details_input_small"></div>
 					</div>
 					<div class="user_details_row">
 						<div class="user_details_text">User email :</div>
-						<div class="user_details_input"><input type="text" name="user_email"  maxlength="255" value="{$users.user_email}" class="standard_tile_input_small" id="user_details_input"></div>
+						<div class="user_details_input"><input type="text" name="user_email"  maxlength="255" value="{$users.user_email}" class="user_details_input_small"></div>
 					</div>
 					<div class="user_details_row">
 						<div class="user_details_text">User website :</div>
-						<div class="user_details_input"><input type="text" name="user_website"  maxlength="255" value="{$users.user_website}" class="standard_tile_input_small" id="user_details_input"></div>
+						<div class="user_details_input"><input type="text" name="user_website"  maxlength="255" value="{$users.user_website}" class="user_details_input_small"></div>
 					</div>
 					<div class="user_details_row">
 						<div class="user_details_text">User MSNM :</div>
-						<div class="user_details_input"><input type="text" name="user_msnm"  maxlength="255" value="{$users.user_msnm}" class="standard_tile_input_small" id="user_details_input"></div>
+						<div class="user_details_input"><input type="text" name="user_msnm"  maxlength="255" value="{$users.user_msnm}" class="user_details_input_small"></div>
 					</div>
 					<div class="user_details_row">
 						<div class="user_details_text">Inactive :</div>
@@ -105,20 +105,20 @@ function user_stats()
 						{if $users.user_pwd ==! ''}
 							<div class="user_details_input"><input type="button" value="reset" class="topbutton_cpanel_small" onClick="reset_pwd();"></div>
 						{else}
-							<div class="user_details_input"><input type="text" name="user_pwd"  maxlength="255" class="standard_tile_input_small" id="user_details_input"></div>
+							<div class="user_details_input"><input type="text" name="user_pwd"  maxlength="255" class="user_details_input_small"></div>
 						{/if}
 					</div>
 					<div class="user_details_row">	
 						<div class="user_details_text">User permission :</div>
-						<div class="user_details_input"><input type="text" name="user_permission"  maxlength="60" value="{$users.user_permission}" class="standard_tile_input_small" id="user_details_input"></div>
+						<div class="user_details_input"><input type="text" name="user_permission"  maxlength="60" value="{$users.user_permission}" class="user_details_input_small"></div>
 					</div>
 					<div class="user_details_row">	
 						<div class="user_details_text">User ICQ :</div>
-						<div class="user_details_input"><input type="text" name="user_icq"  maxlength="255" value="{$users.user_icq}" class="standard_tile_input_small" id="user_details_input"></div>
+						<div class="user_details_input"><input type="text" name="user_icq"  maxlength="255" value="{$users.user_icq}" class="user_details_input_small"></div>
 					</div>
 					<div class="user_details_row">
 						<div class="user_details_text">User AIM :</div>
-						<div class="user_details_input"><input type="text" name="user_aim"  maxlength="255" value="{$users.user_aim}" class="standard_tile_input_small" id="user_details_input"></div>
+						<div class="user_details_input"><input type="text" name="user_aim"  maxlength="255" value="{$users.user_aim}" class="user_details_input_small"></div>
 					</div>
 				</div>
 			</div>
@@ -158,7 +158,7 @@ function user_stats()
 				<br><br>
 				<label for="file_upload" class="file_upload">Select file</label>
                 <input id="file_upload" type="file" name="image">
-                <input type="text" class="standard_tile_input_small" id="file_upload_user_detail">&nbsp;</span>
+                <input type="text" class="standard_tile_input_small" id="file_upload_user_detail">&nbsp;
                 <br><br>
 				<input type="submit" name="Modify" value="Upload" class="topbutton_cpanel_small">
 				<input type="hidden" name="MAX_FILE_SIZE" value="50000">

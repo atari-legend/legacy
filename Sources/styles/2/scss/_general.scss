@@ -108,13 +108,16 @@ img { display: block; }
 .standard_tile_line { border-bottom: 2px solid #666; }
 .standard_tile_background { position: relative; }
 .standard_tile_image { width: 100%; }
-.standard_tile_subtext { font-size: 15px; }
+.standard_tile_subtext { font-size: 11pt; color: #3c3c3c; font-weight:bold;}
 .standard_tile p {
     width: 91.7%;
     padding-right: 4%;
     padding-left: 4%;
     border-right: 2px solid #666;
 }
+
+.standard_tile_subtext a{color: #3c3c3c;}
+.standard_tile_subtext a:hover{color: black;}
 
 .standard_tile_title {
     position: absolute;
@@ -408,6 +411,8 @@ a.standard_tile_link:focus {
 .checkbox input[type=checkbox]:checked + label:after {
 	opacity: 1;
 }
+
+.checkbox_alt{@extend .checkbox;}
 
 
 //*------------------------------------------------------------

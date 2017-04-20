@@ -148,7 +148,7 @@ function TestURL() {
 				<div class="links_mod_row">
 				{if  $website.website_imgext !== ""}
 					<div class="links_mod_text">
-                         <div class="checkbox" id="checkbox_user_detail">
+                         <div class="links_mod_checkbox">
                             <input type="checkbox" id="delete_image" name="delete_image" value="yes">
                             <label for="delete_image"></label>&nbsp;Delete Image?
                             <!--<input type="checkbox" name="delete_image" id="delete_image" value="yes">-->
@@ -167,14 +167,14 @@ function TestURL() {
 						<!--<input type="file" name="image">-->
                         <label for="file_upload" class="file_upload">Select file</label>
                         <input id="file_upload" type="file" name="image">
-                        <input type="text" class="standard_tile_input_small" id="file_upload_user_detail">&nbsp;</span>
+                        <input type="text" class="standard_tile_input_small" id="file_upload_user_detail">&nbsp;
                         <br><br>
 					</div>
 				{/if}
 				</div>
                 <div class="links_mod_row">
 					<div class="links_mod_text">
-                         <div class="checkbox" id="checkbox_user_detail">
+                         <div class="links_mod_checkbox">
                             <input type="checkbox" value="1" id="website_inactive" name="website_inactive" {if $website.inactive == '1'} checked {/if}>
                             <label for="website_inactive"></label>&nbsp;Inactive
                         </div>
