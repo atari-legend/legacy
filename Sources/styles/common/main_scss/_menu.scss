@@ -513,7 +513,7 @@ html {
 //* for resolutions between 1280 and 1920 the search goes to the side menu */
 //* some re-placement of the skin button is needed here */
 //* HOWEVER, this is not done for the CPANEL, to solve this id no-wrap is created */
-#no-wrap {
+.no-wrap {
     margin-top: 0;
 }
 

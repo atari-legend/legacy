@@ -53,7 +53,34 @@
 
 #changelog_select select { width: 50%; }
 
-
+//*-----------------------Database updates-------------------------- */
+.td_db_result,
+.td_db_state,
+.td_db_id,
+.td_db_description,
+.td_db_exe{@extend .standard_table_center;}
 
 //*-----------------------Technical doc-------------------------- */
 .tech_doc_contents {margin-left:-1.5em;text-align:left;}
+
+.tech_doc_img {
+    margin-left: 1%;
+    box-shadow: 0 0 12px #000;
+    display:inline;
+    margin:5px;
+}
+
+.tech_doc_parent_table {
+    @extend .standard_table_list;
+    @extend #menu_list_table;
+    border:none;
+    text-align:left;
+    width:85%;
+}
+
+.tech_doc_child_table {
+    @extend #game_list_table;
+    width:100%;
+    border: solid 1px black;
+    margin:auto;
+}

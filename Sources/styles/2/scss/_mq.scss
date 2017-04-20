@@ -177,12 +177,16 @@
     #child_good_karma_chart,
     #child_bad_karma_chart,
     #child_good_karma,
+    #child_bar,
+    #child_line,
     #child_bad_karma {
         width: 75%;
         float: left;
     }
 
     #child_good_karma,
+    #child_bar,
+    #child_line,
     #child_good_karma_chart,
     #child_bad_karma_chart,
     #child_bad_karma {
@@ -224,6 +228,8 @@
     #child_good_karma_chart,
     #child_bad_karma_chart,
     #child_good_karma,
+    #child_bar,
+    #child_line,
     #child_bad_karma {
         width: 100%;
         float: left;
@@ -236,12 +242,11 @@
     }
 }
 
-
 //*----------------------------------------------------------
 //Quick search games
 //------------------------------------------------------------ */
 @media screen and (max-width: 1099px) {
-    #quick_search_options {
+    #quick_search_options, #quick_search_user_options {
         margin-left: 5%;
         width: 100%;
     }
@@ -249,7 +254,7 @@
 
 //* Make the table view responsive */
 @media screen and (max-width: 799px) {
-    #quick_search_options {
+    #quick_search_options, #quick_search_user_options {
         display: table;
         width: 50%;
         margin-left: 40%;
@@ -259,11 +264,11 @@
 }
 
 @media screen and (max-width: 599px) {
-    #quick_search_options {margin-left: 30%;}
+    #quick_search_options, #quick_search_user_options {margin-left: 30%;}
 }
 
 @media screen and (max-width: 399px) {
-    #quick_search_options {
+    #quick_search_options, #quick_search_user_options {
         width: 75%;
         margin-left: 15%;
     }
@@ -282,7 +287,7 @@
 
 @media screen and (max-width: 1050px) {
     .user_details_container {flex-direction: column;}
-    #user_details_input{width: 75%;}
+    .user_details_input_small{width: 75%;}
     #child_1_user, #child_2_user {margin-left: 3%;}
     #child_1_user{margin-bottom: 5px;}
 }
@@ -291,7 +296,7 @@
     .user_details_text {width: 50%;display: inline;}
     .user_details_input {width: 50%;display: inline;}
     .user_details_row {width: 100%;}
-    #user_details_input{width: 90%;}
+    .user_details_input_small{width: 90%;}
     #child_1_user{margin-bottom: 5px;}
     #file_upload_user_detail{width: 55%;}
 }
@@ -661,47 +666,42 @@
 //*----------------------------------------------------------
 //Admin - DB updates
 //------------------------------------------------------------ */
-
-@media screen and (max-width: 480px) {
-    #left_nav_position_db_updates {margin-top: 20px;}
-}
-
 @media screen and (max-width: 500px) {
-    #td_db_result,
-    #th_db_result,
-    #th_db_state,
-    #td_db_state,
-    #td_db_id,
-    #th_db_id,
-    #th_db_exe,
-    #td_db_exe {
+    .td_db_result,
+    .th_db_result,
+    .th_db_state,
+    .td_db_state,
+    .td_db_id,
+    .th_db_id,
+    .th_db_exe,
+    .td_db_exe {
         display: none;
     }
 }
 
 @media screen and (max-width: 600px) {
-    #td_db_result,
-    #th_db_result,
-    #th_db_state,
-    #td_db_state,
-    #td_db_id,
-    #th_db_id {
+    .td_db_result,
+    .th_db_result,
+    .th_db_state,
+    .td_db_state,
+    .td_db_id,
+    .th_db_id {
         display: none;
     }
 }
 
 @media screen and (max-width: 900px) {
-    #td_db_result,
-    #th_db_result,
-    #th_db_state,
-    #td_db_state {
+    .td_db_result,
+    .th_db_result,
+    .th_db_state,
+    .td_db_state {
         display: none;
     }
 }
 
 @media screen and (max-width: 1279px) {
-    #td_db_result,
-    #th_db_result {
+    .td_db_result,
+    .th_db_result {
         display: none;
     }
 }
@@ -742,6 +742,13 @@
         display: none;
     }
 }
+
+//*----------------------------------------------------------
+//Admin - tech doc
+//------------------------------------------------------------ */
+@media screen and (max-width: 550px) {
+    .tech_doc_img{width:90%;}
+}  
 
 //*----------------------------------------------------------
 //Menu editor - Menu list

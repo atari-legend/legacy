@@ -112,6 +112,9 @@ img { display: block; }
     color: #bcbdbd;
 }
 
+.standard_tile_subtext a{color: #bcbdbd;}
+.standard_tile_subtext a:hover{color: white;}
+
 .standard_tile p {
     width: 91.7%;
     padding-right: 4%;
@@ -412,8 +415,8 @@ img { display: block; }
 	opacity: 1;
 }
 
-#checkbox_alt label {
-    	border:1px solid #008b8b;}
+.checkbox_alt{@extend .checkbox;}
+.checkbox_alt label{border:1px solid #008b8b;}
 
 //*------------------------------------------------------------
 //Standard table settings

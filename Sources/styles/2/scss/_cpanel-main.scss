@@ -16,7 +16,9 @@
 
 #child_good_karma,
 #child_bad_karma,
-#child_bad_karma_chart
+#child_bad_karma_chart,
+#child_bar,
+#child_line,
 #child_good_karma_chart {
     float: left;
     width: 50%;
@@ -58,7 +60,7 @@
     margin-bottom: 0;
 }
 
-#quick_search_options {
+#quick_search_options, #quick_search_user_options {
     display: table;
     width: 75%;
     margin-right: auto;
@@ -98,7 +100,7 @@
     background: #666;
 }
 
-#quick_search_small_select {
+#quick_search_small_select, #quick_search_user_small_select {
     width: 50px;
     height: 25px;
     background: #666;

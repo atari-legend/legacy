@@ -20,6 +20,8 @@
 
 #child_good_karma,
 #child_bad_karma,
+#child_bar,
+#child_line,
 #child_bad_karma_chart
 #child_good_karma_chart {
     float: left;
@@ -55,7 +57,7 @@
 //Quick search games
 //------------------------------------------------------------ */
 .quick_search_check { margin-right: 5px; }
-#quick_search_options {
+#quick_search_options, #quick_search_user_options {
     display: table;
     width: 75%;
     margin-right: auto;
@@ -98,7 +100,7 @@
     margin-top: 0;
 }
 
-#quick_search_small_select {
+#quick_search_small_select, #quick_search_user_small_select {
     width: 50px;
     height: 25px;
 }

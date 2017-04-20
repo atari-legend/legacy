@@ -20,12 +20,16 @@ $query_screenstar = $mysqli->query("SELECT
 					game.game_name,
 					game.game_id,
 					comments.comment,
+                    comments.timestamp,
                     game_user_comments.game_user_comments_id,
+                    users.user_id,
+                    users.userid,
 					screenshot_main.screenshot_id,
 					screenshot_main.imgext
 					FROM game_user_comments
 					LEFT JOIN comments ON (game_user_comments.comment_id = comments.comments_id)
 					LEFT JOIN game ON (game_user_comments.game_id = game.game_id)
+                    LEFT JOIN users ON (comments.user_id = users.user_id)
 					LEFT JOIN screenshot_game ON (game.game_id = screenshot_game.game_id)
 					LEFT JOIN screenshot_main ON (screenshot_game.screenshot_id = screenshot_main.screenshot_id)
 					WHERE CHAR_LENGTH( game_name ) <15 AND
@@ -46,12 +50,15 @@ $sql_screenstar = $query_screenstar->fetch_array(MYSQLI_BOTH);
 	$screenstar_image .= $sql_screenstar['screenshot_id'];
 	$screenstar_image .= '.';
 	$screenstar_image .= $sql_screenstar['imgext'];
-			
+    	
 	$smarty->assign('screenstar',
 	     array('screenstar_game_name' => $sql_screenstar['game_name'],
 		   'screenstar_comment' => $screenstar_comment,
            'screenstar_comment_id' => $sql_screenstar['game_user_comments_id'],
+           'screenstar_user_id' => $sql_screenstar['user_id'],
+           'screenstar_username' => $sql_screenstar['userid'],
 		   'screenstar_game_id' => $sql_screenstar['game_id'],
+           'screenstar_date'  => date("d/m/Y", $sql_screenstar['timestamp']),
 		   'screenstar_img' => $screenstar_image));
 
 ?>

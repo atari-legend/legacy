@@ -95,7 +95,7 @@ $smarty->assign('karma_good_label', json_encode($karma_good_label));
 //******************************************//
 
 //* Karma 0 to -100
-$result   = $mysqli->query("SELECT * FROM users WHERE karma < '0' and karma >= '-100'") or die ("error getting karma 0 -100");
+$result   = $mysqli->query("SELECT * FROM users WHERE karma <= '0' and karma >= '-100'") or die ("error getting karma 0 -100");
 $karma = $result->num_rows;
 $karma_bad_value[0] = $karma;
 $karma_bad_label[0] = ">-100";
