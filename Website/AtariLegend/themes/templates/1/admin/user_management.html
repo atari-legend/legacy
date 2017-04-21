@@ -330,6 +330,8 @@ function EmailSent(){
 {/block}
 
 {block name=main_tile}
+<link rel="stylesheet" href="{$template_dir}includes/font-awesome-4.7.0/css/font-awesome.min.css"> <!-- Font awesome for icons-->
+
 <div id="dialog_confirm_delete" title="Delete Users?" style="display:none;">
   <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
   These users will be permanently deleted. Are you sure?</p>
@@ -401,7 +403,7 @@ function EmailSent(){
                     <td class="username_td">{if $line.user_name != ''}<a href="../user/user_detail.php?user_id_selected={$line.user_id}" class="standard_table_center">{$line.user_name}</a>{else}<i>n/a</i>{/if}</td> 
                     <td class="joindate_td">{if $line.join_date != ''}{$line.join_date}{else}<i>n/a</i>{/if}</td>
                     <td class="lastvisit_td">{if $line.last_visit != ''}{$line.last_visit}{else}<i>n/a</i>{/if}</td>
-                    <td class="email_td">{if $line.email != ''}<a href="mailto:{$line.email}" class="standard_tile_link_black">M</a>{else}<i>n/a</i>{/if}</td>
+                    <td class="email_td">{if $line.email != ''}<a href="mailto:{$line.email}" class="standard_tile_link_black"><i class="fa fa-envelope" aria-hidden="true"></i></a>{/if}</td>
                 </tr>
                 {/foreach}
                 {else}
