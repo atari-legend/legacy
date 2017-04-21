@@ -85,9 +85,13 @@
     text-align: left;
 }
 
-#year_th,
+#year_th{
+    width: 7%;
+    text-align: left;
+}
+
 #info_th {
-    width: 10%;
+    width: 12%;
     text-align: left;
 }
 
@@ -108,13 +112,20 @@
     text-align: left;
 }
 
-.info_td,
 .year_td {
-    width: 10%;
+    width: 7%;
     padding-left: 2px;
+    text-align: left;
     font-size: 10pt;
     font-weight: 100;
+}
+
+.info_td {
+    width:12%;
+    padding-left: 2px;
     text-align: left;
+    font-size: 10pt;
+    font-weight: 100;
 }
 
 #game_list_table { width: 100%; }

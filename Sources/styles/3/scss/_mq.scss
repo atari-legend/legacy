@@ -417,6 +417,11 @@
 //*----------------------------------------------------------
 //Games list
 //------------------------------------------------------------ */
+@media screen and (min-width: 1281px) and (max-width: 1500px){
+    .info_td, #info_th{width:15%;}
+    .year_td, #year_th{width:5%;}
+    }
+    
 @media screen and (max-width: 1174px) {
     .info_td,
     .year_td,

@@ -18,9 +18,9 @@
     @if $skin-name == legacy {
         border: 1px solid #008b8b;
     } @else if $skin-name == tos {
-        border: 1px solid black;
+        border: 1px solid white;
     } @else if $skin-name == picasso {
-        border: 1px solid black;
+        border: 1px solid #484c7b;
     }
 }
 
@@ -110,8 +110,8 @@ figure.effect-tile figcaption {
         border-bottom: 1px solid black;
     } @else if $skin-name == picasso {
         background: rgb(172, 172, 172);
-        border-top: 1px solid  black;
-        border-bottom: 1px solid  black;
+        border-top: 1px solid #484c7b;
+        border-bottom: 1px solid #484c7b;
     }
     opacity: 0.9;
 	color: white;

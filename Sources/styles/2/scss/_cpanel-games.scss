@@ -85,9 +85,13 @@
     text-align: left;
 }
 
-#year_th,
+#year_th{
+    width: 7%;
+    text-align: left;
+}
+
 #info_th {
-    width: 10%;
+    width: 12%;
     text-align: left;
 }
 
@@ -104,9 +108,14 @@
     text-align: left;
 }
 
-.info_td,
 .year_td {
-    width: 10%;
+    width: 7%;
+    padding-left: 2px;
+    text-align: left;
+}
+
+.info_td {
+    width:12%;
     padding-left: 2px;
     text-align: left;
 }
