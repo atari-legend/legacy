@@ -539,8 +539,13 @@
     }
 
     #gd_publisher_info {margin-top: 0;}
+    
+    #gd_text_area_big{height:100%;}
 }
 
+@media screen and (max-width: 360px) {
+    #file_upload_game_screenshots{width: 50%;}
+}
 
 //*----------------------------------------------------------
 //Games comment
@@ -883,6 +888,10 @@
     #download_details_row {width: 100%;}
     #download_details_text {display: inline;}
     #download_details_input {display: inline; }
+}
+
+@media screen and (max-width: 360px) {
+    #file_upload_game_detail{width: 50%;}
 }
 
 //*----------------------------------------------------------
