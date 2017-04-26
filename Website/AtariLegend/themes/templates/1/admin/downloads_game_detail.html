@@ -8,6 +8,7 @@
 *   email                : martens_maarten@hotmail.com
 *
 *   Id: downloads_game_detail.html,v 0.1 2017/03/12 STG 19:55
+*   Id: downloads_game_detail.html,v 0.2 2017/04/25 STG 23:15 - New style upload button
 *		
 ***************************************************************************/
 *}
@@ -16,6 +17,14 @@
 
 {block name=java_script}
 <script type="text/javascript">
+$(function() {    
+    $but = $('#file_upload_game_detail');
+    
+    $("input:file[id=file_upload]").change(function() {
+        document.getElementById('file_upload_game_detail').value = $(this).val();
+    });
+});
+
 function editDownload(str, game_id) {
 
     var str2 = "downloadedit_ajax_";
@@ -623,8 +632,12 @@ function deleteDownload(str, game_id) {
             <fieldset>
                 <legend>Add a new download</legend>
                 <br>
-                <b>Filename :</b> 
-                <input type="file" name="game_download_name" accept="application/x-zip-compressed,application/x-zip-compressed,application/x-zip-compressed">
+                <label for="file_upload" class="file_upload">Select file</label>
+                <input id="file_upload" type="file" name="game_download_name">
+                <input type="text" class="standard_tile_input_small" id="file_upload_game_detail">&nbsp;
+                <br><br>
+                <!--<b>Filename :</b> 
+                <input type="file" name="game_download_name" accept="application/x-zip-compressed,application/x-zip-compressed,application/x-zip-compressed">-->
                 <input type="submit" class="topbutton_cpanel_small" value="Upload" style="padding:2px;">
                 <input type="hidden" name="game_id" value="{$game.game_id}">
                 <br>
