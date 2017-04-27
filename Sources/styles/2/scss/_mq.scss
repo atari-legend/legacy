@@ -540,6 +540,10 @@
     }
 }
 
+@media screen and (max-width: 700px) {
+    #game_review_textfield { width: 97%;}
+}
+
 @media screen and (max-width: 1100px) {
     #reviewdate_gr_th,
     .reviewdate_gr_td {
@@ -608,6 +612,13 @@
     .year_gm_td {
         display: none;
     }
+}
+
+//*----------------------------------------------------------
+//Games music detail
+//------------------------------------------------------------ */
+@media screen and (max-width: 360px) {
+    #file_upload_game_music{width: 50%;}
 }
 
 //*----------------------------------------------------------
