@@ -112,7 +112,7 @@ function submovetocomment(JSsubID)
 					<br>
 					Joined: {$line.user_joindate}
 					<br>
-					{if $line.user_comment_nr eq 0} {else}<a href="../games/games_comment.php?c_counter={$structure.v_counter}&amp;users_id={$line.user_id}&amp;view=users_comments" class="links_addnew_link">{/if}Game Comments: {$line.user_comment_nr}{if $line.user_comment_nr eq 0} {else}</a>{/if}
+					Game Comments: {if $line.user_comment_nr eq 0} {$line.user_comment_nr} {else}<a href="../games/games_comment.php?c_counter={$structure.v_counter}&amp;users_id={$line.user_id}&amp;view=users_comments" class="links_addnew_link">{$line.user_comment_nr}</a>{/if}
 					<br>
 					Game Submissions: {$line.usersubmit_number}
 					<br>
@@ -123,28 +123,28 @@ function submovetocomment(JSsubID)
 					<br>
 					<br>
 					{if $line.email != ''}
-						<a href="mailto:{$line.email}?subject=Thanks%20for%20the%20submission%20on%20{$line.email_game}%20at%20Atari%20Legend" class="left_nav_link">
+						<a href="mailto:{$line.email}?subject=Thanks%20for%20the%20submission%20on%20{$line.email_game}%20at%20Atari%20Legend" class="links_addnew_link">
 							<b>EMAIL</b>
 						</a>
-						|
+						 ---
 					{/if}
 					{if $structure.list == 'done'} {else}
-						<a href="../games/db_games_submissions.php?action=update_submission&amp;submit_id={$line.submit_id}&amp;list={$structure.list}&amp;v_counter={$structure.v_counter}" class="left_nav_link">
+						<a href="../games/db_games_submissions.php?action=update_submission&amp;submit_id={$line.submit_id}&amp;list={$structure.list}&amp;v_counter={$structure.v_counter}" class="links_addnew_link">
 							<b>DONE</b>
 						</a>
-						|
+						---
 					{/if}
 					{if $structure.list == 'current'}
-						<a  onClick="commentdelete({$line.submit_id})" style="cursor: pointer;" class="left_nav_link">
+						<a href="#" onClick="commentdelete({$line.submit_id})" style="cursor: pointer;" class="links_addnew_link">
 							<b>DELETE</b>
 						</a>
-						|
+						---
 					{/if}
-					<a  onClick="submovetocomment({$line.submit_id})" style="cursor: pointer;" class="left_nav_link">
+					<a href="#" onClick="submovetocomment({$line.submit_id})" style="cursor: pointer;" class="links_addnew_link">
 						<b>TO COMMENTS</b>
 					</a>	
-					|
-					<a href="#top" class="left_nav_link"><b>TO TOP</b></a>
+					---
+					<a href="#top" class="links_addnew_link"><b>BACK TO TOP</b></a>
 				</td>
 			</tr>		
 		{/foreach}

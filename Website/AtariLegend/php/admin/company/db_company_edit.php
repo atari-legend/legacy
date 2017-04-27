@@ -14,7 +14,8 @@
  *          id: db_company_edit,v 0.22 2017/02/26 22:19 STG
  *              - fix sql warnings stonish server
  *              - Extra checks when deleting a company
- *
+ *          id: db_company_edit,v 0.22 2017/04/27 22:19 STG
+ *              - adding real escape string when updating/inserting
  ***************************************************************************/
 
 /*
@@ -89,6 +90,10 @@ if (isset($action) and $action == 'add_logo') {
 
 //update the info of the individual
 if (isset($action) and $action == 'update') {
+    
+    $comp_name = $mysqli->real_escape_string($comp_name);
+    $textfield = $mysqli->real_escape_string($textfield);
+    
     $sdbquery = $mysqli->query("UPDATE pub_dev SET pub_dev_name = '$comp_name' WHERE pub_dev_id = $comp_id") or die("Couldn't Update into pub_dev");
 
     $COMPANYtext = $mysqli->query("SELECT pub_dev_id FROM pub_dev_text
@@ -162,6 +167,9 @@ if ($action == "insert_comp") {
         }else{
             $textfield = '';
         }
+        
+        $comp_name = $mysqli->real_escape_string($comp_name);
+        $textfield = $mysqli->real_escape_string($textfield);
         
         $sql = $mysqli->query("INSERT INTO pub_dev (pub_dev_name) VALUES ('$comp_name')");
 
