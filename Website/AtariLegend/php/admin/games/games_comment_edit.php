@@ -44,8 +44,8 @@ $query_comment = $sql_comment->fetch_array(MYSQLI_BOTH) or die("couldn't build q
 
 $date = date("F j, Y", $query_comment['timestamp']);
 
-$comment = nl2br($query_comment['comment']);
-$comment = stripslashes($comment);
+$comment = stripslashes($query_comment['comment']);
+$comment = trim($comment);
 
 $smarty->assign('comments', array(
     'comment' => $comment,

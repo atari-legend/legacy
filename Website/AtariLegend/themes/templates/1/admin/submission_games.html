@@ -9,6 +9,8 @@
 *   Id: submissions_games.html,v 0.10 ?
 *   Id: submissions_games.html,v 0.20 2016/07/27 22:06 Grave 
 *						- AL 2.0
+*   Id: submissions_games.html,v 0.21 2017/04/28 23:19 Grave 
+*						- Added font awesome and updated layout
 *
 ***************************************************************************/
 
@@ -64,7 +66,17 @@ function submovetocomment(JSsubID)
 {block name=title}Game Submissions{/block}
 
 {block name=main_tile}
+<link rel="stylesheet" href="{$template_dir}includes/font-awesome-4.7.0/css/font-awesome.min.css"> <!-- Font awesome for icons-->   
+
 <div class="standard_tile" id="games_submissions">
+    <div class="help-tip">
+        <p><i class="fa fa-envelope" aria-hidden="true"></i> - mail to <br>
+           <i class="fa fa-trash" aria-hidden="true"></i> - delete submission<br>
+           <i class="fa fa-check-square" aria-hidden="true"></i> - move to DONE list<br>
+           <i class="fa fa-comment" aria-hidden="true"></i> - move to COMMENTS<br>
+           <i class="fa fa-arrow-up" aria-hidden="true"></i> - back to top
+        </p>
+    </div>
 	<h1>GAME SUBMISSIONS</h1>
 	<div class="standard_tile_line"></div>
 		<div class="standard_tile_text">
@@ -98,9 +110,19 @@ function submovetocomment(JSsubID)
 					Radom shot
 				</td>	
 				<td class="gc_center_head">
-					<a href="../games/games_detail.php?game_id={$line.game_id}" class="links_addnew_link">{$line.game_name}</a>
-						Posted by <a href="../user/user_detail.php?user_id_selected={$line.user_id}" class="links_addnew_link">{$line.user_name}</a> on {$line.date}
+					<a href="../games/games_detail.php?game_id={$line.game_id}" class="links_addnew_link">{$line.game_name}</a>						
 				</td>
+                 <td class="gc_right_head">
+                     {if $line.email != ''}
+                        <a href="mailto:{$line.email}?subject=Thanks%20for%20the%20submission%20on%20{$line.email_game}%20at%20Atari%20Legend" class="links_addnew_link"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+                    {/if}
+                    <a href="#" onClick="commentdelete({$line.submit_id})" style="cursor: pointer;" class="links_addnew_link"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                    {if $structure.list == 'current'}
+                        <a href="../games/db_games_submissions.php?action=update_submission&amp;submit_id={$line.submit_id}&amp;list={$structure.list}&amp;v_counter={$structure.v_counter}" class="links_addnew_link"><i class="fa fa-check-square" aria-hidden="true"></i></a>
+                    {/if}
+                    <a href="#" onClick="submovetocomment({$line.submit_id})" style="cursor: pointer;" class="links_addnew_link"><i class="fa fa-comment" aria-hidden="true"></i></a>
+                    <a href="#top" class="links_addnew_link"><i class="fa fa-arrow-up" aria-hidden="true"></i></a>
+                </td>   
 			</tr>
 			<tr>
 				<td class="gc_left">
@@ -112,39 +134,19 @@ function submovetocomment(JSsubID)
 					<br>
 					Joined: {$line.user_joindate}
 					<br>
-					Game Comments: {if $line.user_comment_nr eq 0} {$line.user_comment_nr} {else}<a href="../games/games_comment.php?c_counter={$structure.v_counter}&amp;users_id={$line.user_id}&amp;view=users_comments" class="links_addnew_link">{$line.user_comment_nr}</a>{/if}
+					Comments: {if $line.user_comment_nr eq 0} {$line.user_comment_nr} {else}<a href="../games/games_comment.php?c_counter={$structure.v_counter}&amp;users_id={$line.user_id}&amp;view=users_comments" class="links_addnew_link">{$line.user_comment_nr}</a>{/if}
 					<br>
-					Game Submissions: {$line.usersubmit_number}
+					Submissions: {$line.usersubmit_number}
 					<br>
 					Karma: {$line.karma}
 				</td>
-				<td class="gc_center">	
+				<td class="gc_center" colspan="2">	
+                    Posted by <a href="../user/user_detail.php?user_id_selected={$line.user_id}" class="standard_tile_link_black">{$line.user_name}</a> on {$line.date}
+                    <br>
+                    <br>
 					{$line.comment}
 					<br>
 					<br>
-					{if $line.email != ''}
-						<a href="mailto:{$line.email}?subject=Thanks%20for%20the%20submission%20on%20{$line.email_game}%20at%20Atari%20Legend" class="links_addnew_link">
-							<b>EMAIL</b>
-						</a>
-						 ---
-					{/if}
-					{if $structure.list == 'done'} {else}
-						<a href="../games/db_games_submissions.php?action=update_submission&amp;submit_id={$line.submit_id}&amp;list={$structure.list}&amp;v_counter={$structure.v_counter}" class="links_addnew_link">
-							<b>DONE</b>
-						</a>
-						---
-					{/if}
-					{if $structure.list == 'current'}
-						<a href="#" onClick="commentdelete({$line.submit_id})" style="cursor: pointer;" class="links_addnew_link">
-							<b>DELETE</b>
-						</a>
-						---
-					{/if}
-					<a href="#" onClick="submovetocomment({$line.submit_id})" style="cursor: pointer;" class="links_addnew_link">
-						<b>TO COMMENTS</b>
-					</a>	
-					---
-					<a href="#top" class="links_addnew_link"><b>BACK TO TOP</b></a>
 				</td>
 			</tr>		
 		{/foreach}
