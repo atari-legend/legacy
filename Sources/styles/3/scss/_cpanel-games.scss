@@ -260,8 +260,14 @@
 }
 
 .gc_center_head {
-    width: 80%;
+    width: 60%;
     font-size: 12pt;
+}
+
+.gc_right_head {
+    width: 20%;
+    font-size: 11pt;
+    text-align: right;
 }
 
 .gc_left {
@@ -348,7 +354,7 @@
     height: 450px;
 }
 
-#game_review_screenshot_text {
+.game_review_screenshot_text {
     @extend .standard_tile_input_area;
     width: 75%;
     height: 75px;

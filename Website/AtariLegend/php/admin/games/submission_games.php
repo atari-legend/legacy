@@ -102,7 +102,7 @@ while ($query_submission = $sql_submission->fetch_array(MYSQLI_BOTH)) {
     $v_game_image .= $sql_game['imgext'];
 
     $converted_date = date("F j, Y", $query_submission['timestamp']);
-    $user_joindate  = date("F j, Y", $query_submission['join_date']);
+    $user_joindate  = date("d-m-y", $query_submission['join_date']);
     $comment        = InsertALCode($query_submission['submit_text']);
     $comment        = InsertSmillies($comment);
     $comment        = nl2br($comment);
@@ -146,7 +146,7 @@ if ($v_counter > 0) {
 //Check if we need to place a next arrow
 if ($v_rows > ($v_counter + 25)) {
     $forward_arrow = ($v_counter + 25);
-}
+}else{$forward_arrow = '';}
 
 if (!isset($list)) {
     $list = "current";
@@ -154,6 +154,7 @@ if (!isset($list)) {
 if (empty($back_arrow)) {
     $back_arrow = '';
 }
+
 $smarty->assign('structure', array(
     'list' => $list,
     'v_counter' => $v_counter,

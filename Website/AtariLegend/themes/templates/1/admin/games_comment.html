@@ -9,6 +9,7 @@
  *
  *   Id: games_comment.html,v 0.10 2005/10/11 15:03 STG
  *   Id: games_comment.html,v 0.20 2015/12/28 23:54 STG - 1920 width - HTML validated
+ *   Id: games_comment.html,v 0.21 2017/04/28 20:10 STG - added icons and updated look
  *
  ***************************************************************************/
 
@@ -44,7 +45,17 @@ function commentdelete(JScomID,JSusers_id)
 {/block}
 
 {block name=main_tile}
+
+<link rel="stylesheet" href="{$template_dir}includes/font-awesome-4.7.0/css/font-awesome.min.css"> <!-- Font awesome for icons-->
+
 <div class="standard_tile" id="games_comment">
+    <div class="help-tip">
+        <p><i class="fa fa-envelope" aria-hidden="true"></i> - mail to <br>
+           <i class="fa fa-pencil" aria-hidden="true"></i> - edit comment <br>
+           <i class="fa fa-trash" aria-hidden="true"></i> - delete comment<br>
+           <i class="fa fa-arrow-up" aria-hidden="true"></i> - back to top
+        </p>
+    </div>
 	<h1>ADD/EDIT GAME COMMENTS</h1>
 	<div class="standard_tile_line"></div>
 	<div class="standard_tile_text">
@@ -62,45 +73,40 @@ function commentdelete(JScomID,JSusers_id)
 					Radom shot
 				</td>
 				<td class="gc_center_head">
-					<a href="../games/games_detail.php?game_id={$line.game_id}" class="links_addnew_link">{$line.game}</a> 
-					posted by <a href="../user/user_detail.php?user_id_selected={$line.users_id}" class="links_addnew_link">{$line.user_name}</a> on {$line.date}
+					<a href="../games/games_detail.php?game_id={$line.game_id}" class="links_addnew_link">{$line.game}</a> 					
 				</td>
+                <td class="gc_right_head">
+                     {if $line.email != ''}
+                        <a href="mailto:{$line.email}?subject=Comment%20of%20{$line.game|escape:'url'}%20at%20Atari%20Legend" class="links_addnew_link"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+                    {/if}
+                    <a href="../games/games_comment_edit.php?game_user_comments_id={$line.game_user_comments_id}{$links.users_comments}&amp;v_counter={$links.v_counter}" class="links_addnew_link"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                    <a href="#" onClick="commentdelete({$line.comment_id},{$line.users_id})" style="cursor: pointer;" class="links_addnew_link"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                    <a href="#top" class="links_addnew_link"><i class="fa fa-arrow-up" aria-hidden="true"></i></a>
+                </td>   
 			</tr>
 			<tr>
 				<td class="gc_left">
-					{if isset($line.image) and $line.image != ''}
+					{if isset($line.image) and $line.image != ''}                      
 						<a href="../games/games_detail.php?game_id={$line.game_id}" class="links_addnew_link">
-						<img src="../../includes/show_image.php?file={$line.image}&amp;resize=160,null,null,null" alt="{$line.game}" class="user_stats_img_dark">
+						<img src="../../includes/show_image.php?file={$line.image}&amp;resize=160,null,null,null" alt="{$line.game}" class="user_stats_img_dark" style="max-width:95%;">
 						</a>
 					{/if}
 					<br>
 					Joined: {$line.user_joindate}
 					<br>
-					Game Comments: <a href="../games/games_comment.php?c_counter={$links.v_counter}&amp;users_id={$line.users_id}&amp;view=users_comments" class="links_addnew_link">{$line.user_comment_nr}</a>
+					Comments: <a href="../games/games_comment.php?c_counter={$links.v_counter}&amp;users_id={$line.users_id}&amp;view=users_comments" class="links_addnew_link">{$line.user_comment_nr}</a>
 					<br>
-					Game Submissions: {$line.usersubmit_number}
+					Submissions: {$line.usersubmit_number}
 					<br>
 					Karma: {$line.karma}
 				</td>
-				<td class="gc_center">
+				<td class="gc_center" colspan="2">
+                    Posted by <a href="../user/user_detail.php?user_id_selected={$line.users_id}" class="standard_tile_link_black">{$line.user_name}</a> on {$line.date}
+                    <br>
+                    <br>
 					{$line.comment}
 					<br>
 					<br>
-					{if $line.email != ''}
-					<a href="mailto:{$line.email}?subject=Comment%20of%20{$line.game|escape:'url'}%20at%20Atari%20Legend" class="links_addnew_link">
-					<b>EMAIL</b>
-					</a>
-					 ---
-					{/if}
-					<a href="../games/games_comment_edit.php?game_user_comments_id={$line.game_user_comments_id}{$links.users_comments}&amp;v_counter={$links.v_counter}" class="links_addnew_link">
-						<b>EDIT</b>
-					</a>
-					 ---
-					<a href="#" onClick="commentdelete({$line.comment_id},{$line.users_id})" style="cursor: pointer;" class="links_addnew_link">
-						<b>DELETE</b>
-					</a>
-					---
-					<a href="#top" class="links_addnew_link"><b>BACK TO TOP</b></a>
 				</td>
 			</tr>		
 		{/foreach}

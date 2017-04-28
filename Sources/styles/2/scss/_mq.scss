@@ -509,6 +509,11 @@
     .gc_left {display: none;}
 }
 
+@media screen and (max-width: 500px) {
+    .gc_center_head {width:65%;}
+    .gc_right_head {width:35%;}
+}
+
 //*----------------------------------------------------------
 //Games Upload
 //------------------------------------------------------------ */
