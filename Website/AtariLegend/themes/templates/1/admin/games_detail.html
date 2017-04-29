@@ -322,9 +322,9 @@ function browseDeveloper(str) {
 								{/foreach}
 								<img src="../../../themes/templates/1/includes/img/arrow_ltr.gif" alt="" width="38" height="22" style="display:inline;">		
 								<input type="button" name="valider" value="Delete" onclick="delete_creator()" class="topbutton_cpanel_small" style="display:inline;">
-							{/if}
-							<br>
-							<br>
+                                <br>
+                                <br>
+                            {/if}
 							<select name="ind_id" id="ind_id">
 							<option value="-" selected="selected">-</option>
 							{foreach from=$individuals item=line}
@@ -351,16 +351,16 @@ function browseDeveloper(str) {
 				<fieldset class="game_data_tile">
 					<legend>Release Year</legend>
 						{if isset($game_year)}	
-						{foreach from=$game_year item=line}
-							<input type="checkbox" name="game_year_id[]" value="{$line.game_year_id}">{$line.game_year} {if  $line.game_extra_info <> ''}<b>({$line.game_extra_info})</b>{/if}
-							<br>
-							<br>
-						{/foreach}
-						<img src="../../../themes/templates/1/includes/img/arrow_ltr.gif" alt="" width="38" height="22" style="display:inline;">		
-						<input type="button" name="valider" value="Delete" onclick="delete_year()" class="topbutton_cpanel_small" style="display:inline;">
-						{/if}
-						<br>
-						<br>
+                            {foreach from=$game_year item=line}
+                                <input type="checkbox" name="game_year_id[]" value="{$line.game_year_id}">{$line.game_year} {if  $line.game_extra_info <> ''}<b>({$line.game_extra_info})</b>{/if}
+                                <br>
+                                <br>
+                            {/foreach}
+                            <img src="../../../themes/templates/1/includes/img/arrow_ltr.gif" alt="" width="38" height="22" style="display:inline;">		
+                            <input type="button" name="valider" value="Delete" onclick="delete_year()" class="topbutton_cpanel_small" style="display:inline;">
+                            <br>
+                            <br>
+                        {/if}
 						{html_select_date start_year=1984 display_days=0 display_months=0 id="small_select"}
 						<b>Release Year</b>	
 						<br>
@@ -385,17 +385,17 @@ function browseDeveloper(str) {
 				<legend>Developer info</legend>
 				<form action="../games/db_games_detail.php" method="post" name="developer" id="developer">
 					{if isset($developer)}	
-					{foreach from=$developer item=line}
-						<input type="checkbox" name="game_developer_id[]" value="{$line.pub_id}">
-						<a href="../company/company_edit.php?comp_id={$line.pub_id}" class="left_nav_link">{$line.pub_name}</a> {if $line.continent <> '' }<b>({$line.continent})</b>{/if} {if  $line.extra_info <> '' }<b>({$line.extra_info})</b>{/if}
-						<br>
-						<br>
-					{/foreach}
-					<img src="../../../themes/templates/1/includes/img/arrow_ltr.gif" alt="" width="38" height="22" style="display:inline;">		
-					<input type="button" name="valider" value="Delete" onclick="delete_developer()" class="topbutton_cpanel_small" style="display:inline;">
-					{/if}
-					<br>
-					<br>
+                        {foreach from=$developer item=line}
+                            <input type="checkbox" name="game_developer_id[]" value="{$line.pub_id}">
+                            <a href="../company/company_edit.php?comp_id={$line.pub_id}" class="left_nav_link">{$line.pub_name}</a> {if $line.continent <> '' }<b>({$line.continent})</b>{/if} {if  $line.extra_info <> '' }<b>({$line.extra_info})</b>{/if}
+                            <br>
+                            <br>
+                        {/foreach}
+                        <img src="../../../themes/templates/1/includes/img/arrow_ltr.gif" alt="" width="38" height="22" style="display:inline;">		
+                        <input type="button" name="valider" value="Delete" onclick="delete_developer()" class="topbutton_cpanel_small" style="display:inline;">
+                        <br>
+                        <br>
+                    {/if}
 					<table>
 					<tr>
 						<td>
@@ -451,9 +451,9 @@ function browseDeveloper(str) {
 					<input type="submit" name="valider" value="Add" class="topbutton_cpanel_small">
 					<input type="hidden" name="action" value="game_aka">	
 					<input type="hidden" name="game_id" value="{$game_id}">	
-					<br>
-					<br>
 					{if $nr_aka <> 0}
+                        <br>
+                        <br>
 						<b>Current AKA</b>
 						<br>
 						{foreach from=$aka item=line}
@@ -479,13 +479,13 @@ function browseDeveloper(str) {
 								<a href="../company/company_edit.php?comp_id={$line.pub_id}" class="left_nav_link">{$line.pub_name}</a> {if $line.continent <> '' }<b>({$line.continent})</b>{/if} {if  $line.extra_info <> '' }<b>({$line.extra_info})</b>{/if} 					
 							<br>
 							<br>
-						{/foreach}
-					{/if}					
-					<img src="../../../themes/templates/1/includes/img/arrow_ltr.gif" alt="" width="38" height="22" style="display:inline;">		
-					<input type="button" name="valider" value="Delete" onclick="delete_publisher()" class="topbutton_cpanel_small" style="display:inline;">
-					<br>
-					<br>
-					<table>
+						{/foreach}			
+                        <img src="../../../themes/templates/1/includes/img/arrow_ltr.gif" alt="" width="38" height="22" style="display:inline;">		
+                        <input type="button" name="valider" value="Delete" onclick="delete_publisher()" class="topbutton_cpanel_small" style="display:inline;">
+                        <br>
+                        <br>
+					{/if}		
+                    <table>
 					<tr>
 						<td>
 							<select name="companybrowse" onchange="browseCompany(this.value)" id="gd_pub_small_select">

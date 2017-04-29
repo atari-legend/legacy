@@ -61,7 +61,7 @@ function scoredelete(JSmagID,JSgame_id)
 			</fieldset>
 		{/if}
 		<br>
-		<fieldset>
+		<fieldset class="centered_fieldset">
 			<legend class="links_legend">Magazine issues</legend>
 			<br>
 			{* Marty! Hi mate! here you need to add the search variables. Take care /Matt *}
@@ -71,6 +71,8 @@ function scoredelete(JSmagID,JSgame_id)
 					<option value="{$line.magazine_issue_id}">{$line.magazine_name} issue {$line.magazine_issue_nr}</option>	
 					{/foreach}
 				</select>
+                <br>
+                <br>
 				<input type="hidden" name="action" value="set_score">	
 				<input type="submit" value="Select" class="topbutton_cpanel_small">
 			</form>
