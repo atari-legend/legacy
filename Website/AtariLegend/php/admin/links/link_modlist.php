@@ -65,7 +65,7 @@ $LINKSQL = $mysqli->query("SELECT * FROM website
                         or die("Couldn't query website and website description");
 
 while ($rowlink = $LINKSQL->fetch_array(MYSQLI_BOTH)) {
-    $timestamp = date("F j, Y", $rowlink['website_date']);
+    $timestamp = date("d-m-y", $rowlink['website_date']);
     $submitted = get_username_from_id($rowlink['user_id']);
     $website_image = $website_image_path;
     $website_image .= $rowlink['website_id'];

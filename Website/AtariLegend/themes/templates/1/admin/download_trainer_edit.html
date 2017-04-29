@@ -44,18 +44,18 @@ function trainerdelete(trainer_id)
 	<h1>EDIT TRAINER</h1>
 	<div class="standard_tile_line"></div>
 	<div class="standard_tile_text">
-		<fieldset>
+		<fieldset class="centered_fieldset">
 			<legend>Edit trainer option</legend>
 			<form action="../downloads/db_download_trainer.php" method="post" name="post" id="trainer_edit">
 				<b>Name :</b>
 				<input type="text" name="trainer_name" value="{$trainer_edit.trainer_name_edit}" class="standard_tile_input_small">
+                <br>
+                <br>
                 <input type="submit" value="Update" style="padding:2px;" class="topbutton_cpanel_small">
 				<input type="submit" value="Delete" onClick="trainerdelete({$trainer_edit.trainer_id_edit}); return false;" class="topbutton_cpanel_small">	
 				<input type="hidden" name="action" value="update">
 				<input type="hidden" name="trainer_id" value="{$trainer_edit.trainer_id_edit}">
 			</form>	
-			<br>
-			<br>
 		</fieldset>
 	</div>
 	{else}

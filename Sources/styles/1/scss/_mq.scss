@@ -353,12 +353,12 @@
 //*----------------------------------------------------------
 //Links Modify list
 //------------------------------------------------------------ */
-@media screen and (max-width: 500px) {
-    .links_list_row {flex-direction: column;}
+@media screen and (max-width: 640px) {
+    .user_stats_img_dark {display: none;}
 }
 
-@media screen and (max-width: 480px) {
-    .user_stats_img_dark {display: none;}
+@media screen and (max-width: 500px) {
+    .links_list_row {flex-direction: column;}
 }
 
 

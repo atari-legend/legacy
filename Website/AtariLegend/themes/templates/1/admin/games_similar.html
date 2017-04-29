@@ -37,13 +37,14 @@ The main game page
 					<option value="{$line.game_id}">{$line.game_name}</option>
 				{/foreach}			
 			</select>	
+            <br>
+            <br>
 			<input type="submit" name="valider" value="Add" class="topbutton_cpanel_small">
 			<input type="hidden" name="action" value="add_game_similar">	
 			<input type="hidden" name="game_id" value="{$game_info.game_id}">	
-			<br>
-			<br>
-			<br>
 			{if $nr_similar <> 0}
+                <br>
+                <br>
 				<b>Current Similar games</b>
 				<br>
 				<br>

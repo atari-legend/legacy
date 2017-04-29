@@ -35,42 +35,30 @@ The main downloads page
 		<br>
 		<br>
 		<form action="../downloads/downloads_list.php" method="get" name="game_search">
-		<div id="games_main_parent">
-			<fieldset>
-			<legend>Search</legend>
-			<br>
-			<div class="games_main_row">
-				<div class="games_main_text">By Name :</div>
-				<div class="games_main_input">
-					<select name="gamebrowse" id="games_main_small_select">
-						<option value="-" SELECTED>-</option>
-						{html_options values=$az_value output=$az_output}
-					</select>
-					<input type="text" name="gamesearch" value="" class="standard_tile_input_small">
-				</div>
-			</div>
-			<div class="games_main_row">
-				<div class="games_main_text">Type :</div>
-				<div class="games_main_input">
-					<select name="download_type" id="games_main_pub_select">
-						<option value="-" SELECTED>-</option>
+			<fieldset class="centered_fieldset">
+                <legend>Search</legend>
+                    <br>
+                    By Name :<br>
+                    <select name="gamebrowse" id="games_main_small_select">
+                        <option value="-" SELECTED>-</option>
+                        {html_options values=$az_value output=$az_output}
+                    </select>
+                    <input type="text" name="gamesearch" value="" class="standard_tile_input_small">
+                    <br><br>
+                    Type :<br>
+                    <select name="download_type" id="games_main_pub_select">
+                        <option value="-" SELECTED>-</option>
                             <option value="Game">Game</option>
-							<option value="Demo">Demo</option>
+                            <option value="Demo">Demo</option>
                             <option value="Menu">Menudisk</option>
-					</select>
-				</div>
-			</div>
-			<br>
-			<br>
-			<div class="standard_table_center">
-				<input type="submit" value="Search" class="topbutton_cpanel_small">
-			</div>
-			<br>
-			<br>
+                    </select>
+                <br>
+                <br>
+                <input type="submit" value="Search" class="topbutton_cpanel_small">
+                <br>    
 			</fieldset>
 			<input type="hidden" name="action" id="action" value="search">
 			<input type="hidden" name="user_id" id="user_id" value="{$user_id}">
-		</div>
 		</form>
 	</div>
 </div>
