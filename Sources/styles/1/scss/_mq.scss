@@ -895,6 +895,13 @@
 //*----------------------------------------------------------
 //download edit
 //------------------------------------------------------------ */
+
+/*This stuff is a 'solution' for all the problems I'm having regarding responsiveness in IE!! */
+@media screen and (max-width: 600px) {
+    .download_long_descr{display:none;}
+    .download_short_descr{display:inline;}
+}
+
 @media screen and (max-width: 480px) {
     #download_details_row {width: 100%;}
     #download_details_text {display: inline;}

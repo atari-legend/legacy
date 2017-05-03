@@ -1063,8 +1063,10 @@ if (isset($action) and $action == "mod_download") {
     $query_download_demo = $mysqli->query("SELECT * FROM demo ORDER BY demo_name ASC");
 
     while ($query = $query_download_demo->fetch_array(MYSQLI_BOTH)) {
+        //sadly this truncate is again a compromise to get the page responsive in IE
+        $demo_name = substr($query['demo_name'], 0, 20);
         $smarty->append('demo_id', $query['demo_id']);
-        $smarty->append('demo_name', $query['demo_name']);
+        $smarty->append('demo_name', $demo_name);
     }
 
     $smarty->assign('game_download_id', $game_download_id);
