@@ -8,36 +8,34 @@
 // DOWNLOAD edit section
 // *********************
 
-#download_format
-{ @extend #quick_search_pub_select;}
+#download_format, #download_language, #download_trainer, #download_option, #download_tos, #download_crew, #download_intro, 
+#download_menu, #download_set, #download_author_az, #download_author_name
+{@extend #quick_search_pub_select; width: 100%;}
 
-#download_language
-{ @extend #quick_search_pub_select;}
+#download_version, #download_info{@extend #quick_search_pub_select; width: 95%;}
 
-#download_trainer
-{ @extend #quick_search_pub_select;}
-
-#download_option {
-    @extend #small_select;
-}
-
-#download_tos {
-    @extend #small_select;
-}
-
-#download_crew
-{ @extend #quick_search_pub_select;}
-
-#download_intro
-{ @extend #quick_search_pub_select;}
-
-#download_menu
-{ @extend #quick_search_pub_select;}
-
-#download_set
-{ @extend #quick_search_pub_select; 
-  width:100%;}
-  
 #file_upload_game_detail{width: 60%;}
 
 .downloads_main_row{@extend .games_main_row;}
+
+.download_short_descr{display:none;}
+
+.download_details_input{
+    @extend .user_details_input;
+    width: 75%;
+} 
+
+.download_details_text{
+    @extend .user_details_text;
+    width: 25%;
+} 
+
+.download_details_row{
+    @extend .user_details_row;
+}
+
+download_details_text_long{
+    @extend .user_details_text;
+    width: 100%;
+    text-align:center;
+} 
