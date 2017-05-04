@@ -161,67 +161,163 @@ function browseDeveloper(str) {
 			<br>
 			<div id="gd_basic_game_info_1">
 				<div class="gd_basic_game_info_row">
-					<div class="gd_basic_game_info_row_check"><input type="checkbox" name="unreleased" value="1"{if $game_info.game_unreleased == 1} checked{/if}/></div>
+					<div class="gd_basic_game_info_row_check">
+                        <div class="links_mod_checkbox">
+                            <input type="checkbox" id="unreleased" name="unreleased" value="1" {if $game_info.game_unreleased == 1} checked{/if}>
+                            <label for="unreleased"></label>
+                            <!--<input type="checkbox" name="unreleased" value="1"{if $game_info.game_unreleased == 1} checked{/if}/>-->
+                        </div>    
+                    </div>
 					<div class="gd_basic_game_info_row_checktxt">Unreleased&nbsp;</div>
 				</div>
 				<div class="gd_basic_game_info_row">
-					<div class="gd_basic_game_info_row_check"><input type="checkbox" name="development" value="1"{if $game_info.game_development == 1} checked{/if}/></div>
+					<div class="gd_basic_game_info_row_check">
+                        <div class="links_mod_checkbox">
+                            <input type="checkbox" id="development" name="development" value="1" {if $game_info.game_development == 1} checked{/if}>
+                            <label for="development"></label>
+                            <!--<input type="checkbox" name="development" value="1"{if $game_info.game_development == 1} checked{/if}/>-->
+                        </div>
+                    </div>    
 					<div class="gd_basic_game_info_row_checktxt">In development&nbsp;</div>
 				</div>
 				<div class="gd_basic_game_info_row">
-					<div class="gd_basic_game_info_row_check"><input type="checkbox" name="free" value="1"{if $game_info.game_free == 1} checked{/if}/></div>
+					<div class="gd_basic_game_info_row_check">
+                        <div class="links_mod_checkbox">
+                            <input type="checkbox" id="free" name="free" value="1" {if $game_info.game_free == 1} checked{/if}>
+                            <label for="free"></label>
+                            <!--<input type="checkbox" name="free" value="1"{if $game_info.game_free == 1} checked{/if}/>-->
+                         </div>    
+                    </div>
 					<div class="gd_basic_game_info_row_checktxt">Non-commercial&nbsp;</div>
 				</div>
 				<div class="gd_basic_game_info_row">
-					<div class="gd_basic_game_info_row_check"><input type="checkbox" name="ste_only" value="1"{if $game_info.game_ste_only == 1} checked{/if}/></div>
+					<div class="gd_basic_game_info_row_check">
+                        <div class="links_mod_checkbox">
+                            <input type="checkbox" id="ste_only" name="ste_only" value="1" {if $game_info.game_ste_only == 1} checked{/if}>
+                            <label for="ste_only"></label>
+                            <!--<input type="checkbox" name="ste_only" value="1"{if $game_info.game_ste_only == 1} checked{/if}/>-->
+                         </div>        
+                    </div>
 					<div class="gd_basic_game_info_row_checktxt">STE ONLY&nbsp;</div>
 				</div>					
 				<div class="gd_basic_game_info_row">
-					<div class="gd_basic_game_info_row_check"><input type="checkbox" name="ste_enhanced" value="1"{if $game_info.game_ste_enhan == 1} checked/{/if}></div>
+					<div class="gd_basic_game_info_row_check">
+                        <div class="links_mod_checkbox">
+                            <input type="checkbox" id="ste_enhanced" name="ste_enhanced" value="1" {if $game_info.game_ste_enhan == 1} checked{/if}>
+                            <label for="ste_enhanced"></label>
+                            <!--<input type="checkbox" name="ste_enhanced" value="1"{if $game_info.game_ste_enhan == 1} checked/{/if}>-->
+                         </div>    
+                    </div>
 					<div class="gd_basic_game_info_row_checktxt">STE Enhanced&nbsp;</div>
 				</div>
 				<div class="gd_basic_game_info_row">
-					<div class="gd_basic_game_info_row_check"><input type="checkbox" name="falcon_only" value="1"{if $game_info.game_falcon_only == 1} checked{/if}/></div>
+					<div class="gd_basic_game_info_row_check">
+                        <div class="links_mod_checkbox">
+                            <input type="checkbox" id="falcon_only" name="falcon_only" value="1" {if $game_info.game_falcon_only == 1} checked{/if}>
+                            <label for="falcon_only"></label>
+                            <!--<input type="checkbox" name="falcon_only" value="1"{if $game_info.game_falcon_only == 1} checked{/if}/>-->
+                         </div> 
+                     </div>
 					<div class="gd_basic_game_info_row_checktxt">Falcon only&nbsp;</div>
 				</div>		
 				<div class="gd_basic_game_info_row">
-					<div class="gd_basic_game_info_row_check"><input type="checkbox" name="falcon_enhanced" value="1"{if $game_info.game_falcon_enhan == 1} checked{/if}/></div>
+					<div class="gd_basic_game_info_row_check">
+                        <div class="links_mod_checkbox">
+                            <input type="checkbox" id="falcon_enhanced" name="falcon_enhanced" value="1" {if $game_info.game_falcon_enhan == 1} checked{/if}>
+                            <label for="falcon_enhanced"></label>
+                            <!--<input type="checkbox" name="falcon_enhanced" value="1"{if $game_info.game_falcon_enhan == 1} checked{/if}/>-->
+                         </div> 
+                    </div>
 					<div class="gd_basic_game_info_row_checktxt">Falcon Enhanced&nbsp;</div>
 				</div>
                 <div class="gd_basic_game_info_row">
-					<div class="gd_basic_game_info_row_check"><input type="checkbox" name="falcon_rgb" value="1"{if $game_info.game_falcon_rgb == 1} checked{/if}/></div>
+					<div class="gd_basic_game_info_row_check">
+                        <div class="links_mod_checkbox">
+                            <input type="checkbox" id="falcon_rgb" name="falcon_rgb" value="1" {if $game_info.game_falcon_rgb == 1} checked{/if}>
+                            <label for="falcon_rgb"></label>
+                            <!--<input type="checkbox" name="falcon_rgb" value="1"{if $game_info.game_falcon_rgb == 1} checked{/if}/>-->
+                         </div> 
+                    </div>
 					<div class="gd_basic_game_info_row_checktxt">Falcon RGB&nbsp;</div>
 				</div>
                 <div class="gd_basic_game_info_row">
-					<div class="gd_basic_game_info_row_check"><input type="checkbox" name="falcon_vga" value="1"{if $game_info.game_falcon_vga == 1} checked{/if}/></div>
+					<div class="gd_basic_game_info_row_check">
+                        <div class="links_mod_checkbox">
+                            <input type="checkbox" id="falcon_vga" name="falcon_vga" value="1" {if $game_info.game_falcon_vga == 1} checked{/if}>
+                            <label for="falcon_vga"></label>
+                            <!--<input type="checkbox" name="falcon_vga" value="1"{if $game_info.game_falcon_vga == 1} checked{/if}/>-->
+                         </div> 
+                    </div>
 					<div class="gd_basic_game_info_row_checktxt">Falcon VGA&nbsp;</div>
 				</div>
 				<div class="gd_basic_game_info_row">
-					<div class="gd_basic_game_info_row_check"><input type="checkbox" name="unfinished" value="1"{if $game_info.game_unfinished == 1} checked{/if}/></div>
+					<div class="gd_basic_game_info_row_check">
+                        <div class="links_mod_checkbox">
+                            <input type="checkbox" id="unfinished" name="unfinished" value="1" {if $game_info.game_unfinished == 1} checked{/if}>
+                            <label for="unfinished"></label>
+                            <!--<input type="checkbox" name="unfinished" value="1"{if $game_info.game_unfinished == 1} checked{/if}/>-->
+                         </div> 
+                     </div>
 					<div class="gd_basic_game_info_row_checktxt">Unfinished&nbsp;</div>
 				</div>	
 				<div class="gd_basic_game_info_row">
-					<div class="gd_basic_game_info_row_check"><input type="checkbox" name="monochrome" value="1"{if $game_info.game_mono == 1} checked{/if}/></div>
+					<div class="gd_basic_game_info_row_check">
+                        <div class="links_mod_checkbox">
+                            <input type="checkbox" id="monochrome" name="monochrome" value="1" {if $game_info.game_mono == 1} checked{/if}>
+                            <label for="monochrome"></label>
+                            <!--<input type="checkbox" name="monochrome" value="1"{if $game_info.game_mono == 1} checked{/if}/>-->
+                         </div> 
+                    </div>
 					<div class="gd_basic_game_info_row_checktxt">Monochrome&nbsp;</div>
 				</div>
 				<div class="gd_basic_game_info_row">
-					<div class="gd_basic_game_info_row_check"><input type="checkbox" name="wanted" value="1"{if $game_info.game_wanted <> ''} checked{/if}/></div>
+					<div class="gd_basic_game_info_row_check">
+                        <div class="links_mod_checkbox">
+                            <input type="checkbox" id="wanted" name="wanted" value="1" {if $game_info.game_wanted <> ''} checked{/if}>
+                            <label for="wanted"></label>
+                            <!--<input type="checkbox" name="wanted" value="1"{if $game_info.game_wanted <> ''} checked{/if}/>-->
+                         </div> 
+                    </div>
 					<div class="gd_basic_game_info_row_checktxt">Wanted&nbsp;</div>
 				</div>	
 				<div class="gd_basic_game_info_row">
-					<div class="gd_basic_game_info_row_check"><input type="checkbox" name="arcade" value="1"{if $game_info.game_arcade == 1} checked{/if}/></div>
+					<div class="gd_basic_game_info_row_check">
+                        <div class="links_mod_checkbox">
+                            <input type="checkbox" id="arcade" name="arcade" value="1" {if $game_info.game_arcade == 1} checked{/if}>
+                            <label for="arcade"></label>
+                            <!--<input type="checkbox" name="arcade" value="1"{if $game_info.game_arcade == 1} checked{/if}/>-->
+                         </div> 
+                    </div>
 					<div class="gd_basic_game_info_row_checktxt">Arcade conversion&nbsp;</div>
 				</div>
 				<div class="gd_basic_game_info_row">
-					<div class="gd_basic_game_info_row_check"><input type="checkbox" name="seuck" value="1"{if $game_info.game_seuck == 1} checked{/if}/></div>
+					<div class="gd_basic_game_info_row_check">
+                        <div class="links_mod_checkbox">
+                            <input type="checkbox" id="seuck" name="seuck" value="1" {if $game_info.game_seuck == 1} checked{/if}>
+                            <label for="seuck"></label>
+                            <!--<input type="checkbox" name="seuck" value="1"{if $game_info.game_seuck == 1} checked{/if}/>-->
+                        </div>  
+                    </div>
 					<div class="gd_basic_game_info_row_checktxt">SEUCK game&nbsp;</div>
 				</div>	
 				<div class="gd_basic_game_info_row">
-					<div class="gd_basic_game_info_row_check"><input type="checkbox" name="stos" value="1"{if $game_info.game_stos == 1} checked{/if}/></div>
+					<div class="gd_basic_game_info_row_check">
+                        <div class="links_mod_checkbox">
+                            <input type="checkbox" id="stos" name="stos" value="1" {if $game_info.game_stos == 1} checked{/if}>
+                            <label for="stos"></label>
+                            <!--<input type="checkbox" name="stos" value="1"{if $game_info.game_stos == 1} checked{/if}/>-->
+                        </div>  
+                    </div>
 					<div class="gd_basic_game_info_row_checktxt">STOS game&nbsp;</div>
 				</div>
 				<div class="gd_basic_game_info_row">
-					<div class="gd_basic_game_info_row_check"><input type="checkbox" name="stac" value="1"{if $game_info.game_stac == 1} checked{/if}/></div>
+					<div class="gd_basic_game_info_row_check">
+                        <div class="links_mod_checkbox">
+                            <input type="checkbox" id="stac" name="stac" value="1" {if $game_info.game_stac == 1} checked{/if}>
+                            <label for="stac"></label>
+                            <!--<input type="checkbox" name="stac" value="1"{if $game_info.game_stac == 1} checked{/if}/>-->
+                        </div>  
+                    </div>
 					<div class="gd_basic_game_info_row_checktxt">STAC game&nbsp;</div>
 				</div>	
 			</div>
@@ -315,9 +411,12 @@ function browseDeveloper(str) {
 						<form action="../games/db_games_detail.php" method="post" name="creator" id="creator">
 							{if isset($game_author)}		
 								{foreach from=$game_author item=line}
-									<input type="checkbox" name="game_author_id[]" value="{$line.game_author_id}">
-									<a href="../individuals/individuals_edit.php?ind_id={$line.ind_id}" class="left_nav_link">{$line.ind_name}</a><br><b>({$line.auhthor_type_info})</b>
-									<br>
+                                    <div class="links_mod_checkbox">
+                                        <input type="checkbox" id="{$line.game_author_id}" name="game_author_id[]" value="{$line.game_author_id}">
+                                        <label for="{$line.game_author_id}"></label>&nbsp;
+                                        <!--<input type="checkbox" name="game_author_id[]" value="{$line.game_author_id}">-->
+                                        <a href="../individuals/individuals_edit.php?ind_id={$line.ind_id}" class="left_nav_link">{$line.ind_name}</a><br><b>({$line.auhthor_type_info})</b>
+                                    </div>  
 									<br>
 								{/foreach}
 								<img src="../../../themes/templates/1/includes/img/arrow_ltr.gif" alt="" width="38" height="22" style="display:inline;">		
@@ -352,8 +451,11 @@ function browseDeveloper(str) {
 					<legend>Release Year</legend>
 						{if isset($game_year)}	
                             {foreach from=$game_year item=line}
-                                <input type="checkbox" name="game_year_id[]" value="{$line.game_year_id}">{$line.game_year} {if  $line.game_extra_info <> ''}<b>({$line.game_extra_info})</b>{/if}
-                                <br>
+                                <div class="links_mod_checkbox">
+                                    <input type="checkbox" id="{$line.game_year_id}" name="game_year_id[]" value="{$line.game_year_id}">
+                                    <label for="{$line.game_year_id}"></label>&nbsp;{$line.game_year} {if  $line.game_extra_info <> ''}<b>({$line.game_extra_info})</b>{/if}
+                                    <!--<input type="checkbox" name="game_year_id[]" value="{$line.game_year_id}">{$line.game_year} {if  $line.game_extra_info <> ''}<b>({$line.game_extra_info})</b>{/if}>-->
+                                </div>  
                                 <br>
                             {/foreach}
                             <img src="../../../themes/templates/1/includes/img/arrow_ltr.gif" alt="" width="38" height="22" style="display:inline;">		
@@ -386,9 +488,12 @@ function browseDeveloper(str) {
 				<form action="../games/db_games_detail.php" method="post" name="developer" id="developer">
 					{if isset($developer)}	
                         {foreach from=$developer item=line}
-                            <input type="checkbox" name="game_developer_id[]" value="{$line.pub_id}">
-                            <a href="../company/company_edit.php?comp_id={$line.pub_id}" class="left_nav_link">{$line.pub_name}</a> {if $line.continent <> '' }<b>({$line.continent})</b>{/if} {if  $line.extra_info <> '' }<b>({$line.extra_info})</b>{/if}
-                            <br>
+                            <div class="links_mod_checkbox">
+                                <input type="checkbox" id="{$line.pub_id}" name="game_developer_id[]" value="{$line.pub_id}">
+                                <label for="{$line.pub_id}"></label>&nbsp;
+                                <a href="../company/company_edit.php?comp_id={$line.pub_id}" class="left_nav_link">{$line.pub_name}</a> {if $line.continent <> '' }<b>({$line.continent})</b>{/if} {if  $line.extra_info <> '' }<b>({$line.extra_info})</b>{/if}
+                                <!--<input type="checkbox" name="game_developer_id[]" value="{$line.pub_id}">-->
+                            </div>  
                             <br>
                         {/foreach}
                         <img src="../../../themes/templates/1/includes/img/arrow_ltr.gif" alt="" width="38" height="22" style="display:inline;">		
@@ -475,10 +580,13 @@ function browseDeveloper(str) {
 				<form action="../games/db_games_detail.php" method="post" name="publisher" id="publisher">
 					{if isset($publisher)}			
 						{foreach from=$publisher item=line}
-							<input type="checkbox" name="game_publisher_id[]" value="{$line.pub_id}">
-								<a href="../company/company_edit.php?comp_id={$line.pub_id}" class="left_nav_link">{$line.pub_name}</a> {if $line.continent <> '' }<b>({$line.continent})</b>{/if} {if  $line.extra_info <> '' }<b>({$line.extra_info})</b>{/if} 					
-							<br>
-							<br>
+                            <div class="links_mod_checkbox">
+                                <input type="checkbox" id="{$line.pub_id}" name="game_publisher_id[]" value="{$line.pub_id}">
+                                <label for="{$line.pub_id}"></label>&nbsp;
+                                <a href="../company/company_edit.php?comp_id={$line.pub_id}" class="left_nav_link">{$line.pub_name}</a> {if $line.continent <> '' }<b>({$line.continent})</b>{/if} {if  $line.extra_info <> '' }<b>({$line.extra_info})</b>{/if}
+                                <!--<input type="checkbox" name="game_publisher_id[]" value="{$line.pub_id}">-->
+                            </div>  
+                            <br>
 						{/foreach}			
                         <img src="../../../themes/templates/1/includes/img/arrow_ltr.gif" alt="" width="38" height="22" style="display:inline;">		
                         <input type="button" name="valider" value="Delete" onclick="delete_publisher()" class="topbutton_cpanel_small" style="display:inline;">

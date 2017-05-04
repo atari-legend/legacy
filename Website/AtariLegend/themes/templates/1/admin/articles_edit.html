@@ -199,7 +199,6 @@ function storeCaret(textEl) {
 		<form action="../articles/db_articles.php" method="post" name="post">
 			<fieldset>
 				<legend>Preview article</legend>
-					<b>
 					<a href="../articles/articles_preview.php?article_id={$article.article_id}" class="left_nav_link"> Preview </a> this article<br>
 			</fieldset>
 			<br>
@@ -254,7 +253,7 @@ function storeCaret(textEl) {
 				<input type="button" accesskey= "b" name="addbbcode0" value="B" onclick="bbstyle(0,'textintro')">
 				<input type="button" accesskey= "u" name="addbbcode4" value="U" onclick="bbstyle(4,'textintro')">
 				<input type="button" accesskey= "i" name="addbbcode2" value="I" onclick="bbstyle(2,'textintro')">
-				<input type="button" accesskey="w" name="addbbcode6" vealue="URL" onClick="bbstyle(6,'textintro')">			  
+				<input type="button" accesskey="w" name="addbbcode6" value="URL" onClick="bbstyle(6,'textintro')">			  
 				<input type="button" accesskey="x" name="addbbcode8" value="@" onClick="bbstyle(8,'textintro')">			  			
 				<textarea name="textintro" id="game_review_textfield" ONSELECT="javascript:storeCaret(this);" ONCLICK="javascript:storeCaret(this);" ONKEYUP="javascript:storeCaret(this);" ONCHANGE="javascript:storeCaret(this);" rows="5" style="padding-left:0px;">{$article.article_intro}</textarea>
 				<br>
@@ -277,7 +276,8 @@ function storeCaret(textEl) {
 						<img src="../../includes/show_image.php?file={$line.article_screenshot}&amp;resize=200,null,null,null&amp;crop=null,null,null,null" alt="screenshot" style="display:inline;" class="user_stats_img" id="user_details_img_dark">
 						<br>
 						<br>
-						<input id="game_review_screenshot_text" type="text" name="inputfield[]" value="{$line.article_screenshot_comment}">
+                        <input class="game_review_screenshot_text" type="text" name="inputfield[]" value="{$line.article_screenshot_comment}">
+						<!--<input id="game_review_screenshot_text" type="text" name="inputfield[]" value="{$line.article_screenshot_comment}">-->
 						<br>
 						<a href="javascript:deletecomment({$line.article_screenshot_id},{$article.article_id})" class="left_nav_link">Delete Shot</a>
 						<br>

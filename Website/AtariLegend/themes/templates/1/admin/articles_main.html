@@ -85,7 +85,7 @@ function deletearticle(article_id)
 				<fieldset>
 					<legend>
 					{if $line.user_email <> ''}	
-						Written by <a href="mailto:{$line.user_email}?subject=Your%20article%20-%20{$line.article_title}%20at%20Atari%20Legend" class="left_nav_link">{$line.user_id}</a> on {$line.article_date}
+						<a href="mailto:{$line.user_email}?subject=Your%20article%20-%20{$line.article_title}%20at%20Atari%20Legend" class="left_nav_link">{$line.user_id}</a> - {$line.article_date}
 					{else}
 						Written by {$line.user_id} on {$line.article_date}
 					{/if}	

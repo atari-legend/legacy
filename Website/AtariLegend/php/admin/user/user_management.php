@@ -58,8 +58,9 @@ if ( isset($action) and $action == 'quick_search_users' )
     } else {
         $sql_query .= " WHERE userid LIKE '$userbrowse%'";
     }
-
+       
     if (!empty($usersearch)) {
+        $usersearch = $mysqli->real_escape_string($usersearch);
         $sql_query .= " AND userid LIKE '%$usersearch%'";
     } else {
         $sql_query .= "AND userid LIKE '%'";
