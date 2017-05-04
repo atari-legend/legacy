@@ -23,6 +23,7 @@ if (isset($action) and $action == "crew_browse") {
     if (isset($query) and $query == "num") {
         $crewbrowse_select = " WHERE crew_name REGEXP '^[0-9].*'";
     } else {
+        $query = $mysqli->real_escape_string($query);
         $crewbrowse_select = " WHERE crew_name LIKE '$query%'";
     }
 
@@ -49,6 +50,7 @@ if (isset($action) and $action == "ind_browse") {
     if (isset($query) and $query == "num") {
         $indbrowse_select = " WHERE ind_name REGEXP '^[0-9].*'";
     } else {
+        $query = $mysqli->real_escape_string($query);
         $indbrowse_select = " WHERE ind_name LIKE '$query%'";
     }
 
