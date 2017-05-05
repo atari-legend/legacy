@@ -273,7 +273,7 @@ function storeCaret(textEl) {
 				<br>
 				{if $screenshots_nr <> ''}
 					{foreach from=$screenshots item=line} 
-						<img src="../../includes/show_image.php?file={$line.article_screenshot}&amp;resize=200,null,null,null&amp;crop=null,null,null,null" alt="screenshot" style="display:inline;" class="user_stats_img" id="user_details_img_dark">
+						<img src="../../includes/show_image.php?file={$line.article_screenshot}&amp;resize=200,null,null,null&amp;crop=null,null,null,null" alt="screenshot" style="display:inline;" class="game_screenshot_img">
 						<br>
 						<br>
                         <input class="game_review_screenshot_text" type="text" name="inputfield[]" value="{$line.article_screenshot_comment}">

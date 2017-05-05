@@ -1,14 +1,16 @@
 {* 
 /***************************************************************************
-*                                interviews_preview.tpl
+*                                interviews_preview.html
 *                            --------------------------
 *   begin                : friday, July 21, 2005
 *   copyright            : (C) 2004 Atari Legend
 *   email                : admin@atarilegend.com
 *
-*   Id: interviews_preview.tpl,v 0.10 2005/07/21 16:47 ST Graveyard
-*   Id: interviews_preview.tpl,v 0.10 2016/08/03 16:34 ST Graveyard
+*   Id: interviews_preview.html,v 0.10 2005/07/21 16:47 ST Graveyard
+*   Id: interviews_preview.html,v 0.10 2016/08/03 16:34 ST Graveyard
 *					- AL 2.0
+*   Id: interviews_preview.html,v 0.11 2017/05/05 22:52 ST Graveyard
+*					- screenshot bug
 *
 ***************************************************************************/
 
@@ -60,17 +62,19 @@
 						<br>
 						<br>
 					</div>
-					{foreach from=$screenshots item=line} 
-						<div class="review_screenshot_order">
-							<a href="../../includes/show_image.php?file={$line.screenshot}&amp;resize=410,null,null,null" data-lightbox="image-1" data-title="{$interview.individual_name} - {$line.count}">
-								<img src="../../includes/show_image.php?file={$line.screenshot}&amp;resize=170,null,null,null" alt="Click to enlarge!" style="display:inline;" class="user_stats_img" id="user_details_img_dark">
-							</a>
-							<br><b>{$line.comment}</b>
-							<br>
-							<br>
-							<br>
-						</div>
-					{/foreach}
+                    {if isset($screenshots)}
+                        {foreach from=$screenshots item=line} 
+                            <div class="review_screenshot_order">
+                                <a href="../../includes/show_image.php?file={$line.screenshot}&amp;resize=410,null,null,null" data-lightbox="image-1" data-title="{$interview.individual_name} - {$line.count}">
+                                    <img src="../../includes/show_image.php?file={$line.screenshot}&amp;resize=170,null,null,null" alt="Click to enlarge!" style="display:inline;" class="user_stats_img" id="user_details_img_dark">
+                                </a>
+                                <br><b>{$line.comment}</b>
+                                <br>
+                                <br>
+                                <br>
+                            </div>
+                        {/foreach}
+                    {/if}
 				</div>		
 			</div>	
 			<br>

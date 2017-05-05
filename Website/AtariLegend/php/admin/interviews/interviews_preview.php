@@ -89,18 +89,21 @@ $query_screenshots = $mysqli->query("SELECT * FROM interview_main
 $count = 1;
 
 while ($sql_screenshots = $query_screenshots->fetch_array(MYSQLI_BOTH)) {
-    $new_path = $interview_screenshot_path;
-    $new_path .= $sql_screenshots['screenshot_id'];
-    $new_path .= ".";
-    $new_path .= $sql_screenshots['imgext'];
+    if ( $sql_screenshots['screenshot_id'] != '')
+    {
+        $new_path = $interview_screenshot_path;
+        $new_path .= $sql_screenshots['screenshot_id'];
+        $new_path .= ".";
+        $new_path .= $sql_screenshots['imgext'];
 
-    $smarty->append('screenshots', array(
-        'screenshot' => $new_path,
-        'count' => $count,
-        'comment' => $sql_screenshots['comment_text']
-    ));
+        $smarty->append('screenshots', array(
+            'screenshot' => $new_path,
+            'count' => $count,
+            'comment' => $sql_screenshots['comment_text']
+        ));
 
-    $count++;
+        $count++;
+    }
 }
 
 //Send all smarty variables to the templates

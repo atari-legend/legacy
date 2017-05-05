@@ -83,7 +83,7 @@ if (isset($action) and $action == 'search') {
             $v_ind_image = "none";
         }
 
-        $interview_date = date("F j, Y", $interview['interview_date']);
+        $interview_date = date("d-m-Y", $interview['interview_date']);
         $interview_text = $interview['interview_intro'];
         $interview_text = nl2br($interview_text);
         $interview_text = InsertALCode($interview_text);
