@@ -8,6 +8,8 @@
 *
 *   Id: articles_preview.html,v 0.10 2016/10/08 20:14 ST Graveyard
 *					- AL 2.0
+*   Id: articles_preview.html,v 0.11 2017/05/05 22:53 ST Graveyard
+*					- screenshot bug
 *
 ***************************************************************************/
 
@@ -51,17 +53,19 @@
 						<br>
 						<br>
 					</div>
-					{foreach from=$screenshots item=line} 
-						<div class="review_screenshot_order">
-							<a href="../../includes/show_image.php?file={$line.screenshot}&amp;resize=410,null,null,null" data-lightbox="image-1" data-title="{$article.article_title} - {$line.count}">
-								<img src="../../includes/show_image.php?file={$line.screenshot}&amp;resize=170,null,null,null" alt="Click to enlarge!" style="display:inline;" class="user_stats_img" id="user_details_img_dark">
-							</a>
-							<br><b>{$line.comment}</b>
-							<br>
-							<br>
-							<br>
-						</div>
-					{/foreach}
+                    {if isset($screenshots)}
+                        {foreach from=$screenshots item=line} 
+                            <div class="review_screenshot_order">
+                                <a href="../../includes/show_image.php?file={$line.screenshot}&amp;resize=410,null,null,null" data-lightbox="image-1" data-title="{$article.article_title} - {$line.count}">
+                                    <img src="../../includes/show_image.php?file={$line.screenshot}&amp;resize=170,null,null,null" alt="Click to enlarge!" style="display:inline;" class="user_stats_img" id="user_details_img_dark">
+                                </a>
+                                <br><b>{$line.comment}</b>
+                                <br>
+                                <br>
+                                <br>
+                            </div>
+                        {/foreach}
+                    {/if}
 				</div>		
 			</div>	
 			<br>

@@ -42,6 +42,13 @@ function deleteinterview(interview_id)
 
 {block name=main_tile}
 <div class="standard_tile" id="interviews_main">
+    <div class="help-tip">
+        <p>
+			The first thing that needs to be done is to add an actual interview in the DB. We need to link an
+			interview to an actual person. To add an interview to the AL DB you click on the "Add an Interview" link at the left side. There you'll have to search for the individual you want to interview.
+			Once this is done, you will enter the interview main screen. This is where the actual interview is inserted in the DB.
+        </p>
+    </div>
 	<h1>INTERVIEWS</h1>
 	<div class="standard_tile_line"></div>
 	<div class="standard_tile_text">
@@ -92,9 +99,9 @@ function deleteinterview(interview_id)
 				<fieldset>
 					<legend>
 					{if $line.user_email <> ''}	
-						Written by <a href="mailto:{$line.user_email}?subject=Your%20interview%20with%20{$line.email_name}%20at%20Atari%20Legend" class="left_nav_link">{$line.user_id}</a> on {$line.interview_date}
+						<a href="mailto:{$line.user_email}?subject=Your%20interview%20with%20{$line.email_name}%20at%20Atari%20Legend" class="left_nav_link">{$line.user_id}</a> - {$line.interview_date}
 					{else}
-						Written by {$line.user_id} on {$line.interview_date}
+						{$line.user_id} - {$line.interview_date}
 					{/if}	
 					</legend>
 					<br>
