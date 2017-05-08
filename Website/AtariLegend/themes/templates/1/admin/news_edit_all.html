@@ -54,7 +54,7 @@ function delete_news(news_id)
 			<fieldset>
 				<legend>
 				{if $line.edit_email <> ''}	
-					Submitted by <a href="mailto:{$line.edit_email}?subject=Your%20newspost%20{$line.email_headline}%20at%20Atari%20Legend" class="left_nav_link">{$line.edit_userid}</a> on {$line.edit_date}
+					<a href="mailto:{$line.edit_email}?subject=Your%20newspost%20{$line.email_headline}%20at%20Atari%20Legend" class="left_nav_link">{$line.edit_userid}</a> - {$line.edit_date}
 				{else}
 					Submitted by {$line.edit_userid} on {$line.edit_date}
 				{/if}	

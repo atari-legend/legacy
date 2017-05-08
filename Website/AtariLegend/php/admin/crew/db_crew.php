@@ -33,6 +33,9 @@ if ($action == "stop") {
 //****************************************************************************************
 if ($action == "insert_crew") {
     if (isset($new_crew)) {
+        
+        $new_crew = $mysqli->real_escape_string($new_crew);
+        
         $mysqli->query("INSERT INTO crew (crew_name) VALUES ('$new_crew')");
 
         $_SESSION['edit_message'] = "New crew has been added";
