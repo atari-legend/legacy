@@ -22,6 +22,18 @@ The main game page
 <link type="text/css" href="{$style_dir}css/lightbox.css" hreflang="en" rel="stylesheet">
 
 <script type="text/javascript">
+function myFunction() {  
+    $but = $('#file_upload_game_file');
+  
+    $("input:file[id=file_upload]").change(function() {
+        document.getElementById('file_upload_game_screenshots').value = 'file(s) selected';
+    });
+    
+    $("input:file[id=file_upload2]").change(function() {
+        document.getElementById('file_upload_game_file').value = $(this).val();
+    });
+}
+
 function browseCrew(str) {
     if (str == "") {
         document.getElementById("option_crew").innerHTML = "";
@@ -1445,7 +1457,7 @@ function ChangeParent(parent_id,menu_disk_id) {
       closeClick  : false,
       openEffect  : 'elastic',
       closeEffect : 'elastic'
-  });
+  });  
 });
 </script>
 {/block}

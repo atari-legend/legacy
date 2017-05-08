@@ -44,18 +44,18 @@ function categorydelete(doc_category_id)
 	<h1>{$doc_category_edit.doc_category_name_edit}</h1>
 	<div class="standard_tile_line"></div>
 	<div class="standard_tile_text">
-		<fieldset>
+		<fieldset class="centered_fieldset">
 			<legend>Edit doc category</legend>
 			<form action="../docs/db_doc_category.php" method="post" name="post" id="doc_category_edit">
 				<b>Name :</b>
 				<input type="text" name="doc_category_name" value="{$doc_category_edit.doc_category_name_edit}" class="standard_tile_input_small">
+                <br>
+                <br>
 				<input type="submit" value="Update" style="padding:2px;" class="topbutton_cpanel_small">
 				<input type="submit" value="Delete" onClick="categorydelete({$doc_category_edit.doc_category_id_edit}); return false;" class="topbutton_cpanel_small">	
 				<input type="hidden" name="action" value="update">
 				<input type="hidden" name="doc_category_id" value="{$doc_category_edit.doc_category_id_edit}">
 			</form>	
-			<br>
-			<br>
 		</fieldset>
 	</div>
 	{else}

@@ -51,7 +51,7 @@ $sql_news = $mysqli->query("SELECT
 
 while ($news = $sql_news->fetch_array(MYSQLI_BOTH)) {
     $user_name      = get_username_from_id($news['user_id']);
-    $news_date      = date("F j, Y", $news['news_date']);
+    $news_date      = date("d-m-Y", $news['news_date']);
     $news_text      = InsertALCode($news['news_text']);
     //$news_text = InsertSmillies($news_text);
     $news_text      = nl2br($news_text);
