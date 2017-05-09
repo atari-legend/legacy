@@ -101,7 +101,24 @@ if ((isset($action) and $action == "deactivate_user")) {
         $time_elapsed_secs        = microtime(true) - $start;
         $_SESSION['edit_message'] = 'User(s) updated';
     } else {
-        $_SESSION['edit_message'] = 'Please SELECT a user you want to delete';
+        $_SESSION['edit_message'] = 'Please SELECT a user you want to deactivate';
+    }
+}
+
+if ((isset($action) and $action == "activate_user")) {
+    if (isset($user_id)) {
+        $start = microtime(true);
+        $i     = 0;
+        foreach ($user_id as $user) {
+            create_log_entry('Users', $user, 'User', $user, 'Update', $_SESSION['user_id']);
+
+            $sql = $mysqli->query("UPDATE users SET inactive = ' ' WHERE user_id = '$user'; ") or die("error updating user");
+            $i++;
+        }
+        $time_elapsed_secs        = microtime(true) - $start;
+        $_SESSION['edit_message'] = 'User(s) updated';
+    } else {
+        $_SESSION['edit_message'] = 'Please SELECT a user you want to activate';
     }
 }
 

@@ -33,9 +33,17 @@ while ($query_users = $sql_users->fetch_array(MYSQLI_BOTH)) {
     if ($query_users['join_date'] !== '') {
         $join_date = date("F j, Y", $query_users['join_date']);
     }
+    else
+    {
+        $join_date = "Unknown";
+    }        
     if ($query_users['last_visit'] !== '') {
         $last_visit = date("F j, Y", $query_users['last_visit']);
     }
+     else
+    {
+        $last_visit = "Unknown";
+    }   
     $smarty->assign('users', array(
         'user_id' => $query_users['user_id'],
         'user_name' => $query_users['userid'],
@@ -48,7 +56,9 @@ while ($query_users = $sql_users->fetch_array(MYSQLI_BOTH)) {
         'avatar_ext' => $query_users['avatar_ext'],
         'image' => "$user_avatar_path$query_users[user_id].$query_users[avatar_ext]",
         'inactive' => $query_users['inactive'],
-        'user_aim' => $query_users['user_aim']
+        'user_aim' => $query_users['user_aim'],
+        'last_visit' => $last_visit,
+        'join_date' => $join_date
     ));
 }
 

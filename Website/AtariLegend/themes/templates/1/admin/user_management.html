@@ -197,6 +197,23 @@ function UserlistFunction() {
                     }
                 });
         }
+        
+         if ($(this).val() == "activate_user") {
+                 $( "#dialog_confirm_activate" ).dialog({
+                    resizable: false,
+                    height:140,
+                    modal: true,
+                    buttons: {
+                        "Activate user(s)": function() {
+                        $( this ).dialog( "close" );
+                        UserModify();
+                        },
+                        Cancel: function() {
+                        $( this ).dialog( "close" );
+                        }
+                    }
+                });
+        }
 
         if ($(this).val() == "email_user") {
 
@@ -336,6 +353,10 @@ function EmailSent(){
   <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
   These users will be permanently deleted. Are you sure?</p>
 </div>
+<div id="dialog_confirm_activate" title="Activate Users?" style="display:none;">
+  <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
+  These users will be activated. Are you sure?</p>
+</div>
 <div id="dialog_confirm_deactivate" title="Deactivate Users?" style="display:none;">
   <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
   These users will be deactivated. Are you sure?</p>
@@ -418,6 +439,7 @@ function EmailSent(){
                             {if isset($mail_link)}
                                 <option value="email_user">Send Email</option>
                             {/if}
+                            <option value="activate_user">Activate User</option>
                             <option value="deactivate_user">Deactivate User</option>
                             {if isset($delete_link)}
                                 <option value="delete_user">Delete User</option>
