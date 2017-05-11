@@ -194,3 +194,32 @@ figure.effect-tile:hover p.icon-links a:first-child {
 	-webkit-transition-delay: 0.2s;
 	transition-delay: 0.2s;
 }
+
+/*--------------------***/
+/***** Who's online *****/
+/*--------------------***/
+@if $skin-name == tos {
+    .online_title{
+        @extend .left_nav_section;
+        font-size:0.9em; 
+        text-align:center;
+    }
+
+    .online_users{
+       @extend .left_nav_link;
+       font-size:0.9em; 
+       text-align:center;
+    }  
+} @else {
+    .online_title{
+        @extend .left_nav_section;
+        font-size:0.8em; 
+        text-align:center;
+    }
+
+    .online_users{
+       @extend .left_nav_link;
+       font-size:0.8em; 
+       text-align:center;
+    }  
+}
