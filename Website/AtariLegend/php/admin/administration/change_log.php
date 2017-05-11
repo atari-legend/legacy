@@ -15,6 +15,9 @@
 include("../../config/common.php");
 include("../../config/admin.php");
 
+//load the changes per month tile
+include("../../common/tiles/changes_per_month_tile.php");
+
 //load the search fields of the quick search side menu
 include("../../admin/games/quick_search_games.php");
 
