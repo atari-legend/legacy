@@ -44,18 +44,17 @@ function optiondelete(option_id)
 	<h1>EDIT OPTION</h1>
 	<div class="standard_tile_line"></div>
 	<div class="standard_tile_text">
-		<fieldset>
+		<fieldset class="centered_fieldset">
 			<legend>Edit option</legend>
 			<form action="../downloads/db_download_options.php" method="post" name="post" id="option_edit">
 				<b>Name :</b>
 				<input type="text" name="option_name" value="{$option_edit.option_edit}" class="standard_tile_input_small">
+                <br><br>
                 <input type="submit" value="Update" style="padding:2px;" class="topbutton_cpanel_small">
 				<input type="submit" value="Delete" onClick="optiondelete({$option_edit.option_id_edit}); return false;" class="topbutton_cpanel_small">	
 				<input type="hidden" name="action" value="update">
 				<input type="hidden" name="option_id" value="{$option_edit.option_id_edit}">
 			</form>	
-			<br>
-			<br>
 		</fieldset>
 	</div>
 	{else}

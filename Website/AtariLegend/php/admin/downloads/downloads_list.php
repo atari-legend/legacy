@@ -60,6 +60,7 @@ if ($download_type == 'Game') {
 
     if (isset($action) and $action == "search") {
         if (isset($gamesearch)) {
+            $gamesearch = $mysqli->real_escape_string($gamesearch);
         } else {
             $gamesearch = "";
         }
@@ -70,6 +71,7 @@ if ($download_type == 'Game') {
         } elseif ($gamebrowse == 'num') {
             $gamebrowse_select = "AND game.game_name REGEXP '^[0-9].*'";
         } else {
+            $gamebrowse = $mysqli->real_escape_string($gamebrowse);
             $gamebrowse_select = "AND game.game_name LIKE '$gamebrowse%'";
         }
         

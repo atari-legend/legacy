@@ -69,19 +69,19 @@ function UpdateDatabase(database_update_id)
 		<div class="main_stats_container">
 			<table class="standard_table_list">
 			<tr>
-				<th id="th_db_id">ID</th>
-				<th id="th_db_description">Description</th>
-				<th id="th_db_result">Test</th>
-				<th id="th_db_state">Status</th>
-				<th id="th_db_exe">Action</th>
+				<th class="th_db_id">ID</th>
+				<th class="th_db_description">Description</th>
+				<th class="th_db_result">Test</th>
+				<th class="th_db_state">Status</th>
+				<th class="th_db_exe">Action</th>
 			</tr>
 			{foreach from=$database_update item=line}
 			<tr>
-				<td class="standard_table_center" id="td_db_id">{$line.database_update_id}</td>
-				<td class="standard_table_center" id="td_db_description">{$line.update_description}</td>
-				<td class="standard_table_center" id="td_db_result">{$line.test_result}</td>
-				<td class="standard_table_center" id="td_db_state">{$line.implementation_state}</td>
-				<td class="standard_table_center" id="td_db_exe">
+				<td class="td_db_id">{$line.database_update_id}</td>
+				<td class="td_db_description">{$line.update_description}</td>
+				<td class="td_db_result">{$line.test_result}</td>
+				<td class="td_db_state">{$line.implementation_state}</td>
+				<td class="td_db_exe">
 					{if $line.allow_execute=='yes'}
 						<button class="quick_search_games_button" onclick="UpdateDatabase({$line.database_update_id});">Execute</button>
 					{/if}

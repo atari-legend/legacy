@@ -13,6 +13,13 @@ The change log page
 ************************************************************************************************
 *}
 {extends file='1/admin/frontpage.html'}
+
+{block name=left_tile}
+    {include file='1/admin/tile_changes_per_month.html'}
+    <br>
+    {include file='1/admin/left_nav.html'}
+{/block}
+           
 {block name=main_tile}
 <div class="standard_tile">
 	<h1>CHANGE LOG</h1>
@@ -48,6 +55,7 @@ The change log page
 				<a href="../administration/change_log.php" class="left_nav_link">Latest log entries</a>
 			</fieldset>
 		</div>
+        </form>
 		<br><br>
 		{if $rec_nr <> '0'}
 		<div>

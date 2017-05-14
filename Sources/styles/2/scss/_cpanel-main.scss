@@ -4,42 +4,6 @@
 //*************************************************************/
 //********CPanel MAIN structure and LEFT and RIGHT css*********/
 //*************************************************************/
-
-
-#user_stats {
-    float: right;
-    width: 48%;
-}
-
-#welcome_cpanel {
-    float: left;
-    width: 48%;
-}
-
-#left_nav_position_front {
-    float: left;
-    margin-top: -40px;
-    margin-bottom: 20px;
-}
-
-#main_stats_position_front {
-    margin-top: -40px;
-    margin-bottom: 20px;
-}
-
-#quick_search_position_front {
-    float: right;
-    margin-top: -40px;
-    margin-bottom: 20px;
-}
-
-.user_stats_img {
-    max-width: 100%;
-    margin-bottom: 10px;
-    opacity: .8;
-    box-shadow: 0 0 12px #000;
-}
-
 .main_stats_container {
     display: flex;
     align-items: flex-start;
@@ -51,14 +15,20 @@
 }
 
 #child_good_karma,
-#child_bad_karma {
+#child_bad_karma,
+#child_bad_karma_chart,
+#child_bar,
+#child_line,
+#child_good_karma_chart {
     float: left;
-    width: 27%;
+    width: 50%;
+    margin-left: auto;
 }
 
 .main_stats_child  table { width: 98%; }
 #user_stats table { width: 100%; }
 #welcome_cpanel table { width: 100%; }
+
 //*----------------------------------------------------------
 //Left nav
 //------------------------------------------------------------ */
@@ -90,7 +60,7 @@
     margin-bottom: 0;
 }
 
-#quick_search_options {
+#quick_search_options, #quick_search_user_options {
     display: table;
     width: 75%;
     margin-right: auto;
@@ -130,7 +100,7 @@
     background: #666;
 }
 
-#quick_search_small_select {
+#quick_search_small_select, #quick_search_user_small_select {
     width: 50px;
     height: 25px;
     background: #666;

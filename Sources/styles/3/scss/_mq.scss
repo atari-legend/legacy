@@ -122,6 +122,7 @@
     }
 }
 
+
 //*----------------------------------------------------------
 // CPanel
 //------------------------------------------------------------ */
@@ -129,31 +130,49 @@
 //Front page
 //------------------------------------------------------------ */
 //* Make the table view responsive */
-@media screen and (max-width: 799px) {
-    #welcome_cpanel {width: 100%; margin-bottom: 15px;}
-    #user_stats {width: 100%;}
-    #main_stats_position_front {width: 100%; float: left; }
-    #left_nav_position_front {width: 100%;  float: left;}
+@media screen and (max-width: 1449px) {
+    .good_karma_chart,
+    .bad_karma_chart,
+    .bar_changelog,
+    .line_changelog{
+        width: 100%;
+        height : 100%;
+    }
 }
 
-@media screen and (max-width: 480px) {
-    #welcome_cpanel { width: 100%; margin-top: 0;}
-    #main_stats_position_front { margin-top: -5px;}
+@media screen and (min-width: 1450px) {
+    .good_karma_chart,
+    .bad_karma_chart{
+        width: 400px;
+        height : 425px;
+    }
+    
+    .bar_changelog,
+    .line_changelog{
+        width: 100%;
+        height : 100%;
+    }
 }
 
 @media screen and (max-width: 1199px) {
-    .main_stats_container {
-        flex-direction: column;
-    }
+    .main_stats_container {flex-direction: column-reverse;}
 
     #child_some_stats,
+    #child_good_karma_chart,
+    #child_bad_karma_chart,
     #child_good_karma,
+    #child_bar,
+    #child_line,
     #child_bad_karma {
-        width: 100%;
+        width: 75%;
         float: left;
     }
 
     #child_good_karma,
+    #child_bar,
+    #child_line,
+    #child_good_karma_chart,
+    #child_bad_karma_chart,
     #child_bad_karma {
         margin-top: 20px;
     }
@@ -168,16 +187,55 @@
     }
 }
 
+@media screen and (max-width: 799px) {
+    #welcome_cpanel {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    #user_stats {width: 100%;}
+    #main_stats_position_front {
+        width: 100%;
+        float: left;
+    }
+
+    #left_nav_position_front {
+        width: 100%;
+        float: left;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    #welcome_cpanel {width: 100%;}
+    
+    #child_some_stats,
+    #child_good_karma_chart,
+    #child_bad_karma_chart,
+    #child_good_karma,
+    #child_bar,
+    #child_line,
+    #child_bad_karma {
+        width: 100%;
+        float: left;
+    }
+    
+    .good_karma_chart,
+    .bad_karma_chart{
+        width: 100%;
+        height : 100%;
+    }
+}
+
 
 //*----------------------------------------------------------
 //Quick search games
 //------------------------------------------------------------ */
 @media screen and (max-width: 1099px) {
-    #quick_search_options {margin-left: 5%; width: 100%; }
+    #quick_search_options, #quick_search_user_options {margin-left: 5%; width: 100%; }
 }
 
 @media screen and (max-width: 799px) {
-    #quick_search_options {
+    #quick_search_options, #quick_search_user_options {
         display: table;
         width: 50%;
         margin-left: 40%;
@@ -187,34 +245,38 @@
 }
 
 @media screen and (max-width: 599px) {
-    #quick_search_options {margin-left: 30%;}
+    #quick_search_options, #quick_search_user_options {margin-left: 30%;}
 }
 
 @media screen and (max-width: 399px) {
-    #quick_search_options {width: 75%; margin-left: 15%;}
+    #quick_search_options, #quick_search_user_options {width: 75%; margin-left: 15%;}
 }
 
 
 //*----------------------------------------------------------
 //User details
 //------------------------------------------------------------ */
-@media screen and (max-width: 1050px) {
-    .user_details_container {
-        flex-direction: column;
+@media screen and (max-width: 1280px) {
+    #child_1_user,
+    #child_2_user {
+        width: 100%;
     }
 }
 
-@media screen and (max-width: 1280px) {
-    #child_1,
-    #child_2 {
-        width: 100%;
-    }
+@media screen and (max-width: 1050px) {
+    .user_details_container {flex-direction: column;}
+    .user_details_input_small{width: 75%;}
+    #child_1_user, #child_2_user {margin-left: 3%;}
+    #child_1_user{margin-bottom: 5px;}
 }
 
 @media screen and (max-width: 480px) {
     .user_details_text {width: 50%;display: inline;}
     .user_details_input {width: 50%;display: inline;}
-    .user_details_row {width: 50%;}
+    .user_details_row {width: 100%;}
+    .user_details_input_small{width: 90%;}
+    #child_1_user{margin-bottom: 5px;}
+    #file_upload_user_detail{width: 55%;}
 }
 
 //*----------------------------------------------------------
@@ -247,19 +309,30 @@
 @media screen and (max-width: 600px) {
     .lastvisit_th {display: none;}
     .lastvisit_td {display: none;}
-    .joindate_td {display: none;}
-    .joindate_th {display: none;}
     #usersearch td {text-align: center;}
     #usersearch th {text-align: center;}
+}
+
+@media screen and (max-width: 450px) {
+    .joindate_th {display: none;}
+    .joindate_td {display: none;}
 }
 
 //*----------------------------------------------------------
 //Links addnew
 //------------------------------------------------------------ */
 @media screen and (max-width: 480px) {
-    .links_addnew_text {width: 50%;display: inline;}
-    .links_addnew_input {width: 50%;display: inline;}
-    .links_addnew_row {width: 50%;}
+    .links_addnew_text {
+        width: 100%;
+        display: block;
+    }
+
+    .links_addnew_input {
+        width: 100%;
+        display: block;
+    }
+
+    .links_addnew_row {width: 100%;}
 }
 
 
@@ -272,7 +345,7 @@
     }
 }
 
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 640px) {
     .user_stats_img_dark {display: none;}
 }
 
@@ -296,6 +369,9 @@
     .links_mod_text {width: 100%;display: block;}
     .links_mod_input {width: 100%;display: block;}
     .links_mod_row {width: 100%;margin-bottom: 10px;}
+    #website_name, #website_url{width: 62%;}
+    #website_category_select {width: 63.7%;}
+    .links_mod_container{margin-left: 3.5%;}
 }
 
 @media screen and (max-width: 600px) {
@@ -341,6 +417,11 @@
 //*----------------------------------------------------------
 //Games list
 //------------------------------------------------------------ */
+@media screen and (min-width: 1281px) and (max-width: 1500px){
+    .info_td, #info_th{width:15%;}
+    .year_td, #year_th{width:5%;}
+    }
+    
 @media screen and (max-width: 1174px) {
     .info_td,
     .year_td,
@@ -399,7 +480,13 @@
     #gd_right {float: right; width: 100%;}
     #gd_center {float: right; width: 100%;}
     #gd_publisher_info {margin-top: 0;}
+    #gd_text_area_big{height:100%;}
 }
+
+@media screen and (max-width: 360px) {
+    #file_upload_game_screenshots{width: 50%;}
+}
+
 
 
 //*----------------------------------------------------------
@@ -408,6 +495,11 @@
 @media screen and (max-width: 640px) {
     .gc_left_head {display: none;}
     .gc_left {display: none;}
+}
+
+@media screen and (max-width: 500px) {
+    .gc_center_head {width:65%;}
+    .gc_right_head {width:35%;}
 }
 
 //*----------------------------------------------------------
@@ -455,6 +547,10 @@
     .gamepub_gr_td {
         display: none;
     }
+}
+
+@media screen and (max-width: 700px) {
+    #game_review_textfield { width: 97%;}
 }
 
 //*----------------------------------------------------------
@@ -506,6 +602,13 @@
     .year_gm_td {
         display: none;
     }
+}
+
+//*----------------------------------------------------------
+//Games music detail
+//------------------------------------------------------------ */
+@media screen and (max-width: 360px) {
+    #file_upload_game_music{width: 50%;}
 }
 
 //*----------------------------------------------------------
@@ -574,41 +677,41 @@
 //Admin - DB updates
 //------------------------------------------------------------ */
 @media screen and (max-width: 500px) {
-    #td_db_result,
-    #th_db_result,
-    #th_db_state,
-    #td_db_state,
-    #td_db_id,
-    #th_db_id,
-    #th_db_exe,
-    #td_db_exe {
+    .td_db_result,
+    .th_db_result,
+    .th_db_state,
+    .td_db_state,
+    .td_db_id,
+    .th_db_id,
+    .th_db_exe,
+    .td_db_exe {
         display: none;
     }
 }
 
 @media screen and (max-width: 600px) {
-    #td_db_result,
-    #th_db_result,
-    #th_db_state,
-    #td_db_state,
-    #td_db_id,
-    #th_db_id {
+    .td_db_result,
+    .th_db_result,
+    .th_db_state,
+    .td_db_state,
+    .td_db_id,
+    .th_db_id {
         display: none;
     }
 }
 
 @media screen and (max-width: 900px) {
-    #td_db_result,
-    #th_db_result,
-    #th_db_state,
-    #td_db_state {
+    .td_db_result,
+    .th_db_result,
+    .th_db_state,
+    .td_db_state {
         display: none;
     }
 }
 
 @media screen and (max-width: 1279px) {
-    #td_db_result,
-    #th_db_result {
+    .td_db_result,
+    .th_db_result {
         display: none;
     }
 }
@@ -645,6 +748,13 @@
         display: none;
     }
 }
+
+//*----------------------------------------------------------
+//Admin - tech doc
+//------------------------------------------------------------ */
+@media screen and (max-width: 550px) {
+    .tech_doc_img{width:90%;}
+}  
 
 //*----------------------------------------------------------
 //Menu editor - Menu list
@@ -735,17 +845,35 @@
 //*----------------------------------------------------------
 //download edit
 //------------------------------------------------------------ */
-@media screen and (max-width: 480px) {
-    #download_details_row {width: 100%;}
-    #download_details_text {display: inline;} 
-    #download_details_input {display: inline; } 
+
+/*This stuff is a 'solution' for all the problems I'm having regarding responsiveness in IE!! */
+@media screen and (max-width: 600px) {
+    .download_long_descr{display:none;}
+    .download_short_descr{display:inline;}
 }
 
+@media screen and (max-width: 480px) {
+    #download_details_row {width: 100%;}
+    #download_details_text {display: inline;}
+    #download_details_input {display: inline; }
+}
 
+@media screen and (max-width: 360px) {
+    #file_upload_game_detail{width: 50%;}
+}
 
 //*----------------------------------------------------------
 //General settings
 //------------------------------------------------------------ */
+
+//*----------------------------------------------------------
+//Tiles
+//------------------------------------------------------------ */
+@media screen and (min-width: 800px) and (max-width: 1100px) {
+    .tile_arrow{font-size: 12pt;}
+    .grid figure figcaption { font-size: 1em;}
+}
+
 //*----------------------------------------------------------
 //Background images
 //------------------------------------------------------------ */

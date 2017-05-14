@@ -42,10 +42,14 @@
 				{foreach name='outer' from=$news_images item='line'}
 					<div class="news_images_container">
 						<div class="news_images_check">	
-							<input type="checkbox" name="news_image_id[]" value="{$line.image_id}">
+                            <div class="checkbox">
+                                <input type="checkbox" id="{$line.image_id}" name="news_image_id[]" value="{$line.image_id}">
+                                <label for="{$line.image_id}"></label>
+                                <!--<input type="checkbox" name="news_image_id[]" value="{$line.image_id}">-->
+                            </div>
 						</div>
 						<div class="news_images_display">	
-							<img src="../../includes/show_image.php?file={$line.image_link}&amp;resize=200,null,null,null" alt="newsbutton" class="user_stats_img" id="user_details_img_dark">
+							<img src="../../includes/show_image.php?file={$line.image_link}&amp;resize=200,null,null,null" alt="newsbutton" class="game_screenshot_img">
 						</div>
 						<div class="news_images_name">
 							{$line.image_name}

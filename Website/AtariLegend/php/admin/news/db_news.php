@@ -71,7 +71,7 @@ if (isset($action) and $action == "add_news") {
 //****************************************************************************************
 
 if (isset($action) and $action == "approve_submission") {
-    include("../../includes/functions_search.php");
+    include("../../lib/functions_search.php");
 
     $sql_submission = "SELECT
             news_headline,

@@ -110,6 +110,7 @@ if (isset($action) and ($action == "game_browse" xor $action == "game_search")) 
     // Create WHERE clause for search field
     if ($action == "game_search") {
         if (isset($query) and $query !== "empty") {
+            $query = $mysqli->real_escape_string($query);
             $sql_build .= " WHERE game_name LIKE '%$query%'";
             $sql_build_aka .= " WHERE aka_name LIKE '%$query%'";
             $sql_build_demo .= " WHERE demo_name LIKE '%$query%'";
@@ -137,7 +138,7 @@ if (isset($action) and ($action == "game_browse" xor $action == "game_search")) 
     $mysqli->query("INSERT INTO temp $sql_build_tool") or die("Couldn't query Software Database7 ($sql_build_tool)");
 
     $sql_series_link = $mysqli->query("SELECT * FROM temp ORDER BY software_name ASC") or die(mysqli_error());
-
+    
     /*$sql_series_link = $mysqli->query($sql_build)
     or die ("Couldn't query Software Database5 ($sql_build)");*/
 

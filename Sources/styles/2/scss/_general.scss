@@ -108,13 +108,16 @@ img { display: block; }
 .standard_tile_line { border-bottom: 2px solid #666; }
 .standard_tile_background { position: relative; }
 .standard_tile_image { width: 100%; }
-.standard_tile_subtext { font-size: 15px; }
+.standard_tile_subtext { font-size: 11pt; color: #3c3c3c; font-weight:bold;}
 .standard_tile p {
     width: 91.7%;
     padding-right: 4%;
     padding-left: 4%;
     border-right: 2px solid #666;
 }
+
+.standard_tile_subtext a{color: #3c3c3c;}
+.standard_tile_subtext a:hover{color: black;}
 
 .standard_tile_title {
     position: absolute;
@@ -338,6 +341,83 @@ a.standard_tile_link:focus {
     margin: auto;
     text-align: center;
 }
+
+#file_upload{
+    display: none;
+}
+
+#file_upload2{
+    display: none;
+}
+
+.file_upload {
+    width: 80px;
+    height: 25px;
+    font-size: 14px;
+    color: #182727;
+    text-shadow: -1px 1px 5px #fff, 1px -1px 15px #acacac;
+    cursor: pointer;
+    background: #fff;
+    border: 0;
+    border-bottom: 3px solid #000;
+    border-left: 1px solid #000;
+    padding: 4px 10px; 
+}
+
+.file_upload:hover {
+    color: #fff;
+    background: #000;
+    border-bottom: 3px solid #000;
+}
+
+.selected{
+    font-weight:bold;
+}
+
+//*** checkbox css ****//
+.checkbox {
+	width: 100%;
+	margin: 2px 0px;
+	position: relative;
+}
+
+.checkbox label {
+	cursor: pointer;
+	position: absolute;
+	width: 15px;
+	height: 15px;
+	top: 0;
+  	left: 0;
+	background: #666;
+	border:1px solid black;
+}
+
+.checkbox label:after {
+	opacity: 0.2;
+	content: '';
+	position: absolute;
+	width: 9px;
+	height: 5px;
+	background: transparent;
+	top: 2px;
+	left: 2px;
+	border: 3px solid white;
+	border-top: none;
+	border-right: none;
+
+	transform: rotate(-45deg);
+}
+
+.checkbox label:hover::after {
+	opacity: 0.5;
+}
+
+.checkbox input[type=checkbox]:checked + label:after {
+	opacity: 1;
+}
+
+.checkbox_alt{@extend .checkbox;}
+
 
 //*------------------------------------------------------------
 //Standard table settings

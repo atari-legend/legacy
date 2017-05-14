@@ -142,7 +142,11 @@
 								<tr class="table_game_list">
 									<td class="menu_mark_td">
 										<form name="MenuDiskContent" id="MenuDiskContent">
-										<input type="checkbox" id="menu_disk_title_id{$line.menu_disk_title_id}" name="menu_disk_title_id[]" value="{$line.menu_disk_title_id}" onchange="deleteGamefromMenu({$line.menu_disk_title_id},{$menu_disk_id})">
+                                         <div class="links_mod_checkbox">
+                                            <input type="checkbox" id="menu_disk_title_id{$line.menu_disk_title_id}" name="menu_disk_title_id[]" value="{$line.menu_disk_title_id}" onchange="deleteGamefromMenu({$line.menu_disk_title_id},{$menu_disk_id})">
+                                            <label for="menu_disk_title_id{$line.menu_disk_title_id}"></label>&nbsp;
+                                            <!--<input type="checkbox" id="menu_disk_title_id{$line.menu_disk_title_id}" name="menu_disk_title_id[]" value="{$line.menu_disk_title_id}" onchange="deleteGamefromMenu({$line.menu_disk_title_id},{$menu_disk_id})">-->
+                                        </div>  
 									</td>
 									<td class="menu_gamename_td">
 										{if $line.game_name != ''}
@@ -222,7 +226,11 @@
 								<tr class="table_game_list">
 									<td class="menu_mark_td">
 										<form name="MenuDiskContent" id="MenuDiskContent">
-										<input type="checkbox" id="menu_disk_title_id{$line.menu_disk_title_id}" name="menu_disk_title_id[]" value="{$line.menu_disk_title_id}" onchange="deleteDocfromMenu({$line.menu_disk_title_id},{$menu_disk_id})">
+                                        <div class="links_mod_checkbox">
+                                            <input type="checkbox" id="menu_disk_title_id{$line.menu_disk_title_id}" name="menu_disk_title_id[]" value="{$line.menu_disk_title_id}" onchange="deleteDocfromMenu({$line.menu_disk_title_id},{$menu_disk_id})">
+                                            <label for="menu_disk_title_id{$line.menu_disk_title_id}"></label>&nbsp;
+                                            <!--<input type="checkbox" id="menu_disk_title_id{$line.menu_disk_title_id}" name="menu_disk_title_id[]" value="{$line.menu_disk_title_id}" onchange="deleteDocfromMenu({$line.menu_disk_title_id},{$menu_disk_id})">-->
+                                        </div>  		
 									</td>
 									<td class="menu_docname_td">
 										{if $line.game_name != ''}
@@ -385,7 +393,12 @@
 			<tr class="table_game_list">
 				<td class="menu_mark_td">
 					<form name="MenuDiskContent" id="MenuDiskContent">
-					<input type="checkbox" id="menu_disk_title_id{$line.menu_disk_title_id}" name="menu_disk_title_id[]" value="{$line.menu_disk_title_id}" onchange="deleteGamefromMenu({$line.menu_disk_title_id},{$menu_disk_id})">
+                    <div class="links_mod_checkbox">
+                        <input type="checkbox" id="menu_disk_title_id{$line.menu_disk_title_id}" name="menu_disk_title_id[]" value="{$line.menu_disk_title_id}" onchange="deleteGamefromMenu({$line.menu_disk_title_id},{$menu_disk_id})">
+                        <label for="menu_disk_title_id{$line.menu_disk_title_id}"></label>&nbsp;
+                        <!--<input type="checkbox" id="menu_disk_title_id{$line.menu_disk_title_id}" name="menu_disk_title_id[]" value="{$line.menu_disk_title_id}" onchange="deleteGamefromMenu({$line.menu_disk_title_id},{$menu_disk_id})">-->
+                    </div>  
+					
 				</td>
 				<td class="menu_gamename_td">
 					{if $line.game_name != ''}
@@ -467,7 +480,11 @@
 			<tr class="table_game_list">
 				<td class="menu_mark_td">
 					<form name="MenuDiskContent" id="MenuDiskContent">
-					<input type="checkbox" id="menu_disk_title_id{$line.menu_disk_title_id}" name="menu_disk_title_id[]" value="{$line.menu_disk_title_id}" onchange="deleteDocfromMenu({$line.menu_disk_title_id},{$menu_disk_id})">
+                    <div class="links_mod_checkbox">
+                        <input type="checkbox" id="menu_disk_title_id{$line.menu_disk_title_id}" name="menu_disk_title_id[]" value="{$line.menu_disk_title_id}" onchange="deleteDocfromMenu({$line.menu_disk_title_id},{$menu_disk_id})">
+                        <label for="menu_disk_title_id{$line.menu_disk_title_id}"></label>&nbsp;
+                        <!--<input type="checkbox" id="menu_disk_title_id{$line.menu_disk_title_id}" name="menu_disk_title_id[]" value="{$line.menu_disk_title_id}" onchange="deleteDocfromMenu({$line.menu_disk_title_id},{$menu_disk_id})">-->
+                    </div>  
 				</td>
 				<td class="menu_docname_td">
 					{if $line.game_name != ''}
@@ -639,7 +656,11 @@
 			<tr class="table_game_list">
 				<td class="menu_mark_td">
 					<form name="MenuDiskContent" id="MenuDiskContent">
-					<input type="checkbox" id="menu_disk_title_id{$line.menu_disk_title_id}" name="menu_disk_title_id[]" value="{$line.menu_disk_title_id}" onchange="deleteGamefromMenu({$line.menu_disk_title_id},{$menu_disk_id})">
+                    <div class="links_mod_checkbox">
+                        <input type="checkbox" id="menu_disk_title_id{$line.menu_disk_title_id}" name="menu_disk_title_id[]" value="{$line.menu_disk_title_id}" onchange="deleteGamefromMenu({$line.menu_disk_title_id},{$menu_disk_id})">
+                        <label for="menu_disk_title_id{$line.menu_disk_title_id}"></label>&nbsp;
+                        <!--<input type="checkbox" id="menu_disk_title_id{$line.menu_disk_title_id}" name="menu_disk_title_id[]" value="{$line.menu_disk_title_id}" onchange="deleteGamefromMenu({$line.menu_disk_title_id},{$menu_disk_id})">-->
+                    </div>  
 				</td>
 				<td class="menu_gamename_td">
 					{if $line.game_name != ''}

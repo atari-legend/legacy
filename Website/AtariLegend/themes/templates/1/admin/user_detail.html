@@ -10,6 +10,7 @@
 *   Id: User_detail.html,v 0.20 2015/08/22 23:43 ST Gravedigger
 *   Id: User_detail.html,v 0.30 2015/12/03 23:10 ST Gravedigger - HTML Validated/Flexbox added
 *   Id: User_detail.html,v 0.40 2015/12/21 23:55 ST Gravedigger - Removed message var
+*   Id: User_detail.html,v 0.42 2017/04/08 23:48 ST Gravedigger - new checkbox + input type file
 *
 ***************************************************************************/
 
@@ -20,6 +21,14 @@ User detail page. Overhere you can maintain the log on data of a user and have a
 {extends file='1/admin/frontpage.html'}
 {block name=java_script}
 <script type="text/javascript">
+$(function() {    
+    $but = $('#file_upload_user_detail');
+    
+    $("input:file[id=file_upload]").change(function() {
+        document.getElementById('file_upload_user_detail').value = $(this).val();
+    });
+});
+
 function delete_user() 
 {
 	document.getElementById('user').method="post";
@@ -44,6 +53,9 @@ function user_stats()
 {/block}
 {block name=main_tile}
 <div class="standard_tile" id="user_details">
+    <div class="help-tip">
+        <p>Tip : To upload an avatar, click on 'select file'. Once the file is selected, just press the upload button.</p>
+    </div>
 	<h1>USER DETAILS</h1>
 	<div class="standard_tile_line"></div>
 	<div class="standard_tile_text">
@@ -58,54 +70,75 @@ function user_stats()
 			<legend>User details</legend>
 			<form action="../user/db_user.php?action=modify_user&amp;user_id_selected={$users.user_id}" method="post" name="user" id="user">
 			<div class="user_details_container">
-				<div class="user_details_child" id="child_1">
+				<div class="user_details_child" id="child_1_user">
 					<div class="user_details_row">
 						<div class="user_details_text">User name :</div>
-						<div class="user_details_input"><input type="text" name="user_name"  maxlength="60" value="{$users.user_name}" class="standard_tile_input_small"></div>
+						<div class="user_details_input"><input type="text" name="user_name"  maxlength="60" value="{$users.user_name}" class="user_details_input_small"></div>
 					</div>
 					<div class="user_details_row">
 						<div class="user_details_text">User email :</div>
-						<div class="user_details_input"><input type="text" name="user_email"  maxlength="255" value="{$users.user_email}" class="standard_tile_input_small"></div>
+						<div class="user_details_input"><input type="text" name="user_email"  maxlength="255" value="{$users.user_email}" class="user_details_input_small"></div>
 					</div>
 					<div class="user_details_row">
 						<div class="user_details_text">User website :</div>
-						<div class="user_details_input"><input type="text" name="user_website"  maxlength="255" value="{$users.user_website}" class="standard_tile_input_small"></div>
+						<div class="user_details_input"><input type="text" name="user_website"  maxlength="255" value="{$users.user_website}" class="user_details_input_small"></div>
 					</div>
 					<div class="user_details_row">
 						<div class="user_details_text">User MSNM :</div>
-						<div class="user_details_input"><input type="text" name="user_msnm"  maxlength="255" value="{$users.user_msnm}" class="standard_tile_input_small"></div>
+						<div class="user_details_input"><input type="text" name="user_msnm"  maxlength="255" value="{$users.user_msnm}" class="user_details_input_small"></div>
+					</div>
+                    <div class="user_details_row">
+						<div class="user_details_text">Join date :</div>
+						<div class="user_details_input"><input type="text" name="join date"  maxlength="255" value="{$users.join_date}" class="user_details_input_small" disabled></div>
 					</div>
 					<div class="user_details_row">
 						<div class="user_details_text">Inactive :</div>
-						<div class="user_details_input"><input type="checkbox" name="user_inactive" value="1" maxlength="255" class="quick_search_check" {if $users.inactive == '1'} checked {/if}></div>
+						<div class="user_details_input">
+                            <div class="checkbox" id="checkbox_user_detail">
+                                <input type="checkbox" value="1" id="user_inactive" name="user_inactive" {if $users.inactive == '1'} checked {/if}>
+                                <label for="user_inactive"></label>
+                                <!--<input type="checkbox" name="user_inactive" value="1" maxlength="255" class="quick_search_check" {if $users.inactive == '1'} checked {/if}>-->
+                            </div>
+                        </div>
 					</div>
 				</div>
-				<div class="user_details_child" id="child_2">
+                <div class="user_details_child" id="child_3_user"></div>
+				<div class="user_details_child" id="child_2_user">
 					<div class="user_details_row">
 						<div class="user_details_text">User pwd :</div>
 						{if $users.user_pwd ==! ''}
 							<div class="user_details_input"><input type="button" value="reset" class="topbutton_cpanel_small" onClick="reset_pwd();"></div>
 						{else}
-							<div class="user_details_input"><input type="text" name="user_pwd"  maxlength="255" class="standard_tile_input_small"></div>
+							<div class="user_details_input"><input type="text" name="user_pwd"  maxlength="255" class="user_details_input_small"></div>
 						{/if}
 					</div>
 					<div class="user_details_row">	
 						<div class="user_details_text">User permission :</div>
-						<div class="user_details_input"><input type="text" name="user_permission"  maxlength="60" value="{$users.user_permission}" class="standard_tile_input_small"></div>
+						<div class="user_details_input"><input type="text" name="user_permission"  maxlength="60" value="{$users.user_permission}" class="user_details_input_small"></div>
 					</div>
 					<div class="user_details_row">	
 						<div class="user_details_text">User ICQ :</div>
-						<div class="user_details_input"><input type="text" name="user_icq"  maxlength="255" value="{$users.user_icq}" class="standard_tile_input_small"></div>
+						<div class="user_details_input"><input type="text" name="user_icq"  maxlength="255" value="{$users.user_icq}" class="user_details_input_small"></div>
 					</div>
 					<div class="user_details_row">
 						<div class="user_details_text">User AIM :</div>
-						<div class="user_details_input"><input type="text" name="user_aim"  maxlength="255" value="{$users.user_aim}" class="standard_tile_input_small"></div>
+						<div class="user_details_input"><input type="text" name="user_aim"  maxlength="255" value="{$users.user_aim}" class="user_details_input_small"></div>
+					</div>
+                    <div class="user_details_row">
+						<div class="user_details_text">Last visit :</div>
+						<div class="user_details_input"><input type="text" name="last_visit"  maxlength="255" value="{$users.last_visit}" class="user_details_input_small" disabled></div>
 					</div>
 				</div>
 			</div>
 			<table>	
 			<tr>
-				<td><br><br><input type="submit" value="Modify" class="topbutton_cpanel_small"></td>
+				<td><br><br>
+                {if $users.user_pwd ==! ''}
+                    <input type="submit" value="Modify" class="topbutton_cpanel_small">
+                {else}
+                   <input type="button" value="Modify" class="topbutton_cpanel_small" onclick="formhash(this.form, this.form.user_pwd);">
+                {/if}
+                </td>
 				<td><br><br><input type="button" value="Delete" onClick="delete_user();" class="topbutton_cpanel_small"></td>
 				<td><br><br><input type="button" value="Statistics" onClick="user_stats();" class="topbutton_cpanel_small"></td>
 				<td><br><br><input type="hidden" name="user_id_selected" value="{$users.user_id}" class="topbutton_cpanel_small"></td>
@@ -116,13 +149,14 @@ function user_stats()
 		<br/><br/>
 		<fieldset>
 			<legend>Avatar</legend>
+                
 			{if $users.avatar_ext !=''}
 				<form action="../user/db_user.php?action=delete_avatar&amp;user_id_selected={$users.user_id}" method="post" name="delete_avatar">
 				Delete Image?
 				<div>
 					<br><img src="../../includes/show_image.php?file={$users.image}&amp;resize=160,null,null,null" alt="Avatar" class="user_stats_img" id="user_details_img_dark">
 				</div>
-				<br><br>
+				<br>
 				<input type="hidden" name="user_id_selected" value="{$users.user_id}">
 				<input type="submit" value="Delete" class="topbutton_cpanel_small">
 				</form>
@@ -130,7 +164,10 @@ function user_stats()
 				<form enctype="multipart/form-data" action="../user/db_user.php?user_id_selected={$users.user_id}" method="post" name="avatar" id="avatar">
 					Attach image
 				<br><br>
-				<input type="file" name="image">
+				<label for="file_upload" class="file_upload">Select file</label>
+                <input id="file_upload" type="file" name="image">
+                <input type="text" class="standard_tile_input_small" id="file_upload_user_detail">&nbsp;
+                <br><br>
 				<input type="submit" name="Modify" value="Upload" class="topbutton_cpanel_small">
 				<input type="hidden" name="MAX_FILE_SIZE" value="50000">
 				<input type="hidden" name="user_id_selected" value="{$users.user_id}">

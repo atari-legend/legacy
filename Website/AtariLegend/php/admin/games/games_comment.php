@@ -115,7 +115,7 @@ while ($query_comment = $sql_comment->fetch_array(MYSQLI_BOTH)) {
     if ($query_comment['join_date'] == "") {
         $user_joindate = "unknown";
     } else {
-        $user_joindate = date("F j, Y", $query_comment['join_date']);
+        $user_joindate = date("d-m-y", $query_comment['join_date']);
     }
     $date = date("F j, Y", $query_comment['timestamp']);
 

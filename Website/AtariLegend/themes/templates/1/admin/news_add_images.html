@@ -10,6 +10,8 @@
 *   Id: news_add_images.html,v 0.10 2004/05/01 ST Graveyard
 *   Id: news_add_images.html,v 0.20 2016/07/29 ST Graveyard
 *			- AL 2.0
+*   Id: news_add_images.html,v 0.20 2017/05/08 ST Graveyard
+*			- Custom file selector
 *
 ***************************************************************************/
 //****************************************************************************************
@@ -21,6 +23,16 @@
 {block name=title}Add a News Image{/block}
 
 {block name=main_tile}
+<script type="text/javascript">
+$(function() {    
+    $but = $('#file_upload_user_detail');
+    
+    $("input:file[id=file_upload]").change(function() {
+        document.getElementById('file_upload_user_detail').value = $(this).val();
+    });
+});
+</script>
+
 <form action="../news/db_news.php" enctype="multipart/form-data" method="post" name="imageadd">
 <div class="standard_tile" id="news_add_image">
 	<h1>ADD NEWS IMAGE</h1>
@@ -46,7 +58,10 @@
 				<br>
 				Image File
 				<br>
-				<input type="file" name="news_image">
+				<!--<input type="file" name="news_image">-->
+                <label for="file_upload" class="file_upload">Select file</label>
+                <input id="file_upload" type="file" name="news_image">
+                <input type="text" class="standard_tile_input_small" id="file_upload_user_detail">&nbsp;
 				<br>
 				<br>
 				<input type="hidden" name="action" id="action" value="image_upload">

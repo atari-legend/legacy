@@ -41,7 +41,7 @@ function delete_news(news_id)
 
 {block name=main_tile}
 <div class="standard_tile" id="news_approve">
-	<h1>NEWS ICON PREVIEWS</h1>
+	<h1>APPROVE NEWS</h1>
 	<div class="standard_tile_line"></div>
 	<div class="standard_tile_text">
 		<div class="left_nav_section">		
@@ -54,7 +54,7 @@ function delete_news(news_id)
 			{foreach from=$news_submissions item=line}
 				<fieldset>
 					<legend>
-						Written by {$line.news_userid} on {$line.news_date}
+						{$line.news_userid} - {$line.news_date}
 					</legend>
 					<br>
 					<b>Headline - {$line.news_headline}</b>

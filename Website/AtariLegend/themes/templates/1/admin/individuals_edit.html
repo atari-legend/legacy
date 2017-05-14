@@ -10,6 +10,8 @@
 *   Id: Individuals_edit.html,v 0.10 2005/08/06 15:25 Gatekeeper
 *   Id: Individuals_edit.html,v 0.20 2016/08/01 23:17 Gatekeeper
 *			- AL 2.0
+*   Id: Individuals_edit.html,v 0.21 2017/05/05 19:10 Gatekeeper
+*           - Custom upload field
 *
 ***************************************************************************/
 
@@ -22,6 +24,14 @@ The individuals edit page
 
 {block name=java_script}	
 <script type="text/javascript">
+$(function() {    
+    $but = $('#file_upload_user_detail');
+    
+    $("input:file[id=file_upload]").change(function() {
+        document.getElementById('file_upload_user_detail').value = $(this).val();
+    });
+});
+
 function individual_pic_delete(ind_id)
 { 
     // CONFIRM REQUIRES ONE ARGUMENT
@@ -252,13 +262,18 @@ function storeCaret(textEl) {
 				<legend>Individual Image</legend>
 				<br>
 				<img src="../../includes/show_image.php?file={$individuals.ind_image}" class="user_stats_img" id="user_details_img_dark">
-				<a href="javascript:individual_pic_delete({$individuals.ind_id});" class="left_nav_link">delete photo</a>
+                <br>
+                <input type="button" onclick="individual_pic_delete({$individuals.ind_id});" class="topbutton_cpanel_small" value="Delete">
+				<!--<a href="javascript:individual_pic_delete({$individuals.ind_id});" class="left_nav_link">delete photo</a>-->
 			</fieldset>
 		{else}
 			<form action="../individuals/db_individuals.php" method="post" enctype="multipart/form-data" name="individual_pic" id="individual_pic">	
 				<fieldset>
 					<legend>Individual Image</legend>
-					<input type="file" name="individual_pic">
+					<!--<input type="file" name="individual_pic">-->
+                    <label for="file_upload" class="file_upload">Select file</label>
+                    <input id="file_upload" type="file" name="individual_pic">
+                    <input type="text" class="standard_tile_input_small" id="file_upload_user_detail">&nbsp;
 					<br>
 					<br>
 					<input type="submit" name="inserter" value="Upload" class="topbutton_cpanel_small">
@@ -275,15 +290,17 @@ function storeCaret(textEl) {
 				<input type="submit" value="Add Nick" class="topbutton_cpanel_small">
 				<input type="hidden" name="action" value="add_nick">
 				<input type="hidden" name="ind_id" value="{$individuals.ind_id}">		
-		</form>
-		<br>
-		{if isset($nicks)}
-			<b>Known Nicks</b><br><br>
-			{foreach from=$nicks item=line}
-				{$line.nick_name} - <a style="cursor:pointer" class="left_nav_link" onClick="nickdelete({$line.nick_id},{$individuals.ind_id}); return false;">Delete</a><br/>
-			{/foreach}
-		{/if}	
-		<br>	
+                {if isset($nicks)}
+                    <br>
+                    <br>
+                    <b>Known Nicks</b><br><br>
+                    {foreach from=$nicks item=line}
+                        {$line.nick_name} - <a style="cursor:pointer" class="left_nav_link" onClick="nickdelete({$line.nick_id},{$individuals.ind_id}); return false;">Delete</a><br/>
+                    {/foreach}
+                {/if}	
+                <br>	
+            </fieldset>
+        </form>
 	</div>
 	{else}
 	<h1>Edit individual</h1>

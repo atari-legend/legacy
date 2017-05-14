@@ -10,7 +10,8 @@
 *   Id: games_music_detail.html,v 0.10 2005/11/15 ST Graveyard
 *   Id: games_music_detail.html,v 0.20 2016/07/26 ST Graveyard
 *			- AL 2.0
-*
+*   Id: games_music_detail.html,v 0.21 2017/04/27 23:56 ST Gravedigger
+*			- custom file selector & checkbox
 ***************************************************************************/
 
 //****************************************************************************************
@@ -21,6 +22,14 @@
 
 {block name=java_script}
 <script type="text/javascript">
+$(function() {    
+    $but = $('#file_upload_game_screenshots');
+    
+    $("input:file[id=file_upload]").change(function() {
+        document.getElementById('file_upload_game_screenshots').value = 'file(s) selected';
+    });
+});
+
 function add_composer() 
 {
 	document.editmuzak.method="post";
@@ -41,6 +50,9 @@ function delete_music(game_id)
 
 {block name=main_tile}
 <div class="standard_tile" id="games_music_detail">
+     <div class="help-tip">
+        <p>Tip : To upload more music files at once, just press the 'select files' button, and hold ctrl while selecting files. Afterwards press 'upload'.</p>
+    </div>
 	<h1>GAME MUSIC</h1>
 	<div class="standard_tile_line"></div>
 	<div class="standard_tile_text">
@@ -54,9 +66,12 @@ function delete_music(game_id)
 				<legend>Edit existing files</legend>
 					{if isset($music)}		
 						{foreach from=$music item=line}
-							<input type="checkbox" name="music_id_selected[]" value="{$line.music_id}">
-							<a href="../games/games_music_detail.php?music_id={$line.music_id}&amp;action=play_music"  class="left_nav_link">{$line.ind_name}_{$line.music_id}.{$line.extention}</a>
-							<br>
+							<!--<input type="checkbox" name="music_id_selected[]" value="{$line.music_id}">-->
+                            <div class="checkbox" id="checkbox_user_detail">
+                                <input type="checkbox" id="{$line.music_id}" name="music_id_selected[]" value="{$line.music_id}">
+                                <label for="{$line.music_id}"></label>
+                                <a href="../games/games_music_detail.php?music_id={$line.music_id}&amp;action=play_music" class="left_nav_link">{$line.ind_name}_{$line.music_id}.{$line.extention}</a>
+							</div>
 							<br>
 						{/foreach}	
 						<img src="../../../themes/templates/1/includes/img/arrow_ltr.gif" alt="" width="38" height="22" style="float:left;">		
@@ -85,10 +100,14 @@ function delete_music(game_id)
 		<form enctype="multipart/form-data" method="post" action="../games/db_games_music.php" name="composer">		
 		<fieldset>
 		<legend>Music files for {$ind_selected.ind_name}</legend>
-			{section name=loop loop=6 start=1} 
+			<!--{section name=loop loop=6 start=1} 
 				<input type="file" name="music[{$smarty.section.loop.index}]">
 				<br>
-			{/section}	
+			{/section}-->
+            <label for="file_upload" class="file_upload">Select file(s)</label>
+            <input id="file_upload" type="file" name="music[]" multiple>
+            <input type="text" class="standard_tile_input_small" id="file_upload_game_screenshots">&nbsp;
+            <br>
 			<input type="hidden" name="ind_id" value="{$ind_selected.ind_id}">
 			<input type="hidden" name="MAX_FILE_SIZE" value="100000">
 			<input type="hidden" name="action" value="upload_zaks">

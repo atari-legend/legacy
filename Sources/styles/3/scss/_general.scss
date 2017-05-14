@@ -109,10 +109,13 @@ img {display: block; }
 .standard_tile_background { position: relative; }
 .standard_tile_image { width: 100%; }
 .standard_tile_subtext {
-    font-size: 10pt;
-    font-weight: bold;
+    font-size: 11pt;
     color: #161c71;
+    font-weight: bold;
 }
+
+.standard_tile_subtext a{color: #161c71;}
+.standard_tile_subtext a:hover{color: black;}
 
 .standard_tile p {
     width: 91.7%;
@@ -185,7 +188,7 @@ img {display: block; }
 }
 
 .standard_tile h6 {
-    font-size: 11pt;
+    font-size: 12pt;
     font-weight: 100;
     color: #000;
     text-align: left;
@@ -344,6 +347,82 @@ img {display: block; }
     text-align: center;
 }
 
+#file_upload{
+    display: none;
+}
+
+#file_upload2{
+    display: none;
+}
+
+
+.file_upload {
+    width: 80px;
+    height: 25px;
+    margin-left: 2px;
+    font-size: 10pt;
+    color: #000;
+    cursor: pointer;
+    background: #dbd7d1;
+    border: 1px solid #000;
+    border-radius: 0 15px 15px 0;
+    padding: 4px 10px; 
+}
+
+.file_upload:hover {
+    color: #fff;
+    background: $bg-color;
+    border: 1px solid #4f4f4f;
+}
+
+.selected{
+    font-weight:bold;
+}
+
+//*** checkbox css ****//
+.checkbox {
+	width: 100%;
+	margin: 2px 0px;
+	position: relative;
+}
+
+.checkbox label {
+	cursor: pointer;
+	position: absolute;
+	width: 15px;
+	height: 15px;
+	top: 0;
+  	left: 0;
+	background: white;
+	border:1px solid black;
+}
+
+.checkbox label:after {
+	opacity: 0.2;
+	content: '';
+	position: absolute;
+	width: 9px;
+	height: 5px;
+	background: transparent;
+	top: 2px;
+	left: 2px;
+	border: 3px solid black;
+	border-top: none;
+	border-right: none;
+
+	transform: rotate(-45deg);
+}
+
+.checkbox label:hover::after {
+	opacity: 0.5;
+}
+
+.checkbox input[type=checkbox]:checked + label:after {
+	opacity: 1;
+}
+
+.checkbox_alt{@extend .checkbox;}
+
 //*------------------------------------------------------------
 //Standard table settings
 //-------------------------------------------------------------*/
@@ -401,7 +480,7 @@ img {display: block; }
 }
 
 .standard_table_center {
-    font-size: 11pt;
+    font-size: 12pt;
     font-weight: 100;
     color: #000;
     text-align: center;
@@ -409,7 +488,7 @@ img {display: block; }
 
 .standard_table_left {
     padding-left: 2px;
-    font-size: 11pt;
+    font-size: 12pt;
     font-weight: 100;
     color: #000;
     text-align: left;
@@ -417,7 +496,7 @@ img {display: block; }
 
 .standard_table_right {
     padding-right: 2px;
-    font-size: 11pt;
+    font-size: 12pt;
     font-weight: 100;
     color: #000;
     text-align: right;

@@ -28,6 +28,7 @@ if (isset($action) and $action == "crew_browse") {
                 WHERE crew_name REGEXP '^[0-9].*'
                 ORDER BY crew_name ASC") or die("Couldn't query Crew database");
     } else {
+        $query = $mysqli->real_escape_string($query);
         $sql_crew = $mysqli->query("SELECT * FROM crew
                 WHERE crew_name LIKE '$query%'
                 ORDER BY crew_name ASC") or die("Couldn't query Crew database");
@@ -47,6 +48,7 @@ if (isset($action) and $action == "crew_browse") {
 }
 
 if (isset($action) and $action == "crew_search") {
+    $query = $mysqli->real_escape_string($query);
     $sql_crew = $mysqli->query("SELECT * FROM crew
                 WHERE crew_name LIKE '%$query%'
                 ORDER BY crew_name ASC") or die("Couldn't query Crew database");
@@ -71,6 +73,7 @@ if (isset($action) and $action == "crew_gen_browse") {
         WHERE crew_name REGEXP '^[0-9].*'
         ORDER BY crew_name ASC") or die("Couldn't query Crew database");
     } else {
+        $query = $mysqli->real_escape_string($query);
         $sql_crew = $mysqli->query("SELECT * FROM crew
         WHERE crew_name LIKE '$query%'
         ORDER BY crew_name ASC") or die("Couldn't query Crew database");
@@ -97,7 +100,8 @@ if (isset($action) and $action == "ind_gen_browse") {
         //Create a temporary table to build an array with both names and nicknames
         $mysqli->query("CREATE TEMPORARY TABLE temp ENGINE=MEMORY $sql_individuals") or die("failed to create temporary table");
         //$mysqli->query("INSERT INTO temp $sql_aka") or die("failed to insert akas into temporary table");
-
+        
+        $query = $mysqli->real_escape_string($query);
         $query_temporary = $mysqli->query("SELECT * FROM temp WHERE ind_name LIKE '$query%' ORDER BY ind_name ASC") or die("Failed to query temporary table");
         $mysqli->query("DROP TABLE temp");
     }
@@ -123,6 +127,7 @@ if (isset($action) and $action == "ind_gen_search") {
         $mysqli->query("CREATE TEMPORARY TABLE temp ENGINE=MEMORY $sql_individuals") or die("failed to create temporary table");
         //$mysqli->query("INSERT INTO temp $sql_aka") or die("failed to insert akas into temporary table");
 
+        $query = $mysqli->real_escape_string($query);
         $query_temporary = $mysqli->query("SELECT * FROM temp WHERE ind_name LIKE '%$query%' ORDER BY ind_name ASC") or die("Failed to query temporary table");
         $mysqli->query("DROP TABLE temp");
     } elseif ($query == "empty") {

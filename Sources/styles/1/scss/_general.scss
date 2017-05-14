@@ -112,6 +112,9 @@ img { display: block; }
     color: #bcbdbd;
 }
 
+.standard_tile_subtext a{color: #bcbdbd;}
+.standard_tile_subtext a:hover{color: white;}
+
 .standard_tile p {
     width: 91.7%;
     padding-right: 4%;
@@ -344,6 +347,80 @@ img { display: block; }
     margin: auto;
     text-align: center;
 }
+
+
+//*** input type file css ****//
+#file_upload{
+    display: none;
+}
+
+#file_upload2{
+    display: none;
+}
+
+.file_upload {
+    width: 80px;
+    height: 25px;
+    font-size: 10pt;
+    color: #fff;
+    cursor: pointer;
+    background: #122323;
+    border: 0;
+    border-bottom: 3px solid #122323;
+    border-left: 1px solid #122323;
+    padding: 3px 10px; 
+}
+
+.file_upload:hover {
+    color: #fff;
+    background: #006f6f;
+    border-bottom: 3px solid #122323;
+} 
+
+//*** checkbox css ****//
+.checkbox {
+	width: 100%;
+	margin: 2px 0px;
+	position: relative;
+}
+
+.checkbox label {
+	cursor: pointer;
+	position: absolute;
+	width: 15px;
+	height: 15px;
+	top: 0;
+  	left: 0;
+	background: black;
+	border:1px solid white;
+}
+
+.checkbox label:after {
+	opacity: 0.2;
+	content: '';
+	position: absolute;
+	width: 9px;
+	height: 5px;
+	background: transparent;
+	top: 2px;
+	left: 2px;
+	border: 3px solid white;
+	border-top: none;
+	border-right: none;
+
+	transform: rotate(-45deg);
+}
+
+.checkbox label:hover::after {
+	opacity: 0.5;
+}
+
+.checkbox input[type=checkbox]:checked + label:after {
+	opacity: 1;
+}
+
+.checkbox_alt{@extend .checkbox;}
+.checkbox_alt label{border:1px solid #008b8b;}
 
 //*------------------------------------------------------------
 //Standard table settings
