@@ -54,7 +54,7 @@ function delete_news(news_id)
 			<fieldset>
 				<legend>
 				{if $line.edit_email <> ''}	
-					Submitted by <a href="mailto:{$line.edit_email}?subject=Your%20newspost%20{$line.email_headline}%20at%20Atari%20Legend" class="left_nav_link">{$line.edit_userid}</a> on {$line.edit_date}
+					<a href="mailto:{$line.edit_email}?subject=Your%20newspost%20{$line.email_headline}%20at%20Atari%20Legend" class="left_nav_link">{$line.edit_userid}</a> - {$line.edit_date}
 				{else}
 					Submitted by {$line.edit_userid} on {$line.edit_date}
 				{/if}	
@@ -63,8 +63,8 @@ function delete_news(news_id)
 				<b>Headline - {$line.edit_headline}</b>
 				<br>
 				<br>
-				<div style="float:left;margin-right:15px;" id="news_approve_icon">
-					<img src="../../includes/show_image.php?file={$line.edit_icon}&amp;resize=120,null,null,null" alt="newsbutton" class="user_stats_img" id="user_details_img_dark">
+				<div style="float:left;margin-right:15px;">
+					<img src="../../includes/show_image.php?file={$line.edit_icon}&amp;resize=120,null,null,null" alt="newsbutton" class="game_screenshot_img">
 				</div>	
 				<div style="display:inline;">
 					<i>{$line.edit_text}</i>

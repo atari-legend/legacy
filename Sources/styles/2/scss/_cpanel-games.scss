@@ -85,9 +85,13 @@
     text-align: left;
 }
 
-#year_th,
+#year_th{
+    width: 7%;
+    text-align: left;
+}
+
 #info_th {
-    width: 10%;
+    width: 12%;
     text-align: left;
 }
 
@@ -104,9 +108,14 @@
     text-align: left;
 }
 
-.info_td,
 .year_td {
-    width: 10%;
+    width: 7%;
+    padding-left: 2px;
+    text-align: left;
+}
+
+.info_td {
+    width:12%;
     padding-left: 2px;
     text-align: left;
 }
@@ -213,6 +222,11 @@
     background: #666;
 }
 
+#file_upload_game_screenshots{width: 60%;}
+#file_upload_game_file{width: 60%;}
+#file_upload_game_box{width: 60%;}
+#file_upload_game_music{width: 60%;}
+
 //*----------------------------------------------------------
 //Games comment
 //------------------------------------------------------------ */
@@ -240,8 +254,14 @@
 }
 
 .gc_center_head {
-    width: 80%;
-    font-size: 16px;
+    width: 60%;
+    font-size: 12pt;
+}
+
+.gc_right_head {
+    width: 20%;
+    font-size: 11pt;
+    text-align: right;
 }
 
 .gc_left {
@@ -322,7 +342,7 @@
     height: 450px;
 }
 
-#game_review_screenshot_text {
+.game_review_screenshot_text {
     @extend .standard_tile_input_area;
     width: 75%;
     height: 75px;
@@ -398,4 +418,11 @@
 .zaks_gm_td {
     width: 10%;
     padding-left: 2px;
+}
+
+//*----------------------------------------------------------
+//Games screenshots upload
+//------------------------------------------------------------ */
+.game_screenshot_img{ 
+    @extend #user_details_img_dark;
 }

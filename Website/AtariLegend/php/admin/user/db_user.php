@@ -10,6 +10,7 @@
  *   Id: db_user.php,v 1.01 2015/12/21 ST Graveyard - Added messages
  *                          - Added more SQL statements
  *   Id: db_user.php,v 1.02 2016/08/19 ST Graveyard - Added Change log
+ *   Id: db_user.php,v 1.03 2017/04/02 ST Graveyard - Added real escape when updating username
  *
  ***************************************************************************/
 
@@ -51,20 +52,24 @@ if (isset($action) and $action == 'avatar_upload') {
             $mysqli->query("UPDATE users SET avatar_ext='$ext' WHERE user_id='$user_id_selected'");
             $file_data = rename("$tmp_name", "$user_avatar_save_path$user_id_selected.$ext");
             chmod("$user_avatar_save_path$user_id_selected.$ext", 0777);
+            
+             // check for size specs
+            $imginfo = getimagesize("$user_avatar_save_path$user_id_selected.$ext") or die("getimagesize not working");
+            $width  = $imginfo[0];
+            $height = $imginfo[1];
+
+            if ($width < 101 and $height < 101) {
+                $_SESSION['edit_message'] = "Avatar added";
+                create_log_entry('Users', $user_id_selected, 'Avatar', $user_id_selected, 'Insert', $_SESSION['user_id']);
+            } else {
+                $_SESSION['edit_message'] = "Upload failed due to not confirming to specs - width and height must be 100px wide max";
+                $mysqli->query("UPDATE users SET avatar_ext='' WHERE user_id='$user_id_selected'");
+                unlink("$user_avatar_save_path$user_id_selected.$ext");
+            }
         }
-
-        // check for size specs
-        $imginfo = getimagesize("$user_avatar_save_path$user_id_selected.$ext") or die("getimagesize not working");
-        $width  = $imginfo[0];
-        $height = $imginfo[1];
-
-        if ($width < 101 and $height < 101) {
-            $_SESSION['edit_message'] = "Avatar added";
-            create_log_entry('Users', $user_id_selected, 'Avatar', $user_id_selected, 'Insert', $_SESSION['user_id']);
-        } else {
-            $_SESSION['edit_message'] = "Upload failed due to not confirming to specs.";
-            $mysqli->query("UPDATE users SET avatar_ext='' WHERE user_id='$user_id_selected'");
-            unlink("$user_avatar_save_path$user_id_selected.$ext");
+        else
+        {
+            $_SESSION['edit_message'] = "Please upload only files with extension png, jpg or gif";
         }
     }
 }
@@ -87,7 +92,7 @@ if (isset($action) and $action == "delete_avatar") {
 // reset pwd
 //****************************************************************************************
 if (isset($action) and $action == 'reset_pwd') {
-    $mysqli->query("UPDATE users SET password='' WHERE user_id='$user_id_selected'");
+    $mysqli->query("UPDATE users SET password='', sha512_password = '', salt = '' WHERE user_id='$user_id_selected'");
     $_SESSION['edit_message'] = "Password reset";
 
     create_log_entry('Users', $user_id_selected, 'User', $user_id_selected, 'Update', $_SESSION['user_id']);
@@ -97,14 +102,38 @@ if (isset($action) and $action == 'reset_pwd') {
 // modify user
 //****************************************************************************************
 if (isset($action) and $action == 'modify_user') {
-    if (isset($user_pwd) && $user_pwd != '') {
-        $md5pass = md5($user_pwd);
-        $mysqli->query("UPDATE users SET userid='$user_name', password='$md5pass', email='$user_email', permission='$user_permission', user_website='$user_website', user_icq='$user_icq', user_msnm='$user_msnm', user_aim='$user_aim', inactive='$user_inactive' WHERE user_id='$user_id_selected'");
+    
+    if (isset($_POST['pmd5']) &&  $_POST['pmd5'] != '' && isset($_POST['p']) && $_POST['p'] != '' ) {
+      
+        $user_name = $mysqli->real_escape_string($user_name);
+        $md5pass = $_POST['pmd5']; // The md5 hashed password.
+        $sha512 = $_POST['p']; // The hashed password.
+        $random_salt = hash('sha512', uniqid(mt_rand(1, mt_getrandmax()), true));//create random salt
+        $update_password = hash('sha512', $sha512 . $random_salt); // Create salted password
+    
+        if (isset ($user_inactive))
+        {
+            $mysqli->query("UPDATE users SET userid='$user_name', password='$md5pass', sha512_password='$update_password', salt='$random_salt', email='$user_email', permission='$user_permission', user_website='$user_website', user_icq='$user_icq', user_msnm='$user_msnm', user_aim='$user_aim', inactive='$user_inactive' WHERE user_id='$user_id_selected'");
+        }
+        else
+        {
+            $mysqli->query("UPDATE users SET userid='$user_name', password='$md5pass', sha512_password='$update_password', salt='$random_salt', email='$user_email', permission='$user_permission', user_website='$user_website', user_icq='$user_icq', user_msnm='$user_msnm', user_aim='$user_aim', inactive=' ' WHERE user_id='$user_id_selected'");
+        }
         $_SESSION['edit_message'] = "User data modified";
 
         create_log_entry('Users', $user_id_selected, 'User', $user_id_selected, 'Update', $_SESSION['user_id']);
     } else {
-        $mysqli->query("UPDATE users SET userid='$user_name', email='$user_email', permission='$user_permission', user_website='$user_website', user_icq='$user_icq', user_msnm='$user_msnm', user_aim='$user_aim', inactive='$user_inactive' WHERE user_id='$user_id_selected'");
+        
+        $user_name = $mysqli->real_escape_string($user_name);
+        
+        if (isset ($user_inactive))
+        {
+            $mysqli->query("UPDATE users SET userid='$user_name', email='$user_email', permission='$user_permission', user_website='$user_website', user_icq='$user_icq', user_msnm='$user_msnm', user_aim='$user_aim', inactive='$user_inactive' WHERE user_id='$user_id_selected'");
+        }
+        else
+        {
+            $mysqli->query("UPDATE users SET userid='$user_name', email='$user_email', permission='$user_permission', user_website='$user_website', user_icq='$user_icq', user_msnm='$user_msnm', user_aim='$user_aim', inactive=' ' WHERE user_id='$user_id_selected'");
+        }
         $_SESSION['edit_message'] = "User data modified";
 
         create_log_entry('Users', $user_id_selected, 'User', $user_id_selected, 'Update', $_SESSION['user_id']);

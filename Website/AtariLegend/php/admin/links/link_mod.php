@@ -45,6 +45,7 @@ $smarty->assign('website', array(
 //  'category_id' => $rowlink['website_category_id'],
     'website_description_text' => $rowlink['website_description_text'],
     'website_imgext' => $rowlink['website_imgext'],
+    'inactive' => $rowlink['inactive'],
     'website_image' => $website_image));
 
 //get the categories of this website

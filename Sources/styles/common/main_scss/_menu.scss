@@ -513,7 +513,7 @@ html {
 //* for resolutions between 1280 and 1920 the search goes to the side menu */
 //* some re-placement of the skin button is needed here */
 //* HOWEVER, this is not done for the CPANEL, to solve this id no-wrap is created */
-#no-wrap {
+.no-wrap {
     margin-top: 0;
 }
 
@@ -604,10 +604,11 @@ html {
     z-index: 1;
     left: -99999em;
     @if $skin-name == legacy {
-        top: 61px;
+        top: 60px;
     } @else if $skin-name == tos {
+        top: 30px;
         padding: 0;
-    } @else {}
+    } @else { top: 27px;}
 }
 
 #main_nav_ul > li:hover > ul {
@@ -681,8 +682,16 @@ header nav input {
     @if $skin-name == tos or $skin-name == picasso {
         border: $menu-top-button-hover-border;
     }
-    border-bottom: $menu-top-button-hover-border-bottom;
 }
+
+.subbutton:hover {
+    @if $skin-name == tos {
+        border-bottom: 3px solid #000;
+    }
+    else{
+        border-bottom: $menu-top-button-hover-border-bottom;
+    }
+}    
 
 .searchbutton {
     display: block;

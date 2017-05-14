@@ -230,7 +230,7 @@ function storeCaret(textEl) {
 				<div style="display:inline-block;">
 					<b>Written by : </b><br>
 					<select name="members" id="quick_search_pub_select">
-						<option value="-" selected>-</option>
+						<option value="-">-</option>
 						{foreach from=$authors item=line}
 							{if $edit_review.member_id == $line.user_id}
 								<option value="{$line.user_id}" SELECTED>{$line.user_name}</option>
@@ -274,11 +274,11 @@ function storeCaret(textEl) {
 				<br>
 				{if $screenshots_nr <> 0}
 					{foreach from=$screenshots item=line} 
-						<img src="../../includes/show_image.php?file={$line.screenshot_link}&amp;resize=200,null,null,null" alt="{$line.screenshot_comment}" style="display:inline;" class="user_stats_img" id="user_details_img_dark">
+						<img src="../../includes/show_image.php?file={$line.screenshot_link}&amp;resize=200,null,null,null" alt="{$line.screenshot_comment}" style="display:inline;" class="game_screenshot_img">
 						<br>
 						<br>
 						add comment : <br>
-						<input id="game_review_screenshot_text" type="text" name="inputfield[]" value="{$line.screenshot_comment}">
+						<input class="game_review_screenshot_text" type="text" name="inputfield[]" value="{$line.screenshot_comment}">
 						<br>
 						{if $line.screenshot_comment <> ''}
 							<a href="javascript:deletecomment({$game.game_id},{$reviewid},{$line.screenshot_id})" class="left_nav_link">

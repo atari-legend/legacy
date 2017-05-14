@@ -18,6 +18,9 @@
  *         from the manual : Returns FALSE on failure. For successful SELECT, SHOW, DESCRIBE or EXPLAIN queries mysqli_query() 
  *         will return a mysqli_result object. For other successful queries mysqli_query() will return TRUE. 
  *       - When deleting a menu set, also delete from crew_menu_prod table and ind_menu_prod
+ *
+ * id : db_menu_disk.php, v 1.22 2017/05/08 STG
+ *       - Removed sort bug
  ***************************************************************************/
 
 // We are using the action var to separate all the queries.
@@ -368,7 +371,7 @@ if (isset($action) and ($action == "add_title_to_menu")) {
         $temp_query = $mysqli->query("INSERT INTO temp $sql_demos") or die(mysqli_error());
         $temp_query = $mysqli->query("INSERT INTO temp $sql_tools") or die(mysqli_error());
 
-        $temp_query = $mysqli->query("SELECT * FROM temp GROUP BY menu_disk_title_id ORDER BY software_name ASC") or die("does not compute3");
+        $temp_query = $mysqli->query("SELECT * FROM temp GROUP BY menu_disk_title_id ORDER BY menu_disk_title_id ASC") or die("does not compute3");
 
         while ($query = $temp_query->fetch_array(MYSQLI_BOTH)) {
             // This smarty is used for creating the list of games
@@ -459,6 +462,7 @@ if (isset($action) and $action == "add_doc_to_menu") {
                              pub_dev.pub_dev_name AS 'developer_name',
                              pub_dev.pub_dev_id AS 'developer_id',
                              doc_disk_game.doc_id AS 'doc_id',
+                             doc.doc_type_id,
                              menu_types_main.menu_types_text,
                              menu_disk_title_author.menu_disk_title_author_id,
                              menu_disk_title.menu_disk_title_id AS 'menu_disk_title_id'
@@ -466,19 +470,21 @@ if (isset($action) and $action == "add_doc_to_menu") {
                              LEFT JOIN menu_disk_title_author ON (menu_disk_title_author.menu_disk_title_id = menu_disk_title.menu_disk_title_id)
                              LEFT JOIN menu_disk_title_doc_games ON (menu_disk_title.menu_disk_title_id = menu_disk_title_doc_games.menu_disk_title_id)
                              LEFT JOIN doc_disk_game ON (menu_disk_title_doc_games.doc_games_id = doc_disk_game.doc_disk_game_id)
+                             LEFT JOIN doc ON (doc_disk_game.doc_id = doc.doc_id)
                              LEFT JOIN game ON (game.game_id = doc_disk_game.game_id)
                              LEFT JOIN game_developer ON (game.game_id = game_developer.game_id)
                              LEFT JOIN pub_dev ON (game_developer.dev_pub_id = pub_dev.pub_dev_id)
                              LEFT JOIN game_year ON (game.game_id = game_year.game_id)
                              LEFT JOIN menu_types_main ON (menu_disk_title.menu_types_main_id = menu_types_main.menu_types_main_id)
                              WHERE menu_disk_title.menu_disk_id = '$menu_disk_id' AND menu_disk_title.menu_types_main_id = '6' ORDER BY game.game_name ASC";
-
+                             
         $sql_doc_tools = "SELECT tools.tools_name AS 'software_name',
                              tools.tools_id AS 'software_id',
                              '' AS year,
                              '' AS developer_name,
                              '' AS developer_id,
                              doc_disk_tool.doc_id AS 'doc_id',
+                             doc.doc_type_id,
                              menu_types_main.menu_types_text,
                              menu_disk_title_author.menu_disk_title_author_id,
                              menu_disk_title.menu_disk_title_id AS 'menu_disk_title_id'
@@ -486,6 +492,7 @@ if (isset($action) and $action == "add_doc_to_menu") {
                              LEFT JOIN menu_disk_title_author ON (menu_disk_title_author.menu_disk_title_id = menu_disk_title.menu_disk_title_id)
                              LEFT JOIN menu_disk_title_doc_tools ON (menu_disk_title.menu_disk_title_id = menu_disk_title_doc_tools.menu_disk_title_id)
                              LEFT JOIN doc_disk_tool ON (menu_disk_title_doc_tools.doc_tools_id = doc_disk_tool.doc_disk_tool_id)
+                             LEFT JOIN doc ON (doc_disk_tool.doc_id = doc.doc_id)
                              LEFT JOIN tools ON (tools.tools_id = doc_disk_tool.tools_id)
                              LEFT JOIN menu_types_main ON (menu_disk_title.menu_types_main_id = menu_types_main.menu_types_main_id)
                              WHERE menu_disk_title.menu_disk_id = '$menu_disk_id' AND menu_disk_title.menu_types_main_id = '6' ORDER BY tools.tools_name ASC";
@@ -493,7 +500,7 @@ if (isset($action) and $action == "add_doc_to_menu") {
         $temp_query2 = $mysqli->query("CREATE TEMPORARY TABLE temp2 ENGINE=MEMORY $sql_doc_games") or die(mysqli_error());
         $temp_query2 = $mysqli->query("INSERT INTO temp2 $sql_doc_tools") or die(mysqli_error());
 
-        $temp_query2 = $mysqli->query("SELECT * FROM temp2 GROUP BY menu_disk_title_id ORDER BY software_name ASC") or die("does not compute4");
+        $temp_query2 = $mysqli->query("SELECT * FROM temp2 GROUP BY menu_disk_title_id ORDER BY menu_disk_title_id ASC") or die("does not compute4");
 
         while ($query = $temp_query2->fetch_array(MYSQLI_BOTH)) {
             // This smarty is used for creating the list of games
@@ -504,6 +511,7 @@ if (isset($action) and $action == "add_doc_to_menu") {
                 'developer_name' => $query['developer_name'],
                 'developer_id' => $query['developer_id'],
                 'doc_id' => $query['doc_id'],
+                'doc_type_id' => $query['doc_type_id'],
                 'menu_disk_title_author_id' => $query['menu_disk_title_author_id'],
                 'menu_types_text' => $query['menu_types_text'],
                 'menu_disk_title_id' => $query['menu_disk_title_id']
@@ -589,7 +597,7 @@ if (isset($action) and $action == "delete_from_menu_disk") {
           LEFT JOIN game_year ON (game.game_id = game_year.game_id)
           LEFT JOIN menu_types_main ON (menu_disk_title.menu_types_main_id = menu_types_main.menu_types_main_id)
           WHERE menu_disk_title.menu_disk_id = '$menu_disk_id' AND menu_disk_title.menu_types_main_id = '1' ORDER BY game.game_name ASC";
-
+          
     $sql_demos = "SELECT demo.demo_id AS 'software_id',
           demo.demo_name AS 'software_name',
           crew.crew_id AS 'developer_id',
@@ -631,7 +639,7 @@ if (isset($action) and $action == "delete_from_menu_disk") {
     $temp_query = $mysqli->query("INSERT INTO temp $sql_demos") or die(mysqli_error());
     $temp_query = $mysqli->query("INSERT INTO temp $sql_tools") or die(mysqli_error());
 
-    $temp_query = $mysqli->query("SELECT * FROM temp GROUP BY menu_disk_title_id ORDER BY software_name ASC") or die("does not compute3");
+    $temp_query = $mysqli->query("SELECT * FROM temp GROUP BY menu_disk_title_id ORDER BY menu_disk_title_id ASC") or die("does not compute3");
 
 
     while ($query = $temp_query->fetch_array(MYSQLI_BOTH)) {
@@ -717,6 +725,7 @@ if (isset($action) and $action == "delete_doc_from_menu_disk") {
                              pub_dev.pub_dev_name AS 'developer_name',
                              pub_dev.pub_dev_id AS 'developer_id',
                              doc_disk_game.doc_id AS 'doc_id',
+                             doc.doc_type_id,
                              menu_types_main.menu_types_text,
                              menu_disk_title_author.menu_disk_title_author_id,
                              menu_disk_title.menu_disk_title_id AS 'menu_disk_title_id'
@@ -724,19 +733,21 @@ if (isset($action) and $action == "delete_doc_from_menu_disk") {
                              LEFT JOIN menu_disk_title_author ON (menu_disk_title_author.menu_disk_title_id = menu_disk_title.menu_disk_title_id)
                              LEFT JOIN menu_disk_title_doc_games ON (menu_disk_title.menu_disk_title_id = menu_disk_title_doc_games.menu_disk_title_id)
                              LEFT JOIN doc_disk_game ON (menu_disk_title_doc_games.doc_games_id = doc_disk_game.doc_disk_game_id)
+                             LEFT JOIN doc ON (doc_disk_game.doc_id = doc.doc_id)    
                              LEFT JOIN game ON (game.game_id = doc_disk_game.game_id)
                              LEFT JOIN game_developer ON (game.game_id = game_developer.game_id)
                              LEFT JOIN pub_dev ON (game_developer.dev_pub_id = pub_dev.pub_dev_id)
                              LEFT JOIN game_year ON (game.game_id = game_year.game_id)
                              LEFT JOIN menu_types_main ON (menu_disk_title.menu_types_main_id = menu_types_main.menu_types_main_id)
-                             WHERE menu_disk_title.menu_disk_id = '$menu_disk_id' AND menu_disk_title.menu_types_main_id = '6' ORDER BY game.game_name ASC";
-
+                             WHERE menu_disk_title.menu_disk_id = '$menu_disk_id' AND menu_disk_title.menu_types_main_id = '6' ORDER BY game.game_name ASC";                   
+                             
     $sql_doc_tools = "SELECT tools.tools_name AS 'software_name',
                              tools.tools_id AS 'software_id',
                              '' AS year,
                              '' AS developer_name,
                              '' AS developer_id,
                              doc_disk_tool.doc_id AS 'doc_id',
+                             doc.doc_type_id,
                              menu_disk_title_author.menu_disk_title_author_id,
                              menu_types_main.menu_types_text,
                              menu_disk_title.menu_disk_title_id AS 'menu_disk_title_id'
@@ -744,6 +755,7 @@ if (isset($action) and $action == "delete_doc_from_menu_disk") {
                              LEFT JOIN menu_disk_title_author ON (menu_disk_title_author.menu_disk_title_id = menu_disk_title.menu_disk_title_id)
                              LEFT JOIN menu_disk_title_doc_tools ON (menu_disk_title.menu_disk_title_id = menu_disk_title_doc_tools.menu_disk_title_id)
                              LEFT JOIN doc_disk_tool ON (menu_disk_title_doc_tools.doc_tools_id = doc_disk_tool.doc_disk_tool_id)
+                             LEFT JOIN doc ON (doc_disk_tool.doc_id = doc.doc_id)     
                              LEFT JOIN tools ON (tools.tools_id = doc_disk_tool.tools_id)
                              LEFT JOIN menu_types_main ON (menu_disk_title.menu_types_main_id = menu_types_main.menu_types_main_id)
                              WHERE menu_disk_title.menu_disk_id = '$menu_disk_id' AND menu_disk_title.menu_types_main_id = '6' ORDER BY tools.tools_name ASC";
@@ -751,7 +763,7 @@ if (isset($action) and $action == "delete_doc_from_menu_disk") {
     $temp_query2 = $mysqli->query("CREATE TEMPORARY TABLE temp2 ENGINE=MEMORY $sql_doc_games") or die(mysqli_error());
     $temp_query2 = $mysqli->query("INSERT INTO temp2 $sql_doc_tools") or die(mysqli_error());
 
-    $temp_query2 = $mysqli->query("SELECT * FROM temp2 GROUP BY menu_disk_title_id ORDER BY software_name ASC") or die("does not compute4");
+    $temp_query2 = $mysqli->query("SELECT * FROM temp2 GROUP BY menu_disk_title_id ORDER BY menu_disk_title_id ASC") or die("does not compute4");
 
     while ($query = $temp_query2->fetch_array(MYSQLI_BOTH)) {
         // This smarty is used for creating the list of games
@@ -762,6 +774,7 @@ if (isset($action) and $action == "delete_doc_from_menu_disk") {
             'developer_name' => $query['developer_name'],
             'developer_id' => $query['developer_id'],
             'doc_id' => $query['doc_id'],
+            'doc_type_id' => $query['doc_type_id'],
             'menu_types_text' => $query['menu_types_text'],
             'menu_disk_title_author_id' => $query['menu_disk_title_author_id'],
             'menu_disk_title_id' => $query['menu_disk_title_id']
@@ -1597,7 +1610,7 @@ if (isset($action) and ($action == "change_menu_disk_state" or $action == "chang
         $temp_query = $mysqli->query("INSERT INTO temp $sql_demos") or die(mysqli_error());
         $temp_query = $mysqli->query("INSERT INTO temp $sql_tools") or die(mysqli_error());
 
-        $temp_query = $mysqli->query("SELECT * FROM temp GROUP BY menu_disk_title_id ORDER BY software_name ASC") or die("does not compute3");
+        $temp_query = $mysqli->query("SELECT * FROM temp GROUP BY menu_disk_title_id ORDER BY menu_disk_title_id ASC") or die("does not compute3");
 
         while ($query = $temp_query->fetch_array(MYSQLI_BOTH)) {
             // This smarty is used for creating the list of games
@@ -1660,7 +1673,7 @@ if (isset($action) and ($action == "change_menu_disk_state" or $action == "chang
         $temp_query2 = $mysqli->query("CREATE TEMPORARY TABLE temp2 ENGINE=MEMORY $sql_doc_games") or die(mysqli_error());
         $temp_query2 = $mysqli->query("INSERT INTO temp2 $sql_doc_tools") or die(mysqli_error());
 
-        $temp_query2 = $mysqli->query("SELECT * FROM temp2 GROUP BY menu_disk_title_id ORDER BY software_name ASC") or die("does not compute4");
+        $temp_query2 = $mysqli->query("SELECT * FROM temp2 GROUP BY menu_disk_title_id ORDER BY menu_disk_title_id ASC") or die("does not compute4");
 
         while ($query = $temp_query2->fetch_array(MYSQLI_BOTH)) {
             // This smarty is used for creating the list of games
@@ -1996,7 +2009,7 @@ if (isset($action) and ($action == "change_nickname")) {
 //****************************************************************************************
 if (isset($action) and ($action == "change_doctype")) {
     if (isset($doc_type_id)) {
-        //Update nickname
+        //Update doc type
         $sql = $mysqli->query("UPDATE doc SET doc_type_id='$doc_type_id'
             WHERE doc_id='$doc_id'") or die("error updating doc type");
 
@@ -2049,7 +2062,7 @@ if (isset($action) and ($action == "change_doctype")) {
     $temp_query2 = $mysqli->query("CREATE TEMPORARY TABLE temp2 ENGINE=MEMORY $sql_doc_games") or die(mysqli_error());
     $temp_query2 = $mysqli->query("INSERT INTO temp2 $sql_doc_tools") or die(mysqli_error());
 
-    $temp_query2 = $mysqli->query("SELECT * FROM temp2 GROUP BY menu_disk_title_id ORDER BY software_name ASC") or die("does not compute4");
+    $temp_query2 = $mysqli->query("SELECT * FROM temp2 GROUP BY menu_disk_title_id ORDER BY menu_disk_title_id ASC") or die("does not compute4");
 
     while ($query = $temp_query2->fetch_array(MYSQLI_BOTH)) {
         // This smarty is used for creating the list of games
@@ -2217,7 +2230,7 @@ if (isset($action) and ($action == "add_set_to_menu" or $action == "link_game_to
     $temp_query = $mysqli->query("INSERT INTO temp $sql_demos_chain") or die(mysqli_error());
     $temp_query = $mysqli->query("INSERT INTO temp $sql_tools_chain") or die("you are a cock");
 
-    $temp_query = $mysqli->query("SELECT * FROM temp ORDER BY menu_sets_name, software_name ASC") or die("does not compute3");
+    $temp_query = $mysqli->query("SELECT * FROM temp ORDER BY menu_sets_name, menu_disk_title_id ASC") or die("does not compute3");
 
     $menu_disk_name_compare = "";
 
@@ -2333,7 +2346,7 @@ if (isset($action) and ($action == "add_set_to_menu" or $action == "link_game_to
         $temp_query = $mysqli->query("INSERT INTO temp3 $sql_demos_chain") or die(mysqli_error());
         $temp_query = $mysqli->query("INSERT INTO temp3 $sql_tools_chain") or die("you are a cock");
 
-        $temp_query = $mysqli->query("SELECT * FROM temp3 ORDER BY menu_sets_name, software_name ASC") or die("does not compute3");
+        $temp_query = $mysqli->query("SELECT * FROM temp3 ORDER BY menu_sets_name, menu_disk_title_id ASC") or die("does not compute3");
 
         while ($row = $temp_query->fetch_array(MYSQLI_BOTH)) {
             // Create Menu disk name
@@ -2435,7 +2448,7 @@ if (isset($action) and ($action == "add_set_to_menu" or $action == "link_game_to
     $temp_query = $mysqli->query("INSERT INTO temp2 $sql_demos") or die(mysqli_error());
     $temp_query = $mysqli->query("INSERT INTO temp2 $sql_tools") or die(mysqli_error());
 
-    $temp_query = $mysqli->query("SELECT * FROM temp2 GROUP BY menu_disk_title_id ORDER BY software_name ASC") or die("does not compute3");
+    $temp_query = $mysqli->query("SELECT * FROM temp2 GROUP BY menu_disk_title_id ORDER BY menu_disk_title_id ASC") or die("does not compute3");
 
     while ($query = $temp_query->fetch_array(MYSQLI_BOTH)) {
         // This smarty is used for creating the list of games

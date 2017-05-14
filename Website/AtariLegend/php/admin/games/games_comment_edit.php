@@ -10,6 +10,7 @@
  *
  *   Id: games_comment_edit.php,v 0.10 2005/09/18 Silver Surfer
  *   Id: games_comment_edit.php,v 0.20 2015/12/29 STG - added left/right side
+ *   Id: games_comment_edit.php,v 0.21 2017/04/27 STG - added stripslashes
  *
  ***************************************************************************/
 
@@ -43,8 +44,11 @@ $query_comment = $sql_comment->fetch_array(MYSQLI_BOTH) or die("couldn't build q
 
 $date = date("F j, Y", $query_comment['timestamp']);
 
+$comment = stripslashes($query_comment['comment']);
+$comment = trim($comment);
+
 $smarty->assign('comments', array(
-    'comment' => $query_comment['comment'],
+    'comment' => $comment,
     'date' => $date,
     'game' => $query_comment['game_name'],
     'game_id' => $query_comment['game_id'],

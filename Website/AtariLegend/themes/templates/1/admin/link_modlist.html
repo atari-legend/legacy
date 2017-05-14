@@ -10,10 +10,13 @@
 *   Id: link_modlist.html,v 0.20 12/09/2015 ST Graveyard
 *   Id: link_modlist.html,v 0.30 25/11/2015 ST Graveyard - Flexbox/HTML validated
 *   Id: link_modlist.html,v 0.35 21/07/2016 ST Graveyard - Layout change + user detail link
+*   Id: link_modlist.html,v 0.36 29/04/2017 ST Graveyard - Icons added
 ***************************************************************************/
 *}
 {extends file='1/admin/frontpage.html'}
 {block name=main_tile}
+<link rel="stylesheet" href="{$template_dir}includes/font-awesome-4.7.0/css/font-awesome.min.css"> <!-- Font awesome for icons-->
+
 <div class="standard_tile" id="linkmodlist">
 	<h1>MODIFY LINKS</h1>
 	<div class="standard_tile_line"></div>
@@ -32,6 +35,7 @@
 						{/foreach}
 					</select>
 				</div>
+                <br>
 				<div class="links_list_input">
 					<input type="submit" value="Pick" class="topbutton_cpanel_small">
 				</div>
@@ -44,19 +48,19 @@
 		{foreach from=$link_list item=line}
    			<tr>
 				<td class="links_modlist_tdline">
-				{if  $line.website_imgext !== ""}
-					<a href="{$line.website_url}" target="_blank" class="links_addnew_link">
-					<img src="../../includes/show_image.php?file={$line.website_image}&amp;resize=160,null,null,null" alt="website screenshot" class="user_stats_img_dark">
-					</a>					
-				{/if}
+                    {if  $line.website_imgext !== ""}
+                        <a href="{$line.website_url}" target="_blank" class="links_addnew_link">
+                        <img src="../../includes/show_image.php?file={$line.website_image}&amp;resize=160,null,null,null" alt="website screenshot" class="user_stats_img_dark" style="max-width:95%;" >
+                        </a>					
+                    {/if}
 				</td>
-				<td class="links_modlist_tdline">	
-				<br>
-				<a href="{$line.website_url}" class="links_addnew_link" target="_blank">{$line.website_name}</a>
-				<a href="link_mod.php?website_id={$line.website_id}" class="links_addnew_link">(Click to modify)</a><br>
-				added on {$line.timestamp} by <a href="../user/user_detail.php?user_id_selected={$line.user_id}" class="left_nav_link">{$line.submitted}</a><br><br>
-				{$line.website_description}
-				<br><br>	
+				<td class="links_modlist_tdline" style="padding-left:5px;">	
+                    <br>
+                    <a href="{$line.website_url}" class="links_addnew_link" target="_blank">{$line.website_name} - </a>  
+                    <a href="link_mod.php?website_id={$line.website_id}" class="links_addnew_link"><i class="fa fa-pencil" aria-hidden="true"></i></a><br>
+                    <b>added on {$line.timestamp} by <a href="../user/user_detail.php?user_id_selected={$line.user_id}" class="left_nav_link">{$line.submitted}</a><br><br></b>
+                    {$line.website_description}
+                    <br><br>	
 				</td>
 			</tr>
 		{/foreach}

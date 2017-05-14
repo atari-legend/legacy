@@ -15,6 +15,9 @@
 include("../../config/common.php");
 include("../../config/admin.php");
 
+//load the changes per month tile
+include("../../common/tiles/changes_per_month_tile.php");
+
 //load the search fields of the quick search side menu
 include("../../admin/games/quick_search_games.php");
 
@@ -427,7 +430,7 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH)) {
 if ($v_counter > 0) {
     // Build the link
     if ($action == 'log_search') {
-        $v_linkback = ("change_log.php?action=log_search" . '&v_counter=' . ($v_counter - 25));
+        $v_linkback = ("change_log.php?action=log_search" . '&Date_Year=' . ($Date_Year) . '&Date_Month=' . ($Date_Month) . '&Date_Day=' . ($Date_Day) . '&v_counter=' . ($v_counter - 25));
     } else {
         $v_linkback = ("change_log.php" . '?v_counter=' . ($v_counter - 25));
     }

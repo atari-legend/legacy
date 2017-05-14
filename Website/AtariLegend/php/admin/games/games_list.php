@@ -134,6 +134,7 @@ if (empty($action)) {
  */
 if (isset($action) and $action == "search") {
     if (isset($gamesearch)) {
+        $gamesearch = $mysqli->real_escape_string($gamesearch);
     } else {
         $gamesearch = "";
     }

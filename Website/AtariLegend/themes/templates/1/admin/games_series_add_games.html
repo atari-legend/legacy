@@ -103,7 +103,7 @@ function deleteseries()
 		</div> 	
 		<br>
 		<br>
-		<fieldset>
+		<fieldset class="centered_fieldset">
 		<legend>Series options</legend>
 			<a style="cursor: pointer;" onClick="deleteseries(); return false;" class="left_nav_link">
 				Delete series
@@ -115,7 +115,7 @@ function deleteseries()
 		</fieldset>
 		<br>
 		<br>
-		<fieldset>	
+		<fieldset class="centered_fieldset">	
 			<legend>Search games</legend>	
 				<form action="../games/games_series_add_games.php" method="post" name="game_search" id="game_search">
 				<div style="display: inline;align-items:center;margin: 0 auto;text-align:center;">
@@ -125,6 +125,8 @@ function deleteseries()
 						{html_options values=$az_value output=$az_output}
 					</select>
 					<input type="text" name="gamesearch" class="standard_tile_input_small">
+                    <br>
+                    <br>
 					<input type="hidden" name="action" value="add_games_search">
 					<input type="hidden" name="game_series_id" value="{$series_info.game_series_id}">
 					<input type="submit" value="Search" class="topbutton_cpanel_small">
@@ -147,7 +149,11 @@ function deleteseries()
 				{foreach from=$series_link item=line}
 					<tr>
 						<td style="width:5%;">
-							<input type="checkbox" name="game_id[]" value="{$line.game_id}" id="user_select_all" class="quick_search_check">
+							<!--<input type="checkbox" name="game_id[]" value="{$line.game_id}" id="user_select_all" class="quick_search_check">-->
+                            <div class="checkbox">
+                                <input type="checkbox" id="{$line.game_id}" name="game_id[]" value="{$line.game_id}">
+                                <label for="{$line.game_id}"></label>
+                            </div>
 						</td>
 						<td class="game_td">{if $line.game_name != ''}<a href="games_detail.php?game_id={$line.game_id}" class="standard_table_left">{$line.game_name}</a>
 								{else}<i>n/a</i>{/if}

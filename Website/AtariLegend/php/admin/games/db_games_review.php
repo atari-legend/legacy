@@ -12,7 +12,9 @@
  *              - AL 2.0
  *   Id: db_games_review.php,v 0.16 2016/08/19 ST Graveyard
  *              - Added change log
- *
+ *   Id: db_games_review.php,v 0.17 2017/04/27 ST Graveyard
+ *              - prevent crash when score is not filled
+ *              - added real_excape_string
  ***************************************************************************/
 
 /*
@@ -28,7 +30,8 @@ include("../../config/admin.php");
 if (isset($action) and $action == 'add_review') {
     // first we have to convert the date vars into a time stamp to be inserted to review_date
     $date = date_to_timestamp($Date_Year, $Date_Month, $Date_Day);
-
+    $textfield = $mysqli->real_escape_string($textfield);
+    
     $sdbquery = $mysqli->query("INSERT INTO review_main (user_id, review_text, review_date) VALUES ($members, '$textfield', '$date')") or die("Couldn't insert into review_main");
 
     //get the id of the inserted review
@@ -43,8 +46,12 @@ if (isset($action) and $action == 'add_review') {
     $sdbquery = $mysqli->query("INSERT INTO review_game (review_id, game_id) VALUES ($reviewid, $game_id)") or die("Couldn't insert into review_game");
 
     //Fill the score table
-    $sdbquery = $mysqli->query("INSERT INTO review_score (review_id, review_graphics, review_sound, review_gameplay, review_overall) VALUES ($reviewid, $graphics, $sound, $gameplay, $conclusion)") or die("Couldn't insert into review_score");
-
+    if ( $graphics == '' or $sound == '' or $gameplay == '' or $conclusion == '' ) {}
+    else
+    {
+        $sdbquery = $mysqli->query("INSERT INTO review_score (review_id, review_graphics, review_sound, review_gameplay, review_overall) VALUES ($reviewid, $graphics, $sound, $gameplay, $conclusion)") or die("Couldn't insert into review_score");
+    }
+    
     //we're gonna add the screenhots into the screenshot_review table and fill up the review_comment table.
     //We need to loop on the screenshot table to check the shots used. If a comment field is filled,
     //the screenshot was used!

@@ -11,6 +11,8 @@
 *							- AL 2.0
 *   Id:  games_box.html,v 0.21 2016/08/19 Grave
 *							- added lightbox
+*   Id:  games_box.html,v 0.22 2017/04/27 Grave
+*							- new type of selector for file upload
 *
 ***************************************************************************/
 *}
@@ -18,6 +20,14 @@
 
 {block name=java_script}
 <script type="text/javascript">
+$(function() {    
+    $but = $('#file_upload_game_box');
+    
+    $("input:file[id=file_upload]").change(function() {
+        document.getElementById('file_upload_game_box').value = $(this).val();
+    });
+});
+
 function deletescreen(JSgameboxID,JSmode)
 {
 	// CONFIRM REQUIRES ONE ARGUMENT
@@ -57,8 +67,13 @@ function deletescreen(JSgameboxID,JSmode)
 			<div class="boxscan_table_body">
 				<form enctype="multipart/form-data" name="frmUploadShot" action="db_games_box.php" method="post">		
 					<br>
-					<input type="file" name="image[1]">
+					<!--<input type="file" name="image[1]">-->
+                    <label for="file_upload" class="file_upload">Select file</label>
+                    <input id="file_upload" type="file" name="image[1]">
+                    <input type="text" class="standard_tile_input_small" id="file_upload_game_box">&nbsp;
 					<input type="hidden" name="game_id" value="{$game_info.game_id}">
+                    <br>
+                    <br>
 					{if $mode.mode eq "back"}
 						<input type="hidden" name="mode" value="back">
 						<input type="hidden" name="frontscan_id" value="{$mode.frontscan_id}">
@@ -82,7 +97,7 @@ function deletescreen(JSgameboxID,JSmode)
 							<br>
 							<br>
 							<a href="../../includes/show_image.php?file={$line.front_image}" data-lightbox="image-1" data-title="Front boxscans">
-								<img style="display:inline;" src="../../includes/show_image.php?file={$line.front_image}&amp;resize=75,null,null,null" width="75" alt="Click to enlarge!" class="user_stats_img" id="user_details_img_dark">
+								<img style="display:inline;" src="../../includes/show_image.php?file={$line.front_image}&amp;resize=75,null,null,null" width="75" alt="Click to enlarge!"  class="game_screenshot_img">
 							</a>
 							<br>
 							<a style="cursor:pointer;" class="left_nav_link" OnClick="deletescreen({$line.game_boxscan_id},'notback'); return false;">Delete</a> --		
@@ -106,7 +121,7 @@ function deletescreen(JSgameboxID,JSmode)
 							<br>
 							<br>
 							<a href="../../includes/show_image.php?file={$line.back_image}" data-lightbox="image-1" data-title="Back boxscan">
-								<img style="display:inline;" src="../../includes/show_image.php?file={$line.back_image}&amp;resize=75,null,null,null" width="75" alt="Click to enlarge!" class="user_stats_img" id="user_details_img_dark">
+								<img style="display:inline;" src="../../includes/show_image.php?file={$line.back_image}&amp;resize=75,null,null,null" width="75" alt="Click to enlarge!"  class="game_screenshot_img">
 							</a>
 							<br>
 							<a style="cursor:pointer;" class="left_nav_link" OnClick="deletescreen({$line.game_boxscan_id},'back'); return false;">Delete</a>

@@ -35,15 +35,18 @@
         <link type="text/css" href="{$style_dir}css/notify-osd.css" hreflang="en" rel="stylesheet">
         <!-- start - get the icons used for mobile devices -->
         <link rel="icon" href="{$template_dir}includes/icons/favicon.png"> <!-- fav icon & Chrome mobile icon-->
-        <link rel="apple-touch-icon-precomposed" sizes="57x57" href="{$template_dir}includes/icons/icon-57x57.png">
-        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{$template_dir}includes/icons/icon-72x72.png">
-        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{$template_dir}includes/icons/icon-114x114.png">
-        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{$template_dir}includes/icons/icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="57x57" href="{$template_dir}includes/icons/icon-57x57.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="{$template_dir}includes/icons/icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="{$template_dir}includes/icons/icon-114x114.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="{$template_dir}includes/icons/icon-144x144.png">
         <!-- end - get the icons used for mobile devices -->
         <script type="text/javascript" src="{$template_dir}includes/js/jquery-2.1.4.min.js"></script> <!-- main jquery stuff -->
         <script type="text/javascript" src="{$template_dir}includes/js/jquery-ui.js"></script> <!-- main jqueryUI stuff -->
         <script type="text/javascript" src="{$template_dir}includes/js/jquery.fancybox.pack.js"></script>
         <script type="text/javascript" src="{$template_dir}includes/js/notify-osd.js"></script>
+        <script type='text/JavaScript' src="{$template_dir}includes/js/sha512.js"></script> <!-- log on security script -->
+		<script type='text/JavaScript' src="{$template_dir}includes/js/md5.js"></script>  <!-- log on security script -->
+        <script type='text/JavaScript' src="{$template_dir}includes/js/forms.js"></script> <!-- log on security script -->
         <script type="text/javascript"> <!-- script needed for the side menu -->
             //<![CDATA[
             $(window).load(function(){
@@ -94,7 +97,7 @@
                     <!-- This is the side menu only visible for smartphones (max resolution 480pc)-->
                     <div class="container">
                        <div id="sidebar">
-                            <div class="skin-wrap" id="no-wrap">
+                            <div class="no-wrap">
                                 <nav class="skin-menu">
                                   <ul class="side_navigation">
                                     <li><button class="sidebutton" id="games_side">GAMES</button>
@@ -111,13 +114,13 @@
                                             <li><a href="../company/company_main.php" title="Companies" class="sidebutton_cpanel">COMPANIES</a></li>
                                             <li><a href="../company/company_logos.php" title="Company logo" class="sidebutton_cpanel">COMPANY LOGO</a></li>
                                             <li><a href="../interviews/interviews_main.php" title="Interviews" class="sidebutton_cpanel">INTERVIEWS</a></li>
-                                            <li><a href="../interviews/interviews_help.php" title="Interviews help" class="sidebutton_cpanel">INTERVIEWS HELP</a></li>
+                                            <!--<li><a href="../interviews/interviews_help.php" title="Interviews help" class="sidebutton_cpanel">INTERVIEWS HELP</a></li>-->
                                         </ul>
                                     </li>
                                   </ul>
                                 </nav>
                             </div>
-                             <div class="skin-wrap" id="no-wrap">
+                             <div class="no-wrap">
                                 <nav class="skin-menu">
                                   <ul class="side_navigation">
                                     <li><button class="sidebutton" id="menus_side">MENUS</button>
@@ -136,7 +139,7 @@
                                   </ul>
                                 </nav>
                             </div>
-                            <div class="skin-wrap" id="no-wrap">
+                            <div class="no-wrap">
                                 <nav class="skin-menu">
                                   <ul class="side_navigation">
                                     <li><button class="sidebutton" id="demos_side">DEMOS</button>
@@ -155,19 +158,18 @@
                                   </ul>
                                 </nav>
                             </div>
-                            <div class="skin-wrap" id="no-wrap">
+                            <div class="no-wrap">
                                 <nav class="skin-menu">
                                   <ul class="side_navigation">
                                     <li><button class="sidebutton" id="users_side">USERS</button>
                                         <ul class="sub-menu">
-                                            <li><a href="../administration/user_management.php" class="sidebutton_cpanel">USER MANAGEMENT</a></li>
-                                            <li><a href="../user/user_main.php" class="sidebutton_cpanel">USER SEARCH</a></li>
+                                            <li><a href="../user/user_management.php" class="sidebutton_cpanel">USER MANAGEMENT</a></li>
                                         </ul>
                                     </li>
                                   </ul>
                                 </nav>
                             </div>
-                            <div class="skin-wrap" id="no-wrap">
+                            <div class="no-wrap">
                                 <nav class="skin-menu">
                                   <ul class="side_navigation">
                                     <li><button class="sidebutton" id="admin_side">NEWS</button>
@@ -181,7 +183,7 @@
                                   </ul>
                                 </nav>
                             </div>
-                            <div class="skin-wrap" id="no-wrap">
+                            <div class="no-wrap">
                                 <nav class="skin-menu">
                                   <ul class="side_navigation">
                                     <li><button class="sidebutton" id="other_side">OTHER</button>
@@ -189,6 +191,7 @@
                                             <li><a href="../index.php" title="Statistics" class="sidebutton_cpanel">STATISTICS</a></li>
                                             <li><a href="../administration/database_update.php" title="Administration" class="sidebutton_cpanel">DB UPDATES</a></li>
                                             <li><a href="../administration/change_log.php" title="Change log" class="sidebutton_cpanel">CHANGE LOG</a></li>
+                                            <li><a href="../administration/technical_doc.php" title="Technical doc" class="sidebutton_cpanel">TECH DOC</a></li>
                                             <li><a href="../trivia/did_you_know.php" title="Did you know" class="sidebutton_cpanel">DID YOU KNOW</a></li>
                                             <li><a href="../trivia/manage_trivia_quotes.php" title="Trivia quotes" class="sidebutton_cpanel">TRIVIA QUOTES</a></li>
                                             <li><a href="../links/link_addnew.php" title="Add links" class="sidebutton_cpanel">ADD LINKS</a></li>
@@ -211,7 +214,7 @@
                                   </ul>
                                 </nav>
                             </div>
-                            <div class="skin-wrap" id="no-wrap">
+                            <div class="no-wrap">
                                 <nav class="skin-menu">
                                   <ul class="clearfix">
                                     <li>
@@ -265,7 +268,7 @@
                                 <li><a href="../company/company_main.php" title="Companies" class="subbutton">COMPANIES</a></li>
                                 <li><a href="../company/company_logos.php" title="Company logo" class="subbutton">COMPANY LOGO</a></li>
                                 <li><a href="../interviews/interviews_main.php" title="Interviews" class="subbutton">INTERVIEWS</a></li>
-                                <li><a href="../interviews/interviews_help.php" title="Interviews help" class="subbutton">INTERVIEWS HELP</a></li>
+                                <!--<li><a href="../interviews/interviews_help.php" title="Interviews help" class="subbutton">INTERVIEWS HELP</a></li>-->
                             </ul>
                         </li>
                         <li><button type="button" class="topbutton" id="menus">MENUS</button>
@@ -296,8 +299,7 @@
                         </li>
                         <li><button type="button" class="topbutton" id="users">USERS</button>
                             <ul>
-                                <li><a href="../administration/user_management.php" class="subbutton">USER MANAGEMENT</a></li>
-                                <li><a href="../user/user_main.php"  class="subbutton">USER SEARCH</a></li>
+                                <li><a href="../user/user_management.php" class="subbutton">USER MANAGEMENT</a></li>
                             </ul>
                         </li>
                         <li><button type="button" class="topbutton" id="admin">NEWS</button>
@@ -313,6 +315,7 @@
                                 <li><a href="../index.php" title="Statistics" class="subbutton">MAIN/STATS</a></li>
                                 <li><a href="../administration/database_update.php" title="Administration" class="subbutton">DB UPDATES</a></li>
                                 <li><a href="../administration/change_log.php" title="Change log" class="subbutton">CHANGE LOG</a></li>
+                                <li><a href="../administration/technical_doc.php" title="Technical doc" class="subbutton">TECH DOC</a></li>
                                 <li><a href="../trivia/did_you_know.php" title="Did you know" class="subbutton">DID YOU KNOW</a></li>
                                 <li><a href="../trivia/manage_trivia_quotes.php" title="Trivia quotes" class="subbutton">TRIVIA QUOTES</a></li>
                                 <li><a href="../links/link_addnew.php" title="Add links" class="subbutton">ADD LINKS</a></li>

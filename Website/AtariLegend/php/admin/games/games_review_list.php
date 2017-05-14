@@ -32,6 +32,7 @@ if (empty($action)) {
     $action = "";
 }
 if (isset($action) and $action == 'search') {
+        
     //check the $gamebrowse select
     if ($gamebrowse == "") {
         $gamebrowse_select = "";
@@ -40,6 +41,7 @@ if (isset($action) and $action == 'search') {
     } elseif ($gamebrowse == 'num') {
         $gamebrowse_select = "game.game_name REGEXP '^[0-9].*' AND ";
     } else {
+        $gamebrowse = $mysqli->real_escape_string($gamebrowse);
         $gamebrowse_select = "game.game_name LIKE '$gamebrowse%' AND ";
     }
 
@@ -72,6 +74,7 @@ if (isset($action) and $action == 'search') {
                        LEFT JOIN game_year ON ( game_year.game_id = game.game_id ) WHERE ";
 
         $RESULTGAME .= $gamebrowse_select;
+        $gamesearch = $mysqli->real_escape_string($gamesearch);
         $RESULTGAME .= "game.game_name LIKE '%$gamesearch%'";
         $RESULTGAME .= ' ORDER BY game.game_name ASC';
 

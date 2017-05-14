@@ -38,110 +38,110 @@
 
 {block name=java_script}
 <script type="text/javascript">
-$(document).ready(function() {
+//$(document).ready(function() {
 
-function UserSearch() {
+//function UserSearch() {
 
-    var form_values = $( "#user_search" ).serialize();
+//    var form_values = $( "#user_search" ).serialize();
 
-    $.ajax({
+//    $.ajax({
 
-    // The URL for the request
-    url: "ajax_user_management.php",
+//    // The URL for the request
+//    url: "ajax_user_management.php",
 
-    // The data to send (will be converted to a query string)
-    data: form_values,
+//    // The data to send (will be converted to a query string)
+//    data: form_values,
 
-    // Whether this is a POST or GET request
-    type: "GET",
+//    // Whether this is a POST or GET request
+//    type: "GET",
 
-    // The type of data we expect back
-   dataType : "html",
+//    // The type of data we expect back
+//   dataType : "html",
 
-    // Code to run if the request succeeds;
-    // the response is passed to the function
-    success: function( html ) {
-        $( "#ajax_usersearch" ).html( html );
-    }
-    });
-}
+//    // Code to run if the request succeeds;
+//    // the response is passed to the function
+//    success: function( html ) {
+//        $( "#ajax_usersearch" ).html( html );
+//    }
+//    });
+//}
 
-    $( "#quick_search_small_select" ).change(function () { UserSearch(); });
-    $( "#js_user_search" ).keyup(function () {
-        var value = $(this).val();
-        if (value.length >= 3 || value == "") {
-            UserSearch();
-        }
-    });
-    $( "#no_comments" ).change(function () {
-        if ($(this).is(':checked')) { $("#with_comments").prop("checked", false);}
-        UserSearch();
-    });
-    $( "#with_comments" ).change(function () {
-        if ($(this).is(':checked')) { $("#no_comments").prop("checked", false);}
-        UserSearch();
-    });
-    $( "#no_submissions" ).change(function () {
-        if ($(this).is(':checked')) { $("#with_submissions").prop("checked", false);}
-        UserSearch();
-    });
-    $( "#with_submissions" ).change(function () {
-        if ($(this).is(':checked')) { $("#no_submissions").prop("checked", false);}
-        UserSearch();
-    });
-    $( "#no_email" ).change(function () {
-        if ($(this).is(':checked')) { $("#with_email").prop("checked", false);}
-        UserSearch();
-    });
-    $( "#with_email" ).change(function () {
-        if ($(this).is(':checked')) { $("#no_email").prop("checked", false);}
-        UserSearch();
-    });
-    $( "#no_news" ).change(function () {
-        if ($(this).is(':checked')) { $("#with_news").prop("checked", false);}
-        UserSearch();
-    });
-    $( "#with_news" ).change(function () {
-        if ($(this).is(':checked')) { $("#no_news").prop("checked", false);}
-        UserSearch();
-    });
-    $( "#no_links" ).change(function () {
-        if ($(this).is(':checked')) { $("#with_links").prop("checked", false);}
-        UserSearch();
-    });
-    $( "#with_links" ).change(function () {
-     if ($(this).is(':checked')) { $("#no_links").prop("checked", false);}
-        UserSearch();
-    });
-    $( "#no_interviews" ).change(function () {
-        if ($(this).is(':checked')) { $("#with_interviews").prop("checked", false);}
-        UserSearch();
-    });
-    $( "#with_interviews" ).change(function () {
-        if ($(this).is(':checked')) { $("#no_interviews").prop("checked", false);}
-        UserSearch();
-    });
-    $( "#no_review" ).change(function () {
-        if ($(this).is(':checked')) { $("#with_review").prop("checked", false);}
-        UserSearch();
-    });
-    $( "#with_review" ).change(function () {
-        if ($(this).is(':checked')) { $("#no_review").prop("checked", false);}
-        UserSearch();
-    });
-    $( "#not_admin" ).change(function () {
-        if ($(this).is(':checked')) { $("#is_admin").prop("checked", false);}
-        UserSearch();
-    });
-    $( "#is_admin" ).change(function () {
-        if ($(this).is(':checked')) { $("#not_admin").prop("checked", false);}
-        UserSearch();
-    });
-    $( "#last_visit" ).change(function () {
-        UserSearch();
-    });
+//    $( "#quick_search_small_select" ).change(function () { UserSearch(); });
+//    $( "#js_user_search" ).keyup(function () {
+//        var value = $(this).val();
+//        if (value.length >= 3 || value == "") {
+//            UserSearch();
+//        }
+//    });
+//    $( "#no_comments" ).change(function () {
+//        if ($(this).is(':checked')) { $("#with_comments").prop("checked", false);}
+//        UserSearch();
+//    });
+//    $( "#with_comments" ).change(function () {
+//        if ($(this).is(':checked')) { $("#no_comments").prop("checked", false);}
+//        UserSearch();
+//    });
+//   $( "#no_submissions" ).change(function () {
+//        if ($(this).is(':checked')) { $("#with_submissions").prop("checked", false);}
+//        UserSearch();
+//    });
+//    $( "#with_submissions" ).change(function () {
+//        if ($(this).is(':checked')) { $("#no_submissions").prop("checked", false);}
+//        UserSearch();
+//    });
+//    $( "#no_email" ).change(function () {
+//        if ($(this).is(':checked')) { $("#with_email").prop("checked", false);}
+//        UserSearch();
+//    });
+//    $( "#with_email" ).change(function () {
+//        if ($(this).is(':checked')) { $("#no_email").prop("checked", false);}
+//        UserSearch();
+//    });
+//    $( "#no_news" ).change(function () {
+//        if ($(this).is(':checked')) { $("#with_news").prop("checked", false);}
+//        UserSearch();
+//    });
+//    $( "#with_news" ).change(function () {
+//        if ($(this).is(':checked')) { $("#no_news").prop("checked", false);}
+//        UserSearch();
+//    });
+//    $( "#no_links" ).change(function () {
+//        if ($(this).is(':checked')) { $("#with_links").prop("checked", false);}
+//        UserSearch();
+//    });
+//    $( "#with_links" ).change(function () {
+//     if ($(this).is(':checked')) { $("#no_links").prop("checked", false);}
+//        UserSearch();
+//    });
+//    $( "#no_interviews" ).change(function () {
+//        if ($(this).is(':checked')) { $("#with_interviews").prop("checked", false);}
+//        UserSearch();
+//    });
+//    $( "#with_interviews" ).change(function () {
+//        if ($(this).is(':checked')) { $("#no_interviews").prop("checked", false);}
+//        UserSearch();
+//    });
+//    $( "#no_review" ).change(function () {
+//        if ($(this).is(':checked')) { $("#with_review").prop("checked", false);}
+//        UserSearch();
+//    });
+//    $( "#with_review" ).change(function () {
+//        if ($(this).is(':checked')) { $("#no_review").prop("checked", false);}
+//        UserSearch();
+//    });
+//    $( "#not_admin" ).change(function () {
+//        if ($(this).is(':checked')) { $("#is_admin").prop("checked", false);}
+//        UserSearch();
+//    });
+//    $( "#is_admin" ).change(function () {
+//        if ($(this).is(':checked')) { $("#not_admin").prop("checked", false);}
+//        UserSearch();
+//    });
+//    $( "#last_visit" ).change(function () {
+//        UserSearch();
+//    });
 
-});
+//}); 
 
 $( document ).ajaxComplete(function() {
   UserlistFunction();
@@ -188,6 +188,23 @@ function UserlistFunction() {
                     modal: true,
                     buttons: {
                         "Deactivate user(s)": function() {
+                        $( this ).dialog( "close" );
+                        UserModify();
+                        },
+                        Cancel: function() {
+                        $( this ).dialog( "close" );
+                        }
+                    }
+                });
+        }
+        
+         if ($(this).val() == "activate_user") {
+                 $( "#dialog_confirm_activate" ).dialog({
+                    resizable: false,
+                    height:140,
+                    modal: true,
+                    buttons: {
+                        "Activate user(s)": function() {
                         $( this ).dialog( "close" );
                         UserModify();
                         },
@@ -279,23 +296,23 @@ function UserModify() {
     // });
 
     document.getElementById('user_list').method="post";
-    document.getElementById('user_list').action="../administration/db_user_management.php?action=delete_user";
+    document.getElementById('user_list').action="../user/db_user_management.php?action=delete_user";
     document.getElementById('user_list').submit();
 }
 
- $(document).ready(function() {
-  $(".user_popup").fancybox({
-      maxWidth    : 900,
-      maxHeight   : 600,
-      fitToView   : true,
-      width       : '70%',
-      height      : '70%',
-      autoSize    : true,
-      closeClick  : false,
-      openEffect  : 'elastic',
-      closeEffect : 'elastic'
-  });
-});
+//$(document).ready(function() {
+//  $(".user_popup").fancybox({
+//      maxWidth    : 900,
+//      maxHeight   : 600,
+//      fitToView   : true,
+//      width       : '70%',
+//      height      : '70%',
+//      autoSize    : true,
+//      closeClick  : false,
+//      openEffect  : 'elastic',
+//      closeEffect : 'elastic'
+//  });
+//});
 </script>
 <script>
 function EmailSent(){
@@ -307,7 +324,7 @@ function EmailSent(){
             "Email user(s)": function() {
             $( this ).dialog( "close" );
             document.getElementById('user_list').method="post";
-            document.getElementById('user_list').action="../administration/db_user_management.php?action=email_user";
+            document.getElementById('user_list').action="../user/db_user_management.php?action=email_user";
             document.getElementById('user_list').submit();
             },
             Cancel: function() {
@@ -330,9 +347,15 @@ function EmailSent(){
 {/block}
 
 {block name=main_tile}
+<link rel="stylesheet" href="{$template_dir}includes/font-awesome-4.7.0/css/font-awesome.min.css"> <!-- Font awesome for icons-->
+
 <div id="dialog_confirm_delete" title="Delete Users?" style="display:none;">
   <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
   These users will be permanently deleted. Are you sure?</p>
+</div>
+<div id="dialog_confirm_activate" title="Activate Users?" style="display:none;">
+  <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
+  These users will be activated. Are you sure?</p>
 </div>
 <div id="dialog_confirm_deactivate" title="Deactivate Users?" style="display:none;">
   <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
@@ -342,21 +365,47 @@ function EmailSent(){
   <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
   Email users?</p>
 </div>
+<form action="test" name="user_list" id="user_list">
 <div class="standard_tile" id="user_management">
+    <div class="help-tip">
+		<p> 
+            Use the search tile on the left to make a user query. You also have the following 'mass' options : <br><br>
+            <b><u>Deleting users</u></b> - You can only delete users if all the 'No' checks are activated in your search.<br><br>
+            <b><u>Email users</u></b> - You can only email users if the 'with email' check is activated in your search.
+            <br><br>
+            Each user gets KARMA points. This is a system to check which people are actually usefull to AL, and which just created an account to download stuff. 
+            When somebody adds a comment, a review, a hint ... Karma points are rewarded. When somebody downloads stuff from the site, you will loose karma. To update the user
+            db karma points, press the link below. Keep in mind this can take some time.
+            This is the current Karma system : 
+            <br>- 5pts / game downloads
+            <br>+ 5pts / game comment
+            <br>+ 10pts / game submission
+            <br>+ 3pts / weblink
+            <br>+ 15pts / news update
+            <br>+ 50pts / game review
+        </p>
+	</div>
     <h1>USER MANAGEMENT</h1>
     <div class="standard_tile_line"></div>
     <div class="standard_tile_text">
         <div class="left_nav_section">
-            Deleting users - You can only delete users if all the 'No' checks are activated in your search.<br>
-            Email users - You can only email users if the 'with email' check is activated in your search.
+            This is the user area. Overhere you can maintain user accounts of the AL website! There are currently 
+			<b>{$nr_users_total}</b> users in the DB.
+            <br><br>      
+            <div class="centered_fieldset"><a href="../user/karma_sync.php" class="standard_tile_link_cpanel" onclick="SyncKarma(); return false;">Karma Re-Sync</a></div>
         </div>
         <br>
-        <form action="test" name="user_list" id="user_list">
         <div class="main_stats_container" id="ajax_usersearch">
             {if isset($users)}
             <table class="standard_table_list">
                 <tr>
-                    <th><input type="checkbox" name="user_select_all" id="user_select_all" class="quick_search_check">All</th>
+                    <th>
+                        <!--<input type="checkbox" name="user_select_all" id="user_select_all" class="quick_search_check"> -->
+                        <div class="checkbox">
+                            <input type="checkbox" id="user_select_all" name="user_select_all">&nbsp; All
+                            <label for="user_select_all"></label>
+                        </div>
+                    </th>
                     <th class="username_th">User Name</th>
                     <th class="joindate_th">Join Date</th>
                     <th class="lastvisit_th">Last Visit</th>
@@ -364,16 +413,22 @@ function EmailSent(){
                 </tr>
                 {foreach from=$users item=line}
                 <tr>
-                    <td class="select_td"><input type="checkbox" name="user_id[]" value="{$line.user_id}" class="user_checkbox"></td>
-                    <td class="username_td"><a class="standard_table_center user_popup fancybox.ajax" href="../administration/user_detail.php?user_id_selected={$line.user_id}">{$line.user_name}</a></td>
-                    <!-- <td class="username_td">{if $line.user_name != ''}<a href="../user/user_detail.php?user_id_selected={$line.user_id}" class="standard_table_center">{$line.user_name}</a>{else}<i>n/a</i>{/if}</td> -->
+                    <td class="select_td">
+                        <!--<input type="checkbox" name="user_id[]" value="{$line.user_id}" class="user_checkbox">-->
+                        <div class="checkbox">
+                            <input type="checkbox" value="{$line.user_id}" id="checkboxInput[{$line.user_id}]" name="user_id[]" class="user_checkbox">
+                            <label for="checkboxInput[{$line.user_id}]"></label>
+                        </div>
+                    </td>
+                    <!-- <td class="username_td"><a class="standard_table_center user_popup fancybox.ajax" href="../administration/user_detail.php?user_id_selected={$line.user_id}">{$line.user_name}</a></td> -->
+                    <td class="username_td">{if $line.user_name != ''}<a href="../user/user_detail.php?user_id_selected={$line.user_id}" class="standard_table_center">{$line.user_name}</a>{else}<i>n/a</i>{/if}</td> 
                     <td class="joindate_td">{if $line.join_date != ''}{$line.join_date}{else}<i>n/a</i>{/if}</td>
                     <td class="lastvisit_td">{if $line.last_visit != ''}{$line.last_visit}{else}<i>n/a</i>{/if}</td>
-                    <td class="email_td">{if $line.email != ''}<a href="mailto:{$line.email}" class="standard_tile_link_black">M</a>{else}<i>n/a</i>{/if}</td>
+                    <td class="email_td">{if $line.email != ''}<a href="mailto:{$line.email}" class="standard_tile_link_black"><i class="fa fa-envelope" aria-hidden="true"></i></a>{/if}</td>
                 </tr>
                 {/foreach}
                 {else}
-                <div class="left_nav_section">No users found</div>
+                    <div class="left_nav_section">No users found</div>
                 {/if}
                 {if isset($nr_users)}
                 <tr>
@@ -384,6 +439,7 @@ function EmailSent(){
                             {if isset($mail_link)}
                                 <option value="email_user">Send Email</option>
                             {/if}
+                            <option value="activate_user">Activate User</option>
                             <option value="deactivate_user">Deactivate User</option>
                             {if isset($delete_link)}
                                 <option value="delete_user">Delete User</option>

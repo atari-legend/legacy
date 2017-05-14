@@ -19,14 +19,14 @@
 include("../../config/common.php");
 
 //Load all tiles
-include("../tiles/latest_news_tile.php");
-include("../tiles/trivia_tile.php");
-include("../tiles/did_you_know_tile.php");
-include("../tiles/latest_reviews_tile.php");
-include("../tiles/who_is_it_tile.php");
-include("../tiles/screenstar.php");
+include("../../common/tiles/latest_news_tile.php");
+include("../../common/tiles/trivia_tile.php");
+include("../../common/tiles/did_you_know_tile.php");
+include("../../common/tiles/latest_reviews_tile.php");
+include("../../common/tiles/who_is_it_tile.php");
+include("../../common/tiles/screenstar.php");
 include("../tiles/statistics_tile.php");
-include("../tiles/hotlinks_tile.php");
+include("../../common/tiles/hotlinks_tile.php");
 
 
 //Create the id's for dynamic positioning of the tiles

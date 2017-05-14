@@ -10,6 +10,7 @@
 *   Id: games_main.html,v 0.20 2015/10/24 22:35 Gatekeeper
 *   Id: games_main.html,v 0.30 2015/12/26 22:51 Gatekeeper - Flexbox/1920 width/HTML valid/removal of message var
 *   Id: games_main.html,v 0.31 2017/01/06 17:38 Gatekeeper - Falcon RGB & VGA
+*   Id: games_main.html,v 0.32 2017/04/20 23:56 Gatekeeper - new checkboxes
 *
 ***************************************************************************/
 
@@ -47,8 +48,12 @@ function gameinsert_gm()
 </script>
 {/block}
 
+{block name=left_tile}
+    {include file='1/admin/left_nav.html'}
+{/block}
+
 {block name=right_tile}
-	{include file='1/admin/quick_search_games.html'}
+	{include file='1/admin/quick_search_users.html'}
 {/block}
 
 {block name=main_tile}
@@ -105,70 +110,134 @@ function gameinsert_gm()
 			<div class="games_check_container">
 				<div class="games_check_child" id="child_1">
 					<div class="games_check_row">
-						<div class="games_check_box"><input type="checkbox" name="falcon_only" value="1" class="quick_search_check"></div>
-						<div class="games_check_text">Falcon only</div>
+						<div class="links_mod_checkbox">
+                            <input type="checkbox" id="falcon_only" name="falcon_only" value="1">
+                            <label for="falcon_only"></label>
+                            <!--<input type="checkbox" name="falcon_only" value="1" class="quick_search_check">-->
+                        </div>
+						<div class="games_check_text">&nbsp; Falcon only</div>
 					</div>
                     <div class="games_check_row">
-						<div class="games_check_box"><input type="checkbox" name="falcon_rgb" value="1" class="quick_search_check"></div>
-						<div class="games_check_text">Falcon RGB</div>
+						<div class="links_mod_checkbox">
+                            <input type="checkbox" id="falcon_rgb" name="falcon_rgb" value="1">
+                            <label for="falcon_rgb"></label>
+                            <!--<input type="checkbox" name="falcon_rgb" value="1" class="quick_search_check">-->
+                        </div>
+						<div class="games_check_text">&nbsp; Falcon RGB</div>
 					</div>
 					<div class="games_check_row">
-						<div class="games_check_box"><input type="checkbox" name="ste_only" value="1" class="quick_search_check"></div>
-						<div class="games_check_text">STE only</div>
+                        <div class="links_mod_checkbox">
+                            <input type="checkbox" id="ste_only" name="ste_only" value="1">
+                            <label for="ste_only"></label>
+                            <!--<input type="checkbox" name="ste_only" value="1" class="quick_search_check">-->
+                        </div>
+						<div class="games_check_text">&nbsp; STE only</div>
 					</div>
 					<div class="games_check_row">
-						<div class="games_check_box"><input type="checkbox" name="free" value="1" class="quick_search_check"></div>
-						<div class="games_check_text">Non-Commercial</div>
+						<div class="links_mod_checkbox">
+                            <input type="checkbox" id="free" name="free" value="1">
+                            <label for="free"></label>
+                            <!--<input type="checkbox" name="free" value="1" class="quick_search_check">-->
+                        </div>
+						<div class="games_check_text">&nbsp; Non-Commercial</div>
 					</div>
 					<div class="games_check_row">
-						<div class="games_check_box"><input type="checkbox" name="development" value="1" class="quick_search_check"></div>
-						<div class="games_check_text">In development</div>
+						<div class="links_mod_checkbox">
+                            <input type="checkbox" id="development" name="development" value="1">
+                            <label for="development"></label>
+                            <!--<input type="checkbox" name="development" value="1" class="quick_search_check">-->
+                        </div>
+						<div class="games_check_text">&nbsp; In development</div>
 					</div>
 					<div class="games_check_row">
-						<div class="games_check_box"><input type="checkbox" name="unreleased" value="1" class="quick_search_check"></div>
-						<div class="games_check_text">Unreleased</div>
+						<div class="links_mod_checkbox">
+                            <input type="checkbox" id="unreleased" name="unreleased" value="1">
+                            <label for="unreleased"></label>
+                            <!--<input type="checkbox" name="unreleased" value="1" class="quick_search_check">-->
+                        </div>
+						<div class="games_check_text">&nbsp; Unreleased</div>
 					</div>
 					<div class="games_check_row">
-						<div class="games_check_box"><input type="checkbox" name="monochrome" value="1" class="quick_search_check"></div>
-						<div class="games_check_text">Monochrome</div>
+						<div class="links_mod_checkbox">
+                            <input type="checkbox" id="monochrome" name="monochrome" value="1">
+                            <label for="monochrome"></label>
+                            <!--<input type="checkbox" name="monochrome" value="1" class="quick_search_check">-->
+                        </div>
+						<div class="games_check_text">&nbsp; Monochrome</div>
 					</div>
 					<div class="games_check_row">
-						<div class="games_check_box"><input type="checkbox" name="stos" value="1" class="quick_search_check"></div>
-						<div class="games_check_text">STOS</div>
+						<div class="links_mod_checkbox">
+                            <input type="checkbox" id="stos" name="stos" value="1">
+                            <label for="stos"></label>
+                            <!--<input type="checkbox" name="stos" value="1" class="quick_search_check">-->
+                        </div>
+						<div class="games_check_text">&nbsp; STOS</div>
 					</div>
 				</div>
 				<div class="games_check_child" id="child_2">
 					<div class="games_check_row">
-						<div class="games_check_box"><input type="checkbox" name="falcon_enhanced" value="1" class="quick_search_check"></div>
-						<div class="games_check_text">Falcon Enhanced</div>
+						<div class="links_mod_checkbox">
+                            <input type="checkbox" id="falcon_enhanced" name="falcon_enhanced" value="1">
+                            <label for="falcon_enhanced"></label>
+                           <!--<input type="checkbox" name="falcon_enhanced" value="1" class="quick_search_check">-->
+                        </div>
+						<div class="games_check_text">&nbsp; Falcon Enhanced</div>
 					</div>
                     <div class="games_check_row">
-						<div class="games_check_box"><input type="checkbox" name="falcon_vga" value="1" class="quick_search_check"></div>
-						<div class="games_check_text">Falcon VGA</div>
+						<div class="links_mod_checkbox">
+                            <input type="checkbox" id="falcon_vga" name="falcon_vga" value="1">
+                            <label for="falcon_vga"></label>
+                            <!--<input type="checkbox" name="falcon_vga" value="1" class="quick_search_check">-->
+                        </div>
+						<div class="games_check_text">&nbsp; Falcon VGA</div>
 					</div>
 					<div class="games_check_row">
-						<div class="games_check_box"><input type="checkbox" name="ste_enhanced" value="1" class="quick_search_check"></div>
-						<div class="games_check_text">STE Enhanced</div>
+						<div class="links_mod_checkbox">
+                            <input type="checkbox" id="ste_enhanced" name="ste_enhanced" value="1">
+                            <label for="ste_enhanced"></label>
+                            <!--<input type="checkbox" name="ste_enhanced" value="1" class="quick_search_check">-->
+                        </div>
+						<div class="games_check_text">&nbsp; STE Enhanced</div>
 					</div>
 					<div class="games_check_row">
-						<div class="games_check_box"><input type="checkbox" name="arcade" value="1" class="quick_search_check"></div>
-						<div class="games_check_text">Arcade Conversion</div>
+						<div class="links_mod_checkbox">
+                            <input type="checkbox" id="arcade" name="arcade" value="1">
+                            <label for="arcade"></label>
+                            <!--<input type="checkbox" name="arcade" value="1" class="quick_search_check">-->
+                        </div>
+						<div class="games_check_text">&nbsp; Arcade Conversion</div>
 					</div>
 					<div class="games_check_row">
-						<div class="games_check_box"><input type="checkbox" name="wanted" value="1" class="quick_search_check"></div>
-						<div class="games_check_text">Wanted</div>
+						<div class="links_mod_checkbox">
+                            <input type="checkbox" id="wanted" name="wanted" value="1">
+                            <label for="wanted"></label>
+                            <!--<input type="checkbox" name="wanted" value="1" class="quick_search_check">-->
+                        </div>
+						<div class="games_check_text">&nbsp; Wanted</div>
 					</div>
 					<div class="games_check_row">
-						<div class="games_check_box"><input type="checkbox" name="unfinished" value="1" class="quick_search_check"></div>
-						<div class="games_check_text">Unfinished/Rumoured</div>
+						<div class="links_mod_checkbox">
+                            <input type="checkbox" id="unfinished" name="unfinished" value="1">
+                            <label for="unfinished"></label>
+                            <!--<input type="checkbox" name="unfinished" value="1" class="quick_search_check">-->
+                        </div>
+						<div class="games_check_text">&nbsp; Unfinished/Rumoured</div>
 					</div>
 					<div class="games_check_row">
-						<div class="games_check_box"><input type="checkbox" name="seuck" value="1" class="quick_search_check"></div>
-						<div class="games_check_text">SEUCK</div>
+						<div class="links_mod_checkbox">
+                            <input type="checkbox" id="seuck" name="seuck" value="1">
+                            <label for="seuck"></label>
+                            <!--<input type="checkbox" name="seuck" value="1" class="quick_search_check">-->
+                        </div>
+						<div class="games_check_text">&nbsp; SEUCK</div>
 					</div>
 					<div class="games_check_row">
-						<div class="games_check_box"><input type="checkbox" name="stac" value="1" class="quick_search_check"></div>
-						<div class="games_check_text">STAC</div>
+						<div class="links_mod_checkbox">
+                            <input type="checkbox" id="stac" name="stac" value="1">
+                            <label for="stac"></label>
+                            <!--<input type="checkbox" name="stac" value="1" class="quick_search_check">-->
+                        </div>
+						<div class="games_check_text">&nbsp; STAC</div>
 					</div>
 				</div>
 			</div>

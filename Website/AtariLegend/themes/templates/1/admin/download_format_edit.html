@@ -44,18 +44,17 @@ function formatdelete(format_id)
 	<h1>{$format_edit.format_edit}</h1>
 	<div class="standard_tile_line"></div>
 	<div class="standard_tile_text">
-		<fieldset>
+		<fieldset class="centered_fieldset">
 			<legend>Edit format</legend>
 			<form action="../downloads/db_download_format.php" method="post" name="post" id="format_edit">
 				<b>Name :</b>
 				<input type="text" name="format_name" value="{$format_edit.format_edit}" class="standard_tile_input_small">
-				<input type="submit" value="Update" style="padding:2px;" class="topbutton_cpanel_small">
+				<br><br>
+                <input type="submit" value="Update" style="padding:2px;" class="topbutton_cpanel_small">
 				<input type="submit" value="Delete" onClick="formatdelete({$format_edit.format_id_edit}); return false;" class="topbutton_cpanel_small">	
 				<input type="hidden" name="action" value="update">
 				<input type="hidden" name="format_id" value="{$format_edit.format_id_edit}">
 			</form>	
-			<br>
-			<br>
 		</fieldset>
 	</div>
 	{else}

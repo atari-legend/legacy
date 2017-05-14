@@ -4,19 +4,22 @@
 //*************************************************************/
 //*****************CPanel USER section css*********************/
 //*************************************************************/
-//*------------User details-----------------------------------*/
+//*----------------------------------------------------------
+//User details
+//------------------------------------------------------------ */
 #user_details_img_dark {
     margin-left: 1%;
     box-shadow: 0 0 12px #000;
 }
 
 .user_details_container { display: flex; }
-
-#child_1,
-#child_2 {
-    width: 50%;
+#child_1_user,
+#child_2_user {
+    width: 47.5%;
     margin-left: 2%;
 }
+
+#child_3_user {width: 5%;}
 
 .user_details_text {
     display: table-cell;
@@ -28,10 +31,20 @@
     width: 50%;
 }
 
+.user_details_input_small{
+    @extend .standard_tile_input_small;
+    width: 90%;
+}
+
+#file_upload_user_detail{width: 60%;}
+
 .user_details_row {
     display: table;
     width: 100%;
 }
+
+#checkbox_user_detail label {
+    	border:1px solid #666;}
 
 //*----------------------------------------------------------
 //User main
