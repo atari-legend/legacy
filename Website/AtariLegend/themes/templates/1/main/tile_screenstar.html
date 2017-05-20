@@ -27,12 +27,10 @@
             <figure class="effect-tile" style="margin:0px;">
                 <img class="standard_tile_image" src="../../includes/show_image.php?file={$screenstar.screenstar_img}&amp;resize=410,null,null,null&amp;crop=left,top,410,260&amp;minimum_size=410,260" alt="screenstar">            
                 <figcaption>
-                    <span class="tile_arrow"><i class="fa fa-chevron-up" aria-hidden="true"></i></span>                    
-                    <span class="tile_title"><a href="../../admin/games/games_detail.php?game_id={$screenstar.screenstar_game_id}">{$screenstar.screenstar_game_name}</a></span>
+                    <span class="standard_tile_subtext" style="left: 5%; position: absolute; top: 50%;">Random review</span><span class="tile_arrow"><i class="fa fa-chevron-up" aria-hidden="true"></i></span>                    
+                    <span class="tile_title"><a href="#">{$screenstar.screenstar_game_name}</a></span>     
                     <p class="icon-links" style="width:85%;">
-                        <a href="../../admin/downloads/downloads_game_detail.php?game_id={$screenstar.screenstar_game_id}"><span class="icon"><i class="fa fa-floppy-o" aria-hidden="true"></i></span></a>
-                        <a href="../../admin/games/games_comment_edit.php?game_user_comments_id={$screenstar.screenstar_comment_id}&v_counter=0"><span class="icon"><i class="fa fa-pencil" aria-hidden="true"></i></span></a>
-                        <a href="../../admin/games/games_detail.php?game_id={$screenstar.screenstar_game_id}"><span class="icon"><i class="fa fa-list" aria-hidden="true"></i></span></a>
+                        <span class="standard_tile_subtext" style="font-size:7pt;"><a href="#">{$screenstar.screenstar_year}</a></span>
                     </p>
                 </figcaption>			
             </figure>
@@ -40,9 +38,10 @@
     </div>
     <div class="standard_tile_explanation">
         <br>        
-        <h6>{$screenstar.screenstar_comment}</h6>
+        <h6>{$screenstar.screenstar_review}</h6>
         <br>
-        <span class="standard_tile_subtext">by <a href="../../admin/user/user_detail.php?user_id_selected={$screenstar.screenstar_user_id}">{$screenstar.screenstar_username}</a>, {$screenstar.screenstar_date}</span><h2><a href="../../admin/games/games_comment.php" class="standard_tile_link"><i class="fa fa-chevron-right" aria-hidden="true"></i></a></h2>
+        <span class="standard_tile_subtext">by <a href="#">{$screenstar.screenstar_username}</a>, {$screenstar.screenstar_date}</span>
+        <br><h2><a href="#" class="standard_tile_link">More&nbsp;&nbsp;<i class="fa fa-chevron-right" aria-hidden="true"></i></a></h2>
     </div>
 </div>
 </div>

@@ -108,7 +108,7 @@ img { display: block; }
 .standard_tile_line { border-bottom: 2px solid #666; }
 .standard_tile_background { position: relative; }
 .standard_tile_image { width: 100%; }
-.standard_tile_subtext { font-size: 11pt; color: #3c3c3c; font-weight:bold;}
+.standard_tile_subtext { font-size: 12pt; color: #3c3c3c; font-weight:bold;}
 .standard_tile p {
     width: 91.7%;
     padding-right: 4%;
@@ -150,33 +150,33 @@ h1 {
     text-shadow: -1px 1px 8px #666, 1px -1px 8px #515151;
 }
 
-h2 {
+.standard_tile h2 {
     float: right;
     font-size: 13px;
     font-style: italic;
     font-weight: 100;
 }
 
-h3 {
+.standard_tile h3 {
     font-size: 17px;
     font-weight: 100;
     color: #fff;
     text-align: center;
 }
 
-h4 {
+.standard_tile h4 {
     font-size: 16px;
     font-weight: 100;
     color: #fff;
 }
 
-h5 {
+.standard_tile h5 {
     font-size: 12px;
     font-weight: 100;
     color: #3c3c3c;
 }
 
-h6 {
+.standard_tile h6 {
     font-size: 16px;
     font-weight: 100;
     color: #3c3c3c;

@@ -3,8 +3,8 @@
 //**************************************************************/
 //**************************************************************/
 //***This is the css code for the front page of the main site***/
-
 //**************************************************************/
+
 //*----------------------------------------------------------
 // Welcome tile settings --> frontpage
 //------------------------------------------------------------ */
@@ -33,22 +33,7 @@
 #welcome p {
     padding-right: 5%;
     padding-left: 5%;
-    //* RGBa with 0.6 opacity */
     text-align: center;
-    background: rgb(0, 80, 80);
-    //* Fallback for web browsers that doesn't support RGBa */
-    background: rgba(0, 80, 80, .6);
-    border-right: 2px solid #01b5b5;
-}
-
-.welcome_text {
-    position: absolute;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    font-size: 11pt;
-    color: #bcbdbd;
-    border-bottom: 2px solid #01b5b5;
-    margin-top: 130px;
 }
 
 .trivia_title {
@@ -56,8 +41,7 @@
     color: #fff;
 }
 
-.trivia_tag { font-size: 13pt;
-}
+.trivia_tag { font-size: 13pt; color: #01b5b5;}
 
 .trivia_text { font-size: 12pt; color: #fff;}
 
@@ -138,6 +122,7 @@
 }
 
 .logon_socmed:hover { opacity: .7; }
+
 //*----------------------------------------------------------
 //latest news tile --> front page
 //------------------------------------------------------------ */
@@ -181,26 +166,36 @@
 }
 
 //*----------------------------------------------------------
+//screenstar --> front page
+//------------------------------------------------------------ */
+.screenstar_position_front{margin-top: 20px; margin-bottom: 20px;}
+
+//*----------------------------------------------------------
 //Who is it - front page
 //------------------------------------------------------------ */
 .whoisit_position_front { margin-bottom: 20px; }
+
 //*----------------------------------------------------------
 //Latest reviews tile - front page
 //------------------------------------------------------------ */
 .latest_reviews { margin-bottom: 20px; }
+
 //*----------------------------------------------------------
 //Did you know tile - front page
 //------------------------------------------------------------ */
 .didyouknow_position_front { margin-bottom: 20px; }
+
 //*----------------------------------------------------------
 //Statistics tile - front page
 //------------------------------------------------------------ */
 .statistics_position_front { margin-bottom: 20px; }
 .statistics_dark { color: #ccc; }
+
 //*----------------------------------------------------------
 //Hotlinks tile - front page
 //------------------------------------------------------------ */
 .hotlinks_position_front { margin-bottom: 20px; }
+
 //*----------------------------------------------------------
 //contact tiles - front page
 //------------------------------------------------------------ */

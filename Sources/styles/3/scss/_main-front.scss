@@ -11,7 +11,7 @@
     float: left;
     width: 845px;
     height: 460px;
-    margin-top: -10px;
+    margin-top: 20px; 
     margin-bottom: 20px;
     overflow: hidden;
     border-top: 10px solid #161c71;
@@ -32,23 +32,8 @@
 
 #welcome p {
     padding-right: 5%;
-    padding-left: 5%;
-    //* RGBa with 0.6 opacity */
-    text-align: center;
-    background: rgb(192, 193, 202) transparent;
-    //* Fallback for web browsers that doesn't support RGBa */
-    background: rgba(192, 193, 202, .6);
-    border-right: 2px solid #484c7b;
-}
-
-.welcome_text {
-    position: absolute;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    font-size: 11pt;
-    color: #161c71;
-    border-bottom: 2px solid #484c7b;
-    margin-top: 130px;
+    padding-left: 5%;   
+    text-align: center; 
 }
 
 .trivia_title {
@@ -56,10 +41,10 @@
     color: #000;
 }
 
-.trivia_tag { font-size: 13pt; }
+.trivia_tag { font-size: 13pt; color: #161c71; font-weight: bold;}
 .trivia_text {
     font-size: 13pt;
-    color: #000;
+    color: white;
 }
 
 //*----------------------------------------------------------
@@ -68,7 +53,7 @@
 .logon {
     float: right;
     width: 100%;
-    margin-top: -10px;
+    margin-top: 20px;
     margin-bottom: 20px;
 }
 
@@ -139,6 +124,12 @@
 }
 
 .logon_socmed:hover {opacity: .7;}
+
+//*----------------------------------------------------------
+//screenstar --> front page
+//------------------------------------------------------------ */
+.screenstar_position_front{margin-top: 20px; margin-bottom: 20px;}
+
 //*----------------------------------------------------------
 //latest news tile --> front page
 //------------------------------------------------------------ */
@@ -186,23 +177,28 @@
 //Who is it - front page
 //------------------------------------------------------------ */
 .whoisit_position_front {margin-bottom: 20px;}
+
 //*----------------------------------------------------------
 //Latest reviews tile - front page
 //------------------------------------------------------------ */
 .latest_reviews {margin-bottom: 20px;}
+
 //*----------------------------------------------------------
 //Did you know tile - front page
 //------------------------------------------------------------ */
 .didyouknow_position_front {margin-bottom: 20px;}
+
 //*----------------------------------------------------------
 //Statistics tile - front page
 //------------------------------------------------------------ */
 .statistics_position_front {margin-bottom: 20px;}
 .statistics_dark {color: #161c71;}
+
 //*----------------------------------------------------------
 //Hotlinks tile - front page
 //------------------------------------------------------------ */
 .hotlinks_position_front {margin-bottom: 20px;}
+
 //*----------------------------------------------------------
 //contact tiles - front page
 //------------------------------------------------------------ */
