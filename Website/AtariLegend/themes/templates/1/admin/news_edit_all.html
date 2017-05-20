@@ -41,6 +41,12 @@ function delete_news(news_id)
 
 {block name=main_tile}
 <div class="standard_tile" id="news_edit_all">
+     <div class="help-tip">
+		<p> 
+            <i class="fa fa-pencil fa-lg" aria-hidden="true"></i> - Edit <br>
+            <i class="fa fa-trash fa-lg" aria-hidden="true"></i> - Delete <br>
+        </p>
+    </div>
 	<h1>NEWS EDIT</h1>
 	<div class="standard_tile_line"></div>
 	<div class="standard_tile_text">
@@ -73,8 +79,8 @@ function delete_news(news_id)
 				<div style="width:100%;text-align:center;">
 					<br>
 					<br>
-					<a href="news_edit.php?news_id={$line.edit_id}" class="left_nav_link">EDIT</a> ::
-					<a href="javascript:delete_news({$line.edit_id})" class="left_nav_link">DELETE</a>
+					<a href="news_edit.php?news_id={$line.edit_id}" class="left_nav_link"><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></a> ::
+					<a href="javascript:delete_news({$line.edit_id})" class="left_nav_link"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a>
 				</div>
 			</fieldset> 
 			<br/>

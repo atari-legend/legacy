@@ -15,7 +15,7 @@
     float: left;
     width: 845px;
     height: 460px;
-    margin-top: -40px;
+    margin-top: 20px;
     margin-bottom: 20px;
     overflow: hidden;
     border: 2px solid #000;
@@ -35,22 +35,7 @@
 #welcome p {
     padding-right: 5%;
     padding-left: 5%;
-    //* RGBa with 0.6 opacity */
     text-align: center;
-    background: rgb(172, 172, 172) transparent;
-    //* Fallback for web browsers that doesn't support RGBa */
-    background: rgba(172, 172, 172, .8);
-    border-right: 2px solid #666;
-}
-
-.welcome_text {
-    position: absolute;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    font-size: 15px;
-    color: #23f001;
-    border-bottom: 2px solid #666;
-    margin-top: 130px;
 }
 
 .trivia_title {
@@ -58,17 +43,23 @@
     color: #fff;
 }
 
-.trivia_tag {
-}
+.trivia_tag { font-size: 13pt; color: black;}
 
 .trivia_text { font-size: 16px; color: #fff;}
+
+//*----------------------------------------------------------
+//screenstar --> front page
+//------------------------------------------------------------ */
+.screenstar_position_front{margin-top: 20px; margin-bottom: 20px;}
+
 //*----------------------------------------------------------
 //logon tile --> front page
 //------------------------------------------------------------ */
 .logon {
     float: right;
     width: 100%;
-    margin-top: -40px;
+    margin-top: 20px;
+     margin-bottom: 20px;
 }
 
 .logon_input_usn {
@@ -138,6 +129,7 @@
 }
 
 .logon_socmed:hover {opacity: .7;}
+
 //*----------------------------------------------------------
 //datequote tile - front page
 //------------------------------------------------------------ */
@@ -178,6 +170,7 @@
 //Statistics tile - front page
 //------------------------------------------------------------ */
 .statistics_dark { color: #666; }
+
 //*----------------------------------------------------------
 //contact tiles - front page
 //------------------------------------------------------------ */

@@ -12,6 +12,8 @@
 *					AL 2.0 update
 *   Id: games_review_add.html,v 0.11 2017/02/26 ST Graveyard
 *					Remove the hotspot button
+*   Id: games_review_add.html,v 0.12 2017/05/18 ST Graveyard
+*					add screenstar button
 *
 ***************************************************************************/
 
@@ -50,7 +52,7 @@ t_help = "Insert Hotspot Target: [hotspot=#]";
 x_help = "Set Smiley";
 
 // Define the bbCode tags
-bbtags = new Array('[b]','[/b]','[i]','[/i]','[u]','[/u]','[url]','[/url]','[mail]','[/mail]', '[hotspotUrl=#]', '[/hotspotUrl]', '[hotspot=]', '[/hotspot]');
+bbtags = new Array('[b]','[/b]','[i]','[/i]','[u]','[/u]','[url]','[/url]','[mail]','[/mail]', '[hotspotUrl=#]', '[/hotspotUrl]', '[hotspot=]', '[/hotspot]','[screenstar]','[/screenstar]' );
 bbcode = new Array();
 imageTag = false;
 
@@ -162,6 +164,9 @@ function storeCaret(textEl) {
 
 {block name=main_tile}
 <div class="standard_tile" id="games_review_add">
+    <div class="help-tip">
+        <p>Use the 'Screenstar' button to mark the text used in the screenstar tile on the website.</p>
+    </div>
 	<h1>{$game.game_name}</h1>
 	<div class="standard_tile_line"></div>
 	<div class="standard_tile_text">
@@ -208,7 +213,8 @@ function storeCaret(textEl) {
 				<input type="button" accesskey= "u" name="addbbcode4" value="U" onclick="bbstyle(4,'textfield')">
 				<input type="button" accesskey= "i" name="addbbcode2" value="I" onclick="bbstyle(2,'textfield')">
 				<input type="button" accesskey="w" name="addbbcode6" value="URL" onClick="bbstyle(6,'textfield')">			  
-				<input type="button" accesskey="x" name="addbbcode8" value="@" onClick="bbstyle(8,'textfield')">			  			
+				<input type="button" accesskey="x" name="addbbcode8" value="@" onClick="bbstyle(8,'textfield')">
+                <input type="button" accesskey="screenstar" name="addbbcode14" value="Screenstar" onClick="bbstyle(14,'textfield')">                
 				<textarea name="textfield" id="game_review_textfield" ONSELECT="javascript:storeCaret(this);" ONCLICK="javascript:storeCaret(this);" ONKEYUP="javascript:storeCaret(this);" ONCHANGE="javascript:storeCaret(this);" rows="15" ></textarea>
 				<br>
 				<br>
