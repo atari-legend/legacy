@@ -9,6 +9,8 @@
 *
 *   Id: latest_news_tile.html,v 0.1 2015/04/14 23:27 ST Graveyard
 *	Id: latest_news_tile.html,v 0.2 2015/12/05 ST Graveyard - HTML validated
+*	Id: latest_news_tile.html,v 0.3 2017/05/23 ST Graveyard - HTML validated
+*           - dotdotdot script active for news_text
 *
 ***************************************************************************/
 
@@ -16,29 +18,28 @@
 // This is the latest news tile
 //**************************************************************************************** 
 *}
+
 {block name=latest_news_tile}
 <div class="latest_news">
 	<div class="standard_tile" >
 		<h1><a href="#" class="standard_tile_link">LATEST NEWS</a></h1>
-
 		{assign var="number" value=1}
-		{foreach from=$news item=line}
-			
+		{foreach from=$news item=line}			
 			<div class="standard_tile_line"></div>
 			<div {if $number is even}class="standard_list_entry"{else}class="standard_list_entry_odd"{/if}>
-				<div class="standard_list_entry_left">
+				<!--<div class="standard_list_entry_left">
 					<a href="#">
 					<img src="../../includes/show_image.php?file={$line.image}&amp;resize=164,null,null,null&amp;crop=left,top,164,120" alt="latest_news">
 					</a>
-				</div>
-				<div class="standard_list_entry_right">
+				</div>-->
+				<div class="standard_list_entry_news">
 					<h4 style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis">
 						<a href="#" title="{$line.news_headline}" class="standard_tile_link">{$line.news_headline}</a>
 					</h4>
 					<h5 style="font-weight: bold;">{$line.news_date}</h5>
-					<h5 class="standard_list_entry_right_news_text">
-							{$line.news_text}
-					</h5>
+                    <div class="standard_list_entry_news_text">
+                       {$line.news_text}
+                    </div>
 				</div>							
 			</div>
 			{$number=$number+1}

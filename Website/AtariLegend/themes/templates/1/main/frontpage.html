@@ -2,14 +2,16 @@
 {*
 /***************************************************************************
 *                                frontpage.html
-*                            ----------------
+*                            ---------------------
 *   begin                : Tuesday, April 15, 2015
 *   copyright            : (C) 2015 Atari Legend
 *   email                : martens_maarten@hotmail.com
 *   actual update        : Creation of file
 *
 *   Id: frontpage.html,v 0.1 2015/04/15 23:52 SilverSurfer
-    Id: frontpage.html,v 0.2 2015/12/05 ST Graveyard - HTML validated
+*   Id: frontpage.html,v 0.2 2015/12/05 ST Graveyard - HTML validated
+*	Id: frontpage.html,v 0.3 2017/05/23 ST Graveyard - HTML validated
+*           - dotdotdot script active for news_text
 *
 ***************************************************************************/
 
@@ -20,7 +22,7 @@
 
 {block name=javascript_slider}
     <script type="text/javascript" src="{$template_dir}includes/js/jssor.slider.mini.js"></script>  <!-- This script is needed for the animation in the welcome tile -->
-
+    <script src="{$template_dir}includes/js/jquery.dotdotdot.js" type="text/javascript"></script> <!--this script is used for the elipsis (...) effect of the latest news / reviews tile -->
     <script> <!-- This script is needed for the animation in the welcome tile -->
             jQuery(document).ready(function ($) {
 
@@ -211,10 +213,52 @@
         });
       });
      </script>
+     <script type="text/javascript"> <!--This is the script to truncate the latest news-->
+         window.onload = function() {
+            $(".standard_list_entry_news_text").dotdotdot({
+                    //	configuration goes here
+                    
+                /*	The text to add as ellipsis. */
+                ellipsis	: '... ',
+         
+                /*	How to cut off the text/html: 'word'/'letter'/'children' */
+                wrap		: 'word',
+         
+                /*	Wrap-option fallback to 'letter' for long words */
+                fallbackToLetter: false,
+         
+                /*	jQuery-selector for the element to keep and put after the ellipsis. */
+                after		: null,
+         
+                /*	Whether to update the ellipsis: true/'window' */
+                watch		: window,
+
+                /*	Optionally set a max-height, can be a number or function.
+                    If null, the height will be measured. */
+                height		: null,
+
+                /*	Deviation for the height-option. */
+                tolerance	: 0,
+         
+                /*	Callback function that is fired after the ellipsis is added,
+                    receives two parameters: isTruncated(boolean), orgContent(string). */
+                callback	: function( isTruncated, orgContent ) {},
+         
+                lastCharacter	: {
+         
+                    /*	Remove these characters from the end of the truncated text. */
+                    remove		: [ ' ', ',', ';', '.', '!', '?' ],
+         
+                    /*	Don't add an ellipsis if this array contains 
+                        the last character of the truncated text. */
+                    noEllipsis	: []
+                }   
+            });
+        };
+    </script>
 {/block}
 
 {block name=main_body}
-
 
     <div id="main">
 
