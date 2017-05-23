@@ -34,6 +34,8 @@ function InsertALCode($alcode) {
     $alcode = str_replace("[/sup]", "</sup>", $alcode);
     $alcode = str_replace("[screenstar]", "", $alcode);
     $alcode = str_replace("[/screenstar]", "", $alcode);
+    $alcode = str_replace("[frontpage]", "", $alcode);
+    $alcode = str_replace("[/frontpage]", "", $alcode);
     $alcode = preg_replace("#\[b\](.+?)\[/b\]#is", "<b>\\1</b>", $alcode);
     $alcode = preg_replace("#\[i\](.+?)\[/i\]#is", "<i>\\1</i>", $alcode);
     $alcode = preg_replace("#\[u\](.+?)\[/u\]#is", "<u>\\1</u>", $alcode);
