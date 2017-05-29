@@ -182,7 +182,7 @@
                 $( "#welcome" ).effect("slide", { direction: "left" }, 1000 );
                 $( ".whoisit_position_front" ).effect("slide", { direction: "left" }, 1000 );
                 $( ".logon" ).effect("slide", { direction: "right" }, 1000 );
-                $( ".datequote_position_front" ).effect("slide", { direction: "left" }, 1000 );
+                $( ".datequote_position_front" ).effect("slide", { direction: "right" }, 1000 );
                 $( ".didyouknow_position_front" ).effect("slide", { direction: "right" }, 1000 );
                 $( ".statistics_position_front" ).effect("slide", { direction: "right" }, 1000 );
                 $( ".contact_tiles" ).effect("slide", { direction: "right" }, 1000 );
@@ -213,9 +213,9 @@
         });
       });
      </script>
-     <script type="text/javascript"> <!--This is the script to truncate the latest news-->
+     <script type="text/javascript"> 
          window.onload = function() {
-            $(".standard_list_entry_news_text").dotdotdot({
+            $(".standard_list_entry_news_text").dotdotdot({  <!--This is the script to truncate the latest news-->
                     //	configuration goes here
                     
                 /*	The text to add as ellipsis. */
@@ -369,6 +369,11 @@
             {block name=user_login_tile}
             {include file='1/main/user_login_tile.html'}
             {/block}
+            
+             <!--Start date quote tile-->
+            {block name=date_quote_tile}
+            {include file='1/main/date_quote_tile.html'}
+            {/block}
         </div>
 
         <!--this column is only visible in the 3 colum mode and 1 column mode-->
@@ -385,16 +390,14 @@
 
         <!--this column is only visible in the 3 colum mode and 1 column mode-->
         <div class="column_center">
-            <!--Start screenstar tile-->
-            {block name=screenstar_tile}
-            <br>
-            {include file='1/main/tile_screenstar.html'}
-            {/block}
-
             <!--Start latest reviews tile-->
             {block name=latest_reviews_tile}
-            <br> 
             {include file='1/main/latest_reviews_tile.html'}
+            {/block}
+            
+             <!--Start screenstar tile-->
+            {block name=screenstar_tile}
+            {include file='1/main/tile_screenstar.html'}
             {/block}
 
             <!--Start "hotlinks" tile-->
@@ -405,11 +408,6 @@
 
         <!--this column is only visible in the 3 colum mode and 1 column mode-->
         <div class="column_right">
-
-            <!--Start date quote tile-->
-            {block name=date_quote_tile}
-            {include file='1/main/date_quote_tile.html'}
-            {/block}
 
             <!--Start "Did you know" tile-->
             {block name=did_you_know_tile}
@@ -433,36 +431,34 @@
         <!--this column is only visible in the 2 colum mode -->
         <div class="column_left_tab">
 
-            <!--Start date quote tile-->
+            <!--Start date quote tile
             {block name=date_quote_tile}
             {include file='1/main/date_quote_tile.html'}
-            {/block}
+            {/block}-->
 
             <!--Start "Did you know" tile-->
             {block name=did_you_know_tile}
             {include file='1/main/did_you_know_tile.html'}
             {/block}
 
-            <!--Start contact tiles-->
-            <div class="contact_tiles">
-                <div class="contact_jukebox_button"><a href="#"> </a></div>
-                    <div class="contact_chat_button"><a href="#"> </a></div>
-            </div>
-        </div>
-
-        <!--this column is only visible in the 2 colum mode -->
-        <div class="column_right_tab">
-
             <!--Start "statistics" tile-->
             {block name=statistics_tile}
             {include file='1/main/statistics_tile.html'}
             {/block}
-
-            <!--Start contact tiles-->
+            
+             <!--Start contact tiles-->
             <div class="contact_tiles">
+                <div class="contact_jukebox_button"><a href="#"> </a></div>
+                <div class="contact_chat_button"><a href="#"> </a></div>
                 <div class="contact_email_button"><a href="#"> </a></div>
-                    <div class="contact_facebook_button"><a href="#"> </a></div>
+                <div class="contact_facebook_button"><a href="#"> </a></div>
             </div>
+            
+        </div>
+
+        <!--this column is only visible in the 2 colum mode -->
+        <div class="column_right_tab">
+            <!--can be used for future tiles-->
         </div>
     </div>
 {/block}

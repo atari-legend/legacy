@@ -23,6 +23,9 @@ include("../../config/common.php");
 include("../../admin/games/quick_search_games.php");
 include("../../config/admin.php");
 
+$user_id_contrib = $user_id_selected;
+include("../../common/tiles/user_contribution.php");
+
 //Lets get all the data of the selected user
 $sql_users = $mysqli->query("SELECT * FROM users
                               WHERE user_id = $user_id_selected") or die("Couldn't query users Database");

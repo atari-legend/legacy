@@ -79,21 +79,13 @@
     content: url('../images/logon_pwd.png');
 }
 
-.logon_facebook_button::before {
-    display: block;
-    width: auto;
-    //*or your image's width*/
-    height: 50%;
-    content: url('../images/login-facebook.png');
-}
+.logon_facebook_button, .logon_twitter_button{text-align: center;}
 
-.logon_twitter_button::before {
-    display: block;
-    width: auto;
-    //*or your image's width*/
-    height: 50%;
-    content: url('../images/login_twitter.png');
-}
+/* we will be implementing this at a later stage
+/*.logon_facebook_button::before {content: url('../images/login-facebook.png');} */
+
+/*.logon_twitter_button::before {content: url('../images/login_twitter.png');} */
+
 
 .logon_left {
     position: absolute;
@@ -122,10 +114,8 @@
 
 .logon_signin img:hover {opacity: .7;}
 .logon_socmed {
-    display: block;
-    width: 50%;
+    width: 100%;
     margin-top: 10px;
-    margin: auto;
 }
 
 .logon_socmed:hover {opacity: .7;}

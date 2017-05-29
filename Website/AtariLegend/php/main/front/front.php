@@ -25,9 +25,8 @@ include("../../common/tiles/did_you_know_tile.php");
 include("../../common/tiles/latest_reviews_tile.php");
 include("../../common/tiles/who_is_it_tile.php");
 include("../../common/tiles/screenstar.php");
-include("../tiles/statistics_tile.php");
+include("../../common/tiles/tile_stats.php");
 include("../../common/tiles/hotlinks_tile.php");
-
 
 //Create the id's for dynamic positioning of the tiles
 $smarty->assign('date_quote_tile', 'datequote_position_front');

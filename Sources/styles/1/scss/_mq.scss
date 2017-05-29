@@ -65,6 +65,12 @@
     }
 }
 
+@media screen and (max-width: 1494px){
+    .screenstar_position_front {
+        margin-top:0px;
+    }
+}
+
 
 //*----------------------------------------------------------
 //datequote tile - front page
@@ -78,6 +84,24 @@
     .datequote_position_front {
         float: left;
         width: 94%;
+    }
+}
+
+@media screen and (max-width: 1494px){
+    .datequote_position_front {
+        margin-top:420px;
+    }
+}
+
+@media screen and (max-width: 800px){
+    .datequote_position_front {
+        margin-top:400px;
+    }
+}
+
+@media screen and (max-width: 639px){
+    .datequote_position_front {
+        margin-top:420px;
     }
 }
 

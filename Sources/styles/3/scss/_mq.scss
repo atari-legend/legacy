@@ -34,8 +34,7 @@
 @media screen and (max-width: 639px) {
     .logon {
         width: 100%;
-        margin-top: 0;
-        margin-bottom: 20px;
+        margin-top: 20;
     }
 }
 
@@ -63,8 +62,22 @@
 //datequote tile - front page
 //------------------------------------------------------------ */
 //* 1 and 2 tiles */
-@media screen and (max-width: 800px) {
-    .datequote_position_front {margin-top: 0;}
+@media screen and (max-width: 1494px){
+    .datequote_position_front {
+        margin-top:400px;
+    }
+}
+
+@media screen and (max-width: 800px){
+    .datequote_position_front {
+        margin-top:380px;
+    }
+}
+
+@media screen and (max-width: 639px){
+    .datequote_position_front {
+        margin-top:400px;
+    }
 }
 
 @media screen and (min-width: 1495px) {

@@ -14,7 +14,7 @@
 ***************************************************************************/
 
 //*********************************************************************************************
-// This is the php code for the latest news tile
+// This is the php code for the latest news/Press release tile
 //*********************************************************************************************
 
 //Select the news from the DB
@@ -32,11 +32,8 @@ while ($sql_news = $query_news->fetch_array(MYSQLI_BOTH))
 
     $news_text = $sql_news['news_text']; 
     
-    $pos_start = strpos($news_text, '[frontpage]');
-    $pos_start = $pos_start;
-    
+    $pos_start = strpos($news_text, '[frontpage]'); 
     $pos_end = strpos($news_text, '[/frontpage]');
-    $pos_end = $pos_end;
     
     $nr_char = $pos_end - $pos_start;
     
