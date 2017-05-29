@@ -51,6 +51,12 @@
 //*----------------------------------------------------------
 //latest news tile --> front page
 //------------------------------------------------------------ */
+@media screen and (max-width: 639px){
+    .latest_news {
+        margin-top:20px;
+    }
+}
+
 @media screen and (min-width: 640px) and (max-width: 800px) {
     .latest_news {margin-top: 395px;}
 }
@@ -75,8 +81,23 @@
 //datequote tile - front page
 //------------------------------------------------------------ */
 //* 1 and 2 tiles */
-@media screen and (max-width: 800px) {
-    .datequote_position_front {margin-top: 0;}
+
+@media screen and (max-width: 1494px){
+    .datequote_position_front {
+        margin-top:420px;
+    }
+}
+
+@media screen and (max-width: 800px){
+    .datequote_position_front {
+        margin-top:400px;
+    }
+}
+
+@media screen and (max-width: 639px){
+    .datequote_position_front {
+        margin-top:420px;
+    }
 }
 
 @media screen and (min-width: 1495px) {
@@ -92,9 +113,21 @@
     .whoisit_position_front {float: right;}
 }
 
+@media screen and (max-width: 1494px){
+    .whoisit_position_front {
+        margin-top:20px;
+    }
+}
+
 //*----------------------------------------------------------
 //Latest reviews tile - front page
 //------------------------------------------------------------ */
+@media screen and (max-width: 800px){
+     .latest_reviews {
+        margin-top:20px;
+    }
+}
+
 @media screen and (min-width: 1495px) {
     .latest_reviews {
         width: 49%;
@@ -109,6 +142,13 @@
     .didyouknow_position_front {
         float: left;
         width: 100%;
+        margin-top: 20px;
+    }
+}
+
+@media screen and (max-width: 1494px){
+    .didyouknow_position_front  {
+        margin-top:20px;
     }
 }
 
@@ -119,6 +159,13 @@
     .statistics_position_front {
         float: left;
         width: 100%;
+        margin-top: 20px;
+    }
+}
+
+@media screen and (max-width: 1494px){
+    .statistics_position_front {
+        margin-top:20px;
     }
 }
 
@@ -126,17 +173,21 @@
 //Hotlinks tile - front page
 //------------------------------------------------------------
 @media screen and (min-width: 1495px) {
-    .hotlinks_position_front {width: 94%; float: left;}
+    .hotlinks_position_front {width: 94%; float: left; margin-top: 20px;}
 }
 
 //*----------------------------------------------------------
 //contact tiles - front page
 //------------------------------------------------------------ */
 @media screen and (min-width: 1495px){
-    .contact_tiles {width: 49%; float: right;}
+    .contact_tiles {width: 49%; float: right;margin-top: 20px;}
 }
 
-
+@media screen and (max-width: 1494px){
+    .contact_tiles {
+        margin-top:20px;
+    }
+}
 
 
 //*----------------------------------------------------------

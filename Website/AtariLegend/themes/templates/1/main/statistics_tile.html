@@ -23,17 +23,15 @@
 		<div class="standard_tile_line"></div>
 		<div class="standard_tile_text">
 			<h6>
-				{$statistics.games_number} games in the AL database <br>
-				<span class="statistics_dark">{$statistics.demos_number} demos in the AL database</span> <br>
-				{$statistics.games_screenshot} screenshots in the AL database <br> 
-				<span class="statistics_dark">{$statistics.games_screenshot_distinct} games have screenshots</span> <br>
-				{$statistics.demos_screenshot_distinct} demos have screenshots <br>
-				<span class="statistics_dark">{$statistics.game_publisher} game publishers in the AL database</span> <br> 
-				{$statistics.game_developer} game developers in the AL database <br> 
-				<span class="statistics_dark">{$statistics.game_year} games have a release year</span> <br> 
-				{$statistics.games_boxscan} gamebox scans in the AL database <br> 
-				<span class="statistics_dark">{$statistics.game_category} games are signed to a category</span> <br> 
-				{$statistics.game_download} games are downloadable <br>
+                {assign var="number" value=1}
+                {foreach from=$statistics item=line}
+                    {if $number is even}
+                        {if $line.value != ''}{$line.value}{/if}<br>
+                    {else}
+                        <span class="statistics_dark">{if $line.value != ''}{$line.value}{/if}<br></span>
+                    {/if}
+                    {$number=$number+1}
+                {/foreach}
 			</h6>
 		</div>
 	</div>	
