@@ -35,6 +35,7 @@ $sidebutton-cpanel-left-border: 0;
 $sidebutton-cpanel-bg:0;
 $menu-sub-button-font:0;
 $menu-sub-button-height:0;
+$log_on_bg:0;
 
 @if $skin-name == tos {
     $menu-top: 0;
@@ -61,6 +62,7 @@ $menu-sub-button-height:0;
     $sidebutton-cpanel-font: 16px;
     $menu-sub-button-font: 16px;
     $menu-sub-button-height: 30px;
+    $log_on_bg: white;
 } @else if $skin-name == picasso {
     $menu-top: 220px;
     $menu-opacity: 1;
@@ -94,6 +96,7 @@ $menu-sub-button-height:0;
     $sidebutton-cpanel-left-border: 2px solid #000;
     $menu-sub-button-font: 16px;
     $menu-sub-button-height: 30px;
+    $log_on_bg: #161c71;
 } @else if $skin-name == legacy {
     $menu-top: 225px;
     $menu-opacity: .8;
@@ -121,6 +124,7 @@ $menu-sub-button-height:0;
     $sidebutton-cpanel-bg: #55b4b4;
     $menu-sub-button-font: 15px;
     $menu-sub-button-height: 26px;
+    $log_on_bg: #122323;
 }
 
 //* ---------the side menu--------*/
@@ -895,4 +899,116 @@ header nav input {
     #search {
         display: none;
     }
+}
+
+
+//* ---------the log on menu --------*/
+
+.log_on_menu{
+    position: absolute;
+    display : block;
+    right: 0;
+}
+
+@if $skin-name == tos
+{
+    @media screen and (min-width: 1280px) and (max-width: 2304px) {
+        .log_on_menu{margin-top:34px;}
+    }
+}
+
+.log_on_menu ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  position: relative;
+  float: right;
+  background-color: $sidebutton-bg;
+  border-bottom: $menu-top-button-border-bottom;
+  
+}
+
+@if $skin-name != tos
+{
+    .log_on_menu ul{border-radius: 3px;   }
+}
+
+.log_on_menu li {
+  float: left;          
+}
+
+.log_on_menu #login {
+  border-right: $menu-top-button-border-left; 
+  border-left: $menu-top-button-border-left; 
+}
+
+.log_on_menu #signup a {
+  border-radius: 0 3px 3px 0;
+}
+
+@if $skin-name != tos
+{
+    .log_on_menu #login-trigger {
+      border-radius: 3px 0 0 3px;
+    }
+}
+
+.log_on_menu #login-trigger,
+.log_on_menu #signup a {
+  display: inline-block;
+  *display: inline;
+  *zoom: 1;
+  height: 25px;
+  line-height: 25px;
+  padding: 0 8px;
+  text-decoration: none;
+  color: $menu-top-button-color;
+}
+
+.log_on_menu #login-trigger:hover,
+.log_on_menu #login .active,
+.log_on_menu #signup a:hover {
+  background: $menu-top-button-hover-bg;
+  color: $menu-top-button-hover-color;
+}
+
+.log_on_menu #login-content {
+  display: none;
+  position: absolute;
+  top: 24px;
+  right: 0;
+  z-index: 999;    
+  background-color: $log_on_bg;
+  padding: 15px;
+  box-shadow: 0 2px 2px -1px rgba(0,0,0,.9);
+  border-radius: 3px 0 3px 3px;
+}
+
+.log_on_menu li #login-content {
+  right: 0;
+  width: 250px;  
+}
+
+@if $skin-name != tos {
+    .log_on_text {font-size: 10pt;}
+}
+@else{
+    .log_on_text {font-size: 0.9em;} 
+}
+
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder {
+  color: #fff;
+}
+input:-moz-placeholder,
+textarea:-moz-placeholder {
+  color: #fff;
+}
+input::-moz-placeholder,
+textarea::-moz-placeholder {
+  color: #fff;
+}
+input:-ms-input-placeholder,
+textarea:-ms-input-placeholder {
+  color: #fff;
 }

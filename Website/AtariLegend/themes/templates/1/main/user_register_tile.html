@@ -1,0 +1,53 @@
+{*
+/***************************************************************************
+*                               user_register_tile.html
+*                            ---------------------------
+*   begin                : Sunday, June 04, 2017
+*   copyright            : (C) 2017 Atari Legend
+*   email                : martens_maarten@hotmail.command
+*   actual update        : Creation of file
+*
+*   Id:user_register_tile.html,v 0.1 2017/06/04 Gatekeeper
+*
+***************************************************************************/
+
+//****************************************************************************************
+// This is the user register tile
+//****************************************************************************************
+*}
+{block name=user_register_tile}
+    <div class="register">
+        <div class="standard_tile">
+        <form action="../../common/login/db_register.php" method="post" name="register_form">
+            <h1>REGISTER</h1>
+            <div class="standard_tile_line"></div>  
+            <br>
+            <div class="standard_tile_explanation" >      
+                <h6>
+                    Create your personal Atari Legend account here, and help make this project get even better. With an account, you will have acces to more features and are able to share your input.
+                </h6>
+            </div>
+            <div class="register_input">
+                <input class="standard_tile_input_small" style="width:70%" type="text" name="userid" placeholder="Username (required)" required>
+                <br>    
+                <input class="standard_tile_input_small" style="width:70%" type="password" name="password" placeholder="Password (required)" required>
+                <br>
+                <input class="standard_tile_input_small" style="width:70%" type="password" name="password_again" placeholder="Password again (required)" required>
+                <br>
+                <input class="standard_tile_input_small" style="width:70%" type="text" name="email" placeholder="Email (required)" required>
+                <br>
+                <input class="standard_tile_input_small" style="width:70%" type="text" name="website" placeholder="Website">
+                <br>
+                <input class="standard_tile_input_small" style="width:70%" type="text" name="fb_profile" placeholder="Facebook profile">
+                <br>
+                <input class="standard_tile_input_small" style="width:70%" type="text" name="twitter_profile" placeholder="Twitter profile">
+                <br>
+                <input class="standard_tile_input_small" style="width:70%" type="text" name="af_profile" placeholder="Atari forum profile">
+                <br>
+            </div>
+            <br>
+            <input type="submit" value="REGISTER" class="signinbutton">
+        </form>
+        </div>
+    </div>
+{/block}

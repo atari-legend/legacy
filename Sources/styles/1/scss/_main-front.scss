@@ -46,7 +46,22 @@
 .trivia_text { font-size: 12pt; color: #fff;}
 
 //*----------------------------------------------------------
-//logon tile --> front page
+//register tile --> front page
+//------------------------------------------------------------ */
+.register {
+    float: right;
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.register_input{
+    width: 100%;
+    text-align:center;
+}
+
+//*----------------------------------------------------------
+//logon tile --> front page --> Not used anymore
 //------------------------------------------------------------ */
 .logon {
     float: right;

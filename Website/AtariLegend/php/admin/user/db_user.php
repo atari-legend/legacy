@@ -113,11 +113,11 @@ if (isset($action) and $action == 'modify_user') {
     
         if (isset ($user_inactive))
         {
-            $mysqli->query("UPDATE users SET userid='$user_name', password='$md5pass', sha512_password='$update_password', salt='$random_salt', email='$user_email', permission='$user_permission', user_website='$user_website', user_icq='$user_icq', user_msnm='$user_msnm', user_aim='$user_aim', inactive='$user_inactive' WHERE user_id='$user_id_selected'");
+            $mysqli->query("UPDATE users SET userid='$user_name', password='$md5pass', sha512_password='$update_password', salt='$random_salt', email='$user_email', permission='$user_permission', user_website='$user_website', user_fb='$user_fb', user_twitter='$user_twitter', user_af='$user_af', inactive='$user_inactive' WHERE user_id='$user_id_selected'");
         }
         else
         {
-            $mysqli->query("UPDATE users SET userid='$user_name', password='$md5pass', sha512_password='$update_password', salt='$random_salt', email='$user_email', permission='$user_permission', user_website='$user_website', user_icq='$user_icq', user_msnm='$user_msnm', user_aim='$user_aim', inactive=' ' WHERE user_id='$user_id_selected'");
+            $mysqli->query("UPDATE users SET userid='$user_name', password='$md5pass', sha512_password='$update_password', salt='$random_salt', email='$user_email', permission='$user_permission', user_website='$user_website', user_fb='$user_fb', user_twitter='$user_twitter', user_af='$user_af', inactive=' ' WHERE user_id='$user_id_selected'");
         }
         $_SESSION['edit_message'] = "User data modified";
 
@@ -128,11 +128,11 @@ if (isset($action) and $action == 'modify_user') {
         
         if (isset ($user_inactive))
         {
-            $mysqli->query("UPDATE users SET userid='$user_name', email='$user_email', permission='$user_permission', user_website='$user_website', user_icq='$user_icq', user_msnm='$user_msnm', user_aim='$user_aim', inactive='$user_inactive' WHERE user_id='$user_id_selected'");
+            $mysqli->query("UPDATE users SET userid='$user_name', email='$user_email', permission='$user_permission', user_website='$user_website', user_fb='$user_fb', user_twitter='$user_twitter', user_af='$user_af', inactive='$user_inactive' WHERE user_id='$user_id_selected'");
         }
         else
         {
-            $mysqli->query("UPDATE users SET userid='$user_name', email='$user_email', permission='$user_permission', user_website='$user_website', user_icq='$user_icq', user_msnm='$user_msnm', user_aim='$user_aim', inactive=' ' WHERE user_id='$user_id_selected'");
+            $mysqli->query("UPDATE users SET userid='$user_name', email='$user_email', permission='$user_permission', user_website='$user_website', user_fb='$user_fb', user_twitter='$user_twitter', user_af='$user_af', inactive=' ' WHERE user_id='$user_id_selected'");
         }
         $_SESSION['edit_message'] = "User data modified";
 

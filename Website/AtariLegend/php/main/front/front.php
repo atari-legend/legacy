@@ -36,6 +36,28 @@ $smarty->assign('screenstar_tile', 'screenstar_position_front');
 $smarty->assign('statistics_tile', 'statistics_position_front');
 $smarty->assign('who_is_it_tile', 'whoisit_position_front');
 
+if (isset($error))
+{
+    $_SESSION['edit_message'] = 'Usn or pwd incorrect - Please try again';
+    header("Location: ../front/front.php");
+}
+
+if (isset($action) and $action == 'register')
+{
+    $smarty->assign("action", 'register');
+}
+
+if (isset($action) and $action == 'reset')
+{
+    $smarty->assign("action", 'reset');
+}
+
+if (isset($action) and $action == 'new_pwd')
+{
+    $smarty->assign("q", $q);
+    $smarty->assign("action", 'new_pwd');
+}
+
 //Send all smarty variables to the templates
 $smarty->display("file:".$mainsite_template_folder."frontpage.html");
 
