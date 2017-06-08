@@ -12,9 +12,7 @@
  *
  ***************************************************************************/
 
-//this is a test
-
-function InsertALCode($alcode) {
+ function InsertALCode($alcode) {
     $alcode = preg_replace("#\[color\=(\#[0-9A-F]{0,6}|[A-z]+)\](.*)\[\/color\]#Ui", "<span style=\"color: $1;\">$2</span>", $alcode);
     //$alcode = eregi_replace("\\[style=([^\\[]*)\\]","<span class=\"\\1\">",$alcode);
     //$alcode = str_replace("[/style]", "</span>", $alcode);

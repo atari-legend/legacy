@@ -27,6 +27,7 @@ if (file_exists("../../config/database_upgrade.php")==true) { exit("Upgrade mode
 
 //Check if the user is logged on to the site
 sec_session_start();
+
 if (login_check($mysqli) == true) {
     $smarty->assign('user_session', array(
         'userid' => $_SESSION['userid'],
@@ -60,7 +61,7 @@ $smarty->assign('nr_users', $nr_users);
 //Now let's check who was online in the last 24 hours
 $twentyfour_hours = time()-(60*1440); 
 
-//Lets get all the data of the user who are online
+//Lets get all the data of the user who were online
 $sql_users = $mysqli->query("SELECT * FROM users
                               WHERE last_visit > '$twentyfour_hours'") or die("Couldn't query users Database 24h");
 

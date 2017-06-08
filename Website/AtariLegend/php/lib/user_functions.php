@@ -101,7 +101,7 @@ function login($userid, $password, $mysqli) {
         $stmt->bind_param('s', $userid); // Bind "$userid" to parameter.
         $stmt->execute(); // Execute the prepared query.
         $stmt->store_result();
-
+        
         // get variables from result.
         $stmt->bind_result($user_id, $userid, $db_password, $salt, $permission);
         $stmt->fetch();
@@ -110,7 +110,6 @@ function login($userid, $password, $mysqli) {
         if ($stmt->num_rows == 1) {
             // If the user exists we check if the account is locked
             // from too many login attempts
-
             if (checkbrute($user_id, $mysqli) == true) {
                 // Account is locked
                 // Send an email to user saying their account is locked
@@ -176,42 +175,71 @@ function checkbrute($user_id, $mysqli) {
 }
 
 function login_check($mysqli) {
-    // Check if all session variables are set
-    if (isset($_SESSION['user_id'], $_SESSION['userid'], $_SESSION['login_string'], $_SESSION['permission'])) {
-        $user_id      = $_SESSION['user_id'];
-        $login_string = $_SESSION['login_string'];
-        $userid       = $_SESSION['userid'];
-        $permission   = $_SESSION['permission'];
+   
+    //check for cookie 
+    //I can't do the extra pwd check sadly enough as I don't seem to have the know how. 
+    if(isset($_COOKIE['cooksession'])){
+   	    $session_id = $_COOKIE['cooksession'];
 
-        // Get the user-agent string of the user.
-        $user_browser = $_SERVER['HTTP_USER_AGENT'];
+	    //get the username and password
+   	    $query_user = $mysqli->query("SELECT * FROM users WHERE session = '$session_id'") or die ("error getting user data");
+	    $user = $query_user->fetch_array(MYSQLI_BOTH) or die("error getting user data - query");
+       
+        $_SESSION['userid'] = $user['userid'];
+        $_SESSION['user_id'] = $user['user_id'];
+        $_SESSION['permission'] = $user['permission'];
+        
+        // update last visit
+        $now = time();
+        if ($update_stmt = $mysqli->prepare("UPDATE users SET last_visit=? WHERE user_id=?")) {
+            $update_stmt->bind_param('ss', $now, $user_id);
+            // Execute the prepared query.
+            if (!$update_stmt->execute()) {
+                header('Location: ../error.php?err=time failure: UPDATE');
+            }
+        }
+        return true;
+   }else{
+        // Check if all session variables are set
+        if (isset($_SESSION['user_id'], $_SESSION['userid'], $_SESSION['login_string'], $_SESSION['permission'])) {
+            $user_id      = $_SESSION['user_id'];
+            $login_string = $_SESSION['login_string'];
+            $userid       = $_SESSION['userid'];
+            $permission   = $_SESSION['permission'];
 
-        if ($stmt = $mysqli->prepare("SELECT sha512_password
-                                      FROM users
-                                      WHERE user_id = ? LIMIT 1")) {
-            // Bind "$user_id" to parameter.
-            $stmt->bind_param('i', $user_id);
-            $stmt->execute(); // Execute the prepared query.
-            $stmt->store_result();
+            // Get the user-agent string of the user.
+            $user_browser = $_SERVER['HTTP_USER_AGENT'];
 
-            if ($stmt->num_rows == 1) {
-                // If the user exists get variables from result.
-                $stmt->bind_result($password);
-                $stmt->fetch();
-                $login_check = hash('sha512', $password . $user_browser);
+            if ($stmt = $mysqli->prepare("SELECT sha512_password
+                                          FROM users
+                                          WHERE user_id = ? LIMIT 1")) {
+                // Bind "$user_id" to parameter.
+                $stmt->bind_param('i', $user_id);
+                $stmt->execute(); // Execute the prepared query.
+                $stmt->store_result();
 
-                if ($login_check == $login_string) {
-                    // Logged In!!!!
-                    // update last visit
-                    $now = time();
-                    if ($update_stmt = $mysqli->prepare("UPDATE users SET last_visit=? WHERE user_id=?")) {
-                        $update_stmt->bind_param('ss', $now, $user_id);
-                        // Execute the prepared query.
-                        if (!$update_stmt->execute()) {
-                            header('Location: ../error.php?err=time failure: UPDATE');
+                if ($stmt->num_rows == 1) {
+                    // If the user exists get variables from result.
+                    $stmt->bind_result($password);
+                    $stmt->fetch();
+                    $login_check = hash('sha512', $password . $user_browser);
+
+                    if ($login_check == $login_string) {
+                        // Logged In!!!!
+                        // update last visit
+                        $now = time();
+                        if ($update_stmt = $mysqli->prepare("UPDATE users SET last_visit=? WHERE user_id=?")) {
+                            $update_stmt->bind_param('ss', $now, $user_id);
+                            // Execute the prepared query.
+                            if (!$update_stmt->execute()) {
+                                header('Location: ../error.php?err=time failure: UPDATE');
+                            }
                         }
+                        return true;
+                    } else {
+                        // Not logged in
+                        return false;
                     }
-                    return true;
                 } else {
                     // Not logged in
                     return false;
@@ -224,9 +252,6 @@ function login_check($mysqli) {
             // Not logged in
             return false;
         }
-    } else {
-        // Not logged in
-        return false;
     }
 }
 

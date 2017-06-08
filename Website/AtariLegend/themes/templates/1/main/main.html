@@ -31,6 +31,7 @@
 		<!-- End - let the site behave like a mobile app on phone -->
 		<link type="text/css" href="{$style_dir}css/style.css" type="text/css" rel="stylesheet" id="main_stylesheet">
 		<link type="text/css" href="{$style_dir}css/jquery-ui.css" rel="Stylesheet">
+        <link type="text/css" href="{$style_dir}css/notify-osd.css" hreflang="en" rel="stylesheet">
 		<link rel="icon" href="{$template_dir}includes/icons/favicon.png"> <!-- fav icon -->
 		<!-- start - get the icons used for mobile devices -->
 		<link rel="apple-touch-icon-precomposed" sizes="57x57" href="{$template_dir}includes/icons/icon-57x57.png">
@@ -44,6 +45,7 @@
         <script type='text/JavaScript' src="{$template_dir}includes/js/forms.js"></script> <!-- log on security script -->
 		<script type="text/javascript" src="{$template_dir}includes/js/jquery-1.11.3.min.js"></script> <!-- main jquery stuff -->
 		<script type="text/javascript" src="{$template_dir}includes/js/jquery-ui.js"></script> <!-- main jqueryUI stuff -->
+        <script type="text/javascript" src="{$template_dir}includes/js/notify-osd.js"></script>
 		<script type="text/javascript"> <!-- script needed for the autocompletion search engine -->
 			$(document).ready(function()
 			{
@@ -79,8 +81,7 @@
 						$.post( "../../../php/main/front/skin_switcher.php?action=skinswitch&skin="+skin);
 						return false;
 					});
-			});
-			
+			});			
 		</script>
 		<script type="text/javascript"> <!-- script needed for the side menu -->
 			//<![CDATA[ 
@@ -92,6 +93,28 @@
 			});
 			//]]> 	
 		</script>
+        <script type="text/javascript"> 
+            $(document).ready(function(){
+              $('#login-trigger').click(function(){  <!-- script needed log in menu -->
+                $(this).next('#login-content').slideToggle();
+                $(this).toggleClass('active');          
+                
+                if ($(this).hasClass('active')) $(this).find('span').html('&#x25B2;')
+                  else $(this).find('span').html('&#x25BC;')
+                })
+                
+                {if isset($edit_message)}
+                    $.notify_osd.create({        <!-- script to display messages -->
+                        'text'        : '{$edit_message}',                          // notification message
+                        'icon'        : '{$style_dir}/images/osd_icons/star.png',   // icon path, 48x48
+                        'sticky'      : false,                                      // if true, timeout is ignored
+                        'timeout'     : 4,                                          // disappears after 6 seconds
+                        'dismissable' : true                                        // can be dismissed manually
+                        });
+
+                {/if}
+            });
+        </script>
 		{block name=javascript_slider} {/block}
 	</head>
 	<body id="body">
@@ -146,11 +169,59 @@
 					<div id="right">
 						<img id="img_bee" src="{$style_dir}images/top_right0{math equation='rand(1,2)'}.png" alt="bee" />
 					</div>
+                    <!--log on menu-->
+                    <div class="log_on_menu">
+                      <ul>
+                        <li id="login">
+                          <a id="login-trigger" href="#">
+                          {if ! isset($user_session.userid)}
+                            Guest<span>▼</span>
+                          {else}
+                            {$user_session.userid}<span>▼</span>
+                          {/if}
+                          </a>
+                          <div id="login-content">                    
+                            {if ! isset($user_session.userid)}
+                                <form action="../../common/login/user_process_login.php" method="post" name="login_form">
+                                <fieldset>
+                                    <input class="standard_tile_input_small" type="text" name="userid" placeholder="Username" required>   
+                                    <input class="standard_tile_input_small" type="password" name="password" placeholder="Password" required>
+                                    <br><br>                               
+                                    <button type="button" value="Login" class="topbutton_cpanel_small" onclick="formhash(this.form, this.form.password);">
+                                        Sign in
+                                    </button>
+                                    <br><br>
+                                    <div class="links_mod_checkbox">
+                                        <input type="checkbox" id="remember_me" name="remember_me" value="1">
+                                        <label for="remember_me"></label>&nbsp;Remember me
+                                    </div> 
+                                    <br>
+                                    <span class="log_on_text"><a href="../../main/front/front.php?action=reset" class="standard_tile_link_black"><i class="fa fa-angle-double-right" aria-hidden="true"></i>&nbsp;Forgot password?</a></span>
+                                    <br>
+                                    <span class="log_on_text"><a href="../../main/front/front.php?action=register" class="standard_tile_link_black"><i class="fa fa-angle-double-right" aria-hidden="true"></i>&nbsp;No account? Sign up now <i class="fa fa-chevron-right" aria-hidden="true"></i></a></span>
+                                </fieldset>
+                                </form>
+                            {else}
+                               <form action="../../common/login/user_process_logout.php" method="post" name="login_form">
+                               <fieldset>
+                                   <span class="log_on_text"><a href="../../admin/" class="standard_tile_link_black"><i class="fa fa-cogs" aria-hidden="true"></i>&nbsp; Control Panel</a></span>
+                                   <br>
+                                   <span class="log_on_text"><a href="../../admin/user/user_detail.php?user_id_selected={$user_session.user_id}" class="standard_tile_link_black"><i class="fa fa-user-circle-o" aria-hidden="true"></i>&nbsp; User Profile</a></span>
+                                   <br><br>                               
+                                   <input type="Submit" value="Sign out" class="topbutton_cpanel_small">
+                               </fieldset>
+                               </form>
+                            {/if}
+                          </div>                     
+                        </li>
+                      </ul>
+                    </div>
+                    <!-- end of log on menu-->
 					{assign var='number' value=1|rand:5}
 					{if $number is odd}
-					<img id="animation" src="{$style_dir}images/animations/animation0{math equation='rand(1,5)'}.gif" alt="animation" />
+                        <img id="animation" src="{$style_dir}images/animations/animation0{math equation='rand(1,5)'}.gif" alt="animation" />
 					{else}
-					<img id="animation_vert" src="{$style_dir}images/animations/animation_vert0{math equation='rand(1,2)'}.gif" alt="animation" />
+                        <img id="animation_vert" src="{$style_dir}images/animations/animation_vert0{math equation='rand(1,2)'}.gif" alt="animation" />
 					{/if}
 				</div>			
 				<nav id="main_nav">
@@ -170,7 +241,7 @@
 				</nav>	
 			</header>
 		</div>
-		<div id="wrapper">
+		<div id="wrapper">            
 			{block name=main_body}{/block}
 		</div>
 		<footer class="footer">

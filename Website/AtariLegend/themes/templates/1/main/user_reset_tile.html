@@ -1,0 +1,39 @@
+{*
+/***************************************************************************
+*                               user_reset_tile.html
+*                            ---------------------------
+*   begin                : Wednesday, June 07, 2017
+*   copyright            : (C) 2017 Atari Legend
+*   email                : martens_maarten@hotmail.command
+*   actual update        : Creation of file
+*
+*   Id:user_reset_tile.html,v 0.1 2017/06/07 Gatekeeper
+*
+***************************************************************************/
+
+//****************************************************************************************
+// This is the user register tile
+//****************************************************************************************
+*}
+{block name=user_reset_tile}
+    <div class="register">
+        <div class="standard_tile">
+        <form action="../../common/login/db_reset.php" method="post" name="reset_form">
+            <h1>RESET PASSWORD</h1>
+            <div class="standard_tile_line"></div>  
+            <br>
+            <div class="standard_tile_explanation" >      
+                <h6>
+                    Did you forget your password? Please enter the email address of your account.
+                </h6>
+            </div>
+            <div class="register_input">
+                <input class="standard_tile_input_small" style="width:70%" type="text" name="email" placeholder="Email(required)" required>
+                <input type="hidden" name="action" value="check_email">
+            </div>
+            <br>
+            <input type="submit" value="REQUEST" class="signinbutton">
+        </form>
+        </div>
+    </div>
+{/block}
