@@ -261,11 +261,18 @@
                       <ul>
                         <li id="login">
                           <a id="login-trigger" href="#">
-                          {if ! isset($user_session.userid)}
-                            Guest<span>▼</span>
-                          {else}
-                            {$user_session.userid}<span>▼</span>
-                          {/if}
+                           {if ! isset($user_session.userid)}
+                               <div id="log_on_button"><i class="fa fa-user-circle fa-lg" aria-hidden="true" ></i>&nbsp; Guest<span>▼</span></div>
+                               <div id="log_on_button_480"><i class="fa fa-user-circle fa-lg" aria-hidden="true"></i></div>
+                           {else}
+                               {if $user_session.extension == ''}
+                                   <div id="log_on_button"><i class="fa fa-user-circle fa-lg" aria-hidden="true"></i>&nbsp; {$user_session.userid}<span>▼</span></div>
+                                   <div id="log_on_button_480"><i class="fa fa-user-circle fa-lg" aria-hidden="true" style="color:green;"></i></div>
+                               {else}
+                                   <div id="log_on_button"><img src="../../includes/show_image.php?file={$user_session.image}&amp;resize=23,null,null,null" alt="Avatar" class="log_on_avatar" style="display:inline;">&nbsp; {$user_session.userid}<span>▼</span></div>
+                                   <div id="log_on_button_480"><img src="../../includes/show_image.php?file={$user_session.image}&amp;resize=23,null,null,null" alt="Avatar" class="log_on_avatar" style="display:inline;"></div>
+                               {/if} 
+                           {/if}
                           </a>
                           <div id="login-content">                    
                             {if ! isset($user_session.userid)}

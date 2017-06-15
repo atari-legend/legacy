@@ -32,8 +32,10 @@ if (login_check($mysqli) == true) {
     $smarty->assign('user_session', array(
         'userid' => $_SESSION['userid'],
         'user_id' => $_SESSION['user_id'],
-        'permission' => $_SESSION['permission']
-    ));
+        'permission' => $_SESSION['permission'],
+        'extension' => $_SESSION['image'],
+        'image' => "$user_avatar_path$_SESSION[user_id].$_SESSION[image]"
+    )); 
 }
 
 

@@ -94,7 +94,7 @@ function md5_test($userid, $md5_password, $password, $mysqli) {
 
 function login($userid, $password, $mysqli) {
     // Using prepared statements means that SQL injection is not possible.
-    if ($stmt = $mysqli->prepare("SELECT user_id, userid, sha512_password, salt, permission
+    if ($stmt = $mysqli->prepare("SELECT user_id, userid, sha512_password, salt, permission, avatar_ext
         FROM users
        WHERE userid = ?
         LIMIT 1")) {
@@ -103,7 +103,7 @@ function login($userid, $password, $mysqli) {
         $stmt->store_result();
         
         // get variables from result.
-        $stmt->bind_result($user_id, $userid, $db_password, $salt, $permission);
+        $stmt->bind_result($user_id, $userid, $db_password, $salt, $permission, $avatar_ext);
         $stmt->fetch();
         // hash the password with the unique salt.
         $password = hash('sha512', $password . $salt);
@@ -129,6 +129,7 @@ function login($userid, $password, $mysqli) {
                     $_SESSION['userid']       = $userid;
                     $_SESSION['permission']   = $permission;
                     $_SESSION['login_string'] = hash('sha512', $password . $user_browser);
+                    $_SESSION['image']        = $avatar_ext;
                     // Login successful.
                     return true;
                 } else {
@@ -188,6 +189,7 @@ function login_check($mysqli) {
         $_SESSION['userid'] = $user['userid'];
         $_SESSION['user_id'] = $user['user_id'];
         $_SESSION['permission'] = $user['permission'];
+        $_SESSION['image'] .= $user['avatar_ext'];
         
         // update last visit
         $now = time();

@@ -36,6 +36,7 @@ $sidebutton-cpanel-bg:0;
 $menu-sub-button-font:0;
 $menu-sub-button-height:0;
 $log_on_bg:0;
+$log_on_border:0;
 
 @if $skin-name == tos {
     $menu-top: 0;
@@ -63,6 +64,7 @@ $log_on_bg:0;
     $menu-sub-button-font: 16px;
     $menu-sub-button-height: 30px;
     $log_on_bg: white;
+    $log_on_border: 1px solid black; 
 } @else if $skin-name == picasso {
     $menu-top: 220px;
     $menu-opacity: 1;
@@ -97,6 +99,7 @@ $log_on_bg:0;
     $menu-sub-button-font: 16px;
     $menu-sub-button-height: 30px;
     $log_on_bg: #161c71;
+    $log_on_border: 1px solid white; 
 } @else if $skin-name == legacy {
     $menu-top: 225px;
     $menu-opacity: .8;
@@ -125,6 +128,7 @@ $log_on_bg:0;
     $menu-sub-button-font: 15px;
     $menu-sub-button-height: 26px;
     $log_on_bg: #122323;
+    $log_on_border: 1px solid black; 
 }
 
 //* ---------the side menu--------*/
@@ -940,6 +944,8 @@ header nav input {
 .log_on_menu #login {
   border-right: $menu-top-button-border-left; 
   border-left: $menu-top-button-border-left; 
+  padding: 5px 7px;
+  border: medium none;
 }
 
 .log_on_menu #signup a {
@@ -975,7 +981,12 @@ header nav input {
 .log_on_menu #login-content {
   display: none;
   position: absolute;
-  top: 24px;
+  @if $skin-name != tos 
+  {
+    top: 39px;
+  } @else {
+    top: 36px;
+  }
   right: 0;
   z-index: 999;    
   background-color: $log_on_bg;
@@ -1011,4 +1022,23 @@ textarea::-moz-placeholder {
 input:-ms-input-placeholder,
 textarea:-ms-input-placeholder {
   color: #fff;
+}
+
+.log_on_avatar{
+    border-radius: 50%;
+    diplay: inline; 
+    float: left;
+    border: $log_on_border;
+}
+
+@media screen and (max-width: 480px) {
+    #log_on_button{display: none;}   
+    .log_on_avatar{margin-top:3px;}
+    .log_on_menu ul{border:none;}
+    .log_on_menu #login{padding: 2px 0px;}
+    .log_on_menu #login-trigger:hover{color: $menu-top-button-color; background-color: $sidebutton-bg;}
+}
+
+@media screen and (min-width: 481px) {
+    #log_on_button_480{display: none;}
 }
