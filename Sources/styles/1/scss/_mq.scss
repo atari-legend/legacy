@@ -22,9 +22,12 @@
     #welcome {margin-bottom: 20px;}
 }
 
+@media screen and (max-width: 1279px) {
+    #welcome {margin-top: 0px;}
+} 
 
 //*----------------------------------------------------------
-//logon tile --> front page
+//logon tile --> front page --> Not used anymore
 //------------------------------------------------------------ */
 //* 2 tiles and background welcome image */
 @media screen and (min-width: 640px) and (max-width: 800px) {
@@ -34,6 +37,24 @@
 //* 1 tile */
 @media screen and (max-width: 639px) {
     .logon {
+        width: 100%;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+}
+
+
+//*----------------------------------------------------------
+//Register tile --> front page
+//------------------------------------------------------------ */
+//* 2 tiles and background welcome image */
+@media screen and (min-width: 640px) and (max-width: 1279px) {
+    .register {margin-top: 0; margin-bottom:20px;}
+}
+
+//* 1 tile */
+@media screen and (max-width: 639px) {
+    .register {
         width: 100%;
         margin-top: 20px;
         margin-bottom: 20px;
@@ -75,10 +96,6 @@
 //*----------------------------------------------------------
 //datequote tile - front page
 //------------------------------------------------------------ */
-//* 1 and 2 tiles */
-@media screen and (max-width: 800px) {
-    .datequote_position_front {margin-top: 0;}
-}
 
 @media screen and (min-width: 1495px){
     .datequote_position_front {
@@ -89,19 +106,12 @@
 
 @media screen and (max-width: 1494px){
     .datequote_position_front {
-        margin-top:420px;
-    }
-}
-
-@media screen and (max-width: 800px){
-    .datequote_position_front {
-        margin-top:400px;
+        float: right;
     }
 }
 
 @media screen and (max-width: 639px){
     .datequote_position_front {
-        margin-top:420px;
     }
 }
 
@@ -109,10 +119,18 @@
 //*----------------------------------------------------------
 //Who is it - front page
 //------------------------------------------------------------ */
-@media screen and (min-width: 1495px){
-    .whoisit_position_front {float: right;}
+@media screen and (min-width: 1280px){
+    .whoisit_position_front {
+        float: right;
+        margin-top: 20px;
+    }
 }
 
+@media screen and (max-width: 480px){
+    .whoisit_position_front {
+        margin-top: 20px;
+    }
+}
 
 //*----------------------------------------------------------
 //Latest reviews tile - front page

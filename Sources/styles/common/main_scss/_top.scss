@@ -84,19 +84,19 @@
         border-style: solid;
         @if $skin-name == legacy {
             border-bottom-width: 7px;
-            border-bottom-color: #00d3d3;
+            //*border-bottom-color: #00d3d3;*/
             box-shadow: 0 0 7px #00d3d3;
             background: linear-gradient(#175f5f, #000);
             //* Standard syntax (must be last) */
         } @else if $skin-name == tos {
             border-bottom-width: 2px;
-            border-bottom-color: #000;
+            //*border-bottom-color: #000;*/
             box-shadow: 3px 3px 5px #888;
             background: linear-gradient(#175f5f, #23f001);
             //* Standard syntax (must be last) */
         } @else {
             border-bottom-width: 7px;
-            border-bottom-color: #161c71;
+            //*border-bottom-color: #161c71;*/
             box-shadow: 0 0 7px #161c71;
             background: linear-gradient(#161c71, #000);
             //* Standard syntax (must be last) */
@@ -145,4 +145,26 @@
     #right {
         width: 35%;
     }
+}
+
+//* these queries are needed to perfect the position of the logo on smartphone view
+
+@media screen and (max-width: 450px) 
+{
+    #logo_img_480{margin-left: -3px;}
+}
+
+@media screen and (max-width: 400px)
+{
+    #logo_img_480{margin-left: -5px;}
+}
+
+@media screen and (max-width: 375px)
+{
+    #logo_img_480{margin-left: -8px;}
+}
+
+@media screen and (max-width: 350px)
+{
+    #logo_img_480{margin-left: -11px;}
 }

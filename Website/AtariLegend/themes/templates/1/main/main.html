@@ -32,6 +32,7 @@
 		<link type="text/css" href="{$style_dir}css/style.css" type="text/css" rel="stylesheet" id="main_stylesheet">
 		<link type="text/css" href="{$style_dir}css/jquery-ui.css" rel="Stylesheet">
         <link type="text/css" href="{$style_dir}css/notify-osd.css" hreflang="en" rel="stylesheet">
+        <link type="text/css" href="{$style_dir}css/animsition.min.css" hreflang="en" rel="stylesheet">
 		<link rel="icon" href="{$template_dir}includes/icons/favicon.png"> <!-- fav icon -->
 		<!-- start - get the icons used for mobile devices -->
 		<link rel="apple-touch-icon-precomposed" sizes="57x57" href="{$template_dir}includes/icons/icon-57x57.png">
@@ -175,9 +176,16 @@
                         <li id="login">
                           <a id="login-trigger" href="#">
                           {if ! isset($user_session.userid)}
-                            Guest<span>▼</span>
+                            <div id="log_on_button"><i class="fa fa-user-circle fa-lg" aria-hidden="true" ></i>&nbsp; Guest<span>▼</span></div>
+                            <div id="log_on_button_480"><i class="fa fa-user-circle fa-lg" aria-hidden="true" ></i></div>
                           {else}
-                            {$user_session.userid}<span>▼</span>
+                            {if $user_session.extension == ''}
+                                <div id="log_on_button"><i class="fa fa-user-circle fa-lg" aria-hidden="true" style="color:green;"></i>&nbsp; {$user_session.userid}<span>▼</span></div>
+                                <div id="log_on_button_480"><i class="fa fa-user-circle fa-lg" aria-hidden="true" style="color:green;"></i></div>
+                            {else}
+                                <div id="log_on_button"><img src="../../includes/show_image.php?file={$user_session.image}&amp;resize=23,null,null,null" alt="Avatar" class="log_on_avatar" style="display:inline;">&nbsp; {$user_session.userid}<span>▼</span></div>
+                                <div id="log_on_button_480"><img src="../../includes/show_image.php?file={$user_session.image}&amp;resize=23,null,null,null" alt="Avatar" class="log_on_avatar" style="display:inline;"></div>
+                            {/if} 
                           {/if}
                           </a>
                           <div id="login-content">                    
