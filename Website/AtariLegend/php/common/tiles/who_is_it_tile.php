@@ -19,6 +19,7 @@
 $query_interview = $mysqli->query("SELECT  
 						interview_main.interview_id,
 						interview_text.interview_intro,	
+                        interview_text.interview_date,	
 						individuals.ind_id,
 						individuals.ind_name,
 						individual_text.ind_imgext,
@@ -40,10 +41,26 @@ $v_ind_image .= $sql_interview['ind_id'];
 $v_ind_image .= '.';
 $v_ind_image .= $sql_interview['ind_imgext'];
 
+$interview_date = date("d/m/Y", $sql_interview['interview_date']);
+
+//Structure and manipulate the comment text
+$int_text = $sql_interview['interview_intro']; 
+    
+$pos_start = strpos($int_text, '[frontpage]');
+$pos_start = $pos_start;
+
+$pos_end = strpos($int_text, '[/frontpage]');
+$pos_end = $pos_end;
+
+$nr_char = $pos_end - $pos_start;
+
+$int_text = substr($int_text, $pos_start, $nr_char);
+
 //fixxx the enters 
-$int_text = nl2br($sql_interview['interview_intro']);
+$int_text = stripslashes($int_text);
 $int_text = InsertALCode($int_text); // disabled this as it wrecked the design.
 $int_text = trim($int_text);
+$int_text = RemoveSmillies($int_text); 
 
 	
 $smarty->assign('who_is_it',
@@ -52,5 +69,6 @@ $smarty->assign('who_is_it',
 		 	   'ind_img' => $v_ind_image,
 			   'int_id' => $sql_interview['interview_id'],
 			   'int_text' => $int_text,
+               'int_date' => $interview_date,
 			   'int_userid' => $sql_interview['userid']));
 ?>
