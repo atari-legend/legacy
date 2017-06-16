@@ -353,8 +353,8 @@
                 {include file='1/main/who_is_it_tile.html'}
             {/block}
         </div>
-
-        <!--this column is only visible in the 3 colum mode and 1 column mode-->
+        
+        <!--this column is only visible in the 3 colum mode-->
         <div class="column_left">
             <!--Start latest news tile-->
             {block name=latest_news_tile}
@@ -366,7 +366,46 @@
                 {include file='1/main/date_quote_tile.html'}
             {/block}
         </div>
-
+        
+        <!--this column is only visible in the 1 colum mode-->
+        <div class="column_phone">
+             <!--register account tile -->
+            {if (isset($action)) and ($action == 'register')}
+                {block name=user_register_tile}
+                    {include file='1/main/user_register_tile.html'}
+                {/block}
+            {/if}
+            
+            <!--password reset tile -->
+            {if (isset($action)) and ($action == 'reset')}
+                {block name=user_reset_tile}
+                    {include file='1/main/user_reset_tile.html'}
+                {/block}
+            {/if}
+            
+            <!--password reset tile - enter new pwd -->
+            {if (isset($action)) and ($action == 'new_pwd')}
+                {block name=user_reset_tile}
+                    {include file='1/main/user_new_pwd_tile.html'}
+                {/block}
+            {/if}
+            
+            <!--Start latest news tile-->
+            {block name=latest_news_tile}
+                {include file='1/main/latest_news_tile.html'}
+            {/block}
+            
+            <!--Start "Who is it" tile-->
+            {block name=who_is_it_tile}
+                {include file='1/main/who_is_it_tile.html'}
+            {/block}
+            
+            <!--Start date quote tile-->
+            {block name=date_quote_tile}
+                {include file='1/main/date_quote_tile.html'}
+            {/block}
+        </div>
+        
         <!--this column is only visible in the 3 colum mode and 1 column mode-->
         <div class="column_center">
             <!--Start latest reviews tile-->
@@ -437,10 +476,10 @@
 
         <!--this column is only visible in the 2 colum mode -->
         <div class="column_right_tab">
-            <!--Start date quote tile-->
+            <!--Start date quote tile
             {block name=date_quote_tile}
                 {include file='1/main/date_quote_tile.html'}
-            {/block}
+            {/block}-->
         </div>
     </div>
   </div>

@@ -21,6 +21,7 @@ $query_links = $mysqli->query("SELECT
 						website.website_name,
 						website.website_url,
 						website.website_imgext,
+                        website.website_date,
 						users.userid,
 						website_description.website_description_text
 						FROM website
@@ -49,5 +50,6 @@ $smarty->assign('hotlinks',
 		 	'website_img' =>$v_link_image,
 			'website_url' => $sql_links['website_url'],
 			'website_text' => $website_text,
+            'website_date' => date("d/m/Y", $sql_links['website_date']),
 			'userid' => $sql_links['userid']));
 ?>

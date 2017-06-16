@@ -65,6 +65,10 @@
 //*----------------------------------------------------------
 //latest news tile --> front page
 //------------------------------------------------------------ */
+@media screen and (max-width: 639px){
+     .latest_news {margin-top: 20px;}
+}
+
 @media screen and (min-width: 640px) and (max-width: 800px) {
     .latest_news {margin-top: 395px;}
 }
@@ -1013,6 +1017,7 @@
     }
 
     .column_right {display: none;}
+    .column_phone {display: none;}
     .column_left_tab { width: 48%; float: left;}
     .column_right_tab { width: 48%; float: right;}
     .column_wide_right {width: 48%; float: right;}
@@ -1021,18 +1026,19 @@
 
 //* 1 tile and a simplified intro screen */
 @media screen and (max-width: 639px) {
-    .column_left { width: 100%; }
+    .column_left { display: none;}
     .column_center { width: 100%; margin-left: 0;}
     .column_right { width: 100%; }
     .column_right_tab {display: none;}
     .column_left_tab {display: none;}
-    .column_wide_right { width: 100%;}
+    .column_wide_right {display: none;}
     .column_wide_left {display: none;}
 }
 
 @media screen and (min-width: 801px) {
     .column_right_tab {display: none;}
     .column_left_tab {display: none;}
+    .column_phone {display: none;}
 }
 
 //*  4 tiles and background welcome image */
@@ -1045,6 +1051,7 @@
     .column_left {display: none;}
     .column_center {display: none;}
     .column_right {display: none;}
+    .column_phone {display: none;}
 }
 
 @media screen and (min-width: 450px) and (max-width: 639px) {
