@@ -322,3 +322,74 @@ figure.effect-bubba:hover p {
        text-align:center;
     }  
 }
+
+/*--------------------***/
+/*****  Statistics  *****/
+/*--------------------***/
+@if $skin-name == legacy {
+    .statistics_dark { color: #ccc; }
+    .standard_table_list_stats tr:nth-child(even) { background-color: #122323; }
+    .standard_table_list_stats tr:nth-child(odd) { background-color: #0d2e2e; }
+    .stats_text{
+        font-size: 11pt;
+        font-weight: 100;
+        color: #fff;
+        text-align: center;
+    }
+}    
+@elseif $skin-name == tos {    
+    .statistics_dark { color: #666; }
+    .standard_table_list_stats tr:nth-child(even) {  background: linear-gradient(to right, #fff, #acacac); }
+    .standard_table_list_stats tr:nth-child(odd) { background: linear-gradient(to right, #fff, #23f001); }
+    .stats_text{
+        font-size: 16px;
+        font-weight: 100;
+        color: #3c3c3c;
+    }
+}
+@elseif $skin-name == picasso {
+    .statistics_position_front {margin-bottom: 20px;}
+    .statistics_dark {color: #161c71;}
+    .standard_table_list_stats tr:nth-child(even) {  background: #a6a6a6; }
+    .standard_table_list_stats tr:nth-child(odd) { background: #6a6a6a; } 
+    .stats_text{
+        font-size: 12pt;
+        font-weight: 100;
+        color: #000;
+        text-align: center;
+    }
+}
+
+.standard_table_list_stats{
+    @extend .standard_table_list;
+    border:0;
+    font-size: 11pt;
+}
+
+/*-------------------------***/
+/*****  Latest comments  *****/
+/*------------------------***/
+@if $skin-name == legacy {
+    .latest_comments_text{font-size: 11pt;color: #fff;}
+}@elseif $skin-name == tos {  
+    .latest_comments_text{font-size: 16px;color: #3c3c3c;}
+}@elseif $skin-name == picasso {
+    .latest_comments_text{font-size: 12pt;color: #000;} 
+}
+    
+.latest_comments_text{
+    font-weight: 100;
+    margin-left:5px;
+    margin-right:5px;
+    margin-bottom:15px;
+    margin-top:15px;
+    float:left;
+}
+
+.standard_table_list_comments{
+    @extend .standard_table_list_stats;
+}
+
+.standard_table_list_comments td{
+    border-bottom: solid 2px #000;
+}

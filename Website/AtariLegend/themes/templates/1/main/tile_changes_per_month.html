@@ -2,12 +2,12 @@
 /***************************************************************************
 *                                tile_changes_per_month.html
 *                            ---------------------------------
-*   begin                : Thursday, May 11, 2017
+*   begin                : Saturday, June 24, 2017
 *   copyright            : (C) 2017 Atari Legend
 *   email                : martens_maarten@hotmail.com
 *   actual update        : Creation of file
 *
-*   Id: tile_changes_per_month.html,v 0.1 2017/05/11 20:43 ST Graveyard
+*   Id: tile_changes_per_month.html,v 0.1 2017/06/24 20:43 ST Graveyard
 *
 ***************************************************************************/
 
@@ -28,7 +28,7 @@ window.onload = function () {
     
     var myLineChart = new Chart(ctx_change_line, {
         responsive: true,
-        type: 'doughnut',
+        type: 'pie',
         data: {
             labels: labels_cl_monthly,
             datasets: [
@@ -55,8 +55,9 @@ window.onload = function () {
 	<h1>STATS</h1>
 		<div class="standard_tile_line"></div>
 		<div class="standard_list_entry">
-            <div class="standard_table_center">
-                <br>This chart represents the nr of changes made to the DB each month for the past year. Hover over the chart for more info.
+            <div class="standard_table_center" style="float:left;margin-left:5px;">
+                <br><h6>This pie chart represents the nr of changes made to the DB each month over the past year. Hover over the chart for more info. 
+                For all the details of the changes made, please visit the <a href="../../admin/administration/change_log.php" class="standard_tile_link_cpanel">change log</a> section of the control panel.</h6><br><br>
             </div>
 			<div class="standard_tile_text">   
                  <div class="line_changelog" style="width:98%;margin-left:auto;margin-right:auto;">

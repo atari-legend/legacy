@@ -1,0 +1,79 @@
+//**************************************************************/
+//**************************TOS SKIN*************************/
+//**************************************************************/
+//**************************************************************/
+//***This is the css code for the game pages of the main site***/
+//**************************************************************/
+
+
+//****************Games main search page************************/
+
+.game_button{
+    @extend .topbutton;
+    max-width:38px;
+    height:25px;
+    line-height: 25px;
+}
+
+#games_nav{
+    @extend #main_nav;
+}
+
+#games_nav_ul{
+    @extend #main_nav_ul;
+}
+
+.games_main_row_site{
+    display: table;
+    width: 75%;
+    margin: auto;
+}
+
+.games_main_text_short{
+    display: table-cell;
+    width: 10%;
+    font-weight: bold;
+}
+
+.games_main_input_site{
+    display: table-cell;
+    width: 65%;
+}
+
+.games_main_input_site_text{
+    display: table-cell;
+    width: 65%;
+}
+
+#games_main_small_select_site{
+    width: 10%;
+    height: 25px;
+}
+
+.standard_tile_input_small_site{
+    @extend .standard_tile_input_small;
+    width: 98.5%; 
+}
+
+#games_main_select_site {
+    width: 100%;
+    height: 25px;
+    margin-top: 0;
+}
+
+.games_main_container{ display: flex; width:75%; margin-left:13%; }
+ 
+#child_1_games,
+#child_2_games {
+    width: 47.5%;
+    border-top : 1px solid #666666;
+    border-bottom : 1px solid #666666;
+}
+
+#child_1_games{border-left : 1px solid #666666;}
+#child_2_games{border-right : 1px solid #666666;}
+
+#child_3_games {width: 5%; border-top: 1px solid #666666; border-bottom : 1px solid #666666;}
+
+.games_main_text_check{width:80%;display: table-cell;}
+.games_main_input_check{width:10%;display: table-cell;}

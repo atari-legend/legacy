@@ -1,0 +1,449 @@
+{*
+/***************************************************************************
+                              games_main.html
+*                            --------------------------
+*   begin                : Friday, June 16, 2017
+*   copyright            : (C) 2017 Atari Legend
+*   email                : admin@atarilegend.com
+*
+*   Id: games_main.HTML,v 0.10 2017/06/16 20:42 Gatekeeper - creation of file
+*
+***************************************************************************/
+
+************************************************************************************************
+The main game page
+************************************************************************************************
+*}
+
+{extends file='1/main/main.html'}
+
+{block name=main_body}
+    <div id="main" class="main_container_cpanel">
+        <div class="content_box_cpanel" id="column_left_cpanel">
+            <br>
+            {block name=left_tile}
+                {if $mode == "advanced"} 
+                    {if isset($stats) and ($stats == 1)}
+                         {include file='1/main/statistics_tile.html'}
+                    {else}
+                        {include file='1/main/tile_changes_per_month.html'}
+                    {/if}
+                    <br>
+                    {include file='1/main/latest_comments_tile.html'}
+                {else}
+                    {if isset($stats) and ($stats == 1)}
+                        {include file='1/main/statistics_tile.html'}
+                    {else}
+                        {include file='1/main/latest_comments_tile.html'}
+                    {/if}
+                {/if}
+                
+            {/block}
+        </div>
+        <div class="content_box_cpanel" id="column_center_cpanel">
+            <br>
+            <div class="standard_tile" id="games_main">
+                <h1>GAMES</h1>
+                <div class="standard_tile_line"></div>
+                <div class="standard_tile_text">
+                    <h6>
+                        Welcome to the game section. The place to be for every Atari ST and retro gaming nutcase. Enjoy your stay! Search for a game by using any of the functionalities below. 
+                        Combinations are allowed. There are currently <b>{$games_nr}</b> games in the DB. For more statistics of the db, click <a href="../../main/games/games_main.php?mode={$mode}&stats=1" class="standard_tile_link_cpanel">here</a>.
+                        if there is data missing and you are willing to contribute, please get in touch with the team.    
+                    </h6>
+                    <div id="games_main_space">
+                        <br>
+                        <br>
+                    </div>
+                    <nav id="games_nav">
+					<ul id="games_nav_ul">
+                        <li><a href="" class="game_button" id="a">#</a></li>
+						<li><a href="" class="game_button" id="a">A</a></li>
+						<li><a href="" class="game_button" id="b">B</a></li>
+						<li><a href="" class="game_button" id="a">C</a></li>
+						<li><a href="" class="game_button" id="a">D</a></li>
+						<li><a href="" class="game_button" id="a">E</a></li>
+						<li><a href="" class="game_button" id="a">F</a></li>
+						<li><a href="" class="game_button" id="a">G</a></li>
+						<li><a href="" class="game_button" id="a">H</a></li>
+                        <li><a href="" class="game_button" id="a">I</a></li>
+						<li><a href="" class="game_button" id="a">J</a></li>
+						<li><a href="" class="game_button" id="a">K</a></li>
+						<li><a href="" class="game_button" id="a">L</a></li>
+						<li><a href="" class="game_button" id="a">M</a></li>
+						<li><a href="" class="game_button" id="a">N</a></li>
+						<li><a href="" class="game_button" id="a">O</a></li>
+						<li><a href="" class="game_button" id="a">P</a></li>
+                        <li><a href="" class="game_button" id="a">Q</a></li>
+						<li><a href="" class="game_button" id="a">R</a></li>
+						<li><a href="" class="game_button" id="a">S</a></li>
+						<li><a href="" class="game_button" id="a">T</a></li>
+						<li><a href="" class="game_button" id="a">U</a></li>
+						<li><a href="" class="game_button" id="a">V</a></li>
+						<li><a href="" class="game_button" id="a">W</a></li>
+						<li><a href="" class="game_button" id="a">X</a></li>
+                        <li><a href="" class="game_button" id="a">Y</a></li>
+						<li><a href="" class="game_button" id="a">Z</a></li>
+					</ul>
+                    </nav>
+                </div>
+                <div class="standard_tile_line"></div>
+                <br>
+                <br>
+                <form action="../games/games_list.php" method="get" name="game_search">
+                <div id="games_main_parent">
+                    <div class="games_main_row_site">
+                        <div class="games_main_text_site"><h6>Title (a-z)</h6></div>
+                        <div class="games_main_text_short"><h6>:</h6></div>
+                        <div class="games_main_input_site">
+                            <select name="gamebrowse" id="games_main_select_site">
+                                <option value="" SELECTED>-</option>
+                                {html_options values=$az_value output=$az_output}
+                            </select>
+                       </div>
+                    </div>
+                    <div class="games_main_row_site">
+                        <div class="games_main_text_site_site"><h6>Title</h6></div>
+                        <div class="games_main_text_short"><h6>:</h6></div>
+                        <div class="games_main_input_site_text">
+                            <input type="text" name="gamesearch" value="" class="standard_tile_input_small_site">
+                        </div>
+                    </div>
+                    <div class="games_main_row_site">
+                        <div class="games_main_text_site"><h6>By Publisher</h6></div>
+                        <div class="games_main_text_short"><h6>:</h6></div>
+                        <div class="games_main_input_site">
+                            <select name="publisher" id="games_main_select_site">
+                                <option value="-" SELECTED>-</option>
+                                {foreach from=$company_publisher item=line}
+                                    <option value="{$line.comp_id}">{$line.comp_name}</option>
+                                {/foreach}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="games_main_row_site">
+                        <div class="games_main_text_site"><h6>By Developer</h6></div>
+                        <div class="games_main_text_short"><h6>:</h6></div>
+                        <div class="games_main_input_site">
+                            <select name="developer" id="games_main_select_site">
+                                <option value="-" SELECTED>-</option>
+                                {foreach from=$company_developer item=line}
+                                    <option value="{$line.comp_id}">{$line.comp_name}</option>
+                                {/foreach}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="games_main_row_site">
+                        <div class="games_main_text_site"><h6>Category</h6></div>
+                        <div class="games_main_text_short"><h6>:</h6></div>
+                        <div class="games_main_input_site">
+                            <select name="Category" id="games_main_select_site">
+                                <option value="-" SELECTED>-</option>
+                                {foreach from=$category item=line}
+                                    <option value="{$line.cat_id}">{$line.cat_name}</option>
+                                {/foreach}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="games_main_row_site">
+                        <div class="games_main_text_site"><h6>Release year</h6></div>
+                        <div class="games_main_text_short"><h6>:</h6></div>
+                        <div class="games_main_input_site">
+                            <select name="game_year" id="games_main_select_site">
+                                <option value="-" SELECTED>-</option>
+                                {foreach from=$game_year item=line}
+                                    <option value="{$line.game_year}">{$line.game_year}</option>
+                                {/foreach}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="games_main_row_site">
+                        <div class="games_main_text_site"><h6>Download</h6></div>
+                        <div class="games_main_text_short"><h6>:</h6></div>
+                        <div class="games_main_input_site">
+                            <div class="games_check_row">
+                                <div class="links_mod_checkbox">
+                                    <input type="checkbox" id="download" name="download" value="1">
+                                    <label for="download"></label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="games_main_row_site">
+                        <div class="games_main_text_site"><h6>Screenshot</h6></div>
+                        <div class="games_main_text_short"><h6>:</h6></div>
+                        <div class="games_main_input_site">
+                            <div class="games_check_row">
+                                <div class="links_mod_checkbox">
+                                    <input type="checkbox" id="screenshot" name="screenshot" value="1">
+                                    <label for="screenshot"></label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="games_main_row_site">
+                        <div class="games_main_text_site"><h6>Boxscan</h6></div>
+                        <div class="games_main_text_short"><h6>:</h6></div>
+                        <div class="games_main_input_site">
+                            <div class="games_check_row">
+                                <div class="links_mod_checkbox">
+                                    <input type="checkbox" id="boxscan" name="boxscan" value="1">
+                                    <label for="boxscan"></label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="games_main_row_site">
+                        <div class="games_main_text_site"><h6>Review</h6></div>
+                        <div class="games_main_text_short"><h6>:</h6></div>
+                        <div class="games_main_input_site">
+                            <div class="games_check_row">
+                                <div class="links_mod_checkbox">
+                                    <input type="checkbox" id="review" name="review" value="1">
+                                    <label for="review"></label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {if $mode == "advanced"}
+                    <br><br>
+                    	<div class="games_main_container">
+                            <div class="games_main_child" id="child_1_games">
+                                <br>
+                                <div class="games_main_row_site">
+                                    <div class="games_main_text_check"><h6>STE only</h6></div>
+                                    <div class="games_main_text_short"><h6>:</h6></div>
+                                    <div class="games_main_input_check">
+                                         <div class="games_check_row">
+                                            <div class="links_mod_checkbox">
+                                                <input type="checkbox" id="ste_only" name="ste_only" value="1">
+                                                <label for="ste_only"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="games_main_row_site">
+                                    <div class="games_main_text_check"><h6>STE enhanced</h6></div>
+                                    <div class="games_main_text_short"><h6>:</h6></div>
+                                    <div class="games_main_input_check">
+                                         <div class="games_check_row">
+                                            <div class="links_mod_checkbox">
+                                                <input type="checkbox" id="ste_enhanced" name="ste_enhanced" value="1">
+                                                <label for="ste_enhanced"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="games_main_row_site">
+                                    <div class="games_main_text_check"><h6>Falcon only</h6></div>
+                                    <div class="games_main_text_short"><h6>:</h6></div>
+                                    <div class="games_main_input_check">
+                                         <div class="games_check_row">
+                                            <div class="links_mod_checkbox">
+                                                <input type="checkbox" id="falcon_only" name="falcon_only" value="1">
+                                                <label for="falcon_only"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="games_main_row_site">
+                                    <div class="games_main_text_check"><h6>Falcon enhanced</h6></div>
+                                    <div class="games_main_text_short"><h6>:</h6></div>
+                                    <div class="games_main_input_check">
+                                         <div class="games_check_row">
+                                            <div class="links_mod_checkbox">
+                                                <input type="checkbox" id="falcon_enhanced" name="falcon_enhanced" value="1">
+                                                <label for="falcon_enhanced"></label>
+                                            </div>                              
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="games_main_row_site">
+                                    <div class="games_main_text_check"><h6>Falcon RGB</h6></div>
+                                    <div class="games_main_text_short"><h6>:</h6></div>
+                                    <div class="games_main_input_check">
+                                        <div class="games_check_row">
+                                            <div class="links_mod_checkbox">
+                                                <input type="checkbox" id="falcon_rgb" name="falcon_rgb" value="1">
+                                                <label for="falcon_rgb"></label>
+                                            </div>                               
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="games_main_row_site">
+                                    <div class="games_main_text_check"><h6>Falcon VGA</h6></div>
+                                    <div class="games_main_text_short"><h6>:</h6></div>
+                                    <div class="games_main_input_check">
+                                        <div class="games_check_row">
+                                            <div class="links_mod_checkbox">
+                                                <input type="checkbox" id="falcon_vga" name="falcon_vga" value="1">
+                                                <label for="falcon_vga"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="games_main_row_site">
+                                    <div class="games_main_text_check"><h6>Monochrome</h6></div>
+                                    <div class="games_main_text_short"><h6>:</h6></div>
+                                    <div class="games_main_input_check">
+                                        <div class="games_check_row">
+                                            <div class="links_mod_checkbox">
+                                                <input type="checkbox" id="monochrome" name="monochrome" value="1">
+                                                <label for="monochrome"></label>
+                                           </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="games_main_row_site">
+                                    <div class="games_main_text_check"><h6>Non-Commercial</h6></div>
+                                    <div class="games_main_text_short"><h6>:</h6></div>
+                                    <div class="games_main_input_check">
+                                        <div class="games_check_row">
+                                            <div class="links_mod_checkbox">
+                                                <input type="checkbox" id="free" name="free" value="1">
+                                                <label for="free"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                            </div>
+                            <div class="games_main_child" id="child_3_games"><br><br></div>
+                            <div class="games_main_child" id="child_2_games">
+                               <br>
+                               <div class="games_main_row_site">
+                                    <div class="games_main_text_check"><h6>In development</h6></div>
+                                    <div class="games_main_text_short"><h6>:</h6></div>
+                                    <div class="games_main_input_check">
+                                        <div class="games_check_row">
+                                            <div class="links_mod_checkbox">
+                                                <input type="checkbox" id="development" name="development" value="1">
+                                                <label for="development"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="games_main_row_site">
+                                    <div class="games_main_text_check"><h6>Unreleased</h6></div>
+                                    <div class="games_main_text_short"><h6>:</h6></div>
+                                    <div class="games_main_input_check">
+                                        <div class="games_check_row">
+                                            <div class="links_mod_checkbox">
+                                                <input type="checkbox" id="unreleased" name="unreleased" value="1">
+                                                <label for="unreleased"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="games_main_row_site">
+                                    <div class="games_main_text_check"><h6>STOS</h6></div>
+                                    <div class="games_main_text_short"><h6>:</h6></div>
+                                    <div class="games_main_input_check">
+                                        <div class="games_check_row">
+                                            <div class="links_mod_checkbox">
+                                                <input type="checkbox" id="stos" name="stos" value="1">
+                                                <label for="stos"></label>
+                                                </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="games_main_row_site">
+                                    <div class="games_main_text_check"><h6>Arcade</h6></div>
+                                    <div class="games_main_text_short"><h6>:</h6></div>
+                                    <div class="games_main_input_check">
+                                        <div class="games_check_row">
+                                            <div class="links_mod_checkbox">
+                                                <input type="checkbox" id="arcade" name="arcade" value="1">
+                                                <label for="arcade"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="games_main_row_site">
+                                    <div class="games_main_text_check"><h6>Wanted</h6></div>
+                                    <div class="games_main_text_short"><h6>:</h6></div>
+                                    <div class="games_main_input_check">
+                                        <div class="games_check_row">
+                                            <div class="links_mod_checkbox">
+                                                <input type="checkbox" id="wanted" name="wanted" value="1">
+                                                <label for="wanted"></label>   
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="games_main_row_site">
+                                    <div class="games_main_text_check"><h6>Unfinished</h6></div>
+                                    <div class="games_main_text_short"><h6>:</h6></div>
+                                    <div class="games_main_input_check">
+                                        <div class="games_check_row">
+                                            <div class="links_mod_checkbox">
+                                                <input type="checkbox" id="unfinished" name="unfinished" value="1">
+                                                <label for="unfinished"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="games_main_row_site">
+                                    <div class="games_main_text_check"><h6>SEUCK</h6></div>
+                                    <div class="games_main_text_short"><h6>:</h6></div>
+                                    <div class="games_main_input_check">
+                                        <div class="games_check_row">
+                                            <div class="links_mod_checkbox">
+                                                <input type="checkbox" id="seuck" name="seuck" value="1">
+                                                <label for="seuck"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="games_main_row_site">
+                                    <div class="games_main_text_check"><h6>STAC</h6></div>
+                                    <div class="games_main_text_short"><h6>:</h6></div>
+                                    <div class="games_main_input_check">
+                                        <div class="games_check_row">
+                                            <div class="links_mod_checkbox">
+                                                <input type="checkbox" id="stac" name="stac" value="1">
+                                                <label for="stac"></label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br>
+                            </div>
+                        </div>
+                    {/if}
+                    <br>
+                    <br>
+                    <div class="standard_table_center">
+                        <br>
+                        <input type="submit" value="SEARCH" class="quick_search_games_button">
+                        <br><br>
+                    </div>  
+                    <input type="hidden" name="action" id="action" value="search">
+                    <input type="hidden" name="user_id" id="user_id" value="{$user_id}">
+                </div>
+                <div class="standard_tile_text">
+                    <div class="standard_table_left" style="display:inline-block;">
+                        <a href="../../main/games/games_main.php?mode=standard" class="standard_tile_link">Standard search</a>
+                    </div>
+                    <div class="standard_table_right" style="display:inline-block;float:right;">
+                        <a href="../../main/games/games_main.php?mode=advanced" class="standard_tile_link">Advanced search</a>
+                    </div>
+                </div>
+                </form>
+            </div>
+        </div>
+        <br>
+        <div class="content_box_cpanel" id="column_right_cpanel">
+            {block name=right_tile}
+                {if $mode == "advanced"}
+                    {include file='1/main/tile_screenstar.html'}
+                    <br>
+                    {include file='1/main/who_is_it_tile.html'} 
+                {else}                   
+                    {include file='1/main/tile_changes_per_month.html'}
+                {/if}
+            {/block}        
+        </div>
+    </div>
+    
+{/block}

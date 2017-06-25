@@ -1,0 +1,47 @@
+{* 
+/***************************************************************************
+*                               latest_comments_tile.html
+*                            -------------------------------
+*   begin                : Tuesday, June 22, 2017
+*   copyright            : (C) 2017 Atari Legend
+*   email                : martens_maarten@hotmail.com
+*   actual update        : Creation of file
+*
+*   Id: latest_comments_tile.html,v 0.1 2017/06/22 19:54 ST Graveyard
+*
+***************************************************************************/
+
+//****************************************************************************************
+// This is the 'Latest Comments' tile
+//**************************************************************************************** 
+*}
+{block name=latest_comments_tile}
+<div class="{$statistics_tile}">	
+	<div class="standard_tile">
+		<h1><a href="#" class="standard_tile_link">LATEST COMMENTS</a></h1>
+		<div class="standard_tile_line"></div>
+		<div class="standard_list_entry">
+            <table class="standard_table_list_comments">
+            {foreach from=$comments item=line}
+                <tr>
+                    <td class="standard_table_left">
+                        <span class="standard_tile_subtext" style="font-weight:bold;float:left;margin-left:5px;margin-right:5px;margin-top:15px;">
+                            <a href="#" class>{$line.user_name}</a>
+                        </span>
+                        <span class="standard_tile_subtext"  style="font-weight:bold;float:right;display:inline;margin-left:5px;margin-right:5px;margin-top:15px;">
+                            <a href="#" class>{$line.game}</a>
+                        </span>
+                        <span class="latest_comments_text">{$line.comment}</span>      
+                        <span class="standard_tile_subtext" style="font-weight:bold;float:right;display:inline;margin-right:5px;margin-bottom:15px;">
+                            {$line.date}
+                        </span>
+                        <br><br>
+                    </td>
+                </tr>
+            {/foreach}
+            </table>
+		</div>
+	<div class="standard_tile_line"></div>
+	</div>	
+</div>
+{/block}
