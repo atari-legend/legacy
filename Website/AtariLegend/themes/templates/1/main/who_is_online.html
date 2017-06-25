@@ -2,25 +2,23 @@
 /***************************************************************************
                               who_is_online.html
 *                            --------------------------
-*   begin                : May 11, 2017
+*   begin                : Friday, June 16, 2017
 *   copyright            : (C) 2017 Atari Legend
 *   email                : admin@atarilegend.com
 *
-*   Id: who_is_online.html,v 0.10 2017/05/11 ST Graveyard
+*   Id: who_is_online.html,v 0.10 2017/06/16 20:42 Gatekeeper - creation of file
 *
 ***************************************************************************/
 
 *}
 <link rel="stylesheet" href="{$template_dir}includes/font-awesome-4.7.0/css/font-awesome.min.css"> <!-- Font awesome for icons-->
 
-<div class="standard_tile">
-    <h1>WHO'S ONLINE?</h1>
-	<div class="standard_tile_line"></div>
-	<div class="standard_tile_text">
+
+	<div class="standard_tile_text">    
        <div class="main_stats_container">
 			<table class="standard_table_list">
 			<tr>
-                <td class="online_title">
+                <td class="online_title">  
                     {if $nr_users == '1'}
                         In total there is {$nr_users} registered user online (based on users active over the past 1 minute) :
                     {elseif $nr_users == '0'}
@@ -34,7 +32,7 @@
                 <td class="online_users">
                     {if isset($users_online)}
                         {foreach from=$users_online item=line}
-                            <i class="fa fa-user-o" aria-hidden="true"></i>&nbsp;<a href="../user/user_detail.php?user_id_selected={$line.user_id}" class="left_nav_link">{$line.user_name}</a>&nbsp;&nbsp;
+                            <i class="fa fa-user-o" aria-hidden="true"></i>&nbsp;<a href="#" class="left_nav_link">{$line.user_name}</a>&nbsp;&nbsp;
                         {/foreach}
                     {/if}
                 </td>
@@ -54,7 +52,7 @@
                 <td class="online_users">
                     {if isset($users_24h)}
                         {foreach from=$users_24h item=line}
-                            <i class="fa fa-user-o" aria-hidden="true"></i>&nbsp;<a href="../user/user_detail.php?user_id_selected={$line.user_id}" class="left_nav_link">{$line.user_name}</a>&nbsp;&nbsp;
+                            <i class="fa fa-user-o" aria-hidden="true"></i>&nbsp;<a href="#" class="left_nav_link">{$line.user_name}</a>&nbsp;&nbsp;
                         {/foreach}
                     {/if}
                 </td>
@@ -62,5 +60,5 @@
             </table>
         </div>
     </div>                   
-</div>
+
 

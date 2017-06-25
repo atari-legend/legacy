@@ -34,8 +34,8 @@ if ($current_month == 13)
 
 if ($last_month == 13)
 {
-    $$last_month = 1; 
-    $$last_year = $$last_year + 1;  
+    $last_month = 1; 
+    $last_year = $last_year + 1;  
 }
 
 if ($current_month == 14)

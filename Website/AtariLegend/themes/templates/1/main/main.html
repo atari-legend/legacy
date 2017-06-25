@@ -39,7 +39,7 @@
 		<link rel="apple-touch-icon-precomposed" sizes="72x72" href="{$template_dir}includes/icons/icon-72x72.png">
 		<link rel="apple-touch-icon-precomposed" sizes="114x114" href="{$template_dir}includes/icons/icon-114x114.png">
 		<link rel="apple-touch-icon-precomposed" sizes="144x144" href="{$template_dir}includes/icons/icon-144x144.png">
-		<!-- end - get the icons used for mobile devices -->
+		<!-- end - get the icons used for mobile devices -->    
 		<script type='text/javascript' src="{$template_dir}includes/js/respond.min.js"></script> <!-- script needed for the side menu -->
 		<script type='text/JavaScript' src="{$template_dir}includes/js/sha512.js"></script> <!-- log on security script -->
 		<script type='text/JavaScript' src="{$template_dir}includes/js/md5.js"></script>  <!-- log on security script -->
@@ -126,7 +126,7 @@
 					<div class="container">
 					  <div id="sidebar">
 						  <ul class="side_navigation">
-							<li><a href="" class="sidebutton" id="games_side">GAMES</a></li>
+							<li><a href="../games/games_main.php" class="sidebutton" id="games_side">GAMES</a></li>
 							<li><a href="" class="sidebutton" id="menus_side">MENUS</a></li>
 							<li><a href="" class="sidebutton" id="demos_side">DEMOS</a></li>
 							<li><a href="" class="sidebutton" id="music_side">MUSIC</a></li>
@@ -234,8 +234,8 @@
 				</div>			
 				<nav id="main_nav">
 					<ul id="main_nav_ul">
-						<li><a href="" id="home"></a></li>
-						<li><a href="" class="topbutton" id="games">GAMES</a></li>
+						<li><a href="../front/front.php" id="home"></a></li>
+						<li><a href="../games/games_main.php" class="topbutton" id="games">GAMES</a></li>
 						<li><a href="" class="topbutton" id="menus">MENUS</a></li>
 						<li><a href="" class="topbutton" id="demos">DEMOS</a></li>
 						<li><a href="" class="topbutton" id="music">MUSIC</a></li>
@@ -251,7 +251,13 @@
 		</div>
 		<div id="wrapper">            
 			{block name=main_body}{/block}
+            <div class="main_online">       
+            {block name=who_is_online}
+                {include file='1/main/who_is_online.html'}
+            {/block}
+            </div>
 		</div>
+        
 		<footer class="footer">
 			<div class="footer_logo">
 				<br><br><br>

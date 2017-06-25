@@ -203,6 +203,53 @@
     }
 }
 
+//*----------------------------------------------------------
+//games main page
+//------------------------------------------------------------ */
+@media screen and (max-width: 1919px){
+    #games_nav{display:none;}
+    #games_main_space{display:none;}
+}
+
+@media screen and (max-width: 1800px){
+    .standard_tile_input_small_site{
+        width: 98.3%;
+    }
+}   
+
+@media screen and (max-width: 1550px){
+    .standard_tile_input_small_site{
+        width: 98%;
+    }
+}   
+
+@media screen and (max-width: 1000px){
+    .standard_tile_input_small_site{
+        width: 97.7%;
+    }
+}
+
+@media screen and (max-width: 1000px){
+    .standard_tile_input_small_site{
+        width: 97.5%;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .games_main_text_site {display: inline; width:100%;}
+    .games_main_text_short {display: none;}
+    .games_main_input_site, .games_main_input_site_text {display: inline;width:100%;margin-bottom:5px;}
+    .games_main_row_site {width: 90%;}
+    .standard_tile_input_small_site, #games_main_select_site{margin-bottom:10px;}
+    .games_main_container {flex-direction: column; margin-left:10%;}
+    #child_1_games,#child_2_games,#child_3_games{width:100%;}
+    #child_1_games{border-right: 1px solid #666666; border-bottom:0px;}
+    #child_3_games{display:none;}
+    #child_2_games{border-left: 1px solid #666666; border-top:0px;}
+}
+
+
+
 
 //*----------------------------------------------------------
 // CPanel
