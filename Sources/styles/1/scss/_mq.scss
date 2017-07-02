@@ -215,7 +215,7 @@
     }
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 600px) { 
     .games_main_text_site {display: inline; width:100%;}
     .games_main_text_short {display: none;}
     .games_main_input_site, .games_main_input_site_text {display: inline;width:100%;margin-bottom:5px;}
@@ -226,6 +226,16 @@
     #child_1_games{border-right: 1px solid #01b5b5; border-bottom:0px;}
     #child_3_games{display:none;}
     #child_2_games{border-left: 1px solid #01b5b5; border-top:0px;}
+}
+
+
+//*----------------------------------------------------------
+//games main list
+//------------------------------------------------------------ */
+@media screen and (max-width: 450px){
+    #download-json{
+        display: none;
+    }
 }
 
 

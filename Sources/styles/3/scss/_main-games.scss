@@ -78,3 +78,24 @@
 
 .games_main_text_check{width:80%;display: table-cell;}
 .games_main_input_check{width:10%;display: table-cell;}
+
+//****************Games main list page************************/
+.games_tabulator_list{margin-left:20px; margin-right:20px; margin-bottom:20px;}
+.export_button {
+    height: 26px;
+    margin: 2px;
+    padding: 4px;
+    font-size: 11pt;
+    font-weight: bold;
+    color: #fff;
+    cursor: pointer;
+    background: #161c71;
+    border: 2px solid #000;
+    border-radius: 0 15px 15px 0;
+}
+
+.export_button:hover {
+    color: #000;
+    background: #dbd7d1;
+    border: 2px solid #4f4f4f;
+}

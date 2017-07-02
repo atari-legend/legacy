@@ -28,7 +28,7 @@ window.onload = function () {
     
     var myLineChart = new Chart(ctx_change_line, {
         responsive: true,
-        type: 'pie',
+        type: 'bar',
         data: {
             labels: labels_cl_monthly,
             datasets: [
@@ -52,11 +52,11 @@ window.onload = function () {
 </script>
 
 <div class="standard_tile">
-	<h1>STATS</h1>
+	<h1>UPDATES</h1>
 		<div class="standard_tile_line"></div>
 		<div class="standard_list_entry">
             <div class="standard_table_center" style="float:left;margin-left:5px;">
-                <br><h6>This pie chart represents the nr of changes made to the DB each month over the past year. Hover over the chart for more info. 
+                <br><h6>This bar chart represents the nr of changes made to the DB each month over the past year. Hover over the chart for more info. 
                 For all the details of the changes made, please visit the <a href="../../admin/administration/change_log.php" class="standard_tile_link_cpanel">change log</a> section of the control panel.</h6><br><br>
             </div>
 			<div class="standard_tile_text">   

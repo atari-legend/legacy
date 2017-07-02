@@ -32,7 +32,7 @@
 		<link type="text/css" href="{$style_dir}css/style.css" type="text/css" rel="stylesheet" id="main_stylesheet">
 		<link type="text/css" href="{$style_dir}css/jquery-ui.css" rel="Stylesheet">
         <link type="text/css" href="{$style_dir}css/notify-osd.css" hreflang="en" rel="stylesheet">
-        <link type="text/css" href="{$style_dir}css/animsition.min.css" hreflang="en" rel="stylesheet">
+        <link type="text/css" href="{$style_dir}css/animsition.min.css" hreflang="en" rel="stylesheet"><!-- fade up script needed for the intro page -->
 		<link rel="icon" href="{$template_dir}includes/icons/favicon.png"> <!-- fav icon -->
 		<!-- start - get the icons used for mobile devices -->
 		<link rel="apple-touch-icon-precomposed" sizes="57x57" href="{$template_dir}includes/icons/icon-57x57.png">
@@ -252,9 +252,9 @@
 		<div id="wrapper">            
 			{block name=main_body}{/block}
             <div class="main_online">       
-            {block name=who_is_online}
-                {include file='1/main/who_is_online.html'}
-            {/block}
+                {block name=who_is_online}
+                    {include file='1/main/who_is_online.html'}
+                {/block}
             </div>
 		</div>
         

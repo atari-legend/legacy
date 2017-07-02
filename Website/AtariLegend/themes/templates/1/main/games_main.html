@@ -26,7 +26,7 @@ The main game page
                     {if isset($stats) and ($stats == 1)}
                          {include file='1/main/statistics_tile.html'}
                     {else}
-                        {include file='1/main/tile_changes_per_month.html'}
+                        {include file='1/main/who_is_it_tile.html'}  
                     {/if}
                     <br>
                     {include file='1/main/latest_comments_tile.html'}
@@ -90,7 +90,7 @@ The main game page
                 <div class="standard_tile_line"></div>
                 <br>
                 <br>
-                <form action="../games/games_list.php" method="get" name="game_search">
+                <form action="../games/games_main_list.php" method="get" name="game_search">
                 <div id="games_main_parent">
                     <div class="games_main_row_site">
                         <div class="games_main_text_site"><h6>Title (a-z)</h6></div>
@@ -129,18 +129,6 @@ The main game page
                                 <option value="-" SELECTED>-</option>
                                 {foreach from=$company_developer item=line}
                                     <option value="{$line.comp_id}">{$line.comp_name}</option>
-                                {/foreach}
-                            </select>
-                        </div>
-                    </div>
-                    <div class="games_main_row_site">
-                        <div class="games_main_text_site"><h6>Category</h6></div>
-                        <div class="games_main_text_short"><h6>:</h6></div>
-                        <div class="games_main_input_site">
-                            <select name="Category" id="games_main_select_site">
-                                <option value="-" SELECTED>-</option>
-                                {foreach from=$category item=line}
-                                    <option value="{$line.cat_id}">{$line.cat_name}</option>
                                 {/foreach}
                             </select>
                         </div>
@@ -425,20 +413,22 @@ The main game page
                     <div class="standard_table_left" style="display:inline-block;">
                         <a href="../../main/games/games_main.php?mode=standard" class="standard_tile_link">Standard search</a>
                     </div>
-                    <div class="standard_table_right" style="display:inline-block;float:right;">
+                    <div class="standard_table_right" style="display:inline-block;float:right;margin-top: 2px;">
                         <a href="../../main/games/games_main.php?mode=advanced" class="standard_tile_link">Advanced search</a>
                     </div>
                 </div>
                 </form>
             </div>
+            <br>
+            <div class="standard_table_center"><a href="javascript:history.go(-1)" class="standard_tile_link">back</a></div>
         </div>
-        <br>
         <div class="content_box_cpanel" id="column_right_cpanel">
+            <br>
             {block name=right_tile}
                 {if $mode == "advanced"}
                     {include file='1/main/tile_screenstar.html'}
                     <br>
-                    {include file='1/main/who_is_it_tile.html'} 
+                    {include file='1/main/tile_changes_per_month.html'}
                 {else}                   
                     {include file='1/main/tile_changes_per_month.html'}
                 {/if}
