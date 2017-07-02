@@ -76,3 +76,29 @@
 
 .games_main_text_check{width:80%;display: table-cell;}
 .games_main_input_check{width:10%;display: table-cell;}
+
+
+//****************Games main list page************************/
+
+.games_tabulator_list{margin-left:20px; margin-right:20px; margin-bottom:20px;}
+.export_button {
+    padding-top: 3px;
+    padding-left: 5px; 
+    padding-right: 5px;
+    margin-right: auto;
+    margin-left: auto;
+    font-size: 10pt;
+    color: #182727;
+    cursor: pointer;
+    background: #00d3d3;
+    border: 0;
+    border-bottom: 3px solid #008b8b;
+    border-left: 1px solid #007878;
+}
+
+.export_button:hover {
+    color: #fff;
+    color: #182727;
+    background: #00a9a9;
+    border-bottom: 3px solid #006f6f;
+}

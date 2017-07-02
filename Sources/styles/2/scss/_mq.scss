@@ -248,6 +248,14 @@
     #child_2_games{border-left: 1px solid #666666; border-top:0px;}
 }
 
+//*----------------------------------------------------------
+//games main list
+//------------------------------------------------------------ */
+@media screen and (max-width: 450px){
+    #download-json{
+        display: none;
+    }
+}
 
 
 

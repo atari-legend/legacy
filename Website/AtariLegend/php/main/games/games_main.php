@@ -34,17 +34,6 @@ include("../../common/tiles/changes_per_month_tile.php");
 $smarty->assign('who_is_it_tile', '');
 $smarty->assign('statistics_tile', '');
 
-//Get the category values to fill the searchfield
-$sql_categories = $mysqli->query("SELECT * from game_cat ORDER BY game_cat_name ASC")
-                           or die("Problems retrieving values from game_cat table");
-
-while ($categories = $sql_categories->fetch_array(MYSQLI_BOTH)) {
-    $smarty->append('category', array(
-            'cat_id' => $categories['game_cat_id'],
-            'cat_name' => $categories['game_cat_name']));
-}
-
-
 // get the game_years from the game_year table
 $sql_year = $mysqli->query("SELECT distinct game_year from game_year order by game_year") 
                      or die ("problems getting data from game_year table");
