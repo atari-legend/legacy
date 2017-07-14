@@ -18,6 +18,17 @@ The main game page
 {extends file='1/main/main.html'}
 
 {block name=main_body}
+    <script type="text/javascript"> <!-- script needed for the autocompletion search engine -->
+        $(document).ready(function()
+        {
+            $('#gamesearch').autocomplete(
+            {
+                source: "../../../php/includes/autocomplete.php",
+                minLength: 2
+            });
+        });
+    </script>
+    
     <div id="main" class="main_container_cpanel">
         <div class="content_box_cpanel" id="column_left_cpanel">
             <br>
@@ -106,7 +117,7 @@ The main game page
                         <div class="games_main_text_site_site"><h6>Title</h6></div>
                         <div class="games_main_text_short"><h6>:</h6></div>
                         <div class="games_main_input_site_text">
-                            <input type="text" name="gamesearch" value="" class="standard_tile_input_small_site">
+                            <input type="text" name="gamesearch" value="" class="standard_tile_input_small_site" id="gamesearch">
                         </div>
                     </div>
                     <div class="games_main_row_site">

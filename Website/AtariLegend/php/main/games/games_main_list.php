@@ -33,6 +33,7 @@ $start = microtime(true);
 
 $RESULTGAME = "SELECT game.game_id,
         game.game_name,
+        review_game.review_game_id,
         game_boxscan.game_boxscan_id,
         screenshot_game.screenshot_id,
         game_music.music_id,
@@ -49,6 +50,7 @@ $RESULTGAME = "SELECT game.game_id,
         pd2.pub_dev_id as 'developer_id',
         game_year.game_year
         FROM game
+        LEFT JOIN review_game ON (review_game.game_id = game.game_id)
         LEFT JOIN game_boxscan ON (game_boxscan.game_id = game.game_id)
         LEFT JOIN screenshot_game ON (screenshot_game.game_id = game.game_id)
         LEFT JOIN game_music ON (game_music.game_id = game.game_id)
@@ -79,6 +81,7 @@ $RESULTGAME = "SELECT game.game_id,
 $RESULTAKA = "SELECT
          game_aka.game_id,
          game_aka.aka_name,
+         review_game.review_game_id,
          game_boxscan.game_boxscan_id,
          screenshot_game.screenshot_id,
          game_music.music_id,
@@ -96,6 +99,7 @@ $RESULTAKA = "SELECT
          game_year.game_year
       FROM game_aka
       LEFT JOIN game ON (game_aka.game_id = game.game_id)
+      LEFT JOIN review_game ON (review_game.game_id = game.game_id)
       LEFT JOIN game_boxscan ON (game_boxscan.game_id = game_aka.game_id)
       LEFT JOIN screenshot_game ON (screenshot_game.game_id = game.game_id)
       LEFT JOIN game_music ON (game_music.game_id = game.game_id)
@@ -186,6 +190,14 @@ if (isset($action) and $action == "search") {
     
     if (isset($screenshot) and $screenshot == "1") {
         $screenshot_select = " AND screenshot_game.screenshot_id IS NOT NULL";
+    }
+    
+    if (isset($boxscan) and $boxscan == "1") {
+        $boxscan_select = " AND game_boxscan.game_boxscan_id IS NOT NULL";
+    }
+    
+    if (isset($review) and $review == "1") {
+        $review_select = " AND review_game.review_id IS NOT NULL";
     }
 
     if (isset($falcon_only) and $falcon_only == "1") {
@@ -294,6 +306,12 @@ if (isset($action) and $action == "search") {
         if (isset($screenshot) and $screenshot == "1") {
             $RESULTGAME .= $screenshot_select;
         }
+        if (isset($boxscan) and $boxscan == "1") {
+            $RESULTGAME .= $boxscan_select;
+        }
+        if (isset($review) and $review == "1") {
+            $RESULTGAME .= $review_select;
+        }
         if (isset($year_select)) {
             $RESULTGAME .= $year_select;
         }
@@ -348,7 +366,7 @@ if (isset($action) and $action == "search") {
 
         $RESULTGAME .= ' GROUP BY game.game_id, game.game_name HAVING COUNT(DISTINCT game.game_id, game.game_name) = 1';
         $RESULTGAME .= ' ORDER BY game_name ASC';
-        
+
         $games = $mysqli->query($RESULTGAME);
 
         if (empty($games)) {
@@ -368,6 +386,19 @@ if (isset($action) and $action == "search") {
                 $RESULTAKA .= $akabrowse_select;
                 $RESULTAKA .= $publisher_select;
                 $RESULTAKA .= $developer_select;
+                
+                if (isset($download) and $download == "1") {
+                    $RESULTAKA .= $download_select;
+                }
+                if (isset($screenshot) and $screenshot == "1") {
+                    $RESULTAKA .= $screenshot_select;
+                } 
+                if (isset($boxscan) and $boxscan == "1") {
+                    $RESULTAKA .= $boxscan_select;
+                }
+                if (isset($review) and $review == "1") {
+                    $RESULTAKA .= $review_select;
+                }
                 if (isset($year_select)) {
                     $RESULTAKA .= $year_select;
                 }

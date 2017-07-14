@@ -32,7 +32,7 @@
                 <td class="online_users">
                     {if isset($users_online)}
                         {foreach from=$users_online item=line}
-                            <i class="fa fa-user-o" aria-hidden="true"></i>&nbsp;<a href="#" class="left_nav_link">{$line.user_name}</a>&nbsp;&nbsp;
+                            <i class="fa fa-user-o" aria-hidden="true"></i>&nbsp;<a href="../../admin/user/user_detail.php?user_id_selected={$line.user_id}" class="left_nav_link">{$line.user_name}</a>&nbsp;&nbsp;
                         {/foreach}
                     {/if}
                 </td>
@@ -52,7 +52,7 @@
                 <td class="online_users">
                     {if isset($users_24h)}
                         {foreach from=$users_24h item=line}
-                            <i class="fa fa-user-o" aria-hidden="true"></i>&nbsp;<a href="#" class="left_nav_link">{$line.user_name}</a>&nbsp;&nbsp;
+                            <i class="fa fa-user-o" aria-hidden="true"></i>&nbsp;<a href="../../admin/user/user_detail.php?user_id_selected={$line.user_id}" class="left_nav_link">{$line.user_name}</a>&nbsp;&nbsp;
                         {/foreach}
                     {/if}
                 </td>

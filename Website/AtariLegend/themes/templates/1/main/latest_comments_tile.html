@@ -15,33 +15,200 @@
 // This is the 'Latest Comments' tile
 //**************************************************************************************** 
 *}
+
+{literal}
+<script type="text/javascript">
+function CommentEditable(comment_id,user_id) {
+    var string = "latest_comment_edit";
+    var editable_comment = string.concat(comment_id);
+    
+    var string = "comment_edit_icon";
+    var edit_icon = string.concat(comment_id);
+    
+    var string = "comment_save_icon";
+    var save_icon = string.concat(comment_id);
+    
+    var string = "comment_input";
+    var comment_input = string.concat(comment_id);
+    
+    var input = document.getElementById(comment_input);
+    input.style.display='inline';
+    
+    var save = document.getElementById(save_icon);
+    save.style.display='inline';
+    
+    var edit = document.getElementById(edit_icon);
+    edit.style.display='none';
+    
+    var output = document.getElementById(editable_comment);
+    output.style.display='none';
+}
+
+function SaveEditable(comment_id,user_id) {
+
+    //It took me ages to get his to work because I'm a dipshit - I hate ajax --> ST Graveyard 14/07/2014 @fucking 00:44
+    //Im not using contenteditable crap on a div because this way, loads of <br> statements are added in the DB.
+    //So I'm changing the div to a text area, still, in java it seems a return is not sent to the server so I'm doing a conversion to <br>
+    //Once the <br> are in the db, I do another conversion when I load the from the DB into an input field
+
+    var string = "comment_input";
+    var comment_data = string.concat(comment_id);
+       
+    var comment = document.getElementById(comment_data).value
+    comment = comment.replace(/\n\r?/g, '<br />');
+    
+    var url = "../../common/tiles/db_latest_comments_tile.php?action=save_comment&comment_id="+comment_id+"&data="+comment;
+          
+    if (comment_id == "")
+    {
+        document.getElementById("latest_comments_all").innerHTML = "";
+        return;
+    }
+    else
+    {
+        if (window.XMLHttpRequest)
+        {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        }
+        else
+        {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function()
+        {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
+            {
+                document.getElementById("latest_comments_all").innerHTML = xmlhttp.responseText;
+            }
+        }
+        xmlhttp.open("GET",url,true);
+        xmlhttp.send();
+    }
+}
+
+function DeleteEditable(comment_id,user_id) {
+
+     // CONFIRM REQUIRES ONE ARGUMENT
+     var message = "Are you sure you want to delete this comment?";
+     // CONFIRM IS BOOLEAN. THAT MEANS THAT
+     // IT RETURNS TRUE IF 'OK' IS CLICKED
+     // OTHERWISE IT RETURN FALSE
+     var return_value = confirm(message);
+     
+     if (return_value !="0")
+     {
+         if (comment_id == "")
+            {
+                document.getElementById("latest_comments_all").innerHTML = "";
+                return;
+            }
+            else
+            {
+                if (window.XMLHttpRequest)
+                {
+                    // code for IE7+, Firefox, Chrome, Opera, Safari
+                    xmlhttp = new XMLHttpRequest();
+                }
+                else
+                {
+                    // code for IE6, IE5
+                    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+                }
+                xmlhttp.onreadystatechange = function()
+                {
+                    if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
+                    {
+                        document.getElementById("latest_comments_all").innerHTML = xmlhttp.responseText;
+                    }
+                }
+                xmlhttp.open("GET","../../common/tiles/db_latest_comments_tile.php?action=delete_comment&comment_id="+comment_id,true);
+                xmlhttp.send();
+            }
+        }
+     }
+</script>
+{/literal} 
+
 {block name=latest_comments_tile}
-<div class="{$statistics_tile}">	
-	<div class="standard_tile">
-		<h1><a href="#" class="standard_tile_link">LATEST COMMENTS</a></h1>
-		<div class="standard_tile_line"></div>
-		<div class="standard_list_entry">
-            <table class="standard_table_list_comments">
-            {foreach from=$comments item=line}
-                <tr>
-                    <td class="standard_table_left">
-                        <span class="standard_tile_subtext" style="font-weight:bold;float:left;margin-left:5px;margin-right:5px;margin-top:15px;">
-                            <a href="#" class>{$line.user_name}</a>
-                        </span>
-                        <span class="standard_tile_subtext"  style="font-weight:bold;float:right;display:inline;margin-left:5px;margin-right:5px;margin-top:15px;">
-                            <a href="#" class>{$line.game}</a>
-                        </span>
-                        <span class="latest_comments_text">{$line.comment}</span>      
-                        <span class="standard_tile_subtext" style="font-weight:bold;float:right;display:inline;margin-right:5px;margin-bottom:15px;">
-                            {$line.date}
-                        </span>
-                        <br><br>
-                    </td>
-                </tr>
-            {/foreach}
-            </table>
-		</div>
-	<div class="standard_tile_line"></div>
-	</div>	
-</div>
+
+{if isset($smarty_action) and $smarty_action == "delete_comment"}
+    {if isset($comments)}	
+        <table class="standard_table_list_comments">
+        {foreach from=$comments item=line}
+            <tr>
+                <td class="standard_table_left">
+                    <span class="standard_tile_subtext" style="font-weight:bold;float:left;margin-left:5px;margin-right:5px;margin-top:15px;">
+                        <a href="#">{$line.user_name}</a>
+                    </span>
+                    <span class="standard_tile_subtext" style="font-weight:bold;float:right;display:inline;margin-left:5px;margin-right:5px;margin-top:15px;">
+                        <a href="#">{$line.game}</a>
+                    </span>
+                    <span class="latest_comments_text">
+                        <div id="latest_comment_edit{$line.comment_id}">{$line.comment}</div>
+                        <div style="width:108%;"><textarea cols="70" id="comment_input{$line.comment_id}" class="latest_comments_textarea" style="display:none;">{$line.comment_edit}</textarea></div>
+                    </span> 
+                    {if isset($user_session)}
+                        {if $user_session.user_id == $line.user_id}
+                            <span class="latest_comments_icons">
+                                <a style="cursor: pointer;" onClick="CommentEditable({$line.comment_id},{$line.user_id})" class="standard_tile_link"><i class="fa fa-pencil" id="comment_edit_icon{$line.comment_id}" aria-hidden="true"  title="Click to edit comment"></i></a>
+                                <a style="cursor: pointer;" onClick="SaveEditable({$line.comment_id},{$line.user_id})" class="standard_tile_link"><i class="fa fa-floppy-o" id="comment_save_icon{$line.comment_id}" aria-hidden="true" title="Click to save change" style="display:none;"></i></a>
+                                <a style="cursor: pointer;" onClick="DeleteEditable({$line.comment_id},{$line.user_id})" class="standard_tile_link"><i class="fa fa-trash-o" id="comment_delete_icon{$line.comment_id}" aria-hidden="true" title="Click to delete comment"></i></a>
+                            </span>
+                        {/if}
+                    {/if}
+                    <span class="standard_tile_subtext" style="font-weight:bold;float:right;display:inline;margin-right:5px;margin-bottom:15px;">
+                        {$line.date}
+                    </span>
+                    <br><br>
+                </td>
+            </tr>
+        {/foreach}
+        </table>
+    {/if}
+{else}
+    <div class="{$statistics_tile}">	
+        <div class="standard_tile">
+            <h1><a href="#" class="standard_tile_link">LATEST COMMENTS</a></h1>
+            <div class="standard_tile_line"></div>
+            <div class="standard_list_entry">
+                <div id="latest_comments_all">
+                    <table class="standard_table_list_comments">
+                    {foreach from=$comments item=line}
+                        <tr>
+                            <td class="standard_table_left">
+                                <span class="standard_tile_subtext" style="font-weight:bold;float:left;margin-left:5px;margin-right:5px;margin-top:15px;">
+                                    <a href="#">{$line.user_name}</a>
+                                </span>
+                                <span class="standard_tile_subtext" style="font-weight:bold;float:right;display:inline;margin-left:5px;margin-right:5px;margin-top:15px;">
+                                    <a href="#">{$line.game}</a>
+                                </span>
+                                <span class="latest_comments_text">
+                                    <div id="latest_comment_edit{$line.comment_id}">{$line.comment}</div>
+                                    <div style="width:100%;text-align:center;"><textarea id="comment_input{$line.comment_id}" class="latest_comments_textarea" style="display:none;" cols="80">{$line.comment_edit}</textarea></div>
+                                </span> 
+                                {if isset($user_session)}
+                                    {if $user_session.user_id == $line.user_id}
+                                        <span class="latest_comments_icons">
+                                            <a style="cursor: pointer;" onClick="CommentEditable({$line.comment_id},{$line.user_id})" class="standard_tile_link"><i class="fa fa-pencil" id="comment_edit_icon{$line.comment_id}" aria-hidden="true"  title="Click to edit comment"></i></a>
+                                            <a style="cursor: pointer;" onClick="SaveEditable({$line.comment_id},{$line.user_id})" class="standard_tile_link"><i class="fa fa-floppy-o" id="comment_save_icon{$line.comment_id}" aria-hidden="true" title="Click to save change" style="display:none;"></i></a>
+                                            <a style="cursor: pointer;" onClick="DeleteEditable({$line.comment_id},{$line.user_id})" class="standard_tile_link"><i class="fa fa-trash-o" id="comment_delete_icon{$line.comment_id}" aria-hidden="true" title="Click to delete comment"></i></a>
+                                        </span>
+                                    {/if}
+                                {/if}
+                                <span class="standard_tile_subtext" style="font-weight:bold;float:right;display:inline;margin-right:5px;margin-bottom:15px;">
+                                    {$line.date}
+                                </span>
+                                <br><br>
+                            </td>
+                        </tr>
+                    {/foreach}
+                    </table>
+                </div>
+            </div>
+        <div class="standard_tile_line"></div>
+        </div>	
+    </div>
+{/if}
 {/block}
