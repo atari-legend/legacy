@@ -830,8 +830,16 @@ body .ui-tooltip {
 /* Component containers
 ----------------------------------*/
 .ui-widget {
-	font-family: Trebuchet MS,Tahoma,Verdana,Arial,sans-serif;
-	font-size: 1.1em;
+	font-family: 'Audiowide';
+    font-style: normal;
+    font-weight: normal;
+    src: url('../font/audiowide-regular-webfont.eot');
+    src: url('../font/audiowide-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../font/audiowide-regular-webfont.woff2') format('woff2'),
+         url('../font/audiowide-regular-webfont.woff') format('woff'),
+         url('../font/audiowide-regular-webfont.ttf') format('truetype'),
+         url('../font/audiowide-regular-webfont.svg#audiowideregular') format('svg');
+	font-size: 1em;
 }
 .ui-widget .ui-widget {
 	font-size: 1em;
@@ -845,8 +853,8 @@ body .ui-tooltip {
 }
 .ui-widget-content {
 	border: 1px solid #dddddd;
-	background: #eeeeee url("images/ui-bg_highlight-soft_100_eeeeee_1x100.png") 50% top repeat-x;
-	color: #333333;
+	background: black;
+	color: white;
 }
 .ui-widget-content a {
 	color: #333333;
@@ -883,10 +891,10 @@ body .ui-tooltip {
 .ui-state-focus,
 .ui-widget-content .ui-state-focus,
 .ui-widget-header .ui-state-focus {
-	border: 1px solid #fbcb09;
-	background: #fdf5ce url("images/ui-bg_glass_100_fdf5ce_1x400.png") 50% 50% repeat-x;
+	border: 1px solid white;
+	background: #00d3d3;
 	font-weight: bold;
-	color: #c77405;
+	color: black;
 }
 .ui-state-hover a,
 .ui-state-hover a:hover,

@@ -830,7 +830,15 @@ body .ui-tooltip {
 /* Component containers
 ----------------------------------*/
 .ui-widget {
-	font-family: Trebuchet MS,Tahoma,Verdana,Arial,sans-serif;
+	font-family: 'robot';
+    font-style: normal;
+    font-weight: normal;
+    src: url('../font/ubuntu-webfont.eot');
+    src: url('../font/ubuntu-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../font/ubuntu-webfont.woff2') format('woff2'),
+         url('../font/ubuntu-webfont.woff') format('woff'),
+         url('../font/ubuntu-webfont.ttf') format('truetype'),
+         url('../font/ubuntu-webfont.svg#ubunturegular') format('svg');
 	font-size: 1.1em;
 }
 .ui-widget .ui-widget {
@@ -840,7 +848,7 @@ body .ui-tooltip {
 .ui-widget select,
 .ui-widget textarea,
 .ui-widget button {
-	font-family: Trebuchet MS,Tahoma,Verdana,Arial,sans-serif;
+	font-family: 'robot';
 	font-size: 1em;
 }
 .ui-widget-content {
@@ -866,6 +874,7 @@ body .ui-tooltip {
 .ui-state-default,
 .ui-widget-content .ui-state-default,
 .ui-widget-header .ui-state-default {
+    font-family: 'robot';
 	border: 1px solid #cccccc;
 	background: #f6f6f6 url("images/ui-bg_glass_100_f6f6f6_1x400.png") 50% 50% repeat-x;
 	font-weight: bold;
@@ -883,10 +892,9 @@ body .ui-tooltip {
 .ui-state-focus,
 .ui-widget-content .ui-state-focus,
 .ui-widget-header .ui-state-focus {
-	border: 1px solid #fbcb09;
-	background: #fdf5ce url("images/ui-bg_glass_100_fdf5ce_1x400.png") 50% 50% repeat-x;
-	font-weight: bold;
-	color: #c77405;
+	border: 1px solid black;
+	background: white;
+	color: black;
 }
 .ui-state-hover a,
 .ui-state-hover a:hover,

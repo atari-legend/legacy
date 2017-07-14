@@ -39,8 +39,6 @@ if (isset ($action) and $action == 'check_email')
             //check if email address exists in DB
             $query_rows = $mysqli->query("select * from users where email = '$_POST[email]'");
             $number = $query_rows->num_rows;
-            
-            echo $number;
               
             if($number == 0)
             {
@@ -62,7 +60,7 @@ if (isset ($action) and $action == 'check_email')
                 $sdbquery = $mysqli->query("INSERT INTO users_reset (user_id, password, time) VALUES ('$sql_user_id[user_id]', '$password', '$timestamp')") or die("Couldn't insert user into users_reset table");
 
                 // Create a url which we will direct them to reset their password  
-                $pwrurl = "http://localhost/atarilegend/php/main/front/front.php?action=new_pwd&q=".$password;  
+                $pwrurl = "http://dev.stonish.net/php/main/front/front.php?action=new_pwd&q=".$password;  
       
                 $mail = new PHPMailer;
 
@@ -72,8 +70,12 @@ if (isset ($action) and $action == 'check_email')
                 $mail->AddAddress($_POST["email"]);     
 
                 // Create Email
-                $mail->isSMTP(); // Set mailer to use SMTP
-                //$mail->SMTPDebug  = 2;                            // enables SMTP debug information (for testing)
+                
+                //We need to comment out this comment to have it to work from server, on localhost it runs with this command
+                //$mail->isSMTP(); // Set mailer to use SMTP
+                
+                
+                $mail->SMTPDebug  = 1;                            // enables SMTP debug information (for testing)
                 // 1 = errors and messages
                 // 2 = messages only
                 //$mail->Host = 'smtp.live.com';                    // Specify main and backup SMTP servers

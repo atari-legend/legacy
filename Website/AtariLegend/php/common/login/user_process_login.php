@@ -41,7 +41,7 @@ if (isset($_POST['userid'], $_POST['p'])) {
     //fill the session vars
     if (login($userid, $password, $mysqli) == true) {
         // Login success     
-        if ($remember_me == '1')
+        if (isset($remember_me) && $remember_me == '1')
         {
             // get session parameters
             //$params = session_get_cookie_params();

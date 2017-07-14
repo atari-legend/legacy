@@ -185,16 +185,16 @@ function login_check($mysqli) {
 	    //get the username and password
    	    $query_user = $mysqli->query("SELECT * FROM users WHERE session = '$session_id'") or die ("error getting user data");
 	    $user = $query_user->fetch_array(MYSQLI_BOTH) or die("error getting user data - query");
-       
+        
         $_SESSION['userid'] = $user['userid'];
         $_SESSION['user_id'] = $user['user_id'];
         $_SESSION['permission'] = $user['permission'];
-        $_SESSION['image'] .= $user['avatar_ext'];
-        
+        $_SESSION['image'] = $user['avatar_ext'];
+                      
         // update last visit
         $now = time();
         if ($update_stmt = $mysqli->prepare("UPDATE users SET last_visit=? WHERE user_id=?")) {
-            $update_stmt->bind_param('ss', $now, $user_id);
+            $update_stmt->bind_param('ss', $now, $_SESSION['user_id']);
             // Execute the prepared query.
             if (!$update_stmt->execute()) {
                 header('Location: ../error.php?err=time failure: UPDATE');

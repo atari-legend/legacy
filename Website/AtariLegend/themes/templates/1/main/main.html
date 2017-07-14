@@ -61,9 +61,10 @@
 					source: "../../../php/includes/autocomplete.php",
 					position: { my : "left top", at: "right top", of: $("#skin_side"), collision: "flipfit none" }
 				});
-			$(window).resize(function() {
-				$(".ui-autocomplete").css('display', 'none');
-				});
+
+                $(window).resize(function() {
+                    $(".ui-autocomplete").css('display', 'none');
+                });
 			});
 			
 			$(document).ready(function() { 
@@ -116,6 +117,16 @@
                 {/if}
             });
         </script>
+        <script type="text/javascript"> <!-- Go to the game search results -->
+			function Search() {
+                var game_search = document.getElementById("auto").value;
+                {literal}
+                    if (!game_search) {game_search = document.getElementById("search_text_side").value;}
+                {/literal} 
+                url="../games/games_main_list.php?gamesearch="+game_search+"&action=search";
+                location.href=url;
+            }
+		</script>
 		{block name=javascript_slider} {/block}
 	</head>
 	<body id="body">
@@ -136,8 +147,8 @@
 							<li><a href="" class="sidebutton" id="about_side">ABOUT</a></li>
 						  </ul>
 						  <ul id="search_ul">
-							  <li id="searchbutton_side"><input id="search_text_side" type="text" name="search_text" maxlength="11"></li>
-							  <li><a href="#"><div id="search_side"> </div></a></li>
+							  <li id="searchbutton_side"><input id="search_text_side" type="text" name="gamesearch" maxlength="11"></li>
+							  <li><a href="#" onclick="Search()"><div id="search_side"></div></a></li>
 						  </ul>
 						  <div class="skin-wrap">
 							<nav class="skin-menu">
@@ -244,7 +255,7 @@
 						<li><a href="" class="topbutton" id="links">LINKS</a></li>
 						<li><a href="" class="topbutton" id="about">ABOUT</a></li>
 						<li><div class="searchbutton" id="search_text"><input type="text" id="auto"></div></li>
-						<li><div id="search"></div></li>
+						<li><a href="javascript:Search();"><div id="search"></div></a></li>
 					</ul>
 				</nav>	
 			</header>
