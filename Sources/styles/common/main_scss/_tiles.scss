@@ -386,8 +386,6 @@ figure.effect-bubba:hover p {
         color: black; 
         text-shadow: -1px 1px 8px #666, 1px -1px 8px #515151;
         outline: 0 none;}
-    .standard_table_list_comments tr:nth-child(even){background: #ffffff;}
-    .standard_table_list_comments tr:nth-child(odd) {background: #cccccc;}
 }@elseif $skin-name == picasso {
     .latest_comments_text{font-size: 12pt;color: #000;} 
     .latest_comments_icons{color: #161c71;}
