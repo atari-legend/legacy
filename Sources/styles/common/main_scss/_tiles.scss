@@ -372,19 +372,35 @@ figure.effect-bubba:hover p {
 @if $skin-name == legacy {
     .latest_comments_text{font-size: 11pt;color: #fff;}   
     .latest_comments_icons{color: #bcbdbd;}
+    .latest_comments_link{
+        @extent .standard_tile_link;
+        color: #bcbdbd;}
+    .latest_comments_link:hover { color: #01b5b5; }
 }@elseif $skin-name == tos {  
     .latest_comments_text{font-size: 16px;color: #3c3c3c;}
     .latest_comments_icons{color: #3c3c3c;}
+    .latest_comments_link{
+        @extent .standard_tile_link;
+        color: #666666;}
+    .latest_comments_link:hover { 
+        color: black; 
+        text-shadow: -1px 1px 8px #666, 1px -1px 8px #515151;
+        outline: 0 none;}
+    .standard_table_list_comments tr:nth-child(even){background: #ffffff;}
+    .standard_table_list_comments tr:nth-child(odd) {background: #cccccc;}
 }@elseif $skin-name == picasso {
     .latest_comments_text{font-size: 12pt;color: #000;} 
     .latest_comments_icons{color: #161c71;}
     .latest_comments_textarea{background:#eeeeee;color:black;}
+    .latest_comments_link{
+        @extent .standard_tile_link;
+        color: #161c71;}
+    .latest_comments_link:hover { color: black; }
 }
 
 .latest_comments_textarea{ 
     @extend .standard_tile_input_area;
     height: 10em;
-
 }
     
 .latest_comments_text{
@@ -402,12 +418,4 @@ figure.effect-bubba:hover p {
 
 .standard_table_list_comments td{
     border-bottom: solid 2px #000;
-}
-
-.latest_comments_icons
-{ 
-    font-weight:bold;
-    float:left;
-    margin-left:5px;
-    margin-bottom:15px;
 }

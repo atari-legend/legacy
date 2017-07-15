@@ -58,6 +58,9 @@ if (isset($action) and $action == 'new_pwd')
     $smarty->assign("action", 'new_pwd');
 }
 
+//We are using this var to have the frontpage animation happen only once we visit AL
+if (isset($action) and $action=='first_time') {$smarty->assign('smarty_action', 'first_time');}
+
 //Send all smarty variables to the templates
 $smarty->display("file:".$mainsite_template_folder."frontpage.html");
 
