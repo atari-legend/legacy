@@ -105,3 +105,8 @@
 .main_comments_textarea{@extend .standard_tile_input_area;
                         background: #666666;
                         height: 10em;}
+                        
+.standard_table_list_comments_main{@extend .standard_table_list_stats;}
+.standard_table_list_comments_main td{
+    border-bottom: solid 2px #000;
+}

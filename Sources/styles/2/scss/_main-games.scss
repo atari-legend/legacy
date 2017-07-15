@@ -106,3 +106,10 @@
 
 //****************Games main comments************************/
 .main_comments_textarea{@extend .standard_tile_input_area; height: 10em;}
+
+.standard_table_list_comments_main{@extend .standard_table_list_stats;}
+.standard_table_list_comments_main td{
+    border-bottom: solid 2px #666666;
+}
+.standard_table_list_comments_main tr:nth-child(even){background: #eeeeee;}
+.standard_table_list_comments_main tr:nth-child(odd) {background: #cccccc;}
