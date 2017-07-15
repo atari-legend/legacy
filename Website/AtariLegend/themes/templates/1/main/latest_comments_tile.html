@@ -143,20 +143,23 @@ function DeleteEditable(comment_id,user_id) {
                         <a href="#">{$line.user_name}</a>
                     </span>
                     <span class="standard_tile_subtext" style="font-weight:bold;float:right;display:inline;margin-left:5px;margin-right:5px;margin-top:15px;">
-                        <a href="#">{$line.game}</a>
+                        <a href="#" >{$line.game}</a>
                     </span>
-                    <span class="latest_comments_text">
+                    <div class="latest_comments_text">
                         <div id="latest_comment_edit{$line.comment_id}">{$line.comment}</div>
                         <div style="width:108%;"><textarea cols="70" id="comment_input{$line.comment_id}" class="latest_comments_textarea" style="display:none;">{$line.comment_edit}</textarea></div>
-                    </span> 
+                    </div> 
                     {if isset($user_session)}
+                        <span style="font-weight:bold;float:left;margin-left:5px;margin-bottom:15px;">
                         {if $user_session.user_id == $line.user_id}
-                            <span class="latest_comments_icons">
-                                <a style="cursor: pointer;" onClick="CommentEditable({$line.comment_id},{$line.user_id})" class="standard_tile_link"><i class="fa fa-pencil" id="comment_edit_icon{$line.comment_id}" aria-hidden="true"  title="Click to edit comment"></i></a>
-                                <a style="cursor: pointer;" onClick="SaveEditable({$line.comment_id},{$line.user_id})" class="standard_tile_link"><i class="fa fa-floppy-o" id="comment_save_icon{$line.comment_id}" aria-hidden="true" title="Click to save change" style="display:none;"></i></a>
-                                <a style="cursor: pointer;" onClick="DeleteEditable({$line.comment_id},{$line.user_id})" class="standard_tile_link"><i class="fa fa-trash-o" id="comment_delete_icon{$line.comment_id}" aria-hidden="true" title="Click to delete comment"></i></a>
-                            </span>
+                            <a style="cursor: pointer;" onClick="CommentEditable({$line.comment_id},{$line.user_id})" class="latest_comments_link"><i class="fa fa-pencil" id="comment_edit_icon{$line.comment_id}" aria-hidden="true"  title="Click to edit comment"></i></a>
+                            <a style="cursor: pointer;" onClick="SaveEditable({$line.comment_id},{$line.user_id})" class="latest_comments_link"><i class="fa fa-floppy-o" id="comment_save_icon{$line.comment_id}" aria-hidden="true" title="Click to save change" style="display:none;"></i></a>
+                            <a style="cursor: pointer;" onClick="DeleteEditable({$line.comment_id},{$line.user_id})" class="latest_comments_link"><i class="fa fa-trash-o" id="comment_delete_icon{$line.comment_id}" aria-hidden="true" title="Click to delete comment"></i></a>
                         {/if}
+                        {if $line.email != ''}
+                            <a href="mailto:{$line.email}?subject=Comment%20of%20{$line.game|escape:'url'}%20at%20Atari%20Legend" class="latest_comments_link" title="Click to contact user"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+                        {/if}
+                        </span>
                     {/if}
                     <span class="standard_tile_subtext" style="font-weight:bold;float:right;display:inline;margin-right:5px;margin-bottom:15px;">
                         {$line.date}
@@ -168,47 +171,48 @@ function DeleteEditable(comment_id,user_id) {
         </table>
     {/if}
 {else}
-    <div class="{$statistics_tile}">	
-        <div class="standard_tile">
-            <h1><a href="#" class="standard_tile_link">LATEST COMMENTS</a></h1>
-            <div class="standard_tile_line"></div>
-            <div class="standard_list_entry">
-                <div id="latest_comments_all">
-                    <table class="standard_table_list_comments">
-                    {foreach from=$comments item=line}
-                        <tr>
-                            <td class="standard_table_left">
-                                <span class="standard_tile_subtext" style="font-weight:bold;float:left;margin-left:5px;margin-right:5px;margin-top:15px;">
-                                    <a href="#">{$line.user_name}</a>
-                                </span>
-                                <span class="standard_tile_subtext" style="font-weight:bold;float:right;display:inline;margin-left:5px;margin-right:5px;margin-top:15px;">
-                                    <a href="#">{$line.game}</a>
-                                </span>
-                                <span class="latest_comments_text">
-                                    <div id="latest_comment_edit{$line.comment_id}">{$line.comment}</div>
-                                    <div style="width:100%;text-align:center;"><textarea id="comment_input{$line.comment_id}" class="latest_comments_textarea" style="display:none;" cols="80">{$line.comment_edit}</textarea></div>
-                                </span> 
-                                {if isset($user_session)}
-                                    {if $user_session.user_id == $line.user_id}
-                                        <span class="latest_comments_icons">
-                                            <a style="cursor: pointer;" onClick="CommentEditable({$line.comment_id},{$line.user_id})" class="standard_tile_link"><i class="fa fa-pencil" id="comment_edit_icon{$line.comment_id}" aria-hidden="true"  title="Click to edit comment"></i></a>
-                                            <a style="cursor: pointer;" onClick="SaveEditable({$line.comment_id},{$line.user_id})" class="standard_tile_link"><i class="fa fa-floppy-o" id="comment_save_icon{$line.comment_id}" aria-hidden="true" title="Click to save change" style="display:none;"></i></a>
-                                            <a style="cursor: pointer;" onClick="DeleteEditable({$line.comment_id},{$line.user_id})" class="standard_tile_link"><i class="fa fa-trash-o" id="comment_delete_icon{$line.comment_id}" aria-hidden="true" title="Click to delete comment"></i></a>
-                                        </span>
-                                    {/if}
-                                {/if}
-                                <span class="standard_tile_subtext" style="font-weight:bold;float:right;display:inline;margin-right:5px;margin-bottom:15px;">
-                                    {$line.date}
-                                </span>
-                                <br><br>
-                            </td>
-                        </tr>
-                    {/foreach}
-                    </table>
-                </div>
-            </div>
+    <div class="standard_tile">
+        <h1><a href="../games/games_comment_main.php" class="standard_tile_link" title="Click to see all comments">LATEST COMMENTS</a></h1>
         <div class="standard_tile_line"></div>
-        </div>	
-    </div>
+        <div class="standard_list_entry">
+            <div id="latest_comments_all">
+                <table class="standard_table_list_comments">
+                {foreach from=$comments item=line}
+                    <tr>
+                        <td class="standard_table_left">
+                            <span class="standard_tile_subtext" style="font-weight:bold;float:left;margin-left:5px;margin-right:5px;margin-top:15px;">
+                                <a href="#">{$line.user_name}</a>
+                            </span>
+                            <span class="standard_tile_subtext" style="font-weight:bold;float:right;display:inline;margin-left:5px;margin-right:5px;margin-top:15px;">
+                                <a href="#">{$line.game}</a>
+                            </span>
+                            <div class="latest_comments_text">
+                                <div id="latest_comment_edit{$line.comment_id}">{$line.comment}</div>
+                                <div style="width:100%;text-align:center;"><textarea id="comment_input{$line.comment_id}" class="latest_comments_textarea" style="display:none;" cols="80">{$line.comment_edit}</textarea></div>
+                            </div> 
+                            {if isset($user_session)}
+                                <span style="font-weight:bold;float:left;margin-left:5px;margin-bottom:15px;">
+                                {if $user_session.user_id == $line.user_id}
+                                    <a style="cursor: pointer;" onClick="CommentEditable({$line.comment_id},{$line.user_id})" class="latest_comments_link"><i class="fa fa-pencil" id="comment_edit_icon{$line.comment_id}" aria-hidden="true"  title="Click to edit comment"></i></a>
+                                    <a style="cursor: pointer;" onClick="SaveEditable({$line.comment_id},{$line.user_id})" class="latest_comments_link"><i class="fa fa-floppy-o" id="comment_save_icon{$line.comment_id}" aria-hidden="true" title="Click to save change" style="display:none;"></i></a>
+                                    <a style="cursor: pointer;" onClick="DeleteEditable({$line.comment_id},{$line.user_id})" class="latest_comments_link"><i class="fa fa-trash-o" id="comment_delete_icon{$line.comment_id}" aria-hidden="true" title="Click to delete comment"></i></a>
+                                {/if}
+                                {if $line.email != ''}
+                                    <a href="mailto:{$line.email}?subject=Comment%20of%20{$line.game|escape:'url'}%20at%20Atari%20Legend" class="latest_comments_link" title="Click to contact user"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+                                {/if}
+                                </span>
+                            {/if}
+                            <span class="standard_tile_subtext" style="font-weight:bold;float:right;display:inline;margin-right:5px;margin-bottom:15px;">
+                                {$line.date}
+                            </span>
+                            <br><br>
+                        </td>
+                    </tr>
+                {/foreach}
+                </table>
+            </div>
+        </div>
+    <div class="standard_tile_line"></div>
+    </div>	
 {/if}
 {/block}

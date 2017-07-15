@@ -102,3 +102,7 @@
     background: #b6b3ae;
     border-bottom: 3px solid #666666;
 }
+
+
+//****************Games main comments************************/
+.main_comments_textarea{@extend .standard_tile_input_area; height: 10em;}

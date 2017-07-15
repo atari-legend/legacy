@@ -24,7 +24,7 @@
 
 {block name=javascript_slider}
     <script type="text/javascript" src="{$template_dir}includes/js/jssor.slider.mini.js"></script>  <!-- This script is needed for the animation in the welcome tile -->
-    <script type="text/javascript" src="{$template_dir}includes/js/animsition.min.js"></script><!-- fade up script needed for the intro page -->
+    {if isset($smarty_action) and $smarty_action == 'first_time'}<script type="text/javascript" src="{$template_dir}includes/js/animsition.min.js"></script>{/if}<!-- fade up script needed for the intro page -->
     <script type="text/javascript" src="{$template_dir}includes/js/jquery.dotdotdot.js" type="text/javascript"></script> <!--this script is used for the elipsis (...) effect of the latest news / reviews tile -->
     <script> <!-- This script is needed for the animation in the welcome tile -->
             jQuery(document).ready(function ($) {
@@ -145,6 +145,7 @@
 
         });
     </script>
+    {if isset($smarty_action) and $smarty_action == 'first_time'}
     <script type="text/javascript"> <!-- intro fade up script -->
          $(document).ready(function() {
               $(".animsition").animsition({
@@ -172,6 +173,7 @@
               });
             });
     </script>
+    {/if}
     <script type="text/javascript"> 
          window.onload = function() {
             $(".standard_list_entry_news_text").dotdotdot({  <!--This is the script to truncate the latest news-->
@@ -218,7 +220,7 @@
 {/block}
 
 {block name=main_body}
-<div class="animsition">
+{if isset($smarty_action) and $smarty_action == 'first_time'}<div class="animsition">{/if}
 
     <div id="main">
 
@@ -484,5 +486,5 @@
             {/block}-->
         </div>
     </div>
-  </div>
+  {if isset($smarty_action) and $smarty_action == 'first_time'}</div>{/if}
 {/block}
