@@ -407,6 +407,11 @@
         </div>
         <div id="wrapper">
             {block name=main_body}{/block}
+            <div class="main_online">                 
+                {block name=who_is_online}
+                    {include file='1/admin/who_is_online.html'}
+                {/block}
+            </div>
         </div>
         <footer class="footer">
             <div class="footer_logo">

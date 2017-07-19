@@ -162,6 +162,10 @@ while ($query_comment = $sql_comment->fetch_array(MYSQLI_BOTH)) {
         'user_joindate' => $user_joindate,
         'usersubmit_number' => $usersubmit_number,
         'comment_id' => $query_comment['comment_id'],
+        'user_fb' => $query_comment['user_fb'],
+        'user_website' => $query_comment['user_website'],
+        'user_twitter' => $query_comment['user_twitter'],
+        'user_af' => $query_comment['user_af'],
         'email' => $query_comment['email']
     ));
 }

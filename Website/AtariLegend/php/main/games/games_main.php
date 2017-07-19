@@ -43,6 +43,16 @@ while ($game_year = $sql_year->fetch_array(MYSQLI_BOTH)) {
             'game_year' => $game_year['game_year']));
 }
 
+// get the categories for the genre dropdown
+$sql_cat = $mysqli->query("SELECT * from game_cat order by game_cat_name") 
+                     or die ("problems getting data from game_cat table");
+
+while ($game_cat = $sql_cat->fetch_array(MYSQLI_BOTH)) {
+    $smarty->append('game_cat', array(
+            'game_cat_name' => $game_cat['game_cat_name'],
+            'game_cat_id' => $game_cat['game_cat_id']));
+}
+
 if ( isset($mode) and ( $mode ==! '' ) )
 {
     $smarty->assign("mode", $mode);

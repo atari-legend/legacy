@@ -45,7 +45,7 @@ while ($query_comment = $sql_comment->fetch_array(MYSQLI_BOTH))
     $breaks = array("<br />","<br>","<br/>");  
     $comment = str_ireplace($breaks, "\r\n", $comment); 
     
-    $date = date("F j, Y",$query_comment['timestamp']);
+    $date = date("d/m/y",$query_comment['timestamp']);
     
     $smarty->append('comments',
 	    array('comment' => $oldcomment,
@@ -56,6 +56,10 @@ while ($query_comment = $sql_comment->fetch_array(MYSQLI_BOTH))
 			  'game_id' => $query_comment['game_id'],
 			  'user_name' => $query_comment['userid'],
               'user_id' => $query_comment['user_id'],
+              'user_fb' => $query_comment['user_fb'],
+              'user_website' => $query_comment['user_website'],
+              'user_twitter' => $query_comment['user_twitter'],
+              'user_af' => $query_comment['user_af'],
 			  'email' => $query_comment['email']));
 }
 ?>
