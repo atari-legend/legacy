@@ -218,7 +218,7 @@
 @media screen and (max-width: 600px) { 
     .games_main_text_site {display: inline; width:100%;}
     .games_main_text_short {display: none;}
-    .games_main_input_site, .games_main_input_site_text {display: inline;width:100%;margin-bottom:5px;}
+    .games_main_input_site, .games_main_input_site_text, .games_main_input_list_text {display: inline;width:100%;margin-bottom:5px;}
     .games_main_row_site {width: 90%;}
     .standard_tile_input_small_site, #games_main_select_site{margin-bottom:10px;}
     .games_main_container {flex-direction: column; margin-left:10%;}
@@ -238,6 +238,30 @@
     }
 }
 
+@media screen and (max-width: 1599px){
+    #games_list_4, #games_list_2, #games_list_1 {display:none;}
+    #games_list_3 {display:inline;}
+}
+
+@media screen and (max-width: 949px){
+    #games_list_4, #games_list_3, #games_list_1 {display:none;}
+    #games_list_2 {display:inline;}
+}
+
+@media screen and (max-width: 799px){
+    #games_list_4, #games_list_2, #games_list_1 {display:none;}
+    #games_list_3 {display:inline;}
+}
+
+@media screen and (max-width: 670px){
+    #games_list_4, #games_list_3, #games_list_1 {display:none;}
+    #games_list_2 {display:inline;}
+}
+
+@media screen and (max-width: 450px){
+    #games_list_4, #games_list_3, #games_list_2 {display:none;}
+    #games_list_1 {display:inline;}
+}
 
 //*----------------------------------------------------------
 // CPanel

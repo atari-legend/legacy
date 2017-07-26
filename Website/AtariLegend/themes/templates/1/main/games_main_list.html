@@ -17,9 +17,13 @@ The main game page
 
 {extends file='1/main/main.html'}
 
+
+
 {block name=main_body}
+    <script type="text/javascript" src="{$template_dir}includes/js/lightbox.min.js"></script>
+    <link type="text/css" href="{$style_dir}css/lightbox.css" hreflang="en" rel="stylesheet">
     
-     <div id="main" class="main_container_cpanel">
+    <div id="main" class="main_container_cpanel">
         <div class="content_box_cpanel" id="column_left_cpanel">
             <br>
             {block name=left_tile}
@@ -28,6 +32,7 @@ The main game page
         </div>
         <div class="content_box_cpanel" id="column_center_cpanel">
             <br>
+            {if isset($export) and ($export == 'export')}
             <div class="standard_tile" id="games_main">
                 <div class="help-tip">
                     <p> 
@@ -42,7 +47,7 @@ The main game page
                     </h6>
                 </div>
                 <div class="standard_tile_line"></div>
-                <br>   
+                <br> 
                 <div class="games_tabulator_list">                
                     <button id="download-csv" class="export_button">Download CSV</button>
                     <button id="download-json" class="export_button">Download JSON</button>
@@ -70,9 +75,9 @@ The main game page
                     pagination:"local",
                     columns:[ //Define Table Columns
                         {title:"Name", field:"game_name", sorter:"string", align:"left", headerFilter:"input", minWidth:150, responsive:0},
-                        {title:"Publisher", field:"publisher_name", sorter:"string", align:"left", headerFilter:"input", minWidth:150, cellClick:function(e, cell){window.location="../games/games_main_list.php?publisher=" + cell.getRow().getData().publisher_id + "&action=search"}},
-                        {title:"Developer", field:"developer_name", sorter:"string", align:"left", headerFilter:"input", minWidth:150, cellClick:function(e, cell){window.location="../games/games_main_list.php?developer=" + cell.getRow().getData().developer_id + "&action=search"}},
-                        {title:"Year", field:"year", sorter:"string", align:"left",headerFilter:"input", width:75, minWidth:50, cellClick:function(e, cell){window.location="../games/games_main_list.php?year=" + cell.getRow().getData().year + "&action=search"}},
+                        {title:"Publisher", field:"publisher_name", sorter:"string", align:"left", headerFilter:"input", minWidth:150, cellClick:function(e, cell){window.location="../games/games_main_list.php?publisher=" + cell.getRow().getData().publisher_id + "&action=search&export=1"}},
+                        {title:"Developer", field:"developer_name", sorter:"string", align:"left", headerFilter:"input", minWidth:150, cellClick:function(e, cell){window.location="../games/games_main_list.php?developer=" + cell.getRow().getData().developer_id + "&action=search&export=1"}},
+                        {title:"Year", field:"year", sorter:"string", align:"left",headerFilter:"input", width:75, minWidth:50, cellClick:function(e, cell){window.location="../games/games_main_list.php?year=" + cell.getRow().getData().year + "&action=search&export=1"}},
                         {title:"Boxscan", field:"boxscan", sorter:"string", formatter:"tickCross",headerFilter:"input", width:100, minWidth:50},
                         {title:"Screenshot", field:"screenshot", sorter:"string", formatter:"tickCross",headerFilter:"input", width:120, minWidth:50},
                         {title:"Download", field:"download", sorter:"string", formatter:"tickCross",headerFilter:"input", width:110, minWidth:50},
@@ -106,6 +111,282 @@ The main game page
                 {/literal}
                 </script>	
             </div>
+            {else}
+                <div class="standard_tile" id="games_main">
+                     <div class="help-tip">
+                        <p> 
+                            <i class="fa fa-camera" aria-hidden="true"></i> - Screenshot <br>
+                            <i class="fa fa-music" aria-hidden="true"></i> - Music <br>
+                            <i class="fa fa-cube" aria-hidden="true"></i> - Boxscan <br>
+                            <i class="fa fa-file-o" aria-hidden="true"></i> - Download <br>
+                            <i class="fa fa-newspaper-o" aria-hidden="true"></i> - Review <br> 
+                        </p>
+                    </div>
+                    <h1>GAMES</h1>
+                    <div class="standard_tile_line"></div>
+                    <br>
+                    <form action="../games/games_main_list.php" method="get" name="game_search">
+                        <div class="games_main_row_site">
+                            <div class="games_main_list_info" style="text-align:left;">Title</div>
+                            <div class="games_main_text_short"><span class="games_main_list_info">:</span></div>
+                            <div class="games_main_input_list_text">
+                                <input type="text" name="gamesearch" value="" class="standard_tile_input_small_site" id="gamesearch" style="height:20px;">
+                            </div>
+                        </div>
+                        <div class="games_main_row_site">
+                            <div class="games_main_list_info" style="text-align:left;">By Publisher</div>
+                            <div class="games_main_text_short"><span class="games_main_list_info">:</span></div>
+                            <div class="games_main_input_site">
+                                <select name="publisher" id="games_main_select_site" style="height:20px;">
+                                    <option value="-" SELECTED>-</option>
+                                    {foreach from=$company_publisher item=line}
+                                        <option value="{$line.comp_id}">{$line.comp_name}</option>
+                                    {/foreach}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="games_main_row_site">
+                            <div class="games_main_list_info" style="text-align:left;">By Developer</div>
+                            <div class="games_main_text_short"><span class="games_main_list_info">:</span></div>
+                            <div class="games_main_input_site">
+                                <select name="developer" id="games_main_select_site" style="height:20px;">
+                                    <option value="-" SELECTED>-</option>
+                                    {foreach from=$company_developer item=line}
+                                        <option value="{$line.comp_id}">{$line.comp_name}</option>
+                                    {/foreach}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="games_main_row_site">
+                            <div class="games_main_list_info" style="text-align:left;">Release year</div>
+                            <div class="games_main_text_short"><span class="games_main_list_info">:</span></div>
+                            <div class="games_main_input_site">
+                                <select name="year" id="games_main_select_site" style="height:20px;">
+                                    <option value="-" SELECTED>-</option>
+                                    {foreach from=$game_year item=line}
+                                        <option value="{$line.game_year}">{$line.game_year}</option>
+                                    {/foreach}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="standard_table_center">
+                            <br>
+                            <input type="submit" value="SEARCH" class="quick_search_games_button" style="height:20px;margin-bottom:15px;">
+                        </div>      
+                        <input type="hidden" name="action" id="action" value="search">
+                        <input type="hidden" name="mode" id="mode" value="{if isset($mode)}{$mode}{/if}">
+                    </form>
+                    <div class="standard_tile_line"></div>
+                    <div id="games_list_4">
+                        <table class="standard_table_list_comments_main">
+                            {$tr = true} 
+                            {foreach from=$game_search item=line name=game_search}
+                                {if $tr} 
+                                    <tr>
+                                    {$tr = false}    
+                                {/if}
+                                    <td style="width:25%;">
+                                        {if $line.screenshot_id != ''}
+                                            <div class="games_main_list_title">
+                                                <a href="../../includes/show_image.php?file={$line.screenshot_image}&amp;resize=410,null,null,null" data-lightbox="image-1" data-title="{$line.game_name}">
+                                                    <br><img src="../../includes/show_image.php?file={$line.screenshot_image}&amp;resize=200,null,null,null" width="200" alt="Click to enlarge!" class="game_main_list_screenshot_img">
+                                                </a>
+                                            </div>
+                                        {/if}
+                                        <div class="games_main_list_title">
+                                            <a href="games_detail.php?game_id={$line.game_id}" class="standard_table_left">
+                                                <br>{$line.game_name}
+                                            </a>
+                                        </div>
+                                        <div class="games_main_list_info">
+                                            <a href="games_main_list.php?publisher={$line.publisher_id}&amp;action=search" class="standard_table_left">{$line.publisher_name}</a>{if (isset($line.year))}<a href="games_main_list.php?year={$line.year}&amp;action=search" class="standard_table_left">, {$line.year}</a>{/if}
+                                        </div>  
+                                        <div class="games_main_list_info" style="margin-bottom:10px;">
+                                            {if $line.screenshot_id != ''}
+                                                <i class="fa fa-camera" aria-hidden="true" title="More screenshots available"></i>
+                                            {/if}
+                                            {if isset($line.music)}
+                                                <i class="fa fa-music" aria-hidden="true" title="Music available"></i>
+                                            {/if}
+                                            {if isset($line.boxscan)}
+                                                <i class="fa fa-cube" aria-hidden="true" title="Boxscan available"></i>
+                                            {/if}
+                                            {if isset($line.download)}
+                                                <i class="fa fa-file-o" aria-hidden="true" title="Download available"></i>
+                                            {/if}
+                                            {if isset($line.review)}
+                                                <i class="fa fa-newspaper-o" aria-hidden="true" title="Review available"></i>
+                                            {/if}                                        
+                                            {if isset($line.screenshot_id) or isset($line.music) or isset($line.boxscan) or isset($line.download)}
+                                            {else}
+                                                <br>
+                                            {/if}
+                                        </div>
+                                   </td>
+                                 {if $smarty.foreach.game_search.iteration is div by 4}       
+                                    </tr> 
+                                    {$tr = true} 
+                                 {/if} 
+                            {/foreach}
+                            <tr>
+                                <td colspan="4"><div class="games_main_list_title"><br>{if $nr_of_games == 1}1 game found {else} {$nr_of_games} games found{/if} in {$query_time} sec<br><br></div></td>
+                            </tr>
+                        </table>
+                    </div>                      
+                    <div id="games_list_3">
+                        <table class="standard_table_list_comments">
+                            {$tr = true} 
+                            {foreach from=$game_search item=line name=game_search}
+                                {if $tr} 
+                                    <tr>
+                                    {$tr = false}    
+                                {/if}
+                                    <td style="width:25%;">
+                                        {if $line.screenshot_id != ''}
+                                            <div class="games_main_list_title">
+                                                <a href="../../includes/show_image.php?file={$line.screenshot_image}&amp;resize=410,null,null,null" data-lightbox="image-1" data-title="{$line.game_name}">
+                                                    <br><img src="../../includes/show_image.php?file={$line.screenshot_image}&amp;resize=200,null,null,null" width="200" alt="Click to enlarge!" class="game_main_list_screenshot_img">
+                                                </a>
+                                            </div>
+                                        {/if}
+                                        <div class="games_main_list_title">
+                                            <a href="games_detail.php?game_id={$line.game_id}" class="standard_table_left">
+                                                <br>{$line.game_name}
+                                            </a>
+                                        </div>
+                                        <div class="games_main_list_info">
+                                            <a href="games_main_list.php?publisher={$line.publisher_id}&amp;action=search" class="standard_table_left">{$line.publisher_name}</a>{if (isset($line.year))}<a href="games_main_list.php?year={$line.year}&amp;action=search" class="standard_table_left">, {$line.year}</a>{/if}
+                                        </div>  
+                                        <div class="games_main_list_info" style="margin-bottom:10px;">
+                                            {if $line.screenshot_id != ''}
+                                                <i class="fa fa-camera" aria-hidden="true" title="More screenshots available"></i>
+                                            {/if}
+                                            {if isset($line.music)}
+                                                <i class="fa fa-music" aria-hidden="true" title="Music available"></i>
+                                            {/if}
+                                            {if isset($line.boxscan)}
+                                                <i class="fa fa-cube" aria-hidden="true" title="Boxscan available"></i>
+                                            {/if}
+                                            {if isset($line.download)}
+                                                <i class="fa fa-file-o" aria-hidden="true" title="Download available"></i>
+                                            {/if}
+                                            {if isset($line.screenshot_id) or isset($line.music) or isset($line.boxscan) or isset($line.download)}
+                                            {else}
+                                                <br>
+                                            {/if}
+                                        </div>
+                                   </td>
+                                 {if $smarty.foreach.game_search.iteration is div by 3}       
+                                    </tr> 
+                                    {$tr = true} 
+                                 {/if} 
+                            {/foreach}
+                             <tr>
+                                <td colspan="3"><div class="games_main_list_title"><br>{if $nr_of_games == 1}1 game found {else} {$nr_of_games} games found{/if} in {$query_time} sec<br><br></div></td>
+                            </tr>
+                        </table>
+                    </div>           
+                    <div id="games_list_2">
+                       <table class="standard_table_list_comments">
+                            {$tr = true} 
+                            {foreach from=$game_search item=line name=game_search}
+                                {if $tr} 
+                                    <tr>
+                                    {$tr = false}    
+                                {/if}
+                                    <td style="width:25%;">
+                                        {if $line.screenshot_id != ''}
+                                            <div class="games_main_list_title">
+                                                <a href="../../includes/show_image.php?file={$line.screenshot_image}&amp;resize=410,null,null,null" data-lightbox="image-1" data-title="{$line.game_name}">
+                                                    <br><img src="../../includes/show_image.php?file={$line.screenshot_image}&amp;resize=200,null,null,null" width="200" alt="Click to enlarge!" class="game_main_list_screenshot_img">
+                                                </a>
+                                            </div>
+                                        {/if}
+                                        <div class="games_main_list_title">
+                                            <a href="games_detail.php?game_id={$line.game_id}" class="standard_table_left">
+                                                <br>{$line.game_name}
+                                            </a>
+                                        </div>
+                                        <div class="games_main_list_info">
+                                            <a href="games_main_list.php?publisher={$line.publisher_id}&amp;action=search" class="standard_table_left">{$line.publisher_name}</a>{if (isset($line.year))}<a href="games_main_list.php?year={$line.year}&amp;action=search" class="standard_table_left">, {$line.year}</a>{/if}
+                                        </div>  
+                                        <div class="games_main_list_info" style="margin-bottom:10px;">
+                                            {if $line.screenshot_id != ''}
+                                                <i class="fa fa-camera" aria-hidden="true" title="More screenshots available"></i>
+                                            {/if}
+                                            {if isset($line.music)}
+                                                <i class="fa fa-music" aria-hidden="true" title="Music available"></i>
+                                            {/if}
+                                            {if isset($line.boxscan)}
+                                                <i class="fa fa-cube" aria-hidden="true" title="Boxscan available"></i>
+                                            {/if}
+                                            {if isset($line.download)}
+                                                <i class="fa fa-file-o" aria-hidden="true" title="Download available"></i>
+                                            {/if}
+                                            {if isset($line.screenshot_id) or isset($line.music) or isset($line.boxscan) or isset($line.download)}
+                                            {else}
+                                                <br>
+                                            {/if}
+                                        </div>
+                                   </td>
+                                 {if $smarty.foreach.game_search.iteration is div by 2}       
+                                    </tr> 
+                                    {$tr = true} 
+                                 {/if} 
+                            {/foreach}
+                             <tr>
+                                <td colspan="2"><div class="games_main_list_title"><br>{if $nr_of_games == 1}1 game found {else} {$nr_of_games} games found{/if} in {$query_time} sec<br><br></div></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div id="games_list_1">
+                        <table class="standard_table_list_comments">
+                            {foreach from=$game_search item=line name=game_search}
+                                <tr>
+                                    <td style="width:25%;">
+                                        {if $line.screenshot_id != ''}
+                                            <div class="games_main_list_title">
+                                                <a href="../../includes/show_image.php?file={$line.screenshot_image}&amp;resize=410,null,null,null" data-lightbox="image-1" data-title="{$line.game_name}">
+                                                    <br><img src="../../includes/show_image.php?file={$line.screenshot_image}&amp;resize=200,null,null,null" width="200" alt="Click to enlarge!" class="game_main_list_screenshot_img">
+                                                </a>
+                                            </div>
+                                        {/if}
+                                        <div class="games_main_list_title">
+                                            <a href="games_detail.php?game_id={$line.game_id}" class="standard_table_left">
+                                                <br>{$line.game_name}
+                                            </a>
+                                        </div>
+                                        <div class="games_main_list_info">
+                                            <a href="games_main_list.php?publisher={$line.publisher_id}&amp;action=search" class="standard_table_left">{$line.publisher_name}</a>{if (isset($line.year))}<a href="games_main_list.php?year={$line.year}&amp;action=search" class="standard_table_left">, {$line.year}</a>{/if}
+                                        </div>  
+                                        <div class="games_main_list_info" style="margin-bottom:10px;">
+                                            {if $line.screenshot_id != ''}
+                                                <i class="fa fa-camera" aria-hidden="true" title="More screenshots available"></i>
+                                            {/if}
+                                            {if isset($line.music)}
+                                                <i class="fa fa-music" aria-hidden="true" title="Music available"></i>
+                                            {/if}
+                                            {if isset($line.boxscan)}
+                                                <i class="fa fa-cube" aria-hidden="true" title="Boxscan available"></i>
+                                            {/if}
+                                            {if isset($line.download)}
+                                                <i class="fa fa-file-o" aria-hidden="true" title="Download available"></i>
+                                            {/if}
+                                            {if isset($line.screenshot_id) or isset($line.music) or isset($line.boxscan) or isset($line.download)}
+                                            {else}
+                                                <br>
+                                            {/if}
+                                        </div>
+                                   </td> 
+                                </tr> 
+                            {/foreach}
+                             <tr>
+                                <td><div class="games_main_list_title"><br>{if $nr_of_games == 1}1 game found {else} {$nr_of_games} games found{/if} in {$query_time} sec<br><br></div></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            {/if}
             <br>
             <div class="standard_table_center"><a href="javascript:history.go(-1)" class="standard_tile_link">back</a></div>
         </div>
