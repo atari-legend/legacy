@@ -19,18 +19,26 @@
 //load all common functions
 include("../../config/common.php");
 
+//Load this include to fill the pub and dev field. No need to reinvent the wheel, right? Or is this lazy coding? :-)
+include("../../admin/games/quick_search_games.php");
+
 //load the tiles
-include("../../common/tiles/who_is_it_tile.php");
-include("../../common/tiles/tile_stats.php");
-include("../../common/tiles/screenstar.php");
 include("../../common/tiles/latest_comments_tile.php");
 include("../../common/tiles/changes_per_month_tile.php");
+
+// get the game_years from the game_year table
+$sql_year = $mysqli->query("SELECT distinct game_year from game_year order by game_year") 
+                     or die ("problems getting data from game_year table");
+
+while ($game_year = $sql_year->fetch_array(MYSQLI_BOTH)) {
+    $smarty->append('game_year', array(
+            'game_year' => $game_year['game_year']));
+}
 
 date_default_timezone_set('UTC');
 $start = microtime(true);
 
 // First create base sql statements
-
 $RESULTGAME = "SELECT game.game_id,
         game.game_name,
         review_game.review_game_id,
@@ -488,31 +496,14 @@ if (isset($action) and $action == "search") {
 
                 $i = 0;
 
-                while ($sql_game_search = $temp_query->fetch_array(MYSQLI_BOTH)) {                  
-
-                    //Game names can only be 40 chars long
-                    if (strlen($sql_game_search['game_name']) > 40) {
-                        $game_name = substr($sql_game_search['game_name'], 0, 40);
-                        $game_name = $game_name . '...';
-                    } else {
-                        $game_name = $sql_game_search['game_name'];
-                    }
-
-                    //publishers can only be 18 chars long
-                    if (strlen($sql_game_search['publisher_name']) > 18) {
-                        $pub_name = substr($sql_game_search['publisher_name'], 0, 18);
-                        $pub_name = $pub_name . '...';
-                    } else {
-                        $pub_name = $sql_game_search['publisher_name'];
-                    }
-
-                    //developers can only be 18 chars long
-                    if (strlen($sql_game_search['developer_name']) > 18) {
-                        $dev_name = substr($sql_game_search['developer_name'], 0, 18);
-                        $dev_name = $dev_name . '...';
-                    } else {
-                        $dev_name = $sql_game_search['developer_name'];
-                    }
+                while ($sql_game_search = $temp_query->fetch_array(MYSQLI_BOTH)) 
+                {       
+                    $screenshot_image = '';
+                    $screenshot_id = '';
+                    
+                    $game_name = $sql_game_search['game_name'];
+                    $pub_name = $sql_game_search['publisher_name'];
+                    $dev_name = $sql_game_search['developer_name'];
                     
                     if ($sql_game_search['game_boxscan_id'] != '') {$box = "1";}else{$box = "0";}    
                     if ($sql_game_search['game_download_id'] != '') {$down = "1";}else{$down = "0";}    
@@ -554,28 +545,71 @@ if (isset($action) and $action == "search") {
                     {
                         $i++;
                          
-                        // this is the array used in tabulator mode
-                        $list_data = array(
-                            'id'=>$i,
-                            'game_id'=>$sql_game_search['game_id'],
-                            'game_name'=>$game_name,
-                            'publisher_id'=> $sql_game_search['publisher_id'],
-                            'publisher_name' => $pub_name,
-                            'developer_id' => $sql_game_search['developer_id'],
-                            'developer_name' => $dev_name,
-                            'year' => $sql_game_search['game_year'],
-                            'music' => $music,
-                            'boxscan' => $box,
-                            'download' => $down,
-                            'screenshot' => $screen,
-                            'falcon_only' => $sql_game_search['falcon_only'],
-                            'falcon_enhan' => $sql_game_search['falcon_enhanced'],
-                            'falcon_rgb' => $sql_game_search['falcon_rgb'],
-                            'falcon_vga' => $sql_game_search['falcon_vga'],
-                            'ste_enhanced' => $sql_game_search['ste_enhanced'],
-                            'ste_only' => $sql_game_search['ste_only']);
-                        
-                        $data[] = $list_data;
+                        if (isset($export) and $export == "1") {
+                            // this is the array used in export mode
+                            $list_data = array(
+                                'id'=>$i,
+                                'game_id'=>$sql_game_search['game_id'],
+                                'game_name'=>$game_name,
+                                'publisher_id'=> $sql_game_search['publisher_id'],
+                                'publisher_name' => $pub_name,
+                                'developer_id' => $sql_game_search['developer_id'],
+                                'developer_name' => $dev_name,
+                                'year' => $sql_game_search['game_year'],
+                                'music' => $music,
+                                'boxscan' => $box,
+                                'download' => $down,
+                                'screenshot' => $screen,
+                                'falcon_only' => $sql_game_search['falcon_only'],
+                                'falcon_enhan' => $sql_game_search['falcon_enhanced'],
+                                'falcon_rgb' => $sql_game_search['falcon_rgb'],
+                                'falcon_vga' => $sql_game_search['falcon_vga'],
+                                'ste_enhanced' => $sql_game_search['ste_enhanced'],
+                                'ste_only' => $sql_game_search['ste_only']);
+                                
+                                $data[] = $list_data;
+                        }
+                        else
+                        {
+                            //Select a random screenshot record
+                            $sql_screenshots = $mysqli->query("SELECT *
+                                                                FROM screenshot_game 
+                                                                LEFT JOIN screenshot_main ON (screenshot_game.screenshot_id = screenshot_main.screenshot_id) 
+                                                                WHERE screenshot_game.game_id = '$sql_game_search[game_id]'						   	   
+                                                                ORDER BY RAND() LIMIT 1") or die("Database error - selecting screenshots"); 
+                    
+                            while ($screenshot =  $sql_screenshots->fetch_array(MYSQLI_BOTH)) {
+                                //Ready screenshots path and filename
+                                $screenshot_image = $game_screenshot_path;
+                                $screenshot_image .= $screenshot['screenshot_id'];
+                                $screenshot_image .= '.';
+                                $screenshot_image .= $screenshot['imgext'];
+                                $screenshot_id = $screenshot['screenshot_id'];
+                            }
+                            
+                            $smarty->append('game_search', array(
+                                'game_id' => $sql_game_search['game_id'],
+                                'game_name' => $game_name,
+                                'publisher_id' => $sql_game_search['publisher_id'],
+                                'publisher_name' => $pub_name,
+                                'developer_id' => $sql_game_search['developer_id'],
+                                'developer_name' => $dev_name,
+                                'year' => $sql_game_search['game_year'],
+                                'music' => $sql_game_search['music_id'],
+                                'boxscan' => $sql_game_search['game_boxscan_id'],
+                                'download' => $sql_game_search['game_download_id'],
+                                'review' => $sql_game_search['review_game_id'],
+                                'path' => $game_screenshot_path,
+                                'screenshot_image' => $screenshot_image,
+                                'screenshot_id' => $screenshot_id,
+                                'falcon_only' => $sql_game_search['falcon_only'],
+                                'falcon_enhan' => $sql_game_search['falcon_enhanced'],
+                                'falcon_rgb' => $sql_game_search['falcon_rgb'],
+                                'falcon_vga' => $sql_game_search['falcon_vga'],
+                                'ste_enhanced' => $sql_game_search['ste_enhanced'],
+                                'ste_only' => $sql_game_search['ste_only']
+                            ));  
+                        }   
                     }
                 }
                 
@@ -585,21 +619,25 @@ if (isset($action) and $action == "search") {
                 if (isset($data))
                 {
                     $smarty->assign('data', json_encode($data));
-                    
-                    $time_elapsed_secs = microtime(true) - $start;
-                    $smarty->assign("nr_of_games", $i);
-                    $smarty->assign("query_time", $time_elapsed_secs);
-
-                    //Send all smarty variables to the templates
-                    $smarty->display("file:" . $mainsite_template_folder . "games_main_list.html");
+                    $smarty->assign('export', 'export');
                 }
-                else
+                
+                if ($i == 0)
                 {
                     $edit_message             = "No entries found for your selection";
                     $_SESSION['edit_message'] = $edit_message;
                     $smarty->assign("message", $edit_message);
 
                     header("Location: ../games/games_main.php?mode=$mode");
+                }
+                else
+                {
+                    $time_elapsed_secs = microtime(true) - $start;
+                    $smarty->assign("nr_of_games", $i);
+                    $smarty->assign("query_time", $time_elapsed_secs);
+
+                    //Send all smarty variables to the templates
+                    $smarty->display("file:" . $mainsite_template_folder . "games_main_list.html");
                 }
             } else {
                 $edit_message             = "No entries found for your selection";

@@ -99,7 +99,19 @@ The main game page
                     </nav>
                 </div>
                 <div class="standard_tile_line"></div>
+                <div class="help-tip">
+                        <p> 
+                            Some may require extra info : <br>
+                            <b>- Download</b> : Only games with a download available<br>
+                            <b>- Screenshot</b> : Only games with a one or more screenshots available<br>
+                            <b>- Boxscan</b> : Same as screenshot, but for boxscans<br>
+                            <b>- Review</b> : Only games that contain a review<br>
+                            <b>- Export mode</b> : An Excel like output list with filter and sort functions, with possibility to export to CSV, XLSX and JSON. More export features will be available in the future.<br>        
+                            <b>- Advanced search</b> : More search functionalities. Keep in mind these may slow down query speeds.<br>
+                        </p>
+                    </div>
                 <br>
+                 
                 <br>
                 <form action="../games/games_main_list.php" method="get" name="game_search">
                 <div id="games_main_parent">
@@ -212,6 +224,18 @@ The main game page
                                 <div class="links_mod_checkbox">
                                     <input type="checkbox" id="review" name="review" value="1">
                                     <label for="review"></label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="games_main_row_site">
+                        <div class="games_main_text_site"><h6>Export mode</h6></div>
+                        <div class="games_main_text_short"><h6>:</h6></div>
+                        <div class="games_main_input_site">
+                            <div class="games_check_row">
+                                <div class="links_mod_checkbox">
+                                    <input type="checkbox" id="export" name="export" value="1">
+                                    <label for="export"></label>
                                 </div>
                             </div>
                         </div>

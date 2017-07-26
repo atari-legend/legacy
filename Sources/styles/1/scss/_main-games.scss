@@ -103,7 +103,31 @@
     border-bottom: 3px solid #006f6f;
 }
 
+#games_list_3, #games_list_2, #games_list_1 {display:none;}
 
+.games_main_list_title{
+    @extend .standard_tile_subtext;
+    text-align: center;
+}
+    
+.game_main_list_screenshot_img{
+    @extend .game_screenshot_img;
+    display:inline;
+}
+
+.games_main_list_info{
+    @extend .standard_tile_subtext;
+    text-align: center;
+    color: white;
+}
+
+.games_main_list_info a {color: white;}
+
+.games_main_input_list_text{
+    display: table-cell;
+    width: 65%;
+}
+    
 //****************Games main comments************************/
 .main_comments_textarea{@extend .standard_tile_input_area; height: 10em;}
 
