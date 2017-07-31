@@ -45,11 +45,15 @@ $RESULTGAME = "SELECT
                     LEFT JOIN review_game ON ( review_game.game_id = game.game_id )
                     LEFT JOIN review_main ON ( review_main.review_id = review_game.review_id)
                     LEFT JOIN users ON ( review_main.user_id = users.user_id)
-                    WHERE review_game.game_id IS NOT NULL ORDER BY review_main.review_date DESC";
+                    WHERE review_game.game_id IS NOT NULL 
+                    GROUP BY game.game_id, game.game_name HAVING COUNT(DISTINCT game.game_id, game.game_name) = 1
+                    ORDER BY review_main.review_date DESC";
 
 $games = $mysqli->query($RESULTGAME);
 
 $rows = $games->num_rows;
+$v_reviewed_games = $rows;
+
 if ($rows > 0) {
     if (empty($i)) {
         $i = 0;
@@ -83,6 +87,7 @@ $smarty->assign('az_output', $az_output);
 
 
 $smarty->assign('review_nr', $v_reviews);
+$smarty->assign('game_review_nr', $v_reviewed_games);
 $smarty->assign("user_id", $_SESSION['user_id']);
 
 //Send all smarty variables to the templates

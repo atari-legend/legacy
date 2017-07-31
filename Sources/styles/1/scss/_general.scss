@@ -596,6 +596,7 @@ legend {
 }
 
 .help-tip p {
+    z-index: 10;
     position: relative;
     right: 290px;
     //* The tooltip */

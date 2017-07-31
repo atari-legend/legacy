@@ -57,11 +57,13 @@ $RESULTGAME = "SELECT game.game_id,
         pd2.pub_dev_name as 'developer_name',
         pd2.pub_dev_id as 'developer_id',
         game_year.game_year,
-        game_cat_cross.game_cat_id
+        game_cat_cross.game_cat_id,
+        game_cat.game_cat_name
         FROM game
         LEFT JOIN review_game ON (review_game.game_id = game.game_id)
         LEFT JOIN game_boxscan ON (game_boxscan.game_id = game.game_id)
         LEFT JOIN game_cat_cross ON (game_cat_cross.game_id = game.game_id)
+        LEFT JOIN game_cat ON (game_cat_cross.game_cat_id = game_cat.game_cat_id)
         LEFT JOIN screenshot_game ON (screenshot_game.game_id = game.game_id)
         LEFT JOIN game_music ON (game_music.game_id = game.game_id)
         LEFT JOIN game_download ON (game_download.game_id = game.game_id)
@@ -107,11 +109,13 @@ $RESULTAKA = "SELECT
          pd2.pub_dev_name as 'developer_name',
          pd2.pub_dev_id as 'developer_id',
          game_year.game_year,
-         game_cat_cross.game_cat_id
+         game_cat_cross.game_cat_id,
+         game_cat.game_cat_name
       FROM game_aka
       LEFT JOIN game ON (game_aka.game_id = game.game_id)
       LEFT JOIN review_game ON (review_game.game_id = game.game_id)
       LEFT JOIN game_cat_cross ON (game_cat_cross.game_id = game.game_id)
+      LEFT JOIN game_cat ON (game_cat_cross.game_cat_id = game_cat.game_cat_id)
       LEFT JOIN game_boxscan ON (game_boxscan.game_id = game_aka.game_id)
       LEFT JOIN screenshot_game ON (screenshot_game.game_id = game.game_id)
       LEFT JOIN game_music ON (game_music.game_id = game.game_id)
@@ -155,6 +159,30 @@ if (isset($action) and $action == "search") {
         $gamesearch = $mysqli->real_escape_string($gamesearch);
     } else {
         $gamesearch = "";
+    }
+    
+    if (isset($publisher_input)) {
+        $publisher_input = $mysqli->real_escape_string($publisher_input);
+    } else {
+        $publisher_input = "";
+    }
+    
+    if (isset($developer_input)) {
+        $developer_input = $mysqli->real_escape_string($developer_input);
+    } else {
+        $developer_input = "";
+    }
+    
+    if (isset($year_input)) {
+        $year_input = $mysqli->real_escape_string($year_input);
+    } else {
+        $year_input = "";
+    }
+    
+    if (isset($cat_input)) {
+        $cat_input = $mysqli->real_escape_string($cat_input);
+    } else {
+        $cat_input = "";
     }
 
     //check the $gamebrowse select
@@ -303,7 +331,7 @@ if (isset($action) and $action == "search") {
     //Before we start the build the query, we check if there is at least
     //one search field filled in or used!
 
-    if ($publisher_select == "" and $gamebrowse_select == "" and $gamesearch == "" and $developer_select == "" and $year_select == "" and $category_select == "" and empty($falcon_only_select) 
+    if ($publisher_select == "" and $gamebrowse_select == "" and $publisher_input == "" and $developer_input == "" and $year_input == "" and $cat_input == "" and $gamesearch == "" and $developer_select == "" and $year_select == "" and $category_select == "" and empty($falcon_only_select) 
         and empty($falcon_enhanced_select) and empty($falcon_rgb_select) and empty($falcon_vga_select) and empty($ste_only_select) and empty($ste_enhanced_select) 
         and empty($unreleased_select) and empty($development_select) and empty($arcade_select) and empty($wanted_select) and empty($monochrome_select) and empty($stos_select) 
         and empty($unfinished_select) and empty($seuck_select) and empty($stac_select) and empty($screenshot) and empty($download) and empty($boxscan) and empty($review_select)) {
@@ -325,6 +353,31 @@ if (isset($action) and $action == "search") {
         } else {
             $RESULTGAME .= "game.game_name LIKE '%'";
         }
+        
+        if (!empty($publisher_input)) {
+            $RESULTGAME .= " AND pd1.pub_dev_name LIKE '%$publisher_input%'";
+        } else {
+        //    $RESULTGAME .= " AND pd1.pub_dev_name LIKE '%'";
+        }
+        
+        if (!empty($developer_input)) {
+            $RESULTGAME .= " AND pd2.pub_dev_name LIKE '%$developer_input%'";
+        } else {
+         //   $RESULTGAME .= " AND pd2.pub_dev_name LIKE '%'";
+        }
+        
+        if (!empty($year_input)) {
+            $RESULTGAME .= " AND game_year.game_year LIKE '%$year_input%'";
+        } else {
+         //   $RESULTGAME .= " AND game_year.game_year LIKE '%'";
+        }
+        
+        if (!empty($cat_input)) {
+            $RESULTGAME .= " AND game_cat.game_cat_name LIKE '%$cat_input%'";
+        } else {
+         //   $RESULTGAME .= " AND game_cat.game_cat_name LIKE '%'";
+        }
+        
         $RESULTGAME .= $gamebrowse_select;
         $RESULTGAME .= $publisher_select;
         $RESULTGAME .= $developer_select;
@@ -415,6 +468,30 @@ if (isset($action) and $action == "search") {
                 } else {
                     $RESULTAKA .= "game_aka.aka_name LIKE '%'";
                 }
+                if (!empty($publisher_input)) {
+                    $RESULTAKA .= " AND pd1.pub_dev_name LIKE '%$publisher_input%'";
+                } else {
+                    $RESULTAKA .= " AND pd1.pub_dev_name LIKE '%'";
+                }
+                
+                if (!empty($developer_input)) {
+                    $RESULTAKA .= " AND pd2.pub_dev_name LIKE '%$developer_input%'";
+                } else {
+                    $RESULTAKA .= " AND pd2.pub_dev_name LIKE '%'";
+                }
+                
+                if (!empty($year_input)) {
+                    $RESULTAKA .= " AND game_year.game_year LIKE '%$year_input%'";
+                } else {
+                    $RESULTAKA .= " AND game_year.game_year LIKE '%'";
+                }
+                
+                if (!empty($cat_input)) {
+                    $RESULTAKA .= " AND game_cat.game_cat_name LIKE '%$cat_input%'";
+                } else {
+                    $RESULTAKA .= " AND game_cat.game_cat_name LIKE '%'";
+                }
+                
                 $RESULTAKA .= $akabrowse_select;
                 $RESULTAKA .= $publisher_select;
                 $RESULTAKA .= $developer_select;
@@ -571,20 +648,41 @@ if (isset($action) and $action == "search") {
                         }
                         else
                         {
-                            //Select a random screenshot record
-                            $sql_screenshots = $mysqli->query("SELECT *
-                                                                FROM screenshot_game 
-                                                                LEFT JOIN screenshot_main ON (screenshot_game.screenshot_id = screenshot_main.screenshot_id) 
-                                                                WHERE screenshot_game.game_id = '$sql_game_search[game_id]'						   	   
-                                                                ORDER BY RAND() LIMIT 1") or die("Database error - selecting screenshots"); 
-                    
-                            while ($screenshot =  $sql_screenshots->fetch_array(MYSQLI_BOTH)) {
-                                //Ready screenshots path and filename
-                                $screenshot_image = $game_screenshot_path;
-                                $screenshot_image .= $screenshot['screenshot_id'];
-                                $screenshot_image .= '.';
-                                $screenshot_image .= $screenshot['imgext'];
-                                $screenshot_id = $screenshot['screenshot_id'];
+                            if (isset($boxscan) and $boxscan == "1") 
+                            {
+                                //Select a random boxscan record
+                                $sql_screenshots = $mysqli->query("SELECT *
+                                                                    FROM game_boxscan 
+                                                                    WHERE game_id='$sql_game_search[game_id]' and game_boxscan_side = '0'						   	   
+                                                                    ORDER BY RAND() LIMIT 1") or die("Database error - selecting screenshots"); 
+                        
+                                while ($screenshot_result =  $sql_screenshots->fetch_array(MYSQLI_BOTH)) {
+                                    //Ready screenshots path and filename
+                                    $screenshot_image = $game_boxscan_path;
+                                    $screenshot_image .= $screenshot_result['game_boxscan_id'];
+                                    $screenshot_image .= '.';
+                                    $screenshot_image .= $screenshot_result['imgext'];
+                                    $screenshot_id = $screenshot_result['game_boxscan_id'];
+                                }
+                                
+                            }
+                            else
+                            {
+                                //Select a random screenshot record
+                                $sql_screenshots = $mysqli->query("SELECT *
+                                                                    FROM screenshot_game 
+                                                                    LEFT JOIN screenshot_main ON (screenshot_game.screenshot_id = screenshot_main.screenshot_id) 
+                                                                    WHERE screenshot_game.game_id = '$sql_game_search[game_id]'						   	   
+                                                                    ORDER BY RAND() LIMIT 1") or die("Database error - selecting screenshots"); 
+                        
+                                while ($screenshot_result =  $sql_screenshots->fetch_array(MYSQLI_BOTH)) {
+                                    //Ready screenshots path and filename
+                                    $screenshot_image = $game_screenshot_path;
+                                    $screenshot_image .= $screenshot_result['screenshot_id'];
+                                    $screenshot_image .= '.';
+                                    $screenshot_image .= $screenshot_result['imgext'];
+                                    $screenshot_id = $screenshot_result['screenshot_id'];
+                                }
                             }
                             
                             $smarty->append('game_search', array(
@@ -634,6 +732,16 @@ if (isset($action) and $action == "search") {
                 {
                     $time_elapsed_secs = microtime(true) - $start;
                     $smarty->assign("nr_of_games", $i);
+                    
+                    $rest4 = $i%4; 
+                    $smarty->assign("rest4", $rest4);
+                    
+                    $rest3 = $i%3; 
+                    $smarty->assign("rest3", $rest3);
+                    
+                    $rest2 = $i%2; 
+                    $smarty->assign("rest2", $rest2);
+                    
                     $smarty->assign("query_time", $time_elapsed_secs);
 
                     //Send all smarty variables to the templates
