@@ -103,7 +103,7 @@
     border-bottom: 3px solid #666666;
 }
 
-#games_list_3, #games_list_2, #games_list_1 {display:none;}
+#games_main_list_3, #games_main_list_2, #games_main_list_1 {display:none;}
 
 .games_main_list_title{
     @extend .standard_tile_subtext;
@@ -113,6 +113,20 @@
 .game_main_list_screenshot_img{
     @extend .game_screenshot_img;
     display:inline;
+    opacity: 0;
+}
+
+.game_main_list_screenshot_img:not(.initial) {
+    transition: opacity 1s;
+}
+.game_main_list_screenshot_img.initial,
+.game_main_list_screenshot_img.loaded,
+.game_main_list_screenshot_img.error {
+    opacity: 1;
+}
+
+.game_main_list_screenshot_img:not([src]) {
+    visibility: hidden;
 }
 
 .games_main_list_info{
@@ -127,6 +141,16 @@
     display: table-cell;
     width: 65%;
 }
+
+.games_main_list_input_small{
+    @extend .standard_tile_input_small_site;
+    height : 20px;
+}
+
+#games_main_pub_drop{@extend #games_main_select_site; height:27px;}
+#games_main_dev_drop{@extend #games_main_select_site; height:27px;}
+#games_main_year_drop{@extend #games_main_select_site; height:27px;}
+#games_main_cat_drop{@extend #games_main_select_site; height:27px;}
 
 //****************Games main comments************************/
 .main_comments_textarea{@extend .standard_tile_input_area; height: 10em;}

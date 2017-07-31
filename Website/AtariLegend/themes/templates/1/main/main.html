@@ -48,20 +48,39 @@
 		<script type="text/javascript" src="{$template_dir}includes/js/jquery-ui.js"></script> <!-- main jqueryUI stuff -->
         <script type="text/javascript" src="{$template_dir}includes/js/notify-osd.js"></script>
 		<script type="text/javascript"> <!-- script needed for the autocompletion search engine -->
+            $(function() {
+                $( "#auto" ).autocomplete({
+                    source: function(request, response) {
+                        $.getJSON(
+                            "../../../php/includes/autocomplete.php?",
+                            { term:request.term, extraParams:$('#autocomplete1').val() }, 
+                            response
+                        );
+                    },
+                    minLength: 2,
+                    select: function(event, ui){
+                        //On select action
+                    }
+                });
+                
+                $( "#search_text_side" ).autocomplete({
+                    source: function(request, response) {
+                        $.getJSON(
+                            "../../../php/includes/autocomplete.php?",
+                            { term:request.term, extraParams:$('#autocomplete1').val() }, 
+                            response
+                        );
+                    },
+                    minLength: 2,
+                    position: { my : "left top", at: "right top", of: $("#skin_side"), collision: "flipfit none" },
+                    select: function(event, ui){
+                        //On select action
+                    }
+                });
+            });
+        
 			$(document).ready(function()
 			{
-				$('#auto').autocomplete(
-				{
-					source: "../../../php/includes/autocomplete.php",
-					minLength: 2
-				});
-				
-				$('#search_text_side').autocomplete(
-				{
-					source: "../../../php/includes/autocomplete.php",
-					position: { my : "left top", at: "right top", of: $("#skin_side"), collision: "flipfit none" }
-				});
-
                 $(window).resize(function() {
                     $(".ui-autocomplete").css('display', 'none');
                 });
@@ -148,6 +167,7 @@
 						  </ul>
 						  <ul id="search_ul">
 							  <li id="searchbutton_side"><input id="search_text_side" type="text" name="gamesearch" maxlength="11"></li>
+                              <input type="hidden" value="title" id="autocomplete1">
 							  <li><a href="#" onclick="Search()"><div id="search_side"></div></a></li>
 						  </ul>
 						  <div class="skin-wrap">
@@ -255,6 +275,7 @@
 						<li><a href="" class="topbutton" id="links">LINKS</a></li>
 						<li><a href="" class="topbutton" id="about">ABOUT</a></li>
 						<li><div class="searchbutton" id="search_text"><input type="text" id="auto"></div></li>
+                        <input type="hidden" value="title" id="autocomplete1">
 						<li><a href="javascript:Search();"><div id="search"></div></a></li>
 					</ul>
 				</nav>	
@@ -268,7 +289,7 @@
                 {/block}
             </div>
 		</div>
-        
+       
 		<footer class="footer">
 			<div class="footer_logo">
 				<br><br><br>

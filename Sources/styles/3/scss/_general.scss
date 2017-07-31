@@ -594,6 +594,7 @@ legend {
 }
 
 .help-tip p {
+    z-index: 10;
     position: relative;
     right: 290px;
     //* The tooltip */
@@ -613,7 +614,7 @@ legend {
 #help-tip2 p { 
     right: 200px;
     width: 200px;
-    }
+}
 
 //I am removing the pointer as the alignment of the text box changes from '?' to '?' - this is done the be compliant with a resolution of 320 width.
 //Test it for yourself to see what I mean

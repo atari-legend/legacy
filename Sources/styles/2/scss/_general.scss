@@ -570,7 +570,7 @@ legend {
     border: #666 solid 1px;
     border-radius: 50%;
 }
-
+    
 #help-tip2 {
     width: 10px;
     height: 10px;
@@ -596,6 +596,7 @@ legend {
 }
 
 .help-tip p {
+    z-index: 10;
     position: relative;
     right: 290px;
     //* The tooltip */
