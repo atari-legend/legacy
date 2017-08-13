@@ -17,8 +17,6 @@ The main game page
 
 {extends file='1/main/main.html'}
 
-
-
 {block name=main_body}
     <script type="text/javascript" src="{$template_dir}includes/js/lightbox.min.js"></script>
     <link type="text/css" href="{$style_dir}css/lightbox.css" hreflang="en" rel="stylesheet">
@@ -225,7 +223,7 @@ The main game page
                     fitColumns:true,
                     pagination:"local",
                     columns:[ //Define Table Columns
-                        {title:"Name", field:"game_name", sorter:"string", align:"left", headerFilter:"input", minWidth:150, responsive:0},
+                        {title:"Name", field:"game_name", sorter:"string", align:"left", headerFilter:"input", minWidth:150, responsive:0,cellClick:function(e, cell){window.location="../games/games_main_detail.php?game_id=" + cell.getRow().getData().game_id}},
                         {title:"Publisher", field:"publisher_name", sorter:"string", align:"left", headerFilter:"input", minWidth:150, cellClick:function(e, cell){window.location="../games/games_main_list.php?publisher=" + cell.getRow().getData().publisher_id + "&action=search&export=1"}},
                         {title:"Developer", field:"developer_name", sorter:"string", align:"left", headerFilter:"input", minWidth:150, cellClick:function(e, cell){window.location="../games/games_main_list.php?developer=" + cell.getRow().getData().developer_id + "&action=search&export=1"}},
                         {title:"Year", field:"year", sorter:"string", align:"left",headerFilter:"input", width:75, minWidth:50, cellClick:function(e, cell){window.location="../games/games_main_list.php?year=" + cell.getRow().getData().year + "&action=search&export=1"}},
@@ -358,7 +356,7 @@ The main game page
                                             </div>
                                         {/if}
                                         <div class="games_main_list_title">
-                                            <a href="games_detail.php?game_id={$line.game_id}" class="standard_table_left">
+                                            <a href="games_main_detail.php?game_id={$line.game_id}" class="standard_table_left">
                                                 <br>{$line.game_name}
                                             </a>
                                         </div>
@@ -388,25 +386,27 @@ The main game page
                                         </div>
                                    </td>
                                   {if $smarty.foreach.game_search.last} 
-                                    {if $rest4 == 3}
-                                        <td>
-                                        </td>
+                                      {if $nr_of_games >= 4}
+                                        {if $rest4 == 3}
+                                            <td>
+                                            </td>
+                                        {/if}
+                                        {if $rest4 == 2}
+                                            <td>
+                                            </td>
+                                            <td>
+                                            </td>
+                                        {/if}
+                                        {if $rest4 == 1}
+                                            <td>
+                                            </td>
+                                            <td>
+                                            </td>
+                                            <td>
+                                            </td>
+                                        {/if}
+                                      {/if}
                                     {/if}
-                                    {if $rest4 == 2}
-                                        <td>
-                                        </td>
-                                        <td>
-                                        </td>
-                                    {/if}
-                                    {if $rest4 == 1}
-                                        <td>
-                                        </td>
-                                        <td>
-                                        </td>
-                                        <td>
-                                        </td>
-                                    {/if}
-                                  {/if}
                                   {if $smarty.foreach.game_search.iteration is div by 4}       
                                      </tr> 
                                      {$tr = true} 
@@ -434,7 +434,7 @@ The main game page
                                             </div>
                                         {/if}
                                         <div class="games_main_list_title">
-                                            <a href="games_detail.php?game_id={$line.game_id}" class="standard_table_left">
+                                            <a href="games_main_detail.php??game_id={$line.game_id}" class="standard_table_left">
                                                 <br>{$line.game_name}
                                             </a>
                                         </div>
@@ -464,6 +464,7 @@ The main game page
                                         </div>
                                    </td>
                                    {if $smarty.foreach.game_search.last} 
+                                     {if $nr_of_games >= 4}
                                       {if $rest3 == 2}
                                          <td>
                                          </td>
@@ -473,7 +474,8 @@ The main game page
                                          </td>
                                          <td>
                                          </td>
-                                      {/if}                                             
+                                      {/if}   
+                                    {/if}  
                                    {/if}
                                  {if $smarty.foreach.game_search.iteration is div by 3}       
                                     </tr> 
@@ -502,7 +504,7 @@ The main game page
                                             </div>
                                         {/if}
                                         <div class="games_main_list_title">
-                                            <a href="games_detail.php?game_id={$line.game_id}" class="standard_table_left">
+                                            <a href="games_main_detail.php?game_id={$line.game_id}" class="standard_table_left">
                                                 <br>{$line.game_name}
                                             </a>
                                         </div>
@@ -532,10 +534,12 @@ The main game page
                                         </div>
                                    </td>
                                    {if $smarty.foreach.game_search.last} 
-                                     {if $rest2 == 1}
-                                        <td>
-                                        </td>
-                                     {/if}                                   
+                                     {if $nr_of_games >= 3}
+                                         {if $rest2 == 1}
+                                            <td>
+                                            </td>
+                                         {/if} 
+                                     {/if}
                                    {/if}
                                  {if $smarty.foreach.game_search.iteration is div by 2}       
                                     </tr> 
@@ -560,7 +564,7 @@ The main game page
                                             </div>
                                         {/if}
                                         <div class="games_main_list_title">
-                                            <a href="games_detail.php?game_id={$line.game_id}" class="standard_table_left">
+                                            <a href="games_main_detail.php?game_id={$line.game_id}" class="standard_table_left">
                                                 <br>{$line.game_name}
                                             </a>
                                         </div>
