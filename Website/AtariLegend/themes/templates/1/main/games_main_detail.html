@@ -1,0 +1,1011 @@
+{*
+/***************************************************************************
+*                                games_main_detail.html
+*                            -----------------------------
+*   begin                : Tuesday, August 1, 2017
+*   copyright            : (C) 2017 Atari Legend
+*   email                : martens_maarten@hotmail.com
+*   actual update        : Creation of file
+*
+*   Id: frontpage.html,v 0.1 2017/08/01 19:08 STG
+*
+***************************************************************************/
+
+//****************************************************************************************
+// This is the game detail page
+//****************************************************************************************
+*}
+
+
+{extends file='1/main/main.html'}
+
+{block name=main_body}
+    <script src="{$template_dir}includes/js/jssor.slider-25.2.1.min.js" type="text/javascript"></script>
+    
+    <script type="text/javascript"> <!-- script used for the jquery screenshot and boxscan slider -->
+        jQuery(document).ready(function ($) {
+      
+        //screenshot slider code
+        var jssor_1_SlideshowTransitions = [
+          {literal}{$Duration:1200,$Opacity:2}{/literal}
+        ];
+        
+        var jssor_1_options = {
+          $AutoPlay: 1,
+          $SlideshowOptions: {
+            $Class: $JssorSlideshowRunner$,
+            $Transitions: jssor_1_SlideshowTransitions,
+            $TransitionsOrder: 1
+          },
+          $ArrowNavigatorOptions: {
+            $Class: $JssorArrowNavigator$
+          },
+          $BulletNavigatorOptions: {
+            $Class: $JssorBulletNavigator$
+          },
+          $ThumbnailNavigatorOptions: {
+            $Class: $JssorThumbnailNavigator$,
+            {if $nr_screenshots < 10}
+                $Rows: 1,
+                $Cols: 4,
+                $Align: 209,
+            {else}
+                $Rows: 2,
+                $Cols: 8,
+                $Align: 171,
+            {/if}
+            $SpacingX: 5,
+            $SpacingY: 5,
+            $Orientation: 2           
+          }
+        };
+        
+        var jssor_1_slider = new $JssorSlider$("jssor_1", jssor_1_options);
+        
+        
+        // boxscan slider code
+        var jssor_2_SlideshowTransitions = [
+            {literal}{$Duration:1200,$Opacity:2}{/literal}
+        ];
+        
+        var jssor_2_options = {
+            $AutoPlay: 1,
+            $FillMode: 5,    
+            $SlideshowOptions: {               
+                $Class: $JssorSlideshowRunner$,
+                $Transitions: jssor_1_SlideshowTransitions,
+                $TransitionsOrder: 1
+            },
+            $ArrowNavigatorOptions: {
+                $Class: $JssorArrowNavigator$
+            },
+            $ThumbnailNavigatorOptions: {
+                $Class: $JssorThumbnailNavigator$,
+                $Cols: 4,
+                $Align: 400
+            }
+        };
+
+        var jssor_2_slider = new $JssorSlider$("jssor_2", jssor_2_options);
+
+        /*#region responsive code begin*/
+        function ScaleSlider() {
+            //for screenshots
+            var containerElement = jssor_1_slider.$Elmt.parentNode;
+            var containerWidth = containerElement.clientWidth;
+            if (containerWidth) {
+                var MAX_WIDTH = 960;
+
+                var expectedWidth = containerWidth;
+
+                if (MAX_WIDTH) {
+                    expectedWidth = Math.min(MAX_WIDTH, expectedWidth);
+                }
+
+                jssor_1_slider.$ScaleWidth(expectedWidth);
+            }
+            else {
+                window.setTimeout(ScaleSlider, 30);
+            }
+            
+            //for boxscans
+            var containerElement2 = jssor_2_slider.$Elmt.parentNode;
+            var containerWidth2 = containerElement2.clientWidth;
+            if (containerWidth2) {
+                var MAX_WIDTH = 480;
+
+                var expectedWidth2 = containerWidth2;
+
+                if (MAX_WIDTH) {
+                    expectedWidth2 = Math.min(MAX_WIDTH, expectedWidth2);
+                }
+
+                jssor_2_slider.$ScaleWidth(expectedWidth2);
+            }
+            else {
+                window.setTimeout(ScaleSlider, 30);
+            }
+        }
+        
+        ScaleSlider();
+        $(window).bind("load", ScaleSlider);
+        $(window).bind("resize", ScaleSlider);
+        $(window).bind("orientationchange", ScaleSlider);
+        /*#endregion responsive code end*/
+        
+        
+        //API $Play, $Pause
+        function Play() {
+            jssor_1_slider.$Play();
+        }
+            
+        function Pause() {
+            jssor_1_slider.$Pause();
+        }
+        
+        $("#play_jssor1").click(Play);
+        $("#pause_jssor1").click(Pause);
+        
+        function Play_box() {
+            jssor_2_slider.$Play();
+        }
+            
+        function Pause_box() {
+            jssor_2_slider.$Pause();
+        }
+        
+        $("#play_jssor2").click(Play_box);
+        $("#pause_jssor2").click(Pause_box);
+    });
+    
+    
+    </script>
+    <!-- I am adding a small piece of style code to make the thumbs bigger when there a less screenshots available, it makes it look better -->
+    <style>
+      {if $nr_screenshots < 10}
+         {literal}.games_main_detail_thumbs .p {width:160px;height:100px;}{/literal}
+      {else}
+         {literal}.games_main_detail_thumbs .p {width:90px;height:52px;}{/literal}
+      {/if}
+    </style>   
+    
+    <script type="text/javascript" src="{$template_dir}includes/js/lightbox.min.js"></script>
+    <link type="text/css" href="{$style_dir}css/lightbox.css" hreflang="en" rel="stylesheet">
+    
+    <script>
+        lightbox.option({        
+          'showImageNumberLabel': false
+        })
+    </script>
+    <script type="text/javascript">
+        function Show_profile(pub_id) {
+            var string = "profile";
+            var show_profile = string.concat(pub_id);
+            
+            var string = "profile_on";
+            var profile_on = string.concat(pub_id);
+            
+            var string = "profile_off";
+            var profile_off = string.concat(pub_id);
+            
+            var profile = document.getElementById(show_profile);
+            profile.style.display='table-row';
+            
+            var profile_icon_on = document.getElementById(profile_on);
+            profile_icon_on.style.display='none';
+            
+            var profile_icon_off = document.getElementById(profile_off);
+            profile_icon_off.style.display='inline';
+        }
+        
+        function Hide_profile(pub_id) {
+            var string = "profile";
+            var show_profile = string.concat(pub_id);
+            
+            var string = "profile_on";
+            var profile_on = string.concat(pub_id);
+            
+            var string = "profile_off";
+            var profile_off = string.concat(pub_id);
+            
+            var profile = document.getElementById(show_profile);
+            profile.style.display='none';
+            
+            var profile_icon_on = document.getElementById(profile_on);
+            profile_icon_on.style.display='inline';
+            
+            var profile_icon_off = document.getElementById(profile_off);
+            profile_icon_off.style.display='none';
+        }
+        
+        function Show_profile_ind(ind_id) {
+            var string = "profile_ind";
+            var show_profile_ind = string.concat(ind_id);
+            
+            var string = "profile_on_ind";
+            var profile_on_ind = string.concat(ind_id);
+            
+            var string = "profile_off_ind";
+            var profile_off_ind = string.concat(ind_id);
+            
+            var profile_ind = document.getElementById(show_profile_ind);
+            profile_ind.style.display='table-row';
+            
+            var profile_icon_on_ind = document.getElementById(profile_on_ind);
+            profile_icon_on_ind.style.display='none';
+            
+            var profile_icon_off_ind = document.getElementById(profile_off_ind);
+            profile_icon_off_ind.style.display='inline';
+        }
+        
+        function Hide_profile_ind(ind_id) {
+            var string = "profile_ind";
+            var show_profile_ind = string.concat(ind_id);
+            
+            var string = "profile_on_ind";
+            var profile_on_ind = string.concat(ind_id);
+            
+            var string = "profile_off_ind";
+            var profile_off_ind = string.concat(ind_id);
+            
+            var profile_ind = document.getElementById(show_profile_ind);
+            profile_ind.style.display='none';
+            
+            var profile_icon_on_ind = document.getElementById(profile_on_ind);
+            profile_icon_on_ind.style.display='inline';
+            
+            var profile_icon_off_ind = document.getElementById(profile_off_ind);
+            profile_icon_off_ind.style.display='none';
+        }
+        
+    </script>
+
+
+ 
+    <div id="main">
+        
+        <!--this column is only visible with 4 columns-->
+        <div class="column_wide_left_1920">
+            <div class="screenstar_position_front">
+            <!--*********************-->
+            <!--START Game info tile -->
+            <!--*********************-->
+            <div class="standard_tile">
+                <div class="help-tip">
+                    <p> 
+                        <i class="fa fa-info-circle" aria-hidden="true"></i> - Open/close the profile of a company or individual<br>
+                        <i class="fa fa-picture-o" aria-hidden="true"></i> - Click for the company logo or author photo<br>
+                        <i class="fa fa-newspaper-o" aria-hidden="true"></i> - Interview available
+                    </p>
+                </div>
+                <h1>GAME INFO</h1>
+                <div class="standard_tile_line"></div>
+                <div class="standard_list_entry">              
+                    <table class="standard_table_games_main_detail">
+                        {if isset($publisher)}
+                            {foreach from=$publisher item=line name=publisher}
+                                {if $line.logo != 'none'}
+                                    {$pub_logo = 1}
+                                {/if}
+                            {/foreach}
+                        {/if}
+                        {if isset($developer)}
+                            {foreach from=$developer item=line name=developer}
+                                {if $line.logo != 'none'}
+                                    {$dev_logo = 1}
+                                {/if}
+                            {/foreach}
+                        {/if}
+                        {if isset($dev_logo) || isset($pub_logo)}
+                        <tr>
+                            <td class="standard_table_center" colspan="3">
+                                {if isset($publisher)}
+                                    {$count_pub_logo=0}
+                                    {foreach from=$publisher item=line name=publisher}
+                                        {if $line.logo != 'none'}
+                                            {if $count_pub_logo == 0}
+                                                <!--<img src="../../includes/show_image.php?file={$line.logo}" alt="company logo" class="user_stats_img" id="games_details_img">-->
+                                                <img src="{$line.logo}" alt="company logo" class="games_details_img">
+                                                {$count_pub_logo=1}
+                                                {$logo = $line.logo}
+                                            {/if}
+                                        {/if}
+                                    {/foreach}
+                                {/if}
+                                {if isset($developer)}
+                                    {$count_dev_logo=0}
+                                    {foreach from=$developer item=line name=developer}
+                                        {if $line.logo != 'none'}
+                                            {if isset($logo)}
+                                               {if $line.logo != $logo}
+                                                   {if $count_dev_logo == 0}
+                                                        <img src="{$line.logo}" alt="company logo" class="games_details_img">
+                                                        {$count_dev_logo=1}
+                                                   {/if}
+                                               {/if}
+                                            {else}
+                                                {if $count_dev_logo == 0}
+                                                    <img src="{$line.logo}" alt="company logo" class="games_details_img">
+                                                    {$count_dev_logo=1}
+                                                {/if}
+                                            {/if}
+                                        {/if}
+                                    {/foreach}
+                                {/if}
+                            </td>   
+                        </tr>
+                        {/if}
+                        {if isset($publisher)}
+                            {foreach from=$publisher item=line name=publisher}
+                                <tr>
+                                    <td width="30%">
+                                        {if $smarty.foreach.publisher.index == 0}
+                                           <span class="games_main_detail_info_right">Publisher</span>
+                                        {/if}
+                                        {if $line.continent != '' ||  $line.extra_info != ''}
+                                            <br><br>
+                                        {/if}
+                                    </td>
+                                    <td width="5%">
+                                        <span class="games_main_detail_info_left" style="text-align:center;">-</span>
+                                        {if $line.continent != '' ||  $line.extra_info != ''}
+                                            <br><br>
+                                        {/if}
+                                    </td>
+                                    <td width="60%">
+                                        <span class="games_main_detail_info_left">
+                                            <a href="games_main_list.php?publisher={$line.pub_id}&amp;action=search" class="standard_tile_link">{$line.pub_name}</a>
+                                            {if $line.pub_profile != 'none'}
+                                                <a style="cursor: pointer;" onClick="Show_profile({$line.pub_id})" class="latest_comments_link"><i class="fa fa-info-circle" aria-hidden="true" id="profile_on{$line.pub_id}" text="click to view profile"></i></a>
+                                                <a style="cursor: pointer;" onClick="Hide_profile({$line.pub_id})" class="latest_comments_link"><i class="fa fa-info-circle" aria-hidden="true" id="profile_off{$line.pub_id}" style="display:none;" text="click to view profile"></i></a>
+                                            {/if}
+                                            {if $line.logo != 'none'}
+                                                <a href="../../includes/show_image.php?file={$line.logo_pop}" data-lightbox="image-1" data-title="{$line.pub_name}" class="latest_comments_link"><i class="fa fa-picture-o" aria-hidden="true"></i></a>
+                                            {/if}
+                                        </span>
+                                        {if $line.continent != '' ||  $line.extra_info != ''}
+                                            <br><span class="standard_tile_subtext">{$line.continent}{if $line.continent != '' AND $line.extra_info != ''} - {/if}{$line.extra_info}</span>  
+                                        {/if}
+                                    </td>
+                                </tr>
+                                {if $line.pub_profile != ''}
+                                    <tr></tr>
+                                    <tr style="display:none;" id="profile{$line.pub_id}">
+                                        <td width="100%" colspan="3" class="standard_table_center">
+                                           <textarea cols="70" id="profile{$line.pub_id}" class="latest_comments_textarea" style="margin-top:5px;margin-bottom:5px;" readonly>{$line.pub_profile}</textarea>
+                                        </td>
+                                    </tr>
+                                {/if}
+                            {/foreach}
+                        {/if}
+                        {if isset($developer)}
+                            {foreach from=$developer item=line name=developer}
+                                <tr> 
+                                    <td width="30%">
+                                        {if $smarty.foreach.developer.index == 0}
+                                            <span class="games_main_detail_info_right">Developer</span>
+                                        {/if}
+                                        {if $line.continent != '' ||  $line.extra_info != ''}
+                                            <br><br>
+                                        {/if}
+                                    </td>
+                                    <td width="5%">
+                                        <span class="games_main_detail_info_left" style="text-align:center;">-</span>
+                                        {if $line.continent != '' ||  $line.extra_info != ''}
+                                            <br><br>
+                                        {/if}
+                                    </td>
+                                    <td width="60%">
+                                        <span class="games_main_detail_info_left">
+                                            <a href="games_main_list.php?developer={$line.pub_id}&amp;action=search" class="standard_tile_link">{$line.pub_name}</a>
+                                            {if $line.pub_profile != 'none'}
+                                                <a style="cursor: pointer;" onClick="Show_profile({$line.pub_id})" class="latest_comments_link"><i class="fa fa-info-circle" aria-hidden="true" id="profile_on{$line.pub_id}" text="click to view profile"></i></a>
+                                                <a style="cursor: pointer;" onClick="Hide_profile({$line.pub_id})" class="latest_comments_link"><i class="fa fa-info-circle" aria-hidden="true" id="profile_off{$line.pub_id}" style="display:none;" text="click to view profile"></i></a>
+                                            {/if}
+                                            {if $line.logo != 'none'}
+                                                <a href="../../includes/show_image.php?file={$line.logo_pop}" data-lightbox="image-1" data-title="{$line.pub_name}" class="latest_comments_link"><i class="fa fa-picture-o" aria-hidden="true"></i></a>
+                                            {/if}
+                                        </span>
+                                        {if $line.continent != '' ||  $line.extra_info != ''}
+                                            <br><span class="standard_tile_subtext">{$line.continent}{if $line.continent != '' AND $line.extra_info != ''} - {/if}{$line.extra_info}</span>  
+                                        {/if}
+                                    </td>                                   
+                                </tr>
+                                {if $line.pub_profile != ''}
+                                    <tr></tr>
+                                    <tr style="display:none;" id="profile{$line.pub_id}">
+                                        <td width="100%" colspan="3" class="standard_table_center">
+                                           <textarea cols="70" id="profile{$line.pub_id}" class="latest_comments_textarea" style="margin-top:5px;margin-bottom:5px;" readonly>{$line.pub_profile}</textarea>
+                                        </td>
+                                    </tr>
+                                {/if}
+                            {/foreach}
+                        {/if}
+                        {if isset($game_author)}
+                            {foreach from=$game_author item=line name=game_author}
+                                <tr> 
+                                    <td width="30%">
+                                        {if $smarty.foreach.game_author.index == 0}
+                                            <span class="games_main_detail_info_right">Author</span>
+                                        {/if}
+                                        {if $line.auhthor_type_info != ''}
+                                            <br><br>
+                                        {/if}
+                                        {if $line.ind_nick != ''}
+                                            {if $line.auhthor_type_info == ''}
+                                                <br><br>
+                                            {else}
+                                                <br>
+                                            {/if}
+                                        {/if}                                        
+                                    </td>
+                                    <td width="5%">
+                                        <span class="games_main_detail_info_left" style="text-align:center;">-</span>
+                                        {if $line.auhthor_type_info != ''}
+                                            <br><br>
+                                        {/if}
+                                        {if $line.ind_nick != ''}
+                                            {if $line.auhthor_type_info == ''}
+                                                <br><br>
+                                            {else}
+                                                <br>
+                                            {/if}
+                                        {/if}
+                                    </td>
+                                    <td width="60%">
+                                        <span class="games_main_detail_info_left">
+                                            <a href="games_main_list.php?game_author={$line.ind_id}&amp;action=search" class="standard_tile_link">{$line.ind_name}</a>
+                                            {if $line.ind_profile != 'none'}
+                                                <a style="cursor: pointer;" onClick="Show_profile_ind({$line.ind_id})" class="latest_comments_link"><i class="fa fa-info-circle" aria-hidden="true" id="profile_on_ind{$line.ind_id}" text="click to view profile"></i></a>
+                                                <a style="cursor: pointer;" onClick="Hide_profile_ind({$line.ind_id})" class="latest_comments_link"><i class="fa fa-info-circle" aria-hidden="true" id="profile_off_ind{$line.ind_id}" style="display:none;" text="click to view profile"></i></a>
+                                            {/if}
+                                            {if $line.ind_img != 'none'}
+                                                <a href="../../includes/show_image.php?file={$line.ind_img}" data-lightbox="image-1" data-title="{$line.ind_name}" class="latest_comments_link"><i class="fa fa-picture-o" aria-hidden="true"></i></a>
+                                            {/if}
+                                            {if $line.interview_id != ''}
+                                                 <i class="fa fa-newspaper-o" aria-hidden="true" title="Interview available"></i>
+                                            {/if}
+                                        </span>
+                                        {if $line.ind_nick != ''}
+                                            <br><span class="standard_tile_subtext">AKA {$line.ind_nick}</span>  
+                                        {/if}
+                                        {if $line.auhthor_type_info != ''}
+                                            <br><span class="standard_tile_subtext">{$line.auhthor_type_info}</span>  
+                                        {/if}                                      
+                                    </td>                                   
+                                </tr>
+                                {if $line.ind_profile != ''}
+                                    <tr></tr>
+                                    <tr style="display:none;" id="profile_ind{$line.ind_id}">
+                                        <td width="100%" colspan="3" class="standard_table_center">
+                                           <textarea cols="70" id="profile_ind{$line.ind_id}" class="latest_comments_textarea" style="margin-top:5px;margin-bottom:5px;" readonly>{$line.ind_profile}</textarea>
+                                        </td>
+                                    </tr>
+                                {/if}
+                            {/foreach}
+                        {/if}
+                        {if isset($game_year)}
+                            {foreach from=$game_year item=line name=game_year}
+                                <tr> 
+                                    <td width="30%">
+                                    {if $smarty.foreach.game_year.index == 0}
+                                        <span class="games_main_detail_info_right">Year</span>
+                                    {/if}
+                                        {if $line.extra_info != ''}
+                                            <br><br>
+                                        {/if}
+                                    </td>
+                                    <td width="5%">
+                                        <span class="games_main_detail_info_left" style="text-align:center;">-</span>
+                                        {if $line.extra_info != ''}
+                                            <br><br>
+                                        {/if}
+                                    </td>
+                                    <td width="60%">
+                                        <span class="games_main_detail_info_left">
+                                            <a href="games_main_list.php?year={$line.game_year}&amp;action=search" class="standard_tile_link">{$line.game_year}</a>    
+                                        </span>
+                                        {if $line.extra_info != ''}
+                                            <br><span class="standard_tile_subtext">{$line.extra_info}</span>  
+                                        {/if}
+                                    </td>                                   
+                                </tr>
+                            {/foreach}
+                        {/if}
+                        {if isset($cat)}
+                            {foreach from=$cat item=line name=cat}
+                                <tr> 
+                                    <td width="30%">
+                                    {if $smarty.foreach.cat.index == 0}
+                                        <span class="games_main_detail_info_right">Category</span>
+                                    {/if}                                     
+                                    </td>
+                                    <td width="5%">
+                                        <span class="games_main_detail_info_left" style="text-align:center;">-</span>                                       
+                                    </td>
+                                    <td width="60%">
+                                        <span class="games_main_detail_info_left">
+                                            <a href="games_main_list.php?category={$line.cat_id}&amp;action=search" class="standard_tile_link">{$line.cat_name}</a>    
+                                        </span>
+                                    </td>                                   
+                                </tr>
+                            {/foreach}
+                        {/if}
+                        {if $game_info.game_free == 1 || $game_info.game_unreleased == 1 || $game_info.game_development == 1 || $game_info.game_ste_only == 1 || $game_info.game_ste_enhan == 1
+                            || $game_info.game_falcon_only == 1 ||  $game_info.game_falcon_enhan == 1 || $game_info.game_falcon_rgb == 1 || $game_info.game_falcon_vga == 1 || $game_info.game_mono == 1
+                            || $game_info.game_wanted <> '' || $game_info.game_arcade == 1 || $game_info.game_seuck == 1 || $game_info.game_stos == 1 || $game_info.game_stac == 1}
+                            <tr> 
+                                <td width="30%">
+                                    <span class="games_main_detail_info_right">Specifics</span>
+                                        {if $game_info.game_free == 1}
+                                            <br>
+                                        {/if}
+                                        {if $game_info.game_unreleased == 1} 
+                                            <br>
+                                        {/if}
+                                        {if $game_info.game_unfinished == 1}
+                                            <br>
+                                        {/if}
+                                        {if $game_info.game_development == 1}
+                                            <br>
+                                        {/if}
+                                        {if $game_info.game_ste_only == 1}
+                                            <br>
+                                        {/if}   
+                                        {if $game_info.game_ste_enhan == 1}
+                                            <br>
+                                        {/if}
+                                        {if $game_info.game_falcon_only == 1}
+                                            <br>
+                                        {/if}
+                                        {if $game_info.game_falcon_enhan == 1} 
+                                            <br>
+                                        {/if}
+                                        {if $game_info.game_falcon_rgb == 1}
+                                            <br>
+                                        {/if}
+                                        {if $game_info.game_falcon_vga == 1}
+                                            <br>
+                                        {/if}
+                                        {if $game_info.game_mono == 1}
+                                            <br>
+                                        {/if}
+                                        {if $game_info.game_wanted <> ''}
+                                            <br>
+                                        {/if}
+                                        {if $game_info.game_arcade == 1} 
+                                            <br>
+                                        {/if}
+                                        {if $game_info.game_seuck == 1}
+                                            <br>
+                                        {/if}
+                                        {if $game_info.game_stos == 1}
+                                            <br>
+                                        {/if}
+                                        {if $game_info.game_stac == 1}
+                                            <br>
+                                        {/if}
+                                </td>
+                                <td width="5%">
+                                    <span class="games_main_detail_info_left" style="text-align:center;">-</span>
+                                        {if $game_info.game_free == 1}
+                                            <br>
+                                        {/if}
+                                        {if $game_info.game_unreleased == 1} 
+                                            <br>
+                                        {/if}
+                                        {if $game_info.game_unfinished == 1}
+                                            <br>
+                                        {/if}
+                                        {if $game_info.game_development == 1}
+                                            <br>
+                                        {/if}
+                                        {if $game_info.game_ste_only == 1}
+                                            <br>
+                                        {/if}   
+                                        {if $game_info.game_ste_enhan == 1}
+                                            <br>
+                                        {/if}
+                                        {if $game_info.game_falcon_only == 1}
+                                            <br>
+                                        {/if}
+                                        {if $game_info.game_falcon_enhan == 1} 
+                                            <br>
+                                        {/if}
+                                        {if $game_info.game_falcon_rgb == 1}
+                                            <br>
+                                        {/if}
+                                        {if $game_info.game_falcon_vga == 1}
+                                            <br>
+                                        {/if}
+                                        {if $game_info.game_mono == 1}
+                                            <br>
+                                        {/if}
+                                        {if $game_info.game_wanted <> ''}
+                                            <br>
+                                        {/if}
+                                        {if $game_info.game_arcade == 1} 
+                                            <br>
+                                        {/if}
+                                        {if $game_info.game_seuck == 1}
+                                            <br>
+                                        {/if}
+                                        {if $game_info.game_stos == 1}
+                                            <br>
+                                        {/if}
+                                        {if $game_info.game_stac == 1}
+                                            <br>
+                                        {/if}
+                                </td>
+                                <td width="60%">
+                                    <span class="standard_tile_subtext">
+                                        {if $game_info.game_free == 1}
+                                            Non-Commercial <br>
+                                        {/if}
+                                        {if $game_info.game_unreleased == 1} 
+                                            Unreleased <br>
+                                        {/if}
+                                        {if $game_info.game_unfinished == 1}
+                                            Unfinished <br>
+                                        {/if}
+                                        {if $game_info.game_development == 1}
+                                            In development <br>
+                                        {/if}
+                                        {if $game_info.game_ste_only == 1}
+                                            STe only <br>
+                                        {/if}   
+                                        {if $game_info.game_ste_enhan == 1}
+                                            STe enhanced <br>
+                                        {/if}
+                                        {if $game_info.game_falcon_only == 1}
+                                            Falcon only <br>
+                                        {/if}
+                                        {if $game_info.game_falcon_enhan == 1} 
+                                            Falcon enhanced <br>
+                                        {/if}
+                                        {if $game_info.game_falcon_rgb == 1}
+                                            Falcon RGB <br>
+                                        {/if}
+                                        {if $game_info.game_falcon_vga == 1}
+                                            Falcon VGA <br>
+                                        {/if}
+                                        {if $game_info.game_mono == 1}
+                                            Monochrome <br>
+                                        {/if}
+                                        {if $game_info.game_wanted <> ''}
+                                            Wanted <br>
+                                        {/if}
+                                        {if $game_info.game_arcade == 1} 
+                                            Arcade <br>
+                                        {/if}
+                                        {if $game_info.game_seuck == 1}
+                                            SUECK <br>
+                                        {/if}
+                                        {if $game_info.game_stos == 1}
+                                            STOS <br>
+                                        {/if}
+                                        {if $game_info.game_stac == 1}
+                                            STAC <br>
+                                        {/if}
+                                    </span>
+                                </td>                                   
+                            </tr>
+                        {/if}
+                        {if isset($aka)}
+                            {foreach from=$aka item=line name=aka}
+                                <tr> 
+                                    <td width="30%">
+                                    {if $smarty.foreach.aka.index == 0}
+                                        <span class="games_main_detail_info_right">AKA</span>
+                                    {/if}                                     
+                                    </td>
+                                    <td width="5%">
+                                        <span class="games_main_detail_info_left" style="text-align:center;">-</span>                                       
+                                    </td>
+                                    <td width="60%">
+                                        <span class="games_main_detail_info_left">
+                                            <a href="games_main_detail.php?game_id={$line.game_id}" class="standard_tile_link">{$line.game_aka_name}</a>    
+                                        </span>
+                                    </td>                                   
+                                </tr>
+                            {/foreach}
+                        {/if}
+                    </table>
+                </div>
+                <div class="standard_tile_line"></div>
+            </div>	
+            <!--*******************-->
+            <!--END Game info tile -->
+            <!--*********************-->
+            </div>
+        </div>
+        
+        
+        
+        
+        <!--this column is only visible with 3 and 2 columns-->
+        <div class="column_wide_left">
+            <!--*********************-->
+            <!--START screenshot tile -->
+            <!--*********************-->
+            <br>
+            <div class="standard_tile">
+                <h1>{$game_info.game_name|upper}</h1>
+                <div class="standard_tile_line"></div>                                
+                    <div id="jssor_1" class="games_main_detail_screenshot">
+                        <div data-u="slides" class="games_main_detail_slides">
+                            {foreach from=$screenshots item=line name=screenshots}
+                            <div>
+                                <img data-u="image" src="{$line.screenshot_image}">
+                                <img data-u="thumb" src="{$line.screenshot_image}">
+                            </div>
+                            {/foreach}                            
+                        </div>
+                        <!-- Thumbnail Navigator -->
+                        <div data-u="thumbnavigator" class="games_main_detail_thumbs" data-autocenter="2" data-scale-left="0.75">
+                            <div data-u="slides">
+                                <div data-u="prototype" class="p">                                    
+                                    <div data-u="thumbnailtemplate" class="t"></div>
+                                </div>
+                            </div>
+                        </div>
+                        {if $nr_screenshots <= 20}
+                            <!-- Bullet Navigator -->
+                            <div data-u="navigator" class="games_main_detail_nav" data-scale="0.5">
+                                <div data-u="prototype" class="i">
+                                    <svg viewbox="0 0 16000 16000" style="position:absolute;top:0;left:0;width:100%;height:100%;">
+                                        <rect class="b" x="2200" y="2200" width="11600" height="11600"></rect>
+                                    </svg>
+                                </div>
+                            </div>
+                        {/if}
+                        <!-- Arrow Navigator -->
+                        <div data-u="arrowleft" class="games_main_detail_arrow" id="games_main_detail_arrow_left" data-autocenter="2" data-scale="0.75" data-scale-left="1">
+                            <svg viewbox="0 0 16000 16000" style="position:absolute;top:0;left:0;width:100%;height:100%;">
+                                <polyline class="a" points="11040,1920 4960,8000 11040,14080 "></polyline>
+                            </svg>
+                        </div>
+                        <div data-u="arrowright" class="games_main_detail_arrow" id="games_main_detail_arrow_right" data-autocenter="2" data-scale="0.75" data-scale-right="1">
+                            <svg viewbox="0 0 16000 16000" style="position:absolute;top:0;left:0;width:100%;height:100%;">
+                                <polyline class="a" points="4960,1920 11040,8000 4960,14080 "></polyline>
+                            </svg>
+                        </div>
+                    </div>
+                    <!-- #endregion Jssor Slider End -->
+                    <span class="games_main_detail_info_right"><span class="standard_tile_subtext"><b>{$nr_screenshots}</b> screenshots loaded</span></span>
+                    <span class="standard_tile_subtext" style="float:right;margin-right:20px;">Autoplay <a href="javascript:Play();" id="play_jssor1" >On</a>/<a id="pause_jssor1" href="javascript:Pause();">Off</a></span>
+                    <br><br>
+                </div>
+            <!--*********************-->
+            <!--END screenshot tile -->
+            <!--*********************-->
+
+
+            <!--this column is only visible with 4 columns-->
+            <div class="column_wide_center_1920">
+                
+                <!--Start latest news tile-->
+                {block name=latest_news_tile}
+                    {include file='1/main/latest_news_tile.html'}
+                {/block}
+
+                <!--Start latest reviews tile-->
+                {block name=latest_reviews_tile}
+                    {include file='1/main/latest_reviews_tile.html'}
+                {/block}
+
+                <div class="contact_tiles">
+                    <div class="contact_email_button"><a href="#"> </a></div>
+                    <div class="contact_facebook_button"><a href="#"> </a></div>
+                    <div class="contact_jukebox_button"><a href="#"> </a></div>
+                    <div class="contact_chat_button"><a href="#"> </a></div>
+                </div>
+            </div>
+        </div>
+
+        <!--this column is only visible with 4 columns-->
+        <div class="column_wide_right_1920">          
+            <!--*********************-->
+            <!--START boxscan tile -->
+            <!--*********************-->
+            <br>
+             <div class="standard_tile">
+                <h1>BOXSCAN</h1>
+                <div class="standard_tile_line"></div>      
+                <div id="jssor_2" class="games_main_detail_box">
+                    <!-- Loading Screen -->
+                    <div data-u="slides" class="games_main_detail_slides_box">
+                        {foreach from=$boxscan item=line name=boxscan}
+                            <div>
+                                <a href="../../includes/show_image.php?file={$line.image_pop}" data-lightbox="image-1" class="latest_comments_link"><img data-u="image" src="{$line.image}" class="games_main_detail_box_img"></a>    
+                                <div u="thumb">
+                                    <div style="width: 100%; height: 100%; background-image: url({$line.image}); background-position: center center; background-repeat: no-repeat; background-size: contain;">
+                                    </div>
+                                </div>
+                            </div>
+                        {/foreach}
+                    </div>
+                    <!-- Thumbnail Navigator -->
+                    <div data-u="thumbnavigator" class="games_main_detail_thumbs_box" data-autocenter="1" data-scale-bottom="0.75">
+                        <div data-u="slides">
+                            <div data-u="prototype" class="p" style="width:100px;height:100px;">
+                                <div data-u="thumbnailtemplate" class="t"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Arrow Navigator -->
+                    <div data-u="arrowleft" class="games_main_detail_arrow" id="games_main_detail_arrow_left_box" data-autocenter="2" data-scale="0.75" data-scale-left="1">
+                        <svg viewbox="0 0 16000 16000" style="position:absolute;top:-75px;left:0;width:100%;height:100%;">
+                            <polyline class="a" points="11040,1920 4960,8000 11040,14080 "></polyline>
+                        </svg>
+                    </div>
+                    <div data-u="arrowright" class="games_main_detail_arrow" id="games_main_detail_arrow_right_box" data-autocenter="2" data-scale="0.75" data-scale-right="1">
+                        <svg viewbox="0 0 16000 16000" style="position:absolute;top:-75px;left:0;width:100%;height:100%;">
+                            <polyline class="a" points="4960,1920 11040,8000 4960,14080 "></polyline>
+                        </svg>
+                    </div>
+                </div>
+                <span class="games_main_detail_info_right"><span class="standard_tile_subtext">{if isset($nr_box)}{if $nr_box == '1'}<b>{$nr_box}</b> boxscan loaded{else}<b>{$nr_box}</b> boxscans loaded{/if}{/if}</span></span>
+                <span class="standard_tile_subtext" style="float:right;margin-right:20px;">Autoplay <a href="javascript:Play_box();" id="play_jssor2" >On</a>/<a href="javascript:Pause_box();" id="pause_jssor2">Off</a></span>
+                <br><br>
+            </div>
+        </div>
+
+        <!--this column is only visible with 3 columns-->
+        <div class="column_wide_right">
+            <!--register account tile -->
+            {if (isset($action)) and ($action == 'register')}
+                {block name=user_register_tile}
+                    {include file='1/main/user_register_tile.html'}
+                {/block}
+            {/if}
+            
+            <!--password reset tile -->
+            {if (isset($action)) and ($action == 'reset')}
+                {block name=user_reset_tile}
+                    {include file='1/main/user_reset_tile.html'}
+                {/block}
+            {/if}
+            
+            <!--password reset tile - enter new pwd -->
+            {if (isset($action)) and ($action == 'new_pwd')}
+                {block name=user_reset_tile}
+                    {include file='1/main/user_new_pwd_tile.html'}
+                {/block}
+            {/if}
+            
+            <!--Start "Who is it" tile-->
+            {block name=who_is_it_tile}
+                {include file='1/main/who_is_it_tile.html'}
+            {/block}
+        </div>
+        
+        <!--this column is only visible in the 3 colum mode-->
+        <div class="column_left">
+            <!--Start latest news tile-->
+            {block name=latest_news_tile}
+                {include file='1/main/latest_news_tile.html'}
+            {/block}
+            
+            <!--Start date quote tile-->
+            {block name=date_quote_tile}
+                {include file='1/main/date_quote_tile.html'}
+            {/block}
+        </div>
+        
+        <!--this column is only visible in the 1 colum mode-->
+        <div class="column_phone">
+             <!--register account tile -->
+            {if (isset($action)) and ($action == 'register')}
+                {block name=user_register_tile}
+                    {include file='1/main/user_register_tile.html'}
+                {/block}
+            {/if}
+            
+            <!--password reset tile -->
+            {if (isset($action)) and ($action == 'reset')}
+                {block name=user_reset_tile}
+                    {include file='1/main/user_reset_tile.html'}
+                {/block}
+            {/if}
+            
+            <!--password reset tile - enter new pwd -->
+            {if (isset($action)) and ($action == 'new_pwd')}
+                {block name=user_reset_tile}
+                    {include file='1/main/user_new_pwd_tile.html'}
+                {/block}
+            {/if}
+            
+            <!--Start latest news tile-->
+            {block name=latest_news_tile}
+                {include file='1/main/latest_news_tile.html'}
+            {/block}
+            
+            <!--Start "Who is it" tile-->
+            {block name=who_is_it_tile}
+                {include file='1/main/who_is_it_tile.html'}
+            {/block}
+            
+            <!--Start date quote tile-->
+            {block name=date_quote_tile}
+                {include file='1/main/date_quote_tile.html'}
+            {/block}
+        </div>
+        
+        <!--this column is only visible in the 3 colum mode and 1 column mode-->
+        <div class="column_center">
+            <!--Start latest reviews tile-->
+            {block name=latest_reviews_tile}
+                {include file='1/main/latest_reviews_tile.html'}
+            {/block}
+            
+             <!--Start screenstar tile-->
+            {block name=screenstar_tile}
+                {include file='1/main/tile_screenstar.html'}
+            {/block}
+
+            <!--Start "hotlinks" tile-->
+            {block name=hotlinks_tile}
+                {include file='1/main/hotlinks_tile.html'}
+            {/block}
+        </div>
+
+        <!--this column is only visible in the 3 colum mode and 1 column mode-->
+        <div class="column_right">
+
+            <!--Start "Did you know" tile-->
+            {block name=did_you_know_tile}
+                {include file='1/main/did_you_know_tile.html'}
+            {/block}
+
+            <!--Start "statistics" tile-->
+            {block name=statistics_tile}
+                {include file='1/main/statistics_tile.html'}
+            {/block}
+
+            <!--Start contact tiles - will only be used on the front page so no inheritance here -->
+            <div class="contact_tiles">
+                    <div class="contact_email_button"><a href="#"> </a></div>
+                    <div class="contact_facebook_button"><a href="#"> </a></div>
+                    <div class="contact_jukebox_button"><a href="#"> </a></div>
+                    <div class="contact_chat_button"><a href="#"> </a></div>
+                </div>
+        </div>
+
+        <!--this column is only visible in the 2 colum mode -->
+        <div class="column_left_tab">
+
+            <!--Start date quote tile
+            {block name=date_quote_tile}
+            {include file='1/main/date_quote_tile.html'}
+            {/block}-->
+
+            <!--Start "Did you know" tile-->
+            {block name=did_you_know_tile}
+                {include file='1/main/did_you_know_tile.html'}
+            {/block}
+
+            <!--Start "statistics" tile-->
+            {block name=statistics_tile}
+                {include file='1/main/statistics_tile.html'}
+            {/block}
+            
+             <!--Start contact tiles-->
+            <div class="contact_tiles">
+                <div class="contact_jukebox_button"><a href="#"> </a></div>
+                <div class="contact_chat_button"><a href="#"> </a></div>
+                <div class="contact_email_button"><a href="#"> </a></div>
+                <div class="contact_facebook_button"><a href="#"> </a></div>
+            </div>
+            
+        </div>
+
+        <!--this column is only visible in the 2 colum mode -->
+        <div class="column_right_tab">
+            <!--Start date quote tile
+            {block name=date_quote_tile}
+                {include file='1/main/date_quote_tile.html'}
+            {/block}-->
+        </div>
+    </div>
+{/block}
