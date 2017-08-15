@@ -140,10 +140,10 @@ function DeleteEditable(comment_id,user_id) {
             <tr>
                 <td class="standard_table_left">
                     <span class="standard_tile_subtext" style="font-weight:bold;float:left;margin-left:5px;margin-right:5px;margin-top:15px;">
-                        <a href="#">{$line.user_name}</a>
+                        <a href="../../admin/user/user_detail.php?user_id_selected={$line.user_id}">{$line.user_name}</a>
                     </span>
                     <span class="standard_tile_subtext" style="font-weight:bold;float:right;display:inline;margin-left:5px;margin-right:5px;margin-top:15px;">
-                        <a href="#" >{$line.game}</a>
+                        <a href="../games/games_main_detail.php?game_id={$line.game_id}">{$line.game}</a>
                     </span>
                     <div class="latest_comments_text">
                         <div id="latest_comment_edit{$line.comment_id}">{$line.comment}</div>
@@ -159,6 +159,18 @@ function DeleteEditable(comment_id,user_id) {
                         {if $line.email != ''}
                             <a href="mailto:{$line.email}?subject=Comment%20of%20{$line.game|escape:'url'}%20at%20Atari%20Legend" class="latest_comments_link" title="Click to contact user"><i class="fa fa-envelope" aria-hidden="true"></i></a>
                         {/if}
+                        {if $line.user_fb != ''}
+                            <a href="{$line.user_fb}" class="latest_comments_link" title="Click to visit Facebook profile"><i class="fa fa-facebook-square" aria-hidden="true"></i></a>
+                        {/if}
+                        {if $line.user_twitter != ''}
+                            <a href="{$line.user_twitter}" class="latest_comments_link" title="Click to visit Twitter profile"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                        {/if}   
+                        {if $line.user_af != ''}
+                            <a href="{$line.user_af}" class="latest_comments_link" title="Click to visit Atari-Forum profile"><i class="fa fa-external-link-square" aria-hidden="true"></i></a>
+                        {/if}
+                        {if $line.user_website != ''}
+                            <a href="{$line.user_website}" class="latest_comments_link" title="Click to visit users website"><i class="fa fa-external-link-square" aria-hidden="true"></i></a>
+                        {/if}           
                         </span>
                     {/if}
                     <span class="standard_tile_subtext" style="font-weight:bold;float:right;display:inline;margin-right:5px;margin-bottom:15px;">
@@ -172,6 +184,19 @@ function DeleteEditable(comment_id,user_id) {
     {/if}
 {else}
     <div class="standard_tile">
+        <div class="help-tip">
+            <p> 
+                <u>Only available with your own comments:</u><br>
+                <i class="fa fa-pencil" aria-hidden="true"></i> - Edit comment<br>
+                <i class="fa fa-floppy-o" aria-hidden="true"></i> - Save changes to comment<br>
+                <i class="fa fa-trash-o" aria-hidden="true"></i> - Delete comment (if )<br><br>
+                <u>General options:</u><br>
+                <i class="fa fa-envelope" aria-hidden="true"></i> - Email author of comment<br>
+                <i class="fa fa-facebook-square" aria-hidden="true"></i> - Go to Facebook profile of author<br>
+                <i class="fa fa-twitter" aria-hidden="true"></i> - Go to Twitter profile of author<br>
+                <i class="fa fa-external-link-square" aria-hidden="true"></i> - Visit external link
+            </p>
+        </div>
         <h1><a href="../games/games_comment_main.php" class="standard_tile_link" title="Click to see all comments">LATEST COMMENTS</a></h1>
         <div class="standard_tile_line"></div>
         <div class="standard_list_entry">
@@ -181,10 +206,10 @@ function DeleteEditable(comment_id,user_id) {
                     <tr>
                         <td class="standard_table_left">
                             <span class="standard_tile_subtext" style="font-weight:bold;float:left;margin-left:5px;margin-right:5px;margin-top:15px;">
-                                <a href="#">{$line.user_name}</a>
+                                <a href="../../admin/user/user_detail.php?user_id_selected={$line.user_id}">{$line.user_name}</a>
                             </span>
                             <span class="standard_tile_subtext" style="font-weight:bold;float:right;display:inline;margin-left:5px;margin-right:5px;margin-top:15px;">
-                                <a href="#">{$line.game}</a>
+                                <a href="../games/games_main_detail.php?game_id={$line.game_id}">{$line.game}</a>
                             </span>
                             <div class="latest_comments_text">
                                 <div id="latest_comment_edit{$line.comment_id}">{$line.comment}</div>

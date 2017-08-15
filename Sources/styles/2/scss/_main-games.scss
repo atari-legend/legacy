@@ -283,7 +283,6 @@
 
 .games_main_detail_box_img{    
     border: 1px solid #666666;
-    image-rendering: pixelated;
 }
 
 #games_main_detail_arrow_left_box{left:45px;}
@@ -305,3 +304,45 @@
 .games_main_detail_thumbs_box .p:hover .t{opacity:.8;}
 .games_main_detail_thumbs_box .pav .t, .games_main_detail_thumbs_box .pdn .t, .games_main_detail_thumbs_box .p:hover.pdn .t{opacity:1;}
 
+.games_main_detail_comments_add{
+    @extend .latest_comments_textarea;
+    height: 7em;  
+}
+
+.games_main_detail_comments_log_on{
+    @extend .latest_comments_text;
+    text-align:center;
+    color:red;
+}
+
+.games_main_detail_comments_container{
+    max-height: 500px;
+    overflow: auto;
+    width: 100%;
+}
+
+//scrollbar CHROME and SAFARI
+.games_main_detail_comments_container::-webkit-scrollbar {
+    width: 1em;
+    background-color: #cccccc;
+}
+ 
+.games_main_detail_comments_container::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+ 
+.games_main_detail_comments_container::-webkit-scrollbar-thumb {
+  background-color: #666666;
+  outline: 1px solid slategrey;
+}
+
+//scrollbar IE
+.games_main_detail_comments_container {
+    scrollbar-3dlight-color:#666666;
+    scrollbar-arrow-color:#666666;
+    scrollbar-base-color:#666666;
+    scrollbar-darkshadow-color:#666666;
+    scrollbar-face-color:#666666;
+    scrollbar-highlight-color:#cccccc;
+    scrollbar-shadow-color:#666666;
+}
