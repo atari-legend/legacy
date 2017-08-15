@@ -1,18 +1,18 @@
 <?php
 /***************************************************************************
-*                                db_latest_comments_tile.php
+*                                db_games_main_detail.php
 *                            ------------------------------------
-*   begin                : Wednesday, Julu 12, 2017
+*   begin                : Sunday, August 13, 2017
 *   copyright            : (C) 2017 Atari Legend
 *   email                : martens_maarten@hotmail.com
 *   actual update        : Creation of file
 *
-*   Id: db_latest_comments_tile.php,v 0.1 2017/07/12 23:35 ST Graveyard
+*   Id: db_games_main_detail.php,v 0.1 2017/08/13 21:02 ST Graveyard
 *
 ***************************************************************************/
 
 //*********************************************************************************************
-// This is the php code where we update, delete the latest game comments
+// This is the php code where we update, delete the game's comments
 //*********************************************************************************************
 
 include("../../config/common.php");
@@ -27,7 +27,7 @@ if (isset($action))
         $sql = $mysqli->query("DELETE FROM game_user_comments WHERE comment_id = '$comment_id'") or die("couldn't delete game_comment quote");
         $sql = $mysqli->query("DELETE FROM comments WHERE comments_id = '$comment_id'") or die("couldn't delete comment quote");
     }
-    else
+    elseif ($action=="save_comment")
     {
         //$data = $_POST['data'];
         $data = $mysqli->real_escape_string($data);  
@@ -36,14 +36,26 @@ if (isset($action))
         
         create_log_entry('Games', $comment_id, 'Comment', $comment_id, 'Update', $_SESSION['user_id']); 
     }
+    else
+    {
+        $data = $mysqli->real_escape_string($data);  
+        $timestamp = time();
+        
+        $mysqli->query("INSERT INTO comments (comment, user_id, timestamp ) VALUES ('$data', '$_SESSION[user_id]', '$timestamp')") or die ("Inserting the comment failed");
+        $new_comment_id = $mysqli->insert_id;
+        $mysqli->query("INSERT INTO game_user_comments (game_id, comment_id) VALUES ('$game_id', '$new_comment_id')") or die ("Inserting the comment failed");
+         
+        create_log_entry('Games', $new_comment_id, 'Comment', $new_comment_id, 'Insert', $_SESSION['user_id']); 
+    }
     
-    //get all the data
+    //Select the comments from the DB
     $sql_comment = $mysqli->query("SELECT *
-                                    FROM game_user_comments
-                                    LEFT JOIN comments ON ( game_user_comments.comment_id = comments.comments_id )
-                                    LEFT JOIN users ON ( comments.user_id = users.user_id )
-                                    LEFT JOIN game ON ( game_user_comments.game_id = game.game_id )
-                                    ORDER BY comments.timestamp DESC LIMIT 3") or die("Syntax Error! Couldn't not get the comments!");
+                                FROM game_user_comments
+                                LEFT JOIN comments ON ( game_user_comments.comment_id = comments.comments_id )
+                                LEFT JOIN users ON ( comments.user_id = users.user_id )
+                                LEFT JOIN game ON ( game_user_comments.game_id = game.game_id )
+                                WHERE game_user_comments.game_id = '$game_id'
+                                ORDER BY comments.timestamp desc") or die("Syntax Error! Couldn't not get the comments!");
 
     // lets put the comments in a smarty array
     while ($query_comment = $sql_comment->fetch_array(MYSQLI_BOTH)) 
@@ -85,6 +97,9 @@ if (isset($action))
     }
     
     $smarty->assign('smarty_action', 'delete_comment');
-    $smarty->display("file:" . $mainsite_template_folder. "latest_comments_tile.html");
+    $smarty->assign('game_id', $game_id);
+
+    //Send all smarty variables to the templates
+    $smarty->display("file:" . $mainsite_template_folder . "ajax_games_main_detail_comments.html");   
 }
 ?>

@@ -157,9 +157,8 @@
         $("#play_jssor2").click(Play_box);
         $("#pause_jssor2").click(Pause_box);
     });
-    
-    
     </script>
+    
     <!-- I am adding a small piece of style code to make the thumbs bigger when there a less screenshots available, it makes it look better -->
     <style>
       {if $nr_screenshots < 10}
@@ -177,7 +176,7 @@
           'showImageNumberLabel': false
         })
     </script>
-    <script type="text/javascript">
+    <script type="text/javascript"> <!--game info box scripts -->
         function Show_profile(pub_id) {
             var string = "profile";
             var show_profile = string.concat(pub_id);
@@ -257,11 +256,285 @@
             var profile_icon_off_ind = document.getElementById(profile_off_ind);
             profile_icon_off_ind.style.display='none';
         }
-        
     </script>
+    
+    {literal}
+    <script type="text/javascript"> <!-- Comment tile scripts
+    function CommentEditable(comment_id,user_id) {
+        var string = "latest_comment_edit";
+        var editable_comment = string.concat(comment_id);
+        
+        var string = "comment_edit_icon";
+        var edit_icon = string.concat(comment_id);
+        
+        var string = "comment_save_icon";
+        var save_icon = string.concat(comment_id);
+        
+        var string = "comment_input";
+        var comment_input = string.concat(comment_id);
+        
+        var input = document.getElementById(comment_input);
+        input.style.display='inline';
+        
+        var save = document.getElementById(save_icon);
+        save.style.display='inline';
+        
+        var edit = document.getElementById(edit_icon);
+        edit.style.display='none';
+        
+        var output = document.getElementById(editable_comment);
+        output.style.display='none';
+    }
 
+    function SaveEditable(comment_id,user_id,game_id) {
 
- 
+        //It took me ages to get his to work because I'm a dipshit - I hate ajax --> ST Graveyard 14/07/2014 @fucking 00:44
+        //Im not using contenteditable crap on a div because this way, loads of <br> statements are added in the DB.
+        //So I'm changing the div to a text area, still, in java it seems a return is not sent to the server so I'm doing a conversion to <br>
+        //Once the <br> are in the db, I do another conversion when I load the from the DB into an input field
+
+        var string = "comment_input";
+        var comment_data = string.concat(comment_id);
+           
+        var comment = document.getElementById(comment_data).value
+        comment = comment.replace(/\n\r?/g, '<br />');
+        
+        var url = "../../main/games/db_games_main_detail.php?action=save_comment&comment_id="+comment_id+"&data="+comment+"&game_id="+game_id;
+              
+        if (comment_id == "")
+        {
+            document.getElementById("latest_comments_all").innerHTML = "";
+            return;
+        }
+        else
+        {
+            if (window.XMLHttpRequest)
+            {
+                // code for IE7+, Firefox, Chrome, Opera, Safari
+                xmlhttp = new XMLHttpRequest();
+            }
+            else
+            {
+                // code for IE6, IE5
+                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xmlhttp.onreadystatechange = function()
+            {
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
+                {
+                    document.getElementById("latest_comments_all").innerHTML = xmlhttp.responseText;
+                }
+            }
+            xmlhttp.open("GET",url,true);
+            xmlhttp.send();
+        }
+    }
+
+    function DeleteEditable(comment_id,user_id,game_id) {
+
+         // CONFIRM REQUIRES ONE ARGUMENT
+         var message = "Are you sure you want to delete this comment?";
+         // CONFIRM IS BOOLEAN. THAT MEANS THAT
+         // IT RETURNS TRUE IF 'OK' IS CLICKED
+         // OTHERWISE IT RETURN FALSE
+         var return_value = confirm(message);
+         
+         if (return_value !="0")
+         {
+             if (comment_id == "")
+                {
+                    document.getElementById("latest_comments_all").innerHTML = "";
+                    return;
+                }
+                else
+                {
+                    if (window.XMLHttpRequest)
+                    {
+                        // code for IE7+, Firefox, Chrome, Opera, Safari
+                        xmlhttp = new XMLHttpRequest();
+                    }
+                    else
+                    {
+                        // code for IE6, IE5
+                        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+                    }
+                    xmlhttp.onreadystatechange = function()
+                    {
+                        if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
+                        {
+                            document.getElementById("latest_comments_all").innerHTML = xmlhttp.responseText;
+                        }
+                    }
+                    xmlhttp.open("GET","../../main/games/db_games_main_detail.php?action=delete_comment&comment_id="+comment_id+"&game_id="+game_id,true);
+                    xmlhttp.send();
+                }
+            }
+         }
+         
+         function AddComment(user_id,game_id) {
+
+            //It took me ages to get his to work because I'm a dipshit - I hate ajax --> ST Graveyard 14/07/2014 @fucking 00:44
+            //Im not using contenteditable crap on a div because this way, loads of <br> statements are added in the DB.
+            //So I'm changing the div to a text area, still, in java it seems a return is not sent to the server so I'm doing a conversion to <br>
+            //Once the <br> are in the db, I do another conversion when I load the from the DB into an input field
+
+            var comment_data = "comment_add";;
+               
+            var comment = document.getElementById(comment_data).value
+            comment = comment.replace(/\n\r?/g, '<br />');
+            
+            var url = "../../main/games/db_games_main_detail.php?action=add_comment&user_id="+user_id+"&data="+comment+"&game_id="+game_id;
+            
+            document.getElementById('comment_add').value = "";
+                 
+            if (game_id == "")
+            {
+                document.getElementById("latest_comments_all").innerHTML = "";
+                return;
+            }
+            else
+            {
+                if (window.XMLHttpRequest)
+                {
+                    // code for IE7+, Firefox, Chrome, Opera, Safari
+                    xmlhttp = new XMLHttpRequest();
+                }
+                else
+                {
+                    // code for IE6, IE5
+                    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+                }
+                xmlhttp.onreadystatechange = function()
+                {
+                    if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
+                    {
+                        document.getElementById("latest_comments_all").innerHTML = xmlhttp.responseText;
+                    }
+                }
+                xmlhttp.open("GET",url,true);
+                xmlhttp.send();
+            }
+        }
+    </script>
+    
+    <script type="text/javascript"> <!-- all the code for the options of the textfield of the comment section -->
+        var clientPC = navigator.userAgent.toLowerCase(); // Get client info
+        var clientVer = parseInt(navigator.appVersion); // Get browser version
+
+        var is_ie = ((clientPC.indexOf("msie") != -1) && (clientPC.indexOf("opera") == -1));
+        var is_nav = ((clientPC.indexOf('mozilla')!=-1) && (clientPC.indexOf('spoofer')==-1)
+                        && (clientPC.indexOf('compatible') == -1) && (clientPC.indexOf('opera')==-1)
+                        && (clientPC.indexOf('webtv')==-1) && (clientPC.indexOf('hotjava')==-1));
+        var is_moz = 0;
+
+        var is_win = ((clientPC.indexOf("win")!=-1) || (clientPC.indexOf("16bit") != -1));
+        var is_mac = (clientPC.indexOf("mac")!=-1);
+
+        // Define the bbCode tags
+        bbtags = new Array('[b]','[/b]','[i]','[/i]','[u]','[/u]','[url=www.yourlinkhere.com]','[/url]','[mail]','[/mail]', '[hotspotUrl=#]', '[/hotspotUrl]', '[hotspot=]', '[/hotspot]','[screenstar]','[/screenstar]','[frontpage]','[/frontpage]' );
+        bbcode = new Array();
+        imageTag = false;
+
+        function bbstyle(bbnumber, bbname) {
+
+            var txtarea = eval('document.post.' + bbname);
+
+            txtarea.focus();
+            donotinsert = false;
+            theSelection = false;
+            bblast = 0;
+
+            if (bbnumber == -1) { // Close all open tags & default button names
+                while (bbcode[0]) {
+                    butnumber = arraypop(bbcode) - 1;
+                    txtarea.value += bbtags[butnumber + 1];
+                    buttext = eval('document.post.addbbcode' + butnumber + '.value');
+                    eval('document.post.addbbcode' + butnumber + '.value ="' + buttext.substr(0,(buttext.length - 1)) + '"');
+                }
+                imageTag = false; // All tags are closed including image tags :D
+                txtarea.focus();
+                return;
+            }
+
+            if ((clientVer >= 4) && is_ie && is_win)
+            {
+                theSelection = document.selection.createRange().text; // Get text selection
+                if (theSelection) {
+                    // Add tags around selection
+                    document.selection.createRange().text = bbtags[bbnumber] + theSelection + bbtags[bbnumber+1];
+                    txtarea.focus();
+                    theSelection = '';
+                    return;
+                }
+            }
+            else if (txtarea.selectionEnd && (txtarea.selectionEnd - txtarea.selectionStart > 0))
+            {
+                mozWrap(txtarea, bbtags[bbnumber], bbtags[bbnumber+1]);
+                return;
+            }
+
+            // Find last occurance of an open tag the same as the one just clicked
+            for (i = 0; i < bbcode.length; i++) {
+                if (bbcode[i] == bbnumber+1) {
+                    bblast = i;
+                    donotinsert = true;
+                }
+            }
+
+            if (donotinsert) {		// Close all open tags up to the one just clicked & default button names
+                while (bbcode[bblast]) {
+                        butnumber = arraypop(bbcode) - 1;
+                        txtarea.value += bbtags[butnumber + 1];
+                        buttext = eval('document.post.addbbcode' + butnumber + '.value');
+                        eval('document.post.addbbcode' + butnumber + '.value ="' + buttext.substr(0,(buttext.length - 1)) + '"');
+                        imageTag = false;
+                    }
+                    txtarea.focus();
+                    return;
+            } else { // Open tags
+
+                if (imageTag && (bbnumber != 14)) {		// Close image tag before adding another
+                    txtarea.value += bbtags[15];
+                    lastValue = arraypop(bbcode) - 1;	// Remove the close image tag from the list
+                    document.post.addbbcode14.value = "Img";	// Return button back to normal state
+                    imageTag = false;
+                }
+
+                // Open tag
+                txtarea.value += bbtags[bbnumber];
+                if ((bbnumber == 14) && (imageTag == false)) imageTag = 1; // Check to stop additional tags after an unclosed image tag
+                arraypush(bbcode,bbnumber+1);
+                eval('document.post.addbbcode'+bbnumber+'.value += "*"');
+                txtarea.focus();
+                return;
+            }
+            storeCaret(txtarea);
+        }
+
+        // From http://www.massless.org/mozedit/
+        function mozWrap(txtarea, open, close)
+        {
+            var selLength = txtarea.textLength;
+            var selStart = txtarea.selectionStart;
+            var selEnd = txtarea.selectionEnd;
+            if (selEnd == 1 || selEnd == 2)
+                selEnd = selLength;
+
+            var s1 = (txtarea.value).substring(0,selStart);
+            var s2 = (txtarea.value).substring(selStart, selEnd)
+            var s3 = (txtarea.value).substring(selEnd, selLength);
+            txtarea.value = s1 + open + s2 + close + s3;
+            return;
+        }
+
+        // Insert at Claret position. Code from
+        // http://www.faqts.com/knowledge_base/view.phtml/aid/1052/fid/130
+        function storeCaret(textEl) {
+            if (textEl.createTextRange) textEl.caretPos = document.selection.createRange().duplicate();
+        }
+    </script>
+    {/literal} 
+            
     <div id="main">
         
         <!--this column is only visible with 4 columns-->
@@ -717,7 +990,112 @@
             <!--*******************-->
             <!--END Game info tile -->
             <!--*********************-->
+            <br>
+            <!--*************************-->
+            <!--START Game comments tile -->
+            <!--*************************-->  
+            <div class="games_main_details_comments_position">
+                <div class="standard_tile">
+                    <div class="help-tip">
+                        <p> 
+                            <u>Only available with your own comments:</u><br>
+                            <i class="fa fa-pencil" aria-hidden="true"></i> - Edit comment<br>
+                            <i class="fa fa-floppy-o" aria-hidden="true"></i> - Save changes to comment<br>
+                            <i class="fa fa-trash-o" aria-hidden="true"></i> - Delete comment (if )<br><br>
+                            <u>General options:</u><br>
+                            <i class="fa fa-envelope" aria-hidden="true"></i> - Email author of comment<br>
+                            <i class="fa fa-facebook-square" aria-hidden="true"></i> - Go to Facebook profile of author<br>
+                            <i class="fa fa-twitter" aria-hidden="true"></i> - Go to Twitter profile of author<br>
+                            <i class="fa fa-external-link-square" aria-hidden="true"></i> - Visit external link
+                        </p>
+                    </div>
+                    <h1><a href="../games/games_comment_main.php" class="standard_tile_link" title="Click to see all comments">COMMENTS</a></h1>
+                    <div class="standard_tile_line"></div>
+                    {if isset($user_session)}
+                        <form name="post">
+                        <div class="standard_list_entry">
+                            <div style="width:100%;text-align:center;margin-top:10px;">
+                                <input type="button" accesskey= "b" name="addbbcode0" value="B" onclick="bbstyle(0,'textfield')" class="quick_search_games_button" style="min-width:20px;width:0;display:inline;" title="Bold">
+                                <input type="button" accesskey= "u" name="addbbcode4" value="U" onclick="bbstyle(4,'textfield')" class="quick_search_games_button" style="min-width:20px;width:0;display:inline;" title="Underline">
+                                <input type="button" accesskey= "i" name="addbbcode2" value="I" onclick="bbstyle(2,'textfield')" class="quick_search_games_button" style="min-width:20px;width:0;display:inline;" title="Recursive">
+                                <input type="button" accesskey="w" name="addbbcode6" value="URL" onClick="bbstyle(6,'textfield')" class="quick_search_games_button" style="min-width:40px;width:0;display:inline;" title="Add links">			  
+                                <input type="button" accesskey="x" name="addbbcode8" value="@" onClick="bbstyle(8,'textfield')" class="quick_search_games_button" style="min-width:20px;width:0;display:inline;" title="Add email address"> 
+                                <textarea id="comment_add" class="games_main_detail_comments_add" style="margin-top:10px;margin-bottom:10px;" name="textfield" ONSELECT="javascript:storeCaret(this);" ONCLICK="javascript:storeCaret(this);" ONKEYUP="javascript:storeCaret(this);" ONCHANGE="javascript:storeCaret(this);"></textarea>
+                            </div>
+                        </div>
+                        <div style="text-align:center;">
+                            <input type="button" value="Add" class="quick_search_games_button" style="margin-bottom:10px;" onClick="AddComment({$user_session.user_id},{$game_info.game_id})">
+                        </div>
+                        </form>
+                    {else}
+                        <div class="standard_list_entry" style="height:0;">
+                            <div class="games_main_detail_comments_log_on">
+                                Please log in to add your own comment to this game.
+                            </div>
+                        </div>
+                    {/if}
+                    <div class="standard_tile_line"></div>
+                    <div id="latest_comments_all">
+                    {if isset($comments)} 
+                        <div class="games_main_detail_comments_container">
+                            <div class="standard_list_entry">                                                  
+                                <table class="standard_table_list_comments">
+                                {foreach from=$comments item=line}
+                                    <tr>
+                                        <td class="standard_table_left">
+                                            <span class="standard_tile_subtext" style="font-weight:bold;float:left;margin-left:5px;margin-right:5px;margin-top:15px;">
+                                                <a href="../../admin/user/user_detail.php?user_id_selected={$line.user_id}">{$line.user_name}</a>
+                                            </span>
+                                            <span class="standard_tile_subtext" style="font-weight:bold;float:right;display:inline;margin-left:5px;margin-right:5px;margin-top:15px;">
+                                                {if isset($user_session)}
+                                                    <span style="font-weight:bold;float:left;margin-left:5px;margin-bottom:15px;">
+                                                    {if $user_session.user_id == $line.user_id}
+                                                        <a style="cursor: pointer;" onClick="CommentEditable({$line.comment_id},{$line.user_id})" class="latest_comments_link"><i class="fa fa-pencil" id="comment_edit_icon{$line.comment_id}" aria-hidden="true"  title="Click to edit comment"></i></a>
+                                                        <a style="cursor: pointer;" onClick="SaveEditable({$line.comment_id},{$line.user_id},{$game_info.game_id})" class="latest_comments_link"><i class="fa fa-floppy-o" id="comment_save_icon{$line.comment_id}" aria-hidden="true" title="Click to save change" style="display:none;"></i></a>
+                                                        <a style="cursor: pointer;" onClick="DeleteEditable({$line.comment_id},{$line.user_id},{$game_info.game_id})" class="latest_comments_link"><i class="fa fa-trash-o" id="comment_delete_icon{$line.comment_id}" aria-hidden="true" title="Click to delete comment"></i></a>
+                                                    {/if}
+                                                    {if $line.email != ''}
+                                                        <a href="mailto:{$line.email}?subject=Comment%20of%20{$line.game|escape:'url'}%20at%20Atari%20Legend" class="latest_comments_link" title="Click to email user"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+                                                    {/if}
+                                                    {if $line.user_fb != ''}
+                                                        <a href="{$line.user_fb}" class="latest_comments_link" title="Click to visit Facebook profile"><i class="fa fa-facebook-square" aria-hidden="true"></i></a>
+                                                    {/if}
+                                                    {if $line.user_twitter != ''}
+                                                        <a href="{$line.user_twitter}" class="latest_comments_link" title="Click to visit Twitter profile"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                                                    {/if}   
+                                                    {if $line.user_af != ''}
+                                                        <a href="{$line.user_af}" class="latest_comments_link" title="Click to visit Atari-Forum profile"><i class="fa fa-external-link-square" aria-hidden="true"></i></a>
+                                                    {/if}
+                                                    {if $line.user_website != ''}
+                                                        <a href="{$line.user_website}" class="latest_comments_link" title="Click to visit users website"><i class="fa fa-external-link-square" aria-hidden="true"></i></a>
+                                                    {/if}                               
+                                                    </span>
+                                                {/if}
+                                            </span>
+                                            <div class="latest_comments_text">
+                                                <div id="latest_comment_edit{$line.comment_id}">{$line.comment}</div>
+                                                <div style="width:100%;text-align:center;"><textarea id="comment_input{$line.comment_id}" class="latest_comments_textarea" style="display:none;" cols="80">{$line.comment_edit}</textarea></div>
+                                            </div> 
+                                            <span class="standard_tile_subtext" style="font-weight:bold;float:right;display:inline;margin-right:5px;margin-bottom:15px;">
+                                                {$line.date}
+                                            </span>
+                                            <br><br>
+                                        </td>
+                                    </tr>
+                                {/foreach}
+                                </table>     
+                            </div>
+                        </div>
+                    {/if}
+                    </div>
+                    <div class="standard_tile_line"></div>
+                </div>
             </div>
+            
+            <!--***********************-->
+            <!--END Game comments tile -->
+            <!--***********************-->
+            </div>            
         </div>
         
         
