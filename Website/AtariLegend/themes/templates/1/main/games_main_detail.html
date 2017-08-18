@@ -62,31 +62,32 @@
         
         var jssor_1_slider = new $JssorSlider$("jssor_1", jssor_1_options);
         
-        
-        // boxscan slider code
-        var jssor_2_SlideshowTransitions = [
-            {literal}{$Duration:1200,$Opacity:2}{/literal}
-        ];
-        
-        var jssor_2_options = {
-            $AutoPlay: 1,
-            $FillMode: 5,    
-            $SlideshowOptions: {               
-                $Class: $JssorSlideshowRunner$,
-                $Transitions: jssor_1_SlideshowTransitions,
-                $TransitionsOrder: 1
-            },
-            $ArrowNavigatorOptions: {
-                $Class: $JssorArrowNavigator$
-            },
-            $ThumbnailNavigatorOptions: {
-                $Class: $JssorThumbnailNavigator$,
-                $Cols: 4,
-                $Align: 400
-            }
-        };
+        {if isset($boxscan)}
+            // boxscan slider code
+            var jssor_2_SlideshowTransitions = [
+                {literal}{$Duration:1200,$Opacity:2}{/literal}
+            ];
+            
+            var jssor_2_options = {
+                $AutoPlay: 1,
+                $FillMode: 5,    
+                $SlideshowOptions: {               
+                    $Class: $JssorSlideshowRunner$,
+                    $Transitions: jssor_1_SlideshowTransitions,
+                    $TransitionsOrder: 1
+                },
+                $ArrowNavigatorOptions: {
+                    $Class: $JssorArrowNavigator$
+                },
+                $ThumbnailNavigatorOptions: {
+                    $Class: $JssorThumbnailNavigator$,
+                    $Cols: 4,
+                    $Align: 400
+                }
+            };
 
-        var jssor_2_slider = new $JssorSlider$("jssor_2", jssor_2_options);
+            var jssor_2_slider = new $JssorSlider$("jssor_2", jssor_2_options);
+        {/if}
 
         /*#region responsive code begin*/
         function ScaleSlider() {
@@ -108,23 +109,25 @@
                 window.setTimeout(ScaleSlider, 30);
             }
             
+            {if isset($boxscan)}
             //for boxscans
-            var containerElement2 = jssor_2_slider.$Elmt.parentNode;
-            var containerWidth2 = containerElement2.clientWidth;
-            if (containerWidth2) {
-                var MAX_WIDTH = 480;
+                var containerElement2 = jssor_2_slider.$Elmt.parentNode;
+                var containerWidth2 = containerElement2.clientWidth;
+                if (containerWidth2) {
+                    var MAX_WIDTH = 480;
 
-                var expectedWidth2 = containerWidth2;
+                    var expectedWidth2 = containerWidth2;
 
-                if (MAX_WIDTH) {
-                    expectedWidth2 = Math.min(MAX_WIDTH, expectedWidth2);
+                    if (MAX_WIDTH) {
+                        expectedWidth2 = Math.min(MAX_WIDTH, expectedWidth2);
+                    }
+
+                    jssor_2_slider.$ScaleWidth(expectedWidth2);
                 }
-
-                jssor_2_slider.$ScaleWidth(expectedWidth2);
-            }
-            else {
-                window.setTimeout(ScaleSlider, 30);
-            }
+                else {
+                    window.setTimeout(ScaleSlider, 30);
+                }
+            {/if}
         }
         
         ScaleSlider();
@@ -146,16 +149,18 @@
         $("#play_jssor1").click(Play);
         $("#pause_jssor1").click(Pause);
         
-        function Play_box() {
-            jssor_2_slider.$Play();
-        }
+        {if isset($boxscan)}
+            function Play_box() {
+                jssor_2_slider.$Play();
+            }
+                
+            function Pause_box() {
+                jssor_2_slider.$Pause();
+            }
             
-        function Pause_box() {
-            jssor_2_slider.$Pause();
-        }
-        
-        $("#play_jssor2").click(Play_box);
-        $("#pause_jssor2").click(Pause_box);
+            $("#play_jssor2").click(Play_box);
+            $("#pause_jssor2").click(Pause_box);
+        {/if}
     });
     </script>
     
@@ -534,12 +539,55 @@
         }
     </script>
     {/literal} 
+    
+    <script type="text/javascript" src="{$template_dir}includes/js/jquery.dotdotdot.js" type="text/javascript"></script> <!--this script is used for the elipsis (...) effect of the preview of the reviews -->
+    <script type="text/javascript"> 
+         window.onload = function() {
+            $(".game_details_review_preview_text").dotdotdot({  <!--This is the script to truncate the preview of the reviews-->
+                    //	configuration goes here
+                    
+                /*	The text to add as ellipsis. */
+                ellipsis	: '... ',
+         
+                /*	How to cut off the text/html: 'word'/'letter'/'children' */
+                wrap		: 'word',
+         
+                /*	Wrap-option fallback to 'letter' for long words */
+                fallbackToLetter: false,
+         
+                /*	jQuery-selector for the element to keep and put after the ellipsis. */
+                after		: null,
+         
+                /*	Whether to update the ellipsis: true/'window' */
+                watch		: window,
+
+                /*	Optionally set a max-height, can be a number or function.
+                    If null, the height will be measured. */
+                height		: null,
+
+                /*	Deviation for the height-option. */
+                tolerance	: 0,
+         
+                /*	Callback function that is fired after the ellipsis is added,
+                    receives two parameters: isTruncated(boolean), orgContent(string). */
+                callback	: function( isTruncated, orgContent ) {},
+         
+                lastCharacter	: {
+         
+                    /*	Remove these characters from the end of the truncated text. */
+                    remove		: [ ' ', ',', ';', '.', '!', '?' ],
+         
+                    /*	Don't add an ellipsis if this array contains 
+                        the last character of the truncated text. */
+                    noEllipsis	: []
+                }   
+            });
+        };
+    </script>
             
-    <div id="main">
-        
-        <!--this column is only visible with 4 columns-->
-        <div class="column_wide_left_1920">
-            <div class="screenstar_position_front">
+    <div id="main" class="main_container_games_details">
+        <div class="content_box_games_details" id="column_left_games_details">
+            <br>
             <!--*********************-->
             <!--START Game info tile -->
             <!--*********************-->
@@ -1090,300 +1138,222 @@
                     </div>
                     <div class="standard_tile_line"></div>
                 </div>
-            </div>
-            
+            </div>           
             <!--***********************-->
             <!--END Game comments tile -->
-            <!--***********************-->
-            </div>            
+            <!--***********************-->          
         </div>
         
+        <div class="content_box_games_details" id="column_center_games_details">
+            <!--*********************-->
+            <!--START review tile -->
+            <!--*********************-->
+            {if isset($mode) AND $mode == 'review'}
+                <br>
+                <div class="standard_tile">
+                    <h1>{$review.game_name}</h1>
+                    <div class="standard_tile_line"></div>
+                    <div class="standard_tile_text" id="games_detail_review_bg">
+                        <h4 style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;display:inline;">
+                            Written by <a href="../../admin/user/user_detail.php?user_id_selected={$review.user_id}" class="standard_tile_link">{$review.user_name}</a>
+                        </h4>
+                        <h2 style="float:right; display:inline;">
+                            <a href="../games/games_main_detail.php?game_id={$game_id}" class="standard_tile_link">Review overview <i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+                        </h2>
+                        <h5 style="font-weight: bold;">{$review.date}</h5>
+                        <br>
+                        <br>
+                        <div class="games_detail_review_container">
+                            <div class="games_detail_review_child" id="games_detail_review_text">
+                                {$review.text}
+                                <b><i>Score</i></b> 
+                                <br>
+                                <br>
+                                Graphics : <b>{$score.graphics}</b><br>
+                                Sound : <b>{$score.sound}</b><br>
+                                Gameplay : <b>{$score.gameplay}</b><br>
+                                Overall : <b>{$score.overall}</b><br><br>
+                            </div>
+                            <div class="games_detail_review_child" id="games_detail_review_screenshots">
+                                <div class="games_detail_review_screenshot_space">
+                                    <br>
+                                    <br>
+                                    <br>
+                                </div>
+                                {foreach from=$screenshots_review item=line} 
+                                    <div class="games_detail_review_screenshot_order">
+                                        <a href="../../includes/show_image.php?file={$line.screenshot}&amp;resize=410,null,null,null" data-lightbox="image-1" data-title="{$line.comment}">
+                                            <img src="../../includes/show_image.php?file={$line.screenshot}&amp;resize=170,null,null,null" alt="Click to enlarge!" style="display:inline;" class="game_screenshot_img"></a>
+                                        <br>
+                                        <span class="standard_tile_subtext" style="font-weight: bold;">{$line.comment}</b>
+                                        <br>
+                                        <br>
+                                        <br>
+                                    </div>
+                                {/foreach}
+                            </div>		
+                        </div>	
+                        <br>
+                    </div>
+                </div>
+            {/if}
+            <!--*********************-->
+            <!--END review tile -->
+            <!--*********************-->
         
-        
-        
-        <!--this column is only visible with 3 and 2 columns-->
-        <div class="column_wide_left">
             <!--*********************-->
             <!--START screenshot tile -->
             <!--*********************-->
             <br>
             <div class="standard_tile">
-                <h1>{$game_info.game_name|upper}</h1>
-                <div class="standard_tile_line"></div>                                
-                    <div id="jssor_1" class="games_main_detail_screenshot">
-                        <div data-u="slides" class="games_main_detail_slides">
-                            {foreach from=$screenshots item=line name=screenshots}
-                            <div>
-                                <img data-u="image" src="{$line.screenshot_image}">
-                                <img data-u="thumb" src="{$line.screenshot_image}">
-                            </div>
-                            {/foreach}                            
+                <h1>{if isset($mode) AND $mode == 'review'}SCREENSHOTS{else}{$game_info.game_name|upper}{/if}</h1>
+                <div class="standard_tile_line"></div>
+                <div id="jssor_1" class="games_main_detail_screenshot">   
+                    <div data-u="slides" class="games_main_detail_slides">
+                        {foreach from=$screenshots item=line name=screenshots}
+                        <div>
+                            <img data-u="image" src="{$line.screenshot_image}">
+                            <img data-u="thumb" src="{$line.screenshot_image}">
                         </div>
-                        <!-- Thumbnail Navigator -->
-                        <div data-u="thumbnavigator" class="games_main_detail_thumbs" data-autocenter="2" data-scale-left="0.75">
-                            <div data-u="slides">
-                                <div data-u="prototype" class="p">                                    
-                                    <div data-u="thumbnailtemplate" class="t"></div>
-                                </div>
+                        {/foreach}                            
+                    </div>
+                    <!-- Thumbnail Navigator -->
+                    <div data-u="thumbnavigator" class="games_main_detail_thumbs" data-autocenter="2" data-scale-left="0.75">
+                        <div data-u="slides">
+                            <div data-u="prototype" class="p">                                    
+                                <div data-u="thumbnailtemplate" class="t"></div>
                             </div>
-                        </div>
-                        {if $nr_screenshots <= 20}
-                            <!-- Bullet Navigator -->
-                            <div data-u="navigator" class="games_main_detail_nav" data-scale="0.5">
-                                <div data-u="prototype" class="i">
-                                    <svg viewbox="0 0 16000 16000" style="position:absolute;top:0;left:0;width:100%;height:100%;">
-                                        <rect class="b" x="2200" y="2200" width="11600" height="11600"></rect>
-                                    </svg>
-                                </div>
-                            </div>
-                        {/if}
-                        <!-- Arrow Navigator -->
-                        <div data-u="arrowleft" class="games_main_detail_arrow" id="games_main_detail_arrow_left" data-autocenter="2" data-scale="0.75" data-scale-left="1">
-                            <svg viewbox="0 0 16000 16000" style="position:absolute;top:0;left:0;width:100%;height:100%;">
-                                <polyline class="a" points="11040,1920 4960,8000 11040,14080 "></polyline>
-                            </svg>
-                        </div>
-                        <div data-u="arrowright" class="games_main_detail_arrow" id="games_main_detail_arrow_right" data-autocenter="2" data-scale="0.75" data-scale-right="1">
-                            <svg viewbox="0 0 16000 16000" style="position:absolute;top:0;left:0;width:100%;height:100%;">
-                                <polyline class="a" points="4960,1920 11040,8000 4960,14080 "></polyline>
-                            </svg>
                         </div>
                     </div>
-                    <!-- #endregion Jssor Slider End -->
-                    <span class="games_main_detail_info_right"><span class="standard_tile_subtext"><b>{$nr_screenshots}</b> screenshots loaded</span></span>
-                    <span class="standard_tile_subtext" style="float:right;margin-right:20px;">Autoplay <a href="javascript:Play();" id="play_jssor1" >On</a>/<a id="pause_jssor1" href="javascript:Pause();">Off</a></span>
-                    <br><br>
+                    {if $nr_screenshots <= 20}
+                        <!-- Bullet Navigator -->
+                        <div data-u="navigator" class="games_main_detail_nav" data-scale="0.5">
+                            <div data-u="prototype" class="i">
+                                <svg viewbox="0 0 16000 16000" style="position:absolute;top:0;left:0;width:100%;height:100%;">
+                                    <rect class="b" x="2200" y="2200" width="11600" height="11600"></rect>
+                                </svg>
+                            </div>
+                        </div>
+                    {/if}
+                    <!-- Arrow Navigator -->
+                    <div data-u="arrowleft" class="games_main_detail_arrow" id="games_main_detail_arrow_left" data-autocenter="2" data-scale="0.75" data-scale-left="1">                 
+                        <svg viewbox="0 0 16000 16000" style="position:absolute;top:0;left:0;width:100%;height:100%;">
+                            <polyline class="a" points="11040,1920 4960,8000 11040,14080 "></polyline>
+                        </svg>
+                    </div>
+                    <div data-u="arrowright" class="games_main_detail_arrow" id="games_main_detail_arrow_right" data-autocenter="2" data-scale="0.75" data-scale-right="1">                  
+                        <svg viewbox="0 0 16000 16000" style="position:absolute;top:0;left:0;width:100%;height:100%;">
+                            <polyline class="a" points="4960,1920 11040,8000 4960,14080 "></polyline>
+                        </svg>
+                    </div>
                 </div>
+                <!-- #endregion Jssor Slider End -->
+                <span class="games_main_detail_info_right"><span class="standard_tile_subtext"><b>{$nr_screenshots}</b> screenshots loaded</span></span>
+                <span class="standard_tile_subtext" style="float:right;margin-right:20px;">Autoplay <a href="javascript:Play();" id="play_jssor1" >On</a>/<a id="pause_jssor1" href="javascript:Pause();">Off</a></span>
+                <br><br>
+            </div>
             <!--*********************-->
             <!--END screenshot tile -->
             <!--*********************-->
 
-
-            <!--this column is only visible with 4 columns-->
-            <div class="column_wide_center_1920">
-                
-                <!--Start latest news tile-->
-                {block name=latest_news_tile}
-                    {include file='1/main/latest_news_tile.html'}
-                {/block}
-
-                <!--Start latest reviews tile-->
-                {block name=latest_reviews_tile}
-                    {include file='1/main/latest_reviews_tile.html'}
-                {/block}
-
-                <div class="contact_tiles">
-                    <div class="contact_email_button"><a href="#"> </a></div>
-                    <div class="contact_facebook_button"><a href="#"> </a></div>
-                    <div class="contact_jukebox_button"><a href="#"> </a></div>
-                    <div class="contact_chat_button"><a href="#"> </a></div>
+            <!--*************************-->
+            <!--START Review preview tile -->
+            <!--**************************-->   
+            <br>
+            {if isset($mode) AND $mode == 'review'}
+            {else}
+                <div class="standard_tile">
+                    <h1>REVIEWS</h1> 
+                    <div class="standard_tile_line"></div> 
+                    {if isset($review)}
+                        <table class="standard_table_games_main_detail">               
+                        {foreach from=$review item=line name=review}
+                            <tr>
+                            <td class="game_details_review_preview_left">  
+                                <div style="margin-left:10px;margin-right:10px;text-align:justify;margin-bottom:10px;margin-top:10px">
+                                    <a href="../../includes/show_image.php?file={$line.screenshot}&amp;resize=410,null,null,null" data-lightbox="image-1">
+                                    <img src="../../includes/show_image.php?file={$line.screenshot}&amp;resize=210,null,null,null" alt="Click to enlarge!" style="display:inline;margin-top:10px;" class="game_screenshot_img"></a>
+                                    <br>
+                                    <span class="standard_tile_subtext" style="font-weight: bold;">{$line.comment}</span>
+                                </div>
+                            </td>
+                            <td class="game_details_review_preview_right">
+                                <div style="margin-top:20px;margin-bottom:15px;margin-right:20px;margin-left:10px;">
+                                    <h4 style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis">
+                                        Written by <a href="../../admin/user/user_detail.php?user_id_selected={$line.user_id}" class="standard_tile_link">{$line.user_name}</a>
+                                    </h4>
+                                    <h5 style="font-weight: bold;">{$line.date}</h5>
+                                    <div class="game_details_review_preview_text">
+                                       {$line.text}
+                                    </div>
+                                    <h2><a href="../games/games_main_detail.php?mode=review&game_id={$game_id}&review_id={$line.review_id}" class="standard_tile_link">Read more <i class="fa fa-chevron-right" aria-hidden="true"></i></a></h2>
+                                    <br>                            
+                                </div>
+                            </td>
+                            </tr>		
+                        {/foreach}
+                        </table>
+                    {else}
+                        <div class="games_main_detail_comments_log_on">
+                            There is no review. Here I will build a 'write a review' box for people who are logged in.
+                        </div>
+                    {/if}
                 </div>
-            </div>
+            {/if}
         </div>
 
-        <!--this column is only visible with 4 columns-->
-        <div class="column_wide_right_1920">          
+        <div class="content_box_games_details" id="column_right_games_details">       
             <!--*********************-->
             <!--START boxscan tile -->
             <!--*********************-->
             <br>
              <div class="standard_tile">
                 <h1>BOXSCAN</h1>
-                <div class="standard_tile_line"></div>      
-                <div id="jssor_2" class="games_main_detail_box">
-                    <!-- Loading Screen -->
-                    <div data-u="slides" class="games_main_detail_slides_box">
-                        {foreach from=$boxscan item=line name=boxscan}
-                            <div>
-                                <a href="../../includes/show_image.php?file={$line.image_pop}" data-lightbox="image-1" class="latest_comments_link"><img data-u="image" src="{$line.image}" class="games_main_detail_box_img"></a>    
-                                <div u="thumb">
-                                    <div style="width: 100%; height: 100%; background-image: url({$line.image}); background-position: center center; background-repeat: no-repeat; background-size: contain;">
+                <div class="standard_tile_line"></div>  
+                {if isset($boxscan)}
+                    <div id="jssor_2" class="games_main_detail_box">
+                        <!-- Loading Screen -->
+                        <div data-u="slides" class="games_main_detail_slides_box">
+                            {foreach from=$boxscan item=line name=boxscan}
+                                <div>
+                                    <a href="../../includes/show_image.php?file={$line.image_pop}" data-lightbox="image-1" class="latest_comments_link"><img data-u="image" src="{$line.image}" class="games_main_detail_box_img"></a>    
+                                    <div u="thumb">
+                                        <div style="width: 100%; height: 100%; background-image: url({$line.image}); background-position: center center; background-repeat: no-repeat; background-size: contain;">
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        {/foreach}
-                    </div>
-                    <!-- Thumbnail Navigator -->
-                    <div data-u="thumbnavigator" class="games_main_detail_thumbs_box" data-autocenter="1" data-scale-bottom="0.75">
-                        <div data-u="slides">
-                            <div data-u="prototype" class="p" style="width:100px;height:100px;">
-                                <div data-u="thumbnailtemplate" class="t"></div>
+                            {/foreach}
+                        </div>
+                        <!-- Thumbnail Navigator -->
+                        <div data-u="thumbnavigator" class="games_main_detail_thumbs_box" data-autocenter="1" data-scale-bottom="0.75">
+                            <div data-u="slides">
+                                <div data-u="prototype" class="p" style="width:100px;height:100px;">
+                                    <div data-u="thumbnailtemplate" class="t"></div>
+                                </div>
                             </div>
                         </div>
+                        <!-- Arrow Navigator -->
+                        <div data-u="arrowleft" class="games_main_detail_arrow" id="games_main_detail_arrow_left_box" data-autocenter="2" data-scale="0.75" data-scale-left="1">
+                            <svg viewbox="0 0 16000 16000" style="position:absolute;top:-75px;left:0;width:100%;height:100%;">
+                                <polyline class="a" points="11040,1920 4960,8000 11040,14080 "></polyline>
+                            </svg>
+                        </div>
+                        <div data-u="arrowright" class="games_main_detail_arrow" id="games_main_detail_arrow_right_box" data-autocenter="2" data-scale="0.75" data-scale-right="1">
+                            <svg viewbox="0 0 16000 16000" style="position:absolute;top:-75px;left:0;width:100%;height:100%;">
+                                <polyline class="a" points="4960,1920 11040,8000 4960,14080 "></polyline>
+                            </svg>
+                        </div>
                     </div>
-                    <!-- Arrow Navigator -->
-                    <div data-u="arrowleft" class="games_main_detail_arrow" id="games_main_detail_arrow_left_box" data-autocenter="2" data-scale="0.75" data-scale-left="1">
-                        <svg viewbox="0 0 16000 16000" style="position:absolute;top:-75px;left:0;width:100%;height:100%;">
-                            <polyline class="a" points="11040,1920 4960,8000 11040,14080 "></polyline>
-                        </svg>
+                    <span class="games_main_detail_info_right"><span class="standard_tile_subtext">{if isset($nr_box)}{if $nr_box == '1'}<b>{$nr_box}</b> boxscan loaded{else}<b>{$nr_box}</b> boxscans loaded{/if}{/if}</span></span>
+                    <span class="standard_tile_subtext" style="float:right;margin-right:20px;">Autoplay <a href="javascript:Play_box();" id="play_jssor2" >On</a>/<a href="javascript:Pause_box();" id="pause_jssor2">Off</a></span>
+                    <br><br>
+                {else}
+                    <div class="games_main_detail_comments_log_on">
+                        There is no boxscan. Here I will build an upload box for people who are logged in.
                     </div>
-                    <div data-u="arrowright" class="games_main_detail_arrow" id="games_main_detail_arrow_right_box" data-autocenter="2" data-scale="0.75" data-scale-right="1">
-                        <svg viewbox="0 0 16000 16000" style="position:absolute;top:-75px;left:0;width:100%;height:100%;">
-                            <polyline class="a" points="4960,1920 11040,8000 4960,14080 "></polyline>
-                        </svg>
-                    </div>
-                </div>
-                <span class="games_main_detail_info_right"><span class="standard_tile_subtext">{if isset($nr_box)}{if $nr_box == '1'}<b>{$nr_box}</b> boxscan loaded{else}<b>{$nr_box}</b> boxscans loaded{/if}{/if}</span></span>
-                <span class="standard_tile_subtext" style="float:right;margin-right:20px;">Autoplay <a href="javascript:Play_box();" id="play_jssor2" >On</a>/<a href="javascript:Pause_box();" id="pause_jssor2">Off</a></span>
-                <br><br>
+                {/if}
             </div>
         </div>
 
-        <!--this column is only visible with 3 columns-->
-        <div class="column_wide_right">
-            <!--register account tile -->
-            {if (isset($action)) and ($action == 'register')}
-                {block name=user_register_tile}
-                    {include file='1/main/user_register_tile.html'}
-                {/block}
-            {/if}
-            
-            <!--password reset tile -->
-            {if (isset($action)) and ($action == 'reset')}
-                {block name=user_reset_tile}
-                    {include file='1/main/user_reset_tile.html'}
-                {/block}
-            {/if}
-            
-            <!--password reset tile - enter new pwd -->
-            {if (isset($action)) and ($action == 'new_pwd')}
-                {block name=user_reset_tile}
-                    {include file='1/main/user_new_pwd_tile.html'}
-                {/block}
-            {/if}
-            
-            <!--Start "Who is it" tile-->
-            {block name=who_is_it_tile}
-                {include file='1/main/who_is_it_tile.html'}
-            {/block}
-        </div>
-        
-        <!--this column is only visible in the 3 colum mode-->
-        <div class="column_left">
-            <!--Start latest news tile-->
-            {block name=latest_news_tile}
-                {include file='1/main/latest_news_tile.html'}
-            {/block}
-            
-            <!--Start date quote tile-->
-            {block name=date_quote_tile}
-                {include file='1/main/date_quote_tile.html'}
-            {/block}
-        </div>
-        
-        <!--this column is only visible in the 1 colum mode-->
-        <div class="column_phone">
-             <!--register account tile -->
-            {if (isset($action)) and ($action == 'register')}
-                {block name=user_register_tile}
-                    {include file='1/main/user_register_tile.html'}
-                {/block}
-            {/if}
-            
-            <!--password reset tile -->
-            {if (isset($action)) and ($action == 'reset')}
-                {block name=user_reset_tile}
-                    {include file='1/main/user_reset_tile.html'}
-                {/block}
-            {/if}
-            
-            <!--password reset tile - enter new pwd -->
-            {if (isset($action)) and ($action == 'new_pwd')}
-                {block name=user_reset_tile}
-                    {include file='1/main/user_new_pwd_tile.html'}
-                {/block}
-            {/if}
-            
-            <!--Start latest news tile-->
-            {block name=latest_news_tile}
-                {include file='1/main/latest_news_tile.html'}
-            {/block}
-            
-            <!--Start "Who is it" tile-->
-            {block name=who_is_it_tile}
-                {include file='1/main/who_is_it_tile.html'}
-            {/block}
-            
-            <!--Start date quote tile-->
-            {block name=date_quote_tile}
-                {include file='1/main/date_quote_tile.html'}
-            {/block}
-        </div>
-        
-        <!--this column is only visible in the 3 colum mode and 1 column mode-->
-        <div class="column_center">
-            <!--Start latest reviews tile-->
-            {block name=latest_reviews_tile}
-                {include file='1/main/latest_reviews_tile.html'}
-            {/block}
-            
-             <!--Start screenstar tile-->
-            {block name=screenstar_tile}
-                {include file='1/main/tile_screenstar.html'}
-            {/block}
-
-            <!--Start "hotlinks" tile-->
-            {block name=hotlinks_tile}
-                {include file='1/main/hotlinks_tile.html'}
-            {/block}
-        </div>
-
-        <!--this column is only visible in the 3 colum mode and 1 column mode-->
-        <div class="column_right">
-
-            <!--Start "Did you know" tile-->
-            {block name=did_you_know_tile}
-                {include file='1/main/did_you_know_tile.html'}
-            {/block}
-
-            <!--Start "statistics" tile-->
-            {block name=statistics_tile}
-                {include file='1/main/statistics_tile.html'}
-            {/block}
-
-            <!--Start contact tiles - will only be used on the front page so no inheritance here -->
-            <div class="contact_tiles">
-                    <div class="contact_email_button"><a href="#"> </a></div>
-                    <div class="contact_facebook_button"><a href="#"> </a></div>
-                    <div class="contact_jukebox_button"><a href="#"> </a></div>
-                    <div class="contact_chat_button"><a href="#"> </a></div>
-                </div>
-        </div>
-
-        <!--this column is only visible in the 2 colum mode -->
-        <div class="column_left_tab">
-
-            <!--Start date quote tile
-            {block name=date_quote_tile}
-            {include file='1/main/date_quote_tile.html'}
-            {/block}-->
-
-            <!--Start "Did you know" tile-->
-            {block name=did_you_know_tile}
-                {include file='1/main/did_you_know_tile.html'}
-            {/block}
-
-            <!--Start "statistics" tile-->
-            {block name=statistics_tile}
-                {include file='1/main/statistics_tile.html'}
-            {/block}
-            
-             <!--Start contact tiles-->
-            <div class="contact_tiles">
-                <div class="contact_jukebox_button"><a href="#"> </a></div>
-                <div class="contact_chat_button"><a href="#"> </a></div>
-                <div class="contact_email_button"><a href="#"> </a></div>
-                <div class="contact_facebook_button"><a href="#"> </a></div>
-            </div>
-            
-        </div>
-
-        <!--this column is only visible in the 2 colum mode -->
-        <div class="column_right_tab">
-            <!--Start date quote tile
-            {block name=date_quote_tile}
-                {include file='1/main/date_quote_tile.html'}
-            {/block}-->
-        </div>
     </div>
 {/block}

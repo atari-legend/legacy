@@ -263,6 +263,88 @@
     #games_main_list_1 {display:inline;}
 }
 
+
+
+//*----------------------------------------------------------
+//games main details
+//------------------------------------------------------------ */
+@media screen and (max-width: 1280px) {
+    #column_left_games_details  {
+        float: left;
+        width:40%;
+    }
+
+    #column_center_games_details  {
+        float: right;
+        width: 58%;
+    }
+
+    #column_right_games_details  { float: right; width: 58%;}
+}
+
+//* for lower resolutions put the left and right below eachother */
+@media screen and (max-width: 799px) {
+    .main_container_games_details  {
+        display: flex;
+        flex-direction: column-reverse;
+        float: left;
+        width: 100%;
+    }
+
+    #column_left_games_details  { width: 100%; float: left; margin: auto;  order:2;}
+    #column_center_games_details { width: 100%; float: left; margin: auto; order:3;  }
+    #column_right_games_details  { width: 100%; float: right; margin: auto; order:1;}
+
+    .main_container_games_details  >div {
+        width: 100%;
+    }
+
+    .content_box_games_details  {
+        display: block;
+        margin: 0 auto;
+    }
+}
+
+@media screen and (min-width: 800px) and (max-width: 1000px) {
+    .game_details_review_preview_left {display:none;}
+}
+
+@media screen and (max-width: 600px) {
+    .game_details_review_preview_left {display:none;}
+}
+
+//*----------------------------------------------------------
+//games main details - game review
+//------------------------------------------------------------ */
+@media screen and (max-width: 999px) {
+    .games_detail_review_container {
+        flex-direction: column;
+    }
+
+    #games_detail_review_screenshots,
+    #games_detail_review_text {
+        width: 100%;
+        float: left;
+    }
+
+    .games_detail_review_container >div {
+        width: 100%;
+    }
+
+    .games_detail_review_child {
+        display: block;
+        margin: 0 auto;
+    }
+
+    .games_detail_review_screenshot_order {
+        display: inline-block;
+        vertical-align: top;
+    }
+    
+    .games_detail_review_screenshot_space {display:inline;}
+    #games_detail_review_screenshots{background-color: #122323;}
+}
+
 //*----------------------------------------------------------
 // CPanel
 //------------------------------------------------------------ */

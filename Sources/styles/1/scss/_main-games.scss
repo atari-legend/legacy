@@ -161,6 +161,24 @@
 }
 
 //****************Games detail page************************/
+
+#column_left_games_details {
+    float: left;
+    width: 24.75%;
+    margin-right: 1%;
+}
+
+#column_center_games_details {
+    float: left;
+    width: 48.5%;
+}
+
+#column_right_games_details {
+    float: right;
+    width: 24.75%;
+    margin-left: 1%;
+}
+
 .games_details_img{ 
     display:inline;
     margin-top : 15px;
@@ -309,6 +327,7 @@
     @extend .latest_comments_text;
     text-align:center;
     color:red;
+    float:none;
 }
 
 .games_main_detail_comments_container{
@@ -341,3 +360,59 @@
     scrollbar-highlight-color:#122323;
     scrollbar-shadow-color:#008b8b;
 }
+
+.game_details_review_preview_left{
+   width:25%;
+}
+
+.game_details_review_preview_right{
+   width:75%;
+}
+
+.game_details_review_preview_text{
+    @extend .standard_list_entry_news_text;
+    height: 120px;
+    display: block;
+    margin-bottom:10px;
+}
+
+//*****Games detail - Reviews*********/
+
+.games_detail_review_container {
+    display: flex;
+    display: table;
+    width: 100%;
+    align-items: flex-start;
+}
+
+.games_detail_review_child  table { width: 98%; }
+#games_detail_review_text {
+    display: table-cell;
+    width: 75%;
+    vertical-align: top;
+    font-weight: 100;
+    color: #ffffff;
+    font-size: 11pt;
+    text-align: left;
+}
+
+#games_detail_review_screenshots {
+    display: table-cell;
+    width: 20%;
+    text-align: center;
+}
+
+.games_detail_review_screenshot_order {
+    width: 170px;
+    margin: auto;
+    font-size: 9pt;
+    background-color: #122323;
+    padding-left:5px;
+    padding-bottom:5px;
+    padding-top:8px;
+    padding-right:8px;
+}
+
+#games_detail_review_bg{background-color: #0d2e2e;}
+
+.games_detail_review_screenshot_space{display:none;}

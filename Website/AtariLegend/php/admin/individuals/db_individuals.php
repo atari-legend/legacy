@@ -218,10 +218,12 @@ if (isset($action) and $action == 'insert_ind') {
         $indrow = $individuals->fetch_row();
 
         $id = $indrow[0];
+        if (isset($textfield))
+        {
+            $textfield = $mysqli->real_escape_string($textfield);
 
-        $textfield = $mysqli->real_escape_string($textfield);
-
-        $sdbquery = $mysqli->query("INSERT INTO individual_text (ind_id, ind_profile) VALUES ($id, '$textfield')") or die("Couldn't insert into individual_text");
+            $sdbquery = $mysqli->query("INSERT INTO individual_text (ind_id, ind_profile) VALUES ($id, '$textfield')") or die("Couldn't insert into individual_text");
+        }
 
         create_log_entry('Individuals', $id, 'Individual', $id, 'Insert', $_SESSION['user_id']);
 
