@@ -45,16 +45,6 @@ $interview_date = date("d/m/Y", $sql_interview['interview_date']);
 
 //Structure and manipulate the comment text
 $int_text = $sql_interview['interview_intro']; 
-    
-$pos_start = strpos($int_text, '[frontpage]');
-$pos_start = $pos_start;
-
-$pos_end = strpos($int_text, '[/frontpage]');
-$pos_end = $pos_end;
-
-$nr_char = $pos_end - $pos_start;
-
-$int_text = substr($int_text, $pos_start, $nr_char);
 
 //fixxx the enters 
 $int_text = stripslashes($int_text);
