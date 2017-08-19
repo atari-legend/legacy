@@ -239,7 +239,7 @@
 .games_main_detail_thumbs .t {
     position:absolute;
     top:0;
-    left:0.5px;
+    left:1px;
     width:97%;
     height:97%;
     border:1px solid white;
@@ -416,3 +416,12 @@
 #games_detail_review_bg{background-color: #0d2e2e;}
 
 .games_detail_review_screenshot_space{display:none;}
+
+//*****Games detail - Interviews*********/
+#games_detail_interview_chapters a:link{
+    color: white;
+}
+
+#games_detail_interview_chapters a:hover{
+    color: #008b8b;
+}

@@ -12,6 +12,8 @@
 *		- AL 2.0 
 *   Id: interviews_edit.html,v 0.21 2017/06/16 19:38 ST Graveyard
 *                   added the [frontpage] functionality 
+*   Id: interviews_edit.html,v 0.22 2017/08/19 15:02 ST Graveyard
+*                   removed the [frontpage] functionality --> Why was this necessary??
 ***************************************************************************/
 
 ///****************************************************************************************
@@ -275,7 +277,7 @@ function storeCaret(textEl) {
 				<input type="button" accesskey= "i" name="addbbcode2" value="I" onclick="bbstyle(2,'textintro')">
 				<input type="button" accesskey="w" name="addbbcode6" value="URL" onClick="bbstyle(6,'textintro')">			  
 				<input type="button" accesskey="x" name="addbbcode8" value="@" onClick="bbstyle(8,'textintro')">	
-                <input type="button" accesskey="frontpage" name="addbbcode16" value="Frontpage" onClick="bbstyle(14,'textintro')">                         
+                <!--<input type="button" accesskey="frontpage" name="addbbcode16" value="Frontpage" onClick="bbstyle(14,'textintro')">-->                       
 				<textarea name="textintro" id="game_review_textfield" ONSELECT="javascript:storeCaret(this);" ONCLICK="javascript:storeCaret(this);" ONKEYUP="javascript:storeCaret(this);" ONCHANGE="javascript:storeCaret(this);" rows="5" style="padding-left:0px;">{$interview.interview_intro}</textarea>
 				<br>
 				<br>
