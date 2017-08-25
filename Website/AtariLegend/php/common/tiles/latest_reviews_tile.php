@@ -25,10 +25,13 @@ $query_recent_reviews = $mysqli->query("SELECT
 						review_main.review_text,
                         review_main.review_date,
 						game.game_name,
+                        users.user_id,
+                        users.userid,
 						screenshot_review.screenshot_id,
 						screenshot_main.imgext
 						FROM review_game
 						LEFT JOIN review_main on (review_game.review_id = review_main.review_id)
+                        LEFT JOIN users on (review_main.user_id = users.user_id)
 						LEFT JOIN game on (review_game.game_id = game.game_id)
 						LEFT JOIN screenshot_review on (review_game.review_id = screenshot_review.review_id)
 						LEFT JOIN screenshot_main on (screenshot_review.screenshot_id = screenshot_main.screenshot_id)
@@ -71,6 +74,8 @@ while ($sql_recent_reviews = $query_recent_reviews->fetch_array(MYSQLI_BOTH))
 	     array('review_name' => $sql_recent_reviews['game_name'],
 		   'review_id' => $sql_recent_reviews['review_id'],
            'review_date' => $review_date,
+           'user_id' => $sql_recent_reviews['user_id'],
+           'user_name' => $sql_recent_reviews['userid'],
 		   'game_id' => $sql_recent_reviews['game_id'],
 		   'review_text' => $review_text,
 		   'review_img' => $v_review_image));

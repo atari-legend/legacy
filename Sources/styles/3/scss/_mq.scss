@@ -238,17 +238,20 @@
 //games main details
 //------------------------------------------------------------ */
 @media screen and (max-width: 1280px) {
-    #column_left_games_details  {
+    #column_left_games_details{
         float: left;
         width:40%;
     }
 
-    #column_center_games_details  {
+    #column_center_games_details{
         float: right;
         width: 58%;
     }
-
-    #column_right_games_details  { float: right; width: 58%;}
+  
+    #column_right_games_details {
+        float: right;
+        width: 58%;
+    }
 }
 
 //* for lower resolutions put the left and right below eachother */
@@ -272,14 +275,6 @@
         display: block;
         margin: 0 auto;
     }
-}
-
-@media screen and (min-width: 800px) and (max-width: 1000px) {
-    .game_details_review_preview_left {display:none;}
-}
-
-@media screen and (max-width: 600px) {
-    .game_details_review_preview_left {display:none;}
 }
 
 //*----------------------------------------------------------
@@ -314,6 +309,33 @@
     #games_detail_review_screenshots{background-color: #eeeeee;}
 }
 
+//*----------------------------------------------------------
+//Interviews details
+//------------------------------------------------------------ */
+@media screen and (max-width: 1280px) {
+    #column_left_interviews_details  {
+        float: left;
+        width:40%;
+    }
+
+    #column_center_interviews_details  {
+        float: right;
+        width: 58%;
+    }
+
+    #column_right_interviews_details  { 
+        float: left; 
+        width: 40%;
+        margin-left:0;
+    }
+}
+
+//* for lower resolutions put the left and right below eachother */
+@media screen and (max-width: 799px) {
+    #column_left_interviews_details  { width: 100%; float: left; margin: auto;  order:3;}
+    #column_center_interviews_details { width: 100%; float: left; margin: auto; order:2;  }
+    #column_right_interviews_details  { width: 100%; float: right; margin: auto; order:1;}
+}
 
 //*----------------------------------------------------------
 // CPanel

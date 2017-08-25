@@ -1,0 +1,41 @@
+{* 
+/***************************************************************************
+*                                latest_interviews_tile.html
+*                            -------------------------------
+*   begin                : Monday, August 21, 2017
+*   copyright            : (C) 2017 Atari Legend
+*   email                : martens_maarten@hotmail.com
+*   actual update        : Creation of file
+*
+*   Id: latest_interviews_tile.html,v 0.1 2017/08/21 00:51 ST Graveyard
+*
+***************************************************************************/
+
+//****************************************************************************************
+// This is the latest interviews tile
+//**************************************************************************************** 
+*}
+
+{block name=latest_interviews_tile}
+    <div class="standard_tile">
+        <h1><a href="#" class="standard_tile_link">LATEST INTERVIEWS</a></h1>
+        {assign var="number" value=1}
+        {foreach from=$recent_interviews item=line}
+            <div class="standard_tile_line"></div>	
+            <div {if $number is even}class="standard_list_entry"{else}class="standard_list_entry_odd"{/if}>
+                <div class="standard_list_entry_news">
+                    <h4 style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis">
+                        <a href="../interviews/interviews_detail.php?selected_interview_id={$line.interview_id}" title="{$line.individual_name}" class="standard_tile_link">{$line.individual_name}</a>
+                    </h4>
+                    <h5 style="font-weight: bold;">{$line.interview_date} - by <a href="../../admin/user/user_detail.php?user_id_selected={$interview.interview_author_id}" class="standard_tile_link">{$line.interview_author}</a></h5>
+                    <div class="standard_list_entry_news_text">
+                       {$line.interview_intro}
+                    </div>
+                    <h2><a href="../interviews/interviews_detail.php?selected_interview_id={$line.interview_id}" class="standard_tile_link"><i class="fa fa-chevron-right" aria-hidden="true"></i></a></h2>
+                </div>							
+            </div>
+            {$number=$number+1}
+        {/foreach}
+        <div class="standard_tile_line"></div>
+    </div>
+{/block}

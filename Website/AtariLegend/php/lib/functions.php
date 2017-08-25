@@ -742,7 +742,7 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
                 $query_data = $result->fetch_array(MYSQLI_BOTH);
                 $section_id = $query_data['ind_id'];
             }
-        }
+        }       
 
         // get the name of the person that is interviewed
         $query_ind = "SELECT ind_name FROM individuals WHERE ind_id = '$section_id'";
@@ -752,6 +752,43 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
 
         if ($subsection == 'Interview' or $subsection == 'Screenshots') {
             $subsection_name = $section_name;
+        }
+        
+        if ($subsection == 'Comment') {
+            //get game_id and interview_user_comments_id
+            $query_user_comment = "SELECT interview_user_comments.interview_id,
+                                          interview_user_comments.interview_user_comments_id,
+                                          individuals.ind_name
+                                          FROM interview_user_comments
+                                          LEFT JOIN interview_main ON ( interview_user_comments.interview_id = interview_main.interview_id )
+                                          LEFT JOIN individuals on (interview_main.ind_id = individuals.ind_id)
+                                          WHERE interview_user_comments.comment_id = '$subsection_id'";
+
+            $result = $mysqli->query($query_user_comment) or die("getting user comments id failed");
+            $query_data      = $result->fetch_array(MYSQLI_BOTH);
+            $subsection_id   = $query_data['interview_user_comments_id'];
+            $section_id      = $query_data['interview_id'];
+            $section_name    = $query_data['ind_name'];
+            $subsection_name = $query_data['ind_name'];
+        }
+    }
+    
+     //  Everything we do for the Review section
+    if ($section == 'Reviews') {
+        if ($subsection == 'Comment') {
+            //get the game name
+            $query_user_comment = "SELECT * FROM review_user_comments
+                                          LEFT JOIN review_main ON (review_user_comments.review_id = review_main.review_id)
+                                          LEFT JOIN review_game ON (review_main.review_id = review_game.review_id)
+                                          LEFT JOIN game ON (game.game_id = review_game.game_id)
+                                          WHERE review_user_comments.comment_id = '$subsection_id'";
+
+            $result = $mysqli->query($query_user_comment) or die("getting user comments id failed");
+            $query_data      = $result->fetch_array(MYSQLI_BOTH);
+            $subsection_id   = $query_data['review_user_comments_id'];
+            $section_id      = $query_data['review_id'];
+            $section_name    = $query_data['game_name'];
+            $subsection_name = $query_data['game_name'];
         }
     }
 

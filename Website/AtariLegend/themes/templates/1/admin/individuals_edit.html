@@ -210,6 +210,15 @@ function storeCaret(textEl) {
 	if (textEl.createTextRange) textEl.caretPos = document.selection.createRange().duplicate();
 }
 </script>
+
+<script type="text/javascript" src="{$template_dir}includes/js/lightbox.min.js"></script><!--lightbox popup script-->
+<link type="text/css" href="{$style_dir}css/lightbox.css" hreflang="en" rel="stylesheet"> 
+<script>
+    lightbox.option({        
+      'showImageNumberLabel': false
+    })
+</script>
+    
 {/block}
 
 {block name=title}Edit {$individuals.ind_name}{/block}
@@ -261,7 +270,9 @@ function storeCaret(textEl) {
 			<fieldset>
 				<legend>Individual Image</legend>
 				<br>
-				<img src="../../includes/show_image.php?file={$individuals.ind_image}" class="user_stats_img" id="user_details_img_dark">
+                <a href="../../includes/show_image.php?file={$individuals.ind_image}&amp;resize=410,null,null,null" data-lightbox="image-1">
+                    <img src="../../includes/show_image.php?file={$individuals.ind_image}&amp;resize=160,null,null,null" alt="{$line.ind_name}" class="user_stats_img_dark" style="max-width:95%;">
+                </a>
                 <br>
                 <input type="button" onclick="individual_pic_delete({$individuals.ind_id});" class="topbutton_cpanel_small" value="Delete">
 				<!--<a href="javascript:individual_pic_delete({$individuals.ind_id});" class="left_nav_link">delete photo</a>-->

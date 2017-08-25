@@ -1,0 +1,171 @@
+{* 
+/***************************************************************************
+ *                                games_reviews_main.html
+*                            ------------------------------
+*   begin                : Wednesday, August 23, 2017
+*   copyright            : (C) 2017 Atari Legend
+*   email                : martens_maarten@hotmail.com
+*
+*   Id: games_reviews_html.php,v 0.1 2017/08/23 20:30 STG
+****************************************************************************/
+
+//****************************************************************************************
+// This is the main games reviews page
+//**************************************************************************************** 
+*}
+
+{extends file='1/main/main.html'}
+
+{block name=main_body}
+    <script type="text/javascript" src="{$template_dir}includes/js/jquery.dotdotdot.js" type="text/javascript"></script> <!--this script is used for the elipsis (...) effect of the preview of the reviews -->
+    <script type="text/javascript"> 
+         window.onload = function() {
+            $(".interview_main_text").dotdotdot({  <!--This is the script to truncate the preview of the reviews-->
+                    //	configuration goes here
+                    
+                /*	The text to add as ellipsis. */
+                ellipsis	: '... ',
+         
+                /*	How to cut off the text/html: 'word'/'letter'/'children' */
+                wrap		: 'word',
+         
+                /*	Wrap-option fallback to 'letter' for long words */
+                fallbackToLetter: false,
+         
+                /*	jQuery-selector for the element to keep and put after the ellipsis. */
+                after		: null,
+         
+                /*	Whether to update the ellipsis: true/'window' */
+                watch		: window,
+
+                /*	Optionally set a max-height, can be a number or function.
+                    If null, the height will be measured. */
+                height		: null,
+
+                /*	Deviation for the height-option. */
+                tolerance	: 0,
+         
+                /*	Callback function that is fired after the ellipsis is added,
+                    receives two parameters: isTruncated(boolean), orgContent(string). */
+                callback	: function( isTruncated, orgContent ) {},
+         
+                lastCharacter	: {
+         
+                    /*	Remove these characters from the end of the truncated text. */
+                    remove		: [ ' ', ',', ';', '.', '!', '?' ],
+         
+                    /*	Don't add an ellipsis if this array contains 
+                        the last character of the truncated text. */
+                    noEllipsis	: []
+                }   
+            });
+        };
+    </script>
+    
+    <script type="text/javascript" src="{$template_dir}includes/js/lightbox.min.js"></script><!--lightbox popup script-->
+    <link type="text/css" href="{$style_dir}css/lightbox.css" hreflang="en" rel="stylesheet"> 
+    <script>
+        lightbox.option({        
+          'showImageNumberLabel': false
+        })
+    </script>
+    
+    <div id="main" class="main_container_cpanel">
+        <div class="content_box_cpanel" id="column_left_cpanel">
+            <br>
+            {block name=left_tile}
+                {include file='1/main/latest_comments_tile.html'}
+            {/block}
+        </div>
+        <div class="content_box_cpanel" id="column_center_cpanel">
+            <br>
+            <div class="standard_tile" id="games_main">
+                <div class="help-tip">
+                    <p>For a review search on game level, go to the game section</p>
+                </div>
+                <h1>REVIEWS</h1>
+                <div class="standard_tile_line"></div>
+                <div class="standard_tile_text">
+                    <h6 style="text-align:left;">
+                        What do other people think of a certain game? You wanna learn more about a particular game? 
+                        You came to the right place. Overhere you'll find reviews of your favorite ST classics. 
+                        If you feel inspired and you want to write something yourself, make sure to send your review 
+                        to the Atari Legend team. And if it fits, we'll be happy to place it online. Enjoy the read! 
+                        There are currently <span style="font-weight:bold;"><a href="../games/games_reviews_main.php" class="standard_tile_link">{$nr_reviews}</a></span> 
+                        reviews available in the Atari Legend database.
+                        {if isset($action)} <span class="standard_tile_subtext_reviews">The selected author has writtan a total of 
+                        <span style="font-weight:bold;">{$author_reviews}</span> {if $author_reviews == '1'}review{else}reviews{/if}.</span>{/if}
+                        <br><br>
+                    </h6>
+                </div>
+                <form action="../games/games_reviews_main.php" method="get" name="game_search">
+                    <div class="games_main_row_site">
+                        <div class="games_main_text_site"><h6>Author search</h6></div>
+                        <div class="games_main_text_short"><h6>:</h6></div>
+                        <div class="games_main_input_site">
+                            <select name="author_id" id="games_main_pub_drop">
+                                <option value="-" SELECTED>-</option>
+                                {foreach from=$authors item=line}
+                                    <option value="{$line.author_id}">{$line.author_name}</option>
+                                {/foreach}
+                            </select>
+                            <input type="hidden" name="action" id="action" value="search">
+                        </div>                  
+                    </div>
+                    <div class="standard_table_center">
+                        <br>
+                        <input type="submit" value="SEARCH" class="quick_search_games_button">
+                    </div>   
+                </form>
+                <br>
+                <br>
+                <div class="standard_tile_line"></div>
+                <div id="author_list">	
+                    <table class="standard_table_games_main_detail">               
+                    {foreach from=$recent_reviews item=line}
+                        <tr>
+                        <td class="game_details_review_preview_left" style="width:20%;">  
+                            <div style="margin-left:10px;margin-right:10px;text-align:justify;margin-bottom:10px;margin-top:10px">
+                                <a href="../../includes/show_image.php?file={$line.review_img}&amp;resize=410,null,null,null" data-lightbox="image-1">
+                                    <img src="../../includes/show_image.php?file={$line.review_img}&amp;resize=160,null,null,null" alt="{$line.review_name}" class="user_stats_img_dark" style="max-width:95%;">
+                                </a>
+                                <br>
+                            </div>
+                        </td>
+                        <td class="game_details_review_preview_right" style="width:80%;">
+                            <div style="margin-top:20px;margin-bottom:15px;margin-right:20px;margin-left:10px;">
+                               <h4 style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis">
+                                    <a href="../games/games_reviews_detail.php?review_id={$line.review_id}" class="standard_tile_link">{$line.review_name}</a>	
+                                </h4>
+                                <h5 style="font-weight: bold;">{$line.review_date} by <a href="../../admin/user/user_detail.php?user_id_selected={$line.review_author_id}" class="latest_comments_link">{$line.review_author}</a></h5>
+                                <div class="interview_main_text">
+                                   {$line.review_text}
+                                </div>
+                                <h2><a href="../games/games_reviews_detail.php?review_id={$line.review_id}" class="standard_tile_link">Read more <i class="fa fa-chevron-right" aria-hidden="true"></i></a></h2>
+                                <br>                            
+                            </div>
+                        </td>
+                        </tr>		
+                    {/foreach}
+                    </table>
+                    <div class="standard_table_center">
+                        {if $links.linkback != ''}
+                            <a href ="../games/games_reviews_main.php{$links.linkback}" class="standard_tile_link" style="float:left;margin-left:5px;margin-top:10px;">Previous page</a>	
+                        {/if}
+                        {if $links.linknext != ''}
+                            <a href="../games/games_reviews_main.php{$links.linknext}" class="standard_tile_link" style="float:right;margin-right:5px;margin-top:10px;">Next page</a>
+                        {/if}
+                    </div>	
+                </div>
+            </div>
+        </div>
+        <div class="content_box_cpanel" id="column_right_cpanel">
+            <br>
+            {block name=right_tile}
+                {include file='1/main/tile_screenstar.html'}
+                <br>
+                {include file='1/main/did_you_know_tile.html'}
+            {/block}        
+        </div>
+    </div>
+{/block}
