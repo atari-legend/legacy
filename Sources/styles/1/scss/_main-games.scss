@@ -376,7 +376,7 @@
     margin-bottom:10px;
 }
 
-//*****Games detail - Reviews*********/
+//*****Games Reviews*********/
 
 .games_detail_review_container {
     display: flex;
@@ -390,7 +390,6 @@
     display: table-cell;
     width: 75%;
     vertical-align: top;
-    font-weight: 100;
     color: #ffffff;
     font-size: 11pt;
     text-align: left;
@@ -417,11 +416,7 @@
 
 .games_detail_review_screenshot_space{display:none;}
 
-//*****Games detail - Interviews*********/
-#games_detail_interview_chapters a:link{
-    color: white;
-}
-
-#games_detail_interview_chapters a:hover{
-    color: #008b8b;
+.standard_tile_subtext_reviews{
+    @extend .standard_tile_subtext;
+    font-size: 1em; 
 }

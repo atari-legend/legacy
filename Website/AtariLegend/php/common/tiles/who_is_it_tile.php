@@ -23,6 +23,7 @@ $query_interview = $mysqli->query("SELECT
 						individuals.ind_id,
 						individuals.ind_name,
 						individual_text.ind_imgext,
+                        users.user_id,	
 						users.userid						   
 						FROM interview_main
 						LEFT JOIN interview_text ON (interview_main.interview_id = interview_text.interview_id) 
@@ -60,5 +61,6 @@ $smarty->assign('who_is_it',
 			   'int_id' => $sql_interview['interview_id'],
 			   'int_text' => $int_text,
                'int_date' => $interview_date,
+               'int_user_id' => $sql_interview['user_id'],
 			   'int_userid' => $sql_interview['userid']));
 ?>

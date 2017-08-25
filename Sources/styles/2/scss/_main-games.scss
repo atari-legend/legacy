@@ -330,6 +330,7 @@
     @extend .latest_comments_text;
     text-align:center;
     color:red;
+    float:none;
 }
 
 .games_main_detail_comments_container{
@@ -393,7 +394,6 @@
     display: table-cell;
     width: 75%;
     vertical-align: top;
-    font-weight: 100;
     color: #ffffff;
     font-size: 11pt;
     text-align: left;
@@ -420,3 +420,7 @@
 
 .games_detail_review_screenshot_space{display:none;}
  
+.standard_tile_subtext_reviews{
+    @extend .standard_tile_subtext;
+    font-size: 0.9em; 
+}

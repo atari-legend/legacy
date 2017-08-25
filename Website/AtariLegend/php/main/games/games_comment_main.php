@@ -177,7 +177,7 @@ if ($v_counter > 0) {
 }
 
 //Check if we need to place a next arrow
-if ($v_rows > ($v_counter + 15)) {
+if ($v_rows > ($v_counter + 5)) {
     //Build the link
     $v_linknext = ('?v_counter=' . ($v_counter + 5 . $users_comments));
 }

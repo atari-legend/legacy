@@ -154,44 +154,48 @@
 				<div id="top_background">
 					<!-- This is the side menu only visible for smartphones (max resolution 480pc)-->				
 					<div class="container">
-					  <div id="sidebar">
-						  <ul class="side_navigation">
-							<li><a href="../games/games_main.php" class="sidebutton" id="games_side">GAMES</a></li>
-							<li><a href="" class="sidebutton" id="menus_side">MENUS</a></li>
-							<li><a href="" class="sidebutton" id="demos_side">DEMOS</a></li>
-							<li><a href="" class="sidebutton" id="music_side">MUSIC</a></li>
-							<li><a href="" class="sidebutton" id="magazines_side">MAGAZINES</a></li>
-							<li><a href="" class="sidebutton" id="forum_main_side">FORUM</a></li>
-							<li><a href="" class="sidebutton" id="links_side">LINKS</a></li>
-							<li><a href="" class="sidebutton" id="about_side">ABOUT</a></li>
-						  </ul>
-						  <ul id="search_ul">
-							  <li id="searchbutton_side"><input id="search_text_side" type="text" name="gamesearch" maxlength="11"></li>
-                              <input type="hidden" value="title" id="autocomplete1">
-							  <li><a href="#" onclick="Search()"><div id="search_side"></div></a></li>
-						  </ul>
-						  <div class="skin-wrap">
-							<nav class="skin-menu">
-							  <ul class="clearfix">
-								<li>
-									<button class="sidebutton" id="skin_side">SKIN</button>
-									<ul class="sub-menu">
-										<li><a href="#" rel="1" class="sidebutton_cpanel">LEGACY</a></li>
-										<li><a href="#" rel="2" class="sidebutton_cpanel">TOS 2.07</a></li>
-										<li><a href="#" rel="3" class="sidebutton_cpanel">PICASSO</a></li>
-									</ul>
-								</li>
-							  </ul>
-							</nav>
-						  </div>
-					  </div>
-					  <div class="main-content">
-							<button type="button" data-toggle=".container" id="sidebar-toggle" style="border:none; cursor: pointer;">
-							  <span class="bar"></span>
-							  <span class="bar"></span>
-							  <span class="bar"></span>
-							</button>
-					  </div>
+					    <div id="sidebar">
+                            <div class="no-wrap">
+                                 <nav class="skin-menu">
+                                    <ul class="side_navigation">
+                                        <li><a href="#" class="sidebutton" id="news_side">NEWS</a></li>
+                                        <li><a href="../games/games_main.php" class="sidebutton" id="games_side">GAMES</a></li>
+                                        <li><a href="../games/games_reviews_main.php" class="sidebutton" id="reveiws_side">REVIEWS</a></li>
+                                        <li><a href="../interviews/interviews_main.php" class="sidebutton" id="interviews_side">INTERVIEWS</a></li>
+                                        <li><a href="#" class="sidebutton" id="links_side">LINKS</a></li>
+                                        <li><a href="#" class="sidebutton" id="cpanel_side">CPANEL</a></li>
+                                        <li><a href="#" class="sidebutton" id="forum_main_side">FORUM</a></li>
+                                        <li><a href="#" class="sidebutton" id="about_side">ABOUT</a></li>
+                                        </ul>
+                                </nav>
+                            </div>
+                            <ul id="search_ul">
+                                <li id="searchbutton_side"><input id="search_text_side" type="text" name="gamesearch" maxlength="11"></li>
+                                <input type="hidden" value="title" id="autocomplete1">
+                                <li><a href="#" onclick="Search()"><div id="search_side"></div></a></li>
+                            </ul>
+                            <div class="skin-wrap">
+                                <nav class="skin-menu">
+                                  <ul class="clearfix">
+                                    <li>
+                                        <button class="sidebutton" id="skin_side">SKIN</button>
+                                        <ul class="sub-menu">
+                                            <li><a href="#" rel="1" class="sidebutton_cpanel">LEGACY</a></li>
+                                            <li><a href="#" rel="2" class="sidebutton_cpanel">TOS 2.07</a></li>
+                                            <li><a href="#" rel="3" class="sidebutton_cpanel">PICASSO</a></li>
+                                        </ul>
+                                    </li>
+                                  </ul>
+                                </nav>
+                            </div>
+					    </div>
+                        <div class="main-content">
+                            <button type="button" data-toggle=".container" id="sidebar-toggle" style="border:none; cursor: pointer;">
+                              <span class="bar"></span>
+                              <span class="bar"></span>
+                              <span class="bar"></span>
+                            </button>
+                        </div>
 					</div>		
 					<!-- end of side menu-->
 					<div id="left">
@@ -266,13 +270,13 @@
 				<nav id="main_nav">
 					<ul id="main_nav_ul">
 						<li><a href="../front/front.php" id="home"></a></li>
+						<li><a href="#" class="topbutton" id="news">NEWS</a></li>
 						<li><a href="../games/games_main.php" class="topbutton" id="games">GAMES</a></li>
-						<li><a href="" class="topbutton" id="menus">MENUS</a></li>
-						<li><a href="" class="topbutton" id="demos">DEMOS</a></li>
-						<li><a href="" class="topbutton" id="music">MUSIC</a></li>
-						<li><a href="" class="topbutton" id="magazines">MAGAZINES</a></li>
-						<li><a href="" class="topbutton" id="forum_top">FORUM</a></li>
-						<li><a href="" class="topbutton" id="links">LINKS</a></li>
+						<li><a href="../games/games_reviews_main.php" class="topbutton" id="demos">REVIEWS</a></li>
+						<li><a href="../interviews/interviews_main.php" class="topbutton" id="music">INTERVIEWS</a></li>
+                        <li><a href="" class="topbutton" id="links">LINKS</a></li>
+						<li><a href="" class="topbutton" id="cpanel">CPANEL</a></li>
+						<li><a href="" class="topbutton" id="forum_top">FORUM</a></li>	
 						<li><a href="" class="topbutton" id="about">ABOUT</a></li>
 						<li><div class="searchbutton" id="search_text"><input type="text" id="auto"></div></li>
                         <input type="hidden" value="title" id="autocomplete1">

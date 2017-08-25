@@ -205,6 +205,28 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH)) {
         if ($log['sub_section'] == 'Interview' or $log['sub_section'] == 'Screenshots') {
             $subsection_link = $section_link;
         }
+        
+        if ($log['sub_section'] == 'Comment') {
+            $section_link = ("../interviews/interviews_edit.php" . '?interview_id=' . $log['section_id']);
+            if ($log['action'] == 'Delete') {
+                $subsection_link = ("../administration/change_log.php");
+            } else {
+                $subsection_link = ("../interviews/interviews_comment_edit.php" . '?interview_user_comments_id=' . $log['sub_section_id'] . '&v_counter=0');
+            }
+        }
+    }
+    
+    //  the REVIEW SECTION
+    if ($log['section'] == 'Reviews') {
+        $section_link = ("../games/games_review_comment_edit.php" . '?review_user_comments_id=' . $log['sub_section_id'] . '&v_counter=0');
+        
+        if ($log['sub_section'] == 'Comment') {
+            if ($log['action'] == 'Delete') {
+                $subsection_link = ("../administration/change_log.php");
+            } else {
+                $subsection_link = ("../games/games_review_comment_edit.php" . '?review_user_comments_id=' . $log['sub_section_id'] . '&v_counter=0');
+            }
+        }
     }
 
     //  the NEWS SECTION

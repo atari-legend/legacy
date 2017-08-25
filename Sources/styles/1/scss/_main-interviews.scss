@@ -1,0 +1,36 @@
+//******************************************************************/
+//**************************LEGACY SKIN******************************/
+//*******************************************************************/
+//*******************************************************************/
+//***This is the css code for the interview pages of the main site***/
+//*******************************************************************/
+
+
+//****************Interview detail page************************/
+#interview_chapters a:link{
+    color: white;
+}
+
+#interview_chapters a:visited{
+    color: white;
+}
+
+#interview_chapters a:hover{
+    color: #008b8b;
+}
+
+.interview_profile_text{
+    @extend .standard_tile_explanation;
+    margin-bottom:0px;
+    padding-top: 10px;
+}
+
+#column_right_interviews_details{@extend #column_right_games_details;}
+#column_left_interviews_details{@extend #column_left_games_details;}
+#column_center_interviews_details{@extend #column_center_games_details;}
+
+//****************Interview main page************************/
+.interview_main_text{
+    @extend .game_details_review_preview_text;
+    height: 75px;
+}
