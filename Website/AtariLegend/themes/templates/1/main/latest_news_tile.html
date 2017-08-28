@@ -22,7 +22,7 @@
 {block name=latest_news_tile}
 <div class="latest_news">
 	<div class="standard_tile">
-		<h1><a href="#" class="standard_tile_link">PRESS RELEASE</a></h1>
+		<h1><a href="../news/news.php" class="standard_tile_link">PRESS RELEASE</a></h1>
 		{assign var="number" value=1}
 		{foreach from=$news item=line}			
 			<div class="standard_tile_line"></div>
@@ -34,13 +34,13 @@
 				</div>-->
 				<div class="standard_list_entry_news">
 					<h4 style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis">
-						<a href="#" title="{$line.news_headline}" class="standard_tile_link">{$line.news_headline}</a>
+						<a href="../news/news.php" title="{$line.news_headline}" class="standard_tile_link">{$line.news_headline}</a>
 					</h4>
-					<h5 style="font-weight: bold;">{$line.news_date}</h5>
+					<h5 style="font-weight: bold;">{$line.news_date} by <a href="../../admin/user/user_detail.php?user_id_selected={$line.user_id}" class="standard_tile_link">{$line.user_name}</a></h5>
                     <div class="standard_list_entry_news_text">
                        {$line.news_text} 
                     </div>
-                    <h2><a href="#" class="standard_tile_link"><i class="fa fa-chevron-right" aria-hidden="true"></i></a></h2>
+                    <h2><a href="../news/news.php" class="standard_tile_link"><i class="fa fa-chevron-right" aria-hidden="true"></i></a></h2>
 				</div>							
 			</div>
 			{$number=$number+1}

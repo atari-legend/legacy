@@ -69,12 +69,14 @@ function delete_news(news_id)
 				<b>Headline - {$line.edit_headline}</b>
 				<br>
 				<br>
+                {if $line.edit_image_id != '0'}
 				<div style="float:left;margin-right:15px;">
 					<img src="../../includes/show_image.php?file={$line.edit_icon}&amp;resize=120,null,null,null" alt="newsbutton" class="game_screenshot_img">
 				</div>	
-				<div style="display:inline;">
-					<i>{$line.edit_text}</i>
-				</div>
+                {/if}
+                <div style="display:inline;">
+                    <i>{$line.edit_text}</i>
+                </div>
 				<br>
 				<div style="width:100%;text-align:center;">
 					<br>

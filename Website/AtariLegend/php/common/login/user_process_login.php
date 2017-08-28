@@ -57,7 +57,14 @@ if (isset($_POST['userid'], $_POST['p'])) {
         header('Location: ../../main/front/front.php');
     } else {
         // Login failed
-        header('Location: ../../main/front/front.php?error=1');
+        // check the cause - is the user inactive?
+        $sql_inactive = $mysqli->query("SELECT * FROM users WHERE userid = '$userid'");
+        $query_inactive = $sql_inactive->fetch_array(MYSQLI_BOTH);
+        if ($query_inactive['inactive'] == 1 )
+        {    
+            header('Location: ../../main/front/front.php?error=2');
+        }
+        else{header('Location: ../../main/front/front.php?error=1');}       
     }
 } else {
     // The correct POST variables were not sent to this page.

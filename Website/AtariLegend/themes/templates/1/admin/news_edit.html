@@ -188,6 +188,7 @@ function storeCaret(textEl) {
 						<div class="links_mod_text">News Icon</div>
 						<div class="links_mod_input">
 							<select name="news_image_id" id="quick_search_pub_select">
+                                <option value="0">-</option>
 								{foreach from=$news_images item=line}
 									{if $edit_submissions.edit_image_id eq $line.image_id}			
 										<option value="{$line.image_id}" selected>{$line.image_name}</option>

@@ -190,6 +190,7 @@ function storeCaret(textEl) {
 						<div class="links_mod_text">News Icon</div>
 						<div class="links_mod_input">
 							<select name="icon" id="quick_search_pub_select">
+                                <option value="-">-</option>
 								{foreach from=$news_images item=line}
 									<option value="{$line.image_id}">{$line.image_name}</option>
 								{/foreach}	

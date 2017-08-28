@@ -57,6 +57,9 @@ function user_stats()
    	document.getElementById('user').submit();
 }
 </script>
+<script type='text/JavaScript' src="{$template_dir}includes/js/sha512.js"></script> <!-- log on security script -->
+<script type='text/JavaScript' src="{$template_dir}includes/js/md5.js"></script>  <!-- log on security script -->
+<script type='text/JavaScript' src="{$template_dir}includes/js/forms.js"></script> <!-- log on security script -->
 {/block}
 
 {block name=main_tile}
@@ -99,27 +102,17 @@ function user_stats()
 						<div class="user_details_text">Join date :</div>
 						<div class="user_details_input"><input type="text" name="join date"  maxlength="255" value="{$users.join_date}" class="user_details_input_small" disabled></div>
 					</div>
-					<div class="user_details_row">
-						<div class="user_details_text">Inactive :</div>
-						<div class="user_details_input">
-                            <div class="checkbox" id="checkbox_user_detail">
-                                <input type="checkbox" value="1" id="user_inactive" name="user_inactive" {if $users.inactive == '1'} checked {/if}>
-                                <label for="user_inactive"></label>
-                                <!--<input type="checkbox" name="user_inactive" value="1" maxlength="255" class="quick_search_check" {if $users.inactive == '1'} checked {/if}>-->
-                            </div>
-                        </div>
-					</div>
 				</div>
                 <div class="user_details_child" id="child_3_user"></div>
-				<div class="user_details_child" id="child_2_user">
-					<div class="user_details_row">
+				<div class="user_details_child" id="child_2_user">                    
+					<!--<div class="user_details_row">
 						<div class="user_details_text">User pwd :</div>
 						{if $users.user_pwd ==! ''}
 							<div class="user_details_input"><input type="button" value="reset" class="topbutton_cpanel_small" onClick="reset_pwd();"></div>
 						{else}
 							<div class="user_details_input"><input type="text" name="user_pwd"  maxlength="255" class="user_details_input_small"></div>
 						{/if}
-					</div>
+					</div>-->
 					<div class="user_details_row">	
 						<div class="user_details_text">User permission :</div>
 						<div class="user_details_input"><input type="text" name="user_permission"  maxlength="60" value="{$users.user_permission}" class="user_details_input_small"></div>
@@ -135,6 +128,16 @@ function user_stats()
                     <div class="user_details_row">
 						<div class="user_details_text">Last visit :</div>
 						<div class="user_details_input"><input type="text" name="last_visit"  maxlength="255" value="{$users.last_visit}" class="user_details_input_small" disabled></div>
+					</div>
+                    <div class="user_details_row">
+						<div class="user_details_text">Inactive :</div>
+						<div class="user_details_input">
+                            <div class="checkbox" id="checkbox_user_detail">
+                                <input type="checkbox" value="1" id="user_inactive" name="user_inactive" {if $users.inactive == '1'} checked {/if}>
+                                <label for="user_inactive"></label>
+                                <!--<input type="checkbox" name="user_inactive" value="1" maxlength="255" class="quick_search_check" {if $users.inactive == '1'} checked {/if}>-->
+                            </div>
+                        </div>
 					</div>
 				</div>
 			</div>
@@ -156,33 +159,73 @@ function user_stats()
 		</fieldset>
 		<br/><br/>
 		<fieldset>
-			<legend>Avatar</legend>
-                
-			{if $users.avatar_ext !=''}
-				<form action="../user/db_user.php?action=delete_avatar&amp;user_id_selected={$users.user_id}" method="post" name="delete_avatar">
-				Delete Image?
-				<div>
-					<br><img src="../../includes/show_image.php?file={$users.image}&amp;resize=160,null,null,null" alt="Avatar" class="user_stats_img" id="user_details_img_dark">
-				</div>
-				<br>
-				<input type="hidden" name="user_id_selected" value="{$users.user_id}">
-				<input type="submit" value="Delete" class="topbutton_cpanel_small">
-				</form>
-			{else}
-				<form enctype="multipart/form-data" action="../user/db_user.php?user_id_selected={$users.user_id}" method="post" name="avatar" id="avatar">
-					Attach image
-				<br><br>
-				<label for="file_upload" class="file_upload">Select file</label>
-                <input id="file_upload" type="file" name="image">
-                <input type="text" class="standard_tile_input_small" id="file_upload_user_detail">&nbsp;
-                <br><br>
-				<input type="submit" name="Modify" value="Upload" class="topbutton_cpanel_small">
-				<input type="hidden" name="MAX_FILE_SIZE" value="50000">
-				<input type="hidden" name="user_id_selected" value="{$users.user_id}">
-				<input type="hidden" name="action" value="avatar_upload">
-				</form>
-			{/if}
+			<legend>Avatar</legend> 
+                <div class="user_details_container">
+                    <div class="user_details_child" id="child_1_user">
+                        {if $users.avatar_ext !=''}
+                            <form action="../user/db_user.php?action=delete_avatar&amp;user_id_selected={$users.user_id}" method="post" name="delete_avatar">
+                            Delete Image?
+                            <div>
+                                <br><img src="../../includes/show_image.php?file={$users.image}&amp;resize=160,null,null,null" alt="Avatar" class="user_stats_img" id="user_details_img_dark">
+                            </div>
+                            <br>
+                            <input type="hidden" name="user_id_selected" value="{$users.user_id}">
+                            <input type="submit" value="Delete" class="topbutton_cpanel_small">
+                            </form>
+                        {else}
+                            <form enctype="multipart/form-data" action="../user/db_user.php?user_id_selected={$users.user_id}" method="post" name="avatar" id="avatar">
+                                Attach image
+                            <br><br>
+                            <label for="file_upload" class="file_upload">Select file</label>
+                            <input id="file_upload" type="file" name="image">
+                            <input type="text" class="standard_tile_input_small" id="file_upload_user_detail">&nbsp;
+                            <br><br>
+                            <input type="submit" name="Modify" value="Upload" class="topbutton_cpanel_small">
+                            <input type="hidden" name="MAX_FILE_SIZE" value="50000">
+                            <input type="hidden" name="user_id_selected" value="{$users.user_id}">
+                            <input type="hidden" name="action" value="avatar_upload">
+                            </form>
+                        {/if}
+                     </div>
+                </div>
 		</fieldset>
+        <br/><br/>
+        <fieldset>
+			<legend>Reset Password</legend>  
+            <form action="../user/db_user.php" method="post" name="login_form">
+			<div class="user_details_container">
+				<div class="user_details_child" id="child_1_user">
+                    {if $user_session.permission == '1'}
+                        You are admin, you can change passwords for all users <br><br>
+                        <div class="user_details_row">
+                            <div class="user_details_text">New password :</div>
+                            <div class="user_details_input"><input type="password" name="user_new_pwd"  maxlength="255" class="user_details_input_small"></div>
+                        </div>
+                        <br>
+                        <input type="submit" name="Modify" value="Modify" class="topbutton_cpanel_small">
+                        <input type="hidden" name="user_id_selected" value="{$users.user_id}">
+                        <input type="hidden" name="action" value="reset_pwd">
+                    {else}
+                        <div class="user_details_row">
+                            <div class="user_details_text">Current password :</div>
+                            <div class="user_details_input"><input name="password" type="password" required  maxlength="255" class="user_details_input_small"></div>
+                        </div>
+                        <div class="user_details_row">
+                            <div class="user_details_text">New password :</div>
+                            <div class="user_details_input"><input type="password" name="user_new_pwd"  maxlength="255" class="user_details_input_small"></div>
+                        </div>
+                        <div class="user_details_row">
+                            <div class="user_details_text">Confirm new password :</div>
+                            <div class="user_details_input"><input type="password" name="user_confirm_pwd"  maxlength="255" class="user_details_input_small"></div>
+                        </div>
+                        <br>
+                        <input type="button" onclick="formhash(this.form, this.form.password);" name="Modify" value="Modify" class="topbutton_cpanel_small">
+                        <input type="hidden" name="user_id_selected" value="{$users.user_id}">
+                        <input type="hidden" name="action" value="reset_pwd">
+                    {/if}
+                </div>
+            </div>
+        </fieldset>
 		{else}
 		<div class="left_nav_section">
 			User does not exist.

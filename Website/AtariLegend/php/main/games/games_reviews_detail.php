@@ -83,7 +83,6 @@ while ($sql_screenshots = $query_screenshots->fetch_array(MYSQLI_BOTH)) {
 $sql_reviews_author = $mysqli->query("SELECT * FROM review_main
                            LEFT JOIN review_game ON (review_main.review_id = review_game.review_id)
                            LEFT JOIN game ON (game.game_id = review_game.game_id)
-                           LEFT JOIN game_year ON (game.game_id = game_year.game_id)
                            LEFT JOIN users ON (review_main.user_id = users.user_id)
                            WHERE review_main.user_id = '$query_review[user_id]'
                            AND review_main.review_id != '$review_id'
@@ -95,11 +94,15 @@ while ($query_reviews_author = $sql_reviews_author->fetch_array(MYSQLI_BOTH))
 {
     $count++;
     
+    //select the game year
+    $sql_game_year = $mysqli->query("SELECT * FROM game_year where game_id = $query_reviews_author[game_id]") or die ("error in game year query");
+    $query_game_year = $sql_game_year->fetch_array(MYSQLI_BOTH);
+    
     $smarty->append('reviews_author', array(
             'review_id' => $query_reviews_author['review_id'],
             'game_name' => $query_reviews_author['game_name'],
-            'game_year' => $query_reviews_author['game_year'],
             'game_id' => $query_reviews_author['game_id'],
+            'game_year' => $query_game_year['game_year'],
             'user_name' => $query_reviews_author['userid'],
             'user_id' => $query_reviews_author['user_id']
         ));   
