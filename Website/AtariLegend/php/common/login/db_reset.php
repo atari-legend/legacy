@@ -60,7 +60,7 @@ if (isset ($action) and $action == 'check_email')
                 $sdbquery = $mysqli->query("INSERT INTO users_reset (user_id, password, time) VALUES ('$sql_user_id[user_id]', '$password', '$timestamp')") or die("Couldn't insert user into users_reset table");
 
                 // Create a url which we will direct them to reset their password  
-                $pwrurl = "http://dev.stonish.net/php/main/front/front.php?action=new_pwd&q=".$password;  
+                $pwrurl = $pwd_reset_link.$password;  
       
                 $mail = new PHPMailer;
 
@@ -79,19 +79,19 @@ if (isset ($action) and $action == 'check_email')
                 // 1 = errors and messages
                 // 2 = messages only
                 //$mail->Host = 'smtp.live.com';                    // Specify main and backup SMTP servers
-                $mail->Host       = 'smtp.gmail.com';
+                $mail->Host       = $ms_host;
                 $mail->SMTPAuth   = true; // Enable SMTP authentication
                 //$mail->Username = 'atarilegend@hotmail.com';      // SMTP username
                 //$mail->Password = '@Tar1L3geNd';                  // SMTP password
-                $mail->Username   = 'atarilegendserver@gmail.com';
-                $mail->Password   = '@Tar1L3geNd';
+                $mail->Username   = $ms_usn;
+                $mail->Password   = $ms_pwd;
                 $mail->SMTPSecure = 'tls'; // Enable TLS encryption, `ssl` also accepted
                 //$mail->SMTPSecure = 'ssl';
                 //$mail->Port = 587;                                // TCP port to connect to
-                $mail->Port       = 587;
+                $mail->Port       = $ms_port;
 
-                $mail->setFrom('atarilegendserver@gmail.com', 'Atarilegend');
-                $mail->addReplyTo('atarilegendserver@gmail.com', 'Atarilegend');
+                $mail->setFrom($pwd_reset_from, 'Atarilegend');
+                $mail->addReplyTo($pwd_reset_reply, 'Atarilegend');
 
                 $mail->isHTML(false); // Set email format to HTML
 

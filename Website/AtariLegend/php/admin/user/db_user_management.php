@@ -50,25 +50,26 @@ if (isset($action) and $action == "email_user") {
             $i++;
         }
 
-        // Create Email
-        $mail->isSMTP(); // Set mailer to use SMTP
+        //We need to comment out this comment to have it to work from server, on localhost it runs with this command
+        //$mail->isSMTP(); // Set mailer to use SMTP
+       
         //$mail->SMTPDebug  = 2;                            // enables SMTP debug information (for testing)
         // 1 = errors and messages
         // 2 = messages only
         //$mail->Host = 'smtp.live.com';                    // Specify main and backup SMTP servers
-        $mail->Host       = 'smtp.gmail.com';
+        $mail->Host       = $ms_host;
         $mail->SMTPAuth   = true; // Enable SMTP authentication
         //$mail->Username = 'atarilegend@hotmail.com';      // SMTP username
         //$mail->Password = '@Tar1L3geNd';                  // SMTP password
-        $mail->Username   = 'atarilegendserver@gmail.com';
-        $mail->Password   = '@Tar1L3geNd';
+        $mail->Username   = $ms_usn;
+        $mail->Password   = $ms_pwd;
         $mail->SMTPSecure = 'tls'; // Enable TLS encryption, `ssl` also accepted
         //$mail->SMTPSecure = 'ssl';
         //$mail->Port = 587;                                // TCP port to connect to
-        $mail->Port       = 587;
+        $mail->Port       = $ms_port;
 
-        $mail->setFrom('atarilegendserver@gmail.com', 'Atarilegend');
-        $mail->addReplyTo('atarilegendserver@gmail.com', 'Atarilegend');
+        $mail->setFrom($pwd_reset_from, 'Atarilegend');
+        $mail->addReplyTo($pwd_reset_reply, 'Atarilegend');
 
         $mail->isHTML(false); // Set email format to HTML
 

@@ -1,12 +1,12 @@
 <?php
 /***************************************************************************
- *                                games_main_detail.php
+ *                                games_detail.php
 *                            ------------------------------
 *   begin                : Thursday, 20 July, 2017
 *   copyright            : (C) 2017 Atari Legend
 *   email                : martens_maarten@hotmail.com
 *
-*   Id: games_main_detail.php,v 0.10 20/07/2017 17:37 STG 
+*   Id: games_detail.php,v 0.10 20/07/2017 17:37 STG 
 ****************************************************************************/
 
 //****************************************************************************************
@@ -514,7 +514,7 @@ while ($query_comment = $sql_comment->fetch_array(MYSQLI_BOTH))
 $smarty->assign("game_id", $game_id);
 
 //Send all smarty variables to the templates
-$smarty->display("file:" . $mainsite_template_folder . "games_main_detail.html");
+$smarty->display("file:" . $mainsite_template_folder . "games_detail.html");
 
 //close the connection
 mysqli_close($mysqli);

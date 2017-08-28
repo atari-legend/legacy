@@ -69,6 +69,7 @@ while ($news = $sql_news->fetch_array(MYSQLI_BOTH)) {
         'email_headline' => $email_headline,
         'edit_date' => $news_date,
         'edit_text' => $news_text,
+        'edit_image_id' => $news['news_image_id'],
         'edit_email' => $news['email'],
         'edit_icon' => $v_image
     ));

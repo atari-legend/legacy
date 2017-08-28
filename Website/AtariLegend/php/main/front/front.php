@@ -38,8 +38,17 @@ $smarty->assign('who_is_it_tile', 'whoisit_position_front');
 
 if (isset($error))
 {
-    $_SESSION['edit_message'] = 'Usn or pwd incorrect - Please try again';
-    header("Location: ../front/front.php");
+    if ($error == 1)
+    {    
+        $_SESSION['edit_message'] = 'Usn or pwd incorrect - Please try again';
+        header("Location: ../front/front.php");
+    }
+    
+    if ($error == 2)
+    {    
+        $_SESSION['edit_message'] = 'User is set inactive - contact admin';
+        header("Location: ../front/front.php");
+    }
 }
 
 if (isset($action) and $action == 'register')

@@ -63,6 +63,7 @@ if ($num_submissions == '0') {
             'news_headline' => $submission['news_headline'],
             'news_date' => $news_date,
             'news_text' => $news_text,
+            'news_image_id' => $submission['news_image_id'],
             'news_icon' => $v_image
         ));
     }

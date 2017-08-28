@@ -20,6 +20,7 @@
 //Select the news from the DB
 $query_news = $mysqli->query("SELECT * FROM news
                            LEFT JOIN news_image ON (news.news_image_id = news_image.news_image_id)
+                           LEFT JOIN users on (news.user_id = users.user_id)
                            ORDER BY news.news_date DESC LIMIT 6");
 
 //Lets put all the acquired news data into a smarty array and send them to the template.
@@ -51,6 +52,8 @@ while ($sql_news = $query_news->fetch_array(MYSQLI_BOTH))
     $smarty->append('news',
         array('news_date' => $news_date,
           'news_headline' => $sql_news['news_headline'],
+          'user_id' => $sql_news['user_id'],
+          'user_name' => $sql_news['userid'],
           'news_text' => $news_text,
           'image' => $v_image));
 }
