@@ -9,6 +9,8 @@
  *   Id: games_review_edit.php,v 0.10 2004/12/04 23:34 ST Graveyard
  *   Id: games_review_edit.php,v 0.20 2016/07/23 22:32 ST Graveyard
  *                          - AL 2.0
+ *   Id: games_review_edit.php,v 0.21 2017/09/01 10:20 ST Graveyard
+ *                          - added some tweaks for review submissions
  *
  ***************************************************************************/
 
@@ -118,7 +120,12 @@ if (isset($reviewid) and isset($game_id)) {
 
     $smarty->assign("screenshots_nr", $i);
     $smarty->assign("reviewid", $reviewid);
-
+    
+    if (isset($action))
+    {
+        $smarty->assign("action", $action);
+    }
+    
     $smarty->assign("user_id", $_SESSION['user_id']);
 
     //Send all smarty variables to the templates

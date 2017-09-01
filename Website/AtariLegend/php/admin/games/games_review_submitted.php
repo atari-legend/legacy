@@ -10,7 +10,8 @@
  *   Id: games_review_submitted.php,v 0.10 2005/12/04 Gatekeeper
  *   Id: games_review_submitted.php,v 0.15 2016/07/24 Gatekeeper
  *                  - AL 2.0
- *
+ *   Id: games_review_submitted.php,,v 0.16 2017/09/01 10:20 ST Graveyard
+ *                  - added some tweaks for review submissions
  ***************************************************************************/
 
 /*

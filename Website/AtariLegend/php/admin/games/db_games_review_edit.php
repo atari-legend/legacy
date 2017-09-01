@@ -11,7 +11,8 @@
  *         - AL 2.0
  *   Id: db_games_review_edit.php,v 0.16 2016/08/19 12:34 ST Graveyard
  *         - Added change log
- *
+ *   Id: db_games_review_edit.php,v 0.17 2017/09/01 10:20 ST Graveyard
+ *                  - added some tweaks for review submissions
  ***************************************************************************/
 
 //*********************************************************************************************
@@ -43,7 +44,7 @@ if (isset($action) and $action == 'delete_comment') {
     header("Location: ../games/games_review_edit.php?reviewid=$reviewid&game_id=$game_id");
 }
 
-if (isset($action) and $action == 'delete_review') {
+if (isset($action) and ( $action == 'delete_review' or $action == 'delete_submission' )) {
     $sql = $mysqli->query("DELETE FROM review_main WHERE review_id = '$reviewid' ") or die("deletion review_main failed");
     $sql = $mysqli->query("DELETE FROM review_game WHERE review_id = '$reviewid' AND game_id = '$game_id' ") or die("deletion review_game failed");
     $sql = $mysqli->query("DELETE FROM review_score WHERE review_id = '$reviewid' ") or die("deletion review_score failed");
@@ -60,11 +61,17 @@ if (isset($action) and $action == 'delete_review') {
     $_SESSION['edit_message'] = "Review deleted";
 
     create_log_entry('Games', $game_id, 'Review', $reviewid, 'Delete', $_SESSION['user_id']);
-
-    header("Location: ../games/games_review_add.php?game_id=$game_id");
+    if ($action == 'delete_review')
+    {
+        header("Location: ../games/games_review_add.php?game_id=$game_id");
+    }
+    else
+    {
+        header("Location: ../games/games_review_submitted.php");
+    }
 }
 
-if ($action == 'edit_review') {
+if ($action == 'edit_review' or $action == 'submitted') {
     // first we have to convert the date vars into a time stamp to be inserted to review_date
 
     $date = date_to_timestamp($Date_Year, $Date_Month, $Date_Day);
@@ -139,8 +146,15 @@ if ($action == 'edit_review') {
     $_SESSION['edit_message'] = "Review updated";
 
     create_log_entry('Games', $game_id, 'Review', $reviewid, 'Update', $_SESSION['user_id']);
-
-    header("Location: ../games/games_review_edit.php?reviewid=$reviewid&game_id=$game_id");
+    
+    if ($action == 'submitted')
+    {
+        header("Location: ../games/games_review_submitted.php");
+    }
+    else
+    {
+        header("Location: ../games/games_review_edit.php?reviewid=$reviewid&game_id=$game_id");
+    }
 }
 
 if (isset($action) and $action == 'move_to_comment') {

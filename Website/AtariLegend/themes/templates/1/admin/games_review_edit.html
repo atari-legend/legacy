@@ -16,6 +16,8 @@
 *					add screenstar button
 *   Id: games_review_edit.html,v 0.23 2017/05/24 08:38 ST Graveyard
 *                   added the [frontpage] functionality 
+*   Id: games_review_edit.html,v 0.24 2017/09/01 10:20 ST Graveyard
+*                  - added some tweaks for review submissions
 ***************************************************************************/
 
 ///****************************************************************************************
@@ -38,6 +40,21 @@ function deletereview(reviewid, gameid)
 	if (return_value !="0")
     {
       	url="db_games_review_edit.php?reviewid="+reviewid+"&game_id="+gameid+"&action=delete_review";
+		location.href=url;
+    }
+}
+
+function deleteSubmission(reviewid, gameid)
+{	
+	// CONFIRM REQUIRES ONE ARGUMENT
+    var message = "Are you sure you want to delete this review?";
+    // CONFIRM IS BOOLEAN. THAT MEANS THAT
+    // IT RETURNS TRUE IF 'OK' IS CLICKED
+    // OTHERWISE IT RETURN FALSE
+    var return_value = confirm(message);
+	if (return_value !="0")
+    {
+      	url="db_games_review_edit.php?reviewid="+reviewid+"&game_id="+gameid+"&action=delete_submission";
 		location.href=url;
     }
 }
@@ -307,12 +324,16 @@ function storeCaret(textEl) {
 				{/if}																																																																																																																																																																					
 				<br>
 				<br>
-				<input type="hidden" name="action" value="edit_review">
+				<input type="hidden" name="action" value="{if isset($action) and $action == 'submitted'}submitted{else}edit_review{/if}">
 				<input type="hidden" name="game_id" value="{$game.game_id}">
 				<input type="hidden" name="reviewid" value="{$reviewid}">
-				<input type="submit" name="Create Review" value="Edit" class="topbutton_cpanel_small">
-				<input type="button" name="delete" value="Delete" onclick="deletereview({$reviewid},{$game.game_id})" style="padding:2px;" class="topbutton_cpanel_small">
-				<input type="button" name="delete" value="Move to Comments" onclick="move_to_comment({$reviewid},{$game.game_id})" class="topbutton_cpanel" style="padding:2px;width:200px;">
+				<input type="submit" name="Create Review" value="{if isset($action) and $action == 'submitted'}Submit review{else}Edit{/if}" class="topbutton_cpanel_small" {if isset($action) and $action == 'submitted'}style="padding:2px;width:200px;"{/if}>
+				{if isset($action) and $action == 'submitted'}
+                    <input type="button" name="delete" value="Delete submission" onclick="deleteSubmission({$reviewid},{$game.game_id})" style="padding:2px;width:200px;" class="topbutton_cpanel_small">
+                {else} 
+                    <input type="button" name="delete" value="Delete" onclick="deletereview({$reviewid},{$game.game_id})" style="padding:2px;" class="topbutton_cpanel_small">    
+                {/if}
+                <input type="button" name="delete" value="Move to Comments" onclick="move_to_comment({$reviewid},{$game.game_id})" class="topbutton_cpanel" style="padding:2px;width:200px;">
 				<br>
 				<br>
 			</fieldset> 

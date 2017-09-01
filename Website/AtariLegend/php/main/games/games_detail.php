@@ -509,8 +509,7 @@ while ($query_comment = $sql_comment->fetch_array(MYSQLI_BOTH))
                 'comment' => $sql_screenshots_review['comment_text']
             ));
     }
-
-
+    
 $smarty->assign("game_id", $game_id);
 
 //Send all smarty variables to the templates

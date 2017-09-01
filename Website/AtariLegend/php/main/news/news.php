@@ -17,7 +17,6 @@
 include("../../config/common.php");
 
 //load the tiles
-//load the tiles
 include("../../common/tiles/screenstar.php");
 include("../../common/tiles/did_you_know_tile.php");
 include("../../common/tiles/latest_comments_tile.php");
