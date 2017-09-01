@@ -1145,12 +1145,13 @@
         </div>
         
         <div class="content_box_games_details" id="column_center_games_details">
+            
             <!--*********************-->
             <!--START screenshot tile -->
             <!--*********************-->
             <br>
             <div class="standard_tile">
-                <h1>{if isset($mode) AND $mode == 'review'}SCREENSHOTS{else}{$game_info.game_name|upper}{/if}</h1>
+                <h1>{$game_info.game_name|upper}</h1>
                 <div class="standard_tile_line"></div>
                 <div id="jssor_1" class="games_main_detail_screenshot">   
                     <div data-u="slides" class="games_main_detail_slides">
@@ -1199,51 +1200,56 @@
             <!--*********************-->
             <!--END screenshot tile -->
             <!--*********************-->
-
+          
             <!--*************************-->
             <!--START Review preview tile -->
             <!--**************************-->   
             <br>
-            {if isset($mode) AND $mode == 'review'}
-            {else}
-                <div class="standard_tile">
-                    <h1><a href="../games/games_reviews_main.php" class="standard_tile_link" title="Click to see all reviews">REVIEWS</h1> 
-                    <div class="standard_tile_line"></div> 
-                    {if isset($review)}
-                        <table class="standard_table_games_main_detail">               
-                        {foreach from=$review item=line name=review}
-                            <tr>
-                            <td class="game_details_review_preview_left">  
-                                <div style="margin-left:10px;margin-right:10px;text-align:justify;margin-bottom:10px;margin-top:10px">
-                                    <a href="../../includes/show_image.php?file={$line.screenshot}&amp;resize=410,null,null,null" data-lightbox="image-1">
-                                    <img src="../../includes/show_image.php?file={$line.screenshot}&amp;resize=210,null,null,null" alt="Click to enlarge!" style="display:inline;margin-top:10px;" class="game_screenshot_img"></a>
-                                    <br>
-                                    <span class="standard_tile_subtext" style="font-weight: bold;">{$line.comment}</span>
-                                </div>
-                            </td>
-                            <td class="game_details_review_preview_right">
-                                <div style="margin-top:20px;margin-bottom:15px;margin-right:20px;margin-left:10px;">
-                                    <h4 style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis">
-                                        Written by <a href="../../admin/user/user_detail.php?user_id_selected={$line.user_id}" class="standard_tile_link">{$line.user_name}</a>
-                                    </h4>
-                                    <h5 style="font-weight: bold;">{$line.date}</h5>
-                                    <div class="game_details_review_preview_text">
-                                       {$line.text}
-                                    </div>
-                                    <h2><a href="../games/games_reviews_detail.php?game_id={$game_id}&review_id={$line.review_id}" class="standard_tile_link">Read more <i class="fa fa-chevron-right" aria-hidden="true"></i></a></h2>
-                                    <br>                            
-                                </div>
-                            </td>
-                            </tr>		
-                        {/foreach}
-                        </table>
-                    {else}
-                        <div class="games_main_detail_comments_log_on">
-                            There is no review. Here I will build a 'write a review' box for people who are logged in.
+            <div class="standard_tile">
+                <h1><a href="../games/games_reviews_main.php" class="standard_tile_link" title="Click to see all reviews">REVIEWS</a></h1> 
+                <div class="standard_tile_line"></div> 
+                {if isset($user_session)}
+                    <div class="standard_tile_text">     
+                        <h6 style="text-align:center;">
+                            Feel inspired to write your own review? Please click <a href="../games/games_reviews_add.php?game_id={$game_info.game_id}" class="standard_tile_link">here</a> and get started!
+                        </h6>
+                    </div> 
+                {else}
+                   <div class="games_main_detail_comments_log_on">
+                        If you like to write a review yourself, please log in and follow the link.
+                   </div> 
+                {/if}
+                {if isset($review)}
+                <div class="standard_tile_line"></div>
+                <table class="standard_table_games_main_detail">               
+                {foreach from=$review item=line name=review}
+                    <tr>
+                    <td class="game_details_review_preview_left">  
+                        <div style="margin-left:10px;margin-right:10px;text-align:justify;margin-bottom:10px;margin-top:10px">
+                            <a href="../../includes/show_image.php?file={$line.screenshot}&amp;resize=410,null,null,null" data-lightbox="image-1">
+                            <img src="../../includes/show_image.php?file={$line.screenshot}&amp;resize=210,null,null,null" alt="Click to enlarge!" style="display:inline;margin-top:10px;" class="game_screenshot_img"></a>
+                            <br>
+                            <span class="standard_tile_subtext" style="font-weight: bold;">{$line.comment}</span>
                         </div>
-                    {/if}
-                </div>
-            {/if}
+                    </td>
+                    <td class="game_details_review_preview_right">
+                        <div style="margin-top:20px;margin-bottom:15px;margin-right:20px;margin-left:10px;">
+                            <h4 style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis">
+                                Written by <a href="../../admin/user/user_detail.php?user_id_selected={$line.user_id}" class="standard_tile_link">{$line.user_name}</a>
+                            </h4>
+                            <h5 style="font-weight: bold;">{$line.date}</h5>
+                            <div class="game_details_review_preview_text">
+                               {$line.text}
+                            </div>
+                            <h2><a href="../games/games_reviews_detail.php?game_id={$game_id}&review_id={$line.review_id}" class="standard_tile_link">Read more <i class="fa fa-chevron-right" aria-hidden="true"></i></a></h2>
+                            <br>                            
+                        </div>
+                    </td>
+                    </tr>		
+                {/foreach}
+                </table>
+                {/if}
+            </div>
         </div>
 
         <div class="content_box_games_details" id="column_right_games_details">           

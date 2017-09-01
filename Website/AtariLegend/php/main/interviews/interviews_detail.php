@@ -109,10 +109,9 @@ while ($sql_screenshots = $query_screenshots->fetch_array(MYSQLI_BOTH)) {
 $sql_games = $mysqli->query("SELECT * FROM game_author
                                       LEFT JOIN author_type ON (game_author.author_type_id = author_type.author_type_id)
                                       LEFT JOIN game ON (game_author.game_id = game.game_id)
-                                      LEFT JOIN game_year ON (game.game_id = game_year.game_id)
                                       WHERE game_author.ind_id = '$query_interview[ind_id]'
                                       GROUP BY game.game_id, game.game_name HAVING COUNT(DISTINCT game.game_id, game.game_name) = 1
-                                      ORDER BY game_year.game_year ASC") or die ("problem with query");
+                                      ORDER BY game.game_name ASC") or die ("problem with query");
 
 $count = 0;
                                   
@@ -120,10 +119,14 @@ while ($query_games = $sql_games->fetch_array(MYSQLI_BOTH))
 {
     $count++;
     
+    //select the game year
+    $sql_game_year = $mysqli->query("SELECT * FROM game_year where game_id = $query_games[game_id]") or die ("error in game year query");
+    $query_game_year = $sql_game_year->fetch_array(MYSQLI_BOTH);
+    
     $smarty->append('games', array(
             'game_id' => $query_games['game_id'],
             'game_name' => $query_games['game_name'],
-            'game_year' => $query_games['game_year'],
+            'game_year' => $query_game_year['game_year'],
             'auhthor_type_info' => $query_games['author_type_info'],
             'count' => $count,
         ));

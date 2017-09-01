@@ -346,6 +346,33 @@
     .news_left_head{width:100%;}
 }
 
+//*----------------------------------------------------------
+//reviews details
+//------------------------------------------------------------ */
+@media screen and (max-width: 1280px) {
+    #column_left_reviews_details  {
+        float: left;
+        width:40%;
+    }
+
+    #column_center_reviews_details  {
+        float: right;
+        width: 58%;
+    }
+
+    #column_right_reviews_details  { 
+        float: left; 
+        width: 40%;
+        margin-left:0;
+    }
+}
+
+//* for lower resolutions put the left and right below eachother */
+@media screen and (max-width: 799px) {
+    #column_left_reviews_details  { width: 100%; float: left; margin: auto;  order:2;}
+    #column_center_reviews_details { width: 100%; float: left; margin: auto; order:3;  }
+    #column_right_reviews_details  { width: 100%; float: right; margin: auto; order:1;}
+}
 
 //*----------------------------------------------------------
 // CPanel
