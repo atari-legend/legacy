@@ -113,10 +113,12 @@ function user_stats()
 							<div class="user_details_input"><input type="text" name="user_pwd"  maxlength="255" class="user_details_input_small"></div>
 						{/if}
 					</div>-->
+                    {if $user_session.permission != '2'}
 					<div class="user_details_row">	
 						<div class="user_details_text">User permission :</div>
 						<div class="user_details_input"><input type="text" name="user_permission"  maxlength="60" value="{$users.user_permission}" class="user_details_input_small"></div>
 					</div>
+                    {/if}
 					<div class="user_details_row">	
 						<div class="user_details_text">User AF :</div>
 						<div class="user_details_input"><input type="text" name="user_af"  maxlength="255" value="{$users.user_af}" class="user_details_input_small"></div>
@@ -129,6 +131,7 @@ function user_stats()
 						<div class="user_details_text">Last visit :</div>
 						<div class="user_details_input"><input type="text" name="last_visit"  maxlength="255" value="{$users.last_visit}" class="user_details_input_small" disabled></div>
 					</div>
+                    {if $user_session.permission != '2'}
                     <div class="user_details_row">
 						<div class="user_details_text">Inactive :</div>
 						<div class="user_details_input">
@@ -139,6 +142,7 @@ function user_stats()
                             </div>
                         </div>
 					</div>
+                    {/if}
 				</div>
 			</div>
 			<table>	
@@ -190,7 +194,7 @@ function user_stats()
                 </div>
 		</fieldset>
         <br/><br/>
-        <fieldset>
+        <fieldset>           
 			<legend>Reset Password</legend>  
             <form action="../user/db_user.php" method="post" name="login_form">
 			<div class="user_details_container">
@@ -206,25 +210,30 @@ function user_stats()
                         <input type="hidden" name="user_id_selected" value="{$users.user_id}">
                         <input type="hidden" name="action" value="reset_pwd">
                     {else}
-                        <div class="user_details_row">
-                            <div class="user_details_text">Current password :</div>
-                            <div class="user_details_input"><input name="password" type="password" required  maxlength="255" class="user_details_input_small"></div>
-                        </div>
-                        <div class="user_details_row">
-                            <div class="user_details_text">New password :</div>
-                            <div class="user_details_input"><input type="password" name="user_new_pwd"  maxlength="255" class="user_details_input_small"></div>
-                        </div>
-                        <div class="user_details_row">
-                            <div class="user_details_text">Confirm new password :</div>
-                            <div class="user_details_input"><input type="password" name="user_confirm_pwd"  maxlength="255" class="user_details_input_small"></div>
-                        </div>
-                        <br>
-                        <input type="button" onclick="formhash(this.form, this.form.password);" name="Modify" value="Modify" class="topbutton_cpanel_small">
-                        <input type="hidden" name="user_id_selected" value="{$users.user_id}">
-                        <input type="hidden" name="action" value="reset_pwd">
+                        {if $user_session.user_id == $users.user_id}
+                            <div class="user_details_row">
+                                <div class="user_details_text">Current password :</div>
+                                <div class="user_details_input"><input name="password" type="password" required  maxlength="255" class="user_details_input_small"></div>
+                            </div>
+                            <div class="user_details_row">
+                                <div class="user_details_text">New password :</div>
+                                <div class="user_details_input"><input type="password" name="user_new_pwd"  maxlength="255" class="user_details_input_small"></div>
+                            </div>
+                            <div class="user_details_row">
+                                <div class="user_details_text">Confirm new password :</div>
+                                <div class="user_details_input"><input type="password" name="user_confirm_pwd"  maxlength="255" class="user_details_input_small"></div>
+                            </div>
+                            <br>
+                            <input type="button" onclick="formhash(this.form, this.form.password);" name="Modify" value="Modify" class="topbutton_cpanel_small">
+                            <input type="hidden" name="user_id_selected" value="{$users.user_id}">
+                            <input type="hidden" name="action" value="reset_pwd">
+                        {else}
+                            You are not allowed to reset other user's passwords
+                        {/if}
                     {/if}
                 </div>
             </div>
+            </form>
         </fieldset>
 		{else}
 		<div class="left_nav_section">

@@ -431,24 +431,26 @@ function EmailSent(){
                     <div class="left_nav_section">No users found</div>
                 {/if}
                 {if isset($nr_users)}
-                <tr>
-                    <td class="standard_table_left" colspan="5">
-                        <img width="38" height="22" style="float:left;" alt="" src="../../../themes/templates/1/includes/img/arrow_ltr.gif">
-                        <select name="action" id="user_list_action">
-                            <option value="-" selected>Select Action</option>
-                            {if isset($mail_link)}
-                                <option value="email_user">Send Email</option>
-                            {/if}
-                            <option value="activate_user">Activate User</option>
-                            <option value="deactivate_user">Deactivate User</option>
-                            {if isset($delete_link)}
-                                <option value="delete_user">Delete User</option>
-                            {/if}
-                        </select>
-                        <b>Found {if $nr_users != ''}{$nr_users}{else}0{/if} users in {$query_time} sec</b>
-                    </td>
-                </tr>
-            {/if}
+                    {if $nr_users != 0}
+                        <tr>
+                            <td class="standard_table_left" colspan="5">
+                                <img width="38" height="22" style="float:left;" alt="" src="../../../themes/templates/1/includes/img/arrow_ltr.gif">
+                                <select name="action" id="user_list_action">
+                                    <option value="-" selected>Select Action</option>
+                                    {if isset($mail_link)}
+                                        <option value="email_user">Send Email</option>
+                                    {/if}
+                                    <option value="activate_user">Activate User</option>
+                                    <option value="deactivate_user">Deactivate User</option>
+                                    {if isset($delete_link)}
+                                        <option value="delete_user">Delete User</option>
+                                    {/if}
+                                </select>
+                                <b>Found {$nr_users} users in {$query_time} sec</b>
+                            </td>
+                        </tr>
+                    {/if}
+                {/if}
             </table>
         </div>
     </div>

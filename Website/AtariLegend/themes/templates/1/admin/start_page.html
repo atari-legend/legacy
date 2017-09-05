@@ -126,9 +126,11 @@ window.onload = function () {
         <div class="left_nav_section">
             Welcome <b><a href="../../admin/user/user_detail.php?user_id_selected={$users.user_id}" class="standard_tile_link_cpanel">{$users.user_name}</a></b> to the heart of AtariLegend, the control panel. This screen will give you a quick overview of all the various statistics of the atarilegend website. 
             The links on the left hand side of this screen and at the top allow you to control every aspect of your cpanel experience. 
-            Each page will have instructions on how to use the tools. If you have remarks or questions, please use the private 
+            Each page will have instructions on how to use the tools. 
+            {if $user_session.permission != 1}<br><br><b><u>You are a regular user and you want have update or insert authorizations. If you like to help out on this project and want to contribute more than currently 
+            possible on the main site, get in touch with us.</u></b>{else}If you have remarks or questions, please use the private
             <a href="http://www.atari-forum.com/viewforum.php?f=36" class="standard_tile_link_cpanel">AtariLegend</a> forum over at 
-            <a href="http://www.atari-forum.com/" class="standard_tile_link_cpanel">Atari-Forum.</a>
+            <a href="http://www.atari-forum.com/" class="standard_tile_link_cpanel">Atari-Forum.</a>{/if}
         </div>
         <br>
     </div>
