@@ -12,6 +12,7 @@
 // We are using the action var to separate all the queries.
 include("../../config/common.php");
 include("../../config/admin.php");
+include("../../config/admin_rights.php");
 
 //update the menu type
 if (isset($menus_type_id) and isset($action) and $action == 'update') {

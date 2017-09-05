@@ -23,6 +23,11 @@
 include("../../config/common.php");
 include("../../config/admin.php");
 
+//We have to make sure that a user can only change his own data and not others unless he is an admin!
+if ($user_id_selected == $_SESSION['user_id'])
+{}
+else{include("../../config/admin_rights.php");}
+
 //****************************************************************************************
 // add avatar
 //****************************************************************************************

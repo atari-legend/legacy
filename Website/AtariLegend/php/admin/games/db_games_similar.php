@@ -17,6 +17,7 @@
 //load all common functions
 include("../../config/common.php");
 include("../../config/admin.php");
+include("../../config/admin_rights.php");
 
 //***********************************************************************************
 //If delete similar link has been pressed

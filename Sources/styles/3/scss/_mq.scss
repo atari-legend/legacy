@@ -275,6 +275,16 @@
         display: block;
         margin: 0 auto;
     }
+    
+    .games_main_detail_nav{display:none;}
+}
+
+@media screen and (min-width: 800px) and (max-width: 1000px) {
+    .game_details_review_preview_left {display:none;}
+}
+
+@media screen and (max-width: 600px) {
+    .game_details_review_preview_left {display:none;}
 }
 
 //*----------------------------------------------------------

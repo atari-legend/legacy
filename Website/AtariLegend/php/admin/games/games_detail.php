@@ -27,7 +27,6 @@ include("../../admin/games/quick_search_games.php");
 //***********************************************************************************
 //Let's get the general game info first.
 //***********************************************************************************
-
 $sql_game = $mysqli->query("SELECT game_name,
                game.game_id,
                game_free.free,

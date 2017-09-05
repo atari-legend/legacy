@@ -18,13 +18,6 @@ The main game page
 {extends file='1/main/main.html'}
 
 {block name=main_body}
-    <script type="text/javascript" src="{$template_dir}includes/js/lightbox.min.js"></script>
-    <link type="text/css" href="{$style_dir}css/lightbox.css" hreflang="en" rel="stylesheet">
-    <script>
-        lightbox.option({        
-          'showImageNumberLabel': false
-        })
-    </script>
     {literal}
     <script type="text/javascript"> <!-- script needed for the autocompletion search engine -->
         $(function() {
@@ -349,7 +342,7 @@ The main game page
                                     <td style="width:25%;">
                                         {if $line.screenshot_id != ''}
                                             <div class="games_main_list_title">
-                                                <a href="../../includes/show_image.php?file={$line.screenshot_image}&amp;resize=410,null,null,null" data-lightbox="image-1" data-title="{$line.game_name}">
+                                                <a href="games_detail.php?game_id={$line.game_id}">
                                                     <br>
                                                     <img data-original="../../includes/show_image.php?file={$line.screenshot_image}&amp;resize=200,null,null,null" width="200" alt="Click to enlarge!" class="game_main_list_screenshot_img">
                                                 </a>                                           
@@ -428,7 +421,7 @@ The main game page
                                     <td style="width:25%;">
                                         {if $line.screenshot_id != ''}
                                             <div class="games_main_list_title">
-                                                <a href="../../includes/show_image.php?file={$line.screenshot_image}&amp;resize=410,null,null,null" data-lightbox="image-1" data-title="{$line.game_name}">
+                                                <a href="games_detail.php?game_id={$line.game_id}">
                                                     <br><img data-original="../../includes/show_image.php?file={$line.screenshot_image}&amp;resize=200,null,null,null" width="200" alt="Click to enlarge!" class="game_main_list_screenshot_img">
                                                 </a>
                                             </div>
@@ -498,7 +491,7 @@ The main game page
                                     <td style="width:25%;">
                                         {if $line.screenshot_id != ''}
                                             <div class="games_main_list_title">
-                                                <a href="../../includes/show_image.php?file={$line.screenshot_image}&amp;resize=410,null,null,null" data-lightbox="image-1" data-title="{$line.game_name}">
+                                                <a href="games_detail.php?game_id={$line.game_id}">
                                                     <br><img data-original="../../includes/show_image.php?file={$line.screenshot_image}&amp;resize=200,null,null,null" width="200" alt="Click to enlarge!" class="game_main_list_screenshot_img">
                                                 </a>
                                             </div>
@@ -558,7 +551,7 @@ The main game page
                                     <td style="width:25%;">
                                         {if $line.screenshot_id != ''}
                                             <div class="games_main_list_title">
-                                                <a href="../../includes/show_image.php?file={$line.screenshot_image}&amp;resize=410,null,null,null" data-lightbox="image-1" data-title="{$line.game_name}">
+                                                <a href="games_detail.php?game_id={$line.game_id}">
                                                     <br><img data-original="../../includes/show_image.php?file={$line.screenshot_image}&amp;resize=200,null,null,null" width="200" alt="Click to enlarge!" class="game_main_list_screenshot_img">
                                                 </a>
                                             </div>

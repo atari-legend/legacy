@@ -23,7 +23,7 @@
 
 include("../../config/common.php");
 include("../../config/admin.php");
-
+include("../../config/admin_rights.php");
 
 
 if (isset($action) and $action == "boxscan_upload") {

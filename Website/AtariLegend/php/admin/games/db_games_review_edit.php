@@ -22,6 +22,7 @@
 //load all common functions
 include("../../config/common.php");
 include("../../config/admin.php");
+include("../../config/admin_rights.php");
 
 if (isset($action) and $action == 'delete_comment') {
     $REVIEWSHOT = $mysqli->query("SELECT * FROM screenshot_review

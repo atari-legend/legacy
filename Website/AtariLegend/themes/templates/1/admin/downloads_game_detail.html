@@ -93,7 +93,19 @@ function modDownload(game_download_id, game_id) {
         }
         xmlhttp.onreadystatechange = function() {
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                document.getElementById("mod_download").innerHTML = xmlhttp.responseText;
+                
+                data = xmlhttp.responseText.split ( "[BRK]" );
+                document.getElementById("mod_download").innerHTML = data[0];
+
+                $.notify_osd.create({
+                    'text'        : data[1],             // notification message
+                    'icon'        : '{$style_dir}images/osd_icons/star.png', // icon path, 48x48
+                    'sticky'      : false,             // if true, timeout is ignored
+                    'timeout'     : 4,                 // disappears after 6 seconds
+                    'dismissable' : true               // can be dismissed manually
+                    });
+
+                document.getElementById("mod_download").reset();
             }
         }
 
@@ -132,7 +144,19 @@ function addOption(game_download_id, game_id) {
         }
         xmlhttp.onreadystatechange = function() {
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                document.getElementById("linked_options").innerHTML = xmlhttp.responseText;
+                
+                 data = xmlhttp.responseText.split ( "[BRK]" );
+                document.getElementById("linked_options").innerHTML = data[0];
+
+            $.notify_osd.create({
+                'text'        : data[1],             // notification message
+                'icon'        : '{$style_dir}images/osd_icons/star.png', // icon path, 48x48
+                'sticky'      : false,             // if true, timeout is ignored
+                'timeout'     : 4,                 // disappears after 6 seconds
+                'dismissable' : true               // can be dismissed manually
+                });
+
+            document.getElementById("linked_options").reset();
             }
         }
 
@@ -158,7 +182,18 @@ function delOption(download_options_id, game_download_id, game_id) {
         }
         xmlhttp.onreadystatechange = function() {
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                document.getElementById("linked_options").innerHTML = xmlhttp.responseText;
+                 data = xmlhttp.responseText.split ( "[BRK]" );
+                document.getElementById("linked_options").innerHTML = data[0];
+
+            $.notify_osd.create({
+                'text'        : data[1],             // notification message
+                'icon'        : '{$style_dir}images/osd_icons/star.png', // icon path, 48x48
+                'sticky'      : false,             // if true, timeout is ignored
+                'timeout'     : 4,                 // disappears after 6 seconds
+                'dismissable' : true               // can be dismissed manually
+                });
+
+            document.getElementById("linked_options").reset();
             }
         }
 
@@ -181,7 +216,19 @@ function addTos(game_download_id, game_id) {
         }
         xmlhttp.onreadystatechange = function() {
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                document.getElementById("linked_tos").innerHTML = xmlhttp.responseText;
+                
+                data = xmlhttp.responseText.split ( "[BRK]" );
+                document.getElementById("linked_tos").innerHTML = data[0];
+
+                $.notify_osd.create({
+                    'text'        : data[1],             // notification message
+                    'icon'        : '{$style_dir}images/osd_icons/star.png', // icon path, 48x48
+                    'sticky'      : false,             // if true, timeout is ignored
+                    'timeout'     : 4,                 // disappears after 6 seconds
+                    'dismissable' : true               // can be dismissed manually
+                    });
+
+                document.getElementById("linked_tos").reset();
             }
         }
 
@@ -207,7 +254,18 @@ function delTos(download_tos_id, game_download_id, game_id) {
         }
         xmlhttp.onreadystatechange = function() {
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                document.getElementById("linked_tos").innerHTML = xmlhttp.responseText;
+                data = xmlhttp.responseText.split ( "[BRK]" );
+                document.getElementById("linked_tos").innerHTML = data[0];
+
+                $.notify_osd.create({
+                    'text'        : data[1],             // notification message
+                    'icon'        : '{$style_dir}images/osd_icons/star.png', // icon path, 48x48
+                    'sticky'      : false,             // if true, timeout is ignored
+                    'timeout'     : 4,                 // disappears after 6 seconds
+                    'dismissable' : true               // can be dismissed manually
+                    });
+
+                document.getElementById("linked_tos").reset();
             }
         }
 
@@ -230,7 +288,19 @@ function addTrainer(game_download_id, game_id) {
         }
         xmlhttp.onreadystatechange = function() {
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                document.getElementById("linked_trainer").innerHTML = xmlhttp.responseText;
+                
+                data = xmlhttp.responseText.split ( "[BRK]" );
+                document.getElementById("linked_trainer").innerHTML = data[0];
+
+                $.notify_osd.create({
+                    'text'        : data[1],             // notification message
+                    'icon'        : '{$style_dir}images/osd_icons/star.png', // icon path, 48x48
+                    'sticky'      : false,             // if true, timeout is ignored
+                    'timeout'     : 4,                 // disappears after 6 seconds
+                    'dismissable' : true               // can be dismissed manually
+                    });
+
+                document.getElementById("linked_trainer").reset();
             }
         }
 
@@ -256,7 +326,18 @@ function delTrainer(download_trainer_id, game_download_id, game_id) {
         }
         xmlhttp.onreadystatechange = function() {
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                document.getElementById("linked_trainer").innerHTML = xmlhttp.responseText;
+                data = xmlhttp.responseText.split ( "[BRK]" );
+                document.getElementById("linked_trainer").innerHTML = data[0];
+
+                $.notify_osd.create({
+                    'text'        : data[1],             // notification message
+                    'icon'        : '{$style_dir}images/osd_icons/star.png', // icon path, 48x48
+                    'sticky'      : false,             // if true, timeout is ignored
+                    'timeout'     : 4,                 // disappears after 6 seconds
+                    'dismissable' : true               // can be dismissed manually
+                    });
+
+                document.getElementById("linked_trainer").reset();
             }
         }
 
@@ -279,7 +360,19 @@ function addCrew(game_download_id, game_id) {
         }
         xmlhttp.onreadystatechange = function() {
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                document.getElementById("linked_crew").innerHTML = xmlhttp.responseText;
+                
+                data = xmlhttp.responseText.split ( "[BRK]" );
+                document.getElementById("linked_crew").innerHTML = data[0];
+
+                $.notify_osd.create({
+                    'text'        : data[1],             // notification message
+                    'icon'        : '{$style_dir}images/osd_icons/star.png', // icon path, 48x48
+                    'sticky'      : false,             // if true, timeout is ignored
+                    'timeout'     : 4,                 // disappears after 6 seconds
+                    'dismissable' : true               // can be dismissed manually
+                    });
+
+                document.getElementById("linked_crew").reset();
             }
         }
 
@@ -305,7 +398,18 @@ function delCrew(download_crew_id, game_download_id, game_id) {
         }
         xmlhttp.onreadystatechange = function() {
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                document.getElementById("linked_crew").innerHTML = xmlhttp.responseText;
+                data = xmlhttp.responseText.split ( "[BRK]" );
+                document.getElementById("linked_crew").innerHTML = data[0];
+
+                $.notify_osd.create({
+                    'text'        : data[1],             // notification message
+                    'icon'        : '{$style_dir}images/osd_icons/star.png', // icon path, 48x48
+                    'sticky'      : false,             // if true, timeout is ignored
+                    'timeout'     : 4,                 // disappears after 6 seconds
+                    'dismissable' : true               // can be dismissed manually
+                    });
+
+                document.getElementById("linked_crew").reset();
             }
         }
 
@@ -328,7 +432,19 @@ function addMenu(game_download_id, game_id) {
         }
         xmlhttp.onreadystatechange = function() {
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                document.getElementById("linked_menudisk").innerHTML = xmlhttp.responseText;
+                
+                data = xmlhttp.responseText.split ( "[BRK]" );
+                document.getElementById("linked_menudisk").innerHTML = data[0];
+
+                $.notify_osd.create({
+                    'text'        : data[1],             // notification message
+                    'icon'        : '{$style_dir}images/osd_icons/star.png', // icon path, 48x48
+                    'sticky'      : false,             // if true, timeout is ignored
+                    'timeout'     : 4,                 // disappears after 6 seconds
+                    'dismissable' : true               // can be dismissed manually
+                    });
+
+                document.getElementById("linked_menudisk").reset();
             }
         }
 
@@ -354,7 +470,18 @@ function delMenu(menu_disk_title_game_id, game_download_id, game_id) {
         }
         xmlhttp.onreadystatechange = function() {
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                document.getElementById("linked_menudisk").innerHTML = xmlhttp.responseText;
+                data = xmlhttp.responseText.split ( "[BRK]" );
+                document.getElementById("linked_menudisk").innerHTML = data[0];
+
+                $.notify_osd.create({
+                    'text'        : data[1],             // notification message
+                    'icon'        : '{$style_dir}images/osd_icons/star.png', // icon path, 48x48
+                    'sticky'      : false,             // if true, timeout is ignored
+                    'timeout'     : 4,                 // disappears after 6 seconds
+                    'dismissable' : true               // can be dismissed manually
+                    });
+
+                document.getElementById("linked_menudisk").reset();
             }
         }
 
@@ -377,7 +504,19 @@ function createSet(game_download_id, game_id) {
         }
         xmlhttp.onreadystatechange = function() {
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                document.getElementById("linked_set").innerHTML = xmlhttp.responseText;
+                
+                data = xmlhttp.responseText.split ( "[BRK]" );
+                document.getElementById("linked_set").innerHTML = data[0];
+
+                $.notify_osd.create({
+                    'text'        : data[1],             // notification message
+                    'icon'        : '{$style_dir}images/osd_icons/star.png', // icon path, 48x48
+                    'sticky'      : false,             // if true, timeout is ignored
+                    'timeout'     : 4,                 // disappears after 6 seconds
+                    'dismissable' : true               // can be dismissed manually
+                    });
+
+                document.getElementById("linked_set").reset();
             }
         }
 
@@ -404,7 +543,18 @@ function delSet(set_id, game_download_id, game_id) {
         }
         xmlhttp.onreadystatechange = function() {
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                document.getElementById("linked_set").innerHTML = xmlhttp.responseText;
+                data = xmlhttp.responseText.split ( "[BRK]" );
+                document.getElementById("linked_set").innerHTML = data[0];
+
+                $.notify_osd.create({
+                    'text'        : data[1],             // notification message
+                    'icon'        : '{$style_dir}images/osd_icons/star.png', // icon path, 48x48
+                    'sticky'      : false,             // if true, timeout is ignored
+                    'timeout'     : 4,                 // disappears after 6 seconds
+                    'dismissable' : true               // can be dismissed manually
+                    });
+
+                document.getElementById("linked_set").reset();
             }
         }
 
@@ -427,7 +577,18 @@ function linkSet(game_download_id, game_id) {
         }
         xmlhttp.onreadystatechange = function() {
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                document.getElementById("linked_set").innerHTML = xmlhttp.responseText;
+                data = xmlhttp.responseText.split ( "[BRK]" );
+                document.getElementById("linked_set").innerHTML = data[0];
+
+                $.notify_osd.create({
+                    'text'        : data[1],             // notification message
+                    'icon'        : '{$style_dir}images/osd_icons/star.png', // icon path, 48x48
+                    'sticky'      : false,             // if true, timeout is ignored
+                    'timeout'     : 4,                 // disappears after 6 seconds
+                    'dismissable' : true               // can be dismissed manually
+                    });
+
+                document.getElementById("linked_set").reset();
             }
         }
 
@@ -478,7 +639,19 @@ function addAuthorstoDownload(game_download_id, game_id) {
         }
         xmlhttp.onreadystatechange = function() {
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                document.getElementById("download_credit_list").innerHTML = xmlhttp.responseText;
+                
+                data = xmlhttp.responseText.split ( "[BRK]" );
+                document.getElementById("download_credit_list").innerHTML = data[0];
+
+                $.notify_osd.create({
+                    'text'        : data[1],             // notification message
+                    'icon'        : '{$style_dir}images/osd_icons/star.png', // icon path, 48x48
+                    'sticky'      : false,             // if true, timeout is ignored
+                    'timeout'     : 4,                 // disappears after 6 seconds
+                    'dismissable' : true               // can be dismissed manually
+                    });
+
+                document.getElementById("download_credit_list").reset();
             }
         }
 
@@ -515,7 +688,18 @@ function deleteAuthors(game_download_ind_id,game_download_id,game_id,ind_id) {
         }
         xmlhttp.onreadystatechange = function() {
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                document.getElementById("download_credit_list").innerHTML = xmlhttp.responseText;
+                data = xmlhttp.responseText.split ( "[BRK]" );
+                document.getElementById("download_credit_list").innerHTML = data[0];
+
+                $.notify_osd.create({
+                    'text'        : data[1],             // notification message
+                    'icon'        : '{$style_dir}images/osd_icons/star.png', // icon path, 48x48
+                    'sticky'      : false,             // if true, timeout is ignored
+                    'timeout'     : 4,                 // disappears after 6 seconds
+                    'dismissable' : true               // can be dismissed manually
+                    });
+
+                document.getElementById("download_credit_list").reset();
             }
         }
         xmlhttp.open("GET","../downloads/db_downloads_game.php?action=delete_download_authors&game_id="+game_id+"&ind_id="+ind_id+"&game_download_ind_id="+game_download_ind_id+"&game_download_id="+game_download_id,true);

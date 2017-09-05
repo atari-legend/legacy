@@ -457,7 +457,8 @@ if (isset($action) and $action == "search") {
         $edit_message             = "Please fill in one of the fields";
         $_SESSION['edit_message'] = $edit_message;
 
-        header("Location: ../games/games_main.php?mode=$mode");
+        if (isset($mode)){header("Location: ../games/games_main.php?mode=$mode");}
+        else{header("Location: ../games/games_main.php");}
     } else {
         /*
          ***********************************************************************************
@@ -713,6 +714,9 @@ if (isset($action) and $action == "search") {
                     $screenshot_image = '';
                     $screenshot_id = '';
                     
+                    //do this for when we only have 1 game result
+                    $game_id_1_result = $sql_game_search['game_id'];
+                    
                     $game_name = $sql_game_search['game_name'];
                     $pub_name = $sql_game_search['publisher_name'];
                     $dev_name = $sql_game_search['developer_name'];
@@ -860,13 +864,20 @@ if (isset($action) and $action == "search") {
                     $edit_message             = "No entries found for your selection";
                     $_SESSION['edit_message'] = $edit_message;
                     $smarty->assign("message", $edit_message);
-
-                    header("Location: ../games/games_main.php?mode=$mode");
+                    
+                    if (isset($mode)){header("Location: ../games/games_main.php?mode=$mode");}
+                    else{header("Location: ../games/games_main.php");}
                 }
                 else
                 {
                     $time_elapsed_secs = microtime(true) - $start;
                     $smarty->assign("nr_of_games", $i);
+                    
+                    //if we have only 1 search result, go to the detail page at once!
+                    if ( $i == 1 )
+                    {
+                            header("Location: ../games/games_detail.php?game_id=$game_id_1_result");
+                    }
                     
                     $rest4 = $i%4; 
                     $smarty->assign("rest4", $rest4);
@@ -887,7 +898,8 @@ if (isset($action) and $action == "search") {
                 $_SESSION['edit_message'] = $edit_message;
                 $smarty->assign("message", $edit_message);
 
-                header("Location: ../games/games_main.php?mode=$mode");
+                if (isset($mode)){header("Location: ../games/games_main.php?mode=$mode");}
+                else{header("Location: ../games/games_main.php");}
             }
         }
     }

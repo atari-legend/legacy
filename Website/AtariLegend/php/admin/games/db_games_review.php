@@ -26,6 +26,7 @@
 //load all common functions
 include("../../config/common.php");
 include("../../config/admin.php");
+include("../../config/admin_rights.php");
 
 if (isset($action) and $action == 'add_review') {
     // first we have to convert the date vars into a time stamp to be inserted to review_date

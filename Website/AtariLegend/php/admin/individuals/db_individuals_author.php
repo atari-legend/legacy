@@ -19,6 +19,7 @@
 
 include("../../config/common.php");
 include("../../config/admin.php");
+include("../../config/admin_rights.php");
 
 if (isset($action) and $action == 'insert') {
     $sql_author = $mysqli->query("INSERT INTO author_type (author_type_info) VALUES ('$newtype')") or die("Couldn't insert into author_type");

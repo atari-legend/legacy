@@ -22,6 +22,7 @@
 //load all common functions
 include("../../config/common.php");
 include("../../config/admin.php");
+include("../../config/admin_rights.php");
 
 //***********************************************************************************
 //Insert new game
@@ -35,7 +36,7 @@ if (isset($action) and $action == "insert_game") {
     $new_game_id = $mysqli->insert_id;
 
     create_log_entry('Games', $new_game_id, 'Game', $new_game_id, 'Insert', $_SESSION['user_id']);
-
+    
     header("Location: ../games/games_detail.php?game_id=$new_game_id");
 }
 
@@ -457,5 +458,6 @@ if (isset($action) and $action == 'delete_game') {
         }
     }
 }
+
 //close the connection
 mysqli_close($mysqli);
