@@ -54,7 +54,9 @@ if (isset($_POST['userid'], $_POST['p'])) {
             //update the table with the session id
             $sdbquery = $mysqli->query("UPDATE users SET session = '$session_id' WHERE userid = '$userid'") or die("Couldn't Update user table with session id");; 
         }    
-        header('Location: ../../main/front/front.php');
+        //header('Location: ../../main/front/front.php');
+        $_SESSION['edit_message'] = "Log in succesfull";
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
     } else {
         // Login failed
         // check the cause - is the user inactive?
@@ -62,12 +64,21 @@ if (isset($_POST['userid'], $_POST['p'])) {
         $query_inactive = $sql_inactive->fetch_array(MYSQLI_BOTH);
         if ($query_inactive['inactive'] == 1 )
         {    
-            header('Location: ../../main/front/front.php?error=2');
+            //header('Location: ../../main/front/front.php?error=2');
+            $_SESSION['edit_message'] = 'User is set inactive - contact admin';
+            header('Location: ' . $_SERVER['HTTP_REFERER']);
         }
-        else{header('Location: ../../main/front/front.php?error=1');}       
+        else
+        {
+            $_SESSION['edit_message'] = 'Usn or pwd incorrect - Please try again';
+            header('Location: ' . $_SERVER['HTTP_REFERER']);
+            //header('Location: ../../main/front/front.php?error=1');
+        }       
     }
 } else {
     // The correct POST variables were not sent to this page.
-   header('Location: ../../main/front/front.php?error=1');
+   //header('Location: ../../main/front/front.php?error=1');
+   $_SESSION['edit_message'] = 'Usn or pwd incorrect - Please try again';
+   header('Location: ' . $_SERVER['HTTP_REFERER']);
 }
 ?>

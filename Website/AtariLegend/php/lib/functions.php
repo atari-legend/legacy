@@ -494,6 +494,7 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
             $result = $mysqli->query($query_game_id) or die("getting game name failed");
             $query_data = $result->fetch_array(MYSQLI_BOTH);
             $section_id = $query_data['game_id'];
+            $subsection_id = $query_data['game_id'];
         }
 
         //  get the game name
@@ -503,7 +504,9 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
         $section_name = $query_data['game_name'];
 
 
-        if ($subsection == 'Game' or $subsection == 'File' or $subsection == 'Screenshot' or $subsection == 'Mag score' or $subsection == 'Box back' or $subsection == 'Box front' or $subsection == 'Review' or $subsection == 'Review comment' or $subsection == 'Music' or $subsection == 'Submission') {
+        if ($subsection == 'Game' or $subsection == 'File' or $subsection == 'Screenshot' or $subsection == 'Mag score' or $subsection == 'Box back' 
+            or $subsection == 'Box front' or $subsection == 'Review' or $subsection == 'Review comment' or $subsection == 'Music' 
+            or $subsection == 'Submission' or $subsection == 'Fact') {
             $subsection_name = $section_name;
         }
 

@@ -15,10 +15,16 @@
 
 //load all common functions
 include("../../config/common.php");
+include("../../config/admin.php");
 
 //load the tiles
-include("../../common/tiles/screenstar.php");
+$type = 'user';
+include("../../common/tiles/latest_comments_tile.php");
 
+$user_id_contrib = $_SESSION['user_id'];
+include("../../common/tiles/user_contribution.php");
+
+include("../../common/tiles/latest_reviews_tile.php");
 
 //***********************************************************************************
 //get the name of the game
@@ -69,7 +75,37 @@ if (isset($_SESSION['user_id']))
     }
 
     $smarty->assign("nr_screenshots", $count);
-}    
+
+    //Lets get all the reviews by this author
+    $sql_reviews_author = $mysqli->query("SELECT * FROM review_main
+                               LEFT JOIN review_game ON (review_main.review_id = review_game.review_id)
+                               LEFT JOIN game ON (game.game_id = review_game.game_id)
+                               LEFT JOIN users ON (review_main.user_id = users.user_id)
+                               WHERE review_main.user_id = '$_SESSION[user_id]'
+                               AND review_main.review_edit = '0' ORDER BY game.game_name") or die ("problem with query");
+
+    $count = 0;
+                                      
+    while ($query_reviews_author = $sql_reviews_author->fetch_array(MYSQLI_BOTH)) 
+    {
+        $count++;
+        
+        //select the game year
+        $sql_game_year = $mysqli->query("SELECT * FROM game_year where game_id = $query_reviews_author[game_id]") or die ("error in game year query");
+        $query_game_year = $sql_game_year->fetch_array(MYSQLI_BOTH);
+        
+        $smarty->append('reviews_author', array(
+                'review_id' => $query_reviews_author['review_id'],
+                'game_name' => $query_reviews_author['game_name'],
+                'game_id' => $query_reviews_author['game_id'],
+                'game_year' => $query_game_year['game_year'],
+                'user_name' => $query_reviews_author['userid'],
+                'user_id' => $query_reviews_author['user_id']
+            ));   
+    }  
+
+    $smarty->assign('nr_reviews_author', $count);  
+} 
 
 $smarty->assign("game_id", $game_id);
 
