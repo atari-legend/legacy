@@ -340,6 +340,10 @@
     width: 100%;
 }
 
+.file_upload_games_detail{
+    @extend .file_upload;
+}
+
 //scrollbar CHROME and SAFARI
 .games_main_detail_comments_container::-webkit-scrollbar {
     width: 1em;
@@ -380,6 +384,9 @@
     display: block;
     margin-bottom:10px;
 }
+
+.games_main_details_submisions_position_medium{display:none;}
+.games_main_details_info_position_low{display:none;}
 
 //*****Games detail - Reviews*********/
 

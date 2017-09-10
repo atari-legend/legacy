@@ -33,7 +33,9 @@ setcookie("cooksession", session_id(), time()-60*60*24*100, "/");
 // Destroy session
 session_destroy();
 
-header('Location: ../../main/front/front.php');
+//header('Location: ../../main/front/front.php');
+$_SESSION['edit_message'] = "Log out succesfull";
+header('Location: ' . $_SERVER['HTTP_REFERER']);
 
 mysql_close();
 ?>

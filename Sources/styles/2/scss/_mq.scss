@@ -285,6 +285,11 @@
 //*----------------------------------------------------------
 //games main details
 //------------------------------------------------------------ */
+@media screen and (min-width: 800px) and (max-width: 1280px) {
+    .games_main_details_submissions_position_high{display:none;}
+    .games_main_details_submisions_position_medium{display:inline;}
+}
+
 @media screen and (max-width: 1280px) {
     #column_left_games_details{
         float: left;
@@ -325,6 +330,9 @@
     }
     
     .games_main_detail_nav{display:none;}
+    
+    .games_main_details_info_position_low{display:inline;}
+    .games_main_details_info_position_high{display:none;}
 }
 
 @media screen and (min-width: 800px) and (max-width: 1000px) {
@@ -1309,6 +1317,19 @@
     .content_box_cpanel {
         display: block;
         margin: 0 auto;
+    }
+}
+
+//*----------------------------------------------------------
+// Back to top arrow
+//------------------------------------------------------------ */
+@media screen and (max-width: 599px) {
+    .scroll-top-wrapper {
+        width: 40px;
+        height: 38px;
+        line-height: 36px;
+        right: 10px;
+        bottom: 10px;
     }
 }
 

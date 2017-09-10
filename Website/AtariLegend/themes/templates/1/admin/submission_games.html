@@ -11,6 +11,8 @@
 *						- AL 2.0
 *   Id: submissions_games.html,v 0.21 2017/04/28 23:19 Grave 
 *						- Added font awesome and updated layout
+*   Id: submissions_games.html,v 1.22 2017/09/08 STG
+*                       - Enhanced for submissions with screenshots
 *
 ***************************************************************************/
 
@@ -60,6 +62,15 @@ function submovetocomment(JSsubID)
 			location.href=url;
     	}  
 }
+</script>
+<!-- lightbox screenshot pop up script -->
+<script type="text/javascript" src="{$template_dir}includes/js/lightbox.min.js"></script>
+<link type="text/css" href="{$style_dir}css/lightbox.css" hreflang="en" rel="stylesheet">
+
+<script>
+    lightbox.option({        
+      'showImageNumberLabel': false
+    })
 </script>
 {/block}
 
@@ -147,6 +158,15 @@ function submovetocomment(JSsubID)
 					{$line.comment}
 					<br>
 					<br>
+                    {if isset($submission_screenshots)}
+                        {foreach from=$submission_screenshots item=line_screen}
+                            {if $line.submit_id == $line_screen.game_submitinfo_id}  
+                                <a href="../../includes/show_image.php?file={$line_screen.game_submitinfo_screenshot}&amp;resize=410,null,null,null" data-lightbox="image-1">
+                                    <img src="../../includes/show_image.php?file={$line_screen.game_submitinfo_screenshot}&amp;resize=170,null,null,null" alt="Click to enlarge!" style="display:inline;" class="game_screenshot_img">
+                                </a>
+                            {/if}
+                        {/foreach}
+                    {/if}
 				</td>
 			</tr>		
 		{/foreach}

@@ -509,7 +509,78 @@ while ($query_comment = $sql_comment->fetch_array(MYSQLI_BOTH))
                 'comment' => $sql_screenshots_review['comment_text']
             ));
     }
+ 
+
+//***********************************************************************************
+//Get Similar game
+//*********************************************************************************** 
+    //select a random similar game
+    $sql_similar = $mysqli->query("SELECT * FROM game_similar WHERE game_similar.game_id = '$game_id' ORDER BY RAND() LIMIT 1") 
+                                                or die("Error - Couldn't get similar game");
+
+    while ($query_similar = $sql_similar->fetch_array(MYSQLI_BOTH)) 
+    {   
+        //get the game data
+        $query_game_similar_data = $mysqli->query("SELECT * FROM game 
+                                                            LEFT JOIN screenshot_game ON (game.game_id = screenshot_game.game_id)
+                                                            LEFT JOIN screenshot_main ON (screenshot_game.screenshot_id = screenshot_main.screenshot_id)
+                                                            LEFT JOIN game_developer ON (game_developer.game_id = game.game_id)
+                                                            LEFT JOIN pub_dev ON (pub_dev.pub_dev_id = game_developer.dev_pub_id)
+                                                            LEFT JOIN game_year ON (game.game_id = game_year.game_id) 
+                                                            WHERE game.game_id = '$query_similar[game_similar_cross]'
+                                                            ORDER BY RAND() LIMIT 1") 
+                                                or die("Error - Couldn't get similar game data");
+        
+        while ($sql_game_similar_data = $query_game_similar_data->fetch_array(MYSQLI_BOTH))
+        {                
+            $new_path = $game_screenshot_path;
+            $new_path .= $sql_game_similar_data['screenshot_id'];
+            $new_path .= ".";
+            $new_path .= $sql_game_similar_data['imgext'];
+            
+            $smarty->assign('similar', array(
+                'game_id' => $query_similar['game_similar_cross'],
+                'game_name' => $sql_game_similar_data['game_name'],
+                'game_year' => $sql_game_similar_data['game_year'],
+                'game_dev_name' => $sql_game_similar_data['pub_dev_name'],
+                'game_dev_id' => $sql_game_similar_data['pub_dev_id'],
+                'screenshot' => $new_path ));    
+        }
+    }
     
+//***********************************************************************************
+//Get the game facts
+//*********************************************************************************** 
+    //load the facts for this games
+    $query_games_facts = $mysqli->query("SELECT * from game_fact
+                                         LEFT JOIN game ON (game.game_id = game_fact.game_id)
+                                         WHERE game_fact.game_id = $game_id") or die ("error in query game facts");  
+
+    while ( $sql_games_facts = $query_games_facts->fetch_array(MYSQLI_BOTH))
+    {
+        //check if there are screenshot added to the submission
+        $query_screenshots_facts = $mysqli->query("SELECT * FROM screenshot_main
+                                            LEFT JOIN screenshot_game_fact ON (screenshot_main.screenshot_id = screenshot_game_fact.screenshot_id)
+                                            WHERE screenshot_game_fact.game_fact_id = '$sql_games_facts[game_fact_id]'") or die("Error - Couldn't query fact screenshots");
+        
+        while ($sql_screenshots_facts = $query_screenshots_facts->fetch_array(MYSQLI_BOTH))
+        {
+            $new_path = $game_fact_screenshot_path;
+            $new_path .= $sql_screenshots_facts['screenshot_id'];
+            $new_path .= ".";
+            $new_path .= $sql_screenshots_facts['imgext'];
+            
+            $smarty->append('facts_screenshots',
+             array('game_fact_id' => $sql_games_facts['game_fact_id'],
+                   'game_fact_screenshot' => $new_path));
+        }
+        
+        $smarty->append('facts', array(
+            'game_fact_id' => $sql_games_facts['game_fact_id'],
+            'game_fact' => $sql_games_facts['game_fact']
+        ));
+    }
+  
 $smarty->assign("game_id", $game_id);
 
 //Send all smarty variables to the templates

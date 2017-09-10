@@ -84,6 +84,10 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH)) {
         if ($log['sub_section'] == 'File') {
             $subsection_link = ("../downloads/downloads_game_detail.php" . '?game_id=' . $log['sub_section_id']);
         }
+        
+        if ($log['sub_section'] == 'Fact') {
+            $subsection_link = ("../games/games_facts.php" . '?game_id=' . $log['sub_section_id'] . '&game_name=' . $log['section_name']);
+        }
 
         if ($log['sub_section'] == 'Screenshot') {
             $subsection_link = ("../games/games_screenshot_add.php" . '?game_id=' . $log['sub_section_id'] . '&game_name=' . $log['section_name']);

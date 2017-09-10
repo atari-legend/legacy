@@ -36,20 +36,20 @@ $smarty->assign('screenstar_tile', 'screenstar_position_front');
 $smarty->assign('statistics_tile', 'statistics_position_front');
 $smarty->assign('who_is_it_tile', 'whoisit_position_front');
 
-if (isset($error))
-{
-    if ($error == 1)
-    {    
-        $_SESSION['edit_message'] = 'Usn or pwd incorrect - Please try again';
-        header("Location: ../front/front.php");
-    }
+//if (isset($error))
+//{
+//    if ($error == 1)
+//   {    
+//        $_SESSION['edit_message'] = 'Usn or pwd incorrect - Please try again';
+//        header("Location: ../front/front.php");
+//    }
     
-    if ($error == 2)
-    {    
-        $_SESSION['edit_message'] = 'User is set inactive - contact admin';
-        header("Location: ../front/front.php");
-    }
-}
+//    if ($error == 2)
+//    {    
+//        $_SESSION['edit_message'] = 'User is set inactive - contact admin';
+//        header("Location: ../front/front.php");
+//    }
+//}
 
 if (isset($action) and $action == 'register')
 {

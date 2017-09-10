@@ -14,7 +14,8 @@
 if (login_check($mysqli) == false) 
 {    
     $_SESSION['edit_message'] = "Please log in to use this functionality";
-    header("Location: ../../main/front/front.php");
+    header('Location: ' . $_SERVER['HTTP_REFERER']);
+    die('');
 }
 
 //if ($_SESSION['permission']==1 or $_SESSION['permission']=='1')

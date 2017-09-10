@@ -35,6 +35,70 @@ if (isset($action))
         
         create_log_entry('Games', $comment_id, 'Comment', $comment_id, 'Update', $_SESSION['user_id']); 
     }
+    elseif ($action=="submit_info")
+    {
+       if ( $textfield == '' or  $textfield == 'Game info')
+        {
+            $_SESSION['edit_message'] = "Please add some info in the game info field";
+            header("Location: ../games/games_detail.php?game_id=$game_id"); 
+            die();
+        }
+        else
+        {
+            $timestamp = time();
+            $mysqli->query("INSERT INTO game_submitinfo (game_id, user_id, timestamp, submit_text ) VALUES ('$game_id', '$_SESSION[user_id]', '$timestamp', '$textfield')") or die ("Inserting the game submission failed");
+            
+            $new_game_submit_id = $mysqli->insert_id;
+            create_log_entry('Games', $new_game_submit_id, 'Submission', $game_id, 'Insert', $_SESSION['user_id']);  
+                      
+            //Here we'll be looping on each of the inputs on the page that are filled in with an image!
+            $image = $_FILES['image'];
+
+            foreach ($image['tmp_name'] as $key => $tmp_name) {
+                if ($tmp_name !== 'none') {
+                    // Check what extention the file has and if it is allowed.
+
+                    $ext        = "";
+                    $type_image = $image['type'][$key];
+
+                    // set extension
+                    if ($type_image == 'image/png') {
+                        $ext = 'png';
+                    }
+
+                    if ($type_image == 'image/x-png') {
+                        $ext = 'png';
+                    } elseif ($type_image == 'image/gif') {
+                        $ext = 'gif';
+                    } elseif ($type_image == 'image/jpeg') {
+                        $ext = 'jpg';
+                    }
+
+                    if ($ext !== "") {
+                        // First we insert the directory path of where the file will be stored... this also creates an autoinc number for us.
+                        $sdbquery = $mysqli->query("INSERT INTO screenshot_main (screenshot_id,imgext) VALUES ('','$ext')") or die("Database error - inserting screenshots");
+
+                        //select the newly entered screenshot_id from the main table
+                        $SCREENSHOT = $mysqli->query("SELECT screenshot_id FROM screenshot_main
+                                               ORDER BY screenshot_id desc") or die("Database error - selecting screenshots");
+
+                        $screenshotrow = $SCREENSHOT->fetch_row();
+                        $screenshot_id = $screenshotrow[0];
+
+                        $sdbquery = $mysqli->query("INSERT INTO screenshot_game_submitinfo (game_submitinfo_id, screenshot_id) VALUES ($new_game_submit_id, $screenshot_id)") or die("Database error - inserting screenshots2");
+
+                        // Rename the uploaded file to its autoincrement number and move it to its proper place.
+                        $file_data = rename($image['tmp_name'][$key], "$game_submit_screenshot_save_path$screenshotrow[0].$ext");
+
+                        chmod("$game_submit_screenshot_save_path$screenshotrow[0].$ext", 0777);                       
+                    }
+                }
+            }         
+            $_SESSION['edit_message'] = "Game submission has been sent - waiting for approval";
+            header("Location: ../games/games_detail.php?game_id=$game_id"); 
+            die();
+        }   
+    }
     else
     {
         $data = $mysqli->real_escape_string($data);  

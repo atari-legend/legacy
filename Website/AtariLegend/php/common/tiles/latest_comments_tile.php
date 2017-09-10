@@ -16,15 +16,28 @@
 //*********************************************************************************************
 
 //Select the comments from the DB
-$sql_comment = $mysqli->query("SELECT *
-                                FROM game_user_comments
-                                LEFT JOIN comments ON ( game_user_comments.comment_id = comments.comments_id )
-                                LEFT JOIN users ON ( comments.user_id = users.user_id )
-                                LEFT JOIN game ON ( game_user_comments.game_id = game.game_id )
-                                ORDER BY comments.timestamp DESC LIMIT 3") or die("Syntax Error! Couldn't not get the comments!");
+if (isset($type) and $type == 'user') //user specific comments mode!
+{
+    $sql_comment = $mysqli->query("SELECT *
+                                    FROM game_user_comments
+                                    LEFT JOIN comments ON ( game_user_comments.comment_id = comments.comments_id )
+                                    LEFT JOIN users ON ( comments.user_id = users.user_id )
+                                    LEFT JOIN game ON ( game_user_comments.game_id = game.game_id )
+                                    WHERE comments.user_id = '$_SESSION[user_id]'
+                                    ORDER BY comments.timestamp DESC LIMIT 10") or die("Syntax Error! Couldn't not get the comments!");  
+    $smarty->assign('type', 'user');
+}   
+else
+{    
+    $sql_comment = $mysqli->query("SELECT *
+                                    FROM game_user_comments
+                                    LEFT JOIN comments ON ( game_user_comments.comment_id = comments.comments_id )
+                                    LEFT JOIN users ON ( comments.user_id = users.user_id )
+                                    LEFT JOIN game ON ( game_user_comments.game_id = game.game_id )
+                                    ORDER BY comments.timestamp DESC LIMIT 10") or die("Syntax Error! Couldn't not get the comments!");
+}
 
-                                // lets put the comments in a smarty array
-
+// lets put the comments in a smarty array
 while ($query_comment = $sql_comment->fetch_array(MYSQLI_BOTH)) 
 {
     

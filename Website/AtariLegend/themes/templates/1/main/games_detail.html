@@ -584,672 +584,227 @@
             });
         };
     </script>
+    <script type="text/javascript">
+        $(function() {    
+            $but = $('#file_upload_game_screenshots');
             
+            $("input:file[id=file_upload]").change(function() {
+                document.getElementById('file_upload_game_screenshots').value = 'file(s) selected';
+            });
+        }); 
+    </script> 
+    
     <div id="main" class="main_container_games_details">
         <div class="content_box_games_details" id="column_left_games_details">
             <br>
             <!--*********************-->
             <!--START Game info tile -->
             <!--*********************-->
-            <div class="standard_tile">
-                <div class="help-tip">
-                    <p> 
-                        <i class="fa fa-info-circle" aria-hidden="true"></i> - Open/close the profile of a company or individual<br>
-                        <i class="fa fa-picture-o" aria-hidden="true"></i> - Click for the company logo or author photo<br>
-                        <i class="fa fa-newspaper-o" aria-hidden="true"></i> - Interview available
-                    </p>
+                <div class="games_main_details_info_position_high">
+                    {include file='1/main/games_detail_info.html'}
                 </div>
-                <h1>GAME INFO</h1>
-                <div class="standard_tile_line"></div>
-                <div class="standard_list_entry">              
-                    <table class="standard_table_games_main_detail">
-                        {if isset($publisher)}
-                            {foreach from=$publisher item=line name=publisher}
-                                {if $line.logo != 'none'}
-                                    {$pub_logo = 1}
-                                {/if}
-                            {/foreach}
-                        {/if}
-                        {if isset($developer)}
-                            {foreach from=$developer item=line name=developer}
-                                {if $line.logo != 'none'}
-                                    {$dev_logo = 1}
-                                {/if}
-                            {/foreach}
-                        {/if}
-                        {if isset($dev_logo) || isset($pub_logo)}
-                        <tr>
-                            <td class="standard_table_center" colspan="3">
-                                {if isset($publisher)}
-                                    {$count_pub_logo=0}
-                                    {foreach from=$publisher item=line name=publisher}
-                                        {if $line.logo != 'none'}
-                                            {if $count_pub_logo == 0}
-                                                <!--<img src="../../includes/show_image.php?file={$line.logo}" alt="company logo" class="user_stats_img" id="games_details_img">-->
-                                                <img src="{$line.logo}" alt="company logo" class="games_details_img">
-                                                {$count_pub_logo=1}
-                                                {$logo = $line.logo}
-                                            {/if}
-                                        {/if}
-                                    {/foreach}
-                                {/if}
-                                {if isset($developer)}
-                                    {$count_dev_logo=0}
-                                    {foreach from=$developer item=line name=developer}
-                                        {if $line.logo != 'none'}
-                                            {if isset($logo)}
-                                               {if $line.logo != $logo}
-                                                   {if $count_dev_logo == 0}
-                                                        <img src="{$line.logo}" alt="company logo" class="games_details_img">
-                                                        {$count_dev_logo=1}
-                                                   {/if}
-                                               {/if}
-                                            {else}
-                                                {if $count_dev_logo == 0}
-                                                    <img src="{$line.logo}" alt="company logo" class="games_details_img">
-                                                    {$count_dev_logo=1}
-                                                {/if}
-                                            {/if}
-                                        {/if}
-                                    {/foreach}
-                                {/if}
-                            </td>   
-                        </tr>
-                        {/if}
-                        {if isset($publisher)}
-                            {foreach from=$publisher item=line name=publisher}
-                                <tr>
-                                    <td width="30%">
-                                        {if $smarty.foreach.publisher.index == 0}
-                                           <span class="games_main_detail_info_right">Publisher</span>
-                                        {/if}
-                                        {if $line.continent != '' ||  $line.extra_info != ''}
-                                            <br><br>
-                                        {/if}
-                                    </td>
-                                    <td width="5%">
-                                        <span class="games_main_detail_info_left" style="text-align:center;">-</span>
-                                        {if $line.continent != '' ||  $line.extra_info != ''}
-                                            <br><br>
-                                        {/if}
-                                    </td>
-                                    <td width="60%">
-                                        <span class="games_main_detail_info_left">
-                                            <a href="games_main_list.php?publisher={$line.pub_id}&amp;action=search" class="standard_tile_link">{$line.pub_name}</a>
-                                            {if $line.pub_profile != 'none'}
-                                                <a style="cursor: pointer;" onClick="Show_profile({$line.pub_id})" class="latest_comments_link"><i class="fa fa-info-circle" aria-hidden="true" id="profile_on{$line.pub_id}" text="click to view profile"></i></a>
-                                                <a style="cursor: pointer;" onClick="Hide_profile({$line.pub_id})" class="latest_comments_link"><i class="fa fa-info-circle" aria-hidden="true" id="profile_off{$line.pub_id}" style="display:none;" text="click to view profile"></i></a>
-                                            {/if}
-                                            {if $line.logo != 'none'}
-                                                <a href="../../includes/show_image.php?file={$line.logo_pop}" data-lightbox="image-1" data-title="{$line.pub_name}" class="latest_comments_link"><i class="fa fa-picture-o" aria-hidden="true"></i></a>
-                                            {/if}
-                                        </span>
-                                        {if $line.continent != '' ||  $line.extra_info != ''}
-                                            <br><span class="standard_tile_subtext">{$line.continent}{if $line.continent != '' AND $line.extra_info != ''} - {/if}{$line.extra_info}</span>  
-                                        {/if}
-                                    </td>
-                                </tr>
-                                {if $line.pub_profile != ''}
-                                    <tr></tr>
-                                    <tr style="display:none;" id="profile{$line.pub_id}">
-                                        <td width="100%" colspan="3" class="standard_table_center">
-                                           <textarea cols="70" id="profile{$line.pub_id}" class="latest_comments_textarea" style="margin-top:5px;margin-bottom:5px;" readonly>{$line.pub_profile}</textarea>
-                                        </td>
-                                    </tr>
-                                {/if}
-                            {/foreach}
-                        {/if}
-                        {if isset($game_year)}
-                            {foreach from=$game_year item=line name=game_year}
-                                <tr> 
-                                    <td width="30%">
-                                    {if $smarty.foreach.game_year.index == 0}
-                                        <span class="games_main_detail_info_right">Year</span>
-                                    {/if}
-                                        {if $line.extra_info != ''}
-                                            <br><br>
-                                        {/if}
-                                    </td>
-                                    <td width="5%">
-                                        <span class="games_main_detail_info_left" style="text-align:center;">-</span>
-                                        {if $line.extra_info != ''}
-                                            <br><br>
-                                        {/if}
-                                    </td>
-                                    <td width="60%">
-                                        <span class="games_main_detail_info_left">
-                                            <a href="games_main_list.php?year={$line.game_year}&amp;action=search" class="standard_tile_link">{$line.game_year}</a>    
-                                        </span>
-                                        {if $line.extra_info != ''}
-                                            <br><span class="standard_tile_subtext">{$line.extra_info}</span>  
-                                        {/if}
-                                    </td>                                   
-                                </tr>
-                            {/foreach}
-                        {/if}
-                        {if isset($developer)}
-                            {foreach from=$developer item=line name=developer}
-                                <tr> 
-                                    <td width="30%">
-                                        {if $smarty.foreach.developer.index == 0}
-                                            <span class="games_main_detail_info_right">Developer</span>
-                                        {/if}
-                                        {if $line.continent != '' ||  $line.extra_info != ''}
-                                            <br><br>
-                                        {/if}
-                                    </td>
-                                    <td width="5%">
-                                        <span class="games_main_detail_info_left" style="text-align:center;">-</span>
-                                        {if $line.continent != '' ||  $line.extra_info != ''}
-                                            <br><br>
-                                        {/if}
-                                    </td>
-                                    <td width="60%">
-                                        <span class="games_main_detail_info_left">
-                                            <a href="games_main_list.php?developer={$line.pub_id}&amp;action=search" class="standard_tile_link">{$line.pub_name}</a>
-                                            {if $line.pub_profile != 'none'}
-                                                <a style="cursor: pointer;" onClick="Show_profile({$line.pub_id})" class="latest_comments_link"><i class="fa fa-info-circle" aria-hidden="true" id="profile_on{$line.pub_id}" text="click to view profile"></i></a>
-                                                <a style="cursor: pointer;" onClick="Hide_profile({$line.pub_id})" class="latest_comments_link"><i class="fa fa-info-circle" aria-hidden="true" id="profile_off{$line.pub_id}" style="display:none;" text="click to view profile"></i></a>
-                                            {/if}
-                                            {if $line.logo != 'none'}
-                                                <a href="../../includes/show_image.php?file={$line.logo_pop}" data-lightbox="image-1" data-title="{$line.pub_name}" class="latest_comments_link"><i class="fa fa-picture-o" aria-hidden="true"></i></a>
-                                            {/if}
-                                        </span>
-                                        {if $line.continent != '' ||  $line.extra_info != ''}
-                                            <br><span class="standard_tile_subtext">{$line.continent}{if $line.continent != '' AND $line.extra_info != ''} - {/if}{$line.extra_info}</span>  
-                                        {/if}
-                                    </td>                                   
-                                </tr>
-                                {if $line.pub_profile != ''}
-                                    <tr></tr>
-                                    <tr style="display:none;" id="profile{$line.pub_id}">
-                                        <td width="100%" colspan="3" class="standard_table_center">
-                                           <textarea cols="70" id="profile{$line.pub_id}" class="latest_comments_textarea" style="margin-top:5px;margin-bottom:5px;" readonly>{$line.pub_profile}</textarea>
-                                        </td>
-                                    </tr>
-                                {/if}
-                            {/foreach}
-                        {/if}                        
-                        {if isset($game_author)}
-                            {foreach from=$game_author item=line name=game_author}
-                                <tr> 
-                                    <td width="30%">
-                                        {if $smarty.foreach.game_author.index == 0}
-                                            <span class="games_main_detail_info_right">Author</span>
-                                        {/if}
-                                        {if $line.auhthor_type_info != ''}
-                                            <br><br>
-                                        {/if}
-                                        {if $line.ind_nick != ''}
-                                            {if $line.auhthor_type_info == ''}
-                                                <br><br>
-                                            {else}
-                                                <br>
-                                            {/if}
-                                        {/if}                                        
-                                    </td>
-                                    <td width="5%">
-                                        <span class="games_main_detail_info_left" style="text-align:center;">-</span>
-                                        {if $line.auhthor_type_info != ''}
-                                            <br><br>
-                                        {/if}
-                                        {if $line.ind_nick != ''}
-                                            {if $line.auhthor_type_info == ''}
-                                                <br><br>
-                                            {else}
-                                                <br>
-                                            {/if}
-                                        {/if}
-                                    </td>
-                                    <td width="60%">
-                                        <span class="games_main_detail_info_left">
-                                            <a href="games_main_list.php?game_author={$line.ind_id}&amp;action=search" class="standard_tile_link">{$line.ind_name}</a>
-                                            {if $line.ind_profile != 'none'}
-                                                <a style="cursor: pointer;" onClick="Show_profile_ind({$line.ind_id})" class="latest_comments_link"><i class="fa fa-info-circle" aria-hidden="true" id="profile_on_ind{$line.ind_id}" text="click to view profile"></i></a>
-                                                <a style="cursor: pointer;" onClick="Hide_profile_ind({$line.ind_id})" class="latest_comments_link"><i class="fa fa-info-circle" aria-hidden="true" id="profile_off_ind{$line.ind_id}" style="display:none;" text="click to view profile"></i></a>
-                                            {/if}
-                                            {if $line.ind_img != 'none'}
-                                                <a href="../../includes/show_image.php?file={$line.ind_img}" data-lightbox="image-1" data-title="{$line.ind_name}" class="latest_comments_link"><i class="fa fa-picture-o" aria-hidden="true"></i></a>
-                                            {/if}
-                                            {if $line.interview_id != ''}
-                                                  <a href="../interviews/interviews_detail.php?selected_interview_id={$line.interview_id}" class="latest_comments_link"><i class="fa fa-newspaper-o" aria-hidden="true" title="Interview available"></i></a>
-                                            {/if}
-                                        </span>
-                                        {if $line.ind_nick != ''}
-                                            <br><span class="standard_tile_subtext">AKA {$line.ind_nick}</span>  
-                                        {/if}
-                                        {if $line.auhthor_type_info != ''}
-                                            <br><span class="standard_tile_subtext">{$line.auhthor_type_info}</span>  
-                                        {/if}                                      
-                                    </td>                                   
-                                </tr>
-                                {if $line.ind_profile != ''}
-                                    <tr></tr>
-                                    <tr style="display:none;" id="profile_ind{$line.ind_id}">
-                                        <td width="100%" colspan="3" class="standard_table_center">
-                                           <textarea cols="70" id="profile_ind{$line.ind_id}" class="latest_comments_textarea" style="margin-top:5px;margin-bottom:5px;" readonly>{$line.ind_profile}</textarea>
-                                        </td>
-                                    </tr>
-                                {/if}
-                            {/foreach}
-                        {/if}                                               
-                        {if $game_info.game_free == 1 || $game_info.game_unreleased == 1 || $game_info.game_development == 1 || $game_info.game_ste_only == 1 || $game_info.game_ste_enhan == 1
-                            || $game_info.game_falcon_only == 1 ||  $game_info.game_falcon_enhan == 1 || $game_info.game_falcon_rgb == 1 || $game_info.game_falcon_vga == 1 || $game_info.game_mono == 1
-                            || $game_info.game_wanted <> '' || $game_info.game_arcade == 1 || $game_info.game_seuck == 1 || $game_info.game_stos == 1 || $game_info.game_stac == 1}
-                            <tr> 
-                                <td width="30%">
-                                    <span class="games_main_detail_info_right">Specifics</span>
-                                        {if $game_info.game_free == 1}
-                                            <br>
-                                        {/if}
-                                        {if $game_info.game_unreleased == 1} 
-                                            <br>
-                                        {/if}
-                                        {if $game_info.game_unfinished == 1}
-                                            <br>
-                                        {/if}
-                                        {if $game_info.game_development == 1}
-                                            <br>
-                                        {/if}
-                                        {if $game_info.game_ste_only == 1}
-                                            <br>
-                                        {/if}   
-                                        {if $game_info.game_ste_enhan == 1}
-                                            <br>
-                                        {/if}
-                                        {if $game_info.game_falcon_only == 1}
-                                            <br>
-                                        {/if}
-                                        {if $game_info.game_falcon_enhan == 1} 
-                                            <br>
-                                        {/if}
-                                        {if $game_info.game_falcon_rgb == 1}
-                                            <br>
-                                        {/if}
-                                        {if $game_info.game_falcon_vga == 1}
-                                            <br>
-                                        {/if}
-                                        {if $game_info.game_mono == 1}
-                                            <br>
-                                        {/if}
-                                        {if $game_info.game_wanted <> ''}
-                                            <br>
-                                        {/if}
-                                        {if $game_info.game_arcade == 1} 
-                                            <br>
-                                        {/if}
-                                        {if $game_info.game_seuck == 1}
-                                            <br>
-                                        {/if}
-                                        {if $game_info.game_stos == 1}
-                                            <br>
-                                        {/if}
-                                        {if $game_info.game_stac == 1}
-                                            <br>
-                                        {/if}
-                                </td>
-                                <td width="5%">
-                                    <span class="games_main_detail_info_left" style="text-align:center;">-</span>
-                                        {if $game_info.game_free == 1}
-                                            <br>
-                                        {/if}
-                                        {if $game_info.game_unreleased == 1} 
-                                            <br>
-                                        {/if}
-                                        {if $game_info.game_unfinished == 1}
-                                            <br>
-                                        {/if}
-                                        {if $game_info.game_development == 1}
-                                            <br>
-                                        {/if}
-                                        {if $game_info.game_ste_only == 1}
-                                            <br>
-                                        {/if}   
-                                        {if $game_info.game_ste_enhan == 1}
-                                            <br>
-                                        {/if}
-                                        {if $game_info.game_falcon_only == 1}
-                                            <br>
-                                        {/if}
-                                        {if $game_info.game_falcon_enhan == 1} 
-                                            <br>
-                                        {/if}
-                                        {if $game_info.game_falcon_rgb == 1}
-                                            <br>
-                                        {/if}
-                                        {if $game_info.game_falcon_vga == 1}
-                                            <br>
-                                        {/if}
-                                        {if $game_info.game_mono == 1}
-                                            <br>
-                                        {/if}
-                                        {if $game_info.game_wanted <> ''}
-                                            <br>
-                                        {/if}
-                                        {if $game_info.game_arcade == 1} 
-                                            <br>
-                                        {/if}
-                                        {if $game_info.game_seuck == 1}
-                                            <br>
-                                        {/if}
-                                        {if $game_info.game_stos == 1}
-                                            <br>
-                                        {/if}
-                                        {if $game_info.game_stac == 1}
-                                            <br>
-                                        {/if}
-                                </td>
-                                <td width="60%">
-                                    <span class="standard_tile_subtext">
-                                        {if $game_info.game_free == 1}
-                                            Non-Commercial <br>
-                                        {/if}
-                                        {if $game_info.game_unreleased == 1} 
-                                            Unreleased <br>
-                                        {/if}
-                                        {if $game_info.game_unfinished == 1}
-                                            Unfinished <br>
-                                        {/if}
-                                        {if $game_info.game_development == 1}
-                                            In development <br>
-                                        {/if}
-                                        {if $game_info.game_ste_only == 1}
-                                            STe only <br>
-                                        {/if}   
-                                        {if $game_info.game_ste_enhan == 1}
-                                            STe enhanced <br>
-                                        {/if}
-                                        {if $game_info.game_falcon_only == 1}
-                                            Falcon only <br>
-                                        {/if}
-                                        {if $game_info.game_falcon_enhan == 1} 
-                                            Falcon enhanced <br>
-                                        {/if}
-                                        {if $game_info.game_falcon_rgb == 1}
-                                            Falcon RGB <br>
-                                        {/if}
-                                        {if $game_info.game_falcon_vga == 1}
-                                            Falcon VGA <br>
-                                        {/if}
-                                        {if $game_info.game_mono == 1}
-                                            Monochrome <br>
-                                        {/if}
-                                        {if $game_info.game_wanted <> ''}
-                                            Wanted <br>
-                                        {/if}
-                                        {if $game_info.game_arcade == 1} 
-                                            Arcade <br>
-                                        {/if}
-                                        {if $game_info.game_seuck == 1}
-                                            SUECK <br>
-                                        {/if}
-                                        {if $game_info.game_stos == 1}
-                                            STOS <br>
-                                        {/if}
-                                        {if $game_info.game_stac == 1}
-                                            STAC <br>
-                                        {/if}
-                                    </span>
-                                </td>                                   
-                            </tr>
-                        {/if}
-                        {if isset($aka)}
-                            {foreach from=$aka item=line name=aka}
-                                <tr> 
-                                    <td width="30%">
-                                    {if $smarty.foreach.aka.index == 0}
-                                        <span class="games_main_detail_info_right">AKA</span>
-                                    {/if}                                     
-                                    </td>
-                                    <td width="5%">
-                                        <span class="games_main_detail_info_left" style="text-align:center;">-</span>                                       
-                                    </td>
-                                    <td width="60%">
-                                        <span class="games_main_detail_info_left">
-                                            <a href="games_main_detail.php?game_id={$line.game_id}" class="standard_tile_link">{$line.game_aka_name}</a>    
-                                        </span>
-                                    </td>                                   
-                                </tr>
-                            {/foreach}
-                        {/if}
-                        {if isset($cat)}
-                            {foreach from=$cat item=line name=cat}
-                                <tr> 
-                                    <td width="30%">
-                                    {if $smarty.foreach.cat.index == 0}
-                                        <span class="games_main_detail_info_right">Category</span>
-                                    {/if}                                     
-                                    </td>
-                                    <td width="5%">
-                                        <span class="games_main_detail_info_left" style="text-align:center;">-</span>                                       
-                                    </td>
-                                    <td width="60%">
-                                        <span class="games_main_detail_info_left">
-                                            <a href="games_main_list.php?category={$line.cat_id}&amp;action=search" class="standard_tile_link">{$line.cat_name}</a>    
-                                        </span>
-                                    </td>                                   
-                                </tr>
-                            {/foreach}
-                        {/if}
-                    </table>
-                </div>
-                <div class="standard_tile_line"></div>
-            </div>	
             <!--*******************-->
             <!--END Game info tile -->
-            <!--*********************-->
+            <!--*******************-->
             <br>
             <!--*************************-->
             <!--START Game comments tile -->
-            <!--*************************-->  
-            <div class="games_main_details_comments_position">
-                <div class="standard_tile">
-                    <div class="help-tip">
-                        <p> 
-                            <u>Only available with your own comments:</u><br>
-                            <i class="fa fa-pencil" aria-hidden="true"></i> - Edit comment<br>
-                            <i class="fa fa-floppy-o" aria-hidden="true"></i> - Save changes to comment<br>
-                            <i class="fa fa-trash-o" aria-hidden="true"></i> - Delete comment (if )<br><br>
-                            <u>General options:</u><br>
-                            <i class="fa fa-envelope" aria-hidden="true"></i> - Email author of comment<br>
-                            <i class="fa fa-facebook-square" aria-hidden="true"></i> - Go to Facebook profile of author<br>
-                            <i class="fa fa-twitter" aria-hidden="true"></i> - Go to Twitter profile of author<br>
-                            <i class="fa fa-external-link-square" aria-hidden="true"></i> - Visit external link
-                        </p>
-                    </div>
-                    <h1><a href="../games/games_comment_main.php" class="standard_tile_link" title="Click to see all comments">COMMENTS</a></h1>
-                    <div class="standard_tile_line"></div>
-                    {if isset($user_session)}
-                        <form name="post">
-                        <div class="standard_list_entry">
-                            <div style="width:100%;text-align:center;margin-top:10px;">
-                                <input type="button" accesskey= "b" name="addbbcode0" value="B" onclick="bbstyle(0,'textfield')" class="quick_search_games_button" style="min-width:20px;width:0;display:inline;" title="Bold">
-                                <input type="button" accesskey= "u" name="addbbcode4" value="U" onclick="bbstyle(4,'textfield')" class="quick_search_games_button" style="min-width:20px;width:0;display:inline;" title="Underline">
-                                <input type="button" accesskey= "i" name="addbbcode2" value="I" onclick="bbstyle(2,'textfield')" class="quick_search_games_button" style="min-width:20px;width:0;display:inline;" title="Recursive">
-                                <input type="button" accesskey="w" name="addbbcode6" value="URL" onClick="bbstyle(6,'textfield')" class="quick_search_games_button" style="min-width:40px;width:0;display:inline;" title="Add links">			  
-                                <input type="button" accesskey="x" name="addbbcode8" value="@" onClick="bbstyle(8,'textfield')" class="quick_search_games_button" style="min-width:20px;width:0;display:inline;" title="Add email address"> 
-                                <textarea id="comment_add" class="games_main_detail_comments_add" style="margin-top:10px;margin-bottom:10px;" name="textfield" ONSELECT="javascript:storeCaret(this);" ONCLICK="javascript:storeCaret(this);" ONKEYUP="javascript:storeCaret(this);" ONCHANGE="javascript:storeCaret(this);"></textarea>
-                            </div>
-                        </div>
-                        <div style="text-align:center;">
-                            <input type="button" value="Add" class="quick_search_games_button" style="margin-bottom:10px;" onClick="AddComment({$user_session.user_id},{$game_info.game_id})">
-                        </div>
-                        </form>
-                    {else}
-                        <div class="standard_list_entry" style="height:0;">
-                            <div class="games_main_detail_comments_log_on">
-                                Please log in to add your own comment to this game.
-                            </div>
-                        </div>
-                    {/if}
-                    <div class="standard_tile_line"></div>
-                    <div id="latest_comments_all">
-                    {if isset($comments)} 
-                        <div class="games_main_detail_comments_container">
-                            <div class="standard_list_entry">                                                  
-                                <table class="standard_table_list_comments">
-                                {foreach from=$comments item=line}
-                                    <tr>
-                                        <td class="standard_table_left">
-                                            <span class="standard_tile_subtext" style="font-weight:bold;float:left;margin-left:5px;margin-right:5px;margin-top:15px;">
-                                                <a href="../../admin/user/user_detail.php?user_id_selected={$line.user_id}">{$line.user_name}</a>
-                                            </span>
-                                            <span class="standard_tile_subtext" style="font-weight:bold;float:right;display:inline;margin-left:5px;margin-right:5px;margin-top:15px;">
-                                                {if isset($user_session)}
-                                                    <span style="font-weight:bold;float:left;margin-left:5px;margin-bottom:15px;">
-                                                    {if $user_session.user_id == $line.user_id}
-                                                        <a style="cursor: pointer;" onClick="CommentEditable({$line.comment_id},{$line.user_id})" class="latest_comments_link"><i class="fa fa-pencil" id="comment_edit_icon{$line.comment_id}" aria-hidden="true"  title="Click to edit comment"></i></a>
-                                                        <a style="cursor: pointer;" onClick="SaveEditable({$line.comment_id},{$line.user_id},{$game_info.game_id})" class="latest_comments_link"><i class="fa fa-floppy-o" id="comment_save_icon{$line.comment_id}" aria-hidden="true" title="Click to save change" style="display:none;"></i></a>
-                                                        <a style="cursor: pointer;" onClick="DeleteEditable({$line.comment_id},{$line.user_id},{$game_info.game_id})" class="latest_comments_link"><i class="fa fa-trash-o" id="comment_delete_icon{$line.comment_id}" aria-hidden="true" title="Click to delete comment"></i></a>
-                                                    {/if}
-                                                    {if $line.email != ''}
-                                                        <a href="mailto:{$line.email}?subject=Comment%20of%20{$line.game|escape:'url'}%20at%20Atari%20Legend" class="latest_comments_link" title="Click to email user"><i class="fa fa-envelope" aria-hidden="true"></i></a>
-                                                    {/if}
-                                                    {if $line.user_fb != ''}
-                                                        <a href="{$line.user_fb}" class="latest_comments_link" title="Click to visit Facebook profile"><i class="fa fa-facebook-square" aria-hidden="true"></i></a>
-                                                    {/if}
-                                                    {if $line.user_twitter != ''}
-                                                        <a href="{$line.user_twitter}" class="latest_comments_link" title="Click to visit Twitter profile"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                                                    {/if}   
-                                                    {if $line.user_af != ''}
-                                                        <a href="{$line.user_af}" class="latest_comments_link" title="Click to visit Atari-Forum profile"><i class="fa fa-external-link-square" aria-hidden="true"></i></a>
-                                                    {/if}
-                                                    {if $line.user_website != ''}
-                                                        <a href="{$line.user_website}" class="latest_comments_link" title="Click to visit users website"><i class="fa fa-external-link-square" aria-hidden="true"></i></a>
-                                                    {/if}                               
-                                                    </span>
-                                                {/if}
-                                            </span>
-                                            <div class="latest_comments_text">
-                                                <div id="latest_comment_edit{$line.comment_id}">{$line.comment}</div>
-                                                <div style="width:100%;text-align:center;"><textarea id="comment_input{$line.comment_id}" class="latest_comments_textarea" style="display:none;" cols="80">{$line.comment_edit}</textarea></div>
-                                            </div> 
-                                            <span class="standard_tile_subtext" style="font-weight:bold;float:right;display:inline;margin-right:5px;margin-bottom:15px;">
-                                                {$line.date}
-                                            </span>
-                                            <br><br>
-                                        </td>
-                                    </tr>
-                                {/foreach}
-                                </table>     
-                            </div>
-                        </div>
-                    {/if}
-                    </div>
-                    <div class="standard_tile_line"></div>
+            <!--*************************--> 
+                <div class="games_main_details_comments_position_high">
+                    {include file='1/main/games_detail_comments.html'}
                 </div>
-            </div>           
             <!--***********************-->
             <!--END Game comments tile -->
-            <!--***********************-->          
+            <!--***********************--> 
+            <br>
+            {if isset($similar) or isset($interview) or isset($facts)}
+                {if isset($boxscan)}
+                    {if isset($comments)} 
+                    {else}
+                        <!--****************************-->
+                        <!--Start game submission tile  -->
+                        <!--****************************-->  
+                        <div class="games_main_details_submissions_position_high">
+                            {include file='1/main/games_detail_submission.html'}
+                        </div>
+                        <!--****************************-->
+                        <!--END game submission tile    -->
+                        <!--****************************-->   
+                    {/if}
+                {/if}
+            {/if}
+            
+            {if isset($boxscan)}
+                <div class="games_main_details_submisions_position_medium">
+                    {include file='1/main/games_detail_submission.html'}
+                </div>
+            {else}
+                {if isset($similar) or isset($interview) or isset($facts)}
+                    <div class="games_main_details_submisions_position_medium">
+                        {include file='1/main/games_detail_submission.html'}
+                    </div>    
+                {/if}
+            {/if}
+            
         </div>
         
-        <div class="content_box_games_details" id="column_center_games_details">
-            
+        <div class="content_box_games_details" id="column_center_games_details">         
             <!--*********************-->
             <!--START screenshot tile -->
             <!--*********************-->
             <br>
-            <div class="standard_tile">
-                <h1>{$game_info.game_name|upper}</h1>
-                <div class="standard_tile_line"></div>
-                <div id="jssor_1" class="games_main_detail_screenshot">   
-                    <div data-u="slides" class="games_main_detail_slides">
-                        {foreach from=$screenshots item=line name=screenshots}
-                        <div>
-                            <img data-u="image" src="{$line.screenshot_image}">
-                            <img data-u="thumb" src="{$line.screenshot_image}">
+            <div class="games_main_details_screenshots_position_high">
+                <div class="standard_tile">
+                    <h1>{$game_info.game_name|upper}</h1>
+                    <div class="standard_tile_line"></div>
+                    <div id="jssor_1" class="games_main_detail_screenshot">   
+                        <div data-u="slides" class="games_main_detail_slides">
+                            {foreach from=$screenshots item=line name=screenshots}
+                            <div>
+                                <img data-u="image" src="{$line.screenshot_image}">
+                                <img data-u="thumb" src="{$line.screenshot_image}">
+                            </div>
+                            {/foreach}                            
                         </div>
-                        {/foreach}                            
-                    </div>
-                    <!-- Thumbnail Navigator -->
-                    <div data-u="thumbnavigator" class="games_main_detail_thumbs" data-autocenter="2" data-scale-left="0.75">
-                        <div data-u="slides">
-                            <div data-u="prototype" class="p">                                    
-                                <div data-u="thumbnailtemplate" class="t"></div>
+                        <!-- Thumbnail Navigator -->
+                        <div data-u="thumbnavigator" class="games_main_detail_thumbs" data-autocenter="2" data-scale-left="0.75">
+                            <div data-u="slides">
+                                <div data-u="prototype" class="p">                                    
+                                    <div data-u="thumbnailtemplate" class="t"></div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    {if $nr_screenshots <= 20}
-                        <!-- Bullet Navigator -->
-                        <div data-u="navigator" class="games_main_detail_nav" data-scale="0.5">
-                            <div data-u="prototype" class="i">
-                                <svg viewbox="0 0 16000 16000" style="position:absolute;top:0;left:0;width:100%;height:100%;">
-                                    <rect class="b" x="2200" y="2200" width="11600" height="11600"></rect>
-                                </svg>
+                        {if $nr_screenshots <= 20}
+                            <!-- Bullet Navigator -->
+                            <div data-u="navigator" class="games_main_detail_nav" data-scale="0.5">
+                                <div data-u="prototype" class="i">
+                                    <svg viewbox="0 0 16000 16000" style="position:absolute;top:0;left:0;width:100%;height:100%;">
+                                        <rect class="b" x="2200" y="2200" width="11600" height="11600"></rect>
+                                    </svg>
+                                </div>
                             </div>
+                        {/if}
+                        <!-- Arrow Navigator -->
+                        <div data-u="arrowleft" class="games_main_detail_arrow" id="games_main_detail_arrow_left" data-autocenter="2" data-scale="0.75" data-scale-left="1">                 
+                            <svg viewbox="0 0 16000 16000" style="position:absolute;top:0;left:0;width:100%;height:100%;">
+                                <polyline class="a" points="11040,1920 4960,8000 11040,14080 "></polyline>
+                            </svg>
                         </div>
-                    {/if}
-                    <!-- Arrow Navigator -->
-                    <div data-u="arrowleft" class="games_main_detail_arrow" id="games_main_detail_arrow_left" data-autocenter="2" data-scale="0.75" data-scale-left="1">                 
-                        <svg viewbox="0 0 16000 16000" style="position:absolute;top:0;left:0;width:100%;height:100%;">
-                            <polyline class="a" points="11040,1920 4960,8000 11040,14080 "></polyline>
-                        </svg>
+                        <div data-u="arrowright" class="games_main_detail_arrow" id="games_main_detail_arrow_right" data-autocenter="2" data-scale="0.75" data-scale-right="1">                  
+                            <svg viewbox="0 0 16000 16000" style="position:absolute;top:0;left:0;width:100%;height:100%;">
+                                <polyline class="a" points="4960,1920 11040,8000 4960,14080 "></polyline>
+                            </svg>
+                        </div>
                     </div>
-                    <div data-u="arrowright" class="games_main_detail_arrow" id="games_main_detail_arrow_right" data-autocenter="2" data-scale="0.75" data-scale-right="1">                  
-                        <svg viewbox="0 0 16000 16000" style="position:absolute;top:0;left:0;width:100%;height:100%;">
-                            <polyline class="a" points="4960,1920 11040,8000 4960,14080 "></polyline>
-                        </svg>
-                    </div>
+                    <!-- #endregion Jssor Slider End -->
+                    <span class="games_main_detail_info_right"><span class="standard_tile_subtext"><b>{$nr_screenshots}</b> screenshots loaded</span></span>
+                    <span class="standard_tile_subtext" style="float:right;margin-right:20px;">Autoplay <a href="javascript:Play();" id="play_jssor1" >On</a>/<a id="pause_jssor1" href="javascript:Pause();">Off</a></span>
+                    <br><br>
                 </div>
-                <!-- #endregion Jssor Slider End -->
-                <span class="games_main_detail_info_right"><span class="standard_tile_subtext"><b>{$nr_screenshots}</b> screenshots loaded</span></span>
-                <span class="standard_tile_subtext" style="float:right;margin-right:20px;">Autoplay <a href="javascript:Play();" id="play_jssor1" >On</a>/<a id="pause_jssor1" href="javascript:Pause();">Off</a></span>
-                <br><br>
             </div>
             <!--*********************-->
-            <!--END screenshot tile -->
+            <!--END screenshot tile  -->
             <!--*********************-->
+            
+            <!--*********************-->
+            <!--START Game info tile -->
+            <!--*********************-->
+                <div class="games_main_details_info_position_low">
+                    <br>
+                    {include file='1/main/games_detail_info.html'}
+                </div>
+            <!--*******************-->
+            <!--END Game info tile -->
+            <!--*******************-->
           
             <!--*************************-->
             <!--START Review preview tile -->
             <!--**************************-->   
             <br>
-            <div class="standard_tile">
-                <h1><a href="../games/games_reviews_main.php" class="standard_tile_link" title="Click to see all reviews">REVIEWS</a></h1> 
-                <div class="standard_tile_line"></div> 
-                {if isset($user_session)}
-                    <div class="standard_tile_text">     
-                        <h6 style="text-align:center;">
-                            Feel inspired to write your own review? Please click <a href="../games/games_reviews_add.php?game_id={$game_info.game_id}" class="standard_tile_link">here</a> and get started!
-                        </h6>
-                    </div> 
-                {else}
-                   <div class="games_main_detail_comments_log_on">
-                        If you like to write a review yourself, please log in and follow the link.
-                   </div> 
-                {/if}
-                {if isset($review)}
-                <div class="standard_tile_line"></div>
-                <table class="standard_table_games_main_detail">               
-                {foreach from=$review item=line name=review}
-                    <tr>
-                    <td class="game_details_review_preview_left">  
-                        <div style="margin-left:10px;margin-right:10px;text-align:justify;margin-bottom:10px;margin-top:10px">
-                            <a href="../../includes/show_image.php?file={$line.screenshot}&amp;resize=410,null,null,null" data-lightbox="image-1">
-                            <img src="../../includes/show_image.php?file={$line.screenshot}&amp;resize=210,null,null,null" alt="Click to enlarge!" style="display:inline;margin-top:10px;" class="game_screenshot_img"></a>
-                            <br>
-                            <span class="standard_tile_subtext" style="font-weight: bold;">{$line.comment}</span>
-                        </div>
-                    </td>
-                    <td class="game_details_review_preview_right">
-                        <div style="margin-top:20px;margin-bottom:15px;margin-right:20px;margin-left:10px;">
-                            <h4 style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis">
-                                Written by <a href="../../admin/user/user_detail.php?user_id_selected={$line.user_id}" class="standard_tile_link">{$line.user_name}</a>
-                            </h4>
-                            <h5 style="font-weight: bold;">{$line.date}</h5>
-                            <div class="game_details_review_preview_text">
-                               {$line.text}
+            <div class="games_main_details_reviews_position_high">
+                <div class="standard_tile">
+                    <h1><a href="../games/games_reviews_main.php" class="standard_tile_link" title="Click to see all reviews">REVIEWS</a></h1> 
+                    <div class="standard_tile_line"></div> 
+                    {if isset($user_session)}
+                        <div class="standard_tile_text">     
+                            <h6 style="text-align:center;">
+                                Feel inspired to write your own review? Please click <a href="../games/games_reviews_add.php?game_id={$game_info.game_id}" class="standard_tile_link">here</a> and get started!
+                            </h6>
+                        </div> 
+                    {else}
+                       <div class="games_main_detail_comments_log_on">
+                            If you like to write a review yourself, please log in and follow the link.
+                       </div> 
+                    {/if}
+                    {if isset($review)}
+                    <div class="standard_tile_line"></div>
+                    <table class="standard_table_games_main_detail">               
+                    {foreach from=$review item=line name=review}
+                        <tr>
+                        <td class="game_details_review_preview_left">  
+                            <div style="margin-left:10px;margin-right:10px;text-align:justify;margin-bottom:10px;margin-top:10px">
+                                <a href="../../includes/show_image.php?file={$line.screenshot}&amp;resize=410,null,null,null" data-lightbox="image-1">
+                                <img src="../../includes/show_image.php?file={$line.screenshot}&amp;resize=210,null,null,null" alt="Click to enlarge!" style="display:inline;margin-top:10px;" class="game_screenshot_img"></a>
+                                <br>
+                                <span class="standard_tile_subtext" style="font-weight: bold;">{$line.comment}</span>
                             </div>
-                            <h2><a href="../games/games_reviews_detail.php?game_id={$game_id}&review_id={$line.review_id}" class="standard_tile_link">Read more <i class="fa fa-chevron-right" aria-hidden="true"></i></a></h2>
-                            <br>                            
-                        </div>
-                    </td>
-                    </tr>		
-                {/foreach}
-                </table>
-                {/if}
+                        </td>
+                        <td class="game_details_review_preview_right">
+                            <div style="margin-top:20px;margin-bottom:15px;margin-right:20px;margin-left:10px;">
+                                <h4 style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis">
+                                    Written by <a href="../../admin/user/user_detail.php?user_id_selected={$line.user_id}" class="standard_tile_link">{$line.user_name}</a>
+                                </h4>
+                                <h5 style="font-weight: bold;">{$line.date}</h5>
+                                <div class="game_details_review_preview_text">
+                                   {$line.text}
+                                </div>
+                                <h2><a href="../games/games_reviews_detail.php?game_id={$game_id}&review_id={$line.review_id}" class="standard_tile_link">Read more <i class="fa fa-chevron-right" aria-hidden="true"></i></a></h2>
+                                <br>                            
+                            </div>
+                        </td>
+                        </tr>		
+                    {/foreach}
+                    </table>
+                    {/if}
+                </div>
             </div>
+            <!--*************************-->
+            <!--END Review preview tile  -->
+            <!--**************************-->  
+
+            {if isset($similar) or isset($interview) or isset($facts)}
+                {if isset($boxscan)}
+                    {if isset($comments)} 
+                        <!--****************************-->
+                        <!--Start game submission tile  -->
+                        <!--****************************-->   
+                        <br>
+                        <div class="games_main_details_submissions_position_high">
+                            {include file='1/main/games_detail_submission.html'}
+                        </div>
+                        <!--****************************-->
+                        <!--END game submission tile    -->
+                        <!--****************************-->   
+                    {/if}
+                {/if}
+            {else}
+                {if isset($boxscan)}
+                    {if isset($review)} 
+                    {else}
+                        <br>
+                        <!--****************************-->
+                        <!--Start game submission tile  -->
+                        <!--****************************--> 
+                        <div class="games_main_details_submissions_position_high">
+                            {include file='1/main/games_detail_submission.html'}
+                        </div>
+                        <!--****************************-->
+                        <!--END game submission tile    -->
+                        <!--****************************--> 
+                    {/if}
+                {/if}
+            {/if}
+            
         </div>
 
         <div class="content_box_games_details" id="column_right_games_details">           
@@ -1257,91 +812,142 @@
             <!--START boxscan tile -->
             <!--*********************-->
             <br>
-             <div class="standard_tile">
-                <h1>BOXSCAN</h1>
-                <div class="standard_tile_line"></div>  
-                {if isset($boxscan)}
-                    
-                    <div id="jssor_2" class="games_main_detail_box">
-                        <!-- Loading Screen -->
-                        <div data-u="slides" class="games_main_detail_slides_box">
-                            {foreach from=$boxscan item=line name=boxscan}
-                                <div>
-                                    <a href="../../includes/show_image.php?file={$line.image_pop}" data-lightbox="image-1" class="latest_comments_link"><img data-u="image" src="{$line.image}" class="games_main_detail_box_img"></a>    
-                                    <div u="thumb">
-                                        <div style="width: 100%; height: 100%; background-image: url({$line.image}); background-position: center center; background-repeat: no-repeat; background-size: contain;">
+            <div class="games_main_details_boxscans_position_high">
+                <div class="standard_tile">
+                    <h1>BOXSCAN</h1>
+                    <div class="standard_tile_line"></div>  
+                    {if isset($boxscan)}
+                        
+                        <div id="jssor_2" class="games_main_detail_box">
+                            <!-- Loading Screen -->
+                            <div data-u="slides" class="games_main_detail_slides_box">
+                                {foreach from=$boxscan item=line name=boxscan}
+                                    <div>
+                                        <a href="../../includes/show_image.php?file={$line.image_pop}" data-lightbox="image-1" class="latest_comments_link"><img data-u="image" src="{$line.image}" class="games_main_detail_box_img"></a>    
+                                        <div u="thumb">
+                                            <div style="width: 100%; height: 100%; background-image: url({$line.image}); background-position: center center; background-repeat: no-repeat; background-size: contain;">
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            {/foreach}
-                        </div>
-                        <!-- Thumbnail Navigator -->
-                        <div data-u="thumbnavigator" class="games_main_detail_thumbs_box" data-autocenter="1" data-scale-bottom="0.75">
-                            <div data-u="slides">
-                                <div data-u="prototype" class="p" style="width:100px;height:100px;">
-                                    <div data-u="thumbnailtemplate" class="t"></div>
+                                {/foreach}
+                            </div>
+                            <!-- Thumbnail Navigator -->
+                            <div data-u="thumbnavigator" class="games_main_detail_thumbs_box" data-autocenter="1" data-scale-bottom="0.75">
+                                <div data-u="slides">
+                                    <div data-u="prototype" class="p" style="width:100px;height:100px;">
+                                        <div data-u="thumbnailtemplate" class="t"></div>
+                                    </div>
                                 </div>
                             </div>
+                            <!-- Arrow Navigator -->
+                            <div data-u="arrowleft" class="games_main_detail_arrow" id="games_main_detail_arrow_left_box" data-autocenter="2" data-scale="0.75" data-scale-left="1">
+                                <svg viewbox="0 0 16000 16000" style="position:absolute;top:-75px;left:0;width:100%;height:100%;">
+                                    <polyline class="a" points="11040,1920 4960,8000 11040,14080 "></polyline>
+                                </svg>
+                            </div>
+                            <div data-u="arrowright" class="games_main_detail_arrow" id="games_main_detail_arrow_right_box" data-autocenter="2" data-scale="0.75" data-scale-right="1">
+                                <svg viewbox="0 0 16000 16000" style="position:absolute;top:-75px;left:0;width:100%;height:100%;">
+                                    <polyline class="a" points="4960,1920 11040,8000 4960,14080 "></polyline>
+                                </svg>
+                            </div>
                         </div>
-                        <!-- Arrow Navigator -->
-                        <div data-u="arrowleft" class="games_main_detail_arrow" id="games_main_detail_arrow_left_box" data-autocenter="2" data-scale="0.75" data-scale-left="1">
-                            <svg viewbox="0 0 16000 16000" style="position:absolute;top:-75px;left:0;width:100%;height:100%;">
-                                <polyline class="a" points="11040,1920 4960,8000 11040,14080 "></polyline>
-                            </svg>
+                        <span class="games_main_detail_info_right"><span class="standard_tile_subtext">{if isset($nr_box)}{if $nr_box == '1'}<b>{$nr_box}</b> boxscan loaded{else}<b>{$nr_box}</b> boxscans loaded{/if}{/if}</span></span>
+                        <span class="standard_tile_subtext" style="float:right;margin-right:20px;">Autoplay <a href="javascript:Play_box();" id="play_jssor2" >On</a>/<a href="javascript:Pause_box();" id="pause_jssor2">Off</a></span>
+                        <br><br>
+                    {else}
+                        <div class="standard_tile_text">     
+                            <h6 style="text-align:center;">
+                                There is no boxscan in the database. You have one? Please use the submit tile to sent it to us.
+                            </h6>
                         </div>
-                        <div data-u="arrowright" class="games_main_detail_arrow" id="games_main_detail_arrow_right_box" data-autocenter="2" data-scale="0.75" data-scale-right="1">
-                            <svg viewbox="0 0 16000 16000" style="position:absolute;top:-75px;left:0;width:100%;height:100%;">
-                                <polyline class="a" points="4960,1920 11040,8000 4960,14080 "></polyline>
-                            </svg>
-                        </div>
+                    {/if}
+                </div>
+            </div>
+            <!--*********************-->
+            <!--END boxscan tile     -->
+            <!--*********************-->
+            
+            <!--*********************-->
+            <!--START interview tile -->
+            <!--*********************-->
+            <div class="games_main_details_interviews_position_high">    
+               {include file='1/main/games_detail_interview.html'}
+            </div>
+            <!--*********************-->
+            <!--END interview tile   -->
+            <!--*********************-->
+            
+            <!--*********************-->
+            <!--START similar tile   -->
+            <!--*********************-->
+            <div class="games_main_details_similar_position_high">
+                {include file='1/main/games_detail_similar.html'}
+            </div>
+            <!--*********************-->
+            <!--END similar tile     -->
+            <!--*********************-->
+            
+            <!--*********************-->
+            <!--START Facts tile     -->
+            <!--*********************-->
+            <div class="games_main_details_facts_position_high">
+                {include file='1/main/games_detail_facts.html'}
+            </div>
+            <!--*********************-->
+            <!--END Facts tile          -->
+            <!--*********************-->
+            
+            {if isset($similar) or isset($interview) or isset($facts)}
+                {if isset($boxscan)}
+                {else} 
+                    <!--****************************-->
+                    <!--Start game submission tile  -->
+                    <!--****************************-->   
+                    <div class="games_main_details_submissions_position_high">
+                        <br>
+                        {include file='1/main/games_detail_submission.html'}
                     </div>
-                    <span class="games_main_detail_info_right"><span class="standard_tile_subtext">{if isset($nr_box)}{if $nr_box == '1'}<b>{$nr_box}</b> boxscan loaded{else}<b>{$nr_box}</b> boxscans loaded{/if}{/if}</span></span>
-                    <span class="standard_tile_subtext" style="float:right;margin-right:20px;">Autoplay <a href="javascript:Play_box();" id="play_jssor2" >On</a>/<a href="javascript:Pause_box();" id="pause_jssor2">Off</a></span>
-                    <br><br>
+                    <!--****************************-->
+                    <!--END game submission tile    -->
+                    <!--****************************-->   
+                {/if}
+            {else}
+                {if isset($boxscan)}
+                    {if isset($review)}
+                        <!--****************************-->
+                        <!--Start game submission tile  -->
+                        <!--****************************-->  
+                        <div class="games_main_details_submissions_position_high">
+                            <br>
+                            {include file='1/main/games_detail_submission.html'}
+                        </div>
+                        <!--****************************-->
+                        <!--END game submission tile    -->
+                        <!--****************************--> 
+                    {/if}
+                {else}                   
+                    <!--****************************-->
+                    <!--Start game submission tile  -->
+                    <!--****************************--> 
+                    <div class="games_main_details_submissions_position_high">
+                        <br>
+                        {include file='1/main/games_detail_submission.html'}
+                    </div>
+                    <!--****************************-->
+                    <!--END game submission tile    -->
+                    <!--****************************--> 
+                {/if}
+            {/if}
+            
+            {if isset($boxscan)}
+            {else}
+                {if isset($similar) or isset($interview) or isset($facts)}
                 {else}
-                    <div class="games_main_detail_comments_log_on">
-                        There is no boxscan. Here I will build an upload box for people who are logged in.
+                    <br>
+                    <div class="games_main_details_submisions_position_medium">
+                        {include file='1/main/games_detail_submission.html'}
                     </div>
                 {/if}
-            </div>
-        <!--*********************-->
-        <!--END boxscan tile     -->
-        <!--*********************-->
-        
-        <!--*********************-->
-        <!--START interview tile -->
-        <!--*********************-->
-            {if isset($interviews)}  
-                <br>
-                <div class="standard_tile">
-                    <h1><a href="../interviews/interviews_main.php" class="standard_tile_link" title="Click to see all interviews">INTERVIEWS</a></h1>
-                    <div class="standard_tile_line"></div>  
-                        {foreach from=$interviews item=line name=interviews}
-                            {if $smarty.foreach.interviews.index == $random_interview_nr}
-                            <div class="standard_tile_background">
-                                <div class="grid">
-                                    <figure class="effect-tile" style="margin:0px;">           
-                                    <img class="standard_tile_image" src="../../includes/show_image.php?file={$line.ind_img}&amp;resize=410,null,null,null&amp;crop=left,top,410,260" alt="Interview">
-                                    <figcaption>
-                                        <span class="standard_tile_subtext" style="left: 5%; position: absolute; top: 50%;">Random Interview</span><span class="tile_arrow"><i class="fa fa-chevron-up" aria-hidden="true"></i></span>                    
-                                        <span class="tile_title"><a href="../interviews/interviews_detail.php?selected_interview_id={$line.int_id}">{$line.ind_name}</a></span>                      
-                                    </figcaption>			
-                                    </figure>
-                                </div>
-                            </div>
-                            <div class="standard_tile_explanation">
-                                <br>	
-                                <h6>{$line.int_text}</h6>
-                                <br>
-                                <span class="standard_tile_subtext">by <a href="../../admin/user/user_detail.php?user_id_selected={$line.int_user_id}">{$line.int_userid}</a>, {$line.int_date}</span>
-                                <br><h2><a href="../interviews/interviews_detail.php?selected_interview_id={$line.int_id}" class="standard_tile_link">More&nbsp;&nbsp;<i class="fa fa-chevron-right" aria-hidden="true"></i></a></h2>
-                            </div>
-                            {/if}
-                        {/foreach}
-                </div>
-                <!--*********************-->
-                <!--END interview tile -->
-                <!--*********************-->
             {/if}
         </div>
 {/block}

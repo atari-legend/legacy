@@ -98,6 +98,43 @@
                 })
             });
         </script>
+        {literal}
+        <script> <!-- The 'go to the top' buttong -->         
+            $(function(){
+             
+                $(document).on( 'scroll', function(){
+             
+                    if ($(window).scrollTop() > 100) {
+                        $('.scroll-top-wrapper').addClass('show');
+                    } else {
+                        $('.scroll-top-wrapper').removeClass('show');
+                    }
+                });
+            });
+        </script>
+        <script> <!-- The 'go to the top' buttong -->  
+            $(function(){            
+                $(document).on( 'scroll', function(){
+             
+                    if ($(window).scrollTop() > 100) {
+                        $('.scroll-top-wrapper').addClass('show');
+                    } else {
+                        $('.scroll-top-wrapper').removeClass('show');
+                    }
+                });
+             
+                $('.scroll-top-wrapper').on('click', scrollToTop);
+            });
+             
+            function scrollToTop() {
+                verticalOffset = typeof(verticalOffset) != 'undefined' ? verticalOffset : 0;
+                element = $('body');
+                offset = element.offset();
+                offsetTop = offset.top;
+                $('html, body').animate({scrollTop: offsetTop}, 500, 'linear');
+            }
+        </script>
+        {/literal}
         {block name=java_script}{/block}
     </head>
     <body id="body">
@@ -407,7 +444,7 @@
             </header>
         </div>
         <div id="wrapper">
-            {block name=main_body}{/block}
+            {block name=main_body}{/block}           
             <div class="main_online">                 
                 {block name=who_is_online}
                     {include file='1/admin/who_is_online.html'}
@@ -421,5 +458,10 @@
                 <h3>&copy; copyright 2004 - {'Y'|date} </h3>
             </div>
         </footer>
+        <div class="scroll-top-wrapper "> <!--back to top link -->
+            <span class="scroll-top-inner">
+                <i class="fa fa-2x fa-arrow-circle-up"></i>
+            </span>
+        </div>
     </body>
 </html>

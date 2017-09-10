@@ -118,6 +118,10 @@ function user_stats()
 						<div class="user_details_text">User permission :</div>
 						<div class="user_details_input"><input type="text" name="user_permission"  maxlength="60" value="{$users.user_permission}" class="user_details_input_small"></div>
 					</div>
+                    {else}
+                    <div class="user_details_row">							
+						<div class="user_details_input"><input type="hidden" name="user_permission"  maxlength="60" value="{$users.user_permission}" class="user_details_input_small"></div>
+					</div>
                     {/if}
 					<div class="user_details_row">	
 						<div class="user_details_text">User AF :</div>
@@ -140,6 +144,12 @@ function user_stats()
                                 <label for="user_inactive"></label>
                                 <!--<input type="checkbox" name="user_inactive" value="1" maxlength="255" class="quick_search_check" {if $users.inactive == '1'} checked {/if}>-->
                             </div>
+                        </div>
+					</div>
+                    {else}
+                    <div class="user_details_row">						
+						<div class="user_details_input">                          
+                            <input type="hidden" value="1" id="user_inactive" name="user_inactive" {if $users.inactive == '1'} checked {/if}>                               
                         </div>
 					</div>
                     {/if}

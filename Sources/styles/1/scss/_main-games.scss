@@ -186,7 +186,9 @@
     margin-left: 10px;    
     margin-right: 10px;
     max-height: 100px;
-    //border: 1px solid #008b8b;
+    border: 1px solid #666666;
+    background: black;
+    padding:5px;
 }
 
 .games_main_detail_info_right{
@@ -336,6 +338,19 @@
     width: 100%;
 }
 
+.file_upload_games_detail{
+    @extend .file_upload;
+    background: #00d3d3;;
+    border-bottom: 3px solid #008b8b;
+    color: #182727;
+}
+
+.file_upload_games_detail:hover {
+    color: #182727;
+    background: #00a9a9;
+    border-bottom: 3px solid #006f6f; 
+}
+
 //scrollbar CHROME and SAFARI
 .games_main_detail_comments_container::-webkit-scrollbar {
     width: 1em;
@@ -375,6 +390,9 @@
     display: block;
     margin-bottom:10px;
 }
+
+.games_main_details_submisions_position_medium{display:none;}
+.games_main_details_info_position_low{display:none;}
 
 //*****Games Reviews*********/
 
@@ -420,3 +438,5 @@
     @extend .standard_tile_subtext;
     font-size: 1em; 
 }
+
+
