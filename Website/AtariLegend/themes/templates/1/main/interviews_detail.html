@@ -356,11 +356,11 @@
             <!--*****************************-->
             <!--START Author Picture tile -->
             <!--*****************************-->
-            {if $interview.interview_img != 'none'}
-                <br>
-                <div class="standard_tile">
-                    <h1><a href="../games/games_main_list.php?game_author={$interview.individual_id}&amp;action=search#" class="standard_tile_link" title="Click to see all comments">{$interview.individual_name|upper}</a></h1>
-                    <div class="standard_tile_line"></div>  
+            <br>
+            <div class="standard_tile">
+                <h1><a href="../games/games_main_list.php?game_author={$interview.individual_id}&amp;action=search#" class="standard_tile_link" title="Click to see all comments">{$interview.individual_name|upper}</a></h1>
+                <div class="standard_tile_line"></div>  
+                {if $interview.interview_img != 'none'}
                     <div class="standard_tile_background">
                         <div class="grid">
                             <figure class="effect-tile" style="margin:0px;">           
@@ -372,12 +372,12 @@
                             </figure>
                         </div>
                     </div>
-                    <div class="standard_tile_explanation">
-                        <br>	
-                        <h6>{$interview.interview_intro}</h6>
-                    </div>
+                {/if}
+                <div class="standard_tile_explanation">
+                    <br>	
+                    <h6>{$interview.interview_intro}</h6>
                 </div>
-            {/if}
+            </div>
             <!--*****************************-->
             <!--END Aurhor Picture tile -->
             <!--*****************************-->    

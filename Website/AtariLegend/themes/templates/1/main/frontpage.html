@@ -231,15 +231,25 @@
                 {include file='1/main/tile_screenstar.html'}
             {/block}
 
-            <!--Start date quote tile-->
+            <!--Start date quote tile
             {block name=date_quote_tile}
                 {include file='1/main/date_quote_tile.html'}
+            {/block}-->
+            
+            <!--Start "class AL" tile-->
+            {block name=class_tile}
+                {include file='1/main/tile_class_of_al.html'}
+            {/block}
+            
+             <!--Start open db tile-->
+            {block name=date_quote_tile}
+                {include file='1/main/tile_open_db.html'}
             {/block}
 
-            <!--Start "hotlinks" tile-->
+            <!--Start "hotlinks" tile
             {block name=hotlinks_tile}
                 {include file='1/main/hotlinks_tile.html'}
-            {/block}
+            {/block}-->
         </div>
         <!--this column is only visible with 3 and 2 columns-->
         <div class="column_wide_left">
@@ -284,11 +294,19 @@
                     </div>
                 {/block}
 
-                <div class="contact_tiles">
-                    <div class="contact_email_button"><a href="#"> </a></div>
-                    <div class="contact_facebook_button"><a href="#"> </a></div>
+                <!--Start contact tiles-->
+                <!--<div class="contact_tiles">
                     <div class="contact_jukebox_button"><a href="#"> </a></div>
                     <div class="contact_chat_button"><a href="#"> </a></div>
+                    <div class="contact_email_button"><a href="#"> </a></div>
+                    <div class="contact_facebook_button"><a href="#"> </a></div>
+                </div>-->
+                
+                <!--Start "AL Mobile" tile-->
+                <div class="contact_tiles">
+                    {block name=al_mobile}
+                        {include file='1/main/tile_al_mobile.html'}
+                    {/block}
                 </div>
             </div>
         </div>
@@ -367,9 +385,14 @@
                 {include file='1/main/latest_news_tile.html'}
             {/block}
             
-            <!--Start date quote tile-->
+            <!--Start date quote tile
             {block name=date_quote_tile}
                 {include file='1/main/date_quote_tile.html'}
+            {/block}-->
+            
+             <!--Start open db tile-->
+            {block name=date_quote_tile}
+                {include file='1/main/tile_open_db.html'}
             {/block}
         </div>
         
@@ -406,9 +429,14 @@
                 {include file='1/main/who_is_it_tile.html'}
             {/block}
             
-            <!--Start date quote tile-->
+            <!--Start date quote tile
             {block name=date_quote_tile}
                 {include file='1/main/date_quote_tile.html'}
+            {/block}-->
+            
+             <!--Start open db tile-->
+            {block name=date_quote_tile}
+                {include file='1/main/tile_open_db.html'}
             {/block}
         </div>
         
@@ -426,9 +454,14 @@
                 {include file='1/main/tile_screenstar.html'}
             {/block}
 
-            <!--Start "hotlinks" tile-->
+            <!--Start "hotlinks" tile
             {block name=hotlinks_tile}
                 {include file='1/main/hotlinks_tile.html'}
+            {/block}-->
+            
+            <!--Start "class AL" tile-->
+            {block name=class_tile}
+                {include file='1/main/tile_class_of_al.html'}
             {/block}
         </div>
 
@@ -445,13 +478,20 @@
                 {include file='1/main/statistics_tile.html'}
             {/block}
 
-            <!--Start contact tiles - will only be used on the front page so no inheritance here -->
-            <div class="contact_tiles">
-                    <div class="contact_email_button"><a href="#"> </a></div>
-                    <div class="contact_facebook_button"><a href="#"> </a></div>
-                    <div class="contact_jukebox_button"><a href="#"> </a></div>
-                    <div class="contact_chat_button"><a href="#"> </a></div>
+            <!--Start contact tiles-->
+            <!--<div class="contact_tiles">
+                <div class="contact_jukebox_button"><a href="#"> </a></div>
+                <div class="contact_chat_button"><a href="#"> </a></div>
+                <div class="contact_email_button"><a href="#"> </a></div>
+                <div class="contact_facebook_button"><a href="#"> </a></div>
+            </div>-->
+            
+            <!--Start "AL Mobile" tile-->
+            {block name=al_mobile}
+                <div class="contact_tiles">
+                    {include file='1/main/tile_al_mobile.html'}
                 </div>
+            {/block}
         </div>
 
         <!--this column is only visible in the 2 colum mode -->
@@ -472,13 +512,20 @@
                 {include file='1/main/statistics_tile.html'}
             {/block}
             
-             <!--Start contact tiles-->
-            <div class="contact_tiles">
+            <!--Start contact tiles-->
+            <!--<div class="contact_tiles">
                 <div class="contact_jukebox_button"><a href="#"> </a></div>
                 <div class="contact_chat_button"><a href="#"> </a></div>
                 <div class="contact_email_button"><a href="#"> </a></div>
                 <div class="contact_facebook_button"><a href="#"> </a></div>
-            </div>
+            </div>-->
+            
+            <!--Start "AL Mobile" tile-->
+            {block name=al_mobile}
+                <div class="contact_tiles">
+                    {include file='1/main/tile_al_mobile.html'}
+                </div>
+            {/block}
             
         </div>
 

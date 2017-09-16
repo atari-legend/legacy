@@ -15,7 +15,6 @@
 // This is the game info on the game detail page. This piece is always used as an include
 //****************************************************************************************
 *}
-
 <div class="standard_tile">
     <div class="help-tip">
         <p> 
@@ -456,6 +455,31 @@
                     </tr>
                 {/foreach}
             {/if}
+            {if isset($game_vs)}
+                {foreach from=$game_vs item=line name=game_vs}
+                    <tr> 
+                        <td width="30%" style="vertical-align:top;"> 
+                            {if $smarty.foreach.game_vs.index == 0}
+                                <span class="games_main_detail_info_right">Compare</span>
+                            {/if}
+                        </td>
+                        <td width="5%" style="vertical-align:top;">   
+                            {if $smarty.foreach.game_vs.index == 0}
+                                <span class="games_main_detail_info_left" style="text-align:center;">-</span> 
+                            {/if}
+                        </td>
+                        <td width="60%">
+                            {if isset($line.amiga_id) and $line.amiga_id != 0}
+                                <a href="http://www.lemonamiga.com/?game_id={$line.amiga_id}"><img src="../../includes/show_image.php?file={$style_dir2}images/Amiga.png&amp;resize=80,null,null,null" alt="Click to enlarge!" style="display:inline;margin-top:5px; border: 1px solid #666666; background: black;" class="game_screenshot_img"></a>
+                            {/if}
+                            {if isset($line.C64_id) and $line.C64_id != 0}
+                                <br>
+                                <a href="http://www.lemon64.com/?game_id={$line.C64_id}"><img src="../../includes/show_image.php?file={$style_dir2}images/c64.jpg&amp;resize=80,null,null,null" alt="Click to enlarge!" style="display:inline;margin-top:5px;border: 1px solid #666666; background: black;" class="game_screenshot_img"></a>
+                            {/if}
+                        </td>                                   
+                    </tr>
+                {/foreach}
+            {/if}           
         </table>
     </div>
     <div class="standard_tile_line"></div>

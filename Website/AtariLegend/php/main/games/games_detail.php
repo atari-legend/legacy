@@ -135,7 +135,7 @@ while ($game_author = $sql_gameauthors->fetch_array(MYSQLI_BOTH)) {
         $v_ind_image .= $game_author['ind_imgext'];
     } else {
         $v_ind_image = "none";
-    }
+    }     
     
     if(preg_match("/[a-z]/i", $game_author['ind_profile'])){
         $profile = $game_author['ind_profile'];
@@ -177,17 +177,20 @@ while ($game_author = $sql_gameauthors->fetch_array(MYSQLI_BOTH)) {
             $int_text = InsertALCode($int_text); // disabled this as it wrecked the design.
             $int_text = trim($int_text);
             $int_text = RemoveSmillies($int_text); 
-                     
-            $smarty->append('interviews',  
-                array( 'ind_id' => $game_author['game_author_id'],
-                       'ind_name' => $game_author['ind_name'],
-                       'ind_img' => $v_ind_image,
-                       'int_id' => $interview['interview_id'],
-                       'int_text' => $int_text,
-                       'int_date' => $interview_date,
-                       'int_user_id' => $interview['user_id'],
-                       'int_userid' => $interview['userid']
-                    ));
+               
+            if ( $v_ind_image != 'none' )
+            {
+                $smarty->append('interviews',  
+                    array( 'ind_id' => $game_author['game_author_id'],
+                           'ind_name' => $game_author['ind_name'],
+                           'ind_img' => $v_ind_image,
+                           'int_id' => $interview['interview_id'],
+                           'int_text' => $int_text,
+                           'int_date' => $interview_date,
+                           'int_user_id' => $interview['user_id'],
+                           'int_userid' => $interview['userid']
+                        ));
+            }
         }
     }
                   
@@ -580,6 +583,19 @@ while ($query_comment = $sql_comment->fetch_array(MYSQLI_BOTH))
             'game_fact' => $sql_games_facts['game_fact']
         ));
     }
+    
+//*********************************************************************************************
+// Get the amiga and C64 id's for the Lemon links
+//********************************************************************************************* 
+$sql_vs = $mysqli->query("SELECT amiga_id, C64_id FROM game_vs WHERE atari_id = '$game_id'") 
+		  or die("Error - Couldn't get the Lemon links");
+
+while ($query_vs = $sql_vs->fetch_array(MYSQLI_BOTH))
+{
+	$smarty->append('game_vs',
+	   		 array('amiga_id' => $query_vs['amiga_id'],
+			 	   'C64_id' => $query_vs['C64_id']));
+}
   
 $smarty->assign("game_id", $game_id);
 

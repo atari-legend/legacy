@@ -1455,7 +1455,26 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
             $subsection_name = $query_data['ind_name'];
         }
     }
+    
+    //  Everything we do for the BUG REPORT TYPE SECTION
+    if ($section == 'Bug type') {
+        // get the name of the type
+        $query_type = "SELECT bug_report_type FROM bug_report_type WHERE bug_report_type_id = '$section_id'";
+        $result = $mysqli->query($query_type) or die("getting type name failed");
+        $query_data   = $result->fetch_array(MYSQLI_BOTH);
+        $section_name = $query_data['bug_report_type'];
 
+        if ($subsection == 'Bug type') {
+            $subsection_name = $section_name;
+        }
+    }
+    
+    //  Everything we do for the BUG REPORT SECTION
+    if ($section == 'Bug') {
+        $subsection_name = ("Bug report ID " . $subsection_id);
+        $section_name    = ("Bug report ID " . $subsection_id);
+    }
+    
     $section_name    = $mysqli->real_escape_string($section_name);
     $subsection_name = $mysqli->real_escape_string($subsection_name);
 

@@ -30,11 +30,13 @@ include("../../common/tiles/hotlinks_tile.php");
 
 //Create the id's for dynamic positioning of the tiles
 $smarty->assign('date_quote_tile', 'datequote_position_front');
+$smarty->assign('tile_open_db', 'tile_open_db_front');
 $smarty->assign('did_you_know_tile', 'didyouknow_position_front');
 $smarty->assign('hotlinks_tile', 'hotlinks_position_front');
 $smarty->assign('screenstar_tile', 'screenstar_position_front');
 $smarty->assign('statistics_tile', 'statistics_position_front');
 $smarty->assign('who_is_it_tile', 'whoisit_position_front');
+$smarty->assign('class_tile', 'class_position_front');
 
 //if (isset($error))
 //{
