@@ -593,7 +593,16 @@
             });
         }); 
     </script> 
-    
+    <script type="text/javascript">
+        $(function() {    
+            $but_med = $('#file_upload_game_screenshots_medium');
+            
+            $("input:file[id=file_upload_medium]").change(function() {
+                document.getElementById('file_upload_game_screenshots_medium').value = 'file(s) selected';
+            });
+        }); 
+    </script> 
+
     <div id="main" class="main_container_games_details">
         <div class="content_box_games_details" id="column_left_games_details">
             <br>
@@ -636,12 +645,12 @@
             
             {if isset($boxscan)}
                 <div class="games_main_details_submisions_position_medium">
-                    {include file='1/main/games_detail_submission.html'}
+                    {include file='1/main/games_detail_submission_medium.html'}
                 </div>
             {else}
                 {if isset($similar) or isset($interview) or isset($facts)}
                     <div class="games_main_details_submisions_position_medium">
-                        {include file='1/main/games_detail_submission.html'}
+                        {include file='1/main/games_detail_submission_medium.html'}
                     </div>    
                 {/if}
             {/if}
@@ -657,49 +666,59 @@
                 <div class="standard_tile">
                     <h1>{$game_info.game_name|upper}</h1>
                     <div class="standard_tile_line"></div>
-                    <div id="jssor_1" class="games_main_detail_screenshot">   
-                        <div data-u="slides" class="games_main_detail_slides">
-                            {foreach from=$screenshots item=line name=screenshots}
-                            <div>
-                                <img data-u="image" src="{$line.screenshot_image}">
-                                <img data-u="thumb" src="{$line.screenshot_image}">
+                    {if isset($screenshots)}
+                        <div id="jssor_1" class="games_main_detail_screenshot">   
+                            <div data-u="slides" class="games_main_detail_slides">
+                                {foreach from=$screenshots item=line name=screenshots}
+                                <div>
+                                    <img data-u="image" src="{$line.screenshot_image}">
+                                    <img data-u="thumb" src="{$line.screenshot_image}">
+                                </div>
+                                {/foreach}                            
                             </div>
-                            {/foreach}                            
-                        </div>
-                        <!-- Thumbnail Navigator -->
-                        <div data-u="thumbnavigator" class="games_main_detail_thumbs" data-autocenter="2" data-scale-left="0.75">
-                            <div data-u="slides">
-                                <div data-u="prototype" class="p">                                    
-                                    <div data-u="thumbnailtemplate" class="t"></div>
+                            <!-- Thumbnail Navigator -->
+                            <div data-u="thumbnavigator" class="games_main_detail_thumbs" data-autocenter="2" data-scale-left="0.75">
+                                <div data-u="slides">
+                                    <div data-u="prototype" class="p">                                    
+                                        <div data-u="thumbnailtemplate" class="t"></div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        {if $nr_screenshots <= 20}
-                            <!-- Bullet Navigator -->
-                            <div data-u="navigator" class="games_main_detail_nav" data-scale="0.5">
-                                <div data-u="prototype" class="i">
-                                    <svg viewbox="0 0 16000 16000" style="position:absolute;top:0;left:0;width:100%;height:100%;">
-                                        <rect class="b" x="2200" y="2200" width="11600" height="11600"></rect>
-                                    </svg>
+                            {if $nr_screenshots <= 20}
+                                <!-- Bullet Navigator -->
+                                <div data-u="navigator" class="games_main_detail_nav" data-scale="0.5">
+                                    <div data-u="prototype" class="i">
+                                        <svg viewbox="0 0 16000 16000" style="position:absolute;top:0;left:0;width:100%;height:100%;">
+                                            <rect class="b" x="2200" y="2200" width="11600" height="11600"></rect>
+                                        </svg>
+                                    </div>
                                 </div>
+                            {/if}
+                            <!-- Arrow Navigator -->
+                            <div data-u="arrowleft" class="games_main_detail_arrow" id="games_main_detail_arrow_left" data-autocenter="2" data-scale="0.75" data-scale-left="1">                 
+                                <svg viewbox="0 0 16000 16000" style="position:absolute;top:0;left:0;width:100%;height:100%;">
+                                    <polyline class="a" points="11040,1920 4960,8000 11040,14080 "></polyline>
+                                </svg>
                             </div>
-                        {/if}
-                        <!-- Arrow Navigator -->
-                        <div data-u="arrowleft" class="games_main_detail_arrow" id="games_main_detail_arrow_left" data-autocenter="2" data-scale="0.75" data-scale-left="1">                 
-                            <svg viewbox="0 0 16000 16000" style="position:absolute;top:0;left:0;width:100%;height:100%;">
-                                <polyline class="a" points="11040,1920 4960,8000 11040,14080 "></polyline>
-                            </svg>
+                            <div data-u="arrowright" class="games_main_detail_arrow" id="games_main_detail_arrow_right" data-autocenter="2" data-scale="0.75" data-scale-right="1">                  
+                                <svg viewbox="0 0 16000 16000" style="position:absolute;top:0;left:0;width:100%;height:100%;">
+                                    <polyline class="a" points="4960,1920 11040,8000 4960,14080 "></polyline>
+                                </svg>
+                            </div>
                         </div>
-                        <div data-u="arrowright" class="games_main_detail_arrow" id="games_main_detail_arrow_right" data-autocenter="2" data-scale="0.75" data-scale-right="1">                  
-                            <svg viewbox="0 0 16000 16000" style="position:absolute;top:0;left:0;width:100%;height:100%;">
-                                <polyline class="a" points="4960,1920 11040,8000 4960,14080 "></polyline>
-                            </svg>
+                    {else}
+                        <div class="standard_tile_text">     
+                            <h6 style="text-align:center;">
+                                There are no screenshots in the database. You have any? Please use the submit tile to sent it to us. You can select more screenshots at once to upload.
+                            </h6>
                         </div>
-                    </div>
-                    <!-- #endregion Jssor Slider End -->
-                    <span class="games_main_detail_info_right"><span class="standard_tile_subtext"><b>{$nr_screenshots}</b> screenshots loaded</span></span>
-                    <span class="standard_tile_subtext" style="float:right;margin-right:20px;">Autoplay <a href="javascript:Play();" id="play_jssor1" >On</a>/<a id="pause_jssor1" href="javascript:Pause();">Off</a></span>
-                    <br><br>
+                    {/if}
+                    {if isset($screenshots)}
+                        <!-- #endregion Jssor Slider End -->
+                        <span class="games_main_detail_info_right"><span class="standard_tile_subtext"><b>{$nr_screenshots}</b> screenshots loaded</span></span>
+                        <span class="standard_tile_subtext" style="float:right;margin-right:20px;">Autoplay <a href="javascript:Play();" id="play_jssor1" >On</a>/<a id="pause_jssor1" href="javascript:Pause();">Off</a></span>
+                        <br><br>
+                    {/if}
                 </div>
             </div>
             <!--*********************-->
@@ -816,8 +835,7 @@
                 <div class="standard_tile">
                     <h1>BOXSCAN</h1>
                     <div class="standard_tile_line"></div>  
-                    {if isset($boxscan)}
-                        
+                    {if isset($boxscan)}                        
                         <div id="jssor_2" class="games_main_detail_box">
                             <!-- Loading Screen -->
                             <div data-u="slides" class="games_main_detail_slides_box">
@@ -945,9 +963,9 @@
                 {else}
                     <br>
                     <div class="games_main_details_submisions_position_medium">
-                        {include file='1/main/games_detail_submission.html'}
+                        {include file='1/main/games_detail_submission_medium.html'}
                     </div>
                 {/if}
             {/if}
-        </div>
+        </div>       
 {/block}

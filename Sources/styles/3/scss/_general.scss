@@ -387,6 +387,8 @@ img {display: block; }
     font-weight:bold;
 }
 
+#file_upload_medium{@extend #file_upload;}
+
 //*** checkbox css ****//
 .checkbox {
 	width: 100%;

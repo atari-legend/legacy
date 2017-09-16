@@ -436,6 +436,21 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH)) {
              $subsection_link = ("../individuals/individuals_edit.php" . '?ind_id=' . $log['sub_section_id']);
         }
     }
+    
+    //  the BUG REPORT TYPE SECTION
+    if ($log['section'] == 'Bug type') {
+        $section_link = ("../administration/bug_report_type_edit.php" . '?type_id=' . $log['section_id']);
+
+        if ($log['sub_section'] == 'Bug type') {
+            $subsection_link = ("../administration/bug_report_type_edit.php" . '?type_id=' . $log['section_id']);
+        }
+    }
+    
+    //  the BUG REPORT SECTION
+    if ($log['section'] == 'Bug') {
+        $section_link    = ("../administration/bug_report.php");
+        $subsection_link = ("../administration/bug_report.php");
+    }
   
     
     $smarty->append('log', array(

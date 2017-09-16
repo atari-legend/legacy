@@ -113,7 +113,7 @@ if ($action == "fact_delete") {
             unlink("$new_path");  
         }
                  
-        create_log_entry('Games', $game_id, 'facts', $game_id, 'Delete', $_SESSION['user_id']);
+        create_log_entry('Games', $game_id, 'Fact', $game_id, 'Delete', $_SESSION['user_id']);
 
         $sql = $mysqli->query("DELETE FROM game_fact WHERE game_fact_id = '$fact_id'") or die("couldn't delete game_fact quote");
    

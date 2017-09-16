@@ -385,6 +385,8 @@ a.standard_tile_link:focus {
     font-weight:bold;
 }
 
+#file_upload_medium{@extend #file_upload;}
+
 //*** checkbox css ****//
 .checkbox {
 	width: 100%;

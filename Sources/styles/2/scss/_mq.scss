@@ -118,6 +118,23 @@
 }
 
 //*----------------------------------------------------------
+//tile open db - front page
+//------------------------------------------------------------ */
+
+@media screen and (min-width: 1495px){
+    .tile_open_db_front {
+        float: left;
+        width: 94%;
+    }
+}
+
+@media screen and (max-width: 1494px){
+    .tile_open_db_front {
+        float: right;
+    }
+}
+
+//*----------------------------------------------------------
 //Who is it - front page
 //------------------------------------------------------------ */
 @media screen and (min-width: 800px){
@@ -188,6 +205,17 @@
 //------------------------------------------------------------
 @media screen and (min-width: 1495px) {
     .hotlinks_position_front {width: 94%; float: left; margin-top: 20px;}
+}
+
+//*----------------------------------------------------------
+//class tile - front page
+//------------------------------------------------------------ */
+@media screen and (min-width: 1495px){
+    .class_position_front {
+        width: 94%;
+        float: left;
+        margin-top: 20px;
+    }
 }
 
 //*----------------------------------------------------------
@@ -438,6 +466,134 @@
     #column_left_reviews_details  { width: 100%; float: left; margin: auto;  order:2;}
     #column_center_reviews_details { width: 100%; float: left; margin: auto; order:3;  }
     #column_right_reviews_details  { width: 100%; float: right; margin: auto; order:1;}
+}
+
+//*----------------------------------------------------------
+// Class of AL
+//------------------------------------------------------------ */
+@media only screen and (max-width: 1169px) {
+    .fa-birthday-cake{margin-left: 10%; margin-top: 5%;}
+    .cd-timeline-content .cd-date{text-align:center;display:block;float:none;}
+    .cd-icon{margin-top:3px;}
+    .cd-icon2{margin-top:8px;}
+}
+
+@media only screen and (min-width: 1170px) {
+  #cd-timeline {
+    margin-top: 3em;
+    margin-bottom: 3em;
+  }
+  #cd-timeline::before {
+    left: 50%;
+    margin-left: -2px;
+  }
+}
+
+@media only screen and (min-width: 1170px) {
+  .cd-timeline-block {
+    margin: 4em 0;
+  }
+  .cd-timeline-block:first-child {
+    margin-top: 0;
+  }
+  .cd-timeline-block:last-child {
+    margin-bottom: 0;
+  }
+}
+
+@media only screen and (min-width: 1170px) {
+  .cd-timeline-img {
+    width: 60px;
+    height: 60px;
+    left: 50%;
+    margin-left: -30px;
+    /* Force Hardware Acceleration in WebKit */
+    -webkit-transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+  }
+  .cssanimations .cd-timeline-img.is-hidden {
+    visibility: hidden;
+  }
+  .cssanimations .cd-timeline-img.bounce-in {
+    visibility: visible;
+    -webkit-animation: cd-bounce-1 0.6s;
+    -moz-animation: cd-bounce-1 0.6s;
+    animation: cd-bounce-1 0.6s;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .cd-timeline-content h2 {
+    font-size: 20px;
+    font-size: 1.25rem;
+  }
+  .cd-timeline-content p {
+    font-size: 16px;
+    font-size: 1rem;
+  }
+  .cd-timeline-content .cd-read-more, .cd-timeline-content .cd-date {
+    font-size: 14px;
+    font-size: 0.875rem;
+  }
+}
+@media only screen and (min-width: 1170px) {
+  .cd-timeline-content {
+    margin-left: 0;
+    width: 37%;
+  }
+  .cd-timeline-content::before {
+    top: 24px;
+    left: 100%;
+    border-color: transparent;
+    border-left-color: white;
+  }
+  .cd-timeline-content .cd-read-more {
+    float: left;
+  }
+  .cd-timeline-content .cd-date {
+    position: absolute;
+    width: 100%;
+    left: 140%;
+    top: 6px;
+    font-size: 16px;
+    font-size: 1rem;
+  }
+  .cd-timeline-block:nth-child(even) .cd-timeline-content {
+    float: right;
+  }
+  .cd-timeline-block:nth-child(even) .cd-timeline-content::before {
+    top: 24px;
+    left: auto;
+    right: 100%;
+    border-color: transparent;
+    border-right-color: white;
+  }
+  .cd-timeline-block:nth-child(even) .cd-timeline-content .cd-read-more {
+    float: right;
+  }
+  .cd-timeline-block:nth-child(even) .cd-timeline-content .cd-date {
+    left: auto;
+    right: 140%;
+    text-align: right;
+  }
+  .cssanimations .cd-timeline-content.is-hidden {
+    visibility: hidden;
+  }
+  .cssanimations .cd-timeline-content.bounce-in {
+    visibility: visible;
+    -webkit-animation: cd-bounce-2 0.6s;
+    -moz-animation: cd-bounce-2 0.6s;
+    animation: cd-bounce-2 0.6s;
+  }
+}
+
+@media only screen and (min-width: 1170px) {
+  /* inverse bounce effect on even content blocks */
+  .cssanimations .cd-timeline-block:nth-child(even) .cd-timeline-content.bounce-in {
+    -webkit-animation: cd-bounce-2-inverse 0.6s;
+    -moz-animation: cd-bounce-2-inverse 0.6s;
+    animation: cd-bounce-2-inverse 0.6s;
+  }
 }
 
 //*----------------------------------------------------------

@@ -20,6 +20,7 @@ include("../../config/common.php");
 if (isset($news_headline) and $news_headline != 'Headline' and $news_headline != '' and isset($textfield) and $textfield != 'News item' and $textfield != '' )
 {
     $timestamp = time();
+    $textfield = $mysqli->real_escape_string($textfield);
     $mysqli->query("INSERT INTO news_submission (news_headline, news_text, user_id, news_date ) VALUES ('$news_headline', '$textfield', '$_SESSION[user_id]', '$timestamp')") or die ("Inserting the news submission failed");
     
     $new_news_id = $mysqli->insert_id;
