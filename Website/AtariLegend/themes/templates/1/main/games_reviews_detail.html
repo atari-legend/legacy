@@ -398,7 +398,9 @@
             <!--END Credits tile -->
             <!--*****************************-->   
             
-            {if isset($reviews_author)}  
+            {if isset($reviews_author)} 
+                 <br>
+                {include file='1/main/tile_bug_report.html'}
             {else}            
             <!--*************************-->
             <!--START review comments tile -->
@@ -668,7 +670,10 @@
             </div>           
             <!--***********************-->
             <!--END Game comments tile -->
-            <!--***********************-->    
+            <!--***********************-->   
+            {else}
+                <br>
+                {include file='1/main/tile_bug_report.html'}
             {/if}
             
             <!--*****************************-->

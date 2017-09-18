@@ -393,8 +393,8 @@
                 <tr>
                     <td>
                         {if $interview.individual_profile == 'none'}                
-                            <div class="games_main_detail_comments_log_on">
-                                There is currently no profile availabe in our DB
+                            <div class="standard_tile_text">     
+                                <h6 style="text-align:center;">There is currently no profile availabe in our DB</h6>
                             </div>                   
                         {else}
                             <div class="standard_tile_background" id="games_detail_review_bg">
@@ -442,9 +442,11 @@
                         {else}
                             <tr>
                                 <td width="100%">
-                                    <div class="games_main_detail_comments_log_on">
-                                        There are currently no credits for this person in our DB
-                                    </div>
+                                    <div class="standard_tile_text">     
+                                        <h6 style="text-align:center;">
+                                            There are currently no credits for this person in our DB
+                                        </h6>
+                                   </div>
                                 </td>
                             </tr>
                         {/if}
@@ -481,7 +483,9 @@
                             </div>
                             <br>
                             <br>	
-                            {$interview.interview_text}
+                            <div id="interview_main_text">
+                                {$interview.interview_text}
+                            </div>
                         </div>
                         <div class="games_detail_review_child" id="games_detail_review_screenshots">
                             <div class="games_detail_review_screenshot_space">
@@ -494,7 +498,7 @@
                                     <a href="../../includes/show_image.php?file={$line.screenshot}&amp;resize=410,null,null,null" data-lightbox="image-1" data-title="{$line.comment}">
                                         <img src="../../includes/show_image.php?file={$line.screenshot}&amp;resize=170,null,null,null" alt="Click to enlarge!" style="display:inline;" class="game_screenshot_img"></a>
                                     <br>
-                                    <span class="standard_tile_subtext" style="font-weight: bold;">{$line.comment}</b>
+                                    <span class="standard_tile_subtext" style="font-weight: bold;">{$line.comment}</span>
                                     <br>
                                     <br>
                                     <br>

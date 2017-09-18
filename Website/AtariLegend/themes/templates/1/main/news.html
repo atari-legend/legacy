@@ -51,7 +51,9 @@
                         </div>
                     {/if}
                 </div>    
-            </div>        
+            </div>
+            <br>
+            {include file='1/main/tile_class_of_al.html'}
         </div>
         <div class="content_box_cpanel" id="column_center_cpanel">
             <br>
@@ -62,10 +64,10 @@
                 {foreach from=$news item=line}
                     <tr>
                         <td class="news_left_head">
-                            <h6 style="text-align:left;margin-left:10px;margin-top:3px;margin-bottom:3px;">{$line.news_headline}</h4>
+                            <h6 style="text-align:left;margin-left:10px;margin-top:3px;margin-bottom:3px;">{$line.news_headline}</h6>
                         </td>
                         <td class="news_right_head">
-                            <h6 style="text-align:right;margin-right:10px;margin-top:3px;margin-bottom:3px;">{$line.news_date} by <a href="../../admin/user/user_detail.php?user_id_selected={$line.user_id}" class="latest_comments_link">{$line.user_name}</a></h4>
+                            <h6 style="text-align:right;margin-right:10px;margin-top:3px;margin-bottom:3px;">{$line.news_date} by <a href="../../admin/user/user_detail.php?user_id_selected={$line.user_id}" class="latest_comments_link">{$line.user_name}</a></h6>
                         </td>
                     </tr>
                     <tr>

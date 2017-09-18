@@ -19,6 +19,18 @@
     color: #008b8b;
 }
 
+#interview_main_text a:link{
+    color: #008b8b;
+}
+
+#interview_main_text a:visited{
+    color: #008b8b;
+}
+
+#interview_main_text a:hover{
+    color: white;
+}
+
 .interview_profile_text{
     @extend .standard_tile_explanation;
     margin-bottom:0px;
