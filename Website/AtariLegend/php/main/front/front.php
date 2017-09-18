@@ -37,6 +37,8 @@ $smarty->assign('screenstar_tile', 'screenstar_position_front');
 $smarty->assign('statistics_tile', 'statistics_position_front');
 $smarty->assign('who_is_it_tile', 'whoisit_position_front');
 $smarty->assign('class_tile', 'class_position_front');
+$smarty->assign('almobile_tile', 'almobile_tile_front');
+$smarty->assign('tile_social_corner', 'social_corner_position_front');
 
 //if (isset($error))
 //{
@@ -67,6 +69,13 @@ if (isset($action) and $action == 'new_pwd')
 {
     $smarty->assign("q", $q);
     $smarty->assign("action", 'new_pwd');
+}
+
+if (isset($action) and $action == 'construction')
+{
+    $_SESSION['edit_message'] = 'This section will be available soon - currently under construction';
+    header('Location: ' . $_SERVER['HTTP_REFERER']);
+    die('');
 }
 
 //We are using this var to have the frontpage animation happen only once we visit AL

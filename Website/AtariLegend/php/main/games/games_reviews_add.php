@@ -25,6 +25,7 @@ $user_id_contrib = $_SESSION['user_id'];
 include("../../common/tiles/user_contribution.php");
 
 include("../../common/tiles/latest_reviews_tile.php");
+include("../../common/tiles/tile_bug_report.php");
 
 //***********************************************************************************
 //get the name of the game

@@ -271,8 +271,8 @@
                                         <button class="sidebutton" id="skin_side">SKIN</button>
                                         <ul class="sub-menu">
                                             <li><a href="#" rel="1" class="sidebutton_cpanel">LEGACY</a></li>
-                                            <li><a href="#" rel="2" class="sidebutton_cpanel">TOS 2.07</a></li>
-                                            <li><a href="#" rel="3" class="sidebutton_cpanel">PICASSO</a></li>
+                                            <!--<li><a href="#" rel="2" class="sidebutton_cpanel">TOS 2.07</a></li>
+                                            <li><a href="#" rel="3" class="sidebutton_cpanel">PICASSO</a></li>-->
                                         </ul>
                                     </li>
                                   </ul>
@@ -340,7 +340,8 @@
                                    <span class="log_on_text"><a href="../../main/front/front.php?" class="standard_tile_link_black"><i class="fa fa-desktop" aria-hidden="true"></i>&nbsp; Main site</a></span>
                                    <br>
                                    <span class="log_on_text"><a href="../../admin/user/user_detail.php?user_id_selected={$user_session.user_id}" class="standard_tile_link_black"><i class="fa fa-user-circle-o" aria-hidden="true"></i>&nbsp; User Profile</a></span>
-                                   <br><br>                               
+                                   <br><br>   
+                                   <input type="hidden" name="action" value="cpanel">
                                    <input type="Submit" value="Sign out" class="topbutton_cpanel_small">
                                </fieldset>
                                </form>

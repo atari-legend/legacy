@@ -24,7 +24,7 @@ include("../../admin/games/quick_search_games.php");
 
 //load the tiles
 include("../../common/tiles/latest_comments_tile.php");
-include("../../common/tiles/changes_per_month_tile.php");
+include("../../common/tiles/screenstar.php");
 
 // get the game_years from the game_year table
 $sql_year = $mysqli->query("SELECT distinct game_year from game_year order by game_year") 

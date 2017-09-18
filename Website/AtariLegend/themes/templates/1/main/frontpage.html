@@ -23,6 +23,15 @@
 *}
 
 {block name=javascript_slider}
+    <script type="text/javascript" src="{$template_dir}includes/js/lightbox.min.js"></script>
+    <link type="text/css" href="{$style_dir}css/lightbox.css" hreflang="en" rel="stylesheet">
+    
+    <script>
+        lightbox.option({        
+          'showImageNumberLabel': false
+        })
+    </script>
+    
     <script type="text/javascript" src="{$template_dir}includes/js/jssor.slider.mini.js"></script>  <!-- This script is needed for the animation in the welcome tile -->
     {if isset($smarty_action) and $smarty_action == 'first_time'}<script type="text/javascript" src="{$template_dir}includes/js/animsition.min.js"></script>{/if}<!-- fade up script needed for the intro page -->
     <script type="text/javascript" src="{$template_dir}includes/js/jquery.dotdotdot.js" type="text/javascript"></script> <!--this script is used for the elipsis (...) effect of the latest news / reviews tile -->
@@ -347,6 +356,11 @@
             {block name=statistics_tile}
                 {include file='1/main/statistics_tile.html'}
             {/block}
+            
+            <!--Start "Social Corner" tile-->
+            {block name=social_corner_tile}
+                {include file='1/main/tile_social_corner.html'}
+            {/block}
         </div>
 
         <!--this column is only visible with 3 columns-->
@@ -463,6 +477,11 @@
             {block name=class_tile}
                 {include file='1/main/tile_class_of_al.html'}
             {/block}
+            
+            {block name=social_corner_tile}
+                {include file='1/main/tile_social_corner.html'}
+            {/block}
+            
         </div>
 
         <!--this column is only visible in the 3 colum mode and 1 column mode-->
@@ -492,6 +511,7 @@
                     {include file='1/main/tile_al_mobile.html'}
                 </div>
             {/block}
+           
         </div>
 
         <!--this column is only visible in the 2 colum mode -->

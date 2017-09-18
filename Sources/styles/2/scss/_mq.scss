@@ -219,6 +219,17 @@
 }
 
 //*----------------------------------------------------------
+//Social Corner tile - front page
+//------------------------------------------------------------ */
+@media screen and (min-width: 1495px){
+    .social_corner_position_front {
+        float: left;
+        width: 100%;
+        margin-top: 20px;
+    }
+}
+
+//*----------------------------------------------------------
 //contact tiles - front page
 //------------------------------------------------------------ */
 @media screen and (min-width: 1495px){

@@ -18,6 +18,7 @@ include("../../config/common.php");
 
 //load the tiles
 include("../../common/tiles/latest_reviews_tile.php");
+include("../../common/tiles/tile_bug_report.php");
 
 //***********************************************************************************
 //Let's get all the review and author data
