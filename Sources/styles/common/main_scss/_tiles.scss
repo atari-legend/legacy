@@ -366,14 +366,14 @@ figure.effect-bubba:hover p {
 /*****  Latest comments  *****/
 /*------------------------***/
 @if $skin-name == legacy {
-    .latest_comments_text{font-size: 11pt;color: #fff;}   
+    .latest_comments_text{font-size: 11pt;color: #fff; min-width:95%;}   
     .latest_comments_icons{color: #bcbdbd;}
     .latest_comments_link{
         @extent .standard_tile_link;
         color: #bcbdbd;}
     .latest_comments_link:hover { color: #01b5b5; }
 }@elseif $skin-name == tos {  
-    .latest_comments_text{font-size: 16px;color: #3c3c3c;}
+    .latest_comments_text{font-size: 16px;color: #3c3c3c; min-width:95%;}
     .latest_comments_icons{color: #3c3c3c;}
     .latest_comments_link{
         @extent .standard_tile_link;
@@ -383,7 +383,7 @@ figure.effect-bubba:hover p {
         text-shadow: -1px 1px 8px #666, 1px -1px 8px #515151;
         outline: 0 none;}
 }@elseif $skin-name == picasso {
-    .latest_comments_text{font-size: 12pt;color: #000;} 
+    .latest_comments_text{font-size: 12pt;color: #000; min-width:95%;} 
     .latest_comments_icons{color: #161c71;}
     .latest_comments_textarea{background:#eeeeee;color:black;}
     .latest_comments_link{

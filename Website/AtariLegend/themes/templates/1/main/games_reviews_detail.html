@@ -460,7 +460,7 @@
                                             </span>
                                             <span class="standard_tile_subtext" style="font-weight:bold;float:right;display:inline;margin-left:5px;margin-right:5px;margin-top:15px;">
                                                 {if isset($user_session)}
-                                                    <span style="font-weight:bold;float:left;margin-left:5px;margin-bottom:15px;">
+                                                    <span style="font-weight:bold;float:left;margin-left:5px;">
                                                     {if $user_session.user_id == $line.user_id}
                                                         <a style="cursor: pointer;" onClick="CommentEditable({$line.comment_id},{$line.user_id})" class="latest_comments_link"><i class="fa fa-pencil" id="comment_edit_icon{$line.comment_id}" aria-hidden="true"  title="Click to edit comment"></i></a>
                                                         <a style="cursor: pointer;" onClick="SaveEditable({$line.comment_id},{$line.user_id},{$review.review_id})" class="latest_comments_link"><i class="fa fa-floppy-o" id="comment_save_icon{$line.comment_id}" aria-hidden="true" title="Click to save change" style="display:none;"></i></a>
