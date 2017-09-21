@@ -25,7 +25,7 @@ $test_condition = "SELECT * FROM information_schema.tables
 WHERE table_schema = '$db_databasename' AND table_name = 'ind_menu_prod' LIMIT 1";
 
 // Database change
-$database_update_sql = "ALTER TABLE `ind_menu_prod` CHANGE `ind_menu_prod_id` `ind_menu_prod_id` INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT, CHANGE `ind_id` `ind_id` INT(11) NULL DEFAULT NULL, CHANGE `menu_sets_id` `menu_sets_id` INT(11) NULL DEFAULT NULL; ";
+$database_update_sql = "ALTER TABLE `ind_menu_prod` CHANGE `ind_menu_prod_id` `ind_menu_prod_id` INT(11) NOT NULL AUTO_INCREMENT, CHANGE `ind_id` `ind_id` INT(11) NULL DEFAULT NULL, CHANGE `menu_sets_id` `menu_sets_id` INT(11) NULL DEFAULT NULL; ";
 
 // If the update should auto execute without user interaction set to "yes".
 $database_autoexecute = "yes";

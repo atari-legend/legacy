@@ -622,7 +622,7 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
 
     //  Everything we do for the Trivia SECTION
     if ($section == 'Trivia') {
-        if ($subsection == 'DYK' or $subsection == 'Quote') {
+        if ($subsection == 'DYK' or $subsection == 'Quote' or $subsection == 'Spotlight') {
             $subsection_name = ("Trivia ID " . $subsection_id);
             $section_name    = ("Trivia ID " . $subsection_id);
         }
