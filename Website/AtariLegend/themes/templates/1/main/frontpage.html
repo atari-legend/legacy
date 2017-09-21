@@ -250,11 +250,16 @@
                 {include file='1/main/tile_class_of_al.html'}
             {/block}
             
+            <!--Start "Social Corner" tile-->
+            {block name=social_corner_tile}
+                {include file='1/main/tile_social_corner.html'}
+            {/block}
+            
              <!--Start open db tile-->
             {block name=date_quote_tile}
                 {include file='1/main/tile_open_db.html'}
             {/block}
-
+            
             <!--Start "hotlinks" tile
             {block name=hotlinks_tile}
                 {include file='1/main/hotlinks_tile.html'}
@@ -357,10 +362,15 @@
                 {include file='1/main/statistics_tile.html'}
             {/block}
             
-            <!--Start "Social Corner" tile-->
+            <!--Start spotlight tile-->
+            {block name=spotlight_tile}
+                {include file='1/main/spotlight_tile.html'}
+            {/block}
+            
+            <!--Start "Social Corner" tile
             {block name=social_corner_tile}
                 {include file='1/main/tile_social_corner.html'}
-            {/block}
+            {/block}-->
         </div>
 
         <!--this column is only visible with 3 columns-->
@@ -402,7 +412,7 @@
             <!--Start date quote tile
             {block name=date_quote_tile}
                 {include file='1/main/date_quote_tile.html'}
-            {/block}-->
+            {/block}-->       
             
              <!--Start open db tile-->
             {block name=date_quote_tile}
@@ -452,6 +462,7 @@
             {block name=date_quote_tile}
                 {include file='1/main/tile_open_db.html'}
             {/block}
+            
         </div>
         
         <!--this column is only visible in the 3 colum mode and 1 column mode-->
@@ -478,9 +489,14 @@
                 {include file='1/main/tile_class_of_al.html'}
             {/block}
             
-            {block name=social_corner_tile}
-                {include file='1/main/tile_social_corner.html'}
+            <!--Start spotlight tile-->
+            {block name=spotlight_tile}
+                {include file='1/main/spotlight_tile.html'}
             {/block}
+            
+            <!--{block name=social_corner_tile}
+                {include file='1/main/tile_social_corner.html'}
+            {/block}-->
             
         </div>
 
@@ -511,7 +527,11 @@
                     {include file='1/main/tile_al_mobile.html'}
                 </div>
             {/block}
-           
+            
+            {block name=social_corner_tile}
+                {include file='1/main/tile_social_corner.html'}
+            {/block}
+                       
         </div>
 
         <!--this column is only visible in the 2 colum mode -->
@@ -525,6 +545,10 @@
             <!--Start "Did you know" tile-->
             {block name=did_you_know_tile}
                 {include file='1/main/did_you_know_tile.html'}
+            {/block}
+            
+            {block name=social_corner_tile}
+                {include file='1/main/tile_social_corner.html'}
             {/block}
 
             <!--Start "statistics" tile-->

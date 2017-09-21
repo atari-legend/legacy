@@ -239,7 +239,7 @@ function login_check($mysqli) {
                     if ($login_check == $login_string) {
                         // Logged In!!!!
                         // update last visit
-                        $now = time();
+                        $now = time();                       
                         if ($update_stmt = $mysqli->prepare("UPDATE users SET last_visit=? WHERE user_id=?")) {
                             $update_stmt->bind_param('ss', $now, $user_id);
                             // Execute the prepared query.

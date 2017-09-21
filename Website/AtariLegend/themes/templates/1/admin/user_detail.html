@@ -60,6 +60,8 @@ function user_stats()
 <script type='text/JavaScript' src="{$template_dir}includes/js/sha512.js"></script> <!-- log on security script -->
 <script type='text/JavaScript' src="{$template_dir}includes/js/md5.js"></script>  <!-- log on security script -->
 <script type='text/JavaScript' src="{$template_dir}includes/js/forms.js"></script> <!-- log on security script -->
+<script type="text/javascript" src="{$template_dir}includes/js/lightbox.min.js"></script>
+<link type="text/css" href="{$style_dir}css/lightbox.css" hreflang="en" rel="stylesheet">
 {/block}
 
 {block name=main_tile}
@@ -180,7 +182,9 @@ function user_stats()
                             <form action="../user/db_user.php?action=delete_avatar&amp;user_id_selected={$users.user_id}" method="post" name="delete_avatar">
                             Delete Image?
                             <div>
-                                <br><img src="../../includes/show_image.php?file={$users.image}&amp;resize=160,null,null,null" alt="Avatar" class="user_stats_img" id="user_details_img_dark">
+                                <a href="../../includes/show_image.php?file={$users.image}" data-lightbox="image-1">
+                                    <br><img src="../../includes/show_image.php?file={$users.image}&amp;resize=160,null,null,null" alt="Avatar" class="user_stats_img" id="user_details_img_dark">
+                                </a>
                             </div>
                             <br>
                             <input type="hidden" name="user_id_selected" value="{$users.user_id}">

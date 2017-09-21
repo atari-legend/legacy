@@ -191,9 +191,20 @@
 @media screen and (min-width: 1495px){
     .social_corner_position_front {
         float: left;
+        width: 94%;
+    }
+}
+
+//*----------------------------------------------------------
+//spotlight tile - front page
+//------------------------------------------------------------ */
+@media screen and (min-width: 1495px){
+    .spotlight_position_front { 
+        float: left;
         width: 100%;
     }
 }
+
 
 
 //*----------------------------------------------------------

@@ -27,6 +27,7 @@ include("../../common/tiles/who_is_it_tile.php");
 include("../../common/tiles/screenstar.php");
 include("../../common/tiles/tile_stats.php");
 include("../../common/tiles/hotlinks_tile.php");
+include("../../common/tiles/spotlight_tile.php");
 
 //Create the id's for dynamic positioning of the tiles
 $smarty->assign('date_quote_tile', 'datequote_position_front');
@@ -39,6 +40,7 @@ $smarty->assign('who_is_it_tile', 'whoisit_position_front');
 $smarty->assign('class_tile', 'class_position_front');
 $smarty->assign('almobile_tile', 'almobile_tile_front');
 $smarty->assign('tile_social_corner', 'social_corner_position_front');
+$smarty->assign('spotlight_tile', 'spotlight_position_front');
 
 //if (isset($error))
 //{

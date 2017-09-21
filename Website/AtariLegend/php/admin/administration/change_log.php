@@ -150,6 +150,11 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH)) {
             $section_link    = ("../trivia/manage_trivia_quotes.php");
             $subsection_link = ("../trivia/manage_trivia_quotes.php");
         }
+        
+        if ($log['sub_section'] == 'Spotlight') {
+            $section_link    = ("../trivia/spotlight.php");
+            $subsection_link = ("../trivia/spotlight.php");
+        }
     }
 
     //  the USER SECTION

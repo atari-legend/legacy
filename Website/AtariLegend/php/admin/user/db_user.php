@@ -62,12 +62,14 @@ if (isset($action) and $action == 'avatar_upload') {
             $imginfo = getimagesize("$user_avatar_save_path$user_id_selected.$ext") or die("getimagesize not working");
             $width  = $imginfo[0];
             $height = $imginfo[1];
+            
+             $_SESSION['image'] = $ext;
 
-            if ($width < 101 and $height < 101) {
+            if ($width < 601 and $height < 601) {
                 $_SESSION['edit_message'] = "Avatar added";
                 create_log_entry('Users', $user_id_selected, 'Avatar', $user_id_selected, 'Insert', $_SESSION['user_id']);
             } else {
-                $_SESSION['edit_message'] = "Upload failed due to not confirming to specs - width and height must be 100px wide max";
+                $_SESSION['edit_message'] = "Upload failed due to not confirming to specs - width and height must be 600px max";
                 $mysqli->query("UPDATE users SET avatar_ext='' WHERE user_id='$user_id_selected'");
                 unlink("$user_avatar_save_path$user_id_selected.$ext");
             }
@@ -89,6 +91,7 @@ if (isset($action) and $action == "delete_avatar") {
     $mysqli->query("UPDATE users SET avatar_ext='' WHERE user_id='$user_id_selected'");
     $_SESSION['edit_message'] = "Avatar deleted";
     unlink("$user_avatar_save_path$user_id_selected.$avatar_ext");
+    $_SESSION['image'] = '';
 
     create_log_entry('Users', $user_id_selected, 'Avatar', $user_id_selected, 'Delete', $_SESSION['user_id']);
 }
