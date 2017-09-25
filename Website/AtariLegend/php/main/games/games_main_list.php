@@ -594,6 +594,10 @@ if (isset($action) and $action == "search") {
                 $game_aka_name_sql = $mysqli->query($game_aka_name_query);
                 $rows2 = $game_aka_name_sql->num_rows; 
             }
+            else
+            {
+                $rows2 = 0;
+            }
             
             if ($rows > 0 OR $rows2 > 0) {
                 if (!empty($gamesearch)) {

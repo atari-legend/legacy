@@ -35,7 +35,7 @@ The main bug report type page
 					<form action="../administration/bug_report_type_edit.php" method="post" name="ind_edit" id="ind_edit">
 						<select name="type_id" id="quick_search_pub_select">
 							<option value="-">-</option>
-							{foreach from=$bug_report_type item=line}
+							{foreach from=$bug_report_types item=line}
 								<option value="{$line.bug_report_type_id}">{$line.bug_report_type}</option>
 							{/foreach}	
 						</select>
