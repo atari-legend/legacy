@@ -20,6 +20,7 @@ include("../../config/common.php");
 include("../../common/tiles/screenstar.php");
 include("../../common/tiles/did_you_know_tile.php");
 include("../../common/tiles/latest_comments_tile.php");
+include("../../common/tiles/tile_bug_report.php");
 
 //Send all smarty variables to the templates
 if (isset ($action) and $action == 'andreas')

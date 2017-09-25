@@ -66,6 +66,7 @@ if (isset($action) and $action == 'add_review') {
 
             $screenid = $screenrow[2];
             $comment  = $inputfield[$i];
+            $comment = $mysqli->real_escape_string($comment);
 
             $sdbquery = $mysqli->query("INSERT INTO screenshot_review (review_id, screenshot_id) VALUES ('$reviewid', '$screenid')") or die("Couldn't insert into screenshot_review");
 

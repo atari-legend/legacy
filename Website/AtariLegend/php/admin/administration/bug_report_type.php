@@ -26,9 +26,9 @@ include("../../admin/games/quick_search_games.php");
 //get all the bug report types
 $result_bug_report_type = $mysqli->query("SELECT * FROM bug_report_type") or die ("problem getting bug report types");
 
-$rows = $result_bug_report_type->num_rows;
 while ($row = $result_bug_report_type->fetch_array(MYSQLI_BOTH)) {
-    $smarty->append('bug_report_type', array(
+
+    $smarty->append('bug_report_types', array(
         'bug_report_type_id' => $row['bug_report_type_id'],
         'bug_report_type' => $row['bug_report_type']
     ));
