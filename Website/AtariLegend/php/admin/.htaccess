@@ -1,0 +1,4 @@
+Options +FollowSymlinks -MultiViews -Indexes
+RewriteEngine On
+RewriteBase /index.php
+
