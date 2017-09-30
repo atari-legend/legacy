@@ -23,6 +23,9 @@ include("../../config/common.php");
 include("../../admin/games/quick_search_games.php");
 include("../../config/admin.php");
 
+$user_id_contrib = $user_id_selected;
+include("../../common/tiles/user_contribution.php");
+
 //Lets get all the data of the selected user
 $sql_users = $mysqli->query("SELECT * FROM users
                               WHERE user_id = $user_id_selected") or die("Couldn't query users Database");
@@ -51,12 +54,12 @@ while ($query_users = $sql_users->fetch_array(MYSQLI_BOTH)) {
         'user_email' => $query_users['email'],
         'user_permission' => $query_users['permission'],
         'user_website' => $query_users['user_website'],
-        'user_icq' => $query_users['user_icq'],
-        'user_msnm' => $query_users['user_msnm'],
+        'user_fb' => $query_users['user_fb'],
+        'user_twitter' => $query_users['user_twitter'],
         'avatar_ext' => $query_users['avatar_ext'],
         'image' => "$user_avatar_path$query_users[user_id].$query_users[avatar_ext]",
         'inactive' => $query_users['inactive'],
-        'user_aim' => $query_users['user_aim'],
+        'user_af' => $query_users['user_af'],
         'last_visit' => $last_visit,
         'join_date' => $join_date
     ));

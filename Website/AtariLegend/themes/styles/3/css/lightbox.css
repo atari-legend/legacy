@@ -167,7 +167,7 @@ body:after {
 }
 
 .lb-data .lb-details {
-  width: 85%;
+  width: 100%;
   float: left;
   text-align: left;
   line-height: 1.1em;
@@ -177,6 +177,7 @@ body:after {
   font-size: 13px;
   font-weight: bold;
   line-height: 1em;
+  color:white;
 }
 
 .lb-data .lb-number {

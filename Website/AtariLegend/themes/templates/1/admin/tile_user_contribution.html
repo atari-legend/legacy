@@ -1,0 +1,68 @@
+{*
+/***************************************************************************
+*                                tile_user_contribution.html
+*                            -----------------------------------
+*   begin                : Monday, May 29, 2017
+*   copyright            : (C) 2017 Atari Legend
+*   email                : martens_maarten@hotmail.com
+*   actual update        : Creation of file
+*
+*   Id: tile_user_contribution.html,v 0.1 2017/05/29 20:09 ST Graveyard
+*
+***************************************************************************/
+
+//****************************************************************************************
+// This is a small user contrib tile
+//****************************************************************************************
+*}
+
+<script type="text/javascript" src="{$template_dir}includes/js/Chart.js"></script> <!-- chart creation -->
+<script><!--Load the chart-->
+    window.onload = function () {
+        var data_cl_bar = {$change_log_data|escape:'javascript'};
+        var data_cl_labels = {$change_log_label};
+        var ctx_change_bar = document.getElementById('changelog_bar').getContext("2d");
+        var bg_cl = {$change_log_bg};
+        var border_width_cl = "1";
+        var border_cl = "#000000";
+        
+        var myBarChart = new Chart(ctx_change_bar, {
+            responsive: true,
+            type: 'bar',
+            data: {
+                labels: data_cl_labels,
+                datasets: [
+                    {
+                        label: "# of contributions per section",
+                        backgroundColor: bg_cl,
+                        borderColor: border_cl,
+                        borderWidth: border_width_cl,
+                        data: data_cl_bar,
+                    }
+                ]
+            },
+            options: {
+            legend: {
+                display: false,
+
+                }
+            }
+        })
+};
+</script>
+
+<div class="standard_tile">
+	<h1>USER STATS</h1>
+		<div class="standard_tile_line"></div>
+		<div class="standard_list_entry">
+			<div class="standard_table_center">
+                <br>This chart represents the nr of changes made to the DB per section by the selected user starting from 2017.
+            </div>
+			<div class="standard_tile_text">   
+                 <div class="line_changelog" style="width:98%;margin-left:auto;margin-right:auto;">
+                    <canvas id="changelog_bar"></canvas>
+                </div>
+			</div>
+		</div>
+	<div class="standard_tile_line"></div>
+</div>

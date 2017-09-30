@@ -26,6 +26,7 @@
 //load all common functions
 include("../../config/common.php");
 include("../../config/admin.php");
+include("../../config/admin_rights.php");
 
 if (isset($action) and $action == 'add_review') {
     // first we have to convert the date vars into a time stamp to be inserted to review_date
@@ -65,6 +66,7 @@ if (isset($action) and $action == 'add_review') {
 
             $screenid = $screenrow[2];
             $comment  = $inputfield[$i];
+            $comment = $mysqli->real_escape_string($comment);
 
             $sdbquery = $mysqli->query("INSERT INTO screenshot_review (review_id, screenshot_id) VALUES ('$reviewid', '$screenid')") or die("Couldn't insert into screenshot_review");
 

@@ -126,11 +126,11 @@ if ( isset($action) and $action == 'quick_search_users' )
     //echo $sql_query;
 
     $sql_users = $mysqli->query($sql_query) or die("Couldn't query users Database");
-
+    $nr_users = 0;
     while ($query_users = $sql_users->fetch_array(MYSQLI_BOTH)) {
-        if (empty($nr_users)) {
-            $nr_users = '';
-        }
+        //if (empty($nr_users)) {
+        //    $nr_users = '';
+        //}
 
         $nr_users++;
         $email = trim($query_users['email']);
@@ -153,10 +153,10 @@ if ( isset($action) and $action == 'quick_search_users' )
             'join_date' => $join_date,
             'last_visit' => $last_visit,
             'email' => $email
-        ));
-
-        $smarty->assign('nr_users', $nr_users);
+        ));   
     }
+    
+    $smarty->assign('nr_users', $nr_users);
 
     $time_elapsed_secs = microtime(true) - $start;
     $smarty->assign("query_time", $time_elapsed_secs);
@@ -185,11 +185,11 @@ if ( isset($action) and $action == 'quick_search_users' )
 else
 {
     $sql_users = $mysqli->query("SELECT * FROM users WHERE userid REGEXP '^[0-9].*' ORDER BY users.userid") or die("Couldn't query users Database");
-
+    $nr_users = 0;
     while ($query_users = $sql_users->fetch_array(MYSQLI_BOTH)) {
-        if (empty($nr_users)) {
-            $nr_users = '';
-        }
+        //if (empty($nr_users)) {
+        //    $nr_users = '';
+        //}
 
         $nr_users++;
         $email = trim($query_users['email']);
@@ -212,10 +212,10 @@ else
             'join_date' => $join_date,
             'last_visit' => $last_visit,
             'email' => $email
-        ));
-
-        $smarty->assign('nr_users', $nr_users);
+        ));    
     }
+    
+    $smarty->assign('nr_users', $nr_users);
 
     // Create dropdown values a-z
     $az_value  = az_dropdown_value(0);

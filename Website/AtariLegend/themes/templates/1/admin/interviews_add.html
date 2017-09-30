@@ -10,7 +10,10 @@
 *   Id: interviews_add.html,v 0.10 2005/07/30 23:12 Gatekeeper
 *   Id: interviews_add.html,v 0.20 2016/08/03 20:58 Gatekeeper
 *		-  AL 2.0
-*
+*   Id: interviews_add.html,v 0.21 2017/06/16 19:38 ST Graveyard
+*                   added the [frontpage] functionality
+*   Id: interviews_add.html,v 0.22 2017/08/19 15:04 ST Graveyard
+*                   removed the [frontpage] functionality --> Why was this necessary?? 
 ***************************************************************************/
 
 ///****************************************************************************************
@@ -61,7 +64,7 @@ t_help = "Insert Hotspot Target: [hotspot=#]";
 x_help = "Set Smiley";
 
 // Define the bbCode tags
-bbtags = new Array('[b]','[/b]','[i]','[/i]','[u]','[/u]','[url]','[/url]','[mail]','[/mail]', '[hotspotUrl=#]', '[/hotspotUrl]', '[hotspot=]', '[/hotspot]');
+bbtags = new Array('[b]','[/b]','[i]','[/i]','[u]','[/u]','[url]','[/url]','[mail]','[/mail]', '[hotspotUrl=#]', '[/hotspotUrl]', '[hotspot=]', '[/hotspot]','[frontpage]','[/frontpage]');
 bbcode = new Array();
 imageTag = false;
 
@@ -179,7 +182,7 @@ function storeCaret(textEl) {
 			This is where the actual interview is inserted in the DB. Overhere you'll notice 3 main text boxes.
 			<br>
             <br>
-			<i><b>- Intro :</b></i> This is where you'll write a little introduction to the interview. This text is placed in the boxes of the main interview section of AL (and in the search results) 
+			<i><b>- Intro :</b></i> This is where you'll write a little introduction to the interview. This text is placed in the boxes of the main interview section of AL (and in the search results). Use the 'Frontpage' button to mark the text used in the 'who is it' tile on the website. 
 			<br>
             <br>
 			<i><b>- Chapters :</b></i> This is a section especially created for chapters. Its a bit more complex. You just add as many chapters as you like. 
@@ -246,7 +249,8 @@ function storeCaret(textEl) {
 				<input type="button" accesskey= "u" name="addbbcode4" value="U" onclick="bbstyle(4,'textintro')">
 				<input type="button" accesskey= "i" name="addbbcode2" value="I" onclick="bbstyle(2,'textintro')">
 				<input type="button" accesskey="w" name="addbbcode6" value="URL" onClick="bbstyle(6,'textintro')">			  
-				<input type="button" accesskey="x" name="addbbcode8" value="@" onClick="bbstyle(8,'textintro')">			  			
+				<input type="button" accesskey="x" name="addbbcode8" value="@" onClick="bbstyle(8,'textintro')">
+                <!--<input type="button" accesskey="frontpage" name="addbbcode16" value="Frontpage" onClick="bbstyle(14,'textintro')">-->              
 				<textarea name="textintro" id="game_review_textfield" ONSELECT="javascript:storeCaret(this);" ONCLICK="javascript:storeCaret(this);" ONKEYUP="javascript:storeCaret(this);" ONCHANGE="javascript:storeCaret(this);" rows="5" style="padding-left:0px;" >
 				</textarea>
 				<br>

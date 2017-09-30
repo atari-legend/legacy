@@ -17,11 +17,16 @@
 //load all common functions
 include("../../config/common.php");
 include("../../config/admin.php");
+//include("../../config/admin_rights.php"); /*--> We can not use it like this because of the ajax. redirecting does not work correctly with the inheritance of Ajax.
+
+//This is used for the AJAX parts when user rights do not suffice
+$osd_message = 'You do not have the necessary authorizations to perform this action';
 
 //****************************************************************************************
 // We wanna add a new download
 //****************************************************************************************
 if (isset($action) and $action == 'add_download') {
+    include("../../config/admin_rights.php");
     require_once('../../vendor/pclzip/pclzip/pclzip.lib.php');
 
     $game_download_name = $_FILES['game_download_name'];
@@ -125,12 +130,15 @@ if (isset($action) and $action == "add_option") {
     }
     else
     {
-        // Insert this option into game_download_options table.
-        $sdbquery = $mysqli->query("INSERT INTO game_download_options (game_download_id,download_options_id) VALUES ('$game_download_id','$download_options_id')") or die("ERROR! Couldn't insert ids in game_download_options");
-        
-        $_SESSION['edit_message'] = "Option inserted";
-        
-        create_log_entry('Downloads', $game_id, 'Options', $download_options_id, 'Insert', $_SESSION['user_id']);  
+        if ($_SESSION['permission']==1 or $_SESSION['permission']=='1')
+        {
+            // Insert this option into game_download_options table.
+            $sdbquery = $mysqli->query("INSERT INTO game_download_options (game_download_id,download_options_id) VALUES ('$game_download_id','$download_options_id')") or die("ERROR! Couldn't insert ids in game_download_options");
+            
+            $osd_message = "Option inserted";
+
+            create_log_entry('Downloads', $game_id, 'Options', $download_options_id, 'Insert', $_SESSION['user_id']);  
+        }
     }
     
     // get the download options
@@ -150,6 +158,7 @@ if (isset($action) and $action == "add_option") {
     
     $smarty->assign('game_download_id', $game_download_id);
     $smarty->assign('game_id', $game_id);
+    $smarty->assign('osd_message', $osd_message);
     
     $smarty->assign('smarty_action', 'update_options');
     //Send to smarty for return value
@@ -161,13 +170,23 @@ if (isset($action) and $action == "add_option") {
 // This is where we delete an option from the download
 //****************************************************************************************
 if (isset($action) and $action == "delete_option") {
-
-        // Delete from game_download_options table.
-        $mysqli->query("DELETE from game_download_options WHERE game_download_id='$game_download_id' AND download_options_id='$download_options_id'") or die('Error: ' . mysqli_error($mysqli));
-         
-        $_SESSION['edit_message'] = "Option deleted";
         
-        create_log_entry('Downloads', $game_id, 'Options', $download_options_id, 'Delete', $_SESSION['user_id']);  
+        if ($download_options_id == '-' or $download_options_id == '')
+        {
+             echo "Please select a download option <br><br>";
+        }
+        else
+        {
+             if ($_SESSION['permission']==1 or $_SESSION['permission']=='1')
+            {
+                // Delete from game_download_options table.
+                $mysqli->query("DELETE from game_download_options WHERE game_download_id='$game_download_id' AND download_options_id='$download_options_id'") or die('Error: ' . mysqli_error($mysqli));
+                 
+                $osd_message = "Option deleted";
+                
+                create_log_entry('Downloads', $game_id, 'Options', $download_options_id, 'Delete', $_SESSION['user_id']);  
+            }
+        }
         
          // get the download options
         $sql_options = "SELECT *
@@ -186,6 +205,7 @@ if (isset($action) and $action == "delete_option") {
         
         $smarty->assign('game_download_id', $game_download_id);
         $smarty->assign('game_id', $game_id);
+        $smarty->assign('osd_message', $osd_message );
         
         $smarty->assign('smarty_action', 'update_options');
         //Send to smarty for return value
@@ -203,12 +223,15 @@ if (isset($action) and $action == "add_tos") {
     }
     else
     {
-        // Insert this option into game_download_options table.
-        $sdbquery = $mysqli->query("INSERT INTO game_download_tos (game_download_id,tos_version_id) VALUES ('$game_download_id','$download_tos_id')") or die("ERROR! Couldn't insert ids in game_download_tos");
-        
-        $_SESSION['edit_message'] = "TOS version inserted";
-        
-        create_log_entry('Downloads', $game_id, 'TOS', $download_tos_id, 'Insert', $_SESSION['user_id']);  
+        if ($_SESSION['permission']==1 or $_SESSION['permission']=='1')
+        {
+            // Insert this option into game_download_options table.
+            $sdbquery = $mysqli->query("INSERT INTO game_download_tos (game_download_id,tos_version_id) VALUES ('$game_download_id','$download_tos_id')") or die("ERROR! Couldn't insert ids in game_download_tos");
+            
+            $osd_message = "TOS version inserted";
+            
+            create_log_entry('Downloads', $game_id, 'TOS', $download_tos_id, 'Insert', $_SESSION['user_id']);  
+        }
     }
     
     // get the download tos
@@ -228,7 +251,7 @@ if (isset($action) and $action == "add_tos") {
          
     $smarty->assign('game_download_id', $game_download_id);
     $smarty->assign('game_id', $game_id);
-    
+    $smarty->assign('osd_message', $osd_message );
     $smarty->assign('smarty_action', 'update_tos');
     //Send to smarty for return value
     $smarty->display("file:" . $cpanel_template_folder . "ajax_gamedownloads_detail.html");
@@ -240,13 +263,16 @@ if (isset($action) and $action == "add_tos") {
 // This is where we delete a TOS version from the download
 //****************************************************************************************
 if (isset($action) and $action == "delete_tos") {
-
-        // Delete from game_download_options table.
-        $mysqli->query("DELETE from game_download_tos WHERE game_download_id='$game_download_id' AND tos_version_id='$download_tos_id'") or die('Error: ' . mysqli_error($mysqli));
-         
-        $_SESSION['edit_message'] = "TOS version deleted";
         
-        create_log_entry('Downloads', $game_id, 'TOS', $download_tos_id, 'Delete', $_SESSION['user_id']);  
+        if ($_SESSION['permission']==1 or $_SESSION['permission']=='1')
+        {
+            // Delete from game_download_options table.
+            $mysqli->query("DELETE from game_download_tos WHERE game_download_id='$game_download_id' AND tos_version_id='$download_tos_id'") or die('Error: ' . mysqli_error($mysqli));
+             
+            $osd_message = "TOS version deleted";
+            
+            create_log_entry('Downloads', $game_id, 'TOS', $download_tos_id, 'Delete', $_SESSION['user_id']);  
+        }
         
          // get the download tos
         $sql_tos = "SELECT *
@@ -265,7 +291,7 @@ if (isset($action) and $action == "delete_tos") {
         
         $smarty->assign('game_download_id', $game_download_id);
         $smarty->assign('game_id', $game_id);
-        
+        $smarty->assign('osd_message', $osd_message );
         $smarty->assign('smarty_action', 'update_tos');
         //Send to smarty for return value
         $smarty->display("file:" . $cpanel_template_folder . "ajax_gamedownloads_detail.html");
@@ -283,12 +309,15 @@ if (isset($action) and $action == "add_trainer") {
     }
     else
     {
-        // Insert this trainer option into game_download_trainer table.
-        $sdbquery = $mysqli->query("INSERT INTO game_download_trainer (game_download_id,trainer_options_id) VALUES ('$game_download_id','$download_trainer_id')") or die("ERROR! Couldn't insert ids in game_download_trainer table");
-        
-        $_SESSION['edit_message'] = "Trainer option inserted";
-        
-        create_log_entry('Downloads', $game_id, 'Trainer', $download_trainer_id, 'Insert', $_SESSION['user_id']);  
+        if ($_SESSION['permission']==1 or $_SESSION['permission']=='1')
+        {
+            // Insert this trainer option into game_download_trainer table.
+            $sdbquery = $mysqli->query("INSERT INTO game_download_trainer (game_download_id,trainer_options_id) VALUES ('$game_download_id','$download_trainer_id')") or die("ERROR! Couldn't insert ids in game_download_trainer table");
+            
+            $osd_message = "Trainer option inserted";
+            
+            create_log_entry('Downloads', $game_id, 'Trainer', $download_trainer_id, 'Insert', $_SESSION['user_id']);  
+        }
     }   
         
     // get the download trainer
@@ -308,7 +337,7 @@ if (isset($action) and $action == "add_trainer") {
      
     $smarty->assign('game_download_id', $game_download_id);
     $smarty->assign('game_id', $game_id);
-    
+    $smarty->assign('osd_message', $osd_message );
     $smarty->assign('smarty_action', 'update_trainer');
     //Send to smarty for return value
     $smarty->display("file:" . $cpanel_template_folder . "ajax_gamedownloads_detail.html");
@@ -319,16 +348,19 @@ if (isset($action) and $action == "add_trainer") {
 // This is where we delete a Trainer options from the download
 //****************************************************************************************
 if (isset($action) and $action == "delete_trainer") {
-
-        // delete the trainer option from the game_download_options table.
-        $mysqli->query("DELETE from game_download_trainer WHERE game_download_id='$game_download_id' AND trainer_options_id='$download_trainer_id'") or die('Error: ' . mysqli_error($mysqli));
-         
-        $_SESSION['edit_message'] = "Trainer option deleted";
         
-        create_log_entry('Downloads', $game_id, 'Trainer', $download_trainer_id, 'Delete', $_SESSION['user_id']);  
+        if ($_SESSION['permission']==1 or $_SESSION['permission']=='1')
+        {
+            // delete the trainer option from the game_download_options table.
+            $mysqli->query("DELETE from game_download_trainer WHERE game_download_id='$game_download_id' AND trainer_options_id='$download_trainer_id'") or die('Error: ' . mysqli_error($mysqli));
+             
+            $osd_message = "Trainer option deleted";
+            
+            create_log_entry('Downloads', $game_id, 'Trainer', $download_trainer_id, 'Delete', $_SESSION['user_id']);  
+        }
         
          // get the download tos
-         $sql_trainer = "SELECT *
+        $sql_trainer = "SELECT *
                         FROM game_download_trainer
                         LEFT JOIN trainer_options ON (game_download_trainer.trainer_options_id = trainer_options.trainer_options_id)
                         WHERE game_download_trainer.game_download_id = '$game_download_id'";
@@ -344,7 +376,7 @@ if (isset($action) and $action == "delete_trainer") {
         
         $smarty->assign('game_download_id', $game_download_id);
         $smarty->assign('game_id', $game_id);
-        
+        $smarty->assign('osd_message', $osd_message );
         $smarty->assign('smarty_action', 'update_trainer');
         //Send to smarty for return value
         $smarty->display("file:" . $cpanel_template_folder . "ajax_gamedownloads_detail.html");
@@ -361,12 +393,15 @@ if (isset($action) and $action == "add_crew") {
     }
     else
     {
-        // Insert this crew into game_download_trainer table.
-        $sdbquery = $mysqli->query("INSERT INTO game_download_crew (game_download_id,crew_id) VALUES ('$game_download_id','$download_crew_id')") or die("ERROR! Couldn't insert ids in game_download_crew table");
-        
-        $_SESSION['edit_message'] = "Crew inserted";
-        
-        create_log_entry('Downloads', $game_id, 'Crew', $download_crew_id, 'Insert', $_SESSION['user_id']);  
+        if ($_SESSION['permission']==1 or $_SESSION['permission']=='1')
+        {
+            // Insert this crew into game_download_trainer table.
+            $sdbquery = $mysqli->query("INSERT INTO game_download_crew (game_download_id,crew_id) VALUES ('$game_download_id','$download_crew_id')") or die("ERROR! Couldn't insert ids in game_download_crew table");
+            
+            $osd_message = "Crew inserted";
+            
+            create_log_entry('Downloads', $game_id, 'Crew', $download_crew_id, 'Insert', $_SESSION['user_id']);  
+        }
     }    
       
     // get the linked crews
@@ -386,7 +421,7 @@ if (isset($action) and $action == "add_crew") {
      
     $smarty->assign('game_download_id', $game_download_id);
     $smarty->assign('game_id', $game_id);
-    
+    $smarty->assign('osd_message', $osd_message );
     $smarty->assign('smarty_action', 'update_crew');
     //Send to smarty for return value
     $smarty->display("file:" . $cpanel_template_folder . "ajax_gamedownloads_detail.html");
@@ -397,13 +432,16 @@ if (isset($action) and $action == "add_crew") {
 // This is where we delete a crew from the download
 //****************************************************************************************
 if (isset($action) and $action == "delete_crew") {
-
-        // delete the crew from the game_download_crew table.
-        $mysqli->query("DELETE from game_download_crew WHERE game_download_id='$game_download_id' AND crew_id='$download_crew_id'") or die('Error: ' . mysqli_error($mysqli));
-         
-        $_SESSION['edit_message'] = "Crew deleted";
         
-        create_log_entry('Downloads', $game_id, 'Crew', $download_crew_id, 'Delete', $_SESSION['user_id']);  
+        if ($_SESSION['permission']==1 or $_SESSION['permission']=='1')
+        {
+            // delete the crew from the game_download_crew table.
+            $mysqli->query("DELETE from game_download_crew WHERE game_download_id='$game_download_id' AND crew_id='$download_crew_id'") or die('Error: ' . mysqli_error($mysqli));
+             
+            $osd_message = "Crew deleted";
+            
+            create_log_entry('Downloads', $game_id, 'Crew', $download_crew_id, 'Delete', $_SESSION['user_id']);  
+        }
         
         // get the linked crews
         $sql_crew = "SELECT *
@@ -422,7 +460,7 @@ if (isset($action) and $action == "delete_crew") {
         
         $smarty->assign('game_download_id', $game_download_id);
         $smarty->assign('game_id', $game_id);
-        
+        $smarty->assign('osd_message', $osd_message );
         $smarty->assign('smarty_action', 'update_crew');
         //Send to smarty for return value
         $smarty->display("file:" . $cpanel_template_folder . "ajax_gamedownloads_detail.html");
@@ -436,32 +474,36 @@ if (isset($action) and $action == "add_menudisk") {
 
     if ($download_menudisk_id == '-' or $download_menudisk_id == '')
     {
-        echo "Please select a menudisk<br><br>";
+        $osd_message = "Please select a menudisk";
     }
     else
     {
-        // let's get the menudisk_title_game_id
-        $sql_menudisk = "SELECT menu_disk_title_game_id
-                        FROM menu_disk_title_game
-                        LEFT JOIN menu_disk_title ON (menu_disk_title_game.menu_disk_title_id = menu_disk_title.menu_disk_title_id)
-                        WHERE menu_disk_title_game.game_id = '$game_id' AND menu_disk_title.menu_disk_id = '$download_menudisk_id'";
-
-        $result_menudisk = $mysqli->query($sql_menudisk) or die(mysqli_error());
-        $row              = $result_menudisk->fetch_array(MYSQLI_BOTH);
-        $menu_disk_title_game_id = $row['menu_disk_title_game_id'];
-        
-        if ( $menu_disk_title_game_id == '')
+        if ($_SESSION['permission']==1 or $_SESSION['permission']=='1')
         {
-            echo "Selected menudisk does not contain this game!<br><br>";
-        }
-        else
-        {        
-            // Insert this download into game_download_menu table.
-            $sdbquery = $mysqli->query("INSERT INTO game_download_menu (game_download_id,menu_disk_title_game_id) VALUES ('$game_download_id','$menu_disk_title_game_id')") or die("ERROR! Couldn't insert ids in game_download_menu table");
             
-            $_SESSION['edit_message'] = "menudisk inserted";
+            // let's get the menudisk_title_game_id
+            $sql_menudisk = "SELECT menu_disk_title_game_id
+                            FROM menu_disk_title_game
+                            LEFT JOIN menu_disk_title ON (menu_disk_title_game.menu_disk_title_id = menu_disk_title.menu_disk_title_id)
+                            WHERE menu_disk_title_game.game_id = '$game_id' AND menu_disk_title.menu_disk_id = '$download_menudisk_id'";
+
+            $result_menudisk = $mysqli->query($sql_menudisk) or die(mysqli_error());
+            $row              = $result_menudisk->fetch_array(MYSQLI_BOTH);
+            $menu_disk_title_game_id = $row['menu_disk_title_game_id'];
             
-            create_log_entry('Downloads', $game_id, 'Menudisk', $game_id, 'Insert', $_SESSION['user_id']);  
+            if ( $menu_disk_title_game_id == '')
+            {
+                $osd_message =  "Selected menudisk does not contain this game!<br><br>";
+            }
+            else
+            {        
+                // Insert this download into game_download_menu table.
+                $sdbquery = $mysqli->query("INSERT INTO game_download_menu (game_download_id,menu_disk_title_game_id) VALUES ('$game_download_id','$menu_disk_title_game_id')") or die("ERROR! Couldn't insert ids in game_download_menu table");
+                
+                $osd_message = "menudisk inserted";
+                
+                create_log_entry('Downloads', $game_id, 'Menudisk', $game_id, 'Insert', $_SESSION['user_id']);  
+            }
         }
     }
   
@@ -506,7 +548,7 @@ if (isset($action) and $action == "add_menudisk") {
      
     $smarty->assign('game_download_id', $game_download_id);
     $smarty->assign('game_id', $game_id);
-    
+    $smarty->assign('osd_message', $osd_message );
     $smarty->assign('smarty_action', 'update_menudisk');
     //Send to smarty for return value
     $smarty->display("file:" . $cpanel_template_folder . "ajax_gamedownloads_detail.html");
@@ -517,12 +559,15 @@ if (isset($action) and $action == "add_menudisk") {
 //****************************************************************************************
 if (isset($action) and $action == "delete_menudisk") {
           
-        // delete the crew from the game_download_crew table.
-        $mysqli->query("DELETE from game_download_menu WHERE game_download_id='$game_download_id' AND menu_disk_title_game_id='$menu_disk_title_game_id'") or die('Error: ' . mysqli_error($mysqli));
-         
-        $_SESSION['edit_message'] = "menudisk deleted";
-        
-        create_log_entry('Downloads', $game_id, 'Menudisk', $game_id, 'Delete', $_SESSION['user_id']);  
+        if ($_SESSION['permission']==1 or $_SESSION['permission']=='1')
+        {
+            // delete the crew from the game_download_crew table.
+            $mysqli->query("DELETE from game_download_menu WHERE game_download_id='$game_download_id' AND menu_disk_title_game_id='$menu_disk_title_game_id'") or die('Error: ' . mysqli_error($mysqli));
+             
+            $osd_message = "menudisk deleted";
+            
+            create_log_entry('Downloads', $game_id, 'Menudisk', $game_id, 'Delete', $_SESSION['user_id']);  
+        }
         
         // get the linked menudisks
         $sql_menudisks = "SELECT *
@@ -564,7 +609,7 @@ if (isset($action) and $action == "delete_menudisk") {
         
         $smarty->assign('game_download_id', $game_download_id);
         $smarty->assign('game_id', $game_id);
-        
+        $smarty->assign('osd_message', $osd_message );
         $smarty->assign('smarty_action', 'update_menudisk');
         //Send to smarty for return value
         $smarty->display("file:" . $cpanel_template_folder . "ajax_gamedownloads_detail.html");
@@ -575,76 +620,78 @@ if (isset($action) and $action == "delete_menudisk") {
 //****************************************************************************************
 if (isset($action) and ($action == "create_set" OR $action == "delete_set" OR $action == "link_set")) {
 
-    if (isset($download_set_id)) {
-       
-       if ($action == "create_set")
+    if (isset($download_set_id)) 
+    {  
+        if ($_SESSION['permission']==1 or $_SESSION['permission']=='1')
         {
-            /* first see if this title is already chained */
-            $sql = $mysqli->query("SELECT * FROM game_download_set
-            WHERE game_download_id = '$game_download_id'") or die("error selecting chain");
-            if ($sql->num_rows > 0) {
-                echo "This download is already chained - delete chain first<br><br>";
-            } else {
-                //check if the title is already linked
-                $sql_set_nr = "SELECT game_download_set_nr FROM game_download_set WHERE game_download_id = '$game_download_id'";
-                $query_ser_nr = $mysqli->query($sql_set_nr) or die("problem with set nr query");
-                $query_data = $query_ser_nr->fetch_array(MYSQLI_BOTH);
-                $set_nr     = $query_data['menu_disk_title_set_nr'];
-
-                //if not linked
-                if ($set_nr == 0 or $set_nr = '') {
-                    /*We need to get the highest set nr */
-                    $sql_set_nr = "SELECT game_download_set_nr FROM game_download_set order by game_download_set_nr DESC";
-                    $query_set_nr = $mysqli->query($sql_set_nr) or die("problem with set nr query");
-                    if ($query_set_nr->num_rows > 0) {
-                        while ($row = $query_set_nr->fetch_array(MYSQLI_BOTH)) {
-                            $set_nr = $row['game_download_set_nr'];
-                            $set_nr++;
-                            break;
-                        }
-                    } else {
-                        $set_nr = 1;
-                    }
-                }
-
-                $sql_download_set = $mysqli->query("INSERT INTO game_download_set (game_download_set_nr, game_download_set_chain, game_download_id) VALUES ('$set_nr','1', $game_download_id)") or die("error inserting download chain");
-                $osd_message = "Chain created for this download";
-
-                create_log_entry('Downloads', $game_id, 'Chain', $game_id, 'Insert', $_SESSION['user_id']);  
-            }
-        }
-        
-        if ($action == "delete_set")
-        {
-            $mysqli->query("DELETE from game_download_set WHERE game_download_id='$game_download_id' AND game_download_set_id='$download_set_id'") or die('Error: ' . mysqli_error($mysqli));
-             
-            $_SESSION['edit_message'] = "Set deleted";
-            
-            create_log_entry('Downloads', $game_id, 'Chain', $game_id, 'Delete', $_SESSION['user_id']);             
-        }
-    
-        if ($action == "link_set")
-        {
-             if ($download_chain == 'Nr' or $download_chain == '') {
-                echo "Please add a correct part nr<br><br>";
-            } elseif ($download_set_id == '' or $download_set_id == '-') {
-                echo "Please select a set";
-            } else {
-                //check if the title is already linked
+           if ($action == "create_set")
+            {
+                /* first see if this title is already chained */
                 $sql = $mysqli->query("SELECT * FROM game_download_set
-              WHERE game_download_id = '$game_download_id'") or die("error selecting chain");
+                WHERE game_download_id = '$game_download_id'") or die("error selecting chain");
                 if ($sql->num_rows > 0) {
-                    echo "This title is already chained - delete chain first";
+                    $osd_message = "This download is already chained - delete chain first<br><br>";
                 } else {
-                    $sql_download_set = $mysqli->query("INSERT INTO game_download_set (game_download_set_nr, game_download_set_chain, game_download_id) VALUES ('$download_set_id','$download_chain', $game_download_id)") or die("error inserting download chain");
+                    //check if the title is already linked
+                    $sql_set_nr = "SELECT game_download_set_nr FROM game_download_set WHERE game_download_id = '$game_download_id'";
+                    $query_ser_nr = $mysqli->query($sql_set_nr) or die("problem with set nr query");
+                    $query_data = $query_ser_nr->fetch_array(MYSQLI_BOTH);
+                    $set_nr     = $query_data['menu_disk_title_set_nr'];
+
+                    //if not linked
+                    if ($set_nr == 0 or $set_nr = '') {
+                        /*We need to get the highest set nr */
+                        $sql_set_nr = "SELECT game_download_set_nr FROM game_download_set order by game_download_set_nr DESC";
+                        $query_set_nr = $mysqli->query($sql_set_nr) or die("problem with set nr query");
+                        if ($query_set_nr->num_rows > 0) {
+                            while ($row = $query_set_nr->fetch_array(MYSQLI_BOTH)) {
+                                $set_nr = $row['game_download_set_nr'];
+                                $set_nr++;
+                                break;
+                            }
+                        } else {
+                            $set_nr = 1;
+                        }
+                    }
+
+                    $sql_download_set = $mysqli->query("INSERT INTO game_download_set (game_download_set_nr, game_download_set_chain, game_download_id) VALUES ('$set_nr','1', $game_download_id)") or die("error inserting download chain");
                     $osd_message = "Chain created for this download";
 
-                    create_log_entry('Downloads', $game_id, 'Chain', $game_id, 'Insert', $_SESSION['user_id']);
+                    create_log_entry('Downloads', $game_id, 'Chain', $game_id, 'Insert', $_SESSION['user_id']);  
+                }
+            }
+            
+            if ($action == "delete_set")
+            {
+                $mysqli->query("DELETE from game_download_set WHERE game_download_id='$game_download_id' AND game_download_set_id='$download_set_id'") or die('Error: ' . mysqli_error($mysqli));
+                 
+                $osd_message = "Set deleted";
+                
+                create_log_entry('Downloads', $game_id, 'Chain', $game_id, 'Delete', $_SESSION['user_id']);             
+            }
+        
+            if ($action == "link_set")
+            {
+                 if ($download_chain == 'Nr' or $download_chain == '') {
+                    $osd_message = "Please add a correct part nr<br><br>";
+                } elseif ($download_set_id == '' or $download_set_id == '-') {
+                    $osd_message = "Please select a set";
+                } else {
+                    //check if the title is already linked
+                    $sql = $mysqli->query("SELECT * FROM game_download_set
+                  WHERE game_download_id = '$game_download_id'") or die("error selecting chain");
+                    if ($sql->num_rows > 0) {
+                        $osd_message = "This title is already chained - delete chain first";
+                    } else {
+                        $sql_download_set = $mysqli->query("INSERT INTO game_download_set (game_download_set_nr, game_download_set_chain, game_download_id) VALUES ('$download_set_id','$download_chain', $game_download_id)") or die("error inserting download chain");
+                        $osd_message = "Chain created for this download";
+
+                        create_log_entry('Downloads', $game_id, 'Chain', $game_id, 'Insert', $_SESSION['user_id']);
+                    }
                 }
             }
         }
-   
-   }
+    }
     
     //  get the chain/set linked to this download
     $SQL_sets = $mysqli->query("SELECT * FROM game_download_set 
@@ -739,7 +786,7 @@ if (isset($action) and ($action == "create_set" OR $action == "delete_set" OR $a
     
     $smarty->assign('game_download_id', $game_download_id);
     $smarty->assign('game_id', $game_id);
-    
+    $smarty->assign('osd_message', $osd_message );
     $smarty->assign('smarty_action', 'update_set');
     //Send to smarty for return value
     $smarty->display("file:" . $cpanel_template_folder . "ajax_gamedownloads_detail.html");
@@ -751,21 +798,24 @@ if (isset($action) and ($action == "create_set" OR $action == "delete_set" OR $a
 //****************************************************************************************
 if (isset($action) and ( $action == "add_author" or $action == "delete_download_authors")) {
     
-    if ($action == "add_author")
+    if ($_SESSION['permission']==1 or $_SESSION['permission']=='1')
     {
-        if (isset($ind_id) and isset($author_type_id) and isset($game_download_id)) {
-            //Insert individual into the game_download_individual table
-            $mysqli->query("INSERT INTO game_download_individual (game_download_id,ind_id,author_type_id) VALUES ('$game_download_id','$ind_id','$author_type_id')");
-
-            create_log_entry('Downloads', $game_id, 'Authors', $ind_id, 'Insert', $_SESSION['user_id']);
+        if ($action == "add_author")
+        {
+            if (isset($ind_id) and isset($author_type_id) and isset($game_download_id)) {
+                //Insert individual into the game_download_individual table
+                $mysqli->query("INSERT INTO game_download_individual (game_download_id,ind_id,author_type_id) VALUES ('$game_download_id','$ind_id','$author_type_id')");
+                $osd_message = "Author added";
+                create_log_entry('Downloads', $game_id, 'Authors', $ind_id, 'Insert', $_SESSION['user_id']);
+            }
         }
-    }
-    
-    if ($action == "delete_download_authors")
-    {
-        create_log_entry('Downloads', $game_id, 'Authors', $ind_id, 'Delete', $_SESSION['user_id']);
         
-        $mysqli->query("DELETE FROM game_download_individual WHERE game_download_ind_id = '$game_download_ind_id'");        
+        if ($action == "delete_download_authors")
+        {
+            create_log_entry('Downloads', $game_id, 'Authors', $ind_id, 'Delete', $_SESSION['user_id']);
+            $osd_message = "Author deleted";
+            $mysqli->query("DELETE FROM game_download_individual WHERE game_download_ind_id = '$game_download_ind_id'");        
+        }
     }
     
     // Get the download authors
@@ -819,7 +869,7 @@ if (isset($action) and ( $action == "add_author" or $action == "delete_download_
     
     $smarty->assign('game_download_id', $game_download_id);
     $smarty->assign('game_id', $game_id);
-    
+    $smarty->assign('osd_message', $osd_message );
     $smarty->assign('smarty_action', 'update_individuals');
     //Send to smarty for return value
     $smarty->display("file:" . $cpanel_template_folder . "ajax_gamedownloads_detail.html");
@@ -830,7 +880,7 @@ if (isset($action) and ( $action == "add_author" or $action == "delete_download_
 // Quick add format
 //****************************************************************************************
 if (isset($action) and $action == "game_download_format_add") {
-
+    include("../../config/admin_rights.php");
     if ( $new_format_name == '' ) {
         $_SESSION['edit_message'] = "Please enter a format";
     }
@@ -851,7 +901,7 @@ if (isset($action) and $action == "game_download_format_add") {
 // Quick add option
 //****************************************************************************************
 if (isset($action) and $action == "game_download_option_add") {
-
+    include("../../config/admin_rights.php");
     if ( $new_option_name == '' ) {
         $_SESSION['edit_message'] = "Please enter an option";
     }
@@ -872,7 +922,7 @@ if (isset($action) and $action == "game_download_option_add") {
 // Quick add lingo
 //****************************************************************************************
 if (isset($action) and $action == "game_download_lingo_add") {
-
+    include("../../config/admin_rights.php");
     if ( $new_lingo_name == '' or $lingo_short == '') {
         $_SESSION['edit_message'] = "Please enter a language and abbrevation";
     }
@@ -893,7 +943,7 @@ if (isset($action) and $action == "game_download_lingo_add") {
 // Quick add TOS
 //****************************************************************************************
 if (isset($action) and $action == "game_download_tos_add") {
-
+    include("../../config/admin_rights.php");
     if ( $new_tos_name == '' ) {
         $_SESSION['edit_message'] = "Please enter a TOS version";
     }
@@ -914,7 +964,7 @@ if (isset($action) and $action == "game_download_tos_add") {
 // Quick add trainer
 //****************************************************************************************
 if (isset($action) and $action == "game_download_trainer_add") {
-
+    include("../../config/admin_rights.php");
     if ( $new_trainer_name == '' ) {
         $_SESSION['edit_message'] = "Please enter a trainer option";
     }
@@ -935,69 +985,73 @@ if (isset($action) and $action == "game_download_trainer_add") {
 // This is where we add/modify the main download options
 //****************************************************************************************
 if (isset($action) and $action == "mod_download") {
-
-    //check if we need to add or modify the game_download_details table
-    $sql_nr_details = "SELECT * FROM game_download_details WHERE game_download_id ='$game_download_id'";
-    $query_nr_details = $mysqli->query($sql_nr_details) or die("problem getting download details");
-    if ($query_nr_details->num_rows > 0) {
-        $textfield = $mysqli->real_escape_string($download_info);
-        $sdbquery = $mysqli->query("UPDATE game_download_details SET version='$download_version', info= '$textfield' WHERE  game_download_id ='$game_download_id'") or die("ERROR! Couldn't update game_download_details");
-    }else{
-       // Insert into game_download_details table.
-       $textfield = $mysqli->real_escape_string($download_info);
-       $sdbquery = $mysqli->query("INSERT INTO game_download_details (game_download_id,version,info) VALUES ('$game_download_id','$download_version', '$textfield')") or die("ERROR! Couldn't insert into game_download_details");
-    }
     
-    //check if we need to add or modify the game_download_lingo table
-    if ( $download_language  == '-' ){}
-    else
-    {    
-        $sql_nr_lingo = "SELECT * FROM game_download_lingo WHERE game_download_id ='$game_download_id'";
-        $query_nr_lingo = $mysqli->query($sql_nr_lingo) or die("problem getting download lingo");
-        if ($query_nr_lingo->num_rows > 0) {
-            $sdbquery = $mysqli->query("UPDATE game_download_lingo SET lingo_id='$download_language' WHERE game_download_id ='$game_download_id'") or die("ERROR! Couldn't update game_download_lingo");
+    if ($_SESSION['permission']==1 or $_SESSION['permission']=='1')
+    {
+        //check if we need to add or modify the game_download_details table
+        $sql_nr_details = "SELECT * FROM game_download_details WHERE game_download_id ='$game_download_id'";
+        $query_nr_details = $mysqli->query($sql_nr_details) or die("problem getting download details");
+        if ($query_nr_details->num_rows > 0) {
+            $textfield = $mysqli->real_escape_string($download_info);
+            $sdbquery = $mysqli->query("UPDATE game_download_details SET version='$download_version', info= '$textfield' WHERE  game_download_id ='$game_download_id'") or die("ERROR! Couldn't update game_download_details");
         }else{
-           // Insert this option into game_download_lingo table.
-           $sdbquery = $mysqli->query("INSERT INTO game_download_lingo (game_download_id,lingo_id) VALUES ('$game_download_id','$download_language')") or die("ERROR! Couldn't insert into game_download_lingo");
+           // Insert into game_download_details table.
+           $textfield = $mysqli->real_escape_string($download_info);
+           $sdbquery = $mysqli->query("INSERT INTO game_download_details (game_download_id,version,info) VALUES ('$game_download_id','$download_version', '$textfield')") or die("ERROR! Couldn't insert into game_download_details");
         }
-    }
-    
-    //check if we need to add or modify the download format table
-    if ( $download_format == '-' ){}
-    else
-    {    
-        //let's get the download id
-        $sql_download_id = $mysqli->query("SELECT download_id FROM game_download WHERE game_download_id='$game_download_id'")
-                                  or die("Database error - selecting download_main");
-        $download_row = $sql_download_id->fetch_row();
-        $download_id = $download_row[0];
-          
-        $sql_nr_format = "SELECT * FROM download_format WHERE download_id ='$download_id'";
-        $query_nr_format = $mysqli->query($sql_nr_format) or die("problem getting download format");
-        if ($query_nr_format->num_rows > 0) {
-            $sdbquery = $mysqli->query("UPDATE download_format SET format_id='$download_format' WHERE download_id ='$download_id'") or die("ERROR! Couldn't update download_format");
-        }else{
-           // Insert this option into game_download_lingo table.
-           $sdbquery = $mysqli->query("INSERT INTO download_format (download_id,format_id) VALUES ('$download_id','$download_format')") or die("ERROR! Couldn't insert into download_format");
+        
+        //check if we need to add or modify the game_download_lingo table
+        if ( $download_language  == '-' ){}
+        else
+        {    
+            $sql_nr_lingo = "SELECT * FROM game_download_lingo WHERE game_download_id ='$game_download_id'";
+            $query_nr_lingo = $mysqli->query($sql_nr_lingo) or die("problem getting download lingo");
+            if ($query_nr_lingo->num_rows > 0) {
+                $sdbquery = $mysqli->query("UPDATE game_download_lingo SET lingo_id='$download_language' WHERE game_download_id ='$game_download_id'") or die("ERROR! Couldn't update game_download_lingo");
+            }else{
+               // Insert this option into game_download_lingo table.
+               $sdbquery = $mysqli->query("INSERT INTO game_download_lingo (game_download_id,lingo_id) VALUES ('$game_download_id','$download_language')") or die("ERROR! Couldn't insert into game_download_lingo");
+            }
         }
-    }
     
-    //check if we need to add or modify the game_download_intro table
-    if ( $download_intro  == '-' ){}
-    else
-    {    
-        $sql_nr_demo = "SELECT * FROM game_download_intro WHERE game_download_id ='$game_download_id'";
-        $query_nr_demo = $mysqli->query($sql_nr_demo) or die("problem getting download intro");
-        if ($query_nr_demo->num_rows > 0) {
-            $sdbquery = $mysqli->query("UPDATE game_download_intro SET demo_id='$download_intro' WHERE game_download_id ='$game_download_id'") or die("ERROR! Couldn't update game_download_intro");
-        }else{
-           // Insert this option into game_download_lingo table.
-           $sdbquery = $mysqli->query("INSERT INTO game_download_intro (game_download_id,demo_id) VALUES ('$game_download_id','$download_intro')") or die("ERROR! Couldn't insert into game_download_demo");
+    
+        //check if we need to add or modify the download format table
+        if ( $download_format == '-' ){}
+        else
+        {    
+            //let's get the download id
+            $sql_download_id = $mysqli->query("SELECT download_id FROM game_download WHERE game_download_id='$game_download_id'")
+                                      or die("Database error - selecting download_main");
+            $download_row = $sql_download_id->fetch_row();
+            $download_id = $download_row[0];
+              
+            $sql_nr_format = "SELECT * FROM download_format WHERE download_id ='$download_id'";
+            $query_nr_format = $mysqli->query($sql_nr_format) or die("problem getting download format");
+            if ($query_nr_format->num_rows > 0) {
+                $sdbquery = $mysqli->query("UPDATE download_format SET format_id='$download_format' WHERE download_id ='$download_id'") or die("ERROR! Couldn't update download_format");
+            }else{
+               // Insert this option into game_download_lingo table.
+               $sdbquery = $mysqli->query("INSERT INTO download_format (download_id,format_id) VALUES ('$download_id','$download_format')") or die("ERROR! Couldn't insert into download_format");
+            }
         }
-    }
     
-    $_SESSION['edit_message'] = "Download details updated";
-    create_log_entry('Downloads', $game_id, 'Details', $game_id, 'Update', $_SESSION['user_id']);  
+        //check if we need to add or modify the game_download_intro table
+        if ( $download_intro  == '-' ){}
+        else
+        {    
+            $sql_nr_demo = "SELECT * FROM game_download_intro WHERE game_download_id ='$game_download_id'";
+            $query_nr_demo = $mysqli->query($sql_nr_demo) or die("problem getting download intro");
+            if ($query_nr_demo->num_rows > 0) {
+                $sdbquery = $mysqli->query("UPDATE game_download_intro SET demo_id='$download_intro' WHERE game_download_id ='$game_download_id'") or die("ERROR! Couldn't update game_download_intro");
+            }else{
+               // Insert this option into game_download_lingo table.
+               $sdbquery = $mysqli->query("INSERT INTO game_download_intro (game_download_id,demo_id) VALUES ('$game_download_id','$download_intro')") or die("ERROR! Couldn't insert into game_download_demo");
+            }
+        }
+        
+        $osd_message = "Download details updated";
+        create_log_entry('Downloads', $game_id, 'Details', $game_id, 'Update', $_SESSION['user_id']);  
+    }
     
     //  First we get all the data of this download        
     $sql_downloads = "SELECT *
@@ -1071,7 +1125,7 @@ if (isset($action) and $action == "mod_download") {
 
     $smarty->assign('game_download_id', $game_download_id);
     $smarty->assign('game_id', $game_id);
-    
+    $smarty->assign('osd_message', $osd_message );
     $smarty->assign('smarty_action', 'update_details');
     //Send to smarty for return value
     $smarty->display("file:" . $cpanel_template_folder . "ajax_gamedownloads_detail.html");
@@ -1082,6 +1136,7 @@ if (isset($action) and $action == "mod_download") {
 // This is where we completely delete the download
 //****************************************************************************************
 if (isset($action) and $action == "delete_download") {
+    include("../../config/admin_rights.php");
     create_log_entry('Games', $game_id, 'File', $game_id, 'Delete', $_SESSION['user_id']);
 
     // let's get the download id

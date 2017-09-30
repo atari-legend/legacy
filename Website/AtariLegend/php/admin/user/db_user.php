@@ -23,6 +23,11 @@
 include("../../config/common.php");
 include("../../config/admin.php");
 
+//We have to make sure that a user can only change his own data and not others unless he is an admin!
+if ($user_id_selected == $_SESSION['user_id'])
+{}
+else{include("../../config/admin_rights.php");}
+
 //****************************************************************************************
 // add avatar
 //****************************************************************************************
@@ -57,12 +62,14 @@ if (isset($action) and $action == 'avatar_upload') {
             $imginfo = getimagesize("$user_avatar_save_path$user_id_selected.$ext") or die("getimagesize not working");
             $width  = $imginfo[0];
             $height = $imginfo[1];
+            
+             $_SESSION['image'] = $ext;
 
-            if ($width < 101 and $height < 101) {
+            if ($width < 601 and $height < 601) {
                 $_SESSION['edit_message'] = "Avatar added";
                 create_log_entry('Users', $user_id_selected, 'Avatar', $user_id_selected, 'Insert', $_SESSION['user_id']);
             } else {
-                $_SESSION['edit_message'] = "Upload failed due to not confirming to specs - width and height must be 100px wide max";
+                $_SESSION['edit_message'] = "Upload failed due to not confirming to specs - width and height must be 600px max";
                 $mysqli->query("UPDATE users SET avatar_ext='' WHERE user_id='$user_id_selected'");
                 unlink("$user_avatar_save_path$user_id_selected.$ext");
             }
@@ -84,6 +91,7 @@ if (isset($action) and $action == "delete_avatar") {
     $mysqli->query("UPDATE users SET avatar_ext='' WHERE user_id='$user_id_selected'");
     $_SESSION['edit_message'] = "Avatar deleted";
     unlink("$user_avatar_save_path$user_id_selected.$avatar_ext");
+    $_SESSION['image'] = '';
 
     create_log_entry('Users', $user_id_selected, 'Avatar', $user_id_selected, 'Delete', $_SESSION['user_id']);
 }
@@ -92,11 +100,85 @@ if (isset($action) and $action == "delete_avatar") {
 // reset pwd
 //****************************************************************************************
 if (isset($action) and $action == 'reset_pwd') {
-    $mysqli->query("UPDATE users SET password='', sha512_password = '', salt = '' WHERE user_id='$user_id_selected'");
-    $_SESSION['edit_message'] = "Password reset";
+    //$mysqli->query("UPDATE users SET password='', sha512_password = '', salt = '' WHERE user_id='$user_id_selected'");
+    //$_SESSION['edit_message'] = "Password reset";
 
-    create_log_entry('Users', $user_id_selected, 'User', $user_id_selected, 'Update', $_SESSION['user_id']);
-}
+    //create_log_entry('Users', $user_id_selected, 'User', $user_id_selected, 'Update', $_SESSION['user_id']);
+    
+    //Admins can change pwd's for everyone - the current pwd field is not necessary
+    if ($_SESSION['permission']==1)
+    {        
+        //add the new password
+        $md5pass = hash('md5',$_POST['user_new_pwd']); // The md5 hashed password.
+        $sha512 = hash('sha512',$_POST['user_new_pwd']); // The hashed password.
+        $random_salt = hash('sha512', uniqid(mt_rand(1, mt_getrandmax()), true));//create random salt
+        $update_password = hash('sha512', $sha512 . $random_salt); // Create salted password
+        
+        $mysqli->query("UPDATE users SET password='$md5pass', sha512_password = '$update_password', salt = '$random_salt' WHERE user_id='$user_id_selected'");
+        
+        //If you are changing your own pwd, we need to update the session vars
+        if ($user_id_selected == $_SESSION['user_id'])
+        {
+            //Let's log in - fill the session vars
+            if (login($_SESSION['userid'], $sha512, $mysqli) == true) {   
+                create_log_entry('Users', $user_id_selected, 'User', $user_id_selected, 'Update', $_SESSION['user_id']);
+                $_SESSION['edit_message'] = "Own account succesfully updated";
+                header("Location: ../user/user_detail.php?user_id_selected=$user_id_selected");
+            }
+            else
+            {
+                $_SESSION['edit_message'] = "Own account succesfully updated - Please log in";
+                header("Location: ../../main/front/front.php");
+            }      
+        }
+        else
+        {
+            $_SESSION['edit_message'] = "Account succesfully updated";
+            header("Location: ../user/user_detail.php?user_id_selected=$user_id_selected");
+        }
+    }        
+    else
+    {
+        // Check if current pwd is correct
+        $password = $_POST['p'];
+        if (login($_SESSION['userid'], $password, $mysqli) == true) 
+        {              
+            //check if both new pwd's are the same
+            if($_POST['user_new_pwd'] == $_POST['user_confirm_pwd'])
+            {
+                //add the new password
+                $md5pass = hash('md5',$_POST['user_new_pwd']); // The md5 hashed password.
+                $sha512 = hash('sha512',$_POST['user_new_pwd']); // The hashed password.
+                $random_salt = hash('sha512', uniqid(mt_rand(1, mt_getrandmax()), true));//create random salt
+                $update_password = hash('sha512', $sha512 . $random_salt); // Create salted password
+                
+                $mysqli->query("UPDATE users SET password='$md5pass', sha512_password = '$update_password', salt = '$random_salt' WHERE user_id='$user_id_selected'");
+                
+                //Let's log in - fill the session vars
+                if (login($_SESSION['userid'], $sha512, $mysqli) == true) {   
+                    create_log_entry('Users', $user_id_selected, 'User', $user_id_selected, 'Update', $_SESSION['user_id']);
+                    $_SESSION['edit_message'] = "Account succesfully updated";
+                    header("Location: ../user/user_detail.php?user_id_selected=$user_id_selected");
+                }
+                else
+                {
+                    $_SESSION['edit_message'] = "Account succesfully updated - Please log in";
+                    header("Location: ../../main/front/front.php");
+                }
+            }
+            else
+            {
+                $_SESSION['edit_message'] = "The new and confirmed passwords are not the same";
+                header("Location: ../user/user_detail.php?user_id_selected=$user_id_selected");
+            }
+        }
+        else
+        {
+           $_SESSION['edit_message'] = "The current password is not correct";
+           header("Location: ../user/user_detail.php?user_id_selected=$user_id_selected");
+        }
+    }
+}   
 
 //****************************************************************************************
 // modify user
@@ -113,11 +195,11 @@ if (isset($action) and $action == 'modify_user') {
     
         if (isset ($user_inactive))
         {
-            $mysqli->query("UPDATE users SET userid='$user_name', password='$md5pass', sha512_password='$update_password', salt='$random_salt', email='$user_email', permission='$user_permission', user_website='$user_website', user_icq='$user_icq', user_msnm='$user_msnm', user_aim='$user_aim', inactive='$user_inactive' WHERE user_id='$user_id_selected'");
+            $mysqli->query("UPDATE users SET userid='$user_name', password='$md5pass', sha512_password='$update_password', salt='$random_salt', email='$user_email', permission='$user_permission', user_website='$user_website', user_fb='$user_fb', user_twitter='$user_twitter', user_af='$user_af', inactive='$user_inactive' WHERE user_id='$user_id_selected'");
         }
         else
         {
-            $mysqli->query("UPDATE users SET userid='$user_name', password='$md5pass', sha512_password='$update_password', salt='$random_salt', email='$user_email', permission='$user_permission', user_website='$user_website', user_icq='$user_icq', user_msnm='$user_msnm', user_aim='$user_aim', inactive=' ' WHERE user_id='$user_id_selected'");
+            $mysqli->query("UPDATE users SET userid='$user_name', password='$md5pass', sha512_password='$update_password', salt='$random_salt', email='$user_email', permission='$user_permission', user_website='$user_website', user_fb='$user_fb', user_twitter='$user_twitter', user_af='$user_af', inactive=' ' WHERE user_id='$user_id_selected'");
         }
         $_SESSION['edit_message'] = "User data modified";
 
@@ -128,11 +210,11 @@ if (isset($action) and $action == 'modify_user') {
         
         if (isset ($user_inactive))
         {
-            $mysqli->query("UPDATE users SET userid='$user_name', email='$user_email', permission='$user_permission', user_website='$user_website', user_icq='$user_icq', user_msnm='$user_msnm', user_aim='$user_aim', inactive='$user_inactive' WHERE user_id='$user_id_selected'");
+            $mysqli->query("UPDATE users SET userid='$user_name', email='$user_email', permission='$user_permission', user_website='$user_website', user_fb='$user_fb', user_twitter='$user_twitter', user_af='$user_af', inactive='$user_inactive' WHERE user_id='$user_id_selected'");
         }
         else
         {
-            $mysqli->query("UPDATE users SET userid='$user_name', email='$user_email', permission='$user_permission', user_website='$user_website', user_icq='$user_icq', user_msnm='$user_msnm', user_aim='$user_aim', inactive=' ' WHERE user_id='$user_id_selected'");
+            $mysqli->query("UPDATE users SET userid='$user_name', email='$user_email', permission='$user_permission', user_website='$user_website', user_fb='$user_fb', user_twitter='$user_twitter', user_af='$user_af', inactive=' ' WHERE user_id='$user_id_selected'");
         }
         $_SESSION['edit_message'] = "User data modified";
 

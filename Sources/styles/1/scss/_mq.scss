@@ -22,9 +22,12 @@
     #welcome {margin-bottom: 20px;}
 }
 
+@media screen and (max-width: 1279px) {
+    #welcome {margin-top: 0px;}
+} 
 
 //*----------------------------------------------------------
-//logon tile --> front page
+//logon tile --> front page --> Not used anymore
 //------------------------------------------------------------ */
 //* 2 tiles and background welcome image */
 @media screen and (min-width: 640px) and (max-width: 800px) {
@@ -42,8 +45,30 @@
 
 
 //*----------------------------------------------------------
+//Register tile --> front page
+//------------------------------------------------------------ */
+//* 2 tiles and background welcome image */
+@media screen and (min-width: 640px) and (max-width: 1279px) {
+    .register {margin-top: 0; margin-bottom:20px;}
+}
+
+//* 1 tile */
+@media screen and (max-width: 639px) {
+    .register {
+        width: 100%;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+}
+
+
+//*----------------------------------------------------------
 //latest news tile --> front page
 //------------------------------------------------------------ */
+@media screen and (max-width: 639px){
+     .latest_news {margin-top: 20px;}
+}
+
 @media screen and (min-width: 640px) and (max-width: 800px) {
     .latest_news {margin-top: 395px;}
 }
@@ -61,8 +86,13 @@
 //------------------------------------------------------------ */
 @media screen and (min-width: 1495px){
     .screenstar_position_front {
-        margin-top: 20px;
         width: 94%;
+    }
+}
+
+@media screen and (max-width: 1494px){
+    .screenstar_position_front {
+        margin-top:0px;
     }
 }
 
@@ -70,10 +100,6 @@
 //*----------------------------------------------------------
 //datequote tile - front page
 //------------------------------------------------------------ */
-//* 1 and 2 tiles */
-@media screen and (max-width: 800px) {
-    .datequote_position_front {margin-top: 0;}
-}
 
 @media screen and (min-width: 1495px){
     .datequote_position_front {
@@ -82,14 +108,50 @@
     }
 }
 
+@media screen and (max-width: 1494px){
+    .datequote_position_front {
+        float: right;
+    }
+}
+
+@media screen and (max-width: 639px){
+    .datequote_position_front {
+    }
+}
+
+//*----------------------------------------------------------
+//tile open db - front page
+//------------------------------------------------------------ */
+
+@media screen and (min-width: 1495px){
+    .tile_open_db_front {
+        float: left;
+        width: 94%;
+    }
+}
+
+@media screen and (max-width: 1494px){
+    .tile_open_db_front {
+        float: right;
+    }
+}
+
 
 //*----------------------------------------------------------
 //Who is it - front page
 //------------------------------------------------------------ */
-@media screen and (min-width: 1495px){
-    .whoisit_position_front {float: right;}
+@media screen and (min-width: 1280px){
+    .whoisit_position_front {
+        float: right;
+        margin-top: 20px;
+    }
 }
 
+@media screen and (max-width: 480px){
+    .whoisit_position_front {
+        margin-top: 20px;
+    }
+}
 
 //*----------------------------------------------------------
 //Latest reviews tile - front page
@@ -123,12 +185,43 @@
     }
 }
 
+//*----------------------------------------------------------
+//Social Corner tile - front page
+//------------------------------------------------------------ */
+@media screen and (min-width: 1495px){
+    .social_corner_position_front {
+        float: left;
+        width: 94%;
+    }
+}
+
+//*----------------------------------------------------------
+//spotlight tile - front page
+//------------------------------------------------------------ */
+@media screen and (min-width: 1495px){
+    .spotlight_position_front { 
+        float: left;
+        width: 100%;
+    }
+}
+
+
 
 //*----------------------------------------------------------
 //Hotlinks tile - front page
 //------------------------------------------------------------ */
 @media screen and (min-width: 1495px){
     .hotlinks_position_front {
+        width: 94%;
+        float: left;
+    }
+}
+
+//*----------------------------------------------------------
+//class tile - front page
+//------------------------------------------------------------ */
+@media screen and (min-width: 1495px){
+    .class_position_front {
         width: 94%;
         float: left;
     }
@@ -143,6 +236,374 @@
         float: right;
     }
 }
+
+
+//*----------------------------------------------------------
+//games main page
+//------------------------------------------------------------ */
+@media screen and (max-width: 1919px){
+    #games_nav{display:none;}
+    #games_main_space{display:none;}
+}
+
+@media screen and (max-width: 1450px){
+    .standard_tile_input_small_site{
+        width: 98.3%;
+    }
+}
+
+@media screen and (max-width: 1049px){
+    .games_main_input_site_text {width: 50%;}
+}
+   
+
+@media screen and (max-width: 1000px){
+    .standard_tile_input_small_site{
+        width: 97.7%;
+    }
+}
+
+@media screen and (max-width: 600px) { 
+    .games_main_text_site {display: inline; width:100%;}
+    .games_main_text_short {display: none;}
+    .games_main_input_site, .games_main_input_site_text, .games_main_input_list_text {display: inline;width:100%;margin-bottom:5px;}
+    .games_main_row_site {width: 90%;}
+    .standard_tile_input_small_site, #games_main_select_site{margin-bottom:10px;}
+    .games_main_container {flex-direction: column; margin-left:10%;}
+    #child_1_games,#child_2_games,#child_3_games{width:100%;}
+    #child_1_games{border-right: 1px solid #01b5b5; border-bottom:0px;}
+    #child_3_games{display:none;}
+    #child_2_games{border-left: 1px solid #01b5b5; border-top:0px;}
+}
+
+
+//*----------------------------------------------------------
+//games main list
+//------------------------------------------------------------ */
+@media screen and (max-width: 450px){
+    #download-json{
+        display: none;
+    }
+}
+
+@media screen and (max-width: 1599px){
+    #games_main_list_4, #games_main_list_2, #games_main_list_1 {display:none;}
+    #games_main_list_3 {display:inline;}
+}
+
+@media screen and (max-width: 949px){
+    #games_main_list_4, #games_main_list_3, #games_main_list_1 {display:none;}
+    #games_main_list_2 {display:inline;}
+}
+
+@media screen and (max-width: 799px){
+    #games_main_list_4, #games_main_list_2, #games_main_list_1 {display:none;}
+    #games_main_list_3 {display:inline;}
+}
+
+@media screen and (max-width: 670px){
+    #games_main_list_4, #games_main_list_3, #games_main_list_1 {display:none;}
+    #games_main_list_2 {display:inline;}
+}
+
+@media screen and (max-width: 450px){
+    #games_main_list_4, #games_main_list_3, #games_main_list_2 {display:none;}
+    #games_main_list_1 {display:inline;}
+}
+
+
+
+//*----------------------------------------------------------
+//games main details
+//------------------------------------------------------------ */
+@media screen and (min-width: 800px) and (max-width: 1280px) {
+    .games_main_details_submissions_position_high{display:none;}
+    .games_main_details_submisions_position_medium{display:inline;}
+}
+
+
+@media screen and (max-width: 1280px) {
+    #column_left_games_details{
+        float: left;
+        width:40%;
+    }
+
+    #column_center_games_details{
+        float: right;
+        width: 58%;
+    }
+    
+    #column_right_games_details {
+        float: right;
+        width: 58%;
+    }
+}
+
+//* for lower resolutions put the left and right below eachother */
+@media screen and (max-width: 799px) {
+    .main_container_games_details  {
+        display: flex;
+        flex-direction: column-reverse;
+        float: left;
+        width: 100%;
+    }
+
+    #column_left_games_details  { width: 100%; float: left; margin: auto;  order:2;}
+    #column_center_games_details { width: 100%; float: left; margin: auto; order:3;  }
+    #column_right_games_details  { width: 100%; float: right; margin: auto; order:1;}
+
+    .main_container_games_details  >div {
+        width: 100%;
+    }
+
+    .content_box_games_details  {
+        display: block;
+        margin: 0 auto;
+    }
+    
+    .games_main_detail_nav{display:none;}
+    
+    .games_main_details_info_position_low{display:inline;}
+    .games_main_details_info_position_high{display:none;}
+
+}
+
+@media screen and (min-width: 800px) and (max-width: 1000px) {
+    .game_details_review_preview_left {display:none;}
+}
+
+@media screen and (max-width: 600px) {
+    .game_details_review_preview_left {display:none;}
+}
+
+//*----------------------------------------------------------
+//games main details - game review
+//------------------------------------------------------------ */
+@media screen and (max-width: 999px) {
+    .games_detail_review_container {
+        flex-direction: column;
+    }
+
+    #games_detail_review_screenshots,
+    #games_detail_review_text {
+        width: 100%;
+        float: left;
+    }
+
+    .games_detail_review_container >div {
+        width: 100%;
+    }
+
+    .games_detail_review_child {
+        display: block;
+        margin: 0 auto;
+    }
+
+    .games_detail_review_screenshot_order {
+        display: inline-block;
+        vertical-align: top;
+    }
+    
+    .games_detail_review_screenshot_space {display:inline;}
+    #games_detail_review_screenshots{background-color: #122323;}
+}
+
+//*----------------------------------------------------------
+//Interviews details
+//------------------------------------------------------------ */
+@media screen and (max-width: 1280px) {
+    #column_left_interviews_details  {
+        float: left;
+        width:40%;
+    }
+
+    #column_center_interviews_details  {
+        float: right;
+        width: 58%;
+    }
+
+    #column_right_interviews_details  { 
+        float: left; 
+        width: 40%;
+        margin-left:0;
+    }
+}
+
+//* for lower resolutions put the left and right below eachother */
+@media screen and (max-width: 799px) {
+    #column_left_interviews_details  { width: 100%; float: left; margin: auto;  order:3;}
+    #column_center_interviews_details { width: 100%; float: left; margin: auto; order:2;  }
+    #column_right_interviews_details  { width: 100%; float: right; margin: auto; order:1;}
+}
+
+
+//*----------------------------------------------------------
+//News
+//------------------------------------------------------------ */
+@media screen and (max-width: 900px) {
+    .news_date {display: inline;}
+    .news_right_head {display: none;}
+    .news_left_head{width:100%;}
+}
+
+//*----------------------------------------------------------
+//reviews details
+//------------------------------------------------------------ */
+@media screen and (max-width: 1280px) {
+    #column_left_reviews_details  {
+        float: left;
+        width:40%;
+    }
+
+    #column_center_reviews_details  {
+        float: right;
+        width: 58%;
+    }
+
+    #column_right_reviews_details  { 
+        float: left; 
+        width: 40%;
+        margin-left:0;
+    }
+}
+
+//* for lower resolutions put the left and right below eachother */
+@media screen and (max-width: 799px) {
+    #column_left_reviews_details  { width: 100%; float: left; margin: auto;  order:2;}
+    #column_center_reviews_details { width: 100%; float: left; margin: auto; order:3;  }
+    #column_right_reviews_details  { width: 100%; float: right; margin: auto; order:1;}
+}
+
+
+//*----------------------------------------------------------
+// Class of AL
+//------------------------------------------------------------ */
+@media only screen and (max-width: 1169px) {
+    .fa-birthday-cake{margin-left: 10%; margin-top: 5%;}
+    .cd-timeline-content .cd-date{text-align:center;display:block;float:none;}
+    .cd-icon{margin-top:3px;}
+    .cd-icon2{margin-top:8px;}
+}
+
+@media only screen and (min-width: 1170px) {
+  #cd-timeline {
+    margin-top: 3em;
+    margin-bottom: 3em;
+  }
+  #cd-timeline::before {
+    left: 50%;
+    margin-left: -2px;
+  }
+}
+
+@media only screen and (min-width: 1170px) {
+  .cd-timeline-block {
+    margin: 4em 0;
+  }
+  .cd-timeline-block:first-child {
+    margin-top: 0;
+  }
+  .cd-timeline-block:last-child {
+    margin-bottom: 0;
+  }
+}
+
+@media only screen and (min-width: 1170px) {
+  .cd-timeline-img {
+    width: 60px;
+    height: 60px;
+    left: 50%;
+    margin-left: -30px;
+    /* Force Hardware Acceleration in WebKit */
+    -webkit-transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+  }
+  .cssanimations .cd-timeline-img.is-hidden {
+    visibility: hidden;
+  }
+  .cssanimations .cd-timeline-img.bounce-in {
+    visibility: visible;
+    -webkit-animation: cd-bounce-1 0.6s;
+    -moz-animation: cd-bounce-1 0.6s;
+    animation: cd-bounce-1 0.6s;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .cd-timeline-content h2 {
+    font-size: 20px;
+    font-size: 1.25rem;
+  }
+  .cd-timeline-content p {
+    font-size: 16px;
+    font-size: 1rem;
+  }
+  .cd-timeline-content .cd-read-more, .cd-timeline-content .cd-date {
+    font-size: 14px;
+    font-size: 0.875rem;
+  }
+}
+@media only screen and (min-width: 1170px) {
+  .cd-timeline-content {
+    margin-left: 0;
+    width: 37%;
+  }
+  .cd-timeline-content::before {
+    top: 24px;
+    left: 100%;
+    border-color: transparent;
+    border-left-color: white;
+  }
+  .cd-timeline-content .cd-read-more {
+    float: left;
+  }
+  .cd-timeline-content .cd-date {
+    position: absolute;
+    width: 100%;
+    left: 140%;
+    top: 6px;
+    font-size: 16px;
+    font-size: 1rem;
+  }
+  .cd-timeline-block:nth-child(even) .cd-timeline-content {
+    float: right;
+  }
+  .cd-timeline-block:nth-child(even) .cd-timeline-content::before {
+    top: 24px;
+    left: auto;
+    right: 100%;
+    border-color: transparent;
+    border-right-color: white;
+  }
+  .cd-timeline-block:nth-child(even) .cd-timeline-content .cd-read-more {
+    float: right;
+  }
+  .cd-timeline-block:nth-child(even) .cd-timeline-content .cd-date {
+    left: auto;
+    right: 140%;
+    text-align: right;
+  }
+  .cssanimations .cd-timeline-content.is-hidden {
+    visibility: hidden;
+  }
+  .cssanimations .cd-timeline-content.bounce-in {
+    visibility: visible;
+    -webkit-animation: cd-bounce-2 0.6s;
+    -moz-animation: cd-bounce-2 0.6s;
+    animation: cd-bounce-2 0.6s;
+  }
+}
+
+@media only screen and (min-width: 1170px) {
+  /* inverse bounce effect on even content blocks */
+  .cssanimations .cd-timeline-block:nth-child(even) .cd-timeline-content.bounce-in {
+    -webkit-animation: cd-bounce-2-inverse 0.6s;
+    -moz-animation: cd-bounce-2-inverse 0.6s;
+    animation: cd-bounce-2-inverse 0.6s;
+  }
+}
+
+
 
 //*----------------------------------------------------------
 // CPanel
@@ -972,6 +1433,7 @@
     }
 
     .column_right {display: none;}
+    .column_phone {display: none;}
     .column_left_tab { width: 48%; float: left;}
     .column_right_tab { width: 48%; float: right;}
     .column_wide_right {width: 48%; float: right;}
@@ -980,18 +1442,19 @@
 
 //* 1 tile and a simplified intro screen */
 @media screen and (max-width: 639px) {
-    .column_left { width: 100%; }
+    .column_left { display: none;}
     .column_center { width: 100%; margin-left: 0;}
     .column_right { width: 100%; }
     .column_right_tab {display: none;}
     .column_left_tab {display: none;}
-    .column_wide_right { width: 100%;}
+    .column_wide_right {display: none;}
     .column_wide_left {display: none;}
 }
 
 @media screen and (min-width: 801px) {
     .column_right_tab {display: none;}
     .column_left_tab {display: none;}
+    .column_phone {display: none;}
 }
 
 //*  4 tiles and background welcome image */
@@ -1004,6 +1467,7 @@
     .column_left {display: none;}
     .column_center {display: none;}
     .column_right {display: none;}
+    .column_phone {display: none;}
 }
 
 @media screen and (min-width: 450px) and (max-width: 639px) {
@@ -1051,6 +1515,19 @@
 }
 }
 
+//*----------------------------------------------------------
+// Back to top arrow
+//------------------------------------------------------------ */
+@media screen and (max-width: 599px) {
+    .scroll-top-wrapper {
+        width: 40px;
+        height: 38px;
+        line-height: 36px;
+        right: 10px;
+        bottom: 10px;
+    }
+}
+        
 //*----------------------------------------------------------
 // resolutions tested!
 //------------------------------------------------------------ */

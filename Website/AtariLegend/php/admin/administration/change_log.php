@@ -84,6 +84,10 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH)) {
         if ($log['sub_section'] == 'File') {
             $subsection_link = ("../downloads/downloads_game_detail.php" . '?game_id=' . $log['sub_section_id']);
         }
+        
+        if ($log['sub_section'] == 'Fact') {
+            $subsection_link = ("../games/games_facts.php" . '?game_id=' . $log['sub_section_id'] . '&game_name=' . $log['section_name']);
+        }
 
         if ($log['sub_section'] == 'Screenshot') {
             $subsection_link = ("../games/games_screenshot_add.php" . '?game_id=' . $log['sub_section_id'] . '&game_name=' . $log['section_name']);
@@ -146,6 +150,11 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH)) {
             $section_link    = ("../trivia/manage_trivia_quotes.php");
             $subsection_link = ("../trivia/manage_trivia_quotes.php");
         }
+        
+        if ($log['sub_section'] == 'Spotlight') {
+            $section_link    = ("../trivia/spotlight.php");
+            $subsection_link = ("../trivia/spotlight.php");
+        }
     }
 
     //  the USER SECTION
@@ -204,6 +213,28 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH)) {
 
         if ($log['sub_section'] == 'Interview' or $log['sub_section'] == 'Screenshots') {
             $subsection_link = $section_link;
+        }
+        
+        if ($log['sub_section'] == 'Comment') {
+            $section_link = ("../interviews/interviews_edit.php" . '?interview_id=' . $log['section_id']);
+            if ($log['action'] == 'Delete') {
+                $subsection_link = ("../administration/change_log.php");
+            } else {
+                $subsection_link = ("../interviews/interviews_comment_edit.php" . '?interview_user_comments_id=' . $log['sub_section_id'] . '&v_counter=0');
+            }
+        }
+    }
+    
+    //  the REVIEW SECTION
+    if ($log['section'] == 'Reviews') {
+        $section_link = ("../games/games_review_comment_edit.php" . '?review_user_comments_id=' . $log['sub_section_id'] . '&v_counter=0');
+        
+        if ($log['sub_section'] == 'Comment') {
+            if ($log['action'] == 'Delete') {
+                $subsection_link = ("../administration/change_log.php");
+            } else {
+                $subsection_link = ("../games/games_review_comment_edit.php" . '?review_user_comments_id=' . $log['sub_section_id'] . '&v_counter=0');
+            }
         }
     }
 
@@ -409,6 +440,21 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH)) {
         if ($log['sub_section'] == 'Authors') {
              $subsection_link = ("../individuals/individuals_edit.php" . '?ind_id=' . $log['sub_section_id']);
         }
+    }
+    
+    //  the BUG REPORT TYPE SECTION
+    if ($log['section'] == 'Bug type') {
+        $section_link = ("../administration/bug_report_type_edit.php" . '?type_id=' . $log['section_id']);
+
+        if ($log['sub_section'] == 'Bug type') {
+            $subsection_link = ("../administration/bug_report_type_edit.php" . '?type_id=' . $log['section_id']);
+        }
+    }
+    
+    //  the BUG REPORT SECTION
+    if ($log['section'] == 'Bug') {
+        $section_link    = ("../administration/bug_report.php");
+        $subsection_link = ("../administration/bug_report.php");
     }
   
     

@@ -10,7 +10,8 @@
 *   Id: games_review_submitted.html,v 0.10 2005/12/04 Gatekeeper
 *   Id: games_review_submitted.html,v 0.15 2016/07/24 Gatekeeper
 *					- AL 2.0
-*
+*   Id: games_review_submitted.html,,v 0.16 2017/09/01 10:20 ST Graveyard
+*                  - added some tweaks for review submissions
 ***************************************************************************/
 
 ************************************************************************************************
@@ -35,7 +36,7 @@ The submitted review page
 		<legend>Submitted Reviews</legend>
 			{if $submission_nr != '0'}
 				{foreach from=$review item=line}
-					<a href="../games/games_review_edit.php?reviewid={$line.review_id}&game_id={$line.game_id}" class="left_nav_link"><b>{$line.game_name}</b></a> reviewed by <a href="../user/user_detail.php?user_id_selected={$line.user_id}" class="left_nav_link"><b>{$line.userid}</b></a><br>
+					<a href="../games/games_review_edit.php?reviewid={$line.review_id}&game_id={$line.game_id}&action=submitted" class="left_nav_link"><b>{$line.game_name}</b></a> reviewed by <a href="../user/user_detail.php?user_id_selected={$line.user_id}" class="left_nav_link"><b>{$line.userid}</b></a><br>
 				{/foreach}
 			{else}
 				No reviews submitted today!

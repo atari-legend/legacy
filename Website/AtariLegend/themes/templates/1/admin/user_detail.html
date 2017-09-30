@@ -19,13 +19,20 @@ User detail page. Overhere you can maintain the log on data of a user and have a
 *********************************************************************************************************
 *}
 {extends file='1/admin/frontpage.html'}
+
+{block name=left_tile}
+    {include file='1/admin/tile_user_contribution.html'}
+    <br>
+    {include file='1/admin/left_nav.html'}
+{/block}
+
 {block name=java_script}
 <script type="text/javascript">
 $(function() {    
     $but = $('#file_upload_user_detail');
     
     $("input:file[id=file_upload]").change(function() {
-        document.getElementById('file_upload_user_detail').value = $(this).val();
+        document.getElementById('file_upload_user_detail').value = 'File selected';
     });
 });
 
@@ -50,7 +57,13 @@ function user_stats()
    	document.getElementById('user').submit();
 }
 </script>
+<script type='text/JavaScript' src="{$template_dir}includes/js/sha512.js"></script> <!-- log on security script -->
+<script type='text/JavaScript' src="{$template_dir}includes/js/md5.js"></script>  <!-- log on security script -->
+<script type='text/JavaScript' src="{$template_dir}includes/js/forms.js"></script> <!-- log on security script -->
+<script type="text/javascript" src="{$template_dir}includes/js/lightbox.min.js"></script>
+<link type="text/css" href="{$style_dir}css/lightbox.css" hreflang="en" rel="stylesheet">
 {/block}
+
 {block name=main_tile}
 <div class="standard_tile" id="user_details">
     <div class="help-tip">
@@ -61,10 +74,10 @@ function user_stats()
 	<div class="standard_tile_text">
 		{if (isset($users.user_name))}
 		<div class="left_nav_section">
-			Overhere you can maintain the log on data of a user and have a look at his activities. Press 'modify' to change certain
-			data. 'Delete' will completely remove the account. You are also able to reset the password of the user. After resetting, you are
-			able to enter and save a new password for the account. Finally, press 'statistics' to see what this user has done at AL so far.
-		</div> 
+            In here, you can examine and maintain the log-on data of a user and have a look at their activities. 
+            'Modify' will let you change certain data. 'Delete' will completely remove the account. You are also able to reset the password of the user. 
+            After resetting, you are able to enter and save a new password for the account. Finally, 'Statistics' will display what this user has done at AL so far.
+        </div> 
 		<br><br>
 		<fieldset>
 			<legend>User details</legend>
@@ -84,14 +97,48 @@ function user_stats()
 						<div class="user_details_input"><input type="text" name="user_website"  maxlength="255" value="{$users.user_website}" class="user_details_input_small"></div>
 					</div>
 					<div class="user_details_row">
-						<div class="user_details_text">User MSNM :</div>
-						<div class="user_details_input"><input type="text" name="user_msnm"  maxlength="255" value="{$users.user_msnm}" class="user_details_input_small"></div>
+						<div class="user_details_text">User Facebook :</div>
+						<div class="user_details_input"><input type="text" name="user_fb"  maxlength="255" value="{$users.user_fb}" class="user_details_input_small"></div>
 					</div>
                     <div class="user_details_row">
 						<div class="user_details_text">Join date :</div>
 						<div class="user_details_input"><input type="text" name="join date"  maxlength="255" value="{$users.join_date}" class="user_details_input_small" disabled></div>
 					</div>
+				</div>
+                <div class="user_details_child" id="child_3_user"></div>
+				<div class="user_details_child" id="child_2_user">                    
+					<!--<div class="user_details_row">
+						<div class="user_details_text">User pwd :</div>
+						{if $users.user_pwd ==! ''}
+							<div class="user_details_input"><input type="button" value="reset" class="topbutton_cpanel_small" onClick="reset_pwd();"></div>
+						{else}
+							<div class="user_details_input"><input type="text" name="user_pwd"  maxlength="255" class="user_details_input_small"></div>
+						{/if}
+					</div>-->
+                    {if $user_session.permission != '2'}
+					<div class="user_details_row">	
+						<div class="user_details_text">User permission :</div>
+						<div class="user_details_input"><input type="text" name="user_permission"  maxlength="60" value="{$users.user_permission}" class="user_details_input_small"></div>
+					</div>
+                    {else}
+                    <div class="user_details_row">							
+						<div class="user_details_input"><input type="hidden" name="user_permission"  maxlength="60" value="{$users.user_permission}" class="user_details_input_small"></div>
+					</div>
+                    {/if}
+					<div class="user_details_row">	
+						<div class="user_details_text">User AF :</div>
+						<div class="user_details_input"><input type="text" name="user_af"  maxlength="255" value="{$users.user_af}" class="user_details_input_small"></div>
+					</div>
 					<div class="user_details_row">
+						<div class="user_details_text">User Twitter :</div>
+						<div class="user_details_input"><input type="text" name="user_twitter"  maxlength="255" value="{$users.user_twitter}" class="user_details_input_small"></div>
+					</div>
+                    <div class="user_details_row">
+						<div class="user_details_text">Last visit :</div>
+						<div class="user_details_input"><input type="text" name="last_visit"  maxlength="255" value="{$users.last_visit}" class="user_details_input_small" disabled></div>
+					</div>
+                    {if $user_session.permission != '2'}
+                    <div class="user_details_row">
 						<div class="user_details_text">Inactive :</div>
 						<div class="user_details_input">
                             <div class="checkbox" id="checkbox_user_detail">
@@ -101,33 +148,13 @@ function user_stats()
                             </div>
                         </div>
 					</div>
-				</div>
-                <div class="user_details_child" id="child_3_user"></div>
-				<div class="user_details_child" id="child_2_user">
-					<div class="user_details_row">
-						<div class="user_details_text">User pwd :</div>
-						{if $users.user_pwd ==! ''}
-							<div class="user_details_input"><input type="button" value="reset" class="topbutton_cpanel_small" onClick="reset_pwd();"></div>
-						{else}
-							<div class="user_details_input"><input type="text" name="user_pwd"  maxlength="255" class="user_details_input_small"></div>
-						{/if}
+                    {else}
+                    <div class="user_details_row">						
+						<div class="user_details_input">                          
+                            <input type="hidden" value="1" id="user_inactive" name="user_inactive" {if $users.inactive == '1'} checked {/if}>                               
+                        </div>
 					</div>
-					<div class="user_details_row">	
-						<div class="user_details_text">User permission :</div>
-						<div class="user_details_input"><input type="text" name="user_permission"  maxlength="60" value="{$users.user_permission}" class="user_details_input_small"></div>
-					</div>
-					<div class="user_details_row">	
-						<div class="user_details_text">User ICQ :</div>
-						<div class="user_details_input"><input type="text" name="user_icq"  maxlength="255" value="{$users.user_icq}" class="user_details_input_small"></div>
-					</div>
-					<div class="user_details_row">
-						<div class="user_details_text">User AIM :</div>
-						<div class="user_details_input"><input type="text" name="user_aim"  maxlength="255" value="{$users.user_aim}" class="user_details_input_small"></div>
-					</div>
-                    <div class="user_details_row">
-						<div class="user_details_text">Last visit :</div>
-						<div class="user_details_input"><input type="text" name="last_visit"  maxlength="255" value="{$users.last_visit}" class="user_details_input_small" disabled></div>
-					</div>
+                    {/if}
 				</div>
 			</div>
 			<table>	
@@ -148,33 +175,80 @@ function user_stats()
 		</fieldset>
 		<br/><br/>
 		<fieldset>
-			<legend>Avatar</legend>
-                
-			{if $users.avatar_ext !=''}
-				<form action="../user/db_user.php?action=delete_avatar&amp;user_id_selected={$users.user_id}" method="post" name="delete_avatar">
-				Delete Image?
-				<div>
-					<br><img src="../../includes/show_image.php?file={$users.image}&amp;resize=160,null,null,null" alt="Avatar" class="user_stats_img" id="user_details_img_dark">
-				</div>
-				<br>
-				<input type="hidden" name="user_id_selected" value="{$users.user_id}">
-				<input type="submit" value="Delete" class="topbutton_cpanel_small">
-				</form>
-			{else}
-				<form enctype="multipart/form-data" action="../user/db_user.php?user_id_selected={$users.user_id}" method="post" name="avatar" id="avatar">
-					Attach image
-				<br><br>
-				<label for="file_upload" class="file_upload">Select file</label>
-                <input id="file_upload" type="file" name="image">
-                <input type="text" class="standard_tile_input_small" id="file_upload_user_detail">&nbsp;
-                <br><br>
-				<input type="submit" name="Modify" value="Upload" class="topbutton_cpanel_small">
-				<input type="hidden" name="MAX_FILE_SIZE" value="50000">
-				<input type="hidden" name="user_id_selected" value="{$users.user_id}">
-				<input type="hidden" name="action" value="avatar_upload">
-				</form>
-			{/if}
+			<legend>Avatar</legend> 
+                <div class="user_details_container">
+                    <div class="user_details_child" id="child_1_user">
+                        {if $users.avatar_ext !=''}
+                            <form action="../user/db_user.php?action=delete_avatar&amp;user_id_selected={$users.user_id}" method="post" name="delete_avatar">
+                            Delete Image?
+                            <div>
+                                <a href="../../includes/show_image.php?file={$users.image}" data-lightbox="image-1">
+                                    <br><img src="../../includes/show_image.php?file={$users.image}&amp;resize=160,null,null,null" alt="Avatar" class="user_stats_img" id="user_details_img_dark">
+                                </a>
+                            </div>
+                            <br>
+                            <input type="hidden" name="user_id_selected" value="{$users.user_id}">
+                            <input type="submit" value="Delete" class="topbutton_cpanel_small">
+                            </form>
+                        {else}
+                            <form enctype="multipart/form-data" action="../user/db_user.php?user_id_selected={$users.user_id}" method="post" name="avatar" id="avatar">
+                                Attach image
+                            <br><br>
+                            <label for="file_upload" class="file_upload">Select file</label>
+                            <input id="file_upload" type="file" name="image">
+                            <input type="text" class="standard_tile_input_small" id="file_upload_user_detail">&nbsp;
+                            <br><br>
+                            <input type="submit" name="Modify" value="Upload" class="topbutton_cpanel_small">
+                            <input type="hidden" name="MAX_FILE_SIZE" value="50000">
+                            <input type="hidden" name="user_id_selected" value="{$users.user_id}">
+                            <input type="hidden" name="action" value="avatar_upload">
+                            </form>
+                        {/if}
+                     </div>
+                </div>
 		</fieldset>
+        <br/><br/>
+        <fieldset>           
+			<legend>Reset Password</legend>  
+            <form action="../user/db_user.php" method="post" name="login_form">
+			<div class="user_details_container">
+				<div class="user_details_child" id="child_1_user">
+                    {if $user_session.permission == '1'}
+                        You are admin, you can change passwords for all users <br><br>
+                        <div class="user_details_row">
+                            <div class="user_details_text">New password :</div>
+                            <div class="user_details_input"><input type="password" name="user_new_pwd"  maxlength="255" class="user_details_input_small"></div>
+                        </div>
+                        <br>
+                        <input type="submit" name="Modify" value="Modify" class="topbutton_cpanel_small">
+                        <input type="hidden" name="user_id_selected" value="{$users.user_id}">
+                        <input type="hidden" name="action" value="reset_pwd">
+                    {else}
+                        {if $user_session.user_id == $users.user_id}
+                            <div class="user_details_row">
+                                <div class="user_details_text">Current password :</div>
+                                <div class="user_details_input"><input name="password" type="password" required  maxlength="255" class="user_details_input_small"></div>
+                            </div>
+                            <div class="user_details_row">
+                                <div class="user_details_text">New password :</div>
+                                <div class="user_details_input"><input type="password" name="user_new_pwd"  maxlength="255" class="user_details_input_small"></div>
+                            </div>
+                            <div class="user_details_row">
+                                <div class="user_details_text">Confirm new password :</div>
+                                <div class="user_details_input"><input type="password" name="user_confirm_pwd"  maxlength="255" class="user_details_input_small"></div>
+                            </div>
+                            <br>
+                            <input type="button" onclick="formhash(this.form, this.form.password);" name="Modify" value="Modify" class="topbutton_cpanel_small">
+                            <input type="hidden" name="user_id_selected" value="{$users.user_id}">
+                            <input type="hidden" name="action" value="reset_pwd">
+                        {else}
+                            You are not allowed to reset other user's passwords
+                        {/if}
+                    {/if}
+                </div>
+            </div>
+            </form>
+        </fieldset>
 		{else}
 		<div class="left_nav_section">
 			User does not exist.

@@ -58,6 +58,12 @@ img {display: block; }
     margin-right: 5%;
 }
 
+.main_online{
+    float: left;
+    width: 100%;
+    margin-top: 20px;
+}
+
 //*------------------------------------------------------------
 //Standard tile settings
 //
@@ -269,44 +275,46 @@ img {display: block; }
     background: #6a6a6a;
 }
 
-.standard_list_entry_left {
+//.standard_list_entry_left {
+//    position: absolute;
+//    top: 50%;
+//    left: 0;
+//    width: 50%;
+//    transform: translateY(-50%);
+//}
+
+//.standard_list_entry_left img {
+//    max-width: 100%;
+//    width: 80%;
+//    margin-left: 15px;
+//    box-shadow: 0 0 7px #484c7b;
+//}
+
+//.standard_list_entry_left img:hover { box-shadow: 0 0 7px #fff; }
+//.standard_list_entry_right {
+.standard_list_entry_news{
     position: absolute;
-    top: 50%;
-    left: 0;
-    width: 50%;
+    margin: 10px;
+    top: 43%;
+//    left: 48%;
+    width: 90%;
     transform: translateY(-50%);
 }
 
-.standard_list_entry_left img {
-    max-width: 100%;
-    width: 80%;
-    margin-left: 15px;
-    box-shadow: 0 0 7px #484c7b;
-}
-
-.standard_list_entry_left img:hover { box-shadow: 0 0 7px #fff; }
-.standard_list_entry_right {
-    position: absolute;
-    top: 50%;
-    left: 48%;
-    width: 50%;
-    transform: translateY(-50%);
-}
-
-.standard_list_entry_right_news_text {
-    display: block;
-    //* Fallback for non-webkit */
+.standard_list_entry_news_text {
+    font-weight: 100;
+    color: #000;
+    text-align: left;
     display: -webkit-box;
-    height: 70px;
+    height: 60px;
     padding: 0;
-    margin: 0;
-    overflow: hidden;
-    //* Fallback for non-webkit */
+    width:100%;
+    margin-top: 10px;
     line-height: 1.2;
-    text-overflow: ellipsis;
     box-sizing: border-box;
     -webkit-line-clamp: 5;
     -webkit-box-orient: vertical;
+    font-size:12pt;
 }
 
 .standard_tile_text { padding: 20px; }
@@ -378,6 +386,8 @@ img {display: block; }
 .selected{
     font-weight:bold;
 }
+
+#file_upload_medium{@extend #file_upload;}
 
 //*** checkbox css ****//
 .checkbox {
@@ -586,6 +596,7 @@ legend {
 }
 
 .help-tip p {
+    z-index: 10;
     position: relative;
     right: 290px;
     //* The tooltip */
@@ -605,7 +616,7 @@ legend {
 #help-tip2 p { 
     right: 200px;
     width: 200px;
-    }
+}
 
 //I am removing the pointer as the alignment of the text box changes from '?' to '?' - this is done the be compliant with a resolution of 320 width.
 //Test it for yourself to see what I mean
@@ -647,4 +658,100 @@ legend {
 @keyframes fadeIn {
     0% { opacity: 0; }
     100% { opacity: 100%; }
+}
+
+
+//*------------------------------------------------------------
+//The CSS for the tabs
+//-------------------------------------------------------------*/
+/* Style the tab */
+div.tab {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+}
+
+/* Style the buttons inside the tab */
+div.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+}
+
+/* Change background color of buttons on hover */
+div.tab button:hover {
+    background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+div.tab button.active {
+    background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
+}  
+
+/*fade in effect on tab */
+.tabcontent {
+    -webkit-animation: fadeEffect 1s;
+    animation: fadeEffect 0.5s; /* Fading effect takes 1 second */
+}
+
+@-webkit-keyframes fadeEffect {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+@keyframes fadeEffect {
+    from {opacity: 0;}
+    to {opacity: 1;}
+} 
+
+//*------------------------------------------------------------
+//The 'to the top' button
+//-------------------------------------------------------------*
+.scroll-top-wrapper {
+    position: fixed;
+	opacity: 0;
+	visibility: hidden;
+	overflow: hidden;
+	text-align: center;
+	z-index: 99999999;
+    background-color: #777777;
+	color: #eeeeee;
+	width: 50px;
+	height: 48px;
+	line-height: 48px;
+	right: 30px;
+	bottom: 30px;
+	padding-top: 2px;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	border-bottom-right-radius: 10px;
+	border-bottom-left-radius: 10px;
+	-webkit-transition: all 0.5s ease-in-out;
+	-moz-transition: all 0.5s ease-in-out;
+	-ms-transition: all 0.5s ease-in-out;
+	-o-transition: all 0.5s ease-in-out;
+	transition: all 0.5s ease-in-out;
+}
+.scroll-top-wrapper:hover {
+	background-color:  #888888;
+}
+.scroll-top-wrapper.show {
+    visibility:visible;
+    cursor:pointer;
+	opacity: 1.0;
+}
+.scroll-top-wrapper i.fa {
+	line-height: inherit;
 }

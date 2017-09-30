@@ -12,9 +12,7 @@
  *
  ***************************************************************************/
 
-//this is a test
-
-function InsertALCode($alcode) {
+ function InsertALCode($alcode) {
     $alcode = preg_replace("#\[color\=(\#[0-9A-F]{0,6}|[A-z]+)\](.*)\[\/color\]#Ui", "<span style=\"color: $1;\">$2</span>", $alcode);
     //$alcode = eregi_replace("\\[style=([^\\[]*)\\]","<span class=\"\\1\">",$alcode);
     //$alcode = str_replace("[/style]", "</span>", $alcode);
@@ -32,6 +30,10 @@ function InsertALCode($alcode) {
     $alcode = str_replace("[/tt]", "</tt>", $alcode);
     $alcode = str_replace("[sup]", "<sup>", $alcode);
     $alcode = str_replace("[/sup]", "</sup>", $alcode);
+    $alcode = str_replace("[screenstar]", "", $alcode);
+    $alcode = str_replace("[/screenstar]", "", $alcode);
+    $alcode = str_replace("[frontpage]", "", $alcode);
+    $alcode = str_replace("[/frontpage]", "", $alcode);
     $alcode = preg_replace("#\[b\](.+?)\[/b\]#is", "<b>\\1</b>", $alcode);
     $alcode = preg_replace("#\[i\](.+?)\[/i\]#is", "<i>\\1</i>", $alcode);
     $alcode = preg_replace("#\[u\](.+?)\[/u\]#is", "<u>\\1</u>", $alcode);
@@ -492,6 +494,7 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
             $result = $mysqli->query($query_game_id) or die("getting game name failed");
             $query_data = $result->fetch_array(MYSQLI_BOTH);
             $section_id = $query_data['game_id'];
+            $subsection_id = $query_data['game_id'];
         }
 
         //  get the game name
@@ -501,7 +504,9 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
         $section_name = $query_data['game_name'];
 
 
-        if ($subsection == 'Game' or $subsection == 'File' or $subsection == 'Screenshot' or $subsection == 'Mag score' or $subsection == 'Box back' or $subsection == 'Box front' or $subsection == 'Review' or $subsection == 'Review comment' or $subsection == 'Music' or $subsection == 'Submission') {
+        if ($subsection == 'Game' or $subsection == 'File' or $subsection == 'Screenshot' or $subsection == 'Mag score' or $subsection == 'Box back' 
+            or $subsection == 'Box front' or $subsection == 'Review' or $subsection == 'Review comment' or $subsection == 'Music' 
+            or $subsection == 'Submission' or $subsection == 'Fact') {
             $subsection_name = $section_name;
         }
 
@@ -617,7 +622,7 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
 
     //  Everything we do for the Trivia SECTION
     if ($section == 'Trivia') {
-        if ($subsection == 'DYK' or $subsection == 'Quote') {
+        if ($subsection == 'DYK' or $subsection == 'Quote' or $subsection == 'Spotlight') {
             $subsection_name = ("Trivia ID " . $subsection_id);
             $section_name    = ("Trivia ID " . $subsection_id);
         }
@@ -740,7 +745,7 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
                 $query_data = $result->fetch_array(MYSQLI_BOTH);
                 $section_id = $query_data['ind_id'];
             }
-        }
+        }       
 
         // get the name of the person that is interviewed
         $query_ind = "SELECT ind_name FROM individuals WHERE ind_id = '$section_id'";
@@ -750,6 +755,43 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
 
         if ($subsection == 'Interview' or $subsection == 'Screenshots') {
             $subsection_name = $section_name;
+        }
+        
+        if ($subsection == 'Comment') {
+            //get game_id and interview_user_comments_id
+            $query_user_comment = "SELECT interview_user_comments.interview_id,
+                                          interview_user_comments.interview_user_comments_id,
+                                          individuals.ind_name
+                                          FROM interview_user_comments
+                                          LEFT JOIN interview_main ON ( interview_user_comments.interview_id = interview_main.interview_id )
+                                          LEFT JOIN individuals on (interview_main.ind_id = individuals.ind_id)
+                                          WHERE interview_user_comments.comment_id = '$subsection_id'";
+
+            $result = $mysqli->query($query_user_comment) or die("getting user comments id failed");
+            $query_data      = $result->fetch_array(MYSQLI_BOTH);
+            $subsection_id   = $query_data['interview_user_comments_id'];
+            $section_id      = $query_data['interview_id'];
+            $section_name    = $query_data['ind_name'];
+            $subsection_name = $query_data['ind_name'];
+        }
+    }
+    
+     //  Everything we do for the Review section
+    if ($section == 'Reviews') {
+        if ($subsection == 'Comment') {
+            //get the game name
+            $query_user_comment = "SELECT * FROM review_user_comments
+                                          LEFT JOIN review_main ON (review_user_comments.review_id = review_main.review_id)
+                                          LEFT JOIN review_game ON (review_main.review_id = review_game.review_id)
+                                          LEFT JOIN game ON (game.game_id = review_game.game_id)
+                                          WHERE review_user_comments.comment_id = '$subsection_id'";
+
+            $result = $mysqli->query($query_user_comment) or die("getting user comments id failed");
+            $query_data      = $result->fetch_array(MYSQLI_BOTH);
+            $subsection_id   = $query_data['review_user_comments_id'];
+            $section_id      = $query_data['review_id'];
+            $section_name    = $query_data['game_name'];
+            $subsection_name = $query_data['game_name'];
         }
     }
 
@@ -1413,7 +1455,26 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
             $subsection_name = $query_data['ind_name'];
         }
     }
+    
+    //  Everything we do for the BUG REPORT TYPE SECTION
+    if ($section == 'Bug type') {
+        // get the name of the type
+        $query_type = "SELECT bug_report_type FROM bug_report_type WHERE bug_report_type_id = '$section_id'";
+        $result = $mysqli->query($query_type) or die("getting type name failed");
+        $query_data   = $result->fetch_array(MYSQLI_BOTH);
+        $section_name = $query_data['bug_report_type'];
 
+        if ($subsection == 'Bug type') {
+            $subsection_name = $section_name;
+        }
+    }
+    
+    //  Everything we do for the BUG REPORT SECTION
+    if ($section == 'Bug') {
+        $subsection_name = ("Bug report ID " . $subsection_id);
+        $section_name    = ("Bug report ID " . $subsection_id);
+    }
+    
     $section_name    = $mysqli->real_escape_string($section_name);
     $subsection_name = $mysqli->real_escape_string($subsection_name);
 

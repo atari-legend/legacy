@@ -41,6 +41,12 @@ function delete_news(news_id)
 
 {block name=main_tile}
 <div class="standard_tile" id="news_edit_all">
+     <div class="help-tip">
+		<p> 
+            <i class="fa fa-pencil fa-lg" aria-hidden="true"></i> - Edit <br>
+            <i class="fa fa-trash fa-lg" aria-hidden="true"></i> - Delete <br>
+        </p>
+    </div>
 	<h1>NEWS EDIT</h1>
 	<div class="standard_tile_line"></div>
 	<div class="standard_tile_text">
@@ -63,18 +69,20 @@ function delete_news(news_id)
 				<b>Headline - {$line.edit_headline}</b>
 				<br>
 				<br>
+                {if $line.edit_image_id != '0'}
 				<div style="float:left;margin-right:15px;">
 					<img src="../../includes/show_image.php?file={$line.edit_icon}&amp;resize=120,null,null,null" alt="newsbutton" class="game_screenshot_img">
 				</div>	
-				<div style="display:inline;">
-					<i>{$line.edit_text}</i>
-				</div>
+                {/if}
+                <div style="display:inline;">
+                    <i>{$line.edit_text}</i>
+                </div>
 				<br>
 				<div style="width:100%;text-align:center;">
 					<br>
 					<br>
-					<a href="news_edit.php?news_id={$line.edit_id}" class="left_nav_link">EDIT</a> ::
-					<a href="javascript:delete_news({$line.edit_id})" class="left_nav_link">DELETE</a>
+					<a href="news_edit.php?news_id={$line.edit_id}" class="left_nav_link"><i class="fa fa-pencil fa-lg" aria-hidden="true"></i></a> ::
+					<a href="javascript:delete_news({$line.edit_id})" class="left_nav_link"><i class="fa fa-trash fa-lg" aria-hidden="true"></i></a>
 				</div>
 			</fieldset> 
 			<br/>

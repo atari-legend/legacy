@@ -28,15 +28,13 @@
         <div class="content_box_cpanel" id="column_center_cpanel">
             <br>
             {block name=main_tile}{/block}
-            <br>
-            {block name=who_is_online}
-                {include file='1/admin/who_is_online.html'}
-            {/block}
         </div>
         <div class="content_box_cpanel" id="column_right_cpanel">
             <br>
             {block name=right_tile}
                 {include file='1/admin/quick_search_games.html'}
+                <br>
+                {include file='1/main/tile_bug_report.html'}
             {/block}
         </div>
     </div>

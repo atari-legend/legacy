@@ -12,7 +12,10 @@
 *					AL 2.0 update
 *   Id: games_review_add.html,v 0.11 2017/02/26 ST Graveyard
 *					Remove the hotspot button
-*
+*   Id: games_review_add.html,v 0.12 2017/05/18 ST Graveyard
+*					add screenstar button
+*   Id: games_review_add.html,v 0.13 2017/05/24 08:38 ST Graveyard
+*                   added the [frontpage] functionality 
 ***************************************************************************/
 
 ///****************************************************************************************
@@ -50,7 +53,7 @@ t_help = "Insert Hotspot Target: [hotspot=#]";
 x_help = "Set Smiley";
 
 // Define the bbCode tags
-bbtags = new Array('[b]','[/b]','[i]','[/i]','[u]','[/u]','[url]','[/url]','[mail]','[/mail]', '[hotspotUrl=#]', '[/hotspotUrl]', '[hotspot=]', '[/hotspot]');
+bbtags = new Array('[b]','[/b]','[i]','[/i]','[u]','[/u]','[url]','[/url]','[mail]','[/mail]', '[hotspotUrl=#]', '[/hotspotUrl]', '[hotspot=]', '[/hotspot]','[screenstar]','[/screenstar]','[frontpage]','[/frontpage]' );
 bbcode = new Array();
 imageTag = false;
 
@@ -162,6 +165,12 @@ function storeCaret(textEl) {
 
 {block name=main_tile}
 <div class="standard_tile" id="games_review_add">
+    <div class="help-tip">
+        <p>- Use the 'Screenstar' button to mark the text used in the screenstar tile on the website.<br><br>
+           - Use the 'Frontpage' button to mark the text used in the 'latest reviews' tile on the website.<br>
+            <i>Keep in mind the dotdotdot (...) truncate function is also active on this text, so should you mark a piece of text which is too big for the tile, 
+            this will be truncated automatically to fit the page.</i></p>
+    </div>
 	<h1>{$game.game_name}</h1>
 	<div class="standard_tile_line"></div>
 	<div class="standard_tile_text">
@@ -208,7 +217,9 @@ function storeCaret(textEl) {
 				<input type="button" accesskey= "u" name="addbbcode4" value="U" onclick="bbstyle(4,'textfield')">
 				<input type="button" accesskey= "i" name="addbbcode2" value="I" onclick="bbstyle(2,'textfield')">
 				<input type="button" accesskey="w" name="addbbcode6" value="URL" onClick="bbstyle(6,'textfield')">			  
-				<input type="button" accesskey="x" name="addbbcode8" value="@" onClick="bbstyle(8,'textfield')">			  			
+				<input type="button" accesskey="x" name="addbbcode8" value="@" onClick="bbstyle(8,'textfield')">
+                <input type="button" accesskey="screenstar" name="addbbcode14" value="Screenstar" onClick="bbstyle(14,'textfield')">
+                <input type="button" accesskey="frontpage" name="addbbcode16" value="Frontpage" onClick="bbstyle(16,'textfield')">                    
 				<textarea name="textfield" id="game_review_textfield" ONSELECT="javascript:storeCaret(this);" ONCLICK="javascript:storeCaret(this);" ONKEYUP="javascript:storeCaret(this);" ONCHANGE="javascript:storeCaret(this);" rows="15" ></textarea>
 				<br>
 				<br>

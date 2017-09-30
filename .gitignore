@@ -27,8 +27,9 @@ style.css.map
 composer.phar
 composer.json
 
-Website/AtariLegend/themes/styles/3/css/
+# ignore HTACCESS files
+/Website/AtariLegend/.htaccess
+/Website/AtariLegend/.htpasswd
+/Website/AtariLegend/php/.htaccess
+/Website/AtariLegend/php/admin/.htaccess
 
-Website/AtariLegend/themes/styles/2/css/
-
-Website/AtariLegend/themes/styles/1/css/
