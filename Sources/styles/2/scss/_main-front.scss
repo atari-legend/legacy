@@ -15,7 +15,7 @@
     float: left;
     width: 845px;
     height: 460px;
-    margin-top: -40px;
+    margin-top: 20px;
     margin-bottom: 20px;
     overflow: hidden;
     border: 2px solid #000;
@@ -35,22 +35,7 @@
 #welcome p {
     padding-right: 5%;
     padding-left: 5%;
-    //* RGBa with 0.6 opacity */
     text-align: center;
-    background: rgb(172, 172, 172) transparent;
-    //* Fallback for web browsers that doesn't support RGBa */
-    background: rgba(172, 172, 172, .8);
-    border-right: 2px solid #666;
-}
-
-.welcome_text {
-    position: absolute;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    font-size: 15px;
-    color: #23f001;
-    border-bottom: 2px solid #666;
-    margin-top: 130px;
 }
 
 .trivia_title {
@@ -58,17 +43,37 @@
     color: #fff;
 }
 
-.trivia_tag {
-}
+.trivia_tag { font-size: 13pt; color: black;}
 
 .trivia_text { font-size: 16px; color: #fff;}
+
 //*----------------------------------------------------------
-//logon tile --> front page
+//screenstar --> front page
+//------------------------------------------------------------ */
+.screenstar_position_front{margin-top: 20px; margin-bottom: 20px;}
+
+
+//*----------------------------------------------------------
+//register tile --> front page
+//------------------------------------------------------------ */
+.register {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.register_input{
+    width: 100%;
+    text-align:center;
+}
+
+//*----------------------------------------------------------
+//logon tile --> front page --> Not used anymore
 //------------------------------------------------------------ */
 .logon {
     float: right;
     width: 100%;
-    margin-top: -40px;
+    margin-top: 20px;
+     margin-bottom: 20px;
 }
 
 .logon_input_usn {
@@ -88,21 +93,13 @@
     content: url('../images/logon_pwd.png');
 }
 
-.logon_facebook_button::before {
-    display: block;
-    width: auto;
-    //*or your image's width*/
-    height: 50%;
-    content: url('../images/login-facebook.png');
-}
+.logon_facebook_button, .logon_twitter_button{text-align: center;}
 
-.logon_twitter_button::before {
-    display: block;
-    width: auto;
-    //*or your image's width*/
-    height: 50%;
-    content: url('../images/login_twitter.png');
-}
+/* we will be implementing this at a later stage
+/*.logon_facebook_button::before {content: url('../images/login-facebook.png');} */
+
+/*.logon_twitter_button::before {content: url('../images/login_twitter.png');} */
+
 
 .logon_left {
     position: absolute;
@@ -131,13 +128,12 @@
 
 .logon_signin img:hover {opacity: .7;}
 .logon_socmed {
-    display: block;
-    width: 50%;
+    width: 100%;
     margin-top: 10px;
-    margin: auto;
 }
 
 .logon_socmed:hover {opacity: .7;}
+
 //*----------------------------------------------------------
 //datequote tile - front page
 //------------------------------------------------------------ */
@@ -174,10 +170,6 @@
     background: rgba(172, 172, 172, .7);
 }
 
-//*----------------------------------------------------------
-//Statistics tile - front page
-//------------------------------------------------------------ */
-.statistics_dark { color: #666; }
 //*----------------------------------------------------------
 //contact tiles - front page
 //------------------------------------------------------------ */

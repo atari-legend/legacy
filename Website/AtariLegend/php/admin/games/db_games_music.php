@@ -21,6 +21,7 @@
 
 include("../../config/common.php");
 include("../../config/admin.php");
+include("../../config/admin_rights.php");
 
 //****************************************************************************************
 // This is delete music file from game

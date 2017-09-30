@@ -11,7 +11,8 @@
  *   Id: submission_games.php,v 0.12 2005/04/28 Silver Surfer
  *   Id: submission_games.php,v 0.13 2016/07/27 STG
  *               - AL 2.0
- *
+ *   Id: submission_games.php,v 1.14 2017/09/08 STG
+ *               - Enhanced for submissions with screenshots
  ***************************************************************************/
 
 /*
@@ -84,6 +85,23 @@ while ($query_submission = $sql_submission->fetch_array(MYSQLI_BOTH)) {
 
         $sql_game = $query_game->fetch_array(MYSQLI_BOTH);
     }
+    
+    //check if there are screenshot added to the submission
+    $query_screenshots_submission = $mysqli->query("SELECT * FROM screenshot_main
+                                        LEFT JOIN screenshot_game_submitinfo ON (screenshot_main.screenshot_id = screenshot_game_submitinfo.screenshot_id)
+                                        WHERE screenshot_game_submitinfo.game_submitinfo_id = '$query_submission[game_submitinfo_id]'") or die("Error - Couldn't query submitinfo screenshots");
+    
+    while ($sql_screenshots_submission = $query_screenshots_submission->fetch_array(MYSQLI_BOTH))
+    {
+        $new_path = $game_submit_screenshot_path;
+        $new_path .= $sql_screenshots_submission['screenshot_id'];
+        $new_path .= ".";
+        $new_path .= $sql_screenshots_submission['imgext'];
+        
+        $smarty->append('submission_screenshots',
+	     array('game_submitinfo_id' => $sql_screenshots_submission['game_submitinfo_id'],
+		   'game_submitinfo_screenshot' => $new_path));
+    }
 
     // Retrive userstats from database
     $query_user         = $mysqli->query("SELECT *
@@ -102,7 +120,13 @@ while ($query_submission = $sql_submission->fetch_array(MYSQLI_BOTH)) {
     $v_game_image .= $sql_game['imgext'];
 
     $converted_date = date("F j, Y", $query_submission['timestamp']);
-    $user_joindate  = date("d-m-y", $query_submission['join_date']);
+    if ($query_submission['join_date'] !== '') {
+        $user_joindate  = date("d-m-y", $query_submission['join_date']);
+    }
+    else
+    {
+        $user_joindate = "Unknown";
+    }        
     $comment        = InsertALCode($query_submission['submit_text']);
     $comment        = InsertSmillies($comment);
     $comment        = nl2br($comment);

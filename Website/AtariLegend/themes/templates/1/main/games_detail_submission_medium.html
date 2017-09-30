@@ -1,0 +1,54 @@
+{*
+/***************************************************************************
+*                                games_detail_submission_medium.html
+*                            -----------------------------------------
+*   begin                : Saturday, September 9, 2017
+*   copyright            : (C) 2017 Atari Legend
+*   email                : martens_maarten@hotmail.com
+*   actual update        : Creation of file
+*
+*   Id: games_detail_submission_medium.html,v 0.1 2017/09/09 11:23 STG
+*
+***************************************************************************/
+
+//****************************************************************************************
+// This is the game submission on the game detail page. This piece is always used as an include
+// This version is specifically made to not intervene with the 'high' rez version
+//****************************************************************************************
+*}
+<div class="standard_tile">                   
+    <h1>SUBMIT INFO</h1>
+    <div class="standard_tile_line"></div>
+    <div class="standard_tile_text">     
+        <h6 style="text-align:justify;">Is there anything displayed on this page that is not correct or missing?
+            Do you have artwork or a screenshot you like to share? Or perhaps you are one of the creators? Please let us know. 
+        </h6>
+    </div>
+    {if isset($user_session)}
+        <form enctype="multipart/form-data" method="post" action="../../main/games/db_games_main_detail.php">
+            <div class="standard_list_entry">
+                <div style="width:100%;text-align:center;margin-top:10px;">
+                    <textarea class="games_main_detail_comments_add" style="margin-top:10px;margin-bottom:10px;" name="textfield_medium">Game info</textarea>
+                    <br>
+                    <label for="file_upload_medium" class="file_upload_games_detail">Select file(s)</label>
+                    <input id="file_upload_medium" type="file" name="image_medium[]" multiple>
+                    <input type="hidden" name="action" value="submit_info">
+                    <input type="hidden" name="subtype" value="medium">
+                    <input type="hidden" name="game_id" value="{$game_info.game_id}">
+                    <input type="text" class="standard_tile_input_small" id="file_upload_game_screenshots_medium">&nbsp;
+                </div>
+            </div>
+            <br>
+            <div style="text-align:center;">
+                <input type="submit" value="Add" class="quick_search_games_button" style="margin-bottom:10px;">
+            </div>
+        </form>
+    {else}
+        <div class="standard_list_entry" style="height:0;">
+            <div class="games_main_detail_comments_log_on">
+                Please log in to submit info.
+            </div>
+        </div>
+    {/if}
+</div>    
+ 

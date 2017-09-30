@@ -2,14 +2,18 @@
 {*
 /***************************************************************************
 *                                frontpage.html
-*                            ----------------
+*                            ---------------------
 *   begin                : Tuesday, April 15, 2015
 *   copyright            : (C) 2015 Atari Legend
 *   email                : martens_maarten@hotmail.com
 *   actual update        : Creation of file
 *
 *   Id: frontpage.html,v 0.1 2015/04/15 23:52 SilverSurfer
-    Id: frontpage.html,v 0.2 2015/12/05 ST Graveyard - HTML validated
+*   Id: frontpage.html,v 0.2 2015/12/05 ST Graveyard - HTML validated
+*	Id: frontpage.html,v 0.3 2017/05/23 ST Graveyard
+*           - dotdotdot script active for news_text
+*	Id: frontpage.html,v 0.4 2017/06/16 ST Graveyard
+*           - New intro animation, adding the register tiles, enhancing responsivness
 *
 ***************************************************************************/
 
@@ -19,8 +23,18 @@
 *}
 
 {block name=javascript_slider}
+    <script type="text/javascript" src="{$template_dir}includes/js/lightbox.min.js"></script>
+    <link type="text/css" href="{$style_dir}css/lightbox.css" hreflang="en" rel="stylesheet">
+    
+    <script>
+        lightbox.option({        
+          'showImageNumberLabel': false
+        })
+    </script>
+    
     <script type="text/javascript" src="{$template_dir}includes/js/jssor.slider.mini.js"></script>  <!-- This script is needed for the animation in the welcome tile -->
-
+    {if isset($smarty_action) and $smarty_action == 'first_time'}<script type="text/javascript" src="{$template_dir}includes/js/animsition.min.js"></script>{/if}<!-- fade up script needed for the intro page -->
+    <script type="text/javascript" src="{$template_dir}includes/js/jquery.dotdotdot.js" type="text/javascript"></script> <!--this script is used for the elipsis (...) effect of the latest news / reviews tile -->
     <script> <!-- This script is needed for the animation in the welcome tile -->
             jQuery(document).ready(function ($) {
 
@@ -33,7 +47,7 @@
                 $AutoPlay: true,                                    //[Optional] Whether to auto play, to enable slideshow, this option must be set to true, default value is false
                 $AutoPlaySteps: 1,                                  //[Optional] Steps to go for each navigation request (this options applys only when slideshow disabled), the default value is 1
                 $AutoPlayInterval: 5000,                            //[Optional] Interval (in milliseconds) to go for next slide since the previous stopped if the slider is auto playing, default value is 3000
-                $PauseOnHover: 1,                               //[Optional] Whether to pause when mouse over if a slider is auto playing, 0 no pause, 1 pause for desktop, 2 pause for touch device, 3 pause for desktop and touch device, 4 freeze for desktop, 8 freeze for touch device, 12 freeze for desktop and touch device, default value is 1
+                $PauseOnHover: 1,                                   //[Optional] Whether to pause when mouse over if a slider is auto playing, 0 no pause, 1 pause for desktop, 2 pause for touch device, 3 pause for desktop and touch device, 4 freeze for desktop, 8 freeze for touch device, 12 freeze for desktop and touch device, default value is 1
 
                 $ArrowKeyNavigation: true,                          //[Optional] Allows keyboard (arrow key) navigation or not, default value is false
                 $SlideDuration: 500,                                //[Optional] Specifies default duration (swipe) for slide in milliseconds, default value is 500
@@ -51,22 +65,22 @@
                     $Class: $JssorSlideshowRunner$,                 //[Required] Class to create instance of slideshow
                     $Transitions: _SlideshowTransitions,            //[Required] An array of slideshow transitions to play slideshow
                     $TransitionsOrder: 1,                           //[Optional] The way to choose transition to play slide, 1 Sequence, 0 Random
-                    $ShowLink: true                                    //[Optional] Whether to bring slide link on top of the slider when slideshow is running, default value is false
+                    $ShowLink: true                                 //[Optional] Whether to bring slide link on top of the slider when slideshow is running, default value is false
                 },
 
-                $BulletNavigatorOptions: {                                //[Optional] Options to specify and enable navigator or not
-                    $Class: $JssorBulletNavigator$,                       //[Required] Class to create navigator instance
+                $BulletNavigatorOptions: {                          //[Optional] Options to specify and enable navigator or not
+                    $Class: $JssorBulletNavigator$,                 //[Required] Class to create navigator instance
                     $ChanceToShow: 2,                               //[Required] 0 Never, 1 Mouse Over, 2 Always
                     $AutoCenter: 1,                                 //[Optional] Auto center navigator in parent container, 0 None, 1 Horizontal, 2 Vertical, 3 Both, default value is 0
                     $Steps: 1,                                      //[Optional] Steps to go for each navigation request, default value is 1
                     $Lanes: 1,                                      //[Optional] Specify lanes to arrange items, default value is 1
-                    $SpacingX: 10,                                   //[Optional] Horizontal space between each item in pixel, default value is 0
-                    $SpacingY: 10,                                   //[Optional] Vertical space between each item in pixel, default value is 0
+                    $SpacingX: 10,                                  //[Optional] Horizontal space between each item in pixel, default value is 0
+                    $SpacingY: 10,                                  //[Optional] Vertical space between each item in pixel, default value is 0
                     $Orientation: 1                                 //[Optional] The orientation of the navigator, 1 horizontal, 2 vertical, default value is 1
                 },
 
                 $ArrowNavigatorOptions: {
-                    $Class: $JssorArrowNavigator$,              //[Requried] Class to create arrow navigator instance
+                    $Class: $JssorArrowNavigator$,                  //[Requried] Class to create arrow navigator instance
                     $ChanceToShow: 2,                               //[Required] 0 Never, 1 Mouse Over, 2 Always
                     $Steps: 1                                       //[Optional] Steps to go for each navigation request, default value is 1
                 }
@@ -140,81 +154,82 @@
 
         });
     </script>
-    <script type="text/javascript"><!-- This script is needed for the animation of all the tiles - slide effect -->
-      $(function() {
+    {if isset($smarty_action) and $smarty_action == 'first_time'}
+    <script type="text/javascript"> <!-- intro fade up script -->
+         $(document).ready(function() {
+              $(".animsition").animsition({
+                inClass: 'fade-in-up',
+                outClass: 'fade-out-up',
+                inDuration: 1500,
+                outDuration: 800,
+                linkElement: '.animsition-link',
+                // e.g. linkElement: 'a:not([target="_blank"]):not([href^="#"])'
+                loading: true,
+                loadingParentElement: 'body', //animsition wrapper element
+                loadingClass: 'animsition-loading',
+                loadingInner: '', // e.g '<img src="loading.svg" />'
+                timeout: false,
+                timeoutCountdown: 5000,
+                onLoadEvent: true,
+                browser: [ 'animation-duration', '-webkit-animation-duration'],
+                // "browser" option allows you to disable the "animsition" in case the css property in the array is not supported by your browser.
+                // The default setting is to disable the "animsition" in a browser that does not support "animation-duration".
+                overlay : false,
+                overlayClass : 'animsition-overlay-slide',
+                overlayParentElement : 'body',
+                transition: function(url){ window.location.href = url; }
 
-        // run the currently selected effect
-        function runEffect() {
+              });
+            });
+    </script>
+    {/if}
+    <script type="text/javascript"> 
+         window.onload = function() {
+            $(".standard_list_entry_news_text").dotdotdot({  <!--This is the script to truncate the latest news-->
+                    //	configuration goes here
+                    
+                /*	The text to add as ellipsis. */
+                ellipsis	: '... ',
+         
+                /*	How to cut off the text/html: 'word'/'letter'/'children' */
+                wrap		: 'word',
+         
+                /*	Wrap-option fallback to 'letter' for long words */
+                fallbackToLetter: false,
+         
+                /*	jQuery-selector for the element to keep and put after the ellipsis. */
+                after		: null,
+         
+                /*	Whether to update the ellipsis: true/'window' */
+                watch		: window,
 
-            if ($(window).width() > 1494)
-            {
-                $( ".latest_news" ).effect("slide", { direction: "down" }, 1000 );
-                $( "#welcome" ).effect("slide", { direction: "up" }, 1000 );
-                $( ".whoisit_position_front" ).effect("slide", { direction: "right" }, 1000 );
-                $( ".logon" ).effect("slide", { direction: "right" }, 1000 );
-                $( ".datequote_position_front" ).effect("slide", { direction: "left" }, 1000 );
-                $( ".didyouknow_position_front" ).effect("slide", { direction: "right" }, 1000 );
-                $( ".statistics_position_front" ).effect("slide", { direction: "right" }, 1000 );
-                $( ".contact_tiles" ).effect("slide", { direction: "down" }, 1000 );
-                $( ".screenstar_position_front" ).effect("slide", { direction: "left" }, 1000 );
-                $( ".latest_reviews" ).effect("slide", { direction: "down" }, 1000 );
-                $( ".hotlinks_position_front" ).effect("slide", { direction: "left" }, 1000 );
-            }
-            else if ($(window).width() > 800)
-            {
-                $( ".latest_news" ).effect("slide", { direction: "left" }, 1000 );
-                $( "#welcome" ).effect("slide", { direction: "left" }, 1000 );
-                $( ".whoisit_position_front" ).effect("slide", { direction: "left" }, 1000 );
-                $( ".logon" ).effect("slide", { direction: "right" }, 1000 );
-                $( ".datequote_position_front" ).effect("slide", { direction: "right" }, 1000 );
-                $( ".didyouknow_position_front" ).effect("slide", { direction: "right" }, 1000 );
-                $( ".statistics_position_front" ).effect("slide", { direction: "right" }, 1000 );
-                $( ".contact_tiles" ).effect("slide", { direction: "right" }, 1000 );
-                $( ".screenstar_position_front" ).effect("slide", { direction: "down" }, 1000 );
-                $( ".latest_reviews" ).effect("slide", { direction: "down" }, 1000 );
-                $( ".hotlinks_position_front" ).effect("slide", { direction: "down" }, 1000 );
-            }
-            else if ($(window).width() > 640)
-            {
-                $( ".latest_news" ).effect("slide", { direction: "left" }, 1000 );
-                $( "#welcome" ).effect("slide", { direction: "left" }, 1000 );
-                $( ".whoisit_position_front" ).effect("slide", { direction: "left" }, 1000 );
-                $( ".logon" ).effect("slide", { direction: "right" }, 1000 );
-                $( ".datequote_position_front" ).effect("slide", { direction: "left" }, 1000 );
-                $( ".didyouknow_position_front" ).effect("slide", { direction: "right" }, 1000 );
-                $( ".statistics_position_front" ).effect("slide", { direction: "right" }, 1000 );
-                $( ".contact_tiles" ).effect("slide", { direction: "right" }, 1000 );
-                $( ".screenstar_position_front" ).effect("slide", { direction: "right" }, 1000 );
-                $( ".latest_reviews" ).effect("slide", { direction: "right" }, 1000 );
-                $( ".hotlinks_position_front" ).effect("slide", { direction: "right" }, 1000 );
-            }
-            else
-            {
-                $( ".latest_news" ).effect("slide", { direction: "right" }, 1000 );
-                $( "#welcome" ).effect("slide", { direction: "left" }, 1000 );
-                $( ".whoisit_position_front" ).effect("slide", { direction: "left" }, 1000 );
-                $( ".logon" ).effect("slide", { direction: "left" }, 1000 );
-                $( ".datequote_position_front" ).effect("slide", { direction: "left" }, 1000 );
-                $( ".didyouknow_position_front" ).effect("slide", { direction: "right" }, 1000 );
-                $( ".statistics_position_front" ).effect("slide", { direction: "left" }, 1000 );
-                $( ".contact_tiles" ).effect("slide", { direction: "right" }, 1000 );
-                $( ".screenstar_position_front" ).effect("slide", { direction: "right" }, 1000 );
-                $( ".latest_reviews" ).effect("slide", { direction: "left" }, 1000 );
-                $( ".hotlinks_position_front" ).effect("slide", { direction: "right" }, 1000 );
-            }
+                /*	Optionally set a max-height, can be a number or function.
+                    If null, the height will be measured. */
+                height		: null,
+
+                /*	Deviation for the height-option. */
+                tolerance	: 0,
+         
+                /*	Callback function that is fired after the ellipsis is added,
+                    receives two parameters: isTruncated(boolean), orgContent(string). */
+                callback	: function( isTruncated, orgContent ) {},
+         
+                lastCharacter	: {
+         
+                    /*	Remove these characters from the end of the truncated text. */
+                    remove		: [ ' ', ',', ';', '.', '!', '?' ],
+         
+                    /*	Don't add an ellipsis if this array contains 
+                        the last character of the truncated text. */
+                    noEllipsis	: []
+                }   
+            });
         };
-
-        // set effect from select menu value
-        $(document).ready(function() {
-          runEffect();
-          return false;
-        });
-      });
-     </script>
+    </script>
 {/block}
 
 {block name=main_body}
-
+{if isset($smarty_action) and $smarty_action == 'first_time'}<div class="animsition">{/if}
 
     <div id="main">
 
@@ -222,38 +237,56 @@
         <div class="column_wide_left_1920">
             <!--Start logon tile - will only be used on the front page so no inheritance here -->
             {block name=screenstar_tile}
-            <br> 
-            {include file='1/main/tile_screenstar.html'}
+                {include file='1/main/tile_screenstar.html'}
             {/block}
 
-            <!--Start date quote tile-->
+            <!--Start date quote tile
             {block name=date_quote_tile}
-            {include file='1/main/date_quote_tile.html'}
+                {include file='1/main/date_quote_tile.html'}
+            {/block}-->
+            
+            <!--Start "class AL" tile-->
+            {block name=class_tile}
+                {include file='1/main/tile_class_of_al.html'}
             {/block}
-
-            <!--Start "hotlinks" tile-->
+            
+            <!--Start "Social Corner" tile-->
+            {block name=social_corner_tile}
+                {include file='1/main/tile_social_corner.html'}
+            {/block}
+            
+             <!--Start open db tile-->
+            {block name=date_quote_tile}
+                {include file='1/main/tile_open_db.html'}
+            {/block}
+            
+            <!--Start "hotlinks" tile
             {block name=hotlinks_tile}
-            {include file='1/main/hotlinks_tile.html'}
-            {/block}
+                {include file='1/main/hotlinks_tile.html'}
+            {/block}-->
         </div>
-
         <!--this column is only visible with 3 and 2 columns-->
         <div class="column_wide_left">
             <!-- Jssor Slider Begin -->
             <!-- To move inline styles to css file/block, please specify a class name for each element. -->
-            <div id="welcome">
+            <div id="welcome">  
                 <!-- Slides Container -->
                 <div data-u="slides" class="welcome_slides">
                     {foreach from=$image item=line}
-                        <div><img class="standard_tile_image" data-u="image" src="../../includes/show_image.php?file={$line.image_name}" alt="">
-                            <p class="welcome_text">
-                                <span class="trivia_title"> <!--style='font-size:19pt; color:white;'-->{$trivia_quote}</span>
-                                <span class="trivia_tag"> <!--style='font-size:13pt;'--><br>Your number 1 Atari ST resource on the net!</span>
-                                <span class="trivia_text" > <!--style='font-size:12pt; color:white' --><br><br>Atari Legend is a living and breathing webproject, designed by sceners.
-                                    We like to involve as many people as possible to make it fresh and up to date. We offer a nostalgic trip down the Atari ST memory lane, focussing on exciting game related content.
-                                    Details on all the classics, in-depth reviews, interviews with the creators of yesterday’s gems and much more.
-                                </span>
-                            </p>
+                        <div class="grid">
+                            <figure class="effect-bubba" style="margin:0;max-width: 99.8%;">
+                                <img src="../../includes/show_image.php?file={$line.image_name}" data-u="image" class="standard_tile_image" alt=" ">
+                                <figcaption style="width:90%;height:80%;text-transform:0;" >
+                                    <h2> {$trivia_quote}</h2>
+                                    <p style="text-transform:none;">
+                                        <span class="trivia_tag"><br>Your number 1 Atari ST resource on the net!</span>
+                                        <span class="trivia_text" ><br><br>Atari Legend is a living and breathing webproject, designed by sceners.
+                                            We like to involve as many people as possible to make it fresh and up to date. We offer a nostalgic trip down the Atari ST memory lane, focussing on exciting content.
+                                            Details on all the classics, in-depth reviews, interviews with the creators of yesterday’s gems and much more.
+                                        </span>
+                                    </p>
+                                </figcaption>			
+                            </figure>
                         </div>
                     {/foreach}
                 </div>
@@ -262,147 +295,291 @@
 
             <!--this column is only visible with 4 columns-->
             <div class="column_wide_center_1920">
+                
                 <!--Start latest news tile-->
                 {block name=latest_news_tile}
-                {include file='1/main/latest_news_tile.html'}
+                    {include file='1/main/latest_news_tile.html'}
                 {/block}
 
                 <!--Start latest reviews tile-->
                 {block name=latest_reviews_tile}
-                {include file='1/main/latest_reviews_tile.html'}
+                    <div class="latest_reviews">
+                        {include file='1/main/latest_reviews_tile.html'}
+                    </div>
                 {/block}
 
-                <div class="contact_tiles">
-                    <div class="contact_email_button"><a href="#"> </a></div>
-                    <div class="contact_facebook_button"><a href="#"> </a></div>
+                <!--Start contact tiles-->
+                <!--<div class="contact_tiles">
                     <div class="contact_jukebox_button"><a href="#"> </a></div>
                     <div class="contact_chat_button"><a href="#"> </a></div>
+                    <div class="contact_email_button"><a href="#"> </a></div>
+                    <div class="contact_facebook_button"><a href="#"> </a></div>
+                </div>-->
+                
+                <!--Start "AL Mobile" tile-->
+                <div class="contact_tiles">
+                    {block name=al_mobile}
+                        {include file='1/main/tile_al_mobile.html'}
+                    {/block}
                 </div>
             </div>
         </div>
 
         <!--this column is only visible with 4 columns-->
-        <div class="column_wide_right_1920">
-            <!--Start logon tile - will only be used on the front page so no inheritance here -->
-            {block name=user_login_tile}
-            {include file='1/main/user_login_tile.html'}
-            {/block}
-
+        <div class="column_wide_right_1920">          
+            {if (isset($action)) and ($action == 'register')}
+                {block name=user_register_tile}
+                    {include file='1/main/user_register_tile.html'}
+                {/block}
+            {/if}
+            
+            <!--password reset tile -->
+            {if (isset($action)) and ($action == 'reset')}
+                {block name=user_reset_tile}
+                    {include file='1/main/user_reset_tile.html'}
+                {/block}
+            {/if}
+            
+            <!--password reset tile - enter new pwd -->
+            {if (isset($action)) and ($action == 'new_pwd')}
+                {block name=user_reset_tile}
+                    {include file='1/main/user_new_pwd_tile.html'}
+                {/block}
+            {/if}
+                
             <!--Start "Who is it" tile-->
             {block name=who_is_it_tile}
-            {include file='1/main/who_is_it_tile.html'}
+                {include file='1/main/who_is_it_tile.html'}
             {/block}
-
+            
             <!--Start "Did you know" tile-->
             {block name=did_you_know_tile}
-            {include file='1/main/did_you_know_tile.html'}
+                {include file='1/main/did_you_know_tile.html'}
             {/block}
 
             <!--Start "statistics" tile-->
             {block name=statistics_tile}
-            {include file='1/main/statistics_tile.html'}
+                {include file='1/main/statistics_tile.html'}
             {/block}
+            
+            <!--Start spotlight tile-->
+            {block name=spotlight_tile}
+                {include file='1/main/spotlight_tile.html'}
+            {/block}
+            
+            <!--Start "Social Corner" tile
+            {block name=social_corner_tile}
+                {include file='1/main/tile_social_corner.html'}
+            {/block}-->
         </div>
 
         <!--this column is only visible with 3 columns-->
         <div class="column_wide_right">
-            <!--Start logon tile - will only be used on the front page so no inheritance here -->
-            {block name=user_login_tile}
-            {include file='1/main/user_login_tile.html'}
+            <!--register account tile -->
+            {if (isset($action)) and ($action == 'register')}
+                {block name=user_register_tile}
+                    {include file='1/main/user_register_tile.html'}
+                {/block}
+            {/if}
+            
+            <!--password reset tile -->
+            {if (isset($action)) and ($action == 'reset')}
+                {block name=user_reset_tile}
+                    {include file='1/main/user_reset_tile.html'}
+                {/block}
+            {/if}
+            
+            <!--password reset tile - enter new pwd -->
+            {if (isset($action)) and ($action == 'new_pwd')}
+                {block name=user_reset_tile}
+                    {include file='1/main/user_new_pwd_tile.html'}
+                {/block}
+            {/if}
+            
+            <!--Start "Who is it" tile-->
+            {block name=who_is_it_tile}
+                {include file='1/main/who_is_it_tile.html'}
             {/block}
         </div>
-
-        <!--this column is only visible in the 3 colum mode and 1 column mode-->
+        
+        <!--this column is only visible in the 3 colum mode-->
         <div class="column_left">
             <!--Start latest news tile-->
             {block name=latest_news_tile}
                 {include file='1/main/latest_news_tile.html'}
             {/block}
-            <!--Start "Who is it" tile-->
-            {block name=who_is_it_tile}
-            {include file='1/main/who_is_it_tile.html'}
+            
+            <!--Start date quote tile
+            {block name=date_quote_tile}
+                {include file='1/main/date_quote_tile.html'}
+            {/block}-->       
+            
+             <!--Start open db tile-->
+            {block name=date_quote_tile}
+                {include file='1/main/tile_open_db.html'}
             {/block}
         </div>
-
+        
+        <!--this column is only visible in the 1 colum mode-->
+        <div class="column_phone">
+             <!--register account tile -->
+            {if (isset($action)) and ($action == 'register')}
+                {block name=user_register_tile}
+                    {include file='1/main/user_register_tile.html'}
+                {/block}
+            {/if}
+            
+            <!--password reset tile -->
+            {if (isset($action)) and ($action == 'reset')}
+                {block name=user_reset_tile}
+                    {include file='1/main/user_reset_tile.html'}
+                {/block}
+            {/if}
+            
+            <!--password reset tile - enter new pwd -->
+            {if (isset($action)) and ($action == 'new_pwd')}
+                {block name=user_reset_tile}
+                    {include file='1/main/user_new_pwd_tile.html'}
+                {/block}
+            {/if}
+            
+            <!--Start latest news tile-->
+            {block name=latest_news_tile}
+                {include file='1/main/latest_news_tile.html'}
+            {/block}
+            
+            <!--Start "Who is it" tile-->
+            {block name=who_is_it_tile}
+                {include file='1/main/who_is_it_tile.html'}
+            {/block}
+            
+            <!--Start date quote tile
+            {block name=date_quote_tile}
+                {include file='1/main/date_quote_tile.html'}
+            {/block}-->
+            
+             <!--Start open db tile-->
+            {block name=date_quote_tile}
+                {include file='1/main/tile_open_db.html'}
+            {/block}
+            
+        </div>
+        
         <!--this column is only visible in the 3 colum mode and 1 column mode-->
         <div class="column_center">
-            <!--Start screenstar tile-->
-            {block name=screenstar_tile}
-            <br>
-            {include file='1/main/tile_screenstar.html'}
-            {/block}
-
             <!--Start latest reviews tile-->
             {block name=latest_reviews_tile}
-            {include file='1/main/latest_reviews_tile.html'}
+                <div class="latest_reviews">
+                    {include file='1/main/latest_reviews_tile.html'}
+                </div>
+            {/block}
+            
+             <!--Start screenstar tile-->
+            {block name=screenstar_tile}
+                {include file='1/main/tile_screenstar.html'}
             {/block}
 
-            <!--Start "hotlinks" tile-->
+            <!--Start "hotlinks" tile
             {block name=hotlinks_tile}
-            {include file='1/main/hotlinks_tile.html'}
+                {include file='1/main/hotlinks_tile.html'}
+            {/block}-->
+            
+            <!--Start "class AL" tile-->
+            {block name=class_tile}
+                {include file='1/main/tile_class_of_al.html'}
             {/block}
+            
+            <!--Start spotlight tile-->
+            {block name=spotlight_tile}
+                {include file='1/main/spotlight_tile.html'}
+            {/block}
+            
+            <!--{block name=social_corner_tile}
+                {include file='1/main/tile_social_corner.html'}
+            {/block}-->
+            
         </div>
 
         <!--this column is only visible in the 3 colum mode and 1 column mode-->
         <div class="column_right">
 
-            <!--Start date quote tile-->
-            {block name=date_quote_tile}
-            {include file='1/main/date_quote_tile.html'}
-            {/block}
-
             <!--Start "Did you know" tile-->
             {block name=did_you_know_tile}
-            {include file='1/main/did_you_know_tile.html'}
+                {include file='1/main/did_you_know_tile.html'}
             {/block}
 
             <!--Start "statistics" tile-->
             {block name=statistics_tile}
-            {include file='1/main/statistics_tile.html'}
+                {include file='1/main/statistics_tile.html'}
             {/block}
 
-            <!--Start contact tiles - will only be used on the front page so no inheritance here -->
-            <div class="contact_tiles">
-                    <div class="contact_email_button"><a href="#"> </a></div>
-                    <div class="contact_facebook_button"><a href="#"> </a></div>
-                    <div class="contact_jukebox_button"><a href="#"> </a></div>
-                    <div class="contact_chat_button"><a href="#"> </a></div>
+            <!--Start contact tiles-->
+            <!--<div class="contact_tiles">
+                <div class="contact_jukebox_button"><a href="#"> </a></div>
+                <div class="contact_chat_button"><a href="#"> </a></div>
+                <div class="contact_email_button"><a href="#"> </a></div>
+                <div class="contact_facebook_button"><a href="#"> </a></div>
+            </div>-->
+            
+            <!--Start "AL Mobile" tile-->
+            {block name=al_mobile}
+                <div class="contact_tiles">
+                    {include file='1/main/tile_al_mobile.html'}
                 </div>
+            {/block}
+            
+            {block name=social_corner_tile}
+                {include file='1/main/tile_social_corner.html'}
+            {/block}
+                       
         </div>
 
         <!--this column is only visible in the 2 colum mode -->
         <div class="column_left_tab">
 
-            <!--Start date quote tile-->
+            <!--Start date quote tile
             {block name=date_quote_tile}
             {include file='1/main/date_quote_tile.html'}
-            {/block}
+            {/block}-->
 
             <!--Start "Did you know" tile-->
             {block name=did_you_know_tile}
-            {include file='1/main/did_you_know_tile.html'}
+                {include file='1/main/did_you_know_tile.html'}
+            {/block}
+            
+            {block name=social_corner_tile}
+                {include file='1/main/tile_social_corner.html'}
             {/block}
 
+            <!--Start "statistics" tile-->
+            {block name=statistics_tile}
+                {include file='1/main/statistics_tile.html'}
+            {/block}
+            
             <!--Start contact tiles-->
-            <div class="contact_tiles">
+            <!--<div class="contact_tiles">
                 <div class="contact_jukebox_button"><a href="#"> </a></div>
-                    <div class="contact_chat_button"><a href="#"> </a></div>
-            </div>
+                <div class="contact_chat_button"><a href="#"> </a></div>
+                <div class="contact_email_button"><a href="#"> </a></div>
+                <div class="contact_facebook_button"><a href="#"> </a></div>
+            </div>-->
+            
+            <!--Start "AL Mobile" tile-->
+            {block name=al_mobile}
+                <div class="contact_tiles">
+                    {include file='1/main/tile_al_mobile.html'}
+                </div>
+            {/block}
+            
         </div>
 
         <!--this column is only visible in the 2 colum mode -->
         <div class="column_right_tab">
-
-            <!--Start "statistics" tile-->
-            {block name=statistics_tile}
-            {include file='1/main/statistics_tile.html'}
-            {/block}
-
-            <!--Start contact tiles-->
-            <div class="contact_tiles">
-                <div class="contact_email_button"><a href="#"> </a></div>
-                    <div class="contact_facebook_button"><a href="#"> </a></div>
-            </div>
+            <!--Start date quote tile
+            {block name=date_quote_tile}
+                {include file='1/main/date_quote_tile.html'}
+            {/block}-->
         </div>
     </div>
+  {if isset($smarty_action) and $smarty_action == 'first_time'}</div>{/if}
 {/block}

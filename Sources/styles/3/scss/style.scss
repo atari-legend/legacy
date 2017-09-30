@@ -26,6 +26,11 @@ $bg-color: #161c71;
 @import '../../common/main_scss/menu';             //* --> TOP and SIDE MENU */
 
 //*----------------------------------------------------------
+// Tabulator
+//------------------------------------------------------------ */
+@import '../../common/main_scss/tabulator';                 //* --> the excel style tabulator */
+
+//*----------------------------------------------------------
 // Tiles
 //------------------------------------------------------------ */
 @import '../../common/main_scss/tiles';                     //* --> Tiles */
@@ -33,7 +38,12 @@ $bg-color: #161c71;
 //*----------------------------------------------------------
 // Main website
 //------------------------------------------------------------ */
-@import '../../3/scss/main-front';        //* --> Front page */
+@import '../../3/scss/main-front';                          //* --> Front page */
+@import '../../3/scss/main-games';                          //* --> The game pages */
+@import '../../3/scss/main-interviews';                     //* --> The interview pages */
+@import '../../3/scss/main-news';                           //* --> The news pages */
+@import '../../3/scss/main-reviews';                        //* --> The news pages */
+@import '../../3/scss/main-classAL';                        //* --> The Class of AL pages */
 
 //*----------------------------------------------------------
 // CPanel

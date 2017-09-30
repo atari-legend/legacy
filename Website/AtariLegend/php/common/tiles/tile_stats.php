@@ -18,15 +18,14 @@
 //*******************************
 // Get the user stats
 //*******************************
-//Lets get all the date of the selected user
-$sql_users = $mysqli->query("SELECT * FROM users
-                          WHERE user_id = '" . $_SESSION['user_id'] . "' ") or die("Couldn't query users Database");
 
-while ($query_users = $sql_users->fetch_array(MYSQLI_BOTH)) {
-    $smarty->assign('users', array(
-        'user_id' => $query_users['user_id'],
-        'user_name' => $query_users['userid'],
-        'image' => "$user_avatar_path$query_users[user_id].$query_users[avatar_ext]"
+$stack = statistics_stack();
+
+// smack the stack into a smarty var and pray it works
+foreach ($stack as $value) {
+    $smarty->append('statistics', array(
+        'value' => $value
     ));
 }
+
 ?>

@@ -631,6 +631,11 @@
 			{/foreach}
 		{/if}
 	</table>
+    
+     {if isset($osd_message)}
+		[BRK]{$osd_message}
+	{/if}
+    
 {/if}
 
 
@@ -814,4 +819,9 @@
             No authors linked to this title yet
         {/if}   
     </div>
+    
+    {if isset($osd_message)}
+		[BRK]{$osd_message}
+	{/if}
+    
 {/if}

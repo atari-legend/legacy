@@ -27,12 +27,16 @@
 
 include("../../config/common.php");
 include("../../config/admin.php");
+//include("../../config/admin_rights.php"); /*--> We can not use it like this because of the ajax. redirecting does not work correctly with the inheritance of Ajax.
 
+//This is used for the AJAX parts when user rights do not suffice
+$osd_message = 'You do not have the necessary authorizations to perform this action';
 //****************************************************************************************
 // Add new menu set
 //****************************************************************************************
 
 if ($action == "menu_set_new") {
+    include("../../config/admin_rights.php");
     if (isset($menu_sets_name)) {
         $sql             = $mysqli->query("INSERT INTO menu_set (menu_sets_name) VALUES ('$menu_sets_name')") or die('Error: ' . mysqli_error($mysqli));
         $new_menu_set_id = $mysqli->insert_id;
@@ -51,6 +55,7 @@ if ($action == "menu_set_new") {
 //****************************************************************************************
 
 if ($action == "add_new_menu_disk") {
+    include("../../config/admin_rights.php");
     if ($menu_disk_number !== '' or $menu_disk_letter !== '') {
         //first we start with if this is numbered menu disk
         if ($menu_disk_number !== '' and $menu_disk_letter == '') {
@@ -93,6 +98,7 @@ if ($action == "add_new_menu_disk") {
 //****************************************************************************************
 
 if (isset($action) and $action == "multi_add_new_menu_disk") {
+    include("../../config/admin_rights.php");
     if ($first_disk !== '' and $last_disk !== '') {
         //First disk must me a smaller number then last disk
         if ($first_disk < $last_disk) {
@@ -114,6 +120,7 @@ if (isset($action) and $action == "multi_add_new_menu_disk") {
 // Edit menu_set name
 //****************************************************************************************
 if ($action == "menu_set_name_update") {
+    include("../../config/admin_rights.php");
     if (isset($menu_sets_id) and $menu_sets_name !== "") {
         $sql = $mysqli->query("UPDATE menu_set SET menu_sets_name='$menu_sets_name'
               WHERE menu_sets_id='$menu_sets_id'") or die('Error: ' . mysqli_error($mysqli));
@@ -131,6 +138,7 @@ if ($action == "menu_set_name_update") {
 // Connect crew to menu set
 //****************************************************************************************
 if ($action == "menu_set_crew_set") {
+    include("../../config/admin_rights.php");
     if (isset($crew_id) and ($crew_id == !"") and isset($menu_sets_id)) {
         $sql                      = $mysqli->query("INSERT INTO crew_menu_prod (crew_id,menu_sets_id) VALUES ('$crew_id','$menu_sets_id')") or die('Error: ' . mysqli_error($mysqli));
         $_SESSION['edit_message'] = "Crew hooked to this Menu disk series";
@@ -151,6 +159,7 @@ if ($action == "menu_set_crew_set") {
 // Connect individual to menu set
 //****************************************************************************************
 if ($action == "menu_set_ind_set") {
+    include("../../config/admin_rights.php");
     if (isset($ind_id) and ($ind_id == !"") and isset($menu_sets_id)) {
         $sql                      = $mysqli->query("INSERT INTO ind_menu_prod (ind_id,menu_sets_id) VALUES ('$ind_id','$menu_sets_id')") or die('Error: ' . mysqli_error($mysqli));
         $_SESSION['edit_message'] = "Individual hooked to this Menu disk series";
@@ -171,6 +180,7 @@ if ($action == "menu_set_ind_set") {
 // Connect menu type to menu set
 //****************************************************************************************
 if ($action == "menu_set_type_set") {
+    include("../../config/admin_rights.php");
     if (isset($menu_type_browse) and ($menu_type_browse == !"") and isset($menu_sets_id)) {
         $sql = $mysqli->query("INSERT INTO menu_type (menu_types_main_id,menu_sets_id) VALUES ('$menu_type_browse','$menu_sets_id')") or die('Error: ' . mysqli_error($mysqli));
         $_SESSION['edit_message'] = "Menu set hooked to this Menu disk series";
@@ -193,6 +203,7 @@ if ($action == "menu_set_type_set") {
 // Quick add new crew
 //****************************************************************************************
 if ($action == "menu_set_crew_add") {
+    include("../../config/admin_rights.php");
     if (isset($new_crew_name) and isset($menu_sets_id)) {
         $sql         = $mysqli->query("INSERT INTO crew (crew_name) VALUES ('$new_crew_name')");
         $new_crew_id = $mysqli->insert_id;
@@ -209,6 +220,7 @@ if ($action == "menu_set_crew_add") {
 // Quick add new Individual
 //****************************************************************************************
 if ($action == "menu_set_ind_add") {
+    include("../../config/admin_rights.php");
     if (isset($new_ind_name) and isset($menu_sets_id)) {
         $sql        = $mysqli->query("INSERT INTO Individuals (ind_name) VALUES ('$new_ind_name')");
         $new_ind_id = $mysqli->insert_id;
@@ -225,6 +237,7 @@ if ($action == "menu_set_ind_add") {
 // This is delete crew from menu series
 //****************************************************************************************
 if ($action == "delete_crew_from_menu_set") {
+    include("../../config/admin_rights.php");
     if (isset($crew_id) and isset($menu_sets_id)) {
         create_log_entry('Menu set', $menu_sets_id, 'Crew', $crew_id, 'Delete', $_SESSION['user_id']);
 
@@ -239,6 +252,7 @@ if ($action == "delete_crew_from_menu_set") {
 // This is the delete menu type from menu series
 //****************************************************************************************
 if ($action == "delete_menu_type_from_menu_set") {
+    include("../../config/admin_rights.php");
     if (isset($menu_type_id) and isset($menu_sets_id)) {
         create_log_entry('Menu set', $menu_sets_id, 'Menu type', $menu_type_id, 'Delete', $_SESSION['user_id']);
 
@@ -254,6 +268,7 @@ if ($action == "delete_menu_type_from_menu_set") {
 // This is delete individuel from menu series
 //****************************************************************************************
 if ($action == "delete_ind_from_menu_set") {
+    include("../../config/admin_rights.php");
     if (isset($ind_id) and isset($menu_sets_id)) {
         create_log_entry('Menu set', $menu_sets_id, 'Individual', $ind_id, 'Delete', $_SESSION['user_id']);
 
@@ -269,42 +284,48 @@ if ($action == "delete_ind_from_menu_set") {
 //****************************************************************************************
 if (isset($action) and ($action == "add_title_to_menu")) {
     if (isset($software_id) and isset($menu_disk_id)) {
-        if (isset($software_type) and $software_type == "Game") {
-            //Insert new title in menu_disk_title table
-            $mysqli->query("INSERT INTO menu_disk_title (menu_disk_id,menu_types_main_id) VALUES ('$menu_disk_id','1')");
-            $last_id = $mysqli->insert_id; // Get Last autoinc id
-            // Specify title in menu_disk_title_game table
-            $mysqli->query("INSERT INTO menu_disk_title_game (menu_disk_title_id,game_id) VALUES ('$last_id','$software_id')");
+        if ($_SESSION['permission']==1 or $_SESSION['permission']=='1')
+        {
+            if (isset($software_type) and $software_type == "Game") {
+                //Insert new title in menu_disk_title table
+                $mysqli->query("INSERT INTO menu_disk_title (menu_disk_id,menu_types_main_id) VALUES ('$menu_disk_id','1')");
+                $last_id = $mysqli->insert_id; // Get Last autoinc id
+                // Specify title in menu_disk_title_game table
+                $mysqli->query("INSERT INTO menu_disk_title_game (menu_disk_title_id,game_id) VALUES ('$last_id','$software_id')");
 
-            $sql           = $mysqli->query("SELECT game_name FROM game WHERE game_id = '$software_id'");
-            $row           = $sql->fetch_array(MYSQLI_BOTH);
-            $software_name = $row['game_name'];
+                $sql           = $mysqli->query("SELECT game_name FROM game WHERE game_id = '$software_id'");
+                $row           = $sql->fetch_array(MYSQLI_BOTH);
+                $software_name = $row['game_name'];
+                
+                create_log_entry('Menu disk', $menu_disk_id, 'Game', $software_id, 'Insert', $_SESSION['user_id']);
+                $osd_message = "$software_name added to menu disk!";
+            }
+            if (isset($software_type) and $software_type == "Demo") {
+                $mysqli->query("INSERT INTO menu_disk_title (menu_disk_id,menu_types_main_id) VALUES ('$menu_disk_id','2')");
+                $last_id = $mysqli->insert_id; // Get Last autoinc id
+                // Specify title in menu_disk_title_game table
+                $mysqli->query("INSERT INTO menu_disk_title_demo (menu_disk_title_id,demo_id) VALUES ('$last_id','$software_id')");
 
-            create_log_entry('Menu disk', $menu_disk_id, 'Game', $software_id, 'Insert', $_SESSION['user_id']);
-        }
-        if (isset($software_type) and $software_type == "Demo") {
-            $mysqli->query("INSERT INTO menu_disk_title (menu_disk_id,menu_types_main_id) VALUES ('$menu_disk_id','2')");
-            $last_id = $mysqli->insert_id; // Get Last autoinc id
-            // Specify title in menu_disk_title_game table
-            $mysqli->query("INSERT INTO menu_disk_title_demo (menu_disk_title_id,demo_id) VALUES ('$last_id','$software_id')");
+                $sql           = $mysqli->query("SELECT demo_name FROM demo WHERE demo_id = '$software_id'");
+                $row           = $sql->fetch_array(MYSQLI_BOTH);
+                $software_name = $row['demo_name'];
 
-            $sql           = $mysqli->query("SELECT demo_name FROM demo WHERE demo_id = '$software_id'");
-            $row           = $sql->fetch_array(MYSQLI_BOTH);
-            $software_name = $row['demo_name'];
+                create_log_entry('Menu disk', $menu_disk_id, 'Demo', $software_id, 'Insert', $_SESSION['user_id']);
+                $osd_message = "$software_name added to menu disk!";
+            }
+            if (isset($software_type) and $software_type == "Tool") {
+                $mysqli->query("INSERT INTO menu_disk_title (menu_disk_id,menu_types_main_id) VALUES ('$menu_disk_id','3')");
+                $last_id = $mysqli->insert_id; // Get Last autoinc id
+                // Specify title in menu_disk_title_game table
+                $mysqli->query("INSERT INTO menu_disk_title_tools (menu_disk_title_id,tools_id) VALUES ('$last_id','$software_id')");
 
-            create_log_entry('Menu disk', $menu_disk_id, 'Demo', $software_id, 'Insert', $_SESSION['user_id']);
-        }
-        if (isset($software_type) and $software_type == "Tool") {
-            $mysqli->query("INSERT INTO menu_disk_title (menu_disk_id,menu_types_main_id) VALUES ('$menu_disk_id','3')");
-            $last_id = $mysqli->insert_id; // Get Last autoinc id
-            // Specify title in menu_disk_title_game table
-            $mysqli->query("INSERT INTO menu_disk_title_tools (menu_disk_title_id,tools_id) VALUES ('$last_id','$software_id')");
+                $sql           = $mysqli->query("SELECT tools_name FROM tools WHERE tools_id = '$software_id'");
+                $row           = $sql->fetch_array(MYSQLI_BOTH);
+                $software_name = $row['tools_name'];
 
-            $sql           = $mysqli->query("SELECT tools_name FROM tools WHERE tools_id = '$software_id'");
-            $row           = $sql->fetch_array(MYSQLI_BOTH);
-            $software_name = $row['tools_name'];
-
-            create_log_entry('Menu disk', $menu_disk_id, 'Tool', $software_id, 'Insert', $_SESSION['user_id']);
+                create_log_entry('Menu disk', $menu_disk_id, 'Tool', $software_id, 'Insert', $_SESSION['user_id']);
+                $osd_message = "$software_name added to menu disk!";
+            }
         }
 
         // ok, insert done. Now this is a ajax job so we need a return value.
@@ -388,8 +409,6 @@ if (isset($action) and ($action == "add_title_to_menu")) {
             ));
         }
 
-        $osd_message = "$software_name added to menu disk!";
-
         $smarty->assign('smarty_action', 'add_game_to_menu_return');
         $smarty->assign('osd_message', $osd_message);
         $smarty->assign('menu_disk_id', $menu_disk_id);
@@ -404,55 +423,60 @@ if (isset($action) and ($action == "add_title_to_menu")) {
 //****************************************************************************************
 if (isset($action) and $action == "add_doc_to_menu") {
     if (isset($software_id) and isset($menu_disk_id)) {
-        if (isset($software_type) and $software_type == "Game") {
-            //Insert new title in menu_disk_title table
-            $mysqli->query("INSERT INTO menu_disk_title (menu_disk_id,menu_types_main_id) VALUES ('$menu_disk_id','6')") or die("error inserting menu_disk_title");
-            $title_id = $mysqli->insert_id; // Get Last autoinc id
+        if ($_SESSION['permission']==1 or $_SESSION['permission']=='1')
+        {
+            if (isset($software_type) and $software_type == "Game") 
+            {
+                //Insert new title in menu_disk_title table
+                $mysqli->query("INSERT INTO menu_disk_title (menu_disk_id,menu_types_main_id) VALUES ('$menu_disk_id','6')") or die("error inserting menu_disk_title");
+                $title_id = $mysqli->insert_id; // Get Last autoinc id
 
-            //insert the doc in the doc table first - category = doc_disk_game
-            $mysqli->query("INSERT INTO doc (doc_category_id) VALUES ('1')") or die("error inserting doc");
-            $doc_id = $mysqli->insert_id; // Get Last autoinc id
+                //insert the doc in the doc table first - category = doc_disk_game
+                $mysqli->query("INSERT INTO doc (doc_category_id) VALUES ('1')") or die("error inserting doc");
+                $doc_id = $mysqli->insert_id; // Get Last autoinc id
 
-            //insert in doc_disk_game
-            $mysqli->query("INSERT INTO doc_disk_game (game_id, doc_id) VALUES ('$software_id','$doc_id')") or die("error inserting doc_disk_game");
-            $doc_disk_game_id = $mysqli->insert_id; // Get Last autoinc id
+                //insert in doc_disk_game
+                $mysqli->query("INSERT INTO doc_disk_game (game_id, doc_id) VALUES ('$software_id','$doc_id')") or die("error inserting doc_disk_game");
+                $doc_disk_game_id = $mysqli->insert_id; // Get Last autoinc id
 
-            //insert menu_disk_title_doc_games
-            $mysqli->query("INSERT INTO menu_disk_title_doc_games (menu_disk_title_id, doc_games_id) VALUES ('$title_id','$doc_disk_game_id')") or die("error inserting menu_disk_title_doc_games");
+                //insert menu_disk_title_doc_games
+                $mysqli->query("INSERT INTO menu_disk_title_doc_games (menu_disk_title_id, doc_games_id) VALUES ('$title_id','$doc_disk_game_id')") or die("error inserting menu_disk_title_doc_games");
 
-            $sql           = $mysqli->query("SELECT game_name FROM game WHERE game_id = '$software_id'");
-            $row           = $sql->fetch_array(MYSQLI_BOTH);
-            $software_name = $row['game_name'];
+                $sql           = $mysqli->query("SELECT game_name FROM game WHERE game_id = '$software_id'");
+                $row           = $sql->fetch_array(MYSQLI_BOTH);
+                $software_name = $row['game_name'];
 
-            create_log_entry('Menu disk', $menu_disk_id, 'Game doc', $software_id, 'Insert', $_SESSION['user_id']);
+                create_log_entry('Menu disk', $menu_disk_id, 'Game doc', $software_id, 'Insert', $_SESSION['user_id']);
+                $osd_message = "$software_name added to menu disk!";
+            }
+
+            if (isset($software_type) and $software_type == "Tool") {
+                //Insert new title in menu_disk_title table
+                $mysqli->query("INSERT INTO menu_disk_title (menu_disk_id,menu_types_main_id) VALUES ('$menu_disk_id','6')") or die("error inserting menu_disk_title");
+                $title_id = $mysqli->insert_id; // Get Last autoinc id
+
+                //insert the doc in the doc table first - category = doc_disk_tool
+                $mysqli->query("INSERT INTO doc (doc_category_id) VALUES ('2')") or die("error inserting doc");
+                $doc_id = $mysqli->insert_id; // Get Last autoinc id
+
+                //insert in doc_disk_tool
+                $mysqli->query("INSERT INTO doc_disk_tool (tools_id, doc_id) VALUES ('$software_id','$doc_id')") or die("error inserting doc_disk_tool");
+                ;
+                $doc_disk_tool_id = $mysqli->insert_id; // Get Last autoinc id
+
+                //insert menu_disk_title_doc_tools
+                $mysqli->query("INSERT INTO menu_disk_title_doc_tools (menu_disk_title_id, doc_tools_id) VALUES ('$title_id','$doc_disk_tool_id')") or die("error inserting menu_disk_title_doc_tools");
+                ;
+                ;
+
+                $sql           = $mysqli->query("SELECT tools_name FROM tools WHERE tools_id = '$software_id'");
+                $row           = $sql->fetch_array(MYSQLI_BOTH);
+                $software_name = $row['tools_name'];
+
+                create_log_entry('Menu disk', $menu_disk_id, 'Tool doc', $software_id, 'Insert', $_SESSION['user_id']);
+                $osd_message = "$software_name added to menu disk!";
+            }
         }
-
-        if (isset($software_type) and $software_type == "Tool") {
-            //Insert new title in menu_disk_title table
-            $mysqli->query("INSERT INTO menu_disk_title (menu_disk_id,menu_types_main_id) VALUES ('$menu_disk_id','6')") or die("error inserting menu_disk_title");
-            $title_id = $mysqli->insert_id; // Get Last autoinc id
-
-            //insert the doc in the doc table first - category = doc_disk_tool
-            $mysqli->query("INSERT INTO doc (doc_category_id) VALUES ('2')") or die("error inserting doc");
-            $doc_id = $mysqli->insert_id; // Get Last autoinc id
-
-            //insert in doc_disk_tool
-            $mysqli->query("INSERT INTO doc_disk_tool (tools_id, doc_id) VALUES ('$software_id','$doc_id')") or die("error inserting doc_disk_tool");
-            ;
-            $doc_disk_tool_id = $mysqli->insert_id; // Get Last autoinc id
-
-            //insert menu_disk_title_doc_tools
-            $mysqli->query("INSERT INTO menu_disk_title_doc_tools (menu_disk_title_id, doc_tools_id) VALUES ('$title_id','$doc_disk_tool_id')") or die("error inserting menu_disk_title_doc_tools");
-            ;
-            ;
-
-            $sql           = $mysqli->query("SELECT tools_name FROM tools WHERE tools_id = '$software_id'");
-            $row           = $sql->fetch_array(MYSQLI_BOTH);
-            $software_name = $row['tools_name'];
-
-            create_log_entry('Menu disk', $menu_disk_id, 'Tool doc', $software_id, 'Insert', $_SESSION['user_id']);
-        }
-
 
         // Get the doc disks
         //list of games for the menu disk
@@ -528,9 +552,7 @@ if (isset($action) and $action == "add_doc_to_menu") {
                 'doc_type_name' => $query_type['doc_type_name']
             ));
         }
-
-        $osd_message = "$software_name added to menu disk!";
-
+               
         $smarty->assign('smarty_action', 'add_doc_to_menu_return');
         $smarty->assign('osd_message', $osd_message);
         $smarty->assign('menu_disk_id', $menu_disk_id);
@@ -561,18 +583,21 @@ if (isset($action) and $action == "delete_from_menu_disk") {
         } 
         else 
         {
-            create_log_entry('Menu disk', $menu_disk_id, 'Software', $menu_disk_title_id, 'Delete', $_SESSION['user_id']);
+            if ($_SESSION['permission']==1 or $_SESSION['permission']=='1')
+            {
+                create_log_entry('Menu disk', $menu_disk_id, 'Software', $menu_disk_title_id, 'Delete', $_SESSION['user_id']);
 
-            $mysqli->query("DELETE FROM menu_disk_title_various WHERE menu_disk_title_id='$menu_disk_title_id'");
-            $mysqli->query("DELETE FROM menu_disk_title_tools WHERE menu_disk_title_id='$menu_disk_title_id'");
-            $mysqli->query("DELETE FROM menu_disk_title_music WHERE menu_disk_title_id='$menu_disk_title_id'");
-            $mysqli->query("DELETE FROM menu_disk_title_game WHERE menu_disk_title_id='$menu_disk_title_id'");
-            $mysqli->query("DELETE FROM menu_disk_title_doc_tools WHERE menu_disk_title_id='$menu_disk_title_id'");
-            $mysqli->query("DELETE FROM menu_disk_title_doc_games WHERE menu_disk_title_id='$menu_disk_title_id'");
-            $mysqli->query("DELETE FROM menu_disk_title_demo WHERE menu_disk_title_id='$menu_disk_title_id'");
-            $mysqli->query("DELETE FROM menu_disk_title WHERE menu_disk_title_id='$menu_disk_title_id'");
+                $mysqli->query("DELETE FROM menu_disk_title_various WHERE menu_disk_title_id='$menu_disk_title_id'");
+                $mysqli->query("DELETE FROM menu_disk_title_tools WHERE menu_disk_title_id='$menu_disk_title_id'");
+                $mysqli->query("DELETE FROM menu_disk_title_music WHERE menu_disk_title_id='$menu_disk_title_id'");
+                $mysqli->query("DELETE FROM menu_disk_title_game WHERE menu_disk_title_id='$menu_disk_title_id'");
+                $mysqli->query("DELETE FROM menu_disk_title_doc_tools WHERE menu_disk_title_id='$menu_disk_title_id'");
+                $mysqli->query("DELETE FROM menu_disk_title_doc_games WHERE menu_disk_title_id='$menu_disk_title_id'");
+                $mysqli->query("DELETE FROM menu_disk_title_demo WHERE menu_disk_title_id='$menu_disk_title_id'");
+                $mysqli->query("DELETE FROM menu_disk_title WHERE menu_disk_title_id='$menu_disk_title_id'");
 
-            $osd_message = "Title deleted from menu disk";
+                $osd_message = "Title deleted from menu disk";
+            }
         }
     }
 
@@ -659,7 +684,7 @@ if (isset($action) and $action == "delete_from_menu_disk") {
 
     $smarty->assign('smarty_action', 'add_game_to_menu_return');
     $smarty->assign('menu_disk_id', $menu_disk_id);
-
+    
     $smarty->assign('osd_message', $osd_message);
 
     //Send to smarty for return value
@@ -679,40 +704,43 @@ if (isset($action) and $action == "delete_doc_from_menu_disk") {
     } 
     else 
     {
-        create_log_entry('Menu disk', $menu_disk_id, 'Doc', $menu_disk_title_id, 'Delete', $_SESSION['user_id']);
+        if ($_SESSION['permission']==1 or $_SESSION['permission']=='1')
+        {
+            create_log_entry('Menu disk', $menu_disk_id, 'Doc', $menu_disk_title_id, 'Delete', $_SESSION['user_id']);
 
-        //get the doc cross id
-        $query_doc_game_id = "SELECT doc_games_id FROM menu_disk_title_doc_games WHERE menu_disk_title_id='$menu_disk_title_id'";
-        $result = $mysqli->query($query_doc_game_id) or die("Database error - selecting menu_disk_title_doc_games_id");
-        $query_data  = $result->fetch_array(MYSQLI_BOTH);
-        $doc_game_id = $query_data['doc_games_id'];
+            //get the doc cross id
+            $query_doc_game_id = "SELECT doc_games_id FROM menu_disk_title_doc_games WHERE menu_disk_title_id='$menu_disk_title_id'";
+            $result = $mysqli->query($query_doc_game_id) or die("Database error - selecting menu_disk_title_doc_games_id");
+            $query_data  = $result->fetch_array(MYSQLI_BOTH);
+            $doc_game_id = $query_data['doc_games_id'];
 
-        $query_doc_tool_id = "SELECT * FROM menu_disk_title_doc_tools WHERE menu_disk_title_id='$menu_disk_title_id'";
-        $result = $mysqli->query($query_doc_tool_id) or die("Database error - selecting menu_disk_title_doc_tools_id");
-        $query_data  = $result->fetch_array(MYSQLI_BOTH);
-        $doc_tool_id = $query_data['doc_tools_id'];
+            $query_doc_tool_id = "SELECT * FROM menu_disk_title_doc_tools WHERE menu_disk_title_id='$menu_disk_title_id'";
+            $result = $mysqli->query($query_doc_tool_id) or die("Database error - selecting menu_disk_title_doc_tools_id");
+            $query_data  = $result->fetch_array(MYSQLI_BOTH);
+            $doc_tool_id = $query_data['doc_tools_id'];
 
-        //get the doc id
-        $query_doc_id = "SELECT * FROM doc_disk_game WHERE doc_disk_game_id='$doc_game_id'";
-        $result = $mysqli->query($query_doc_id) or die("Database error - selecting doc_id");
-        $query_data = $result->fetch_array(MYSQLI_BOTH);
-        $doc_id     = $query_data['doc_id'];
-
-        if ($doc_id == '') {
-            $query_doc_id = "SELECT * FROM doc_disk_tool WHERE doc_disk_tool_id='$doc_tool_id'";
-            $result = $mysqli->query($query_doc_id) or die("Database error - selecting doc_id from tool table");
+            //get the doc id
+            $query_doc_id = "SELECT * FROM doc_disk_game WHERE doc_disk_game_id='$doc_game_id'";
+            $result = $mysqli->query($query_doc_id) or die("Database error - selecting doc_id");
             $query_data = $result->fetch_array(MYSQLI_BOTH);
             $doc_id     = $query_data['doc_id'];
+
+            if ($doc_id == '') {
+                $query_doc_id = "SELECT * FROM doc_disk_tool WHERE doc_disk_tool_id='$doc_tool_id'";
+                $result = $mysqli->query($query_doc_id) or die("Database error - selecting doc_id from tool table");
+                $query_data = $result->fetch_array(MYSQLI_BOTH);
+                $doc_id     = $query_data['doc_id'];
+            }
+
+            $mysqli->query("DELETE FROM menu_disk_title WHERE menu_disk_title_id='$menu_disk_title_id'") or die("deleting menu_disk_title table");
+            $mysqli->query("DELETE FROM doc_disk_game WHERE doc_disk_game_id='$doc_game_id'") or die("deleting doc_disk_game table");
+            $mysqli->query("DELETE FROM menu_disk_title_doc_games WHERE menu_disk_title_id='$menu_disk_title_id'") or die("deleting menu_disk_title_doc_games");
+            $mysqli->query("DELETE FROM doc_disk_tool WHERE doc_disk_tool_id='$doc_tool_id'") or die("deleting doc_disk_game table");
+            $mysqli->query("DELETE FROM menu_disk_title_doc_tools WHERE menu_disk_title_id='$menu_disk_title_id'") or die("deleting menu_disk_title_doc_games");
+            $mysqli->query("DELETE FROM doc WHERE doc_id='$doc_id'") or die("deleting doc table");
+
+            $osd_message = "Game doc deleted from menu disk";
         }
-
-        $mysqli->query("DELETE FROM menu_disk_title WHERE menu_disk_title_id='$menu_disk_title_id'") or die("deleting menu_disk_title table");
-        $mysqli->query("DELETE FROM doc_disk_game WHERE doc_disk_game_id='$doc_game_id'") or die("deleting doc_disk_game table");
-        $mysqli->query("DELETE FROM menu_disk_title_doc_games WHERE menu_disk_title_id='$menu_disk_title_id'") or die("deleting menu_disk_title_doc_games");
-        $mysqli->query("DELETE FROM doc_disk_tool WHERE doc_disk_tool_id='$doc_tool_id'") or die("deleting doc_disk_game table");
-        $mysqli->query("DELETE FROM menu_disk_title_doc_tools WHERE menu_disk_title_id='$menu_disk_title_id'") or die("deleting menu_disk_title_doc_games");
-        $mysqli->query("DELETE FROM doc WHERE doc_id='$doc_id'") or die("deleting doc table");
-
-        $osd_message = "Game doc deleted from menu disk";
     }
 
 
@@ -805,57 +833,61 @@ if (isset($action) and $action == "delete_doc_from_menu_disk") {
 // add screenshots to menu disk
 //****************************************************************************************
 if (isset($action) and $action == "add_screens") {
-    //Here we'll be looping on each of the inputs on the page that are filled in with an image!
-    $image = $_FILES['image'];
+    
+    if ($_SESSION['permission']==1 or $_SESSION['permission']=='1')
+    {
+        //Here we'll be looping on each of the inputs on the page that are filled in with an image!
+        $image = $_FILES['image'];
 
-    $osd_message = "";
+        $osd_message = "";
 
-    foreach ($image['tmp_name'] as $key => $tmp_name) {
-        if ($tmp_name !== "") {
-            // Check what extention the file has and if it is allowed.
-            $ext        = "";
-            $type_image = $image['type'][$key];
+        foreach ($image['tmp_name'] as $key => $tmp_name) {
+            if ($tmp_name !== "") {
+                // Check what extention the file has and if it is allowed.
+                $ext        = "";
+                $type_image = $image['type'][$key];
 
-            // set extension
-            if ($type_image == 'image/png') {
-                $ext = 'png';
-            }
+                // set extension
+                if ($type_image == 'image/png') {
+                    $ext = 'png';
+                }
 
-            if ($type_image == 'image/x-png') {
-                $ext = 'png';
-            } elseif ($type_image == 'image/gif') {
-                $ext = 'gif';
-            } elseif ($type_image == 'image/jpeg') {
-                $ext = 'jpg';
-            }
+                if ($type_image == 'image/x-png') {
+                    $ext = 'png';
+                } elseif ($type_image == 'image/gif') {
+                    $ext = 'gif';
+                } elseif ($type_image == 'image/jpeg') {
+                    $ext = 'jpg';
+                }
 
-            if ($ext !== "") {
-                // First we insert the directory path of where the file will be stored... this also creates an autoinc number for us.
-                $sdbquery = $mysqli->query("INSERT INTO screenshot_main (screenshot_id,imgext) VALUES ('','$ext')") or die("Database error - inserting screenshots");
+                if ($ext !== "") {
+                    // First we insert the directory path of where the file will be stored... this also creates an autoinc number for us.
+                    $sdbquery = $mysqli->query("INSERT INTO screenshot_main (screenshot_id,imgext) VALUES ('','$ext')") or die("Database error - inserting screenshots");
 
-                //select the newly entered screenshot_id from the main table
-                $SCREENSHOT = $mysqli->query("SELECT screenshot_id FROM screenshot_main
-                       ORDER BY screenshot_id desc") or die("Database error - selecting screenshots");
+                    //select the newly entered screenshot_id from the main table
+                    $SCREENSHOT = $mysqli->query("SELECT screenshot_id FROM screenshot_main
+                           ORDER BY screenshot_id desc") or die("Database error - selecting screenshots");
 
-                $screenshotrow = $SCREENSHOT->fetch_row();
-                $screenshot_id = $screenshotrow[0];
+                    $screenshotrow = $SCREENSHOT->fetch_row();
+                    $screenshot_id = $screenshotrow[0];
 
-                $sdbquery = $mysqli->query("INSERT INTO screenshot_menu (menu_disk_id, screenshot_id) VALUES ($menu_disk_id, $screenshot_id)") or die("Database error - inserting screenshots2");
+                    $sdbquery = $mysqli->query("INSERT INTO screenshot_menu (menu_disk_id, screenshot_id) VALUES ($menu_disk_id, $screenshot_id)") or die("Database error - inserting screenshots2");
 
-                // Rename the uploaded file to its autoincrement number and move it to its proper place.
-                $file_data = rename($image['tmp_name'][$key], "$menu_screenshot_save_path$screenshotrow[0].$ext");
+                    // Rename the uploaded file to its autoincrement number and move it to its proper place.
+                    $file_data = rename($image['tmp_name'][$key], "$menu_screenshot_save_path$screenshotrow[0].$ext");
 
-                chmod("$menu_screenshot_save_path$screenshotrow[0].$ext", 0777);
+                    chmod("$menu_screenshot_save_path$screenshotrow[0].$ext", 0777);
 
-                $osd_message = "Screenshot uploaded";
+                    $osd_message = "Screenshot uploaded";
 
-                create_log_entry('Menu disk', $menu_disk_id, 'Screenshots', $menu_disk_id, 'Insert', $_SESSION['user_id']);
+                    create_log_entry('Menu disk', $menu_disk_id, 'Screenshots', $menu_disk_id, 'Insert', $_SESSION['user_id']);
+                }
             }
         }
-    }
 
-    if ($osd_message == '') {
-        $osd_message = "No screenshot uploaded";
+        if ($osd_message == '') {
+            $osd_message = "No screenshot uploaded";
+        }
     }
 
     //Get the screenshots for this menu if they exist
@@ -885,6 +917,7 @@ if (isset($action) and $action == "add_screens") {
 
     $smarty->assign("screenshots_nr", $v_screenshots);
     $smarty->assign('osd_message', $osd_message);
+   
     $smarty->assign('smarty_action', 'add_screen_to_menu_return');
     $smarty->assign('menu_disk_id', $menu_disk_id);
 
@@ -896,32 +929,36 @@ if (isset($action) and $action == "add_screens") {
 // delete screenshots from a menudisk
 //****************************************************************************************
 if (isset($action) and $action == "delete_screen_from_menu_disk") {
-    $sql_menushot = $mysqli->query("SELECT * FROM screenshot_menu
-                        WHERE menu_disk_id = $menu_disk_id
-                    AND screenshot_id = $screenshot_id") or die('Error: ' . mysqli_error($mysqli));
+    if ($_SESSION['permission']==1 or $_SESSION['permission']=='1')
+    {
+        $sql_menushot = $mysqli->query("SELECT * FROM screenshot_menu
+                            WHERE menu_disk_id = $menu_disk_id
+                        AND screenshot_id = $screenshot_id") or die('Error: ' . mysqli_error($mysqli));
 
-    $menushot   = $sql_menushot->fetch_row();
-    $menushotid = $menushot[0];
+        $menushot   = $sql_menushot->fetch_row();
+        $menushotid = $menushot[0];
 
-    //get the extension
-    $SCREENSHOT = $mysqli->query("SELECT * FROM screenshot_main
-                    WHERE screenshot_id = '$screenshot_id'") or die('Error: ' . mysqli_error($mysqli));
+        //get the extension
+        $SCREENSHOT = $mysqli->query("SELECT * FROM screenshot_main
+                        WHERE screenshot_id = '$screenshot_id'") or die('Error: ' . mysqli_error($mysqli));
 
-    $screenshotrow  = $SCREENSHOT->fetch_array(MYSQLI_BOTH);
-    $screenshot_ext = $screenshotrow['imgext'];
+        $screenshotrow  = $SCREENSHOT->fetch_array(MYSQLI_BOTH);
+        $screenshot_ext = $screenshotrow['imgext'];
 
-    $sql = $mysqli->query("DELETE FROM screenshot_main WHERE screenshot_id = '$screenshot_id' ");
-    $sql = $mysqli->query("DELETE FROM screenshot_menu WHERE screenshot_id = '$screenshot_id' ");
+        $sql = $mysqli->query("DELETE FROM screenshot_main WHERE screenshot_id = '$screenshot_id' ");
+        $sql = $mysqli->query("DELETE FROM screenshot_menu WHERE screenshot_id = '$screenshot_id' ");
 
-    $new_path = $menu_screenshot_save_path;
-    ;
-    $new_path .= $screenshot_id;
-    $new_path .= ".";
-    $new_path .= $screenshot_ext;
+        $new_path = $menu_screenshot_save_path;
+        ;
+        $new_path .= $screenshot_id;
+        $new_path .= ".";
+        $new_path .= $screenshot_ext;
 
-    unlink("$new_path");
+        unlink("$new_path");
 
-    create_log_entry('Menu disk', $menu_disk_id, 'Screenshots', $menu_disk_id, 'Delete', $_SESSION['user_id']);
+        create_log_entry('Menu disk', $menu_disk_id, 'Screenshots', $menu_disk_id, 'Delete', $_SESSION['user_id']);
+        $osd_message = 'screenshot deleted';
+    }
 
     //Get the screenshots for this menu if they exist
     $sql_screenshots = $mysqli->query("SELECT * FROM screenshot_menu
@@ -947,9 +984,9 @@ if (isset($action) and $action == "delete_screen_from_menu_disk") {
         $count++;
         $v_screenshots++;
     }
-
+   
     $smarty->assign("screenshots_nr", $v_screenshots);
-
+    $smarty->assign('osd_message', $osd_message);
     $smarty->assign('smarty_action', 'add_screen_to_menu_return');
     $smarty->assign('menu_disk_id', $menu_disk_id);
 
@@ -961,11 +998,15 @@ if (isset($action) and $action == "delete_screen_from_menu_disk") {
 // delete download from a menudisk
 //****************************************************************************************
 if (isset($action) and $action == "delete_download_from_menu_disk") {
-    create_log_entry('Menu disk', $menu_disk_id, 'File', $menu_disk_id, 'Delete', $_SESSION['user_id']);
+    if ($_SESSION['permission']==1 or $_SESSION['permission']=='1')
+    {
+        create_log_entry('Menu disk', $menu_disk_id, 'File', $menu_disk_id, 'Delete', $_SESSION['user_id']);
+        $osd_message = 'download deleted';
 
-    $mysqli->query("DELETE from menu_disk_download WHERE menu_disk_download_id='$menu_disk_download_id'");
-    unlink("$menu_file_path$menu_disk_download_id.zip");
-
+        $mysqli->query("DELETE from menu_disk_download WHERE menu_disk_download_id='$menu_disk_download_id'");
+        unlink("$menu_file_path$menu_disk_download_id.zip");
+    }
+    
     //************************************************************************************************
     //Let's get the menu info for the file name concatenation, and the download data for disks already
     //uploaded
@@ -1018,7 +1059,8 @@ if (isset($action) and $action == "delete_download_from_menu_disk") {
             }
         }
     }
-
+    
+    $smarty->assign('osd_message', $osd_message);
     $smarty->assign('menu_disk_name', $menu_disk_name);
     $smarty->assign('download_nr', $nr_downloads);
 
@@ -1033,151 +1075,152 @@ if (isset($action) and $action == "delete_download_from_menu_disk") {
 // We wanna add a new download to a menu
 //****************************************************************************************
 if (isset($action) and $action == 'add_file') {
-    require_once('../../vendor/pclzip/pclzip/pclzip.lib.php');
+    if ($_SESSION['permission']==1 or $_SESSION['permission']=='1')
+    {
+        require_once('../../vendor/pclzip/pclzip/pclzip.lib.php');
 
-    $menu_download_name = $_FILES['menu_download_name'];
+        $menu_download_name = $_FILES['menu_download_name'];
 
-    if (isset($menu_download_name)) {
-        $file_name = $_FILES['menu_download_name']['name'];
+        if (isset($menu_download_name)) {
+            $file_name = $_FILES['menu_download_name']['name'];
 
-        $tempfilename = $_FILES['menu_download_name']['tmp_name'];
+            $tempfilename = $_FILES['menu_download_name']['tmp_name'];
 
-        // Time for zip magic
-        $zip = new PclZip("$tempfilename");
+            // Time for zip magic
+            $zip = new PclZip("$tempfilename");
 
-        // Obtain the contentlist of the zip file.
-        if (($list = $zip->listContent()) == 0) {
-            die("Error : " . $zip->errorInfo(true));
-        }
-
-        // Get the filename from the returned array
-        $filename = $list[0]['filename'];
-
-        // Split the filename to get the extention
-        $ext = strrchr($filename, ".");
-
-        // Get rid of the . in the extention
-        $ext = explode(".", $ext);
-
-        // convert to lowercase just incase....
-        $ext = strtolower($ext[1]);
-
-        // check if the extention is valid.
-        if ($ext == "stx" || $ext == "msa" || $ext == "st") {
-        } // pretty isn't it? ;)
-
-        else {
-            exit("Try uploading a diskimage type that is allowed, like stx or msa not $ext");
-        }
-
-        // Insert the ext,timestamp and the menu id into the menu download table.
-        $sdbquery = $mysqli->query("INSERT INTO menu_disk_download (menu_disk_id,fileext) VALUES ('$menu_disk_id','$ext')") or die('Error: ' . mysqli_error($mysqli));
-
-        //select the newly created menu_download_id from the menu_download table
-        $MENUDOWN = $mysqli->query("SELECT menu_disk_download_id FROM menu_disk_download
-                     ORDER BY menu_disk_download_id desc") or die('Error: ' . mysqli_error($mysqli));
-
-        $menudownrow = $MENUDOWN->fetch_row();
-
-        // Time to unzip the file to the temporary directory
-        $archive = new PclZip("$tempfilename");
-
-        if ($archive->extract(PCLZIP_OPT_PATH, "$menu_file_temp_path") == 0) {
-            die("Error : " . $archive->errorInfo(true));
-        }
-
-        // rename diskimage to increment number
-        rename("$menu_file_temp_path$filename", "$menu_file_temp_path$menudownrow[0].$ext") or die("couldn't rename the file");
-
-        //Time to rezip file and place it in the proper location.
-        $archive = new PclZip("$menu_file_path$menudownrow[0].zip");
-        $v_list  = $archive->create("$menu_file_temp_path$menudownrow[0].$ext", PCLZIP_OPT_REMOVE_ALL_PATH);
-        if ($v_list == 0) {
-            die("Error : " . $archive->errorInfo(true));
-        }
-
-        // Time to do the safeties, here we do a sha512 file hash that we later enter into the database, this will be used in the download
-        // function to check everytime the file is being downloaded... if the hashes don't match, then datacorruption have changed the file.
-        $crc = openssl_digest("$menu_file_path$menudownrow[0].zip", 'sha512');
-
-        //$crc = md5_file ( "$game_file_path$gamedownrow[0].zip");
-
-        $sdbquery = $mysqli->query("UPDATE menu_disk_download SET sha512 = '$crc' WHERE menu_disk_download_id = '$menudownrow[0]'") or die('Error: ' . mysqli_error($mysqli));
-
-        // Chmod file so that we can backup/delete files through ftp.
-        chmod("$menu_file_path$menudownrow[0].zip", 0777);
-
-        // Delete the unzipped file in the temporary directory
-        unlink("$menu_file_temp_path$menudownrow[0].$ext");
-
-        $osd_message = "menu uploaded";
-
-        $smarty->assign('osd_message', $osd_message);
-
-        create_log_entry('Menu disk', $menu_disk_id, 'File', $menu_disk_id, 'Insert', $_SESSION['user_id']);
-
-        //************************************************************************************************
-        //Let's get the menu info for the file name concatenation, and the download data for disks already
-        //uploaded
-        //************************************************************************************************
-        //get the existing downloads
-        $SQL_DOWNLOADS = $mysqli->query("SELECT * FROM menu_disk_download WHERE menu_disk_id='$menu_disk_id'") or die("Error getting download info");
-
-        $nr_downloads = 0;
-        while ($downloads = $SQL_DOWNLOADS->fetch_array(MYSQLI_BOTH)) {
-            $filepath = $menu_file_path;
-
-            //start filling the smarty object
-            $smarty->append('downloads', array(
-                'menu_disk_download_id' => $downloads['menu_disk_download_id'],
-                'filename' => $downloads['menu_disk_download_id'],
-                'filepath' => $filepath
-            ));
-
-            $nr_downloads++;
-        }
-
-        //In all cases we search we start searching through the menu_set table
-        //first
-        $sql_menus = "SELECT menu_disk.menu_sets_id,
-            menu_set.menu_sets_name,
-            menu_disk.menu_disk_number,
-            menu_disk.menu_disk_letter,
-            menu_disk.menu_disk_version,
-            menu_disk.menu_disk_part
-            FROM menu_disk
-            LEFT JOIN menu_set ON (menu_disk.menu_sets_id = menu_set.menu_sets_id)
-            WHERE menu_disk.menu_disk_id = '$menu_disk_id'";
-
-        $result_menus = $mysqli->query($sql_menus) or die('Error: ' . mysqli_error($mysqli));
-
-        while ($row = $result_menus->fetch_array(MYSQLI_BOTH)) {
-            // Create Menu disk name
-            $menu_disk_name = "$row[menu_sets_name] ";
-            if (isset($row['menu_disk_number'])) {
-                $menu_disk_name .= "$row[menu_disk_number]";
+            // Obtain the contentlist of the zip file.
+            if (($list = $zip->listContent()) == 0) {
+                die("Error : " . $zip->errorInfo(true));
             }
-            if (isset($row['menu_disk_letter'])) {
-                $menu_disk_name .= "$row[menu_disk_letter]";
+
+            // Get the filename from the returned array
+            $filename = $list[0]['filename'];
+
+            // Split the filename to get the extention
+            $ext = strrchr($filename, ".");
+
+            // Get rid of the . in the extention
+            $ext = explode(".", $ext);
+
+            // convert to lowercase just incase....
+            $ext = strtolower($ext[1]);
+
+            // check if the extention is valid.
+            if ($ext == "stx" || $ext == "msa" || $ext == "st") {
+            } // pretty isn't it? ;)
+
+            else {
+                exit("Try uploading a diskimage type that is allowed, like stx or msa not $ext");
             }
-            if (isset($row['menu_disk_part'])) {
-                if (is_numeric($row['menu_disk_part'])) {
-                    $menu_disk_name .= " part $row[menu_disk_part]";
-                } else {
-                    $menu_disk_name .= "$row[menu_disk_part]";
-                }
+
+            // Insert the ext,timestamp and the menu id into the menu download table.
+            $sdbquery = $mysqli->query("INSERT INTO menu_disk_download (menu_disk_id,fileext) VALUES ('$menu_disk_id','$ext')") or die('Error: ' . mysqli_error($mysqli));
+
+            //select the newly created menu_download_id from the menu_download table
+            $MENUDOWN = $mysqli->query("SELECT menu_disk_download_id FROM menu_disk_download
+                         ORDER BY menu_disk_download_id desc") or die('Error: ' . mysqli_error($mysqli));
+
+            $menudownrow = $MENUDOWN->fetch_row();
+
+            // Time to unzip the file to the temporary directory
+            $archive = new PclZip("$tempfilename");
+
+            if ($archive->extract(PCLZIP_OPT_PATH, "$menu_file_temp_path") == 0) {
+                die("Error : " . $archive->errorInfo(true));
             }
+
+            // rename diskimage to increment number
+            rename("$menu_file_temp_path$filename", "$menu_file_temp_path$menudownrow[0].$ext") or die("couldn't rename the file");
+
+            //Time to rezip file and place it in the proper location.
+            $archive = new PclZip("$menu_file_path$menudownrow[0].zip");
+            $v_list  = $archive->create("$menu_file_temp_path$menudownrow[0].$ext", PCLZIP_OPT_REMOVE_ALL_PATH);
+            if ($v_list == 0) {
+                die("Error : " . $archive->errorInfo(true));
+            }
+
+            // Time to do the safeties, here we do a sha512 file hash that we later enter into the database, this will be used in the download
+            // function to check everytime the file is being downloaded... if the hashes don't match, then datacorruption have changed the file.
+            $crc = openssl_digest("$menu_file_path$menudownrow[0].zip", 'sha512');
+
+            //$crc = md5_file ( "$game_file_path$gamedownrow[0].zip");
+
+            $sdbquery = $mysqli->query("UPDATE menu_disk_download SET sha512 = '$crc' WHERE menu_disk_download_id = '$menudownrow[0]'") or die('Error: ' . mysqli_error($mysqli));
+
+            // Chmod file so that we can backup/delete files through ftp.
+            chmod("$menu_file_path$menudownrow[0].zip", 0777);
+
+            // Delete the unzipped file in the temporary directory
+            unlink("$menu_file_temp_path$menudownrow[0].$ext");
+
+            $osd_message = "menu uploaded";
+
+            create_log_entry('Menu disk', $menu_disk_id, 'File', $menu_disk_id, 'Insert', $_SESSION['user_id']);
         }
-
-        $smarty->assign('menu_disk_name', $menu_disk_name);
-        $smarty->assign('download_nr', $nr_downloads);
-
-        $smarty->assign('smarty_action', 'add_file_to_menu_return');
-        $smarty->assign('menu_disk_id', $menu_disk_id);
-
-        //Send to smarty for return value
-        $smarty->display("file:" . $cpanel_template_folder . "ajax_menus_detail.html");
     }
+
+    //************************************************************************************************
+    //Let's get the menu info for the file name concatenation, and the download data for disks already
+    //uploaded
+    //************************************************************************************************
+    //get the existing downloads
+    $SQL_DOWNLOADS = $mysqli->query("SELECT * FROM menu_disk_download WHERE menu_disk_id='$menu_disk_id'") or die("Error getting download info");
+
+    $nr_downloads = 0;
+    while ($downloads = $SQL_DOWNLOADS->fetch_array(MYSQLI_BOTH)) {
+        $filepath = $menu_file_path;
+
+        //start filling the smarty object
+        $smarty->append('downloads', array(
+            'menu_disk_download_id' => $downloads['menu_disk_download_id'],
+            'filename' => $downloads['menu_disk_download_id'],
+            'filepath' => $filepath
+        ));
+
+        $nr_downloads++;
+    }
+
+    //In all cases we search we start searching through the menu_set table
+    //first
+    $sql_menus = "SELECT menu_disk.menu_sets_id,
+        menu_set.menu_sets_name,
+        menu_disk.menu_disk_number,
+        menu_disk.menu_disk_letter,
+        menu_disk.menu_disk_version,
+        menu_disk.menu_disk_part
+        FROM menu_disk
+        LEFT JOIN menu_set ON (menu_disk.menu_sets_id = menu_set.menu_sets_id)
+        WHERE menu_disk.menu_disk_id = '$menu_disk_id'";
+
+    $result_menus = $mysqli->query($sql_menus) or die('Error: ' . mysqli_error($mysqli));
+
+    while ($row = $result_menus->fetch_array(MYSQLI_BOTH)) {
+        // Create Menu disk name
+        $menu_disk_name = "$row[menu_sets_name] ";
+        if (isset($row['menu_disk_number'])) {
+            $menu_disk_name .= "$row[menu_disk_number]";
+        }
+        if (isset($row['menu_disk_letter'])) {
+            $menu_disk_name .= "$row[menu_disk_letter]";
+        }
+        if (isset($row['menu_disk_part'])) {
+            if (is_numeric($row['menu_disk_part'])) {
+                $menu_disk_name .= " part $row[menu_disk_part]";
+            } else {
+                $menu_disk_name .= "$row[menu_disk_part]";
+            }
+        }
+    }
+    
+    $smarty->assign('osd_message', $osd_message);   
+    $smarty->assign('menu_disk_name', $menu_disk_name);
+    $smarty->assign('download_nr', $nr_downloads);
+    $smarty->assign('smarty_action', 'add_file_to_menu_return');
+    $smarty->assign('menu_disk_id', $menu_disk_id);
+
+    //Send to smarty for return value
+    $smarty->display("file:" . $cpanel_template_folder . "ajax_menus_detail.html");
 }
 
 
@@ -1187,11 +1230,14 @@ if (isset($action) and $action == 'add_file') {
 
 if (isset($action) and $action == "add_intro_credits") {
     if (isset($ind_id) and isset($author_type_id) and isset($menu_disk_id)) {
-        //Insert individual into the menu_disk credits table
-        $mysqli->query("INSERT INTO menu_disk_credits (menu_disk_id,ind_id,author_type_id) VALUES ('$menu_disk_id','$ind_id','$author_type_id')");
+        if ($_SESSION['permission']==1 or $_SESSION['permission']=='1')
+        {
+            //Insert individual into the menu_disk credits table
+            $mysqli->query("INSERT INTO menu_disk_credits (menu_disk_id,ind_id,author_type_id) VALUES ('$menu_disk_id','$ind_id','$author_type_id')");
 
-        create_log_entry('Menu disk', $menu_disk_id, 'Credits', $ind_id, 'Insert', $_SESSION['user_id']);
-
+            create_log_entry('Menu disk', $menu_disk_id, 'Credits', $ind_id, 'Insert', $_SESSION['user_id']);
+            $osd_message = 'credit added';
+        }
         // Get the menudisk credits
         $sql_individuals = "SELECT
               individuals.ind_id,
@@ -1259,7 +1305,7 @@ if (isset($action) and $action == "add_intro_credits") {
             $query_ind_id = $query['ind_id'];
         }
 
-
+        $smarty->assign('osd_message', $osd_message);   
         $smarty->assign('smarty_action', 'update_menu_disk_credits');
         //Send to smarty for return value
         $smarty->display("file:" . $cpanel_template_folder . "ajax_menus_detail.html");
@@ -1272,11 +1318,15 @@ if (isset($action) and $action == "add_intro_credits") {
 
 if (isset($action) and $action == "delete_menu_disk_credits") {
     if (isset($menu_disk_credits_id)) {
-        create_log_entry('Menu disk', $menu_disk_id, 'Credits', $menu_disk_credits_id, 'Delete', $_SESSION['user_id']);
+        if ($_SESSION['permission']==1 or $_SESSION['permission']=='1')
+        {
+            create_log_entry('Menu disk', $menu_disk_id, 'Credits', $menu_disk_credits_id, 'Delete', $_SESSION['user_id']);
 
-        //Insert individual into the menu_disk credits table
-        $mysqli->query("DELETE FROM menu_disk_credits WHERE menu_disk_credits_id = '$menu_disk_credits_id'");
-
+            //Insert individual into the menu_disk credits table
+            $mysqli->query("DELETE FROM menu_disk_credits WHERE menu_disk_credits_id = '$menu_disk_credits_id'");
+            $osd_message = 'Credits deleted';
+        }
+        
         // Get the menudisk credits
         $sql_individuals = "SELECT
               individuals.ind_id,
@@ -1344,7 +1394,7 @@ if (isset($action) and $action == "delete_menu_disk_credits") {
             $query_ind_id = $query['ind_id'];
         }
 
-
+        $smarty->assign('osd_message', $osd_message);   
         $smarty->assign('smarty_action', 'update_menu_disk_credits');
         //Send to smarty for return value
         $smarty->display("file:" . $cpanel_template_folder . "ajax_menus_detail.html");
@@ -1356,126 +1406,132 @@ if (isset($action) and $action == "delete_menu_disk_credits") {
 //****************************************************************************************
 if (isset($action) and ($action == "change_menu_disk_state" or $action == "change_menu_disk_year" or $action == "change_menu_disk_parent" or $action == "delete_menu_disk")) {
     if (isset($menu_disk_id)) {
-        if ($action == "change_menu_disk_state") {
-            //Update state
-            $sql = $mysqli->query("UPDATE menu_disk SET state='$state_id'
-              WHERE menu_disk_id='$menu_disk_id'");
-
-            create_log_entry('Menu disk', $menu_disk_id, 'State', $state_id, 'Update', $_SESSION['user_id']);
-        // first check if the menu has already a parent entry
-        } elseif ($action == "change_menu_disk_parent") {
-            $sql = $mysqli->query("SELECT * FROM menu_disk_submenu
-            WHERE menu_disk_id = '$menu_disk_id'") or die("error selecting menu disk parent");
-            if ($sql->num_rows > 0) {
+        if ($_SESSION['permission']==1 or $_SESSION['permission']=='1')
+        {
+            if ($action == "change_menu_disk_state") {
                 //Update state
-                $sql = $mysqli->query("UPDATE menu_disk_submenu SET parent_id='$parent_id'
-              WHERE menu_disk_id='$menu_disk_id'");
-            } else {
-                $sql_menu_parent = $mysqli->query("INSERT INTO menu_disk_submenu (parent_id, menu_disk_id) VALUES ('$parent_id','$menu_disk_id')") or die("error inserting menu parent");
-            }
-            create_log_entry('Menu disk', $menu_disk_id, 'Parent', $parent_id, 'Update', $_SESSION['user_id']);
-        } elseif ($action == "delete_menu_disk") {
-            // first let's check if this menu disk has user comments
-            $sql = $mysqli->query("SELECT * FROM menu_user_comments WHERE menu_disk_id = '$menu_disk_id'") or die("error selecting menu comments");
-            if ($sql->num_rows > 0) {
-                $osd_message = "This menu still has user comments, please remove them first";
-            } else {
-                // check for downloads
-                $sql = $mysqli->query("SELECT * FROM menu_disk_download WHERE menu_disk_id='$menu_disk_id'") or die("error selecting menu downloads");
+                $sql = $mysqli->query("UPDATE menu_disk SET state='$state_id'
+                  WHERE menu_disk_id='$menu_disk_id'");
+
+                create_log_entry('Menu disk', $menu_disk_id, 'State', $state_id, 'Update', $_SESSION['user_id']);
+                $osd_message = 'State updated';
+            // first check if the menu has already a parent entry
+            } elseif ($action == "change_menu_disk_parent") {
+                $sql = $mysqli->query("SELECT * FROM menu_disk_submenu
+                WHERE menu_disk_id = '$menu_disk_id'") or die("error selecting menu disk parent");
                 if ($sql->num_rows > 0) {
-                    $osd_message = "This menu still has downloads, please remove them first";
+                    //Update state
+                    $sql = $mysqli->query("UPDATE menu_disk_submenu SET parent_id='$parent_id'
+                  WHERE menu_disk_id='$menu_disk_id'");
                 } else {
-                    //check for screenshots
-                    $sql = $mysqli->query("SELECT * FROM screenshot_menu WHERE menu_disk_id='$menu_disk_id'") or die("error selecting menu screenshots");
+                    $sql_menu_parent = $mysqli->query("INSERT INTO menu_disk_submenu (parent_id, menu_disk_id) VALUES ('$parent_id','$menu_disk_id')") or die("error inserting menu parent");
+                }
+                create_log_entry('Menu disk', $menu_disk_id, 'Parent', $parent_id, 'Update', $_SESSION['user_id']);
+                $osd_message = 'Parent updated';
+            } elseif ($action == "delete_menu_disk") {
+                // first let's check if this menu disk has user comments
+                $sql = $mysqli->query("SELECT * FROM menu_user_comments WHERE menu_disk_id = '$menu_disk_id'") or die("error selecting menu comments");
+                if ($sql->num_rows > 0) {
+                    $osd_message = "This menu still has user comments, please remove them first";
+                } else {
+                    // check for downloads
+                    $sql = $mysqli->query("SELECT * FROM menu_disk_download WHERE menu_disk_id='$menu_disk_id'") or die("error selecting menu downloads");
                     if ($sql->num_rows > 0) {
-                        $osd_message = "This menu still has screenshots, please remove them first";
-                    } else {  
+                        $osd_message = "This menu still has downloads, please remove them first";
+                    } else {
+                        //check for screenshots
+                        $sql = $mysqli->query("SELECT * FROM screenshot_menu WHERE menu_disk_id='$menu_disk_id'") or die("error selecting menu screenshots");
+                        if ($sql->num_rows > 0) {
+                            $osd_message = "This menu still has screenshots, please remove them first";
+                        } else {  
 
-                        create_log_entry('Menu disk', $menu_disk_id, 'Menu disk', $menu_disk_id, 'Delete', $_SESSION['user_id']);
-                        
-                         //get the menu set id
-                        $query_menu_sets_id = "SELECT menu_sets_id FROM menu_disk WHERE menu_disk_id = '$menu_disk_id'";
-                        $result = $mysqli->query($query_menu_sets_id) or die("getting menu_set_id failed");
-                        $query_id     = $result->fetch_array(MYSQLI_BOTH);
-                        $menu_sets_id = $query_id['menu_sets_id'];
-                        
-                        //get the menu disk title id
-                        $sql_menu_disk_title_id = "SELECT menu_disk_title_id FROM menu_disk_title WHERE menu_disk_id = '$menu_disk_id'";
-                        $result = $mysqli->query($sql_menu_disk_title_id) or die("getting menu_disk_title_id failed");
-                        
-                        while ($query_id = $result->fetch_array(MYSQLI_BOTH)) {
-                        
-                            $menu_disk_title_id = $query_id['menu_disk_title_id'];   
-                          
-                            //get the doc cross id
-                            $query_doc_game_id = "SELECT doc_games_id FROM menu_disk_title_doc_games WHERE menu_disk_title_id='$menu_disk_title_id'";
-                            $result_doc_game = $mysqli->query($query_doc_game_id) or die("Database error - selecting menu_disk_title_doc_games_id");
-                            $query_data  = $result_doc_game->fetch_array(MYSQLI_BOTH);
-                            $doc_game_id = $query_data['doc_games_id'];
+                            create_log_entry('Menu disk', $menu_disk_id, 'Menu disk', $menu_disk_id, 'Delete', $_SESSION['user_id']);
+                            
+                             //get the menu set id
+                            $query_menu_sets_id = "SELECT menu_sets_id FROM menu_disk WHERE menu_disk_id = '$menu_disk_id'";
+                            $result = $mysqli->query($query_menu_sets_id) or die("getting menu_set_id failed");
+                            $query_id     = $result->fetch_array(MYSQLI_BOTH);
+                            $menu_sets_id = $query_id['menu_sets_id'];
+                            
+                            //get the menu disk title id
+                            $sql_menu_disk_title_id = "SELECT menu_disk_title_id FROM menu_disk_title WHERE menu_disk_id = '$menu_disk_id'";
+                            $result = $mysqli->query($sql_menu_disk_title_id) or die("getting menu_disk_title_id failed");
+                            
+                            while ($query_id = $result->fetch_array(MYSQLI_BOTH)) {
+                            
+                                $menu_disk_title_id = $query_id['menu_disk_title_id'];   
+                              
+                                //get the doc cross id
+                                $query_doc_game_id = "SELECT doc_games_id FROM menu_disk_title_doc_games WHERE menu_disk_title_id='$menu_disk_title_id'";
+                                $result_doc_game = $mysqli->query($query_doc_game_id) or die("Database error - selecting menu_disk_title_doc_games_id");
+                                $query_data  = $result_doc_game->fetch_array(MYSQLI_BOTH);
+                                $doc_game_id = $query_data['doc_games_id'];
 
-                            $query_doc_tool_id = "SELECT * FROM menu_disk_title_doc_tools WHERE menu_disk_title_id='$menu_disk_title_id'";
-                            $result_doc_tool = $mysqli->query($query_doc_tool_id) or die("Database error - selecting menu_disk_title_doc_tools_id");
-                            $query_data  = $result_doc_tool->fetch_array(MYSQLI_BOTH);
-                            $doc_tool_id = $query_data['doc_tools_id'];
+                                $query_doc_tool_id = "SELECT * FROM menu_disk_title_doc_tools WHERE menu_disk_title_id='$menu_disk_title_id'";
+                                $result_doc_tool = $mysqli->query($query_doc_tool_id) or die("Database error - selecting menu_disk_title_doc_tools_id");
+                                $query_data  = $result_doc_tool->fetch_array(MYSQLI_BOTH);
+                                $doc_tool_id = $query_data['doc_tools_id'];
 
-                            //get the doc id
-                            $query_doc_id = "SELECT * FROM doc_disk_game WHERE doc_disk_game_id='$doc_game_id'";
-                            $result_doc_id = $mysqli->query($query_doc_id) or die("Database error - selecting doc_id");
-                            $query_data = $result_doc_id->fetch_array(MYSQLI_BOTH);
-                            $doc_id     = $query_data['doc_id'];
-
-                            if ($doc_id == '') {
-                                $query_doc_id = "SELECT * FROM doc_disk_tool WHERE doc_disk_tool_id='$doc_tool_id'";
-                                $result_doc_id = $mysqli->query($query_doc_id) or die("Database error - selecting doc_id from tool table");
-                                $query_data =  $result_doc_id->fetch_array(MYSQLI_BOTH);
+                                //get the doc id
+                                $query_doc_id = "SELECT * FROM doc_disk_game WHERE doc_disk_game_id='$doc_game_id'";
+                                $result_doc_id = $mysqli->query($query_doc_id) or die("Database error - selecting doc_id");
+                                $query_data = $result_doc_id->fetch_array(MYSQLI_BOTH);
                                 $doc_id     = $query_data['doc_id'];
+
+                                if ($doc_id == '') {
+                                    $query_doc_id = "SELECT * FROM doc_disk_tool WHERE doc_disk_tool_id='$doc_tool_id'";
+                                    $result_doc_id = $mysqli->query($query_doc_id) or die("Database error - selecting doc_id from tool table");
+                                    $query_data =  $result_doc_id->fetch_array(MYSQLI_BOTH);
+                                    $doc_id     = $query_data['doc_id'];
+                                }
+                                
+                                //Lets do all the menu disk title stuff
+                                $mysqli->query("DELETE from menu_disk_title WHERE menu_disk_title_id='$menu_disk_title_id'") or die("error deleting entries from menu_disk_title table");
+                                $mysqli->query("DELETE from menu_disk_title_game WHERE menu_disk_title_id='$menu_disk_title_id'") or die("error deleting entries from menu_disk_title_game table");
+                                $mysqli->query("DELETE from menu_disk_title_tools WHERE menu_disk_title_id='$menu_disk_title_id'") or die("error deleting entries from menu_disk_title_tools table");
+                                $mysqli->query("DELETE from menu_disk_title_demo WHERE menu_disk_title_id='$menu_disk_title_id'") or die("error deleting entries from menu_disk_title_demo table");
+                                $mysqli->query("DELETE from menu_disk_title_music WHERE menu_disk_title_id='$menu_disk_title_id'") or die("error deleting entries from menu_disk_title_music table");
+                                $mysqli->query("DELETE from menu_disk_title_various WHERE menu_disk_title_id='$menu_disk_title_id'") or die("error deleting entries from menu_disk_title_various table");
+                                $mysqli->query("DELETE from menu_disk_title_doc_games WHERE menu_disk_title_id='$menu_disk_title_id'") or die("error deleting entries from menu_disk_title_doc_games table");
+                                $mysqli->query("DELETE from menu_disk_title_doc_tools WHERE menu_disk_title_id='$menu_disk_title_id'") or die("error deleting entries from menu_disk_title_doc_tools table");
+                                $mysqli->query("DELETE from menu_disk_title_set WHERE menu_disk_title_id='$menu_disk_title_id'") or die("error deleting entries from menu_disk_title_set");
+                                $mysqli->query("DELETE from menu_disk_title_author WHERE menu_disk_title_id='$menu_disk_title_id'") or die("error deleting entries from menu_disk_title_authors table");
+                                
+                                //Lets do all the doc disk stuff
+                                $mysqli->query("DELETE FROM doc_disk_game WHERE doc_disk_game_id='$doc_game_id'") or die("deleting doc_disk_game table");                        
+                                $mysqli->query("DELETE FROM doc_disk_tool WHERE doc_disk_tool_id='$doc_tool_id'") or die("deleting doc_disk_game table");
+                                $mysqli->query("DELETE FROM doc WHERE doc_id='$doc_id'") or die("deleting doc table");
                             }
                             
-                            //Lets do all the menu disk title stuff
-                            $mysqli->query("DELETE from menu_disk_title WHERE menu_disk_title_id='$menu_disk_title_id'") or die("error deleting entries from menu_disk_title table");
-                            $mysqli->query("DELETE from menu_disk_title_game WHERE menu_disk_title_id='$menu_disk_title_id'") or die("error deleting entries from menu_disk_title_game table");
-                            $mysqli->query("DELETE from menu_disk_title_tools WHERE menu_disk_title_id='$menu_disk_title_id'") or die("error deleting entries from menu_disk_title_tools table");
-                            $mysqli->query("DELETE from menu_disk_title_demo WHERE menu_disk_title_id='$menu_disk_title_id'") or die("error deleting entries from menu_disk_title_demo table");
-                            $mysqli->query("DELETE from menu_disk_title_music WHERE menu_disk_title_id='$menu_disk_title_id'") or die("error deleting entries from menu_disk_title_music table");
-                            $mysqli->query("DELETE from menu_disk_title_various WHERE menu_disk_title_id='$menu_disk_title_id'") or die("error deleting entries from menu_disk_title_various table");
-                            $mysqli->query("DELETE from menu_disk_title_doc_games WHERE menu_disk_title_id='$menu_disk_title_id'") or die("error deleting entries from menu_disk_title_doc_games table");
-                            $mysqli->query("DELETE from menu_disk_title_doc_tools WHERE menu_disk_title_id='$menu_disk_title_id'") or die("error deleting entries from menu_disk_title_doc_tools table");
-                            $mysqli->query("DELETE from menu_disk_title_set WHERE menu_disk_title_id='$menu_disk_title_id'") or die("error deleting entries from menu_disk_title_set");
-                            $mysqli->query("DELETE from menu_disk_title_author WHERE menu_disk_title_id='$menu_disk_title_id'") or die("error deleting entries from menu_disk_title_authors table");
-                            
-                            //Lets do all the doc disk stuff
-                            $mysqli->query("DELETE FROM doc_disk_game WHERE doc_disk_game_id='$doc_game_id'") or die("deleting doc_disk_game table");                        
-                            $mysqli->query("DELETE FROM doc_disk_tool WHERE doc_disk_tool_id='$doc_tool_id'") or die("deleting doc_disk_game table");
-                            $mysqli->query("DELETE FROM doc WHERE doc_id='$doc_id'") or die("deleting doc table");
-                        }
+                            // menu disk tables
+                            $mysqli->query("DELETE from menu_disk_year WHERE menu_disk_id='$menu_disk_id'") or die("error deleting entries from menu_disk_year");
+                            $mysqli->query("DELETE from menu_disk_submenu WHERE menu_disk_id='$menu_disk_id'") or die("error deleting entries from menu_disk_submenu");
+                            $mysqli->query("DELETE from menu_disk_credits WHERE menu_disk_id='$menu_disk_id'") or die("error deleting entries from menu_disk_credits");
+                            $mysqli->query("DELETE from menu_disk WHERE menu_disk_id='$menu_disk_id'") or die("error deleting entries from menu_disk");
                         
-                        // menu disk tables
-                        $mysqli->query("DELETE from menu_disk_year WHERE menu_disk_id='$menu_disk_id'") or die("error deleting entries from menu_disk_year");
-                        $mysqli->query("DELETE from menu_disk_submenu WHERE menu_disk_id='$menu_disk_id'") or die("error deleting entries from menu_disk_submenu");
-                        $mysqli->query("DELETE from menu_disk_credits WHERE menu_disk_id='$menu_disk_id'") or die("error deleting entries from menu_disk_credits");
-                        $mysqli->query("DELETE from menu_disk WHERE menu_disk_id='$menu_disk_id'") or die("error deleting entries from menu_disk");
-                    
-                        $osd_message = "Menudisk completely removed";
-                        $smarty->assign('osd_message', $osd_message);
-                        $smarty->assign('menu_sets_id', $menu_sets_id);
+                            $osd_message = "Menudisk completely removed";
+                            $smarty->assign('osd_message', $osd_message);
+                            $smarty->assign('menu_sets_id', $menu_sets_id);
 
-                        //Send all smarty variables to the templates
-                        $smarty->display("file:" . $cpanel_template_folder . "menus_disk_list.html");
+                            //Send all smarty variables to the templates
+                            $smarty->display("file:" . $cpanel_template_folder . "menus_disk_list.html");
+                        }
                     }
                 }
-            }
-        } else {
-            // first check if the menu has already a year entry
-            $sql = $mysqli->query("SELECT * FROM menu_disk_year
-            WHERE menu_disk_id = '$menu_disk_id'") or die("error selecting menu disk");
-            if ($sql->num_rows > 0) {
-                //Update year
-                $sql = $mysqli->query("UPDATE menu_disk_year SET menu_year='$year_id'
-              WHERE menu_disk_id='$menu_disk_id'");
             } else {
-                $sql_menu_year = $mysqli->query("INSERT INTO menu_disk_year (menu_year, menu_disk_id) VALUES ('$year_id','$menu_disk_id')") or die("error inserting menu year");
+                // first check if the menu has already a year entry
+                $sql = $mysqli->query("SELECT * FROM menu_disk_year
+                WHERE menu_disk_id = '$menu_disk_id'") or die("error selecting menu disk");
+                if ($sql->num_rows > 0) {
+                    //Update year
+                    $sql = $mysqli->query("UPDATE menu_disk_year SET menu_year='$year_id'
+                  WHERE menu_disk_id='$menu_disk_id'");
+                } else {
+                    $sql_menu_year = $mysqli->query("INSERT INTO menu_disk_year (menu_year, menu_disk_id) VALUES ('$year_id','$menu_disk_id')") or die("error inserting menu year");
+                }
+                create_log_entry('Menu disk', $menu_disk_id, 'Year', $year_id, 'Update', $_SESSION['user_id']);
+                $osd_message = 'Year updated';
             }
-            create_log_entry('Menu disk', $menu_disk_id, 'Year', $year_id, 'Update', $_SESSION['user_id']);
         }
 
         $sql_menus = "SELECT menu_disk.menu_sets_id,
@@ -2009,11 +2065,15 @@ if (isset($action) and ($action == "change_nickname")) {
 //****************************************************************************************
 if (isset($action) and ($action == "change_doctype")) {
     if (isset($doc_type_id)) {
-        //Update doc type
-        $sql = $mysqli->query("UPDATE doc SET doc_type_id='$doc_type_id'
-            WHERE doc_id='$doc_id'") or die("error updating doc type");
+        if ($_SESSION['permission']==1 or $_SESSION['permission']=='1')
+        {
+            //Update doc type
+            $sql = $mysqli->query("UPDATE doc SET doc_type_id='$doc_type_id'
+                WHERE doc_id='$doc_id'") or die("error updating doc type");
 
-        create_log_entry('Menu disk', $menu_disk_id, 'Doc type', $doc_type_id, 'Insert', $_SESSION['user_id']);
+            create_log_entry('Menu disk', $menu_disk_id, 'Doc type', $doc_type_id, 'Insert', $_SESSION['user_id']);
+            $osd_message = 'doctype updated';
+        }
     }
 
     // Get the doc disks
@@ -2091,6 +2151,7 @@ if (isset($action) and ($action == "change_doctype")) {
         ));
     }
 
+    $smarty->assign('osd_message', $osd_message);
     $smarty->assign('menu_disk_id', $menu_disk_id);
     $smarty->assign('smarty_action', 'add_doc_to_menu_return');
     //Send to smarty for return value
@@ -2102,64 +2163,67 @@ if (isset($action) and ($action == "change_doctype")) {
 //****************************************************************************************
 if (isset($action) and ($action == "add_set_to_menu" or $action == "link_game_to_set" or $action == "delete_game_from_set")) {
     if (isset($menu_disk_title_id)) {
-        if ($action == "add_set_to_menu") {
-            /* first see if this title is already chained */
-            $sql = $mysqli->query("SELECT * FROM menu_disk_title_set
-            WHERE menu_disk_title_id = '$menu_disk_title_id'") or die("error selecting chain");
-            if ($sql->num_rows > 0) {
-                $osd_message = "This title is already chained - delete chain first";
-            } else {
-                //check if the title is already linked
-                $sql_set_nr = "SELECT menu_disk_title_set_nr FROM menu_disk_title_set WHERE menu_disk_title_id = '$menu_disk_title_id'";
-                $query_ser_nr = $mysqli->query($sql_set_nr) or die("problem with set nr query");
-                $query_data = $query_ser_nr->fetch_array(MYSQLI_BOTH);
-                $set_nr     = $query_data['menu_disk_title_set_nr'];
-
-                //if not linked
-                if ($set_nr == 0 or $set_nr = '') {
-                    /*We need to get the highest set nr */
-                    $sql_set_nr = "SELECT menu_disk_title_set_nr FROM menu_disk_title_set order by menu_disk_title_set_nr DESC";
-                    $query_set_nr = $mysqli->query($sql_set_nr) or die("problem with set nr query");
-                    if ($query_set_nr->num_rows > 0) {
-                        while ($row = $query_set_nr->fetch_array(MYSQLI_BOTH)) {
-                            $set_nr = $row['menu_disk_title_set_nr'];
-                            $set_nr++;
-                            break;
-                        }
-                    } else {
-                        $set_nr = 1;
-                    }
-                }
-
-                $sql_menu_set = $mysqli->query("INSERT INTO menu_disk_title_set (menu_disk_title_set_nr, menu_disk_title_set_chain, menu_disk_title_id) VALUES ('$set_nr','1', $menu_disk_title_id)") or die("error inserting menu chain");
-                $osd_message = "Chain created for this title";
-
-                create_log_entry('Menu disk', $menu_disk_id, 'Chain', $menu_disk_title_id, 'Insert', $_SESSION['user_id']);
-            }
-        } elseif ($action == "link_game_to_set") {
-            if ($menu_disk_title_set_chain == 'Nr' or $menu_disk_title_set_chain == '') {
-                $osd_message = "Please add a correct part nr";
-            } elseif ($chainbrowse == '' or $chainbrowse == '-') {
-                $osd_message = "Please select a set";
-            } else {
-                //check if the title is already linked
+        if ($_SESSION['permission']==1 or $_SESSION['permission']=='1')
+        {
+            if ($action == "add_set_to_menu") {
+                /* first see if this title is already chained */
                 $sql = $mysqli->query("SELECT * FROM menu_disk_title_set
-              WHERE menu_disk_title_id = '$menu_disk_title_id'") or die("error selecting chain");
+                WHERE menu_disk_title_id = '$menu_disk_title_id'") or die("error selecting chain");
                 if ($sql->num_rows > 0) {
                     $osd_message = "This title is already chained - delete chain first";
                 } else {
-                    $sql_menu_set = $mysqli->query("INSERT INTO menu_disk_title_set (menu_disk_title_set_nr, menu_disk_title_set_chain, menu_disk_title_id) VALUES ('$chainbrowse','$menu_disk_title_set_chain', $menu_disk_title_id)") or die("error inserting menu chain");
+                    //check if the title is already linked
+                    $sql_set_nr = "SELECT menu_disk_title_set_nr FROM menu_disk_title_set WHERE menu_disk_title_id = '$menu_disk_title_id'";
+                    $query_ser_nr = $mysqli->query($sql_set_nr) or die("problem with set nr query");
+                    $query_data = $query_ser_nr->fetch_array(MYSQLI_BOTH);
+                    $set_nr     = $query_data['menu_disk_title_set_nr'];
+
+                    //if not linked
+                    if ($set_nr == 0 or $set_nr = '') {
+                        /*We need to get the highest set nr */
+                        $sql_set_nr = "SELECT menu_disk_title_set_nr FROM menu_disk_title_set order by menu_disk_title_set_nr DESC";
+                        $query_set_nr = $mysqli->query($sql_set_nr) or die("problem with set nr query");
+                        if ($query_set_nr->num_rows > 0) {
+                            while ($row = $query_set_nr->fetch_array(MYSQLI_BOTH)) {
+                                $set_nr = $row['menu_disk_title_set_nr'];
+                                $set_nr++;
+                                break;
+                            }
+                        } else {
+                            $set_nr = 1;
+                        }
+                    }
+
+                    $sql_menu_set = $mysqli->query("INSERT INTO menu_disk_title_set (menu_disk_title_set_nr, menu_disk_title_set_chain, menu_disk_title_id) VALUES ('$set_nr','1', $menu_disk_title_id)") or die("error inserting menu chain");
                     $osd_message = "Chain created for this title";
 
                     create_log_entry('Menu disk', $menu_disk_id, 'Chain', $menu_disk_title_id, 'Insert', $_SESSION['user_id']);
                 }
-            }
-        } elseif ($action == "delete_game_from_set") {
-            create_log_entry('Menu disk', $menu_disk_id, 'Chain', $menu_disk_title_id, 'Delete', $_SESSION['user_id']);
+            } elseif ($action == "link_game_to_set") {
+                if ($menu_disk_title_set_chain == 'Nr' or $menu_disk_title_set_chain == '') {
+                    $osd_message = "Please add a correct part nr";
+                } elseif ($chainbrowse == '' or $chainbrowse == '-') {
+                    $osd_message = "Please select a set";
+                } else {
+                    //check if the title is already linked
+                    $sql = $mysqli->query("SELECT * FROM menu_disk_title_set
+                  WHERE menu_disk_title_id = '$menu_disk_title_id'") or die("error selecting chain");
+                    if ($sql->num_rows > 0) {
+                        $osd_message = "This title is already chained - delete chain first";
+                    } else {
+                        $sql_menu_set = $mysqli->query("INSERT INTO menu_disk_title_set (menu_disk_title_set_nr, menu_disk_title_set_chain, menu_disk_title_id) VALUES ('$chainbrowse','$menu_disk_title_set_chain', $menu_disk_title_id)") or die("error inserting menu chain");
+                        $osd_message = "Chain created for this title";
 
-            $mysqli->query("DELETE from menu_disk_title_set WHERE menu_disk_title_id='$menu_disk_title_id'") or die("error deleting title from chain");
-            $osd_message = "Title deleted from chain";
-            $smarty->assign('title_name', $title_name);
+                        create_log_entry('Menu disk', $menu_disk_id, 'Chain', $menu_disk_title_id, 'Insert', $_SESSION['user_id']);
+                    }
+                }
+            } elseif ($action == "delete_game_from_set") {
+                create_log_entry('Menu disk', $menu_disk_id, 'Chain', $menu_disk_title_id, 'Delete', $_SESSION['user_id']);
+
+                $mysqli->query("DELETE from menu_disk_title_set WHERE menu_disk_title_id='$menu_disk_title_id'") or die("error deleting title from chain");
+                $osd_message = "Title deleted from chain";
+                $smarty->assign('title_name', $title_name);        
+            }
         }
     }
 
@@ -2478,6 +2542,7 @@ if (isset($action) and ($action == "add_set_to_menu" or $action == "link_game_to
 // Delete menu set
 //****************************************************************************************
 if (isset($action) and ($action == "delete_set")) {
+    include("../../config/admin_rights.php");
     //when deleting a set, we only check for menu disks
     $sql = $mysqli->query("SELECT * FROM menu_disk WHERE menu_sets_id='$menu_sets_id'") or die("error selecting menu disks");
     if ($sql->num_rows > 0) {
@@ -2500,6 +2565,7 @@ if (isset($action) and ($action == "delete_set")) {
 // Publish menu set
 //****************************************************************************************
 if (isset($action) and ($action == "publish_set")) {
+    include("../../config/admin_rights.php");
     if ($online == 'online') {
         $sql = $mysqli->query("UPDATE menu_set SET publish='1'
             WHERE menu_sets_id='$menu_sets_id'");
@@ -2520,7 +2586,7 @@ if (isset($action) and ($action == "publish_set")) {
 // Add an author to a menu_disk_title
 //****************************************************************************************
 if ($action == 'add_author' OR $action == 'delete_menu_disk_title_credits' )
-{   
+{       
     //Get the menu_disk_id
     $sql_menu_disk_id = $mysqli->query("SELECT menu_disk_id FROM menu_disk_title WHERE menu_disk_title_id ='$menu_disk_title_id'");   
     
@@ -2528,21 +2594,25 @@ if ($action == 'add_author' OR $action == 'delete_menu_disk_title_credits' )
         $menu_disk_id = $query['menu_disk_id'];
     }
 
-    if ($action == 'add_author')
+    if ($_SESSION['permission']==1 or $_SESSION['permission']=='1')
     {
-        //Insert author into the menu_disk_title_author table
-        $mysqli->query("INSERT INTO menu_disk_title_author (menu_disk_title_id,ind_id,author_type_id) VALUES ('$menu_disk_title_id','$ind_id','$author_type_id')") or die("error inserting menu_disk_title_author"); ; 
-    
-        create_log_entry('Menu disk', $menu_disk_id, 'Authors', $menu_disk_title_id, 'Insert', $_SESSION['user_id']); 
+        if ($action == 'add_author')
+        {
+            //Insert author into the menu_disk_title_author table
+            $mysqli->query("INSERT INTO menu_disk_title_author (menu_disk_title_id,ind_id,author_type_id) VALUES ('$menu_disk_title_id','$ind_id','$author_type_id')") or die("error inserting menu_disk_title_author"); ; 
+        
+            create_log_entry('Menu disk', $menu_disk_id, 'Authors', $menu_disk_title_id, 'Insert', $_SESSION['user_id']); 
+            $osd_message = 'Author added';
+        }
+        else
+        {
+            //delete author from the menu_disk_title_author table
+            $mysqli->query("DELETE FROM menu_disk_title_author WHERE menu_disk_title_id='$menu_disk_title_id' and ind_id ='$ind_id' and author_type_id ='$author_type_id'") or die("error deleting menu disk title credit");
+        
+            create_log_entry('Menu disk', $menu_disk_id, 'Authors', $menu_disk_title_id, 'Delete', $_SESSION['user_id']); 
+            $osd_message = 'Author deleted';
+        }
     }
-    else
-    {
-        //delete author from the menu_disk_title_author table
-        $mysqli->query("DELETE FROM menu_disk_title_author WHERE menu_disk_title_id='$menu_disk_title_id' and ind_id ='$ind_id' and author_type_id ='$author_type_id'") or die("error deleting menu disk title credit");
-    
-        create_log_entry('Menu disk', $menu_disk_id, 'Authors', $menu_disk_title_id, 'Delete', $_SESSION['user_id']); 
-    }
-    
   
     //Get the individuals
     $sql_individuals = $mysqli->query("SELECT * FROM individuals ORDER BY ind_name ASC");
@@ -2616,7 +2686,7 @@ if ($action == 'add_author' OR $action == 'delete_menu_disk_title_credits' )
     $az_output = az_dropdown_output(0);
 
     $smarty->assign('smarty_action', 'title_credits_return');
-        
+    $smarty->assign('osd_message', $osd_message);    
     $smarty->assign('az_value', $az_value);
     $smarty->assign('az_output', $az_output);
 

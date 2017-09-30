@@ -11,6 +11,8 @@
  *     - AL 2.0 adding messages + bug fixes
  * Id:  db_news.php,v 0.11 2016/08/20 ST Graveyard
  *     - Added change log
+ * Id:  db_news.php,v 0.12 2017/08/25 ST Graveyard
+ *     - possibility to remove news icon from news article
  *
  ***************************************************************************/
 
@@ -22,6 +24,7 @@
 
 include("../../config/common.php");
 include("../../config/admin.php");
+include("../../config/admin_rights.php");
 
 //****************************************************************************************
 // This is where we delete news posts
@@ -47,12 +50,12 @@ if (isset($action) and $action == "add_news") {
         $_SESSION['edit_message'] = "Please fill in the necessary fields";
     } else {
         $descr = $mysqli->real_escape_string($descr);
-
+  
         // Insert the description and the image into the news_image table.
         $sdbquery = $mysqli->query("INSERT INTO news_submission
               (news_headline,news_text,news_image_id,user_id,news_date)
-               VALUES ('$headline','$descr','$icon','$user_id','$news_date')") or die("Error inserting news update");
-
+               VALUES ('$headline','$descr','$icon','$user_id','$news_date')") or die("Error inserting news update");         
+      
         $_SESSION['edit_message'] = "News added correctly";
 
         $new_news_id = $mysqli->insert_id;

@@ -47,6 +47,12 @@ $date = date("F j, Y", $query_comment['timestamp']);
 $comment = stripslashes($query_comment['comment']);
 $comment = trim($comment);
 
+//this is needed, because users can change their own comments on the website, however this is done with JS (instead of a post with pure HTML)
+//The translation of the 'enter' breaks is different in JS, so in JS I do a conversion to a <br>. However, when we edit a comment, this <br> should not be 
+//visible to the user, hence again, now this conversion in php
+$breaks = array("<br />","<br>","<br/>");  
+$comment = str_ireplace($breaks, "\r\n", $comment); 
+
 $smarty->assign('comments', array(
     'comment' => $comment,
     'date' => $date,

@@ -54,7 +54,8 @@ function UpdateDatabase(database_update_id)
 {block name=main_tile}
 <div class="standard_tile">
     <div class="help-tip">
-		<p>This is an overview of the scripts that have been executed throughout the development of AL 2.0. Once is script is executed succesfully, it can't be executed again.
+		<p>This is an overview of the scripts that have been executed throughout the development of AL 2.0. Once a script is executed succesfully, it can't be executed again.
+        {if $user_session.permission == '1'}
            <br><br><b>Some technical info for the admins : </b><br>
            Each script contains a var called $database_update_sql which contains the simple SQL statement. However, sometimes it is needed to run more complex scripts. 
            If we want to do this, 2 things need to be kept in mind : 
@@ -62,6 +63,7 @@ function UpdateDatabase(database_update_id)
            should contain a link to the more complex script file. 
            <br> 2) the actual script file must be placed in the database_scripts folder as well, and its filename should contain the word 'addition'. 
            <br><br><i> An example of this way of working can be found in files 2017-01-30_merge_nicknames_into_individuals.php and 2017-01-30_merge_nicknames_into_individuals-addition.php</i></p>
+        {/if}
 	</div>
 	<h1>DATABASE UPDATES</h1>
 	<div class="standard_tile_line"></div>

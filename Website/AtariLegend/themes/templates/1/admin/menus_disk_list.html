@@ -665,8 +665,16 @@ function addAuthorstoMenutitle(menu_disk_title_id) {
 
                 data = xmlhttp.responseText.split ( "[BRK]" );
                 document.getElementById("author_list").innerHTML = data[0];
+                
+            $.notify_osd.create({
+                'text'        : data[1],             // notification message
+                'icon'        : '{$style_dir}images/osd_icons/star.png', // icon path, 48x48
+                'sticky'      : false,             // if true, timeout is ignored
+                'timeout'     : 4,                 // disappears after 6 seconds
+                'dismissable' : true               // can be dismissed manually
+                });
 
-            document.getElementById("authors_form").reset();
+            document.getElementById("author_list").reset();
             }
         }
         
@@ -907,6 +915,7 @@ function deleteScreenshotfromMenu(str,menu_disk_id) {
 
         if (return_value =="0")
         {
+             document.getElementById("menu_screenshot_list").innerHTML = "";
             return;
         }
         else
@@ -926,16 +935,16 @@ function deleteScreenshotfromMenu(str,menu_disk_id) {
             {
                 if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
                 {
-                    document.getElementById("menu_screenshot_list").innerHTML = xmlhttp.responseText;
+                    data = xmlhttp.responseText.split ( "[BRK]" );
+                    document.getElementById("menu_screenshot_list").innerHTML = data[0];
 
                      $.notify_osd.create({
-                    'text'        : 'Screenshot deleted from menudisk', // notification message
+                    'text'        : data[1],    // notification message
                     'icon'        : '{$style_dir}images/osd_icons/star.png', // icon path, 48x48
                     'sticky'      : false,             // if true, timeout is ignored
                     'timeout'     : 4,                 // disappears after 6 seconds
                     'dismissable' : true               // can be dismissed manually
                     });
-
                 }
             }
 
@@ -975,10 +984,11 @@ function deleteDownload(str,menu_disk_id) {
             {
                 if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
                 {
-                    document.getElementById("menu_file_list").innerHTML = xmlhttp.responseText;
+                    data = xmlhttp.responseText.split ( "[BRK]" );
+                    document.getElementById("menu_file_list").innerHTML = data[0];
 
                      $.notify_osd.create({
-                    'text'        : 'Download deleted from menudisk', // notification message
+                    'text'        : data[1],    // notification message
                     'icon'        : '{$style_dir}images/osd_icons/star.png', // icon path, 48x48
                     'sticky'      : false,             // if true, timeout is ignored
                     'timeout'     : 4,                 // disappears after 6 seconds
@@ -1197,7 +1207,17 @@ function addCreditstoMenu(menu_disk_id) {
         }
         xmlhttp.onreadystatechange = function() {
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                document.getElementById("menu_credit_list").innerHTML = xmlhttp.responseText;
+                data = xmlhttp.responseText.split ( "[BRK]" );
+                document.getElementById("menu_credit_list").innerHTML =  data[0];
+
+            $.notify_osd.create({
+                'text'        : data[1],             // notification message
+                'icon'        : '{$style_dir}images/osd_icons/star.png', // icon path, 48x48
+                'sticky'      : false,             // if true, timeout is ignored
+                'timeout'     : 4,                 // disappears after 6 seconds
+                'dismissable' : true               // can be dismissed manually
+                });
+                document.getElementById("menu_credit_list").reset();
             }
         }
 
@@ -1234,7 +1254,17 @@ function DeleteCredits(menu_disk_credits_id,menu_disk_id) {
         }
         xmlhttp.onreadystatechange = function() {
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                document.getElementById("menu_credit_list").innerHTML = xmlhttp.responseText;
+                data = xmlhttp.responseText.split ( "[BRK]" );
+                document.getElementById("menu_credit_list").innerHTML =  data[0];
+
+            $.notify_osd.create({
+                'text'        : data[1],             // notification message
+                'icon'        : '{$style_dir}images/osd_icons/star.png', // icon path, 48x48
+                'sticky'      : false,             // if true, timeout is ignored
+                'timeout'     : 4,                 // disappears after 6 seconds
+                'dismissable' : true               // can be dismissed manually
+                });
+                document.getElementById("menu_credit_list").reset();
             }
         }
         xmlhttp.open("GET","../menus/db_menu_disk.php?action=delete_menu_disk_credits&menu_disk_credits_id="+menu_disk_credits_id+"&menu_disk_id="+menu_disk_id,true);
@@ -1268,7 +1298,18 @@ function DeleteTitleCredits(menu_disk_title_id,ind_id,author_type_id) {
         }
         xmlhttp.onreadystatechange = function() {
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                document.getElementById("author_list").innerHTML = xmlhttp.responseText;
+                 data = xmlhttp.responseText.split ( "[BRK]" );
+                 document.getElementById("author_list").innerHTML = data[0];
+
+            $.notify_osd.create({
+                'text'        : data[1],             // notification message
+                'icon'        : '{$style_dir}images/osd_icons/star.png', // icon path, 48x48
+                'sticky'      : false,             // if true, timeout is ignored
+                'timeout'     : 4,                 // disappears after 6 seconds
+                'dismissable' : true               // can be dismissed manually
+                });
+
+            document.getElementById("author_list").reset();
             }
         }
         xmlhttp.open("GET","../menus/db_menu_disk.php?action=delete_menu_disk_title_credits&menu_disk_title_id="+menu_disk_title_id+"&author_type_id="+author_type_id+"+&ind_id="+ind_id,true);
@@ -1295,16 +1336,17 @@ function ChangeState(state_id,menu_disk_id) {
         }
         xmlhttp.onreadystatechange = function() {
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                document.getElementById(disk_edit_ajax).innerHTML = xmlhttp.responseText;
+                data = xmlhttp.responseText.split ( "[BRK]" );
+                document.getElementById(disk_edit_ajax).innerHTML = data[0];
 
                  $.notify_osd.create({
-                'text'        : 'Update status of menudisk',             // notification message
+                'text'        : data[1],             // notification message
                 'icon'        : '{$style_dir}images/osd_icons/star.png', // icon path, 48x48
                 'sticky'      : false,             // if true, timeout is ignored
                 'timeout'     : 4,                 // disappears after 4 seconds
                 'dismissable' : true               // can be dismissed manually
                 });
-
+            document.getElementById(disk_edit_ajax).reset();
             }
         }
         xmlhttp.open("GET","../menus/db_menu_disk.php?action=change_menu_disk_state&state_id="+state_id+"&menu_disk_id="+menu_disk_id,true);
@@ -1359,16 +1401,17 @@ function ChangeDoctype(doc_type_id,doc_id,menu_disk_id) {
         }
         xmlhttp.onreadystatechange = function() {
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                document.getElementById("menu_doc_list").innerHTML = xmlhttp.responseText;
+                data = xmlhttp.responseText.split ( "[BRK]" );
+                document.getElementById("menu_doc_list").innerHTML = data[0];
 
                  $.notify_osd.create({
-                'text'        : 'Doctype changed',             // notification message
+                'text'        : data[1],             // notification message
                 'icon'        : '{$style_dir}images/osd_icons/star.png', // icon path, 48x48
                 'sticky'      : false,             // if true, timeout is ignored
                 'timeout'     : 4,                 // disappears after 4 seconds
                 'dismissable' : true               // can be dismissed manually
                 });
-
+             document.getElementById("menu_doc_list").reset();
             }
         }
         xmlhttp.open("GET","../menus/db_menu_disk.php?action=change_doctype&doc_type_id="+doc_type_id+"&doc_id="+doc_id+"&menu_disk_id="+menu_disk_id,true);
@@ -1394,16 +1437,17 @@ function ChangeYear(year_id,menu_disk_id) {
         }
         xmlhttp.onreadystatechange = function() {
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                document.getElementById(disk_edit_ajax).innerHTML = xmlhttp.responseText;
+                data = xmlhttp.responseText.split ( "[BRK]" );
+                document.getElementById(disk_edit_ajax).innerHTML = data[0];
 
                  $.notify_osd.create({
-                'text'        : 'Update release year of menudisk',             // notification message
+                'text'        : data[1],             // notification message
                 'icon'        : '{$style_dir}images/osd_icons/star.png', // icon path, 48x48
                 'sticky'      : false,             // if true, timeout is ignored
                 'timeout'     : 4,                 // disappears after 4 seconds
                 'dismissable' : true               // can be dismissed manually
                 });
-
+            document.getElementById(disk_edit_ajax).reset();
             }
         }
         xmlhttp.open("GET","../menus/db_menu_disk.php?action=change_menu_disk_year&year_id="+year_id+"&menu_disk_id="+menu_disk_id,true);
@@ -1429,16 +1473,17 @@ function ChangeParent(parent_id,menu_disk_id) {
         }
         xmlhttp.onreadystatechange = function() {
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                document.getElementById(disk_edit_ajax).innerHTML = xmlhttp.responseText;
+                data = xmlhttp.responseText.split ( "[BRK]" );
+                document.getElementById(disk_edit_ajax).innerHTML = data[0];
 
                  $.notify_osd.create({
-                'text'        : 'Parent disk updated',             // notification message
+                'text'        : data[1],             // notification message
                 'icon'        : '{$style_dir}images/osd_icons/star.png', // icon path, 48x48
                 'sticky'      : false,             // if true, timeout is ignored
                 'timeout'     : 4,                 // disappears after 4 seconds
                 'dismissable' : true               // can be dismissed manually
                 });
-
+            document.getElementById(disk_edit_ajax).reset();
             }
         }
         xmlhttp.open("GET","../menus/db_menu_disk.php?action=change_menu_disk_parent&parent_id="+parent_id+"&menu_disk_id="+menu_disk_id,true);
