@@ -26,3 +26,10 @@ style.css
 style.css.map
 composer.phar
 composer.json
+
+# ignore HTACCESS files
+/Website/AtariLegend/.htaccess
+/Website/AtariLegend/.htpasswd
+/Website/AtariLegend/php/.htaccess
+/Website/AtariLegend/php/admin/.htaccess
+
