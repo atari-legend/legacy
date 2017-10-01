@@ -1,9 +1,0 @@
-Options +FollowSymlinks -MultiViews -Indexes
-RewriteEngine On
-RewriteBase /
-
-RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s/+main/([^\s]+) [NC]
-RewriteRule ^ %1 [R=301,L]
-
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule (?!^main/)^(.*)$ /main/$1 [L,NC]

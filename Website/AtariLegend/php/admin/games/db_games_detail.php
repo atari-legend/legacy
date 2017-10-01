@@ -377,41 +377,49 @@ if (isset($action) and $action == 'delete_game') {
         $sdbquery = $mysqli->query("SELECT * FROM game_diskscan WHERE game_id='$game_id'") or die("Error getting diskscan info");
         if ($sdbquery->num_rows > 0) {
             $_SESSION['edit_message'] = "Deletion failed - This game has a diskscan - Delete it in the appropriate section";
+            header("Location: ../games/games_detail.php?game_id=$game_id");
         } else {
             $sdbquery = $mysqli->query("SELECT * FROM game_gallery WHERE game_id='$game_id'") or die("Error getting gallery info");
 
             if ($sdbquery->num_rows > 0) {
                 $_SESSION['edit_message'] = "Deletion failed - This game has a images in the gallery table - Delete it in the appropriate section";
+                header("Location: ../games/games_detail.php?game_id=$game_id");
             } else {
                 $sdbquery = $mysqli->query("SELECT * FROM game_boxscan WHERE game_id='$game_id'") or die("Error getting boxscan info");
 
                 if ($sdbquery->num_rows > 0) {
                     $_SESSION['edit_message'] = "Deletion failed - This game has (a) boxscan(s) - Delete it in the appropriate section";
+                    header("Location: ../games/games_detail.php?game_id=$game_id");
                 } else {
                     $sdbquery = $mysqli->query("SELECT * FROM game_user_comments WHERE game_id='$game_id'") or die("Error getting user comments");
 
                     if ($sdbquery->num_rows > 0) {
                         $_SESSION['edit_message'] = "Deletion failed - This game has user comments - Delete it in the appropriate section";
+                        header("Location: ../games/games_detail.php?game_id=$game_id");
                     } else {
                         $sdbquery = $mysqli->query("SELECT * FROM game_submitinfo WHERE game_id='$game_id'") or die("Error getting submit info");
 
                         if ($sdbquery->num_rows > 0) {
                             $_SESSION['edit_message'] = "Deletion failed - This game has info submitted from visitors - Delete it in the appropriate section";
+                            header("Location: ../games/games_detail.php?game_id=$game_id");
                         } else {
                             $sdbquery = $mysqli->query("SELECT * FROM screenshot_game WHERE game_id='$game_id'") or die("Error getting screenshot info");
 
                             if ($sdbquery->num_rows > 0) {
                                 $_SESSION['edit_message'] = "Deletion failed - This game has screenshots - Delete it in the appropriate section";
+                                header("Location: ../games/games_detail.php?game_id=$game_id");
                             } else {
                                 $sdbquery = $mysqli->query("SELECT * FROM review_game WHERE game_id='$game_id'") or die("Error getting review info");
 
                                 if ($sdbquery->num_rows > 0) {
                                     $_SESSION['edit_message'] = "Deletion failed - This game has reviews - Delete it in the appropriate section";
+                                    header("Location: ../games/games_detail.php?game_id=$game_id");
                                 } else {
                                     $sdbquery = $mysqli->query("SELECT * FROM game_music WHERE game_id='$game_id'") or die("Error getting music info");
 
                                     if ($sdbquery->num_rows > 0) {
                                         $_SESSION['edit_message'] = "Deletion failed - This game has music files attached - Delete it in the appropriate section";
+                                        header("Location: ../games/games_detail.php?game_id=$game_id");
                                     } else {
                                         create_log_entry('Games', $game_id, 'Game', $game_id, 'Delete', $_SESSION['user_id']);
 
