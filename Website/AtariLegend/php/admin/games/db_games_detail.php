@@ -367,12 +367,14 @@ if (isset($action) and $action == 'modify_game') {
 //***********************************************************************************
 //If the delete button has been pressed, delete the necesarry records from the tables
 //***********************************************************************************
+   
 if (isset($action) and $action == 'delete_game') {
     //First we need to do a hell of a lot checks before we can delete an actual game.
     $sdbquery = $mysqli->query("SELECT * FROM game_download WHERE game_id='$game_id'") or die("Error getting download info");
 
     if ($sdbquery->num_rows > 0) {
         $_SESSION['edit_message'] = "Deletion failed - This game has downloads - Delete it in the appropriate section";
+        header("Location: ../games/games_detail.php?game_id=$game_id");
     } else {
         $sdbquery = $mysqli->query("SELECT * FROM game_diskscan WHERE game_id='$game_id'") or die("Error getting diskscan info");
         if ($sdbquery->num_rows > 0) {
