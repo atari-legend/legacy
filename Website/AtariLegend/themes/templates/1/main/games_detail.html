@@ -18,18 +18,18 @@
 
 
 {extends file='1/main/main.html'}
-
+{block name=title} {$game_info.game_name} | Atari Legend{/block}
 {block name=main_body}
     <script src="{$template_dir}includes/js/jssor.slider-25.2.1.min.js" type="text/javascript"></script>
-    
+
     <script type="text/javascript"> <!-- script used for the jquery screenshot and boxscan slider -->
         jQuery(document).ready(function ($) {
-      
+
         //screenshot slider code
         var jssor_1_SlideshowTransitions = [
           {literal}{$Duration:1200,$Opacity:2}{/literal}
         ];
-        
+
         var jssor_1_options = {
           $AutoPlay: 1,
           $SlideshowOptions: {
@@ -56,22 +56,22 @@
             {/if}
             $SpacingX: 5,
             $SpacingY: 5,
-            $Orientation: 2           
+            $Orientation: 2
           }
         };
-        
+
         var jssor_1_slider = new $JssorSlider$("jssor_1", jssor_1_options);
-        
+
         {if isset($boxscan)}
             // boxscan slider code
             var jssor_2_SlideshowTransitions = [
                 {literal}{$Duration:1200,$Opacity:2}{/literal}
             ];
-            
+
             var jssor_2_options = {
                 $AutoPlay: 1,
-                $FillMode: 5,    
-                $SlideshowOptions: {               
+                $FillMode: 5,
+                $SlideshowOptions: {
                     $Class: $JssorSlideshowRunner$,
                     $Transitions: jssor_1_SlideshowTransitions,
                     $TransitionsOrder: 1
@@ -108,7 +108,7 @@
             else {
                 window.setTimeout(ScaleSlider, 30);
             }
-            
+
             {if isset($boxscan)}
             //for boxscans
                 var containerElement2 = jssor_2_slider.$Elmt.parentNode;
@@ -129,41 +129,41 @@
                 }
             {/if}
         }
-        
+
         ScaleSlider();
         $(window).bind("load", ScaleSlider);
         $(window).bind("resize", ScaleSlider);
         $(window).bind("orientationchange", ScaleSlider);
         /*#endregion responsive code end*/
-        
-        
+
+
         //API $Play, $Pause
         function Play() {
             jssor_1_slider.$Play();
         }
-            
+
         function Pause() {
             jssor_1_slider.$Pause();
         }
-        
+
         $("#play_jssor1").click(Play);
         $("#pause_jssor1").click(Pause);
-        
+
         {if isset($boxscan)}
             function Play_box() {
                 jssor_2_slider.$Play();
             }
-                
+
             function Pause_box() {
                 jssor_2_slider.$Pause();
             }
-            
+
             $("#play_jssor2").click(Play_box);
             $("#pause_jssor2").click(Pause_box);
         {/if}
     });
     </script>
-    
+
     <!-- I am adding a small piece of style code to make the thumbs bigger when there a less screenshots available, it makes it look better -->
     <style>
       {if $nr_screenshots < 10}
@@ -171,13 +171,13 @@
       {else}
          {literal}.games_main_detail_thumbs .p {width:90px;height:52px;}{/literal}
       {/if}
-    </style>   
-    
+    </style>
+
     <script type="text/javascript" src="{$template_dir}includes/js/lightbox.min.js"></script>
     <link type="text/css" href="{$style_dir}css/lightbox.css" hreflang="en" rel="stylesheet">
-    
+
     <script>
-        lightbox.option({        
+        lightbox.option({
           'showImageNumberLabel': false
         })
     </script>
@@ -185,108 +185,108 @@
         function Show_profile(pub_id) {
             var string = "profile";
             var show_profile = string.concat(pub_id);
-            
+
             var string = "profile_on";
             var profile_on = string.concat(pub_id);
-            
+
             var string = "profile_off";
             var profile_off = string.concat(pub_id);
-            
+
             var profile = document.getElementById(show_profile);
             profile.style.display='table-row';
-            
+
             var profile_icon_on = document.getElementById(profile_on);
             profile_icon_on.style.display='none';
-            
+
             var profile_icon_off = document.getElementById(profile_off);
             profile_icon_off.style.display='inline';
         }
-        
+
         function Hide_profile(pub_id) {
             var string = "profile";
             var show_profile = string.concat(pub_id);
-            
+
             var string = "profile_on";
             var profile_on = string.concat(pub_id);
-            
+
             var string = "profile_off";
             var profile_off = string.concat(pub_id);
-            
+
             var profile = document.getElementById(show_profile);
             profile.style.display='none';
-            
+
             var profile_icon_on = document.getElementById(profile_on);
             profile_icon_on.style.display='inline';
-            
+
             var profile_icon_off = document.getElementById(profile_off);
             profile_icon_off.style.display='none';
         }
-        
+
         function Show_profile_ind(ind_id) {
             var string = "profile_ind";
             var show_profile_ind = string.concat(ind_id);
-            
+
             var string = "profile_on_ind";
             var profile_on_ind = string.concat(ind_id);
-            
+
             var string = "profile_off_ind";
             var profile_off_ind = string.concat(ind_id);
-            
+
             var profile_ind = document.getElementById(show_profile_ind);
             profile_ind.style.display='table-row';
-            
+
             var profile_icon_on_ind = document.getElementById(profile_on_ind);
             profile_icon_on_ind.style.display='none';
-            
+
             var profile_icon_off_ind = document.getElementById(profile_off_ind);
             profile_icon_off_ind.style.display='inline';
         }
-        
+
         function Hide_profile_ind(ind_id) {
             var string = "profile_ind";
             var show_profile_ind = string.concat(ind_id);
-            
+
             var string = "profile_on_ind";
             var profile_on_ind = string.concat(ind_id);
-            
+
             var string = "profile_off_ind";
             var profile_off_ind = string.concat(ind_id);
-            
+
             var profile_ind = document.getElementById(show_profile_ind);
             profile_ind.style.display='none';
-            
+
             var profile_icon_on_ind = document.getElementById(profile_on_ind);
             profile_icon_on_ind.style.display='inline';
-            
+
             var profile_icon_off_ind = document.getElementById(profile_off_ind);
             profile_icon_off_ind.style.display='none';
         }
     </script>
-    
+
     {literal}
     <script type="text/javascript"> <!-- Comment tile scripts
     function CommentEditable(comment_id,user_id) {
         var string = "latest_comment_edit";
         var editable_comment = string.concat(comment_id);
-        
+
         var string = "comment_edit_icon";
         var edit_icon = string.concat(comment_id);
-        
+
         var string = "comment_save_icon";
         var save_icon = string.concat(comment_id);
-        
+
         var string = "comment_input";
         var comment_input = string.concat(comment_id);
-        
+
         var input = document.getElementById(comment_input);
         input.style.display='inline';
-        
+
         var save = document.getElementById(save_icon);
         save.style.display='inline';
-        
+
         var edit = document.getElementById(edit_icon);
         edit.style.display='none';
-        
+
         var output = document.getElementById(editable_comment);
         output.style.display='none';
     }
@@ -300,12 +300,12 @@
 
         var string = "comment_input";
         var comment_data = string.concat(comment_id);
-           
+
         var comment = document.getElementById(comment_data).value
         comment = comment.replace(/\n\r?/g, '<br />');
-        
+
         var url = "../../main/games/db_games_main_detail.php?action=save_comment&comment_id="+comment_id+"&data="+comment+"&game_id="+game_id;
-              
+
         if (comment_id == "")
         {
             document.getElementById("latest_comments_all").innerHTML = "";
@@ -343,7 +343,7 @@
          // IT RETURNS TRUE IF 'OK' IS CLICKED
          // OTHERWISE IT RETURN FALSE
          var return_value = confirm(message);
-         
+
          if (return_value !="0")
          {
              if (comment_id == "")
@@ -375,7 +375,7 @@
                 }
             }
          }
-         
+
          function AddComment(user_id,game_id) {
 
             //It took me ages to get his to work because I'm a dipshit - I hate ajax --> ST Graveyard 14/07/2014 @fucking 00:44
@@ -384,14 +384,14 @@
             //Once the <br> are in the db, I do another conversion when I load the from the DB into an input field
 
             var comment_data = "comment_add";;
-               
+
             var comment = document.getElementById(comment_data).value
             comment = comment.replace(/\n\r?/g, '<br />');
-            
+
             var url = "../../main/games/db_games_main_detail.php?action=add_comment&user_id="+user_id+"&data="+comment+"&game_id="+game_id;
-            
+
             document.getElementById('comment_add').value = "";
-                 
+
             if (game_id == "")
             {
                 document.getElementById("latest_comments_all").innerHTML = "";
@@ -421,7 +421,7 @@
             }
         }
     </script>
-    
+
     <script type="text/javascript"> <!-- all the code for the options of the textfield of the comment section -->
         var clientPC = navigator.userAgent.toLowerCase(); // Get client info
         var clientVer = parseInt(navigator.appVersion); // Get browser version
@@ -538,26 +538,26 @@
             if (textEl.createTextRange) textEl.caretPos = document.selection.createRange().duplicate();
         }
     </script>
-    {/literal} 
-    
+    {/literal}
+
     <script type="text/javascript" src="{$template_dir}includes/js/jquery.dotdotdot.js" type="text/javascript"></script> <!--this script is used for the elipsis (...) effect of the preview of the reviews -->
-    <script type="text/javascript"> 
+    <script type="text/javascript">
          window.onload = function() {
             $(".game_details_review_preview_text").dotdotdot({  <!--This is the script to truncate the preview of the reviews-->
                     //	configuration goes here
-                    
+
                 /*	The text to add as ellipsis. */
                 ellipsis	: '... ',
-         
+
                 /*	How to cut off the text/html: 'word'/'letter'/'children' */
                 wrap		: 'word',
-         
+
                 /*	Wrap-option fallback to 'letter' for long words */
                 fallbackToLetter: false,
-         
+
                 /*	jQuery-selector for the element to keep and put after the ellipsis. */
                 after		: null,
-         
+
                 /*	Whether to update the ellipsis: true/'window' */
                 watch		: window,
 
@@ -567,41 +567,41 @@
 
                 /*	Deviation for the height-option. */
                 tolerance	: 0,
-         
+
                 /*	Callback function that is fired after the ellipsis is added,
                     receives two parameters: isTruncated(boolean), orgContent(string). */
                 callback	: function( isTruncated, orgContent ) {},
-         
+
                 lastCharacter	: {
-         
+
                     /*	Remove these characters from the end of the truncated text. */
                     remove		: [ ' ', ',', ';', '.', '!', '?' ],
-         
-                    /*	Don't add an ellipsis if this array contains 
+
+                    /*	Don't add an ellipsis if this array contains
                         the last character of the truncated text. */
                     noEllipsis	: []
-                }   
+                }
             });
         };
     </script>
     <script type="text/javascript">
-        $(function() {    
+        $(function() {
             $but = $('#file_upload_game_screenshots');
-            
+
             $("input:file[id=file_upload]").change(function() {
                 document.getElementById('file_upload_game_screenshots').value = 'file(s) selected';
             });
-        }); 
-    </script> 
+        });
+    </script>
     <script type="text/javascript">
-        $(function() {    
+        $(function() {
             $but_med = $('#file_upload_game_screenshots_medium');
-            
+
             $("input:file[id=file_upload_medium]").change(function() {
                 document.getElementById('file_upload_game_screenshots_medium').value = 'file(s) selected';
             });
-        }); 
-    </script> 
+        });
+    </script>
 
     <div id="main" class="main_container_games_details">
         <div class="content_box_games_details" id="column_left_games_details">
@@ -618,31 +618,31 @@
             <br>
             <!--*************************-->
             <!--START Game comments tile -->
-            <!--*************************--> 
+            <!--*************************-->
                 <div class="games_main_details_comments_position_high">
                     {include file='1/main/games_detail_comments.html'}
                 </div>
             <!--***********************-->
             <!--END Game comments tile -->
-            <!--***********************--> 
+            <!--***********************-->
             <br>
             {if isset($similar) or isset($interview) or isset($facts)}
                 {if isset($boxscan)}
-                    {if isset($comments)} 
+                    {if isset($comments)}
                     {else}
                         <!--****************************-->
                         <!--Start game submission tile  -->
-                        <!--****************************-->  
+                        <!--****************************-->
                         <div class="games_main_details_submissions_position_high">
                             {include file='1/main/games_detail_submission.html'}
                         </div>
                         <!--****************************-->
                         <!--END game submission tile    -->
-                        <!--****************************-->   
+                        <!--****************************-->
                     {/if}
                 {/if}
             {/if}
-            
+
             {if isset($boxscan)}
                 <div class="games_main_details_submisions_position_medium">
                     {include file='1/main/games_detail_submission_medium.html'}
@@ -651,13 +651,13 @@
                 {if isset($similar) or isset($interview) or isset($facts)}
                     <div class="games_main_details_submisions_position_medium">
                         {include file='1/main/games_detail_submission_medium.html'}
-                    </div>    
+                    </div>
                 {/if}
             {/if}
-            
+
         </div>
-        
-        <div class="content_box_games_details" id="column_center_games_details">         
+
+        <div class="content_box_games_details" id="column_center_games_details">
             <!--*********************-->
             <!--START screenshot tile -->
             <!--*********************-->
@@ -667,19 +667,19 @@
                     <h1>{$game_info.game_name|upper}</h1>
                     <div class="standard_tile_line"></div>
                     {if isset($screenshots)}
-                        <div id="jssor_1" class="games_main_detail_screenshot">   
+                        <div id="jssor_1" class="games_main_detail_screenshot">
                             <div data-u="slides" class="games_main_detail_slides">
                                 {foreach from=$screenshots item=line name=screenshots}
                                 <div>
                                     <img data-u="image" src="{$line.screenshot_image}">
                                     <img data-u="thumb" src="{$line.screenshot_image}">
                                 </div>
-                                {/foreach}                            
+                                {/foreach}
                             </div>
                             <!-- Thumbnail Navigator -->
                             <div data-u="thumbnavigator" class="games_main_detail_thumbs" data-autocenter="2" data-scale-left="0.75">
                                 <div data-u="slides">
-                                    <div data-u="prototype" class="p">                                    
+                                    <div data-u="prototype" class="p">
                                         <div data-u="thumbnailtemplate" class="t"></div>
                                     </div>
                                 </div>
@@ -695,19 +695,19 @@
                                 </div>
                             {/if}
                             <!-- Arrow Navigator -->
-                            <div data-u="arrowleft" class="games_main_detail_arrow" id="games_main_detail_arrow_left" data-autocenter="2" data-scale="0.75" data-scale-left="1">                 
+                            <div data-u="arrowleft" class="games_main_detail_arrow" id="games_main_detail_arrow_left" data-autocenter="2" data-scale="0.75" data-scale-left="1">
                                 <svg viewbox="0 0 16000 16000" style="position:absolute;top:0;left:0;width:100%;height:100%;">
                                     <polyline class="a" points="11040,1920 4960,8000 11040,14080 "></polyline>
                                 </svg>
                             </div>
-                            <div data-u="arrowright" class="games_main_detail_arrow" id="games_main_detail_arrow_right" data-autocenter="2" data-scale="0.75" data-scale-right="1">                  
+                            <div data-u="arrowright" class="games_main_detail_arrow" id="games_main_detail_arrow_right" data-autocenter="2" data-scale="0.75" data-scale-right="1">
                                 <svg viewbox="0 0 16000 16000" style="position:absolute;top:0;left:0;width:100%;height:100%;">
                                     <polyline class="a" points="4960,1920 11040,8000 4960,14080 "></polyline>
                                 </svg>
                             </div>
                         </div>
                     {else}
-                        <div class="standard_tile_text">     
+                        <div class="standard_tile_text">
                             <h6 style="text-align:center;">
                                 There are no screenshots in the database. You have any? Please use the submit tile to sent it to us. You can select more screenshots at once to upload.
                             </h6>
@@ -724,7 +724,7 @@
             <!--*********************-->
             <!--END screenshot tile  -->
             <!--*********************-->
-            
+
             <!--*********************-->
             <!--START Game info tile -->
             <!--*********************-->
@@ -735,32 +735,32 @@
             <!--*******************-->
             <!--END Game info tile -->
             <!--*******************-->
-          
+
             <!--*************************-->
             <!--START Review preview tile -->
-            <!--**************************-->   
+            <!--**************************-->
             <br>
             <div class="games_main_details_reviews_position_high">
                 <div class="standard_tile">
-                    <h1><a href="../games/games_reviews_main.php" class="standard_tile_link" title="Click to see all reviews">REVIEWS</a></h1> 
-                    <div class="standard_tile_line"></div> 
+                    <h1><a href="../games/games_reviews_main.php" class="standard_tile_link" title="Click to see all reviews">REVIEWS</a></h1>
+                    <div class="standard_tile_line"></div>
                     {if isset($user_session)}
-                        <div class="standard_tile_text">     
+                        <div class="standard_tile_text">
                             <h6 style="text-align:center;">
                                 Feel inspired to write your own review? Please click <a href="../games/games_reviews_add.php?game_id={$game_info.game_id}" class="standard_tile_link">here</a> and get started!
                             </h6>
-                        </div> 
+                        </div>
                     {else}
                        <div class="games_main_detail_comments_log_on">
                             If you like to write a review yourself, please log in and follow the link.
-                       </div> 
+                       </div>
                     {/if}
                     {if isset($review)}
                     <div class="standard_tile_line"></div>
-                    <table class="standard_table_games_main_detail">               
+                    <table class="standard_table_games_main_detail">
                     {foreach from=$review item=line name=review}
                         <tr>
-                        <td class="game_details_review_preview_left">  
+                        <td class="game_details_review_preview_left">
                             <div style="margin-left:10px;margin-right:10px;text-align:justify;margin-bottom:10px;margin-top:10px">
                                 <a href="../../includes/show_image.php?file={$line.screenshot}&amp;resize=410,null,null,null" data-lightbox="image-1">
                                 <img src="../../includes/show_image.php?file={$line.screenshot}&amp;resize=210,null,null,null" alt="Click to enlarge!" style="display:inline;margin-top:10px;" class="game_screenshot_img"></a>
@@ -778,10 +778,10 @@
                                    {$line.text}
                                 </div>
                                 <h2><a href="../games/games_reviews_detail.php?game_id={$game_id}&review_id={$line.review_id}" class="standard_tile_link">Read more <i class="fa fa-chevron-right" aria-hidden="true"></i></a></h2>
-                                <br>                            
+                                <br>
                             </div>
                         </td>
-                        </tr>		
+                        </tr>
                     {/foreach}
                     </table>
                     {/if}
@@ -789,44 +789,44 @@
             </div>
             <!--*************************-->
             <!--END Review preview tile  -->
-            <!--**************************-->  
+            <!--**************************-->
 
             {if isset($similar) or isset($interview) or isset($facts)}
                 {if isset($boxscan)}
-                    {if isset($comments)} 
+                    {if isset($comments)}
                         <!--****************************-->
                         <!--Start game submission tile  -->
-                        <!--****************************-->   
+                        <!--****************************-->
                         <br>
                         <div class="games_main_details_submissions_position_high">
                             {include file='1/main/games_detail_submission.html'}
                         </div>
                         <!--****************************-->
                         <!--END game submission tile    -->
-                        <!--****************************-->   
+                        <!--****************************-->
                     {/if}
                 {/if}
             {else}
                 {if isset($boxscan)}
-                    {if isset($review)} 
+                    {if isset($review)}
                     {else}
                         <br>
                         <!--****************************-->
                         <!--Start game submission tile  -->
-                        <!--****************************--> 
+                        <!--****************************-->
                         <div class="games_main_details_submissions_position_high">
                             {include file='1/main/games_detail_submission.html'}
                         </div>
                         <!--****************************-->
                         <!--END game submission tile    -->
-                        <!--****************************--> 
+                        <!--****************************-->
                     {/if}
                 {/if}
             {/if}
-            
+
         </div>
 
-        <div class="content_box_games_details" id="column_right_games_details">           
+        <div class="content_box_games_details" id="column_right_games_details">
             <!--*********************-->
             <!--START boxscan tile -->
             <!--*********************-->
@@ -834,14 +834,14 @@
             <div class="games_main_details_boxscans_position_high">
                 <div class="standard_tile">
                     <h1>BOXSCAN</h1>
-                    <div class="standard_tile_line"></div>  
-                    {if isset($boxscan)}                        
+                    <div class="standard_tile_line"></div>
+                    {if isset($boxscan)}
                         <div id="jssor_2" class="games_main_detail_box">
                             <!-- Loading Screen -->
                             <div data-u="slides" class="games_main_detail_slides_box">
                                 {foreach from=$boxscan item=line name=boxscan}
                                     <div>
-                                        <a href="../../includes/show_image.php?file={$line.image_pop}" data-lightbox="image-1" class="latest_comments_link"><img data-u="image" src="{$line.image}" class="games_main_detail_box_img"></a>    
+                                        <a href="../../includes/show_image.php?file={$line.image_pop}" data-lightbox="image-1" class="latest_comments_link"><img data-u="image" src="{$line.image}" class="games_main_detail_box_img"></a>
                                         <div u="thumb">
                                             <div style="width: 100%; height: 100%; background-image: url({$line.image}); background-position: center center; background-repeat: no-repeat; background-size: contain;">
                                             </div>
@@ -873,7 +873,7 @@
                         <span class="standard_tile_subtext" style="float:right;margin-right:20px;">Autoplay <a href="javascript:Play_box();" id="play_jssor2" >On</a>/<a href="javascript:Pause_box();" id="pause_jssor2">Off</a></span>
                         <br><br>
                     {else}
-                        <div class="standard_tile_text">     
+                        <div class="standard_tile_text">
                             <h6 style="text-align:center;">
                                 There is no boxscan in the database. You have one? Please use the submit tile to sent it to us.
                             </h6>
@@ -884,17 +884,17 @@
             <!--*********************-->
             <!--END boxscan tile     -->
             <!--*********************-->
-            
+
             <!--*********************-->
             <!--START interview tile -->
             <!--*********************-->
-            <div class="games_main_details_interviews_position_high">    
+            <div class="games_main_details_interviews_position_high">
                {include file='1/main/games_detail_interview.html'}
             </div>
             <!--*********************-->
             <!--END interview tile   -->
             <!--*********************-->
-            
+
             <!--*********************-->
             <!--START similar tile   -->
             <!--*********************-->
@@ -904,7 +904,7 @@
             <!--*********************-->
             <!--END similar tile     -->
             <!--*********************-->
-            
+
             <!--*********************-->
             <!--START Facts tile     -->
             <!--*********************-->
@@ -914,49 +914,49 @@
             <!--*********************-->
             <!--END Facts tile          -->
             <!--*********************-->
-            
+
             {if isset($similar) or isset($interview) or isset($facts)}
                 {if isset($boxscan)}
-                {else} 
+                {else}
                     <!--****************************-->
                     <!--Start game submission tile  -->
-                    <!--****************************-->   
+                    <!--****************************-->
                     <div class="games_main_details_submissions_position_high">
                         <br>
                         {include file='1/main/games_detail_submission.html'}
                     </div>
                     <!--****************************-->
                     <!--END game submission tile    -->
-                    <!--****************************-->   
+                    <!--****************************-->
                 {/if}
             {else}
                 {if isset($boxscan)}
                     {if isset($review)}
                         <!--****************************-->
                         <!--Start game submission tile  -->
-                        <!--****************************-->  
+                        <!--****************************-->
                         <div class="games_main_details_submissions_position_high">
                             <br>
                             {include file='1/main/games_detail_submission.html'}
                         </div>
                         <!--****************************-->
                         <!--END game submission tile    -->
-                        <!--****************************--> 
+                        <!--****************************-->
                     {/if}
-                {else}                   
+                {else}
                     <!--****************************-->
                     <!--Start game submission tile  -->
-                    <!--****************************--> 
+                    <!--****************************-->
                     <div class="games_main_details_submissions_position_high">
                         <br>
                         {include file='1/main/games_detail_submission.html'}
                     </div>
                     <!--****************************-->
                     <!--END game submission tile    -->
-                    <!--****************************--> 
+                    <!--****************************-->
                 {/if}
             {/if}
-            
+
             {if isset($boxscan)}
             {else}
                 {if isset($similar) or isset($interview) or isset($facts)}
@@ -967,5 +967,5 @@
                     </div>
                 {/if}
             {/if}
-        </div>       
+        </div>
 {/block}
