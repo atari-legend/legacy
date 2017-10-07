@@ -23,7 +23,7 @@ if (isset($_POST['userid'], $_POST['pmd5'])) {
     $userid = $_POST['userid'];
     $md5_password = $_POST['pmd5']; // The md5 hashed password.
     $password = $_POST['p']; // The hashed password.
-    
+
     if(md5_test($userid, $md5_password, $password, $mysqli) == true) {
         // md5 success
         //echo "<br>All went good";
@@ -40,7 +40,7 @@ if (isset($_POST['userid'], $_POST['p'])) {
 
     //fill the session vars
     if (login($userid, $password, $mysqli) == true) {
-        // Login success     
+        // Login success
         if (isset($remember_me) && $remember_me == '1')
         {
             // get session parameters
@@ -50,12 +50,12 @@ if (isset($_POST['userid'], $_POST['p'])) {
             //setcookie("cooksession", session_id(), time()+60*60*24*100, $params["path"], $params["domain"], $params["secure"], $params["httponly"]);
             setcookie("cooksession", session_id(), time()+60*60*24*100, "/");
 			$session_id = session_id();
-            
+
             //update the table with the session id
-            $sdbquery = $mysqli->query("UPDATE users SET session = '$session_id' WHERE userid = '$userid'") or die("Couldn't Update user table with session id");; 
-        }    
+            $sdbquery = $mysqli->query("UPDATE users SET session = '$session_id' WHERE userid = '$userid'") or die("Couldn't Update user table with session id");;
+        }
         //header('Location: ../../main/front/front.php');
-        $_SESSION['edit_message'] = "Log in succesfull";
+        $_SESSION['edit_message'] = "Login successful";
         header('Location: ' . $_SERVER['HTTP_REFERER']);
     } else {
         // Login failed
@@ -63,7 +63,7 @@ if (isset($_POST['userid'], $_POST['p'])) {
         $sql_inactive = $mysqli->query("SELECT * FROM users WHERE userid = '$userid'");
         $query_inactive = $sql_inactive->fetch_array(MYSQLI_BOTH);
         if ($query_inactive['inactive'] == 1 )
-        {    
+        {
             //header('Location: ../../main/front/front.php?error=2');
             $_SESSION['edit_message'] = 'User is set inactive - contact admin';
             header('Location: ' . $_SERVER['HTTP_REFERER']);
@@ -73,7 +73,7 @@ if (isset($_POST['userid'], $_POST['p'])) {
             $_SESSION['edit_message'] = 'Usn or pwd incorrect - Please try again';
             header('Location: ' . $_SERVER['HTTP_REFERER']);
             //header('Location: ../../main/front/front.php?error=1');
-        }       
+        }
     }
 } else {
     // The correct POST variables were not sent to this page.
