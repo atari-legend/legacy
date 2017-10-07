@@ -27,9 +27,9 @@ $sql_interview = $mysqli->query("SELECT *
                         LEFT JOIN interview_text on (interview_main.interview_id = interview_text.interview_id)
                         LEFT JOIN users on (interview_main.user_id = users.user_id)
                         LEFT JOIN individuals on (interview_main.ind_id = individuals.ind_id)
-                        LEFT JOIN individual_text on (interview_main.ind_id = individual_text.ind_id)
-                        WHERE interview_main.interview_id = '$selected_interview_id'") or die("Error - Couldn't query interview data");
-
+                        
+                        WHERE interview_main.interview_id = '$selected_interview_id'") or die("Error - Couldn't query interview data");                      
+                        
 $query_interview = $sql_interview->fetch_array(MYSQLI_BOTH);
 
 $v_interview_date = date("F j, Y", $query_interview['interview_date']);
@@ -47,17 +47,21 @@ $interview_chapters = nl2br($interview_chapters);
 $interview_chapters = InsertALCode($interview_chapters);
 
 //get the profile of the author
-if(preg_match("/[a-z]/i", $query_interview['ind_profile'])){
-    $profile = $query_interview['ind_profile'];
+$sql_ind_text = $mysqli->query("SELECT * FROM individual_text WHERE ind_id = $query_interview[ind_id]") or die ("problem getting individual data");
+$query_ind_text = $sql_ind_text->fetch_array(MYSQLI_BOTH);
+
+
+if(preg_match("/[a-z]/i", $query_ind_text['ind_profile'])){
+    $profile = $query_ind_text['ind_profile'];
 }
 else {$profile = 'none';}
 
 //The interviewed person's picture
-if ($query_interview['ind_imgext'] == 'png' or $query_interview['ind_imgext'] == 'jpg' or $query_interview['ind_imgext'] == 'gif') {
+if ($query_ind_text['ind_imgext'] == 'png' or $query_ind_text['ind_imgext'] == 'jpg' or $query_ind_text['ind_imgext'] == 'gif') {
     $v_ind_image = $individual_screenshot_path;
     $v_ind_image .= $query_interview['ind_id'];
     $v_ind_image .= '.';
-    $v_ind_image .= $query_interview['ind_imgext'];
+    $v_ind_image .= $query_ind_text['ind_imgext'];
 } else {
     $v_ind_image = "none";
 }
