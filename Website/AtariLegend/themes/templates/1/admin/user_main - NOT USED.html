@@ -1,4 +1,4 @@
-{* 
+{*
 /***************************************************************************
                               user_main.html
 *                            --------------------------
@@ -21,7 +21,7 @@ The main Users page
 {block name=java_script}
 <script type="text/javascript">
 function SyncKarma()
-{ 
+{
     // CONFIRM REQUIRES ONE ARGUMENT
     var message = "Are you sure you want to do this? Resyncing Karma takes a minute you know...";
     // CONFIRM IS BOOLEAN. THAT MEANS THAT
@@ -33,7 +33,7 @@ function SyncKarma()
     {
     	url="../user/karma_sync.php";
 		location.href=url;
-    } 
+    }
 }
 </script>
 {/block}
@@ -43,9 +43,9 @@ function SyncKarma()
 	<div class="standard_tile_line"></div>
 	<div class="standard_tile_text">
 		<div class="left_nav_section">
-			This is the user area. Overhere you can maintain user accounts of the AL website! There are currently 
-			<b>{$nr_users}</b> users in the DB.
-		</div> 
+			This is the user area. Overhere you can maintain user accounts of the AL website! There are currently
+			<b>{$nr_users}</b> users in the database.
+		</div>
 		<br><br>
 		<form action="../user/user_search.php" method="get" name="user_search">
 			<fieldset>
@@ -93,7 +93,7 @@ function SyncKarma()
 							<td class="standard_table_center">{if $line.value != ''}{$line.value}{/if}</td>
 						</tr>
 							{/foreach}
-						</table>	
+						</table>
 					</td>
 				</tr>
 				</table>
@@ -112,7 +112,7 @@ function SyncKarma()
 							<td class="standard_table_right">{$line.karma}</td>
 						</tr>
 							{/foreach}
-						</table>						
+						</table>
 					</td>
 				</tr>
 				</table>
@@ -131,7 +131,7 @@ function SyncKarma()
 							<td class="standard_table_right">{$line.karma}</td>
 						</tr>
 							{/foreach}
-						</table>	
+						</table>
 					</td>
 				</tr>
 				</table>
