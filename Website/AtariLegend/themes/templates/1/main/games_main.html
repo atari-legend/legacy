@@ -25,7 +25,7 @@ The main game page
                 source: function(request, response) {
                     $.getJSON(
                         "../../../php/includes/autocomplete.php",
-                        { term:request.term, extraParams:$('#autocomplete1').val() }, 
+                        { term:request.term, extraParams:$('#autocomplete1').val() },
                         response
                     );
                 },
@@ -34,12 +34,12 @@ The main game page
                     //On select action
                 }
             });
-            
+
             $('#games_main_pub_input').autocomplete({
                 source: function(request, response) {
                     $.getJSON(
                         "../../../php/includes/autocomplete.php",
-                        { term:request.term, extraParams:$('#autocomplete2').val() }, 
+                        { term:request.term, extraParams:$('#autocomplete2').val() },
                         response
                     );
                 },
@@ -48,12 +48,12 @@ The main game page
                     //On select action
                 }
             });
-            
+
             $('#games_main_dev_input').autocomplete({
                 source: function(request, response) {
                     $.getJSON(
                         "../../../php/includes/autocomplete.php",
-                        { term:request.term, extraParams:$('#autocomplete3').val() }, 
+                        { term:request.term, extraParams:$('#autocomplete3').val() },
                         response
                     );
                 },
@@ -62,12 +62,12 @@ The main game page
                     //On select action
                 }
             });
-            
+
             $('#games_main_year_input').autocomplete({
                 source: function(request, response) {
                     $.getJSON(
                         "../../../php/includes/autocomplete.php",
-                        { term:request.term, extraParams:$('#autocomplete4').val() }, 
+                        { term:request.term, extraParams:$('#autocomplete4').val() },
                         response
                     );
                 },
@@ -76,12 +76,12 @@ The main game page
                     //On select action
                 }
             });
-           
+
             $('#games_main_cat_input').autocomplete({
                 source: function(request, response) {
                     $.getJSON(
                         "../../../php/includes/autocomplete.php",
-                        { term:request.term, extraParams:$('#autocomplete5').val() }, 
+                        { term:request.term, extraParams:$('#autocomplete5').val() },
                         response
                     );
                 },
@@ -94,125 +94,125 @@ The main game page
     </script>
     {/literal}
     <script type="text/javascript">
-    function dropdown_pub() {      
+    function dropdown_pub() {
         var publisher_input = document.getElementById("games_main_pub_input");
         publisher_input.style.display='none';
-        
+
         var publisher = document.getElementById("games_main_pub_drop");
         publisher.style.display='inline';
-        
+
         var pub_input_text = document.getElementById("input_pub");
         pub_input_text.style.display='none';
-        
+
         var pub_drop_text = document.getElementById("drop_pub");
-        pub_drop_text.style.display='inline';  
+        pub_drop_text.style.display='inline';
     }
-    
-    function input_pub() {      
+
+    function input_pub() {
         var publisher_input = document.getElementById("games_main_pub_input");
         publisher_input.style.display='inline';
-        
+
         var publisher = document.getElementById("games_main_pub_drop");
         publisher.style.display='none';
-        
+
         var pub_input_text = document.getElementById("input_pub");
         pub_input_text.style.display='inline';
-        
+
         var pub_drop_text = document.getElementById("drop_pub");
-        pub_drop_text.style.display='none';  
+        pub_drop_text.style.display='none';
     }
-    
-    function dropdown_dev() {      
+
+    function dropdown_dev() {
         var developer_input = document.getElementById("games_main_dev_input");
         developer_input.style.display='none';
-        
+
         var developer = document.getElementById("games_main_dev_drop");
         developer.style.display='inline';
-        
+
         var dev_input_text = document.getElementById("input_dev");
         dev_input_text.style.display='none';
-        
+
         var dev_drop_text = document.getElementById("drop_dev");
-        dev_drop_text.style.display='inline';  
+        dev_drop_text.style.display='inline';
     }
-    
-    function input_dev() {      
+
+    function input_dev() {
         var developer_input = document.getElementById("games_main_dev_input");
         developer_input.style.display='inline';
-        
+
         var developer = document.getElementById("games_main_dev_drop");
         developer.style.display='none';
-        
+
         var dev_input_text = document.getElementById("input_dev");
         dev_input_text.style.display='inline';
-        
+
         var dev_drop_text = document.getElementById("drop_dev");
-        dev_drop_text.style.display='none';  
+        dev_drop_text.style.display='none';
     }
-    function dropdown_year() {      
+    function dropdown_year() {
         var year_input = document.getElementById("games_main_year_input");
         year_input.style.display='none';
-        
+
         var year = document.getElementById("games_main_year_drop");
         year.style.display='inline';
-        
+
         var year_input_text = document.getElementById("input_year");
         year_input_text.style.display='none';
-        
+
         var year_drop_text = document.getElementById("drop_year");
-        year_drop_text.style.display='inline';  
+        year_drop_text.style.display='inline';
     }
-    
-    function input_year() {      
+
+    function input_year() {
         var year_input = document.getElementById("games_main_year_input");
         year_input.style.display='inline';
-        
+
         var year = document.getElementById("games_main_year_drop");
         year.style.display='none';
-        
+
         var year_input_text = document.getElementById("input_year");
         year_input_text.style.display='inline';
-        
+
         var year_drop_text = document.getElementById("drop_year");
-        year_drop_text.style.display='none';  
+        year_drop_text.style.display='none';
     }
-    function dropdown_cat() {      
+    function dropdown_cat() {
         var cat_input = document.getElementById("games_main_cat_input");
         cat_input.style.display='none';
-        
+
         var cat = document.getElementById("games_main_cat_drop");
         cat.style.display='inline';
-        
+
         var cat_input_text = document.getElementById("input_cat");
         cat_input_text.style.display='none';
-        
+
         var cat_drop_text = document.getElementById("drop_cat");
-        cat_drop_text.style.display='inline';  
+        cat_drop_text.style.display='inline';
     }
-    
-    function input_cat() {      
+
+    function input_cat() {
         var cat_input = document.getElementById("games_main_cat_input");
         cat_input.style.display='inline';
-        
+
         var cat = document.getElementById("games_main_cat_drop");
         cat.style.display='none';
-        
+
         var cat_input_text = document.getElementById("input_cat");
         cat_input_text.style.display='inline';
-        
+
         var cat_drop_text = document.getElementById("drop_cat");
-        cat_drop_text.style.display='none';  
+        cat_drop_text.style.display='none';
     }
     </script>
     <div id="main" class="main_container_cpanel">
         <div class="content_box_cpanel" id="column_left_cpanel">
             <br>
             {block name=left_tile}
-                {if $mode == "advanced"} 
+                {if $mode == "advanced"}
                     {if isset($stats) and ($stats == 1)}
                          {include file='1/main/statistics_tile.html'}
                     {else}
-                        {include file='1/main/who_is_it_tile.html'}  
+                        {include file='1/main/who_is_it_tile.html'}
                     {/if}
                     <br>
                     {include file='1/main/latest_comments_tile.html'}
@@ -223,21 +223,21 @@ The main game page
                         {include file='1/main/latest_comments_tile.html'}
                     {/if}
                 {/if}
-                
+
             {/block}
         </div>
         <div class="content_box_cpanel" id="column_center_cpanel">
             <br>
             <div class="standard_tile" id="games_main">
                 <div class="help-tip">
-                    <p> 
+                    <p>
                         Some extra info : <br><br>
                         <i class="fa fa-chevron-circle-down" aria-hidden="true" title="Click for drop down mode"></i> : Click this item to switch from list to input mode and vice versa<br><br>
                         - <u>Download</u> : Display only games with a download available<br>
                         - <u>Screenshot</u> : Display only games with one or more screenshots available<br>
                         - <u>Boxscan</u> : Same as screenshot, but for boxscans<br>
                         - <u>Review</u> : Display only games that contain a review<br><br>
-                        - <u>Export mode</u> : An Excel like output list with filter and sort functions, with possibility to export to CSV, XLSX and JSON. More export features will be available in the future.<br><br>        
+                        - <u>Export mode</u> : An Excel like output list with filter and sort functions, with possibility to export to CSV, XLSX and JSON. More export features will be available in the future.<br><br>
                         - <u>Advanced search</u> : More search functionalities. Keep in mind these may slow down query speeds.<br>
                     </p>
                 </div>
@@ -245,9 +245,9 @@ The main game page
                 <div class="standard_tile_line"></div>
                 <div class="standard_tile_text">
                     <h6>
-                        Welcome to the game section. The place to be for every Atari ST and retro gaming nutcase. Enjoy your stay! Search for a game by using any of the functionalities below. 
-                        Combinations are allowed. There are currently <b>{$games_nr}</b> games in the DB. For more statistics of the db, click <a href="../../main/games/games_main.php?mode={$mode}&stats=1" class="standard_tile_link_cpanel">here</a>.
-                        if there is data missing and you are willing to contribute, please get in touch with the team.    
+                        Welcome to the game section. The place to be for every Atari ST and retro gaming nutcase. Enjoy your stay! Search for a game by using any of the functionalities below.
+                        Combinations are allowed. There are currently <b>{$games_nr}</b> games in the database. For more statistics of the db, click <a href="../../main/games/games_main.php?mode={$mode}&stats=1" class="standard_tile_link_cpanel">here</a>.
+                        if there is data missing and you are willing to contribute, please get in touch with the team.
                     </h6>
                     <div id="games_main_space">
                         <br>
@@ -285,8 +285,8 @@ The main game page
                         </ul>
                     </nav>
                 </div>
-                <div class="standard_tile_line"></div>    
-                <br>                
+                <div class="standard_tile_line"></div>
+                <br>
                 <br>
                 <form action="../games/games_main_list.php" method="get" name="game_search">
                 <div id="games_main_parent">
@@ -297,7 +297,7 @@ The main game page
                             <select name="gamebrowse" id="games_main_select_site">
                                 <option value="" SELECTED>-</option>
                                 {html_options values=$az_value output=$az_output}
-                            </select>                          
+                            </select>
                        </div>
                     </div>
                     <div class="games_main_row_site">
@@ -473,7 +473,7 @@ The main game page
                                             <div class="links_mod_checkbox">
                                                 <input type="checkbox" id="falcon_enhanced" name="falcon_enhanced" value="1">
                                                 <label for="falcon_enhanced"></label>
-                                            </div>                              
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -485,7 +485,7 @@ The main game page
                                             <div class="links_mod_checkbox">
                                                 <input type="checkbox" id="falcon_rgb" name="falcon_rgb" value="1">
                                                 <label for="falcon_rgb"></label>
-                                            </div>                               
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -585,7 +585,7 @@ The main game page
                                         <div class="games_check_row">
                                             <div class="links_mod_checkbox">
                                                 <input type="checkbox" id="wanted" name="wanted" value="1">
-                                                <label for="wanted"></label>   
+                                                <label for="wanted"></label>
                                             </div>
                                         </div>
                                     </div>
@@ -636,7 +636,7 @@ The main game page
                         <br>
                         <input type="submit" value="SEARCH" class="quick_search_games_button">
                         <br><br>
-                    </div>  
+                    </div>
                     <input type="hidden" name="action" id="action" value="search">
                     <input type="hidden" name="mode" id="mode" value="{if isset($mode)}{$mode}{/if}">
                 </div>
@@ -660,10 +660,10 @@ The main game page
                     {include file='1/main/tile_screenstar.html'}
                     <br>
                     {include file='1/main/tile_changes_per_month.html'}
-                {else}                   
+                {else}
                     {include file='1/main/tile_changes_per_month.html'}
                 {/if}
-            {/block}        
+            {/block}
         </div>
     </div>
 {/block}
