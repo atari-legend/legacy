@@ -1,4 +1,4 @@
-{* 
+{*
 /***************************************************************************
 *                                interviews_add.html
 *                            --------------------------
@@ -13,12 +13,12 @@
 *   Id: interviews_add.html,v 0.21 2017/06/16 19:38 ST Graveyard
 *                   added the [frontpage] functionality
 *   Id: interviews_add.html,v 0.22 2017/08/19 15:04 ST Graveyard
-*                   removed the [frontpage] functionality --> Why was this necessary?? 
+*                   removed the [frontpage] functionality --> Why was this necessary??
 ***************************************************************************/
 
 ///****************************************************************************************
 // This is the sub template file to generate the interviews add page
-//**************************************************************************************** 
+//****************************************************************************************
 *}
 {extends file='1/admin/frontpage.html'}
 
@@ -26,7 +26,7 @@
 <script src="../templates/0/js/game_comment.js"></script>
 <script type="text/javascript">
 function deletecomment(screenshot_id, interview_id)
-{	
+{
 	// CONFIRM REQUIRES ONE ARGUMENT
     var message = "Are you sure you want to delete the screenshot with its comment?";
     // CONFIRM IS BOOLEAN. THAT MEANS THAT
@@ -179,21 +179,21 @@ function storeCaret(textEl) {
 <div class="standard_tile" id="interviews_add">
     <div class="help-tip">
         <p>
-			This is where the actual interview is inserted in the DB. Overhere you'll notice 3 main text boxes.
+			This is where the actual interview is inserted in the database. Overhere you'll notice 3 main text boxes.
 			<br>
             <br>
-			<i><b>- Intro :</b></i> This is where you'll write a little introduction to the interview. This text is placed in the boxes of the main interview section of AL (and in the search results). Use the 'Frontpage' button to mark the text used in the 'who is it' tile on the website. 
+			<i><b>- Intro :</b></i> This is where you'll write a little introduction to the interview. This text is placed in the boxes of the main interview section of AL (and in the search results). Use the 'Frontpage' button to mark the text used in the 'who is it' tile on the website.
 			<br>
             <br>
-			<i><b>- Chapters :</b></i> This is a section especially created for chapters. Its a bit more complex. You just add as many chapters as you like. 
-            eg : <i>Introduction, It started back then...</i>These chapters should have some sort of hotspot. Therefor you should always select each chapter and press the hotspotsource button. It also necesarry to give each chapter a unique number (behind the # sign). 
-			This chapter can be link to a certain place in the actual interview section by selecting the place and pressing the hotspottarget button. And ofcourse adding the appropriate number. 
+			<i><b>- Chapters :</b></i> This is a section especially created for chapters. Its a bit more complex. You just add as many chapters as you like.
+            eg : <i>Introduction, It started back then...</i>These chapters should have some sort of hotspot. Therefor you should always select each chapter and press the hotspotsource button. It also necesarry to give each chapter a unique number (behind the # sign).
+			This chapter can be link to a certain place in the actual interview section by selecting the place and pressing the hotspottarget button. And ofcourse adding the appropriate number.
 			<br>
 			<br>
-			<i><b>- Interview :</b></i> This is where you'll add the actual interview text. 
+			<i><b>- Interview :</b></i> This is where you'll add the actual interview text.
 			<br>
 			<br>
-			Remember that you have a lot of freedom regarding layout issues. Even the "enters" you place in a text field are translated to the AL page, so make something nice of it, will you? :-) 
+			Remember that you have a lot of freedom regarding layout issues. Even the "enters" you place in a text field are translated to the AL page, so make something nice of it, will you? :-)
         </p>
     </div>
 	<h1>{$selected_individual.ind_name}</h1>
@@ -202,20 +202,20 @@ function storeCaret(textEl) {
 		<div class="left_nav_section">
 			At this page you can add a new existing interview in the AL database.  The screen might seem a little complex,
 			therefor I suggest you first read the help provided with this section on the top right.
-		</div> 
+		</div>
 		<br>
 		<br>
 		<form action="../interviews/db_interview.php" method="post" name="post">
 			<fieldset>
 				<legend>Add Interview</legend>
-				<br>	
+				<br>
 				<div style="display:inline-block;">
 					<b>Written by : </b>
 					<select name="members" id="quick_search_pub_select">
 						<option value="-" selected>-</option>
 						{foreach from=$authors item=line}
 							<option value="{$line.user_id}">{$line.user_name}</option>
-						{/foreach}	
+						{/foreach}
 					</select>
 				</div>
 				<br>
@@ -231,7 +231,7 @@ function storeCaret(textEl) {
 							{else}
 								<option value="{$line.ind_id}">{$line.ind_name}</option>
 							{/if}
-						{/foreach}	
+						{/foreach}
 					</select>
 					<br>
 					<br>
@@ -248,9 +248,9 @@ function storeCaret(textEl) {
 				<input type="button" accesskey= "b" name="addbbcode0" value="B" onclick="bbstyle(0,'textintro')">
 				<input type="button" accesskey= "u" name="addbbcode4" value="U" onclick="bbstyle(4,'textintro')">
 				<input type="button" accesskey= "i" name="addbbcode2" value="I" onclick="bbstyle(2,'textintro')">
-				<input type="button" accesskey="w" name="addbbcode6" value="URL" onClick="bbstyle(6,'textintro')">			  
+				<input type="button" accesskey="w" name="addbbcode6" value="URL" onClick="bbstyle(6,'textintro')">
 				<input type="button" accesskey="x" name="addbbcode8" value="@" onClick="bbstyle(8,'textintro')">
-                <!--<input type="button" accesskey="frontpage" name="addbbcode16" value="Frontpage" onClick="bbstyle(14,'textintro')">-->              
+                <!--<input type="button" accesskey="frontpage" name="addbbcode16" value="Frontpage" onClick="bbstyle(14,'textintro')">-->
 				<textarea name="textintro" id="game_review_textfield" ONSELECT="javascript:storeCaret(this);" ONCLICK="javascript:storeCaret(this);" ONKEYUP="javascript:storeCaret(this);" ONCHANGE="javascript:storeCaret(this);" rows="5" style="padding-left:0px;" >
 				</textarea>
 				<br>
@@ -260,8 +260,8 @@ function storeCaret(textEl) {
 				<input type="button" accesskey= "b" name="addbbcode0" value="B" onclick="bbstyle(0,'textchapters')">
 				<input type="button" accesskey= "u" name="addbbcode4" value="U" onclick="bbstyle(4,'textchapters')">
 				<input type="button" accesskey= "i" name="addbbcode2" value="I" onclick="bbstyle(2,'textchapters')">
-				<input type="button" accesskey="w" name="addbbcode6" value="URL" onClick="bbstyle(6,'textchapters')">			  
-				<input type="button" accesskey="x" name="addbbcode8" value="@" onClick="bbstyle(8,'textchapters')">			  			
+				<input type="button" accesskey="w" name="addbbcode6" value="URL" onClick="bbstyle(6,'textchapters')">
+				<input type="button" accesskey="x" name="addbbcode8" value="@" onClick="bbstyle(8,'textchapters')">
 				<input type="button" accesskey= "s" name="addbbcode10" value="Hotspot Source" onclick="bbstyle(10,'textchapters')">
 				<textarea name="textchapters" id="game_review_textfield" ONSELECT="javascript:storeCaret(this);" ONCLICK="javascript:storeCaret(this);" ONKEYUP="javascript:storeCaret(this);" ONCHANGE="javascript:storeCaret(this);" rows="5" style="padding-left:0px;">
 				</textarea>
@@ -272,9 +272,9 @@ function storeCaret(textEl) {
 				<input type="button" accesskey= "b" name="addbbcode0" value="B" onclick="bbstyle(0,'textfield')">
 				<input type="button" accesskey= "u" name="addbbcode4" value="U" onclick="bbstyle(4,'textfield')">
 				<input type="button" accesskey= "i" name="addbbcode2" value="I" onclick="bbstyle(2,'textfield')">
-				<input type="button" accesskey="w" name="addbbcode6" value="URL" onClick="bbstyle(6,'textfield')">			  
-				<input type="button" accesskey="x" name="addbbcode8" value="@" onClick="bbstyle(8,'textfield')">			  			
-				<input type="button" accesskey= "t" name="addbbcode12" value="Hotspot Target" onclick="bbstyle(12,'textfield')">		 
+				<input type="button" accesskey="w" name="addbbcode6" value="URL" onClick="bbstyle(6,'textfield')">
+				<input type="button" accesskey="x" name="addbbcode8" value="@" onClick="bbstyle(8,'textfield')">
+				<input type="button" accesskey= "t" name="addbbcode12" value="Hotspot Target" onclick="bbstyle(12,'textfield')">
 				<textarea name="textfield" id="game_review_textfield" ONSELECT="javascript:storeCaret(this);" ONCLICK="javascript:storeCaret(this);" ONKEYUP="javascript:storeCaret(this);" ONCHANGE="javascript:storeCaret(this);" rows="15" style="padding-left:0px;">
 				</textarea>
 				<br>

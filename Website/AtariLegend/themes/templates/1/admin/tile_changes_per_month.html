@@ -18,14 +18,14 @@
 <script type="text/javascript" src="{$template_dir}includes/js/Chart.js"></script> <!-- chart creation -->
 <script>
 window.onload = function () {
-        
+
     var data_cl_monthly = {$change_log_monthly_data};
     var labels_cl_monthly = {$change_log_monthly_label};
     var bg_cl = {$change_log_bg};
     var border_width_cl = {$change_log_border_width};
     var border_cl = {$change_log_border};
     var ctx_change_line = document.getElementById('changelog_line').getContext("2d");
-    
+
     var myLineChart = new Chart(ctx_change_line, {
         responsive: true,
         type: 'doughnut',
@@ -56,9 +56,9 @@ window.onload = function () {
 		<div class="standard_tile_line"></div>
 		<div class="standard_list_entry">
             <div class="standard_table_center">
-                <br>This chart represents the nr of changes made to the DB each month for the past year. Hover over the chart for more info.
+                <br>This chart represents the nr of changes made to the database each month for the past year. Hover over the chart for more info.
             </div>
-			<div class="standard_tile_text">   
+			<div class="standard_tile_text">
                  <div class="line_changelog" style="width:98%;margin-left:auto;margin-right:auto;">
                     <canvas id="changelog_line"></canvas>
                 </div>
