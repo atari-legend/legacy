@@ -294,9 +294,9 @@
     function SaveEditable(comment_id,user_id,game_id) {
 
         //It took me ages to get his to work because I'm a dipshit - I hate ajax --> ST Graveyard 14/07/2014 @fucking 00:44
-        //Im not using contenteditable crap on a div because this way, loads of <br> statements are added in the DB.
+        //Im not using contenteditable crap on a div because this way, loads of <br> statements are added in the Database.
         //So I'm changing the div to a text area, still, in java it seems a return is not sent to the server so I'm doing a conversion to <br>
-        //Once the <br> are in the db, I do another conversion when I load the from the DB into an input field
+        //Once the <br> are in the db, I do another conversion when I load the from the Database into an input field
 
         var string = "comment_input";
         var comment_data = string.concat(comment_id);
@@ -379,9 +379,9 @@
          function AddComment(user_id,game_id) {
 
             //It took me ages to get his to work because I'm a dipshit - I hate ajax --> ST Graveyard 14/07/2014 @fucking 00:44
-            //Im not using contenteditable crap on a div because this way, loads of <br> statements are added in the DB.
+            //Im not using contenteditable crap on a div because this way, loads of <br> statements are added in the Database.
             //So I'm changing the div to a text area, still, in java it seems a return is not sent to the server so I'm doing a conversion to <br>
-            //Once the <br> are in the db, I do another conversion when I load the from the DB into an input field
+            //Once the <br> are in the db, I do another conversion when I load the from the Database into an input field
 
             var comment_data = "comment_add";;
 

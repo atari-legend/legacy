@@ -1,4 +1,4 @@
-{* 
+{*
 /***************************************************************************
 *                               latest_comments_tile.html
 *                            -------------------------------
@@ -13,7 +13,7 @@
 
 //****************************************************************************************
 // This is the 'Latest Comments' tile
-//**************************************************************************************** 
+//****************************************************************************************
 *}
 
 {literal}
@@ -21,25 +21,25 @@
 function CommentEditable(comment_id,user_id) {
     var string = "latest_comment_edit";
     var editable_comment = string.concat(comment_id);
-    
+
     var string = "comment_edit_icon";
     var edit_icon = string.concat(comment_id);
-    
+
     var string = "comment_save_icon";
     var save_icon = string.concat(comment_id);
-    
+
     var string = "comment_input";
     var comment_input = string.concat(comment_id);
-    
+
     var input = document.getElementById(comment_input);
     input.style.display='inline';
-    
+
     var save = document.getElementById(save_icon);
     save.style.display='inline';
-    
+
     var edit = document.getElementById(edit_icon);
     edit.style.display='none';
-    
+
     var output = document.getElementById(editable_comment);
     output.style.display='none';
 }
@@ -47,18 +47,18 @@ function CommentEditable(comment_id,user_id) {
 function SaveEditable(comment_id,user_id,type) {
 
     //It took me ages to get his to work because I'm a dipshit - I hate ajax --> ST Graveyard 14/07/2014 @fucking 00:44
-    //Im not using contenteditable crap on a div because this way, loads of <br> statements are added in the DB.
+    //Im not using contenteditable crap on a div because this way, loads of <br> statements are added in the database.
     //So I'm changing the div to a text area, still, in java it seems a return is not sent to the server so I'm doing a conversion to <br>
-    //Once the <br> are in the db, I do another conversion when I load the from the DB into an input field
+    //Once the <br> are in the database, I do another conversion when I load the from the database into an input field
 
     var string = "comment_input";
     var comment_data = string.concat(comment_id);
-       
+
     var comment = document.getElementById(comment_data).value
     comment = comment.replace(/\n\r?/g, '<br />');
-       
+
     var url = "../../common/tiles/db_latest_comments_tile.php?action=save_comment&comment_id="+comment_id+"&type="+type+"&data="+comment;
-          
+
     if (comment_id == "")
     {
         document.getElementById("latest_comments_all").innerHTML = "";
@@ -96,7 +96,7 @@ function DeleteEditable(comment_id,user_id,type) {
      // IT RETURNS TRUE IF 'OK' IS CLICKED
      // OTHERWISE IT RETURN FALSE
      var return_value = confirm(message);
-     
+
      if (return_value !="0")
      {
          if (comment_id == "")
@@ -129,13 +129,13 @@ function DeleteEditable(comment_id,user_id,type) {
         }
      }
 </script>
-{/literal} 
+{/literal}
 
 {block name=latest_comments_tile}
 
 {if isset($smarty_action) and $smarty_action == "delete_comment"}
     {if isset($comments)}
-        <div class="games_main_detail_comments_container">	
+        <div class="games_main_detail_comments_container">
             <table class="standard_table_list_comments">
             {foreach from=$comments item=line}
                 <tr>
@@ -149,7 +149,7 @@ function DeleteEditable(comment_id,user_id,type) {
                         <div class="latest_comments_text">
                             <div id="latest_comment_edit{$line.comment_id}"><div id="games_detail_review_main_text">{$line.comment}</div></div>
                             <div style="width:108%;"><textarea cols="70" id="comment_input{$line.comment_id}" class="latest_comments_textarea" style="display:none;">{$line.comment_edit}</textarea></div>
-                        </div> 
+                        </div>
                         {if isset($user_session)}
                             <span style="font-weight:bold;float:left;margin-left:5px;margin-bottom:15px;">
                             {if $user_session.user_id == $line.user_id}
@@ -165,13 +165,13 @@ function DeleteEditable(comment_id,user_id,type) {
                             {/if}
                             {if $line.user_twitter != ''}
                                 <a href="{$line.user_twitter}" class="latest_comments_link" title="Click to visit Twitter profile"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                            {/if}   
+                            {/if}
                             {if $line.user_af != ''}
                                 <a href="{$line.user_af}" class="latest_comments_link" title="Click to visit Atari-Forum profile"><i class="fa fa-gamepad" aria-hidden="true"></i></a>
                             {/if}
                             {if $line.user_website != ''}
                                 <a href="{$line.user_website}" class="latest_comments_link" title="Click to visit users website"><i class="fa fa-globe" aria-hidden="true"></i></a>
-                            {/if}           
+                            {/if}
                             </span>
                         {/if}
                         <span class="standard_tile_subtext" style="font-weight:bold;float:right;display:inline;margin-right:5px;margin-bottom:15px;">
@@ -187,7 +187,7 @@ function DeleteEditable(comment_id,user_id,type) {
 {else}
     <div class="standard_tile">
         <div class="help-tip">
-            <p> 
+            <p>
                 <u>Only available with your own comments:</u><br>
                 <i class="fa fa-pencil" aria-hidden="true"></i> - Edit comment<br>
                 <i class="fa fa-floppy-o" aria-hidden="true"></i> - Save changes to comment<br>
@@ -203,7 +203,7 @@ function DeleteEditable(comment_id,user_id,type) {
         <div class="standard_tile_line"></div>
         <div class="standard_list_entry">
             <div id="latest_comments_all">
-                <div class="games_main_detail_comments_container">	
+                <div class="games_main_detail_comments_container">
                     <table class="standard_table_list_comments">
                     {if isset($type) and $type=='user'}  <!--user specific comments mode! -->
                         {if isset($comments)}
@@ -229,7 +229,7 @@ function DeleteEditable(comment_id,user_id,type) {
                                 <div class="latest_comments_text">
                                     <div id="latest_comment_edit{$line.comment_id}"><div id="games_detail_review_main_text">{$line.comment}</div></div>
                                     <div style="width:100%;text-align:center;"><textarea id="comment_input{$line.comment_id}" class="latest_comments_textarea" style="display:none;" cols="80">{$line.comment_edit}</textarea></div>
-                                </div> 
+                                </div>
                                 {if isset($user_session)}
                                     <span style="font-weight:bold;float:left;margin-left:5px;margin-bottom:15px;">
                                     {if $user_session.user_id == $line.user_id}
@@ -245,13 +245,13 @@ function DeleteEditable(comment_id,user_id,type) {
                                     {/if}
                                     {if $line.user_twitter != ''}
                                         <a href="{$line.user_twitter}" class="latest_comments_link" title="Click to visit Twitter profile"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                                    {/if}   
+                                    {/if}
                                     {if $line.user_af != ''}
                                         <a href="{$line.user_af}" class="latest_comments_link" title="Click to visit Atari-Forum profile"><i class="fa fa-gamepad" aria-hidden="true"></i></a>
                                     {/if}
                                     {if $line.user_website != ''}
                                         <a href="{$line.user_website}" class="latest_comments_link" title="Click to visit users website"><i class="fa fa-globe" aria-hidden="true"></i></a>
-                                    {/if}                               
+                                    {/if}
                                     </span>
                                 {/if}
                                 <span class="standard_tile_subtext" style="font-weight:bold;float:right;display:inline;margin-right:5px;margin-bottom:15px;">
@@ -271,7 +271,7 @@ function DeleteEditable(comment_id,user_id,type) {
                                     You haven't written any game comments. Browse the library, share some memories and upgrade your karma stats ;-)
                                 </div>
                             </td>
-                        </tr>   
+                        </tr>
                         {/if}
                     {/if}
                     </table>
@@ -279,6 +279,6 @@ function DeleteEditable(comment_id,user_id,type) {
             </div>
         </div>
     <div class="standard_tile_line"></div>
-    </div>	
+    </div>
 {/if}
 {/block}
