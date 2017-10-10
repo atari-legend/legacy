@@ -10,7 +10,7 @@ an update/upgrade :wink:
 ## Prerequisites
 
 * A web server with PHP, with the `mysqli` and `gd` extensions (Require PNG and JPEG support)
-* MySQL
+* MySQL, with the SQL mode `only_full_group_by` disabled (e.g. `sql_mode=''`)
 * NodeJS + NPM
 
 ## Instructions
@@ -18,7 +18,7 @@ an update/upgrade :wink:
 * Clone the project from GitHub
 * Install the NPM dependencies: `npm install`
 * Run Grunt to generate the CSS files: `npm run grunt`
-* Point your web server document root to `AtariLegend/Website/AtariLegend/`
+* Point your web server document root to `Website/AtariLegend/`
 * Obtain a dump of the database and import it into your MySQL server
 * Create a PHP file containing the MySQL connection details in `Website/AtariLegend/php/config/connect.php`:
 
