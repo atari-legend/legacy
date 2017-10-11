@@ -160,8 +160,23 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH)) {
     //  the USER SECTION
     if ($log['section'] == 'Users') {
         if ($log['sub_section'] == 'Avatar' or $log['sub_section'] == 'User') {
-            $section_link    = ("../user/user_detail.php" . '?user_id_selected=' . $log['section_id']);
-            $subsection_link = ("../user/user_detail.php" . '?user_id_selected=' . $log['sub_section_id']);
+            if ($user_name == '0') {
+                // This is a log event about a deleted user (e.g. an avatar change or profile update)
+                // As they're deleted, we can't link to their profile
+                $section_link = '';
+                $subsection_link = '';
+            } else {
+                $section_link    = ("../user/user_detail.php" . '?user_id_selected=' . $log['section_id']);
+                $subsection_link = ("../user/user_detail.php" . '?user_id_selected=' . $log['sub_section_id']);
+            }
+        }
+
+        if ($log['sub_section'] == 'User' and $log['action'] == 'Delete') {
+            // This is the log event when a user deleted another user
+            // The deleted user doesn't exist in the database anymore, so we
+            // can't link to their profile
+            $section_link = '';
+            $subsection_link = '';
         }
     }
 
