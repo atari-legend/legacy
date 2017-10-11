@@ -1,12 +1,12 @@
 <?php
 //***************************************************************************
-// *                                Interviews_detail.php
-//*                            ------------------------------
-//*   begin                : Sunday, August 20, 2017
-//*   copyright            : (C) 2017 Atari Legend
-//*   email                : martens_maarten@hotmail.com
-//*
-//*   Id: Interviews_detail.php,v 0.1 2017/08/20 13:02 STG
+//                                Interviews_detail.php
+//                            ------------------------------
+//   begin                : Sunday, August 20, 2017
+//   copyright            : (C) 2017 Atari Legend
+//   email                : martens_maarten@hotmail.com
+//
+//   Id: Interviews_detail.php,v 0.1 2017/08/20 13:02 STG
 //****************************************************************************
 
 //****************************************************************************
@@ -46,8 +46,7 @@ $interview_chapters = nl2br($interview_chapters);
 $interview_chapters = InsertALCode($interview_chapters);
 
 //get the profile of the author
-$sql_ind_text = $mysqli->query("SELECT * FROM individual_text WHERE ind_id = $query_interview[ind_id]")
-    or die("problem getting individual data");
+$sql_ind_text = $mysqli->query("SELECT * FROM individual_text WHERE ind_id = $query_interview[ind_id]") or die("problem getting individual data");
 
 $query_ind_text = $sql_ind_text->fetch_array(MYSQLI_BOTH);
 
@@ -85,11 +84,11 @@ $smarty->assign('interview', array(
 
 //Get the screenshots and the comments of this interview
 $query_screenshots = $mysqli->query("SELECT * FROM interview_main
-                                LEFT JOIN screenshot_interview ON (interview_main.interview_id = screenshot_interview.interview_id)
-                                LEFT JOIN screenshot_main ON (screenshot_interview.screenshot_id = screenshot_main.screenshot_id)
-                                LEFT JOIN interview_comments ON (screenshot_interview.screenshot_interview_id = interview_comments.screenshot_interview_id)
-                                WHERE interview_main.interview_id = '$selected_interview_id'
-                                ORDER BY screenshot_main.screenshot_id");
+    LEFT JOIN screenshot_interview ON (interview_main.interview_id = screenshot_interview.interview_id)
+    LEFT JOIN screenshot_main ON (screenshot_interview.screenshot_id = screenshot_main.screenshot_id)
+    LEFT JOIN interview_comments ON (screenshot_interview.screenshot_interview_id = interview_comments.screenshot_interview_id)
+    WHERE interview_main.interview_id = '$selected_interview_id'
+    ORDER BY screenshot_main.screenshot_id");
 
 $count = 1;
 
@@ -142,11 +141,11 @@ while ($query_games = $sql_games->fetch_array(MYSQLI_BOTH)) {
 //***********************************************************************************
 //Select the comments from the DB
 $sql_comment = $mysqli->query("SELECT *
-                                FROM interview_user_comments
-                                LEFT JOIN comments ON ( interview_user_comments.comment_id = comments.comments_id )
-                                LEFT JOIN users ON ( comments.user_id = users.user_id )
-                                WHERE interview_user_comments.interview_id = '$selected_interview_id'
-                                ORDER BY comments.timestamp desc") or die("Syntax Error! Couldn't not get the comments!");
+    FROM interview_user_comments
+    LEFT JOIN comments ON ( interview_user_comments.comment_id = comments.comments_id )
+    LEFT JOIN users ON ( comments.user_id = users.user_id )
+    WHERE interview_user_comments.interview_id = '$selected_interview_id'
+    ORDER BY comments.timestamp desc") or die("Syntax Error! Couldn't not get the comments!");
 
 
 while ($query_comment = $sql_comment->fetch_array(MYSQLI_BOTH)) {
@@ -187,7 +186,6 @@ while ($query_comment = $sql_comment->fetch_array(MYSQLI_BOTH)) {
         'email' => $query_comment['email']
     ));
 }
-
 
 //Send all smarty variables to the templates
 $smarty->display("file:" . $mainsite_template_folder . "interviews_detail.html");
