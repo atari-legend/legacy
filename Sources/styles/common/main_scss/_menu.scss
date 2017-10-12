@@ -254,11 +254,14 @@ html {
 
 @if $skin-name == legacy {
     #search_side {
+        border: none;
+        border-bottom: 3px solid #008b8b;
         background-image: url('../images/menu_search.png');
         background-size: cover;
         background-repeat: no-repeat;
+        padding-bottom: 1px;
         padding-left: 50px;
-        padding-top: 40px;
+        padding-top: 19px;
     }
     #searchbutton_side {
         background: $bg-color;
@@ -638,7 +641,7 @@ header nav li {
     display: inline-block;
 }
 
-header nav input {
+header nav input[type=text] {
     background-color: #000;
     color: #fff;
     width: 247px;
@@ -649,6 +652,9 @@ header nav input {
     display: block;
     text-align: center;
     font-size: $menu-input-font;
+}
+header nav input[type=submit] {
+    border: none;
 }
 
 .top_button_extra {
