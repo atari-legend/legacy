@@ -1,4 +1,4 @@
-{* 
+{*
 /***************************************************************************
                               technical_doc.html
 *                            --------------------------
@@ -67,7 +67,7 @@ The main doc page
 					</ul>
 					</li>
 				</ul>
-		</fieldset> 
+		</fieldset>
 		<br>
 		<br>
 		<br>
@@ -79,9 +79,9 @@ The main doc page
 			</a>
 			<br>
 			<br>
-			This screenshot is a visual representation of the current table structure used for the menu section. This ER diagram shows exactly how all tables are connected to each other. 
-			This section is ofcourse linked to the other sections of the database. Check the other ER diagrams to get a better idea. Below you will find a complete description of each table
-			used here.
+			The above Entity Relation (ER) diagram shows exactly how all of the tables are connected to each other.
+            This data is linked to the other sections of the database. Look at the other ER diagrams to get a better idea.
+            There is a complete description of each table used for the menu disks below.
 			<br>
 			<br>
 			<u>Layout of tables :</u>
@@ -98,68 +98,69 @@ The main doc page
 					</tr>
 					<tr>
 						<td>
-							<b>menu_types_main</b> : This table contains the actual menu types eg. demo menu, game menu, tool menu…
+							<b>menu_types_main</b> : This table contains the actual menu types e.g. demo menu, game menu, tool menu…
 						</td>
 					</tr>
 					<tr>
 						<td>
-							<b>menu_set</b> : Many crews made different "sets" of menu disks. One example would be the Pompey Pirates, they had 2 sets, the actual 'Pompey Pirates' set and another one named "Krappy Compacts".
+							<b>menu_set</b> : Many crews made different "sets" of menu disks. One example would be the Pompey Pirates as they had 2 sets; the actual 'Pompey Pirates' set and another one named "Krappy Compacts".
 						</td>
 					</tr>
 					<tr>
 						<td>
-							<b>menu_sets_order</b> : This table is needed specifically for putting the discs in the correct way on screen. We need to know how many discs are released, which number they start and end, gaps, how they are ordered ... 
+							<b>menu_sets_order</b> : This table is needed specifically for ordering the disks in the correct way.
+                            We need to know how many disks were released, which number they start and end at, any known gaps and how they are ordered.
 						</td>
 					</tr>
 					<tr>
 						<td>
-							<b>menu_disk</b> : This is the main table for the menu disks. Every menu disk belongs to a set, hence the set id.
+							<b>menu_disk</b> : This is the main table for the menu disks. Every menu disk belongs to a set, hence the set identifier.
 						</td>
 					</tr>
 					<tr>
 						<td>
-							<b>menu_disk_title</b> : Menu disks can contain all kinds of software titles. These titles are stored in the menu_disk_title table and are linked to the actual menu disk using the menu_disk_id field. This title table also contains menu_disk_title_type field. 
+							<b>menu_disk_title</b> : Menu disks can contain all kinds of software titles. These titles are stored in the menu_disk_title table and are linked to the actual menu disk using the menu_disk_id field. This title table also contains menu_disk_title_type field.
 								This means that, even if a menu disk is linked to a 'game' type, each title individually has its own type. So, a game menu disk, can also contain a doc for example.
 						</td>
 					</tr>
 					<tr>
 						<td>
-							<b>menu_disk_title_game</b> : All the game titles are contained in this table. We have seperate table for each type of title so we can enhance search features on the site and for data consistency.
+							<b>menu_disk_title_game</b> : All the game titles are contained in this table. We have separate table for each type of title so we can enhance search features on the site and for data consistency.
 						</td>
 					</tr>
 					<tr>
 						<td>
-							<b>menu_disk_title_tools</b> : All the tool titles are contained in this table. We have seperate table for each type of title so we can enhance search features on the site and for data consistency.
+							<b>menu_disk_title_tools</b> : All the tool titles are contained in this table. We have separate table for each type of title so we can enhance search features on the site and for data consistency.
 						</td>
 					</tr>
 					<tr>
 						<td>
-							<b>menu_disk_title_demo</b> : All the demo titles are contained in this table. We have seperate table for each type of title so we can enhance search features on the site and for data consistency.
+							<b>menu_disk_title_demo</b> : All the demo titles are contained in this table. We have separate table for each type of title so we can enhance search features on the site and for data consistency.
 						</td>
 					</tr>
 					<tr>
 						<td>
-							<b>menu_disk_title_music</b> : All the music titles are contained in this table. We have seperate table for each type of title so we can enhance search features on the site and for data consistency.
+							<b>menu_disk_title_music</b> : All the music titles are contained in this table. We have separate table for each type of title so we can enhance search features on the site and for data consistency.
 						</td>
 					</tr>
 					<tr>
 						<td>
-							<b>menu_disk_title_doc_games</b> : All the (doc discs with) game docs are contained in this table. We have seperate table for each type of title so we can enhance search features on the site and for data consistency.
+							<b>menu_disk_title_doc_games</b> : All the (doc disks with) game docs are contained in this table. We have separate table for each type of title so we can enhance search features on the site and for data consistency.
 						</td>
 					</tr>
 					<tr>
 						<td>
-							<b>menu_disk_title_doc_tools</b> : All the (doc discs with) tool docs are contained in this table. We have seperate table for each type of title so we can enhance search features on the site and for data consistency.
+							<b>menu_disk_title_doc_tools</b> : All the (doc disks with) tool docs are contained in this table. We have separate table for each type of title so we can enhance search features on the site and for data consistency.
 						</td>
 					</tr>
 					<tr>
 						<td>
-							<b>menu_disk_title_various</b> : All titles not belonging to any type of the above are contained in this table. We have seperate table for each type of title so we can enhance search features on the site and for data consistency.
+							<b>menu_disk_title_various</b> : All titles not belonging to any type of the above are contained in this table. We have separate table for each type of title so we can enhance search features on the site and for data consistency.
 						</td>
 					</tr>
 					<tr>
 						<td>
-							<b>menu_disk_title_set</b> : This table contains the sets of titles. For example, let's say a menu disk contains the game title 'Gods'. However, this title is normally spread over 2 disks. Using this 'set' table, we can link a title over 2 discs. 
+							<b>menu_disk_title_set</b> : This table contains the sets of titles. For example, let's say a menu disk contains the game title 'Gods'. However, this title is normally spread over 2 disks. Using this 'set' table, we can link a title over 2 discs.
 						</td>
 					</tr>
 					<tr>
@@ -179,27 +180,27 @@ The main doc page
 					</tr>
 					<tr>
 						<td>
-							<b>menu_disk_submenu</b> : It sometimes happens that a menudisk is some kind of submenu of a totally different other menu disk. Using the cross table we can link menu disks to other menu disks.
+							<b>menu_disk_submenu</b> : It sometimes happens that a menu disk is some kind of submenu of a totally different other menu disk. Using the cross table we can link menu disks to other menu disks.
 						</td>
 					</tr>
 					<tr>
 						<td>
-							<b>menu_disk_state</b> : The main states table containing info like 'corrupt', 'complete' ... 
+							<b>menu_disk_state</b> : The main states table containing info like 'corrupt', 'complete' ...
 						</td>
 					</tr>
 					<tr>
 						<td>
-							<b>menu_disk_credits</b> : This table contains the individual id's of the people who were responsible for the intro of the menudisk. This is a cross table between the menu disk and the individuals table.
+							<b>menu_disk_credits</b> : This table contains the individual id's of the people who were responsible for the intro of the menu disk. This is a cross table between the menu disk and the individuals table.
 						</td>
 					</tr>
                     <tr>
 						<td>
-							<b>menu_disk_year</b> : This table contains the release year of the menudisk.
+							<b>menu_disk_year</b> : This table contains the release year of the menu disk.
 						</td>
 					</tr>
                      <tr>
 						<td>
-							<b>menu_disk_title_author</b> : This table is used to store all the authors of each menu disk. Who did what on this menu disk? crackers, hackers, artists ...
+							<b>menu_disk_title_author</b> : This table is used to store the credits for each menu disk. Such as the crackers, hackers, artists etc.
 						</td>
 					</tr>
 					</table>
@@ -215,11 +216,11 @@ The main doc page
 			</a>
 			<br>
 			<br>
-			Overhere we see a visual overview of how the doc tables are linked to the menu section by use of doc disks. As you also can see, not only doc disks are linked to the doc table. Other sections 
-			will be linked as wel. Some examples : 
+			Overhere we see a visual overview of how the doc tables are linked to the menu section by use of doc disks. As you also can see, not only doc disks are linked to the doc table. Other sections
+			will be linked as wel. Some examples :
 			<br>
 			<br>
-			- Let's say we are dealing with a SEWER DOC DISK containing a manual of "Xenon 2" and a cheat code for "Supercars". Both docs have got an entry in the menu_disk_title_doc_games, in the doc_disk_game and in the doc table. There can be more 
+			- Let's say we are dealing with a SEWER DOC DISK containing a manual of "Xenon 2" and a cheat code for "Supercars". Both docs have got an entry in the menu_disk_title_doc_games, in the doc_disk_game and in the doc table. There can be more
 			docs of the same game (even with the same doc type!). These docs wil have the category "doc disk game".
 			<br>
 			<br>
@@ -277,7 +278,7 @@ The main doc page
 			</a>
 			<br>
 			<br>
-			Another big, complex part of the website. These table contain all data on the crews and individuals. Their complete relationship with eachother and their work. 
+			Another big, complex part of the website. These table contain all data on the crews and individuals. Their complete relationship with eachother and their work.
 			<br>
 			<br>
 			<u>Layout of tables :</u>
@@ -309,7 +310,7 @@ The main doc page
 					</tr>
 					<tr>
 						<td>
-							<b>crew_menu_prod, crew_demo_prod, ind_demo_prod, ind_menu_prod</b> : The cross tables linking the crews and individuals to their work. Every crew or individual has got their own productions, 
+							<b>crew_menu_prod, crew_demo_prod, ind_demo_prod, ind_menu_prod</b> : The cross tables linking the crews and individuals to their work. Every crew or individual has got their own productions,
 							these are always demos or menus. Games are dealt with in the game tables structure.
 						</td>
 					</tr>
@@ -326,7 +327,7 @@ The main doc page
 			</a>
 			<br>
 			<br>
-			The following tables will stock the individuals. Sceners, game/demo creators, musicians … These tables are used in various structures all over the DB. 
+			The following tables will stock the individuals. Sceners, game/demo creators, musicians … These tables are used in various structures all over the DB.
 			<br>
 			<br>
 			<u>Layout of tables :</u>
