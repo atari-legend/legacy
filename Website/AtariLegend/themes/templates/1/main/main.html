@@ -53,7 +53,7 @@
                     source: function(request, response) {
                         $.getJSON(
                             "../../../php/includes/autocomplete.php?",
-                            { term:request.term, extraParams:$('#autocomplete1').val() },
+                            { term:request.term, extraParams: 'title' },
                             response
                         );
                     },
@@ -67,7 +67,7 @@
                     source: function(request, response) {
                         $.getJSON(
                             "../../../php/includes/autocomplete.php?",
-                            { term:request.term, extraParams:$('#autocomplete1').val() },
+                            { term:request.term, extraParams: 'title' },
                             response
                         );
                     },
@@ -136,16 +136,6 @@
                 {/if}
             });
         </script>
-        <script type="text/javascript"> <!-- Go to the game search results -->
-			function Search() {
-                var game_search = document.getElementById("auto").value;
-                {literal}
-                    if (!game_search) {game_search = document.getElementById("search_text_side").value;}
-                {/literal}
-                url="../games/games_main_list.php?gamesearch="+game_search+"&action=search";
-                location.href=url;
-            }
-		</script>
         {literal}
         <script> <!-- The 'go to the top' buttong -->
             $(function(){
@@ -207,11 +197,13 @@
                                         </ul>
                                 </nav>
                             </div>
-                            <ul id="search_ul">
-                                <li id="searchbutton_side"><input id="search_text_side" type="text" name="gamesearch" maxlength="11"></li>
-                                <input type="hidden" value="title" id="autocomplete1">
-                                <li><a href="#" onclick="Search()"><div id="search_side"></div></a></li>
-                            </ul>
+                            <form action="../games/games_main_list.php" method="get">
+                                <input type="hidden" name="action" value="search">
+                                <ul id="search_ul">
+                                    <li id="searchbutton_side"><input id="search_text_side" type="text" name="gamesearch" maxlength="11"></li>
+                                    <li><input type="submit" id="search_side" value=""></li>
+                                </ul>
+                            </form>
                             <div class="skin-wrap">
                                 <nav class="skin-menu">
                                   <ul class="clearfix">
@@ -306,20 +298,22 @@
 					{/if}
 				</div>
 				<nav id="main_nav">
-					<ul id="main_nav_ul">
-						<li><a href="../front/front.php" id="home"></a></li>
-						<li><a href="../news/news.php" class="topbutton" id="news">NEWS</a></li>
-						<li><a href="../games/games_main.php" class="topbutton" id="games">GAMES</a></li>
-						<li><a href="../games/games_reviews_main.php" class="topbutton" id="demos">REVIEWS</a></li>
-						<li><a href="../interviews/interviews_main.php" class="topbutton" id="music">INTERVIEWS</a></li>
-                        <li><a href="../front/front.php?action=construction" class="topbutton" id="links">LINKS</a></li>
-						<li><a href="../../admin/" class="topbutton" id="cpanel">CPANEL</a></li>
-						<li><a href="http://www.atari-forum.com" class="topbutton" id="forum_top">FORUM</a></li>
-						<li><a href="../classAL/classAL.php" class="topbutton" id="about">ABOUT</a></li>
-						<li><div class="searchbutton" id="search_text"><input type="text" id="auto"></div></li>
-                        <input type="hidden" value="title" id="autocomplete1">
-						<li><a href="javascript:Search();"><div id="search"></div></a></li>
-					</ul>
+					<form action="../games/games_main_list.php" method="get">
+						<input type="hidden" name="action" value="search">
+						<ul id="main_nav_ul">
+							<li><a href="../front/front.php" id="home"></a></li>
+							<li><a href="../news/news.php" class="topbutton" id="news">NEWS</a></li>
+							<li><a href="../games/games_main.php" class="topbutton" id="games">GAMES</a></li>
+							<li><a href="../games/games_reviews_main.php" class="topbutton" id="demos">REVIEWS</a></li>
+							<li><a href="../interviews/interviews_main.php" class="topbutton" id="music">INTERVIEWS</a></li>
+							<li><a href="../front/front.php?action=construction" class="topbutton" id="links">LINKS</a></li>
+							<li><a href="../../admin/" class="topbutton" id="cpanel">CPANEL</a></li>
+							<li><a href="http://www.atari-forum.com" class="topbutton" id="forum_top">FORUM</a></li>
+							<li><a href="../classAL/classAL.php" class="topbutton" id="about">ABOUT</a></li>
+							<li><div class="searchbutton" id="search_text"><input type="text" id="auto" name="gamesearch"></div></li>
+							<li><input type="submit" id="search" value=""></li>
+						</ul>
+					</form>
 				</nav>
 			</header>
 		</div>
