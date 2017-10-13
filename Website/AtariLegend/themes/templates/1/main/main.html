@@ -48,36 +48,18 @@
 		<script type="text/javascript" src="{$template_dir}includes/js/jquery-ui.js"></script> <!-- main jqueryUI stuff -->
         <script type="text/javascript" src="{$template_dir}includes/js/notify-osd.js"></script>
 		<script type="text/javascript"> <!-- script needed for the autocompletion search engine -->
-            $(function() {
-                $( "#auto" ).autocomplete({
-                    source: function(request, response) {
-                        $.getJSON(
-                            "../../../php/includes/autocomplete.php?",
-                            { term:request.term, extraParams: 'title' },
-                            response
-                        );
-                    },
-                    minLength: 2,
-                    select: function(event, ui){
-                        //On select action
-                    }
-                });
+                $(document).ready(function() {
+                    $( "#auto" ).autocomplete({
+                        source: "../../../php/includes/autocomplete.php?extraParams=title",
+                        minLength: 2,
+                    });
 
-                $( "#search_text_side" ).autocomplete({
-                    source: function(request, response) {
-                        $.getJSON(
-                            "../../../php/includes/autocomplete.php?",
-                            { term:request.term, extraParams: 'title' },
-                            response
-                        );
-                    },
-                    minLength: 2,
-                    position: { my : "left top", at: "right top", of: $("#skin_side"), collision: "flipfit none" },
-                    select: function(event, ui){
-                        //On select action
-                    }
+                    $( "#search_text_side" ).autocomplete({
+                        source: "../../../php/includes/autocomplete.php?extraParams=title",
+                        minLength: 2,
+                        position: { my : "left top", at: "right top", of: $("#skin_side"), collision: "flipfit none" },
+                    });
                 });
-            });
 
 			$(document).ready(function()
 			{
