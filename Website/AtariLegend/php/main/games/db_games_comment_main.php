@@ -17,25 +17,21 @@
 
 include("../../config/common.php");
 
-if (isset($action))
-{
-    if ($action=='delete_comment')
-    {    
+if (isset($action)) {
+    if ($action=='delete_comment') {
         create_log_entry('Games', $comment_id, 'Comment', $comment_id, 'Delete', $_SESSION['user_id']);
 
         $sql = $mysqli->query("DELETE FROM game_user_comments WHERE comment_id = '$comment_id'") or die("couldn't delete game_comment quote");
         $sql = $mysqli->query("DELETE FROM comments WHERE comments_id = '$comment_id'") or die("couldn't delete comment quote");
-    }
-    else
-    {
+    } else {
         //$data = $_POST['data'];
-        $data = $mysqli->real_escape_string($data);  
-        
+        $data = $mysqli->real_escape_string($data);
+
         $mysqli->query("UPDATE comments SET comment='$data' WHERE comments_id='$comment_id'") or die("couldn't update comments table");
-        
-        create_log_entry('Games', $comment_id, 'Comment', $comment_id, 'Update', $_SESSION['user_id']); 
+
+        create_log_entry('Games', $comment_id, 'Comment', $comment_id, 'Update', $_SESSION['user_id']);
     }
-    
+
     $v_counter = (isset($_GET["v_counter"]) ? $_GET["v_counter"] : 0);
 
     //*********************************************************************************************
@@ -128,16 +124,16 @@ if (isset($action))
         $oldcomment = trim($oldcomment);
         $oldcomment = RemoveSmillies($oldcomment);
         $oldcomment = stripslashes($oldcomment);
-        
+
         $comment = stripslashes($query_comment['comment']);
         $comment = trim($comment);
         $comment = RemoveSmillies($comment);
-         
+
         //this is needed, because users can change their own comments on the website, however this is done with JS (instead of a post with pure HTML)
-        //The translation of the 'enter' breaks is different in JS, so in JS I do a conversion to a <br>. However, when we edit a comment, this <br> should not be 
-        //visible to the user, hence again, now this conversion in php    
-        $breaks = array("<br />","<br>","<br/>");  
-        $comment = str_ireplace($breaks, "\r\n", $comment); 
+        //The translation of the 'enter' breaks is different in JS, so in JS I do a conversion to a <br>. However, when we edit a comment, this <br> should not be
+        //visible to the user, hence again, now this conversion in php
+        $breaks = array("<br />","<br>","<br/>");
+        $comment = str_ireplace($breaks, "\r\n", $comment);
 
         if ($query_comment['join_date'] == "") {
             $user_joindate = "unknown";
@@ -209,8 +205,7 @@ if (isset($action))
         'users_comments' => $users_comments,
         'c_counter' => $c_counter
     ));
-        
+
     $smarty->assign('smarty_action', 'delete_comment');
     $smarty->display("file:" . $mainsite_template_folder. "ajax_games_comment_main.html");
 }
-?>

@@ -45,48 +45,44 @@ $smarty->assign('spotlight_tile', 'spotlight_position_front');
 //if (isset($error))
 //{
 //    if ($error == 1)
-//   {    
+//   {
 //        $_SESSION['edit_message'] = 'Usn or pwd incorrect - Please try again';
 //        header("Location: ../front/front.php");
 //    }
-    
+
 //    if ($error == 2)
-//    {    
+//    {
 //        $_SESSION['edit_message'] = 'User is set inactive - contact admin';
 //        header("Location: ../front/front.php");
 //    }
 //}
 
-if (isset($action) and $action == 'register')
-{
+if (isset($action) and $action == 'register') {
     $smarty->assign("action", 'register');
 }
 
-if (isset($action) and $action == 'reset')
-{
+if (isset($action) and $action == 'reset') {
     $smarty->assign("action", 'reset');
 }
 
-if (isset($action) and $action == 'new_pwd')
-{
+if (isset($action) and $action == 'new_pwd') {
     $smarty->assign("q", $q);
     $smarty->assign("action", 'new_pwd');
 }
 
-if (isset($action) and $action == 'construction')
-{
+if (isset($action) and $action == 'construction') {
     $_SESSION['edit_message'] = 'This section will be available soon - currently under construction';
     header('Location: ' . $_SERVER['HTTP_REFERER']);
     die('');
 }
 
 //We are using this var to have the frontpage animation happen only once we visit AL
-if (isset($action) and $action=='first_time') {$smarty->assign('smarty_action', 'first_time');}
+if (isset($action) and $action=='first_time') {
+    $smarty->assign('smarty_action', 'first_time');
+}
 
 //Send all smarty variables to the templates
 $smarty->display("file:".$mainsite_template_folder."frontpage.html");
 
 //close the connection
-mysqli_close($mysqli)
-?>
-
+mysqli_close($mysqli);

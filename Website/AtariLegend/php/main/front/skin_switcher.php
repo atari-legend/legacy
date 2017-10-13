@@ -31,4 +31,3 @@ if (isset($action) and $action == "skinswitch") {
         $_SESSION['skin'] = $skin;
     }
 }
-?>
