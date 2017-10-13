@@ -35,8 +35,8 @@ $smarty->assign('who_is_it_tile', '');
 $smarty->assign('statistics_tile', '');
 
 // get the game_years from the game_year table
-$sql_year = $mysqli->query("SELECT distinct game_year from game_year order by game_year") 
-                     or die ("problems getting data from game_year table");
+$sql_year = $mysqli->query("SELECT distinct game_year from game_year order by game_year")
+                     or die("problems getting data from game_year table");
 
 while ($game_year = $sql_year->fetch_array(MYSQLI_BOTH)) {
     $smarty->append('game_year', array(
@@ -44,8 +44,8 @@ while ($game_year = $sql_year->fetch_array(MYSQLI_BOTH)) {
 }
 
 // get the categories for the genre dropdown
-$sql_cat = $mysqli->query("SELECT * from game_cat order by game_cat_name") 
-                     or die ("problems getting data from game_cat table");
+$sql_cat = $mysqli->query("SELECT * from game_cat order by game_cat_name")
+                     or die("problems getting data from game_cat table");
 
 while ($game_cat = $sql_cat->fetch_array(MYSQLI_BOTH)) {
     $smarty->append('game_cat', array(
@@ -53,26 +53,22 @@ while ($game_cat = $sql_cat->fetch_array(MYSQLI_BOTH)) {
             'game_cat_id' => $game_cat['game_cat_id']));
 }
 
-if ( isset($mode) and ( $mode ==! '' ) )
-{
+if (isset($mode) and ($mode ==! '')) {
     $smarty->assign("mode", $mode);
-}
-else
-{
+} else {
     $smarty->assign("mode", "standard");
 }
 
-if ( isset($stats) and ($stats == 1) )
-{
+if (isset($stats) and ($stats == 1)) {
     $smarty->assign("stats", "1");
-}                      
-                      
+}
+
 date_default_timezone_set('UTC');
 $start = microtime(true);
 
 $result   = $mysqli->query("SELECT * FROM game");
 $games_nr = $result->num_rows;
- 
+
 $smarty->assign("games_nr", $games_nr);
 
 if (isset($_SESSION['edit_message'])) {
