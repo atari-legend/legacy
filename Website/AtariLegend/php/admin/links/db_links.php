@@ -28,6 +28,7 @@ if (isset($action) and $action == "addnew_link") {
     // This is where the actual links will be inserted into the DB!!
     //****************************************************************************************
     $timestamp = time();
+    $name      = $mysqli->real_escape_string($name);
     $name      = trim($name);
 
     $mysqli->query("INSERT INTO website (website_name, website_url, website_date, user_id) VALUES ('$name', '$url','$timestamp','$user_id')") or die("Unable to insert website into database");
@@ -98,12 +99,12 @@ if (isset($action) and $action == "link_delete") {
 
     $website_query = $mysqli->query("SELECT website_imgext FROM website WHERE website_id='$website_id'");
     list($website_imgext) = $website_query->fetch_array(MYSQLI_BOTH);
-    
+
     if ( $website_imgext !== '' )
     {
         unlink("$website_image_save_path$website_id.$website_imgext");
     }
-    
+
     create_log_entry('Links', $website_id, 'Link', $website_id, 'Delete', $_SESSION['user_id']);
 
     $sql = $mysqli->query("DELETE FROM website WHERE website_id = '$website_id'") or die("Failed to delete website");
@@ -173,7 +174,7 @@ if (isset($action) and $action == 'modify_link') {
     {
         $mysqli->query("UPDATE website SET website_name='$website_name', website_url='$website_url', inactive=' ' WHERE website_id='$website_id'");
     }
-    
+
     //$mysqli->query("UPDATE website_category_cross SET website_category_id='$category' WHERE website_id='$website_id'");
 
     $sql_desc = $mysqli->query("SELECT * FROM website_description WHERE website_id='$website_id'");
