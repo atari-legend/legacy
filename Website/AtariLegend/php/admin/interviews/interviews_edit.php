@@ -47,6 +47,7 @@ while ($authors = $sql_author->fetch_array(MYSQLI_BOTH)) {
 $sql_interview = $mysqli->query("SELECT * FROM interview_main
                   LEFT JOIN interview_text ON ( interview_main.interview_id = interview_text.interview_id )
                   LEFT JOIN individuals on ( interview_main.ind_id = individuals.ind_id )
+                  LEFT JOIN users on ( interview_main.user_id = users.user_id)
                 WHERE interview_main.interview_id = '$interview_id'") or die("Database error - selecting interview data");
 
 while ($interview = $sql_interview->fetch_array(MYSQLI_BOTH)) {
@@ -58,6 +59,7 @@ while ($interview = $sql_interview->fetch_array(MYSQLI_BOTH)) {
         'interview_text' => $interview['interview_text'],
         'interview_ind_name' => $interview['ind_name'],
         'interview_author' => $interview['user_id'],
+        'interview_author_name' => $interview['userid'],
         'interview_ind_id' => $interview['ind_id']
     ));
 }

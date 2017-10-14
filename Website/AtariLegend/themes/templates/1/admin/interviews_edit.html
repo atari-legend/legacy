@@ -24,6 +24,33 @@
 
 {block name=java_script}
 <script type="text/javascript">
+
+$(document).ready(function() {
+    $( "#member_name" ).autocomplete({
+        source: "../../../php/admin/common/autocomplete.php?extraParams=admin-user",
+        minLength: 2,
+        select: function (evt, ui) {
+            $("#member_name").val(ui.item.label);
+            $("#members").val(ui.item.value);
+            // Prevent Autocomplete default behaviour of injecting the 'value' in the input field
+            return false;
+        },
+    });
+
+    $( "#individual_name" ).autocomplete({
+        source: "../../../php/includes/autocomplete.php?extraParams=individual",
+        minLength: 2,
+        select: function (evt, ui) {
+            console.log("select!");
+            $("#individual_name").val(ui.item.label);
+            $("#individual").val(ui.item.value);
+            // Prevent Autocomplete default behaviour of injecting the 'value' in the input field
+            return false;
+        },
+    });
+
+});
+
 function deletecomment(screenshot_id, interview_id)
 {
 	// CONFIRM REQUIRES ONE ARGUMENT
@@ -235,32 +262,16 @@ function storeCaret(textEl) {
 				<div style="display:inline-block;">
 					<b>Written by : </b>
 					<br>
-					<select name="members" id="quick_search_pub_select">
-						<option value="-">-</option>
-						{foreach from=$authors item=line}
-							{if $line.user_id == $interview.interview_author}
-								<option value="{$line.user_id}" selected>{$line.user_name}</option>
-							{else}
-								<option value="{$line.user_id}">{$line.user_name}</option>
-							{/if}
-						{/foreach}
-					</select>
+                    <input type="text" id="member_name" value="{$interview.interview_author_name}" class="standard_tile_input_small">
+                    <input type="hidden" name="members" id="members" value="{$interview.interview_author}">
 				</div>
 				<br>
 				<br>
 				<div style="display:inline-block;">
 					<b>Individual :</b>
 					<br>
-					<select name="individual" id="quick_search_pub_select">
-						<option value="-">-</option>
-						{foreach from=$individuals item=line}
-							{if $line.ind_id == $interview.interview_ind_id}
-								<option value="{$line.ind_id}" selected>{$line.ind_name}</option>
-							{else}
-								<option value="{$line.ind_id}">{$line.ind_name}</option>
-							{/if}
-						{/foreach}
-					</select>
+                    <input type="text" id="individual_name" value="{$interview.interview_ind_name}" class="standard_tile_input_small">
+                    <input type="hidden" name="individual" id="individual" value="{$interview.interview_ind_id}">
 					<br>
 					<br>
 				</div>
