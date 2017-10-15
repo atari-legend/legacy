@@ -10,7 +10,7 @@
 ****************************************************************************/
 
 //****************************************************************************************
-// This is the detail page of a review. 
+// This is the detail page of a review.
 //****************************************************************************************
 
 //load all common functions
@@ -78,7 +78,7 @@ while ($sql_screenshots = $query_screenshots->fetch_array(MYSQLI_BOTH)) {
         'comment' => $sql_screenshots['comment_text']
     ));
     $count++;
-}  
+}
 
 //Lets get all the reviews by this author
 $sql_reviews_author = $mysqli->query("SELECT * FROM review_main
@@ -87,18 +87,17 @@ $sql_reviews_author = $mysqli->query("SELECT * FROM review_main
                            LEFT JOIN users ON (review_main.user_id = users.user_id)
                            WHERE review_main.user_id = '$query_review[user_id]'
                            AND review_main.review_id != '$review_id'
-                           AND review_main.review_edit = '0' ORDER BY game.game_name") or die ("problem with query");
+                           AND review_main.review_edit = '0' ORDER BY game.game_name") or die("problem with query");
 
 $count = 0;
-                                  
-while ($query_reviews_author = $sql_reviews_author->fetch_array(MYSQLI_BOTH)) 
-{
+
+while ($query_reviews_author = $sql_reviews_author->fetch_array(MYSQLI_BOTH)) {
     $count++;
-    
+
     //select the game year
-    $sql_game_year = $mysqli->query("SELECT * FROM game_year where game_id = $query_reviews_author[game_id]") or die ("error in game year query");
+    $sql_game_year = $mysqli->query("SELECT * FROM game_year where game_id = $query_reviews_author[game_id]") or die("error in game year query");
     $query_game_year = $sql_game_year->fetch_array(MYSQLI_BOTH);
-    
+
     $smarty->append('reviews_author', array(
             'review_id' => $query_reviews_author['review_id'],
             'game_name' => $query_reviews_author['game_name'],
@@ -106,8 +105,8 @@ while ($query_reviews_author = $sql_reviews_author->fetch_array(MYSQLI_BOTH))
             'game_year' => $query_game_year['game_year'],
             'user_name' => $query_reviews_author['userid'],
             'user_id' => $query_reviews_author['user_id']
-        ));   
-}  
+        ));
+}
 
 $smarty->assign('nr_reviews_author', $count);
 
@@ -122,41 +121,44 @@ $sql_comment = $mysqli->query("SELECT *
                                 WHERE review_user_comments.review_id = '$review_id'
                                 ORDER BY comments.timestamp desc") or die("Syntax Error! Couldn't not get the comments!");
 
-                                
-while ($query_comment = $sql_comment->fetch_array(MYSQLI_BOTH)) 
-{
+
+while ($query_comment = $sql_comment->fetch_array(MYSQLI_BOTH)) {
     $oldcomment = $query_comment['comment'];
     $oldcomment = nl2br($oldcomment);
     $oldcomment = InsertALCode($oldcomment);
     $oldcomment = trim($oldcomment);
     $oldcomment = RemoveSmillies($oldcomment);
     $oldcomment = stripslashes($oldcomment);
-    
+
     $comment = stripslashes($query_comment['comment']);
     $comment = trim($comment);
     $comment = RemoveSmillies($comment);
-     
+
     //this is needed, because users can change their own comments on the website, however this is done with JS (instead of a post with pure HTML)
-    //The translation of the 'enter' breaks is different in JS, so in JS I do a conversion to a <br>. However, when we edit a comment, this <br> should not be 
-    //visible to the user, hence again, now this conversion in php    
-    $breaks = array("<br />","<br>","<br/>");  
-    $comment = str_ireplace($breaks, "\r\n", $comment); 
-    
-    $date = date("d/m/y",$query_comment['timestamp']);
-    
-    $smarty->append('comments',
-	    array('comment' => $oldcomment,
+    //The translation of the 'enter' breaks is different in JS, so in JS I do a conversion to a <br>. However, when we edit a comment, this <br> should not be
+    //visible to the user, hence again, now this conversion in php
+    $breaks = array("<br />","<br>","<br/>");
+    $comment = str_ireplace($breaks, "\r\n", $comment);
+
+    $date = date("d/m/y", $query_comment['timestamp']);
+
+    $smarty->append(
+
+        'comments',
+        array('comment' => $oldcomment,
               'comment_edit' => $comment,
               'comment_id' => $query_comment['comment_id'],
-			  'date' => $date,
-			  'user_name' => $query_comment['userid'],
+              'date' => $date,
+              'user_name' => $query_comment['userid'],
               'user_id' => $query_comment['user_id'],
               'user_fb' => $query_comment['user_fb'],
               'user_website' => $query_comment['user_website'],
               'user_twitter' => $query_comment['user_twitter'],
               'user_af' => $query_comment['user_af'],
-			  'email' => $query_comment['email']));
-} 
+              'email' => $query_comment['email'])
+
+    );
+}
 
 
 //Send all smarty variables to the templates

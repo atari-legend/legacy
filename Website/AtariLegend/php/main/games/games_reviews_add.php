@@ -6,11 +6,11 @@
 *   copyright            : (C) 2017 Atari Legend
 *   email                : martens_maarten@hotmail.com
 *
-*   Id: games_review_add.php,v 0.10 29/08/2017 20:20 STG 
+*   Id: games_review_add.php,v 0.10 29/08/2017 20:20 STG
 ****************************************************************************/
 
 //****************************************************************************************
-// This is the detail page of a game. 
+// This is the detail page of a game.
 //****************************************************************************************
 
 //load all common functions
@@ -30,7 +30,7 @@ include("../../common/tiles/tile_bug_report.php");
 //***********************************************************************************
 //get the name of the game
 //***********************************************************************************
-$sql_game = $mysqli->query("SELECT * FROM game WHERE game.game_id='$game_id'") 
+$sql_game = $mysqli->query("SELECT * FROM game WHERE game.game_id='$game_id'")
                             or die("Error getting game info");
 
 
@@ -41,8 +41,7 @@ while ($game_info = $sql_game->fetch_array(MYSQLI_BOTH)) {
     ));
 }
 
-if (isset($_SESSION['user_id']))
-{
+if (isset($_SESSION['user_id'])) {
     //***********************************************************************************
     //Get the screenshots
     //***********************************************************************************
@@ -59,7 +58,7 @@ if (isset($_SESSION['user_id']))
         $screenshot_image .= $screenshots['screenshot_id'];
         $screenshot_image .= '.';
         $screenshot_image .= $screenshots['imgext'];
-        
+
         $screenshot_image_pop = $game_screenshot_path;
         $screenshot_image_pop .= $screenshots['screenshot_id'];
         $screenshot_image_pop .= '.';
@@ -83,18 +82,17 @@ if (isset($_SESSION['user_id']))
                                LEFT JOIN game ON (game.game_id = review_game.game_id)
                                LEFT JOIN users ON (review_main.user_id = users.user_id)
                                WHERE review_main.user_id = '$_SESSION[user_id]'
-                               AND review_main.review_edit = '0' ORDER BY game.game_name") or die ("problem with query");
+                               AND review_main.review_edit = '0' ORDER BY game.game_name") or die("problem with query");
 
     $count = 0;
-                                      
-    while ($query_reviews_author = $sql_reviews_author->fetch_array(MYSQLI_BOTH)) 
-    {
+
+    while ($query_reviews_author = $sql_reviews_author->fetch_array(MYSQLI_BOTH)) {
         $count++;
-        
+
         //select the game year
-        $sql_game_year = $mysqli->query("SELECT * FROM game_year where game_id = $query_reviews_author[game_id]") or die ("error in game year query");
+        $sql_game_year = $mysqli->query("SELECT * FROM game_year where game_id = $query_reviews_author[game_id]") or die("error in game year query");
         $query_game_year = $sql_game_year->fetch_array(MYSQLI_BOTH);
-        
+
         $smarty->append('reviews_author', array(
                 'review_id' => $query_reviews_author['review_id'],
                 'game_name' => $query_reviews_author['game_name'],
@@ -102,11 +100,11 @@ if (isset($_SESSION['user_id']))
                 'game_year' => $query_game_year['game_year'],
                 'user_name' => $query_reviews_author['userid'],
                 'user_id' => $query_reviews_author['user_id']
-            ));   
-    }  
+            ));
+    }
 
-    $smarty->assign('nr_reviews_author', $count);  
-} 
+    $smarty->assign('nr_reviews_author', $count);
+}
 
 $smarty->assign("game_id", $game_id);
 

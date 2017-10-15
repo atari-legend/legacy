@@ -11,7 +11,7 @@
  *   Id: games_comment_main.php,v 0.10 2017/07/14 ST Graveyard
  *
  ***************************************************************************
- *  This page loads all the comments    
+ *  This page loads all the comments
  ***************************************************************************/
 
 include("../../config/common.php");
@@ -19,7 +19,7 @@ include("../../config/common.php");
 //load the tiles
 include("../../common/tiles/who_is_it_tile.php");
 include("../../common/tiles/tile_stats.php");
-include("../../common/tiles/screenstar.php");   
+include("../../common/tiles/screenstar.php");
 include("../../common/tiles/changes_per_month_tile.php");
 
 //no special position necesarry for the tiles (compared to the front page)
@@ -119,16 +119,16 @@ while ($query_comment = $sql_comment->fetch_array(MYSQLI_BOTH)) {
     $oldcomment = trim($oldcomment);
     $oldcomment = RemoveSmillies($oldcomment);
     $oldcomment = stripslashes($oldcomment);
-    
+
     $comment = stripslashes($query_comment['comment']);
     $comment = trim($comment);
     $comment = RemoveSmillies($comment);
-     
+
     //this is needed, because users can change their own comments on the website, however this is done with JS (instead of a post with pure HTML)
-    //The translation of the 'enter' breaks is different in JS, so in JS I do a conversion to a <br>. However, when we edit a comment, this <br> should not be 
-    //visible to the user, hence again, now this conversion in php    
-    $breaks = array("<br />","<br>","<br/>");  
-    $comment = str_ireplace($breaks, "\r\n", $comment); 
+    //The translation of the 'enter' breaks is different in JS, so in JS I do a conversion to a <br>. However, when we edit a comment, this <br> should not be
+    //visible to the user, hence again, now this conversion in php
+    $breaks = array("<br />","<br>","<br/>");
+    $comment = str_ireplace($breaks, "\r\n", $comment);
 
     if ($query_comment['join_date'] == "") {
         $user_joindate = "unknown";
