@@ -401,6 +401,40 @@ if ($imagenum_rows > 0) {
     $smarty->assign("nr_box", $front);
 }
 
+//***********************************************************************************
+// Musics
+//***********************************************************************************
+
+$stmt = $mysqli->prepare("
+SELECT
+    music.music_id,
+    music.mime_type,
+    individuals.ind_id,
+    individuals.ind_name,
+    music_types_main.extention
+FROM
+    music
+LEFT JOIN game_music ON game_music.music_id = music.music_id
+LEFT JOIN music_author ON music_author.music_id = music.music_id
+LEFT JOIN individuals ON individuals.ind_id = music_author.ind_id
+LEFT JOIN music_types ON music_types.music_id = music.music_id
+LEFT JOIN music_types_main ON music_types_main.music_types_main_id = music_types.music_types_main_id
+WHERE
+    game_music.game_id = ?")
+    or die("Error querying music: ".$mysqli->error);
+$stmt->bind_param("i", $game_id);
+$stmt->execute();
+$stmt->bind_result($music_id, $music_mime_type, $ind_id, $ind_name, $extension);
+while ($stmt->fetch()) {
+    $smarty->append("music", array(
+        "music_id" => $music_id,
+        "music_mime_type" => $music_mime_type,
+        "music_ind_id" => $ind_id,
+        "music_ind_name" => $ind_name,
+        "music_extension" => $extension
+    ));
+}
+$stmt->close();
 
 //***********************************************************************************
 //Get the comments

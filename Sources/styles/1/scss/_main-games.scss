@@ -394,6 +394,71 @@
 .games_main_details_submisions_position_medium{display:none;}
 .games_main_details_info_position_low{display:none;}
 
+
+/* SND music player */
+
+.music-player.snd {
+    background-color: #525257;
+    text-align: center;
+    margin: 10px auto 10px auto;
+    padding: 5px;
+    border-radius: 3px;
+    box-shadow: 0 0 5px #444;
+    max-width: 200px;
+}
+
+.music-player.snd .download-link {
+    float: right;
+}
+
+.music-player.snd>div {
+    margin-top: 7px;
+    margin-bottom: 7px;
+}
+
+.music-player.snd .controls {
+    display: inline-table;
+}
+
+.music-player.snd .music-player-button {
+    display: table-cell;
+    padding-left: 15px;
+    padding-right: 15px;
+    color: white;
+    vertical-align: middle;
+}
+
+.music-player.snd .music-player-button:hover {
+    color: #01b5b5;
+    text-shadow: 0 0 3px #777;
+}
+
+/* MP3 music player */
+
+.music-player.mp3 {
+    text-align: center;
+}
+
+.music-player.mp3>div {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.music-player.mp3 {
+    margin: 10px auto 10px auto;
+}
+
+.music-player.mp3 audio {
+    max-width: 200px;
+    margin: auto;
+}
+
+/* Other formats music player */
+
+.music-player.other {
+    padding: 10px;
+}
+
 //*****Games Reviews*********/
 
 .games_detail_review_container {
