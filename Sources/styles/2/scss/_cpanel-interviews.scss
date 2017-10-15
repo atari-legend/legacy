@@ -27,3 +27,8 @@
     width: 100%;
     vertical-align: middle;
 }
+
+#member_select{
+    @extend #quick_search_pub_select;
+}
+
