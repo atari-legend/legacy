@@ -50,7 +50,7 @@ while ($sql_news = $query_news->fetch_array(MYSQLI_BOTH)) {
     $news_text = RemoveSmillies($news_text);
 
     //convert the date to readible format
-    $news_date = date("F j, Y",$sql_news['news_date']);
+    $news_date = date("F j, Y", $sql_news['news_date']);
 
     $smarty->append('news', array(
                 'news_date' => $news_date,
@@ -65,13 +65,13 @@ while ($sql_news = $query_news->fetch_array(MYSQLI_BOTH)) {
 
 //Check if back arrow is needed
 if ($v_counter > 0) {
-// Build the link
+    // Build the link
     $v_linkback =('?v_counter=' . ($v_counter - 6));
 }
 
 //Check if we need to place a next arrow
 if ($v_rows > ($v_counter + 6)) {
-//Build the link
+    //Build the link
     $v_linknext =('?v_counter=' . ($v_counter + 6));
 }
 
@@ -85,7 +85,9 @@ if (empty($v_linknext)) {
     $v_linknext = "";
 }
 
-$smarty->assign('links', array(
+$smarty->assign(
+    'links',
+    array(
         'linkback' => $v_linkback,
         'linknext' => $v_linknext)
 );

@@ -120,7 +120,6 @@ $sql_games = $mysqli->query("SELECT * FROM game_author
 $count = 0;
 
 while ($query_games = $sql_games->fetch_array(MYSQLI_BOTH)) {
-
     $count++;
 
     //select the game year
@@ -161,8 +160,8 @@ while ($query_comment = $sql_comment->fetch_array(MYSQLI_BOTH)) {
     $comment = RemoveSmillies($comment);
 
     //this is needed, because users can change their own comments on the website, however this is done with JS (instead of a post with pure HTML)
-    //The translation of the 'enter' breaks is different in JS, so in JS I do a conversion to a <br>. However, when we edit a comment, this <br> should not be
-    //visible to the user, hence again, now this conversion in php
+    //The translation of the 'enter' breaks is different in JS, so in JS I do a conversion to a <br>.
+    //However, when we edit a comment, this <br> should not be visible to the user, hence again, now this conversion in php
     $breaks  = array(
         "<br />",
         "<br>",
