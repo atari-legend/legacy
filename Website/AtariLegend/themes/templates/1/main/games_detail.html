@@ -21,6 +21,11 @@
 {block name=title} {$game_info.game_name} | Atari Legend{/block}
 {block name=main_body}
     <script src="{$template_dir}includes/js/jssor.slider-25.2.1.min.js" type="text/javascript"></script>
+    {if isset($music)}
+        <script src="{$template_dir}includes/js/scriptprocessor_player.min.js" type="text/javascript"></script>
+        <script src="{$template_dir}includes/js/backend_sc68.js" type="text/javascript"></script>
+        <script src="{$template_dir}includes/js/music-player.snd.js" type="text/javascript"></script>
+    {/if}
 
     <script type="text/javascript"> <!-- script used for the jquery screenshot and boxscan slider -->
         jQuery(document).ready(function ($) {
@@ -161,7 +166,14 @@
             $("#play_jssor2").click(Play_box);
             $("#pause_jssor2").click(Pause_box);
         {/if}
+
     });
+
+    {if isset($music)}
+        $(document).ready( function() {
+            $('.music-player.snd').sndPlayer();
+        });
+    {/if}
     </script>
 
     <!-- I am adding a small piece of style code to make the thumbs bigger when there a less screenshots available, it makes it look better -->
@@ -614,6 +626,16 @@
                 </div>
             <!--*******************-->
             <!--END Game info tile -->
+            <!--*******************-->
+            <br>
+            <!--*********************-->
+            <!--START Game info tile -->
+            <!--*********************-->
+            <div>
+                {include file='1/main/games_detail_music.html'}
+            </div>
+            <!--*******************-->
+            <!--END Game music tile -->
             <!--*******************-->
             <br>
             <!--*************************-->
