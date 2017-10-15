@@ -25,6 +25,14 @@
 {block name=java_script}
 <script type="text/javascript">
 
+function dropdown_member() {
+    var member_input = document.getElementById("member_name");
+    member_input.style.display='none';
+
+    var member_select = document.getElementById("member_select");
+    member_select.style.display='inline';
+}
+
 $(document).ready(function() {
     $( "#member_name" ).autocomplete({
         source: "../../../php/admin/common/autocomplete.php?extraParams=admin-user",
@@ -263,6 +271,18 @@ function storeCaret(textEl) {
 					<b>Written by : </b>
 					<br>
                     <input type="text" id="member_name" value="{$interview.interview_author_name}" class="standard_tile_input_small">
+                    <select name="members" id="member_select" style="display:none;">
+                        <option value="-">-</option>
+                        {foreach from=$authors item=line}             
+                            {if $line.user_id == $interview.interview_author}
+                                <option value="{$line.user_id}" selected>{$line.user_name}</option>
+                            {else}
+                                <option value="{$line.user_id}">{$line.user_name}</option>
+                            {/if}
+                        {/foreach}
+                    </select>
+                    <a style="cursor: pointer;" onClick="dropdown_member()" class="left_nav_link"><i class="fa fa-chevron-circle-down" aria-hidden="true" id="input_member" title="Click for drop down mode"></i></a>
+                    <a style="cursor: pointer;" onClick="input_member()" class="left_nav_link"><i class="fa fa-chevron-circle-down" aria-hidden="true" id="drop_member" title="Click for input field mode" style="display:none;"></i></a>
                     <input type="hidden" name="members" id="members" value="{$interview.interview_author}">
 				</div>
 				<br>
