@@ -28,6 +28,7 @@
 function dropdown_member() {
     var member_input = document.getElementById("member_name");
     member_input.style.display='none';
+    document.getElementById("members").setAttribute("name","members_changed");
 
     var member_select = document.getElementById("member_select");
     member_select.style.display='inline';
