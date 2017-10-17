@@ -23,28 +23,12 @@
 {extends file='1/admin/frontpage.html'}
 
 {block name=java_script}
+<script type='text/JavaScript' src="{$template_dir}includes/js/ui.widgets.js"></script>
+
 <script type="text/javascript">
 
-function dropdown_member() {
-    var member_input = document.getElementById("member_name");
-    member_input.style.display='none';
-    document.getElementById("members").setAttribute("name","members_changed");
-
-    var member_select = document.getElementById("member_select");
-    member_select.style.display='inline';
-}
-
 $(document).ready(function() {
-    $( "#member_name" ).autocomplete({
-        source: "../../../php/admin/common/autocomplete.php?extraParams=admin-user",
-        minLength: 2,
-        select: function (evt, ui) {
-            $("#member_name").val(ui.item.label);
-            $("#members").val(ui.item.value);
-            // Prevent Autocomplete default behaviour of injecting the 'value' in the input field
-            return false;
-        },
-    });
+    $("select[name=members]").autocompleteAlternative();
 
     $( "#individual_name" ).autocomplete({
         source: "../../../php/includes/autocomplete.php?extraParams=individual",
@@ -271,10 +255,11 @@ function storeCaret(textEl) {
 				<div style="display:inline-block;">
 					<b>Written by : </b>
 					<br>
-                    <input type="text" id="member_name" value="{$interview.interview_author_name}" class="standard_tile_input_small">
-                    <select name="members" id="member_select" style="display:none;">
+                    <select name="members"
+                        data-autocomplete-endpoint="../../../php/admin/common/autocomplete.php?extraParams=admin-user"
+                        data-alternative-toggle="#members_select_toggle">
                         <option value="-">-</option>
-                        {foreach from=$authors item=line}             
+                        {foreach from=$authors item=line}
                             {if $line.user_id == $interview.interview_author}
                                 <option value="{$line.user_id}" selected>{$line.user_name}</option>
                             {else}
@@ -282,9 +267,7 @@ function storeCaret(textEl) {
                             {/if}
                         {/foreach}
                     </select>
-                    <a style="cursor: pointer;" onClick="dropdown_member()" class="left_nav_link"><i class="fa fa-chevron-circle-down" aria-hidden="true" id="input_member" title="Click for drop down mode"></i></a>
-                    <a style="cursor: pointer;" onClick="input_member()" class="left_nav_link"><i class="fa fa-chevron-circle-down" aria-hidden="true" id="drop_member" title="Click for input field mode" style="display:none;"></i></a>
-                    <input type="hidden" name="members" id="members" value="{$interview.interview_author}">
+                    <a href="javascript:;" class="left_nav_link" id="members_select_toggle" ><i class="fa fa-chevron-circle-down" aria-hidden="true" ></i></a>
 				</div>
 				<br>
 				<br>
