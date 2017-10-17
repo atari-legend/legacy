@@ -37,10 +37,28 @@ switch ($extraParams) {
                 "value" => $user_id,
                 "label" => $userid)
             );
-        }
-        
+        }      
         $stmt->close();
+        break;
+        
+    case "individual":
+        $stmt = $mysqli->prepare("
+            SELECT ind_id, ind_name
+            FROM individuals
+            WHERE LOWER(ind_name) LIKE CONCAT('%',LOWER(?),'%')")
+        or die("Error querying individuals: ".$mysqli->error);
 
+        $stmt->bind_param("s", $term);
+        $stmt->execute();
+        $stmt->bind_result($ind_id, $ind_name);
+
+        while ($stmt->fetch()) {
+            array_push($json, array(
+                "value" => $ind_id,
+                "label" => $ind_name)
+            );
+        }      
+        $stmt->close();
         break;
 }
 
