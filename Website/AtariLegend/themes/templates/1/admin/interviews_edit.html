@@ -14,6 +14,8 @@
 *                   added the [frontpage] functionality
 *   Id: interviews_edit.html,v 0.22 2017/08/19 15:02 ST Graveyard
 *                   removed the [frontpage] functionality --> Why was this necessary??
+*   Id: interviews_edit.html,v 0.23 2017/10/17 Nico & STG
+*                   Fixing bugs and updating this section with JQUERY and more
 ***************************************************************************/
 
 ///****************************************************************************************
@@ -29,19 +31,7 @@
 
 $(document).ready(function() {
     $("select[name=members]").autocompleteAlternative();
-
-    $( "#individual_name" ).autocomplete({
-        source: "../../../php/includes/autocomplete.php?extraParams=individual",
-        minLength: 2,
-        select: function (evt, ui) {
-            console.log("select!");
-            $("#individual_name").val(ui.item.label);
-            $("#individual").val(ui.item.value);
-            // Prevent Autocomplete default behaviour of injecting the 'value' in the input field
-            return false;
-        },
-    });
-
+    $("select[name=individual]").autocompleteAlternative();
 });
 
 function deletecomment(screenshot_id, interview_id)
@@ -257,7 +247,8 @@ function storeCaret(textEl) {
 					<br>
                     <select name="members"
                         data-autocomplete-endpoint="../../../php/admin/common/autocomplete.php?extraParams=admin-user"
-                        data-alternative-toggle="#members_select_toggle">
+                        data-alternative-toggle="#members_select_toggle"
+                        id="member_select">
                         <option value="-">-</option>
                         {foreach from=$authors item=line}
                             {if $line.user_id == $interview.interview_author}
@@ -274,8 +265,20 @@ function storeCaret(textEl) {
 				<div style="display:inline-block;">
 					<b>Individual :</b>
 					<br>
-                    <input type="text" id="individual_name" value="{$interview.interview_ind_name}" class="standard_tile_input_small">
-                    <input type="hidden" name="individual" id="individual" value="{$interview.interview_ind_id}">
+                    <select name="individual" 
+                        data-autocomplete-endpoint="../../../php/admin/common/autocomplete.php?extraParams=individual"
+                        data-alternative-toggle="#individual_select_toggle"
+                        id="member_select">>
+                        <option value="-">-</option>
+                        {foreach from=$individuals item=line}
+                          {if $line.ind_id == $interview.interview_ind_id}
+                            <option value="{$line.ind_id}" selected>{$line.ind_name}</option>
+                          {else}
+                            <option value="{$line.ind_id}">{$line.ind_name}</option>
+                          {/if}
+                        {/foreach}          
+                    </select>
+                    <a href="javascript:;" class="left_nav_link" id="individual_select_toggle" ><i class="fa fa-chevron-circle-down" aria-hidden="true" ></i></a>
 					<br>
 					<br>
 				</div>
