@@ -25,8 +25,7 @@ switch ($extraParams) {
         $stmt = $mysqli->prepare("
             SELECT user_id, userid
             FROM users
-            WHERE permission = 1
-            AND LOWER(userid) LIKE CONCAT('%',LOWER(?),'%')")
+            WHERE LOWER(userid) LIKE CONCAT('%',LOWER(?),'%')")
         or die("Error querying users: ".$mysqli->error);
 
         $stmt->bind_param("s", $term);
