@@ -26,16 +26,7 @@
 <script type="text/javascript">
 
 $(document).ready(function() {
-    $( "#member_name" ).autocomplete({
-        source: "../../../php/admin/common/autocomplete.php?extraParams=admin-user",
-        minLength: 2,
-        select: function (evt, ui) {
-            $("#member_name").val(ui.item.label);
-            $("#members").val(ui.item.value);
-            // Prevent Autocomplete default behaviour of injecting the 'value' in the input field
-            return false;
-        },
-    });
+    $("select[name=members]").autocompleteAlternative();
 
     $( "#individual_name" ).autocomplete({
         source: "../../../php/includes/autocomplete.php?extraParams=individual",
@@ -262,8 +253,19 @@ function storeCaret(textEl) {
 				<div style="display:inline-block;">
 					<b>Written by : </b>
 					<br>
-                    <input type="text" id="member_name" value="{$interview.interview_author_name}" class="standard_tile_input_small">
-                    <input type="hidden" name="members" id="members" value="{$interview.interview_author}">
+                    <select name="members"
+                        data-autocomplete-endpoint="../../../php/admin/common/autocomplete.php?extraParams=admin-user"
+                        data-alternative-toggle="#members_select_toggle">
+                        <option value="-">-</option>
+                        {foreach from=$authors item=line}
+                            {if $line.user_id == $interview.interview_author}
+                                <option value="{$line.user_id}" selected>{$line.user_name}</option>
+                            {else}
+                                <option value="{$line.user_id}">{$line.user_name}</option>
+                            {/if}
+                        {/foreach}
+                    </select>
+                    <a href="javascript:;" class="left_nav_link" id="members_select_toggle" ><i class="fa fa-chevron-circle-down" aria-hidden="true" ></i></a>
 				</div>
 				<br>
 				<br>
