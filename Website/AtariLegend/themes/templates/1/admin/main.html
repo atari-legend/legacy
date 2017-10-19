@@ -134,6 +134,16 @@
                 $('html, body').animate({scrollTop: offsetTop}, 500, 'linear');
             }
         </script>
+
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="//www.googletagmanager.com/gtag/js?id=UA-108399799-2"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'UA-108399799-2');
+        </script>
         {/literal}
         {block name=java_script}{/block}
     </head>
