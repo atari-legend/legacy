@@ -30,8 +30,8 @@
 <script type="text/javascript">
 
 $(document).ready(function() {
-    $("select[name=members]").autocompleteAlternative();
-    $("select[name=individual]").autocompleteAlternative();
+    $("select[name=members]").altAutocomplete();
+    $("select[name=individual]").altAutocomplete();
 });
 
 function deletecomment(screenshot_id, interview_id)
@@ -246,8 +246,8 @@ function storeCaret(textEl) {
 					<b>Written by : </b>
 					<br>
                     <select name="members"
-                        data-autocomplete-endpoint="../../../php/admin/common/autocomplete.php?extraParams=admin-user"
-                        data-alternative-toggle="#members_select_toggle"
+                        data-alt-autocomplete-endpoint="../../../php/admin/common/autocomplete.php?extraParams=admin-user"
+                        data-alt-autocomplete-toggle="#members_select_toggle"
                         id="member_select">
                         <option value="-">-</option>
                         {foreach from=$authors item=line}
@@ -266,8 +266,8 @@ function storeCaret(textEl) {
 					<b>Individual :</b>
 					<br>
                     <select name="individual" 
-                        data-autocomplete-endpoint="../../../php/admin/common/autocomplete.php?extraParams=individual"
-                        data-alternative-toggle="#individual_select_toggle"
+                        data-alt-autocomplete-endpoint="../../../php/admin/common/autocomplete.php?extraParams=individual"
+                        data-alt-autocomplete-toggle="#individual_select_toggle"
                         id="member_select">>
                         <option value="-">-</option>
                         {foreach from=$individuals item=line}
