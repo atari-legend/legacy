@@ -2,7 +2,7 @@
     /**
      * jQuery plugin to provide an alternative auto-completed input
      * field to an existing select dropdown */
-    $.fn.autocompleteAlternative = function () {
+    $.fn.altAutocomplete = function () {
         this.each(function () {
             // Get all attributes on our <select> tag
             var selectElement = $(this);
@@ -13,9 +13,9 @@
                 selectedValue = selectElement.find(':selected').val(),
                 // Various attribute we need to perform the auto-complete:
                 // - the Ajax endpoint
-                completeEndpoint = selectElement.data('autocomplete-endpoint'),
+                completeEndpoint = selectElement.data('alt-autocomplete-endpoint'),
                 // - Which element is used to toggle between select / input mode
-                toggleControl = selectElement.data('alternative-toggle');
+                toggleControl = selectElement.data('alt-autocomplete-toggle');
 
             // Generate an ID for the auto-completed input based on the select name
             var displaySelectId = selectName + '-autocomplete-display';
