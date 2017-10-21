@@ -62,7 +62,7 @@
 								<br>
 								<br>
 								<b>Menu disk options :</b><br>
-								<a onclick="DeleteMenuDisk({$menus.menu_disk_id})" style="cursor: pointer;" class="standard_tile_link">Delete menu disk</a><br>
+								<a onclick="DeleteMenuDiskModal({$menus.menu_disk_id})" style="cursor: pointer;" class="standard_tile_link">Delete menu disk</a><br>
 								<div id="intro_credit_link"><a onclick="popAddIntroCred({$menus.menu_disk_id})" style="cursor: pointer;" class="standard_tile_link">Add intro credits</a><br></div>
 								<div id="gameto_menu_link"><a onclick="popAddGames({$menus.menu_disk_id})" style="cursor: pointer;" class="standard_tile_link">Add Game/Tool/Demo to menu</a><br></div>
 								<div id="docto_menu_link"><a onclick="popAddDocs({$menus.menu_disk_id})" style="cursor: pointer;" class="standard_tile_link">Add Doc to menu</a><br></div>
@@ -143,9 +143,8 @@
 									<td class="menu_mark_td">
 										<form name="MenuDiskContent" id="MenuDiskContent">
                                          <div class="links_mod_checkbox">
-                                            <input type="checkbox" id="menu_disk_title_id{$line.menu_disk_title_id}" name="menu_disk_title_id[]" value="{$line.menu_disk_title_id}" onchange="deleteGamefromMenu({$line.menu_disk_title_id},{$menu_disk_id})">
+                                            <input type="checkbox" id="menu_disk_title_id{$line.menu_disk_title_id}" name="menu_disk_title_id[]" value="{$line.menu_disk_title_id}" onchange="DeleteGamefromMenuButton({$line.menu_disk_title_id},{$menu_disk_id})">
                                             <label for="menu_disk_title_id{$line.menu_disk_title_id}"></label>&nbsp;
-                                            <!--<input type="checkbox" id="menu_disk_title_id{$line.menu_disk_title_id}" name="menu_disk_title_id[]" value="{$line.menu_disk_title_id}" onchange="deleteGamefromMenu({$line.menu_disk_title_id},{$menu_disk_id})">-->
                                         </div>
 									</td>
 									<td class="menu_gamename_td">
@@ -394,9 +393,8 @@
 				<td class="menu_mark_td">
 					<form name="MenuDiskContent" id="MenuDiskContent">
                     <div class="links_mod_checkbox">
-                        <input type="checkbox" id="menu_disk_title_id{$line.menu_disk_title_id}" name="menu_disk_title_id[]" value="{$line.menu_disk_title_id}" onchange="deleteGamefromMenu({$line.menu_disk_title_id},{$menu_disk_id})">
+                        <input type="checkbox" id="menu_disk_title_id{$line.menu_disk_title_id}" name="menu_disk_title_id[]" value="{$line.menu_disk_title_id}" onchange="DeleteGamefromMenuButton({$line.menu_disk_title_id},{$menu_disk_id})">
                         <label for="menu_disk_title_id{$line.menu_disk_title_id}"></label>&nbsp;
-                        <!--<input type="checkbox" id="menu_disk_title_id{$line.menu_disk_title_id}" name="menu_disk_title_id[]" value="{$line.menu_disk_title_id}" onchange="deleteGamefromMenu({$line.menu_disk_title_id},{$menu_disk_id})">-->
                     </div>
 
 				</td>
@@ -662,9 +660,8 @@
 				<td class="menu_mark_td">
 					<form name="MenuDiskContent" id="MenuDiskContent">
                     <div class="links_mod_checkbox">
-                        <input type="checkbox" id="menu_disk_title_id{$line.menu_disk_title_id}" name="menu_disk_title_id[]" value="{$line.menu_disk_title_id}" onchange="deleteGamefromMenu({$line.menu_disk_title_id},{$menu_disk_id})">
+                        <input type="checkbox" id="menu_disk_title_id{$line.menu_disk_title_id}" name="menu_disk_title_id[]" value="{$line.menu_disk_title_id}" onchange="DeleteGamefromMenuButton({$line.menu_disk_title_id},{$menu_disk_id})">
                         <label for="menu_disk_title_id{$line.menu_disk_title_id}"></label>&nbsp;
-                        <!--<input type="checkbox" id="menu_disk_title_id{$line.menu_disk_title_id}" name="menu_disk_title_id[]" value="{$line.menu_disk_title_id}" onchange="deleteGamefromMenu({$line.menu_disk_title_id},{$menu_disk_id})">-->
                     </div>
 				</td>
 				<td class="menu_gamename_td">
