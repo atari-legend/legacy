@@ -19,9 +19,6 @@ function formhash(form, password) {
 
     // Make sure the plaintext password doesn't get sent. 
     password.value = "";
- 
-    // Finally submit the form. 
-    form.submit();
 }
  
 function regformhash(form, uid, email, password, conf) {
