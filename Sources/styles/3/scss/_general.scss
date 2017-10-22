@@ -489,6 +489,13 @@ img {display: block; }
     margin: 0;
 }
 
+.standard_table_list_no_hover{
+    @extend .standard_table_list;
+}
+
+.standard_table_list_no_hover tr:nth-child(even) { background-color: #efefef; }
+.standard_table_list_no_hover tr:nth-child(odd) { background-color: #dbd7d1; }
+
 .standard_table_center {
     font-size: 12pt;
     font-weight: 100;
