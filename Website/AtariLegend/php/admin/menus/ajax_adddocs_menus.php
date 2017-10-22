@@ -69,12 +69,12 @@ if (isset($action) and ($action=="game_browse" xor $action=="game_search")) {
             $sql_build_aka .= " WHERE aka_name REGEXP '^[0-9].*'";
             $sql_build_tool .= " WHERE tools_name REGEXP '^[0-9].*'";
         } else {
-                    $sql_build .= " WHERE game_name LIKE '$query%'";
-                    $sql_build_aka .= " WHERE aka_name LIKE '$query%'";
-                    $sql_build_tool .= " WHERE tools_name LIKE '$query%'";
+            $sql_build .= " WHERE game_name LIKE '$query%'";
+            $sql_build_aka .= " WHERE aka_name LIKE '$query%'";
+            $sql_build_tool .= " WHERE tools_name LIKE '$query%'";
         }
     }
-                // Create WHERE clause for search field
+    // Create WHERE clause for search field
     if ($action=="game_search") {
         if (isset($query) and $query!=="empty") {
             $query = $mysqli->real_escape_string($query);
@@ -102,7 +102,7 @@ if (isset($action) and ($action=="game_browse" xor $action=="game_search")) {
     $smarty->assign('smarty_action', 'game_list');
 
     while ($query_series_link = $sql_series_link->fetch_array(MYSQLI_BOTH)) {
-    // This smarty is used for creating the list of games contained within a game series
+        // This smarty is used for creating the list of games contained within a game series
         $smarty->append('series_link', array(
             'game_id' => $query_series_link['software_id'],
             'game_name' => $query_series_link['software_name'],

@@ -11,7 +11,7 @@
  *          - AL 2.0
  *
  ***************************************************************************
- 
+
 ************************************************************************************************
 On this page we link authors to a menu disk title
 ************************************************************************************************/
@@ -43,27 +43,24 @@ $sql_author_info = "SELECT  individuals.ind_id,
                             WHERE menu_disk_title_author.menu_disk_title_id = '$menu_disk_title_id'
                             ORDER BY individuals.ind_name ASC";
 
-$query_author_info = $mysqli->query($sql_author_info) or die ("problem getting author info");
+$query_author_info = $mysqli->query($sql_author_info) or die("problem getting author info");
 
 while ($query = $query_author_info->fetch_array(MYSQLI_BOTH)) {
-     
     $sql_ind_nicks = $mysqli->query("SELECT nick_id FROM individual_nicks WHERE ind_id = '$query[ind_id]'");
         
     while ($fetch_ind_nicks = $sql_ind_nicks->fetch_array(MYSQLI_BOTH)) {
-     
         $nick_id = $fetch_ind_nicks['nick_id'];
         
         $sql_nick_names = $mysqli->query("SELECT ind_name from individuals WHERE ind_id = '$nick_id'") or die('Error: ' . mysqli_error($mysqli));
     
         while ($fetch_nick_names = $sql_nick_names->fetch_array(MYSQLI_BOTH)) {
-
             $smarty->append('ind_nick', array(
                 'ind_id' => $query['ind_id'],
                 'individual_nicks_id' => $nick_id,
                 'nick' => $fetch_nick_names['ind_name']
             ));
         }
-    }  
+    }
 
     // This smarty is used for for the menu_disk_title credits
     $smarty->append('title_credits', array(

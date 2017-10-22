@@ -72,7 +72,7 @@ if ($action == "add_new_menu_disk") {
             $_SESSION['edit_message'] = "New Menu disk added";
             create_log_entry('Menu set', $menu_sets_id, 'Menu disk', $last_id, 'Insert', $_SESSION['user_id']);
         } elseif ($menu_disk_number == '' and $menu_disk_letter !== '') {
-        //Ok, but if it is not a numbered disk but instead it is one of those horrible alphabetic disks
+            //Ok, but if it is not a numbered disk but instead it is one of those horrible alphabetic disks
             $sql      = $mysqli->query("INSERT INTO menu_disk (menu_sets_id,menu_disk_letter) VALUES ('$menu_sets_id','$menu_disk_letter')") or die('Error: ' . mysqli_error($mysqli));
             $last_id2 = $mysqli->insert_id;
             if ($menu_disk_part !== '') {
@@ -807,7 +807,6 @@ if (isset($action) and $action == "delete_doc_from_menu_disk") {
 // add screenshots to menu disk
 //****************************************************************************************
 if (isset($action) and $action == "add_screens") {
-
     if ($_SESSION['permission']==1 or $_SESSION['permission']=='1') {
         //Here we'll be looping on each of the inputs on the page that are filled in with an image!
         $image = $_FILES['image'];
@@ -1222,17 +1221,14 @@ if (isset($action) and $action == "add_intro_credits") {
 
         while ($query = $query_individual->fetch_array(MYSQLI_BOTH)) {
             if ($query_ind_id <> $query['ind_id']) {
-
                 $sql_ind_nicks = $mysqli->query("SELECT nick_id FROM individual_nicks WHERE ind_id = '$query[ind_id]'");
 
                 while ($fetch_ind_nicks = $sql_ind_nicks->fetch_array(MYSQLI_BOTH)) {
-
                     $nick_id = $fetch_ind_nicks['nick_id'];
 
                     $sql_nick_names = $mysqli->query("SELECT ind_name from individuals WHERE ind_id = '$nick_id'") or die('Error: ' . mysqli_error($mysqli));
 
                     while ($fetch_nick_names = $sql_nick_names->fetch_array(MYSQLI_BOTH)) {
-
                         $smarty->append('ind_nick', array(
                             'ind_id' => $query['ind_id'],
                             'individual_nicks_id' => $nick_id,
@@ -1241,22 +1237,22 @@ if (isset($action) and $action == "add_intro_credits") {
                     }
                 }
 
-               /*  $sql_ind_nick = "SELECT
-                individual_nicks.individual_nicks_id,
-                individual_nicks.nick
-                FROM individuals
-                LEFT JOIN individual_nicks ON (individuals.ind_id = individual_nicks.ind_id)
-                WHERE individuals.ind_id = '$query[ind_id]'";
+                /*  $sql_ind_nick = "SELECT
+                 individual_nicks.individual_nicks_id,
+                 individual_nicks.nick
+                 FROM individuals
+                 LEFT JOIN individual_nicks ON (individuals.ind_id = individual_nicks.ind_id)
+                 WHERE individuals.ind_id = '$query[ind_id]'";
 
-                $query_ind_nick = $mysqli->query($sql_ind_nick) or die('Error: ' . mysqli_error($mysqli));
+                 $query_ind_nick = $mysqli->query($sql_ind_nick) or die('Error: ' . mysqli_error($mysqli));
 
-                while ($query_nick = $query_ind_nick->fetch_array(MYSQLI_BOTH)) {
-                    $smarty->append('ind_nick', array(
-                        'ind_id' => $query['ind_id'],
-                        'individual_nicks_id' => $query_nick['individual_nicks_id'],
-                        'nick' => $query_nick['nick']
-                    ));
-                } */
+                 while ($query_nick = $query_ind_nick->fetch_array(MYSQLI_BOTH)) {
+                     $smarty->append('ind_nick', array(
+                         'ind_id' => $query['ind_id'],
+                         'individual_nicks_id' => $query_nick['individual_nicks_id'],
+                         'nick' => $query_nick['nick']
+                     ));
+                 } */
             }
 
             // This smarty is used for for the menu_disk credits
@@ -1310,17 +1306,14 @@ if (isset($action) and $action == "delete_menu_disk_credits") {
 
         while ($query = $query_individual->fetch_array(MYSQLI_BOTH)) {
             if ($query_ind_id <> $query['ind_id']) {
-
                 $sql_ind_nicks = $mysqli->query("SELECT nick_id FROM individual_nicks WHERE ind_id = '$query[ind_id]'");
 
                 while ($fetch_ind_nicks = $sql_ind_nicks->fetch_array(MYSQLI_BOTH)) {
-
                     $nick_id = $fetch_ind_nicks['nick_id'];
 
                     $sql_nick_names = $mysqli->query("SELECT ind_name from individuals WHERE ind_id = '$nick_id'") or die('Error: ' . mysqli_error($mysqli));
 
                     while ($fetch_nick_names = $sql_nick_names->fetch_array(MYSQLI_BOTH)) {
-
                         $smarty->append('ind_nick', array(
                             'ind_id' => $query['ind_id'],
                             'individual_nicks_id' => $nick_id,
@@ -1329,22 +1322,22 @@ if (isset($action) and $action == "delete_menu_disk_credits") {
                     }
                 }
 
-               /*  $sql_ind_nick = "SELECT
-                individual_nicks.individual_nicks_id,
-                individual_nicks.nick
-                FROM individuals
-                LEFT JOIN individual_nicks ON (individuals.ind_id = individual_nicks.ind_id)
-                WHERE individuals.ind_id = '$query[ind_id]'";
+                /*  $sql_ind_nick = "SELECT
+                 individual_nicks.individual_nicks_id,
+                 individual_nicks.nick
+                 FROM individuals
+                 LEFT JOIN individual_nicks ON (individuals.ind_id = individual_nicks.ind_id)
+                 WHERE individuals.ind_id = '$query[ind_id]'";
 
-                $query_ind_nick = $mysqli->query($sql_ind_nick) or die('Error: ' . mysqli_error($mysqli));
+                 $query_ind_nick = $mysqli->query($sql_ind_nick) or die('Error: ' . mysqli_error($mysqli));
 
-                while ($query_nick = $query_ind_nick->fetch_array(MYSQLI_BOTH)) {
-                    $smarty->append('ind_nick', array(
-                        'ind_id' => $query['ind_id'],
-                        'individual_nicks_id' => $query_nick['individual_nicks_id'],
-                        'nick' => $query_nick['nick']
-                    ));
-                } */
+                 while ($query_nick = $query_ind_nick->fetch_array(MYSQLI_BOTH)) {
+                     $smarty->append('ind_nick', array(
+                         'ind_id' => $query['ind_id'],
+                         'individual_nicks_id' => $query_nick['individual_nicks_id'],
+                         'nick' => $query_nick['nick']
+                     ));
+                 } */
             }
 
             // This smarty is used for for the menu_disk credits
@@ -1379,7 +1372,7 @@ if (isset($action) and ($action == "change_menu_disk_state" or $action == "chang
 
                 create_log_entry('Menu disk', $menu_disk_id, 'State', $state_id, 'Update', $_SESSION['user_id']);
                 $osd_message = 'State updated';
-            // first check if the menu has already a parent entry
+                // first check if the menu has already a parent entry
             } elseif ($action == "change_menu_disk_parent") {
                 $sql = $mysqli->query("SELECT * FROM menu_disk_submenu
                 WHERE menu_disk_id = '$menu_disk_id'") or die('Error: ' . mysqli_error($mysqli));
@@ -1408,10 +1401,9 @@ if (isset($action) and ($action == "change_menu_disk_state" or $action == "chang
                         if ($sql->num_rows > 0) {
                             $osd_message = "This menu still has screenshots, please remove them first";
                         } else {
-
                             create_log_entry('Menu disk', $menu_disk_id, 'Menu disk', $menu_disk_id, 'Delete', $_SESSION['user_id']);
 
-                             //get the menu set id
+                            //get the menu set id
                             $query_menu_sets_id = "SELECT menu_sets_id FROM menu_disk WHERE menu_disk_id = '$menu_disk_id'";
                             $result = $mysqli->query($query_menu_sets_id) or die('Error: ' . mysqli_error($mysqli));
                             $query_id     = $result->fetch_array(MYSQLI_BOTH);
@@ -1422,7 +1414,6 @@ if (isset($action) and ($action == "change_menu_disk_state" or $action == "chang
                             $result = $mysqli->query($sql_menu_disk_title_id) or die('Error: ' . mysqli_error($mysqli));
 
                             while ($query_id = $result->fetch_array(MYSQLI_BOTH)) {
-
                                 $menu_disk_title_id = $query_id['menu_disk_title_id'];
 
                                 //get the doc cross id
@@ -1711,7 +1702,7 @@ if (isset($action) and ($action == "change_menu_disk_state" or $action == "chang
             ));
         }
 
-         //get the doc types
+        //get the doc types
         $sql_doc_type = "SELECT * from doc_type";
         $query_doc_type = $mysqli->query($sql_doc_type) or die('Error: ' . mysqli_error($mysqli));
 
@@ -1734,23 +1725,22 @@ if (isset($action) and ($action == "change_menu_disk_state" or $action == "chang
               WHERE menu_disk_credits.menu_disk_id = '$menu_disk_id'
               ORDER BY individuals.ind_name ASC";
 
-        $query_individual = $mysqli->query($sql_individuals) or die('Error: ' . mysqli_error($mysqli));;
+        $query_individual = $mysqli->query($sql_individuals) or die('Error: ' . mysqli_error($mysqli));
+        ;
 
         $query_ind_id = "";
 
         while ($query = $query_individual->fetch_array(MYSQLI_BOTH)) {
             if ($query_ind_id <> $query['ind_id']) {
-
-                $sql_ind_nicks = $mysqli->query("SELECT nick_id FROM individual_nicks WHERE ind_id = '$query[ind_id]'") or die('Error: ' . mysqli_error($mysqli));;
+                $sql_ind_nicks = $mysqli->query("SELECT nick_id FROM individual_nicks WHERE ind_id = '$query[ind_id]'") or die('Error: ' . mysqli_error($mysqli));
+                ;
 
                 while ($fetch_ind_nicks = $sql_ind_nicks->fetch_array(MYSQLI_BOTH)) {
-
                     $nick_id = $fetch_ind_nicks['nick_id'];
 
                     $sql_nick_names = $mysqli->query("SELECT ind_name from individuals WHERE ind_id = '$nick_id'") or die('Error: ' . mysqli_error($mysqli));
 
                     while ($fetch_nick_names = $sql_nick_names->fetch_array(MYSQLI_BOTH)) {
-
                         $smarty->append('ind_nick', array(
                             'ind_id' => $query['ind_id'],
                             'individual_nicks_id' => $nick_id,
@@ -1759,22 +1749,22 @@ if (isset($action) and ($action == "change_menu_disk_state" or $action == "chang
                     }
                 }
 
-              /*   $sql_ind_nick = "SELECT
-                individual_nicks.individual_nicks_id,
-                individual_nicks.nick
-                FROM individuals
-                LEFT JOIN individual_nicks ON (individuals.ind_id = individual_nicks.ind_id)
-                WHERE individuals.ind_id = '$query[ind_id]'";
+                /*   $sql_ind_nick = "SELECT
+                  individual_nicks.individual_nicks_id,
+                  individual_nicks.nick
+                  FROM individuals
+                  LEFT JOIN individual_nicks ON (individuals.ind_id = individual_nicks.ind_id)
+                  WHERE individuals.ind_id = '$query[ind_id]'";
 
-                $query_ind_nick = $mysqli->query($sql_ind_nick) or die('Error: ' . mysqli_error($mysqli));
+                  $query_ind_nick = $mysqli->query($sql_ind_nick) or die('Error: ' . mysqli_error($mysqli));
 
-                while ($query_nick = $query_ind_nick->fetch_array(MYSQLI_BOTH)) {
-                    $smarty->append('ind_nick', array(
-                        'ind_id' => $query['ind_id'],
-                        'individual_nicks_id' => $query_nick['individual_nicks_id'],
-                        'nick' => $query_nick['nick']
-                    ));
-                } */
+                  while ($query_nick = $query_ind_nick->fetch_array(MYSQLI_BOTH)) {
+                      $smarty->append('ind_nick', array(
+                          'ind_id' => $query['ind_id'],
+                          'individual_nicks_id' => $query_nick['individual_nicks_id'],
+                          'nick' => $query_nick['nick']
+                      ));
+                  } */
             }
 
             // This smarty is used for for the menu_disk credits
@@ -2593,20 +2583,17 @@ if ($action == 'add_author' or $action == 'delete_menu_disk_title_credits') {
                                 WHERE menu_disk_title_author.menu_disk_title_id = '$menu_disk_title_id'
                                 ORDER BY individuals.ind_name ASC";
 
-    $query_author_info = $mysqli->query($sql_author_info) or die ("problem getting author info");
+    $query_author_info = $mysqli->query($sql_author_info) or die("problem getting author info");
 
     while ($query = $query_author_info->fetch_array(MYSQLI_BOTH)) {
-
         $sql_ind_nicks = $mysqli->query("SELECT nick_id FROM individual_nicks WHERE ind_id = '$query[ind_id]'");
 
         while ($fetch_ind_nicks = $sql_ind_nicks->fetch_array(MYSQLI_BOTH)) {
-
             $nick_id = $fetch_ind_nicks['nick_id'];
 
             $sql_nick_names = $mysqli->query("SELECT ind_name from individuals WHERE ind_id = '$nick_id'") or die('Error: ' . mysqli_error($mysqli));
 
             while ($fetch_nick_names = $sql_nick_names->fetch_array(MYSQLI_BOTH)) {
-
                 $smarty->append('ind_nick', array(
                     'ind_id' => $query['ind_id'],
                     'individual_nicks_id' => $nick_id,
@@ -2648,5 +2635,4 @@ if ($action == 'add_author' or $action == 'delete_menu_disk_title_credits') {
 
     //Send all smarty variables to the templates
     $smarty->display("file:" . $cpanel_template_folder . "ajax_menus_detail.html");
-
 }
