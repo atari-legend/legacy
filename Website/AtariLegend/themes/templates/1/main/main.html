@@ -237,20 +237,17 @@
                           </a>
                           <div id="login-content">
                             {if ! isset($user_session.userid)}
-                                <form action="../../common/login/user_process_login.php" method="post" name="login_form">
+                                <form action="../../common/login/user_process_login.php" method="post" name="login_form" onsubmit="formhash(this, this.password);">
                                 <fieldset>
                                     <input class="standard_tile_input_small" type="text" name="userid" placeholder="Username" required>
                                     <input class="standard_tile_input_small" type="password" name="password" placeholder="Password" required>
-                                    <br><br>
-                                    <button type="button" value="Login" class="topbutton_cpanel_small" onclick="formhash(this.form, this.form.password);">
-                                        Sign in
-                                    </button>
-                                    <br><br>
                                     <div class="links_mod_checkbox">
                                         <input type="checkbox" id="remember_me" name="remember_me" value="1">
                                         <label for="remember_me"></label>&nbsp;Remember me
                                     </div>
                                     <br>
+                                    <input type="submit" value="Sign in" class="topbutton_cpanel_small">
+                                    <br><br>
                                     <span class="log_on_text"><a href="../../main/front/front.php?action=reset" class="standard_tile_link_black"><i class="fa fa-angle-double-right" aria-hidden="true"></i>&nbsp;Forgot password?</a></span>
                                     <br>
                                     <span class="log_on_text"><a href="../../main/front/front.php?action=register" class="standard_tile_link_black"><i class="fa fa-angle-double-right" aria-hidden="true"></i>&nbsp;No account? Sign up now <i class="fa fa-chevron-right" aria-hidden="true"></i></a></span>
