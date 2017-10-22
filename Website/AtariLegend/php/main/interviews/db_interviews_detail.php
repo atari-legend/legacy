@@ -16,6 +16,7 @@
 //*********************************************************************************************
 
 include("../../config/common.php");
+include("../../config/admin.php");
 
 if (isset($action)) {
     if ($action=='delete_comment') {
