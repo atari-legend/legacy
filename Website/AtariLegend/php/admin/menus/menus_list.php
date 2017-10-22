@@ -44,7 +44,7 @@ $sql_menus = "SELECT menu_set.menu_sets_id,
                         LEFT JOIN menu_types_main ON (menu_type.menu_types_main_id = menu_types_main.menu_types_main_id)
                         ORDER BY menu_sets_name ASC";
 
-$result_menus = $mysqli->query($sql_menus) or die("error in query");
+$result_menus = $mysqli->query($sql_menus) or die('Error: ' . mysqli_error($mysqli));
 
 $rows = $result_menus->num_rows;
 if ($rows > 0) {
@@ -53,7 +53,7 @@ if ($rows > 0) {
         $i++;
 
         //check how many menus there are for the game
-        $numbermenus = $mysqli->query("SELECT count(*) as count FROM menu_disk WHERE menu_sets_id='$row[menu_sets_id]'") or die("couldn't get number of zaks");
+        $numbermenus = $mysqli->query("SELECT count(*) as count FROM menu_disk WHERE menu_sets_id='$row[menu_sets_id]'") or die('Error: ' . mysqli_error($mysqli));
 
         $array = $numbermenus->fetch_array(MYSQLI_BOTH);
 
@@ -82,4 +82,3 @@ if ($rows > 0) {
 
     //close the connection
     mysqli_free_result($numbermenus);
-
