@@ -242,6 +242,7 @@
 										<form action="#" method="post" name="doc_type_edit{$line.doc_id}" id="doc_type_edit{$line.doc_id}">
 											<select name="doc_type_id" id="quick_search_small_select" style="width:125px;" onchange="ChangeDoctype(this.value,{$line.doc_id},{$menus.menu_disk_id})">
 											<option value="" selected>-</option>
+                                            {if isset($doc_type)}
 												{foreach from=$doc_type item=doc_types}
 													{if $doc_types.doc_type_id == $line.doc_type_id}
 														{html_options values=$doc_types.doc_type_id output=$doc_types.doc_type_name selected=$line.doc_type_id}
@@ -249,6 +250,7 @@
 														{html_options values=$doc_types.doc_type_id output=$doc_types.doc_type_name}
 													{/if}
 												{/foreach}
+                                            {/if}
 											</select>
 										</form>
 									</td>
@@ -495,6 +497,7 @@
 					<form action="#" method="post" name="doc_type_edit{$line.doc_id}" id="doc_type_edit{$line.doc_id}">
 						<select name="doc_type_id" id="quick_search_small_select" style="width:125px;" onchange="ChangeDoctype(this.value,{$line.doc_id},{$menu_disk_id})">
 						<option value="" selected>-</option>
+                            {if isset($doc_type)}
 							{foreach from=$doc_type item=doc_types}
 								{if $doc_types.doc_type_id == $line.doc_type_id}
 									{html_options values=$doc_types.doc_type_id output=$doc_types.doc_type_name selected=$line.doc_type_id}
@@ -502,6 +505,7 @@
 									{html_options values=$doc_types.doc_type_id output=$doc_types.doc_type_name}
 								{/if}
 							{/foreach}
+                            {/if}
 						</select>
 					</form>
 				</td>
