@@ -1,0 +1,112 @@
+{*
+/***************************************************************************
+*                                games_detail_comments.html
+*                            -----------------------------------
+*   begin                : Saturday, September 9, 2017
+*   copyright            : (C) 2017 Atari Legend
+*   email                : martens_maarten@hotmail.com
+*   actual update        : Creation of file
+*
+*   Id: games_detail_comments.html,v 0.1 2017/09/09 11:23 STG
+*
+***************************************************************************/
+
+//****************************************************************************************
+// This is the game comments on the game detail page. This piece is always used as an include
+//****************************************************************************************
+*}
+            
+<div class="standard_tile">
+    <div class="help-tip">
+        <p> 
+            <u>Only available with your own comments:</u><br>
+            <i class="fa fa-pencil" aria-hidden="true"></i> - Edit comment<br>
+            <i class="fa fa-floppy-o" aria-hidden="true"></i> - Save changes to comment<br>
+            <i class="fa fa-trash-o" aria-hidden="true"></i> - Delete comment (if )<br><br>
+            <u>General options:</u><br>
+            <i class="fa fa-envelope" aria-hidden="true"></i> - Email author of comment<br>
+            <i class="fa fa-facebook-square" aria-hidden="true"></i> - Go to Facebook profile of author<br>
+            <i class="fa fa-twitter" aria-hidden="true"></i> - Go to Twitter profile of author<br>
+            <i class="fa fa-external-link-square" aria-hidden="true"></i> - Visit external link
+        </p>
+    </div>
+    <h1><a href="../games/games_comment_main.php" class="standard_tile_link" title="Click to see all comments">COMMENTS</a></h1>
+    <div class="standard_tile_line"></div>
+    {if isset($user_session)}
+        <form name="post">
+        <div class="standard_list_entry">
+            <div style="width:100%;text-align:center;margin-top:10px;">
+                <input type="button" accesskey= "b" name="addbbcode0" value="B" onclick="bbstyle(0,'textfield')" class="quick_search_games_button" style="min-width:20px;width:0;display:inline;" title="Bold">
+                <input type="button" accesskey= "u" name="addbbcode4" value="U" onclick="bbstyle(4,'textfield')" class="quick_search_games_button" style="min-width:20px;width:0;display:inline;" title="Underline">
+                <input type="button" accesskey= "i" name="addbbcode2" value="I" onclick="bbstyle(2,'textfield')" class="quick_search_games_button" style="min-width:20px;width:0;display:inline;" title="Recursive">
+                <input type="button" accesskey="w" name="addbbcode6" value="URL" onClick="bbstyle(6,'textfield')" class="quick_search_games_button" style="min-width:40px;width:0;display:inline;" title="Add links">			  
+                <input type="button" accesskey="x" name="addbbcode8" value="@" onClick="bbstyle(8,'textfield')" class="quick_search_games_button" style="min-width:20px;width:0;display:inline;" title="Add email address"> 
+                <textarea id="comment_add" class="games_main_detail_comments_add" style="margin-top:10px;margin-bottom:10px;" name="textfield" ONSELECT="javascript:storeCaret(this);" ONCLICK="javascript:storeCaret(this);" ONKEYUP="javascript:storeCaret(this);" ONCHANGE="javascript:storeCaret(this);"></textarea>
+            </div>
+        </div>
+        <div style="text-align:center;">
+            <input type="button" value="Add" class="quick_search_games_button" style="margin-bottom:10px;" onClick="AddComment({$user_session.user_id},{$game_info.game_id})">
+        </div>
+        </form>
+    {else}
+        <div class="standard_list_entry" style="height:0;">
+            <div class="games_main_detail_comments_log_on">
+                Please log in to add your own comment to this game.
+            </div>
+        </div>
+    {/if}
+    <div class="standard_tile_line"></div>
+    <div id="latest_comments_all">
+    {if isset($comments)} 
+        <div class="games_main_detail_comments_container">
+            <div class="standard_list_entry">                                                  
+                <table class="standard_table_list_comments">
+                {foreach from=$comments item=line}
+                    <tr>
+                        <td class="standard_table_left">
+                            <span class="standard_tile_subtext" style="font-weight:bold;float:left;margin-left:5px;margin-right:5px;margin-top:15px;">
+                                <a href="../../admin/user/user_detail.php?user_id_selected={$line.user_id}">{$line.user_name}</a>
+                            </span>
+                            <span class="standard_tile_subtext" style="font-weight:bold;float:right;display:inline;margin-left:5px;margin-right:5px;margin-top:15px;">
+                                {if isset($user_session)}
+                                    <span style="font-weight:bold;float:left;margin-left:5px;">
+                                    {if $user_session.user_id == $line.user_id}
+                                        <a style="cursor: pointer;" onClick="CommentEditable({$line.comment_id},{$line.user_id})" class="latest_comments_link"><i class="fa fa-pencil" id="comment_edit_icon{$line.comment_id}" aria-hidden="true"  title="Click to edit comment"></i></a>
+                                        <a style="cursor: pointer;" onClick="SaveEditable({$line.comment_id},{$line.user_id},{$game_info.game_id})" class="latest_comments_link"><i class="fa fa-floppy-o" id="comment_save_icon{$line.comment_id}" aria-hidden="true" title="Click to save change" style="display:none;"></i></a>
+                                        <a style="cursor: pointer;" onClick="DeleteEditable({$line.comment_id},{$line.user_id},{$game_info.game_id})" class="latest_comments_link"><i class="fa fa-trash-o" id="comment_delete_icon{$line.comment_id}" aria-hidden="true" title="Click to delete comment"></i></a>
+                                    {/if}
+                                    {if $line.email != ''}
+                                        <a href="mailto:{$line.email}?subject=Comment%20of%20{$line.game|escape:'url'}%20at%20Atari%20Legend" class="latest_comments_link" title="Click to email user"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+                                    {/if}
+                                    {if $line.user_fb != ''}
+                                        <a href="{$line.user_fb}" class="latest_comments_link" title="Click to visit Facebook profile"><i class="fa fa-facebook-square" aria-hidden="true"></i></a>
+                                    {/if}
+                                    {if $line.user_twitter != ''}
+                                        <a href="{$line.user_twitter}" class="latest_comments_link" title="Click to visit Twitter profile"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                                    {/if}   
+                                    {if $line.user_af != ''}
+                                        <a href="{$line.user_af}" class="latest_comments_link" title="Click to visit Atari-Forum profile"><i class="fa fa-external-link-square" aria-hidden="true"></i></a>
+                                    {/if}
+                                    {if $line.user_website != ''}
+                                        <a href="{$line.user_website}" class="latest_comments_link" title="Click to visit users website"><i class="fa fa-external-link-square" aria-hidden="true"></i></a>
+                                    {/if}                               
+                                    </span>
+                                {/if}
+                            </span>
+                            <div class="latest_comments_text">
+                                <div id="latest_comment_edit{$line.comment_id}"><div id="games_detail_review_main_text">{$line.comment}</div></div>
+                                <div style="width:100%;text-align:center;"><textarea id="comment_input{$line.comment_id}" class="latest_comments_textarea" style="display:none;" cols="80">{$line.comment_edit}</textarea></div>
+                            </div> 
+                            <span class="standard_tile_subtext" style="font-weight:bold;float:right;display:inline;margin-right:5px;margin-bottom:15px;">
+                                {$line.date}
+                            </span>
+                        </td>
+                    </tr>
+                {/foreach}
+                </table>     
+            </div>
+        </div>
+    {/if}
+    </div>
+    <div class="standard_tile_line"></div>
+</div>  

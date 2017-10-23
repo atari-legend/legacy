@@ -1,0 +1,76 @@
+{* 
+/***************************************************************************
+*                                games_review.html
+*                            --------------------------
+*   begin                : Sunday, November 27, 2005
+*   copyright            : (C) 2005 Atari Legend
+*   email                : admin@atarilegend.com
+*						   Created file
+*						
+*   Id:  games_review.html,v 0.10 2005/11/27 ST Graveyard
+*   Id:  games_review.html,v 0.20 2016/07/22 ST Graveyard
+*						- AL 2.0
+*
+***************************************************************************/
+
+************************************************************************************************
+The main game review
+************************************************************************************************
+*}
+{extends file='1/admin/frontpage.html'}
+
+{block name=title}Add/Edit a game review entry{/block}
+
+{block name=main_tile}
+<div class="standard_tile" id="games_review">
+	<h1>GAME REVIEWS</h1>
+	<div class="standard_tile_line"></div>
+	<div class="standard_tile_text">
+		<div class="left_nav_section">
+			In this section you can add or edit game reviews. There are currently <b>{$review_nr}</b> reviews for <b>{$game_review_nr}</b> games in the DB for !
+		</div> 
+		<br>
+		<br>
+		<form action="../games/games_review_list.php" method="post" name="game_review" id="game_review">
+		<fieldset class="centered_fieldset">
+			<legend class="links_legend">Add new Reviews</legend>
+			<b>By name :</b>
+			<select name="gamebrowse" id="quick_search_small_select">
+				<option value="" SELECTED>-</option>
+				{html_options values=$az_value output=$az_output}
+			</select>
+			<input type="text" name="gamesearch" value="" class="standard_tile_input_small">
+			<input type="submit" value="Search" class="topbutton_cpanel_small">
+			<br>
+		</fieldset>
+		<input type="hidden" name="action" id="action" value="search">
+		<input type="hidden" name="user_id" id="user_id" value="{$user_id}">
+		</form>
+		<br>
+		<br>
+		{if isset($message)}
+			<div class="message_box">{$message}</div>
+		{/if}
+		<table class="standard_table_list">
+			<tr>
+				<th id="gamename_gr_th">Game Name</th>
+				<th id="gamepub_gr_th">Publisher</th>
+				<th id="username_gr_th">Username</th>
+				<th id="reviewdate_gr_th">Review date</th>
+				<th id="nrreviews_gr_th">Nr</th>
+			</tr>
+			{foreach from=$review item=line}
+				<tr>
+					<td class="gamename_gr_td">{if $line.game_name != ''}<a href="games_review_add.php?game_id={$line.game_id}" class="standard_table_center">{$line.game_name}</a>{else}<i>n/a</i>{/if}</td>
+					<td class="gamepub_gr_td">{if $line.game_publisher != ''}{$line.game_publisher}{else}<i>n/a</i>{/if}</td>
+					<td class="username_gr_td">{$line.username}</td>
+					<td class="reviewdate_gr_td">{$line.review_date}</td>				
+					<td class="nrreviews_gr_td">{if $line.number_reviews != ''}{$line.number_reviews}{else}<i>0</i>{/if}</td>
+				</tr>
+			{/foreach}
+		</table>
+		<br>
+		<div class="standard_table_center"><a href="javascript:history.go(-1)" class="standard_tile_link">back</a></div>
+	</div>
+</div>
+{/block}

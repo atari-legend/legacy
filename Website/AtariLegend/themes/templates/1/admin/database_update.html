@@ -1,0 +1,97 @@
+{* 
+/***************************************************************************
+*                                site_admin.html
+*                            --------------------------
+*   begin                : 2016-02-13
+*   copyright            : (C) 2015 Atari Legend
+*   email                : admin@atarilegend.com
+*
+*   Id: site_admin.html,v 0.1 Silver Surfer
+*
+***************************************************************************/
+*}
+{extends file='1/admin/frontpage.html'}
+
+{* {block name=left_tile} *}
+
+<!-- <div class="standard_tile" id="{$left_nav}">
+	<h1>ADMIN</h1>
+		<div class="standard_tile_line"></div>
+		<div class="standard_list_entry">
+			<div class="standard_tile_text">
+				<ul class="standard_table_list">
+					<li class="left_nav_section">Sections</li>
+					<li><a href="../administration/database_update.php" class="left_nav_link">Database Update</a></li>
+					<li><a href="../administration/construction.php" class="left_nav_link">Website Settings</a></li>
+					<li><a href="../administration/construction.php" class="left_nav_link">Website Themes</a></li>
+				</ul>
+			</div>			
+		</div>
+	<div class="standard_tile_line"></div>
+</div> -->
+
+{* {/block} *}
+
+{block name=java_script}
+<script type="text/javascript">
+function UpdateDatabase(database_update_id) 
+{ 
+            // CONFIRM REQUIRES ONE ARGUMENT 
+         var message = "Are you sure? There is no going back from this..."; 
+         // CONFIRM IS BOOLEAN. THAT MEANS THAT 
+         // IT RETURNS TRUE IF 'OK' IS CLICKED 
+         // OTHERWISE IT RETURN FALSE 
+         var return_value = confirm(message); 
+ 
+         if (return_value !="0") 
+         { 
+              url="db_database_update.php?action=update_database&update_script_id="+database_update_id; 
+               location.href=url; 
+         }  
+} 
+</script>
+{/block}
+{block name=main_tile}
+<div class="standard_tile">
+    <div class="help-tip">
+		<p>This is an overview of the scripts that have been executed throughout the development of AL 2.0. Once a script is executed succesfully, it can't be executed again.
+        {if $user_session.permission == '1'}
+           <br><br><b>Some technical info for the admins : </b><br>
+           Each script contains a var called $database_update_sql which contains the simple SQL statement. However, sometimes it is needed to run more complex scripts. 
+           If we want to do this, 2 things need to be kept in mind : 
+           <br> 1) create a normal script file with the database update variables, however, this time the $database_update_sql variable 
+           should contain a link to the more complex script file. 
+           <br> 2) the actual script file must be placed in the database_scripts folder as well, and its filename should contain the word 'addition'. 
+           <br><br><i> An example of this way of working can be found in files 2017-01-30_merge_nicknames_into_individuals.php and 2017-01-30_merge_nicknames_into_individuals-addition.php</i></p>
+        {/if}
+	</div>
+	<h1>DATABASE UPDATES</h1>
+	<div class="standard_tile_line"></div>
+	<div class="standard_tile_text">
+		<div class="main_stats_container">
+			<table class="standard_table_list">
+			<tr>
+				<th class="th_db_id">ID</th>
+				<th class="th_db_description">Description</th>
+				<th class="th_db_result">Test</th>
+				<th class="th_db_state">Status</th>
+				<th class="th_db_exe">Action</th>
+			</tr>
+			{foreach from=$database_update item=line}
+			<tr>
+				<td class="td_db_id">{$line.database_update_id}</td>
+				<td class="td_db_description">{$line.update_description}</td>
+				<td class="td_db_result">{$line.test_result}</td>
+				<td class="td_db_state">{$line.implementation_state}</td>
+				<td class="td_db_exe">
+					{if $line.allow_execute=='yes'}
+						<button class="quick_search_games_button" onclick="UpdateDatabase({$line.database_update_id});">Execute</button>
+					{/if}
+				</td>
+			</tr>
+			{/foreach}
+			</table>	
+		</div>
+	</div>
+</div>
+{/block}

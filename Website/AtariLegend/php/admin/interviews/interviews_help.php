@@ -8,19 +8,25 @@
 *   actual update        : created this page
 *
 *   Id: interviews_help.php,v 0.10 2005/07/31 18:01 Gatekeeper
+*   Id: interviews_help.php,v 0.20 2016/08/03 23:03 Gatekeeper
+*           - AL 2.0
 *
 ***************************************************************************/
 
 //****************************************************************************************
-// This is the interview help page. 
-//**************************************************************************************** 
+// This is the interview help page.
+//****************************************************************************************
 
-include("../includes/common.php");
+include("../../config/common.php");
+include("../../config/admin.php");
 
-$smarty->assign("user_id",$_SESSION['user_id']);
+//load the search fields of the quick search side menu
+include("../../admin/games/quick_search_games.php");
+
+$smarty->assign("user_id", $_SESSION['user_id']);
 
 //Send all smarty variables to the templates
-$smarty->display('file:../templates/0/interviews_help.html');
+$smarty->display("file:".$cpanel_template_folder."interviews_help.html");
 
 //close the connection
 mysqli_close($mysqli);

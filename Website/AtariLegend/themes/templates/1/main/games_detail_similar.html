@@ -1,0 +1,44 @@
+{*
+/***************************************************************************
+*                                games_detail_similar.html
+*                            -----------------------------------
+*   begin                : Saturday, September 9, 2017
+*   copyright            : (C) 2017 Atari Legend
+*   email                : martens_maarten@hotmail.com
+*   actual update        : Creation of file
+*
+*   Id: games_detail_similar.html,v 0.1 2017/09/09 11:23 STG
+*
+***************************************************************************/
+
+//****************************************************************************************
+// This is the similar game on the game detail page. This piece is always used as an include
+//****************************************************************************************
+*}
+
+{if isset($similar)}
+    <link rel="stylesheet" href="{$template_dir}includes/font-awesome-4.7.0/css/font-awesome.min.css"> <!-- Font awesome for icons-->
+    <br>
+    <div class="games_main_details_similar_position">
+        <div class="standard_tile">		
+            <h1>SIMILAR GAME</h1>
+            <div class="standard_tile_line"></div>
+            <div class="standard_tile_background">
+                <div class="grid">
+                    <figure class="effect-tile" style="margin:0px;">
+                        <img class="standard_tile_image" src="../../includes/show_image.php?file={$similar.screenshot}&amp;resize=410,null,null,null&amp;crop=left,top,410,260&amp;minimum_size=410,260" alt="screenstar">            
+                        <figcaption>
+                            <span class="standard_tile_subtext" style="left: 5%; position: absolute; top: 50%;">
+                                <a href="games_main_list.php?developer={$similar.game_dev_id}&amp;action=search">{$similar.game_dev_name}</a>
+                            </span><span class="tile_arrow"><i class="fa fa-chevron-up" aria-hidden="true"></i></span>                    
+                            <span class="tile_title"><a href="../games/games_detail.php?game_id={$similar.game_id}">{$similar.game_name}</a></span>     
+                            <p class="icon-links" style="width:85%;">
+                                <span class="standard_tile_subtext" style="font-size:7pt;"><a href="../games/games_main_list.php?year={$similar.game_year}&action=search">{$similar.game_year}</a></span>
+                            </p>
+                        </figcaption>			
+                    </figure>
+                </div>
+            </div>
+        </div>
+    </div>
+{/if}

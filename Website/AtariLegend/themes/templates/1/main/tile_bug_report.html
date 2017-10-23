@@ -1,0 +1,54 @@
+{* 
+/***************************************************************************
+*                              tile_bug_report.html
+*                            --------------------------
+*   begin                : September 12, 2017
+*   copyright            : (C) 2017 Atari Legend
+*   email                : admin@atarilegend.com
+*
+*   Id: tile_bug_report.html,v 0.10 2017/09/12 ST Graveyard
+*
+***************************************************************************/
+
+//****************************************************************************************
+// This is the bug report tile
+//**************************************************************************************** 
+*}
+
+<div class="standard_tile">                   
+    <h1>SUBMIT BUG</h1>
+    <div class="standard_tile_line"></div>
+    <div class="standard_tile_text">     
+        <h6 style="text-align:justify;">
+            Did you stumble upon a bug? Are there any issues with the layout? Or do you have a general remark to help us make this site better? Please let us know.
+        </h6>
+    </div>
+    {if isset($user_session)}
+        <form method="post" name="post_bug" action="../../common/tiles/db_tile_bug_report.php">
+            <div class="standard_list_entry">
+                <div style="width:100%;text-align:center;margin-top:10px;">
+                    <select name="bug_report_type" id="quick_search_pub_select">
+                        <option value="-" SELECTED>-</option>
+                        {foreach from=$bug_report_type item=line} 
+                            <option value="{$line.bug_report_type_id}">{$line.bug_report_type}</option>
+                        {/foreach}
+                    </select>		
+                    <!--<input type="text" name="news_headline" class="standard_tile_input_small" style="width:90%;" value="Headline">-->
+                </div>
+                <div style="width:100%;text-align:center;margin-top:10px;">
+                     <textarea class="games_main_detail_comments_add" style="margin-top:10px;margin-bottom:10px;" name="textfield_bug">Bug report</textarea>
+                </div>
+            </div>
+            <div style="text-align:center;">
+                <input type="submit" value="Add" class="quick_search_games_button" style="margin-bottom:10px;">
+            </div>
+        </form>
+    {else}
+        <div class="standard_list_entry" style="height:0;">
+            <div class="games_main_detail_comments_log_on">
+                Please log in to submit a bug report.
+            </div>
+        </div>
+    {/if}
+</div>    
+        

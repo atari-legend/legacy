@@ -1,0 +1,336 @@
+//*************************************************************/
+//**********************PICASSO SKIN***************************/
+//*************************************************************/
+//**************************************************************/
+//***This is the css code for the front page of the main site***/
+//**************************************************************/
+//*------------Welcome tile settings --> frontpage------------ */
+
+#welcome {
+    position: relative;
+    float: left;
+    width: 845px;
+    height: 460px;
+    margin-top: 20px; 
+    margin-bottom: 20px;
+    overflow: hidden;
+    border-top: 10px solid #161c71;
+    border-right: 1px solid #161c71;
+    border-bottom: 3px solid #161c71;
+    border-left: 1px solid #161c71;
+}
+
+.welcome_slides {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 845px;
+    height: 460px;
+    overflow: hidden;
+    cursor: move;
+}
+
+#welcome p {
+    padding-right: 5%;
+    padding-left: 5%;   
+    text-align: center; 
+}
+
+.trivia_title {
+    font-size: 20pt;
+    color: #000;
+}
+
+.trivia_tag { font-size: 13pt; color: #161c71; font-weight: bold;}
+.trivia_text {
+    font-size: 13pt;
+    color: white;
+}
+
+//*----------------------------------------------------------
+//register tile --> front page
+//------------------------------------------------------------ */
+.register {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.register_input{
+    width: 100%;
+    text-align:center;
+}
+
+//*----------------------------------------------------------
+//logon tile --> front page --> Not used anymore
+//------------------------------------------------------------ */
+.logon {
+    float: right;
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.logon_input_usn {
+    position: relative;
+    width: 100%;
+    margin-top: 20px;
+    margin-left: 10%;
+}
+
+.logon_username_icon::before {
+    display: block;
+    content: url('../images/logon_usn.png');
+}
+
+.logon_password_icon::before {
+    display: block;
+    content: url('../images/logon_pwd.png');
+}
+
+.logon_facebook_button, .logon_twitter_button{text-align: center;}
+
+/* we will be implementing this at a later stage
+/*.logon_facebook_button::before {content: url('../images/login-facebook.png');} */
+
+/*.logon_twitter_button::before {content: url('../images/login_twitter.png');} */
+
+
+.logon_left {
+    position: absolute;
+    left: 0;
+    width: 10%;
+}
+
+.logon_right {
+    position: absolute;
+    left: 45px;
+    width: 90%;
+}
+
+.logon_input_pwd {
+    position: relative;
+    width: 100%;
+    margin-top: 85px;
+    margin-left: 10%;
+}
+
+.logon_signin {margin-top: 170px;}
+.logon_signin img {
+    display: block;
+    margin: auto;
+}
+
+.logon_signin img:hover {opacity: .7; }
+.logon_socmed {
+    width: 100%;
+    margin-top: 10px;
+}
+
+.logon_socmed:hover {opacity: .7;}
+
+//*----------------------------------------------------------
+//screenstar --> front page
+//------------------------------------------------------------ */
+.screenstar_position_front{margin-top: 20px; margin-bottom: 20px;}
+
+//*----------------------------------------------------------
+//latest news tile --> front page
+//------------------------------------------------------------ */
+.latest_news { margin-bottom: 20px; }
+ 
+
+//*----------------------------------------------------------
+//datequote tile - front page
+//------------------------------------------------------------ */
+.datequote_position_front {margin-bottom: 20px;}
+.datequote_bg {background: url('../images/datequote_bg.jpg');}
+.datequote_bg p {text-align: center;}
+.datequote_day {
+    margin-top: 0;
+    margin-bottom: -20px;
+    font-size: 85pt;
+    color: #fff;
+}
+
+.datequote_month {
+    margin-top: -10px;
+    margin-bottom: -10px;
+    font-size: 30pt;
+    color: #fff;
+}
+
+.datequote_year {
+    margin-top: -10px;
+    font-size: 55pt;
+    color: #ccc;
+    text-align: center;
+}
+
+.datequote_text {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    //* RGBa with 0.6 opacity */
+    color: #fff;
+    background: rgb(192, 193, 202) transparent;
+    //* Fallback for web browsers that doesn't support RGBa */
+    background: rgba(192, 193, 202, .6);
+}
+
+//*----------------------------------------------------------
+//tile open DB - front page
+//------------------------------------------------------------ */
+.tile_open_db_front { margin-bottom: 20px;}
+
+
+//*----------------------------------------------------------
+//Who is it - front page
+//------------------------------------------------------------ */
+.whoisit_position_front {margin-bottom: 20px;}
+
+//*----------------------------------------------------------
+//Latest reviews tile - front page
+//------------------------------------------------------------ */
+.latest_reviews {margin-bottom: 20px;}
+
+//*----------------------------------------------------------
+//Did you know tile - front page
+//------------------------------------------------------------ */
+.didyouknow_position_front {margin-bottom: 20px;}
+
+//*----------------------------------------------------------
+//Hotlinks tile - front page
+//------------------------------------------------------------ */
+.hotlinks_position_front {margin-bottom: 20px;}
+
+//*----------------------------------------------------------
+//Class tile - front page
+//------------------------------------------------------------ */
+.class_position_front { margin-bottom: 20px; }
+
+//*----------------------------------------------------------
+//Social corner tile - front page
+//------------------------------------------------------------ */
+.social_corner_position_front { margin-bottom: 20px; }
+
+//*----------------------------------------------------------
+//contact tiles - front page
+//------------------------------------------------------------ */
+.contact_tiles {
+    margin-bottom: 20px;
+    background: none;
+    border: none;
+}
+
+.contact_tiles >a >div {
+    max-width: 100%;
+    margin-bottom: 20px;
+}
+
+.contact_email_button {
+    display: block;
+    background-image: url('../images/email.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.contact_email_button >a {
+    display: block;
+    width: 320px;
+    height: 120px;
+}
+
+.contact_facebook_button {
+    display: block;
+    background-image: url('../images/facebook.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.contact_facebook_button >a {
+    display: block;
+    width: 240px;
+    height: 120px;
+}
+
+.contact_jukebox_button {
+    display: block;
+    background-image: url('../images/jukebox.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.contact_jukebox_button >a {
+    display: block;
+    width: 240px;
+    height: 120px;
+}
+
+.contact_chat_button {
+    display: block;
+    background-image: url('../images/chat.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+}
+
+.contact_chat_button >a {
+    display: block;
+    width: 240px;
+    height: 120px;
+}
+
+.contact_tiles img:hover {box-shadow: 0 0 7px #fff;}
+
+//*----------------------------------------------------------
+// Footer
+//------------------------------------------------------------ */
+.footer {
+    float: left;
+    width: 100%;
+    margin-top: 15px;
+    background: url('../images/bottom_bg_sides.jpg') left 0 repeat-x;
+    border-top: 10px solid #161c71;
+}
+
+.footer_logo {
+    height: 120px;
+    font-size: 10pt;
+    color: #fff;
+    text-align: center;
+    background: url('../images/footer_bg.jpg') center 0 no-repeat;
+}
+
+.footer_logo_image::before {
+    display: block;
+    content: url('../images/footer_logo.png');
+}
+
+#footer_img {
+    margin-right: auto;
+    margin-bottom: 5px;
+    margin-left: auto;
+}
+
+//*----------------------------------------------------------
+// Skin specific code for the search results
+//------------------------------------------------------------ */
+//* Component containers----------------------------------*/
+.ui-widget-content {
+    width: 245px;
+    font-size: 13px;
+    color: #fff;
+    background: #000;
+    border: 1px solid #161c71;
+}
+
+// Interaction states
+
+.ui-state-hover,
+.ui-widget-content .ui-state-hover,
+.ui-widget-header .ui-state-hover,
+.ui-state-focus,
+.ui-widget-content .ui-state-focus,
+.ui-widget-header .ui-state-focus {
+    color: #000;
+    background: #dbd7d1;
+    border: 1px solid #4f4f4f;
+}

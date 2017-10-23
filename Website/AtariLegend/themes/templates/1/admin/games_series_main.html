@@ -1,0 +1,57 @@
+{* 
+/***************************************************************************
+*                                games_series_main.html
+*                            -------------------------------
+*   begin                : ?
+*   copyright            : (C) 2005 Atari Legend
+*   email                : maarten.martens@freebel.net
+*   actual update        : created this page
+*
+*   Id: games_series_main.html,v 0.10 ? Silver Surfer
+*   Id: games_series_main.html,v 0.15 2016/07/24 Gatekeeper
+*					- AL 2.0
+*
+***************************************************************************/
+
+************************************************************************************************
+The Main game series page
+************************************************************************************************
+*}
+
+{extends file='1/admin/frontpage.html'}
+
+{block name=title}Game Series - Add Series{/block}
+
+{block name=main_tile}
+<div class="standard_tile" id="games_series_main">
+	<h1>GAME SERIES</h1>
+	<div class="standard_tile_line"></div>
+	<div class="standard_tile_text">
+        <div class="left_nav_section">	
+            Add a new game series by typing the name for it in the field below, click on the add button. And Presto! 
+            You will now have a new series in the series list, click on the new series and start adding games to it!
+        </div>
+        <br>
+        <br>
+        <fieldset class="centered_fieldset">
+            <legend>Create series</legend>	
+            <form action="../games/db_games_series.php" method="post" name="add_series" id="add_series">
+                New name:
+                <input type="text" name="new_series" id="new_series" value="" size="40" maxlength="64" class="standard_tile_input_small">
+                <br>
+                <br>
+                <input type="hidden" name="action" value="addnew_series">
+                <input type="submit" name="inserter" value="Add" class="topbutton_cpanel_small">
+            </form>
+        </fieldset>		
+        <br>
+        <br>
+        <fieldset class="centered_fieldset">
+            <legend>Current series</legend>	
+            {foreach from=$game_series item=line}
+                <a href="../games/games_series_editor.php?series_page=series_editor&amp;game_series_id={$line.game_series_id}" class="left_nav_link">{$line.game_series_name}</a><br>
+            {/foreach}
+        </fieldset>
+	</div>
+</div>
+{/block}

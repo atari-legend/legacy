@@ -1,0 +1,136 @@
+{* 
+/***************************************************************************
+*                                interviews_main.html
+*                            ------------------------------
+*   begin                : Thursday, July 21, 2005
+*   copyright            : (C) 2003 Atari Legend
+*   email                : maarten.martens@freebel.net
+*   actual update        : Start of creation file
+*
+*   Id: interviews_main.html,v 0.10 21/07/2005 22:17 Gatekeeper
+*   Id: interviews_main.html,v 0.20 02/08/2016 22:24 Gatekeeper
+*		- AL 2.0
+*
+***************************************************************************
+
+///****************************************************************************************
+// This is the sub template file to generate the interviews main
+//**************************************************************************************** 
+*}
+{extends file='1/admin/frontpage.html'}
+
+{block name=java_script}
+<script type="text/javascript">
+function deleteinterview(interview_id)
+{	
+	// CONFIRM REQUIRES ONE ARGUMENT
+    var message = "Are you sure you want to delete this interview?";
+    // CONFIRM IS BOOLEAN. THAT MEANS THAT
+    // IT RETURNS TRUE IF 'OK' IS CLICKED
+    // OTHERWISE IT RETURN FALSE
+    var return_value = confirm(message);
+	if (return_value !="0")
+    {
+      	url="db_interview.php?action=delete_interview&interview_id="+interview_id;
+		location.href=url;
+    }
+}
+</script>
+{/block}
+
+{block name=title}Interviews{/block}
+
+{block name=main_tile}
+<div class="standard_tile" id="interviews_main">
+    <div class="help-tip">
+        <p>
+			The first thing that needs to be done is to add an actual interview in the DB. We need to link an
+			interview to an actual person. To add an interview to the AL DB you click on the "Add an Interview" link at the left side. There you'll have to search for the individual you want to interview.
+			Once this is done, you will enter the interview main screen. This is where the actual interview is inserted in the DB.
+        </p>
+    </div>
+	<h1>INTERVIEWS</h1>
+	<div class="standard_tile_line"></div>
+	<div class="standard_tile_text">
+		<div class="left_nav_section">		
+			Overhere you can add a new interview or edit an existing interview. If you like to edit an interview,
+			just look up the person in the dropdown list and press <b>search</b>. If you like a list of all interviewed
+			people, just press search without making a selection. If you like to add an interview, select the person
+			and press the <b>add</b> button.
+		</div> 
+		<br>
+		<br>
+		<div class="main_company_container">
+			<div class="main_company_child" id="child_edit_company">
+				<fieldset>
+					<legend>Search Interview</legend>		
+					<form action="../interviews/interviews_main.php" method="post" name="search">
+						<select name="individual_search" id="quick_search_pub_select">
+							<option value="-" selected>-</option>
+							{foreach from=$individuals_interviewed item=line}
+								<option value="{$line.ind_id}">{$line.ind_name}</option>
+							{/foreach}	
+						</select>
+						<input type="submit" value="Search" class="topbutton_cpanel_small">
+						<input type="hidden" name="action" value="search">
+					</form>	
+				</fieldset>
+			</div>
+			<div class="main_company_child" id="child_add_company">
+				<fieldset>
+					<legend>Add an Interview</legend>
+					<form action="../interviews/interviews_add.php" method="post" name="insert">
+						<select name="individual_create" id="quick_search_pub_select">
+							<option value="-" selected>-</option>
+							{foreach from=$individuals item=line}
+								<option value="{$line.ind_id}">{$line.ind_name}</option>
+							{/foreach}	
+						</select>
+						<input type="submit" value="Add" class="topbutton_cpanel_small">
+						<input type="hidden" name="user_id" id="user_id" value="{$user_id}">
+					</form>	
+				</fieldset>
+			</div>
+		</div>
+		<br>
+		<br>
+		{if isset($interview)}
+			{foreach from=$interview item=line}
+				<fieldset>
+					<legend>
+					{if $line.user_email <> ''}	
+						<a href="mailto:{$line.user_email}?subject=Your%20interview%20with%20{$line.email_name}%20at%20Atari%20Legend" class="left_nav_link">{$line.user_id}</a> - {$line.interview_date}
+					{else}
+						{$line.user_id} - {$line.interview_date}
+					{/if}	
+					</legend>
+					<br>
+					Interview with <a href="../individuals/individuals_edit.php?ind_id={$line.ind_id}" class="left_nav_link"><b>{$line.ind_name}</b></a>
+					<br>
+					<br>	
+					<div class="interviews_main_table">
+						{if $line.ind_photo == 'none'}
+							<div class="interviews_main_preview_100">
+								<i>{$line.interview_text}</i>
+							</div>
+						{else}
+							<div class="interviews_main_photo">
+								<img src="../../includes/show_image.php?file={$line.ind_photo}&amp;resize=150,null,null,null" alt="photo" class="user_stats_img" id="user_details_img_dark" style="margin-right:20px;">						
+							</div>
+							<div class="interviews_main_preview">
+								<i>{$line.interview_text}</i>
+							</div>
+						{/if}
+					</div>
+					<br>
+					<div style="text-align:center;">
+						<a href="interviews_edit.php?interview_id={$line.interview_id}" class="left_nav_link">EDIT</a> :: <a href="javascript:deleteinterview({$line.interview_id})" class="left_nav_link">DELETE</a> :: <a href="interviews_preview.php?interview_id={$line.interview_id}" class="left_nav_link">PREVIEW</a> :: <a href="interviews_screenshots_add.php?interview_id={$line.interview_id}" class="left_nav_link">ADD SCREENSHOTS</a>
+					</div>
+				</fieldset> 
+				<br>
+				<br>
+			{/foreach}
+		{/if}
+	</div>
+</div>
+{/block}
