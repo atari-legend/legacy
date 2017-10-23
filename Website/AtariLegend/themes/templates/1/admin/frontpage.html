@@ -1,0 +1,41 @@
+{*
+/***************************************************************************
+*                                frontpage.html
+*                            --------------------
+*   begin                : sunday, August 23, 2015
+*   copyright            : (C) 2015 Atari Legend
+*   email                : martens_maarten@hotmail.com
+*   actual update        : Creation of file
+*
+*   Id: frontpage.html, v 0.1 2015/08/23 23:29 STG
+*   Id: frontpage.html, v 0.2 2015/11/09 STG 23:17 - HTML validated, flex box
+*
+***************************************************************************/
+
+//****************************************************************************************
+// This is the front page of the cpanel (statistics)
+//****************************************************************************************
+*}
+{extends file='1/admin/main.html'}
+{block name=main_body}
+    <div id="main" class="main_container_cpanel">
+        <div class="content_box_cpanel" id="column_left_cpanel">
+            <br>
+            {block name=left_tile}
+                {include file='1/admin/left_nav.html'}
+            {/block}
+        </div>
+        <div class="content_box_cpanel" id="column_center_cpanel">
+            <br>
+            {block name=main_tile}{/block}
+        </div>
+        <div class="content_box_cpanel" id="column_right_cpanel">
+            <br>
+            {block name=right_tile}
+                {include file='1/admin/quick_search_games.html'}
+                <br>
+                {include file='1/main/tile_bug_report.html'}
+            {/block}
+        </div>
+    </div>
+{/block}

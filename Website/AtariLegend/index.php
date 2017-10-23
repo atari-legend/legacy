@@ -15,7 +15,7 @@
 // This file is only used to start up the actual website
 //**************************************************************************************** 
 
-header("Location: php/main/front/front.php");
+header("Location: php/main/front/front.php?action=first_time");
 ?>
 
 

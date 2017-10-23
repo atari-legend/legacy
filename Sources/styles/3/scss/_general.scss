@@ -1,0 +1,757 @@
+//*********************************************************************/
+//****************************PICASSO SKIN*****************************/
+//*********************************************************************/
+//*********************************************************************/
+//**** This is the css code for general skin specific css settings ****/
+//*********************************************************************/
+//*---------------------load the main font-------------------------- */ 
+
+@font-face {
+    font-family: 'robot';
+    font-style: normal;
+    font-weight: normal;
+    src: url('ubuntu-webfont.eot');
+    src: url('ubuntu-webfont.eot?#iefix') format('embedded-opentype'),
+              url('ubuntu-webfont.woff2') format('woff2'),
+              url('ubuntu-webfont.woff') format('woff'),
+              url('ubuntu-webfont.ttf') format('truetype'),
+              url('ubuntu-webfont.svg#ubunturegular') format('svg');
+}
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+html {
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+body {
+    font-family: robot, arial, helvetica, sans-serif;
+    background: #dbd7d1;
+}
+
+body a {text-decoration: none; }
+body a:hover {text-decoration: none; }
+body a:visited {text-decoration: none; }
+img {display: block; }
+//*----------------------------------------------------------
+// Main site width
+//------------------------------------------------------------ */
+#wrapper {
+    width: 100%;
+    max-width: 1920px;
+    margin: auto;
+}
+
+#wrapper_header {
+    width: 100%;
+    max-width: 1280px;
+    margin: auto;
+}
+
+#main {
+    float: left;
+    width: 100%;
+    margin-right: 5%;
+}
+
+.main_online{
+    float: left;
+    width: 100%;
+    margin-top: 20px;
+}
+
+//*------------------------------------------------------------
+//Standard tile settings
+//
+//Up until width of 639 we have 1 tile per rows
+//From 640 to 800 we have 2 tiles.
+//From a width of 801 we will be having rows of 3 tiles
+//-------------------------------------------------------------*/
+.column_left {
+    float: left;
+    width: 32%;
+}
+
+.column_center {
+    float: left;
+    width: 32%;
+    margin-left: 2%;
+}
+
+.column_right {
+    float: right;
+    width: 32%;
+}
+
+.column_wide_left {
+    float: left;
+    width: 64%;
+    margin-top: 0;
+}
+
+.column_wide_right {
+    float: right;
+    width: 32%;
+    margin-top: 0;
+}
+
+.column_wide_right_1920 { display: none; }
+.column_wide_left_1920 { display: none; }
+.column_wide_center_1920 { display: none; }
+.standard_tile {
+    width: 100%;
+    background: linear-gradient(to top, #fff, #a6a6a6);
+    border-top: 10px solid $bg-color;
+    border-right: 1px solid $bg-color;
+    border-bottom: 3px solid $bg-color;
+    border-left: 1px solid $bg-color;
+}
+
+.standard_tile_line { border-bottom: 2px solid #000; }
+.standard_tile_background { position: relative; }
+.standard_tile_image { width: 100%; }
+.standard_tile_subtext {
+    font-size: 11pt;
+    color: #161c71;
+    font-weight: bold;
+}
+
+.standard_tile_subtext a{color: #161c71;}
+.standard_tile_subtext a:hover{color: black;}
+
+.standard_tile p {
+    width: 91.7%;
+    padding-right: 4%;
+    text-align: left;
+    border-right: 2px solid #484c7b;
+    //border-left: 2px solid #01b5b5;
+    //padding-left: 4%;
+}
+
+.standard_tile_title {
+    position: absolute;
+    z-index: 1;
+    //* RGBa with 0.6 opacity */
+    padding-top: 3%;
+    font-size: 17pt;
+    font-weight: 100;
+    color: #fff;
+    background: rgb(192, 193, 202) transparent;
+    //* Fallback for web browsers that doesn't support RGBa */
+    background: rgba(192, 193, 202, .6);
+    border-bottom: 2px solid #484c7b;
+    bottom: 0;
+}
+
+.standard_tile_explanation {
+    position: relative;
+    padding-right: 3%;
+    padding-bottom: 3%;
+    padding-left: 3%;
+    margin-bottom: 4%;
+}
+
+.standard_tile h1 {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 18pt;
+    font-weight: bold;
+    color: #000;
+    text-align: center;
+}
+
+.standard_tile h2 {
+    float: right;
+    font-size: 10pt;
+    font-style: italic;
+    font-weight: bold;
+    color: #00d3d3;
+}
+
+.standard_tile h3 {
+    font-size: 13pt;
+    font-weight: 100;
+    color: #000;
+    text-align: center;
+}
+
+.standard_tile h4 {
+    font-size: 13pt;
+    font-weight: 100;
+    color: #000;
+    text-align: left;
+}
+
+.standard_tile h5 {
+    font-size: 9pt;
+    font-weight: 100;
+    color: #000;
+    text-align: left;
+}
+
+.standard_tile h6 {
+    font-size: 12pt;
+    font-weight: 100;
+    color: #000;
+    text-align: left;
+}
+
+.standard_tile_input {
+    display: block;
+    width: 85%;
+    height: 44px;
+    padding: 0;
+    padding-left: 5px;
+    margin-top: 0;
+    color: #fff;
+    text-align: left;
+    background: url('../images/logon_input.png') 0 0 no-repeat;
+    background-size: 85% 42px;
+    border: 0;
+}
+
+.standard_tile_input_small {
+    width: 185px;
+    height: 18px;
+    padding: 3px;
+    padding-left: 7px;
+    margin-top: 0;
+    color: #fff;
+    text-align: left;
+    background: #666;
+    border: 1px solid #b2b2b2;
+}
+
+.standard_tile_input_area {
+    width: 90%;
+    height: 40px;
+    padding: 3px;
+    padding-left: 7px;
+    margin-top: 0;
+    color: #fff;
+    text-align: left;
+    background: #666;
+    border: 1px solid #b2b2b2;
+}
+
+#text_area_big { height: 150px; }
+.standard_tile_link:link { color: #000; }
+.standard_tile_link:visited { color: #000; }
+.standard_tile_link:hover { color: $bg-color; }
+.standard_tile_link_reverse:link { color: #000; }
+.standard_tile_link_reverse:visited { color: #000; }
+.standard_tile_link_reverse:hover { color: #fff; }
+.standard_tile_link_cpanel:link {
+    font-size: 11pt;
+    color: #6a6a6a;
+}
+
+.standard_tile_link_cpanel:visited { color: #6a6a6a; }
+.standard_tile_link_cpanel:hover { color: #122323; }
+.standard_tile_link_black:link {
+    font-weight: bold;
+    color: #000;
+}
+
+.standard_tile_link_black:visited { color: #000; }
+.standard_tile_link_black:hover { color: #6a6a6a; }
+.standard_tile_link_button:link { color: #fff; }
+.standard_list_entry {
+    position: relative;
+    display: table;
+    width: 100%;
+    height: 140px;
+}
+
+.standard_list_entry_odd {
+    position: relative;
+    display: table;
+    width: 100%;
+    height: 140px;
+    background: #6a6a6a;
+}
+
+//.standard_list_entry_left {
+//    position: absolute;
+//    top: 50%;
+//    left: 0;
+//    width: 50%;
+//    transform: translateY(-50%);
+//}
+
+//.standard_list_entry_left img {
+//    max-width: 100%;
+//    width: 80%;
+//    margin-left: 15px;
+//    box-shadow: 0 0 7px #484c7b;
+//}
+
+//.standard_list_entry_left img:hover { box-shadow: 0 0 7px #fff; }
+//.standard_list_entry_right {
+.standard_list_entry_news{
+    position: absolute;
+    margin: 10px;
+    top: 43%;
+//    left: 48%;
+    width: 90%;
+    transform: translateY(-50%);
+}
+
+.standard_list_entry_news_text {
+    font-weight: 100;
+    color: #000;
+    text-align: left;
+    display: -webkit-box;
+    height: 60px;
+    padding: 0;
+    width:100%;
+    margin-top: 10px;
+    line-height: 1.2;
+    box-sizing: border-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    font-size:12pt;
+}
+
+.standard_tile_text { padding: 20px; }
+.standard_tile select {
+    width: 78%;
+    height: 20px;
+    padding: 0;
+    padding-left: 5px;
+    margin-top: 5px;
+    background-color: #666;
+    color: #fff;
+    border: 1px solid #b2b2b2;
+}
+
+#small_select {
+    width: 50px;
+    height: 26px;
+    margin-top: 0;
+    background: #666;
+}
+
+#medium_select {
+    width: 185px;
+    height: 28px;
+    margin-top: 0;
+    background: #666;
+}
+
+#medium_select2 {
+    width: 140px;
+    height: 25px;
+    margin-top: 0;
+    background: #666;
+}
+
+.centered_fieldset {
+    margin: auto;
+    text-align: center;
+}
+
+#file_upload{
+    display: none;
+}
+
+#file_upload2{
+    display: none;
+}
+
+
+.file_upload {
+    width: 80px;
+    height: 25px;
+    margin-left: 2px;
+    font-size: 10pt;
+    color: #000;
+    cursor: pointer;
+    background: #dbd7d1;
+    border: 1px solid #000;
+    border-radius: 0 15px 15px 0;
+    padding: 4px 10px; 
+}
+
+.file_upload:hover {
+    color: #fff;
+    background: $bg-color;
+    border: 1px solid #4f4f4f;
+}
+
+.selected{
+    font-weight:bold;
+}
+
+#file_upload_medium{@extend #file_upload;}
+
+//*** checkbox css ****//
+.checkbox {
+	width: 100%;
+	margin: 2px 0px;
+	position: relative;
+}
+
+.checkbox label {
+	cursor: pointer;
+	position: absolute;
+	width: 15px;
+	height: 15px;
+	top: 0;
+  	left: 0;
+	background: white;
+	border:1px solid black;
+}
+
+.checkbox label:after {
+	opacity: 0.2;
+	content: '';
+	position: absolute;
+	width: 9px;
+	height: 5px;
+	background: transparent;
+	top: 2px;
+	left: 2px;
+	border: 3px solid black;
+	border-top: none;
+	border-right: none;
+
+	transform: rotate(-45deg);
+}
+
+.checkbox label:hover::after {
+	opacity: 0.5;
+}
+
+.checkbox input[type=checkbox]:checked + label:after {
+	opacity: 1;
+}
+
+.checkbox_alt{@extend .checkbox;}
+
+//*------------------------------------------------------------
+//Standard table settings
+//-------------------------------------------------------------*/
+#column_left_cpanel {
+    float: left;
+    width: 20%;
+    margin-right: 1%;
+}
+
+#column_center_cpanel {
+    float: left;
+    width: 58%;
+}
+
+#column_right_cpanel {
+    float: right;
+    width: 20%;
+    margin-left: 1%;
+}
+
+.standard_table_list {
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    background-color: #f3f3f3;
+    border: solid 1px #b2b2b2;
+    border-spacing: 0;
+}
+
+.standard_table_list  li {
+    font-size: 113pxpt;
+    color: #000;
+    text-align: center;
+    list-style-type: none;
+}
+
+.standard_table_list th {
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-left: 3px;
+    margin: 0;
+    background-color: #dbd7d1;
+    border-collapse: collapse;
+    border-bottom: solid 2px #b2b2b2;
+}
+
+.standard_table_list tr:nth-child(even) { background-color: #f3f3f3; }
+.standard_table_list tr:nth-child(odd) { background-color: #efefef; }
+.standard_table_list tr:hover { background-color: #dbd7d1; }
+.standard_table_list td {
+    padding-top: 1px;
+    padding-bottom: 1px;
+    padding-left: 3px;
+    margin: 0;
+}
+
+.standard_table_center {
+    font-size: 12pt;
+    font-weight: 100;
+    color: #000;
+    text-align: center;
+}
+
+.standard_table_left {
+    padding-left: 2px;
+    font-size: 12pt;
+    font-weight: 100;
+    color: #000;
+    text-align: left;
+}
+
+.standard_table_right {
+    padding-right: 2px;
+    font-size: 12pt;
+    font-weight: 100;
+    color: #000;
+    text-align: right;
+}
+
+.standard_table_center img { display: inline; }
+.topbutton_cpanel_small {
+    width: 80px;
+    height: 25px;
+    margin-left: 2px;
+    font-size: 10pt;
+    color: #000;
+    cursor: pointer;
+    background: #dbd7d1;
+    border: 1px solid #000;
+    border-radius: 0 15px 15px 0;
+}
+
+.topbutton_cpanel_small:hover {
+    color: #fff;
+    background: $bg-color;
+    border: 1px solid #4f4f4f;
+}
+
+.topbutton_cpanel {
+    @extend .topbutton_cpanel_small;
+    width: 120px;
+}
+
+.topbutton_cpanel:hover { @extend .topbutton_cpanel_small:hover; }
+fieldset {
+    padding: 8px;
+    font-size: 11pt;
+    background: #efefef;
+    border: solid 1px #b2b2b2;
+}
+
+legend {
+    padding: 1px 10px;
+    font-weight: bold;
+    color: #122323;
+    background: #dbd7d1;
+    border: solid 2px #b2b2b2;
+}
+
+//*------------------------------------------------------------
+//The CSS for the help tips
+//-------------------------------------------------------------*/
+.help-tip {
+    float: right;
+    width: 20px;
+    height: 20px;
+    margin-top: 5px;
+    margin-right: 5px;
+    font-size: 14px;
+    line-height: 22px;
+    text-align: center;
+    cursor: default;
+    background-color: #666;
+    border: #fff solid 1px;
+    border-radius: 50%;
+}
+
+#help-tip2 {
+    width: 10px;
+    height: 10px;
+    font-size: 10px;
+    line-height: 10px;
+    display: inline;
+}
+
+.help-tip::before {
+    font-weight: bold;
+    color: #fff;
+    content: '?';
+}
+
+#help-tip2::before {
+    content: '-';
+}
+
+.help-tip:hover p {
+    display: block;
+    transform-origin: 100% 0;
+    -webkit-animation: fadeIn .3s ease-in-out;
+    animation: fadeIn .3s ease-in-out;
+}
+
+.help-tip p {
+    z-index: 10;
+    position: relative;
+    right: 290px;
+    //* The tooltip */
+    display: none;
+    width: 300px;
+    padding: 5px;
+    font-size: 13px;
+    line-height: 1.4;
+    text-align: left;
+    background-color: #666;
+    color: #fff;
+    border: #000 solid 1px;
+    border-radius: 3px;
+    box-shadow: 1px 1px 1px rgba(0, 0, 0, .2);
+}
+
+#help-tip2 p { 
+    right: 200px;
+    width: 200px;
+}
+
+//I am removing the pointer as the alignment of the text box changes from '?' to '?' - this is done the be compliant with a resolution of 320 width.
+//Test it for yourself to see what I mean
+//.help-tip p::before {
+//* The pointer of the tooltip */:
+//  position: absolute;
+//  content: '';
+//  width: 0;
+//  height: 0;
+//  border: 6px solid transparent;
+//  border-bottom-color: #1E2021;
+//  right: 10px;
+//  top: -12px;
+//}
+
+.help-tip p::after {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    //* Prevents the tooltip from being hidden */
+    width: 100%;
+    height: 40px;
+    content: '';
+}
+
+//* CSS animation */
+@-webkit-keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: scale(.6);
+    }
+
+    100% {
+        opacity: 100%;
+        transform: scale(1);
+    }
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 100%; }
+}
+
+
+//*------------------------------------------------------------
+//The CSS for the tabs
+//-------------------------------------------------------------*/
+/* Style the tab */
+div.tab {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+}
+
+/* Style the buttons inside the tab */
+div.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+}
+
+/* Change background color of buttons on hover */
+div.tab button:hover {
+    background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+div.tab button.active {
+    background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+    display: none;
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
+}  
+
+/*fade in effect on tab */
+.tabcontent {
+    -webkit-animation: fadeEffect 1s;
+    animation: fadeEffect 0.5s; /* Fading effect takes 1 second */
+}
+
+@-webkit-keyframes fadeEffect {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+@keyframes fadeEffect {
+    from {opacity: 0;}
+    to {opacity: 1;}
+} 
+
+//*------------------------------------------------------------
+//The 'to the top' button
+//-------------------------------------------------------------*
+.scroll-top-wrapper {
+    position: fixed;
+	opacity: 0;
+	visibility: hidden;
+	overflow: hidden;
+	text-align: center;
+	z-index: 99999999;
+    background-color: #777777;
+	color: #eeeeee;
+	width: 50px;
+	height: 48px;
+	line-height: 48px;
+	right: 30px;
+	bottom: 30px;
+	padding-top: 2px;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	border-bottom-right-radius: 10px;
+	border-bottom-left-radius: 10px;
+	-webkit-transition: all 0.5s ease-in-out;
+	-moz-transition: all 0.5s ease-in-out;
+	-ms-transition: all 0.5s ease-in-out;
+	-o-transition: all 0.5s ease-in-out;
+	transition: all 0.5s ease-in-out;
+}
+.scroll-top-wrapper:hover {
+	background-color:  #888888;
+}
+.scroll-top-wrapper.show {
+    visibility:visible;
+    cursor:pointer;
+	opacity: 1.0;
+}
+.scroll-top-wrapper i.fa {
+	line-height: inherit;
+}

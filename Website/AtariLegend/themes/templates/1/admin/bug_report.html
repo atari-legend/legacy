@@ -1,0 +1,45 @@
+{* 
+/***************************************************************************
+*                              bug_report.html
+*                            --------------------------
+*   begin                : September 12, 2017
+*   copyright            : (C) 2017 Atari Legend
+*   email                : admin@atarilegend.com
+*
+*   Id: bug_report.html,v 0.10 2017/09/12 ST Graveyard
+*
+***************************************************************************/
+
+*}
+{extends file='1/admin/frontpage.html'}
+{block name=main_tile}
+<div class="standard_tile">
+	<h1>BUG REPORTS</h1>
+	<div class="standard_tile_line"></div>
+	<div class="standard_tile_text">
+        {if isset($bug_report)}
+            {foreach from=$bug_report item=line}		
+                <fieldset>
+                <legend>Posted by <a href="../user/user_detail.php?user_id_selected={$line.user_id}" class="standard_tile_link_cpanel">{$line.userid}</a> on {$line.bug_report_date} </legend>
+                <br>
+                <b><u>Type : {$line.bug_report_type}</u></b>
+                <br><br>
+                {$line.bug_report_text}
+                <br>
+                <br>
+                <form action="../administration/db_bug_report.php" method="post" name="bug{$line.bug_report_id}" id="bug{$line.bug_report_id}">
+                    <input type="hidden" name="action" value="delete">
+                    <input type="hidden" name="bug_report_id" value="{$line.bug_report_id}">
+                    <input type="submit" value="Delete"  class="topbutton_cpanel_small">
+                </form>
+                </fieldset> 
+                <br>
+            {/foreach}
+        {else}
+            <fieldset>
+                No bugs reported!
+            </fieldset>
+        {/if}
+	</div>
+</div>
+{/block}

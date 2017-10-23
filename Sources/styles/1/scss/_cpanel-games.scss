@@ -1,0 +1,445 @@
+//*************************************************************/
+//**********************LEGACY SKIN****************************/
+//*************************************************************/
+//*************************************************************/
+//*****************CPanel GAMES section css********************/
+//*************************************************************/
+//*----------------------------------------------------------
+//Games main
+//------------------------------------------------------------ */
+.games_main_text {
+    display: table-cell;
+    width: 25%;
+    font-weight: bold;
+}
+
+.games_main_input {
+    display: table-cell;
+    width: 75%;
+}
+
+.games_main_row {
+    display: table;
+    width: 75%;
+    margin-left: auto;
+}
+
+.games_check_container {
+    display: flex;
+    width: 50%;
+    margin: auto;
+}
+
+#child_1,
+#child_2 {
+    width: 50%;
+    margin: auto;
+}
+
+.games_check_text {
+    display: table-cell;
+    width: 95%;
+    font-weight: bold;
+}
+
+.games_check_box {
+    display: table-cell;
+    width: 5%;
+}
+
+.games_check_row {
+    display: table;
+    width: 100%;
+}
+
+#games_main_pub_select {
+    width: 185px;
+    height: 25px;
+    margin-top: 0;
+}
+
+#games_main_dev_select {
+    width: 185px;
+    height: 25px;
+    margin-top: 0;
+}
+
+#games_main_small_select {
+    width: 50px;
+    height: 25px;
+}
+
+//*----------------------------------------------------------
+//Games list
+//------------------------------------------------------------ */
+#game_th {
+    width: 40%;
+    text-align: left;
+}
+
+#pub_th,
+#dev_th {
+    width: 20%;
+    text-align: left;
+}
+
+#year_th,
+#info_th {
+    width: 10%;
+    text-align: left;
+}
+
+.game_td {
+    width: 40%;
+    padding-left: 2px;
+    font-size: 10pt;
+    font-weight: 100;
+    color: #fff;
+    text-align: left;
+}
+
+.pub_td,
+.dev_td {
+    width: 20%;
+    padding-left: 2px;
+    font-size: 10pt;
+    font-weight: 100;
+    color: #fff;
+    text-align: left;
+}
+
+.info_td,
+.year_td {
+    width: 10%;
+    padding-left: 2px;
+    font-size: 10pt;
+    font-weight: 100;
+    color: #fff;
+    text-align: left;
+}
+
+#game_list_table { width: 100%; }
+//*----------------------------------------------------------
+//Games detail
+//------------------------------------------------------------ */
+#games_detail { float: left; }
+#gd_left {
+    float: left;
+    width: 32%;
+}
+
+#gd_center {
+    float: left;
+    width: 32%;
+    margin-left: 2%;
+}
+
+#gd_right {
+    float: right;
+    width: 32%;
+}
+
+#gd_development {
+    float: left;
+    width: 100%;
+    margin-top: 20px;
+}
+
+#gd_basic_game_info {
+    float: left;
+    width: 60%;
+}
+
+.gd_basic_game_info_row {
+    display: table;
+    width: 65%;
+    padding: 2px;
+}
+
+.gd_basic_game_info_row_check {
+    display: table-cell;
+    width: 3%;
+}
+
+.gd_basic_game_info_row_checktxt {
+    display: table-cell;
+    width: 45%;
+}
+
+#gd_basic_game_info_category {
+    float: right;
+    width: 40%;
+    margin-top: -285px;
+}
+
+#gd_other_features {
+    float: right;
+    width: 38%;
+}
+
+#gd_creator_info { margin-bottom: 20px; }
+#gd_publisher_info { margin-bottom: 20px; }
+#gd_developer_info { margin-bottom: 20px; }
+#gd_back {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#gd_bottom {
+    float: left;
+    width: 100%;
+}
+
+#gd_dev_small_select {
+    width: 50px;
+    height: 27px;
+}
+
+#gd_pub_small_select {
+    width: 50px;
+    height: 27px;
+}
+
+#gd_text_area_big { height: 250px; }
+#game_extra_info_pub,
+#continent_pub,
+#company_id_pub,
+#game_extra_info_dev,
+#continent_dev,
+#company_id_dev,
+#game_extra_info_year,
+#author_type_id,
+#ind_id {
+    width: 140px;
+    height: 25px;
+    margin-top: 0;
+}
+
+#file_upload_game_screenshots{width: 60%;}
+#file_upload_game_file{width: 60%;}
+#file_upload_game_box{width: 60%;}
+#file_upload_game_music{width: 60%;}
+
+//*----------------------------------------------------------
+//Games comment
+//------------------------------------------------------------ */
+.gc_table_list {
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    text-align: left;
+    background-color: #00d3d3;
+    border: solid 1px #000;
+    border-spacing: 0;
+}
+
+.gc_table_list tr:nth-child(even) { background-color: #00d3d3; }
+.gc_table_list tr:nth-child(odd) { background-color: #006f6f; }
+.gc_table_list td {
+    padding: 5px;
+    margin: 0;
+    border-bottom: solid 1px #000;
+}
+
+.gc_left_head {
+    width: 20%;
+    font-size: 10pt;
+}
+
+.gc_center_head {
+    width: 60%;
+    font-size: 10pt;
+}
+
+.gc_right_head {
+    width: 20%;
+    font-size: 10pt;
+    text-align: right;
+}
+
+.gc_left {
+    width: 20%;
+    font-size: 10pt;
+}
+
+.gc_center {
+    width: 80%;
+    font-size: 10pt;
+
+}
+
+//*----------------------------------------------------------
+//Games comment edit
+//------------------------------------------------------------ */
+#gce_button,
+#gce_button2 {display: inline; }
+
+#gce_area { width: 100%; }
+//*----------------------------------------------------------
+//Games upload
+//------------------------------------------------------------ */
+.game_upload_container { display: flex; }
+#gu_child_1,
+#gu_child_2 {
+    width: 50%;
+    margin-left: 2%;
+}
+
+#gu_select {
+    width: 192px;
+    height: 25px;
+    margin-top: 0;
+}
+
+//*----------------------------------------------------------
+//Games review main
+//------------------------------------------------------------ */
+#gamename_gr_th {
+    width: 35%;
+    text-align: left;
+}
+
+#username_gr_th,
+#gamepub_gr_th,
+#reviewdate_gr_th {
+    width: 20%;
+    text-align: left;
+}
+
+#nrreviews_gr_th {
+    width: 5%;
+    text-align: left;
+}
+
+.gamename_gr_td {
+    width: 35%;
+    padding-left: 2px;
+    font-size: 10pt;
+    font-weight: 100;
+    color: #fff;
+}
+
+.username_gr_td,
+.gamepub_gr_td,
+.reviewdate_gr_td {
+    width: 20%;
+    padding-left: 2px;
+    font-size: 10pt;
+    font-weight: 100;
+    color: #fff;
+}
+
+.nrreviews_gr_td {
+    width: 5%;
+    padding-left: 2px;
+    font-size: 10pt;
+    font-weight: 100;
+    color: #fff;
+}
+
+//*----------------------------------------------------------
+//Games review add
+//------------------------------------------------------------ */
+#game_review_textfield {
+    @extend .standard_tile_input_area;
+    width: 99%;
+    height: 450px;
+}
+
+.game_review_screenshot_text {
+    @extend .standard_tile_input_area;
+    width: 75%;
+    height: 75px;
+}
+
+//*----------------------------------------------------------
+//Games review preview
+//------------------------------------------------------------ */
+.review_container {
+    display: flex;
+    display: table;
+    width: 100%;
+    align-items: flex-start;
+}
+
+.review_child  table { width: 98%; }
+#review_text {
+    display: table-cell;
+    width: 70%;
+    vertical-align: top;
+}
+
+#review_screenshots {
+    display: table-cell;
+    width: 30%;
+    text-align: center;
+}
+
+.review_screenshot_order {
+    width: 170px;
+    margin: auto;
+    font-size: 9pt;
+}
+
+//*----------------------------------------------------------
+//Games music list
+//------------------------------------------------------------ */
+#game_gm_th {
+    width: 50%;
+    text-align: left;
+}
+
+#pub_gm_th {
+    width: 25%;
+    text-align: left;
+}
+
+#year_gm_th {
+    width: 15%;
+    text-align: left;
+}
+
+#zaks_gm_th {
+    width: 10%;
+    text-align: left;
+}
+
+.game_gm_td {
+    width: 50%;
+    padding-left: 2px;
+    font-size: 10pt;
+    font-weight: 100;
+    color: #fff;
+}
+
+.pub_gm_td {
+    width: 25%;
+    padding-left: 2px;
+    font-size: 10pt;
+    font-weight: 100;
+    color: #fff;
+}
+
+.year_gm_td {
+    width: 15%;
+    padding-left: 2px;
+    font-size: 10pt;
+    font-weight: 100;
+    color: #fff;
+}
+
+.zaks_gm_td {
+    width: 10%;
+    padding-left: 2px;
+    font-size: 10pt;
+    font-weight: 100;
+    color: #fff;
+}
+
+
+//*----------------------------------------------------------
+//Games screenshots upload
+//------------------------------------------------------------ */
+.game_screenshot_img{ 
+    @extend #user_details_img_dark;
+}

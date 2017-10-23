@@ -1,0 +1,19 @@
+linters:
+    BorderZero:
+        enabled: false
+    Indentation:
+        width: 4
+    SelectorFormat:
+        enabled: true
+        convention: snake_case
+    IdSelector:
+        enabled: false
+    PropertySortOrder:
+        enabled: false
+    EmptyLineBetweenBlocks:
+        enabled: false
+    ColorVariable:
+        enabled: false
+    SelectorFormat:
+        enabled: false
+

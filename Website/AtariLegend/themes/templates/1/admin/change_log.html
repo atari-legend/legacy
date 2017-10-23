@@ -1,0 +1,131 @@
+{* 
+/***************************************************************************
+                              change_log.html
+*                            --------------------------
+*   begin                : Wednesday, 17 august, 2016
+*   copyright            : (C) 2016 Atari Legend
+*   email                : martens_maarten@hotmail.com
+*
+***************************************************************************/
+
+************************************************************************************************
+The change log page
+************************************************************************************************
+*}
+{extends file='1/admin/frontpage.html'}
+
+{block name=left_tile}
+    {include file='1/admin/tile_changes_per_month.html'}
+    <br>
+    {include file='1/admin/left_nav.html'}
+{/block}
+           
+{block name=main_tile}
+<div class="standard_tile">
+	<h1>CHANGE LOG</h1>
+	<div class="standard_tile_line"></div>
+	<div class="standard_tile_text">
+		<div class="left_nav_section">
+			Welcome to the change log. On this page you will find every change made on the database. Below you can find the latest log changes, you can also use the search function. 
+			The logs are divided in 'SECTIONS' and 'SUBSECTIONS'. A section can be a 'Game', 'Demo', 'Links', 'Menu'...The subsection goes in more detail eg. 'File', 'Screenshot', 'Boxscan' ...
+			The 'ACTIONS' depict which action was performed on the table, like an 'Insert', 'Delete' or 'Update'. Lastly you will also find the USER and DATE.
+		</div> 
+		<br>
+		<br>
+		<form action="../administration/change_log.php" method="get" name="user_search" >
+		<div>
+			<fieldset class="centered_fieldset">
+				<legend>Search log</legend>
+				<br>
+				<div>
+					<div id="changelog_select">
+						Log entries until <br>
+						{html_select_date start_year='2003' end_year='+1'}
+					</div>
+				</div>
+				<br>
+				<div>
+					<div>
+						<input type="hidden" name="action" id="log_search" value="log_search">
+						<input type="submit" value="Search" class="topbutton_cpanel_small">
+					</div>
+				</div>
+				<br>
+				<br>
+				<a href="../administration/change_log.php" class="left_nav_link">Latest log entries</a>
+			</fieldset>
+		</div>
+        </form>
+		<br><br>
+		{if $rec_nr <> '0'}
+		<div>
+			<table class="standard_table_list">
+				<tr>
+					<th id="log_date_th">Date</th>
+					<th id="log_user_th">User</th>
+					<th id="log_section_th">Section</th>
+					<th id="log_name_th">Name</th>
+					<th id="log_action_th">Action</th>
+					<th id="log_subsection_th">Subsect</th>
+					<th id="log_sub_name_th">Sub Name</th>
+				</tr>
+				{if $log_nr <> '0'}
+					{foreach from=$log item=line}
+					<tr>
+						<td class="log_date_td">
+							{$line.log_date}
+						</td>
+						<td class="log_user_td">
+							<a href="../user/user_detail.php?user_id_selected={$line.log_user_id}" class="standard_table_left">
+								{$line.log_user_name}
+							</a>
+						</td>
+						<td class="log_section_td">
+							<a href="{$line.log_section_link}" class="standard_table_left">
+								{$line.log_section}
+							</a>
+						</td>
+						<td class="log_name_td">
+							<a href="{$line.log_section_link}" class="standard_table_left">
+								{$line.log_section_name}
+							</a>
+						</td>	
+						<td class="log_action_td">
+							{$line.log_action}
+						</td>						
+						<td class="log_subsection_td">
+							<a href="{$line.log_subsection_link}" class="standard_table_left">
+								{$line.log_subsection}
+							</a>
+						</td>
+						<td class="log_subname_td">
+							<a href="{$line.log_subsection_link}" class="standard_table_left">
+								{$line.log_subsection_name}
+							</a>
+						</td>		
+					</tr>
+					{/foreach}
+				{else}
+					<div class="standard_table_center">No log entries in the database</div>
+				{/if}
+			</table>
+		</div>
+		<br>
+		<div class="standard_table_center">
+			{if $links.linkback != ''}
+				<a href ="{$links.linkback}" class="standard_tile_link" style="float:left;">Previous</a>
+			{/if}
+
+			{if $links.linknext != ''}
+				<a href="{$links.linknext}" class="standard_tile_link" style="float:right;">Next</a>
+			{/if}
+		</div>
+		{else}
+			<div class="left_nav_section">
+				No log entries found
+			</div>
+		{/if}
+		<br>
+	</div>	
+</div>
+{/block}

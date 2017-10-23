@@ -1,0 +1,44 @@
+{*
+/***************************************************************************
+*                               user_new_pwd_tile.html
+*                            ---------------------------
+*   begin                : Wednesday, June 08, 2017
+*   copyright            : (C) 2017 Atari Legend
+*   email                : martens_maarten@hotmail.command
+*   actual update        : Creation of file
+*
+*   Id:user_new_pwd_tile.html,v 0.1 2017/08/07 Gatekeeper
+*
+***************************************************************************/
+
+//****************************************************************************************
+// This is the user pwd reset tile - entering the new pwd
+//****************************************************************************************
+*}
+{block name=user_reset_tile}
+    <div class="register">
+        <div class="standard_tile">
+        <form action="../../common/login/db_reset.php" method="post" name="reset_form">
+            <h1>RESET PASSWORD</h1>
+            <div class="standard_tile_line"></div>  
+            <br>
+            <div class="standard_tile_explanation" >      
+                <h6>
+                    Please re-enter the email address of your account and your new password.
+                </h6>
+            </div>
+            <div class="register_input">
+                <input class="standard_tile_input_small" style="width:70%" type="text" name="email" placeholder="Email (required)" required>
+                <br>
+                <input class="standard_tile_input_small" style="width:70%" type="password" name="password" placeholder="Password (required)" required>
+                <br>
+                <input class="standard_tile_input_small" style="width:70%" type="password" name="password_again" placeholder="Password again (required)" required>
+            </div>
+            <br>
+            <input type="submit" value="RESET" class="signinbutton" name="ResetPasswordForm">
+            <input type="hidden" name="q" value="{$q}">
+            <input type="hidden" name="action" value="new_pwd">
+        </form>
+        </div>
+    </div>
+{/block}

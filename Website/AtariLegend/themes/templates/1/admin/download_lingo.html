@@ -1,0 +1,70 @@
+{* 
+/***************************************************************************
+*                                download_lingo.html
+*                            --------------------------
+*   begin                : March 15, 2017
+*   copyright            : (C) 2017 Atari Legend
+*   email                : maarten.martens@freebel.net
+*   actual update        : Creation of file
+*
+***************************************************************************/
+
+************************************************************************************************
+The main Lingo page
+************************************************************************************************
+*}
+{extends file='1/admin/frontpage.html'}
+
+{block name=title}Add/Edit a download lingo{/block}
+
+{block name=main_tile}
+<div class="standard_tile" id="individuals_main">
+    <div class="help-tip">
+		<p>These languages are used to display the language of the version of the game/demo/menu...
+            <br>Some examples :
+            <br> - English EN
+            <br> - French  FR 
+            <br> - ...
+        </p>
+	</div>
+	<h1>LANGUAGES</h1>
+	<div class="standard_tile_line"></div>
+	<div class="standard_tile_text">
+		<div class="left_nav_section">
+			In this section you can add or edit a download language. To edit an existing language, look up the name
+			in the dropdown box. To add a new language, use the input field and press 'add'.            
+		</div> 
+		<br>
+		<br>
+		<div class="main_company_container">
+			<div class="main_company_child" id="child_edit_company">
+				<fieldset>
+					<legend>Edit a download language</legend>		
+					<form action="../downloads/download_lingo_edit.php" method="post" name="ind_edit" id="ind_edit">
+						<select name="lingo_id" id="quick_search_pub_select">
+							<option value="-">-</option>
+							{foreach from=$download_lingo item=line}
+								<option value="{$line.lingo_id}">{$line.lingo_name}</option>
+							{/foreach}	
+						</select>
+						<input type="hidden" name="user_id" value="{$user_id}">
+						<input type="submit" value="Edit" class="topbutton_cpanel_small">
+					</form>	
+				</fieldset>
+			</div>
+			<div class="main_company_child" id="child_add_company">
+				<fieldset>
+					<legend>Add a download language</legend>
+					<form action="../downloads/db_download_lingo.php" method="post" name="ind_add" id="ind_add">
+						<input type="text" name="lingo_name" class="standard_tile_input_small">
+                        <input type="text" name="lingo_short" class="standard_tile_input_small" id="small_select">
+						<input type="submit" value="Add" class="topbutton_cpanel_small">
+						<input type="hidden" name="action" id="action" value="insert_lingo">
+						<input type="hidden" name="user_id" value="{$user_id}">
+					</form>	
+				</fieldset>
+			</div>
+		</div>
+	</div>
+</div>
+{/block}

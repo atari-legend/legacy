@@ -1,0 +1,49 @@
+{* 
+/***************************************************************************
+*                                company_logos.html
+*                            --------------------------
+*   begin                : Sunday, August 7, 2005
+*   copyright            : (C) 2005 Atari Legend
+*   email                : maarten.martens@freebel.net
+*   actual update        : Creation of file
+*   Id: company_logos.html,v 0.10 2005/08/07 14:29 Gatekeeper
+*   Id: company_logos.html,v 0.10 2016/07/31 23:47 Gatekeeper
+*		- AL 2.0
+*
+***************************************************************************/
+
+************************************************************************************************
+The company logos preview page
+************************************************************************************************
+*}
+{extends file='1/admin/frontpage.html'}
+
+{block name=title}Company logos preview{/block}
+
+{block name=main_tile}
+
+<div class="standard_tile" id="company_logos">
+	<h1>COMPANY LOGOS</h1>
+	<div class="standard_tile_line"></div>
+	<div class="standard_tile_text">
+		<div class="left_nav_section">
+			This is just an eye candy section with an overview of the current company logos. Clicking on the
+			company name will lead you to the appropriate edit page.
+		</div> 
+		<br>
+		<br>
+		<fieldset class="centered_fieldset">
+			<legend>Logos</legend>
+			{foreach from=$company item=line}
+				<div style="display:inline-block;text-align:center;margin-left:10px;margin-right:10px;">
+					<img src="../../includes/show_image.php?file={$line.company_image}" alt="{$line.comp_name} Logo" class="user_stats_img" id="user_details_img_dark" style="display:inline;">
+					<br>
+					<b><a href="../company/company_edit.php?comp_id={$line.comp_id}" class="left_nav_link">{$line.comp_name}</a></b>
+					<br>
+					<br>
+				</div>
+			{/foreach}
+		</fieldset>	
+	</div>
+</div>
+{/block}

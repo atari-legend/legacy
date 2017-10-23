@@ -1,0 +1,68 @@
+{*
+/***************************************************************************
+*                                tile_changes_per_month.html
+*                            ---------------------------------
+*   begin                : Thursday, May 11, 2017
+*   copyright            : (C) 2017 Atari Legend
+*   email                : martens_maarten@hotmail.com
+*   actual update        : Creation of file
+*
+*   Id: tile_changes_per_month.html,v 0.1 2017/05/11 20:43 ST Graveyard
+*
+***************************************************************************/
+
+//****************************************************************************************
+// This is a small statistics tile
+//****************************************************************************************
+*}
+<script type="text/javascript" src="{$template_dir}includes/js/Chart.js"></script> <!-- chart creation -->
+<script>
+window.onload = function () {
+        
+    var data_cl_monthly = {$change_log_monthly_data};
+    var labels_cl_monthly = {$change_log_monthly_label};
+    var bg_cl = {$change_log_bg};
+    var border_width_cl = {$change_log_border_width};
+    var border_cl = {$change_log_border};
+    var ctx_change_line = document.getElementById('changelog_line').getContext("2d");
+    
+    var myLineChart = new Chart(ctx_change_line, {
+        responsive: true,
+        type: 'doughnut',
+        data: {
+            labels: labels_cl_monthly,
+            datasets: [
+                {
+                    label: "Changes per month",
+                    backgroundColor: bg_cl,
+                    borderColor: border_cl,
+                    borderWidth: border_width_cl,
+                    data: data_cl_monthly,
+                }
+            ]
+        },
+        options: {
+        legend: {
+            display: false,
+
+            }
+        }
+    })
+};
+</script>
+
+<div class="standard_tile">
+	<h1>STATS</h1>
+		<div class="standard_tile_line"></div>
+		<div class="standard_list_entry">
+            <div class="standard_table_center">
+                <br>This chart represents the nr of changes made to the DB each month for the past year. Hover over the chart for more info.
+            </div>
+			<div class="standard_tile_text">   
+                 <div class="line_changelog" style="width:98%;margin-left:auto;margin-right:auto;">
+                    <canvas id="changelog_line"></canvas>
+                </div>
+			</div>
+		</div>
+	<div class="standard_tile_line"></div>
+</div>

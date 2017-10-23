@@ -1,0 +1,35 @@
+# exclude everything except directory data
+/Website/AtariLegend/data/
+
+# exclude everything except directory templates_c
+/Website/AtariLegend/php/temp/smarty/templates_c/
+
+# exclude the connect.php file
+/Website/AtariLegend/php/config/connect.php
+
+# exclude the SASS cache
+/Website/AtariLegend/themes/.sass-cache/
+/Website/AtariLegend/themes/.pleeeaserc
+.sass-cache/
+/result/
+/node_modules/
+scss-lint-report.xml
+
+# exclude the SASS map file
+/Website/AtariLegend/themes/styles/1/css/style.css
+/Website/AtariLegend/themes/styles/1/css/style.css.map
+/Website/AtariLegend/themes/styles/2/css/style.css
+/Website/AtariLegend/themes/styles/2/css/style.css.map
+/Website/AtariLegend/themes/styles/3/css/style.css
+/Website/AtariLegend/themes/styles/3/css/style.css.map
+style.css
+style.css.map
+composer.phar
+composer.json
+
+# ignore HTACCESS files
+/Website/AtariLegend/.htaccess
+/Website/AtariLegend/.htpasswd
+/Website/AtariLegend/php/.htaccess
+/Website/AtariLegend/php/admin/.htaccess
+

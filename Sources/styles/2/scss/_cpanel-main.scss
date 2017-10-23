@@ -1,0 +1,107 @@
+//*************************************************************/
+//**********************TOS 207 SKIN***************************/
+//*************************************************************/
+//*************************************************************/
+//********CPanel MAIN structure and LEFT and RIGHT css*********/
+//*************************************************************/
+.main_stats_container {
+    display: flex;
+    align-items: flex-start;
+}
+
+#child_some_stats {
+    float: left;
+    width: 45%;
+}
+
+#child_good_karma,
+#child_bad_karma,
+#child_bad_karma_chart,
+#child_bar,
+#child_line,
+#child_good_karma_chart {
+    float: left;
+    width: 50%;
+    margin-left: auto;
+}
+
+.main_stats_child  table { width: 98%; }
+#user_stats table { width: 100%; }
+#welcome_cpanel table { width: 100%; }
+
+//*----------------------------------------------------------
+//Left nav
+//------------------------------------------------------------ */
+#leftnav_position_front { float: left; }
+.left_nav_section {
+    padding-top: 3px;
+    padding-bottom: 3px;
+    padding-left: 3px;
+    margin: 0;
+    font-weight: bold;
+    text-align: center;
+    list-style-type: none;
+    background-color: #dbd7d1;
+    border-collapse: collapse;
+    border-top: solid 2px #b2b2b2;
+    border-bottom: solid 2px #b2b2b2;
+}
+
+.left_nav_link:link { color: #182727; }
+.left_nav_link:visited { color: #182727; }
+.left_nav_link:hover { color: #666; }
+//*----------------------------------------------------------
+//Quick search games
+//------------------------------------------------------------ */
+.quick_search_check { margin-right: 5px; }
+#quick_search_games_main {
+    float: left;
+    margin-top: 20px;
+    margin-bottom: 0;
+}
+
+#quick_search_options, #quick_search_user_options {
+    display: table;
+    width: 75%;
+    margin-right: auto;
+    margin-left: auto;
+    text-align: left;
+}
+
+.quick_search_games_button {
+    width: 80px;
+    height: 25px;
+    padding-top: 3px;
+    font-size: 13px;
+    color: #182727;
+    text-shadow: -1px 1px 5px #fff, 1px -1px 15px #acacac;
+    cursor: pointer;
+    background: #fff;
+    border: 0;
+    border-bottom: 3px solid #000;
+}
+
+.quick_search_games_button:hover {
+    color: #fff;
+    background: #000;
+}
+
+#quick_search_pub_select {
+    width: 185px;
+    height: 25px;
+    margin-top: 0;
+    background: #666;
+}
+
+#quick_search_dev_select {
+    width: 185px;
+    height: 25px;
+    margin-top: 0;
+    background: #666;
+}
+
+#quick_search_small_select, #quick_search_user_small_select {
+    width: 50px;
+    height: 25px;
+    background: #666;
+}

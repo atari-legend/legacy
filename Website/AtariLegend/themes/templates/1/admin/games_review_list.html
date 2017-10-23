@@ -1,0 +1,58 @@
+{* 
+/***************************************************************************
+                              games_review_list.html
+*                            --------------------------
+*   begin                : Sunday, November 27, 2005
+*   copyright            : (C) 2005 Atari Legend
+*   email                : admin@atarilegend.com
+*
+*   Id: games_review_list.html,v 0.10 2005/11/27 Gatekeeper
+*   Id: games_review_list.html,v 0.15 2016/07/24 ST Graveyard
+*
+***************************************************************************/
+
+************************************************************************************************
+The main game page
+************************************************************************************************
+*}
+{extends file='1/admin/frontpage.html'}
+
+{block name=title}Search results{/block}
+
+{block name=main_tile}
+<div class="standard_tile" id="games_review_list">
+	<h1>REVIEWS</h1>
+	<div class="standard_tile_line"></div>
+	<div class="standard_tile_text">
+		<div class="left_nav_section">
+			This is the search result page. Click a game to go to the main review page. 
+			If you want to do a new search query, click <a href="games_review.php" class="left_nav_link"><b>here</b></a>!
+		</div> 
+		<br>
+		<br>
+		<table class="standard_table_list">
+			<tr>
+				<th id="gamename_gr_th">Game Name</th>
+				<th id="gamepub_gr_th">Publisher</th>
+				<th id="reviewdate_gr_th">Year</th>
+				<th id="nrreviews_gr_th">Nr</th>
+			</tr>
+			{foreach from=$review item=line}
+				<tr>
+					<td class="gamename_gr_td">{if $line.game_name != ''}<a href="games_review_add.php?game_id={$line.game_id}" class="standard_table_center">{$line.game_name}</a>{else}<i>n/a</i>{/if}</td>
+					<td class="gamepub_gr_td">{if $line.game_publisher != ''}{$line.game_publisher}{else}<i>n/a</i>{/if}</td>
+					<td class="reviewdate_gr_td">{if $line.game_year != ''}{$line.game_year}{else}<i>n/a</i>{/if}</td>				
+					<td class="nrreviews_gr_td">{if $line.number_reviews != ''}{$line.number_reviews}{else}<i>0</i>{/if}</td>
+				</tr>
+			{/foreach}
+			<tr>
+				<td colspan="4" class="standard_table_left">
+					{if $nr_of_entries == 1}1 game found {else} {$nr_of_entries} games found{/if} in {$querytime} sec
+				</td>
+			</tr>
+		</table>
+		<br>
+		<div class="standard_table_center"><a href="javascript:history.go(-1)" class="standard_tile_link">back</a></div>
+	</div>
+</div>
+{/block}
