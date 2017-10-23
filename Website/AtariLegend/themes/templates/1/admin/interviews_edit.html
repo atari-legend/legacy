@@ -75,8 +75,51 @@
             var user = document.getElementById("member_select");
             var strUser = user.options[user.selectedIndex].text;
             document.getElementById("interview_preview_user").innerHTML = strUser;
+            
+            //Do all the preps for the intro text!
+            var intro = document.getElementsByName("textintro")[0].value;
+            intro = intro.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+            intro = intro.replace(/\n\r?/g, '<br />');
+            intro = intro.replaceAll("[b]", "<b>");
+            intro = intro.replaceAll("[/b]", "</b>");
+            intro = intro.replaceAll("[u]", "<u>");
+            intro = intro.replaceAll("[/u]", "</u>");
+            intro = intro.replaceAll("[i]", "<i>");
+            intro = intro.replaceAll("[/i]", "</i>");
+            intro = intro.replaceAll("[url=", "<a href=");
+            intro = intro.replaceAll("[/url]", "</a>");
+            intro = intro.replaceAll("[email=", "<a href=mailto:");
+            intro = intro.replaceAll("[/email]", "</a>"); 
+            document.getElementById("interview_preview_intro").innerHTML = intro;
+            
+            //Do all the preps for the chapters text!
+            var chapters = document.getElementsByName("textchapters")[0].value;
+            chapters = chapters.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+            chapters = chapters.replace(/\n\r?/g, '<br />');
+            chapters = chapters.replaceAll("[b]", "<b>");
+            chapters = chapters.replaceAll("[/b]", "</b>");
+            chapters = chapters.replaceAll("[u]", "<u>");
+            chapters = chapters.replaceAll("[/u]", "</u>");
+            chapters = chapters.replaceAll("[i]", "<i>");
+            chapters = chapters.replaceAll("[/i]", "</i>");
+            chapters = chapters.replaceAll("[url=", "<a href=");
+            chapters = chapters.replaceAll("[/url]", "</a>");
+            chapters = chapters.replaceAll("[email=", "<a href=mailto:");
+            chapters = chapters.replaceAll("[/email]", "</a>");
+            for (i = 0; i < 30; i++) 
+            {   
+                var hotspot = "[hotspotUrl=#";
+                var hotspot_output = hotspot.concat(i);
+                var hotspot_final = hotspot_output.concat("]");
+                var name = "<a href=#";
+                var name_output = name.concat(i);
+                var name_final = name_output.concat(" class=standard_tile_link_black>");
+                chapters = chapters.replaceAll(hotspot_final, name_final);
+            }  
+            chapters = chapters.replaceAll("[/hotspotUrl]", "</a>");  
+            document.getElementById("interview_preview_chapters").innerHTML = chapters;
 
-            //Do all the preps for the actual review text!
+            //Do all the preps for the actual interview text!
             var text = document.getElementsByName("textfield")[0].value;
             text = text.replace(/</g, "&lt;").replace(/>/g, "&gt;");
             text = text.replace(/\n\r?/g, '<br />');
@@ -88,12 +131,22 @@
             text = text.replaceAll("[/i]", "</i>");
             text = text.replaceAll("[url=", "<a href=");
             text = text.replaceAll("[/url]", "</a>");
-            text = text.replaceAll("[mail=", "<a href=mailto:");
-            text = text.replaceAll("[/mail]", "</a>");
-            text = text.replaceAll("]", " class=standard_tile_link_cpanel>");
+            text = text.replaceAll("[email=", "<a href=mailto:");
+            text = text.replaceAll("[/email]", "</a>");
+            for (i = 0; i < 30; i++) 
+            {
+                var hotspot = "[hotspot=";
+                var hotspot_output = hotspot.concat(i);
+                var hotspot_final = hotspot_output.concat("]");
+                var name = "<a name=";
+                var name_output = name.concat(i);
+                var name_final = name_output.concat(">");
+                text = text.replaceAll(hotspot_final, name_final);
+            }
+            text = text.replaceAll("[/hotspot]", "</a>");   
+            text = text.replaceAll("]", " class=standard_tile_link_black>");            
             document.getElementById("interview_preview_text").innerHTML = text;
-
-
+            
             //get the screenshots data
             for (i = 1; i <= {$screenshots_nr}; i++)
             {
@@ -191,7 +244,7 @@ var is_win = ((clientPC.indexOf("win")!=-1) || (clientPC.indexOf("16bit") != -1)
 var is_mac = (clientPC.indexOf("mac")!=-1);
 
 // Define the bbCode tags
-bbtags = new Array('[b]','[/b]','[i]','[/i]','[u]','[/u]','[url]','[/url]','[mail]','[/mail]', '[hotspotUrl=#]', '[/hotspotUrl]', '[hotspot=]', '[/hotspot]','[frontpage]','[/frontpage]');
+bbtags = new Array('[b]','[/b]','[i]','[/i]','[u]','[/u]','[url]','[/url]','[email]','[/email]', '[hotspotUrl=#]', '[/hotspotUrl]', '[hotspot=]', '[/hotspot]','[frontpage]','[/frontpage]');
 bbcode = new Array();
 imageTag = false;
 
@@ -463,18 +516,28 @@ function storeCaret(textEl) {
                 <legend>Preview</legend>
                 <div class="review_container">
                     <div class="review_child" id="review_text">
-                        <h4 style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;display:inline;">
-                            Written by <span id="interview_preview_user"></span>
-                        </h4>
-                        <h5 style="font-weight: bold;"><div id="interview_preview_date"></div></h5>
+                        Written by <span id="interview_preview_user"></span>
+                        <b><div id="interview_preview_date"></div></b>
                         <br>
                         <br>
                         {if $interview.interview_img != 'none'}
-                            <span style="float:right; margin-left: 10px;" id="interview_preview_photo"><img src="../../includes/show_image.php?file={$interview.interview_img}&amp;resize=200,null,null,null" alt="{$interview.individual_name}" style="display:inline;" class="user_stats_img" id="user_details_img_dark"></span>
+                            <span style="float:left; margin-right:10px;" id="interview_preview_photo"><img src="../../includes/show_image.php?file={$interview.interview_img}&amp;resize=200,null,null,null" alt="{$interview.individual_name}" style="display:inline;" class="user_stats_img" id="user_details_img_dark"></span>
                         {/if}
+                        <u>INTRO</u>
+                        <br>
+                        <br>
+                        <div id="interview_preview_intro"></div>
+                        <br>
+                        <br>
+                        <u>CHAPTERS</u>
+                        <br>
+                        <br>
                         <div id="interview_preview_chapters"></div>
                         <br>
-                        <br>	
+                        <br>
+                        <u>INTERVIEW</u>
+                        <br>
+                        <br>
                         <div id="interview_preview_text"></div>
                         <br>
                         <br>
