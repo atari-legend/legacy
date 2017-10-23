@@ -2,7 +2,7 @@
 /***************************************************************************
 *                             ajax_menus_add_docs.html
 *                            --------------------------
-*   begin                : 
+*   begin                :
 *   copyright            : (C) 2016 Atari Legend
 *   email                : admin@atarilegend.com
 *
@@ -15,7 +15,7 @@
 *}
 
 {* Full search list *}
-{if isset($smarty_action) and $smarty_action == "full_list"}					
+{if isset($smarty_action) and $smarty_action == "full_list"}
 	<form action="" method="post" name="game_search" id="game_search">
 		<div class="standard_tile_text">
 			<fieldset class="centered_fieldset">
@@ -25,17 +25,15 @@
                     <option value="" SELECTED>-</option>
                     {html_options values=$az_value output=$az_output}
 				</select>
-				<input type="text" name="gamesearch" id="docsearch_menudisk" class="standard_tile_input_small">
+				<input type="text" name="gamesearch" id="docsearch_menudisk" onkeyup="searchDoc({$menu_disk_id})" class="standard_tile_input_small">
                 <br><br>
-                <input type="button" class="topbutton_cpanel_small" value="Search" onclick="searchDoc({$menu_disk_id})">
-				<br>
 			</fieldset>
 		</div>
 	</form>
 	<br>
-	<form action="" method="get" name="doc_add_to_menu" id="doc_add_to_menu">	
+	<form action="" method="get" name="doc_add_to_menu" id="doc_add_to_menu">
         {if isset($series_link) }
-		<div id="doc_list">		
+		<div id="doc_list">
 			<table class="table_game_list" style="width:95%;border: solid 1px black;margin:auto;">
 				<tr>
 					<th id="menu_mark_th">Add</th>
@@ -52,7 +50,7 @@
                             <input type="checkbox" id="{$line.game_id}" name="game_id[]" value="{$line.game_id}" style="margin-left:4px;" onchange="addDoctoMenu(this.value,{$menu_disk_id},'{$line.software_type}')">
                             <label for="{$line.game_id}"></label>&nbsp;
                             <!--<input type="checkbox" name="game_id[]" value="{$line.game_id}" style="margin-left:4px;" onchange="addDoctoMenu(this.value,{$menu_disk_id},'{$line.software_type}')">-->
-                        </div>  
+                        </div>
 					</td>
 					<td class="game_td">
 						{if $line.game_name != ''}{if $line.software_type == 'Game'}<a href="../games/games_detail.php?game_id={$line.game_id}" class="standard_table_left">{$line.game_name}</a>{else}<a href="../administration/construction.php" class="standard_table_left">{$line.game_name}</a>{/if}
@@ -75,7 +73,7 @@
 						{else}
 							<i>n/a</i>
 						{/if}
-					</td>				
+					</td>
 					<td class="year_td">
 						{if $line.year != ''}
 							<a href="../games/games_main.php?year={$line.year}&amp;action=search" class="standard_table_left">
@@ -102,7 +100,7 @@
 					</td>
 				</tr>
 			</table>
-		</div>	
+		</div>
         {else}
             <div class="standard_tile_text">
                 <div class="left_nav_section">
@@ -151,7 +149,7 @@
 					{else}
 						<i>n/a</i>
 					{/if}
-				</td>				
+				</td>
 				<td class="year_td">
 					{if $line.year != ''}
 						<a href="../games/games_main.php?year={$line.year}&amp;action=search" class="standard_table_left">
@@ -186,5 +184,3 @@
         </div>
     {/if}
 {/if}
-
-	
