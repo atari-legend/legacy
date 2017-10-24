@@ -594,23 +594,19 @@ function addDoctoMenu(software_id, menu_disk_id, software_type) {
         $("#menu_doc_list").html("");
         return;
     } else {
-        if (window.XMLHttpRequest) {
-            // code for IE7+, Firefox, Chrome, Opera, Safari
-            xmlhttp = new XMLHttpRequest();
-        } else {
-            // code for IE6, IE5
-            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-        }
-        xmlhttp.onreadystatechange = function() {
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                data = xmlhttp.responseText.split("[BRK]");
-                document.getElementById("menu_doc_list").innerHTML = data[0];
-                OSDMessageDisplay(data[1]);
-                document.getElementById("doc_add_to_menu").reset();
+        $.ajax({
+            // The URL for the request
+            url: "db_menu_disk.php",
+            data: "action=add_doc_to_menu&software_id=" + software_id + "&menu_disk_id=" + menu_disk_id + "&software_type=" + software_type,
+            type: "POST",
+            dataType: "html",
+            // Code to run if the request succeeds;
+            success: function(html) {
+                var ReturnHtml = html.split('[BRK]');
+                $("#menu_doc_list").html(ReturnHtml[0]);
+                OSDMessageDisplay(ReturnHtml[1]);
             }
-        }
-        xmlhttp.open("GET", "../menus/db_menu_disk.php?action=add_doc_to_menu&software_id=" + software_id + "&menu_disk_id=" + menu_disk_id + "&software_type=" + software_type, true);
-        xmlhttp.send();
+        });
     }
 }
 
@@ -671,25 +667,21 @@ function LinkChain(menu_disk_title_id, menu_disk_id) {
         $("#menu_software_list").html("");
         return;
     } else {
-        if (window.XMLHttpRequest) {
-            // code for IE7+, Firefox, Chrome, Opera, Safari
-            xmlhttp = new XMLHttpRequest();
-        } else {
-            // code for IE6, IE5
-            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-        }
-        xmlhttp.onreadystatechange = function() {
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                data = xmlhttp.responseText.split("[BRK]");
-                document.getElementById("menu_software_list").innerHTML = data[0];
-                OSDMessageDisplay(data[1]);
-                //document.getElementById("link_game_to_set").reset();
-                document.getElementById("menu_detail_expand_set").innerHTML = "";
+        var form_values = $("#link_game_to_set").serialize();
+        $.ajax({
+            // The URL for the request
+            url: "db_menu_disk.php",
+            data: form_values,
+            type: "POST",
+            dataType: "html",
+            // Code to run if the request succeeds;
+            success: function(html) {
+                var ReturnHtml = html.split('[BRK]');
+                $("#menu_software_list").html(ReturnHtml[0]);
+                OSDMessageDisplay(ReturnHtml[1]);
+                $("#menu_detail_expand_set").html("");
             }
-        }
-        var formData = new FormData(document.getElementById("link_game_to_set"));
-        xmlhttp.open("POST", "../menus/db_menu_disk.php", true);
-        xmlhttp.send(formData);
+        });
     }
 }
 
@@ -698,24 +690,20 @@ function DeleteChain(menu_disk_title_id, menu_disk_id, title_name) {
         $("#menu_software_list").html("");
         return;
     } else {
-        if (window.XMLHttpRequest) {
-            // code for IE7+, Firefox, Chrome, Opera, Safari
-            xmlhttp = new XMLHttpRequest();
-        } else {
-            // code for IE6, IE5
-            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-        }
-        xmlhttp.onreadystatechange = function() {
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                data = xmlhttp.responseText.split("[BRK]");
-                document.getElementById("menu_software_list").innerHTML = data[0];
-                OSDMessageDisplay(data[1]);
-                //document.getElementById("link_game_to_set").reset();
+        $.ajax({
+            // The URL for the request
+            url: "db_menu_disk.php",
+            data: "action=delete_game_from_set&menu_disk_title_id=" + menu_disk_title_id + "&menu_disk_id=" + menu_disk_id + "&title_name=" + title_name,
+            type: "POST",
+            dataType: "html",
+            // Code to run if the request succeeds;
+            success: function(html) {
+                var ReturnHtml = html.split('[BRK]');
+                $("#menu_software_list").html(ReturnHtml[0]);
+                OSDMessageDisplay(ReturnHtml[1]);
                 $("#menu_detail_expand_set").html("");
             }
-        }
-        xmlhttp.open("GET", "../menus/db_menu_disk.php?action=delete_game_from_set&menu_disk_title_id=" + menu_disk_title_id + "&menu_disk_id=" + menu_disk_id + "&title_name=" + title_name, true);
-        xmlhttp.send();
+        });
     }
 }
 
@@ -724,24 +712,20 @@ function CreateChain(str, menu_disk_id) {
         $("#menu_software_list").html("");
         return;
     } else {
-        if (window.XMLHttpRequest) {
-            // code for IE7+, Firefox, Chrome, Opera, Safari
-            xmlhttp = new XMLHttpRequest();
-        } else {
-            // code for IE6, IE5
-            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-        }
-        xmlhttp.onreadystatechange = function() {
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                data = xmlhttp.responseText.split("[BRK]");
-                document.getElementById("menu_software_list").innerHTML = data[0];
-                OSDMessageDisplay(data[1]);
-                //document.getElementById("link_game_to_set").reset();
+        $.ajax({
+            // The URL for the request
+            url: "db_menu_disk.php",
+            data: "action=add_set_to_menu&menu_disk_title_id=" + str + "&menu_disk_id=" + menu_disk_id,
+            type: "POST",
+            dataType: "html",
+            // Code to run if the request succeeds;
+            success: function(html) {
+                var ReturnHtml = html.split('[BRK]');
+                $("#menu_software_list").html(ReturnHtml[0]);
+                OSDMessageDisplay(ReturnHtml[1]);
                 $("#menu_detail_expand_set").html("");
             }
-        }
-        xmlhttp.open("GET", "../menus/db_menu_disk.php?action=add_set_to_menu&menu_disk_title_id=" + str + "&menu_disk_id=" + menu_disk_id, true);
-        xmlhttp.send();
+        });
     }
 }
 
@@ -795,22 +779,19 @@ function deleteScreenshotfromMenu(str, menu_disk_id) {
         $("#menu_screenshot_list").html("");
         return;
     } else {
-        if (window.XMLHttpRequest) {
-            // code for IE7+, Firefox, Chrome, Opera, Safari
-            xmlhttp = new XMLHttpRequest();
-        } else {
-            // code for IE6, IE5
-            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-        }
-        xmlhttp.onreadystatechange = function() {
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                data = xmlhttp.responseText.split("[BRK]");
-                document.getElementById("menu_screenshot_list").innerHTML = data[0];
-                OSDMessageDisplay(data[1]);
+        $.ajax({
+            // The URL for the request
+            url: "db_menu_disk.php",
+            data: "action=delete_screen_from_menu_disk&screenshot_id=" + str + "&menu_disk_id=" + menu_disk_id,
+            type: "POST",
+            dataType: "html",
+            // Code to run if the request succeeds;
+            success: function(html) {
+                var ReturnHtml = html.split('[BRK]');
+                $("#menu_software_list").html(ReturnHtml[0]);
+                OSDMessageDisplay(ReturnHtml[1]);
             }
-        }
-        xmlhttp.open("GET", "../menus/db_menu_disk.php?action=delete_screen_from_menu_disk&screenshot_id=" + str + "&menu_disk_id=" + menu_disk_id, true);
-        xmlhttp.send();
+        });
     }
 }
 
