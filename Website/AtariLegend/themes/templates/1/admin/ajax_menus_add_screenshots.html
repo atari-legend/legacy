@@ -8,7 +8,7 @@
 *
 *   Id: ajax_menus_add_screenshots.html,v 0.10 2016/09/10 23:01 STG
 *			- creation of file
-*   Id: ajax_menus_add_screenshots.html,v 0.11 2017/05/06 23:15 STG 
+*   Id: ajax_menus_add_screenshots.html,v 0.11 2017/05/06 23:15 STG
 *           - Custom upload selector
 *
 ***************************************************************************/
@@ -18,11 +18,11 @@
 	<fieldset class="centered_fieldset">
 		<legend>Browse</legend>
 		<form action="" method="post" name="screenshot_add_to_menu" id="screenshot_add_to_menu">
-			<!--{section name=loop loop=11 start=1} 
+			<!--{section name=loop loop=11 start=1}
 				<input type="file" name="image[{$smarty.section.loop.index}]">
 			{/section}-->
             <label for="file_upload" class="file_upload" onclick="myFunction()">Select file(s)</label>
-            <input id="file_upload" type="file" name="image[]" multiple>
+            <input id="file_upload" class="JSMenuScreenshotUpload" type="file" name="image[]" multiple>
             <input type="text" class="standard_tile_input_small" id="file_upload_game_screenshots">&nbsp;
 			<br>
 			<br>
@@ -30,7 +30,7 @@
 			<input type="hidden" name="menu_disk_id" value="{$menu_disk_id}">
 			<input type="hidden" name="action" value="add_screens">
 			<input type="button" value="Add" onclick="addScreenshottoMenu({$menu_disk_id})" class="topbutton_cpanel">
-		</form>	
-	</fieldset> 
+		</form>
+	</fieldset>
 </div>
 </br>
