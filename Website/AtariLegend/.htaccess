@@ -1,0 +1,41 @@
+Options +FollowSymlinks -MultiViews -Indexes
+
+# Custom error pages
+ErrorDocument 403 /themes/templates/1/forbidden.html
+ErrorDocument 404 /themes/templates/1/page_not_found.html
+
+RewriteEngine On
+RewriteBase /
+
+# The following rules are to hide the root level /php/ and /php/main/
+# folders from the URL. We want to simulate users accessing files under these
+# folders as if they were are the root / of the website.
+
+# If request are coming for /php/something.php or /php/main/something.php,
+# Redirect them to /something.php
+# e.g.:
+#   /php/common/login/user_process_login.php -> /common/login/user_process_login.php
+#   /php/main/front/front.php -> /front/front.php
+RewriteRule ^php/(.*) /$1 [L,R=301]
+RewriteRule ^main/(.*) /$1 [L,R=301]
+
+# If there is a request for /foo/bar/something.php, check that the file
+# /php/main/foo/bar/something.php exists, then rewrite it to that
+RewriteCond %{DOCUMENT_ROOT}/php/main%{REQUEST_URI} -f
+RewriteRule ^/?(.*)$ php/main/$1 [END]
+
+# Companion rule of the above for /foo/bar/ (index file) should be rewritten to
+# /php/main/foo/bar/index.php
+RewriteCond %{DOCUMENT_ROOT}/php/main%{REQUEST_URI}/index.php -f
+RewriteRule ^/?(.*)$ php/main/$1/index.php [END]
+
+
+# If there is a request for /foo/bar/something.php, check that the file
+# /php/foo/bar/something.php exists, then rewrite it to that
+RewriteCond %{DOCUMENT_ROOT}/php%{REQUEST_URI} -f
+RewriteRule ^(.*)$ php/$1 [END]
+
+# Companion rule of the above for /foo/bar/ (index file) should be rewritten to
+# /php//foo/bar/index.php
+RewriteCond %{DOCUMENT_ROOT}/php%{REQUEST_URI}/index.php -f
+RewriteRule ^(.*)$ php/$1/index.php [END]

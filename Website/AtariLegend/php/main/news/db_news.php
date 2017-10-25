@@ -16,6 +16,7 @@
 //*************************************************************************
 
 include("../../config/common.php");
+include("../../config/admin.php");
 
 if (isset($news_headline) and $news_headline != 'Headline' and $news_headline != '' and isset($textfield) and $textfield != 'News item' and $textfield != '') {
     $timestamp = time();
