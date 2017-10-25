@@ -22,20 +22,20 @@ RewriteRule ^main/(.*) /$1 [L,R=301]
 # If there is a request for /foo/bar/something.php, check that the file
 # /php/main/foo/bar/something.php exists, then rewrite it to that
 RewriteCond %{DOCUMENT_ROOT}/php/main%{REQUEST_URI} -f
-RewriteRule ^/?(.*)$ %{DOCUMENT_ROOT}/php/main/$1 [END]
+RewriteRule ^/?(.*)$ php/main/$1 [END]
 
 # Companion rule of the above for /foo/bar/ (index file) should be rewritten to
 # /php/main/foo/bar/index.php
 RewriteCond %{DOCUMENT_ROOT}/php/main%{REQUEST_URI}/index.php -f
-RewriteRule ^/?(.*)$ %{DOCUMENT_ROOT}/php/main/$1/index.php [END]
+RewriteRule ^/?(.*)$ php/main/$1/index.php [END]
 
 
 # If there is a request for /foo/bar/something.php, check that the file
 # /php/foo/bar/something.php exists, then rewrite it to that
 RewriteCond %{DOCUMENT_ROOT}/php%{REQUEST_URI} -f
-RewriteRule ^(.*)$ %{DOCUMENT_ROOT}/php/$1 [END]
+RewriteRule ^(.*)$ php/$1 [END]
 
 # Companion rule of the above for /foo/bar/ (index file) should be rewritten to
 # /php//foo/bar/index.php
 RewriteCond %{DOCUMENT_ROOT}/php%{REQUEST_URI}/index.php -f
-RewriteRule ^(.*)$ %{DOCUMENT_ROOT}/php/$1/index.php [END]
+RewriteRule ^(.*)$ php/$1/index.php [END]
