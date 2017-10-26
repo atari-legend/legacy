@@ -805,22 +805,19 @@ function deleteDownload(str, menu_disk_id) {
     if (return_value == "0") {
         return;
     } else {
-        if (window.XMLHttpRequest) {
-            // code for IE7+, Firefox, Chrome, Opera, Safari
-            xmlhttp = new XMLHttpRequest();
-        } else {
-            // code for IE6, IE5
-            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-        }
-        xmlhttp.onreadystatechange = function() {
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                data = xmlhttp.responseText.split("[BRK]");
-                document.getElementById("menu_file_list").innerHTML = data[0];
-                OSDMessageDisplay(data[1]);
+        $.ajax({
+            // The URL for the request
+            url: "db_menu_disk.php",
+            data: "action=delete_download_from_menu_disk&menu_disk_download_id=" + str + "&menu_disk_id=" + menu_disk_id,
+            type: "POST",
+            dataType: "html",
+            // Code to run if the request succeeds;
+            success: function(html) {
+                var ReturnHtml = html.split('[BRK]');
+                $("#menu_file_list").html(ReturnHtml[0]);
+                OSDMessageDisplay(ReturnHtml[1]);
             }
-        }
-        xmlhttp.open("GET", "../menus/db_menu_disk.php?action=delete_download_from_menu_disk&menu_disk_download_id=" + str + "&menu_disk_id=" + menu_disk_id, true);
-        xmlhttp.send();
+        });
     }
 }
 
@@ -837,22 +834,19 @@ function deleteDocfromMenu(str, menu_disk_id) {
             document.getElementById("menu_doc_list").innerHTML = "";
             return;
         } else {
-            if (window.XMLHttpRequest) {
-                // code for IE7+, Firefox, Chrome, Opera, Safari
-                xmlhttp = new XMLHttpRequest();
-            } else {
-                // code for IE6, IE5
-                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-            }
-            xmlhttp.onreadystatechange = function() {
-                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                    data = xmlhttp.responseText.split("[BRK]");
-                    document.getElementById("menu_doc_list").innerHTML = data[0];
-                    OSDMessageDisplay(data[1]);
+            $.ajax({
+                // The URL for the request
+                url: "db_menu_disk.php",
+                data: "action=delete_doc_from_menu_disk&menu_disk_title_id=" + str + "&menu_disk_id=" + menu_disk_id,
+                type: "POST",
+                dataType: "html",
+                // Code to run if the request succeeds;
+                success: function(html) {
+                    var ReturnHtml = html.split('[BRK]');
+                    $("#menu_doc_list").html(ReturnHtml[0]);
+                    OSDMessageDisplay(ReturnHtml[1]);
                 }
-            }
-            xmlhttp.open("GET", "../menus/db_menu_disk.php?action=delete_doc_from_menu_disk&menu_disk_title_id=" + str + "&menu_disk_id=" + menu_disk_id, true);
-            xmlhttp.send();
+            });
         }
     }
 }
@@ -888,25 +882,22 @@ function addCreditstoMenu(menu_disk_id) {
         $("#menu_credit_list").html("");
         return;
     } else {
-        if (window.XMLHttpRequest) {
-            // code for IE7+, Firefox, Chrome, Opera, Safari
-            xmlhttp = new XMLHttpRequest();
-        } else {
-            // code for IE6, IE5
-            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-        }
-        xmlhttp.onreadystatechange = function() {
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                data = xmlhttp.responseText.split("[BRK]");
-                document.getElementById("menu_credit_list").innerHTML = data[0];
-                OSDMessageDisplay(data[1]);
-                document.getElementById("menu_credit_list").reset();
-            }
-        }
         var ind_id = document.getElementById("menu_credits_form").elements.namedItem("ind_id").value;
         var author_type_id = document.getElementById("menu_credits_form").elements.namedItem("author_type_id").value;
-        xmlhttp.open("GET", "../menus/db_menu_disk.php?action=add_intro_credits&author_type_id=" + author_type_id + "&menu_disk_id=" + menu_disk_id + "&ind_id=" + ind_id, true);
-        xmlhttp.send();
+        $.ajax({
+            // The URL for the request
+            url: "db_menu_disk.php",
+            data: "action=add_intro_credits&author_type_id=" + author_type_id + "&menu_disk_id=" + menu_disk_id + "&ind_id=" + ind_id,
+            type: "POST",
+            dataType: "html",
+            // Code to run if the request succeeds;
+            success: function(html) {
+                var ReturnHtml = html.split('[BRK]');
+                $("#menu_credit_list").html(ReturnHtml[0]);
+                OSDMessageDisplay(ReturnHtml[1]);
+                document.getElementById("menu_credit_list").reset();
+            }
+        });
     }
 }
 
@@ -922,23 +913,20 @@ function DeleteCredits(menu_disk_credits_id, menu_disk_id) {
             $("#menu_credit_list").html("");
             return;
         } else {
-            if (window.XMLHttpRequest) {
-                // code for IE7+, Firefox, Chrome, Opera, Safari
-                xmlhttp = new XMLHttpRequest();
-            } else {
-                // code for IE6, IE5
-                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-            }
-            xmlhttp.onreadystatechange = function() {
-                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                    data = xmlhttp.responseText.split("[BRK]");
-                    document.getElementById("menu_credit_list").innerHTML = data[0];
-                    OSDMessageDisplay(data[1]);
+            $.ajax({
+                // The URL for the request
+                url: "db_menu_disk.php",
+                data: "action=delete_menu_disk_credits&menu_disk_credits_id=" + menu_disk_credits_id + "&menu_disk_id=" + menu_disk_id,
+                type: "POST",
+                dataType: "html",
+                // Code to run if the request succeeds;
+                success: function(html) {
+                    var ReturnHtml = html.split('[BRK]');
+                    $("#menu_credit_list").html(ReturnHtml[0]);
+                    OSDMessageDisplay(ReturnHtml[1]);
                     document.getElementById("menu_credit_list").reset();
                 }
-            }
-            xmlhttp.open("GET", "../menus/db_menu_disk.php?action=delete_menu_disk_credits&menu_disk_credits_id=" + menu_disk_credits_id + "&menu_disk_id=" + menu_disk_id, true);
-            xmlhttp.send();
+            });
         }
     }
 }
@@ -955,23 +943,20 @@ function DeleteTitleCredits(menu_disk_title_id, ind_id, author_type_id) {
             $("#author_list").html("");
             return;
         } else {
-            if (window.XMLHttpRequest) {
-                // code for IE7+, Firefox, Chrome, Opera, Safari
-                xmlhttp = new XMLHttpRequest();
-            } else {
-                // code for IE6, IE5
-                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-            }
-            xmlhttp.onreadystatechange = function() {
-                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                    data = xmlhttp.responseText.split("[BRK]");
-                    document.getElementById("author_list").innerHTML = data[0];
-                    OSDMessageDisplay(data[1]);
+            $.ajax({
+                // The URL for the request
+                url: "db_menu_disk.php",
+                data: "action=delete_menu_disk_title_credits&menu_disk_title_id=" + menu_disk_title_id + "&author_type_id=" + author_type_id + "+&ind_id=" + ind_id,
+                type: "POST",
+                dataType: "html",
+                // Code to run if the request succeeds;
+                success: function(html) {
+                    var ReturnHtml = html.split('[BRK]');
+                    $("#author_list").html(ReturnHtml[0]);
+                    OSDMessageDisplay(ReturnHtml[1]);
                     document.getElementById("author_list").reset();
                 }
-            }
-            xmlhttp.open("GET", "../menus/db_menu_disk.php?action=delete_menu_disk_title_credits&menu_disk_title_id=" + menu_disk_title_id + "&author_type_id=" + author_type_id + "+&ind_id=" + ind_id, true);
-            xmlhttp.send();
+            });
         }
     }
 }
@@ -983,23 +968,20 @@ function ChangeState(state_id, menu_disk_id) {
         $("#"+disk_edit_ajax).html("");
         return;
     } else {
-        if (window.XMLHttpRequest) {
-            // code for IE7+, Firefox, Chrome, Opera, Safari
-            xmlhttp = new XMLHttpRequest();
-        } else {
-            // code for IE6, IE5
-            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-        }
-        xmlhttp.onreadystatechange = function() {
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                data = xmlhttp.responseText.split("[BRK]");
-                document.getElementById(disk_edit_ajax).innerHTML = data[0];
-                OSDMessageDisplay(data[1]);
+        $.ajax({
+            // The URL for the request
+            url: "db_menu_disk.php",
+            data: "action=change_menu_disk_state&state_id=" + state_id + "&menu_disk_id=" + menu_disk_id,
+            type: "POST",
+            dataType: "html",
+            // Code to run if the request succeeds;
+            success: function(html) {
+                var ReturnHtml = html.split('[BRK]');
+                $("#"+disk_edit_ajax).html(ReturnHtml[0]);
+                OSDMessageDisplay(ReturnHtml[1]);
                 document.getElementById(disk_edit_ajax).reset();
             }
-        }
-        xmlhttp.open("GET", "../menus/db_menu_disk.php?action=change_menu_disk_state&state_id=" + state_id + "&menu_disk_id=" + menu_disk_id, true);
-        xmlhttp.send();
+        });
     }
 }
 
@@ -1008,23 +990,20 @@ function ChangeDoctype(doc_type_id, doc_id, menu_disk_id) {
         $("#menu_doc_list").html("");
         return;
     } else {
-        if (window.XMLHttpRequest) {
-            // code for IE7+, Firefox, Chrome, Opera, Safari
-            xmlhttp = new XMLHttpRequest();
-        } else {
-            // code for IE6, IE5
-            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-        }
-        xmlhttp.onreadystatechange = function() {
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                data = xmlhttp.responseText.split("[BRK]");
-                document.getElementById("menu_doc_list").innerHTML = data[0];
-                OSDMessageDisplay(data[1]);
+        $.ajax({
+            // The URL for the request
+            url: "db_menu_disk.php",
+            data: "action=change_doctype&doc_type_id=" + doc_type_id + "&doc_id=" + doc_id + "&menu_disk_id=" + menu_disk_id,
+            type: "POST",
+            dataType: "html",
+            // Code to run if the request succeeds;
+            success: function(html) {
+                var ReturnHtml = html.split('[BRK]');
+                $("#menu_doc_list").html(ReturnHtml[0]);
+                OSDMessageDisplay(ReturnHtml[1]);
                 document.getElementById("menu_doc_list").reset();
             }
-        }
-        xmlhttp.open("GET", "../menus/db_menu_disk.php?action=change_doctype&doc_type_id=" + doc_type_id + "&doc_id=" + doc_id + "&menu_disk_id=" + menu_disk_id, true);
-        xmlhttp.send();
+        });
     }
 }
 
@@ -1035,23 +1014,20 @@ function ChangeYear(year_id, menu_disk_id) {
         $("#"+disk_edit_ajax).html("");
         return;
     } else {
-        if (window.XMLHttpRequest) {
-            // code for IE7+, Firefox, Chrome, Opera, Safari
-            xmlhttp = new XMLHttpRequest();
-        } else {
-            // code for IE6, IE5
-            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-        }
-        xmlhttp.onreadystatechange = function() {
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                data = xmlhttp.responseText.split("[BRK]");
-                document.getElementById(disk_edit_ajax).innerHTML = data[0];
-                OSDMessageDisplay(data[1]);
+        $.ajax({
+            // The URL for the request
+            url: "db_menu_disk.php",
+            data: "action=change_menu_disk_year&year_id=" + year_id + "&menu_disk_id=" + menu_disk_id,
+            type: "POST",
+            dataType: "html",
+            // Code to run if the request succeeds;
+            success: function(html) {
+                var ReturnHtml = html.split('[BRK]');
+                $("#"+disk_edit_ajax).html(ReturnHtml[0]);
+                OSDMessageDisplay(ReturnHtml[1]);
                 document.getElementById(disk_edit_ajax).reset();
             }
-        }
-        xmlhttp.open("GET", "../menus/db_menu_disk.php?action=change_menu_disk_year&year_id=" + year_id + "&menu_disk_id=" + menu_disk_id, true);
-        xmlhttp.send();
+        });
     }
 }
 
@@ -1062,54 +1038,22 @@ function ChangeParent(parent_id, menu_disk_id) {
         $("#disk_edit_ajax").html("");
         return;
     } else {
-        if (window.XMLHttpRequest) {
-            // code for IE7+, Firefox, Chrome, Opera, Safari
-            xmlhttp = new XMLHttpRequest();
-        } else {
-            // code for IE6, IE5
-            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-        }
-        xmlhttp.onreadystatechange = function() {
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                data = xmlhttp.responseText.split("[BRK]");
-                document.getElementById(disk_edit_ajax).innerHTML = data[0];
-                OSDMessageDisplay(data[1]);
+        $.ajax({
+            // The URL for the request
+            url: "db_menu_disk.php",
+            data: "action=change_menu_disk_parent&parent_id=" + parent_id + "&menu_disk_id=" + menu_disk_id,
+            type: "POST",
+            dataType: "html",
+            // Code to run if the request succeeds;
+            success: function(html) {
+                var ReturnHtml = html.split('[BRK]');
+                $("#"+disk_edit_ajax).html(ReturnHtml[0]);
+                OSDMessageDisplay(ReturnHtml[1]);
                 document.getElementById(disk_edit_ajax).reset();
             }
-        }
-        xmlhttp.open("GET", "../menus/db_menu_disk.php?action=change_menu_disk_parent&parent_id=" + parent_id + "&menu_disk_id=" + menu_disk_id, true);
-        xmlhttp.send();
+        });
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 </script>
 {/block}
