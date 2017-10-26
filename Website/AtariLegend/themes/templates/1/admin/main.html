@@ -134,7 +134,11 @@
                 $('html, body').animate({scrollTop: offsetTop}, 500, 'linear');
             }
         </script>
+        {/literal}
 
+        {* Insert Google Analytics tags only on production *}
+        {if $smarty.server.HTTP_HOST == $smarty.const.SITEHOST}
+        {literal}
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="//www.googletagmanager.com/gtag/js?id=UA-108399799-2"></script>
         <script>
@@ -145,6 +149,8 @@
           gtag('config', 'UA-108399799-2');
         </script>
         {/literal}
+        {/if}
+
         {block name=java_script}{/block}
     </head>
     <body id="body">
