@@ -29,7 +29,7 @@
 		<meta name="mobile-web-app-capable" content="yes"><!-- Chrome-->
 		<meta name="apple-mobile-web-app-capable" content="yes"><!-- apple -->
 		<!-- End - let the site behave like a mobile app on phone -->
-		<link type="text/css" href="{$style_dir}css/style.css" type="text/css" rel="stylesheet" id="main_stylesheet">
+		<link type="text/css" href="{$style_dir}css/style.css" rel="stylesheet" id="main_stylesheet">
 		<link type="text/css" href="{$style_dir}css/jquery-ui.css" rel="Stylesheet">
         <link type="text/css" href="{$style_dir}css/notify-osd.css" hreflang="en" rel="stylesheet">
         <link type="text/css" href="{$style_dir}css/animsition.min.css" hreflang="en" rel="stylesheet"><!-- fade up script needed for the intro page -->
@@ -47,7 +47,8 @@
 		<script type="text/javascript" src="{$template_dir}includes/js/jquery-1.11.3.min.js"></script> <!-- main jquery stuff -->
 		<script type="text/javascript" src="{$template_dir}includes/js/jquery-ui.js"></script> <!-- main jqueryUI stuff -->
         <script type="text/javascript" src="{$template_dir}includes/js/notify-osd.js"></script>
-		<script type="text/javascript"> <!-- script needed for the autocompletion search engine -->
+		<script type="text/javascript">
+        <!-- script needed for the autocompletion search engine -->
                 $(document).ready(function() {
                     $( "#auto" ).autocomplete({
                         source: "../../../php/includes/autocomplete.php?extraParams=title",
@@ -85,8 +86,8 @@
 						return false;
 					});
 			});
-		</script>
-		<script type="text/javascript"> <!-- script needed for the side menu -->
+
+        <!-- script needed for the side menu -->
 			//<![CDATA[
 			$(window).load(function(){
 			  $("[data-toggle]").click(function() {
@@ -95,8 +96,8 @@
 			  });
 			});
 			//]]>
-		</script>
-        <script type="text/javascript">
+
+
             $(document).ready(function(){
               $('#login-trigger').click(function(){  <!-- script needed log in menu -->
                 $(this).next('#login-content').slideToggle();
@@ -117,13 +118,10 @@
 
                 {/if}
             });
-        </script>
-        {literal}
-        <script> <!-- The 'go to the top' buttong -->
-            $(function(){
 
-                $(document).on( 'scroll', function(){
-
+            <!-- The 'go to the top' button -->
+            $(function() {
+                $(document).on('scroll', function() {
                     if ($(window).scrollTop() > 100) {
                         $('.scroll-top-wrapper').addClass('show');
                     } else {
@@ -131,18 +129,15 @@
                     }
                 });
             });
-        </script>
-        <script> <!-- The 'go to the top' buttong -->
-            $(function(){
-                $(document).on( 'scroll', function(){
-
+            <!-- The 'go to the top' button -->
+            $(function() {
+                $(document).on('scroll', function() {
                     if ($(window).scrollTop() > 100) {
                         $('.scroll-top-wrapper').addClass('show');
                     } else {
                         $('.scroll-top-wrapper').removeClass('show');
                     }
                 });
-
                 $('.scroll-top-wrapper').on('click', scrollToTop);
             });
 
@@ -151,10 +146,12 @@
                 element = $('body');
                 offset = element.offset();
                 offsetTop = offset.top;
-                $('html, body').animate({scrollTop: offsetTop}, 500, 'linear');
+                $('html, body').animate({
+                    scrollTop: offsetTop
+                }, 500, 'linear');
             }
         </script>
-        {/literal}
+
 		{block name=javascript_slider} {/block}
 	</head>
 	<body id="body">
