@@ -1,0 +1,22 @@
+Options +FollowSymlinks -MultiViews -Indexes
+
+RewriteEngine On
+RewriteBase /
+
+# See .htaccess file one level above, these rules are to hide the root level
+# /php/ and /php/main/ folders
+
+# If request are coming for /php/something.php, redirect them to /something.php
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s/+php/([^\s]+) [NC]
+RewriteRule ^ %1 [R=301,L]
+
+# If request are coming for /main/something.php, redirect them to /something.php
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s/+main/([^\s]+) [NC]
+RewriteRule ^ %1 [R=301,L]
+
+# If the requested folder or file doesn't exist, look it up under main/
+# For example if the request is /front/front.php, look it up
+# at main/front/front.php
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule (?!^main/)^(.*)$ /main/$1 [L,NC]
