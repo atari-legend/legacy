@@ -135,6 +135,22 @@
             }
         </script>
         {/literal}
+
+        {* Insert Google Analytics tags only on production *}
+        {if $smarty.server.HTTP_HOST == $smarty.const.SITEHOST}
+        {literal}
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="//www.googletagmanager.com/gtag/js?id=UA-108399799-2"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'UA-108399799-2');
+        </script>
+        {/literal}
+        {/if}
+
         {block name=java_script}{/block}
     </head>
     <body id="body">
@@ -351,9 +367,9 @@
                     <!-- end of log on menu-->
                     {assign var='number' value=1|rand:5}
                     {if $number is odd}
-                    <img id="animation" src="{$style_dir}images/animations/animation0{math equation='rand(1,5)'}.gif" alt="animation" />
+                    <img id="animation" src="{$style_dir}images/animations/animation0{math equation='rand(1,8)'}.gif" alt="animation" />
                     {else}
-                    <img id="animation_vert" src="{$style_dir}images/animations/animation_vert0{math equation='rand(1,2)'}.gif" alt="animation" />
+                    <img id="animation_vert" src="{$style_dir}images/animations/animation_vert0{math equation='rand(1,3)'}.gif" alt="animation" />
                     {/if}
                 </div>
                 <nav id="main_nav">
