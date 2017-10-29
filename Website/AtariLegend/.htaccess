@@ -10,32 +10,19 @@ RewriteBase /
 # The following rules are to hide the root level /php/ and /php/main/
 # folders from the URL. We want to simulate users accessing files under these
 # folders as if they were are the root / of the website.
+# This is needed to maintain the links other websites (like Lemon Amiga) made
+# to /games/games_details.php?game_id=...
 
-# If request are coming for /php/something.php or /php/main/something.php,
-# Redirect them to /something.php
-# e.g.:
-#   /php/common/login/user_process_login.php -> /common/login/user_process_login.php
-#   /php/main/front/front.php -> /front/front.php
-RewriteRule ^php/(.*) /$1 [L,R=301]
-RewriteRule ^main/(.*) /$1 [L,R=301]
+# If request are coming for /php/something.php, redirect them to /something.php
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s/+php/([^\s]+) [NC]
+RewriteRule ^ %1 [R=301,L]
 
-# If there is a request for /foo/bar/something.php, check that the file
-# /php/main/foo/bar/something.php exists, then rewrite it to that
-RewriteCond %{DOCUMENT_ROOT}/php/main%{REQUEST_URI} -f
-RewriteRule ^/?(.*)$ php/main/$1 [END]
-
-# Companion rule of the above for /foo/bar/ (index file) should be rewritten to
-# /php/main/foo/bar/index.php
-RewriteCond %{DOCUMENT_ROOT}/php/main%{REQUEST_URI}/index.php -f
-RewriteRule ^/?(.*)$ php/main/$1/index.php [END]
-
-
-# If there is a request for /foo/bar/something.php, check that the file
-# /php/foo/bar/something.php exists, then rewrite it to that
-RewriteCond %{DOCUMENT_ROOT}/php%{REQUEST_URI} -f
-RewriteRule ^(.*)$ php/$1 [END]
-
-# Companion rule of the above for /foo/bar/ (index file) should be rewritten to
-# /php//foo/bar/index.php
-RewriteCond %{DOCUMENT_ROOT}/php%{REQUEST_URI}/index.php -f
-RewriteRule ^(.*)$ php/$1/index.php [END]
+# If the requested folder or file doesn't exist, look it up under php/
+# For example if the request is /main/front/front.php, look it up
+# at php/main/front/front.php
+# __Note__  It works with conjunction with php/.htaccess, so that requests
+# to /front/front.php gets rewritten to main/front/front.php first, then
+# front/front.php by php/.htaccess
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule (?!^php/)^(.*)$ /php/$1 [L,NC]
