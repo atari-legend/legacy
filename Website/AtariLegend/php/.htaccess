@@ -7,12 +7,14 @@ RewriteBase /
 # /php/ and /php/main/ folders
 
 # If request are coming for /php/something.php, redirect them to /something.php
+# Use 307 and not 301 to cover POST redirection (See issue #250)
 RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s/+php/([^\s]+) [NC]
-RewriteRule ^ %1 [R=301,L]
+RewriteRule ^ %1 [R=307,L]
 
 # If request are coming for /main/something.php, redirect them to /something.php
+# Use 307 and not 301 to cover POST redirection (See issue #250)
 RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s/+main/([^\s]+) [NC]
-RewriteRule ^ %1 [R=301,L]
+RewriteRule ^ %1 [R=307,L]
 
 # If the requested folder or file doesn't exist, look it up under main/
 # For example if the request is /front/front.php, look it up
