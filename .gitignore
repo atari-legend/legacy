@@ -4,8 +4,8 @@
 # exclude temporary directory where Smarty templates are compiled
 /Website/AtariLegend/php/temp
 
-# exclude the connect.php file
-/Website/AtariLegend/php/config/connect.php
+# exclude the database connection settings file
+/Website/AtariLegend/php/config/connection_settings.php
 
 # exclude the SASS cache
 /Website/AtariLegend/themes/.sass-cache/
