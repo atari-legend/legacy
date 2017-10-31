@@ -10,16 +10,33 @@
 *
 ***************************************************************************/
 
-$result = $mysqli->query("SELECT table_name
-FROM information_schema.tables
-WHERE table_schema = '$db_databasename'
-AND engine != 'InnoDB'")
+$result = $mysqli->query("DROP PROCEDURE IF EXISTS convertToInnodb;")
     or die("Error selecting MyISAM tables: ".$mysqli->error);
 
-while($row = mysqli_fetch_assoc($result)) {
-    $table_name = $row["table_name"];
 
-    $mysqli->query("ALTER TABLE $table_name ENGINE=InnoDB")
-        or die("Error converting $table_name to InnoDB: ".$mysqli->error);
-}
-?>
+$result = $mysqli->query("
+    CREATE PROCEDURE convertToInnodb()
+    BEGIN
+    mainloop: LOOP
+      SELECT TABLE_NAME INTO @convertTable FROM information_schema.TABLES
+      WHERE `TABLE_SCHEMA` LIKE DATABASE()
+      AND `ENGINE` LIKE 'MyISAM' ORDER BY TABLE_NAME LIMIT 1;
+      IF @convertTable IS NULL THEN
+        LEAVE mainloop;
+      END IF;
+      SET @sqltext := CONCAT('ALTER TABLE `', DATABASE(), '`.`', @convertTable, '` ENGINE = INNODB');
+      PREPARE convertTables FROM @sqltext;
+      EXECUTE convertTables;
+      DEALLOCATE PREPARE convertTables;
+      SET @convertTable = NULL;
+    END LOOP mainloop;
+
+    END;")
+        or die("Error selecting MyISAM tables: ".$mysqli->error);
+
+
+$result = $mysqli->query("CALL convertToInnodb();")
+    or die("Error selecting MyISAM tables: ".$mysqli->error);
+
+$result = $mysqli->query("DROP PROCEDURE IF EXISTS convertToInnodb;")
+    or die("Error selecting MyISAM tables: ".$mysqli->error);
