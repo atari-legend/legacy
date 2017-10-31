@@ -23,7 +23,7 @@ include("../../config/common.php");
 include("../../config/admin.php");
 
 //load the search fields of the quick search side menu
-include("../../admin/games/quick_search_games.php");
+include("../../common/tiles/tile_change_log.php");
 
 //load the stats tile
 include("../../common/tiles/tile_stats.php");
@@ -236,51 +236,51 @@ $i = 0;
 
 if ($current_month == 13)
 {
-    $current_month = 1; 
-    $current_year = $current_year + 1;  
+    $current_month = 1;
+    $current_year = $current_year + 1;
 }
 
 if ($last_month == 13)
 {
-    $last_month = 1; 
-    $last_year = $last_year + 1;  
+    $last_month = 1;
+    $last_year = $last_year + 1;
 }
 
 if ($current_month == 14)
 {
-    $current_month = 2; 
-    $current_year = $current_year + 1;  
+    $current_month = 2;
+    $current_year = $current_year + 1;
 }
 
 if ($last_month == 14)
 {
-    $last_month = 2; 
-    $last_year = $last_year + 1;  
+    $last_month = 2;
+    $last_year = $last_year + 1;
 }
 
 if ($current_month == 15)
 {
-    $current_month = 3; 
-    $current_year = $current_year + 1;  
-}    
+    $current_month = 3;
+    $current_year = $current_year + 1;
+}
 
 for ($k = 1 ; $k <= 12; $k++)
-{   
+{
     if ($current_month == 13)
     {
-        $current_month = 1; 
-        $current_year = $current_year + 1;  
+        $current_month = 1;
+        $current_year = $current_year + 1;
     }
 
     if ($last_month == 13)
     {
-        $last_month = 1; 
-        $last_year = $last_year + 1;  
+        $last_month = 1;
+        $last_year = $last_year + 1;
     }
 
     $date_high = date_to_timestamp($current_year, $current_month, $current_day );
     $date_low = date_to_timestamp($last_year, $last_month, $current_day );
-    
+
     $result_monthly   = $mysqli->query("SELECT * FROM change_log WHERE timestamp >= $date_low and timestamp < $date_high") or die ("error getting change_log data");
     $change_log_monthly = $result_monthly->num_rows;
     $change_log_monthly_data[$i] = $change_log_monthly;
@@ -290,7 +290,7 @@ for ($k = 1 ; $k <= 12; $k++)
     $change_log_bg[$i] = "#c2c2c2";
     $change_log_border_width[$i] = "1";
     $change_log_border[$i] = "#000000";
-    
+
     $last_month = $last_month + 1;
     $current_month = $current_month + 1;
     $i = $i + 1;

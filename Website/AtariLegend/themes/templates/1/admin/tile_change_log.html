@@ -1,0 +1,171 @@
+{*
+/***************************************************************************
+*                                quick_search_users.html
+*                            ----------------------------
+*   begin                : 2016-02-13
+*   copyright            : (C) 2015 Atari Legend
+*   email                : admin@atarilegend.com
+*
+*   Id: quick_search_users.html,v 0.1 Silver Surfer
+*
+***************************************************************************/
+
+//****************************************************************************************
+// This is the quick game search for the left part of the cpanel
+//****************************************************************************************
+*}
+{block name=quick_search_users}
+
+<div class="standard_tile">
+    <h1>RECENT CHANGES</h1>
+    <div class="standard_tile_line"></div>
+    <br>
+        <div class="standard_table_center">
+
+            {foreach from=$log item=line}
+
+                {*    {$line.log_date}  *}
+
+                    {if $line.log_user_name <> '0'}
+                    <a href="../user/user_detail.php?user_id_selected={$line.log_user_id}" class="standard_table_left">
+                        {$line.log_user_name}
+                    </a>
+                    {else}
+                        [deleted user]
+                    {/if}
+                    {if $line.log_action=="Insert"}
+                    added the
+                    {else if $line.log_action=="Delete"}
+                    removed the
+                    {else if $line.log_action=="Update"}
+                    modified the
+                    {else}
+                    {$line.log_action} the
+                    {/if}
+
+                    {* Start sub section  *}
+
+                    {if $line.log_subsection != $line.log_section}
+                        {if $line.log_subsection_link <> ''}
+                            <a href="{$line.log_subsection_link}" class="standard_table_left">
+                                {$line.log_subsection}
+                            </a>
+                            {else}
+                                {$line.log_subsection}
+                            {/if}
+
+                        {if $line.log_subsection_link <> ''}
+                            <a href="{$line.log_subsection_link}" class="standard_table_left">
+                                {$line.log_subsection_name}
+                            </a>
+                        {else}
+                            {$line.log_subsection_name}
+                        {/if}
+                    {/if}
+
+                    {* End sub section  *}
+
+                    {if $line.log_action=="Delete"} from {/if}
+                    {if $line.log_action=="Insert" and $line.log_subsection != $line.log_section} to {/if}
+
+                    {* Start section  *}
+                    {if $line.log_section != 'Menu disk' and $line.log_section != 'Games'}
+                        {if $line.log_section_link <> ''}
+                            <a href="{$line.log_section_link}" class="standard_table_left">
+                                {$line.log_section}
+                            </a>
+                        {else}
+                            {$line.log_section}
+                        {/if}
+                    {/if}
+
+                    {if $line.log_section_link <> ''}
+                        <a href="{$line.log_section_link}" class="standard_table_left">
+                            {$line.log_section_name}
+                        </a>
+                    {else}
+                        {$line.log_section_name}
+                    {/if}
+                    {* End section  *}
+
+
+<br><br>
+            {/foreach}
+
+
+
+
+
+
+
+
+
+            <table class="standard_table_list">
+                <tr>
+                    <th id="log_date_th">Date</th>
+                    <th id="log_user_th">User</th>
+                    <th id="log_section_th">Section</th>
+                    <th id="log_name_th">Name</th>
+                    <th id="log_action_th">Action</th>
+                    <th id="log_subsection_th">Subsect</th>
+                    <th id="log_sub_name_th">Sub Name</th>
+                </tr>
+                    {foreach from=$log item=line}
+                    <tr>
+                        <td class="log_date_td">
+                            {$line.log_date}
+                        </td>
+                        <td class="log_user_td">
+                            {if $line.log_user_name <> '0'}
+                            <a href="../user/user_detail.php?user_id_selected={$line.log_user_id}" class="standard_table_left">
+                                {$line.log_user_name}
+                            </a>
+                            {else}
+                                [deleted user]
+                            {/if}
+                        </td>
+                        <td class="log_section_td">
+                            {if $line.log_section_link <> ''}
+                                <a href="{$line.log_section_link}" class="standard_table_left">
+                                    {$line.log_section}
+                                </a>
+                            {else}
+                                {$line.log_section}
+                            {/if}
+                        </td>
+                        <td class="log_name_td">
+                            {if $line.log_section_link <> ''}
+                                <a href="{$line.log_section_link}" class="standard_table_left">
+                                    {$line.log_section_name}
+                                </a>
+                            {else}
+                                {$line.log_section_name}
+                            {/if}
+                        </td>
+                        <td class="log_action_td">
+                            {$line.log_action}
+                        </td>
+                        <td class="log_subsection_td">
+                            {if $line.log_subsection_link <> ''}
+                                <a href="{$line.log_subsection_link}" class="standard_table_left">
+                                    {$line.log_subsection}
+                                </a>
+                            {else}
+                                {$line.log_subsection}
+                            {/if}
+                        </td>
+                        <td class="log_subname_td">
+                            {if $line.log_subsection_link <> ''}
+                                <a href="{$line.log_subsection_link}" class="standard_table_left">
+                                    {$line.log_subsection_name}
+                                </a>
+                            {else}
+                                {$line.log_subsection_name}
+                            {/if}
+                        </td>
+                    </tr>
+                    {/foreach}
+            </table>
+        </div>
+</div>
+{/block}
