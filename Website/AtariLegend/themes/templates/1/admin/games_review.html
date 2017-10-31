@@ -1,4 +1,4 @@
-{* 
+{*
 /***************************************************************************
 *                                games_review.html
 *                            --------------------------
@@ -6,7 +6,7 @@
 *   copyright            : (C) 2005 Atari Legend
 *   email                : admin@atarilegend.com
 *						   Created file
-*						
+*
 *   Id:  games_review.html,v 0.10 2005/11/27 ST Graveyard
 *   Id:  games_review.html,v 0.20 2016/07/22 ST Graveyard
 *						- AL 2.0
@@ -27,8 +27,8 @@ The main game review
 	<div class="standard_tile_line"></div>
 	<div class="standard_tile_text">
 		<div class="left_nav_section">
-			In this section you can add or edit game reviews. There are currently <b>{$review_nr}</b> reviews for <b>{$game_review_nr}</b> games in the DB for !
-		</div> 
+			In this section you can add or edit game reviews. There are currently <b>{$review_nr}</b> reviews for <b>{$game_review_nr}</b> games in the database!
+		</div>
 		<br>
 		<br>
 		<form action="../games/games_review_list.php" method="post" name="game_review" id="game_review">
@@ -59,15 +59,17 @@ The main game review
 				<th id="reviewdate_gr_th">Review date</th>
 				<th id="nrreviews_gr_th">Nr</th>
 			</tr>
+            {if isset($review)}
 			{foreach from=$review item=line}
 				<tr>
 					<td class="gamename_gr_td">{if $line.game_name != ''}<a href="games_review_add.php?game_id={$line.game_id}" class="standard_table_center">{$line.game_name}</a>{else}<i>n/a</i>{/if}</td>
 					<td class="gamepub_gr_td">{if $line.game_publisher != ''}{$line.game_publisher}{else}<i>n/a</i>{/if}</td>
 					<td class="username_gr_td">{$line.username}</td>
-					<td class="reviewdate_gr_td">{$line.review_date}</td>				
+					<td class="reviewdate_gr_td">{$line.review_date}</td>
 					<td class="nrreviews_gr_td">{if $line.number_reviews != ''}{$line.number_reviews}{else}<i>0</i>{/if}</td>
 				</tr>
 			{/foreach}
+            {/if}
 		</table>
 		<br>
 		<div class="standard_table_center"><a href="javascript:history.go(-1)" class="standard_tile_link">back</a></div>

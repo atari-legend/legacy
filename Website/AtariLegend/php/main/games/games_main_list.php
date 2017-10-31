@@ -27,8 +27,8 @@ include("../../common/tiles/latest_comments_tile.php");
 include("../../common/tiles/screenstar.php");
 
 // get the game_years from the game_year table
-$sql_year = $mysqli->query("SELECT distinct game_year from game_year order by game_year") 
-                     or die ("problems getting data from game_year table");
+$sql_year = $mysqli->query("SELECT distinct game_year from game_year order by game_year")
+                     or die("problems getting data from game_year table");
 
 while ($game_year = $sql_year->fetch_array(MYSQLI_BOTH)) {
     $smarty->append('game_year', array(
@@ -90,9 +90,7 @@ if (empty($game_author)) {
           LEFT JOIN pub_dev pd2 on (pd2.pub_dev_id = game_developer.dev_pub_id)
           LEFT JOIN game_year on (game_year.game_id = game.game_id)
         WHERE ";
-}
-else
-{
+} else {
     $RESULTGAME = "SELECT game.game_id,
             game.game_name,
             review_game.review_game_id,
@@ -199,8 +197,7 @@ if (empty($game_author)) {
           LEFT JOIN pub_dev pd2 on (pd2.pub_dev_id = game_developer.dev_pub_id)
           LEFT JOIN game_year on (game_year.game_id = game.game_id)
          WHERE ";
-}
-else{
+} else {
     $RESULTAKA = "SELECT
              game_aka.game_id,
              game_aka.aka_name,
@@ -272,25 +269,25 @@ if (isset($action) and $action == "search") {
     } else {
         $gamesearch = "";
     }
-    
+
     if (isset($publisher_input)) {
         $publisher_input = $mysqli->real_escape_string($publisher_input);
     } else {
         $publisher_input = "";
     }
-    
+
     if (isset($developer_input)) {
         $developer_input = $mysqli->real_escape_string($developer_input);
     } else {
         $developer_input = "";
     }
-    
+
     if (isset($year_input)) {
         $year_input = $mysqli->real_escape_string($year_input);
     } else {
         $year_input = "";
     }
-    
+
     if (isset($cat_input)) {
         $cat_input = $mysqli->real_escape_string($cat_input);
     } else {
@@ -335,14 +332,14 @@ if (isset($action) and $action == "search") {
     } else {
         $year_select = " AND game_year.game_year LIKE '$year'";
     }
-    
+
     //check the game_author select
     if (empty($game_author)) {
         $game_author_select = "";
     } else {
         $game_author_select = " AND game_author.ind_id = '$game_author'";
     }
-    
+
     //check the category select
     if (empty($category) or $category == '-') {
         $category_select = "";
@@ -355,20 +352,20 @@ if (isset($action) and $action == "search") {
     //
     // Here comes a bunch of tickbox checks.
     //
-    
+
     //if (isset($download) and $download == "1") {
     //    $download_select = " AND game_download.download_id IS NOT NULL";
     //}
-    
+
     //This is just too slow in combination with the advanced options
     //if (isset($screenshot) and $screenshot == "1") {
     //    $screenshot_select = " AND screenshot_game.screenshot_id IS NOT NULL";
     //}
-    
+
     //if (isset($boxscan) and $boxscan == "1") {
     //    $boxscan_select = " AND game_boxscan.game_boxscan_id IS NOT NULL";
     //}
-    
+
     if (isset($review) and $review == "1") {
         $review_select = " AND review_game.review_id IS NOT NULL";
     }
@@ -382,7 +379,7 @@ if (isset($action) and $action == "search") {
         $falcon_enhanced_select = " AND game_falcon_enhan.falcon_enhanced =$falcon_enhanced";
         $smarty->assign('games_falcon_enhanced', '1');
     }
-    
+
     if (isset($falcon_rgb) and $falcon_rgb == "1") {
         $falcon_rgb_select = " AND game_falcon_rgb.falcon_rgb =$falcon_rgb";
         $smarty->assign('games_falcon_rgb', '1');
@@ -450,15 +447,18 @@ if (isset($action) and $action == "search") {
     //Before we start the build the query, we check if there is at least
     //one search field filled in or used!
 
-    if ($publisher_select == "" and $gamebrowse_select == "" and $publisher_input == "" and $developer_input == "" and $year_input == "" and $cat_input == "" and $gamesearch == "" and $developer_select == "" and $year_select == "" and $category_select == "" and empty($falcon_only_select) 
-        and empty($falcon_enhanced_select) and empty($falcon_rgb_select) and empty($falcon_vga_select) and empty($ste_only_select) and empty($ste_enhanced_select) and empty($game_author_select) 
-        and empty($unreleased_select) and empty($development_select) and empty($arcade_select) and empty($wanted_select) and empty($monochrome_select) and empty($stos_select) 
+    if ($publisher_select == "" and $gamebrowse_select == "" and $publisher_input == "" and $developer_input == "" and $year_input == "" and $cat_input == "" and $gamesearch == "" and $developer_select == "" and $year_select == "" and $category_select == "" and empty($falcon_only_select)
+        and empty($falcon_enhanced_select) and empty($falcon_rgb_select) and empty($falcon_vga_select) and empty($ste_only_select) and empty($ste_enhanced_select) and empty($game_author_select)
+        and empty($unreleased_select) and empty($development_select) and empty($arcade_select) and empty($wanted_select) and empty($monochrome_select) and empty($stos_select)
         and empty($unfinished_select) and empty($seuck_select) and empty($stac_select) and empty($screenshot) and empty($download) and empty($boxscan) and empty($review_select)) {
         $edit_message             = "Please fill in one of the fields";
         $_SESSION['edit_message'] = $edit_message;
 
-        if (isset($mode)){header("Location: ../games/games_main.php?mode=$mode");}
-        else{header("Location: ../games/games_main.php");}
+        if (isset($mode)) {
+            header("Location: ../games/games_main.php?mode=$mode");
+        } else {
+            header("Location: ../games/games_main.php");
+        }
     } else {
         /*
          ***********************************************************************************
@@ -473,35 +473,35 @@ if (isset($action) and $action == "search") {
         } else {
             $RESULTGAME .= "game.game_name LIKE '%'";
         }
-        
+
         if (!empty($publisher_input)) {
             $RESULTGAME .= " AND pd1.pub_dev_name LIKE '%$publisher_input%'";
         } else {
-        //    $RESULTGAME .= " AND pd1.pub_dev_name LIKE '%'";
+            //    $RESULTGAME .= " AND pd1.pub_dev_name LIKE '%'";
         }
-        
+
         if (!empty($developer_input)) {
             $RESULTGAME .= " AND pd2.pub_dev_name LIKE '%$developer_input%'";
         } else {
-         //   $RESULTGAME .= " AND pd2.pub_dev_name LIKE '%'";
+            //   $RESULTGAME .= " AND pd2.pub_dev_name LIKE '%'";
         }
-        
+
         if (!empty($year_input)) {
             $RESULTGAME .= " AND game_year.game_year LIKE '%$year_input%'";
         } else {
-         //   $RESULTGAME .= " AND game_year.game_year LIKE '%'";
+            //   $RESULTGAME .= " AND game_year.game_year LIKE '%'";
         }
-        
+
         if (!empty($cat_input)) {
             $RESULTGAME .= " AND game_cat.game_cat_name LIKE '%$cat_input%'";
         } else {
-         //   $RESULTGAME .= " AND game_cat.game_cat_name LIKE '%'";
+            //   $RESULTGAME .= " AND game_cat.game_cat_name LIKE '%'";
         }
-        
+
         $RESULTGAME .= $gamebrowse_select;
         $RESULTGAME .= $publisher_select;
         $RESULTGAME .= $developer_select;
-        
+
         //if (isset($download) and $download == "1") {
         //    $RESULTGAME .= $download_select;
         //}
@@ -511,7 +511,7 @@ if (isset($action) and $action == "search") {
         //if (isset($boxscan) and $boxscan == "1") {
         //    $RESULTGAME .= $boxscan_select;
         //}
-        
+
         if (isset($review) and $review == "1") {
             $RESULTGAME .= $review_select;
         }
@@ -575,7 +575,7 @@ if (isset($action) and $action == "search") {
 
         $RESULTGAME .= ' GROUP BY game.game_id, game.game_name HAVING COUNT(DISTINCT game.game_id, game.game_name) = 1';
         $RESULTGAME .= ' ORDER BY game_name ASC';
-       
+
         $games = $mysqli->query($RESULTGAME);
 
         if (empty($games)) {
@@ -585,21 +585,18 @@ if (isset($action) and $action == "search") {
 
             header("Location: ../games/games_main.php");
         } else {
-           
             $rows = $games->num_rows;
-            
+
             //check for aka name
             if (!empty($gamesearch)) {
                 $game_aka_name_query = "SELECT aka_name FROM game_aka WHERE aka_name LIKE '%$gamesearch%'";
                 $game_aka_name_sql = $mysqli->query($game_aka_name_query);
-                $rows2 = $game_aka_name_sql->num_rows; 
-            }
-            else
-            {
+                $rows2 = $game_aka_name_sql->num_rows;
+            } else {
                 $rows2 = 0;
             }
-            
-            if ($rows > 0 OR $rows2 > 0) {
+
+            if ($rows > 0 or $rows2 > 0) {
                 if (!empty($gamesearch)) {
                     $RESULTAKA .= "game_aka.aka_name LIKE '%$gamesearch%'";
                 } else {
@@ -608,37 +605,37 @@ if (isset($action) and $action == "search") {
                 if (!empty($publisher_input)) {
                     $RESULTAKA .= " AND pd1.pub_dev_name LIKE '%$publisher_input%'";
                 } else {
-                //    $RESULTAKA .= " AND pd1.pub_dev_name LIKE '%'";
+                    //    $RESULTAKA .= " AND pd1.pub_dev_name LIKE '%'";
                 }
-                
+
                 if (!empty($developer_input)) {
                     $RESULTAKA .= " AND pd2.pub_dev_name LIKE '%$developer_input%'";
                 } else {
-                //    $RESULTAKA .= " AND pd2.pub_dev_name LIKE '%'";
+                    //    $RESULTAKA .= " AND pd2.pub_dev_name LIKE '%'";
                 }
-                
+
                 if (!empty($year_input)) {
                     $RESULTAKA .= " AND game_year.game_year LIKE '%$year_input%'";
                 } else {
-                 //   $RESULTAKA .= " AND game_year.game_year LIKE '%'";
+                    //   $RESULTAKA .= " AND game_year.game_year LIKE '%'";
                 }
-                
+
                 if (!empty($cat_input)) {
                     $RESULTAKA .= " AND game_cat.game_cat_name LIKE '%$cat_input%'";
                 } else {
-                //    $RESULTAKA .= " AND game_cat.game_cat_name LIKE '%'";
+                    //    $RESULTAKA .= " AND game_cat.game_cat_name LIKE '%'";
                 }
-                
+
                 $RESULTAKA .= $akabrowse_select;
                 $RESULTAKA .= $publisher_select;
                 $RESULTAKA .= $developer_select;
-                
+
                 //if (isset($download) and $download == "1") {
                 //    $RESULTAKA .= $download_select;
                 //}
                 //if (isset($screenshot) and $screenshot == "1") {
                 //    $RESULTAKA .= $screenshot_select;
-                //} 
+                //}
                 //if (isset($boxscan) and $boxscan == "1") {
                 //    $RESULTAKA .= $boxscan_select;
                 //}
@@ -713,58 +710,71 @@ if (isset($action) and $action == "search") {
 
                 $i = 0;
 
-                while ($sql_game_search = $temp_query->fetch_array(MYSQLI_BOTH)) 
-                {       
+                while ($sql_game_search = $temp_query->fetch_array(MYSQLI_BOTH)) {
                     $screenshot_image = '';
                     $screenshot_id = '';
-                    
+
                     //do this for when we only have 1 game result
                     $game_id_1_result = $sql_game_search['game_id'];
-                    
+
                     $game_name = $sql_game_search['game_name'];
                     $pub_name = $sql_game_search['publisher_name'];
                     $dev_name = $sql_game_search['developer_name'];
-                    
-                    if ($sql_game_search['game_boxscan_id'] != '') {$box = "1";}else{$box = "0";}    
-                    if ($sql_game_search['game_download_id'] != '') {$down = "1";}else{$down = "0";}    
-                    if ($sql_game_search['screenshot_id'] != '') {$screen = "1";}else{$screen = "0";}  
-                    if ($sql_game_search['music_id'] != '') {$music = "1";}else{$music = "0";}  
 
-                    if ( $dev_name == '' ){$dev_name = 'n/a';}   
-                    if ( $pub_name == '' ){$pub_name = 'n/a';}      
-                    if ( $sql_game_search['game_year'] == '' ){$sql_game_search['game_year'] = 'n/a';}                        
-                    
+                    if ($sql_game_search['game_boxscan_id'] != '') {
+                        $box = "1";
+                    } else {
+                        $box = "0";
+                    }
+                    if ($sql_game_search['game_download_id'] != '') {
+                        $down = "1";
+                    } else {
+                        $down = "0";
+                    }
+                    if ($sql_game_search['screenshot_id'] != '') {
+                        $screen = "1";
+                    } else {
+                        $screen = "0";
+                    }
+                    if ($sql_game_search['music_id'] != '') {
+                        $music = "1";
+                    } else {
+                        $music = "0";
+                    }
+
+                    if ($dev_name == '') {
+                        $dev_name = 'n/a';
+                    }
+                    if ($pub_name == '') {
+                        $pub_name = 'n/a';
+                    }
+                    if ($sql_game_search['game_year'] == '') {
+                        $sql_game_search['game_year'] = 'n/a';
+                    }
+
                     $ignore = 0;
-                    
-                    if (isset($screenshot) and $screenshot == "1") 
-                    {
-                       if ($screen == "0")
-                       {
-                           $ignore = 1;
-                       }
-                    }
-                    
-                    if (isset($boxscan) and $boxscan == "1") 
-                    {
-                       if ($box == "0")
-                       {
-                           $ignore = 1;
-                       }
-                    }
-                    
-                    if (isset($download) and $download == "1") 
-                    {
-                        
-                        if ($down == '0')
-                        {
+
+                    if (isset($screenshot) and $screenshot == "1") {
+                        if ($screen == "0") {
                             $ignore = 1;
                         }
                     }
-                    
-                    if ( $ignore == 0 )
-                    {
+
+                    if (isset($boxscan) and $boxscan == "1") {
+                        if ($box == "0") {
+                            $ignore = 1;
+                        }
+                    }
+
+                    if (isset($download) and $download == "1") {
+                        if ($down == '0') {
+                            $ignore = 1;
+                        }
+                    }
+
+                    if ($ignore == 0) {
                         $i++;
-                         
+
                         if (isset($export) and $export == "1") {
                             // this is the array used in export mode
                             $list_data = array(
@@ -786,19 +796,16 @@ if (isset($action) and $action == "search") {
                                 'falcon_vga' => $sql_game_search['falcon_vga'],
                                 'ste_enhanced' => $sql_game_search['ste_enhanced'],
                                 'ste_only' => $sql_game_search['ste_only']);
-                                
-                                $data[] = $list_data;
-                        }
-                        else
-                        {
-                            if (isset($boxscan) and $boxscan == "1") 
-                            {
+
+                            $data[] = $list_data;
+                        } else {
+                            if (isset($boxscan) and $boxscan == "1") {
                                 //Select a random boxscan record
                                 $sql_screenshots = $mysqli->query("SELECT *
-                                                                    FROM game_boxscan 
-                                                                    WHERE game_id='$sql_game_search[game_id]' and game_boxscan_side = '0'						   	   
-                                                                    ORDER BY RAND() LIMIT 1") or die("Database error - selecting screenshots"); 
-                        
+                                                                    FROM game_boxscan
+                                                                    WHERE game_id='$sql_game_search[game_id]' and game_boxscan_side = '0'
+                                                                    ORDER BY RAND() LIMIT 1") or die("Database error - selecting screenshots");
+
                                 while ($screenshot_result =  $sql_screenshots->fetch_array(MYSQLI_BOTH)) {
                                     //Ready screenshots path and filename
                                     $screenshot_image = $game_boxscan_path;
@@ -807,17 +814,14 @@ if (isset($action) and $action == "search") {
                                     $screenshot_image .= $screenshot_result['imgext'];
                                     $screenshot_id = $screenshot_result['game_boxscan_id'];
                                 }
-                                
-                            }
-                            else
-                            {
+                            } else {
                                 //Select a random screenshot record
                                 $sql_screenshots = $mysqli->query("SELECT *
-                                                                    FROM screenshot_game 
-                                                                    LEFT JOIN screenshot_main ON (screenshot_game.screenshot_id = screenshot_main.screenshot_id) 
-                                                                    WHERE screenshot_game.game_id = '$sql_game_search[game_id]'						   	   
-                                                                    ORDER BY RAND() LIMIT 1") or die("Database error - selecting screenshots"); 
-                        
+                                                                    FROM screenshot_game
+                                                                    LEFT JOIN screenshot_main ON (screenshot_game.screenshot_id = screenshot_main.screenshot_id)
+                                                                    WHERE screenshot_game.game_id = '$sql_game_search[game_id]'
+                                                                    ORDER BY RAND() LIMIT 1") or die("Database error - selecting screenshots");
+
                                 while ($screenshot_result =  $sql_screenshots->fetch_array(MYSQLI_BOTH)) {
                                     //Ready screenshots path and filename
                                     $screenshot_image = $game_screenshot_path;
@@ -827,7 +831,7 @@ if (isset($action) and $action == "search") {
                                     $screenshot_id = $screenshot_result['screenshot_id'];
                                 }
                             }
-                            
+
                             $smarty->append('game_search', array(
                                 'game_id' => $sql_game_search['game_id'],
                                 'game_name' => $game_name,
@@ -849,49 +853,47 @@ if (isset($action) and $action == "search") {
                                 'falcon_vga' => $sql_game_search['falcon_vga'],
                                 'ste_enhanced' => $sql_game_search['ste_enhanced'],
                                 'ste_only' => $sql_game_search['ste_only']
-                            ));  
-                        }   
+                            ));
+                        }
                     }
                 }
-                
+
                 $mysqli->query("DROP TABLE temp") or die("does not compute4");
- 
+
                 //return JSON formatted data
-                if (isset($data))
-                {
+                if (isset($data)) {
                     $smarty->assign('data', json_encode($data));
                     $smarty->assign('export', 'export');
                 }
-                
-                if ($i == 0)
-                {
+
+                if ($i == 0) {
                     $edit_message             = "No entries found for your selection";
                     $_SESSION['edit_message'] = $edit_message;
                     $smarty->assign("message", $edit_message);
-                    
-                    if (isset($mode)){header("Location: ../games/games_main.php?mode=$mode");}
-                    else{header("Location: ../games/games_main.php");}
-                }
-                else
-                {
+
+                    if (isset($mode)) {
+                        header("Location: ../games/games_main.php?mode=$mode");
+                    } else {
+                        header("Location: ../games/games_main.php");
+                    }
+                } else {
                     $time_elapsed_secs = microtime(true) - $start;
                     $smarty->assign("nr_of_games", $i);
-                    
+
                     //if we have only 1 search result, go to the detail page at once!
-                    if ( $i == 1 )
-                    {
-                            header("Location: ../games/games_detail.php?game_id=$game_id_1_result");
+                    if ($i == 1) {
+                        header("Location: ../games/games_detail.php?game_id=$game_id_1_result");
                     }
-                    
-                    $rest4 = $i%4; 
+
+                    $rest4 = $i%4;
                     $smarty->assign("rest4", $rest4);
-                    
-                    $rest3 = $i%3; 
+
+                    $rest3 = $i%3;
                     $smarty->assign("rest3", $rest3);
-                    
-                    $rest2 = $i%2; 
+
+                    $rest2 = $i%2;
                     $smarty->assign("rest2", $rest2);
-                    
+
                     $smarty->assign("query_time", $time_elapsed_secs);
 
                     //Send all smarty variables to the templates
@@ -902,8 +904,11 @@ if (isset($action) and $action == "search") {
                 $_SESSION['edit_message'] = $edit_message;
                 $smarty->assign("message", $edit_message);
 
-                if (isset($mode)){header("Location: ../games/games_main.php?mode=$mode");}
-                else{header("Location: ../games/games_main.php");}
+                if (isset($mode)) {
+                    header("Location: ../games/games_main.php?mode=$mode");
+                } else {
+                    header("Location: ../games/games_main.php");
+                }
             }
         }
     }

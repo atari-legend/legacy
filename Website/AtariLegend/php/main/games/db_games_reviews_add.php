@@ -24,7 +24,7 @@ if (isset($action) and $action == 'add_review') {
     // first we have to convert the date vars into a time stamp to be inserted to review_date
     $date = date_to_timestamp($Date_Year, $Date_Month, $Date_Day);
     $textfield = $mysqli->real_escape_string($textfield);
-    
+
     $sdbquery = $mysqli->query("INSERT INTO review_main (user_id, review_text, review_date, review_edit) VALUES ($members, '$textfield', '$date', '1')") or die("Couldn't insert into review_main");
     $new_review_main_id = $mysqli->insert_id;
 
@@ -33,7 +33,7 @@ if (isset($action) and $action == 'add_review') {
 
     //Fill the score table
     $sdbquery = $mysqli->query("INSERT INTO review_score (review_id, review_graphics, review_sound, review_gameplay, review_overall) VALUES ($new_review_main_id, $graphics, $sound, $gameplay, $overall)") or die("Couldn't insert into review_score");
-    
+
     //we're gonna add the screenhots into the screenshot_review table and fill up the review_comment table.
     //We need to loop on the screenshot table to check the shots used. If a comment field is filled,
     //the screenshot was used!

@@ -1,4 +1,4 @@
-{* 
+{*
 /***************************************************************************
 *                               date_quote_tile.html
 *                            ---------------------------
@@ -14,22 +14,22 @@
 
 //****************************************************************************************
 // This is date quote tile
-//**************************************************************************************** 
+//****************************************************************************************
 *}
 
 {block name=date_quote_tile}
-<div class="{$date_quote_tile}">
-	<div class="standard_tile">		
+<div class="{if isset($date_quote_tile)}{$date_quote_tile}{/if}">
+	<div class="standard_tile">
 		<h1>WEDNESDAY</h1>
-		<div class="standard_tile_line"></div>	
+		<div class="standard_tile_line"></div>
 		<div class="datequote_bg">
 			<p class="datequote_day">18</p>
 			<p class="datequote_month">January</p>
 			<p class="datequote_year">2015</p>
-			<p class="datequote_text">This day, 25 years ago, French company <a href="#" class="standard_tile_link_reverse">Delphine Software</a> 
-			released there classic graphic adventure <a href="#" class="standard_tile_link_reverse">‘Future Wars - Time travellers’</a> 
+			<p class="datequote_text">This day, 25 years ago, French company <a href="#" class="standard_tile_link_reverse">Delphine Software</a>
+			released there classic graphic adventure <a href="#" class="standard_tile_link_reverse">‘Future Wars - Time travellers’</a>
 			on the ST. Read our in-depth review <a href="#" class="standard_tile_link_reverse">here</a>.</p>
 		</div>
-	</div>	
+	</div>
 </div>
-{/block}	
+{/block}

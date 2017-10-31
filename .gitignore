@@ -1,8 +1,8 @@
 # exclude everything except directory data
 /Website/AtariLegend/data/
 
-# exclude everything except directory templates_c
-/Website/AtariLegend/php/temp/smarty/templates_c/
+# exclude temporary directory where Smarty templates are compiled
+/Website/AtariLegend/php/temp
 
 # exclude the connect.php file
 /Website/AtariLegend/php/config/connect.php
@@ -26,10 +26,3 @@ style.css
 style.css.map
 composer.phar
 composer.json
-
-# ignore HTACCESS files
-/Website/AtariLegend/.htaccess
-/Website/AtariLegend/.htpasswd
-/Website/AtariLegend/php/.htaccess
-/Website/AtariLegend/php/admin/.htaccess
-

@@ -20,6 +20,40 @@ include("../../config/admin.php");
 //load the search fields of the quick search side menu
 include("../../admin/games/quick_search_games.php");
 
+//get the number of reviews in the archive
+$query_number = $mysqli->query("SELECT * FROM review_main WHERE review_edit = '0'") or die("Couldn't get the number of reviews");
+$v_reviews = $query_number->num_rows;
+
+$RESULTGAME = "SELECT
+                    game.game_id,
+                    game.game_name,
+                    pub_dev.pub_dev_name,
+                    pub_dev.pub_dev_id,
+                    game_year.game_year,
+                    users.userid,
+                    review_main.review_date
+                    FROM game
+                    LEFT JOIN game_publisher ON ( game.game_id = game_publisher.game_id )
+                    LEFT JOIN pub_dev ON ( game_publisher.pub_dev_id = pub_dev.pub_dev_id )
+                    LEFT JOIN game_year ON ( game_year.game_id = game.game_id )
+                    LEFT JOIN review_game ON ( review_game.game_id = game.game_id )
+                    LEFT JOIN review_main ON ( review_main.review_id = review_game.review_id)
+                    LEFT JOIN users ON ( review_main.user_id = users.user_id)
+                    WHERE review_game.game_id IS NOT NULL
+                    GROUP BY game.game_id, game.game_name HAVING COUNT(DISTINCT game.game_id, game.game_name) = 1
+                    ORDER BY review_main.review_date DESC";
+
+$games = $mysqli->query($RESULTGAME);
+
+$rows = $games->num_rows;
+$v_reviewed_games = $rows;
+
+// Send to smarty
+
+$smarty->assign('review_nr', $v_reviews);
+$smarty->assign('game_review_nr', $v_reviewed_games);
+
+
 /*
  ************************************************************************************************
  This is the game review main page
@@ -32,7 +66,7 @@ if (empty($action)) {
     $action = "";
 }
 if (isset($action) and $action == 'search') {
-        
+
     //check the $gamebrowse select
     if ($gamebrowse == "") {
         $gamebrowse_select = "";
