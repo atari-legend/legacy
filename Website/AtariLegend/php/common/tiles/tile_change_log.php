@@ -17,7 +17,7 @@
     $sql_log = $mysqli->query("SELECT *
                              FROM change_log
                              WHERE section != 'Users'
-                             ORDER BY change_log_id DESC LIMIT 25");
+                             ORDER BY change_log_id DESC LIMIT 50");
 
 while ($log = $sql_log->fetch_array(MYSQLI_BOTH)) {
     $user_name = get_username_from_id($log['user_id']);
