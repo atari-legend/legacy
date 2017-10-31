@@ -369,7 +369,7 @@ figure.effect-bubba:hover p {
     .latest_comments_text{font-size: 11pt;color: #fff; min-width:95%;}
     .latest_comments_icons{color: #bcbdbd;}
     .latest_comments_link{
-        @extend .standard_tile_link;
+        /*@extend .standard_tile_link;*/
         color: #bcbdbd;}
     .latest_comments_link:hover { color: #01b5b5; }
 }@elseif $skin-name == tos {
