@@ -20,10 +20,12 @@
   "description": "The Atarilegend project",
   "main": "Gruntfile.js",
   "dependencies": {
+    "grunt-cli": "^1.2.0",
     "phplint": "^1.7.1"
   },
   "scripts": {
-    "test": "tap test/*.js"
+    "test": "tap test/*.js",
+    "grunt": "grunt"
   },
   "repository": {
     "type": "git",

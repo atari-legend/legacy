@@ -8,6 +8,7 @@
 //load the main font
 //------------------------------------------------------------ */
 @font-face { 
+    /* Define skin specific font for headlines */
     font-family: 'Audiowide';
     font-style: normal;
     font-weight: normal;
@@ -29,9 +30,14 @@ html {
     overflow-y: scroll;
 }
 
-body {
-    font-family: Audiowide, Arial, helvetica, sans-serif;
+body{
+    /* font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI","Roboto","Helvetica Neue", Arial, sans-serif; */
+    font-family: verdana;
     background-color: #000;
+}
+
+h1, h2, h3, h4, h5, #news_head, #main_nav_ul, .effect-tile, legend{
+    font-family: Audiowide, Arial, helvetica, sans-serif;
 }
 
 body a { text-decoration: none; }
@@ -205,7 +211,6 @@ img { display: block; }
     padding: 0;
     padding-left: 5px;
     margin-top: 0;
-    font-family: Audiowide;
     color: #fff;
     text-align: left;
     background: url('../images/logon_input.png') 0 0 no-repeat;
@@ -223,7 +228,6 @@ img { display: block; }
     text-align: left;
     background: #000;
     border: 1px solid #008b8b;
-    font-family: Audiowide;
 }
 
 .standard_tile_input_area {
@@ -236,7 +240,6 @@ img { display: block; }
     text-align: left;
     background: #000;
     border: 1px solid #008b8b;
-    font-family: Audiowide;
 }
 
 #text_area_big { height: 150px; }
@@ -328,7 +331,6 @@ img { display: block; }
     padding: 0;
     padding-left: 5px;
     margin-top: 5px;
-    font-family: Audiowide;
     background-color: #000;
     color: #fff;
     border: 1px solid #008b8b;

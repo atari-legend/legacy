@@ -1,4 +1,4 @@
-{* 
+{*
 /***************************************************************************
 *                                tile_screenstar.html
 *                            ---------------------------
@@ -13,31 +13,31 @@
 
 //****************************************************************************************
 // This is the 'screenstar' tile
-//**************************************************************************************** 
+//****************************************************************************************
 *}
 
 <link rel="stylesheet" href="{$template_dir}includes/font-awesome-4.7.0/css/font-awesome.min.css"> <!-- Font awesome for icons-->
 
-<div class="{$screenstar_tile}">
-    <div class="standard_tile">		
+<div class="{if isset($screenstar_tile)}{$screenstar_tile}{/if}">
+    <div class="standard_tile">
         <h1><a href="../games/games_reviews_main.php" class="standard_tile_link">SCREENSTAR</a></h1>
         <div class="standard_tile_line"></div>
         <div class="standard_tile_background">
             <div class="grid">
                 <figure class="effect-tile" style="margin:0px;">
-                    <img class="standard_tile_image" src="../../includes/show_image.php?file={$screenstar.screenstar_img}&amp;resize=410,null,null,null&amp;crop=left,top,410,260&amp;minimum_size=410,260" alt="screenstar">            
+                    <img class="standard_tile_image" src="../../includes/show_image.php?file={$screenstar.screenstar_img}&amp;resize=410,null,null,null&amp;crop=left,top,410,260&amp;minimum_size=410,260" alt="screenstar">
                     <figcaption>
-                        <span class="standard_tile_subtext" style="left: 5%; position: absolute; top: 50%;">Random review</span><span class="tile_arrow"><i class="fa fa-chevron-up" aria-hidden="true"></i></span>                    
-                        <span class="tile_title"><a href="../games/games_detail.php?game_id={$screenstar.screenstar_game_id}">{$screenstar.screenstar_game_name}</a></span>     
+                        <span class="standard_tile_subtext" style="left: 5%; position: absolute; top: 50%;">Random review</span><span class="tile_arrow"><i class="fa fa-chevron-up" aria-hidden="true"></i></span>
+                        <span class="tile_title"><a href="../games/games_detail.php?game_id={$screenstar.screenstar_game_id}">{$screenstar.screenstar_game_name}</a></span>
                         <p class="icon-links" style="width:85%;">
                             <span class="standard_tile_subtext" style="font-size:7pt;"><a href="../games/games_main_list.php?year={$screenstar.screenstar_year}&action=search">{$screenstar.screenstar_year}</a></span>
                         </p>
-                    </figcaption>			
+                    </figcaption>
                 </figure>
             </div>
         </div>
         <div class="standard_tile_explanation">
-            <br>        
+            <br>
             <h6><div id="games_detail_review_main_text">{$screenstar.screenstar_review}</div></h6>
             <br>
             <span class="standard_tile_subtext">by <a href="../../admin/user/user_detail.php?user_id_selected={$screenstar.screenstar_user_id}">{$screenstar.screenstar_username}</a>, {$screenstar.screenstar_date}</span>

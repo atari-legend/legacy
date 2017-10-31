@@ -6,7 +6,7 @@
 *   copyright            : (C) 2017 Atari Legend
 *   email                : martens_maarten@hotmail.com
 *
-*   Id: games_review_add.html,v 0.10 29/08/2017 20:25 STG 
+*   Id: games_review_add.html,v 0.10 29/08/2017 20:25 STG
 ****************************************************************************/
 
 //****************************************************************************************
@@ -21,13 +21,13 @@
     <!-- lightbox screenshot pop up script -->
     <script type="text/javascript" src="{$template_dir}includes/js/lightbox.min.js"></script>
     <link type="text/css" href="{$style_dir}css/lightbox.css" hreflang="en" rel="stylesheet">
-    
+
     <script>
-        lightbox.option({        
+        lightbox.option({
           'showImageNumberLabel': false
         })
     </script>
-    
+
     <script type="text/javascript"> <!-- all the code for the options of the textfield of the comment section -->
         var clientPC = navigator.userAgent.toLowerCase(); // Get client info
         var clientVer = parseInt(navigator.appVersion); // Get browser version
@@ -145,7 +145,7 @@
         }
     </script>
     <script type="text/javascript">
-        function openTab(evt, tabName) 
+        function openTab(evt, tabName)
         {
             // Declare all variables
             var i, tabcontent, tablinks;
@@ -165,20 +165,20 @@
             // Show the current tab, and add an "active" class to the button that opened the tab
             document.getElementById(tabName).style.display = "block";
             evt.currentTarget.className += " active";
-            
+
             //al the java code for the filling of the fields in the preview tab!
             if (tabName == 'preview')
-            {                            
+            {
                 //get the date field
                 var day = document.getElementsByName("Date_Day")[0].value;
-                document.getElementById("games_preview_review_date").innerHTML = day;  
-                document.getElementById("games_preview_review_date").innerHTML += '-';  
+                document.getElementById("games_preview_review_date").innerHTML = day;
+                document.getElementById("games_preview_review_date").innerHTML += '-';
                 var month = document.getElementsByName("Date_Month")[0].value;
-                document.getElementById("games_preview_review_date").innerHTML += month;  
-                document.getElementById("games_preview_review_date").innerHTML += '-';  
+                document.getElementById("games_preview_review_date").innerHTML += month;
+                document.getElementById("games_preview_review_date").innerHTML += '-';
                 var year = document.getElementsByName("Date_Year")[0].value;
-                document.getElementById("games_preview_review_date").innerHTML += year;  
-                
+                document.getElementById("games_preview_review_date").innerHTML += year;
+
                 //get the score
                 {literal}
                 //graphics
@@ -198,7 +198,7 @@
                 if(!isNaN(overall)) {document.getElementById("games_preview_review_overall").innerHTML = overall;}
                 else{document.getElementById("games_preview_review_overall").innerHTML = 'please enter a number';}
                 {/literal}
-                
+
                 //Do all the preps for the actual review text!
                 var text = document.getElementById('game_review_textfield').value;
                 text = text.replace(/</g, "&lt;").replace(/>/g, "&gt;");
@@ -214,16 +214,16 @@
                 text = text.replaceAll("[mail=", "<a href=mailto:");
                 text = text.replaceAll("[/mail]", "</a>");
                 text = text.replaceAll("]", " class=standard_tile_link_cpanel>");
-                document.getElementById("games_preview_review_text").innerHTML = text; 
+                document.getElementById("games_preview_review_text").innerHTML = text;
 
-                
+
                 //get the screenshots data
-                for (i = 0; i < {$nr_screenshots}; i++) 
-                {   
+                for (i = 0; i < {$nr_screenshots}; i++)
+                {
                    var string = "comment_";
                    var string_comment = string.concat(i);
-                   var comment = document.getElementById(string_comment).value; 
-                   
+                   var comment = document.getElementById(string_comment).value;
+
                    if (comment == '')
                    {
                         var string3 = "output_";
@@ -235,33 +235,33 @@
                    {
                        var string2 = "preview_comment_";
                        var string_preview_comment = string2.concat(i);
-                       document.getElementById(string_preview_comment).innerHTML = comment; 
-                       
+                       document.getElementById(string_preview_comment).innerHTML = comment;
+
                        var string3 = "output_";
                        var string_output = string3.concat(i);
                        var output = document.getElementById(string_output);
                        output.style.display='inline';
                    }
-                }   
+                }
             }
-        } 
+        }
     </script>
     <script>
         {literal}
-            String.prototype.replaceAll = function(str1, str2, ignore) 
+            String.prototype.replaceAll = function(str1, str2, ignore)
             {
                 return this.replace(new RegExp(str1.replace(/([\/\,\!\\\^\$\{\}\[\]\(\)\.\*\+\?\|\<\>\-\&])/g,"\\$&"),(ignore?"gi":"g")),(typeof(str2)=="string")?str2.replace(/\$/g,"$$$$"):str2);
-            } 
+            }
         {/literal}
     </script>
     <script>
-        function add_review() 
+        function add_review()
         {
             var graphics = document.getElementsByName("graphics")[0].value;
             var sound = document.getElementsByName("sound")[0].value;
             var gameplay = document.getElementsByName("gameplay")[0].value;
             var overall = document.getElementsByName("overall")[0].value;
-            
+
             if(!isNaN(graphics) && !isNaN(sound) && !isNaN(gameplay) && !isNaN(overall))
             {
                 document.getElementById('post').method="post";
@@ -274,11 +274,11 @@
                 alert("Please use only numeric values in the score field");
                 return false;
             }
-            
+
         }
     </script>
     <script type="text/javascript" src="{$template_dir}includes/js/jquery.dotdotdot.js" type="text/javascript"></script> <!--this script is used for the elipsis (...) effect of the latest reviews tile -->
-    
+
     <div id="main" class="main_container_games_details">
         <div class="content_box_games_details" id="column_left_reviews_details">
             <!--*****************************-->
@@ -287,7 +287,7 @@
             <br>
             <div class="standard_tile">
                 <h1>GAME REVIEWS</h1>
-                <div class="standard_tile_line"></div>  
+                <div class="standard_tile_line"></div>
                 <div class="games_main_detail_comments_container">
                     <table class="standard_table_list_stats">
                         {if isset($reviews_author)}
@@ -304,7 +304,7 @@
                                     <span style="overflow: hidden;text-overflow: ellipsis"><a href="../games/games_detail.php?game_id={$line.game_id}" class="standard_tile_link" style="margin-left:10px;">{$line.game_name}</a></span>
                                     <br><span class="standard_tile_subtext" style="margin-left:15px;"><a href="../games/games_reviews_detail.php?review_id={$line.review_id}&game_id={$line.game_id}" style="margin-left:10px;">read more</a></span>
                                 </td>
-                               
+
                                 <td width="10%" style="padding-top:5px;padding-bottom:5px;">
                                     <a href="../games/games_main_list.php?year={$line.game_year}&amp;action=search" class="standard_tile_link" style="margin-right:10px;">{$line.game_year}</a>
                                     <br><br>
@@ -325,30 +325,30 @@
             </div>
             <!--*****************************-->
             <!--END Credits tile             -->
-            <!--*****************************-->   
+            <!--*****************************-->
             {if isset($reviews_author)}
                  <br>
                  {include file='1/main/latest_comments_tile.html'}
             {else}
                 <br>
                 {include file='1/main/latest_reviews_tile.html'}
-            {/if}        
-        </div>	
+            {/if}
+        </div>
 
         <div class="content_box_games_details" id="column_center_reviews_details">
             {if isset($user_session)}
             <br>
-            <div class="standard_tile"> 
+            <div class="standard_tile">
                 <div class="help-tip">
-                    <p> 
+                    <p>
                         This is the place were you write your own reviews. Some things to consider :
-                        <br> - Make sure your review is worthy! A game review is more than an elaborate comment to a game (we have comments sections for this). See other reviews in the DB as examples
+                        <br> - Make sure your review is worthy! A game review is more than an elaborate comment to a game (we have comments sections for this). See other reviews in the database as examples
                         <br> - You are not obliged to follow the common review structure (comments, graphics, sounds, gameplay, conclusion)
                         <br> - Your submitted review will be checked by our admin before it enters the database
                         <br> - The score input fields are obliged
                         <br> - Make sure to add some comments to the screenshots below to make the review more 'fun'. Every screenshot you comment, will be added to the review
                         <br> - Click the screenshots for a bigger version
-                        <br> - Use the preview tab to see what your work looks like before you submit it 
+                        <br> - Use the preview tab to see what your work looks like before you submit it
                         <br> - THANKS A LOT for you submission and for making this website more interesting for all of us!
                     </p>
                 </div>
@@ -357,8 +357,8 @@
                 <div class="tab">
                   <button class="tablinks" onclick="openTab(event, 'edit')" id="defaultOpen">EDIT</button>
                   <button class="tablinks" onclick="openTab(event, 'preview')">PREVIEW</button>
-                </div>    
-                <div id="edit" class="tabcontent">   
+                </div>
+                <div id="edit" class="tabcontent">
                     <!--**************************-->
                     <!--START Write a review tile -->
                     <!--**************************-->
@@ -376,16 +376,16 @@
                                 <div style="width:200px;">{html_select_date start_year="2000"}</div>
                             </h6>
                         </div>
-                        <div class="standard_tile_text">  
+                        <div class="standard_tile_text">
                             <h6>Review :</h6>
                             <div style="width:100%;text-align:left;margin-top:10px;">
                                 <input type="button" accesskey= "b" name="addbbcode0" value="B" onclick="bbstyle(0,'textfield')" class="quick_search_games_button" style="min-width:20px;width:0;display:inline;" title="Bold">
                                 <input type="button" accesskey= "u" name="addbbcode4" value="U" onclick="bbstyle(4,'textfield')" class="quick_search_games_button" style="min-width:20px;width:0;display:inline;" title="Underline">
                                 <input type="button" accesskey= "i" name="addbbcode2" value="I" onclick="bbstyle(2,'textfield')" class="quick_search_games_button" style="min-width:20px;width:0;display:inline;" title="Recursive">
-                                <input type="button" accesskey="w" name="addbbcode6" value="URL" onClick="bbstyle(6,'textfield')" class="quick_search_games_button" style="min-width:40px;width:0;display:inline;" title="Add links">			  
-                                <input type="button" accesskey="x" name="addbbcode8" value="@" onClick="bbstyle(8,'textfield')" class="quick_search_games_button" style="min-width:20px;width:0;display:inline;" title="Add email address"> 
+                                <input type="button" accesskey="w" name="addbbcode6" value="URL" onClick="bbstyle(6,'textfield')" class="quick_search_games_button" style="min-width:40px;width:0;display:inline;" title="Add links">
+                                <input type="button" accesskey="x" name="addbbcode8" value="@" onClick="bbstyle(8,'textfield')" class="quick_search_games_button" style="min-width:20px;width:0;display:inline;" title="Add email address">
                                 <textarea name="textfield" id="game_review_textfield" ONSELECT="javascript:storeCaret(this);" ONCLICK="javascript:storeCaret(this);" ONKEYUP="javascript:storeCaret(this);" ONCHANGE="javascript:storeCaret(this);" rows="15" placeholder="Review (required)" required></textarea>
-                            </div> 
+                            </div>
                             <br>
                             <h6>Score :</h6>
                             <input type="text" name="graphics" class="standard_tile_input_small" style="width:22%;" placeholder="Graphics (required)" required>
@@ -394,27 +394,27 @@
                             <input type="text" name="overall" class="standard_tile_input_small" placeholder="Overall (required)" required style="width:22%;">
                         </div>
                         <br>
-                        <div class="standard_tile_text" style="text-align:center;">  
+                        <div class="standard_tile_text" style="text-align:center;">
                             <h6>Screenshots</h6>
                             <br>
                             {if $nr_screenshots <> 0}
-                                <table class="standard_table_games_main_detail">        
-                                {foreach from=$screenshots item=line} 
+                                <table class="standard_table_games_main_detail">
+                                {foreach from=$screenshots item=line}
                                     <tr>
-                                        <td style="width:15%;border:0;">  
-                                            <a href="../../includes/show_image.php?file={$line.screenshot_image_pop}&amp;resize=410,null,null,null" data-lightbox="image-1">     
+                                        <td style="width:15%;border:0;">
+                                            <a href="../../includes/show_image.php?file={$line.screenshot_image_pop}&amp;resize=410,null,null,null" data-lightbox="image-1">
                                                 <img src="../../includes/show_image.php?file={$line.screenshot_image_pop}&amp;resize=75,null,null,null" alt="screenshot" style="display:inline; margin:5px;" class="game_screenshot_img">
                                             </a>
                                         </td>
                                         <td style="width:85%;border:0;">
                                             <input type="text" name="inputfield[]" id="comment_{$line.count}" class="standard_tile_input_small" style="width:95%;">
-                                        </td>   
+                                        </td>
                                     </tr>
                                 {/foreach}
                                 </table>
                             {else}
                                 There are currently no screenshots attached to this game. Go to the<a href="../games/games_detail.php?game_id={$game.game_id}" class="left_nav_link"> screenshot adding</a>
-                                page to link specific screenshots to this game. 
+                                page to link specific screenshots to this game.
                             {/if}
                             <br>
                             <br>
@@ -444,7 +444,7 @@
                             <div class="games_detail_review_child" id="games_detail_review_text">
                                 <div id="games_preview_review_text"></div>
                                 <br>
-                                <b><i>Score</i></b> 
+                                <b><i>Score</i></b>
                                 <br>
                                 <br>
                                 Graphics : <span id="games_preview_review_graphics"></span><br>
@@ -458,7 +458,7 @@
                                     <br>
                                     <br>
                                 </div>
-                                {foreach from=$screenshots item=line} 
+                                {foreach from=$screenshots item=line}
                                     <div id="output_{$line.count}">
                                         <div class="games_detail_review_screenshot_order">
                                             <a href="../../includes/show_image.php?file={$line.screenshot_image_pop}&amp;resize=410,null,null,null" data-lightbox="image-1">
@@ -472,8 +472,8 @@
                                         </div>
                                     </div>
                                 {/foreach}
-                            </div>		
-                        </div>	
+                            </div>
+                        </div>
                         <br>
                     </div>
                     <!--*********************-->
@@ -493,31 +493,31 @@
             {/if}
         </div>
 
-        <div class="content_box_games_details" id="column_right_reviews_details">  
-            {if isset($reviews_author)}  
+        <div class="content_box_games_details" id="column_right_reviews_details">
+            {if isset($reviews_author)}
                 <br>
-                {include file='1/admin/tile_user_contribution.html'}  
+                {include file='1/admin/tile_user_contribution.html'}
             {else}
                 <br>
                 {include file='1/main/latest_comments_tile.html'}
-                
-                <script type="text/javascript"> 
+
+                <script type="text/javascript">
                  window.onload = function() {
                     $(".standard_list_entry_news_text").dotdotdot({  <!--This is the script to truncate the latest interviews-->
                             //	configuration goes here
-                            
+
                         /*	The text to add as ellipsis. */
                         ellipsis	: '... ',
-                 
+
                         /*	How to cut off the text/html: 'word'/'letter'/'children' */
                         wrap		: 'word',
-                 
+
                         /*	Wrap-option fallback to 'letter' for long words */
                         fallbackToLetter: false,
-                 
+
                         /*	jQuery-selector for the element to keep and put after the ellipsis. */
                         after		: null,
-                 
+
                         /*	Whether to update the ellipsis: true/'window' */
                         watch		: window,
 
@@ -527,30 +527,30 @@
 
                         /*	Deviation for the height-option. */
                         tolerance	: 0,
-                 
+
                         /*	Callback function that is fired after the ellipsis is added,
                             receives two parameters: isTruncated(boolean), orgContent(string). */
                         callback	: function( isTruncated, orgContent ) {},
-                 
+
                         lastCharacter	: {
-                 
+
                             /*	Remove these characters from the end of the truncated text. */
                             remove		: [ ' ', ',', ';', '.', '!', '?' ],
-                 
-                            /*	Don't add an ellipsis if this array contains 
+
+                            /*	Don't add an ellipsis if this array contains
                                 the last character of the truncated text. */
                             noEllipsis	: []
-                        }   
+                        }
                     });
                 };
-                </script>    
-            {/if}       
+                </script>
+            {/if}
             <br>
             {include file='1/main/tile_bug_report.html'}
-        </div>   
-    </div> 
+        </div>
+    </div>
     <script>
         // Get the element with id="defaultOpen" and click on it
         document.getElementById("defaultOpen").click();
-    </script> 
+    </script>
 {/block}

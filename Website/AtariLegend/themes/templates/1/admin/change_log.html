@@ -1,4 +1,4 @@
-{* 
+{*
 /***************************************************************************
                               change_log.html
 *                            --------------------------
@@ -19,17 +19,20 @@ The change log page
     <br>
     {include file='1/admin/left_nav.html'}
 {/block}
-           
+
 {block name=main_tile}
 <div class="standard_tile">
 	<h1>CHANGE LOG</h1>
 	<div class="standard_tile_line"></div>
 	<div class="standard_tile_text">
 		<div class="left_nav_section">
-			Welcome to the change log. On this page you will find every change made on the database. Below you can find the latest log changes, you can also use the search function. 
-			The logs are divided in 'SECTIONS' and 'SUBSECTIONS'. A section can be a 'Game', 'Demo', 'Links', 'Menu'...The subsection goes in more detail eg. 'File', 'Screenshot', 'Boxscan' ...
-			The 'ACTIONS' depict which action was performed on the table, like an 'Insert', 'Delete' or 'Update'. Lastly you will also find the USER and DATE.
-		</div> 
+            On this page you will find every change that has been made to the database.
+            The most recent changes are listed below, but you can also use the search function to find older changes.
+            The date of the change and the user that made it are listed first.
+            The logs are divided in <b>Sections</b> and <b>Sub-sections</b>.  A <b>section</b> can be a 'Game', 'Demo', 'Links' or a 'Menu',
+            whereas the <b>sub-section</b> goes in more detail e.g. 'File', 'Screenshot' or a 'Box Scan'.
+            The 'Actions' show what was performed on the table, such as an 'Insert', 'Delete' or 'Update'.
+		</div>
 		<br>
 		<br>
 		<form action="../administration/change_log.php" method="get" name="user_search" >
@@ -76,33 +79,53 @@ The change log page
 							{$line.log_date}
 						</td>
 						<td class="log_user_td">
+							{if $line.log_user_name <> '0'}
 							<a href="../user/user_detail.php?user_id_selected={$line.log_user_id}" class="standard_table_left">
 								{$line.log_user_name}
 							</a>
+							{else}
+								[deleted user]
+							{/if}
 						</td>
 						<td class="log_section_td">
-							<a href="{$line.log_section_link}" class="standard_table_left">
+							{if $line.log_section_link <> ''}
+								<a href="{$line.log_section_link}" class="standard_table_left">
+									{$line.log_section}
+								</a>
+							{else}
 								{$line.log_section}
-							</a>
+							{/if}
 						</td>
 						<td class="log_name_td">
-							<a href="{$line.log_section_link}" class="standard_table_left">
+							{if $line.log_section_link <> ''}
+								<a href="{$line.log_section_link}" class="standard_table_left">
+									{$line.log_section_name}
+								</a>
+							{else}
 								{$line.log_section_name}
-							</a>
-						</td>	
+							{/if}
+						</td>
 						<td class="log_action_td">
 							{$line.log_action}
-						</td>						
+						</td>
 						<td class="log_subsection_td">
-							<a href="{$line.log_subsection_link}" class="standard_table_left">
+							{if $line.log_subsection_link <> ''}
+								<a href="{$line.log_subsection_link}" class="standard_table_left">
+									{$line.log_subsection}
+								</a>
+							{else}
 								{$line.log_subsection}
-							</a>
+							{/if}
 						</td>
 						<td class="log_subname_td">
-							<a href="{$line.log_subsection_link}" class="standard_table_left">
+							{if $line.log_subsection_link <> ''}
+								<a href="{$line.log_subsection_link}" class="standard_table_left">
+									{$line.log_subsection_name}
+								</a>
+							{else}
 								{$line.log_subsection_name}
-							</a>
-						</td>		
+							{/if}
+						</td>
 					</tr>
 					{/foreach}
 				{else}
@@ -126,6 +149,6 @@ The change log page
 			</div>
 		{/if}
 		<br>
-	</div>	
+	</div>
 </div>
 {/block}

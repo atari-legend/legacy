@@ -28,7 +28,8 @@ error_reporting(-1);
 define("SITESTATUS", "online");
 
 // This is the url of the site
-define("SITEURL", "http://www.atarilegend.com/");
+define("SITEHOST", "www.atarilegend.com");
+define("SITEURL", "http://".SITEHOST."/");
 
 //***************************************************************
 // Setup the Smarty Templating framework

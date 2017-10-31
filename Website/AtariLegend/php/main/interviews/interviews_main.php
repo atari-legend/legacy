@@ -1,6 +1,6 @@
 <?php
 /***************************************************************************
- *                                interviews_main.php
+*                                interviews_main.php
 *                            ------------------------------
 *   begin                : Monday, August 21, 2017
 *   copyright            : (C) 2017 Atari Legend
@@ -10,7 +10,7 @@
 ****************************************************************************/
 
 //****************************************************************************************
-// This is the main page of the interviews. 
+// This is the main page of the interviews.
 //****************************************************************************************
 
 //load all common functions
@@ -33,15 +33,14 @@ $v_rows = $query_number->num_rows;
 
 //main query
 $sql_interview = $mysqli->query("SELECT *
-                        FROM interview_main
-                        LEFT JOIN interview_text on (interview_main.interview_id = interview_text.interview_id)
-                        LEFT JOIN users on (interview_main.user_id = users.user_id)
-                        LEFT JOIN individuals on (interview_main.ind_id = individuals.ind_id)
-                        LEFT JOIN individual_text on (interview_main.ind_id = individual_text.ind_id)
-                        ORDER BY interview_text.interview_date DESC LIMIT  " . $v_counter . ", 5") or die("Error - Couldn't query interview data");
+    FROM interview_main
+    LEFT JOIN interview_text on (interview_main.interview_id = interview_text.interview_id)
+    LEFT JOIN users on (interview_main.user_id = users.user_id)
+    LEFT JOIN individuals on (interview_main.ind_id = individuals.ind_id)
+    LEFT JOIN individual_text on (interview_main.ind_id = individual_text.ind_id)
+    ORDER BY interview_text.interview_date DESC LIMIT  " . $v_counter . ", 5") or die("Error - Couldn't query interview data");
 
-while ($query_interview = $sql_interview->fetch_array(MYSQLI_BOTH))
-{	  
+while ($query_interview = $sql_interview->fetch_array(MYSQLI_BOTH)) {
     $v_interview_date = date("F j, Y", $query_interview['interview_date']);
 
     $interview_text = $query_interview['interview_intro'];
@@ -53,10 +52,11 @@ while ($query_interview = $sql_interview->fetch_array(MYSQLI_BOTH))
     $interview_chapters = InsertALCode($interview_chapters);
 
     //get the profile of the author
-    if(preg_match("/[a-z]/i", $query_interview['ind_profile'])){
+    if (preg_match("/[a-z]/i", $query_interview['ind_profile'])) {
         $profile = $query_interview['ind_profile'];
+    } else {
+        $profile = 'none';
     }
-    else {$profile = 'none';}
 
     //The interviewed person's picture
     if ($query_interview['ind_imgext'] == 'png' or $query_interview['ind_imgext'] == 'jpg' or $query_interview['ind_imgext'] == 'gif') {
@@ -86,7 +86,7 @@ while ($query_interview = $sql_interview->fetch_array(MYSQLI_BOTH))
     ));
 }
 
-$smarty->assign('nr_interviews',$v_rows);
+$smarty->assign('nr_interviews', $v_rows);
 
 //Check if back arrow is needed
 if ($v_counter > 0) {

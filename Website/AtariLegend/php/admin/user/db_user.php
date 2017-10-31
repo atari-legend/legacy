@@ -185,6 +185,26 @@ if (isset($action) and $action == 'reset_pwd') {
 //****************************************************************************************
 if (isset($action) and $action == 'modify_user') {
     
+    if ($user_website == 'http://')
+    {
+        $user_website = '';
+    }
+    
+    if ($user_fb == 'https://')
+    {
+        $user_fb = '';
+    }
+    
+    if ($user_twitter == 'https://')
+    {
+        $user_twitter = '';
+    }
+    
+    if ($user_af == 'http://')
+    {
+        $user_af = '';
+    }
+    
     if (isset($_POST['pmd5']) &&  $_POST['pmd5'] != '' && isset($_POST['p']) && $_POST['p'] != '' ) {
       
         $user_name = $mysqli->real_escape_string($user_name);

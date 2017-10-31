@@ -67,7 +67,16 @@ function user_stats()
 {block name=main_tile}
 <div class="standard_tile" id="user_details">
     <div class="help-tip">
-        <p>Tip : To upload an avatar, click on 'select file'. Once the file is selected, just press the upload button.</p>
+        <p>
+            Tip : To upload an avatar, click on 'select file'. Once the file is selected, just press the upload button.
+            <br>
+            <br>
+            Some more info on the input fields :<br><br>
+            <b>User Website :</b> Link to your personal website. Make sure to start with the 'http://'.<br><br>
+            <b>Facebook profile :</b> Link to your facebook profile page eg. 'https://www.facebook.com/atarilegend/'<br><br>
+            <b>AF profile :</b> Link to your Atari-Forum profile page eg. 'http://www.atari-forum.com/memberlist.php?mode=viewprofile&u=5'<br><br>
+            <b>Twitter Profile :</b> Link to your Twitter profile page eg. 'https://twitter.com/MaartenMartens'
+        </p>
     </div>
 	<h1>USER DETAILS</h1>
 	<div class="standard_tile_line"></div>
@@ -94,12 +103,12 @@ function user_stats()
 					</div>
 					<div class="user_details_row">
 						<div class="user_details_text">User website :</div>
-						<div class="user_details_input"><input type="text" name="user_website"  maxlength="255" value="{$users.user_website}" class="user_details_input_small"></div>
+						<div class="user_details_input"><input type="text" name="user_website"  maxlength="255" value="{if ($users.user_website != '')}{$users.user_website}{else}http://{/if}" class="user_details_input_small" placeholder="http://"></div>
 					</div>
 					<div class="user_details_row">
-						<div class="user_details_text">User Facebook :</div>
-						<div class="user_details_input"><input type="text" name="user_fb"  maxlength="255" value="{$users.user_fb}" class="user_details_input_small"></div>
-					</div>
+						<div class="user_details_text">Facebook profile :</div>
+						<div class="user_details_input"><input type="text" name="user_fb"  maxlength="255" value="{if ($users.user_fb != '')}{$users.user_fb}{else}https://{/if}" class="user_details_input_small" placeholder="https://"></div>
+					</div>  
                     <div class="user_details_row">
 						<div class="user_details_text">Join date :</div>
 						<div class="user_details_input"><input type="text" name="join date"  maxlength="255" value="{$users.join_date}" class="user_details_input_small" disabled></div>
@@ -126,12 +135,12 @@ function user_stats()
 					</div>
                     {/if}
 					<div class="user_details_row">	
-						<div class="user_details_text">User AF :</div>
-						<div class="user_details_input"><input type="text" name="user_af"  maxlength="255" value="{$users.user_af}" class="user_details_input_small"></div>
+						<div class="user_details_text">AF Profile :</div>
+						<div class="user_details_input"><input type="text" name="user_af"  maxlength="255" value="{if ($users.user_af != '')}{$users.user_af}{else}http://{/if}" class="user_details_input_small" placeholder="http://"></div>
 					</div>
 					<div class="user_details_row">
-						<div class="user_details_text">User Twitter :</div>
-						<div class="user_details_input"><input type="text" name="user_twitter"  maxlength="255" value="{$users.user_twitter}" class="user_details_input_small"></div>
+						<div class="user_details_text">Twitter profile :</div>
+						<div class="user_details_input"><input type="text" name="user_twitter"  maxlength="255" value="{if ($users.user_twitter != '')}{$users.user_twitter}{else}https://{/if}" class="user_details_input_small" placeholder="https://"></div>
 					</div>
                     <div class="user_details_row">
 						<div class="user_details_text">Last visit :</div>

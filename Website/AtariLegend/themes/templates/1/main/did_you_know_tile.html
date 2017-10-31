@@ -1,4 +1,4 @@
-{* 
+{*
 /***************************************************************************
 *                               did_you_know_tile.html
 *                            -----------------------------
@@ -14,16 +14,16 @@
 
 //****************************************************************************************
 // This is the 'did you know' tile
-//**************************************************************************************** 
+//****************************************************************************************
 *}
 {block name=did_you_know_tile}
-<div class="{$did_you_know_tile}">
-	<div class="standard_tile">		
+<div class="{if isset($did_you_know_tile)}{$did_you_know_tile}{/if}">
+	<div class="standard_tile">
 		<h1>DID YOU KNOW?</h1>
 		<div class="standard_tile_line"></div>
 		<div class="standard_tile_text">
 			<h6>{$trivia_text}</h6>
 		</div>
-	</div>	
-</div>	
-{/block}	
+	</div>
+</div>
+{/block}
