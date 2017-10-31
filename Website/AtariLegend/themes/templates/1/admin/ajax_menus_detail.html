@@ -349,15 +349,16 @@
 		<Select class="saveHistory" id="m1" name="m1" onchange="browseInd(this.value)" style="width:70px;height:25px;display:inline;">
 			{html_options values=$az_value output=$az_output}
 		</select>
-		<div id="ind_member" style="display:inline;">
-			<select id="ind_id" name="ind_id">
-				{foreach from=$ind item=line}
-					<option value="{$line.ind_id}">{$line.ind_name}</option>
-				{/foreach}
-			</select>
-		</div>
+        <input type="text" onkeyup="searchInd(this.value)" class="standard_tile_input_small" value="search">
         <br>
-		<input type="text" onkeyup="searchInd(this.value)" class="standard_tile_input_small" value="search">
+        <div id="ind_member" style="display:inline;">
+            <select id="ind_id" name="ind_id">
+                {foreach from=$ind item=line}
+                    <option value="{$line.ind_id}">{$line.ind_name}</option>
+                {/foreach}
+            </select>
+        </div>
+
 		<select id="author_type_id" name="author_type_id" size="1" style="margin:5px;margin-top:0px;width:200px;">
 		<option value="">-</option>
 			{foreach from=$author_type item=line}
