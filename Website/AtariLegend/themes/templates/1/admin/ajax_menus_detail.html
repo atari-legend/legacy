@@ -62,7 +62,7 @@
 								<br>
 								<br>
 								<b>Menu disk options :</b><br>
-								<a onclick="DeleteMenuDisk({$menus.menu_disk_id})" style="cursor: pointer;" class="standard_tile_link">Delete menu disk</a><br>
+								<a onclick="DeleteMenuDiskModal({$menus.menu_disk_id})" style="cursor: pointer;" class="standard_tile_link">Delete menu disk</a><br>
 								<div id="intro_credit_link"><a onclick="popAddIntroCred({$menus.menu_disk_id})" style="cursor: pointer;" class="standard_tile_link">Add intro credits</a><br></div>
 								<div id="gameto_menu_link"><a onclick="popAddGames({$menus.menu_disk_id})" style="cursor: pointer;" class="standard_tile_link">Add Game/Tool/Demo to menu</a><br></div>
 								<div id="docto_menu_link"><a onclick="popAddDocs({$menus.menu_disk_id})" style="cursor: pointer;" class="standard_tile_link">Add Doc to menu</a><br></div>
@@ -143,9 +143,8 @@
 									<td class="menu_mark_td">
 										<form name="MenuDiskContent" id="MenuDiskContent">
                                          <div class="links_mod_checkbox">
-                                            <input type="checkbox" id="menu_disk_title_id{$line.menu_disk_title_id}" name="menu_disk_title_id[]" value="{$line.menu_disk_title_id}" onchange="deleteGamefromMenu({$line.menu_disk_title_id},{$menu_disk_id})">
+                                            <input type="checkbox" id="menu_disk_title_id{$line.menu_disk_title_id}" name="menu_disk_title_id[]" value="{$line.menu_disk_title_id}" onchange="DeleteGamefromMenuButton({$line.menu_disk_title_id},{$menu_disk_id})">
                                             <label for="menu_disk_title_id{$line.menu_disk_title_id}"></label>&nbsp;
-                                            <!--<input type="checkbox" id="menu_disk_title_id{$line.menu_disk_title_id}" name="menu_disk_title_id[]" value="{$line.menu_disk_title_id}" onchange="deleteGamefromMenu({$line.menu_disk_title_id},{$menu_disk_id})">-->
                                         </div>
 									</td>
 									<td class="menu_gamename_td">
@@ -243,6 +242,7 @@
 										<form action="#" method="post" name="doc_type_edit{$line.doc_id}" id="doc_type_edit{$line.doc_id}">
 											<select name="doc_type_id" id="quick_search_small_select" style="width:125px;" onchange="ChangeDoctype(this.value,{$line.doc_id},{$menus.menu_disk_id})">
 											<option value="" selected>-</option>
+                                            {if isset($doc_type)}
 												{foreach from=$doc_type item=doc_types}
 													{if $doc_types.doc_type_id == $line.doc_type_id}
 														{html_options values=$doc_types.doc_type_id output=$doc_types.doc_type_name selected=$line.doc_type_id}
@@ -250,6 +250,7 @@
 														{html_options values=$doc_types.doc_type_id output=$doc_types.doc_type_name}
 													{/if}
 												{/foreach}
+                                            {/if}
 											</select>
 										</form>
 									</td>
@@ -348,15 +349,16 @@
 		<Select class="saveHistory" id="m1" name="m1" onchange="browseInd(this.value)" style="width:70px;height:25px;display:inline;">
 			{html_options values=$az_value output=$az_output}
 		</select>
-		<div id="ind_member" style="display:inline;">
-			<select id="ind_id" name="ind_id">
-				{foreach from=$ind item=line}
-					<option value="{$line.ind_id}">{$line.ind_name}</option>
-				{/foreach}
-			</select>
-		</div>
+        <input type="text" onkeyup="searchInd(this.value)" class="standard_tile_input_small" value="search">
         <br>
-		<input type="text" onkeyup="searchInd(this.value)" class="standard_tile_input_small" value="search">
+        <div id="ind_member" style="display:inline;">
+            <select id="ind_id" name="ind_id">
+                {foreach from=$ind item=line}
+                    <option value="{$line.ind_id}">{$line.ind_name}</option>
+                {/foreach}
+            </select>
+        </div>
+
 		<select id="author_type_id" name="author_type_id" size="1" style="margin:5px;margin-top:0px;width:200px;">
 		<option value="">-</option>
 			{foreach from=$author_type item=line}
@@ -394,9 +396,8 @@
 				<td class="menu_mark_td">
 					<form name="MenuDiskContent" id="MenuDiskContent">
                     <div class="links_mod_checkbox">
-                        <input type="checkbox" id="menu_disk_title_id{$line.menu_disk_title_id}" name="menu_disk_title_id[]" value="{$line.menu_disk_title_id}" onchange="deleteGamefromMenu({$line.menu_disk_title_id},{$menu_disk_id})">
+                        <input type="checkbox" id="menu_disk_title_id{$line.menu_disk_title_id}" name="menu_disk_title_id[]" value="{$line.menu_disk_title_id}" onchange="DeleteGamefromMenuButton({$line.menu_disk_title_id},{$menu_disk_id})">
                         <label for="menu_disk_title_id{$line.menu_disk_title_id}"></label>&nbsp;
-                        <!--<input type="checkbox" id="menu_disk_title_id{$line.menu_disk_title_id}" name="menu_disk_title_id[]" value="{$line.menu_disk_title_id}" onchange="deleteGamefromMenu({$line.menu_disk_title_id},{$menu_disk_id})">-->
                     </div>
 
 				</td>
@@ -497,6 +498,7 @@
 					<form action="#" method="post" name="doc_type_edit{$line.doc_id}" id="doc_type_edit{$line.doc_id}">
 						<select name="doc_type_id" id="quick_search_small_select" style="width:125px;" onchange="ChangeDoctype(this.value,{$line.doc_id},{$menu_disk_id})">
 						<option value="" selected>-</option>
+                            {if isset($doc_type)}
 							{foreach from=$doc_type item=doc_types}
 								{if $doc_types.doc_type_id == $line.doc_type_id}
 									{html_options values=$doc_types.doc_type_id output=$doc_types.doc_type_name selected=$line.doc_type_id}
@@ -504,6 +506,7 @@
 									{html_options values=$doc_types.doc_type_id output=$doc_types.doc_type_name}
 								{/if}
 							{/foreach}
+                            {/if}
 						</select>
 					</form>
 				</td>
@@ -662,9 +665,8 @@
 				<td class="menu_mark_td">
 					<form name="MenuDiskContent" id="MenuDiskContent">
                     <div class="links_mod_checkbox">
-                        <input type="checkbox" id="menu_disk_title_id{$line.menu_disk_title_id}" name="menu_disk_title_id[]" value="{$line.menu_disk_title_id}" onchange="deleteGamefromMenu({$line.menu_disk_title_id},{$menu_disk_id})">
+                        <input type="checkbox" id="menu_disk_title_id{$line.menu_disk_title_id}" name="menu_disk_title_id[]" value="{$line.menu_disk_title_id}" onchange="DeleteGamefromMenuButton({$line.menu_disk_title_id},{$menu_disk_id})">
                         <label for="menu_disk_title_id{$line.menu_disk_title_id}"></label>&nbsp;
-                        <!--<input type="checkbox" id="menu_disk_title_id{$line.menu_disk_title_id}" name="menu_disk_title_id[]" value="{$line.menu_disk_title_id}" onchange="deleteGamefromMenu({$line.menu_disk_title_id},{$menu_disk_id})">-->
                     </div>
 				</td>
 				<td class="menu_gamename_td">
