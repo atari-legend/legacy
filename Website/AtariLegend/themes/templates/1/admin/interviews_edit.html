@@ -357,10 +357,10 @@ function storeCaret(textEl) {
 			This is where the actual interview is inserted in the database. Overhere you'll notice 3 main text boxes.
 			<br>
             <br>
-			<i><b>- Intro :</b></i> This is where you'll write a little introduction to the interview. This text is placed in the boxes of the main interview section of AL (and in the search results). Use the 'Frontpage' button to mark the text used in the 'who is it' tile on the website.
+			<i><b>- Intro :</b></i> The introduction to the interview. This is the short text you will see in the main interview section and in the 'who is it' tile.
 			<br>
             <br>
-			<i><b>- Chapters :</b></i> This is a section especially created for chapters. Its a bit more complex. You just add as many chapters as you like.
+			<i><b>- Chapters :</b></i> A bit more complex. You just add as many chapters as you like.
             eg : <i>Introduction, It started back then...</i>These chapters should have some sort of hotspot. Therefor you should always select each chapter and press the hotspotsource button. It also necesarry to give each chapter a unique number (behind the # sign).
 			This chapter can be link to a certain place in the actual interview section by selecting the place and pressing the hotspottarget button. And ofcourse adding the appropriate number.
 			<br>
@@ -371,11 +371,17 @@ function storeCaret(textEl) {
             You can add screenshots by pressing the link at the bottom of the screen. Once shots have been linked to an interview, they will appear in this screen with their own comment fields for you to fill out if needed.
             <br>
 			<br>
-			Remember that you have a lot of freedom regarding layout issues. Even the "enters" you place in a text field are translated to the AL page, so make something nice of it, will you? :-)
+            Use the 'preview' tab to get an idea of what the interview will look like on the main website.
+            <br>
+            <br>
+            <i class="fa fa-chevron-circle-down" aria-hidden="true" title="Click for drop down mode"></i> : Click this item to switch from list to input mode and vice versa
+            <br>
+            <br>
+            <i class="fa fa-trash-o" aria-hidden="true" title="Click to delete screenshot"></i> : Once a screenshot comment is added to the DB, you need to press this icon if you want to delete it.
         </p>
     </div>
 	{if isset($interview.interview_ind_name)}
-	<h1>{$interview.interview_ind_name}</h1>
+	<h1><a href="../individuals/individuals_edit.php?ind_id={$interview.interview_ind_id}" class="standard_tile_link">{$interview.interview_ind_name|upper}</a></h1>
 	<div class="standard_tile_line"></div>
 	<div class="standard_tile_text">
 		<div class="left_nav_section">
@@ -489,8 +495,8 @@ function storeCaret(textEl) {
                                 <td style="width:85%;border:0;">
                                     <input type="text" name="inputfield[]" value="{$line.interview_screenshot_comment}" class="standard_tile_input_small" style="width:95%;" id="comment_{$line.interview_screenshot_count}">
                                 </td>
-                                <td style="width:5%;border:0;margin-right:1%">
-                                    <a href="javascript:deletecomment({$line.interview_screenshot_id},{$interview.interview_id})" class="left_nav_link">
+                                <td style="width:5%;border:0;">
+                                    <a href="javascript:deletecomment({$line.interview_screenshot_id},{$interview.interview_id})" class="standard_tile_link">
                                         <i class="fa fa-trash-o" aria-hidden="true" title="Click to delete screenshot"></i>
                                     </a>
                                 </td>
@@ -520,9 +526,6 @@ function storeCaret(textEl) {
                         <b><div id="interview_preview_date"></div></b>
                         <br>
                         <br>
-                        {if $interview.interview_img != 'none'}
-                            <span style="float:left; margin-right:10px;" id="interview_preview_photo"><img src="../../includes/show_image.php?file={$interview.interview_img}&amp;resize=200,null,null,null" alt="{$interview.individual_name}" style="display:inline;" class="user_stats_img" id="user_details_img_dark"></span>
-                        {/if}
                         <u>INTRO</u>
                         <br>
                         <br>
