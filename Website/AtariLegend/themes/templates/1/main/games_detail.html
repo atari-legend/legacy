@@ -21,7 +21,9 @@
 {block name=title} {$game_info.game_name} | Atari Legend{/block}
 {block name=main_body}
     <script src="{$template_dir}includes/js/jssor.slider-25.2.1.min.js" type="text/javascript"></script>
-    {if isset($music)}
+    {ie_detect}
+    {* Music player is not supported on IE *}
+    {if isset($music) and ! $ie}
         <script src="{$template_dir}includes/js/scriptprocessor_player.min.js" type="text/javascript"></script>
         <script src="{$template_dir}includes/js/backend_sc68.js" type="text/javascript"></script>
         <script src="{$template_dir}includes/js/music-player.snd.js" type="text/javascript"></script>
@@ -169,7 +171,7 @@
 
     });
 
-    {if isset($music)}
+    {if isset($music) and ! $ie}
         $(document).ready( function() {
             $('.music-player.snd').sndPlayer();
         });

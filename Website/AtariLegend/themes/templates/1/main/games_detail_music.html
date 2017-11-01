@@ -6,46 +6,45 @@
         <ul>
             {foreach from=$music item=line name=music}
             <li>
+                {ie_detect}
+                {if ! $ie}
+                    {if $line.music_extension == 'snd'}
+                        <div class="music-player snd" data-music-id="{$line.music_id}" data-music-ext="{$line.music_extension}">
+                            <a href="../../../data/music/games/{$line.music_id}.{$line.music_extension}" download="{$game_info.game_name}.{$line.music_extension}" title="Download music for {$game_info.game_name} by {$line.music_ind_name}" class="download-link"><i class="fa fa-download"></i></a>
+                            <div class="tracks">
+                                Track 
+                                <span class="current-track">1</span>
+                                /
+                                <span class="track-count">?</span>
+                            </div>
 
-                {if $line.music_extension == 'snd'}
-                    <div class="music-player snd" data-music-id="{$line.music_id}" data-music-ext="{$line.music_extension}">
-                        <a href="../../../data/music/games/{$line.music_id}.{$line.music_extension}" download="{$game_info.game_name}.{$line.music_extension}" title="Download music for {$game_info.game_name} by {$line.music_ind_name}" class="download-link"><i class="fa fa-download"></i></a>
-                        <div class="tracks">
-                            Track 
-                            <span class="current-track">1</span>
-                            /
-                            <span class="track-count">?</span>
-                        </div>
+                            <div class="controls">
+                                <a href="#" class="music-player-button track-prev" title="Previous track"><i class="fa fa-step-backward"></i></a>
+                                <a href="#" class="music-player-button track-play-stop stopped" title="Play / Stop"><i class="fa fa-2x fa-play"></i></a>
+                                <a href="#" class="music-player-button track-next" title="Next track"><i class="fa fa-step-forward"></i></a>
+                            </div>
 
-                        <div class="controls">
-                            <a href="#" class="music-player-button track-prev" title="Previous track"><i class="fa fa-step-backward"></i></a>
-                            <a href="#" class="music-player-button track-play-stop stopped" title="Play / Stop"><i class="fa fa-2x fa-play"></i></a>
-                            <a href="#" class="music-player-button track-next" title="Next track"><i class="fa fa-step-forward"></i></a>
+                            <div class="info">
+                                <span>by</span> {$line.music_ind_name}<br>
+                                <span>Format: {$line.music_extension}</span>
+                            </div>
                         </div>
-
-                        <div class="info">
-                            <span>by</span> {$line.music_ind_name}<br>
-                            <span>Format: {$line.music_extension}</span>
+                    {elseif $line.music_extension == 'mp3'}
+                        <div class="music-player mp3">
+                            <div class="info">
+                                by {$line.music_ind_name} ({$line.music_extension})
+                                <a href="../../../data/music/games/{$line.music_id}.{$line.music_extension}" download="{$game_info.game_name}.{$line.music_extension}" title="Download music for {$game_info.game_name} by {$line.music_ind_name}"><i class="fa fa-download"></i></a>
+                            </div>
+                            <audio controls>
+                                <source src="../../../data/music/games/{$line.music_id}.{$line.music_extension}" type="{$line.music_mime_type}">
+                            </audio>
                         </div>
-                    </div>
-                {elseif $line.music_extension == 'mp3'}
-                    <div class="music-player mp3">
-                        <div class="info">
-                            by {$line.music_ind_name} ({$line.music_extension})
-                            <a href="../../../data/music/games/{$line.music_id}.{$line.music_extension}" download="{$game_info.game_name}.{$line.music_extension}" title="Download music for {$game_info.game_name} by {$line.music_ind_name}"><i class="fa fa-download"></i></a>
-                        </div>
-                        <audio controls>
-                            <source src="../../../data/music/games/{$line.music_id}.{$line.music_extension}" type="{$line.music_mime_type}">
-                        </audio>
-                    </div>
+                    {else}
+                        {include file='1/main/games_detail_music_simple_row.html'}
+                    {/if}
                 {else}
-                    <div class="music-player other">
-                        <div class="info">
-                            by {$line.music_ind_name} ({$line.music_extension})
-                            <a href="../../../data/music/games/{$line.music_id}.{$line.music_extension}" download="{$game_info.game_name}.{$line.music_extension}" title="Download music for {$game_info.game_name} by {$line.music_ind_name}"><i class="fa fa-download"></i></a>
-                        </div>
-                    </div>
-
+                    {* No music player on IE, just list the music files *}
+                    {include file='1/main/games_detail_music_simple_row.html'}
                 {/if}
             {/foreach}
         </ul>
