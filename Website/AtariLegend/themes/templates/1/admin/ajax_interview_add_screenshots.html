@@ -1,0 +1,28 @@
+{*
+/***************************************************************************
+*                             ajax_interview_add_screenshots.html
+*                            ---------------------------------
+*   begin                : Thursday, November 2, 2017
+*   copyright            : (C) 2017 Atari Legend
+*   email                : admin@atarilegend.com
+*
+*   Id: ajax_interview_add_screenshots.html,v 0.10 2017/11/02 22:29 STG
+*			- creation of file
+*
+***************************************************************************/
+*}
+
+<div class="standard_tile_text">
+	<fieldset class="centered_fieldset">
+		<legend>Browse</legend>
+            <label for="file_upload" class="file_upload" onclick="myFunction()">Select file(s)</label>
+            <input id="file_upload" type="file" name="image[]" multiple>
+            <input type="text" class="standard_tile_input_small" id="file_upload_game_screenshots">&nbsp;
+			<br>
+			<br>
+			<input type="hidden" name="MAX_FILE_SIZE" value="100000">
+			<input type="hidden" name="action2" value="add_screens">
+			<input type="button" value="Add" onclick="addScreenshottoInterview({$interview_id})" class="topbutton_cpanel">
+	</fieldset> 
+</div>
+</br>
