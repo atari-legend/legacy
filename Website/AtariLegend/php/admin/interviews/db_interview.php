@@ -32,11 +32,9 @@ if ($action == "stop") {
 //****************************************************************************************
 
 //If we are uploading new screenshots
-if (isset($action) and $action == 'add_screens') {
+if (isset($action2) and $action2 == 'add_screens') {
     //Here we'll be looping on each of the inputs on the page that are filled in with an image!
     $image = $_FILES['image'];
-
-    echo $image;
 
     foreach ($image['tmp_name'] as $key => $tmp_name) {
         if ($tmp_name !== 'none') {
@@ -74,7 +72,7 @@ if (isset($action) and $action == 'add_screens') {
                 // Rename the uploaded file to its autoincrement number and move it to its proper place.
                 $file_data = rename($image['tmp_name'][$key], "$interview_screenshot_save_path$screenshotrow[0].$ext");
 
-                $_SESSION['edit_message'] = 'Screenshots added';
+                $osd_message = "Screenshot uploaded";
 
                 create_log_entry('Interviews', $interview_id, 'Screenshots', $interview_id, 'Insert', $_SESSION['user_id']);
 
@@ -82,8 +80,52 @@ if (isset($action) and $action == 'add_screens') {
             }
         }
     }
+    
+    if ($osd_message == '') {
+        $osd_message = "No screenshot uploaded";
+    }
+    
+    //Let's get the screenshots for the interview
+    $sql_screenshots = $mysqli->query("SELECT * FROM screenshot_interview
+                    LEFT JOIN screenshot_main on ( screenshot_interview.screenshot_id = screenshot_main.screenshot_id )
+                    WHERE screenshot_interview.interview_id = '$interview_id' ORDER BY screenshot_interview.screenshot_id ASC") or die("Database error - getting screenshots & comments");
 
-    header("Location: ../interviews/interviews_screenshots_add.php?interview_id=$interview_id");
+    //get the number of screenshots in the archive
+    $v_screeshots = $sql_screenshots->num_rows;
+    $smarty->assign("screenshots_nr", $v_screeshots);
+
+    $count = 1;
+
+    while ($screenshots = $sql_screenshots->fetch_array(MYSQLI_BOTH)) {
+        $v_int_image = $interview_screenshot_path;
+        $v_int_image .= $screenshots['screenshot_id'];
+        $v_int_image .= '.';
+        $v_int_image .= $screenshots['imgext'];
+
+        //We need to get the comments with each screenshot
+        $sql_comments = $mysqli->query("SELECT * FROM interview_comments
+                     WHERE screenshot_interview_id  = $screenshots[screenshot_interview_id]") or die("Database error - getting screenshots comments");
+
+        $comments = $sql_comments->fetch_array(MYSQLI_BOTH);
+
+        $smarty->append('screenshots', array(
+            'interview_screenshot' => $v_int_image,
+            'interview_screenshot_id' => $screenshots['screenshot_id'],
+            'interview_screenshot_count' => $count,
+            'interview_screenshot_comment' => $comments['comment_text']
+        ));
+        $count = $count + 1;
+    }
+    
+    $smarty->assign('osd_message', $osd_message);
+   
+    $smarty->assign('smarty_action', 'add_screen_to_interview_return');
+    $smarty->assign('interview_id', $interview_id);
+
+    //Send to smarty for return value
+    $smarty->display("file:" . $cpanel_template_folder . "interviews_edit.html");
+
+    //header("Location: ../interviews/interviews_screenshots_add.php?interview_id=$interview_id");
 }
 
 //If we pressed the delete screenshot link
