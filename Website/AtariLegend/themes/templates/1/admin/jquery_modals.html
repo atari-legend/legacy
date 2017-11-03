@@ -1,0 +1,48 @@
+{*
+/***************************************************************************
+                              jquery_modals.html
+*                            --------------------------
+*   begin                : Sunday, August 28, 2005
+*   copyright            : (C) 2017 AtariLegend
+*   email                : admin@atarilegend.com
+*
+*
+*
+***************************************************************************/
+
+************************************************************************************************
+The main game page
+************************************************************************************************
+*}
+
+{foreach $modals as $modal}
+
+    {if $modal=="delete_title"}
+        <div id="JSdialogConfirmDeleteMenuTitle" title="Delete Title?" style="display:none;">
+            <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
+                Are you sure?
+            </p>
+        </div>
+    {/if}
+    {if $modal=="delete_disk"}
+        <div id="JSdialogConfirmDeleteMenuDisk" title="Delete Disk?" style="display:none;">
+            <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
+                Are you sure?
+            </p>
+        </div>
+    {/if}
+    {if $modal=="delete_individual_menuset"}
+        <div id="JSdialogConfirmDeleteIndividualSet" title="Delete Individual?" style="display:none;">
+            <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
+                Are you sure?
+            </p>
+        </div>
+    {/if}
+    {if $modal=="delete_crew_menuset"}
+        <div id="JSdialogConfirmDeleteCrewSet" title="Delete Crew?" style="display:none;">
+            <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
+                Are you sure?
+            </p>
+        </div>
+    {/if}
+{/foreach}
