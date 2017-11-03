@@ -1119,9 +1119,101 @@ if (isset($action) and $action == "delete_menu_disk_credits") {
 }
 
 //****************************************************************************************
+// DELETE MENU DISK
+//****************************************************************************************
+
+
+if (isset($action) and ($action == "delete_menu_disk")) {
+   // first let's check if this menu disk has user comments
+   $sql = $mysqli->query("SELECT * FROM menu_user_comments WHERE menu_disk_id = '$menu_disk_id'") or die('Error: ' . mysqli_error($mysqli));
+   if ($sql->num_rows > 0) {
+       $osd_message = "This menu still has user comments, please remove them first";
+   } else {
+       // check for downloads
+       $sql = $mysqli->query("SELECT * FROM menu_disk_download WHERE menu_disk_id='$menu_disk_id'") or die('Error: ' . mysqli_error($mysqli));
+       if ($sql->num_rows > 0) {
+           $osd_message = "This menu still has downloads, please remove them first";
+       } else {
+           //check for screenshots
+           $sql = $mysqli->query("SELECT * FROM screenshot_menu WHERE menu_disk_id='$menu_disk_id'") or die('Error: ' . mysqli_error($mysqli));
+           if ($sql->num_rows > 0) {
+               $osd_message = "This menu still has screenshots, please remove them first";
+           } else {
+               create_log_entry('Menu disk', $menu_disk_id, 'Menu disk', $menu_disk_id, 'Delete', $_SESSION['user_id']);
+
+               //get the menu set id
+               $query_menu_sets_id = "SELECT menu_sets_id FROM menu_disk WHERE menu_disk_id = '$menu_disk_id'";
+               $result = $mysqli->query($query_menu_sets_id) or die('Error: ' . mysqli_error($mysqli));
+               $query_id     = $result->fetch_array(MYSQLI_BOTH);
+               $menu_sets_id = $query_id['menu_sets_id'];
+
+               //get the menu disk title id
+               $sql_menu_disk_title_id = "SELECT menu_disk_title_id FROM menu_disk_title WHERE menu_disk_id = '$menu_disk_id'";
+               $result = $mysqli->query($sql_menu_disk_title_id) or die('Error: ' . mysqli_error($mysqli));
+
+               while ($query_id = $result->fetch_array(MYSQLI_BOTH)) {
+                   $menu_disk_title_id = $query_id['menu_disk_title_id'];
+
+                   //get the doc cross id
+                   $query_doc_game_id = "SELECT doc_games_id FROM menu_disk_title_doc_games WHERE menu_disk_title_id='$menu_disk_title_id'";
+                   $result_doc_game = $mysqli->query($query_doc_game_id) or die('Error: ' . mysqli_error($mysqli));
+                   $query_data  = $result_doc_game->fetch_array(MYSQLI_BOTH);
+                   $doc_game_id = $query_data['doc_games_id'];
+
+                   $query_doc_tool_id = "SELECT * FROM menu_disk_title_doc_tools WHERE menu_disk_title_id='$menu_disk_title_id'";
+                   $result_doc_tool = $mysqli->query($query_doc_tool_id) or die('Error: ' . mysqli_error($mysqli));
+                   $query_data  = $result_doc_tool->fetch_array(MYSQLI_BOTH);
+                   $doc_tool_id = $query_data['doc_tools_id'];
+
+                   //get the doc id
+                   $query_doc_id = "SELECT * FROM doc_disk_game WHERE doc_disk_game_id='$doc_game_id'";
+                   $result_doc_id = $mysqli->query($query_doc_id) or die('Error: ' . mysqli_error($mysqli));
+                   $query_data = $result_doc_id->fetch_array(MYSQLI_BOTH);
+                   $doc_id     = $query_data['doc_id'];
+
+                   if ($doc_id == '') {
+                       $query_doc_id = "SELECT * FROM doc_disk_tool WHERE doc_disk_tool_id='$doc_tool_id'";
+                       $result_doc_id = $mysqli->query($query_doc_id) or die('Error: ' . mysqli_error($mysqli));
+                       $query_data = $result_doc_id->fetch_array(MYSQLI_BOTH);
+                       $doc_id     = $query_data['doc_id'];
+                   }
+
+                   //Lets do all the menu disk title stuff
+                   $mysqli->query("DELETE from menu_disk_title WHERE menu_disk_title_id='$menu_disk_title_id'") or die('Error: ' . mysqli_error($mysqli));
+                   $mysqli->query("DELETE from menu_disk_title_game WHERE menu_disk_title_id='$menu_disk_title_id'") or die('Error: ' . mysqli_error($mysqli));
+                   $mysqli->query("DELETE from menu_disk_title_tools WHERE menu_disk_title_id='$menu_disk_title_id'") or die('Error: ' . mysqli_error($mysqli));
+                   $mysqli->query("DELETE from menu_disk_title_demo WHERE menu_disk_title_id='$menu_disk_title_id'") or die('Error: ' . mysqli_error($mysqli));
+                   $mysqli->query("DELETE from menu_disk_title_music WHERE menu_disk_title_id='$menu_disk_title_id'") or die('Error: ' . mysqli_error($mysqli));
+                   $mysqli->query("DELETE from menu_disk_title_various WHERE menu_disk_title_id='$menu_disk_title_id'") or die('Error: ' . mysqli_error($mysqli));
+                   $mysqli->query("DELETE from menu_disk_title_doc_games WHERE menu_disk_title_id='$menu_disk_title_id'") or die('Error: ' . mysqli_error($mysqli));
+                   $mysqli->query("DELETE from menu_disk_title_doc_tools WHERE menu_disk_title_id='$menu_disk_title_id'") or die('Error: ' . mysqli_error($mysqli));
+                   $mysqli->query("DELETE from menu_disk_title_set WHERE menu_disk_title_id='$menu_disk_title_id'") or die('Error: ' . mysqli_error($mysqli));
+                   $mysqli->query("DELETE from menu_disk_title_author WHERE menu_disk_title_id='$menu_disk_title_id'") or die('Error: ' . mysqli_error($mysqli));
+
+                   //Lets do all the doc disk stuff
+                   $mysqli->query("DELETE FROM doc_disk_game WHERE doc_disk_game_id='$doc_game_id'") or die('Error: ' . mysqli_error($mysqli));
+                   $mysqli->query("DELETE FROM doc_disk_tool WHERE doc_disk_tool_id='$doc_tool_id'") or die('Error: ' . mysqli_error($mysqli));
+                   $mysqli->query("DELETE FROM doc WHERE doc_id='$doc_id'") or die('Error: ' . mysqli_error($mysqli));
+               }
+
+               // menu disk tables
+               $mysqli->query("DELETE from menu_disk_year WHERE menu_disk_id='$menu_disk_id'") or die('Error: ' . mysqli_error($mysqli));
+               $mysqli->query("DELETE from menu_disk_submenu WHERE menu_disk_id='$menu_disk_id'") or die('Error: ' . mysqli_error($mysqli));
+               $mysqli->query("DELETE from menu_disk_credits WHERE menu_disk_id='$menu_disk_id'") or die('Error: ' . mysqli_error($mysqli));
+               $mysqli->query("DELETE from menu_disk WHERE menu_disk_id='$menu_disk_id'") or die('Error: ' . mysqli_error($mysqli));
+
+               $osd_message = "Menudisk completely removed";
+               $smarty->assign('osd_message', $osd_message);
+           }
+       }
+   }
+   echo "$osd_message";
+}
+
+//****************************************************************************************
 // UPDATE STATE/YEAR/PARENT/DELETE MENU DISK
 //****************************************************************************************
-if (isset($action) and ($action == "change_menu_disk_state" or $action == "change_menu_disk_year" or $action == "change_menu_disk_parent" or $action == "delete_menu_disk")) {
+if (isset($action) and ($action == "change_menu_disk_state" or $action == "change_menu_disk_year" or $action == "change_menu_disk_parent")) {
     if (isset($menu_disk_id)) {
         if ($_SESSION['permission'] == 1 or $_SESSION['permission'] == '1') {
             if ($action == "change_menu_disk_state") {
@@ -1144,94 +1236,6 @@ if (isset($action) and ($action == "change_menu_disk_state" or $action == "chang
                 }
                 create_log_entry('Menu disk', $menu_disk_id, 'Parent', $parent_id, 'Update', $_SESSION['user_id']);
                 $osd_message = 'Parent updated';
-            } elseif ($action == "delete_menu_disk") {
-                // first let's check if this menu disk has user comments
-                $sql = $mysqli->query("SELECT * FROM menu_user_comments WHERE menu_disk_id = '$menu_disk_id'") or die('Error: ' . mysqli_error($mysqli));
-                if ($sql->num_rows > 0) {
-                    $osd_message = "This menu still has user comments, please remove them first";
-                } else {
-                    // check for downloads
-                    $sql = $mysqli->query("SELECT * FROM menu_disk_download WHERE menu_disk_id='$menu_disk_id'") or die('Error: ' . mysqli_error($mysqli));
-                    if ($sql->num_rows > 0) {
-                        $osd_message = "This menu still has downloads, please remove them first";
-                    } else {
-                        //check for screenshots
-                        $sql = $mysqli->query("SELECT * FROM screenshot_menu WHERE menu_disk_id='$menu_disk_id'") or die('Error: ' . mysqli_error($mysqli));
-                        if ($sql->num_rows > 0) {
-                            $osd_message = "This menu still has screenshots, please remove them first";
-                        } else {
-                            create_log_entry('Menu disk', $menu_disk_id, 'Menu disk', $menu_disk_id, 'Delete', $_SESSION['user_id']);
-
-                            //get the menu set id
-                            $query_menu_sets_id = "SELECT menu_sets_id FROM menu_disk WHERE menu_disk_id = '$menu_disk_id'";
-                            $result = $mysqli->query($query_menu_sets_id) or die('Error: ' . mysqli_error($mysqli));
-                            $query_id     = $result->fetch_array(MYSQLI_BOTH);
-                            $menu_sets_id = $query_id['menu_sets_id'];
-
-                            //get the menu disk title id
-                            $sql_menu_disk_title_id = "SELECT menu_disk_title_id FROM menu_disk_title WHERE menu_disk_id = '$menu_disk_id'";
-                            $result = $mysqli->query($sql_menu_disk_title_id) or die('Error: ' . mysqli_error($mysqli));
-
-                            while ($query_id = $result->fetch_array(MYSQLI_BOTH)) {
-                                $menu_disk_title_id = $query_id['menu_disk_title_id'];
-
-                                //get the doc cross id
-                                $query_doc_game_id = "SELECT doc_games_id FROM menu_disk_title_doc_games WHERE menu_disk_title_id='$menu_disk_title_id'";
-                                $result_doc_game = $mysqli->query($query_doc_game_id) or die('Error: ' . mysqli_error($mysqli));
-                                $query_data  = $result_doc_game->fetch_array(MYSQLI_BOTH);
-                                $doc_game_id = $query_data['doc_games_id'];
-
-                                $query_doc_tool_id = "SELECT * FROM menu_disk_title_doc_tools WHERE menu_disk_title_id='$menu_disk_title_id'";
-                                $result_doc_tool = $mysqli->query($query_doc_tool_id) or die('Error: ' . mysqli_error($mysqli));
-                                $query_data  = $result_doc_tool->fetch_array(MYSQLI_BOTH);
-                                $doc_tool_id = $query_data['doc_tools_id'];
-
-                                //get the doc id
-                                $query_doc_id = "SELECT * FROM doc_disk_game WHERE doc_disk_game_id='$doc_game_id'";
-                                $result_doc_id = $mysqli->query($query_doc_id) or die('Error: ' . mysqli_error($mysqli));
-                                $query_data = $result_doc_id->fetch_array(MYSQLI_BOTH);
-                                $doc_id     = $query_data['doc_id'];
-
-                                if ($doc_id == '') {
-                                    $query_doc_id = "SELECT * FROM doc_disk_tool WHERE doc_disk_tool_id='$doc_tool_id'";
-                                    $result_doc_id = $mysqli->query($query_doc_id) or die('Error: ' . mysqli_error($mysqli));
-                                    $query_data = $result_doc_id->fetch_array(MYSQLI_BOTH);
-                                    $doc_id     = $query_data['doc_id'];
-                                }
-
-                                //Lets do all the menu disk title stuff
-                                $mysqli->query("DELETE from menu_disk_title WHERE menu_disk_title_id='$menu_disk_title_id'") or die('Error: ' . mysqli_error($mysqli));
-                                $mysqli->query("DELETE from menu_disk_title_game WHERE menu_disk_title_id='$menu_disk_title_id'") or die('Error: ' . mysqli_error($mysqli));
-                                $mysqli->query("DELETE from menu_disk_title_tools WHERE menu_disk_title_id='$menu_disk_title_id'") or die('Error: ' . mysqli_error($mysqli));
-                                $mysqli->query("DELETE from menu_disk_title_demo WHERE menu_disk_title_id='$menu_disk_title_id'") or die('Error: ' . mysqli_error($mysqli));
-                                $mysqli->query("DELETE from menu_disk_title_music WHERE menu_disk_title_id='$menu_disk_title_id'") or die('Error: ' . mysqli_error($mysqli));
-                                $mysqli->query("DELETE from menu_disk_title_various WHERE menu_disk_title_id='$menu_disk_title_id'") or die('Error: ' . mysqli_error($mysqli));
-                                $mysqli->query("DELETE from menu_disk_title_doc_games WHERE menu_disk_title_id='$menu_disk_title_id'") or die('Error: ' . mysqli_error($mysqli));
-                                $mysqli->query("DELETE from menu_disk_title_doc_tools WHERE menu_disk_title_id='$menu_disk_title_id'") or die('Error: ' . mysqli_error($mysqli));
-                                $mysqli->query("DELETE from menu_disk_title_set WHERE menu_disk_title_id='$menu_disk_title_id'") or die('Error: ' . mysqli_error($mysqli));
-                                $mysqli->query("DELETE from menu_disk_title_author WHERE menu_disk_title_id='$menu_disk_title_id'") or die('Error: ' . mysqli_error($mysqli));
-
-                                //Lets do all the doc disk stuff
-                                $mysqli->query("DELETE FROM doc_disk_game WHERE doc_disk_game_id='$doc_game_id'") or die('Error: ' . mysqli_error($mysqli));
-                                $mysqli->query("DELETE FROM doc_disk_tool WHERE doc_disk_tool_id='$doc_tool_id'") or die('Error: ' . mysqli_error($mysqli));
-                                $mysqli->query("DELETE FROM doc WHERE doc_id='$doc_id'") or die('Error: ' . mysqli_error($mysqli));
-                            }
-
-                            // menu disk tables
-                            $mysqli->query("DELETE from menu_disk_year WHERE menu_disk_id='$menu_disk_id'") or die('Error: ' . mysqli_error($mysqli));
-                            $mysqli->query("DELETE from menu_disk_submenu WHERE menu_disk_id='$menu_disk_id'") or die('Error: ' . mysqli_error($mysqli));
-                            $mysqli->query("DELETE from menu_disk_credits WHERE menu_disk_id='$menu_disk_id'") or die('Error: ' . mysqli_error($mysqli));
-                            $mysqli->query("DELETE from menu_disk WHERE menu_disk_id='$menu_disk_id'") or die('Error: ' . mysqli_error($mysqli));
-
-                            $osd_message = "Menudisk completely removed";
-                            $smarty->assign('osd_message', $osd_message);
-                            $smarty->assign('menu_sets_id', $menu_sets_id);
-
-                            //Send all smarty variables to the templates
-                            $smarty->display("file:" . $cpanel_template_folder . "menus_disk_list.html");
-                        }
-                    }
-                }
             } else {
                 // first check if the menu has already a year entry
                 $sql = $mysqli->query("SELECT * FROM menu_disk_year
