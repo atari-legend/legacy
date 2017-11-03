@@ -772,7 +772,7 @@ function ChangeParent(parent_id, menu_disk_id) {
 }
 // Are you sure question Delete
 function DeleteGamefromMenuButton(str, menu_disk_id) {
-    $("#dialog_confirm_delete").dialog({
+    $("#JSdialogConfirmDeleteMenuTitle").dialog({
         resizable: false,
         height: 140,
         modal: true,
@@ -811,7 +811,7 @@ function DeleteGamefromMenu(menu_disk_title_id, menu_disk_id) {
 }
 
 function DeleteMenuDiskModal(menu_disk_id) {
-    $("#dialog_confirm_delete_menu_disk").dialog({
+    $("#JSdialogConfirmDeleteMenuDisk").dialog({
         resizable: false,
         height: 140,
         modal: true,
@@ -838,37 +838,48 @@ function DeleteMenuDisk(menu_disk_id) {
         dataType: "html",
         // Code to run if the request succeeds;
         success: function(html) {
-            var ReturnHtml = html.split("[BRK]");
-            $("#" + disk_edit_ajax).html("");
-            OSDMessageDisplay(ReturnHtml[4]);
+            if (html=="Menudisk completely removed") {
+                $("#" + disk_edit_ajax).html("");
+            }
+            OSDMessageDisplay(html);
         }
     });
 }
 
-function IndDelete(ind_select) {
-    // CONFIRM REQUIRES ONE ARGUMENT
-    var message = "Are you sure you want to delete this individual from this menu set?";
-    // CONFIRM IS BOOLEAN. THAT MEANS THAT
-    // IT RETURNS TRUE IF 'OK' IS CLICKED
-    // OTHERWISE IT RETURN FALSE
-    var return_value = confirm(message);
-    if (return_value != "0") {
-        url = "db_menu_disk.php?menu_sets_id={$menu_set.menu_sets_id}&ind_id=" + ind_select + "&action=delete_ind_from_menu_set";
-        location.href = url;
-    }
+function DeleteMenuSetIndividualModal(ind_select) {
+    $("#JSdialogConfirmDeleteIndividualSet").dialog({
+        resizable: false,
+        height: 140,
+        modal: true,
+        buttons: {
+            "Delete disk": function() {
+                $(this).dialog("close");
+                url = "db_menu_disk.php?menu_sets_id={$menu_set.menu_sets_id}&ind_id=" + ind_select + "&action=delete_ind_from_menu_set";
+                location.href = url;
+            },
+            Cancel: function() {
+                $(this).dialog("close");
+            }
+        }
+    });
 }
 
-function CrewDelete(crew_select) {
-    // CONFIRM REQUIRES ONE ARGUMENT
-    var message = "Are you sure you want to delete this crew from this menu set?";
-    // CONFIRM IS BOOLEAN. THAT MEANS THAT
-    // IT RETURNS TRUE IF 'OK' IS CLICKED
-    // OTHERWISE IT RETURN FALSE
-    var return_value = confirm(message);
-    if (return_value != "0") {
-        url = "db_menu_disk.php?menu_sets_id={$menu_set.menu_sets_id}&crew_id=" + crew_select + "&action=delete_crew_from_menu_set";
-        location.href = url;
-    }
+function DeleteMenuSetCrewModal(crew_select) {
+    $("#JSdialogConfirmDeleteCrewSet").dialog({
+        resizable: false,
+        height: 140,
+        modal: true,
+        buttons: {
+            "Delete disk": function() {
+                $(this).dialog("close");
+                url = "db_menu_disk.php?menu_sets_id={$menu_set.menu_sets_id}&crew_id=" + crew_select + "&action=delete_crew_from_menu_set";
+                location.href = url;
+            },
+            Cancel: function() {
+                $(this).dialog("close");
+            }
+        }
+    });
 }
 
 function MenuTypeDelete(menu_type_select) {
@@ -1149,7 +1160,7 @@ function DeleteTitleCredits(menu_disk_title_id, ind_id, author_type_id) {
         <br>
         {if isset($connected_crew)}
         {foreach from=$connected_crew item=line}
-         {$line.crew_name} - <a href="#" class="standard_tile_link" onclick="CrewDelete({$line.crew_id});">Delete</a><br>
+         {$line.crew_name} - <a href="#" class="standard_tile_link" onclick="DeleteMenuSetCrewModal({$line.crew_id});">Delete</a><br>
         {/foreach}
         {/if}
         <br>
@@ -1186,7 +1197,7 @@ function DeleteTitleCredits(menu_disk_title_id, ind_id, author_type_id) {
         <br>
         {if isset($connected_ind)}
         {foreach from=$connected_ind item=line}
-         {$line.ind_name} - <a href="#" class="standard_tile_link" onclick="IndDelete({$line.ind_id});">Delete</a><br>
+         {$line.ind_name} - <a href="#" class="standard_tile_link" onclick="DeleteMenuSetIndividualModal({$line.ind_id});">Delete</a><br>
         {/foreach}
         {/if}
         <br>
@@ -1217,18 +1228,19 @@ function DeleteTitleCredits(menu_disk_title_id, ind_id, author_type_id) {
     </div>
 </div>
 <br>
-{include file='1/admin/left_nav.html'}
+
 {/block}
 
 {block name=main_tile}
-<div id="dialog_confirm_delete" title="Delete Title?" style="display:none;">
-  <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
-  Are you sure?</p>
-</div>
-<div id="dialog_confirm_delete_menu_disk" title="Delete Disk?" style="display:none;">
-  <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
-  Are you sure?</p>
-</div>
+
+{append var='modals' value='delete_title' index='first'}
+{append var='modals' value='delete_disk' index='last'}
+{append var='modals' value='delete_individual_menuset' index='last'}
+{append var='modals' value='delete_crew_menuset' index='last'}
+
+{include file='1/admin/jquery_modals.html'}
+
+
 <div class="standard_tile">
     <h1>EDIT SET</h1>
     <div class="standard_tile_line"></div>
