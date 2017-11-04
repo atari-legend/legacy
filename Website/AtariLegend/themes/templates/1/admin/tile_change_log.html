@@ -22,20 +22,22 @@
     <br>
         <div class="standard_table_left">
             <h5 class="standard_tile_subtext" style="font-family:verdana;">
-            {foreach from=$log item=line}
 
+            <table class="standard_table_list_stats">
+            {foreach from=$log item=line}
+            <tr>
+                <td class="standard_table_center" style="padding-top:3px; padding-bottom:3px;">
                 {*    {$line.log_date}  *}
 
                     {if $line.log_user_name <> '0'}
-                    <a href="../user/user_detail.php?user_id_selected={$line.log_user_id}">
-                        {$line.log_user_name}
-                    </a>
+                            {$line.log_user_name}
                     {else}
                         [deleted user]
                     {/if}
                     {if $line.log_action=="Insert"}
                         added{if $line.log_subsection =="Screenshots"}
                                 {else if $line.log_subsection =="Authors"} an
+                                {else if $line.log_subsection =="Individual"} an
                                 {else} the{/if}
                     {else if $line.log_action=="Delete"}
                         removed{if $line.log_subsection !="Screenshots"} the{/if}
@@ -60,7 +62,10 @@
                                 {else if $line.log_subsection=="Authors"}author{if $line.log_action=="Insert"} to{else if $line.log_action=="Delete"} from{/if}
                                 {else}{$line.log_subsection}{/if}
 
-                        {if $line.log_subsection !="Screenshots"}{$line.log_subsection_name}{/if}
+                        {if $line.log_subsection =="Screenshots"}
+
+                        {else if $line.log_subsection =="Individual"}
+                        {else}"{$line.log_subsection_name}"{/if}
                     {/if}
 
                     {* End sub section  *}
@@ -79,17 +84,15 @@
                     {/if}
 
                     {if $line.log_section_link <> ''}
-                        <a href="{$line.log_section_link}" class="standard_tile_subtext_reviews">
                             {$line.log_section_name}
-                        </a>
                     {else}
                         {$line.log_section_name}
                     {/if}
                     {* End section  *}
-
-
-<br><br>
+                </td>
+            </tr>
             {/foreach}
+            </table>
         </h5>
         </div>
 </div>
