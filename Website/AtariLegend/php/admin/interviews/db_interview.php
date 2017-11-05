@@ -20,7 +20,7 @@
 
 include("../../config/common.php");
 include("../../config/admin.php");
-include("../../config/admin_rights.php");
+//include("../../config/admin_rights.php"); /*--> We can not use it like this because of the ajax. redirecting does not work correctly with the inheritance of Ajax.
 
 if ($action == "stop") {
     echo "test";
@@ -33,53 +33,61 @@ if ($action == "stop") {
 
 //If we are uploading new screenshots
 if (isset($action2) and $action2 == 'add_screens') {
-    //Here we'll be looping on each of the inputs on the page that are filled in with an image!
-    $image = $_FILES['image'];
+    if ($_SESSION['permission']==1 or $_SESSION['permission']=='1')
+    {
+        //Here we'll be looping on each of the inputs on the page that are filled in with an image!
+        $image = $_FILES['image'];
 
-    foreach ($image['tmp_name'] as $key => $tmp_name) {
-        if ($tmp_name !== 'none') {
-            // Check what extention the file has and if it is allowed.
+        foreach ($image['tmp_name'] as $key => $tmp_name) {
+            if ($tmp_name !== 'none') {
+                // Check what extention the file has and if it is allowed.
 
-            $ext        = "";
-            $type_image = $image['type'][$key];
+                $ext        = "";
+                $type_image = $image['type'][$key];
 
-            // set extension
-            if ($type_image == 'image/png') {
-                $ext = 'png';
-            }
+                // set extension
+                if ($type_image == 'image/png') {
+                    $ext = 'png';
+                }
 
-            if ($type_image == 'image/x-png') {
-                $ext = 'png';
-            } elseif ($type_image == 'image/gif') {
-                $ext = 'gif';
-            } elseif ($type_image == 'image/jpeg') {
-                $ext = 'jpg';
-            }
+                if ($type_image == 'image/x-png') {
+                    $ext = 'png';
+                } elseif ($type_image == 'image/gif') {
+                    $ext = 'gif';
+                } elseif ($type_image == 'image/jpeg') {
+                    $ext = 'jpg';
+                }
 
-            if ($ext !== "") {
-                // First we insert the directory path of where the file will be stored... this also creates an autoinc number for us.
-                $sdbquery = $mysqli->query("INSERT INTO screenshot_main (screenshot_id,imgext) VALUES ('','$ext')") or die("Database error - inserting screenshots");
+                if ($ext !== "") {
+                    // First we insert the directory path of where the file will be stored... this also creates an autoinc number for us.
+                    $sdbquery = $mysqli->query("INSERT INTO screenshot_main (screenshot_id,imgext) VALUES ('','$ext')") or die("Database error - inserting screenshots");
 
-                //select the newly entered screenshot_id from the main table
-                $SCREENSHOT = $mysqli->query("SELECT screenshot_id FROM screenshot_main
-                       ORDER BY screenshot_id desc") or die("Database error - selecting screenshots");
+                    //select the newly entered screenshot_id from the main table
+                    $SCREENSHOT = $mysqli->query("SELECT screenshot_id FROM screenshot_main
+                           ORDER BY screenshot_id desc") or die("Database error - selecting screenshots");
 
-                $screenshotrow = $SCREENSHOT->fetch_row();
-                $screenshot_id = $screenshotrow[0];
+                    $screenshotrow = $SCREENSHOT->fetch_row();
+                    $screenshot_id = $screenshotrow[0];
 
-                $sdbquery = $mysqli->query("INSERT INTO screenshot_interview (interview_id, screenshot_id) VALUES ($interview_id, $screenshot_id)") or die("Database error - inserting screenshots2");
+                    $sdbquery = $mysqli->query("INSERT INTO screenshot_interview (interview_id, screenshot_id) VALUES ($interview_id, $screenshot_id)") or die("Database error - inserting screenshots2");
 
-                // Rename the uploaded file to its autoincrement number and move it to its proper place.
-                $file_data = rename($image['tmp_name'][$key], "$interview_screenshot_save_path$screenshotrow[0].$ext");
+                    // Rename the uploaded file to its autoincrement number and move it to its proper place.
+                    $file_data = rename($image['tmp_name'][$key], "$interview_screenshot_save_path$screenshotrow[0].$ext");
 
-                $osd_message = "Screenshot uploaded";
+                    $osd_message = "Screenshot uploaded";
 
-                create_log_entry('Interviews', $interview_id, 'Screenshots', $interview_id, 'Insert', $_SESSION['user_id']);
+                    create_log_entry('Interviews', $interview_id, 'Screenshots', $interview_id, 'Insert', $_SESSION['user_id']);
 
-                chmod("$interview_screenshot_save_path$screenshotrow[0].$ext", 0777);
+                    chmod("$interview_screenshot_save_path$screenshotrow[0].$ext", 0777);
+                }
             }
         }
     }
+    else
+    {
+        $osd_message = "You do not have the necessary authorizations to perform this action";
+    }    
+    
     
     if ($osd_message == '') {
         $osd_message = "No screenshot uploaded";
@@ -91,8 +99,8 @@ if (isset($action2) and $action2 == 'add_screens') {
                     WHERE screenshot_interview.interview_id = '$interview_id' ORDER BY screenshot_interview.screenshot_id ASC") or die("Database error - getting screenshots & comments");
 
     //get the number of screenshots in the archive
-    $v_screeshots = $sql_screenshots->num_rows;
-    $smarty->assign("screenshots_nr", $v_screeshots);
+    $v_screenshots = $sql_screenshots->num_rows;
+    $smarty->assign("screenshots_nr", $v_screenshots);
 
     $count = 1;
 
@@ -124,12 +132,11 @@ if (isset($action2) and $action2 == 'add_screens') {
 
     //Send to smarty for return value
     $smarty->display("file:" . $cpanel_template_folder . "interviews_edit.html");
-
-    //header("Location: ../interviews/interviews_screenshots_add.php?interview_id=$interview_id");
 }
 
 //If we pressed the delete screenshot link
 if (isset($action) and $action == 'delete_screen') {
+    include("../../config/admin_rights.php");
     $sql_interviewshot = $mysqli->query("SELECT * FROM screenshot_interview
                         WHERE interview_id = $interview_id
                     AND screenshot_id = $screenshot_id") or die("Database error - selecting screenshots interview");
@@ -168,6 +175,7 @@ if (isset($action) and $action == 'delete_screen') {
 // Delete the interview and return to the interview page
 //*************************************************************************
 if (isset($action) and $action == "delete_interview") {
+    include("../../config/admin_rights.php");
     create_log_entry('Interviews', $interview_id, 'Interview', $interview_id, 'Delete', $_SESSION['user_id']);
 
     $sql = $mysqli->query("DELETE FROM interview_main WHERE interview_id = '$interview_id' ");
@@ -214,6 +222,7 @@ if (isset($action) and $action == "delete_interview") {
 
 //If the delete comment has been triggered
 if (isset($action) and $action == 'delete_screenshot_comment') {
+    include("../../config/admin_rights.php");
     $sql_interviewshot = $mysqli->query("SELECT * FROM screenshot_interview
                           WHERE interview_id = $interview_id
                     AND screenshot_id = $screenshot_id") or die("Database error - selecting screenshots interview");
@@ -253,7 +262,8 @@ if (isset($action) and $action == 'delete_screenshot_comment') {
 //*************************************************************************
 
 //If the Update interview has been triggered
-if (isset($action) and $action == 'update_interview') {
+if (isset($action) and $action == 'update_interview' and $action2 <> 'add_screens' ) {
+    include("../../config/admin_rights.php");
     //First, we'll be filling up the main interview table
     $sdbquery = $mysqli->query("UPDATE interview_main SET user_id = $members, ind_id = $individual
                WHERE interview_id = $interview_id") or die("Couldn't Update into interview_main");
@@ -342,6 +352,7 @@ if (isset($action) and $action == 'update_interview') {
         //Send all smarty variables to the templates
         $smarty->display("file:" . $cpanel_template_folder . "interviews_add.html");
     } else {
+        include("../../config/admin_rights.php");
         $sdbquery = $mysqli->query("INSERT INTO interview_main (user_id, ind_id) VALUES ($members, $individual)") or die("Couldn't insert into interview_main");
 
         //get the id of the inserted interview
