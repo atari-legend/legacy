@@ -27,7 +27,7 @@ if (isset($action)) {
 }
 
 //get the number of log entries
-$query_number = $mysqli->query("SELECT * FROM change_log WHERE section != 'Users'") or die("Couldn't get the number of changes");
+$query_number = $mysqli->query("SELECT * FROM change_log") or die("Couldn't get the number of changes");
 $v_log = $query_number->num_rows;
 
 $smarty->assign('log_nr', $v_log);
@@ -45,14 +45,14 @@ $v_counter = (isset($_GET["v_counter"]) ? $_GET["v_counter"] : 0);
 // if we are dealing with a log search, build the query
 if ($action == 'log_search') {
     $log_timestamp = date_to_timestamp($Date_Year, $Date_Month, $Date_Day);
-    $sql_log       = $mysqli->query("SELECT * FROM change_log WHERE timestamp < '$log_timestamp' WHERE section != 'Users'
+    $sql_log       = $mysqli->query("SELECT * FROM change_log WHERE timestamp < '$log_timestamp'
                                ORDER BY change_log_id DESC LIMIT  " . $v_counter . ", 25");
 
     $v_number = $sql_log->num_rows;
     $smarty->assign('rec_nr', $v_number);
 } else {
     $sql_log = $mysqli->query("SELECT *
-                             FROM change_log WHERE section != 'Users'
+                             FROM change_log
                              ORDER BY change_log_id DESC LIMIT  " . $v_counter . ", 25");
 
     $v_number = $sql_log->num_rows;
