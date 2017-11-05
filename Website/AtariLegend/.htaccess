@@ -7,6 +7,12 @@ ErrorDocument 404 /themes/templates/1/page_not_found.html
 RewriteEngine On
 RewriteBase /
 
+# Rewrite old interviews URLs to the new structure, as multiple websites are
+# still linking to the old URLs. e.g.:
+# /interviews/interview.php?interview_id=4 -> /interviews/interviews_detail.php?selected_interview_id=4
+RewriteCond %{QUERY_STRING} "interview_id=([0-9]+)"
+RewriteRule "^interviews/interview\.php" "interviews/interviews_detail.php?selected_interview_id=%1" [R=301,L]
+
 # The following rules are to hide the root level /php/ and /php/main/
 # folders from the URL. We want to simulate users accessing files under these
 # folders as if they were are the root / of the website.
