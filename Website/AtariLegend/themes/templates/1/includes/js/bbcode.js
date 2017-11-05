@@ -128,4 +128,47 @@ function mozWrap(txtarea, open, close)
 function storeCaret(textEl) {
     if (textEl.createTextRange) textEl.caretPos = document.selection.createRange().duplicate();
 }
+
+//This function is used for the 'on the fly' previews of interviews and reviews
+function previewText(text)
+{
+    text = text.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    text = text.replace(/\n\r?/g, '<br />');
+    text = text.replaceAll("[b]", "<b>");
+    text = text.replaceAll("[/b]", "</b>");
+    text = text.replaceAll("[u]", "<u>");
+    text = text.replaceAll("[/u]", "</u>");
+    text = text.replaceAll("[i]", "<i>");
+    text = text.replaceAll("[/i]", "</i>");
+    text = text.replaceAll("[url=", "<a href=");
+    text = text.replaceAll("[/url]", "</a>");
+    text = text.replaceAll("[email=", "<a href=mailto:");
+    text = text.replaceAll("[/email]", "</a>"); 
+    for (i = 0; i < 30; i++) 
+    {   
+        var hotspotUrl = "[hotspotUrl=#";
+        var hotspotUrl_output = hotspotUrl.concat(i);
+        var hotspotUrl_final = hotspotUrl_output.concat("]");
+        var nameUrl = "<a href=#";
+        var nameUrl_output = nameUrl.concat(i);
+        var nameUrl_final = nameUrl_output.concat(" class=standard_tile_link_black>");
+        text = text.replaceAll(hotspotUrl_final, nameUrl_final);
+        var hotspot = "[hotspot=";
+        var hotspot_output = hotspot.concat(i);
+        var hotspot_final = hotspot_output.concat("]");
+        var name = "<a name=";
+        var name_output = name.concat(i);
+        var name_final = name_output.concat(">");
+        text = text.replaceAll(hotspot_final, name_final);
+    }  
+    text = text.replaceAll("[/hotspotUrl]", "</a>");  
+    text = text.replaceAll("[/hotspot]", "</a>");   
+    text = text.replaceAll("]", " class=standard_tile_link_black>"); 
+    return text;  
+}
+
+String.prototype.replaceAll = function(str1, str2, ignore)
+{
+    return this.replace(new RegExp(str1.replace(/([\/\,\!\\\^\$\{\}\[\]\(\)\.\*\+\?\|\<\>\-\&])/g,"\\$&"),(ignore?"gi":"g")),(typeof(str2)=="string")?str2.replace(/\$/g,"$$$$"):str2);
+}
 /* END all the code for the text functions - BBCODE */

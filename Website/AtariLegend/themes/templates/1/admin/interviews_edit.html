@@ -80,74 +80,18 @@
             
             //Do all the preps for the intro text!
             var intro = document.getElementsByName("textintro")[0].value;
-            intro = intro.replace(/</g, "&lt;").replace(/>/g, "&gt;");
-            intro = intro.replace(/\n\r?/g, '<br />');
-            intro = intro.replaceAll("[b]", "<b>");
-            intro = intro.replaceAll("[/b]", "</b>");
-            intro = intro.replaceAll("[u]", "<u>");
-            intro = intro.replaceAll("[/u]", "</u>");
-            intro = intro.replaceAll("[i]", "<i>");
-            intro = intro.replaceAll("[/i]", "</i>");
-            intro = intro.replaceAll("[url=", "<a href=");
-            intro = intro.replaceAll("[/url]", "</a>");
-            intro = intro.replaceAll("[email=", "<a href=mailto:");
-            intro = intro.replaceAll("[/email]", "</a>"); 
+            intro = previewText(intro);
             document.getElementById("interview_preview_intro").innerHTML = intro;
             
             //Do all the preps for the chapters text!
             var chapters = document.getElementsByName("textchapters")[0].value;
-            chapters = chapters.replace(/</g, "&lt;").replace(/>/g, "&gt;");
-            chapters = chapters.replace(/\n\r?/g, '<br />');
-            chapters = chapters.replaceAll("[b]", "<b>");
-            chapters = chapters.replaceAll("[/b]", "</b>");
-            chapters = chapters.replaceAll("[u]", "<u>");
-            chapters = chapters.replaceAll("[/u]", "</u>");
-            chapters = chapters.replaceAll("[i]", "<i>");
-            chapters = chapters.replaceAll("[/i]", "</i>");
-            chapters = chapters.replaceAll("[url=", "<a href=");
-            chapters = chapters.replaceAll("[/url]", "</a>");
-            chapters = chapters.replaceAll("[email=", "<a href=mailto:");
-            chapters = chapters.replaceAll("[/email]", "</a>");
-            for (i = 0; i < 30; i++) 
-            {   
-                var hotspot = "[hotspotUrl=#";
-                var hotspot_output = hotspot.concat(i);
-                var hotspot_final = hotspot_output.concat("]");
-                var name = "<a href=#";
-                var name_output = name.concat(i);
-                var name_final = name_output.concat(" class=standard_tile_link_black>");
-                chapters = chapters.replaceAll(hotspot_final, name_final);
-            }  
-            chapters = chapters.replaceAll("[/hotspotUrl]", "</a>");  
+            chapters = previewText(chapters);
             document.getElementById("interview_preview_chapters").innerHTML = chapters;
 
             //Do all the preps for the actual interview text!
-            var text = document.getElementsByName("textfield")[0].value;
-            text = text.replace(/</g, "&lt;").replace(/>/g, "&gt;");
-            text = text.replace(/\n\r?/g, '<br />');
-            text = text.replaceAll("[b]", "<b>");
-            text = text.replaceAll("[/b]", "</b>");
-            text = text.replaceAll("[u]", "<u>");
-            text = text.replaceAll("[/u]", "</u>");
-            text = text.replaceAll("[i]", "<i>");
-            text = text.replaceAll("[/i]", "</i>");
-            text = text.replaceAll("[url=", "<a href=");
-            text = text.replaceAll("[/url]", "</a>");
-            text = text.replaceAll("[email=", "<a href=mailto:");
-            text = text.replaceAll("[/email]", "</a>");
-            for (i = 0; i < 30; i++) 
-            {
-                var hotspot = "[hotspot=";
-                var hotspot_output = hotspot.concat(i);
-                var hotspot_final = hotspot_output.concat("]");
-                var name = "<a name=";
-                var name_output = name.concat(i);
-                var name_final = name_output.concat(">");
-                text = text.replaceAll(hotspot_final, name_final);
-            }
-            text = text.replaceAll("[/hotspot]", "</a>");   
-            text = text.replaceAll("]", " class=standard_tile_link_black>");            
-            document.getElementById("interview_preview_text").innerHTML = text;
+            var interview = document.getElementsByName("textfield")[0].value;
+            interview = previewText(interview);
+            document.getElementById("interview_preview_text").innerHTML = interview;
             
             //get the screenshots data
             for (i = 1; i <= {$screenshots_nr}; i++)
@@ -177,14 +121,6 @@
             }
         }
     }
-</script>
-<script>
-    {literal}
-        String.prototype.replaceAll = function(str1, str2, ignore)
-        {
-            return this.replace(new RegExp(str1.replace(/([\/\,\!\\\^\$\{\}\[\]\(\)\.\*\+\?\|\<\>\-\&])/g,"\\$&"),(ignore?"gi":"g")),(typeof(str2)=="string")?str2.replace(/\$/g,"$$$$"):str2);
-        }
-    {/literal}
 </script>
 
 
@@ -277,23 +213,23 @@ function addScreenshottoInterview(interview_id) {
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 
                 data = xmlhttp.responseText.split ( "[BRK]" );
-                document.getElementById("interview_screenshot_list").innerHTML = data[0];
+                document.getElementById("interview_screenshot_list").innerHTML = data[1];
 
-            $.notify_osd.create({
-                'text'        : data[1],             // notification message
-                'icon'        : '{$style_dir}images/osd_icons/star.png', // icon path, 48x48
-                'sticky'      : false,             // if true, timeout is ignored
-                'timeout'     : 4,                 // disappears after 6 seconds
-                'dismissable' : true               // can be dismissed manually
-                });
+                $.notify_osd.create({
+                    'text'        : data[2],             // notification message
+                    'icon'        : '{$style_dir}images/osd_icons/star.png', // icon path, 48x48
+                    'sticky'      : false,             // if true, timeout is ignored
+                    'timeout'     : 4,                 // disappears after 6 seconds
+                    'dismissable' : true               // can be dismissed manually
+                    });
 
-            document.getElementById("screenshot_add_to_interview").reset();
+                document.getElementById("screenshot_add_to_interview").reset();
             }
         }
 
         var formData = new FormData( document.getElementById("screenshot_add_to_interview") );
 
-        xmlhttp.open("POST","../interviews/db_interview.php",true);
+        xmlhttp.open("POST","../interviews/db_interview.php?action2=add_screens",true);
         xmlhttp.send(formData);
     }
 }
@@ -341,12 +277,10 @@ function myFunction() {
         <br>
     {/if}
 
-   {if isset($osd_message)}
-		[BRK]{$osd_message}
-	{/if}
-
+    {if isset($osd_message)}
+        [BRK]{$osd_message}
+    {/if}
 {else}
-
     <div class="standard_tile" id="interviews_edit">
         <div class="help-tip">
             <p>
