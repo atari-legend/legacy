@@ -15,7 +15,8 @@
 *   Id: interviews_edit.html,v 0.22 2017/08/19 15:02 ST Graveyard
 *                   removed the [frontpage] functionality --> Why was this necessary??
 *   Id: interviews_edit.html,v 0.23 2017/10/17 Nico & STG
-*                   Fixing bugs and updating this section with JQUERY and more
+*                   Fixing bugs and updating this section with JQUERY
+*                   Adding a JS preview
 ***************************************************************************/
 
 ///****************************************************************************************
@@ -181,7 +182,7 @@ function popAddScreenshots(str) {
         xmlhttp.onreadystatechange = function() {
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
                 document.getElementById("interview_expand_screenshots").innerHTML = xmlhttp.responseText;
-                document.getElementById("screenshot_link").innerHTML = "<a onclick=\"closeAddScreenshots("+str+")\" style=\"cursor: pointer;\" class=\"MAINNAV\">Add screenshots</a>";
+                document.getElementById("screenshot_link").innerHTML = "<a onclick=\"closeAddScreenshots("+str+")\" style=\"cursor: pointer;\" class=\"left_nav_link\"><i class=\"fa fa-minus-square-o\" aria-hidden=\"true\"></i> Add screenshots</a>";
             }
         }
         xmlhttp.open("GET","../interviews/ajax_addscreenshots_interview.php?interview_id="+str,true);
@@ -192,7 +193,7 @@ function popAddScreenshots(str) {
 //close the screenshot selection box
 function closeAddScreenshots(str) {
         document.getElementById("interview_expand_screenshots").innerHTML = "";
-        document.getElementById("screenshot_link").innerHTML = "<a onclick=\"popAddScreenshots("+str+")\" style=\"cursor: pointer;\" class=\"MAINNAV\">Add screenshots</a>";
+        document.getElementById("screenshot_link").innerHTML = "<a onclick=\"popAddScreenshots("+str+")\" style=\"cursor: pointer;\" class=\"left_nav_link\"><i class=\"fa fa-plus-square-o\" aria-hidden=\"true\"></i> Add screenshots</a>";
         return;
 }
 
@@ -213,10 +214,10 @@ function addScreenshottoInterview(interview_id) {
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 
                 data = xmlhttp.responseText.split ( "[BRK]" );
-                document.getElementById("interview_screenshot_list").innerHTML = data[1];
+                document.getElementById("interview_screenshot_list").innerHTML = data[0];
 
                 $.notify_osd.create({
-                    'text'        : data[2],             // notification message
+                    'text'        : data[1],             // notification message
                     'icon'        : '{$style_dir}images/osd_icons/star.png', // icon path, 48x48
                     'sticky'      : false,             // if true, timeout is ignored
                     'timeout'     : 4,                 // disappears after 6 seconds
@@ -253,34 +254,6 @@ function myFunction() {
 
 {block name=main_tile}
 
-{if isset($smarty_action) and $smarty_action == "add_screen_to_interview_return"}
-	 {if $screenshots_nr <> ''}
-        <table class="standard_table_list_no_hover">
-        {foreach from=$screenshots item=line}
-            <tr>
-                <td style="width:1%;border:0;">
-                    <a href="javascript:deletecomment({$line.interview_screenshot_id},{$interview.interview_id})" class="standard_tile_link">
-                        <i class="fa fa-trash-o" aria-hidden="true" title="Click to delete screenshot"></i>
-                    </a>
-                </td>
-                <td style="width:9%;border:0;">
-                    <a href="../../includes/show_image.php?file={$line.interview_screenshot}" data-lightbox="image-1">
-                        <img src="../../includes/show_image.php?file={$line.interview_screenshot}&amp;resize=75,null,null,null&amp;crop=null,null,null,null" alt="screenshot" style="display:inline; margin:5px;" class="game_screenshot_img">
-                    </a>
-                </td>
-                <td style="width:90%;border:0;">
-                    <input type="text" name="inputfield[]" value="{$line.interview_screenshot_comment}" class="standard_tile_input_small" style="width:95%;" id="comment_{$line.interview_screenshot_count}">
-                </td> 
-            </tr>
-        {/foreach}
-        </table>
-        <br>
-    {/if}
-
-    {if isset($osd_message)}
-        [BRK]{$osd_message}
-    {/if}
-{else}
     <div class="standard_tile" id="interviews_edit">
         <div class="help-tip">
             <p>
@@ -520,6 +493,4 @@ function myFunction() {
         // Get the element with id="defaultOpen" and click on it
         document.getElementById("defaultOpen").click();
     </script>
-
-{/if}
 {/block}
