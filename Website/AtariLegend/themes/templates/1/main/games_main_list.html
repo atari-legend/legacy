@@ -153,8 +153,8 @@ The main game page
                         <b>{if $nr_of_games == 1}1 game found {else} {$nr_of_games} games found{/if} in {$query_time} sec</b>
                     </div>
                 </div>
-                <script type="text/javascript" src="{$template_dir}includes/js/tabulator.min.js"></script> <!-- tabulator script -->
-                <script type="text/javascript" src="{$template_dir}includes/js/xlsx.full.min.js"></script> <!-- export to xlsx script -->
+                <script type="text/javascript" src="{$template_dir}includes/js/vendor/tabulator-3.2.x.min.js"></script> <!-- tabulator script -->
+                <script type="text/javascript" src="{$template_dir}includes/js/vendor/xlsx.full-0.10.6.min.js"></script> <!-- export to xlsx script -->
                 <script>
                 //define some sample data
                 var tabledata = {$data};
@@ -541,7 +541,7 @@ The main game page
             {/if}
             <br>
             <!--This is the lazy load script with fader effect - fader is pure css class -->
-            <script type="text/javascript" src="{$template_dir}includes/js/lazyload.min.js"></script>
+            <script type="text/javascript" src="{$template_dir}includes/js/vendor/lazyload-8.0.1.min.js"></script>
             <script>
             (function () {
                 var ll = new LazyLoad({

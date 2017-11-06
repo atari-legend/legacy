@@ -23,7 +23,7 @@
 *}
 
 {block name=javascript_slider}
-    <script type="text/javascript" src="{$template_dir}includes/js/lightbox.min.js"></script>
+    <script type="text/javascript" src="{$template_dir}includes/js/vendor/lightbox-2.9.0.min.js"></script>
     <link type="text/css" href="{$style_dir}css/lightbox.css" hreflang="en" rel="stylesheet">
     
     <script>
@@ -32,9 +32,9 @@
         })
     </script>
     
-    <script type="text/javascript" src="{$template_dir}includes/js/jssor.slider.mini.js"></script>  <!-- This script is needed for the animation in the welcome tile -->
-    {if isset($smarty_action) and $smarty_action == 'first_time'}<script type="text/javascript" src="{$template_dir}includes/js/animsition.min.js"></script>{/if}<!-- fade up script needed for the intro page -->
-    <script type="text/javascript" src="{$template_dir}includes/js/jquery.dotdotdot.min.js" type="text/javascript"></script> <!--this script is used for the elipsis (...) effect of the latest news / reviews tile -->
+    <script type="text/javascript" src="{$template_dir}includes/js/vendor/jssor.slider-25.2.1.min.js"></script>  <!-- This script is needed for the animation in the welcome tile -->
+    {if isset($smarty_action) and $smarty_action == 'first_time'}<script type="text/javascript" src="{$template_dir}includes/js/vendor/animsition-4.0.2.min.js"></script>{/if}<!-- fade up script needed for the intro page -->
+    <script type="text/javascript" src="{$template_dir}includes/js/vendor/jquery.dotdotdot-1.8.3.min.js" type="text/javascript"></script> <!--this script is used for the elipsis (...) effect of the latest news / reviews tile -->
     <script> <!-- This script is needed for the animation in the welcome tile -->
             jQuery(document).ready(function ($) {
 
