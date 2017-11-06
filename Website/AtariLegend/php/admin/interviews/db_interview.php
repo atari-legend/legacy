@@ -89,7 +89,9 @@ if (isset($action2) and $action2 == 'add_screens') {
     }    
     
     
-    if ($osd_message == '') {
+    if (isset($osd_message)){}
+    else
+    {
         $osd_message = "No screenshot uploaded";
     }
     
@@ -131,7 +133,7 @@ if (isset($action2) and $action2 == 'add_screens') {
     $smarty->assign('interview_id', $interview_id);
 
     //Send to smarty for return value
-    $smarty->display("file:" . $cpanel_template_folder . "interviews_edit.html");
+    $smarty->display("file:" . $cpanel_template_folder . "ajax_interview_add_screenshots.html");
 }
 
 //If we pressed the delete screenshot link
