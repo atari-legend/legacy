@@ -16,6 +16,78 @@
 //load all common functions
 include("../../config/common.php");
 
+/**
+ * Generates an SEO-friendly description of a game, depending on the data available
+ * @param $game_name Name of the game
+ * @param $game_free Whether the game is free (non-commercial) or not
+ * @param $game_years Year(s) the game was released
+ * @param $game_categories Categorie(s) the game belong to
+ * @param $game_developers Developer(s) of the game
+ * @param $screenshots Number of screenshots available
+ * @param $boxscans Number of boxscans available
+ * @param $reviews Number of reviews available
+ * return A text description of the game
+ */
+function generate_game_description(
+    string $game_name,
+    bool $game_free,
+    array $game_years,
+    array $game_categories,
+    array $game_developers,
+    int $screenshots,
+    int $boxscans,
+    int $reviews) {
+
+    $desc = "$game_name is a ";
+    if ($game_free) {
+        $desc .= "non-commercial ";
+    }
+
+    if ($game_categories) {
+        $desc .= strtolower(join($game_categories, ", "))." ";
+    }
+
+    $desc .= "Atari ST game ";
+
+    if ($game_developers) {
+        $desc .= "developed by ".join($game_developers, ", ")." ";
+    }
+
+    if ($game_years) {
+        $desc .= "released in ".join($game_years, ", ");
+    }
+
+    // Fixup a/an for vowels: "a Atari ST game" should be "an Atari ST game"
+    // In theory it's not really about vowels, but how the word is pronounced,
+    // but using vowels for approximation is good enough.
+    // Replace any " a ..." followed by a vowel with " an ..."
+    $desc = preg_replace("/ a ([aeiou])/i", " an $1", $desc);
+
+    // Remove last trailing space, which may happen if the game has a developer
+    // but no release date
+    $desc = trim($desc);
+
+    // Append extra info (number of screenshots, reviews, etc) in brackets
+    // after the description
+    $extra_info = [];
+
+    if ($screenshots) {
+        $extra_info[] = "$screenshots screenshot".(($screenshots > 1) ? "s" : "");
+    }
+    if ($boxscans) {
+        $extra_info[] = "$boxscans box scan".(($boxscans > 1) ? "s" : "");
+    }
+    if ($reviews) {
+        $extra_info[] = "$reviews review".(($reviews > 1) ? "s" : "");
+    }
+
+    if ($extra_info) {
+        $desc .= " (".join($extra_info, ", ").")";
+    }
+
+    return $desc.".";
+}
+
 //***********************************************************************************
 //Let's get the general game info first.
 //***********************************************************************************
@@ -57,7 +129,7 @@ $sql_game = $mysqli->query("SELECT game_name,
                     WHERE game.game_id='$game_id'") or die("Error getting game info");
 
 
-while ($game_info = $sql_game->fetch_array(MYSQLI_BOTH)) {
+if ($game_info = $sql_game->fetch_array(MYSQLI_BOTH)) {
     $smarty->assign('game_info', array(
         'game_name' => $game_info['game_name'],
         'game_id' => $game_info['game_id'],
@@ -87,7 +159,10 @@ $sql_year = $mysqli->query("SELECT * FROM game_year
                LEFT JOIN game_extra_info ON ( game_year.game_extra_info_id = game_extra_info.game_extra_info_id )
                WHERE game_id='$game_id' ORDER BY game_year ASC") or die("Error loading year");
 
+$game_years = [];
 while ($year = $sql_year->fetch_array(MYSQLI_BOTH)) {
+    $game_years[] = $year['game_year'];
+
     $smarty->append('game_year', array(
         'game_year_id' => $year['game_year_id'],
         'game_year' => $year['game_year'],
@@ -102,7 +177,10 @@ $sql_categories = $mysqli->query("SELECT * FROM game_cat
                                            LEFT JOIN game_cat_cross ON (game_cat.game_cat_id = game_cat_cross.game_cat_id)
                                            WHERE game_id='$game_id' ORDER BY game_cat_name") or die("Error loading categories");
 
+$game_categories = [];
 while ($categories = $sql_categories->fetch_array(MYSQLI_BOTH)) {
+    $game_categories[] = $categories['game_cat_name'];
+
     $smarty->append('cat', array(
         'cat_id' => $categories['game_cat_id'],
         'cat_name' => $categories['game_cat_name']
@@ -269,7 +347,9 @@ $sql_developer = $mysqli->query("SELECT * FROM game_developer
                   LEFT JOIN continent ON ( game_developer.continent_id = continent.continent_id )
                   WHERE game_developer.game_id = '$game_id' ORDER BY pub_dev_name ASC") or die("Couldn't query developers");
 
+$game_developers = [];
 while ($developers = $sql_developer->fetch_array(MYSQLI_BOTH)) {
+    $game_developers[] = rtrim($developers['pub_dev_name']);
     if ($developers['pub_dev_imgext'] == 'png' or $developers['pub_dev_imgext'] == 'jpg' or $developers['pub_dev_imgext'] == 'gif') {
         //$v_ind_image = $company_screenshot_path;
         $v_ind_image = $company_screenshot_save_path;
@@ -332,7 +412,10 @@ $sql_screenshots = $mysqli->query("SELECT * FROM screenshot_game
 
 $count = 0;
 
+$game_screenshots_count = 0;
+
 while ($screenshots = $sql_screenshots->fetch_array(MYSQLI_BOTH)) {
+    $game_screenshots_count++;
     //Ready screenshots path and filename
     $screenshot_image = $game_screenshot_save_path;
     $screenshot_image .= $screenshots['screenshot_id'];
@@ -370,8 +453,11 @@ $smarty->assign('numberscans', $imagenum_rows);
 
 $front=0;
 
+$game_boxscans_count = 0;
+
 if ($imagenum_rows > 0) {
     while ($rowimage = $IMAGE->fetch_array(MYSQLI_BOTH)) { // First check if front cover
+        $game_boxscans_count++;
         if ($rowimage['game_boxscan_side'] == 0) {
             $front++;
 
@@ -467,7 +553,9 @@ while ($query_comment = $sql_comment->fetch_array(MYSQLI_BOTH)) {
                                LEFT JOIN users ON (review_main.user_id = users.user_id)
                                WHERE game.game_id = '$game_id' AND review_main.review_edit = '0'") or die("Error - Couldn't query review data");
 
+    $game_reviews_count = 0;
     while ($query_review = $sql_review->fetch_array(MYSQLI_BOTH)) {
+        $game_reviews_count++;
         $review_date = date("F j, Y", $query_review['review_date']);
 
         //Structure and manipulate the review text
@@ -597,6 +685,15 @@ while ($query_vs = $sql_vs->fetch_array(MYSQLI_BOTH)) {
 }
 
 $smarty->assign("game_id", $game_id);
+$smarty->assign("game_description", generate_game_description(
+    $game_info['game_name'],
+    $game_info['free'] or false,
+    $game_years,
+    $game_categories,
+    $game_developers,
+    $game_screenshots_count,
+    $game_boxscans_count,
+    $game_reviews_count));
 
 //Send all smarty variables to the templates
 $smarty->display("file:" . $mainsite_template_folder . "games_detail.html");
