@@ -27,7 +27,7 @@ LIMIT 1";
 $database_update_sql = '../../admin/administration/database_scripts/2017-10-30_convert_tables_to_utf8-addition.php';
 
 // If the update should auto execute without user interaction set to "yes".
-$database_autoexecute = "yes";
+$database_autoexecute = "no";
 
 // This var should almost allways be set to "no", it is only used for certain corner cases where
 // the database change has already been done in some other way and we only want to update the
