@@ -4,7 +4,7 @@ include "../vendor/smottt/wideimage/WideImage.php";
 
 //Set image quality
 
-$jpeg_compression = '90';
+$jpeg_compression = '80';
 $png_compression  = '7';
 
 //
