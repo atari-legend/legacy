@@ -264,7 +264,7 @@ if (isset($action) and $action == 'delete_screenshot_comment') {
 //*************************************************************************
 
 //If the Update interview has been triggered
-if (isset($action) and $action == 'update_interview' and $action2 <> 'add_screens' ) {
+if (isset($action) and $action == 'update_interview' and (!isset($action2))) {
     include("../../config/admin_rights.php");
     //First, we'll be filling up the main interview table
     $sdbquery = $mysqli->query("UPDATE interview_main SET user_id = $members, ind_id = $individual
@@ -276,9 +276,24 @@ if (isset($action) and $action == 'update_interview' and $action2 <> 'add_screen
     $textfield    = $mysqli->real_escape_string($textfield);
     $textintro    = $mysqli->real_escape_string($textintro);
     $textchapters = $mysqli->real_escape_string($textchapters);
+    
+    //check if this is first update. If yes, interview_text is not filled yet and we need to do a create
+    //Let's get the screenshots for the interview
+    $sql_interview_text = $mysqli->query("SELECT * FROM interview_text WHERE interview_id = '$interview_id'") or die("Database error - getting interview text");
 
-    $sdbquery = $mysqli->query("UPDATE interview_text SET interview_text = '$textfield', interview_date = '$date', interview_intro = '$textintro', interview_chapters = '$textchapters' WHERE interview_id = $interview_id") or die("Couldn't update into interview_text");
-
+    //get the number of screenshots in the archive
+    $v_nr_text = $sql_interview_text->num_rows;
+    
+    if ($v_nr_text > 0)
+    {
+        $sdbquery = $mysqli->query("UPDATE interview_text SET interview_text = '$textfield', interview_date = '$date', interview_intro = '$textintro', interview_chapters = '$textchapters' WHERE interview_id = $interview_id") or die("Couldn't update into interview_text");
+    }
+    else
+    {
+        $sdbquery = $mysqli->query("INSERT INTO interview_text (interview_id, interview_text, interview_date, interview_intro, interview_chapters) VALUES ($interview_id, '$textfield', '$date', '$textintro','$textchapters')") or die("Couldn't insert into interview_text");
+ 
+    }
+    
     //we're gonna add the screenhots into the screenshot_interview table and fill up the interview_comment table.
     //We need to loop on the screenshot table to check the shots used. If a comment field is filled,
     //the screenshot was used!
@@ -318,57 +333,16 @@ if (isset($action) and $action == 'update_interview' and $action2 <> 'add_screen
 //This is what happens when we press the create interview button in the interview creation
 //page
 //****************************************************************************************
-    if ($members == '' or $members == '-' or $individual == '' or $individual == "-") {
-        $_SESSION['edit_message'] = 'Some required info is not filled in. Make sure the -author- and -individual- fields are completed';
-
-        //Get the individuals
-        $sql_individuals = $mysqli->query("SELECT * FROM individuals ORDER BY ind_name ASC") or die("Couldn't query individuals database");
-
-        while ($individuals = $sql_individuals->fetch_array(MYSQLI_BOTH)) {
-            //Get the selected individual data
-            if ($individuals['ind_id'] == $individual) {
-                $smarty->assign('selected_individual', array(
-                    'ind_id' => $individuals['ind_id'],
-                    'ind_name' => $individuals['ind_name']
-                ));
-            }
-
-            $smarty->append('individuals', array(
-                'ind_id' => $individuals['ind_id'],
-                'ind_name' => $individuals['ind_name']
-            ));
-        }
-
-        //Get the authors for the interview
-        $sql_author = $mysqli->query("SELECT user_id,userid FROM users") or die("Database error - getting members name");
-
-        while ($authors = $sql_author->fetch_array(MYSQLI_BOTH)) {
-            $smarty->append('authors', array(
-                'user_id' => $authors['user_id'],
-                'user_name' => $authors['userid']
-            ));
-        }
-
-        $smarty->assign("user_id", $_SESSION['user_id']);
-
-        //Send all smarty variables to the templates
-        $smarty->display("file:" . $cpanel_template_folder . "interviews_add.html");
+    if ($individual_create == '' or $individual_create == '-' ) {
+        $_SESSION['edit_message'] = 'Some required info is not filled in. Make sure the -Add Interview- field is used';
+        header("Location: ../interviews/interviews_main.php");
     } else {
         include("../../config/admin_rights.php");
-        $sdbquery = $mysqli->query("INSERT INTO interview_main (user_id, ind_id) VALUES ($members, $individual)") or die("Couldn't insert into interview_main");
+        $sdbquery = $mysqli->query("INSERT INTO interview_main (ind_id) VALUES ($individual_create)") or die("Couldn't insert into interview_main");
 
         //get the id of the inserted interview
         $id = $mysqli->insert_id;
-
-        // first we have to convert the date vars into a time stamp to be inserted to review_date
-        $date = date_to_timestamp($Date_Year, $Date_Month, $Date_Day);
-
-        $textfield    = $mysqli->real_escape_string($textfield);
-        $textintro    = $mysqli->real_escape_string($textintro);
-        $textchapters = $mysqli->real_escape_string($textchapters);
-
-        $sdbquery = $mysqli->query("INSERT INTO interview_text (interview_id, interview_text, interview_date, interview_intro, interview_chapters) VALUES ($id, '$textfield', '$date', '$textintro','$textchapters')") or die("Couldn't insert into interview_text");
-
+        
         create_log_entry('Interviews', $individual, 'Interview', $id, 'Insert', $_SESSION['user_id']);
 
         $_SESSION['edit_message'] = 'Interview added succesfully';
