@@ -27,7 +27,7 @@ var is_win = ((clientPC.indexOf("win")!=-1) || (clientPC.indexOf("16bit") != -1)
 var is_mac = (clientPC.indexOf("mac")!=-1);
 
 // Define the bbCode tags
-bbtags = new Array('[b]','[/b]','[i]','[/i]','[u]','[/u]','[url]','[/url]','[email]','[/email]', '[hotspotUrl=#]', '[/hotspotUrl]', '[hotspot=]', '[/hotspot]','[frontpage]','[/frontpage]');
+bbtags = new Array('[b]','[/b]','[i]','[/i]','[u]','[/u]','[url=http://www.yourlink.com]','[/url]','[email]','[/email]', '[hotspotUrl=#]', '[/hotspotUrl]', '[hotspot=]', '[/hotspot]','[frontpage]','[/frontpage]');
 bbcode = new Array();
 imageTag = false;
 

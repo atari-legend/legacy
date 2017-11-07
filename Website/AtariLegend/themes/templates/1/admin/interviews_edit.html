@@ -257,7 +257,7 @@ function myFunction() {
     <div class="standard_tile" id="interviews_edit">
         <div class="help-tip">
             <p>
-                This is where the actual interview is inserted in the database. Overhere you'll notice 3 main text boxes.
+                Here you can edit an existing interview. Overhere you'll notice 3 main text boxes.
                 <br>
                 <br>
                 <i><b>- Intro :</b></i> The introduction to the interview. This is the short text you will see in the main interview section and in the 'who is it' tile.
@@ -280,7 +280,7 @@ function myFunction() {
                 <i class="fa fa-chevron-circle-down" aria-hidden="true" title="Click for drop down mode"></i> : Click this item to switch from list to input mode and vice versa
                 <br>
                 <br>
-                <i class="fa fa-trash-o" aria-hidden="true" title="Click to delete screenshot"></i> : Once a screenshot comment is added to the DB, you need to press this icon if you want to delete it.
+                <i class="fa fa-trash-o" aria-hidden="true" title="Click to delete screenshot"></i> : Once a screenshot is added to the DB, you need to press this icon if you want to delete it.
             </p>
         </div>
         {if isset($interview.interview_ind_name)}
@@ -459,7 +459,7 @@ function myFunction() {
                                 {foreach from=$screenshots item=line} 
                                     <div id="output_{$line.interview_screenshot_count}">
                                         <div class="interview_preview_screenshot_order">
-                                            <a href="../../includes/show_image.php?file={$line.interview_screenshot}&amp;resize=410,null,null,null" data-lightbox="image-1">
+                                            <a href="../../includes/show_image.php?file={$line.interview_screenshot}" data-lightbox="image-1">
                                                 <img src="../../includes/show_image.php?file={$line.interview_screenshot}&amp;resize=170,null,null,null" alt="Click to enlarge!" style="display:inline;" class="game_screenshot_img">
                                             </a>
                                             <br><b><span style="font-weight: bold;" id="preview_comment_{$line.interview_screenshot_count}"></span></b>
