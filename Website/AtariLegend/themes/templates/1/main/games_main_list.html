@@ -16,6 +16,11 @@ The main game page
 *}
 
 {extends file='1/main/main.html'}
+{if $smarty.get.gamebrowse}
+    {block name=title}Atari ST games starting with {$smarty.get.gamebrowse|upper}&hellip; | Atari Legend{/block}
+{else}
+    {block name=title}Atari ST games search results | Atari Legend{/block}
+{/if}
 
 {block name=main_body}
     {literal}
