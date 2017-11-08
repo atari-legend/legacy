@@ -110,9 +110,24 @@ if ($extraVar == 'cat')
     }
 }
 
-// get the categories for the genre dropdown
-$sql_cat = $mysqli->query("SELECT * from game_cat order by game_cat_name") 
-                     or die ("problems getting data from game_cat table");
+if ($extraVar == 'individual')
+{
+    $stmt = $mysqli->prepare("SELECT ind_id, ind_name from individuals WHERE LOWER(ind_name) LIKE CONCAT('%',LOWER(?),'%') ORDER BY ind_name")
+        or die ("problems getting data from individuals table: ".$mysqli->error);
+    $stmt->bind_param("s", $term);
+    $stmt->execute();
+    $stmt->bind_result($ind_id, $ind_name);
 
+    while ($stmt->fetch()) {
+        $json[] = array(
+            "value" => $ind_id,
+            "label" => $ind_name
+        );
+    }
+
+    $stmt->close();
+}
+
+header("Content-Type: application/json");
 echo json_encode($json);
 ?>
