@@ -55,11 +55,13 @@ foreach (glob("../../admin/administration/database_scripts/*.php") as $filename)
 // Sort array
 asort($database_update);
 
+mysqli_begin_transaction($mysqli) or die("Error while starting transaction: ".$mysqli->error);
+
 foreach ($database_update as $key) {
     //No way around hardcoding database_update table itself...
     if ($key['database_update_id'] == 1) {
         // Run the test condition query
-        $test_query = $mysqli->query("$key[test_condition]") or die("Database update $key[database_update_id] Test condition failed");
+        $test_query = $mysqli->query("$key[test_condition]") or die("Database update $key[database_update_id] Test condition failed: ".$mysqli->error);
 
         // check if the condition query returns true or false
         if ($test_query->fetch_row() == true) {
@@ -78,7 +80,7 @@ foreach ($database_update as $key) {
             }
             else  
             {
-                $mysqli->query("$key[database_update_sql]") or die("Database update $key[database_update_id] failed!");
+                $mysqli->query("$key[database_update_sql]") or die("Database update $key[database_update_id] failed: ".$mysqli->error);
             }
             
             // Add info to the database_change table
@@ -95,13 +97,13 @@ foreach ($database_update as $key) {
 
             $mysqli->query("INSERT INTO database_change
             (database_update_id, update_description, execute_timestamp, implementation_state, update_filename, database_change_script)
-             VALUES ('$key[database_update_id]', '$update_description','$timestamp', 'implemented', '$key[update_filename]', '$script_string')") or die("Unable to insert into database_change table");
+             VALUES ('$key[database_update_id]', '$update_description','$timestamp', 'implemented', '$key[update_filename]', '$script_string')") or die("Unable to insert into database_change table: ".$mysqli->error);
         }
     } //end hardcode database update table.
 
     // Checking if the database_update_id already exist in the database to avoid issues later on.
 
-    $result_change = $mysqli->query("SELECT * from database_change WHERE database_update_id=$key[database_update_id]");
+    $result_change = $mysqli->query("SELECT * from database_change WHERE database_update_id=$key[database_update_id]") or die("Unable to select change: ".$mysqli->error);
     $row_change    = $result_change->fetch_array(MYSQLI_ASSOC);
 
     $row_cnt = $result_change->num_rows;
@@ -109,7 +111,7 @@ foreach ($database_update as $key) {
     // What should happend if the script is not in the database
         // We begin with any script that is set to autoexecute
         if ($key['database_autoexecute'] == "yes") { // Run the test condition query
-            $test_query = $mysqli->query("$key[test_condition]") or die("Database update $key[database_update_id] Test condition failed");
+            $test_query = $mysqli->query("$key[test_condition]") or die("Database update $key[database_update_id] Test condition failed: ".$mysqli->error);
 
             // check if the condition query returns true or false
             if ($test_query->fetch_row() == true) {
@@ -128,7 +130,7 @@ foreach ($database_update as $key) {
                 }
                 else  
                 {
-                    $mysqli->query("$key[database_update_sql]") or die("Database update $key[database_update_id] failed!");
+                    $mysqli->query("$key[database_update_sql]") or die("Database update $key[database_update_id] failed: ".$mysqli->error);
                 }
                     
                 // Add info to the database_change table
@@ -145,7 +147,7 @@ foreach ($database_update as $key) {
 
                 $mysqli->query("INSERT INTO database_change
             (database_update_id, update_description, execute_timestamp, implementation_state, update_filename, database_change_script)
-             VALUES ('$key[database_update_id]', '$update_description','$timestamp', 'implemented', '$key[update_filename]', '$script_string')") or die("Unable to insert into database_change table");
+             VALUES ('$key[database_update_id]', '$update_description','$timestamp', 'implemented', '$key[update_filename]', '$script_string')") or die("Unable to insert into database_change table: ".$mysqli->error);
             }
         } // End autoexecute
 
@@ -155,7 +157,7 @@ foreach ($database_update as $key) {
         // the query. I would suggest caution when using this.
 
         // Run the test condition query
-        $test_query = $mysqli->query("$key[test_condition]") or die("Database update $key[database_update_id] Test condition failed");
+        $test_query = $mysqli->query("$key[test_condition]") or die("Database update $key[database_update_id] Test condition failed: ".$mysqli->error);
 
         // check if the condition query returns true or false
         if ($test_query->fetch_row() == true) {
@@ -184,13 +186,13 @@ foreach ($database_update as $key) {
 
                 $mysqli->query("INSERT INTO database_change
               (database_update_id, update_description, execute_timestamp, implementation_state, update_filename, database_change_script)
-              VALUES ('$key[database_update_id]', '$update_description','$timestamp', 'implemented', '$key[update_filename]', '$script_string')") or die("Unable to insert corner cases into database_change table");
+              VALUES ('$key[database_update_id]', '$update_description','$timestamp', 'implemented', '$key[update_filename]', '$script_string')") or die("Unable to insert corner cases into database_change table: ".$mysqli->error);
             }
         }
     } // End if statement for rowcount nothing in database
 
     // Lets do some matching against the database
-    $result_change = $mysqli->query("SELECT * from database_change WHERE database_update_id=$key[database_update_id]");
+    $result_change = $mysqli->query("SELECT * from database_change WHERE database_update_id=$key[database_update_id]") or die("Unable to select change: ".$mysqli->error);
     $row_change    = $result_change->fetch_array(MYSQLI_ASSOC);
 
     $row_cnt = $result_change->num_rows;
@@ -203,7 +205,7 @@ foreach ($database_update as $key) {
         $implementation_state = "pending";
 
         // Do condition test
-        $test_query = $mysqli->query("$key[test_condition]") or die("Database update $key[database_update_id] Test condition failed");
+        $test_query = $mysqli->query("$key[test_condition]") or die("Database update $key[database_update_id] Test condition failed: ".$mysqli->error);
 
         if ($test_query->fetch_row() == true) {
             $test_result = "test_success";
@@ -231,6 +233,8 @@ foreach ($database_update as $key) {
         'test_result' => $test_result
     ));
 }
+
+mysqli_commit($mysqli) or die("Unable to commit transaction: ".$mysqli->error);
 
 //Send all smarty variables to the templates
 $smarty->display("file:" . $cpanel_template_folder . "database_update.html");

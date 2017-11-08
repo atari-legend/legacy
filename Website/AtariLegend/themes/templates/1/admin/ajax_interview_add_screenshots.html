@@ -1,0 +1,55 @@
+{*
+/***************************************************************************
+*                             ajax_interview_add_screenshots.html
+*                            ---------------------------------
+*   begin                : Thursday, November 2, 2017
+*   copyright            : (C) 2017 Atari Legend
+*   email                : admin@atarilegend.com
+*
+*   Id: ajax_interview_add_screenshots.html,v 0.10 2017/11/02 22:29 STG
+*			- creation of file
+*
+***************************************************************************/
+*}
+{if isset($smarty_action) and $smarty_action == "add_screen_to_interview_return"}
+	 {if $screenshots_nr <> ''}
+        <table class="standard_table_list_no_hover">
+        {foreach from=$screenshots item=line}
+            <tr>
+                <td style="width:1%;border:0;">
+                    <a href="javascript:deletecomment({$line.interview_screenshot_id},{$interview.interview_id})" class="standard_tile_link">
+                        <i class="fa fa-trash-o" aria-hidden="true" title="Click to delete screenshot"></i>
+                    </a>
+                </td>
+                <td style="width:9%;border:0;">
+                    <a href="../../includes/show_image.php?file={$line.interview_screenshot}" data-lightbox="image-1">
+                        <img src="../../includes/show_image.php?file={$line.interview_screenshot}&amp;resize=75,null,null,null&amp;crop=null,null,null,null" alt="screenshot" style="display:inline; margin:5px;" class="game_screenshot_img">
+                    </a>
+                </td>
+                <td style="width:90%;border:0;">
+                    <input type="text" name="inputfield[]" value="{$line.interview_screenshot_comment}" class="standard_tile_input_small" style="width:95%;" id="comment_{$line.interview_screenshot_count}">
+                </td> 
+            </tr>
+        {/foreach}
+        </table>
+        <br>
+    {/if}
+
+    {if isset($osd_message)}
+        [BRK]{$osd_message}
+    {/if}
+{else}
+    <div class="standard_tile_text">
+        <fieldset class="centered_fieldset">
+            <legend>Browse</legend>
+                <label for="file_upload" class="file_upload" onclick="myFunction()">Select file(s)</label>
+                <input id="file_upload" type="file" name="image[]" multiple>
+                <input type="text" class="standard_tile_input_small" id="file_upload_game_screenshots">&nbsp;
+                <br>
+                <br>
+                <input type="hidden" name="MAX_FILE_SIZE" value="100000">
+                <input type="button" value="Add" onclick="addScreenshottoInterview({$interview_id})" class="topbutton_cpanel">
+        </fieldset> 
+    </div>
+    </br>
+{/if}
