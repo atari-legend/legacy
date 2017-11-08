@@ -4,8 +4,27 @@ Options +FollowSymlinks -MultiViews -Indexes
 ErrorDocument 403 /themes/templates/1/forbidden.html
 ErrorDocument 404 /themes/templates/1/page_not_found.html
 
+# Configure compression on static resources
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/plain
+    AddOutputFilterByType DEFLATE text/html
+    AddOutputFilterByType DEFLATE text/xml
+    AddOutputFilterByType DEFLATE text/css
+    AddOutputFilterByType DEFLATE application/xml
+    AddOutputFilterByType DEFLATE application/xhtml+xml
+    AddOutputFilterByType DEFLATE application/rss+xml
+    AddOutputFilterByType DEFLATE application/javascript
+    AddOutputFilterByType DEFLATE application/x-javascript
+</IfModule>
+
 RewriteEngine On
 RewriteBase /
+
+# Rewrite old interviews URLs to the new structure, as multiple websites are
+# still linking to the old URLs. e.g.:
+# /interviews/interview.php?interview_id=4 -> /interviews/interviews_detail.php?selected_interview_id=4
+RewriteCond %{QUERY_STRING} "interview_id=([0-9]+)"
+RewriteRule "^interviews/interview\.php" "interviews/interviews_detail.php?selected_interview_id=%1" [R=301,L]
 
 # The following rules are to hide the root level /php/ and /php/main/
 # folders from the URL. We want to simulate users accessing files under these

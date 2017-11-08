@@ -62,7 +62,7 @@ module.exports = function(grunt) {
         filters: {'oldIE': true},
         rem: ['12px'],
         opacity: true,
-        minifier: false,
+        minifier: true,
         mqpacker: false,
         pseudoElements: true,
       },
