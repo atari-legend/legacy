@@ -15,26 +15,6 @@
 *}
 {extends file='1/admin/frontpage.html'}
 
-{*{block name=left_tile}*}
-<!-- <div class="standard_tile" id="{$left_nav}">
-    <h1>ADMIN NAVIGATION</h1>
-        <div class="standard_tile_line"></div>
-        <div class="standard_list_entry">
-            <div class="standard_tile_text">
-                <ul class="standard_table_list">
-                    <li class="left_nav_section">Administration Sections</li>
-
-                    <li><a href="../administration/database_update.php" class="left_nav_link">Database Update</a></li>
-                    <li><a href="../administration/construction.php" class="left_nav_link">Website Settings</a></li>
-                    <li><a href="../administration/construction.php" class="left_nav_link">Website Themes</a></li>
-                    <li><a href="../administration/user_management.php" class="left_nav_link">User Management</a></li>
-
-                </ul>
-            </div>
-        </div>
-    <div class="standard_tile_line"></div>
-</div> -->
-{*{/block}*}
 
 {block name=java_script}
 <script type="text/javascript">
@@ -300,19 +280,6 @@ function UserModify() {
     document.getElementById('user_list').submit();
 }
 
-//$(document).ready(function() {
-//  $(".user_popup").fancybox({
-//      maxWidth    : 900,
-//      maxHeight   : 600,
-//      fitToView   : true,
-//      width       : '70%',
-//      height      : '70%',
-//      autoSize    : true,
-//      closeClick  : false,
-//      openEffect  : 'elastic',
-//      closeEffect : 'elastic'
-//  });
-//});
 </script>
 <script>
 function EmailSent(){
