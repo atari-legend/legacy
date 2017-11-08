@@ -4,8 +4,9 @@
 # can't be converted to BLOB when they have a primary key constraint. They
 # will be restored at the end
 foreach (array("news_search_wordlist") as $table) {
-    $mysqli->query("ALTER TABLE $table DROP PRIMARY KEY")
-        or die("Unable to drop primary key constraint for $table: ".$mysqli->error);
+    # Ignore errors here. If the script was run twice, the primary key may
+    # already have been dropped
+    $mysqli->query("ALTER TABLE $table DROP PRIMARY KEY");
 }
 
 # Also drop some indexes for the same reason
@@ -14,8 +15,9 @@ foreach (array(
     "demo" => array("demo_name")
     ) as $table => $indices) {
     foreach ($indices as $index) {
-        $mysqli->query("ALTER TABLE $table DROP INDEX $index")
-            or die("Unable to drop index $index for $table: ".$mysqli->error);
+        # Ignore errors here. If the script was run twice, the indexes may
+        # already have been dropped
+        $mysqli->query("ALTER TABLE $table DROP INDEX $index");
     }
 }
 
