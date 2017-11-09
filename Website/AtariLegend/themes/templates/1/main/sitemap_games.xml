@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+{foreach from=$game_ids item=id}
+	<url>
+		<loc>{$smarty.const.REQUEST_SITEURL}/games/games_detail.php?game_id={$id}</loc>
+		<changefreq>weekly</changefreq>
+	</url>
+{/foreach}
+</urlset> 
