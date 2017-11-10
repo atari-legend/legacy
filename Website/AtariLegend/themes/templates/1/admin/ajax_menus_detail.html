@@ -100,18 +100,6 @@
 								<tr>
 									<td class="menu_cred_td">{$individual.author_type_info}</td>
 									<td class="menu_scene_td"><a href="../individuals/individuals_edit.php?ind_id={$individual.ind_id}" class="standard_table_left">{$individual.ind_name}</a></td>
-									<!-- <form action="#" method="post" name="nick_edit{$individual.ind_id}" id="nick_edit{$individual.ind_id}">
-										<td class="menu_nick_td">
-											<select name="individual_nicks_id" id="quick_search_small_select" style="width:125px;" onchange="ChangeNick(this.value,{$individual.menu_disk_credits_id},{$individual.menu_disk_id})">
-											<option value="" selected>-</option>
-												{foreach from=$ind_nick item=line}
-													{if $line.ind_id == $individual.ind_id }
-														{html_options values=$line.individual_nicks_id output=$line.nick selected=$individual.individual_nicks_id}
-													{/if}
-												{/foreach}
-											</select>
-										</td>
-									</form>	 -->
 									<td class="menu_delete_td" style="text-align:right;">
 										<input type="button" onclick="DeleteCredits({$individual.menu_disk_credits_id},{$individual.menu_disk_id})" class="quick_search_games_button" value="delete" style="margin-right:5px;">
 									</td>
@@ -120,7 +108,7 @@
 							</table>
 						{/if}
 					</div>
-					<div id="menu_software_list">
+					<div id="JSMenuSoftwareList">
 						{if isset($game)}
                             <br>
                             <br>
@@ -205,8 +193,8 @@
 					</div>
 					<br>
                     <div id="menu_detail_expand_author_title"></div>
-					<div id="menu_detail_expand_set"></div>
-					<div id="menu_detail_expand_games"></div>
+					<div id="JSMenuDetailExpandSet"></div>
+					<div id="JSMenuDetailExpandGames"></div>
 					<div id="menu_doc_list">
 						{if isset($doc_game)}
                             <br>
@@ -277,7 +265,7 @@
 					<br>
                     <div id="menu_detail_expand_author_title_doc"></div>
 					<div id="menu_detail_expand_docs"></div>
-					<div id="menu_screenshot_list">
+					<div id="JSMenuScreenshotList">
 						{if isset( $screenshots)}
 						<div class="standard_tile_text">
 							<fieldset class="centered_fieldset">
@@ -300,8 +288,8 @@
 						</div>
 						{/if}
 					</div>
-					<div id="menu_detail_expand_screenshots"></div>
-					<div id="menu_file_list">
+					<div id="JSMenuDetailExpandScreenshots"></div>
+					<div id="JSMenuFileList">
 						{if isset( $downloads)}
 						<div class="standard_tile_text">
 							<fieldset class="centered_fieldset">
@@ -319,7 +307,7 @@
 						</div>
 						{/if}
 					</div>
-					<div id="menu_detail_expand_file"></div>
+					<div id="JSMenuDetailExpandFile"></div>
 				</td>
 			</tr>
 		</table>
@@ -634,7 +622,7 @@
 	{if isset($game)}
     <br>
     <br>
-	<div id="menu_software_list">
+	<div id="JSMenuSoftwareList">
 		<table class="table_game_list" style="width:95%;border: solid 1px black;margin:auto;">
 		<tr>
 			<th id="menu_mark_th"></th>

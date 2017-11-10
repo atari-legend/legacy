@@ -126,7 +126,8 @@ $sql_crew = $mysqli->query("SELECT
 while ($crew_result = $sql_crew->fetch_array(MYSQLI_BOTH)) {
     $smarty->append('connected_crew', array(
         'crew_id' => $crew_result['crew_id'],
-        'crew_name' => $crew_result['crew_name']
+        'crew_name' => $crew_result['crew_name'],
+        'menu_sets_id' => $menu_sets_id
     ));
 }
 
@@ -151,7 +152,8 @@ $sql_ind = $mysqli->query("SELECT
 while ($ind_result = $sql_ind->fetch_array(MYSQLI_BOTH)) {
     $smarty->append('connected_ind', array(
         'ind_id' => $ind_result['ind_id'],
-        'ind_name' => $ind_result['ind_name']
+        'ind_name' => $ind_result['ind_name'],
+        'menu_sets_id' => $menu_sets_id
     ));
 }
 
@@ -176,7 +178,8 @@ $sql_menu_types_connection = $mysqli->query("SELECT
 while ($menu_types_connection_result = $sql_menu_types_connection->fetch_array(MYSQLI_BOTH)) {
     $smarty->append('connected_menu_types', array(
         'menu_types_main_id' => $menu_types_connection_result['menu_types_main_id'],
-        'menu_types_text' => $menu_types_connection_result['menu_types_text']
+        'menu_types_text' => $menu_types_connection_result['menu_types_text'],
+        'menu_sets_id' => $menu_sets_id
     ));
 }
 
