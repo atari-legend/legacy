@@ -139,9 +139,6 @@ if (isset($action) and ($action == "game_browse" xor $action == "game_search")) 
 
     $sql_series_link = $mysqli->query("SELECT * FROM temp ORDER BY software_name ASC") or die(mysqli_error());
 
-    /*$sql_series_link = $mysqli->query($sql_build)
-    or die ("Couldn't query Software Database5 ($sql_build)");*/
-
     $smarty->assign('smarty_action', 'game_list');
 
     while ($query_series_link = $sql_series_link->fetch_array(MYSQLI_BOTH)) { // This smarty is used for creating the list of games contained within a game series
