@@ -146,15 +146,15 @@ if (isset($action) and $action == "edit_disk_box" and $menu_disk_id !== '') {
 
     // Get the menudisk credits
     $sql_individuals = "SELECT
-                                    individuals.ind_id,
-                                    individuals.ind_name,
-                                    menu_disk_credits.menu_disk_credits_id,
-                                    author_type.author_type_info
-                                    FROM individuals
-                                    LEFT JOIN menu_disk_credits ON (individuals.ind_id = menu_disk_credits.ind_id)
-                                    LEFT JOIN author_type ON (menu_disk_credits.author_type_id = author_type.author_type_id)
-                                    WHERE menu_disk_credits.menu_disk_id = '$menu_disk_id'
-                                    ORDER BY individuals.ind_name ASC";
+                        individuals.ind_id,
+                        individuals.ind_name,
+                        menu_disk_credits.menu_disk_credits_id,
+                        author_type.author_type_info
+                        FROM individuals
+                        LEFT JOIN menu_disk_credits ON (individuals.ind_id = menu_disk_credits.ind_id)
+                        LEFT JOIN author_type ON (menu_disk_credits.author_type_id = author_type.author_type_id)
+                        WHERE menu_disk_credits.menu_disk_id = '$menu_disk_id'
+                        ORDER BY individuals.ind_name ASC";
 
     $query_individual = $mysqli->query($sql_individuals) or die('Error: ' . mysqli_error($mysqli));
 
@@ -401,15 +401,7 @@ if (isset($action) and $action == "add_intro_credit") {
     // Create individuals array
     $menu_disk_id = $query;
 
-    $sql_individuals = "SELECT ind_id,ind_name FROM individuals ORDER BY ind_name ASC";
-    //$sql_aka         = "SELECT ind_id,nick FROM individual_nicks ORDER BY nick ASC";
-
-    //Create a temporary table to build an array with both names and nicknames
-    $mysqli->query("CREATE TEMPORARY TABLE temp ENGINE=MEMORY $sql_individuals") or die('Error: ' . mysqli_error($mysqli));
-    //$mysqli->query("INSERT INTO temp $sql_aka") or die('Error: ' . mysqli_error($mysqli));
-
-    $query_temporary = $mysqli->query("SELECT * FROM temp WHERE ind_name LIKE 'a%' ORDER BY ind_name ASC") or die('Error: ' . mysqli_error($mysqli));
-    $mysqli->query("DROP TABLE temp");
+    $query_temporary = $mysqli->query("SELECT ind_id,ind_name FROM individuals WHERE ind_name LIKE 'a%' ORDER BY ind_name ASC") or die('Error: ' . mysqli_error($mysqli));
 
     while ($genealogy_ind = $query_temporary->fetch_array(MYSQLI_BOTH)) {
         $smarty->append('ind', array(
@@ -440,22 +432,18 @@ if (isset($action) and $action == "add_intro_credit") {
     $smarty->assign('menu_disk_id', $menu_disk_id);
 }
 
+//
+// Individual browse section
+//
 if (isset($action) and $action == "ind_gen_browse") {
     if (isset($query)) {
-        $sql_individuals = "SELECT ind_id,ind_name FROM individuals ORDER BY ind_name ASC";
-        //$sql_aka         = "SELECT ind_id,nick FROM individual_nicks ORDER BY nick ASC";
-
-        //Create a temporary table to build an array with both names and nicknames
-        $mysqli->query("CREATE TEMPORARY TABLE temp ENGINE=MEMORY $sql_individuals") or die('Error: ' . mysqli_error($mysqli));
-        //$mysqli->query("INSERT INTO temp $sql_aka") or die('Error: ' . mysqli_error($mysqli));
 
         if ($query == "num") {
-            $query_temporary = $mysqli->query("SELECT * FROM temp WHERE ind_name REGEXP '^[0-9].*' ORDER BY ind_name ASC") or die('Error: ' . mysqli_error($mysqli));
+            $query_temporary = $mysqli->query("SELECT ind_id,ind_name FROM individuals WHERE ind_name REGEXP '^[0-9].*' ORDER BY ind_name ASC") or die('Error: ' . mysqli_error($mysqli));
         } else {
             $query = $mysqli->real_escape_string($query);
-            $query_temporary = $mysqli->query("SELECT * FROM temp WHERE ind_name LIKE '$query%' ORDER BY ind_name ASC") or die('Error: ' . mysqli_error($mysqli));
+            $query_temporary = $mysqli->query("SELECT ind_id,ind_name FROM individuals WHERE ind_name LIKE '$query%' ORDER BY ind_name ASC") or die('Error: ' . mysqli_error($mysqli));
         }
-        $mysqli->query("DROP TABLE temp");
     }
     while ($genealogy_ind = $query_temporary->fetch_array(MYSQLI_BOTH)) {
         $smarty->append('author_type', array(
@@ -466,28 +454,17 @@ if (isset($action) and $action == "ind_gen_browse") {
     $smarty->assign('smarty_action', 'ind_gen_browse');
 }
 
+//
+// Individual search section
+//
 if (isset($action) and $action == "ind_gen_search") {
     if (isset($query) and $query !== "empty") {
-        $sql_individuals = "SELECT ind_id,ind_name FROM individuals ORDER BY ind_name ASC";
-        //$sql_aka         = "SELECT ind_id,nick FROM individual_nicks ORDER BY nick ASC";
-
-        //Create a temporary table to build an array with both names and nicknames
-        $mysqli->query("CREATE TEMPORARY TABLE temp ENGINE=MEMORY $sql_individuals") or die('Error: ' . mysqli_error($mysqli));
-        //$mysqli->query("INSERT INTO temp $sql_aka") or die('Error: ' . mysqli_error($mysqli));
 
         $query = $mysqli->real_escape_string($query);
-        $query_temporary = $mysqli->query("SELECT * FROM temp WHERE ind_name LIKE '%$query%' ORDER BY ind_name ASC") or die('Error: ' . mysqli_error($mysqli));
-        $mysqli->query("DROP TABLE temp");
+        $query_temporary = $mysqli->query("SELECT ind_id,ind_name FROM individuals WHERE ind_name LIKE '%$query%' ORDER BY ind_name ASC") or die('Error: ' . mysqli_error($mysqli));
     } elseif ($query == "empty") {
-        $sql_individuals = "SELECT ind_id,ind_name FROM individuals ORDER BY ind_name ASC";
-        //$sql_aka         = "SELECT ind_id,nick FROM individual_nicks ORDER BY nick ASC";
 
-        //Create a temporary table to build an array with both names and nicknames
-        $mysqli->query("CREATE TEMPORARY TABLE temp ENGINE=MEMORY $sql_individuals") or die("failed to create temporary table");
-        //$mysqli->query("INSERT INTO temp $sql_aka") or die("failed to insert akas into temporary table");
-
-        $query_temporary = $mysqli->query("SELECT * FROM temp WHERE ind_name LIKE '%a%' ORDER BY ind_name ASC") or die("Failed to query temporary table");
-        $mysqli->query("DROP TABLE temp");
+        $query_temporary = $mysqli->query("SELECT ind_id,ind_name FROM individuals WHERE ind_name LIKE '%a%' ORDER BY ind_name ASC") or die("Failed to query temporary table");
     }
 
     while ($genealogy_ind = $query_temporary->fetch_array(MYSQLI_BOTH)) {
@@ -496,7 +473,6 @@ if (isset($action) and $action == "ind_gen_search") {
             'ind_name' => $genealogy_ind['ind_name']
         ));
     }
-
     $smarty->assign('smarty_action', 'ind_gen_browse');
 }
 
