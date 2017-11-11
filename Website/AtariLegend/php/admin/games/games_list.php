@@ -29,50 +29,53 @@ $start = microtime(true);
 
 // First create base sql statements
 
-$RESULTGAME = "SELECT game.game_id,
-        game.game_name,
-        game_boxscan.game_boxscan_id,
-        screenshot_game.screenshot_id,
-        game_music.music_id,
-        game_download.game_download_id,
-        game_falcon_only.falcon_only,
-        game_falcon_enhan.falcon_enhanced,
-        game_falcon_rgb.falcon_rgb,
-        game_falcon_vga.falcon_vga,
-        game_ste_enhan.ste_enhanced,
-        game_ste_only.ste_only,
-        pd1.pub_dev_name as 'publisher_name',
-        pd1.pub_dev_id as 'publisher_id',
-        pd2.pub_dev_name as 'developer_name',
-        pd2.pub_dev_id as 'developer_id',
-        game_year.game_year
-        FROM game
-        LEFT JOIN game_boxscan ON (game_boxscan.game_id = game.game_id)
-        LEFT JOIN screenshot_game ON (screenshot_game.game_id = game.game_id)
-        LEFT JOIN game_music ON (game_music.game_id = game.game_id)
-        LEFT JOIN game_download ON (game_download.game_id = game.game_id)
-        LEFT JOIN game_falcon_only ON (game_falcon_only.game_id = game.game_id)
-        LEFT JOIN game_falcon_enhan ON (game.game_id = game_falcon_enhan.game_id)
-        LEFT JOIN game_falcon_rgb ON (game_falcon_rgb.game_id = game.game_id)
-        LEFT JOIN game_falcon_vga ON (game.game_id = game_falcon_vga.game_id)
-        LEFT JOIN game_ste_enhan ON (game.game_id = game_ste_enhan.game_id)
-        LEFT JOIN game_ste_only ON (game.game_id = game_ste_only.game_id)
-        LEFT JOIN game_free ON (game.game_id = game_free.game_id)
-        LEFT JOIN game_arcade ON (game.game_id = game_arcade.game_id)
-        LEFT JOIN game_development ON (game.game_id = game_development.game_id)
-      LEFT JOIN game_unreleased ON (game.game_id = game_unreleased.game_id)
-      LEFT JOIN game_unfinished ON (game.game_id = game_unfinished.game_id)
-      LEFT JOIN game_mono ON (game.game_id = game_mono.game_id)
-      LEFT JOIN game_seuck ON (game.game_id = game_seuck.game_id)
-      LEFT JOIN game_stos ON (game.game_id = game_stos.game_id)
-      LEFT JOIN game_stac ON (game.game_id = game_stac.game_id)
-      LEFT JOIN game_wanted ON (game.game_id = game_wanted.game_id)
-      LEFT JOIN game_publisher ON (game_publisher.game_id = game.game_id)
-      LEFT JOIN pub_dev pd1 ON (pd1.pub_dev_id = game_publisher.pub_dev_id)
-      LEFT JOIN game_developer ON (game_developer.game_id = game.game_id)
-      LEFT JOIN pub_dev pd2 on (pd2.pub_dev_id = game_developer.dev_pub_id)
-      LEFT JOIN game_year on (game_year.game_id = game.game_id)
-    WHERE ";
+$RESULTGAME = "SELECT
+    game.game_id,
+    game.game_name,
+    game_boxscan.game_boxscan_id,
+    screenshot_game.screenshot_id,
+    game_music.music_id,
+    game_download.game_download_id,
+    game_falcon_only.falcon_only,
+    game_falcon_enhan.falcon_enhanced,
+    game_falcon_rgb.falcon_rgb,
+    game_falcon_vga.falcon_vga,
+    game_ste_enhan.ste_enhanced,
+    game_ste_only.ste_only,
+    pd1.pub_dev_name as 'publisher_name',
+    pd1.pub_dev_id as 'publisher_id',
+    pd2.pub_dev_name as 'developer_name',
+    pd2.pub_dev_id as 'developer_id',
+    game_year.game_year
+FROM game
+LEFT JOIN game_attributes ON (game_attributes.game_id = game.game_id)
+LEFT JOIN attribute_type ON (attribute_type.attribute_type_id = game_attributes.attribute_type_id)
+LEFT JOIN game_boxscan ON (game_boxscan.game_id = game.game_id)
+LEFT JOIN screenshot_game ON (screenshot_game.game_id = game.game_id)
+LEFT JOIN game_music ON (game_music.game_id = game.game_id)
+LEFT JOIN game_download ON (game_download.game_id = game.game_id)
+LEFT JOIN game_falcon_only ON (game_falcon_only.game_id = game.game_id)
+LEFT JOIN game_falcon_enhan ON (game.game_id = game_falcon_enhan.game_id)
+LEFT JOIN game_falcon_rgb ON (game_falcon_rgb.game_id = game.game_id)
+LEFT JOIN game_falcon_vga ON (game.game_id = game_falcon_vga.game_id)
+LEFT JOIN game_ste_enhan ON (game.game_id = game_ste_enhan.game_id)
+LEFT JOIN game_ste_only ON (game.game_id = game_ste_only.game_id)
+LEFT JOIN game_free ON (game.game_id = game_free.game_id)
+LEFT JOIN game_arcade ON (game.game_id = game_arcade.game_id)
+LEFT JOIN game_development ON (game.game_id = game_development.game_id)
+LEFT JOIN game_unreleased ON (game.game_id = game_unreleased.game_id)
+LEFT JOIN game_unfinished ON (game.game_id = game_unfinished.game_id)
+LEFT JOIN game_mono ON (game.game_id = game_mono.game_id)
+LEFT JOIN game_seuck ON (game.game_id = game_seuck.game_id)
+LEFT JOIN game_stos ON (game.game_id = game_stos.game_id)
+LEFT JOIN game_stac ON (game.game_id = game_stac.game_id)
+LEFT JOIN game_wanted ON (game.game_id = game_wanted.game_id)
+LEFT JOIN game_publisher ON (game_publisher.game_id = game.game_id)
+LEFT JOIN pub_dev pd1 ON (pd1.pub_dev_id = game_publisher.pub_dev_id)
+LEFT JOIN game_developer ON (game_developer.game_id = game.game_id)
+LEFT JOIN pub_dev pd2 on (pd2.pub_dev_id = game_developer.dev_pub_id)
+LEFT JOIN game_year on (game_year.game_id = game.game_id)
+WHERE ";
 
 $RESULTAKA = "SELECT
          game_aka.game_id,
@@ -94,6 +97,8 @@ $RESULTAKA = "SELECT
          game_year.game_year
       FROM game_aka
       LEFT JOIN game ON (game_aka.game_id = game.game_id)
+      LEFT JOIN game_attributes ON (game_attributes.game_id = game.game_id)
+      LEFT JOIN attribute_type ON (attribute_type.attribute_type_id = game_attributes.attribute_type_id)
       LEFT JOIN game_boxscan ON (game_boxscan.game_id = game_aka.game_id)
       LEFT JOIN screenshot_game ON (screenshot_game.game_id = game.game_id)
       LEFT JOIN game_music ON (game_music.game_id = game.game_id)
@@ -187,7 +192,7 @@ if (isset($action) and $action == "search") {
         $falcon_enhanced_select = " AND game_falcon_enhan.falcon_enhanced =$falcon_enhanced";
         $smarty->assign('games_falcon_enhanced', '1');
     }
-    
+
     if (isset($falcon_rgb) and $falcon_rgb == "1") {
         $falcon_rgb_select = " AND game_falcon_rgb.falcon_rgb =$falcon_rgb";
         $smarty->assign('games_falcon_rgb', '1');

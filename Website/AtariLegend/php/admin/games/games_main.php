@@ -42,6 +42,20 @@ if (isset($_SESSION['edit_message'])) {
     $smarty->assign("message", $_SESSION['edit_message']);
 }
 
+// Attribute Types
+$sql_attribute = $mysqli->query("SELECT attribute_type_id,
+                   attribute_type_name
+                   FROM attribute_type
+                   ORDER BY attribute_type_name ASC")
+                or die("Problems retriving attribute types.");
+
+while ($attribute_types = $sql_attribute->fetch_array(MYSQLI_BOTH)) {
+    $smarty->append('attribute', array(
+                    'attribute_type_id' => $attribute_types['attribute_type_id'],
+                    'attribute_type_name' => $attribute_types['attribute_type_name']));
+}
+
+
 //Send all smarty variables to the templates
 $smarty->display("file:" . $cpanel_template_folder . "games_main.html");
 
