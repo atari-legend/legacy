@@ -1,0 +1,18 @@
+language: node_js
+
+build:
+    # Build our custom Docker image with NodeJS + PHP as a pre step
+    pre_ci:
+        - docker build -t atari-legend:latest Docker/php
+
+    # Start the custom image we've built just above
+    pre_ci_boot:
+        image_name: atari-legend
+        image_tag: latest
+        pull: false
+
+    # Do the actual build / CI of the project
+    ci:
+        - shippable_retry npm install
+        - shippable_retry pear install PHP_CodeSniffer
+        - npm run grunt
