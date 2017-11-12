@@ -108,7 +108,28 @@ function gameinsert_gm()
 			<br>
 			<br>
 			<div class="games_check_container">
-				<div class="games_check_child" id="child_1">
+
+
+                <div class="games_check_child" id="child_1">
+            {foreach from=$attribute item=attributes}
+
+                    <div class="games_check_row">
+                        <div class="links_mod_checkbox">
+                            <input type="checkbox" id="game_attributes_{$attributes.attribute_type_id}" name="attributes[]" value="{$attributes.attribute_type_id}">
+                            <label for="game_attributes_{$attributes.attribute_type_id}"></label>
+                        </div>
+                        <div class="games_check_text">&nbsp; {$attributes.attribute_type_name}</div>
+                    </div>
+
+            {/foreach}
+                </div>
+
+
+
+
+
+{*
+                <div class="games_check_child" id="child_1">
 					<div class="games_check_row">
 						<div class="links_mod_checkbox">
                             <input type="checkbox" id="falcon_only" name="falcon_only" value="1">
@@ -174,6 +195,11 @@ function gameinsert_gm()
 						<div class="games_check_text">&nbsp; STOS</div>
 					</div>
 				</div>
+
+
+
+
+
 				<div class="games_check_child" id="child_2">
 					<div class="games_check_row">
 						<div class="links_mod_checkbox">
@@ -240,6 +266,15 @@ function gameinsert_gm()
 						<div class="games_check_text">&nbsp; STAC</div>
 					</div>
 				</div>
+
+
+
+
+
+
+
+
+*}
 			</div>
 			<br>
 			<br>

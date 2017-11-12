@@ -14,7 +14,7 @@
 $database_update_id = 111;
 
 // Description of what the change will do.
-$update_description = "Populate atribute_type table";
+$update_description = "Populate attribute_type table";
 
 // Should the database change query execute if test is "test_fail" or "test_success"
 $execute_condition = "test_success";

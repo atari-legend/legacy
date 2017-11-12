@@ -55,7 +55,6 @@ while ($attribute_types = $sql_attribute->fetch_array(MYSQLI_BOTH)) {
                     'attribute_type_name' => $attribute_types['attribute_type_name']));
 }
 
-
 //Send all smarty variables to the templates
 $smarty->display("file:" . $cpanel_template_folder . "games_main.html");
 

@@ -23,7 +23,7 @@ $test_condition = "SELECT * FROM information_schema.tables
 WHERE table_schema = '$db_databasename' AND table_name = 'game_attributes' LIMIT 1";
 
 // Database change
-$database_update_sql = "../../admin/administration/database_scripts/ 2017-11-11_populate_game_attributes_table-addition.php";
+$database_update_sql = "../../admin/administration/database_scripts/2017-11-11_populate_game_attributes_table-addition.php";
 
 // If the update should auto execute without user interaction set to "yes".
 $database_autoexecute = "yes";
