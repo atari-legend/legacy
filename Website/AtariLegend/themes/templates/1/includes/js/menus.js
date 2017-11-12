@@ -4,6 +4,47 @@
  *
  * Copyright 2017 Mattias Lönnback
  */
+
+ (function($) {
+
+$.fn.bindWithDelay = function( type, data, fn, timeout, throttle ) {
+
+    if ( $.isFunction( data ) ) {
+        throttle = timeout;
+        timeout = fn;
+        fn = data;
+        data = undefined;
+    }
+
+    // Allow delayed function to be removed with fn in unbind function
+    fn.guid = fn.guid || ($.guid && $.guid++);
+
+    // Bind each separately so that each element has its own delay
+    return this.each(function() {
+
+        var wait = null;
+
+        function cb() {
+            var e = $.extend(true, { }, arguments[0]);
+            var ctx = this;
+            var throttler = function() {
+                wait = null;
+                fn.apply(ctx, [e]);
+            };
+
+            if (!throttle) { clearTimeout(wait); wait = null; }
+            if (!wait) { wait = setTimeout(throttler, timeout); }
+        }
+
+        cb.guid = fn.guid;
+
+        $(this).bind(type, data, cb);
+    });
+};
+
+})(jQuery);
+
+
 function OSDMessageDisplay(message) {
     $.notify_osd.create({
         'text': message, // notification message
@@ -96,12 +137,13 @@ function GameSearchListen() {
     $(".JSGameBrowse").change(function() {
         SearchingGame("game_browse");
     });
-    $(".JSGameSearch").keyup(function() {
+
+    $(".JSGameSearch").bindWithDelay("keyup", function(e) {
         var value = $(this).val();
         if (value.length >= 3) {
             SearchingGame("game_search");
         }
-    });
+    }, 100);
 }
 
 function addGametoMenu(software_id, menu_disk_id, software_type) {
