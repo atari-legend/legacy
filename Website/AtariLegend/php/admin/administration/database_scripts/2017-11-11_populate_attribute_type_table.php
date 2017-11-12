@@ -11,7 +11,7 @@
 ***************************************************************************/
 
 // Unique identifier set by developer.
-$database_update_id = 111;
+$database_update_id = 114;
 
 // Description of what the change will do.
 $update_description = "Populate attribute_type table";
@@ -29,16 +29,9 @@ INSERT INTO attribute_type
   (attribute_type_name)
 VALUES
   ('Arcade'),
-  ('Falcon Enhanced'),
-  ('Falcon Only'),
-  ('Falcon RGB'),
-  ('Falcon VGA'),
   ('Non Commercial'),
-  ('Monochrome Only'),
   ('SEUCK'),
   ('STAC'),
-  ('STE Enhanced'),
-  ('STE Only'),
   ('Unfinished'),
   ('Unreleased'),
   ('Wanted'),
