@@ -55,6 +55,18 @@ while ($attribute_types = $sql_attribute->fetch_array(MYSQLI_BOTH)) {
                     'attribute_type_name' => $attribute_types['attribute_type_name']));
 }
 
+// Attribute Types
+$sql_attribute = $mysqli->query("SELECT attribute_hardware_type_id,
+                   attribute_hardware_type_name
+                   FROM attribute_hardware_type
+                   ORDER BY attribute_hardware_type_name ASC")
+                or die("Problems retriving attribute types.");
+
+while ($attribute_types = $sql_attribute->fetch_array(MYSQLI_BOTH)) {
+    $smarty->append('attribute_hardware', array(
+                    'attribute_hardware_type_id' => $attribute_types['attribute_hardware_type_id'],
+                    'attribute_hardware_type_name' => $attribute_types['attribute_hardware_type_name']));
+}
 //Send all smarty variables to the templates
 $smarty->display("file:" . $cpanel_template_folder . "games_main.html");
 

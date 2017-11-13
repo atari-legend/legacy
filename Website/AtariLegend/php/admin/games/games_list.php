@@ -30,11 +30,21 @@ $start = microtime(true);
 $game_attributes_select = "";
 $game_attributes_join   = "";
 
+$game_attributes_hardware_select = "";
+$game_attributes_hardware_join   = "";
+
 if (isset($attributes)) {
     foreach ($attributes as $attributes_key => $attributes_value) {
         $game_attributes_join .= " LEFT JOIN game_attributes AS ga$attributes_key ON (ga$attributes_key.game_id = game.game_id)
         LEFT JOIN attribute_type AS at$attributes_key ON (at$attributes_key.attribute_type_id = ga$attributes_key.attribute_type_id)";
         $game_attributes_select .= " AND ga$attributes_key.attribute_type_id = $attributes_value";
+    }
+}
+if (isset($attributes_hardware)) {
+    foreach ($attributes_hardware as $attributes_key => $attributes_value) {
+        $game_attributes_join .= " LEFT JOIN game_attributes_hardware AS gah$attributes_key ON (gah$attributes_key.game_id = game.game_id)
+        LEFT JOIN attribute_hardware_type AS aht$attributes_key ON (aht$attributes_key.attribute_hardware_type_id = gah$attributes_key.attribute_hardware_type_id)";
+        $game_attributes_select .= " AND gah$attributes_key.attribute_hardware_type_id = $attributes_value";
     }
 }
 
@@ -54,12 +64,12 @@ $RESULTGAME = "SELECT
     game_year.game_year
 FROM game";
 $RESULTGAME .= $game_attributes_join;
+$RESULTGAME .= $game_attributes_hardware_join;
 $RESULTGAME .= "
 LEFT JOIN game_boxscan ON (game_boxscan.game_id = game.game_id)
 LEFT JOIN screenshot_game ON (screenshot_game.game_id = game.game_id)
 LEFT JOIN game_music ON (game_music.game_id = game.game_id)
 LEFT JOIN game_download ON (game_download.game_id = game.game_id)
-LEFT JOIN game_wanted ON (game.game_id = game_wanted.game_id)
 LEFT JOIN game_publisher ON (game_publisher.game_id = game.game_id)
 LEFT JOIN pub_dev pd1 ON (pd1.pub_dev_id = game_publisher.pub_dev_id)
 LEFT JOIN game_developer ON (game_developer.game_id = game.game_id)
@@ -82,12 +92,12 @@ $RESULTAKA = "SELECT
       FROM game_aka
       LEFT JOIN game ON (game_aka.game_id = game.game_id)";
 $RESULTAKA .= $game_attributes_join;
+$RESULTAKA .= $game_attributes_hardware_join;
 $RESULTAKA .= "
       LEFT JOIN game_boxscan ON (game_boxscan.game_id = game_aka.game_id)
       LEFT JOIN screenshot_game ON (screenshot_game.game_id = game.game_id)
       LEFT JOIN game_music ON (game_music.game_id = game.game_id)
       LEFT JOIN game_download ON (game_download.game_id = game.game_id)
-      LEFT JOIN game_wanted ON (game.game_id = game_wanted.game_id)
       LEFT JOIN game_publisher ON (game.game_id = game_publisher.game_id)
       LEFT JOIN pub_dev pd1 ON (game_publisher.pub_dev_id = pd1.pub_dev_id)
       LEFT JOIN game_developer ON (game.game_id = game_developer.game_id)
@@ -175,6 +185,9 @@ if (isset($action) and $action == "search") {
     if (isset($game_attributes_select)) {
         $RESULTGAME .= $game_attributes_select;
     }
+    if (isset($game_attributes_hardware_select)) {
+        $RESULTGAME .= $game_attributes_hardware_select;
+    }
 
     if (isset($wanted) and $wanted == "1") {
         $RESULTGAME .= " AND game_wanted.game_id IS NOT NULL";
@@ -208,6 +221,9 @@ if (isset($action) and $action == "search") {
             }
             if (isset($game_attributes_select)) {
                 $RESULTAKA .= $game_attributes_select;
+            }
+            if (isset($game_attributes_hardware_select)) {
+                $RESULTAKA .= $game_attributes_hardware_select;
             }
             if (isset($wanted) and $wanted == "1") {
                 $RESULTAKA .= " AND game_wanted.game_id IS NOT NULL";

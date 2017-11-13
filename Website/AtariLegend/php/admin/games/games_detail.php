@@ -89,6 +89,59 @@ while ($game_info = $sql_game->fetch_array(MYSQLI_BOTH)) {
 }
 
 //***********************************************************************************
+//get the game attributes
+//***********************************************************************************
+
+$sql_game_attributes = $mysqli->query("SELECT * FROM game_attributes
+               WHERE game_id='$game_id'") or die('Error: ' . mysqli_error($mysqli));
+
+while ($game_attributes = $sql_game_attributes->fetch_array(MYSQLI_BOTH)) {
+    $smarty->append('game_attributes', array(
+        'attribute_type_id' => $game_attributes['attribute_type_id']
+    ));
+}
+
+//***********************************************************************************
+//get the game hardware attributes
+//***********************************************************************************
+
+$sql_game_attributes_hardware = $mysqli->query("SELECT * FROM game_attributes_hardware
+               WHERE game_id='$game_id'") or die('Error: ' . mysqli_error($mysqli));
+
+while ($game_hardware_attributes = $sql_game_attributes_hardware->fetch_array(MYSQLI_BOTH)) {
+    $smarty->append('game_hardware_attributes', array(
+        'attribute_hardware_type_id' => $game_hardware_attributes['attribute_hardware_type_id']
+    ));
+}
+
+//***********************************************************************************
+//get the attribute type liet
+//***********************************************************************************
+
+$sql_attribute_type = $mysqli->query("SELECT * FROM attribute_type") or die('Error: ' . mysqli_error($mysqli));
+
+while ($attribute_types = $sql_attribute_type->fetch_array(MYSQLI_BOTH)) {
+    $smarty->append('attribute_types', array(
+        'attribute_type_id' => $attribute_types['attribute_type_id'],
+        'attribute_type_name' => $attribute_types['attribute_type_name']
+    ));
+}
+
+//***********************************************************************************
+//get the game hardware attributes
+//***********************************************************************************
+
+$sql_attribute_hardware_type = $mysqli->query("SELECT * FROM attribute_hardware_type") or die('Error: ' . mysqli_error($mysqli));
+
+while ($attribute_hardware_types = $sql_attribute_hardware_type->fetch_array(MYSQLI_BOTH)) {
+    $smarty->append('attribute_hardware_types', array(
+        'attribute_hardware_type_id' => $attribute_hardware_types['attribute_hardware_type_id'],
+        'attribute_hardware_type_name' => $attribute_hardware_types['attribute_hardware_type_name']
+    ));
+}
+
+
+//***********************************************************************************
 //get the release dates
 //***********************************************************************************
 

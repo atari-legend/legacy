@@ -214,150 +214,24 @@ if (isset($action) and $action == 'modify_game') {
         }
     }
 
+    // Delete game attributes currently in the database for this game
+    $sdbquery = $mysqli->query("DELETE FROM game_attributes WHERE game_id=$game_id");
 
-    // Update the public domain tick box info
-    // Start off by deleting previos value
-    $sdbquery = $mysqli->query("DELETE FROM game_free WHERE game_id='$game_id'");
-
-    // then insert the new value if it has been passed.
-    if (isset($free)) {
-        $sdbquery = $mysqli->query("INSERT INTO game_free (game_id,free) VALUES ('$game_id','$free')");
+    // Insert the all the attributes again
+    if (isset($attribute_types)) {
+        foreach ($attribute_types as $attribute_type) {
+            $sdbquery = $mysqli->query("INSERT INTO game_attributes (game_id,attribute_type_id) VALUES ($game_id,$attribute_type)");
+        }
     }
 
-    // Update the Unreleased tick box info
-    // Start off by deleting previos value
-    $sdbquery = $mysqli->query("DELETE FROM game_unreleased WHERE game_id='$game_id'");
+    // Delete game hardware attributes currently in the database for this game
+    $sdbquery = $mysqli->query("DELETE FROM game_attributes_hardware WHERE game_id=$game_id");
 
-    // then insert the new value if it has been passed.
-    if (isset($unreleased)) {
-        $sdbquery = $mysqli->query("INSERT INTO game_unreleased (game_id,unreleased) VALUES ('$game_id','$unreleased')");
-    }
-
-    // Update the In Development tick box info
-    // Start off by deleting previos value
-    $sdbquery = $mysqli->query("DELETE FROM game_development WHERE game_id='$game_id'");
-
-    // then insert the new value if it has been passed.
-    if (isset($development)) {
-        $sdbquery = $mysqli->query("INSERT INTO game_development (game_id,development) VALUES ('$game_id','$development')");
-    }
-
-    // Update the STE ONLY tick box info
-    // Start off by deleting previos value
-    $sdbquery = $mysqli->query("DELETE FROM game_ste_only WHERE game_id='$game_id'");
-
-    // then insert the new value if it has been passed.
-    if (isset($ste_only)) {
-        $sdbquery = $mysqli->query("INSERT INTO game_ste_only (game_id,ste_only) VALUES ('$game_id','$ste_only')");
-    }
-
-    // Update the STE ENHANCED tick box info
-    // Start off by deleting previos value
-    $sdbquery = $mysqli->query("DELETE FROM game_ste_enhan WHERE game_id='$game_id'");
-
-    // then insert the new value if it has been passed.
-    if (isset($ste_enhanced)) {
-        $sdbquery = $mysqli->query("INSERT INTO game_ste_enhan (game_id,ste_enhanced) VALUES ('$game_id','$ste_enhanced')");
-    }
-
-    // Update the FALCON ONLY tick box info
-    // Start off by deleting previos value
-    $sdbquery = $mysqli->query("DELETE FROM game_falcon_only WHERE game_id='$game_id'");
-
-    // then insert the new value if it has been passed.
-    if (isset($falcon_only)) {
-        $sdbquery = $mysqli->query("INSERT INTO game_falcon_only (game_id,falcon_only) VALUES ('$game_id','$falcon_only')");
-    }
-
-    // Update the FALCON ENHANCED tick box info
-    // Start off by deleting previos value
-    $sdbquery = $mysqli->query("DELETE FROM game_falcon_enhan WHERE game_id='$game_id'");
-
-    // then insert the new value if it has been passed.
-    if (isset($falcon_enhanced)) {
-        $sdbquery = $mysqli->query("INSERT INTO game_falcon_enhan (game_id,falcon_enhanced) VALUES ('$game_id','$falcon_enhanced')");
-    }
-
-    // Update the FALCON RGB tick box info
-    // Start off by deleting previos value
-    $sdbquery = $mysqli->query("DELETE FROM game_falcon_rgb WHERE game_id='$game_id'");
-
-    // then insert the new value if it has been passed.
-    if (isset($falcon_rgb)) {
-        $sdbquery = $mysqli->query("INSERT INTO game_falcon_rgb (game_id,falcon_rgb) VALUES ('$game_id','$falcon_rgb')");
-    }
-
-    // Update the FALCON VGA tick box info
-    // Start off by deleting previos value
-    $sdbquery = $mysqli->query("DELETE FROM game_falcon_vga WHERE game_id='$game_id'");
-
-    // then insert the new value if it has been passed.
-    if (isset($falcon_vga)) {
-        $sdbquery = $mysqli->query("INSERT INTO game_falcon_vga (game_id,falcon_vga) VALUES ('$game_id','$falcon_vga')");
-    }
-
-    // Update the GAME UNFINISHED tick box info
-    // Start off by deleting previos value
-    $sdbquery = $mysqli->query("DELETE FROM game_unfinished WHERE game_id='$game_id'");
-
-    // then insert the new value if it has been passed.
-    if (isset($unfinished)) {
-        $sdbquery = $mysqli->query("INSERT INTO game_unfinished (game_id,unfinished) VALUES ('$game_id','$unfinished')");
-    }
-
-    // Update the MONOCHROME GAME tick box info
-    // Start off by deleting previos value
-    $sdbquery = $mysqli->query("DELETE FROM game_mono WHERE game_id='$game_id'");
-
-    // then insert the new value if it has been passed.
-    if (isset($monochrome)) {
-        $sdbquery = $mysqli->query("INSERT INTO game_mono (game_id,monochrome) VALUES ('$game_id','$monochrome')");
-    }
-
-    // Update the game wanted tick box info
-    // Start off by deleting previos value
-    $sdbquery = $mysqli->query("DELETE FROM game_wanted WHERE game_id='$game_id'");
-
-    // then insert the new value if it has been passed.
-    if (isset($wanted)) {
-        $sdbquery = $mysqli->query("INSERT INTO game_wanted (game_id) VALUES ('$game_id')");
-    }
-
-    // UPDATE THE ARCADE TICK BOX INFO
-    // Start off by deleting previos value
-    $sdbquery = $mysqli->query("DELETE FROM game_arcade WHERE game_id='$game_id'");
-
-    // then insert the new value if it has been passed.
-    if (isset($arcade)) {
-        $sdbquery = $mysqli->query("INSERT INTO game_arcade (game_id,arcade) VALUES ('$game_id','$arcade')") or die("Couldn't insert arcade tick box info");
-    }
-
-    // UPDATE THE SEUCK TICK BOX INFO
-    // Start off by deleting previos value
-    $sdbquery = $mysqli->query("DELETE FROM game_seuck WHERE game_id='$game_id'");
-
-    // then insert the new value if it has been passed.
-    if (isset($seuck)) {
-        $sdbquery = $mysqli->query("INSERT INTO game_seuck (game_id,seuck) VALUES ('$game_id','$seuck')") or die("Couldn't insert seuck tick box info");
-    }
-
-    // UPDATE THE STOS TICK BOX INFO
-    // Start off by deleting previos value
-    $sdbquery = $mysqli->query("DELETE FROM game_stos WHERE game_id='$game_id'") or die("STOS Deletion failed");
-    ;
-
-    // then insert the new value if it has been passed.
-    if (isset($stos)) {
-        $sdbquery = $mysqli->query("INSERT INTO game_stos (game_id,stos) VALUES ('$game_id','$stos')");
-    }
-
-    // UPDATE THE STAC TICK BOX INFO
-    // Start off by deleting previos value
-    $sdbquery = $mysqli->query("DELETE FROM game_stac WHERE game_id='$game_id'");
-
-    // then insert the new value if it has been passed.
-    if (isset($stac)) {
-        $sdbquery = $mysqli->query("INSERT INTO game_stac (game_id,stac) VALUES ('$game_id','$stac')") or die("Couldn't insert stac tick box info");
+    // Insert the all the attributes again
+    if (isset($attribute_hardware_types)) {
+        foreach ($attribute_hardware_types as $hattribute_type) {
+            $sdbquery = $mysqli->query("INSERT INTO game_attributes_hardware (game_id,attribute_hardware_type_id) VALUES ($game_id,$hattribute_type)");
+        }
     }
 
     $_SESSION['edit_message'] = "Game has been modified";
@@ -433,21 +307,8 @@ if (isset($action) and $action == 'delete_game') {
                                         $sdbquery = $mysqli->query("DELETE FROM game_developer WHERE game_id = '$game_id' ");
                                         $sdbquery = $mysqli->query("DELETE FROM game_year WHERE game_id = '$game_id' ");
                                         $sdbquery = $mysqli->query("DELETE FROM game_cat_cross WHERE game_id = '$game_id' ");
-                                        $sdbquery = $mysqli->query("DELETE FROM game_development WHERE game_id='$game_id'");
-                                        $sdbquery = $mysqli->query("DELETE FROM game_unreleased WHERE game_id='$game_id'");
-                                        $sdbquery = $mysqli->query("DELETE FROM game_free WHERE game_id='$game_id'");
-                                        $sdbquery = $mysqli->query("DELETE FROM game_arcade WHERE game_id='$game_id'");
-                                        $sdbquery = $mysqli->query("DELETE FROM game_seuck WHERE game_id='$game_id'");
-                                        $sdbquery = $mysqli->query("DELETE FROM game_stos WHERE game_id='$game_id'");
-                                        $sdbquery = $mysqli->query("DELETE FROM game_wanted WHERE game_id='$game_id'");
-                                        $sdbquery = $mysqli->query("DELETE FROM game_mono WHERE game_id='$game_id'");
-                                        $sdbquery = $mysqli->query("DELETE FROM game_unfinished WHERE game_id='$game_id'");
-                                        $sdbquery = $mysqli->query("DELETE FROM game_falcon_enhan WHERE game_id='$game_id'");
-                                        $sdbquery = $mysqli->query("DELETE FROM game_falcon_only WHERE game_id='$game_id'");
-                                        $sdbquery = $mysqli->query("DELETE FROM game_falcon_rgb WHERE game_id='$game_id'");
-                                        $sdbquery = $mysqli->query("DELETE FROM game_falcon_vga WHERE game_id='$game_id'");
-                                        $sdbquery = $mysqli->query("DELETE FROM game_ste_enhan WHERE game_id='$game_id'");
-                                        $sdbquery = $mysqli->query("DELETE FROM game_ste_only WHERE game_id='$game_id'");
+                                        $sdbquery = $mysqli->query("DELETE FROM game_attributes_hardware WHERE game_id='$game_id'");
+                                        $sdbquery = $mysqli->query("DELETE FROM game_attributes WHERE game_id='$game_id'");
                                         $sdbquery = $mysqli->query("DELETE FROM game_aka WHERE game_id='$game_id'");
                                         $sdbquery = $mysqli->query("DELETE FROM lingo_game WHERE game_id='$game_id'");
                                         $sdbquery = $mysqli->query("DELETE FROM game_similar WHERE game_id='$game_id'");

@@ -123,6 +123,19 @@ function gameinsert_gm()
 
             {/foreach}
                 </div>
+                <div class="games_check_child" id="child_2">
+            {foreach from=$attribute_hardware item=attributes_hardware}
+
+                    <div class="games_check_row">
+                        <div class="links_mod_checkbox">
+                            <input type="checkbox" id="game_attributes_hardware_{$attributes_hardware.attribute_hardware_type_id}" name="attributes_hardware[]" value="{$attributes_hardware.attribute_hardware_type_id}">
+                            <label for="game_attributes_hardware_{$attributes_hardware.attribute_hardware_type_id}"></label>
+                        </div>
+                        <div class="games_check_text">&nbsp; {$attributes_hardware.attribute_hardware_type_name}</div>
+                    </div>
+
+            {/foreach}
+                </div>
 
 
 
