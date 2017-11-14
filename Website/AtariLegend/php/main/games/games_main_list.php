@@ -27,13 +27,35 @@ include("../../common/tiles/latest_comments_tile.php");
 include("../../common/tiles/screenstar.php");
 
 // get the game_years from the game_year table
-$sql_year = $mysqli->query("SELECT distinct game_year from game_year order by game_year")
-                     or die("problems getting data from game_year table");
+$sql_year = $mysqli->query("SELECT distinct game_year from game_year order by game_year") or die("problems getting data from game_year table");
 
 while ($game_year = $sql_year->fetch_array(MYSQLI_BOTH)) {
     $smarty->append('game_year', array(
-            'game_year' => $game_year['game_year']));
+        'game_year' => $game_year['game_year']
+    ));
 }
+
+$game_attributes_select = "";
+$game_attributes_join   = "";
+
+$game_attributes_hardware_select = "";
+$game_attributes_hardware_join   = "";
+
+if (isset($attributes)) {
+    foreach ($attributes as $attributes_key => $attributes_value) {
+        $game_attributes_join .= " LEFT JOIN game_attributes AS ga$attributes_key ON (ga$attributes_key.game_id = game.game_id)
+        LEFT JOIN attribute_type AS at$attributes_key ON (at$attributes_key.attribute_type_id = ga$attributes_key.attribute_type_id)";
+        $game_attributes_select .= " AND ga$attributes_key.attribute_type_id = $attributes_value";
+    }
+}
+if (isset($attributes_hardware)) {
+    foreach ($attributes_hardware as $attributes_key => $attributes_value) {
+        $game_attributes_join .= " LEFT JOIN game_attributes_hardware AS gah$attributes_key ON (gah$attributes_key.game_id = game.game_id)
+        LEFT JOIN attribute_hardware_type AS aht$attributes_key ON (aht$attributes_key.attribute_hardware_type_id = gah$attributes_key.attribute_hardware_type_id)";
+        $game_attributes_select .= " AND gah$attributes_key.attribute_hardware_type_id = $attributes_value";
+    }
+}
+
 
 date_default_timezone_set('UTC');
 $start = microtime(true);
@@ -41,106 +63,68 @@ $start = microtime(true);
 // First create base sql statements
 if (empty($game_author)) {
     $RESULTGAME = "SELECT game.game_id,
-            game.game_name,
-            review_game.review_game_id,
-            game_boxscan.game_boxscan_id,
-            screenshot_game.screenshot_id,
-            game_music.music_id,
-            game_download.game_download_id,
-            game_falcon_only.falcon_only,
-            game_falcon_enhan.falcon_enhanced,
-            game_falcon_rgb.falcon_rgb,
-            game_falcon_vga.falcon_vga,
-            game_ste_enhan.ste_enhanced,
-            game_ste_only.ste_only,
-            pd1.pub_dev_name as 'publisher_name',
-            pd1.pub_dev_id as 'publisher_id',
-            pd2.pub_dev_name as 'developer_name',
-            pd2.pub_dev_id as 'developer_id',
-            game_year.game_year,
-            game_cat_cross.game_cat_id,
-            game_cat.game_cat_name
-            FROM game
-            LEFT JOIN review_game ON (review_game.game_id = game.game_id)
-            LEFT JOIN game_boxscan ON (game_boxscan.game_id = game.game_id)
-            LEFT JOIN game_cat_cross ON (game_cat_cross.game_id = game.game_id)
-            LEFT JOIN game_cat ON (game_cat_cross.game_cat_id = game_cat.game_cat_id)
-            LEFT JOIN screenshot_game ON (screenshot_game.game_id = game.game_id)
-            LEFT JOIN game_music ON (game_music.game_id = game.game_id)
-            LEFT JOIN game_download ON (game_download.game_id = game.game_id)
-            LEFT JOIN game_falcon_only ON (game_falcon_only.game_id = game.game_id)
-            LEFT JOIN game_falcon_enhan ON (game.game_id = game_falcon_enhan.game_id)
-            LEFT JOIN game_falcon_rgb ON (game_falcon_rgb.game_id = game.game_id)
-            LEFT JOIN game_falcon_vga ON (game.game_id = game_falcon_vga.game_id)
-            LEFT JOIN game_ste_enhan ON (game.game_id = game_ste_enhan.game_id)
-            LEFT JOIN game_ste_only ON (game.game_id = game_ste_only.game_id)
-            LEFT JOIN game_free ON (game.game_id = game_free.game_id)
-            LEFT JOIN game_arcade ON (game.game_id = game_arcade.game_id)
-            LEFT JOIN game_development ON (game.game_id = game_development.game_id)
-          LEFT JOIN game_unreleased ON (game.game_id = game_unreleased.game_id)
-          LEFT JOIN game_unfinished ON (game.game_id = game_unfinished.game_id)
-          LEFT JOIN game_mono ON (game.game_id = game_mono.game_id)
-          LEFT JOIN game_seuck ON (game.game_id = game_seuck.game_id)
-          LEFT JOIN game_stos ON (game.game_id = game_stos.game_id)
-          LEFT JOIN game_stac ON (game.game_id = game_stac.game_id)
-          LEFT JOIN game_wanted ON (game.game_id = game_wanted.game_id)
-          LEFT JOIN game_publisher ON (game_publisher.game_id = game.game_id)
-          LEFT JOIN pub_dev pd1 ON (pd1.pub_dev_id = game_publisher.pub_dev_id)
-          LEFT JOIN game_developer ON (game_developer.game_id = game.game_id)
-          LEFT JOIN pub_dev pd2 on (pd2.pub_dev_id = game_developer.dev_pub_id)
-          LEFT JOIN game_year on (game_year.game_id = game.game_id)
+        game.game_name,
+        review_game.review_game_id,
+        game_boxscan.game_boxscan_id,
+        screenshot_game.screenshot_id,
+        game_music.music_id,
+        game_download.game_download_id,
+        pd1.pub_dev_name as 'publisher_name',
+        pd1.pub_dev_id as 'publisher_id',
+        pd2.pub_dev_name as 'developer_name',
+        pd2.pub_dev_id as 'developer_id',
+        game_year.game_year,
+        game_cat_cross.game_cat_id,
+        game_cat.game_cat_name
+        FROM game";
+    $RESULTGAME .= $game_attributes_join;
+    $RESULTGAME .= $game_attributes_hardware_join;
+    $RESULTGAME .= "
+        LEFT JOIN review_game ON (review_game.game_id = game.game_id)
+        LEFT JOIN game_boxscan ON (game_boxscan.game_id = game.game_id)
+        LEFT JOIN game_cat_cross ON (game_cat_cross.game_id = game.game_id)
+        LEFT JOIN game_cat ON (game_cat_cross.game_cat_id = game_cat.game_cat_id)
+        LEFT JOIN screenshot_game ON (screenshot_game.game_id = game.game_id)
+        LEFT JOIN game_music ON (game_music.game_id = game.game_id)
+        LEFT JOIN game_download ON (game_download.game_id = game.game_id)
+        LEFT JOIN game_publisher ON (game_publisher.game_id = game.game_id)
+        LEFT JOIN pub_dev pd1 ON (pd1.pub_dev_id = game_publisher.pub_dev_id)
+        LEFT JOIN game_developer ON (game_developer.game_id = game.game_id)
+        LEFT JOIN pub_dev pd2 on (pd2.pub_dev_id = game_developer.dev_pub_id)
+        LEFT JOIN game_year on (game_year.game_id = game.game_id)
         WHERE ";
 } else {
     $RESULTGAME = "SELECT game.game_id,
-            game.game_name,
-            review_game.review_game_id,
-            game_boxscan.game_boxscan_id,
-            screenshot_game.screenshot_id,
-            game_music.music_id,
-            game_download.game_download_id,
-            game_falcon_only.falcon_only,
-            game_falcon_enhan.falcon_enhanced,
-            game_falcon_rgb.falcon_rgb,
-            game_falcon_vga.falcon_vga,
-            game_ste_enhan.ste_enhanced,
-            game_ste_only.ste_only,
-            pd1.pub_dev_name as 'publisher_name',
-            pd1.pub_dev_id as 'publisher_id',
-            pd2.pub_dev_name as 'developer_name',
-            pd2.pub_dev_id as 'developer_id',
-            game_year.game_year,
-            game_cat_cross.game_cat_id,
-            game_cat.game_cat_name
-            FROM game
-            LEFT JOIN game_author ON (game_author.game_id = game.game_id)
-            LEFT JOIN review_game ON (review_game.game_id = game.game_id)
-            LEFT JOIN game_boxscan ON (game_boxscan.game_id = game.game_id)
-            LEFT JOIN game_cat_cross ON (game_cat_cross.game_id = game.game_id)
-            LEFT JOIN game_cat ON (game_cat_cross.game_cat_id = game_cat.game_cat_id)
-            LEFT JOIN screenshot_game ON (screenshot_game.game_id = game.game_id)
-            LEFT JOIN game_music ON (game_music.game_id = game.game_id)
-            LEFT JOIN game_download ON (game_download.game_id = game.game_id)
-            LEFT JOIN game_falcon_only ON (game_falcon_only.game_id = game.game_id)
-            LEFT JOIN game_falcon_enhan ON (game.game_id = game_falcon_enhan.game_id)
-            LEFT JOIN game_falcon_rgb ON (game_falcon_rgb.game_id = game.game_id)
-            LEFT JOIN game_falcon_vga ON (game.game_id = game_falcon_vga.game_id)
-            LEFT JOIN game_ste_enhan ON (game.game_id = game_ste_enhan.game_id)
-            LEFT JOIN game_ste_only ON (game.game_id = game_ste_only.game_id)
-            LEFT JOIN game_free ON (game.game_id = game_free.game_id)
-            LEFT JOIN game_arcade ON (game.game_id = game_arcade.game_id)
-            LEFT JOIN game_development ON (game.game_id = game_development.game_id)
-          LEFT JOIN game_unreleased ON (game.game_id = game_unreleased.game_id)
-          LEFT JOIN game_unfinished ON (game.game_id = game_unfinished.game_id)
-          LEFT JOIN game_mono ON (game.game_id = game_mono.game_id)
-          LEFT JOIN game_seuck ON (game.game_id = game_seuck.game_id)
-          LEFT JOIN game_stos ON (game.game_id = game_stos.game_id)
-          LEFT JOIN game_stac ON (game.game_id = game_stac.game_id)
-          LEFT JOIN game_wanted ON (game.game_id = game_wanted.game_id)
-          LEFT JOIN game_publisher ON (game_publisher.game_id = game.game_id)
-          LEFT JOIN pub_dev pd1 ON (pd1.pub_dev_id = game_publisher.pub_dev_id)
-          LEFT JOIN game_developer ON (game_developer.game_id = game.game_id)
-          LEFT JOIN pub_dev pd2 on (pd2.pub_dev_id = game_developer.dev_pub_id)
-          LEFT JOIN game_year on (game_year.game_id = game.game_id)
+        game.game_name,
+        review_game.review_game_id,
+        game_boxscan.game_boxscan_id,
+        screenshot_game.screenshot_id,
+        game_music.music_id,
+        game_download.game_download_id,
+        pd1.pub_dev_name as 'publisher_name',
+        pd1.pub_dev_id as 'publisher_id',
+        pd2.pub_dev_name as 'developer_name',
+        pd2.pub_dev_id as 'developer_id',
+        game_year.game_year,
+        game_cat_cross.game_cat_id,
+        game_cat.game_cat_name
+        FROM game";
+    $RESULTGAME .= $game_attributes_join;
+    $RESULTGAME .= $game_attributes_hardware_join;
+    $RESULTGAME .= "
+        LEFT JOIN game_author ON (game_author.game_id = game.game_id)
+        LEFT JOIN review_game ON (review_game.game_id = game.game_id)
+        LEFT JOIN game_boxscan ON (game_boxscan.game_id = game.game_id)
+        LEFT JOIN game_cat_cross ON (game_cat_cross.game_id = game.game_id)
+        LEFT JOIN game_cat ON (game_cat_cross.game_cat_id = game_cat.game_cat_id)
+        LEFT JOIN screenshot_game ON (screenshot_game.game_id = game.game_id)
+        LEFT JOIN game_music ON (game_music.game_id = game.game_id)
+        LEFT JOIN game_download ON (game_download.game_id = game.game_id)
+        LEFT JOIN game_publisher ON (game_publisher.game_id = game.game_id)
+        LEFT JOIN pub_dev pd1 ON (pd1.pub_dev_id = game_publisher.pub_dev_id)
+        LEFT JOIN game_developer ON (game_developer.game_id = game.game_id)
+        LEFT JOIN pub_dev pd2 on (pd2.pub_dev_id = game_developer.dev_pub_id)
+        LEFT JOIN game_year on (game_year.game_id = game.game_id)
         WHERE ";
 }
 
@@ -153,12 +137,6 @@ if (empty($game_author)) {
              screenshot_game.screenshot_id,
              game_music.music_id,
              game_download.game_download_id,
-             game_falcon_only.falcon_only,
-             game_falcon_enhan.falcon_enhanced,
-             game_falcon_rgb.falcon_rgb,
-             game_falcon_vga.falcon_vga,
-             game_ste_enhan.ste_enhanced,
-             game_ste_only.ste_only,
              pd1.pub_dev_name as 'publisher_name',
              pd1.pub_dev_id as 'publisher_id',
              pd2.pub_dev_name as 'developer_name',
@@ -167,7 +145,10 @@ if (empty($game_author)) {
              game_cat_cross.game_cat_id,
              game_cat.game_cat_name
           FROM game_aka
-          LEFT JOIN game ON (game_aka.game_id = game.game_id)
+          LEFT JOIN game ON (game_aka.game_id = game.game_id)";
+    $RESULTAKA .= $game_attributes_join;
+    $RESULTAKA .= $game_attributes_hardware_join;
+    $RESULTAKA .= "
           LEFT JOIN review_game ON (review_game.game_id = game.game_id)
           LEFT JOIN game_cat_cross ON (game_cat_cross.game_id = game.game_id)
           LEFT JOIN game_cat ON (game_cat_cross.game_cat_id = game_cat.game_cat_id)
@@ -175,22 +156,6 @@ if (empty($game_author)) {
           LEFT JOIN screenshot_game ON (screenshot_game.game_id = game.game_id)
           LEFT JOIN game_music ON (game_music.game_id = game.game_id)
           LEFT JOIN game_download ON (game_download.game_id = game.game_id)
-          LEFT JOIN game_falcon_only ON (game_falcon_only.game_id = game.game_id)
-          LEFT JOIN game_falcon_enhan ON (game.game_id = game_falcon_enhan.game_id)
-          LEFT JOIN game_falcon_rgb ON (game_falcon_rgb.game_id = game.game_id)
-          LEFT JOIN game_falcon_vga ON (game.game_id = game_falcon_vga.game_id)
-          LEFT JOIN game_ste_enhan ON (game.game_id = game_ste_enhan.game_id)
-          LEFT JOIN game_ste_only ON (game.game_id = game_ste_only.game_id)
-          LEFT JOIN game_free ON (game.game_id = game_free.game_id)
-          LEFT JOIN game_arcade ON (game.game_id = game_arcade.game_id)
-          LEFT JOIN game_development ON (game.game_id = game_development.game_id)
-          LEFT JOIN game_unreleased ON (game.game_id = game_unreleased.game_id)
-          LEFT JOIN game_unfinished ON (game.game_id = game_unfinished.game_id)
-          LEFT JOIN game_mono ON (game.game_id = game_mono.game_id)
-          LEFT JOIN game_seuck ON (game.game_id = game_seuck.game_id)
-          LEFT JOIN game_stos ON (game.game_id = game_stos.game_id)
-          LEFT JOIN game_stac ON (game.game_id = game_stac.game_id)
-          LEFT JOIN game_wanted ON (game.game_id = game_wanted.game_id)
           LEFT JOIN game_publisher ON (game.game_id = game_publisher.game_id)
           LEFT JOIN pub_dev pd1 ON (game_publisher.pub_dev_id = pd1.pub_dev_id)
           LEFT JOIN game_developer ON (game.game_id = game_developer.game_id)
@@ -206,12 +171,6 @@ if (empty($game_author)) {
              screenshot_game.screenshot_id,
              game_music.music_id,
              game_download.game_download_id,
-             game_falcon_only.falcon_only,
-             game_falcon_enhan.falcon_enhanced,
-             game_falcon_rgb.falcon_rgb,
-             game_falcon_vga.falcon_vga,
-             game_ste_enhan.ste_enhanced,
-             game_ste_only.ste_only,
              pd1.pub_dev_name as 'publisher_name',
              pd1.pub_dev_id as 'publisher_id',
              pd2.pub_dev_name as 'developer_name',
@@ -220,7 +179,10 @@ if (empty($game_author)) {
              game_cat_cross.game_cat_id,
              game_cat.game_cat_name
           FROM game_aka
-          LEFT JOIN game ON (game_aka.game_id = game.game_id)
+          LEFT JOIN game ON (game_aka.game_id = game.game_id)";
+    $RESULTAKA .= $game_attributes_join;
+    $RESULTAKA .= $game_attributes_hardware_join;
+    $RESULTAKA .= "
           LEFT JOIN game_author ON (game_author.game_id = game.game_id)
           LEFT JOIN review_game ON (review_game.game_id = game.game_id)
           LEFT JOIN game_cat_cross ON (game_cat_cross.game_id = game.game_id)
@@ -229,22 +191,6 @@ if (empty($game_author)) {
           LEFT JOIN screenshot_game ON (screenshot_game.game_id = game.game_id)
           LEFT JOIN game_music ON (game_music.game_id = game.game_id)
           LEFT JOIN game_download ON (game_download.game_id = game.game_id)
-          LEFT JOIN game_falcon_only ON (game_falcon_only.game_id = game.game_id)
-          LEFT JOIN game_falcon_enhan ON (game.game_id = game_falcon_enhan.game_id)
-          LEFT JOIN game_falcon_rgb ON (game_falcon_rgb.game_id = game.game_id)
-          LEFT JOIN game_falcon_vga ON (game.game_id = game_falcon_vga.game_id)
-          LEFT JOIN game_ste_enhan ON (game.game_id = game_ste_enhan.game_id)
-          LEFT JOIN game_ste_only ON (game.game_id = game_ste_only.game_id)
-          LEFT JOIN game_free ON (game.game_id = game_free.game_id)
-          LEFT JOIN game_arcade ON (game.game_id = game_arcade.game_id)
-          LEFT JOIN game_development ON (game.game_id = game_development.game_id)
-          LEFT JOIN game_unreleased ON (game.game_id = game_unreleased.game_id)
-          LEFT JOIN game_unfinished ON (game.game_id = game_unfinished.game_id)
-          LEFT JOIN game_mono ON (game.game_id = game_mono.game_id)
-          LEFT JOIN game_seuck ON (game.game_id = game_seuck.game_id)
-          LEFT JOIN game_stos ON (game.game_id = game_stos.game_id)
-          LEFT JOIN game_stac ON (game.game_id = game_stac.game_id)
-          LEFT JOIN game_wanted ON (game.game_id = game_wanted.game_id)
           LEFT JOIN game_publisher ON (game.game_id = game_publisher.game_id)
           LEFT JOIN pub_dev pd1 ON (game_publisher.pub_dev_id = pd1.pub_dev_id)
           LEFT JOIN game_developer ON (game.game_id = game_developer.game_id)
@@ -349,108 +295,15 @@ if (isset($action) and $action == "search") {
         $category_select = " AND game_cat_cross.game_cat_id = $category";
     }
 
-    //
-    // Here comes a bunch of tickbox checks.
-    //
-
-    //if (isset($download) and $download == "1") {
-    //    $download_select = " AND game_download.download_id IS NOT NULL";
-    //}
-
-    //This is just too slow in combination with the advanced options
-    //if (isset($screenshot) and $screenshot == "1") {
-    //    $screenshot_select = " AND screenshot_game.screenshot_id IS NOT NULL";
-    //}
-
-    //if (isset($boxscan) and $boxscan == "1") {
-    //    $boxscan_select = " AND game_boxscan.game_boxscan_id IS NOT NULL";
-    //}
 
     if (isset($review) and $review == "1") {
         $review_select = " AND review_game.review_id IS NOT NULL";
     }
 
-    if (isset($falcon_only) and $falcon_only == "1") {
-        $falcon_only_select = " AND game_falcon_only.falcon_only =$falcon_only";
-        $smarty->assign('games_falcon_only', '1');
-    }
-
-    if (isset($falcon_enhanced) and $falcon_enhanced == "1") {
-        $falcon_enhanced_select = " AND game_falcon_enhan.falcon_enhanced =$falcon_enhanced";
-        $smarty->assign('games_falcon_enhanced', '1');
-    }
-
-    if (isset($falcon_rgb) and $falcon_rgb == "1") {
-        $falcon_rgb_select = " AND game_falcon_rgb.falcon_rgb =$falcon_rgb";
-        $smarty->assign('games_falcon_rgb', '1');
-    }
-
-    if (isset($falcon_vga) and $falcon_vga == "1") {
-        $falcon_vga_select = " AND game_falcon_vga.falcon_vga =$falcon_vga";
-        $smarty->assign('games_falcon_vga', '1');
-    }
-
-    if (isset($ste_only) and $ste_only == "1") {
-        $ste_only_select = " AND game_ste_only.ste_only =$ste_only";
-        $smarty->assign('games_ste_only', '1');
-    }
-
-    if (isset($ste_enhanced) and $ste_enhanced == "1") {
-        $ste_enhanced_select = " AND game_ste_enhan.ste_enhanced =$ste_enhanced";
-        $smarty->assign('games_ste_enhanced', '1');
-    }
-
-    if (isset($free) and $free == "1") {
-        $free_select = " AND game_free.free =$free";
-        $smarty->assign('games_free', '1');
-    }
-
-    if (isset($arcade) and $arcade == "1") {
-        $arcade_select = " AND game_arcade.arcade =$arcade";
-        $smarty->assign('games_arcade', '1');
-    }
-
-    if (isset($development) and $development == "1") {
-        $development_select = " AND game_development.development =$development";
-        $smarty->assign('games_development', '1');
-    }
-
-    if (isset($unreleased) and $unreleased == "1") {
-        $unreleased_select = " AND game_unreleased.unreleased =$unreleased";
-    }
-
-    if (isset($wanted) and $wanted == "1") {
-        $wanted_select = " AND game_wanted.wanted =$wanted";
-    }
-
-    if (isset($monochrome) and $monochrome == "1") {
-        $monochrome_select = " AND game_monochrome.monochrome =$monochrome";
-    }
-
-    if (isset($stos) and $stos == "1") {
-        $stos_select = " AND game_stos.stos =$stos";
-    }
-
-    if (isset($unfinished) and $unfinished == "1") {
-        $unfinished_select = " AND game_unfinished.unfinished =$unfinished";
-    }
-
-    if (isset($seuck) and $seuck == "1") {
-        $seuck_select = " AND game_seuck.seuck =$seuck";
-    }
-
-    if (isset($stac) and $stac == "1") {
-        $stac_select = " AND game_stac.stac =$stac";
-    }
-
-
     //Before we start the build the query, we check if there is at least
     //one search field filled in or used!
 
-    if ($publisher_select == "" and $gamebrowse_select == "" and $publisher_input == "" and $developer_input == "" and $year_input == "" and $cat_input == "" and $gamesearch == "" and $developer_select == "" and $year_select == "" and $category_select == "" and empty($falcon_only_select)
-        and empty($falcon_enhanced_select) and empty($falcon_rgb_select) and empty($falcon_vga_select) and empty($ste_only_select) and empty($ste_enhanced_select) and empty($game_author_select)
-        and empty($unreleased_select) and empty($development_select) and empty($arcade_select) and empty($wanted_select) and empty($monochrome_select) and empty($stos_select)
-        and empty($unfinished_select) and empty($seuck_select) and empty($stac_select) and empty($screenshot) and empty($download) and empty($boxscan) and empty($review_select)) {
+    if ($publisher_select == "" and $gamebrowse_select == "" and $publisher_input == "" and $developer_input == "" and $year_input == "" and $cat_input == "" and $gamesearch == "" and $developer_select == "" and $year_select == "" and $category_select == "" and empty($game_author_select) and empty($screenshot) and empty($download) and empty($boxscan) and empty($review_select)) {
         $edit_message             = "Please fill in one of the fields";
         $_SESSION['edit_message'] = $edit_message;
 
@@ -476,41 +329,23 @@ if (isset($action) and $action == "search") {
 
         if (!empty($publisher_input)) {
             $RESULTGAME .= " AND pd1.pub_dev_name LIKE '%$publisher_input%'";
-        } else {
-            //    $RESULTGAME .= " AND pd1.pub_dev_name LIKE '%'";
         }
 
         if (!empty($developer_input)) {
             $RESULTGAME .= " AND pd2.pub_dev_name LIKE '%$developer_input%'";
-        } else {
-            //   $RESULTGAME .= " AND pd2.pub_dev_name LIKE '%'";
         }
 
         if (!empty($year_input)) {
             $RESULTGAME .= " AND game_year.game_year LIKE '%$year_input%'";
-        } else {
-            //   $RESULTGAME .= " AND game_year.game_year LIKE '%'";
         }
 
         if (!empty($cat_input)) {
             $RESULTGAME .= " AND game_cat.game_cat_name LIKE '%$cat_input%'";
-        } else {
-            //   $RESULTGAME .= " AND game_cat.game_cat_name LIKE '%'";
         }
 
         $RESULTGAME .= $gamebrowse_select;
         $RESULTGAME .= $publisher_select;
         $RESULTGAME .= $developer_select;
-
-        //if (isset($download) and $download == "1") {
-        //    $RESULTGAME .= $download_select;
-        //}
-        //if (isset($screenshot) and $screenshot == "1") {
-        //    $RESULTGAME .= $screenshot_select;
-        //}
-        //if (isset($boxscan) and $boxscan == "1") {
-        //    $RESULTGAME .= $boxscan_select;
-        //}
 
         if (isset($review) and $review == "1") {
             $RESULTGAME .= $review_select;
@@ -524,53 +359,11 @@ if (isset($action) and $action == "search") {
         if (isset($game_author_select)) {
             $RESULTGAME .= $game_author_select;
         }
-        if (isset($falcon_only) and $falcon_only == "1") {
-            $RESULTGAME .= $falcon_only_select;
+        if (isset($game_attributes_select)) {
+            $RESULTGAME .= $game_attributes_select;
         }
-        if (isset($falcon_enhanced) and $falcon_enhanced == "1") {
-            $RESULTGAME .= $falcon_enhanced_select;
-        }
-        if (isset($falcon_rgb) and $falcon_rgb == "1") {
-            $RESULTGAME .= $falcon_rgb_select;
-        }
-        if (isset($falcon_vga) and $falcon_vga == "1") {
-            $RESULTGAME .= $falcon_vga_select;
-        }
-        if (isset($ste_only) and $ste_only == "1") {
-            $RESULTGAME .= $ste_only_select;
-        }
-        if (isset($ste_enhanced) and $ste_enhanced == "1") {
-            $RESULTGAME .= $ste_enhanced_select;
-        }
-        if (isset($free) and $free == "1") {
-            $RESULTGAME .= $free_select;
-        }
-        if (isset($arcade) and $arcade == "1") {
-            $RESULTGAME .= $arcade_select;
-        }
-        if (isset($development) and $development == "1") {
-            $RESULTGAME .= $development_select;
-        }
-        if (isset($unreleased) and $unreleased == "1") {
-            $RESULTGAME .= " AND game_unreleased.unreleased =$unreleased";
-        }
-        if (isset($unfinished) and $unfinished == "1") {
-            $RESULTGAME .= " AND game_unfinished.unfinished =$unfinished";
-        }
-        if (isset($monochrome) and $monochrome == "1") {
-            $RESULTGAME .= " AND game_mono.monochrome =$monochrome";
-        }
-        if (isset($seuck) and $seuck == "1") {
-            $RESULTGAME .= " AND game_seuck.seuck = $seuck";
-        }
-        if (isset($stos) and $stos == "1") {
-            $RESULTGAME .= " AND game_stos.stos = $stos";
-        }
-        if (isset($stac) and $stac == "1") {
-            $RESULTGAME .= " AND game_stac.stac = $stac";
-        }
-        if (isset($wanted) and $wanted == "1") {
-            $RESULTGAME .= " AND game_wanted.game_id IS NOT NULL";
+        if (isset($game_attributes_hardware_select)) {
+            $RESULTGAME .= $game_attributes_hardware_select;
         }
 
         $RESULTGAME .= ' GROUP BY game.game_id, game.game_name HAVING COUNT(DISTINCT game.game_id, game.game_name) = 1';
@@ -590,8 +383,8 @@ if (isset($action) and $action == "search") {
             //check for aka name
             if (!empty($gamesearch)) {
                 $game_aka_name_query = "SELECT aka_name FROM game_aka WHERE aka_name LIKE '%$gamesearch%'";
-                $game_aka_name_sql = $mysqli->query($game_aka_name_query);
-                $rows2 = $game_aka_name_sql->num_rows;
+                $game_aka_name_sql   = $mysqli->query($game_aka_name_query);
+                $rows2               = $game_aka_name_sql->num_rows;
             } else {
                 $rows2 = 0;
             }
@@ -651,57 +444,15 @@ if (isset($action) and $action == "search") {
                 if (isset($category_select)) {
                     $RESULTAKA .= $category_select;
                 }
-                if (isset($falcon_only) and $falcon_only == "1") {
-                    $RESULTAKA .= $falcon_only_select;
+                if (isset($game_attributes_select)) {
+                    $RESULTAKA .= $game_attributes_select;
                 }
-                if (isset($falcon_enhanced) and $falcon_enhanced == "1") {
-                    $RESULTAKA .= $falcon_enhanced_select;
+                if (isset($game_attributes_hardware_select)) {
+                    $RESULTAKA .= $game_attributes_hardware_select;
                 }
-                if (isset($falcon_rgb) and $falcon_rgb == "1") {
-                    $RESULTAKA .= $falcon_rgb_select;
-                }
-                if (isset($falcon_vga) and $falcon_vga == "1") {
-                    $RESULTAKA .= $falcon_vga_select;
-                }
-                if (isset($ste_only) and $ste_only == "1") {
-                    $RESULTAKA .= $ste_only_select;
-                }
-                if (isset($ste_enhanced) and $ste_enhanced == "1") {
-                    $RESULTAKA .= $ste_enhanced_select;
-                }
-                if (isset($free) and $free == "1") {
-                    $RESULTAKA .= $free_select;
-                }
-                if (isset($arcade) and $arcade == "1") {
-                    $RESULTAKA .= $arcade_select;
-                }
-                if (isset($development) and $development == "1") {
-                    $RESULTAKA .= $development_select;
-                }
-                if (isset($unreleased) and $unreleased == "1") {
-                    $RESULTAKA .= " AND game_unreleased.unreleased =$unreleased";
-                }
-                if (isset($unfinished) and $unfinished == "1") {
-                    $RESULTAKA .= " AND game_unfinished.unfinished =$unfinished";
-                }
-                if (isset($monochrome) and $monochrome == "1") {
-                    $RESULTAKA .= " AND game_mono.monochrome =$monochrome";
-                }
-                if (isset($seuck) and $seuck == "1") {
-                    $RESULTAKA .= " AND game_seuck.seuck = $seuck";
-                }
-                if (isset($stos) and $stos == "1") {
-                    $RESULTAKA .= " AND game_stos.stos = $stos";
-                }
-                if (isset($stac) and $stac == "1") {
-                    $RESULTAKA .= " AND game_stac.stac = $stac";
-                }
-                if (isset($wanted) and $wanted == "1") {
-                    $RESULTAKA .= " AND game_wanted.game_id IS NOT NULL";
-                }
+
                 $RESULTAKA .= ' GROUP BY game_aka.game_id, game_aka.aka_name HAVING COUNT(DISTINCT game_aka.game_id, game_aka.aka_name) = 1';
                 $RESULTAKA .= ' ORDER BY game_aka.aka_name ASC';
-
 
                 $mysqli->query("CREATE TEMPORARY TABLE temp ENGINE=MEMORY $RESULTGAME") or die(mysqli_error());
                 $mysqli->query("INSERT INTO temp $RESULTAKA") or die(mysqli_error());
@@ -712,14 +463,14 @@ if (isset($action) and $action == "search") {
 
                 while ($sql_game_search = $temp_query->fetch_array(MYSQLI_BOTH)) {
                     $screenshot_image = '';
-                    $screenshot_id = '';
+                    $screenshot_id    = '';
 
                     //do this for when we only have 1 game result
                     $game_id_1_result = $sql_game_search['game_id'];
 
                     $game_name = $sql_game_search['game_name'];
-                    $pub_name = $sql_game_search['publisher_name'];
-                    $dev_name = $sql_game_search['developer_name'];
+                    $pub_name  = $sql_game_search['publisher_name'];
+                    $dev_name  = $sql_game_search['developer_name'];
 
                     if ($sql_game_search['game_boxscan_id'] != '') {
                         $box = "1";
@@ -778,10 +529,10 @@ if (isset($action) and $action == "search") {
                         if (isset($export) and $export == "1") {
                             // this is the array used in export mode
                             $list_data = array(
-                                'id'=>$i,
-                                'game_id'=>$sql_game_search['game_id'],
-                                'game_name'=>$game_name,
-                                'publisher_id'=> $sql_game_search['publisher_id'],
+                                'id' => $i,
+                                'game_id' => $sql_game_search['game_id'],
+                                'game_name' => $game_name,
+                                'publisher_id' => $sql_game_search['publisher_id'],
                                 'publisher_name' => $pub_name,
                                 'developer_id' => $sql_game_search['developer_id'],
                                 'developer_name' => $dev_name,
@@ -789,13 +540,8 @@ if (isset($action) and $action == "search") {
                                 'music' => $music,
                                 'boxscan' => $box,
                                 'download' => $down,
-                                'screenshot' => $screen,
-                                'falcon_only' => $sql_game_search['falcon_only'],
-                                'falcon_enhan' => $sql_game_search['falcon_enhanced'],
-                                'falcon_rgb' => $sql_game_search['falcon_rgb'],
-                                'falcon_vga' => $sql_game_search['falcon_vga'],
-                                'ste_enhanced' => $sql_game_search['ste_enhanced'],
-                                'ste_only' => $sql_game_search['ste_only']);
+                                'screenshot' => $screen
+                            );
 
                             $data[] = $list_data;
                         } else {
@@ -806,7 +552,7 @@ if (isset($action) and $action == "search") {
                                                                     WHERE game_id='$sql_game_search[game_id]' and game_boxscan_side = '0'
                                                                     ORDER BY RAND() LIMIT 1") or die("Database error - selecting screenshots");
 
-                                while ($screenshot_result =  $sql_screenshots->fetch_array(MYSQLI_BOTH)) {
+                                while ($screenshot_result = $sql_screenshots->fetch_array(MYSQLI_BOTH)) {
                                     //Ready screenshots path and filename
                                     $screenshot_image = $game_boxscan_path;
                                     $screenshot_image .= $screenshot_result['game_boxscan_id'];
@@ -822,7 +568,7 @@ if (isset($action) and $action == "search") {
                                                                     WHERE screenshot_game.game_id = '$sql_game_search[game_id]'
                                                                     ORDER BY RAND() LIMIT 1") or die("Database error - selecting screenshots");
 
-                                while ($screenshot_result =  $sql_screenshots->fetch_array(MYSQLI_BOTH)) {
+                                while ($screenshot_result = $sql_screenshots->fetch_array(MYSQLI_BOTH)) {
                                     //Ready screenshots path and filename
                                     $screenshot_image = $game_screenshot_path;
                                     $screenshot_image .= $screenshot_result['screenshot_id'];
@@ -846,13 +592,7 @@ if (isset($action) and $action == "search") {
                                 'review' => $sql_game_search['review_game_id'],
                                 'path' => $game_screenshot_path,
                                 'screenshot_image' => $screenshot_image,
-                                'screenshot_id' => $screenshot_id,
-                                'falcon_only' => $sql_game_search['falcon_only'],
-                                'falcon_enhan' => $sql_game_search['falcon_enhanced'],
-                                'falcon_rgb' => $sql_game_search['falcon_rgb'],
-                                'falcon_vga' => $sql_game_search['falcon_vga'],
-                                'ste_enhanced' => $sql_game_search['ste_enhanced'],
-                                'ste_only' => $sql_game_search['ste_only']
+                                'screenshot_id' => $screenshot_id
                             ));
                         }
                     }
@@ -885,13 +625,13 @@ if (isset($action) and $action == "search") {
                         header("Location: ../games/games_detail.php?game_id=$game_id_1_result");
                     }
 
-                    $rest4 = $i%4;
+                    $rest4 = $i % 4;
                     $smarty->assign("rest4", $rest4);
 
-                    $rest3 = $i%3;
+                    $rest3 = $i % 3;
                     $smarty->assign("rest3", $rest3);
 
-                    $rest2 = $i%2;
+                    $rest2 = $i % 2;
                     $smarty->assign("rest2", $rest2);
 
                     $smarty->assign("query_time", $time_elapsed_secs);
