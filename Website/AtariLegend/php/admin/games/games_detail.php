@@ -27,64 +27,15 @@ include("../../admin/games/quick_search_games.php");
 //***********************************************************************************
 //Let's get the general game info first.
 //***********************************************************************************
-$sql_game = $mysqli->query("SELECT game_name,
-               game.game_id,
-               game_free.free,
-               game_development.development,
-               game_unreleased.unreleased,
-               game_ste_only.ste_only,
-               game_ste_enhan.ste_enhanced,
-               game_falcon_only.falcon_only,
-               game_falcon_enhan.falcon_enhanced,
-               game_falcon_rgb.falcon_rgb,
-               game_falcon_vga.falcon_vga,
-               game_unfinished.unfinished,
-               game_mono.monochrome,
-               game_wanted.game_wanted_id,
-               game_arcade.arcade,
-               game_seuck.seuck,
-               game_stos.stos,
-               game_stac.stac
+$sql_game = $mysqli->query("SELECT *
                FROM game
-               LEFT JOIN game_free ON (game.game_id = game_free.game_id)
-               LEFT JOIN game_unreleased ON (game.game_id = game_unreleased.game_id)
-               LEFT JOIN game_development ON (game.game_id = game_development.game_id)
-               LEFT JOIN game_ste_only ON (game.game_id = game_ste_only.game_id)
-               LEFT JOIN game_ste_enhan ON (game.game_id = game_ste_enhan.game_id)
-               LEFT JOIN game_falcon_only ON (game.game_id = game_falcon_only.game_id)
-               LEFT JOIN game_falcon_enhan ON (game.game_id = game_falcon_enhan.game_id)
-               LEFT JOIN game_falcon_rgb ON (game.game_id = game_falcon_rgb.game_id)
-               LEFT JOIN game_falcon_vga ON (game.game_id = game_falcon_vga.game_id)
-               LEFT JOIN game_arcade ON (game.game_id = game_arcade.game_id)
-               LEFT JOIN game_seuck ON (game.game_id = game_seuck.game_id)
-               LEFT JOIN game_stos ON (game.game_id = game_stos.game_id)
-               LEFT JOIN game_stac ON (game.game_id = game_stac.game_id)
-               LEFT JOIN game_unfinished ON (game.game_id = game_unfinished.game_id)
-               LEFT JOIN game_mono ON (game.game_id = game_mono.game_id)
-               LEFT JOIN game_wanted ON (game.game_id = game_wanted.game_id)
-                 WHERE game.game_id='$game_id'") or die("Error getting game info");
+                 WHERE game_id='$game_id'") or die("Error getting game info");
 
 
 while ($game_info = $sql_game->fetch_array(MYSQLI_BOTH)) {
     $smarty->assign('game_info', array(
         'game_name' => $game_info['game_name'],
-        'game_id' => $game_info['game_id'],
-        'game_free' => $game_info['free'],
-        'game_development' => $game_info['development'],
-        'game_unreleased' => $game_info['unreleased'],
-        'game_ste_only' => $game_info['ste_only'],
-        'game_ste_enhan' => $game_info['ste_enhanced'],
-        'game_falcon_only' => $game_info['falcon_only'],
-        'game_falcon_enhan' => $game_info['falcon_enhanced'],
-        'game_falcon_rgb' => $game_info['falcon_rgb'],
-        'game_falcon_vga' => $game_info['falcon_vga'],
-        'game_unfinished' => $game_info['unfinished'],
-        'game_mono' => $game_info['monochrome'],
-        'game_wanted' => $game_info['game_wanted_id'],
-        'game_arcade' => $game_info['arcade'],
-        'game_seuck' => $game_info['seuck'],
-        'game_stos' => $game_info['stos'],
-        'game_stac' => $game_info['stac']
+        'game_id' => $game_info['game_id']
     ));
 }
 
