@@ -69,4 +69,54 @@ INSERT INTO game_attributes (attribute_type_id,game_id) SELECT 8,game_id FROM ga
 $result = $mysqli->query("
 INSERT INTO game_attributes (attribute_type_id,game_id) SELECT 9,game_id FROM game_development")
     or die("Error selecting game_development tables: ".$mysqli->error);
+
+// game_faclon_enhan tables
+$result = $mysqli->query("
+INSERT INTO game_attributes (attribute_type_id,game_id) SELECT 10,game_id FROM game_falcon_enhan")
+    or die("Error selecting game_falcon_enhan tables: ".$mysqli->error);
+
+// game_faclon_only tables
+$result = $mysqli->query("
+DELETE FROM game_falcon_only WHERE game_id = 27")
+    or die("Error selecting game_faclon_only tables: ".$mysqli->error);
+$result = $mysqli->query("
+INSERT INTO game_attributes (attribute_type_id,game_id) SELECT 11,game_id FROM game_falcon_only")
+    or die("Error selecting game_faclon_only tables: ".$mysqli->error);
+
+// game_faclon_rgb tables
+$result = $mysqli->query("
+INSERT INTO game_attributes (attribute_type_id,game_id) SELECT 12,game_id FROM game_falcon_rgb")
+    or die("Error selecting game_faclon_rgb tables: ".$mysqli->error);
+
+// game_faclon_vga tables
+$result = $mysqli->query("
+INSERT INTO game_attributes (attribute_type_id,game_id) SELECT 13,game_id FROM game_falcon_vga")
+    or die("Error selecting game_faclon_vga tables: ".$mysqli->error);
+
+// game_mono tables
+$result = $mysqli->query("
+DELETE FROM game_mono WHERE game_id = 4072")
+    or die("Error selecting game_faclon_only tables: ".$mysqli->error);
+$result = $mysqli->query("
+DELETE FROM game_mono WHERE game_id = 5313")
+    or die("Error selecting game_faclon_only tables: ".$mysqli->error);
+$result = $mysqli->query("
+DELETE FROM game_mono WHERE game_id = 5386")
+    or die("Error selecting game_faclon_only tables: ".$mysqli->error);
+$result = $mysqli->query("
+DELETE FROM game_mono WHERE game_id = 5741")
+    or die("Error selecting game_faclon_only tables: ".$mysqli->error);
+$result = $mysqli->query("
+INSERT INTO game_attributes (attribute_type_id,game_id) SELECT 14,game_id FROM game_mono")
+    or die("Error selecting game_mono tables: ".$mysqli->error);
+
+// game_ste_enhan tables
+$result = $mysqli->query("
+INSERT INTO game_attributes (attribute_type_id,game_id) SELECT 15,game_id FROM game_ste_enhan")
+    or die("Error selecting game_ste_enhan tables: ".$mysqli->error);
+
+// game_ste_only tables
+$result = $mysqli->query("
+INSERT INTO game_attributes (attribute_type_id,game_id) SELECT 16,game_id FROM game_ste_only")
+    or die("Error selecting game_ste_only tables: ".$mysqli->error);
 ?>

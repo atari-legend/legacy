@@ -11,7 +11,7 @@
 ***************************************************************************/
 
 // Unique identifier set by developer.
-$database_update_id = 118;
+$database_update_id = 116;
 
 // Description of what the change will do.
 $update_description = "Drop old game attributes tables";

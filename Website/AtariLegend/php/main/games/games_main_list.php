@@ -566,7 +566,8 @@ if (isset($action) and $action == "search") {
                                                                     FROM screenshot_game
                                                                     LEFT JOIN screenshot_main ON (screenshot_game.screenshot_id = screenshot_main.screenshot_id)
                                                                     WHERE screenshot_game.game_id = '$sql_game_search[game_id]'
-                                                                    ORDER BY RAND() LIMIT 1") or die("Database error - selecting screenshots");
+                                                                    ORDER BY RAND() LIMIT 1")
+                                                                    or die("Database error - selecting screenshots");
 
                                 while ($screenshot_result = $sql_screenshots->fetch_array(MYSQLI_BOTH)) {
                                     //Ready screenshots path and filename

@@ -10,7 +10,7 @@
 ***************************************************************************/
 
 // Unique identifier set by developer.
-$database_update_id = 116;
+$database_update_id = 115;
 
 // Description of what the change will do.
 $update_description = "Populate game_attributes table";

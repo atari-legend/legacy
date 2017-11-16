@@ -11,7 +11,7 @@
 ***************************************************************************/
 
 // Unique identifier set by developer.
-$database_update_id = 110;
+$database_update_id = 111;
 
 // Description of what the change will do.
 $update_description = "Create attribute type table";
@@ -25,9 +25,13 @@ WHERE table_schema = '$db_databasename' AND table_name = 'attribute_type' LIMIT 
 
 // Database change
 $database_update_sql = "CREATE TABLE `attribute_type` (
-  `attribute_type_id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  `attribute_type_name` varchar(255) COLLATE 'utf8_general_ci' NOT NULL
-) COMMENT='' ENGINE='InnoDB' COLLATE 'utf8_general_ci'";
+  `attribute_type_id` int(11) NOT NULL AUTO_INCREMENT,
+  `attribute_type_name` varchar(255) NOT NULL,
+  `attribute_category_id` int(11) NOT NULL,
+  PRIMARY KEY (`attribute_type_id`),
+  KEY `attribute_category_id` (`attribute_category_id`),
+  CONSTRAINT `attribute_type_ibfk_1` FOREIGN KEY (`attribute_category_id`) REFERENCES `attribute_category` (`attribute_category_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8";
 
 // If the update should auto execute without user interaction set to "yes".
 $database_autoexecute = "yes";

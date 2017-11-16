@@ -26,17 +26,24 @@ WHERE table_schema = '$db_databasename' AND table_name = 'attribute_type' LIMIT 
 // Database change
 $database_update_sql = "
 INSERT INTO attribute_type
-  (attribute_type_name)
+  (attribute_type_name,attribute_category_id)
 VALUES
-  ('Arcade'),
-  ('Non Commercial'),
-  ('SEUCK'),
-  ('STAC'),
-  ('Unfinished'),
-  ('Unreleased'),
-  ('Wanted'),
-  ('Stos'),
-  ('In Development');";
+  ('Arcade','1'),
+  ('Non Commercial','1'),
+  ('SEUCK','1'),
+  ('STAC','1'),
+  ('Unfinished','1'),
+  ('Unreleased','1'),
+  ('Wanted','1'),
+  ('Stos','1'),
+  ('In Development','1'),
+  ('Falcon Enhanced','2'),
+  ('Falcon Only','2'),
+  ('Falcon RGB','2'),
+  ('Falcon VGA','2'),
+  ('Monochrome Only','2'),
+  ('STE Enhanced','2'),
+  ('STE Only','2');";
 
 // If the update should auto execute without user interaction set to "yes".
 $database_autoexecute = "yes";

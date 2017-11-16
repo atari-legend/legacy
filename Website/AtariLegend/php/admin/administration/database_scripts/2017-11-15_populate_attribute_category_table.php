@@ -1,9 +1,9 @@
 <?php
 /***************************************************************************
-*                                2017-11-11_game_attributes_hardware_table.php
+*                                2017-11-15_populate_attribute_category_table.php
 *                            -----------------------
 *   begin                : 2017-11-11
-*   copyright            : (C) 2016 Atari Legend
+*   copyright            : (C) 2017 Atari Legend
 *   email                : silversurfer@atari-forum.com
 *   actual update        :
 *
@@ -14,27 +14,21 @@
 $database_update_id = 113;
 
 // Description of what the change will do.
-$update_description = "Create game_attributes_hardware table";
+$update_description = "Populate attribute_category table";
 
 // Should the database change query execute if test is "test_fail" or "test_success"
-$execute_condition = "test_fail";
+$execute_condition = "test_success";
 
 //This is the test query, the query should be made to get an either true or false result.
 $test_condition = "SELECT * FROM information_schema.tables
-WHERE table_schema = '$db_databasename' AND table_name = 'game_attributes_hardware' LIMIT 1";
+WHERE table_schema = '$db_databasename' AND table_name = 'attribute_category' LIMIT 1";
 
 // Database change
-$database_update_sql = "
-CREATE TABLE `game_attributes_hardware` (
-  `game_attributes_hardware_id` int(11) NOT NULL AUTO_INCREMENT,
-  `attribute_hardware_type_id` int(11) NOT NULL,
-  `game_id` int(11) NOT NULL,
-  PRIMARY KEY (`game_attributes_hardware_id`),
-  KEY `attribute_hardware_type_id` (`attribute_hardware_type_id`),
-  KEY `game_id` (`game_id`),
-  CONSTRAINT `game_attributes_hardware_ibfk_1` FOREIGN KEY (`attribute_hardware_type_id`) REFERENCES `attribute_hardware_type` (`attribute_hardware_type_id`),
-  CONSTRAINT `game_attributes_hardware_ibfk_2` FOREIGN KEY (`game_id`) REFERENCES `game` (`game_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;";
+$database_update_sql = "INSERT INTO attribute_category
+  (attribute_category_name)
+VALUES
+  ('General'),
+  ('Hardware')";
 
 // If the update should auto execute without user interaction set to "yes".
 $database_autoexecute = "yes";
