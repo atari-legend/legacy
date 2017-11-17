@@ -257,15 +257,11 @@
                     {/if}
                 {/foreach}
             {/if}
-            {if isset($game_hardware_attributes) || isset($game_attributes)}
+            {if isset($game_attributes)}
                 <tr>
                     <td width="30%">
                         <span class="games_main_detail_info_right">Specifics</span>
                             {foreach from=$game_attributes item=attributes}
-                                <br>
-                            {/foreach}
-
-                            {foreach from=$game_hardware_attributes item=hattributes}
                                 <br>
                             {/foreach}
                     </td>
@@ -274,19 +270,11 @@
                         {foreach from=$game_attributes item=attributes}
                             <br>
                         {/foreach}
-
-                        {foreach from=$game_hardware_attributes item=hattributes}
-                            <br>
-                        {/foreach}
                     </td>
                     <td width="60%">
                         <span class="standard_tile_subtext">
                             {foreach from=$game_attributes item=attributes}
                                 {$attributes.attribute_type_name}<br>
-                            {/foreach}
-
-                            {foreach from=$game_hardware_attributes item=hattributes}
-                                {$hattributes.attribute_hardware_type_name}<br>
                             {/foreach}
                         </span>
                     </td>

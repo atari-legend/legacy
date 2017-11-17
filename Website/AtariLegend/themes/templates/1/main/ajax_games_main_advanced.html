@@ -41,21 +41,6 @@
         <div class="games_main_child" id="child_2_games">
            <br>
 
-           {foreach from=$attribute_hardware_types item=attributes_hardware}
-           <div class="games_main_row_site">
-                <div class="games_main_text_check"><h6>{$attributes_hardware.attribute_hardware_type_name}</h6></div>
-                <div class="games_main_text_short"><h6>:</h6></div>
-                <div class="games_main_input_check">
-                    <div class="games_check_row">
-                        <div class="links_mod_checkbox">
-                            <input type="checkbox" id="game_attributes_hardware_{$attributes_hardware.attribute_hardware_type_id}" name="attributes_hardware[]" value="{$attributes_hardware.attribute_hardware_type_id}">
-                            <label for="game_attributes_hardware_{$attributes_hardware.attribute_hardware_type_id}"></label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {/foreach}
-
             <br>
         </div>
     </div>

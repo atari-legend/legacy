@@ -38,9 +38,6 @@ while ($game_year = $sql_year->fetch_array(MYSQLI_BOTH)) {
 $game_attributes_select = "";
 $game_attributes_join   = "";
 
-$game_attributes_hardware_select = "";
-$game_attributes_hardware_join   = "";
-
 if (isset($attributes)) {
     foreach ($attributes as $attributes_key => $attributes_value) {
         $game_attributes_join .= " LEFT JOIN game_attributes AS ga$attributes_key ON (ga$attributes_key.game_id = game.game_id)
@@ -48,14 +45,6 @@ if (isset($attributes)) {
         $game_attributes_select .= " AND ga$attributes_key.attribute_type_id = $attributes_value";
     }
 }
-if (isset($attributes_hardware)) {
-    foreach ($attributes_hardware as $attributes_key => $attributes_value) {
-        $game_attributes_join .= " LEFT JOIN game_attributes_hardware AS gah$attributes_key ON (gah$attributes_key.game_id = game.game_id)
-        LEFT JOIN attribute_hardware_type AS aht$attributes_key ON (aht$attributes_key.attribute_hardware_type_id = gah$attributes_key.attribute_hardware_type_id)";
-        $game_attributes_select .= " AND gah$attributes_key.attribute_hardware_type_id = $attributes_value";
-    }
-}
-
 
 date_default_timezone_set('UTC');
 $start = microtime(true);
@@ -78,7 +67,6 @@ if (empty($game_author)) {
         game_cat.game_cat_name
         FROM game";
     $RESULTGAME .= $game_attributes_join;
-    $RESULTGAME .= $game_attributes_hardware_join;
     $RESULTGAME .= "
         LEFT JOIN review_game ON (review_game.game_id = game.game_id)
         LEFT JOIN game_boxscan ON (game_boxscan.game_id = game.game_id)
@@ -110,7 +98,6 @@ if (empty($game_author)) {
         game_cat.game_cat_name
         FROM game";
     $RESULTGAME .= $game_attributes_join;
-    $RESULTGAME .= $game_attributes_hardware_join;
     $RESULTGAME .= "
         LEFT JOIN game_author ON (game_author.game_id = game.game_id)
         LEFT JOIN review_game ON (review_game.game_id = game.game_id)
@@ -147,7 +134,6 @@ if (empty($game_author)) {
           FROM game_aka
           LEFT JOIN game ON (game_aka.game_id = game.game_id)";
     $RESULTAKA .= $game_attributes_join;
-    $RESULTAKA .= $game_attributes_hardware_join;
     $RESULTAKA .= "
           LEFT JOIN review_game ON (review_game.game_id = game.game_id)
           LEFT JOIN game_cat_cross ON (game_cat_cross.game_id = game.game_id)
@@ -181,7 +167,6 @@ if (empty($game_author)) {
           FROM game_aka
           LEFT JOIN game ON (game_aka.game_id = game.game_id)";
     $RESULTAKA .= $game_attributes_join;
-    $RESULTAKA .= $game_attributes_hardware_join;
     $RESULTAKA .= "
           LEFT JOIN game_author ON (game_author.game_id = game.game_id)
           LEFT JOIN review_game ON (review_game.game_id = game.game_id)
@@ -362,9 +347,6 @@ if (isset($action) and $action == "search") {
         if (isset($game_attributes_select)) {
             $RESULTGAME .= $game_attributes_select;
         }
-        if (isset($game_attributes_hardware_select)) {
-            $RESULTGAME .= $game_attributes_hardware_select;
-        }
 
         $RESULTGAME .= ' GROUP BY game.game_id, game.game_name HAVING COUNT(DISTINCT game.game_id, game.game_name) = 1';
         $RESULTGAME .= ' ORDER BY game_name ASC';
@@ -446,9 +428,6 @@ if (isset($action) and $action == "search") {
                 }
                 if (isset($game_attributes_select)) {
                     $RESULTAKA .= $game_attributes_select;
-                }
-                if (isset($game_attributes_hardware_select)) {
-                    $RESULTAKA .= $game_attributes_hardware_select;
                 }
 
                 $RESULTAKA .= ' GROUP BY game_aka.game_id, game_aka.aka_name HAVING COUNT(DISTINCT game_aka.game_id, game_aka.aka_name) = 1';

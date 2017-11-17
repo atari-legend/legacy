@@ -31,21 +31,6 @@ while ($attribute_types = $sql_attribute_type->fetch_array(MYSQLI_BOTH)) {
     ));
 }
 
-//***********************************************************************************
-//get the game hardware attributes
-//***********************************************************************************
-
-$sql_attribute_hardware_type = $mysqli->query("SELECT * FROM attribute_hardware_type") or die('Error: ' . mysqli_error($mysqli));
-
-while ($attribute_hardware_types = $sql_attribute_hardware_type->fetch_array(MYSQLI_BOTH)) {
-    $smarty->append('attribute_hardware_types', array(
-        'attribute_hardware_type_id' => $attribute_hardware_types['attribute_hardware_type_id'],
-        'attribute_hardware_type_name' => $attribute_hardware_types['attribute_hardware_type_name']
-    ));
-}
-
-
-
 //Send all smarty variables to the templates
 $smarty->display("file:" . $mainsite_template_folder. "ajax_games_main_advanced.html");
 

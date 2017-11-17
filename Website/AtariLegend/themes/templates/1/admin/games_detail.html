@@ -172,19 +172,6 @@ function browseDeveloper(str) {
                                 <div class="gd_basic_game_info_row_checktxt">{$attributes.attribute_type_name}&nbsp;</div>
                             </div>
                             {/foreach}
-
-                            {foreach from=$attribute_hardware_types item=attributes_hardware}
-                            <div class="gd_basic_game_info_row">
-                                <div class="gd_basic_game_info_row_check">
-                                    <div class="links_mod_checkbox">
-                                        <input type="checkbox" id="attribute_hardware_type_{$attributes_hardware.attribute_hardware_type_id}" name="attribute_hardware_types[]" value="{$attributes_hardware.attribute_hardware_type_id}" {if isset($game_hardware_attributes)}{foreach from=$game_hardware_attributes item=hattributes} {if $hattributes.attribute_hardware_type_id == $attributes_hardware.attribute_hardware_type_id} checked{/if}{/foreach}{/if}>
-                                        <label for="attribute_hardware_type_{$attributes_hardware.attribute_hardware_type_id}"></label>
-                                    </div>
-                                </div>
-                                <div class="gd_basic_game_info_row_checktxt">{$attributes_hardware.attribute_hardware_type_name}&nbsp;</div>
-                            </div>
-                            {/foreach}
-
                         </div>
                         <div id="gd_basic_game_info_category">
                             <b>Category</b>

@@ -44,21 +44,6 @@ while ($game_attributes = $sql_game_attributes->fetch_array(MYSQLI_BOTH)) {
 }
 
 //***********************************************************************************
-//get the game hardware attributes
-//***********************************************************************************
-
-$sql_game_attributes_hardware = $mysqli->query("SELECT * FROM game_attributes_hardware
-            LEFT JOIN attribute_hardware_type ON (attribute_hardware_type.attribute_hardware_type_id = game_attributes_hardware.attribute_hardware_type_id)
-               WHERE game_id='$game_id'") or die('Error: ' . mysqli_error($mysqli));
-
-while ($game_hardware_attributes = $sql_game_attributes_hardware->fetch_array(MYSQLI_BOTH)) {
-    $smarty->append('game_hardware_attributes', array(
-        'attribute_hardware_type_id' => $game_hardware_attributes['attribute_hardware_type_id'],
-        'attribute_hardware_type_name' => $game_hardware_attributes['attribute_hardware_type_name']
-    ));
-}
-
-//***********************************************************************************
 //get the release dates
 //***********************************************************************************
 $sql_year = $mysqli->query("SELECT * FROM game_year
