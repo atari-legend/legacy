@@ -224,16 +224,6 @@ if (isset($action) and $action == 'modify_game') {
         }
     }
 
-    // Delete game hardware attributes currently in the database for this game
-    $sdbquery = $mysqli->query("DELETE FROM game_attributes_hardware WHERE game_id=$game_id");
-
-    // Insert the all the attributes again
-    if (isset($attribute_hardware_types)) {
-        foreach ($attribute_hardware_types as $hattribute_type) {
-            $sdbquery = $mysqli->query("INSERT INTO game_attributes_hardware (game_id,attribute_hardware_type_id) VALUES ($game_id,$hattribute_type)");
-        }
-    }
-
     $_SESSION['edit_message'] = "Game has been modified";
 
     create_log_entry('Games', $game_id, 'Game', $game_id, 'Update', $_SESSION['user_id']);

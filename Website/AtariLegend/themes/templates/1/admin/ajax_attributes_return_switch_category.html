@@ -1,0 +1,48 @@
+
+<div class="standard_tile_line"></div>
+<div class="help-tip">
+    <p> </p>
+</div>
+<br>
+<form method="post" name="post" id="category_name_edit">
+    <div style="margin-left:20px;">
+        Change Category name:<br>
+    </div>
+    <input type="text" name="attribute_category_name" id="JSCategoryNameEdit" value="{$attribute_category_name}" class="standard_tile_input_small">
+
+    <input type="hidden" name="action" value="change_attribute_category_name">
+    <input type="hidden" name="attribute_category_id" value="{$attribute_category_id}" id="JSAttributeCategoryNameChangeID">
+    <br><br>
+    <input type="button" value="Change" class="quick_search_games_button" id="JSChangeAttributeCategoryNameButton">
+</form>
+
+<br>
+
+<div class="standard_tile_line"></div>
+<div class="help-tip">
+    <p> </p>
+</div>
+<br>
+{* Attribute Type List *}
+
+    <b>Category "<div class="JSCategoryName" style="display:inline;"><b>{$attribute_category_name}</b></div>" Selected</b><br><br>
+
+    {if isset($attribute_types)}
+        {foreach from=$attribute_types item=line}
+            {$line.attribute_type_name}<br>
+        {/foreach}
+    {else}
+
+    This Category is unused and empty and can be deleted.<br><br>
+    <form method="post" name="post" id="JSDeleteAtributeCategoryForm">
+        <input type="hidden" name="action" value="delete_attribute_category">
+        <input type="hidden" name="attribute_category_id" value="{$attribute_category_id}">
+        <input type="button" value="Delete" class="quick_search_games_button" id="JSDeleteAttributeCategoryButton">
+    </form>
+    {/if}
+
+
+    <br>
+
+
+<br>
