@@ -1,0 +1,35 @@
+<br>
+<div class="main_company_container">
+    <div class="main_company_child" id="child_edit_company" style="text-align:left;">
+        <fieldset>
+            <legend>{$attribute_type_name}</legend>
+                <div id="close_new_disk"><a  style="cursor: pointer;" class="left_nav_link" >Add New Disk</a><br></div>
+                <a  style="cursor: pointer;" class="left_nav_link" >Delete set</a>
+        </fieldset>
+    </div>
+</div>
+<br>
+<br>
+<table class="standard_table_list" id="game_list_table">
+    <tr>
+        <th id="menu_disk_list_th">Title</th>
+        <th id="menu_list_crew_th">Publisher</th>
+        <th id="menu_list_ind_th">Developer</th>
+        <th id="menu_state_th">Year</th>
+    </tr>
+    {if isset($menus)}
+        {foreach from=$menus item=line}
+            <tr id="diskedit_ajax_{$line.menu_disk_id}">
+                <td class="menu_disk_list_td">{if $line.menu_disk_id != ''}<a onclick="editDisk({$line.menu_disk_id})" style="cursor: pointer;">{$line.menu_disk_name}</a>{else}<i>n/a</i>{/if}</td>
+                <td class="menu_list_crew_td">{if isset($line.crew_id)}{$line.crew_name}{else}<i>n/a</i>{/if}</td>
+                <td class="menu_list_ind_td">{if isset($line.ind_id)}{$line.ind_name}{else}<i>n/a</i>{/if}</td>
+                <td class="menu_state_td">{if isset($line.menu_state)}{$line.menu_state}{else}<i>n/a</i>{/if}</td>
+            </tr>
+        {/foreach}
+    {/if}
+    <tr>
+        <td class="standard_table_left" colspan="4">
+            <b></b>
+        </td>
+    </tr>
+</table>

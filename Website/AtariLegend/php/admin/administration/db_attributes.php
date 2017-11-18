@@ -51,8 +51,10 @@ if (isset($attribute_type_name) and $action == "add_new_attribute_type") {
 // Delete attribute Category
 if (isset($attribute_category_id) and $action == "delete_attribute_category") {
 
-    $mysqli->query("DELETE FROM attribute_category WHERE attribute_category_id = '$attribute_category_id')")
+if ($attribute_category_id!==1) {
+    $mysqli->query("DELETE FROM attribute_category WHERE attribute_category_id = '$attribute_category_id'")
     or die('Error: ' . mysqli_error($mysqli));
 
     echo "Attribute Category Deleted!";
+}
 }
