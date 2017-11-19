@@ -143,7 +143,7 @@ function GameSearchListen() {
         if (value.length >= 3) {
             SearchingGame("game_search");
         }
-    }, 100);
+    }, 300);
 }
 
 function addGametoMenu(software_id, menu_disk_id, software_type) {
