@@ -2,48 +2,54 @@
  * menus.js
  * http://www.atarilegend.com
  *
- * Copyright 2017 Mattias Lönnback
  */
 
- (function($) {
+ //This handles the queues
+(function($) {
 
-$.fn.bindWithDelay = function( type, data, fn, timeout, throttle ) {
+    // jQuery on an empty object, we are going to use this as our Queue
+    var ajaxQueue = $({});
 
-    if ( $.isFunction( data ) ) {
-        throttle = timeout;
-        timeout = fn;
-        fn = data;
-        data = undefined;
-    }
+    $.ajaxQueue = function(ajaxOpts) {
+        var jqXHR,
+        dfd = $.Deferred(),
+        promise = dfd.promise();
 
-    // Allow delayed function to be removed with fn in unbind function
-    fn.guid = fn.guid || ($.guid && $.guid++);
+         // run the actual query
+         function doRequest(next) {
+             jqXHR = $.ajax(ajaxOpts);
+             jqXHR.done(dfd.resolve)
+                 .fail(dfd.reject)
+                 .then(next, next);
+         }
 
-    // Bind each separately so that each element has its own delay
-    return this.each(function() {
+         // queue our ajax request
+         ajaxQueue.queue(doRequest);
 
-        var wait = null;
+         // add the abort method
+         promise.abort = function(statusText) {
 
-        function cb() {
-            var e = $.extend(true, { }, arguments[0]);
-            var ctx = this;
-            var throttler = function() {
-                wait = null;
-                fn.apply(ctx, [e]);
-            };
+             // proxy abort to the jqXHR if it is active
+             if (jqXHR) {
+                 return jqXHR.abort(statusText);
+             }
 
-            if (!throttle) { clearTimeout(wait); wait = null; }
-            if (!wait) { wait = setTimeout(throttler, timeout); }
-        }
+             // if there wasn't already a jqXHR we need to remove from queue
+             var queue = ajaxQueue.queue(),
+                 index = $.inArray(doRequest, queue);
 
-        cb.guid = fn.guid;
+             if (index > -1) {
+                 queue.splice(index, 1);
+             }
 
-        $(this).bind(type, data, cb);
-    });
-};
+             // and then reject the deferred
+             dfd.rejectWith(ajaxOpts.context || ajaxOpts, [promise, statusText, ""]);
+             return promise;
+         };
 
-})(jQuery);
-
+         return promise;
+     };
+ })(jQuery);
 
 function OSDMessageDisplay(message) {
     $.notify_osd.create({
@@ -97,7 +103,7 @@ function popAddGames(str) {
             type: "GET",
             dataType: "html",
             // Code to run if the request succeeds;
-            success: function(html) {
+            success: function (html) {
                 $("#JSMenuDetailExpandGames").html(html);
                 $("#gameto_menu_link").html("<a onclick=\"closeAddGames(" + str + ")\" style=\"cursor: pointer;\" class=\"MAINNAV\">Add Game/Tool/Demo to menu</a>");
                 GameSearchListen();
@@ -120,31 +126,32 @@ function SearchingGame(GameSearchAction) {
             var form_values = $("#game_search_menu").serialize() + "&action=game_search&list=inner&query=" + $(".JSGameSearch").val();
         }
     }
-    $.ajax({
+    $.ajaxQueue({
         // The URL for the request
         url: "ajax_addgames_menus.php",
         data: form_values,
         type: "GET",
         dataType: "html",
         // Code to run if the request succeeds;
-        success: function(html) {
+        success: function (html) {
             $("#game_list").html(html);
         }
     });
 }
 
 function GameSearchListen() {
-    $(".JSGameBrowse").change(function() {
+    $(".JSGameBrowse").change(function () {
         SearchingGame("game_browse");
     });
 
-    $(".JSGameSearch").bindWithDelay("keyup", function(e) {
+    $(".JSGameSearch").keyup(function () {
         var value = $(this).val();
         if (value.length >= 3) {
             SearchingGame("game_search");
         }
-    }, 300);
+    });
 }
+
 
 function addGametoMenu(software_id, menu_disk_id, software_type) {
     if (software_id === "") {
