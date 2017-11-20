@@ -55,6 +55,8 @@ foreach (glob("../../admin/administration/database_scripts/*.php") as $filename)
 // Sort array
 asort($database_update);
 
+mysqli_begin_transaction($mysqli) or die("Error while starting transaction: ".$mysqli->error);
+
 foreach ($database_update as $key) {
     //No way around hardcoding database_update table itself...
     if ($key['database_update_id'] == 1) {
@@ -231,6 +233,8 @@ foreach ($database_update as $key) {
         'test_result' => $test_result
     ));
 }
+
+mysqli_commit($mysqli) or die("Unable to commit transaction: ".$mysqli->error);
 
 //Send all smarty variables to the templates
 $smarty->display("file:" . $cpanel_template_folder . "database_update.html");

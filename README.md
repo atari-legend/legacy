@@ -20,14 +20,13 @@ an update/upgrade :wink:
 * Run Grunt to generate the CSS files: `npm run grunt`
 * Point your web server document root to `Website/AtariLegend/`
 * Obtain a dump of the database and import it into your MySQL server
-* Create a PHP file containing the MySQL connection details in `Website/AtariLegend/php/config/connect.php`:
+* Create a PHP file containing the MySQL connection details in `Website/AtariLegend/php/config/connection_settings.php`:
 
 ```php
 <?php
+
+$db_host = "YOUR_DB_HOSTNAME";
 $db_username = "YOUR_DB_USER_NAME";
 $db_password = "YOUR_DB_PASSWORD";
 $db_databasename = "YOUR_DB_NAME";
-
-$mysqli = new mysqli("YOUR_DB_SERVER", $db_username, $db_password, $db_databasename);
-?>
 ```
