@@ -16,17 +16,19 @@
 
 {* Full search list *}
 {if isset($smarty_action) and $smarty_action == "full_list"}
-	<form action="" method="post" name="game_search" id="game_search">
+	<form action="" method="post" name="game_search" id="doc_search_menu">
 		<div class="standard_tile_text">
 			<fieldset class="centered_fieldset">
 			<legend>Search (to add a doc)</legend>
 				By name : <br>
-				<select name="gamebrowse" onchange="browseDoc(this.value,{$menu_disk_id})" id="quick_search_small_select">
+				<select name="docbrowse" class="JSDocBrowse" id="quick_search_small_select">
                     <option value="" SELECTED>-</option>
                     {html_options values=$az_value output=$az_output}
 				</select>
-				<input type="text" name="gamesearch" id="docsearch_menudisk" onkeyup="searchDoc({$menu_disk_id})" class="standard_tile_input_small">
+                <input type="text" name="docsearch" id="docsearch_menudisk" value="" class="standard_tile_input_small JSDocSearch">
                 <br><br>
+                <input type="hidden" name="menu_disk_id" id="menu_disk_id" value="{$menu_disk_id}">
+				<br>
 			</fieldset>
 		</div>
 	</form>

@@ -152,6 +152,40 @@ function GameSearchListen() {
     });
 }
 
+function SearchingDoc(DocSearchAction) {
+    if (DocSearchAction === "doc_browse") {
+        var form_values = $("#doc_search_menu").serialize() + "&action=game_browse&list=inner&query=" + $(".JSDocBrowse").val();
+    } else {
+        if (DocSearchAction === "doc_search") {
+            var form_values = $("#doc_search_menu").serialize() + "&action=game_search&list=inner&query=" + $(".JSDocSearch").val();
+        }
+    }
+    $.ajaxQueue({
+        // The URL for the request
+        url: "ajax_adddocs_menus.php",
+        data: form_values,
+        type: "GET",
+        dataType: "html",
+        // Code to run if the request succeeds;
+        success: function (html) {
+            $("#doc_list").html(html);
+        }
+    });
+}
+
+function DocSearchListen() {
+    $(".JSDocBrowse").change(function () {
+        SearchingDoc("doc_browse");
+    });
+
+    $(".JSDocSearch").keyup(function () {
+        var value = $(this).val();
+        if (value.length >= 3) {
+            SearchingDoc("doc_search");
+        }
+    });
+}
+
 
 function addGametoMenu(software_id, menu_disk_id, software_type) {
     if (software_id === "") {
@@ -475,48 +509,6 @@ function closeAddSet(str, menu_disk_id, title_name) {
     $("#JSMenuDetailExpandSet").html("");
     $("#" + str).html("<a onclick=\"popAddSet(" + str + "," + menu_disk_id + ",'" + title + "')\" style=\"cursor: pointer;\" class=\"standard_tile_link\">Add</a>");
     return;
-}
-
-function browseDoc(str, menu_disk_id) {
-    if (str === "") {
-        $("#doc_list").html("");
-        return;
-    } else {
-        $.ajax({
-            // The URL for the request
-            url: "ajax_adddocs_menus.php",
-            data: "action=game_browse&list=inner&query=" + str + "&menu_disk_id=" + menu_disk_id,
-            type: "GET",
-            dataType: "html",
-            // Code to run if the request succeeds;
-            success: function(html) {
-                $("#doc_list").html(html);
-            }
-        });
-    }
-}
-
-function searchDoc(menu_disk_id) {
-    var JSid = document.getElementById("docsearch_menudisk");
-    var str = JSid.value;
-    if (str === "") {
-        str = "empty";
-        $("#doc_list").html("");
-    } else {
-        if (str.length >= 3) {
-            $.ajax({
-                // The URL for the request
-                url: "ajax_adddocs_menus.php",
-                data: "action=game_search&list=inner&query=" + str + "&menu_disk_id=" + menu_disk_id,
-                type: "GET",
-                dataType: "html",
-                // Code to run if the request succeeds;
-                success: function(html) {
-                    $("#doc_list").html(html);
-                }
-            });
-        }
-    }
 }
 
 function addAuthorstoMenutitle(menu_disk_title_id) {
