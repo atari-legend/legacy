@@ -58,3 +58,11 @@ if ($attribute_category_id!==1) {
     echo "Attribute Category Deleted!";
 }
 }
+// Change name of attribute type name
+if (isset($attribute_type_id) and $action == "change_attribute_type_name") {
+
+$mysqli->query("UPDATE attribute_type SET attribute_type_name = '$attribute_type_name' WHERE attribute_type_id = $attribute_type_id")
+or die('Error: ' . mysqli_error($mysqli));
+
+echo "Attribute name updated!";
+}

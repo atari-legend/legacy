@@ -18,11 +18,15 @@
 include("../../config/common.php");
 include("../../config/admin.php");
 
+
+
+//
+// OPEN ATTRIBUTES EDITOR
+//
 if (isset($attribute_type_id) and $action == "open_attributes_editor") {
 
-
 //***********************************************************************************
-//get the attribute Category list
+//get the attribute type info
 //***********************************************************************************
 
 $sql_attribute_type = $mysqli->query("SELECT * FROM attribute_type WHERE attribute_type_id = $attribute_type_id")
@@ -30,6 +34,7 @@ $sql_attribute_type = $mysqli->query("SELECT * FROM attribute_type WHERE attribu
 
 $attribute_type = $sql_attribute_type->fetch_array(MYSQLI_BOTH);
 
+$smarty->assign("action", "open_attributes_editor");
 $smarty->assign("attribute_type_name", $attribute_type['attribute_type_name']);
 $smarty->assign("attribute_type_id", $attribute_type['attribute_type_id']);
 /*
@@ -46,6 +51,17 @@ while ($attribute_types = $sql_attribute_type->fetch_array(MYSQLI_BOTH)) {
     ));
 } */
 
+//Send all smarty variables to the templates
+$smarty->display("file:" . $cpanel_template_folder . "ajax_attributes_editor.html");
+}
+
+//
+// CLOSE ATTRIBUTES EDITOR
+//
+
+if ($action == "close_attributes_editor") {
+
+$smarty->assign("action", "close_attributes_editor");
 //Send all smarty variables to the templates
 $smarty->display("file:" . $cpanel_template_folder . "ajax_attributes_editor.html");
 }

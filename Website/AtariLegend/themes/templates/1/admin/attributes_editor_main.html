@@ -21,17 +21,18 @@ The main game page
 <script type="text/javascript">
 function OSDMessageDisplay(message) {
     $.notify_osd.create({
-        'text': message, // notification message
-        'icon': '../../../themes/styles/1/images/osd_icons/star.png', // icon path, 48x48
-        'sticky': false, // if true, timeout is ignored
-        'timeout': 4, // disappears after 6 seconds
-        'dismissable': true // can be dismissed manually
+        "text": message, // notification message
+        "icon": "../../../themes/styles/1/images/osd_icons/star.png", // icon path, 48x48
+        "sticky": false, // if true, timeout is ignored
+        "timeout": 4, // disappears after 6 seconds
+        "dismissable": true // can be dismissed manually
     });
 }
 
 $(function () {
     $(".JSAttributeCategoryChange").change(function() {
         AttributeCategoryChange ();
+        AttributeEditorClose();
     });
     $(".JSAddNewAttributeCategoryButton").click(function() {
         AddNewAttributeCategory ();
@@ -64,17 +65,44 @@ $( document ).ajaxComplete(function() {
                 }
         });
     });
-
-$(".JSAttributeTypeCheckbox").change(function() {
-    var attribute_type_id = $(this).val();
-    if ($(this).prop('checked') === true) {
-        $(".JSAttributeTypeCheckbox").not(this).prop("checked", false);
-        AttributeEditor(attribute_type_id);
-    } else {
-        alert("Uncheck this!");
-    }
 });
 
+function AttributesEditorListen() {
+$("#JSChangeAttributeTypeNameButton").click(function() {
+    if ($("#JSAttributeTypeNameEdit").val() === "") {
+        return;
+    } else {
+        var form_values = $("#attribute_type_name_edit").serialize();
+        var attribute_type_id = $("#JSAttributeTypeNameChangeID").val();
+        var new_attribute_name = $("#JSAttributeTypeNameEdit").val();
+        $.ajax({
+            // The URL for the request
+            url: "db_attributes.php",
+            data: form_values,
+            type: "POST",
+            dataType: "html",
+            // Code to run if the request succeeds;
+            success: function(html) {
+                OSDMessageDisplay(html);
+                $(".JSAttributeTypeID_" +attribute_type_id).html(new_attribute_name);
+            }
+        });
+    }
+})
+}
+
+$( document ).on('click',"[id^='edit_attributes_']", function() {
+    var attribute_type_id = "";
+    attribute_type_id = $(this).val();
+    console.log(attribute_type_id);
+    if ($(this).is(":checked")) {
+        $(".JSAttributeTypeCheckbox").not(this).prop("checked", false);
+        AttributeEditorOpen(attribute_type_id);
+        console.log("Open " + attribute_type_id);
+    } else {
+        AttributeEditorClose();
+        console.log("Close " + attribute_type_id);
+    }
 });
 
 function AttributeCategoryNameChange () {
@@ -103,7 +131,7 @@ function AttributeCategoryNameChange () {
 
 function AttributeCategoryChange () {
     var attribute_category_id = $(".JSAttributeCategoryChange").val();
-    if (attribute_category_id == "-") {
+    if (attribute_category_id === "-") {
         $("#AjaxAttributeTypeList").html("");
         return;
     }
@@ -142,6 +170,7 @@ function AddNewAttributeCategory () {
         });
      }
 }
+
 
 function AddNewAttributeType () {
     var type_name = $(".JSNewAttributeType").val();
@@ -182,7 +211,7 @@ function DeleteAttributeCategory() {
     });
 }
 
-function AttributeEditor(attribute_type_id) {
+function AttributeEditorOpen(attribute_type_id) {
     $.ajax({
         // The URL for the request
         url: "ajax_attributes_editor.php",
@@ -192,11 +221,25 @@ function AttributeEditor(attribute_type_id) {
         // Code to run if the request succeeds;
         success: function(html) {
             $("#AjaxAttributesEditor").html(html);
+            AttributesEditorListen();
         }
     });
-
 }
 
+function AttributeEditorClose() {
+
+    $.ajax({
+        // The URL for the request
+        url: "ajax_attributes_editor.php",
+        data: "action=close_attributes_editor",
+        type: "GET",
+        dataType: "html",
+        // Code to run if the request succeeds;
+        success: function(html) {
+            $("#AjaxAttributesEditor").html(html);
+        }
+    });
+}
 </script>
 {/block}
 

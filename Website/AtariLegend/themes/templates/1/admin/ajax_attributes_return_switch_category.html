@@ -33,12 +33,12 @@
 
         {foreach from=$attribute_types item=attributes}
         <div class="games_main_row_site">
-            <div class="games_main_text_check"><h6>{$attributes.attribute_type_name}</h6></div>
+            <div class="games_main_text_check"><h6 class="JSAttributeTypeID_{$attributes.attribute_type_id}">{$attributes.attribute_type_name}</h6></div>
             <div class="games_main_text_short"><h6>:</h6></div>
             <div class="games_main_input_check">
                  <div class="games_check_row">
                     <div class="links_mod_checkbox">
-                        <input type="checkbox" id="edit_attributes_{$attributes.attribute_type_id}" class="JSAttributeTypeCheckbox" name="attributes[]" value="{$attributes.attribute_type_id}">
+                        <input type="checkbox" id="edit_attributes_{$attributes.attribute_type_id}" class="JSAttributeTypeCheckbox" name="attribute_type_id" value="{$attributes.attribute_type_id}">
                         <label for="edit_attributes_{$attributes.attribute_type_id}"></label>
                     </div>
                 </div>
