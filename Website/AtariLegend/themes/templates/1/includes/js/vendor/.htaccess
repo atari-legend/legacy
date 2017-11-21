@@ -1,0 +1,9 @@
+# Aggressively cache vendor resources, since they will never change.
+# If they do, they will get a new version number in their filename, ensuring
+# the new version is requested instead of the old, e.g:
+# jquery-1.2.3.min.js -> jquery-4.5.6.min.js
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresDefault "access plus 5 years"
+</IfModule>
+
