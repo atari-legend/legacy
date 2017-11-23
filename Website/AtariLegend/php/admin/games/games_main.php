@@ -42,17 +42,29 @@ if (isset($_SESSION['edit_message'])) {
     $smarty->assign("message", $_SESSION['edit_message']);
 }
 
-// Attribute Types
-$sql_attribute = $mysqli->query("SELECT attribute_type_id,
-                   attribute_type_name
-                   FROM attribute_type
-                   ORDER BY attribute_type_name ASC")
-                or die("Problems retriving attribute types.");
+// get software devtools list
+$sql_software_devtool = $mysqli->query("SELECT software_devtool_id,
+                   software_devtool_name
+                   FROM software_devtool
+                   ORDER BY software_devtool_name ASC")
+                or die("Problems retriving software_devtool.");
 
-while ($attribute_types = $sql_attribute->fetch_array(MYSQLI_BOTH)) {
-    $smarty->append('attribute', array(
-                    'attribute_type_id' => $attribute_types['attribute_type_id'],
-                    'attribute_type_name' => $attribute_types['attribute_type_name']));
+while ($software_devtool = $sql_software_devtool->fetch_array(MYSQLI_BOTH)) {
+    $smarty->append('software_devtool', array(
+                    'software_devtool_id' => $software_devtool['software_devtool_id'],
+                    'software_devtool_name' => $software_devtool['software_devtool_name']));
+}
+// software_origin
+$sql_software_origin = $mysqli->query("SELECT software_origin_id,
+                   software_origin_name
+                   FROM software_origin
+                   ORDER BY software_origin_name ASC")
+                or die("Problems retriving software_origin.");
+
+while ($software_origin = $sql_software_origin->fetch_array(MYSQLI_BOTH)) {
+    $smarty->append('software_origin', array(
+                    'software_origin_id' => $software_origin['software_origin_id'],
+                    'software_origin_name' => $software_origin['software_origin_name']));
 }
 //Send all smarty variables to the templates
 $smarty->display("file:" . $cpanel_template_folder . "games_main.html");

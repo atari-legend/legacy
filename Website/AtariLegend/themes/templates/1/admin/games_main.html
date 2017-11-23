@@ -111,19 +111,93 @@ function gameinsert_gm()
 
 
                 <div class="games_check_child" id="child_1">
-            {foreach from=$attribute item=attributes}
-
+            {foreach from=$software_origin item=line}
                     <div class="games_check_row">
                         <div class="links_mod_checkbox">
-                            <input type="checkbox" id="game_attributes_{$attributes.attribute_type_id}" name="attributes[]" value="{$attributes.attribute_type_id}">
-                            <label for="game_attributes_{$attributes.attribute_type_id}"></label>
+                            <input type="checkbox" id="software_origin_{$line.software_origin_id}" name="software_origin[]" value="{$line.software_origin_id}">
+                            <label for="software_origin_{$line.software_origin_id}"></label>
                         </div>
-                        <div class="games_check_text">&nbsp; {$attributes.attribute_type_name}</div>
+                        <div class="games_check_text">&nbsp; {$line.software_origin_name}</div>
                     </div>
-
+            {/foreach}
+            {foreach from=$software_devtool item=line}
+                    <div class="games_check_row">
+                        <div class="links_mod_checkbox">
+                            <input type="checkbox" id="software_devtool_{$line.software_devtool_id}" name="software_devtool[]" value="{$line.software_devtool_id}">
+                            <label for="software_devtool_{$line.software_devtool_id}"></label>
+                        </div>
+                        <div class="games_check_text">&nbsp; {$line.software_devtool_name}</div>
+                    </div>
             {/foreach}
                 </div>
                 <div class="games_check_child" id="child_2">
+                    <div class="games_check_row">
+						<div class="links_mod_checkbox">
+                            <input type="checkbox" id="falcon_only" name="falcon_only" value="1">
+                            <label for="falcon_only"></label>
+                            <!--<input type="checkbox" name="falcon_only" value="1" class="quick_search_check">-->
+                        </div>
+						<div class="games_check_text">&nbsp; Falcon only</div>
+					</div>
+                    <div class="games_check_row">
+						<div class="links_mod_checkbox">
+                            <input type="checkbox" id="falcon_rgb" name="falcon_rgb" value="1">
+                            <label for="falcon_rgb"></label>
+                            <!--<input type="checkbox" name="falcon_rgb" value="1" class="quick_search_check">-->
+                        </div>
+						<div class="games_check_text">&nbsp; Falcon RGB</div>
+					</div>
+					<div class="games_check_row">
+                        <div class="links_mod_checkbox">
+                            <input type="checkbox" id="ste_only" name="ste_only" value="1">
+                            <label for="ste_only"></label>
+                            <!--<input type="checkbox" name="ste_only" value="1" class="quick_search_check">-->
+                        </div>
+						<div class="games_check_text">&nbsp; STE only</div>
+					</div>
+					<div class="games_check_row">
+						<div class="links_mod_checkbox">
+                            <input type="checkbox" id="free" name="free" value="1">
+                            <label for="free"></label>
+                            <!--<input type="checkbox" name="free" value="1" class="quick_search_check">-->
+                        </div>
+						<div class="games_check_text">&nbsp; Non-Commercial</div>
+					</div>
+
+					<div class="games_check_row">
+						<div class="links_mod_checkbox">
+                            <input type="checkbox" id="monochrome" name="monochrome" value="1">
+                            <label for="monochrome"></label>
+                            <!--<input type="checkbox" name="monochrome" value="1" class="quick_search_check">-->
+                        </div>
+						<div class="games_check_text">&nbsp; Monochrome</div>
+					</div>
+
+
+                    <div class="games_check_row">
+                    						<div class="links_mod_checkbox">
+                                                <input type="checkbox" id="falcon_enhanced" name="falcon_enhanced" value="1">
+                                                <label for="falcon_enhanced"></label>
+                                               <!--<input type="checkbox" name="falcon_enhanced" value="1" class="quick_search_check">-->
+                                            </div>
+                    						<div class="games_check_text">&nbsp; Falcon Enhanced</div>
+                    					</div>
+                                        <div class="games_check_row">
+                    						<div class="links_mod_checkbox">
+                                                <input type="checkbox" id="falcon_vga" name="falcon_vga" value="1">
+                                                <label for="falcon_vga"></label>
+                                                <!--<input type="checkbox" name="falcon_vga" value="1" class="quick_search_check">-->
+                                            </div>
+                    						<div class="games_check_text">&nbsp; Falcon VGA</div>
+                    					</div>
+                    					<div class="games_check_row">
+                    						<div class="links_mod_checkbox">
+                                                <input type="checkbox" id="ste_enhanced" name="ste_enhanced" value="1">
+                                                <label for="ste_enhanced"></label>
+                                                <!--<input type="checkbox" name="ste_enhanced" value="1" class="quick_search_check">-->
+                                            </div>
+                    						<div class="games_check_text">&nbsp; STE Enhanced</div>
+                    					</div>
 
                 </div>
 

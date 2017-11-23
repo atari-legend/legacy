@@ -1,9 +1,9 @@
 <?php
 /***************************************************************************
-*                                2017-11-20_populate_al_section_table.php
+*                                2017-11-23_drop_boolean_tables.php
 *                            -----------------------
-*   begin                : 2017-11-11
-*   copyright            : (C) 2016 Atari Legend
+*   begin                : 2017-11-23
+*   copyright            : (C) 2017 Atari Legend
 *   email                : silversurfer@atari-forum.com
 *   actual update        :
 *
@@ -11,25 +11,37 @@
 ***************************************************************************/
 
 // Unique identifier set by developer.
-$database_update_id = 120;
+$database_update_id = 118;
 
 // Description of what the change will do.
-$update_description = "Populate al_section table";
+$update_description = "Drop old game attributes tables";
 
 // Should the database change query execute if test is "test_fail" or "test_success"
 $execute_condition = "test_success";
 
 //This is the test query, the query should be made to get an either true or false result.
 $test_condition = "SELECT * FROM information_schema.tables
-WHERE table_schema = '$db_databasename' AND table_name = 'al_section' LIMIT 1";
+WHERE table_schema = '$db_databasename' AND (table_name = 'game_arcade'
+OR table_name = 'game_development'
+OR table_name = 'game_seuck'
+OR table_name = 'game_stac'
+OR table_name = 'game_stos'
+OR table_name = 'game_unfinished'
+OR table_name = 'game_unreleased'
+OR table_name = 'game_wanted')
+LIMIT 1";
 
 // Database change
 $database_update_sql = "
-INSERT INTO al_section
-  (al_section_name)
-VALUES
-  ('Games top level'),
-  ('Demos top level');";
+DROP TABLE IF EXISTS
+game_arcade,
+game_development,
+game_seuck,
+game_stac,
+game_stos,
+game_unfinished,
+game_unreleased,
+game_wanted;";
 
 // If the update should auto execute without user interaction set to "yes".
 $database_autoexecute = "yes";

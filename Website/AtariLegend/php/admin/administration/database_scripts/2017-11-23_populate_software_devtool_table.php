@@ -1,8 +1,8 @@
 <?php
 /***************************************************************************
-*                                2017-11-15_populate_attribute_category_table.php
+*                                2017-11-23_populate_software_devtool_table.php
 *                            -----------------------
-*   begin                : 2017-11-11
+*   begin                : 2017-11-23
 *   copyright            : (C) 2017 Atari Legend
 *   email                : silversurfer@atari-forum.com
 *   actual update        :
@@ -11,24 +11,26 @@
 ***************************************************************************/
 
 // Unique identifier set by developer.
-$database_update_id = 113;
+$database_update_id = 114;
 
 // Description of what the change will do.
-$update_description = "Populate attribute_category table";
+$update_description = "Populate software_devtool table";
 
 // Should the database change query execute if test is "test_fail" or "test_success"
 $execute_condition = "test_success";
 
 //This is the test query, the query should be made to get an either true or false result.
 $test_condition = "SELECT * FROM information_schema.tables
-WHERE table_schema = '$db_databasename' AND table_name = 'attribute_category' LIMIT 1";
+WHERE table_schema = '$db_databasename' AND table_name = 'software_devtool' LIMIT 1";
 
 // Database change
-$database_update_sql = "INSERT INTO attribute_category
-  (attribute_category_name)
+$database_update_sql = "
+INSERT INTO software_devtool
+  (software_devtool_name)
 VALUES
-  ('General'),
-  ('Hardware')";
+  ('SEUCK'),
+  ('STAC'),
+  ('Stos');";
 
 // If the update should auto execute without user interaction set to "yes".
 $database_autoexecute = "yes";
