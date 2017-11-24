@@ -27,15 +27,38 @@ include("../../admin/games/quick_search_games.php");
 //***********************************************************************************
 //Let's get the general game info first.
 //***********************************************************************************
-$sql_game = $mysqli->query("SELECT *
+$sql_game = $mysqli->query("SELECT game_name,
+               game.game_id,
+               game_free.free,
+               game_ste_only.ste_only,
+               game_ste_enhan.ste_enhanced,
+               game_falcon_only.falcon_only,
+               game_falcon_enhan.falcon_enhanced,
+               game_falcon_rgb.falcon_rgb,
+               game_falcon_vga.falcon_vga,
+               game_mono.monochrome
                FROM game
-                 WHERE game_id='$game_id'") or die("Error getting game info");
-
-
+               LEFT JOIN game_free ON (game.game_id = game_free.game_id)
+               LEFT JOIN game_ste_only ON (game.game_id = game_ste_only.game_id)
+               LEFT JOIN game_ste_enhan ON (game.game_id = game_ste_enhan.game_id)
+               LEFT JOIN game_falcon_only ON (game.game_id = game_falcon_only.game_id)
+               LEFT JOIN game_falcon_enhan ON (game.game_id = game_falcon_enhan.game_id)
+               LEFT JOIN game_falcon_rgb ON (game.game_id = game_falcon_rgb.game_id)
+               LEFT JOIN game_falcon_vga ON (game.game_id = game_falcon_vga.game_id)
+               LEFT JOIN game_mono ON (game.game_id = game_mono.game_id)
+               WHERE game.game_id='$game_id'") or die("Error getting game info");
 while ($game_info = $sql_game->fetch_array(MYSQLI_BOTH)) {
     $smarty->assign('game_info', array(
         'game_name' => $game_info['game_name'],
-        'game_id' => $game_info['game_id']
+        'game_id' => $game_info['game_id'],
+        'game_free' => $game_info['free'],
+        'game_ste_only' => $game_info['ste_only'],
+        'game_ste_enhan' => $game_info['ste_enhanced'],
+        'game_falcon_only' => $game_info['falcon_only'],
+        'game_falcon_enhan' => $game_info['falcon_enhanced'],
+        'game_falcon_rgb' => $game_info['falcon_rgb'],
+        'game_falcon_vga' => $game_info['falcon_vga'],
+        'game_mono' => $game_info['monochrome']
     ));
 }
 
@@ -43,12 +66,23 @@ while ($game_info = $sql_game->fetch_array(MYSQLI_BOTH)) {
 //get the game attributes
 //***********************************************************************************
 
-$sql_game_attributes = $mysqli->query("SELECT * FROM game_attributes
+// Game devtools
+$sql_game_attributes_devtool = $mysqli->query("SELECT * FROM game_devtool_cross
                WHERE game_id='$game_id'") or die('Error: ' . mysqli_error($mysqli));
 
-while ($game_attributes = $sql_game_attributes->fetch_array(MYSQLI_BOTH)) {
-    $smarty->append('game_attributes', array(
-        'attribute_type_id' => $game_attributes['attribute_type_id']
+while ($game_devtools = $sql_game_attributes_devtool->fetch_array(MYSQLI_BOTH)) {
+    $smarty->append('game_tools', array(
+        'software_devtool_id' => $game_devtools['software_devtool_id']
+    ));
+}
+
+// Game origin
+$sql_game_attributes_origin = $mysqli->query("SELECT * FROM game_origin_cross
+               WHERE game_id='$game_id'") or die('Error: ' . mysqli_error($mysqli));
+
+while ($game_origins = $sql_game_attributes_origin->fetch_array(MYSQLI_BOTH)) {
+    $smarty->append('game_origins', array(
+        'software_origin_id' => $game_origins['software_origin_id']
     ));
 }
 
@@ -56,13 +90,29 @@ while ($game_attributes = $sql_game_attributes->fetch_array(MYSQLI_BOTH)) {
 //get the attribute type list
 //***********************************************************************************
 
-$sql_attribute_type = $mysqli->query("SELECT * FROM attribute_type") or die('Error: ' . mysqli_error($mysqli));
+// get software devtools list
+$sql_software_devtool = $mysqli->query("SELECT software_devtool_id,
+                   software_devtool_name
+                   FROM software_devtool
+                   ORDER BY software_devtool_name ASC")
+                or die("Problems retriving software_devtool.");
 
-while ($attribute_types = $sql_attribute_type->fetch_array(MYSQLI_BOTH)) {
-    $smarty->append('attribute_types', array(
-        'attribute_type_id' => $attribute_types['attribute_type_id'],
-        'attribute_type_name' => $attribute_types['attribute_type_name']
-    ));
+while ($software_devtool = $sql_software_devtool->fetch_array(MYSQLI_BOTH)) {
+    $smarty->append('software_devtool', array(
+                    'software_devtool_id' => $software_devtool['software_devtool_id'],
+                    'software_devtool_name' => $software_devtool['software_devtool_name']));
+}
+// software_origin
+$sql_software_origin = $mysqli->query("SELECT software_origin_id,
+                   software_origin_name
+                   FROM software_origin
+                   ORDER BY software_origin_name ASC")
+                or die("Problems retriving software_origin.");
+
+while ($software_origin = $sql_software_origin->fetch_array(MYSQLI_BOTH)) {
+    $smarty->append('software_origin', array(
+                    'software_origin_id' => $software_origin['software_origin_id'],
+                    'software_origin_name' => $software_origin['software_origin_name']));
 }
 
 //***********************************************************************************
