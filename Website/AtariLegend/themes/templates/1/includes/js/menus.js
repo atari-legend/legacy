@@ -110,7 +110,7 @@ function popAddGames(str) {
             }
         });
     }
-}
+} 
 
 function closeAddGames(str) {
     $("#JSMenuDetailExpandGames").html("");
@@ -287,7 +287,7 @@ function browseInd(str) {
         $("#ind_member").html("");
         return;
     } else {
-        $.ajax({
+        $.ajaxQueue({
             // The URL for the request
             url: "ajax_menus_detail.php",
             data: "action=ind_gen_browse&query=" + str,
@@ -305,7 +305,7 @@ function searchInd(str) {
     if (str === "") {
         $("#ind_member").html("");
     } else {
-        $.ajax({
+        $.ajaxQueue({
             // The URL for the request
             url: "ajax_menus_detail.php",
             data: "action=ind_gen_search&query=" + str,
@@ -350,7 +350,7 @@ function popAddAuthorMenutitle(menu_disk_title_id, game_id, game_name) {
         $("#menu_detail_expand_author_title").html("");
         return;
     } else {
-        $.ajax({
+        $.ajaxQueue({
             // The URL for the request
             url: "ajax_add_author_menutitle.php",
             data: "menu_disk_title_id=" + menu_disk_title_id + "&game_name=" + game_name + "&game_id=" + game_id,
@@ -412,6 +412,7 @@ function popAddDocs(str) {
             success: function(html) {
                 $("#menu_detail_expand_docs").html(html);
                 $("#docto_menu_link").html("<a onclick=\"closeAddDocs(" + str + ")\" style=\"cursor: pointer;\" class=\"MAINNAV\">Add Doc to menu</a>");
+                DocSearchListen();
             }
         });
     }
