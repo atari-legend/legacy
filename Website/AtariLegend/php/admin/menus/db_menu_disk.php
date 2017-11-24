@@ -708,8 +708,8 @@ if (isset($action) and $action == "delete_screen_from_menu_disk") {
         $screenshotrow  = $SCREENSHOT->fetch_array(MYSQLI_BOTH);
         $screenshot_ext = $screenshotrow['imgext'];
 
-        $sql = $mysqli->query("DELETE FROM screenshot_main WHERE screenshot_id = '$screenshot_id' ");
-        $sql = $mysqli->query("DELETE FROM screenshot_menu WHERE screenshot_id = '$screenshot_id' ");
+        $sql = $mysqli->query("DELETE FROM screenshot_main WHERE screenshot_id = '$screenshot_id' ") or die('Error: ' . mysqli_error($mysqli));
+        $sql = $mysqli->query("DELETE FROM screenshot_menu WHERE screenshot_id = '$screenshot_id' ") or die('Error: ' . mysqli_error($mysqli));
 
         $new_path = $menu_screenshot_save_path;
         ;
