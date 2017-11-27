@@ -1,4 +1,4 @@
-{* 
+{*
 /***************************************************************************
                               manage_trivia_quotes.html
 *                            ------------------------------
@@ -12,6 +12,71 @@
 ***************************************************************************/
 *}
 {extends file='1/admin/frontpage.html'}
+{block name=java_script}
+<script type="text/javascript">
+function OSDMessageDisplay(message) {
+    $.notify_osd.create({
+        'text': message, // notification message
+        'icon': '../../../themes/styles/1/images/osd_icons/star.png', // icon path, 48x48
+        'sticky': false, // if true, timeout is ignored
+        'timeout': 4, // disappears after 6 seconds
+        'dismissable': true // can be dismissed manually
+    });
+}
+function EditTriviaQuote(trivia_quote_id) {
+    if (trivia_quote_id !=='') {
+        $.ajax({
+            // The URL for the request
+            url: "ajax_trivia_quotes.php",
+            data: "action=edit_trivia_quoute&trivia_quote_id=" + trivia_quote_id,
+            type: "GET",
+            dataType: "html",
+            // Code to run if the request succeeds;
+            success: function (html) {
+                $("#Ajax_trivia_quote_" + trivia_quote_id).html(html);
+                ListenTrivia();
+            }
+        });
+    }
+}
+
+function DisplayTriviaQuote(trivia_quote_id) {
+    if (trivia_quote_id !=='') {
+        $.ajax({
+            // The URL for the request
+            url: "ajax_trivia_quotes.php",
+            data: "action=display_trivia_quoute&trivia_quote_id=" + trivia_quote_id,
+            type: "GET",
+            dataType: "html",
+            // Code to run if the request succeeds;
+            success: function (html) {
+                $("#Ajax_trivia_quote_" + trivia_quote_id).html(html);
+            }
+        });
+    }
+
+}
+
+function ListenTrivia() {
+$("#JSSubmitEditTriviaQuote").click(function() {
+    var form_values = $(".JSTriviaEditForm").serialize();
+    var trivia_quote_id = $(".JSTriviaEditForm").find('input[name="trivia_quote_id"]').val();
+    $.ajax({
+        // The URL for the request
+        url: "db_trivia.php",
+        data: form_values,
+        type: "POST",
+        dataType: "html",
+        // Code to run if the request succeeds;
+        success: function(html) {
+            DisplayTriviaQuote(trivia_quote_id);
+            OSDMessageDisplay(html);
+        }
+    });
+})
+}
+</script>
+{/block}
 {block name=main_tile}
 <div class="standard_tile">
 	<h1>TRIVIA QUOTES</h1>
@@ -19,8 +84,8 @@
 	<div class="standard_tile_text">
 		<div class="left_nav_section">
 			  Here you can add a new <strong>trivia quote</strong> by using the below text field or you can delete old trivia quotes.<br/>
-		</div> 
-		<br>		
+		</div>
+		<br>
 		<br>
 		<fieldset>
 		<legend>Add new Trivia</legend>
@@ -31,12 +96,13 @@
 			<br><br>
 			<input type="hidden" name="action" value="add_trivia">
 			<input type="submit" value="Submit" class="topbutton_cpanel_small">
+
 			</form>
 		</div>
-		</fieldset> 
+		</fieldset>
 		<br>
 		{foreach from=$trivia item=line}
-			<fieldset>
+			<fieldset id="Ajax_trivia_quote_{$line.trivia_quote_id}">
 			<legend>Trivia ID {$line.trivia_quote_id}</legend>
 			<br>
 			{$line.trivia_quote}
@@ -46,8 +112,9 @@
 				<input type="hidden" name="action" value="delete_trivia_quote">
 				<input type="hidden" name="trivia_quote_id" value="{$line.trivia_quote_id}">
 				<input type="submit" value="Delete" class="topbutton_cpanel_small">
+                <input type="button" value="Edit" class="topbutton_cpanel_small" onclick="EditTriviaQuote({$line.trivia_quote_id})">
 			</form>
-			</fieldset> 
+			</fieldset>
 			<br>
 		{/foreach}
 	</div>
