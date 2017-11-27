@@ -21,7 +21,7 @@
 {extends file='1/admin/frontpage.html'}
 
 {block name=java_script}
-<script type="text/javascript" src="{$template_dir}includes/js/jquery.dotdotdot.js" type="text/javascript"></script> <!--this script is used for the elipsis (...) effect of the preview of the reviews -->
+<script type="text/javascript" src="{$template_dir}includes/js/vendor/jquery.dotdotdot-1.8.3.min.js" type="text/javascript"></script> <!--this script is used for the elipsis (...) effect of the preview of the reviews -->
 <script type="text/javascript">
      window.onload = function() {
         $(".interview_main_text").dotdotdot({  <!--This is the script to truncate the preview of the reviews-->
@@ -66,8 +66,8 @@
     };
 </script>
 
-<script type="text/javascript" src="{$template_dir}includes/js/lightbox.min.js"></script><!--lightbox popup script-->
-<link type="text/css" href="{$style_dir}css/lightbox.css" hreflang="en" rel="stylesheet">
+<script type="text/javascript" src="{$template_dir}includes/js/vendor/lightbox-2.9.0.min.js"></script><!--lightbox popup script-->
+<link type="text/css" href="{$style_dir}css/vendor/lightbox-2.9.0.css" hreflang="en" rel="stylesheet">
 <script>
     lightbox.option({
       'showImageNumberLabel': false

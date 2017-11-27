@@ -343,7 +343,7 @@ if (isset($action) and $action == 'update_interview' and (!isset($action2))) {
         //get the id of the inserted interview
         $id = $mysqli->insert_id;
         
-        create_log_entry('Interviews', $individual, 'Interview', $id, 'Insert', $_SESSION['user_id']);
+        create_log_entry('Interviews', $individual_create, 'Interview', $id, 'Insert', $_SESSION['user_id']);
 
         $_SESSION['edit_message'] = 'Interview added succesfully';
 
