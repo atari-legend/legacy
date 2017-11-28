@@ -950,7 +950,7 @@ function deleteScreenshotfromMenu(str, menu_disk_id) {
                     // Code to run if the request succeeds;
                     success: function(html) {
                         var ReturnHtml = html.split('[BRK]');
-                        $("#JSMenuSoftwareList").html(ReturnHtml[0]);
+                        $("#JSMenuScreenshotList").html(ReturnHtml[0]);
                         OSDMessageDisplay(ReturnHtml[1]);
                     }
                 });
