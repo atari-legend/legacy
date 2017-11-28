@@ -29,7 +29,10 @@ include("../../config/admin_rights.php");
 //***********************************************************************************
 if (isset($action) and $action == "insert_game") {
     //Insert the game in the game table
-    $sql_game = $mysqli->query("INSERT INTO game (game_name) VALUES ('$newgame')") or die("Couldn't insert game into database");
+    $stmt = $mysqli->prepare("INSERT INTO game (game_name) VALUES (?)") or die($mysqli->error);
+    $stmt->bind_param("s", $newgame) or die($mysqli->error);
+    $stmt->execute() or die($mysqli->error);
+    $stmt->close();
 
     $_SESSION['edit_message'] = "The game $newgame has been inserted into the database";
 
