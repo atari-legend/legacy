@@ -62,7 +62,7 @@
 								<br>
 								<br>
 								<b>Menu disk options :</b><br>
-								<a onclick="DeleteMenuDisk({$menus.menu_disk_id})" style="cursor: pointer;" class="standard_tile_link">Delete menu disk</a><br>
+								<a onclick="DeleteMenuDiskModal({$menus.menu_disk_id})" style="cursor: pointer;" class="standard_tile_link">Delete menu disk</a><br>
 								<div id="intro_credit_link"><a onclick="popAddIntroCred({$menus.menu_disk_id})" style="cursor: pointer;" class="standard_tile_link">Add intro credits</a><br></div>
 								<div id="gameto_menu_link"><a onclick="popAddGames({$menus.menu_disk_id})" style="cursor: pointer;" class="standard_tile_link">Add Game/Tool/Demo to menu</a><br></div>
 								<div id="docto_menu_link"><a onclick="popAddDocs({$menus.menu_disk_id})" style="cursor: pointer;" class="standard_tile_link">Add Doc to menu</a><br></div>
@@ -100,18 +100,6 @@
 								<tr>
 									<td class="menu_cred_td">{$individual.author_type_info}</td>
 									<td class="menu_scene_td"><a href="../individuals/individuals_edit.php?ind_id={$individual.ind_id}" class="standard_table_left">{$individual.ind_name}</a></td>
-									<!-- <form action="#" method="post" name="nick_edit{$individual.ind_id}" id="nick_edit{$individual.ind_id}">
-										<td class="menu_nick_td">
-											<select name="individual_nicks_id" id="quick_search_small_select" style="width:125px;" onchange="ChangeNick(this.value,{$individual.menu_disk_credits_id},{$individual.menu_disk_id})">
-											<option value="" selected>-</option>
-												{foreach from=$ind_nick item=line}
-													{if $line.ind_id == $individual.ind_id }
-														{html_options values=$line.individual_nicks_id output=$line.nick selected=$individual.individual_nicks_id}
-													{/if}
-												{/foreach}
-											</select>
-										</td>
-									</form>	 -->
 									<td class="menu_delete_td" style="text-align:right;">
 										<input type="button" onclick="DeleteCredits({$individual.menu_disk_credits_id},{$individual.menu_disk_id})" class="quick_search_games_button" value="delete" style="margin-right:5px;">
 									</td>
@@ -120,7 +108,7 @@
 							</table>
 						{/if}
 					</div>
-					<div id="menu_software_list">
+					<div id="JSMenuSoftwareList">
 						{if isset($game)}
                             <br>
                             <br>
@@ -143,9 +131,8 @@
 									<td class="menu_mark_td">
 										<form name="MenuDiskContent" id="MenuDiskContent">
                                          <div class="links_mod_checkbox">
-                                            <input type="checkbox" id="menu_disk_title_id{$line.menu_disk_title_id}" name="menu_disk_title_id[]" value="{$line.menu_disk_title_id}" onchange="deleteGamefromMenu({$line.menu_disk_title_id},{$menu_disk_id})">
+                                            <input type="checkbox" id="menu_disk_title_id{$line.menu_disk_title_id}" name="menu_disk_title_id[]" value="{$line.menu_disk_title_id}" onchange="DeleteGamefromMenuButton({$line.menu_disk_title_id},{$menu_disk_id})">
                                             <label for="menu_disk_title_id{$line.menu_disk_title_id}"></label>&nbsp;
-                                            <!--<input type="checkbox" id="menu_disk_title_id{$line.menu_disk_title_id}" name="menu_disk_title_id[]" value="{$line.menu_disk_title_id}" onchange="deleteGamefromMenu({$line.menu_disk_title_id},{$menu_disk_id})">-->
                                         </div>
 									</td>
 									<td class="menu_gamename_td">
@@ -206,8 +193,8 @@
 					</div>
 					<br>
                     <div id="menu_detail_expand_author_title"></div>
-					<div id="menu_detail_expand_set"></div>
-					<div id="menu_detail_expand_games"></div>
+					<div id="JSMenuDetailExpandSet"></div>
+					<div id="JSMenuDetailExpandGames"></div>
 					<div id="menu_doc_list">
 						{if isset($doc_game)}
                             <br>
@@ -243,6 +230,7 @@
 										<form action="#" method="post" name="doc_type_edit{$line.doc_id}" id="doc_type_edit{$line.doc_id}">
 											<select name="doc_type_id" id="quick_search_small_select" style="width:125px;" onchange="ChangeDoctype(this.value,{$line.doc_id},{$menus.menu_disk_id})">
 											<option value="" selected>-</option>
+                                            {if isset($doc_type)}
 												{foreach from=$doc_type item=doc_types}
 													{if $doc_types.doc_type_id == $line.doc_type_id}
 														{html_options values=$doc_types.doc_type_id output=$doc_types.doc_type_name selected=$line.doc_type_id}
@@ -250,6 +238,7 @@
 														{html_options values=$doc_types.doc_type_id output=$doc_types.doc_type_name}
 													{/if}
 												{/foreach}
+                                            {/if}
 											</select>
 										</form>
 									</td>
@@ -276,7 +265,7 @@
 					<br>
                     <div id="menu_detail_expand_author_title_doc"></div>
 					<div id="menu_detail_expand_docs"></div>
-					<div id="menu_screenshot_list">
+					<div id="JSMenuScreenshotList">
 						{if isset( $screenshots)}
 						<div class="standard_tile_text">
 							<fieldset class="centered_fieldset">
@@ -285,7 +274,7 @@
 									{foreach from=$screenshots item=line name=screen}
 										<div style="display:inline-block;text-align:center;">
 											Image {$line.count}<br>
-											<a href="../../includes/show_image.php?file={$line.screenshot_image}&amp;resize=410,null,null,null" data-lightbox="image-1" data-title="image - {$line.count}">
+											<a href="../../includes/show_image.php?file={$line.screenshot_image}" data-lightbox="image-1" data-title="image - {$line.count}">
 											<img src="../../includes/show_image.php?file={$line.screenshot_image}&amp;resize=75,null,null,null" width="75" alt="Click to enlarge!" class="user_stats_img" id="user_details_img_dark"></a>
 											<a href="javascript:deleteScreenshotfromMenu({$line.id},{$menu_disk_id})" class="standard_tile_link_black">Delete</a>
 											<br>
@@ -299,8 +288,8 @@
 						</div>
 						{/if}
 					</div>
-					<div id="menu_detail_expand_screenshots"></div>
-					<div id="menu_file_list">
+					<div id="JSMenuDetailExpandScreenshots"></div>
+					<div id="JSMenuFileList">
 						{if isset( $downloads)}
 						<div class="standard_tile_text">
 							<fieldset class="centered_fieldset">
@@ -318,7 +307,7 @@
 						</div>
 						{/if}
 					</div>
-					<div id="menu_detail_expand_file"></div>
+					<div id="JSMenuDetailExpandFile"></div>
 				</td>
 			</tr>
 		</table>
@@ -348,15 +337,16 @@
 		<Select class="saveHistory" id="m1" name="m1" onchange="browseInd(this.value)" style="width:70px;height:25px;display:inline;">
 			{html_options values=$az_value output=$az_output}
 		</select>
-		<div id="ind_member" style="display:inline;">
-			<select id="ind_id" name="ind_id">
-				{foreach from=$ind item=line}
-					<option value="{$line.ind_id}">{$line.ind_name}</option>
-				{/foreach}
-			</select>
-		</div>
+        <input type="text" onkeyup="searchInd(this.value)" class="standard_tile_input_small" value="search">
         <br>
-		<input type="text" onkeyup="searchInd(this.value)" class="standard_tile_input_small" value="search">
+        <div id="ind_member" style="display:inline;">
+            <select id="ind_id" name="ind_id">
+                {foreach from=$ind item=line}
+                    <option value="{$line.ind_id}">{$line.ind_name}</option>
+                {/foreach}
+            </select>
+        </div>
+
 		<select id="author_type_id" name="author_type_id" size="1" style="margin:5px;margin-top:0px;width:200px;">
 		<option value="">-</option>
 			{foreach from=$author_type item=line}
@@ -394,9 +384,8 @@
 				<td class="menu_mark_td">
 					<form name="MenuDiskContent" id="MenuDiskContent">
                     <div class="links_mod_checkbox">
-                        <input type="checkbox" id="menu_disk_title_id{$line.menu_disk_title_id}" name="menu_disk_title_id[]" value="{$line.menu_disk_title_id}" onchange="deleteGamefromMenu({$line.menu_disk_title_id},{$menu_disk_id})">
+                        <input type="checkbox" id="menu_disk_title_id{$line.menu_disk_title_id}" name="menu_disk_title_id[]" value="{$line.menu_disk_title_id}" onchange="DeleteGamefromMenuButton({$line.menu_disk_title_id},{$menu_disk_id})">
                         <label for="menu_disk_title_id{$line.menu_disk_title_id}"></label>&nbsp;
-                        <!--<input type="checkbox" id="menu_disk_title_id{$line.menu_disk_title_id}" name="menu_disk_title_id[]" value="{$line.menu_disk_title_id}" onchange="deleteGamefromMenu({$line.menu_disk_title_id},{$menu_disk_id})">-->
                     </div>
 
 				</td>
@@ -497,6 +486,7 @@
 					<form action="#" method="post" name="doc_type_edit{$line.doc_id}" id="doc_type_edit{$line.doc_id}">
 						<select name="doc_type_id" id="quick_search_small_select" style="width:125px;" onchange="ChangeDoctype(this.value,{$line.doc_id},{$menu_disk_id})">
 						<option value="" selected>-</option>
+                            {if isset($doc_type)}
 							{foreach from=$doc_type item=doc_types}
 								{if $doc_types.doc_type_id == $line.doc_type_id}
 									{html_options values=$doc_types.doc_type_id output=$doc_types.doc_type_name selected=$line.doc_type_id}
@@ -504,6 +494,7 @@
 									{html_options values=$doc_types.doc_type_id output=$doc_types.doc_type_name}
 								{/if}
 							{/foreach}
+                            {/if}
 						</select>
 					</form>
 				</td>
@@ -542,7 +533,7 @@
 				{foreach from=$screenshots item=line name=screen}
 					<div style="display:inline-block;text-align:center;">
 						Image {$line.count}<br>
-						<a href="../../includes/show_image.php?file={$line.screenshot_image}&amp;resize=410,null,null,null" data-lightbox="image-1" data-title="image - {$line.count}">
+						<a href="../../includes/show_image.php?file={$line.screenshot_image}" data-lightbox="image-1" data-title="image - {$line.count}">
 						<img src="../../includes/show_image.php?file={$line.screenshot_image}&amp;resize=75,null,null,null" width="75" alt="Click to enlarge!" class="user_stats_img" id="user_details_img_dark"></a>
 						<a href="javascript:deleteScreenshotfromMenu({$line.id},{$menu_disk_id})" class="standard_tile_link_black">Delete</a>
 						<br>
@@ -612,18 +603,6 @@
 				<tr>
 					<td class="menu_cred_td">{$individual.author_type_info}</td>
 					<td class="menu_scene_td"><a href="../individuals/individuals_edit.php?ind_id={$individual.ind_id}" class="standard_table_left">{$individual.ind_name}</a></td>
-					<!-- <form action="#" method="post" name="nick_edit{$individual.ind_id}" id="nick_edit{$individual.ind_id}">
-						<td class="menu_nick_td">
-							<select name="individual_nicks_id" id="quick_search_small_select" style="width:125px;" onchange="ChangeNick(this.value,{$individual.menu_disk_credits_id},{$individual.menu_disk_id})">
-								<option value="" selected>-</option>
-								{foreach from=$ind_nick item=line}
-									{if $line.ind_id == $individual.ind_id }
-										{html_options values=$line.individual_nicks_id output=$line.nick selected=$individual.individual_nicks_id}
-									{/if}
-								{/foreach}
-							</select>
-						</td>
-					</form>		 -->
 					<td class="menu_delete_td" style="text-align:right;">
 						<input type="button" onclick="DeleteCredits({$individual.menu_disk_credits_id},{$individual.menu_disk_id})" class="quick_search_games_button" value="delete" style="margin-right:5px;">
 					</td>
@@ -643,7 +622,7 @@
 	{if isset($game)}
     <br>
     <br>
-	<div id="menu_software_list">
+	<div id="JSMenuSoftwareList">
 		<table class="table_game_list" style="width:95%;border: solid 1px black;margin:auto;">
 		<tr>
 			<th id="menu_mark_th"></th>
@@ -662,9 +641,8 @@
 				<td class="menu_mark_td">
 					<form name="MenuDiskContent" id="MenuDiskContent">
                     <div class="links_mod_checkbox">
-                        <input type="checkbox" id="menu_disk_title_id{$line.menu_disk_title_id}" name="menu_disk_title_id[]" value="{$line.menu_disk_title_id}" onchange="deleteGamefromMenu({$line.menu_disk_title_id},{$menu_disk_id})">
+                        <input type="checkbox" id="menu_disk_title_id{$line.menu_disk_title_id}" name="menu_disk_title_id[]" value="{$line.menu_disk_title_id}" onchange="DeleteGamefromMenuButton({$line.menu_disk_title_id},{$menu_disk_id})">
                         <label for="menu_disk_title_id{$line.menu_disk_title_id}"></label>&nbsp;
-                        <!--<input type="checkbox" id="menu_disk_title_id{$line.menu_disk_title_id}" name="menu_disk_title_id[]" value="{$line.menu_disk_title_id}" onchange="deleteGamefromMenu({$line.menu_disk_title_id},{$menu_disk_id})">-->
                     </div>
 				</td>
 				<td class="menu_gamename_td">
@@ -797,18 +775,6 @@
                 <tr>
                     <td class="menu_cred_td">{$individual.author_type_info}</td>
                     <td class="menu_scene_td"><a href="../individuals/individuals_edit.php?ind_id={$individual.ind_id}" class="standard_table_left">{$individual.ind_name}</a></td>
-                   <!--  <form action="#" method="post" name="nick_edit{$individual.ind_id}" id="nick_edit{$individual.ind_id}">
-                        <td class="menu_nick_td">
-                            <select name="individual_nicks_id" id="quick_search_small_select" style="width:125px;" onchange="ChangeNick(this.value,{$individual.menu_disk_credits_id},{$individual.menu_disk_id})">
-                            <option value="" selected>-</option>
-                                {foreach from=$ind_nick item=line}
-                                    {if $line.ind_id == $individual.ind_id }
-                                        {html_options values=$line.individual_nicks_id output=$line.nick selected=$individual.individual_nicks_id}
-                                    {/if}
-                                {/foreach}
-                            </select>
-                        </td>
-                    </form>			 -->
                     <td class="menu_delete_td" style="text-align:right;">
                         <input type="button" onclick="DeleteTitleCredits({$menu_disk_title_id},{$individual.ind_id},{$individual.author_type_id})" class="quick_search_games_button" value="delete" style="margin-right:5px;">
                     </td>

@@ -1,4 +1,4 @@
-{* 
+{*
 /***************************************************************************
 *                              tile_bug_report.html
 *                            --------------------------
@@ -12,13 +12,13 @@
 
 //****************************************************************************************
 // This is the bug report tile
-//**************************************************************************************** 
+//****************************************************************************************
 *}
 
-<div class="standard_tile">                   
+<div class="standard_tile">
     <h1>SUBMIT BUG</h1>
     <div class="standard_tile_line"></div>
-    <div class="standard_tile_text">     
+    <div class="standard_tile_text">
         <h6 style="text-align:justify;">
             Did you stumble upon a bug? Are there any issues with the layout? Or do you have a general remark to help us make this site better? Please let us know.
         </h6>
@@ -29,10 +29,12 @@
                 <div style="width:100%;text-align:center;margin-top:10px;">
                     <select name="bug_report_type" id="quick_search_pub_select">
                         <option value="-" SELECTED>-</option>
-                        {foreach from=$bug_report_type item=line} 
+                        {if isset($bug_report_type)}
+                        {foreach from=$bug_report_type item=line}
                             <option value="{$line.bug_report_type_id}">{$line.bug_report_type}</option>
                         {/foreach}
-                    </select>		
+                        {/if}
+                    </select>
                     <!--<input type="text" name="news_headline" class="standard_tile_input_small" style="width:90%;" value="Headline">-->
                 </div>
                 <div style="width:100%;text-align:center;margin-top:10px;">
@@ -50,5 +52,4 @@
             </div>
         </div>
     {/if}
-</div>    
-        
+</div>
