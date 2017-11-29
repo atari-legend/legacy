@@ -44,16 +44,14 @@ $sql_menus = "SELECT menu_set.menu_sets_id,
                         LEFT JOIN menu_types_main ON (menu_type.menu_types_main_id = menu_types_main.menu_types_main_id)
                         ORDER BY menu_sets_name ASC";
 
-$result_menus = $mysqli->query($sql_menus) or die("error in query");
+$result_menus = $mysqli->query($sql_menus) or die('Error: ' . mysqli_error($mysqli));
 
 $rows = $result_menus->num_rows;
 if ($rows > 0) {
-    $i = 0;
     while ($row = $result_menus->fetch_array(MYSQLI_BOTH)) {
-        $i++;
 
         //check how many menus there are for the game
-        $numbermenus = $mysqli->query("SELECT count(*) as count FROM menu_disk WHERE menu_sets_id='$row[menu_sets_id]'") or die("couldn't get number of zaks");
+        $numbermenus = $mysqli->query("SELECT count(*) as count FROM menu_disk WHERE menu_sets_id='$row[menu_sets_id]'") or die('Error: ' . mysqli_error($mysqli));
 
         $array = $numbermenus->fetch_array(MYSQLI_BOTH);
 
@@ -73,13 +71,12 @@ if ($rows > 0) {
     $totaltime1 = (float) ($end1['sec'] - $start1['sec']) + ((float) ($end1['usec'] - $start1['usec']) / 1000000);
 
     $smarty->assign('querytime', $totaltime1);
-    $smarty->assign('nr_of_entries', $i);
+    $smarty->assign('nr_of_entries', $rows);
 }
-    $smarty->assign("user_id", $_SESSION['user_id']);
+$smarty->assign("user_id", $_SESSION['user_id']);
 
-    //Send all smarty variables to the templates
-    $smarty->display("file:" . $cpanel_template_folder . "menus_list.html");
+//Send all smarty variables to the templates
+$smarty->display("file:" . $cpanel_template_folder . "menus_list.html");
 
-    //close the connection
-    mysqli_free_result($numbermenus);
-
+//close the connection
+mysqli_free_result($numbermenus);
