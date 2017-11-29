@@ -32,6 +32,7 @@ $sql_interview = $mysqli->query("SELECT *
 $query_interview = $sql_interview->fetch_array(MYSQLI_BOTH);
 
 $v_interview_date = date("F j, Y", $query_interview['interview_date']);
+$v_interview_year = date("Y", $query_interview['interview_date']);
 
 $interview_text = $query_interview['interview_text'];
 $interview_text = nl2br($interview_text);
@@ -76,6 +77,7 @@ $smarty->assign('interview', array(
     'interview_email' => $query_interview['email'],
     'interview_id' => $selected_interview_id,
     'interview_date' => $v_interview_date,
+    'interview_year' => $v_interview_year,
     'interview_img' => $v_ind_image,
     'interview_text' => $interview_text,
     'interview_intro' => $interview_intro,
