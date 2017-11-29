@@ -47,9 +47,7 @@ if (isset($action) and $action == "did_you_know_delete") {
     create_log_entry('Trivia', $trivia_id, 'DYK', $trivia_id, 'Delete', $_SESSION['user_id']);
 
     $sql = $mysqli->query("DELETE FROM trivia WHERE trivia_id = '$trivia_id'") or die("Couldn't delete trivia text");
-    $_SESSION['edit_message'] = "trivia quote has been deleted";
-
-    header("Location: ../trivia/did_you_know.php");
+    echo "trivia quote has been deleted";
 
     mysqli_close($mysqli);
 }
@@ -77,7 +75,7 @@ if (isset($action) and $action == "add_trivia") {
     if (isset($trivia_quote)) {
         $trivia_quote = $mysqli->real_escape_string($trivia_quote);
 
-        $mysqli->query("INSERT INTO trivia_quotes (trivia_quote) VALUES ('$trivia_quote')") or die("couldn't add trivia quote");
+        $mysqli->query("INSERT INTO trivia_quotes (trivia_quote) VALUES ('$trivia_quote')") or die('Error: ' . mysqli_error($mysqli));
 
         $new_trivia_id = $mysqli->insert_id;
         create_log_entry('Trivia', $new_trivia_id, 'Quote', $new_trivia_id, 'Insert', $_SESSION['user_id']);
@@ -87,79 +85,46 @@ if (isset($action) and $action == "add_trivia") {
         header("Location: ../trivia/manage_trivia_quotes.php");
     }
 }
+
 //****************************************************************************************
-// Upload trivia and add to db - THIS IS NOT USED AT AL2.0 (WAS AL 1.0)
+// Edit trivia quote!
 //****************************************************************************************
-if (isset($action) and $action == "trivia_upload") {
-    //Here we'll be looping on each of the inputs on the page that are filled in with an image!
 
-    $image = $_FILES['image'];
+if (isset($action) and $action == "edit_trivia_quote") {
+    if (isset($trivia_quote)) {
+        $trivia_quote = $mysqli->real_escape_string($trivia_quote);
 
-    foreach ($image['tmp_name'] as $key => $tmp_name) {
-        if ($tmp_name !== 'none') {
-            // Check what extention the file has and if it is allowed.
+        $mysqli->query("UPDATE trivia_quotes SET trivia_quote='$trivia_quote' WHERE trivia_quote_id = $trivia_quote_id") or die('Error: ' . mysqli_error($mysqli));
 
-            $ext        = "";
-            $type_image = $image['type'][$key];
-
-            // set extension
-            if ($type_image == 'image/x-png') {
-                $ext = 'png';
-            } elseif ($type_image == 'image/png') {
-                $ext = 'png';
-            } elseif ($type_image == 'image/gif') {
-                $ext = 'gif';
-            } elseif ($type_image == 'image/jpeg') {
-                $ext = 'jpg';
-            }
-
-            if ($ext !== "") {
-                // First we insert extension of the file... this also creates an autoinc number for us.
-                $sdbquery = $mysqli->query("INSERT INTO trivia_screens (trivia_screens_id, imgext, skin_id) VALUES ('', '$ext', 'skin')") or die("Database error - inserting screenshots");
-
-                //select the newly entered screenshot_id from the main table
-                $SCREENSHOT = $mysqli->query("SELECT trivia_screens_id FROM trivia_screens
-                                   ORDER BY trivia_screens_id desc") or die("Database error - selecting screenshots");
-
-                $screenshotrow = $SCREENSHOT->fetch_row();
-                $screenshot_id = $screenshotrow[0];
-
-                // Rename the uploaded file to its autoincrement number and move it to its proper place.
-                $file_data = rename($image['tmp_name'][$key], "$trivia_screenshot_path$screenshotrow[0].$ext");
-
-                chmod("$trivia_screenshot_path$screenshotrow[0].$ext", 0777);
-            }
-        }
+        create_log_entry('Trivia', $trivia_quote_id, 'Quote', $trivia_quote_id, 'Edit', $_SESSION['user_id']);
+        echo "Trivia Quote updated!";
     }
-
-    mysqli_close($mysqli);
-    header("Location: ../trivia/manage_trivia_screens.php");
 }
 
 //****************************************************************************************
-// Delete the trivia screenshot - THIS IS NOT USED AT AL2.0 (WAS AL 1.0)
+// Edit did you know quote!
 //****************************************************************************************
 
-if (isset($action) and $action == "delete_trivia_screen") {
-    if (isset($imageid)) {
-        //get the extension
-        $SCREENSHOT = $mysqli->query("SELECT * FROM trivia_screens
-                                   WHERE trivia_screens_id = '$imageid'") or die("Database error - selecting screenshots");
+if (isset($action) and $action == "update_trivia") {
 
-        $screenshotrow  = $SCREENSHOT->fetch_array(MYSQLI_BOTH);
-        $screenshot_ext = $screenshotrow['imgext'];
+    if (isset($trivia_text)) {
+        $trivia_text = $mysqli->real_escape_string($trivia_text);
 
-        $sql = $mysqli->query("DELETE FROM trivia_screens WHERE trivia_screens_id = '$imageid' ");
+        $mysqli->query("UPDATE trivia SET trivia_text='$trivia_text' WHERE trivia_id = $trivia_id") or die('Error: ' . mysqli_error($mysqli));
 
-        $new_path = $trivia_screenshot_path;
-        $new_path .= $imageid;
-        $new_path .= ".";
-        $new_path .= $screenshot_ext;
+        create_log_entry('Trivia', $trivia_id, 'Quote', $trivia_id, 'Edit', $_SESSION['user_id']);
 
-        unlink("$new_path");
+        $trivia_text = stripslashes($trivia_text);
 
-        mysqli_close($mysqli);
+        $smarty->assign('trivia_id', $trivia_id);
+        $smarty->assign('trivia_text', $trivia_text);
 
-        header("Location: ../trivia/manage_trivia_screens.php");
+$smarty->assign('smarty_action', 'did_you_know_update_returnview');
+//Send all smarty variables to the templates
+$smarty->display("file:" . $cpanel_template_folder . "ajax_trivia_quotes_edit.html");
+
+
+
+
     }
 }

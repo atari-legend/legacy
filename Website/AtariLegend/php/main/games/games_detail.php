@@ -575,10 +575,15 @@ while ($query_comment = $sql_comment->fetch_array(MYSQLI_BOTH)) {
 
             );
         }
+        
+        $fact_text = nl2br($sql_games_facts['game_fact']);
+        $fact_text = InsertALCode($fact_text); // disabled this as it wrecked the design.
+        $fact_text = trim($fact_text);
+        $fact_text = RemoveSmillies($fact_text);
 
         $smarty->append('facts', array(
             'game_fact_id' => $sql_games_facts['game_fact_id'],
-            'game_fact' => $sql_games_facts['game_fact']
+            'game_fact' => $fact_text
         ));
     }
 

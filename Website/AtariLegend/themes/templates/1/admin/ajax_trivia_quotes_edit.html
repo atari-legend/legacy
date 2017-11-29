@@ -1,0 +1,41 @@
+{* Edit form for the trivia quote *}
+{if isset($smarty_action) and $smarty_action == "trivia_quote_edit"}
+<legend>Trivia ID {$trivia_quote_id}</legend>
+<br>
+<form action="../trivia/db_trivia.php" method="post" name="trivia{$trivia_quote_id}" id="trivia{$trivia_quote_id}" class="JSTriviaEditForm">
+    <input type="text" name="trivia_quote" value="{$trivia_quote}" class="standard_tile_input_small" style="width:90%;">
+    <br>
+    <br>
+
+    <input type="hidden" name="action" value="edit_trivia_quote">
+    <input type="hidden" name="trivia_quote_id" value="{$trivia_quote_id}">
+<input type="button" value="Edit" class="topbutton_cpanel_small" id="JSSubmitEditTriviaQuote">
+</form>
+{/if}
+
+{if isset($smarty_action) and $smarty_action == "display_trivia_quoute"}
+<legend>Trivia ID {$trivia_quote_id}</legend>
+<br>
+{$trivia_quote}
+<br>
+<br>
+<form action="../trivia/db_trivia.php" method="post" name="trivia{$trivia_quote_id}" id="trivia{$trivia_quote_id}">
+    <input type="hidden" name="action" value="delete_trivia_quote">
+    <input type="hidden" name="trivia_quote_id" value="{$trivia_quote_id}">
+    <input type="submit" value="Delete" class="topbutton_cpanel_small">
+    <input type="button" value="Edit" class="topbutton_cpanel_small" onclick="EditTriviaQuote({$trivia_quote_id})">
+</form>
+{/if}
+{* Edit form for the did you know quote *}
+{if isset($smarty_action) and $smarty_action == "did_you_know_edit_view"}
+    <textarea name="trivia_text" id="trivia_text" class="standard_tile_input_area">{$trivia_text}</textarea>
+    [BRK]
+    <input type="button" value="Update"  class="topbutton_cpanel_small" onclick="DidyouknowUpdate({$trivia_id})">
+{/if}
+
+{* Return View for the did you know update *}
+{if isset($smarty_action) and $smarty_action == "did_you_know_update_returnview"}
+    {$trivia_text}
+    [BRK]
+    <input type="button" value="Edit"  class="topbutton_cpanel_small" onclick="DidyouknowEdit({$trivia_id})">
+{/if}

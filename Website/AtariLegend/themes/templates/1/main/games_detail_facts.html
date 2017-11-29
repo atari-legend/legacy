@@ -33,8 +33,8 @@
                                     {if isset($facts_screenshots)}
                                         {foreach from=$facts_screenshots item=line_screen}
                                             {if $line.game_fact_id == $line_screen.game_fact_id}  
-                                                <a href="../../includes/show_image.php?file={$line_screen.game_fact_screenshot}&amp;resize=410,null,null,null" data-lightbox="image-1">
-                                                    <img src="../../includes/show_image.php?file={$line_screen.game_fact_screenshot}&amp;resize=170,null,null,null" alt="Click to enlarge!" style="display:inline;" class="game_screenshot_img">
+                                                <a href="../../includes/show_image.php?file={$line_screen.game_fact_screenshot}" data-lightbox="image-1">
+                                                    <img src="../../includes/show_image.php?file={$line_screen.game_fact_screenshot}&amp;resize=170,null,null,null" alt="Click to enlarge!" style="display:inline;margin:5px;" class="game_screenshot_img">
                                                     
                                                 </a>
                                             {/if}
