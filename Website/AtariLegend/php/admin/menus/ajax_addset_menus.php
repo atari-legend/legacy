@@ -79,11 +79,11 @@ $sql_tools_chain = "SELECT tools.tools_id AS 'software_id',
                     LEFT JOIN menu_set ON (menu_set.menu_sets_id = menu_disk.menu_sets_id)
                     WHERE menu_disk_title.menu_types_main_id = '3'";
 
-$temp_query = $mysqli->query("CREATE TEMPORARY TABLE temp ENGINE=MEMORY $sql_games_chain") or die(mysqli_error());
-$temp_query = $mysqli->query("INSERT INTO temp $sql_demos_chain") or die(mysqli_error());
-$temp_query = $mysqli->query("INSERT INTO temp $sql_tools_chain") or die("you are a cock");
+$temp_query = $mysqli->query("CREATE TEMPORARY TABLE temp ENGINE=MEMORY $sql_games_chain") or die('Error: ' . mysqli_error($mysqli));
+$temp_query = $mysqli->query("INSERT INTO temp $sql_demos_chain") or die('Error: ' . mysqli_error($mysqli));
+$temp_query = $mysqli->query("INSERT INTO temp $sql_tools_chain") or die('Error: ' . mysqli_error($mysqli));
 
-$temp_query = $mysqli->query("SELECT * FROM temp ORDER BY menu_sets_name, software_name ASC") or die("does not compute3");
+$temp_query = $mysqli->query("SELECT * FROM temp ORDER BY menu_sets_name, software_name ASC") or die('Error: ' . mysqli_error($mysqli));
 
 $menu_disk_name_compare = "";
 
@@ -124,7 +124,7 @@ while ($row = $temp_query->fetch_array(MYSQLI_BOTH)) {
 //get the titles from this set
 //First get the setnr
 $sql_set_nr = "SELECT menu_disk_title_set_nr FROM menu_disk_title_set WHERE menu_disk_title_id = '$menu_disk_title_id'";
-$query_ser_nr = $mysqli->query($sql_set_nr) or die("problem with set nr query");
+$query_ser_nr = $mysqli->query($sql_set_nr) or die('Error: ' . mysqli_error($mysqli));
 $query_data = $query_ser_nr->fetch_array(MYSQLI_BOTH);
 $set_nr     = $query_data['menu_disk_title_set_nr'];
 
@@ -192,11 +192,11 @@ if ($set_nr <> '') {
                         WHERE menu_disk_title.menu_types_main_id = '3' AND menu_disk_title_set.menu_disk_title_set_nr = '$set_nr'
                         ORDER BY menu_disk_title_set.menu_disk_title_set_chain ASC";
 
-    $temp_query = $mysqli->query("CREATE TEMPORARY TABLE temp2 ENGINE=MEMORY $sql_games_chain") or die(mysqli_error());
-    $temp_query = $mysqli->query("INSERT INTO temp2 $sql_demos_chain") or die(mysqli_error());
-    $temp_query = $mysqli->query("INSERT INTO temp2 $sql_tools_chain") or die("you are a cock");
+    $temp_query = $mysqli->query("CREATE TEMPORARY TABLE temp2 ENGINE=MEMORY $sql_games_chain") or die('Error: ' . mysqli_error($mysqli));
+    $temp_query = $mysqli->query("INSERT INTO temp2 $sql_demos_chain") or die('Error: ' . mysqli_error($mysqli));
+    $temp_query = $mysqli->query("INSERT INTO temp2 $sql_tools_chain") or die('Error: ' . mysqli_error($mysqli));
 
-    $temp_query = $mysqli->query("SELECT * FROM temp2 ORDER BY menu_sets_name, software_name ASC") or die("does not compute3");
+    $temp_query = $mysqli->query("SELECT * FROM temp2 ORDER BY menu_sets_name, software_name ASC") or die('Error: ' . mysqli_error($mysqli));
 
     while ($row = $temp_query->fetch_array(MYSQLI_BOTH)) {
         // Create Menu disk name

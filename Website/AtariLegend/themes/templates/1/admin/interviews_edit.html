@@ -14,6 +14,9 @@
 *                   added the [frontpage] functionality
 *   Id: interviews_edit.html,v 0.22 2017/08/19 15:02 ST Graveyard
 *                   removed the [frontpage] functionality --> Why was this necessary??
+*   Id: interviews_edit.html,v 0.23 2017/10/17 Nico & STG
+*                   Fixing bugs and updating this section with JQUERY
+*                   Adding a JS preview
 ***************************************************************************/
 
 ///****************************************************************************************
@@ -23,6 +26,114 @@
 {extends file='1/admin/frontpage.html'}
 
 {block name=java_script}
+<!-- Lightbox for the screenshots -->
+<script type="text/javascript" src="{$template_dir}includes/js/vendor/lightbox-2.9.0.min.js"></script><!--lightbox popup script-->
+<link type="text/css" href="{$style_dir}css/vendor/lightbox-2.9.0.css" hreflang="en" rel="stylesheet">
+<script>
+    lightbox.option({
+      'showImageNumberLabel': false
+    })
+</script>
+
+<!-- Load the BBCODE script -->
+<script type="text/javascript" src="{$template_dir}includes/js/bbcode.js"></script>
+
+<!-- All the code for the tabs and the preview -->
+<script type="text/javascript">
+    function openTab(evt, tabName)
+    {
+        // Declare all variables
+        var i, tabcontent, tablinks;
+
+        // Get all elements with class="tabcontent" and hide them
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+
+        // Get all elements with class="tablinks" and remove the class "active"
+         tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+
+        // Show the current tab, and add an "active" class to the button that opened the tab
+        document.getElementById(tabName).style.display = "block";
+        evt.currentTarget.className += " active";
+
+        //al the java code for the filling of the fields in the preview tab!
+        if (tabName == 'preview')
+        {
+            //get the date field
+            var day = document.getElementsByName("Date_Day")[0].value;
+            document.getElementById("interview_preview_date").innerHTML = day;
+            document.getElementById("interview_preview_date").innerHTML += '-';
+            var month = document.getElementsByName("Date_Month")[0].value;
+            document.getElementById("interview_preview_date").innerHTML += month;
+            document.getElementById("interview_preview_date").innerHTML += '-';
+            var year = document.getElementsByName("Date_Year")[0].value;
+            document.getElementById("interview_preview_date").innerHTML += year;
+            
+            var user = document.getElementById("member_select");
+            var strUser = user.options[user.selectedIndex].text;
+            document.getElementById("interview_preview_user").innerHTML = strUser;
+            
+            //Do all the preps for the intro text!
+            var intro = document.getElementsByName("textintro")[0].value;
+            intro = previewText(intro);
+            document.getElementById("interview_preview_intro").innerHTML = intro;
+            
+            //Do all the preps for the chapters text!
+            var chapters = document.getElementsByName("textchapters")[0].value;
+            chapters = previewText(chapters);
+            document.getElementById("interview_preview_chapters").innerHTML = chapters;
+
+            //Do all the preps for the actual interview text!
+            var interview = document.getElementsByName("textfield")[0].value;
+            interview = previewText(interview);
+            document.getElementById("interview_preview_text").innerHTML = interview;
+            
+            //get the screenshots data
+            for (i = 1; i <= {$screenshots_nr}; i++)
+            {
+               var string = "comment_";
+               var string_comment = string.concat(i);
+               var comment = document.getElementById(string_comment).value;
+
+               if (comment == '')
+               {
+                    var string3 = "output_";
+                    var string_output = string3.concat(i);
+                    var output = document.getElementById(string_output);
+                    output.style.display='none';
+               }
+               else
+               {
+                   var string2 = "preview_comment_";
+                   var string_preview_comment = string2.concat(i);
+                   document.getElementById(string_preview_comment).innerHTML = comment;
+
+                   var string3 = "output_";
+                   var string_output = string3.concat(i);
+                   var output = document.getElementById(string_output);
+                   output.style.display='inline';
+               }
+            }
+        }
+    }
+</script>
+
+
+<!-- The autocomplete and dropdown switcher -->
+<script type='text/JavaScript' src="{$template_dir}includes/js/ui.widgets.js"></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $("select[name=members]").altAutocomplete();
+        $("select[name=individual]").altAutocomplete();
+    });
+</script>
+
+<!-- Delete the comments and the interview -->
 <script type="text/javascript">
 function deletecomment(screenshot_id, interview_id)
 {
@@ -54,135 +165,86 @@ function deleteinterview(interview_id)
     }
 }
 
-var clientPC = navigator.userAgent.toLowerCase(); // Get client info
-var clientVer = parseInt(navigator.appVersion); // Get browser version
-
-var is_ie = ((clientPC.indexOf("msie") != -1) && (clientPC.indexOf("opera") == -1));
-var is_nav = ((clientPC.indexOf('mozilla')!=-1) && (clientPC.indexOf('spoofer')==-1)
-                && (clientPC.indexOf('compatible') == -1) && (clientPC.indexOf('opera')==-1)
-                && (clientPC.indexOf('webtv')==-1) && (clientPC.indexOf('hotjava')==-1));
-var is_moz = 0;
-
-var is_win = ((clientPC.indexOf("win")!=-1) || (clientPC.indexOf("16bit") != -1));
-var is_mac = (clientPC.indexOf("mac")!=-1);
-
-// Helpline messages
-b_help = "Bold text: [b]text[/b]  (alt+b)";
-i_help = "Italic text: [i]text[/i]  (alt+i)";
-u_help = "Underline text: [u]text[/u]  (alt+u)";
-q_help = "Quote text: [quote]text[/quote]  (alt+q)";
-h_help = "Insert URL: [url]http://url[/url] or [url=http://url]URL text[/url]";
-e_help = "Insert email: [@]email address[/@] or [@=email]email text[/@]";
-s_help = "Insert Hotspot Source: [hotspotUrl=#]";
-t_help = "Insert Hotspot Target: [hotspot=#]";
-x_help = "Set Smiley";
-
-// Define the bbCode tags
-bbtags = new Array('[b]','[/b]','[i]','[/i]','[u]','[/u]','[url]','[/url]','[mail]','[/mail]', '[hotspotUrl=#]', '[/hotspotUrl]', '[hotspot=]', '[/hotspot]','[frontpage]','[/frontpage]');
-bbcode = new Array();
-imageTag = false;
-
-// Shows the help messages in the helpline window
-function helpline(help) {
-	document.post.helpbox.value = eval(help + "_help");
+//open the screenshot selection box
+function popAddScreenshots(str) {
+    if (str == "") {
+        document.getElementById("interview_expand_screenshots").innerHTML = "";
+        return;
+    } else {
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                document.getElementById("interview_expand_screenshots").innerHTML = xmlhttp.responseText;
+                document.getElementById("screenshot_link").innerHTML = "<a onclick=\"closeAddScreenshots("+str+")\" style=\"cursor: pointer;\" class=\"left_nav_link\"><i class=\"fa fa-minus-square-o\" aria-hidden=\"true\"></i> Add screenshots</a>";
+            }
+        }
+        xmlhttp.open("GET","../interviews/ajax_addscreenshots_interview.php?interview_id="+str,true);
+        xmlhttp.send();
+    }
 }
 
-function bbstyle(bbnumber, bbname) {
-
-	var txtarea = eval('document.post.' + bbname);
-
-	txtarea.focus();
-	donotinsert = false;
-	theSelection = false;
-	bblast = 0;
-
-	if (bbnumber == -1) { // Close all open tags & default button names
-		while (bbcode[0]) {
-			butnumber = arraypop(bbcode) - 1;
-			txtarea.value += bbtags[butnumber + 1];
-			buttext = eval('document.post.addbbcode' + butnumber + '.value');
-			eval('document.post.addbbcode' + butnumber + '.value ="' + buttext.substr(0,(buttext.length - 1)) + '"');
-		}
-		imageTag = false; // All tags are closed including image tags :D
-		txtarea.focus();
-		return;
-	}
-
-	if ((clientVer >= 4) && is_ie && is_win)
-	{
-		theSelection = document.selection.createRange().text; // Get text selection
-		if (theSelection) {
-			// Add tags around selection
-			document.selection.createRange().text = bbtags[bbnumber] + theSelection + bbtags[bbnumber+1];
-			txtarea.focus();
-			theSelection = '';
-			return;
-		}
-	}
-	else if (txtarea.selectionEnd && (txtarea.selectionEnd - txtarea.selectionStart > 0))
-	{
-		mozWrap(txtarea, bbtags[bbnumber], bbtags[bbnumber+1]);
-		return;
-	}
-
-	// Find last occurance of an open tag the same as the one just clicked
-	for (i = 0; i < bbcode.length; i++) {
-		if (bbcode[i] == bbnumber+1) {
-			bblast = i;
-			donotinsert = true;
-		}
-	}
-
-	if (donotinsert) {		// Close all open tags up to the one just clicked & default button names
-		while (bbcode[bblast]) {
-				butnumber = arraypop(bbcode) - 1;
-				txtarea.value += bbtags[butnumber + 1];
-				buttext = eval('document.post.addbbcode' + butnumber + '.value');
-				eval('document.post.addbbcode' + butnumber + '.value ="' + buttext.substr(0,(buttext.length - 1)) + '"');
-				imageTag = false;
-			}
-			txtarea.focus();
-			return;
-	} else { // Open tags
-
-		if (imageTag && (bbnumber != 14)) {		// Close image tag before adding another
-			txtarea.value += bbtags[15];
-			lastValue = arraypop(bbcode) - 1;	// Remove the close image tag from the list
-			document.post.addbbcode14.value = "Img";	// Return button back to normal state
-			imageTag = false;
-		}
-
-		// Open tag
-		txtarea.value += bbtags[bbnumber];
-		if ((bbnumber == 14) && (imageTag == false)) imageTag = 1; // Check to stop additional tags after an unclosed image tag
-		arraypush(bbcode,bbnumber+1);
-		eval('document.post.addbbcode'+bbnumber+'.value += "*"');
-		txtarea.focus();
-		return;
-	}
-	storeCaret(txtarea);
+//close the screenshot selection box
+function closeAddScreenshots(str) {
+        document.getElementById("interview_expand_screenshots").innerHTML = "";
+        document.getElementById("screenshot_link").innerHTML = "<a onclick=\"popAddScreenshots("+str+")\" style=\"cursor: pointer;\" class=\"left_nav_link\"><i class=\"fa fa-plus-square-o\" aria-hidden=\"true\"></i> Add screenshots</a>";
+        return;
 }
 
-// From http://www.massless.org/mozedit/
-function mozWrap(txtarea, open, close)
-{
-	var selLength = txtarea.textLength;
-	var selStart = txtarea.selectionStart;
-	var selEnd = txtarea.selectionEnd;
-	if (selEnd == 1 || selEnd == 2)
-		selEnd = selLength;
+//Save the screenshots to the interview
+function addScreenshottoInterview(interview_id) {
+ if (interview_id == "") {
+        document.getElementById("interview_screenshot_list").innerHTML = "";
+        return;
+    } else {
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
 
-	var s1 = (txtarea.value).substring(0,selStart);
-	var s2 = (txtarea.value).substring(selStart, selEnd)
-	var s3 = (txtarea.value).substring(selEnd, selLength);
-	txtarea.value = s1 + open + s2 + close + s3;
-	return;
+                data = xmlhttp.responseText.split ( "[BRK]" );
+                document.getElementById("interview_screenshot_list").innerHTML = data[0];
+
+                $.notify_osd.create({
+                    'text'        : data[1],             // notification message
+                    'icon'        : '{$style_dir}images/osd_icons/star.png', // icon path, 48x48
+                    'sticky'      : false,             // if true, timeout is ignored
+                    'timeout'     : 4,                 // disappears after 6 seconds
+                    'dismissable' : true               // can be dismissed manually
+                    });
+
+                document.getElementById("screenshot_add_to_interview").reset();
+            }
+        }
+
+        var formData = new FormData( document.getElementById("screenshot_add_to_interview") );
+
+        xmlhttp.open("POST","../interviews/db_interview.php?action2=add_screens",true);
+        xmlhttp.send(formData);
+    }
 }
 
-// Insert at Claret position. Code from
-// http://www.faqts.com/knowledge_base/view.phtml/aid/1052/fid/130
-function storeCaret(textEl) {
-	if (textEl.createTextRange) textEl.caretPos = document.selection.createRange().duplicate();
+//the code for the screenshot selector
+function myFunction() {  
+    $but = $('#file_upload_game_file');
+  
+    $("input:file[id=file_upload]").change(function() {
+        document.getElementById('file_upload_game_screenshots').value = 'file(s) selected';
+    });
+    
+    $("input:file[id=file_upload2]").change(function() {
+        document.getElementById('file_upload_game_file').value = $(this).val();
+    });
 }
 </script>
 {/block}
@@ -190,159 +252,244 @@ function storeCaret(textEl) {
 {block name=title}Edit Interviews - <a href="../individuals/individuals_edit.php?ind_id={$interview.interview_ind_id}" class="left_nav_links">{$interview.interview_ind_name}</a>{/block}
 
 {block name=main_tile}
-<div class="standard_tile" id="interviews_edit">
-    <div class="help-tip">
-        <p>
-			This is where the actual interview is inserted in the database. Overhere you'll notice 3 main text boxes.
-			<br>
+
+    <div class="standard_tile" id="interviews_edit">
+        <div class="help-tip">
+            <p>
+                Here you can edit an existing interview. Overhere you'll notice 3 main text boxes.
+                <br>
+                <br>
+                <i><b>- Intro :</b></i> The introduction to the interview. This is the short text you will see in the main interview section and in the 'who is it' tile.
+                <br>
+                <br>
+                <i><b>- Chapters :</b></i> A bit more complex. You just add as many chapters as you like.
+                eg : <i>Introduction, It started back then...</i>These chapters should have some sort of hotspot. Therefor you should always select each chapter and press the hotspotsource button. It also necesarry to give each chapter a unique number (behind the # sign).
+                This chapter can be link to a certain place in the actual interview section by selecting the place and pressing the hotspottarget button. And ofcourse adding the appropriate number.
+                <br>
+                <br>
+                <i><b>- Interview :</b></i> This is where you'll add the actual interview text.
+                <br>
+                <br>
+                You can add screenshots by pressing the link at the bottom of the screen. Once shots have been linked to an interview, they will appear in this screen with their own comment fields for you to fill out if needed.
+                <br>
+                <br>
+                Use the 'preview' tab to get an idea of what the interview will look like on the main website.
+                <br>
+                <br>
+                <i class="fa fa-chevron-circle-down" aria-hidden="true" title="Click for drop down mode"></i> : Click this item to switch from list to input mode and vice versa
+                <br>
+                <br>
+                <i class="fa fa-trash-o" aria-hidden="true" title="Click to delete screenshot"></i> : Once a screenshot is added to the DB, you need to press this icon if you want to delete it.
+            </p>
+        </div>
+        {if isset($interview.interview_ind_name)}
+        <h1><a href="../individuals/individuals_edit.php?ind_id={$interview.interview_ind_id}" class="standard_tile_link">{$interview.interview_ind_name|upper}</a></h1>
+        <div class="standard_tile_line"></div>
+        <div class="standard_tile_text">
+            <div class="left_nav_section">
+                At this page you can change an existing interview in the AL database. The screen might seem a little complex,
+                therefor I suggest you first read the help provided with this section on the top right.
+            </div>
             <br>
-			<i><b>- Intro :</b></i> This is where you'll write a little introduction to the interview. This text is placed in the boxes of the main interview section of AL (and in the search results). Use the 'Frontpage' button to mark the text used in the 'who is it' tile on the website.
-			<br>
             <br>
-			<i><b>- Chapters :</b></i> This is a section especially created for chapters. Its a bit more complex. You just add as many chapters as you like.
-            eg : <i>Introduction, It started back then...</i>These chapters should have some sort of hotspot. Therefor you should always select each chapter and press the hotspotsource button. It also necesarry to give each chapter a unique number (behind the # sign).
-			This chapter can be link to a certain place in the actual interview section by selecting the place and pressing the hotspottarget button. And ofcourse adding the appropriate number.
-			<br>
-			<br>
-			<i><b>- Interview :</b></i> This is where you'll add the actual interview text.
-			<br>
-			<br>
-            You can add screenshots by pressing the link at the bottom of the screen. Once shots have been linked to an interview, they will appear in this screen with their own comment fields for you to fill out if needed.
+            <div class="tab">
+              <button class="tablinks" onclick="openTab(event, 'edit')" id="defaultOpen">EDIT</button>
+              <button class="tablinks" onclick="openTab(event, 'preview')">PREVIEW</button>
+            </div>
             <br>
-			<br>
-			Remember that you have a lot of freedom regarding layout issues. Even the "enters" you place in a text field are translated to the AL page, so make something nice of it, will you? :-)
-        </p>
+            <br>
+            <div id="edit" class="tabcontent">
+                <form action="../interviews/db_interview.php" method="post" name="post" id="screenshot_add_to_interview">
+                    <fieldset>
+                        <legend>Edit interview</legend>
+                        <br>
+                        <div style="display:inline-block;">
+                            <b>Written by : </b>
+                            <br>
+                            <select name="members"
+                                data-alt-autocomplete-endpoint="../../../php/admin/common/autocomplete.php?extraParams=admin-user"
+                                data-alt-autocomplete-toggle="#members_select_toggle"
+                                id="member_select">
+                                <option value="-">-</option>
+                                {foreach from=$authors item=line}
+                                    {if $line.user_id == $interview.interview_author}
+                                        <option value="{$line.user_id}" selected>{$line.user_name}</option>
+                                    {else}
+                                        <option value="{$line.user_id}">{$line.user_name}</option>
+                                    {/if}
+                                {/foreach}
+                            </select>
+                            <a href="javascript:;" class="left_nav_link" id="members_select_toggle" ><i class="fa fa-chevron-circle-down" aria-hidden="true" ></i></a>
+                        </div>
+                        <br>
+                        <br>
+                        <div style="display:inline-block;">
+                            <b>Individual :</b>
+                            <br>
+                            <select name="individual" 
+                                data-alt-autocomplete-endpoint="../../../php/admin/common/autocomplete.php?extraParams=individual"
+                                data-alt-autocomplete-toggle="#individual_select_toggle"
+                                id="member_select">>
+                                <option value="-">-</option>
+                                {foreach from=$individuals item=line}
+                                  {if $line.ind_id == $interview.interview_ind_id}
+                                    <option value="{$line.ind_id}" selected>{$line.ind_name}</option>
+                                  {else}
+                                    <option value="{$line.ind_id}">{$line.ind_name}</option>
+                                  {/if}
+                                {/foreach}          
+                            </select>
+                            <a href="javascript:;" class="left_nav_link" id="individual_select_toggle" ><i class="fa fa-chevron-circle-down" aria-hidden="true" ></i></a>
+                            <br>
+                            <br>
+                        </div>
+                        <div style="width:100%;">
+                            <div style="width:20%;"><b>Date :</b></div>
+                            <div style="width:200px;">{html_select_date time=$interview.interview_date start_year="2000"}</div>
+                        </div>
+                        <br>
+                        <br>
+                        <b>Intro :</b>
+                        <br>
+                        <input type="button" accesskey= "b" name="addbbcode0" value="B" onclick="bbstyle(0,'textintro')">
+                        <input type="button" accesskey= "u" name="addbbcode4" value="U" onclick="bbstyle(4,'textintro')">
+                        <input type="button" accesskey= "i" name="addbbcode2" value="I" onclick="bbstyle(2,'textintro')">
+                        <input type="button" accesskey="w" name="addbbcode6" value="URL" onClick="bbstyle(6,'textintro')">
+                        <input type="button" accesskey="x" name="addbbcode8" value="@" onClick="bbstyle(8,'textintro')">
+                        <!--<input type="button" accesskey="frontpage" name="addbbcode16" value="Frontpage" onClick="bbstyle(14,'textintro')">-->
+                        <textarea name="textintro" id="game_review_textfield" ONSELECT="javascript:storeCaret(this);" ONCLICK="javascript:storeCaret(this);" ONKEYUP="javascript:storeCaret(this);" ONCHANGE="javascript:storeCaret(this);" rows="5" style="padding-left:0px;height:200px;">{$interview.interview_intro}</textarea>
+                        <br>
+                        <br>
+                        <b>Chapters :</b>
+                        <br>
+                        <input type="button" accesskey= "b" name="addbbcode0" value="B" onclick="bbstyle(0,'textchapters')">
+                        <input type="button" accesskey= "u" name="addbbcode4" value="U" onclick="bbstyle(4,'textchapters')">
+                        <input type="button" accesskey= "i" name="addbbcode2" value="I" onclick="bbstyle(2,'textchapters')">
+                        <input type="button" accesskey="w" name="addbbcode6" value="URL" onClick="bbstyle(6,'textchapters')">
+                        <input type="button" accesskey="x" name="addbbcode8" value="@" onClick="bbstyle(8,'textchapters')">
+                        <input type="button" accesskey= "s" name="addbbcode10" value="Hotspot Source" onclick="bbstyle(10,'textchapters')"/>
+                        <textarea name="textchapters" id="game_review_textfield" ONSELECT="javascript:storeCaret(this);" ONCLICK="javascript:storeCaret(this);" ONKEYUP="javascript:storeCaret(this);" ONCHANGE="javascript:storeCaret(this);" rows="5" style="padding-left:0px;">{$interview.interview_chapters}</textarea>
+                        <br>
+                        <br>
+                        <b>Interview :</b>
+                        <br>
+                        <input type="button" accesskey= "b" name="addbbcode0" value="B" onclick="bbstyle(0,'textfield')">
+                        <input type="button" accesskey= "u" name="addbbcode4" value="U" onclick="bbstyle(4,'textfield')">
+                        <input type="button" accesskey= "i" name="addbbcode2" value="I" onclick="bbstyle(2,'textfield')">
+                        <input type="button" accesskey="w" name="addbbcode6" value="URL" onClick="bbstyle(6,'textfield')">
+                        <input type="button" accesskey="x" name="addbbcode8" value="@" onClick="bbstyle(8,'textfield')"/>
+                        <input type="button" accesskey= "t" name="addbbcode12" value="Hotspot Target" onclick="bbstyle(12,'textfield')">
+                        <textarea name="textfield" id="game_review_textfield" ONSELECT="javascript:storeCaret(this);" ONCLICK="javascript:storeCaret(this);" ONKEYUP="javascript:storeCaret(this);" ONCHANGE="javascript:storeCaret(this);" rows="15" style="padding-left:0px;">{$interview.interview_text}</textarea>
+                    </fieldset>
+                    <br>
+                    <fieldset class="centered_fieldset">
+                        <legend>Screenshots</legend>
+                        <br>
+                        <div id="interview_screenshot_list">
+                        {if $screenshots_nr <> ''}
+                            <table class="standard_table_list_no_hover">
+                            {foreach from=$screenshots item=line}
+                                <tr>
+                                    <td style="width:1%;border:0;">
+                                        <a href="javascript:deletecomment({$line.interview_screenshot_id},{$interview.interview_id})" class="standard_tile_link">
+                                            <i class="fa fa-trash-o" aria-hidden="true" title="Click to delete screenshot"></i>
+                                        </a>
+                                    </td>
+                                    <td style="width:9%;border:0;">
+                                        <a href="../../includes/show_image.php?file={$line.interview_screenshot}" data-lightbox="image-1">
+                                            <img src="../../includes/show_image.php?file={$line.interview_screenshot}&amp;resize=75,null,null,null&amp;crop=null,null,null,null" alt="screenshot" style="display:inline; margin:5px;" class="game_screenshot_img">
+                                        </a>
+                                    </td>
+                                    <td style="width:90%;border:0;">
+                                        <input type="text" name="inputfield[]" value="{$line.interview_screenshot_comment}" class="standard_tile_input_small" style="width:95%;" id="comment_{$line.interview_screenshot_count}">
+                                    </td> 
+                                </tr>
+                            {/foreach}
+                            </table>
+                            <br>
+                        {/if}
+                        </div>
+                        <div id="screenshot_link"><a onclick="popAddScreenshots({$interview.interview_id})" style="cursor: pointer;" class="left_nav_link"><i class="fa fa-plus-square-o" aria-hidden="true"></i> Add screenshots</a></div>
+                        <div id="interview_expand_screenshots"></div>
+                        <br>
+                        <br>
+                        <input type="hidden" name="interview_id" value="{$interview.interview_id}">
+                        <input type="hidden" name="action" value="update_interview">
+                        <input type="submit" name="update" value="Update" class="topbutton_cpanel_small">
+                        <input type="button" name="delete" value="Delete" onclick="deleteinterview({$interview.interview_id})" class="topbutton_cpanel_small">
+                    </fieldset>
+                </form>
+            </div>
+            <div id="preview" class="tabcontent">
+                <fieldset>
+                    <legend>Preview</legend>
+                    <div class="review_container">
+                        <div class="review_child" id="review_text">
+                            Written by <span id="interview_preview_user"></span>
+                            <b><div id="interview_preview_date"></div></b>
+                            <br>
+                            <br>
+                            <u>INTRO</u>
+                            <br>
+                            <br>
+                            <div id="interview_preview_intro"></div>
+                            <br>
+                            <br>
+                            <u>CHAPTERS</u>
+                            <br>
+                            <br>
+                            <div id="interview_preview_chapters"></div>
+                            <br>
+                            <br>
+                            <u>INTERVIEW</u>
+                            <br>
+                            <br>
+                            <div id="interview_preview_text"></div>
+                            <br>
+                            <br>
+                        </div>	
+                        <div class="review_child" id="review_screenshots">
+                            <div class="review_screenshot_space">
+                                <br>
+                                <br>
+                                <br>
+                            </div>
+                            {if isset($screenshots)}
+                                {foreach from=$screenshots item=line} 
+                                    <div id="output_{$line.interview_screenshot_count}">
+                                        <div class="interview_preview_screenshot_order">
+                                            <a href="../../includes/show_image.php?file={$line.interview_screenshot}" data-lightbox="image-1">
+                                                <img src="../../includes/show_image.php?file={$line.interview_screenshot}&amp;resize=170,null,null,null" alt="Click to enlarge!" style="display:inline;" class="game_screenshot_img">
+                                            </a>
+                                            <br><b><span style="font-weight: bold;" id="preview_comment_{$line.interview_screenshot_count}"></span></b>
+                                            <br>
+                                            <br>
+                                            <br>
+                                        </div>
+                                    </div>
+                                {/foreach}
+                            {/if}
+                        </div>		
+                    </div>	
+                    <br>
+                </fieldset>
+            </div>
+            <br>
+            {else}
+                <h1>Interview edit</h1>
+                <div class="standard_tile_line"></div>
+                <div class="standard_tile_text">
+                    <div class="left_nav_section">
+                        Interview does not exist.
+                    </div>
+                </div>
+            {/if}
+            <div class="standard_table_center"><a href="../interviews/interviews_main.php" class="standard_tile_link">back</a></div>
+            <br>
+        </div>
     </div>
-	{if isset($interview.interview_ind_name)}
-	<h1>{$interview.interview_ind_name}</h1>
-	<div class="standard_tile_line"></div>
-	<div class="standard_tile_text">
-		<div class="left_nav_section">
-			At this page you can change an existing interview in the AL database. The screen might seem a little complex,
-			therefor I suggest you first read the help provided with this section on the top right.
-		</div>
-		<br>
-		<br>
-		<form action="../interviews/db_interview.php" method="post" name="post">
-			<fieldset>
-				<legend>Preview interview</legend>
-					<a href="../interviews/interviews_preview.php?interview_id={$interview.interview_id}" class="left_nav_link"> Preview </a> this interview<br>
-			</fieldset>
-			<br>
-			<fieldset>
-				<legend>Edit interview</legend>
-				<br>
-				<div style="display:inline-block;">
-					<b>Written by : </b>
-					<br>
-					<select name="members" id="quick_search_pub_select">
-						<option value="-">-</option>
-						{foreach from=$authors item=line}
-							{if $line.user_id == $interview.interview_author}
-								<option value="{$line.user_id}" selected>{$line.user_name}</option>
-							{else}
-								<option value="{$line.user_id}">{$line.user_name}</option>
-							{/if}
-						{/foreach}
-					</select>
-				</div>
-				<br>
-				<br>
-				<div style="display:inline-block;">
-					<b>Individual :</b>
-					<br>
-					<select name="individual" id="quick_search_pub_select">
-						<option value="-">-</option>
-						{foreach from=$individuals item=line}
-							{if $line.ind_id == $interview.interview_ind_id}
-								<option value="{$line.ind_id}" selected>{$line.ind_name}</option>
-							{else}
-								<option value="{$line.ind_id}">{$line.ind_name}</option>
-							{/if}
-						{/foreach}
-					</select>
-					<br>
-					<br>
-				</div>
-				<div style="width:100%;">
-					<div style="width:20%;"><b>Date :</b></div>
-					<div style="width:200px;">{html_select_date time=$interview.interview_date start_year="2000"}</div>
-				</div>
-				<br>
-				<br>
-				<b>Intro :</b>
-				<br>
-				<input type="button" accesskey= "b" name="addbbcode0" value="B" onclick="bbstyle(0,'textintro')">
-				<input type="button" accesskey= "u" name="addbbcode4" value="U" onclick="bbstyle(4,'textintro')">
-				<input type="button" accesskey= "i" name="addbbcode2" value="I" onclick="bbstyle(2,'textintro')">
-				<input type="button" accesskey="w" name="addbbcode6" value="URL" onClick="bbstyle(6,'textintro')">
-				<input type="button" accesskey="x" name="addbbcode8" value="@" onClick="bbstyle(8,'textintro')">
-                <!--<input type="button" accesskey="frontpage" name="addbbcode16" value="Frontpage" onClick="bbstyle(14,'textintro')">-->
-				<textarea name="textintro" id="game_review_textfield" ONSELECT="javascript:storeCaret(this);" ONCLICK="javascript:storeCaret(this);" ONKEYUP="javascript:storeCaret(this);" ONCHANGE="javascript:storeCaret(this);" rows="5" style="padding-left:0px;">{$interview.interview_intro}</textarea>
-				<br>
-				<br>
-				<b>Chapters :</b>
-				<br>
-				<input type="button" accesskey= "b" name="addbbcode0" value="B" onclick="bbstyle(0,'textchapters')">
-				<input type="button" accesskey= "u" name="addbbcode4" value="U" onclick="bbstyle(4,'textchapters')">
-				<input type="button" accesskey= "i" name="addbbcode2" value="I" onclick="bbstyle(2,'textchapters')">
-				<input type="button" accesskey="w" name="addbbcode6" value="URL" onClick="bbstyle(6,'textchapters')">
-				<input type="button" accesskey="x" name="addbbcode8" value="@" onClick="bbstyle(8,'textchapters')">
-				<input type="button" accesskey= "s" name="addbbcode10" value="Hotspot Source" onclick="bbstyle(10,'textchapters')"/>
-				<textarea name="textchapters" id="game_review_textfield" ONSELECT="javascript:storeCaret(this);" ONCLICK="javascript:storeCaret(this);" ONKEYUP="javascript:storeCaret(this);" ONCHANGE="javascript:storeCaret(this);" rows="5" style="padding-left:0px;">{$interview.interview_chapters}</textarea>
-				<br>
-				<br>
-				<b>Interview :</b>
-				<br>
-				<input type="button" accesskey= "b" name="addbbcode0" value="B" onclick="bbstyle(0,'textfield')">
-				<input type="button" accesskey= "u" name="addbbcode4" value="U" onclick="bbstyle(4,'textfield')">
-				<input type="button" accesskey= "i" name="addbbcode2" value="I" onclick="bbstyle(2,'textfield')">
-				<input type="button" accesskey="w" name="addbbcode6" value="URL" onClick="bbstyle(6,'textfield')">
-				<input type="button" accesskey="x" name="addbbcode8" value="@" onClick="bbstyle(8,'textfield')"/>
-				<input type="button" accesskey= "t" name="addbbcode12" value="Hotspot Target" onclick="bbstyle(12,'textfield')">
-				<textarea name="textfield" id="game_review_textfield" ONSELECT="javascript:storeCaret(this);" ONCLICK="javascript:storeCaret(this);" ONKEYUP="javascript:storeCaret(this);" ONCHANGE="javascript:storeCaret(this);" rows="15" style="padding-left:0px;">{$interview.interview_text}</textarea>
-			</fieldset>
-			<br>
-			<fieldset class="centered_fieldset">
-				<legend>Screenshots</legend>
-				<br>
-				{if $screenshots_nr <> ''}
-					{foreach from=$screenshots item=line}
-						<img src="../../includes/show_image.php?file={$line.interview_screenshot}&amp;resize=200,null,null,null&amp;crop=null,null,null,null" alt="screenshot" style="display:inline;" class="game_screenshot_img">
-						<br>
-						<br>
-						<input class="game_review_screenshot_text" type="text" name="inputfield[]" value="{$line.interview_screenshot_comment}">
-						<br>
-						<a href="javascript:deletecomment({$line.interview_screenshot_id},{$interview.interview_id})" class="left_nav_link">Delete Shot</a>
-						<br>
-						<br>
-						<br>
-					{/foreach}
-					Want to add more screenshots? Go <a href="interviews_screenshots_add.php?interview_id={$interview.interview_id}" class="left_nav_link">here</a>!
-				{else}
-					There are currently no screenshots attached to this interview. Go to the <a href="interviews_screenshots_add.php?interview_id={$interview.interview_id}" class="left_nav_link">screenshot adding</a>
-					page to link specific screenshots to this interview. Remember that you have to create an interview first before actually uploading screenshots!
-				{/if}
-				<br>
-				<br>
-				<input type="hidden" name="interview_id" value="{$interview.interview_id}">
-				<input type="hidden" name="action" value="update_interview">
-				<input type="submit" name="update" value="Update" class="topbutton_cpanel_small">
-				<input type="button" name="delete" value="Delete" onclick="deleteinterview({$interview.interview_id})" class="topbutton_cpanel_small">
-			</fieldset>
-		</form>
-		<br>
-		{else}
-			<h1>Interview edit</h1>
-			<div class="standard_tile_line"></div>
-			<div class="standard_tile_text">
-				<div class="left_nav_section">
-					Interview does not exist.
-				</div>
-			</div>
-		{/if}
-		<div class="standard_table_center"><a href="../interviews/interviews_main.php" class="standard_tile_link">back</a></div>
-		<br>
-	</div>
-</div>
+    <script>
+        // Get the element with id="defaultOpen" and click on it
+        document.getElementById("defaultOpen").click();
+    </script>
 {/block}

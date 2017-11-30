@@ -50,7 +50,7 @@ $sql_menus = "SELECT menu_disk.menu_sets_id,
                         LEFT JOIN menu_disk_state ON ( menu_disk.state = menu_disk_state.state_id)
                         WHERE menu_disk.menu_sets_id = '$menu_sets_id' ORDER BY menu_disk_number, menu_disk_letter, menu_disk_part, menu_disk_version ASC";
 
-$result_menus = $mysqli->query($sql_menus) or die ("error in select");
+$result_menus = $mysqli->query($sql_menus) or die('Error: ' . mysqli_error($mysqli));
 
 $rows = $result_menus->num_rows;
 $i    = 0;
@@ -106,7 +106,7 @@ $smarty->assign('menu_set', array(
 ));
 
 // Crew data for crew editor
-$sql_crew = $mysqli->query("SELECT * FROM crew WHERE crew_name REGEXP '^[0-9].*' ORDER BY crew_name") or die("Couldn't query Crew database");
+$sql_crew = $mysqli->query("SELECT * FROM crew WHERE crew_name REGEXP '^[0-9].*' ORDER BY crew_name") or die('Error: ' . mysqli_error($mysqli));
 
 while ($crew_result = $sql_crew->fetch_array(MYSQLI_BOTH)) {
     $smarty->append('crew', array(
@@ -121,17 +121,18 @@ $sql_crew = $mysqli->query("SELECT
                         crew.crew_name
                         FROM crew_menu_prod
                         LEFT JOIN crew ON (crew_menu_prod.crew_id = crew.crew_id)
-                        WHERE crew_menu_prod.menu_sets_id = '$menu_sets_id' ORDER BY crew.crew_name ASC") or die("Couldn't query Crew database");
+                        WHERE crew_menu_prod.menu_sets_id = '$menu_sets_id' ORDER BY crew.crew_name ASC") or die('Error: ' . mysqli_error($mysqli));
 
 while ($crew_result = $sql_crew->fetch_array(MYSQLI_BOTH)) {
     $smarty->append('connected_crew', array(
         'crew_id' => $crew_result['crew_id'],
-        'crew_name' => $crew_result['crew_name']
+        'crew_name' => $crew_result['crew_name'],
+        'menu_sets_id' => $menu_sets_id
     ));
 }
 
 // ind data for ind editor
-$sql_ind = $mysqli->query("SELECT * FROM individuals WHERE ind_name REGEXP '^[0-9].*' ORDER BY ind_name") or die("Couldn't query individuals database");
+$sql_ind = $mysqli->query("SELECT * FROM individuals WHERE ind_name REGEXP '^[0-9].*' ORDER BY ind_name") or die('Error: ' . mysqli_error($mysqli));
 
 while ($ind_result = $sql_ind->fetch_array(MYSQLI_BOTH)) {
     $smarty->append('ind', array(
@@ -146,17 +147,18 @@ $sql_ind = $mysqli->query("SELECT
                             individuals.ind_name
                             FROM ind_menu_prod
                             LEFT JOIN individuals ON (ind_menu_prod.ind_id = individuals.ind_id)
-                            WHERE ind_menu_prod.menu_sets_id = '$menu_sets_id' ORDER BY individuals.ind_name ASC") or die("Couldn't query individuals database for ind connection");
+                            WHERE ind_menu_prod.menu_sets_id = '$menu_sets_id' ORDER BY individuals.ind_name ASC") or die('Error: ' . mysqli_error($mysqli));
 
 while ($ind_result = $sql_ind->fetch_array(MYSQLI_BOTH)) {
     $smarty->append('connected_ind', array(
         'ind_id' => $ind_result['ind_id'],
-        'ind_name' => $ind_result['ind_name']
+        'ind_name' => $ind_result['ind_name'],
+        'menu_sets_id' => $menu_sets_id
     ));
 }
 
 //get the menu types for the types dropdown
-$sql_menu_types = $mysqli->query("SELECT * FROM menu_types_main") or die("Couldn't query menu types main database");
+$sql_menu_types = $mysqli->query("SELECT * FROM menu_types_main") or die('Error: ' . mysqli_error($mysqli));
 
 while ($menu_types_result = $sql_menu_types->fetch_array(MYSQLI_BOTH)) {
     $smarty->append('menu_types', array(
@@ -171,12 +173,13 @@ $sql_menu_types_connection = $mysqli->query("SELECT
                         menu_types_main.menu_types_text
                         FROM menu_types_main
                         LEFT JOIN menu_type ON ( menu_type.menu_types_main_id =  menu_types_main.menu_types_main_id)
-                        WHERE menu_type.menu_sets_id = '$menu_sets_id'") or die("Couldn't query menu types database for type connection");
+                        WHERE menu_type.menu_sets_id = '$menu_sets_id'") or die('Error: ' . mysqli_error($mysqli));
 
 while ($menu_types_connection_result = $sql_menu_types_connection->fetch_array(MYSQLI_BOTH)) {
     $smarty->append('connected_menu_types', array(
         'menu_types_main_id' => $menu_types_connection_result['menu_types_main_id'],
-        'menu_types_text' => $menu_types_connection_result['menu_types_text']
+        'menu_types_text' => $menu_types_connection_result['menu_types_text'],
+        'menu_sets_id' => $menu_sets_id
     ));
 }
 

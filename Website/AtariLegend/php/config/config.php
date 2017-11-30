@@ -31,6 +31,11 @@ define("SITESTATUS", "online");
 define("SITEHOST", "www.atarilegend.com");
 define("SITEURL", "http://".SITEHOST."/");
 
+// The URL of the site as requested in the browser, without a trailing slash
+// Useful to generate absolute URLs that will work both
+// for 'localhost', 'dev.stonish.net' and 'www.atarilegend.com'
+define("REQUEST_SITEURL", $_SERVER["REQUEST_SCHEME"]."://".$_SERVER["HTTP_HOST"]);
+
 //***************************************************************
 // Setup the Smarty Templating framework
 //***************************************************************

@@ -31,8 +31,7 @@ html {
 }
 
 body{
-    /* font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI","Roboto","Helvetica Neue", Arial, sans-serif; */
-    font-family: verdana;
+    font-family: verdana, Arial, Helvetica, sans-serif;
     background-color: #000;
 }
 
@@ -494,6 +493,13 @@ img { display: block; }
     margin: 0;
     border-bottom: solid 1px #000;
 }
+
+.standard_table_list_no_hover{
+    @extend .standard_table_list;
+}
+
+.standard_table_list_no_hover tr:nth-child(even) { background-color: #006f6f; }
+.standard_table_list_no_hover tr:nth-child(odd) { background-color: #294f4f; }
 
 .standard_table_center {
     font-size: 10pt;

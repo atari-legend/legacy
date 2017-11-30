@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+	<sitemap>
+		<loc>{$smarty.const.REQUEST_SITEURL}/front/sitemap_general.php</loc>
+	</sitemap>
+	<sitemap>
+		<loc>{$smarty.const.REQUEST_SITEURL}/front/sitemap_games.php?letter=-</loc>
+	</sitemap>
+{foreach from=$range item=item}
+	<sitemap>
+		<loc>{$smarty.const.REQUEST_SITEURL}/front/sitemap_games.php?letter={$item}</loc>
+	</sitemap>
+{/foreach}
+</sitemapindex>

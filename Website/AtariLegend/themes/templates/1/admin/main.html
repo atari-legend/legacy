@@ -30,9 +30,8 @@
         <meta name="apple-mobile-web-app-capable" content="yes"><!-- apple -->
         <!-- End - let the site behave like a mobile app on phone -->
         <link type="text/css" href="{$style_dir}css/style.css" rel="stylesheet" id="main_stylesheet">
-        <link type="text/css" href="{$style_dir}css/jquery-ui.css" rel="Stylesheet">
-        <link type="text/css" href="{$style_dir}css/jquery.fancybox.css" rel="Stylesheet">
-        <link type="text/css" href="{$style_dir}css/notify-osd.css" hreflang="en" rel="stylesheet">
+        <link type="text/css" href="{$style_dir}css/vendor/jquery-ui-1.11.4.css" rel="Stylesheet">
+        <link type="text/css" href="{$style_dir}css/vendor/notify-osd-51f8de7.css" hreflang="en" rel="stylesheet">
         <!-- start - get the icons used for mobile devices -->
         <link rel="icon" href="{$template_dir}includes/icons/favicon.png"> <!-- fav icon & Chrome mobile icon-->
         <link rel="apple-touch-icon" sizes="57x57" href="{$template_dir}includes/icons/icon-57x57.png">
@@ -40,13 +39,12 @@
         <link rel="apple-touch-icon" sizes="114x114" href="{$template_dir}includes/icons/icon-114x114.png">
         <link rel="apple-touch-icon" sizes="144x144" href="{$template_dir}includes/icons/icon-144x144.png">
         <!-- end - get the icons used for mobile devices -->
-        <script type="text/javascript" src="{$template_dir}includes/js/jquery-2.1.4.min.js"></script> <!-- main jquery stuff -->
-        <script type="text/javascript" src="{$template_dir}includes/js/jquery-ui.js"></script> <!-- main jqueryUI stuff -->
-        <script type="text/javascript" src="{$template_dir}includes/js/jquery.fancybox.pack.js"></script>
-        <script type="text/javascript" src="{$template_dir}includes/js/notify-osd.js"></script>
-        <script type='text/JavaScript' src="{$template_dir}includes/js/sha512.js"></script> <!-- log on security script -->
-		<script type='text/JavaScript' src="{$template_dir}includes/js/md5.js"></script>  <!-- log on security script -->
-        <script type='text/JavaScript' src="{$template_dir}includes/js/forms.js"></script> <!-- log on security script -->
+        <script type="text/javascript" src="{$template_dir}includes/js/vendor/jquery-2.1.4.min.js"></script> <!-- main jquery stuff -->
+        <script type="text/javascript" src="{$template_dir}includes/js/vendor/jquery-ui-1.11.4.min.js"></script> <!-- main jqueryUI stuff -->
+        <script type="text/javascript" src="{$template_dir}includes/js/vendor/notify-osd-51f8de7.min.js"></script>
+        <script type='text/javascript' src="{$template_dir}includes/js/vendor/sha512-2.2.min.js"></script> <!-- log on security script -->
+        <script type='text/javascript' src="{$template_dir}includes/js/vendor/md5-1.0.1.min.js"></script>  <!-- log on security script -->
+        <script type='text/javascript' src="{$template_dir}includes/js/forms.js"></script> <!-- log on security script -->
         <script type="text/javascript"> <!-- script needed for the side menu -->
             //<![CDATA[
             $(window).load(function(){
@@ -87,23 +85,23 @@
                 });
             {/if}
         </script>
-        <script type="text/javascript"> 
+        <script type="text/javascript">
             $(document).ready(function(){
               $('#login-trigger').click(function(){  <!-- script needed log in menu -->
                 $(this).next('#login-content').slideToggle();
-                $(this).toggleClass('active');          
-                
+                $(this).toggleClass('active');
+
                 if ($(this).hasClass('active')) $(this).find('span').html('&#x25B2;')
                   else $(this).find('span').html('&#x25BC;')
                 })
             });
         </script>
         {literal}
-        <script> <!-- The 'go to the top' buttong -->         
+        <script> <!-- The 'go to the top' buttong -->
             $(function(){
-             
+
                 $(document).on( 'scroll', function(){
-             
+
                     if ($(window).scrollTop() > 100) {
                         $('.scroll-top-wrapper').addClass('show');
                     } else {
@@ -112,20 +110,20 @@
                 });
             });
         </script>
-        <script> <!-- The 'go to the top' buttong -->  
-            $(function(){            
+        <script> <!-- The 'go to the top' buttong -->
+            $(function(){
                 $(document).on( 'scroll', function(){
-             
+
                     if ($(window).scrollTop() > 100) {
                         $('.scroll-top-wrapper').addClass('show');
                     } else {
                         $('.scroll-top-wrapper').removeClass('show');
                     }
                 });
-             
+
                 $('.scroll-top-wrapper').on('click', scrollToTop);
             });
-             
+
             function scrollToTop() {
                 verticalOffset = typeof(verticalOffset) != 'undefined' ? verticalOffset : 0;
                 element = $('body');
@@ -270,7 +268,7 @@
                                             <li><a href="../downloads/download_options.php" title="Download options" class="sidebutton_cpanel">DOWNLOAD OPTIONS</a></li>
                                             <li><a href="../downloads/download_lingo.php" title="Languages" class="sidebutton_cpanel">LANGUAGES</a></li>
                                             <li><a href="../downloads/download_tos.php" title="TOS version" class="sidebutton_cpanel">TOS VERSIONS</a></li>
-                                            <li><a href="../downloads/download_trainer.php" title="Trainer options" class="sidebutton_cpanel">TRAINER OPTIONS</a></li>                                           
+                                            <li><a href="../downloads/download_trainer.php" title="Trainer options" class="sidebutton_cpanel">TRAINER OPTIONS</a></li>
                                             <li><a href="../articles/articles_main.php" title="Articles" class="sidebutton_cpanel">ARTICLES</a></li>
                                             <li><a href="../articles/article_type.php" title="Article types" class="sidebutton_cpanel">ARTICLE TYPES</a></li>
                                             <li><a href="../administration/construction.php" title="Add magazines" class="sidebutton_cpanel">ADD MAGAZINES</a></li>
@@ -327,20 +325,20 @@
                                {else}
                                    <div id="log_on_button"><img src="../../includes/show_image.php?file={$user_session.image}&amp;resize=23,null,null,null" alt="Avatar" class="log_on_avatar" style="display:inline;">&nbsp; {$user_session.userid}<span>▼</span></div>
                                    <div id="log_on_button_480"><img src="../../includes/show_image.php?file={$user_session.image}&amp;resize=23,null,null,null" alt="Avatar" class="log_on_avatar" style="display:inline;"></div>
-                               {/if} 
+                               {/if}
                            {/if}
                           </a>
-                          <div id="login-content">                    
+                          <div id="login-content">
                             {if ! isset($user_session.userid)}
                                 <form action="../../common/login/user_process_login.php" method="post" name="login_form" onsubmit="formhash(this, this.password);">
                                 <fieldset>
-                                    <input class="standard_tile_input_small" type="text" name="userid" placeholder="Username" required>   
+                                    <input class="standard_tile_input_small" type="text" name="userid" placeholder="Username" required>
                                     <input class="standard_tile_input_small" type="password" name="password" placeholder="Password" required>
                                     <div class="links_mod_checkbox">
                                         <input type="checkbox" id="remember_me" name="remember_me" value="1">
                                         <label for="remember_me"></label>&nbsp;Remember me
                                     </div>
-                                    <br>                               
+                                    <br>
                                     <input type="submit" value="Sign in" class="topbutton_cpanel_small">
                                     <br><br>
                                     <span class="log_on_text"><a href="../../main/front/front.php?action=reset" class="standard_tile_link_black"><i class="fa fa-angle-double-right" aria-hidden="true"></i>&nbsp;Forgot password?</a></span>
@@ -354,13 +352,13 @@
                                    <span class="log_on_text"><a href="../../main/front/front.php?" class="standard_tile_link_black"><i class="fa fa-desktop" aria-hidden="true"></i>&nbsp; Main site</a></span>
                                    <br>
                                    <span class="log_on_text"><a href="../../admin/user/user_detail.php?user_id_selected={$user_session.user_id}" class="standard_tile_link_black"><i class="fa fa-user-circle-o" aria-hidden="true"></i>&nbsp; User Profile</a></span>
-                                   <br><br>   
+                                   <br><br>
                                    <input type="hidden" name="action" value="cpanel">
                                    <input type="Submit" value="Sign out" class="topbutton_cpanel_small">
                                </fieldset>
                                </form>
                             {/if}
-                          </div>                     
+                          </div>
                         </li>
                       </ul>
                     </div>
@@ -451,7 +449,7 @@
                                 <li><a href="../downloads/download_options.php" title="Download options" class="subbutton">OPTIONS</a></li>
                                 <li><a href="../downloads/download_lingo.php" title="Languages" class="subbutton">LANGUAGES</a></li>
                                 <li><a href="../downloads/download_tos.php" title="TOS version" class="subbutton">TOS VERSIONS</a></li>
-                                <li><a href="../downloads/download_trainer.php" title="Trainer options" class="subbutton">TRAINERS</a></li>   
+                                <li><a href="../downloads/download_trainer.php" title="Trainer options" class="subbutton">TRAINERS</a></li>
                                 <li><a href="../articles/articles_main.php" title="Articles" class="subbutton">ARTICLES</a></li>
                                 <li><a href="../articles/article_type.php" title="Article types" class="subbutton">ARTICLE TYPES</a></li>
                                 <li><a href="../administration/construction.php" title="Add magazines" class="subbutton">ADD MAGAZINES</a></li>
@@ -464,8 +462,8 @@
             </header>
         </div>
         <div id="wrapper">
-            {block name=main_body}{/block}           
-            <div class="main_online">                 
+            {block name=main_body}{/block}
+            <div class="main_online">
                 {block name=who_is_online}
                     {include file='1/admin/who_is_online.html'}
                 {/block}

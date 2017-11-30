@@ -46,7 +46,7 @@ function commentdelete(JScomID,JSusers_id)
 
 {block name=main_tile}
 
-<link rel="stylesheet" href="{$template_dir}includes/font-awesome-4.7.0/css/font-awesome.min.css"> <!-- Font awesome for icons-->
+<link rel="stylesheet" href="{$style_dir}css/vendor/font-awesome-4.7.0/css/font-awesome.min.css"> <!-- Font awesome for icons-->
 
 <div class="standard_tile" id="games_comment">
     <div class="help-tip">
@@ -70,7 +70,7 @@ function commentdelete(JScomID,JSusers_id)
 		{foreach from=$comments item=line}
 			<tr>
 				<td class="gc_left_head">
-					Radom shot
+					Random shot
 				</td>
 				<td class="gc_center_head">
 					<a href="../games/games_detail.php?game_id={$line.game_id}" class="links_addnew_link">{$line.game}</a>
