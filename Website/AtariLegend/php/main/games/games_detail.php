@@ -29,14 +29,14 @@ include("../../config/common.php");
  * return A text description of the game
  */
 function generate_game_description(
-    string $game_name,
-    bool $game_free,
-    array $game_years,
-    array $game_categories,
-    array $game_developers,
-    int $screenshots,
-    int $boxscans,
-    int $reviews) {
+    $game_name,
+    $game_free,
+    $game_years,
+    $game_categories,
+    $game_developers,
+    $screenshots,
+    $boxscans,
+    $reviews) {
 
     $desc = "$game_name is a ";
     if ($game_free) {
@@ -663,7 +663,7 @@ while ($query_comment = $sql_comment->fetch_array(MYSQLI_BOTH)) {
 
             );
         }
-        
+
         $fact_text = nl2br($sql_games_facts['game_fact']);
         $fact_text = InsertALCode($fact_text); // disabled this as it wrecked the design.
         $fact_text = trim($fact_text);
