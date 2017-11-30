@@ -1,12 +1,11 @@
 <?php
 /***************************************************************************
-*                                classAL.php
+*                                about.php
 *                            ------------------------------
 *   begin                : Friday, September 14, 2017
 *   copyright            : (C) 2017 Atari Legend
 *   email                : martens_maarten@hotmail.com
 *
-*   Id: classAL.php,v 0.1 2017/09/14 11:39 STG
 ****************************************************************************/
 
 //*********************************************************************************************
@@ -52,7 +51,7 @@ if (isset($action) and $action == 'andreas') {
     $smarty->assign('action', 'andreas');
 }
 
-$smarty->display("file:" . $mainsite_template_folder . "class_of_AL.html");
+$smarty->display("file:" . $mainsite_template_folder . "about.html");
 
 //close the connection
 mysqli_close($mysqli);
