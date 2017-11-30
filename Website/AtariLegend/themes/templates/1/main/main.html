@@ -21,18 +21,17 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
-		<meta name="description" content="Atari Legend : Legends never die!">
-		<meta name="keywords" content="atari, atari st, games, game, demo, demos, reviews, articles, interviews, st">
-		<title> {block name=title}Atari Legend | Legends Never Die{/block}</title>
+		<meta name="description" content="{block name=description}{/block}">
+		<title>{block name=title}Atari ST games, reviews, interviews and news | Atari Legend{/block}</title>
 		<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
 		<!-- start - let the site behave like a mobile app on phone -->
 		<meta name="mobile-web-app-capable" content="yes"><!-- Chrome-->
 		<meta name="apple-mobile-web-app-capable" content="yes"><!-- apple -->
 		<!-- End - let the site behave like a mobile app on phone -->
 		<link type="text/css" href="{$style_dir}css/style.css" rel="stylesheet" id="main_stylesheet">
-		<link type="text/css" href="{$style_dir}css/jquery-ui.css" rel="Stylesheet">
-        <link type="text/css" href="{$style_dir}css/notify-osd.css" hreflang="en" rel="stylesheet">
-        <link type="text/css" href="{$style_dir}css/animsition.min.css" hreflang="en" rel="stylesheet"><!-- fade up script needed for the intro page -->
+		<link type="text/css" href="{$style_dir}css/vendor/jquery-ui-1.11.4.css" rel="Stylesheet">
+        <link type="text/css" href="{$style_dir}css/vendor/notify-osd-51f8de7.css" hreflang="en" rel="stylesheet">
+        <link type="text/css" href="{$style_dir}css/vendor/animsition-4.0.2.min.css" hreflang="en" rel="stylesheet"><!-- fade up script needed for the intro page -->
 		<link rel="icon" href="{$template_dir}includes/icons/favicon.png"> <!-- fav icon -->
 		<!-- start - get the icons used for mobile devices -->
 		<link rel="apple-touch-icon-precomposed" sizes="57x57" href="{$template_dir}includes/icons/icon-57x57.png">
@@ -40,14 +39,14 @@
 		<link rel="apple-touch-icon-precomposed" sizes="114x114" href="{$template_dir}includes/icons/icon-114x114.png">
 		<link rel="apple-touch-icon-precomposed" sizes="144x144" href="{$template_dir}includes/icons/icon-144x144.png">
 		<!-- end - get the icons used for mobile devices -->
-		<script type='text/javascript' src="{$template_dir}includes/js/respond.min.js"></script> <!-- script needed for the side menu -->
-		<script type='text/JavaScript' src="{$template_dir}includes/js/sha512.js"></script> <!-- log on security script -->
-		<script type='text/JavaScript' src="{$template_dir}includes/js/md5.js"></script>  <!-- log on security script -->
-        <script type='text/JavaScript' src="{$template_dir}includes/js/forms.js"></script> <!-- log on security script -->
-		<script type="text/javascript" src="{$template_dir}includes/js/jquery-1.11.3.min.js"></script> <!-- main jquery stuff -->
-		<script type="text/javascript" src="{$template_dir}includes/js/jquery-ui.js"></script> <!-- main jqueryUI stuff -->
-        <script type="text/javascript" src="{$template_dir}includes/js/notify-osd.js"></script>
-		<script type="text/javascript">
+        <script type='text/javascript' src="{$template_dir}includes/js/vendor/respond-1.1.0.min.js"></script> <!-- script needed for the side menu -->
+        <script type='text/javascript' src="{$template_dir}includes/js/vendor/sha512-2.2.min.js"></script> <!-- log on security script -->
+        <script type='text/javascript' src="{$template_dir}includes/js/vendor/md5-1.0.1.min.js"></script>  <!-- log on security script -->
+        <script type='text/javascript' src="{$template_dir}includes/js/forms.js"></script> <!-- log on security script -->
+        <script type="text/javascript" src="{$template_dir}includes/js/vendor/jquery-2.1.4.min.js"></script> <!-- main jquery stuff -->
+        <script type="text/javascript" src="{$template_dir}includes/js/vendor/jquery-ui-1.11.4.min.js"></script> <!-- main jqueryUI stuff -->
+        <script type="text/javascript" src="{$template_dir}includes/js/vendor/notify-osd-51f8de7.min.js"></script>
+        <script type="text/javascript">
         <!-- script needed for the autocompletion search engine -->
                 $(document).ready(function() {
                     $( "#auto" ).autocomplete({
@@ -187,7 +186,7 @@
                                         <li><a href="../front/front.php?action=construction" class="sidebutton" id="links_side">LINKS</a></li>
                                         <li><a href="../../admin/" class="sidebutton" id="cpanel_side">CPANEL</a></li>
                                         <li><a href="http://www.atari-forum.com" class="sidebutton" id="forum_main_side">FORUM</a></li>
-                                        <li><a href="../classAL/classAL.php" class="sidebutton" id="about_side">ABOUT</a></li>
+                                        <li><a href="../about/about.php" class="sidebutton" id="about_side">ABOUT</a></li>
                                     </ul>
                                 </nav>
                             </div>
@@ -300,7 +299,7 @@
 							<li><a href="../front/front.php?action=construction" class="topbutton" id="links">LINKS</a></li>
 							<li><a href="../../admin/" class="topbutton" id="cpanel">CPANEL</a></li>
 							<li><a href="http://www.atari-forum.com" class="topbutton" id="forum_top">FORUM</a></li>
-							<li><a href="../classAL/classAL.php" class="topbutton" id="about">ABOUT</a></li>
+							<li><a href="../about/about.php" class="topbutton" id="about">ABOUT</a></li>
 							<li><div class="searchbutton" id="search_text"><input type="text" id="auto" name="gamesearch"></div></li>
 							<li><input type="submit" id="search" value=""></li>
 						</ul>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+	<url>
+		<loc>{$smarty.const.REQUEST_SITEURL}/</loc>
+		<changefreq>daily</changefreq>
+	</url>
+	<url>
+		<loc>{$smarty.const.REQUEST_SITEURL}/news/news.php</loc>
+		<changefreq>daily</changefreq>
+	</url>
+{foreach from=$interview_ids item=id}
+	<url>
+		<loc>{$smarty.const.REQUEST_SITEURL}/interviews/interviews_detail.php?selected_interview_id={$id}</loc>
+		<changefreq>monthly</changefreq>
+	</url>
+{/foreach}
+{foreach from=$review_ids item=id}
+	<url>
+		<loc>{$smarty.const.REQUEST_SITEURL}/games/games_reviews_detail.php?review_id={$id}</loc>
+		<changefreq>monthly</changefreq>
+	</url>
+{/foreach}
+</urlset> 
+

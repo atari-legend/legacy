@@ -491,6 +491,13 @@ a.standard_tile_link:focus {
     margin: 0;
 }
 
+.standard_table_list_no_hover{
+    @extend .standard_table_list;
+}
+
+.standard_table_list_no_hover tr:nth-child(even) { background-color: #eee; }
+.standard_table_list_no_hover tr:nth-child(odd) { background-color: #dbd7d1; }
+
 .standard_table_center {
     font-size: 16px;
     font-weight: 100;

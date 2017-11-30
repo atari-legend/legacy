@@ -16,8 +16,10 @@ include("../../config/common.php");
 include("../../config/admin.php");
 include("../../config/admin_rights.php");
 
+echo $action;
+
 if ($action == "game_fact_insert") {
-    
+      
     if ($fact_text == '')
     {
         $_SESSION['edit_message'] = "Please add an actual fact in the textfield";
@@ -121,3 +123,42 @@ if ($action == "fact_delete") {
         header("Location: ../games/games_facts.php?game_id=$game_id&game_name=$game_name");        
     }
 }
+
+if ($action == "delete_screenshot") {
+    //****************************************************************************************
+    // Delete the screenshot of a fact
+    //****************************************************************************************
+    //get the extension
+    $SCREENSHOT = $mysqli->query("SELECT * FROM screenshot_main
+                              WHERE screenshot_id = '$screenshot_id'") or die("Database error - selecting screenshots");
+
+    $screenshotrow  = $SCREENSHOT->fetch_array(MYSQLI_BOTH);
+    $screenshot_ext = $screenshotrow['imgext'];
+
+    $sql = $mysqli->query("DELETE FROM screenshot_main WHERE screenshot_id = '$screenshot_id' ") or die("Database error - deleting from screenshot_main");
+    $sql = $mysqli->query("DELETE FROM screenshot_game_fact WHERE screenshot_id = '$screenshot_id' ") or die("Database error - deleting from screenshot_game_fact");
+
+    $new_path = $game_fact_screenshot_save_path;
+    $new_path .= $screenshot_id;
+    $new_path .= ".";
+    $new_path .= $screenshot_ext;
+
+    unlink("$new_path");  
+             
+    create_log_entry('Games', $game_id, 'Fact', $game_id, 'Delete shot', $_SESSION['user_id']);
+    
+    $_SESSION['edit_message'] = "Screenshot deleted";
+    header("Location: ../games/games_facts.php?game_id=$game_id");    
+} 
+
+if ($action == "fact_update")  
+{
+    //****************************************************************************************
+    // Update the fact
+    //****************************************************************************************    
+    $fact_text = $mysqli->real_escape_string($fact);        
+    $mysqli->query("UPDATE game_fact SET game_fact='$fact_text' WHERE game_fact_id='$fact_id'") or die("couldn't update game_facts table");
+        
+    create_log_entry('Games', $game_id, 'Fact', $game_id, 'Update', $_SESSION['user_id']);  
+    header("Location: ../games/games_facts.php?game_id=$game_id");    
+}   

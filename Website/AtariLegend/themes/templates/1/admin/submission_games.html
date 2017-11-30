@@ -64,8 +64,8 @@ function submovetocomment(JSsubID)
 }
 </script>
 <!-- lightbox screenshot pop up script -->
-<script type="text/javascript" src="{$template_dir}includes/js/lightbox.min.js"></script>
-<link type="text/css" href="{$style_dir}css/lightbox.css" hreflang="en" rel="stylesheet">
+<script type="text/javascript" src="{$template_dir}includes/js/vendor/lightbox-2.9.0.min.js"></script>
+<link type="text/css" href="{$style_dir}css/vendor/lightbox-2.9.0.css" hreflang="en" rel="stylesheet">
 
 <script>
     lightbox.option({
@@ -77,7 +77,7 @@ function submovetocomment(JSsubID)
 {block name=title}Game Submissions{/block}
 
 {block name=main_tile}
-<link rel="stylesheet" href="{$template_dir}includes/font-awesome-4.7.0/css/font-awesome.min.css"> <!-- Font awesome for icons-->
+<link rel="stylesheet" href="{$style_dir}css/vendor/font-awesome-4.7.0/css/font-awesome.min.css"> <!-- Font awesome for icons-->
 
 <div class="standard_tile" id="games_submissions">
     <div class="help-tip">
@@ -118,7 +118,7 @@ function submovetocomment(JSsubID)
 		{foreach from=$submission item=line}
 			<tr>
 				<td class="gc_left_head">
-					Radom shot
+					Random shot
 				</td>
 				<td class="gc_center_head">
 					<a href="../games/games_detail.php?game_id={$line.game_id}" class="links_addnew_link">{$line.game_name}</a>

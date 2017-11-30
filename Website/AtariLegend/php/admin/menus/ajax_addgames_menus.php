@@ -138,9 +138,6 @@ if (isset($action) and ($action == "game_browse" xor $action == "game_search")) 
     $mysqli->query("INSERT INTO temp $sql_build_tool") or die("Couldn't query Software Database7 ($sql_build_tool)");
 
     $sql_series_link = $mysqli->query("SELECT * FROM temp ORDER BY software_name ASC") or die(mysqli_error());
-    
-    /*$sql_series_link = $mysqli->query($sql_build)
-    or die ("Couldn't query Software Database5 ($sql_build)");*/
 
     $smarty->assign('smarty_action', 'game_list');
 

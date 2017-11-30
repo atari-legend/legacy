@@ -1,0 +1,30 @@
+version: '3'
+services:
+  # Database instance
+  db:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: atari
+    volumes:
+      - ./db:/var/lib/mysql
+      # Need special MySQL config to disable `only_full_group_by`
+      - ./mysqld.cnf:/etc/mysql/conf.d/mysqld.cnf
+  # PHP instance
+  php:
+    # Custom image as we need specific extensions
+    build: ./php
+    links:
+      - db
+    ports:
+      - 80:80
+    volumes:
+      - ../Website/AtariLegend:/var/www/html
+    depends_on:
+      - db
+  # Convenience phpMyAdmin image to administer the database
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    links:
+      - db:db
+    ports:
+      - 8080:80

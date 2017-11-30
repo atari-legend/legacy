@@ -1156,6 +1156,15 @@
     #interview_preview_photo {display: none;}
 }
 
+@media screen and (max-width: 1199px) {   
+    .interview_preview_screenshot_order {
+        display: inline-block;
+        vertical-align: top;
+    }
+    
+    #review_screenshots{background:#eee;}
+}
+
 
 //*----------------------------------------------------------
 //Admin - DB updates
