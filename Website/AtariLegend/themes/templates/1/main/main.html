@@ -29,7 +29,7 @@
 		<meta name="apple-mobile-web-app-capable" content="yes"><!-- apple -->
 		<!-- End - let the site behave like a mobile app on phone -->
 		<link type="text/css" href="{$style_dir}css/style.css" rel="stylesheet" id="main_stylesheet">
-		<link type="text/css" href="{$style_dir}css/vendor/jquery-ui-1.11.4.css" rel="Stylesheet">
+		<link type="text/css" href="{$style_dir}css/vendor/jquery-ui-1.11.4.min.css" rel="Stylesheet">
         <link type="text/css" href="{$style_dir}css/vendor/notify-osd-51f8de7.css" hreflang="en" rel="stylesheet">
         <link type="text/css" href="{$style_dir}css/vendor/animsition-4.0.2.min.css" hreflang="en" rel="stylesheet"><!-- fade up script needed for the intro page -->
 		<link rel="icon" href="{$template_dir}includes/icons/favicon.png"> <!-- fav icon -->
@@ -150,7 +150,7 @@
                 }, 500, 'linear');
             }
         </script>
- 
+
         {* Insert Google Analytics tags only on production *}
         {if $smarty.server.HTTP_HOST == $smarty.const.SITEHOST}
         {literal}
