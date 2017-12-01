@@ -1,24 +1,21 @@
-(function($) {
+(function ($) {
     /**
      * jQuery plugin to provide an alternative auto-completed input
      * field to an existing select dropdown */
     $.fn.altAutocomplete = function () {
         this.each(function () {
             // Get all attributes on our <select> tag
-            var selectElement = $(this);
-
-            var selectName = selectElement.attr('name'),
+            var selectElement = $(this),
+                selectName = selectElement.attr('name'),
                 // Currently selected label and value
-                selectedLabel = selectElement.find(':selected').text(), 
-                selectedValue = selectElement.find(':selected').val(),
+                selectedLabel = selectElement.find(':selected').text(),
                 // Various attribute we need to perform the auto-complete:
                 // - the Ajax endpoint
                 completeEndpoint = selectElement.data('alt-autocomplete-endpoint'),
                 // - Which element is used to toggle between select / input mode
-                toggleControl = selectElement.data('alt-autocomplete-toggle');
-
-            // Generate an ID for the auto-completed input based on the select name
-            var displaySelectId = selectName + '-autocomplete-display';
+                toggleControl = selectElement.data('alt-autocomplete-toggle'),
+                // Generate an ID for the auto-completed input based on the select name
+                displaySelectId = selectName + '-autocomplete-display';
 
             // Some select are initialized with '-'. We don't want to display
             // this in input mode, so clear it
@@ -27,21 +24,21 @@
             }
 
             // Setup the autocomplete input field
-            var autocompleteDisplayInput = $('<input type="text" class="ui-widget-inline standard_tile_input_small" id="'+displaySelectId+'" value="'+selectedLabel+'">');
+            var autocompleteDisplayInput = $('<input type="text" class="ui-widget-inline standard_tile_input_small" id="' + displaySelectId + '" value="' + selectedLabel + '">');
             autocompleteDisplayInput
                 .autocomplete({
                     source: completeEndpoint,
                     minLength: 2,
                     select: function (evt, ui) {
                         // Synchronize the <input> value with the <select> one
-                        
+
                         // When a selection is chosen, update the input
                         // with the label, and select the correct <option>
                         // within the <select>
                         $(this).val(ui.item.label);
                         selectElement.val(ui.item.value).trigger('change');
                         return false;
-                    },
+                    }
                 })
                 .insertAfter(selectElement);
 
@@ -51,7 +48,7 @@
                 // with label of the currently selected value
                 autocompleteDisplayInput.val($(this).find('option:selected').text());
             });
-    
+
             // Setup the toggle button
             $(toggleControl).click(function () {
                 // When the toggle is clicked, show/hide the
@@ -65,10 +62,9 @@
                 if (autocompleteDisplayInput.is(':visible')) {
                     $(this).attr('title', 'Click for dropdown mode');
                 } else {
-                    $(this).attr('title', 'Click for autocompleted input field mode');                    
+                    $(this).attr('title', 'Click for autocompleted input field mode');
                 }
             });
-
 
             // Everything is ready, now hide our <select> by default
             selectElement.toggleClass('ui-widget-hidden');
