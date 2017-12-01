@@ -1,0 +1,15 @@
+{
+    "extends": "standard",
+    "rules": {
+        "semi": ["off", "always"],
+        "indent": ["error", 4],
+        "one-var": ["off"]
+    },
+    "env": {
+        "browser": true,
+        "jquery": true
+    },
+    "globals": {
+        "Tabulator": true
+    }
+}
