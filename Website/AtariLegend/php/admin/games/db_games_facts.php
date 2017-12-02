@@ -16,8 +16,6 @@ include("../../config/common.php");
 include("../../config/admin.php");
 include("../../config/admin_rights.php");
 
-echo $action;
-
 if ($action == "game_fact_insert") {
       
     if ($fact_text == '')
