@@ -3,13 +3,16 @@
     "rules": {
         "semi": ["off", "always"],
         "indent": ["error", 4],
-        "one-var": ["off"]
+        "one-var": ["off"],
+        "linebreak-style": ["error", "unix"]
     },
     "env": {
         "browser": true,
         "jquery": true
     },
     "globals": {
-        "Tabulator": true
+        "Tabulator": true,
+        "md5": true,
+        "hex_sha512": true
     }
 }
