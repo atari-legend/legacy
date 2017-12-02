@@ -7,6 +7,9 @@ an update/upgrade :wink:
 
 # Local installation
 
+Follow the instructions below to setup your local environment. Alternatively,
+use the [pre-configured Docker setup](Docker/README.md).
+
 ## Prerequisites
 
 * A web server with PHP, with the `mysqli` and `gd` extensions (Require PNG and JPEG support)
