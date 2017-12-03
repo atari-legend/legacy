@@ -90,16 +90,16 @@ function SaveEditable(comment_id,user_id,type) {
 
 function DeleteEditable(comment_id,user_id,type) {
 
-     // CONFIRM REQUIRES ONE ARGUMENT
-     var message = "Are you sure you want to delete this comment?";
-     // CONFIRM IS BOOLEAN. THAT MEANS THAT
-     // IT RETURNS TRUE IF 'OK' IS CLICKED
-     // OTHERWISE IT RETURN FALSE
-     var return_value = confirm(message);
+    // CONFIRM REQUIRES ONE ARGUMENT
+    var message = "Are you sure you want to delete this comment?";
+    // CONFIRM IS BOOLEAN. THAT MEANS THAT
+    // IT RETURNS TRUE IF 'OK' IS CLICKED
+    // OTHERWISE IT RETURN FALSE
+    var return_value = confirm(message);
 
-     if (return_value !="0")
-     {
-         if (comment_id == "")
+    if (return_value !="0")
+    {
+        if (comment_id == "")
             {
                 document.getElementById("latest_comments_all").innerHTML = "";
                 return;
@@ -127,7 +127,7 @@ function DeleteEditable(comment_id,user_id,type) {
                 xmlhttp.send();
             }
         }
-     }
+    }
 </script>
 {/literal}
 
@@ -266,7 +266,7 @@ function DeleteEditable(comment_id,user_id,type) {
                     {if isset($type) and $type=='user'}
                         {if isset($comments)}
                         {else}
-                         <tr>
+                        <tr>
                             <td width="100%">
                                 <div class="standard_list_entry_news_text" style="text-align:center;">
                                     You haven't written any game comments. Browse the library, share some memories and upgrade your karma stats ;-)

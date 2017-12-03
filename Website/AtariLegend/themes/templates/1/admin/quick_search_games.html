@@ -1,4 +1,4 @@
-{* 
+{*
 /***************************************************************************
 *                                quick_search_games.html
 *                            ----------------------------
@@ -8,14 +8,14 @@
 *   actual update        : Creation of file
 *
 *   Id: quick_search_games,v 0.1 2015/08/23 ST Graveyard
-*	Id: quick_search_games,v 0.2 2015/12/21 ST Graveyard - 1920 compatible/HTML validated
-*	Id: quick_search_games,v 0.21 2017/01/06 ST Graveyard - Falcon RGB & VGA
+*   Id: quick_search_games,v 0.2 2015/12/21 ST Graveyard - 1920 compatible/HTML validated
+*   Id: quick_search_games,v 0.21 2017/01/06 ST Graveyard - Falcon RGB & VGA
 *
 ***************************************************************************/
 
 //****************************************************************************************
 // This is the quick game search for the left part of the cpanel
-//**************************************************************************************** 
+//****************************************************************************************
 *}
 
 {block name=quick_search_games}
@@ -23,229 +23,229 @@
 function gameinsert()
 {
     JSnewgame=document.getElementById("qs_newgame").value;
-	
-	if (JSnewgame=='')
-	{
-		alert('Please fill in a game name');
-	}
-	else
-	{
-    	// CONFIRM REQUIRES ONE ARGUMENT
-    	var message = "Are you sure you want to insert this game into the database?";
-    	// CONFIRM IS BOOLEAN. THAT MEANS THAT
-    	// IT RETURNS TRUE IF 'OK' IS CLICKED
-    	// OTHERWISE IT RETURN FALSE
-    	var return_value = confirm(message);
-		
-    	if (return_value !="0")
-    	{
-    		url="../games/db_games_detail.php?newgame="+JSnewgame+"&action=insert_game";
-			location.href=url;
-    	} 
-	}
+
+    if (JSnewgame=='')
+    {
+        alert('Please fill in a game name');
+    }
+    else
+    {
+        // CONFIRM REQUIRES ONE ARGUMENT
+        var message = "Are you sure you want to insert this game into the database?";
+        // CONFIRM IS BOOLEAN. THAT MEANS THAT
+        // IT RETURNS TRUE IF 'OK' IS CLICKED
+        // OTHERWISE IT RETURN FALSE
+        var return_value = confirm(message);
+
+        if (return_value !="0")
+        {
+            url="../games/db_games_detail.php?newgame="+JSnewgame+"&action=insert_game";
+            location.href=url;
+        }
+    }
 }
 </script>
 
 <div class="standard_tile">
-	<h1>QUICKSEARCH</h1>
-	<div class="standard_tile_line"></div>
-		<div class="standard_list_entry">
-			<div class="standard_table_center">
-				<form method="post" name="insertgame">
-					<br>Add new Game:<br>	
-					<input type="text" name="newgame" id="qs_newgame" value="" class="standard_tile_input_small"><br><br>	
-					<input type="submit" value="Insert" onClick="gameinsert(); return false;" class="quick_search_games_button">	
-				</form>
-			</div>
-			<br>
-			<div class="standard_tile_line"></div>
-			<br>
-			<form action="../games/games_list.php" method="get" name="game_search" id="game_search">
-				<div class="standard_table_center">
-					<h3>Search for Game:</h3>	<br> 			
-					<div class="standard_table_center">
-						By name :<br>	
-						<select name="gamebrowse" id="quick_search_small_select">
-							<option value="" SELECTED>-</option>
-							{html_options values=$az_value output=$az_output}
-						</select>
-						<input type="text" name="gamesearch" value="" class="standard_tile_input_small">
-					</div>
-					<br>
-					<div class="standard_table_center">
-						By Publisher : <br>
-						<select name="publisher" id="quick_search_pub_select">
-							<option value="-" SELECTED>-</option>
-							{foreach from=$company_publisher item=line} 
-								<option value="{$line.comp_id}">{$line.comp_name}</option>
-							{/foreach}
-						</select>		
-					</div>
-					<br>
-					<div class="standard_table_center">
-						By Developer : <br>
-						<select name="developer" id="quick_search_dev_select">
-							<option value="-" SELECTED>-</option>
-							{foreach from=$company_developer item=line} 
-								<option value="{$line.comp_id}">{$line.comp_name}</option>
-							{/foreach}
-						</select>
-					</div>
-					<br>
-					<br>
-					<div id="quick_search_options" class="standard_table_left">
-						<div style="display:table-row;">
-							<div style="display:table-cell;font-weight:bold;vertical-align:middle;">
+    <h1>QUICKSEARCH</h1>
+    <div class="standard_tile_line"></div>
+        <div class="standard_list_entry">
+            <div class="standard_table_center">
+                <form method="post" name="insertgame">
+                    <br>Add new Game:<br>
+                    <input type="text" name="newgame" id="qs_newgame" value="" class="standard_tile_input_small"><br><br>
+                    <input type="submit" value="Insert" onClick="gameinsert(); return false;" class="quick_search_games_button">
+                </form>
+            </div>
+            <br>
+            <div class="standard_tile_line"></div>
+            <br>
+            <form action="../games/games_list.php" method="get" name="game_search" id="game_search">
+                <div class="standard_table_center">
+                    <h3>Search for Game:</h3>   <br>
+                    <div class="standard_table_center">
+                        By name :<br>
+                        <select name="gamebrowse" id="quick_search_small_select">
+                            <option value="" SELECTED>-</option>
+                            {html_options values=$az_value output=$az_output}
+                        </select>
+                        <input type="text" name="gamesearch" value="" class="standard_tile_input_small">
+                    </div>
+                    <br>
+                    <div class="standard_table_center">
+                        By Publisher : <br>
+                        <select name="publisher" id="quick_search_pub_select">
+                            <option value="-" SELECTED>-</option>
+                            {foreach from=$company_publisher item=line}
+                                <option value="{$line.comp_id}">{$line.comp_name}</option>
+                            {/foreach}
+                        </select>
+                    </div>
+                    <br>
+                    <div class="standard_table_center">
+                        By Developer : <br>
+                        <select name="developer" id="quick_search_dev_select">
+                            <option value="-" SELECTED>-</option>
+                            {foreach from=$company_developer item=line}
+                                <option value="{$line.comp_id}">{$line.comp_name}</option>
+                            {/foreach}
+                        </select>
+                    </div>
+                    <br>
+                    <br>
+                    <div id="quick_search_options" class="standard_table_left">
+                        <div style="display:table-row;">
+                            <div style="display:table-cell;font-weight:bold;vertical-align:middle;">
                                 <div class="checkbox_alt">
                                     <input type="checkbox" value="1" id="falcon_only" name="falcon_only">&nbsp;&nbsp;Falcon only
                                     <label for="falcon_only"></label>
-                                    <!--<input type="checkbox" name="falcon_only" value="1" class="quick_search_check">-->               
-                                </div>                 
-                            </div>   
-						</div>
-						<div style="display:table-row;">	
-							<div style="display:table-cell;font-weight:bold;vertical-align:middle;">
+                                    <!--<input type="checkbox" name="falcon_only" value="1" class="quick_search_check">-->
+                                </div>
+                            </div>
+                        </div>
+                        <div style="display:table-row;">
+                            <div style="display:table-cell;font-weight:bold;vertical-align:middle;">
                                 <div class="checkbox_alt">
                                     <input type="checkbox" value="1" id="falcon_enhanced" name="falcon_enhanced">&nbsp;&nbsp;Falcon Enhanced
                                     <label for="falcon_enhanced"></label>
                                     <!--<input type="checkbox" name="falcon_enhanced" value="1" class="quick_search_check">-->
                                 </div>
-							</div>
-						</div>
+                            </div>
+                        </div>
                         <div style="display:table-row;">
-							<div style="display:table-cell;font-weight:bold;vertical-align:middle;">
+                            <div style="display:table-cell;font-weight:bold;vertical-align:middle;">
                                 <div class="checkbox_alt">
                                     <input type="checkbox" value="1" id="falcon_rgb" name="falcon_rgb">&nbsp;&nbsp;Falcon RGB
                                     <label for="falcon_rgb"></label>
                                     <!--<input type="checkbox" name="falcon_rgb" value="1" class="quick_search_check">-->
                                 </div>
-							</div>
-						</div>
-						<div style="display:table-row;">	
-							<div style="display:table-cell;font-weight:bold;vertical-align:middle;">
+                            </div>
+                        </div>
+                        <div style="display:table-row;">
+                            <div style="display:table-cell;font-weight:bold;vertical-align:middle;">
                                 <div class="checkbox_alt">
                                     <input type="checkbox" value="1" id="falcon_vga" name="falcon_vga">&nbsp;&nbsp;Falcon VGA
                                     <label for="falcon_vga"></label>
                                     <!--<input type="checkbox" name="falcon_vga" value="1" class="quick_search_check">-->
                                 </div>
-							</div>
-						</div>
-						<div style="display:table-row;">
-							<div style="display:table-cell;font-weight:bold;vertical-align:middle;">
+                            </div>
+                        </div>
+                        <div style="display:table-row;">
+                            <div style="display:table-cell;font-weight:bold;vertical-align:middle;">
                                 <div class="checkbox_alt">
                                     <input type="checkbox" value="1" id="ste_only" name="ste_only">&nbsp;&nbsp;STE only
                                     <label for="ste_only"></label>
                                     <!--<input type="checkbox" name="ste_only" value="1" class="quick_search_check">-->
                                 </div>
-							</div>
-						</div>
-						<div style="display:table-row;">	
-							<div style="display:table-cell;font-weight:bold;vertical-align:middle;">
+                            </div>
+                        </div>
+                        <div style="display:table-row;">
+                            <div style="display:table-cell;font-weight:bold;vertical-align:middle;">
                                 <div class="checkbox_alt">
                                     <input type="checkbox" value="1" id="ste_enhanced" name="ste_enhanced">&nbsp;&nbsp;STE Enhanced
                                     <label for="ste_enhanced"></label>
                                     <!--<input type="checkbox" name="ste_enhanced" value="1" class="quick_search_check">-->
                                 </div>
-							</div>
-						</div>	
-						<div style="display:table-row;">
-							<div style="display:table-cell;font-weight:bold;vertical-align:middle;">
+                            </div>
+                        </div>
+                        <div style="display:table-row;">
+                            <div style="display:table-cell;font-weight:bold;vertical-align:middle;">
                                 <div class="checkbox_alt">
                                     <input type="checkbox" value="1" id="free" name="free">&nbsp;&nbsp;Non-Commercial
                                     <label for="free"></label>
                                     <!--<input type="checkbox" name="free" value="1" class="quick_search_check">-->
                                 </div>
-							</div>
-						</div>
-						<div style="display:table-row;">	
-							<div style="display:table-cell;font-weight:bold;vertical-align:middle;">
+                            </div>
+                        </div>
+                        <div style="display:table-row;">
+                            <div style="display:table-cell;font-weight:bold;vertical-align:middle;">
                                 <div class="checkbox_alt">
                                     <input type="checkbox" value="1" id="arcade" name="arcade">&nbsp;&nbsp;Arcade Conversion
                                     <label for="arcade"></label>
                                     <!--<input type="checkbox" name="arcade" value="1" class="quick_search_check">-->
                                 </div>
-							</div>
-						</div>		
-						<div style="display:table-row;">
-							<div style="display:table-cell;font-weight:bold;vertical-align:middle;">
+                            </div>
+                        </div>
+                        <div style="display:table-row;">
+                            <div style="display:table-cell;font-weight:bold;vertical-align:middle;">
                                 <div class="checkbox_alt">
                                     <input type="checkbox" value="1" id="development" name="development">&nbsp;&nbsp;In development
                                     <label for="development"></label>
                                     <!--<input type="checkbox" name="development" value="1" class="quick_search_check">-->
                                 </div>
-							</div>
-						</div>
-						<div style="display:table-row;">	
-							<div style="display:table-cell;font-weight:bold;vertical-align:middle;">
+                            </div>
+                        </div>
+                        <div style="display:table-row;">
+                            <div style="display:table-cell;font-weight:bold;vertical-align:middle;">
                                 <div class="checkbox_alt">
                                     <input type="checkbox" value="1" id="wanted" name="wanted">&nbsp;&nbsp;Wanted
                                     <label for="wanted"></label>
                                     <!--<input type="checkbox" name="wanted" value="1" class="quick_search_check">-->
                                 </div>
-							</div>
-						</div>			
-						<div style="display:table-row;">
-							<div style="display:table-cell;font-weight:bold;vertical-align:middle;">
+                            </div>
+                        </div>
+                        <div style="display:table-row;">
+                            <div style="display:table-cell;font-weight:bold;vertical-align:middle;">
                                 <div class="checkbox_alt">
                                     <input type="checkbox" value="1" id="unreleased" name="unreleased">&nbsp;&nbsp;Unreleased
                                     <label for="unreleased"></label>
                                     <!--<input type="checkbox" name="unreleased" value="1" class="quick_search_check">-->
                                 </div>
-							</div>
-						</div>
-						<div style="display:table-row;">	
-							<div style="display:table-cell;font-weight:bold;vertical-align:middle;">
+                            </div>
+                        </div>
+                        <div style="display:table-row;">
+                            <div style="display:table-cell;font-weight:bold;vertical-align:middle;">
                                 <div class="checkbox_alt">
                                     <input type="checkbox" value="1" id="unfinished" name="unfinished">&nbsp;&nbsp;Unfinished/Rumour
                                     <label for="unfinished"></label>
                                     <!-- <input type="checkbox" name="unfinished" value="1" class="quick_search_check">-->
                                 </div>
-							</div>
-						</div>				
-						<div style="display:table-row;">
-							<div style="display:table-cell;font-weight:bold;vertical-align:middle;">
+                            </div>
+                        </div>
+                        <div style="display:table-row;">
+                            <div style="display:table-cell;font-weight:bold;vertical-align:middle;">
                                 <div class="checkbox_alt">
                                     <input type="checkbox" value="1" id="monochrome" name="monochrome">&nbsp;&nbsp;Monochrome
                                     <label for="monochrome"></label>
                                     <!--<input type="checkbox" name="monochrome" value="1" class="quick_search_check">-->
                                 </div>
-							</div>
-						</div>
-						<div style="display:table-row;">	
-							<div style="display:table-cell;font-weight:bold;vertical-align:middle;">
+                            </div>
+                        </div>
+                        <div style="display:table-row;">
+                            <div style="display:table-cell;font-weight:bold;vertical-align:middle;">
                                 <div class="checkbox_alt">
                                     <input type="checkbox" value="1" id="seuck" name="seuck">&nbsp;&nbsp;SEUCK
                                     <label for="seuck"></label>
                                     <!--<input type="checkbox" name="seuck" value="1" class="quick_search_check">-->
                                 </div>
-							</div>
-						</div>					
-						<div style="display:table-row;">
-							<div style="display:table-cell;font-weight:bold;vertical-align:middle;">
+                            </div>
+                        </div>
+                        <div style="display:table-row;">
+                            <div style="display:table-cell;font-weight:bold;vertical-align:middle;">
                                 <div class="checkbox_alt">
                                     <input type="checkbox" value="1" id="stos" name="stos">&nbsp;&nbsp;STOS
                                     <label for="stos"></label>
                                     <!--<input type="checkbox" name="stos" value="1" class="quick_search_check">-->
                                 </div>
-							</div>
-						</div>
-						<div style="display:table-row;">	
-							<div style="display:table-cell;font-weight:bold;vertical-align:middle;">
+                            </div>
+                        </div>
+                        <div style="display:table-row;">
+                            <div style="display:table-cell;font-weight:bold;vertical-align:middle;">
                                 <div class="checkbox_alt">
                                     <input type="checkbox" value="1" id="stac" name="stac">&nbsp;&nbsp;STAC
                                     <label for="stac"></label>
                                     <!--<input type="checkbox" name="stac" value="1" class="quick_search_check">-->
                                 </div>
-							</div>
-						</div>						
-					</div>
-					<br>
-					<input type="hidden" name="action" id="action_quick_search" value="search">
-					<input type="submit" value="Search" class="quick_search_games_button">
-					<br><br>
-					<hr>
-				</div>
-			</form>	
-		</div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <input type="hidden" name="action" id="action_quick_search" value="search">
+                    <input type="submit" value="Search" class="quick_search_games_button">
+                    <br><br>
+                    <hr>
+                </div>
+            </form>
+        </div>
 </div>
 {/block}
