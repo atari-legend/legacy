@@ -78,7 +78,7 @@ The main game page
         <br>
         {if isset($connected_menu_types)}
             {foreach from=$connected_menu_types item=line}
-                {$line.menu_types_text} - <a href="#" class="standard_tile_link" onclick="MenuTypeDelete({$line.menu_types_main_id},{$line.menu_sets_id});">Delete</a><br>
+                {$line.menu_types_text} - <a href="#" class="standard_tile_link" onclick="menuTypeDelete({$line.menu_types_main_id},{$line.menu_sets_id});">Delete</a><br>
             {/foreach}
         {/if}
         <br>
@@ -115,7 +115,7 @@ The main game page
         <br>
         {if isset($connected_crew)}
         {foreach from=$connected_crew item=line}
-            {$line.crew_name} - <a href="#" class="standard_tile_link" onclick="DeleteMenuSetCrewModal({$line.crew_id},{$line.menu_sets_id});">Delete</a><br>
+            {$line.crew_name} - <a href="#" class="standard_tile_link" onclick="deleteMenuSetCrewModal({$line.crew_id},{$line.menu_sets_id});">Delete</a><br>
         {/foreach}
         {/if}
         <br>
@@ -152,7 +152,7 @@ The main game page
         <br>
         {if isset($connected_ind)}
         {foreach from=$connected_ind item=line}
-            {$line.ind_name} - <a href="#" class="standard_tile_link" onclick="DeleteMenuSetIndividualModal({$line.ind_id},{$line.menu_sets_id});">Delete</a><br>
+            {$line.ind_name} - <a href="#" class="standard_tile_link" onclick="deleteMenuSetIndividualModal({$line.ind_id},{$line.menu_sets_id});">Delete</a><br>
         {/foreach}
         {/if}
         <br>
@@ -206,14 +206,14 @@ The main game page
                 <fieldset>
                     <legend>More options</legend>
                         <div id="close_new_disk"><a onclick="addNewdisk({$menu_set.menu_sets_id})" style="cursor: pointer;" class="left_nav_link" >Add New Disk</a><br></div>
-                        <a onclick="DeleteSet({$menu_set.menu_sets_id})" style="cursor: pointer;" class="left_nav_link" >Delete set</a>
+                        <a onclick="deleteSet({$menu_set.menu_sets_id})" style="cursor: pointer;" class="left_nav_link" >Delete set</a>
                 </fieldset>
             </div>
             <div class="main_company_child" id="child_add_company" style="text-align:left;">
                 <fieldset>
                     <legend>Publish Set</legend>
-                        <input onchange="PublishSet({$menu_set.menu_sets_id},'online')" type="radio" name="publish" value="online" {if ({$menu_set.online}=='1')}checked{/if}> Online<br>
-                        <input onchange="PublishSet({$menu_set.menu_sets_id},'offline')" type="radio" name="publish" value="offline" {if ({$menu_set.online}=='0')}checked{/if}> Offline<br>
+                        <input onchange="publishSet({$menu_set.menu_sets_id},'online')" type="radio" name="publish" value="online" {if ({$menu_set.online}=='1')}checked{/if}> Online<br>
+                        <input onchange="publishSet({$menu_set.menu_sets_id},'offline')" type="radio" name="publish" value="offline" {if ({$menu_set.online}=='0')}checked{/if}> Offline<br>
                 </fieldset>
             </div>
         </div>

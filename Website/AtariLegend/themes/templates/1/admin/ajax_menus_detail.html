@@ -19,7 +19,7 @@
     <td colspan="4" style="width:100%;margin:0px;padding:0px;">
         <table class="standard_table_list" id="menu_list_table">
             <tr>
-                <td class="menu_disk_list_td"><a onclick="CloseeditDisk({$menus.menu_disk_id})" style="cursor: pointer;">{$menus.menu_disk_name}</a></td>
+                <td class="menu_disk_list_td"><a onclick="closeeditDisk({$menus.menu_disk_id})" style="cursor: pointer;">{$menus.menu_disk_name}</a></td>
                 <td class="menu_list_crew_td">{if isset($menus.crew_id)}{$menus.crew_name}{else}<i>n/a</i>{/if}</td>
                 <td class="menu_list_ind_td">{if isset($menus.ind_id)}{$menus.ind_name}{else}<i>n/a</i>{/if}</td>
                 <td class="menu_state_td">{if isset($menus.menu_state)}{$menus.menu_state}{else}<i>n/a</i>{/if}</td>
@@ -44,7 +44,7 @@
                         <div class="main_company_container">
                             <div class="main_company_child" id="child_edit_company">
                                 <b>Set state:</b><br>
-                                <select name="state_id" id="quick_search_pub_select" onchange="ChangeState(this.value,{$menus.menu_disk_id})">
+                                <select name="state_id" id="quick_search_pub_select" onchange="changeState(this.value,{$menus.menu_disk_id})">
                                     <option value="">Set State</option>
                                     {if isset($state_id)}
                                         {html_options values=$state_id output=$menu_state selected=$menu_state_id}
@@ -53,7 +53,7 @@
                                 <br>
                                 <br>
                                 <b>Set parent menu:</b><br>
-                                <select name="parent_id" id="quick_search_pub_select" onchange="ChangeParent(this.value,{$menus.menu_disk_id})">
+                                <select name="parent_id" id="quick_search_pub_select" onchange="changeParent(this.value,{$menus.menu_disk_id})">
                                     <option value="">Set parent</option>
                                     {foreach from=$parent item=line}
                                         {html_options values=$line.parent_id output=$line.parent_name selected=$menu_parent_id}
@@ -62,7 +62,7 @@
                                 <br>
                                 <br>
                                 <b>Menu disk options :</b><br>
-                                <a onclick="DeleteMenuDiskModal({$menus.menu_disk_id})" style="cursor: pointer;" class="standard_tile_link">Delete menu disk</a><br>
+                                <a onclick="deleteMenuDiskModal({$menus.menu_disk_id})" style="cursor: pointer;" class="standard_tile_link">Delete menu disk</a><br>
                                 <div id="intro_credit_link"><a onclick="popAddIntroCred({$menus.menu_disk_id})" style="cursor: pointer;" class="standard_tile_link">Add intro credits</a><br></div>
                                 <div id="gameto_menu_link"><a onclick="popAddGames({$menus.menu_disk_id})" style="cursor: pointer;" class="standard_tile_link">Add Game/Tool/Demo to menu</a><br></div>
                                 <div id="docto_menu_link"><a onclick="popAddDocs({$menus.menu_disk_id})" style="cursor: pointer;" class="standard_tile_link">Add Doc to menu</a><br></div>
@@ -71,7 +71,7 @@
                             </div>
                             <div class="main_company_child" id="child_add_company">
                                 <b>Release Year:</b><br>
-                                {html_select_date start_year="1984" end_year="+1" display_days=false display_months=false prefix="" field_name="" style="width:100px;height:25px;" name="year_id" time="{$menus.menu_year}-01-01" onchange="ChangeYear(this.value,$menu_disk_id)"}
+                                {html_select_date start_year="1984" end_year="+1" display_days=false display_months=false prefix="" field_name="" style="width:100px;height:25px;" name="year_id" time="{$menus.menu_year}-01-01" onchange="changeYear(this.value,$menu_disk_id)"}
                                 <br><img src="../../../themes/templates/1/includes/img/arrow_ltr.gif" alt="" width="38" height="22" style="display:inline;">
                                 <h3 style="text-align:center;display:inline;">{if (isset($menus.menu_year))} {$menus.menu_year} set {else} Not set{/if}</h3>
                                 <br>
@@ -101,7 +101,7 @@
                                     <td class="menu_cred_td">{$individual.author_type_info}</td>
                                     <td class="menu_scene_td"><a href="../individuals/individuals_edit.php?ind_id={$individual.ind_id}" class="standard_table_left">{$individual.ind_name}</a></td>
                                     <td class="menu_delete_td" style="text-align:right;">
-                                        <input type="button" onclick="DeleteCredits({$individual.menu_disk_credits_id},{$individual.menu_disk_id})" class="quick_search_games_button" value="delete" style="margin-right:5px;">
+                                        <input type="button" onclick="deleteCredits({$individual.menu_disk_credits_id},{$individual.menu_disk_id})" class="quick_search_games_button" value="delete" style="margin-right:5px;">
                                     </td>
                                 </tr>
                             {/foreach}
@@ -131,7 +131,7 @@
                                     <td class="menu_mark_td">
                                         <form name="MenuDiskContent" id="MenuDiskContent">
                                         <div class="links_mod_checkbox">
-                                            <input type="checkbox" id="menu_disk_title_id{$line.menu_disk_title_id}" name="menu_disk_title_id[]" value="{$line.menu_disk_title_id}" onchange="DeleteGamefromMenuButton({$line.menu_disk_title_id},{$menu_disk_id})">
+                                            <input type="checkbox" id="menu_disk_title_id{$line.menu_disk_title_id}" name="menu_disk_title_id[]" value="{$line.menu_disk_title_id}" onchange="deleteGamefromMenuButton({$line.menu_disk_title_id},{$menu_disk_id})">
                                             <label for="menu_disk_title_id{$line.menu_disk_title_id}"></label>&nbsp;
                                         </div>
                                     </td>
@@ -228,7 +228,7 @@
                                     </td>
                                     <td class="menu_doctype_td">
                                         <form action="#" method="post" name="doc_type_edit{$line.doc_id}" id="doc_type_edit{$line.doc_id}">
-                                            <select name="doc_type_id" id="quick_search_small_select" style="width:125px;" onchange="ChangeDoctype(this.value,{$line.doc_id},{$menus.menu_disk_id})">
+                                            <select name="doc_type_id" id="quick_search_small_select" style="width:125px;" onchange="changeDoctype(this.value,{$line.doc_id},{$menus.menu_disk_id})">
                                             <option value="" selected>-</option>
                                             {if isset($doc_type)}
                                                 {foreach from=$doc_type item=doc_types}
@@ -384,7 +384,7 @@
                 <td class="menu_mark_td">
                     <form name="MenuDiskContent" id="MenuDiskContent">
                     <div class="links_mod_checkbox">
-                        <input type="checkbox" id="menu_disk_title_id{$line.menu_disk_title_id}" name="menu_disk_title_id[]" value="{$line.menu_disk_title_id}" onchange="DeleteGamefromMenuButton({$line.menu_disk_title_id},{$menu_disk_id})">
+                        <input type="checkbox" id="menu_disk_title_id{$line.menu_disk_title_id}" name="menu_disk_title_id[]" value="{$line.menu_disk_title_id}" onchange="deleteGamefromMenuButton({$line.menu_disk_title_id},{$menu_disk_id})">
                         <label for="menu_disk_title_id{$line.menu_disk_title_id}"></label>&nbsp;
                     </div>
 
@@ -472,7 +472,6 @@
                     <div class="links_mod_checkbox">
                         <input type="checkbox" id="menu_disk_title_id{$line.menu_disk_title_id}" name="menu_disk_title_id[]" value="{$line.menu_disk_title_id}" onchange="deleteDocfromMenu({$line.menu_disk_title_id},{$menu_disk_id})">
                         <label for="menu_disk_title_id{$line.menu_disk_title_id}"></label>&nbsp;
-                        <!--<input type="checkbox" id="menu_disk_title_id{$line.menu_disk_title_id}" name="menu_disk_title_id[]" value="{$line.menu_disk_title_id}" onchange="deleteDocfromMenu({$line.menu_disk_title_id},{$menu_disk_id})">-->
                     </div>
                 </td>
                 <td class="menu_docname_td">
@@ -484,7 +483,7 @@
                 </td>
                 <td class="menu_doctype_td">
                     <form action="#" method="post" name="doc_type_edit{$line.doc_id}" id="doc_type_edit{$line.doc_id}">
-                        <select name="doc_type_id" id="quick_search_small_select" style="width:125px;" onchange="ChangeDoctype(this.value,{$line.doc_id},{$menu_disk_id})">
+                        <select name="doc_type_id" id="quick_search_small_select" style="width:125px;" onchange="changeDoctype(this.value,{$line.doc_id},{$menu_disk_id})">
                         <option value="" selected>-</option>
                             {if isset($doc_type)}
                             {foreach from=$doc_type item=doc_types}
@@ -591,7 +590,6 @@
         <tr>
             <th id="menu_cred_th">Credits</th>
             <th id="menu_scene_th">"Sceners"</th>
-            <!-- <th id="menu_nick_th">Nick</th> -->
             <th id="menu_delete_th">
                 <div class="help-tip">
                     <p style="right:260px;">The intro of a menu disk was a lot of times coded by different people than the actual menu itself. You can add them by pressing the 'add intro credits' above.</p>
@@ -604,7 +602,7 @@
                     <td class="menu_cred_td">{$individual.author_type_info}</td>
                     <td class="menu_scene_td"><a href="../individuals/individuals_edit.php?ind_id={$individual.ind_id}" class="standard_table_left">{$individual.ind_name}</a></td>
                     <td class="menu_delete_td" style="text-align:right;">
-                        <input type="button" onclick="DeleteCredits({$individual.menu_disk_credits_id},{$individual.menu_disk_id})" class="quick_search_games_button" value="delete" style="margin-right:5px;">
+                        <input type="button" onclick="deleteCredits({$individual.menu_disk_credits_id},{$individual.menu_disk_id})" class="quick_search_games_button" value="delete" style="margin-right:5px;">
                     </td>
                 </tr>
             {/foreach}
@@ -641,7 +639,7 @@
                 <td class="menu_mark_td">
                     <form name="MenuDiskContent" id="MenuDiskContent">
                     <div class="links_mod_checkbox">
-                        <input type="checkbox" id="menu_disk_title_id{$line.menu_disk_title_id}" name="menu_disk_title_id[]" value="{$line.menu_disk_title_id}" onchange="DeleteGamefromMenuButton({$line.menu_disk_title_id},{$menu_disk_id})">
+                        <input type="checkbox" id="menu_disk_title_id{$line.menu_disk_title_id}" name="menu_disk_title_id[]" value="{$line.menu_disk_title_id}" onchange="deleteGamefromMenuButton({$line.menu_disk_title_id},{$menu_disk_id})">
                         <label for="menu_disk_title_id{$line.menu_disk_title_id}"></label>&nbsp;
                     </div>
                 </td>
@@ -716,10 +714,10 @@
                         </select>
                         <input type="text" name="menu_disk_title_set_chain" value="{if isset($select_chain_nr)}{$select_chain_nr}{else}Nr{/if}" class="standard_tile_input_small" style="width:5%">
                         <br>
-                        <input type="button" onclick="LinkChain({$menu_disk_title_id},{$menu_disk_id})" class="topbutton_cpanel_small" value="Link">
+                        <input type="button" onclick="linkChain({$menu_disk_title_id},{$menu_disk_id})" class="topbutton_cpanel_small" value="Link">
                         <br>
                         {if isset($select_chain_data)}
-                            <input type="button" onclick="DeleteChain({$menu_disk_title_id},{$menu_disk_id},'{{$title_name}|escape:'quotes'}')" class="topbutton_cpanel_small" value="Delete" style="margin-top:1px;">
+                            <input type="button" onclick="deleteChain({$menu_disk_title_id},{$menu_disk_id},'{{$title_name}|escape:'quotes'}')" class="topbutton_cpanel_small" value="Delete" style="margin-top:1px;">
                         {/if}
                         <input type="hidden" name="menu_disk_id" value="{$menu_disk_id}">
                         <input type="hidden" name="menu_disk_title_id" value="{$menu_disk_title_id}">
@@ -744,7 +742,7 @@
                 <form action="" method="get" name="set_add_to_menu" id="set_add_to_menu">
                     <fieldset>
                     <legend>Create chain {if isset($title_name)}for {$title_name}{/if}</legend>
-                        <input type="button" onclick="CreateChain({$menu_disk_title_id},{$menu_disk_id})" class="topbutton_cpanel_small" value="Create">
+                        <input type="button" onclick="createChain({$menu_disk_title_id},{$menu_disk_id})" class="topbutton_cpanel_small" value="Create">
                         <div class="help-tip">
                             <p style="right:220px;">In this box you create a CHAIN for this title. <b>BE AWARE</b>, before creating a new chain for a title, make sure the chain
                             does not already exist for this menu set. Check the dropdown in the 'select chain' section before creating a new one.</p>

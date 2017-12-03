@@ -60,27 +60,14 @@ On this page we link authors to a menu disk title
                     <tr>
                         <th id="menu_cred_th">Credits</th>
                         <th id="menu_scene_th">"Sceners"</th>
-                        <!-- <th id="menu_nick_th">Nick</th> -->
                         <th id="menu_delete_th"></th>
                     </tr>
                     {foreach name=outer item=individual from=$title_credits}
                         <tr>
                             <td class="menu_cred_td">{$individual.author_type_info}</td>
                             <td class="menu_scene_td"><a href="../individuals/individuals_edit.php?ind_id={$individual.ind_id}" class="standard_table_left">{$individual.ind_name}</a></td>
-                            <!--  <form action="#" method="post" name="nick_edit{$individual.ind_id}" id="nick_edit{$individual.ind_id}">
-                                <td class="menu_nick_td">
-                                    <select name="individual_nicks_id" id="quick_search_small_select" style="width:125px;" onchange="ChangeNick(this.value,{$individual.menu_disk_credits_id},{$individual.menu_disk_id})">
-                                    <option value="" selected>-</option>
-                                        {foreach from=$ind_nick item=line}
-                                            {if $line.ind_id == $individual.ind_id }
-                                                {html_options values=$line.individual_nicks_id output=$line.nick selected=$individual.individual_nicks_id}
-                                            {/if}
-                                        {/foreach}
-                                    </select>
-                                </td>
-                            </form>              -->
                             <td class="menu_delete_td" style="text-align:right;">
-                                <input type="button" onclick="DeleteTitleCredits({$menu_disk_title_id},{$individual.ind_id},{$individual.author_type_id})" class="quick_search_games_button" value="delete" style="margin-right:5px;">
+                                <input type="button" onclick="deleteTitleCredits({$menu_disk_title_id},{$individual.ind_id},{$individual.author_type_id})" class="quick_search_games_button" value="delete" style="margin-right:5px;">
                             </td>
                         </tr>
                     {/foreach}
