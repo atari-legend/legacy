@@ -7,12 +7,12 @@
 *   email                : admin@atarilegend.com
 *
 *   Id: ajax_interview_add_screenshots.html,v 0.10 2017/11/02 22:29 STG
-*			- creation of file
+*           - creation of file
 *
 ***************************************************************************/
 *}
 {if isset($smarty_action) and $smarty_action == "add_screen_to_interview_return"}
-	 {if $screenshots_nr <> ''}
+    {if $screenshots_nr <> ''}
         <table class="standard_table_list_no_hover">
         {foreach from=$screenshots item=line}
             <tr>
@@ -28,7 +28,7 @@
                 </td>
                 <td style="width:90%;border:0;">
                     <input type="text" name="inputfield[]" value="{$line.interview_screenshot_comment}" class="standard_tile_input_small" style="width:95%;" id="comment_{$line.interview_screenshot_count}">
-                </td> 
+                </td>
             </tr>
         {/foreach}
         </table>
@@ -49,7 +49,7 @@
                 <br>
                 <input type="hidden" name="MAX_FILE_SIZE" value="100000">
                 <input type="button" value="Add" onclick="addScreenshottoInterview({$interview_id})" class="topbutton_cpanel">
-        </fieldset> 
+        </fieldset>
     </div>
     </br>
 {/if}

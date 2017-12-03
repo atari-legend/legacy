@@ -15,10 +15,10 @@
 // This is the game comments on the game detail page. This piece is always used as an include
 //****************************************************************************************
 *}
-            
+
 <div class="standard_tile">
     <div class="help-tip">
-        <p> 
+        <p>
             <u>Only available with your own comments:</u><br>
             <i class="fa fa-pencil" aria-hidden="true"></i> - Edit comment<br>
             <i class="fa fa-floppy-o" aria-hidden="true"></i> - Save changes to comment<br>
@@ -40,8 +40,8 @@
                 <input type="button" accesskey= "b" name="addbbcode0" value="B" onclick="bbstyle(0,'textfield')" class="quick_search_games_button" style="min-width:20px;width:0;display:inline;" title="Bold">
                 <input type="button" accesskey= "u" name="addbbcode4" value="U" onclick="bbstyle(4,'textfield')" class="quick_search_games_button" style="min-width:20px;width:0;display:inline;" title="Underline">
                 <input type="button" accesskey= "i" name="addbbcode2" value="I" onclick="bbstyle(2,'textfield')" class="quick_search_games_button" style="min-width:20px;width:0;display:inline;" title="Recursive">
-                <input type="button" accesskey="w" name="addbbcode6" value="URL" onClick="bbstyle(6,'textfield')" class="quick_search_games_button" style="min-width:40px;width:0;display:inline;" title="Add links">			  
-                <input type="button" accesskey="x" name="addbbcode8" value="@" onClick="bbstyle(8,'textfield')" class="quick_search_games_button" style="min-width:20px;width:0;display:inline;" title="Add email address"> 
+                <input type="button" accesskey="w" name="addbbcode6" value="URL" onClick="bbstyle(6,'textfield')" class="quick_search_games_button" style="min-width:40px;width:0;display:inline;" title="Add links">
+                <input type="button" accesskey="x" name="addbbcode8" value="@" onClick="bbstyle(8,'textfield')" class="quick_search_games_button" style="min-width:20px;width:0;display:inline;" title="Add email address">
                 <textarea id="comment_add" class="games_main_detail_comments_add" style="margin-top:10px;margin-bottom:10px;" name="textfield" ONSELECT="javascript:storeCaret(this);" ONCLICK="javascript:storeCaret(this);" ONKEYUP="javascript:storeCaret(this);" ONCHANGE="javascript:storeCaret(this);"></textarea>
             </div>
         </div>
@@ -58,9 +58,9 @@
     {/if}
     <div class="standard_tile_line"></div>
     <div id="latest_comments_all">
-    {if isset($comments)} 
+    {if isset($comments)}
         <div class="games_main_detail_comments_container">
-            <div class="standard_list_entry">                                                  
+            <div class="standard_list_entry">
                 <table class="standard_table_list_comments">
                 {foreach from=$comments item=line}
                     <tr>
@@ -84,30 +84,30 @@
                                     {/if}
                                     {if $line.user_twitter != ''}
                                         <a href="{$line.user_twitter}" class="latest_comments_link" title="Click to visit Twitter profile"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                                    {/if}   
+                                    {/if}
                                     {if $line.user_af != ''}
                                         <a href="{$line.user_af}" class="latest_comments_link" title="Click to visit Atari-Forum profile"><i class="fa fa-gamepad" aria-hidden="true"></i></a>
                                     {/if}
                                     {if $line.user_website != ''}
                                         <a href="{$line.user_website}" class="latest_comments_link" title="Click to visit users website"><i class="fa fa-globe" aria-hidden="true"></i></a>
-                                    {/if}                               
+                                    {/if}
                                     </span>
                                 {/if}
                             </span>
                             <div class="latest_comments_text">
                                 <div id="latest_comment_edit{$line.comment_id}"><div id="games_detail_review_main_text">{$line.comment}</div></div>
                                 <div style="width:100%;text-align:center;"><textarea id="comment_input{$line.comment_id}" class="latest_comments_textarea" style="display:none;" cols="80">{$line.comment_edit}</textarea></div>
-                            </div> 
+                            </div>
                             <span class="standard_tile_subtext" style="font-weight:bold;float:right;display:inline;margin-right:5px;margin-bottom:15px;">
                                 {$line.date}
                             </span>
                         </td>
                     </tr>
                 {/foreach}
-                </table>     
+                </table>
             </div>
         </div>
     {/if}
     </div>
     <div class="standard_tile_line"></div>
-</div>  
+</div>

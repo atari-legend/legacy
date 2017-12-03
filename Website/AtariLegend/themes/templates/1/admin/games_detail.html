@@ -1,19 +1,19 @@
 {*
 /***************************************************************************
- *                                games_detail.html
- *                            ------------------------
- *   begin                : Tuesday, September 11, 2005
- *   copyright            : (C) 2005 Atari Legend
- *   email                : admin@atarilegend.com
- *	 actual update        : Creation of file
- *
- *   Id: games_detail.html,v 0.10 2005/10/11 15:03 Zombieman
- *   Id: games_detail.html,v 0.20 2015/11/02 21:26 STG
- *   Id: games_detail.html,v 0.30 2015/12/27 21:26 STG - 1920 width/HTML Valid/Messages -- NO FLEXBOX
- *   Id: games_detail.html,v 0.31 2017/01/06 STG - added falcon vga and rgb option
- *   id: games_detail.html,v 0.32 2017/02/26 22:19 STG - fixed 'write a review link'
- *
- ***************************************************************************/
+*                                games_detail.html
+*                            ------------------------
+*   begin                : Tuesday, September 11, 2005
+*   copyright            : (C) 2005 Atari Legend
+*   email                : admin@atarilegend.com
+*   actual update        : Creation of file
+*
+*   Id: games_detail.html,v 0.10 2005/10/11 15:03 Zombieman
+*   Id: games_detail.html,v 0.20 2015/11/02 21:26 STG
+*   Id: games_detail.html,v 0.30 2015/12/27 21:26 STG - 1920 width/HTML Valid/Messages -- NO FLEXBOX
+*   Id: games_detail.html,v 0.31 2017/01/06 STG - added falcon vga and rgb option
+*   id: games_detail.html,v 0.32 2017/02/26 22:19 STG - fixed 'write a review link'
+*
+***************************************************************************/
 
 //****************************************************************************************
 // This is the detail page of a game. Change all the specifics over here!
@@ -33,65 +33,65 @@ function deletegame(game_id)
 
     if (return_value !="0")
     {
-    	url="../games/db_games_detail.php?game_id="+game_id+"&action=delete_game";
-		location.href=url;
+        url="../games/db_games_detail.php?game_id="+game_id+"&action=delete_game";
+        location.href=url;
     }
 }
 
 function delete_publisher()
 {
-	document.getElementById('publisher').method="post";
-	document.getElementById('publisher').action="../games/db_games_detail.php?action=delete_publisher";
-   	document.getElementById('publisher').submit();
+    document.getElementById('publisher').method="post";
+    document.getElementById('publisher').action="../games/db_games_detail.php?action=delete_publisher";
+    document.getElementById('publisher').submit();
 }
 
 function add_publisher()
 {
-	document.getElementById('publisher').method="post";
-	document.getElementById('publisher').action="../games/db_games_detail.php?action=add_publisher";
-   	document.getElementById('publisher').submit();
+    document.getElementById('publisher').method="post";
+    document.getElementById('publisher').action="../games/db_games_detail.php?action=add_publisher";
+    document.getElementById('publisher').submit();
 }
 
 function delete_developer()
 {
-	document.getElementById('developer').method="post";
-	document.getElementById('developer').action="../games/db_games_detail.php?action=delete_developer";
-   	document.getElementById('developer').submit();
+    document.getElementById('developer').method="post";
+    document.getElementById('developer').action="../games/db_games_detail.php?action=delete_developer";
+    document.getElementById('developer').submit();
 }
 
 function add_developer()
 {
-	document.getElementById('developer').method="post";
-	document.getElementById('developer').action="../games/db_games_detail.php?action=add_developer";
-   	document.getElementById('developer').submit();
+    document.getElementById('developer').method="post";
+    document.getElementById('developer').action="../games/db_games_detail.php?action=add_developer";
+    document.getElementById('developer').submit();
 }
 
 function delete_creator()
 {
-	document.getElementById('creator').method="post";
-	document.getElementById('creator').action="../games/db_games_detail.php?action=delete_creator";
-   	document.getElementById('creator').submit();
+    document.getElementById('creator').method="post";
+    document.getElementById('creator').action="../games/db_games_detail.php?action=delete_creator";
+    document.getElementById('creator').submit();
 }
 
 function add_creator()
 {
-	document.getElementById('creator').method="post";
-	document.getElementById('creator').action="../games/db_games_detail.php?action=add_creator";
-   	document.getElementById('creator').submit();
+    document.getElementById('creator').method="post";
+    document.getElementById('creator').action="../games/db_games_detail.php?action=add_creator";
+    document.getElementById('creator').submit();
 }
 
 function delete_year()
 {
-	document.getElementById('year').method="post";
-	document.getElementById('year').action="../games/db_games_detail.php?action=delete_year";
-   	document.getElementById('year').submit();
+    document.getElementById('year').method="post";
+    document.getElementById('year').action="../games/db_games_detail.php?action=delete_year";
+    document.getElementById('year').submit();
 }
 
 function add_year()
 {
-	document.getElementById('year').method="post";
-	document.getElementById('year').action="../games/db_games_detail.php?action=add_year";
-   	document.getElementById('year').submit();
+    document.getElementById('year').method="post";
+    document.getElementById('year').action="../games/db_games_detail.php?action=add_year";
+    document.getElementById('year').submit();
 }
 
 function browseCompany(str) {
@@ -141,7 +141,7 @@ function browseDeveloper(str) {
 
 {block name=main_tile}
 <div class="standard_tile" id="games_detail">
-	{if isset ($game_info)}
+    {if isset ($game_info)}
         <h1>{$game_info.game_name}</h1>
         <div class="standard_tile_line"></div>
         <div class="standard_tile_text">
@@ -186,7 +186,7 @@ function browseDeveloper(str) {
                                         <input type="checkbox" id="free" name="free" value="1" {if $game_info.game_free == 1} checked{/if}>
                                         <label for="free"></label>
                                         <!--<input type="checkbox" name="free" value="1"{if $game_info.game_free == 1} checked{/if}/>-->
-                                     </div>
+                                    </div>
                                 </div>
                                 <div class="gd_basic_game_info_row_checktxt">Non-commercial&nbsp;</div>
                             </div>
@@ -196,7 +196,7 @@ function browseDeveloper(str) {
                                         <input type="checkbox" id="ste_only" name="ste_only" value="1" {if $game_info.game_ste_only == 1} checked{/if}>
                                         <label for="ste_only"></label>
                                         <!--<input type="checkbox" name="ste_only" value="1"{if $game_info.game_ste_only == 1} checked{/if}/>-->
-                                     </div>
+                                    </div>
                                 </div>
                                 <div class="gd_basic_game_info_row_checktxt">STE ONLY&nbsp;</div>
                             </div>
@@ -206,7 +206,7 @@ function browseDeveloper(str) {
                                         <input type="checkbox" id="ste_enhanced" name="ste_enhanced" value="1" {if $game_info.game_ste_enhan == 1} checked{/if}>
                                         <label for="ste_enhanced"></label>
                                         <!--<input type="checkbox" name="ste_enhanced" value="1"{if $game_info.game_ste_enhan == 1} checked/{/if}>-->
-                                     </div>
+                                    </div>
                                 </div>
                                 <div class="gd_basic_game_info_row_checktxt">STE Enhanced&nbsp;</div>
                             </div>
@@ -216,8 +216,8 @@ function browseDeveloper(str) {
                                         <input type="checkbox" id="falcon_only" name="falcon_only" value="1" {if $game_info.game_falcon_only == 1} checked{/if}>
                                         <label for="falcon_only"></label>
                                         <!--<input type="checkbox" name="falcon_only" value="1"{if $game_info.game_falcon_only == 1} checked{/if}/>-->
-                                     </div>
-                                 </div>
+                                    </div>
+                                </div>
                                 <div class="gd_basic_game_info_row_checktxt">Falcon only&nbsp;</div>
                             </div>
                             <div class="gd_basic_game_info_row">
@@ -226,7 +226,7 @@ function browseDeveloper(str) {
                                         <input type="checkbox" id="falcon_enhanced" name="falcon_enhanced" value="1" {if $game_info.game_falcon_enhan == 1} checked{/if}>
                                         <label for="falcon_enhanced"></label>
                                         <!--<input type="checkbox" name="falcon_enhanced" value="1"{if $game_info.game_falcon_enhan == 1} checked{/if}/>-->
-                                     </div>
+                                    </div>
                                 </div>
                                 <div class="gd_basic_game_info_row_checktxt">Falcon Enhanced&nbsp;</div>
                             </div>
@@ -236,7 +236,7 @@ function browseDeveloper(str) {
                                         <input type="checkbox" id="falcon_rgb" name="falcon_rgb" value="1" {if $game_info.game_falcon_rgb == 1} checked{/if}>
                                         <label for="falcon_rgb"></label>
                                         <!--<input type="checkbox" name="falcon_rgb" value="1"{if $game_info.game_falcon_rgb == 1} checked{/if}/>-->
-                                     </div>
+                                    </div>
                                 </div>
                                 <div class="gd_basic_game_info_row_checktxt">Falcon RGB&nbsp;</div>
                             </div>
@@ -246,7 +246,7 @@ function browseDeveloper(str) {
                                         <input type="checkbox" id="falcon_vga" name="falcon_vga" value="1" {if $game_info.game_falcon_vga == 1} checked{/if}>
                                         <label for="falcon_vga"></label>
                                         <!--<input type="checkbox" name="falcon_vga" value="1"{if $game_info.game_falcon_vga == 1} checked{/if}/>-->
-                                     </div>
+                                    </div>
                                 </div>
                                 <div class="gd_basic_game_info_row_checktxt">Falcon VGA&nbsp;</div>
                             </div>
@@ -256,8 +256,8 @@ function browseDeveloper(str) {
                                         <input type="checkbox" id="unfinished" name="unfinished" value="1" {if $game_info.game_unfinished == 1} checked{/if}>
                                         <label for="unfinished"></label>
                                         <!--<input type="checkbox" name="unfinished" value="1"{if $game_info.game_unfinished == 1} checked{/if}/>-->
-                                     </div>
-                                 </div>
+                                    </div>
+                                </div>
                                 <div class="gd_basic_game_info_row_checktxt">Unfinished&nbsp;</div>
                             </div>
                             <div class="gd_basic_game_info_row">
@@ -266,7 +266,7 @@ function browseDeveloper(str) {
                                         <input type="checkbox" id="monochrome" name="monochrome" value="1" {if $game_info.game_mono == 1} checked{/if}>
                                         <label for="monochrome"></label>
                                         <!--<input type="checkbox" name="monochrome" value="1"{if $game_info.game_mono == 1} checked{/if}/>-->
-                                     </div>
+                                    </div>
                                 </div>
                                 <div class="gd_basic_game_info_row_checktxt">Monochrome&nbsp;</div>
                             </div>
@@ -276,7 +276,7 @@ function browseDeveloper(str) {
                                         <input type="checkbox" id="wanted" name="wanted" value="1" {if $game_info.game_wanted <> ''} checked{/if}>
                                         <label for="wanted"></label>
                                         <!--<input type="checkbox" name="wanted" value="1"{if $game_info.game_wanted <> ''} checked{/if}/>-->
-                                     </div>
+                                    </div>
                                 </div>
                                 <div class="gd_basic_game_info_row_checktxt">Wanted&nbsp;</div>
                             </div>
@@ -286,7 +286,7 @@ function browseDeveloper(str) {
                                         <input type="checkbox" id="arcade" name="arcade" value="1" {if $game_info.game_arcade == 1} checked{/if}>
                                         <label for="arcade"></label>
                                         <!--<input type="checkbox" name="arcade" value="1"{if $game_info.game_arcade == 1} checked{/if}/>-->
-                                     </div>
+                                    </div>
                                 </div>
                                 <div class="gd_basic_game_info_row_checktxt">Arcade conversion&nbsp;</div>
                             </div>
@@ -647,7 +647,7 @@ function browseDeveloper(str) {
                 </div>
             </div>
         </div>
-	{else}
+    {else}
         <div class="standard_tile_line"></div>
         <div class="standard_tile_text">
             <div class="left_nav_section">
@@ -659,6 +659,6 @@ function browseDeveloper(str) {
                 <div class="standard_table_center"><a href="javascript:history.go(-1)" class="standard_tile_link">back</a></div>
             </div>
         </div>
-	{/if}
+    {/if}
 </div>
 {/block}

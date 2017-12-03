@@ -1,4 +1,4 @@
-{* 
+{*
 /***************************************************************************
 *                                doc_type.html
 *                            --------------------------
@@ -19,46 +19,46 @@ The main doc type page
 
 {block name=main_tile}
 <div class="standard_tile" id="individuals_main">
-	<div class="help-tip">
-		<p>As an example, let's take a doc disk. Let's say that Sewer Doc Disk xx contains a cheatcode for the game Xenon and a walkthrough for Kings Quest. 'Cheatcode' and 'Walkthrough' would be the doc types in this example.</p>
-	</div>
-	<div style="margin-left:20px;"><h1>DOC TYPE</h1></div>
-	<div class="standard_tile_line"></div>
-	<div class="standard_tile_text">
-		<div class="left_nav_section">
-			In this section you can add or edit a doc type which can be linked to a game doc or tool doc. To edit an existing doc type, look up the name
-			in the dropdown box. To add a new doc type, use the input field and press 'add'
-		</div> 
-		<br>
-		<br>
-		<div class="main_company_container">
-			<div class="main_company_child" id="child_edit_company">
-				<fieldset>
-					<legend>Edit a doc type</legend>		
-					<form action="../docs/doc_type_edit.php" method="post" name="ind_edit" id="ind_edit">
-						<select name="doc_type_id" id="quick_search_pub_select">
-							<option value="-">-</option>
-							{foreach from=$doc_type item=line}
-								<option value="{$line.doc_type_id}">{$line.doc_type_name}</option>
-							{/foreach}	
-						</select>
-						<input type="hidden" name="user_id" id="user_id" value="{$user_id}">
-						<input type="submit" value="Edit" class="topbutton_cpanel_small">
-					</form>	
-				</fieldset>
-			</div>
-			<div class="main_company_child" id="child_add_company">
-				<fieldset>
-					<legend>Add a doc type</legend>
-					<form action="../docs/db_doc_type.php" method="post" name="ind_add" id="ind_add">
-						<input type="text" name="type_name" class="standard_tile_input_small">
-						<input type="submit" value="Add" class="topbutton_cpanel_small">
-						<input type="hidden" name="action" id="action" value="insert_type">
-						<input type="hidden" name="user_id" id="user_id" value="{$user_id}">
-					</form>	
-				</fieldset>
-			</div>
-		</div>
-	</div>
+    <div class="help-tip">
+        <p>As an example, let's take a doc disk. Let's say that Sewer Doc Disk xx contains a cheatcode for the game Xenon and a walkthrough for Kings Quest. 'Cheatcode' and 'Walkthrough' would be the doc types in this example.</p>
+    </div>
+    <div style="margin-left:20px;"><h1>DOC TYPE</h1></div>
+    <div class="standard_tile_line"></div>
+    <div class="standard_tile_text">
+        <div class="left_nav_section">
+            In this section you can add or edit a doc type which can be linked to a game doc or tool doc. To edit an existing doc type, look up the name
+            in the dropdown box. To add a new doc type, use the input field and press 'add'
+        </div>
+        <br>
+        <br>
+        <div class="main_company_container">
+            <div class="main_company_child" id="child_edit_company">
+                <fieldset>
+                    <legend>Edit a doc type</legend>
+                    <form action="../docs/doc_type_edit.php" method="post" name="ind_edit" id="ind_edit">
+                        <select name="doc_type_id" id="quick_search_pub_select">
+                            <option value="-">-</option>
+                            {foreach from=$doc_type item=line}
+                                <option value="{$line.doc_type_id}">{$line.doc_type_name}</option>
+                            {/foreach}
+                        </select>
+                        <input type="hidden" name="user_id" id="user_id" value="{$user_id}">
+                        <input type="submit" value="Edit" class="topbutton_cpanel_small">
+                    </form>
+                </fieldset>
+            </div>
+            <div class="main_company_child" id="child_add_company">
+                <fieldset>
+                    <legend>Add a doc type</legend>
+                    <form action="../docs/db_doc_type.php" method="post" name="ind_add" id="ind_add">
+                        <input type="text" name="type_name" class="standard_tile_input_small">
+                        <input type="submit" value="Add" class="topbutton_cpanel_small">
+                        <input type="hidden" name="action" id="action" value="insert_type">
+                        <input type="hidden" name="user_id" id="user_id" value="{$user_id}">
+                    </form>
+                </fieldset>
+            </div>
+        </div>
+    </div>
 </div>
 {/block}
