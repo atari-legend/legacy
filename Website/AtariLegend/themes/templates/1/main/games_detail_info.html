@@ -17,7 +17,7 @@
 *}
 <div class="standard_tile">
     <div class="help-tip">
-        <p> 
+        <p>
             <i class="fa fa-info-circle" aria-hidden="true"></i> - Open/close the profile of a company or individual<br>
             <i class="fa fa-picture-o" aria-hidden="true"></i> - Click for the company logo or author photo<br>
             <i class="fa fa-newspaper-o" aria-hidden="true"></i> - Interview available
@@ -25,7 +25,7 @@
     </div>
     <h1>GAME INFO</h1>
     <div class="standard_tile_line"></div>
-    <div class="standard_list_entry">              
+    <div class="standard_list_entry">
         <table class="standard_table_games_main_detail">
             {if isset($publisher)}
                 {foreach from=$publisher item=line name=publisher}
@@ -62,12 +62,12 @@
                         {foreach from=$developer item=line name=developer}
                             {if $line.logo != 'none'}
                                 {if isset($logo)}
-                                   {if $line.logo != $logo}
-                                       {if $count_dev_logo == 0}
+                                    {if $line.logo != $logo}
+                                        {if $count_dev_logo == 0}
                                             <img src="{$line.logo}" alt="company logo" class="games_details_img">
                                             {$count_dev_logo=1}
-                                       {/if}
-                                   {/if}
+                                        {/if}
+                                    {/if}
                                 {else}
                                     {if $count_dev_logo == 0}
                                         <img src="{$line.logo}" alt="company logo" class="games_details_img">
@@ -77,7 +77,7 @@
                             {/if}
                         {/foreach}
                     {/if}
-                </td>   
+                </td>
             </tr>
             {/if}
             {if isset($publisher)}
@@ -85,7 +85,7 @@
                     <tr>
                         <td width="30%">
                             {if $smarty.foreach.publisher.index == 0}
-                               <span class="games_main_detail_info_right">Publisher</span>
+                                <span class="games_main_detail_info_right">Publisher</span>
                             {/if}
                             {if $line.continent != '' ||  $line.extra_info != ''}
                                 <br><br>
@@ -109,7 +109,7 @@
                                 {/if}
                             </span>
                             {if $line.continent != '' ||  $line.extra_info != ''}
-                                <br><span class="standard_tile_subtext">{$line.continent}{if $line.continent != '' AND $line.extra_info != ''} - {/if}{$line.extra_info}</span>  
+                                <br><span class="standard_tile_subtext">{$line.continent}{if $line.continent != '' AND $line.extra_info != ''} - {/if}{$line.extra_info}</span>
                             {/if}
                         </td>
                     </tr>
@@ -117,7 +117,7 @@
                         <tr></tr>
                         <tr style="display:none;" id="profile{$line.pub_id}">
                             <td width="100%" colspan="3" class="standard_table_center">
-                               <textarea cols="70" id="profile{$line.pub_id}" class="latest_comments_textarea" style="margin-top:5px;margin-bottom:5px;" readonly>{$line.pub_profile}</textarea>
+                                <textarea cols="70" id="profile{$line.pub_id}" class="latest_comments_textarea" style="margin-top:5px;margin-bottom:5px;" readonly>{$line.pub_profile}</textarea>
                             </td>
                         </tr>
                     {/if}
@@ -125,7 +125,7 @@
             {/if}
             {if isset($game_year)}
                 {foreach from=$game_year item=line name=game_year}
-                    <tr> 
+                    <tr>
                         <td width="30%">
                         {if $smarty.foreach.game_year.index == 0}
                             <span class="games_main_detail_info_right">Year</span>
@@ -142,18 +142,18 @@
                         </td>
                         <td width="60%">
                             <span class="games_main_detail_info_left">
-                                <a href="games_main_list.php?year={$line.game_year}&amp;action=search" class="standard_tile_link">{$line.game_year}</a>    
+                                <a href="games_main_list.php?year={$line.game_year}&amp;action=search" class="standard_tile_link">{$line.game_year}</a>
                             </span>
                             {if $line.extra_info != ''}
-                                <br><span class="standard_tile_subtext">{$line.extra_info}</span>  
+                                <br><span class="standard_tile_subtext">{$line.extra_info}</span>
                             {/if}
-                        </td>                                   
+                        </td>
                     </tr>
                 {/foreach}
             {/if}
             {if isset($developer)}
                 {foreach from=$developer item=line name=developer}
-                    <tr> 
+                    <tr>
                         <td width="30%">
                             {if $smarty.foreach.developer.index == 0}
                                 <span class="games_main_detail_info_right">Developer</span>
@@ -180,23 +180,23 @@
                                 {/if}
                             </span>
                             {if $line.continent != '' ||  $line.extra_info != ''}
-                                <br><span class="standard_tile_subtext">{$line.continent}{if $line.continent != '' AND $line.extra_info != ''} - {/if}{$line.extra_info}</span>  
+                                <br><span class="standard_tile_subtext">{$line.continent}{if $line.continent != '' AND $line.extra_info != ''} - {/if}{$line.extra_info}</span>
                             {/if}
-                        </td>                                   
+                        </td>
                     </tr>
                     {if $line.pub_profile != ''}
                         <tr></tr>
                         <tr style="display:none;" id="profile{$line.pub_id}">
                             <td width="100%" colspan="3" class="standard_table_center">
-                               <textarea cols="70" id="profile{$line.pub_id}" class="latest_comments_textarea" style="margin-top:5px;margin-bottom:5px;" readonly>{$line.pub_profile}</textarea>
+                                <textarea cols="70" id="profile{$line.pub_id}" class="latest_comments_textarea" style="margin-top:5px;margin-bottom:5px;" readonly>{$line.pub_profile}</textarea>
                             </td>
                         </tr>
                     {/if}
                 {/foreach}
-            {/if}                        
+            {/if}
             {if isset($game_author)}
                 {foreach from=$game_author item=line name=game_author}
-                    <tr> 
+                    <tr>
                         <td width="30%">
                             {if $smarty.foreach.game_author.index == 0}
                                 <span class="games_main_detail_info_right">Author</span>
@@ -210,7 +210,7 @@
                                 {else}
                                     <br>
                                 {/if}
-                            {/if}                                        
+                            {/if}
                         </td>
                         <td width="5%">
                             <span class="games_main_detail_info_left" style="text-align:center;">-</span>
@@ -236,37 +236,37 @@
                                     <a href="../../includes/show_image.php?file={$line.ind_img}" data-lightbox="image-1" data-title="{$line.ind_name}" class="latest_comments_link"><i class="fa fa-picture-o" aria-hidden="true"></i></a>
                                 {/if}
                                 {if $line.interview_id != ''}
-                                      <a href="../interviews/interviews_detail.php?selected_interview_id={$line.interview_id}" class="latest_comments_link"><i class="fa fa-newspaper-o" aria-hidden="true" title="Interview available"></i></a>
+                                    <a href="../interviews/interviews_detail.php?selected_interview_id={$line.interview_id}" class="latest_comments_link"><i class="fa fa-newspaper-o" aria-hidden="true" title="Interview available"></i></a>
                                 {/if}
                             </span>
                             {if $line.ind_nick != ''}
-                                <br><span class="standard_tile_subtext">AKA {$line.ind_nick}</span>  
+                                <br><span class="standard_tile_subtext">AKA {$line.ind_nick}</span>
                             {/if}
                             {if $line.auhthor_type_info != ''}
-                                <br><span class="standard_tile_subtext">{$line.auhthor_type_info}</span>  
-                            {/if}                                      
-                        </td>                                   
+                                <br><span class="standard_tile_subtext">{$line.auhthor_type_info}</span>
+                            {/if}
+                        </td>
                     </tr>
                     {if $line.ind_profile != ''}
                         <tr></tr>
                         <tr style="display:none;" id="profile_ind{$line.ind_id}">
                             <td width="100%" colspan="3" class="standard_table_center">
-                               <textarea cols="70" id="profile_ind{$line.ind_id}" class="latest_comments_textarea" style="margin-top:5px;margin-bottom:5px;" readonly>{$line.ind_profile}</textarea>
+                                <textarea cols="70" id="profile_ind{$line.ind_id}" class="latest_comments_textarea" style="margin-top:5px;margin-bottom:5px;" readonly>{$line.ind_profile}</textarea>
                             </td>
                         </tr>
                     {/if}
                 {/foreach}
-            {/if}                                               
+            {/if}
             {if $game_info.game_free == 1 || $game_info.game_unreleased == 1 || $game_info.game_development == 1 || $game_info.game_ste_only == 1 || $game_info.game_ste_enhan == 1
                 || $game_info.game_falcon_only == 1 ||  $game_info.game_falcon_enhan == 1 || $game_info.game_falcon_rgb == 1 || $game_info.game_falcon_vga == 1 || $game_info.game_mono == 1
                 || $game_info.game_wanted <> '' || $game_info.game_arcade == 1 || $game_info.game_seuck == 1 || $game_info.game_stos == 1 || $game_info.game_stac == 1}
-                <tr> 
+                <tr>
                     <td width="30%">
                         <span class="games_main_detail_info_right">Specifics</span>
                             {if $game_info.game_free == 1}
                                 <br>
                             {/if}
-                            {if $game_info.game_unreleased == 1} 
+                            {if $game_info.game_unreleased == 1}
                                 <br>
                             {/if}
                             {if $game_info.game_unfinished == 1}
@@ -277,14 +277,14 @@
                             {/if}
                             {if $game_info.game_ste_only == 1}
                                 <br>
-                            {/if}   
+                            {/if}
                             {if $game_info.game_ste_enhan == 1}
                                 <br>
                             {/if}
                             {if $game_info.game_falcon_only == 1}
                                 <br>
                             {/if}
-                            {if $game_info.game_falcon_enhan == 1} 
+                            {if $game_info.game_falcon_enhan == 1}
                                 <br>
                             {/if}
                             {if $game_info.game_falcon_rgb == 1}
@@ -299,7 +299,7 @@
                             {if $game_info.game_wanted <> ''}
                                 <br>
                             {/if}
-                            {if $game_info.game_arcade == 1} 
+                            {if $game_info.game_arcade == 1}
                                 <br>
                             {/if}
                             {if $game_info.game_seuck == 1}
@@ -317,7 +317,7 @@
                             {if $game_info.game_free == 1}
                                 <br>
                             {/if}
-                            {if $game_info.game_unreleased == 1} 
+                            {if $game_info.game_unreleased == 1}
                                 <br>
                             {/if}
                             {if $game_info.game_unfinished == 1}
@@ -328,14 +328,14 @@
                             {/if}
                             {if $game_info.game_ste_only == 1}
                                 <br>
-                            {/if}   
+                            {/if}
                             {if $game_info.game_ste_enhan == 1}
                                 <br>
                             {/if}
                             {if $game_info.game_falcon_only == 1}
                                 <br>
                             {/if}
-                            {if $game_info.game_falcon_enhan == 1} 
+                            {if $game_info.game_falcon_enhan == 1}
                                 <br>
                             {/if}
                             {if $game_info.game_falcon_rgb == 1}
@@ -350,7 +350,7 @@
                             {if $game_info.game_wanted <> ''}
                                 <br>
                             {/if}
-                            {if $game_info.game_arcade == 1} 
+                            {if $game_info.game_arcade == 1}
                                 <br>
                             {/if}
                             {if $game_info.game_seuck == 1}
@@ -368,7 +368,7 @@
                             {if $game_info.game_free == 1}
                                 Non-Commercial <br>
                             {/if}
-                            {if $game_info.game_unreleased == 1} 
+                            {if $game_info.game_unreleased == 1}
                                 Unreleased <br>
                             {/if}
                             {if $game_info.game_unfinished == 1}
@@ -379,14 +379,14 @@
                             {/if}
                             {if $game_info.game_ste_only == 1}
                                 STe only <br>
-                            {/if}   
+                            {/if}
                             {if $game_info.game_ste_enhan == 1}
                                 STe enhanced <br>
                             {/if}
                             {if $game_info.game_falcon_only == 1}
                                 Falcon only <br>
                             {/if}
-                            {if $game_info.game_falcon_enhan == 1} 
+                            {if $game_info.game_falcon_enhan == 1}
                                 Falcon enhanced <br>
                             {/if}
                             {if $game_info.game_falcon_rgb == 1}
@@ -401,7 +401,7 @@
                             {if $game_info.game_wanted <> ''}
                                 Wanted <br>
                             {/if}
-                            {if $game_info.game_arcade == 1} 
+                            {if $game_info.game_arcade == 1}
                                 Arcade <br>
                             {/if}
                             {if $game_info.game_seuck == 1}
@@ -414,58 +414,58 @@
                                 STAC <br>
                             {/if}
                         </span>
-                    </td>                                   
+                    </td>
                 </tr>
             {/if}
             {if isset($aka)}
                 {foreach from=$aka item=line name=aka}
-                    <tr> 
+                    <tr>
                         <td width="30%">
                         {if $smarty.foreach.aka.index == 0}
                             <span class="games_main_detail_info_right">AKA</span>
-                        {/if}                                     
+                        {/if}
                         </td>
                         <td width="5%">
-                            <span class="games_main_detail_info_left" style="text-align:center;">-</span>                                       
+                            <span class="games_main_detail_info_left" style="text-align:center;">-</span>
                         </td>
                         <td width="60%">
                             <span class="games_main_detail_info_left">
-                                <a href="games_detail.php?game_id={$line.game_id}" class="standard_tile_link">{$line.game_aka_name}</a>    
+                                <a href="games_detail.php?game_id={$line.game_id}" class="standard_tile_link">{$line.game_aka_name}</a>
                             </span>
-                        </td>                                   
+                        </td>
                     </tr>
                 {/foreach}
             {/if}
             {if isset($cat)}
                 {foreach from=$cat item=line name=cat}
-                    <tr> 
+                    <tr>
                         <td width="30%">
                         {if $smarty.foreach.cat.index == 0}
                             <span class="games_main_detail_info_right">Category</span>
-                        {/if}                                     
+                        {/if}
                         </td>
                         <td width="5%">
-                            <span class="games_main_detail_info_left" style="text-align:center;">-</span>                                       
+                            <span class="games_main_detail_info_left" style="text-align:center;">-</span>
                         </td>
                         <td width="60%">
                             <span class="games_main_detail_info_left">
-                                <a href="games_main_list.php?category={$line.cat_id}&amp;action=search" class="standard_tile_link">{$line.cat_name}</a>    
+                                <a href="games_main_list.php?category={$line.cat_id}&amp;action=search" class="standard_tile_link">{$line.cat_name}</a>
                             </span>
-                        </td>                                   
+                        </td>
                     </tr>
                 {/foreach}
             {/if}
             {if isset($game_vs)}
                 {foreach from=$game_vs item=line name=game_vs}
-                    <tr> 
-                        <td width="30%" style="vertical-align:top;"> 
+                    <tr>
+                        <td width="30%" style="vertical-align:top;">
                             {if $smarty.foreach.game_vs.index == 0}
                                 <span class="games_main_detail_info_right">Compare</span>
                             {/if}
                         </td>
-                        <td width="5%" style="vertical-align:top;">   
+                        <td width="5%" style="vertical-align:top;">
                             {if $smarty.foreach.game_vs.index == 0}
-                                <span class="games_main_detail_info_left" style="text-align:center;">-</span> 
+                                <span class="games_main_detail_info_left" style="text-align:center;">-</span>
                             {/if}
                         </td>
                         <td width="60%">
@@ -476,11 +476,11 @@
                                 <br>
                                 <a href="http://www.lemon64.com/?game_id={$line.C64_id}"><img src="../../includes/show_image.php?file={$style_dir2}images/c64.jpg&amp;resize=80,null,null,null" style="display:inline;margin-top:5px;border: 1px solid #666666; background: black;" class="game_screenshot_img"></a>
                             {/if}
-                        </td>                                   
+                        </td>
                     </tr>
                 {/foreach}
-            {/if}           
+            {/if}
         </table>
     </div>
     <div class="standard_tile_line"></div>
-</div>	
+</div>

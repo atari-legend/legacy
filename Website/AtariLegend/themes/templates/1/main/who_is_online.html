@@ -1,7 +1,7 @@
-{* 
+{*
 /***************************************************************************
-                              who_is_online.html
-*                            --------------------------
+                            who_is_online.html
+*                           --------------------------
 *   begin                : Friday, June 16, 2017
 *   copyright            : (C) 2017 Atari Legend
 *   email                : admin@atarilegend.com
@@ -14,11 +14,11 @@
 <link rel="stylesheet" href="{$style_dir}css/vendor/font-awesome-4.7.0/css/font-awesome.min.css"> <!-- Font awesome for icons-->
 
 
-	<div class="standard_tile_text">    
-       <div class="main_stats_container">
-			<table class="standard_table_list">
-			<tr>
-                <td class="online_title">  
+    <div class="standard_tile_text">
+        <div class="main_stats_container">
+            <table class="standard_table_list">
+            <tr>
+                <td class="online_title">
                     {if $nr_users == '1'}
                         In total there is {$nr_users} registered user online (based on users active over the past 1 minute) :
                     {elseif $nr_users == '0'}
@@ -37,7 +37,7 @@
                     {/if}
                 </td>
                 </tr>
-			<tr>
+            <tr>
                 <td class="online_title">
                     {if $nr_users_24 == '1'}
                         In the past 24h there was {$nr_users_24} registered user online :
@@ -48,7 +48,7 @@
                     {/if}
                 </td>
             </tr>
-            <tr>    
+            <tr>
                 <td class="online_users">
                     {if isset($users_24h)}
                         {foreach from=$users_24h item=line}
@@ -59,6 +59,4 @@
             </tr>
             </table>
         </div>
-    </div>                   
-
-
+    </div>

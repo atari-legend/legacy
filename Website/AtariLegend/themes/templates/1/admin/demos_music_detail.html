@@ -1,104 +1,104 @@
-{* 
+{*
 /***************************************************************************
 *                                demos_music_detail.tpl
 *                            ------------------------------
 *   begin                : saturday, November 19, 2005
 *   copyright            : (C) 2005 Atari Legend
 *   email                : admin@atarilegend.com
-*						   Created file
-*						
+*                          Created file
+*
 *   Id: demos_music_detail.tpl,v 0.10 2005/11/19 ST Graveyard
 *
 ***************************************************************************/
 
 //****************************************************************************************
 // This is the detail page of a demo. Change all the specifics over here!
-//**************************************************************************************** 
+//****************************************************************************************
 *}
 {extends file='1/admin/frontpage.html'}
 {block name=java_script}
 <script type="text/javascript">
-function add_composer() 
+function add_composer()
 {
-	document.editmuzak.method="post";
-	document.editmuzak.action="../demos/demos_music_detail.php?action=pick_composer";
-   	document.editmuzak.submit();
+    document.editmuzak.method="post";
+    document.editmuzak.action="../demos/demos_music_detail.php?action=pick_composer";
+    document.editmuzak.submit();
 }
 
-function delete_music(demo_id) 
+function delete_music(demo_id)
 {
-	document.editmuzak.method="post";
-	document.editmuzak.action="../demos/db_demos_music.php?demo_id="+demo_id+"&action=delete_music";
-   	document.editmuzak.submit();
+    document.editmuzak.method="post";
+    document.editmuzak.action="../demos/db_demos_music.php?demo_id="+demo_id+"&action=delete_music";
+    document.editmuzak.submit();
 }
 </script>
 {/block}
 {block name=title}Edit demo music - <a href="../demos/demos_detail.php?demo_id={$demo.demo_id}" class=MAINNAV_WHITE>{$demo.demo_name}</a>{/block}
 {block name=main_tile}
 <div class="NEWMAINCELL">
-	<fieldset class="interview_set">
-		<legend class="links_legend">Demo Music</legend>
+    <fieldset class="interview_set">
+        <legend class="links_legend">Demo Music</legend>
 
-				Add a new muzak or delete an existing one from the db. Choose the composer and go for it!
+                Add a new muzak or delete an existing one from the db. Choose the composer and go for it!
 <br/>
-	</fieldset> 
+    </fieldset>
 <br/><br/>
-	<form action="../demos/demos_music_detail.php" method="post" name="editmuzak">
-	<fieldset class="interview_set">
-		<legend class="links_legend">Edit existing files</legend>
-		<br/>
+    <form action="../demos/demos_music_detail.php" method="post" name="editmuzak">
+    <fieldset class="interview_set">
+        <legend class="links_legend">Edit existing files</legend>
+        <br/>
 
-					{if $nr_of_zaks >= 1}		
-					{foreach from=$music item=line}
-						<input type="checkbox" name="music_id_selected[]" value="{$line.music_id}">
-					  	<a href="../demos/demos_music_detail.php?music_id={$line.music_id}&amp;action=play_music" class="MAINNAV">{$line.ind_name}_{$line.music_id}.{$line.extention}</a>
-					  	<br/>
-					  	<br/>
-					{/foreach}
-					{/if}					
-					<img src="../templates/0/images/arrow_ltr.gif" alt="" width="38" height="22">		
-					<input type="button" value="Delete" onclick="delete_music({$demo.demo_id})">
-					<br/>
-					<br/>
-					<select name="individuals" class="continentSelects">
-						<option value="-" selected>-</option>
-						{if isset($ind)}
-						{foreach from=$ind item=line}
-							<option value="{$line.ind_id}">{$line.ind_name}</option>							
-						{/foreach}
-						{/if}			
-					</select>	
-					<b>Composers</b>					
-					<br/><br/>
-					<input type="hidden" name="music_id" value="{if isset($line.music_id)}{$line.music_id}{/if}">
-					<input type="hidden" name="demo_id" value="{$demo.demo_id}">
-					<input type="button" value="Pick" onclick="add_composer()">
+                    {if $nr_of_zaks >= 1}
+                    {foreach from=$music item=line}
+                        <input type="checkbox" name="music_id_selected[]" value="{$line.music_id}">
+                        <a href="../demos/demos_music_detail.php?music_id={$line.music_id}&amp;action=play_music" class="MAINNAV">{$line.ind_name}_{$line.music_id}.{$line.extention}</a>
+                        <br/>
+                        <br/>
+                    {/foreach}
+                    {/if}
+                    <img src="../templates/0/images/arrow_ltr.gif" alt="" width="38" height="22">
+                    <input type="button" value="Delete" onclick="delete_music({$demo.demo_id})">
+                    <br/>
+                    <br/>
+                    <select name="individuals" class="continentSelects">
+                        <option value="-" selected>-</option>
+                        {if isset($ind)}
+                        {foreach from=$ind item=line}
+                            <option value="{$line.ind_id}">{$line.ind_name}</option>
+                        {/foreach}
+                        {/if}
+                    </select>
+                    <b>Composers</b>
+                    <br/><br/>
+                    <input type="hidden" name="music_id" value="{if isset($line.music_id)}{$line.music_id}{/if}">
+                    <input type="hidden" name="demo_id" value="{$demo.demo_id}">
+                    <input type="button" value="Pick" onclick="add_composer()">
 
-	</fieldset>
-	</form>
+    </fieldset>
+    </form>
 
 
 {if isset($action) and $action == 'pick_composer'}
 <br/><br/>
-		<form enctype="multipart/form-data" method="post" action="../demos/db_demos_music.php" name="composer">		
-		<fieldset class="interview_set">
-		<legend class="links_legend">Music files for {$ind_selected.ind_name}</legend>
-	<br/>
-					{section name=loop loop=6 start=1} 
-						<input type="file" name="music[{$smarty.section.loop.index}]">
-						<br/>
-					{/section}	
-					<input type="hidden" name="ind_id" value="{$ind_selected.ind_id}">
-					<input type="hidden" name="MAX_FILE_SIZE" value="100000">
-					<input type="hidden" name="action" value="upload_zaks">
-					<input type="hidden" name="demo_id" value="{$demo.demo_id}">
-					<input type="submit" name="valider" value="Upload">
-					<br/>
-					<br/>
-					<a href="../demos/demos_music_detail.php?demo_id={$demo.demo_id}" class=MAINNAV> Pick another composer </a>
-	<br/>
-	</fieldset>
-	</form>
+        <form enctype="multipart/form-data" method="post" action="../demos/db_demos_music.php" name="composer">
+        <fieldset class="interview_set">
+        <legend class="links_legend">Music files for {$ind_selected.ind_name}</legend>
+    <br/>
+                    {section name=loop loop=6 start=1}
+                        <input type="file" name="music[{$smarty.section.loop.index}]">
+                        <br/>
+                    {/section}
+                    <input type="hidden" name="ind_id" value="{$ind_selected.ind_id}">
+                    <input type="hidden" name="MAX_FILE_SIZE" value="100000">
+                    <input type="hidden" name="action" value="upload_zaks">
+                    <input type="hidden" name="demo_id" value="{$demo.demo_id}">
+                    <input type="submit" name="valider" value="Upload">
+                    <br/>
+                    <br/>
+                    <a href="../demos/demos_music_detail.php?demo_id={$demo.demo_id}" class=MAINNAV> Pick another composer </a>
+    <br/>
+    </fieldset>
+    </form>
 
 {/if}
 
@@ -106,7 +106,7 @@ function delete_music(demo_id)
 <div class="back_button"><a href="../demos/demos_music.php" class="MAINNAV">back</a></div>
 <br/>
 {if isset($message)}
-	<div class="message_box">{$message}</div>
+    <div class="message_box">{$message}</div>
 {/if}
 </div>
 {/block}

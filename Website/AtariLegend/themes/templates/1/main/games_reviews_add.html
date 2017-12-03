@@ -1,6 +1,6 @@
 {*
 /***************************************************************************
- *                                games_reviews_add.html
+*                                games_reviews_add.html
 *                            ---------------------------------
 *   begin                : Tuesday, 29 August, 2017
 *   copyright            : (C) 2017 Atari Legend
@@ -25,7 +25,7 @@
 
     <script>
         lightbox.option({
-          'showImageNumberLabel': false
+            'showImageNumberLabel': false
         })
     </script>
 
@@ -93,7 +93,7 @@
                 }
             }
 
-            if (donotinsert) {		// Close all open tags up to the one just clicked & default button names
+            if (donotinsert) {      // Close all open tags up to the one just clicked & default button names
                 while (bbcode[bblast]) {
                         butnumber = arraypop(bbcode) - 1;
                         txtarea.value += bbtags[butnumber + 1];
@@ -105,10 +105,10 @@
                     return;
             } else { // Open tags
 
-                if (imageTag && (bbnumber != 14)) {		// Close image tag before adding another
+                if (imageTag && (bbnumber != 14)) {     // Close image tag before adding another
                     txtarea.value += bbtags[15];
-                    lastValue = arraypop(bbcode) - 1;	// Remove the close image tag from the list
-                    document.post.addbbcode14.value = "Img";	// Return button back to normal state
+                    lastValue = arraypop(bbcode) - 1;   // Remove the close image tag from the list
+                    document.post.addbbcode14.value = "Img";    // Return button back to normal state
                     imageTag = false;
                 }
 
@@ -158,7 +158,7 @@
             }
 
             // Get all elements with class="tablinks" and remove the class "active"
-             tablinks = document.getElementsByClassName("tablinks");
+            tablinks = document.getElementsByClassName("tablinks");
             for (i = 0; i < tablinks.length; i++) {
                 tablinks[i].className = tablinks[i].className.replace(" active", "");
             }
@@ -221,28 +221,28 @@
                 //get the screenshots data
                 for (i = 0; i < {$nr_screenshots}; i++)
                 {
-                   var string = "comment_";
-                   var string_comment = string.concat(i);
-                   var comment = document.getElementById(string_comment).value;
+                    var string = "comment_";
+                    var string_comment = string.concat(i);
+                    var comment = document.getElementById(string_comment).value;
 
-                   if (comment == '')
-                   {
+                    if (comment == '')
+                    {
                         var string3 = "output_";
                         var string_output = string3.concat(i);
                         var output = document.getElementById(string_output);
                         output.style.display='none';
-                   }
-                   else
-                   {
-                       var string2 = "preview_comment_";
-                       var string_preview_comment = string2.concat(i);
-                       document.getElementById(string_preview_comment).innerHTML = comment;
+                    }
+                    else
+                    {
+                        var string2 = "preview_comment_";
+                        var string_preview_comment = string2.concat(i);
+                        document.getElementById(string_preview_comment).innerHTML = comment;
 
-                       var string3 = "output_";
-                       var string_output = string3.concat(i);
-                       var output = document.getElementById(string_output);
-                       output.style.display='inline';
-                   }
+                        var string3 = "output_";
+                        var string_output = string3.concat(i);
+                        var output = document.getElementById(string_output);
+                        output.style.display='inline';
+                    }
                 }
             }
         }
@@ -328,8 +328,8 @@
             <!--END Credits tile             -->
             <!--*****************************-->
             {if isset($reviews_author)}
-                 <br>
-                 {include file='1/main/latest_comments_tile.html'}
+                <br>
+                {include file='1/main/latest_comments_tile.html'}
             {else}
                 <br>
                 {include file='1/main/latest_reviews_tile.html'}
@@ -356,8 +356,8 @@
                 <h1>{$game_info.game_name|upper}</h1>
                 <div class="standard_tile_line"></div>
                 <div class="tab">
-                  <button class="tablinks" onclick="openTab(event, 'edit')" id="defaultOpen">EDIT</button>
-                  <button class="tablinks" onclick="openTab(event, 'preview')">PREVIEW</button>
+                    <button class="tablinks" onclick="openTab(event, 'edit')" id="defaultOpen">EDIT</button>
+                    <button class="tablinks" onclick="openTab(event, 'preview')">PREVIEW</button>
                 </div>
                 <div id="edit" class="tabcontent">
                     <!--**************************-->
@@ -503,44 +503,44 @@
                 {include file='1/main/latest_comments_tile.html'}
 
                 <script type="text/javascript">
-                 window.onload = function() {
+                window.onload = function() {
                     $(".standard_list_entry_news_text").dotdotdot({  <!--This is the script to truncate the latest interviews-->
-                            //	configuration goes here
+                            //  configuration goes here
 
-                        /*	The text to add as ellipsis. */
-                        ellipsis	: '... ',
+                        /*  The text to add as ellipsis. */
+                        ellipsis    : '... ',
 
-                        /*	How to cut off the text/html: 'word'/'letter'/'children' */
-                        wrap		: 'word',
+                        /*  How to cut off the text/html: 'word'/'letter'/'children' */
+                        wrap        : 'word',
 
-                        /*	Wrap-option fallback to 'letter' for long words */
+                        /*  Wrap-option fallback to 'letter' for long words */
                         fallbackToLetter: false,
 
-                        /*	jQuery-selector for the element to keep and put after the ellipsis. */
-                        after		: null,
+                        /*  jQuery-selector for the element to keep and put after the ellipsis. */
+                        after       : null,
 
-                        /*	Whether to update the ellipsis: true/'window' */
-                        watch		: window,
+                        /*  Whether to update the ellipsis: true/'window' */
+                        watch       : window,
 
-                        /*	Optionally set a max-height, can be a number or function.
+                        /*  Optionally set a max-height, can be a number or function.
                             If null, the height will be measured. */
-                        height		: null,
+                        height      : null,
 
-                        /*	Deviation for the height-option. */
-                        tolerance	: 0,
+                        /*  Deviation for the height-option. */
+                        tolerance   : 0,
 
-                        /*	Callback function that is fired after the ellipsis is added,
+                        /*  Callback function that is fired after the ellipsis is added,
                             receives two parameters: isTruncated(boolean), orgContent(string). */
-                        callback	: function( isTruncated, orgContent ) {},
+                        callback    : function( isTruncated, orgContent ) {},
 
-                        lastCharacter	: {
+                        lastCharacter   : {
 
-                            /*	Remove these characters from the end of the truncated text. */
-                            remove		: [ ' ', ',', ';', '.', '!', '?' ],
+                            /*  Remove these characters from the end of the truncated text. */
+                            remove      : [ ' ', ',', ';', '.', '!', '?' ],
 
-                            /*	Don't add an ellipsis if this array contains
+                            /*  Don't add an ellipsis if this array contains
                                 the last character of the truncated text. */
-                            noEllipsis	: []
+                            noEllipsis  : []
                         }
                     });
                 };
