@@ -1,4 +1,4 @@
-{* 
+{*
 /***************************************************************************
 *                                Individuals_edit.html
 *                            ----------------------------
@@ -9,7 +9,7 @@
 *
 *   Id: Individuals_edit.html,v 0.10 2005/08/06 15:25 Gatekeeper
 *   Id: Individuals_edit.html,v 0.20 2016/08/01 23:17 Gatekeeper
-*			- AL 2.0
+*           - AL 2.0
 *   Id: Individuals_edit.html,v 0.21 2017/05/05 19:10 Gatekeeper
 *           - Custom upload field
 *
@@ -22,18 +22,18 @@ The individuals edit page
 *}
 {extends file='1/admin/frontpage.html'}
 
-{block name=java_script}	
+{block name=java_script}
 <script type="text/javascript">
-$(function() {    
+$(function() {
     $but = $('#file_upload_user_detail');
-    
+
     $("input:file[id=file_upload]").change(function() {
         document.getElementById('file_upload_user_detail').value = $(this).val();
     });
 });
 
 function individual_pic_delete(ind_id)
-{ 
+{
     // CONFIRM REQUIRES ONE ARGUMENT
     var message = "Are you sure you want to delete this picture from the database?";
     // CONFIRM IS BOOLEAN. THAT MEANS THAT
@@ -43,40 +43,40 @@ function individual_pic_delete(ind_id)
 
     if (return_value !="0")
     {
-    	url="db_individuals.php?ind_id="+ind_id+"&action=delete_pic";
-		location.href=url;
-    } 
+        url="db_individuals.php?ind_id="+ind_id+"&action=delete_pic";
+        location.href=url;
+    }
 }
 
 function individualdelete(ind_id)
-{ 
-   	// CONFIRM REQUIRES ONE ARGUMENT
-   	var message = "Are you sure you want to delete this individual from the database?";
-   	// CONFIRM IS BOOLEAN. THAT MEANS THAT
-   	// IT RETURNS TRUE IF 'OK' IS CLICKED
-   	// OTHERWISE IT RETURN FALSE
-   	var return_value = confirm(message);
+{
+    // CONFIRM REQUIRES ONE ARGUMENT
+    var message = "Are you sure you want to delete this individual from the database?";
+    // CONFIRM IS BOOLEAN. THAT MEANS THAT
+    // IT RETURNS TRUE IF 'OK' IS CLICKED
+    // OTHERWISE IT RETURN FALSE
+    var return_value = confirm(message);
 
-   	if (return_value !="0")
-   	{
-   		url="db_individuals.php?ind_id="+ind_id+"&action=delete_ind";
-		location.href=url;
-   	} 	
+    if (return_value !="0")
+    {
+        url="db_individuals.php?ind_id="+ind_id+"&action=delete_ind";
+        location.href=url;
+    }
 }
 function nickdelete(nick_id,ind_id)
-{ 
-   	// CONFIRM REQUIRES ONE ARGUMENT
-   	var message = "Are you sure you want to delete this nickname from the database?";
-   	// CONFIRM IS BOOLEAN. THAT MEANS THAT
-   	// IT RETURNS TRUE IF 'OK' IS CLICKED
-   	// OTHERWISE IT RETURN FALSE
-   	var return_value = confirm(message);
+{
+    // CONFIRM REQUIRES ONE ARGUMENT
+    var message = "Are you sure you want to delete this nickname from the database?";
+    // CONFIRM IS BOOLEAN. THAT MEANS THAT
+    // IT RETURNS TRUE IF 'OK' IS CLICKED
+    // OTHERWISE IT RETURN FALSE
+    var return_value = confirm(message);
 
-   	if (return_value !="0")
-   	{
-   		url="db_individuals.php?nick_id="+nick_id+"&ind_id="+ind_id+"&action=delete_nick";
-		location.href=url;
-   	} 	
+    if (return_value !="0")
+    {
+        url="db_individuals.php?nick_id="+nick_id+"&ind_id="+ind_id+"&action=delete_nick";
+        location.href=url;
+    }
 }
 </script>
 
@@ -84,95 +84,95 @@ function nickdelete(nick_id,ind_id)
 <script type="text/javascript" src="{$template_dir}includes/js/bbcode.js"></script>
 
 <script type="text/javascript" src="{$template_dir}includes/js/vendor/lightbox-2.9.0.min.js"></script><!--lightbox popup script-->
-<link type="text/css" href="{$style_dir}css/vendor/lightbox-2.9.0.css" hreflang="en" rel="stylesheet"> 
+<link type="text/css" href="{$style_dir}css/vendor/lightbox-2.9.0.css" hreflang="en" rel="stylesheet">
 <script>
-    lightbox.option({        
-      'showImageNumberLabel': false
+    lightbox.option({
+        'showImageNumberLabel': false
     })
 </script>
-    
+
 {/block}
 
 {block name=title}Edit {$individuals.ind_name}{/block}
 
 {block name=main_tile}
 <div class="standard_tile" id="individuals_edit">
-	{if isset($individuals.ind_name) }
-	<h1>{$individuals.ind_name|upper}</h1>
-	<div class="standard_tile_line"></div>
-	<div class="standard_tile_text">
-		<div class="left_nav_section">
-			In this section you can edit an individual. You can use the profile box for additional info on the person.
-			A photo can be uploaded as well. If a picture is already linked, you can delete it and upload a new one.
-		</div> 
-		<br>
-		<br>
-		<fieldset>
-			<legend>Edit individual</legend>
-			<form action="../individuals/db_individuals.php" method="post" name="post" id="ind_edit">
-				<b>Name :</b>
-				<input type="text" name="ind_name" value="{$individuals.ind_name}" class="standard_tile_input_small">
-				<br>
-				<br>
-				<b>Email :</b>
-				<input type="text" name="ind_email" value="{$individuals.ind_email}" class="standard_tile_input_small">
-				<br>
-				<br>
-				<b>Profile :</b>
-				<br>
-				<br>
-				<input type="button" accesskey= "b" name="addbbcode0" value="B" onclick="bbstyle(0,'textfield')" onMouseOver="helpline('b')" />
-				<input type="button" accesskey= "u" name="addbbcode4" value="U" onclick="bbstyle(4,'textfield')" onMouseOver="helpline('u')" />
-				<input type="button" accesskey= "i" name="addbbcode2" value="I" onclick="bbstyle(2,'textfield')" onMouseOver="helpline('i')" />
-				<input type="button" accesskey="w" name="addbbcode6" value="URL" onClick="bbstyle(6,'textfield')" onMouseOver="helpline('h')" />			  
-				<input type="button" accesskey="x" name="addbbcode8" value="@" onClick="bbstyle(8,'textfield')" onMouseOver="helpline('e')" />			  			
-				<textarea name="textfield" id="game_review_textfield" ONSELECT="javascript:storeCaret(this);" ONCLICK="javascript:storeCaret(this);" ONKEYUP="javascript:storeCaret(this);" ONCHANGE="javascript:storeCaret(this);" rows="5" style="padding-left:0px;">{$individuals.ind_profile}</textarea>
-				<br>
-				<br>
-				<input type="submit" value="Update" style="padding:2px;" class="topbutton_cpanel_small">
-				<input type="submit" value="Delete" onClick="individualdelete({$individuals.ind_id}); return false;" class="topbutton_cpanel_small">	
-				<input type="hidden" name="action" value="update">
-				<input type="hidden" name="ind_id" value="{$individuals.ind_id}">
-			</form>	
-			<br>
-			<br>
-		</fieldset>
-		<br>
-		{if $individuals.ind_image !== 'none'}
-			<fieldset>
-				<legend>Individual Image</legend>
-				<br>
+    {if isset($individuals.ind_name) }
+    <h1>{$individuals.ind_name|upper}</h1>
+    <div class="standard_tile_line"></div>
+    <div class="standard_tile_text">
+        <div class="left_nav_section">
+            In this section you can edit an individual. You can use the profile box for additional info on the person.
+            A photo can be uploaded as well. If a picture is already linked, you can delete it and upload a new one.
+        </div>
+        <br>
+        <br>
+        <fieldset>
+            <legend>Edit individual</legend>
+            <form action="../individuals/db_individuals.php" method="post" name="post" id="ind_edit">
+                <b>Name :</b>
+                <input type="text" name="ind_name" value="{$individuals.ind_name}" class="standard_tile_input_small">
+                <br>
+                <br>
+                <b>Email :</b>
+                <input type="text" name="ind_email" value="{$individuals.ind_email}" class="standard_tile_input_small">
+                <br>
+                <br>
+                <b>Profile :</b>
+                <br>
+                <br>
+                <input type="button" accesskey= "b" name="addbbcode0" value="B" onclick="bbstyle(0,'textfield')" onMouseOver="helpline('b')" />
+                <input type="button" accesskey= "u" name="addbbcode4" value="U" onclick="bbstyle(4,'textfield')" onMouseOver="helpline('u')" />
+                <input type="button" accesskey= "i" name="addbbcode2" value="I" onclick="bbstyle(2,'textfield')" onMouseOver="helpline('i')" />
+                <input type="button" accesskey="w" name="addbbcode6" value="URL" onClick="bbstyle(6,'textfield')" onMouseOver="helpline('h')" />
+                <input type="button" accesskey="x" name="addbbcode8" value="@" onClick="bbstyle(8,'textfield')" onMouseOver="helpline('e')" />
+                <textarea name="textfield" id="game_review_textfield" ONSELECT="javascript:storeCaret(this);" ONCLICK="javascript:storeCaret(this);" ONKEYUP="javascript:storeCaret(this);" ONCHANGE="javascript:storeCaret(this);" rows="5" style="padding-left:0px;">{$individuals.ind_profile}</textarea>
+                <br>
+                <br>
+                <input type="submit" value="Update" style="padding:2px;" class="topbutton_cpanel_small">
+                <input type="submit" value="Delete" onClick="individualdelete({$individuals.ind_id}); return false;" class="topbutton_cpanel_small">
+                <input type="hidden" name="action" value="update">
+                <input type="hidden" name="ind_id" value="{$individuals.ind_id}">
+            </form>
+            <br>
+            <br>
+        </fieldset>
+        <br>
+        {if $individuals.ind_image !== 'none'}
+            <fieldset>
+                <legend>Individual Image</legend>
+                <br>
                 <a href="../../includes/show_image.php?file={$individuals.ind_image}&amp;resize=410,null,null,null" data-lightbox="image-1">
                     <img src="../../includes/show_image.php?file={$individuals.ind_image}&amp;resize=160,null,null,null" alt="{$line.ind_name}" class="user_stats_img_dark" style="max-width:95%;">
                 </a>
                 <br>
                 <input type="button" onclick="individual_pic_delete({$individuals.ind_id});" class="topbutton_cpanel_small" value="Delete">
-				<!--<a href="javascript:individual_pic_delete({$individuals.ind_id});" class="left_nav_link">delete photo</a>-->
-			</fieldset>
-		{else}
-			<form action="../individuals/db_individuals.php" method="post" enctype="multipart/form-data" name="individual_pic" id="individual_pic">	
-				<fieldset>
-					<legend>Individual Image</legend>
-					<!--<input type="file" name="individual_pic">-->
+                <!--<a href="javascript:individual_pic_delete({$individuals.ind_id});" class="left_nav_link">delete photo</a>-->
+            </fieldset>
+        {else}
+            <form action="../individuals/db_individuals.php" method="post" enctype="multipart/form-data" name="individual_pic" id="individual_pic">
+                <fieldset>
+                    <legend>Individual Image</legend>
+                    <!--<input type="file" name="individual_pic">-->
                     <label for="file_upload" class="file_upload">Select file</label>
                     <input id="file_upload" type="file" name="individual_pic">
                     <input type="text" class="standard_tile_input_small" id="file_upload_user_detail">&nbsp;
-					<br>
-					<br>
-					<input type="submit" name="inserter" value="Upload" class="topbutton_cpanel_small">
-				</fieldset>
-				<input type="hidden" name="action" value="add_photo">
-				<input type="hidden" name="ind_id" value="{$individuals.ind_id}">
-			</form>
-		{/if}
-		<br>
-		<form action="../individuals/db_individuals.php" method="post" name="ind" id="NickAdd">		
-			<fieldset>
-				<legend>Individuals nick (AKAs)</legend>
-				<input type="text" name="ind_nick" value="" class="standard_tile_input_small">		
-				<input type="submit" value="Add Nick" class="topbutton_cpanel_small">
-				<input type="hidden" name="action" value="add_nick">
-				<input type="hidden" name="ind_id" value="{$individuals.ind_id}">		
+                    <br>
+                    <br>
+                    <input type="submit" name="inserter" value="Upload" class="topbutton_cpanel_small">
+                </fieldset>
+                <input type="hidden" name="action" value="add_photo">
+                <input type="hidden" name="ind_id" value="{$individuals.ind_id}">
+            </form>
+        {/if}
+        <br>
+        <form action="../individuals/db_individuals.php" method="post" name="ind" id="NickAdd">
+            <fieldset>
+                <legend>Individuals nick (AKAs)</legend>
+                <input type="text" name="ind_nick" value="" class="standard_tile_input_small">
+                <input type="submit" value="Add Nick" class="topbutton_cpanel_small">
+                <input type="hidden" name="action" value="add_nick">
+                <input type="hidden" name="ind_id" value="{$individuals.ind_id}">
                 {if isset($nicks)}
                     <br>
                     <br>
@@ -180,21 +180,21 @@ function nickdelete(nick_id,ind_id)
                     {foreach from=$nicks item=line}
                         {$line.nick_name} - <a style="cursor:pointer" class="left_nav_link" onClick="nickdelete({$line.nick_id},{$individuals.ind_id}); return false;">Delete</a><br/>
                     {/foreach}
-                {/if}	
-                <br>	
+                {/if}
+                <br>
             </fieldset>
         </form>
-	</div>
-	{else}
-	<h1>Edit individual</h1>
-	<div class="standard_tile_line"></div>
-	<div class="standard_tile_text">
-		<div class="left_nav_section">
-			Individual does not exist.
-		</div> 
-	</div>
-	{/if}
-	<div class="standard_table_center"><a href="javascript:history.go(-1)" class="standard_tile_link">back</a></div>
-	<br>
+    </div>
+    {else}
+    <h1>Edit individual</h1>
+    <div class="standard_tile_line"></div>
+    <div class="standard_tile_text">
+        <div class="left_nav_section">
+            Individual does not exist.
+        </div>
+    </div>
+    {/if}
+    <div class="standard_table_center"><a href="javascript:history.go(-1)" class="standard_tile_link">back</a></div>
+    <br>
 </div>
 {/block}

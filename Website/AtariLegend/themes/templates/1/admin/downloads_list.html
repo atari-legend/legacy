@@ -1,4 +1,4 @@
-{* 
+{*
 /***************************************************************************
 *                                downloads_list.html
 *                            --------------------------
@@ -22,75 +22,75 @@ The main game page
 
 {block name=main_tile}
 <div class="standard_tile" id="games_list">
-	<h1>ADD/EDIT A DOWNLOAD</h1>
-	<div class="standard_tile_line"></div>
-	<div class="standard_tile_text">
-		<div class="left_nav_section">
-		This is the search result page. Click a title to go to download options page. 
-	</div> 
-	<br>
-	<br>
-	<div id="games_list_4">
+    <h1>ADD/EDIT A DOWNLOAD</h1>
+    <div class="standard_tile_line"></div>
+    <div class="standard_tile_text">
+        <div class="left_nav_section">
+        This is the search result page. Click a title to go to download options page.
+    </div>
+    <br>
+    <br>
+    <div id="games_list_4">
     {if $type == 'game'}
-		<table class="standard_table_list" id="game_list_table">
-			<tr>
-				<th id="game_th">Game Name</th>
-				<th id="pub_th">Publisher</th>
-				<th id="dev_th">Developer</th>
-				<th id="year_th">Year</th>
+        <table class="standard_table_list" id="game_list_table">
+            <tr>
+                <th id="game_th">Game Name</th>
+                <th id="pub_th">Publisher</th>
+                <th id="dev_th">Developer</th>
+                <th id="year_th">Year</th>
                 <th id="info_th">Nr</th>
-			</tr>
-			{foreach from=$download_search item=line}
-			<tr id="downloadedit_ajax_{$line.game_id}">
-				<td class="game_td">
-					{if $line.game_name != ''}
-						<a href="downloads_game_detail.php?game_id={$line.game_id}" class="standard_table_left">{$line.game_name}</a>
-					{else}
-						<i>n/a</i>
-					{/if}
-				</td>
-				<td class="pub_td">
-					{if $line.publisher_name != ''}
-						{$line.publisher_name}
-					{else}
-						<i>n/a</i>
-					{/if}
-				</td>
-				<td class="dev_td">
-					{if $line.developer_name != ''}
-						{$line.developer_name}
-					{else}
-						<i>n/a</i>
-					{/if}
-				</td>
-				<td class="year_td">
-					{if $line.year != ''}
-						{$line.year}
+            </tr>
+            {foreach from=$download_search item=line}
+            <tr id="downloadedit_ajax_{$line.game_id}">
+                <td class="game_td">
+                    {if $line.game_name != ''}
+                        <a href="downloads_game_detail.php?game_id={$line.game_id}" class="standard_table_left">{$line.game_name}</a>
+                    {else}
+                        <i>n/a</i>
+                    {/if}
+                </td>
+                <td class="pub_td">
+                    {if $line.publisher_name != ''}
+                        {$line.publisher_name}
+                    {else}
+                        <i>n/a</i>
+                    {/if}
+                </td>
+                <td class="dev_td">
+                    {if $line.developer_name != ''}
+                        {$line.developer_name}
+                    {else}
+                        <i>n/a</i>
+                    {/if}
+                </td>
+                <td class="year_td">
+                    {if $line.year != ''}
+                        {$line.year}
 
-					{else}
-						<i>n/a</i>
-					{/if}
-				</td>
+                    {else}
+                        <i>n/a</i>
+                    {/if}
+                </td>
                 <td class="info_td">
                     {if $line.number_downloads != ''}
-						{$line.number_downloads}
+                        {$line.number_downloads}
 
-					{else}
-						<i>n/a</i>
-					{/if}                
+                    {else}
+                        <i>n/a</i>
+                    {/if}
                 </td>
-			</tr>
-			{/foreach}
-			<tr>
-				<td class="standard_table_left" colspan="5">
-					<br><b>{if $nr_of_games == 1}1 game found {else} {$nr_of_games} games found{/if} in {$query_time} sec</b>
-				</td>
-			</tr>
-		</table>
+            </tr>
+            {/foreach}
+            <tr>
+                <td class="standard_table_left" colspan="5">
+                    <br><b>{if $nr_of_games == 1}1 game found {else} {$nr_of_games} games found{/if} in {$query_time} sec</b>
+                </td>
+            </tr>
+        </table>
     {/if}
-	</div>
-	<br>
-</div>	
+    </div>
+    <br>
+</div>
 </div>
 <br>
 <div class="standard_table_center"><a href="javascript:history.go(-1)" class="standard_tile_link">back</a></div>

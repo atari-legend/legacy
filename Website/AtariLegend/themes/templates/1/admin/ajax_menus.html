@@ -1,56 +1,56 @@
 {* Crew browse for the crew pick list *}
 {if isset($smarty_action) and $smarty_action == "crew_list"}
-	<select name="crew_id" id="quick_search_pub_select">
-		<option value="" selected>-</option>
-		{foreach from=$crew item=line}
-			<option value="{$line.crew_id}">{$line.crew_name}</option>
-		{/foreach}
-	</select>
+    <select name="crew_id" id="quick_search_pub_select">
+        <option value="" selected>-</option>
+        {foreach from=$crew item=line}
+            <option value="{$line.crew_id}">{$line.crew_name}</option>
+        {/foreach}
+    </select>
 {/if}
 
 {* Individual browse for the individual pick list *}
 {if isset($smarty_action) and $smarty_action == "ind_list"}
-	<select name="ind_id" id="quick_search_pub_select">
-		<option value="" selected>-</option>
-		{foreach from=$ind item=line}
-			<option value="{$line.ind_id}">{$line.ind_name}</option>
-		{/foreach}
-	</select>
+    <select name="ind_id" id="quick_search_pub_select">
+        <option value="" selected>-</option>
+        {foreach from=$ind item=line}
+            <option value="{$line.ind_id}">{$line.ind_name}</option>
+        {/foreach}
+    </select>
 {/if}
 
 {* The Add new menu disk box *}
 {if isset($smarty_action) and $smarty_action == "add_new_disk_box"}
 <br>
-	<div class="main_company_container">
-		<div class="main_company_child" id="child_edit_company" style="text-align:left;">
-			<fieldset>
-				<legend>Add Menu</legend>
-				<form action="../menus/db_menu_disk.php" method="post" name="post" id="menu_disk_add">
-					<div class="add_new_disk_space">Disk number: </div><div class="add_new_disk_space"><input type="text" name="menu_disk_number" value="" class="standard_tile_input_small" style="margin:5px;width:45px;"></div><br>
-					<div class="add_new_disk_space">Disk letter: </div><div class="add_new_disk_space"><input type="text" name="menu_disk_letter" value="" class="standard_tile_input_small" style="margin:5px;width:45px;"></div><br>
-					<div class="add_new_disk_space">Disk part: </div><div class="add_new_disk_space"><input type="text" name="menu_disk_part" value="" class="standard_tile_input_small" style="margin:5px;width:45px;"></div><br>
-					<div class="add_new_disk_space">Disk version: </div><div class="add_new_disk_space"><input type="text" name="menu_disk_version" value="" class="standard_tile_input_small" style="margin:5px;width:45px;"></div><br>
-					<br>
-					<input type="hidden" name="menu_sets_id" value="{$menu_sets_id}">
-					<input type="hidden" name="action" value="add_new_menu_disk">
-					<input type="submit" value="Add new" class="topbutton_cpanel_small"> 
-					<input type="button"  value="Cancel" onclick="CloseaddNewdisk()" style="margin-left:5px;" class="topbutton_cpanel_small">
-				</form>
-			</fieldset>	
-		</div>
-		<div class="main_company_child" id="child_add_company" style="text-align:left;">
-			<fieldset>
-				<legend>Add multiple Menus</legend>
-				<form action="../menus/db_menu_disk.php" method="post" name="post" id="menu_multi_disk_add">
-					<div class="add_new_disk_space">First number: </div><div class="add_new_disk_space"><input type="text" name="first_disk" value="" class="standard_tile_input_small" style="margin:5px;width:45px;"></div><br>
-					<div class="add_new_disk_space">Last number: </div><div class="add_new_disk_space"><input type="text" name="last_disk" value="" class="standard_tile_input_small" style="margin:5px;width:45px;"></div><br>
-					<input type="hidden" name="menu_sets_id" value="{$menu_sets_id}">
-					<input type="hidden" name="action" value="multi_add_new_menu_disk">
-					<br>
-					<input type="submit" value="Add new" class="topbutton_cpanel_small"> 
-					<input type="button" onclick="CloseaddNewdisk()" style="margin-left:5px;" class="topbutton_cpanel_small" value="Cancel">
-				</form>
-			</fieldset>
-		</div>
-	</div>
+    <div class="main_company_container">
+        <div class="main_company_child" id="child_edit_company" style="text-align:left;">
+            <fieldset>
+                <legend>Add Menu</legend>
+                <form action="../menus/db_menu_disk.php" method="post" name="post" id="menu_disk_add">
+                    <div class="add_new_disk_space">Disk number: </div><div class="add_new_disk_space"><input type="text" name="menu_disk_number" value="" class="standard_tile_input_small" style="margin:5px;width:45px;"></div><br>
+                    <div class="add_new_disk_space">Disk letter: </div><div class="add_new_disk_space"><input type="text" name="menu_disk_letter" value="" class="standard_tile_input_small" style="margin:5px;width:45px;"></div><br>
+                    <div class="add_new_disk_space">Disk part: </div><div class="add_new_disk_space"><input type="text" name="menu_disk_part" value="" class="standard_tile_input_small" style="margin:5px;width:45px;"></div><br>
+                    <div class="add_new_disk_space">Disk version: </div><div class="add_new_disk_space"><input type="text" name="menu_disk_version" value="" class="standard_tile_input_small" style="margin:5px;width:45px;"></div><br>
+                    <br>
+                    <input type="hidden" name="menu_sets_id" value="{$menu_sets_id}">
+                    <input type="hidden" name="action" value="add_new_menu_disk">
+                    <input type="submit" value="Add new" class="topbutton_cpanel_small">
+                    <input type="button"  value="Cancel" onclick="CloseaddNewdisk()" style="margin-left:5px;" class="topbutton_cpanel_small">
+                </form>
+            </fieldset>
+        </div>
+        <div class="main_company_child" id="child_add_company" style="text-align:left;">
+            <fieldset>
+                <legend>Add multiple Menus</legend>
+                <form action="../menus/db_menu_disk.php" method="post" name="post" id="menu_multi_disk_add">
+                    <div class="add_new_disk_space">First number: </div><div class="add_new_disk_space"><input type="text" name="first_disk" value="" class="standard_tile_input_small" style="margin:5px;width:45px;"></div><br>
+                    <div class="add_new_disk_space">Last number: </div><div class="add_new_disk_space"><input type="text" name="last_disk" value="" class="standard_tile_input_small" style="margin:5px;width:45px;"></div><br>
+                    <input type="hidden" name="menu_sets_id" value="{$menu_sets_id}">
+                    <input type="hidden" name="action" value="multi_add_new_menu_disk">
+                    <br>
+                    <input type="submit" value="Add new" class="topbutton_cpanel_small">
+                    <input type="button" onclick="CloseaddNewdisk()" style="margin-left:5px;" class="topbutton_cpanel_small" value="Cancel">
+                </form>
+            </fieldset>
+        </div>
+    </div>
 {/if}

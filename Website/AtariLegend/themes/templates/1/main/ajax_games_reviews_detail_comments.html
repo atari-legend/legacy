@@ -1,25 +1,25 @@
-{* 
+{*
 /***************************************************************************
- *                                ajax_games_reviews_detail_comments.html
- *                            ----------------------------------------------
- *   begin                : wednesday, August 23, 2017
- *   copyright            : (C) 2017 Atari Legend
- *   email                : martens_maarten@hotmail.com
- *   actual update        : Creation of file
- *
- *   Id: ajax_games_reviews_detail_comments.html,v 0.10 2017/08/23 16:32 ST Graveyard
- *
- ***************************************************************************/
+*                            ajax_games_reviews_detail_comments.html
+*                            ----------------------------------------------
+*   begin                : wednesday, August 23, 2017
+*   copyright            : (C) 2017 Atari Legend
+*   email                : martens_maarten@hotmail.com
+*   actual update        : Creation of file
+*
+*   Id: ajax_games_reviews_detail_comments.html,v 0.10 2017/08/23 16:32 ST Graveyard
+*
+***************************************************************************/
 
 //****************************************************************************************
 // This is the interviews details comments part - ajax part when saving a comment
-//**************************************************************************************** 
+//****************************************************************************************
 *}
 
 {if isset($smarty_action) and $smarty_action == "delete_comment"}
     {if isset($comments)}
         <div class="games_main_detail_comments_container">
-            <div class="standard_list_entry">                                                  
+            <div class="standard_list_entry">
                 <table class="standard_table_list_comments">
                 {foreach from=$comments item=line}
                     <tr>
@@ -43,20 +43,20 @@
                                     {/if}
                                     {if $line.user_twitter != ''}
                                         <a href="{$line.user_twitter}" class="latest_comments_link" title="Click to visit Twitter profile"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                                    {/if}   
+                                    {/if}
                                     {if $line.user_af != ''}
                                         <a href="{$line.user_af}" class="latest_comments_link" title="Click to visit Atari-Forum profile"><i class="fa fa-gamepad" aria-hidden="true"></i></a>
                                     {/if}
                                     {if $line.user_website != ''}
                                         <a href="{$line.user_website}" class="latest_comments_link" title="Click to visit users website"><i class="fa fa-globe" aria-hidden="true"></i></a>
-                                    {/if}                               
+                                    {/if}
                                     </span>
                                 {/if}
                             </span>
                             <div class="latest_comments_text">
                                 <div id="latest_comment_edit{$line.comment_id}"><div id="games_detail_review_main_text">{$line.comment}</div></div>
                                 <div style="width:100%;text-align:center;"><textarea id="comment_input{$line.comment_id}" class="latest_comments_textarea" style="display:none;" cols="80">{$line.comment_edit}</textarea></div>
-                            </div> 
+                            </div>
                             <span class="standard_tile_subtext" style="font-weight:bold;float:right;display:inline;margin-right:5px;margin-bottom:15px;">
                                 {$line.date}
                             </span>
@@ -64,7 +64,7 @@
                         </td>
                     </tr>
                 {/foreach}
-                </table>     
+                </table>
             </div>
         </div>
     {/if}

@@ -1,4 +1,4 @@
-{* 
+{*
 /***************************************************************************
 *                                bug_report_type_edit.html
 *                            --------------------------
@@ -16,22 +16,22 @@ The bug report type edit page
 *}
 {extends file='1/admin/frontpage.html'}
 
-{block name=java_script}	
+{block name=java_script}
 <script type="text/javascript">
 function typedelete(type_id)
-{ 
-   	// CONFIRM REQUIRES ONE ARGUMENT
-   	var message = "Are you sure you want to delete this bug report type from the database?";
-   	// CONFIRM IS BOOLEAN. THAT MEANS THAT
-   	// IT RETURNS TRUE IF 'OK' IS CLICKED
-   	// OTHERWISE IT RETURN FALSE
-   	var return_value = confirm(message);
+{
+    // CONFIRM REQUIRES ONE ARGUMENT
+    var message = "Are you sure you want to delete this bug report type from the database?";
+    // CONFIRM IS BOOLEAN. THAT MEANS THAT
+    // IT RETURNS TRUE IF 'OK' IS CLICKED
+    // OTHERWISE IT RETURN FALSE
+    var return_value = confirm(message);
 
-   	if (return_value !="0")
-   	{
-   		url="db_bug_report_type.php?type_id="+type_id+"&action=delete_type";
-		location.href=url;
-   	} 	
+    if (return_value !="0")
+    {
+        url="db_bug_report_type.php?type_id="+type_id+"&action=delete_type";
+        location.href=url;
+    }
 }
 </script>
 {/block}
@@ -40,33 +40,33 @@ function typedelete(type_id)
 
 {block name=main_tile}
 <div class="standard_tile" id="individuals_edit">
-	{if isset($type_edit.type_edit) }
-	<h1>EDIT TYPE</h1>
-	<div class="standard_tile_line"></div>
-	<div class="standard_tile_text">
-		<fieldset class="centered_fieldset">
-			<legend>Edit type</legend>
-			<form action="../administration/db_bug_report_type.php" method="post" name="post" id="type_edit">
-				<b>Name :</b>
-				<input type="text" name="type_name" value="{$type_edit.type_edit}" class="standard_tile_input_small">
+    {if isset($type_edit.type_edit) }
+    <h1>EDIT TYPE</h1>
+    <div class="standard_tile_line"></div>
+    <div class="standard_tile_text">
+        <fieldset class="centered_fieldset">
+            <legend>Edit type</legend>
+            <form action="../administration/db_bug_report_type.php" method="post" name="post" id="type_edit">
+                <b>Name :</b>
+                <input type="text" name="type_name" value="{$type_edit.type_edit}" class="standard_tile_input_small">
                 <br><br>
                 <input type="submit" value="Update" style="padding:2px;" class="topbutton_cpanel_small">
-				<input type="submit" value="Delete" onClick="typedelete({$type_edit.type_id_edit}); return false;" class="topbutton_cpanel_small">	
-				<input type="hidden" name="action" value="update">
-				<input type="hidden" name="type_id" value="{$type_edit.type_id_edit}">
-			</form>	
-		</fieldset>
-	</div>
-	{else}
-	<h1>Edit Type</h1>
-	<div class="standard_tile_line"></div>
-	<div class="standard_tile_text">
-		<div class="left_nav_section">
-			Type does not exist.
-		</div> 
-	</div>
-	{/if}
-	<div class="standard_table_center"><a href="../administration/bug_report_type.php" class="standard_tile_link">back</a></div>
-	<br>
+                <input type="submit" value="Delete" onClick="typedelete({$type_edit.type_id_edit}); return false;" class="topbutton_cpanel_small">
+                <input type="hidden" name="action" value="update">
+                <input type="hidden" name="type_id" value="{$type_edit.type_id_edit}">
+            </form>
+        </fieldset>
+    </div>
+    {else}
+    <h1>Edit Type</h1>
+    <div class="standard_tile_line"></div>
+    <div class="standard_tile_text">
+        <div class="left_nav_section">
+            Type does not exist.
+        </div>
+    </div>
+    {/if}
+    <div class="standard_table_center"><a href="../administration/bug_report_type.php" class="standard_tile_link">back</a></div>
+    <br>
 </div>
 {/block}
