@@ -12,6 +12,7 @@
     "grunt-contrib-uglify": "~3.2.1",
     "grunt-contrib-watch": "^1.0.0",
     "grunt-eslint": "^20.1.0",
+    "grunt-lintspaces": "^0.8.1",
     "grunt-phpcbf": "^0.1.1",
     "grunt-phpcs": "^0.4.0",
     "grunt-pleeease": "^1.4.0",

@@ -1,11 +1,11 @@
-{* 
+{*
 /***************************************************************************
-                              demos_music_list.tpl
-*                            --------------------------
+*                           demos_music_list.tpl
+*                           --------------------------
 *   begin                : saturday, November 19, 2005
 *   copyright            : (C) 2005 Atari Legend
 *   email                : admin@atarilegend.com
-*						   Created file
+*                          Created file
 *
 *   Id: demos_music_list.tpl,v 0.10 2005/11/19 ST Graveyard
 *
@@ -20,32 +20,32 @@ The demo list page!
 {block name=main_tile}
 
 <div class="NEWMAINCELL" style="text-align:center;">
-	<fieldset class="interview_set">
-		This is the search result page. Click a demo to go to the main music page. 
-		If you want to do a new search query, click <a href="demos_music.php" class="MAINNAV"><b>here</b></a>!
-	</fieldset> 
+    <fieldset class="interview_set">
+        This is the search result page. Click a demo to go to the main music page.
+        If you want to do a new search query, click <a href="demos_music.php" class="MAINNAV"><b>here</b></a>!
+    </fieldset>
 <br/><br/>
-	<table class="table_game_list">
-			<tr>
-				<th style="width:30%;">Demo Name</th>
-				<th style="width:30%;">Crew</th>
-				<th style="width:30%;">Year</th>
-				<th style="width:10%;">Nr of zaks</th>
-			</tr>
-					{foreach from=$music item=line}
-			<tr>
-				<td style="width:30%;">{if $line.demo_name != ''}<a href="demos_music_detail.php?demo_id={$line.demo_id}" class="MAINNAV">{$line.demo_name}</a>{else}<i>n/a</i>{/if}</td>
-				<td style="width:30%;">{if $line.demo_crew != ''}{$line.demo_crew}{else}<i>n/a</i>{/if}</td>
-				<td style="width:30%;">{if $line.demo_year != ''}{$line.demo_year}{else}<i>n/a</i>{/if}</td>				
-				<td style="width:10%;">{if $line.number_zaks != ''}{$line.number_zaks}{else}<i>0</i>{/if}</td>
-			</tr>
-		{/foreach}
-			<tr>
-				<td class="game_list_footer" colspan="4">
-					{if $nr_of_entries == 1}1 demo found {else} {$nr_of_entries} demos found{/if} in {$querytime} sec
-				</td>
-			</tr>
-		</table>
+    <table class="table_game_list">
+            <tr>
+                <th style="width:30%;">Demo Name</th>
+                <th style="width:30%;">Crew</th>
+                <th style="width:30%;">Year</th>
+                <th style="width:10%;">Nr of zaks</th>
+            </tr>
+                    {foreach from=$music item=line}
+            <tr>
+                <td style="width:30%;">{if $line.demo_name != ''}<a href="demos_music_detail.php?demo_id={$line.demo_id}" class="MAINNAV">{$line.demo_name}</a>{else}<i>n/a</i>{/if}</td>
+                <td style="width:30%;">{if $line.demo_crew != ''}{$line.demo_crew}{else}<i>n/a</i>{/if}</td>
+                <td style="width:30%;">{if $line.demo_year != ''}{$line.demo_year}{else}<i>n/a</i>{/if}</td>
+                <td style="width:10%;">{if $line.number_zaks != ''}{$line.number_zaks}{else}<i>0</i>{/if}</td>
+            </tr>
+        {/foreach}
+            <tr>
+                <td class="game_list_footer" colspan="4">
+                    {if $nr_of_entries == 1}1 demo found {else} {$nr_of_entries} demos found{/if} in {$querytime} sec
+                </td>
+            </tr>
+        </table>
 <br/>
 <br/>
 <div class="back_button"><a href="../demos/demos_music.php" class="MAINNAV">back</a></div>

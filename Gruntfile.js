@@ -44,6 +44,13 @@ module.exports = function (grunt) {
             }
         },
 
+        lintspaces: {
+            options: {
+                editorconfig: '.editorconfig'
+            },
+            src: ['<%= webRoot %>/themes/templates/1/**/*.html']
+        },
+
         scsslint: {
             allFiles: [
                 'Sources/styles/1/scss/*.scss',
@@ -164,9 +171,10 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-stylefmt');
     grunt.loadNpmTasks('grunt-stylelint');
     grunt.loadNpmTasks('grunt-eslint');
+    grunt.loadNpmTasks('grunt-lintspaces');
 
     // Default task(s).
-    grunt.registerTask('default', ['eslint:application', 'sass', 'pleeease']);
+    grunt.registerTask('default', ['eslint:application', 'lintspaces', 'sass', 'pleeease']);
     grunt.registerTask('lint', ['scsslint']);
     grunt.registerTask('sass-lint', ['sasslint']);
     grunt.registerTask('beauty', ['stylizeSCSS']);

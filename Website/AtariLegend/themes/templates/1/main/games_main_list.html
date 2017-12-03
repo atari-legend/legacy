@@ -1,7 +1,7 @@
 {*
 /***************************************************************************
-                              games_main_list.html
-*                            --------------------------
+*                           games_main_list.html
+*                           --------------------------
 *   begin                : Sunday, June 25, 2017
 *   copyright            : (C) 2017 Atari Legend
 *   email                : admin@atarilegend.com
@@ -124,7 +124,7 @@ The main game page
         <div class="content_box_cpanel" id="column_left_cpanel">
             <br>
             {block name=left_tile}
-                 {include file='1/main/latest_comments_tile.html'}
+                {include file='1/main/latest_comments_tile.html'}
             {/block}
         </div>
         <div class="content_box_cpanel" id="column_center_cpanel">
@@ -133,7 +133,7 @@ The main game page
             <div class="standard_tile" id="games_main">
                 <div class="help-tip">
                     <p>
-                       To filter on boxscan, screenshot, download or music, use '1' (=has) or '0' (=has not)
+                        To filter on boxscan, screenshot, download or music, use '1' (=has) or '0' (=has not)
                     </p>
                 </div>
                 <h1>GAMES</h1>
@@ -211,7 +211,7 @@ The main game page
             </div>
             {else}
                 <div class="standard_tile" id="games_main">
-                     <div class="help-tip">
+                    <div class="help-tip">
                         <p>
                             <i class="fa fa-camera" aria-hidden="true"></i> - Screenshot <br>
                             <i class="fa fa-music" aria-hidden="true"></i> - Music <br>
@@ -329,33 +329,33 @@ The main game page
                                                 <br>
                                             {/if}
                                         </div>
-                                   </td>
-                                  {if $smarty.foreach.game_search.last}
-                                      {if $nr_of_games >= 4}
-                                        {if $rest4 == 3}
-                                            <td>
-                                            </td>
+                                    </td>
+                                    {if $smarty.foreach.game_search.last}
+                                        {if $nr_of_games >= 4}
+                                            {if $rest4 == 3}
+                                                <td>
+                                                </td>
+                                            {/if}
+                                            {if $rest4 == 2}
+                                                <td>
+                                                </td>
+                                                <td>
+                                                </td>
+                                            {/if}
+                                            {if $rest4 == 1}
+                                                <td>
+                                                </td>
+                                                <td>
+                                                </td>
+                                                <td>
+                                                </td>
+                                            {/if}
                                         {/if}
-                                        {if $rest4 == 2}
-                                            <td>
-                                            </td>
-                                            <td>
-                                            </td>
-                                        {/if}
-                                        {if $rest4 == 1}
-                                            <td>
-                                            </td>
-                                            <td>
-                                            </td>
-                                            <td>
-                                            </td>
-                                        {/if}
-                                      {/if}
                                     {/if}
-                                  {if $smarty.foreach.game_search.iteration is div by 4}
-                                     </tr>
-                                     {$tr = true}
-                                  {/if}
+                                    {if $smarty.foreach.game_search.iteration is div by 4}
+                                        </tr>
+                                        {$tr = true}
+                                    {/if}
                             {/foreach}
                         </table>
                     </div>
@@ -407,30 +407,30 @@ The main game page
                                                 <br>
                                             {/if}
                                         </div>
-                                   </td>
-                                   {if $smarty.foreach.game_search.last}
-                                     {if $nr_of_games >= 4}
-                                      {if $rest3 == 2}
-                                         <td>
-                                         </td>
-                                      {/if}
-                                      {if $rest3 == 1}
-                                         <td>
-                                         </td>
-                                         <td>
-                                         </td>
-                                      {/if}
+                                    </td>
+                                    {if $smarty.foreach.game_search.last}
+                                        {if $nr_of_games >= 4}
+                                            {if $rest3 == 2}
+                                                <td>
+                                                </td>
+                                            {/if}
+                                            {if $rest3 == 1}
+                                                <td>
+                                                </td>
+                                                <td>
+                                                </td>
+                                            {/if}
+                                        {/if}
                                     {/if}
-                                   {/if}
-                                 {if $smarty.foreach.game_search.iteration is div by 3}
-                                    </tr>
-                                    {$tr = true}
-                                 {/if}
+                                    {if $smarty.foreach.game_search.iteration is div by 3}
+                                        </tr>
+                                        {$tr = true}
+                                    {/if}
                             {/foreach}
                         </table>
                     </div>
                     <div id="games_main_list_2">
-                       <table class="standard_table_list_comments_main">
+                        <table class="standard_table_list_comments_main">
                             <tr>
                                 <td colspan="2"><div class="games_main_list_info"><br>{if $nr_of_games == 1}1 game found {else} {$nr_of_games} games found{/if} in {$query_time} sec<br><br></div></td>
                             </tr>
@@ -477,19 +477,19 @@ The main game page
                                                 <br>
                                             {/if}
                                         </div>
-                                   </td>
-                                   {if $smarty.foreach.game_search.last}
-                                     {if $nr_of_games >= 3}
-                                         {if $rest2 == 1}
-                                            <td>
-                                            </td>
-                                         {/if}
-                                     {/if}
-                                   {/if}
-                                 {if $smarty.foreach.game_search.iteration is div by 2}
-                                    </tr>
-                                    {$tr = true}
-                                 {/if}
+                                    </td>
+                                    {if $smarty.foreach.game_search.last}
+                                        {if $nr_of_games >= 3}
+                                            {if $rest2 == 1}
+                                                <td>
+                                                </td>
+                                            {/if}
+                                        {/if}
+                                    {/if}
+                                    {if $smarty.foreach.game_search.iteration is div by 2}
+                                        </tr>
+                                        {$tr = true}
+                                    {/if}
                             {/foreach}
                         </table>
                     </div>
@@ -537,7 +537,7 @@ The main game page
                                                 <br>
                                             {/if}
                                         </div>
-                                   </td>
+                                    </td>
                                 </tr>
                             {/foreach}
                         </table>
