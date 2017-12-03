@@ -58,8 +58,8 @@
         "DeleteSet": true,
         "PublishSet": true,
         "DeleteCredits": true,
+        "DeleteTitleCredits": true,
         "md5": true,
         "hex_sha512": true
-        "DeleteTitleCredits": true
     }
 }
