@@ -7,27 +7,27 @@
 *   email                : admin@atarilegend.com
 *
 *   Id:  ajax_menus_add_file.html,v 0.10 2016/09/13 23:03 STG
-*			- creation of file
+*           - creation of file
 *   Id:  ajax_menus_add_file.html,v 0.11 2017/05/08 22:40 STG
-*			- custom file upload
+*           - custom file upload
 ***************************************************************************/
 *}
 
 <div class="standard_tile_text">
-	<form action="" enctype="multipart/form-data" method="post" name="file_add_to_menu" id="file_add_to_menu">
-	<fieldset class="centered_fieldset">
-		<legend>Add a new download</legend>
-		<!--<b>Filename :</b> 
-		<input type="file" name="menu_download_name" accept="application/x-zip-compressed,application/x-zip-compressed,application/x-zip-compressed">-->
+    <form action="" enctype="multipart/form-data" method="post" name="file_add_to_menu" id="file_add_to_menu">
+    <fieldset class="centered_fieldset">
+        <legend>Add a new download</legend>
+        <!--<b>Filename :</b>
+        <input type="file" name="menu_download_name" accept="application/x-zip-compressed,application/x-zip-compressed,application/x-zip-compressed">-->
         <label for="file_upload2" class="file_upload" onclick="myFunction()" accept="application/x-zip-compressed,application/x-zip-compressed,application/x-zip-compressed">Select file(s)</label>
         <input id="file_upload2" type="file" name="menu_download_name">
         <input type="text" class="standard_tile_input_small" id="file_upload_game_file">&nbsp;
         <br>
-		<br>
-		<input type="button" class="topbutton_cpanel" value="Add" onclick="addFiletoMenu({$menu_disk_id})">
-		<input type="hidden" name="menu_disk_id" value="{$menu_disk_id}">
-		<input type="hidden" name="action" value="add_file">
-	</fieldset>
-	</form>
+        <br>
+        <input type="button" class="topbutton_cpanel" value="Add" onclick="addFiletoMenu({$menu_disk_id})">
+        <input type="hidden" name="menu_disk_id" value="{$menu_disk_id}">
+        <input type="hidden" name="action" value="add_file">
+    </fieldset>
+    </form>
 </div>
 </br>

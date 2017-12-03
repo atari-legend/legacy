@@ -1,7 +1,7 @@
 {*
 /***************************************************************************
-                              crew_genealogy.html
-*                            --------------------------
+*                           crew_genealogy.html
+*                           --------------------------
 *   begin                : Sunday, August 28, 2005
 *   copyright            : (C) 2005 Atari Legend
 *   email                : admin@atarilegend.com
@@ -302,7 +302,7 @@ function ChangeNick(individual_nicks_id,crew_individual_id,crew_select)
             <div class="main_company_child" id="child_edit_company">
                 <fieldset>
                     <legend>Members</legend>
-                     <form action="../crew/db_crew.php" method="post">
+                    <form action="../crew/db_crew.php" method="post">
                         <select id="quick_search_small_select" name="m1" onchange="browseInd(this.value)">
                             <option value="" SELECTED>-</option>
                             {html_options values=$az_value output=$az_output}

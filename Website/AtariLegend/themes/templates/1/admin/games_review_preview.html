@@ -1,4 +1,4 @@
-{* 
+{*
 /***************************************************************************
 *                               games_review_preview.tpl
 *                            -------------------------------
@@ -11,7 +11,7 @@
 ***************************************************************************/
 //****************************************************************************************
 // this is the template file to generate a game review
-//**************************************************************************************** 
+//****************************************************************************************
 *}
 {extends file='1/admin/frontpage.html'}
 
@@ -22,57 +22,56 @@
 
 {block name=title}
 <div style="float:left;">
-	Written by {if $review.email != ''}<a href="mailto:{$review.email}?subject=Your review of {$review.game_name} at Atari Legend">{$review.user_name}</a>{else}{$review.user_name}{/if}
+    Written by {if $review.email != ''}<a href="mailto:{$review.email}?subject=Your review of {$review.game_name} at Atari Legend">{$review.user_name}</a>{else}{$review.user_name}{/if}
 </div>
 <div style="float:right;padding-right:5px;">{$review.date}</div>
 {/block}
 
 {block name=main_tile}
 <div class="standard_tile" id="games_review_preview">
-	<h1>{$review.game_name}</h1>
-	<div class="standard_tile_line"></div>
-	<div class="standard_tile_text">
-		<div class="left_nav_section">
-			Written by {if $review.email != ''}<a href="mailto:{$review.email}?subject=Your review of {$review.game_name} at Atari Legend" class="left_nav_link">{$review.user_name}</a>{else}{$review.user_name}{/if} on {$review.date}
-		</div>
-		<br>
-		<br>
-		<fieldset>
-			<legend>Preview</legend>
-			<div class="review_container">
-				<div class="review_child" id="review_text">
-					{$review.text}
-					<b><i>Score</i></b>
-					<br>
-					<br>
-					Graphics : <b>{$score.graphics}</b><br>
-					Sound : <b>{$score.sound}</b><br>
-					Gameplay : <b>{$score.gameplay}</b><br>
-					Overall : <b>{$score.overall}</b><br>
-				</div>
-				<div class="review_child" id="review_screenshots">
-					<div class="review_screenshot_space">
-						<br>
-						<br>
-						<br>
-					</div>
-					{foreach from=$screenshots item=line} 
-						<div class="review_screenshot_order">
-							<a href="../../includes/show_image.php?file={$line.screenshot}&amp;resize=410,null,null,null" data-lightbox="image-1" data-title="{$review.game_name} - {$line.count}">
-								<img src="../../includes/show_image.php?file={$line.screenshot}&amp;resize=170,null,null,null" alt="Click to enlarge!" style="display:inline;" class="game_screenshot_img"></a>
-							<br><b>{$line.comment}</b>
-							<br>
-							<br>
-							<br>
-						</div>
-					{/foreach}
-				</div>		
-			</div>	
-			<br>
-		</fieldset>
-		<br>
-		<div class="standard_table_center"><a href="javascript:history.go(-1)" class="standard_tile_link">back</a></div>
-	</div>
+    <h1>{$review.game_name}</h1>
+    <div class="standard_tile_line"></div>
+    <div class="standard_tile_text">
+        <div class="left_nav_section">
+            Written by {if $review.email != ''}<a href="mailto:{$review.email}?subject=Your review of {$review.game_name} at Atari Legend" class="left_nav_link">{$review.user_name}</a>{else}{$review.user_name}{/if} on {$review.date}
+        </div>
+        <br>
+        <br>
+        <fieldset>
+            <legend>Preview</legend>
+            <div class="review_container">
+                <div class="review_child" id="review_text">
+                    {$review.text}
+                    <b><i>Score</i></b>
+                    <br>
+                    <br>
+                    Graphics : <b>{$score.graphics}</b><br>
+                    Sound : <b>{$score.sound}</b><br>
+                    Gameplay : <b>{$score.gameplay}</b><br>
+                    Overall : <b>{$score.overall}</b><br>
+                </div>
+                <div class="review_child" id="review_screenshots">
+                    <div class="review_screenshot_space">
+                        <br>
+                        <br>
+                        <br>
+                    </div>
+                    {foreach from=$screenshots item=line}
+                        <div class="review_screenshot_order">
+                            <a href="../../includes/show_image.php?file={$line.screenshot}&amp;resize=410,null,null,null" data-lightbox="image-1" data-title="{$review.game_name} - {$line.count}">
+                                <img src="../../includes/show_image.php?file={$line.screenshot}&amp;resize=170,null,null,null" alt="Click to enlarge!" style="display:inline;" class="game_screenshot_img"></a>
+                            <br><b>{$line.comment}</b>
+                            <br>
+                            <br>
+                            <br>
+                        </div>
+                    {/foreach}
+                </div>
+            </div>
+            <br>
+        </fieldset>
+        <br>
+        <div class="standard_table_center"><a href="javascript:history.go(-1)" class="standard_tile_link">back</a></div>
+    </div>
 </div>
 {/block}
-	
