@@ -110,7 +110,10 @@ if (isset($ind_id) and isset($action) and $action == "add_nick") {
     if ($ind_nick != '') {
         
         //First add an entry in the individuals table
-        $sdbquery = $mysqli->query("INSERT INTO individuals (ind_name) VALUES ('$ind_nick')") or die("Couldn't insert into individuals");
+        $stmt = $mysqli->prepare("INSERT INTO individuals (ind_name) VALUES (?)") or die($mysqli->error);
+        $stmt->bind_param("s", $ind_nick) or die($mysqli->error);
+        $stmt->execute() or die($mysqli->error);
+        $stmt->close();
         $ind_nick_id = $mysqli->insert_id;
 
         //Now update the nick table       

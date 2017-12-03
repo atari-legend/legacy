@@ -1,17 +1,17 @@
-{* 
+{*
 /***************************************************************************
- *                                games_detail_facts.html
- *                            -----------------------------
- *   begin                : Saturday, September 09, 2017
- *   copyright            : (C) 2017 Atari Legend
- *   email                : martens_maarten@hotmail.com
- *
- *   Id: games_detail_facts.html,v 1.0  2017/09/09 ST Graveyard
- ***************************************************************************/
- 
- //****************************************************************************************
+*                            games_detail_facts.html
+*                            -----------------------------
+*   begin                : Saturday, September 09, 2017
+*   copyright            : (C) 2017 Atari Legend
+*   email                : martens_maarten@hotmail.com
+*
+*   Id: games_detail_facts.html,v 1.0  2017/09/09 ST Graveyard
+***************************************************************************/
+
+//****************************************************************************************
 // This is the facts tile for the game detail page
-//**************************************************************************************** 
+//****************************************************************************************
 *}
 
 {if isset($facts)}
@@ -21,21 +21,21 @@
         <div class="standard_tile_line"></div>
         <div class="standard_list_entry">
             <div id="latest_comments_all">
-                <div class="games_main_detail_comments_container">	
-                     <table class="standard_table_list_comments">
+                <div class="games_main_detail_comments_container">
+                    <table class="standard_table_list_comments">
                         {foreach from=$facts item=line}
-                         <tr>
+                        <tr>
                             <td class="standard_table_left">
                                 <div class="latest_comments_text">
                                     {$line.game_fact}
-                                </div> 
+                                </div>
                                 <div style="text-align:center;">
                                     {if isset($facts_screenshots)}
                                         {foreach from=$facts_screenshots item=line_screen}
-                                            {if $line.game_fact_id == $line_screen.game_fact_id}  
+                                            {if $line.game_fact_id == $line_screen.game_fact_id}
                                                 <a href="../../includes/show_image.php?file={$line_screen.game_fact_screenshot}" data-lightbox="image-1">
                                                     <img src="../../includes/show_image.php?file={$line_screen.game_fact_screenshot}&amp;resize=170,null,null,null" alt="Click to enlarge!" style="display:inline;margin:5px;" class="game_screenshot_img">
-                                                    
+
                                                 </a>
                                             {/if}
                                         {/foreach}

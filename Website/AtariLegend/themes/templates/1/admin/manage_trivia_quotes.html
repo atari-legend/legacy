@@ -1,6 +1,6 @@
 {*
 /***************************************************************************
-                              manage_trivia_quotes.html
+*                            manage_trivia_quotes.html
 *                            ------------------------------
 *   begin                : Sept 29, 2005
 *   copyright            : (C) 2005 Atari Legend
@@ -79,44 +79,44 @@ $("#JSSubmitEditTriviaQuote").click(function() {
 {/block}
 {block name=main_tile}
 <div class="standard_tile">
-	<h1>TRIVIA QUOTES</h1>
-	<div class="standard_tile_line"></div>
-	<div class="standard_tile_text">
-		<div class="left_nav_section">
-			  Here you can add a new <strong>trivia quote</strong> by using the below text field or you can delete old trivia quotes.<br/>
-		</div>
-		<br>
-		<br>
-		<fieldset>
-		<legend>Add new Trivia</legend>
-		<div class="centered_fieldset">
-			<form action="../trivia/db_trivia.php" method="post" name="trivia" id="trivia">
-			Trivia Text<br>
-			<textarea name="trivia_quote" id="trivia_quote" class="standard_tile_input_area"></textarea>
-			<br><br>
-			<input type="hidden" name="action" value="add_trivia">
-			<input type="submit" value="Submit" class="topbutton_cpanel_small">
+    <h1>TRIVIA QUOTES</h1>
+    <div class="standard_tile_line"></div>
+    <div class="standard_tile_text">
+        <div class="left_nav_section">
+            Here you can add a new <strong>trivia quote</strong> by using the below text field or you can delete old trivia quotes.<br/>
+        </div>
+        <br>
+        <br>
+        <fieldset>
+        <legend>Add new Trivia</legend>
+        <div class="centered_fieldset">
+            <form action="../trivia/db_trivia.php" method="post" name="trivia" id="trivia">
+            Trivia Text<br>
+            <textarea name="trivia_quote" id="trivia_quote" class="standard_tile_input_area"></textarea>
+            <br><br>
+            <input type="hidden" name="action" value="add_trivia">
+            <input type="submit" value="Submit" class="topbutton_cpanel_small">
 
-			</form>
-		</div>
-		</fieldset>
-		<br>
-		{foreach from=$trivia item=line}
-			<fieldset id="Ajax_trivia_quote_{$line.trivia_quote_id}">
-			<legend>Trivia ID {$line.trivia_quote_id}</legend>
-			<br>
-			{$line.trivia_quote}
-			<br>
-			<br>
-			<form action="../trivia/db_trivia.php" method="post" name="trivia{$line.trivia_quote_id}" id="trivia{$line.trivia_quote_id}">
-				<input type="hidden" name="action" value="delete_trivia_quote">
-				<input type="hidden" name="trivia_quote_id" value="{$line.trivia_quote_id}">
-				<input type="submit" value="Delete" class="topbutton_cpanel_small">
+            </form>
+        </div>
+        </fieldset>
+        <br>
+        {foreach from=$trivia item=line}
+            <fieldset id="Ajax_trivia_quote_{$line.trivia_quote_id}">
+            <legend>Trivia ID {$line.trivia_quote_id}</legend>
+            <br>
+            {$line.trivia_quote}
+            <br>
+            <br>
+            <form action="../trivia/db_trivia.php" method="post" name="trivia{$line.trivia_quote_id}" id="trivia{$line.trivia_quote_id}">
+                <input type="hidden" name="action" value="delete_trivia_quote">
+                <input type="hidden" name="trivia_quote_id" value="{$line.trivia_quote_id}">
+                <input type="submit" value="Delete" class="topbutton_cpanel_small">
                 <input type="button" value="Edit" class="topbutton_cpanel_small" onclick="EditTriviaQuote({$line.trivia_quote_id})">
-			</form>
-			</fieldset>
-			<br>
-		{/foreach}
-	</div>
+            </form>
+            </fieldset>
+            <br>
+        {/foreach}
+    </div>
 </div>
 {/block}

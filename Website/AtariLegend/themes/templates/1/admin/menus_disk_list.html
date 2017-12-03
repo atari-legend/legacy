@@ -1,6 +1,6 @@
 {*
 /***************************************************************************
-                              menu_disk_list.tpl
+*                            menu_disk_list.tpl
 *                            --------------------------
 *   begin                : Sunday, August 28, 2005
 *   copyright            : (C) 2005 Atari Legend
@@ -57,7 +57,7 @@ The main game page
         <div class="standard_tile_line"></div>
         <div class="help-tip">
             <p>This is the overal type of the menu disk. Eg. The "Adrenaline UK" set is considered to be a game set. The "Sewer Doc Disk" set is an E-zine/doc set. However, this does not
-               mean a game set can not contain anything else. Each menu disk title in the database has its own menu disk title TYPE attribute. Please see the general HELP of this section for more details.</p>
+            mean a game set can not contain anything else. Each menu disk title in the database has its own menu disk title TYPE attribute. Please see the general HELP of this section for more details.</p>
         </div>
         <br>
         <form action="../menus/db_menu_disk.php" method="post" name="post" id="menu_type_edit">
@@ -78,7 +78,7 @@ The main game page
         <br>
         {if isset($connected_menu_types)}
             {foreach from=$connected_menu_types item=line}
-             {$line.menu_types_text} - <a href="#" class="standard_tile_link" onclick="MenuTypeDelete({$line.menu_types_main_id},{$line.menu_sets_id});">Delete</a><br>
+                {$line.menu_types_text} - <a href="#" class="standard_tile_link" onclick="menuTypeDelete({$line.menu_types_main_id},{$line.menu_sets_id});">Delete</a><br>
             {/foreach}
         {/if}
         <br>
@@ -115,7 +115,7 @@ The main game page
         <br>
         {if isset($connected_crew)}
         {foreach from=$connected_crew item=line}
-         {$line.crew_name} - <a href="#" class="standard_tile_link" onclick="DeleteMenuSetCrewModal({$line.crew_id},{$line.menu_sets_id});">Delete</a><br>
+            {$line.crew_name} - <a href="#" class="standard_tile_link" onclick="deleteMenuSetCrewModal({$line.crew_id},{$line.menu_sets_id});">Delete</a><br>
         {/foreach}
         {/if}
         <br>
@@ -152,7 +152,7 @@ The main game page
         <br>
         {if isset($connected_ind)}
         {foreach from=$connected_ind item=line}
-         {$line.ind_name} - <a href="#" class="standard_tile_link" onclick="DeleteMenuSetIndividualModal({$line.ind_id},{$line.menu_sets_id});">Delete</a><br>
+            {$line.ind_name} - <a href="#" class="standard_tile_link" onclick="deleteMenuSetIndividualModal({$line.ind_id},{$line.menu_sets_id});">Delete</a><br>
         {/foreach}
         {/if}
         <br>
@@ -206,14 +206,14 @@ The main game page
                 <fieldset>
                     <legend>More options</legend>
                         <div id="close_new_disk"><a onclick="addNewdisk({$menu_set.menu_sets_id})" style="cursor: pointer;" class="left_nav_link" >Add New Disk</a><br></div>
-                        <a onclick="DeleteSet({$menu_set.menu_sets_id})" style="cursor: pointer;" class="left_nav_link" >Delete set</a>
+                        <a onclick="deleteSet({$menu_set.menu_sets_id})" style="cursor: pointer;" class="left_nav_link" >Delete set</a>
                 </fieldset>
             </div>
             <div class="main_company_child" id="child_add_company" style="text-align:left;">
                 <fieldset>
                     <legend>Publish Set</legend>
-                        <input onchange="PublishSet({$menu_set.menu_sets_id},'online')" type="radio" name="publish" value="online" {if ({$menu_set.online}=='1')}checked{/if}> Online<br>
-                        <input onchange="PublishSet({$menu_set.menu_sets_id},'offline')" type="radio" name="publish" value="offline" {if ({$menu_set.online}=='0')}checked{/if}> Offline<br>
+                        <input onchange="publishSet({$menu_set.menu_sets_id},'online')" type="radio" name="publish" value="online" {if ({$menu_set.online}=='1')}checked{/if}> Online<br>
+                        <input onchange="publishSet({$menu_set.menu_sets_id},'offline')" type="radio" name="publish" value="offline" {if ({$menu_set.online}=='0')}checked{/if}> Offline<br>
                 </fieldset>
             </div>
         </div>

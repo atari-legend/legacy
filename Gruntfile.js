@@ -31,19 +31,22 @@ module.exports = function (grunt) {
                     'Gruntfile.js',
                     '<%= webRoot %>/themes/templates/1/includes/js/*.js',
                     // For now ignore some files that need cleanup
-                    '!<%= webRoot %>/themes/templates/1/includes/js/bbcode.js',
-                    '!<%= webRoot %>/themes/templates/1/includes/js/forms.js',
-                    '!<%= webRoot %>/themes/templates/1/includes/js/menus.js'
+                    '!<%= webRoot %>/themes/templates/1/includes/js/bbcode.js'
                 ]
             },
             needsCleanup: {
                 src: [
                     // Specific target to run manually to work on cleaning up these
-                    '<%= webRoot %>/themes/templates/1/includes/js/bbcode.js',
-                    '<%= webRoot %>/themes/templates/1/includes/js/forms.js',
-                    '<%= webRoot %>/themes/templates/1/includes/js/menus.js'
+                    '<%= webRoot %>/themes/templates/1/includes/js/bbcode.js'
                 ]
             }
+        },
+
+        lintspaces: {
+            options: {
+                editorconfig: '.editorconfig'
+            },
+            src: ['<%= webRoot %>/themes/templates/1/**/*.html']
         },
 
         scsslint: {
@@ -166,9 +169,10 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-stylefmt');
     grunt.loadNpmTasks('grunt-stylelint');
     grunt.loadNpmTasks('grunt-eslint');
+    grunt.loadNpmTasks('grunt-lintspaces');
 
     // Default task(s).
-    grunt.registerTask('default', ['eslint:application', 'sass', 'pleeease']);
+    grunt.registerTask('default', ['eslint:application', 'lintspaces', 'sass', 'pleeease']);
     grunt.registerTask('lint', ['scsslint']);
     grunt.registerTask('sass-lint', ['sasslint']);
     grunt.registerTask('beauty', ['stylizeSCSS']);
