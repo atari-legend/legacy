@@ -32,14 +32,13 @@ module.exports = function (grunt) {
                     '<%= webRoot %>/themes/templates/1/includes/js/*.js',
                     // For now ignore some files that need cleanup
                     '!<%= webRoot %>/themes/templates/1/includes/js/bbcode.js',
-                    '!<%= webRoot %>/themes/templates/1/includes/js/forms.js'
+                    '!<%= webRoot %>/themes/templates/1/includes/js/menus.js'
                 ]
             },
             needsCleanup: {
                 src: [
                     // Specific target to run manually to work on cleaning up these
-                    '!<%= webRoot %>/themes/templates/1/includes/js/bbcode.js',
-                    '!<%= webRoot %>/themes/templates/1/includes/js/forms.js',
+                    '<%= webRoot %>/themes/templates/1/includes/js/bbcode.js',
                     '<%= webRoot %>/themes/templates/1/includes/js/menus.js'
                 ]
             }

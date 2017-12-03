@@ -3,7 +3,8 @@
     "rules": {
         "semi": ["off", "always"],
         "indent": ["error", 4],
-        "one-var": ["off"]
+        "one-var": ["off"],
+        "linebreak-style": ["error", "unix"]
     },
     "env": {
         "browser": true,
@@ -57,6 +58,8 @@
         "DeleteSet": true,
         "PublishSet": true,
         "DeleteCredits": true,
+        "md5": true,
+        "hex_sha512": true
         "DeleteTitleCredits": true
     }
 }
