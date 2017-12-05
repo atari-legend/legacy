@@ -30,7 +30,7 @@
 }
 
 #member_select{
-    @extend #quick_search_pub_select;
+    @extend .quick_search_pub_select;
     width: 192px;
     height: 27px;
 }

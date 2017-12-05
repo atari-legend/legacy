@@ -1,6 +1,6 @@
 {* Crew browse for the crew pick list *}
 {if isset($smarty_action) and $smarty_action == "crew_list"}
-    <select name="crew_select" id="quick_search_pub_select">
+    <select name="crew_select" class="quick_search_pub_select">
         <option value="" SELECTED>-</option>
         {foreach from=$crew item=line}
             <option value="{$line.crew_id}">{$line.crew_name}</option>

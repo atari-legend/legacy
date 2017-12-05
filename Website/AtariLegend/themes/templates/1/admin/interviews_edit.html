@@ -27,7 +27,7 @@
 
 {block name=java_script}
 <!-- Lightbox for the screenshots -->
-<script type="text/javascript" src="{$template_dir}includes/js/vendor/lightbox-2.9.0.min.js"></script><!--lightbox popup script-->
+<script src="{$template_dir}includes/js/vendor/lightbox-2.9.0.min.js"></script><!--lightbox popup script-->
 <link type="text/css" href="{$style_dir}css/vendor/lightbox-2.9.0.css" hreflang="en" rel="stylesheet">
 <script>
     lightbox.option({
@@ -36,10 +36,10 @@
 </script>
 
 <!-- Load the BBCODE script -->
-<script type="text/javascript" src="{$template_dir}includes/js/bbcode.js"></script>
+<script src="{$template_dir}includes/js/bbcode.js"></script>
 
 <!-- All the code for the tabs and the preview -->
-<script type="text/javascript">
+<script>
     function openTab(evt, tabName)
     {
         // Declare all variables
@@ -126,7 +126,7 @@
 
 <!-- The autocomplete and dropdown switcher -->
 <script type='text/JavaScript' src="{$template_dir}includes/js/ui.widgets.js"></script>
-<script type="text/javascript">
+<script>
     $(document).ready(function() {
         $("select[name=members]").altAutocomplete();
         $("select[name=individual]").altAutocomplete();
@@ -134,7 +134,7 @@
 </script>
 
 <!-- Delete the comments and the interview -->
-<script type="text/javascript">
+<script>
 function deletecomment(screenshot_id, interview_id)
 {
     // CONFIRM REQUIRES ONE ARGUMENT

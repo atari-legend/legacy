@@ -19,7 +19,7 @@ The crew genealogy page
 {extends file='1/admin/frontpage.html'}
 
 {block name=java_script}
-<script type="text/javascript">
+<script>
 function crewinsert()
 {
     JSnewcrew=document.forms["insertcrew"].newcrew.value;
@@ -218,7 +218,7 @@ function ChangeNick(individual_nicks_id,crew_individual_id,crew_select)
             <br>
             {* Ajax *}
             <div id="crew_list">
-                <select name="crew_select" id="quick_search_pub_select">
+                <select name="crew_select" class="quick_search_pub_select">
                     <option value="" SELECTED>-</option>
                     {foreach from=$crew item=line}
                         {html_options values=$line.crew_id output=$line.crew_name}
@@ -280,7 +280,7 @@ function ChangeNick(individual_nicks_id,crew_individual_id,crew_select)
                         <input type="text" name="crewsearch" value="" onkeyup="searchSubCrew(this.value)" class="standard_tile_input_small">
                         <br><br>
                         <div id="sub_crew">
-                            <select name="sub_crew[]" id="quick_search_pub_select">
+                            <select name="sub_crew[]" class="quick_search_pub_select">
                                 <option value="" SELECTED>-</option>
                                 {foreach from=$crew_gene item=line}
                                     {if $line.crew_id <> $crew_select.crew_id}
@@ -310,7 +310,7 @@ function ChangeNick(individual_nicks_id,crew_individual_id,crew_select)
                         <input type="text" onkeyup="searchInd(this.value)" class="standard_tile_input_small">
                         <br><br>
                         <div id="ind_member">
-                            <select name="ind_id" id="quick_search_pub_select">
+                            <select name="ind_id" class="quick_search_pub_select">
                                 <option value="" SELECTED>-</option>
                                 {foreach from=$ind_gene item=line}
                                     <option value="{$line.ind_id}">{$line.ind_name}</option>

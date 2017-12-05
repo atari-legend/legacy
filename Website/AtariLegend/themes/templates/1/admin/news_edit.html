@@ -24,7 +24,7 @@ This is the sub template file to generate the news edit page
 {block name=title}Edit News{/block}
 
 {block name=java_script}
-<script type="text/javascript">
+<script>
 var clientPC = navigator.userAgent.toLowerCase(); // Get client info
 var clientVer = parseInt(navigator.appVersion); // Get browser version
 
@@ -187,7 +187,7 @@ function storeCaret(textEl) {
                     <div class="links_mod_row">
                         <div class="links_mod_text">News Icon</div>
                         <div class="links_mod_input">
-                            <select name="news_image_id" id="quick_search_pub_select">
+                            <select name="news_image_id" class="quick_search_pub_select">
                                 <option value="0">-</option>
                                 {foreach from=$news_images item=line}
                                     {if $edit_submissions.edit_image_id eq $line.image_id}

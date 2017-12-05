@@ -27,7 +27,7 @@
 {block name=title}Add review - <a href="../games/games_detail.php?game_id={$game.game_id}" class="standard_tile_link_reverse">{$game.game_name}</a>{/block}
 
 {block name=java_script}
-<script type="text/javascript">
+<script>
 
 var clientPC = navigator.userAgent.toLowerCase(); // Get client info
 var clientVer = parseInt(navigator.appVersion); // Get browser version
@@ -196,7 +196,7 @@ function storeCaret(textEl) {
                 <br>
                 <div style="display:inline-block;">
                     <b>Written by : </b><br>
-                    <select name="members" id="quick_search_pub_select">
+                    <select name="members" class="quick_search_pub_select">
                         <option value="-" selected>-</option>
                         {foreach from=$authors item=line}
                             <option value="{$line.user_id}">{$line.user_name}</option>

@@ -16,7 +16,7 @@
 {extends file='1/admin/frontpage.html'}
 
 {block name=java_script}
-<script type="text/javascript">
+<script>
     $(function() {
         $but = $('#file_upload_fact_screenshots');
 
@@ -25,14 +25,14 @@
         });
     });
 </script>
-<script type="text/javascript" src="{$template_dir}includes/js/vendor/lightbox-2.9.0.min.js"></script>
+<script src="{$template_dir}includes/js/vendor/lightbox-2.9.0.min.js"></script>
 <link type="text/css" href="{$style_dir}css/vendor/lightbox-2.9.0.css" hreflang="en" rel="stylesheet">
 
 <!-- Load the BBCODE script -->
-<script type="text/javascript" src="{$template_dir}includes/js/bbcode.js"></script>
+<script src="{$template_dir}includes/js/bbcode.js"></script>
 
 <!-- Delete the facts and the interview -->
-<script type="text/javascript">
+<script>
 function deletescreen(game_fact_id, screenshot_id, game_id)
 {
     // CONFIRM REQUIRES ONE ARGUMENT

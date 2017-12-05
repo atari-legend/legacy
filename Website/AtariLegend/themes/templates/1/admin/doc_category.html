@@ -37,7 +37,7 @@ The main doc category page
                 <fieldset>
                     <legend>Edit a doc category</legend>
                     <form action="../docs/doc_category_edit.php" method="post" name="ind_edit" id="ind_edit">
-                        <select name="doc_category_id" id="quick_search_pub_select">
+                        <select name="doc_category_id" class="quick_search_pub_select">
                             <option value="-">-</option>
                             {foreach from=$doc_category item=line}
                                 <option value="{$line.doc_category_id}">{$line.doc_category_name}</option>
