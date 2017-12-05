@@ -19,7 +19,7 @@
 
 {block name=java_script}
 <script src="../templates/0/js/game_comment.js"></script>
-<script type="text/javascript">
+<script>
 function deletecomment(screenshot_id, article_id)
 {
     // CONFIRM REQUIRES ONE ARGUMENT
@@ -190,7 +190,7 @@ function storeCaret(textEl) {
                     <br>
                     <br>
                     <b>Written by : </b><br>
-                    <select name="members" id="quick_search_pub_select">
+                    <select name="members" class="quick_search_pub_select">
                         <option value="-" selected>-</option>
                         {foreach from=$authors item=line}
                             <option value="{$line.user_id}">{$line.user_name}</option>
@@ -202,7 +202,7 @@ function storeCaret(textEl) {
                 <div style="display:inline-block;">
                     <b>Type :</b>
                     <br>
-                    <select name="article_type" id="quick_search_pub_select">
+                    <select name="article_type" class="quick_search_pub_select">
                         <option value="-" selected>-</option>
                         {foreach from=$article_types item=line}
                             {if $line.article_type_id == $selected_article_type.article_type_id}

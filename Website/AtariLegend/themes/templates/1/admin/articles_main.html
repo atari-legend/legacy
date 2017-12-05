@@ -19,7 +19,7 @@
 {extends file='1/admin/frontpage.html'}
 
 {block name=java_script}
-<script type="text/javascript">
+<script>
 function deletearticle(article_id)
 {
     // CONFIRM REQUIRES ONE ARGUMENT
@@ -56,7 +56,7 @@ function deletearticle(article_id)
                 <fieldset>
                     <legend>Search Article</legend>
                     <form action="../articles/articles_main.php" method="post" name="search">
-                        <select name="article_search" id="quick_search_pub_select">
+                        <select name="article_search" class="quick_search_pub_select">
                             <option value="-" selected>-</option>
                             {foreach from=$articles item=line}
                                 <option value="{$line.article_id}">{$line.article_title}</option>

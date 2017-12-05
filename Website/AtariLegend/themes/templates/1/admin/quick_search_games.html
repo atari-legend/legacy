@@ -19,7 +19,7 @@
 *}
 
 {block name=quick_search_games}
-<script type="text/javascript">
+<script>
 function gameinsert()
 {
     JSnewgame=document.getElementById("qs_newgame").value;
@@ -74,7 +74,7 @@ function gameinsert()
                     <br>
                     <div class="standard_table_center">
                         By Publisher : <br>
-                        <select name="publisher" id="quick_search_pub_select">
+                        <select name="publisher" class="quick_search_pub_select">
                             <option value="-" SELECTED>-</option>
                             {foreach from=$company_publisher item=line}
                                 <option value="{$line.comp_id}">{$line.comp_name}</option>

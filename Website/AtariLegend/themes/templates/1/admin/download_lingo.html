@@ -41,7 +41,7 @@ The main Lingo page
                 <fieldset>
                     <legend>Edit a download language</legend>
                     <form action="../downloads/download_lingo_edit.php" method="post" name="ind_edit" id="ind_edit">
-                        <select name="lingo_id" id="quick_search_pub_select">
+                        <select name="lingo_id" class="quick_search_pub_select">
                             <option value="-">-</option>
                             {foreach from=$download_lingo item=line}
                                 <option value="{$line.lingo_id}">{$line.lingo_name}</option>

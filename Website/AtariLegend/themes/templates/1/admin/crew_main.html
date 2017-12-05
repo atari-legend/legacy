@@ -18,7 +18,7 @@ The main game page
 *}
 {extends file='1/admin/frontpage.html'}
 {block name=java_script}
-<script type="text/javascript">
+<script>
 function crewinsert()
 {
     JSnewcrew=document.forms["insertcrew"].newcrew.value;
@@ -116,7 +116,7 @@ function searchCrew(str) {
             <br>
             {* Ajax *}
             <div id="crew_list">
-                <select name="crew_select" id="quick_search_pub_select">
+                <select name="crew_select" class="quick_search_pub_select">
                     <option value="" SELECTED>-</option>
                     {foreach from=$crew item=line}
                         {html_options values=$line.crew_id output=$line.crew_name}

@@ -10,9 +10,9 @@
 
 #download_format, #download_language, #download_trainer, #download_option, #download_tos, #download_crew, #download_intro, 
 #download_menu, #download_set, #download_author_az, #download_author_name
-{@extend #quick_search_pub_select; width: 100%;}
+{@extend .quick_search_pub_select; width: 100%;}
 
-#download_version, #download_info{@extend #quick_search_pub_select; width: 95%;}
+#download_version, #download_info{@extend .quick_search_pub_select; width: 95%;}
 
 #file_upload_game_detail{width: 60%;}
 

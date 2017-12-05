@@ -29,7 +29,7 @@ On this page we link authors to a menu disk title
                 <input type="text" onkeyup="searchInd(this.value)" class="standard_tile_input_small">
                 <br><br>
                 <div id="ind_member">
-                    <select name="ind_id" id="quick_search_pub_select">
+                    <select name="ind_id" class="quick_search_pub_select">
                         <option value="" SELECTED>-</option>
                         {foreach from=$ind_name item=line}
                             <option value="{$line.ind_id}">{$line.ind_name}</option>

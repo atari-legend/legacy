@@ -24,7 +24,7 @@ The main game submission page
 {extends file='1/admin/frontpage.html'}
 
 {block name=java_script}
-<script type="text/javascript">
+<script>
 function commentdelete(JSsubID)
 {
     JSview = "{$structure.list}";
@@ -64,7 +64,7 @@ function submovetocomment(JSsubID)
 }
 </script>
 <!-- lightbox screenshot pop up script -->
-<script type="text/javascript" src="{$template_dir}includes/js/vendor/lightbox-2.9.0.min.js"></script>
+<script src="{$template_dir}includes/js/vendor/lightbox-2.9.0.min.js"></script>
 <link type="text/css" href="{$style_dir}css/vendor/lightbox-2.9.0.css" hreflang="en" rel="stylesheet">
 
 <script>
