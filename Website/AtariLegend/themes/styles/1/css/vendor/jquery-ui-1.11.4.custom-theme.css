@@ -830,16 +830,16 @@ body .ui-tooltip {
 /* Component containers
 ----------------------------------*/
 .ui-widget {
-	font-family: 'robot';
+	font-family: Audiowide, Arial, helvetica, sans-serif;
     font-style: normal;
     font-weight: normal;
-    src: url('../font/ubuntu-webfont.eot');
-    src: url('../font/ubuntu-webfont.eot?#iefix') format('embedded-opentype'),
-         url('../font/ubuntu-webfont.woff2') format('woff2'),
-         url('../font/ubuntu-webfont.woff') format('woff'),
-         url('../font/ubuntu-webfont.ttf') format('truetype'),
-         url('../font/ubuntu-webfont.svg#ubunturegular') format('svg');
-	font-size: 1.1em;
+    src: url('../font/audiowide-regular-webfont.eot');
+    src: url('../font/audiowide-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../font/audiowide-regular-webfont.woff2') format('woff2'),
+         url('../font/audiowide-regular-webfont.woff') format('woff'),
+         url('../font/audiowide-regular-webfont.ttf') format('truetype'),
+         url('../font/audiowide-regular-webfont.svg#audiowideregular') format('svg');
+	font-size: 1em;
 }
 .ui-widget .ui-widget {
 	font-size: 1em;
@@ -848,13 +848,12 @@ body .ui-tooltip {
 .ui-widget select,
 .ui-widget textarea,
 .ui-widget button {
-	font-family: 'robot';
 	font-size: 1em;
 }
 .ui-widget-content {
 	border: 1px solid #dddddd;
-	background: #eeeeee url("images/ui-bg_highlight-soft_100_eeeeee_1x100.png") 50% top repeat-x;
-	color: #333333;
+	background: black;
+	color: white;
 }
 .ui-widget-content a {
 	color: #333333;
@@ -874,7 +873,6 @@ body .ui-tooltip {
 .ui-state-default,
 .ui-widget-content .ui-state-default,
 .ui-widget-header .ui-state-default {
-    font-family: 'robot';
 	border: 1px solid #cccccc;
 	background: #f6f6f6 url("images/ui-bg_glass_100_f6f6f6_1x400.png") 50% 50% repeat-x;
 	font-weight: bold;
@@ -892,8 +890,9 @@ body .ui-tooltip {
 .ui-state-focus,
 .ui-widget-content .ui-state-focus,
 .ui-widget-header .ui-state-focus {
-	border: 1px solid black;
-	background: white;
+	border: 1px solid white;
+	background: #00d3d3;
+	font-weight: bold;
 	color: black;
 }
 .ui-state-hover a,
@@ -992,14 +991,14 @@ body .ui-tooltip {
 	background-image: url("images/ui-icons_ffffff_256x240.png");
 }
 .ui-state-default .ui-icon {
-	background-image: url("images/ui-icons_ef8c08_256x240.png");
+	background-image: url("images/ui-icons_228ef1_256x240.png");
 }
 .ui-state-hover .ui-icon,
 .ui-state-focus .ui-icon {
-	background-image: url("images/ui-icons_ef8c08_256x240.png");
+	background-image: url("images/ui-icons_228ef1_256x240.png");
 }
 .ui-state-active .ui-icon {
-	background-image: url("images/ui-icons_ef8c08_256x240.png");
+	background-image: url("images/ui-icons_228ef1_256x240.png");
 }
 .ui-state-highlight .ui-icon {
 	background-image: url("images/ui-icons_228ef1_256x240.png");
