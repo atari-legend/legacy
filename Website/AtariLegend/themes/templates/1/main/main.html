@@ -34,13 +34,13 @@
         <link type="text/css" href="{$style_dir}css/vendor/animsition-4.0.2.min.css" hreflang="en" rel="stylesheet"><!-- fade up script needed for the intro page -->
         <link rel="icon" href="{$template_dir}includes/icons/favicon.png"> <!-- fav icon -->
         <!-- start - get the icons used for mobile devices -->
-        <link rel="apple-touch-icon-precomposed" sizes="57x57" href="{$template_dir}includes/icons/icon-57x57.png">
-        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{$template_dir}includes/icons/icon-72x72.png">
-        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{$template_dir}includes/icons/icon-114x114.png">
-        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{$template_dir}includes/icons/icon-144x144.png">
+        <link rel="apple-touch-icon" sizes="57x57" href="{$template_dir}includes/icons/icon-57x57.png">
+        <link rel="apple-touch-icon" sizes="72x72" href="{$template_dir}includes/icons/icon-72x72.png">
+        <link rel="apple-touch-icon" sizes="114x114" href="{$template_dir}includes/icons/icon-114x114.png">
+        <link rel="apple-touch-icon" sizes="144x144" href="{$template_dir}includes/icons/icon-144x144.png">
         <!-- end - get the icons used for mobile devices -->
 
-        <script type="text/javascript" src="{$template_dir}includes/js/vendor/jquery-2.1.4.min.js"></script> <!-- main jquery stuff -->
+        <script src="{$template_dir}includes/js/vendor/jquery-2.1.4.min.js"></script> <!-- main jquery stuff -->
 
         {* Insert Google Analytics tags only on production *}
         {if $smarty.server.HTTP_HOST == $smarty.const.SITEHOST}
@@ -219,14 +219,14 @@
             </span>
         </div>
 
-        <script type='text/javascript' src="{$template_dir}includes/js/vendor/md5-1.0.1.min.js"></script>  <!-- log on security script -->
-        <script type='text/javascript' src="{$template_dir}includes/js/vendor/sha512-2.2.min.js"></script> <!-- log on security script -->
-        <script type='text/javascript' src="{$template_dir}includes/js/vendor/respond-1.1.0.min.js"></script> <!-- script needed for the side menu -->
-        <script type="text/javascript" src="{$template_dir}includes/js/vendor/jquery-ui-1.11.4.min.js"></script> <!-- main jqueryUI stuff -->
-        <script type="text/javascript" src="{$template_dir}includes/js/vendor/notify-osd-51f8de7.min.js"></script>
+        <script src="{$template_dir}includes/js/vendor/md5-1.0.1.min.js"></script>  <!-- log on security script -->
+        <script src="{$template_dir}includes/js/vendor/sha512-2.2.min.js"></script> <!-- log on security script -->
+        <script src="{$template_dir}includes/js/vendor/respond-1.1.0.min.js"></script> <!-- script needed for the side menu -->
+        <script src="{$template_dir}includes/js/vendor/jquery-ui-1.11.4.min.js"></script> <!-- main jqueryUI stuff -->
+        <script src="{$template_dir}includes/js/vendor/notify-osd-51f8de7.min.js"></script>
 
         {if isset($edit_message)}
-            <script type="text/javascript">
+            <script>
                 $(document).ready(function(){
                     $.notify_osd.create({
                         // script to display messages
@@ -240,7 +240,7 @@
             </script>
         {/if}
 
-        <script type='text/javascript' src="{$template_dir}includes/js/forms.js"></script> <!-- log on security script -->
-        <script type='text/javascript' src="{$template_dir}includes/js/main.js"></script>
+        <script src="{$template_dir}includes/js/forms.js"></script> <!-- log on security script -->
+        <script src="{$template_dir}includes/js/main.js"></script>
     </body>
 </html>
