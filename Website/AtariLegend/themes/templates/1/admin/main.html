@@ -39,100 +39,8 @@
         <link rel="apple-touch-icon" sizes="114x114" href="{$template_dir}includes/icons/icon-114x114.png">
         <link rel="apple-touch-icon" sizes="144x144" href="{$template_dir}includes/icons/icon-144x144.png">
         <!-- end - get the icons used for mobile devices -->
+
         <script type="text/javascript" src="{$template_dir}includes/js/vendor/jquery-2.1.4.min.js"></script> <!-- main jquery stuff -->
-        <script type="text/javascript" src="{$template_dir}includes/js/vendor/jquery-ui-1.11.4.min.js"></script> <!-- main jqueryUI stuff -->
-        <script type="text/javascript" src="{$template_dir}includes/js/vendor/notify-osd-51f8de7.min.js"></script>
-        <script type='text/javascript' src="{$template_dir}includes/js/vendor/sha512-2.2.min.js"></script> <!-- log on security script -->
-        <script type='text/javascript' src="{$template_dir}includes/js/vendor/md5-1.0.1.min.js"></script>  <!-- log on security script -->
-        <script type='text/javascript' src="{$template_dir}includes/js/forms.js"></script> <!-- log on security script -->
-        <script type="text/javascript"> <!-- script needed for the side menu -->
-            //<![CDATA[
-            $(window).load(function(){
-                $("[data-toggle]").click(function() {
-                    var toggle_el = $(this).data("toggle");
-                    $(toggle_el).toggleClass("open-sidebar");
-                });
-            });
-            //]]>
-
-            $(document).ready(function() {
-                    $(".clearfix li a").click(function() {
-                        var css_path = "../../../themes/styles/" + $(this).attr('rel') + "/css/style.css";
-                        var logo_img_path = "../../../themes/styles/" + $(this).attr('rel') + "/images/logos/top_cpanel_logo01.png";
-                        var logo_img_480_path = "../../../themes/styles/" + $(this).attr('rel') + "/images/logos/top_cpanel_logo01_480.png";
-                        var logo_bee_path = "../../../themes/styles/" + $(this).attr('rel') + "/images/top_right01.png";
-                        var skin = $(this).attr('rel');
-
-                        $("link#main_stylesheet").attr("href",css_path);
-                        $("#logo_img").attr("src",logo_img_path);
-                        $("#logo_img_480").attr("src",logo_img_480_path);
-                        $("#img_bee").attr("src",logo_bee_path);
-                        $.post( "../../../php/main/front/skin_switcher.php?action=skinswitch&skin="+skin);
-                        return false;
-                    });
-            });
-
-
-            {if isset($edit_message)}
-                $( document ).ready(function() {
-                    $.notify_osd.create({
-                        'text'        : '{$edit_message}',             // notification message
-                        'icon'        : '{$style_dir}/images/osd_icons/star.png', // icon path, 48x48
-                        'sticky'      : false,             // if true, timeout is ignored
-                        'timeout'     : 4,                 // disappears after 6 seconds
-                        'dismissable' : true               // can be dismissed manually
-                        });
-                });
-            {/if}
-        </script>
-        <script type="text/javascript">
-            $(document).ready(function(){
-                $('#login-trigger').click(function(){  <!-- script needed log in menu -->
-                    $(this).next('#login-content').slideToggle();
-                    $(this).toggleClass('active');
-
-                    if ($(this).hasClass('active')) $(this).find('span').html('&#x25B2;')
-                    else $(this).find('span').html('&#x25BC;')
-                })
-            });
-        </script>
-        {literal}
-        <script> <!-- The 'go to the top' buttong -->
-            $(function(){
-
-                $(document).on( 'scroll', function(){
-
-                    if ($(window).scrollTop() > 100) {
-                        $('.scroll-top-wrapper').addClass('show');
-                    } else {
-                        $('.scroll-top-wrapper').removeClass('show');
-                    }
-                });
-            });
-        </script>
-        <script> <!-- The 'go to the top' buttong -->
-            $(function(){
-                $(document).on( 'scroll', function(){
-
-                    if ($(window).scrollTop() > 100) {
-                        $('.scroll-top-wrapper').addClass('show');
-                    } else {
-                        $('.scroll-top-wrapper').removeClass('show');
-                    }
-                });
-
-                $('.scroll-top-wrapper').on('click', scrollToTop);
-            });
-
-            function scrollToTop() {
-                verticalOffset = typeof(verticalOffset) != 'undefined' ? verticalOffset : 0;
-                element = $('body');
-                offset = element.offset();
-                offsetTop = offset.top;
-                $('html, body').animate({scrollTop: offsetTop}, 500, 'linear');
-            }
-        </script>
-        {/literal}
 
         {* Insert Google Analytics tags only on production *}
         {if $smarty.server.HTTP_HOST == $smarty.const.SITEHOST}
@@ -481,5 +389,27 @@
                 <i class="fa fa-2x fa-arrow-circle-up"></i>
             </span>
         </div>
+
+        <script type='text/javascript' src="{$template_dir}includes/js/vendor/md5-1.0.1.min.js"></script>  <!-- log on security script -->
+        <script type='text/javascript' src="{$template_dir}includes/js/vendor/sha512-2.2.min.js"></script> <!-- log on security script -->
+        <script type="text/javascript" src="{$template_dir}includes/js/vendor/jquery-ui-1.11.4.min.js"></script> <!-- main jqueryUI stuff -->
+        <script type="text/javascript" src="{$template_dir}includes/js/vendor/notify-osd-51f8de7.min.js"></script>
+
+        {if isset($edit_message)}
+            <script type="text/javascript"> <!-- script needed for the side menu -->
+                $( document ).ready(function() {
+                    $.notify_osd.create({
+                        'text'        : '{$edit_message}',             // notification message
+                        'icon'        : '{$style_dir}/images/osd_icons/star.png', // icon path, 48x48
+                        'sticky'      : false,             // if true, timeout is ignored
+                        'timeout'     : 4,                 // disappears after 6 seconds
+                        'dismissable' : true               // can be dismissed manually
+                        });
+                });
+            </script>
+        {/if}
+
+        <script type='text/javascript' src="{$template_dir}includes/js/forms.js"></script> <!-- log on security script -->
+        <script type='text/javascript' src="{$template_dir}includes/js/main.js"></script>
     </body>
 </html>
