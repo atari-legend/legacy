@@ -33,7 +33,7 @@ The main TOS page
                 <fieldset>
                     <legend>Edit a TOS version</legend>
                     <form action="../downloads/download_tos_edit.php" method="post" name="ind_edit" id="ind_edit">
-                        <select name="tos_id" class="quick_search_pub_select">
+                        <select name="tos_id" class="standard_select select_large">
                             <option value="-">-</option>
                             {foreach from=$download_tos item=line}
                                 <option value="{$line.tos_id}">{$line.tos_name}</option>

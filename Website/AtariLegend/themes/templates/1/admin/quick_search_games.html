@@ -65,7 +65,7 @@ function gameinsert()
                     <h3>Search for Game:</h3>   <br>
                     <div class="standard_table_center">
                         By name :<br>
-                        <select name="gamebrowse" id="quick_search_small_select">
+                        <select name="gamebrowse" class="standard_select select_small">
                             <option value="" SELECTED>-</option>
                             {html_options values=$az_value output=$az_output}
                         </select>
@@ -74,7 +74,7 @@ function gameinsert()
                     <br>
                     <div class="standard_table_center">
                         By Publisher : <br>
-                        <select name="publisher" class="quick_search_pub_select">
+                        <select name="publisher" class="standard_select select_large">
                             <option value="-" SELECTED>-</option>
                             {foreach from=$company_publisher item=line}
                                 <option value="{$line.comp_id}">{$line.comp_name}</option>
@@ -84,7 +84,7 @@ function gameinsert()
                     <br>
                     <div class="standard_table_center">
                         By Developer : <br>
-                        <select name="developer" id="quick_search_dev_select">
+                        <select name="developer" class="standard_select select_large">
                             <option value="-" SELECTED>-</option>
                             {foreach from=$company_developer item=line}
                                 <option value="{$line.comp_id}">{$line.comp_name}</option>

@@ -107,7 +107,7 @@ function searchCrew(str) {
         <br>
         Search for crew:<br>
         <form action="../crew/crew_editor.php" method="get" name="post_menu_crew_set" id="menu_crew_set">
-            <select name="crewbrowse" size="1" id="quick_search_small_select" onchange="browseCrew(this.value)">
+            <select name="crewbrowse" size="1" class="standard_select select_small" onchange="browseCrew(this.value)">
                 <option value="" SELECTED>-</option>
                 {html_options values=$az_value output=$az_output}
             </select>
@@ -116,7 +116,7 @@ function searchCrew(str) {
             <br>
             {* Ajax *}
             <div id="crew_list">
-                <select name="crew_select" class="quick_search_pub_select">
+                <select name="crew_select" class="standard_select select_large">
                     <option value="" SELECTED>-</option>
                     {foreach from=$crew item=line}
                         {html_options values=$line.crew_id output=$line.crew_name}

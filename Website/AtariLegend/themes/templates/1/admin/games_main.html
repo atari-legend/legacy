@@ -48,7 +48,7 @@ The main game page
             <div class="games_main_row">
                 <div class="games_main_text">By Name :</div>
                 <div class="games_main_input">
-                    <select name="gamebrowse" id="games_main_small_select">
+                    <select name="gamebrowse" class="standard_select select_small">
                         <option value="" SELECTED>-</option>
                         {html_options values=$az_value output=$az_output}
                     </select>
@@ -58,7 +58,7 @@ The main game page
             <div class="games_main_row">
                 <div class="games_main_text">By Publisher :</div>
                 <div class="games_main_input">
-                    <select name="publisher" id="games_main_pub_select">
+                    <select name="publisher" class="standard_select select_large">
                         <option value="-" SELECTED>-</option>
                         {foreach from=$company_publisher item=line}
                             <option value="{$line.comp_id}">{$line.comp_name}</option>
@@ -69,7 +69,7 @@ The main game page
             <div class="games_main_row">
                 <div class="games_main_text">By Developer :</div>
                 <div class="games_main_input">
-                    <select name="developer" id="games_main_dev_select">
+                    <select name="developer" class="standard_select select_large">
                         <option value="-" SELECTED>-</option>
                         {foreach from=$company_developer item=line}
                             <option value="{$line.comp_id}">{$line.comp_name}</option>

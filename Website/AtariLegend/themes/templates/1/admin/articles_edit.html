@@ -213,7 +213,7 @@ function storeCaret(textEl) {
                     <br>
                     <b>Written by : </b>
                     <br>
-                    <select name="members" class="quick_search_pub_select">
+                    <select name="members" class="standard_select select_large">
                         <option value="-">-</option>
                         {foreach from=$authors item=line}
                             {if $line.user_id == $article.article_author}
@@ -229,7 +229,7 @@ function storeCaret(textEl) {
                 <div style="display:inline-block;">
                     <b>Type :</b>
                     <br>
-                    <select name="article_type" class="quick_search_pub_select">
+                    <select name="article_type" class="standard_select select_large">
                         <option value="-">-</option>
                         {foreach from=$article_types item=line}
                             {if $line.article_type_id == $article.article_type_id}

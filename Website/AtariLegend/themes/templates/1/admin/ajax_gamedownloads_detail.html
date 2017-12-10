@@ -74,7 +74,7 @@
                                                     <div class="download_details_text_long" style="margin-right:10px;">
                                                         Format:
                                                         <br>
-                                                        <select name="format_id" id="download_format">
+                                                        <select name="format_id" class="standard_select select_full">
                                                             <option value="-">-</option>
                                                             {if isset($format_id)}
                                                                 {html_options values=$format_id output=$format selected=$download_format}
@@ -86,7 +86,7 @@
                                                     <div class="download_details_text_long" style="margin-right:10px;">
                                                         lingo:
                                                         <br>
-                                                        <select name="language_id" id="download_language">
+                                                        <select name="language_id" id="download_language" class="standard_select select_full">
                                                             <option value="-">-</option>
                                                             {if isset($lingo_id)}
                                                                 {html_options values=$lingo_id output=$lingo_name selected=$download_lingo}
@@ -98,7 +98,7 @@
                                                     <div class="download_details_text_long" style="margin-right:10px;">
                                                         Intro:
                                                         <br>
-                                                        <select name="demo_id" id="download_intro">
+                                                        <select name="demo_id" id="download_intro" class="standard_select select_full">
                                                             <option value="-">-</option>
                                                             {if isset($demo_id)}
                                                                 {html_options values=$demo_id output=$demo_name selected=$download_demo }
@@ -133,7 +133,7 @@
                                                 Options :
                                                 <br>
                                                 <br>
-                                                <select name="download_options_id" id="download_option">
+                                                <select name="download_options_id" id="download_option" class="standard_select select_full">
                                                     <option value="-">-</option>
                                                     {foreach from=$options item=line}
                                                         <option value="{$line.options_id}">{$line.option|truncate:20:'..':true:true}</option>
@@ -183,7 +183,7 @@
                                                 TOS :
                                                 <br>
                                                 <br>
-                                                <select name="download_tos_id" id="download_tos">
+                                                <select name="download_tos_id" id="download_tos" class="standard_select select_full">
                                                     <option value="-">-</option>
                                                     {foreach from=$tos item=line}
                                                         <option value="{$line.tos_id}">{$line.tos|truncate:20:'..':true:true}</option>
@@ -232,7 +232,7 @@
                                         <div class="download_details_row">
                                             <div class="download_details_text_long">
                                                 Trainer :
-                                                <select name="download_trainer_id" id="download_trainer">
+                                                <select name="download_trainer_id" id="download_trainer" class="standard_select select_full">
                                                     <option value="-">-</option>
                                                     {foreach from=$trainer item=line}
                                                         <option value="{$line.trainer_id}">{$line.trainer|truncate:20:'..':true:true}</option>
@@ -282,7 +282,7 @@
                                                 Crew :
                                                 <br>
                                                 <br>
-                                                <select name="crew_id" id="download_crew">
+                                                <select name="crew_id" id="download_crew" class="standard_select select_full">
                                                     <option value="-">-</option>
                                                     {foreach from=$crew item=line}
                                                         <option value="{$line.crew_id}">{$line.crew|truncate:20:'..':true:true}</option>
@@ -333,7 +333,7 @@
                                                 Menudisk :
                                                 <br>
                                                 <br>
-                                                <select name="download_menudisk_title_game_id" id="download_menu">
+                                                <select name="download_menudisk_title_game_id" id="download_menu" class="standard_select select_full">
                                                     <option value="-">-</option>
                                                     {foreach from=$menudisk item=line}
                                                         <!--This stuff is a 'solution' for all the problems I'm having regarding responsiveness in IE!! -->
@@ -385,7 +385,7 @@
                                                 Set :
                                                 <br>
                                                 <br>
-                                                <select name="download_set_id" id="download_set">
+                                                <select name="download_set_id" id="download_set" class="standard_select select_full">
                                                     <option value="-">-</option>
                                                     {foreach from=$set item=line}
                                                         <!--This stuff is a 'solution' for all the problems I'm having regarding responsiveness in IE!! -->
@@ -440,19 +440,19 @@
                                                         Individual :
                                                         <br>
                                                         <br>
-                                                        <select id="quick_search_small_select" name="m1" onchange="browseInd(this.value)">
+                                                        <select class="standard_select select_small" name="m1" onchange="browseInd(this.value)">
                                                             <option value="" SELECTED>-</option>
                                                             {html_options values=$az_value output=$az_output}
                                                         </select>
                                                         <div id="ind_member">
-                                                            <select name="ind_id" id="download_author_az">
+                                                            <select name="ind_id" id="download_author_az" class="standard_select select_full">
                                                                 <option value="" SELECTED>-</option>
                                                                 {foreach from=$ind_name item=line}
                                                                     <option value="{$line.ind_id}">{$line.ind_name}</option>
                                                                 {/foreach}
                                                             </select>
                                                         </div>
-                                                        <select id="download_author_name" name="author_type_id" size="1">
+                                                        <select id="download_author_name" class="standard_select select_full" name="author_type_id" size="1">
                                                             <option value="">-</option>
                                                             {foreach from=$author_type item=line}
                                                                 <option value="{$line.author_type_id}">{$line.author_type_info}</option>
@@ -749,7 +749,7 @@
 
 {* This is the Ind browse *}
 {if isset($smarty_action) and $smarty_action == "ind_gen_browse"}
-    <select id="ind_id" name="ind_id">
+    <select id="ind_id" class="standard_select select_medium" name="ind_id">
         {foreach from=$author_type item=line}
             <option value="{$line.ind_id}">{$line.ind_name}</option>
         {/foreach}
@@ -781,7 +781,7 @@
                 <div class="download_details_text_long" style="margin-right:10px;">
                     Format:
                     <br>
-                    <select name="format_id" id="download_format">
+                    <select name="format_id" id="download_format" class="standard_select select_full">
                         <option value="-">-</option>
                         {if isset($format_id)}
                             {html_options values=$format_id output=$format selected=$download_format}
@@ -793,7 +793,7 @@
                 <div class="download_details_text_long" style="margin-right:10px;">
                     lingo:
                     <br>
-                    <select name="language_id" id="download_language">
+                    <select name="language_id" id="download_language" class="standard_select select_full">
                         <option value="-">-</option>
                         {if isset($lingo_id)}
                             {html_options values=$lingo_id output=$lingo_name selected=$download_lingo}
@@ -805,7 +805,7 @@
                 <div class="download_details_text_long" style="margin-right:10px;">
                     Intro:
                     <br>
-                    <select name="demo_id" id="download_intro">
+                    <select name="demo_id" id="download_intro" class="standard_select select_full">
                         <option value="-">-</option>
                         {if isset($demo_id)}
                             {html_options values=$demo_id output=$demo_name selected=$download_demo }

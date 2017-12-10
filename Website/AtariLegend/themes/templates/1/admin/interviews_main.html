@@ -114,7 +114,7 @@
                 <fieldset>
                     <legend>Search Interview</legend>
                     <form action="../interviews/interviews_edit.php" method="post" name="search">
-                        <select name="interview_id" class="quick_search_pub_select">
+                        <select name="interview_id" class="standard_select select_large">
                             <option value="-" selected>-</option>
                             {foreach from=$individuals_interviewed item=line}
                                 <option value="{$line.interview_id}">{$line.ind_name}</option>
@@ -133,7 +133,7 @@
                         <select name="individual_create"
                             data-alt-autocomplete-endpoint="../../../php/admin/common/autocomplete.php?extraParams=individual"
                             data-alt-autocomplete-toggle="#individual_select_toggle"
-                            id="member_select">>
+                            id="member_select" class="standard_select select_large">
                             <option value="-">-</option>
                             {foreach from=$individuals item=line}
                                 <option value="{$line.ind_id}">{$line.ind_name}</option>

@@ -8,7 +8,7 @@
 //*----------------------------------------------------------
 // * load the main font
 // * ------------------------------------------------------------ */
- 
+
 @font-face {
     font-family: AtariST;
     font-style: normal;
@@ -319,7 +319,7 @@ a.standard_tile_link:focus {
 .standard_tile_text { padding: 20px; }
 .standard_tile select {
     width: 78%;
-    height: 20px;
+    height: 25px;
     padding: 0;
     padding-left: 5px;
     margin-top: 5px;
@@ -328,25 +328,30 @@ a.standard_tile_link:focus {
     border: 1px solid #b2b2b2;
 }
 
-#small_select {
+.select_small {
     width: 50px;
     height: 27px;
     background: #666;
 }
 
-#medium_select {
+.select_medium {
+    width: 140px;
+    margin-top: 0;
+    background: #666;
+}
+
+.select_large {
     width: 185px;
     height: 27px;
     margin-top: 0;
     background: #666;
 }
 
-#medium_select2 {
-    width: 140px;
-    height: 25px;
+.select_full {
+    width: 100%;
     margin-top: 0;
-    background: #666;
 }
+
 
 .centered_fieldset {
     margin: auto;
@@ -372,7 +377,7 @@ a.standard_tile_link:focus {
     border: 0;
     border-bottom: 3px solid #000;
     border-left: 1px solid #000;
-    padding: 4px 10px; 
+    padding: 4px 10px;
 }
 
 .file_upload:hover {
@@ -579,7 +584,7 @@ legend {
     border: #666 solid 1px;
     border-radius: 50%;
 }
-    
+
 #help-tip2 {
     width: 10px;
     height: 10px;
@@ -622,11 +627,11 @@ legend {
     box-shadow: 1px 1px 1px rgba(0, 0, 0, .2);
 }
 
-#help-tip2 p { 
+#help-tip2 p {
     right: 200px;
     width: 200px;
 }
-    
+
 // I am removing the pointer as the alignment of the text box changes from '?' to '?' - this is done the be compliant with a resolution of 320 width.
 // Test it for yourself to see what I mean
 //  .help-tip p:before {
@@ -705,7 +710,7 @@ div.tab button.active {
     padding: 6px 12px;
     border: 1px solid #ccc;
     border-top: none;
-}  
+}
 
 /*fade in effect on tab */
 .tabcontent {
@@ -721,7 +726,7 @@ div.tab button.active {
 @keyframes fadeEffect {
     from {opacity: 0;}
     to {opacity: 1;}
-} 
+}
 
 
 //*------------------------------------------------------------

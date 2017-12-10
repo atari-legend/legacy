@@ -425,7 +425,7 @@ function browseDeveloper(str) {
                                         <br>
                                         <br>
                                     {/if}
-                                    <select name="ind_id" id="ind_id">
+                                    <select name="ind_id" id="ind_id" class="standard_select select_medium">
                                     <option value="-" selected="selected">-</option>
                                     {foreach from=$individuals item=line}
                                         <option value="{$line.ind_id}">{$line.ind_name}</option>
@@ -433,7 +433,7 @@ function browseDeveloper(str) {
                                     </select>
                                     <b>Name</b>
                                     <br/>
-                                    <select name="author_type_id" id="author_type_id">
+                                    <select name="author_type_id" class="standard_select select_medium">
                                     <option value="-" selected="selected">-</option>
                                     {foreach from=$author_types item=line}
                                         <option value="{$line.author_type_id}">{$line.author_type}</option>
@@ -464,10 +464,10 @@ function browseDeveloper(str) {
                                         <br>
                                         <br>
                                     {/if}
-                                    {html_select_date start_year=1984 display_days=0 display_months=0 id="small_select"}
+                                    {html_select_date start_year=1984 display_days=0 display_months=0 class="standard_select select_small"}
                                     <b>Release Year</b>
                                     <br>
-                                    <select name="game_extra_info_year" id="game_extra_info_year">
+                                    <select name="game_extra_info_year" class="standard_select select_medium">
                                         <option value="-" selected="selected">-</option>
                                         {foreach from=$game_extra_info item=line}
                                             <option value="{$line.game_extra_info_id}">{$line.game_extra_info}</option>
@@ -505,14 +505,14 @@ function browseDeveloper(str) {
                             <table>
                             <tr>
                                 <td>
-                                    <select name="developerbrowse" onchange="browseDeveloper(this.value)" id="gd_dev_small_select">
+                                    <select name="developerbrowse" onchange="browseDeveloper(this.value)" class="standard_select select_small">
                                         <option value="" SELECTED>-</option>
                                         {html_options values=$az_value output=$az_output}
                                     </select>
                                 </td>
                                 <td>
                                     <div id="ajax_developer_browse">
-                                        <select name="company_id_dev" id="company_id_dev">
+                                        <select name="company_id_dev" class="standard_select select_medium">
                                             <option value="-" selected="selected">-</option>
                                             {foreach from=$company item=line}
                                                 <option value="{$line.comp_id}">{$line.comp_name}</option>
@@ -526,7 +526,7 @@ function browseDeveloper(str) {
                             </tr>
                             </table>
                             <br>
-                            <select name="continent_dev" id="continent_dev">
+                            <select name="continent_dev" class="standard_select select_medium">
                                 <option value="-" selected="selected">-</option>
                                 {foreach from=$continent item=line}
                                     <option value="{$line.continent_id}">{$line.continent_name}</option>
@@ -534,7 +534,7 @@ function browseDeveloper(str) {
                             </select>
                             <b>Continent</b>
                             <br/>
-                            <select name="game_extra_info_dev" id="game_extra_info_dev">
+                            <select name="game_extra_info_dev" class="standard_select select_medium">
                                 <option value="-" selected="selected">-</option>
                                 {foreach from=$game_extra_info item=line}
                                     <option value="{$line.game_extra_info_id}">{$line.game_extra_info}</option>
@@ -597,14 +597,14 @@ function browseDeveloper(str) {
                             <table>
                             <tr>
                                 <td>
-                                    <select name="companybrowse" onchange="browseCompany(this.value)" id="gd_pub_small_select">
+                                    <select name="companybrowse" onchange="browseCompany(this.value)" class="standard_select select_small">
                                         <option value="" SELECTED>-</option>
                                         {html_options values=$az_value output=$az_output}
                                     </select>
                                 </td>
                                 <td>
                                     <div id="ajax_publisher_browse">
-                                        <select name="company_id_pub" id="company_id_pub">
+                                        <select name="company_id_pub" class="standard_select select_medium">
                                             <option value="-" selected="selected">-</option>
                                             {foreach from=$company item=line}
                                                 <option value="{$line.comp_id}">{$line.comp_name}</option>
@@ -618,7 +618,7 @@ function browseDeveloper(str) {
                             </tr>
                             </table>
                             <br>
-                            <select name="continent_pub" id="continent_pub">
+                            <select name="continent_pub" class="standard_select select_medium">
                                 <option value="-" selected="selected">-</option>
                                 {foreach from=$continent item=line}
                                     <option value="{$line.continent_id}">{$line.continent_name}</option>
@@ -626,7 +626,7 @@ function browseDeveloper(str) {
                             </select>
                             <b>Continent</b>
                             <br>
-                            <select name="game_extra_info_pub" id="game_extra_info_pub">
+                            <select name="game_extra_info_pub" class="standard_select select_medium">
                                 <option value="-" selected="selected">-</option>
                                 {foreach from=$game_extra_info item=line}
                                     <option value="{$line.game_extra_info_id}">{$line.game_extra_info}</option>

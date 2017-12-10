@@ -27,7 +27,7 @@
         <form method="post" name="post_bug" action="../../common/tiles/db_tile_bug_report.php">
             <div class="standard_list_entry">
                 <div style="width:100%;text-align:center;margin-top:10px;">
-                    <select name="bug_report_type" class="quick_search_pub_select">
+                    <select name="bug_report_type" class="standard_select select_large">
                         <option value="-" SELECTED>-</option>
                         {if isset($bug_report_type)}
                         {foreach from=$bug_report_type item=line}

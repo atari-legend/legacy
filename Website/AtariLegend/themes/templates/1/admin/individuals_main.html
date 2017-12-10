@@ -36,7 +36,7 @@ The main individual page
                 <fieldset>
                     <legend>Edit an individual</legend>
                     <form action="../individuals/individuals_edit.php" method="post" name="ind_edit" id="ind_edit">
-                        <select name="ind_id" class="quick_search_pub_select">
+                        <select name="ind_id" class="standard_select select_large">
                             <option value="-">-</option>
                             {foreach from=$individuals item=line}
                                 <option value="{$line.ind_id}">{$line.ind_name}</option>

@@ -73,7 +73,8 @@ function TestURL() {
             </div>
             <div class="links_addnew_row">
                 <div class="links_addnew_text">Category</div>
-                <div class="links_addnew_input"><select name="category">
+                <div class="links_addnew_input" class="standard_select select_large">
+                    <select name="category">
                         {foreach from=$website_category item=line}
                             <option value="{$line.website_category_id}">{$line.website_category_name}</option>
                         {/foreach}
@@ -124,11 +125,13 @@ function TestURL() {
                     </div>
                     <div class="links_addnew_row">
                         <div class="links_addnew_text">Category</div>
-                        <div class="links_addnew_input"><select name="validate_category">
-                            {foreach from=$website_category item=line}
-                                <option value="{$line.website_category_id}" {if $line.website_category_id eq $lineweb.website_category}SELECTED{/if}>{$line.website_category_name}</option>
-                            {/foreach}
-                        </select></div>
+                        <div class="links_addnew_input">
+                            <select name="validate_category" class="standard_select select_large">
+                                {foreach from=$website_category item=line}
+                                    <option value="{$line.website_category_id}" {if $line.website_category_id eq $lineweb.website_category}SELECTED{/if}>{$line.website_category_name}</option>
+                                {/foreach}
+                            </select>
+                        </div>
                     </div>
                     <div class="links_addnew_row">
                         <div class="links_addnew_text">Description</div>
