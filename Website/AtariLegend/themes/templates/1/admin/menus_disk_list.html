@@ -33,7 +33,7 @@ The main game page
     <div class="standard_table_center">
         <br>
         <form action="../menus/menus_disk_list.php" method="get" name="post" id="menu_set_change">
-            <select name="menu_sets_id" class="quick_search_pub_select" onchange="this.form.submit()">
+            <select name="menu_sets_id" class="standard_select select_large" onchange="this.form.submit()">
                 <option value="" selected style="background-color:white;">Change Menu Set</option>
                 {foreach from=$menu_set_list item=line}
                     {html_options values=$line.menu_sets_id output=$line.menu_sets_name}
@@ -64,7 +64,7 @@ The main game page
             <div style="margin-left:20px;">
                 Menu type:<br>
             </div>
-            <select name="menu_type_browse" size="1" class="quick_search_pub_select">
+            <select name="menu_type_browse" size="1" class="standard_select select_large">
                 <option value="" selected>-</option>
                 {foreach from=$menu_types item=line}
                     {html_options values=$line.menu_types_id output=$line.menu_types_text}
@@ -94,13 +94,13 @@ The main game page
         <br>
         Set Crew for menu set:<br>
         <form action="../menus/db_menu_disk.php" method="post" name="post_menu_crew_set" id="menu_crew_set">
-            <select name="crew_browse" size="1" id="quick_search_small_select" onchange="browseCrew(this.value)">
+            <select name="crew_browse" size="1" class="standard_select select_small" onchange="browseCrew(this.value)">
                 <option value="" SELECTED>-</option>
                 {html_options values=$az_value output=$az_output}
             </select>
             {* Ajax *}
             <div id="option_crew">
-                <select name="crew_id" class="quick_search_pub_select">
+                <select name="crew_id" class="standard_select select_large">
                     <option value="" selected>-</option>
                     {foreach from=$crew item=line}
                         {html_options values=$line.crew_id output=$line.crew_name}
@@ -131,13 +131,13 @@ The main game page
         <br>
         Set individual for menu set:<br>
         <form action="../menus/db_menu_disk.php" method="post" name="post_menu_ind_set" id="menu_ind_set">
-            <select name="ind_browse" size="1" id="quick_search_small_select" onchange="browseIndividual(this.value)">
+            <select name="ind_browse" size="1" class="standard_select select_small" onchange="browseIndividual(this.value)">
                 <option value="" SELECTED>-</option>
                 {html_options values=$az_value output=$az_output}
             </select>
             {* Ajax *}
             <div id="option_ind">
-                <select name="ind_id" class="quick_search_pub_select">
+                <select name="ind_id" class="standard_select select_large">
                     <option value="" selected>-</option>
                     {foreach from=$ind item=line}
                         {html_options values=$line.ind_id output=$line.ind_name}

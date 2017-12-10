@@ -36,7 +36,7 @@ The main company (developer/publisher) page
                 <fieldset>
                     <legend>Edit a company</legend>
                     <form action="../company/company_edit.php" method="post" name="comp_edit" id="comp_edit">
-                        <select name="comp_id" class="quick_search_pub_select">
+                        <select name="comp_id" class="standard_select select_large">
                             <option value="-">-</option>
                             {foreach from=$company item=line}
                                 <option value="{$line.comp_id}">{$line.comp_name}</option>

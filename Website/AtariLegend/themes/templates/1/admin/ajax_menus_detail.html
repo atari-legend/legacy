@@ -44,7 +44,7 @@
                         <div class="main_company_container">
                             <div class="main_company_child" id="child_edit_company">
                                 <b>Set state:</b><br>
-                                <select name="state_id" class="quick_search_pub_select" onchange="changeState(this.value,{$menus.menu_disk_id})">
+                                <select name="state_id" class="standard_select select_large" onchange="changeState(this.value,{$menus.menu_disk_id})">
                                     <option value="">Set State</option>
                                     {if isset($state_id)}
                                         {html_options values=$state_id output=$menu_state selected=$menu_state_id}
@@ -53,7 +53,7 @@
                                 <br>
                                 <br>
                                 <b>Set parent menu:</b><br>
-                                <select name="parent_id" class="quick_search_pub_select" onchange="changeParent(this.value,{$menus.menu_disk_id})">
+                                <select name="parent_id" class="standard_select select_large" onchange="changeParent(this.value,{$menus.menu_disk_id})">
                                     <option value="">Set parent</option>
                                     {foreach from=$parent item=line}
                                         {html_options values=$line.parent_id output=$line.parent_name selected=$menu_parent_id}
@@ -228,7 +228,7 @@
                                     </td>
                                     <td class="menu_doctype_td">
                                         <form action="#" method="post" name="doc_type_edit{$line.doc_id}" id="doc_type_edit{$line.doc_id}">
-                                            <select name="doc_type_id" id="quick_search_small_select" style="width:125px;" onchange="changeDoctype(this.value,{$line.doc_id},{$menus.menu_disk_id})">
+                                            <select name="doc_type_id" class="standard_select select_medium" onchange="changeDoctype(this.value,{$line.doc_id},{$menus.menu_disk_id})">
                                             <option value="" selected>-</option>
                                             {if isset($doc_type)}
                                                 {foreach from=$doc_type item=doc_types}
@@ -340,14 +340,14 @@
         <input type="text" onkeyup="searchInd(this.value)" class="standard_tile_input_small" value="search">
         <br>
         <div id="ind_member" style="display:inline;">
-            <select id="ind_id" name="ind_id">
+            <select id="ind_id" name="ind_id" class="standard_select select_medium">
                 {foreach from=$ind item=line}
                     <option value="{$line.ind_id}">{$line.ind_name}</option>
                 {/foreach}
             </select>
         </div>
 
-        <select id="author_type_id" name="author_type_id" size="1" style="margin:5px;margin-top:0px;width:200px;">
+        <select id="author_type_id" class="standard_select select_medium" name="author_type_id" size="1" style="margin:5px;margin-top:0px;width:200px;">
         <option value="">-</option>
             {foreach from=$author_type item=line}
                 <option value="{$line.author_type_id}">{$line.author_type_info}</option>
@@ -483,7 +483,7 @@
                 </td>
                 <td class="menu_doctype_td">
                     <form action="#" method="post" name="doc_type_edit{$line.doc_id}" id="doc_type_edit{$line.doc_id}">
-                        <select name="doc_type_id" id="quick_search_small_select" style="width:125px;" onchange="changeDoctype(this.value,{$line.doc_id},{$menu_disk_id})">
+                        <select name="doc_type_id" class="standard_select select_medium" onchange="changeDoctype(this.value,{$line.doc_id},{$menu_disk_id})">
                         <option value="" selected>-</option>
                             {if isset($doc_type)}
                             {foreach from=$doc_type item=doc_types}
@@ -575,7 +575,7 @@
 
 {* This is the Ind browse *}
 {if isset($smarty_action) and $smarty_action == "ind_gen_browse"}
-    <select id="ind_id" name="ind_id">
+    <select id="ind_id" name="ind_id" class="standard_select select_medium">
         {foreach from=$author_type item=line}
             <option value="{$line.ind_id}">{$line.ind_name}</option>
         {/foreach}
@@ -706,7 +706,7 @@
                 <form action="" method="post" name="link_game_to_set" id="link_game_to_set">
                     <fieldset>
                     <legend>Select chain {if isset($title_name)}for {$title_name}{/if}</legend>
-                        <select name="chainbrowse" class="quick_search_pub_select">
+                        <select name="chainbrowse" class="standard_select select_large">
                             <option value="" selected>-</option>
                             {foreach from=$chain_data item=line}
                                 {html_options values=$line.menu_disk_title_set_nr output=$line.menu_disk_name selected=$select_chain_data}

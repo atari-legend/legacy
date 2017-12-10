@@ -309,7 +309,7 @@ function myFunction() {
                             <select name="members"
                                 data-alt-autocomplete-endpoint="../../../php/admin/common/autocomplete.php?extraParams=admin-user"
                                 data-alt-autocomplete-toggle="#members_select_toggle"
-                                id="member_select">
+                                id="member_select" class="standard_select select_large">
                                 <option value="-">-</option>
                                 {foreach from=$authors item=line}
                                     {if $line.user_id == $interview.interview_author}
@@ -329,7 +329,7 @@ function myFunction() {
                             <select name="individual"
                                 data-alt-autocomplete-endpoint="../../../php/admin/common/autocomplete.php?extraParams=individual"
                                 data-alt-autocomplete-toggle="#individual_select_toggle"
-                                id="member_select">>
+                                id="member_select" class="standard_select select_large">
                                 <option value="-">-</option>
                                 {foreach from=$individuals item=line}
                                     {if $line.ind_id == $interview.interview_ind_id}

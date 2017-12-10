@@ -33,7 +33,7 @@ The main article type page
                 <fieldset>
                     <legend>Edit an article type</legend>
                     <form action="../articles/article_type_edit.php" method="post" name="article_edit" id="article_edit">
-                        <select name="article_type_id" class="quick_search_pub_select">
+                        <select name="article_type_id" class="standard_select select_large">
                             <option value="-">-</option>
                             {foreach from=$article_type item=line}
                                 <option value="{$line.article_type_id}">{$line.article_type}</option>

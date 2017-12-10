@@ -33,7 +33,7 @@ The main bug report type page
                 <fieldset>
                     <legend>Edit a bug report type</legend>
                     <form action="../administration/bug_report_type_edit.php" method="post" name="ind_edit" id="ind_edit">
-                        <select name="type_id" class="quick_search_pub_select">
+                        <select name="type_id" class="standard_select select_large">
                             <option value="-">-</option>
                             {foreach from=$bug_report_types item=line}
                                 <option value="{$line.bug_report_type_id}">{$line.bug_report_type}</option>

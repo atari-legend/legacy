@@ -40,7 +40,7 @@ The main menus type page
                 <fieldset>
                     <legend>Edit a menu type</legend>
                     <form action="../menus/menus_type_edit.php" method="post" name="ind_edit" id="ind_edit">
-                        <select name="menu_type_id" class="quick_search_pub_select">
+                        <select name="menu_type_id" class="standard_select select_large">
                             <option value="-">-</option>
                             {foreach from=$menus_type item=line}
                                 <option value="{$line.menu_types_main_id}">{$line.menu_type_text}</option>
