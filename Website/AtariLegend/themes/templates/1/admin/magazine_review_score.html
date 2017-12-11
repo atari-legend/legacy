@@ -66,7 +66,7 @@ function scoredelete(JSmagID,JSgame_id)
             <br>
             {* Marty! Hi mate! here you need to add the search variables. Take care /Matt *}
             <form action="../magazine/magazine_setscore.php?source=gameinfo&game_id={$game.game_id}" method="post" name="pickissue" id="pickissue">
-                <select name="magazine_issue_id" id="magazine_issue_id">
+                <select name="magazine_issue_id" id="magazine_issue_id" class="standard_select select_medium">
                     {foreach from=$issues item=line}
                     <option value="{$line.magazine_issue_id}">{$line.magazine_name} issue {$line.magazine_issue_nr}</option>
                     {/foreach}
