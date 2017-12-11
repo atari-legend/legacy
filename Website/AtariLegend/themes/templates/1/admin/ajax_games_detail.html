@@ -19,7 +19,7 @@
 
 {if isset($smarty_action) and $smarty_action == "company_publisher_browse"}
     {if isset($company)}
-        <select name="company_id_pub" id="company_id_pub">
+        <select name="company_id_pub" class="standard_select select_medium">
             <option value="-" selected>-</option>
             {foreach from=$company item=line}
                 <option value="{$line.company_id}">{$line.company_name}</option>
@@ -30,7 +30,7 @@
 
 {if isset($smarty_action) and $smarty_action == "company_developer_browse"}
     {if isset($company)}
-        <select name="company_id_dev" id="company_id_dev">
+        <select name="company_id_dev" class="standard_select select_medium">
             <option value="-" selected>-</option>
             {foreach from=$company item=line}
                 <option value="{$line.company_id}">{$line.company_name}</option>

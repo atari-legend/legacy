@@ -1,6 +1,6 @@
 {* Crew browse for the crew pick list *}
 {if isset($smarty_action) and $smarty_action == "crew_list"}
-    <select name="crew_id" id="quick_search_pub_select">
+    <select name="crew_id" class="standard_select select_large">
         <option value="" selected>-</option>
         {foreach from=$crew item=line}
             <option value="{$line.crew_id}">{$line.crew_name}</option>
@@ -10,7 +10,7 @@
 
 {* Individual browse for the individual pick list *}
 {if isset($smarty_action) and $smarty_action == "ind_list"}
-    <select name="ind_id" id="quick_search_pub_select">
+    <select name="ind_id" class="standard_select select_large">
         <option value="" selected>-</option>
         {foreach from=$ind item=line}
             <option value="{$line.ind_id}">{$line.ind_name}</option>

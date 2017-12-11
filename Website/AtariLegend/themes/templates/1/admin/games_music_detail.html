@@ -21,7 +21,7 @@
 {extends file='1/admin/frontpage.html'}
 
 {block name=java_script}
-<script type="text/javascript">
+<script>
 $(function() {
     $but = $('#file_upload_game_screenshots');
 
@@ -79,7 +79,7 @@ function delete_music(game_id)
                         <br>
                         <br>
                     {/if}
-                    <select name="individuals" class="continentSelects" id="quick_search_small_select">
+                    <select name="individuals" class="continentSelects standard_select select_small">
                         <option value="-" selected>-</option>
                         {if isset($ind)}
                             {foreach from=$ind item=line}

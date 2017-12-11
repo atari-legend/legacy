@@ -22,14 +22,14 @@ On this page we link authors to a menu disk title
         <fieldset>
             <legend>Authors</legend>
             <form action="" method="post" id="authors_form">
-                <select id="quick_search_small_select" name="m1" onchange="browseInd(this.value)">
+                <select class="standard_select select_small" name="m1" onchange="browseInd(this.value)">
                     <option value="" SELECTED>-</option>
                     {html_options values=$az_value output=$az_output}
                 </select>
                 <input type="text" onkeyup="searchInd(this.value)" class="standard_tile_input_small">
                 <br><br>
                 <div id="ind_member">
-                    <select name="ind_id" id="quick_search_pub_select">
+                    <select name="ind_id" class="standard_select select_large">
                         <option value="" SELECTED>-</option>
                         {foreach from=$ind_name item=line}
                             <option value="{$line.ind_id}">{$line.ind_name}</option>
@@ -37,7 +37,7 @@ On this page we link authors to a menu disk title
                     </select>
                 </div>
                 <br>
-                <select id="author_type_id" name="author_type_id" size="1" style="margin:5px;margin-top:0px;width:200px;">
+                <select id="author_type_id" class="standard_select select_medium" name="author_type_id" size="1" style="margin:5px;margin-top:0px;width:200px;">
                 <option value="">-</option>
                     {foreach from=$author_type item=line}
                         <option value="{$line.author_type_id}">{$line.author_type_info}</option>

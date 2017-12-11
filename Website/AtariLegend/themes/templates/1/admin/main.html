@@ -40,7 +40,7 @@
         <link rel="apple-touch-icon" sizes="144x144" href="{$template_dir}includes/icons/icon-144x144.png">
         <!-- end - get the icons used for mobile devices -->
 
-        <script type="text/javascript" src="{$template_dir}includes/js/vendor/jquery-2.1.4.min.js"></script> <!-- main jquery stuff -->
+        <script src="{$template_dir}includes/js/vendor/jquery-2.1.4.min.js"></script> <!-- main jquery stuff -->
 
         {* Insert Google Analytics tags only on production *}
         {if $smarty.server.HTTP_HOST == $smarty.const.SITEHOST}
@@ -390,13 +390,13 @@
             </span>
         </div>
 
-        <script type='text/javascript' src="{$template_dir}includes/js/vendor/md5-1.0.1.min.js"></script>  <!-- log on security script -->
-        <script type='text/javascript' src="{$template_dir}includes/js/vendor/sha512-2.2.min.js"></script> <!-- log on security script -->
-        <script type="text/javascript" src="{$template_dir}includes/js/vendor/jquery-ui-1.11.4.min.js"></script> <!-- main jqueryUI stuff -->
-        <script type="text/javascript" src="{$template_dir}includes/js/vendor/notify-osd-51f8de7.min.js"></script>
+        <script src="{$template_dir}includes/js/vendor/md5-1.0.1.min.js"></script>  <!-- log on security script -->
+        <script src="{$template_dir}includes/js/vendor/sha512-2.2.min.js"></script> <!-- log on security script -->
+        <script src="{$template_dir}includes/js/vendor/jquery-ui-1.11.4.min.js"></script> <!-- main jqueryUI stuff -->
+        <script src="{$template_dir}includes/js/vendor/notify-osd-51f8de7.min.js"></script>
 
         {if isset($edit_message)}
-            <script type="text/javascript"> <!-- script needed for the side menu -->
+            <script> <!-- script needed for the side menu -->
                 $( document ).ready(function() {
                     $.notify_osd.create({
                         'text'        : '{$edit_message}',             // notification message
@@ -409,7 +409,7 @@
             </script>
         {/if}
 
-        <script type='text/javascript' src="{$template_dir}includes/js/forms.js"></script> <!-- log on security script -->
-        <script type='text/javascript' src="{$template_dir}includes/js/main.js"></script>
+        <script src="{$template_dir}includes/js/forms.js"></script> <!-- log on security script -->
+        <script src="{$template_dir}includes/js/main.js"></script>
     </body>
 </html>

@@ -23,7 +23,7 @@
 {block name=title}Add a News Item{/block}
 
 {block name=java_script}
-<script type="text/javascript">
+<script>
 var clientPC = navigator.userAgent.toLowerCase(); // Get client info
 var clientVer = parseInt(navigator.appVersion); // Get browser version
 
@@ -189,7 +189,7 @@ function storeCaret(textEl) {
                     <div class="links_mod_row">
                         <div class="links_mod_text">News Icon</div>
                         <div class="links_mod_input">
-                            <select name="icon" id="quick_search_pub_select">
+                            <select name="icon" class="standard_select select_large">
                                 <option value="-">-</option>
                                 {foreach from=$news_images item=line}
                                     <option value="{$line.image_id}">{$line.image_name}</option>

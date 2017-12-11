@@ -19,7 +19,7 @@ The crew genealogy page
 {extends file='1/admin/frontpage.html'}
 
 {block name=java_script}
-<script type="text/javascript">
+<script>
 function crewinsert()
 {
     JSnewcrew=document.forms["insertcrew"].newcrew.value;
@@ -209,7 +209,7 @@ function ChangeNick(individual_nicks_id,crew_individual_id,crew_select)
         <br>
         Search for crew:<br>
         <form action="../crew/crew_editor.php" method="get" name="post_menu_crew_set" id="menu_crew_set">
-            <select name="crewbrowse" size="1" id="quick_search_small_select" onchange="browseCrew(this.value)">
+            <select name="crewbrowse" size="1" class="standard_select select_small" onchange="browseCrew(this.value)">
                 <option value="" SELECTED>-</option>
                 {html_options values=$az_value output=$az_output}
             </select>
@@ -218,7 +218,7 @@ function ChangeNick(individual_nicks_id,crew_individual_id,crew_select)
             <br>
             {* Ajax *}
             <div id="crew_list">
-                <select name="crew_select" id="quick_search_pub_select">
+                <select name="crew_select" class="standard_select select_large">
                     <option value="" SELECTED>-</option>
                     {foreach from=$crew item=line}
                         {html_options values=$line.crew_id output=$line.crew_name}
@@ -273,14 +273,14 @@ function ChangeNick(individual_nicks_id,crew_individual_id,crew_select)
                 <fieldset>
                     <legend>Subcrew</legend>
                     <form action="../crew/db_crew.php" method="post" name="crew_gene2" id="crew_gene2">
-                        <select id="quick_search_small_select" onchange="browseSubCrew(this.value)">
+                        <select class="standard_select select_small" onchange="browseSubCrew(this.value)">
                             <option value="" SELECTED>-</option>
                             {html_options values=$az_value output=$az_output}
                         </select>
                         <input type="text" name="crewsearch" value="" onkeyup="searchSubCrew(this.value)" class="standard_tile_input_small">
                         <br><br>
                         <div id="sub_crew">
-                            <select name="sub_crew[]" id="quick_search_pub_select">
+                            <select name="sub_crew[]" class="standard_select select_large">
                                 <option value="" SELECTED>-</option>
                                 {foreach from=$crew_gene item=line}
                                     {if $line.crew_id <> $crew_select.crew_id}
@@ -303,14 +303,14 @@ function ChangeNick(individual_nicks_id,crew_individual_id,crew_select)
                 <fieldset>
                     <legend>Members</legend>
                     <form action="../crew/db_crew.php" method="post">
-                        <select id="quick_search_small_select" name="m1" onchange="browseInd(this.value)">
+                        <select class="standard_select select_small" name="m1" onchange="browseInd(this.value)">
                             <option value="" SELECTED>-</option>
                             {html_options values=$az_value output=$az_output}
                         </select>
                         <input type="text" onkeyup="searchInd(this.value)" class="standard_tile_input_small">
                         <br><br>
                         <div id="ind_member">
-                            <select name="ind_id" id="quick_search_pub_select">
+                            <select name="ind_id" class="standard_select select_large">
                                 <option value="" SELECTED>-</option>
                                 {foreach from=$ind_gene item=line}
                                     <option value="{$line.ind_id}">{$line.ind_name}</option>

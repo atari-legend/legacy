@@ -20,7 +20,7 @@ The main game page
 
 {block name=main_body}
     {literal}
-    <script type="text/javascript"> <!-- script needed for the autocompletion search engine -->
+    <script> <!-- script needed for the autocompletion search engine -->
         $(document).ready(function() {
             $(".autocompleted").each(function() {
                 var extraParam = $(this).attr("data-autocomplete-param");
@@ -32,7 +32,7 @@ The main game page
         });
     </script>
     {/literal}
-    <script type="text/javascript">
+    <script>
     function dropdown_pub() {
         var publisher_input = document.getElementById("games_main_pub_input");
         publisher_input.style.display='none';

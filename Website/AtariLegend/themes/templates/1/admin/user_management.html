@@ -17,7 +17,7 @@
 
 
 {block name=java_script}
-<script type="text/javascript">
+<script>
 //$(document).ready(function() {
 
 //function UserSearch() {
@@ -399,7 +399,7 @@ function EmailSent(){
                         <tr>
                             <td class="standard_table_left" colspan="5">
                                 <img width="38" height="22" style="float:left;" alt="" src="../../../themes/templates/1/includes/img/arrow_ltr.gif">
-                                <select name="action" id="user_list_action">
+                                <select name="action" id="user_list_action" class="standard_select select_large">
                                     <option value="-" selected>Select Action</option>
                                     {if isset($mail_link)}
                                         <option value="email_user">Send Email</option>
