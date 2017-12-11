@@ -31,7 +31,7 @@ The main game page
         <fieldset class="centered_fieldset">
         <legend class="links_legend">Games Similar to {$game_info.game_name}</legend>
             <b>Similar game :</b>
-            <select name="game_similar" id="quick_search_pub_select">
+            <select name="game_similar" class="standard_select select_large">
                 <option value="-" selected>-</option>
                 {foreach from=$similar_games item=line}
                     <option value="{$line.game_id}">{$line.game_name}</option>

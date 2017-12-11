@@ -18,7 +18,7 @@
             <form action="" method="post" name="link_game_to_set" id="link_game_to_set">
                 <fieldset>
                 <legend>Select chain {if isset($title_name)}for {$title_name}{/if}</legend>
-                    <select name="chainbrowse" id="quick_search_pub_select">
+                    <select name="chainbrowse" class="standard_select select_large">
                         <option value="" selected>-</option>
                         {foreach from=$chain_data item=line}
                             {html_options values=$line.menu_disk_title_set_nr output=$line.menu_disk_name selected=$select_chain_data}

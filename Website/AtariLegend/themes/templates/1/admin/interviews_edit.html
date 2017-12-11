@@ -27,7 +27,7 @@
 
 {block name=java_script}
 <!-- Lightbox for the screenshots -->
-<script type="text/javascript" src="{$template_dir}includes/js/vendor/lightbox-2.9.0.min.js"></script><!--lightbox popup script-->
+<script src="{$template_dir}includes/js/vendor/lightbox-2.9.0.min.js"></script><!--lightbox popup script-->
 <link type="text/css" href="{$style_dir}css/vendor/lightbox-2.9.0.css" hreflang="en" rel="stylesheet">
 <script>
     lightbox.option({
@@ -36,10 +36,10 @@
 </script>
 
 <!-- Load the BBCODE script -->
-<script type="text/javascript" src="{$template_dir}includes/js/bbcode.js"></script>
+<script src="{$template_dir}includes/js/bbcode.js"></script>
 
 <!-- All the code for the tabs and the preview -->
-<script type="text/javascript">
+<script>
     function openTab(evt, tabName)
     {
         // Declare all variables
@@ -125,8 +125,8 @@
 
 
 <!-- The autocomplete and dropdown switcher -->
-<script type='text/JavaScript' src="{$template_dir}includes/js/ui.widgets.js"></script>
-<script type="text/javascript">
+<script src="{$template_dir}includes/js/ui.widgets.js"></script>
+<script>
     $(document).ready(function() {
         $("select[name=members]").altAutocomplete();
         $("select[name=individual]").altAutocomplete();
@@ -134,7 +134,7 @@
 </script>
 
 <!-- Delete the comments and the interview -->
-<script type="text/javascript">
+<script>
 function deletecomment(screenshot_id, interview_id)
 {
     // CONFIRM REQUIRES ONE ARGUMENT
@@ -309,7 +309,7 @@ function myFunction() {
                             <select name="members"
                                 data-alt-autocomplete-endpoint="../../../php/admin/common/autocomplete.php?extraParams=admin-user"
                                 data-alt-autocomplete-toggle="#members_select_toggle"
-                                id="member_select">
+                                id="member_select" class="standard_select select_large">
                                 <option value="-">-</option>
                                 {foreach from=$authors item=line}
                                     {if $line.user_id == $interview.interview_author}
@@ -329,7 +329,7 @@ function myFunction() {
                             <select name="individual"
                                 data-alt-autocomplete-endpoint="../../../php/admin/common/autocomplete.php?extraParams=individual"
                                 data-alt-autocomplete-toggle="#individual_select_toggle"
-                                id="member_select">>
+                                id="member_select" class="standard_select select_large">
                                 <option value="-">-</option>
                                 {foreach from=$individuals item=line}
                                     {if $line.ind_id == $interview.interview_ind_id}

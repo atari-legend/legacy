@@ -19,17 +19,6 @@
     border: 1px solid #008b8b;
 }
 
-.links_addnew_row select {
-    width: 185px;
-    height: 25px;
-    padding: 0;
-    padding-left: 5px;
-    margin-top: 5px;
-    margin-top: 0;
-    background-color: #000;
-    color: #fff;
-    border: 1px solid #008b8b;
-}
 
 .links_addnew_text {
     display: table-cell;
@@ -114,4 +103,4 @@
 }
 
 #website_name, #website_url{width: 50%;}
-#website_category_select { @extend #medium_select;width: 51.3%; }
+#website_category_select { @extend .select_large;width: 51.3%; }

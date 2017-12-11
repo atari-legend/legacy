@@ -36,7 +36,7 @@ The main format page
                 <fieldset>
                     <legend>Edit a download option</legend>
                     <form action="../downloads/download_options_edit.php" method="post" name="ind_edit" id="ind_edit">
-                        <select name="option_id" id="quick_search_pub_select">
+                        <select name="option_id" class="standard_select select_large">
                             <option value="-">-</option>
                             {foreach from=$download_options item=line}
                                 <option value="{$line.download_options_id}">{$line.download_option}</option>

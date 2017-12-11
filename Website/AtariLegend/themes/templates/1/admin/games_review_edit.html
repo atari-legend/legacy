@@ -27,7 +27,7 @@
 {extends file='1/admin/frontpage.html'}
 
 {block name=java_script}
-<script type="text/javascript">
+<script>
 
 function deletereview(reviewid, gameid)
 {
@@ -256,7 +256,7 @@ function storeCaret(textEl) {
                 <br>
                 <div style="display:inline-block;">
                     <b>Written by : </b><br>
-                    <select name="members" id="quick_search_pub_select">
+                    <select name="members" class="standard_select select_large">
                         <option value="-">-</option>
                         {foreach from=$authors item=line}
                             {if $edit_review.member_id == $line.user_id}

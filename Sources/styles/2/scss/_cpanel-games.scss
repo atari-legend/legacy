@@ -51,26 +51,6 @@
     width: 100%;
 }
 
-#games_main_pub_select {
-    width: 185px;
-    height: 25px;
-    margin-top: 0;
-    background: #666;
-}
-
-#games_main_dev_select {
-    width: 185px;
-    height: 25px;
-    margin-top: 0;
-    background: #666;
-}
-
-#games_main_small_select {
-    width: 50px;
-    height: 25px;
-    background: #666;
-}
-
 //*----------------------------------------------------------
 //Games list
 //------------------------------------------------------------ */
@@ -194,33 +174,7 @@
     width: 100%;
 }
 
-#gd_dev_small_select {
-    width: 50px;
-    height: 27px;
-    background: #666;
-}
-
-#gd_pub_small_select {
-    width: 50px;
-    height: 27px;
-    background: #666;
-}
-
 #gd_text_area_big { height: 250px; }
-#game_extra_info_pub,
-#continent_pub,
-#company_id_pub,
-#game_extra_info_dev,
-#continent_dev,
-#company_id_dev,
-#game_extra_info_year,
-#author_type_id,
-#ind_id {
-    width: 140px;
-    height: 25px;
-    margin-top: 0;
-    background: #666;
-}
 
 #file_upload_game_screenshots{width: 60%;}
 #file_upload_game_file{width: 60%;}
@@ -287,13 +241,6 @@
 #gu_child_2 {
     width: 50%;
     margin-left: 2%;
-}
-
-#gu_select {
-    width: 194px;
-    height: 25px;
-    margin-top: 0;
-    background: #666;
 }
 
 //*----------------------------------------------------------
@@ -423,6 +370,6 @@
 //*----------------------------------------------------------
 //Games screenshots upload
 //------------------------------------------------------------ */
-.game_screenshot_img{ 
+.game_screenshot_img{
     @extend #user_details_img_dark;
 }

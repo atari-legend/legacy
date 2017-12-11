@@ -79,7 +79,7 @@ if (isset($action) and $action == "crew_gen_browse") {
         ORDER BY crew_name ASC") or die("Couldn't query Crew database");
     }
 
-    echo '<select name="sub_crew[]" id="quick_search_pub_select">';
+    echo '<select name="sub_crew[]" class="standard_select select_large">';
     echo '<option value="" SELECTED>-</option>';
 
     while ($crew = $sql_crew->fetch_array(MYSQLI_BOTH)) {
@@ -106,7 +106,7 @@ if (isset($action) and $action == "ind_gen_browse") {
         $mysqli->query("DROP TABLE temp");
     }
 
-    echo '<SELECT name="ind_id" id="quick_search_pub_select">';
+    echo '<SELECT name="ind_id" class="standard_select select_large">';
     echo '<option value="" SELECTED>-</option>';
 
     while ($genealogy_ind = $query_temporary->fetch_array(MYSQLI_BOTH)) {
@@ -142,7 +142,7 @@ if (isset($action) and $action == "ind_gen_search") {
         $mysqli->query("DROP TABLE temp");
     }
 
-    echo '<SELECT name="ind_id" id="quick_search_pub_select">';
+    echo '<SELECT name="ind_id" class="standard_select select_large">';
     echo '<option value="" SELECTED>-</option>';
     while ($genealogy_ind = $query_temporary->fetch_array(MYSQLI_BOTH)) {
         $ind_id   = $genealogy_ind['ind_id'];

@@ -88,19 +88,12 @@
     border-bottom: 3px solid #006f6f;
 }
 
-#quick_search_pub_select {
-    width: 185px;
-    height: 25px;
+.standard_select {
     margin-top: 0;
-}
-
-#quick_search_dev_select {
-    width: 185px;
     height: 25px;
-    margin-top: 0;
-}
-
-#quick_search_small_select, #quick_search_user_small_select {
-    width: 50px;
-    height: 25px;
+    padding: 0;
+    padding-left: 5px;
+    background-color: #000;
+    color: #fff;
+    border: 1px solid #008b8b;
 }

@@ -7,7 +7,7 @@
 //*----------------------------------------------------------
 //load the main font
 //------------------------------------------------------------ */
-@font-face { 
+@font-face {
     /* Define skin specific font for headlines */
     font-family: 'Audiowide';
     font-style: normal;
@@ -325,8 +325,7 @@ img { display: block; }
 
 .standard_tile_text { padding: 20px; }
 .standard_tile select {
-    width: 78%;
-    height: 20px;
+    height: 25px;
     padding: 0;
     padding-left: 5px;
     margin-top: 5px;
@@ -335,20 +334,22 @@ img { display: block; }
     border: 1px solid #008b8b;
 }
 
-#small_select {
+.select_small {
     width: 50px;
-    height: 25px;
-}
-
-#medium_select {
-    width: 185px;
-    height: 25px;
     margin-top: 0;
 }
 
-#medium_select2 {
+.select_medium {
     width: 140px;
-    height: 25px;
+    margin-top: 0;
+}
+.select_large {
+    width: 185px;
+    margin-top: 0;
+}
+
+.select_full {
+    width: 100%;
     margin-top: 0;
 }
 
@@ -378,14 +379,14 @@ img { display: block; }
     border: 0;
     border-bottom: 3px solid #122323;
     border-left: 1px solid #122323;
-    padding: 3px 10px; 
+    padding: 3px 10px;
 }
 
 .file_upload:hover {
     color: #fff;
     background: #006f6f;
     border-bottom: 3px solid #122323;
-} 
+}
 
 #file_upload_medium{@extend #file_upload;}
 
@@ -623,7 +624,7 @@ legend {
     box-shadow: 1px 1px 1px rgba(0, 0, 0, .2);
 }
 
-#help-tip2 p { 
+#help-tip2 p {
     right: 200px;
     width: 200px;
     }
@@ -710,7 +711,7 @@ div.tab button.active {
 /* Style the tab content */
 .tabcontent {
     display: none;
-} 
+}
 
 /*fade in effect on tab */
 .tabcontent {
@@ -726,7 +727,7 @@ div.tab button.active {
 @keyframes fadeEffect {
     from {opacity: 0;}
     to {opacity: 1;}
-} 
+}
 
 
 //*------------------------------------------------------------
@@ -768,4 +769,3 @@ div.tab button.active {
 .scroll-top-wrapper i.fa {
 	line-height: inherit;
 }
-

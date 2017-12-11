@@ -17,7 +17,7 @@ The tpl upload page
 *}
 {extends file='1/admin/frontpage.html'}
 {block name=java_script}
-<script type="text/javascript">
+<script>
 function delete_download(id, demo_id)
 {
         // CONFIRM REQUIRES ONE ARGUMENT
@@ -79,52 +79,60 @@ function delete_download(id, demo_id)
         </div>
         <div style="display:table;width:100%;padding:2px;">
                 <div style="display:table-cell;width:150px;"><b>Language :</b></div>
-                <div style="display:table-cell;width:270px;"><select name="language" size="1">
-                    <option value="Ar" {if $line.language=='Ar'} selected {/if}>Arabic</option>
-                    <option value="En" {if $line.language=='En'} selected {/if}>English</option>
-                    <option value="Es" {if $line.language=='Es'} selected {/if}>Spanish</option>
-                    <option value="Fr" {if $line.language=='Fr'} selected {/if}>French</option>
-                    <option value="Sv" {if $line.language=='Sv'} selected {/if}>Swedish</option>
-                    <option value="It" {if $line.language=='It'} selected {/if}>Italian</option>
-                    <option value="De" {if $line.language=='De'} selected {/if}>German</option>
-                    <option value="Fi" {if $line.language=='Fi'} selected {/if}>Finish</option>
-                    <option value="Mu" {if $line.language=='Mu'} selected {/if}>Mulilanguage</option>
-                </select></div>
+                <div style="display:table-cell;width:270px;">
+                    <select name="language" size="1" class="standard_select select_small">
+                        <option value="Ar" {if $line.language=='Ar'} selected {/if}>Arabic</option>
+                        <option value="En" {if $line.language=='En'} selected {/if}>English</option>
+                        <option value="Es" {if $line.language=='Es'} selected {/if}>Spanish</option>
+                        <option value="Fr" {if $line.language=='Fr'} selected {/if}>French</option>
+                        <option value="Sv" {if $line.language=='Sv'} selected {/if}>Swedish</option>
+                        <option value="It" {if $line.language=='It'} selected {/if}>Italian</option>
+                        <option value="De" {if $line.language=='De'} selected {/if}>German</option>
+                        <option value="Fi" {if $line.language=='Fi'} selected {/if}>Finish</option>
+                        <option value="Mu" {if $line.language=='Mu'} selected {/if}>Mulilanguage</option>
+                    </select>
+                </div>
                 <div style="display:table-cell;width:150px;"><b>Trainer :</b></div>
-                <div style="display:table-cell;width:170px;"><select name="trainer" size="1">
-                    <option value=""  {if $line.trainer !=='M' and $line.trainer !=='T'} selected {/if}>No Trainer</option>
-                    <option value="T" {if $line.trainer =='T'} selected {/if}>Trainer</option>
-                    <option value="M" {if $line.trainer =='M'} selected {/if}>Mega Trainer</option>
-                </select></div>
+                <div style="display:table-cell;width:170px;">
+                    <select name="trainer" size="1" class="standard_select select_medium">
+                        <option value=""  {if $line.trainer !=='M' and $line.trainer !=='T'} selected {/if}>No Trainer</option>
+                        <option value="T" {if $line.trainer =='T'} selected {/if}>Trainer</option>
+                        <option value="M" {if $line.trainer =='M'} selected {/if}>Mega Trainer</option>
+                    </select>
+                </div>
         </div>
         <div style="display:table;width:100%;padding:2px;">
                 <div style="display:table-cell;width:150px;"><b>Disk :</b></div>
-                <div style="display:table-cell;width:270px;"><select name="disks" size="1">
-                    <option value="0"  {if $line.disks == '' or $line.disks == '0'}  selected  {/if}>Single disk game</option>
-                    <option value="1"  {if $line.disks == '1'} selected {/if}>1</option>
-                    <option value="2"  {if $line.disks == '2'} selected {/if}>2</option>
-                    <option value="3"  {if $line.disks == '3'} selected {/if}>3</option>
-                    <option value="4"  {if $line.disks == '4'} selected {/if}>4</option>
-                    <option value="5"  {if $line.disks == '5'} selected {/if}>5</option>
-                    <option value="6"  {if $line.disks == '6'} selected {/if}>6</option>
-                    <option value="7"  {if $line.disks == '7'} selected {/if}>7</option>
-                    <option value="8"  {if $line.disks == '8'} selected {/if}>8</option>
-                    <option value="9"  {if $line.disks == '9'} selected {/if}>9</option>
-                    <option value="10" {if $line.disks == '10'} selected {/if}>10</option>
-                </select></div>
+                <div style="display:table-cell;width:270px;">
+                    <select name="disks" size="1" class="standard_select select_small">
+                        <option value="0"  {if $line.disks == '' or $line.disks == '0'}  selected  {/if}>Single disk game</option>
+                        <option value="1"  {if $line.disks == '1'} selected {/if}>1</option>
+                        <option value="2"  {if $line.disks == '2'} selected {/if}>2</option>
+                        <option value="3"  {if $line.disks == '3'} selected {/if}>3</option>
+                        <option value="4"  {if $line.disks == '4'} selected {/if}>4</option>
+                        <option value="5"  {if $line.disks == '5'} selected {/if}>5</option>
+                        <option value="6"  {if $line.disks == '6'} selected {/if}>6</option>
+                        <option value="7"  {if $line.disks == '7'} selected {/if}>7</option>
+                        <option value="8"  {if $line.disks == '8'} selected {/if}>8</option>
+                        <option value="9"  {if $line.disks == '9'} selected {/if}>9</option>
+                        <option value="10" {if $line.disks == '10'} selected {/if}>10</option>
+                    </select>
+                </div>
                 <div style="display:table-cell;width:150px;"><b>SET NR :</b></div>
-                <div style="display:table-cell;width:170px;"><select name="set_nr" size="1">
-                    <option value="1"  {if $line.set_nr == '1'}  selected  {/if}>1</option>
-                    <option value="2"  {if $line.set_nr == '2'}  selected  {/if}>2</option>
-                    <option value="3"  {if $line.set_nr == '3'}  selected  {/if}>3</option>
-                    <option value="4"  {if $line.set_nr == '4'}  selected  {/if}>4</option>
-                    <option value="5"  {if $line.set_nr == '5'}  selected  {/if}>5</option>
-                    <option value="6"  {if $line.set_nr == '6'}  selected  {/if}>6</option>
-                    <option value="7"  {if $line.set_nr == '7'}  selected  {/if}>7</option>
-                    <option value="8"  {if $line.set_nr == '8'}  selected  {/if}>8</option>
-                    <option value="9"  {if $line.set_nr == '9'}  selected  {/if}>9</option>
-                    <option value="10" {if $line.set_nr == '10'}  selected  {/if}>10</option>
-                </select></div>
+                <div style="display:table-cell;width:170px;">
+                    <select name="set_nr" size="1" class="standard_select select_small">
+                        <option value="1"  {if $line.set_nr == '1'}  selected  {/if}>1</option>
+                        <option value="2"  {if $line.set_nr == '2'}  selected  {/if}>2</option>
+                        <option value="3"  {if $line.set_nr == '3'}  selected  {/if}>3</option>
+                        <option value="4"  {if $line.set_nr == '4'}  selected  {/if}>4</option>
+                        <option value="5"  {if $line.set_nr == '5'}  selected  {/if}>5</option>
+                        <option value="6"  {if $line.set_nr == '6'}  selected  {/if}>6</option>
+                        <option value="7"  {if $line.set_nr == '7'}  selected  {/if}>7</option>
+                        <option value="8"  {if $line.set_nr == '8'}  selected  {/if}>8</option>
+                        <option value="9"  {if $line.set_nr == '9'}  selected  {/if}>9</option>
+                        <option value="10" {if $line.set_nr == '10'}  selected  {/if}>10</option>
+                    </select>
+                </div>
         </div>
         <div style="display:table;width:100%;padding:2px;">
                 <div style="display:table-cell;width:150px;"><b>Demo version :</b></div>

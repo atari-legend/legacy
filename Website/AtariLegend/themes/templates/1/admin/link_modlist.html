@@ -29,7 +29,7 @@
                     Pick category
                 </div>
                 <div class="links_list_select">
-                    <select name="catpick" id="medium_select">
+                    <select name="catpick" class="standard_select select_large">
                         {foreach from=$category item=line}
                             <option value="{$line.category_id}" {$line.selected}>{$line.category_name}</option>
                         {/foreach}

@@ -4,7 +4,7 @@
 //*********************************************************************/
 //**** This is the css code for general skin specific css settings ****/
 //*********************************************************************/
-//*---------------------load the main font-------------------------- */ 
+//*---------------------load the main font-------------------------- */
 
 @font-face {
     font-family: 'robot';
@@ -320,7 +320,7 @@ img {display: block; }
 .standard_tile_text { padding: 20px; }
 .standard_tile select {
     width: 78%;
-    height: 20px;
+    height: 25px;
     padding: 0;
     padding-left: 5px;
     margin-top: 5px;
@@ -329,26 +329,31 @@ img {display: block; }
     border: 1px solid #b2b2b2;
 }
 
-#small_select {
+.select_small {
     width: 50px;
     height: 26px;
     margin-top: 0;
     background: #666;
 }
 
-#medium_select {
+.select_medium {
+    width: 140px;
+    margin-top: 0;
+    background: #666;
+}
+
+.select_large {
     width: 185px;
     height: 28px;
     margin-top: 0;
     background: #666;
 }
 
-#medium_select2 {
-    width: 140px;
-    height: 25px;
+.select_full {
+    width: 100%;
     margin-top: 0;
-    background: #666;
 }
+
 
 .centered_fieldset {
     margin: auto;
@@ -374,7 +379,7 @@ img {display: block; }
     background: #dbd7d1;
     border: 1px solid #000;
     border-radius: 0 15px 15px 0;
-    padding: 4px 10px; 
+    padding: 4px 10px;
 }
 
 .file_upload:hover {
@@ -620,7 +625,7 @@ legend {
     box-shadow: 1px 1px 1px rgba(0, 0, 0, .2);
 }
 
-#help-tip2 p { 
+#help-tip2 p {
     right: 200px;
     width: 200px;
 }
@@ -705,7 +710,7 @@ div.tab button.active {
     padding: 6px 12px;
     border: 1px solid #ccc;
     border-top: none;
-}  
+}
 
 /*fade in effect on tab */
 .tabcontent {
@@ -721,7 +726,7 @@ div.tab button.active {
 @keyframes fadeEffect {
     from {opacity: 0;}
     to {opacity: 1;}
-} 
+}
 
 //*------------------------------------------------------------
 //The 'to the top' button
