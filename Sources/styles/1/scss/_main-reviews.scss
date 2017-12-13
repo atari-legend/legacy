@@ -5,6 +5,12 @@
 //***This is the css code for the reviews pages of the main site*****/
 //*******************************************************************/
 
-#column_right_reviews_details{@extend #column_right_games_details;}
-#column_left_reviews_details{@extend #column_left_games_details;}
-#column_center_reviews_details{@extend #column_center_games_details;}
+#column_right_reviews_details {
+    @extend #column_right_games_details;
+}
+#column_left_reviews_details {
+    @extend #column_left_games_details;
+}
+#column_center_reviews_details {
+    @extend #column_center_games_details;
+}

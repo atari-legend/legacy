@@ -25,14 +25,22 @@
     margin-left: auto;
 }
 
-.main_stats_child  table { width: 98%; }
-#user_stats table { width: 100%; }
-#welcome_cpanel table { width: 100%; }
+.main_stats_child  table {
+    width: 98%;
+}
+#user_stats table {
+    width: 100%;
+}
+#welcome_cpanel table {
+    width: 100%;
+}
 
 //*----------------------------------------------------------
 //Left nav
 //------------------------------------------------------------ */
-#leftnav_position_front { float: left; }
+#leftnav_position_front {
+    float: left;
+}
 .left_nav_section {
     padding-top: 3px;
     padding-bottom: 3px;
@@ -47,20 +55,29 @@
     border-bottom: solid 2px #b2b2b2;
 }
 
-.left_nav_link:link { color: #182727; }
-.left_nav_link:visited { color: #182727; }
-.left_nav_link:hover { color: #666; }
+.left_nav_link:link {
+    color: #182727;
+}
+.left_nav_link:visited {
+    color: #182727;
+}
+.left_nav_link:hover {
+    color: #666666;
+}
 //*----------------------------------------------------------
 //Quick search games
 //------------------------------------------------------------ */
-.quick_search_check { margin-right: 5px; }
+.quick_search_check {
+    margin-right: 5px;
+}
 #quick_search_games_main {
     float: left;
     margin-top: 20px;
     margin-bottom: 0;
 }
 
-#quick_search_options, #quick_search_user_options {
+#quick_search_options,
+#quick_search_user_options {
     display: table;
     width: 75%;
     margin-right: auto;
@@ -74,16 +91,16 @@
     padding-top: 3px;
     font-size: 13px;
     color: #182727;
-    text-shadow: -1px 1px 5px #fff, 1px -1px 15px #acacac;
+    text-shadow: -1px 1px 5px #ffffff, 1px -1px 15px #acacac;
     cursor: pointer;
-    background: #fff;
+    background: #ffffff;
     border: 0;
-    border-bottom: 3px solid #000;
+    border-bottom: 3px solid #000000;
 }
 
 .quick_search_games_button:hover {
-    color: #fff;
-    background: #000;
+    color: #ffffff;
+    background: #000000;
 }
 
 .standard_select {
@@ -91,7 +108,7 @@
     height: 25px;
     padding: 0;
     padding-left: 5px;
-    background-color: #666;
-    color: #fff;
+    background-color: #666666;
+    color: #ffffff;
     border: 1px solid #b2b2b2;
 }

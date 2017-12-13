@@ -3,88 +3,88 @@
 //**************************************************************************/
 
 .grid {
-	position: relative;
-	margin: 0 auto;
+    position: relative;
+    margin: 0 auto;
 }
 
 /* Common style */
 .grid figure {
-	position: relative;
-	overflow: hidden;
-	width: 100%;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
     max-width: 99.5%;
-	background: #3085a3;
+    background: #3085a3;
     @if $skin-name == legacy {
         border: 1px solid #008b8b;
     } @else if $skin-name == tos {
-        border: 1px solid white;
+        border: 1px solid #ffffff;
     } @else if $skin-name == picasso {
         border: 1px solid #484c7b;
     }
 }
 
 .grid figure img {
-	position: relative;
-	opacity: 0.9;
+    position: relative;
+    opacity: .9;
 }
 
 .grid figure figcaption {
-	padding: 2em;
-	color: #fff;
-	text-transform: uppercase;
-	font-size: 1.25em;
-	-webkit-backface-visibility: hidden;
-	backface-visibility: hidden;
+    padding: 2em;
+    color: #ffffff;
+    text-transform: uppercase;
+    font-size: 1.25em;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
 }
 
 .grid figure figcaption::before,
 .grid figure figcaption::after {
-	pointer-events: none;
+    pointer-events: none;
 }
 
 .grid figure figcaption,
 .grid figure figcaption > a {
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
 
 /* Anchor will cover the whole item by default */
 /* For some effects it will show as a button */
 .grid figure figcaption > a {
-	z-index: 1000;
-	text-indent: 200%;
-	white-space: nowrap;
-	font-size: 0;
-	opacity: 0;
+    z-index: 1000;
+    text-indent: 200%;
+    white-space: nowrap;
+    font-size: 0;
+    opacity: 0;
 }
 
 .grid figure p {
-	letter-spacing: 1px;
-	font-size: 68.5%;
+    letter-spacing: 1px;
+    font-size: 68.5%;
 }
 
-.tile_arrow{
+.tile_arrow {
     position: absolute;
     bottom: 100%;
-    color: #fff;
+    color: #ffffff;
     left: 80%;
 }
 
-.tile_title{
+.tile_title {
     bottom: 50%;
     position: absolute;
-    left:5%;
+    left: 5%;
 }
 
-.tile_title a{
-    color: white;
+.tile_title a {
+    color: #ffffff;
 }
 
-.tile_title a:hover{
-    color: black;
+.tile_title a:hover {
+    color: #000000;
 }
 
 /*--------------------********************************/
@@ -94,103 +94,103 @@
 /*--------------------********************************/
 
 figure.effect-tile figcaption {
-	top: auto;
-	bottom: 0;
-	padding: 1em;
-	height: 1em;
+    top: auto;
+    bottom: 0;
+    padding: 1em;
+    height: 1em;
     @if $skin-name == legacy {
-        background: rgba(0, 80, 80, 0.8);
-        border-top: 1px solid white;
-        border-bottom: 1px solid white;
+        background: rgba(0, 80, 80, .8);
+        border-top: 1px solid #ffffff;
+        border-bottom: 1px solid #ffffff;
     } @else if $skin-name == tos {
-        background: rgba(172, 172, 172, 0.8);
-        border-top: 1px solid black;
-        border-bottom: 1px solid black;
+        background: rgba(172, 172, 172, .8);
+        border-top: 1px solid #000000;
+        border-bottom: 1px solid #000000;
     } @else if $skin-name == picasso {
-        background: rgba(172, 172, 172, 0.8);
+        background: rgba(172, 172, 172, .8);
         border-top: 1px solid #484c7b;
         border-bottom: 1px solid #484c7b;
     }
 
-	color: white;
-	-webkit-transition: -webkit-transform 0.35s;
-	transition: transform 0.35s;
-	-webkit-transform: translate3d(0,100%,0);
-	transform: translate3d(0,100%,0);
+    color: #ffffff;
+    -webkit-transition: -webkit-transform .35s;
+    transition: transform .35s;
+    -webkit-transform: translate3d(0,100%,0);
+    transform: translate3d(0,100%,0);
 }
 
 figure.effect-tile p.icon-links a {
     position: relative;
     bottom: -10px;
-    float:right;
-	color: white;
-    padding-left:10px;
-	font-size: 1.4em;
+    float: right;
+    color: #ffffff;
+    padding-left: 10px;
+    font-size: 1.4em;
 }
 
 figure.effect-tile:hover p.icon-links a:hover,
 figure.effect-tile:hover p.icon-links a:focus {
-	color: black;
+    color: #000000;
 }
 
 figure.effect-tile p.description {
-	position: absolute;
-	bottom: 8em;
-	padding: 2em;
-	color: #fff;
-	text-transform: none;
-	font-size: 90%;
-	opacity: 0;
-	-webkit-transition: opacity 0.35s;
-	transition: opacity 0.35s;
-	-webkit-backface-visibility: hidden; /* Fix for Chrome 37.0.2062.120 (Mac) */
+    position: absolute;
+    bottom: 8em;
+    padding: 2em;
+    color: #ffffff;
+    text-transform: none;
+    font-size: 90%;
+    opacity: 0;
+    -webkit-transition: opacity .35s;
+    transition: opacity .35s;
+    -webkit-backface-visibility: hidden; /* Fix for Chrome 37.0.2062.120 (Mac) */
 }
 
 figure.effect-tile tile_title,
 figure.effect-tile p.icon-links a {
-	-webkit-transition: -webkit-transform 0.35s;
-	transition: transform 0.35s;
-	-webkit-transform: translate3d(0,200%,0);
-	transform: translate3d(0,200%,0);
+    -webkit-transition: -webkit-transform .35s;
+    transition: transform .35s;
+    -webkit-transform: translate3d(0,200%,0);
+    transform: translate3d(0,200%,0);
 }
 
 figure.effect-tile p.icon-links a span::before {
-	display: inline-block;
-	padding: 8px 10px;
-	speak: none;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
+    display: inline-block;
+    padding: 8px 10px;
+    speak: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 figure.effect-tile:hover p.description {
-	opacity: 1;
+    opacity: 1;
 }
 
 figure.effect-tile:hover figcaption,
 figure.effect-tile:hover tile_title,
 figure.effect-tile:hover p.icon-links a {
-	-webkit-transform: translate3d(0,0,0);
-	transform: translate3d(0,0,0);
+    -webkit-transform: translate3d(0,0,0);
+    transform: translate3d(0,0,0);
 }
 
 figure.effect-tile:hover tile_title {
-	-webkit-transition-delay: 0.05s;
-	transition-delay: 0.05s;
+    -webkit-transition-delay: .05s;
+    transition-delay: .05s;
 }
 
 figure.effect-tile:hover p.icon-links a:nth-child(3) {
-	-webkit-transition-delay: 0.1s;
-	transition-delay: 0.1s;
+    -webkit-transition-delay: .1s;
+    transition-delay: .1s;
 }
 
 figure.effect-tile:hover p.icon-links a:nth-child(2) {
-	-webkit-transition-delay: 0.15s;
-	transition-delay: 0.15s;
+    -webkit-transition-delay: .15s;
+    transition-delay: .15s;
 }
 
 figure.effect-tile:hover p.icon-links a:first-child {
-	-webkit-transition-delay: 0.2s;
-	transition-delay: 0.2s;
+    -webkit-transition-delay: .2s;
+    transition-delay: .2s;
 }
 
 /*---------------------------------------************/
@@ -204,89 +204,87 @@ figure.effect-bubba {
         background: rgb(0, 80, 80);
     } @else if $skin-name == tos or $skin-name == picasso {
         background: rgb(172, 172, 172);
-	}
+    }
 }
 
 figure.effect-bubba img {
-	-webkit-transition: opacity 0.35s;
-	transition: opacity 0.35s;
+    -webkit-transition: opacity .35s;
+    transition: opacity .35s;
 }
 
 figure.effect-bubba:hover img {
-	opacity: 0.4;
+    opacity: .4;
 }
 
 figure.effect-bubba figcaption::before,
 figure.effect-bubba figcaption::after {
-	position: absolute;
-	top: 30px;
-	right: 30px;
-	bottom: 30px;
-	left: 30px;
-	content: '';
-	opacity: 0;
-	-webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
-	transition: opacity 0.35s, transform 0.35s;
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    bottom: 30px;
+    left: 30px;
+    content: '';
+    opacity: 0;
+    -webkit-transition: opacity .35s, -webkit-transform .35s;
+    transition: opacity .35s, transform .35s;
 }
 
 figure.effect-bubba figcaption::before {
-	border-top: 1px solid #fff;
-	border-bottom: 1px solid #fff;
-	-webkit-transform: scale(0,1);
-	transform: scale(0,1);
+    border-top: 1px solid #ffffff;
+    border-bottom: 1px solid #ffffff;
+    -webkit-transform: scale(0,1);
+    transform: scale(0,1);
 }
 
 figure.effect-bubba figcaption::after {
-	border-right: 1px solid #fff;
-	border-left: 1px solid #fff;
-	-webkit-transform: scale(1,0);
-	transform: scale(1,0);
+    border-right: 1px solid #ffffff;
+    border-left: 1px solid #ffffff;
+    -webkit-transform: scale(1,0);
+    transform: scale(1,0);
 }
 
 figure.effect-bubba h2 {
-    text-align:center;
-	padding: 20px 2.5em;
-	opacity: 1;
+    text-align: center;
+    padding: 20px 2.5em;
+    opacity: 1;
     @if $skin-name == legacy {
-        text-shadow:
-        -1px -1px 0 #005050,
+        text-shadow: -1px -1px 0 #005050,
         1px -1px 0 #005050,
         -1px 1px 0 #005050,
         1px 1px 0 #005050;
     } @else if $skin-name == tos or $skin-name == picasso {
-         text-shadow:
-        -1px -1px 0 #000,
-        1px -1px 0 #000,
-        -1px 1px 0 #000,
-        1px 1px 0 #000;
+        text-shadow: -1px -1px 0 #000000,
+        1px -1px 0 #000000,
+        -1px 1px 0 #000000,
+        1px 1px 0 #000000;
     }
-	-webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
-	transition: opacity 0.35s, transform 0.35s;
-	-webkit-transform: translate3d(0,20px,0);
-	transform: translate3d(0,20px,0);
+    -webkit-transition: opacity .35s, -webkit-transform .35s;
+    transition: opacity .35s, transform .35s;
+    -webkit-transform: translate3d(0,20px,0);
+    transform: translate3d(0,20px,0);
 }
 
 figure.effect-bubba p {
-	padding: 20px 2.5em;
-	opacity: 0;
-	-webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
-	transition: opacity 0.35s, transform 0.35s;
-	-webkit-transform: translate3d(0,20px,0);
-	transform: translate3d(0,20px,0);
+    padding: 20px 2.5em;
+    opacity: 0;
+    -webkit-transition: opacity .35s, -webkit-transform .35s;
+    transition: opacity .35s, transform .35s;
+    -webkit-transform: translate3d(0,20px,0);
+    transform: translate3d(0,20px,0);
 }
 
 figure.effect-bubba:hover figcaption::before,
 figure.effect-bubba:hover figcaption::after {
-	opacity: 1;
-	-webkit-transform: scale(1);
-	transform: scale(1);
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1);
 }
 
 figure.effect-bubba:hover h2,
 figure.effect-bubba:hover p {
-	opacity: 1;
-	-webkit-transform: translate3d(0,0,0);
-	transform: translate3d(0,0,0);
+    opacity: 1;
+    -webkit-transform: translate3d(0,0,0);
+    transform: translate3d(0,0,0);
 }
 
 
@@ -294,28 +292,28 @@ figure.effect-bubba:hover p {
 /***** Who's online *****/
 /*--------------------***/
 @if $skin-name == tos {
-    .online_title{
+    .online_title {
         @extend .left_nav_section;
-        font-size:0.9em;
-        text-align:center;
+        font-size: .9em;
+        text-align: center;
     }
 
-    .online_users{
-       @extend .left_nav_link;
-       font-size:0.9em;
-       text-align:center;
+    .online_users {
+        @extend .left_nav_link;
+        font-size: .9em;
+        text-align: center;
     }
 } @else {
-    .online_title{
+    .online_title {
         @extend .left_nav_section;
-        font-size:0.8em;
-        text-align:center;
+        font-size: .8em;
+        text-align: center;
     }
 
-    .online_users{
-       @extend .left_nav_link;
-       font-size:0.8em;
-       text-align:center;
+    .online_users {
+        @extend .left_nav_link;
+        font-size: .8em;
+        text-align: center;
     }
 }
 
@@ -323,42 +321,62 @@ figure.effect-bubba:hover p {
 /*****  Statistics  *****/
 /*--------------------***/
 @if $skin-name == legacy {
-    .statistics_dark { color: #ccc; }
-    .standard_table_list_stats tr:nth-child(even) { background-color: #122323; }
-    .standard_table_list_stats tr:nth-child(odd) { background-color: #0d2e2e; }
-    .stats_text{
+    .statistics_dark {
+        color: #cccccc;
+    }
+    .standard_table_list_stats tr:nth-child(even) {
+        background-color: #122323;
+    }
+    .standard_table_list_stats tr:nth-child(odd) {
+        background-color: #0d2e2e;
+    }
+    .stats_text {
         font-size: 11pt;
         font-weight: 100;
-        color: #fff;
+        color: #ffffff;
         text-align: center;
     }
 }
 @elseif $skin-name == tos {
-    .statistics_dark { color: #666; }
-    .standard_table_list_stats tr:nth-child(even) {  background: linear-gradient(to right, #fff, #acacac); }
-    .standard_table_list_stats tr:nth-child(odd) { background: linear-gradient(to right, #fff, #23f001); }
-    .stats_text{
+    .statistics_dark {
+        color: #666666;
+    }
+    .standard_table_list_stats tr:nth-child(even) {
+        background: linear-gradient(to right, #ffffff, #acacac);
+    }
+    .standard_table_list_stats tr:nth-child(odd) {
+        background: linear-gradient(to right, #ffffff, #23f001);
+    }
+    .stats_text {
         font-size: 16px;
         font-weight: 100;
         color: #3c3c3c;
     }
 }
 @elseif $skin-name == picasso {
-    .statistics_position_front {margin-bottom: 20px;}
-    .statistics_dark {color: #161c71;}
-    .standard_table_list_stats tr:nth-child(even) {  background: #a6a6a6; }
-    .standard_table_list_stats tr:nth-child(odd) { background: #6a6a6a; }
-    .stats_text{
+    .statistics_position_front {
+        margin-bottom: 20px;
+    }
+    .statistics_dark {
+        color: #161c71;
+    }
+    .standard_table_list_stats tr:nth-child(even) {
+        background: #a6a6a6;
+    }
+    .standard_table_list_stats tr:nth-child(odd) {
+        background: #6a6a6a;
+    }
+    .stats_text {
         font-size: 12pt;
         font-weight: 100;
-        color: #000;
+        color: #000000;
         text-align: center;
     }
 }
 
-.standard_table_list_stats{
+.standard_table_list_stats {
     @extend .standard_table_list;
-    border:0;
+    border: 0;
     font-size: 11pt;
 }
 
@@ -366,50 +384,79 @@ figure.effect-bubba:hover p {
 /*****  Latest comments  *****/
 /*------------------------***/
 @if $skin-name == legacy {
-    .latest_comments_text{font-size: 11pt;color: #fff; min-width:95%;}
-    .latest_comments_icons{color: #bcbdbd;}
-    .latest_comments_link{
+    .latest_comments_text {
+        font-size: 11pt;
+        color: #ffffff;
+        min-width: 95%;
+    }
+    .latest_comments_icons {
+        color: #bcbdbd;
+    }
+    .latest_comments_link {
         /*@extend .standard_tile_link;*/
-        color: #bcbdbd;}
-    .latest_comments_link:hover { color: #01b5b5; }
-}@elseif $skin-name == tos {
-    .latest_comments_text{font-size: 16px;color: #3c3c3c; min-width:95%;}
-    .latest_comments_icons{color: #3c3c3c;}
-    .latest_comments_link{
-        @extend .standard_tile_link;
-        color: #666666;}
+        color: #bcbdbd;
+    }
     .latest_comments_link:hover {
-        color: black;
-        text-shadow: -1px 1px 8px #666, 1px -1px 8px #515151;
-        outline: 0 none;}
-}@elseif $skin-name == picasso {
-    .latest_comments_text{font-size: 12pt;color: #000; min-width:95%;}
-    .latest_comments_icons{color: #161c71;}
-    .latest_comments_textarea{background:#eeeeee;color:black;}
-    .latest_comments_link{
+        color: #01b5b5;
+    }
+}@elseif $skin-name == tos {
+    .latest_comments_text {
+        font-size: 16px;
+        color: #3c3c3c;
+        min-width: 95%;
+    }
+    .latest_comments_icons {
+        color: #3c3c3c;
+    }
+    .latest_comments_link {
         @extend .standard_tile_link;
-        color: #161c71;}
-    .latest_comments_link:hover { color: black; }
+        color: #666666;
+    }
+    .latest_comments_link:hover {
+        color: #000000;
+        text-shadow: -1px 1px 8px #666666, 1px -1px 8px #515151;
+        outline: 0 none;
+    }
+}@elseif $skin-name == picasso {
+    .latest_comments_text {
+        font-size: 12pt;
+        color: #000000;
+        min-width: 95%;
+    }
+    .latest_comments_icons {
+        color: #161c71;
+    }
+    .latest_comments_textarea {
+        background: #eeeeee;
+        color: #000000;
+    }
+    .latest_comments_link {
+        @extend .standard_tile_link;
+        color: #161c71;
+    }
+    .latest_comments_link:hover {
+        color: #000000;
+    }
 }
 
-.latest_comments_textarea{
+.latest_comments_textarea {
     @extend .standard_tile_input_area;
     height: 10em;
 }
 
-.latest_comments_text{
+.latest_comments_text {
     font-weight: 100;
-    margin-left:5px;
-    margin-right:5px;
-    margin-bottom:15px;
-    margin-top:15px;
-    float:left;
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 15px;
+    margin-top: 15px;
+    float: left;
 }
 
-.standard_table_list_comments{
+.standard_table_list_comments {
     @extend .standard_table_list_stats;
 }
 
-.standard_table_list_comments td{
-    border-bottom: solid 2px #000;
+.standard_table_list_comments td {
+    border-bottom: solid 2px #000000;
 }

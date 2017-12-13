@@ -29,9 +29,15 @@
     margin-left: auto;
 }
 
-.main_stats_child  table { width: 98%; }
-#user_stats table { width: 100%; }
-#welcome_cpanel table { width: 100%; }
+.main_stats_child  table {
+    width: 98%;
+}
+#user_stats table {
+    width: 100%;
+}
+#welcome_cpanel table {
+    width: 100%;
+}
 
 //*----------------------------------------------------------
 //Left nav
@@ -41,23 +47,32 @@
     padding-bottom: 3px;
     padding-left: 3px;
     margin: 0;
-    color: #ffd;
+    color: #ffffdd;
     text-align: center;
     list-style-type: none;
     background-color: #006f6f;
     background-color: #006f6f;
     border-collapse: collapse;
-    border-bottom: solid 1px #000;
+    border-bottom: solid 1px #000000;
 }
 
-.left_nav_link:link { color: #122323; }
-.left_nav_link:visited { color: #122323; }
-.left_nav_link:hover { color: #fff; }
+.left_nav_link:link {
+    color: #122323;
+}
+.left_nav_link:visited {
+    color: #122323;
+}
+.left_nav_link:hover {
+    color: #ffffff;
+}
 //*----------------------------------------------------------
 //Quick search games
 //------------------------------------------------------------ */
-.quick_search_check { margin-right: 5px; }
-#quick_search_options, #quick_search_user_options {
+.quick_search_check {
+    margin-right: 5px;
+}
+#quick_search_options,
+#quick_search_user_options {
     display: table;
     width: 75%;
     margin-right: auto;
@@ -82,7 +97,7 @@
 }
 
 .quick_search_games_button:hover {
-    color: #fff;
+    color: #ffffff;
     color: #182727;
     background: #00a9a9;
     border-bottom: 3px solid #006f6f;
@@ -93,7 +108,7 @@
     height: 25px;
     padding: 0;
     padding-left: 5px;
-    background-color: #000;
-    color: #fff;
+    background-color: #000000;
+    color: #ffffff;
     border: 1px solid #008b8b;
 }

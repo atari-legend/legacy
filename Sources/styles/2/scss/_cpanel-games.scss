@@ -65,7 +65,7 @@
     text-align: left;
 }
 
-#year_th{
+#year_th {
     width: 7%;
     text-align: left;
 }
@@ -95,18 +95,22 @@
 }
 
 .info_td {
-    width:12%;
+    width: 12%;
     padding-left: 2px;
     text-align: left;
 }
 
-#game_list_table { width: 100%; }
+#game_list_table {
+    width: 100%;
+}
 
 //*----------------------------------------------------------
 //Games detail
 //------------------------------------------------------------ */
 
-#games_detail { float: left; }
+#games_detail {
+    float: left;
+}
 #gd_left {
     float: left;
     width: 32%;
@@ -161,9 +165,15 @@
     width: 38%;
 }
 
-#gd_creator_info { margin-bottom: 20px; }
-#gd_publisher_info { margin-bottom: 20px; }
-#gd_developer_info { margin-bottom: 20px; }
+#gd_creator_info {
+    margin-bottom: 20px;
+}
+#gd_publisher_info {
+    margin-bottom: 20px;
+}
+#gd_developer_info {
+    margin-bottom: 20px;
+}
 #gd_back {
     margin-top: 20px;
     margin-bottom: 20px;
@@ -174,12 +184,22 @@
     width: 100%;
 }
 
-#gd_text_area_big { height: 250px; }
+#gd_text_area_big {
+    height: 250px;
+}
 
-#file_upload_game_screenshots{width: 60%;}
-#file_upload_game_file{width: 60%;}
-#file_upload_game_box{width: 60%;}
-#file_upload_game_music{width: 60%;}
+#file_upload_game_screenshots {
+    width: 60%;
+}
+#file_upload_game_file {
+    width: 60%;
+}
+#file_upload_game_box {
+    width: 60%;
+}
+#file_upload_game_music {
+    width: 60%;
+}
 
 //*----------------------------------------------------------
 //Games comment
@@ -194,12 +214,16 @@
     border-spacing: 0;
 }
 
-.gc_table_list tr:nth-child(even) { background-color: #f3f3f3; }
-.gc_table_list tr:nth-child(odd) { background-color: #eee; }
+.gc_table_list tr:nth-child(even) {
+    background-color: #f3f3f3;
+}
+.gc_table_list tr:nth-child(odd) {
+    background-color: #eeeeee;
+}
 .gc_table_list td {
     padding: 5px;
     margin: 0;
-    border-bottom: solid 1px #000;
+    border-bottom: solid 1px #000000;
 }
 
 .gc_left_head {
@@ -231,11 +255,15 @@
 //*----------------------------------------------------------
 //Games comment edit
 //------------------------------------------------------------ */
-#gce_area { width: 100%; }
+#gce_area {
+    width: 100%;
+}
 //*----------------------------------------------------------
 //Games upload
 //------------------------------------------------------------ */
-.game_upload_container { display: flex; }
+.game_upload_container {
+    display: flex;
+}
 
 #gu_child_1,
 #gu_child_2 {
@@ -305,7 +333,9 @@
     align-items: flex-start;
 }
 
-.review_child  table { width: 98%; }
+.review_child  table {
+    width: 98%;
+}
 #review_text {
     display: table-cell;
     width: 70%;
@@ -370,6 +400,6 @@
 //*----------------------------------------------------------
 //Games screenshots upload
 //------------------------------------------------------------ */
-.game_screenshot_img{
+.game_screenshot_img {
     @extend #user_details_img_dark;
 }
