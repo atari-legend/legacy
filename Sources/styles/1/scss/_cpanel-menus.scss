@@ -29,7 +29,7 @@
     padding-left: 2px;
     font-size: 10pt;
     font-weight: 100;
-    color: #fff;
+    color: #ffffff;
 }
 
 .menu_crew_td,
@@ -38,7 +38,7 @@
     padding-left: 2px;
     font-size: 10pt;
     font-weight: 100;
-    color: #fff;
+    color: #ffffff;
 }
 
 .nr_menus_td,
@@ -47,12 +47,12 @@
     padding-left: 2px;
     font-size: 10pt;
     font-weight: 100;
-    color: #fff;
+    color: #ffffff;
 }
 
 .help_text {
     font-size: 12pt;
-    color: #000;
+    color: #000000;
     text-align: left;
     border: 0;
 }
@@ -83,7 +83,7 @@
     padding-left: 2px;
     font-size: 10pt;
     font-weight: 100;
-    color: #fff;
+    color: #ffffff;
 }
 
 .menu_list_ind_td {
@@ -91,7 +91,7 @@
     padding-left: 2px;
     font-size: 10pt;
     font-weight: 100;
-    color: #fff;
+    color: #ffffff;
     text-align: left;
 }
 
@@ -100,7 +100,7 @@
     padding-right: 5px;
     font-size: 10pt;
     font-weight: 100;
-    color: #fff;
+    color: #ffffff;
     text-align: right;
 }
 
@@ -115,7 +115,8 @@
     text-align: left;
 }
 
-#menu_update_th,menu_delete_th {
+#menu_update_th,
+menu_delete_th {
     width: 10%;
     text-align: left;
 }
@@ -126,7 +127,7 @@
     padding-right: 5px;
     font-size: 10pt;
     font-weight: 100;
-    color: #fff;
+    color: #ffffff;
     text-align: left;
 }
 
@@ -135,16 +136,17 @@
     padding-right: 5px;
     font-size: 10pt;
     font-weight: 100;
-    color: #fff;
+    color: #ffffff;
     text-align: left;
 }
 
-.menu_update_td, menu_delete_td {
+.menu_update_td,
+menu_delete_td {
     width: 10%;
     padding-right: 5px;
     font-size: 10pt;
     font-weight: 100;
-    color: #fff;
+    color: #ffffff;
     text-align: left;
 }
 
@@ -177,7 +179,7 @@
     padding-right: 5px;
     font-size: 10pt;
     font-weight: 100;
-    color: #fff;
+    color: #ffffff;
     text-align: left;
 }
 
@@ -186,7 +188,7 @@
     padding-right: 5px;
     font-size: 10pt;
     font-weight: 100;
-    color: #fff;
+    color: #ffffff;
     text-align: left;
 }
 
@@ -195,7 +197,7 @@
     padding-right: 5px;
     font-size: 10pt;
     font-weight: 100;
-    color: #fff;
+    color: #ffffff;
     text-align: left;
 }
 
@@ -204,7 +206,7 @@
     padding-right: 5px;
     font-size: 10pt;
     font-weight: 100;
-    color: #fff;
+    color: #ffffff;
     text-align: left;
 }
 
@@ -213,9 +215,15 @@
     background-color: #294f4f;
 }
 
-#menu_list_table tr:hover { background-color: #294f4f; }
-#menu_list_table tr:nth-child(even) { background-color: #294f4f; }
-#menu_list_table tr:nth-child(odd) { background-color: #006f6f; }
+#menu_list_table tr:hover {
+    background-color: #294f4f;
+}
+#menu_list_table tr:nth-child(even) {
+    background-color: #294f4f;
+}
+#menu_list_table tr:nth-child(odd) {
+    background-color: #006f6f;
+}
 .add_new_disk_space {
     display: inline-block;
     width: 50%;
@@ -239,8 +247,11 @@
     padding-right: 5px;
     font-size: 10pt;
     font-weight: 100;
-    color: #fff;
+    color: #ffffff;
     text-align: left;
 }
 
-.menu_doctype_td,.menu_docinfo_td { width: 20%; }
+.menu_doctype_td,
+.menu_docinfo_td {
+    width: 20%;
+}

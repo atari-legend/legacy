@@ -121,38 +121,14 @@ module.exports = function (grunt) {
                 standard: 'PSR2'
             }
         },
-
-        stylizeSCSS: {
-            target: {
-                options: {
-                    tabSize: 4,
-                    extraLine: true,
-                    oneLine: true,
-                    cleanZeros: true
-                },
-
-                files: [{
-                    expand: true,
-                    src: [
-                        'Sources/styles/1/scss/*.scss',
-                        'Sources/styles/2/scss/*.scss',
-                        'Sources/styles/3/scss/*.scss',
-                        'Sources/styles/common/main_scss/**/*.scss'
-                    ],
-                    dest: 'result/scss/'
-                }]
+        csscomb: {
+            dynamic_mappings: {
+                expand: true,
+                cwd: 'Sources/styles/1/scss/',
+                src: ['*.scss'],
+                dest: 'Sources/styles/1/scss/'
             }
 
-        },
-        stylefmt: {
-            format: {
-                options: {
-                    syntax: 'scss'
-                },
-                files: {
-                    'result/fix/scss/': ['Sources/styles/1/scss/*.scss']
-                }
-            }
         }
 
     });
@@ -161,21 +137,19 @@ module.exports = function (grunt) {
     // grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-sass');
     grunt.loadNpmTasks('grunt-scss-lint');
-    grunt.loadNpmTasks('grunt-scss-stylize');
     grunt.loadNpmTasks('grunt-pleeease');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-phpcs');
     grunt.loadNpmTasks('grunt-sass-lint');
-    grunt.loadNpmTasks('grunt-stylefmt');
     grunt.loadNpmTasks('grunt-stylelint');
     grunt.loadNpmTasks('grunt-eslint');
     grunt.loadNpmTasks('grunt-lintspaces');
+    grunt.loadNpmTasks('grunt-csscomb');
 
     // Default task(s).
     grunt.registerTask('default', ['eslint:application', 'lintspaces', 'sass', 'pleeease']);
     grunt.registerTask('lint', ['scsslint']);
     grunt.registerTask('sass-lint', ['sasslint']);
-    grunt.registerTask('beauty', ['stylizeSCSS']);
-    grunt.registerTask('css-fix', ['stylefmt']);
+    grunt.registerTask('css-fix', ['csscomb']);
     grunt.registerTask('phpcheck', ['phpcs']);
 };

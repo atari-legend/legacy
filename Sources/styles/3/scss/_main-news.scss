@@ -5,23 +5,30 @@
 //***This is the css code for the news pages of the main site********/
 //*******************************************************************/
 
-#news_main_text{
+#news_main_text {
     @extend .interview_main_text;
-    height: 100%;   
+    height: 100%;
 }
 
-#news_main_text a:link{
+#news_main_text a:link {
     color: #161c71;
 }
 
-#news_main_text a:visited{
+#news_main_text a:visited {
     color: #161c71;
 }
 
-#news_main_text a:hover{
-    color: black;
+#news_main_text a:hover {
+    color: #000000;
 }
 
-.news_left_head{width:50%;}
-.news_right_head{width:50%;} 
-.news_date {display:none;color:black;} 
+.news_left_head {
+    width: 50%;
+}
+.news_right_head {
+    width: 50%;
+}
+.news_date {
+    display: none;
+    color: #000000;
+}

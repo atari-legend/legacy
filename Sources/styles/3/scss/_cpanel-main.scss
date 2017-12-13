@@ -27,15 +27,23 @@
     margin-left: auto;
 }
 
-.main_stats_child  table { width: 98%; }
-#user_stats table { width: 100%; }
-#welcome_cpanel table { width: 100%; }
+.main_stats_child  table {
+    width: 98%;
+}
+#user_stats table {
+    width: 100%;
+}
+#welcome_cpanel table {
+    width: 100%;
+}
 
 //*----------------------------------------------------------
 //Left nav
 //------------------------------------------------------------ */
 
-#leftnav_position_front { float: left; }
+#leftnav_position_front {
+    float: left;
+}
 .left_nav_section {
     padding-top: 3px;
     padding-bottom: 3px;
@@ -55,16 +63,23 @@
     color: #122323;
 }
 
-.left_nav_link:visited { color: #122323; }
-.left_nav_link:hover { color: #6a6a6a; }
+.left_nav_link:visited {
+    color: #122323;
+}
+.left_nav_link:hover {
+    color: #6a6a6a;
+}
 
 //*----------------------------------------------------------
 //Quick search games
 //------------------------------------------------------------ */
 
-.quick_search_check { margin-right: 5px; }
+.quick_search_check {
+    margin-right: 5px;
+}
 
-#quick_search_options, #quick_search_user_options {
+#quick_search_options,
+#quick_search_user_options {
     display: table;
     width: 75%;
     margin-right: auto;
@@ -78,15 +93,15 @@
     margin-left: 2px;
     font-size: 10pt;
     font-weight: bold;
-    color: #fff;
+    color: #ffffff;
     cursor: pointer;
     background: #161c71;
-    border: 2px solid #000;
+    border: 2px solid #000000;
     border-radius: 0 15px 15px 0;
 }
 
 .quick_search_games_button:hover {
-    color: #000;
+    color: #000000;
     background: #dbd7d1;
     border: 2px solid #4f4f4f;
 }
@@ -96,7 +111,7 @@
     height: 25px;
     padding: 0;
     padding-left: 5px;
-    background-color: #666;
-    color: #fff;
+    background-color: #666666;
+    color: #ffffff;
     border: 1px solid #b2b2b2;
 }
