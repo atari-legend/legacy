@@ -59,7 +59,6 @@ if (isset($catpick)) {
 }
 
 $LINKSQL = $mysqli->query("SELECT * FROM website
-                        LEFT JOIN website_description ON (website.website_id = website_description.website_id)
                         LEFT JOIN website_category_cross ON (website.website_id = website_category_cross.website_id)
                         WHERE website_category_cross.website_category_id=$website_category_id ORDER by website.website_name")
                         or die("Couldn't query website and website description");
@@ -76,7 +75,7 @@ while ($rowlink = $LINKSQL->fetch_array(MYSQLI_BOTH)) {
         'website_id' => $rowlink['website_id'],
         'website_name' => $rowlink['website_name'],
         'website_url' => $rowlink['website_url'],
-        'website_description' => $rowlink['website_description_text'],
+        'website_description' => $rowlink['description'],
         'website_image' => $website_image,
         'timestamp' => $timestamp,
         'submitted' => $submitted,

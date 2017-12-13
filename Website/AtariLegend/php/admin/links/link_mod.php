@@ -27,7 +27,6 @@ include("../../config/admin.php");
 $smarty->assign('website_id', $website_id);
 
 $LINKSQL = $mysqli->query("SELECT * FROM website
-        LEFT JOIN website_description ON (website.website_id = website_description.website_id)
         WHERE website.website_id='$website_id'")
        or die("Error while querying the links database");
 
@@ -43,7 +42,7 @@ $smarty->assign('website', array(
     'website_url' => $rowlink['website_url'],
     'website_id' => $rowlink['website_id'],
 //  'category_id' => $rowlink['website_category_id'],
-    'website_description_text' => $rowlink['website_description_text'],
+    'website_description_text' => $rowlink['description'],
     'website_imgext' => $rowlink['website_imgext'],
     'inactive' => $rowlink['inactive'],
     'website_image' => $website_image));
