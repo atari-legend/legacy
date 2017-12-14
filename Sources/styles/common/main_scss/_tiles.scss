@@ -7,7 +7,7 @@
     margin: 0 auto;
 }
 
-/* Common style */
+//* Common style */
 .grid figure {
     position: relative;
     overflow: hidden;
@@ -51,8 +51,8 @@
     height: 100%;
 }
 
-/* Anchor will cover the whole item by default */
-/* For some effects it will show as a button */
+//* Anchor will cover the whole item by default */
+//* For some effects it will show as a button */
 .grid figure figcaption > a {
     z-index: 1000;
     text-indent: 200%;
@@ -87,11 +87,11 @@
     color: #000000;
 }
 
-/*--------------------********************************/
-/***** screenstar ************************************/
-/***** Kindly borrowed from :  ***********************/
-/*https://tympanus.net/Development/HoverEffectIdeas/**/
-/*--------------------********************************/
+//*--------------------********************************/
+//***** screenstar ************************************/
+//***** Kindly borrowed from :  ***********************/
+//*https://tympanus.net/Development/HoverEffectIdeas/**/
+//*--------------------********************************/
 
 figure.effect-tile figcaption {
     top: auto;
@@ -143,7 +143,7 @@ figure.effect-tile p.description {
     opacity: 0;
     -webkit-transition: opacity .35s;
     transition: opacity .35s;
-    -webkit-backface-visibility: hidden; /* Fix for Chrome 37.0.2062.120 (Mac) */
+    -webkit-backface-visibility: hidden; //* Fix for Chrome 37.0.2062.120 (Mac) */
 }
 
 figure.effect-tile tile_title,
@@ -193,11 +193,11 @@ figure.effect-tile:hover p.icon-links a:first-child {
     transition-delay: .2s;
 }
 
-/*---------------------------------------************/
-/***** Bubba - fading tile frontpage ****************/
-/***** Kindly borrowed from :  **********************/
-/*https://tympanus.net/Development/HoverEffectIdeas/*/
-/*---------------------------------------************/
+//*---------------------------------------************/
+//***** Bubba - fading tile frontpage ****************/
+//***** Kindly borrowed from :  **********************/
+//*https://tympanus.net/Development/HoverEffectIdeas/*/
+//*---------------------------------------************/
 
 figure.effect-bubba {
     @if $skin-name == legacy {
@@ -288,9 +288,9 @@ figure.effect-bubba:hover p {
 }
 
 
-/*--------------------***/
-/***** Who's online *****/
-/*--------------------***/
+//*--------------------***/
+//***** Who's online *****/
+//*--------------------***/
 @if $skin-name == tos {
     .online_title {
         @extend .left_nav_section;
@@ -317,9 +317,9 @@ figure.effect-bubba:hover p {
     }
 }
 
-/*--------------------***/
-/*****  Statistics  *****/
-/*--------------------***/
+//*--------------------***/
+//*****  Statistics  *****/
+//*--------------------***/
 @if $skin-name == legacy {
     .statistics_dark {
         color: #cccccc;
@@ -380,9 +380,9 @@ figure.effect-bubba:hover p {
     font-size: 11pt;
 }
 
-/*-------------------------***/
-/*****  Latest comments  *****/
-/*------------------------***/
+//*-------------------------***/
+//*****  Latest comments  *****/
+//*------------------------***/
 @if $skin-name == legacy {
     .latest_comments_text {
         font-size: 11pt;
@@ -393,7 +393,7 @@ figure.effect-bubba:hover p {
         color: #bcbdbd;
     }
     .latest_comments_link {
-        /*@extend .standard_tile_link;*/
+        //*@extend .standard_tile_link;*/
         color: #bcbdbd;
     }
     .latest_comments_link:hover {

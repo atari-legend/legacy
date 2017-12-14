@@ -46,7 +46,13 @@ module.exports = function (grunt) {
             options: {
                 editorconfig: '.editorconfig'
             },
-            src: ['<%= webRoot %>/themes/templates/1/**/*.html']
+            src: [
+                '<%= webRoot %>/themes/templates/1/**/*.html',
+                'Sources/styles/1/scss/*.scss',
+                'Sources/styles/2/scss/*.scss',
+                'Sources/styles/3/scss/*.scss',
+                'Sources/styles/common/main_scss/**/*.scss'
+            ]
         },
 
         scsslint: {
@@ -127,6 +133,24 @@ module.exports = function (grunt) {
                 cwd: 'Sources/styles/1/scss/',
                 src: ['*.scss'],
                 dest: 'Sources/styles/1/scss/'
+            },
+            dynamic_mappings2: {
+                expand: true,
+                cwd: 'Sources/styles/2/scss/',
+                src: ['*.scss'],
+                dest: 'Sources/styles/2/scss/'
+            },
+            dynamic_mappings3: {
+                expand: true,
+                cwd: 'Sources/styles/3/scss/',
+                src: ['*.scss'],
+                dest: 'Sources/styles/3/scss/'
+            },
+            dynamic_mappings4: {
+                expand: true,
+                cwd: 'Sources/styles/common/main_scss/',
+                src: ['*.scss'],
+                dest: 'Sources/styles/common/main_scss/'
             }
 
         }
