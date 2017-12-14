@@ -361,7 +361,7 @@ if (isset($action) and $action == "add_doc_to_menu") {
                 $title_id = $mysqli->insert_id; // Get Last autoinc id
 
                 //insert the doc in the doc table first - category = doc_disk_game
-                $mysqli->query("INSERT INTO doc (doc_category_id) VALUES ('1')") or die('Error: ' . mysqli_error($mysqli));
+                $mysqli->query("INSERT INTO doc (doc_category_id,doc_type_id) VALUES ('1','1')") or die('Error: ' . mysqli_error($mysqli));
                 $doc_id = $mysqli->insert_id; // Get Last autoinc id
 
                 //insert in doc_disk_game
