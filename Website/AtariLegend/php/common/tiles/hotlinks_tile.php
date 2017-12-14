@@ -22,13 +22,13 @@ $query_links = $mysqli->query("SELECT
 						website.website_url,
 						website.website_imgext,
                         website.website_date,
-						users.userid,
-						website_description.website_description_text
+                        website.website_date,
+                        website.description,
+						users.userid
 						FROM website
 						LEFT JOIN users ON ( website.user_id = users.user_id )
-						LEFT JOIN website_description ON ( website.website_id = website_description.website_id )
 						WHERE website.website_imgext <> ' '
-						ORDER BY RAND() LIMIT 1") or die("query error, hotlinks");
+						ORDER BY RAND() LIMIT 1") or die("query error, hotlinks: ".$mysqli->error);
 
 $sql_links = $query_links->fetch_array(MYSQLI_BOTH);
 
@@ -39,7 +39,7 @@ $v_link_image .= $sql_links['website_id'];
 $v_link_image .= '.';
 $v_link_image .= $sql_links['website_imgext'];
 
-$website_text = nl2br($sql_links['website_description_text']);
+$website_text = nl2br($sql_links['description']);
 $website_text = InsertALCode($website_text); // disabled this as it wrecked the design.
 $website_text = trim($website_text);
 $website_text = RemoveSmillies($website_text);
