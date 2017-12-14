@@ -30,8 +30,7 @@
     margin: auto;
 }
 
-#child_1,
-#child_2 {
+#child_1, #child_2 {
     width: 50%;
     margin: auto;
 }
@@ -60,14 +59,12 @@
     text-align: left;
 }
 
-#pub_th,
-#dev_th {
+#pub_th, #dev_th {
     width: 20%;
     text-align: left;
 }
 
-#year_th,
-#info_th {
+#year_th, #info_th {
     width: 10%;
     text-align: left;
 }
@@ -77,35 +74,37 @@
     padding-left: 2px;
     font-size: 10pt;
     font-weight: 100;
-    color: #fff;
+    color: #ffffff;
     text-align: left;
 }
 
-.pub_td,
-.dev_td {
+.pub_td, .dev_td {
     width: 20%;
     padding-left: 2px;
     font-size: 10pt;
     font-weight: 100;
-    color: #fff;
+    color: #ffffff;
     text-align: left;
 }
 
-.info_td,
-.year_td {
+.info_td, .year_td {
     width: 10%;
     padding-left: 2px;
     font-size: 10pt;
     font-weight: 100;
-    color: #fff;
+    color: #ffffff;
     text-align: left;
 }
 
-#game_list_table { width: 100%; }
+#game_list_table {
+    width: 100%;
+}
 //*----------------------------------------------------------
 //Games detail
 //------------------------------------------------------------ */
-#games_detail { float: left; }
+#games_detail {
+    float: left;
+}
 #gd_left {
     float: left;
     width: 32%;
@@ -160,9 +159,15 @@
     width: 38%;
 }
 
-#gd_creator_info { margin-bottom: 20px; }
-#gd_publisher_info { margin-bottom: 20px; }
-#gd_developer_info { margin-bottom: 20px; }
+#gd_creator_info {
+    margin-bottom: 20px;
+}
+#gd_publisher_info {
+    margin-bottom: 20px;
+}
+#gd_developer_info {
+    margin-bottom: 20px;
+}
 #gd_back {
     margin-top: 20px;
     margin-bottom: 20px;
@@ -173,12 +178,22 @@
     width: 100%;
 }
 
-#gd_text_area_big { height: 250px; }
+#gd_text_area_big {
+    height: 250px;
+}
 
-#file_upload_game_screenshots{width: 60%;}
-#file_upload_game_file{width: 60%;}
-#file_upload_game_box{width: 60%;}
-#file_upload_game_music{width: 60%;}
+#file_upload_game_screenshots {
+    width: 60%;
+}
+#file_upload_game_file {
+    width: 60%;
+}
+#file_upload_game_box {
+    width: 60%;
+}
+#file_upload_game_music {
+    width: 60%;
+}
 
 //*----------------------------------------------------------
 //Games comment
@@ -189,16 +204,20 @@
     margin-left: auto;
     text-align: left;
     background-color: #00d3d3;
-    border: solid 1px #000;
+    border: solid 1px #000000;
     border-spacing: 0;
 }
 
-.gc_table_list tr:nth-child(even) { background-color: #00d3d3; }
-.gc_table_list tr:nth-child(odd) { background-color: #006f6f; }
+.gc_table_list tr:nth-child(even) {
+    background-color: #00d3d3;
+}
+.gc_table_list tr:nth-child(odd) {
+    background-color: #006f6f;
+}
 .gc_table_list td {
     padding: 5px;
     margin: 0;
-    border-bottom: solid 1px #000;
+    border-bottom: solid 1px #000000;
 }
 
 .gc_left_head {
@@ -225,22 +244,25 @@
 .gc_center {
     width: 80%;
     font-size: 10pt;
-
 }
 
 //*----------------------------------------------------------
 //Games comment edit
 //------------------------------------------------------------ */
-#gce_button,
-#gce_button2 {display: inline; }
+#gce_button, #gce_button2 {
+    display: inline;
+}
 
-#gce_area { width: 100%; }
+#gce_area {
+    width: 100%;
+}
 //*----------------------------------------------------------
 //Games upload
 //------------------------------------------------------------ */
-.game_upload_container { display: flex; }
-#gu_child_1,
-#gu_child_2 {
+.game_upload_container {
+    display: flex;
+}
+#gu_child_1, #gu_child_2 {
     width: 50%;
     margin-left: 2%;
 }
@@ -253,9 +275,7 @@
     text-align: left;
 }
 
-#username_gr_th,
-#gamepub_gr_th,
-#reviewdate_gr_th {
+#username_gr_th, #gamepub_gr_th, #reviewdate_gr_th {
     width: 20%;
     text-align: left;
 }
@@ -270,17 +290,15 @@
     padding-left: 2px;
     font-size: 10pt;
     font-weight: 100;
-    color: #fff;
+    color: #ffffff;
 }
 
-.username_gr_td,
-.gamepub_gr_td,
-.reviewdate_gr_td {
+.username_gr_td, .gamepub_gr_td, .reviewdate_gr_td {
     width: 20%;
     padding-left: 2px;
     font-size: 10pt;
     font-weight: 100;
-    color: #fff;
+    color: #ffffff;
 }
 
 .nrreviews_gr_td {
@@ -288,7 +306,7 @@
     padding-left: 2px;
     font-size: 10pt;
     font-weight: 100;
-    color: #fff;
+    color: #ffffff;
 }
 
 //*----------------------------------------------------------
@@ -316,7 +334,9 @@
     align-items: flex-start;
 }
 
-.review_child  table { width: 98%; }
+.review_child  table {
+    width: 98%;
+}
 #review_text {
     display: table-cell;
     width: 70%;
@@ -363,7 +383,7 @@
     padding-left: 2px;
     font-size: 10pt;
     font-weight: 100;
-    color: #fff;
+    color: #ffffff;
 }
 
 .pub_gm_td {
@@ -371,7 +391,7 @@
     padding-left: 2px;
     font-size: 10pt;
     font-weight: 100;
-    color: #fff;
+    color: #ffffff;
 }
 
 .year_gm_td {
@@ -379,7 +399,7 @@
     padding-left: 2px;
     font-size: 10pt;
     font-weight: 100;
-    color: #fff;
+    color: #ffffff;
 }
 
 .zaks_gm_td {
@@ -387,13 +407,13 @@
     padding-left: 2px;
     font-size: 10pt;
     font-weight: 100;
-    color: #fff;
+    color: #ffffff;
 }
 
 
 //*----------------------------------------------------------
 //Games screenshots upload
 //------------------------------------------------------------ */
-.game_screenshot_img{
+.game_screenshot_img {
     @extend #user_details_img_dark;
 }

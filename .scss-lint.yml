@@ -16,4 +16,5 @@ linters:
         enabled: false
     SelectorFormat:
         enabled: false
-
+    HexLength:
+        style: long

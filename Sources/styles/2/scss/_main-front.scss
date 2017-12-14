@@ -18,8 +18,8 @@
     margin-top: 20px;
     margin-bottom: 20px;
     overflow: hidden;
-    border: 2px solid #000;
-    box-shadow: 3px 3px 5px #888;
+    border: 2px solid #000000;
+    box-shadow: 3px 3px 5px #888888;
 }
 
 .welcome_slides {
@@ -40,17 +40,26 @@
 
 .trivia_title {
     font-size: 25px;
-    color: #fff;
+    color: #ffffff;
 }
 
-.trivia_tag { font-size: 13pt; color: black;}
+.trivia_tag {
+    font-size: 13pt;
+    color: #000000;
+}
 
-.trivia_text { font-size: 16px; color: #fff;}
+.trivia_text {
+    font-size: 16px;
+    color: #ffffff;
+}
 
 //*----------------------------------------------------------
 //screenstar --> front page
 //------------------------------------------------------------ */
-.screenstar_position_front{margin-top: 20px; margin-bottom: 20px;}
+.screenstar_position_front {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
 
 
 //*----------------------------------------------------------
@@ -61,9 +70,9 @@
     margin-top: 20px;
 }
 
-.register_input{
+.register_input {
     width: 100%;
-    text-align:center;
+    text-align: center;
 }
 
 //*----------------------------------------------------------
@@ -73,7 +82,7 @@
     float: right;
     width: 100%;
     margin-top: 20px;
-     margin-bottom: 20px;
+    margin-bottom: 20px;
 }
 
 .logon_input_usn {
@@ -93,7 +102,9 @@
     content: url('../images/logon_pwd.png');
 }
 
-.logon_facebook_button, .logon_twitter_button{text-align: center;}
+.logon_facebook_button, .logon_twitter_button {
+    text-align: center;
+}
 
 /* we will be implementing this at a later stage
 /*.logon_facebook_button::before {content: url('../images/login-facebook.png');} */
@@ -120,43 +131,53 @@
     margin-left: 10%;
 }
 
-.logon_signin {margin-top: 170px;}
+.logon_signin {
+    margin-top: 170px;
+}
 .logon_signin img {
     display: block;
     margin: auto;
 }
 
-.logon_signin img:hover {opacity: .7;}
+.logon_signin img:hover {
+    opacity: .7;
+}
 .logon_socmed {
     width: 100%;
     margin-top: 10px;
 }
 
-.logon_socmed:hover {opacity: .7;}
+.logon_socmed:hover {
+    opacity: .7;
+}
 
 //*----------------------------------------------------------
 //datequote tile - front page
 //------------------------------------------------------------ */
-.datequote_bg { background: url('../images/datequote_bg.jpg'); }
-.datequote_bg p { text-align: center; }
+.datequote_bg {
+    background: url('../images/datequote_bg.jpg');
+}
+.datequote_bg p {
+    text-align: center;
+}
 .datequote_day {
     margin-top: 0;
     margin-bottom: -20px;
     font-size: 113px;
-    color: #fff;
+    color: #ffffff;
 }
 
 .datequote_month {
     margin-top: -10px;
     margin-bottom: -10px;
     font-size: 40px;
-    color: #fff;
+    color: #ffffff;
 }
 
 .datequote_year {
     margin-top: -10px;
     font-size: 73px;
-    color: #000;
+    color: #000000;
     text-align: center;
 }
 
@@ -164,7 +185,7 @@
     padding-top: 10px;
     padding-bottom: 10px;
     //* RGBa with 0.6 opacity */
-    color: #fff;
+    color: #ffffff;
     background: rgb(172, 172, 172) transparent;
     //* Fallback for web browsers that doesn't support RGBa */
     background: rgba(172, 172, 172, .7);
@@ -180,11 +201,11 @@
     box-shadow: none;
 }
 
-.contact_tiles >a >div {
+.contact_tiles > a > div {
     max-width: 100%;
     margin-bottom: 20px;
-    border: 2px solid #000;
-    box-shadow: 3px 3px 5px #888;
+    border: 2px solid #000000;
+    box-shadow: 3px 3px 5px #888888;
 }
 
 .contact_email_button {
@@ -194,7 +215,7 @@
     background-size: contain;
 }
 
-.contact_email_button >a {
+.contact_email_button > a {
     display: block;
     width: 320px;
     height: 120px;
@@ -207,7 +228,7 @@
     background-size: contain;
 }
 
-.contact_facebook_button >a {
+.contact_facebook_button > a {
     display: block;
     width: 240px;
     height: 120px;
@@ -220,7 +241,7 @@
     background-size: contain;
 }
 
-.contact_jukebox_button >a {
+.contact_jukebox_button > a {
     display: block;
     width: 240px;
     height: 120px;
@@ -233,7 +254,7 @@
     background-size: contain;
 }
 
-.contact_chat_button >a {
+.contact_chat_button > a {
     display: block;
     width: 240px;
     height: 120px;
@@ -247,16 +268,16 @@
     width: 100%;
     margin-top: 20px;
     background-color: #23ec00;
-    box-shadow: 3px 3px 5px #888;
+    box-shadow: 3px 3px 5px #888888;
 }
 
 .footer_logo {
     height: 120px;
     font-size: 13px;
-    color: #fff;
+    color: #ffffff;
     text-align: center;
     background: url('../images/footer_bg.jpg') center 0 no-repeat;
-    border-top: 2px solid #000;
+    border-top: 2px solid #000000;
 }
 
 .footer_logo_image::before {
@@ -277,20 +298,15 @@
 .ui-widget-content {
     width: 245px;
     font-size: 13px;
-    color: #fff;
-    background: #000;
-    border: 1px solid #fff;
+    color: #ffffff;
+    background: #000000;
+    border: 1px solid #ffffff;
 }
 
 //* Interaction states
 //----------------------------------*/
-.ui-state-hover,
-.ui-widget-content .ui-state-hover,
-.ui-widget-header .ui-state-hover,
-.ui-state-focus,
-.ui-widget-content .ui-state-focus,
-.ui-widget-header .ui-state-focus {
-    color: #000;
-    background: #fff;
-    border: 1px solid #000;
+.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus {
+    color: #000000;
+    background: #ffffff;
+    border: 1px solid #000000;
 }
