@@ -117,13 +117,13 @@
 
      $sql_doc_tools = "SELECT tools.tools_name AS 'software_name',
                               tools.tools_id AS 'software_id',
-                              '' AS year,
-                              '' AS developer_name,
-                              '' AS developer_id,
+                              '0' AS year,
+                              'n/a' AS developer_name,
+                              '0' AS developer_id,
                               doc_disk_tool.doc_id AS 'doc_id',
                               doc.doc_type_id,
-                              menu_disk_title_author.menu_disk_title_author_id,
                               menu_types_main.menu_types_text,
+                              menu_disk_title_author.menu_disk_title_author_id,
                               menu_disk_title.menu_disk_title_id AS 'menu_disk_title_id'
                               FROM menu_disk_title
                               LEFT JOIN menu_disk_title_author ON (menu_disk_title_author.menu_disk_title_id = menu_disk_title.menu_disk_title_id)
@@ -134,8 +134,8 @@
                               LEFT JOIN menu_types_main ON (menu_disk_title.menu_types_main_id = menu_types_main.menu_types_main_id)
                               WHERE menu_disk_title.menu_disk_id = '$menu_disk_id' AND menu_disk_title.menu_types_main_id = '6' ORDER BY tools.tools_name ASC";
 
-     $temp_query2 = $mysqli->query("CREATE TEMPORARY TABLE temp2 ENGINE=MEMORY $sql_doc_games") or die('Error: ' . mysqli_error($mysqli));
-     $temp_query2 = $mysqli->query("INSERT INTO temp2 $sql_doc_tools") or die('Error: ' . mysqli_error($mysqli));
+     $temp_query2 = $mysqli->query("CREATE TEMPORARY TABLE temp2 ENGINE=MEMORY $sql_doc_games") or die('Error1: ' . mysqli_error($mysqli));
+     $temp_query2 = $mysqli->query("INSERT INTO temp2 $sql_doc_tools") or die('Error2: ' . mysqli_error($mysqli));
 
      $temp_query2 = $mysqli->query("SELECT * FROM temp2 GROUP BY menu_disk_title_id ORDER BY menu_disk_title_id ASC") or die('Error: ' . mysqli_error($mysqli));
 

@@ -55,7 +55,7 @@ $sql_build_aka = "SELECT game.game_id AS 'software_id',
 
 $sql_build_demo = "SELECT demo.demo_id AS 'software_id',
                                 demo.demo_name AS 'software_name',
-                                '' AS publisher_id,
+                                '0' AS publisher_id,
                                 'n/a' AS publisher_name,
                                 crew.crew_id AS 'developer_id',
                                 crew.crew_name AS 'developer_name',
@@ -68,7 +68,7 @@ $sql_build_demo = "SELECT demo.demo_id AS 'software_id',
 
 $sql_build_demo_aka = "SELECT demo.demo_id AS 'software_id',
                                 demo_aka.aka_name AS 'software_name',
-                                '' AS publisher_id,
+                                '0' AS publisher_id,
                                 'n/a' AS publisher_name,
                                 crew.crew_id AS 'developer_id',
                                 crew.crew_name AS 'developer_name',
@@ -82,9 +82,9 @@ $sql_build_demo_aka = "SELECT demo.demo_id AS 'software_id',
 
 $sql_build_tool = "SELECT tools.tools_id AS 'software_id',
                                 tools.tools_name AS 'software_name',
-                                '' AS publisher_id,
+                                '0' AS publisher_id,
                                 'n/a' AS publisher_name,
-                                '' AS developer_id,
+                                '0' AS developer_id,
                                 'n/a' AS developer_name,
                                 'n/a' AS year,
                                 'Tool' AS software_type
@@ -133,7 +133,7 @@ if (isset($action) and ($action == "game_browse" xor $action == "game_search")) 
     //Perform queries
     $mysqli->query("CREATE TEMPORARY TABLE temp ENGINE=MEMORY $sql_build") or die(mysqli_error());
     $mysqli->query("INSERT INTO temp $sql_build_aka") or die(mysqli_error());
-    $mysqli->query("INSERT INTO temp $sql_build_demo") or die("Couldn't query Software Database5 ($sql_build_demo)");
+    $mysqli->query("INSERT INTO temp $sql_build_demo") or die("Couldn't query Software Database5 ($sql_build_demo): ".$mysqli->error);
     $mysqli->query("INSERT INTO temp $sql_build_demo_aka") or die("Couldn't query Software Database6 ($sql_build_demo_aka)");
     $mysqli->query("INSERT INTO temp $sql_build_tool") or die("Couldn't query Software Database7 ($sql_build_tool)");
 
