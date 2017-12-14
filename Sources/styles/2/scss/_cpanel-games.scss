@@ -29,8 +29,7 @@
     margin: auto;
 }
 
-#child_1,
-#child_2 {
+#child_1, #child_2 {
     width: 50%;
     margin: auto;
 }
@@ -59,8 +58,7 @@
     text-align: left;
 }
 
-#pub_th,
-#dev_th {
+#pub_th, #dev_th {
     width: 20%;
     text-align: left;
 }
@@ -81,8 +79,7 @@
     text-align: left;
 }
 
-.pub_td,
-.dev_td {
+.pub_td, .dev_td {
     width: 20%;
     padding-left: 2px;
     text-align: left;
@@ -265,8 +262,7 @@
     display: flex;
 }
 
-#gu_child_1,
-#gu_child_2 {
+#gu_child_1, #gu_child_2 {
     width: 50%;
     margin-left: 2%;
 }
@@ -279,9 +275,7 @@
     text-align: left;
 }
 
-#username_gr_th,
-#gamepub_gr_th,
-#reviewdate_gr_th {
+#username_gr_th, #gamepub_gr_th, #reviewdate_gr_th {
     width: 20%;
     text-align: left;
 }
@@ -296,9 +290,7 @@
     padding-left: 2px;
 }
 
-.username_gr_td,
-.gamepub_gr_td,
-.reviewdate_gr_td {
+.username_gr_td, .gamepub_gr_td, .reviewdate_gr_td {
     width: 20%;
     padding-left: 2px;
 }

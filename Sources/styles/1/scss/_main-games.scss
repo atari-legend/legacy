@@ -66,8 +66,7 @@
     margin-left: 13%;
 }
 
-#child_1_games,
-#child_2_games {
+#child_1_games, #child_2_games {
     width: 47.5%;
     border-top: 1px solid #01b5b5;
     border-bottom: 1px solid #01b5b5;
@@ -125,9 +124,7 @@
     border-bottom: 3px solid #006f6f;
 }
 
-#games_main_list_3,
-#games_main_list_2,
-#games_main_list_1 {
+#games_main_list_3, #games_main_list_2, #games_main_list_1 {
     display: none;
 }
 
@@ -145,9 +142,7 @@
 .game_main_list_screenshot_img:not(.initial) {
     transition: opacity 1s;
 }
-.game_main_list_screenshot_img.initial,
-.game_main_list_screenshot_img.loaded,
-.game_main_list_screenshot_img.error {
+.game_main_list_screenshot_img.initial, .game_main_list_screenshot_img.loaded, .game_main_list_screenshot_img.error {
     opacity: 1;
 }
 
@@ -300,9 +295,7 @@
 .games_main_detail_thumbs .p:hover .t {
     opacity: .8;
 }
-.games_main_detail_thumbs .pav .t,
-.games_main_detail_thumbs .pdn .t,
-.games_main_detail_thumbs .p:hover.pdn .t {
+.games_main_detail_thumbs .pav .t, .games_main_detail_thumbs .pdn .t, .games_main_detail_thumbs .p:hover.pdn .t {
     opacity: 1;
 }
 
@@ -433,9 +426,7 @@
 .games_main_detail_thumbs_box .p:hover .t {
     opacity: .8;
 }
-.games_main_detail_thumbs_box .pav .t,
-.games_main_detail_thumbs_box .pdn .t,
-.games_main_detail_thumbs_box .p:hover.pdn .t {
+.games_main_detail_thumbs_box .pav .t, .games_main_detail_thumbs_box .pdn .t, .games_main_detail_thumbs_box .p:hover.pdn .t {
     opacity: 1;
 }
 

@@ -7,17 +7,12 @@
 //*----------------------------------------------------------
 //Change log
 //------------------------------------------------------------ */
-#log_date_th,
-#log_action_th,
-#log_section_th,
-#log_subsection_th {
+#log_date_th, #log_action_th, #log_section_th, #log_subsection_th {
     width: 10%;
     text-align: left;
 }
 
-#log_name_th,
-#log_sub_name_th,
-#log_user_th {
+#log_name_th, #log_sub_name_th, #log_user_th {
     width: 20%;
     text-align: left;
 }
@@ -27,10 +22,7 @@
     text-align: right;
 }
 
-.log_date_td,
-.log_action_td,
-.log_section_td,
-.log_subsection_td {
+.log_date_td, .log_action_td, .log_section_td, .log_subsection_td {
     width: 10%;
     padding-left: 2px;
     font-size: 10pt;
@@ -38,9 +30,7 @@
     color: #ffffff;
 }
 
-.log_user_td,
-.log_name_td,
-.log_subname_td {
+.log_user_td, .log_name_td, .log_subname_td {
     width: 20%;
     padding-left: 2px;
     font-size: 10pt;
@@ -58,11 +48,7 @@
 }
 
 //*-----------------------Database updates-------------------------- */
-.td_db_result,
-.td_db_state,
-.td_db_id,
-.td_db_description,
-.td_db_exe {
+.td_db_result, .td_db_state, .td_db_id, .td_db_description, .td_db_exe {
     @extend .standard_table_center;
 }
 
