@@ -9,17 +9,20 @@
 //------------------------------------------------------------ */
 #user_details_img_dark {
     margin-left: 1%;
-    box-shadow: 0 0 12px #000;
+    box-shadow: 0 0 12px #000000;
 }
 
-.user_details_container { display: flex; }
-#child_1_user,
-#child_2_user {
+.user_details_container {
+    display: flex;
+}
+#child_1_user, #child_2_user {
     width: 47.5%;
     margin-left: 2%;
 }
 
-#child_3_user {width: 5%;}
+#child_3_user {
+    width: 5%;
+}
 
 .user_details_text {
     display: table-cell;
@@ -31,12 +34,14 @@
     width: 50%;
 }
 
-.user_details_input_small{
+.user_details_input_small {
     @extend .standard_tile_input_small;
     width: 90%;
 }
 
-#file_upload_user_detail{width: 60%;}
+#file_upload_user_detail {
+    width: 60%;
+}
 
 .user_details_row {
     display: table;
@@ -44,7 +49,8 @@
 }
 
 #checkbox_user_detail label {
-    	border:1px solid #666;}
+    border: 1px solid #666666;
+}
 
 //*----------------------------------------------------------
 //User main
@@ -64,38 +70,42 @@
 //*----------------------------------------------------------
 //User search
 //------------------------------------------------------------ */
-#usersearch th { text-align: left; }
+#usersearch th {
+    text-align: left;
+}
 
-.username_th,
-.joindate_th,
-.lastvisit_th { width: 25%; }
+.username_th, .joindate_th, .lastvisit_th {
+    width: 25%;
+}
 
-.username_td,
-.joindate_td,
-.lastvisit_td {
+.username_td, .joindate_td, .lastvisit_td {
     width: 25%;
     padding-left: 2px;
     font-size: 16px;
     font-weight: 100;
-    color: #000;
+    color: #000000;
 }
 
-.email_th { width: 10%; }
+.email_th {
+    width: 10%;
+}
 .email_td {
     width: 10%;
     padding-left: 2px;
     font-size: 16px;
     font-weight: 100;
-    color: #000;
+    color: #000000;
 }
 
-.website_th { width: 15%; }
+.website_th {
+    width: 15%;
+}
 .website_td {
     width: 15%;
     padding-left: 2px;
     font-size: 16px;
     font-weight: 100;
-    color: #000;
+    color: #000000;
 }
 
 #user_search_main_tabel {
@@ -116,8 +126,12 @@
 //*----------------------------------------------------------
 //User management
 //------------------------------------------------------------ */
-#user_management th { text-align: left; }
-.select_th { width: 10%; }
+#user_management th {
+    text-align: left;
+}
+.select_th {
+    width: 10%;
+}
 .select_td {
     width: 10%;
     padding-left: 2px;
