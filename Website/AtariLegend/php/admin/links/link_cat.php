@@ -24,17 +24,8 @@ include("../../config/common.php");
 include("../../admin/games/quick_search_games.php");
 include("../../config/admin.php");
 
-$website = $mysqli->query("SELECT website_category_id, website_category_name FROM website_category ORDER by website_category_name");
+include("../../common/DAO/LinkCategoryDAO.php");
 
-while ($category_row = $website->fetch_array(MYSQLI_BOTH)) {
-    $website_count = $mysqli->query("SELECT website_id FROM website_category_cross WHERE website_category_id = '$category_row[website_category_id]'");
-    $nr_of_links = $website_count->num_rows;
-
-    $smarty->append('category', array(
-        'category_name' => $category_row['website_category_name'],
-        'category_id' => $category_row['website_category_id'],
-        'category_count' => $nr_of_links));
-}
-
-//Send all smarty variables to the templates
+$dao = new AL\Common\DAO\LinkCategoryDAO($mysqli);
+$smarty->assign('categories', $dao->getAllCategories());
 $smarty->display("file:".$cpanel_template_folder."link_cat.html");
