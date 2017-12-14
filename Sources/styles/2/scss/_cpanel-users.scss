@@ -15,8 +15,7 @@
 .user_details_container {
     display: flex;
 }
-#child_1_user,
-#child_2_user {
+#child_1_user, #child_2_user {
     width: 47.5%;
     margin-left: 2%;
 }
@@ -75,15 +74,11 @@
     text-align: left;
 }
 
-.username_th,
-.joindate_th,
-.lastvisit_th {
+.username_th, .joindate_th, .lastvisit_th {
     width: 25%;
 }
 
-.username_td,
-.joindate_td,
-.lastvisit_td {
+.username_td, .joindate_td, .lastvisit_td {
     width: 25%;
     padding-left: 2px;
     font-size: 16px;

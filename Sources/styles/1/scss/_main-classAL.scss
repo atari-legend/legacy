@@ -162,9 +162,7 @@
 .cd-timeline-content h2 {
     color: #303e49;
 }
-.cd-timeline-content p,
-.cd-timeline-content .cd-read-more,
-.cd-timeline-content .cd-date {
+.cd-timeline-content p, .cd-timeline-content .cd-read-more, .cd-timeline-content .cd-date {
     font-size: 13px;
     font-size: .8125rem;
 }
@@ -173,8 +171,7 @@
     color: #ffffff;
 }
 
-.cd-timeline-content .cd-read-more,
-.cd-timeline-content .cd-date {
+.cd-timeline-content .cd-read-more, .cd-timeline-content .cd-date {
     display: inline-block;
 }
 .cd-timeline-content p {

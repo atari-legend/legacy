@@ -137,8 +137,7 @@ $log_on_border: 0;
 //* in certain resolutions the quick search field */
 //* This file contains the complete build code as well as the positioning of the side menu for all */
 //* resolutions - see the code at the bottom of the file */
-body,
-html {
+body, html {
     height: 100%;
 }
 
@@ -339,37 +338,16 @@ html {
 }
 
 @if $skin-name == tos {
-    #skin_side,
-    #other_side,
-    #games_side,
-    #menus_side,
-    #demos_side,
-    #users_side,
-    #admin_side,
-    .side_navigation * a {
+    #skin_side, #other_side, #games_side, #menus_side, #demos_side, #users_side, #admin_side, .side_navigation * a {
         width: 190px;
         border-bottom: 3px solid #000000;
     }
 } @else if $skin-name == picasso {
-    #skin_side,
-    #other_side,
-    #games_side,
-    #menus_side,
-    #demos_side,
-    #users_side,
-    #admin_side,
-    .side_navigation * a {
+    #skin_side, #other_side, #games_side, #menus_side, #demos_side, #users_side, #admin_side, .side_navigation * a {
         width: 165px;
     }
 } @else if $skin-name == legacy {
-    #skin_side,
-    #other_side,
-    #games_side,
-    #menus_side,
-    #demos_side,
-    #users_side,
-    #admin_side,
-    .side_navigation * a {
+    #skin_side, #other_side, #games_side, #menus_side, #demos_side, #users_side, #admin_side, .side_navigation * a {
         width: 168px;
     }
 }
@@ -494,8 +472,7 @@ html {
     @extend .sidebutton_extra;
 }
 
-.sidebutton:hover,
-.sidebutton_cpanel:hover {
+.sidebutton:hover, .sidebutton_cpanel:hover {
     background: $menu-top-button-hover-bg;
     color: $sidebutton-hoover-font;
     @if $skin-name == legacy or $skin-name == picasso {
@@ -550,8 +527,7 @@ html {
 }
 
 @media screen and (min-width: 1920px) {
-    #search_side,
-    #search_text_side {
+    #search_side, #search_text_side {
         display: none;
     }
 }
@@ -691,8 +667,7 @@ header nav input[type=submit] {
     @extend .top_button_extra;
 }
 
-.topbutton:hover,
-.subbutton:hover {
+.topbutton:hover, .subbutton:hover {
     background: $menu-top-button-hover-bg;
     color: $menu-top-button-hover-color;
     @if $skin-name == tos or $skin-name == picasso {
@@ -743,8 +718,7 @@ header nav input[type=submit] {
 }
 
 @if $skin-name == tos or $skin-name == picasso {
-    #home:hover,
-    #search:hover {
+    #home:hover, #search:hover {
         height: 0;
     }
 }
@@ -967,8 +941,7 @@ header nav input[type=submit] {
     }
 }
 
-.log_on_menu #login-trigger,
-.log_on_menu #signup a {
+.log_on_menu #login-trigger, .log_on_menu #signup a {
     display: inline-block;
     *display: inline;
     *zoom: 1;
@@ -979,9 +952,7 @@ header nav input[type=submit] {
     color: $menu-top-button-color;
 }
 
-.log_on_menu #login-trigger:hover,
-.log_on_menu #login .active,
-.log_on_menu #signup a:hover {
+.log_on_menu #login-trigger:hover, .log_on_menu #login .active, .log_on_menu #signup a:hover {
     background: $menu-top-button-hover-bg;
     color: $menu-top-button-hover-color;
 }
@@ -1018,20 +989,16 @@ header nav input[type=submit] {
     }
 }
 
-input::-webkit-input-placeholder,
-textarea::-webkit-input-placeholder {
+input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
     color: #ffffff;
 }
-input:-moz-placeholder,
-textarea:-moz-placeholder {
+input:-moz-placeholder, textarea:-moz-placeholder {
     color: #ffffff;
 }
-input::-moz-placeholder,
-textarea::-moz-placeholder {
+input::-moz-placeholder, textarea::-moz-placeholder {
     color: #ffffff;
 }
-input:-ms-input-placeholder,
-textarea:-ms-input-placeholder {
+input:-ms-input-placeholder, textarea:-ms-input-placeholder {
     color: #ffffff;
 }
 

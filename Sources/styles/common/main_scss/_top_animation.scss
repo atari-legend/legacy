@@ -114,8 +114,7 @@ $animation-top: 0;
 //* at a resolution of max 480 (smartphones) we want a smaller logo with border */
 
 @media screen and (max-width: 480px) {
-    #animation,
-    #animation_vert {
+    #animation, #animation_vert {
         display: none;
     }
 }
@@ -124,8 +123,7 @@ $animation-top: 0;
 //* at a resolution of max 960 (Tablets & low res laptop) we want the original logo without the bee */
 
 @media screen and (min-width: 481px) and (max-width: 960px) {
-    #animation,
-    #animation_vert {
+    #animation, #animation_vert {
         display: none;
     }
 }
