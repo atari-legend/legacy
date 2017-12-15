@@ -111,11 +111,11 @@ function nickdelete(nick_id,ind_id)
             <legend>Edit individual</legend>
             <form action="../individuals/db_individuals.php" method="post" name="post" id="ind_edit">
                 <b>Name :</b>
-                <input type="text" name="ind_name" value="{$individuals.ind_name}" class="standard_tile_input_small">
+                <input type="text" name="ind_name" value="{$individuals.ind_name}" class="standard_input input_large">
                 <br>
                 <br>
                 <b>Email :</b>
-                <input type="text" name="ind_email" value="{$individuals.ind_email}" class="standard_tile_input_small">
+                <input type="text" name="ind_email" value="{$individuals.ind_email}" class="standard_input input_large">
                 <br>
                 <br>
                 <b>Profile :</b>
@@ -156,7 +156,7 @@ function nickdelete(nick_id,ind_id)
                     <!--<input type="file" name="individual_pic">-->
                     <label for="file_upload" class="file_upload">Select file</label>
                     <input id="file_upload" type="file" name="individual_pic">
-                    <input type="text" class="standard_tile_input_small" id="file_upload_user_detail">&nbsp;
+                    <input type="text" class="standard_input input_large" id="file_upload_user_detail">&nbsp;
                     <br>
                     <br>
                     <input type="submit" name="inserter" value="Upload" class="topbutton_cpanel_small">
@@ -169,7 +169,7 @@ function nickdelete(nick_id,ind_id)
         <form action="../individuals/db_individuals.php" method="post" name="ind" id="NickAdd">
             <fieldset>
                 <legend>Individuals nick (AKAs)</legend>
-                <input type="text" name="ind_nick" value="" class="standard_tile_input_small">
+                <input type="text" name="ind_nick" value="" class="standard_input input_large">
                 <input type="submit" value="Add Nick" class="topbutton_cpanel_small">
                 <input type="hidden" name="action" value="add_nick">
                 <input type="hidden" name="ind_id" value="{$individuals.ind_id}">

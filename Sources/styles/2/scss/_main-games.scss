@@ -45,21 +45,6 @@
     width: 65%;
 }
 
-#games_main_small_select_site {
-    width: 10%;
-    height: 25px;
-}
-
-.standard_tile_input_small_site {
-    @extend .standard_tile_input_small;
-    width: 98.5%;
-}
-
-#games_main_select_site {
-    width: 100%;
-    height: 25px;
-    margin-top: 0;
-}
 
 .games_main_container {
     display: flex;
@@ -165,28 +150,6 @@
 .games_main_input_list_text {
     display: table-cell;
     width: 65%;
-}
-
-.games_main_list_input_small {
-    @extend .standard_tile_input_small_site;
-    height: 20px;
-}
-
-#games_main_pub_drop {
-    @extend #games_main_select_site;
-    height: 27px;
-}
-#games_main_dev_drop {
-    @extend #games_main_select_site;
-    height: 27px;
-}
-#games_main_year_drop {
-    @extend #games_main_select_site;
-    height: 27px;
-}
-#games_main_cat_drop {
-    @extend #games_main_select_site;
-    height: 27px;
 }
 
 //****************Games main comments************************/

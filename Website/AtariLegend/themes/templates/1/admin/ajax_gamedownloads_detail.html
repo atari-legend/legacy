@@ -58,7 +58,7 @@
                                                     <div class="download_details_text_long" style="margin-right:10px;">
                                                         Version:
                                                         <br>
-                                                        <input type="text" name="version" class="standard_tile_input_small" value="{$download_details.version}" id="download_version">
+                                                        <input type="text" name="version" class="standard_input input_full" value="{$download_details.version}">
                                                     </div>
                                                 </div>
                                                 <div class="download_details_row">
@@ -393,7 +393,7 @@
                                                     {/foreach}
                                                 </select>
                                                 <br>
-                                                <input type="text" name="download_chain" id="download_chain" value="Nr" class="standard_tile_input_small" style="width:25%">
+                                                <input type="text" name="download_chain" id="download_chain" value="Nr" class="standard_input input_small">
                                                 <br>
                                                 <br>
                                                 <input type="button" name="link_set" value="Link" onClick="linkSet({$downloads.game_download_id},{$game.game_id}); return false;" class="topbutton_cpanel_small">
@@ -765,7 +765,7 @@
                 <div class="download_details_text_long" style="margin-right:10px;">
                     Version:
                     <br>
-                    <input type="text" name="version" class="standard_tile_input_small" value="{$download_details.version}" id="download_version">
+                    <input type="text" name="version" class="standard_input input_full" value="{$download_details.version}">
                 </div>
             </div>
             <div class="download_details_row">

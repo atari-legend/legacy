@@ -71,7 +71,7 @@
                             </div>
                             <div class="main_company_child" id="child_add_company">
                                 <b>Release Year:</b><br>
-                                {html_select_date start_year="1984" end_year="+1" display_days=false display_months=false prefix="" field_name="" style="width:100px;height:25px;" name="year_id" time="{$menus.menu_year}-01-01" onchange="changeYear(this.value,$menu_disk_id)"}
+                                {html_select_date start_year="1984" end_year="+1" display_days=false display_months=false prefix="" field_name="" class="standard_select select_medium" name="year_id" time="{$menus.menu_year}-01-01" onchange="changeYear(this.value,$menu_disk_id)"}
                                 <br><img src="../../../themes/templates/1/includes/img/arrow_ltr.gif" alt="" width="38" height="22" style="display:inline;">
                                 <h3 style="text-align:center;display:inline;">{if (isset($menus.menu_year))} {$menus.menu_year} set {else} Not set{/if}</h3>
                                 <br>
@@ -334,10 +334,10 @@
     <br>
     <form action="" method="post" id="menu_credits_form">
         <b>Add intro credits:</b><br>
-        <Select class="saveHistory" id="m1" name="m1" onchange="browseInd(this.value)" style="width:70px;height:25px;display:inline;">
+        <select class="standard_select select_small" id="m1" name="m1" onchange="browseInd(this.value)">
             {html_options values=$az_value output=$az_output}
         </select>
-        <input type="text" onkeyup="searchInd(this.value)" class="standard_tile_input_small" value="search">
+        <input type="text" onkeyup="searchInd(this.value)" class="standard_input input_large" value="search">
         <br>
         <div id="ind_member" style="display:inline;">
             <select id="ind_id" name="ind_id" class="standard_select select_medium">
@@ -347,7 +347,7 @@
             </select>
         </div>
 
-        <select id="author_type_id" class="standard_select select_medium" name="author_type_id" size="1" style="margin:5px;margin-top:0px;width:200px;">
+        <select id="author_type_id" class="standard_select select_large" name="author_type_id" size="1">
         <option value="">-</option>
             {foreach from=$author_type item=line}
                 <option value="{$line.author_type_id}">{$line.author_type_info}</option>
@@ -712,7 +712,7 @@
                                 {html_options values=$line.menu_disk_title_set_nr output=$line.menu_disk_name selected=$select_chain_data}
                             {/foreach}
                         </select>
-                        <input type="text" name="menu_disk_title_set_chain" value="{if isset($select_chain_nr)}{$select_chain_nr}{else}Nr{/if}" class="standard_tile_input_small" style="width:5%">
+                        <input type="text" name="menu_disk_title_set_chain" value="{if isset($select_chain_nr)}{$select_chain_nr}{else}Nr{/if}" class="standard_input input_small">
                         <br>
                         <input type="button" onclick="linkChain({$menu_disk_title_id},{$menu_disk_id})" class="topbutton_cpanel_small" value="Link">
                         <br>

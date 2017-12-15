@@ -8,15 +8,6 @@
 // DOWNLOAD edit section
 // *********************
 
-#download_version, #download_info {
-    @extend .standard_tile_input_small;
-    width: 95%;
-}
-
-#file_upload_game_detail {
-    width: 60%;
-}
-
 .downloads_main_row {
     @extend .games_main_row;
 }

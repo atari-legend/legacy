@@ -43,10 +43,6 @@
     text-align: right;
 }
 
-#changelog_select select {
-    width: 50%;
-}
-
 //*-----------------------Database updates-------------------------- */
 .td_db_result, .td_db_state, .td_db_id, .td_db_description, .td_db_exe {
     @extend .standard_table_center;

@@ -111,7 +111,7 @@ function searchCrew(str) {
                 <option value="" SELECTED>-</option>
                 {html_options values=$az_value output=$az_output}
             </select>
-            <input type="text" name="crewsearch" value="" onkeyup="searchCrew(this.value)" class="standard_tile_input_small">
+            <input type="text" name="crewsearch" value="" onkeyup="searchCrew(this.value)" class="standard_input input_large">
             <br>
             <br>
             {* Ajax *}
@@ -133,7 +133,7 @@ function searchCrew(str) {
         {* Add crew section *}
         Add new Crew to db:
         <form method="post" name="insertcrew">
-            <input type="text" name="newcrew" value="" class="standard_tile_input_small">
+            <input type="text" name="newcrew" value="" class="standard_input input_large">
             <br>
             <br>
             <input type="submit" value="Insert" class="quick_search_games_button" onClick="crewinsert(); return false;">
