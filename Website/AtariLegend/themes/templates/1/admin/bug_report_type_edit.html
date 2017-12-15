@@ -48,7 +48,7 @@ function typedelete(type_id)
             <legend>Edit type</legend>
             <form action="../administration/db_bug_report_type.php" method="post" name="post" id="type_edit">
                 <b>Name :</b>
-                <input type="text" name="type_name" value="{$type_edit.type_edit}" class="standard_tile_input_small">
+                <input type="text" name="type_name" value="{$type_edit.type_edit}" class="standard_input input_large">
                 <br><br>
                 <input type="submit" value="Update" style="padding:2px;" class="topbutton_cpanel_small">
                 <input type="submit" value="Delete" onClick="typedelete({$type_edit.type_id_edit}); return false;" class="topbutton_cpanel_small">

@@ -24,7 +24,7 @@
                             {html_options values=$line.menu_disk_title_set_nr output=$line.menu_disk_name selected=$select_chain_data}
                         {/foreach}
                     </select>
-                    <input type="text" name="menu_disk_title_set_chain" value="{if isset($select_chain_nr)}{$select_chain_nr}{else}Nr{/if}" class="standard_tile_input_small" style="width:5%">
+                    <input type="text" name="menu_disk_title_set_chain" value="{if isset($select_chain_nr)}{$select_chain_nr}{else}Nr{/if}" class="standard_input input_small">
                     <br>
                     <input type="button" onclick="linkChain({$menu_disk_title_id},{$menu_disk_id})" class="topbutton_cpanel_small" value="Link">
                     <br>

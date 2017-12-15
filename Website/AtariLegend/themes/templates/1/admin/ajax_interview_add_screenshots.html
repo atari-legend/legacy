@@ -27,7 +27,7 @@
                     </a>
                 </td>
                 <td style="width:90%;border:0;">
-                    <input type="text" name="inputfield[]" value="{$line.interview_screenshot_comment}" class="standard_tile_input_small" style="width:95%;" id="comment_{$line.interview_screenshot_count}">
+                    <input type="text" name="inputfield[]" value="{$line.interview_screenshot_comment}" class="standard_input" style="width:95%;" id="comment_{$line.interview_screenshot_count}">
                 </td>
             </tr>
         {/foreach}
@@ -44,7 +44,7 @@
             <legend>Browse</legend>
                 <label for="file_upload" class="file_upload" onclick="myFunction()">Select file(s)</label>
                 <input id="file_upload" type="file" name="image[]" multiple>
-                <input type="text" class="standard_tile_input_small" id="file_upload_game_screenshots">&nbsp;
+                <input type="text" class="standard_input" id="file_upload_game_screenshots">&nbsp;
                 <br>
                 <br>
                 <input type="hidden" name="MAX_FILE_SIZE" value="100000">

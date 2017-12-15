@@ -241,18 +241,6 @@ img {
     border: 0;
 }
 
-.standard_tile_input_small {
-    width: 185px;
-    height: 25px;
-    padding: 0;
-    padding-left: 5px;
-    margin-top: 0;
-    color: #ffffff;
-    text-align: left;
-    background: #000000;
-    border: 1px solid #008b8b;
-}
-
 .standard_tile_input_area {
     width: 90%;
     height: 40px;
@@ -375,34 +363,6 @@ img {
 
 .standard_tile_text {
     padding: 20px;
-}
-.standard_tile select {
-    height: 25px;
-    padding: 0;
-    padding-left: 5px;
-    margin-top: 5px;
-    background-color: #000000;
-    color: #ffffff;
-    border: 1px solid #008b8b;
-}
-
-.select_small {
-    width: 50px;
-    margin-top: 0;
-}
-
-.select_medium {
-    width: 140px;
-    margin-top: 0;
-}
-.select_large {
-    width: 185px;
-    margin-top: 0;
-}
-
-.select_full {
-    width: 100%;
-    margin-top: 0;
 }
 
 #other {
@@ -624,7 +584,7 @@ img {
     @extend .topbutton_cpanel_small:hover;
 }
 fieldset {
-    padding: 8px;
+    padding: 15px;
     font-size: 11pt;
     background: $bg-color;
     border: solid 1px #000000;
@@ -636,6 +596,7 @@ legend {
     background: #006f6f;
     border: #000000 solid 1px;
 }
+
 
 //*------------------------------------------------------------
 //The CSS for the help tips
@@ -793,7 +754,7 @@ div.tab button.active {
 //*fade in effect on tab */
 .tabcontent {
     -webkit-animation: fadeEffect 1s;
-    animation: fadeEffect .5s; //* Fading effect takes 1 second */
+            animation: fadeEffect .5s; //* Fading effect takes 1 second */
 }
 
 @-webkit-keyframes fadeEffect {
@@ -837,10 +798,6 @@ div.tab button.active {
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
     border-bottom-left-radius: 10px;
-    -webkit-transition: all .5s ease-in-out;
-    -moz-transition: all .5s ease-in-out;
-    -ms-transition: all .5s ease-in-out;
-    -o-transition: all .5s ease-in-out;
     transition: all .5s ease-in-out;
 }
 .scroll-top-wrapper:hover {
