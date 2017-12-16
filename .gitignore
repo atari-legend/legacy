@@ -1,5 +1,6 @@
 # exclude everything except directory data
-/Website/AtariLegend/data/
+/Website/AtariLegend/data/*
+!/Website/AtariLegend/data/database-*
 
 # exclude temporary directory where Smarty templates are compiled
 /Website/AtariLegend/php/temp
