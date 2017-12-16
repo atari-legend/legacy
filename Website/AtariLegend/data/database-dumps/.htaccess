@@ -1,0 +1,4 @@
+Options +Indexes
+IndexIgnore .??* *~ *# HEADER* README* RCS CVS *,v *,t
+HeaderName HEADER.html
+
