@@ -1,23 +1,24 @@
 // Helper function for the normalize() mixin.
-@function _normalize-include($section, $exclude: null) {
+@function _normalize_include($section, $exclude: null) {
     // Initialize the global variables needed by this function.
-    @if not global_variable_exists(_normalize-include) {
-        $_normalize-include: () !global;
-        $_normalize-exclude: () !global;
+    @if not global_variable_exists(_normalize_include) {
+        $_normalize_include: () !global;
+        $_normalize_exclude: () !global;
     }
     // Since we are given 2 parameters, set the global variables.
     @if $exclude != null {
         $include: $section;
         // Sass doesn't have static variables, so the work-around is to stuff these
         // values into global variables so we can access them in future calls.
-        $_normalize-include: if(type-of($include) == 'list', $include, ($include)) !global;
-        $_normalize-exclude: if(type-of($exclude) == 'list', $exclude, ($exclude)) !global;
+        $_normalize_include: if(type-of($include) == 'list', $include, ($include)) !global;
+        $_normalize_exclude: if(type-of($exclude) == 'list', $exclude, ($exclude)) !global;
         @return true;
     }
     // Check if $section is in the $include list.
-    @if index($_normalize-include, $section) {
+    @if index($_normalize_include, $section) {
         @return true;
-    } @else if not index($_normalize-exclude, $section) and index($_normalize-include, all) { // If $include is set to (all), make sure $section is not in $exclude.
+    } @else if not index($_normalize_exclude, $section) and index($_normalize_include, all) {
+        // If $include is set to (all), make sure $section is not in $exclude.
         @return true;
     }
     @return false;
@@ -25,13 +26,13 @@
 
 @mixin normalize($include: (all), $exclude: ()) {
     // Initialize the helper function by passing it this mixin's parameters.
-    $init: _normalize-include($include, $exclude);
+    $init: _normalize_include($include, $exclude);
     // If we've customized any font variables, we'll need extra properties.
-    @if $base-font-size != 16px or $base-line-height != 24px or $base-unit != 'em' or $h1-font-size != 2 * $base-font-size or $h2-font-size != 1.5 * $base-font-size or $h3-font-size != 1.17 * $base-font-size or $h4-font-size != 1 * $base-font-size or $h5-font-size != .83 * $base-font-size or $h6-font-size != .67 * $base-font-size {
-        $normalize-vertical-rhythm: true !global;
+    @if $base_font_size != 16px or $base_line_height != 24px or $base_unit != 'em' or $h1_font_size != 2 * $base_font_size or $h2_font_size != 1.5 * $base_font_size or $h3_font_size != 1.17 * $base_font_size or $h4_font_size != 1 * $base_font_size or $h5_font_size != .83 * $base_font_size or $h6_font_size != .67 * $base_font_size {
+        $normalize_vertical_rhythm: true !global;
     }
     //*! normalize-scss | MIT/GPLv2 License | bit.ly/normalize-scss */
-    @if _normalize-include(document) {
+    @if _normalize_include(document) {
         //* Document
         //   ========================================================================== */
         //**
@@ -41,20 +42,20 @@
         // *    IE on Windows Phone and in iOS.
         // */
         html {
-            font-family: $base-font-family; //* 1 */
-            @if $normalize-vertical-rhythm {
+            font-family: $base_font_family; //* 1 */
+            @if $normalize_vertical_rhythm {
                 // Correct old browser bug that prevented accessible resizing of text
                 // when root font-size is set with px or em.
-                font-size: ($base-font-size / 16px) * 100%;
-                line-height: ($base-line-height / $base-font-size) * 1em; //* 2 */
+                font-size: ($base_font_size / 16px) * 100%;
+                line-height: ($base_line_height / $base_font_size) * 1em; //* 2 */
             } @else {
                 line-height: 1.15; //* 2 */
             }
-            -ms-text-size-adjust: 100%; //* 3 */
+                -ms-text-size-adjust: 100%; //* 3 */
             -webkit-text-size-adjust: 100%; //* 3 */
         }
     }
-    @if _normalize-include(sections) {
+    @if _normalize_include(sections) {
         //* Sections
         //   ========================================================================== */
         //**
@@ -79,59 +80,59 @@
         // * `article` contexts in Chrome, Firefox, and Safari.
         // */
         h1 {
-            @include normalize-font-size($h1-font-size);
-            @if $normalize-vertical-rhythm {
-                @include normalize-line-height($h1-font-size);
+            @include normalize_font_size($h1_font_size);
+            @if $normalize_vertical_rhythm {
+                @include normalize_line_height($h1_font_size);
             }
-            @if $normalize-vertical-rhythm {
+            @if $normalize_vertical_rhythm {
                 //* Set 1 unit of vertical rhythm on the top and bottom margins. */
-                @include normalize-margin(1 0, $h1-font-size);
+                @include normalize_margin(1 0, $h1_font_size);
             } @else {
                 margin: .67em 0;
             }
         }
-        @if $normalize-vertical-rhythm {
+        @if $normalize_vertical_rhythm {
             h2 {
-                @include normalize-font-size($h2-font-size);
-                @include normalize-line-height($h2-font-size);
-                @include normalize-margin(1 0, $h2-font-size);
+                @include normalize_font_size($h2_font_size);
+                @include normalize_line_height($h2_font_size);
+                @include normalize_margin(1 0, $h2_font_size);
             }
             h3 {
-                @include normalize-font-size($h3-font-size);
-                @include normalize-line-height($h3-font-size);
-                @include normalize-margin(1 0, $h3-font-size);
+                @include normalize_font_size($h3_font_size);
+                @include normalize_line_height($h3_font_size);
+                @include normalize_margin(1 0, $h3_font_size);
             }
             h4 {
-                @include normalize-font-size($h4-font-size);
-                @include normalize-line-height($h4-font-size);
-                @include normalize-margin(1 0, $h4-font-size);
+                @include normalize_font_size($h4_font_size);
+                @include normalize_line_height($h4_font_size);
+                @include normalize_margin(1 0, $h4_font_size);
             }
             h5 {
-                @include normalize-font-size($h5-font-size);
-                @include normalize-line-height($h5-font-size);
-                @include normalize-margin(1 0, $h5-font-size);
+                @include normalize_font_size($h5_font_size);
+                @include normalize_line_height($h5_font_size);
+                @include normalize_margin(1 0, $h5_font_size);
             }
             h6 {
-                @include normalize-font-size($h6-font-size);
-                @include normalize-line-height($h6-font-size);
-                @include normalize-margin(1 0, $h6-font-size);
+                @include normalize_font_size($h6_font_size);
+                @include normalize_line_height($h6_font_size);
+                @include normalize_margin(1 0, $h6_font_size);
             }
         }
     }
-    @if _normalize-include(grouping) {
+    @if _normalize_include(grouping) {
         //* Grouping content
         //   ========================================================================== */
-        @if $normalize-vertical-rhythm {
+        @if $normalize_vertical_rhythm {
             //**
             // * Set 1 unit of vertical rhythm on the top and bottom margin.
             // */
             blockquote {
-                @include normalize-margin(1 $indent-amount);
+                @include normalize_margin(1 $indent_amount);
             }
             dl,
             ol,
             ul {
-                @include normalize-margin(1 0);
+                @include normalize_margin(1 0);
             }
             //**
             // * Turn off margins on nested lists.
@@ -144,11 +145,11 @@
                 }
             }
             dd {
-                margin: 0 0 0 $indent-amount;
+                margin: 0 0 0 $indent_amount;
             }
             ol,
             ul {
-                padding: 0 0 0 $indent-amount;
+                padding: 0 0 0 $indent_amount;
             }
         }
         //**
@@ -162,10 +163,10 @@
         // * Add the correct margin in IE 8.
         // */
         figure {
-            @if $normalize-vertical-rhythm {
-                @include normalize-margin(1 $indent-amount);
+            @if $normalize_vertical_rhythm {
+                @include normalize_margin(1 $indent_amount);
             } @else {
-                margin: 1em $indent-amount;
+                margin: 1em $indent_amount;
             }
         }
         //**
@@ -183,13 +184,13 @@
         main {
             display: block;
         }
-        @if $normalize-vertical-rhythm {
+        @if $normalize_vertical_rhythm {
             //**
             // * Set 1 unit of vertical rhythm on the top and bottom margin.
             // */
             p,
             pre {
-                @include normalize-margin(1 0);
+                @include normalize_margin(1 0);
             }
         }
         //**
@@ -201,7 +202,7 @@
             font-size: 1em; //* 2 */
         }
     }
-    @if _normalize-include(links) {
+    @if _normalize_include(links) {
         //* Links
         //  ========================================================================== */
         //**
@@ -221,7 +222,7 @@
             outline-width: 0;
         }
     }
-    @if _normalize-include(text) {
+    @if _normalize_include(text) {
         //* Text-level semantics
         //   ========================================================================== */
         //**
@@ -267,8 +268,8 @@
         // * Add the correct background and color in IE 9-.
         // */
         mark {
-            background-color: #ff0;
-            color: #000;
+            background-color: #ffff00;
+            color: #000000;
         }
         //**
         // * Add the correct font size in all browsers.
@@ -294,7 +295,7 @@
             top: -.5em;
         }
     }
-    @if _normalize-include(embedded) {
+    @if _normalize_include(embedded) {
         //* Embedded content
         //   ========================================================================== */
         //**
@@ -324,7 +325,7 @@
             overflow: hidden;
         }
     }
-    @if _normalize-include(forms) {
+    @if _normalize_include(forms) {
         //* Forms
         //   ========================================================================== */
         //**
@@ -338,8 +339,8 @@
         textarea {
             font-family: inherit; //* 1 */
             font-size: 100%; //* 1 */
-            @if $normalize-vertical-rhythm {
-                line-height: ($base-line-height / $base-font-size) * 1em; //* 1 */
+            @if $normalize_vertical_rhythm {
+                line-height: ($base_line_height / $base_font_size) * 1em; //* 1 */
             } @else {
                 line-height: 1.15; //* 1 */
             }
@@ -471,7 +472,7 @@
             overflow: auto;
         }
     }
-    @if _normalize-include(interactive) {
+    @if _normalize_include(interactive) {
         //* Interactive
         //   ========================================================================== */
         //*
@@ -491,13 +492,13 @@
         // */
         menu {
             display: block;
-            @if $normalize-vertical-rhythm {
+            @if $normalize_vertical_rhythm {
                 //*
                 // * 1. Set 1 unit of vertical rhythm on the top and bottom margin.
                 // * 2. Set consistent space for the list style image.
                 // */
-                @include normalize-margin(1 0); //* 1 */
-                padding: 0 0 0 $indent-amount; //* 2 */
+                @include normalize_margin(1 0); //* 1 */
+                padding: 0 0 0 $indent_amount; //* 2 */
                 //**
                 // * Turn off margins on nested lists.
                 // */
@@ -509,7 +510,7 @@
             }
         }
     }
-    @if _normalize-include(scripting) {
+    @if _normalize_include(scripting) {
         //* Scripting
         //   ========================================================================== */
         //**
@@ -525,7 +526,7 @@
             display: none;
         }
     }
-    @if _normalize-include(hidden) {
+    @if _normalize_include(hidden) {
         //* Hidden
         //   ========================================================================== */
         //**

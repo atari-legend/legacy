@@ -119,10 +119,10 @@ img {
 .standard_tile {
     width: 100%;
     background: linear-gradient(to top, #ffffff, #a6a6a6);
-    border-top: 10px solid $bg-color;
-    border-right: 1px solid $bg-color;
-    border-bottom: 3px solid $bg-color;
-    border-left: 1px solid $bg-color;
+    border-top: 10px solid $bg_color;
+    border-right: 1px solid $bg_color;
+    border-bottom: 3px solid $bg_color;
+    border-left: 1px solid $bg_color;
 }
 
 .standard_tile_line {
@@ -260,7 +260,7 @@ img {
     color: #000000;
 }
 .standard_tile_link:hover {
-    color: $bg-color;
+    color: $bg_color;
 }
 .standard_tile_link_reverse:link {
     color: #000000;
@@ -386,7 +386,7 @@ img {
 
 .file_upload:hover {
     color: #ffffff;
-    background: $bg-color;
+    background: $bg_color;
     border: 1px solid #4f4f4f;
 }
 
@@ -556,7 +556,7 @@ img {
 
 .topbutton_cpanel_small:hover {
     color: #ffffff;
-    background: $bg-color;
+    background: $bg_color;
     border: 1px solid #4f4f4f;
 }
 

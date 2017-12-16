@@ -4,13 +4,13 @@
 
 //* ---------SASS variables for animation--------*/
 
-$animation-top: 0;
-@if $skin-name == legacy {
-    $animation-top: 145px;
-} @else if $skin-name == picasso {
-    $animation-top: 156px;
-} @else if $skin-name == tos {
-    $animation-top: 174px;
+$animation_top: 0;
+@if $skin_name == legacy {
+    $animation_top: 145px;
+} @else if $skin_name == picasso {
+    $animation_top: 156px;
+} @else if $skin_name == tos {
+    $animation_top: 174px;
 }
 
 
@@ -26,7 +26,7 @@ $animation-top: 0;
 
 @-webkit-keyframes STcharacters {
     0% {
-        top: $animation-top;
+        top: $animation_top;
         left: -20%;
         opacity: 0;
     }
@@ -37,7 +37,7 @@ $animation-top: 0;
         opacity: 1;
     }
     100% {
-        top: $animation-top;
+        top: $animation_top;
         left: 45%;
         opacity: 0;
     }
@@ -45,7 +45,7 @@ $animation-top: 0;
 
 @keyframes STcharacters {
     0% {
-        top: $animation-top;
+        top: $animation_top;
         left: -20%;
         opacity: 0;
     }
@@ -56,7 +56,7 @@ $animation-top: 0;
         opacity: 1;
     }
     100% {
-        top: $animation-top;
+        top: $animation_top;
         left: 45%;
         opacity: 0;
     }
