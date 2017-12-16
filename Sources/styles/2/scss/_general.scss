@@ -341,9 +341,7 @@ a.standard_tile_link:hover, a.standard_tile_link:focus {
     width: 100%;
     margin-top: 10px;
     line-height: 1.2;
-    -webkit-line-clamp: 5;
-    -webkit-box-orient: vertical;
-            box-orient: vertical;
+    box-orient: vertical;
     font-size: 1em;
 }
 
@@ -695,14 +693,14 @@ legend {
 //*------------------------------------------------------------
 //The CSS for the tabs
 //-------------------------------------------------------------*/
-/* Style the tab */
+//* Style the tab */
 div.tab {
     overflow: hidden;
     border: 1px solid #cccccc;
     background-color: #f1f1f1;
 }
 
-/* Style the buttons inside the tab */
+//* Style the buttons inside the tab */
 div.tab button {
     background-color: inherit;
     float: left;
@@ -713,17 +711,17 @@ div.tab button {
     transition: .3s;
 }
 
-/* Change background color of buttons on hover */
+//* Change background color of buttons on hover */
 div.tab button:hover {
     background-color: #dddddd;
 }
 
-/* Create an active/current tablink class */
+//* Create an active/current tablink class */
 div.tab button.active {
     background-color: #cccccc;
 }
 
-/* Style the tab content */
+//* Style the tab content */
 .tabcontent {
     display: none;
     padding: 6px 12px;
@@ -731,10 +729,9 @@ div.tab button.active {
     border-top: none;
 }
 
-/*fade in effect on tab */
+//*fade in effect on tab */
 .tabcontent {
-    -webkit-animation: fadeEffect 1s;
-            animation: fadeEffect .5s; /* Fading effect takes 1 second */
+    animation: fadeEffect .5s; //* Fading effect takes 1 second */
 }
 
 @-webkit-keyframes fadeEffect {

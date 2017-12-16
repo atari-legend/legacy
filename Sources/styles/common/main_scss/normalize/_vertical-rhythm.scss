@@ -4,54 +4,54 @@
 // This is the minimal amount of code needed to create vertical rhythm in our
 // CSS. If you are looking for a robust solution, look at the excellent Typey
 // library. @see https://github.com/jptaranto/typey
-@function normalize-rhythm($value, $relative-to: $base-font-size, $unit: $base-unit) {
+@function normalize_rhythm($value, $relative_to: $base_font_size, $unit: $base_unit) {
     @if unit($value) != px {
         @error "The normalize vertical-rhythm module only supports px inputs. The typey library is better.";
     }
     @if $unit == rem {
-        @return ($value / $base-font-size) * 1rem;
+        @return ($value / $base_font_size) * 1rem;
     } @else if $unit == em {
-        @return ($value / $relative-to) * 1em;
+        @return ($value / $relative_to) * 1em;
     } @else {
         // $unit == px
         @return $value;
     }
 }
 
-@mixin normalize-font-size($value, $relative-to: $base-font-size) {
+@mixin normalize_font_size($value, $relative_to: $base_font_size) {
     @if unit($value) != 'px' {
-        @error "normalize-font-size() only supports px inputs. The typey library is better.";
+        @error "normalize_font_size() only supports px inputs. The typey library is better.";
     }
-    font-size: normalize-rhythm($value, $relative-to);
+    font-size: normalize_rhythm($value, $relative_to);
 }
 
-@mixin normalize-rhythm($property, $values, $relative-to: $base-font-size) {
-    $value-list: $values;
+@mixin normalize_rhythm($property, $values, $relative_to: $base_font_size) {
+    $value_list: $values;
     $sep: space;
     @if type-of($values) == 'list' {
         $sep: list-separator($values);
     } @else {
-        $value-list: append((), $values);
+        $value_list: append((), $values);
     }
-    $normalized-values: ();
-    @each $value in $value-list {
+    $normalized_values: ();
+    @each $value in $value_list {
         @if unitless($value) and $value != 0 {
-            $value: $value * normalize-rhythm($base-line-height, $relative-to);
+            $value: $value * normalize_rhythm($base_line_height, $relative_to);
         }
-        $normalized-values: append($normalized-values, $value, $sep);
+        $normalized_values: append($normalized_values, $value, $sep);
     }
-    #{$property}: $normalized-values;
+    #{$property}: $normalized_values;
 }
 
-@mixin normalize-margin($values, $relative-to: $base-font-size) {
-    @include normalize-rhythm(margin, $values, $relative-to);
+@mixin normalize_margin($values, $relative_to: $base_font_size) {
+    @include normalize_rhythm(margin, $values, $relative_to);
 }
 
-@mixin normalize-line-height($font-size, $min-line-padding: 2px) {
-    $lines: ceil($font-size / $base-line-height);
+@mixin normalize_line_height($font_size, $min_line_padding: 2px) {
+    $lines: ceil($font_size / $base_line_height);
     // If lines are cramped include some extra leading.
-    @if ($lines * $base-line-height - $font-size) < ($min-line-padding * 2) {
+    @if ($lines * $base_line_height - $font_size) < ($min_line_padding * 2) {
         $lines: $lines + 1;
     }
-    @include normalize-rhythm(line-height, $lines, $font-size);
+    @include normalize_rhythm(line-height, $lines, $font_size);
 }

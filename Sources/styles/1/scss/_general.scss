@@ -196,7 +196,7 @@ img {
     font-size: 10pt;
     font-style: italic;
     font-weight: 100;
-    color: $bg-color;
+    color: $bg_color;
 }
 
 .standard_tile h3 {
@@ -331,7 +331,7 @@ img {
 //    max-width: 100%;
 //    width: 80%;
 //    margin-left: 15px;
-//    box-shadow: 0 0 7px $bg-color;
+//    box-shadow: 0 0 7px $bg_color;
 //}
 
 //.standard_list_entry_left img:hover { box-shadow: 0 0 7px #fff; }
@@ -586,7 +586,7 @@ img {
 fieldset {
     padding: 15px;
     font-size: 11pt;
-    background: $bg-color;
+    background: $bg_color;
     border: solid 1px #000000;
 }
 

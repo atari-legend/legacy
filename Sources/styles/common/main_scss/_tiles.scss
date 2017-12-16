@@ -14,11 +14,11 @@
     width: 100%;
     max-width: 99.5%;
     background: #3085a3;
-    @if $skin-name == legacy {
+    @if $skin_name == legacy {
         border: 1px solid #008b8b;
-    } @else if $skin-name == tos {
+    } @else if $skin_name == tos {
         border: 1px solid #ffffff;
-    } @else if $skin-name == picasso {
+    } @else if $skin_name == picasso {
         border: 1px solid #484c7b;
     }
 }
@@ -33,7 +33,6 @@
     color: #ffffff;
     text-transform: uppercase;
     font-size: 1.25em;
-    -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
 }
 
@@ -96,25 +95,23 @@ figure.effect-tile figcaption {
     bottom: 0;
     padding: 1em;
     height: 1em;
-    @if $skin-name == legacy {
+    @if $skin_name == legacy {
         background: rgba(0, 80, 80, .8);
         border-top: 1px solid #ffffff;
         border-bottom: 1px solid #ffffff;
-    } @else if $skin-name == tos {
+    } @else if $skin_name == tos {
         background: rgba(172, 172, 172, .8);
         border-top: 1px solid #000000;
         border-bottom: 1px solid #000000;
-    } @else if $skin-name == picasso {
+    } @else if $skin_name == picasso {
         background: rgba(172, 172, 172, .8);
         border-top: 1px solid #484c7b;
         border-bottom: 1px solid #484c7b;
     }
 
     color: #ffffff;
-    -webkit-transition: -webkit-transform .35s;
     transition: transform .35s;
-    -webkit-transform: translate3d(0,100%,0);
-    transform: translate3d(0,100%,0);
+    transform: translate3d(0, 100%, 0);
 }
 
 figure.effect-tile p.icon-links a {
@@ -138,15 +135,12 @@ figure.effect-tile p.description {
     text-transform: none;
     font-size: 90%;
     opacity: 0;
-    -webkit-transition: opacity .35s;
     transition: opacity .35s;
     -webkit-backface-visibility: hidden; //* Fix for Chrome 37.0.2062.120 (Mac) */
 }
 
 figure.effect-tile tile_title, figure.effect-tile p.icon-links a {
-    -webkit-transition: -webkit-transform .35s;
     transition: transform .35s;
-    -webkit-transform: translate3d(0,200%,0);
     transform: translate3d(0,200%,0);
 }
 
@@ -163,27 +157,22 @@ figure.effect-tile:hover p.description {
 }
 
 figure.effect-tile:hover figcaption, figure.effect-tile:hover tile_title, figure.effect-tile:hover p.icon-links a {
-    -webkit-transform: translate3d(0,0,0);
-    transform: translate3d(0,0,0);
+    transform: translate3d(0, 0, 0);
 }
 
 figure.effect-tile:hover tile_title {
-    -webkit-transition-delay: .05s;
     transition-delay: .05s;
 }
 
 figure.effect-tile:hover p.icon-links a:nth-child(3) {
-    -webkit-transition-delay: .1s;
     transition-delay: .1s;
 }
 
 figure.effect-tile:hover p.icon-links a:nth-child(2) {
-    -webkit-transition-delay: .15s;
     transition-delay: .15s;
 }
 
 figure.effect-tile:hover p.icon-links a:first-child {
-    -webkit-transition-delay: .2s;
     transition-delay: .2s;
 }
 
@@ -194,15 +183,14 @@ figure.effect-tile:hover p.icon-links a:first-child {
 //*---------------------------------------************/
 
 figure.effect-bubba {
-    @if $skin-name == legacy {
+    @if $skin_name == legacy {
         background: rgb(0, 80, 80);
-    } @else if $skin-name == tos or $skin-name == picasso {
+    } @else if $skin_name == tos or $skin_name == picasso {
         background: rgb(172, 172, 172);
     }
 }
 
 figure.effect-bubba img {
-    -webkit-transition: opacity .35s;
     transition: opacity .35s;
 }
 
@@ -218,71 +206,61 @@ figure.effect-bubba figcaption::before, figure.effect-bubba figcaption::after {
     left: 30px;
     content: '';
     opacity: 0;
-    -webkit-transition: opacity .35s, -webkit-transform .35s;
     transition: opacity .35s, transform .35s;
 }
 
 figure.effect-bubba figcaption::before {
     border-top: 1px solid #ffffff;
     border-bottom: 1px solid #ffffff;
-    -webkit-transform: scale(0,1);
-    transform: scale(0,1);
+    transform: scale(0, 1);
 }
 
 figure.effect-bubba figcaption::after {
     border-right: 1px solid #ffffff;
     border-left: 1px solid #ffffff;
-    -webkit-transform: scale(1,0);
-    transform: scale(1,0);
+    transform: scale(1, 0);
 }
 
 figure.effect-bubba h2 {
     text-align: center;
     padding: 20px 2.5em;
     opacity: 1;
-    @if $skin-name == legacy {
+    @if $skin_name == legacy {
         text-shadow: -1px -1px 0 #005050,
         1px -1px 0 #005050,
         -1px 1px 0 #005050,
         1px 1px 0 #005050;
-    } @else if $skin-name == tos or $skin-name == picasso {
+    } @else if $skin_name == tos or $skin_name == picasso {
         text-shadow: -1px -1px 0 #000000,
         1px -1px 0 #000000,
         -1px 1px 0 #000000,
         1px 1px 0 #000000;
     }
-    -webkit-transition: opacity .35s, -webkit-transform .35s;
     transition: opacity .35s, transform .35s;
-    -webkit-transform: translate3d(0,20px,0);
-    transform: translate3d(0,20px,0);
+    transform: translate3d(0, 20px, 0);
 }
 
 figure.effect-bubba p {
     padding: 20px 2.5em;
     opacity: 0;
-    -webkit-transition: opacity .35s, -webkit-transform .35s;
     transition: opacity .35s, transform .35s;
-    -webkit-transform: translate3d(0,20px,0);
-    transform: translate3d(0,20px,0);
+    transform: translate3d(0, 20px, 0);
 }
 
 figure.effect-bubba:hover figcaption::before, figure.effect-bubba:hover figcaption::after {
     opacity: 1;
-    -webkit-transform: scale(1);
     transform: scale(1);
 }
 
 figure.effect-bubba:hover h2, figure.effect-bubba:hover p {
     opacity: 1;
-    -webkit-transform: translate3d(0,0,0);
-    transform: translate3d(0,0,0);
+    transform: translate3d(0, 0, 0);
 }
-
 
 //*--------------------***/
 //***** Who's online *****/
 //*--------------------***/
-@if $skin-name == tos {
+@if $skin_name == tos {
     .online_title {
         @extend .left_nav_section;
         font-size: .9em;
@@ -311,7 +289,7 @@ figure.effect-bubba:hover h2, figure.effect-bubba:hover p {
 //*--------------------***/
 //*****  Statistics  *****/
 //*--------------------***/
-@if $skin-name == legacy {
+@if $skin_name == legacy {
     .statistics_dark {
         color: #cccccc;
     }
@@ -327,8 +305,7 @@ figure.effect-bubba:hover h2, figure.effect-bubba:hover p {
         color: #ffffff;
         text-align: center;
     }
-}
-@elseif $skin-name == tos {
+} @elseif $skin_name == tos {
     .statistics_dark {
         color: #666666;
     }
@@ -343,8 +320,7 @@ figure.effect-bubba:hover h2, figure.effect-bubba:hover p {
         font-weight: 100;
         color: #3c3c3c;
     }
-}
-@elseif $skin-name == picasso {
+} @elseif $skin_name == picasso {
     .statistics_position_front {
         margin-bottom: 20px;
     }
@@ -374,7 +350,7 @@ figure.effect-bubba:hover h2, figure.effect-bubba:hover p {
 //*-------------------------***/
 //*****  Latest comments  *****/
 //*------------------------***/
-@if $skin-name == legacy {
+@if $skin_name == legacy {
     .latest_comments_text {
         font-size: 11pt;
         color: #ffffff;
@@ -390,7 +366,7 @@ figure.effect-bubba:hover h2, figure.effect-bubba:hover p {
     .latest_comments_link:hover {
         color: #01b5b5;
     }
-}@elseif $skin-name == tos {
+}@elseif $skin_name == tos {
     .latest_comments_text {
         font-size: 16px;
         color: #3c3c3c;
@@ -408,7 +384,7 @@ figure.effect-bubba:hover h2, figure.effect-bubba:hover p {
         text-shadow: -1px 1px 8px #666666, 1px -1px 8px #515151;
         outline: 0 none;
     }
-}@elseif $skin-name == picasso {
+}@elseif $skin_name == picasso {
     .latest_comments_text {
         font-size: 12pt;
         color: #000000;

@@ -626,7 +626,7 @@
         height: 60px;
         left: 50%;
         margin-left: -30px;
-        /* Force Hardware Acceleration in WebKit */
+        //* Force Hardware Acceleration in WebKit */
         -webkit-transform: translateZ(0);
         -webkit-backface-visibility: hidden;
     }
@@ -635,8 +635,6 @@
     }
     .cssanimations .cd-timeline-img.bounce-in {
         visibility: visible;
-        -webkit-animation: cd-bounce-1 .6s;
-        -moz-animation: cd-bounce-1 .6s;
         animation: cd-bounce-1 .6s;
     }
 }
@@ -700,17 +698,13 @@
     }
     .cssanimations .cd-timeline-content.bounce-in {
         visibility: visible;
-        -webkit-animation: cd-bounce-2 .6s;
-        -moz-animation: cd-bounce-2 .6s;
         animation: cd-bounce-2 .6s;
     }
 }
 
 @media only screen and (min-width: 1170px) {
-    /* inverse bounce effect on even content blocks */
+    //* inverse bounce effect on even content blocks */
     .cssanimations .cd-timeline-block:nth-child(even) .cd-timeline-content.bounce-in {
-        -webkit-animation: cd-bounce-2-inverse .6s;
-        -moz-animation: cd-bounce-2-inverse .6s;
         animation: cd-bounce-2-inverse .6s;
     }
 }
@@ -1556,7 +1550,7 @@
 //download edit
 //------------------------------------------------------------ */
 
-/*This stuff is a 'solution' for all the problems I'm having regarding responsiveness in IE!! */
+//*This stuff is a 'solution' for all the problems I'm having regarding responsiveness in IE!! */
 @media screen and (max-width: 600px) {
     .download_long_descr {
         display: none;
