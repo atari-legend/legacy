@@ -25,3 +25,5 @@ linters:
         enabled: false
     SingleLinePerSelector:
         enabled: false
+    MergeableSelector:
+        enabled: false
