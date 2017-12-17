@@ -406,7 +406,7 @@
 .games_main_detail_comments_log_on {
     @extend .latest_comments_text;
     text-align: center;
-    color: red;
+    color: #ff0000;
     float: none;
 }
 
@@ -435,7 +435,7 @@
 }
 
 .games_main_detail_comments_container::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0 , 0 , .3);
 }
 
 .games_main_detail_comments_container::-webkit-scrollbar-thumb {
