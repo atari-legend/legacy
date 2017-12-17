@@ -247,7 +247,7 @@ function storeCaret(textEl) {
                 <option value="" SELECTED>-</option>
                 {html_options values=$az_value output=$az_output}
             </select>
-            <input type="text" name="crewsearch" value="" onkeyup="searchCrew(this.value)" class="standard_tile_input_small">
+            <input type="text" name="crewsearch" value="" onkeyup="searchCrew(this.value)" class="standard_input input_large">
             <br>
             <br>
             {* Ajax *}
@@ -269,7 +269,7 @@ function storeCaret(textEl) {
         {* Add crew section *}
         Add new Crew to db:
         <form method="post" name="insertcrew">
-            <input type="text" name="newcrew" value="" class="standard_tile_input_small">
+            <input type="text" name="newcrew" value="" class="standard_input input_large">
             <br>
             <br>
             <input type="submit" value="Insert" class="quick_search_games_button" onClick="crewinsert(); return false;">
@@ -306,7 +306,7 @@ function storeCaret(textEl) {
                 <form action="../crew/db_crew.php" method="post" name="post" id="crew_edit">
                     <div style="text-align:left;">
                         <b>Name :</b>
-                        <input type="text" name="crew_name" class="standard_tile_input_small" value="{if isset($crew_select.crew_name)}{$crew_select.crew_name}{/if}">
+                        <input type="text" name="crew_name" class="standard_input input_large" value="{if isset($crew_select.crew_name)}{$crew_select.crew_name}{/if}">
                         <br>
                         <br>
                         <b>History :</b>
@@ -354,7 +354,7 @@ function storeCaret(textEl) {
                     <!--<input type="file" name="crew_pic" accept="image/jpeg,image/x-png">-->
                     <label for="file_upload" class="file_upload">Select file</label>
                     <input id="file_upload" type="file" name="crew_pic" accept="image/jpeg,image/x-png">
-                    <input type="text" class="standard_tile_input_small" id="file_upload_user_detail">&nbsp;
+                    <input type="text" class="standard_input input_large" id="file_upload_user_detail">&nbsp;
                     <br/>
                     <br/>
                     <input type="submit" name="inserter" value="Upload" class="topbutton_cpanel_small">

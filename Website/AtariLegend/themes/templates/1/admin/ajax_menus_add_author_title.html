@@ -26,7 +26,7 @@ On this page we link authors to a menu disk title
                     <option value="" SELECTED>-</option>
                     {html_options values=$az_value output=$az_output}
                 </select>
-                <input type="text" onkeyup="searchInd(this.value)" class="standard_tile_input_small">
+                <input type="text" onkeyup="searchInd(this.value)" class="standard_input input_large">
                 <br><br>
                 <div id="ind_member">
                     <select name="ind_id" class="standard_select select_large">
@@ -37,7 +37,7 @@ On this page we link authors to a menu disk title
                     </select>
                 </div>
                 <br>
-                <select id="author_type_id" class="standard_select select_medium" name="author_type_id" size="1" style="margin:5px;margin-top:0px;width:200px;">
+                <select id="author_type_id" class="standard_select select_large" name="author_type_id">
                 <option value="">-</option>
                     {foreach from=$author_type item=line}
                         <option value="{$line.author_type_id}">{$line.author_type_info}</option>

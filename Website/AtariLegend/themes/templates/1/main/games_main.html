@@ -233,7 +233,7 @@ The main game page
                         <div class="games_main_text_site"><h6>Title (a-z)</h6></div>
                         <div class="games_main_text_short"><h6>:</h6></div>
                         <div class="games_main_input_site">
-                            <select name="gamebrowse" id="games_main_select_site">
+                            <select name="gamebrowse" id="games_main_select_site" class="standard_select">
                                 <option value="" SELECTED>-</option>
                                 {html_options values=$az_value output=$az_output}
                             </select>
@@ -250,7 +250,7 @@ The main game page
                         <div class="games_main_text_site"><h6>By Publisher <a style="cursor: pointer;" onClick="dropdown_pub()" class="latest_comments_link"><i class="fa fa-chevron-circle-down" aria-hidden="true" id="input_pub" title="Click for drop down mode"></i></a><a style="cursor: pointer;" onClick="input_pub()" class="latest_comments_link"><i class="fa fa-chevron-circle-down" aria-hidden="true" id="drop_pub" title="Click for input field mode" style="display:none;"></i></a></h6></div>
                         <div class="games_main_text_short"><h6>:</h6></div>
                         <div class="games_main_input_site">
-                            <select name="publisher" id="games_main_pub_drop" style="display:none;">
+                            <select name="publisher" id="games_main_pub_drop" style="display:none;" class="standard_select">
                                 <option value="-" SELECTED>-</option>
                                 {foreach from=$company_publisher item=line}
                                     <option value="{$line.comp_id}">{$line.comp_name}</option>
@@ -263,7 +263,7 @@ The main game page
                         <div class="games_main_text_site"><h6>By Developer <a style="cursor: pointer;" onClick="dropdown_dev()" class="latest_comments_link"><i class="fa fa-chevron-circle-down" aria-hidden="true" id="input_dev" title="Click for drop down mode"></i></a><a style="cursor: pointer;" onClick="input_dev()" class="latest_comments_link"><i class="fa fa-chevron-circle-down" aria-hidden="true" id="drop_dev" title="Click for input field mode" style="display:none;"></i></a></h6></div>
                         <div class="games_main_text_short"><h6>:</h6></div>
                         <div class="games_main_input_site">
-                            <select name="developer" id="games_main_dev_drop" style="display:none;">
+                            <select name="developer" id="games_main_dev_drop" style="display:none;" class="standard_select">
                                 <option value="-" SELECTED>-</option>
                                 {foreach from=$company_developer item=line}
                                     <option value="{$line.comp_id}">{$line.comp_name}</option>
@@ -276,7 +276,7 @@ The main game page
                         <div class="games_main_text_site"><h6>Release year <a style="cursor: pointer;" onClick="dropdown_year()" class="latest_comments_link"><i class="fa fa-chevron-circle-down" aria-hidden="true" id="input_year" title="Click for drop down mode"></i></a><a style="cursor: pointer;" onClick="input_year()" class="latest_comments_link"><i class="fa fa-chevron-circle-down" aria-hidden="true" id="drop_year" title="Click for input field mode" style="display:none;"></i></a></h6></div>
                         <div class="games_main_text_short"><h6>:</h6></div>
                         <div class="games_main_input_site">
-                            <select name="year" id="games_main_year_drop" style="display:none;">
+                            <select name="year" id="games_main_year_drop" style="display:none;" class="standard_select">
                                 <option value="-" SELECTED>-</option>
                                 {foreach from=$game_year item=line}
                                     <option value="{$line.game_year}">{$line.game_year}</option>
@@ -289,7 +289,7 @@ The main game page
                         <div class="games_main_text_site"><h6>Category <a style="cursor: pointer;" onClick="dropdown_cat()" class="latest_comments_link"><i class="fa fa-chevron-circle-down" aria-hidden="true" id="input_cat" title="Click for drop down mode"></i></a><a style="cursor: pointer;" onClick="input_cat()" class="latest_comments_link"><i class="fa fa-chevron-circle-down" aria-hidden="true" id="drop_cat" title="Click for input field mode" style="display:none;"></i></a></h6></div>
                         <div class="games_main_text_short"><h6>:</h6></div>
                         <div class="games_main_input_site">
-                            <select name="category" id="games_main_cat_drop" style="display:none;">
+                            <select name="category" id="games_main_cat_drop" style="display:none;" class="standard_select">
                                 <option value="-" SELECTED>-</option>
                                 {foreach from=$game_cat item=line}
                                     <option value="{$line.game_cat_id}">{$line.game_cat_name}</option>

@@ -17,11 +17,9 @@
     <form action="" enctype="multipart/form-data" method="post" name="file_add_to_menu" id="file_add_to_menu">
     <fieldset class="centered_fieldset">
         <legend>Add a new download</legend>
-        <!--<b>Filename :</b>
-        <input type="file" name="menu_download_name" accept="application/x-zip-compressed,application/x-zip-compressed,application/x-zip-compressed">-->
         <label for="file_upload2" class="file_upload" onclick="myFunction()" accept="application/x-zip-compressed,application/x-zip-compressed,application/x-zip-compressed">Select file(s)</label>
         <input id="file_upload2" type="file" name="menu_download_name">
-        <input type="text" class="standard_tile_input_small" id="file_upload_game_file">&nbsp;
+        <input type="text" class="standard_input input_large" id="file_upload_game_file">&nbsp;
         <br>
         <br>
         <input type="button" class="topbutton_cpanel" value="Add" onclick="addFiletoMenu({$menu_disk_id})">

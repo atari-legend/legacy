@@ -5,8 +5,8 @@
 //*----------------------------------------------------------
 // SASS Variables
 //------------------------------------------------------------ */
-$skin-name: 'tos';
-$bg-color: #ffffff;
+$skin_name: 'tos';
+$bg_color: #ffffff;
 
 //*----------------------------------------------------------
 // Normalization script
@@ -17,6 +17,7 @@ $bg-color: #ffffff;
 // General settings
 //------------------------------------------------------------ */
 @import '../../2/scss/general';   //* --> general skin specific css settings */
+@import '../../2/scss/form_components';   //* --> general skin specific css settings */
 
 //*----------------------------------------------------------
 // Top

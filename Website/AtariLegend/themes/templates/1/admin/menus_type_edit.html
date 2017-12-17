@@ -48,7 +48,7 @@ function typedelete(menus_type_id)
             <legend>Edit menu type</legend>
             <form action="../menus/db_menus_type.php" method="post" name="post" id="menus_type_edit">
                 <b>Name :</b>
-                <input type="text" name="menus_type_name" value="{$menus_type_edit.menu_type_text_edit}" class="standard_tile_input_small">
+                <input type="text" name="menus_type_name" value="{$menus_type_edit.menu_type_text_edit}" class="standard_input input_large">
                 <br><br>
                 <input type="submit" value="Update" style="padding:2px;" class="topbutton_cpanel_small">
                 <input type="submit" value="Delete" onClick="typedelete({$menus_type_edit.menu_types_main_id_edit}); return false;" class="topbutton_cpanel_small">
