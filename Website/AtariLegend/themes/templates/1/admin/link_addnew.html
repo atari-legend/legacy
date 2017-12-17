@@ -62,19 +62,19 @@ function TestURL() {
             <legend>Add new link</legend>
             <div class="links_addnew_row">
                 <div class="links_addnew_text">Site Name</div>
-                <div class="links_addnew_input"><input type="text" name="name" id="name" class="standard_tile_input_small"></div>
+                <div class="links_addnew_input"><input type="text" name="name" id="name" class="standard_input input_large"></div>
             </div>
             <div class="links_addnew_row">
                 <div class="links_addnew_text">URL</div>
                 <div class="links_addnew_input">
-                    <input type="text" name="url" id="website_url" value="http://" class="standard_tile_input_small">
+                    <input type="text" name="url" id="website_url" value="http://" class="standard_input input_large">
                     <input type="button" onclick="TestURL()" class="topbutton_cpanel_small" value="Test" style="margin-left:1px;">
                 </div>
             </div>
             <div class="links_addnew_row">
                 <div class="links_addnew_text">Category</div>
                 <div class="links_addnew_input" class="standard_select select_large">
-                    <select name="category">
+                    <select name="category" class="standard_select select_large">
                         {foreach from=$website_category item=line}
                             <option value="{$line.website_category_id}">{$line.website_category_name}</option>
                         {/foreach}
@@ -117,11 +117,11 @@ function TestURL() {
                     <legend>New submitted website</legend>
                     <div class="links_addnew_row">
                         <div class="links_addnew_text">Site Name</div>
-                        <div class="links_addnew_input"><input type="text" name="validate_website_name" value="{$lineweb.website_name}" class="standard_tile_input_small"></div>
+                        <div class="links_addnew_input"><input type="text" name="validate_website_name" value="{$lineweb.website_name}" class="standard_input input_large"></div>
                     </div>
                     <div class="links_addnew_row">
                         <div class="links_addnew_text">URL</div>
-                        <div class="links_addnew_input"><input type="text" name="validate_website_url" value="{$lineweb.website_url}" class="standard_tile_input_small"></div>
+                        <div class="links_addnew_input"><input type="text" name="validate_website_url" value="{$lineweb.website_url}" class="standard_input input_large"></div>
                     </div>
                     <div class="links_addnew_row">
                         <div class="links_addnew_text">Category</div>

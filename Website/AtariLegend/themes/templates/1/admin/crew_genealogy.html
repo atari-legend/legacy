@@ -213,7 +213,7 @@ function ChangeNick(individual_nicks_id,crew_individual_id,crew_select)
                 <option value="" SELECTED>-</option>
                 {html_options values=$az_value output=$az_output}
             </select>
-            <input type="text" name="crewsearch" value="" onkeyup="searchCrew(this.value)" class="standard_tile_input_small">
+            <input type="text" name="crewsearch" value="" onkeyup="searchCrew(this.value)" class="standard_input input_large">
             <br>
             <br>
             {* Ajax *}
@@ -235,7 +235,7 @@ function ChangeNick(individual_nicks_id,crew_individual_id,crew_select)
         {* Add crew section *}
         Add new Crew to db:
         <form method="post" name="insertcrew">
-            <input type="text" name="newcrew" value="" class="standard_tile_input_small">
+            <input type="text" name="newcrew" value="" class="standard_input input_large">
             <br>
             <br>
             <input type="submit" value="Insert" class="quick_search_games_button" onClick="crewinsert(); return false;">
@@ -277,7 +277,7 @@ function ChangeNick(individual_nicks_id,crew_individual_id,crew_select)
                             <option value="" SELECTED>-</option>
                             {html_options values=$az_value output=$az_output}
                         </select>
-                        <input type="text" name="crewsearch" value="" onkeyup="searchSubCrew(this.value)" class="standard_tile_input_small">
+                        <input type="text" name="crewsearch" value="" onkeyup="searchSubCrew(this.value)" class="standard_input input_large">
                         <br><br>
                         <div id="sub_crew">
                             <select name="sub_crew[]" class="standard_select select_large">
@@ -307,7 +307,7 @@ function ChangeNick(individual_nicks_id,crew_individual_id,crew_select)
                             <option value="" SELECTED>-</option>
                             {html_options values=$az_value output=$az_output}
                         </select>
-                        <input type="text" onkeyup="searchInd(this.value)" class="standard_tile_input_small">
+                        <input type="text" onkeyup="searchInd(this.value)" class="standard_input input_large">
                         <br><br>
                         <div id="ind_member">
                             <select name="ind_id" class="standard_select select_large">

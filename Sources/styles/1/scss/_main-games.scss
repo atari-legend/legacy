@@ -49,17 +49,6 @@
     width: 65%;
 }
 
-.standard_tile_input_small_site {
-    @extend .standard_tile_input_small;
-    width: 98.7%;
-}
-
-#games_main_select_site {
-    width: 100%;
-    height: 25px;
-    margin-top: 0;
-}
-
 .games_main_container {
     display: flex;
     width: 75%;
@@ -163,28 +152,6 @@
 .games_main_input_list_text {
     display: table-cell;
     width: 65%;
-}
-
-.games_main_list_input_small {
-    @extend .standard_tile_input_small_site;
-    height: 20px;
-}
-
-#games_main_pub_drop {
-    @extend #games_main_select_site;
-    height: 27px;
-}
-#games_main_dev_drop {
-    @extend #games_main_select_site;
-    height: 27px;
-}
-#games_main_year_drop {
-    @extend #games_main_select_site;
-    height: 27px;
-}
-#games_main_cat_drop {
-    @extend #games_main_select_site;
-    height: 27px;
 }
 
 //****************Games main comments************************/
@@ -439,7 +406,7 @@
 .games_main_detail_comments_log_on {
     @extend .latest_comments_text;
     text-align: center;
-    color: red;
+    color: #ff0000;
     float: none;
 }
 
@@ -468,7 +435,7 @@
 }
 
 .games_main_detail_comments_container::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0 , 0 , .3);
 }
 
 .games_main_detail_comments_container::-webkit-scrollbar-thumb {

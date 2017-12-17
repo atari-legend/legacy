@@ -196,7 +196,7 @@ img {
     font-size: 10pt;
     font-style: italic;
     font-weight: 100;
-    color: $bg-color;
+    color: $bg_color;
 }
 
 .standard_tile h3 {
@@ -239,18 +239,6 @@ img {
     background: url('../images/logon_input.png') 0 0 no-repeat;
     background-size: 85% 44px;
     border: 0;
-}
-
-.standard_tile_input_small {
-    width: 185px;
-    height: 25px;
-    padding: 0;
-    padding-left: 5px;
-    margin-top: 0;
-    color: #ffffff;
-    text-align: left;
-    background: #000000;
-    border: 1px solid #008b8b;
 }
 
 .standard_tile_input_area {
@@ -343,7 +331,7 @@ img {
 //    max-width: 100%;
 //    width: 80%;
 //    margin-left: 15px;
-//    box-shadow: 0 0 7px $bg-color;
+//    box-shadow: 0 0 7px $bg_color;
 //}
 
 //.standard_list_entry_left img:hover { box-shadow: 0 0 7px #fff; }
@@ -375,34 +363,6 @@ img {
 
 .standard_tile_text {
     padding: 20px;
-}
-.standard_tile select {
-    height: 25px;
-    padding: 0;
-    padding-left: 5px;
-    margin-top: 5px;
-    background-color: #000000;
-    color: #ffffff;
-    border: 1px solid #008b8b;
-}
-
-.select_small {
-    width: 50px;
-    margin-top: 0;
-}
-
-.select_medium {
-    width: 140px;
-    margin-top: 0;
-}
-.select_large {
-    width: 185px;
-    margin-top: 0;
-}
-
-.select_full {
-    width: 100%;
-    margin-top: 0;
 }
 
 #other {
@@ -624,9 +584,9 @@ img {
     @extend .topbutton_cpanel_small:hover;
 }
 fieldset {
-    padding: 8px;
+    padding: 15px;
     font-size: 11pt;
-    background: $bg-color;
+    background: $bg_color;
     border: solid 1px #000000;
 }
 
@@ -636,6 +596,7 @@ legend {
     background: #006f6f;
     border: #000000 solid 1px;
 }
+
 
 //*------------------------------------------------------------
 //The CSS for the help tips
@@ -837,10 +798,6 @@ div.tab button.active {
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
     border-bottom-left-radius: 10px;
-    -webkit-transition: all .5s ease-in-out;
-    -moz-transition: all .5s ease-in-out;
-    -ms-transition: all .5s ease-in-out;
-    -o-transition: all .5s ease-in-out;
     transition: all .5s ease-in-out;
 }
 .scroll-top-wrapper:hover {
