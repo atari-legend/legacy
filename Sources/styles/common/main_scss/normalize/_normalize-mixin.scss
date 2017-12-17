@@ -51,7 +51,7 @@
             } @else {
                 line-height: 1.15; //* 2 */
             }
-                -ms-text-size-adjust: 100%; //* 3 */
+            -ms-text-size-adjust: 100%; //* 3 */
             -webkit-text-size-adjust: 100%; //* 3 */
         }
     }
@@ -230,7 +230,7 @@
         // * 2. Add the correct text decoration in Chrome, Edge, IE, Opera, and Safari.
         // */
         abbr[title] {
-            border-bottom: none; //* 1 */
+            border-bottom: 0; //* 1 */
             text-decoration: underline; //* 2 */
             text-decoration: underline dotted; //* 2 */
         }
@@ -367,15 +367,15 @@
         // * 2. Correct the inability to style clickable types in iOS and Safari.
         // */
         button,
-        html [type="button"], //* 1 */
-        [type="reset"],
-        [type="submit"] {
+        html [type='button'], //* 1 */
+        [type='reset'],
+        [type='submit'] {
             -webkit-appearance: button; //* 2 */
         }
         button,
-        [type="button"],
-        [type="reset"],
-        [type="submit"] {
+        [type='button'],
+        [type='reset'],
+        [type='submit'] {
             ///**
             // * Remove the inner border and padding in Firefox.
             // */
@@ -400,23 +400,23 @@
         // * 1. Add the correct box sizing in IE 10-.
         // * 2. Remove the padding in IE 10-.
         // */
-        [type="checkbox"],
-        [type="radio"] {
+        [type='checkbox'],
+        [type='radio'] {
             box-sizing: border-box; //* 1 */
             padding: 0; //* 2 */
         }
         //**
         // * Correct the cursor style of increment and decrement buttons in Chrome.
         // */
-        [type="number"]::-webkit-inner-spin-button,
-        [type="number"]::-webkit-outer-spin-button {
+        [type='number']::-webkit-inner-spin-button,
+        [type='number']::-webkit-outer-spin-button {
             height: auto;
         }
         //**
         // * 1. Correct the odd appearance in Chrome and Safari.
         // * 2. Correct the outline style in Safari.
         // */
-        [type="search"] {
+        [type='search'] {
             -webkit-appearance: textfield; //* 1 */
             outline-offset: -2px; //* 2 */
             //**

@@ -754,7 +754,7 @@ div.tab button.active {
 //*fade in effect on tab */
 .tabcontent {
     -webkit-animation: fadeEffect 1s;
-            animation: fadeEffect .5s; //* Fading effect takes 1 second */
+    animation: fadeEffect .5s; //* Fading effect takes 1 second */
 }
 
 @-webkit-keyframes fadeEffect {
