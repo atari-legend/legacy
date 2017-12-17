@@ -42,6 +42,8 @@ $smarty->assign('almobile_tile', 'almobile_tile_front');
 $smarty->assign('tile_social_corner', 'social_corner_position_front');
 $smarty->assign('spotlight_tile', 'spotlight_position_front');
 
+$smarty->assign('database_dumps_path', $database_dumps_path);
+
 //if (isset($error))
 //{
 //    if ($error == 1)
