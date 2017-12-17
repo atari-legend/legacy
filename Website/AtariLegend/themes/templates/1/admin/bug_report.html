@@ -20,7 +20,7 @@
         {if isset($bug_report)}
             {foreach from=$bug_report item=line}
                 <fieldset>
-                <legend>Posted by <a href="../user/user_detail.php?user_id_selected={$line.user_id}" class="standard_tile_link_cpanel">{$line.userid}</a> on {$line.bug_report_date} </legend>
+                <legend>Posted by <a href="../user/user_detail.php?user_id_selected={$line.user_id}" class="standard_tile_link_reverse">{$line.userid}</a> on {$line.bug_report_date} </legend>
                 <br>
                 <b><u>Type : {$line.bug_report_type}</u></b>
                 <br><br>
