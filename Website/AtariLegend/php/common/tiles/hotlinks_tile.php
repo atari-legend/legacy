@@ -44,12 +44,13 @@ $website_text = InsertALCode($website_text); // disabled this as it wrecked the 
 $website_text = trim($website_text);
 $website_text = RemoveSmillies($website_text);
 
-$smarty->assign('hotlinks',
-    	 array('website_id' => $sql_links['website_id'],
-		 	'website_name' => $sql_links['website_name'],
-		 	'website_img' =>$v_link_image,
-			'website_url' => $sql_links['website_url'],
-			'website_text' => $website_text,
+$smarty->assign(
+    'hotlinks',
+         array('website_id' => $sql_links['website_id'],
+            'website_name' => $sql_links['website_name'],
+            'website_img' =>$v_link_image,
+            'website_url' => $sql_links['website_url'],
+            'website_text' => $website_text,
             'website_date' => date("d/m/Y", $sql_links['website_date']),
-			'userid' => $sql_links['userid']));
-?>
+            'userid' => $sql_links['userid'])
+);

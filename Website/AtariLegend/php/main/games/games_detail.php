@@ -36,8 +36,8 @@ function generate_game_description(
     $game_developers,
     $screenshots,
     $boxscans,
-    $reviews) {
-
+    $reviews
+) {
     $desc = "$game_name is a ";
     if ($game_free) {
         $desc .= "non-commercial ";
@@ -698,7 +698,8 @@ $smarty->assign("game_description", generate_game_description(
     $game_developers,
     $game_screenshots_count,
     $game_boxscans_count,
-    $game_reviews_count));
+    $game_reviews_count
+));
 
 //Send all smarty variables to the templates
 $smarty->display("file:" . $mainsite_template_folder . "games_detail.html");

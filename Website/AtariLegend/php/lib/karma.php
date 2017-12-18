@@ -25,8 +25,7 @@
 // $karma_action = demo_submission
 
 
-function UserKarma($user_id, $karma_action)
-{
+function UserKarma($user_id, $karma_action) {
     global $mysqli;
     if (empty($user_id)) {
         die("user_id wasn't passed properly");
@@ -78,8 +77,7 @@ function UserKarma($user_id, $karma_action)
     return;
 }
 
-function KarmaGood()
-{
+function KarmaGood() {
     global $mysqli;
     $sql = $mysqli->query("SELECT karma,userid,user_id FROM users ORDER BY karma DESC LIMIT 17");
     while ($row = $sql->fetch_array(MYSQLI_BOTH)) {
@@ -88,8 +86,7 @@ function KarmaGood()
     return $result;
 }
 
-function KarmaBad()
-{
+function KarmaBad() {
     global $mysqli;
     $sql = $mysqli->query("SELECT karma,userid,user_id FROM users WHERE karma IS NOT NULL ORDER BY karma ASC LIMIT 17");
     while ($row = $sql->fetch_array(MYSQLI_BOTH)) {

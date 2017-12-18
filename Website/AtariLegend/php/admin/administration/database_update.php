@@ -12,12 +12,12 @@
  ****************************************************************************/
 //The database update section was designed to run simple db table scripts.
 //A script is created. This script contains a var called $database_update_sql which contains the SQL statement.
-//However, sometimes it is need to run more complex scripts. Therefor I have 'raped' this php file a little. 
-//To run a more complex script containing php code, we need to do 2 things : 
+//However, sometimes it is need to run more complex scripts. Therefor I have 'raped' this php file a little.
+//To run a more complex script containing php code, we need to do 2 things :
 // 1) create a normal script file with the database update variables, however, this time the $database_update_sql variable
-//    should contain a link to the more complex script file. 
+//    should contain a link to the more complex script file.
 // 2) the actual script file must be place in the database_scripts folder as well, and its filename should contain the word 'addition'.
-// a example of this way of working can be found in files 2017-01-30_merge_nicknames_into_individuals.php and 2017-01-30_merge_nicknames_into_individuals-addition.php 
+// a example of this way of working can be found in files 2017-01-30_merge_nicknames_into_individuals.php and 2017-01-30_merge_nicknames_into_individuals-addition.php
 
 include("../../config/common.php");
 include("../../config/admin.php");
@@ -30,12 +30,9 @@ foreach (glob("../../admin/administration/database_scripts/*.php") as $filename)
     // import update script
     
     //we don't want to execute additions just yet
-    if (strpos($filename, 'addition') !== false) 
-    {
+    if (strpos($filename, 'addition') !== false) {
         //do nothing
-    }
-    else
-    {
+    } else {
         require_once("$filename");
 
         // take all variables from the update script and place in an array
@@ -74,12 +71,9 @@ foreach ($database_update as $key) {
         if ($key['execute_condition'] == $test_result) {
             
              //overhere we check if we are dealing with an addition - a script containing more than just SQL
-            if (strncmp($key['database_update_sql'], "..", 2) === 0)
-            {
+            if (strncmp($key['database_update_sql'], "..", 2) === 0) {
                 include $key['database_update_sql'];
-            }
-            else  
-            {
+            } else {
                 $mysqli->query("$key[database_update_sql]") or die("Database update $key[database_update_id] failed: ".$mysqli->error);
             }
             
@@ -108,7 +102,7 @@ foreach ($database_update as $key) {
 
     $row_cnt = $result_change->num_rows;
     if ($row_cnt < 1) {
-    // What should happend if the script is not in the database
+        // What should happend if the script is not in the database
         // We begin with any script that is set to autoexecute
         if ($key['database_autoexecute'] == "yes") { // Run the test condition query
             $test_query = $mysqli->query("$key[test_condition]") or die("Database update $key[database_update_id] Test condition failed: ".$mysqli->error);
@@ -124,12 +118,9 @@ foreach ($database_update as $key) {
             if ($key['execute_condition'] == $test_result) {
                 
                  //overhere we check if we are dealing with an addition - a script containing more than just SQL
-                if (strncmp($key['database_update_sql'], "..", 2) === 0)
-                {
+                if (strncmp($key['database_update_sql'], "..", 2) === 0) {
                     include $key['database_update_sql'];
-                }
-                else  
-                {
+                } else {
                     $mysqli->query("$key[database_update_sql]") or die("Database update $key[database_update_id] failed: ".$mysqli->error);
                 }
                     

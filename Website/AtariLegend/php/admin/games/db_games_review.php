@@ -47,9 +47,8 @@ if (isset($action) and $action == 'add_review') {
     $sdbquery = $mysqli->query("INSERT INTO review_game (review_id, game_id) VALUES ($reviewid, $game_id)") or die("Couldn't insert into review_game");
 
     //Fill the score table
-    if ( $graphics == '' or $sound == '' or $gameplay == '' or $conclusion == '' ) {}
-    else
-    {
+    if ($graphics == '' or $sound == '' or $gameplay == '' or $conclusion == '') {
+    } else {
         $sdbquery = $mysqli->query("INSERT INTO review_score (review_id, review_graphics, review_sound, review_gameplay, review_overall) VALUES ($reviewid, $graphics, $sound, $gameplay, $conclusion)") or die("Couldn't insert into review_score");
     }
     

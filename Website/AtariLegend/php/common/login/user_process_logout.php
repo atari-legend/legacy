@@ -1,4 +1,4 @@
-<?php
+<?php
 /*******************************************************************************
 *                                user_process_logout.php
 *                            ------------------------------
@@ -11,7 +11,7 @@
 
 *********************************************************************************
 * User logout process
-*********************************************************************************/
+*********************************************************************************/
 //************************************************************************
 // This is the logout code - kill the sessionvars and undo the cookie
 //************************************************************************
@@ -33,13 +33,10 @@ setcookie("cooksession", session_id(), time()-60*60*24*100, "/");
 // Destroy session
 session_destroy();
 
-if ( isset($_POST['action']) and $_POST['action'] == 'cpanel' )
-{
+if (isset($_POST['action']) and $_POST['action'] == 'cpanel') {
     $_SESSION['edit_message'] = "Log out succesfull";
     header('Location: ../../main/front/front.php');
-}
-else
-{
+} else {
     $_SESSION['edit_message'] = "Log out succesfull";
     header('Location: ' . $_SERVER['HTTP_REFERER']);
 }

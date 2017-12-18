@@ -93,7 +93,6 @@ if (isset($action) and $action == "crew_gen_browse") {
 
 if (isset($action) and $action == "ind_gen_browse") {
     if (isset($query)) {
-
         $sql_individuals = "SELECT ind_id,ind_name FROM individuals ORDER BY ind_name ASC";
         //$sql_aka         = "SELECT ind_id,nick FROM individual_nicks ORDER BY nick ASC";
 

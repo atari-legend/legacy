@@ -128,7 +128,7 @@ $query_ser_nr = $mysqli->query($sql_set_nr) or die('Error: ' . mysqli_error($mys
 $query_data = $query_ser_nr->fetch_array(MYSQLI_BOTH);
 $set_nr     = $query_data['menu_disk_title_set_nr'];
 
-if ($set_nr <> '') {
+if ($set_nr != '') {
     $sql_games_chain = "SELECT game.game_id AS 'software_id',
                         game.game_name AS 'software_name',
                         menu_set.menu_sets_name,

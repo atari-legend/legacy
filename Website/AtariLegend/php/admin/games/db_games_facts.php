@@ -17,20 +17,16 @@ include("../../config/admin.php");
 include("../../config/admin_rights.php");
 
 if ($action == "game_fact_insert") {
-      
-    if ($fact_text == '')
-    {
+    if ($fact_text == '') {
         $_SESSION['edit_message'] = "Please add an actual fact in the textfield";
         header("Location: ../games/games_facts.php?game_id=$game_id&game_name=$game_name");
-    }
-    else
-    {
+    } else {
         $fact_text = $mysqli->real_escape_string($fact_text);
         
-        $mysqli->query("INSERT INTO game_fact (game_id, game_fact ) VALUES ('$game_id', '$fact_text')") or die ("Inserting the game fact failed");
+        $mysqli->query("INSERT INTO game_fact (game_id, game_fact ) VALUES ('$game_id', '$fact_text')") or die("Inserting the game fact failed");
             
         $new_game_fact_id = $mysqli->insert_id;
-        create_log_entry('Games', $game_id, 'Fact', $game_id, 'Insert', $_SESSION['user_id']);  
+        create_log_entry('Games', $game_id, 'Fact', $game_id, 'Insert', $_SESSION['user_id']);
                   
         //Here we'll be looping on each of the inputs on the page that are filled in with an image!
         $image = $_FILES['image'];
@@ -71,11 +67,11 @@ if ($action == "game_fact_insert") {
                     // Rename the uploaded file to its autoincrement number and move it to its proper place.
                     $file_data = rename($image['tmp_name'][$key], "$game_fact_screenshot_save_path$screenshotrow[0].$ext");
 
-                    chmod("$game_fact_screenshot_save_path$screenshotrow[0].$ext", 0777);                       
+                    chmod("$game_fact_screenshot_save_path$screenshotrow[0].$ext", 0777);
                 }
             }
-        }          
-        header("Location: ../games/games_facts.php?game_id=$game_id&game_name=$game_name");        
+        }
+        header("Location: ../games/games_facts.php?game_id=$game_id&game_name=$game_name");
     }
 }
     
@@ -90,8 +86,7 @@ if ($action == "fact_delete") {
         //Let's first check if this submission has screenshots.
         $query_fact_screenshot = $mysqli->query("SELECT * FROM screenshot_game_fact WHERE game_fact_id = " . $fact_id . "") or die("something is wrong with mysqli of fact screenshots");
         
-        while ($sql_fact_screenshot = $query_fact_screenshot->fetch_array(MYSQLI_BOTH))
-        {
+        while ($sql_fact_screenshot = $query_fact_screenshot->fetch_array(MYSQLI_BOTH)) {
             $screenshot_id = $sql_fact_screenshot['screenshot_id'];
 
             //get the extension
@@ -110,7 +105,7 @@ if ($action == "fact_delete") {
             $new_path .= ".";
             $new_path .= $screenshot_ext;
 
-            unlink("$new_path");  
+            unlink("$new_path");
         }
                  
         create_log_entry('Games', $game_id, 'Fact', $game_id, 'Delete', $_SESSION['user_id']);
@@ -118,7 +113,7 @@ if ($action == "fact_delete") {
         $sql = $mysqli->query("DELETE FROM game_fact WHERE game_fact_id = '$fact_id'") or die("couldn't delete game_fact quote");
    
         $_SESSION['edit_message'] = "Fact deleted";
-        header("Location: ../games/games_facts.php?game_id=$game_id&game_name=$game_name");        
+        header("Location: ../games/games_facts.php?game_id=$game_id&game_name=$game_name");
     }
 }
 
@@ -141,22 +136,21 @@ if ($action == "delete_screenshot") {
     $new_path .= ".";
     $new_path .= $screenshot_ext;
 
-    unlink("$new_path");  
+    unlink("$new_path");
              
     create_log_entry('Games', $game_id, 'Fact', $game_id, 'Delete shot', $_SESSION['user_id']);
     
     $_SESSION['edit_message'] = "Screenshot deleted";
-    header("Location: ../games/games_facts.php?game_id=$game_id");    
-} 
+    header("Location: ../games/games_facts.php?game_id=$game_id");
+}
 
-if ($action == "fact_update")  
-{
+if ($action == "fact_update") {
     //****************************************************************************************
     // Update the fact
-    //****************************************************************************************    
-    $fact_text = $mysqli->real_escape_string($fact);        
+    //****************************************************************************************
+    $fact_text = $mysqli->real_escape_string($fact);
     $mysqli->query("UPDATE game_fact SET game_fact='$fact_text' WHERE game_fact_id='$fact_id'") or die("couldn't update game_facts table");
         
-    create_log_entry('Games', $game_id, 'Fact', $game_id, 'Update', $_SESSION['user_id']);  
-    header("Location: ../games/games_facts.php?game_id=$game_id");    
-}   
+    create_log_entry('Games', $game_id, 'Fact', $game_id, 'Update', $_SESSION['user_id']);
+    header("Location: ../games/games_facts.php?game_id=$game_id");
+}

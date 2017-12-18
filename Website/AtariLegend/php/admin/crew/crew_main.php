@@ -23,22 +23,19 @@ include("../../config/common.php");
 include("../../config/admin.php");
 include("../../admin/games/quick_search_games.php");
 
-if (isset($crewsearch)){
+if (isset($crewsearch)) {
     $crewsearch = $mysqli->real_escape_string($crewsearch);
-}
-else{
+} else {
     $crewsearch='-';
 }
 
-if (isset($crewbrowse)){
-}
-else{
+if (isset($crewbrowse)) {
+} else {
     $crewbrowse='-';
 }
 
-if (isset($message)){
-}
-else{
+if (isset($message)) {
+} else {
     $message='';
 }
 
