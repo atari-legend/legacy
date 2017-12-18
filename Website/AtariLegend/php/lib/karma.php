@@ -83,7 +83,6 @@ function KarmaGood()
     global $mysqli;
     $sql = $mysqli->query("SELECT karma,userid,user_id FROM users ORDER BY karma DESC LIMIT 17");
     while ($row = $sql->fetch_array(MYSQLI_BOTH)) {
-
         $result[] = $row;
     }
     return $result;
@@ -94,9 +93,7 @@ function KarmaBad()
     global $mysqli;
     $sql = $mysqli->query("SELECT karma,userid,user_id FROM users WHERE karma IS NOT NULL ORDER BY karma ASC LIMIT 17");
     while ($row = $sql->fetch_array(MYSQLI_BOTH)) {
-
         $result[] = $row;
     }
     return $result;
 }
-?>

@@ -126,8 +126,8 @@ img {
 .standard_tile {
     width: 100%;
     background-color: #122323;
-    border-top: 10px solid #01b5b5;
-    border-bottom: 3px solid #01b5b5;
+    border-top: 10px solid #00d3d3;
+    border-bottom: 3px solid #00d3d3;
 }
 
 .standard_tile_line {
@@ -155,8 +155,8 @@ img {
     width: 91.7%;
     padding-right: 4%;
     text-align: left;
-    border-right: 2px solid #01b5b5;
-    //  border-left: 2px solid #01b5b5;
+    border-right: 2px solid #00d3d3;
+    //  border-left: 2px solid #00d3d3;
     padding-left: 4%;
 }
 
@@ -171,7 +171,7 @@ img {
     background: rgb(0, 80, 80);
     //* Fallback for web browsers that doesn't support RGBa */
     background: rgba(0, 80, 80, .6);
-    border-bottom: 2px solid #01b5b5;
+    border-bottom: 2px solid #00d3d3;
 }
 
 .standard_tile_explanation {
@@ -270,24 +270,15 @@ img {
     color: #ffffff;
 }
 .standard_tile_link:hover {
-    color: #01b5b5;
+    color: #00d3d3;
 }
 .standard_tile_link_reverse:link {
-    color: #01b5b5;
+    color: #00d3d3;
 }
 .standard_tile_link_reverse:visited {
-    color: #01b5b5;
+    color: #00d3d3;
 }
 .standard_tile_link_reverse:hover {
-    color: #ffffff;
-}
-.standard_tile_link_cpanel:link {
-    color: #01b5b5;
-}
-.standard_tile_link_cpanel:visited {
-    color: #01b5b5;
-}
-.standard_tile_link_cpanel:hover {
     color: #ffffff;
 }
 .standard_tile_link_black:link {

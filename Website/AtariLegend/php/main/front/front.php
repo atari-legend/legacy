@@ -44,21 +44,6 @@ $smarty->assign('spotlight_tile', 'spotlight_position_front');
 
 $smarty->assign('database_dumps_path', $database_dumps_path);
 
-//if (isset($error))
-//{
-//    if ($error == 1)
-//   {
-//        $_SESSION['edit_message'] = 'Usn or pwd incorrect - Please try again';
-//        header("Location: ../front/front.php");
-//    }
-
-//    if ($error == 2)
-//    {
-//        $_SESSION['edit_message'] = 'User is set inactive - contact admin';
-//        header("Location: ../front/front.php");
-//    }
-//}
-
 if (isset($action) and $action == 'register') {
     $smarty->assign("action", 'register');
 }

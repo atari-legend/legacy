@@ -97,7 +97,6 @@ function deleteseries(str)
                         {foreach from=$series_link item=line}
                             <tr>
                                 <td style="width:5%;">
-                                    <!--<input type="checkbox" name="game_series_cross_id[]" value="{$line.game_series_cross_id}" id="user_select_all" class="quick_search_check">-->
                                     <div class="checkbox">
                                         <input type="checkbox" id="{$line.game_series_cross_id}" name="game_series_cross_id[]" value="{$line.game_series_cross_id}">
                                         <label for="{$line.game_series_cross_id}"></label>

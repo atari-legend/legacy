@@ -14,7 +14,8 @@
  * User management functions
  *********************************************************************************/
 
-function sec_session_start() {
+function sec_session_start()
+{
     $session_name = 'sec_session_id'; // Set a custom session name
     $secure       = SECURE;
     // This stops JavaScript being able to access the session id.
@@ -33,7 +34,8 @@ function sec_session_start() {
     session_regenerate_id(true); // regenerated the session, delete the old one.
 }
 
-function md5_test($userid, $md5_password, $password, $mysqli) {
+function md5_test($userid, $md5_password, $password, $mysqli)
+{
     // Using prepared statements means that SQL injection is not possible.
     if ($stmt = $mysqli->prepare("SELECT user_id, userid, password
         FROM users
@@ -92,7 +94,8 @@ function md5_test($userid, $md5_password, $password, $mysqli) {
     }
 }
 
-function login($userid, $password, $mysqli) {
+function login($userid, $password, $mysqli)
+{
     // Using prepared statements means that SQL injection is not possible.
     if ($stmt = $mysqli->prepare("SELECT user_id, userid, sha512_password, salt, permission, avatar_ext, inactive
         FROM users
@@ -101,7 +104,7 @@ function login($userid, $password, $mysqli) {
         $stmt->bind_param('s', $userid); // Bind "$userid" to parameter.
         $stmt->execute(); // Execute the prepared query.
         $stmt->store_result();
-        
+
         // get variables from result.
         $stmt->bind_result($user_id, $userid, $db_password, $salt, $permission, $avatar_ext, $inactive);
         $stmt->fetch();
@@ -115,32 +118,32 @@ function login($userid, $password, $mysqli) {
             //    $_SESSION['edit_message'] = "Your account is locked because of too many failed attempts";
             //    header("Location: ../../main/front/front.php");
             //} else {
-                // Check if the password in the database matches
-                // the password the user submitted.
-                if ($db_password == $password and $inactive == 0) {
-                    // Password is correct!
-                    // Get the user-agent string of the user.
-                    $user_browser             = $_SERVER['HTTP_USER_AGENT'];
-                    // XSS protection as we might print this value
-                    $user_id                  = preg_replace("/[^0-9]+/", "", $user_id);
-                    $_SESSION['user_id']      = $user_id;
-                    // XSS protection as we might print this value
-                    $userid                   = preg_replace("/[^a-zA-Z0-9_\-]+/", "", $userid);
-                    $_SESSION['userid']       = $userid;
-                    $_SESSION['permission']   = $permission;
-                    $_SESSION['login_string'] = hash('sha512', $password . $user_browser);
-                    $_SESSION['image']        = $avatar_ext;
-                    // Login successful.
-                    return true;
-                } else {
-                    // Password is not correct
-                    // We record this attempt in the database
-                    $now = time();
-                    $mysqli->query("INSERT INTO users_login_attempts(user_id, time)
+            // Check if the password in the database matches
+            // the password the user submitted.
+            if ($db_password == $password and $inactive == 0) {
+                // Password is correct!
+                // Get the user-agent string of the user.
+                $user_browser             = $_SERVER['HTTP_USER_AGENT'];
+                // XSS protection as we might print this value
+                $user_id                  = preg_replace("/[^0-9]+/", "", $user_id);
+                $_SESSION['user_id']      = $user_id;
+                // XSS protection as we might print this value
+                $userid                   = preg_replace("/[^a-zA-Z0-9_\-]+/", "", $userid);
+                $_SESSION['userid']       = $userid;
+                $_SESSION['permission']   = $permission;
+                $_SESSION['login_string'] = hash('sha512', $password . $user_browser);
+                $_SESSION['image']        = $avatar_ext;
+                // Login successful.
+                return true;
+            } else {
+                // Password is not correct
+                // We record this attempt in the database
+                $now = time();
+                $mysqli->query("INSERT INTO users_login_attempts(user_id, time)
                                     VALUES ('$user_id', '$now')");
-                    return false;
-                }
-           // }
+                return false;
+            }
+            // }
         } else {
             // No user exists.
             return false;
@@ -149,7 +152,8 @@ function login($userid, $password, $mysqli) {
 }
 
 
-function checkbrute($user_id, $mysqli) {
+function checkbrute($user_id, $mysqli)
+{
     // Get timestamp of current time
     $now = time();
 
@@ -175,27 +179,27 @@ function checkbrute($user_id, $mysqli) {
     }
 }
 
-function login_check($mysqli) {
-   
-    //check for cookie 
-    //I can't do the extra pwd check sadly enough as I don't seem to have the know how. 
-    if(isset($_COOKIE['cooksession'])){
-   	    $session_id = $_COOKIE['cooksession'];
+function login_check($mysqli)
+{
 
-	    //get the username and password
-   	    $query_user = $mysqli->query("SELECT * FROM users WHERE session = '$session_id'");
-     
+    //check for cookie
+    //I can't do the extra pwd check sadly enough as I don't seem to have the know how.
+    if (isset($_COOKIE['cooksession'])) {
+        $session_id = $_COOKIE['cooksession'];
+
+        //get the username and password
+        $query_user = $mysqli->query("SELECT * FROM users WHERE session = '$session_id'");
+
         $v_rows = $query_user->num_rows;
-        
-        if($v_rows > 0)
-        {
+
+        if ($v_rows > 0) {
             $user = $query_user->fetch_array(MYSQLI_BOTH);
-            
+
             $_SESSION['userid'] = $user['userid'];
             $_SESSION['user_id'] = $user['user_id'];
             $_SESSION['permission'] = $user['permission'];
             $_SESSION['image'] = $user['avatar_ext'];
-                          
+
             // update last visit
             $now = time();
             if ($update_stmt = $mysqli->prepare("UPDATE users SET last_visit=? WHERE user_id=?")) {
@@ -206,12 +210,10 @@ function login_check($mysqli) {
                 }
             }
             return true;
-        }
-        else
-        {
+        } else {
             return false;
         }
-   }else{
+    } else {
         // Check if all session variables are set
         if (isset($_SESSION['user_id'], $_SESSION['userid'], $_SESSION['login_string'], $_SESSION['permission'])) {
             $user_id      = $_SESSION['user_id'];
@@ -239,7 +241,7 @@ function login_check($mysqli) {
                     if ($login_check == $login_string) {
                         // Logged In!!!!
                         // update last visit
-                        $now = time();                       
+                        $now = time();
                         if ($update_stmt = $mysqli->prepare("UPDATE users SET last_visit=? WHERE user_id=?")) {
                             $update_stmt->bind_param('ss', $now, $user_id);
                             // Execute the prepared query.
@@ -267,8 +269,8 @@ function login_check($mysqli) {
     }
 }
 
-function esc_url($url) {
-
+function esc_url($url)
+{
     if ('' == $url) {
         return $url;
     }
