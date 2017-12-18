@@ -409,7 +409,7 @@ body, html {
         color: #182727;
     }
     .sub-menu li a:hover {
-        background: #01b5b5;
+        background: #00d3d3;
         color: #43635f;
     }
 } @else if $skin_name == picasso {
@@ -1002,7 +1002,7 @@ input:-ms-input-placeholder, textarea:-ms-input-placeholder {
 
 .log_on_avatar {
     border-radius: 50%;
-    diplay: inline;
+    display: inline;
     float: left;
     border: $log_on_border;
 }
