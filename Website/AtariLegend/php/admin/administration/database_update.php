@@ -30,12 +30,9 @@ foreach (glob("../../admin/administration/database_scripts/*.php") as $filename)
     // import update script
     
     //we don't want to execute additions just yet
-    if (strpos($filename, 'addition') !== false) 
-    {
+    if (strpos($filename, 'addition') !== false) {
         //do nothing
-    }
-    else
-    {
+    } else {
         require_once("$filename");
 
         // take all variables from the update script and place in an array
@@ -72,14 +69,10 @@ foreach ($database_update as $key) {
 
         // if the execute condition is met, execute update
         if ($key['execute_condition'] == $test_result) {
-            
              //overhere we check if we are dealing with an addition - a script containing more than just SQL
-            if (strncmp($key['database_update_sql'], "..", 2) === 0)
-            {
+            if (strncmp($key['database_update_sql'], "..", 2) === 0) {
                 include $key['database_update_sql'];
-            }
-            else  
-            {
+            } else {
                 $mysqli->query("$key[database_update_sql]") or die("Database update $key[database_update_id] failed: ".$mysqli->error);
             }
             
@@ -122,14 +115,10 @@ foreach ($database_update as $key) {
 
             // if the execute condition is met, execute update
             if ($key['execute_condition'] == $test_result) {
-                
                  //overhere we check if we are dealing with an addition - a script containing more than just SQL
-                if (strncmp($key['database_update_sql'], "..", 2) === 0)
-                {
+                if (strncmp($key['database_update_sql'], "..", 2) === 0) {
                     include $key['database_update_sql'];
-                }
-                else  
-                {
+                } else {
                     $mysqli->query("$key[database_update_sql]") or die("Database update $key[database_update_id] failed: ".$mysqli->error);
                 }
                     

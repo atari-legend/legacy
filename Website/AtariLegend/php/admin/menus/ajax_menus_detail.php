@@ -437,7 +437,6 @@ if (isset($action) and $action == "add_intro_credit") {
 //
 if (isset($action) and $action == "ind_gen_browse") {
     if (isset($query)) {
-
         if ($query == "num") {
             $query_temporary = $mysqli->query("SELECT ind_id,ind_name FROM individuals WHERE ind_name REGEXP '^[0-9].*' ORDER BY ind_name ASC") or die('Error: ' . mysqli_error($mysqli));
         } else {
@@ -459,11 +458,9 @@ if (isset($action) and $action == "ind_gen_browse") {
 //
 if (isset($action) and $action == "ind_gen_search") {
     if (isset($query) and $query !== "empty") {
-
         $query = $mysqli->real_escape_string($query);
         $query_temporary = $mysqli->query("SELECT ind_id,ind_name FROM individuals WHERE ind_name LIKE '%$query%' ORDER BY ind_name ASC") or die('Error: ' . mysqli_error($mysqli));
     } elseif ($query == "empty") {
-
         $query_temporary = $mysqli->query("SELECT ind_id,ind_name FROM individuals WHERE ind_name LIKE '%a%' ORDER BY ind_name ASC") or die("Failed to query temporary table");
     }
 

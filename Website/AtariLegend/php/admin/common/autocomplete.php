@@ -26,18 +26,18 @@ switch ($extraParams) {
             SELECT user_id, userid
             FROM users
             WHERE LOWER(userid) LIKE CONCAT('%',LOWER(?),'%')")
-        or die("Error querying users: ".$mysqli->error);
+        or
+        die("Error querying users: ".$mysqli->error);
 
         $stmt->bind_param("s", $term);
         $stmt->execute();
         $stmt->bind_result($user_id, $userid);
 
-        while ($stmt->fetch()) {
-            array_push($json, array(
-                "value" => $user_id,
-                "label" => $userid)
-            );
-        }      
+    while ($stmt->fetch()) {
+        array_push($json, array(
+        "value" => $user_id,
+        "label" => $userid));
+    }
         $stmt->close();
         break;
         
@@ -46,22 +46,21 @@ switch ($extraParams) {
             SELECT ind_id, ind_name
             FROM individuals
             WHERE LOWER(ind_name) LIKE CONCAT('%',LOWER(?),'%')")
-        or die("Error querying individuals: ".$mysqli->error);
+        or
+        die("Error querying individuals: ".$mysqli->error);
 
         $stmt->bind_param("s", $term);
         $stmt->execute();
         $stmt->bind_result($ind_id, $ind_name);
 
-        while ($stmt->fetch()) {
-            array_push($json, array(
-                "value" => $ind_id,
-                "label" => $ind_name)
-            );
-        }      
+    while ($stmt->fetch()) {
+        array_push($json, array(
+        "value" => $ind_id,
+        "label" => $ind_name));
+    }
         $stmt->close();
         break;
 }
 
 header("Content-Type: application/json");
 echo json_encode($json);
-?>

@@ -24,7 +24,9 @@ include("../../lib/functions.php");
 include("../../lib/karma.php");
 include("../../lib/who_is_online.php");
 
-if (file_exists("../../config/database_upgrade.php")==true) { exit("Upgrade mode");}
+if (file_exists("../../config/database_upgrade.php")==true) {
+    exit("Upgrade mode");
+}
 
 //Check if the user is logged on to the site
 sec_session_start();
@@ -36,7 +38,7 @@ if (login_check($mysqli) == true) {
         'permission' => $_SESSION['permission'],
         'extension' => $_SESSION['image'],
         'image' => "$user_avatar_path$_SESSION[user_id].$_SESSION[image]"
-    )); 
+    ));
 }
 
 include("../../config/template_config.php");
@@ -52,4 +54,3 @@ if (SITESTATUS == "offline") {
         header("Location: " . SITEURL . "blank.php");
     }
 }
-?>

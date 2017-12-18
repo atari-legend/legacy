@@ -15,11 +15,11 @@
 //
 // Software list connected to a menu disk
 //
- function menu_disk_software_list($menu_disk_id)
- {
-     global $mysqli;
+function menu_disk_software_list($menu_disk_id)
+{
+    global $mysqli;
 
-     $sql_games = "SELECT game.game_id AS 'software_id',
+    $sql_games = "SELECT game.game_id AS 'software_id',
          game.game_name AS 'software_name',
          pub_dev.pub_dev_id AS 'developer_id',
          pub_dev.pub_dev_name AS 'developer_name',
@@ -39,7 +39,7 @@
          LEFT JOIN menu_types_main ON (menu_disk_title.menu_types_main_id = menu_types_main.menu_types_main_id)
          WHERE menu_disk_title.menu_disk_id = '$menu_disk_id' AND menu_disk_title.menu_types_main_id = '1' ORDER BY game.game_name ASC";
 
-     $sql_demos = "SELECT demo.demo_id AS 'software_id',
+    $sql_demos = "SELECT demo.demo_id AS 'software_id',
          demo.demo_name AS 'software_name',
          crew.crew_id AS 'developer_id',
          crew.crew_name AS 'developer_name',
@@ -59,7 +59,7 @@
          LEFT JOIN menu_types_main ON (menu_disk_title.menu_types_main_id = menu_types_main.menu_types_main_id)
          WHERE menu_disk_title.menu_disk_id = '$menu_disk_id' AND menu_disk_title.menu_types_main_id = '2' ORDER BY demo.demo_name ASC";
 
-     $sql_tools = "SELECT tools.tools_id AS 'software_id',
+    $sql_tools = "SELECT tools.tools_id AS 'software_id',
          tools.tools_name AS 'software_name',
          '' AS developer_id,
          '' AS developer_name,
@@ -76,24 +76,24 @@
          LEFT JOIN menu_types_main ON (menu_disk_title.menu_types_main_id = menu_types_main.menu_types_main_id)
          WHERE menu_disk_title.menu_disk_id = '$menu_disk_id' AND menu_disk_title.menu_types_main_id = '3' ORDER BY tools.tools_name ASC";
 
-     $drop = $mysqli->query("DROP TABLE IF EXISTS temp") or die('Error: ' . mysqli_error($mysqli));
+    $drop = $mysqli->query("DROP TABLE IF EXISTS temp") or die('Error: ' . mysqli_error($mysqli));
 
-     $temp_query = $mysqli->query("CREATE TEMPORARY TABLE temp ENGINE=MEMORY $sql_games") or die('Error: ' . mysqli_error($mysqli));
-     $temp_query = $mysqli->query("INSERT INTO temp $sql_demos") or die('Error: ' . mysqli_error($mysqli));
-     $temp_query = $mysqli->query("INSERT INTO temp $sql_tools") or die('Error: ' . mysqli_error($mysqli));
+    $temp_query = $mysqli->query("CREATE TEMPORARY TABLE temp ENGINE=MEMORY $sql_games") or die('Error: ' . mysqli_error($mysqli));
+    $temp_query = $mysqli->query("INSERT INTO temp $sql_demos") or die('Error: ' . mysqli_error($mysqli));
+    $temp_query = $mysqli->query("INSERT INTO temp $sql_tools") or die('Error: ' . mysqli_error($mysqli));
 
-     $temp_query = $mysqli->query("SELECT * FROM temp GROUP BY menu_disk_title_id ORDER BY menu_disk_title_id ASC") or die('Error: ' . mysqli_error($mysqli));
+    $temp_query = $mysqli->query("SELECT * FROM temp GROUP BY menu_disk_title_id ORDER BY menu_disk_title_id ASC") or die('Error: ' . mysqli_error($mysqli));
 
-     $drop = $mysqli->query("DROP TABLE IF EXISTS temp") or die('Error: ' . mysqli_error($mysqli));
+    $drop = $mysqli->query("DROP TABLE IF EXISTS temp") or die('Error: ' . mysqli_error($mysqli));
 
-     return $temp_query;
- }
+    return $temp_query;
+}
 
- function menu_disk_doc_list($menu_disk_id)
- {
-     global $mysqli;
+function menu_disk_doc_list($menu_disk_id)
+{
+    global $mysqli;
 
-     $sql_doc_games = "SELECT game.game_name AS 'software_name',
+    $sql_doc_games = "SELECT game.game_name AS 'software_name',
                               game.game_id AS 'software_id',
                               game_year.game_year AS 'year',
                               pub_dev.pub_dev_name AS 'developer_name',
@@ -115,7 +115,7 @@
                               LEFT JOIN menu_types_main ON (menu_disk_title.menu_types_main_id = menu_types_main.menu_types_main_id)
                               WHERE menu_disk_title.menu_disk_id = '$menu_disk_id' AND menu_disk_title.menu_types_main_id = '6' ORDER BY game.game_name ASC";
 
-     $sql_doc_tools = "SELECT tools.tools_name AS 'software_name',
+    $sql_doc_tools = "SELECT tools.tools_name AS 'software_name',
                               tools.tools_id AS 'software_id',
                               '0' AS year,
                               'n/a' AS developer_name,
@@ -134,10 +134,10 @@
                               LEFT JOIN menu_types_main ON (menu_disk_title.menu_types_main_id = menu_types_main.menu_types_main_id)
                               WHERE menu_disk_title.menu_disk_id = '$menu_disk_id' AND menu_disk_title.menu_types_main_id = '6' ORDER BY tools.tools_name ASC";
 
-     $temp_query2 = $mysqli->query("CREATE TEMPORARY TABLE temp2 ENGINE=MEMORY $sql_doc_games") or die('Error1: ' . mysqli_error($mysqli));
-     $temp_query2 = $mysqli->query("INSERT INTO temp2 $sql_doc_tools") or die('Error2: ' . mysqli_error($mysqli));
+    $temp_query2 = $mysqli->query("CREATE TEMPORARY TABLE temp2 ENGINE=MEMORY $sql_doc_games") or die('Error1: ' . mysqli_error($mysqli));
+    $temp_query2 = $mysqli->query("INSERT INTO temp2 $sql_doc_tools") or die('Error2: ' . mysqli_error($mysqli));
 
-     $temp_query2 = $mysqli->query("SELECT * FROM temp2 GROUP BY menu_disk_title_id ORDER BY menu_disk_title_id ASC") or die('Error: ' . mysqli_error($mysqli));
+    $temp_query2 = $mysqli->query("SELECT * FROM temp2 GROUP BY menu_disk_title_id ORDER BY menu_disk_title_id ASC") or die('Error: ' . mysqli_error($mysqli));
 
-     return $temp_query2;
- }
+    return $temp_query2;
+}

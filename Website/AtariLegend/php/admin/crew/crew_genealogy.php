@@ -23,21 +23,18 @@ include("../../config/common.php");
 include("../../config/admin.php");
 include("../../admin/games/quick_search_games.php");
 
-if (isset($crewsearch)){
-}
-else{
+if (isset($crewsearch)) {
+} else {
     $crewsearch='';
 }
 
-if (isset($crewbrowse)){
-}
-else{
+if (isset($crewbrowse)) {
+} else {
     $crewbrowse='';
 }
 
-if (isset($message)){
-}
-else{
+if (isset($message)) {
+} else {
     $message='';
 }
 
@@ -175,7 +172,6 @@ if (isset($action) and $action == "genealogy") {
                                   WHERE crew_individual.crew_id = '$crew_select'") or die("Couldn't retrieve nick ids");
 
     while ($fetch_ind_nicks = $sql_ind_nicks->fetch_array(MYSQLI_BOTH)) {
-        
         $nick_id = $fetch_ind_nicks['nick_id'];
         
         $sql_nick_names = $mysqli->query("SELECT ind_name from individuals WHERE ind_id = '$nick_id'") or die("Couldn't retrieve nick names");

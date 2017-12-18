@@ -73,8 +73,8 @@ if (isset($action)) {
 
         $smarty->append(
 
-        'comments',
-        array('comment' => $oldcomment,
+            'comments',
+            array('comment' => $oldcomment,
               'comment_edit' => $comment,
               'comment_id' => $query_comment['comment_id'],
               'date' => $date,
@@ -85,8 +85,7 @@ if (isset($action)) {
               'user_twitter' => $query_comment['user_twitter'],
               'user_af' => $query_comment['user_af'],
               'email' => $query_comment['email'])
-
-    );
+        );
     }
 
     $smarty->assign('smarty_action', 'delete_comment');

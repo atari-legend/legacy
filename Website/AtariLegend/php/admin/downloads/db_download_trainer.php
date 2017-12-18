@@ -13,7 +13,6 @@
 include("../../config/common.php");
 include("../../config/admin.php");
 include("../../config/admin_rights.php");
-
 //update the trainer options
 if (isset($trainer_id) and isset($action) and $action == 'update') {
     $sdbquery = $mysqli->query("UPDATE trainer_options SET trainer_options = '$trainer_name' WHERE trainer_options_id = $trainer_id") or die("Couldn't Update the trainer options table");

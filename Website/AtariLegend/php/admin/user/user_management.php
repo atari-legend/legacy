@@ -19,13 +19,9 @@ include("../../admin/games/quick_search_games.php");
 include("../../config/admin.php");
 
 $start = microtime(true);
-
-if ( isset($action) and $action == 'quick_search_users' )
-{ 
+if (isset($action) and $action == 'quick_search_users') {
     $last_visit_timestamp = date_to_timestamp($Date_Year, $Date_Month, $Date_Day);
-
     $sql_query = "SELECT users.user_id, users.userid, users.email, users.join_date, users.last_visit FROM users";
-
     if (isset($with_comments) and $with_comments == "1") {
         $sql_query .= " LEFT JOIN comments ON (users.user_id = comments.user_id)";
     }
@@ -120,21 +116,18 @@ if ( isset($action) and $action == 'quick_search_users' )
 
     // filter out duplicates
     $sql_query .= " GROUP BY users.user_id HAVING COUNT(DISTINCT users.user_id) = 1";
-
     $sql_query .= " ORDER BY users.userid";
-
-    //echo $sql_query;
+//echo $sql_query;
 
     $sql_users = $mysqli->query($sql_query) or die("Couldn't query users Database");
     $nr_users = 0;
     while ($query_users = $sql_users->fetch_array(MYSQLI_BOTH)) {
-        //if (empty($nr_users)) {
+    //if (empty($nr_users)) {
         //    $nr_users = '';
         //}
 
         $nr_users++;
         $email = trim($query_users['email']);
-
         if ($query_users['join_date'] !== '') {
             $join_date = date("F j, Y", $query_users['join_date']);
         } else {
@@ -153,15 +146,13 @@ if ( isset($action) and $action == 'quick_search_users' )
             'join_date' => $join_date,
             'last_visit' => $last_visit,
             'email' => $email
-        ));   
+        ));
     }
     
     $smarty->assign('nr_users', $nr_users);
-
     $time_elapsed_secs = microtime(true) - $start;
     $smarty->assign("query_time", $time_elapsed_secs);
-
-    //See if we can mass delete - this is a extra measurement not to mass delete a population
+//See if we can mass delete - this is a extra measurement not to mass delete a population
     if ((isset($no_comments) and $no_comments == "1") and (isset($no_review) and $no_review == "1") and (isset($no_submissions) and $no_submissions == "1") and (isset($no_links) and $no_links == "1") and (isset($no_news) and $no_news == "1") and (isset($no_interviews) and $no_interviews == "1") and (isset($not_admin) and $not_admin == "1")) {
         $smarty->assign("delete_link", "1");
     }
@@ -173,17 +164,12 @@ if ( isset($action) and $action == 'quick_search_users' )
     // Create dropdown values a-z
     $az_value  = az_dropdown_value(0);
     $az_output = az_dropdown_output(0);
-
     $smarty->assign('az_value', $az_value);
     $smarty->assign('az_output', $az_output);
     $smarty->assign('az_select', "num");
-
     $time_elapsed_secs = microtime(true) - $start;
     $smarty->assign("query_time", $time_elapsed_secs);
- 
-}
-else
-{
+} else {
     $sql_users = $mysqli->query("SELECT * FROM users WHERE userid REGEXP '^[0-9].*' ORDER BY users.userid") or die("Couldn't query users Database");
     $nr_users = 0;
     while ($query_users = $sql_users->fetch_array(MYSQLI_BOTH)) {
@@ -212,7 +198,7 @@ else
             'join_date' => $join_date,
             'last_visit' => $last_visit,
             'email' => $email
-        ));    
+        ));
     }
     
     $smarty->assign('nr_users', $nr_users);
@@ -233,6 +219,5 @@ else
 $query_number = $mysqli->query("SELECT email FROM users") or die("Couldn't get the total number of users");
 $v_rows = $query_number->num_rows;
 $smarty->assign('nr_users_total', $v_rows);
-
 //Send all smarty variables to the templates
 $smarty->display("file:" . $cpanel_template_folder . "user_management.html");

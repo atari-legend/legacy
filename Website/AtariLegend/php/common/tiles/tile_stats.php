@@ -20,12 +20,9 @@
 //*******************************
 
 $stack = statistics_stack();
-
 // smack the stack into a smarty var and pray it works
 foreach ($stack as $value) {
     $smarty->append('statistics', array(
         'value' => $value
     ));
 }
-
-?>

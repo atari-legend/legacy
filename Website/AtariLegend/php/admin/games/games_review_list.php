@@ -66,7 +66,6 @@ if (empty($action)) {
     $action = "";
 }
 if (isset($action) and $action == 'search') {
-
     //check the $gamebrowse select
     if ($gamebrowse == "") {
         $gamebrowse_select = "";

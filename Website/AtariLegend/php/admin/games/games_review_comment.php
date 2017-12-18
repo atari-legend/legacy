@@ -50,7 +50,7 @@ $sql_build = "SELECT *
                  " . $where_clause . "
                 ORDER BY comments.timestamp DESC LIMIT  " . $v_counter . ", 15";
 
-$sql_comment = $mysqli->query($sql_build) or die ("problem with the main query");
+$sql_comment = $mysqli->query($sql_build) or die("problem with the main query");
 
 // get the total nr of comments in the DB
 $query_total_number = $mysqli->query("SELECT * FROM review_user_comments") or die("Couldn't get the total number of comments");

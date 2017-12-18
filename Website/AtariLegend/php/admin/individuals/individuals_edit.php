@@ -44,12 +44,11 @@ if ($ind_id == '-') {
     //Send all smarty variables to the templates
     $smarty->display("file:" . $cpanel_template_folder . "individuals_main.html");
 } else {
-    
     //Let's see if we have selected a nickname
-    $sql_nick = $mysqli->query("SELECT * FROM individual_nicks WHERE nick_id=$ind_id") or die ("problem getting nickname");
+    $sql_nick = $mysqli->query("SELECT * FROM individual_nicks WHERE nick_id=$ind_id") or die("problem getting nickname");
                                       
-    while ($ind_nicks = $sql_nick->fetch_array(MYSQLI_BOTH)) {       
-       $ind_id = $ind_nicks['ind_id'];
+    while ($ind_nicks = $sql_nick->fetch_array(MYSQLI_BOTH)) {
+        $ind_id = $ind_nicks['ind_id'];
     }
                                          
     //Get the individual data
@@ -78,7 +77,7 @@ if ($ind_id == '-') {
     }
 
     // Get nickname information
-    $sql_nick = $mysqli->query("SELECT * FROM individual_nicks where ind_id=$ind_id") or die ("problem getting nickname");
+    $sql_nick = $mysqli->query("SELECT * FROM individual_nicks where ind_id=$ind_id") or die("problem getting nickname");
       
     while ($ind_nicks = $sql_nick->fetch_array(MYSQLI_BOTH)) {
         $ind_id = $ind_nicks['nick_id'];
@@ -90,7 +89,7 @@ if ($ind_id == '-') {
                 'nick_name' => $ind_nickname['ind_name']
             ));
         }
-    } 
+    }
   
     $smarty->assign("user_id", $_SESSION['user_id']);
 

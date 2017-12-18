@@ -14,5 +14,3 @@ $mysqli->query("UPDATE website
 
 $mysqli->query("DROP TABLE website_description")
     or die("Couldn't drop the website_description table: ".$mysqli->error) ;
-
-?>

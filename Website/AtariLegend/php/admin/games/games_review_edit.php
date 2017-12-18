@@ -121,8 +121,7 @@ if (isset($reviewid) and isset($game_id)) {
     $smarty->assign("screenshots_nr", $i);
     $smarty->assign("reviewid", $reviewid);
     
-    if (isset($action))
-    {
+    if (isset($action)) {
         $smarty->assign("action", $action);
     }
     

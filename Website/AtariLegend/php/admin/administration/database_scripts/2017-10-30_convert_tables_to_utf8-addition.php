@@ -126,7 +126,7 @@ foreach (array(
 }
 
 # Restore indexes we dropped previously
-foreach ( array (
+foreach (array (
     "users" => array(
         "userid" => "userid",
         "userid_2" => "userid",
@@ -144,5 +144,3 @@ foreach ( array (
 # created will be utf8 by default
 $mysqli->query("ALTER DATABASE `$db_databasename` CHARACTER SET utf8 COLLATE utf8_general_ci")
     or die("Unable to alter database character set: ".$mysqli->error);
-
-?>

@@ -40,41 +40,37 @@ $query_screenstar = $mysqli->query("SELECT
 					WHERE CHAR_LENGTH( game_name ) <15 ORDER BY RAND() LIMIT 1") or die("query error, screenstar");
 
 $sql_screenstar = $query_screenstar->fetch_array(MYSQLI_BOTH);
-	
-	//Structure and manipulate the comment text
-	$screenstar_review = $sql_screenstar['review_text']; 
     
-    $pos_start = strpos($screenstar_review, '[screenstar]');
-    $pos_start = $pos_start;
-    
-    $pos_end = strpos($screenstar_review, '[/screenstar]');
-    $pos_end = $pos_end;
-    
-    $nr_char = $pos_end - $pos_start;
-    
-    $screenstar_review = substr($screenstar_review, $pos_start, $nr_char);
+    //Structure and manipulate the comment text
+    $screenstar_review = $sql_screenstar['review_text'];
+$pos_start = strpos($screenstar_review, '[screenstar]');
+$pos_start = $pos_start;
+$pos_end = strpos($screenstar_review, '[/screenstar]');
+$pos_end = $pos_end;
+$nr_char = $pos_end - $pos_start;
+$screenstar_review = substr($screenstar_review, $pos_start, $nr_char);
       
-	$screenstar_review = stripslashes($screenstar_review);
-	$screenstar_review = InsertALCode($screenstar_review); 
-	$screenstar_review = trim($screenstar_review);
-	$screenstar_review = RemoveSmillies($screenstar_review); 
+    $screenstar_review = stripslashes($screenstar_review);
+    $screenstar_review = InsertALCode($screenstar_review);
+    $screenstar_review = trim($screenstar_review);
+    $screenstar_review = RemoveSmillies($screenstar_review);
     
-	//Ready screenshots path and filename
-	$screenstar_image  = $game_screenshot_path;
-	$screenstar_image .= $sql_screenstar['screenshot_id'];
-	$screenstar_image .= '.';
-	$screenstar_image .= $sql_screenstar['imgext'];
-    	
-	$smarty->assign('screenstar',
-	     array('screenstar_game_name' => $sql_screenstar['game_name'],
-		   'screenstar_review' => $screenstar_review,
+    //Ready screenshots path and filename
+    $screenstar_image  = $game_screenshot_path;
+    $screenstar_image .= $sql_screenstar['screenshot_id'];
+    $screenstar_image .= '.';
+    $screenstar_image .= $sql_screenstar['imgext'];
+        
+    $smarty->assign(
+        'screenstar',
+        array('screenstar_game_name' => $sql_screenstar['game_name'],
+           'screenstar_review' => $screenstar_review,
            'screenstar_review_id' => $sql_screenstar['review_id'],
            'screenstar_user_id' => $sql_screenstar['user_id'],
            'screenstar_username' => $sql_screenstar['userid'],
-		   'screenstar_game_id' => $sql_screenstar['game_id'],
+           'screenstar_game_id' => $sql_screenstar['game_id'],
            'screenstar_date'  => date("d/m/Y", $sql_screenstar['review_date']),
            'screenstar_developer' => $sql_screenstar['pub_dev_name'],
-           'screenstar_year' => $sql_screenstar['game_year'],   
-		   'screenstar_img' => $screenstar_image));
-
-?>
+           'screenstar_year' => $sql_screenstar['game_year'],
+           'screenstar_img' => $screenstar_image)
+    );

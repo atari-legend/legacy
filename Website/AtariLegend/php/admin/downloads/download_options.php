@@ -24,7 +24,7 @@ include("../../config/admin.php");
 include("../../admin/games/quick_search_games.php");
 
 //get all the download options
-$result_download_options = $mysqli->query("SELECT * FROM download_options") or die ("problem getting download options");
+$result_download_options = $mysqli->query("SELECT * FROM download_options") or die("problem getting download options");
 
 $rows = $result_download_options->num_rows;
 while ($row = $result_download_options->fetch_array(MYSQLI_BOTH)) {

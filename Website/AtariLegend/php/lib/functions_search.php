@@ -19,42 +19,42 @@
  *
  ***************************************************************************/
 
- function clean_words($mode, &$entry)
- {
-     static $drop_char_match =   array('^', '$', '&', '(', ')', '<', '>', '`', '\'', '"', '|', ',', '@', '_', '?', '%', '-', '~', '+', '.', '[', ']', '{', '}', ':', '\\', '/', '=', '#', '\'', ';', '!');
-     static $drop_char_replace = array(' ', ' ', ' ', ' ', ' ', ' ', ' ', '',  '',   ' ', ' ', ' ', ' ', '',  ' ', ' ', '',  ' ',  ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' , ' ', ' ', ' ', ' ',  ' ', ' ');
+function clean_words($mode, &$entry)
+{
+    static $drop_char_match =   array('^', '$', '&', '(', ')', '<', '>', '`', '\'', '"', '|', ',', '@', '_', '?', '%', '-', '~', '+', '.', '[', ']', '{', '}', ':', '\\', '/', '=', '#', '\'', ';', '!');
+    static $drop_char_replace = array(' ', ' ', ' ', ' ', ' ', ' ', ' ', '',  '',   ' ', ' ', ' ', ' ', '',  ' ', ' ', '',  ' ',  ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' , ' ', ' ', ' ', ' ',  ' ', ' ');
 
-     $entry = ' ' . strip_tags(strtolower($entry)) . ' ';
+    $entry = ' ' . strip_tags(strtolower($entry)) . ' ';
 
-     if ($mode == 'post') {
-         // Replace line endings by a space
-         $entry = preg_replace('/[\n\r]/is', ' ', $entry);
-         // HTML entities like &nbsp;
-         $entry = preg_replace('/\b&[a-z]+;\b/', ' ', $entry);
-         // Remove URL's
-         $entry = preg_replace('/\b[a-z0-9]+:\/\/[a-z0-9\.\-]+(\/[a-z0-9\?\.%_\-\+=&\/]+)?/', ' ', $entry);
-         // Quickly remove BBcode.
-         $entry = preg_replace('/\[img:[a-z0-9]{10,}\].*?\[\/img:[a-z0-9]{10,}\]/', ' ', $entry);
-         $entry = preg_replace('/\[\/?url(=.*?)?\]/', ' ', $entry);
-         $entry = preg_replace('/\[\/?[a-z\*=\+\-]+(\:?[0-9a-z]+)?:[a-z0-9]{10,}(\:[a-z0-9]+)?=?.*?\]/', ' ', $entry);
-     }
+    if ($mode == 'post') {
+        // Replace line endings by a space
+        $entry = preg_replace('/[\n\r]/is', ' ', $entry);
+        // HTML entities like &nbsp;
+        $entry = preg_replace('/\b&[a-z]+;\b/', ' ', $entry);
+        // Remove URL's
+        $entry = preg_replace('/\b[a-z0-9]+:\/\/[a-z0-9\.\-]+(\/[a-z0-9\?\.%_\-\+=&\/]+)?/', ' ', $entry);
+        // Quickly remove BBcode.
+        $entry = preg_replace('/\[img:[a-z0-9]{10,}\].*?\[\/img:[a-z0-9]{10,}\]/', ' ', $entry);
+        $entry = preg_replace('/\[\/?url(=.*?)?\]/', ' ', $entry);
+        $entry = preg_replace('/\[\/?[a-z\*=\+\-]+(\:?[0-9a-z]+)?:[a-z0-9]{10,}(\:[a-z0-9]+)?=?.*?\]/', ' ', $entry);
+    }
 
-     //
-     // Filter out strange characters like ^, $, &, change "it's" to "its"
-     //
-     for ($i = 0; $i < count($drop_char_match); $i++) {
-         $entry =  str_replace($drop_char_match[$i], $drop_char_replace[$i], $entry);
-     }
+    //
+    // Filter out strange characters like ^, $, &, change "it's" to "its"
+    //
+    for ($i = 0; $i < count($drop_char_match); $i++) {
+        $entry =  str_replace($drop_char_match[$i], $drop_char_replace[$i], $entry);
+    }
 
-     if ($mode == 'post') {
-         $entry = str_replace('*', ' ', $entry);
+    if ($mode == 'post') {
+        $entry = str_replace('*', ' ', $entry);
 
-         // 'words' that consist of <3 or >20 characters are removed.
-         $entry = preg_replace('/[ ]([\S]{1,2}|[\S]{21,})[ ]/', ' ', $entry);
-     }
+        // 'words' that consist of <3 or >20 characters are removed.
+        $entry = preg_replace('/[ ]([\S]{1,2}|[\S]{21,})[ ]/', ' ', $entry);
+    }
 
-     return $entry;
- }
+    return $entry;
+}
 
 function split_words(&$entry, $mode = 'post')
 {

@@ -22,33 +22,31 @@
 include("../../config/common.php");
 include("../../config/admin.php");
 include("../../config/admin_rights.php");
-
 //****************************************************************************************
 // This is delete music file from game
 //****************************************************************************************
 
 if (isset($action) and $action == 'delete_music') {
     if (isset($music_id)) {
-       
-       foreach ((array) $music_id_selected as $music) {
+        foreach ((array) $music_id_selected as $music) {
             //get the extension
             $MUSIC = $mysqli->query("SELECT * FROM music
                               WHERE music_id = '$music'") or die("Database error - selecting screenshots");
 
-            $musicrow  = $MUSIC->fetch_array(MYSQLI_BOTH);
-            $music_ext = $musicrow['imgext'];
+             $musicrow  = $MUSIC->fetch_array(MYSQLI_BOTH);
+             $music_ext = $musicrow['imgext'];
 
-            $sql = $mysqli->query("DELETE FROM music WHERE music_id = '$music' ") or die("error deleting music");
-            $sql = $mysqli->query("DELETE FROM game_music WHERE music_id = '$music' ") or die("error deleting game_music");
-            $sql = $mysqli->query("DELETE FROM music_author WHERE music_id = '$music' ") or die("error deleting music_author");
-            $sql = $mysqli->query("DELETE FROM music_types WHERE music_id = '$music' ") or die("error deleting music_types");
+             $sql = $mysqli->query("DELETE FROM music WHERE music_id = '$music' ") or die("error deleting music");
+             $sql = $mysqli->query("DELETE FROM game_music WHERE music_id = '$music' ") or die("error deleting game_music");
+             $sql = $mysqli->query("DELETE FROM music_author WHERE music_id = '$music' ") or die("error deleting music_author");
+             $sql = $mysqli->query("DELETE FROM music_types WHERE music_id = '$music' ") or die("error deleting music_types");
 
-            $new_path = $music_game_save_path;
-            $new_path .= $music;
-            $new_path .= ".";
-            $new_path .= $music_ext;
+             $new_path = $music_game_save_path;
+             $new_path .= $music;
+             $new_path .= ".";
+             $new_path .= $music_ext;
 
-            unlink("$new_path");
+             unlink("$new_path");
         }
     }
 
