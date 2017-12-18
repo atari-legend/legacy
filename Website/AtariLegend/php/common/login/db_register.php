@@ -19,101 +19,72 @@
 include("../../config/common.php");
 include("../../vendor/phpmailer/phpmailer/PHPMailerAutoload.php");
 
-if (isset($action) and $action == 'confirm')
-{
-   //when the confirmation email link is pressed we enter this part of the code. We check if the user exists and set the account to active.
-   //Then we auto log in!
+if (isset($action) and $action == 'confirm') {
+    //when the confirmation email link is pressed we enter this part of the code. We check if the user exists and set the account to active.
+    //Then we auto log in!
    
-    if(isset($_GET['usn']) && !empty($_GET['usn']) AND isset($_GET['pwd']) && !empty($_GET['pwd']))
-    {
+    if (isset($_GET['usn']) && !empty($_GET['usn']) and isset($_GET['pwd']) && !empty($_GET['pwd'])) {
         // Verify data
-        $query_user = $mysqli->query("SELECT * FROM users WHERE userid='$_GET[usn]' AND password='$_GET[pwd]' AND inactive='1'") or die(mysql_error()); 
+        $query_user = $mysqli->query("SELECT * FROM users WHERE userid='$_GET[usn]' AND password='$_GET[pwd]' AND inactive='1'") or die(mysql_error());
         $match  = $query_user->num_rows;
         
-        if($match > 0)
-        {
+        if ($match > 0) {
             $query_update_user = $mysqli->query("UPDATE users SET inactive = '0' WHERE userid = '$_GET[usn]'") or die("Couldn't Update user table");
            
             $_SESSION['edit_message'] = "Account succesfully updated - Please log in";
             header("Location: ../../main/front/front.php");
-
-        }
-        else
-        {
+        } else {
             $_SESSION['edit_message'] = "User not found in database - contact admin";
             header("Location: ../../main/front/front.php");
         }
-    }
-    else
-    {
+    } else {
         $_SESSION['edit_message'] = "incorrect link - data missing - please contact admin";
         header("Location: ../../main/front/front.php");
-    }  
-}
-else
-{
+    }
+} else {
     // Make sure all fields were entered
-    if(!$_POST['userid'] || !$_POST['password'] || !$_POST['password_again'] || !$_POST['email'])
-    {    
+    if (!$_POST['userid'] || !$_POST['password'] || !$_POST['password_again'] || !$_POST['email']) {
         $_SESSION['edit_message'] = "You didn't fill in a required field.";
         header("Location: ../../main/front/front.php?action=register");
-    }
-    else
-    { 
+    } else {
         // Spruce up username, check length
         $_POST['userid'] = trim($_POST['userid']);
 
-        if(strlen($_POST['userid']) > 30)
-        {
+        if (strlen($_POST['userid']) > 30) {
             $_SESSION['edit_message'] = "Sorry, the username is longer than 30 characters, please shorten it.";
             header("Location: ../../main/front/front.php?action=register");
-        }
-        else
-        {
+        } else {
             // Check if username is already in use
             $user_name = $mysqli->real_escape_string($_POST['userid']);
             $query_rows = $mysqli->query("select userid from users where userid = '$user_name'");
             $number = $query_rows->num_rows;
             
-            if($number > 0)
-            {
+            if ($number > 0) {
                 $_SESSION['edit_message'] = "Sorry, the username is already taken, please pick another one";
                 header("Location: ../../main/front/front.php?action=register");
-            }
-            else
-            {
-                 // Check if both pwd fields are the same
-                if ($_POST['password'] <> $_POST['password_again'])
-                {
+            } else {
+                // Check if both pwd fields are the same
+                if ($_POST['password'] <> $_POST['password_again']) {
                     $_SESSION['edit_message'] = "The password fields do not correspond!";
                     header("Location: ../../main/front/front.php?action=register");
-
-                }
-                else
-                {
+                } else {
                     //check if the email addres is valid
-                    if (!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) 
-                    {
-                        $_SESSION['edit_message'] =  "Invalid email format"; 
+                    if (!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
+                        $_SESSION['edit_message'] =  "Invalid email format";
                         header("Location: ../../main/front/front.php?action=register");
-                    }
-                    else
-                    {
+                    } else {
                         //check if the email already exists
                         $query_rows = $mysqli->query("select * from users where email = '$_POST[email]'");
                         $number = $query_rows->num_rows;
                         
-                        if($number > 0)
-                        {
-                            $_SESSION['edit_message'] =  "Email address already exists in database!"; 
+                        if ($number > 0) {
+                            $_SESSION['edit_message'] =  "Email address already exists in database!";
                             header("Location: ../../main/front/front.php?action=register");
-                        }
-                        else
-                        {
+                        } else {
                             //Add the new account to the database but make it inactive for now
                             $user_name = $mysqli->real_escape_string($_POST['userid']);
-                            $md5pass = hash('md5',$_POST['password']); // The md5 hashed password.
-                            $sha512 = hash('sha512',$_POST['password']); // The hashed password.
+                            $md5pass = hash('md5', $_POST['password']); // The md5 hashed password.
+                            $sha512 = hash('sha512', $_POST['password']); // The hashed password.
                             $random_salt = hash('sha512', uniqid(mt_rand(1, mt_getrandmax()), true));//create random salt
                             $update_password = hash('sha512', $sha512 . $random_salt); // Create salted password
                             $timestamp = time();
@@ -122,15 +93,15 @@ else
                             $new_user_id = $mysqli->insert_id;
                             
                             //Let's create an email for verification
-                            // Create a url which we will direct them to reset their password  
-                            $pwrurl = $confirm_account_link.'&pwd='.$md5pass.'&usn='.$user_name;  
+                            // Create a url which we will direct them to reset their password
+                            $pwrurl = $confirm_account_link.'&pwd='.$md5pass.'&usn='.$user_name;
                   
                             $mail = new PHPMailer;
 
                             $start = microtime(true);
                             $i     = 0;
                    
-                            $mail->AddAddress($email);     
+                            $mail->AddAddress($email);
 
                             // Create Email
                             
@@ -160,8 +131,8 @@ else
 
                             $mail->Subject = 'Atarilegend - Account confirmation';
                             
-                            // Mail them their key  
-                            $mailbody = "Dear user,\n\nIf this e-mail does not apply to you please ignore it. Please activate your account at www.atarilegend.com\n\nby clicking the link below. If you cannot click it, please paste it into your web browser's address bar.\n\n" . $pwrurl . "\n\nThanks,\nTEAM AL";  
+                            // Mail them their key
+                            $mailbody = "Dear user,\n\nIf this e-mail does not apply to you please ignore it. Please activate your account at www.atarilegend.com\n\nby clicking the link below. If you cannot click it, please paste it into your web browser's address bar.\n\n" . $pwrurl . "\n\nThanks,\nTEAM AL";
 
                             $mail->Body    = $mailbody;
 
@@ -178,7 +149,7 @@ else
                             
                             create_log_entry('Users', $new_user_id, 'User', $new_user_id, 'Insert', $new_user_id);
                             $_SESSION['edit_message'] = "An email was sent to you. Please follow the link to activate the account";
-                            header("Location: ../../main/front/front.php");                    
+                            header("Location: ../../main/front/front.php");
                         }
                     }
                 }
