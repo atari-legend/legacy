@@ -156,7 +156,6 @@ while ($query_comment = $sql_comment->fetch_array(MYSQLI_BOTH)) {
               'user_twitter' => $query_comment['user_twitter'],
               'user_af' => $query_comment['user_af'],
               'email' => $query_comment['email'])
-
     );
 }
 

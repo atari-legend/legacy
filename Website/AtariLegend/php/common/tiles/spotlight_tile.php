@@ -18,19 +18,15 @@
 //lets get a random spotlight entry
 $query_spotlight = $mysqli->query("SELECT * from spotlight
                                             LEFT JOIN screenshot_main ON (spotlight.screenshot_id = screenshot_main.screenshot_id)
-                                            ORDER BY RAND() LIMIT 1") or die ("error in query spotlight");
-
+                                            ORDER BY RAND() LIMIT 1") or die("error in query spotlight");
 $sql_spotlight = $query_spotlight->fetch_array(MYSQLI_BOTH);
 $new_path = $spotlight_screenshot_path;
 $new_path .= $sql_spotlight['screenshot_id'];
 $new_path .= ".";
 $new_path .= $sql_spotlight['imgext'];
-    
 $smarty->assign('spotlight', array(
     'spotlight_id' => $sql_spotlight['spotlight_id'],
     'spotlight_screenshot' => $new_path,
     'link' => $sql_spotlight['link'],
     'spotlight' => $sql_spotlight['spotlight']
 ));
-
-?>

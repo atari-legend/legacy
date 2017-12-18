@@ -67,7 +67,6 @@ $smarty->assign('nr_comments', $v_rows);
 
 // lets put the comments in a smarty array
 while ($query_comment = $sql_comment->fetch_array(MYSQLI_BOTH)) {
-
     //  Retrive userstats from database
     $query_user = $mysqli->query("SELECT *
                                FROM interview_user_comments

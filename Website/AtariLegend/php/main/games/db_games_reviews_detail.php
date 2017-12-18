@@ -81,8 +81,7 @@ if (isset($action)) {
             'user_website' => $query_comment['user_website'],
             'user_twitter' => $query_comment['user_twitter'],
             'user_af' => $query_comment['user_af'],
-            'email' => $query_comment['email'])
-        );
+            'email' => $query_comment['email']));
     }
 
     $smarty->assign('smarty_action', 'delete_comment');

@@ -142,7 +142,7 @@ while ($sql_recent_reviews = $query_recent_reviews->fetch_array(MYSQLI_BOTH)) {
     $smarty->append(
 
         'recent_reviews',
-         array('review_name' => $sql_recent_reviews['game_name'],
+        array('review_name' => $sql_recent_reviews['game_name'],
            'review_id' => $sql_recent_reviews['review_id'],
            'review_author' => $sql_recent_reviews['userid'],
            'review_author_id' => $sql_recent_reviews['user_id'],
@@ -150,7 +150,6 @@ while ($sql_recent_reviews = $query_recent_reviews->fetch_array(MYSQLI_BOTH)) {
            'game_id' => $sql_recent_reviews['game_id'],
            'review_text' => $review_text,
            'review_img' => $new_path)
-
     );
 }
 
@@ -163,9 +162,8 @@ while ($sql_author = $query_authors->fetch_array(MYSQLI_BOTH)) {
     $smarty->append(
 
         'authors',
-         array('author_id' => $sql_author['user_id'],
+        array('author_id' => $sql_author['user_id'],
                'author_name' => $sql_author['userid'])
-
     );
 }
 

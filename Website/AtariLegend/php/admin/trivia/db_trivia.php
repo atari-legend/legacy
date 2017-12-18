@@ -93,9 +93,7 @@ if (isset($action) and $action == "add_trivia") {
 if (isset($action) and $action == "edit_trivia_quote") {
     if (isset($trivia_quote)) {
         $trivia_quote = $mysqli->real_escape_string($trivia_quote);
-
         $mysqli->query("UPDATE trivia_quotes SET trivia_quote='$trivia_quote' WHERE trivia_quote_id = $trivia_quote_id") or die('Error: ' . mysqli_error($mysqli));
-
         create_log_entry('Trivia', $trivia_quote_id, 'Quote', $trivia_quote_id, 'Edit', $_SESSION['user_id']);
         echo "Trivia Quote updated!";
     }
@@ -106,25 +104,15 @@ if (isset($action) and $action == "edit_trivia_quote") {
 //****************************************************************************************
 
 if (isset($action) and $action == "update_trivia") {
-
     if (isset($trivia_text)) {
         $trivia_text = $mysqli->real_escape_string($trivia_text);
-
         $mysqli->query("UPDATE trivia SET trivia_text='$trivia_text' WHERE trivia_id = $trivia_id") or die('Error: ' . mysqli_error($mysqli));
-
         create_log_entry('Trivia', $trivia_id, 'Quote', $trivia_id, 'Edit', $_SESSION['user_id']);
-
         $trivia_text = stripslashes($trivia_text);
-
         $smarty->assign('trivia_id', $trivia_id);
         $smarty->assign('trivia_text', $trivia_text);
-
-$smarty->assign('smarty_action', 'did_you_know_update_returnview');
-//Send all smarty variables to the templates
-$smarty->display("file:" . $cpanel_template_folder . "ajax_trivia_quotes_edit.html");
-
-
-
-
+        $smarty->assign('smarty_action', 'did_you_know_update_returnview');
+    //Send all smarty variables to the templates
+        $smarty->display("file:" . $cpanel_template_folder . "ajax_trivia_quotes_edit.html");
     }
 }

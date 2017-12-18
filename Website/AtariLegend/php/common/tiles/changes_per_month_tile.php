@@ -51,7 +51,7 @@ if ($current_month == 15) {
     $current_year = $current_year + 1;
 }
 
-for ($k = 1 ; $k <= 12; $k++) {
+for ($k = 1; $k <= 12; $k++) {
     if ($current_month == 13) {
         $current_month = 1;
         $current_year = $current_year + 1;

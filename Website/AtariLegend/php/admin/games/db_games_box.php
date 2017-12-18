@@ -25,26 +25,22 @@ include("../../config/common.php");
 include("../../config/admin.php");
 include("../../config/admin_rights.php");
 
-
 if (isset($action) and $action == "boxscan_upload") {
     //****************************************************************************************
     // This is where the boxscans get their upload treatment
     //****************************************************************************************
-    $filename = $_FILES['image']; 
-    $filename = $filename['tmp_name'][1]; 
+    $filename = $_FILES['image'];
+    $filename = $filename['tmp_name'][1];
     
     //Here we'll be looping on each of the inputs on the page that are filled in with an image!
     $image = $_FILES['image'];
-
     $osd_message = "";
-
     foreach ($image['tmp_name'] as $key => $tmp_name) {
         if ($tmp_name !== "") {
-            // Check what extention the file has and if it is allowed.
+        // Check what extention the file has and if it is allowed.
             $ext        = "";
             $type_image = $image['type'][$key];
-
-            // set extension
+        // set extension
             if ($type_image == 'image/png') {
                 $ext = 'png';
             }
@@ -58,9 +54,10 @@ if (isset($action) and $action == "boxscan_upload") {
             }
 
             if ($ext !== "") {
-        
-                if (isset($mode)){}else{$mode = '';}
-
+                if (isset($mode)) {
+                } else {
+                    $mode = '';
+                }
                 if ($mode == "back") {
                     $sdbquery = $mysqli->query("INSERT INTO game_boxscan (game_id, game_boxscan_side,imgext) VALUES ('$game_id', '1','$ext')");
 
@@ -71,11 +68,11 @@ if (isset($action) and $action == "boxscan_upload") {
                     $backbox    = $boxback->fetch_row();
                     $backbox_id = $backbox[0];
 
-                    //insert the id of the front box
+                   //insert the id of the front box
 
                     $sdbquery  = $mysqli->query("INSERT INTO game_box_couples (game_boxscan_id, game_boxscan_cross) VALUES ('$frontscan_id', '$backbox_id')");
-                    // @Dal, notice I use $filename instead of $file_data
-                    // Rename the uploaded file to its autoincrement number and move it to its proper place.
+                   // @Dal, notice I use $filename instead of $file_data
+                   // Rename the uploaded file to its autoincrement number and move it to its proper place.
                     $file_data = rename("$filename", "$game_boxscan_save_path$backbox[0].$ext");
 
                     create_log_entry('Games', $game_id, 'Box back', $game_id, 'Insert', $_SESSION['user_id']);
@@ -117,7 +114,6 @@ if (isset($action) and $action == "boxscan_delete") {
      //get the extension
     $SCREENSHOT = $mysqli->query("SELECT * FROM game_boxscan
                     WHERE game_boxscan_id = '$game_boxscan_id'") or die('Error: ' . mysqli_error($mysqli));
-
     $screenshotrow  = $SCREENSHOT->fetch_array(MYSQLI_BOTH);
     $screenshot_ext = $screenshotrow['imgext'];
     

@@ -27,16 +27,16 @@ date_default_timezone_set('UTC');
 $start = microtime(true);
 
 if ($download_type == '-') {
-    $_SESSION['edit_message'] = "Please select a download type";   
+    $_SESSION['edit_message'] = "Please select a download type";
     header("Location: ../downloads/downloads_main.php");
 }
 
 if ($download_type == 'Demo' or $download_type == 'Menu') {
-    $_SESSION['edit_message'] = "This search type is still under construction";   
+    $_SESSION['edit_message'] = "This search type is still under construction";
     header("Location: ../downloads/downloads_main.php");
 }
 
-if ( $gamebrowse == '-' and $gamesearch == '' ) {
+if ($gamebrowse == '-' and $gamesearch == '') {
     $_SESSION['edit_message'] = "Please fill in the necesarry fields";
     header("Location: ../downloads/downloads_main.php");
 }
@@ -138,7 +138,7 @@ if ($download_type == 'Game') {
                         'year' => $sql_game_search['game_year'],
                         'number_downloads' => $array['count']
                     ));
-                }
+            }
                         
             $time_elapsed_secs = microtime(true) - $start;
             

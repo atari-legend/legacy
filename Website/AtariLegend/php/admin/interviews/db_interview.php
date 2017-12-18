@@ -33,8 +33,7 @@ if ($action == "stop") {
 
 //If we are uploading new screenshots
 if (isset($action2) and $action2 == 'add_screens') {
-    if ($_SESSION['permission']==1 or $_SESSION['permission']=='1')
-    {
+    if ($_SESSION['permission']==1 or $_SESSION['permission']=='1') {
         //Here we'll be looping on each of the inputs on the page that are filled in with an image!
         $image = $_FILES['image'];
 
@@ -82,16 +81,13 @@ if (isset($action2) and $action2 == 'add_screens') {
                 }
             }
         }
-    }
-    else
-    {
+    } else {
         $osd_message = "You do not have the necessary authorizations to perform this action";
-    }    
+    }
     
     
-    if (isset($osd_message)){}
-    else
-    {
+    if (isset($osd_message)) {
+    } else {
         $osd_message = "No screenshot uploaded";
     }
     
@@ -99,25 +95,19 @@ if (isset($action2) and $action2 == 'add_screens') {
     $sql_screenshots = $mysqli->query("SELECT * FROM screenshot_interview
                     LEFT JOIN screenshot_main on ( screenshot_interview.screenshot_id = screenshot_main.screenshot_id )
                     WHERE screenshot_interview.interview_id = '$interview_id' ORDER BY screenshot_interview.screenshot_id ASC") or die("Database error - getting screenshots & comments");
-
-    //get the number of screenshots in the archive
+//get the number of screenshots in the archive
     $v_screenshots = $sql_screenshots->num_rows;
     $smarty->assign("screenshots_nr", $v_screenshots);
-
     $count = 1;
-
     while ($screenshots = $sql_screenshots->fetch_array(MYSQLI_BOTH)) {
         $v_int_image = $interview_screenshot_path;
         $v_int_image .= $screenshots['screenshot_id'];
         $v_int_image .= '.';
         $v_int_image .= $screenshots['imgext'];
-
-        //We need to get the comments with each screenshot
+    //We need to get the comments with each screenshot
         $sql_comments = $mysqli->query("SELECT * FROM interview_comments
                      WHERE screenshot_interview_id  = $screenshots[screenshot_interview_id]") or die("Database error - getting screenshots comments");
-
         $comments = $sql_comments->fetch_array(MYSQLI_BOTH);
-
         $smarty->append('screenshots', array(
             'interview_screenshot' => $v_int_image,
             'interview_screenshot_id' => $screenshots['screenshot_id'],
@@ -128,11 +118,9 @@ if (isset($action2) and $action2 == 'add_screens') {
     }
     
     $smarty->assign('osd_message', $osd_message);
-   
     $smarty->assign('smarty_action', 'add_screen_to_interview_return');
     $smarty->assign('interview_id', $interview_id);
-
-    //Send to smarty for return value
+//Send to smarty for return value
     $smarty->display("file:" . $cpanel_template_folder . "ajax_interview_add_screenshots.html");
 }
 
@@ -280,39 +268,34 @@ if (isset($action) and $action == 'update_interview' and (!isset($action2))) {
     //check if this is first update. If yes, interview_text is not filled yet and we need to do a create
     //Let's get the screenshots for the interview
     $sql_interview_text = $mysqli->query("SELECT * FROM interview_text WHERE interview_id = '$interview_id'") or die("Database error - getting interview text");
-
-    //get the number of screenshots in the archive
+//get the number of screenshots in the archive
     $v_nr_text = $sql_interview_text->num_rows;
     
-    if ($v_nr_text > 0)
-    {
+    if ($v_nr_text > 0) {
         $sdbquery = $mysqli->query("UPDATE interview_text SET interview_text = '$textfield', interview_date = '$date', interview_intro = '$textintro', interview_chapters = '$textchapters' WHERE interview_id = $interview_id") or die("Couldn't update into interview_text");
-    }
-    else
-    {
+    } else {
         $sdbquery = $mysqli->query("INSERT INTO interview_text (interview_id, interview_text, interview_date, interview_intro, interview_chapters) VALUES ($interview_id, '$textfield', '$date', '$textintro','$textchapters')") or die("Couldn't insert into interview_text");
- 
     }
     
     //we're gonna add the screenhots into the screenshot_interview table and fill up the interview_comment table.
     //We need to loop on the screenshot table to check the shots used. If a comment field is filled,
     //the screenshot was used!
-    $SCREEN = $mysqli->query("SELECT * FROM screenshot_interview where interview_id = '$interview_id' ORDER BY screenshot_id ASC") or die("Database error - getting screenshots");
+            $SCREEN = $mysqli->query("SELECT * FROM screenshot_interview where interview_id = '$interview_id' ORDER BY screenshot_id ASC") or die("Database error - getting screenshots");
 
-    $i = 0;
+            $i = 0;
     while ($screenrow = $SCREEN->fetch_row()) {
         if ($inputfield[$i] != "") {
             //fill the comments table
             $screenid = $screenrow[0];
             $comment  = $inputfield[$i];
-            $comment  = $mysqli->real_escape_string($comment);
+                    $comment  = $mysqli->real_escape_string($comment);
 
-            $interviewshotid = $screenrow[0];
+                    $interviewshotid = $screenrow[0];
 
-            //check if comment already exists for this shot
-            $INTERVIEWCOMMENT = $mysqli->query("SELECT * FROM interview_comments where screenshot_interview_id = $interviewshotid") or die("Database error - selecting screenshot interview comment");
+                    //check if comment already exists for this shot
+                    $INTERVIEWCOMMENT = $mysqli->query("SELECT * FROM interview_comments where screenshot_interview_id = $interviewshotid") or die("Database error - selecting screenshot interview comment");
 
-            $number = $INTERVIEWCOMMENT->num_rows;
+                    $number = $INTERVIEWCOMMENT->num_rows;
 
             if ($number > 0) {
                 $sdbquery = $mysqli->query("UPDATE interview_comments SET comment_text = '$comment'
@@ -321,19 +304,19 @@ if (isset($action) and $action == 'update_interview' and (!isset($action2))) {
                 $sdbquery = $mysqli->query("INSERT INTO interview_comments (screenshot_interview_id, comment_text) VALUES ($interviewshotid, '$comment')") or die("Couldn't insert into interview_comments");
             }
         }
-        $i++;
+                $i++;
     }
-    create_log_entry('Interviews', $interview_id, 'Interview', $interview_id, 'Update', $_SESSION['user_id']);
+            create_log_entry('Interviews', $interview_id, 'Interview', $interview_id, 'Update', $_SESSION['user_id']);
 
-    $_SESSION['edit_message'] = 'Interview updated succesfully';
+            $_SESSION['edit_message'] = 'Interview updated succesfully';
 
-    header("Location: ../interviews/interviews_edit.php?interview_id=$interview_id");
+            header("Location: ../interviews/interviews_edit.php?interview_id=$interview_id");
 } elseif (isset($action) and $action == 'add_interview') {
 //****************************************************************************************
 //This is what happens when we press the create interview button in the interview creation
 //page
 //****************************************************************************************
-    if ($individual_create == '' or $individual_create == '-' ) {
+    if ($individual_create == '' or $individual_create == '-') {
         $_SESSION['edit_message'] = 'Some required info is not filled in. Make sure the -Add Interview- field is used';
         header("Location: ../interviews/interviews_main.php");
     } else {

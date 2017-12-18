@@ -52,7 +52,6 @@ $sql_interview = $mysqli->query("SELECT * FROM interview_main
                 WHERE interview_main.interview_id = '$interview_id'") or die("Database error - selecting interview data");
 
 while ($interview = $sql_interview->fetch_array(MYSQLI_BOTH)) {
-    
     //The interviewed person's picture
     if ($interview['ind_imgext'] == 'png' or $interview['ind_imgext'] == 'jpg' or $interview['ind_imgext'] == 'gif') {
         $v_ind_image = $individual_screenshot_path;

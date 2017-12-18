@@ -24,7 +24,6 @@
 include("../../config/common.php");
 include("../../config/admin.php");
 include("../../config/admin_rights.php");
-
 //****************************************************************************************
 // This is delete from series place
 //****************************************************************************************
@@ -90,7 +89,6 @@ if ($action == "delete_gameseries") {
 
         $mysqli->query("DELETE FROM game_series WHERE game_series_id='$game_series_id'");
         $mysqli->query("DELETE FROM game_series_cross WHERE game_series_id='$game_series_id'");
-        
         $_SESSION['edit_message'] = "series deleted";
 //        mysqli_free_result();
     }

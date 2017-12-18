@@ -61,31 +61,31 @@ foreach (KarmaBad() as $key => $value) {
 //******************************************//
 
 //* Karma 0 to 100
-$result   = $mysqli->query("SELECT * FROM users WHERE karma > '0' and karma <= '100'") or die ("error getting karma 0 - 100");
+$result   = $mysqli->query("SELECT * FROM users WHERE karma > '0' and karma <= '100'") or die("error getting karma 0 - 100");
 $karma = $result->num_rows;
 $karma_good_value[0] = $karma;
 $karma_good_label[0] = "<100";
 
 //* Karma 100 to 500
-$result   = $mysqli->query("SELECT * FROM users WHERE karma > '100' and karma <= '500'") or die ("error getting karma 0 - 500");
+$result   = $mysqli->query("SELECT * FROM users WHERE karma > '100' and karma <= '500'") or die("error getting karma 0 - 500");
 $karma = $result->num_rows;
 $karma_good_value[1] = $karma;
 $karma_good_label[1] = "<500";
 
 //* Karma 500 to 1000
-$result   = $mysqli->query("SELECT * FROM users WHERE karma > '500' and karma <= '1000'") or die ("error getting karma 500 - 2000");
+$result   = $mysqli->query("SELECT * FROM users WHERE karma > '500' and karma <= '1000'") or die("error getting karma 500 - 2000");
 $karma = $result->num_rows;
 $karma_good_value[2] = $karma;
 $karma_good_label[2] = "<1000";
 
 //* Karma 1000 to 2000
-$result   = $mysqli->query("SELECT * FROM users WHERE karma > '1000' and karma <= '2000'") or die ("error getting karma 500 - 2000");
+$result   = $mysqli->query("SELECT * FROM users WHERE karma > '1000' and karma <= '2000'") or die("error getting karma 500 - 2000");
 $karma = $result->num_rows;
 $karma_good_value[3] = $karma;
 $karma_good_label[3] = "<2000";
 
 //* Karma > 2000
-$result   = $mysqli->query("SELECT * FROM users WHERE karma > '2000'") or die ("error getting karma > 2000");
+$result   = $mysqli->query("SELECT * FROM users WHERE karma > '2000'") or die("error getting karma > 2000");
 $karma = $result->num_rows;
 $karma_good_value[4] = $karma;
 $karma_good_label[4] = ">2000";
@@ -98,31 +98,31 @@ $smarty->assign('karma_good_label', json_encode($karma_good_label));
 //******************************************//
 
 //* Karma 0 to -100
-$result   = $mysqli->query("SELECT * FROM users WHERE karma <= '0' and karma >= '-100'") or die ("error getting karma 0 -100");
+$result   = $mysqli->query("SELECT * FROM users WHERE karma <= '0' and karma >= '-100'") or die("error getting karma 0 -100");
 $karma = $result->num_rows;
 $karma_bad_value[0] = $karma;
 $karma_bad_label[0] = ">-100";
 
 //* Karma -100 to -500
-$result   = $mysqli->query("SELECT * FROM users WHERE karma < '-100' and karma >= '-500'") or die ("error getting karma -100 -500");
+$result   = $mysqli->query("SELECT * FROM users WHERE karma < '-100' and karma >= '-500'") or die("error getting karma -100 -500");
 $karma = $result->num_rows;
 $karma_bad_value[1] = $karma;
 $karma_bad_label[1] = ">-500";
 
 //* Karma -500 to -1000
-$result   = $mysqli->query("SELECT * FROM users WHERE karma < '-500' and karma >= '-1000'") or die ("error getting karma -500 -2000");
+$result   = $mysqli->query("SELECT * FROM users WHERE karma < '-500' and karma >= '-1000'") or die("error getting karma -500 -2000");
 $karma = $result->num_rows;
 $karma_bad_value[2] = $karma;
 $karma_bad_label[2] = ">-1000";
 
 //* Karma -1000 to -2000
-$result   = $mysqli->query("SELECT * FROM users WHERE karma < '-1000' and karma >= '-2000'") or die ("error getting karma -500 -2000");
+$result   = $mysqli->query("SELECT * FROM users WHERE karma < '-1000' and karma >= '-2000'") or die("error getting karma -500 -2000");
 $karma = $result->num_rows;
 $karma_bad_value[3] = $karma;
 $karma_bad_label[3] = ">-2000";
 
 //* Karma < 2000
-$result   = $mysqli->query("SELECT * FROM users WHERE karma < '-2000'") or die ("error getting karma > 2000");
+$result   = $mysqli->query("SELECT * FROM users WHERE karma < '-2000'") or die("error getting karma > 2000");
 $karma = $result->num_rows;
 $karma_bad_value[4] = $karma;
 $karma_bad_label[4] = "<-2000";
@@ -165,55 +165,55 @@ $smarty->assign('karma_border_width', json_encode($karma_border_width));
 // Changes per Section
 //**************************************
 //* Changelog - Games
-$result   = $mysqli->query("SELECT * FROM change_log WHERE section = 'Games'") or die ("error getting games from change_log");
+$result   = $mysqli->query("SELECT * FROM change_log WHERE section = 'Games'") or die("error getting games from change_log");
 $change_log = $result->num_rows;
 $change_log_data[0] = $change_log;
 $change_log_label[0] = "Games";
 
 //* Changelog - Users
-$result   = $mysqli->query("SELECT * FROM change_log WHERE section = 'Users'") or die ("error getting Users from change_log");
+$result   = $mysqli->query("SELECT * FROM change_log WHERE section = 'Users'") or die("error getting Users from change_log");
 $change_log = $result->num_rows;
 $change_log_data[1] = $change_log;
 $change_log_label[1] = "Users";
 
 //* Changelog - Links
-$result   = $mysqli->query("SELECT * FROM change_log WHERE section = 'Links'") or die ("error getting Links from change_log");
+$result   = $mysqli->query("SELECT * FROM change_log WHERE section = 'Links'") or die("error getting Links from change_log");
 $change_log = $result->num_rows;
 $change_log_data[2] = $change_log;
 $change_log_label[2] = "Links";
 
 //* Changelog - Individuals
-$result   = $mysqli->query("SELECT * FROM change_log WHERE section = 'Individuals'") or die ("error getting Individuals from change_log");
+$result   = $mysqli->query("SELECT * FROM change_log WHERE section = 'Individuals'") or die("error getting Individuals from change_log");
 $change_log = $result->num_rows;
 $change_log_data[3] = $change_log;
 $change_log_label[3] = "Individuals";
 
 //* Changelog - News
-$result   = $mysqli->query("SELECT * FROM change_log WHERE section = 'News'") or die ("error getting News from change_log");
+$result   = $mysqli->query("SELECT * FROM change_log WHERE section = 'News'") or die("error getting News from change_log");
 $change_log = $result->num_rows;
 $change_log_data[4] = $change_log;
 $change_log_label[4] = "News";
 
 //* Changelog - Crew
-$result   = $mysqli->query("SELECT * FROM change_log WHERE section = 'Crew'") or die ("error getting Crew from change_log");
+$result   = $mysqli->query("SELECT * FROM change_log WHERE section = 'Crew'") or die("error getting Crew from change_log");
 $change_log = $result->num_rows;
 $change_log_data[5] = $change_log;
 $change_log_label[5] = "Crew";
 
 //* Changelog - Menu disk
-$result   = $mysqli->query("SELECT * FROM change_log WHERE section = 'Menu disk'") or die ("error getting Menu disk from change_log");
+$result   = $mysqli->query("SELECT * FROM change_log WHERE section = 'Menu disk'") or die("error getting Menu disk from change_log");
 $change_log = $result->num_rows;
 $change_log_data[6] = $change_log;
 $change_log_label[6] = "Menu disk";
 
 //* Changelog - Downloads
-$result   = $mysqli->query("SELECT * FROM change_log WHERE section = 'Downloads'") or die ("error getting Downloads from change_log");
+$result   = $mysqli->query("SELECT * FROM change_log WHERE section = 'Downloads'") or die("error getting Downloads from change_log");
 $change_log = $result->num_rows;
 $change_log_data[7] = $change_log;
 $change_log_label[7] = "Downloads";
 
 //* Changelog - Articles
-$result   = $mysqli->query("SELECT * FROM change_log WHERE section = 'Articles'") or die ("error getting Articles from change_log");
+$result   = $mysqli->query("SELECT * FROM change_log WHERE section = 'Articles'") or die("error getting Articles from change_log");
 $change_log = $result->num_rows;
 $change_log_data[8] = $change_log;
 $change_log_label[8] = "Articles";
@@ -234,54 +234,46 @@ $current_day = 01;
 $months = array (1=>'Jan',2=>'Feb',3=>'Mar',4=>'Apr',5=>'May',6=>'Jun',7=>'Jul',8=>'Aug',9=>'Sep',10=>'Oct',11=>'Nov',12=>'Dec');
 $i = 0;
 
-if ($current_month == 13)
-{
-    $current_month = 1; 
-    $current_year = $current_year + 1;  
+if ($current_month == 13) {
+    $current_month = 1;
+    $current_year = $current_year + 1;
 }
 
-if ($last_month == 13)
-{
-    $last_month = 1; 
-    $last_year = $last_year + 1;  
+if ($last_month == 13) {
+    $last_month = 1;
+    $last_year = $last_year + 1;
 }
 
-if ($current_month == 14)
-{
-    $current_month = 2; 
-    $current_year = $current_year + 1;  
+if ($current_month == 14) {
+    $current_month = 2;
+    $current_year = $current_year + 1;
 }
 
-if ($last_month == 14)
-{
-    $last_month = 2; 
-    $last_year = $last_year + 1;  
+if ($last_month == 14) {
+    $last_month = 2;
+    $last_year = $last_year + 1;
 }
 
-if ($current_month == 15)
-{
-    $current_month = 3; 
-    $current_year = $current_year + 1;  
-}    
+if ($current_month == 15) {
+    $current_month = 3;
+    $current_year = $current_year + 1;
+}
 
-for ($k = 1 ; $k <= 12; $k++)
-{   
-    if ($current_month == 13)
-    {
-        $current_month = 1; 
-        $current_year = $current_year + 1;  
+for ($k = 1; $k <= 12; $k++) {
+    if ($current_month == 13) {
+        $current_month = 1;
+        $current_year = $current_year + 1;
     }
 
-    if ($last_month == 13)
-    {
-        $last_month = 1; 
-        $last_year = $last_year + 1;  
+    if ($last_month == 13) {
+        $last_month = 1;
+        $last_year = $last_year + 1;
     }
 
-    $date_high = date_to_timestamp($current_year, $current_month, $current_day );
-    $date_low = date_to_timestamp($last_year, $last_month, $current_day );
+    $date_high = date_to_timestamp($current_year, $current_month, $current_day);
+    $date_low = date_to_timestamp($last_year, $last_month, $current_day);
     
-    $result_monthly   = $mysqli->query("SELECT * FROM change_log WHERE timestamp >= $date_low and timestamp < $date_high") or die ("error getting change_log data");
+    $result_monthly   = $mysqli->query("SELECT * FROM change_log WHERE timestamp >= $date_low and timestamp < $date_high") or die("error getting change_log data");
     $change_log_monthly = $result_monthly->num_rows;
     $change_log_monthly_data[$i] = $change_log_monthly;
     $change_log_monthly_label[$i] = $months[(int) $last_month];

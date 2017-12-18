@@ -162,6 +162,4 @@ if (isset($action) and $action == 'confirm') {
 $smarty->display("file:".$mainsite_template_folder."frontpage.html");
 
 //close the connection
-mysqli_close($mysqli)
-?>
-
+mysqli_close($mysqli);

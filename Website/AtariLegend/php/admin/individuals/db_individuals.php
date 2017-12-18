@@ -83,7 +83,6 @@ if (isset($ind_id) and isset($action) and $action == 'add_photo') {
 
 //update the info of the individual
 if (isset($ind_id) and isset($action) and $action == 'update') {
-    
     $ind_name = $mysqli->real_escape_string($ind_name);
     $sdbquery = $mysqli->query("UPDATE individuals SET ind_name = '$ind_name' WHERE ind_id = $ind_id") or die("Couldn't Update into individuals");
 
@@ -108,15 +107,14 @@ if (isset($ind_id) and isset($action) and $action == 'update') {
 // Add nicknames
 if (isset($ind_id) and isset($action) and $action == "add_nick") {
     if ($ind_nick != '') {
-        
-        //First add an entry in the individuals table
+//First add an entry in the individuals table
         $stmt = $mysqli->prepare("INSERT INTO individuals (ind_name) VALUES (?)") or die($mysqli->error);
         $stmt->bind_param("s", $ind_nick) or die($mysqli->error);
         $stmt->execute() or die($mysqli->error);
         $stmt->close();
         $ind_nick_id = $mysqli->insert_id;
 
-        //Now update the nick table       
+        //Now update the nick table
         $sdbquery = $mysqli->query("INSERT INTO individual_nicks (ind_id, nick_id) VALUES ($ind_id, '$ind_nick_id')") or die("Couldn't insert into individual_nicks");
 
         $_SESSION['edit_message'] = "Individual nick added";
@@ -143,7 +141,6 @@ if (isset($ind_id) and isset($action) and $action == "delete_nick") {
 
 //if we want to delete the individual (from the edit page)
 if (isset($ind_id) and isset($action) and $action == 'delete_ind') {
-   
     $sdbquery = $mysqli->query("SELECT * FROM interview_main WHERE ind_id='$ind_id'") or die("Error getting interview info");
     if ($sdbquery->num_rows > 0) {
         $_SESSION['edit_message'] = "Deletion failed - This individual is interviewed - Delete it in the appropriate section";
@@ -169,34 +166,33 @@ if (isset($ind_id) and isset($action) and $action == 'delete_ind') {
                         $_SESSION['edit_message'] = "Deletion failed - This individual is linked to a crew - delete in appropriate section";
                         header("Location: ../individuals/individuals_main.php");
                     } else {
-                         $sdbquery = $mysqli->query("SELECT * FROM game_download_individual WHERE ind_id='$ind_id'") or die("Error getting game_download_individual info");
+                        $sdbquery = $mysqli->query("SELECT * FROM game_download_individual WHERE ind_id='$ind_id'") or die("Error getting game_download_individual info");
                         if ($sdbquery->num_rows > 0) {
                             $_SESSION['edit_message'] = "Deletion failed - This individual is linked to a download - delete in appropriate section";
                             header("Location: ../individuals/individuals_main.php");
-                        } else {              
+                        } else {
                             create_log_entry('Individuals', $ind_id, 'Individual', $ind_id, 'Delete', $_SESSION['user_id']);
-                            
-                            //first delete picture
+                        //first delete picture
                             $photo = $mysqli->query("SELECT ind_imgext FROM individual_text WHERE ind_id='$ind_id'");
                             list($ind_imgext) = $photo->fetch_row();
-
                             if ($ind_imgext <> '') {
                                 unlink("$individual_screenshot_save_path$ind_id.$ind_imgext");
                             }
                             
                             //Let's get all the nicknames
-                            $nickname = $mysqli->query("SELECT * FROM individual_nicks where ind_id = '$ind_id'") or die ("error getting nicknames");
-
-                            while ($name = mysqli_fetch_assoc($nickname)) 
-                            {
+                            $nickname = $mysqli->query("SELECT * FROM individual_nicks where ind_id = '$ind_id'") or die("error getting nicknames");
+                            while ($name = mysqli_fetch_assoc($nickname)) {
                                 $nick_id = $name['nick_id'];
-                                $sql = $mysqli->query("DELETE FROM individuals WHERE ind_id = $nick_id") or die ("Failed to delete the nicks from this person");;
+                                $sql = $mysqli->query("DELETE FROM individuals WHERE ind_id = $nick_id") or die("Failed to delete the nicks from this person");
+                                ;
                             }
                             
                             //then delete the rest
-                            $sql                      = $mysqli->query("DELETE FROM individuals WHERE ind_id = $ind_id") or die ("Failed to delete individual");;
-                            $sql                      = $mysqli->query("DELETE FROM individual_text WHERE ind_id = $ind_id") or die ("Failed to delete ind text");;
-                            $sql                      = $mysqli->query("DELETE FROM individual_nicks WHERE ind_id = $ind_id") or die ("Failed to delete nickname");
+                            $sql                      = $mysqli->query("DELETE FROM individuals WHERE ind_id = $ind_id") or die("Failed to delete individual");
+                            ;
+                            $sql                      = $mysqli->query("DELETE FROM individual_text WHERE ind_id = $ind_id") or die("Failed to delete ind text");
+                            ;
+                            $sql                      = $mysqli->query("DELETE FROM individual_nicks WHERE ind_id = $ind_id") or die("Failed to delete nickname");
                             $_SESSION['edit_message'] = "individual succesfully deleted";
                             header("Location: ../individuals/individuals_main.php");
                         }
@@ -222,13 +218,11 @@ if (isset($action) and $action == 'insert_ind') {
         $indrow = $individuals->fetch_row();
 
         $id = $indrow[0];
-        if (isset($textfield))
-        {
+        if (isset($textfield)) {
             $textfield = $mysqli->real_escape_string($textfield);
 
             $sdbquery = $mysqli->query("INSERT INTO individual_text (ind_id, ind_profile) VALUES ($id, '$textfield')") or die("Couldn't insert into individual_text");
         }
-
         create_log_entry('Individuals', $id, 'Individual', $id, 'Insert', $_SESSION['user_id']);
 
         $_SESSION['edit_message'] = "individual succesfully inserted";

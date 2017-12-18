@@ -36,8 +36,8 @@ function generate_game_description(
     $game_developers,
     $screenshots,
     $boxscans,
-    $reviews) {
-
+    $reviews
+) {
     $desc = "$game_name is a ";
     if ($game_free) {
         $desc .= "non-commercial ";
@@ -538,7 +538,6 @@ while ($query_comment = $sql_comment->fetch_array(MYSQLI_BOTH)) {
               'user_twitter' => $query_comment['user_twitter'],
               'user_af' => $query_comment['user_af'],
               'email' => $query_comment['email'])
-
     );
 }
 
@@ -658,9 +657,8 @@ while ($query_comment = $sql_comment->fetch_array(MYSQLI_BOTH)) {
             $smarty->append(
 
                 'facts_screenshots',
-             array('game_fact_id' => $sql_games_facts['game_fact_id'],
+                array('game_fact_id' => $sql_games_facts['game_fact_id'],
                    'game_fact_screenshot' => $new_path)
-
             );
         }
 
@@ -678,30 +676,31 @@ while ($query_comment = $sql_comment->fetch_array(MYSQLI_BOTH)) {
 //*********************************************************************************************
 // Get the amiga and C64 id's for the Lemon links
 //*********************************************************************************************
-$sql_vs = $mysqli->query("SELECT amiga_id, C64_id FROM game_vs WHERE atari_id = '$game_id'")
+    $sql_vs = $mysqli->query("SELECT amiga_id, C64_id FROM game_vs WHERE atari_id = '$game_id'")
           or die("Error - Couldn't get the Lemon links");
 
-while ($query_vs = $sql_vs->fetch_array(MYSQLI_BOTH)) {
-    $smarty->append(
-        'game_vs',
-             array('amiga_id' => $query_vs['amiga_id'],
+    while ($query_vs = $sql_vs->fetch_array(MYSQLI_BOTH)) {
+        $smarty->append(
+            'game_vs',
+            array('amiga_id' => $query_vs['amiga_id'],
                    'C64_id' => $query_vs['C64_id'])
-    );
-}
+        );
+    }
 
-$smarty->assign("game_id", $game_id);
-$smarty->assign("game_description", generate_game_description(
-    $game_info['game_name'],
-    $game_info['free'] or false,
-    $game_years,
-    $game_categories,
-    $game_developers,
-    $game_screenshots_count,
-    $game_boxscans_count,
-    $game_reviews_count));
+    $smarty->assign("game_id", $game_id);
+    $smarty->assign("game_description", generate_game_description(
+        $game_info['game_name'],
+        $game_info['free'] or false,
+        $game_years,
+        $game_categories,
+        $game_developers,
+        $game_screenshots_count,
+        $game_boxscans_count,
+        $game_reviews_count
+    ));
 
 //Send all smarty variables to the templates
-$smarty->display("file:" . $mainsite_template_folder . "games_detail.html");
+    $smarty->display("file:" . $mainsite_template_folder . "games_detail.html");
 
 //close the connection
-mysqli_close($mysqli);
+    mysqli_close($mysqli);

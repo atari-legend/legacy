@@ -31,8 +31,7 @@ $database_update_sql = "CREATE TABLE IF NOT EXISTS `game_download_details` (
   `version` varchar(45),
   `info` TEXT,
   PRIMARY KEY (`game_download_details_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;"; 
-
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;";
 // If the update should auto execute without user interaction set to "yes".
 $database_autoexecute = "yes";
 

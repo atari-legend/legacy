@@ -33,7 +33,6 @@ if (isset($action) and $action == "insert_game") {
     $stmt->bind_param("s", $newgame) or die($mysqli->error);
     $stmt->execute() or die($mysqli->error);
     $stmt->close();
-
     $_SESSION['edit_message'] = "The game $newgame has been inserted into the database";
 
     $new_game_id = $mysqli->insert_id;
@@ -204,7 +203,6 @@ if (isset($action) and $action == 'modify_game') {
     // game_table
 
     $game_name = $mysqli->real_escape_string($game_name);
-
     $sdbquery = $mysqli->query("UPDATE game SET game_name='$game_name' WHERE game_id=$game_id") or die("trouble updating game");
 
     // Delete the category crosses currently in the database for this game
@@ -284,8 +282,7 @@ if (isset($action) and $action == 'modify_game') {
     // Update the FALCON RGB tick box info
     // Start off by deleting previos value
     $sdbquery = $mysqli->query("DELETE FROM game_falcon_rgb WHERE game_id='$game_id'");
-
-    // then insert the new value if it has been passed.
+// then insert the new value if it has been passed.
     if (isset($falcon_rgb)) {
         $sdbquery = $mysqli->query("INSERT INTO game_falcon_rgb (game_id,falcon_rgb) VALUES ('$game_id','$falcon_rgb')");
     }
@@ -293,8 +290,7 @@ if (isset($action) and $action == 'modify_game') {
     // Update the FALCON VGA tick box info
     // Start off by deleting previos value
     $sdbquery = $mysqli->query("DELETE FROM game_falcon_vga WHERE game_id='$game_id'");
-
-    // then insert the new value if it has been passed.
+// then insert the new value if it has been passed.
     if (isset($falcon_vga)) {
         $sdbquery = $mysqli->query("INSERT INTO game_falcon_vga (game_id,falcon_vga) VALUES ('$game_id','$falcon_vga')");
     }
@@ -373,7 +369,6 @@ if (isset($action) and $action == 'modify_game') {
 //***********************************************************************************
 //If the delete button has been pressed, delete the necesarry records from the tables
 //***********************************************************************************
-
 if (isset($action) and $action == 'delete_game') {
     //First we need to do a hell of a lot checks before we can delete an actual game.
     $sdbquery = $mysqli->query("SELECT * FROM game_download WHERE game_id='$game_id'") or die("Error getting download info");
@@ -474,6 +469,5 @@ if (isset($action) and $action == 'delete_game') {
         }
     }
 }
-
 //close the connection
 mysqli_close($mysqli);

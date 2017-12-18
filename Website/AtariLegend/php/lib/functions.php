@@ -12,7 +12,8 @@
  *
  ***************************************************************************/
 
- function InsertALCode($alcode) {
+function InsertALCode($alcode)
+{
     $alcode = preg_replace("#\[color\=(\#[0-9A-F]{0,6}|[A-z]+)\](.*)\[\/color\]#Ui", "<span style=\"color: $1;\">$2</span>", $alcode);
     //$alcode = eregi_replace("\\[style=([^\\[]*)\\]","<span class=\"\\1\">",$alcode);
     //$alcode = str_replace("[/style]", "</span>", $alcode);
@@ -59,7 +60,8 @@
     return $alcode;
 }
 
-function BBCode($Text) {
+function BBCode($Text)
+{
     // Replace any html brackets with HTML Entities to prevent executing HTML or script
     // Don't use strip_tags here because it breaks [url] search by replacing & with amp
     $Text = str_replace("<", "&lt", $Text);
@@ -152,7 +154,8 @@ function BBCode($Text) {
     return $Text;
 }
 
-function InsertSmillies($alcode) {
+function InsertSmillies($alcode)
+{
     $alcode = str_replace(":-D", "<img style=\"vertical-align: middle;\" src=\"../templates/0/emoticons/icon_biggrin.gif\">", $alcode);
     $alcode = str_replace(":)", "<img style=\"vertical-align: middle;\" src=\"../templates/0/emoticons/icon_smile.gif\">", $alcode);
     $alcode = str_replace(":(", "<img style=\"vertical-align: middle;\" src=\"../templates/0/emoticons/icon_sad.gif\">", $alcode);
@@ -180,7 +183,8 @@ function InsertSmillies($alcode) {
     return $alcode;
 }
 
-function RemoveSmillies($alcode) {
+function RemoveSmillies($alcode)
+{
     $alcode = str_replace(":-D", "", $alcode);
     $alcode = str_replace(":)", "", $alcode);
     $alcode = str_replace(":(", "", $alcode);
@@ -208,7 +212,8 @@ function RemoveSmillies($alcode) {
     return $alcode;
 }
 
-function get_username_from_id($submitted) {
+function get_username_from_id($submitted)
+{
     global $mysqli;
     $result = $mysqli->query("SELECT userid FROM users WHERE user_id = $submitted") or die("Query failed");
     if ($result->num_rows == 0) {
@@ -219,13 +224,15 @@ function get_username_from_id($submitted) {
     }
 }
 
-function date_to_timestamp($date_Year, $date_Month, $date_Day) {
+function date_to_timestamp($date_Year, $date_Month, $date_Day)
+{
     $timestamp = mktime(0, 0, 0, $date_Month, $date_Day, $date_Year);
     return $timestamp;
 }
 
 
-function filter($entry) {
+function filter($entry)
+{
     // Filter out strange characters like ^, $, &, change "it's" to "its"
     static $drop_char_match = array('^', '$', '&', '(', ')', '<', '>', '`', '"', '|', ',', '@', '_', '?', '%', '-', '~', '+', '.', '[', ']', '{', '}', ':', '\\', '/', '=', '#', '\'', ';', '!');
     static $drop_char_replace = array('', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '');
@@ -236,7 +243,8 @@ function filter($entry) {
     return $entry;
 }
 
-function search($entry) {
+function search($entry)
+{
     // search for strange characters like ^, $, &, change "it's" to "its"
     static $drop_char_match = array('^', '$', '&', '(', ')', '<', '>', '`', '"', '|', ',', '@', '_', '?', '%', '-', '~', '+', '.', '[', ']', '{', '}', ':', '\\', '/', '=', '#', '\'', ';', '!');
 
@@ -250,7 +258,8 @@ function search($entry) {
     return $count;
 }
 
-function az_dropdown_value($entry) {
+function az_dropdown_value($entry)
+{
     $entry = array(
         'num',
         'a',
@@ -284,7 +293,8 @@ function az_dropdown_value($entry) {
     return $entry;
 }
 
-function az_dropdown_output($entry) {
+function az_dropdown_output($entry)
+{
     $entry = array(
         '0-9',
         'A',
@@ -318,7 +328,8 @@ function az_dropdown_output($entry) {
     return $entry;
 }
 
-function statistics_stack() {
+function statistics_stack()
+{
     global $mysqli;
 
     //**************************
@@ -481,7 +492,8 @@ function statistics_stack() {
 
 //This function will create a change log table entry according to its parameters. In the db* files, with every DB transaction,
 //this function is called. The table is used for the change log section of the cpanel.
-function create_log_entry($section, $section_id, $subsection, $subsection_id, $action, $user_id) {
+function create_log_entry($section, $section_id, $subsection, $subsection_id, $action, $user_id)
+{
     global $mysqli;
 
     $log_time = date_to_timestamp(date('Y'), date('m'), date('d'));
@@ -504,8 +516,8 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
         $section_name = $query_data['game_name'];
 
 
-        if ($subsection == 'Game' or $subsection == 'File' or $subsection == 'Screenshot' or $subsection == 'Mag score' or $subsection == 'Box back' 
-            or $subsection == 'Box front' or $subsection == 'Review' or $subsection == 'Review comment' or $subsection == 'Music' 
+        if ($subsection == 'Game' or $subsection == 'File' or $subsection == 'Screenshot' or $subsection == 'Mag score' or $subsection == 'Box back'
+            or $subsection == 'Box front' or $subsection == 'Review' or $subsection == 'Review comment' or $subsection == 'Music'
             or $subsection == 'Submission' or $subsection == 'Fact') {
             $subsection_name = $section_name;
         }
@@ -745,7 +757,7 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
                 $query_data = $result->fetch_array(MYSQLI_BOTH);
                 $section_id = $query_data['ind_id'];
             }
-        }       
+        }
 
         // get the name of the person that is interviewed
         $query_ind = "SELECT ind_name FROM individuals WHERE ind_id = '$section_id'";
@@ -994,7 +1006,6 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
 
     //  Everything we do for the MENU DISK
     if ($section == 'Menu disk') {
-        
         // get the name of the menu disk
         $sql_menus = "SELECT menu_disk.menu_sets_id,
                             menu_set.menu_sets_name,
@@ -1143,7 +1154,6 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
         }
 
         if ($subsection == 'Software' or $subsection == 'Chain' or $subsection == 'Doc' or $subsection == 'Authors') {
-                        
             //get the type of software
             $query_soft = "SELECT menu_types_main_id FROM menu_disk_title WHERE menu_disk_title_id = '$subsection_id'";
             $result = $mysqli->query($query_soft) or die("getting menu_type failed");
@@ -1223,9 +1233,8 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
                 $subsection_name = $query_data['game_name'];
                                 
                 if ($subsection == 'Authors') {
-                }
-                else{
-                   $subsection      = 'Game doc';
+                } else {
+                    $subsection      = 'Game doc';
                 }
 
                 if ($subsection_name == '') {
@@ -1248,10 +1257,9 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
                     $subsection_name = $query_data['tools_name'];
                     
                     if ($subsection == 'Authors') {
+                    } else {
+                        $subsection      = 'Tool doc';
                     }
-                    else{
-                       $subsection      = 'Tool doc';
-                    } 
                 }
             }
         }
@@ -1427,7 +1435,7 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
             $subsection_name = $section_name;
         }
         
-         if ($subsection == 'Trainer') {
+        if ($subsection == 'Trainer') {
             // get the name of the trainer option
             $query_trainer = "SELECT * FROM trainer_options
                              WHERE trainer_options_id = '$subsection_id'";

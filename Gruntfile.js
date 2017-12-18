@@ -119,8 +119,27 @@ module.exports = function (grunt) {
         phpcs: {
             application: {
                 src: [
-                    // '<%= webRoot %>php/admin/menus/ajax_adddocs_menus.php',
-                    '<%= webRoot %>php/main/**/*.php'
+                    '<%= webRoot %>php/main/**/*.php',
+                    '<%= webRoot %>php/admin/**/*.php',
+                    '<%= webRoot %>php/common/**/*.php',
+                    '<%= webRoot %>php/config/*.php',
+                    '<%= webRoot %>php/includes/*.php',
+                    '<%= webRoot %>php/lib/*.php'
+                ]
+            },
+            options: {
+                standard: 'PSR2'
+            }
+        },
+        phpcbf: {
+            application: {
+                src: [
+                    '<%= webRoot %>php/main/**/*.php',
+                    '<%= webRoot %>php/admin/**/*.php',
+                    '<%= webRoot %>php/common/**/*.php',
+                    '<%= webRoot %>php/config/*.php',
+                    '<%= webRoot %>php/includes/*.php',
+                    '<%= webRoot %>php/lib/*.php'
                 ]
             },
             options: {
@@ -164,16 +183,17 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-pleeease');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-phpcs');
+    grunt.loadNpmTasks('grunt-phpcbf');
     grunt.loadNpmTasks('grunt-sass-lint');
-    grunt.loadNpmTasks('grunt-stylelint');
     grunt.loadNpmTasks('grunt-eslint');
     grunt.loadNpmTasks('grunt-lintspaces');
     grunt.loadNpmTasks('grunt-csscomb');
 
     // Default task(s).
-    grunt.registerTask('default', ['eslint:application', 'lintspaces', 'sass', 'pleeease']);
+    grunt.registerTask('default', ['eslint:application', 'lintspaces', 'sass', 'pleeease', 'phpcbf']);
     grunt.registerTask('lint', ['scsslint']);
     grunt.registerTask('sass-lint', ['sasslint']);
     grunt.registerTask('css-fix', ['csscomb']);
     grunt.registerTask('phpcheck', ['phpcs']);
+    grunt.registerTask('phpfix', ['phpcbf']);
 };
