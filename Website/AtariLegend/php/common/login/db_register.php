@@ -64,7 +64,7 @@ if (isset($action) and $action == 'confirm') {
                 header("Location: ../../main/front/front.php?action=register");
             } else {
                 // Check if both pwd fields are the same
-                if ($_POST['password'] <> $_POST['password_again']) {
+                if ($_POST['password'] != $_POST['password_again']) {
                     $_SESSION['edit_message'] = "The password fields do not correspond!";
                     header("Location: ../../main/front/front.php?action=register");
                 } else {

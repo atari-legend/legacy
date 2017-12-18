@@ -16,10 +16,9 @@ WHERE table_schema = '$db_databasename'
 AND engine != 'InnoDB'")
     or die("Error selecting MyISAM tables: ".$mysqli->error);
 
-while($row = mysqli_fetch_assoc($result)) {
+while ($row = mysqli_fetch_assoc($result)) {
     $table_name = $row["table_name"];
 
     $mysqli->query("ALTER TABLE $table_name ENGINE=InnoDB")
         or die("Error converting $table_name to InnoDB: ".$mysqli->error);
 }
-?>

@@ -30,8 +30,8 @@ if (isset($action) and $action == "boxscan_upload") {
     //****************************************************************************************
     // This is where the boxscans get their upload treatment
     //****************************************************************************************
-    $filename = $_FILES['image']; 
-    $filename = $filename['tmp_name'][1]; 
+    $filename = $_FILES['image'];
+    $filename = $filename['tmp_name'][1];
     
     //Here we'll be looping on each of the inputs on the page that are filled in with an image!
     $image = $_FILES['image'];
@@ -58,8 +58,10 @@ if (isset($action) and $action == "boxscan_upload") {
             }
 
             if ($ext !== "") {
-        
-                if (isset($mode)){}else{$mode = '';}
+                if (isset($mode)) {
+                } else {
+                    $mode = '';
+                }
 
                 if ($mode == "back") {
                     $sdbquery = $mysqli->query("INSERT INTO game_boxscan (game_id, game_boxscan_side,imgext) VALUES ('$game_id', '1','$ext')");
@@ -114,7 +116,7 @@ if (isset($action) and $action == "boxscan_delete") {
     // This is where the boxscans get deleted
     //****************************************************************************************
     
-     //get the extension
+    //get the extension
     $SCREENSHOT = $mysqli->query("SELECT * FROM game_boxscan
                     WHERE game_boxscan_id = '$game_boxscan_id'") or die('Error: ' . mysqli_error($mysqli));
 

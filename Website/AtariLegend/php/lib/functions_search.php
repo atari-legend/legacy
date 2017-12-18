@@ -19,8 +19,7 @@
  *
  ***************************************************************************/
 
- function clean_words($mode, &$entry)
- {
+ function clean_words($mode, &$entry) {
      static $drop_char_match =   array('^', '$', '&', '(', ')', '<', '>', '`', '\'', '"', '|', ',', '@', '_', '?', '%', '-', '~', '+', '.', '[', ']', '{', '}', ':', '\\', '/', '=', '#', '\'', ';', '!');
      static $drop_char_replace = array(' ', ' ', ' ', ' ', ' ', ' ', ' ', '',  '',   ' ', ' ', ' ', ' ', '',  ' ', ' ', '',  ' ',  ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' , ' ', ' ', ' ', ' ',  ' ', ' ');
 
@@ -56,13 +55,11 @@
      return $entry;
  }
 
-function split_words(&$entry, $mode = 'post')
-{
+function split_words(&$entry, $mode = 'post') {
     return explode(' ', trim(preg_replace('#\s+#', ' ', $entry)));
 }
 
-function add_search_words($mode, $post_id, $post_text, $post_title = '')
-{
+function add_search_words($mode, $post_id, $post_text, $post_title = '') {
     include("../../config/connect.php");
 
     $search_raw_words = array();
@@ -145,8 +142,7 @@ function add_search_words($mode, $post_id, $post_text, $post_title = '')
 }
 
 
-function remove_search_post($post_id_sql)
-{
+function remove_search_post($post_id_sql) {
     $words_removed = false;
 
     $sql = "SELECT news_word_id

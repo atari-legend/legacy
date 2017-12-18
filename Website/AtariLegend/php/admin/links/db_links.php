@@ -93,8 +93,7 @@ if (isset($action) and $action == "link_delete") {
     $website_query = $mysqli->query("SELECT website_imgext FROM website WHERE website_id='$website_id'");
     list($website_imgext) = $website_query->fetch_array(MYSQLI_BOTH);
 
-    if ( $website_imgext !== NULL )
-    {
+    if ($website_imgext !== null) {
         unlink("$website_image_save_path$website_id.$website_imgext");
     }
 
@@ -147,7 +146,7 @@ if (isset($action) and $action == 'modify_link') {
     }
 
     // Here we delete the website image
-    if ( isset($delete_image) and $delete_image == 'yes') {
+    if (isset($delete_image) and $delete_image == 'yes') {
         $website_query = $mysqli->query("SELECT website_imgext FROM website WHERE website_id='$website_id'");
         list($website_imgext) = $website_query->fetch_array(MYSQLI_BOTH);
         $full_filename = "$website_image_save_path$website_id.$website_imgext";
@@ -159,12 +158,9 @@ if (isset($action) and $action == 'modify_link') {
 
     // Do the website updating
     $website_description_text = $mysqli->real_escape_string($website_description_text);
-    if (isset ($website_inactive))
-    {
+    if (isset($website_inactive)) {
         $mysqli->query("UPDATE website SET website_name='$website_name', website_url='$website_url', description='$website_description_text', inactive=TRUE WHERE website_id='$website_id'") or die($mysqli->error);
-    }
-    else
-    {
+    } else {
         $mysqli->query("UPDATE website SET website_name='$website_name', website_url='$website_url', description='$website_description_text', inactive=FALSE WHERE website_id='$website_id'") or die($mysqli->error);
     }
 

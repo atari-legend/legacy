@@ -31,10 +31,10 @@ if (empty($catpick)) {
 $SQL = "SELECT website_category_id, website_category_name FROM website_category ORDER BY website_category_name";
 $linkcategorysql = $mysqli->query($SQL) or die("Couldn't query categories");
 
-list($website_category_id,$website_category_name) = $linkcategorysql->fetch_array(MYSQLI_BOTH);
+list($website_category_id, $website_category_name) = $linkcategorysql->fetch_array(MYSQLI_BOTH);
 
 mysqli_data_seek($linkcategorysql, 0) or die("what happend?");
-while (list($category_id,$category_name) = $linkcategorysql->fetch_array(MYSQLI_BOTH)) {
+while (list($category_id, $category_name) = $linkcategorysql->fetch_array(MYSQLI_BOTH)) {
     if ($category_id==$website_category_id) {
         $selected="SELECTED";
     } else {

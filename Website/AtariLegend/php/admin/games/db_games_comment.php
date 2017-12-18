@@ -30,7 +30,6 @@ if ($action == "edit_games_comment") {
     //****************************************************************************************
 
     if (isset($comment_text) and isset($comment_id)) {
-        
         $comment_text = $mysqli->real_escape_string($comment_text);
         
         $mysqli->query("UPDATE comments SET comment='$comment_text' WHERE comments_id='$comment_id'") or die("couldn't update comments table");

@@ -33,11 +33,13 @@ switch ($extraParams) {
         $stmt->bind_result($user_id, $userid);
 
         while ($stmt->fetch()) {
-            array_push($json, array(
+            array_push(
+                $json,
+                array(
                 "value" => $user_id,
                 "label" => $userid)
             );
-        }      
+        }
         $stmt->close();
         break;
         
@@ -53,15 +55,16 @@ switch ($extraParams) {
         $stmt->bind_result($ind_id, $ind_name);
 
         while ($stmt->fetch()) {
-            array_push($json, array(
+            array_push(
+                $json,
+                array(
                 "value" => $ind_id,
                 "label" => $ind_name)
             );
-        }      
+        }
         $stmt->close();
         break;
 }
 
 header("Content-Type: application/json");
 echo json_encode($json);
-?>

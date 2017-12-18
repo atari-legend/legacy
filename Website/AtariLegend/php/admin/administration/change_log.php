@@ -420,7 +420,7 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH)) {
         }
     }
     
-     //  the DOWNLOAD EDIT SECTION
+    //  the DOWNLOAD EDIT SECTION
     if ($log['section'] == 'Downloads') {
         $section_link = ("../downloads/downloads_game_detail.php" . '?game_id=' . $log['section_id']);
 
@@ -449,11 +449,11 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH)) {
         }
                
         if ($log['sub_section'] == 'Crew') {
-             $subsection_link = ("../crew/crew_editor.php?crewbrowse=&crewsearch=&crew_select=" . $log['sub_section_id']);
+            $subsection_link = ("../crew/crew_editor.php?crewbrowse=&crewsearch=&crew_select=" . $log['sub_section_id']);
         }
         
         if ($log['sub_section'] == 'Authors') {
-             $subsection_link = ("../individuals/individuals_edit.php" . '?ind_id=' . $log['sub_section_id']);
+            $subsection_link = ("../individuals/individuals_edit.php" . '?ind_id=' . $log['sub_section_id']);
         }
     }
     

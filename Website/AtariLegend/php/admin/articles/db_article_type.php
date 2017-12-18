@@ -9,7 +9,7 @@
  *
  *             id: db_article_type.php,v 0.22 2017/02/26 22:19 STG
  *              - fix sql warnings stonish server
- *      
+ *
  ***************************************************************************/
 
 // We are using the action var to separate all the queries.

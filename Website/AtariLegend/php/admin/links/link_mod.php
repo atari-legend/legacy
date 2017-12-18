@@ -70,11 +70,11 @@ $RESULT=$mysqli->query("SELECT * FROM website_category ORDER BY website_category
 $sel='';
 
 while ($rowlinkcat = $RESULT->fetch_array(MYSQLI_BOTH)) {
-/*  $sel='';
-    if($rowlink['website_category_id']==$rowlinkcat['website_category_id'])
-    {
-      $sel="SELECTED";
-    } */
+    /*  $sel='';
+        if($rowlink['website_category_id']==$rowlinkcat['website_category_id'])
+        {
+          $sel="SELECTED";
+        } */
 
     $smarty->append('category', array(
         'category_id' => $rowlinkcat['website_category_id'],

@@ -15,8 +15,7 @@
 //
 // Software list connected to a menu disk
 //
- function menu_disk_software_list($menu_disk_id)
- {
+ function menu_disk_software_list($menu_disk_id) {
      global $mysqli;
 
      $sql_games = "SELECT game.game_id AS 'software_id',
@@ -89,8 +88,7 @@
      return $temp_query;
  }
 
- function menu_disk_doc_list($menu_disk_id)
- {
+ function menu_disk_doc_list($menu_disk_id) {
      global $mysqli;
 
      $sql_doc_games = "SELECT game.game_name AS 'software_name',

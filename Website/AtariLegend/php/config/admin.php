@@ -4,7 +4,7 @@
 *                            --------------------------
 *   copyright            : (C) 2015 Atari Legend
 *   email                : silversurfer@atari-forum.com
-*						   
+*
 *
 ***************************************************************************/
 
@@ -18,8 +18,7 @@ include("../../common/tiles/tile_bug_report.php");
 
 
 //This is the actual authorization check
-if (login_check($mysqli) == false) 
-{    
+if (login_check($mysqli) == false) {
     $_SESSION['edit_message'] = "Please log in to use this functionality";
     header('Location: ' . $_SERVER['HTTP_REFERER']);
     die('');
@@ -31,4 +30,3 @@ if (login_check($mysqli) == false)
 //	echo $_SESSION['permission']; echo "<br>";
 //	exit("You don't have permission to enter the control panel");
 //}
-?>

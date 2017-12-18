@@ -9,7 +9,7 @@
 *
 *   Id: latest_news_tile.php,v 0.1 2015/04/14 22:56 ST Graveyard
 *   Id: latest_news_tile.php,v 0.2 2017/05/22 09:02 ST Graveyard
-*           - added the [frontpage] functionality 
+*           - added the [frontpage] functionality
 *
 ***************************************************************************/
 
@@ -24,16 +24,15 @@ $query_news = $mysqli->query("SELECT * FROM news
                            ORDER BY news.news_date DESC LIMIT 6");
 
 //Lets put all the acquired news data into a smarty array and send them to the template.
-while ($sql_news = $query_news->fetch_array(MYSQLI_BOTH))
-{
+while ($sql_news = $query_news->fetch_array(MYSQLI_BOTH)) {
     $v_image  = $news_images_path;
     $v_image .= $sql_news['news_image_id'];
     $v_image .= '.';
     $v_image .= $sql_news['news_image_ext'];
 
-    $news_text = $sql_news['news_text']; 
+    $news_text = $sql_news['news_text'];
     
-    $pos_start = strpos($news_text, '[frontpage]'); 
+    $pos_start = strpos($news_text, '[frontpage]');
     $pos_end = strpos($news_text, '[/frontpage]');
     
     $nr_char = $pos_end - $pos_start;
@@ -47,14 +46,15 @@ while ($sql_news = $query_news->fetch_array(MYSQLI_BOTH))
     $news_text = RemoveSmillies($news_text);
 
     //convert the date to readible format
-    $news_date = date("F j, Y",$sql_news['news_date']);
+    $news_date = date("F j, Y", $sql_news['news_date']);
 
-    $smarty->append('news',
+    $smarty->append(
+        'news',
         array('news_date' => $news_date,
           'news_headline' => $sql_news['news_headline'],
           'user_id' => $sql_news['user_id'],
           'user_name' => $sql_news['userid'],
           'news_text' => $news_text,
-          'image' => $v_image));
+          'image' => $v_image)
+    );
 }
-?>

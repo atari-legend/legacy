@@ -29,8 +29,7 @@ include("../../config/admin_rights.php");
 
 if (isset($action) and $action == 'delete_music') {
     if (isset($music_id)) {
-       
-       foreach ((array) $music_id_selected as $music) {
+        foreach ((array) $music_id_selected as $music) {
             //get the extension
             $MUSIC = $mysqli->query("SELECT * FROM music
                               WHERE music_id = '$music'") or die("Database error - selecting screenshots");

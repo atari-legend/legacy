@@ -56,8 +56,7 @@ if ($action == "delete_submission") {
         //Let's first check if this submission has screenshots.
         $query_submit_screenshot = $mysqli->query("SELECT * FROM screenshot_game_submitinfo WHERE game_submitinfo_id = " . $submit_id . "") or die("something is wrong with mysqli of submissions screenshots");
         
-        while ($sql_submit_screenshot = $query_submit_screenshot->fetch_array(MYSQLI_BOTH))
-        {
+        while ($sql_submit_screenshot = $query_submit_screenshot->fetch_array(MYSQLI_BOTH)) {
             $screenshot_id = $sql_submit_screenshot['screenshot_id'];
 
             //get the extension
@@ -76,7 +75,7 @@ if ($action == "delete_submission") {
             $new_path .= ".";
             $new_path .= $screenshot_ext;
 
-            unlink("$new_path");  
+            unlink("$new_path");
         }
                  
         create_log_entry('Games', $submit_id, 'Submission', $submit_id, 'Delete', $_SESSION['user_id']);
@@ -104,12 +103,9 @@ if ($action == "move_submission_tocomment") {
         $query_submit_screenshot = $mysqli->query("SELECT * FROM screenshot_game_submitinfo WHERE game_submitinfo_id = " . $submit_id . "") or die("something is wrong with mysqli of submissions screenshots");
         $v_rows = $query_submit_screenshot->num_rows;
         
-        if ($v_rows > 0)
-        {
+        if ($v_rows > 0) {
             $_SESSION['edit_message'] = "Submission has screenshots and is not suited for the comment section";
-        }
-        else
-        {
+        } else {
             $query_submit = $mysqli->query("SELECT * FROM game_submitinfo WHERE game_submitinfo_id = " . $submit_id . "") or die("something is wrong with mysqli");
             $sql_submit = $query_submit->fetch_array(MYSQLI_BOTH) or die("something is wrong with mysqli2");
 

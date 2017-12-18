@@ -20,8 +20,7 @@ include("../../config/admin.php");
 
 $start = microtime(true);
 
-if ( isset($action) and $action == 'quick_search_users' )
-{ 
+if (isset($action) and $action == 'quick_search_users') {
     $last_visit_timestamp = date_to_timestamp($Date_Year, $Date_Month, $Date_Day);
 
     $sql_query = "SELECT users.user_id, users.userid, users.email, users.join_date, users.last_visit FROM users";
@@ -153,7 +152,7 @@ if ( isset($action) and $action == 'quick_search_users' )
             'join_date' => $join_date,
             'last_visit' => $last_visit,
             'email' => $email
-        ));   
+        ));
     }
     
     $smarty->assign('nr_users', $nr_users);
@@ -180,10 +179,7 @@ if ( isset($action) and $action == 'quick_search_users' )
 
     $time_elapsed_secs = microtime(true) - $start;
     $smarty->assign("query_time", $time_elapsed_secs);
- 
-}
-else
-{
+} else {
     $sql_users = $mysqli->query("SELECT * FROM users WHERE userid REGEXP '^[0-9].*' ORDER BY users.userid") or die("Couldn't query users Database");
     $nr_users = 0;
     while ($query_users = $sql_users->fetch_array(MYSQLI_BOTH)) {
@@ -212,7 +208,7 @@ else
             'join_date' => $join_date,
             'last_visit' => $last_visit,
             'email' => $email
-        ));    
+        ));
     }
     
     $smarty->assign('nr_users', $nr_users);
