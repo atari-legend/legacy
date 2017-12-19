@@ -31,7 +31,6 @@ list($start2, $start3) = explode(":", exec('date +%N:%S'));
  ***********************************************************************************
  */
 
-
 if (isset($action) and $action == "search") {
     //check the $gamebrowse select
     if (empty($demobrowse) or $demobrowse == '-') {
@@ -145,7 +144,6 @@ if (isset($action) and $action == "search") {
                        LEFT JOIN crew ON (crew.crew_id = crew_demo_prod.crew_id)
                        LEFT JOIN demo_ste_enhan ON (demo_ste_enhan.demo_id = demo.demo_id)
                        WHERE ";
-
 
                 $RESULTAKA .= $akabrowse_select;
                 $RESULTAKA .= "demo_aka.aka_name LIKE '%$demosearch%'";

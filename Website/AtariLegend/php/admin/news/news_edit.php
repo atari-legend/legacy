@@ -37,7 +37,6 @@ if (empty($news_id)) {
     //$news_text = InsertALCode($news['news_text']);
     //$news_text = InsertSmillies($news_text);
 
-
     $smarty->assign('edit_submissions', array(
         'edit_userid' => $user_name,
         'edit_submission_id' => $news_submission_id,

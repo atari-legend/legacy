@@ -25,7 +25,7 @@ $new_path = $spotlight_screenshot_path;
 $new_path .= $sql_spotlight['screenshot_id'];
 $new_path .= ".";
 $new_path .= $sql_spotlight['imgext'];
-    
+
 $smarty->assign('spotlight', array(
     'spotlight_id' => $sql_spotlight['spotlight_id'],
     'spotlight_screenshot' => $new_path,

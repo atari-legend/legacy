@@ -46,7 +46,7 @@ $website_text = RemoveSmillies($website_text);
 
 $smarty->assign(
     'hotlinks',
-         array('website_id' => $sql_links['website_id'],
+    array('website_id' => $sql_links['website_id'],
             'website_name' => $sql_links['website_name'],
             'website_img' =>$v_link_image,
             'website_url' => $sql_links['website_url'],

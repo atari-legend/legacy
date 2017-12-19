@@ -148,7 +148,6 @@ function login($userid, $password, $mysqli) {
     }
 }
 
-
 function checkbrute($user_id, $mysqli) {
     // Get timestamp of current time
     $now = time();

@@ -24,7 +24,7 @@ if ($action == "edit_interviews_comment") {
 
     if (isset($comment_text) and isset($comment_id)) {
         $comment_text = $mysqli->real_escape_string($comment_text);
-        
+
         $mysqli->query("UPDATE comments SET comment='$comment_text' WHERE comments_id='$comment_id'") or die("couldn't update comments table");
 
         create_log_entry('Interviews', $comment_id, 'Comment', $comment_id, 'Update', $_SESSION['user_id']);
@@ -38,7 +38,6 @@ if ($action == "edit_interviews_comment") {
         header("Location: ../interviews/interviews_comment.php?v_counter=$v_counter");
     }
 }
-
 
 // Delete
 if ($action == "delete_comment") {

@@ -8,14 +8,19 @@ return PhpCsFixer\Config::create()
         'declare_equal_normalize' => ['space' => 'single'],
         'hash_to_slash_comment' => true,
         'native_function_casing' => true,
+        'no_multiline_whitespace_around_double_arrow' => true,
+        'no_extra_consecutive_blank_lines' => true,
+        'no_multiline_whitespace_before_semicolons' => true,
+        'no_singleline_whitespace_before_semicolons' => true,
+        'no_whitespace_in_blank_line' => true,
         'standardize_not_equals' => true,
+        'line_ending' => true,
     ])
     ->setFinder(
         PhpCsFixer\Finder::create()
         ->exclude('templates_c', 'vendor')
         ->in(__DIR__.'/Website/AtariLegend/php')
-    )
-;
+    );
 
 /*
 This document has been generated with

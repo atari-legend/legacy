@@ -38,7 +38,6 @@ if (isset($message)) {
     $message='';
 }
 
-
 if (isset($new_crew)) {
     $smarty->assign('new_crew', $new_crew);
 }
@@ -99,7 +98,7 @@ if (isset($action) and $action == "genealogy") {
             'crew_name' => $genealogy['crew_name']
         ));
     }
-    
+
     //Get the individuals
     $sql_individuals = $mysqli->query("SELECT * FROM individuals ORDER BY ind_name ASC");
 
@@ -173,9 +172,9 @@ if (isset($action) and $action == "genealogy") {
 
     while ($fetch_ind_nicks = $sql_ind_nicks->fetch_array(MYSQLI_BOTH)) {
         $nick_id = $fetch_ind_nicks['nick_id'];
-        
+
         $sql_nick_names = $mysqli->query("SELECT ind_name from individuals WHERE ind_id = '$nick_id'") or die("Couldn't retrieve nick names");
-        
+
         while ($fetch_nick_names = $sql_nick_names->fetch_array(MYSQLI_BOTH)) {
             $smarty->append('nick_names', array(
                 'individual_nicks_id' => $fetch_ind_nicks['nick_id'],
@@ -208,7 +207,6 @@ if (empty($action)) {
         'action' => $action
     ));
 }
-
 
 // Search variables that got to be sent with the headers all through this module or else the code will dump the user back to the crew_main.php
 $smarty->assign('tracking', array(

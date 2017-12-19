@@ -30,14 +30,14 @@ while ($sql_recent_interviews = $sql_interview->fetch_array(MYSQLI_BOTH)) {
     $interview_text = $sql_recent_interviews['interview_intro'];
     $interview_text = nl2br($interview_text);
     $interview_text = InsertALCode($interview_text);
-    
+
     //convert the date to readible format
     $v_interview_date = date("F j, Y", $sql_recent_interviews['interview_date']);
-            
+
     $smarty->append(
-            
+
         'recent_interviews',
-         array( 'individual_name' => $sql_recent_interviews['ind_name'],
+        array( 'individual_name' => $sql_recent_interviews['ind_name'],
                 'individual_id' => $sql_recent_interviews['ind_id'],
                 'interview_author' => $sql_recent_interviews['userid'],
                 'interview_author_id' => $sql_recent_interviews['user_id'],
@@ -45,6 +45,5 @@ while ($sql_recent_interviews = $sql_interview->fetch_array(MYSQLI_BOTH)) {
                 'interview_id' => $sql_recent_interviews['interview_id'],
                 'interview_date' => $v_interview_date,
                 'interview_intro' => $interview_text)
-            
     );
 }

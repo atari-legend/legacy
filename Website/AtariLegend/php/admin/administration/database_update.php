@@ -28,7 +28,7 @@ include("../../admin/games/quick_search_games.php");
 // use glob and a foreach loop to search the database_scripts folder for update files
 foreach (glob("../../admin/administration/database_scripts/*.php") as $filename) {
     // import update script
-    
+
     //we don't want to execute additions just yet
     if (strpos($filename, 'addition') !== false) {
         //do nothing
@@ -69,14 +69,13 @@ foreach ($database_update as $key) {
 
         // if the execute condition is met, execute update
         if ($key['execute_condition'] == $test_result) {
-            
-             //overhere we check if we are dealing with an addition - a script containing more than just SQL
+            //overhere we check if we are dealing with an addition - a script containing more than just SQL
             if (strncmp($key['database_update_sql'], "..", 2) === 0) {
                 include $key['database_update_sql'];
             } else {
                 $mysqli->query("$key[database_update_sql]") or die("Database update $key[database_update_id] failed: ".$mysqli->error);
             }
-            
+
             // Add info to the database_change table
             // Set the timestamp
             $timestamp = time();
@@ -116,14 +115,13 @@ foreach ($database_update as $key) {
 
             // if the execute condition is met, execute update
             if ($key['execute_condition'] == $test_result) {
-                
-                 //overhere we check if we are dealing with an addition - a script containing more than just SQL
+                //overhere we check if we are dealing with an addition - a script containing more than just SQL
                 if (strncmp($key['database_update_sql'], "..", 2) === 0) {
                     include $key['database_update_sql'];
                 } else {
                     $mysqli->query("$key[database_update_sql]") or die("Database update $key[database_update_id] failed: ".$mysqli->error);
                 }
-                    
+
                 // Add info to the database_change table
                 // Set the timestamp
                 $timestamp = time();

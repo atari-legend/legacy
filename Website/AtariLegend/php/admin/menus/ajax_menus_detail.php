@@ -143,7 +143,6 @@ if (isset($action) and $action == "edit_disk_box" and $menu_disk_id !== '') {
         ));
     }
 
-
     // Get the menudisk credits
     $sql_individuals = "SELECT
                         individuals.ind_id,

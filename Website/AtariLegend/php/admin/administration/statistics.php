@@ -130,7 +130,6 @@ $karma_bad_label[4] = "<-2000";
 $smarty->assign('karma_bad_value', json_encode($karma_bad_value));
 $smarty->assign('karma_bad_label', json_encode($karma_bad_label));
 
-
 $karma_border[0] = "#000000";
 $karma_border_width[0] = "1";
 $karma_bg[0] = "#c2c2c2";
@@ -221,7 +220,6 @@ $change_log_label[8] = "Articles";
 $smarty->assign('change_log_data', json_encode($change_log_data));
 $smarty->assign('change_log_label', json_encode($change_log_label));
 
-
 //**************************************
 // nr of changes in the past 12 months
 //**************************************
@@ -259,7 +257,7 @@ if ($current_month == 15) {
     $current_year = $current_year + 1;
 }
 
-for ($k = 1 ; $k <= 12; $k++) {
+for ($k = 1; $k <= 12; $k++) {
     if ($current_month == 13) {
         $current_month = 1;
         $current_year = $current_year + 1;
@@ -272,7 +270,7 @@ for ($k = 1 ; $k <= 12; $k++) {
 
     $date_high = date_to_timestamp($current_year, $current_month, $current_day);
     $date_low = date_to_timestamp($last_year, $last_month, $current_day);
-    
+
     $result_monthly   = $mysqli->query("SELECT * FROM change_log WHERE timestamp >= $date_low and timestamp < $date_high") or die("error getting change_log data");
     $change_log_monthly = $result_monthly->num_rows;
     $change_log_monthly_data[$i] = $change_log_monthly;
@@ -282,7 +280,7 @@ for ($k = 1 ; $k <= 12; $k++) {
     $change_log_bg[$i] = "#c2c2c2";
     $change_log_border_width[$i] = "1";
     $change_log_border[$i] = "#000000";
-    
+
     $last_month = $last_month + 1;
     $current_month = $current_month + 1;
     $i = $i + 1;

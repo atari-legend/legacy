@@ -64,7 +64,6 @@ $sql_game = $mysqli->query("SELECT game_name,
                LEFT JOIN game_wanted ON (game.game_id = game_wanted.game_id)
                  WHERE game.game_id='$game_id'") or die("Error getting game info");
 
-
 while ($game_info = $sql_game->fetch_array(MYSQLI_BOTH)) {
     $smarty->assign('game_info', array(
         'game_name' => $game_info['game_name'],
@@ -127,7 +126,6 @@ while ($categories = $sql_categories->fetch_array(MYSQLI_BOTH)) {
     ));
 }
 
-
 //**********************************************************************************
 //Get the author info
 //**********************************************************************************
@@ -151,7 +149,6 @@ while ($author = $sql_author->fetch_array(MYSQLI_BOTH)) {
         'author_type_id' => $author['author_type_id']
     ));
 }
-
 
 //Starting off with displaying the authors that are linked to the game and having a delete option for them */
 $sql_gameauthors = $mysqli->query("SELECT * FROM game_author
@@ -182,7 +179,6 @@ while ($company = $sql_company->fetch_array(MYSQLI_BOTH)) {
     ));
 }
 
-
 //let's get the publishers for this game
 $sql_publisher = $mysqli->query("SELECT * FROM pub_dev
                  LEFT JOIN game_publisher ON ( pub_dev.pub_dev_id = game_publisher.pub_dev_id )
@@ -199,7 +195,6 @@ while ($publishers = $sql_publisher->fetch_array(MYSQLI_BOTH)) {
         'continent' => $publishers['continent_name']
     ));
 }
-
 
 //let's get the developers for this game
 $sql_developer = $mysqli->query("SELECT * FROM pub_dev
@@ -218,7 +213,6 @@ while ($developers = $sql_developer->fetch_array(MYSQLI_BOTH)) {
     ));
 }
 
-
 //**********************************************************************************
 //Get all the continents
 //**********************************************************************************
@@ -231,7 +225,6 @@ while ($continent = $sql_continent->fetch_array(MYSQLI_BOTH)) {
         'continent_name' => $continent['continent_name']
     ));
 }
-
 
 //**********************************************************************************
 //Get the extra game info
@@ -246,7 +239,6 @@ while ($game_extra_info = $sql_game_extra_info->fetch_array(MYSQLI_BOTH)) {
     ));
 }
 
-
 //***********************************************************************************
 //The game categories
 //***********************************************************************************
@@ -259,7 +251,6 @@ while ($categories = $sql_categories->fetch_array(MYSQLI_BOTH)) {
         'game_cat_name' => $categories['game_cat_name']
     ));
 }
-
 
 $sql_catcross = $mysqli->query("SELECT * FROM game_cat_cross WHERE game_id='$game_id'") or die("Error loading categorie cross table");
 
@@ -275,7 +266,6 @@ while ($catcross = $sql_catcross->fetch_array(MYSQLI_BOTH)) {
 }
 
 $smarty->assign("nr_catcross", $nr_catcross);
-
 
 //***********************************************************************************
 //AKA's
@@ -299,7 +289,6 @@ $smarty->assign("nr_aka", $nr_aka);
 //***********************************************************************************
 //The game statistics below on the page
 //***********************************************************************************
-
 
 //Get the number of screenshots!
 $numberscreen = $mysqli->query("SELECT count(*) as count FROM screenshot_game WHERE game_id = '$game_id'") or die("couldn't get number of screenshots");
@@ -342,7 +331,6 @@ $number_comments = $mysqli->query("SELECT count(*) as count FROM game_user_comme
 $array = $number_comments->fetch_array(MYSQLI_BOTH);
 
 $smarty->assign("nr_comments", $array['count']);
-
 
 $smarty->assign("game_id", $game_id);
 $smarty->assign("user_id", $_SESSION['user_id']);

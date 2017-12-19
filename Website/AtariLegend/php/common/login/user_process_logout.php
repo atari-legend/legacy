@@ -42,4 +42,3 @@ if (isset($_POST['action']) and $_POST['action'] == 'cpanel') {
 }
 
 mysql_close();
-?>

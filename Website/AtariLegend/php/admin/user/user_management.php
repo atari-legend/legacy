@@ -57,7 +57,7 @@ if (isset($action) and $action == 'quick_search_users') {
     } else {
         $sql_query .= " WHERE userid LIKE '$userbrowse%'";
     }
-       
+
     if (!empty($usersearch)) {
         $usersearch = $mysqli->real_escape_string($usersearch);
         $sql_query .= " AND userid LIKE '%$usersearch%'";
@@ -145,7 +145,7 @@ if (isset($action) and $action == 'quick_search_users') {
         } else {
             $last_visit = "Unknown";
         }
-                  
+
         $smarty->append('users', array(
             'user_id' => $query_users['user_id'],
             'user_name' => $query_users['userid'],
@@ -154,7 +154,7 @@ if (isset($action) and $action == 'quick_search_users') {
             'email' => $email
         ));
     }
-    
+
     $smarty->assign('nr_users', $nr_users);
 
     $time_elapsed_secs = microtime(true) - $start;
@@ -210,7 +210,7 @@ if (isset($action) and $action == 'quick_search_users') {
             'email' => $email
         ));
     }
-    
+
     $smarty->assign('nr_users', $nr_users);
 
     // Create dropdown values a-z

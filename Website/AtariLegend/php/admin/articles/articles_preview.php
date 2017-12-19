@@ -74,7 +74,7 @@ while ($sql_screenshots = $query_screenshots->fetch_array(MYSQLI_BOTH)) {
         $new_path .= $sql_screenshots['screenshot_id'];
         $new_path .= ".";
         $new_path .= $sql_screenshots['imgext'];
-        
+
         $smarty->append('screenshots', array(
             'screenshot' => $new_path,
             'count' => $count,

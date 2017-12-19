@@ -88,7 +88,6 @@ while ($query_submission = $sql_submission->fetch_array(MYSQLI_BOTH)) {
     $query_submitinfo = $mysqli->query("SELECT * FROM demo_submitinfo WHERE user_id = '$query_submission[user_id]'") or die("Could not count user submissions");
     $usersubmit_number = $query_submitinfo->num_rows;
 
-
     //Get the dataElements we want to place on screen
     $v_demo_image = $demo_screenshot_path;
     $v_demo_image .= $sql_demo['screenshot_id'];
@@ -123,7 +122,6 @@ while ($query_submission = $sql_submission->fetch_array(MYSQLI_BOTH)) {
 if ($v_counter > 0) {
     $back_arrow = $v_counter - 25;
 }
-
 
 //Check if we need to place a next arrow
 if ($v_rows > ($v_counter + 25)) {

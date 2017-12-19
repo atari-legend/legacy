@@ -133,7 +133,6 @@ if ($action == "menu_set_name_update") {
     header("Location: ../menus/menus_disk_list.php?menu_sets_id=$menu_sets_id");
 }
 
-
 //****************************************************************************************
 // Connect crew to menu set
 //****************************************************************************************
@@ -189,7 +188,6 @@ if ($action == "menu_set_type_set") {
     }
     header("Location: ../menus/menus_disk_list.php?menu_sets_id=$menu_sets_id");
 }
-
 
 //****************************************************************************************
 // Quick add new crew
@@ -254,7 +252,6 @@ if ($action == "delete_menu_type_from_menu_set") {
     $_SESSION['edit_message'] = "Menu type removed from Menu set";
     header("Location: ../menus/menus_disk_list.php?menu_sets_id=$menu_sets_id");
 }
-
 
 //****************************************************************************************
 // This is delete individuel from menu series
@@ -323,7 +320,6 @@ if (isset($action) and ($action == "add_title_to_menu")) {
         //
         //list of games for the menu disk
         $temp_query = menu_disk_software_list($menu_disk_id);
-
 
         while ($query = $temp_query->fetch_array(MYSQLI_BOTH)) {
             // This smarty is used for creating the list of games
@@ -509,7 +505,6 @@ if (isset($action) and $action == "delete_from_menu_disk") {
 // DELETE DOC FROM MENU DISK
 //****************************************************************************************
 if (isset($action) and $action == "delete_doc_from_menu_disk") {
-
     /* let's see if the title contains authors */
     $sql = $mysqli->query("SELECT * FROM menu_disk_title_author WHERE menu_disk_title_id = '$menu_disk_title_id'") or die('Error: ' . mysqli_error($mysqli));
     if ($sql->num_rows > 0) {
@@ -552,7 +547,6 @@ if (isset($action) and $action == "delete_doc_from_menu_disk") {
             $osd_message = "Game doc deleted from menu disk";
         }
     }
-
 
     // ok, delete done. Now this is a ajax job so we need a return value.
     // Get the doc disks
@@ -982,7 +976,6 @@ if (isset($action) and $action == 'add_file') {
     $smarty->display("file:" . $cpanel_template_folder . "ajax_menus_detail.html");
 }
 
-
 //****************************************************************************************
 // ADD MENU CREDITS!
 //****************************************************************************************
@@ -1121,7 +1114,6 @@ if (isset($action) and $action == "delete_menu_disk_credits") {
 //****************************************************************************************
 // DELETE MENU DISK
 //****************************************************************************************
-
 
 if (isset($action) and ($action == "delete_menu_disk")) {
     // first let's check if this menu disk has user comments
@@ -1340,7 +1332,6 @@ if (isset($action) and ($action == "change_menu_disk_state" or $action == "chang
             ));
         }
 
-
         // Get the doc disks
         $temp_query2 = menu_disk_doc_list($menu_disk_id);
 
@@ -1494,7 +1485,6 @@ if (isset($action) and ($action == "change_menu_disk_state" or $action == "chang
         }
 
         $smarty->assign("screenshots_nr", $v_screenshots);
-
 
         //************************************************************************************************
         //Let's get the menu info for the file name concatenation, and the download data for disks already
@@ -1937,7 +1927,6 @@ if (isset($action) and ($action == "add_set_to_menu" or $action == "link_game_to
     $smarty->display("file:" . $cpanel_template_folder . "ajax_menus_detail.html");
 }
 
-
 //****************************************************************************************
 // Delete menu set
 //****************************************************************************************
@@ -1980,7 +1969,6 @@ if (isset($action) and ($action == "publish_set")) {
         header("Location: ../menus/menus_disk_list.php?menu_sets_id=$menu_sets_id");
     }
 }
-
 
 //****************************************************************************************
 // Add an author to a menu_disk_title

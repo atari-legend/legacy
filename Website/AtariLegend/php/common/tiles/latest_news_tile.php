@@ -31,14 +31,14 @@ while ($sql_news = $query_news->fetch_array(MYSQLI_BOTH)) {
     $v_image .= $sql_news['news_image_ext'];
 
     $news_text = $sql_news['news_text'];
-    
+
     $pos_start = strpos($news_text, '[frontpage]');
     $pos_end = strpos($news_text, '[/frontpage]');
-    
+
     $nr_char = $pos_end - $pos_start;
-    
+
     $news_text = substr($news_text, $pos_start, $nr_char);
-    
+
     //fixxx the enters
     $news_text = nl2br($news_text);
     $news_text = InsertALCode($news_text); // disabled this as it wrecked the design.

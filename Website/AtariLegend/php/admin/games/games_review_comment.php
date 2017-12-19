@@ -121,13 +121,13 @@ while ($query_comment = $sql_comment->fetch_array(MYSQLI_BOTH)) {
     } else {
         $avatar_image = '';
     }
-    
+
     //get the game name and game id
     $sql_game = $mysqli->query("SELECT *
                                FROM game
                                LEFT JOIN review_game ON ( review_game.game_id = game.game_id )
                                WHERE review_game.review_id = '$query_comment[review_id]' ORDER BY RAND() LIMIT 1") or die("Could not get game detail");
-                               
+
     $query_game = $sql_game->fetch_array(MYSQLI_BOTH);
 
     $smarty->append('comments', array(

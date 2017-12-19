@@ -53,13 +53,10 @@ $int_text = InsertALCode($int_text); // disabled this as it wrecked the design.
 $int_text = trim($int_text);
 $int_text = RemoveSmillies($int_text);
 
-    
 $smarty->assign(
- 
 
-    
     'who_is_it',
-         array('ind_id' => $sql_interview['ind_id'],
+    array('ind_id' => $sql_interview['ind_id'],
                'ind_name' => $sql_interview['ind_name'],
                'ind_img' => $v_ind_image,
                'int_id' => $sql_interview['interview_id'],
@@ -67,7 +64,4 @@ $smarty->assign(
                'int_date' => $interview_date,
                'int_user_id' => $sql_interview['user_id'],
                'int_userid' => $sql_interview['userid'])
- 
-
-    
 );

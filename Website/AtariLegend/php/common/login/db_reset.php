@@ -32,39 +32,38 @@ if (isset($action) and $action == 'check_email') {
             //check if email address exists in DB
             $query_rows = $mysqli->query("select * from users where email = '$_POST[email]'");
             $number = $query_rows->num_rows;
-              
+
             if ($number == 0) {
                 $_SESSION['edit_message'] =  "There is no user with this email address in our DB - Please contact the admins";
                 header("Location: ../../main/front/front.php?action=reset");
             } else { //lets create an email
                 $sql_user_id = $query_rows->fetch_array(MYSQLI_BOTH);
-                
+
                 // Create a unique salt. This will never leave PHP unencrypted.
                 $salt = $sql_user_id['userid'];
 
                 // Create the unique user password reset key
                 $password = hash('sha512', $salt.$_POST['email']);
                 $timestamp = time();
-                
+
                 // Add all this into the user_reset table with a timestamp. This will be used to make this password expire in time.
                 $sdbquery = $mysqli->query("INSERT INTO users_reset (user_id, password, time) VALUES ('$sql_user_id[user_id]', '$password', '$timestamp')") or die("Couldn't insert user into users_reset table");
 
                 // Create a url which we will direct them to reset their password
                 $pwrurl = $pwd_reset_link.$password;
-      
+
                 $mail = new PHPMailer;
 
                 $start = microtime(true);
                 $i     = 0;
-       
+
                 $mail->AddAddress($_POST["email"]);
 
                 // Create Email
-                
+
                 //We need to comment out this comment to have it to work from server, on localhost it runs with this command
                 //$mail->isSMTP(); // Set mailer to use SMTP
-                
-                
+
                 $mail->SMTPDebug  = 1;                            // enables SMTP debug information (for testing)
                 // 1 = errors and messages
                 // 2 = messages only
@@ -86,7 +85,7 @@ if (isset($action) and $action == 'check_email') {
                 $mail->isHTML(false); // Set email format to HTML
 
                 $mail->Subject = 'Atarilegend - Password Reset';
-                
+
                 // Mail them their key
                 $mailbody = "Dear user,\n\nIf this e-mail does not apply to you please ignore it. It appears that you have requested a password reset at our website www.atarilegend.com\n\nTo reset your password, please click the link below. If you cannot click it, please paste it into your web browser's address bar.\n\n" . $pwrurl . "\n\nThanks,\nTEAM AL";
 
@@ -114,7 +113,7 @@ if (isset($action) and $action == 'new_pwd') {
     $password = $_POST["password"];
     $confirmpassword = $_POST["password_again"];
     $hash = $_POST["q"];
-    
+
     //check if the email addres is valid
     if (!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) {
         $_SESSION['edit_message'] =  "Invalid email format";
@@ -123,7 +122,7 @@ if (isset($action) and $action == 'new_pwd') {
         //check if email address exists in DB
         $query_rows = $mysqli->query("select * from users where email = '$_POST[email]'");
         $number = $query_rows->num_rows;
-              
+
         if ($number == 0) {
             $_SESSION['edit_message'] =  "There is no user with this email address in our DB - Please contact the admins";
             header("Location: ../../main/front/front.php?action=new_pwd&q=$hash");
@@ -146,7 +145,7 @@ if (isset($action) and $action == 'new_pwd') {
                     $twentyfour_hours = time()-(60*1440);
                     $query_time = $mysqli->query("select * from users_reset where password = '$resetkey'") or die("problem getting time from the users_reset table");
                     $number_hash = $query_time->num_rows;
-                   
+
                     if ($number_hash == 0) {
                         $_SESSION['edit_message'] =  "Something went wrong - validation not possible, contact the admins or try a new password request";
                         header("Location: ../../main/front/front.php");
@@ -160,12 +159,12 @@ if (isset($action) and $action == 'new_pwd') {
                             $random_salt = hash('sha512', uniqid(mt_rand(1, mt_getrandmax()), true));//create random salt
                             $update_password = hash('sha512', $sha512 . $random_salt); // Create salted password
                             $timestamp = time();
-             
+
                             $sdbquery = $mysqli->query("UPDATE users SET password = '$md5pass', sha512_password = '$update_password', salt = '$random_salt', last_visit = '$timestamp' WHERE user_id = '$sql_user_id[user_id];'") or die("Couldn't update the user table");
-                            
+
                             //delete the hash from the user_reset table so a new reset can be done
                             $sql_hash = $mysqli->query("DELETE FROM users_reset WHERE password = '$hash'") or die("Couldn't delete password from users_rest table");
-                            
+
                             //Let's log in - fill the session vars
                             if (login($sql_user_id['userid'], $sha512, $mysqli) == true) {
                                 create_log_entry('Users', $sql_user_id['user_id'], 'User', $sql_user_id['user_id'], 'Update', $_SESSION['user_id']);
@@ -177,10 +176,10 @@ if (isset($action) and $action == 'new_pwd') {
                             }
                         } else {
                             $_SESSION['edit_message'] =  "Something went wrong - hash password request expired, try a new password request";
-                            
+
                             //delete the hash from the user_reset table so a new reset can be done
                             $sql_hash = $mysqli->query("DELETE FROM users_reset WHERE password = '$hash'") or die("Couldn't delete password from users_rest table");
-                        
+
                             header("Location: ../../main/front/front.php");
                         }
                     }

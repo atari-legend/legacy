@@ -144,7 +144,7 @@ if ($action == 'edit_review' or $action == 'submitted') {
     $_SESSION['edit_message'] = "Review updated";
 
     create_log_entry('Games', $game_id, 'Review', $reviewid, 'Update', $_SESSION['user_id']);
-    
+
     if ($action == 'submitted') {
         header("Location: ../games/games_review_submitted.php");
     } else {

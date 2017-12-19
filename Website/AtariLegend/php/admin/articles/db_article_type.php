@@ -53,7 +53,7 @@ if (isset($action) and $action == 'insert_type') {
         $sql_article_type = $mysqli->query("INSERT INTO article_type (article_type) VALUES ('$type_name')") or die("error inserting article type");
 
         $new_article_type_id = $mysqli->insert_id;
-        
+
         create_log_entry('Article type', $new_article_type_id, 'Article type', $new_article_type_id, 'Insert', $_SESSION['user_id']);
 
         $_SESSION['edit_message'] = "article type succesfully inserted";

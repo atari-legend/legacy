@@ -22,10 +22,10 @@ $nickname = $mysqli->query("SELECT * FROM individual_nicks order by individual_n
 
 while ($name = mysqli_fetch_assoc($nickname)) {
     $nick = $name['nick'];
-    
+
     //Insert the nickname as a new entry in the individuals table
     $insertquery = $mysqli->query("INSERT INTO individuals (ind_name) VALUES ('$nick')") or die("error inserting nickname into individuals table");
-    
+
     //get the newly created id
     $new_nick_id = $mysqli->insert_id;
 
