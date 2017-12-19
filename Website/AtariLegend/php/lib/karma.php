@@ -24,7 +24,6 @@
 // $karma_action = "game_review"
 // $karma_action = demo_submission
 
-
 function UserKarma($user_id, $karma_action) {
     global $mysqli;
     if (empty($user_id)) {

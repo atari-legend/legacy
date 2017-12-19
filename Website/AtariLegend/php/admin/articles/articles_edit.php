@@ -34,7 +34,6 @@ while ($articles = $sql_articles->fetch_array(MYSQLI_BOTH)) {
     ));
 }
 
-
 //Get the authors for the article
 $sql_author = $mysqli->query("SELECT user_id,userid FROM users") or die("Database error - getting members name");
 
@@ -54,7 +53,6 @@ while ($article_types = $sql_types->fetch_array(MYSQLI_BOTH)) {
         'article_type' => $article_types['article_type']
     ));
 }
-
 
 //we need to get the data of the loaded article
 $sql_article = $mysqli->query("SELECT * FROM article_main

@@ -32,7 +32,6 @@ $v_log = $query_number->num_rows;
 
 $smarty->assign('log_nr', $v_log);
 
-
 if (empty($v_linkback)) {
     $v_linkback = '';
 }
@@ -68,7 +67,6 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH)) {
     if ($log['section'] == 'Games') {
         $section_link = ("../games/games_detail.php" . '?game_id=' . $log['section_id']);
 
-
         if ($log['sub_section'] == 'Game' or $log['sub_section'] == 'AKA' or $log['sub_section'] == 'Year' or $log['sub_section'] == 'Submission') {
             $subsection_link = ("../games/games_detail.php" . '?game_id=' . $log['sub_section_id']);
         }
@@ -84,7 +82,7 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH)) {
         if ($log['sub_section'] == 'File') {
             $subsection_link = ("../downloads/downloads_game_detail.php" . '?game_id=' . $log['sub_section_id']);
         }
-        
+
         if ($log['sub_section'] == 'Fact') {
             $subsection_link = ("../games/games_facts.php" . '?game_id=' . $log['sub_section_id'] . '&game_name=' . $log['section_name']);
         }
@@ -150,7 +148,7 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH)) {
             $section_link    = ("../trivia/manage_trivia_quotes.php");
             $subsection_link = ("../trivia/manage_trivia_quotes.php");
         }
-        
+
         if ($log['sub_section'] == 'Spotlight') {
             $section_link    = ("../trivia/spotlight.php");
             $subsection_link = ("../trivia/spotlight.php");
@@ -229,7 +227,7 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH)) {
         if ($log['sub_section'] == 'Interview' or $log['sub_section'] == 'Screenshots') {
             $subsection_link = $section_link;
         }
-        
+
         if ($log['sub_section'] == 'Comment') {
             $section_link = ("../interviews/interviews_edit.php" . '?interview_id=' . $log['section_id']);
             if ($log['action'] == 'Delete') {
@@ -239,11 +237,11 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH)) {
             }
         }
     }
-    
+
     //  the REVIEW SECTION
     if ($log['section'] == 'Reviews') {
         $section_link = ("../games/games_review_comment_edit.php" . '?review_user_comments_id=' . $log['sub_section_id'] . '&v_counter=0');
-        
+
         if ($log['sub_section'] == 'Comment') {
             if ($log['action'] == 'Delete') {
                 $subsection_link = ("../administration/change_log.php");
@@ -321,7 +319,6 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH)) {
         $section_link    = ("../menus/menus_disk_list.php" . '?menu_sets_id=' . $log['section_id']);
         $subsection_link = $section_link;
 
-
         if ($log['sub_section'] == 'Credits' or $log['sub_section'] == 'Nickname') {
             $subsection_link = ("../individuals/individuals_edit.php" . '?ind_id=' . $log['sub_section_id']);
         }
@@ -374,7 +371,7 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH)) {
             $subsection_link = ("../docs/doc_category_edit.php" . '?doc_category_id=' . $log['section_id']);
         }
     }
-    
+
     //  the DOWNLOAD FORMAT SECTION
     if ($log['section'] == 'Format') {
         $section_link = ("../downloads/download_format_edit.php" . '?format_id=' . $log['section_id']);
@@ -383,7 +380,7 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH)) {
             $subsection_link = ("../downloads/download_format_edit.php" . '?format_id=' . $log['section_id']);
         }
     }
-    
+
     //  the DOWNLOAD LINGO SECTION
     if ($log['section'] == 'Lingo') {
         $section_link = ("../downloads/download_lingo_edit.php" . '?lingo_id=' . $log['section_id']);
@@ -401,7 +398,7 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH)) {
             $subsection_link = ("../downloads/download_options_edit.php" . '?option_id=' . $log['section_id']);
         }
     }
-    
+
     //  the TOS VERSION SECTION
     if ($log['section'] == 'TOS') {
         $section_link = ("../downloads/download_tos_edit.php" . '?tos_id=' . $log['section_id']);
@@ -410,7 +407,7 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH)) {
             $subsection_link = ("../downloads/download_tos_edit.php" . '?tos_id=' . $log['section_id']);
         }
     }
-    
+
     //  the TRAINER OPTION SECTION
     if ($log['section'] == 'Trainer') {
         $section_link = ("../downloads/download_trainer_edit.php" . '?trainer_id=' . $log['section_id']);
@@ -419,7 +416,7 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH)) {
             $subsection_link = ("../downloads/download_trainer_edit.php" . '?trainer_id=' . $log['section_id']);
         }
     }
-    
+
     //  the DOWNLOAD EDIT SECTION
     if ($log['section'] == 'Downloads') {
         $section_link = ("../downloads/downloads_game_detail.php" . '?game_id=' . $log['section_id']);
@@ -427,36 +424,36 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH)) {
         if ($log['sub_section'] == 'Options') {
             $subsection_link = ("../downloads/download_options_edit.php" . '?option_id=' . $log['sub_section_id']);
         }
-        
+
         if ($log['sub_section'] == 'TOS') {
             $subsection_link = ("../downloads/download_tos_edit.php" . '?tos_id=' . $log['sub_section_id']);
         }
-        
+
         if ($log['sub_section'] == 'Details') {
             $subsection_link = $section_link;
         }
-        
+
         if ($log['sub_section'] == 'Menudisk') {
             $subsection_link = $section_link;
         }
-        
+
         if ($log['sub_section'] == 'Chain') {
             $subsection_link = $section_link;
         }
-        
+
         if ($log['sub_section'] == 'Trainer') {
             $subsection_link = ("../downloads/download_trainer_edit.php" . '?trainer_id=' . $log['sub_section_id']);
         }
-               
+
         if ($log['sub_section'] == 'Crew') {
             $subsection_link = ("../crew/crew_editor.php?crewbrowse=&crewsearch=&crew_select=" . $log['sub_section_id']);
         }
-        
+
         if ($log['sub_section'] == 'Authors') {
             $subsection_link = ("../individuals/individuals_edit.php" . '?ind_id=' . $log['sub_section_id']);
         }
     }
-    
+
     //  the BUG REPORT TYPE SECTION
     if ($log['section'] == 'Bug type') {
         $section_link = ("../administration/bug_report_type_edit.php" . '?type_id=' . $log['section_id']);
@@ -465,14 +462,13 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH)) {
             $subsection_link = ("../administration/bug_report_type_edit.php" . '?type_id=' . $log['section_id']);
         }
     }
-    
+
     //  the BUG REPORT SECTION
     if ($log['section'] == 'Bug') {
         $section_link    = ("../administration/bug_report.php");
         $subsection_link = ("../administration/bug_report.php");
     }
-  
-    
+
     $smarty->append('log', array(
         'log_user_name' => $user_name,
         'log_user_id' => $log['user_id'],

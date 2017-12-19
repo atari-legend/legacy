@@ -14,7 +14,7 @@
  Downloads detail
  ***********************************************************************************
  */
- 
+
 //load all common functions
 include("../../config/common.php");
 include("../../config/admin.php");
@@ -46,7 +46,6 @@ $sql_downloads = $mysqli->query("SELECT * FROM game_download
 
 $nr_downloads = 0;
 while ($downloads = $sql_downloads->fetch_array(MYSQLI_BOTH)) {
-       
     // first lets create the filenames
     $filename = "$game_info[game_name]";
 
@@ -58,7 +57,7 @@ while ($downloads = $sql_downloads->fetch_array(MYSQLI_BOTH)) {
     if ($game_info['pub_dev_id'] !== '') {
         $filename .= "($game_info[pub_dev_name])";
     }
-    
+
     //let's get the detail download table
     $sql_download_details = $mysqli->query("SELECT * FROM game_download 
                                              LEFT JOIN game_download_details ON (game_download.game_download_id = game_download_details.game_download_id)
@@ -70,7 +69,7 @@ while ($downloads = $sql_downloads->fetch_array(MYSQLI_BOTH)) {
             $filename .= "($details[version])";
         }
     }
-    
+
     //let's get the format
     $sql_format = $mysqli->query("SELECT * FROM game_download 
                                   LEFT JOIN download_main ON (game_download.download_id = download_main.download_id)
@@ -84,7 +83,7 @@ while ($downloads = $sql_downloads->fetch_array(MYSQLI_BOTH)) {
             $filename .= "($format[format])";
         }
     }
-    
+
     // let's get the language
     $sql_lingo = $mysqli->query("SELECT * FROM game_download 
                                   LEFT JOIN game_download_lingo ON (game_download.game_download_id = game_download_lingo.game_download_id)
@@ -97,15 +96,14 @@ while ($downloads = $sql_downloads->fetch_array(MYSQLI_BOTH)) {
             $filename .= "($lingo[lingo_name])";
         }
     }
-    
-    
+
     if ($downloads['download_ext'] == "stx") {
         $filename .= "[pasti]";
     }
     if ($downloads['download_ext'] == "msa") {
         $filename .= "[MSA]";
     }
-    
+
     $sql_set = $mysqli->query("SELECT * FROM game_download   
                                LEFT JOIN game_download_set ON (game_download.game_download_id = game_download_set.game_download_id)
                                WHERE game_download.game_download_id='$downloads[game_download_id]'") or die("Error getting download set");
@@ -115,7 +113,7 @@ while ($downloads = $sql_downloads->fetch_array(MYSQLI_BOTH)) {
             $filename .= " - part $set[game_download_set_chain]";
         }
     }
-     
+
     $filename .= ".zip";
 
     $filepath = $game_file_path;

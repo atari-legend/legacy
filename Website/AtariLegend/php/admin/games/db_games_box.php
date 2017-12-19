@@ -20,11 +20,9 @@
 
 // This document contain all the code needed to operate the boxscans.
 
-
 include("../../config/common.php");
 include("../../config/admin.php");
 include("../../config/admin_rights.php");
-
 
 if (isset($action) and $action == "boxscan_upload") {
     //****************************************************************************************
@@ -32,7 +30,7 @@ if (isset($action) and $action == "boxscan_upload") {
     //****************************************************************************************
     $filename = $_FILES['image'];
     $filename = $filename['tmp_name'][1];
-    
+
     //Here we'll be looping on each of the inputs on the page that are filled in with an image!
     $image = $_FILES['image'];
 
@@ -101,7 +99,7 @@ if (isset($action) and $action == "boxscan_upload") {
                     create_log_entry('Games', $game_id, 'Box front', $game_id, 'Insert', $_SESSION['user_id']);
 
                     $_SESSION['edit_message'] = "Front scan uploaded";
-                    
+
                     chmod("$game_boxscan_save_path$boxCover[0].$ext", 0777);
                 }
             }
@@ -115,14 +113,14 @@ if (isset($action) and $action == "boxscan_delete") {
     //****************************************************************************************
     // This is where the boxscans get deleted
     //****************************************************************************************
-    
+
     //get the extension
     $SCREENSHOT = $mysqli->query("SELECT * FROM game_boxscan
                     WHERE game_boxscan_id = '$game_boxscan_id'") or die('Error: ' . mysqli_error($mysqli));
 
     $screenshotrow  = $SCREENSHOT->fetch_array(MYSQLI_BOTH);
     $screenshot_ext = $screenshotrow['imgext'];
-    
+
     $sql = $mysqli->query("DELETE FROM game_boxscan WHERE game_boxscan_id = '$game_boxscan_id'");
 
     if ($mode == "back") {

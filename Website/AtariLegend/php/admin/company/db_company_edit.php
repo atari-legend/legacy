@@ -93,7 +93,7 @@ if (isset($action) and $action == 'add_logo') {
 if (isset($action) and $action == 'update') {
     $comp_name = $mysqli->real_escape_string($comp_name);
     $textfield = $mysqli->real_escape_string($textfield);
-    
+
     $sdbquery = $mysqli->query("UPDATE pub_dev SET pub_dev_name = '$comp_name' WHERE pub_dev_id = $comp_id") or die("Couldn't Update into pub_dev");
 
     $COMPANYtext = $mysqli->query("SELECT pub_dev_id FROM pub_dev_text
@@ -160,10 +160,10 @@ if ($action == "insert_comp") {
         } else {
             $textfield = '';
         }
-        
+
         $comp_name = $mysqli->real_escape_string($comp_name);
         $textfield = $mysqli->real_escape_string($textfield);
-        
+
         $sql = $mysqli->query("INSERT INTO pub_dev (pub_dev_name) VALUES ('$comp_name')");
 
         //get the id of the inserted individual

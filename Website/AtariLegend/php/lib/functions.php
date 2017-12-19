@@ -12,52 +12,52 @@
  *
  ***************************************************************************/
 
- function InsertALCode($alcode) {
-     $alcode = preg_replace("#\[color\=(\#[0-9A-F]{0,6}|[A-z]+)\](.*)\[\/color\]#Ui", "<span style=\"color: $1;\">$2</span>", $alcode);
-     //$alcode = eregi_replace("\\[style=([^\\[]*)\\]","<span class=\"\\1\">",$alcode);
-     //$alcode = str_replace("[/style]", "</span>", $alcode);
-     $alcode = preg_replace("(\[size=(.+?)\](.+?)\[\/size\])is", "<span style=\"font-size: $1px\">$2</span>", $alcode);
-     $alcode = preg_replace("#\[font\=(.*)\](.*)\[\/font\]#Ui", "<span style=\"font-family: $1;\">$2</span>", $alcode);
-     $alcode = preg_replace("#\[align\=(.*)\](.*)\[\/align\]#Ui", "<span style=\" $1;\">$2</span>", $alcode);
-     $alcode = str_replace("[move]", "<marquee>", $alcode);
-     $alcode = str_replace("[/move]", "</marquee>", $alcode);
-     $alcode = str_replace("[hr]", "<hr>", $alcode);
-     $alcode = str_replace("[img]", "<img src=\"", $alcode);
-     $alcode = str_replace("[/img]", "\" alt=''>", $alcode);
-     $alcode = str_replace("[sub]", "<sub>", $alcode);
-     $alcode = str_replace("[/sub]", "</sub>", $alcode);
-     $alcode = str_replace("[tt]", "<tt>", $alcode);
-     $alcode = str_replace("[/tt]", "</tt>", $alcode);
-     $alcode = str_replace("[sup]", "<sup>", $alcode);
-     $alcode = str_replace("[/sup]", "</sup>", $alcode);
-     $alcode = str_replace("[screenstar]", "", $alcode);
-     $alcode = str_replace("[/screenstar]", "", $alcode);
-     $alcode = str_replace("[frontpage]", "", $alcode);
-     $alcode = str_replace("[/frontpage]", "", $alcode);
-     $alcode = preg_replace("#\[b\](.+?)\[/b\]#is", "<b>\\1</b>", $alcode);
-     $alcode = preg_replace("#\[i\](.+?)\[/i\]#is", "<i>\\1</i>", $alcode);
-     $alcode = preg_replace("#\[u\](.+?)\[/u\]#is", "<u>\\1</u>", $alcode);
-     $alcode = preg_replace("#\[s\](.+?)\[/s\]#is", "<s>\\1</s>", $alcode);
-     $alcode = str_replace("[*]", "<li>", $alcode);
-     $alcode = str_replace("[list]", "<ul>", $alcode);
-     $alcode = str_replace("[/list]", "</ul>", $alcode);
-     $alcode = preg_replace("#\[email\=(.*)\](.*)\[\/email\]#Ui", "<a href=\"mailto: $1\">$2</a>", $alcode);
-     $alcode = preg_replace("#\[email\](.*)\[\/email\]#Ui", "<a href=\"mailto: $1\">$1</a>", $alcode);
-     $alcode = preg_replace("#\[hotspot\=(.*)\](.*)\[\/hotspot\]#Ui", "<a name=\"$1\">$2</a>", $alcode);
-     $alcode = str_replace("[quote]", "<blockquote><span class=\"12px\">quote:</span><hr>", $alcode);
-     $alcode = str_replace("[/quote]", "<hr></blockquote>", $alcode);
-     $alcode = str_replace("[code]", "<blockquote><pre>", $alcode);
-     $alcode = str_replace("[/code]", "</pre></blockquote>", $alcode);
-     $alcode = preg_replace("#\[url\](www\..+)\[\/url\]#i", "[url=http://$1]$1[/url]", $alcode);
-     $alcode = preg_replace("#\[url\=(www\..+)\](.*)\[\/url\]#i", "[url=http://$1]$2[/url]", $alcode);
-     $alcode = preg_replace("#\[url\=(.*)\](.*)\[\/url\]#Ui", "<a href=\"$1\" class=\"standard_tile_link_black\">$2</a>", $alcode);
-     $alcode = preg_replace("#\[url\](.*)\[\/url\]#Ui", "<a href=\"$1\" class=\"standard_tile_link_black\">$1</a>", $alcode);
-     $alcode = preg_replace("#\[hotspotUrl\=(.*)\](.*)\[\/hotspotUrl\]#Ui", "<a href=\"$1\" class=\"standard_tile_link_black\">$2</a>", $alcode);
-     $alcode = preg_replace("#(^|[\n ])([\w]+?://.*?[^ \"\n\r\t<]*)#is", "\\1<a href=\"\\2\" target=\"_blank\" class=\"standard_tile_link_black\">\\2</a>", $alcode);
-     $alcode = preg_replace("#(^|[\n ])((www|ftp)\.[\w\-]+\.[\w\-.\~]+(?:/[^ \"\t\n\r<]*)?)#is", "\\1<a href=\"http://\\2\" target=\"_blank\" class=\"standard_tile_link_black\">\\2</a>", $alcode);
+function InsertALCode($alcode) {
+    $alcode = preg_replace("#\[color\=(\#[0-9A-F]{0,6}|[A-z]+)\](.*)\[\/color\]#Ui", "<span style=\"color: $1;\">$2</span>", $alcode);
+    //$alcode = eregi_replace("\\[style=([^\\[]*)\\]","<span class=\"\\1\">",$alcode);
+    //$alcode = str_replace("[/style]", "</span>", $alcode);
+    $alcode = preg_replace("(\[size=(.+?)\](.+?)\[\/size\])is", "<span style=\"font-size: $1px\">$2</span>", $alcode);
+    $alcode = preg_replace("#\[font\=(.*)\](.*)\[\/font\]#Ui", "<span style=\"font-family: $1;\">$2</span>", $alcode);
+    $alcode = preg_replace("#\[align\=(.*)\](.*)\[\/align\]#Ui", "<span style=\" $1;\">$2</span>", $alcode);
+    $alcode = str_replace("[move]", "<marquee>", $alcode);
+    $alcode = str_replace("[/move]", "</marquee>", $alcode);
+    $alcode = str_replace("[hr]", "<hr>", $alcode);
+    $alcode = str_replace("[img]", "<img src=\"", $alcode);
+    $alcode = str_replace("[/img]", "\" alt=''>", $alcode);
+    $alcode = str_replace("[sub]", "<sub>", $alcode);
+    $alcode = str_replace("[/sub]", "</sub>", $alcode);
+    $alcode = str_replace("[tt]", "<tt>", $alcode);
+    $alcode = str_replace("[/tt]", "</tt>", $alcode);
+    $alcode = str_replace("[sup]", "<sup>", $alcode);
+    $alcode = str_replace("[/sup]", "</sup>", $alcode);
+    $alcode = str_replace("[screenstar]", "", $alcode);
+    $alcode = str_replace("[/screenstar]", "", $alcode);
+    $alcode = str_replace("[frontpage]", "", $alcode);
+    $alcode = str_replace("[/frontpage]", "", $alcode);
+    $alcode = preg_replace("#\[b\](.+?)\[/b\]#is", "<b>\\1</b>", $alcode);
+    $alcode = preg_replace("#\[i\](.+?)\[/i\]#is", "<i>\\1</i>", $alcode);
+    $alcode = preg_replace("#\[u\](.+?)\[/u\]#is", "<u>\\1</u>", $alcode);
+    $alcode = preg_replace("#\[s\](.+?)\[/s\]#is", "<s>\\1</s>", $alcode);
+    $alcode = str_replace("[*]", "<li>", $alcode);
+    $alcode = str_replace("[list]", "<ul>", $alcode);
+    $alcode = str_replace("[/list]", "</ul>", $alcode);
+    $alcode = preg_replace("#\[email\=(.*)\](.*)\[\/email\]#Ui", "<a href=\"mailto: $1\">$2</a>", $alcode);
+    $alcode = preg_replace("#\[email\](.*)\[\/email\]#Ui", "<a href=\"mailto: $1\">$1</a>", $alcode);
+    $alcode = preg_replace("#\[hotspot\=(.*)\](.*)\[\/hotspot\]#Ui", "<a name=\"$1\">$2</a>", $alcode);
+    $alcode = str_replace("[quote]", "<blockquote><span class=\"12px\">quote:</span><hr>", $alcode);
+    $alcode = str_replace("[/quote]", "<hr></blockquote>", $alcode);
+    $alcode = str_replace("[code]", "<blockquote><pre>", $alcode);
+    $alcode = str_replace("[/code]", "</pre></blockquote>", $alcode);
+    $alcode = preg_replace("#\[url\](www\..+)\[\/url\]#i", "[url=http://$1]$1[/url]", $alcode);
+    $alcode = preg_replace("#\[url\=(www\..+)\](.*)\[\/url\]#i", "[url=http://$1]$2[/url]", $alcode);
+    $alcode = preg_replace("#\[url\=(.*)\](.*)\[\/url\]#Ui", "<a href=\"$1\" class=\"standard_tile_link_black\">$2</a>", $alcode);
+    $alcode = preg_replace("#\[url\](.*)\[\/url\]#Ui", "<a href=\"$1\" class=\"standard_tile_link_black\">$1</a>", $alcode);
+    $alcode = preg_replace("#\[hotspotUrl\=(.*)\](.*)\[\/hotspotUrl\]#Ui", "<a href=\"$1\" class=\"standard_tile_link_black\">$2</a>", $alcode);
+    $alcode = preg_replace("#(^|[\n ])([\w]+?://.*?[^ \"\n\r\t<]*)#is", "\\1<a href=\"\\2\" target=\"_blank\" class=\"standard_tile_link_black\">\\2</a>", $alcode);
+    $alcode = preg_replace("#(^|[\n ])((www|ftp)\.[\w\-]+\.[\w\-.\~]+(?:/[^ \"\t\n\r<]*)?)#is", "\\1<a href=\"http://\\2\" target=\"_blank\" class=\"standard_tile_link_black\">\\2</a>", $alcode);
 
-     return $alcode;
- }
+    return $alcode;
+}
 
 function BBCode($Text) {
     // Replace any html brackets with HTML Entities to prevent executing HTML or script
@@ -223,7 +223,6 @@ function date_to_timestamp($date_Year, $date_Month, $date_Day) {
     $timestamp = mktime(0, 0, 0, $date_Month, $date_Day, $date_Year);
     return $timestamp;
 }
-
 
 function filter($entry) {
     // Filter out strange characters like ^, $, &, change "it's" to "its"
@@ -503,7 +502,6 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
         $query_data   = $result->fetch_array(MYSQLI_BOTH);
         $section_name = $query_data['game_name'];
 
-
         if ($subsection == 'Game' or $subsection == 'File' or $subsection == 'Screenshot' or $subsection == 'Mag score' or $subsection == 'Box back'
             or $subsection == 'Box front' or $subsection == 'Review' or $subsection == 'Review comment' or $subsection == 'Music'
             or $subsection == 'Submission' or $subsection == 'Fact') {
@@ -756,7 +754,7 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
         if ($subsection == 'Interview' or $subsection == 'Screenshots') {
             $subsection_name = $section_name;
         }
-        
+
         if ($subsection == 'Comment') {
             //get game_id and interview_user_comments_id
             $query_user_comment = "SELECT interview_user_comments.interview_id,
@@ -775,7 +773,7 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
             $subsection_name = $query_data['ind_name'];
         }
     }
-    
+
     //  Everything we do for the Review section
     if ($section == 'Reviews') {
         if ($subsection == 'Comment') {
@@ -835,7 +833,6 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
         $result = $mysqli->query($query_menu_Set) or die("getting menu set name failed");
         $query_data   = $result->fetch_array(MYSQLI_BOTH);
         $section_name = $query_data['menu_sets_name'];
-
 
         if ($subsection == 'Menu set' or $subsection == 'Menu disk (multiple)') {
             $subsection_name = $section_name;
@@ -994,7 +991,6 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
 
     //  Everything we do for the MENU DISK
     if ($section == 'Menu disk') {
-        
         // get the name of the menu disk
         $sql_menus = "SELECT menu_disk.menu_sets_id,
                             menu_set.menu_sets_name,
@@ -1143,7 +1139,6 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
         }
 
         if ($subsection == 'Software' or $subsection == 'Chain' or $subsection == 'Doc' or $subsection == 'Authors') {
-                        
             //get the type of software
             $query_soft = "SELECT menu_types_main_id FROM menu_disk_title WHERE menu_disk_title_id = '$subsection_id'";
             $result = $mysqli->query($query_soft) or die("getting menu_type failed");
@@ -1221,7 +1216,7 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
                 $result = $mysqli->query($query_game) or die("getting game name failed");
                 $query_data      = $result->fetch_array(MYSQLI_BOTH);
                 $subsection_name = $query_data['game_name'];
-                                
+
                 if ($subsection == 'Authors') {
                 } else {
                     $subsection      = 'Game doc';
@@ -1245,7 +1240,7 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
                     $result = $mysqli->query($query_tool) or die("getting tool name failed");
                     $query_data      = $result->fetch_array(MYSQLI_BOTH);
                     $subsection_name = $query_data['tools_name'];
-                    
+
                     if ($subsection == 'Authors') {
                     } else {
                         $subsection      = 'Tool doc';
@@ -1320,7 +1315,7 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
             $subsection_name = $section_name;
         }
     }
-    
+
     //  Everything we do for the DOWNLOAD FORMAT SECTION
     if ($section == 'Format') {
         // get the name of the format
@@ -1333,7 +1328,7 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
             $subsection_name = $section_name;
         }
     }
-    
+
     //  Everything we do for the DOWNLOAD LINGO SECTION
     if ($section == 'Lingo') {
         // get the name of the lingo
@@ -1346,7 +1341,7 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
             $subsection_name = $section_name;
         }
     }
-    
+
     //  Everything we do for the DOWNLOAD OPTION SECTION
     if ($section == 'Option') {
         // get the name of the lingo
@@ -1359,7 +1354,7 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
             $subsection_name = $section_name;
         }
     }
-    
+
     //  Everything we do for the TOS VERSION SECTION
     if ($section == 'TOS') {
         // get the name of the lingo
@@ -1372,7 +1367,7 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
             $subsection_name = $section_name;
         }
     }
-    
+
     //  Everything we do for the TRAINER SECTION
     if ($section == 'Trainer') {
         // get the name of the trainer option
@@ -1385,7 +1380,7 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
             $subsection_name = $section_name;
         }
     }
-    
+
     //  Everything we do for the DOWNLOADS EDIT SECTION
     if ($section == 'Downloads') {
         // get the name of the game
@@ -1402,7 +1397,7 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
             $subsection_name = $query_data['download_option'];
             $subsection_id = $query_data['download_options_id'];
         }
-        
+
         if ($subsection == 'TOS') {
             // get the name of the option
             $query_tos = "SELECT * FROM tos_version
@@ -1412,19 +1407,19 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
             $subsection_name = $query_data['tos_version'];
             $subsection_id = $query_data['tos_version_id'];
         }
-        
+
         if ($subsection == 'Details') {
             $subsection_name = $section_name;
         }
-        
+
         if ($subsection == 'Menudisk') {
             $subsection_name = $section_name;
         }
-        
+
         if ($subsection == 'Chain') {
             $subsection_name = $section_name;
         }
-        
+
         if ($subsection == 'Trainer') {
             // get the name of the trainer option
             $query_trainer = "SELECT * FROM trainer_options
@@ -1434,7 +1429,7 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
             $subsection_name = $query_data['trainer_options'];
             $subsection_id = $query_data['trainer_options_id'];
         }
-        
+
         if ($subsection == 'Crew') {
             // get the name of the trainer option
             $query_crew = "SELECT * FROM crew WHERE
@@ -1443,7 +1438,7 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
             $query_data   = $result->fetch_array(MYSQLI_BOTH);
             $subsection_name = $query_data['crew_name'];
         }
-        
+
         if ($subsection == 'Authors') {
             // get the name of the author option
             $query_ind = "SELECT ind_name FROM individuals WHERE
@@ -1453,7 +1448,7 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
             $subsection_name = $query_data['ind_name'];
         }
     }
-    
+
     //  Everything we do for the BUG REPORT TYPE SECTION
     if ($section == 'Bug type') {
         // get the name of the type
@@ -1466,13 +1461,13 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
             $subsection_name = $section_name;
         }
     }
-    
+
     //  Everything we do for the BUG REPORT SECTION
     if ($section == 'Bug') {
         $subsection_name = ("Bug report ID " . $subsection_id);
         $section_name    = ("Bug report ID " . $subsection_id);
     }
-    
+
     $section_name    = $mysqli->real_escape_string($section_name);
     $subsection_name = $mysqli->real_escape_string($subsection_name);
 

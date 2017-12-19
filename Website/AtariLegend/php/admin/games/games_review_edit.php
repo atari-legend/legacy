@@ -120,11 +120,11 @@ if (isset($reviewid) and isset($game_id)) {
 
     $smarty->assign("screenshots_nr", $i);
     $smarty->assign("reviewid", $reviewid);
-    
+
     if (isset($action)) {
         $smarty->assign("action", $action);
     }
-    
+
     $smarty->assign("user_id", $_SESSION['user_id']);
 
     //Send all smarty variables to the templates

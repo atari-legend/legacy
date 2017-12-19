@@ -47,7 +47,6 @@ $sql_author_info = "SELECT  individuals.ind_id,
 $query_author_info = $mysqli->query($sql_author_info) or die("problem getting author info");
 
 while ($query = $query_author_info->fetch_array(MYSQLI_BOTH)) {
-
     // This smarty is used for for the menu_disk_title credits
     $smarty->append('title_credits', array(
         'ind_id' => $query['ind_id'],

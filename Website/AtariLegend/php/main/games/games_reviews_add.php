@@ -33,7 +33,6 @@ include("../../common/tiles/tile_bug_report.php");
 $sql_game = $mysqli->query("SELECT * FROM game WHERE game.game_id='$game_id'")
                             or die("Error getting game info");
 
-
 while ($game_info = $sql_game->fetch_array(MYSQLI_BOTH)) {
     $smarty->assign('game_info', array(
         'game_name' => $game_info['game_name'],

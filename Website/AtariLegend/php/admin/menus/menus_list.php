@@ -49,7 +49,6 @@ $result_menus = $mysqli->query($sql_menus) or die('Error: ' . mysqli_error($mysq
 $rows = $result_menus->num_rows;
 if ($rows > 0) {
     while ($row = $result_menus->fetch_array(MYSQLI_BOTH)) {
-
         //check how many menus there are for the game
         $numbermenus = $mysqli->query("SELECT count(*) as count FROM menu_disk WHERE menu_sets_id='$row[menu_sets_id]'") or die('Error: ' . mysqli_error($mysqli));
 

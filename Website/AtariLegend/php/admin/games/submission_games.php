@@ -85,24 +85,23 @@ while ($query_submission = $sql_submission->fetch_array(MYSQLI_BOTH)) {
 
         $sql_game = $query_game->fetch_array(MYSQLI_BOTH);
     }
-    
+
     //check if there are screenshot added to the submission
     $query_screenshots_submission = $mysqli->query("SELECT * FROM screenshot_main
                                         LEFT JOIN screenshot_game_submitinfo ON (screenshot_main.screenshot_id = screenshot_game_submitinfo.screenshot_id)
                                         WHERE screenshot_game_submitinfo.game_submitinfo_id = '$query_submission[game_submitinfo_id]'") or die("Error - Couldn't query submitinfo screenshots");
-    
+
     while ($sql_screenshots_submission = $query_screenshots_submission->fetch_array(MYSQLI_BOTH)) {
         $new_path = $game_submit_screenshot_path;
         $new_path .= $sql_screenshots_submission['screenshot_id'];
         $new_path .= ".";
         $new_path .= $sql_screenshots_submission['imgext'];
-        
+
         $smarty->append(
-        
+
             'submission_screenshots',
-         array('game_submitinfo_id' => $sql_screenshots_submission['game_submitinfo_id'],
-           'game_submitinfo_screenshot' => $new_path)
-        
+            array('game_submitinfo_id' => $sql_screenshots_submission['game_submitinfo_id'],
+            'game_submitinfo_screenshot' => $new_path)
         );
     }
 

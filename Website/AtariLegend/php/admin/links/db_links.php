@@ -65,7 +65,6 @@ if (isset($action) and $action == "add_cat") {
     header("Location: ../links/link_mod.php?website_id=$website_id");
 }
 
-
 //delete category from website (only website_cat_cross)
 if (isset($action) and $action == "delete_category") {
     //****************************************************************************************
@@ -80,7 +79,6 @@ if (isset($action) and $action == "delete_category") {
     $_SESSION['edit_message'] = "Link Category deleted from database";
     header("Location: ../links/link_mod.php?website_id=$website_id");
 }
-
 
 // LINK DELETE AREA //
 if (isset($action) and $action == "link_delete") {

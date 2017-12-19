@@ -22,15 +22,15 @@ include("../../vendor/phpmailer/phpmailer/PHPMailerAutoload.php");
 if (isset($action) and $action == 'confirm') {
     //when the confirmation email link is pressed we enter this part of the code. We check if the user exists and set the account to active.
     //Then we auto log in!
-   
+
     if (isset($_GET['usn']) && !empty($_GET['usn']) and isset($_GET['pwd']) && !empty($_GET['pwd'])) {
         // Verify data
         $query_user = $mysqli->query("SELECT * FROM users WHERE userid='$_GET[usn]' AND password='$_GET[pwd]' AND inactive='1'") or die(mysql_error());
         $match  = $query_user->num_rows;
-        
+
         if ($match > 0) {
             $query_update_user = $mysqli->query("UPDATE users SET inactive = '0' WHERE userid = '$_GET[usn]'") or die("Couldn't Update user table");
-           
+
             $_SESSION['edit_message'] = "Account succesfully updated - Please log in";
             header("Location: ../../main/front/front.php");
         } else {
@@ -58,7 +58,7 @@ if (isset($action) and $action == 'confirm') {
             $user_name = $mysqli->real_escape_string($_POST['userid']);
             $query_rows = $mysqli->query("select userid from users where userid = '$user_name'");
             $number = $query_rows->num_rows;
-            
+
             if ($number > 0) {
                 $_SESSION['edit_message'] = "Sorry, the username is already taken, please pick another one";
                 header("Location: ../../main/front/front.php?action=register");
@@ -76,7 +76,7 @@ if (isset($action) and $action == 'confirm') {
                         //check if the email already exists
                         $query_rows = $mysqli->query("select * from users where email = '$_POST[email]'");
                         $number = $query_rows->num_rows;
-                        
+
                         if ($number > 0) {
                             $_SESSION['edit_message'] =  "Email address already exists in database!";
                             header("Location: ../../main/front/front.php?action=register");
@@ -88,27 +88,26 @@ if (isset($action) and $action == 'confirm') {
                             $random_salt = hash('sha512', uniqid(mt_rand(1, mt_getrandmax()), true));//create random salt
                             $update_password = hash('sha512', $sha512 . $random_salt); // Create salted password
                             $timestamp = time();
-             
+
                             $sdbquery = $mysqli->query("INSERT INTO users (userid, password, sha512_password, salt, email, permission, join_date, last_visit, user_website, user_fb, user_twitter, user_af, inactive) VALUES ('$user_name', '$md5pass', '$update_password', '$random_salt', '$email', 2, '$timestamp', '$timestamp', '$website', '$fb_profile', '$twitter_profile', '$af_profile', '1')") or die("Couldn't insert user into users table");
                             $new_user_id = $mysqli->insert_id;
-                            
+
                             //Let's create an email for verification
                             // Create a url which we will direct them to reset their password
                             $pwrurl = $confirm_account_link.'&pwd='.$md5pass.'&usn='.$user_name;
-                  
+
                             $mail = new PHPMailer;
 
                             $start = microtime(true);
                             $i     = 0;
-                   
+
                             $mail->AddAddress($email);
 
                             // Create Email
-                            
+
                             //We need to comment out this comment to have it to work from server, on localhost it runs with this command
                             //$mail->isSMTP(); // Set mailer to use SMTP
-                            
-                            
+
                             $mail->SMTPDebug  = 1;                            // enables SMTP debug information (for testing)
                             // 1 = errors and messages
                             // 2 = messages only
@@ -130,7 +129,7 @@ if (isset($action) and $action == 'confirm') {
                             $mail->isHTML(false); // Set email format to HTML
 
                             $mail->Subject = 'Atarilegend - Account confirmation';
-                            
+
                             // Mail them their key
                             $mailbody = "Dear user,\n\nIf this e-mail does not apply to you please ignore it. Please activate your account at www.atarilegend.com\n\nby clicking the link below. If you cannot click it, please paste it into your web browser's address bar.\n\n" . $pwrurl . "\n\nThanks,\nTEAM AL";
 
@@ -146,7 +145,7 @@ if (isset($action) and $action == 'confirm') {
                             }
 
                             $time_elapsed_secs = microtime(true) - $start;
-                            
+
                             create_log_entry('Users', $new_user_id, 'User', $new_user_id, 'Insert', $new_user_id);
                             $_SESSION['edit_message'] = "An email was sent to you. Please follow the link to activate the account";
                             header("Location: ../../main/front/front.php");
@@ -162,6 +161,4 @@ if (isset($action) and $action == 'confirm') {
 $smarty->display("file:".$mainsite_template_folder."frontpage.html");
 
 //close the connection
-mysqli_close($mysqli)
-?>
-
+mysqli_close($mysqli);

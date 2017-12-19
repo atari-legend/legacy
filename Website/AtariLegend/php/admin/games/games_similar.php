@@ -11,7 +11,6 @@
  *
  ***************************************************************************/
 
-
 //load all common functions
 include("../../config/common.php");
 include("../../config/admin.php");

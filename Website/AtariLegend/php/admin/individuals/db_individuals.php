@@ -107,7 +107,6 @@ if (isset($ind_id) and isset($action) and $action == 'update') {
 // Add nicknames
 if (isset($ind_id) and isset($action) and $action == "add_nick") {
     if ($ind_nick != '') {
-        
         //First add an entry in the individuals table
         $stmt = $mysqli->prepare("INSERT INTO individuals (ind_name) VALUES (?)") or die($mysqli->error);
         $stmt->bind_param("s", $ind_nick) or die($mysqli->error);
@@ -133,7 +132,7 @@ if (isset($ind_id) and isset($action) and $action == "delete_nick") {
 
         $mysqli->query("DELETE FROM individual_nicks WHERE nick_id='$nick_id'") or die("Failed to delete nickname - indvidual_nicks table");
         $mysqli->query("DELETE FROM individuals WHERE ind_id='$nick_id'") or die("Failed to delete nickname - indviduals table");
-        
+
         $_SESSION['edit_message'] = "Nickname succesfully deleted";
 
         header("Location: ../individuals/individuals_edit.php?ind_id=$ind_id");
@@ -173,7 +172,7 @@ if (isset($ind_id) and isset($action) and $action == 'delete_ind') {
                             header("Location: ../individuals/individuals_main.php");
                         } else {
                             create_log_entry('Individuals', $ind_id, 'Individual', $ind_id, 'Delete', $_SESSION['user_id']);
-                            
+
                             //first delete picture
                             $photo = $mysqli->query("SELECT ind_imgext FROM individual_text WHERE ind_id='$ind_id'");
                             list($ind_imgext) = $photo->fetch_row();
@@ -181,7 +180,7 @@ if (isset($ind_id) and isset($action) and $action == 'delete_ind') {
                             if ($ind_imgext != '') {
                                 unlink("$individual_screenshot_save_path$ind_id.$ind_imgext");
                             }
-                            
+
                             //Let's get all the nicknames
                             $nickname = $mysqli->query("SELECT * FROM individual_nicks where ind_id = '$ind_id'") or die("error getting nicknames");
 
@@ -190,7 +189,7 @@ if (isset($ind_id) and isset($action) and $action == 'delete_ind') {
                                 $sql = $mysqli->query("DELETE FROM individuals WHERE ind_id = $nick_id") or die("Failed to delete the nicks from this person");
                                 ;
                             }
-                            
+
                             //then delete the rest
                             $sql                      = $mysqli->query("DELETE FROM individuals WHERE ind_id = $ind_id") or die("Failed to delete individual");
                             ;

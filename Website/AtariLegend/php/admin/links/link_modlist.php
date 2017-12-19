@@ -53,7 +53,6 @@ while (list($category_id, $category_name) = $linkcategorysql->fetch_array(MYSQLI
         'selected' => $selected));
 }
 
-
 if (isset($catpick)) {
     $website_category_id=$catpick;
 }

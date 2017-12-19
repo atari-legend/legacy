@@ -119,7 +119,6 @@ $game_fact_screenshot_save_path="../../../data/images/game_fact_screenshots/";
 $music_game_path="../../data/music/games/";
 $music_game_save_path="../../../data/music/games/";
 
-
 //interview
 $interview_screenshot_path="../../data/images/interview_screenshots/";
 $interview_screenshot_save_path="../../../data/images/interview_screenshots/";

@@ -49,7 +49,6 @@ if (isset($action)) {
                                 WHERE review_user_comments.review_id = '$review_id'
                                 ORDER BY comments.timestamp desc") or die("Syntax Error! Couldn't not get the comments!");
 
-
     while ($query_comment = $sql_comment->fetch_array(MYSQLI_BOTH)) {
         $oldcomment = $query_comment['comment'];
         $oldcomment = nl2br($oldcomment);
