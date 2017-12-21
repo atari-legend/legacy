@@ -119,12 +119,8 @@ module.exports = function (grunt) {
         phpcs: {
             application: {
                 src: [
-                    '<%= webRoot %>php/main/**/*.php',
-                    '<%= webRoot %>php/admin/**/*.php',
-                    '<%= webRoot %>php/common/**/*.php',
-                    '<%= webRoot %>php/config/*.php',
-                    '<%= webRoot %>php/includes/*.php',
-                    '<%= webRoot %>php/lib/*.php'
+                    '<%= webRoot %>php/**/*.php',
+                    '!<%= webRoot %>php/{temp,vendor}/**/*.php'
                 ]
             },
             options: {
@@ -135,12 +131,8 @@ module.exports = function (grunt) {
         phpcbf: {
             application: {
                 src: [
-                    '<%= webRoot %>php/main/**/*.php',
-                    '<%= webRoot %>php/admin/**/*.php',
-                    '<%= webRoot %>php/common/**/*.php',
-                    '<%= webRoot %>php/config/*.php',
-                    '<%= webRoot %>php/includes/*.php',
-                    '<%= webRoot %>php/lib/*.php'
+                    '<%= webRoot %>php/**/*.php',
+                    '!<%= webRoot %>php/{temp,vendor}/**/*.php'
                 ]
             },
             options: {
