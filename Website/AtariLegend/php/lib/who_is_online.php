@@ -21,7 +21,7 @@ $sql_users = $mysqli->query("SELECT * FROM users
 
 while ($query_users = $sql_users->fetch_array(MYSQLI_BOTH)) {
     $nr_users = $nr_users + 1;
-    
+
     $smarty->append('users_online', array(
         'user_id' => $query_users['user_id'],
         'user_name' => $query_users['userid']
@@ -39,7 +39,7 @@ $sql_users = $mysqli->query("SELECT * FROM users
 
 while ($query_users = $sql_users->fetch_array(MYSQLI_BOTH)) {
     $nr_users_24 = $nr_users_24 + 1;
-    
+
     $smarty->append('users_24h', array(
         'user_id' => $query_users['user_id'],
         'user_name' => $query_users['userid']

@@ -14,8 +14,7 @@
  * User management functions
  *********************************************************************************/
 
-function sec_session_start()
-{
+function sec_session_start() {
     $session_name = 'sec_session_id'; // Set a custom session name
     $secure       = SECURE;
     // This stops JavaScript being able to access the session id.
@@ -34,8 +33,7 @@ function sec_session_start()
     session_regenerate_id(true); // regenerated the session, delete the old one.
 }
 
-function md5_test($userid, $md5_password, $password, $mysqli)
-{
+function md5_test($userid, $md5_password, $password, $mysqli) {
     // Using prepared statements means that SQL injection is not possible.
     if ($stmt = $mysqli->prepare("SELECT user_id, userid, password
         FROM users
@@ -94,8 +92,7 @@ function md5_test($userid, $md5_password, $password, $mysqli)
     }
 }
 
-function login($userid, $password, $mysqli)
-{
+function login($userid, $password, $mysqli) {
     // Using prepared statements means that SQL injection is not possible.
     if ($stmt = $mysqli->prepare("SELECT user_id, userid, sha512_password, salt, permission, avatar_ext, inactive
         FROM users
@@ -151,9 +148,7 @@ function login($userid, $password, $mysqli)
     }
 }
 
-
-function checkbrute($user_id, $mysqli)
-{
+function checkbrute($user_id, $mysqli) {
     // Get timestamp of current time
     $now = time();
 
@@ -179,8 +174,7 @@ function checkbrute($user_id, $mysqli)
     }
 }
 
-function login_check($mysqli)
-{
+function login_check($mysqli) {
 
     //check for cookie
     //I can't do the extra pwd check sadly enough as I don't seem to have the know how.
@@ -269,8 +263,7 @@ function login_check($mysqli)
     }
 }
 
-function esc_url($url)
-{
+function esc_url($url) {
     if ('' == $url) {
         return $url;
     }

@@ -53,7 +53,6 @@ $v_reviewed_games = $rows;
 $smarty->assign('review_nr', $v_reviews);
 $smarty->assign('game_review_nr', $v_reviewed_games);
 
-
 /*
  ************************************************************************************************
  This is the game review main page
@@ -66,7 +65,6 @@ if (empty($action)) {
     $action = "";
 }
 if (isset($action) and $action == 'search') {
-
     //check the $gamebrowse select
     if ($gamebrowse == "") {
         $gamebrowse_select = "";

@@ -143,7 +143,6 @@ if (isset($action) and $action == "edit_disk_box" and $menu_disk_id !== '') {
         ));
     }
 
-
     // Get the menudisk credits
     $sql_individuals = "SELECT
                         individuals.ind_id,
@@ -161,7 +160,7 @@ if (isset($action) and $action == "edit_disk_box" and $menu_disk_id !== '') {
     $query_ind_id = "";
 
     while ($query = $query_individual->fetch_array(MYSQLI_BOTH)) {
-        if ($query_ind_id <> $query['ind_id']) {
+        if ($query_ind_id != $query['ind_id']) {
             $sql_ind_nicks = $mysqli->query("SELECT nick_id FROM individual_nicks WHERE ind_id = '$query[ind_id]'");
 
             while ($fetch_ind_nicks = $sql_ind_nicks->fetch_array(MYSQLI_BOTH)) {
@@ -437,7 +436,6 @@ if (isset($action) and $action == "add_intro_credit") {
 //
 if (isset($action) and $action == "ind_gen_browse") {
     if (isset($query)) {
-
         if ($query == "num") {
             $query_temporary = $mysqli->query("SELECT ind_id,ind_name FROM individuals WHERE ind_name REGEXP '^[0-9].*' ORDER BY ind_name ASC") or die('Error: ' . mysqli_error($mysqli));
         } else {
@@ -459,11 +457,9 @@ if (isset($action) and $action == "ind_gen_browse") {
 //
 if (isset($action) and $action == "ind_gen_search") {
     if (isset($query) and $query !== "empty") {
-
         $query = $mysqli->real_escape_string($query);
         $query_temporary = $mysqli->query("SELECT ind_id,ind_name FROM individuals WHERE ind_name LIKE '%$query%' ORDER BY ind_name ASC") or die('Error: ' . mysqli_error($mysqli));
     } elseif ($query == "empty") {
-
         $query_temporary = $mysqli->query("SELECT ind_id,ind_name FROM individuals WHERE ind_name LIKE '%a%' ORDER BY ind_name ASC") or die("Failed to query temporary table");
     }
 

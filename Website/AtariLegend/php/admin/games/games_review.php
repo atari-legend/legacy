@@ -85,7 +85,6 @@ $az_output = az_dropdown_output(0);
 $smarty->assign('az_value', $az_value);
 $smarty->assign('az_output', $az_output);
 
-
 $smarty->assign('review_nr', $v_reviews);
 $smarty->assign('game_review_nr', $v_reviewed_games);
 $smarty->assign("user_id", $_SESSION['user_id']);

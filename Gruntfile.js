@@ -119,12 +119,32 @@ module.exports = function (grunt) {
         phpcs: {
             application: {
                 src: [
-                    // '<%= webRoot %>php/admin/menus/ajax_adddocs_menus.php',
-                    '<%= webRoot %>php/main/**/*.php'
+                    '<%= webRoot %>php/**/*.php',
+                    '!<%= webRoot %>php/{temp,vendor}/**/*.php'
+                ]
+            },
+            options: {
+                standard: 'PSR2',
+                severity: 3
+            }
+        },
+        phpcbf: {
+            application: {
+                src: [
+                    '<%= webRoot %>php/**/*.php',
+                    '!<%= webRoot %>php/{temp,vendor}/**/*.php'
                 ]
             },
             options: {
                 standard: 'PSR2'
+            }
+        },
+        phpcsfixer: {
+            application: {
+                dir: []
+            },
+            options: {
+                configfile: '.php_cs'
             }
         },
         csscomb: {
@@ -164,11 +184,12 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-pleeease');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-phpcs');
+    grunt.loadNpmTasks('grunt-phpcbf');
     grunt.loadNpmTasks('grunt-sass-lint');
-    grunt.loadNpmTasks('grunt-stylelint');
     grunt.loadNpmTasks('grunt-eslint');
     grunt.loadNpmTasks('grunt-lintspaces');
     grunt.loadNpmTasks('grunt-csscomb');
+    grunt.loadNpmTasks('grunt-php-cs-fixer');
 
     // Default task(s).
     grunt.registerTask('default', ['eslint:application', 'lintspaces', 'sass', 'pleeease']);
@@ -176,4 +197,6 @@ module.exports = function (grunt) {
     grunt.registerTask('sass-lint', ['sasslint']);
     grunt.registerTask('css-fix', ['csscomb']);
     grunt.registerTask('phpcheck', ['phpcs']);
+    grunt.registerTask('phpfixer', ['phpcbf']);
+    grunt.registerTask('phpfix', ['phpcsfixer']);
 };
