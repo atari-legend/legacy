@@ -16,7 +16,7 @@
 //*********************************************************************************************
 
 //Select the screenstar info from the DB
-$query_screenstar = $mysqli->query("SELECT 
+$query_screenstar = $mysqli->query("SELECT
 					game.game_name,
 					game.game_id,
 					review_main.review_text,

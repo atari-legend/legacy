@@ -18,7 +18,7 @@
 //*********************************************************************************************
 
 //Get the latest reviews
-$query_recent_reviews = $mysqli->query("SELECT 
+$query_recent_reviews = $mysqli->query("SELECT
 						review_game.review_id,
 						review_game.game_id,
 						review_main.review_edit,
