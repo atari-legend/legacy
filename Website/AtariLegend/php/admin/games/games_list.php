@@ -121,7 +121,6 @@ $RESULTAKA = "SELECT
       LEFT JOIN game_year on (game_year.game_id = game.game_id)
      WHERE ";
 
-
 if (empty($action)) {
     $action = '';
 }
@@ -187,7 +186,7 @@ if (isset($action) and $action == "search") {
         $falcon_enhanced_select = " AND game_falcon_enhan.falcon_enhanced =$falcon_enhanced";
         $smarty->assign('games_falcon_enhanced', '1');
     }
-    
+
     if (isset($falcon_rgb) and $falcon_rgb == "1") {
         $falcon_rgb_select = " AND game_falcon_rgb.falcon_rgb =$falcon_rgb";
         $smarty->assign('games_falcon_rgb', '1');
@@ -250,7 +249,6 @@ if (isset($action) and $action == "search") {
     if (isset($stac) and $stac == "1") {
         $stac_select = " AND game_stac.stac =$stac";
     }
-
 
     //Before we start the build the query, we check if there is at least
     //one search field filled in or used!
@@ -404,7 +402,6 @@ if (isset($action) and $action == "search") {
                 }
                 $RESULTAKA .= ' GROUP BY game_aka.game_id, game_aka.aka_name HAVING COUNT(DISTINCT game_aka.game_id, game_aka.aka_name) = 1';
                 $RESULTAKA .= ' ORDER BY game_aka.aka_name ASC';
-
 
                 $mysqli->query("CREATE TEMPORARY TABLE temp ENGINE=MEMORY $RESULTGAME") or die(mysqli_error());
                 $mysqli->query("INSERT INTO temp $RESULTAKA") or die(mysqli_error());

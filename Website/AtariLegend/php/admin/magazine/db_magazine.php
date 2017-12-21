@@ -78,7 +78,6 @@ if (isset($action) and $action == "coverscan_upload") {
         // Insert the image extention to the database.
         $sdbquery = $mysqli->query("UPDATE magazine_issue SET magazine_issue_imgext='$imgext' WHERE magazine_issue_id='$magazine_issue_id'") or die("ERROR! Couldn't insert extension");
 
-
         // Rename the uploaded file to its issue autoincrement number and move it to its proper place.
         $file_data = rename($_FILES['coverscan']['tmp_name'], "$magazine_scan_path$magazine_issue_id.$imgext") or die("ERROR couldn't upload and move file!!");
 
@@ -106,7 +105,6 @@ if (isset($action) and $action == "delete_coverscan") {
     }
 
     $sdbquery = $mysqli->query("UPDATE magazine_issue SET magazine_issue_imgext='' WHERE magazine_issue_id='$magazine_issue_id'") or die("ERROR! Couldn't delete extension");
-
 
     mysqli_close($mysqli);
 

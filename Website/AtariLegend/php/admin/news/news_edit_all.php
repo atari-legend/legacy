@@ -22,7 +22,6 @@ include("../../config/admin.php");
 //load the search fields of the quick search side menu
 include("../../admin/games/quick_search_games.php");
 
-
 if (empty($v_linkback)) {
     $v_linkback = '';
 }

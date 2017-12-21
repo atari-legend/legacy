@@ -53,7 +53,7 @@ if (isset($action) and $action == "email_user") {
 
         //We need to comment out this comment to have it to work from server, on localhost it runs with this command
         //$mail->isSMTP(); // Set mailer to use SMTP
-       
+
         //$mail->SMTPDebug  = 2;                            // enables SMTP debug information (for testing)
         // 1 = errors and messages
         // 2 = messages only

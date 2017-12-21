@@ -63,7 +63,6 @@ if ($extraVar == 'publisher') {
     }
 }
 
-
 if ($extraVar == 'developer') {
     //Get the results
     $result = $mysqli->query("SELECT pub_dev.pub_dev_name

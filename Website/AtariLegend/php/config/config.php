@@ -54,10 +54,10 @@ $smarty->cache_dir = '../../../php/temp/smarty/cache/';
 define("CAN_REGISTER", "any");
 define("DEFAULT_ROLE", "member");
 
-define("SECURE", FALSE);    // FOR DEVELOPMENT ONLY!!!!
+define("SECURE", false);    // FOR DEVELOPMENT ONLY!!!!
 
 //***************************************************************
-// Mail server variables -- change these is we change server! 
+// Mail server variables -- change these is we change server!
 //***************************************************************
 
 //GMAIL SERVER for testing
@@ -119,7 +119,6 @@ $game_fact_screenshot_save_path="../../../data/images/game_fact_screenshots/";
 $music_game_path="../../data/music/games/";
 $music_game_save_path="../../../data/music/games/";
 
-
 //interview
 $interview_screenshot_path="../../data/images/interview_screenshots/";
 $interview_screenshot_save_path="../../../data/images/interview_screenshots/";
@@ -159,4 +158,3 @@ $magazine_scan_path="../../data/images/magazine_scans/";
 //users
 $user_avatar_path="../../data/images/user_avatars/";
 $user_avatar_save_path="../../../data/images/user_avatars/";
-?>

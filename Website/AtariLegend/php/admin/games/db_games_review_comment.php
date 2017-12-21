@@ -4,7 +4,7 @@
  *                            ---------------------------------
  *   begin                : Wednesday, August 23, 2017
  *   copyright            : (C) 2017 Atari Legend
- *   email                : 
+ *   email                :
  *   actual update        : re-creation of code from scratch into new file.
  *
  *   Id: db_games_review_comment.php,v 0.1 2017/08/23 STG
@@ -23,9 +23,8 @@ if ($action == "edit_reviews_comment") {
     //****************************************************************************************
 
     if (isset($comment_text) and isset($comment_id)) {
-        
         $comment_text = $mysqli->real_escape_string($comment_text);
-        
+
         $mysqli->query("UPDATE comments SET comment='$comment_text' WHERE comments_id='$comment_id'") or die("couldn't update comments table");
 
         create_log_entry('Reviews', $comment_id, 'Comment', $comment_id, 'Update', $_SESSION['user_id']);
@@ -39,7 +38,6 @@ if ($action == "edit_reviews_comment") {
         header("Location: ../games/games_review_comment.php?v_counter=$v_counter");
     }
 }
-
 
 // Delete
 if ($action == "delete_comment") {

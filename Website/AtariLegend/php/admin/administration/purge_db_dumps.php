@@ -30,7 +30,6 @@ $oldest_date->sub(new DateInterval(PURGE_INTERVAL));
 echo "Backups older than ".$oldest_date->format("Y-m-d")." will be purged.\n\n";
 
 foreach (scandir($path) as $file) {
-
     if (preg_match("/\d{4}-\d{2}-\d{2}\.sql\.gz/", $file, $matches)) {
         $filedate = new DateTime(basename($file, ".sql.gz"));
         $filepath = $path."/".$file;
@@ -43,4 +42,3 @@ foreach (scandir($path) as $file) {
         }
     }
 }
-?>
