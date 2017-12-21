@@ -227,6 +227,14 @@ img {
     text-align: left;
 }
 
+.glyph_align_right {
+    float: right;
+    font-size: 10pt;
+    font-style: italic;
+    font-weight: 100;
+    color: $bg_color;
+}
+
 .standard_tile_input {
     display: block;
     width: 85%;

@@ -175,7 +175,7 @@ function FactEditable(game_id,game_fact_id) {
                 <a style="cursor: pointer;" onClick="SaveEditable({$line.game_id},{$line.game_fact_id})" class="left_nav_link"><i class="fa fa-floppy-o fa-border fa-pull-right" id="fact_save_icon{$line.game_fact_id}" aria-hidden="true" title="Click to save fact" style="display:none;margin-bottom:5px;"></i></a>
                 <br>
                 <br>
-                <div id="latest_fact_edit{$line.game_fact_id}"><div id="games_detail_review_main_text">{$line.game_fact}</div></div>
+                <div id="latest_fact_edit{$line.game_fact_id}"><div class="standard_link_color">{$line.game_fact}</div></div>
                 <div class="centered_fieldset">
                     <input type="button" accesskey="b" name="addbbcode0" value="B" onclick="bbstyle(0,'fact_input{$line.game_fact_id}')" style="display:none;" id="bb_b{$line.game_fact_id}">
                     <input type="button" accesskey="u" name="addbbcode4" value="U" onclick="bbstyle(4,'fact_input{$line.game_fact_id}')" style="display:none;" id="bb_u{$line.game_fact_id}">
