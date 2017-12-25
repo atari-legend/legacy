@@ -43,7 +43,7 @@ if (isset($action) and $action == 'confirm') {
     }
 } else {
     // Make sure all fields were entered
-    if (!$_POST['userid'] || !$_POST['password'] || !$_POST['password_again'] || !$_POST['email']) {
+    if (!$_POST['userid'] || !$_POST['password'] || !$_POST['password_again'] || !$_POST['email'] || !isset($_POST['accept_license']) || $_POST['accept_license'] !== "true") {
         $_SESSION['edit_message'] = "You didn't fill in a required field.";
         header("Location: ../../main/front/front.php?action=register");
     } else {

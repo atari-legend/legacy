@@ -64,6 +64,13 @@
     text-align: center;
 }
 
+.register_input div {
+    color: white;
+    width: 70%;
+    margin: auto;
+    margin-top: 20px;
+}
+
 //*----------------------------------------------------------
 //logon tile --> front page --> Not used anymore
 //------------------------------------------------------------ */
@@ -356,6 +363,12 @@
     margin-right: auto;
     margin-bottom: 5px;
     margin-left: auto;
+}
+
+footer img.license {
+    margin-left: 10px;
+    display: inline;
+    vertical-align: top;
 }
 
 //*----------------------------------------------------------

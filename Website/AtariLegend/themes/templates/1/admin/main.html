@@ -381,7 +381,7 @@
             <div class="footer_logo">
                 <br><br><br>
                 <div class="footer_logo_image"></div>
-                <h3>&copy; copyright 2004 - {'Y'|date} </h3>
+                <h3>&copy; copyright 2004 - {'Y'|date} <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"><img class="license" src="{$style_dir}images/cc-by-nc-sa.png" alt="Creative Commons License"></a></h3>
             </div>
         </footer>
         <div class="scroll-top-wrapper "> <!--back to top link -->
@@ -399,7 +399,7 @@
             <script> <!-- script needed for the side menu -->
                 $( document ).ready(function() {
                     $.notify_osd.create({
-                        'text'        : '{$edit_message}',             // notification message
+                        'text'        : '{$edit_message|escape:'quotes'}',             // notification message
                         'icon'        : '{$style_dir}/images/osd_icons/star.png', // icon path, 48x48
                         'sticky'      : false,             // if true, timeout is ignored
                         'timeout'     : 4,                 // disappears after 6 seconds
