@@ -205,11 +205,11 @@ function DeleteEditable(comment_id,user_id,type) {
         <div class="standard_list_entry">
             <div id="latest_comments_all">
                 <div class="games_main_detail_comments_container">
-                    <table class="standard_table_list_comments">
+                    <table class="standard_table_list">
                     {if isset($type) and $type=='user'}  <!--user specific comments mode! -->
                         {if isset($comments)}
                         <tr>
-                            <td width="100%" colspan="2">
+                            <td class="w-100" colspan="2">
                                 <div class="standard_list_entry_news_text" style="text-align:center;">
                                     These are your latest game comments :
                                 </div>
@@ -267,7 +267,7 @@ function DeleteEditable(comment_id,user_id,type) {
                         {if isset($comments)}
                         {else}
                         <tr>
-                            <td width="100%">
+                            <td class="w-100">
                                 <div class="standard_list_entry_news_text" style="text-align:center;">
                                     You haven't written any game comments. Browse the library, share some memories and upgrade your karma stats ;-)
                                 </div>

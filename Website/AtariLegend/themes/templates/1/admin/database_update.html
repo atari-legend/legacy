@@ -12,26 +12,6 @@
 *}
 {extends file='1/admin/frontpage.html'}
 
-{* {block name=left_tile} *}
-
-<!-- <div class="standard_tile" id="{$left_nav}">
-    <h1>ADMIN</h1>
-        <div class="standard_tile_line"></div>
-        <div class="standard_list_entry">
-            <div class="standard_tile_text">
-                <ul class="standard_table_list">
-                    <li class="left_nav_section">Sections</li>
-                    <li><a href="../administration/database_update.php" class="left_nav_link">Database Update</a></li>
-                    <li><a href="../administration/construction.php" class="left_nav_link">Website Settings</a></li>
-                    <li><a href="../administration/construction.php" class="left_nav_link">Website Themes</a></li>
-                </ul>
-            </div>
-        </div>
-    <div class="standard_tile_line"></div>
-</div> -->
-
-{* {/block} *}
-
 {block name=java_script}
 <script>
 function UpdateDatabase(database_update_id)
@@ -69,7 +49,7 @@ function UpdateDatabase(database_update_id)
     <div class="standard_tile_line"></div>
     <div class="standard_tile_text">
         <div class="main_stats_container">
-            <table class="standard_table_list">
+            <table class="standard_table_list w-100">
             <tr>
                 <th class="th_db_id">ID</th>
                 <th class="th_db_description">Description</th>

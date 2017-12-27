@@ -124,10 +124,10 @@
                 <br>
                 <div class="standard_tile_line"></div>
                 <div id="author_list">
-                    <table class="standard_table_games_main_detail">
+                    <table class="standard_table_list w-100 no_border">
                     {foreach from=$recent_reviews item=line}
                         <tr>
-                        <td class="game_details_review_preview_left" style="width:20%;">
+                        <td class="w-20">
                             <div style="margin-left:10px;margin-right:10px;text-align:justify;margin-bottom:10px;margin-top:10px">
                                 <a href="../../includes/show_image.php?file={$line.review_img}&amp;resize=410,null,null,null" data-lightbox="image-1">
                                     <img src="../../includes/show_image.php?file={$line.review_img}&amp;resize=160,null,null,null" alt="{$line.review_name}" class="user_stats_img_dark" style="max-width:95%;">
@@ -135,7 +135,7 @@
                                 <br>
                             </div>
                         </td>
-                        <td class="game_details_review_preview_right" style="width:80%;">
+                        <td class="w-80">
                             <div style="margin-top:20px;margin-bottom:15px;margin-right:20px;margin-left:10px;">
                                 <h4 style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis">
                                     <a href="../games/games_reviews_detail.php?review_id={$line.review_id}" class="standard_tile_link">{$line.review_name}</a>

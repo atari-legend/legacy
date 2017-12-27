@@ -760,14 +760,7 @@
 }
 
 @media screen and (max-width: 799px) {
-    #welcome_cpanel {
-        width: 100%;
-        margin-bottom: 20px;
-    }
 
-    #user_stats {
-        width: 100%;
-    }
     #main_stats_position_front {
         width: 100%;
         float: left;
@@ -780,9 +773,6 @@
 }
 
 @media screen and (max-width: 480px) {
-    #welcome_cpanel {
-        width: 100%;
-    }
 
     #child_some_stats, #child_good_karma_chart, #child_bad_karma_chart, #child_good_karma, #child_bar, #child_line, #child_bad_karma {
         width: 100%;
@@ -925,12 +915,6 @@
     }
     .lastvisit_td {
         display: none;
-    }
-    #usersearch td {
-        text-align: center;
-    }
-    #usersearch th {
-        text-align: center;
     }
 }
 
@@ -1084,32 +1068,32 @@
 //Games list
 //------------------------------------------------------------ */
 @media screen and (min-width: 1281px) and (max-width: 1500px) {
-    .info_td, #info_th {
+    .info_td, .info_th {
         width: 15%;
     }
-    .year_td, #year_th {
+    .year_td, .year_th {
         width: 5%;
     }
 }
 
 @media screen and (max-width: 1174px) {
-    .info_td, .year_td, #info_th, #year_th {
+    .info_td, .year_td, .info_th, .year_th {
         display: none;
     }
 }
 
 @media screen and (max-width: 949px) {
-    .dev_td, #dev_th {
+    .dev_td, .dev_th {
         display: none;
     }
 }
 
 @media screen and (max-width: 600px) {
-    .pub_td, #pub_th {
+    .pub_td, .pub_th {
         display: none;
     }
 
-    #game_th, .game_td {
+    .game_th, .game_td {
         text-align: center;
     }
 }
@@ -1251,25 +1235,25 @@
 //Games review main
 //------------------------------------------------------------ */
 @media screen and (max-width: 500px) {
-    #nrreviews_gr_th, .nrreviews_gr_td {
+    .nrreviews_gr_th, .nrreviews_gr_td {
         display: none;
     }
 }
 
 @media screen and (max-width: 600px) {
-    #username_gr_th, .username_gr_td {
+    .username_gr_th, .username_gr_td {
         display: none;
     }
 }
 
 @media screen and (max-width: 1100px) {
-    #reviewdate_gr_th, .reviewdate_gr_td {
+    .reviewdate_gr_th, .reviewdate_gr_td {
         display: none;
     }
 }
 
 @media screen and (max-width: 1750px) {
-    #gamepub_gr_th, .gamepub_gr_td {
+    .gamepub_gr_th, .gamepub_gr_td {
         display: none;
     }
 }
@@ -1297,11 +1281,6 @@
         width: 100%;
     }
 
-    .review_child {
-        display: block;
-        margin: 0 auto;
-    }
-
     .review_screenshot_order {
         display: inline-block;
         vertical-align: top;
@@ -1312,19 +1291,19 @@
 //Games music list
 //------------------------------------------------------------ */
 @media screen and (max-width: 550px) {
-    #zaks_gm_th, .zaks_gm_td {
+    .zaks_gm_th, .zaks_gm_td {
         display: none;
     }
 }
 
 @media screen and (max-width: 1000px) {
-    #pub_gm_th, .pub_gm_td {
+    .pub_gm_th, .pub_gm_td {
         display: none;
     }
 }
 
 @media screen and (max-width: 1450px) {
-    #year_gm_th, .year_gm_td {
+    .year_gm_th, .year_gm_td {
         display: none;
     }
 }
@@ -1452,25 +1431,25 @@
 //Admin - Change log
 //------------------------------------------------------------ */
 @media screen and (max-width: 450px) {
-    #log_subsection_th, #log_date_th, .log_subsection_td, .log_date_td {
+    .log_subsection_th, #log_date_th, .log_subsection_td, .log_date_td {
         display: none;
     }
 }
 
 @media screen and (max-width: 525px) {
-    #log_subsection_th, .log_subsection_td {
+    .log_subsection_th, .log_subsection_td {
         display: none;
     }
 }
 
 @media screen and (max-width: 725px) {
-    #log_name_th, .log_name_td {
+    .log_name_th, .log_name_td {
         display: none;
     }
 }
 
 @media screen and (max-width: 1200px) {
-    #log_sub_name_th, .log_subname_td {
+    .log_sub_name_th, .log_subname_td {
         display: none;
     }
 }
@@ -1488,23 +1467,23 @@
 //Menu editor - Menu list
 //------------------------------------------------------------ */
 @media screen and (max-width: 500px) {
-    #menu_crew_th, .menu_crew_td {
+    .menu_crew_th, .menu_crew_td {
         display: none;
     }
 
-    #menu_disk_set_th, .menu_disk_set_td {
+    .menu_disk_set_th, .menu_disk_set_td {
         text-align: center;
     }
 }
 
 @media screen and (max-width: 600px) {
-    #nr_menus_th, #menu_type_th, .nr_menus_td, .menu_type_td {
+    .nr_menus_th, .menu_type_th, .nr_menus_td, .menu_type_td {
         display: none;
     }
 }
 
 @media screen and (max-width: 1050px) {
-    #menu_individual_th, .menu_individual_td {
+    .menu_individual_th, .menu_individual_td {
         display: none;
     }
 }
@@ -1513,35 +1492,42 @@
 //Menu set edit
 //------------------------------------------------------------ */
 @media screen and (max-width: 400px) {
-    #menu_list_crew_th, .menu_list_crew_td {
+    .menu_list_crew_th, .menu_list_crew_td {
         display: none;
     }
 
-    #menu_disk_list_th, .menu_disk_list_td {
+    .menu_disk_list_th, .menu_disk_list_td {
         text-align: center;
     }
 }
 
 @media screen and (max-width: 450px) {
-    #menu_cred_th, .menu_cred_td {
+    .menu_cred_th, .menu_cred_td {
         display: none;
     }
 }
 
 @media screen and (max-width: 500px) {
-    #menu_list_ind_th, .menu_list_ind_td {
+    .menu_list_ind_th, .menu_list_ind_td {
         display: none;
     }
 }
 
 @media screen and (max-width: 550px) {
-    #menu_nick_th, #menu_update_th, .menu_nick_td, .menu_update_td, #menu_state_th, .menu_state_td, #menu_gamedev_th, .menu_gamedev_td {
+    .menu_state_th, .menu_state_td, .menu_gamedev_th, .menu_gamedev_td {
         display: none;
     }
 }
 
 @media screen and (max-width: 700px) {
-    #menu_gameyear_th, #menu_gameinfo_th, #menu_gameset_th, .menu_gameyear_td, .menu_gameinfo_td, .menu_gameset_td, .menu_docinfo_td, #menu_docinfo_th {
+    .menu_gameyear_th,
+    .menu_gameinfo_th,
+    .menu_gameset_th,
+    .menu_gameyear_td,
+    .menu_gameinfo_td,
+    .menu_gameset_td,
+    .menu_docinfo_td,
+    .menu_docinfo_th {
         display: none;
     }
 }

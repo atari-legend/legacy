@@ -29,18 +29,18 @@ The the user karma sync page
         </div>
         <br>
         <br>
-        <table id="user_search_main_tabel">
+        <table class="user_search_main_table w-100">
         <tr>
             <td>
-                <table class="standard_table_list">
+                <table class="standard_table_list w-100">
                     <tr>
-                        <th class="karma_column">User</th>
-                        <th class="karma_column">Karma</th>
+                        <th class="karma_column w-50">User</th>
+                        <th class="karma_column w-50">Karma</th>
                     </tr>
                     {foreach from=$sync item=line}
                     <tr>
-                        <td class="karma_column">{if $line.user_name != ''}<a class="standard_table_center">{$line.user_name}</a>{/if}</td>
-                        <td class="karma_column">{if $line.karma_value != ''}<a class="standard_table_center">{$line.karma_value}</a>{/if}</td>
+                        <td class="karma_column w-50">{if $line.user_name != ''}<a class="standard_table_center">{$line.user_name}</a>{/if}</td>
+                        <td class="karma_column w-50">{if $line.karma_value != ''}<a class="standard_table_center">{$line.karma_value}</a>{/if}</td>
                     </tr>
                     {/foreach}
                 </table>

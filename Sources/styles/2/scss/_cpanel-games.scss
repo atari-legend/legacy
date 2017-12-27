@@ -50,56 +50,6 @@
     width: 100%;
 }
 
-//*----------------------------------------------------------
-//Games list
-//------------------------------------------------------------ */
-#game_th {
-    width: 40%;
-    text-align: left;
-}
-
-#pub_th, #dev_th {
-    width: 20%;
-    text-align: left;
-}
-
-#year_th {
-    width: 7%;
-    text-align: left;
-}
-
-#info_th {
-    width: 12%;
-    text-align: left;
-}
-
-.game_td {
-    width: 40%;
-    padding-left: 2px;
-    text-align: left;
-}
-
-.pub_td, .dev_td {
-    width: 20%;
-    padding-left: 2px;
-    text-align: left;
-}
-
-.year_td {
-    width: 7%;
-    padding-left: 2px;
-    text-align: left;
-}
-
-.info_td {
-    width: 12%;
-    padding-left: 2px;
-    text-align: left;
-}
-
-#game_list_table {
-    width: 100%;
-}
 
 //*----------------------------------------------------------
 //Games detail
@@ -201,53 +151,7 @@
 //*----------------------------------------------------------
 //Games comment
 //------------------------------------------------------------ */
-.gc_table_list {
-    width: 100%;
-    margin-right: auto;
-    margin-left: auto;
-    text-align: left;
-    background-color: #f3f3f3;
-    border: solid 1px #b2b2b2;
-    border-spacing: 0;
-}
 
-.gc_table_list tr:nth-child(even) {
-    background-color: #f3f3f3;
-}
-.gc_table_list tr:nth-child(odd) {
-    background-color: #eeeeee;
-}
-.gc_table_list td {
-    padding: 5px;
-    margin: 0;
-    border-bottom: solid 1px #000000;
-}
-
-.gc_left_head {
-    width: 20%;
-    font-size: 16px;
-}
-
-.gc_center_head {
-    width: 60%;
-    font-size: 12pt;
-}
-
-.gc_right_head {
-    width: 20%;
-    font-size: 11pt;
-    text-align: right;
-}
-
-.gc_left {
-    width: 20%;
-    font-size: 16px;
-}
-
-.gc_center {
-    width: 80%;
-    font-size: 16px;
-}
 
 //*----------------------------------------------------------
 //Games comment edit
@@ -265,39 +169,6 @@
 #gu_child_1, #gu_child_2 {
     width: 50%;
     margin-left: 2%;
-}
-
-//*----------------------------------------------------------
-//Games review main
-//------------------------------------------------------------ */
-#gamename_gr_th {
-    width: 35%;
-    text-align: left;
-}
-
-#username_gr_th, #gamepub_gr_th, #reviewdate_gr_th {
-    width: 20%;
-    text-align: left;
-}
-
-#nrreviews_gr_th {
-    width: 5%;
-    text-align: left;
-}
-
-.gamename_gr_td {
-    width: 35%;
-    padding-left: 2px;
-}
-
-.username_gr_td, .gamepub_gr_td, .reviewdate_gr_td {
-    width: 20%;
-    padding-left: 2px;
-}
-
-.nrreviews_gr_td {
-    width: 5%;
-    padding-left: 2px;
 }
 
 //*----------------------------------------------------------
@@ -325,9 +196,6 @@
     align-items: flex-start;
 }
 
-.review_child  table {
-    width: 98%;
-}
 #review_text {
     display: table-cell;
     width: 70%;
@@ -346,48 +214,6 @@
     font-size: 10.5pt;
 }
 
-//*----------------------------------------------------------
-//Games music list
-//------------------------------------------------------------ */
-#game_gm_th {
-    width: 50%;
-    text-align: left;
-}
-
-#pub_gm_th {
-    width: 25%;
-    text-align: left;
-}
-
-#year_gm_th {
-    width: 15%;
-    text-align: left;
-}
-
-#zaks_gm_th {
-    width: 10%;
-    text-align: left;
-}
-
-.game_gm_td {
-    width: 50%;
-    padding-left: 2px;
-}
-
-.pub_gm_td {
-    width: 25%;
-    padding-left: 2px;
-}
-
-.year_gm_td {
-    width: 15%;
-    padding-left: 2px;
-}
-
-.zaks_gm_td {
-    width: 10%;
-    padding-left: 2px;
-}
 
 //*----------------------------------------------------------
 //Games screenshots upload

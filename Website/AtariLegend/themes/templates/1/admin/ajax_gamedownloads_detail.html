@@ -18,10 +18,10 @@
 {* EDIT BOX FOR GAME DOWNLOADS*}
 {if isset($smarty_action) and $smarty_action == "edit_download_box"}
     <td colspan="2" style="width:100%;margin:0px;padding:0px;">
-        <table class="standard_table_list" id="menu_list_table">
+        <table class="standard_table_list w-100" id="menu_list_table">
             <tr>
-                <td class="menu_disk_list_td">{if $downloads.filename != ''}<a onclick="closeEditDownload({$downloads.game_download_id},{$game.game_id})" style="cursor: pointer;">{$downloads.filename}</a>{else}<i>n/a</i>{/if}</td>
-                <td class="menu_list_crew_td" style="text-align:right; padding-right:5px;">{if isset($downloads.date)}{$downloads.date}{else}<i>n/a</i>{/if}</td>
+                <td class="menu_disk_list_td w-30">{if $downloads.filename != ''}<a onclick="closeEditDownload({$downloads.game_download_id},{$game.game_id})" style="cursor: pointer;">{$downloads.filename}</a>{else}<i>n/a</i>{/if}</td>
+                <td class="menu_state_td w-30">{if isset($downloads.date)}{$downloads.date}{else}<i>n/a</i>{/if}</td>
             </tr>
             <tr>
                 <td colspan="4" style="border-top: solid 1px #b2b2b2;width:100%;">
@@ -153,13 +153,13 @@
                                                 <br>
                                                 <div class="download_details_row">
                                                     <div class="download_details_input">
-                                                        <table class="table_game_list" id="game_list_table" style="width:100%;border: solid 1px black;margin:auto;">
+                                                        <table class="table_game_list w-100">
                                                         {foreach from=$download_options item=line}
                                                         <tr>
-                                                            <td width="95%">
+                                                            <td class="w-95">
                                                                 <b><a href="../downloads/download_options_edit.php?option_id='{$line.download_options_id}'" class="left_nav_link">{$line.download_option}</a></b>
                                                             </td>
-                                                            <td width="5%" align="center" style="padding-left:0px;padding-top:0px;">
+                                                            <td class="w-5" align="center" style="padding-left:0px;padding-top:0px;">
                                                                 <a href="#" onClick="delOption({$line.download_options_id},{$downloads.game_download_id},{$game.game_id}); return false;"  class="links_addnew_link"><i class="fa fa-trash" aria-hidden="true"></i></a>
                                                             </td>
                                                         </tr>
@@ -203,13 +203,13 @@
                                                 <br>
                                                 <div class="download_details_row">
                                                     <div class="download_details_input">
-                                                        <table class="table_game_list" id="game_list_table" style="width:100%;border: solid 1px black;margin:auto;">
+                                                        <table class="table_game_list w-100">
                                                         {foreach from=$download_tos item=line}
                                                         <tr>
-                                                            <td width="95%">
+                                                            <td class="w-95" width="95%">
                                                                 <b><a href="../downloads/download_tos_edit.php?tos_id='{$line.download_tos_id}'" class="left_nav_link">{$line.download_tos}</a></b>
                                                             </td>
-                                                            <td width="5%" align="center" style="padding-left:0px;padding-top:0px;">
+                                                            <td class="w-5" align="center" style="padding-left:0px;padding-top:0px;">
                                                                 <a href="#" onClick="delTos({$line.download_tos_id},{$downloads.game_download_id},{$game.game_id}); return false;"  class="links_addnew_link"><i class="fa fa-trash" aria-hidden="true"></i></a>
                                                             </td>
                                                         </tr>
@@ -252,13 +252,13 @@
                                                 <br>
                                                 <div class="download_details_row">
                                                     <div class="download_details_input">
-                                                        <table class="table_game_list" id="game_list_table" style="width:100%;border: solid 1px black;margin:auto;">
+                                                        <table class="table_game_list w-100">
                                                         {foreach from=$download_trainer item=line}
                                                         <tr>
-                                                            <td width="95%">
+                                                            <td class="w-95">
                                                                 <b><a href="../downloads/download_trainer_edit.php?trainer_id='{$line.download_trainer_id}'" class="left_nav_link">{$line.download_trainer}</a></b>
                                                             </td>
-                                                            <td width="5%" align="center" style="padding-left:0px;padding-top:0px;">
+                                                            <td class="w-5" align="center" style="padding-left:0px;padding-top:0px;">
                                                                 <a href="#" onClick="delTrainer({$line.download_trainer_id},{$downloads.game_download_id},{$game.game_id}); return false;"  class="links_addnew_link"><i class="fa fa-trash" aria-hidden="true"></i></a>
                                                             </td>
                                                         </tr>
@@ -302,13 +302,13 @@
                                                 <br>
                                                 <div class="download_details_row">
                                                     <div class="download_details_input">
-                                                        <table class="table_game_list" id="game_list_table" style="width:100%;border: solid 1px black;margin:auto;">
+                                                        <table class="table_game_list w-100 table_xsmall">
                                                         {foreach from=$download_crew item=line}
                                                         <tr>
-                                                            <td width="95%">
+                                                            <td class="w-95">
                                                                 <b><a href="../crew/crew_editor.php?crewbrowse=&crewsearch=&crew_select={$line.download_crew_id}" class="left_nav_link">{$line.download_crew}</a></b>
                                                             </td>
-                                                            <td width="5%" align="center" style="padding-left:0px;padding-top:0px;">
+                                                            <td class="w-5" align="center" style="padding-left:0px;">
                                                                 <a href="#" onClick="delCrew({$line.download_crew_id},{$downloads.game_download_id},{$game.game_id}); return false;"  class="links_addnew_link"><i class="fa fa-trash" aria-hidden="true"></i></a>
                                                             </td>
                                                         </tr>
@@ -354,14 +354,14 @@
                                                 <br>
                                                 <div class="download_details_row">
                                                     <div class="download_details_input">
-                                                        <table class="table_game_list" id="game_list_table" style="width:100%;border: solid 1px black;margin:auto;">
+                                                        <table class="table_game_list w-100">
                                                         {foreach from=$download_menudisk item=line}
                                                         <tr>
-                                                            <td width="95%">
+                                                            <td class="w-95">
                                                                 <!--This stuff is a 'solution' for all the problems I'm having regarding responsiveness in IE!! -->
                                                                 <b><a href="../menus/menus_disk_list.php?menu_sets_id={$line.menu_sets_id}" class="left_nav_link">{$line.download_menudisk_name}</a></b>
                                                             </td>
-                                                            <td width="5%" align="center" style="padding-left:0px;padding-top:0px;">
+                                                            <td class="w-5" align="center" style="padding-left:0px;padding-top:0px;">
                                                                 <a href="#" onClick="delMenu({$line.menu_disk_title_game_id},{$downloads.game_download_id},{$game.game_id}); return false;"  class="links_addnew_link"><i class="fa fa-trash" aria-hidden="true"></i></a>
                                                             </td>
                                                         </tr>
@@ -407,15 +407,15 @@
                                                     <div class="download_details_text">Linked downloads :<br><br></div>
                                                 </div>
                                                 <div class="download_details_row">
-                                                    <table class="table_game_list" id="game_list_table" style="width:100%;border: solid 1px black;margin:auto;">
+                                                    <table class="table_game_list w-100">
                                                     {foreach from=$download_set item=line}
                                                     <tr>
-                                                        <td width="95%">
+                                                        <td class="w-95">
                                                             <!--This stuff is a 'solution' for all the problems I'm having regarding responsiveness in IE!! -->
                                                             <div class="download_long_descr"><b>{$line.set_name|truncate:50:'..':true:true}</b></div>
                                                             <div class="download_short_descr"><b>{$line.set_name|truncate:30:'..':true:true}</b></div>
                                                         </td>
-                                                        <td width="5%" align="center" style="padding-left:0px;padding-top:0px;">
+                                                        <td class="w-5" align="center" style="padding-left:0px;padding-top:0px;">
                                                             <a href="#" onClick="delSet({$line.set_id},{$downloads.game_download_id},{$game.game_id}); return false;"  class="links_addnew_link"><i class="fa fa-trash" aria-hidden="true"></i></a>
                                                         </td>
                                                     </tr>
@@ -477,17 +477,17 @@
                                             <fieldset>
                                                 <legend>Linked authors</legend>
                                                 <div id="author_list">
-                                                    <table class="table_game_list" id="game_list_table" style="width:100%;border: solid 1px black;margin:auto;">
+                                                    <table class="table_game_list w-100">
                                                     <tr>
-                                                        <th id="menu_cred_th">Credits</th>
-                                                        <th id="menu_scene_th">"Sceners"</th>
-                                                        <th id="menu_delete_th"></th>
+                                                        <th class="menu_cred_th w-45">Credits</th>
+                                                        <th class="menu_scene_th w-45">"Sceners"</th>
+                                                        <th class="menu_delete_th w-10"></th>
                                                     </tr>
                                                     {foreach name=outer item=individual from=$individuals}
                                                         <tr>
-                                                            <td class="menu_cred_td">{$individual.author_type_info}</td>
-                                                            <td class="menu_scene_td"><a href="../individuals/individuals_edit.php?ind_id={$individual.ind_id}" class="standard_table_left">{$individual.ind_name}</a></td>
-                                                            <td class="menu_delete_td" style="text-align:center;">
+                                                            <td class="menu_cred_td w-45">{$individual.author_type_info}</td>
+                                                            <td class="menu_scene_td w-45"><a href="../individuals/individuals_edit.php?ind_id={$individual.ind_id}" class="standard_table_left">{$individual.ind_name}</a></td>
+                                                            <td class="menu_delete_td w-10" style="text-align:center;">
                                                                 <a href="#" class="links_addnew_link" onclick="deleteAuthors({$individual.game_download_ind_id},{$downloads.game_download_id},{$game.game_id},{$individual.ind_id})" ><i class="fa fa-trash" aria-hidden="true"></i></a>
                                                                 <!--<input type="button" onclick="deleteAuthors({$individual.game_download_ind_id},{$downloads.game_download_id},{$game.game_id},{$individual.ind_id})" class="quick_search_games_button" value="delete" style="margin-right:5px;">-->
                                                             </td>
@@ -522,8 +522,8 @@
 {* CLOSE EDIT BOX FOR MENU DISKS *}
 {if isset($smarty_action) and $smarty_action == "closeedit_download_box"}
     <tr id="downloadedit_ajax_{$line.game_download_id}">
-        <td class="menu_disk_list_td">{if $downloads.filename != ''}<a onclick="editDownload({$downloads.game_download_id},{$downloads.game_id})" style="cursor: pointer;">{$downloads.filename}</a>{else}<i>n/a</i>{/if}</td>
-        <td class="menu_list_crew_td" style="text-align:right; padding-right:5px;">{if isset($downloads.date)}{$downloads.date}{else}<i>n/a</i>{/if}</td>
+        <td class="menu_disk_list_td w-30">{if $downloads.filename != ''}<a onclick="editDownload({$downloads.game_download_id},{$downloads.game_id})" style="cursor: pointer;">{$downloads.filename}</a>{else}<i>n/a</i>{/if}</td>
+        <td class="menu_state_td w-30" style="text-align:right; padding-right:5px;">{if isset($downloads.date)}{$downloads.date}{else}<i>n/a</i>{/if}</td>
     </tr>
 {/if}
 
@@ -536,13 +536,13 @@
     <br>
     <div class="download_details_row">
         <div class="download_details_input">
-            <table class="table_game_list" id="game_list_table" style="width:100%;border: solid 1px black;margin:auto;">
+            <table class="table_game_list w-100">
             {foreach from=$download_options item=line}
             <tr>
-                <td width="95%">
+                <td class="w-95">
                     <b><a href="../downloads/download_options_edit.php?option_id='{$line.download_options_id}'" class="left_nav_link">{$line.download_option}</a></b>
                 </td>
-                <td width="5%" align="center" style="padding-left:0px;padding-top:0px;">
+                <td class="w-5" align="center" style="padding-left:0px;padding-top:0px;">
                     <a href="#" onClick="delOption({$line.download_options_id},{$game_download_id},{$game_id}); return false;"  class="links_addnew_link"><i class="fa fa-trash" aria-hidden="true"></i></a>
                 </td>
             </tr>
@@ -567,13 +567,13 @@
     <br>
     <div class="download_details_row">
         <div class="download_details_input">
-            <table class="table_game_list" id="game_list_table" style="width:100%;border: solid 1px black;margin:auto;">
+            <table class="table_game_list w-100">
             {foreach from=$download_tos item=line}
             <tr>
-                <td width="95%">
+                <td class="w-95">
                     <b><a href="../downloads/download_tos_edit.php?tos_id='{$line.download_tos_id}'" class="left_nav_link">{$line.download_tos}</a></b>
                 </td>
-                <td width="5%" align="center" style="padding-left:0px;padding-top:0px;">
+                <td class="w-5" align="center" style="padding-left:0px;padding-top:0px;">
                     <a href="#" onClick="delTos({$line.download_tos_id},{$game_download_id},{$game_id}); return false;" class="links_addnew_link"><i class="fa fa-trash" aria-hidden="true"></i></a>
                 </td>
             </tr>
@@ -598,13 +598,13 @@
     <br>
     <div class="download_details_row">
         <div class="download_details_input">
-            <table class="table_game_list" id="game_list_table" style="width:100%;border: solid 1px black;margin:auto;">
+            <table class="table_game_list w-100">
             {foreach from=$download_trainer item=line}
             <tr>
-                <td width="95%">
+                <td class="w-95">
                     <b><a href="../downloads/download_trainer_edit.php?trainer_id='{$line.download_trainer_id}'" class="left_nav_link">{$line.download_trainer}</a></b>
                 </td>
-                <td width="5%" align="center" style="padding-left:0px;padding-top:0px;">
+                <td class="w-5" align="center" style="padding-left:0px;padding-top:0px;">
                     <a href="#" onClick="delTrainer({$line.download_trainer_id},{$game_download_id},{$game_id}); return false;" class="links_addnew_link"><i class="fa fa-trash" aria-hidden="true"></i></a>
                 </td>
             </tr>
@@ -629,13 +629,13 @@
     <br>
     <div class="download_details_row">
         <div class="download_details_input">
-            <table class="table_game_list" id="game_list_table" style="width:100%;border: solid 1px black;margin:auto;">
+            <table class="table_game_list w-100">
             {foreach from=$download_crew item=line}
             <tr>
-                <td width="95%">
+                <td class="w-95">
                     <b><a href="../crew/crew_editor.php?crewbrowse=&crewsearch=&crew_select={$line.download_crew_id}" class="left_nav_link">{$line.download_crew}</a></b>
                 </td>
-                <td width="5%" align="center" style="padding-left:0px;padding-top:0px;">
+                <td class="w-5" align="center" style="padding-left:0px;padding-top:0px;">
                     <a href="#" onClick="delCrew({$line.download_crew_id},{$downloads.game_download_id},{$game.game_id}); return false;"  class="links_addnew_link"><i class="fa fa-trash" aria-hidden="true"></i></a>
                 </td>
             </tr>
@@ -660,14 +660,14 @@
         <br>
         <div class="download_details_row">
             <div class="download_details_input">
-                <table class="table_game_list" id="game_list_table" style="width:100%;border: solid 1px black;margin:auto;">
+                <table class="table_game_list w-100">
                 {foreach from=$download_menudisk item=line}
                 <tr>
-                    <td width="95%">
+                    <td class="w-95">
                         <!--This stuff is a 'solution' for all the problems I'm having regarding responsiveness in IE!! -->
                         <b><a href="../menus/menus_disk_list.php?menu_sets_id={$line.menu_sets_id}" class="left_nav_link">{$line.download_menudisk_name}</a></b>
                     </td>
-                    <td width="5%" align="center" style="padding-left:0px;padding-top:0px;">
+                    <td class="w-5" align="center" style="padding-left:0px;padding-top:0px;">
                         <a href="#" onClick="delMenu({$line.menu_disk_title_game_id},{$game_download_id},{$game_id}); return false;"  class="links_addnew_link"><i class="fa fa-trash" aria-hidden="true"></i></a>
                     </td>
                 </tr>
@@ -690,15 +690,15 @@
             <div class="download_details_text">Linked downloads :<br><br></div>
         </div>
         <div class="download_details_row">
-            <table class="table_game_list" id="game_list_table" style="width:100%;border: solid 1px black;margin:auto;">
+            <table class="table_game_list w-100">
             {foreach from=$download_set item=line}
             <tr>
-                <td width="95%">
+                <td class="w-95">
                     <!--This stuff is a 'solution' for all the problems I'm having regarding responsiveness in IE!! -->
                     <div class="download_long_descr"><b>{$line.set_name|truncate:50:'..':true:true}</b></div>
                     <div class="download_short_descr"><b>{$line.set_name|truncate:30:'..':true:true}</b></div>
                 </td>
-                <td width="5%" align="center" style="padding-left:0px;padding-top:0px;">
+                <td class="w-5" align="center" style="padding-left:0px;padding-top:0px;">
                     <a href="#" onClick="delSet({$line.set_id},{$game_download_id},{$game_id}); return false;"  class="links_addnew_link"><i class="fa fa-trash" aria-hidden="true"></i></a>
                 </td>
             </tr>
@@ -720,20 +720,19 @@
         <fieldset>
             <legend>Linked authors</legend>
             <div id="author_list">
-                <table class="table_game_list" id="game_list_table" style="width:100%;border: solid 1px black;margin:auto;">
+                <table class="table_game_list w-100">
                 <tr>
-                    <th id="menu_cred_th">Credits</th>
-                    <th id="menu_scene_th">"Sceners"</th>
-                    <th id="menu_delete_th"></th>
+                    <th class="menu_cred_th w-45">Credits</th>
+                    <th class="menu_scene_th w-45">"Sceners"</th>
+                    <th class="menu_delete_th w-10"></th>
                 </tr>
                 {foreach name=outer item=individual from=$individuals}
                     <tr>
-                        <td class="menu_cred_td">{$individual.author_type_info}</td>
-                        <td class="menu_scene_td"><a href="../individuals/individuals_edit.php?ind_id={$individual.ind_id}" class="standard_table_left">{$individual.ind_name}</a></td>
-                        <td class="menu_delete_td" style="text-align:center;">
+                        <td class="menu_cred_td w-45">{$individual.author_type_info}</td>
+                        <td class="menu_scene_td w-45"><a href="../individuals/individuals_edit.php?ind_id={$individual.ind_id}" class="standard_table_left">{$individual.ind_name}</a></td>
+                        <td class="menu_delete_td w-10" style="text-align:center;">
                             <a href="#" class="links_addnew_link" onclick="deleteAuthors({$individual.game_download_ind_id},{$game_download_id},{$game_id},{$individual.ind_id})"><i class="fa fa-trash" aria-hidden="true"></i></a>
-                            <!--<input type="button" onclick="deleteAuthors({$individual.game_download_ind_id},{$downloads.game_download_id},{$game.game_id},{$individual.ind_id})" class="quick_search_games_button" value="delete" style="margin-right:5px;">-->
-                        </td>
+4                        </td>
                     </tr>
                 {/foreach}
                 </table>

@@ -293,12 +293,7 @@ figure.effect-bubba:hover h2, figure.effect-bubba:hover p {
     .statistics_dark {
         color: #cccccc;
     }
-    .standard_table_list_stats tr:nth-child(even) {
-        background-color: #122323;
-    }
-    .standard_table_list_stats tr:nth-child(odd) {
-        background-color: #0d2e2e;
-    }
+
     .stats_text {
         font-size: 11pt;
         font-weight: 100;
@@ -309,12 +304,7 @@ figure.effect-bubba:hover h2, figure.effect-bubba:hover p {
     .statistics_dark {
         color: #666666;
     }
-    .standard_table_list_stats tr:nth-child(even) {
-        background: linear-gradient(to right, #ffffff, #acacac);
-    }
-    .standard_table_list_stats tr:nth-child(odd) {
-        background: linear-gradient(to right, #ffffff, #23f001);
-    }
+
     .stats_text {
         font-size: 16px;
         font-weight: 100;
@@ -327,12 +317,7 @@ figure.effect-bubba:hover h2, figure.effect-bubba:hover p {
     .statistics_dark {
         color: #161c71;
     }
-    .standard_table_list_stats tr:nth-child(even) {
-        background: #a6a6a6;
-    }
-    .standard_table_list_stats tr:nth-child(odd) {
-        background: #6a6a6a;
-    }
+
     .stats_text {
         font-size: 12pt;
         font-weight: 100;
@@ -341,11 +326,6 @@ figure.effect-bubba:hover h2, figure.effect-bubba:hover p {
     }
 }
 
-.standard_table_list_stats {
-    @extend .standard_table_list;
-    border: 0;
-    font-size: 11pt;
-}
 
 //*-------------------------***/
 //*****  Latest comments  *****/
@@ -418,12 +398,4 @@ figure.effect-bubba:hover h2, figure.effect-bubba:hover p {
     margin-bottom: 15px;
     margin-top: 15px;
     float: left;
-}
-
-.standard_table_list_comments {
-    @extend .standard_table_list_stats;
-}
-
-.standard_table_list_comments td {
-    border-bottom: solid 2px #000000;
 }

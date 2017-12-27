@@ -21,13 +21,13 @@
         <div class="standard_tile_line"></div>
         <div class="standard_list_entry">
             <div class="standard_tile_text">
-                <table class="standard_table_list">
+                <table class="secondary_table_list w-100 table_xsmall table_hover">
                 <tr>
-                    <th>Some Stats</th>
+                    <th class="table_textalign_center">Some Stats</th>
                 </tr>
                     {foreach from=$statistics item=line}
                 <tr>
-                    <td class="standard_table_center">{if $line.value != ''}{$line.value}{/if}</td>
+                    <td class="table_textalign_center">{if $line.value != ''}{$line.value}{/if}</td>
                 </tr>
                     {/foreach}
                 </table>

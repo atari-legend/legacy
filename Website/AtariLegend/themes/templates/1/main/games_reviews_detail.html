@@ -360,10 +360,10 @@
                 <h1>AUTHOR</h1>
                 <div class="standard_tile_line"></div>
                 <div class="games_main_detail_comments_container">
-                    <table class="standard_table_list_stats">
+                    <table class="standard_table_list_stats table_medium">
                         {if isset($reviews_author)}
                         <tr>
-                            <td width="100%" colspan="2">
+                            <td colspan="2">
                                 <div class="standard_list_entry_news_text" style="text-align:center;">
                                     {$review.userid} has written {$nr_reviews_author} additional reviews :
                                 </div>
@@ -371,12 +371,12 @@
                         </tr>
                         {foreach from=$reviews_author item=line name=reviews_author}
                             <tr>
-                                <td width="90%" style="padding-top:5px;padding-bottom:5px;">
+                                <td class="w-90">
                                     <span style="overflow: hidden;text-overflow: ellipsis"><a href="../games/games_detail.php?game_id={$line.game_id}" class="standard_tile_link" style="margin-left:10px;">{$line.game_name}</a></span>
                                     <br><span class="standard_tile_subtext" style="margin-left:15px;"><a href="../games/games_reviews_detail.php?review_id={$line.review_id}&game_id={$line.game_id}" style="margin-left:10px;">read more</a></span>
                                 </td>
 
-                                <td width="10%" style="padding-top:5px;padding-bottom:5px;">
+                                <td class="w-10">
                                     <a href="../games/games_main_list.php?year={$line.game_year}&amp;action=search" class="standard_tile_link" style="margin-right:10px;">{$line.game_year}</a>
                                     <br><br>
                                 </td>
@@ -384,7 +384,7 @@
                         {/foreach}
                         {else}
                             <tr>
-                                <td width="100%">
+                                <td class="w-100">
                                     <div class="standard_list_entry_news_text" style="text-align:center;">
                                         This person hasn't written any additional reviews
                                     </div>
