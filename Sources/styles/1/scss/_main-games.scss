@@ -160,12 +160,6 @@
     height: 10em;
 }
 
-.standard_table_list_comments_main {
-    @extend .standard_table_list_stats;
-}
-.standard_table_list_comments_main td {
-    border-bottom: solid 2px #000000;
-}
 
 //****************Games detail page************************/
 
@@ -207,10 +201,6 @@
 .games_main_detail_info_left {
     color: #ffffff;
     font-size: 1em;
-}
-
-.standard_table_games_main_detail {
-    @extend .standard_table_list_stats;
 }
 
 .games_main_detail_screenshot {
@@ -454,13 +444,6 @@
     scrollbar-shadow-color: #008b8b;
 }
 
-.game_details_review_preview_left {
-    width: 25%;
-}
-
-.game_details_review_preview_right {
-    width: 75%;
-}
 
 .game_details_review_preview_text {
     @extend .standard_list_entry_news_text;
@@ -485,9 +468,6 @@
     align-items: flex-start;
 }
 
-.games_detail_review_child  table {
-    width: 98%;
-}
 #games_detail_review_text {
     display: table-cell;
     width: 75%;

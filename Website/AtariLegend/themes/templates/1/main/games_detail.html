@@ -758,10 +758,10 @@
                     {/if}
                     {if isset($review)}
                     <div class="standard_tile_line"></div>
-                    <table class="standard_table_games_main_detail">
+                    <table class="standard_table_list">
                     {foreach from=$review item=line name=review}
                         <tr>
-                        <td class="game_details_review_preview_left">
+                        <td class="w-25">
                             <div style="margin-left:10px;margin-right:10px;text-align:justify;margin-bottom:10px;margin-top:10px">
                                 <a href="../../includes/show_image.php?file={$line.screenshot}&amp;resize=410,null,null,null" data-lightbox="image-1">
                                 <img src="../../includes/show_image.php?file={$line.screenshot}&amp;resize=210,null,null,null" alt="Click to enlarge!" style="display:inline;margin-top:10px;" class="game_screenshot_img"></a>
@@ -769,7 +769,7 @@
                                 <span class="standard_tile_subtext" style="font-weight: bold;">{$line.comment}</span>
                             </div>
                         </td>
-                        <td class="game_details_review_preview_right">
+                        <td class="w-75">
                             <div style="margin-top:20px;margin-bottom:15px;margin-right:20px;margin-left:10px;">
                                 <h4 style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis">
                                     Written by <a href="../../admin/user/user_detail.php?user_id_selected={$line.user_id}" class="standard_tile_link">{$line.user_name}</a>

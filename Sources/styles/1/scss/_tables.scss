@@ -1,0 +1,387 @@
+//*************************************************************/
+//**********************LEGACY SKIN****************************/
+//*************************************************************/
+//*************************************************************/
+//*************** Tables****************/
+//*************************************************************/
+//*----------------------------------------------------------
+// Tables
+//------------------------------------------------------------ */
+
+
+.table_xsmall {
+    th {
+        padding-top: 3px;
+        padding-bottom: 3px;
+        padding-left: 3;
+        padding-right: 3;
+    }
+    td {
+        padding-top: 1px;
+        padding-bottom: 1px;
+        padding-left: 3;
+        padding-right: 3;
+    }
+}
+.table_small {
+    th,
+    td {
+        padding-top: 3px;
+        padding-bottom: 3px;
+    }
+}
+.table_medium {
+    th,
+    td {
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+}
+.table_large {
+    th,
+    td {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+}
+.table_hover {
+    tbody tr:hover {
+        background-color: #294f4f;
+    }
+}
+.no_border {
+    border: 0 !important;
+}
+//
+// Table Headers
+//
+.table_textalign_right {
+    text-align: right;
+}
+.table_textalign_left {
+    text-align: left;
+}
+.table_textalign_center {
+    text-align: center;
+}
+.menu_state_th,
+.log_sub_name_th {
+    padding-right: 5px;
+    text-align: right;
+}
+.email_th,
+.game_th,
+.gamepub_gr_th,
+.game_gm_th,
+.gamename_gr_th,
+.pub_th,
+.dev_th,
+.year_th,
+.info_th,
+.joindate_th,
+.lastvisit_th,
+.log_date_th,
+.log_action_th,
+.log_section_th,
+.log_subsection_th,
+.log_name_th,
+.log_user_th,
+.menu_cred_th,
+.menu_crew_th,
+.menu_disk_list_th,
+.menu_disk_set_th,
+.menu_individual_th,
+.menu_list_crew_th,
+.menu_list_ind_th,
+.menu_scene_th,
+.menu_delete_th,
+.menu_mark_th,
+.menu_gameinfo_th,
+.menu_gameset_th,
+.menu_gameyear_th,
+.menu_gamedev_th,
+.menu_gamename_th,
+.menu_type_th,
+.menu_doctype_th,
+.menu_docinfo_th,
+.menu_docname_th,
+.nr_menus_th,
+.nrreviews_gr_th,
+.pub_gm_th,
+.reviewdate_gr_th,
+.username_gr_th,
+.username_th,
+.year_gm_th,
+.zaks_gm_th,
+.zaks_gm_th {
+    text-align: left;
+}
+//
+// Table cells
+//
+.select_td {
+    padding-left: 2px;
+    font-size: 10pt;
+    font-weight: 100;
+    color: #ffffff;
+}
+.log_date_td,
+.log_action_td,
+.log_section_td,
+.log_subsection_td,
+.log_user_td,
+.log_name_td,
+.log_subname_td,
+.menu_disk_set_td,
+.menu_crew_td,
+.menu_individual_td,
+.nr_menus_td,
+.menu_type_td,
+.game_gm_td,
+.pub_gm_td,
+.year_gm_td,
+.zaks_gm_td,
+.username_gr_td,
+.gamepub_gr_td,
+.reviewdate_gr_td,
+.nrreviews_gr_td,
+.gamename_gr_td,
+.menu_list_crew_td,
+.menu_disk_list_td,
+.menu_list_ind_td,
+.game_td,
+.pub_td,
+.dev_td,
+.info_td,
+.year_td,
+.username_td,
+.joindate_td,
+.lastvisit_td,
+.email_td {
+    font-size: 10pt;
+    font-weight: 100;
+    color: #ffffff;
+    text-align: left;
+}
+.menu_docname_td,
+.menu_doctype_td,
+.menu_docinfo_td,
+.menu_mark_td,
+.menu_gameinfo_td,
+.menu_gameset_td,
+.menu_gamename_td,
+.menu_gamedev_td,
+.menu_gameyear_td,
+.menu_cred_td,
+.menu_scene_td,
+.menu_delete_td,
+.log_subname_td {
+    padding-right: 5px;
+    font-size: 10pt;
+    font-weight: 100;
+    color: #ffffff;
+    text-align: left;
+}
+.menu_state_td {
+    padding-right: 5px;
+    font-size: 10pt;
+    font-weight: 100;
+    color: #ffffff;
+    text-align: right;
+}
+.standard_table_list {
+    padding: 0;
+    margin-right: auto;
+    margin-left: auto;
+    text-align: left;
+    background-color: #00d3d3;
+    color: #ffffff;
+    border: solid 1px #000000;
+    border-spacing: 0;
+}
+.standard_table_list th {
+    margin: 0;
+    background-color: #006f6f;
+    border-collapse: collapse;
+    border-bottom: solid 1px #000000;
+}
+.standard_table_list td {
+    margin: 0;
+    border-bottom: solid 1px #000000;
+}
+.standard_table_list tr:nth-child(even) {
+    background-color: #122323;
+}
+.standard_table_list tr:nth-child(odd) {
+    background-color: #0d2e2e;
+}
+.secondary_table_list {
+    padding: 0;
+    margin-right: auto;
+    margin-left: auto;
+    text-align: left;
+    background-color: #00d3d3;
+    font-size: 10pt;
+    color: #ffffff;
+    border: solid 1px #000000;
+    border-spacing: 0;
+}
+.secondary_table_list th {
+    margin: 0;
+    font-size: 12pt;
+    padding-left: 5px;
+    padding-right: 5px;
+    background-color: #006f6f;
+    border-collapse: collapse;
+    border-bottom: solid 1px #000000;
+}
+.secondary_table_list td {
+    margin: 0;
+    padding-left: 5px;
+    padding-right: 5px;
+    border-bottom: solid 1px #000000;
+}
+
+.secondary_table_list tr:nth-child(even) {
+    background-color: #00d3d3;
+}
+.secondary_table_list tr:nth-child(odd) {
+    background-color: #006f6f;
+}
+
+.standard_table_list_stats {
+    @extend .standard_table_list;
+    border: 0;
+    font-size: 11pt;
+}
+
+.standard_table_list_comments {
+    @extend .standard_table_list_stats;
+}
+
+.standard_table_list_comments td {
+    border-bottom: solid 2px #000000;
+}
+.standard_table_center {
+    font-size: 10pt;
+    font-weight: 100;
+    color: #ffffff;
+    text-align: center;
+}
+.standard_table_left {
+    padding-left: 2px;
+    font-size: 10pt;
+    font-weight: 100;
+    color: #ffffff;
+    text-align: left;
+}
+.standard_table_right {
+    padding-right: 2px;
+    font-size: 10pt;
+    font-weight: 100;
+    color: #ffffff;
+    text-align: right;
+}
+.standard_table_center img {
+    display: inline;
+}
+#menu_list_table {
+    background-color: #294f4f;
+}
+#menu_list_table tr:hover {
+    background-color: #294f4f;
+}
+#menu_list_table tr:nth-child(even) {
+    background-color: #294f4f;
+}
+#menu_list_table tr:nth-child(odd) {
+    background-color: #006f6f;
+}
+//*----------------------------------------------------------
+//Games list
+//------------------------------------------------------------ */
+.table_game_list {
+    border: solid 1px #000000;
+    margin: auto;
+}
+//*----------------------------------------------------------
+//Games comment
+//------------------------------------------------------------ */
+.gc_table_list {
+    margin-right: auto;
+    margin-left: auto;
+    text-align: left;
+    background-color: #00d3d3;
+    border: solid 1px #000000;
+    border-spacing: 0;
+}
+.gc_table_list tr:nth-child(even) {
+    background-color: #00d3d3;
+}
+.gc_table_list tr:nth-child(odd) {
+    background-color: #006f6f;
+}
+.gc_table_list td {
+    padding: 5px;
+    margin: 0;
+    border-bottom: solid 1px #000000;
+}
+.gc_left_head,
+.gc_center_head {
+    font-size: 10pt;
+}
+.gc_right_head {
+    font-size: 10pt;
+    text-align: right;
+}
+.gc_left,
+.gc_center {
+    font-size: 10pt;
+}
+//*----------------------------------------------------------
+//User search
+//------------------------------------------------------------ */
+.user_search_main_table {
+    margin-top: 3px;
+    margin-bottom: 3px;
+    border: 0;
+}
+//*----------------------------------------------------------
+//User Karma
+//------------------------------------------------------------ */
+.karma_column {
+    text-align: center;
+}
+//*-----------------------Database updates-------------------------- */
+.td_db_result,
+.td_db_state,
+.td_db_id,
+.td_db_description,
+.td_db_exe {
+    @extend .standard_table_center;
+}
+
+//*----------------------------------------------------------
+//Games review main
+//------------------------------------------------------------ */
+
+.links_modlist_tdline {
+    padding: 5px;
+    font-size: 10pt;
+    color: #000000;
+}
+
+.news_left_head {
+    width: 50%;
+    text-align: left;
+    margin-left: 10px;
+    margin-top: 3px;
+    margin-bottom: 3px;
+}
+.news_right_head {
+    width: 50%;
+    text-align: right;
+    margin-right: 10px;
+    margin-top: 3px;
+    margin-bottom: 3px;
+}

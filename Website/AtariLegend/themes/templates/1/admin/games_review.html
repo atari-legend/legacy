@@ -51,22 +51,22 @@ The main game review
         {if isset($message)}
             <div class="message_box">{$message}</div>
         {/if}
-        <table class="standard_table_list">
+        <table class="standard_table_list w-100">
             <tr>
-                <th id="gamename_gr_th">Game Name</th>
-                <th id="gamepub_gr_th">Publisher</th>
-                <th id="username_gr_th">Username</th>
-                <th id="reviewdate_gr_th">Review date</th>
-                <th id="nrreviews_gr_th">Nr</th>
+                <th class="gamename_gr_th w-35">Game Name</th>
+                <th class="gamepub_gr_th w-20">Publisher</th>
+                <th class="username_gr_th w-20">Username</th>
+                <th class="reviewdate_gr_th w-20">Review date</th>
+                <th class="nrreviews_gr_th w-5">Nr</th>
             </tr>
             {if isset($review)}
             {foreach from=$review item=line}
                 <tr>
-                    <td class="gamename_gr_td">{if $line.game_name != ''}<a href="games_review_add.php?game_id={$line.game_id}" class="standard_table_center">{$line.game_name}</a>{else}<i>n/a</i>{/if}</td>
-                    <td class="gamepub_gr_td">{if $line.game_publisher != ''}{$line.game_publisher}{else}<i>n/a</i>{/if}</td>
-                    <td class="username_gr_td">{$line.username}</td>
-                    <td class="reviewdate_gr_td">{$line.review_date}</td>
-                    <td class="nrreviews_gr_td">{if $line.number_reviews != ''}{$line.number_reviews}{else}<i>0</i>{/if}</td>
+                    <td class="gamename_gr_td w-35">{if $line.game_name != ''}<a href="games_review_add.php?game_id={$line.game_id}" class="standard_table_center">{$line.game_name}</a>{else}<i>n/a</i>{/if}</td>
+                    <td class="gamepub_gr_td w-20">{if $line.game_publisher != ''}{$line.game_publisher}{else}<i>n/a</i>{/if}</td>
+                    <td class="username_gr_td w-20">{$line.username}</td>
+                    <td class="reviewdate_gr_td w-20">{$line.review_date}</td>
+                    <td class="nrreviews_gr_td w-5">{if $line.number_reviews != ''}{$line.number_reviews}{else}<i>0</i>{/if}</td>
                 </tr>
             {/foreach}
             {/if}

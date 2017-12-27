@@ -70,17 +70,17 @@ function gameinsert()
     <br>
     <br>
     <div id="games_list_4">
-        <table class="standard_table_list" id="game_list_table">
+        <table class="secondary_table_list w-100 table_hover table_small">
             <tr>
-                <th id="game_th">Game Name</th>
-                <th id="pub_th">Publisher</th>
-                <th id="dev_th">Developer</th>
-                <th id="year_th">Year</th>
-                <th id="info_th">Info</th>
+                <th class="game_th w-40">Game Name</th>
+                <th class="pub_th w-20">Publisher</th>
+                <th class="dev_th w-20">Developer</th>
+                <th class="year_th w-10">Year</th>
+                <th class="info_th w-10">Info</th>
             </tr>
             {foreach from=$game_search item=line}
             <tr>
-                <td class="game_td">
+                <td class="game_td w-40">
                     {if $line.game_name != ''}
                         <a href="games_detail.php?game_id={$line.game_id}" class="standard_table_left">
                             {$line.game_name}
@@ -89,7 +89,7 @@ function gameinsert()
                         <i><span class="standard_table_left">n/a</span></i>
                     {/if}
                 </td>
-                <td class="pub_td">
+                <td class="pub_td w-20">
                     {if $line.publisher_name != ''}
                         <a href="games_list.php?publisher={$line.publisher_id}&amp;action=search" class="standard_table_left">
                         {$line.publisher_name}
@@ -98,7 +98,7 @@ function gameinsert()
                         <i><span class="standard_table_left">n/a</span></i>
                     {/if}
                 </td>
-                <td class="dev_td">
+                <td class="dev_td w-20">
                     {if $line.developer_name != ''}
                         <a href="games_list.php?developer={$line.developer_id}&amp;action=search" class="standard_table_left">
                             {$line.developer_name}
@@ -107,7 +107,7 @@ function gameinsert()
                         <i><span class="standard_table_left">n/a</span></i>
                     {/if}
                 </td>
-                <td class="year_td">
+                <td class="year_td w-10">
                     {if $line.year != ''}
                         <a href="games_list.php?year={$line.year}&amp;action=search" class="standard_table_left">
                             {$line.year}
@@ -116,7 +116,7 @@ function gameinsert()
                         <i><span class="standard_table_left">n/a</span></i>
                     {/if}
                 </td>
-                <td class="info_td">
+                <td class="info_td w-10">
                     {if isset($line.screenshot)}
                         <a href="games_screenshot_add.php?game_id={$line.game_id}" class="standard_table_left"><i class="fa fa-camera" aria-hidden="true"></i></a>
                     {/if}

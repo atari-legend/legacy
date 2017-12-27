@@ -833,16 +833,16 @@ function deleteDownload(str, game_id) {
             </form>
         </div>
         <br>
-        <table class="standard_table_list" id="game_list_table">
+        <table class="standard_table_list w-100">
             <tr>
-                <th id="menu_disk_list_th">Filename</th>
-                <th id="menu_list_crew_th" style="text-align:right; padding-right:5px;">Date</th>
+                <th class="menu_disk_list_th w-30">Filename</th>
+                <th class="menu_state_th w-30">Date</th>
             </tr>
             {if isset($downloads)}
                 {foreach from=$downloads item=line}
                     <tr id="downloadedit_ajax_{$line.game_download_id}">
-                        <td class="menu_disk_list_td">{if $line.filename != ''}<a onclick="editDownload({$line.game_download_id},{$game.game_id})" style="cursor: pointer;">{$line.filename}</a>{else}<i>n/a</i>{/if}</td>
-                        <td class="menu_list_crew_td" style="text-align:right; padding-right:5px;">{if isset($line.date)}{$line.date}{else}<i>n/a</i>{/if}</td>
+                        <td class="menu_disk_list_td w-30">{if $line.filename != ''}<a onclick="editDownload({$line.game_download_id},{$game.game_id})" style="cursor: pointer;">{$line.filename}</a>{else}<i>n/a</i>{/if}</td>
+                        <td class="menu_state_td w-30">{if isset($line.date)}{$line.date}{else}<i>n/a</i>{/if}</td>
                     </tr>
                 {/foreach}
             {/if}

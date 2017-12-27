@@ -138,40 +138,40 @@ function deleteseries()
         <br>
         <form action="../games/db_games_series.php" method="post" name="add_to_series" id="add_to_series">
         {if (isset($series_link))}
-            <table class="standard_table_list">
+            <table class="standard_table_list w-100">
                 <tr>
                     <th style="width:5%; text-align:left;">Info</th>
-                    <th id="game_th">Game Name</th>
-                    <th id="pub_th">Publisher</th>
-                    <th id="dev_th">Developer</th>
-                    <th id="year_th">Year</th>
+                    <th class="game_th w-40">Game Name</th>
+                    <th class="pub_th w-20">Publisher</th>
+                    <th class="dev_th w-20">Developer</th>
+                    <th class="year_th w-10">Year</th>
                 </tr>
                 {foreach from=$series_link item=line}
                     <tr>
-                        <td style="width:5%;">
+                        <td class="w-5">
                             <div class="checkbox">
                                 <input type="checkbox" id="{$line.game_id}" name="game_id[]" value="{$line.game_id}">
                                 <label for="{$line.game_id}"></label>
                             </div>
                         </td>
-                        <td class="game_td">{if $line.game_name != ''}<a href="games_detail.php?game_id={$line.game_id}" class="standard_table_left">{$line.game_name}</a>
+                        <td class="game_td w-40">{if $line.game_name != ''}<a href="games_detail.php?game_id={$line.game_id}" class="standard_table_left">{$line.game_name}</a>
                                 {else}<i>n/a</i>{/if}
                         </td>
-                        <td class="pub_td">{if $line.publisher_name != ''}
+                        <td class="pub_td w-20">{if $line.publisher_name != ''}
                                 <a href="games_main.php?publisher={$line.publisher_id}&amp;action=search" class="standard_table_left">
                                     {$line.publisher_name}
                             </a>
                                 {else}
                                     <i>n/a</i>
                                 {/if}</td>
-                        <td class="dev_td">{if $line.developer_name != ''}
+                        <td class="dev_td w-20">{if $line.developer_name != ''}
                                 <a href="games_main.php?developer={$line.developer_id}&amp;action=search" class="standard_table_left">
                                     {$line.developer_name}
                                 </a>
                                 {else}
                                     <i>n/a</i>
                                 {/if}</td>
-                        <td class="year_td">
+                        <td class="year_td w-10">
                             {if $line.year != ''}
                                 <a href="games_main.php?year={$line.year}&amp;action=search" class="standard_table_left">
                                     {$line.year}

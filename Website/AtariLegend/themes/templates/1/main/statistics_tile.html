@@ -22,13 +22,17 @@
         <h1>STATISTICS</h1>
         <div class="standard_tile_line"></div>
         <div class="standard_list_entry">
-            <table class="standard_table_list_stats">
+
+                {assign var="number" value=1}
             {foreach from=$statistics item=line}
-                <tr>
-                    <td class="standard_table_center" style="padding-top:3px; padding-bottom:3px;"><span class="stats_text">{if $line.value != ''}{$line.value}{/if}</span></td>
-                </tr>
+
+                    <div {if $number is even}class="statistics_list_entry w-100 table_medium"{else}class="statistics_list_entry_odd w-100"{/if}>
+                        <span class="stats_text">{if $line.value != ''}{$line.value}{/if}</span>
+
+                    </div>
+                {$number=$number+1}
             {/foreach}
-            </table>
+
         </div>
     <div class="standard_tile_line"></div>
     </div>

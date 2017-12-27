@@ -32,38 +32,38 @@ The main game page
     <br>
     <div id="games_list_4">
     {if $type == 'game'}
-        <table class="standard_table_list" id="game_list_table">
+        <table class="standard_table_list w-100">
             <tr>
-                <th id="game_th">Game Name</th>
-                <th id="pub_th">Publisher</th>
-                <th id="dev_th">Developer</th>
-                <th id="year_th">Year</th>
-                <th id="info_th">Nr</th>
+                <th class="game_th w-40">Game Name</th>
+                <th class="pub_th w-20">Publisher</th>
+                <th class="dev_th w-20">Developer</th>
+                <th class="year_th w-10">Year</th>
+                <th class="info_th w-10">Nr</th>
             </tr>
             {foreach from=$download_search item=line}
             <tr id="downloadedit_ajax_{$line.game_id}">
-                <td class="game_td">
+                <td class="game_td w-40">
                     {if $line.game_name != ''}
                         <a href="downloads_game_detail.php?game_id={$line.game_id}" class="standard_table_left">{$line.game_name}</a>
                     {else}
                         <i>n/a</i>
                     {/if}
                 </td>
-                <td class="pub_td">
+                <td class="pub_td w-20">
                     {if $line.publisher_name != ''}
                         {$line.publisher_name}
                     {else}
                         <i>n/a</i>
                     {/if}
                 </td>
-                <td class="dev_td">
+                <td class="dev_td w-20">
                     {if $line.developer_name != ''}
                         {$line.developer_name}
                     {else}
                         <i>n/a</i>
                     {/if}
                 </td>
-                <td class="year_td">
+                <td class="year_td w-10">
                     {if $line.year != ''}
                         {$line.year}
 
@@ -71,7 +71,7 @@ The main game page
                         <i>n/a</i>
                     {/if}
                 </td>
-                <td class="info_td">
+                <td class="info_td w-10">
                     {if $line.number_downloads != ''}
                         {$line.number_downloads}
 

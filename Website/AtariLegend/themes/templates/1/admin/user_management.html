@@ -330,7 +330,7 @@ function EmailSent(){
     Email users?</p>
 </div>
 <form action="test" name="user_list" id="user_list">
-<div class="standard_tile" id="user_management">
+<div class="standard_tile">
     <div class="help-tip">
         <p>
             Use the search tile on the left to make a user query. You also have the following 'mass' options : <br><br>
@@ -361,7 +361,7 @@ function EmailSent(){
         <br>
         <div class="main_stats_container" id="ajax_usersearch">
             {if isset($users)}
-            <table class="standard_table_list">
+            <table class="secondary_table_list w-100 table_hover table_xsmall">
                 <tr>
                     <th>
                         <div class="checkbox">
@@ -369,23 +369,23 @@ function EmailSent(){
                             <label for="user_select_all"></label>
                         </div>
                     </th>
-                    <th class="username_th">User Name</th>
-                    <th class="joindate_th">Join Date</th>
-                    <th class="lastvisit_th">Last Visit</th>
-                    <th class="email_th">Email</th>
+                    <th class="username_th w-25">User Name</th>
+                    <th class="joindate_th w-25">Join Date</th>
+                    <th class="lastvisit_th w-25">Last Visit</th>
+                    <th class="email_th w-10">Email</th>
                 </tr>
                 {foreach from=$users item=line}
                 <tr>
-                    <td class="select_td">
+                    <td class="select_td w-10">
                         <div class="checkbox">
                             <input type="checkbox" value="{$line.user_id}" id="checkboxInput[{$line.user_id}]" name="user_id[]" class="user_checkbox">
                             <label for="checkboxInput[{$line.user_id}]"></label>
                         </div>
                     </td>
-                    <td class="username_td">{if $line.user_name != ''}<a href="../user/user_detail.php?user_id_selected={$line.user_id}" class="standard_table_center">{$line.user_name}</a>{else}<i>n/a</i>{/if}</td>
-                    <td class="joindate_td">{if $line.join_date != ''}{$line.join_date}{else}<i>n/a</i>{/if}</td>
-                    <td class="lastvisit_td">{if $line.last_visit != ''}{$line.last_visit}{else}<i>n/a</i>{/if}</td>
-                    <td class="email_td">{if $line.email != ''}<a href="mailto:{$line.email}" class="standard_tile_link_black"><i class="fa fa-envelope" aria-hidden="true"></i></a>{/if}</td>
+                    <td class="username_td w-25">{if $line.user_name != ''}<a href="../user/user_detail.php?user_id_selected={$line.user_id}" class="standard_table_center">{$line.user_name}</a>{else}<i>n/a</i>{/if}</td>
+                    <td class="joindate_td w-25">{if $line.join_date != ''}{$line.join_date}{else}<i>n/a</i>{/if}</td>
+                    <td class="lastvisit_td w-25">{if $line.last_visit != ''}{$line.last_visit}{else}<i>n/a</i>{/if}</td>
+                    <td class="email_td w-10">{if $line.email != ''}<a href="mailto:{$line.email}" class="standard_tile_link_black"><i class="fa fa-envelope" aria-hidden="true"></i></a>{/if}</td>
                 </tr>
                 {/foreach}
                 {else}

@@ -61,18 +61,18 @@
             <div class="standard_tile" id="games_main">
                 <h1>LATEST NEWS</h1>
                 <div class="standard_tile_line"></div>
-                <table class="standard_table_list_comments_main">
+                <table class="standard_table_list_comments w-100 table_medium">
                 {foreach from=$news item=line}
                     <tr>
                         <td class="news_left_head">
-                            <h6 style="text-align:left;margin-left:10px;margin-top:3px;margin-bottom:3px;" id="news_head">{$line.news_headline}</h6>
+                            <h6 id="news_head">{$line.news_headline}</h6>
                         </td>
                         <td class="news_right_head">
                             <h6 style="text-align:right;margin-right:10px;margin-top:3px;margin-bottom:3px;" id="news_head">{$line.news_date} by <a href="../../admin/user/user_detail.php?user_id_selected={$line.user_id}" class="latest_comments_link">{$line.user_name}</a></h6>
                         </td>
                     </tr>
                     <tr>
-                        <td class="game_details_review_preview_right" style="width:100%;padding-bottom:10px;padding-top:10px;" colspan="2">
+                        <td class="" colspan="2">
                             {if $line.image_id != ''}
                                 <div style="text-align=justify;">
                                     <img src="../../includes/show_image.php?file={$line.image}&amp;resize=160,null,null,null" alt="{$line.news_headline}" class="user_stats_img_dark" style="max-width:95%;float:left;margin-left:10px;margin-right:10px;margin-top:15px;">
