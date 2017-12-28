@@ -16,7 +16,11 @@
     width: 45%;
 }
 
-#child_good_karma, #child_bad_karma, #child_bar, #child_line, #child_bad_karma_chart
+#child_good_karma,
+#child_bad_karma,
+#child_bar,
+#child_line,
+#child_bad_karma_chart
 #child_good_karma_chart {
     float: left;
     width: 50%;
@@ -61,7 +65,8 @@
 //Quick search games
 //------------------------------------------------------------ */
 
-#quick_search_options, #quick_search_user_options {
+#quick_search_options,
+#quick_search_user_options {
     display: table;
     width: 75%;
     margin-right: auto;

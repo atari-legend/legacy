@@ -506,7 +506,7 @@ legend {
     display: block;
     transform-origin: 100% 0;
     -webkit-animation: fadeIn .3s ease-in-out;
-            animation: fadeIn .3s ease-in-out;
+    animation: fadeIn .3s ease-in-out;
 }
 
 .help-tip p {
@@ -621,7 +621,7 @@ div.tab button.active {
 //*fade in effect on tab */
 .tabcontent {
     -webkit-animation: fadeEffect 1s;
-            animation: fadeEffect .5s; //* Fading effect takes 1 second */
+    animation: fadeEffect .5s; //* Fading effect takes 1 second */
 }
 
 @-webkit-keyframes fadeEffect {

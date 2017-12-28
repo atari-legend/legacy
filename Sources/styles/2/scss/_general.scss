@@ -112,7 +112,9 @@ img {
     margin-top: 0;
 }
 
-.column_wide_right_1920, .column_wide_left_1920, .column_wide_center_1920 {
+.column_wide_right_1920,
+.column_wide_left_1920,
+.column_wide_center_1920 {
     display: none;
 }
 
@@ -247,7 +249,8 @@ a.standard_tile_link:link {
     outline: 0 none;
 }
 
-a.standard_tile_link:hover, a.standard_tile_link:focus {
+a.standard_tile_link:hover,
+a.standard_tile_link:focus {
     color: #000000;
     text-shadow: -1px 1px 8px #666666, 1px -1px 8px #515151;
 }
