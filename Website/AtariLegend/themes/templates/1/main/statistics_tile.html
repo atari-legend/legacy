@@ -26,7 +26,7 @@
                 {assign var="number" value=1}
             {foreach from=$statistics item=line}
 
-                    <div {if $number is even}class="statistics_list_entry w-100 table_medium"{else}class="statistics_list_entry_odd w-100"{/if}>
+                    <div {if $number is even}class="statistics_list_entry w-100 table_md"{else}class="statistics_list_entry_odd w-100"{/if}>
                         <span class="stats_text">{if $line.value != ''}{$line.value}{/if}</span>
 
                     </div>
