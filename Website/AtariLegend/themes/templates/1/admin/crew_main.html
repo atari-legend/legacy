@@ -103,7 +103,7 @@ function searchCrew(str) {
 <div class="standard_tile">
     <h1>CREW EDITOR </h1>
     <div class="standard_tile_line"></div>
-    <div class="standard_table_center">
+    <div class="standard_tile_text_center">
         <br>
         Search for crew:<br>
         <form action="../crew/crew_editor.php" method="get" name="post_menu_crew_set" id="menu_crew_set">
@@ -150,14 +150,14 @@ function searchCrew(str) {
 <div class="standard_tile">
     <h1>EDIT CREW</h1>
     <div class="standard_tile_line"></div>
-    <div class="standard_tile_text">
+    <div class="standard_tile_padding">
         <div class="left_nav_section">
             In this section you can add or edit a crew. Search for a crew by using any of the
             functionalities on the left.
         </div>
     <br>
     <br>
-    <div class="standard_table_center">{if (isset($new_crew) and $new_crew <> '')}{$new_crew} added to the database!{/if}</div>
+    <div class="standard_tile_text_center">{if (isset($new_crew) and $new_crew <> '')}{$new_crew} added to the database!{/if}</div>
     <br>
     </div>
 </div>

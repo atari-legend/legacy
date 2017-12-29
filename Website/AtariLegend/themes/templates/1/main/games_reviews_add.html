@@ -290,7 +290,7 @@
                 <h1>GAME REVIEWS</h1>
                 <div class="standard_tile_line"></div>
                 <div class="games_main_detail_comments_container">
-                    <table class="standard_table_list_stats table_md">
+                    <table class="standard_table_list table_md no_border">
                         {if isset($reviews_author)}
                         <tr>
                             <td colspan="2">
@@ -364,7 +364,7 @@
                     <!--START Write a review tile -->
                     <!--**************************-->
                     <form id="post" onsubmit="return add_review();" name="post">
-                        <div class="standard_tile_text">
+                        <div class="standard_tile_padding">
                             <h6>
                                 Written by : <br>
                                 <select name="members" class="standard_select select_large">
@@ -377,7 +377,7 @@
                                 <div style="width:200px;">{html_select_date start_year="2000" class="standard_select"}</div>
                             </h6>
                         </div>
-                        <div class="standard_tile_text">
+                        <div class="standard_tile_padding">
                             <h6>Review :</h6>
                             <div style="width:100%;text-align:left;margin-top:10px;">
                                 <input type="button" accesskey= "b" name="addbbcode0" value="B" onclick="bbstyle(0,'textfield')" class="quick_search_games_button" style="min-width:20px;width:0;display:inline;" title="Bold">
@@ -397,7 +397,7 @@
                             </div>
                         </div>
                         <br>
-                        <div class="standard_tile_text" style="text-align:center;">
+                        <div class="standard_tile_padding" style="text-align:center;">
                             <h6>Screenshots</h6>
                             <br>
                             {if $nr_screenshots <> 0}
@@ -436,7 +436,7 @@
                     <!--START Preview tile -->
                     <!--*********************-->
                     <br>
-                    <div class="standard_tile_text" id="games_detail_review_bg">
+                    <div class="standard_tile_padding" id="games_detail_review_bg">
                         <h4 style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;display:inline;">
                             Written by <a href="../../admin/user/user_detail.php?user_id_selected={$user_session.user_id}" class="standard_tile_link">{$user_session.userid}</a>
                         </h4>
@@ -489,7 +489,7 @@
                 <div class="standard_tile">
                     <h1>{$game_info.game_name|upper}</h1>
                     <div class="standard_tile_line"></div>
-                    <div class="standard_tile_text">
+                    <div class="standard_tile_padding">
                         <h6>Please log in to use this page</h6>
                     </div>
                 </div>

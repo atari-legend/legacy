@@ -65,7 +65,7 @@ On this page we link authors to a menu disk title
                     {foreach name=outer item=individual from=$title_credits}
                         <tr>
                             <td class="menu_cred_td w-30">{$individual.author_type_info}</td>
-                            <td class="menu_scene_td w-30"><a href="../individuals/individuals_edit.php?ind_id={$individual.ind_id}" class="standard_table_left">{$individual.ind_name}</a></td>
+                            <td class="menu_scene_td w-30"><a href="../individuals/individuals_edit.php?ind_id={$individual.ind_id}" class="standard_tile_text_left">{$individual.ind_name}</a></td>
                             <td class="menu_delete_td w-10">
                                 <input type="button" onclick="deleteTitleCredits({$menu_disk_title_id},{$individual.ind_id},{$individual.author_type_id})" class="quick_search_games_button" value="delete" style="margin-right:5px;">
                             </td>

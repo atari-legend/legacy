@@ -736,7 +736,7 @@ function deleteDownload(str, game_id) {
     <div class="standard_tile">
         <h1>OPTIONS</h1>
         <div class="standard_tile_line"></div>
-        <div class="standard_table_center">
+        <div class="standard_tile_text_center">
             <br>
             Quick add new format to db:
             <form action="../downloads/db_downloads_game.php" method="post" name="post_download_format_add" id="download_format_add">
@@ -809,12 +809,12 @@ function deleteDownload(str, game_id) {
 <div class="standard_tile" id="game_upload">
     <h1>{$game.game_name}</h1>
     <div class="standard_tile_line"></div>
-    <div class="standard_tile_text">
+    <div class="standard_tile_padding">
         <div class="left_nav_section">
             In this section you can upload a download for <b><a href="../games/games_detail.php?game_id={$game.game_id}" class="standard_tile_link_reverse">{$game.game_name}</a></b>.
         </div>
         <br>
-        <div class="standard_tile_text">
+        <div class="standard_tile_padding">
             <form action="../downloads/db_downloads_game.php?action=add_download" enctype="multipart/form-data" method="post" name="add_file">
             <fieldset class="centered_fieldset">
                 <legend>Add a new download</legend>
@@ -833,7 +833,7 @@ function deleteDownload(str, game_id) {
             </form>
         </div>
         <br>
-        <table class="standard_table_list w-100">
+        <table class="secondary_table_list table_hover table_sm w-100">
             <tr>
                 <th class="menu_disk_list_th w-30">Filename</th>
                 <th class="menu_state_th w-30">Date</th>
@@ -847,13 +847,13 @@ function deleteDownload(str, game_id) {
                 {/foreach}
             {/if}
             <tr>
-                <td class="standard_table_left" colspan="2">
-                    <br><b>{if $nr_downloads == 1}1 download found {else} {$nr_downloads} downloads found{/if}</b>
+                <td colspan="2">
+                    <b>{if $nr_downloads == 1}1 download found {else} {$nr_downloads} downloads found{/if}</b>
                 </td>
             </tr>
         </table>
     </div>
-    <div class="standard_table_center"><a href="javascript:history.go(-1)" class="standard_tile_link">back</a></div>
+    <div class="standard_tile_text_center"><a href="javascript:history.go(-1)" class="standard_tile_link">back</a></div>
     <br>
 </div>
 {/block}

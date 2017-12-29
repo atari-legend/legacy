@@ -17,7 +17,7 @@
 {* Full search list *}
 {if isset($smarty_action) and $smarty_action == "full_list"}
     <form action="" method="post" name="game_search" id="game_search_menu">
-        <div class="standard_tile_text">
+        <div class="standard_tile_padding">
             <fieldset class="centered_fieldset">
             <legend>Search</legend>
                 By name : <br>
@@ -36,7 +36,7 @@
     <form action="" method="get" name="game_add_to_menu" id="game_add_to_menu">
         {if isset($series_link) }
         <div id="game_list">
-            <table class="table_game_list w-95">
+            <table class="secondary_table_list table_hover w-95">
                 <tr>
                     <th class="menu_mark_th w-5">Add</th>
                     <th class="game_th w-40">Game Name</th>
@@ -54,12 +54,12 @@
                         </div>
                     </td>
                     <td class="game_td w-40">
-                        {if $line.game_name != ''}{if $line.software_type == 'Game'}<a href="../games/games_detail.php?game_id={$line.game_id}" class="standard_table_left">{$line.game_name}</a>{else}<a href="../administration/construction.php" class="standard_table_left">{$line.game_name}</a>{/if}
+                        {if $line.game_name != ''}{if $line.software_type == 'Game'}<a href="../games/games_detail.php?game_id={$line.game_id}" class="standard_tile_text_left">{$line.game_name}</a>{else}<a href="../administration/construction.php" class="standard_tile_text_left">{$line.game_name}</a>{/if}
                             {else}<i>n/a</i>{/if}
                     </td>
                     <td class="pub_td w-20">
                         {if $line.publisher_name != ''}
-                            <a href="../games/games_list.php?publisher={$line.publisher_id}&amp;action=search" class="standard_table_left">
+                            <a href="../games/games_list.php?publisher={$line.publisher_id}&amp;action=search" class="standard_tile_text_left">
                                 {$line.publisher_name}
                             </a>
                         {else}
@@ -68,7 +68,7 @@
                     </td>
                     <td class="dev_td w-20">
                         {if $line.developer_name != ''}
-                            <a href="../games/games_list.php?developer={$line.developer_id}&amp;action=search" class="standard_table_left">
+                            <a href="../games/games_list.php?developer={$line.developer_id}&amp;action=search" class="standard_tile_text_left">
                                 {$line.developer_name}
                             </a>
                         {else}
@@ -77,7 +77,7 @@
                     </td>
                     <td class="year_td w-10">
                         {if $line.year != ''}
-                            <a href="../games/games_main.php?year={$line.year}&amp;action=search" class="standard_table_left">
+                            <a href="../games/games_main.php?year={$line.year}&amp;action=search" class="standard_tile_text_left">
                                 {$line.year}
                             </a>
                         {else}
@@ -103,7 +103,7 @@
             </table>
         </div>
         {else}
-            <div class="standard_tile_text">
+            <div class="standard_tile_padding">
                 <div class="left_nav_section">
                     No titles found for your query
                 </div>
@@ -116,7 +116,7 @@
 {* INNER SEARCH LIST *}
 {if isset($smarty_action) and $smarty_action == "inner_list"}
     {if isset($series_link) }
-    <table class="table_game_list w-95">
+    <table class="secondary_table_list table_hover w-95">
         <tr>
             <th class="menu_mark_th w-5">Add</th>
             <th class="game_th w-40">Game Name</th>
@@ -133,12 +133,12 @@
                         <input type="checkbox" name="game_id[]" id="{$line.game_id}" value="{$line.game_id}" style="margin-left:4px;" onchange="addGametoMenu(this.value,{$menu_disk_id},'{$line.software_type}')">
                     </div>
                 </td>
-                <td class="game_td w-40">{if $line.game_name != ''}{if $line.software_type == 'Game'}<a href="../games/games_detail.php?game_id={$line.game_id}" class="standard_table_left">{$line.game_name}</a>{else}{$line.game_name}{/if}
+                <td class="game_td w-40">{if $line.game_name != ''}{if $line.software_type == 'Game'}<a href="../games/games_detail.php?game_id={$line.game_id}" class="standard_tile_text_left">{$line.game_name}</a>{else}{$line.game_name}{/if}
                         {else}<i>n/a</i>{/if}
                 </td>
                 <td class="pub_td w-20">
                     {if $line.publisher_name != ''}
-                        <a href="../games/games_main.php?publisher={$line.publisher_id}&amp;action=search" class="standard_table_left">
+                        <a href="../games/games_main.php?publisher={$line.publisher_id}&amp;action=search" class="standard_tile_text_left">
                             {$line.publisher_name}
                         </a>
                     {else}
@@ -147,7 +147,7 @@
                 </td>
                 <td class="dev_td w-20">
                     {if $line.developer_name != ''}
-                        <a href="../games/games_main.php?developer={$line.developer_id}&amp;action=search" class="standard_table_left">
+                        <a href="../games/games_main.php?developer={$line.developer_id}&amp;action=search" class="standard_tile_text_left">
                             {$line.developer_name}
                         </a>
                     {else}
@@ -156,7 +156,7 @@
                 </td>
                 <td class="year_td w-10">
                     {if $line.year != ''}
-                        <a href="../games/games_main.php?year={$line.year}&amp;action=search" class="standard_table_left">
+                        <a href="../games/games_main.php?year={$line.year}&amp;action=search" class="standard_tile_text_left">
                             {$line.year}
                         </a>
                     {else}
@@ -181,7 +181,7 @@
         </tr>
     </table>
     {else}
-        <div class="standard_tile_text">
+        <div class="standard_tile_padding">
             <div class="left_nav_section">
                 No titles found for your query
             </div>

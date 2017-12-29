@@ -43,7 +43,7 @@ function trainerdelete(trainer_id)
     {if isset($trainer_edit.trainer_name_edit) }
     <h1>EDIT TRAINER</h1>
     <div class="standard_tile_line"></div>
-    <div class="standard_tile_text">
+    <div class="standard_tile_padding">
         <fieldset class="centered_fieldset">
             <legend>Edit trainer option</legend>
             <form action="../downloads/db_download_trainer.php" method="post" name="post" id="trainer_edit">
@@ -61,13 +61,13 @@ function trainerdelete(trainer_id)
     {else}
     <h1>Edit trainer option</h1>
     <div class="standard_tile_line"></div>
-    <div class="standard_tile_text">
+    <div class="standard_tile_padding">
         <div class="left_nav_section">
             Trainer option does not exist.
         </div>
     </div>
     {/if}
-    <div class="standard_table_center"><a href="../downloads/download_trainer.php" class="standard_tile_link">back</a></div>
+    <div class="standard_tile_text_center"><a href="../downloads/download_trainer.php" class="standard_tile_link">back</a></div>
     <br>
 </div>
 {/block}

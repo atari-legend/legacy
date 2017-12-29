@@ -30,7 +30,7 @@ The main game page
 <div class="standard_tile">
     <h1>SET OPTIONS</h1>
     <div class="standard_tile_line"></div>
-    <div class="standard_table_center">
+    <div class="standard_tile_text_center">
         <br>
         <form action="../menus/menus_disk_list.php" method="get" name="post" id="menu_set_change">
             <select name="menu_sets_id" class="standard_select select_large" onchange="this.form.submit()">
@@ -196,7 +196,7 @@ The main game page
 <div class="standard_tile">
     <h1>EDIT SET</h1>
     <div class="standard_tile_line"></div>
-    <div class="standard_tile_text">
+    <div class="standard_tile_padding">
         <div class="left_nav_section">
             Overhere you can edit/delete menu set <b>{$menu_set.menu_sets_name}</b>, or you can add menu disks to it. You can also make the set available on the website with the publish options.
         </div>
@@ -238,7 +238,7 @@ The main game page
                 {/foreach}
             {/if}
             <tr>
-                <td class="standard_table_left" colspan="4">
+                <td colspan="4">
                     <b>{if $nr_of_entries == 1}1 menu disk found {else} {$nr_of_entries} menu disks found{/if} in {$querytime} sec </b>
                 </td>
             </tr>
@@ -246,6 +246,6 @@ The main game page
     </div>
 </div>
 <br>
-<div class="standard_table_center"><a href="javascript:history.go(-1)" class="standard_tile_link">back</a></div>
+<div class="standard_tile_text_center"><a href="javascript:history.go(-1)" class="standard_tile_link">back</a></div>
 <br>
 {/block}

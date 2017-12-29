@@ -97,7 +97,7 @@ function deleteseries()
 <div class="standard_tile" id="games_series_add_games">
     <h1>{$series_info.game_series_name}</h1>
     <div class="standard_tile_line"></div>
-    <div class="standard_tile_text">
+    <div class="standard_tile_padding">
         <div class="left_nav_section">
             Over here you can add games to a series.
         </div>
@@ -154,18 +154,18 @@ function deleteseries()
                                 <label for="{$line.game_id}"></label>
                             </div>
                         </td>
-                        <td class="game_td w-40">{if $line.game_name != ''}<a href="games_detail.php?game_id={$line.game_id}" class="standard_table_left">{$line.game_name}</a>
+                        <td class="game_td w-40">{if $line.game_name != ''}<a href="games_detail.php?game_id={$line.game_id}" class="standard_tile_text_left">{$line.game_name}</a>
                                 {else}<i>n/a</i>{/if}
                         </td>
                         <td class="pub_td w-20">{if $line.publisher_name != ''}
-                                <a href="games_main.php?publisher={$line.publisher_id}&amp;action=search" class="standard_table_left">
+                                <a href="games_main.php?publisher={$line.publisher_id}&amp;action=search" class="standard_tile_text_left">
                                     {$line.publisher_name}
                             </a>
                                 {else}
                                     <i>n/a</i>
                                 {/if}</td>
                         <td class="dev_td w-20">{if $line.developer_name != ''}
-                                <a href="games_main.php?developer={$line.developer_id}&amp;action=search" class="standard_table_left">
+                                <a href="games_main.php?developer={$line.developer_id}&amp;action=search" class="standard_tile_text_left">
                                     {$line.developer_name}
                                 </a>
                                 {else}
@@ -173,7 +173,7 @@ function deleteseries()
                                 {/if}</td>
                         <td class="year_td w-10">
                             {if $line.year != ''}
-                                <a href="games_main.php?year={$line.year}&amp;action=search" class="standard_table_left">
+                                <a href="games_main.php?year={$line.year}&amp;action=search" class="standard_tile_text_left">
                                     {$line.year}
                                 </a>
                                 {else}
@@ -199,7 +199,7 @@ function deleteseries()
         {/if}
         </form>
         <br>
-        <div class="standard_table_center"><a href="../games/games_series_editor.php?series_page=series_editor&game_series_id={$series_info.game_series_id}" class="standard_tile_link">back</a></div>
+        <div class="standard_tile_text_center"><a href="../games/games_series_editor.php?series_page=series_editor&game_series_id={$series_info.game_series_id}" class="standard_tile_link">back</a></div>
     </div>
 </div>
 {/block}

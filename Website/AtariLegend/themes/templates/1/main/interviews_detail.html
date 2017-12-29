@@ -388,11 +388,11 @@
             <div class="standard_tile">
                 <h1>PROFILE</h1>
                 <div class="standard_tile_line"></div>
-                <table class="standard_table_list_stats">
+                <table class="standard_table_list no_border">
                 <tr>
                     <td>
                         {if $interview.individual_profile == 'none'}
-                            <div class="standard_tile_text">
+                            <div class="standard_tile_padding">
                                 <h6 style="text-align:center;">There is currently no profile availabe in our database</h6>
                             </div>
                         {else}
@@ -418,7 +418,7 @@
                 <h1>CREDITS</h1>
                 <div class="standard_tile_line"></div>
                 <div class="games_main_detail_comments_container">
-                    <table class="standard_table_list_stats table_md">
+                    <table class="standard_table_list table_md no_border">
                         {if isset($games)}
                         <tr>
                             <td colspan="2">
@@ -443,7 +443,7 @@
                         {else}
                             <tr>
                                 <td class="w-100">
-                                    <div class="standard_tile_text">
+                                    <div class="standard_tile_padding">
                                         <h6 style="text-align:center;">
                                             There are currently no credits for this person in our database
                                         </h6>
@@ -467,7 +467,7 @@
             <div class="standard_tile">
                 <h1>INTERVIEW</h1>
                 <div class="standard_tile_line"></div>
-                <div class="standard_tile_text" id="games_detail_review_bg">
+                <div class="standard_tile_padding" id="games_detail_review_bg">
                     <h4 style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;display:inline;">
                         Written by <a href="../../admin/user/user_detail.php?user_id_selected={$interview.interview_author_id}" class="standard_tile_link">{$interview.interview_author}</a>
                     </h4>
@@ -565,8 +565,7 @@
                     <div id="latest_comments_all">
                     {if isset($comments)}
                         <div class="games_main_detail_comments_container">
-                            <div class="standard_list_entry">
-                                <table class="standard_table_list_comments">
+                                <table class="standard_table_list table_md">
                                 {foreach from=$comments item=line}
                                     <tr>
                                         <td class="standard_table_left">
@@ -611,7 +610,6 @@
                                     </tr>
                                 {/foreach}
                                 </table>
-                            </div>
                         </div>
                     {/if}
                     </div>

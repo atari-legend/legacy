@@ -25,7 +25,7 @@
                 <div class="standard_tile">
                     <h1>SUBMIT NEWS</h1>
                     <div class="standard_tile_line"></div>
-                    <div class="standard_tile_text">
+                    <div class="standard_tile_padding">
                         <h6 style="text-align:justify;">Did something important happen in the Atari scene
                         that has not been posted yet, make sure to let us know by simply filling in this form. You will be
                         credited on the front page of AtariLegend!</h6>
@@ -61,7 +61,7 @@
             <div class="standard_tile" id="games_main">
                 <h1>LATEST NEWS</h1>
                 <div class="standard_tile_line"></div>
-                <table class="standard_table_list_comments w-100 table_md">
+                <table class="standard_table_list w-100 table_md no_border">
                 {foreach from=$news item=line}
                     <tr>
                         <td class="news_left_head">
@@ -90,7 +90,7 @@
                     </tr>
                 {/foreach}
                 </table>
-                <div class="standard_table_center">
+                <div class="standard_tile_text_center">
                     {if $links.linkback != ''}
                         <a href ="../news/news.php{$links.linkback}" class="standard_tile_link" style="float:left;margin-left:5px;margin-top:10px;">Previous page</a>
                     {/if}

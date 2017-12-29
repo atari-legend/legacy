@@ -49,7 +49,7 @@ function delete_news(news_id)
     </div>
     <h1>NEWS EDIT</h1>
     <div class="standard_tile_line"></div>
-    <div class="standard_tile_text">
+    <div class="standard_tile_padding">
         <div class="left_nav_section">
             This is the main edit page. Here you may selected whichever news update and edit it.
             Currently <b>{$news_nr}</b> news threads in the database.
@@ -88,7 +88,7 @@ function delete_news(news_id)
             <br/>
             <br/>
         {/foreach}
-        <div class="standard_table_center">
+        <div class="standard_tile_text_center">
             {if $links.linkback != ''}
                 <a href ="{$links.linkback}" class="standard_tile_link" style="float:left;">Previous news</a>
             {/if}

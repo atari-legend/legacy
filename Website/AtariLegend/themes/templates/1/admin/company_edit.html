@@ -203,7 +203,7 @@ function storeCaret(textEl) {
     {if (isset($company.comp_name))}
     <h1>{$company.comp_name}</h1>
     <div class="standard_tile_line"></div>
-    <div class="standard_tile_text">
+    <div class="standard_tile_padding">
         <div class="left_nav_section">
             In this section you can edit a company. You can use the profile box for additional info.
             A logo can be uploaded as well. If a picture is already linked, you can delete it and upload a new one.
@@ -265,12 +265,12 @@ function storeCaret(textEl) {
             </form>
         {/if}
         <br>
-        <div class="standard_table_center"><a href="javascript:history.go(-1)" class="standard_tile_link">back</a></div>
+        <div class="standard_tile_text_center"><a href="javascript:history.go(-1)" class="standard_tile_link">back</a></div>
     </div>
     {else}
         <h1>COMPANY EDIT</h1>
         <div class="standard_tile_line"></div>
-        <div class="standard_tile_text">
+        <div class="standard_tile_padding">
             <div class="left_nav_section">
                 Company does not exist.
             </div>

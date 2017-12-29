@@ -60,8 +60,7 @@
     <div id="latest_comments_all">
     {if isset($comments)}
         <div class="games_main_detail_comments_container">
-            <div class="standard_list_entry">
-                <table class="standard_table_list_comments">
+                <table class="standard_table_list table_md no_border">
                 {foreach from=$comments item=line}
                     <tr>
                         <td class="standard_table_left">
@@ -105,7 +104,6 @@
                     </tr>
                 {/foreach}
                 </table>
-            </div>
         </div>
     {/if}
     </div>

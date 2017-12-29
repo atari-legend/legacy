@@ -144,7 +144,7 @@ function browseDeveloper(str) {
     {if isset ($game_info)}
         <h1>{$game_info.game_name}</h1>
         <div class="standard_tile_line"></div>
-        <div class="standard_tile_text">
+        <div class="standard_tile_padding">
             <fieldset>
                 <legend>Basic game info - help</legend>
                         Overhere you can add additional game info. Just select what you think is neceasrry, and press the modify button to link it all to the game.
@@ -621,20 +621,20 @@ function browseDeveloper(str) {
             </div>
             <div id="gd_bottom">
                 <div id="gd_back">
-                    <div class="standard_table_center"><a href="javascript:history.go(-1)" class="standard_tile_link">back</a></div>
+                    <div class="standard_tile_text_center"><a href="javascript:history.go(-1)" class="standard_tile_link">back</a></div>
                 </div>
             </div>
         </div>
     {else}
         <div class="standard_tile_line"></div>
-        <div class="standard_tile_text">
+        <div class="standard_tile_padding">
             <div class="left_nav_section">
                 Game not available
             </div>
         </div>
         <div id="gd_bottom">
             <div id="gd_back">
-                <div class="standard_table_center"><a href="javascript:history.go(-1)" class="standard_tile_link">back</a></div>
+                <div class="standard_tile_text_center"><a href="javascript:history.go(-1)" class="standard_tile_link">back</a></div>
             </div>
         </div>
     {/if}

@@ -134,14 +134,10 @@
     .menu_list_ind_td,
     .menu_crew_th,
     .menu_crew_td,
-    .td_db_result,
-    .th_db_result,
-    .th_db_state,
-    .td_db_state,
-    .td_db_id,
-    .th_db_id,
-    .th_db_exe,
-    .td_db_exe,
+    .db_result,
+    .db_state,
+    .db_id,
+    .db_exe,
     .nrreviews_gr_th,
     .nrreviews_gr_td,
     #linkcat_wide {
@@ -225,12 +221,9 @@
 }
 @media screen and (max-width: 600px) {
     .download_long_descr,
-    .td_db_result,
-    .th_db_result,
-    .th_db_state,
-    .td_db_state,
-    .td_db_id,
-    .th_db_id,
+    .db_result,
+    .db_state,
+    .db_id,
     .nr_menus_th,
     .menu_type_th,
     .nr_menus_td,
@@ -571,10 +564,8 @@
         display: inline;
     }
     .news_right_head,
-    .td_db_result,
-    .th_db_result,
-    .th_db_state,
-    .td_db_state {
+    .db_result,
+    .db_state {
         display: none;
     }
     .news_left_head {
@@ -869,9 +860,7 @@
     #welcome {
         margin-top: 0;
     }
-    .td_db_result,
-    .th_db_result,
-    #quick_links_tile,
+    .db_result,
     #gd_other_features {
         display: none;
     }

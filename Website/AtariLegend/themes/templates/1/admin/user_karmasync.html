@@ -23,7 +23,7 @@ The the user karma sync page
 <div class="standard_tile" id="karma">
     <h1>KARMA SYNC</h1>
     <div class="standard_tile_line"></div>
-    <div class="standard_tile_text">
+    <div class="standard_tile_padding">
         <div class="left_nav_section">
             Karma values have all been resynced for the total user population.
         </div>
@@ -34,13 +34,13 @@ The the user karma sync page
             <td>
                 <table class="standard_table_list w-100">
                     <tr>
-                        <th class="karma_column w-50">User</th>
-                        <th class="karma_column w-50">Karma</th>
+                        <th class="w-50">User</th>
+                        <th class="w-50">Karma</th>
                     </tr>
                     {foreach from=$sync item=line}
                     <tr>
-                        <td class="karma_column w-50">{if $line.user_name != ''}<a class="standard_table_center">{$line.user_name}</a>{/if}</td>
-                        <td class="karma_column w-50">{if $line.karma_value != ''}<a class="standard_table_center">{$line.karma_value}</a>{/if}</td>
+                        <td class="w-50">{if $line.user_name != ''}<a class="standard_tile_text_center">{$line.user_name}</a>{/if}</td>
+                        <td class="w-50">{if $line.karma_value != ''}<a class="standard_tile_text_center">{$line.karma_value}</a>{/if}</td>
                     </tr>
                     {/foreach}
                 </table>
@@ -49,7 +49,7 @@ The the user karma sync page
         </table>
         <br>
         <br>
-        <div class="standard_table_center"><a href="../user/user_main.php" class="standard_tile_link">back</a></div>
+        <div class="standard_tile_text_center"><a href="../user/user_main.php" class="standard_tile_link">back</a></div>
         <br>
     </div>
 </div>

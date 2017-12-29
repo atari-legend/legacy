@@ -1468,41 +1468,31 @@
 //Admin - DB updates
 //------------------------------------------------------------ */
 @media screen and (max-width: 500px) {
-    .td_db_result,
-    .th_db_result,
-    .th_db_state,
-    .td_db_state,
-    .td_db_id,
-    .th_db_id,
-    .th_db_exe,
-    .td_db_exe {
+    .db_result,
+    .db_state,
+    .db_id,
+    .db_exe {
         display: none;
     }
 }
 
 @media screen and (max-width: 600px) {
-    .td_db_result,
-    .th_db_result,
-    .th_db_state,
-    .td_db_state,
-    .td_db_id,
-    .th_db_id {
+    .db_result,
+    .db_state,
+    .db_id {
         display: none;
     }
 }
 
 @media screen and (max-width: 900px) {
-    .td_db_result,
-    .th_db_result,
-    .th_db_state,
-    .td_db_state {
+    .db_result,
+    .db_state {
         display: none;
     }
 }
 
 @media screen and (max-width: 1279px) {
-    .td_db_result,
-    .th_db_result {
+    .db_result {
         display: none;
     }
 }

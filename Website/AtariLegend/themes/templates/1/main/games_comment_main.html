@@ -166,15 +166,14 @@
                 </div>
                 <h1>GAME COMMENTS</h1>
                 <div class="standard_tile_line"></div>
-                <div class="standard_tile_text">
+                <div class="standard_tile_padding">
                     <h6 style="text-align:center;">
                         There is currently a total of <span style="font-weight:bold;">{$total_nr_comments}</span> comments in the AL database!
                     </h6>
                 </div>
-                <div class="standard_tile_line"></div>
-                <div class="standard_list_entry">
+
                     <div id="main_comments_all">
-                        <table class="standard_table_list_comments">
+                        <table class="standard_table_list table_md">
                         {foreach from=$comments item=line}
                             <tr>
                                 <td class="gc_left_head w-20">
@@ -241,8 +240,7 @@
                         {/foreach}
                         </table>
                     </div>
-                </div>
-                <div class="standard_table_center">
+                <div class="standard_tile_text_center">
                     {if $links.linkback != ''}
                         <a href ="../games/games_comment_main.php{$links.linkback}" class="standard_tile_link" style="float:left;margin-left:5px;margin-top:10px;">Previous page</a>
                     {/if}
@@ -253,8 +251,8 @@
             </div>
             <br>
             <br>
-            <div class="standard_table_center">
-                <div class="standard_table_center"><a href="javascript:history.go(-1)" class="standard_tile_link">back</a></div>
+            <div class="standard_tile_text_center">
+                <div class="standard_tile_text_center"><a href="javascript:history.go(-1)" class="standard_tile_link">back</a></div>
             </div>
             <br>
         </div>

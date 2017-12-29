@@ -43,7 +43,7 @@ function typedelete(type_id)
     {if isset($type_edit.type_edit) }
     <h1>EDIT TYPE</h1>
     <div class="standard_tile_line"></div>
-    <div class="standard_tile_text">
+    <div class="standard_tile_padding">
         <fieldset class="centered_fieldset">
             <legend>Edit type</legend>
             <form action="../administration/db_bug_report_type.php" method="post" name="post" id="type_edit">
@@ -60,13 +60,13 @@ function typedelete(type_id)
     {else}
     <h1>Edit Type</h1>
     <div class="standard_tile_line"></div>
-    <div class="standard_tile_text">
+    <div class="standard_tile_padding">
         <div class="left_nav_section">
             Type does not exist.
         </div>
     </div>
     {/if}
-    <div class="standard_table_center"><a href="../administration/bug_report_type.php" class="standard_tile_link">back</a></div>
+    <div class="standard_tile_text_center"><a href="../administration/bug_report_type.php" class="standard_tile_link">back</a></div>
     <br>
 </div>
 {/block}
