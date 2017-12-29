@@ -973,34 +973,19 @@
 //User search
 //------------------------------------------------------------ */
 @media screen and (max-width: 1150px) {
-    .email_th {
-        display: none;
-    }
-    .email_td {
-        display: none;
-    }
-    .website_th {
-        display: none;
-    }
-    .website_td {
+    .email_column {
         display: none;
     }
 }
 
 @media screen and (max-width: 600px) {
-    .lastvisit_th {
-        display: none;
-    }
-    .lastvisit_td {
+    .lastvisit_column {
         display: none;
     }
 }
 
 @media screen and (max-width: 450px) {
-    .joindate_th {
-        display: none;
-    }
-    .joindate_td {
+    .joindate_column {
         display: none;
     }
 }
@@ -1383,22 +1368,19 @@
 //------------------------------------------------------------ */
 
 @media screen and (max-width: 550px) {
-    .zaks_gm_th,
-    .zaks_gm_td {
+    .zaks_gm_column {
         display: none;
     }
 }
 
 @media screen and (max-width: 1000px) {
-    .pub_gm_th,
-    .pub_gm_td {
+    .pub_gm_column {
         display: none;
     }
 }
 
 @media screen and (max-width: 1450px) {
-    .year_gm_th,
-    .year_gm_td {
+    .year_gm_column {
         display: none;
     }
 }
@@ -1506,31 +1488,31 @@
 //Admin - DB updates
 //------------------------------------------------------------ */
 @media screen and (max-width: 500px) {
-    .db_result,
-    .db_state,
-    .db_id,
-    .db_exe {
+    .db_result_column,
+    .db_state_column,
+    .db_id_column,
+    .db_exe_column {
         display: none;
     }
 }
 
 @media screen and (max-width: 600px) {
-    .db_result,
-    .db_state,
-    .db_id {
+    .db_result_column,
+    .db_state_column,
+    .db_id_column {
         display: none;
     }
 }
 
 @media screen and (max-width: 900px) {
-    .db_result,
-    .db_state {
+    .db_result_column,
+    .db_state_column {
         display: none;
     }
 }
 
 @media screen and (max-width: 1279px) {
-    .db_result {
+    .db_result_column {
         display: none;
     }
 }
@@ -1545,31 +1527,26 @@
 }
 
 @media screen and (max-width: 450px) {
-    .log_subsection_th,
-    .log_date_th,
-    .log_subsection_td,
-    .log_date_td {
+    .log_subsection_column,
+    .log_date_column {
         display: none;
     }
 }
 
 @media screen and (max-width: 525px) {
-    .log_subsection_th,
-    .log_subsection_td {
+    .log_subsection_column {
         display: none;
     }
 }
 
 @media screen and (max-width: 725px) {
-    .log_name_th,
-    .log_name_td {
+    .log_name_column {
         display: none;
     }
 }
 
 @media screen and (max-width: 1200px) {
-    .log_sub_name_th,
-    .log_subname_td {
+    .log_subname_column {
         display: none;
     }
 }
