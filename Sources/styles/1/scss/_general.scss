@@ -155,7 +155,26 @@ img {
 .standard_tile_subtext a:hover {
     color: #ffffff;
 }
-
+.standard_tile_text_center {
+    font-size: 10pt;
+    font-weight: 100;
+    color: #ffffff;
+    text-align: center;
+}
+.standard_tile_text_left {
+    padding-left: 2px;
+    font-size: 10pt;
+    font-weight: 100;
+    color: #ffffff;
+    text-align: left;
+}
+.standard_tile_text_right {
+    padding-right: 2px;
+    font-size: 10pt;
+    font-weight: 100;
+    color: #ffffff;
+    text-align: right;
+}
 .standard_tile p {
     width: 91.7%;
     padding-right: 4%;
@@ -362,7 +381,7 @@ img {
     font-size: 11pt;
 }
 
-.standard_tile_text {
+.standard_tile_padding {
     padding: 20px;
 }
 

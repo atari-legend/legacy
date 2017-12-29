@@ -43,7 +43,7 @@ function tosdelete(tos_id)
     {if isset($tos_edit.tos_name_edit) }
     <h1>EDIT TOS</h1>
     <div class="standard_tile_line"></div>
-    <div class="standard_tile_text">
+    <div class="standard_tile_padding">
         <fieldset class="centered_fieldset">
             <legend>Edit TOS version</legend>
             <form action="../downloads/db_download_tos.php" method="post" name="post" id="tos_edit">
@@ -61,13 +61,13 @@ function tosdelete(tos_id)
     {else}
     <h1>Edit TOS version</h1>
     <div class="standard_tile_line"></div>
-    <div class="standard_tile_text">
+    <div class="standard_tile_padding">
         <div class="left_nav_section">
             TOS version does not exist.
         </div>
     </div>
     {/if}
-    <div class="standard_table_center"><a href="../downloads/download_tos.php" class="standard_tile_link">back</a></div>
+    <div class="standard_tile_text_center"><a href="../downloads/download_tos.php" class="standard_tile_link">back</a></div>
     <br>
 </div>
 {/block}

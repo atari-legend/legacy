@@ -24,14 +24,14 @@ The main game page
 <div class="standard_tile" id="games_music_list">
     <h1>GAME MUSIC</h1>
     <div class="standard_tile_line"></div>
-    <div class="standard_tile_text">
+    <div class="standard_tile_padding">
         <div class="left_nav_section">
         This is the search result page. Click a game to go to the main music page.
         If you want to do a new search query, click <a href="games_music.php" class="standard_tile_link"><b>here</b></a>!
         </div>
         <br>
         <br>
-        <table class="standard_table_list w-100">
+        <table class="secondary_table_list w-100 table_hover table_md">
         <tr>
             <th class="game_gm_th w-50">Game Name</th>
             <th class="pub_gm_th w-25">Publisher</th>
@@ -40,20 +40,20 @@ The main game page
         </tr>
         {foreach from=$music item=line}
             <tr>
-                <td class="game_gm_td w-50">{if $line.game_name != ''}<a href="games_music_detail.php?game_id={$line.game_id}" class="standard_table_center">{$line.game_name}</a>{else}<i>n/a</i>{/if}</td>
+                <td class="game_gm_td w-50">{if $line.game_name != ''}<a href="games_music_detail.php?game_id={$line.game_id}" class="standard_tile_text_center">{$line.game_name}</a>{else}<i>n/a</i>{/if}</td>
                 <td class="pub_gm_td w-25">{if $line.game_publisher != ''}{$line.game_publisher}{else}<i>n/a</i>{/if}</td>
                 <td class="year_gm_td w-15">{if $line.game_year != ''}{$line.game_year}{else}<i>n/a</i>{/if}</td>
                 <td class="zaks_gm_td w-10">{if $line.number_zaks != ''}{$line.number_zaks}{else}<i>0</i>{/if}</td>
             </tr>
         {/foreach}
         <tr>
-            <td colspan="4" class="standard_table_left">
+            <td colspan="4">
                 {if $nr_of_entries == 1}1 game found {else} {$nr_of_entries} games found{/if} in {$querytime} sec
             </td>
         </tr>
         </table>
         <br>
-        <div class="standard_table_center"><a href="../games/games_music.php" class="standard_tile_link">back</a></div>
+        <div class="standard_tile_text_center"><a href="../games/games_music.php" class="standard_tile_link">back</a></div>
     </div>
 </div>
 {/block}

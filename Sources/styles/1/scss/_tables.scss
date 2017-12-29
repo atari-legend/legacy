@@ -119,11 +119,12 @@
 //
 // Table cells
 //
-.select_td {
-    padding-left: 2px;
-    font-size: 10pt;
-    font-weight: 100;
-    color: #ffffff;
+.db_result,
+.db_state,
+.db_id,
+.db_description,
+.db_exe {
+    text-align: center;
 }
 .log_date_td,
 .log_action_td,
@@ -159,8 +160,6 @@
 .lastvisit_td,
 .email_td {
     font-size: 10pt;
-    font-weight: 100;
-    color: #ffffff;
     text-align: left;
 }
 .menu_docname_td,
@@ -174,18 +173,19 @@
 .menu_gameyear_td,
 .menu_cred_td,
 .menu_scene_td,
-.menu_delete_td,
-.log_subname_td {
+.menu_delete_td {
     padding-right: 5px;
     font-size: 10pt;
-    font-weight: 100;
     color: #ffffff;
     text-align: left;
 }
-.menu_state_td {
+.karma_points_tablecell {
+    text-align: right;
+}
+.menu_state_td,
+.log_subname_td {
     padding-right: 5px;
     font-size: 10pt;
-    font-weight: 100;
     color: #ffffff;
     text-align: right;
 }
@@ -198,6 +198,7 @@
     color: #ffffff;
     border: solid 1px #000000;
     border-spacing: 0;
+    font-size: 10pt;
 }
 .standard_table_list th {
     margin: 0;
@@ -249,19 +250,6 @@
     background-color: #006f6f;
 }
 
-.standard_table_list_stats {
-    @extend .standard_table_list;
-    border: 0;
-    font-size: 11pt;
-}
-
-.standard_table_list_comments {
-    @extend .standard_table_list_stats;
-}
-
-.standard_table_list_comments td {
-    border-bottom: solid 2px #000000;
-}
 .standard_table_center {
     font-size: 10pt;
     font-weight: 100;
@@ -275,20 +263,11 @@
     color: #ffffff;
     text-align: left;
 }
-.standard_table_right {
-    padding-right: 2px;
-    font-size: 10pt;
-    font-weight: 100;
-    color: #ffffff;
-    text-align: right;
-}
+
 .standard_table_center img {
     display: inline;
 }
 #menu_list_table {
-    background-color: #294f4f;
-}
-#menu_list_table tr:hover {
     background-color: #294f4f;
 }
 #menu_list_table tr:nth-child(even) {
@@ -346,20 +325,8 @@
     margin-bottom: 3px;
     border: 0;
 }
-//*----------------------------------------------------------
-//User Karma
-//------------------------------------------------------------ */
-.karma_column {
-    text-align: center;
-}
+
 //*-----------------------Database updates-------------------------- */
-.td_db_result,
-.td_db_state,
-.td_db_id,
-.td_db_description,
-.td_db_exe {
-    @extend .standard_table_center;
-}
 
 //*----------------------------------------------------------
 //Games review main

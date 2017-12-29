@@ -285,7 +285,7 @@ function myFunction() {
         {if isset($interview.interview_ind_name)}
         <h1><a href="../individuals/individuals_edit.php?ind_id={$interview.interview_ind_id}" class="standard_tile_link">{$interview.interview_ind_name|upper}</a></h1>
         <div class="standard_tile_line"></div>
-        <div class="standard_tile_text">
+        <div class="standard_tile_padding">
             <div class="left_nav_section">
                 At this page you can change an existing interview in the AL database. The screen might seem a little complex,
                 therefor I suggest you first read the help provided with this section on the top right.
@@ -478,13 +478,13 @@ function myFunction() {
             {else}
                 <h1>Interview edit</h1>
                 <div class="standard_tile_line"></div>
-                <div class="standard_tile_text">
+                <div class="standard_tile_padding">
                     <div class="left_nav_section">
                         Interview does not exist.
                     </div>
                 </div>
             {/if}
-            <div class="standard_table_center"><a href="../interviews/interviews_main.php" class="standard_tile_link">back</a></div>
+            <div class="standard_tile_text_center"><a href="../interviews/interviews_main.php" class="standard_tile_link">back</a></div>
             <br>
         </div>
     </div>

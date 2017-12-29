@@ -115,8 +115,7 @@
 .menu_individual_td,
 .nr_menus_td,
 .menu_type_td,
-.menu_disk_set_td,
-.select_td {
+.menu_disk_set_td {
     padding-left: 2px;
 }
 
@@ -165,37 +164,13 @@
 
 
 
-
-
-.standard_table_list_stats {
-    @extend .standard_table_list;
-    border: 0;
-    font-size: 11pt;
-}
-.standard_table_list_stats tr:nth-child(even) {
-    background: linear-gradient(to right, #ffffff, #acacac);
-}
-.standard_table_list_stats tr:nth-child(odd) {
-    background: linear-gradient(to right, #ffffff, #23f001);
-}
-
-
-.standard_table_list_comments {
-    @extend .standard_table_list_stats;
-}
-
-.standard_table_list_comments td {
-    border-bottom: solid 2px #000000;
-}
-
-
 //*-----------------------Database updates-------------------------- */
-.td_db_result,
-.td_db_state,
-.td_db_id,
-.td_db_description,
-.td_db_exe {
-    @extend .standard_table_center;
+.db_result,
+.db_state,
+.db_id,
+.db_description,
+.db_exe {
+    text-align: center;
 }
 
 
@@ -246,10 +221,6 @@
 
 #menu_list_table {
     background-color: #294f4f;
-}
-
-#menu_list_table tr:hover {
-    background-color: #dbd7d1;
 }
 #menu_list_table tr:nth-child(even) {
     background-color: #dbd7d1;
@@ -329,7 +300,6 @@
     color: #000000;
     text-align: center;
 }
-
 .standard_table_left {
     padding-left: 2px;
     font-size: 16px;
@@ -337,12 +307,7 @@
     color: #000000;
     text-align: left;
 }
-
-.standard_table_right {
-    padding-right: 2px;
-    font-size: 16px;
-    font-weight: 100;
-    color: #000000;
+.karma_points_tablecell {
     text-align: right;
 }
 
@@ -350,25 +315,12 @@
     display: inline;
 }
 
-
 //*----------------------------------------------------------
 //User search
 //------------------------------------------------------------ */
-
 
 .user_search_main_table {
     margin-top: 3px;
     margin-bottom: 3px;
     border: 0;
 }
-
-//*----------------------------------------------------------
-//User karma
-//------------------------------------------------------------ */
-.karma_column {
-    text-align: center;
-}
-
-//*----------------------------------------------------------
-//User management
-//------------------------------------------------------------ */

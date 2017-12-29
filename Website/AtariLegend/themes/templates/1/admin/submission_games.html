@@ -90,13 +90,13 @@ function submovetocomment(JSsubID)
     </div>
     <h1>GAME SUBMISSIONS</h1>
     <div class="standard_tile_line"></div>
-        <div class="standard_tile_text">
+        <div class="standard_tile_padding">
             <div class="left_nav_section">
                     When you have finished reviewing the submitted data move the submission to the "Done list" by clicking the appropriate Done button.
                     Users have submitted a total of <b>{$total_nr_submissions}</b> entries in the AL database!
         </div>
         <br><br>
-        <div class="standard_table_center">
+        <div class="standard_tile_text_center">
             {if $structure.list == 'current'}
                 <a href="../games/submission_games.php?list=done" class="standard_tile_link">Switch to Done list</a><br/>
             {elseif $structure.list == 'done'}
@@ -104,7 +104,7 @@ function submovetocomment(JSsubID)
             {/if}
         </div>
         <br>
-        <div class="standard_table_center">
+        <div class="standard_tile_text_center">
             {if $structure.v_counter > 0}
                 <a href ="../games/submission_games.php?list={$structure.list}&amp;v_counter={$structure.back_arrow}" class="standard_tile_link">Previous</a> |
             {/if}
@@ -173,7 +173,7 @@ function submovetocomment(JSsubID)
         </table>
         {* END NEW COMMENT BOX *}
         <br>
-        <div class="standard_table_center">
+        <div class="standard_tile_text_center">
             {if $structure.v_counter > 0}
                 <a href ="../games/submission_games.php?list={$structure.list}&amp;v_counter={$structure.back_arrow}" class="standard_tile_link">Previous</a> |
             {/if}

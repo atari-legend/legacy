@@ -351,7 +351,7 @@ function EmailSent(){
     </div>
     <h1>USER MANAGEMENT</h1>
     <div class="standard_tile_line"></div>
-    <div class="standard_tile_text">
+    <div class="standard_tile_padding">
         <div class="left_nav_section">
             This is the user area. Overhere you can maintain user accounts of the AL website! There are currently
             <b>{$nr_users_total}</b> users in the database.
@@ -376,13 +376,13 @@ function EmailSent(){
                 </tr>
                 {foreach from=$users item=line}
                 <tr>
-                    <td class="select_td w-10">
+                    <td class="w-10">
                         <div class="checkbox">
                             <input type="checkbox" value="{$line.user_id}" id="checkboxInput[{$line.user_id}]" name="user_id[]" class="user_checkbox">
                             <label for="checkboxInput[{$line.user_id}]"></label>
                         </div>
                     </td>
-                    <td class="username_td w-25">{if $line.user_name != ''}<a href="../user/user_detail.php?user_id_selected={$line.user_id}" class="standard_table_center">{$line.user_name}</a>{else}<i>n/a</i>{/if}</td>
+                    <td class="username_td w-25">{if $line.user_name != ''}<a href="../user/user_detail.php?user_id_selected={$line.user_id}" class="standard_tile_text_center">{$line.user_name}</a>{else}<i>n/a</i>{/if}</td>
                     <td class="joindate_td w-25">{if $line.join_date != ''}{$line.join_date}{else}<i>n/a</i>{/if}</td>
                     <td class="lastvisit_td w-25">{if $line.last_visit != ''}{$line.last_visit}{else}<i>n/a</i>{/if}</td>
                     <td class="email_td w-10">{if $line.email != ''}<a href="mailto:{$line.email}" class="standard_tile_link_black"><i class="fa fa-envelope" aria-hidden="true"></i></a>{/if}</td>
@@ -394,7 +394,7 @@ function EmailSent(){
                 {if isset($nr_users)}
                     {if $nr_users != 0}
                         <tr>
-                            <td class="standard_table_left" colspan="5">
+                            <td colspan="5">
                                 <img width="38" height="22" style="float:left;" alt="" src="../../../themes/templates/1/includes/img/arrow_ltr.gif">
                                 <select name="action" id="user_list_action" class="standard_select select_large">
                                     <option value="-" selected>Select Action</option>
@@ -417,7 +417,7 @@ function EmailSent(){
     </div>
 </div>
 {if isset($mail_link)}
-    <div class="standard_tile_text" id="email_fields" style="visibility:hidden">
+    <div class="standard_tile_padding" id="email_fields" style="visibility:hidden">
         <fieldset>
             <legend>Create email</legend>
             <input type="text" name="email_head" id="email_head" class="standard_input input_large" Value="Email title">

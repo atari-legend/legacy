@@ -100,7 +100,7 @@ function nickdelete(nick_id,ind_id)
     {if isset($individuals.ind_name) }
     <h1>{$individuals.ind_name|upper}</h1>
     <div class="standard_tile_line"></div>
-    <div class="standard_tile_text">
+    <div class="standard_tile_padding">
         <div class="left_nav_section">
             In this section you can edit an individual. You can use the profile box for additional info on the person.
             A photo can be uploaded as well. If a picture is already linked, you can delete it and upload a new one.
@@ -188,13 +188,13 @@ function nickdelete(nick_id,ind_id)
     {else}
     <h1>Edit individual</h1>
     <div class="standard_tile_line"></div>
-    <div class="standard_tile_text">
+    <div class="standard_tile_padding">
         <div class="left_nav_section">
             Individual does not exist.
         </div>
     </div>
     {/if}
-    <div class="standard_table_center"><a href="javascript:history.go(-1)" class="standard_tile_link">back</a></div>
+    <div class="standard_tile_text_center"><a href="javascript:history.go(-1)" class="standard_tile_link">back</a></div>
     <br>
 </div>
 {/block}

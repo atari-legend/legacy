@@ -190,7 +190,7 @@ function storeCaret(textEl) {
     {if isset($article.article_title)}
     <h1>{$article.article_title}</h1>
     <div class="standard_tile_line"></div>
-    <div class="standard_tile_text">
+    <div class="standard_tile_padding">
         <div class="left_nav_section">
             At this page you can change an existing Article in the AL database.
         </div>
@@ -302,13 +302,13 @@ function storeCaret(textEl) {
     {else}
         <h1>Article edit</h1>
         <div class="standard_tile_line"></div>
-        <div class="standard_tile_text">
+        <div class="standard_tile_padding">
             <div class="left_nav_section">
                 Article does not exist.
             </div>
         </div>
     {/if}
-    <div class="standard_table_center"><a href="../articles/articles_main.php" class="standard_tile_link">back</a></div>
+    <div class="standard_tile_text_center"><a href="../articles/articles_main.php" class="standard_tile_link">back</a></div>
     <br>
 </div>
 {/block}

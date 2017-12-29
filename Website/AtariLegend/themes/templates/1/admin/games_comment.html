@@ -58,7 +58,7 @@ function commentdelete(JScomID,JSusers_id)
     </div>
     <h1>ADD/EDIT GAME COMMENTS</h1>
     <div class="standard_tile_line"></div>
-    <div class="standard_tile_text">
+    <div class="standard_tile_padding">
         <div class="left_nav_section">
                 This is the user comment edit page. Overhere you can edit or delete user comments for games.
                 There is currently a total of <b>{$total_nr_comments}</b> comments in the AL Database!
@@ -113,7 +113,7 @@ function commentdelete(JScomID,JSusers_id)
         </table>
         {* END NEW COMMENT BOX *}
     </div>
-    <div class="standard_table_center">
+    <div class="standard_tile_text_center">
         {if $links.linkback != ''}
             <a href ="../games/games_comment.php{$links.linkback}" class="standard_tile_link">Previous Comments</a> |
         {/if}
@@ -123,9 +123,9 @@ function commentdelete(JScomID,JSusers_id)
     </div>
     <br>
     <br>
-    <div class="standard_table_center">
-        <div class="standard_table_center"><a href="javascript:history.go(-1)" class="standard_tile_link">back</a></div>
-    </div>
+        <div class="standard_tile_text_center">
+            <a href="javascript:history.go(-1)" class="standard_tile_link">back</a>
+        </div>
     <br>
 </div>
 {/block}

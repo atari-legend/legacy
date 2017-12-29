@@ -122,7 +122,7 @@ window.onload = function () {
 <div class="standard_tile">
     <h1>CPANEL</h1>
     <div class="standard_tile_line"></div>
-    <div class="standard_tile_text">
+    <div class="standard_tile_padding">
         <div class="left_nav_section">
             Welcome <b><a href="../../admin/user/user_detail.php?user_id_selected={$users.user_id}" class="standard_tile_link_reverse">{$users.user_name}</a></b> to the heart of AtariLegend, the Control Panel.
             This will give you a quick overview of all the statistics of the website.
@@ -138,7 +138,7 @@ window.onload = function () {
     <div class="standard_tile_line"></div>
     <h1>KARMA STATS</h1>
     <div class="standard_tile_line"></div>
-    <div class="standard_tile_text">
+    <div class="standard_tile_padding">
         <br>
         <div class="main_stats_container">
             <div class="main_stats_child" id="child_good_karma_chart">
@@ -153,8 +153,8 @@ window.onload = function () {
                 </tr>
                     {foreach from=$karma_good item=line}
                 <tr>
-                    <td><a href="../user/user_detail.php?user_id_selected={$line.user_id}" class="standard_table_left">{$line.user_name}</a></td>
-                    <td class="standard_table_right">{$line.karma}</td>
+                    <td><a href="../user/user_detail.php?user_id_selected={$line.user_id}" class="standard_tile_text_left">{$line.user_name}</a></td>
+                    <td class="karma_points_tablecell">{$line.karma}</td>
                 </tr>
                     {/foreach}
                 </table>
@@ -175,8 +175,8 @@ window.onload = function () {
                 </tr>
                     {foreach from=$karma_bad item=line}
                 <tr>
-                    <td><a href="../user/user_detail.php?user_id_selected={$line.user_id}" class="standard_table_left">{$line.user_name}</a></td>
-                    <td class="standard_table_right">{$line.karma}</td>
+                    <td><a href="../user/user_detail.php?user_id_selected={$line.user_id}" class="standard_tile_text_left">{$line.user_name}</a></td>
+                    <td class="karma_points_tablecell">{$line.karma}</td>
                 </tr>
                     {/foreach}
                 </table>
@@ -187,7 +187,7 @@ window.onload = function () {
     <div class="standard_tile_line"></div>
     <h1>LATEST CHANGES</h1>
     <div class="standard_tile_line"></div>
-    <div class="standard_tile_text">
+    <div class="standard_tile_padding">
         <div class="left_nav_section">
             Here are some latest changes charts. For all the details of the changes made, please visit the <a href="../../admin/administration/change_log.php" class="standard_tile_link_reverse">change log</a> section.
             <br>The pie chart below represents in which sections of the db the most changes are done. The line chart shows the nr of changes of the last 12 months.

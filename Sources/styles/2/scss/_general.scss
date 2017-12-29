@@ -76,7 +76,26 @@ img {
     width: 100%;
     margin-top: 20px;
 }
-
+.standard_tile_text_center {
+    font-size: 16px;
+    font-weight: 100;
+    color: #000000;
+    text-align: center;
+}
+.standard_tile_text_right {
+    padding-right: 2px;
+    font-size: 16px;
+    font-weight: 100;
+    color: #000000;
+    text-align: right;
+}
+.standard_tile_text_left {
+    padding-left: 2px;
+    font-size: 16px;
+    font-weight: 100;
+    color: #000000;
+    text-align: left;
+}
 //*------------------------------------------------------------
 //Standard tile settings
 //
@@ -333,7 +352,7 @@ a.standard_tile_link:focus {
     font-size: 1em;
 }
 
-.standard_tile_text {
+.standard_tile_padding {
     padding: 20px;
 }
 

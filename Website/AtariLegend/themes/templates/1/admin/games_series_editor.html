@@ -47,7 +47,7 @@ function deleteseries(str)
     {if (isset($series_info.game_series_name)) }
     <h1>{$series_info.game_series_name} selected</h1>
     <div class="standard_tile_line"></div>
-    <div class="standard_tile_text">
+    <div class="standard_tile_padding">
         <div class="left_nav_section">
             Over here you can edit/delete a series or add/remove games to/from it.
         </div>
@@ -86,7 +86,7 @@ function deleteseries(str)
                 <br>
                 <br>
                 <form action="../games/db_games_series.php" method="post" name="delete_from_series" id="delete_from_series">
-                    <table class="standard_table_list w-100">
+                    <table class="secondary_table_list table_md table_hover w-100">
                         <tr>
                             <th class="w-5" style="text-align:left;">Info</th>
                             <th class="game_th w-40">Game Name</th>
@@ -102,18 +102,18 @@ function deleteseries(str)
                                         <label for="{$line.game_series_cross_id}"></label>
                                     </div>
                                 </td>
-                                <td class="game_td w-40">{if $line.game_name != ''}<a href="games_detail.php?game_id={$line.game_id}" class="standard_table_left">{$line.game_name}</a>
+                                <td class="game_td w-40">{if $line.game_name != ''}<a href="games_detail.php?game_id={$line.game_id}" class="standard_tile_text_left">{$line.game_name}</a>
                                         {else}<i>n/a</i>{/if}
                                 </td>
                                 <td class="pub_td w-20">{if $line.publisher_name != ''}
-                                        <a href="games_list.php?publisher={$line.publisher_id}&amp;action=search" class="standard_table_left">
+                                        <a href="games_list.php?publisher={$line.publisher_id}&amp;action=search" class="standard_tile_text_left">
                                             {$line.publisher_name}
                                     </a>
                                         {else}
                                             <i>n/a</i>
                                         {/if}</td>
                                 <td class="dev_td w-20">{if $line.developer_name != ''}
-                                        <a href="games_list.php?developer={$line.developer_id}&amp;action=search" class="standard_table_left">
+                                        <a href="games_list.php?developer={$line.developer_id}&amp;action=search" class="standard_tile_text_left">
                                             {$line.developer_name}
                                         </a>
                                         {else}
@@ -121,7 +121,7 @@ function deleteseries(str)
                                         {/if}</td>
                                 <td class="year_td w-10">
                                     {if $line.year != ''}
-                                        <a href="games_list.php?year={$line.year}&amp;action=search" class="standard_table_left">
+                                        <a href="games_list.php?year={$line.year}&amp;action=search" class="standard_tile_text_left">
                                             {$line.year}
                                         </a>
                                         {else}
@@ -143,12 +143,12 @@ function deleteseries(str)
                 </form>
             {/if}
         <br>
-        <div class="standard_table_center"><a href="../games/games_series_main.php" class="standard_tile_link">back</a></div>
+        <div class="standard_tile_text_center"><a href="../games/games_series_main.php" class="standard_tile_link">back</a></div>
     </div>
     {else}
         <h1>Game series</h1>
         <div class="standard_tile_line"></div>
-        <div class="standard_tile_text">
+        <div class="standard_tile_padding">
             <div class="left_nav_section">
                 Game series does not exist
             </div>

@@ -24,7 +24,7 @@ The change log page
 <div class="standard_tile">
     <h1>CHANGE LOG</h1>
     <div class="standard_tile_line"></div>
-    <div class="standard_tile_text">
+    <div class="standard_tile_padding">
         <div class="left_nav_section">
             On this page you will find every change that has been made to the database.
             The most recent changes are listed below, but you can also use the search function to find older changes.
@@ -62,7 +62,7 @@ The change log page
         <br><br>
         {if $rec_nr <> '0'}
         <div>
-            <table class="standard_table_list w-100">
+            <table class="secondary_table_list table_md table_hover w-100">
                 <tr>
                     <th class="log_date_th w-10">Date</th>
                     <th class="log_user_th w-20">User</th>
@@ -80,7 +80,7 @@ The change log page
                         </td>
                         <td class="log_user_td w-20">
                             {if $line.log_user_name <> '0'}
-                            <a href="../user/user_detail.php?user_id_selected={$line.log_user_id}" class="standard_table_left">
+                            <a href="../user/user_detail.php?user_id_selected={$line.log_user_id}" class="standard_tile_text_left">
                                 {$line.log_user_name}
                             </a>
                             {else}
@@ -89,7 +89,7 @@ The change log page
                         </td>
                         <td class="log_section_td w-10">
                             {if $line.log_section_link <> ''}
-                                <a href="{$line.log_section_link}" class="standard_table_left">
+                                <a href="{$line.log_section_link}" class="standard_tile_text_left">
                                     {$line.log_section}
                                 </a>
                             {else}
@@ -98,7 +98,7 @@ The change log page
                         </td>
                         <td class="log_name_td w-20">
                             {if $line.log_section_link <> ''}
-                                <a href="{$line.log_section_link}" class="standard_table_left">
+                                <a href="{$line.log_section_link}" class="standard_tile_text_left">
                                     {$line.log_section_name}
                                 </a>
                             {else}
@@ -110,7 +110,7 @@ The change log page
                         </td>
                         <td class="log_subsection_td w-10">
                             {if $line.log_subsection_link <> ''}
-                                <a href="{$line.log_subsection_link}" class="standard_table_left">
+                                <a href="{$line.log_subsection_link}" class="standard_tile_text_left">
                                     {$line.log_subsection}
                                 </a>
                             {else}
@@ -119,7 +119,7 @@ The change log page
                         </td>
                         <td class="log_subname_td w-20">
                             {if $line.log_subsection_link <> ''}
-                                <a href="{$line.log_subsection_link}" class="standard_table_left">
+                                <a href="{$line.log_subsection_link}" class="standard_tile_text_left">
                                     {$line.log_subsection_name}
                                 </a>
                             {else}
@@ -129,12 +129,12 @@ The change log page
                     </tr>
                     {/foreach}
                 {else}
-                    <div class="standard_table_center">No log entries in the database</div>
+                    <div class="standard_tile_text_center">No log entries in the database</div>
                 {/if}
             </table>
         </div>
         <br>
-        <div class="standard_table_center">
+        <div class="standard_tile_text_center">
             {if $links.linkback != ''}
                 <a href ="{$links.linkback}" class="standard_tile_link" style="float:left;">Previous</a>
             {/if}

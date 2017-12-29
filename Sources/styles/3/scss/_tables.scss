@@ -167,47 +167,13 @@
 .menu_individual_td,
 .menu_disk_set_td,
 .nr_menus_td,
-.menu_type_td,
-.select_td {
+.menu_type_td {
     padding-left: 2px;
 }
 
 
-
-
-
-
-
-.standard_table_list_stats {
-    @extend .standard_table_list;
-    border: 0;
-    font-size: 11pt;
-}
-
-.standard_table_list_stats tr:nth-child(even) {
-    background: #a6a6a6;
-}
-.standard_table_list_stats tr:nth-child(odd) {
-    background: #6a6a6a;
-}
-
-
-.standard_table_list_comments {
-    @extend .standard_table_list_stats;
-}
-
-.standard_table_list_comments td {
-    border-bottom: solid 2px #000000;
-}
-
-
-
 #menu_list_table {
     background-color: #294f4f;
-}
-
-#menu_list_table tr:hover {
-    background-color: #dbd7d1;
 }
 #menu_list_table tr:nth-child(even) {
     background-color: #dbd7d1;
@@ -218,12 +184,12 @@
 
 
 
-.td_db_result,
-.td_db_state,
-.td_db_id,
-.td_db_description,
-.td_db_exe {
-    @extend .standard_table_center;
+.db_result,
+.db_state,
+.db_id,
+.db_description,
+.db_exe {
+    text-align: center;
 }
 
 
@@ -282,13 +248,6 @@
     border: 0;
 }
 
-//*----------------------------------------------------------
-//User karma
-//------------------------------------------------------------ */
-.karma_column {
-    text-align: center;
-}
-
 //*------------------------------------------------------------
 //Standard table settings
 //-------------------------------------------------------------*/
@@ -343,14 +302,12 @@
     margin: 0;
 }
 
-
 .standard_table_center {
     font-size: 12pt;
     font-weight: 100;
     color: #000000;
     text-align: center;
 }
-
 .standard_table_left {
     padding-left: 2px;
     font-size: 12pt;
@@ -358,11 +315,6 @@
     color: #000000;
     text-align: left;
 }
-
-.standard_table_right {
-    padding-right: 2px;
-    font-size: 12pt;
-    font-weight: 100;
-    color: #000000;
+.karma_points_tablecell {
     text-align: right;
 }

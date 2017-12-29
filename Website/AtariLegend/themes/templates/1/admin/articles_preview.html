@@ -35,7 +35,7 @@
 <div class="standard_tile" id="interview_preview">
     <h1>{$article.article_title}</h1>
     <div class="standard_tile_line"></div>
-    <div class="standard_tile_text">
+    <div class="standard_tile_padding">
         <div class="left_nav_section">
             Article by <a href="mailto:{if isset($article.article_email)}{$article.article_email}{/if}?subject=Your article '{$article.article_title}' at Atari Legend"  class="left_nav_link">{$article.article_author}</a> on {$article.article_date}
         </div>
@@ -71,7 +71,7 @@
             <br>
         </fieldset>
         <br>
-        <div class="standard_table_center"><a href="../articles/articles_edit.php?article_id={$article.article_id}" class="standard_tile_link">back</a></div>
+        <div class="standard_tile_text_center"><a href="../articles/articles_edit.php?article_id={$article.article_id}" class="standard_tile_link">back</a></div>
     </div>
 </div>
 {/block}
