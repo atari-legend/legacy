@@ -85,7 +85,7 @@
                         {if isset($individuals)}
                             <br>
                             <br>
-                            <table class="table_game_list w-95">
+                            <table class="standard_table_list w-95">
                             <tr>
                                 <th class="menu_cred_th w-45">Credits</th>
                                 <th class="menu_scene_th w-45">"Sceners"</th>
@@ -97,8 +97,8 @@
                             </tr>
                             {foreach name=outer item=individual from=$individuals}
                                 <tr>
-                                    <td class="menu_cred_td w-30">{$individual.author_type_info}</td>
-                                    <td class="menu_scene_td w-30"><a href="../individuals/individuals_edit.php?ind_id={$individual.ind_id}" class="standard_tile_text_left">{$individual.ind_name}</a></td>
+                                    <td class="menu_cred_td w-45">{$individual.author_type_info}</td>
+                                    <td class="menu_scene_td w-45"><a href="../individuals/individuals_edit.php?ind_id={$individual.ind_id}" class="standard_tile_text_left">{$individual.ind_name}</a></td>
                                     <td class="menu_delete_td w-10">
                                         <input type="button" onclick="deleteCredits({$individual.menu_disk_credits_id},{$individual.menu_disk_id})" class="quick_search_games_button" value="delete" style="margin-right:5px;">
                                     </td>
@@ -111,7 +111,7 @@
                         {if isset($game)}
                             <br>
                             <br>
-                            <table class="table_game_list w-95">
+                            <table class="standard_table_list w-95">
                             <tr>
                                 <th class="menu_mark_th w-5"></th>
                                 <th class="menu_gamename_th w-40">
@@ -197,7 +197,7 @@
                     <div id="menu_doc_list">
                         {if isset($doc_game)}
                             <br>
-                            <table class="table_game_list w-95">
+                            <table class="standard_table_list w-95">
                             <tr>
                                 <th class="menu_mark_th w-5"></th>
                                 <th class="menu_docname_th w-55">Doc Name
@@ -365,7 +365,7 @@
     {if isset($game)}
         <br>
         <br>
-        <table class="table_game_list w-95">
+        <table class="standard_table_list w-95">
         <tr>
             <th class="menu_mark_th w-5"></th>
             <th class="menu_gamename_th w-40">Software Name
@@ -453,7 +453,7 @@
 {if isset($smarty_action) and $smarty_action == "add_doc_to_menu_return"}
     {if isset($doc_game)}
         <br>
-        <table class="table_game_list w-95">
+        <table class="standard_table_list w-95">
         <tr>
             <th class="menu_mark_th w-5"></th>
             <th class="menu_docname_th w-55">Doc Name
@@ -585,7 +585,7 @@
 {if isset($smarty_action) and $smarty_action == "update_menu_disk_credits"}
     <br>
     <br>
-    <table class="table_game_list w-95">
+    <table class="standard_table_list w-95">
         <tr>
             <th class="menu_cred_th w-45">Credits</th>
             <th class="menu_scene_th w-45">"Sceners"</th>
@@ -620,7 +620,7 @@
     <br>
     <br>
     <div id="JSMenuSoftwareList">
-        <table class="table_game_list w-95">
+        <table class="standard_table_list w-95">
         <tr>
             <th class="menu_mark_th w-5"></th>
             <th class="menu_gamename_th w-40">Software Name
@@ -761,7 +761,7 @@
 {if isset($smarty_action) and $smarty_action == "title_credits_return"}
     <div id="author_list">
         {if isset($title_credits)}
-            <table class="table_game_list w-95">
+            <table class="standard_table_list w-95">
             <tr>
                 <th class="menu_cred_th w-45">Credits</th>
                 <th class="menu_scene_th w-45">"Sceners"</th>

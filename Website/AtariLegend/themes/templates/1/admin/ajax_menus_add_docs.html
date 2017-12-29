@@ -36,7 +36,7 @@
     <form action="" method="get" name="doc_add_to_menu" id="doc_add_to_menu">
         {if isset($series_link) }
         <div id="doc_list">
-            <table class="table_game_list w-95">
+            <table class="standard_table_list w-95">
                 <tr>
                     <th class="menu_mark_th w-5">Add</th>
                     <th class="game_th w-40">Name</th>
@@ -117,7 +117,7 @@
 {* INNER SEARCH LIST *}
 {if isset($smarty_action) and $smarty_action == "inner_list"}
     {if isset($series_link) }
-    <table class="table_game_list w-95">
+    <table class="secondary_table_list w-95">
         <tr>
             <th class="menu_mark_th w-5">Add</th>
             <th class="game_th w-40">Game Name</th>

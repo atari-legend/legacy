@@ -369,10 +369,10 @@ function EmailSent(){
                             <label for="user_select_all"></label>
                         </div>
                     </th>
-                    <th class="username_th w-25">User Name</th>
-                    <th class="joindate_th w-25">Join Date</th>
-                    <th class="lastvisit_th w-25">Last Visit</th>
-                    <th class="email_th w-10">Email</th>
+                    <th class="username_column w-25">User Name</th>
+                    <th class="joindate_column w-25">Join Date</th>
+                    <th class="lastvisit_column w-25">Last Visit</th>
+                    <th class="email_column w-10">Email</th>
                 </tr>
                 {foreach from=$users item=line}
                 <tr>
@@ -382,10 +382,10 @@ function EmailSent(){
                             <label for="checkboxInput[{$line.user_id}]"></label>
                         </div>
                     </td>
-                    <td class="username_td w-25">{if $line.user_name != ''}<a href="../user/user_detail.php?user_id_selected={$line.user_id}" class="standard_tile_text_center">{$line.user_name}</a>{else}<i>n/a</i>{/if}</td>
-                    <td class="joindate_td w-25">{if $line.join_date != ''}{$line.join_date}{else}<i>n/a</i>{/if}</td>
-                    <td class="lastvisit_td w-25">{if $line.last_visit != ''}{$line.last_visit}{else}<i>n/a</i>{/if}</td>
-                    <td class="email_td w-10">{if $line.email != ''}<a href="mailto:{$line.email}" class="standard_tile_link_black"><i class="fa fa-envelope" aria-hidden="true"></i></a>{/if}</td>
+                    <td class="username_column w-25">{if $line.user_name != ''}<a href="../user/user_detail.php?user_id_selected={$line.user_id}" class="standard_tile_text_center">{$line.user_name}</a>{else}<i>n/a</i>{/if}</td>
+                    <td class="joindate_column w-25">{if $line.join_date != ''}{$line.join_date}{else}<i>n/a</i>{/if}</td>
+                    <td class="lastvisit_column w-25">{if $line.last_visit != ''}{$line.last_visit}{else}<i>n/a</i>{/if}</td>
+                    <td class="email_column w-10">{if $line.email != ''}<a href="mailto:{$line.email}" class="standard_tile_link_black"><i class="fa fa-envelope" aria-hidden="true"></i></a>{/if}</td>
                 </tr>
                 {/foreach}
                 {else}
