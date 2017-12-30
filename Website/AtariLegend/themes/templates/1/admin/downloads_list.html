@@ -34,36 +34,36 @@ The main game page
     {if $type == 'game'}
         <table class="secondary_table_list table_md table_hover w-100">
             <tr>
-                <th class="game_th w-40">Game Name</th>
-                <th class="pub_th w-20">Publisher</th>
-                <th class="dev_th w-20">Developer</th>
-                <th class="year_th w-10">Year</th>
-                <th class="info_th w-10">Nr</th>
+                <th class="game_name_column w-40">Game Name</th>
+                <th class="publisher_table_column w-20">Publisher</th>
+                <th class="developer_table_column w-20">Developer</th>
+                <th class="release_year_column w-10">Year</th>
+                <th class="information_table_column w-10">Nr</th>
             </tr>
             {foreach from=$download_search item=line}
             <tr id="downloadedit_ajax_{$line.game_id}">
-                <td class="game_td w-40">
+                <td class="game_name_column w-40">
                     {if $line.game_name != ''}
                         <a href="downloads_game_detail.php?game_id={$line.game_id}" class="standard_tile_text_left">{$line.game_name}</a>
                     {else}
                         <i>n/a</i>
                     {/if}
                 </td>
-                <td class="pub_td w-20">
+                <td class="publisher_table_column w-20">
                     {if $line.publisher_name != ''}
                         {$line.publisher_name}
                     {else}
                         <i>n/a</i>
                     {/if}
                 </td>
-                <td class="dev_td w-20">
+                <td class="developer_table_column w-20">
                     {if $line.developer_name != ''}
                         {$line.developer_name}
                     {else}
                         <i>n/a</i>
                     {/if}
                 </td>
-                <td class="year_td w-10">
+                <td class="release_year_column w-10">
                     {if $line.year != ''}
                         {$line.year}
 
@@ -71,7 +71,7 @@ The main game page
                         <i>n/a</i>
                     {/if}
                 </td>
-                <td class="info_td w-10">
+                <td class="information_table_column w-10">
                     {if $line.number_downloads != ''}
                         {$line.number_downloads}
 

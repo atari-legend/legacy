@@ -23,7 +23,6 @@ The main game page
 <div class="standard_tile">
     <h1>MENU SET</h1>
     <div class="standard_tile_line"></div>
-    <div class="standard_list_entry">
         <div class="standard_tile_text_center">
             <form action="../menus/db_menu_disk.php" method="post" name="post" id="menu_edit">
                 <br>
@@ -36,7 +35,7 @@ The main game page
                 <input type="submit" value="Add New" class="quick_search_games_button">
             </form>
         </div>
-    </div>
+    <br>
 </div>
 <br>
 {/block}
@@ -57,19 +56,19 @@ The main game page
             <br>
             <table class="secondary_table_list w-100 table_md table_hover">
                 <tr>
-                    <th class="menu_disk_set_th w-30">Menu Disk Set</th>
-                    <th class="menu_crew_th w-25">Crew</th>
-                    <th class="menu_individual_th w-25">Indvidual</th>
-                    <th class="menu_type_th w-10">type</th>
-                    <th class="nr_menus_th w-10">Nr</th>
+                    <th class="menu_disk_set_column w-30">Menu Disk Set</th>
+                    <th class="menu_crew_column w-25">Crew</th>
+                    <th class="menu_individual_column w-25">Indvidual</th>
+                    <th class="menu_type_column w-10">type</th>
+                    <th class="nr_menus_column w-10">Nr</th>
                 </tr>
                 {foreach from=$menus item=line}
                     <tr>
-                        <td class="menu_disk_set_td w-30">{if $line.menu_sets_name != ''}<a href="../menus/menus_disk_list.php?menu_sets_id={$line.menu_sets_id}" class="standard_tile_text_left">{$line.menu_sets_name}</a>{else}<i>n/a</i>{/if}</td>
-                        <td class="menu_crew_td w-25">{if $line.crew_name != ''}{$line.crew_name}{else}<i>n/a</i>{/if}</td>
-                        <td class="menu_individual_td w-25">{if $line.ind_name != ''}{$line.ind_name}{else}<i>n/a</i>{/if}</td>
-                        <td class="menu_type_td w-10">{if $line.menu_type != ''}{$line.menu_type}{else}<i>n/a</i>{/if}</td>
-                        <td class="nr_menus_td w-10">{if $line.numbermenus != ''}{$line.numbermenus}{else}<i>0</i>{/if}</td>
+                        <td class="menu_disk_set_column w-30">{if $line.menu_sets_name != ''}<a href="../menus/menus_disk_list.php?menu_sets_id={$line.menu_sets_id}" class="standard_tile_text_left">{$line.menu_sets_name}</a>{else}<i>n/a</i>{/if}</td>
+                        <td class="menu_crew_column w-25">{if $line.crew_name != ''}{$line.crew_name}{else}<i>n/a</i>{/if}</td>
+                        <td class="menu_individual_column w-25">{if $line.ind_name != ''}{$line.ind_name}{else}<i>n/a</i>{/if}</td>
+                        <td class="menu_type_column w-10">{if $line.menu_type != ''}{$line.menu_type}{else}<i>n/a</i>{/if}</td>
+                        <td class="nr_menus_column w-10">{if $line.numbermenus != ''}{$line.numbermenus}{else}<i>0</i>{/if}</td>
                     </tr>
                 {/foreach}
                 <tr>

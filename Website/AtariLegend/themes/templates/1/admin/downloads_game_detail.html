@@ -835,14 +835,14 @@ function deleteDownload(str, game_id) {
         <br>
         <table class="secondary_table_list table_hover table_sm w-100">
             <tr>
-                <th class="menu_disk_list_th w-30">Filename</th>
-                <th class="menu_state_th w-30">Date</th>
+                <th class="menu_disk_list_column w-30">Filename</th>
+                <th class="menu_state_column w-30">Date</th>
             </tr>
             {if isset($downloads)}
                 {foreach from=$downloads item=line}
                     <tr id="downloadedit_ajax_{$line.game_download_id}">
-                        <td class="menu_disk_list_td w-30">{if $line.filename != ''}<a onclick="editDownload({$line.game_download_id},{$game.game_id})" style="cursor: pointer;">{$line.filename}</a>{else}<i>n/a</i>{/if}</td>
-                        <td class="menu_state_td w-30">{if isset($line.date)}{$line.date}{else}<i>n/a</i>{/if}</td>
+                        <td class="menu_disk_list_column w-30">{if $line.filename != ''}<a onclick="editDownload({$line.game_download_id},{$game.game_id})" style="cursor: pointer;">{$line.filename}</a>{else}<i>n/a</i>{/if}</td>
+                        <td class="menu_state_column w-30">{if isset($line.date)}{$line.date}{else}<i>n/a</i>{/if}</td>
                     </tr>
                 {/foreach}
             {/if}
