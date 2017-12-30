@@ -117,10 +117,10 @@ function submovetocomment(JSsubID)
         <table class="gc_table_list w-100">
         {foreach from=$submission item=line}
             <tr>
-                <td class="gc_left_head w-20">
+                <td class="gc_left_column w-20">
                     Random shot
                 </td>
-                <td class="gc_center_head w-60">
+                <td class="gc_center_column w-60">
                     <a href="../games/games_detail.php?game_id={$line.game_id}" class="links_addnew_link">{$line.game_name}</a>
                 </td>
                 <td class="gc_right_head w-20">
@@ -136,7 +136,7 @@ function submovetocomment(JSsubID)
                 </td>
             </tr>
             <tr>
-                <td class="gc_left w-20">
+                <td class="gc_left_column w-20">
                     {if isset($line.image) and $line.image != ''}
                         <a href="../games/games_detail.php?game_id={$line.game_id}">
                             <img src="../../includes/show_image.php?file={$line.image}&amp;resize=160,null,null,null" alt="{$line.game_name}" class="user_stats_img_dark"/>
@@ -151,7 +151,7 @@ function submovetocomment(JSsubID)
                     <br>
                     Karma: {$line.karma}
                 </td>
-                <td class="gc_center w-80" colspan="2">
+                <td class="gc_center_column w-80" colspan="2">
                     Posted by <a href="../user/user_detail.php?user_id_selected={$line.user_id}" class="standard_tile_link_black">{$line.user_name}</a> on {$line.date}
                     <br>
                     <br>

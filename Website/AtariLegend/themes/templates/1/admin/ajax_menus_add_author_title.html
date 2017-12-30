@@ -58,15 +58,15 @@ On this page we link authors to a menu disk title
                 {if isset($title_credits)}
                     <table class="standard_table_list w-95">
                     <tr>
-                        <th class="menu_cred_th w-45">Credits</th>
-                        <th class="menu_scene_th w-45">"Sceners"</th>
-                        <th class="menu_delete_th w-10"></th>
+                        <th class="menu_credits_column w-45">Credits</th>
+                        <th class="menu_scene_column w-45">"Sceners"</th>
+                        <th class="menu_delete_column w-10"></th>
                     </tr>
                     {foreach name=outer item=individual from=$title_credits}
                         <tr>
-                            <td class="menu_cred_td w-30">{$individual.author_type_info}</td>
-                            <td class="menu_scene_td w-30"><a href="../individuals/individuals_edit.php?ind_id={$individual.ind_id}" class="standard_tile_text_left">{$individual.ind_name}</a></td>
-                            <td class="menu_delete_td w-10">
+                            <td class="menu_credits_column w-45">{$individual.author_type_info}</td>
+                            <td class="menu_scene_column w-45"><a href="../individuals/individuals_edit.php?ind_id={$individual.ind_id}" class="standard_tile_text_left">{$individual.ind_name}</a></td>
+                            <td class="menu_delete_column w-10">
                                 <input type="button" onclick="deleteTitleCredits({$menu_disk_title_id},{$individual.ind_id},{$individual.author_type_id})" class="quick_search_games_button" value="delete" style="margin-right:5px;">
                             </td>
                         </tr>

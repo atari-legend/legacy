@@ -32,24 +32,21 @@
                     </div>
                     {if isset($user_session)}
                         <form method="post" name="post" action="../../main/news/db_news.php">
-                            <div class="standard_list_entry">
                                 <div style="width:100%;text-align:center;margin-top:10px;">
                                     <input type="text" name="news_headline" class="standard_input input_large" style="width:90%;" value="Headline">
                                 </div>
                                 <div style="width:100%;text-align:center;margin-top:10px;">
                                     <textarea class="games_main_detail_comments_add" style="margin-top:10px;margin-bottom:10px;" name="textfield">News item</textarea>
                                 </div>
-                            </div>
+
                             <div style="text-align:center;">
                                 <input type="submit" value="Add" class="quick_search_games_button" style="margin-bottom:10px;">
                             </div>
                         </form>
                     {else}
-                        <div class="standard_list_entry" style="height:0;">
                             <div class="games_main_detail_comments_log_on">
                                 Please log in to submit a news item.
                             </div>
-                        </div>
                     {/if}
                 </div>
             </div>
@@ -61,14 +58,14 @@
             <div class="standard_tile" id="games_main">
                 <h1>LATEST NEWS</h1>
                 <div class="standard_tile_line"></div>
-                <table class="standard_table_list w-100 table_md no_border">
+                <table class="standard_table_list w-100 table_lg no_border">
                 {foreach from=$news item=line}
                     <tr>
                         <td class="news_left_head">
                             <h6 id="news_head">{$line.news_headline}</h6>
                         </td>
                         <td class="news_right_head">
-                            <h6 style="text-align:right;margin-right:10px;margin-top:3px;margin-bottom:3px;" id="news_head">{$line.news_date} by <a href="../../admin/user/user_detail.php?user_id_selected={$line.user_id}" class="latest_comments_link">{$line.user_name}</a></h6>
+                            <h6 style="text-align:right;margin-right:10px;" id="news_head">{$line.news_date} by <a href="../../admin/user/user_detail.php?user_id_selected={$line.user_id}" class="latest_comments_link">{$line.user_name}</a></h6>
                         </td>
                     </tr>
                     <tr>
