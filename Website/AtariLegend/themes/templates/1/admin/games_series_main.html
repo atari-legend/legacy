@@ -33,8 +33,8 @@ The Main game series page
         </div>
         <br>
         <br>
-        <fieldset class="centered_fieldset">
-            <legend>Create series</legend>
+        <fieldset class="primary_fieldset centered_fieldset">
+            <legend class="primary_legend">Create series</legend>
             <form action="../games/db_games_series.php" method="post" name="add_series" id="add_series">
                 New name:
                 <input type="text" name="new_series" id="new_series" value="" maxlength="64" class="standard_input input_large">
@@ -46,8 +46,8 @@ The Main game series page
         </fieldset>
         <br>
         <br>
-        <fieldset class="centered_fieldset">
-            <legend>Current series</legend>
+        <fieldset class="primary_fieldset centered_fieldset">
+            <legend class="primary_legend">Current series</legend>
             {foreach from=$game_series item=line}
                 <a href="../games/games_series_editor.php?series_page=series_editor&amp;game_series_id={$line.game_series_id}" class="left_nav_link">{$line.game_series_name}</a><br>
             {/foreach}

@@ -62,8 +62,8 @@ function delete_music(game_id)
         <br>
         <br>
         <form action="../games/db_games_music.php" method="post" name="editmuzak">
-            <fieldset>
-                <legend>Edit existing files</legend>
+            <fieldset class="primary_fieldset">
+                <legend class="primary_legend">Edit existing files</legend>
                     {if isset($music)}
                         {foreach from=$music item=line}
                             <!--<input type="checkbox" name="music_id_selected[]" value="{$line.music_id}">-->
@@ -98,8 +98,8 @@ function delete_music(game_id)
         <br>
         {if isset($action) and $action == 'pick_composer'}
         <form enctype="multipart/form-data" method="post" action="../games/db_games_music.php" name="composer">
-        <fieldset>
-        <legend>Music files for {$ind_selected.ind_name}</legend>
+        <fieldset class="primary_fieldset">
+        <legend class="primary_legend">Music files for {$ind_selected.ind_name}</legend>
             <!--{section name=loop loop=6 start=1}
                 <input type="file" name="music[{$smarty.section.loop.index}]">
                 <br>

@@ -65,8 +65,8 @@ function add_author()
 {block name=title}Edit demo - {$demo_info.demo_name}{/block}
 {block name=main_tile}
 <div class="NEWMAINCELL">
-    <fieldset class="game_set">
-        <legend class="links_legend">Crew/Creator info - help</legend>
+    <fieldset class="primary_fieldset">
+        <legend class="primary_legend">Crew/Creator info - help</legend>
 
                 A demo can be build by a crew, or can be created by an individual. If the demo is a one mans job, the crew data should not be filled.
                 However, if the demo is constructed by a crew, the crew should be added in the crew box. As well as the members (of this crew) who participated on this
@@ -77,8 +77,8 @@ function add_author()
 <br/>
 
 <div style="display:inline-block;">
-    <fieldset class="game_set" style="display:inline;width:200px;">
-        <legend class="links_legend">Crew info</legend>
+    <fieldset class="primary_fieldset" style="display:inline;width:200px;">
+        <legend class="primary_legend">Crew info</legend>
     <form action="../demos/db_demos.php" method="post" name="crew">
                     {if isset($demo_crew)}
                     {foreach from=$demo_crew item=line}
@@ -106,8 +106,8 @@ function add_author()
 
 
 
-    <fieldset class="game_set" style="display:inline;width:200px;vertical-align:top;">
-        <legend class="links_legend">Creator info</legend>
+    <fieldset class="primary_fieldset" style="display:inline;width:200px;vertical-align:top;">
+        <legend class="primary_legend">Creator info</legend>
     <form action="../demos/db_demos.php" method="post" name="creator">
                     {if isset($demo_author)}
                     {foreach from=$demo_author item=line}
@@ -142,8 +142,8 @@ function add_author()
     </form>
     </fieldset>
 
-        <fieldset class="game_set" style="display:inline;width:200px;vertical-align:top;">
-        <legend class="links_legend">Other Features</legend>
+        <fieldset class="primary_fieldset" style="display:inline;width:200px;vertical-align:top;">
+        <legend class="primary_legend">Other Features</legend>
             <form action="../demos/db_demos.php" method="post" name="aka" style="text-align:center;">
 
                     <b>Demo AKA :</b><br/>
@@ -170,8 +170,8 @@ function add_author()
     </form>
     </fieldset>
 
-        <fieldset class="game_set" style="display:inline;width:200px;vertical-align:top;">
-        <legend class="links_legend">Statistics</legend>
+        <fieldset class="primary_fieldset" style="display:inline;width:200px;vertical-align:top;">
+        <legend class="primary_legend">Statistics</legend>
 
                     Nr of Screenshots - {$nr_screenshots}<br/>
                     Nr of music files - {$nr_music}<br/>
@@ -184,8 +184,8 @@ function add_author()
 <br/><br/>
 
 
-    <fieldset class="game_set">
-        <legend class="links_legend">Basic demo Info - help</legend>
+    <fieldset class="primary_fieldset">
+        <legend class="primary_legend">Basic demo Info - help</legend>
 
                 Add this part of the screen you can add additional demo info. Just select what you think is neceasrry, and press the modify button to link it all to the demo.
                 When you press the delete button, the complete demo and all table entries linked to this demo entity will be removed from the database!
@@ -193,8 +193,8 @@ function add_author()
     </fieldset>
 <br/>
 
-    <fieldset class="game_set">
-        <legend class="links_legend">Basic demo info</legend>
+    <fieldset class="primary_fieldset">
+        <legend class="primary_legend">Basic demo info</legend>
             <form action="../demos/db_demos.php" method="post" name="edit">
                 <br/>
                 <b>Demo name :</b> <input type="text" name="demo_name" value="{$demo_info.demo_name}">

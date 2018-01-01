@@ -110,8 +110,8 @@ function DidyouknowUpdate(trivia_id) {
         </div>
         <br>
         <br>
-        <fieldset>
-        <legend>Add new Trivia</legend>
+        <fieldset class="primary_fieldset">
+        <legend class="primary_legend">Add new Trivia</legend>
         <div class="centered_fieldset">
             <form action="../trivia/db_trivia.php" method="post" name="trivia" id="trivia">
                 Trivia Text<br>
@@ -126,7 +126,7 @@ function DidyouknowUpdate(trivia_id) {
         {foreach from=$trivia item=line}
             <fieldset id="JStrivia_id_{$line.trivia_id}">
                 <form action="" method="post" name="trivia{$line.trivia_id}" id="JSTrivia{$line.trivia_id}">
-                    <legend>Trivia ID {$line.trivia_id}</legend>
+                    <legend class="primary_legend">Trivia ID {$line.trivia_id}</legend>
                     <br>
                     <div id="JSDidYouKnow_{$line.trivia_id}">
                         {$line.trivia_text}

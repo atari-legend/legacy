@@ -44,8 +44,8 @@ function typedelete(article_type_id)
     <h1>{$article_type_edit.article_type_edit}</h1>
     <div class="standard_tile_line"></div>
     <div class="standard_tile_padding">
-        <fieldset>
-            <legend>Edit article type</legend>
+        <fieldset class="primary_fieldset">
+            <legend class="primary_legend">Edit article type</legend>
             <form action="../articles/db_article_type.php" method="post" name="post" id="article_type_edit">
                 <b>Name :</b>
                 <input type="text" name="article_type_name" value="{$article_type_edit.article_type_edit}" class="standard_input input_large">

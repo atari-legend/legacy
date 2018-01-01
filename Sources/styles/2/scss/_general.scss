@@ -318,7 +318,6 @@ a.standard_tile_link:focus {
 }
 .statistics_list_entry {
     position: relative;
-    display: table;
     width: 100%;
     height: 140px;
     background: linear-gradient(to right, #ffffff, #23f001);
@@ -326,7 +325,6 @@ a.standard_tile_link:focus {
 
 .statistics_list_entry_odd {
     position: relative;
-    display: table;
     width: 100%;
     height: 140px;
     background: linear-gradient(to right, #ffffff, #acacac);

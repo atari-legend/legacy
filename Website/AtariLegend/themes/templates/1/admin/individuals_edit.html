@@ -107,8 +107,8 @@ function nickdelete(nick_id,ind_id)
         </div>
         <br>
         <br>
-        <fieldset>
-            <legend>Edit individual</legend>
+        <fieldset class="primary_fieldset">
+            <legend class="primary_legend">Edit individual</legend>
             <form action="../individuals/db_individuals.php" method="post" name="post" id="ind_edit">
                 <b>Name :</b>
                 <input type="text" name="ind_name" value="{$individuals.ind_name}" class="standard_input input_large">
@@ -139,8 +139,8 @@ function nickdelete(nick_id,ind_id)
         </fieldset>
         <br>
         {if $individuals.ind_image !== 'none'}
-            <fieldset>
-                <legend>Individual Image</legend>
+            <fieldset class="primary_fieldset">
+                <legend class="primary_legend">Individual Image</legend>
                 <br>
                 <a href="../../includes/show_image.php?file={$individuals.ind_image}&amp;resize=410,null,null,null" data-lightbox="image-1">
                     <img src="../../includes/show_image.php?file={$individuals.ind_image}&amp;resize=160,null,null,null" alt="{$line.ind_name}" class="user_stats_img_dark" style="max-width:95%;">
@@ -151,8 +151,8 @@ function nickdelete(nick_id,ind_id)
             </fieldset>
         {else}
             <form action="../individuals/db_individuals.php" method="post" enctype="multipart/form-data" name="individual_pic" id="individual_pic">
-                <fieldset>
-                    <legend>Individual Image</legend>
+                <fieldset class="primary_fieldset">
+                    <legend class="primary_legend">Individual Image</legend>
                     <!--<input type="file" name="individual_pic">-->
                     <label for="file_upload" class="file_upload">Select file</label>
                     <input id="file_upload" type="file" name="individual_pic">
@@ -167,8 +167,8 @@ function nickdelete(nick_id,ind_id)
         {/if}
         <br>
         <form action="../individuals/db_individuals.php" method="post" name="ind" id="NickAdd">
-            <fieldset>
-                <legend>Individuals nick (AKAs)</legend>
+            <fieldset class="primary_fieldset">
+                <legend class="primary_legend">Individuals nick (AKAs)</legend>
                 <input type="text" name="ind_nick" value="" class="standard_input input_large">
                 <input type="submit" value="Add Nick" class="topbutton_cpanel_small">
                 <input type="hidden" name="action" value="add_nick">

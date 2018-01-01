@@ -270,8 +270,8 @@ function ChangeNick(individual_nicks_id,crew_individual_id,crew_select)
         <br>
         <div class="main_company_container">
             <div class="main_company_child" id="child_edit_company">
-                <fieldset>
-                    <legend>Subcrew</legend>
+                <fieldset class="primary_fieldset">
+                    <legend class="primary_legend">Subcrew</legend>
                     <form action="../crew/db_crew.php" method="post" name="crew_gene2" id="crew_gene2">
                         <select class="standard_select select_small" onchange="browseSubCrew(this.value)">
                             <option value="" SELECTED>-</option>
@@ -300,8 +300,8 @@ function ChangeNick(individual_nicks_id,crew_individual_id,crew_select)
                 </fieldset>
             </div>
             <div class="main_company_child" id="child_edit_company">
-                <fieldset>
-                    <legend>Members</legend>
+                <fieldset class="primary_fieldset">
+                    <legend class="primary_legend">Members</legend>
                     <form action="../crew/db_crew.php" method="post">
                         <select class="standard_select select_small" name="m1" onchange="browseInd(this.value)">
                             <option value="" SELECTED>-</option>
@@ -332,8 +332,8 @@ function ChangeNick(individual_nicks_id,crew_individual_id,crew_select)
         <br>
         <div class="main_company_container">
             <div class="main_company_child" id="child_edit_company">
-                <fieldset>
-                    <table class="standard_table_list table_md">
+                <fieldset class="primary_fieldset">
+                    <table class="primary_table_list table_md">
                         <tr>
                             <th style="width:80%;">SubCrews</th>
                             <th style="width:20%;"></th>
@@ -351,8 +351,8 @@ function ChangeNick(individual_nicks_id,crew_individual_id,crew_select)
                 </fieldset>
             </div>
             <div class="main_company_child" id="child_edit_company">
-                <fieldset>
-                    <table class="standard_table_list table_md">
+                <fieldset class="primary_fieldset">
+                    <table class="primary_table_list table_md">
                         <tr>
                             <th style="width:80%;">"Sceners"</th>
                             <th class="w-20"></th>

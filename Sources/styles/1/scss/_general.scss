@@ -339,7 +339,6 @@ img {
 
 .statistics_list_entry {
     position: relative;
-    display: table;
     text-align: center;
     border-bottom: solid 1px #000000;
     padding-top: 3px;
@@ -348,7 +347,6 @@ img {
 
 .statistics_list_entry_odd {
     position: relative;
-    display: table;
     text-align: center;
     border-bottom: solid 1px #000000;
     padding-top: 3px;
@@ -520,21 +518,35 @@ img {
 .topbutton_cpanel:hover {
     @extend .topbutton_cpanel_small:hover;
 }
-fieldset {
+
+.primary_fieldset {
     padding: 15px;
     font-size: 11pt;
     background: $bg_color;
     border: solid 1px #000000;
 }
 
-legend {
+.primary_legend {
     padding: 1px 10px;
     color: #ffffff;
     background: #006f6f;
     border: #000000 solid 1px;
 }
 
+.secondary_fieldset {
+    padding: 15px;
+    font-size: 11pt;
+    background: #294f4f;
+    color: #ffffff;
+    border: solid 1px #000000;
+}
 
+.secondary_legend {
+    padding: 1px 10px;
+    color: #ffffff;
+    background: $bg_color;
+    border: #000000 solid 1px;
+}
 //*------------------------------------------------------------
 //The CSS for the help tips
 //-------------------------------------------------------------*/

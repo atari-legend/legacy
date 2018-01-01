@@ -203,15 +203,15 @@ The main game page
         <br>
         <div class="main_company_container">
             <div class="main_company_child" id="child_edit_company" style="text-align:left;">
-                <fieldset>
-                    <legend>More options</legend>
-                        <div id="close_new_disk"><a onclick="addNewdisk({$menu_set.menu_sets_id})" style="cursor: pointer;" class="left_nav_link" >Add New Disk</a><br></div>
-                        <a onclick="deleteSet({$menu_set.menu_sets_id})" style="cursor: pointer;" class="left_nav_link" >Delete set</a>
+                <fieldset class="secondary_fieldset">
+                    <legend class="primary_legend">More options</legend>
+                        <div id="close_new_disk"><a onclick="addNewdisk({$menu_set.menu_sets_id})" style="cursor: pointer;" class="standard_tile_link" >Add New Disk</a><br></div>
+                        <a onclick="deleteSet({$menu_set.menu_sets_id})" style="cursor: pointer;" class="standard_tile_link">Delete set</a>
                 </fieldset>
             </div>
             <div class="main_company_child" id="child_add_company" style="text-align:left;">
-                <fieldset>
-                    <legend>Publish Set</legend>
+                <fieldset class="secondary_fieldset">
+                    <legend class="primary_legend">Publish Set</legend>
                         <input onchange="publishSet({$menu_set.menu_sets_id},'online')" type="radio" name="publish" value="online" {if ({$menu_set.online}=='1')}checked{/if}> Online<br>
                         <input onchange="publishSet({$menu_set.menu_sets_id},'offline')" type="radio" name="publish" value="offline" {if ({$menu_set.online}=='0')}checked{/if}> Offline<br>
                 </fieldset>

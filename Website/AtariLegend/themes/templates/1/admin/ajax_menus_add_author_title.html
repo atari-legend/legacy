@@ -19,8 +19,8 @@ On this page we link authors to a menu disk title
 
 <div class="main_company_container" style="width:95%; margin:auto;">
     <div class="main_company_child" id="child_edit_company">
-        <fieldset>
-            <legend>Authors</legend>
+        <fieldset class="primary_fieldset">
+            <legend class="primary_legend">Authors</legend>
             <form action="" method="post" id="authors_form">
                 <select class="standard_select select_small" name="m1" onchange="browseInd(this.value)">
                     <option value="" SELECTED>-</option>
@@ -52,11 +52,11 @@ On this page we link authors to a menu disk title
         </fieldset>
     </div>
     <div class="main_company_child" id="child_edit_company">
-        <fieldset>
-            <legend>Linked authors - {$title_name}</legend>
+        <fieldset class="primary_fieldset">
+            <legend class="primary_legend">Linked authors - {$title_name}</legend>
             <div id="author_list">
                 {if isset($title_credits)}
-                    <table class="standard_table_list w-95">
+                    <table class="primary_table_list w-95">
                     <tr>
                         <th class="menu_credits_column w-45">Credits</th>
                         <th class="menu_scene_column w-45">"Sceners"</th>

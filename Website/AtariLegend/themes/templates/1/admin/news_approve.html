@@ -59,8 +59,8 @@ function delete_news(news_id)
         <br>
         {if $nr_submissions <> '0'}
             {foreach from=$news_submissions item=line}
-                <fieldset>
-                    <legend>
+                <fieldset class="primary_fieldset">
+                    <legend class="primary_legend">
                         {$line.news_userid} - {$line.news_date}
                     </legend>
                     <br>

@@ -17,7 +17,7 @@
 {* EDIT BOX FOR MENU DISKS *}
 {if isset($smarty_action) and $smarty_action == "edit_disk_box"}
     <td colspan="4" style="width:100%;margin:0px;padding:0px;border:0;">
-        <table class="standard_table_list no_border table_hover" id="menu_list_table">
+        <table class="primary_table_list no_border table_hover" id="menu_list_table">
             <tr>
                 <td class="menu_disk_list_column w-30"><a onclick="closeeditDisk({$menus.menu_disk_id})" style="cursor: pointer;">{$menus.menu_disk_name}</a></td>
                 <td class="menu_list_crew_column w-30">{if isset($menus.crew_id)}{$menus.crew_name}{else}<i>n/a</i>{/if}</td>
@@ -85,7 +85,7 @@
                         {if isset($individuals)}
                             <br>
                             <br>
-                            <table class="standard_table_list w-95">
+                            <table class="primary_table_list w-95">
                             <tr>
                                 <th class="menu_credits_column w-45">Credits</th>
                                 <th class="menu_scene_column w-45">"Sceners"</th>
@@ -111,7 +111,7 @@
                         {if isset($game)}
                             <br>
                             <br>
-                            <table class="standard_table_list w-95">
+                            <table class="primary_table_list w-95">
                             <tr>
                                 <th class="menu_mark_column w-5"></th>
                                 <th class="menu_gamename_column w-40">
@@ -197,7 +197,7 @@
                     <div id="menu_doc_list">
                         {if isset($doc_game)}
                             <br>
-                            <table class="standard_table_list w-95">
+                            <table class="primary_table_list w-95">
                             <tr>
                                 <th class="menu_mark_column w-5"></th>
                                 <th class="menu_docname_column w-55">Doc Name
@@ -267,8 +267,8 @@
                     <div id="JSMenuScreenshotList">
                         {if isset( $screenshots)}
                         <div class="standard_tile_padding">
-                            <fieldset class="centered_fieldset">
-                                <legend>screenshots</legend>
+                            <fieldset class="primary_fieldset centered_fieldset">
+                                <legend class="primary_legend">screenshots</legend>
                                 {if $screenshots_nr <> ''}
                                     {foreach from=$screenshots item=line name=screen}
                                         <div style="display:inline-block;text-align:center;">
@@ -291,8 +291,8 @@
                     <div id="JSMenuFileList">
                         {if isset( $downloads)}
                         <div class="standard_tile_padding">
-                            <fieldset class="centered_fieldset">
-                                <legend>File</legend>
+                            <fieldset class="primary_fieldset centered_fieldset">
+                                <legend class="primary_legend">File</legend>
                                 {if $download_nr <> ''}
                                     {foreach from=$downloads item=line}
                                         <a href="{$line.filepath}{$line.filename}.zip" class="left_nav_link"><b>{$menu_disk_name}</b></a> -
@@ -365,7 +365,7 @@
     {if isset($game)}
         <br>
         <br>
-        <table class="standard_table_list w-95">
+        <table class="primary_table_list w-95">
         <tr>
             <th class="menu_mark_column w-5"></th>
             <th class="menu_gamename_column w-40">Software Name
@@ -453,7 +453,7 @@
 {if isset($smarty_action) and $smarty_action == "add_doc_to_menu_return"}
     {if isset($doc_game)}
         <br>
-        <table class="standard_table_list w-95">
+        <table class="primary_table_list w-95">
         <tr>
             <th class="menu_mark_column w-5"></th>
             <th class="menu_docname_column w-55">Doc Name
@@ -525,8 +525,8 @@
 
 {if isset($smarty_action) and $smarty_action == "add_screen_to_menu_return"}
     <div class="standard_tile_padding">
-        <fieldset class="centered_fieldset">
-            <legend>screenshots</legend>
+        <fieldset class="primary_fieldset centered_fieldset">
+            <legend class="primary_legend">screenshots</legend>
             {if $screenshots_nr <> ''}
                 {foreach from=$screenshots item=line name=screen}
                     <div style="display:inline-block;text-align:center;">
@@ -552,8 +552,8 @@
 
 {if isset($smarty_action) and $smarty_action == "add_file_to_menu_return"}
     <div class="standard_tile_padding">
-        <fieldset class="centered_fieldset">
-            <legend>File</legend>
+        <fieldset class="primary_fieldset centered_fieldset">
+            <legend class="primary_legend">File</legend>
             {if $download_nr <> ''}
                 {foreach from=$downloads item=line}
                     <a href="{$line.filepath}{$line.filename}.zip" class="left_nav_link"><b>{$menu_disk_name}</b></a> -
@@ -585,7 +585,7 @@
 {if isset($smarty_action) and $smarty_action == "update_menu_disk_credits"}
     <br>
     <br>
-    <table class="standard_table_list w-95">
+    <table class="primary_table_list w-95">
         <tr>
             <th class="menu_credits_column w-45">Credits</th>
             <th class="menu_scene_column w-45">"Sceners"</th>
@@ -620,7 +620,7 @@
     <br>
     <br>
     <div id="JSMenuSoftwareList">
-        <table class="standard_table_list w-95">
+        <table class="primary_table_list w-95">
         <tr>
             <th class="menu_mark_column w-5"></th>
             <th class="menu_gamename_column w-40">Software Name
@@ -703,8 +703,8 @@
         <div class="main_company_container">
             <div class="main_company_child" id="child_edit_company">
                 <form action="" method="post" name="link_game_to_set" id="link_game_to_set">
-                    <fieldset>
-                    <legend>Select chain {if isset($title_name)}for {$title_name}{/if}</legend>
+                    <fieldset class="primary_fieldset">
+                    <legend class="primary_legend">Select chain {if isset($title_name)}for {$title_name}{/if}</legend>
                         <select name="chainbrowse" class="standard_select select_large">
                             <option value="" selected>-</option>
                             {foreach from=$chain_data item=line}
@@ -739,8 +739,8 @@
             </div>
             <div class="main_company_child" id="child_edit_company">
                 <form action="" method="get" name="set_add_to_menu" id="set_add_to_menu">
-                    <fieldset>
-                    <legend>Create chain {if isset($title_name)}for {$title_name}{/if}</legend>
+                    <fieldset class="primary_fieldset">
+                    <legend class="primary_legend">Create chain {if isset($title_name)}for {$title_name}{/if}</legend>
                         <input type="button" onclick="createChain({$menu_disk_title_id},{$menu_disk_id})" class="topbutton_cpanel_small" value="Create">
                         <div class="help-tip">
                             <p style="right:220px;">In this box you create a CHAIN for this title. <b>BE AWARE</b>, before creating a new chain for a title, make sure the chain
@@ -761,7 +761,7 @@
 {if isset($smarty_action) and $smarty_action == "title_credits_return"}
     <div id="author_list">
         {if isset($title_credits)}
-            <table class="standard_table_list w-95">
+            <table class="primary_table_list w-95">
             <tr>
                 <th class="menu_credits_column w-45">Credits</th>
                 <th class="menu_scene_column w-45">"Sceners"</th>

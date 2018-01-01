@@ -53,8 +53,8 @@ function deleteseries(str)
         </div>
         <br>
         <br>
-        <fieldset class="centered_fieldset">
-        <legend>Series options</legend>
+        <fieldset class="primary_fieldset centered_fieldset">
+        <legend class="primary_legend">Series options</legend>
             <a style="cursor: pointer;" onClick="deleteseries({if isset($series_info.game_series_id)}{$series_info.game_series_id}{/if}); return false;" class="left_nav_link">
                 Delete series
             </a>
@@ -65,8 +65,8 @@ function deleteseries(str)
         </fieldset>
         <br>
         <br>
-        <fieldset class="centered_fieldset">
-            <legend>Edit Series name</legend>
+        <fieldset class="primary_fieldset centered_fieldset">
+            <legend class="primary_legend">Edit Series name</legend>
             {if (isset($series_info.sql_series_link_nr) and $series_info.sql_series_link_nr ==0)}
                 No games hooked to this series yet.
                 </fieldset>

@@ -22,8 +22,8 @@
     <div class="standard_tile_line"></div>
     <div class="standard_tile_padding">
         <form action="../links/link_modlist.php" method="post" name="catdrop" id="catdrop">
-        <fieldset>
-            <legend>Links in Archive</legend>
+        <fieldset class="primary_fieldset">
+            <legend class="primary_legend">Links in Archive</legend>
             <div class="links_list_row">
                 <div class="links_list_text">
                     Pick category
@@ -44,7 +44,7 @@
         </form>
         <br><br>
         {if isset($link_list)}
-        <table class="standard_table_list ">
+        <table class="primary_table_list ">
         {foreach from=$link_list item=line}
             <tr>
                 <td class="links_modlist_tdline">
