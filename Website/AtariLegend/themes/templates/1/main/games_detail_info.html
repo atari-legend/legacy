@@ -26,7 +26,7 @@
     <h1>GAME INFO</h1>
     <div class="standard_tile_line"></div>
     <div class="standard_list_entry">
-        <table class="standard_table_list w-100">
+        <table class="standard_table_list ">
             {if isset($publisher)}
                 {foreach from=$publisher item=line name=publisher}
                     {if $line.logo != 'none'}
@@ -116,7 +116,7 @@
                     {if $line.pub_profile != ''}
                         <tr></tr>
                         <tr style="display:none;" id="profile{$line.pub_id}">
-                            <td colspan="3" class="standard_table_center w-100">
+                            <td colspan="3" class="standard_table_center ">
                                 <textarea cols="70" id="profile{$line.pub_id}" class="latest_comments_textarea" style="margin-top:5px;margin-bottom:5px;" readonly>{$line.pub_profile}</textarea>
                             </td>
                         </tr>
@@ -187,7 +187,7 @@
                     {if $line.pub_profile != ''}
                         <tr></tr>
                         <tr style="display:none;" id="profile{$line.pub_id}">
-                            <td colspan="3" class="standard_table_center w-100">
+                            <td colspan="3" class="standard_table_center ">
                                 <textarea cols="70" id="profile{$line.pub_id}" class="latest_comments_textarea" style="margin-top:5px;margin-bottom:5px;" readonly>{$line.pub_profile}</textarea>
                             </td>
                         </tr>
@@ -250,7 +250,7 @@
                     {if $line.ind_profile != ''}
                         <tr></tr>
                         <tr style="display:none;" id="profile_ind{$line.ind_id}">
-                            <td colspan="3" class="standard_table_center w-100">
+                            <td colspan="3" class="standard_table_center ">
                                 <textarea cols="70" id="profile_ind{$line.ind_id}" class="latest_comments_textarea" style="margin-top:5px;margin-bottom:5px;" readonly>{$line.ind_profile}</textarea>
                             </td>
                         </tr>
