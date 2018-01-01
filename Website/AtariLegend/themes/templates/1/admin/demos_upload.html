@@ -55,7 +55,7 @@ function delete_download(id, demo_id)
 
     <form action="../demos/db_demos_upload.php?action=update_download" method="post" name="upload">
     <fieldset class="interview_set">
-        <legend class="links_legend">{$line.date}</legend>
+        <legend class="primary_legend">{$line.date}</legend>
                 <a href="{$line.filepath}.zip" class="MAINNAV">{$line.filename}</a>
                 <br/>
                 <br/>
@@ -160,7 +160,7 @@ function delete_download(id, demo_id)
 <br/>
     <form action="../demos/db_demos_upload.php?action=add_download" enctype="multipart/form-data" method="post" name="add_file">
     <fieldset class="interview_set">
-        <legend class="links_legend">Add a new download</legend>
+        <legend class="primary_legend">Add a new download</legend>
 
                 <b>Filename :</b> <input type="file" name="demo_download_name" accept="application/x-zip-compressed,application/x-zip-compressed,application/x-zip-compressed">
 <br/>

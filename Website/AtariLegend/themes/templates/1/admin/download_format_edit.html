@@ -44,8 +44,8 @@ function formatdelete(format_id)
     <h1>{$format_edit.format_edit}</h1>
     <div class="standard_tile_line"></div>
     <div class="standard_tile_padding">
-        <fieldset class="centered_fieldset">
-            <legend>Edit format</legend>
+        <fieldset class="primary_fieldset centered_fieldset">
+            <legend class="primary_legend">Edit format</legend>
             <form action="../downloads/db_download_format.php" method="post" name="post" id="format_edit">
                 <b>Name :</b>
                 <input type="text" name="format_name" value="{$format_edit.format_edit}" class="standard_input input_large">

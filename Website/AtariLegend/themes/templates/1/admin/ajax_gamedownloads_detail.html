@@ -18,7 +18,7 @@
 {* EDIT BOX FOR GAME DOWNLOADS*}
 {if isset($smarty_action) and $smarty_action == "edit_download_box"}
     <td colspan="2" style="width:100%;margin:0px;padding:0px;">
-        <table class="standard_table_list table_hover no_border" id="menu_list_table">
+        <table class="primary_table_list table_hover no_border" id="menu_list_table">
             <tr>
                 <td class="menu_disk_list_column w-30">{if $downloads.filename != ''}<a onclick="closeEditDownload({$downloads.game_download_id},{$game.game_id})" style="cursor: pointer;">{$downloads.filename}</a>{else}<i>n/a</i>{/if}</td>
                 <td class="menu_state_column w-30">{if isset($downloads.date)}{$downloads.date}{else}<i>n/a</i>{/if}</td>
@@ -45,11 +45,11 @@
                     </div>
                     <div style="text-align:center;"><br> Game uploaded by <b>{$download_details.username}</b> on <b>{$download_details.date}</b></div>
                     <div class="standard_tile_padding">
-                        <fieldset>
+                        <fieldset class="primary_fieldset">
                             <div style="padding-right:20px;padding-left:20px;">
                                 <br>
-                                <fieldset>
-                                    <legend>Download details</legend>
+                                <fieldset class="primary_fieldset">
+                                    <legend class="primary_legend">Download details</legend>
                                     <div id="mod_download">
                                         <div class="game_upload_container">
                                             <div class="game_upload_child" id="gu_child_1">
@@ -125,8 +125,8 @@
                             <div class="game_upload_container">
                                 <div class="game_upload_child" id="gu_child_1">
                                     <div style="padding-right:20px;">
-                                    <fieldset>
-                                        <legend>Label details</legend>
+                                    <fieldset class="primary_fieldset">
+                                        <legend class="primary_legend">Label details</legend>
                                         <div class="download_details_row">
                                             <div class="download_details_text_long">
                                                 Options :
@@ -152,7 +152,7 @@
                                                 <br>
                                                 <div class="download_details_row">
                                                     <div class="download_details_input">
-                                                        <table class="standard_table_list table_sm table_hover ">
+                                                        <table class="primary_table_list table_sm table_hover ">
                                                         {foreach from=$download_options item=line}
                                                         <tr>
                                                             <td class="w-95">
@@ -175,8 +175,8 @@
                                 </div>
                                 <div class="game_upload_child" id="gu_child_1">
                                     <div style="padding-right:20px;">
-                                    <fieldset>
-                                        <legend>Tos details</legend>
+                                    <fieldset class="primary_fieldset">
+                                        <legend class="primary_legend">Tos details</legend>
                                         <div class="download_details_row">
                                             <div class="download_details_text_long">
                                                 TOS :
@@ -202,7 +202,7 @@
                                                 <br>
                                                 <div class="download_details_row">
                                                     <div class="download_details_input">
-                                                        <table class="standard_table_list table_sm table_hover ">
+                                                        <table class="primary_table_list table_sm table_hover ">
                                                         {foreach from=$download_tos item=line}
                                                         <tr>
                                                             <td class="w-95">
@@ -226,8 +226,8 @@
                             <div class="game_upload_container">
                                 <div class="game_upload_child" id="gu_child_1">
                                     <div style="padding-right:20px;">
-                                    <fieldset>
-                                        <legend>Trainer details</legend>
+                                    <fieldset class="primary_fieldset">
+                                        <legend class="primary_legend">Trainer details</legend>
                                         <div class="download_details_row">
                                             <div class="download_details_text_long">
                                                 Trainer :
@@ -251,7 +251,7 @@
                                                 <br>
                                                 <div class="download_details_row">
                                                     <div class="download_details_input">
-                                                        <table class="standard_table_list table_sm table_hover ">
+                                                        <table class="primary_table_list table_sm table_hover ">
                                                         {foreach from=$download_trainer item=line}
                                                         <tr>
                                                             <td class="w-95">
@@ -274,8 +274,8 @@
                                 </div>
                                 <div class="game_upload_child" id="gu_child_1">
                                     <div style="padding-right:20px;">
-                                    <fieldset>
-                                        <legend>Crew details</legend>
+                                    <fieldset class="primary_fieldset">
+                                        <legend class="primary_legend">Crew details</legend>
                                         <div class="download_details_row">
                                             <div class="download_details_text_long">
                                                 Crew :
@@ -301,7 +301,7 @@
                                                 <br>
                                                 <div class="download_details_row">
                                                     <div class="download_details_input">
-                                                        <table class="standard_table_list table_hover table_sm">
+                                                        <table class="primary_table_list table_hover table_sm">
                                                         {foreach from=$download_crew item=line}
                                                         <tr>
                                                             <td class="w-95">
@@ -327,8 +327,8 @@
                             <div class="game_upload_container">
                                 <div class="game_upload_child" id="gu_child_1">
                                     <div style="padding-right:20px;">
-                                    <fieldset>
-                                        <legend>Menudisk details</legend>
+                                    <fieldset class="primary_fieldset">
+                                        <legend class="primary_legend">Menudisk details</legend>
                                         <div class="download_details_row">
                                             <div class="download_details_text_long">
                                                 Menudisk :
@@ -355,7 +355,7 @@
                                                 <br>
                                                 <div class="download_details_row">
                                                     <div class="download_details_input">
-                                                        <table class="standard_table_list table_sm table_hover ">
+                                                        <table class="primary_table_list table_sm table_hover ">
                                                         {foreach from=$download_menudisk item=line}
                                                         <tr>
                                                             <td class="w-95">
@@ -379,8 +379,8 @@
                                 </div>
                                 <div class="game_upload_child" id="gu_child_1">
                                     <div style="padding-right:20px;">
-                                    <fieldset>
-                                        <legend>Set details</legend>
+                                    <fieldset class="primary_fieldset">
+                                        <legend class="primary_legend">Set details</legend>
                                         <div class="download_details_row">
                                             <div class="download_details_text_long">
                                                 Set :
@@ -408,7 +408,7 @@
                                                     <div class="download_details_text">Linked downloads :<br><br></div>
                                                 </div>
                                                 <div class="download_details_row">
-                                                    <table class="standard_table_list table_sm table_hover ">
+                                                    <table class="primary_table_list table_sm table_hover ">
                                                     {foreach from=$download_set item=line}
                                                     <tr>
                                                         <td class="w-95">
@@ -434,8 +434,8 @@
                                 <div class="game_upload_child" id="gu_child_1">
                                     <form action="" method="post" id="authors_form">
                                         <div style="padding-right:20px;">
-                                            <fieldset>
-                                                <legend>Author details</legend>
+                                            <fieldset class="primary_fieldset">
+                                                <legend class="primary_legend">Author details</legend>
                                                 <div class="download_details_row">
                                                     <div class="download_details_text_long">
                                                         Individual :
@@ -475,10 +475,10 @@
                                     <div style="padding-right:20px;">
                                         <div id="download_credit_list">
                                         {if isset($individuals)}
-                                            <fieldset>
-                                                <legend>Linked authors</legend>
+                                            <fieldset class="primary_fieldset">
+                                                <legend class="primary_legend">Linked authors</legend>
                                                 <div id="author_list">
-                                                    <table class="standard_table_list table_sm">
+                                                    <table class="primary_table_list table_sm">
                                                     <tr>
                                                         <th class="menu_credits_column w-45">Credits</th>
                                                         <th class="menu_scene_column w-45">"Sceners"</th>
@@ -542,7 +542,7 @@
     <br>
     <div class="download_details_row">
         <div class="download_details_input">
-            <table class="standard_table_list table_sm table_hover ">
+            <table class="primary_table_list table_sm table_hover ">
             {foreach from=$download_options item=line}
             <tr>
                 <td class="w-95">
@@ -573,7 +573,7 @@
     <br>
     <div class="download_details_row">
         <div class="download_details_input">
-            <table class="standard_table_list table_sm table_hover ">
+            <table class="primary_table_list table_sm table_hover ">
             {foreach from=$download_tos item=line}
             <tr>
                 <td class="w-95">
@@ -606,7 +606,7 @@
     <br>
     <div class="download_details_row">
         <div class="download_details_input">
-            <table class="standard_table_list table_sm table_hover ">
+            <table class="primary_table_list table_sm table_hover ">
             {foreach from=$download_trainer item=line}
             <tr>
                 <td class="w-95">
@@ -637,7 +637,7 @@
     <br>
     <div class="download_details_row">
         <div class="download_details_input">
-            <table class="standard_table_list table_sm table_hover ">
+            <table class="primary_table_list table_sm table_hover ">
             {foreach from=$download_crew item=line}
             <tr>
                 <td class="w-95">
@@ -668,7 +668,7 @@
         <br>
         <div class="download_details_row">
             <div class="download_details_input">
-                <table class="standard_table_list table_sm table_hover ">
+                <table class="primary_table_list table_sm table_hover ">
                 {foreach from=$download_menudisk item=line}
                 <tr>
                     <td class="w-95">
@@ -698,7 +698,7 @@
             <div class="download_details_text">Linked downloads :<br><br></div>
         </div>
         <div class="download_details_row">
-            <table class="standard_table_list table_sm table_hover ">
+            <table class="primary_table_list table_sm table_hover ">
             {foreach from=$download_set item=line}
             <tr>
                 <td class="w-95">
@@ -725,10 +725,10 @@
 {* POP FOR SET INDIVIDUALS *}
 {if isset($smarty_action) and $smarty_action == "update_individuals"}
     {if isset($individuals)}
-        <fieldset>
-            <legend>Linked authors</legend>
+        <fieldset class="primary_fieldset">
+            <legend class="primary_legend">Linked authors</legend>
             <div id="author_list">
-                <table class="standard_table_list table_sm table_hover ">
+                <table class="primary_table_list table_sm table_hover ">
                 <tr>
                     <th class="menu_credits_column w-45">Credits</th>
                     <th class="menu_scene_column w-45">"Sceners"</th>

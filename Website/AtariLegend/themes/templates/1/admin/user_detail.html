@@ -85,8 +85,8 @@ function user_stats()
             After resetting, you are able to enter and save a new password for the account. Finally, 'Statistics' will display what this user has done at AL so far.
         </div>
         <br><br>
-        <fieldset>
-            <legend>User details</legend>
+        <fieldset class="primary_fieldset">
+            <legend class="primary_legend">User details</legend>
             <form action="../user/db_user.php?action=modify_user&amp;user_id_selected={$users.user_id}" method="post" name="user" id="user">
             <div class="user_details_container">
                 <div class="user_details_child" id="child_1_user">
@@ -179,8 +179,8 @@ function user_stats()
             </form>
         </fieldset>
         <br/><br/>
-        <fieldset>
-            <legend>Avatar</legend>
+        <fieldset class="primary_fieldset">
+            <legend class="primary_legend">Avatar</legend>
                 <div class="user_details_container">
                     <div class="user_details_child" id="child_1_user">
                         {if $users.avatar_ext !=''}
@@ -213,8 +213,8 @@ function user_stats()
                 </div>
         </fieldset>
         <br/><br/>
-        <fieldset>
-            <legend>Reset Password</legend>
+        <fieldset class="primary_fieldset">
+            <legend class="primary_legend">Reset Password</legend>
             <form action="../user/db_user.php" method="post" name="login_form">
             <div class="user_details_container">
                 <div class="user_details_child" id="child_1_user">

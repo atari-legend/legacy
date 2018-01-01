@@ -66,8 +66,8 @@ function deletecomment(screenshot_id, article_id)
         </div>
         <br>
         <br>
-        <fieldset class="centered_fieldset">
-            <legend>screenshots</legend>
+        <fieldset class="primary_fieldset centered_fieldset">
+            <legend class="primary_legend">screenshots</legend>
             {if $screenshots_nr <> ''}
                 {foreach from=$screenshots item=line name=screen}
                     <div style="display:inline-block;text-align:center;">
@@ -95,8 +95,8 @@ function deletecomment(screenshot_id, article_id)
         </fieldset>
         <br>
         <br>
-        <fieldset class="centered_fieldset  ">
-        <legend>Browse</legend>
+        <fieldset class="primary_fieldset centered_fieldset">
+        <legend class="primary_legend">Browse</legend>
             <form enctype="multipart/form-data" name="frmUploadShot" action="db_articles.php" method="post">
                 <!--{section name=loop loop=11 start=1}
                     <input type="file" name="image[{$smarty.section.loop.index}]">

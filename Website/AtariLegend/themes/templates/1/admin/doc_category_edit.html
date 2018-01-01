@@ -44,8 +44,8 @@ function categorydelete(doc_category_id)
     <h1>{$doc_category_edit.doc_category_name_edit}</h1>
     <div class="standard_tile_line"></div>
     <div class="standard_tile_padding">
-        <fieldset class="centered_fieldset">
-            <legend>Edit doc category</legend>
+        <fieldset class="primary_fieldset centered_fieldset">
+            <legend class="primary_legend">Edit doc category</legend>
             <form action="../docs/db_doc_category.php" method="post" name="post" id="doc_category_edit">
                 <b>Name :</b>
                 <input type="text" name="doc_category_name" value="{$doc_category_edit.doc_category_name_edit}" class="standard_input input_large">

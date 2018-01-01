@@ -25,12 +25,6 @@
     padding-bottom: 10px;
 }
 
-// Table Headers
-
-.log_subname_column {
-    padding-right: 5px;
-    text-align: right;
-}
 
 //
 // Table Cells
@@ -80,11 +74,11 @@
 }
 
 .menu_state_column,
+.log_subname_column,
 .menu_delete_column {
     padding-right: 5px;
     text-align: right;
 }
-
 .menu_mark_column,
 .menu_gameinfo_column,
 .menu_gameset_column,
@@ -194,7 +188,7 @@
     margin-left: 1%;
 }
 
-.standard_table_list {
+.primary_table_list {
     padding: 0;
     margin-right: auto;
     margin-left: auto;
@@ -204,14 +198,14 @@
     border-spacing: 0;
 }
 
-.standard_table_list  li {
+.primary_table_list  li {
     font-size: 16px;
     color: #000000;
     text-align: center;
     list-style-type: none;
 }
 
-.standard_table_list th {
+.primary_table_list th {
     padding-top: 3px;
     padding-bottom: 3px;
     padding-left: 3px;
@@ -222,16 +216,16 @@
     border-bottom: solid 2px #b2b2b2;
 }
 
-.standard_table_list tr:nth-child(even) {
+.primary_table_list tr:nth-child(even) {
     background-color: #f3f3f3;
 }
-.standard_table_list tr:nth-child(odd) {
+.primary_table_list tr:nth-child(odd) {
     background-color: #eeeeee;
 }
-.standard_table_list tr:hover {
+.primary_table_list tr:hover {
     background-color: #dbd7d1;
 }
-.standard_table_list td {
+.primary_table_list td {
     padding-top: 1px;
     padding-bottom: 1px;
     padding-left: 3px;

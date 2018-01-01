@@ -145,8 +145,8 @@ function browseDeveloper(str) {
         <h1>{$game_info.game_name}</h1>
         <div class="standard_tile_line"></div>
         <div class="standard_tile_padding">
-            <fieldset>
-                <legend>Basic game info - help</legend>
+            <fieldset class="primary_fieldset">
+                <legend class="primary_legend">Basic game info - help</legend>
                         Overhere you can add additional game info. Just select what you think is neceasrry, and press the modify button to link it all to the game.
                         When you press the delete button, the complete game and all table entries linked to this game entity will be removed from the database!
             </fieldset>
@@ -154,8 +154,8 @@ function browseDeveloper(str) {
             <div>
                 <form action="../games/db_games_detail.php" method="post" name="edit">
                     <div id="gd_basic_game_info">
-                    <fieldset>
-                        <legend>Basic game info</legend>
+                    <fieldset class="primary_fieldset">
+                        <legend class="primary_legend">Basic game info</legend>
                         <br><b>Game name :</b> <input type="text" maxlength="255" name="game_name" value="{$game_info.game_name}" class="standard_input input_large">
                         <br>
                         <br>
@@ -324,8 +324,8 @@ function browseDeveloper(str) {
                     </div>
                 </form>
                 <div id="gd_other_features">
-                    <fieldset>
-                    <legend>Other Features</legend>
+                    <fieldset class="primary_fieldset">
+                    <legend class="primary_legend">Other Features</legend>
                         <a href="../downloads/downloads_game_detail.php?game_id={$game_info.game_id}" class="left_nav_link">Add file download</a><br>
                         <a href="../games/games_facts.php?game_id={$game_info.game_id}&amp;game_name={$game_info.game_name}" class="left_nav_link">Add game facts</a><br>
                         <a href="../games/games_screenshot_add.php?game_id={$game_info.game_id}&amp;game_name={$game_info.game_name}" class="left_nav_link">Add screenshots</a><br>
@@ -339,8 +339,8 @@ function browseDeveloper(str) {
                         {/if}
                     </fieldset>
                     <br>
-                    <fieldset>
-                        <legend>Statistics</legend>
+                    <fieldset class="primary_fieldset">
+                        <legend class="primary_legend">Statistics</legend>
                         Nr of Screenshots - {$nr_screenshots}<br>
                         Nr of Box scans - {$nr_boxscans}<br>
                         Nr of reviews - {$nr_reviews}<br>
@@ -350,8 +350,8 @@ function browseDeveloper(str) {
                     </fieldset>
                 </div>
                 <div id="gd_other_features_left">
-                    <fieldset>
-                    <legend>Other Features</legend>
+                    <fieldset class="primary_fieldset">
+                    <legend class="primary_legend">Other Features</legend>
                         <a href="../downloads/downloads_game_detail.php?game_id={$game_info.game_id}" class="left_nav_link">Add file download</a><br>
                         <a href="../games/games_facts.php?game_id={$game_info.game_id}&amp;game_name={$game_info.game_name}" class="left_nav_link">Add game facts</a><br>
                         <a href="../games/games_screenshot_add.php?game_id={$game_info.game_id}&amp;game_name={$game_info.game_name}" class="left_nav_link">Add screenshots</a><br>
@@ -366,8 +366,8 @@ function browseDeveloper(str) {
                     </fieldset>
                 </div>
                 <div id="gd_other_features_right">
-                    <fieldset>
-                        <legend>Statistics</legend>
+                    <fieldset class="primary_fieldset">
+                        <legend class="primary_legend">Statistics</legend>
                         Nr of Screenshots - {$nr_screenshots}<br>
                         Nr of Box scans - {$nr_boxscans}<br>
                         Nr of reviews - {$nr_reviews}<br>
@@ -379,8 +379,8 @@ function browseDeveloper(str) {
             </div>
             <div>
                 <div id="gd_development">
-                    <fieldset>
-                    <legend>
+                    <fieldset class="primary_fieldset">
+                    <legend class="primary_legend">
                         Development info - help</legend>
                                 You can add as many publishers/developers/creators as you like to a game. Use the continent dropdown for example to add in which part of the world
                                 the game was released by that particular Publisher. The info dropdown is used for adding budget release info, or arcade release info.
@@ -390,7 +390,7 @@ function browseDeveloper(str) {
                 <div id="gd_left">
                     <div id="gd_creator_info">
                         <fieldset class="game_data_tile">
-                            <legend>Creator info</legend>
+                            <legend class="primary_legend">Creator info</legend>
                                 <form action="../games/db_games_detail.php" method="post" name="creator" id="creator">
                                     {if isset($game_author)}
                                         {foreach from=$game_author item=line}
@@ -430,7 +430,7 @@ function browseDeveloper(str) {
                     <div id="gd_release_year">
                         <form action="../games/db_games_detail.php" method="post" name="year" id="year">
                             <fieldset class="game_data_tile">
-                                <legend>Release Year</legend>
+                                <legend class="primary_legend">Release Year</legend>
                                     {if isset($game_year)}
                                         {foreach from=$game_year item=line}
                                             <div class="links_mod_checkbox">
@@ -465,7 +465,7 @@ function browseDeveloper(str) {
                 <div id="gd_center">
                     <div id="gd_developer_info">
                     <fieldset class="game_data_tile">
-                        <legend>Developer info</legend>
+                        <legend class="primary_legend">Developer info</legend>
                         <form action="../games/db_games_detail.php" method="post" name="developer" id="developer">
                             {if isset($developer)}
                                 {foreach from=$developer item=line}
@@ -529,7 +529,7 @@ function browseDeveloper(str) {
                     <div id="gd_game_aka">
                         <form action="../games/db_games_detail.php" method="post" name="aka" id="aka">
                         <fieldset class="game_data_tile">
-                            <legend>Add game AKA</legend>
+                            <legend class="primary_legend">Add game AKA</legend>
                             <b>Game AKA :</b> <input type="text" name="game_aka"  class="standard_input input_large">
                             <br>
                             <br>
@@ -556,7 +556,7 @@ function browseDeveloper(str) {
                 <div id="gd_right">
                     <div id="gd_publisher_info">
                     <fieldset class="game_data_tile">
-                        <legend>Publisher info</legend>
+                        <legend class="primary_legend">Publisher info</legend>
                         <form action="../games/db_games_detail.php" method="post" name="publisher" id="publisher">
                             {if isset($publisher)}
                                 {foreach from=$publisher item=line}

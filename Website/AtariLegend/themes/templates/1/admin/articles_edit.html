@@ -197,13 +197,13 @@ function storeCaret(textEl) {
         <br>
         <br>
         <form action="../articles/db_articles.php" method="post" name="post">
-            <fieldset>
-                <legend>Preview article</legend>
+            <fieldset class="primary_fieldset">
+                <legend class="primary_legend">Preview article</legend>
                     <a href="../articles/articles_preview.php?article_id={$article.article_id}" class="left_nav_link"> Preview </a> this article<br>
             </fieldset>
             <br>
-            <fieldset>
-                <legend>Edit article</legend>
+            <fieldset class="primary_fieldset">
+                <legend class="primary_legend">Edit article</legend>
                 <br>
                 <div style="display:inline-block;">
                     <b>Title</b>
@@ -268,8 +268,8 @@ function storeCaret(textEl) {
                 <textarea name="textfield" id="game_review_textfield" ONSELECT="javascript:storeCaret(this);" ONCLICK="javascript:storeCaret(this);" ONKEYUP="javascript:storeCaret(this);" ONCHANGE="javascript:storeCaret(this);" rows="15" style="padding-left:0px;">{$article.article_text}</textarea>
             </fieldset>
             <br>
-            <fieldset class="centered_fieldset">
-                <legend>Screenshots</legend>
+            <fieldset class="primary_fieldset centered_fieldset">
+                <legend class="primary_legend">Screenshots</legend>
                 <br>
                 {if $screenshots_nr <> ''}
                     {foreach from=$screenshots item=line}

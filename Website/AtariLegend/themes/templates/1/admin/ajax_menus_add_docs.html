@@ -18,8 +18,8 @@
 {if isset($smarty_action) and $smarty_action == "full_list"}
     <form action="" method="post" name="game_search" id="doc_search_menu">
         <div class="standard_tile_padding">
-            <fieldset class="centered_fieldset">
-            <legend>Search (to add a doc)</legend>
+            <fieldset class="primary_fieldset centered_fieldset">
+            <legend class="primary_legend">Search (to add a doc)</legend>
                 By name : <br>
                 <select name="docbrowse" class="JSDocBrowse standard_select select_small">
                     <option value="" SELECTED>-</option>
@@ -36,7 +36,7 @@
     <form action="" method="get" name="doc_add_to_menu" id="doc_add_to_menu">
         {if isset($series_link) }
         <div id="doc_list">
-            <table class="standard_table_list w-95">
+            <table class="primary_table_list w-95">
                 <tr>
                     <th class="menu_mark_column w-5">Add</th>
                     <th class="game_name_column w-40">Name</th>

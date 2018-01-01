@@ -136,7 +136,7 @@ function DeleteEditable(comment_id,user_id,type) {
 {if isset($smarty_action) and $smarty_action == "delete_comment"}
     {if isset($comments)}
         <div class="games_main_detail_comments_container">
-            <table class="standard_table_list table_md">
+            <table class="primary_table_list table_md">
             {foreach from=$comments item=line}
                 <tr>
                     <td>
@@ -205,7 +205,7 @@ function DeleteEditable(comment_id,user_id,type) {
         <div class="standard_list_entry">
             <div id="latest_comments_all">
                 <div class="games_main_detail_comments_container">
-                    <table class="standard_table_list">
+                    <table class="primary_table_list">
                     {if isset($type) and $type=='user'}  <!--user specific comments mode! -->
                         {if isset($comments)}
                         <tr>

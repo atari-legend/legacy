@@ -21,19 +21,15 @@
     <div class="standard_tile">
         <h1>STATISTICS</h1>
         <div class="standard_tile_line"></div>
-        <div class="standard_list_entry">
-
                 {assign var="number" value=1}
             {foreach from=$statistics item=line}
 
-                    <div {if $number is even}class="statistics_list_entry  table_md"{else}class="statistics_list_entry_odd "{/if}>
+                    <div {if $number is even}class="statistics_list_entry"{else}class="statistics_list_entry_odd "{/if}>
                         <span class="stats_text">{if $line.value != ''}{$line.value}{/if}</span>
 
                     </div>
                 {$number=$number+1}
             {/foreach}
-
-        </div>
     <div class="standard_tile_line"></div>
     </div>
 </div>

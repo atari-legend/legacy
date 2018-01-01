@@ -42,8 +42,8 @@ The main game page
         <br>
         <form action="../games/games_list.php" method="get" name="game_search">
         <div id="games_main_parent">
-            <fieldset>
-            <legend>Search games</legend>
+            <fieldset class="primary_fieldset">
+            <legend class="primary_legend">Search games</legend>
             <br>
             <div class="games_main_row">
                 <div class="games_main_text">By Name :</div>
@@ -213,8 +213,8 @@ The main game page
         <br>
         <form method="post" action="db_games_detail.php" name="insertgame" onsubmit="return confirm('Are you sure you want to insert this game into the database?');">
         <input type="hidden" name="action" value="insert_game">
-        <fieldset>
-        <legend>Add games</legend>
+        <fieldset class="primary_fieldset">
+        <legend class="primary_legend">Add games</legend>
             <div class="standard_tile_text_center">
                 <input type="text" name="newgame" id="gm_newgame" required class="standard_input input_large">
                 <input type="submit" value="Insert" class="topbutton_cpanel_small">

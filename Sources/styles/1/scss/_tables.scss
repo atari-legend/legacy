@@ -65,9 +65,119 @@
     text-align: center;
 }
 
+.primary_table_list {
+    padding: 0;
+    margin-right: auto;
+    margin-left: auto;
+    text-align: left;
+    background-color: #00d3d3;
+    color: #ffffff;
+    border-collapse: collapse;
+    border: solid 1px #000000;
+    border-spacing: 0;
+    font-size: 10pt;
+    width: 100%;
+}
+.primary_table_list th {
+    margin: 0;
+    padding-left: 5px;
+    padding-right: 5px;
+    background-color: #006f6f;
+    border-top: solid 1px #000000;
+    border-bottom: solid 1px #000000;
+}
+.primary_table_list td {
+    margin: 0;
+    padding-left: 5px;
+    padding-right: 5px;
+    border-top: solid 1px #000000;
+    border-bottom: solid 1px #000000;
+}
+.primary_table_list tr:first-child {
+    td {
+        border-top: 0;
+    }
+}
+.primary_table_list tr:last-child {
+    td {
+        border-bottom: 0;
+    }
+}
+.primary_table_list tr:nth-child(even) {
+    background-color: #122323;
+}
+.primary_table_list tr:nth-child(odd) {
+    background-color: #0d2e2e;
+}
+.secondary_table_list {
+    padding: 0;
+    margin-right: auto;
+    margin-left: auto;
+    text-align: left;
+    background-color: #00d3d3;
+    font-size: 10pt;
+    color: #ffffff;
+    border-collapse: collapse;
+    border: solid 1px #000000;
+    border-spacing: 0;
+    width: 100%;
+}
+.secondary_table_list th {
+    margin: 0;
+    padding-left: 5px;
+    padding-right: 5px;
+    background-color: #006f6f;
+    border-top: solid 1px #000000;
+    border-bottom: solid 1px #000000;
+}
+.secondary_table_list td {
+    margin: 0;
+    padding-left: 5px;
+    padding-right: 5px;
+    border-top: solid 1px #000000;
+    border-bottom: solid 1px #000000;
+}
+.secondary_table_list tr:first-child {
+    td {
+        border-top: 0;
+    }
+}
+.secondary_table_list tr:last-child {
+    td {
+        border-bottom: 0;
+    }
+}
+.secondary_table_list tr:nth-child(even) {
+    background-color: #00d3d3;
+}
+.secondary_table_list tr:nth-child(odd) {
+    background-color: #006f6f;
+}
+
+
 //
-// Table cells
+// Table customizations
 //
+
+.standard_table_center {
+    font-size: 10pt;
+    font-weight: 100;
+    color: #ffffff;
+    text-align: center;
+}
+.standard_table_center img {
+    display: inline;
+}
+#menu_list_table {
+    background-color: #294f4f;
+}
+#menu_list_table tr:nth-child(even) {
+    background-color: #294f4f;
+}
+#menu_list_table tr:nth-child(odd) {
+    background-color: #006f6f;
+}
+
 .db_result_column,
 .db_state_column,
 .db_id_column,
@@ -127,115 +237,6 @@
 .log_subname_column {
     text-align: right;
 }
-.standard_table_list {
-    padding: 0;
-    margin-right: auto;
-    margin-left: auto;
-    text-align: left;
-    background-color: #00d3d3;
-    color: #ffffff;
-    border-collapse: collapse;
-    border: solid 1px #000000;
-    border-spacing: 0;
-    font-size: 10pt;
-    width: 100%;
-}
-.standard_table_list th {
-    margin: 0;
-    padding-left: 5px;
-    padding-right: 5px;
-    background-color: #006f6f;
-    border-top: solid 1px #000000;
-    border-bottom: solid 1px #000000;
-}
-.standard_table_list td {
-    margin: 0;
-    padding-left: 5px;
-    padding-right: 5px;
-    border-top: solid 1px #000000;
-    border-bottom: solid 1px #000000;
-}
-.standard_table_list tr:first-child {
-    td {
-        border-top: 0;
-    }
-}
-.standard_table_list tr:last-child {
-    td {
-        border-bottom: 0;
-    }
-}
-.standard_table_list tr:nth-child(even) {
-    background-color: #122323;
-}
-.standard_table_list tr:nth-child(odd) {
-    background-color: #0d2e2e;
-}
-.secondary_table_list {
-    padding: 0;
-    margin-right: auto;
-    margin-left: auto;
-    text-align: left;
-    background-color: #00d3d3;
-    font-size: 10pt;
-    color: #ffffff;
-    border-collapse: collapse;
-    border: solid 1px #000000;
-    border-spacing: 0;
-    width: 100%;
-}
-.secondary_table_list th {
-    margin: 0;
-    padding-left: 5px;
-    padding-right: 5px;
-    background-color: #006f6f;
-    border-top: solid 1px #000000;
-    border-bottom: solid 1px #000000;
-}
-.secondary_table_list td {
-    margin: 0;
-    padding-left: 5px;
-    padding-right: 5px;
-    border-top: solid 1px #000000;
-    border-bottom: solid 1px #000000;
-}
-.secondary_table_list tr:first-child {
-    td {
-        border-top: 0;
-    }
-}
-.secondary_table_list tr:last-child {
-    td {
-        border-bottom: 0;
-    }
-}
-
-.secondary_table_list tr:nth-child(even) {
-    background-color: #00d3d3;
-}
-.secondary_table_list tr:nth-child(odd) {
-    background-color: #006f6f;
-}
-
-.standard_table_center {
-    font-size: 10pt;
-    font-weight: 100;
-    color: #ffffff;
-    text-align: center;
-}
-
-.standard_table_center img {
-    display: inline;
-}
-#menu_list_table {
-    background-color: #294f4f;
-}
-#menu_list_table tr:nth-child(even) {
-    background-color: #294f4f;
-}
-#menu_list_table tr:nth-child(odd) {
-    background-color: #006f6f;
-}
 
 //*----------------------------------------------------------
 //Games comment
@@ -268,10 +269,6 @@
     font-size: 10pt;
     text-align: right;
 }
-
-//*----------------------------------------------------------
-//Games review main
-//------------------------------------------------------------ */
 
 .links_modlist_tdline {
     padding: 5px;

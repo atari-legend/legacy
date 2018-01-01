@@ -32,8 +32,8 @@ The submitted review page
         </div>
         <br>
         <br>
-        <fieldset>
-        <legend>Submitted Reviews</legend>
+        <fieldset class="primary_fieldset">
+        <legend class="primary_legend">Submitted Reviews</legend>
             {if $submission_nr != '0'}
                 {foreach from=$review item=line}
                     <a href="../games/games_review_edit.php?reviewid={$line.review_id}&game_id={$line.game_id}&action=submitted" class="left_nav_link"><b>{$line.game_name}</b></a> reviewed by <a href="../user/user_detail.php?user_id_selected={$line.user_id}" class="left_nav_link"><b>{$line.userid}</b></a><br>

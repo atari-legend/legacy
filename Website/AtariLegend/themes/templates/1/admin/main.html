@@ -239,7 +239,7 @@
                                 <div id="login-content">
                                     {if ! isset($user_session.userid)}
                                         <form action="../../common/login/user_process_login.php" method="post" name="login_form" onsubmit="formhash(this, this.password);">
-                                        <fieldset>
+                                        <fieldset class="primary_fieldset">
                                             <input class="standard_input input_large" type="text" name="userid" placeholder="Username" required>
                                             <input class="standard_input input_large" type="password" name="password" placeholder="Password" required>
                                             <div class="links_mod_checkbox">
@@ -256,7 +256,7 @@
                                         </form>
                                     {else}
                                         <form action="../../common/login/user_process_logout.php" method="post" name="login_form">
-                                        <fieldset>
+                                        <fieldset class="primary_fieldset">
                                             <span class="log_on_text"><a href="../../main/front/front.php?" class="standard_tile_link_black"><i class="fa fa-desktop" aria-hidden="true"></i>&nbsp; Main site</a></span>
                                             <br>
                                             <span class="log_on_text"><a href="../../admin/user/user_detail.php?user_id_selected={$user_session.user_id}" class="standard_tile_link_black"><i class="fa fa-user-circle-o" aria-hidden="true"></i>&nbsp; User Profile</a></span>

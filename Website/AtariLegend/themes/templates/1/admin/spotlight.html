@@ -37,8 +37,8 @@
         </div>
         <br>
         <br>
-        <fieldset>
-        <legend>Add new spot</legend>
+        <fieldset class="primary_fieldset">
+        <legend class="primary_legend">Add new spot</legend>
         <div class="centered_fieldset">
             <form enctype="multipart/form-data" action="../trivia/db_spotlight.php" method="post" name="fact" id="fact">
                 Spot Text<br>
@@ -59,8 +59,8 @@
         <br>
         {if (isset($spotlight))}
             {foreach from=$spotlight item=line}
-                <fieldset class="centered_fieldset">
-                <legend>Spotlight ID {$line.spotlight_id}</legend>
+                <fieldset class="primary_fieldset centered_fieldset">
+                <legend class="primary_legend">Spotlight ID {$line.spotlight_id}</legend>
                 <br>
                 {$line.spotlight}
                 <br>

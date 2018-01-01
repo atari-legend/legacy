@@ -180,8 +180,8 @@ function storeCaret(textEl) {
         <br>
         <br>
         <form action="../games/db_games_review.php" method="post" name="post">
-            <fieldset>
-                <legend>Other reviews</legend>
+            <fieldset class="primary_fieldset">
+                <legend class="primary_legend">Other reviews</legend>
                 {if isset($review)}
                 {foreach from=$review item=line}
                     <b>Review {$line.review_nr} ::  <a href="../games/games_review_edit.php?reviewid={$line.review_id}&amp;game_id={$game.game_id}" class="left_nav_link">Edit</a> ::
@@ -191,8 +191,8 @@ function storeCaret(textEl) {
             </fieldset>
             <br>
             <br>
-            <fieldset>
-                <legend>Create review</legend>
+            <fieldset class="primary_fieldset">
+                <legend class="primary_legend">Create review</legend>
                 <br>
                 <div style="display:inline-block;">
                     <b>Written by : </b><br>
@@ -235,8 +235,8 @@ function storeCaret(textEl) {
                 <br>
             </fieldset>
             <br>
-            <fieldset class="centered_fieldset">
-                <legend>Screenshots</legend>
+            <fieldset class="primary_fieldset centered_fieldset">
+                <legend class="primary_legend">Screenshots</legend>
                 <br>
                 {if $screenshots_nr <> 0}
                     {foreach from=$screenshots item=line}

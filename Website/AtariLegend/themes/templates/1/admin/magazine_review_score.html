@@ -51,8 +51,8 @@ function scoredelete(JSmagID,JSgame_id)
         {if isset($game_score)}
             <br>
             <br>
-            <fieldset class="centered_fieldset">
-                <legend>Uploaded scores</legend>
+            <fieldset class="primary_fieldset centered_fieldset">
+                <legend class="primary_legend">Uploaded scores</legend>
                 {foreach from=$game_score item=line}
                     <a href="../games/games_detail.php?game_id={$game.game_id}" class="left_nav_link">{$line.game_name}</a> -
                     <a href="../magazine/magazine_issue_edit.php?magazine_issue_id={$line.magazine_issue_id}" class="left_nav_link">{$line.magazine_name} {$line.magazine_issue_nr}</a> - score {$line.score}
@@ -61,8 +61,8 @@ function scoredelete(JSmagID,JSgame_id)
             </fieldset>
         {/if}
         <br>
-        <fieldset class="centered_fieldset">
-            <legend class="links_legend">Magazine issues</legend>
+        <fieldset class="primary_fieldset centered_fieldset">
+            <legend class="primary_legend">Magazine issues</legend>
             <br>
             {* Marty! Hi mate! here you need to add the search variables. Take care /Matt *}
             <form action="../magazine/magazine_setscore.php?source=gameinfo&game_id={$game.game_id}" method="post" name="pickissue" id="pickissue">
