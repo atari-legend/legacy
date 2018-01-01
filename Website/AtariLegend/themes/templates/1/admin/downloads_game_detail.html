@@ -17,6 +17,15 @@
 
 {block name=java_script}
 <script>
+function OSDMessageDisplay (message) {
+    $.notify_osd.create({
+        'text': message, // notification message
+        'icon': '../../../themes/styles/1/images/osd_icons/star.png', // icon path, 48x48
+        'sticky': false, // if true, timeout is ignored
+        'timeout': 4, // disappears after 6 seconds
+        'dismissable': true // can be dismissed manually
+    });
+}
 $(function() {
     $but = $('#file_upload_game_detail');
 
@@ -97,14 +106,7 @@ function modDownload(game_download_id, game_id) {
                 data = xmlhttp.responseText.split ( "[BRK]" );
                 document.getElementById("mod_download").innerHTML = data[0];
 
-                $.notify_osd.create({
-                    'text'        : data[1],             // notification message
-                    'icon'        : '{$style_dir}images/osd_icons/star.png', // icon path, 48x48
-                    'sticky'      : false,             // if true, timeout is ignored
-                    'timeout'     : 4,                 // disappears after 6 seconds
-                    'dismissable' : true               // can be dismissed manually
-                    });
-
+                OSDMessageDisplay (data[1]);
                 document.getElementById("mod_download").reset();
             }
         }
@@ -148,13 +150,7 @@ function addOption(game_download_id, game_id) {
                 data = xmlhttp.responseText.split ( "[BRK]" );
                 document.getElementById("linked_options").innerHTML = data[0];
 
-            $.notify_osd.create({
-                'text'        : data[1],             // notification message
-                'icon'        : '{$style_dir}images/osd_icons/star.png', // icon path, 48x48
-                'sticky'      : false,             // if true, timeout is ignored
-                'timeout'     : 4,                 // disappears after 6 seconds
-                'dismissable' : true               // can be dismissed manually
-                });
+            OSDMessageDisplay (data[1]);
 
             document.getElementById("linked_options").reset();
             }
@@ -185,13 +181,7 @@ function delOption(download_options_id, game_download_id, game_id) {
                 data = xmlhttp.responseText.split ( "[BRK]" );
                 document.getElementById("linked_options").innerHTML = data[0];
 
-            $.notify_osd.create({
-                'text'        : data[1],             // notification message
-                'icon'        : '{$style_dir}images/osd_icons/star.png', // icon path, 48x48
-                'sticky'      : false,             // if true, timeout is ignored
-                'timeout'     : 4,                 // disappears after 6 seconds
-                'dismissable' : true               // can be dismissed manually
-                });
+            OSDMessageDisplay (data[1]);
 
             document.getElementById("linked_options").reset();
             }
@@ -220,13 +210,7 @@ function addTos(game_download_id, game_id) {
                 data = xmlhttp.responseText.split ( "[BRK]" );
                 document.getElementById("linked_tos").innerHTML = data[0];
 
-                $.notify_osd.create({
-                    'text'        : data[1],             // notification message
-                    'icon'        : '{$style_dir}images/osd_icons/star.png', // icon path, 48x48
-                    'sticky'      : false,             // if true, timeout is ignored
-                    'timeout'     : 4,                 // disappears after 6 seconds
-                    'dismissable' : true               // can be dismissed manually
-                    });
+                OSDMessageDisplay (data[1]);
 
                 document.getElementById("linked_tos").reset();
             }
@@ -257,13 +241,7 @@ function delTos(download_tos_id, game_download_id, game_id) {
                 data = xmlhttp.responseText.split ( "[BRK]" );
                 document.getElementById("linked_tos").innerHTML = data[0];
 
-                $.notify_osd.create({
-                    'text'        : data[1],             // notification message
-                    'icon'        : '{$style_dir}images/osd_icons/star.png', // icon path, 48x48
-                    'sticky'      : false,             // if true, timeout is ignored
-                    'timeout'     : 4,                 // disappears after 6 seconds
-                    'dismissable' : true               // can be dismissed manually
-                    });
+                OSDMessageDisplay (data[1]);
 
                 document.getElementById("linked_tos").reset();
             }
@@ -292,13 +270,7 @@ function addTrainer(game_download_id, game_id) {
                 data = xmlhttp.responseText.split ( "[BRK]" );
                 document.getElementById("linked_trainer").innerHTML = data[0];
 
-                $.notify_osd.create({
-                    'text'        : data[1],             // notification message
-                    'icon'        : '{$style_dir}images/osd_icons/star.png', // icon path, 48x48
-                    'sticky'      : false,             // if true, timeout is ignored
-                    'timeout'     : 4,                 // disappears after 6 seconds
-                    'dismissable' : true               // can be dismissed manually
-                    });
+                OSDMessageDisplay (data[1]);
 
                 document.getElementById("linked_trainer").reset();
             }
@@ -329,13 +301,7 @@ function delTrainer(download_trainer_id, game_download_id, game_id) {
                 data = xmlhttp.responseText.split ( "[BRK]" );
                 document.getElementById("linked_trainer").innerHTML = data[0];
 
-                $.notify_osd.create({
-                    'text'        : data[1],             // notification message
-                    'icon'        : '{$style_dir}images/osd_icons/star.png', // icon path, 48x48
-                    'sticky'      : false,             // if true, timeout is ignored
-                    'timeout'     : 4,                 // disappears after 6 seconds
-                    'dismissable' : true               // can be dismissed manually
-                    });
+                OSDMessageDisplay (data[1]);
 
                 document.getElementById("linked_trainer").reset();
             }
@@ -364,13 +330,7 @@ function addCrew(game_download_id, game_id) {
                 data = xmlhttp.responseText.split ( "[BRK]" );
                 document.getElementById("linked_crew").innerHTML = data[0];
 
-                $.notify_osd.create({
-                    'text'        : data[1],             // notification message
-                    'icon'        : '{$style_dir}images/osd_icons/star.png', // icon path, 48x48
-                    'sticky'      : false,             // if true, timeout is ignored
-                    'timeout'     : 4,                 // disappears after 6 seconds
-                    'dismissable' : true               // can be dismissed manually
-                    });
+                OSDMessageDisplay (data[1]);
 
                 document.getElementById("linked_crew").reset();
             }
@@ -401,13 +361,7 @@ function delCrew(download_crew_id, game_download_id, game_id) {
                 data = xmlhttp.responseText.split ( "[BRK]" );
                 document.getElementById("linked_crew").innerHTML = data[0];
 
-                $.notify_osd.create({
-                    'text'        : data[1],             // notification message
-                    'icon'        : '{$style_dir}images/osd_icons/star.png', // icon path, 48x48
-                    'sticky'      : false,             // if true, timeout is ignored
-                    'timeout'     : 4,                 // disappears after 6 seconds
-                    'dismissable' : true               // can be dismissed manually
-                    });
+                OSDMessageDisplay (data[1]);
 
                 document.getElementById("linked_crew").reset();
             }
@@ -436,13 +390,7 @@ function addMenu(game_download_id, game_id) {
                 data = xmlhttp.responseText.split ( "[BRK]" );
                 document.getElementById("linked_menudisk").innerHTML = data[0];
 
-                $.notify_osd.create({
-                    'text'        : data[1],             // notification message
-                    'icon'        : '{$style_dir}images/osd_icons/star.png', // icon path, 48x48
-                    'sticky'      : false,             // if true, timeout is ignored
-                    'timeout'     : 4,                 // disappears after 6 seconds
-                    'dismissable' : true               // can be dismissed manually
-                    });
+                OSDMessageDisplay (data[1]);
 
                 document.getElementById("linked_menudisk").reset();
             }
@@ -473,13 +421,7 @@ function delMenu(menu_disk_title_game_id, game_download_id, game_id) {
                 data = xmlhttp.responseText.split ( "[BRK]" );
                 document.getElementById("linked_menudisk").innerHTML = data[0];
 
-                $.notify_osd.create({
-                    'text'        : data[1],             // notification message
-                    'icon'        : '{$style_dir}images/osd_icons/star.png', // icon path, 48x48
-                    'sticky'      : false,             // if true, timeout is ignored
-                    'timeout'     : 4,                 // disappears after 6 seconds
-                    'dismissable' : true               // can be dismissed manually
-                    });
+                OSDMessageDisplay (data[1]);
 
                 document.getElementById("linked_menudisk").reset();
             }
@@ -508,13 +450,7 @@ function createSet(game_download_id, game_id) {
                 data = xmlhttp.responseText.split ( "[BRK]" );
                 document.getElementById("linked_set").innerHTML = data[0];
 
-                $.notify_osd.create({
-                    'text'        : data[1],             // notification message
-                    'icon'        : '{$style_dir}images/osd_icons/star.png', // icon path, 48x48
-                    'sticky'      : false,             // if true, timeout is ignored
-                    'timeout'     : 4,                 // disappears after 6 seconds
-                    'dismissable' : true               // can be dismissed manually
-                    });
+                OSDMessageDisplay (data[1]);
 
                 document.getElementById("linked_set").reset();
             }
@@ -546,13 +482,7 @@ function delSet(set_id, game_download_id, game_id) {
                 data = xmlhttp.responseText.split ( "[BRK]" );
                 document.getElementById("linked_set").innerHTML = data[0];
 
-                $.notify_osd.create({
-                    'text'        : data[1],             // notification message
-                    'icon'        : '{$style_dir}images/osd_icons/star.png', // icon path, 48x48
-                    'sticky'      : false,             // if true, timeout is ignored
-                    'timeout'     : 4,                 // disappears after 6 seconds
-                    'dismissable' : true               // can be dismissed manually
-                    });
+                OSDMessageDisplay (data[1]);
 
                 document.getElementById("linked_set").reset();
             }
@@ -580,13 +510,7 @@ function linkSet(game_download_id, game_id) {
                 data = xmlhttp.responseText.split ( "[BRK]" );
                 document.getElementById("linked_set").innerHTML = data[0];
 
-                $.notify_osd.create({
-                    'text'        : data[1],             // notification message
-                    'icon'        : '{$style_dir}images/osd_icons/star.png', // icon path, 48x48
-                    'sticky'      : false,             // if true, timeout is ignored
-                    'timeout'     : 4,                 // disappears after 6 seconds
-                    'dismissable' : true               // can be dismissed manually
-                    });
+                OSDMessageDisplay (data[1]);
 
                 document.getElementById("linked_set").reset();
             }
@@ -643,13 +567,7 @@ function addAuthorstoDownload(game_download_id, game_id) {
                 data = xmlhttp.responseText.split ( "[BRK]" );
                 document.getElementById("download_credit_list").innerHTML = data[0];
 
-                $.notify_osd.create({
-                    'text'        : data[1],             // notification message
-                    'icon'        : '{$style_dir}images/osd_icons/star.png', // icon path, 48x48
-                    'sticky'      : false,             // if true, timeout is ignored
-                    'timeout'     : 4,                 // disappears after 6 seconds
-                    'dismissable' : true               // can be dismissed manually
-                    });
+                OSDMessageDisplay (data[1]);
 
                 document.getElementById("download_credit_list").reset();
             }
@@ -691,13 +609,7 @@ function deleteAuthors(game_download_ind_id,game_download_id,game_id,ind_id) {
                     data = xmlhttp.responseText.split ( "[BRK]" );
                     document.getElementById("download_credit_list").innerHTML = data[0];
 
-                    $.notify_osd.create({
-                        'text'        : data[1],             // notification message
-                        'icon'        : '{$style_dir}images/osd_icons/star.png', // icon path, 48x48
-                        'sticky'      : false,             // if true, timeout is ignored
-                        'timeout'     : 4,                 // disappears after 6 seconds
-                        'dismissable' : true               // can be dismissed manually
-                        });
+                    OSDMessageDisplay (data[1]);
 
                     document.getElementById("download_credit_list").reset();
                 }
@@ -730,8 +642,6 @@ function deleteDownload(str, game_id) {
 }
 </script>
 {/block}
-
-
 {block name=left_tile}
     <div class="standard_tile">
         <h1>OPTIONS</h1>
