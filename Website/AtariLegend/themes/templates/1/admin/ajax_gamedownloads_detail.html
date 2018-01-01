@@ -18,7 +18,7 @@
 {* EDIT BOX FOR GAME DOWNLOADS*}
 {if isset($smarty_action) and $smarty_action == "edit_download_box"}
     <td colspan="2" style="width:100%;margin:0px;padding:0px;">
-        <table class="standard_table_list  table_hover no_border" id="menu_list_table">
+        <table class="standard_table_list table_hover no_border" id="menu_list_table">
             <tr>
                 <td class="menu_disk_list_column w-30">{if $downloads.filename != ''}<a onclick="closeEditDownload({$downloads.game_download_id},{$game.game_id})" style="cursor: pointer;">{$downloads.filename}</a>{else}<i>n/a</i>{/if}</td>
                 <td class="menu_state_column w-30">{if isset($downloads.date)}{$downloads.date}{else}<i>n/a</i>{/if}</td>
