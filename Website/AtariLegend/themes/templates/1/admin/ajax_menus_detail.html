@@ -17,7 +17,7 @@
 {* EDIT BOX FOR MENU DISKS *}
 {if isset($smarty_action) and $smarty_action == "edit_disk_box"}
     <td colspan="4" style="width:100%;margin:0px;padding:0px;border:0;">
-        <table class="standard_table_list w-100 no_border table_hover" id="menu_list_table">
+        <table class="standard_table_list  no_border table_hover" id="menu_list_table">
             <tr>
                 <td class="menu_disk_list_column w-30"><a onclick="closeeditDisk({$menus.menu_disk_id})" style="cursor: pointer;">{$menus.menu_disk_name}</a></td>
                 <td class="menu_list_crew_column w-30">{if isset($menus.crew_id)}{$menus.crew_name}{else}<i>n/a</i>{/if}</td>
