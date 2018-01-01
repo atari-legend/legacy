@@ -19,8 +19,6 @@
         width: 75%;
         margin-left: 15%;
     }
-}
-@media screen and (max-width: 400px) {
     .menu_list_crew_column {
         display: none;
     }
@@ -332,11 +330,7 @@
     .menu_gameyear_column,
     .menu_gameinfo_column,
     .menu_gameset_column,
-    .menu_docinfo_column {
-        display: none;
-    }
-}
-@media screen and (max-width: 725px) {
+    .menu_docinfo_column,
     .log_name_column {
         display: none;
     }
@@ -365,74 +359,44 @@
     #column_right_cpanel {
         display: none;
     }
-    #games_main_list_3 {
+    #games_main_list_3,
+    .games_main_details_info_position_low {
         display: inline;
     }
-    .main_container_games_details {
+    .main_container_games_details,
+    .main_container_cpanel {
         display: flex;
         flex-direction: column-reverse;
         float: left;
         width: 100%;
     }
-    #column_left_games_details {
+    .main_container_games_details > div {
         width: 100%;
-        float: left;
-        margin: auto;
-        order: 2;
     }
+    .content_box_games_details,
+    .content_box_cpanel {
+        display: block;
+        margin: 0 auto;
+    }
+    #column_left_interviews_details,
+    #column_center_reviews_details,
     #column_center_games_details {
         width: 100%;
         float: left;
         margin: auto;
         order: 3;
     }
+    #column_center_interviews_details,
+    #column_left_reviews_details,
+    #column_left_games_details {
+        width: 100%;
+        float: left;
+        margin: auto;
+        order: 2;
+    }
+    #column_right_interviews_details,
+    #column_right_reviews_details,
     #column_right_games_details {
-        width: 100%;
-        float: right;
-        margin: auto;
-        order: 1;
-    }
-    .main_container_games_details > div {
-        width: 100%;
-    }
-    .content_box_games_details {
-        display: block;
-        margin: 0 auto;
-    }
-    .games_main_details_info_position_low {
-        display: inline;
-    }
-    #column_left_interviews_details {
-        width: 100%;
-        float: left;
-        margin: auto;
-        order: 3;
-    }
-    #column_center_interviews_details {
-        width: 100%;
-        float: left;
-        margin: auto;
-        order: 2;
-    }
-    #column_right_interviews_details {
-        width: 100%;
-        float: right;
-        margin: auto;
-        order: 1;
-    }
-    #column_left_reviews_details {
-        width: 100%;
-        float: left;
-        margin: auto;
-        order: 2;
-    }
-    #column_center_reviews_details {
-        width: 100%;
-        float: left;
-        margin: auto;
-        order: 3;
-    }
-    #column_right_reviews_details {
         width: 100%;
         float: right;
         margin: auto;
@@ -451,12 +415,6 @@
         margin-right: auto;
         text-align: left;
     }
-    .main_container_cpanel {
-        display: flex;
-        flex-direction: column-reverse;
-        float: left;
-        width: 100%;
-    }
     #column_left_cpanel,
     #column_center_cpanel {
         width: 100%;
@@ -466,12 +424,8 @@
     .main_container_cpanel > div {
         width: 100%;
     }
-    .content_box_cpanel {
-        display: block;
-        margin: 0 auto;
-    }
 }
-@media screen and (min-width: 801px) {
+@media screen and (min-width: 800px) {
     .column_right_tab,
     .column_left_tab,
     .column_phone {
@@ -506,7 +460,6 @@
         display: none;
     }
 }
-
 @media screen and (max-width: 999px) {
     .games_detail_review_container {
         flex-direction: column;
@@ -593,12 +546,6 @@
         width: 100%;
     }
 }
-@media screen and (max-width: 1150px) {
-    .email_column {
-        display: none;
-    }
-}
-
 @media screen and (max-width: 1169px) {
     .fa-birthday-cake {
         margin-left: 10%;
@@ -614,6 +561,9 @@
     }
     .cd-icon2 {
         margin-top: 8px;
+    }
+    .email_column {
+        display: none;
     }
 }
 @media screen and (min-width: 1170px) {
