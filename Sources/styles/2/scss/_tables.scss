@@ -8,30 +8,67 @@
 // Tables
 //------------------------------------------------------------ */
 
-.table_xs td {
-    padding-top: 0;
-    padding-bottom: 0;
-}
-.table_sm td {
-    padding-top: 3;
-    padding-bottom: 3;
-}
-.table_md td {
-    padding-top: 5px;
-    padding-bottom: 5px;
-}
-.table_lg td {
-    padding-top: 10px;
-    padding-bottom: 10px;
-}
 
-
+.table_xs {
+    th {
+        padding-top: 3px;
+        padding-bottom: 3px;
+        padding-left: 3;
+        padding-right: 3;
+    }
+    td {
+        padding-top: 1px;
+        padding-bottom: 1px;
+        padding-left: 3;
+        padding-right: 3;
+    }
+}
+.table_sm {
+    th,
+    td {
+        padding-top: 3px;
+        padding-bottom: 3px;
+    }
+}
+.table_md {
+    th,
+    td {
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+}
+.table_lg {
+    th,
+    td {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+}
+.table_hover {
+    tbody tr:hover {
+        background-color: #294f4f;
+    }
+}
+.no_border {
+    border: 0 !important;
+}
 //
 // Table Cells
 //
 
 
+.news_images_check {
+    vertical-align: middle;
+}
 
+.news_images_display {
+    vertical-align: middle;
+}
+
+.news_images_name {
+    padding-left: 15px;
+    vertical-align: middle;
+}
 .log_date_column,
 .log_action_column,
 .log_section_column,
