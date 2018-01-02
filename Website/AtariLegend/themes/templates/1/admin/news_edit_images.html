@@ -39,11 +39,11 @@
             <div>
                 <table class="primary_table_list table_md table_hover">
                     <tr>
-                        <th>Select</th>
-                        <th>Image</th>
-                        <th>Name</th>
-                        <th>Number</th>
-                        <th>News posts</th>
+                        <th class="news_images_check">Select</th>
+                        <th class="news_images_display">Image</th>
+                        <th class="news_images_display">Name</th>
+                        <th class="news_images_name">Number</th>
+                        <th class="news_images_name">News posts</th>
                     </tr>
                     {foreach name='outer' from=$news_images item='line'}
                     <tr>
@@ -54,7 +54,7 @@
                         <td class="news_images_display">
                             <img src="../../includes/show_image.php?file={$line.image_link}&amp;resize=100,null,null,null" alt="newsbutton" class="game_screenshot_img">
                         </td>
-                        <td class="news_images_name">
+                        <td class="news_images_display">
                             {$line.image_name}
                         </td>
                         <td class="news_images_name">
