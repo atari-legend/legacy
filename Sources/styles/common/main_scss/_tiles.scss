@@ -284,13 +284,11 @@ figure.effect-bubba:hover p {
 } @else {
     .online_title {
         @extend .left_nav_section;
-        font-size: .8em;
         text-align: center;
     }
 
     .online_users {
         @extend .left_nav_link;
-        font-size: .8em;
         text-align: center;
     }
 }
