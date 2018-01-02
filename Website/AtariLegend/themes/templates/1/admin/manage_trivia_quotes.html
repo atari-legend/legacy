@@ -102,7 +102,7 @@ $("#JSSubmitEditTriviaQuote").click(function() {
         </fieldset>
         <br>
         {foreach from=$trivia item=line}
-            <fieldset id="Ajax_trivia_quote_{$line.trivia_quote_id}">
+            <fieldset class="primary_fieldset" id="Ajax_trivia_quote_{$line.trivia_quote_id}">
             <legend class="primary_legend">Trivia ID {$line.trivia_quote_id}</legend>
             <br>
             {$line.trivia_quote}
