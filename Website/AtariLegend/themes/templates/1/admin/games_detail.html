@@ -389,7 +389,7 @@ function browseDeveloper(str) {
                 </div>
                 <div id="gd_left">
                     <div id="gd_creator_info">
-                        <fieldset class="game_data_tile">
+                        <fieldset class="primary_fieldset">
                             <legend class="primary_legend">Creator info</legend>
                                 <form action="../games/db_games_detail.php" method="post" name="creator" id="creator">
                                     {if isset($game_author)}
@@ -429,7 +429,7 @@ function browseDeveloper(str) {
                     </div>
                     <div id="gd_release_year">
                         <form action="../games/db_games_detail.php" method="post" name="year" id="year">
-                            <fieldset class="game_data_tile">
+                            <fieldset class="primary_fieldset">
                                 <legend class="primary_legend">Release Year</legend>
                                     {if isset($game_year)}
                                         {foreach from=$game_year item=line}
@@ -464,7 +464,7 @@ function browseDeveloper(str) {
                 </div>
                 <div id="gd_center">
                     <div id="gd_developer_info">
-                    <fieldset class="game_data_tile">
+                    <fieldset class="primary_fieldset">
                         <legend class="primary_legend">Developer info</legend>
                         <form action="../games/db_games_detail.php" method="post" name="developer" id="developer">
                             {if isset($developer)}
@@ -528,7 +528,7 @@ function browseDeveloper(str) {
                     </div>
                     <div id="gd_game_aka">
                         <form action="../games/db_games_detail.php" method="post" name="aka" id="aka">
-                        <fieldset class="game_data_tile">
+                        <fieldset class="primary_fieldset">
                             <legend class="primary_legend">Add game AKA</legend>
                             <b>Game AKA :</b> <input type="text" name="game_aka"  class="standard_input input_large">
                             <br>
@@ -555,7 +555,7 @@ function browseDeveloper(str) {
                 </div>
                 <div id="gd_right">
                     <div id="gd_publisher_info">
-                    <fieldset class="game_data_tile">
+                    <fieldset class="primary_fieldset">
                         <legend class="primary_legend">Publisher info</legend>
                         <form action="../games/db_games_detail.php" method="post" name="publisher" id="publisher">
                             {if isset($publisher)}
