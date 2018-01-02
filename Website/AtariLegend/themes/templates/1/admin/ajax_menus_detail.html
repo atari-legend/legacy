@@ -16,7 +16,7 @@
 
 {* EDIT BOX FOR MENU DISKS *}
 {if isset($smarty_action) and $smarty_action == "edit_disk_box"}
-    <td colspan="4" style="width:100%;margin:0px;padding:0px;border:0;">
+    <td colspan="4" style="padding:0px;">
         <table class="primary_table_list no_border table_hover" id="menu_list_table">
             <tr>
                 <td class="menu_disk_list_column w-30"><a onclick="closeeditDisk({$menus.menu_disk_id})" style="cursor: pointer;">{$menus.menu_disk_name}</a></td>
@@ -25,7 +25,7 @@
                 <td class="menu_state_column w-20">{if isset($menus.menu_state)}{$menus.menu_state}{else}<i>n/a</i>{/if}</td>
             </tr>
             <tr>
-                <td colspan="4" style="border-top: solid 1px #b2b2b2;width:100%;">
+                <td colspan="4">
                     <div class="help-tip">
                         <p style="width:250px;right:243px;">
                         <b>Set State</b> : The current state of the menu disk. Is this menu disk fully functional, missing ...<br><br>
