@@ -505,7 +505,7 @@
         flex-direction: column;
     }
     .user_details_input_small {
-        width: 75%;
+        width: 90%;
     }
     #child_1_user,
     #child_2_user {
@@ -737,6 +737,12 @@
     #gd_publisher_info {
         margin-top: 20px;
     }
+    #child_1_user,
+    #child_2_user,
+    #gu_child_1,
+    #gu_child_2 {
+        width: 100%;
+    }
 }
 
 @media screen and (min-width: 1280px) {
@@ -775,12 +781,7 @@
         width: 40%;
         margin-left: 0;
     }
-    #child_1_user,
-    #child_2_user,
-    #gu_child_1,
-    #gu_child_2 {
-        width: 100%;
-    }
+
     #column_left_cpanel {
         width: 25%;
         float: left;
