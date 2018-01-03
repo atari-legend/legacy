@@ -17,6 +17,7 @@
 
 
 {block name=java_script}
+<script src="{$template_dir}includes/js/menus.js"></script>
 <script>
 //$(document).ready(function() {
 
@@ -143,57 +144,60 @@ function UserlistFunction() {
 
         // Are you sure question Delete
     $( "#user_list_action" ).change(function () {
-
         if ($(this).val() == "delete_user") {
-            $( "#dialog_confirm_delete" ).dialog({
+            $('#JSGenericModal').dialog({
+                title: 'Delete Users?',
+                open: $('#JSGenericModalText').text('These users will be permanently deleted. Are you sure?'),
                 resizable: false,
-                height:140,
+                height: 200,
                 modal: true,
                 buttons: {
-                    "Delete user(s)": function() {
-                    $( this ).dialog( "close" );
-                    UserModify();
+                    'Delete': function () {
+                        $(this).dialog('close');
+                        UserModify();
                     },
-                    Cancel: function() {
-                    $( this ).dialog( "close" );
+                    Cancel: function () {
+                        $(this).dialog('close');
                     }
                 }
             });
         }
         if ($(this).val() == "deactivate_user") {
-            $( "#dialog_confirm_deactivate" ).dialog({
+            $('#JSGenericModal').dialog({
+                title: 'Deactivate Users?',
+                open: $('#JSGenericModalText').text('These users will be deactivated. Are you sure?'),
                 resizable: false,
-                height:140,
+                height: 200,
                 modal: true,
                 buttons: {
-                    "Deactivate user(s)": function() {
-                    $( this ).dialog( "close" );
-                    UserModify();
+                    'Deactivate': function () {
+                        $(this).dialog('close');
+                        UserModify();
                     },
-                    Cancel: function() {
-                    $( this ).dialog( "close" );
+                    Cancel: function () {
+                        $(this).dialog('close');
                     }
                 }
             });
         }
-
         if ($(this).val() == "activate_user") {
-            $( "#dialog_confirm_activate" ).dialog({
+            $('#JSGenericModal').dialog({
+                title: 'Activate Users?',
+                open: $('#JSGenericModalText').text('These users will be activated. Are you sure?'),
                 resizable: false,
-                height:140,
+                height: 200,
                 modal: true,
                 buttons: {
-                    "Activate user(s)": function() {
-                    $( this ).dialog( "close" );
-                    UserModify();
+                    'Activate': function () {
+                        $(this).dialog('close');
+                        UserModify();
                     },
-                    Cancel: function() {
-                    $( this ).dialog( "close" );
+                    Cancel: function () {
+                        $(this).dialog('close');
                     }
                 }
             });
         }
-
         if ($(this).val() == "email_user") {
             // $( "#dialog_confirm_email" ).dialog({
             //  resizable: false,
@@ -212,10 +216,7 @@ function UserlistFunction() {
             document.getElementById('email_fields').style.visibility = 'visible';
         }
     });
-
-
 }
-
 function UserModify() {
 
     // var form_values = $( "#user_list" ).serialize();
@@ -280,19 +281,21 @@ function UserModify() {
 </script>
 <script>
 function EmailSent(){
-    $( "#dialog_confirm_email" ).dialog({
+    $('#JSGenericModal').dialog({
+        title: 'Email users?',
+        open: $('#JSGenericModalText').text('Email users?'),
         resizable: false,
-        height:140,
+        height: 200,
         modal: true,
         buttons: {
-            "Email user(s)": function() {
-            $( this ).dialog( "close" );
-            document.getElementById('user_list').method="post";
-            document.getElementById('user_list').action="../user/db_user_management.php?action=email_user";
-            document.getElementById('user_list').submit();
+            'Email user(s)': function () {
+                $(this).dialog('close');
+                document.getElementById('user_list').method="post";
+                document.getElementById('user_list').action="../user/db_user_management.php?action=email_user";
+                document.getElementById('user_list').submit();
             },
-            Cancel: function() {
-            $( this ).dialog( "close" );
+            Cancel: function () {
+                $(this).dialog('close');
             }
         }
     });
@@ -310,22 +313,11 @@ function EmailSent(){
 
 {block name=main_tile}
 <link rel="stylesheet" href="{$style_dir}css/vendor/font-awesome-4.7.0/css/font-awesome.min.css"> <!-- Font awesome for icons-->
-
-<div id="dialog_confirm_delete" title="Delete Users?" style="display:none;">
-    <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
-    These users will be permanently deleted. Are you sure?</p>
-</div>
-<div id="dialog_confirm_activate" title="Activate Users?" style="display:none;">
-    <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
-    These users will be activated. Are you sure?</p>
-</div>
-<div id="dialog_confirm_deactivate" title="Deactivate Users?" style="display:none;">
-    <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
-    These users will be deactivated. Are you sure?</p>
-</div>
-<div id="dialog_confirm_email" title="Email Users?" style="display:none;">
-    <p><span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
-    Email users?</p>
+<div id="JSGenericModal" title="Delete Title?" style="display:none;">
+    <p>
+        <span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
+        <div id="JSGenericModalText">Are you sure?</div>
+    </p>
 </div>
 <form action="test" name="user_list" id="user_list">
 <div class="standard_tile">
