@@ -718,18 +718,8 @@
         display: none;
     }
 }
-@media screen and (max-width: 1279px) {
-    #welcome {
-        margin-top: 0;
-    }
-    .db_result_column,
-    #gd_other_features {
-        display: none;
-    }
-    #gd_basic_game_info {
-        width: 100%;
-        margin-bottom: 20px;
-    }
+@media screen and (min-width: 601px) and (max-width: 1279px) {
+
     #gd_other_features_left,
     #gd_left {
         float: left;
@@ -744,6 +734,19 @@
     #gd_back,
     #gd_publisher_info {
         margin-top: 20px;
+    }
+}
+@media screen and (max-width: 1279px) {
+    #welcome {
+        margin-top: 0;
+    }
+    .db_result_column,
+    #gd_other_features {
+        display: none;
+    }
+    #gd_basic_game_info {
+        width: 100%;
+        margin-bottom: 20px;
     }
     #child_1_user,
     #child_2_user,
