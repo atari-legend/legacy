@@ -25,15 +25,21 @@
 }
 @media screen and (max-width: 450px) {
     #download-json,
-    #games_main_list_4,
-    #games_main_list_3,
-    #games_main_list_2,
-    #games_main_list_1,
     .joindate_column,
     .log_subsection_column,
     .log_date_column,
     .menu_credits_column {
         display: none;
+    }
+}
+@media screen and (min-width: 451px) {
+    #games_main_list_4,
+    #games_main_list_3,
+    #games_main_list_1 {
+        display: none;
+    }
+    #games_main_list_2 {
+        display: inline;
     }
 }
 @media screen and (max-width: 480px) {
@@ -316,13 +322,13 @@
         display: none;
     }
 }
-@media screen and (max-width: 670px) {
+@media screen and (min-width: 671px) {
     #games_main_list_4,
-    #games_main_list_3,
+    #games_main_list_2,
     #games_main_list_1 {
         display: none;
     }
-    #games_main_list_2 {
+    #games_main_list_3 {
         display: inline;
     }
 }
@@ -351,15 +357,11 @@
     }
 }
 @media screen and (max-width: 799px) {
-    #games_main_list_4,
-    #games_main_list_2,
-    #games_main_list_1,
     .games_main_detail_nav,
     .games_main_details_info_position_high,
     #column_right_cpanel {
         display: none;
     }
-    #games_main_list_3,
     .games_main_details_info_position_low {
         display: inline;
     }
@@ -428,8 +430,14 @@
 @media screen and (min-width: 800px) {
     .column_right_tab,
     .column_left_tab,
-    .column_phone {
+    .column_phone,
+    #games_main_list_4,
+    #games_main_list_3,
+    #games_main_list_1 {
         display: none;
+    }
+    #games_main_list_2 {
+        display: inline;
     }
 }
 @media screen and (max-width: 900px) {
@@ -445,13 +453,13 @@
         width: 100%;
     }
 }
-@media screen and (max-width: 949px) {
+@media screen and (min-width: 950px) {
     #games_main_list_4,
-    #games_main_list_3,
+    #games_main_list_2,
     #games_main_list_1 {
         display: none;
     }
-    #games_main_list_2 {
+    #games_main_list_3 {
         display: inline;
     }
 }
@@ -900,13 +908,13 @@
         margin: 0 auto;
     }
 }
-@media screen and (max-width: 1599px) {
-    #games_main_list_4,
+@media screen and (min-width: 1600px) {
+    #games_main_list_3,
     #games_main_list_2,
     #games_main_list_1 {
         display: none;
     }
-    #games_main_list_3 {
+    #games_main_list_4 {
         display: inline;
     }
 }
