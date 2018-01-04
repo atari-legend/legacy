@@ -76,7 +76,7 @@
 .log_user_column,
 .log_name_column {
     padding-left: 2px;
-    font-size: 12pt;
+    font-size: 11pt;
     font-weight: 100;
     color: #000000;
 }
@@ -131,7 +131,6 @@
     text-align: left;
 }
 
-
 .username_column,
 .joindate_column,
 .lastvisit_column,
@@ -153,7 +152,6 @@
 .db_exe_column {
     text-align: center;
 }
-
 
 .gc_table_list {
     margin-right: auto;
@@ -193,7 +191,6 @@
 //Menu set edit
 //------------------------------------------------------------ */
 
-
 #menu_list_table {
     background-color: #294f4f;
 }
@@ -204,7 +201,6 @@
     background-color: #eeeeee;
 }
 
-
 //*------------------------------------------------------------
 //Standard table settings
 //-------------------------------------------------------------*/
@@ -213,18 +209,15 @@
     width: 20%;
     margin-right: 1%;
 }
-
 #column_center_cpanel {
     float: left;
     width: 58%;
 }
-
 #column_right_cpanel {
     float: right;
     width: 20%;
     margin-left: 1%;
 }
-
 .primary_table_list {
     padding: 0;
     margin-right: auto;
@@ -234,14 +227,12 @@
     border: solid 1px #b2b2b2;
     border-spacing: 0;
 }
-
 .primary_table_list  li {
     font-size: 16px;
     color: #000000;
     text-align: center;
     list-style-type: none;
 }
-
 .primary_table_list th {
     padding-top: 3px;
     padding-bottom: 3px;
@@ -252,7 +243,6 @@
     border-collapse: collapse;
     border-bottom: solid 2px #b2b2b2;
 }
-
 .primary_table_list tr:nth-child(even) {
     background-color: #f3f3f3;
 }
@@ -268,18 +258,15 @@
     padding-left: 3px;
     margin: 0;
 }
-
 .standard_table_center {
     font-size: 16px;
     font-weight: 100;
     color: #000000;
     text-align: center;
 }
-
 .karma_points_tablecell {
     text-align: right;
 }
-
 .standard_table_center img {
     display: inline;
 }
