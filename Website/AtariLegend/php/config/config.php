@@ -74,8 +74,12 @@ define("SECURE", false);    // FOR DEVELOPMENT ONLY!!!!
 //$confirm_account_link = "http://localhost/atarilegend/php/common/login/db_register.php?action=confirm";
 
 //PROD SERVER @ 1and1
-$ms_usn = '537971048';
-$ms_pwd = 'Tomsguide1%';
+//$ms_usn = '537971048';
+//$ms_pwd = 'Tomsguide1%';
+
+//PROD SERVER @ 1and1 - NEW
+$ms_usn = '172683540';
+$ms_pwd = 'spike99';
 $ms_port = 587;
 $ms_host = 'auth.smtp.1and1.fr';
 
