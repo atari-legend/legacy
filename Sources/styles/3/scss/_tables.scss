@@ -74,7 +74,6 @@
     padding-right: 5px;
     text-align: right;
 }
-
 .menu_credits_column,
 .menu_scene_column,
 .menu_mark_column,
@@ -91,15 +90,12 @@
     padding-right: 5px;
     text-align: left;
 }
-
 .menu_gameyear_column {
     padding-right: 5px;
 }
-
 .karma_points_tablecell {
     text-align: right;
 }
-
 .log_date_column,
 .log_action_column,
 .log_section_column,
@@ -111,8 +107,6 @@
     font-weight: 100;
     color: #000000;
 }
-
-
 .username_column,
 .joindate_column,
 .lastvisit_column,
@@ -122,8 +116,6 @@
     color: #000000;
     text-align: left;
 }
-
-
 .game_name_column,
 .publisher_table_column,
 .developer_table_column,
@@ -151,8 +143,6 @@
 .menu_type_column {
     padding-left: 2px;
 }
-
-
 #menu_list_table {
     background-color: #294f4f;
 }
@@ -162,9 +152,6 @@
 #menu_list_table tr:nth-child(odd) {
     background-color: #efefef;
 }
-
-
-
 .db_result_column,
 .db_state_column,
 .db_id_column,
@@ -172,7 +159,6 @@
 .db_exe_column {
     text-align: center;
 }
-
 //*----------------------------------------------------------
 //Games comment
 //------------------------------------------------------------ */
@@ -184,7 +170,6 @@
     border: solid 1px #b2b2b2;
     border-spacing: 0;
 }
-
 .gc_table_list tr:nth-child(even) {
     background-color: #f3f3f3;
 }
@@ -196,17 +181,14 @@
     margin: 0;
     border-bottom: solid 1px #000000;
 }
-
 .gc_left_column,
 .gc_center_column {
     font-size: 12pt;
 }
-
 .gc_right_head {
     font-size: 11pt;
     text-align: right;
 }
-
 //*------------------------------------------------------------
 //Standard table settings
 //-------------------------------------------------------------*/
@@ -215,18 +197,15 @@
     width: 20%;
     margin-right: 1%;
 }
-
 #column_center_cpanel {
     float: left;
     width: 58%;
 }
-
 #column_right_cpanel {
     float: right;
     width: 20%;
     margin-left: 1%;
 }
-
 .primary_table_list {
     margin-right: auto;
     margin-left: auto;
@@ -234,7 +213,6 @@
     border: solid 1px #b2b2b2;
     border-spacing: 0;
 }
-
 .primary_table_list th {
     padding-top: 3px;
     padding-bottom: 3px;
@@ -244,7 +222,6 @@
     border-collapse: collapse;
     border-bottom: solid 2px #b2b2b2;
 }
-
 .primary_table_list tr:nth-child(even) {
     background-color: #f3f3f3;
 }
@@ -260,7 +237,6 @@
     padding-left: 3px;
     margin: 0;
 }
-
 .standard_table_center {
     font-size: 12pt;
     font-weight: 100;
