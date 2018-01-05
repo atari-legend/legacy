@@ -95,7 +95,7 @@ $confirm_account_link = "http://www.atarilegend.com/php/common/login/db_register
 //***************************************************************
 
 // database dumps
-$database_dumps_path="../../data/database-dumps";
+$database_dumps_path="../../data/database-dumps/";
 
 //articles
 $article_screenshot_path="../../data/images/article_screenshots/";
