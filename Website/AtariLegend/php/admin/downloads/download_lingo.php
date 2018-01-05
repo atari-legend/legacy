@@ -22,7 +22,7 @@ include("../../admin/games/quick_search_games.php");
  ************************************************************************************************
  */
 //get all the menu types
-$result_download_lingo = $mysqli->query("SELECT * FROM lingo") or die ("problem getting language");
+$result_download_lingo = $mysqli->query("SELECT * FROM lingo") or die("problem getting language");
 
 $rows = $result_download_lingo->num_rows;
 while ($row = $result_download_lingo->fetch_array(MYSQLI_BOTH)) {

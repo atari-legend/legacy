@@ -60,7 +60,6 @@ if ($crewsearch != '-' and $crewbrowse == '-') {
     }
 }
 
-
 if (isset($crew_select)) {
     // Do query for crew data
     $sql_crew = $mysqli->query("SELECT * FROM crew

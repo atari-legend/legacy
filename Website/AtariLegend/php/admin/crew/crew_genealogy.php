@@ -23,24 +23,20 @@ include("../../config/common.php");
 include("../../config/admin.php");
 include("../../admin/games/quick_search_games.php");
 
-if (isset($crewsearch)){
-}
-else{
+if (isset($crewsearch)) {
+} else {
     $crewsearch='';
 }
 
-if (isset($crewbrowse)){
-}
-else{
+if (isset($crewbrowse)) {
+} else {
     $crewbrowse='';
 }
 
-if (isset($message)){
-}
-else{
+if (isset($message)) {
+} else {
     $message='';
 }
-
 
 if (isset($new_crew)) {
     $smarty->assign('new_crew', $new_crew);
@@ -102,7 +98,7 @@ if (isset($action) and $action == "genealogy") {
             'crew_name' => $genealogy['crew_name']
         ));
     }
-    
+
     //Get the individuals
     $sql_individuals = $mysqli->query("SELECT * FROM individuals ORDER BY ind_name ASC");
 
@@ -115,23 +111,23 @@ if (isset($action) and $action == "genealogy") {
         }
     }
 
-   /*  $sql_individuals = "SELECT ind_id,ind_name FROM individuals ORDER BY ind_name ASC";
-    $sql_aka         = "SELECT ind_id,nick FROM individual_nicks ORDER BY nick ASC";
+    /*  $sql_individuals = "SELECT ind_id,ind_name FROM individuals ORDER BY ind_name ASC";
+     $sql_aka         = "SELECT ind_id,nick FROM individual_nicks ORDER BY nick ASC";
 
-    //Create a temporary table to build an array with both names and nicknames
-    $mysqli->query("CREATE TEMPORARY TABLE temp ENGINE=MEMORY $sql_individuals") or die("failed to create temporary table");
-    $mysqli->query("INSERT INTO temp $sql_aka") or die("failed to insert akas into temporary table");
+     //Create a temporary table to build an array with both names and nicknames
+     $mysqli->query("CREATE TEMPORARY TABLE temp ENGINE=MEMORY $sql_individuals") or die("failed to create temporary table");
+     $mysqli->query("INSERT INTO temp $sql_aka") or die("failed to insert akas into temporary table");
 
-    $query_temporary = $mysqli->query("SELECT * FROM temp WHERE ind_name LIKE 'a%' ORDER BY ind_name ASC") or die("Failed to query temporary table");
-    $mysqli->query("DROP TABLE temp");
+     $query_temporary = $mysqli->query("SELECT * FROM temp WHERE ind_name LIKE 'a%' ORDER BY ind_name ASC") or die("Failed to query temporary table");
+     $mysqli->query("DROP TABLE temp");
 
 
-    while ($genealogy_ind = $query_temporary->fetch_array(MYSQLI_BOTH)) {
-        $smarty->append('ind_gene', array(
-            'ind_id' => $genealogy_ind['ind_id'],
-            'ind_name' => $genealogy_ind['ind_name']
-        ));
-    } */
+     while ($genealogy_ind = $query_temporary->fetch_array(MYSQLI_BOTH)) {
+         $smarty->append('ind_gene', array(
+             'ind_id' => $genealogy_ind['ind_id'],
+             'ind_name' => $genealogy_ind['ind_name']
+         ));
+     } */
 
     // member of crew - subcrew query
     $sql_subcrew = $mysqli->query("SELECT * FROM sub_crew
@@ -175,11 +171,10 @@ if (isset($action) and $action == "genealogy") {
                                   WHERE crew_individual.crew_id = '$crew_select'") or die("Couldn't retrieve nick ids");
 
     while ($fetch_ind_nicks = $sql_ind_nicks->fetch_array(MYSQLI_BOTH)) {
-        
         $nick_id = $fetch_ind_nicks['nick_id'];
-        
+
         $sql_nick_names = $mysqli->query("SELECT ind_name from individuals WHERE ind_id = '$nick_id'") or die("Couldn't retrieve nick names");
-        
+
         while ($fetch_nick_names = $sql_nick_names->fetch_array(MYSQLI_BOTH)) {
             $smarty->append('nick_names', array(
                 'individual_nicks_id' => $fetch_ind_nicks['nick_id'],
@@ -196,13 +191,13 @@ if (isset($action) and $action == "genealogy") {
 }
 
 if (isset($action) and $action == "stats") {
-     $_SESSION['edit_message'] = "Under construction - Patience is a virtue";
-     header("Location: ../crew/crew_main.php");
+    $_SESSION['edit_message'] = "Under construction - Patience is a virtue";
+    header("Location: ../crew/crew_main.php");
 }
 
 if (isset($action) and $action == "comment") {
-     $_SESSION['edit_message'] = "Under construction - Patience is a virtue";
-     header("Location: ../crew/crew_main.php");
+    $_SESSION['edit_message'] = "Under construction - Patience is a virtue";
+    header("Location: ../crew/crew_main.php");
 }
 
 // If no choice has been made but a crew has been selected we should be brought to the crew main edit regardless
@@ -212,7 +207,6 @@ if (empty($action)) {
         'action' => $action
     ));
 }
-
 
 // Search variables that got to be sent with the headers all through this module or else the code will dump the user back to the crew_main.php
 $smarty->assign('tracking', array(

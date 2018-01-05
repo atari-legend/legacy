@@ -1,8 +1,8 @@
-{* 
+{*
 /***************************************************************************
 *                             link_mod.html
 *                            ------------------
-*	begin                : Sept 27, 2015
+*   begin                : Sept 27, 2015
 *   copyright            : (C) 2015 Atari Legend
 *   email                : admin@atarilegend.com
 *
@@ -13,19 +13,19 @@
 *}
 {extends file='1/admin/frontpage.html'}
 {block name=java_script}
-<script type="text/javascript">
-$(function() {    
+<script>
+$(function() {
     $but = $('#file_upload_user_detail');
-    
+
     $("input:file[id=file_upload]").change(function() {
         document.getElementById('file_upload_user_detail').value = $(this).val();
     });
 });
 
 function deletelink()
-{  
+{
     var JSid=document.getElementById("delete_id");
-	var delete_id = JSid.value
+    var delete_id = JSid.value
 
     // CONFIRM REQUIRES ONE ARGUMENT
     var message = "Are you sure you want to delete this link?";
@@ -36,18 +36,18 @@ function deletelink()
 
     if (return_value !="0")
     {
-      url="../links/db_links.php?action=link_delete&website_id="+delete_id;
-	  location.href=url;
-    } 
+        url="../links/db_links.php?action=link_delete&website_id="+delete_id;
+        location.href=url;
+    }
 }
 
 function addcat()
-{  
+{
     var JSid=document.getElementById("delete_id");
-	var website_id = JSid.value
-	
-	var JSid2=document.getElementById("website_category_select");
-	var cat_id = JSid2.value
+    var website_id = JSid.value
+
+    var JSid2=document.getElementById("website_category_select");
+    var cat_id = JSid2.value
 
     // CONFIRM REQUIRES ONE ARGUMENT
     var message = "Are you sure you want to add the link to this category?";
@@ -58,25 +58,25 @@ function addcat()
 
     if (return_value !="0")
     {
-      url="../links/db_links.php?action=add_cat&website_id="+website_id+"&cat_id="+cat_id;
-	  location.href=url;
-    } 
+        url="../links/db_links.php?action=add_cat&website_id="+website_id+"&cat_id="+cat_id;
+        location.href=url;
+    }
 }
 
 function TestURL() {
-	var url = document.getElementById('website_url').value 
-	
-	if (url != '')
-	{
-		window.open(url);
-	}
-	else
-	{
-		window.alert("Please add an URL");
-	}
+    var url = document.getElementById('website_url').value
+
+    if (url != '')
+    {
+        window.open(url);
+    }
+    else
+    {
+        window.alert("Please add an URL");
+    }
 }
 </script>
-<script type="text/javascript" src="{$template_dir}includes/js/vendor/lightbox-2.9.0.min.js"></script>
+<script src="{$template_dir}includes/js/vendor/lightbox-2.9.0.min.js"></script>
 <link type="text/css" href="{$style_dir}css/vendor/lightbox-2.9.0.css" hreflang="en" rel="stylesheet">
 {/block}
 
@@ -86,116 +86,118 @@ function TestURL() {
         <p>Tip : The inactive check was added to preserve history of the websites of yesterday. instead of removing dead websites, we can set them to inactive and write a nice memory in the description</p>
     </div>
     <h1>MODIFY LINK</h1>
-	<div class="standard_tile_line"></div>
-	<div class="standard_tile_text">
-		{if (isset($website.website_name))}
-		<div class="left_nav_section">
-			Make the changes you want, then hit the submit button to modify.<br>
-			Should you want to delete the link, click the delete button. The effects are immediate.<br>
-			If you want to link the website to more than one category, use the add button.
-		</div> 
-		<br>
-		<br>
-		<form enctype="multipart/form-data" action="../links/db_links.php" method="post" name="linkmod">
-		<fieldset>
-			<legend>Website Data</legend>
-			<div class="links_mod_container">
-				<div class="links_mod_row">
-					<div class="links_mod_text">Site Name</div>
-					<div class="links_mod_input"><input type="text" name="website_name" id="website_name" value="{$website.website_name}" class="standard_tile_input_small"></div>
-				</div>
-				<div class="links_mod_row">
-					<div class="links_mod_text">URL</div> 
-					<div class="links_mod_input">
-						<input type="text" name="website_url" id="website_url" value="{$website.website_url}" class="standard_tile_input_small">
-						<input type="button" onclick="TestURL()" class="topbutton_cpanel_small" value="Test" style="margin-left:1px;">
-					</div> 
-				</div>
-				<div class="links_mod_row">
-					<div class="links_mod_text">Category</div> 
-					<div class="links_mod_input">
-						<select name="category" id="website_category_select">
-							{foreach from=$category item=line}
-									<option value="{$line.category_id}" {$line.selected}>{$line.category_name}</option>
-							{/foreach}
-						</select>
-						<input type="button" name="add_category" value="Add" onClick="addcat(); return false;" class="topbutton_cpanel_small">
-					</div>
-				</div>
+    <div class="standard_tile_line"></div>
+    <div class="standard_tile_padding">
+        {if (isset($website.website_name))}
+        <div class="left_nav_section">
+            Make the changes you want, then hit the submit button to modify.<br>
+            Should you want to delete the link, click the delete button. The effects are immediate.<br>
+            If you want to link the website to more than one category, use the add button.
+        </div>
+        <br>
+        <br>
+        <form enctype="multipart/form-data" action="../links/db_links.php" method="post" name="linkmod">
+        <fieldset class="primary_fieldset">
+            <legend class="primary_legend">Website Data</legend>
+            <div class="links_mod_container">
                 <div class="links_mod_row">
-					<div class="links_mod_text">Linked categories</div>	
-					<div class="links_mod_input">
-						<table>
-						{foreach from=$website_category item=line}
-						<tr>
-							<td>
-								{if  $nr_of_cats == '1'}
-									- {$line.category_name}
-								{else}
-									- {$line.category_name} -- <a href="db_links.php?category_id={$line.category_id}&action=delete_category&website_id={$website.website_id}" class="links_addnew_link">Delete</a> 
-								{/if}							
-							</td>
-						</tr>
-						{/foreach}
-						</table>
-					</div>
-				</div>
-				<div class="links_mod_row">
-					<div class="links_mod_text">Description</div>	
-					<div class="links_mod_input"><textarea name="website_description_text" class="standard_tile_input_area" id="text_area_big">{$website.website_description_text}</textarea></div>
-				</div>
+                    <div class="links_mod_text">Site Name</div>
+                    <div class="links_mod_input">
+                        <input type="text" name="website_name" id="website_name" value="{$website.website_name}" class="standard_input input_large">
+                    </div>
+                </div>
+                <div class="links_mod_row">
+                    <div class="links_mod_text">URL</div>
+                    <div class="links_mod_input">
+                        <input type="text" name="website_url" id="website_url" value="{$website.website_url}" class="standard_input input_large">
+                        <input type="button" onclick="TestURL()" class="topbutton_cpanel_small" value="Test" style="margin-left:1px;">
+                    </div>
+                </div>
+                <div class="links_mod_row">
+                    <div class="links_mod_text">Category</div>
+                    <div class="links_mod_input">
+                        <select name="category" class="standard_select" id="website_category_select">
+                            {foreach from=$category item=line}
+                                    <option value="{$line.category_id}" {$line.selected}>{$line.category_name}</option>
+                            {/foreach}
+                        </select>
+                        <input type="button" name="add_category" value="Add" onClick="addcat(); return false;" class="topbutton_cpanel_small">
+                    </div>
+                </div>
+                <div class="links_mod_row">
+                    <div class="links_mod_text">Linked categories</div>
+                    <div class="links_mod_input">
+                        <table>
+                        {foreach from=$website_category item=line}
+                        <tr>
+                            <td>
+                                {if  $nr_of_cats == '1'}
+                                    - {$line.category_name}
+                                {else}
+                                    - {$line.category_name} -- <a href="db_links.php?category_id={$line.category_id}&action=delete_category&website_id={$website.website_id}" class="links_addnew_link">Delete</a>
+                                {/if}
+                            </td>
+                        </tr>
+                        {/foreach}
+                        </table>
+                    </div>
+                </div>
+                <div class="links_mod_row">
+                    <div class="links_mod_text">Description</div>
+                    <div class="links_mod_input"><textarea name="website_description_text" class="standard_tile_input_area" id="text_area_big">{$website.website_description_text}</textarea></div>
+                </div>
                 <br>
-				<div class="links_mod_row">
-				{if  $website.website_imgext !== ""}
-					<div class="links_mod_text">
+                <div class="links_mod_row">
+                {if  $website.website_imgext !== ""}
+                    <div class="links_mod_text">
                         <div class="links_mod_checkbox">
                             <input type="checkbox" id="delete_image" name="delete_image" value="yes">
                             <label for="delete_image"></label>&nbsp;Delete Image?
                             <!--<input type="checkbox" name="delete_image" id="delete_image" value="yes">-->
                         </div>
                     </div>
-					<div class="links_mod_input">
+                    <div class="links_mod_input">
                         <a href="../../includes/show_image.php?file={$website.website_image}&amp;resize=410,null,null,null" data-lightbox="image-1" data-title="{$website.website_name}">
                             <img src="../../includes/show_image.php?file={$website.website_image}&amp;resize=160,null,null,null" class="user_stats_img" id="user_details_img_dark" alt="website image">
                         </a>
-					</div>
-				{else}
-					<div class="links_mod_text">Attach image</div>
-					<div class="links_mod_input">
-						<input type="hidden" name="MAX_FILE_SIZE" value="100000000">
-						<input type="hidden" name="file_upload" value="yes">
-						<!--<input type="file" name="image">-->
+                    </div>
+                {else}
+                    <div class="links_mod_text">Attach image</div>
+                    <div class="links_mod_input">
+                        <input type="hidden" name="MAX_FILE_SIZE" value="100000000">
+                        <input type="hidden" name="file_upload" value="yes">
+                        <!--<input type="file" name="image">-->
                         <label for="file_upload" class="file_upload">Select file</label>
                         <input id="file_upload" type="file" name="image">
-                        <input type="text" class="standard_tile_input_small" id="file_upload_user_detail">&nbsp;
+                        <input type="text" class="standard_input input_large" id="file_upload_user_detail">&nbsp;
                         <br><br>
-					</div>
-				{/if}
-				</div>
+                    </div>
+                {/if}
+                </div>
                 <div class="links_mod_row">
-					<div class="links_mod_text">
-                         <div class="links_mod_checkbox">
+                    <div class="links_mod_text">
+                        <div class="links_mod_checkbox">
                             <input type="checkbox" value="1" id="website_inactive" name="website_inactive" {if $website.inactive == '1'} checked {/if}>
                             <label for="website_inactive"></label>&nbsp;Inactive
                         </div>
                     </div>
                 </div>
-				<br>
-				<input type="hidden" name="website_id" id="delete_id" value="{$website_id}">
-				<input type="hidden" name="action" value="modify_link">
-				<input type="submit" name="Modify" value="Modify" class="topbutton_cpanel_small">	
-				<input type="button" name="delete" value="Delete" onClick="deletelink(); return false;" class="topbutton_cpanel_small">
-			</div>
-		</fieldset>
-	</form>
-	{else}
-		<div class="left_nav_section">
-			Link does not exist.
-		</div> 
-	{/if}
-	<br>
-	</div>
-	<div class="standard_table_center"><a href="../links/link_modlist.php" class="standard_tile_link">back</a></div> 
-	<br>
-</div>	
+                <br>
+                <input type="hidden" name="website_id" id="delete_id" value="{$website_id}">
+                <input type="hidden" name="action" value="modify_link">
+                <input type="submit" name="Modify" value="Modify" class="topbutton_cpanel_small">
+                <input type="button" name="delete" value="Delete" onClick="deletelink(); return false;" class="topbutton_cpanel_small">
+            </div>
+        </fieldset>
+    </form>
+    {else}
+        <div class="left_nav_section">
+            Link does not exist.
+        </div>
+    {/if}
+    <br>
+    </div>
+    <div class="standard_tile_text_center"><a href="../links/link_modlist.php" class="standard_tile_link">back</a></div>
+    <br>
+</div>
 {/block}

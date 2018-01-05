@@ -15,12 +15,13 @@
 //*********************************************************************************************
 
 //let's get all the types
-$query_bug_report_type = $mysqli->query("SELECT * FROM bug_report_type") or die("query error, bug report");  
+$query_bug_report_type = $mysqli->query("SELECT * FROM bug_report_type") or die("query error, bug report");
 
-While ( $sql_bug_report_type = $query_bug_report_type->fetch_array(MYSQLI_BOTH))
-{	
-    $smarty->append('bug_report_type',
-             array('bug_report_type_id' => $sql_bug_report_type['bug_report_type_id'],
-                   'bug_report_type' => $sql_bug_report_type['bug_report_type']));
+while ($sql_bug_report_type = $query_bug_report_type->fetch_array(MYSQLI_BOTH)) {
+    $smarty->append(
+
+        'bug_report_type',
+        array('bug_report_type_id' => $sql_bug_report_type['bug_report_type_id'],
+                   'bug_report_type' => $sql_bug_report_type['bug_report_type'])
+    );
 }
-?>

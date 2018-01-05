@@ -16,7 +16,7 @@
 //****************************************************************************************
 *}
 
-<script type="text/javascript" src="{$template_dir}includes/js/vendor/Chart-2.5.0.min.js"></script> <!-- chart creation -->
+<script src="{$template_dir}includes/js/vendor/Chart-2.5.0.min.js"></script> <!-- chart creation -->
 <script><!--Load the chart-->
     window.onload = function () {
         var data_cl_bar = {$change_log_data|escape:'javascript'};
@@ -52,17 +52,15 @@
 </script>
 
 <div class="standard_tile">
-	<h1>USER STATS</h1>
-		<div class="standard_tile_line"></div>
-		<div class="standard_list_entry">
-			<div class="standard_table_center">
+    <h1>USER STATS</h1>
+        <div class="standard_tile_line"></div>
+            <div class="standard_tile_text_center">
                 <br>This chart represents the nr of changes made to the database per section by the selected user starting from 2017.
             </div>
-			<div class="standard_tile_text">
-                 <div class="line_changelog" style="width:98%;margin-left:auto;margin-right:auto;">
+            <div class="standard_tile_padding">
+                <div class="line_changelog" style="width:98%;margin-left:auto;margin-right:auto;">
                     <canvas id="changelog_bar"></canvas>
                 </div>
-			</div>
-		</div>
-	<div class="standard_tile_line"></div>
+            </div>
+    <div class="standard_tile_line"></div>
 </div>

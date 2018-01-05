@@ -8,27 +8,25 @@
  *
  *   Id: spotlight.php,v 1.0  2017/09/20 ST Graveyard
  ***************************************************************************/
- 
+
 include("../../config/common.php");
 include("../../config/admin.php");
 
 //load the search fields of the quick search side menu
 include("../../admin/games/quick_search_games.php");
 
-
 //load the existing spotlight entries
 $query_spotlight = $mysqli->query("SELECT * from spotlight
-                                            LEFT JOIN screenshot_main ON (spotlight.screenshot_id = screenshot_main.screenshot_id)") or die ("error in query spotlight");
+                                            LEFT JOIN screenshot_main ON (spotlight.screenshot_id = screenshot_main.screenshot_id)") or die("error in query spotlight");
 
-while ( $sql_spotlight = $query_spotlight->fetch_array(MYSQLI_BOTH))
-{
+while ($sql_spotlight = $query_spotlight->fetch_array(MYSQLI_BOTH)) {
     $new_path = $spotlight_screenshot_path;
     $new_path .= $sql_spotlight['screenshot_id'];
     $new_path .= ".";
     $new_path .= $sql_spotlight['imgext'];
-        
+
     $smarty->append('spotlight', array(
-		'spotlight_id' => $sql_spotlight['spotlight_id'],
+        'spotlight_id' => $sql_spotlight['spotlight_id'],
         'spotlight_screenshot' => $new_path,
         'link' => $sql_spotlight['link'],
         'spotlight' => $sql_spotlight['spotlight']

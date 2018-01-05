@@ -29,19 +29,13 @@
     vertical-align: middle;
 }
 
-#member_select{
-    @extend #quick_search_pub_select;
-    width: 192px;
-    height: 27px;
-}
-
 .interview_preview_screenshot_order {
     width: 170px;
     margin: auto;
     font-size: 9pt;
     background-color: #006f6f;
-    padding-left:5px;
-    padding-bottom:5px;
-    padding-top:8px;
-    padding-right:8px;
+    padding-left: 5px;
+    padding-bottom: 5px;
+    padding-top: 8px;
+    padding-right: 8px;
 }

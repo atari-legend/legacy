@@ -8,7 +8,7 @@
 *   actual update        : Creation of file
 *
 *   Id: did_you_know_tile.html,v 0.1 2015/04/15 00:03 ST Graveyard
-*	Id: did_you_know_tile.html,v 0.2 2015/12/05 ST Graveyard - HTML validated
+*   Id: did_you_know_tile.html,v 0.2 2015/12/05 ST Graveyard - HTML validated
 *
 ***************************************************************************/
 
@@ -18,12 +18,12 @@
 *}
 {block name=did_you_know_tile}
 <div class="{if isset($did_you_know_tile)}{$did_you_know_tile}{/if}">
-	<div class="standard_tile">
-		<h1>DID YOU KNOW?</h1>
-		<div class="standard_tile_line"></div>
-		<div class="standard_tile_text">
-			<h6>{$trivia_text}</h6>
-		</div>
-	</div>
+    <div class="standard_tile">
+        <h1>DID YOU KNOW?</h1>
+        <div class="standard_tile_line"></div>
+        <div class="standard_tile_padding">
+            <h6>{$trivia_text}</h6>
+        </div>
+    </div>
 </div>
 {/block}

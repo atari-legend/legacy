@@ -443,7 +443,6 @@ if (isset($action) and $action == "search") {
         $stac_select = " AND game_stac.stac =$stac";
     }
 
-
     //Before we start the build the query, we check if there is at least
     //one search field filled in or used!
 
@@ -701,7 +700,6 @@ if (isset($action) and $action == "search") {
                 }
                 $RESULTAKA .= ' GROUP BY game_aka.game_id, game_aka.aka_name HAVING COUNT(DISTINCT game_aka.game_id, game_aka.aka_name) = 1';
                 $RESULTAKA .= ' ORDER BY game_aka.aka_name ASC';
-
 
                 $mysqli->query("CREATE TEMPORARY TABLE temp ENGINE=MEMORY $RESULTGAME") or die(mysqli_error());
                 $mysqli->query("INSERT INTO temp $RESULTAKA") or die(mysqli_error());

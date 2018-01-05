@@ -27,5 +27,3 @@ foreach ($stack as $value) {
         'value' => $value
     ));
 }
-
-?>

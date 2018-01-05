@@ -49,7 +49,6 @@ if (isset($action)) {
                                 WHERE review_user_comments.review_id = '$review_id'
                                 ORDER BY comments.timestamp desc") or die("Syntax Error! Couldn't not get the comments!");
 
-
     while ($query_comment = $sql_comment->fetch_array(MYSQLI_BOTH)) {
         $oldcomment = $query_comment['comment'];
         $oldcomment = nl2br($oldcomment);
@@ -70,7 +69,9 @@ if (isset($action)) {
 
         $date = date("d/m/y", $query_comment['timestamp']);
 
-        $smarty->append('comments', array(
+        $smarty->append(
+            'comments',
+            array(
             'comment' => $oldcomment,
             'comment_edit' => $comment,
             'comment_id' => $query_comment['comment_id'],

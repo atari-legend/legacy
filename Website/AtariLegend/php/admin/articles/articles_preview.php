@@ -69,14 +69,13 @@ $query_screenshots = $mysqli->query("SELECT * FROM article_main
 $count = 1;
 
 while ($sql_screenshots = $query_screenshots->fetch_array(MYSQLI_BOTH)) {
-    if ( $sql_screenshots['screenshot_id'] != '')
-    {
+    if ($sql_screenshots['screenshot_id'] != '') {
         $new_path = $article_screenshot_path;
         $new_path .= $sql_screenshots['screenshot_id'];
         $new_path .= ".";
         $new_path .= $sql_screenshots['imgext'];
-        
-         $smarty->append('screenshots', array(
+
+        $smarty->append('screenshots', array(
             'screenshot' => $new_path,
             'count' => $count,
             'comment' => $sql_screenshots['comment_text']

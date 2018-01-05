@@ -24,9 +24,10 @@ include("../../config/common.php");
 include("../../config/admin.php");
 
 //We have to make sure that a user can only change his own data and not others unless he is an admin!
-if ($user_id_selected == $_SESSION['user_id'])
-{}
-else{include("../../config/admin_rights.php");}
+if ($user_id_selected == $_SESSION['user_id']) {
+} else {
+    include("../../config/admin_rights.php");
+}
 
 //****************************************************************************************
 // add avatar
@@ -57,13 +58,13 @@ if (isset($action) and $action == 'avatar_upload') {
             $mysqli->query("UPDATE users SET avatar_ext='$ext' WHERE user_id='$user_id_selected'");
             $file_data = rename("$tmp_name", "$user_avatar_save_path$user_id_selected.$ext");
             chmod("$user_avatar_save_path$user_id_selected.$ext", 0777);
-            
-             // check for size specs
+
+            // check for size specs
             $imginfo = getimagesize("$user_avatar_save_path$user_id_selected.$ext") or die("getimagesize not working");
             $width  = $imginfo[0];
             $height = $imginfo[1];
-            
-             $_SESSION['image'] = $ext;
+
+            $_SESSION['image'] = $ext;
 
             if ($width < 601 and $height < 601) {
                 $_SESSION['edit_message'] = "Avatar added";
@@ -73,9 +74,7 @@ if (isset($action) and $action == 'avatar_upload') {
                 $mysqli->query("UPDATE users SET avatar_ext='' WHERE user_id='$user_id_selected'");
                 unlink("$user_avatar_save_path$user_id_selected.$ext");
             }
-        }
-        else
-        {
+        } else {
             $_SESSION['edit_message'] = "Please upload only files with extension png, jpg or gif";
         }
     }
@@ -104,136 +103,107 @@ if (isset($action) and $action == 'reset_pwd') {
     //$_SESSION['edit_message'] = "Password reset";
 
     //create_log_entry('Users', $user_id_selected, 'User', $user_id_selected, 'Update', $_SESSION['user_id']);
-    
+
     //Admins can change pwd's for everyone - the current pwd field is not necessary
-    if ($_SESSION['permission']==1)
-    {        
+    if ($_SESSION['permission']==1) {
         //add the new password
-        $md5pass = hash('md5',$_POST['user_new_pwd']); // The md5 hashed password.
-        $sha512 = hash('sha512',$_POST['user_new_pwd']); // The hashed password.
+        $md5pass = hash('md5', $_POST['user_new_pwd']); // The md5 hashed password.
+        $sha512 = hash('sha512', $_POST['user_new_pwd']); // The hashed password.
         $random_salt = hash('sha512', uniqid(mt_rand(1, mt_getrandmax()), true));//create random salt
         $update_password = hash('sha512', $sha512 . $random_salt); // Create salted password
-        
+
         $mysqli->query("UPDATE users SET password='$md5pass', sha512_password = '$update_password', salt = '$random_salt' WHERE user_id='$user_id_selected'");
-        
+
         //If you are changing your own pwd, we need to update the session vars
-        if ($user_id_selected == $_SESSION['user_id'])
-        {
+        if ($user_id_selected == $_SESSION['user_id']) {
             //Let's log in - fill the session vars
-            if (login($_SESSION['userid'], $sha512, $mysqli) == true) {   
+            if (login($_SESSION['userid'], $sha512, $mysqli) == true) {
                 create_log_entry('Users', $user_id_selected, 'User', $user_id_selected, 'Update', $_SESSION['user_id']);
                 $_SESSION['edit_message'] = "Own account succesfully updated";
                 header("Location: ../user/user_detail.php?user_id_selected=$user_id_selected");
-            }
-            else
-            {
+            } else {
                 $_SESSION['edit_message'] = "Own account succesfully updated - Please log in";
                 header("Location: ../../main/front/front.php");
-            }      
-        }
-        else
-        {
+            }
+        } else {
             $_SESSION['edit_message'] = "Account succesfully updated";
             header("Location: ../user/user_detail.php?user_id_selected=$user_id_selected");
         }
-    }        
-    else
-    {
+    } else {
         // Check if current pwd is correct
         $password = $_POST['p'];
-        if (login($_SESSION['userid'], $password, $mysqli) == true) 
-        {              
+        if (login($_SESSION['userid'], $password, $mysqli) == true) {
             //check if both new pwd's are the same
-            if($_POST['user_new_pwd'] == $_POST['user_confirm_pwd'])
-            {
+            if ($_POST['user_new_pwd'] == $_POST['user_confirm_pwd']) {
                 //add the new password
-                $md5pass = hash('md5',$_POST['user_new_pwd']); // The md5 hashed password.
-                $sha512 = hash('sha512',$_POST['user_new_pwd']); // The hashed password.
+                $md5pass = hash('md5', $_POST['user_new_pwd']); // The md5 hashed password.
+                $sha512 = hash('sha512', $_POST['user_new_pwd']); // The hashed password.
                 $random_salt = hash('sha512', uniqid(mt_rand(1, mt_getrandmax()), true));//create random salt
                 $update_password = hash('sha512', $sha512 . $random_salt); // Create salted password
-                
+
                 $mysqli->query("UPDATE users SET password='$md5pass', sha512_password = '$update_password', salt = '$random_salt' WHERE user_id='$user_id_selected'");
-                
+
                 //Let's log in - fill the session vars
-                if (login($_SESSION['userid'], $sha512, $mysqli) == true) {   
+                if (login($_SESSION['userid'], $sha512, $mysqli) == true) {
                     create_log_entry('Users', $user_id_selected, 'User', $user_id_selected, 'Update', $_SESSION['user_id']);
                     $_SESSION['edit_message'] = "Account succesfully updated";
                     header("Location: ../user/user_detail.php?user_id_selected=$user_id_selected");
-                }
-                else
-                {
+                } else {
                     $_SESSION['edit_message'] = "Account succesfully updated - Please log in";
                     header("Location: ../../main/front/front.php");
                 }
-            }
-            else
-            {
+            } else {
                 $_SESSION['edit_message'] = "The new and confirmed passwords are not the same";
                 header("Location: ../user/user_detail.php?user_id_selected=$user_id_selected");
             }
-        }
-        else
-        {
-           $_SESSION['edit_message'] = "The current password is not correct";
-           header("Location: ../user/user_detail.php?user_id_selected=$user_id_selected");
+        } else {
+            $_SESSION['edit_message'] = "The current password is not correct";
+            header("Location: ../user/user_detail.php?user_id_selected=$user_id_selected");
         }
     }
-}   
+}
 
 //****************************************************************************************
 // modify user
 //****************************************************************************************
 if (isset($action) and $action == 'modify_user') {
-    
-    if ($user_website == 'http://')
-    {
+    if ($user_website == 'http://') {
         $user_website = '';
     }
-    
-    if ($user_fb == 'https://')
-    {
+
+    if ($user_fb == 'https://') {
         $user_fb = '';
     }
-    
-    if ($user_twitter == 'https://')
-    {
+
+    if ($user_twitter == 'https://') {
         $user_twitter = '';
     }
-    
-    if ($user_af == 'http://')
-    {
+
+    if ($user_af == 'http://') {
         $user_af = '';
     }
-    
-    if (isset($_POST['pmd5']) &&  $_POST['pmd5'] != '' && isset($_POST['p']) && $_POST['p'] != '' ) {
-      
+
+    if (isset($_POST['pmd5']) &&  $_POST['pmd5'] != '' && isset($_POST['p']) && $_POST['p'] != '') {
         $user_name = $mysqli->real_escape_string($user_name);
         $md5pass = $_POST['pmd5']; // The md5 hashed password.
         $sha512 = $_POST['p']; // The hashed password.
         $random_salt = hash('sha512', uniqid(mt_rand(1, mt_getrandmax()), true));//create random salt
         $update_password = hash('sha512', $sha512 . $random_salt); // Create salted password
-    
-        if (isset ($user_inactive))
-        {
+
+        if (isset($user_inactive)) {
             $mysqli->query("UPDATE users SET userid='$user_name', password='$md5pass', sha512_password='$update_password', salt='$random_salt', email='$user_email', permission='$user_permission', user_website='$user_website', user_fb='$user_fb', user_twitter='$user_twitter', user_af='$user_af', inactive='$user_inactive' WHERE user_id='$user_id_selected'");
-        }
-        else
-        {
+        } else {
             $mysqli->query("UPDATE users SET userid='$user_name', password='$md5pass', sha512_password='$update_password', salt='$random_salt', email='$user_email', permission='$user_permission', user_website='$user_website', user_fb='$user_fb', user_twitter='$user_twitter', user_af='$user_af', inactive=' ' WHERE user_id='$user_id_selected'");
         }
         $_SESSION['edit_message'] = "User data modified";
 
         create_log_entry('Users', $user_id_selected, 'User', $user_id_selected, 'Update', $_SESSION['user_id']);
     } else {
-        
         $user_name = $mysqli->real_escape_string($user_name);
-        
-        if (isset ($user_inactive))
-        {
+
+        if (isset($user_inactive)) {
             $mysqli->query("UPDATE users SET userid='$user_name', email='$user_email', permission='$user_permission', user_website='$user_website', user_fb='$user_fb', user_twitter='$user_twitter', user_af='$user_af', inactive='$user_inactive' WHERE user_id='$user_id_selected'");
-        }
-        else
-        {
+        } else {
             $mysqli->query("UPDATE users SET userid='$user_name', email='$user_email', permission='$user_permission', user_website='$user_website', user_fb='$user_fb', user_twitter='$user_twitter', user_af='$user_af', inactive=' ' WHERE user_id='$user_id_selected'");
         }
         $_SESSION['edit_message'] = "User data modified";

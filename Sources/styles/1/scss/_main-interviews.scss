@@ -7,42 +7,48 @@
 
 
 //****************Interview detail page************************/
-#interview_chapters a:link{
-    color: white;
+#interview_chapters a:link {
+    color: #ffffff;
 }
 
-#interview_chapters a:visited{
-    color: white;
+#interview_chapters a:visited {
+    color: #ffffff;
 }
 
-#interview_chapters a:hover{
+#interview_chapters a:hover {
     color: #008b8b;
 }
 
-#interview_main_text a:link{
+.standard_link_color a:link {
     color: #008b8b;
 }
 
-#interview_main_text a:visited{
+.standard_link_color a:visited {
     color: #008b8b;
 }
 
-#interview_main_text a:hover{
-    color: white;
+.standard_link_color a:hover {
+    color: #ffffff;
 }
 
-.interview_profile_text{
+.interview_profile_text {
     @extend .standard_tile_explanation;
-    margin-bottom:0px;
+    margin-bottom: 0;
     padding-top: 10px;
 }
 
-#column_right_interviews_details{@extend #column_right_games_details;}
-#column_left_interviews_details{@extend #column_left_games_details;}
-#column_center_interviews_details{@extend #column_center_games_details;}
+#column_right_interviews_details {
+    @extend #column_right_games_details;
+}
+#column_left_interviews_details {
+    @extend #column_left_games_details;
+}
+#column_center_interviews_details {
+    @extend #column_center_games_details;
+}
 
 //****************Interview main page************************/
-.interview_main_text{
+.interview_main_text {
     @extend .game_details_review_preview_text;
     height: 75px;
 }

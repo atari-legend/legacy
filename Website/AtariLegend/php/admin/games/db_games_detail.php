@@ -217,7 +217,6 @@ if (isset($action) and $action == 'modify_game') {
         }
     }
 
-
     // Update the public domain tick box info
     // Start off by deleting previos value
     $sdbquery = $mysqli->query("DELETE FROM game_free WHERE game_id='$game_id'");

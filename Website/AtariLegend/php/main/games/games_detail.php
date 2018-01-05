@@ -36,8 +36,8 @@ function generate_game_description(
     $game_developers,
     $screenshots,
     $boxscans,
-    $reviews) {
-
+    $reviews
+) {
     $desc = "$game_name is a ";
     if ($game_free) {
         $desc .= "non-commercial ";
@@ -128,7 +128,6 @@ $sql_game = $mysqli->query("SELECT game_name,
                LEFT JOIN game_wanted ON (game.game_id = game_wanted.game_id)
                     WHERE game.game_id='$game_id'") or die("Error getting game info");
 
-
 if ($game_info = $sql_game->fetch_array(MYSQLI_BOTH)) {
     $smarty->assign('game_info', array(
         'game_name' => $game_info['game_name'],
@@ -186,7 +185,6 @@ while ($categories = $sql_categories->fetch_array(MYSQLI_BOTH)) {
         'cat_name' => $categories['game_cat_name']
     ));
 }
-
 
 //**********************************************************************************
 //Get the author info
@@ -338,7 +336,6 @@ while ($publishers = $sql_publisher->fetch_array(MYSQLI_BOTH)) {
     ));
 }
 
-
 //let's get the developers for this game
 $sql_developer = $mysqli->query("SELECT * FROM game_developer
                   LEFT JOIN pub_dev ON ( pub_dev.pub_dev_id = game_developer.dev_pub_id )
@@ -401,7 +398,6 @@ while ($aka = $sql_aka->fetch_array(MYSQLI_BOTH)) {
     $nr_aka++;
 }
 
-
 //***********************************************************************************
 //Get the screenshots
 //***********************************************************************************
@@ -438,8 +434,6 @@ while ($screenshots = $sql_screenshots->fetch_array(MYSQLI_BOTH)) {
 }
 
 $smarty->assign("nr_screenshots", $count);
-
-
 
 //***********************************************************************************
 //Get the boxscans
@@ -487,7 +481,6 @@ if ($imagenum_rows > 0) {
     $smarty->assign("nr_box", $front);
 }
 
-
 //***********************************************************************************
 //Get the comments
 //***********************************************************************************
@@ -522,158 +515,153 @@ while ($query_comment = $sql_comment->fetch_array(MYSQLI_BOTH)) {
 
     $date = date("d/m/y", $query_comment['timestamp']);
 
-    $smarty->append(
-
-        'comments',
-        array('comment' => $oldcomment,
-              'comment_edit' => $comment,
-              'comment_id' => $query_comment['comment_id'],
-              'date' => $date,
-              'game' => $query_comment['game_name'],
-              'game_id' => $query_comment['game_id'],
-              'user_name' => $query_comment['userid'],
-              'user_id' => $query_comment['user_id'],
-              'user_fb' => $query_comment['user_fb'],
-              'user_website' => $query_comment['user_website'],
-              'user_twitter' => $query_comment['user_twitter'],
-              'user_af' => $query_comment['user_af'],
-              'email' => $query_comment['email'])
-
-    );
+    $smarty->append('comments', array(
+        'comment' => $oldcomment,
+        'comment_edit' => $comment,
+        'comment_id' => $query_comment['comment_id'],
+        'date' => $date,
+        'game' => $query_comment['game_name'],
+        'game_id' => $query_comment['game_id'],
+        'user_name' => $query_comment['userid'],
+        'user_id' => $query_comment['user_id'],
+        'user_fb' => $query_comment['user_fb'],
+        'user_website' => $query_comment['user_website'],
+        'user_twitter' => $query_comment['user_twitter'],
+        'user_af' => $query_comment['user_af'],
+        'email' => $query_comment['email']
+    ));
 }
-
 
 //***********************************************************************************
 //Get the reviews
 //***********************************************************************************
-    $sql_review = $mysqli->query("SELECT * FROM game
-                               LEFT JOIN review_game ON (game.game_id = review_game.game_id)
-                               LEFT JOIN review_main ON (review_game.review_id = review_main.review_id)
-                               LEFT JOIN review_score ON (review_main.review_id = review_score.review_id)
-                               LEFT JOIN users ON (review_main.user_id = users.user_id)
-                               WHERE game.game_id = '$game_id' AND review_main.review_edit = '0'") or die("Error - Couldn't query review data");
+$sql_review = $mysqli->query("
+SELECT * FROM game
+LEFT JOIN review_game ON (game.game_id = review_game.game_id)
+LEFT JOIN review_main ON (review_game.review_id = review_main.review_id)
+LEFT JOIN review_score ON (review_main.review_id = review_score.review_id)
+LEFT JOIN users ON (review_main.user_id = users.user_id)
+WHERE game.game_id = '$game_id' AND review_main.review_edit = '0'")
+or die("Error - Couldn't query review data");
 
-    $game_reviews_count = 0;
-    while ($query_review = $sql_review->fetch_array(MYSQLI_BOTH)) {
-        $game_reviews_count++;
-        $review_date = date("F j, Y", $query_review['review_date']);
+$game_reviews_count = 0;
+while ($query_review = $sql_review->fetch_array(MYSQLI_BOTH)) {
+    $game_reviews_count++;
+    $review_date = date("F j, Y", $query_review['review_date']);
 
-        //Structure and manipulate the review text
-        $review_text = $query_review['review_text'];
+    //Structure and manipulate the review text
+    $review_text = $query_review['review_text'];
 
-        $pos_start = strpos($review_text, '[frontpage]');
-        $pos_end = strpos($review_text, '[/frontpage]');
-        $nr_char = $pos_end - $pos_start;
+    $pos_start = strpos($review_text, '[frontpage]');
+    $pos_end = strpos($review_text, '[/frontpage]');
+    $nr_char = $pos_end - $pos_start;
 
-        $review_text  = substr($review_text, $pos_start, $nr_char);
-        $review_text = nl2br($review_text);
-        $review_text = InsertALCode($review_text); // disabled this as it wrecked the design.
-        $review_text = trim($review_text);
-        $review_text = RemoveSmillies($review_text);
+    $review_text  = substr($review_text, $pos_start, $nr_char);
+    $review_text = nl2br($review_text);
+    $review_text = InsertALCode($review_text); // disabled this as it wrecked the design.
+    $review_text = trim($review_text);
+    $review_text = RemoveSmillies($review_text);
 
-        //Get a screenshots and the comments of this review
-        $query_screenshots_review = $mysqli->query("SELECT * FROM review_main
-                                        LEFT JOIN screenshot_review ON (review_main.review_id = screenshot_review.review_id)
-                                        LEFT JOIN screenshot_main ON (screenshot_review.screenshot_id = screenshot_main.screenshot_id)
-                                        LEFT JOIN review_comments ON (screenshot_review.screenshot_review_id = review_comments.screenshot_review_id)
-                                        WHERE review_main.review_id = '$query_review[review_id]' AND review_main.review_edit = '0' ORDER BY RAND() LIMIT 1") or die("Error - Couldn't query review screenshots");
+    //Get a screenshots and the comments of this review
+    $query_screenshots_review = $mysqli->query("SELECT * FROM review_main
+                                    LEFT JOIN screenshot_review ON (review_main.review_id = screenshot_review.review_id)
+                                    LEFT JOIN screenshot_main ON (screenshot_review.screenshot_id = screenshot_main.screenshot_id)
+                                    LEFT JOIN review_comments ON (screenshot_review.screenshot_review_id = review_comments.screenshot_review_id)
+                                    WHERE review_main.review_id = '$query_review[review_id]' AND review_main.review_edit = '0' ORDER BY RAND() LIMIT 1") or die("Error - Couldn't query review screenshots");
 
-        $sql_screenshots_review = $query_screenshots_review->fetch_array(MYSQLI_BOTH);
+    $sql_screenshots_review = $query_screenshots_review->fetch_array(MYSQLI_BOTH);
 
-        $new_path = $game_screenshot_path;
-        $new_path .= $sql_screenshots_review['screenshot_id'];
-        $new_path .= ".";
-        $new_path .= $sql_screenshots_review['imgext'];
+    $new_path = $game_screenshot_path;
+    $new_path .= $sql_screenshots_review['screenshot_id'];
+    $new_path .= ".";
+    $new_path .= $sql_screenshots_review['imgext'];
 
-        $smarty->append('review', array(
-                'user_name' => $query_review['userid'],
-                'user_id' => $query_review['user_id'],
-                'review_id' => $query_review['review_id'],
-                'email' => $query_review['email'],
-                'game_id' => $query_review['game_id'],
-                'date' => $review_date,
-                'game_name' => $query_review['game_name'],
-                'text' => $review_text,
-                'screenshot' => $new_path,
-                'comment' => $sql_screenshots_review['comment_text']
-            ));
-    }
-
+    $smarty->append('review', array(
+            'user_name' => $query_review['userid'],
+            'user_id' => $query_review['user_id'],
+            'review_id' => $query_review['review_id'],
+            'email' => $query_review['email'],
+            'game_id' => $query_review['game_id'],
+            'date' => $review_date,
+            'game_name' => $query_review['game_name'],
+            'text' => $review_text,
+            'screenshot' => $new_path,
+            'comment' => $sql_screenshots_review['comment_text']
+        ));
+}
 
 //***********************************************************************************
 //Get Similar game
 //***********************************************************************************
-    //select a random similar game
-    $sql_similar = $mysqli->query("SELECT * FROM game_similar WHERE game_similar.game_id = '$game_id' ORDER BY RAND() LIMIT 1")
-                                                or die("Error - Couldn't get similar game");
+//select a random similar game
+$sql_similar = $mysqli->query("SELECT * FROM game_similar WHERE game_similar.game_id = '$game_id' ORDER BY RAND() LIMIT 1")
+                                            or die("Error - Couldn't get similar game");
 
-    while ($query_similar = $sql_similar->fetch_array(MYSQLI_BOTH)) {
-        //get the game data
-        $query_game_similar_data = $mysqli->query("SELECT * FROM game
-                                                            LEFT JOIN screenshot_game ON (game.game_id = screenshot_game.game_id)
-                                                            LEFT JOIN screenshot_main ON (screenshot_game.screenshot_id = screenshot_main.screenshot_id)
-                                                            LEFT JOIN game_developer ON (game_developer.game_id = game.game_id)
-                                                            LEFT JOIN pub_dev ON (pub_dev.pub_dev_id = game_developer.dev_pub_id)
-                                                            LEFT JOIN game_year ON (game.game_id = game_year.game_id)
-                                                            WHERE game.game_id = '$query_similar[game_similar_cross]'
-                                                            ORDER BY RAND() LIMIT 1")
-                                                or die("Error - Couldn't get similar game data");
+while ($query_similar = $sql_similar->fetch_array(MYSQLI_BOTH)) {
+    //get the game data
+    $query_game_similar_data = $mysqli->query("
+    SELECT * FROM game
+    LEFT JOIN screenshot_game ON (game.game_id = screenshot_game.game_id)
+    LEFT JOIN screenshot_main ON (screenshot_game.screenshot_id = screenshot_main.screenshot_id)
+    LEFT JOIN game_developer ON (game_developer.game_id = game.game_id)
+    LEFT JOIN pub_dev ON (pub_dev.pub_dev_id = game_developer.dev_pub_id)
+    LEFT JOIN game_year ON (game.game_id = game_year.game_id)
+    WHERE game.game_id = '$query_similar[game_similar_cross]'
+    ORDER BY RAND() LIMIT 1")
+    or die("Error - Couldn't get similar game data");
 
-        while ($sql_game_similar_data = $query_game_similar_data->fetch_array(MYSQLI_BOTH)) {
-            $new_path = $game_screenshot_path;
-            $new_path .= $sql_game_similar_data['screenshot_id'];
-            $new_path .= ".";
-            $new_path .= $sql_game_similar_data['imgext'];
+    while ($sql_game_similar_data = $query_game_similar_data->fetch_array(MYSQLI_BOTH)) {
+        $new_path = $game_screenshot_path;
+        $new_path .= $sql_game_similar_data['screenshot_id'];
+        $new_path .= ".";
+        $new_path .= $sql_game_similar_data['imgext'];
 
-            $smarty->assign('similar', array(
-                'game_id' => $query_similar['game_similar_cross'],
-                'game_name' => $sql_game_similar_data['game_name'],
-                'game_year' => $sql_game_similar_data['game_year'],
-                'game_dev_name' => $sql_game_similar_data['pub_dev_name'],
-                'game_dev_id' => $sql_game_similar_data['pub_dev_id'],
-                'screenshot' => $new_path ));
-        }
+        $smarty->assign('similar', array(
+            'game_id' => $query_similar['game_similar_cross'],
+            'game_name' => $sql_game_similar_data['game_name'],
+            'game_year' => $sql_game_similar_data['game_year'],
+            'game_dev_name' => $sql_game_similar_data['pub_dev_name'],
+            'game_dev_id' => $sql_game_similar_data['pub_dev_id'],
+            'screenshot' => $new_path ));
     }
+}
 
 //***********************************************************************************
 //Get the game facts
 //***********************************************************************************
-    //load the facts for this games
-    $query_games_facts = $mysqli->query("SELECT * from game_fact
-                                         LEFT JOIN game ON (game.game_id = game_fact.game_id)
-                                         WHERE game_fact.game_id = $game_id") or die("error in query game facts");
+//load the facts for this games
+$query_games_facts = $mysqli->query("SELECT * from game_fact
+                                     LEFT JOIN game ON (game.game_id = game_fact.game_id)
+                                     WHERE game_fact.game_id = $game_id") or die("error in query game facts");
 
-    while ($sql_games_facts = $query_games_facts->fetch_array(MYSQLI_BOTH)) {
-        //check if there are screenshot added to the submission
-        $query_screenshots_facts = $mysqli->query("SELECT * FROM screenshot_main
-                                            LEFT JOIN screenshot_game_fact ON (screenshot_main.screenshot_id = screenshot_game_fact.screenshot_id)
-                                            WHERE screenshot_game_fact.game_fact_id = '$sql_games_facts[game_fact_id]'") or die("Error - Couldn't query fact screenshots");
+while ($sql_games_facts = $query_games_facts->fetch_array(MYSQLI_BOTH)) {
+    //check if there are screenshot added to the submission
+    $query_screenshots_facts = $mysqli->query("SELECT * FROM screenshot_main
+                                        LEFT JOIN screenshot_game_fact ON (screenshot_main.screenshot_id = screenshot_game_fact.screenshot_id)
+                                        WHERE screenshot_game_fact.game_fact_id = '$sql_games_facts[game_fact_id]'") or die("Error - Couldn't query fact screenshots");
 
-        while ($sql_screenshots_facts = $query_screenshots_facts->fetch_array(MYSQLI_BOTH)) {
-            $new_path = $game_fact_screenshot_path;
-            $new_path .= $sql_screenshots_facts['screenshot_id'];
-            $new_path .= ".";
-            $new_path .= $sql_screenshots_facts['imgext'];
+    while ($sql_screenshots_facts = $query_screenshots_facts->fetch_array(MYSQLI_BOTH)) {
+        $new_path = $game_fact_screenshot_path;
+        $new_path .= $sql_screenshots_facts['screenshot_id'];
+        $new_path .= ".";
+        $new_path .= $sql_screenshots_facts['imgext'];
 
-            $smarty->append(
-
-                'facts_screenshots',
-             array('game_fact_id' => $sql_games_facts['game_fact_id'],
-                   'game_fact_screenshot' => $new_path)
-
-            );
-        }
-
-        $fact_text = nl2br($sql_games_facts['game_fact']);
-        $fact_text = InsertALCode($fact_text); // disabled this as it wrecked the design.
-        $fact_text = trim($fact_text);
-        $fact_text = RemoveSmillies($fact_text);
-
-        $smarty->append('facts', array(
+        $smarty->append('facts_screenshots', array(
             'game_fact_id' => $sql_games_facts['game_fact_id'],
-            'game_fact' => $fact_text
+            'game_fact_screenshot' => $new_path
         ));
     }
+
+    $fact_text = nl2br($sql_games_facts['game_fact']);
+    $fact_text = InsertALCode($fact_text); // disabled this as it wrecked the design.
+    $fact_text = trim($fact_text);
+    $fact_text = RemoveSmillies($fact_text);
+
+    $smarty->append('facts', array(
+        'game_fact_id' => $sql_games_facts['game_fact_id'],
+        'game_fact' => $fact_text
+    ));
+}
 
 //*********************************************************************************************
 // Get the amiga and C64 id's for the Lemon links
@@ -682,11 +670,10 @@ $sql_vs = $mysqli->query("SELECT amiga_id, C64_id FROM game_vs WHERE atari_id = 
           or die("Error - Couldn't get the Lemon links");
 
 while ($query_vs = $sql_vs->fetch_array(MYSQLI_BOTH)) {
-    $smarty->append(
-        'game_vs',
-             array('amiga_id' => $query_vs['amiga_id'],
-                   'C64_id' => $query_vs['C64_id'])
-    );
+    $smarty->append('game_vs', array(
+        'amiga_id' => $query_vs['amiga_id'],
+        'C64_id' => $query_vs['C64_id']
+    ));
 }
 
 $smarty->assign("game_id", $game_id);
@@ -698,7 +685,8 @@ $smarty->assign("game_description", generate_game_description(
     $game_developers,
     $game_screenshots_count,
     $game_boxscans_count,
-    $game_reviews_count));
+    $game_reviews_count
+));
 
 //Send all smarty variables to the templates
 $smarty->display("file:" . $mainsite_template_folder . "games_detail.html");

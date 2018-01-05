@@ -44,7 +44,6 @@ if (isset($mode) and $mode == "back") {
     ));
 }
 
-
 $IMAGE = $mysqli->query("SELECT * FROM game_boxscan WHERE game_id='$game_id' ORDER BY game_boxscan_side, game_boxscan_id") or die("Database error - selecting gamebox scan");
 
 $imagenum_rows = $IMAGE->num_rows;

@@ -30,7 +30,7 @@
         <meta name="apple-mobile-web-app-capable" content="yes"><!-- apple -->
         <!-- End - let the site behave like a mobile app on phone -->
         <link type="text/css" href="{$style_dir}css/style.css" rel="stylesheet" id="main_stylesheet">
-        <link type="text/css" href="{$style_dir}css/vendor/jquery-ui-1.11.4.css" rel="Stylesheet">
+        <link type="text/css" href="{$style_dir}css/vendor/jquery-ui-1.11.4.custom-theme.css" rel="Stylesheet">
         <link type="text/css" href="{$style_dir}css/vendor/notify-osd-51f8de7.css" hreflang="en" rel="stylesheet">
         <!-- start - get the icons used for mobile devices -->
         <link rel="icon" href="{$template_dir}includes/icons/favicon.png"> <!-- fav icon & Chrome mobile icon-->
@@ -39,100 +39,8 @@
         <link rel="apple-touch-icon" sizes="114x114" href="{$template_dir}includes/icons/icon-114x114.png">
         <link rel="apple-touch-icon" sizes="144x144" href="{$template_dir}includes/icons/icon-144x144.png">
         <!-- end - get the icons used for mobile devices -->
-        <script type="text/javascript" src="{$template_dir}includes/js/vendor/jquery-2.1.4.min.js"></script> <!-- main jquery stuff -->
-        <script type="text/javascript" src="{$template_dir}includes/js/vendor/jquery-ui-1.11.4.min.js"></script> <!-- main jqueryUI stuff -->
-        <script type="text/javascript" src="{$template_dir}includes/js/vendor/notify-osd-51f8de7.min.js"></script>
-        <script type='text/javascript' src="{$template_dir}includes/js/vendor/sha512-2.2.min.js"></script> <!-- log on security script -->
-        <script type='text/javascript' src="{$template_dir}includes/js/vendor/md5-1.0.1.min.js"></script>  <!-- log on security script -->
-        <script type='text/javascript' src="{$template_dir}includes/js/forms.js"></script> <!-- log on security script -->
-        <script type="text/javascript"> <!-- script needed for the side menu -->
-            //<![CDATA[
-            $(window).load(function(){
-              $("[data-toggle]").click(function() {
-                var toggle_el = $(this).data("toggle");
-                $(toggle_el).toggleClass("open-sidebar");
-              });
-            });
-            //]]>
 
-            $(document).ready(function() {
-                    $(".clearfix li a").click(function() {
-                        var css_path = "../../../themes/styles/" + $(this).attr('rel') + "/css/style.css";
-                        var logo_img_path = "../../../themes/styles/" + $(this).attr('rel') + "/images/logos/top_cpanel_logo01.png";
-                        var logo_img_480_path = "../../../themes/styles/" + $(this).attr('rel') + "/images/logos/top_cpanel_logo01_480.png";
-                        var logo_bee_path = "../../../themes/styles/" + $(this).attr('rel') + "/images/top_right01.png";
-                        var skin = $(this).attr('rel');
-
-                        $("link#main_stylesheet").attr("href",css_path);
-                        $("#logo_img").attr("src",logo_img_path);
-                        $("#logo_img_480").attr("src",logo_img_480_path);
-                        $("#img_bee").attr("src",logo_bee_path);
-                        $.post( "../../../php/main/front/skin_switcher.php?action=skinswitch&skin="+skin);
-                        return false;
-                    });
-            });
-
-
-            {if isset($edit_message)}
-                $( document ).ready(function() {
-                    $.notify_osd.create({
-                        'text'        : '{$edit_message}',             // notification message
-                        'icon'        : '{$style_dir}/images/osd_icons/star.png', // icon path, 48x48
-                        'sticky'      : false,             // if true, timeout is ignored
-                        'timeout'     : 4,                 // disappears after 6 seconds
-                        'dismissable' : true               // can be dismissed manually
-                        });
-                });
-            {/if}
-        </script>
-        <script type="text/javascript">
-            $(document).ready(function(){
-              $('#login-trigger').click(function(){  <!-- script needed log in menu -->
-                $(this).next('#login-content').slideToggle();
-                $(this).toggleClass('active');
-
-                if ($(this).hasClass('active')) $(this).find('span').html('&#x25B2;')
-                  else $(this).find('span').html('&#x25BC;')
-                })
-            });
-        </script>
-        {literal}
-        <script> <!-- The 'go to the top' buttong -->
-            $(function(){
-
-                $(document).on( 'scroll', function(){
-
-                    if ($(window).scrollTop() > 100) {
-                        $('.scroll-top-wrapper').addClass('show');
-                    } else {
-                        $('.scroll-top-wrapper').removeClass('show');
-                    }
-                });
-            });
-        </script>
-        <script> <!-- The 'go to the top' buttong -->
-            $(function(){
-                $(document).on( 'scroll', function(){
-
-                    if ($(window).scrollTop() > 100) {
-                        $('.scroll-top-wrapper').addClass('show');
-                    } else {
-                        $('.scroll-top-wrapper').removeClass('show');
-                    }
-                });
-
-                $('.scroll-top-wrapper').on('click', scrollToTop);
-            });
-
-            function scrollToTop() {
-                verticalOffset = typeof(verticalOffset) != 'undefined' ? verticalOffset : 0;
-                element = $('body');
-                offset = element.offset();
-                offsetTop = offset.top;
-                $('html, body').animate({scrollTop: offsetTop}, 500, 'linear');
-            }
-        </script>
-        {/literal}
+        <script src="{$template_dir}includes/js/vendor/jquery-2.1.4.min.js"></script> <!-- main jquery stuff -->
 
         {* Insert Google Analytics tags only on production *}
         {if $smarty.server.HTTP_HOST == $smarty.const.SITEHOST}
@@ -140,11 +48,11 @@
         <!-- Global site tag (gtag.js) - Google Analytics -->
         <script async src="//www.googletagmanager.com/gtag/js?id=UA-108399799-2"></script>
         <script>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
 
-          gtag('config', 'UA-108399799-2');
+            gtag('config', 'UA-108399799-2');
         </script>
         {/literal}
         {/if}
@@ -157,150 +65,150 @@
                 <div id="top_background">
                     <!-- This is the side menu only visible for smartphones (max resolution 480pc)-->
                     <div class="container">
-                       <div id="sidebar">
+                        <div id="sidebar">
                             <div class="no-wrap">
                                 <nav class="skin-menu">
-                                  <ul class="side_navigation">
-                                    <li><button class="sidebutton" id="games_side">GAMES</button>
-                                        <ul class="sub-menu">
-                                            <li><a href="../games/games_main.php" title="Game editor" class="sidebutton_cpanel">GAME EDITOR</a></li>
-                                            <li><a href="../games/games_comment.php" title="Game comments" class="sidebutton_cpanel">GAME COMMENTS</a></li>
-                                            <li><a href="../games/games_series_main.php" title="Game series" class="sidebutton_cpanel">GAME SERIES</a></li>
-                                            <li><a href="../games/games_music.php" title="Game music" class="sidebutton_cpanel">GAME MUSIC</a></li>
-                                            <li><a href="../games/submission_games.php" title="Game submissions" class="sidebutton_cpanel">GAME SUBMISSIONS</a></li>
-                                            <li><a href="../games/games_review.php" title="Game reviews" class="sidebutton_cpanel">REVIEWS</a></li>
-                                            <li><a href="../games/games_review_comment.php" title="Game review comments" class="sidebutton_cpanel">REVIEW COMMENTS</a></li>
-                                            <li><a href="../games/games_review_submitted.php" title="Submitted reviews" class="sidebutton_cpanel">REVIEW SUBMISSIONS</a></li>
-                                            <li><a href="../individuals/individuals_main.php" title="Individuals" class="sidebutton_cpanel">INDIVIDIUALS</a></li>
-                                            <li><a href="../individuals/individuals_author.php" title="Author types" class="sidebutton_cpanel">AUTHOR TYPES</a></li>
-                                            <li><a href="../company/company_main.php" title="Companies" class="sidebutton_cpanel">COMPANIES</a></li>
-                                            <li><a href="../company/company_logos.php" title="Company logo" class="sidebutton_cpanel">COMPANY LOGO</a></li>
-                                            <li><a href="../interviews/interviews_main.php" title="Interviews" class="sidebutton_cpanel">INTERVIEWS</a></li>
-                                            <li><a href="../interviews/interviews_comment.php" title="Interview comments" class="sidebutton_cpanel">INTERVIEW COMMENTS</a></li>
-                                            <!--<li><a href="../interviews/interviews_help.php" title="Interviews help" class="sidebutton_cpanel">INTERVIEWS HELP</a></li>-->
-                                        </ul>
-                                    </li>
-                                  </ul>
-                                </nav>
-                            </div>
-                             <div class="no-wrap">
-                                <nav class="skin-menu">
-                                  <ul class="side_navigation">
-                                    <li><button class="sidebutton" id="menus_side">MENUS</button>
-                                        <ul class="sub-menu">
-                                            <li><a href="../menus/menus_list.php" title="Menu editor" class="sidebutton_cpanel">MENU EDITOR</a></li>
-                                            <li><a href="../menus/menus_type.php" title="Menu type" class="sidebutton_cpanel">MENU TYPE</a></li>
-                                            <li><a href="../docs/doc_type.php" title="Doc type" class="sidebutton_cpanel">DOC TYPE</a></li>
-                                            <li><a href="../docs/doc_category.php" title="Doc category" class="sidebutton_cpanel">DOC CATEGORY</a></li>
-                                            <li><a href="../administration/construction.php" title="Menu comments" class="sidebutton_cpanel">MENU COMMENTS</a></li>
-                                            <li><a href="../administration/construction.php" title="Menu submissions" class="sidebutton_cpanel">MENU SUBMISSIONS</a></li>
-                                            <li><a href="../individuals/individuals_main.php" title="Individuals" class="sidebutton_cpanel">INDIVIDIUALS</a></li>
-                                            <li><a href="../individuals/individuals_author.php" title="Author types" class="sidebutton_cpanel">AUTHOR TYPES</a></li>
-                                            <li><a href="../crew/crew_main.php" title="Crew editor" class="sidebutton_cpanel">CREW EDITOR</a></li>
-                                        </ul>
-                                    </li>
-                                  </ul>
+                                    <ul class="side_navigation">
+                                        <li><button class="sidebutton" id="games_side">GAMES</button>
+                                            <ul class="sub-menu">
+                                                <li><a href="../games/games_main.php" title="Game editor" class="sidebutton_cpanel">GAME EDITOR</a></li>
+                                                <li><a href="../games/games_comment.php" title="Game comments" class="sidebutton_cpanel">GAME COMMENTS</a></li>
+                                                <li><a href="../games/games_series_main.php" title="Game series" class="sidebutton_cpanel">GAME SERIES</a></li>
+                                                <li><a href="../games/games_music.php" title="Game music" class="sidebutton_cpanel">GAME MUSIC</a></li>
+                                                <li><a href="../games/submission_games.php" title="Game submissions" class="sidebutton_cpanel">GAME SUBMISSIONS</a></li>
+                                                <li><a href="../games/games_review.php" title="Game reviews" class="sidebutton_cpanel">REVIEWS</a></li>
+                                                <li><a href="../games/games_review_comment.php" title="Game review comments" class="sidebutton_cpanel">REVIEW COMMENTS</a></li>
+                                                <li><a href="../games/games_review_submitted.php" title="Submitted reviews" class="sidebutton_cpanel">REVIEW SUBMISSIONS</a></li>
+                                                <li><a href="../individuals/individuals_main.php" title="Individuals" class="sidebutton_cpanel">INDIVIDIUALS</a></li>
+                                                <li><a href="../individuals/individuals_author.php" title="Author types" class="sidebutton_cpanel">AUTHOR TYPES</a></li>
+                                                <li><a href="../company/company_main.php" title="Companies" class="sidebutton_cpanel">COMPANIES</a></li>
+                                                <li><a href="../company/company_logos.php" title="Company logo" class="sidebutton_cpanel">COMPANY LOGO</a></li>
+                                                <li><a href="../interviews/interviews_main.php" title="Interviews" class="sidebutton_cpanel">INTERVIEWS</a></li>
+                                                <li><a href="../interviews/interviews_comment.php" title="Interview comments" class="sidebutton_cpanel">INTERVIEW COMMENTS</a></li>
+                                                <!--<li><a href="../interviews/interviews_help.php" title="Interviews help" class="sidebutton_cpanel">INTERVIEWS HELP</a></li>-->
+                                            </ul>
+                                        </li>
+                                    </ul>
                                 </nav>
                             </div>
                             <div class="no-wrap">
                                 <nav class="skin-menu">
-                                  <ul class="side_navigation">
-                                    <li><button class="sidebutton" id="demos_side">DEMOS</button>
-                                        <ul class="sub-menu">
-                                            <li><a href="../administration/construction.php" title="Demo editor" class="sidebutton_cpanel">DEMO EDITOR</a></li>
-                                            <li><a href="../administration/construction.php" title="Demo comments" class="sidebutton_cpanel">DEMO COMMENTS</a></li>
-                                            <li><a href="../administration/construction.php" title="Demo music" class="sidebutton_cpanel">DEMO MUSIC</a></li>
-                                            <li><a href="../administration/construction.php" title="Demo submissions" class="sidebutton_cpanel">DEMO SUBMISSIONS</a></li>
-                                            <li><a href="../administration/construction.php" title="Individuals" class="sidebutton_cpanel">INDIVIDIUALS</a></li>
-                                            <li><a href="../administration/construction.php" title="Author types" class="sidebutton_cpanel">AUTHOR TYPES</a></li>
-                                            <li><a href="../administration/construction.php" title="Crew editor" class="sidebutton_cpanel">CREW EDITOR</a></li>
-                                            <li><a href="../administration/construction.php" title="Interviews" class="sidebutton_cpanel">INTERVIEWS</a></li>
-                                            <li><a href="../administration/construction.php" title="Interviews help" class="sidebutton_cpanel">INTERVIEWS HELP</a></li>
-                                        </ul>
-                                    </li>
-                                  </ul>
+                                    <ul class="side_navigation">
+                                        <li><button class="sidebutton" id="menus_side">MENUS</button>
+                                            <ul class="sub-menu">
+                                                <li><a href="../menus/menus_list.php" title="Menu editor" class="sidebutton_cpanel">MENU EDITOR</a></li>
+                                                <li><a href="../menus/menus_type.php" title="Menu type" class="sidebutton_cpanel">MENU TYPE</a></li>
+                                                <li><a href="../docs/doc_type.php" title="Doc type" class="sidebutton_cpanel">DOC TYPE</a></li>
+                                                <li><a href="../docs/doc_category.php" title="Doc category" class="sidebutton_cpanel">DOC CATEGORY</a></li>
+                                                <li><a href="../administration/construction.php" title="Menu comments" class="sidebutton_cpanel">MENU COMMENTS</a></li>
+                                                <li><a href="../administration/construction.php" title="Menu submissions" class="sidebutton_cpanel">MENU SUBMISSIONS</a></li>
+                                                <li><a href="../individuals/individuals_main.php" title="Individuals" class="sidebutton_cpanel">INDIVIDIUALS</a></li>
+                                                <li><a href="../individuals/individuals_author.php" title="Author types" class="sidebutton_cpanel">AUTHOR TYPES</a></li>
+                                                <li><a href="../crew/crew_main.php" title="Crew editor" class="sidebutton_cpanel">CREW EDITOR</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
                                 </nav>
                             </div>
                             <div class="no-wrap">
                                 <nav class="skin-menu">
-                                  <ul class="side_navigation">
-                                    <li><button class="sidebutton" id="users_side">USERS</button>
-                                        <ul class="sub-menu">
-                                            <li><a href="../user/user_management.php" class="sidebutton_cpanel">USER MANAGEMENT</a></li>
-                                        </ul>
-                                    </li>
-                                  </ul>
+                                    <ul class="side_navigation">
+                                        <li><button class="sidebutton" id="demos_side">DEMOS</button>
+                                            <ul class="sub-menu">
+                                                <li><a href="../administration/construction.php" title="Demo editor" class="sidebutton_cpanel">DEMO EDITOR</a></li>
+                                                <li><a href="../administration/construction.php" title="Demo comments" class="sidebutton_cpanel">DEMO COMMENTS</a></li>
+                                                <li><a href="../administration/construction.php" title="Demo music" class="sidebutton_cpanel">DEMO MUSIC</a></li>
+                                                <li><a href="../administration/construction.php" title="Demo submissions" class="sidebutton_cpanel">DEMO SUBMISSIONS</a></li>
+                                                <li><a href="../administration/construction.php" title="Individuals" class="sidebutton_cpanel">INDIVIDIUALS</a></li>
+                                                <li><a href="../administration/construction.php" title="Author types" class="sidebutton_cpanel">AUTHOR TYPES</a></li>
+                                                <li><a href="../administration/construction.php" title="Crew editor" class="sidebutton_cpanel">CREW EDITOR</a></li>
+                                                <li><a href="../administration/construction.php" title="Interviews" class="sidebutton_cpanel">INTERVIEWS</a></li>
+                                                <li><a href="../administration/construction.php" title="Interviews help" class="sidebutton_cpanel">INTERVIEWS HELP</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
                                 </nav>
                             </div>
                             <div class="no-wrap">
                                 <nav class="skin-menu">
-                                  <ul class="side_navigation">
-                                    <li><button class="sidebutton" id="admin_side">NEWS</button>
-                                        <ul class="sub-menu">
-                                            <li><a href="../news/news_add.php" title="Add news" class="sidebutton_cpanel">ADD NEWS</a></li>
-                                            <li><a href="../news/news_approve.php" title="Approve news" class="sidebutton_cpanel">APPROVE NEWS</a></li>
-                                            <li><a href="../news/news_edit_all.php" title="Edit news" class="sidebutton_cpanel">EDIT NEWS</a></li>
-                                            <li><a href="../news_add_images.php" title="Add news image" class="sidebutton_cpanel">ADD NEWS IMAGE</a></li>
-                                        </ul>
-                                    </li>
-                                  </ul>
+                                    <ul class="side_navigation">
+                                        <li><button class="sidebutton" id="users_side">USERS</button>
+                                            <ul class="sub-menu">
+                                                <li><a href="../user/user_management.php" class="sidebutton_cpanel">USER MANAGEMENT</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
                                 </nav>
                             </div>
                             <div class="no-wrap">
                                 <nav class="skin-menu">
-                                  <ul class="side_navigation">
-                                    <li><button class="sidebutton" id="other_side">OTHER</button>
-                                        <ul class="sub-menu">
-                                            <li><a href="../index.php" title="Statistics" class="sidebutton_cpanel">STATISTICS</a></li>
-                                            <li><a href="../administration/database_update.php" title="Administration" class="sidebutton_cpanel">DB UPDATES</a></li>
-                                            <li><a href="../administration/change_log.php" title="Change log" class="sidebutton_cpanel">CHANGE LOG</a></li>
-                                            <li><a href="../administration/bug_report.php" title="Bug report type" class="sidebutton_cpanel">BUG REPORTS</a></li>
-                                            <li><a href="../administration/bug_report_type.php" title="Bug report type" class="sidebutton_cpanel">BUG REPORT TYPE</a></li>
-                                            <li><a href="../administration/technical_doc.php" title="Technical doc" class="sidebutton_cpanel">TECH DOC</a></li>
-                                            <li><a href="../trivia/did_you_know.php" title="Did you know" class="sidebutton_cpanel">DID YOU KNOW</a></li>
-                                            <li><a href="../trivia/manage_trivia_quotes.php" title="Trivia quotes" class="sidebutton_cpanel">TRIVIA QUOTES</a></li>
-                                            <li><a href="../trivia/spotlight.php" title="Spotlight" class="sidebutton_cpanel">SPOTLIGHT</a></li>
-                                            <li><a href="../links/link_addnew.php" title="Add links" class="sidebutton_cpanel">ADD LINKS</a></li>
-                                            <li><a href="../links/link_modlist.php" title="Modify links" class="sidebutton_cpanel">MODIFY LINKS</a></li>
-                                            <li><a href="../links/link_cat.php" title="Link categories" class="sidebutton_cpanel">LINK CATEGORIES</a></li>
-                                            <li><a href="../downloads/downloads_main.php" title="Download editor" class="sidebutton_cpanel">DOWNLOAD EDIT</a></li>
-                                            <li><a href="../downloads/download_format.php" title="Download format" class="sidebutton_cpanel">DOWNLOAD FORMAT</a></li>
-                                            <li><a href="../downloads/download_options.php" title="Download options" class="sidebutton_cpanel">DOWNLOAD OPTIONS</a></li>
-                                            <li><a href="../downloads/download_lingo.php" title="Languages" class="sidebutton_cpanel">LANGUAGES</a></li>
-                                            <li><a href="../downloads/download_tos.php" title="TOS version" class="sidebutton_cpanel">TOS VERSIONS</a></li>
-                                            <li><a href="../downloads/download_trainer.php" title="Trainer options" class="sidebutton_cpanel">TRAINER OPTIONS</a></li>
-                                            <li><a href="../articles/articles_main.php" title="Articles" class="sidebutton_cpanel">ARTICLES</a></li>
-                                            <li><a href="../articles/article_type.php" title="Article types" class="sidebutton_cpanel">ARTICLE TYPES</a></li>
-                                            <li><a href="../administration/construction.php" title="Add magazines" class="sidebutton_cpanel">ADD MAGAZINES</a></li>
-                                            <li><a href="../administration/construction.php" title="Manage issues" class="sidebutton_cpanel">MANAGE ISSUES</a></li>
-                                            <li><a href="http://www.atari-forum.com" title="Forum" class="sidebutton_cpanel">FORUM</a></li>
-                                        </ul>
-                                    </li>
-                                  </ul>
+                                    <ul class="side_navigation">
+                                        <li><button class="sidebutton" id="admin_side">NEWS</button>
+                                            <ul class="sub-menu">
+                                                <li><a href="../news/news_add.php" title="Add news" class="sidebutton_cpanel">ADD NEWS</a></li>
+                                                <li><a href="../news/news_approve.php" title="Approve news" class="sidebutton_cpanel">APPROVE NEWS</a></li>
+                                                <li><a href="../news/news_edit_all.php" title="Edit news" class="sidebutton_cpanel">EDIT NEWS</a></li>
+                                                <li><a href="../news_add_images.php" title="Add news image" class="sidebutton_cpanel">ADD NEWS IMAGE</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
                                 </nav>
                             </div>
                             <div class="no-wrap">
                                 <nav class="skin-menu">
-                                  <ul class="clearfix">
-                                    <li>
-                                        <button class="sidebutton" id="skin_side">SKIN</button>
-                                        <ul class="sub-menu">
-                                            <li><a href="#" rel="1" class="sidebutton_cpanel">LEGACY</a></li>
-                                            <!--<li><a href="#" rel="2" class="sidebutton_cpanel">TOS 2.07</a></li>
-                                            <li><a href="#" rel="3" class="sidebutton_cpanel">PICASSO</a></li>-->
-                                        </ul>
-                                    </li>
-                                  </ul>
+                                    <ul class="side_navigation">
+                                        <li><button class="sidebutton" id="other_side">OTHER</button>
+                                            <ul class="sub-menu">
+                                                <li><a href="../index.php" title="Statistics" class="sidebutton_cpanel">STATISTICS</a></li>
+                                                <li><a href="../administration/database_update.php" title="Administration" class="sidebutton_cpanel">DB UPDATES</a></li>
+                                                <li><a href="../administration/change_log.php" title="Change log" class="sidebutton_cpanel">CHANGE LOG</a></li>
+                                                <li><a href="../administration/bug_report.php" title="Bug report type" class="sidebutton_cpanel">BUG REPORTS</a></li>
+                                                <li><a href="../administration/bug_report_type.php" title="Bug report type" class="sidebutton_cpanel">BUG REPORT TYPE</a></li>
+                                                <li><a href="../administration/technical_doc.php" title="Technical doc" class="sidebutton_cpanel">TECH DOC</a></li>
+                                                <li><a href="../trivia/did_you_know.php" title="Did you know" class="sidebutton_cpanel">DID YOU KNOW</a></li>
+                                                <li><a href="../trivia/manage_trivia_quotes.php" title="Trivia quotes" class="sidebutton_cpanel">TRIVIA QUOTES</a></li>
+                                                <li><a href="../trivia/spotlight.php" title="Spotlight" class="sidebutton_cpanel">SPOTLIGHT</a></li>
+                                                <li><a href="../links/link_addnew.php" title="Add links" class="sidebutton_cpanel">ADD LINKS</a></li>
+                                                <li><a href="../links/link_modlist.php" title="Modify links" class="sidebutton_cpanel">MODIFY LINKS</a></li>
+                                                <li><a href="../links/link_cat.php" title="Link categories" class="sidebutton_cpanel">LINK CATEGORIES</a></li>
+                                                <li><a href="../downloads/downloads_main.php" title="Download editor" class="sidebutton_cpanel">DOWNLOAD EDIT</a></li>
+                                                <li><a href="../downloads/download_format.php" title="Download format" class="sidebutton_cpanel">DOWNLOAD FORMAT</a></li>
+                                                <li><a href="../downloads/download_options.php" title="Download options" class="sidebutton_cpanel">DOWNLOAD OPTIONS</a></li>
+                                                <li><a href="../downloads/download_lingo.php" title="Languages" class="sidebutton_cpanel">LANGUAGES</a></li>
+                                                <li><a href="../downloads/download_tos.php" title="TOS version" class="sidebutton_cpanel">TOS VERSIONS</a></li>
+                                                <li><a href="../downloads/download_trainer.php" title="Trainer options" class="sidebutton_cpanel">TRAINER OPTIONS</a></li>
+                                                <li><a href="../articles/articles_main.php" title="Articles" class="sidebutton_cpanel">ARTICLES</a></li>
+                                                <li><a href="../articles/article_type.php" title="Article types" class="sidebutton_cpanel">ARTICLE TYPES</a></li>
+                                                <li><a href="../administration/construction.php" title="Add magazines" class="sidebutton_cpanel">ADD MAGAZINES</a></li>
+                                                <li><a href="../administration/construction.php" title="Manage issues" class="sidebutton_cpanel">MANAGE ISSUES</a></li>
+                                                <li><a href="http://www.atari-forum.com" title="Forum" class="sidebutton_cpanel">FORUM</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
                                 </nav>
                             </div>
-                       </div>
-                       <div class="main-content">
+                            <div class="no-wrap">
+                                <nav class="skin-menu">
+                                    <ul class="clearfix">
+                                        <li>
+                                            <button class="sidebutton" id="skin_side">SKIN</button>
+                                            <ul class="sub-menu">
+                                                <li><a href="#" rel="1" class="sidebutton_cpanel">LEGACY</a></li>
+                                                <!--<li><a href="#" rel="2" class="sidebutton_cpanel">TOS 2.07</a></li>
+                                                <li><a href="#" rel="3" class="sidebutton_cpanel">PICASSO</a></li>-->
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                        <div class="main-content">
                             <button type="button" data-toggle=".container" id="sidebar-toggle" style="border:none; cursor: pointer;">
-                                  <span class="bar"></span>
-                                  <span class="bar"></span>
-                                  <span class="bar"></span>
+                                <span class="bar"></span>
+                                <span class="bar"></span>
+                                <span class="bar"></span>
                             </button>
-                       </div>
+                        </div>
                     </div>
                     <!-- end of side menu-->
                     <div id="left">
@@ -312,55 +220,55 @@
                     </div>
                     <!--log on menu-->
                     <div class="log_on_menu">
-                      <ul>
-                        <li id="login">
-                          <a id="login-trigger" href="#">
-                           {if ! isset($user_session.userid)}
-                               <div id="log_on_button"><i class="fa fa-user-circle fa-lg" aria-hidden="true" ></i>&nbsp; Guest<span>▼</span></div>
-                               <div id="log_on_button_480"><i class="fa fa-user-circle fa-lg" aria-hidden="true"></i></div>
-                           {else}
-                               {if $user_session.extension == ''}
-                                   <div id="log_on_button"><i class="fa fa-user-circle fa-lg" aria-hidden="true" style="color:green;"></i>&nbsp; {$user_session.userid}<span>▼</span></div>
-                                   <div id="log_on_button_480"><i class="fa fa-user-circle fa-lg" aria-hidden="true" style="color:green;" style="color:green;"></i></div>
-                               {else}
-                                   <div id="log_on_button"><img src="../../includes/show_image.php?file={$user_session.image}&amp;resize=23,null,null,null" alt="Avatar" class="log_on_avatar" style="display:inline;">&nbsp; {$user_session.userid}<span>▼</span></div>
-                                   <div id="log_on_button_480"><img src="../../includes/show_image.php?file={$user_session.image}&amp;resize=23,null,null,null" alt="Avatar" class="log_on_avatar" style="display:inline;"></div>
-                               {/if}
-                           {/if}
-                          </a>
-                          <div id="login-content">
-                            {if ! isset($user_session.userid)}
-                                <form action="../../common/login/user_process_login.php" method="post" name="login_form" onsubmit="formhash(this, this.password);">
-                                <fieldset>
-                                    <input class="standard_tile_input_small" type="text" name="userid" placeholder="Username" required>
-                                    <input class="standard_tile_input_small" type="password" name="password" placeholder="Password" required>
-                                    <div class="links_mod_checkbox">
-                                        <input type="checkbox" id="remember_me" name="remember_me" value="1">
-                                        <label for="remember_me"></label>&nbsp;Remember me
-                                    </div>
-                                    <br>
-                                    <input type="submit" value="Sign in" class="topbutton_cpanel_small">
-                                    <br><br>
-                                    <span class="log_on_text"><a href="../../main/front/front.php?action=reset" class="standard_tile_link_black"><i class="fa fa-angle-double-right" aria-hidden="true"></i>&nbsp;Forgot password?</a></span>
-                                    <br>
-                                    <span class="log_on_text"><a href="../../main/front/front.php?action=register" class="standard_tile_link_black"><i class="fa fa-angle-double-right" aria-hidden="true"></i>&nbsp;No account? Sign up now <i class="fa fa-chevron-right" aria-hidden="true"></i></a></span>
-                                </fieldset>
-                                </form>
-                            {else}
-                               <form action="../../common/login/user_process_logout.php" method="post" name="login_form">
-                               <fieldset>
-                                   <span class="log_on_text"><a href="../../main/front/front.php?" class="standard_tile_link_black"><i class="fa fa-desktop" aria-hidden="true"></i>&nbsp; Main site</a></span>
-                                   <br>
-                                   <span class="log_on_text"><a href="../../admin/user/user_detail.php?user_id_selected={$user_session.user_id}" class="standard_tile_link_black"><i class="fa fa-user-circle-o" aria-hidden="true"></i>&nbsp; User Profile</a></span>
-                                   <br><br>
-                                   <input type="hidden" name="action" value="cpanel">
-                                   <input type="Submit" value="Sign out" class="topbutton_cpanel_small">
-                               </fieldset>
-                               </form>
-                            {/if}
-                          </div>
-                        </li>
-                      </ul>
+                        <ul>
+                            <li id="login">
+                                <a id="login-trigger" href="#">
+                                    {if ! isset($user_session.userid)}
+                                        <div id="log_on_button"><i class="fa fa-user-circle fa-lg" aria-hidden="true" ></i>&nbsp; Guest<span>▼</span></div>
+                                        <div id="log_on_button_480"><i class="fa fa-user-circle fa-lg" aria-hidden="true"></i></div>
+                                    {else}
+                                        {if $user_session.extension == ''}
+                                            <div id="log_on_button"><i class="fa fa-user-circle fa-lg" aria-hidden="true" style="color:green;"></i>&nbsp; {$user_session.userid}<span>▼</span></div>
+                                            <div id="log_on_button_480"><i class="fa fa-user-circle fa-lg" aria-hidden="true" style="color:green;" style="color:green;"></i></div>
+                                        {else}
+                                            <div id="log_on_button"><img src="../../includes/show_image.php?file={$user_session.image}&amp;resize=23,null,null,null" alt="Avatar" class="log_on_avatar" style="display:inline;">&nbsp; {$user_session.userid}<span>▼</span></div>
+                                            <div id="log_on_button_480"><img src="../../includes/show_image.php?file={$user_session.image}&amp;resize=23,null,null,null" alt="Avatar" class="log_on_avatar" style="display:inline;"></div>
+                                        {/if}
+                                    {/if}
+                                </a>
+                                <div id="login-content">
+                                    {if ! isset($user_session.userid)}
+                                        <form action="../../common/login/user_process_login.php" method="post" name="login_form" onsubmit="formhash(this, this.password);">
+                                        <fieldset class="primary_fieldset">
+                                            <input class="standard_input input_large" type="text" name="userid" placeholder="Username" required>
+                                            <input class="standard_input input_large" type="password" name="password" placeholder="Password" required>
+                                            <div class="links_mod_checkbox">
+                                                <input type="checkbox" id="remember_me" name="remember_me" value="1">
+                                                <label for="remember_me"></label>&nbsp;Remember me
+                                            </div>
+                                            <br>
+                                            <input type="submit" value="Sign in" class="topbutton_cpanel_small">
+                                            <br><br>
+                                            <span class="log_on_text"><a href="../../main/front/front.php?action=reset" class="standard_tile_link_black"><i class="fa fa-angle-double-right" aria-hidden="true"></i>&nbsp;Forgot password?</a></span>
+                                            <br>
+                                            <span class="log_on_text"><a href="../../main/front/front.php?action=register" class="standard_tile_link_black"><i class="fa fa-angle-double-right" aria-hidden="true"></i>&nbsp;No account? Sign up now <i class="fa fa-chevron-right" aria-hidden="true"></i></a></span>
+                                        </fieldset>
+                                        </form>
+                                    {else}
+                                        <form action="../../common/login/user_process_logout.php" method="post" name="login_form">
+                                        <fieldset class="primary_fieldset">
+                                            <span class="log_on_text"><a href="../../main/front/front.php?" class="standard_tile_link_black"><i class="fa fa-desktop" aria-hidden="true"></i>&nbsp; Main site</a></span>
+                                            <br>
+                                            <span class="log_on_text"><a href="../../admin/user/user_detail.php?user_id_selected={$user_session.user_id}" class="standard_tile_link_black"><i class="fa fa-user-circle-o" aria-hidden="true"></i>&nbsp; User Profile</a></span>
+                                            <br><br>
+                                            <input type="hidden" name="action" value="cpanel">
+                                            <input type="Submit" value="Sign out" class="topbutton_cpanel_small">
+                                        </fieldset>
+                                        </form>
+                                    {/if}
+                                </div>
+                            </li>
+                        </ul>
                     </div>
                     <!-- end of log on menu-->
                     {assign var='number' value=1|rand:5}
@@ -473,7 +381,7 @@
             <div class="footer_logo">
                 <br><br><br>
                 <div class="footer_logo_image"></div>
-                <h3>&copy; copyright 2004 - {'Y'|date} </h3>
+                <h3>&copy; copyright 2004 - {'Y'|date} <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank"><img class="license" src="{$style_dir}images/cc-by-nc-sa.png" alt="Creative Commons License"></a></h3>
             </div>
         </footer>
         <div class="scroll-top-wrapper "> <!--back to top link -->
@@ -481,5 +389,27 @@
                 <i class="fa fa-2x fa-arrow-circle-up"></i>
             </span>
         </div>
+
+        <script src="{$template_dir}includes/js/vendor/md5-1.0.1.min.js"></script>  <!-- log on security script -->
+        <script src="{$template_dir}includes/js/vendor/sha512-2.2.min.js"></script> <!-- log on security script -->
+        <script src="{$template_dir}includes/js/vendor/jquery-ui-1.11.4.min.js"></script> <!-- main jqueryUI stuff -->
+        <script src="{$template_dir}includes/js/vendor/notify-osd-51f8de7.min.js"></script>
+
+        {if isset($edit_message)}
+            <script> <!-- script needed for the side menu -->
+                $( document ).ready(function() {
+                    $.notify_osd.create({
+                        'text'        : '{$edit_message|escape:'quotes'}',             // notification message
+                        'icon'        : '{$style_dir}/images/osd_icons/star.png', // icon path, 48x48
+                        'sticky'      : false,             // if true, timeout is ignored
+                        'timeout'     : 4,                 // disappears after 6 seconds
+                        'dismissable' : true               // can be dismissed manually
+                        });
+                });
+            </script>
+        {/if}
+
+        <script src="{$template_dir}includes/js/forms.js"></script> <!-- log on security script -->
+        <script src="{$template_dir}includes/js/main.js"></script>
     </body>
 </html>

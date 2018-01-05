@@ -9,7 +9,7 @@
 *
 *   Id: interviews_edit.html,v 0.10 2005/07/22 13:40 Gatekeeper
 *   Id: interviews_edit.html,v 0.20 2016/08/02 23:03 Gatekeeper
-*		- AL 2.0
+*       - AL 2.0
 *   Id: interviews_edit.html,v 0.21 2017/06/16 19:38 ST Graveyard
 *                   added the [frontpage] functionality
 *   Id: interviews_edit.html,v 0.22 2017/08/19 15:02 ST Graveyard
@@ -27,19 +27,19 @@
 
 {block name=java_script}
 <!-- Lightbox for the screenshots -->
-<script type="text/javascript" src="{$template_dir}includes/js/vendor/lightbox-2.9.0.min.js"></script><!--lightbox popup script-->
+<script src="{$template_dir}includes/js/vendor/lightbox-2.9.0.min.js"></script><!--lightbox popup script-->
 <link type="text/css" href="{$style_dir}css/vendor/lightbox-2.9.0.css" hreflang="en" rel="stylesheet">
 <script>
     lightbox.option({
-      'showImageNumberLabel': false
+        'showImageNumberLabel': false
     })
 </script>
 
 <!-- Load the BBCODE script -->
-<script type="text/javascript" src="{$template_dir}includes/js/bbcode.js"></script>
+<script src="{$template_dir}includes/js/bbcode.js"></script>
 
 <!-- All the code for the tabs and the preview -->
-<script type="text/javascript">
+<script>
     function openTab(evt, tabName)
     {
         // Declare all variables
@@ -52,7 +52,7 @@
         }
 
         // Get all elements with class="tablinks" and remove the class "active"
-         tablinks = document.getElementsByClassName("tablinks");
+        tablinks = document.getElementsByClassName("tablinks");
         for (i = 0; i < tablinks.length; i++) {
             tablinks[i].className = tablinks[i].className.replace(" active", "");
         }
@@ -73,16 +73,16 @@
             document.getElementById("interview_preview_date").innerHTML += '-';
             var year = document.getElementsByName("Date_Year")[0].value;
             document.getElementById("interview_preview_date").innerHTML += year;
-            
+
             var user = document.getElementById("member_select");
             var strUser = user.options[user.selectedIndex].text;
             document.getElementById("interview_preview_user").innerHTML = strUser;
-            
+
             //Do all the preps for the intro text!
             var intro = document.getElementsByName("textintro")[0].value;
             intro = previewText(intro);
             document.getElementById("interview_preview_intro").innerHTML = intro;
-            
+
             //Do all the preps for the chapters text!
             var chapters = document.getElementsByName("textchapters")[0].value;
             chapters = previewText(chapters);
@@ -92,32 +92,32 @@
             var interview = document.getElementsByName("textfield")[0].value;
             interview = previewText(interview);
             document.getElementById("interview_preview_text").innerHTML = interview;
-            
+
             //get the screenshots data
             for (i = 1; i <= {$screenshots_nr}; i++)
             {
-               var string = "comment_";
-               var string_comment = string.concat(i);
-               var comment = document.getElementById(string_comment).value;
+                var string = "comment_";
+                var string_comment = string.concat(i);
+                var comment = document.getElementById(string_comment).value;
 
-               if (comment == '')
-               {
+                if (comment == '')
+                {
                     var string3 = "output_";
                     var string_output = string3.concat(i);
                     var output = document.getElementById(string_output);
                     output.style.display='none';
-               }
-               else
-               {
-                   var string2 = "preview_comment_";
-                   var string_preview_comment = string2.concat(i);
-                   document.getElementById(string_preview_comment).innerHTML = comment;
+                }
+                else
+                {
+                    var string2 = "preview_comment_";
+                    var string_preview_comment = string2.concat(i);
+                    document.getElementById(string_preview_comment).innerHTML = comment;
 
-                   var string3 = "output_";
-                   var string_output = string3.concat(i);
-                   var output = document.getElementById(string_output);
-                   output.style.display='inline';
-               }
+                    var string3 = "output_";
+                    var string_output = string3.concat(i);
+                    var output = document.getElementById(string_output);
+                    output.style.display='inline';
+                }
             }
         }
     }
@@ -125,8 +125,8 @@
 
 
 <!-- The autocomplete and dropdown switcher -->
-<script type='text/JavaScript' src="{$template_dir}includes/js/ui.widgets.js"></script>
-<script type="text/javascript">
+<script src="{$template_dir}includes/js/ui.widgets.js"></script>
+<script>
     $(document).ready(function() {
         $("select[name=members]").altAutocomplete();
         $("select[name=individual]").altAutocomplete();
@@ -134,34 +134,34 @@
 </script>
 
 <!-- Delete the comments and the interview -->
-<script type="text/javascript">
+<script>
 function deletecomment(screenshot_id, interview_id)
 {
-	// CONFIRM REQUIRES ONE ARGUMENT
+    // CONFIRM REQUIRES ONE ARGUMENT
     var message = "Are you sure you want to delete the screenshot with its comment?";
     // CONFIRM IS BOOLEAN. THAT MEANS THAT
     // IT RETURNS TRUE IF 'OK' IS CLICKED
     // OTHERWISE IT RETURN FALSE
     var return_value = confirm(message);
-	if (return_value !="0")
+    if (return_value !="0")
     {
-      	url="db_interview.php?interview_id="+interview_id+"&screenshot_id="+screenshot_id+"&action=delete_screenshot_comment";
-		location.href=url;
+        url="db_interview.php?interview_id="+interview_id+"&screenshot_id="+screenshot_id+"&action=delete_screenshot_comment";
+        location.href=url;
     }
 }
 
 function deleteinterview(interview_id)
 {
-	// CONFIRM REQUIRES ONE ARGUMENT
+    // CONFIRM REQUIRES ONE ARGUMENT
     var message = "Are you sure you want to delete this interview?";
     // CONFIRM IS BOOLEAN. THAT MEANS THAT
     // IT RETURNS TRUE IF 'OK' IS CLICKED
     // OTHERWISE IT RETURN FALSE
     var return_value = confirm(message);
-	if (return_value !="0")
+    if (return_value !="0")
     {
-      	url="db_interview.php?action=delete_interview&interview_id="+interview_id;
-		location.href=url;
+        url="db_interview.php?action=delete_interview&interview_id="+interview_id;
+        location.href=url;
     }
 }
 
@@ -198,7 +198,7 @@ function closeAddScreenshots(str) {
 
 //Save the screenshots to the interview
 function addScreenshottoInterview(interview_id) {
- if (interview_id == "") {
+    if (interview_id == "") {
         document.getElementById("interview_screenshot_list").innerHTML = "";
         return;
     } else {
@@ -235,13 +235,13 @@ function addScreenshottoInterview(interview_id) {
 }
 
 //the code for the screenshot selector
-function myFunction() {  
+function myFunction() {
     $but = $('#file_upload_game_file');
-  
+
     $("input:file[id=file_upload]").change(function() {
         document.getElementById('file_upload_game_screenshots').value = 'file(s) selected';
     });
-    
+
     $("input:file[id=file_upload2]").change(function() {
         document.getElementById('file_upload_game_file').value = $(this).val();
     });
@@ -285,7 +285,7 @@ function myFunction() {
         {if isset($interview.interview_ind_name)}
         <h1><a href="../individuals/individuals_edit.php?ind_id={$interview.interview_ind_id}" class="standard_tile_link">{$interview.interview_ind_name|upper}</a></h1>
         <div class="standard_tile_line"></div>
-        <div class="standard_tile_text">
+        <div class="standard_tile_padding">
             <div class="left_nav_section">
                 At this page you can change an existing interview in the AL database. The screen might seem a little complex,
                 therefor I suggest you first read the help provided with this section on the top right.
@@ -293,15 +293,15 @@ function myFunction() {
             <br>
             <br>
             <div class="tab">
-              <button class="tablinks" onclick="openTab(event, 'edit')" id="defaultOpen">EDIT</button>
-              <button class="tablinks" onclick="openTab(event, 'preview')">PREVIEW</button>
+                <button class="tablinks" onclick="openTab(event, 'edit')" id="defaultOpen">EDIT</button>
+                <button class="tablinks" onclick="openTab(event, 'preview')">PREVIEW</button>
             </div>
             <br>
             <br>
             <div id="edit" class="tabcontent">
                 <form action="../interviews/db_interview.php" method="post" name="post" id="screenshot_add_to_interview">
-                    <fieldset>
-                        <legend>Edit interview</legend>
+                    <fieldset class="primary_fieldset">
+                        <legend class="primary_legend">Edit interview</legend>
                         <br>
                         <div style="display:inline-block;">
                             <b>Written by : </b>
@@ -309,7 +309,7 @@ function myFunction() {
                             <select name="members"
                                 data-alt-autocomplete-endpoint="../../../php/admin/common/autocomplete.php?extraParams=admin-user"
                                 data-alt-autocomplete-toggle="#members_select_toggle"
-                                id="member_select">
+                                id="member_select" class="standard_select select_large">
                                 <option value="-">-</option>
                                 {foreach from=$authors item=line}
                                     {if $line.user_id == $interview.interview_author}
@@ -326,26 +326,26 @@ function myFunction() {
                         <div style="display:inline-block;">
                             <b>Individual :</b>
                             <br>
-                            <select name="individual" 
+                            <select name="individual"
                                 data-alt-autocomplete-endpoint="../../../php/admin/common/autocomplete.php?extraParams=individual"
                                 data-alt-autocomplete-toggle="#individual_select_toggle"
-                                id="member_select">>
+                                id="member_select" class="standard_select select_large">
                                 <option value="-">-</option>
                                 {foreach from=$individuals item=line}
-                                  {if $line.ind_id == $interview.interview_ind_id}
-                                    <option value="{$line.ind_id}" selected>{$line.ind_name}</option>
-                                  {else}
-                                    <option value="{$line.ind_id}">{$line.ind_name}</option>
-                                  {/if}
-                                {/foreach}          
+                                    {if $line.ind_id == $interview.interview_ind_id}
+                                        <option value="{$line.ind_id}" selected>{$line.ind_name}</option>
+                                    {else}
+                                        <option value="{$line.ind_id}">{$line.ind_name}</option>
+                                    {/if}
+                                {/foreach}
                             </select>
                             <a href="javascript:;" class="left_nav_link" id="individual_select_toggle" ><i class="fa fa-chevron-circle-down" aria-hidden="true" ></i></a>
                             <br>
                             <br>
                         </div>
                         <div style="width:100%;">
-                            <div style="width:20%;"><b>Date :</b></div>
-                            <div style="width:200px;">{html_select_date time=$interview.interview_date start_year="2000"}</div>
+                            <div><b>Date :</b></div>
+                            <div>{html_select_date time=$interview.interview_date start_year="2000" class="standard_select"}</div>
                         </div>
                         <br>
                         <br>
@@ -382,12 +382,12 @@ function myFunction() {
                         <textarea name="textfield" id="game_review_textfield" ONSELECT="javascript:storeCaret(this);" ONCLICK="javascript:storeCaret(this);" ONKEYUP="javascript:storeCaret(this);" ONCHANGE="javascript:storeCaret(this);" rows="15" style="padding-left:0px;">{$interview.interview_text}</textarea>
                     </fieldset>
                     <br>
-                    <fieldset class="centered_fieldset">
-                        <legend>Screenshots</legend>
+                    <fieldset class="primary_fieldset centered_fieldset">
+                        <legend class="primary_legend">Screenshots</legend>
                         <br>
                         <div id="interview_screenshot_list">
                         {if $screenshots_nr <> ''}
-                            <table class="standard_table_list_no_hover">
+                            <table class="primary_table_list">
                             {foreach from=$screenshots item=line}
                                 <tr>
                                     <td style="width:1%;border:0;">
@@ -401,8 +401,8 @@ function myFunction() {
                                         </a>
                                     </td>
                                     <td style="width:90%;border:0;">
-                                        <input type="text" name="inputfield[]" value="{$line.interview_screenshot_comment}" class="standard_tile_input_small" style="width:95%;" id="comment_{$line.interview_screenshot_count}">
-                                    </td> 
+                                        <input type="text" name="inputfield[]" value="{$line.interview_screenshot_comment}" class="standard_input input_large" style="width:95%;" id="comment_{$line.interview_screenshot_count}">
+                                    </td>
                                 </tr>
                             {/foreach}
                             </table>
@@ -421,8 +421,8 @@ function myFunction() {
                 </form>
             </div>
             <div id="preview" class="tabcontent">
-                <fieldset>
-                    <legend>Preview</legend>
+                <fieldset class="primary_fieldset">
+                    <legend class="primary_legend">Preview</legend>
                     <div class="review_container">
                         <div class="review_child" id="review_text">
                             Written by <span id="interview_preview_user"></span>
@@ -447,7 +447,7 @@ function myFunction() {
                             <div id="interview_preview_text"></div>
                             <br>
                             <br>
-                        </div>	
+                        </div>
                         <div class="review_child" id="review_screenshots">
                             <div class="review_screenshot_space">
                                 <br>
@@ -455,7 +455,7 @@ function myFunction() {
                                 <br>
                             </div>
                             {if isset($screenshots)}
-                                {foreach from=$screenshots item=line} 
+                                {foreach from=$screenshots item=line}
                                     <div id="output_{$line.interview_screenshot_count}">
                                         <div class="interview_preview_screenshot_order">
                                             <a href="../../includes/show_image.php?file={$line.interview_screenshot}" data-lightbox="image-1">
@@ -469,8 +469,8 @@ function myFunction() {
                                     </div>
                                 {/foreach}
                             {/if}
-                        </div>		
-                    </div>	
+                        </div>
+                    </div>
                     <br>
                 </fieldset>
             </div>
@@ -478,13 +478,13 @@ function myFunction() {
             {else}
                 <h1>Interview edit</h1>
                 <div class="standard_tile_line"></div>
-                <div class="standard_tile_text">
+                <div class="standard_tile_padding">
                     <div class="left_nav_section">
                         Interview does not exist.
                     </div>
                 </div>
             {/if}
-            <div class="standard_table_center"><a href="../interviews/interviews_main.php" class="standard_tile_link">back</a></div>
+            <div class="standard_tile_text_center"><a href="../interviews/interviews_main.php" class="standard_tile_link">back</a></div>
             <br>
         </div>
     </div>

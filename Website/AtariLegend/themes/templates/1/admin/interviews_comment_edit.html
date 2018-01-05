@@ -1,19 +1,19 @@
-{* 
+{*
 /***************************************************************************
- *                                interviews_comment_edit.html
- *                            ----------------------------------
- *   begin                : monday, August 21, 2017 
- *   copyright            : (C) 2017 Atari Legend
- *   email                : admin@atarilegend.com
- *	 actual update        : Creation of file
- *
- *   Id: interviews_comment_edit.html,v 0.10 2017/08/21 23:00 STG
- *
- ***************************************************************************/
+*                            interviews_comment_edit.html
+*                            ----------------------------------
+*   begin                : monday, August 21, 2017
+*   copyright            : (C) 2017 Atari Legend
+*   email                : admin@atarilegend.com
+*   actual update        : Creation of file
+*
+*   Id: interviews_comment_edit.html,v 0.10 2017/08/21 23:00 STG
+*
+***************************************************************************/
 
 //****************************************************************************************
 // This is the main games comments page
-//**************************************************************************************** 
+//****************************************************************************************
 *}
 
 {extends file='1/admin/frontpage.html'}
@@ -21,30 +21,30 @@
 {block name=main_tile}
 
 <div class="standard_tile" id="games_comment_edit">
-	<h1>EDIT INTERVIEW COMMENTS</h1>
-	<div class="standard_tile_line"></div>
-	<div class="standard_tile_text">
-		<div class="left_nav_section">
-			Comment by {$comments.user_name} on {$comments.ind_name} on {$comments.date}
-		</div>
-		<br>
-		<br>
-		<form action="../interviews/db_interviews_comment.php" method="post" name="editinterviews_comment" id="editinterviews_comment">
-			<textarea name="comment_text" class="links_addnew_area" id="gce_area">{$comments.comment}</textarea>
-			<br>
-			<br>
-			<input type="hidden" name="action" id="action" value="edit_interviews_comment">
-			<input type="hidden" name="users_id" value="{$comments.users_id}">
-			<input type="hidden" name="view" value="{$comments.view}">
-			<input type="hidden" name="interview_user_comments_id" value="{$comments.interview_user_comments_id}">
-			<input type="hidden" name="c_counter" value="{$comments.c_counter}">
-			<input type="hidden" name="v_counter" value="{$comments.v_counter}">
-			<input type="hidden" name="comment_id" value="{$comments.comment_id}">
-			<input type="submit" value="Update" class="quick_search_games_button" id="gce_button">
-			<input type="reset" value="Reset" class="quick_search_games_button" id="gce_button2">
-		</form>
-		<br>
-		<div class="standard_table_center"><a href="javascript:history.go(-1)" class="standard_tile_link">back</a></div>
-	</div>
+    <h1>EDIT INTERVIEW COMMENTS</h1>
+    <div class="standard_tile_line"></div>
+    <div class="standard_tile_padding">
+        <div class="left_nav_section">
+            Comment by {$comments.user_name} on {$comments.ind_name} on {$comments.date}
+        </div>
+        <br>
+        <br>
+        <form action="../interviews/db_interviews_comment.php" method="post" name="editinterviews_comment" id="editinterviews_comment">
+            <textarea name="comment_text" class="links_addnew_area" id="gce_area">{$comments.comment}</textarea>
+            <br>
+            <br>
+            <input type="hidden" name="action" id="action" value="edit_interviews_comment">
+            <input type="hidden" name="users_id" value="{$comments.users_id}">
+            <input type="hidden" name="view" value="{$comments.view}">
+            <input type="hidden" name="interview_user_comments_id" value="{$comments.interview_user_comments_id}">
+            <input type="hidden" name="c_counter" value="{$comments.c_counter}">
+            <input type="hidden" name="v_counter" value="{$comments.v_counter}">
+            <input type="hidden" name="comment_id" value="{$comments.comment_id}">
+            <input type="submit" value="Update" class="quick_search_games_button" id="gce_button">
+            <input type="reset" value="Reset" class="quick_search_games_button" id="gce_button2">
+        </form>
+        <br>
+        <div class="standard_tile_text_center"><a href="javascript:history.go(-1)" class="standard_tile_link">back</a></div>
+    </div>
 </div>
 {/block}

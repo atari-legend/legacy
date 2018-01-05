@@ -50,7 +50,6 @@ if (isset($action)) {
                                 WHERE interview_user_comments.interview_id = '$interview_id'
                                 ORDER BY comments.timestamp desc") or die("Syntax Error! Couldn't not get the comments!");
 
-
     while ($query_comment = $sql_comment->fetch_array(MYSQLI_BOTH)) {
         $oldcomment = $query_comment['comment'];
         $oldcomment = nl2br($oldcomment);
@@ -71,22 +70,19 @@ if (isset($action)) {
 
         $date = date("d/m/y", $query_comment['timestamp']);
 
-        $smarty->append(
-
-        'comments',
-        array('comment' => $oldcomment,
-              'comment_edit' => $comment,
-              'comment_id' => $query_comment['comment_id'],
-              'date' => $date,
-              'user_name' => $query_comment['userid'],
-              'user_id' => $query_comment['user_id'],
-              'user_fb' => $query_comment['user_fb'],
-              'user_website' => $query_comment['user_website'],
-              'user_twitter' => $query_comment['user_twitter'],
-              'user_af' => $query_comment['user_af'],
-              'email' => $query_comment['email'])
-
-    );
+        $smarty->append('comments', array(
+            'comment' => $oldcomment,
+            'comment_edit' => $comment,
+            'comment_id' => $query_comment['comment_id'],
+            'date' => $date,
+            'user_name' => $query_comment['userid'],
+            'user_id' => $query_comment['user_id'],
+            'user_fb' => $query_comment['user_fb'],
+            'user_website' => $query_comment['user_website'],
+            'user_twitter' => $query_comment['user_twitter'],
+            'user_af' => $query_comment['user_af'],
+            'email' => $query_comment['email']
+        ));
     }
 
     $smarty->assign('smarty_action', 'delete_comment');

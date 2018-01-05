@@ -1,4 +1,4 @@
-{* 
+{*
 /***************************************************************************
 *                               statistics_tile.html
 *                            -----------------------------
@@ -8,29 +8,29 @@
 *   actual update        : Creation of file
 *
 *   Id: statistics_tile.html,v 0.1 2015/04/15 00:04 ST Graveyard
-*	Id: statistics_tile.html,v 0.2 2015/12/05 ST Graveyard - HTML validated
+*   Id: statistics_tile.html,v 0.2 2015/12/05 ST Graveyard - HTML validated
 *
 ***************************************************************************/
 
 //****************************************************************************************
 // This is the 'statistics' tile
-//**************************************************************************************** 
+//****************************************************************************************
 *}
 {block name=statistics_tile}
-<div class="{$statistics_tile}">	
-	<div class="standard_tile">
-		<h1>STATISTICS</h1>
-		<div class="standard_tile_line"></div>
-		<div class="standard_list_entry">
-            <table class="standard_table_list_stats">
+<div class="{$statistics_tile}">
+    <div class="standard_tile">
+        <h1>STATISTICS</h1>
+        <div class="standard_tile_line"></div>
+                {assign var="number" value=1}
             {foreach from=$statistics item=line}
-                <tr>
-                    <td class="standard_table_center" style="padding-top:3px; padding-bottom:3px;"><span class="stats_text">{if $line.value != ''}{$line.value}{/if}</span></td>
-                </tr>
+
+                    <div {if $number is even}class="statistics_list_entry"{else}class="statistics_list_entry_odd "{/if}>
+                        <span class="stats_text">{if $line.value != ''}{$line.value}{/if}</span>
+
+                    </div>
+                {$number=$number+1}
             {/foreach}
-            </table>
-		</div>
-	<div class="standard_tile_line"></div>
-	</div>	
+    <div class="standard_tile_line"></div>
+    </div>
 </div>
 {/block}

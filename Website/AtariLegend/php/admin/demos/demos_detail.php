@@ -40,7 +40,6 @@ $sql_demo = $mysqli->query("SELECT
                            LEFT JOIN demo_year ON (demo.demo_id = demo_year.demo_id)
                            WHERE demo.demo_id='$demo_id'") or die("Error getting demo info");
 
-
 while ($demo_info = $sql_demo->fetch_array(MYSQLI_BOTH)) {
     $demo_year = $demo_info['demo_year'];
     $demo_year .= '01';

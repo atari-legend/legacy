@@ -36,7 +36,7 @@ rules:
     - filename-extension: false
       leading-underscore: false
   empty-line-between-blocks:
-    - 1
+    - 0
     - ignore-single-line-rulesets: true
   extends-before-declarations: 1
   extends-before-mixins: 1
@@ -52,7 +52,7 @@ rules:
       convention: snakecase
   hex-length:
     - 1
-    - style: short
+    - style: long
   hex-notation:
     - 1
     - style: lowercase
@@ -103,10 +103,6 @@ rules:
   placeholder-name-format:
     - 1
     - convention: snakecase
-  property-sort-order:
-    - 1
-    - order: recess
-    - ignore-custom-properties: false
   property-units:
     - 1
     - global:

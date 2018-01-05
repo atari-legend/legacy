@@ -1,6 +1,6 @@
 {*
 /***************************************************************************
-                              games_main.html
+*                            games_main.html
 *                            --------------------------
 *   begin                : Sunday, August 28, 2005
 *   copyright            : (C) 2005 Atari Legend
@@ -25,218 +25,202 @@ The main game page
 {/block}
 
 {block name=right_tile}
-	{include file='1/admin/quick_search_users.html'}
+    {include file='1/admin/quick_search_users.html'}
 {/block}
 
 {block name=main_tile}
 <div class="standard_tile" id="games_main">
-	<h1>ADD/EDIT A GAME</h1>
-	<div class="standard_tile_line"></div>
-	<div class="standard_tile_text">
-		<div class="left_nav_section">
-			In this section you can add or edit a game. Search for a game by using any of the
-			functionalities below. Combinations are allowed. There are currently <b>{$games_nr}</b> games
-			in the Database.
-		</div>
-		<br>
-		<br>
-		<form action="../games/games_list.php" method="get" name="game_search">
-		<div id="games_main_parent">
-			<fieldset>
-			<legend>Search games</legend>
-			<br>
-			<div class="games_main_row">
-				<div class="games_main_text">By Name :</div>
-				<div class="games_main_input">
-					<select name="gamebrowse" id="games_main_small_select">
-						<option value="" SELECTED>-</option>
-						{html_options values=$az_value output=$az_output}
-					</select>
-					<input type="text" name="gamesearch" value="" class="standard_tile_input_small">
-				</div>
-			</div>
-			<div class="games_main_row">
-				<div class="games_main_text">By Publisher :</div>
-				<div class="games_main_input">
-					<select name="publisher" id="games_main_pub_select">
-						<option value="-" SELECTED>-</option>
-						{foreach from=$company_publisher item=line}
-							<option value="{$line.comp_id}">{$line.comp_name}</option>
-						{/foreach}
-					</select>
-				</div>
-			</div>
-			<div class="games_main_row">
-				<div class="games_main_text">By Developer :</div>
-				<div class="games_main_input">
-					<select name="developer" id="games_main_dev_select">
-						<option value="-" SELECTED>-</option>
-						{foreach from=$company_developer item=line}
-							<option value="{$line.comp_id}">{$line.comp_name}</option>
-						{/foreach}
-					</select>
-				</div>
-			</div>
-			<br>
-			<br>
-			<div class="games_check_container">
-				<div class="games_check_child" id="child_1">
-					<div class="games_check_row">
-						<div class="links_mod_checkbox">
+    <h1>ADD/EDIT A GAME</h1>
+    <div class="standard_tile_line"></div>
+    <div class="standard_tile_padding">
+        <div class="left_nav_section">
+            In this section you can add or edit a game. Search for a game by using any of the
+            functionalities below. Combinations are allowed. There are currently <b>{$games_nr}</b> games
+            in the Database.
+        </div>
+        <br>
+        <br>
+        <form action="../games/games_list.php" method="get" name="game_search">
+        <div id="games_main_parent">
+            <fieldset class="primary_fieldset">
+            <legend class="primary_legend">Search games</legend>
+            <br>
+            <div class="games_main_row">
+                <div class="games_main_text">By Name :</div>
+                <div class="games_main_input">
+                    <select name="gamebrowse" class="standard_select select_small">
+                        <option value="" SELECTED>-</option>
+                        {html_options values=$az_value output=$az_output}
+                    </select>
+                    <input type="text" name="gamesearch" value="" class="standard_input input_large">
+                </div>
+            </div>
+            <div class="games_main_row">
+                <div class="games_main_text">By Publisher :</div>
+                <div class="games_main_input">
+                    <select name="publisher" class="standard_select select_large">
+                        <option value="-" SELECTED>-</option>
+                        {foreach from=$company_publisher item=line}
+                            <option value="{$line.comp_id}">{$line.comp_name}</option>
+                        {/foreach}
+                    </select>
+                </div>
+            </div>
+            <div class="games_main_row">
+                <div class="games_main_text">By Developer :</div>
+                <div class="games_main_input">
+                    <select name="developer" class="standard_select select_large">
+                        <option value="-" SELECTED>-</option>
+                        {foreach from=$company_developer item=line}
+                            <option value="{$line.comp_id}">{$line.comp_name}</option>
+                        {/foreach}
+                    </select>
+                </div>
+            </div>
+            <br>
+            <br>
+            <div class="games_check_container">
+                <div class="games_check_child" id="child_1">
+                    <div class="games_check_row">
+                        <div class="links_mod_checkbox">
                             <input type="checkbox" id="falcon_only" name="falcon_only" value="1">
                             <label for="falcon_only"></label>
-                            <!--<input type="checkbox" name="falcon_only" value="1" class="quick_search_check">-->
                         </div>
-						<div class="games_check_text">&nbsp; Falcon only</div>
-					</div>
+                        <div class="games_check_text">&nbsp; Falcon only</div>
+                    </div>
                     <div class="games_check_row">
-						<div class="links_mod_checkbox">
+                        <div class="links_mod_checkbox">
                             <input type="checkbox" id="falcon_rgb" name="falcon_rgb" value="1">
                             <label for="falcon_rgb"></label>
-                            <!--<input type="checkbox" name="falcon_rgb" value="1" class="quick_search_check">-->
                         </div>
-						<div class="games_check_text">&nbsp; Falcon RGB</div>
-					</div>
-					<div class="games_check_row">
+                        <div class="games_check_text">&nbsp; Falcon RGB</div>
+                    </div>
+                    <div class="games_check_row">
                         <div class="links_mod_checkbox">
                             <input type="checkbox" id="ste_only" name="ste_only" value="1">
                             <label for="ste_only"></label>
-                            <!--<input type="checkbox" name="ste_only" value="1" class="quick_search_check">-->
                         </div>
-						<div class="games_check_text">&nbsp; STE only</div>
-					</div>
-					<div class="games_check_row">
-						<div class="links_mod_checkbox">
+                        <div class="games_check_text">&nbsp; STE only</div>
+                    </div>
+                    <div class="games_check_row">
+                        <div class="links_mod_checkbox">
                             <input type="checkbox" id="free" name="free" value="1">
                             <label for="free"></label>
-                            <!--<input type="checkbox" name="free" value="1" class="quick_search_check">-->
                         </div>
-						<div class="games_check_text">&nbsp; Non-Commercial</div>
-					</div>
-					<div class="games_check_row">
-						<div class="links_mod_checkbox">
+                        <div class="games_check_text">&nbsp; Non-Commercial</div>
+                    </div>
+                    <div class="games_check_row">
+                        <div class="links_mod_checkbox">
                             <input type="checkbox" id="development" name="development" value="1">
                             <label for="development"></label>
-                            <!--<input type="checkbox" name="development" value="1" class="quick_search_check">-->
                         </div>
-						<div class="games_check_text">&nbsp; In development</div>
-					</div>
-					<div class="games_check_row">
-						<div class="links_mod_checkbox">
+                        <div class="games_check_text">&nbsp; In development</div>
+                    </div>
+                    <div class="games_check_row">
+                        <div class="links_mod_checkbox">
                             <input type="checkbox" id="unreleased" name="unreleased" value="1">
                             <label for="unreleased"></label>
-                            <!--<input type="checkbox" name="unreleased" value="1" class="quick_search_check">-->
                         </div>
-						<div class="games_check_text">&nbsp; Unreleased</div>
-					</div>
-					<div class="games_check_row">
-						<div class="links_mod_checkbox">
+                        <div class="games_check_text">&nbsp; Unreleased</div>
+                    </div>
+                    <div class="games_check_row">
+                        <div class="links_mod_checkbox">
                             <input type="checkbox" id="monochrome" name="monochrome" value="1">
                             <label for="monochrome"></label>
-                            <!--<input type="checkbox" name="monochrome" value="1" class="quick_search_check">-->
                         </div>
-						<div class="games_check_text">&nbsp; Monochrome</div>
-					</div>
-					<div class="games_check_row">
-						<div class="links_mod_checkbox">
+                        <div class="games_check_text">&nbsp; Monochrome</div>
+                    </div>
+                    <div class="games_check_row">
+                        <div class="links_mod_checkbox">
                             <input type="checkbox" id="stos" name="stos" value="1">
                             <label for="stos"></label>
-                            <!--<input type="checkbox" name="stos" value="1" class="quick_search_check">-->
                         </div>
-						<div class="games_check_text">&nbsp; STOS</div>
-					</div>
-				</div>
-				<div class="games_check_child" id="child_2">
-					<div class="games_check_row">
-						<div class="links_mod_checkbox">
+                        <div class="games_check_text">&nbsp; STOS</div>
+                    </div>
+                </div>
+                <div class="games_check_child" id="child_2">
+                    <div class="games_check_row">
+                        <div class="links_mod_checkbox">
                             <input type="checkbox" id="falcon_enhanced" name="falcon_enhanced" value="1">
                             <label for="falcon_enhanced"></label>
-                           <!--<input type="checkbox" name="falcon_enhanced" value="1" class="quick_search_check">-->
                         </div>
-						<div class="games_check_text">&nbsp; Falcon Enhanced</div>
-					</div>
+                        <div class="games_check_text">&nbsp; Falcon Enhanced</div>
+                    </div>
                     <div class="games_check_row">
-						<div class="links_mod_checkbox">
+                        <div class="links_mod_checkbox">
                             <input type="checkbox" id="falcon_vga" name="falcon_vga" value="1">
                             <label for="falcon_vga"></label>
-                            <!--<input type="checkbox" name="falcon_vga" value="1" class="quick_search_check">-->
                         </div>
-						<div class="games_check_text">&nbsp; Falcon VGA</div>
-					</div>
-					<div class="games_check_row">
-						<div class="links_mod_checkbox">
+                        <div class="games_check_text">&nbsp; Falcon VGA</div>
+                    </div>
+                    <div class="games_check_row">
+                        <div class="links_mod_checkbox">
                             <input type="checkbox" id="ste_enhanced" name="ste_enhanced" value="1">
                             <label for="ste_enhanced"></label>
-                            <!--<input type="checkbox" name="ste_enhanced" value="1" class="quick_search_check">-->
                         </div>
-						<div class="games_check_text">&nbsp; STE Enhanced</div>
-					</div>
-					<div class="games_check_row">
-						<div class="links_mod_checkbox">
+                        <div class="games_check_text">&nbsp; STE Enhanced</div>
+                    </div>
+                    <div class="games_check_row">
+                        <div class="links_mod_checkbox">
                             <input type="checkbox" id="arcade" name="arcade" value="1">
                             <label for="arcade"></label>
-                            <!--<input type="checkbox" name="arcade" value="1" class="quick_search_check">-->
                         </div>
-						<div class="games_check_text">&nbsp; Arcade Conversion</div>
-					</div>
-					<div class="games_check_row">
-						<div class="links_mod_checkbox">
+                        <div class="games_check_text">&nbsp; Arcade Conversion</div>
+                    </div>
+                    <div class="games_check_row">
+                        <div class="links_mod_checkbox">
                             <input type="checkbox" id="wanted" name="wanted" value="1">
                             <label for="wanted"></label>
-                            <!--<input type="checkbox" name="wanted" value="1" class="quick_search_check">-->
                         </div>
-						<div class="games_check_text">&nbsp; Wanted</div>
-					</div>
-					<div class="games_check_row">
-						<div class="links_mod_checkbox">
+                        <div class="games_check_text">&nbsp; Wanted</div>
+                    </div>
+                    <div class="games_check_row">
+                        <div class="links_mod_checkbox">
                             <input type="checkbox" id="unfinished" name="unfinished" value="1">
                             <label for="unfinished"></label>
-                            <!--<input type="checkbox" name="unfinished" value="1" class="quick_search_check">-->
                         </div>
-						<div class="games_check_text">&nbsp; Unfinished/Rumoured</div>
-					</div>
-					<div class="games_check_row">
-						<div class="links_mod_checkbox">
+                        <div class="games_check_text">&nbsp; Unfinished/Rumoured</div>
+                    </div>
+                    <div class="games_check_row">
+                        <div class="links_mod_checkbox">
                             <input type="checkbox" id="seuck" name="seuck" value="1">
                             <label for="seuck"></label>
-                            <!--<input type="checkbox" name="seuck" value="1" class="quick_search_check">-->
                         </div>
-						<div class="games_check_text">&nbsp; SEUCK</div>
-					</div>
-					<div class="games_check_row">
-						<div class="links_mod_checkbox">
+                        <div class="games_check_text">&nbsp; SEUCK</div>
+                    </div>
+                    <div class="games_check_row">
+                        <div class="links_mod_checkbox">
                             <input type="checkbox" id="stac" name="stac" value="1">
                             <label for="stac"></label>
-                            <!--<input type="checkbox" name="stac" value="1" class="quick_search_check">-->
                         </div>
-						<div class="games_check_text">&nbsp; STAC</div>
-					</div>
-				</div>
-			</div>
-			<br>
-			<br>
-			<div class="standard_table_center">
-				<input type="submit" value="Search" class="topbutton_cpanel_small">
-			</div>
-			<br>
-			<br>
-			</fieldset>
-			<input type="hidden" name="action" id="action" value="search">
-			<input type="hidden" name="user_id" id="user_id" value="{$user_id}">
-		</div>
-		</form>
-		<br>
-		<br>
-		<form method="post" action="db_games_detail.php" name="insertgame" onsubmit="return confirm('Are you sure you want to insert this game into the database?');">
-		<input type="hidden" name="action" value="insert_game">
-		<fieldset>
-		<legend>Add games</legend>
-			<div class="standard_table_center">
-				<input type="text" name="newgame" id="gm_newgame" required class="standard_tile_input_small">
-				<input type="submit" value="Insert" class="topbutton_cpanel_small">
-			</div>
-		</fieldset>
-		</form>
-	</div>
+                        <div class="games_check_text">&nbsp; STAC</div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <br>
+            <div class="standard_tile_text_center">
+                <input type="submit" value="Search" class="topbutton_cpanel_small">
+            </div>
+            <br>
+            <br>
+            </fieldset>
+            <input type="hidden" name="action" id="action" value="search">
+            <input type="hidden" name="user_id" id="user_id" value="{$user_id}">
+        </div>
+        </form>
+        <br>
+        <br>
+        <form method="post" action="db_games_detail.php" name="insertgame" onsubmit="return confirm('Are you sure you want to insert this game into the database?');">
+        <input type="hidden" name="action" value="insert_game">
+        <fieldset class="primary_fieldset">
+        <legend class="primary_legend">Add games</legend>
+            <div class="standard_tile_text_center">
+                <input type="text" name="newgame" id="gm_newgame" required class="standard_input input_large">
+                <input type="submit" value="Insert" class="topbutton_cpanel_small">
+            </div>
+        </fieldset>
+        </form>
+    </div>
 </div>
 {/block}

@@ -9,7 +9,7 @@
 *
 *   Id: interviews_main.html,v 0.10 21/07/2005 22:17 Gatekeeper
 *   Id: interviews_main.html,v 0.20 02/08/2016 22:24 Gatekeeper
-*		- AL 2.0
+*       - AL 2.0
 *   Id: interviews_main.html,v 0.25 07/11/2017 21:37 Gatekeeper
 *       - completely redone the main page now loading the interviews with a paging system
 ***************************************************************************
@@ -21,62 +21,62 @@
 {extends file='1/admin/frontpage.html'}
 
 {block name=java_script}
-<script type="text/javascript" src="{$template_dir}includes/js/vendor/jquery.dotdotdot-1.8.3.min.js" type="text/javascript"></script> <!--this script is used for the elipsis (...) effect of the preview of the reviews -->
-<script type="text/javascript">
-     window.onload = function() {
+<script src="{$template_dir}includes/js/vendor/jquery.dotdotdot-1.8.3.min.js"></script> <!--this script is used for the elipsis (...) effect of the preview of the reviews -->
+<script>
+    window.onload = function() {
         $(".interview_main_text").dotdotdot({  <!--This is the script to truncate the preview of the reviews-->
-                //	configuration goes here
+                //  configuration goes here
 
-            /*	The text to add as ellipsis. */
-            ellipsis	: '... ',
+            /*  The text to add as ellipsis. */
+            ellipsis    : '... ',
 
-            /*	How to cut off the text/html: 'word'/'letter'/'children' */
-            wrap		: 'word',
+            /*  How to cut off the text/html: 'word'/'letter'/'children' */
+            wrap        : 'word',
 
-            /*	Wrap-option fallback to 'letter' for long words */
+            /*  Wrap-option fallback to 'letter' for long words */
             fallbackToLetter: false,
 
-            /*	jQuery-selector for the element to keep and put after the ellipsis. */
-            after		: null,
+            /*  jQuery-selector for the element to keep and put after the ellipsis. */
+            after       : null,
 
-            /*	Whether to update the ellipsis: true/'window' */
-            watch		: window,
+            /*  Whether to update the ellipsis: true/'window' */
+            watch       : window,
 
-            /*	Optionally set a max-height, can be a number or function.
+            /*  Optionally set a max-height, can be a number or function.
                 If null, the height will be measured. */
-            height		: null,
+            height      : null,
 
-            /*	Deviation for the height-option. */
-            tolerance	: 0,
+            /*  Deviation for the height-option. */
+            tolerance   : 0,
 
-            /*	Callback function that is fired after the ellipsis is added,
+            /*  Callback function that is fired after the ellipsis is added,
                 receives two parameters: isTruncated(boolean), orgContent(string). */
-            callback	: function( isTruncated, orgContent ) {},
+            callback    : function( isTruncated, orgContent ) {},
 
-            lastCharacter	: {
+            lastCharacter   : {
 
-                /*	Remove these characters from the end of the truncated text. */
-                remove		: [ ' ', ',', ';', '.', '!', '?' ],
+                /*  Remove these characters from the end of the truncated text. */
+                remove      : [ ' ', ',', ';', '.', '!', '?' ],
 
-                /*	Don't add an ellipsis if this array contains
+                /*  Don't add an ellipsis if this array contains
                     the last character of the truncated text. */
-                noEllipsis	: []
+                noEllipsis  : []
             }
         });
     };
 </script>
 
-<script type="text/javascript" src="{$template_dir}includes/js/vendor/lightbox-2.9.0.min.js"></script><!--lightbox popup script-->
+<script src="{$template_dir}includes/js/vendor/lightbox-2.9.0.min.js"></script><!--lightbox popup script-->
 <link type="text/css" href="{$style_dir}css/vendor/lightbox-2.9.0.css" hreflang="en" rel="stylesheet">
 <script>
     lightbox.option({
-      'showImageNumberLabel': false
+        'showImageNumberLabel': false
     })
 </script>
 
 <!-- The autocomplete and dropdown switcher -->
-<script type='text/JavaScript' src="{$template_dir}includes/js/ui.widgets.js"></script>
-<script type="text/javascript">
+<script src="{$template_dir}includes/js/ui.widgets.js"></script>
+<script>
     $(document).ready(function() {
         $("select[name=members]").altAutocomplete();
         $("select[name=individual_create]").altAutocomplete();
@@ -90,89 +90,87 @@
 <div class="standard_tile" id="interviews_main">
     <div class="help-tip">
         <p>
-			The first thing that needs to be done is to add an actual interview in the database. We need to link an
-			interview to an actual person. To add an interview to the AL database you click on the "Add an Interview" link at the left side. There you'll have to search for the individual you want to interview.
-			Once this is done, you will enter the interview edit screen. This is where the actual interview is inserted in the database. When you are finished and come back to the main screen, your interview will be available in the
+            The first thing that needs to be done is to add an actual interview in the database. We need to link an
+            interview to an actual person. To add an interview to the AL database you click on the "Add an Interview" link at the left side. There you'll have to search for the individual you want to interview.
+            Once this is done, you will enter the interview edit screen. This is where the actual interview is inserted in the database. When you are finished and come back to the main screen, your interview will be available in the
             'Search Interview' edit box and in the list below.
             <br>
             <br>
             <i class="fa fa-chevron-circle-down" aria-hidden="true" title="Click for drop down mode"></i> : Click this item to switch from list to input mode and vice versa
         </p>
     </div>
-	<h1>INTERVIEWS</h1>
-	<div class="standard_tile_line"></div>
-	<div class="standard_tile_text">
-		<div class="left_nav_section">
-			Overhere you can add a new interview or edit an existing interview. If you like to edit an interview,
-			just look up the person in the dropdown list and press <b>search</b>. If you like to add an interview, select the person
-			and press the <b>add</b> button.
-		</div>
-		<br>
-		<br>
-		<div class="main_company_container">
-			<div class="main_company_child" id="child_edit_company">
-				<fieldset>
-					<legend>Search Interview</legend>
-					<form action="../interviews/interviews_edit.php" method="post" name="search">
-						<select name="interview_id" id="quick_search_pub_select">
-							<option value="-" selected>-</option>
-							{foreach from=$individuals_interviewed item=line}
-								<option value="{$line.interview_id}">{$line.ind_name}</option>
-							{/foreach}
-						</select>
-						<input type="submit" value="Search" class="topbutton_cpanel_small">
-						<input type="hidden" name="action" value="search">
-					</form>
-				</fieldset>
-			</div>
-			<div class="main_company_child" id="child_add_company">
-				<fieldset>
-					<legend>Add an Interview</legend>
-					<form action="../interviews/db_interview.php" method="post" name="insert">
+    <h1>INTERVIEWS</h1>
+    <div class="standard_tile_line"></div>
+    <div class="standard_tile_padding">
+        <div class="left_nav_section">
+            Overhere you can add a new interview or edit an existing interview. If you like to edit an interview,
+            just look up the person in the dropdown list and press <b>search</b>. If you like to add an interview, select the person
+            and press the <b>add</b> button.
+        </div>
+        <br>
+        <br>
+        <div class="main_company_container">
+            <div class="main_company_child" id="child_edit_company">
+                <fieldset class="primary_fieldset">
+                    <legend class="primary_legend">Search Interview</legend>
+                    <form action="../interviews/interviews_edit.php" method="post" name="search">
+                        <select name="interview_id" class="standard_select select_large">
+                            <option value="-" selected>-</option>
+                            {foreach from=$individuals_interviewed item=line}
+                                <option value="{$line.interview_id}">{$line.ind_name}</option>
+                            {/foreach}
+                        </select>
+                        <input type="submit" value="Search" class="topbutton_cpanel_small">
+                        <input type="hidden" name="action" value="search">
+                    </form>
+                </fieldset>
+            </div>
+            <div class="main_company_child" id="child_add_company">
+                <fieldset class="primary_fieldset">
+                    <legend class="primary_legend">Add an Interview</legend>
+                    <form action="../interviews/db_interview.php" method="post" name="insert">
                         <a href="javascript:;" class="left_nav_link" id="individual_select_toggle" ><i class="fa fa-chevron-circle-down" aria-hidden="true" ></i></a>
-                        <select name="individual_create" 
+                        <select name="individual_create"
                             data-alt-autocomplete-endpoint="../../../php/admin/common/autocomplete.php?extraParams=individual"
                             data-alt-autocomplete-toggle="#individual_select_toggle"
-                            id="member_select">>
+                            id="member_select" class="standard_select select_large">
                             <option value="-">-</option>
                             {foreach from=$individuals item=line}
                                 <option value="{$line.ind_id}">{$line.ind_name}</option>
-                            {/foreach}          
+                            {/foreach}
                         </select>
-						<input type="submit" value="Add" class="topbutton_cpanel_small">
+                        <input type="submit" value="Add" class="topbutton_cpanel_small">
                         <input type="hidden" name="action" value="add_interview">
-						<input type="hidden" name="user_id" id="user_id" value="{$user_id}">
-					</form>
-				</fieldset>
-			</div>
-		</div>
-		<br>
-		<br>
+                        <input type="hidden" name="user_id" id="user_id" value="{$user_id}">
+                    </form>
+                </fieldset>
+            </div>
+        </div>
         <br>
-        <table class="standard_table_list_no_hover">
+        <br>
+        <br>
+        <table class="primary_table_list">
         {foreach from=$interviews item=line}
             <tr>
-            <td style="width:20%;" class="game_details_review_preview_left" >
-                <div style="margin-left:10px;margin-right:10px;text-align:justify;margin-bottom:10px;margin-top:10px">
-                    {if $line.interview_img == 'none'}
-                        <a href="../interviews/interviews_edit.php?interview_id={$line.interview_id}" class="links_addnew_link">
-                            <img src="../../includes/show_image.php?file={$style_dir2}images/unknown.jpg&amp;resize=160,null,null,null" alt="{$line.individual_name}" class="user_stats_img_dark" style="max-width:95%;">
-                        </a>
-                    {else}
-                        <a href="../../includes/show_image.php?file={$line.interview_img}&amp;resize=410,null,null,null" data-lightbox="image-1">
-                            <img src="../../includes/show_image.php?file={$line.interview_img}&amp;resize=160,null,null,null" alt="{$line.individual_name}" class="user_stats_img_dark" style="max-width:95%;">
-                        </a>
-                    {/if} 
-                </div>
-            </td>
-            <td style="width:80%;" class="game_details_review_preview_right">
-                <div style="margin-top:20px;margin-bottom:15px;margin-right:20px;margin-left:10px;">
-                   <h4 style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis">
+                <td>
+                    <div class="standard_tile_padding">
+                    <div style="display:inline-block;float:left;padding-right:15px;">
+                        {if $line.interview_img == 'none'}
+                            <a href="../interviews/interviews_edit.php?interview_id={$line.interview_id}" class="links_addnew_link">
+                                <img src="../../includes/show_image.php?file={$style_dir2}images/unknown.jpg&amp;resize=160,null,null,null" alt="{$line.individual_name}" class="user_stats_img_dark" style="max-width:95%;">
+                            </a>
+                        {else}
+                            <a href="../../includes/show_image.php?file={$line.interview_img}&amp;resize=410,null,null,null" data-lightbox="image-1">
+                                <img src="../../includes/show_image.php?file={$line.interview_img}&amp;resize=160,null,null,null" alt="{$line.individual_name}" class="user_stats_img_dark" style="max-width:95%;">
+                            </a>
+                        {/if}
+                    </div>
+                    <h4 style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis">
                         <a href="../interviews/interviews_edit.php?interview_id={$line.interview_id}" class="standard_tile_link">{$line.individual_name}</a>
                     </h4>
                     <h5 style="font-weight: bold;">{$line.interview_date} by <a href="../../admin/user/user_detail.php?user_id_selected={$line.interview_author_id}" class="latest_comments_link">{$line.interview_author}</a></h5>
                     <div class="interview_main_text">
-                       {$line.interview_intro}
+                        {$line.interview_intro}
                     </div>
                     <h2><a href="../interviews/interviews_edit.php?interview_id={$line.interview_id}" class="standard_tile_link">Edit <i class="fa fa-chevron-right" aria-hidden="true"></i></a></h2>
                     <br>
@@ -181,7 +179,7 @@
             </tr>
         {/foreach}
         </table>
-        <div class="standard_table_center">
+        <div class="standard_tile_text_center">
             {if $links.linkback != ''}
                 <a href ="../interviews/interviews_main.php{$links.linkback}" class="standard_tile_link" style="float:left;margin-left:5px;margin-top:10px;">Previous page</a>
             {/if}
@@ -190,6 +188,6 @@
             {/if}
             <br><br>
         </div>
-	</div>
+    </div>
 </div>
 {/block}

@@ -1,4 +1,4 @@
-{* 
+{*
 /***************************************************************************
 *                                news_edit.html
 *                            ---------------------------
@@ -6,17 +6,17 @@
 *   copyright            : (C) 2005 Atari Legend
 *   email                : maarten.martens@freebel.net
 *   actual update        : File creation
-*							 
+*
 *   Id: news_edit.html,v 0.10 2004/05/05 ST Graveyard
 *   Id: news_edit.html,v 0.20 2016/07/29 ST Graveyard
-*			- AL 2.0
+*           - AL 2.0
 *   Id: news_edit.html,v 0.21 2017/05/22 ST Graveyard
-*		- Adding [frontpage] function to mark what should be displayed at 
+*       - Adding [frontpage] function to mark what should be displayed at
 *         the front page
 *
 ***************************************************************************/
 ****************************************************************************
- This is the sub template file to generate the news edit page
+This is the sub template file to generate the news edit page
 ****************************************************************************
 *}
 {extends file='1/admin/frontpage.html'}
@@ -24,7 +24,7 @@
 {block name=title}Edit News{/block}
 
 {block name=java_script}
-<script type="text/javascript">
+<script>
 var clientPC = navigator.userAgent.toLowerCase(); // Get client info
 var clientVer = parseInt(navigator.appVersion); // Get browser version
 
@@ -55,180 +55,180 @@ imageTag = false;
 
 // Shows the help messages in the helpline window
 function helpline(help) {
-	document.post.helpbox.value = eval(help + "_help");
+    document.post.helpbox.value = eval(help + "_help");
 }
 
 function bbstyle(bbnumber, bbname) {
 
-	var txtarea = eval('document.post.' + bbname);
+    var txtarea = eval('document.post.' + bbname);
 
-	txtarea.focus();
-	donotinsert = false;
-	theSelection = false;
-	bblast = 0;
+    txtarea.focus();
+    donotinsert = false;
+    theSelection = false;
+    bblast = 0;
 
-	if (bbnumber == -1) { // Close all open tags & default button names
-		while (bbcode[0]) {
-			butnumber = arraypop(bbcode) - 1;
-			txtarea.value += bbtags[butnumber + 1];
-			buttext = eval('document.post.addbbcode' + butnumber + '.value');
-			eval('document.post.addbbcode' + butnumber + '.value ="' + buttext.substr(0,(buttext.length - 1)) + '"');
-		}
-		imageTag = false; // All tags are closed including image tags :D
-		txtarea.focus();
-		return;
-	}
+    if (bbnumber == -1) { // Close all open tags & default button names
+        while (bbcode[0]) {
+            butnumber = arraypop(bbcode) - 1;
+            txtarea.value += bbtags[butnumber + 1];
+            buttext = eval('document.post.addbbcode' + butnumber + '.value');
+            eval('document.post.addbbcode' + butnumber + '.value ="' + buttext.substr(0,(buttext.length - 1)) + '"');
+        }
+        imageTag = false; // All tags are closed including image tags :D
+        txtarea.focus();
+        return;
+    }
 
-	if ((clientVer >= 4) && is_ie && is_win)
-	{
-		theSelection = document.selection.createRange().text; // Get text selection
-		if (theSelection) {
-			// Add tags around selection
-			document.selection.createRange().text = bbtags[bbnumber] + theSelection + bbtags[bbnumber+1];
-			txtarea.focus();
-			theSelection = '';
-			return;
-		}
-	}
-	else if (txtarea.selectionEnd && (txtarea.selectionEnd - txtarea.selectionStart > 0))
-	{
-		mozWrap(txtarea, bbtags[bbnumber], bbtags[bbnumber+1]);
-		return;
-	}
+    if ((clientVer >= 4) && is_ie && is_win)
+    {
+        theSelection = document.selection.createRange().text; // Get text selection
+        if (theSelection) {
+            // Add tags around selection
+            document.selection.createRange().text = bbtags[bbnumber] + theSelection + bbtags[bbnumber+1];
+            txtarea.focus();
+            theSelection = '';
+            return;
+        }
+    }
+    else if (txtarea.selectionEnd && (txtarea.selectionEnd - txtarea.selectionStart > 0))
+    {
+        mozWrap(txtarea, bbtags[bbnumber], bbtags[bbnumber+1]);
+        return;
+    }
 
-	// Find last occurance of an open tag the same as the one just clicked
-	for (i = 0; i < bbcode.length; i++) {
-		if (bbcode[i] == bbnumber+1) {
-			bblast = i;
-			donotinsert = true;
-		}
-	}
+    // Find last occurance of an open tag the same as the one just clicked
+    for (i = 0; i < bbcode.length; i++) {
+        if (bbcode[i] == bbnumber+1) {
+            bblast = i;
+            donotinsert = true;
+        }
+    }
 
-	if (donotinsert) {		// Close all open tags up to the one just clicked & default button names
-		while (bbcode[bblast]) {
-				butnumber = arraypop(bbcode) - 1;
-				txtarea.value += bbtags[butnumber + 1];
-				buttext = eval('document.post.addbbcode' + butnumber + '.value');
-				eval('document.post.addbbcode' + butnumber + '.value ="' + buttext.substr(0,(buttext.length - 1)) + '"');
-				imageTag = false;
-			}
-			txtarea.focus();
-			return;
-	} else { // Open tags
+    if (donotinsert) {      // Close all open tags up to the one just clicked & default button names
+        while (bbcode[bblast]) {
+                butnumber = arraypop(bbcode) - 1;
+                txtarea.value += bbtags[butnumber + 1];
+                buttext = eval('document.post.addbbcode' + butnumber + '.value');
+                eval('document.post.addbbcode' + butnumber + '.value ="' + buttext.substr(0,(buttext.length - 1)) + '"');
+                imageTag = false;
+            }
+            txtarea.focus();
+            return;
+    } else { // Open tags
 
-		if (imageTag && (bbnumber != 14)) {		// Close image tag before adding another
-			txtarea.value += bbtags[15];
-			lastValue = arraypop(bbcode) - 1;	// Remove the close image tag from the list
-			document.post.addbbcode14.value = "Img";	// Return button back to normal state
-			imageTag = false;
-		}
+        if (imageTag && (bbnumber != 14)) {     // Close image tag before adding another
+            txtarea.value += bbtags[15];
+            lastValue = arraypop(bbcode) - 1;   // Remove the close image tag from the list
+            document.post.addbbcode14.value = "Img";    // Return button back to normal state
+            imageTag = false;
+        }
 
-		// Open tag
-		txtarea.value += bbtags[bbnumber];
-		if ((bbnumber == 14) && (imageTag == false)) imageTag = 1; // Check to stop additional tags after an unclosed image tag
-		arraypush(bbcode,bbnumber+1);
-		eval('document.post.addbbcode'+bbnumber+'.value += "*"');
-		txtarea.focus();
-		return;
-	}
-	storeCaret(txtarea);
+        // Open tag
+        txtarea.value += bbtags[bbnumber];
+        if ((bbnumber == 14) && (imageTag == false)) imageTag = 1; // Check to stop additional tags after an unclosed image tag
+        arraypush(bbcode,bbnumber+1);
+        eval('document.post.addbbcode'+bbnumber+'.value += "*"');
+        txtarea.focus();
+        return;
+    }
+    storeCaret(txtarea);
 }
 
 // From http://www.massless.org/mozedit/
 function mozWrap(txtarea, open, close)
 {
-	var selLength = txtarea.textLength;
-	var selStart = txtarea.selectionStart;
-	var selEnd = txtarea.selectionEnd;
-	if (selEnd == 1 || selEnd == 2)
-		selEnd = selLength;
+    var selLength = txtarea.textLength;
+    var selStart = txtarea.selectionStart;
+    var selEnd = txtarea.selectionEnd;
+    if (selEnd == 1 || selEnd == 2)
+        selEnd = selLength;
 
-	var s1 = (txtarea.value).substring(0,selStart);
-	var s2 = (txtarea.value).substring(selStart, selEnd)
-	var s3 = (txtarea.value).substring(selEnd, selLength);
-	txtarea.value = s1 + open + s2 + close + s3;
-	return;
+    var s1 = (txtarea.value).substring(0,selStart);
+    var s2 = (txtarea.value).substring(selStart, selEnd)
+    var s3 = (txtarea.value).substring(selEnd, selLength);
+    txtarea.value = s1 + open + s2 + close + s3;
+    return;
 }
 
 // Insert at Claret position. Code from
 // http://www.faqts.com/knowledge_base/view.phtml/aid/1052/fid/130
 function storeCaret(textEl) {
-	if (textEl.createTextRange) textEl.caretPos = document.selection.createRange().duplicate();
+    if (textEl.createTextRange) textEl.caretPos = document.selection.createRange().duplicate();
 }
 
 </script>
 {/block}
-	
+
 {block name=main_tile}
 <div class="standard_tile" id="news_edit">
     <div class="help-tip">
         <p>
             <i>Use the 'Frontpage' button to mark the text used in the 'latest news' tile on the website.<br>
-            Keep in mind the dotdotdot (...) truncate function is also active on this text, so should you mark a piece of text which is too big for the tile, 
+            Keep in mind the dotdotdot (...) truncate function is also active on this text, so should you mark a piece of text which is too big for the tile,
             this will be truncated automatically to fit the page.</i>
         </p>
     </div>
-	<h1>EDIT NEWS</h1>
-	<div class="standard_tile_line"></div>
-	<div class="standard_tile_text">
-		<div class="left_nav_section">
-			This is the news edit page. Change a news post accordingly.
-		</div> 
-		<br>
-		<br>
-		<fieldset>
-		<legend>News article</legend>
-			<form action="db_news.php" method="post" name="post" id="news_edit_post">
-				<div class="links_mod_container">
-					<div class="links_mod_row">
-						<div class="links_mod_text">Headline</div>
-						<div class="links_mod_input"><input type="text" name="news_headline" id="headline" size='50' maxlength='64' class="standard_tile_input_small" value="{$edit_submissions.edit_headline}"></div>
-					</div>
-					<div class="links_mod_row">	
-						<div class="links_mod_text">News Icon</div>
-						<div class="links_mod_input">
-							<select name="news_image_id" id="quick_search_pub_select">
+    <h1>EDIT NEWS</h1>
+    <div class="standard_tile_line"></div>
+    <div class="standard_tile_padding">
+        <div class="left_nav_section">
+            This is the news edit page. Change a news post accordingly.
+        </div>
+        <br>
+        <br>
+        <fieldset class="primary_fieldset">
+        <legend class="primary_legend">News article</legend>
+            <form action="db_news.php" method="post" name="post" id="news_edit_post">
+                <div class="links_mod_container">
+                    <div class="links_mod_row">
+                        <div class="links_mod_text">Headline</div>
+                        <div class="links_mod_input"><input type="text" name="news_headline" id="headline" size='50' maxlength='64' class="standard_input input_large" value="{$edit_submissions.edit_headline}"></div>
+                    </div>
+                    <div class="links_mod_row">
+                        <div class="links_mod_text">News Icon</div>
+                        <div class="links_mod_input">
+                            <select name="news_image_id" class="standard_select select_large">
                                 <option value="0">-</option>
-								{foreach from=$news_images item=line}
-									{if $edit_submissions.edit_image_id eq $line.image_id}			
-										<option value="{$line.image_id}" selected>{$line.image_name}</option>
-									{else}
-										<option value="{$line.image_id}">{$line.image_name}</option>
-									{/if}
-								{/foreach}	
-							</select>
-							<a href="../news/news_iconpreview.php" class="left_nav_link">Preview Icons</a>
-						</div>
-					</div>
-					<div class="links_mod_row">
-						<div class="links_mod_text">Description</div>
-						<div class="links_mod_input">
+                                {foreach from=$news_images item=line}
+                                    {if $edit_submissions.edit_image_id eq $line.image_id}
+                                        <option value="{$line.image_id}" selected>{$line.image_name}</option>
+                                    {else}
+                                        <option value="{$line.image_id}">{$line.image_name}</option>
+                                    {/if}
+                                {/foreach}
+                            </select>
+                            <a href="../news/news_iconpreview.php" class="left_nav_link">Preview Icons</a>
+                        </div>
+                    </div>
+                    <div class="links_mod_row">
+                        <div class="links_mod_text">Description</div>
+                        <div class="links_mod_input">
                             <input type="button" accesskey= "b" name="addbbcode0" value="B" onclick="bbstyle(0,'news_text')">
                             <input type="button" accesskey= "u" name="addbbcode4" value="U" onclick="bbstyle(4,'news_text')">
                             <input type="button" accesskey= "i" name="addbbcode2" value="I" onclick="bbstyle(2,'news_text')">
-                            <input type="button" accesskey="w" name="addbbcode6" value="URL" onClick="bbstyle(6,'news_text')">			  
-                            <input type="button" accesskey="x" name="addbbcode8" value="@" onClick="bbstyle(8,'news_text')">	
-                            <input type="button" accesskey="frontpage" name="addbbcode14" value="Frontpage" onClick="bbstyle(14,'news_text')">    
+                            <input type="button" accesskey="w" name="addbbcode6" value="URL" onClick="bbstyle(6,'news_text')">
+                            <input type="button" accesskey="x" name="addbbcode8" value="@" onClick="bbstyle(8,'news_text')">
+                            <input type="button" accesskey="frontpage" name="addbbcode14" value="Frontpage" onClick="bbstyle(14,'news_text')">
                             <br>
                             <textarea cols="70" rows="8" name="news_text" class="game_review_screenshot_text" ONSELECT="javascript:storeCaret(this);" ONCLICK="javascript:storeCaret(this);" ONKEYUP="javascript:storeCaret(this);" ONCHANGE="javascript:storeCaret(this);">{$edit_submissions.edit_text}</textarea>
                         </div>
-					</div>
-				</div>
-				<br>
-				<input type="submit" value="Update" class="topbutton_cpanel_small">	
-				{if isset($edit_submissions.edit_submission_id)}
-					<input type="hidden" name="news_submission_id" value="{$edit_submissions.edit_submission_id}">
-					<input type="hidden" name="action" value="update_submission">
-				{/if}
-				{if isset($edit_submissions.edit_id)}
-					<input type="hidden" name="news_id" value="{$edit_submissions.edit_id}">
-					<input type="hidden" name="action" value="update_news">
-				{/if}
-			</form>
-		</fieldset>
-		
-		<br>
-		<div class="standard_table_center"><a href="javascript:history.go(-1)" class="standard_tile_link">back</a></div>
-	</div>
+                    </div>
+                </div>
+                <br>
+                <input type="submit" value="Update" class="topbutton_cpanel_small">
+                {if isset($edit_submissions.edit_submission_id)}
+                    <input type="hidden" name="news_submission_id" value="{$edit_submissions.edit_submission_id}">
+                    <input type="hidden" name="action" value="update_submission">
+                {/if}
+                {if isset($edit_submissions.edit_id)}
+                    <input type="hidden" name="news_id" value="{$edit_submissions.edit_id}">
+                    <input type="hidden" name="action" value="update_news">
+                {/if}
+            </form>
+        </fieldset>
+
+        <br>
+        <div class="standard_tile_text_center"><a href="javascript:history.go(-1)" class="standard_tile_link">back</a></div>
+    </div>
 </div>
 {/block}
