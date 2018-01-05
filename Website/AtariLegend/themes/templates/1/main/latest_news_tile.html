@@ -27,11 +27,6 @@
         {foreach from=$news item=line}
             <div class="standard_tile_line"></div>
             <div {if $number is even}class="standard_list_entry"{else}class="standard_list_entry_odd"{/if}>
-                <!--<div class="standard_list_entry_left">
-                    <a href="#">
-                    <img src="../../includes/show_image.php?file={$line.image}&amp;resize=164,null,null,null&amp;crop=left,top,164,120" alt="latest_news">
-                    </a>
-                </div>-->
                 <div class="standard_list_entry_news">
                     <h4 style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis">
                         <a href="../news/news.php" title="{$line.news_headline}" class="standard_tile_link">{$line.news_headline}</a>
@@ -40,7 +35,9 @@
                     <div class="standard_list_entry_news_text">
                         <div class="latest_news_part">{$line.news_text}</div>
                     </div>
-                    <h2><a href="../news/news.php" class="standard_tile_link"><i class="fa fa-chevron-right" aria-hidden="true"></i></a></h2>
+                    <div class="glyph_align_right">
+                        <a href="../news/news.php" class="standard_tile_link"><i class="fa fa-chevron-right" aria-hidden="true"></i></a>
+                    </div>
                 </div>
             </div>
             {$number=$number+1}

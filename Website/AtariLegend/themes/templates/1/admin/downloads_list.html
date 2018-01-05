@@ -24,7 +24,7 @@ The main game page
 <div class="standard_tile" id="games_list">
     <h1>ADD/EDIT A DOWNLOAD</h1>
     <div class="standard_tile_line"></div>
-    <div class="standard_tile_text">
+    <div class="standard_tile_padding">
         <div class="left_nav_section">
         This is the search result page. Click a title to go to download options page.
     </div>
@@ -32,38 +32,38 @@ The main game page
     <br>
     <div id="games_list_4">
     {if $type == 'game'}
-        <table class="standard_table_list" id="game_list_table">
+        <table class="secondary_table_list table_md table_hover ">
             <tr>
-                <th id="game_th">Game Name</th>
-                <th id="pub_th">Publisher</th>
-                <th id="dev_th">Developer</th>
-                <th id="year_th">Year</th>
-                <th id="info_th">Nr</th>
+                <th class="game_name_column w-40">Game Name</th>
+                <th class="publisher_table_column w-20">Publisher</th>
+                <th class="developer_table_column w-20">Developer</th>
+                <th class="release_year_column w-10">Year</th>
+                <th class="information_table_column w-10">Nr</th>
             </tr>
             {foreach from=$download_search item=line}
             <tr id="downloadedit_ajax_{$line.game_id}">
-                <td class="game_td">
+                <td class="game_name_column w-40">
                     {if $line.game_name != ''}
-                        <a href="downloads_game_detail.php?game_id={$line.game_id}" class="standard_table_left">{$line.game_name}</a>
+                        <a href="downloads_game_detail.php?game_id={$line.game_id}" class="standard_tile_text_left">{$line.game_name}</a>
                     {else}
                         <i>n/a</i>
                     {/if}
                 </td>
-                <td class="pub_td">
+                <td class="publisher_table_column w-20">
                     {if $line.publisher_name != ''}
                         {$line.publisher_name}
                     {else}
                         <i>n/a</i>
                     {/if}
                 </td>
-                <td class="dev_td">
+                <td class="developer_table_column w-20">
                     {if $line.developer_name != ''}
                         {$line.developer_name}
                     {else}
                         <i>n/a</i>
                     {/if}
                 </td>
-                <td class="year_td">
+                <td class="release_year_column w-10">
                     {if $line.year != ''}
                         {$line.year}
 
@@ -71,7 +71,7 @@ The main game page
                         <i>n/a</i>
                     {/if}
                 </td>
-                <td class="info_td">
+                <td class="information_table_column w-10">
                     {if $line.number_downloads != ''}
                         {$line.number_downloads}
 
@@ -82,8 +82,8 @@ The main game page
             </tr>
             {/foreach}
             <tr>
-                <td class="standard_table_left" colspan="5">
-                    <br><b>{if $nr_of_games == 1}1 game found {else} {$nr_of_games} games found{/if} in {$query_time} sec</b>
+                <td colspan="5">
+                    {if $nr_of_games == 1}1 game found {else} {$nr_of_games} games found{/if} in {$query_time} sec
                 </td>
             </tr>
         </table>
@@ -93,6 +93,6 @@ The main game page
 </div>
 </div>
 <br>
-<div class="standard_table_center"><a href="javascript:history.go(-1)" class="standard_tile_link">back</a></div>
+<div class="standard_tile_text_center"><a href="javascript:history.go(-1)" class="standard_tile_link">back</a></div>
 <br>
 {/block}

@@ -203,15 +203,15 @@ function storeCaret(textEl) {
     {if (isset($company.comp_name))}
     <h1>{$company.comp_name}</h1>
     <div class="standard_tile_line"></div>
-    <div class="standard_tile_text">
+    <div class="standard_tile_padding">
         <div class="left_nav_section">
             In this section you can edit a company. You can use the profile box for additional info.
             A logo can be uploaded as well. If a picture is already linked, you can delete it and upload a new one.
         </div>
         <br>
         <br>
-        <fieldset>
-            <legend>Edit Company</legend>
+        <fieldset class="primary_fieldset">
+            <legend class="primary_legend">Edit Company</legend>
             <form action="../company/db_company_edit.php" method="post" name="post" id="comp_edit">
                 <b>Name :</b>
                 <input type="text" name="comp_name" value="{$company.comp_name}" class="standard_input input_large">
@@ -238,8 +238,8 @@ function storeCaret(textEl) {
         </fieldset>
         <br>
         {if $company.comp_image !== 'none'}
-            <fieldset>
-            <legend>Company Logo</legend>
+            <fieldset class="primary_fieldset">
+            <legend class="primary_legend">Company Logo</legend>
             <br>
                 <img src="../../includes/show_image.php?file={$company.comp_image}" alt="company logo" class="user_stats_img" id="user_details_img_dark">
                 <br>
@@ -249,8 +249,8 @@ function storeCaret(textEl) {
             </fieldset>
         {else}
             <form action="../company/db_company_edit.php" method="post" enctype="multipart/form-data" name="company_pic_form" id="compnay_pic_form">
-            <fieldset>
-            <legend>Company Logo</legend>
+            <fieldset class="primary_fieldset">
+            <legend class="primary_legend">Company Logo</legend>
                 <!--<input type="file" name="company_pic">-->
                 <label for="file_upload" class="file_upload">Select file</label>
                 <input id="file_upload" type="file" name="company_pic">
@@ -265,12 +265,12 @@ function storeCaret(textEl) {
             </form>
         {/if}
         <br>
-        <div class="standard_table_center"><a href="javascript:history.go(-1)" class="standard_tile_link">back</a></div>
+        <div class="standard_tile_text_center"><a href="javascript:history.go(-1)" class="standard_tile_link">back</a></div>
     </div>
     {else}
         <h1>COMPANY EDIT</h1>
         <div class="standard_tile_line"></div>
-        <div class="standard_tile_text">
+        <div class="standard_tile_padding">
             <div class="left_nav_section">
                 Company does not exist.
             </div>

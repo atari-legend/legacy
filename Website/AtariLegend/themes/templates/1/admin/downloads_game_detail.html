@@ -17,6 +17,15 @@
 
 {block name=java_script}
 <script>
+function OSDMessageDisplay (message) {
+    $.notify_osd.create({
+        'text': message, // notification message
+        'icon': '../../../themes/styles/1/images/osd_icons/star.png', // icon path, 48x48
+        'sticky': false, // if true, timeout is ignored
+        'timeout': 4, // disappears after 6 seconds
+        'dismissable': true // can be dismissed manually
+    });
+}
 $(function() {
     $but = $('#file_upload_game_detail');
 
@@ -97,14 +106,7 @@ function modDownload(game_download_id, game_id) {
                 data = xmlhttp.responseText.split ( "[BRK]" );
                 document.getElementById("mod_download").innerHTML = data[0];
 
-                $.notify_osd.create({
-                    'text'        : data[1],             // notification message
-                    'icon'        : '{$style_dir}images/osd_icons/star.png', // icon path, 48x48
-                    'sticky'      : false,             // if true, timeout is ignored
-                    'timeout'     : 4,                 // disappears after 6 seconds
-                    'dismissable' : true               // can be dismissed manually
-                    });
-
+                OSDMessageDisplay (data[1]);
                 document.getElementById("mod_download").reset();
             }
         }
@@ -148,13 +150,7 @@ function addOption(game_download_id, game_id) {
                 data = xmlhttp.responseText.split ( "[BRK]" );
                 document.getElementById("linked_options").innerHTML = data[0];
 
-            $.notify_osd.create({
-                'text'        : data[1],             // notification message
-                'icon'        : '{$style_dir}images/osd_icons/star.png', // icon path, 48x48
-                'sticky'      : false,             // if true, timeout is ignored
-                'timeout'     : 4,                 // disappears after 6 seconds
-                'dismissable' : true               // can be dismissed manually
-                });
+            OSDMessageDisplay (data[1]);
 
             document.getElementById("linked_options").reset();
             }
@@ -185,13 +181,7 @@ function delOption(download_options_id, game_download_id, game_id) {
                 data = xmlhttp.responseText.split ( "[BRK]" );
                 document.getElementById("linked_options").innerHTML = data[0];
 
-            $.notify_osd.create({
-                'text'        : data[1],             // notification message
-                'icon'        : '{$style_dir}images/osd_icons/star.png', // icon path, 48x48
-                'sticky'      : false,             // if true, timeout is ignored
-                'timeout'     : 4,                 // disappears after 6 seconds
-                'dismissable' : true               // can be dismissed manually
-                });
+            OSDMessageDisplay (data[1]);
 
             document.getElementById("linked_options").reset();
             }
@@ -220,13 +210,7 @@ function addTos(game_download_id, game_id) {
                 data = xmlhttp.responseText.split ( "[BRK]" );
                 document.getElementById("linked_tos").innerHTML = data[0];
 
-                $.notify_osd.create({
-                    'text'        : data[1],             // notification message
-                    'icon'        : '{$style_dir}images/osd_icons/star.png', // icon path, 48x48
-                    'sticky'      : false,             // if true, timeout is ignored
-                    'timeout'     : 4,                 // disappears after 6 seconds
-                    'dismissable' : true               // can be dismissed manually
-                    });
+                OSDMessageDisplay (data[1]);
 
                 document.getElementById("linked_tos").reset();
             }
@@ -257,13 +241,7 @@ function delTos(download_tos_id, game_download_id, game_id) {
                 data = xmlhttp.responseText.split ( "[BRK]" );
                 document.getElementById("linked_tos").innerHTML = data[0];
 
-                $.notify_osd.create({
-                    'text'        : data[1],             // notification message
-                    'icon'        : '{$style_dir}images/osd_icons/star.png', // icon path, 48x48
-                    'sticky'      : false,             // if true, timeout is ignored
-                    'timeout'     : 4,                 // disappears after 6 seconds
-                    'dismissable' : true               // can be dismissed manually
-                    });
+                OSDMessageDisplay (data[1]);
 
                 document.getElementById("linked_tos").reset();
             }
@@ -292,13 +270,7 @@ function addTrainer(game_download_id, game_id) {
                 data = xmlhttp.responseText.split ( "[BRK]" );
                 document.getElementById("linked_trainer").innerHTML = data[0];
 
-                $.notify_osd.create({
-                    'text'        : data[1],             // notification message
-                    'icon'        : '{$style_dir}images/osd_icons/star.png', // icon path, 48x48
-                    'sticky'      : false,             // if true, timeout is ignored
-                    'timeout'     : 4,                 // disappears after 6 seconds
-                    'dismissable' : true               // can be dismissed manually
-                    });
+                OSDMessageDisplay (data[1]);
 
                 document.getElementById("linked_trainer").reset();
             }
@@ -329,13 +301,7 @@ function delTrainer(download_trainer_id, game_download_id, game_id) {
                 data = xmlhttp.responseText.split ( "[BRK]" );
                 document.getElementById("linked_trainer").innerHTML = data[0];
 
-                $.notify_osd.create({
-                    'text'        : data[1],             // notification message
-                    'icon'        : '{$style_dir}images/osd_icons/star.png', // icon path, 48x48
-                    'sticky'      : false,             // if true, timeout is ignored
-                    'timeout'     : 4,                 // disappears after 6 seconds
-                    'dismissable' : true               // can be dismissed manually
-                    });
+                OSDMessageDisplay (data[1]);
 
                 document.getElementById("linked_trainer").reset();
             }
@@ -364,13 +330,7 @@ function addCrew(game_download_id, game_id) {
                 data = xmlhttp.responseText.split ( "[BRK]" );
                 document.getElementById("linked_crew").innerHTML = data[0];
 
-                $.notify_osd.create({
-                    'text'        : data[1],             // notification message
-                    'icon'        : '{$style_dir}images/osd_icons/star.png', // icon path, 48x48
-                    'sticky'      : false,             // if true, timeout is ignored
-                    'timeout'     : 4,                 // disappears after 6 seconds
-                    'dismissable' : true               // can be dismissed manually
-                    });
+                OSDMessageDisplay (data[1]);
 
                 document.getElementById("linked_crew").reset();
             }
@@ -401,13 +361,7 @@ function delCrew(download_crew_id, game_download_id, game_id) {
                 data = xmlhttp.responseText.split ( "[BRK]" );
                 document.getElementById("linked_crew").innerHTML = data[0];
 
-                $.notify_osd.create({
-                    'text'        : data[1],             // notification message
-                    'icon'        : '{$style_dir}images/osd_icons/star.png', // icon path, 48x48
-                    'sticky'      : false,             // if true, timeout is ignored
-                    'timeout'     : 4,                 // disappears after 6 seconds
-                    'dismissable' : true               // can be dismissed manually
-                    });
+                OSDMessageDisplay (data[1]);
 
                 document.getElementById("linked_crew").reset();
             }
@@ -436,13 +390,7 @@ function addMenu(game_download_id, game_id) {
                 data = xmlhttp.responseText.split ( "[BRK]" );
                 document.getElementById("linked_menudisk").innerHTML = data[0];
 
-                $.notify_osd.create({
-                    'text'        : data[1],             // notification message
-                    'icon'        : '{$style_dir}images/osd_icons/star.png', // icon path, 48x48
-                    'sticky'      : false,             // if true, timeout is ignored
-                    'timeout'     : 4,                 // disappears after 6 seconds
-                    'dismissable' : true               // can be dismissed manually
-                    });
+                OSDMessageDisplay (data[1]);
 
                 document.getElementById("linked_menudisk").reset();
             }
@@ -473,13 +421,7 @@ function delMenu(menu_disk_title_game_id, game_download_id, game_id) {
                 data = xmlhttp.responseText.split ( "[BRK]" );
                 document.getElementById("linked_menudisk").innerHTML = data[0];
 
-                $.notify_osd.create({
-                    'text'        : data[1],             // notification message
-                    'icon'        : '{$style_dir}images/osd_icons/star.png', // icon path, 48x48
-                    'sticky'      : false,             // if true, timeout is ignored
-                    'timeout'     : 4,                 // disappears after 6 seconds
-                    'dismissable' : true               // can be dismissed manually
-                    });
+                OSDMessageDisplay (data[1]);
 
                 document.getElementById("linked_menudisk").reset();
             }
@@ -508,13 +450,7 @@ function createSet(game_download_id, game_id) {
                 data = xmlhttp.responseText.split ( "[BRK]" );
                 document.getElementById("linked_set").innerHTML = data[0];
 
-                $.notify_osd.create({
-                    'text'        : data[1],             // notification message
-                    'icon'        : '{$style_dir}images/osd_icons/star.png', // icon path, 48x48
-                    'sticky'      : false,             // if true, timeout is ignored
-                    'timeout'     : 4,                 // disappears after 6 seconds
-                    'dismissable' : true               // can be dismissed manually
-                    });
+                OSDMessageDisplay (data[1]);
 
                 document.getElementById("linked_set").reset();
             }
@@ -546,13 +482,7 @@ function delSet(set_id, game_download_id, game_id) {
                 data = xmlhttp.responseText.split ( "[BRK]" );
                 document.getElementById("linked_set").innerHTML = data[0];
 
-                $.notify_osd.create({
-                    'text'        : data[1],             // notification message
-                    'icon'        : '{$style_dir}images/osd_icons/star.png', // icon path, 48x48
-                    'sticky'      : false,             // if true, timeout is ignored
-                    'timeout'     : 4,                 // disappears after 6 seconds
-                    'dismissable' : true               // can be dismissed manually
-                    });
+                OSDMessageDisplay (data[1]);
 
                 document.getElementById("linked_set").reset();
             }
@@ -580,13 +510,7 @@ function linkSet(game_download_id, game_id) {
                 data = xmlhttp.responseText.split ( "[BRK]" );
                 document.getElementById("linked_set").innerHTML = data[0];
 
-                $.notify_osd.create({
-                    'text'        : data[1],             // notification message
-                    'icon'        : '{$style_dir}images/osd_icons/star.png', // icon path, 48x48
-                    'sticky'      : false,             // if true, timeout is ignored
-                    'timeout'     : 4,                 // disappears after 6 seconds
-                    'dismissable' : true               // can be dismissed manually
-                    });
+                OSDMessageDisplay (data[1]);
 
                 document.getElementById("linked_set").reset();
             }
@@ -643,13 +567,7 @@ function addAuthorstoDownload(game_download_id, game_id) {
                 data = xmlhttp.responseText.split ( "[BRK]" );
                 document.getElementById("download_credit_list").innerHTML = data[0];
 
-                $.notify_osd.create({
-                    'text'        : data[1],             // notification message
-                    'icon'        : '{$style_dir}images/osd_icons/star.png', // icon path, 48x48
-                    'sticky'      : false,             // if true, timeout is ignored
-                    'timeout'     : 4,                 // disappears after 6 seconds
-                    'dismissable' : true               // can be dismissed manually
-                    });
+                OSDMessageDisplay (data[1]);
 
                 document.getElementById("download_credit_list").reset();
             }
@@ -691,13 +609,7 @@ function deleteAuthors(game_download_ind_id,game_download_id,game_id,ind_id) {
                     data = xmlhttp.responseText.split ( "[BRK]" );
                     document.getElementById("download_credit_list").innerHTML = data[0];
 
-                    $.notify_osd.create({
-                        'text'        : data[1],             // notification message
-                        'icon'        : '{$style_dir}images/osd_icons/star.png', // icon path, 48x48
-                        'sticky'      : false,             // if true, timeout is ignored
-                        'timeout'     : 4,                 // disappears after 6 seconds
-                        'dismissable' : true               // can be dismissed manually
-                        });
+                    OSDMessageDisplay (data[1]);
 
                     document.getElementById("download_credit_list").reset();
                 }
@@ -730,13 +642,11 @@ function deleteDownload(str, game_id) {
 }
 </script>
 {/block}
-
-
 {block name=left_tile}
     <div class="standard_tile">
         <h1>OPTIONS</h1>
         <div class="standard_tile_line"></div>
-        <div class="standard_table_center">
+        <div class="standard_tile_text_center">
             <br>
             Quick add new format to db:
             <form action="../downloads/db_downloads_game.php" method="post" name="post_download_format_add" id="download_format_add">
@@ -800,7 +710,7 @@ function deleteDownload(str, game_id) {
         </div>
     </div>
     <br>
-    {include file='1/admin/left_nav.html'}
+
 {/block}
 
 {block name=main_tile}
@@ -809,15 +719,15 @@ function deleteDownload(str, game_id) {
 <div class="standard_tile" id="game_upload">
     <h1>{$game.game_name}</h1>
     <div class="standard_tile_line"></div>
-    <div class="standard_tile_text">
+    <div class="standard_tile_padding">
         <div class="left_nav_section">
             In this section you can upload a download for <b><a href="../games/games_detail.php?game_id={$game.game_id}" class="standard_tile_link_reverse">{$game.game_name}</a></b>.
         </div>
         <br>
-        <div class="standard_tile_text">
+        <div class="standard_tile_padding">
             <form action="../downloads/db_downloads_game.php?action=add_download" enctype="multipart/form-data" method="post" name="add_file">
-            <fieldset class="centered_fieldset">
-                <legend>Add a new download</legend>
+            <fieldset class="primary_fieldset centered_fieldset">
+                <legend class="primary_legend">Add a new download</legend>
                 <br>
                 <label for="file_upload" class="file_upload">Select file</label>
                 <input id="file_upload" type="file" name="game_download_name">
@@ -833,27 +743,27 @@ function deleteDownload(str, game_id) {
             </form>
         </div>
         <br>
-        <table class="standard_table_list" id="game_list_table">
+        <table class="secondary_table_list table_hover table_sm ">
             <tr>
-                <th id="menu_disk_list_th">Filename</th>
-                <th id="menu_list_crew_th" style="text-align:right; padding-right:5px;">Date</th>
+                <th class="menu_disk_list_column w-30">Filename</th>
+                <th class="menu_state_column w-30">Date</th>
             </tr>
             {if isset($downloads)}
                 {foreach from=$downloads item=line}
                     <tr id="downloadedit_ajax_{$line.game_download_id}">
-                        <td class="menu_disk_list_td">{if $line.filename != ''}<a onclick="editDownload({$line.game_download_id},{$game.game_id})" style="cursor: pointer;">{$line.filename}</a>{else}<i>n/a</i>{/if}</td>
-                        <td class="menu_list_crew_td" style="text-align:right; padding-right:5px;">{if isset($line.date)}{$line.date}{else}<i>n/a</i>{/if}</td>
+                        <td class="menu_disk_list_column w-30">{if $line.filename != ''}<a onclick="editDownload({$line.game_download_id},{$game.game_id})" style="cursor: pointer;">{$line.filename}</a>{else}<i>n/a</i>{/if}</td>
+                        <td class="menu_state_column w-30">{if isset($line.date)}{$line.date}{else}<i>n/a</i>{/if}</td>
                     </tr>
                 {/foreach}
             {/if}
             <tr>
-                <td class="standard_table_left" colspan="2">
-                    <br><b>{if $nr_downloads == 1}1 download found {else} {$nr_downloads} downloads found{/if}</b>
+                <td colspan="2">
+                    <b>{if $nr_downloads == 1}1 download found {else} {$nr_downloads} downloads found{/if}</b>
                 </td>
             </tr>
         </table>
     </div>
-    <div class="standard_table_center"><a href="javascript:history.go(-1)" class="standard_tile_link">back</a></div>
+    <div class="standard_tile_text_center"><a href="javascript:history.go(-1)" class="standard_tile_link">back</a></div>
     <br>
 </div>
 {/block}

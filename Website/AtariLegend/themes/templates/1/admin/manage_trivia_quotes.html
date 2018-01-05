@@ -81,14 +81,14 @@ $("#JSSubmitEditTriviaQuote").click(function() {
 <div class="standard_tile">
     <h1>TRIVIA QUOTES</h1>
     <div class="standard_tile_line"></div>
-    <div class="standard_tile_text">
+    <div class="standard_tile_padding">
         <div class="left_nav_section">
             Here you can add a new <strong>trivia quote</strong> by using the below text field or you can delete old trivia quotes.<br/>
         </div>
         <br>
         <br>
-        <fieldset>
-        <legend>Add new Trivia</legend>
+        <fieldset class="primary_fieldset">
+        <legend class="primary_legend">Add new Trivia</legend>
         <div class="centered_fieldset">
             <form action="../trivia/db_trivia.php" method="post" name="trivia" id="trivia">
             Trivia Text<br>
@@ -102,8 +102,8 @@ $("#JSSubmitEditTriviaQuote").click(function() {
         </fieldset>
         <br>
         {foreach from=$trivia item=line}
-            <fieldset id="Ajax_trivia_quote_{$line.trivia_quote_id}">
-            <legend>Trivia ID {$line.trivia_quote_id}</legend>
+            <fieldset class="primary_fieldset" id="Ajax_trivia_quote_{$line.trivia_quote_id}">
+            <legend class="primary_legend">Trivia ID {$line.trivia_quote_id}</legend>
             <br>
             {$line.trivia_quote}
             <br>

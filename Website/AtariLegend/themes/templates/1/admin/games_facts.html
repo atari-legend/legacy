@@ -138,15 +138,15 @@ function FactEditable(game_id,game_fact_id) {
 <div class="standard_tile">
     <h1>{$game_name|upper}</h1>
     <div class="standard_tile_line"></div>
-    <div class="standard_tile_text">
+    <div class="standard_tile_padding">
         <div class="left_nav_section">
             Here you can add a new game fact to a game. These can contain pictures as wel.
         </div>
         <br>
         <br>
         <form enctype="multipart/form-data" action="../games/db_games_facts.php" method="post" name="post" id="fact">
-            <fieldset>
-            <legend>Add new fact</legend>
+            <fieldset class="primary_fieldset">
+            <legend class="primary_legend">Add new fact</legend>
             <div class="centered_fieldset">
                 <br>
                 <input type="button" accesskey= "b" name="addbbcode0" value="B" onclick="bbstyle(0,'fact_text')">
@@ -169,13 +169,13 @@ function FactEditable(game_id,game_fact_id) {
         <br>
         {if (isset($facts))}
             {foreach from=$facts item=line}
-                <fieldset>
-                <legend>Fact nr {$line.game_fact_nr}</legend>
+                <fieldset class="primary_fieldset">
+                <legend class="primary_legend">Fact nr {$line.game_fact_nr}</legend>
                 <a style="cursor: pointer;" onClick="FactEditable({$line.game_id},{$line.game_fact_id})" class="left_nav_link"><i class="fa fa-pencil fa-border fa-pull-right" id="fact_edit_icon{$line.game_fact_id}" aria-hidden="true"  title="Click to edit fact" style="margin-bottom:5px;"></i></a>
                 <a style="cursor: pointer;" onClick="SaveEditable({$line.game_id},{$line.game_fact_id})" class="left_nav_link"><i class="fa fa-floppy-o fa-border fa-pull-right" id="fact_save_icon{$line.game_fact_id}" aria-hidden="true" title="Click to save fact" style="display:none;margin-bottom:5px;"></i></a>
                 <br>
                 <br>
-                <div id="latest_fact_edit{$line.game_fact_id}"><div id="games_detail_review_main_text">{$line.game_fact}</div></div>
+                <div id="latest_fact_edit{$line.game_fact_id}"><div class="standard_link_color">{$line.game_fact}</div></div>
                 <div class="centered_fieldset">
                     <input type="button" accesskey="b" name="addbbcode0" value="B" onclick="bbstyle(0,'fact_input{$line.game_fact_id}')" style="display:none;" id="bb_b{$line.game_fact_id}">
                     <input type="button" accesskey="u" name="addbbcode4" value="U" onclick="bbstyle(4,'fact_input{$line.game_fact_id}')" style="display:none;" id="bb_u{$line.game_fact_id}">

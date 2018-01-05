@@ -16,11 +16,11 @@
 <div class="standard_tile">
     <h1>BUG REPORTS</h1>
     <div class="standard_tile_line"></div>
-    <div class="standard_tile_text">
+    <div class="standard_tile_padding">
         {if isset($bug_report)}
             {foreach from=$bug_report item=line}
-                <fieldset>
-                <legend>Posted by <a href="../user/user_detail.php?user_id_selected={$line.user_id}" class="standard_tile_link_reverse">{$line.userid}</a> on {$line.bug_report_date} </legend>
+                <fieldset class="primary_fieldset">
+                <legend class="primary_legend">Posted by <a href="../user/user_detail.php?user_id_selected={$line.user_id}" class="standard_tile_link_reverse">{$line.userid}</a> on {$line.bug_report_date} </legend>
                 <br>
                 <b><u>Type : {$line.bug_report_type}</u></b>
                 <br><br>
@@ -36,7 +36,7 @@
                 <br>
             {/foreach}
         {else}
-            <fieldset>
+            <fieldset class="primary_fieldset">
                 No bugs reported!
             </fieldset>
         {/if}

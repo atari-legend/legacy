@@ -26,7 +26,7 @@
 <div class="standard_tile" id="news_edit_image">
     <h1>EDIT NEWS IMAGE</h1>
     <div class="standard_tile_line"></div>
-    <div class="standard_tile_text">
+    <div class="standard_tile_padding">
         <div class="left_nav_section">
             Here you can delete a news image
             <br>
@@ -36,40 +36,51 @@
         </div>
         <br>
         <br>
-        <fieldset>
-            <legend>delete image</legend>
             <div>
-                {foreach name='outer' from=$news_images item='line'}
-                    <div class="news_images_container">
-                        <div class="news_images_check">
-                            <div class="checkbox">
-                                <input type="checkbox" id="{$line.image_id}" name="news_image_id[]" value="{$line.image_id}">
-                                <label for="{$line.image_id}"></label>
-                                <!--<input type="checkbox" name="news_image_id[]" value="{$line.image_id}">-->
-                            </div>
-                        </div>
-                        <div class="news_images_display">
-                            <img src="../../includes/show_image.php?file={$line.image_link}&amp;resize=200,null,null,null" alt="newsbutton" class="game_screenshot_img">
-                        </div>
-                        <div class="news_images_name">
+                <table class="primary_table_list table_md table_hover">
+                    <tr>
+                        <th class="news_images_check">Select</th>
+                        <th class="news_images_display">Image</th>
+                        <th class="news_images_display">Name</th>
+                        <th class="news_images_name">Number</th>
+                        <th class="news_images_name">News posts</th>
+                    </tr>
+                    {foreach name='outer' from=$news_images item='line'}
+                    <tr>
+                        <td class="news_images_check">
+                            <input type="checkbox" id="{$line.image_id}" name="news_image_id[]" value="{$line.image_id}">
+                            <label for="{$line.image_id}"></label>
+                        </td>
+                        <td class="news_images_display">
+                            <img src="../../includes/show_image.php?file={$line.image_link}&amp;resize=100,null,null,null" alt="newsbutton" class="game_screenshot_img">
+                        </td>
+                        <td class="news_images_display">
                             {$line.image_name}
-                            <br>
-                            Image has been used in {$line.image_count} news posts.
-                            <br>
+                        </td>
+                        <td class="news_images_name">
+                            {$line.image_count} news posts
+                        </td>
+                        <td class="news_images_name">
                             {foreach from=$news_headlines name='inner' item='line2'}
                                 {if $line.image_id == $line2.news_image_id}
-                                    <a href="../news/news_edit.php?news_id={$line2.news_id}" class="left_nav_link"><b>{$line2.news_headline}</b></a><br/>
+                                    <a href="../news/news_edit.php?news_id={$line2.news_id}" class="standard_tile_link">
+                                    {$line2.news_headline}
+                                </a>
+                                <br/>
                                 {/if}
                             {/foreach}
-                        </div>
-                    </div>
-                    <br>
-                {/foreach}
+                        </td>
+                    </tr>
+                    {/foreach}
+                    <tr>
+                        <td colspan="5">
+                            <img src="../../../themes/templates/1/includes/img/arrow_ltr.gif" alt="" width="38" height="22" style="float:left;">
+                            <input type="submit" value="Delete" class="topbutton_cpanel_small">
+                        </td>
+                    </tr>
+                </table>
             </div>
-            <br>
-            <br>
-            <input type="submit" value="Delete" class="topbutton_cpanel_small">
-        </fieldset>
+
     </div>
 </div>
 </form>

@@ -239,7 +239,7 @@ function storeCaret(textEl) {
 <div class="standard_tile">
     <h1>CREW EDITOR </h1>
     <div class="standard_tile_line"></div>
-    <div class="standard_table_center">
+    <div class="standard_tile_text_center">
         <br>
         Search for crew:<br>
         <form action="../crew/crew_editor.php" method="get" name="post_menu_crew_set" id="menu_crew_set">
@@ -285,7 +285,7 @@ function storeCaret(textEl) {
 <div class="standard_tile">
     <h1>EDIT CREW</h1>
     <div class="standard_tile_line"></div>
-    <div class="standard_tile_text">
+    <div class="standard_tile_padding">
         <div class="left_nav_section">
             In this section you can edit different aspects of the crew.
         </div>
@@ -301,8 +301,8 @@ function storeCaret(textEl) {
             {* START THE CREW MAIN EDIT *}
             <br>
             <br>
-            <fieldset>
-                <legend>Edit Crew</legend>
+            <fieldset class="primary_fieldset">
+                <legend class="primary_legend">Edit Crew</legend>
                 <form action="../crew/db_crew.php" method="post" name="post" id="crew_edit">
                     <div style="text-align:left;">
                         <b>Name :</b>
@@ -333,8 +333,8 @@ function storeCaret(textEl) {
             <br/>
             <br/>
             {if (isset($crew_select.crew_logo) and $crew_select.crew_logo <> '')}
-                <fieldset class="game_set">
-                <legend class="links_legend">Crew Logo</legend>
+                <fieldset class="primary_fieldset">
+                <legend class="primary_legend">Crew Logo</legend>
                     <br>
                     <img src="../../includes/show_image.php?file={$crew_select.crew_logo}" class="user_stats_img" id="user_details_img_dark" style="display:inline;">
                     <br>
@@ -349,8 +349,8 @@ function storeCaret(textEl) {
                 </fieldset>
             {else}
                 <form action="../crew/db_crew.php" method="post" enctype="multipart/form-data" name="crew_pic" id="crew_pic">
-                <fieldset class="game_set">
-                <legend class="links_legend">Crew Logo</legend>
+                <fieldset class="primary_fieldset">
+                <legend class="primary_legend">Crew Logo</legend>
                     <!--<input type="file" name="crew_pic" accept="image/jpeg,image/x-png">-->
                     <label for="file_upload" class="file_upload">Select file</label>
                     <input id="file_upload" type="file" name="crew_pic" accept="image/jpeg,image/x-png">
@@ -368,7 +368,7 @@ function storeCaret(textEl) {
             {* END THE CREW MAIN EDIT *}
         {else}
             <br>
-            <div class="standard_table_center"> Crew does not exist </div>
+            <div class="standard_tile_text_center"> Crew does not exist </div>
         {/if}
     </div>
 </div>

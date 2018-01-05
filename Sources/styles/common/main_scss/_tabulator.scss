@@ -393,7 +393,8 @@ $footer_seperator_color: #000000; //footer bottom seperator color
                         border: 1px solid  $edit_box_color;
                         padding: 0;
 
-                        input, select {
+                        input,
+                        select {
                             border: 1px;
                             background: transparent;
                         }

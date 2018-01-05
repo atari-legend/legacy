@@ -285,7 +285,7 @@ function myFunction() {
         {if isset($interview.interview_ind_name)}
         <h1><a href="../individuals/individuals_edit.php?ind_id={$interview.interview_ind_id}" class="standard_tile_link">{$interview.interview_ind_name|upper}</a></h1>
         <div class="standard_tile_line"></div>
-        <div class="standard_tile_text">
+        <div class="standard_tile_padding">
             <div class="left_nav_section">
                 At this page you can change an existing interview in the AL database. The screen might seem a little complex,
                 therefor I suggest you first read the help provided with this section on the top right.
@@ -300,8 +300,8 @@ function myFunction() {
             <br>
             <div id="edit" class="tabcontent">
                 <form action="../interviews/db_interview.php" method="post" name="post" id="screenshot_add_to_interview">
-                    <fieldset>
-                        <legend>Edit interview</legend>
+                    <fieldset class="primary_fieldset">
+                        <legend class="primary_legend">Edit interview</legend>
                         <br>
                         <div style="display:inline-block;">
                             <b>Written by : </b>
@@ -344,8 +344,8 @@ function myFunction() {
                             <br>
                         </div>
                         <div style="width:100%;">
-                            <div style="width:20%;"><b>Date :</b></div>
-                            <div style="width:200px;">{html_select_date time=$interview.interview_date start_year="2000"}</div>
+                            <div><b>Date :</b></div>
+                            <div>{html_select_date time=$interview.interview_date start_year="2000" class="standard_select"}</div>
                         </div>
                         <br>
                         <br>
@@ -382,12 +382,12 @@ function myFunction() {
                         <textarea name="textfield" id="game_review_textfield" ONSELECT="javascript:storeCaret(this);" ONCLICK="javascript:storeCaret(this);" ONKEYUP="javascript:storeCaret(this);" ONCHANGE="javascript:storeCaret(this);" rows="15" style="padding-left:0px;">{$interview.interview_text}</textarea>
                     </fieldset>
                     <br>
-                    <fieldset class="centered_fieldset">
-                        <legend>Screenshots</legend>
+                    <fieldset class="primary_fieldset centered_fieldset">
+                        <legend class="primary_legend">Screenshots</legend>
                         <br>
                         <div id="interview_screenshot_list">
                         {if $screenshots_nr <> ''}
-                            <table class="standard_table_list_no_hover">
+                            <table class="primary_table_list">
                             {foreach from=$screenshots item=line}
                                 <tr>
                                     <td style="width:1%;border:0;">
@@ -421,8 +421,8 @@ function myFunction() {
                 </form>
             </div>
             <div id="preview" class="tabcontent">
-                <fieldset>
-                    <legend>Preview</legend>
+                <fieldset class="primary_fieldset">
+                    <legend class="primary_legend">Preview</legend>
                     <div class="review_container">
                         <div class="review_child" id="review_text">
                             Written by <span id="interview_preview_user"></span>
@@ -478,13 +478,13 @@ function myFunction() {
             {else}
                 <h1>Interview edit</h1>
                 <div class="standard_tile_line"></div>
-                <div class="standard_tile_text">
+                <div class="standard_tile_padding">
                     <div class="left_nav_section">
                         Interview does not exist.
                     </div>
                 </div>
             {/if}
-            <div class="standard_table_center"><a href="../interviews/interviews_main.php" class="standard_tile_link">back</a></div>
+            <div class="standard_tile_text_center"><a href="../interviews/interviews_main.php" class="standard_tile_link">back</a></div>
             <br>
         </div>
     </div>

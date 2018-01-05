@@ -18,16 +18,16 @@
 
 {if isset($smarty_action) and $smarty_action == "delete_comment"}
     {if isset($comments)}
-        <table class="standard_table_list_comments_main">
+        <table class="primary_table_list table_md">
         {foreach from=$comments item=line}
             <tr>
-                <td class="gc_left_head">
+                <td class="gc_left_column w-20">
                     <span class="standard_tile_subtext">Random shot</span>
                 </td>
-                <td class="gc_center_head">
+                <td class="gc_center_column w-60">
                     <span class="standard_tile_subtext"><a href="../games/games_main_detail.php?game_id={$line.game_id}">{$line.game}</a></span>
                 </td>
-                <td class="gc_right_head">
+                <td class="gc_right_head w-20">
                     <span style="margin-right:5px;">
                     {if isset($user_session)}
                         {if $user_session.user_id == $line.users_id}
@@ -56,7 +56,7 @@
                 </td>
             </tr>
             <tr>
-                <td class="gc_left">
+                <td class="gc_left_column w-20">
                     {if isset($line.image) and $line.image != ''}
                         <a href="../games/games_detail.php?game_id={$line.game_id}" class="links_addnew_link">
                         <img src="../../includes/show_image.php?file={$line.image}&amp;resize=160,null,null,null" alt="{$line.game}" class="user_stats_img_dark" style="max-width:95%;">
@@ -72,12 +72,12 @@
                         <br><br>
                     </span>
                 </td>
-                <td class="gc_center" colspan="2">
+                <td class="gc_center_column w-80" colspan="2">
                     <div class="latest_comments_text">
                         Posted by <a href="../../admin/user/user_detail.php?user_id_selected={$line.users_id}" class="latest_comments_link">{$line.user_name}</a> on {$line.date}
                         <br>
                         <br>
-                        <div id="comment_edit{$line.comment_id}"><div id="games_detail_review_main_text">{$line.comment}</div></div>
+                        <div id="comment_edit{$line.comment_id}"><div class="standard_link_color">{$line.comment}</div></div>
                         <div style="width:108%;"><textarea cols="105" id="comment_input{$line.comment_id}" class="main_comments_textarea" style="display:none;">{$line.comment_edit}</textarea></div>
                     </div>
                 </td>

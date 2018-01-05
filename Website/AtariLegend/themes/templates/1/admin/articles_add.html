@@ -174,15 +174,15 @@ function storeCaret(textEl) {
 <div class="standard_tile" id="interviews_add">
     <h1>{$article_title}</h1>
     <div class="standard_tile_line"></div>
-    <div class="standard_tile_text">
+    <div class="standard_tile_padding">
         <div class="left_nav_section">
             At this page you can add a new existing article in the AL database.
         </div>
         <br>
         <br>
         <form action="../articles/db_articles.php" method="post" name="post">
-            <fieldset>
-                <legend>Add article</legend>
+            <fieldset class="primary_fieldset">
+                <legend class="primary_legend">Add article</legend>
                 <div style="display:inline-block;">
                     <b>Title</b>
                     <br>
@@ -217,7 +217,7 @@ function storeCaret(textEl) {
                 </div>
                 <div style="width:100%;">
                     <div style="width:20%;"><b>Date :</b></div>
-                    <div style="width:200px;">{html_select_date start_year="2000" class="standard_select"}</div>
+                    <div>{html_select_date start_year="2000" class="standard_select"}</div>
                 </div>
                 <br>
                 <br>
@@ -250,7 +250,7 @@ function storeCaret(textEl) {
             </fieldset>
         </form>
         <br>
-        <div class="standard_table_center"><a href="javascript:history.go(-1)" class="standard_tile_link">back</a></div>
+        <div class="standard_tile_text_center"><a href="javascript:history.go(-1)" class="standard_tile_link">back</a></div>
     </div>
 </div>
 

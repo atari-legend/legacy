@@ -43,9 +43,9 @@ function typedelete(doc_type_id)
     {if isset($doc_type_edit.doc_type_name_edit)}
     <h1>{$doc_type_edit.doc_type_name_edit}</h1>
     <div class="standard_tile_line"></div>
-    <div class="standard_tile_text">
-        <fieldset class="centered_fieldset">
-            <legend>Edit doc type</legend>
+    <div class="standard_tile_padding">
+        <fieldset class="primary_fieldset centered_fieldset">
+            <legend class="primary_legend">Edit doc type</legend>
             <form action="../docs/db_doc_type.php" method="post" name="post" id="doc_type_edit">
                 <b>Name :</b>
                 <input type="text" name="doc_type_name" value="{$doc_type_edit.doc_type_name_edit}" class="standard_input input_large">
@@ -61,13 +61,13 @@ function typedelete(doc_type_id)
     {else}
     <h1>Edit Doc Type</h1>
     <div class="standard_tile_line"></div>
-    <div class="standard_tile_text">
+    <div class="standard_tile_padding">
         <div class="left_nav_section">
             Doc Type does not exist.
         </div>
     </div>
     {/if}
-    <div class="standard_table_center"><a href="../docs/doc_type.php" class="standard_tile_link">back</a></div>
+    <div class="standard_tile_text_center"><a href="../docs/doc_type.php" class="standard_tile_link">back</a></div>
     <br>
 </div>
 {/block}

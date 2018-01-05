@@ -55,7 +55,8 @@
     margin-left: 13%;
 }
 
-#child_1_games, #child_2_games {
+#child_1_games,
+#child_2_games {
     width: 47.5%;
     border-top: 1px solid #00d3d3;
     border-bottom: 1px solid #00d3d3;
@@ -113,7 +114,9 @@
     border-bottom: 3px solid #006f6f;
 }
 
-#games_main_list_3, #games_main_list_2, #games_main_list_1 {
+#games_main_list_4,
+#games_main_list_3,
+#games_main_list_2 {
     display: none;
 }
 
@@ -131,7 +134,9 @@
 .game_main_list_screenshot_img:not(.initial) {
     transition: opacity 1s;
 }
-.game_main_list_screenshot_img.initial, .game_main_list_screenshot_img.loaded, .game_main_list_screenshot_img.error {
+.game_main_list_screenshot_img.initial,
+.game_main_list_screenshot_img.loaded,
+.game_main_list_screenshot_img.error {
     opacity: 1;
 }
 
@@ -160,12 +165,6 @@
     height: 10em;
 }
 
-.standard_table_list_comments_main {
-    @extend .standard_table_list_stats;
-}
-.standard_table_list_comments_main td {
-    border-bottom: solid 2px #000000;
-}
 
 //****************Games detail page************************/
 
@@ -207,10 +206,6 @@
 .games_main_detail_info_left {
     color: #ffffff;
     font-size: 1em;
-}
-
-.standard_table_games_main_detail {
-    @extend .standard_table_list_stats;
 }
 
 .games_main_detail_screenshot {
@@ -262,7 +257,9 @@
 .games_main_detail_thumbs .p:hover .t {
     opacity: .8;
 }
-.games_main_detail_thumbs .pav .t, .games_main_detail_thumbs .pdn .t, .games_main_detail_thumbs .p:hover.pdn .t {
+.games_main_detail_thumbs .pav .t,
+.games_main_detail_thumbs .pdn .t,
+.games_main_detail_thumbs .p:hover.pdn .t {
     opacity: 1;
 }
 
@@ -393,7 +390,9 @@
 .games_main_detail_thumbs_box .p:hover .t {
     opacity: .8;
 }
-.games_main_detail_thumbs_box .pav .t, .games_main_detail_thumbs_box .pdn .t, .games_main_detail_thumbs_box .p:hover.pdn .t {
+.games_main_detail_thumbs_box .pav .t,
+.games_main_detail_thumbs_box .pdn .t,
+.games_main_detail_thumbs_box .p:hover.pdn .t {
     opacity: 1;
 }
 
@@ -440,7 +439,7 @@
 
 .games_main_detail_comments_container::-webkit-scrollbar-thumb {
     background-color: #008b8b;
-    outline: 1px solid slategrey;
+    outline: 1px solid #708090;
 }
 
 //scrollbar IE
@@ -454,13 +453,6 @@
     scrollbar-shadow-color: #008b8b;
 }
 
-.game_details_review_preview_left {
-    width: 25%;
-}
-
-.game_details_review_preview_right {
-    width: 75%;
-}
 
 .game_details_review_preview_text {
     @extend .standard_list_entry_news_text;
@@ -485,9 +477,6 @@
     align-items: flex-start;
 }
 
-.games_detail_review_child  table {
-    width: 98%;
-}
 #games_detail_review_text {
     display: table-cell;
     width: 75%;
@@ -525,16 +514,4 @@
 .standard_tile_subtext_reviews {
     @extend .standard_tile_subtext;
     font-size: 1em;
-}
-
-#games_detail_review_main_text a:link {
-    color: #008b8b;
-}
-
-#games_detail_review_main_text a:visited {
-    color: #008b8b;
-}
-
-#games_detail_review_main_text a:hover {
-    color: #ffffff;
 }

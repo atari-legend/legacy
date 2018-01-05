@@ -87,7 +87,7 @@ function TestURL() {
     </div>
     <h1>MODIFY LINK</h1>
     <div class="standard_tile_line"></div>
-    <div class="standard_tile_text">
+    <div class="standard_tile_padding">
         {if (isset($website.website_name))}
         <div class="left_nav_section">
             Make the changes you want, then hit the submit button to modify.<br>
@@ -97,12 +97,14 @@ function TestURL() {
         <br>
         <br>
         <form enctype="multipart/form-data" action="../links/db_links.php" method="post" name="linkmod">
-        <fieldset>
-            <legend>Website Data</legend>
+        <fieldset class="primary_fieldset">
+            <legend class="primary_legend">Website Data</legend>
             <div class="links_mod_container">
                 <div class="links_mod_row">
                     <div class="links_mod_text">Site Name</div>
-                    <div class="links_mod_input"><input type="text" name="website_name" id="website_name" value="{$website.website_name}" class="standard_input input_large"></div>
+                    <div class="links_mod_input">
+                        <input type="text" name="website_name" id="website_name" value="{$website.website_name}" class="standard_input input_large">
+                    </div>
                 </div>
                 <div class="links_mod_row">
                     <div class="links_mod_text">URL</div>
@@ -114,7 +116,7 @@ function TestURL() {
                 <div class="links_mod_row">
                     <div class="links_mod_text">Category</div>
                     <div class="links_mod_input">
-                        <select name="category" id="website_category_select">
+                        <select name="category" class="standard_select" id="website_category_select">
                             {foreach from=$category item=line}
                                     <option value="{$line.category_id}" {$line.selected}>{$line.category_name}</option>
                             {/foreach}
@@ -195,7 +197,7 @@ function TestURL() {
     {/if}
     <br>
     </div>
-    <div class="standard_table_center"><a href="../links/link_modlist.php" class="standard_tile_link">back</a></div>
+    <div class="standard_tile_text_center"><a href="../links/link_modlist.php" class="standard_tile_link">back</a></div>
     <br>
 </div>
 {/block}

@@ -14,9 +14,9 @@
 <link rel="stylesheet" href="{$style_dir}css/vendor/font-awesome-4.7.0/css/font-awesome.min.css"> <!-- Font awesome for icons-->
 
 
-    <div class="standard_tile_text">
+    <div class="standard_tile_padding">
         <div class="main_stats_container">
-            <table class="standard_table_list">
+            <table class="secondary_table_list table_hover table_sm">
             <tr>
                 <td class="online_title">
                     {if $nr_users == '1'}
@@ -32,7 +32,7 @@
                 <td class="online_users">
                     {if isset($users_online)}
                         {foreach from=$users_online item=line}
-                            <i class="fa fa-user-o" aria-hidden="true"></i>&nbsp;<a href="../user/user_detail.php?user_id_selected={$line.user_id}" class="left_nav_link">{$line.user_name}</a>&nbsp;&nbsp;
+                            <i class="fa fa-user-o" aria-hidden="true" style="color:#000000;"></i>&nbsp;<a href="../user/user_detail.php?user_id_selected={$line.user_id}" class="left_nav_link">{$line.user_name}</a>&nbsp;&nbsp;
                         {/foreach}
                     {/if}
                 </td>
@@ -52,7 +52,7 @@
                 <td class="online_users">
                     {if isset($users_24h)}
                         {foreach from=$users_24h item=line}
-                            <i class="fa fa-user-o" aria-hidden="true"></i>&nbsp;<a href="../user/user_detail.php?user_id_selected={$line.user_id}" class="left_nav_link">{$line.user_name}</a>&nbsp;&nbsp;
+                            <i class="fa fa-user-o" aria-hidden="true" style="color:#000000;"></i>&nbsp;<a href="../user/user_detail.php?user_id_selected={$line.user_id}" class="left_nav_link">{$line.user_name}</a>&nbsp;&nbsp;
                         {/foreach}
                     {/if}
                 </td>

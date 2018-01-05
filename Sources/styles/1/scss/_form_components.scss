@@ -97,7 +97,8 @@
     width: 100%;
 }
 
-#download_version, #download_info {
+#download_version,
+#download_info {
     @extend .standard_input;
     width: 95%;
 }

@@ -31,14 +31,14 @@
 <div class="standard_tile" id="games_review_preview">
     <h1>{$review.game_name}</h1>
     <div class="standard_tile_line"></div>
-    <div class="standard_tile_text">
+    <div class="standard_tile_padding">
         <div class="left_nav_section">
             Written by {if $review.email != ''}<a href="mailto:{$review.email}?subject=Your review of {$review.game_name} at Atari Legend" class="left_nav_link">{$review.user_name}</a>{else}{$review.user_name}{/if} on {$review.date}
         </div>
         <br>
         <br>
-        <fieldset>
-            <legend>Preview</legend>
+        <fieldset class="primary_fieldset">
+            <legend class="primary_legend">Preview</legend>
             <div class="review_container">
                 <div class="review_child" id="review_text">
                     {$review.text}
@@ -71,7 +71,7 @@
             <br>
         </fieldset>
         <br>
-        <div class="standard_table_center"><a href="javascript:history.go(-1)" class="standard_tile_link">back</a></div>
+        <div class="standard_tile_text_center"><a href="javascript:history.go(-1)" class="standard_tile_link">back</a></div>
     </div>
 </div>
 {/block}

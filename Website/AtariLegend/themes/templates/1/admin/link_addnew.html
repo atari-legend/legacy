@@ -48,7 +48,7 @@ function TestURL() {
 <div class="standard_tile" id="linkaddnew">
     <h1>ADD NEW LINK</h1>
     <div class="standard_tile_line"></div>
-    <div class="standard_tile_text">
+    <div class="standard_tile_padding">
         <div class="left_nav_section">
             Here you can add a new link by using the below text fields. Note, submitting this information, will add a link on to the online
             Links Archive, which means that it wont be needing validation first.<br>
@@ -58,8 +58,8 @@ function TestURL() {
         <br>
         <form action="../links/db_links.php" method="post" name="linkadd" id="linkadd">
         <div class="links_addnew_container">
-            <fieldset>
-            <legend>Add new link</legend>
+            <fieldset class="primary_fieldset">
+            <legend class="primary_legend">Add new link</legend>
             <div class="links_addnew_row">
                 <div class="links_addnew_text">Site Name</div>
                 <div class="links_addnew_input"><input type="text" name="name" id="name" class="standard_input input_large"></div>
@@ -99,7 +99,7 @@ function TestURL() {
 <div class="standard_tile" id="linkvalidate">
     <h1>VALIDATE LINK</h1>
     <div class="standard_tile_line"></div>
-    <div class="standard_tile_text">
+    <div class="standard_tile_padding">
         <div class="left_nav_section">
             {if isset($error_msg.message)}
                 {$error_msg.message}
@@ -113,8 +113,8 @@ function TestURL() {
             {foreach from=$validate item=lineweb}
                 <div class="links_addnew_container">
                     <form enctype="multipart/form-data" action="../links/db_links.php" method="post" name="linkmod{$lineweb.website_id}" id="linkmod{$lineweb.website_id}">
-                    <fieldset>
-                    <legend>New submitted website</legend>
+                    <fieldset class="primary_fieldset">
+                    <legend class="primary_legend">New submitted website</legend>
                     <div class="links_addnew_row">
                         <div class="links_addnew_text">Site Name</div>
                         <div class="links_addnew_input"><input type="text" name="validate_website_name" value="{$lineweb.website_name}" class="standard_input input_large"></div>
@@ -145,7 +145,7 @@ function TestURL() {
                     <input type="button" name="delete" value="Delete" onClick="deletelink({$lineweb.website_id}); return false;" class="topbutton_cpanel_small">
                     </fieldset>
                     </form>
-                    <fieldset>
+                    <fieldset class="primary_fieldset">
                         <div class="links_addnew_info">Submitted by <a href="../user/user_detail.php?user_id_selected={$lineweb.user_id}" class="links_addnew_link">{$lineweb.user_name}</a> on {$lineweb.website_date}<br>
                         User Email : <a href="mailto:{$lineweb.user_email}?Subject=Thanks%20for%20the%20link%20you%20submitted" class="links_addnew_link">{$lineweb.user_email}</a><br>
                         <br>

@@ -58,15 +58,15 @@ function delete_screenshot(screenshot_id, game_id)
     </div>
     <h1>{$game_name}</h1>
     <div class="standard_tile_line"></div>
-    <div class="standard_tile_text">
+    <div class="standard_tile_padding">
         <div class="left_nav_section">
             In this section you can add screenshots to a selected game. Use the browse buttons to select the shots and press the
             'Submit Query' button to link them to the game.
         </div>
         <br>
         <br>
-        <fieldset class="centered_fieldset">
-            <legend>screenshots</legend>
+        <fieldset class="primary_fieldset centered_fieldset">
+            <legend class="primary_legend">screenshots</legend>
             {if $screenshots_nr <> ''}
                 {foreach from=$screenshots item=line name=screen}
                     <div style="display:inline-block;text-align:center;">
@@ -84,8 +84,8 @@ function delete_screenshot(screenshot_id, game_id)
         </fieldset>
         <br>
         <br>
-        <fieldset class="centered_fieldset">
-            <legend>Browse</legend>
+        <fieldset class="primary_fieldset centered_fieldset">
+            <legend class="primary_legend">Browse</legend>
             <form enctype="multipart/form-data" name="frmUploadShot" action="db_games_screenshot_add.php" method="post">
                 <!--{section name=loop loop=11 start=1}
                     <input type="file" name="image[{$smarty.section.loop.index}]">
@@ -102,7 +102,7 @@ function delete_screenshot(screenshot_id, game_id)
             </form>
         </fieldset>
     </div>
-    <div class="standard_table_center"><a href="../games/games_detail.php?game_id={$game_id}" class="standard_tile_link">back</a></div>
+    <div class="standard_tile_text_center"><a href="../games/games_detail.php?game_id={$game_id}" class="standard_tile_link">back</a></div>
     <br>
 </div>
 {/block}

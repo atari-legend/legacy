@@ -19,11 +19,10 @@
 {if isset($smarty_action) and $smarty_action == "delete_comment"}
     {if isset($comments)}
         <div class="games_main_detail_comments_container">
-            <div class="standard_list_entry">
-                <table class="standard_table_list_comments">
+                <table class="primary_table_list table_md">
                 {foreach from=$comments item=line}
                     <tr>
-                        <td class="standard_table_left">
+                        <td>
                             <span class="standard_tile_subtext" style="font-weight:bold;float:left;margin-left:5px;margin-right:5px;margin-top:15px;">
                                 <a href="../../admin/user/user_detail.php?user_id_selected={$line.user_id}">{$line.user_name}</a>
                             </span>
@@ -54,7 +53,7 @@
                                 {/if}
                             </span>
                             <div class="latest_comments_text">
-                                <div id="latest_comment_edit{$line.comment_id}"><div id="games_detail_review_main_text">{$line.comment}</div></div>
+                                <div id="latest_comment_edit{$line.comment_id}"><div class="standard_link_color">{$line.comment}</div></div>
                                 <div style="width:100%;text-align:center;"><textarea id="comment_input{$line.comment_id}" class="latest_comments_textarea" style="display:none;" cols="80">{$line.comment_edit}</textarea></div>
                             </div>
                             <span class="standard_tile_subtext" style="font-weight:bold;float:right;display:inline;margin-right:5px;margin-bottom:15px;">
@@ -65,7 +64,6 @@
                     </tr>
                 {/foreach}
                 </table>
-            </div>
         </div>
     {/if}
 {/if}

@@ -47,14 +47,14 @@ function deleteseries(str)
     {if (isset($series_info.game_series_name)) }
     <h1>{$series_info.game_series_name} selected</h1>
     <div class="standard_tile_line"></div>
-    <div class="standard_tile_text">
+    <div class="standard_tile_padding">
         <div class="left_nav_section">
             Over here you can edit/delete a series or add/remove games to/from it.
         </div>
         <br>
         <br>
-        <fieldset class="centered_fieldset">
-        <legend>Series options</legend>
+        <fieldset class="primary_fieldset centered_fieldset">
+        <legend class="primary_legend">Series options</legend>
             <a style="cursor: pointer;" onClick="deleteseries({if isset($series_info.game_series_id)}{$series_info.game_series_id}{/if}); return false;" class="left_nav_link">
                 Delete series
             </a>
@@ -65,8 +65,8 @@ function deleteseries(str)
         </fieldset>
         <br>
         <br>
-        <fieldset class="centered_fieldset">
-            <legend>Edit Series name</legend>
+        <fieldset class="primary_fieldset centered_fieldset">
+            <legend class="primary_legend">Edit Series name</legend>
             {if (isset($series_info.sql_series_link_nr) and $series_info.sql_series_link_nr ==0)}
                 No games hooked to this series yet.
                 </fieldset>
@@ -86,42 +86,42 @@ function deleteseries(str)
                 <br>
                 <br>
                 <form action="../games/db_games_series.php" method="post" name="delete_from_series" id="delete_from_series">
-                    <table class="standard_table_list">
+                    <table class="secondary_table_list table_md table_hover ">
                         <tr>
-                            <th style="width:5%; text-align:left;">Info</th>
-                            <th id="game_th">Game Name</th>
-                            <th id="pub_th">Publisher</th>
-                            <th id="dev_th">Developer</th>
-                            <th id="year_th">Year</th>
+                            <th class="w-5" style="text-align:left;">Info</th>
+                            <th class="game_name_column w-40">Game Name</th>
+                            <th class="publisher_table_column w-20">Publisher</th>
+                            <th class="developer_table_column w-20">Developer</th>
+                            <th class="release_year_column w-10">Year</th>
                         </tr>
                         {foreach from=$series_link item=line}
                             <tr>
-                                <td style="width:5%;">
+                                <td class="w-5">
                                     <div class="checkbox">
                                         <input type="checkbox" id="{$line.game_series_cross_id}" name="game_series_cross_id[]" value="{$line.game_series_cross_id}">
                                         <label for="{$line.game_series_cross_id}"></label>
                                     </div>
                                 </td>
-                                <td class="game_td">{if $line.game_name != ''}<a href="games_detail.php?game_id={$line.game_id}" class="standard_table_left">{$line.game_name}</a>
+                                <td class="game_name_column w-40">{if $line.game_name != ''}<a href="games_detail.php?game_id={$line.game_id}" class="standard_tile_text_left">{$line.game_name}</a>
                                         {else}<i>n/a</i>{/if}
                                 </td>
-                                <td class="pub_td">{if $line.publisher_name != ''}
-                                        <a href="games_list.php?publisher={$line.publisher_id}&amp;action=search" class="standard_table_left">
+                                <td class="publisher_table_column w-20">{if $line.publisher_name != ''}
+                                        <a href="games_list.php?publisher={$line.publisher_id}&amp;action=search" class="standard_tile_text_left">
                                             {$line.publisher_name}
                                     </a>
                                         {else}
                                             <i>n/a</i>
                                         {/if}</td>
-                                <td class="dev_td">{if $line.developer_name != ''}
-                                        <a href="games_list.php?developer={$line.developer_id}&amp;action=search" class="standard_table_left">
+                                <td class="developer_table_column w-20">{if $line.developer_name != ''}
+                                        <a href="games_list.php?developer={$line.developer_id}&amp;action=search" class="standard_tile_text_left">
                                             {$line.developer_name}
                                         </a>
                                         {else}
                                             <i>n/a</i>
                                         {/if}</td>
-                                <td class="year_td">
+                                <td class="release_year_column w-10">
                                     {if $line.year != ''}
-                                        <a href="games_list.php?year={$line.year}&amp;action=search" class="standard_table_left">
+                                        <a href="games_list.php?year={$line.year}&amp;action=search" class="standard_tile_text_left">
                                             {$line.year}
                                         </a>
                                         {else}
@@ -143,12 +143,12 @@ function deleteseries(str)
                 </form>
             {/if}
         <br>
-        <div class="standard_table_center"><a href="../games/games_series_main.php" class="standard_tile_link">back</a></div>
+        <div class="standard_tile_text_center"><a href="../games/games_series_main.php" class="standard_tile_link">back</a></div>
     </div>
     {else}
         <h1>Game series</h1>
         <div class="standard_tile_line"></div>
-        <div class="standard_tile_text">
+        <div class="standard_tile_padding">
             <div class="left_nav_section">
                 Game series does not exist
             </div>
