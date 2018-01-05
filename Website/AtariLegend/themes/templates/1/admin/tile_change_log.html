@@ -21,9 +21,7 @@
     <div class="standard_tile_line"></div>
     <br>
         <div class="standard_table_left">
-            <h5 class="standard_tile_subtext" style="font-family:verdana;">
-
-            <table class="standard_table_list_stats">
+            <table class="primary_table_list">
             {foreach from=$log item=line}
             <tr>
                 <td class="standard_table_center" style="padding-top:3px; padding-bottom:3px;">
@@ -38,10 +36,11 @@
                         added{if $line.log_subsection =="Screenshots"}
                                 {else if $line.log_subsection =="Authors"} an
                                 {else if $line.log_subsection =="Individual"} an
+                                {else if $line.log_subsection =="Interview"} an
                                 {else} the{/if}
                     {else if $line.log_action=="Delete"}
                         removed{if $line.log_subsection !="Screenshots"} the{/if}
-                    {else if $line.log_action=="Update"}
+                    {else if $line.log_action=="Update" or $line.log_action=="Edit"}
                         modified the
                     {else}
                         {$line.log_action} the
@@ -58,42 +57,52 @@
                                 {else if $line.log_subsection=="Creator"}creator
                                 {else if $line.log_subsection=="Game"}game
                                 {else if $line.log_subsection=="Chain"}chain
+                                {else if $line.log_subsection=="Quote"}quote
                                 {else if $line.log_subsection=="Demo"}demo
+                                {else if $line.log_subsection=="Interview"}interview
                                 {else if $line.log_subsection=="Authors"}author{if $line.log_action=="Insert"} to{else if $line.log_action=="Delete"} from{/if}
                                 {else}{$line.log_subsection}{/if}
 
                         {if $line.log_subsection =="Screenshots"}
 
                         {else if $line.log_subsection =="Individual"}
+                        {else if $line.log_subsection =="Interview"}
                         {else}"{$line.log_subsection_name}"{/if}
                     {/if}
 
                     {* End sub section  *}
 
                     {if $line.log_action=="Delete"} from {/if}
-                    {if $line.log_action=="Insert" and $line.log_subsection != $line.log_section} to {/if}
-
+                    {if $line.log_action=="Insert" and $line.log_subsection != $line.log_section}
+                        {if $line.log_subsection=="Interview"}
+                        {else}to{/if}
+                    {/if}
                     {* Start section  *}
                     {if $line.log_section != 'Menu disk' and $line.log_section != 'Games'}
 
                         {if $line.log_section=="Screenshots"}a screenshot
                         {else if $line.log_section=="Doc type"}doc type
                         {else if $line.log_section=="Game doc"}game doc
+                        {else if $line.log_section=="Trivia"}
+                        {else if $line.log_section=="Interviews"} with
+                        {else if $line.log_section=="Crew"}
                         {else}{$line.log_section}{/if}
 
                     {/if}
 
                     {if $line.log_section_link <> ''}
-                            {$line.log_section_name}
-                    {else}
+
+                        {if $line.log_section=="Trivia"}
+
+                        {else}
                         {$line.log_section_name}
+                        {/if}
                     {/if}
                     {* End section  *}
                 </td>
             </tr>
             {/foreach}
             </table>
-        </h5>
         </div>
 </div>
 {/block}

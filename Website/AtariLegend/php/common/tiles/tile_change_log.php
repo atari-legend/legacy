@@ -17,7 +17,7 @@
     $sql_log = $mysqli->query("SELECT *
                              FROM change_log
                              WHERE section != 'Users'
-                             ORDER BY change_log_id DESC LIMIT 20");
+                             ORDER BY change_log_id DESC LIMIT 120");
 
 while ($log = $sql_log->fetch_array(MYSQLI_BOTH)) {
     $user_name = get_username_from_id($log['user_id']);
@@ -27,7 +27,6 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH)) {
     //  the GAMES SECTION
     if ($log['section'] == 'Games') {
         $section_link = ("../games/games_detail.php" . '?game_id=' . $log['section_id']);
-
 
         if ($log['sub_section'] == 'Game' or $log['sub_section'] == 'AKA' or $log['sub_section'] == 'Year' or $log['sub_section'] == 'Submission') {
             $subsection_link = ("../games/games_detail.php" . '?game_id=' . $log['sub_section_id']);
@@ -258,7 +257,6 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH)) {
         $section_link    = ("../menus/menus_disk_list.php" . '?menu_sets_id=' . $log['section_id']);
         $subsection_link = $section_link;
 
-
         if ($log['sub_section'] == 'Credits' or $log['sub_section'] == 'Nickname') {
             $subsection_link = ("../individuals/individuals_edit.php" . '?ind_id=' . $log['sub_section_id']);
         }
@@ -408,7 +406,6 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH)) {
         $section_link    = ("../administration/bug_report.php");
         $subsection_link = ("../administration/bug_report.php");
     }
-
 
     $smarty->append('log', array(
         'log_user_name' => $user_name,
