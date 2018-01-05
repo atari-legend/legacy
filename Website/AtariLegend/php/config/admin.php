@@ -18,7 +18,12 @@ include("../../common/tiles/tile_bug_report.php");
 //This is the actual authorization check
 if (login_check($mysqli) == false) {
     $_SESSION['edit_message'] = "Please log in to use this functionality";
-    header('Location: ' . $_SERVER['HTTP_REFERER']);
+    if(isset($_SERVER['HTTP_REFERER'])) {
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
+    }
+    else { 
+        header('Location:../../main/front/front.php');
+    }
     die('');
 }
 
