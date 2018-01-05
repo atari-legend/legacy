@@ -1,7 +1,7 @@
-{* 
+{*
 /***************************************************************************
-                              demos_main.tpl
-*                            --------------------------
+*                           demos_main.tpl
+*                           --------------------------
 *   begin                : Sunday, October 30, 2005
 *   copyright            : (C) 2005 Atari Legend
 *   email                : admin@atarilegend.com
@@ -16,86 +16,86 @@ The main demo page
 *}
 {extends file='1/admin/frontpage.html'}
 {block name=java_script}
-<script type="text/javascript">
+<script>
 function demoinsert()
 {
     JSnewdemo=document.forms["insertdemo"].newdemo.value;
-	
-	if (JSnewdemo =='')
-	{
-		alert('Please fill in a demo name');
-	}
-	else
-	{
-    	// CONFIRM REQUIRES ONE ARGUMENT
-    	var message = "Are you sure you want to insert this demo into the database?";
-    	// CONFIRM IS BOOLEAN. THAT MEANS THAT
-    	// IT RETURNS TRUE IF 'OK' IS CLICKED
-    	// OTHERWISE IT RETURN FALSE
-    	var return_value = confirm(message);
-		
-    	if (return_value !="0")
-    	{
-    		url="db_demos.php?newdemo="+JSnewdemo+"&action=insert_demo";
-			location.href=url;
-    	} 
-	}
+
+    if (JSnewdemo =='')
+    {
+        alert('Please fill in a demo name');
+    }
+    else
+    {
+        // CONFIRM REQUIRES ONE ARGUMENT
+        var message = "Are you sure you want to insert this demo into the database?";
+        // CONFIRM IS BOOLEAN. THAT MEANS THAT
+        // IT RETURNS TRUE IF 'OK' IS CLICKED
+        // OTHERWISE IT RETURN FALSE
+        var return_value = confirm(message);
+
+        if (return_value !="0")
+        {
+            url="db_demos.php?newdemo="+JSnewdemo+"&action=insert_demo";
+            location.href=url;
+        }
+    }
 }
 </script>
 {/block}
 {block name=title}Add/Edit a demo{/block}
 {block name=main_tile}
 <div class="NEWMAINCELL" style="text-align:center;">
-	<fieldset class="interview_set">
-		In this section you can add or edit a demo. Search for a demo by using any of the 
-		functionalities below. Combinations are allowed. There are currently <b>{$demos_nr}</b> demos
-		in the db!
-	</fieldset> 
+    <fieldset class="interview_set">
+        In this section you can add or edit a demo. Search for a demo by using any of the
+        functionalities below. Combinations are allowed. There are currently <b>{$demos_nr}</b> demos
+        in the db!
+    </fieldset>
 <br/><br/>
 
-		<fieldset class="interview_set" style="text-align:center;">
-		<legend class="links_legend">Search demos</legend>
-		<form action="../demos/demos_list.php" method="post" name="demo_search" id="demo_search">
-		<br/>
+        <fieldset class="interview_set" style="text-align:center;">
+        <legend class="primary_legend">Search demos</legend>
+        <form action="../demos/demos_list.php" method="post" name="demo_search" id="demo_search">
+        <br/>
 
-				<b>By name :</b>
-				<select name="demobrowse">
-					<option value="" SELECTED>-</option>
-					{html_options values=$az_value output=$az_output}
-				</select>
-				<input type="text" name="demosearch" value="">
-				<br/><br/>
-				<b>By Crew :</b>
+                <b>By name :</b>
+                <select name="demobrowse">
+                    <option value="" SELECTED>-</option>
+                    {html_options values=$az_value output=$az_output}
+                </select>
+                <input type="text" name="demosearch" value="">
+                <br/><br/>
+                <b>By Crew :</b>
 
-				<select name="crew">
-					<option value="-" SELECTED>-</option>
-					{foreach from=$crew item=line} 
-						<option value="{$line.crew_id}">{$line.crew_name}</option>
-					{/foreach}
-				</select>		
+                <select name="crew">
+                    <option value="-" SELECTED>-</option>
+                    {foreach from=$crew item=line}
+                        <option value="{$line.crew_id}">{$line.crew_name}</option>
+                    {/foreach}
+                </select>
 
-		<br/>
-		<br/>
-			<input type="submit" value="Search">
-		<br/>
-			<input type="hidden" name="action" id="action" value="search">
-			<input type="hidden" name="user_id" id="user_id" value="{$user_id}">
-			</form>	
-		</fieldset>
+        <br/>
+        <br/>
+            <input type="submit" value="Search">
+        <br/>
+            <input type="hidden" name="action" id="action" value="search">
+            <input type="hidden" name="user_id" id="user_id" value="{$user_id}">
+            </form>
+        </fieldset>
 
 <br/><br/>
 
-		<fieldset class="interview_set">
-		<legend class="links_legend">Add demos</legend>
-			<form method="post" name="insertdemo">
-			<input type="text" name="newdemo">
-			<input type="submit" value="Insert" onClick="demoinsert(); return false;">	
-			</form>
-		</fieldset>
-		</form>
+        <fieldset class="interview_set">
+        <legend class="primary_legend">Add demos</legend>
+            <form method="post" name="insertdemo">
+            <input type="text" name="newdemo">
+            <input type="submit" value="Insert" onClick="demoinsert(); return false;">
+            </form>
+        </fieldset>
+        </form>
 
 {if isset($message)}
-	<div class="message_box">{$message}</div>
+    <div class="message_box">{$message}</div>
 {/if}
 </div>
 {/block}

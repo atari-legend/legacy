@@ -67,19 +67,18 @@ $smarty->assign('nr_comments', $v_rows);
 
 // lets put the comments in a smarty array
 while ($query_comment = $sql_comment->fetch_array(MYSQLI_BOTH)) {
-
     //  Retrive userstats from database
     $query_user = $mysqli->query("SELECT *
                                FROM interview_user_comments
                                LEFT JOIN comments ON ( interview_user_comments.comment_id = comments.comments_id )
                                WHERE user_id = '$query_comment[user_id]'") or die("Could not count user comments");
     $usercomment_number = $query_user->num_rows;
-    
+
     $query_ind_pic = $mysqli->query("SELECT * FROM interview_main
                                 LEFT JOIN individuals on ( interview_main.ind_id = individuals.ind_id )
                                 LEFT JOIN individual_text ON (individual_text.ind_id = individuals.ind_id)
                                 WHERE interview_id = $query_comment[interview_id]") or die("Could not get individual picture");
-    
+
     while ($sql_pic = $query_ind_pic->fetch_array(MYSQLI_BOTH)) {
         //  Get the dataElements we want to place on screen
         $ind_name = $sql_pic['ind_name'];

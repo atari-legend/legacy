@@ -28,7 +28,7 @@ $sql_bug_report = $mysqli->query("SELECT * FROM bug_report
 while ($query_bug_report = $sql_bug_report->fetch_array(MYSQLI_BOTH)) {
     $bug_report_text = nl2br($query_bug_report['bug_report_text']);
     $bug_report_text = stripslashes($bug_report_text);
-    
+
     $bug_report_date = date("F j, Y", $query_bug_report['bug_report_date']);
 
     $smarty->append('bug_report', array(

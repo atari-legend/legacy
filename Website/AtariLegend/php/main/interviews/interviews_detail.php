@@ -51,7 +51,6 @@ $sql_ind_text = $mysqli->query("SELECT * FROM individual_text WHERE ind_id = $qu
 
 $query_ind_text = $sql_ind_text->fetch_array(MYSQLI_BOTH);
 
-
 if (preg_match("/[a-z]/i", $query_ind_text['ind_profile'])) {
     $profile = $query_ind_text['ind_profile'];
 } else {
@@ -85,12 +84,13 @@ $smarty->assign('interview', array(
 ));
 
 //Get the screenshots and the comments of this interview
-$query_screenshots = $mysqli->query("SELECT * FROM interview_main
-    LEFT JOIN screenshot_interview ON (interview_main.interview_id = screenshot_interview.interview_id)
-    LEFT JOIN screenshot_main ON (screenshot_interview.screenshot_id = screenshot_main.screenshot_id)
-    LEFT JOIN interview_comments ON (screenshot_interview.screenshot_interview_id = interview_comments.screenshot_interview_id)
-    WHERE interview_main.interview_id = '$selected_interview_id'
-    ORDER BY screenshot_main.screenshot_id");
+$query_screenshots = $mysqli->query("
+SELECT * FROM interview_main
+LEFT JOIN screenshot_interview ON (interview_main.interview_id = screenshot_interview.interview_id)
+LEFT JOIN screenshot_main ON (screenshot_interview.screenshot_id = screenshot_main.screenshot_id)
+LEFT JOIN interview_comments ON (screenshot_interview.screenshot_interview_id = interview_comments.screenshot_interview_id)
+WHERE interview_main.interview_id = '$selected_interview_id'
+ORDER BY screenshot_main.screenshot_id");
 
 $count = 1;
 
@@ -112,12 +112,15 @@ while ($sql_screenshots = $query_screenshots->fetch_array(MYSQLI_BOTH)) {
 }
 
 //get the games from this author
-$sql_games = $mysqli->query("SELECT * FROM game_author
-                                      LEFT JOIN author_type ON (game_author.author_type_id = author_type.author_type_id)
-                                      LEFT JOIN game ON (game_author.game_id = game.game_id)
-                                      WHERE game_author.ind_id = '$query_interview[ind_id]'
-                                      GROUP BY game.game_id, game.game_name HAVING COUNT(DISTINCT game.game_id, game.game_name) = 1
-                                      ORDER BY game.game_name ASC") or die("problem with query");
+$sql_games = $mysqli->query("
+SELECT *
+FROM game_author
+LEFT JOIN author_type ON (game_author.author_type_id = author_type.author_type_id)
+LEFT JOIN game ON (game_author.game_id = game.game_id)
+WHERE game_author.ind_id = '$query_interview[ind_id]'
+GROUP BY game.game_id, game.game_name HAVING COUNT(DISTINCT game.game_id, game.game_name) = 1
+ORDER BY game.game_name ASC")
+or die("problem with query");
 
 $count = 0;
 
@@ -125,7 +128,8 @@ while ($query_games = $sql_games->fetch_array(MYSQLI_BOTH)) {
     $count++;
 
     //select the game year
-    $sql_game_year = $mysqli->query("SELECT * FROM game_year where game_id = $query_games[game_id]") or die("error in game year query");
+    $sql_game_year = $mysqli->query("SELECT * FROM game_year where game_id = $query_games[game_id]")
+    or die("error in game year query");
     $query_game_year = $sql_game_year->fetch_array(MYSQLI_BOTH);
 
     $smarty->append('games', array(
@@ -148,7 +152,6 @@ $sql_comment = $mysqli->query("SELECT *
     WHERE interview_user_comments.interview_id = '$selected_interview_id'
     ORDER BY comments.timestamp desc") or die("Syntax Error! Couldn't not get the comments!");
 
-
 while ($query_comment = $sql_comment->fetch_array(MYSQLI_BOTH)) {
     $oldcomment = $query_comment['comment'];
     $oldcomment = nl2br($oldcomment);
@@ -161,9 +164,12 @@ while ($query_comment = $sql_comment->fetch_array(MYSQLI_BOTH)) {
     $comment = trim($comment);
     $comment = RemoveSmillies($comment);
 
-    //this is needed, because users can change their own comments on the website, however this is done with JS (instead of a post with pure HTML)
+    // this is needed, because users can change their own comments on the website, however this is done with JS
+    // (instead of a post with pure HTML)
     //The translation of the 'enter' breaks is different in JS, so in JS I do a conversion to a <br>.
-    //However, when we edit a comment, this <br> should not be visible to the user, hence again, now this conversion in php
+    //However, when we edit a comment, this <br> should not be visible to the user, hence again,
+    //now this conversion in php
+
     $breaks  = array(
         "<br />",
         "<br>",

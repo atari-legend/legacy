@@ -1,4 +1,4 @@
-{* 
+{*
 /***************************************************************************
 *                                doc_type_edit.html
 *                            ----------------------------
@@ -16,22 +16,22 @@ The doc type edit page
 *}
 {extends file='1/admin/frontpage.html'}
 
-{block name=java_script}	
-<script type="text/javascript">
+{block name=java_script}
+<script>
 function typedelete(doc_type_id)
-{ 
-   	// CONFIRM REQUIRES ONE ARGUMENT
-   	var message = "Are you sure you want to delete this doc type from the database?";
-   	// CONFIRM IS BOOLEAN. THAT MEANS THAT
-   	// IT RETURNS TRUE IF 'OK' IS CLICKED
-   	// OTHERWISE IT RETURN FALSE
-   	var return_value = confirm(message);
+{
+    // CONFIRM REQUIRES ONE ARGUMENT
+    var message = "Are you sure you want to delete this doc type from the database?";
+    // CONFIRM IS BOOLEAN. THAT MEANS THAT
+    // IT RETURNS TRUE IF 'OK' IS CLICKED
+    // OTHERWISE IT RETURN FALSE
+    var return_value = confirm(message);
 
-   	if (return_value !="0")
-   	{
-   		url="db_doc_type.php?doc_type_id="+doc_type_id+"&action=delete_doc_type";
-		location.href=url;
-   	} 	
+    if (return_value !="0")
+    {
+        url="db_doc_type.php?doc_type_id="+doc_type_id+"&action=delete_doc_type";
+        location.href=url;
+    }
 }
 </script>
 {/block}
@@ -40,34 +40,34 @@ function typedelete(doc_type_id)
 
 {block name=main_tile}
 <div class="standard_tile" id="individuals_edit">
-	{if isset($doc_type_edit.doc_type_name_edit)}
-	<h1>{$doc_type_edit.doc_type_name_edit}</h1>
-	<div class="standard_tile_line"></div>
-	<div class="standard_tile_text">
-		<fieldset class="centered_fieldset">
-			<legend>Edit doc type</legend>
-			<form action="../docs/db_doc_type.php" method="post" name="post" id="doc_type_edit">
-				<b>Name :</b>
-				<input type="text" name="doc_type_name" value="{$doc_type_edit.doc_type_name_edit}" class="standard_tile_input_small">
+    {if isset($doc_type_edit.doc_type_name_edit)}
+    <h1>{$doc_type_edit.doc_type_name_edit}</h1>
+    <div class="standard_tile_line"></div>
+    <div class="standard_tile_padding">
+        <fieldset class="primary_fieldset centered_fieldset">
+            <legend class="primary_legend">Edit doc type</legend>
+            <form action="../docs/db_doc_type.php" method="post" name="post" id="doc_type_edit">
+                <b>Name :</b>
+                <input type="text" name="doc_type_name" value="{$doc_type_edit.doc_type_name_edit}" class="standard_input input_large">
                 <br>
                 <br>
-				<input type="submit" value="Update" style="padding:2px;" class="topbutton_cpanel_small">
-				<input type="submit" value="Delete" onClick="typedelete({$doc_type_edit.doc_type_id_edit}); return false;" class="topbutton_cpanel_small">	
-				<input type="hidden" name="action" value="update">
-				<input type="hidden" name="doc_type_id" value="{$doc_type_edit.doc_type_id_edit}">
-			</form>	
-		</fieldset>
-	</div>
-	{else}
-	<h1>Edit Doc Type</h1>
-	<div class="standard_tile_line"></div>
-	<div class="standard_tile_text">
-		<div class="left_nav_section">
-			Doc Type does not exist.
-		</div> 
-	</div>
-	{/if}
-	<div class="standard_table_center"><a href="../docs/doc_type.php" class="standard_tile_link">back</a></div>
-	<br>
+                <input type="submit" value="Update" style="padding:2px;" class="topbutton_cpanel_small">
+                <input type="submit" value="Delete" onClick="typedelete({$doc_type_edit.doc_type_id_edit}); return false;" class="topbutton_cpanel_small">
+                <input type="hidden" name="action" value="update">
+                <input type="hidden" name="doc_type_id" value="{$doc_type_edit.doc_type_id_edit}">
+            </form>
+        </fieldset>
+    </div>
+    {else}
+    <h1>Edit Doc Type</h1>
+    <div class="standard_tile_line"></div>
+    <div class="standard_tile_padding">
+        <div class="left_nav_section">
+            Doc Type does not exist.
+        </div>
+    </div>
+    {/if}
+    <div class="standard_tile_text_center"><a href="../docs/doc_type.php" class="standard_tile_link">back</a></div>
+    <br>
 </div>
 {/block}

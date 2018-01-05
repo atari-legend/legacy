@@ -22,7 +22,7 @@ include("../../admin/games/quick_search_games.php");
  ************************************************************************************************
  */
 //get all the menu types
-$result_download_trainer = $mysqli->query("SELECT * FROM trainer_options") or die ("problem getting trainer options");
+$result_download_trainer = $mysqli->query("SELECT * FROM trainer_options") or die("problem getting trainer options");
 
 $rows = $result_download_trainer->num_rows;
 while ($row = $result_download_trainer->fetch_array(MYSQLI_BOTH)) {

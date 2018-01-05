@@ -4,8 +4,32 @@
 //*----------------------------------------------------------
 // SASS Variables
 //------------------------------------------------------------ */
-$skin-name: 'legacy';
-$bg-color: #00d3d3;
+$skin_name: 'legacy';
+$bg_color: #00d3d3;
+
+// This variable affects the `.h-*` and `.w-*` classes.
+$sizes: (
+    5: 5%,
+    10: 10%,
+    15: 15%,
+    20: 20%,
+    25: 25%,
+    30: 30%,
+    35: 35%,
+    40: 40%,
+    45: 45%,
+    50: 50%,
+    55: 55%,
+    60: 60%,
+    65: 65%,
+    70: 70%,
+    75: 75%,
+    80: 80%,
+    85: 85%,
+    90: 90%,
+    95: 95%,
+    100: 100%
+) !default;
 
 //----------------------------------------------------------
 // Normalization script
@@ -16,11 +40,14 @@ $bg-color: #00d3d3;
 // General settings
 //------------------------------------------------------------ */
 @import '../../1/scss/general';                             //* --> general skin specific css settings */
+@import '../../1/scss/form_components';                             //* --> general skin specific css settings */
+@import '../../1/scss/tables';                             //* --> general skin specific css settings */
+@import '../../common/main_scss/bootstrap/sizing';                      //* --> Borrow from Bootstrap */
 
 //*----------------------------------------------------------
 // Top
 //------------------------------------------------------------ */
-@import '../../common/main_scss/top';                       //* --> TOP background & graphics */ 
+@import '../../common/main_scss/top';                       //* --> TOP background & graphics */
 @import '../../common/main_scss/top_animation';             //* --> TOP animation */
 @import '../../common/main_scss/menu';                      //* --> TOP and SIDE MENU */
 

@@ -91,10 +91,9 @@ if (isset($action) and $action == 'add_logo') {
 
 //update the info of the individual
 if (isset($action) and $action == 'update') {
-    
     $comp_name = $mysqli->real_escape_string($comp_name);
     $textfield = $mysqli->real_escape_string($textfield);
-    
+
     $sdbquery = $mysqli->query("UPDATE pub_dev SET pub_dev_name = '$comp_name' WHERE pub_dev_id = $comp_id") or die("Couldn't Update into pub_dev");
 
     $COMPANYtext = $mysqli->query("SELECT pub_dev_id FROM pub_dev_text
@@ -120,26 +119,20 @@ if ($action == 'delete_comp') {
     // let's first check if this company is still used!
     /* let's see if the title contains authors */
     $sql = $mysqli->query("SELECT * FROM game_developer WHERE dev_pub_id = '$comp_id'") or die("error selecting game_developer table");
-    if ($sql->num_rows > 0) 
-    {
+    if ($sql->num_rows > 0) {
         $_SESSION['edit_message'] = "This company is still linked to one or more games";
         header("Location: ../company/company_main.php");
-    } 
-    else 
-    {
+    } else {
         $sql = $mysqli->query("SELECT * FROM game_publisher WHERE pub_dev_id = '$comp_id'") or die("error selecting game_publisher table");
-        if ($sql->num_rows > 0) 
-        {
+        if ($sql->num_rows > 0) {
             $_SESSION['edit_message'] = "This company is still linked to one or more games";
             header("Location: ../company/company_main.php");
-        } 
-        else 
-        {
+        } else {
             // Here we delete the company image
             $pub_dev_query = $mysqli->query("SELECT pub_dev_imgext FROM pub_dev_text WHERE pub_dev_id='$comp_id'");
             list($pub_dev_imgext) = $pub_dev_query->fetch_array(MYSQLI_BOTH);
 
-            if ($pub_dev_imgext <> '') {
+            if ($pub_dev_imgext != '') {
                 unlink("$company_screenshot_save_path$comp_id.$pub_dev_imgext");
             }
 
@@ -163,15 +156,14 @@ if ($action == "insert_comp") {
         $_SESSION['edit_message'] = "Please fill in a company name";
         header("Location: ../company/company_main.php");
     } else {
-        
-        if (isset($textfield)){
-        }else{
+        if (isset($textfield)) {
+        } else {
             $textfield = '';
         }
-        
+
         $comp_name = $mysqli->real_escape_string($comp_name);
         $textfield = $mysqli->real_escape_string($textfield);
-        
+
         $sql = $mysqli->query("INSERT INTO pub_dev (pub_dev_name) VALUES ('$comp_name')");
 
         //get the id of the inserted individual

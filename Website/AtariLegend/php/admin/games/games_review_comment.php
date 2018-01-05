@@ -50,7 +50,7 @@ $sql_build = "SELECT *
                  " . $where_clause . "
                 ORDER BY comments.timestamp DESC LIMIT  " . $v_counter . ", 15";
 
-$sql_comment = $mysqli->query($sql_build) or die ("problem with the main query");
+$sql_comment = $mysqli->query($sql_build) or die("problem with the main query");
 
 // get the total nr of comments in the DB
 $query_total_number = $mysqli->query("SELECT * FROM review_user_comments") or die("Couldn't get the total number of comments");
@@ -121,13 +121,13 @@ while ($query_comment = $sql_comment->fetch_array(MYSQLI_BOTH)) {
     } else {
         $avatar_image = '';
     }
-    
+
     //get the game name and game id
     $sql_game = $mysqli->query("SELECT *
                                FROM game
                                LEFT JOIN review_game ON ( review_game.game_id = game.game_id )
                                WHERE review_game.review_id = '$query_comment[review_id]' ORDER BY RAND() LIMIT 1") or die("Could not get game detail");
-                               
+
     $query_game = $sql_game->fetch_array(MYSQLI_BOTH);
 
     $smarty->append('comments', array(

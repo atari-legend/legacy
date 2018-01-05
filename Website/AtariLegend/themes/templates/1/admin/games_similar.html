@@ -1,6 +1,6 @@
-{* 
+{*
 /***************************************************************************
-                              games_similar.html
+*                            games_similar.html
 *                            --------------------------
 *   begin                : April 2006
 *   copyright            : (C) 2006 Atari Legend
@@ -19,44 +19,44 @@ The main game page
 {block name=title}Similar Games{/block}
 {block name=main_tile}
 <div class="standard_tile" id="games_similar">
-	<h1>{$game_info.game_name}</h1>
-	<div class="standard_tile_line"></div>
-	<div class="standard_tile_text">
-		<div class="left_nav_section">
-			Select a game from the dropdown field and hit the "Add" button.
-		</div>
-		<br>
-		<br>
-		<form action="../games/db_games_similar.php" method="post" name="similar">
-		<fieldset class="centered_fieldset">
-		<legend class="links_legend">Games Similar to {$game_info.game_name}</legend>
-			<b>Similar game :</b> 
-			<select name="game_similar" id="quick_search_pub_select">
-				<option value="-" selected>-</option>
-				{foreach from=$similar_games item=line}
-					<option value="{$line.game_id}">{$line.game_name}</option>
-				{/foreach}			
-			</select>	
+    <h1>{$game_info.game_name}</h1>
+    <div class="standard_tile_line"></div>
+    <div class="standard_tile_padding">
+        <div class="left_nav_section">
+            Select a game from the dropdown field and hit the "Add" button.
+        </div>
+        <br>
+        <br>
+        <form action="../games/db_games_similar.php" method="post" name="similar">
+        <fieldset class="primary_fieldset centered_fieldset">
+        <legend class="primary_legend">Games Similar to {$game_info.game_name}</legend>
+            <b>Similar game :</b>
+            <select name="game_similar" class="standard_select select_large">
+                <option value="-" selected>-</option>
+                {foreach from=$similar_games item=line}
+                    <option value="{$line.game_id}">{$line.game_name}</option>
+                {/foreach}
+            </select>
             <br>
             <br>
-			<input type="submit" name="valider" value="Add" class="topbutton_cpanel_small">
-			<input type="hidden" name="action" value="add_game_similar">	
-			<input type="hidden" name="game_id" value="{$game_info.game_id}">	
-			{if $nr_similar <> 0}
+            <input type="submit" name="valider" value="Add" class="topbutton_cpanel_small">
+            <input type="hidden" name="action" value="add_game_similar">
+            <input type="hidden" name="game_id" value="{$game_info.game_id}">
+            {if $nr_similar <> 0}
                 <br>
                 <br>
-				<b>Current Similar games</b>
-				<br>
-				<br>
-				{foreach from=$similar item=line}
-					<a href="../games/games_detail.php?game_id={$line.game_id}" class="left_nav_link">{$line.game_name}</a> - <b><a href="../games/db_games_similar.php?game_similar_id={$line.game_similar_id}&action=delete_similar&game_id={$game_info.game_id}" class="left_nav_link">delete</a></b> 
-					<br/>
-				{/foreach}
-			{/if}
-		</fieldset>
-		</form>
-		<br>
-		<div class="standard_table_center"><a href="javascript:history.go(-1)" class="standard_tile_link">back</a></div>
-	</div>
+                <b>Current Similar games</b>
+                <br>
+                <br>
+                {foreach from=$similar item=line}
+                    <a href="../games/games_detail.php?game_id={$line.game_id}" class="left_nav_link">{$line.game_name}</a> - <b><a href="../games/db_games_similar.php?game_similar_id={$line.game_similar_id}&action=delete_similar&game_id={$game_info.game_id}" class="left_nav_link">delete</a></b>
+                    <br/>
+                {/foreach}
+            {/if}
+        </fieldset>
+        </form>
+        <br>
+        <div class="standard_tile_text_center"><a href="javascript:history.go(-1)" class="standard_tile_link">back</a></div>
+    </div>
 </div>
 {/block}

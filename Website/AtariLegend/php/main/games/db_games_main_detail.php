@@ -207,7 +207,9 @@ if (isset($action)) {
 
         $date = date("F j, Y", $query_comment['timestamp']);
 
-        $smarty->append('comments', array(
+        $smarty->append(
+            'comments',
+            array(
             'comment' => $oldcomment,
             'comment_edit' => $comment,
             'comment_id' => $query_comment['comment_id'],

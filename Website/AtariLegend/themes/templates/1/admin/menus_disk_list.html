@@ -1,6 +1,6 @@
 {*
 /***************************************************************************
-                              menu_disk_list.tpl
+*                            menu_disk_list.tpl
 *                            --------------------------
 *   begin                : Sunday, August 28, 2005
 *   copyright            : (C) 2005 Atari Legend
@@ -18,9 +18,9 @@ The main game page
 *}
 {extends file='1/admin/frontpage.html'}
 {block name=java_script}
-<script type="text/javascript" src="{$template_dir}includes/js/vendor/lightbox-2.9.0.min.js"></script>
+<script src="{$template_dir}includes/js/vendor/lightbox-2.9.0.min.js"></script>
 <link type="text/css" href="{$style_dir}css/vendor/lightbox-2.9.0.css" hreflang="en" rel="stylesheet">
-<script type="text/javascript" src="{$template_dir}includes/js/menus.js"></script>
+<script src="{$template_dir}includes/js/menus.js"></script>
 
 {/block}
 
@@ -30,10 +30,10 @@ The main game page
 <div class="standard_tile">
     <h1>SET OPTIONS</h1>
     <div class="standard_tile_line"></div>
-    <div class="standard_table_center">
+    <div class="standard_tile_text_center">
         <br>
         <form action="../menus/menus_disk_list.php" method="get" name="post" id="menu_set_change">
-            <select name="menu_sets_id" id="quick_search_pub_select" onchange="this.form.submit()">
+            <select name="menu_sets_id" class="standard_select select_large" onchange="this.form.submit()">
                 <option value="" selected style="background-color:white;">Change Menu Set</option>
                 {foreach from=$menu_set_list item=line}
                     {html_options values=$line.menu_sets_id output=$line.menu_sets_name}
@@ -47,7 +47,7 @@ The main game page
         <form action="../menus/db_menu_disk.php" method="post" name="post" id="menu_name_edit">
             <b>Menu set Editor</b><br><br>
             Change name of menu set:<br>
-            <input type="text" name="menu_sets_name" value="{$menu_set.menu_sets_name}" class="standard_tile_input_small"><br/>
+            <input type="text" name="menu_sets_name" value="{$menu_set.menu_sets_name}" class="standard_input input_large"><br/>
             <input type="hidden" name="menu_sets_id" value="{$menu_set.menu_sets_id}">
             <input type="hidden" name="action" value="menu_set_name_update">
             <br>
@@ -57,14 +57,14 @@ The main game page
         <div class="standard_tile_line"></div>
         <div class="help-tip">
             <p>This is the overal type of the menu disk. Eg. The "Adrenaline UK" set is considered to be a game set. The "Sewer Doc Disk" set is an E-zine/doc set. However, this does not
-               mean a game set can not contain anything else. Each menu disk title in the database has its own menu disk title TYPE attribute. Please see the general HELP of this section for more details.</p>
+            mean a game set can not contain anything else. Each menu disk title in the database has its own menu disk title TYPE attribute. Please see the general HELP of this section for more details.</p>
         </div>
         <br>
         <form action="../menus/db_menu_disk.php" method="post" name="post" id="menu_type_edit">
             <div style="margin-left:20px;">
                 Menu type:<br>
             </div>
-            <select name="menu_type_browse" size="1" id="quick_search_pub_select">
+            <select name="menu_type_browse" size="1" class="standard_select select_large">
                 <option value="" selected>-</option>
                 {foreach from=$menu_types item=line}
                     {html_options values=$line.menu_types_id output=$line.menu_types_text}
@@ -78,7 +78,7 @@ The main game page
         <br>
         {if isset($connected_menu_types)}
             {foreach from=$connected_menu_types item=line}
-             {$line.menu_types_text} - <a href="#" class="standard_tile_link" onclick="MenuTypeDelete({$line.menu_types_main_id},{$line.menu_sets_id});">Delete</a><br>
+                {$line.menu_types_text} - <a href="#" class="standard_tile_link" onclick="menuTypeDelete({$line.menu_types_main_id},{$line.menu_sets_id});">Delete</a><br>
             {/foreach}
         {/if}
         <br>
@@ -94,13 +94,13 @@ The main game page
         <br>
         Set Crew for menu set:<br>
         <form action="../menus/db_menu_disk.php" method="post" name="post_menu_crew_set" id="menu_crew_set">
-            <select name="crew_browse" size="1" id="quick_search_small_select" onchange="browseCrew(this.value)">
+            <select name="crew_browse" size="1" class="standard_select select_small" onchange="browseCrew(this.value)">
                 <option value="" SELECTED>-</option>
                 {html_options values=$az_value output=$az_output}
             </select>
             {* Ajax *}
             <div id="option_crew">
-                <select name="crew_id" id="quick_search_pub_select">
+                <select name="crew_id" class="standard_select select_large">
                     <option value="" selected>-</option>
                     {foreach from=$crew item=line}
                         {html_options values=$line.crew_id output=$line.crew_name}
@@ -115,7 +115,7 @@ The main game page
         <br>
         {if isset($connected_crew)}
         {foreach from=$connected_crew item=line}
-         {$line.crew_name} - <a href="#" class="standard_tile_link" onclick="DeleteMenuSetCrewModal({$line.crew_id},{$line.menu_sets_id});">Delete</a><br>
+            {$line.crew_name} - <a href="#" class="standard_tile_link" onclick="deleteMenuSetCrewModal({$line.crew_id},{$line.menu_sets_id});">Delete</a><br>
         {/foreach}
         {/if}
         <br>
@@ -131,13 +131,13 @@ The main game page
         <br>
         Set individual for menu set:<br>
         <form action="../menus/db_menu_disk.php" method="post" name="post_menu_ind_set" id="menu_ind_set">
-            <select name="ind_browse" size="1" id="quick_search_small_select" onchange="browseIndividual(this.value)">
+            <select name="ind_browse" size="1" class="standard_select select_small" onchange="browseIndividual(this.value)">
                 <option value="" SELECTED>-</option>
                 {html_options values=$az_value output=$az_output}
             </select>
             {* Ajax *}
             <div id="option_ind">
-                <select name="ind_id" id="quick_search_pub_select">
+                <select name="ind_id" class="standard_select select_large">
                     <option value="" selected>-</option>
                     {foreach from=$ind item=line}
                         {html_options values=$line.ind_id output=$line.ind_name}
@@ -152,7 +152,7 @@ The main game page
         <br>
         {if isset($connected_ind)}
         {foreach from=$connected_ind item=line}
-         {$line.ind_name} - <a href="#" class="standard_tile_link" onclick="DeleteMenuSetIndividualModal({$line.ind_id},{$line.menu_sets_id});">Delete</a><br>
+            {$line.ind_name} - <a href="#" class="standard_tile_link" onclick="deleteMenuSetIndividualModal({$line.ind_id},{$line.menu_sets_id});">Delete</a><br>
         {/foreach}
         {/if}
         <br>
@@ -160,7 +160,7 @@ The main game page
         <br>
         Quick add new Crew to db:
         <form action="../menus/db_menu_disk.php" method="post" name="post_menu_crew_add" id="menu_crew_add">
-            <input type="text" name="new_crew_name" value="" class="standard_tile_input_small">
+            <input type="text" name="new_crew_name" value="" class="standard_input input_large">
             <br>
             <br>
             <input type="submit" value="Add" class="quick_search_games_button">
@@ -172,7 +172,7 @@ The main game page
         <br>
         Quick add new individual to db:
         <form action="../menus/db_menu_disk.php" method="post" name="post_menu_ind_add" id="menu_ind_add">
-            <input type="text" name="new_ind_name" value="" class="standard_tile_input_small">
+            <input type="text" name="new_ind_name" value="" class="standard_input input_large">
             <br>
             <br>
             <input type="submit" value="Add" class="quick_search_games_button">
@@ -196,49 +196,49 @@ The main game page
 <div class="standard_tile">
     <h1>EDIT SET</h1>
     <div class="standard_tile_line"></div>
-    <div class="standard_tile_text">
+    <div class="standard_tile_padding">
         <div class="left_nav_section">
             Overhere you can edit/delete menu set <b>{$menu_set.menu_sets_name}</b>, or you can add menu disks to it. You can also make the set available on the website with the publish options.
         </div>
         <br>
         <div class="main_company_container">
             <div class="main_company_child" id="child_edit_company" style="text-align:left;">
-                <fieldset>
-                    <legend>More options</legend>
-                        <div id="close_new_disk"><a onclick="addNewdisk({$menu_set.menu_sets_id})" style="cursor: pointer;" class="left_nav_link" >Add New Disk</a><br></div>
-                        <a onclick="DeleteSet({$menu_set.menu_sets_id})" style="cursor: pointer;" class="left_nav_link" >Delete set</a>
+                <fieldset class="secondary_fieldset">
+                    <legend class="primary_legend">More options</legend>
+                        <div id="close_new_disk"><a onclick="addNewdisk({$menu_set.menu_sets_id})" style="cursor: pointer;" class="standard_tile_link" >Add New Disk</a><br></div>
+                        <a onclick="deleteSet({$menu_set.menu_sets_id})" style="cursor: pointer;" class="standard_tile_link">Delete set</a>
                 </fieldset>
             </div>
             <div class="main_company_child" id="child_add_company" style="text-align:left;">
-                <fieldset>
-                    <legend>Publish Set</legend>
-                        <input onchange="PublishSet({$menu_set.menu_sets_id},'online')" type="radio" name="publish" value="online" {if ({$menu_set.online}=='1')}checked{/if}> Online<br>
-                        <input onchange="PublishSet({$menu_set.menu_sets_id},'offline')" type="radio" name="publish" value="offline" {if ({$menu_set.online}=='0')}checked{/if}> Offline<br>
+                <fieldset class="secondary_fieldset">
+                    <legend class="primary_legend">Publish Set</legend>
+                        <input onchange="publishSet({$menu_set.menu_sets_id},'online')" type="radio" name="publish" value="online" {if ({$menu_set.online}=='1')}checked{/if}> Online<br>
+                        <input onchange="publishSet({$menu_set.menu_sets_id},'offline')" type="radio" name="publish" value="offline" {if ({$menu_set.online}=='0')}checked{/if}> Offline<br>
                 </fieldset>
             </div>
         </div>
         <br>
         <div id="new_disk"></div>
         <br>
-        <table class="standard_table_list" id="game_list_table">
+        <table class="secondary_table_list  table_sm table_hover">
             <tr>
-                <th id="menu_disk_list_th">Menu Disk</th>
-                <th id="menu_list_crew_th">Crew</th>
-                <th id="menu_list_ind_th">Individual</th>
-                <th id="menu_state_th">State</th>
+                <th class="menu_disk_list_column w-30">Menu Disk</th>
+                <th class="menu_list_crew_column w-30">Crew</th>
+                <th class="menu_list_individual_column w-20">Individual</th>
+                <th class="menu_state_column w-20">State</th>
             </tr>
             {if isset($menus)}
                 {foreach from=$menus item=line}
                     <tr id="diskedit_ajax_{$line.menu_disk_id}">
-                        <td class="menu_disk_list_td">{if $line.menu_disk_id != ''}<a onclick="editDisk({$line.menu_disk_id})" style="cursor: pointer;">{$line.menu_disk_name}</a>{else}<i>n/a</i>{/if}</td>
-                        <td class="menu_list_crew_td">{if isset($line.crew_id)}{$line.crew_name}{else}<i>n/a</i>{/if}</td>
-                        <td class="menu_list_ind_td">{if isset($line.ind_id)}{$line.ind_name}{else}<i>n/a</i>{/if}</td>
-                        <td class="menu_state_td">{if isset($line.menu_state)}{$line.menu_state}{else}<i>n/a</i>{/if}</td>
+                        <td class="menu_disk_list_column w-30">{if $line.menu_disk_id != ''}<a onclick="editDisk({$line.menu_disk_id})" style="cursor: pointer;">{$line.menu_disk_name}</a>{else}<i>n/a</i>{/if}</td>
+                        <td class="menu_list_crew_column w-30">{if isset($line.crew_id)}{$line.crew_name}{else}<i>n/a</i>{/if}</td>
+                        <td class="menu_list_individual_column w-20">{if isset($line.ind_id)}{$line.ind_name}{else}<i>n/a</i>{/if}</td>
+                        <td class="menu_state_column w-20">{if isset($line.menu_state)}{$line.menu_state}{else}<i>n/a</i>{/if}</td>
                     </tr>
                 {/foreach}
             {/if}
             <tr>
-                <td class="standard_table_left" colspan="4">
+                <td colspan="4">
                     <b>{if $nr_of_entries == 1}1 menu disk found {else} {$nr_of_entries} menu disks found{/if} in {$querytime} sec </b>
                 </td>
             </tr>
@@ -246,6 +246,6 @@ The main game page
     </div>
 </div>
 <br>
-<div class="standard_table_center"><a href="javascript:history.go(-1)" class="standard_tile_link">back</a></div>
+<div class="standard_tile_text_center"><a href="javascript:history.go(-1)" class="standard_tile_link">back</a></div>
 <br>
 {/block}

@@ -7,13 +7,13 @@
 *   email                : admin@atarilegend.com
 *
 *   Id: ajax_interview_add_screenshots.html,v 0.10 2017/11/02 22:29 STG
-*			- creation of file
+*           - creation of file
 *
 ***************************************************************************/
 *}
 {if isset($smarty_action) and $smarty_action == "add_screen_to_interview_return"}
-	 {if $screenshots_nr <> ''}
-        <table class="standard_table_list_no_hover">
+    {if $screenshots_nr <> ''}
+        <table class="primary_table_list">
         {foreach from=$screenshots item=line}
             <tr>
                 <td style="width:1%;border:0;">
@@ -27,8 +27,8 @@
                     </a>
                 </td>
                 <td style="width:90%;border:0;">
-                    <input type="text" name="inputfield[]" value="{$line.interview_screenshot_comment}" class="standard_tile_input_small" style="width:95%;" id="comment_{$line.interview_screenshot_count}">
-                </td> 
+                    <input type="text" name="inputfield[]" value="{$line.interview_screenshot_comment}" class="standard_input" style="width:95%;" id="comment_{$line.interview_screenshot_count}">
+                </td>
             </tr>
         {/foreach}
         </table>
@@ -39,17 +39,17 @@
         [BRK]{$osd_message}
     {/if}
 {else}
-    <div class="standard_tile_text">
-        <fieldset class="centered_fieldset">
-            <legend>Browse</legend>
+    <div class="standard_tile_padding">
+        <fieldset class="primary_fieldset centered_fieldset">
+            <legend class="primary_legend">Browse</legend>
                 <label for="file_upload" class="file_upload" onclick="myFunction()">Select file(s)</label>
                 <input id="file_upload" type="file" name="image[]" multiple>
-                <input type="text" class="standard_tile_input_small" id="file_upload_game_screenshots">&nbsp;
+                <input type="text" class="standard_input" id="file_upload_game_screenshots">&nbsp;
                 <br>
                 <br>
                 <input type="hidden" name="MAX_FILE_SIZE" value="100000">
                 <input type="button" value="Add" onclick="addScreenshottoInterview({$interview_id})" class="topbutton_cpanel">
-        </fieldset> 
+        </fieldset>
     </div>
     </br>
 {/if}

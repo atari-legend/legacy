@@ -106,7 +106,6 @@ if (isset($action) and $action == "edit_trivia_quote") {
 //****************************************************************************************
 
 if (isset($action) and $action == "update_trivia") {
-
     if (isset($trivia_text)) {
         $trivia_text = $mysqli->real_escape_string($trivia_text);
 
@@ -119,12 +118,8 @@ if (isset($action) and $action == "update_trivia") {
         $smarty->assign('trivia_id', $trivia_id);
         $smarty->assign('trivia_text', $trivia_text);
 
-$smarty->assign('smarty_action', 'did_you_know_update_returnview');
-//Send all smarty variables to the templates
-$smarty->display("file:" . $cpanel_template_folder . "ajax_trivia_quotes_edit.html");
-
-
-
-
+        $smarty->assign('smarty_action', 'did_you_know_update_returnview');
+        //Send all smarty variables to the templates
+        $smarty->display("file:" . $cpanel_template_folder . "ajax_trivia_quotes_edit.html");
     }
 }

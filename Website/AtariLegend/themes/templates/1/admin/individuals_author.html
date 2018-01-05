@@ -1,4 +1,4 @@
-{* 
+{*
 /***************************************************************************
 *                                individuals_author.tpl
 *                            -----------------------------
@@ -9,13 +9,13 @@
 *
 *   Id: individuals_auhtor.php,v 0.10 2005/08/06 19:07 Gatekeeper
 *   Id: individuals_auhtor.php,v 0.20 2016/08/01 23:53 Gatekeeper
-*		- AL 2.0
+*       - AL 2.0
 *
 ***************************************************************************/
 
 //****************************************************************************************
 // The Author main page
-//**************************************************************************************** 
+//****************************************************************************************
 *}
 {extends file='1/admin/frontpage.html'}
 
@@ -24,50 +24,50 @@
 {block name=main_tile}
 
 <div class="standard_tile" id="individuals_author">
-	<h1>AUTHOR TYPES</h1>
-	<div class="standard_tile_line"></div>
-	<div class="standard_tile_text">
-		<div class="left_nav_section">
-			Here you can add, edit or delete an author type. These groupings are used in the actual game section
-			to connect them to a certain genre. 		
-		</div> 
-		<br>
-		<br>
-		{if isset($load) and $load == '1'}
-			<form action="../individuals/db_individuals_author.php" method="post" name="post">
-			<fieldset>
-				<legend>Modify type</legend>
-				<input type="text" name="newtype" value="{$author_types_load.author_type}" class="standard_tile_input_small">
-				<input type="hidden" name="action" value="edit">
-				<input type="hidden" name="type_id" value="{$author_types_load.author_type_id}">
-				<input type="submit" value="Edit" class="topbutton_cpanel_small">
-			</fieldset>
-			</form>
-		{else}
-			<form action="../individuals/db_individuals_author.php" method="post" name="post">
-				<fieldset>
-				<legend>Add a new type</legend>
-				<input type="text" name="newtype" class="standard_tile_input_small">
-				<input type="hidden" name="action" value="insert">
-				<input type="submit" value="Insert" class="topbutton_cpanel_small">
-				</fieldset>
-			</form>
-		{/if}
-		<br>
-		<br>
-		<fieldset>
-			<legend>Current types</legend>
-			{foreach from=$author_types item=line} 
-				<ul style="display:block;width:100%;padding:0px;margin:0px;">
-					<li style="display:table-cell;width:70%;">{$line.author_type}</li>
-					<li style="display:table-cell;width:15%;"><a href="../individuals/individuals_author.php?type_id={$line.author_type_id}&amp;action=load" class="left_nav_link">Edit</a></li>
-					<li style="display:table-cell;width:15%;"><a href="../individuals/db_individuals_author.php?type_id={$line.author_type_id}&amp;action=delete" class="left_nav_link">Delete</a></li>
-				</ul>
-			{/foreach}
-		</fieldset>
-		<br>	
-		<br>	
-		<div class="standard_table_center"><a href="javascript:history.go(-1)" class="standard_tile_link">back</a></div>
-	</div>
+    <h1>AUTHOR TYPES</h1>
+    <div class="standard_tile_line"></div>
+    <div class="standard_tile_padding">
+        <div class="left_nav_section">
+            Here you can add, edit or delete an author type. These groupings are used in the actual game section
+            to connect them to a certain genre.
+        </div>
+        <br>
+        <br>
+        {if isset($load) and $load == '1'}
+            <form action="../individuals/db_individuals_author.php" method="post" name="post">
+            <fieldset class="primary_fieldset">
+                <legend class="primary_legend">Modify type</legend>
+                <input type="text" name="newtype" value="{$author_types_load.author_type}" class="standard_input input_large">
+                <input type="hidden" name="action" value="edit">
+                <input type="hidden" name="type_id" value="{$author_types_load.author_type_id}">
+                <input type="submit" value="Edit" class="topbutton_cpanel_small">
+            </fieldset>
+            </form>
+        {else}
+            <form action="../individuals/db_individuals_author.php" method="post" name="post">
+                <fieldset class="primary_fieldset">
+                <legend class="primary_legend">Add a new type</legend>
+                <input type="text" name="newtype" class="standard_input input_large">
+                <input type="hidden" name="action" value="insert">
+                <input type="submit" value="Insert" class="topbutton_cpanel_small">
+                </fieldset>
+            </form>
+        {/if}
+        <br>
+        <br>
+        <fieldset class="primary_fieldset">
+            <legend class="primary_legend">Current types</legend>
+            {foreach from=$author_types item=line}
+                <ul style="display:block;width:100%;padding:0px;margin:0px;">
+                    <li style="display:table-cell;width:70%;">{$line.author_type}</li>
+                    <li style="display:table-cell;width:15%;"><a href="../individuals/individuals_author.php?type_id={$line.author_type_id}&amp;action=load" class="left_nav_link">Edit</a></li>
+                    <li style="display:table-cell;width:15%;"><a href="../individuals/db_individuals_author.php?type_id={$line.author_type_id}&amp;action=delete" class="left_nav_link">Delete</a></li>
+                </ul>
+            {/foreach}
+        </fieldset>
+        <br>
+        <br>
+        <div class="standard_tile_text_center"><a href="javascript:history.go(-1)" class="standard_tile_link">back</a></div>
+    </div>
 </div>
 {/block}

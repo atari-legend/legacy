@@ -79,7 +79,7 @@ if (isset($action) and $action == "crew_gen_browse") {
         ORDER BY crew_name ASC") or die("Couldn't query Crew database");
     }
 
-    echo '<select name="sub_crew[]" id="quick_search_pub_select">';
+    echo '<select name="sub_crew[]" class="standard_select select_large">';
     echo '<option value="" SELECTED>-</option>';
 
     while ($crew = $sql_crew->fetch_array(MYSQLI_BOTH)) {
@@ -93,20 +93,19 @@ if (isset($action) and $action == "crew_gen_browse") {
 
 if (isset($action) and $action == "ind_gen_browse") {
     if (isset($query)) {
-
         $sql_individuals = "SELECT ind_id,ind_name FROM individuals ORDER BY ind_name ASC";
         //$sql_aka         = "SELECT ind_id,nick FROM individual_nicks ORDER BY nick ASC";
 
         //Create a temporary table to build an array with both names and nicknames
         $mysqli->query("CREATE TEMPORARY TABLE temp ENGINE=MEMORY $sql_individuals") or die("failed to create temporary table");
         //$mysqli->query("INSERT INTO temp $sql_aka") or die("failed to insert akas into temporary table");
-        
+
         $query = $mysqli->real_escape_string($query);
         $query_temporary = $mysqli->query("SELECT * FROM temp WHERE ind_name LIKE '$query%' ORDER BY ind_name ASC") or die("Failed to query temporary table");
         $mysqli->query("DROP TABLE temp");
     }
 
-    echo '<SELECT name="ind_id" id="quick_search_pub_select">';
+    echo '<SELECT name="ind_id" class="standard_select select_large">';
     echo '<option value="" SELECTED>-</option>';
 
     while ($genealogy_ind = $query_temporary->fetch_array(MYSQLI_BOTH)) {
@@ -142,7 +141,7 @@ if (isset($action) and $action == "ind_gen_search") {
         $mysqli->query("DROP TABLE temp");
     }
 
-    echo '<SELECT name="ind_id" id="quick_search_pub_select">';
+    echo '<SELECT name="ind_id" class="standard_select select_large">';
     echo '<option value="" SELECTED>-</option>';
     while ($genealogy_ind = $query_temporary->fetch_array(MYSQLI_BOTH)) {
         $ind_id   = $genealogy_ind['ind_id'];

@@ -21,44 +21,44 @@
 {block name=title}{$game_info.game_name} - Atari ST game | Atari Legend{/block}
 {block name=description}{$game_description}{/block}
 {block name=main_body}
-    <script src="{$template_dir}includes/js/vendor/jssor.slider-25.2.1.min.js" type="text/javascript"></script>
+    <script src="{$template_dir}includes/js/vendor/jssor.slider-25.2.1.min.js"></script>
 
-    <script type="text/javascript"> <!-- script used for the jquery screenshot and boxscan slider -->
+    <script> <!-- script used for the jquery screenshot and boxscan slider -->
         jQuery(document).ready(function ($) {
 
         //screenshot slider code
         var jssor_1_SlideshowTransitions = [
-          {literal}{$Duration:1200,$Opacity:2}{/literal}
+            {literal}{$Duration:1200,$Opacity:2}{/literal}
         ];
 
         var jssor_1_options = {
-          $AutoPlay: 1,
-          $SlideshowOptions: {
-            $Class: $JssorSlideshowRunner$,
-            $Transitions: jssor_1_SlideshowTransitions,
-            $TransitionsOrder: 1
-          },
-          $ArrowNavigatorOptions: {
-            $Class: $JssorArrowNavigator$
-          },
-          $BulletNavigatorOptions: {
-            $Class: $JssorBulletNavigator$
-          },
-          $ThumbnailNavigatorOptions: {
-            $Class: $JssorThumbnailNavigator$,
-            {if $nr_screenshots < 10}
-                $Rows: 1,
-                $Cols: 4,
-                $Align: 209,
-            {else}
-                $Rows: 2,
-                $Cols: 8,
-                $Align: 171,
-            {/if}
-            $SpacingX: 5,
-            $SpacingY: 5,
-            $Orientation: 2
-          }
+            $AutoPlay: 1,
+            $SlideshowOptions: {
+                $Class: $JssorSlideshowRunner$,
+                $Transitions: jssor_1_SlideshowTransitions,
+                $TransitionsOrder: 1
+            },
+            $ArrowNavigatorOptions: {
+                $Class: $JssorArrowNavigator$
+            },
+            $BulletNavigatorOptions: {
+                $Class: $JssorBulletNavigator$
+            },
+            $ThumbnailNavigatorOptions: {
+                $Class: $JssorThumbnailNavigator$,
+                {if $nr_screenshots < 10}
+                    $Rows: 1,
+                    $Cols: 4,
+                    $Align: 209,
+                {else}
+                    $Rows: 2,
+                    $Cols: 8,
+                    $Align: 171,
+                {/if}
+                $SpacingX: 5,
+                $SpacingY: 5,
+                $Orientation: 2
+            }
         };
 
         var jssor_1_slider = new $JssorSlider$("jssor_1", jssor_1_options);
@@ -167,22 +167,22 @@
 
     <!-- I am adding a small piece of style code to make the thumbs bigger when there a less screenshots available, it makes it look better -->
     <style>
-      {if $nr_screenshots < 10}
-         {literal}.games_main_detail_thumbs .p {width:160px;height:100px;}{/literal}
-      {else}
-         {literal}.games_main_detail_thumbs .p {width:90px;height:52px;}{/literal}
-      {/if}
+        {if $nr_screenshots < 10}
+            {literal}.games_main_detail_thumbs .p {width:160px;height:100px;}{/literal}
+        {else}
+            {literal}.games_main_detail_thumbs .p {width:90px;height:52px;}{/literal}
+        {/if}
     </style>
 
-    <script type="text/javascript" src="{$template_dir}includes/js/vendor/lightbox-2.9.0.min.js"></script>
+    <script src="{$template_dir}includes/js/vendor/lightbox-2.9.0.min.js"></script>
     <link type="text/css" href="{$style_dir}css/vendor/lightbox-2.9.0.css" hreflang="en" rel="stylesheet">
 
     <script>
         lightbox.option({
-          'showImageNumberLabel': false
+            'showImageNumberLabel': false
         })
     </script>
-    <script type="text/javascript"> <!--game info box scripts -->
+    <script> <!--game info box scripts -->
         function Show_profile(pub_id) {
             var string = "profile";
             var show_profile = string.concat(pub_id);
@@ -265,7 +265,7 @@
     </script>
 
     {literal}
-    <script type="text/javascript"> <!-- Comment tile scripts
+    <script> <!-- Comment tile scripts
     function CommentEditable(comment_id,user_id) {
         var string = "latest_comment_edit";
         var editable_comment = string.concat(comment_id);
@@ -338,16 +338,16 @@
 
     function DeleteEditable(comment_id,user_id,game_id) {
 
-         // CONFIRM REQUIRES ONE ARGUMENT
-         var message = "Are you sure you want to delete this comment?";
-         // CONFIRM IS BOOLEAN. THAT MEANS THAT
-         // IT RETURNS TRUE IF 'OK' IS CLICKED
-         // OTHERWISE IT RETURN FALSE
-         var return_value = confirm(message);
+        // CONFIRM REQUIRES ONE ARGUMENT
+        var message = "Are you sure you want to delete this comment?";
+        // CONFIRM IS BOOLEAN. THAT MEANS THAT
+        // IT RETURNS TRUE IF 'OK' IS CLICKED
+        // OTHERWISE IT RETURN FALSE
+        var return_value = confirm(message);
 
-         if (return_value !="0")
-         {
-             if (comment_id == "")
+        if (return_value !="0")
+        {
+            if (comment_id == "")
                 {
                     document.getElementById("latest_comments_all").innerHTML = "";
                     return;
@@ -375,9 +375,9 @@
                     xmlhttp.send();
                 }
             }
-         }
+        }
 
-         function AddComment(user_id,game_id) {
+        function AddComment(user_id,game_id) {
 
             //It took me ages to get his to work because I'm a dipshit - I hate ajax --> ST Graveyard 14/07/2014 @fucking 00:44
             //Im not using contenteditable crap on a div because this way, loads of <br> statements are added in the Database.
@@ -423,7 +423,7 @@
         }
     </script>
 
-    <script type="text/javascript"> <!-- all the code for the options of the textfield of the comment section -->
+    <script> <!-- all the code for the options of the textfield of the comment section -->
         var clientPC = navigator.userAgent.toLowerCase(); // Get client info
         var clientVer = parseInt(navigator.appVersion); // Get browser version
 
@@ -487,7 +487,7 @@
                 }
             }
 
-            if (donotinsert) {		// Close all open tags up to the one just clicked & default button names
+            if (donotinsert) {      // Close all open tags up to the one just clicked & default button names
                 while (bbcode[bblast]) {
                         butnumber = arraypop(bbcode) - 1;
                         txtarea.value += bbtags[butnumber + 1];
@@ -499,10 +499,10 @@
                     return;
             } else { // Open tags
 
-                if (imageTag && (bbnumber != 14)) {		// Close image tag before adding another
+                if (imageTag && (bbnumber != 14)) {     // Close image tag before adding another
                     txtarea.value += bbtags[15];
-                    lastValue = arraypop(bbcode) - 1;	// Remove the close image tag from the list
-                    document.post.addbbcode14.value = "Img";	// Return button back to normal state
+                    lastValue = arraypop(bbcode) - 1;   // Remove the close image tag from the list
+                    document.post.addbbcode14.value = "Img";    // Return button back to normal state
                     imageTag = false;
                 }
 
@@ -541,51 +541,51 @@
     </script>
     {/literal}
 
-    <script type="text/javascript" src="{$template_dir}includes/js/vendor/jquery.dotdotdot-1.8.3.min.js" type="text/javascript"></script> <!--this script is used for the elipsis (...) effect of the preview of the reviews -->
-    <script type="text/javascript">
-         window.onload = function() {
+    <script src="{$template_dir}includes/js/vendor/jquery.dotdotdot-1.8.3.min.js"></script> <!--this script is used for the elipsis (...) effect of the preview of the reviews -->
+    <script>
+        window.onload = function() {
             $(".game_details_review_preview_text").dotdotdot({  <!--This is the script to truncate the preview of the reviews-->
-                    //	configuration goes here
+                    //  configuration goes here
 
-                /*	The text to add as ellipsis. */
-                ellipsis	: '... ',
+                /*  The text to add as ellipsis. */
+                ellipsis    : '... ',
 
-                /*	How to cut off the text/html: 'word'/'letter'/'children' */
-                wrap		: 'word',
+                /*  How to cut off the text/html: 'word'/'letter'/'children' */
+                wrap        : 'word',
 
-                /*	Wrap-option fallback to 'letter' for long words */
+                /*  Wrap-option fallback to 'letter' for long words */
                 fallbackToLetter: false,
 
-                /*	jQuery-selector for the element to keep and put after the ellipsis. */
-                after		: null,
+                /*  jQuery-selector for the element to keep and put after the ellipsis. */
+                after       : null,
 
-                /*	Whether to update the ellipsis: true/'window' */
-                watch		: window,
+                /*  Whether to update the ellipsis: true/'window' */
+                watch       : window,
 
-                /*	Optionally set a max-height, can be a number or function.
+                /*  Optionally set a max-height, can be a number or function.
                     If null, the height will be measured. */
-                height		: null,
+                height      : null,
 
-                /*	Deviation for the height-option. */
-                tolerance	: 0,
+                /*  Deviation for the height-option. */
+                tolerance   : 0,
 
-                /*	Callback function that is fired after the ellipsis is added,
+                /*  Callback function that is fired after the ellipsis is added,
                     receives two parameters: isTruncated(boolean), orgContent(string). */
-                callback	: function( isTruncated, orgContent ) {},
+                callback    : function( isTruncated, orgContent ) {},
 
-                lastCharacter	: {
+                lastCharacter   : {
 
-                    /*	Remove these characters from the end of the truncated text. */
-                    remove		: [ ' ', ',', ';', '.', '!', '?' ],
+                    /*  Remove these characters from the end of the truncated text. */
+                    remove      : [ ' ', ',', ';', '.', '!', '?' ],
 
-                    /*	Don't add an ellipsis if this array contains
+                    /*  Don't add an ellipsis if this array contains
                         the last character of the truncated text. */
-                    noEllipsis	: []
+                    noEllipsis  : []
                 }
             });
         };
     </script>
-    <script type="text/javascript">
+    <script>
         $(function() {
             $but = $('#file_upload_game_screenshots');
 
@@ -594,7 +594,7 @@
             });
         });
     </script>
-    <script type="text/javascript">
+    <script>
         $(function() {
             $but_med = $('#file_upload_game_screenshots_medium');
 
@@ -708,7 +708,7 @@
                             </div>
                         </div>
                     {else}
-                        <div class="standard_tile_text">
+                        <div class="standard_tile_padding">
                             <h6 style="text-align:center;">
                                 There are no screenshots in the database. You have any? Please use the submit tile to sent it to us. You can select more screenshots at once to upload.
                             </h6>
@@ -746,22 +746,22 @@
                     <h1><a href="../games/games_reviews_main.php" class="standard_tile_link" title="Click to see all reviews">REVIEWS</a></h1>
                     <div class="standard_tile_line"></div>
                     {if isset($user_session)}
-                        <div class="standard_tile_text">
+                        <div class="standard_tile_padding">
                             <h6 style="text-align:center;">
                                 Feel inspired to write your own review? Please click <a href="../games/games_reviews_add.php?game_id={$game_info.game_id}" class="standard_tile_link">here</a> and get started!
                             </h6>
                         </div>
                     {else}
-                       <div class="games_main_detail_comments_log_on">
+                        <div class="games_main_detail_comments_log_on">
                             If you like to write a review yourself, please log in and follow the link.
-                       </div>
+                        </div>
                     {/if}
                     {if isset($review)}
                     <div class="standard_tile_line"></div>
-                    <table class="standard_table_games_main_detail">
+                    <table class="primary_table_list">
                     {foreach from=$review item=line name=review}
                         <tr>
-                        <td class="game_details_review_preview_left">
+                        <td class="w-25">
                             <div style="margin-left:10px;margin-right:10px;text-align:justify;margin-bottom:10px;margin-top:10px">
                                 <a href="../../includes/show_image.php?file={$line.screenshot}&amp;resize=410,null,null,null" data-lightbox="image-1">
                                 <img src="../../includes/show_image.php?file={$line.screenshot}&amp;resize=210,null,null,null" alt="Click to enlarge!" style="display:inline;margin-top:10px;" class="game_screenshot_img"></a>
@@ -769,14 +769,14 @@
                                 <span class="standard_tile_subtext" style="font-weight: bold;">{$line.comment}</span>
                             </div>
                         </td>
-                        <td class="game_details_review_preview_right">
+                        <td class="w-75">
                             <div style="margin-top:20px;margin-bottom:15px;margin-right:20px;margin-left:10px;">
                                 <h4 style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis">
                                     Written by <a href="../../admin/user/user_detail.php?user_id_selected={$line.user_id}" class="standard_tile_link">{$line.user_name}</a>
                                 </h4>
                                 <h5 style="font-weight: bold;">{$line.date}</h5>
                                 <div class="game_details_review_preview_text">
-                                   {$line.text}
+                                    {$line.text}
                                 </div>
                                 <h2><a href="../games/games_reviews_detail.php?game_id={$game_id}&review_id={$line.review_id}" class="standard_tile_link">Read more <i class="fa fa-chevron-right" aria-hidden="true"></i></a></h2>
                                 <br>
@@ -874,7 +874,7 @@
                         <span class="standard_tile_subtext" style="float:right;margin-right:20px;">Autoplay <a href="javascript:Play_box();" id="play_jssor2" >On</a>/<a href="javascript:Pause_box();" id="pause_jssor2">Off</a></span>
                         <br><br>
                     {else}
-                        <div class="standard_tile_text">
+                        <div class="standard_tile_padding">
                             <h6 style="text-align:center;">
                                 There is no boxscan in the database. You have one? Please use the submit tile to sent it to us.
                             </h6>
@@ -890,7 +890,7 @@
             <!--START interview tile -->
             <!--*********************-->
             <div class="games_main_details_interviews_position_high">
-               {include file='1/main/games_detail_interview.html'}
+                {include file='1/main/games_detail_interview.html'}
             </div>
             <!--*********************-->
             <!--END interview tile   -->

@@ -16,26 +16,24 @@
 //****************************************************************************************
 *}
 
-{if isset($interviews)}   
+{if isset($interviews)}
     <br>
     <div class="standard_tile">
         <h1><a href="../interviews/interviews_main.php" class="standard_tile_link" title="Click to see all interviews">INTERVIEWS</a></h1>
-        <div class="standard_tile_line"></div>  
+        <div class="standard_tile_line"></div>
         {foreach from=$interviews item=line name=interviews}
             {if $smarty.foreach.interviews.index == $random_interview_nr}
-            <div class="standard_tile_background">
                 <div class="grid">
-                    <figure class="effect-tile" style="margin:0px;">           
+                    <figure class="effect-tile" style="margin:0px;">
                     <img class="standard_tile_image" src="../../includes/show_image.php?file={$line.ind_img}&amp;resize=410,null,null,null&amp;crop=left,top,410,260" alt="Interview">
                     <figcaption>
-                        <span class="standard_tile_subtext" style="left: 5%; position: absolute; top: 50%;">Random Interview</span><span class="tile_arrow"><i class="fa fa-chevron-up" aria-hidden="true"></i></span>                    
-                        <span class="tile_title"><a href="../interviews/interviews_detail.php?selected_interview_id={$line.int_id}">{$line.ind_name}</a></span>                      
-                    </figcaption>			
+                        <span class="standard_tile_subtext" style="left: 5%; position: absolute; top: 50%;">Random Interview</span><span class="tile_arrow"><i class="fa fa-chevron-up" aria-hidden="true"></i></span>
+                        <span class="tile_title"><a href="../interviews/interviews_detail.php?selected_interview_id={$line.int_id}">{$line.ind_name}</a></span>
+                    </figcaption>
                     </figure>
                 </div>
-            </div>
             <div class="standard_tile_explanation">
-                <br>	
+                <br>
                 <h6>{$line.int_text}</h6>
                 <br>
                 <span class="standard_tile_subtext">by <a href="../../admin/user/user_detail.php?user_id_selected={$line.int_user_id}">{$line.int_userid}</a>, {$line.int_date}</span>

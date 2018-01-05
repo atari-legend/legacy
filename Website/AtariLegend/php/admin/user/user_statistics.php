@@ -43,7 +43,6 @@ $smarty->assign('nr_comments', $nr_comments);
 
 mysqli_free_result($sql);
 
-
 // START - NUMBER OF reviews
 $sql        = $mysqli->query("SELECT * FROM review_main
                     LEFT JOIN review_game ON (review_main.review_id = review_game.review_id)
@@ -73,7 +72,6 @@ $smarty->assign('nr_downloads', $gamecount);
 
 mysqli_free_result($query);
 
-
 // START - NUMBER OF SUBMISSIONS BY USER
 $sql = $mysqli->query("SELECT * FROM game_submitinfo
                        LEFT JOIN game ON (game_submitinfo.game_id = game.game_id)
@@ -91,7 +89,6 @@ while ($query = $sql->fetch_array(MYSQLI_BOTH)) {
 $smarty->assign('nr_submission', $nr_submission);
 
 mysqli_free_result($sql);
-
 
 // START - NUMBER OF LINKS BY USER
 $sql      = $mysqli->query("SELECT * FROM website WHERE user_id = $user_id_selected");

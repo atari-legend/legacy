@@ -25,8 +25,7 @@ $term = $_GET['term'];
 $upperString = strtoupper($term);
 $extraVar = $_GET['extraParams'];
 
-if ($extraVar == 'title')
-{
+if ($extraVar == 'title') {
     //Set up queries
     $game_name_query     = "SELECT game_name FROM game";
     $game_aka_name_query = "SELECT aka_name AS game_name FROM game_aka";
@@ -38,20 +37,18 @@ if ($extraVar == 'title')
     $mysqli->query("INSERT INTO temp $game_aka_name_query");
     //$mysqli->query("INSERT INTO temp $demo_name_query");
     //$mysqli->query("INSERT INTO temp $demo_aka_name_query");
-    
+
     //Get the results
-    $result = $mysqli->query("SELECT game_name FROM temp WHERE game_name LIKE '%$upperString%' ORDER BY game_name ASC LIMIT 10") or die ("error getting date for autocomplete");
-    
-    while ($row = $result->fetch_assoc()) 
-    {  
+    $result = $mysqli->query("SELECT game_name FROM temp WHERE game_name LIKE '%$upperString%' ORDER BY game_name ASC LIMIT 10") or die("error getting date for autocomplete");
+
+    while ($row = $result->fetch_assoc()) {
         $json[] = $row['game_name'];
     }
-    
+
     $mysqli->query("DROP TABLE temp");
 }
 
-if ($extraVar == 'publisher')
-{
+if ($extraVar == 'publisher') {
     //Get the results
     $result = $mysqli->query("SELECT pub_dev.pub_dev_name
                                FROM game_publisher
@@ -60,16 +57,13 @@ if ($extraVar == 'publisher')
                                GROUP BY pub_dev.pub_dev_id HAVING COUNT(DISTINCT pub_dev.pub_dev_id) = 1
                                ORDER BY pub_dev.pub_dev_name ASC LIMIT 10")
                             or die("Problems retrieving values from publishers");
-    
-     while ($row = $result->fetch_assoc()) 
-    {  
+
+    while ($row = $result->fetch_assoc()) {
         $json[] = $row['pub_dev_name'];
     }
 }
 
-
-if ($extraVar == 'developer')
-{
+if ($extraVar == 'developer') {
     //Get the results
     $result = $mysqli->query("SELECT pub_dev.pub_dev_name
                    FROM game_developer
@@ -78,42 +72,36 @@ if ($extraVar == 'developer')
                    GROUP BY pub_dev.pub_dev_id HAVING COUNT(DISTINCT pub_dev.pub_dev_id) = 1
                    ORDER BY pub_dev.pub_dev_name ASC LIMIT 10")
                 or die("Problems retrieving values from developer");
-    
-     while ($row = $result->fetch_assoc()) 
-    {  
+
+    while ($row = $result->fetch_assoc()) {
         $json[] = $row['pub_dev_name'];
     }
 }
 
-if ($extraVar == 'year')
-{
+if ($extraVar == 'year') {
     //Get the results
-    $result = $mysqli->query("SELECT distinct game_year from game_year WHERE game_year LIKE '%$upperString%' 
-                                                                       ORDER BY game_year ASC LIMIT 10") 
-                     or die ("problems getting data from game_year table");
-    
-     while ($row = $result->fetch_assoc()) 
-    {  
+    $result = $mysqli->query("SELECT distinct game_year from game_year WHERE game_year LIKE '%$upperString%'
+                                                                       ORDER BY game_year ASC LIMIT 10")
+                     or die("problems getting data from game_year table");
+
+    while ($row = $result->fetch_assoc()) {
         $json[] = $row['game_year'];
     }
 }
 
-if ($extraVar == 'cat')
-{
+if ($extraVar == 'cat') {
     //Get the results
-    $result = $mysqli->query("SELECT * from game_cat WHERE game_cat_name LIKE '%$upperString%' ORDER BY game_cat_name") 
-                     or die ("problems getting data from game_cat table");
-    
-     while ($row = $result->fetch_assoc()) 
-    {  
+    $result = $mysqli->query("SELECT * from game_cat WHERE game_cat_name LIKE '%$upperString%' ORDER BY game_cat_name")
+                     or die("problems getting data from game_cat table");
+
+    while ($row = $result->fetch_assoc()) {
         $json[] = $row['game_cat_name'];
     }
 }
 
-if ($extraVar == 'individual')
-{
+if ($extraVar == 'individual') {
     $stmt = $mysqli->prepare("SELECT ind_id, ind_name from individuals WHERE LOWER(ind_name) LIKE CONCAT('%',LOWER(?),'%') ORDER BY ind_name")
-        or die ("problems getting data from individuals table: ".$mysqli->error);
+        or die("problems getting data from individuals table: ".$mysqli->error);
     $stmt->bind_param("s", $term);
     $stmt->execute();
     $stmt->bind_result($ind_id, $ind_name);
@@ -130,4 +118,3 @@ if ($extraVar == 'individual')
 
 header("Content-Type: application/json");
 echo json_encode($json);
-?>

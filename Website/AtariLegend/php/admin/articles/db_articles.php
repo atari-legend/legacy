@@ -20,11 +20,6 @@ include("../../config/common.php");
 include("../../config/admin.php");
 include("../../config/admin_rights.php");
 
-if ($action == "stop") {
-    echo "test";
-    exit;
-}
-
 //****************************************************************************************
 // This is the image selection/upload screen for the articles
 //****************************************************************************************
