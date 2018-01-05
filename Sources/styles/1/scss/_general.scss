@@ -35,7 +35,15 @@ body {
     background-color: #000000;
 }
 
-h1, h2, h3, h4, h5, #news_head, #main_nav_ul, .effect-tile, legend {
+h1,
+h2,
+h3,
+h4,
+h5,
+#news_head,
+#main_nav_ul,
+.effect-tile,
+legend {
     font-family: Audiowide, Arial, helvetica, sans-serif;
 }
 
@@ -133,9 +141,6 @@ img {
 .standard_tile_line {
     border-bottom: 2px solid #000000;
 }
-.standard_tile_background {
-    position: relative;
-}
 .standard_tile_image {
     width: 100%;
 }
@@ -150,7 +155,26 @@ img {
 .standard_tile_subtext a:hover {
     color: #ffffff;
 }
-
+.standard_tile_text_center {
+    font-size: 10pt;
+    font-weight: 100;
+    color: #ffffff;
+    text-align: center;
+}
+.standard_tile_text_left {
+    padding-left: 2px;
+    font-size: 10pt;
+    font-weight: 100;
+    color: #ffffff;
+    text-align: left;
+}
+.standard_tile_text_right {
+    padding-right: 2px;
+    font-size: 10pt;
+    font-weight: 100;
+    color: #ffffff;
+    text-align: right;
+}
 .standard_tile p {
     width: 91.7%;
     padding-right: 4%;
@@ -227,6 +251,14 @@ img {
     text-align: left;
 }
 
+.glyph_align_right {
+    float: right;
+    font-size: 10pt;
+    font-style: italic;
+    font-weight: 100;
+    color: $bg_color;
+}
+
 .standard_tile_input {
     display: block;
     width: 85%;
@@ -256,12 +288,7 @@ img {
 #text_area_big {
     height: 150px;
 }
-.standard_tile th {
-    font-size: 12pt;
-    font-weight: bold;
-    color: #ffffff;
-    text-align: center;
-}
+
 
 .standard_tile_link:link {
     color: #ffffff;
@@ -310,23 +337,23 @@ img {
     background: #0d2e2e;
 }
 
-//.standard_list_entry_left {
-//    position: absolute;
-//    top: 50%;
-//    left: 0;
-//    width: 50%;
-//    transform: translateY(-50%);
-//}
+.statistics_list_entry {
+    position: relative;
+    text-align: center;
+    border-bottom: solid 1px #000000;
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
 
-//.standard_list_entry_left img {
-//    max-width: 100%;
-//    width: 80%;
-//    margin-left: 15px;
-//    box-shadow: 0 0 7px $bg_color;
-//}
+.statistics_list_entry_odd {
+    position: relative;
+    text-align: center;
+    border-bottom: solid 1px #000000;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    background: #0d2e2e;
+}
 
-//.standard_list_entry_left img:hover { box-shadow: 0 0 7px #fff; }
-//.standard_list_entry_right {
 .standard_list_entry_news {
     position: absolute;
     margin: 10px;
@@ -352,7 +379,7 @@ img {
     font-size: 11pt;
 }
 
-.standard_tile_text {
+.standard_tile_padding {
     padding: 20px;
 }
 
@@ -465,89 +492,6 @@ img {
     margin-left: 1%;
 }
 
-.standard_table_list {
-    width: 100%;
-    padding: 0;
-    margin-right: auto;
-    margin-left: auto;
-    text-align: left;
-    background-color: #00d3d3;
-    border: solid 1px #000000;
-    border-spacing: 0;
-}
-
-.standard_table_list  li {
-    font-size: 10pt;
-    font-weight: 100;
-    color: #ffffff;
-    text-align: center;
-    list-style-type: none;
-}
-
-.standard_table_list th {
-    padding-top: 3px;
-    padding-bottom: 3px;
-    padding-left: 3px;
-    margin: 0;
-    background-color: #006f6f;
-    border-collapse: collapse;
-    border-bottom: solid 1px #000000;
-}
-
-.standard_table_list tr:nth-child(even) {
-    background-color: #00d3d3;
-}
-.standard_table_list tr:nth-child(odd) {
-    background-color: #006f6f;
-}
-.standard_table_list tr:hover {
-    background-color: #294f4f;
-}
-.standard_table_list td {
-    padding-top: 1px;
-    padding-bottom: 1px;
-    padding-left: 3px;
-    margin: 0;
-    border-bottom: solid 1px #000000;
-}
-
-.standard_table_list_no_hover {
-    @extend .standard_table_list;
-}
-
-.standard_table_list_no_hover tr:nth-child(even) {
-    background-color: #006f6f;
-}
-.standard_table_list_no_hover tr:nth-child(odd) {
-    background-color: #294f4f;
-}
-
-.standard_table_center {
-    font-size: 10pt;
-    font-weight: 100;
-    color: #ffffff;
-    text-align: center;
-}
-
-.standard_table_left {
-    padding-left: 2px;
-    font-size: 10pt;
-    font-weight: 100;
-    color: #ffffff;
-    text-align: left;
-}
-
-.standard_table_right {
-    padding-right: 2px;
-    font-size: 10pt;
-    font-weight: 100;
-    color: #ffffff;
-    text-align: right;
-}
-
-.standard_table_center img {
-    display: inline;
-}
 .topbutton_cpanel_small {
     width: 80px;
     height: 25px;
@@ -574,21 +518,35 @@ img {
 .topbutton_cpanel:hover {
     @extend .topbutton_cpanel_small:hover;
 }
-fieldset {
+
+.primary_fieldset {
     padding: 15px;
     font-size: 11pt;
     background: $bg_color;
     border: solid 1px #000000;
 }
 
-legend {
+.primary_legend {
     padding: 1px 10px;
     color: #ffffff;
     background: #006f6f;
     border: #000000 solid 1px;
 }
 
+.secondary_fieldset {
+    padding: 15px;
+    font-size: 11pt;
+    background: #294f4f;
+    color: #ffffff;
+    border: solid 1px #000000;
+}
 
+.secondary_legend {
+    padding: 1px 10px;
+    color: #ffffff;
+    background: $bg_color;
+    border: #000000 solid 1px;
+}
 //*------------------------------------------------------------
 //The CSS for the help tips
 //-------------------------------------------------------------*/

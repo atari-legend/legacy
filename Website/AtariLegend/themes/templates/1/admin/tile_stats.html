@@ -19,19 +19,17 @@
 <div class="standard_tile">
     <h1>STATS</h1>
         <div class="standard_tile_line"></div>
-        <div class="standard_list_entry">
-            <div class="standard_tile_text">
-                <table class="standard_table_list">
+            <div class="standard_tile_padding">
+                <table class="secondary_table_list  table_xs table_hover">
                 <tr>
-                    <th>Some Stats</th>
+                    <th class="table_textalign_center">Some Stats</th>
                 </tr>
                     {foreach from=$statistics item=line}
                 <tr>
-                    <td class="standard_table_center">{if $line.value != ''}{$line.value}{/if}</td>
+                    <td class="table_textalign_center">{if $line.value != ''}{$line.value}{/if}</td>
                 </tr>
                     {/foreach}
                 </table>
             </div>
-        </div>
     <div class="standard_tile_line"></div>
 </div>

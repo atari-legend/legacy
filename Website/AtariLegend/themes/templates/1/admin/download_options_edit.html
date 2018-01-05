@@ -43,9 +43,9 @@ function optiondelete(option_id)
     {if isset($option_edit.option_edit) }
     <h1>EDIT OPTION</h1>
     <div class="standard_tile_line"></div>
-    <div class="standard_tile_text">
-        <fieldset class="centered_fieldset">
-            <legend>Edit option</legend>
+    <div class="standard_tile_padding">
+        <fieldset class="primary_fieldset centered_fieldset">
+            <legend class="primary_legend">Edit option</legend>
             <form action="../downloads/db_download_options.php" method="post" name="post" id="option_edit">
                 <b>Name :</b>
                 <input type="text" name="option_name" value="{$option_edit.option_edit}" class="standard_input input_large">
@@ -60,13 +60,13 @@ function optiondelete(option_id)
     {else}
     <h1>Edit Option</h1>
     <div class="standard_tile_line"></div>
-    <div class="standard_tile_text">
+    <div class="standard_tile_padding">
         <div class="left_nav_section">
             Option does not exist.
         </div>
     </div>
     {/if}
-    <div class="standard_table_center"><a href="../downloads/download_options.php" class="standard_tile_link">back</a></div>
+    <div class="standard_tile_text_center"><a href="../downloads/download_options.php" class="standard_tile_link">back</a></div>
     <br>
 </div>
 {/block}

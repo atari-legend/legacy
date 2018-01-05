@@ -104,14 +104,14 @@ function DidyouknowUpdate(trivia_id) {
 <div class="standard_tile">
     <h1>DID YOU KNOW</h1>
     <div class="standard_tile_line"></div>
-    <div class="standard_tile_text">
+    <div class="standard_tile_padding">
         <div class="left_nav_section">
             Here you can add a new trivia by using the below text field or you can delete one of the old trivias.
         </div>
         <br>
         <br>
-        <fieldset>
-        <legend>Add new Trivia</legend>
+        <fieldset class="primary_fieldset">
+        <legend class="primary_legend">Add new Trivia</legend>
         <div class="centered_fieldset">
             <form action="../trivia/db_trivia.php" method="post" name="trivia" id="trivia">
                 Trivia Text<br>
@@ -124,9 +124,9 @@ function DidyouknowUpdate(trivia_id) {
         </fieldset>
         <br>
         {foreach from=$trivia item=line}
-            <fieldset id="JStrivia_id_{$line.trivia_id}">
+            <fieldset class="primary_fieldset" id="JStrivia_id_{$line.trivia_id}">
+                <legend class="primary_legend">Trivia ID {$line.trivia_id}</legend>
                 <form action="" method="post" name="trivia{$line.trivia_id}" id="JSTrivia{$line.trivia_id}">
-                    <legend>Trivia ID {$line.trivia_id}</legend>
                     <br>
                     <div id="JSDidYouKnow_{$line.trivia_id}">
                         {$line.trivia_text}

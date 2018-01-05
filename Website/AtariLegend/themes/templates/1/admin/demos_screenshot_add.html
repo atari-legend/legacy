@@ -45,7 +45,7 @@ function delete_screenshot(screenshot_id, demo_id)
     <br/>
 
         <fieldset class="interview_set">
-        <legend class="links_legend">screenshots</legend>
+        <legend class="primary_legend">screenshots</legend>
         {if $screenshots_nr <> ''}
             {foreach from=$screenshots item=line}
                 Image {$line.count} ::
@@ -59,7 +59,7 @@ function delete_screenshot(screenshot_id, demo_id)
         </fieldset>
 <br/><br/>
         <fieldset class="interview_set">
-        <legend class="links_legend">Browse</legend>
+        <legend class="primary_legend">Browse</legend>
         <form enctype="multipart/form-data" name="frmUploadShot" action="db_demos_screenshot_add.php" method="post">
         {section name=loop loop=11 start=1}
             <input type="file" name="image[{$smarty.section.loop.index}]">

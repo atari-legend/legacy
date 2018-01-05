@@ -76,7 +76,26 @@ img {
     width: 100%;
     margin-top: 20px;
 }
-
+.standard_tile_text_center {
+    font-size: 16px;
+    font-weight: 100;
+    color: #000000;
+    text-align: center;
+}
+.standard_tile_text_right {
+    padding-right: 2px;
+    font-size: 16px;
+    font-weight: 100;
+    color: #000000;
+    text-align: right;
+}
+.standard_tile_text_left {
+    padding-left: 2px;
+    font-size: 16px;
+    font-weight: 100;
+    color: #000000;
+    text-align: left;
+}
 //*------------------------------------------------------------
 //Standard tile settings
 //
@@ -112,7 +131,9 @@ img {
     margin-top: 0;
 }
 
-.column_wide_right_1920, .column_wide_left_1920, .column_wide_center_1920 {
+.column_wide_right_1920,
+.column_wide_left_1920,
+.column_wide_center_1920 {
     display: none;
 }
 
@@ -126,9 +147,6 @@ img {
 
 .standard_tile_line {
     border-bottom: 2px solid #666666;
-}
-.standard_tile_background {
-    position: relative;
 }
 .standard_tile_image {
     width: 100%;
@@ -250,7 +268,8 @@ a.standard_tile_link:link {
     outline: 0 none;
 }
 
-a.standard_tile_link:hover, a.standard_tile_link:focus {
+a.standard_tile_link:hover,
+a.standard_tile_link:focus {
     color: #000000;
     text-shadow: -1px 1px 8px #666666, 1px -1px 8px #515151;
 }
@@ -297,23 +316,20 @@ a.standard_tile_link:hover, a.standard_tile_link:focus {
     height: 140px;
     background: linear-gradient(to right, #ffffff, #acacac);
 }
+.statistics_list_entry {
+    position: relative;
+    width: 100%;
+    height: 140px;
+    background: linear-gradient(to right, #ffffff, #23f001);
+}
 
-//.standard_list_entry_left {
-//    position: absolute;
-//    top: 50%;
-//    width: 50%;
-//    transform: translateY(-50%);
-//}
+.statistics_list_entry_odd {
+    position: relative;
+    width: 100%;
+    height: 140px;
+    background: linear-gradient(to right, #ffffff, #acacac);
+}
 
-//.standard_list_entry_left img {
-//    max-width: 100%;
-//    width: 80%;
-//    margin-left: 15px;
-//    box-shadow: 0 0 7px #2c8007;
-//}
-
-//.standard_list_entry_left img:hover { box-shadow: 0 0 7px #fff; }
-//.standard_list_entry_right {
 .standard_list_entry_news {
     position: absolute;
     margin: 10px;
@@ -334,7 +350,7 @@ a.standard_tile_link:hover, a.standard_tile_link:focus {
     font-size: 1em;
 }
 
-.standard_tile_text {
+.standard_tile_padding {
     padding: 20px;
 }
 
@@ -425,108 +441,7 @@ a.standard_tile_link:hover, a.standard_tile_link:focus {
 }
 
 
-//*------------------------------------------------------------
-//Standard table settings
-//-------------------------------------------------------------*/
-#column_left_cpanel {
-    float: left;
-    width: 20%;
-    margin-right: 1%;
-}
 
-#column_center_cpanel {
-    float: left;
-    width: 58%;
-}
-
-#column_right_cpanel {
-    float: right;
-    width: 20%;
-    margin-left: 1%;
-}
-
-.standard_table_list {
-    width: 100%;
-    padding: 0;
-    margin-right: auto;
-    margin-left: auto;
-    text-align: left;
-    background-color: #f3f3f3;
-    border: solid 1px #b2b2b2;
-    border-spacing: 0;
-}
-
-.standard_table_list  li {
-    font-size: 16px;
-    color: #000000;
-    text-align: center;
-    list-style-type: none;
-}
-
-.standard_table_list th {
-    padding-top: 3px;
-    padding-bottom: 3px;
-    padding-left: 3px;
-    margin: 0;
-    text-align: center;
-    background-color: #dbd7d1;
-    border-collapse: collapse;
-    border-bottom: solid 2px #b2b2b2;
-}
-
-.standard_table_list tr:nth-child(even) {
-    background-color: #f3f3f3;
-}
-.standard_table_list tr:nth-child(odd) {
-    background-color: #eeeeee;
-}
-.standard_table_list tr:hover {
-    background-color: #dbd7d1;
-}
-.standard_table_list td {
-    padding-top: 1px;
-    padding-bottom: 1px;
-    padding-left: 3px;
-    margin: 0;
-}
-
-.standard_table_list_no_hover {
-    @extend .standard_table_list;
-}
-
-.standard_table_list_no_hover tr:nth-child(even) {
-    background-color: #eeeeee;
-}
-.standard_table_list_no_hover tr:nth-child(odd) {
-    background-color: #dbd7d1;
-}
-
-.standard_table_center {
-    font-size: 16px;
-    font-weight: 100;
-    color: #000000;
-    text-align: center;
-}
-
-.standard_table_left {
-    padding-left: 2px;
-    font-size: 16px;
-    font-weight: 100;
-    color: #000000;
-    text-align: left;
-}
-
-.standard_table_right {
-    padding-right: 2px;
-    font-size: 16px;
-    font-weight: 100;
-    color: #000000;
-    text-align: right;
-}
-
-.standard_table_center img {
-    display: inline;
-}
 .topbutton_cpanel_small {
     width: 80px;
     height: 25px;
@@ -772,7 +687,7 @@ div.tab button.active {
 .scroll-top-wrapper.show {
     visibility: visible;
     cursor: pointer;
-    opacity: 1.0;
+    opacity: 1;
 }
 .scroll-top-wrapper i.fa {
     line-height: inherit;

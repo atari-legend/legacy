@@ -23,12 +23,12 @@ The main game page
         If you want to do a new search query or like to add a new demo, click <a href="demos_main.php" class="MAINNAV"><b>here</b></a>!
     </fieldset>
 <br/><br/>
-            <table class="table_game_list">
+            <table class="secondary_table_list">
             <tr>
-                <th style="width:25%;">Demo Name</th>
-                <th style="width:25%;">Crew</th>
-                <th style="width:10%;">Year</th>
-                <th style="width:15%;">Info</th>
+                <th class="w-25">Demo Name</th>
+                <th class="w-25">Crew</th>
+                <th class="w-10">Year</th>
+                <th class="w-15">Info</th>
             </tr>
                     {foreach from=$demo_search item=line}
             <tr>
@@ -45,7 +45,7 @@ The main game page
                 {else}
                     <i>n/a</i>
                 {/if}</td>
-                <td style="width:15%;">{if (isset($line.screenshot) and $line.screenshot != '')}
+                <td class="w-15">{if (isset($line.screenshot) and $line.screenshot != '')}
                     <img src="../templates/0/icons/screen.gif" alt="Screenshots available" title="Screenshot Available">
                         {/if}
                         {if (isset($line.music) and $line.music != '')}

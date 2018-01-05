@@ -3,18 +3,18 @@
 {block name=main_tile}
 <div class="NEWMAINCELL">
         <br/>
-    <fieldset class="game_set">
-    <legend class="links_legend">Reviewed games.</legend>
+    <fieldset class="primary_fieldset">
+    <legend class="primary_legend">Reviewed games.</legend>
     <br/>
-        <table class="table_game_list">
+        <table class="secondary_table_list">
             <tr>
-                <th style="width:80%;">Game Name</th>
-                <th style="width:20%;">Score</th>
+                <th class="w-80">Game Name</th>
+                <th class="w-20">Score</th>
             </tr>
                     {foreach from=$magazine item=line}
             <tr>
-                <td style="width:80%;">{if $line.game != ''}{$line.game}</a>{else}<i>n/a</i>{/if}</td>
-                <td style="width:20%;">{$line.score}</td>
+                <td class="w-80">{if $line.game != ''}{$line.game}</a>{else}<i>n/a</i>{/if}</td>
+                <td class="w-20">{$line.score}</td>
             </tr>
         {/foreach}
             <tr>

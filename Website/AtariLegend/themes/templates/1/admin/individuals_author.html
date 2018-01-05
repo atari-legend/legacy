@@ -26,7 +26,7 @@
 <div class="standard_tile" id="individuals_author">
     <h1>AUTHOR TYPES</h1>
     <div class="standard_tile_line"></div>
-    <div class="standard_tile_text">
+    <div class="standard_tile_padding">
         <div class="left_nav_section">
             Here you can add, edit or delete an author type. These groupings are used in the actual game section
             to connect them to a certain genre.
@@ -35,8 +35,8 @@
         <br>
         {if isset($load) and $load == '1'}
             <form action="../individuals/db_individuals_author.php" method="post" name="post">
-            <fieldset>
-                <legend>Modify type</legend>
+            <fieldset class="primary_fieldset">
+                <legend class="primary_legend">Modify type</legend>
                 <input type="text" name="newtype" value="{$author_types_load.author_type}" class="standard_input input_large">
                 <input type="hidden" name="action" value="edit">
                 <input type="hidden" name="type_id" value="{$author_types_load.author_type_id}">
@@ -45,8 +45,8 @@
             </form>
         {else}
             <form action="../individuals/db_individuals_author.php" method="post" name="post">
-                <fieldset>
-                <legend>Add a new type</legend>
+                <fieldset class="primary_fieldset">
+                <legend class="primary_legend">Add a new type</legend>
                 <input type="text" name="newtype" class="standard_input input_large">
                 <input type="hidden" name="action" value="insert">
                 <input type="submit" value="Insert" class="topbutton_cpanel_small">
@@ -55,8 +55,8 @@
         {/if}
         <br>
         <br>
-        <fieldset>
-            <legend>Current types</legend>
+        <fieldset class="primary_fieldset">
+            <legend class="primary_legend">Current types</legend>
             {foreach from=$author_types item=line}
                 <ul style="display:block;width:100%;padding:0px;margin:0px;">
                     <li style="display:table-cell;width:70%;">{$line.author_type}</li>
@@ -67,7 +67,7 @@
         </fieldset>
         <br>
         <br>
-        <div class="standard_table_center"><a href="javascript:history.go(-1)" class="standard_tile_link">back</a></div>
+        <div class="standard_tile_text_center"><a href="javascript:history.go(-1)" class="standard_tile_link">back</a></div>
     </div>
 </div>
 {/block}

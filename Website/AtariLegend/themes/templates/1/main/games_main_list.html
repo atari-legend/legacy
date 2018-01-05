@@ -138,7 +138,7 @@ The main game page
                 </div>
                 <h1>GAMES</h1>
                 <div class="standard_tile_line"></div>
-                <div class="standard_tile_text">
+                <div class="standard_tile_padding">
                     <h6>
                         This is the search result page. Click a game to go to the main page. Click a Publisher/Developer/Year to do a new search. This list has sort functions, filters and you can use the download button to export the contents.
                         For more info regarding this plug in, visit the <a href="https://github.com/olifolkerd/tabulator" class="standard_tile_link_reverse">Tabulator</a> github page.
@@ -270,7 +270,7 @@ The main game page
                                 <input type="text" name="year_input" value="" class="standard_tile_input_small_site autocompleted" id="games_main_year_input" data-autocomplete-param="year">
                             </div>
                         </div>
-                        <div class="standard_table_center">
+                        <div class="standard_tile_text_center">
                             <br>
                             <input type="submit" value="SEARCH" class="quick_search_games_button">
                             <br>
@@ -279,9 +279,9 @@ The main game page
                         <input type="hidden" name="action" id="action" value="search">
                         <input type="hidden" name="mode" id="mode" value="{if isset($mode)}{$mode}{/if}">
                     </form>
-                    <div class="standard_tile_line"></div>
+
                     <div id="games_main_list_4">
-                        <table class="standard_table_list_comments_main">
+                        <table class="primary_table_list table_md">
                             <tr>
                                 <td colspan="4"><div class="games_main_list_info"><br>{if $nr_of_games == 1}1 game found {else} {$nr_of_games} games found{/if} in {$query_time} sec<br><br></div></td>
                             </tr>
@@ -301,12 +301,12 @@ The main game page
                                             </div>
                                         {/if}
                                         <div class="games_main_list_title">
-                                            <a href="games_detail.php?game_id={$line.game_id}" class="standard_table_left">
+                                            <a href="games_detail.php?game_id={$line.game_id}" class="standard_tile_text_left">
                                                 <br>{$line.game_name}
                                             </a>
                                         </div>
                                         <div class="games_main_list_info">
-                                            <a href="games_main_list.php?publisher={$line.publisher_id}&amp;action=search" class="standard_table_left">{$line.publisher_name}</a>{if (isset($line.year))}<a href="games_main_list.php?year={$line.year}&amp;action=search" class="standard_table_left">, {$line.year}</a>{/if}
+                                            <a href="games_main_list.php?publisher={$line.publisher_id}&amp;action=search" class="standard_tile_text_left">{$line.publisher_name}</a>{if (isset($line.year))}<a href="games_main_list.php?year={$line.year}&amp;action=search" class="standard_tile_text_left">, {$line.year}</a>{/if}
                                         </div>
                                         <div class="games_main_list_info" style="margin-bottom:10px;">
                                             {if $line.screenshot_id != ''}
@@ -360,7 +360,7 @@ The main game page
                         </table>
                     </div>
                     <div id="games_main_list_3">
-                        <table class="standard_table_list_comments_main">
+                        <table class="primary_table_list table_md">
                             <tr>
                                 <td colspan="3"><div class="games_main_list_info"><br>{if $nr_of_games == 1}1 game found {else} {$nr_of_games} games found{/if} in {$query_time} sec<br><br></div></td>
                             </tr>
@@ -379,12 +379,12 @@ The main game page
                                             </div>
                                         {/if}
                                         <div class="games_main_list_title">
-                                            <a href="games_detail.php?game_id={$line.game_id}" class="standard_table_left">
+                                            <a href="games_detail.php?game_id={$line.game_id}" class="standard_tile_text_left">
                                                 <br>{$line.game_name}
                                             </a>
                                         </div>
                                         <div class="games_main_list_info">
-                                            <a href="games_main_list.php?publisher={$line.publisher_id}&amp;action=search" class="standard_table_left">{$line.publisher_name}</a>{if (isset($line.year))}<a href="games_main_list.php?year={$line.year}&amp;action=search" class="standard_table_left">, {$line.year}</a>{/if}
+                                            <a href="games_main_list.php?publisher={$line.publisher_id}&amp;action=search" class="standard_tile_text_left">{$line.publisher_name}</a>{if (isset($line.year))}<a href="games_main_list.php?year={$line.year}&amp;action=search" class="standard_tile_text_left">, {$line.year}</a>{/if}
                                         </div>
                                         <div class="games_main_list_info" style="margin-bottom:10px;">
                                             {if $line.screenshot_id != ''}
@@ -430,7 +430,7 @@ The main game page
                         </table>
                     </div>
                     <div id="games_main_list_2">
-                        <table class="standard_table_list_comments_main">
+                        <table class="primary_table_list table_md">
                             <tr>
                                 <td colspan="2"><div class="games_main_list_info"><br>{if $nr_of_games == 1}1 game found {else} {$nr_of_games} games found{/if} in {$query_time} sec<br><br></div></td>
                             </tr>
@@ -449,12 +449,12 @@ The main game page
                                             </div>
                                         {/if}
                                         <div class="games_main_list_title">
-                                            <a href="games_detail.php?game_id={$line.game_id}" class="standard_table_left">
+                                            <a href="games_detail.php?game_id={$line.game_id}" class="standard_tile_text_left">
                                                 <br>{$line.game_name}
                                             </a>
                                         </div>
                                         <div class="games_main_list_info">
-                                            <a href="games_main_list.php?publisher={$line.publisher_id}&amp;action=search" class="standard_table_left">{$line.publisher_name}</a>{if (isset($line.year))}<a href="games_main_list.php?year={$line.year}&amp;action=search" class="standard_table_left">, {$line.year}</a>{/if}
+                                            <a href="games_main_list.php?publisher={$line.publisher_id}&amp;action=search" class="standard_tile_text_left">{$line.publisher_name}</a>{if (isset($line.year))}<a href="games_main_list.php?year={$line.year}&amp;action=search" class="standard_tile_text_left">, {$line.year}</a>{/if}
                                         </div>
                                         <div class="games_main_list_info" style="margin-bottom:10px;">
                                             {if $line.screenshot_id != ''}
@@ -494,13 +494,13 @@ The main game page
                         </table>
                     </div>
                     <div id="games_main_list_1">
-                        <table class="standard_table_list_comments_main">
+                        <table class="primary_table_list table_md">
                             <tr>
                                 <td colspan="1"><div class="games_main_list_info"><br>{if $nr_of_games == 1}1 game found {else} {$nr_of_games} games found{/if} in {$query_time} sec<br><br></div></td>
                             </tr>
                             {foreach from=$game_search item=line name=game_search}
                                 <tr>
-                                    <td style="width:25%;">
+                                    <td class="w-25">
                                         {if $line.screenshot_id != ''}
                                             <div class="games_main_list_title">
                                                 <a href="games_detail.php?game_id={$line.game_id}">
@@ -509,12 +509,12 @@ The main game page
                                             </div>
                                         {/if}
                                         <div class="games_main_list_title">
-                                            <a href="games_detail.php?game_id={$line.game_id}" class="standard_table_left">
+                                            <a href="games_detail.php?game_id={$line.game_id}" class="standard_tile_text_left">
                                                 <br>{$line.game_name}
                                             </a>
                                         </div>
                                         <div class="games_main_list_info">
-                                            <a href="games_main_list.php?publisher={$line.publisher_id}&amp;action=search" class="standard_table_left">{$line.publisher_name}</a>{if (isset($line.year))}<a href="games_main_list.php?year={$line.year}&amp;action=search" class="standard_table_left">, {$line.year}</a>{/if}
+                                            <a href="games_main_list.php?publisher={$line.publisher_id}&amp;action=search" class="standard_tile_text_left">{$line.publisher_name}</a>{if (isset($line.year))}<a href="games_main_list.php?year={$line.year}&amp;action=search" class="standard_tile_text_left">, {$line.year}</a>{/if}
                                         </div>
                                         <div class="games_main_list_info" style="margin-bottom:10px;">
                                             {if $line.screenshot_id != ''}
@@ -555,7 +555,7 @@ The main game page
             }());
             </script>
             <!--end lazy load script with fader effect -->
-            <div class="standard_table_center"><a href="javascript:history.go(-1)" class="standard_tile_link">back</a></div>
+            <div class="standard_tile_text_center"><a href="javascript:history.go(-1)" class="standard_tile_link">back</a></div>
         </div>
         <div class="content_box_cpanel" id="column_right_cpanel">
             <br>

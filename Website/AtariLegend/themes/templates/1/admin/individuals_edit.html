@@ -100,15 +100,15 @@ function nickdelete(nick_id,ind_id)
     {if isset($individuals.ind_name) }
     <h1>{$individuals.ind_name|upper}</h1>
     <div class="standard_tile_line"></div>
-    <div class="standard_tile_text">
+    <div class="standard_tile_padding">
         <div class="left_nav_section">
             In this section you can edit an individual. You can use the profile box for additional info on the person.
             A photo can be uploaded as well. If a picture is already linked, you can delete it and upload a new one.
         </div>
         <br>
         <br>
-        <fieldset>
-            <legend>Edit individual</legend>
+        <fieldset class="primary_fieldset">
+            <legend class="primary_legend">Edit individual</legend>
             <form action="../individuals/db_individuals.php" method="post" name="post" id="ind_edit">
                 <b>Name :</b>
                 <input type="text" name="ind_name" value="{$individuals.ind_name}" class="standard_input input_large">
@@ -139,11 +139,11 @@ function nickdelete(nick_id,ind_id)
         </fieldset>
         <br>
         {if $individuals.ind_image !== 'none'}
-            <fieldset>
-                <legend>Individual Image</legend>
+            <fieldset class="primary_fieldset">
+                <legend class="primary_legend">Individual Image</legend>
                 <br>
                 <a href="../../includes/show_image.php?file={$individuals.ind_image}&amp;resize=410,null,null,null" data-lightbox="image-1">
-                    <img src="../../includes/show_image.php?file={$individuals.ind_image}&amp;resize=160,null,null,null" alt="{$line.ind_name}" class="user_stats_img_dark" style="max-width:95%;">
+                    <img src="../../includes/show_image.php?file={$individuals.ind_image}&amp;resize=160,null,null,null" alt="{$line.ind_name}" class="user_stats_img" id="user_details_img_dark" style="max-width:95%;">
                 </a>
                 <br>
                 <input type="button" onclick="individual_pic_delete({$individuals.ind_id});" class="topbutton_cpanel_small" value="Delete">
@@ -151,8 +151,8 @@ function nickdelete(nick_id,ind_id)
             </fieldset>
         {else}
             <form action="../individuals/db_individuals.php" method="post" enctype="multipart/form-data" name="individual_pic" id="individual_pic">
-                <fieldset>
-                    <legend>Individual Image</legend>
+                <fieldset class="primary_fieldset">
+                    <legend class="primary_legend">Individual Image</legend>
                     <!--<input type="file" name="individual_pic">-->
                     <label for="file_upload" class="file_upload">Select file</label>
                     <input id="file_upload" type="file" name="individual_pic">
@@ -167,8 +167,8 @@ function nickdelete(nick_id,ind_id)
         {/if}
         <br>
         <form action="../individuals/db_individuals.php" method="post" name="ind" id="NickAdd">
-            <fieldset>
-                <legend>Individuals nick (AKAs)</legend>
+            <fieldset class="primary_fieldset">
+                <legend class="primary_legend">Individuals nick (AKAs)</legend>
                 <input type="text" name="ind_nick" value="" class="standard_input input_large">
                 <input type="submit" value="Add Nick" class="topbutton_cpanel_small">
                 <input type="hidden" name="action" value="add_nick">
@@ -188,13 +188,13 @@ function nickdelete(nick_id,ind_id)
     {else}
     <h1>Edit individual</h1>
     <div class="standard_tile_line"></div>
-    <div class="standard_tile_text">
+    <div class="standard_tile_padding">
         <div class="left_nav_section">
             Individual does not exist.
         </div>
     </div>
     {/if}
-    <div class="standard_table_center"><a href="javascript:history.go(-1)" class="standard_tile_link">back</a></div>
+    <div class="standard_tile_text_center"><a href="javascript:history.go(-1)" class="standard_tile_link">back</a></div>
     <br>
 </div>
 {/block}

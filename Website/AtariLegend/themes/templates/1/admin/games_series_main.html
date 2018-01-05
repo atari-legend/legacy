@@ -26,15 +26,15 @@ The Main game series page
 <div class="standard_tile" id="games_series_main">
     <h1>GAME SERIES</h1>
     <div class="standard_tile_line"></div>
-    <div class="standard_tile_text">
+    <div class="standard_tile_padding">
         <div class="left_nav_section">
             Add a new game series by typing the name for it in the field below, click on the add button. And Presto!
             You will now have a new series in the series list, click on the new series and start adding games to it!
         </div>
         <br>
         <br>
-        <fieldset class="centered_fieldset">
-            <legend>Create series</legend>
+        <fieldset class="primary_fieldset centered_fieldset">
+            <legend class="primary_legend">Create series</legend>
             <form action="../games/db_games_series.php" method="post" name="add_series" id="add_series">
                 New name:
                 <input type="text" name="new_series" id="new_series" value="" maxlength="64" class="standard_input input_large">
@@ -46,8 +46,8 @@ The Main game series page
         </fieldset>
         <br>
         <br>
-        <fieldset class="centered_fieldset">
-            <legend>Current series</legend>
+        <fieldset class="primary_fieldset centered_fieldset">
+            <legend class="primary_legend">Current series</legend>
             {foreach from=$game_series item=line}
                 <a href="../games/games_series_editor.php?series_page=series_editor&amp;game_series_id={$line.game_series_id}" class="left_nav_link">{$line.game_series_name}</a><br>
             {/foreach}

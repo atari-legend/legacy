@@ -91,7 +91,8 @@
     content: url('../images/logon_pwd.png');
 }
 
-.logon_facebook_button, .logon_twitter_button {
+.logon_facebook_button,
+.logon_twitter_button {
     text-align: center;
 }
 
@@ -363,7 +364,12 @@
 
 // Interaction states
 
-.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus {
+.ui-state-hover,
+.ui-widget-content .ui-state-hover,
+.ui-widget-header .ui-state-hover,
+.ui-state-focus,
+.ui-widget-content .ui-state-focus,
+.ui-widget-header .ui-state-focus {
     color: #000000;
     background: #dbd7d1;
     border: 1px solid #4f4f4f;

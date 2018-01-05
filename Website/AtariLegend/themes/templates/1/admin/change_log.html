@@ -24,7 +24,7 @@ The change log page
 <div class="standard_tile">
     <h1>CHANGE LOG</h1>
     <div class="standard_tile_line"></div>
-    <div class="standard_tile_text">
+    <div class="standard_tile_padding">
         <div class="left_nav_section">
             On this page you will find every change that has been made to the database.
             The most recent changes are listed below, but you can also use the search function to find older changes.
@@ -37,13 +37,13 @@ The change log page
         <br>
         <form action="../administration/change_log.php" method="get" name="user_search" >
         <div>
-            <fieldset class="centered_fieldset">
-                <legend>Search log</legend>
+            <fieldset class="primary_fieldset centered_fieldset">
+                <legend class="primary_legend">Search log</legend>
                 <br>
                 <div>
                     <div id="changelog_select">
                         Log entries until <br>
-                        {html_select_date start_year='2003' end_year='+1'}
+                        {html_select_date start_year='2003' end_year='+1' class="standard_select"}
                     </div>
                 </div>
                 <br>
@@ -62,64 +62,64 @@ The change log page
         <br><br>
         {if $rec_nr <> '0'}
         <div>
-            <table class="standard_table_list">
+            <table class="secondary_table_list table_md table_hover ">
                 <tr>
-                    <th id="log_date_th">Date</th>
-                    <th id="log_user_th">User</th>
-                    <th id="log_section_th">Section</th>
-                    <th id="log_name_th">Name</th>
-                    <th id="log_action_th">Action</th>
-                    <th id="log_subsection_th">Subsect</th>
-                    <th id="log_sub_name_th">Sub Name</th>
+                    <th class="log_date_column w-10">Date</th>
+                    <th class="log_user_column w-20">User</th>
+                    <th class="log_section_column w-10">Section</th>
+                    <th class="log_name_column w-20">Name</th>
+                    <th class="log_action_column w-10">Action</th>
+                    <th class="log_subsection_column w-10">Subsect</th>
+                    <th class="log_subname_column w-20">Sub Name</th>
                 </tr>
                 {if $log_nr <> '0'}
                     {foreach from=$log item=line}
                     <tr>
-                        <td class="log_date_td">
+                        <td class="log_date_column w-10">
                             {$line.log_date}
                         </td>
-                        <td class="log_user_td">
+                        <td class="log_user_column w-20">
                             {if $line.log_user_name <> '0'}
-                            <a href="../user/user_detail.php?user_id_selected={$line.log_user_id}" class="standard_table_left">
+                            <a href="../user/user_detail.php?user_id_selected={$line.log_user_id}" class="standard_tile_text_left">
                                 {$line.log_user_name}
                             </a>
                             {else}
                                 [deleted user]
                             {/if}
                         </td>
-                        <td class="log_section_td">
+                        <td class="log_section_column w-10">
                             {if $line.log_section_link <> ''}
-                                <a href="{$line.log_section_link}" class="standard_table_left">
+                                <a href="{$line.log_section_link}" class="standard_tile_text_left">
                                     {$line.log_section}
                                 </a>
                             {else}
                                 {$line.log_section}
                             {/if}
                         </td>
-                        <td class="log_name_td">
+                        <td class="log_name_column w-20">
                             {if $line.log_section_link <> ''}
-                                <a href="{$line.log_section_link}" class="standard_table_left">
+                                <a href="{$line.log_section_link}" class="standard_tile_text_left">
                                     {$line.log_section_name}
                                 </a>
                             {else}
                                 {$line.log_section_name}
                             {/if}
                         </td>
-                        <td class="log_action_td">
+                        <td class="log_action_column w-10">
                             {$line.log_action}
                         </td>
-                        <td class="log_subsection_td">
+                        <td class="log_subsection_column w-10">
                             {if $line.log_subsection_link <> ''}
-                                <a href="{$line.log_subsection_link}" class="standard_table_left">
+                                <a href="{$line.log_subsection_link}" class="standard_tile_text_left">
                                     {$line.log_subsection}
                                 </a>
                             {else}
                                 {$line.log_subsection}
                             {/if}
                         </td>
-                        <td class="log_subname_td">
+                        <td class="log_subname_column w-20">
                             {if $line.log_subsection_link <> ''}
-                                <a href="{$line.log_subsection_link}" class="standard_table_left">
+                                <a href="{$line.log_subsection_link}" class="standard_tile_text_left">
                                     {$line.log_subsection_name}
                                 </a>
                             {else}
@@ -129,12 +129,12 @@ The change log page
                     </tr>
                     {/foreach}
                 {else}
-                    <div class="standard_table_center">No log entries in the database</div>
+                    <div class="standard_tile_text_center">No log entries in the database</div>
                 {/if}
             </table>
         </div>
         <br>
-        <div class="standard_table_center">
+        <div class="standard_tile_text_center">
             {if $links.linkback != ''}
                 <a href ="{$links.linkback}" class="standard_tile_link" style="float:left;">Previous</a>
             {/if}

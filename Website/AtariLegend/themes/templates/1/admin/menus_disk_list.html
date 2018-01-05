@@ -30,7 +30,7 @@ The main game page
 <div class="standard_tile">
     <h1>SET OPTIONS</h1>
     <div class="standard_tile_line"></div>
-    <div class="standard_table_center">
+    <div class="standard_tile_text_center">
         <br>
         <form action="../menus/menus_disk_list.php" method="get" name="post" id="menu_set_change">
             <select name="menu_sets_id" class="standard_select select_large" onchange="this.form.submit()">
@@ -196,22 +196,22 @@ The main game page
 <div class="standard_tile">
     <h1>EDIT SET</h1>
     <div class="standard_tile_line"></div>
-    <div class="standard_tile_text">
+    <div class="standard_tile_padding">
         <div class="left_nav_section">
             Overhere you can edit/delete menu set <b>{$menu_set.menu_sets_name}</b>, or you can add menu disks to it. You can also make the set available on the website with the publish options.
         </div>
         <br>
         <div class="main_company_container">
             <div class="main_company_child" id="child_edit_company" style="text-align:left;">
-                <fieldset>
-                    <legend>More options</legend>
-                        <div id="close_new_disk"><a onclick="addNewdisk({$menu_set.menu_sets_id})" style="cursor: pointer;" class="left_nav_link" >Add New Disk</a><br></div>
-                        <a onclick="deleteSet({$menu_set.menu_sets_id})" style="cursor: pointer;" class="left_nav_link" >Delete set</a>
+                <fieldset class="secondary_fieldset">
+                    <legend class="primary_legend">More options</legend>
+                        <div id="close_new_disk"><a onclick="addNewdisk({$menu_set.menu_sets_id})" style="cursor: pointer;" class="standard_tile_link" >Add New Disk</a><br></div>
+                        <a onclick="deleteSet({$menu_set.menu_sets_id})" style="cursor: pointer;" class="standard_tile_link">Delete set</a>
                 </fieldset>
             </div>
             <div class="main_company_child" id="child_add_company" style="text-align:left;">
-                <fieldset>
-                    <legend>Publish Set</legend>
+                <fieldset class="secondary_fieldset">
+                    <legend class="primary_legend">Publish Set</legend>
                         <input onchange="publishSet({$menu_set.menu_sets_id},'online')" type="radio" name="publish" value="online" {if ({$menu_set.online}=='1')}checked{/if}> Online<br>
                         <input onchange="publishSet({$menu_set.menu_sets_id},'offline')" type="radio" name="publish" value="offline" {if ({$menu_set.online}=='0')}checked{/if}> Offline<br>
                 </fieldset>
@@ -220,25 +220,25 @@ The main game page
         <br>
         <div id="new_disk"></div>
         <br>
-        <table class="standard_table_list" id="game_list_table">
+        <table class="secondary_table_list  table_sm table_hover">
             <tr>
-                <th id="menu_disk_list_th">Menu Disk</th>
-                <th id="menu_list_crew_th">Crew</th>
-                <th id="menu_list_ind_th">Individual</th>
-                <th id="menu_state_th">State</th>
+                <th class="menu_disk_list_column w-30">Menu Disk</th>
+                <th class="menu_list_crew_column w-30">Crew</th>
+                <th class="menu_list_individual_column w-20">Individual</th>
+                <th class="menu_state_column w-20">State</th>
             </tr>
             {if isset($menus)}
                 {foreach from=$menus item=line}
                     <tr id="diskedit_ajax_{$line.menu_disk_id}">
-                        <td class="menu_disk_list_td">{if $line.menu_disk_id != ''}<a onclick="editDisk({$line.menu_disk_id})" style="cursor: pointer;">{$line.menu_disk_name}</a>{else}<i>n/a</i>{/if}</td>
-                        <td class="menu_list_crew_td">{if isset($line.crew_id)}{$line.crew_name}{else}<i>n/a</i>{/if}</td>
-                        <td class="menu_list_ind_td">{if isset($line.ind_id)}{$line.ind_name}{else}<i>n/a</i>{/if}</td>
-                        <td class="menu_state_td">{if isset($line.menu_state)}{$line.menu_state}{else}<i>n/a</i>{/if}</td>
+                        <td class="menu_disk_list_column w-30">{if $line.menu_disk_id != ''}<a onclick="editDisk({$line.menu_disk_id})" style="cursor: pointer;">{$line.menu_disk_name}</a>{else}<i>n/a</i>{/if}</td>
+                        <td class="menu_list_crew_column w-30">{if isset($line.crew_id)}{$line.crew_name}{else}<i>n/a</i>{/if}</td>
+                        <td class="menu_list_individual_column w-20">{if isset($line.ind_id)}{$line.ind_name}{else}<i>n/a</i>{/if}</td>
+                        <td class="menu_state_column w-20">{if isset($line.menu_state)}{$line.menu_state}{else}<i>n/a</i>{/if}</td>
                     </tr>
                 {/foreach}
             {/if}
             <tr>
-                <td class="standard_table_left" colspan="4">
+                <td colspan="4">
                     <b>{if $nr_of_entries == 1}1 menu disk found {else} {$nr_of_entries} menu disks found{/if} in {$querytime} sec </b>
                 </td>
             </tr>
@@ -246,6 +246,6 @@ The main game page
     </div>
 </div>
 <br>
-<div class="standard_table_center"><a href="javascript:history.go(-1)" class="standard_tile_link">back</a></div>
+<div class="standard_tile_text_center"><a href="javascript:history.go(-1)" class="standard_tile_link">back</a></div>
 <br>
 {/block}

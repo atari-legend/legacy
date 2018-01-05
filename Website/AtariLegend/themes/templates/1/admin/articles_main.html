@@ -43,7 +43,7 @@ function deletearticle(article_id)
 <div class="standard_tile" id="interviews_main">
     <h1>ARTICLES</h1>
     <div class="standard_tile_line"></div>
-    <div class="standard_tile_text">
+    <div class="standard_tile_padding">
         <div class="left_nav_section">
             Overhere you can add a new article or edit an existing article. If you like to edit an article,
             just look up the article in the dropdown list and press <b>search</b>. If you like a list of all articles,
@@ -53,8 +53,8 @@ function deletearticle(article_id)
         <br>
         <div class="main_company_container">
             <div class="main_company_child" id="child_edit_company">
-                <fieldset>
-                    <legend>Search Article</legend>
+                <fieldset class="primary_fieldset">
+                    <legend class="primary_legend">Search Article</legend>
                     <form action="../articles/articles_main.php" method="post" name="search">
                         <select name="article_search" class="standard_select select_large">
                             <option value="-" selected>-</option>
@@ -68,8 +68,8 @@ function deletearticle(article_id)
                 </fieldset>
             </div>
             <div class="main_company_child" id="child_add_company">
-                <fieldset>
-                    <legend>Add an Article</legend>
+                <fieldset class="primary_fieldset">
+                    <legend class="primary_legend">Add an Article</legend>
                     <form action="../articles/articles_add.php" method="post" name="insert">
                         <input type="text" name="article_title" class="standard_input input_large">
                         <input type="submit" value="Add" class="topbutton_cpanel_small">
@@ -82,8 +82,8 @@ function deletearticle(article_id)
         <br>
         {if isset($article_selected)}
             {foreach from=$article_selected item=line}
-                <fieldset>
-                    <legend>
+                <fieldset class="primary_fieldset">
+                    <legend class="primary_legend">
                     {if $line.user_email <> ''}
                         <a href="mailto:{$line.user_email}?subject=Your%20article%20-%20{$line.article_title}%20at%20Atari%20Legend" class="left_nav_link">{$line.user_id}</a> - {$line.article_date}
                     {else}

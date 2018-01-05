@@ -44,15 +44,15 @@ function scoredelete(JSmagID,JSgame_id)
 <div class="standard_tile" id="magazine_review_score">
     <h1>{$game.game_name}</h1>
     <div class="standard_tile_line"></div>
-    <div class="standard_tile_text">
+    <div class="standard_tile_padding">
         <div class="left_nav_section">
             In this section you can link a game to a magazine and add the score it got in the issue.
         </div>
         {if isset($game_score)}
             <br>
             <br>
-            <fieldset class="centered_fieldset">
-                <legend>Uploaded scores</legend>
+            <fieldset class="primary_fieldset centered_fieldset">
+                <legend class="primary_legend">Uploaded scores</legend>
                 {foreach from=$game_score item=line}
                     <a href="../games/games_detail.php?game_id={$game.game_id}" class="left_nav_link">{$line.game_name}</a> -
                     <a href="../magazine/magazine_issue_edit.php?magazine_issue_id={$line.magazine_issue_id}" class="left_nav_link">{$line.magazine_name} {$line.magazine_issue_nr}</a> - score {$line.score}
@@ -61,8 +61,8 @@ function scoredelete(JSmagID,JSgame_id)
             </fieldset>
         {/if}
         <br>
-        <fieldset class="centered_fieldset">
-            <legend class="links_legend">Magazine issues</legend>
+        <fieldset class="primary_fieldset centered_fieldset">
+            <legend class="primary_legend">Magazine issues</legend>
             <br>
             {* Marty! Hi mate! here you need to add the search variables. Take care /Matt *}
             <form action="../magazine/magazine_setscore.php?source=gameinfo&game_id={$game.game_id}" method="post" name="pickissue" id="pickissue">
@@ -79,7 +79,7 @@ function scoredelete(JSmagID,JSgame_id)
         </fieldset>
     </div>
     <br>
-    <div class="standard_table_center"><a href="../games/games_detail.php?game_id={$game.game_id}" class="standard_tile_link">back</a></div>
+    <div class="standard_tile_text_center"><a href="../games/games_detail.php?game_id={$game.game_id}" class="standard_tile_link">back</a></div>
     <br>
 </div>
 {/block}

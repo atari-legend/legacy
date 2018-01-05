@@ -169,7 +169,7 @@ function storeCaret(textEl) {
     </div>
     <h1>ADD NEWS</h1>
     <div class="standard_tile_line"></div>
-    <div class="standard_tile_text">
+    <div class="standard_tile_padding">
         <div class="left_nav_section">
             This is the news adding page. Fill out the headline, text field and pick a news icon. If you feel there is no icon that
             represents the news you are about to submit then go <a href="../news/news_add_images.php" class="standard_tile_link"><u>here</u></a> first.
@@ -178,8 +178,8 @@ function storeCaret(textEl) {
         </div>
         <br>
         <br>
-        <fieldset>
-        <legend>News article</legend>
+        <fieldset class="primary_fieldset">
+        <legend class="primary_legend">News article</legend>
             <form action="../news/db_news.php" method="post" name="post" id="newsadd">
                 <div class="links_mod_container">
                     <div class="links_mod_row">
@@ -215,7 +215,7 @@ function storeCaret(textEl) {
                 <input type="hidden" name="action" id="action" value="add_news">
                 <input type="hidden" name="user_id" id="user_id" value="{$user_id}">
                 <input type="submit" value="Submit" class="topbutton_cpanel_small">
-                <input type="reset" class="topbutton_cpanel_small">
+                <input type="reset" value="Reset" class="topbutton_cpanel_small">
             </form>
         </fieldset>
     </div>

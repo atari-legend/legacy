@@ -25,18 +25,18 @@ The demo list page!
         If you want to do a new search query, click <a href="demos_music.php" class="MAINNAV"><b>here</b></a>!
     </fieldset>
 <br/><br/>
-    <table class="table_game_list">
+    <table class="secondary_table_list">
             <tr>
-                <th style="width:30%;">Demo Name</th>
-                <th style="width:30%;">Crew</th>
-                <th style="width:30%;">Year</th>
-                <th style="width:10%;">Nr of zaks</th>
+                <th class="w-30">Demo Name</th>
+                <th class="w-30">Crew</th>
+                <th class="w-30">Year</th>
+                <th class="w-10">Nr of zaks</th>
             </tr>
                     {foreach from=$music item=line}
             <tr>
-                <td style="width:30%;">{if $line.demo_name != ''}<a href="demos_music_detail.php?demo_id={$line.demo_id}" class="MAINNAV">{$line.demo_name}</a>{else}<i>n/a</i>{/if}</td>
-                <td style="width:30%;">{if $line.demo_crew != ''}{$line.demo_crew}{else}<i>n/a</i>{/if}</td>
-                <td style="width:30%;">{if $line.demo_year != ''}{$line.demo_year}{else}<i>n/a</i>{/if}</td>
+                <td class="w-30">{if $line.demo_name != ''}<a href="demos_music_detail.php?demo_id={$line.demo_id}" class="MAINNAV">{$line.demo_name}</a>{else}<i>n/a</i>{/if}</td>
+                <td class="w-30">{if $line.demo_crew != ''}{$line.demo_crew}{else}<i>n/a</i>{/if}</td>
+                <td class="w-30">{if $line.demo_year != ''}{$line.demo_year}{else}<i>n/a</i>{/if}</td>
                 <td style="width:10%;">{if $line.number_zaks != ''}{$line.number_zaks}{else}<i>0</i>{/if}</td>
             </tr>
         {/foreach}

@@ -23,12 +23,12 @@ The the user stats page
 <div class="standard_tile" id="user_statistics">
     <h1>USER STATISTICS</h1>
     <div class="standard_tile_line"></div>
-    <div class="standard_tile_text">
+    <div class="standard_tile_padding">
         <div class="left_nav_section">
             These are the changes made by the user since the start of AL in 2004
         </div>
         <br>
-        <ul class="standard_table_list">
+        <ul class="primary_table_list ">
 
         <li class="left_nav_section">This user has posted <b>{if $nr_comments ==! ''}{$nr_comments}{else}0{/if}</b> game comments.</li>
         {if $nr_comments ==! ''}
@@ -70,7 +70,7 @@ The the user stats page
         </ul>
     </div>
 
-    <div class="standard_table_center"><a href="../user/user_detail.php?user_id_selected={$user_id_selected}" class="standard_tile_link">back</a></div>
+    <div class="standard_tile_text_center"><a href="../user/user_detail.php?user_id_selected={$user_id_selected}" class="standard_tile_link">back</a></div>
     <br>
     {if isset($message)}
         <div class="message_box">{$message}</div>

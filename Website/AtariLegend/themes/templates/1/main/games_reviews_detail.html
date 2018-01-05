@@ -360,10 +360,10 @@
                 <h1>AUTHOR</h1>
                 <div class="standard_tile_line"></div>
                 <div class="games_main_detail_comments_container">
-                    <table class="standard_table_list_stats">
+                    <table class="primary_table_list table_md no_border">
                         {if isset($reviews_author)}
                         <tr>
-                            <td width="100%" colspan="2">
+                            <td colspan="2">
                                 <div class="standard_list_entry_news_text" style="text-align:center;">
                                     {$review.userid} has written {$nr_reviews_author} additional reviews :
                                 </div>
@@ -371,12 +371,12 @@
                         </tr>
                         {foreach from=$reviews_author item=line name=reviews_author}
                             <tr>
-                                <td width="90%" style="padding-top:5px;padding-bottom:5px;">
+                                <td class="w-90">
                                     <span style="overflow: hidden;text-overflow: ellipsis"><a href="../games/games_detail.php?game_id={$line.game_id}" class="standard_tile_link" style="margin-left:10px;">{$line.game_name}</a></span>
                                     <br><span class="standard_tile_subtext" style="margin-left:15px;"><a href="../games/games_reviews_detail.php?review_id={$line.review_id}&game_id={$line.game_id}" style="margin-left:10px;">read more</a></span>
                                 </td>
 
-                                <td width="10%" style="padding-top:5px;padding-bottom:5px;">
+                                <td class="w-10">
                                     <a href="../games/games_main_list.php?year={$line.game_year}&amp;action=search" class="standard_tile_link" style="margin-right:10px;">{$line.game_year}</a>
                                     <br><br>
                                 </td>
@@ -384,7 +384,7 @@
                         {/foreach}
                         {else}
                             <tr>
-                                <td width="100%">
+                                <td class="w-100">
                                     <div class="standard_list_entry_news_text" style="text-align:center;">
                                         This person hasn't written any additional reviews
                                     </div>
@@ -451,11 +451,10 @@
                     <div id="latest_comments_all">
                     {if isset($comments)}
                         <div class="games_main_detail_comments_container">
-                            <div class="standard_list_entry">
-                                <table class="standard_table_list_comments">
+                                <table class="primary_table_list table_md">
                                 {foreach from=$comments item=line}
                                     <tr>
-                                        <td class="standard_table_left">
+                                        <td>
                                             <span class="standard_tile_subtext" style="font-weight:bold;float:left;margin-left:5px;margin-right:5px;margin-top:15px;">
                                                 <a href="../../admin/user/user_detail.php?user_id_selected={$line.user_id}">{$line.user_name}</a>
                                             </span>
@@ -486,7 +485,7 @@
                                                 {/if}
                                             </span>
                                             <div class="latest_comments_text">
-                                                <div id="latest_comment_edit{$line.comment_id}"><div id="games_detail_review_main_text">{$line.comment}</div></div>
+                                                <div id="latest_comment_edit{$line.comment_id}"><div class="standard_link_color">{$line.comment}</div></div>
                                                 <div style="width:100%;text-align:center;"><textarea id="comment_input{$line.comment_id}" class="latest_comments_textarea" style="display:none;" cols="80">{$line.comment_edit}</textarea></div>
                                             </div>
                                             <span class="standard_tile_subtext" style="font-weight:bold;float:right;display:inline;margin-right:5px;margin-bottom:15px;">
@@ -497,7 +496,6 @@
                                     </tr>
                                 {/foreach}
                                 </table>
-                            </div>
                         </div>
                     {/if}
                     </div>
@@ -518,7 +516,7 @@
             <div class="standard_tile">
                 <h1><a href="../games/games_detail.php?game_id={$review.game_id}" class="standard_tile_link" title="Click to see all comments">{$review.game_name|upper}</a></h1>
                 <div class="standard_tile_line"></div>
-                <div class="standard_tile_text" id="games_detail_review_bg">
+                <div class="standard_tile_padding" id="games_detail_review_bg">
                     <h4 style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis;display:inline;">
                         Written by <a href="../../admin/user/user_detail.php?user_id_selected={$review.user_id}" class="standard_tile_link">{$review.user_name}</a>
                     </h4>
@@ -530,7 +528,7 @@
                     <br>
                     <div class="games_detail_review_container">
                         <div class="games_detail_review_child" id="games_detail_review_text">
-                            <div id="games_detail_review_main_text">{$review.text}</div>
+                            <div class="standard_link_color">{$review.text}</div>
                             <b><i>Score</i></b>
                             <br>
                             <br>
@@ -617,11 +615,10 @@
                     <div id="latest_comments_all">
                     {if isset($comments)}
                         <div class="games_main_detail_comments_container">
-                            <div class="standard_list_entry">
-                                <table class="standard_table_list_comments">
+                                <table class="primary_table_list table_md">
                                 {foreach from=$comments item=line}
                                     <tr>
-                                        <td class="standard_table_left">
+                                        <td>
                                             <span class="standard_tile_subtext" style="font-weight:bold;float:left;margin-left:5px;margin-right:5px;margin-top:15px;">
                                                 <a href="../../admin/user/user_detail.php?user_id_selected={$line.user_id}">{$line.user_name}</a>
                                             </span>
@@ -652,7 +649,7 @@
                                                 {/if}
                                             </span>
                                             <div class="latest_comments_text">
-                                                <div id="latest_comment_edit{$line.comment_id}"><div id="games_detail_review_main_text">{$line.comment}</div></div>
+                                                <div id="latest_comment_edit{$line.comment_id}"><div class="standard_link_color">{$line.comment}</div></div>
                                                 <div style="width:100%;text-align:center;"><textarea id="comment_input{$line.comment_id}" class="latest_comments_textarea" style="display:none;" cols="80">{$line.comment_edit}</textarea></div>
                                             </div>
                                             <span class="standard_tile_subtext" style="font-weight:bold;float:right;display:inline;margin-right:5px;margin-bottom:15px;">
@@ -663,7 +660,6 @@
                                     </tr>
                                 {/foreach}
                                 </table>
-                            </div>
                         </div>
                     {/if}
                     </div>

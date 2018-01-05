@@ -235,15 +235,15 @@ function storeCaret(textEl) {
     </div>
     <h1>{$game.game_name}</h1>
     <div class="standard_tile_line"></div>
-    <div class="standard_tile_text">
+    <div class="standard_tile_padding">
         <div class="left_nav_section">
             At this page you can edit or delete an existing review in the AL database.
         </div>
         <br>
         <br>
         <form action="../games/db_games_review_edit.php" method="post" name="post">
-            <fieldset>
-                <legend>Other reviews</legend>
+            <fieldset class="primary_fieldset">
+                <legend class="primary_legend">Other reviews</legend>
                 {foreach from=$review item=line}
                     <b>Review {$line.review_nr} ::  <a href="../games/games_review_edit.php?reviewid={$line.review_id}&amp;game_id={$game.game_id}" class="left_nav_link">Edit</a> ::
                     <a href="../games/games_review_preview.php?review_id={$line.review_id}&amp;game_id={$game.game_id}" class="left_nav_link"> Preview </a>by {$line.user_name}</b><br>
@@ -251,8 +251,8 @@ function storeCaret(textEl) {
             </fieldset>
             <br>
             <br>
-            <fieldset>
-                <legend>Edit review</legend>
+            <fieldset class="primary_fieldset">
+                <legend class="primary_legend">Edit review</legend>
                 <br>
                 <div style="display:inline-block;">
                     <b>Written by : </b><br>
@@ -270,8 +270,8 @@ function storeCaret(textEl) {
                 <br>
                 <br>
                 <div style="width:100%;">
-                    <div style="width:20%;"><b>Date :</b></div>
-                    <div style="width:200px;">{html_select_date time=$edit_review.review_date start_year="2000"}</div>
+                    <div><b>Date :</b></div>
+                    <div>{html_select_date time=$edit_review.review_date start_year="2000" class="standard_select"}</div>
                 </div>
                 <br>
                 <br>
@@ -298,8 +298,8 @@ function storeCaret(textEl) {
                 <br>
             </fieldset>
             <br>
-            <fieldset class="centered_fieldset">
-                <legend>Screenshots</legend>
+            <fieldset class="primary_fieldset centered_fieldset">
+                <legend class="primary_legend">Screenshots</legend>
                 <br>
                 {if $screenshots_nr <> 0}
                     {foreach from=$screenshots item=line}
@@ -339,7 +339,7 @@ function storeCaret(textEl) {
             </fieldset>
         </form>
         <br>
-        <div class="standard_table_center"><a href="javascript:history.go(-1)" class="standard_tile_link">back</a></div>
+        <div class="standard_tile_text_center"><a href="javascript:history.go(-1)" class="standard_tile_link">back</a></div>
     </div>
 </div>
 {/block}

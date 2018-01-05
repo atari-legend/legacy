@@ -53,14 +53,14 @@ function deletescreen(JSgameboxID,JSmode)
 <div class="standard_tile" id="games_boxscan">
     <h1>{$game_info.game_name}</h1>
     <div class="standard_tile_line"></div>
-    <div class="standard_tile_text">
+    <div class="standard_tile_padding">
         <div class="left_nav_section">
             In this section you can add boxscans to the database. Front and back scans. First add a front box, then you'll have the opportunity to upload and link a back scan to it!
         </div>
         <br>
         <br>
-        <fieldset class="centered_fieldset">
-            <legend>Upload a boxscan</legend>
+        <fieldset class="primary_fieldset centered_fieldset">
+            <legend class="primary_legend">Upload a boxscan</legend>
             <div class="boxscan_table_head">
                 Browse for a <b>{$mode.mode}</b> boxscan and click "submit" to upload it.
             </div>
@@ -86,8 +86,8 @@ function deletescreen(JSgameboxID,JSmode)
         </fieldset>
         <br>
         <br>
-        <fieldset class="centered_fieldset">
-            <legend>Front boxscans</legend>
+        <fieldset class="primary_fieldset centered_fieldset">
+            <legend class="primary_legend">Front boxscans</legend>
                 {if $nr_front == 0}
                     No frontscan available
                 {else}
@@ -110,8 +110,8 @@ function deletescreen(JSgameboxID,JSmode)
                 <br>
         </fieldset>
         <br>
-        <fieldset class="centered_fieldset">
-            <legend>Back boxscans</legend>
+        <fieldset class="primary_fieldset centered_fieldset">
+            <legend class="primary_legend">Back boxscans</legend>
                 {if $nr_back == 0}
                     No backscan available
                 {else}
@@ -137,7 +137,7 @@ function deletescreen(JSgameboxID,JSmode)
                 {/if}
         </fieldset>
         <br>
-        <div class="standard_table_center"><a href="javascript:history.go(-1)" class="standard_tile_link">back</a></div>
+        <div class="standard_tile_text_center"><a href="javascript:history.go(-1)" class="standard_tile_link">back</a></div>
     </div>
 </div>
 {/block}

@@ -25,7 +25,7 @@ The main doc category page
     </div>
     <div style="margin-left:20px;"><h1>DOC CATEGORY</h1></div>
     <div class="standard_tile_line"></div>
-    <div class="standard_tile_text">
+    <div class="standard_tile_padding">
         <div class="left_nav_section">
             In this section you can add or edit a doc category which can be linked to a document. To edit an existing doc category, look up the name
             in the dropdown box. To add a new doc category, use the input field and press 'add'
@@ -34,8 +34,8 @@ The main doc category page
         <br>
         <div class="main_company_container">
             <div class="main_company_child" id="child_edit_company">
-                <fieldset>
-                    <legend>Edit a doc category</legend>
+                <fieldset class="primary_fieldset">
+                    <legend class="primary_legend">Edit a doc category</legend>
                     <form action="../docs/doc_category_edit.php" method="post" name="ind_edit" id="ind_edit">
                         <select name="doc_category_id" class="standard_select select_large">
                             <option value="-">-</option>
@@ -49,8 +49,8 @@ The main doc category page
                 </fieldset>
             </div>
             <div class="main_company_child" id="child_add_company">
-                <fieldset>
-                    <legend>Add a doc category</legend>
+                <fieldset class="primary_fieldset">
+                    <legend class="primary_legend">Add a doc category</legend>
                     <form action="../docs/db_doc_category.php" method="post" name="ind_add" id="ind_add">
                         <input type="text" name="category_name" class="standard_input input_large">
                         <input type="submit" value="Add" class="topbutton_cpanel_small">

@@ -36,11 +36,13 @@
     backface-visibility: hidden;
 }
 
-.grid figure figcaption::before, .grid figure figcaption::after {
+.grid figure figcaption::before,
+.grid figure figcaption::after {
     pointer-events: none;
 }
 
-.grid figure figcaption, .grid figure figcaption > a {
+.grid figure figcaption,
+.grid figure figcaption > a {
     position: absolute;
     top: 0;
     left: 0;
@@ -123,7 +125,8 @@ figure.effect-tile p.icon-links a {
     font-size: 1.4em;
 }
 
-figure.effect-tile:hover p.icon-links a:hover, figure.effect-tile:hover p.icon-links a:focus {
+figure.effect-tile:hover p.icon-links a:hover,
+figure.effect-tile:hover p.icon-links a:focus {
     color: #000000;
 }
 
@@ -139,7 +142,8 @@ figure.effect-tile p.description {
     -webkit-backface-visibility: hidden; //* Fix for Chrome 37.0.2062.120 (Mac) */
 }
 
-figure.effect-tile tile_title, figure.effect-tile p.icon-links a {
+figure.effect-tile tile_title,
+figure.effect-tile p.icon-links a {
     transition: transform .35s;
     transform: translate3d(0,200%,0);
 }
@@ -156,7 +160,9 @@ figure.effect-tile:hover p.description {
     opacity: 1;
 }
 
-figure.effect-tile:hover figcaption, figure.effect-tile:hover tile_title, figure.effect-tile:hover p.icon-links a {
+figure.effect-tile:hover figcaption,
+figure.effect-tile:hover tile_title,
+figure.effect-tile:hover p.icon-links a {
     transform: translate3d(0, 0, 0);
 }
 
@@ -198,7 +204,8 @@ figure.effect-bubba:hover img {
     opacity: .4;
 }
 
-figure.effect-bubba figcaption::before, figure.effect-bubba figcaption::after {
+figure.effect-bubba figcaption::before,
+figure.effect-bubba figcaption::after {
     position: absolute;
     top: 30px;
     right: 30px;
@@ -247,12 +254,14 @@ figure.effect-bubba p {
     transform: translate3d(0, 20px, 0);
 }
 
-figure.effect-bubba:hover figcaption::before, figure.effect-bubba:hover figcaption::after {
+figure.effect-bubba:hover figcaption::before,
+figure.effect-bubba:hover figcaption::after {
     opacity: 1;
     transform: scale(1);
 }
 
-figure.effect-bubba:hover h2, figure.effect-bubba:hover p {
+figure.effect-bubba:hover h2,
+figure.effect-bubba:hover p {
     opacity: 1;
     transform: translate3d(0, 0, 0);
 }
@@ -275,13 +284,11 @@ figure.effect-bubba:hover h2, figure.effect-bubba:hover p {
 } @else {
     .online_title {
         @extend .left_nav_section;
-        font-size: .8em;
         text-align: center;
     }
 
     .online_users {
         @extend .left_nav_link;
-        font-size: .8em;
         text-align: center;
     }
 }
@@ -293,12 +300,7 @@ figure.effect-bubba:hover h2, figure.effect-bubba:hover p {
     .statistics_dark {
         color: #cccccc;
     }
-    .standard_table_list_stats tr:nth-child(even) {
-        background-color: #122323;
-    }
-    .standard_table_list_stats tr:nth-child(odd) {
-        background-color: #0d2e2e;
-    }
+
     .stats_text {
         font-size: 11pt;
         font-weight: 100;
@@ -309,12 +311,7 @@ figure.effect-bubba:hover h2, figure.effect-bubba:hover p {
     .statistics_dark {
         color: #666666;
     }
-    .standard_table_list_stats tr:nth-child(even) {
-        background: linear-gradient(to right, #ffffff, #acacac);
-    }
-    .standard_table_list_stats tr:nth-child(odd) {
-        background: linear-gradient(to right, #ffffff, #23f001);
-    }
+
     .stats_text {
         font-size: 16px;
         font-weight: 100;
@@ -327,12 +324,7 @@ figure.effect-bubba:hover h2, figure.effect-bubba:hover p {
     .statistics_dark {
         color: #161c71;
     }
-    .standard_table_list_stats tr:nth-child(even) {
-        background: #a6a6a6;
-    }
-    .standard_table_list_stats tr:nth-child(odd) {
-        background: #6a6a6a;
-    }
+
     .stats_text {
         font-size: 12pt;
         font-weight: 100;
@@ -341,11 +333,6 @@ figure.effect-bubba:hover h2, figure.effect-bubba:hover p {
     }
 }
 
-.standard_table_list_stats {
-    @extend .standard_table_list;
-    border: 0;
-    font-size: 11pt;
-}
 
 //*-------------------------***/
 //*****  Latest comments  *****/
@@ -418,12 +405,4 @@ figure.effect-bubba:hover h2, figure.effect-bubba:hover p {
     margin-bottom: 15px;
     margin-top: 15px;
     float: left;
-}
-
-.standard_table_list_comments {
-    @extend .standard_table_list_stats;
-}
-
-.standard_table_list_comments td {
-    border-bottom: solid 2px #000000;
 }

@@ -43,9 +43,9 @@ function typedelete(menus_type_id)
     {if isset($menus_type_edit.menu_type_text_edit) }
     <h1>{$menus_type_edit.menu_type_text_edit}</h1>
     <div class="standard_tile_line"></div>
-    <div class="standard_tile_text">
-        <fieldset class="centered_fieldset">
-            <legend>Edit menu type</legend>
+    <div class="standard_tile_padding">
+        <fieldset class="primary_fieldset centered_fieldset">
+            <legend class="primary_legend">Edit menu type</legend>
             <form action="../menus/db_menus_type.php" method="post" name="post" id="menus_type_edit">
                 <b>Name :</b>
                 <input type="text" name="menus_type_name" value="{$menus_type_edit.menu_type_text_edit}" class="standard_input input_large">
@@ -60,13 +60,13 @@ function typedelete(menus_type_id)
     {else}
     <h1>Edit Menu Type</h1>
     <div class="standard_tile_line"></div>
-    <div class="standard_tile_text">
+    <div class="standard_tile_padding">
         <div class="left_nav_section">
             Menu Type does not exist.
         </div>
     </div>
     {/if}
-    <div class="standard_table_center"><a href="../menus/menus_type.php" class="standard_tile_link">back</a></div>
+    <div class="standard_tile_text_center"><a href="../menus/menus_type.php" class="standard_tile_link">back</a></div>
     <br>
 </div>
 {/block}

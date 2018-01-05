@@ -71,7 +71,26 @@ img {
     width: 100%;
     margin-top: 20px;
 }
-
+.standard_tile_text_center {
+    font-size: 12pt;
+    font-weight: 100;
+    color: #000000;
+    text-align: center;
+}
+.standard_tile_text_left {
+    padding-left: 2px;
+    font-size: 12pt;
+    font-weight: 100;
+    color: #000000;
+    text-align: left;
+}
+.standard_tile_text_right {
+    padding-right: 2px;
+    font-size: 12pt;
+    font-weight: 100;
+    color: #000000;
+    text-align: right;
+}
 //*------------------------------------------------------------
 //Standard tile settings
 //
@@ -128,9 +147,7 @@ img {
 .standard_tile_line {
     border-bottom: 2px solid #000000;
 }
-.standard_tile_background {
-    position: relative;
-}
+
 .standard_tile_image {
     width: 100%;
 }
@@ -299,23 +316,14 @@ img {
     background: #6a6a6a;
 }
 
-//.standard_list_entry_left {
-//    position: absolute;
-//    top: 50%;
-//    left: 0;
-//    width: 50%;
-//    transform: translateY(-50%);
-//}
+.statistics_list_entry {
+    position: relative;
+}
 
-//.standard_list_entry_left img {
-//    max-width: 100%;
-//    width: 80%;
-//    margin-left: 15px;
-//    box-shadow: 0 0 7px #484c7b;
-//}
-
-//.standard_list_entry_left img:hover { box-shadow: 0 0 7px #fff; }
-//.standard_list_entry_right {
+.statistics_list_entry_odd {
+    position: relative;
+    background: #6a6a6a;
+}
 .standard_list_entry_news {
     position: absolute;
     margin: 10px;
@@ -341,7 +349,7 @@ img {
     font-size: 12pt;
 }
 
-.standard_tile_text {
+.standard_tile_padding {
     padding: 20px;
 }
 
@@ -431,102 +439,6 @@ img {
     @extend .checkbox;
 }
 
-//*------------------------------------------------------------
-//Standard table settings
-//-------------------------------------------------------------*/
-#column_left_cpanel {
-    float: left;
-    width: 20%;
-    margin-right: 1%;
-}
-
-#column_center_cpanel {
-    float: left;
-    width: 58%;
-}
-
-#column_right_cpanel {
-    float: right;
-    width: 20%;
-    margin-left: 1%;
-}
-
-.standard_table_list {
-    width: 100%;
-    margin-right: auto;
-    margin-left: auto;
-    background-color: #f3f3f3;
-    border: solid 1px #b2b2b2;
-    border-spacing: 0;
-}
-
-.standard_table_list  li {
-    font-size: 113pxpt;
-    color: #000000;
-    text-align: center;
-    list-style-type: none;
-}
-
-.standard_table_list th {
-    padding-top: 3px;
-    padding-bottom: 3px;
-    padding-left: 3px;
-    margin: 0;
-    background-color: #dbd7d1;
-    border-collapse: collapse;
-    border-bottom: solid 2px #b2b2b2;
-}
-
-.standard_table_list tr:nth-child(even) {
-    background-color: #f3f3f3;
-}
-.standard_table_list tr:nth-child(odd) {
-    background-color: #efefef;
-}
-.standard_table_list tr:hover {
-    background-color: #dbd7d1;
-}
-.standard_table_list td {
-    padding-top: 1px;
-    padding-bottom: 1px;
-    padding-left: 3px;
-    margin: 0;
-}
-
-.standard_table_list_no_hover {
-    @extend .standard_table_list;
-}
-
-.standard_table_list_no_hover tr:nth-child(even) {
-    background-color: #efefef;
-}
-.standard_table_list_no_hover tr:nth-child(odd) {
-    background-color: #dbd7d1;
-}
-
-.standard_table_center {
-    font-size: 12pt;
-    font-weight: 100;
-    color: #000000;
-    text-align: center;
-}
-
-.standard_table_left {
-    padding-left: 2px;
-    font-size: 12pt;
-    font-weight: 100;
-    color: #000000;
-    text-align: left;
-}
-
-.standard_table_right {
-    padding-right: 2px;
-    font-size: 12pt;
-    font-weight: 100;
-    color: #000000;
-    text-align: right;
-}
-
 .standard_table_center img {
     display: inline;
 }
@@ -611,7 +523,7 @@ legend {
     display: block;
     transform-origin: 100% 0;
     -webkit-animation: fadeIn .3s ease-in-out;
-            animation: fadeIn .3s ease-in-out;
+    animation: fadeIn .3s ease-in-out;
 }
 
 .help-tip p {
@@ -726,7 +638,7 @@ div.tab button.active {
 //*fade in effect on tab */
 .tabcontent {
     -webkit-animation: fadeEffect 1s;
-            animation: fadeEffect .5s; //* Fading effect takes 1 second */
+    animation: fadeEffect .5s; //* Fading effect takes 1 second */
 }
 
 @-webkit-keyframes fadeEffect {

@@ -24,7 +24,7 @@
             }
 
             // Setup the autocomplete input field
-            var autocompleteDisplayInput = $('<input type="text" class="ui-widget-inline standard_tile_input_small" id="' + displaySelectId + '" value="' + selectedLabel + '">');
+            var autocompleteDisplayInput = $('<input type="text" class="ui-widget-inline standard_input input_large" id="' + displaySelectId + '" value="' + selectedLabel + '">');
             autocompleteDisplayInput
                 .autocomplete({
                     source: completeEndpoint,
