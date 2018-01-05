@@ -1,0 +1,99 @@
+{*
+/***************************************************************************
+*                                quick_search_users.html
+*                            ----------------------------
+*   begin                : 2016-02-13
+*   copyright            : (C) 2015 Atari Legend
+*   email                : admin@atarilegend.com
+*
+*   Id: quick_search_users.html,v 0.1 Silver Surfer
+*
+***************************************************************************/
+
+//****************************************************************************************
+// This is the quick game search for the left part of the cpanel
+//****************************************************************************************
+*}
+{block name=quick_search_users}
+
+<div class="standard_tile">
+    <h1>RECENT CHANGES</h1>
+    <div class="standard_tile_line"></div>
+    <br>
+        <div class="standard_table_left">
+            <h5 class="standard_tile_subtext" style="font-family:verdana;">
+
+            <table class="standard_table_list_stats">
+            {foreach from=$log item=line}
+            <tr>
+                <td class="standard_table_center" style="padding-top:3px; padding-bottom:3px;">
+                {*    {$line.log_date}  *}
+
+                    {if $line.log_user_name <> '0'}
+                            {$line.log_user_name}
+                    {else}
+                        [deleted user]
+                    {/if}
+                    {if $line.log_action=="Insert"}
+                        added{if $line.log_subsection =="Screenshots"}
+                                {else if $line.log_subsection =="Authors"} an
+                                {else if $line.log_subsection =="Individual"} an
+                                {else} the{/if}
+                    {else if $line.log_action=="Delete"}
+                        removed{if $line.log_subsection !="Screenshots"} the{/if}
+                    {else if $line.log_action=="Update"}
+                        modified the
+                    {else}
+                        {$line.log_action} the
+                    {/if}
+
+                    {* Start sub section  *}
+
+                    {if $line.log_subsection != $line.log_section}
+
+
+                                {if $line.log_subsection=="Screenshots"}a screenshot
+                                {else if $line.log_subsection=="Doc type"}doc type
+                                {else if $line.log_subsection=="Game doc"}game doc
+                                {else if $line.log_subsection=="Creator"}creator
+                                {else if $line.log_subsection=="Game"}game
+                                {else if $line.log_subsection=="Chain"}chain
+                                {else if $line.log_subsection=="Demo"}demo
+                                {else if $line.log_subsection=="Authors"}author{if $line.log_action=="Insert"} to{else if $line.log_action=="Delete"} from{/if}
+                                {else}{$line.log_subsection}{/if}
+
+                        {if $line.log_subsection =="Screenshots"}
+
+                        {else if $line.log_subsection =="Individual"}
+                        {else}"{$line.log_subsection_name}"{/if}
+                    {/if}
+
+                    {* End sub section  *}
+
+                    {if $line.log_action=="Delete"} from {/if}
+                    {if $line.log_action=="Insert" and $line.log_subsection != $line.log_section} to {/if}
+
+                    {* Start section  *}
+                    {if $line.log_section != 'Menu disk' and $line.log_section != 'Games'}
+
+                        {if $line.log_section=="Screenshots"}a screenshot
+                        {else if $line.log_section=="Doc type"}doc type
+                        {else if $line.log_section=="Game doc"}game doc
+                        {else}{$line.log_section}{/if}
+
+                    {/if}
+
+                    {if $line.log_section_link <> ''}
+                            {$line.log_section_name}
+                    {else}
+                        {$line.log_section_name}
+                    {/if}
+                    {* End section  *}
+                </td>
+            </tr>
+            {/foreach}
+            </table>
+        </h5>
+        </div>
+</div>
+{/block}

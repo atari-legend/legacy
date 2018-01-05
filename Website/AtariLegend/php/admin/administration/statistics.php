@@ -23,7 +23,7 @@ include("../../config/common.php");
 include("../../config/admin.php");
 
 //load the search fields of the quick search side menu
-include("../../admin/games/quick_search_games.php");
+include("../../common/tiles/tile_change_log.php");
 
 //load the stats tile
 include("../../common/tiles/tile_stats.php");
