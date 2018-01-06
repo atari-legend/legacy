@@ -105,6 +105,13 @@
     background: #dbd7d1;
     border: 2px solid #4f4f4f;
 }
+
+#games_main_list_3,
+#games_main_list_2,
+#games_main_list_1 {
+    display: none;
+}
+
 .games_main_list_title {
     @extend .standard_tile_subtext;
     text-align: center;
