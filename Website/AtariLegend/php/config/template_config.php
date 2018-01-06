@@ -8,6 +8,8 @@
  *
  ***************************************************************************/
 
+ define('ROOT_PATH', dirname(__DIR__) . '/');
+
 //Skin Switching functions
 
 //create skin switch links dynamically with called page
@@ -16,11 +18,11 @@
 if (isset($_SESSION['skin'])) {
     $set_skin = $_SESSION['skin'];
 
-    $cpanel_template_folder   = "../../../themes/templates/1/admin/";
-    $mainsite_template_folder = "../../../themes/templates/1/main/";
-    $smarty->assign("template_dir", "../../../themes/templates/1/");
-    $smarty->assign("style_dir", "../../../themes/styles/$set_skin/");
-    $smarty->assign("style_dir2", "../../themes/styles/$set_skin/");  //when called from the show_image function
+    $cpanel_template_folder   = "". ROOT_PATH ."../themes/templates/1/admin/";
+    $mainsite_template_folder = "". ROOT_PATH ."../themes/templates/1/main/";
+    $smarty->assign("template_dir", "../../themes/templates/1/");
+    $smarty->assign("style_dir", "../../themes/styles/1/");
+    $smarty->assign("style_dir2", "../../themes/styles/1/");  //when called from the show_image function
 
     foreach (glob("../../../themes/styles/$set_skin/images/trivia/*.*") as $filename) {
         $filename = substr($filename, 3);
@@ -29,10 +31,10 @@ if (isset($_SESSION['skin'])) {
         ));
     }
 } else {
-    $cpanel_template_folder   = "../../../themes/templates/1/admin/";
-    $mainsite_template_folder = "../../../themes/templates/1/main/";
-    $smarty->assign("template_dir", "../../../themes/templates/1/");
-    $smarty->assign("style_dir", "../../../themes/styles/1/");
+    $cpanel_template_folder   = "". ROOT_PATH ."../themes/templates/1/admin/";
+    $mainsite_template_folder = "". ROOT_PATH ."../themes/templates/1/main/";
+    $smarty->assign("template_dir", "../../themes/templates/1/");
+    $smarty->assign("style_dir", "../../themes/styles/1/");
     $smarty->assign("style_dir2", "../../themes/styles/1/");  //when called from the show_image function
 
     foreach (glob("../../../themes/styles/1/images/trivia/*.*") as $filename) {
