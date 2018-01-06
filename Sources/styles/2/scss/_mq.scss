@@ -31,11 +31,7 @@
     .menu_credits_column,
     .log_subsection_column,
     .log_date_column,
-    #download-json,
-    #games_main_list_4,
-    #games_main_list_3,
-    #games_main_list_2,
-    #games_main_list_1 {
+    #download-json {
         display: none;
     }
 }
@@ -330,19 +326,6 @@
     }
 }
 
-
-@media screen and (max-width: 670px) {
-    #games_main_list_4,
-    #games_main_list_3,
-    #games_main_list_1 {
-        display: none;
-    }
-    #games_main_list_2 {
-        display: inline;
-    }
-}
-
-
 @media screen and (max-width: 700px) {
     #game_review_textfield {
         width: 97%;
@@ -467,10 +450,7 @@
         display: inline;
     }
     .games_main_details_info_position_high,
-    .games_main_detail_nav,
-    #games_main_list_4,
-    #games_main_list_2,
-    #games_main_list_1 {
+    .games_main_detail_nav {
         display: none;
     }
     #main_stats_position_front,
@@ -495,9 +475,6 @@
         float: right;
         margin: auto;
         order: 1;
-    }
-    #games_main_list_3 {
-        display: inline;
     }
     .latest_reviews {
         margin-top: 20px;
@@ -526,16 +503,6 @@
     .db_state_column,
     .news_right_head {
         display: none;
-    }
-}
-@media screen and (max-width: 949px) {
-    #games_main_list_4,
-    #games_main_list_3,
-    #games_main_list_1 {
-        display: none;
-    }
-    #games_main_list_2 {
-        display: inline;
     }
 }
 @media screen and (max-width: 999px) {
@@ -986,17 +953,6 @@
         width: 98%;
     }
 }
-@media screen and (max-width: 1599px) {
-    #games_main_list_4,
-    #games_main_list_2,
-    #games_main_list_1 {
-        display: none;
-    }
-    #games_main_list_3 {
-        display: inline;
-    }
-}
-
 @media screen and (max-width: 1750px) {
     .gamepub_gr_column {
         display: none;

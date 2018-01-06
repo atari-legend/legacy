@@ -114,10 +114,25 @@
     border-bottom: 3px solid #006f6f;
 }
 
-#games_main_list_4,
-#games_main_list_3,
-#games_main_list_2 {
-    display: none;
+.games_search_list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-content: stretch;
+    align-items: center;
+}
+
+.games_search_list_box {
+    flex: 0 1 auto;
+    align-self: auto;
+    min-width: 180px;
+    max-width: 230px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.games_search_list row:nth-child(even) {
+    background-color: #0d2e2e;
 }
 
 .games_main_list_title {
