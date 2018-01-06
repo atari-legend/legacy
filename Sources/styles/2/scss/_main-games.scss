@@ -110,12 +110,6 @@
     border-bottom: 3px solid #666666;
 }
 
-#games_main_list_3,
-#games_main_list_2,
-#games_main_list_1 {
-    display: none;
-}
-
 .games_main_list_title {
     @extend .standard_tile_subtext;
     text-align: center;
