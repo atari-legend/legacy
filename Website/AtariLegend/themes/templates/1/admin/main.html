@@ -41,6 +41,7 @@
         <!-- end - get the icons used for mobile devices -->
 
         <script src="{$template_dir}includes/js/vendor/jquery-2.1.4.min.js"></script> <!-- main jquery stuff -->
+        <script src="{$template_dir}includes/js/vendor/jquery-ui-1.11.4.min.js"></script> <!-- main jqueryUI stuff -->
 
         {* Insert Google Analytics tags only on production *}
         {if $smarty.server.HTTP_HOST == $smarty.const.SITEHOST}
@@ -392,7 +393,6 @@
 
         <script src="{$template_dir}includes/js/vendor/md5-1.0.1.min.js"></script>  <!-- log on security script -->
         <script src="{$template_dir}includes/js/vendor/sha512-2.2.min.js"></script> <!-- log on security script -->
-        <script src="{$template_dir}includes/js/vendor/jquery-ui-1.11.4.min.js"></script> <!-- main jqueryUI stuff -->
         <script src="{$template_dir}includes/js/vendor/notify-osd-51f8de7.min.js"></script>
 
         {if isset($edit_message)}
