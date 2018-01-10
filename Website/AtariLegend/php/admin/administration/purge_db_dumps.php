@@ -14,31 +14,47 @@ const PURGE_INTERVAL = "P30D";
 if (php_sapi_name() !== "cli") {
     die("This script can only be run on the command line");
 }
+// Ensure we're using PHP 7.1+, needed for the $optind argument to getopt()
+if (version_compare(phpversion(), "7.1.0", "<")) {
+    die("This script requires PHP 7.1 or above");
+}
 
 // Check presence of file path in arguments
 if (sizeof($argv) < 2) {
-    echo "Usage: ".basename(__FILE__)." </path/to/dumps>\n\n";
-    echo "  Purge DB or media dumps older than an interval (".PURGE_INTERVAL.")\n";
+    echo "Usage: ".basename(__FILE__)." [-q] </path/to/dumps>\n\n";
+    echo "  Purge DB or media dumps older than an interval (".PURGE_INTERVAL.")\n\n";
+    echo "  -q      Quiet mode (only report errors)\n";
     exit(1);
 }
 
-$path = $argv[1];
+$options = getopt("q", [], $optind);
+$quiet_mode = isset($options["q"]);
+
+$path = $argv[$optind];
 
 $oldest_date = new DateTime();
 $oldest_date->sub(new DateInterval(PURGE_INTERVAL));
 
-echo "Dumps older than ".$oldest_date->format("Y-m-d")." will be purged.\n\n";
+if (!$quiet_mode) {
+    echo "Dumps older than ".$oldest_date->format("Y-m-d")
+        ." will be purged from: $path\n\n";
+}
 
-foreach (scandir($path) as $file) {
+$files = scandir($path) or die("Unable to list files from: $path");
+foreach ($files as $file) {
     if (preg_match("/^(\d{4}-\d{2}-\d{2})/", $file, $matches)) {
         $filedate = new DateTime($matches[1]);
         $filepath = $path."/".$file;
 
         if ($filedate < $oldest_date) {
-            echo "Removing old dump: $filepath\n";
+            if (!$quiet_mode) {
+                echo "Removing old dump: $filepath\n";
+            }
             unlink($filepath) or die("Error deleting dump $filepath");
         } else {
-            echo "Keeping recent dump: $filepath\n";
+            if (!$quiet_mode) {
+                echo "Keeping recent dump: $filepath\n";
+            }
         }
     }
 }
