@@ -12,12 +12,10 @@
     display: flex;
     align-items: flex-start;
 }
-
 #child_some_stats {
     float: left;
     width: 45%;
 }
-
 #child_good_karma,
 #child_bad_karma,
 #child_bar,
@@ -28,8 +26,6 @@
     width: 50%;
     margin-left: auto;
 }
-
-
 //*----------------------------------------------------------
 //Left nav
 //------------------------------------------------------------ */
@@ -45,7 +41,6 @@
     border-collapse: collapse;
     border-bottom: solid 1px #000000;
 }
-
 .left_nav_link:link {
     color: #122323;
 }
@@ -67,7 +62,6 @@
     margin-left: auto;
     text-align: left;
 }
-
 .quick_search_games_button {
     display: block;
     width: 80px;
@@ -83,7 +77,6 @@
     border-bottom: 3px solid #008b8b;
     border-left: 1px solid #007878;
 }
-
 .quick_search_games_button:hover {
     color: #ffffff;
     color: #182727;

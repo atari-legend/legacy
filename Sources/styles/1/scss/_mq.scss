@@ -32,16 +32,7 @@
         display: none;
     }
 }
-@media screen and (min-width: 451px) {
-    #games_main_list_4,
-    #games_main_list_3,
-    #games_main_list_1 {
-        display: none;
-    }
-    #games_main_list_2 {
-        display: inline;
-    }
-}
+
 @media screen and (max-width: 480px) {
     .whoisit_position_front {
         margin-top: 20px;
@@ -322,16 +313,6 @@
         display: none;
     }
 }
-@media screen and (min-width: 671px) {
-    #games_main_list_4,
-    #games_main_list_2,
-    #games_main_list_1 {
-        display: none;
-    }
-    #games_main_list_3 {
-        display: inline;
-    }
-}
 @media screen and (max-width: 700px) {
     .menu_gameyear_column,
     .menu_gameinfo_column,
@@ -430,14 +411,8 @@
 @media screen and (min-width: 800px) {
     .column_right_tab,
     .column_left_tab,
-    .column_phone,
-    #games_main_list_4,
-    #games_main_list_3,
-    #games_main_list_1 {
+    .column_phone {
         display: none;
-    }
-    #games_main_list_2 {
-        display: inline;
     }
 }
 @media screen and (max-width: 900px) {
@@ -451,16 +426,6 @@
     }
     .news_left_head {
         width: 100%;
-    }
-}
-@media screen and (min-width: 950px) {
-    #games_main_list_4,
-    #games_main_list_2,
-    #games_main_list_1 {
-        display: none;
-    }
-    #games_main_list_3 {
-        display: inline;
     }
 }
 @media screen and (max-width: 985px) {
@@ -909,16 +874,6 @@
     .main_company_child {
         display: block;
         margin: 0 auto;
-    }
-}
-@media screen and (min-width: 1600px) {
-    #games_main_list_3,
-    #games_main_list_2,
-    #games_main_list_1 {
-        display: none;
-    }
-    #games_main_list_4 {
-        display: inline;
     }
 }
 @media screen and (max-width: 1750px) {
