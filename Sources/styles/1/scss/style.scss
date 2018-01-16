@@ -7,6 +7,14 @@
 $skin_name: 'legacy';
 $bg_color: #00d3d3;
 
+$primary_base_color: #122323;
+$primary_odd_color: #0d2e2e;
+$primary_text_color: #ffffff;
+
+$secondary_base_color: #006f6f;
+$secondary_odd_color: #00d3d3;
+$secondary_text_color: #ffffff;
+
 // This variable affects the `.h-*` and `.w-*` classes.
 $sizes: (
     5: 5%,
@@ -39,10 +47,12 @@ $sizes: (
 //*----------------------------------------------------------
 // General settings
 //------------------------------------------------------------ */
+@import '../../1/scss/variables';                             //* --> Borrow from Bootstrap */
+@import '../../common/main_scss/bootstrap/bootstrap';                      //* --> Borrow from Bootstrap */
 @import '../../1/scss/general';                             //* --> general skin specific css settings */
 @import '../../1/scss/form_components';                             //* --> general skin specific css settings */
 @import '../../1/scss/tables';                             //* --> general skin specific css settings */
-@import '../../common/main_scss/bootstrap/sizing';                      //* --> Borrow from Bootstrap */
+@import '../../1/scss/list';                             //* --> general skin specific css settings */
 
 //*----------------------------------------------------------
 // Top

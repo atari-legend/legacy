@@ -122,15 +122,12 @@ img {
     margin-top: 0;
 }
 
-.column_wide_right_1920 {
-    display: none;
-}
-.column_wide_left_1920 {
-    display: none;
-}
+.column_wide_right_1920,
+.column_wide_left_1920,
 .column_wide_center_1920 {
     display: none;
 }
+
 .standard_tile {
     width: 100%;
     background-color: #122323;
@@ -286,7 +283,6 @@ img {
     height: 150px;
 }
 
-
 .standard_tile_link:link {
     color: #ffffff;
 }
@@ -309,7 +305,6 @@ img {
     font-weight: bold;
     color: #000000;
 }
-
 .standard_tile_link_black:visited {
     color: #000000;
 }
@@ -325,7 +320,6 @@ img {
     width: 100%;
     height: 140px;
 }
-
 .standard_list_entry_odd {
     position: relative;
     display: table;
@@ -333,7 +327,6 @@ img {
     height: 140px;
     background: #0d2e2e;
 }
-
 .statistics_list_entry {
     position: relative;
     text-align: center;
@@ -341,7 +334,6 @@ img {
     padding-top: 3px;
     padding-bottom: 3px;
 }
-
 .statistics_list_entry_odd {
     position: relative;
     text-align: center;
@@ -350,7 +342,6 @@ img {
     padding-bottom: 3px;
     background: #0d2e2e;
 }
-
 .standard_list_entry_news {
     position: absolute;
     margin: 10px;
@@ -359,7 +350,6 @@ img {
     width: 90%;
     transform: translateY(-50%);
 }
-
 .standard_list_entry_news_text {
     font-weight: 100;
     color: #9c9c9c;
@@ -375,11 +365,9 @@ img {
     -webkit-box-orient: vertical;
     font-size: 11pt;
 }
-
 .standard_tile_padding {
     padding: 20px;
 }
-
 #other {
     border-right: 1px solid #007878;
 }
@@ -388,12 +376,8 @@ img {
     text-align: center;
 }
 
-
 //*** input type file css ****//
-#file_upload {
-    display: none;
-}
-
+#file_upload,
 #file_upload2 {
     display: none;
 }
@@ -655,10 +639,8 @@ img {
     }
 }
 
-
 $backgroundcolor: #000000;
 $headerBackgroundcolor: #000000;
-
 
 //*------------------------------------------------------------
 //The CSS for the tabs
@@ -720,7 +702,6 @@ div.tab button.active {
         opacity: 1;
     }
 }
-
 
 //*------------------------------------------------------------
 //The 'to the top' button

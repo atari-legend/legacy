@@ -43,7 +43,7 @@
             {/if}
             {if isset($dev_logo) || isset($pub_logo)}
             <tr>
-                <td class="standard_table_center" colspan="3">
+                <td colspan="3" style="text-align:center;">
                     {if isset($publisher)}
                         {$count_pub_logo=0}
                         {foreach from=$publisher item=line name=publisher}
@@ -92,7 +92,7 @@
                             {/if}
                         </td>
                         <td class="w-5">
-                            <span class="games_main_detail_info_left" style="text-align:center;">-</span>
+                            <span class="games_main_detail_info_left text-center">-</span>
                             {if $line.continent != '' ||  $line.extra_info != ''}
                                 <br><br>
                             {/if}
@@ -116,8 +116,10 @@
                     {if $line.pub_profile != ''}
                         <tr></tr>
                         <tr style="display:none;" id="profile{$line.pub_id}">
-                            <td colspan="3" class="standard_table_center ">
-                                <textarea cols="70" id="profile{$line.pub_id}" class="latest_comments_textarea" style="margin-top:5px;margin-bottom:5px;" readonly>{$line.pub_profile}</textarea>
+                            <td colspan="3" style="text-align:center;">
+                                <textarea cols="70" id="profile{$line.pub_id}" class="latest_comments_textarea" style="margin-top:5px;margin-bottom:5px;font-size:10pt;" readonly>
+                                    {$line.pub_profile}
+                                </textarea>
                             </td>
                         </tr>
                     {/if}
@@ -135,7 +137,7 @@
                             {/if}
                         </td>
                         <td class="w-5">
-                            <span class="games_main_detail_info_left" style="text-align:center;">-</span>
+                            <span class="games_main_detail_info_left text-center">-</span>
                             {if $line.extra_info != ''}
                                 <br><br>
                             {/if}
@@ -163,7 +165,7 @@
                             {/if}
                         </td>
                         <td class="w-5">
-                            <span class="games_main_detail_info_left" style="text-align:center;">-</span>
+                            <span class="games_main_detail_info_left text-center">-</span>
                             {if $line.continent != '' ||  $line.extra_info != ''}
                                 <br><br>
                             {/if}
@@ -187,8 +189,10 @@
                     {if $line.pub_profile != ''}
                         <tr></tr>
                         <tr style="display:none;" id="profile{$line.pub_id}">
-                            <td colspan="3" class="standard_table_center ">
-                                <textarea cols="70" id="profile{$line.pub_id}" class="latest_comments_textarea" style="margin-top:5px;margin-bottom:5px;" readonly>{$line.pub_profile}</textarea>
+                            <td colspan="3" style="text-align:center;">
+                                <textarea cols="70" id="profile{$line.pub_id}" class="latest_comments_textarea" style="margin-top:5px;margin-bottom:5px;font-size:10pt;" readonly>
+                                    {$line.pub_profile}
+                                </textarea>
                             </td>
                         </tr>
                     {/if}
@@ -213,7 +217,7 @@
                             {/if}
                         </td>
                         <td class="w-5">
-                            <span class="games_main_detail_info_left" style="text-align:center;">-</span>
+                            <span class="games_main_detail_info_left text-center">-</span>
                             {if $line.auhthor_type_info != ''}
                                 <br><br>
                             {/if}
@@ -250,8 +254,10 @@
                     {if $line.ind_profile != ''}
                         <tr></tr>
                         <tr style="display:none;" id="profile_ind{$line.ind_id}">
-                            <td colspan="3" class="standard_table_center ">
-                                <textarea cols="70" id="profile_ind{$line.ind_id}" class="latest_comments_textarea" style="margin-top:5px;margin-bottom:5px;" readonly>{$line.ind_profile}</textarea>
+                            <td colspan="3" style="text-align:center;">
+                                <textarea cols="70" id="profile_ind{$line.ind_id}" class="latest_comments_textarea" style="margin-top:5px;margin-bottom:5px;font-size:10pt;" readonly>
+                                    {$line.ind_profile}
+                                </textarea>
                             </td>
                         </tr>
                     {/if}
@@ -313,7 +319,7 @@
                             {/if}
                     </td>
                     <td class="w-5">
-                        <span class="games_main_detail_info_left" style="text-align:center;">-</span>
+                        <span class="games_main_detail_info_left text-center">-</span>
                             {if $game_info.game_free == 1}
                                 <br>
                             {/if}
@@ -426,7 +432,7 @@
                         {/if}
                         </td>
                         <td class="w-5">
-                            <span class="games_main_detail_info_left" style="text-align:center;">-</span>
+                            <span class="games_main_detail_info_left text-center">-</span>
                         </td>
                         <td class="w-60">
                             <span class="games_main_detail_info_left">
@@ -445,7 +451,7 @@
                         {/if}
                         </td>
                         <td class="w-5">
-                            <span class="games_main_detail_info_left" style="text-align:center;">-</span>
+                            <span class="games_main_detail_info_left text-center">-</span>
                         </td>
                         <td class="w-60">
                             <span class="games_main_detail_info_left">
@@ -465,7 +471,7 @@
                         </td>
                         <td class="w-5" style="vertical-align:top;">
                             {if $smarty.foreach.game_vs.index == 0}
-                                <span class="games_main_detail_info_left" style="text-align:center;">-</span>
+                                <span class="games_main_detail_info_left text-center">-</span>
                             {/if}
                         </td>
                         <td class="w-60">

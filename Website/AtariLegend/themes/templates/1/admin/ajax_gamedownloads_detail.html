@@ -494,7 +494,7 @@
                                                                     {$individual.ind_name}
                                                                 </a>
                                                             </td>
-                                                            <td class="menu_delete_column w-10" style="text-align:center;">
+                                                            <td class="menu_delete_column w-10 text-center">
                                                                 <a href="#" class="links_addnew_link" onclick="deleteAuthors({$individual.game_download_ind_id},{$downloads.game_download_id},{$game.game_id},{$individual.ind_id})" ><i class="fa fa-trash" aria-hidden="true"></i></a>
                                                             </td>
                                                         </tr>
@@ -529,7 +529,7 @@
 {if isset($smarty_action) and $smarty_action == "closeedit_download_box"}
     <tr id="downloadedit_ajax_{$line.game_download_id}">
         <td class="menu_disk_list_column w-30">{if $downloads.filename != ''}<a onclick="editDownload({$downloads.game_download_id},{$downloads.game_id})" style="cursor: pointer;">{$downloads.filename}</a>{else}<i>n/a</i>{/if}</td>
-        <td class="menu_state_column w-30" style="text-align:right; padding-right:5px;">{if isset($downloads.date)}{$downloads.date}{else}<i>n/a</i>{/if}</td>
+        <td class="menu_state_column w-30 text-right">{if isset($downloads.date)}{$downloads.date}{else}<i>n/a</i>{/if}</td>
     </tr>
 {/if}
 
@@ -738,7 +738,7 @@
                     <tr>
                         <td class="menu_credits_column w-45">{$individual.author_type_info}</td>
                         <td class="menu_scene_column w-45"><a href="../individuals/individuals_edit.php?ind_id={$individual.ind_id}" class="standard_tile_text_left">{$individual.ind_name}</a></td>
-                        <td class="menu_delete_column w-10" style="text-align:center;">
+                        <td class="menu_delete_column w-10 text-center">
                             <a href="#" class="links_addnew_link" onclick="deleteAuthors({$individual.game_download_ind_id},{$game_download_id},{$game_id},{$individual.ind_id})"><i class="fa fa-trash" aria-hidden="true"></i></a>
 4                        </td>
                     </tr>
