@@ -42,7 +42,8 @@ $sizes: (
 @import '../../2/scss/general';   //* --> general skin specific css settings */
 @import '../../2/scss/form_components';   //* --> general skin specific css settings */
 @import '../../2/scss/tables';   //* --> general skin specific css settings */
-@import '../../common/main_scss/bootstrap/sizing';             //* --> borrowed from bootstrap */
+@import '../../2/scss/variables';                             //* --> Borrow from Bootstrap */
+@import '../../common/main_scss/bootstrap/bootstrap';                      //* --> Borrow from Bootstrap */
 
 //*----------------------------------------------------------
 // Top

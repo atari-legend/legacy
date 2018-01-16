@@ -27,7 +27,7 @@
     @extend .user_details_row;
 }
 
-download_details_text_long {
+.download_details_text_long {
     @extend .user_details_text;
     width: 100%;
     text-align: center;

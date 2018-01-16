@@ -294,7 +294,7 @@
                         {if isset($reviews_author)}
                         <tr>
                             <td colspan="2">
-                                <div class="standard_list_entry_news_text" style="text-align:center;">
+                                <div class="standard_list_entry_news_text text-center">
                                     {$user_session.userid} has written {$nr_reviews_author} additional reviews :
                                 </div>
                             </td>
@@ -315,7 +315,7 @@
                         {else}
                             <tr>
                                 <td class="w-100">
-                                    <div class="standard_list_entry_news_text" style="text-align:center;">
+                                    <div class="standard_list_entry_news_text text-center">
                                         You haven't written any reviews before. This is your first. Congratulations and good luck! For some examples, see tile 'Indepth reviews'.
                                     </div>
                                 </td>
@@ -397,11 +397,11 @@
                             </div>
                         </div>
                         <br>
-                        <div class="standard_tile_padding" style="text-align:center;">
+                        <div class="standard_tile_padding text-center">
                             <h6>Screenshots</h6>
                             <br>
                             {if $nr_screenshots <> 0}
-                                <table class="primary_table_list  no_border">
+                                <table class="primary_table_list no_border">
                                 {foreach from=$screenshots item=line}
                                     <tr>
                                         <td class="w-15" style="border:0;">

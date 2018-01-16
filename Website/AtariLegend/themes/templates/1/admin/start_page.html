@@ -115,7 +115,6 @@ window.onload = function () {
 {block name=left_tile}
     {include file='1/admin/tile_stats.html'}
     <br>
-    {include file='1/admin/left_nav.html'}
 {/block}
 
 {block name=main_tile}
@@ -147,17 +146,21 @@ window.onload = function () {
                 </div>
             </div>
             <div class="main_stats_child" id="child_good_karma">
-                <table class="secondary_table_list  table_sm table_hover">
-                <tr>
-                    <th class="table_textalign_center" colspan="2" id="good_karma">Good Karma</th>
-                </tr>
-                    {foreach from=$karma_good item=line}
-                <tr>
-                    <td><a href="../user/user_detail.php?user_id_selected={$line.user_id}" class="standard_tile_text_left">{$line.user_name}</a></td>
-                    <td class="karma_points_tablecell">{$line.karma}</td>
-                </tr>
-                    {/foreach}
-                </table>
+                <ul class="list-group secondary_list">
+                    <li class="list-group-item text-center">
+                        <b>Good Karma</b>
+                    </li>
+                {assign var="number" value=1}
+                {foreach from=$karma_good item=line}
+                    <li class="list-group-item list-group-item-action {if $number is even}{else}secondary_list_odd{/if}">
+                        <a href="../user/user_detail.php?user_id_selected={$line.user_id}" class="standard_tile_text_left">
+                            {$line.user_name}
+                        </a>
+                        <div class="text-right" style="float:right;">{$line.karma}</div>
+                    </li>
+                {$number=$number+1}
+                {/foreach}
+                </ul>
             </div>
         </div>
         <br>
@@ -169,17 +172,21 @@ window.onload = function () {
                 </div>
             </div>
             <div class="main_stats_child" id="child_bad_karma">
-                <table class="secondary_table_list  table_sm table_hover">
-                <tr>
-                    <th class="table_textalign_center" colspan="2" id="bad_voodoo">Bad Voodoo</th>
-                </tr>
-                    {foreach from=$karma_bad item=line}
-                <tr>
-                    <td><a href="../user/user_detail.php?user_id_selected={$line.user_id}" class="standard_tile_text_left">{$line.user_name}</a></td>
-                    <td class="karma_points_tablecell">{$line.karma}</td>
-                </tr>
-                    {/foreach}
-                </table>
+                <ul class="list-group secondary_list">
+                    <li class="list-group-item text-center">
+                        <b>Bad Voodoo</b>
+                    </li>
+                {assign var="number" value=1}
+                {foreach from=$karma_bad item=line}
+                    <li class="list-group-item list-group-item-action {if $number is even}{else}secondary_list_odd{/if}">
+                        <a href="../user/user_detail.php?user_id_selected={$line.user_id}" class="standard_tile_text_left">
+                            {$line.user_name}
+                        </a>
+                        <div class="text-right" style="float:right;">{$line.karma}</div>
+                    </li>
+                {$number=$number+1}
+                {/foreach}
+                </ul>
             </div>
         </div>
     </div>

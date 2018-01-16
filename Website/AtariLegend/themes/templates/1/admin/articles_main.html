@@ -94,12 +94,10 @@ function deletearticle(article_id)
                     <div style="float:left"><b>{$line.article_title}</b></div><div style="float:right; margin-right:2px;">Type - {$line.article_type}</div>
                     <br>
                     <br>
-                    <div class="interviews_main_table">
-                        <div class="interviews_main_preview_100">
+
                             <i>{$line.article_text}</i>
-                        </div>
-                    </div>
-                    <br>
+
+                    <br><br>
                     <div style="text-align:center;">
                         <a href="articles_edit.php?article_id={$line.article_id}" class="left_nav_link">EDIT</a> :: <a href="javascript:deletearticle({$line.article_id})" class="left_nav_link">DELETE</a> :: <a href="articles_preview.php?article_id={$line.article_id}" class="left_nav_link">PREVIEW</a> :: <a href="articles_screenshots_add.php?article_id={$line.article_id}" class="left_nav_link">ADD SCREENSHOTS</a>
                     </div>
