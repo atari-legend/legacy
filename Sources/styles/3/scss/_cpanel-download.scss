@@ -16,11 +16,6 @@
     display: none;
 }
 
-.download_details_input {
-    @extend .user_details_input;
-    width: 75%;
-}
-
 .download_details_text {
     @extend .user_details_text;
     width: 25%;
