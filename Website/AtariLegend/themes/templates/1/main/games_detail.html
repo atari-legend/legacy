@@ -61,7 +61,9 @@
             }
         };
 
-        var jssor_1_slider = new $JssorSlider$("jssor_1", jssor_1_options);
+        {if isset($screenshots)}
+            var jssor_1_slider = new $JssorSlider$("jssor_1", jssor_1_options);
+        {/if}
 
         {if isset($boxscan)}
             // boxscan slider code
@@ -92,23 +94,25 @@
 
         /*#region responsive code begin*/
         function ScaleSlider() {
-            //for screenshots
-            var containerElement = jssor_1_slider.$Elmt.parentNode;
-            var containerWidth = containerElement.clientWidth;
-            if (containerWidth) {
-                var MAX_WIDTH = 960;
+            {if isset($screenshots)}
+                //for screenshots
+                var containerElement = jssor_1_slider.$Elmt.parentNode;
+                var containerWidth = containerElement.clientWidth;
+                if (containerWidth) {
+                    var MAX_WIDTH = 960;
 
-                var expectedWidth = containerWidth;
+                    var expectedWidth = containerWidth;
 
-                if (MAX_WIDTH) {
-                    expectedWidth = Math.min(MAX_WIDTH, expectedWidth);
+                    if (MAX_WIDTH) {
+                        expectedWidth = Math.min(MAX_WIDTH, expectedWidth);
+                    }
+
+                    jssor_1_slider.$ScaleWidth(expectedWidth);
                 }
-
-                jssor_1_slider.$ScaleWidth(expectedWidth);
-            }
-            else {
-                window.setTimeout(ScaleSlider, 30);
-            }
+                else {
+                    window.setTimeout(ScaleSlider, 30);
+                }
+            {/if}
 
             {if isset($boxscan)}
             //for boxscans
