@@ -1,0 +1,27 @@
+<div class="standard_tile submit_link">
+    <h1>SUBMIT LINK</h1>
+    <div class="standard_tile_line"></div>
+    <div class="standard_tile_explanation">
+        <h6>
+            Do you have an interesting Atari or retro related website you would like to share? Please let us know.
+        </h6>
+    </div>
+    {if isset($user_session)}
+        <form method="post" action="../../common/tiles/tile_submit_link.php">
+            <label for="link_name">Name:</label>
+            <input type="text" class="standard_input" id="link_name" name="name" placeholder="e.g. 'Official Atari site'" required><br>
+
+            <label for="link_url">URL:</label>
+            <input type="url" class="standard_input" id="link_url" name="url" placeholder="e.g. 'http://www.atari.com/'" required><br>
+
+            <label for="link_description">Description:</label>
+            <textarea class="games_main_detail_comments_add" name="description" placeholder="e.g. 'Contains information about the latest Atari games'" required></textarea><br><br>
+
+            <input type="submit" value="Submit" class="quick_search_games_button">
+        </form>
+    {else}
+        <div class="games_main_detail_comments_log_on">
+            Please log in to submit a link.
+        </div>
+    {/if}
+</div>
