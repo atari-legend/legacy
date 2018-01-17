@@ -92,10 +92,6 @@
 #file_upload_game_detail {
     width: 60%;
 }
-.download_details_input {
-    @extend .user_details_input;
-    width: 75%;
-}
 .user_details_input_small {
     @extend .standard_input;
     width: 90%;
