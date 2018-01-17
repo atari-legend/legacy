@@ -104,3 +104,32 @@
     @extend .standard_input;
     width: 98.7%;
 }
+
+//
+// Standard Buttons
+//
+
+.secondary_button {
+    margin-top: 5px;
+    height: 27px;
+    font-size: 100%;
+    color: #ffffff;
+    cursor: pointer;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 4px;
+    padding-bottom: 5px;
+    background: #006f6f;
+    border: .5px solid #122323;
+}
+
+.secondary_button:hover {
+    color: #ffffff;
+    background: #122323;
+    border: .5px solid #008b8b;
+}
+
+label.secondary_button {
+    padding-top: 4px;
+    padding-bottom: 3.5px;
+}
