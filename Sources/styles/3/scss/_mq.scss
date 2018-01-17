@@ -286,7 +286,6 @@
         border-bottom: 0;
     }
 }
-
 @media screen and (max-width: 639px) {
     .column_left,
     .column_right_tab,
@@ -317,8 +316,6 @@
         margin-top: 20px;
         margin-bottom: 20px;
     }
-}
-@media screen and (max-width: 640px) {
     .gc_left_column,
     .user_stats_img_dark {
         display: none;
@@ -452,31 +449,22 @@
         display: none;
     }
 }
-
-
 @media screen and (min-width: 801px) {
     .whoisit_position_front {
         float: right;
         margin-top: 20px;
     }
-    .column_right_tab {
-        display: none;
-    }
-    .column_left_tab {
-        display: none;
-    }
+    .column_right_tab,
+    .column_left_tab,
     .column_phone {
         display: none;
     }
 }
-
-
 @media screen and (max-width: 880px) {
     .standard_tile_input_small_site {
         width: 96.3%;
     }
 }
-
 @media screen and (max-width: 900px) {
     .db_result_column,
     .db_state_column {
@@ -507,27 +495,22 @@
     .games_detail_review_container {
         flex-direction: column;
     }
-
     #games_detail_review_screenshots,
     #games_detail_review_text {
         width: 100%;
         float: left;
     }
-
     .games_detail_review_container > div {
         width: 100%;
     }
-
     .games_detail_review_child {
         display: block;
         margin: 0 auto;
     }
-
     .games_detail_review_screenshot_order {
         display: inline-block;
         vertical-align: top;
     }
-
     .games_detail_review_screenshot_space {
         display: inline;
     }
@@ -544,12 +527,6 @@
         display: none;
     }
 }
-
-
-
-
-
-
 @media screen and (max-width: 1050px) {
     .games_main_row {
         width: 90%;
@@ -594,21 +571,16 @@
         width: 100%;
     }
 }
-
-
 @media screen and (max-width: 1100px) {
     .reviewdate_gr_column {
         display: none;
     }
 }
-
 @media screen and (max-width: 1150px) {
     .email_column {
         display: none;
     }
 }
-
-
 @media screen and (max-width: 1169px) {
     .fa-birthday-cake {
         margin-left: 10%;
@@ -626,9 +598,6 @@
         margin-top: 8px;
     }
 }
-
-
-
 @media screen and (min-width: 1170px) {
     #cd-timeline {
         margin-top: 3em;
@@ -726,17 +695,14 @@
     .review_container {
         flex-direction: column;
     }
-
     #review_screenshots,
     #review_text {
         width: 100%;
         float: left;
     }
-
     .review_container > div {
         width: 100%;
     }
-
     .review_screenshot_order {
         display: inline-block;
         vertical-align: top;
@@ -745,14 +711,12 @@
         display: inline-block;
         vertical-align: top;
     }
-
     #review_screenshots {
         background: #efefef;
     }
     .main_stats_container {
         flex-direction: column-reverse;
     }
-
     #child_some_stats,
     #child_good_karma_chart,
     #child_bad_karma_chart,
@@ -763,7 +727,6 @@
         width: 75%;
         float: left;
     }
-
     #child_good_karma,
     #child_bar,
     #child_line,
@@ -772,25 +735,19 @@
     #child_bad_karma {
         margin-top: 20px;
     }
-
     .main_stats_container > div {
         width: 100%;
     }
-
     .main_stats_child {
         display: block;
         margin: 0 auto;
     }
 }
-
-
 @media screen and (max-width: 1200px) {
     .log_subname_column {
         display: none;
     }
 }
-
-
 @media screen and (max-width: 1279px) {
     .db_result_column {
         display: none;
@@ -828,9 +785,6 @@
     #gd_publisher_info {
         margin-top: 20px;
     }
-}
-
-@media screen and (max-width: 1280px) {
     #column_left_interviews_details,
     #column_left_games_details,
     #column_left_reviews_details {
@@ -902,9 +856,6 @@
         height: 100%;
     }
 }
-
-
-
 @media screen and (max-width: 1494px) {
     .datequote_position_front {
         float: right;
@@ -913,8 +864,6 @@
         float: right;
     }
 }
-
-
 @media screen and (min-width: 1495px) {
     .screenstar_position_front,
     .datequote_position_front,
@@ -968,33 +917,20 @@
     .main_company_container {
         flex-direction: column;
     }
-
     #child_edit_company,
     #child_add_company {
         float: left;
         margin-bottom: 30px;
     }
-
     .main_company_container > div {
         width: 100%;
     }
-
-    .main_company_child {
-        display: block;
-        margin: 0 auto;
-    }
 }
-
-
-
 @media screen and (max-width: 1560px) {
     .standard_tile_input_small_site {
         width: 97.3%;
     }
 }
-
-
-
 @media screen and (max-width: 1599px) {
     #games_main_list_4,
     #games_main_list_2,
