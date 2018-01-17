@@ -1016,21 +1016,8 @@ header nav input[type=submit] {
     }
 }
 
-input::-webkit-input-placeholder,
-textarea::-webkit-input-placeholder {
-    color: #ffffff;
-}
-input:-moz-placeholder,
-textarea:-moz-placeholder {
-    color: #ffffff;
-}
-input::-moz-placeholder,
-textarea::-moz-placeholder {
-    color: #ffffff;
-}
-input:-ms-input-placeholder,
-textarea:-ms-input-placeholder {
-    color: #ffffff;
+::placeholder {
+    color: #666;
 }
 
 .log_on_avatar {

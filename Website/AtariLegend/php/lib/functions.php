@@ -658,6 +658,15 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
             $query_data      = $result->fetch_array(MYSQLI_BOTH);
             $subsection_name = $query_data['website_category_name'];
         }
+
+        if ($subsection == 'Link submit') {
+            // Get the submitted link
+            $query_link =  "SELECT website_name FROM website_validate WHERE website_id = $subsection_id";
+            $result = $mysqli->query($query_link) or die("getting submitted link name failed: ".$mysqli->error);
+            $query_data = $result->fetch_array(MYSQLI_BOTH);
+            $section_name = $query_data['website_name'];
+            $subsection_name = $query_data['website_name'];
+        }
     }
 
     //  Everything we do for the LINKS CATEGORY section

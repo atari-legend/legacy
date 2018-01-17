@@ -139,6 +139,7 @@ $news_images_save_path="../../../data/images/news_images/";
 
 //links
 $website_image_path="../../data/images/website_images/";
+$website_image_path="../../data/images/website_images/";
 $website_image_save_path="../../../data/images/website_images/";
 
 //trivia
