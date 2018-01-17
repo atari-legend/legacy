@@ -18,6 +18,12 @@
     font-size: 11pt;
 }
 
+.primary_list_odd {
+    background-color: $primary_odd_color;
+    color: $primary_text_color;
+    font-size: 11pt;
+}
+
 .secondary_list_odd {
     background-color: $secondary_odd_color;
     color: $secondary_text_color;

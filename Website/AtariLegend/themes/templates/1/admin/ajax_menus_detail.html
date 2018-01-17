@@ -42,7 +42,7 @@
                     <br>
                     <div style="margin-left:20px;">
                         <div class="main_company_container">
-                            <div class="main_company_child" id="child_edit_company">
+                            <div class="text-center" id="child_edit_company">
                                 <b>Set state:</b><br>
                                 <select name="state_id" class="standard_select select_large" onchange="changeState(this.value,{$menus.menu_disk_id})">
                                     <option value="">Set State</option>
@@ -69,7 +69,7 @@
                                 <div id="screenshot_link"><a onclick="popAddScreenshots({$menus.menu_disk_id})" style="cursor: pointer;" class="standard_tile_link">Add Screenshots to menu</a><br></div>
                                 <div id="file_link"><a onclick="popAddFile({$menus.menu_disk_id})" style="cursor: pointer;" class="standard_tile_link">Add File to menu</a><br></div>
                             </div>
-                            <div class="main_company_child" id="child_add_company">
+                            <div class="text-center" id="child_add_company">
                                 <b>Release Year:</b><br>
                                 {html_select_date start_year="1984" end_year="+1" display_days=false display_months=false prefix="" field_name="" class="standard_select select_medium" name="year_id" time="{$menus.menu_year}-01-01" onchange="changeYear(this.value,$menu_disk_id)"}
                                 <br><img src="../../../themes/templates/1/includes/img/arrow_ltr.gif" alt="" width="38" height="22" style="display:inline;">
@@ -701,7 +701,7 @@
     <div id="set_chain_update">
     <div class="standard_tile_padding">
         <div class="main_company_container">
-            <div class="main_company_child" id="child_edit_company">
+            <div class="text-center" id="child_edit_company">
                 <form action="" method="post" name="link_game_to_set" id="link_game_to_set">
                     <fieldset class="primary_fieldset">
                     <legend class="primary_legend">Select chain {if isset($title_name)}for {$title_name}{/if}</legend>
@@ -737,7 +737,7 @@
                     </fieldset>
                 </form>
             </div>
-            <div class="main_company_child" id="child_edit_company">
+            <div class="text-center" id="child_edit_company">
                 <form action="" method="get" name="set_add_to_menu" id="set_add_to_menu">
                     <fieldset class="primary_fieldset">
                     <legend class="primary_legend">Create chain {if isset($title_name)}for {$title_name}{/if}</legend>
