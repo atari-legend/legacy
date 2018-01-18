@@ -308,6 +308,11 @@
     .gc_left_column {
         display: none;
     }
+    .link {
+        img, .image_placeholder {
+            display: none;
+        }
+    }
     .column_center {
         width: 100%;
         margin-left: 0;
@@ -834,8 +839,10 @@
 }
 @media screen and (max-width: 1494px) {
     .datequote_position_front,
-    .tile_open_db_front {
+    .tile_open_db_front,
+    .hotlinks_position_front {
         float: right;
+        width: 100%;
     }
     .screenstar_position_front {
         margin-top: 0;
@@ -843,7 +850,8 @@
 }
 
 @media screen and (min-width: 1495px) {
-    .latest_news {
+    .latest_news,
+    .statistics_position_front{
         float: left;
         width: 48%;
     }
@@ -853,7 +861,6 @@
     .datequote_position_front,
     .tile_open_db_front,
     .social_corner_position_front,
-    .hotlinks_position_front,
     .class_position_front {
         float: left;
         width: 94%;
@@ -865,7 +872,7 @@
     }
     .didyouknow_position_front,
     .spotlight_position_front,
-    .statistics_position_front {
+    .hotlinks_position_front {
         float: left;
         width: 100%;
     }

@@ -261,10 +261,6 @@
                 {include file='1/main/tile_open_db.html'}
             {/block}
 
-            <!--Start "hotlinks" tile
-            {block name=hotlinks_tile}
-                {include file='1/main/hotlinks_tile.html'}
-            {/block}-->
         </div>
         <!--this column is only visible with 3 and 2 columns-->
         <div class="column_wide_left">
@@ -323,6 +319,11 @@
                         {include file='1/main/tile_al_mobile.html'}
                     {/block}
                 </div>
+
+                <!--Start "statistics" tile-->
+                {block name=statistics_tile}
+                    {include file='1/main/statistics_tile.html'}
+                {/block}
             </div>
         </div>
 
@@ -353,14 +354,14 @@
                 {include file='1/main/who_is_it_tile.html'}
             {/block}
 
+            <!--Start "hotlinks" tile-->
+            {block name=hotlinks_tile}
+                {include file='1/main/hotlinks_tile.html'}
+            {/block}
+
             <!--Start "Did you know" tile-->
             {block name=did_you_know_tile}
                 {include file='1/main/did_you_know_tile.html'}
-            {/block}
-
-            <!--Start "statistics" tile-->
-            {block name=statistics_tile}
-                {include file='1/main/statistics_tile.html'}
             {/block}
 
             <!--Start spotlight tile-->
@@ -419,6 +420,11 @@
             {block name=date_quote_tile}
                 {include file='1/main/tile_open_db.html'}
             {/block}
+
+            <!--Start "hotlinks" tile-->
+            {block name=hotlinks_tile}
+                {include file='1/main/hotlinks_tile.html'}
+            {/block}
         </div>
 
         <!--this column is only visible in the 1 colum mode-->
@@ -454,14 +460,14 @@
                 {include file='1/main/who_is_it_tile.html'}
             {/block}
 
-            <!--Start date quote tile
-            {block name=date_quote_tile}
-                {include file='1/main/date_quote_tile.html'}
-            {/block}-->
-
             <!--Start open db tile-->
             {block name=date_quote_tile}
                 {include file='1/main/tile_open_db.html'}
+            {/block}
+            
+            <!--Start "hotlinks" tile-->
+            {block name=hotlinks_tile}
+                {include file='1/main/hotlinks_tile.html'}
             {/block}
 
         </div>
@@ -564,14 +570,6 @@
                 <div class="contact_email_button"><a href="#"> </a></div>
                 <div class="contact_facebook_button"><a href="#"> </a></div>
             </div>-->
-
-            <!--Start "AL Mobile" tile-->
-            {block name=al_mobile}
-                <div class="contact_tiles">
-                    {include file='1/main/tile_al_mobile.html'}
-                </div>
-            {/block}
-
         </div>
 
         <!--this column is only visible in the 2 colum mode -->
@@ -580,6 +578,13 @@
             {block name=date_quote_tile}
                 {include file='1/main/date_quote_tile.html'}
             {/block}-->
+
+            <!--Start "AL Mobile" tile-->
+            {block name=al_mobile}
+                <div class="contact_tiles">
+                    {include file='1/main/tile_al_mobile.html'}
+                </div>
+            {/block}
         </div>
     </div>
     {if isset($smarty_action) and $smarty_action == 'first_time'}</div>{/if}

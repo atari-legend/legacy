@@ -1,6 +1,7 @@
 .links {
 
     color: #9c9c9c;
+    font-size: 11pt;
 
     a {
         color: white;
@@ -25,6 +26,9 @@
 
             a {
                 color: #9c9c9c;
+            }
+            a:hover {
+                color: #00d3d3;
             }
 
             small {
