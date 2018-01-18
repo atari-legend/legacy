@@ -56,7 +56,6 @@
 // Table Cells
 //
 
-
 .news_images_check {
     vertical-align: middle;
 }
@@ -69,80 +68,12 @@
     padding-left: 15px;
     vertical-align: middle;
 }
-.log_date_column,
-.log_action_column,
-.log_section_column,
-.log_subsection_column,
-.log_user_column,
-.log_name_column {
-    padding-left: 2px;
-    font-size: 11pt;
-    font-weight: 100;
-    color: #000000;
-}
-
-.username_gr_column,
-.gamepub_gr_column,
-.reviewdate_gr_column,
-.nrreviews_gr_column,
-.gamename_gr_column,
-.game_gm_column,
-.pub_gm_column,
-.year_gm_column,
-.zaks_gm_column,
-.menu_list_crew_column,
-.menu_disk_list_column,
-.menu_list_individual_column,
-.menu_crew_column,
-.menu_individual_column,
-.nr_menus_column,
-.menu_type_column,
-.menu_disk_set_column {
-    padding-left: 2px;
-}
-
-.game_name_column,
-.publisher_table_column,
-.developer_table_column,
-.release_year_column,
-.information_table_column {
-    padding-left: 2px;
-    text-align: left;
-}
 
 .menu_state_column,
 .log_subname_column,
 .menu_delete_column {
-    padding-right: 5px;
     text-align: right;
 }
-.menu_mark_column,
-.menu_gameinfo_column,
-.menu_gameset_column,
-.menu_gamename_column,
-.menu_gamedeveloper_column,
-.menu_gameyear_column,
-.menu_credits_column,
-.menu_scene_column,
-.menu_docname_column,
-.menu_doctype_column,
-.menu_docinfo_column {
-    padding-right: 5px;
-    text-align: left;
-}
-
-.username_column,
-.joindate_column,
-.lastvisit_column,
-.email_column {
-    padding-left: 2px;
-    font-size: 16px;
-    font-weight: 100;
-    color: #000000;
-    text-align: left;
-}
-
-
 
 //*-----------------------Database updates-------------------------- */
 .db_result_column,
@@ -227,18 +158,12 @@
     border: solid 1px #b2b2b2;
     border-spacing: 0;
 }
-.primary_table_list  li {
-    font-size: 16px;
-    color: #000000;
-    text-align: center;
-    list-style-type: none;
-}
 .primary_table_list th {
     padding-top: 3px;
     padding-bottom: 3px;
-    padding-left: 3px;
+    padding-left: 5px;
+    padding-right: 5px;
     margin: 0;
-    text-align: center;
     background-color: #dbd7d1;
     border-collapse: collapse;
     border-bottom: solid 2px #b2b2b2;
@@ -255,7 +180,8 @@
 .primary_table_list td {
     padding-top: 1px;
     padding-bottom: 1px;
-    padding-left: 3px;
+    padding-left: 5px;
+    padding-right: 5px;
     margin: 0;
 }
 .standard_table_center {
