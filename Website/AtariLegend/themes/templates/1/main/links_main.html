@@ -42,16 +42,20 @@
                             <small class="inactive"><i class="fa fa-warning" aria-hidden="true"></i> Appears to be inactive</small>
                         {/if}
                         {if $link->getImage()}
-                            <a href="{$link->getUrl()}" target="_blank" title="Visit {$link->getName()|escape}">
+                            <a href="../../includes/show_image.php?file={$link->getImage()}&amp;resize=410,null,null,null" target="_blank" title="Screenshot of {$link->getName()|escape}" data-lightbox="image-1">
                                 <img src="{$link->getImage()}" alt="Screenshot of {$link->getName()|escape}">
                             </a>
                         {else}
                             <div class="image_placeholder">
-                                    <a href="{$link->getUrl()}" target="_blank" title="Visit {$link->getName()|escape}"><i class="fa fa-question-circle-o fa-4x" aria-hidden="true"></i></a>
+                                <a href="{$link->getUrl()}" target="_blank" title="Visit {$link->getName()|escape}"><i class="fa fa-question-circle-o fa-4x" aria-hidden="true"></i></a>
                             </div>
                         {/if}
                         <div class="link_description">
-                            <h4><a href="{$link->getUrl()}" target="_blank" title="Visit {$link->getName()|escape}">{$link->getName()}</a></h4>
+                            {if $link->getInactive()}
+                                <h4>{$link->getName()}</h4>
+                            {else}
+                                <h4><a href="{$link->getUrl()}" target="_blank" title="Visit {$link->getName()|escape}">{$link->getName()}</a></h4>
+                            {/if}
                             <h5>Added on {$link->getDate()|date_format} <span>by {$link->getUser()}</span></h5>
 
                             <p>{$link->getDescription()}</p>
@@ -85,4 +89,11 @@
             {include file='1/main/did_you_know_tile.html'}
         </div>
     </div>
+    <script src="{$template_dir}includes/js/vendor/lightbox-2.9.0.min.js"></script><!--lightbox popup script-->
+    <link type="text/css" href="{$style_dir}css/vendor/lightbox-2.9.0.css" hreflang="en" rel="stylesheet">
+    <script>
+        lightbox.option({
+            'showImageNumberLabel': false
+        })
+    </script>
 {/block}
