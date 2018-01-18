@@ -7,7 +7,6 @@
 //*************************************************************/
 
 // Selects
-
 .standard_select {
     margin-top: 5px;
     height: 27px;
@@ -17,37 +16,30 @@
     color: #ffffff;
     border: 1px solid #008b8b;
 }
-
 .select_small {
     width: 50px;
 }
-
 .select_medium {
     width: 140px;
 }
 .select_large {
     width: 185px;
 }
-
 .select_full {
     width: 100%;
 }
-
 #changelog_select select {
     width: 50%;
 }
-
 #website_category_select {
     @extend .select_large;
     width: 51.3%;
 }
-
 #games_main_select_site {
     width: 100%;
     height: 27px;
     margin-top: 0;
 }
-
 #games_main_pub_drop {
     @extend #games_main_select_site;
     margin-top: 5px;
@@ -70,7 +62,6 @@
 }
 
 // Inputs
-
 .standard_input {
     margin-top: 5px;
     height: 25px;
@@ -81,43 +72,60 @@
     border: 1px solid #008b8b;
     text-align: left;
 }
-
 .input_small {
     width: 50px;
 }
-
 .input_medium {
     width: 140px;
 }
 .input_large {
     width: 185px;
 }
-
 .input_full {
     width: 100%;
 }
-
 #download_version,
 #download_info {
     @extend .standard_input;
     width: 95%;
 }
-
 #file_upload_game_detail {
     width: 60%;
 }
-
-.download_details_input {
-    @extend .user_details_input;
-    width: 75%;
-}
-
 .user_details_input_small {
     @extend .standard_input;
     width: 90%;
 }
-
 .standard_tile_input_small_site {
     @extend .standard_input;
     width: 98.7%;
+}
+
+//
+// Standard Buttons
+//
+
+.secondary_button {
+    margin-top: 5px;
+    height: 27px;
+    font-size: 100%;
+    color: #ffffff;
+    cursor: pointer;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 4px;
+    padding-bottom: 5px;
+    background: #006f6f;
+    border: .5px solid #122323;
+}
+
+.secondary_button:hover {
+    color: #ffffff;
+    background: #122323;
+    border: .5px solid #008b8b;
+}
+
+label.secondary_button {
+    padding-top: 4px;
+    padding-bottom: 3.5px;
 }

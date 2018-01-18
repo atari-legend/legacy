@@ -41,7 +41,6 @@
 }
 
 @media screen and (max-width: 480px) {
-    .interviews_main_photo,
     #news_approve_icon {
         display: none;
     }
@@ -51,7 +50,6 @@
         width: 100%;
     }
     #download_details_text,
-    #download_details_input,
     .games_main_text,
     .games_main_input {
         display: inline;
@@ -973,11 +971,6 @@
 
     .main_company_container > div {
         width: 100%;
-    }
-
-    .main_company_child {
-        display: block;
-        margin: 0 auto;
     }
 }
 
