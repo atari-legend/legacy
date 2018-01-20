@@ -1,0 +1,129 @@
+.links {
+
+    color: #9c9c9c;
+    font-size: 11pt;
+
+    a {
+        color: white;
+    }
+
+    ul {
+        list-style-type: none;
+        margin: 1rem;
+
+        li {
+            display: inline-block;
+            width: 45%;
+            margin-right: 2rem;
+            white-space: nowrap;
+
+            &.active {
+                font-weight: bold;
+                a {
+                    color: #fff;
+                }
+            }
+
+            a {
+                color: #9c9c9c;
+            }
+            a:hover {
+                color: #00d3d3;
+            }
+
+            small {
+                color: #7c7c7c;
+            }
+        }
+    }
+
+    .link {
+        &:nth-child(odd) {
+            background-color: #0d2e2e;
+        }
+
+        &:after {
+            clear: both;
+            content: "";
+            display: table;
+        }
+
+
+        clear: both;
+        border-bottom: solid 1px black;
+        padding: 1rem;
+
+        &.inactive {
+            small.inactive {
+                float: right;
+
+                @media (max-width: 576px) {
+                    display: none;
+                }
+            }
+        }
+
+        img, .image_placeholder {
+            max-width: 160px;
+            float: left;
+            margin-right: .5rem;
+            box-shadow: 0 0 12px #000;
+        }
+
+        .image_placeholder {
+            width: 160px;
+            height: 100px;
+            text-align: center;
+
+            a {
+                opacity: .25;
+                display: block;
+            }
+
+            i {
+                margin-top: 16px;
+            }
+        }
+
+        h5 {
+            font-weight: bold;
+        }
+
+        @media (max-width: 576px) {
+            h5 {
+                span {
+                    display: block;
+                }
+            }
+        }
+
+        p {
+            margin-top: .5rem;
+            border: none;
+            padding: 0;
+            width: 100%;
+        }
+    }
+}
+
+.submit_link {
+    form {
+        text-align: center;
+        padding-bottom: 10px;
+
+        label {
+            display: block;
+            color: #fff;
+            font-size: 10pt;
+        }
+
+        textarea {
+            margin-top: 5px;
+        }
+
+        input.standard_input {
+            margin-bottom: 10px;
+            width: 90%;
+        }
+    }
+}
