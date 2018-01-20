@@ -51,7 +51,8 @@ module.exports = function (grunt) {
                     'Sources/styles/1/scss/*.scss',
                     'Sources/styles/2/scss/*.scss',
                     'Sources/styles/3/scss/*.scss',
-                    'Sources/styles/common/main_scss/**/*.scss'
+                    'Sources/styles/common/main_scss/**/*.scss',
+                    '!Sources/styles/common/main_scss/font-awesome-4.7.0/**/*.scss'
                 ]
             },
             html: {
