@@ -79,6 +79,7 @@ while ($rowlink = $LINKSQL->fetch_array(MYSQLI_BOTH)) {
         'timestamp' => $timestamp,
         'submitted' => $submitted,
         'user_id' => $rowlink['user_id'],
+        'inactive' => $rowlink['inactive'],
         'website_imgext' => $rowlink['website_imgext']));
 }
 

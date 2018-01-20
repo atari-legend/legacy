@@ -50,7 +50,7 @@ if ($result->num_rows < 1) {
     ));
 } else {
     while ($valrow = $result->fetch_array(MYSQLI_BOTH)) {
-        $link_sub = $mysqli->query("SELECT website_user_sub FROM website WHERE website_user_sub='$valrow[user_id]'")->num_rows;
+        $link_sub = $mysqli->query("SELECT user_id FROM website WHERE user_id='$valrow[user_id]'")->num_rows;
 
         $website_date = date("F j, Y", $valrow['website_date']);
         $user_name    = get_username_from_id($valrow['user_id']);

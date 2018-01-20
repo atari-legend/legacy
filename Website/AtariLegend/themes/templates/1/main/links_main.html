@@ -1,0 +1,99 @@
+{extends file="1/main/main.html"}
+{if isset($current_category)}
+    {block name=title}Atari ST links and resources - {$current_category->getName()} | Atari Legend{/block}
+{else}
+    {block name=title}Atari ST links and resources | Atari Legend{/block}
+{/if}
+
+{block name=main_body}
+    <div id="main" class="main_container_cpanel">
+        <div class="content_box_cpanel" id="column_left_cpanel">
+            <br>
+            {include file='1/main/tile_submit_link.html'}
+            <br>
+            {include file='1/main/tile_al_mobile.html'}
+        </div>
+        <div class="content_box_cpanel" id="column_center_cpanel">
+            <br>
+            <div class="standard_tile links">
+                <h1>LINKS</h1>
+                <div class="standard_tile_line"></div>
+                <div class="standard_tile_text">
+                    <ul>
+                        <li {if ! isset($current_category)}class="active"{/if}>
+                            <a href="{$smarty.server.PHP_SELF}" title="View all links">All <small>({$total_count})</small></a>
+                        </li>
+                        {foreach from=$categories item=category}
+                            <li {if isset($current_category) && $current_category->getId() == $category->getId()}class="active"{/if}>
+                                {if $category->getCount() > 0}
+                                    <a href="{$smarty.server.PHP_SELF}?category_id={$category->getId()}">{$category->getName()} <small>({$category->getCount()})</small></a>
+                                {else}
+                                    {$category->getName()} <small>({$category->getCount()})</small>
+                                {/if}
+                            </li>
+                        {/foreach}
+                    </ul>
+                </div>
+                <div class="standard_tile_line"></div>
+
+                {foreach from=$links item=link}
+                    <div class="link {if $link->getInactive()}inactive{/if}">
+                        {if $link->getInactive()}
+                            <small class="inactive"><i class="fa fa-warning" aria-hidden="true"></i> Appears to be inactive</small>
+                        {/if}
+                        {if $link->getImage()}
+                            <a href="../../includes/show_image.php?file={$link->getImage()}&amp;resize=410,null,null,null" target="_blank" title="Screenshot of {$link->getName()|escape}" data-lightbox="image-1">
+                                <img src="{$link->getImage()}" alt="Screenshot of {$link->getName()|escape}">
+                            </a>
+                        {else}
+                            <div class="image_placeholder">
+                                <a href="{$link->getUrl()}" target="_blank" title="Visit {$link->getName()|escape}"><i class="fa fa-question-circle-o fa-4x" aria-hidden="true"></i></a>
+                            </div>
+                        {/if}
+                        <div class="link_description">
+                            {if $link->getInactive()}
+                                <h4>{$link->getName()}</h4>
+                            {else}
+                                <h4><a href="{$link->getUrl()}" target="_blank" title="Visit {$link->getName()|escape}">{$link->getName()}</a></h4>
+                            {/if}
+                            <h5>Added on {$link->getDate()|date_format} <span>by {$link->getUser()}</span></h5>
+
+                            <p>{$link->getDescription()}</p>
+                        </div>
+                    </div>
+                {/foreach}
+            </div>
+            <div class="standard_tile_text_center">
+                {if $offset > 0}
+                    {if isset($current_category)}
+                        <a href ="?offset={$offset - 5}&amp;category_id={$current_category->getId()}" class="standard_tile_link" style="float:left;margin-left:5px;margin-top:10px;">Previous page</a>
+                    {else}
+                        <a href ="?offset={$offset - 5}" class="standard_tile_link" style="float:left;margin-left:5px;margin-top:10px;">Previous page</a>
+                    {/if}
+                {/if}
+
+                {if $offset + 5 < $count}
+                    {if isset($current_category)}
+                        <a href="?offset={$offset + 5}&amp;category_id={$current_category->getId()}" class="standard_tile_link" style="float:right;margin-right:5px;margin-top:10px;">Next page</a>
+                    {else}
+                        <a href="?offset={$offset + 5}" class="standard_tile_link" style="float:right;margin-right:5px;margin-top:10px;">Next page</a>
+                    {/if}
+                {/if}
+
+            </div>
+        </div>
+        <div class="content_box_cpanel" id="column_right_cpanel">
+            <br>
+            {include file='1/main/tile_screenstar.html'}
+            <br>
+            {include file='1/main/did_you_know_tile.html'}
+        </div>
+    </div>
+    <script src="{$template_dir}includes/js/vendor/lightbox-2.9.0.min.js"></script><!--lightbox popup script-->
+    <link type="text/css" href="{$style_dir}css/vendor/lightbox-2.9.0.css" hreflang="en" rel="stylesheet">
+    <script>
+        lightbox.option({
+            'showImageNumberLabel': false
+        })
+    </script>
+{/block}
