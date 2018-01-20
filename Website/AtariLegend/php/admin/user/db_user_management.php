@@ -30,9 +30,9 @@ if (isset($action) and $action == "delete_user") {
             $i++;
         }
         $time_elapsed_secs        = microtime(true) - $start;
-        $_SESSION['edit_message'] = "$i User(s) deleted succesfully";
+        $edit_message = "$i User(s) deleted succesfully";
     } else {
-        $_SESSION['edit_message'] = 'Please SELECT a user you want to delete';
+        $edit_message = 'Please SELECT a user you want to delete';
     }
 }
 
@@ -60,8 +60,6 @@ if (isset($action) and $action == "email_user") {
         //$mail->Host = 'smtp.live.com';                    // Specify main and backup SMTP servers
         $mail->Host       = $ms_host;
         $mail->SMTPAuth   = true; // Enable SMTP authentication
-        //$mail->Username = 'atarilegend@hotmail.com';      // SMTP username
-        //$mail->Password = '@Tar1L3geNd';                  // SMTP password
         $mail->Username   = $ms_usn;
         $mail->Password   = $ms_pwd;
         $mail->SMTPSecure = 'tls'; // Enable TLS encryption, `ssl` also accepted
@@ -78,15 +76,14 @@ if (isset($action) and $action == "email_user") {
         $mail->Body    = $email_descr;
 
         if (!$mail->send()) {
-            //$_SESSION['edit_message'] = "Message could not be sent.";
-            $_SESSION['edit_message'] = "Mailer Error: ";
+            $edit_message = "Mailer Error: ";
         } else {
-            $_SESSION['edit_message'] = "Email sent";
+            $edit_message = "Email sent";
         }
 
         $time_elapsed_secs = microtime(true) - $start;
     } else {
-        $_SESSION['edit_message'] = 'Please SELECT a user you want to sent an email to';
+        $edit_message = 'Please SELECT a user you want to sent an email to';
     }
 }
 
@@ -101,9 +98,9 @@ if ((isset($action) and $action == "deactivate_user")) {
             $i++;
         }
         $time_elapsed_secs        = microtime(true) - $start;
-        $_SESSION['edit_message'] = 'User(s) updated';
+        $edit_message = 'User(s) updated';
     } else {
-        $_SESSION['edit_message'] = 'Please SELECT a user you want to deactivate';
+        $edit_message = 'Please SELECT a user you want to deactivate';
     }
 }
 
@@ -118,10 +115,10 @@ if ((isset($action) and $action == "activate_user")) {
             $i++;
         }
         $time_elapsed_secs        = microtime(true) - $start;
-        $_SESSION['edit_message'] = 'User(s) updated';
+        $edit_message = 'User(s) updated';
     } else {
-        $_SESSION['edit_message'] = 'Please SELECT a user you want to activate';
+        $edit_message = 'Please SELECT a user you want to activate';
     }
 }
 
-header("Location: ../user/user_management.php");
+echo $edit_message;
