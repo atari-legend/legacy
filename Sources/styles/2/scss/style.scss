@@ -44,6 +44,7 @@ $sizes: (
 @import '../../2/scss/tables';   //* --> general skin specific css settings */
 @import '../../2/scss/variables';                             //* --> Borrow from Bootstrap */
 @import '../../common/main_scss/bootstrap/bootstrap';                      //* --> Borrow from Bootstrap */
+@import '../../common/main_scss/font-awesome-4.7.0/scss/font-awesome';  //* --> include Fontawesome into our main css */
 
 //*----------------------------------------------------------
 // Top
