@@ -61,24 +61,24 @@ The change log page
         </form>
         <br><br>
         {if $rec_nr <> '0'}
-        <div>
-            <table class="secondary_table_list table_md table_hover ">
+        <div class="table-responsive">
+            <table class="secondary_table_list table_md table_hover">
                 <tr>
-                    <th class="log_date_column w-10">Date</th>
-                    <th class="log_user_column w-20">User</th>
-                    <th class="log_section_column w-10">Section</th>
-                    <th class="log_name_column w-20">Name</th>
-                    <th class="log_action_column w-10">Action</th>
-                    <th class="log_subsection_column w-10">Subsect</th>
-                    <th class="log_subname_column w-20">Sub Name</th>
+                    <th class="text-nowrap">Date</th>
+                    <th class="text-nowrap">User</th>
+                    <th class="text-nowrap">Section</th>
+                    <th class="text-nowrap">Name</th>
+                    <th class="text-nowrap">Action</th>
+                    <th class="text-nowrap">Subsect</th>
+                    <th class="text-nowrap">Sub Name</th>
                 </tr>
                 {if $log_nr <> '0'}
                     {foreach from=$log item=line}
                     <tr>
-                        <td class="log_date_column w-10">
+                        <td class="text-nowrap">
                             {$line.log_date}
                         </td>
-                        <td class="log_user_column w-20">
+                        <td class="text-nowrap">
                             {if $line.log_user_name <> '0'}
                             <a href="../user/user_detail.php?user_id_selected={$line.log_user_id}" class="standard_tile_text_left">
                                 {$line.log_user_name}
@@ -87,7 +87,7 @@ The change log page
                                 [deleted user]
                             {/if}
                         </td>
-                        <td class="log_section_column w-10">
+                        <td class="text-nowrap">
                             {if $line.log_section_link <> ''}
                                 <a href="{$line.log_section_link}" class="standard_tile_text_left">
                                     {$line.log_section}
@@ -96,7 +96,7 @@ The change log page
                                 {$line.log_section}
                             {/if}
                         </td>
-                        <td class="log_name_column w-20">
+                        <td class="text-nowrap">
                             {if $line.log_section_link <> ''}
                                 <a href="{$line.log_section_link}" class="standard_tile_text_left">
                                     {$line.log_section_name}
@@ -105,10 +105,10 @@ The change log page
                                 {$line.log_section_name}
                             {/if}
                         </td>
-                        <td class="log_action_column w-10">
+                        <td class="text-nowrap">
                             {$line.log_action}
                         </td>
-                        <td class="log_subsection_column w-10">
+                        <td class="text-nowrap">
                             {if $line.log_subsection_link <> ''}
                                 <a href="{$line.log_subsection_link}" class="standard_tile_text_left">
                                     {$line.log_subsection}
@@ -117,7 +117,7 @@ The change log page
                                 {$line.log_subsection}
                             {/if}
                         </td>
-                        <td class="log_subname_column w-20">
+                        <td class="text-nowrap">
                             {if $line.log_subsection_link <> ''}
                                 <a href="{$line.log_subsection_link}" class="standard_tile_text_left">
                                     {$line.log_subsection_name}
