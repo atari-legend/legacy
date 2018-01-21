@@ -456,22 +456,22 @@ img {
 //*------------------------------------------------------------
 //Standard table settings
 //-------------------------------------------------------------*/
-#column_left_cpanel {
-    float: left;
-    width: 20%;
-    margin-right: 1%;
-}
-
-#column_center_cpanel {
-    float: left;
-    width: 58%;
-}
-
 #column_right_cpanel {
-    float: right;
-    width: 20%;
-    margin-left: 1%;
+    display: none;
 }
+#column_left_cpanel,
+#column_center_cpanel {
+    width: 100%;
+    float: left;
+    margin: auto;
+}
+.main_container_cpanel {
+    display: flex;
+    flex-direction: column-reverse;
+    float: left;
+    width: 100%;
+}
+
 
 .topbutton_cpanel_small {
     width: 80px;
