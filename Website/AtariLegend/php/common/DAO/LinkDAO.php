@@ -145,6 +145,46 @@ class LinkDAO {
 
         return $count;
     }
+    
+    /**
+     * Select a random link
+     *
+     * @param integer $limit how many random links are sent back
+     */
+    public function selectRandomLink($limit) {
+        $stmt = \AL\Db\execute_query(
+            "LinkDAO: Get random link",
+            $this->_mysqli,
+            "SELECT     website.website_id,
+						website.website_name,
+						website.website_url,
+						website.website_imgext,
+                        website.website_date,
+                        website.website_date,
+                        website.description,
+						users.userid
+						FROM website
+						LEFT JOIN users ON ( website.user_id = users.user_id )
+						WHERE website.website_imgext <> ' ' and website.inactive = 0
+						ORDER BY RAND() LIMIT ?",
+            "i", $limit
+        );
+
+        \AL\Db\bind_result(
+             "LinkDAO: Get random link",
+            $stmt,
+            $id, $name, $url, $imgext,  $date, $user, $description, $user 
+        );
+
+        $links = [];
+        while ($stmt->fetch()) {
+            $links[] = new \AL\Common\Model\Link\Link($id, $name, $url, $imgext,  $date, $user, $description, $user);
+        }
+
+        $stmt->close();
+
+        return $links;
+    }
 
 }
 

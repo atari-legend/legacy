@@ -34,7 +34,7 @@
                 <br>
                 <h6>{$hotlinks.website_text}</h6>
                 <br>
-                <span class="standard_tile_subtext">by <a href="#">{$hotlinks.userid}</a>, {$hotlinks.website_date}</span>
+                <span class="standard_tile_subtext">by <a href="#">{$hotlinks->getUser()}</a>, {$hotlinks->getDate()|date_format}</span>
                 <br><h2><a href="#" class="standard_tile_link">More&nbsp;&nbsp;<i class="fa fa-chevron-right" aria-hidden="true"></i></a></h2>
             </div>
         </div>
