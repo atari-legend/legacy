@@ -168,7 +168,11 @@ if (isset($action) and $action == "search") {
     }
 
     //check to see if the year has been clicked
-    if (isset($year)) {
+    if (empty($year) or $year == '-') {
+        $year_select = '';
+    } elseif ($year == "no_year_set") {
+        $year_select = " AND game_year.game_year IS NULL";
+    } else {
         $year_select = " AND game_year.game_year LIKE '$year%'";
     }
 
@@ -178,47 +182,42 @@ if (isset($action) and $action == "search") {
 
     if (isset($falcon_only) and $falcon_only == "1") {
         $falcon_only_select = " AND game_falcon_only.falcon_only =$falcon_only";
-        $smarty->assign('games_falcon_only', '1');
     }
 
     if (isset($falcon_enhanced) and $falcon_enhanced == "1") {
         $falcon_enhanced_select = " AND game_falcon_enhan.falcon_enhanced =$falcon_enhanced";
-        $smarty->assign('games_falcon_enhanced', '1');
     }
 
     if (isset($falcon_rgb) and $falcon_rgb == "1") {
         $falcon_rgb_select = " AND game_falcon_rgb.falcon_rgb =$falcon_rgb";
-        $smarty->assign('games_falcon_rgb', '1');
     }
 
     if (isset($falcon_vga) and $falcon_vga == "1") {
         $falcon_vga_select = " AND game_falcon_vga.falcon_vga =$falcon_vga";
-        $smarty->assign('games_falcon_vga', '1');
     }
 
     if (isset($ste_only) and $ste_only == "1") {
         $ste_only_select = " AND game_ste_only.ste_only =$ste_only";
-        $smarty->assign('games_ste_only', '1');
     }
 
     if (isset($ste_enhanced) and $ste_enhanced == "1") {
         $ste_enhanced_select = " AND game_ste_enhan.ste_enhanced =$ste_enhanced";
-        $smarty->assign('games_ste_enhanced', '1');
     }
 
     if (isset($free) and $free == "1") {
-        $free_select = " AND game_free.free =$free";
-        $smarty->assign('games_free', '1');
+        $free_select = " AND game_free.free = $free";
+    }
+
+    if (isset($commercial) and $commercial == "1") {
+        $free_select = " AND game_free.free IS NULL";
     }
 
     if (isset($arcade) and $arcade == "1") {
         $arcade_select = " AND game_arcade.arcade =$arcade";
-        $smarty->assign('games_arcade', '1');
     }
 
     if (isset($development) and $development == "1") {
         $development_select = " AND game_development.development =$development";
-        $smarty->assign('games_development', '1');
     }
 
     if (isset($unreleased) and $unreleased == "1") {
@@ -226,11 +225,11 @@ if (isset($action) and $action == "search") {
     }
 
     if (isset($wanted) and $wanted == "1") {
-        $wanted_select = " AND game_wanted.wanted =$wanted";
+        $wanted_select = " AND game_wanted.game_wanted_id IS NOT NULL";
     }
 
     if (isset($monochrome) and $monochrome == "1") {
-        $monochrome_select = " AND game_monochrome.monochrome =$monochrome";
+        $monochrome_select = " AND game_mono.monochrome =$monochrome";
     }
 
     if (isset($stos) and $stos == "1") {
@@ -248,6 +247,12 @@ if (isset($action) and $action == "search") {
     if (isset($stac) and $stac == "1") {
         $stac_select = " AND game_stac.stac =$stac";
     }
+    if (isset($no_boxscan) and $no_boxscan == "1") {
+        $no_boxscan_select = " AND game_boxscan.game_id IS NULL";
+    }
+    if (isset($no_screenshot) and $no_screenshot == "1") {
+        $no_screenshot_select = " AND screenshot_game.game_id IS NULL";
+    }
 
     /*
      ***********************************************************************************
@@ -259,172 +264,137 @@ if (isset($action) and $action == "search") {
      */
     if (!empty($gamesearch)) {
         $RESULTGAME .= "game.game_name LIKE '%$gamesearch%'";
+        $RESULTAKA .= "game_aka.aka_name LIKE '%$gamesearch%'";
     } else {
         $RESULTGAME .= "game.game_name LIKE '%'";
+        $RESULTAKA .= "game_aka.aka_name LIKE '%'";
     }
     $RESULTGAME .= $gamebrowse_select;
     $RESULTGAME .= $publisher_select;
     $RESULTGAME .= $developer_select;
+    $RESULTAKA .= $akabrowse_select;
+    $RESULTAKA .= $publisher_select;
+    $RESULTAKA .= $developer_select;
     if (isset($year_select)) {
         $RESULTGAME .= $year_select;
+        $RESULTAKA .= $year_select;
     }
     if (isset($falcon_only) and $falcon_only == "1") {
         $RESULTGAME .= $falcon_only_select;
+        $RESULTAKA .= $falcon_only_select;
     }
     if (isset($falcon_enhanced) and $falcon_enhanced == "1") {
         $RESULTGAME .= $falcon_enhanced_select;
+        $RESULTAKA .= $falcon_enhanced_select;
     }
     if (isset($falcon_rgb) and $falcon_rgb == "1") {
         $RESULTGAME .= $falcon_rgb_select;
+        $RESULTAKA .= $falcon_rgb_select;
     }
     if (isset($falcon_vga) and $falcon_vga == "1") {
         $RESULTGAME .= $falcon_vga_select;
+        $RESULTAKA .= $falcon_vga_select;
     }
     if (isset($ste_only) and $ste_only == "1") {
         $RESULTGAME .= $ste_only_select;
+        $RESULTAKA .= $ste_only_select;
     }
     if (isset($ste_enhanced) and $ste_enhanced == "1") {
         $RESULTGAME .= $ste_enhanced_select;
+        $RESULTAKA .= $ste_enhanced_select;
     }
     if (isset($free) and $free == "1") {
         $RESULTGAME .= $free_select;
+        $RESULTAKA .= $free_select;
+    }
+    if (isset($commercial) and $commercial == "1") {
+        $RESULTGAME .= $free_select;
+        $RESULTAKA .= $free_select;
     }
     if (isset($arcade) and $arcade == "1") {
         $RESULTGAME .= $arcade_select;
+        $RESULTAKA .= $arcade_select;
     }
     if (isset($development) and $development == "1") {
         $RESULTGAME .= $development_select;
+        $RESULTAKA .= $development_select;
     }
     if (isset($unreleased) and $unreleased == "1") {
-        $RESULTGAME .= " AND game_unreleased.unreleased =$unreleased";
+        $RESULTGAME .= $unreleased_select;
+        $RESULTAKA .= $unreleased_select;
     }
     if (isset($unfinished) and $unfinished == "1") {
-        $RESULTGAME .= " AND game_unfinished.unfinished =$unfinished";
+        $RESULTGAME .= $unfinished_select;
+        $RESULTAKA .= $unfinished_select;
     }
     if (isset($monochrome) and $monochrome == "1") {
-        $RESULTGAME .= " AND game_mono.monochrome =$monochrome";
+        $RESULTGAME .= $monochrome_select;
+        $RESULTAKA .= $monochrome_select;
     }
     if (isset($seuck) and $seuck == "1") {
-        $RESULTGAME .= " AND game_seuck.seuck = $seuck";
+        $RESULTGAME .= $seuck_select;
+        $RESULTAKA .= $seuck_select;
     }
     if (isset($stos) and $stos == "1") {
-        $RESULTGAME .= " AND game_stos.stos = $stos";
+        $RESULTGAME .= $stos_select;
+        $RESULTAKA .= $stos_select;
     }
     if (isset($stac) and $stac == "1") {
-        $RESULTGAME .= " AND game_stac.stac = $stac";
+        $RESULTGAME .= $stac_select;
+        $RESULTAKA .= $stac_select;
+    }
+    if (isset($no_boxscan) and $no_boxscan == "1") {
+        $RESULTGAME .= $no_boxscan_select;
+        $RESULTAKA .= $no_boxscan_select;
+    }
+    if (isset($no_screenshot) and $no_screenshot == "1") {
+        $RESULTGAME .= $no_screenshot_select;
+        $RESULTAKA .= $no_screenshot_select;
     }
     if (isset($wanted) and $wanted == "1") {
-        $RESULTGAME .= " AND game_wanted.game_id IS NOT NULL";
+        $RESULTGAME .= $wanted_select;
+        $RESULTAKA .= $wanted_select;
     }
 
     $RESULTGAME .= ' GROUP BY game.game_id, game.game_name HAVING COUNT(DISTINCT game.game_id, game.game_name) = 1';
     $RESULTGAME .= ' ORDER BY game_name ASC';
+    $RESULTAKA .= ' GROUP BY game_aka.game_id, game_aka.aka_name HAVING COUNT(DISTINCT game_aka.game_id, game_aka.aka_name) = 1';
+    $RESULTAKA .= ' ORDER BY game_aka.aka_name ASC';
 
-    $games = $mysqli->query($RESULTGAME);
+    $mysqli->query("CREATE TEMPORARY TABLE temp ENGINE=MEMORY $RESULTGAME") or die(mysqli_error());
+    $mysqli->query("INSERT INTO temp $RESULTAKA") or die(mysqli_error());
 
-    if (empty($games)) {
-        $edit_message = "There are problems with the game search, please try again";
-        $smarty->assign("message", $edit_message);
-    } else {
-        $rows = $games->num_rows;
-        if ($rows > 0) {
-            if (!empty($gamesearch)) {
-                $RESULTAKA .= "game_aka.aka_name LIKE '%$gamesearch%'";
+    $temp_query = $mysqli->query("SELECT * FROM temp ORDER BY game_name ASC") or die("does not compute3");
+
+    $rows = $temp_query->num_rows;
+    if ($rows > 0) {
+        while ($sql_game_search = $temp_query->fetch_array(MYSQLI_BOTH)) {
+
+            //Game names can only be 40 chars long
+            if (strlen($sql_game_search['game_name']) > 40) {
+                $game_name = substr($sql_game_search['game_name'], 0, 40);
+                $game_name = $game_name . '...';
             } else {
-                $RESULTAKA .= "game_aka.aka_name LIKE '%'";
+                $game_name = $sql_game_search['game_name'];
             }
-            $RESULTAKA .= $akabrowse_select;
-            $RESULTAKA .= $publisher_select;
-            $RESULTAKA .= $developer_select;
-            if (isset($year_select)) {
-                $RESULTAKA .= $year_select;
-            }
-            if (isset($falcon_only) and $falcon_only == "1") {
-                $RESULTAKA .= $falcon_only_select;
-            }
-            if (isset($falcon_enhanced) and $falcon_enhanced == "1") {
-                $RESULTAKA .= $falcon_enhanced_select;
-            }
-            if (isset($falcon_rgb) and $falcon_rgb == "1") {
-                $RESULTAKA .= $falcon_rgb_select;
-            }
-            if (isset($falcon_vga) and $falcon_vga == "1") {
-                $RESULTAKA .= $falcon_vga_select;
-            }
-            if (isset($ste_only) and $ste_only == "1") {
-                $RESULTAKA .= $ste_only_select;
-            }
-            if (isset($ste_enhanced) and $ste_enhanced == "1") {
-                $RESULTAKA .= $ste_enhanced_select;
-            }
-            if (isset($free) and $free == "1") {
-                $RESULTAKA .= $free_select;
-            }
-            if (isset($arcade) and $arcade == "1") {
-                $RESULTAKA .= $arcade_select;
-            }
-            if (isset($development) and $development == "1") {
-                $RESULTAKA .= $development_select;
-            }
-            if (isset($unreleased) and $unreleased == "1") {
-                $RESULTAKA .= " AND game_unreleased.unreleased =$unreleased";
-            }
-            if (isset($unfinished) and $unfinished == "1") {
-                $RESULTAKA .= " AND game_unfinished.unfinished =$unfinished";
-            }
-            if (isset($monochrome) and $monochrome == "1") {
-                $RESULTAKA .= " AND game_mono.monochrome =$monochrome";
-            }
-            if (isset($seuck) and $seuck == "1") {
-                $RESULTAKA .= " AND game_seuck.seuck = $seuck";
-            }
-            if (isset($stos) and $stos == "1") {
-                $RESULTAKA .= " AND game_stos.stos = $stos";
-            }
-            if (isset($stac) and $stac == "1") {
-                $RESULTAKA .= " AND game_stac.stac = $stac";
-            }
-            if (isset($wanted) and $wanted == "1") {
-                $RESULTAKA .= " AND game_wanted.game_id IS NOT NULL";
-            }
-            $RESULTAKA .= ' GROUP BY game_aka.game_id, game_aka.aka_name HAVING COUNT(DISTINCT game_aka.game_id, game_aka.aka_name) = 1';
-            $RESULTAKA .= ' ORDER BY game_aka.aka_name ASC';
 
-            $mysqli->query("CREATE TEMPORARY TABLE temp ENGINE=MEMORY $RESULTGAME") or die(mysqli_error());
-            $mysqli->query("INSERT INTO temp $RESULTAKA") or die(mysqli_error());
+            //publishers can only be 18 chars long
+            if (strlen($sql_game_search['publisher_name']) > 18) {
+                $pub_name = substr($sql_game_search['publisher_name'], 0, 18);
+                $pub_name = $pub_name . '...';
+            } else {
+                $pub_name = $sql_game_search['publisher_name'];
+            }
 
-            $temp_query = $mysqli->query("SELECT * FROM temp ORDER BY game_name ASC") or die("does not compute3");
+            //developers can only be 18 chars long
+            if (strlen($sql_game_search['developer_name']) > 18) {
+                $dev_name = substr($sql_game_search['developer_name'], 0, 18);
+                $dev_name = $dev_name . '...';
+            } else {
+                $dev_name = $sql_game_search['developer_name'];
+            }
 
-            $i = 0;
-
-            while ($sql_game_search = $temp_query->fetch_array(MYSQLI_BOTH)) {
-                $i++;
-
-                //Game names can only be 40 chars long
-                if (strlen($sql_game_search['game_name']) > 40) {
-                    $game_name = substr($sql_game_search['game_name'], 0, 40);
-                    $game_name = $game_name . '...';
-                } else {
-                    $game_name = $sql_game_search['game_name'];
-                }
-
-                //publishers can only be 18 chars long
-                if (strlen($sql_game_search['publisher_name']) > 18) {
-                    $pub_name = substr($sql_game_search['publisher_name'], 0, 18);
-                    $pub_name = $pub_name . '...';
-                } else {
-                    $pub_name = $sql_game_search['publisher_name'];
-                }
-
-                //developers can only be 18 chars long
-                if (strlen($sql_game_search['developer_name']) > 18) {
-                    $dev_name = substr($sql_game_search['developer_name'], 0, 18);
-                    $dev_name = $dev_name . '...';
-                } else {
-                    $dev_name = $sql_game_search['developer_name'];
-                }
-
-                $smarty->append('game_search', array(
+            $smarty->append('game_search', array(
                         'game_id' => $sql_game_search['game_id'],
                         'game_name' => $game_name,
                         'publisher_id' => $sql_game_search['publisher_id'],
@@ -443,17 +413,20 @@ if (isset($action) and $action == "search") {
                         'ste_enhanced' => $sql_game_search['ste_enhanced'],
                         'ste_only' => $sql_game_search['ste_only']
                     ));
-            }
-            $time_elapsed_secs = microtime(true) - $start;
-            $smarty->assign("nr_of_games", $i);
-            $smarty->assign("query_time", $time_elapsed_secs);
-
-            $mysqli->query("DROP TABLE temp") or die("does not compute4");
-
-            $smarty->assign("user_id", $_SESSION['user_id']);
-
-            //Send all smarty variables to the templates
-            $smarty->display("file:" . $cpanel_template_folder . "ajax_game_search.html");
         }
+        $time_elapsed_secs = microtime(true) - $start;
+        $smarty->assign("nr_of_games", $rows);
+        $smarty->assign("query_time", $time_elapsed_secs);
+
+        $mysqli->query("DROP TABLE temp") or die("does not compute4");
+
+        $smarty->assign("user_id", $_SESSION['user_id']);
+
+        //Send all smarty variables to the templates
+        $smarty->display("file:" . $cpanel_template_folder . "ajax_game_search.html");
+    } else {
+        // If there are no search results
+        $smarty->assign("nr_of_games", 'none');
+        $smarty->display("file:" . $cpanel_template_folder . "ajax_game_search.html");
     }
 }
