@@ -19,42 +19,22 @@
 *}
 
 {block name=quick_search_games}
-<script>
-function gameinsert()
-{
-    JSnewgame=document.getElementById("qs_newgame").value;
-
-    if (JSnewgame=='')
-    {
-        alert('Please fill in a game name');
-    }
-    else
-    {
-        // CONFIRM REQUIRES ONE ARGUMENT
-        var message = "Are you sure you want to insert this game into the database?";
-        // CONFIRM IS BOOLEAN. THAT MEANS THAT
-        // IT RETURNS TRUE IF 'OK' IS CLICKED
-        // OTHERWISE IT RETURN FALSE
-        var return_value = confirm(message);
-
-        if (return_value !="0")
-        {
-            url="../games/db_games_detail.php?newgame="+JSnewgame+"&action=insert_game";
-            location.href=url;
-        }
-    }
-}
-</script>
 <script src="{$template_dir}includes/js/menus.js"></script>
 <script src="{$template_dir}includes/js/game_search.js"></script>
+<div id="JSGenericModal" title="Delete Title?" style="display:none;">
+    <p>
+        <span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
+        <div id="JSGenericModalText">Are you sure?</div>
+    </p>
+</div>
 <div class="standard_tile">
     <h1>QUICKSEARCH</h1>
     <div class="standard_tile_line"></div>
             <div class="standard_tile_text_center">
-                <form method="post" name="insertgame">
+                <form method="post" name="insertgame" id="JSInsertNewGame">
                     <br>Add new Game:<br>
-                    <input type="text" name="newgame" id="qs_newgame" value="" class="standard_input input_large"><br><br>
-                    <input type="submit" value="Insert" onClick="gameinsert(); return false;" class="quick_search_games_button">
+                    <input type="text" name="newgame" id="JSNewgameName" value="" class="standard_input input_large"><br><br>
+                    <input type="button" value="Insert" id="JSNewgameButton" onClick="gameinsert(); return false;" class="primary_button">
                 </form>
             </div>
             <br>
@@ -74,7 +54,7 @@ function gameinsert()
                     <br>
                     <div class="standard_tile_text_center">
                         By Publisher : <br>
-                        <select name="publisher" class="standard_select select_large">
+                        <select name="publisher" id="JSCpanelPublisherBrowse" class="standard_select select_large">
                             <option value="-" SELECTED>-</option>
                             {foreach from=$company_publisher item=line}
                                 <option value="{$line.comp_id}">{$line.comp_name}</option>
@@ -84,10 +64,21 @@ function gameinsert()
                     <br>
                     <div class="standard_tile_text_center">
                         By Developer : <br>
-                        <select name="developer" class="standard_select select_large">
+                        <select name="developer" id="JSCpanelDeveloperBrowse" class="standard_select select_large">
                             <option value="-" SELECTED>-</option>
                             {foreach from=$company_developer item=line}
                                 <option value="{$line.comp_id}">{$line.comp_name}</option>
+                            {/foreach}
+                        </select>
+                    </div>
+                    <br>
+                    <div class="standard_tile_text_center">
+                        By Release Year : <br>
+                        <select name="year" id="JSCpanelYearBrowse" class="standard_select select_large">
+                            <option value="-" SELECTED>-</option>
+                            <option value="no_year_set">No Release Year Set</option>
+                            {foreach from=$game_year item=line}
+                                <option value="{$line.game_year}">{$line.game_year}</option>
                             {/foreach}
                         </select>
                     </div>
@@ -117,6 +108,10 @@ function gameinsert()
                         <div class="checkbox_alt">
                             <input type="checkbox" value="1" id="JSste_enhanced" name="ste_enhanced">&nbsp;&nbsp;STE Enhanced
                             <label for="JSste_enhanced"></label>
+                        </div>
+                        <div class="checkbox_alt">
+                            <input type="checkbox" value="1" id="JScommercial" name="commercial">&nbsp;&nbsp;Commercial
+                            <label for="JScommercial"></label>
                         </div>
                         <div class="checkbox_alt">
                             <input type="checkbox" value="1" id="JSfree" name="free">&nbsp;&nbsp;Non-Commercial
@@ -158,10 +153,18 @@ function gameinsert()
                             <input type="checkbox" value="1" id="JSstac" name="stac">&nbsp;&nbsp;STAC
                             <label for="JSstac"></label>
                         </div>
+                        <div class="checkbox_alt">
+                            <input type="checkbox" value="1" id="JSscreenshot" name="no_screenshot">&nbsp;&nbsp;No Screenshot
+                            <label for="JSscreenshot"></label>
+                        </div>
+                        <div class="checkbox_alt">
+                            <input type="checkbox" value="1" id="JSboxscan" name="no_boxscan">&nbsp;&nbsp;No Boxscan
+                            <label for="JSboxscan"></label>
+                        </div>
                     </div>
                     <br>
                     <input type="hidden" name="action" id="action_quick_search" value="search">
-                    <input type="submit" value="Search" class="quick_search_games_button">
+                    <input type="button" value="Reset" class="primary_button" id="JSResetButton">
                     <br><br>
                     <hr>
                 </div>
