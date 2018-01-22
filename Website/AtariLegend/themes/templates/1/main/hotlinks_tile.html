@@ -17,26 +17,28 @@
 //****************************************************************************************
 *}
 {block name=hotlinks_tile}
+ {foreach from=$hotlinks item=hotlink}
     <div class="{$hotlinks_tile}">
         <div class="standard_tile">
             <h1><a href="#" class="standard_tile_link">HOT LINKS</a></h1>
             <div class="standard_tile_line"></div>
                 <div class="grid">
                     <figure class="effect-tile" style="margin:0px;">
-                    <a href="{$hotlinks.website_url}" class="standard_tile_link"><img class="standard_tile_image" src="../../includes/show_image.php?file={$hotlinks.website_img}&amp;resize=410,null,null,null&amp;crop=left,top,410,260&amp;minimum_size=410,260" alt="hot links"></a>
+                    <a href="{$hotlink->getUrl()}" class="standard_tile_link"><img class="standard_tile_image" src="../../includes/show_image.php?file={$hotlink->getImage()}&amp;resize=410,null,null,null&amp;crop=left,top,410,260&amp;minimum_size=410,260" alt="hot links"></a>
                     <figcaption>
                         <span class="standard_tile_subtext" style="left: 5%; position: absolute; top: 50%;">Random Link</span><span class="tile_arrow"><i class="fa fa-chevron-up" aria-hidden="true"></i></span>
-                        <span class="tile_title"><a href="#">{$hotlinks.website_name}</a></span>
+                        <span class="tile_title"><a href="{$hotlink->getUrl()}">{$hotlink->getName()}</a></span>
                     </figcaption>
                     </figure>
                 </div>
             <div class="standard_tile_explanation">
                 <br>
-                <h6>{$hotlinks.website_text}</h6>
+                <h6>{$hotlink->getDescription()}</h6>
                 <br>
-                <span class="standard_tile_subtext">by <a href="#">{$hotlinks->getUser()}</a>, {$hotlinks->getDate()|date_format}</span>
-                <br><h2><a href="#" class="standard_tile_link">More&nbsp;&nbsp;<i class="fa fa-chevron-right" aria-hidden="true"></i></a></h2>
+                <span class="standard_tile_subtext">by <a href="#">{$hotlink->getUser()}</a>, {$hotlink->getDate()|date_format}</span>
+                <br><h2><a href="{$hotlink->getUrl()}" class="standard_tile_link">More&nbsp;&nbsp;<i class="fa fa-chevron-right" aria-hidden="true"></i></a></h2>
             </div>
         </div>
     </div>
+  {/foreach}
 {/block}

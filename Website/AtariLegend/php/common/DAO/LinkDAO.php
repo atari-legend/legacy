@@ -160,8 +160,8 @@ class LinkDAO {
 						website.website_url,
 						website.website_imgext,
                         website.website_date,
-                        website.website_date,
                         website.description,
+                        website.inactive,
 						users.userid
 						FROM website
 						LEFT JOIN users ON ( website.user_id = users.user_id )
@@ -173,12 +173,12 @@ class LinkDAO {
         \AL\Db\bind_result(
              "LinkDAO: Get random link",
             $stmt,
-            $id, $name, $url, $imgext,  $date, $user, $description, $user 
+            $id, $name, $url, $imgext, $date, $description, $inactive, $user 
         );
 
         $links = [];
         while ($stmt->fetch()) {
-            $links[] = new \AL\Common\Model\Link\Link($id, $name, $url, $imgext,  $date, $user, $description, $user);
+            $links[] = new \AL\Common\Model\Link\Link($id, $name, $url, $description, $imgext, $inactive, $user, $date);
         }
 
         $stmt->close();
