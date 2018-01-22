@@ -46,6 +46,15 @@ while ($company_developer = $sql_developer->fetch_array(MYSQLI_BOTH)) {
             'comp_name' => $company_developer['pub_dev_name']));
 }
 
+//Get Year values to fill the searchfield
+$sql_year = $mysqli->query("SELECT distinct game_year from game_year order by game_year")
+                     or die("problems getting data from game_year table");
+
+while ($game_year = $sql_year->fetch_array(MYSQLI_BOTH)) {
+    $smarty->append('game_year', array(
+            'game_year' => $game_year['game_year']));
+}
+
 // Create dropdown values a-z
 $az_value = az_dropdown_value(0);
 $az_output = az_dropdown_output(0);
