@@ -17,5 +17,5 @@
 require_once __DIR__."/../../common/DAO/LinkDAO.php";
 $linkDao = new AL\Common\DAO\LinkDAO($mysqli);
 
-$smarty->assign('hotlinks', $linkDao->selectRandomLink(1));
+$smarty->assign('hotlinks', $linkDao->getRandomLink());
 ?>
