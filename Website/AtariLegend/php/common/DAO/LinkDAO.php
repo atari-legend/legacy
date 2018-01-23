@@ -30,6 +30,7 @@ class LinkDAO {
                 website_imgext,
                 website.inactive,
                 users.userid,
+                users.user_id,
                 website_date,
                 website_category.website_category_id,
                 website_category_name
@@ -66,12 +67,12 @@ class LinkDAO {
         \AL\Db\bind_result(
             "LinkDAO: Get all links",
             $stmt,
-            $id, $name, $url, $description, $imgext, $inactive, $user, $date, $category_id, $category_name
+            $id, $name, $url, $description, $imgext, $inactive, $user, $userid, $date, $category_id, $category_name
         );
 
         $links = [];
         while ($stmt->fetch()) {
-            $links[] = new \AL\Common\Model\Link\Link($id, $name, $url, $description, $imgext, $inactive, $user, $date);
+            $links[] = new \AL\Common\Model\Link\Link($id, $name, $url, $description, $imgext, $inactive, $user, $date, $userid);
         }
 
         $stmt->close();
@@ -98,12 +99,12 @@ class LinkDAO {
         \AL\Db\bind_result(
             "LinkDAO: Get all links",
             $stmt,
-            $id, $name, $url, $description, $imgext, $inactive, $user, $date, $category_id, $category_name
+            $id, $name, $url, $description, $imgext, $inactive, $user, $userid, $date, $category_id, $category_name
         );
 
         $links = [];
         while ($stmt->fetch()) {
-            $links[] = new \AL\Common\Model\Link\Link($id, $name, $url, $description, $imgext, $inactive, $user, $date);
+            $links[] = new \AL\Common\Model\Link\Link($id, $name, $url, $description, $imgext, $inactive, $user, $date, $userid);
         }
 
         $stmt->close();
@@ -144,6 +145,47 @@ class LinkDAO {
         $stmt->close();
 
         return $count;
+    }
+    
+    /**
+     * Select a random link
+     *
+     * @param integer $limit how many random links are sent back
+     */
+    public function getRandomLink() {
+        $stmt = \AL\Db\execute_query(
+            "LinkDAO: Get random link",
+            $this->_mysqli,
+            "SELECT     website.website_id,
+						website.website_name,
+						website.website_url,
+						website.website_imgext,
+                        website.website_date,
+                        website.description,
+                        website.inactive,
+						users.userid,
+                        users.user_id
+						FROM website
+						LEFT JOIN users ON ( website.user_id = users.user_id )
+						WHERE website.website_imgext <> ' ' and website.inactive = 0
+						ORDER BY RAND() LIMIT 1".
+                        null, null
+        );
+
+        \AL\Db\bind_result(
+             "LinkDAO: Get random link",
+            $stmt,
+            $id, $name, $url, $imgext, $date, $description, $inactive, $user, $userid
+        );
+
+        $links = null;
+        if ($stmt->fetch()) {
+            $links = new \AL\Common\Model\Link\Link($id, $name, $url, $description, $imgext, $inactive, $user, $date, $userid);
+        }
+
+        $stmt->close();
+
+        return $links;
     }
 
 }
