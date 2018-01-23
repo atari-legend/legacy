@@ -17,7 +17,7 @@
 include("../../config/common.php");
 
 //load the tiles
-include("../../common/tiles/screenstar.php");
+include("../../common/tiles/hotlinks_tile.php");
 include("../../common/tiles/did_you_know_tile.php");
 include("../../common/tiles/latest_comments_tile.php");
 include("../../common/tiles/tile_bug_report.php");

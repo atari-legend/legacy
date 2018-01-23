@@ -7,10 +7,6 @@
         color: white;
     }
 
-    a:hover {
-        color: #00d3d3;
-    }
-
     ul {
         list-style-type: none;
         margin: 1rem;
@@ -42,6 +38,10 @@
     }
 
     .link {
+        a:hover {
+            color: #00d3d3;
+        }
+
         &:nth-child(odd) {
             background-color: #0d2e2e;
         }
