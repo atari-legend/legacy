@@ -56,7 +56,7 @@
                             {else}
                                 <h4><a href="{$link->getUrl()}" target="_blank" title="Visit {$link->getName()|escape}">{$link->getName()}</a></h4>
                             {/if}
-                            <h5>Added on {$link->getDate()|date_format} <span>by {$link->getUser()}</span></h5>
+                            <h5>Added on {$link->getDate()|date_format} <span>by <a href="../../admin/user/user_detail.php?user_id_selected={$link->getUserid()}">{$link->getUser()}</a></span></h5>
 
                             <p>{$link->getDescription()}</p>
                         </div>
