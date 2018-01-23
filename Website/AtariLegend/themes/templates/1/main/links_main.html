@@ -42,8 +42,8 @@
                             <small class="inactive"><i class="fa fa-warning" aria-hidden="true"></i> Appears to be inactive</small>
                         {/if}
                         {if $link->getImage()}
-                            <a href="../../includes/show_image.php?file={$link->getImage()}&amp;resize=410,null,null,null" target="_blank" title="Screenshot of {$link->getName()|escape}" data-lightbox="image-1">
-                                <img src="{$link->getImage()}" alt="Screenshot of {$link->getName()|escape}">
+                            <a href="../../includes/show_image.php?file={$link->getImage()}" target="_blank" title="Screenshot of {$link->getName()|escape}" data-lightbox="image-1">
+                                <img src="../../includes/show_image.php?file={$link->getImage()}&amp;resize=160,null,null,null&amp;crop=left,top,160,115&amp;minimum_size=160,115" alt="Screenshot of {$link->getName()|escape}">
                             </a>
                         {else}
                             <div class="image_placeholder">
@@ -56,7 +56,7 @@
                             {else}
                                 <h4><a href="{$link->getUrl()}" target="_blank" title="Visit {$link->getName()|escape}">{$link->getName()}</a></h4>
                             {/if}
-                            <h5>Added on {$link->getDate()|date_format} <span>by {$link->getUser()}</span></h5>
+                            <h5>Added on {$link->getDate()|date_format} <span>by <a href="../../admin/user/user_detail.php?user_id_selected={$link->getUserid()}">{$link->getUser()}</a></span></h5>
 
                             <p>{$link->getDescription()}</p>
                         </div>

@@ -15,8 +15,9 @@ class Link {
     private $inactive;
     private $user;
     private $date;
+    private $userid;
 
-    public function __construct($id, $name, $url, $description, $imgext, $inactive, $user, $date) {
+    public function __construct($id, $name, $url, $description, $imgext, $inactive, $user, $date, $userid) {
         $this->id = $id;
         $this->name = $name;
         $this->url = $url;
@@ -24,6 +25,7 @@ class Link {
         $this->inactive = $inactive;
         $this->user = $user;
         $this->date = $date;
+        $this->userid = $userid;
 
         if ($imgext && $imgext !== "") {
             $this->image = $GLOBALS['website_image_path']."/${id}.${imgext}";
@@ -52,6 +54,10 @@ class Link {
 
     public function getUser() {
         return $this->user;
+    }
+    
+    public function getUserId() {
+        return $this->userid;
     }
 
     public function getDate() {
