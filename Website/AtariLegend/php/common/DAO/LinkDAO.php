@@ -148,28 +148,26 @@ class LinkDAO {
     }
     
     /**
-     * Select a random link
-     *
-     * @param integer $limit how many random links are sent back
-     */
+     * Get a random link
+    */
     public function getRandomLink() {
         $stmt = \AL\Db\execute_query(
             "LinkDAO: Get random link",
             $this->_mysqli,
-            "SELECT     website.website_id,
-						website.website_name,
-						website.website_url,
-						website.website_imgext,
-                        website.website_date,
-                        website.description,
-                        website.inactive,
-						users.userid,
-                        users.user_id
-						FROM website
-						LEFT JOIN users ON ( website.user_id = users.user_id )
-						WHERE website.website_imgext <> ' ' and website.inactive = 0
-						ORDER BY RAND() LIMIT 1".
-                        null, null
+            "SELECT website.website_id,
+                    website.website_name,
+                    website.website_url,
+                    website.website_imgext,
+                    website.website_date,
+                    website.description,
+                    website.inactive,
+                    users.userid,
+                    users.user_id
+                    FROM website
+                    LEFT JOIN users ON ( website.user_id = users.user_id )
+                    WHERE website.website_imgext <> ' ' and website.inactive = 0
+                    ORDER BY RAND() LIMIT 1".
+            null, null
         );
 
         \AL\Db\bind_result(
@@ -178,14 +176,14 @@ class LinkDAO {
             $id, $name, $url, $imgext, $date, $description, $inactive, $user, $userid
         );
 
-        $links = null;
+        $link = null;
         if ($stmt->fetch()) {
-            $links = new \AL\Common\Model\Link\Link($id, $name, $url, $description, $imgext, $inactive, $user, $date, $userid);
+            $link = new \AL\Common\Model\Link\Link($id, $name, $url, $description, $imgext, $inactive, $user, $date, $userid);
         }
 
         $stmt->close();
 
-        return $links;
+        return $link;
     }
 
 }
