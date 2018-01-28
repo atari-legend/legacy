@@ -370,7 +370,26 @@
             </header>
         </div>
         <div id="wrapper">
-            {block name=main_body}{/block}
+            <div id="main" class="main_container_cpanel">
+                <div class="content_box_cpanel" id="column_left_cpanel">
+                    <br>
+                    {block name=left_tile}
+                        {include file='1/admin/left_nav.html'}
+                    {/block}
+                </div>
+                <div class="content_box_cpanel" id="column_center_cpanel">
+                    <br>
+                    {block name=main_tile}{/block}
+                </div>
+                <div class="content_box_cpanel" id="column_right_cpanel">
+                    <br>
+                    {block name=right_tile}
+                        {include file='1/admin/quick_search_games.html'}
+                        <br>
+                        {include file='1/main/tile_bug_report.html'}
+                    {/block}
+                </div>
+            </div>
             <div class="main_online">
                 {block name=who_is_online}
                     {include file='1/admin/who_is_online.html'}
