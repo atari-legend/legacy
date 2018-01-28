@@ -17,11 +17,11 @@
 {extends file='1/main/main.html'}
 {block name=title}Latest Atari ST interviews | Atari Legend{/block}
 
-{block name=main_body}
+{block name=additional_scripts}
     <script src="{$template_dir}includes/js/vendor/jquery.dotdotdot-1.8.3.min.js"></script> <!--this script is used for the elipsis (...) effect of the preview of the reviews -->
     <script>
-        window.onload = function() {
-            $(".interview_main_text").dotdotdot({  <!--This is the script to truncate the preview of the reviews-->
+        jQuery(document).ready(function () {
+            $(".interview_main_text").dotdotdot({  // This is the script to truncate the preview of the reviews-->
                     //  configuration goes here
 
                 /*  The text to add as ellipsis. */
@@ -60,17 +60,22 @@
                     noEllipsis  : []
                 }
             });
-        };
+        });
     </script>
 
     <script src="{$template_dir}includes/js/vendor/lightbox-2.9.0.min.js"></script><!--lightbox popup script-->
-    <link type="text/css" href="{$style_dir}css/vendor/lightbox-2.9.0.css" hreflang="en" rel="stylesheet">
     <script>
         lightbox.option({
             'showImageNumberLabel': false
         })
     </script>
+{/block}
 
+{block name=additional_css}
+    <link type="text/css" href="{$style_dir}css/vendor/lightbox-2.9.0.css" hreflang="en" rel="stylesheet">
+{/block}
+
+{block name=main_body}}
     <div id="main" class="main_container_cpanel">
         <div class="content_box_cpanel" id="column_left_cpanel">
             <br>
