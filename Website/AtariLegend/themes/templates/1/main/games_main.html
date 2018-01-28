@@ -18,7 +18,7 @@ The main game page
 {extends file='1/main/main.html'}
 {block name=title}Search and browse Atari ST games | Atari Legend{/block}
 
-{block name=main_body}
+{block name=additional_scripts}
     {literal}
     <script> <!-- script needed for the autocompletion search engine -->
         $(document).ready(function() {
@@ -143,6 +143,9 @@ The main game page
         cat_drop_text.style.display='none';
     }
     </script>
+{/block}
+
+{block name=main_body}
     <div id="main" class="main_container_cpanel">
         <div class="content_box_cpanel" id="column_left_cpanel">
             <br>
