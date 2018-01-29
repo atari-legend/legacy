@@ -370,26 +370,28 @@
             </header>
         </div>
         <div id="wrapper">
-            <div id="main" class="main_container_cpanel">
-                <div class="content_box_cpanel" id="column_left_cpanel">
-                    <br>
-                    {block name=left_tile}
-                        {include file='1/admin/left_nav.html'}
-                    {/block}
-                </div>
-                <div class="content_box_cpanel" id="column_center_cpanel">
-                    <br>
-                    {block name=main_tile}{/block}
-                </div>
-                <div class="content_box_cpanel" id="column_right_cpanel">
-                    <br>
-                    {block name=right_tile}
-                        {include file='1/admin/quick_search_games.html'}
+            {block name=frontpage}
+                <div id="main" class="main_container_cpanel">
+                    <div class="content_box_cpanel" id="column_left_cpanel">
                         <br>
-                        {include file='1/main/tile_bug_report.html'}
-                    {/block}
+                        {block name=left_tile}
+                            {include file='1/admin/left_nav.html'}
+                        {/block}
+                    </div>
+                    <div class="content_box_cpanel" id="column_center_cpanel">
+                        <br>
+                        {block name=main_tile}{/block}
+                    </div>
+                    <div class="content_box_cpanel" id="column_right_cpanel">
+                        <br>
+                        {block name=right_tile}
+                            {include file='1/admin/quick_search_games.html'}
+                            <br>
+                            {include file='1/main/tile_bug_report.html'}
+                        {/block}
+                    </div>
                 </div>
-            </div>
+            {/block}
             <div class="main_online">
                 {block name=who_is_online}
                     {include file='1/admin/who_is_online.html'}
@@ -407,6 +409,13 @@
             <span class="scroll-top-inner">
                 <i class="fa fa-2x fa-arrow-circle-up"></i>
             </span>
+        </div>
+
+        <div id="JSGenericModal" title="" style="display:none;">
+            <p>
+                <span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
+                <div id="JSGenericModalText"></div>
+            </p>
         </div>
 
         <script src="{$template_dir}includes/js/vendor/md5-1.0.1.min.js"></script>  <!-- log on security script -->
