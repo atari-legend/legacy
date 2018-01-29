@@ -71,3 +71,13 @@ $(document).ready(function () {
         }, 500, 'linear');
     });
 });
+
+window.OSDMessageDisplay = function (message) {
+    $.notify_osd.create({
+        'text': message, // notification message
+        'icon': '../../../themes/styles/1/images/osd_icons/star.png', // icon path, 48x48
+        'sticky': false, // if true, timeout is ignored
+        'timeout': 4, // disappears after 6 seconds
+        'dismissable': true // can be dismissed manually
+    });
+}
