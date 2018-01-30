@@ -55,7 +55,7 @@ class Link {
     public function getUser() {
         return $this->user;
     }
-    
+
     public function getUserId() {
         return $this->userid;
     }
