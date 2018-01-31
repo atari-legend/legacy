@@ -18,10 +18,9 @@
 {extends file='1/main/main.html'}
 {block name=title}Add a review for {$game_info.game_name} (Atari ST) | Atari Legend{/block}
 
-{block name=main_body}
+{block name=additional_scripts}
     <!-- lightbox screenshot pop up script -->
     <script src="{$template_dir}includes/js/vendor/lightbox-2.9.0.min.js"></script>
-    <link type="text/css" href="{$style_dir}css/vendor/lightbox-2.9.0.css" hreflang="en" rel="stylesheet">
 
     <script>
         lightbox.option({
@@ -280,6 +279,62 @@
     </script>
     <script src="{$template_dir}includes/js/vendor/jquery.dotdotdot-1.8.3.min.js"></script> <!--this script is used for the elipsis (...) effect of the latest reviews tile -->
 
+    <script>
+        jQuery(document).ready(function() {
+            $(".standard_list_entry_news_text").dotdotdot({  // This is the script to truncate the latest interviews
+                    //  configuration goes here
+
+                /*  The text to add as ellipsis. */
+                ellipsis    : '... ',
+
+                /*  How to cut off the text/html: 'word'/'letter'/'children' */
+                wrap        : 'word',
+
+                /*  Wrap-option fallback to 'letter' for long words */
+                fallbackToLetter: false,
+
+                /*  jQuery-selector for the element to keep and put after the ellipsis. */
+                after       : null,
+
+                /*  Whether to update the ellipsis: true/'window' */
+                watch       : window,
+
+                /*  Optionally set a max-height, can be a number or function.
+                    If null, the height will be measured. */
+                height      : null,
+
+                /*  Deviation for the height-option. */
+                tolerance   : 0,
+
+                /*  Callback function that is fired after the ellipsis is added,
+                    receives two parameters: isTruncated(boolean), orgContent(string). */
+                callback    : function( isTruncated, orgContent ) {},
+
+                lastCharacter   : {
+
+                    /*  Remove these characters from the end of the truncated text. */
+                    remove      : [ ' ', ',', ';', '.', '!', '?' ],
+
+                    /*  Don't add an ellipsis if this array contains
+                        the last character of the truncated text. */
+                    noEllipsis  : []
+                }
+            });
+        });
+    </script>
+    <script>
+        // Get the element with id="defaultOpen" and click on it
+        jQuery(document).ready(function () {
+            document.getElementById("defaultOpen").click();
+        });
+    </script>
+{/block}
+
+{block name=additional_css}
+    <link type="text/css" href="{$style_dir}css/vendor/lightbox-2.9.0.css" hreflang="en" rel="stylesheet">
+{/block}
+
+{block name=main_body}
     <div id="main" class="main_container_games_details">
         <div class="content_box_games_details" id="column_left_reviews_details">
             <!--*****************************-->
@@ -503,57 +558,9 @@
             {else}
                 <br>
                 {include file='1/main/latest_comments_tile.html'}
-
-                <script>
-                window.onload = function() {
-                    $(".standard_list_entry_news_text").dotdotdot({  <!--This is the script to truncate the latest interviews-->
-                            //  configuration goes here
-
-                        /*  The text to add as ellipsis. */
-                        ellipsis    : '... ',
-
-                        /*  How to cut off the text/html: 'word'/'letter'/'children' */
-                        wrap        : 'word',
-
-                        /*  Wrap-option fallback to 'letter' for long words */
-                        fallbackToLetter: false,
-
-                        /*  jQuery-selector for the element to keep and put after the ellipsis. */
-                        after       : null,
-
-                        /*  Whether to update the ellipsis: true/'window' */
-                        watch       : window,
-
-                        /*  Optionally set a max-height, can be a number or function.
-                            If null, the height will be measured. */
-                        height      : null,
-
-                        /*  Deviation for the height-option. */
-                        tolerance   : 0,
-
-                        /*  Callback function that is fired after the ellipsis is added,
-                            receives two parameters: isTruncated(boolean), orgContent(string). */
-                        callback    : function( isTruncated, orgContent ) {},
-
-                        lastCharacter   : {
-
-                            /*  Remove these characters from the end of the truncated text. */
-                            remove      : [ ' ', ',', ';', '.', '!', '?' ],
-
-                            /*  Don't add an ellipsis if this array contains
-                                the last character of the truncated text. */
-                            noEllipsis  : []
-                        }
-                    });
-                };
-                </script>
             {/if}
             <br>
             {include file='1/main/tile_bug_report.html'}
         </div>
     </div>
-    <script>
-        // Get the element with id="defaultOpen" and click on it
-        document.getElementById("defaultOpen").click();
-    </script>
 {/block}
