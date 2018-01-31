@@ -20,5 +20,17 @@
 		<changefreq>monthly</changefreq>
 	</url>
 {/foreach}
-</urlset> 
+	<url>
+		<loc>{$smarty.const.REQUEST_SITEURL}/links/links_main.php</loc>
+		<changefreq>monthly</changefreq>
+	</url>
+{foreach from=$link_categories item=category}
+	{if $category->getCount() > 0}
+	<url>
+		<loc>{$smarty.const.REQUEST_SITEURL}/links/links_main.php?category_id={$category->getId()}</loc>
+		<changefreq>monthly</changefreq>
+	</url>
+	{/if}
+{/foreach}
+</urlset>
 
