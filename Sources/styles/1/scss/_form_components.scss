@@ -84,11 +84,7 @@
 .input_full {
     width: 100%;
 }
-#download_version,
-#download_info {
-    @extend .standard_input;
-    width: 95%;
-}
+
 #file_upload_game_detail {
     width: 60%;
 }
@@ -107,8 +103,9 @@
 
 .primary_button {
     margin-top: 5px;
+    margin-left: 3px;
     height: 27px;
-    font-size: 100%;
+    font-size: 10pt;
     color: #ffffff;
     cursor: pointer;
     padding-left: 15px;
@@ -126,14 +123,17 @@
 }
 
 label.primary_button {
-    padding-top: 4px;
-    padding-bottom: 3.5px;
+    padding-top: 5px;
+    padding-bottom: 2.5px;
+    height: 25px;
+    margin-right: 3px;
 }
 
 .secondary_button {
     margin-top: 5px;
+    margin-left: 3px;
     height: 27px;
-    font-size: 100%;
+    font-size: 10pt;
     color: #ffffff;
     cursor: pointer;
     padding-left: 15px;
@@ -151,6 +151,21 @@ label.primary_button {
 }
 
 label.secondary_button {
-    padding-top: 4px;
-    padding-bottom: 3.5px;
+    padding-top: 5px;
+    padding-bottom: 2.5px;
+    height: 25px;
+    margin-right: 3px;
+}
+
+.primary_textarea {
+    margin-top: 5px;
+    display: block;
+    width: 100%;
+    padding: .375rem .75rem;
+    line-height: 1.5;
+    color: #ffffff;
+    text-align: left;
+    background: #000000;
+    border: 1px solid #008b8b;
+    resize: vertical;
 }

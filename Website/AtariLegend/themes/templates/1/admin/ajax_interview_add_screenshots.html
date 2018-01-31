@@ -40,15 +40,15 @@
     {/if}
 {else}
     <div class="standard_tile_padding">
-        <fieldset class="primary_fieldset centered_fieldset">
+        <fieldset class="secondary_fieldset centered_fieldset">
             <legend class="primary_legend">Browse</legend>
-                <label for="file_upload" class="file_upload" onclick="myFunction()">Select file(s)</label>
+                <label for="file_upload" class="secondary_button" onclick="myFunction()">Select file(s)</label>
                 <input id="file_upload" type="file" name="image[]" multiple>
                 <input type="text" class="standard_input" id="file_upload_game_screenshots">&nbsp;
                 <br>
                 <br>
                 <input type="hidden" name="MAX_FILE_SIZE" value="100000">
-                <input type="button" value="Add" onclick="addScreenshottoInterview({$interview_id})" class="topbutton_cpanel">
+                <input type="button" value="Add" onclick="addScreenshottoInterview({$interview_id})" class="secondary_button">
         </fieldset>
     </div>
     </br>

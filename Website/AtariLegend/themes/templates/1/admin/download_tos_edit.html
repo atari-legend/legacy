@@ -44,15 +44,15 @@ function tosdelete(tos_id)
     <h1>EDIT TOS</h1>
     <div class="standard_tile_line"></div>
     <div class="standard_tile_padding">
-        <fieldset class="primary_fieldset centered_fieldset">
+        <fieldset class="secondary_fieldset centered_fieldset">
             <legend class="primary_legend">Edit TOS version</legend>
             <form action="../downloads/db_download_tos.php" method="post" name="post" id="tos_edit">
                 <b>Name :</b>
                 <input type="text" name="tos_name" value="{$tos_edit.tos_name_edit}" class="standard_input input_large">
                 <br>
                 <br>
-                <input type="submit" value="Update" style="padding:2px;" class="topbutton_cpanel_small">
-                <input type="submit" value="Delete" onClick="tosdelete({$tos_edit.tos_id_edit}); return false;" class="topbutton_cpanel_small">
+                <input type="submit" value="Update" class="secondary_button">
+                <input type="submit" value="Delete" onClick="tosdelete({$tos_edit.tos_id_edit}); return false;" class="secondary_button">
                 <input type="hidden" name="action" value="update">
                 <input type="hidden" name="tos_id" value="{$tos_edit.tos_id_edit}">
             </form>

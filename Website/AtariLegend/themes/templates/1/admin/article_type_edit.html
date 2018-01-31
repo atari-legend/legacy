@@ -44,13 +44,13 @@ function typedelete(article_type_id)
     <h1>{$article_type_edit.article_type_edit}</h1>
     <div class="standard_tile_line"></div>
     <div class="standard_tile_padding">
-        <fieldset class="primary_fieldset centered_fieldset">
+        <fieldset class="secondary_fieldset centered_fieldset">
             <legend class="primary_legend">Edit article type</legend>
             <form action="../articles/db_article_type.php" method="post" name="post" id="article_type_edit">
                 <b>Name :</b>
                 <input type="text" name="article_type_name" value="{$article_type_edit.article_type_edit}" class="standard_input input_large">
-                <input type="submit" value="Update" style="padding:2px;" class="topbutton_cpanel_small">
-                <input type="submit" value="Delete" onClick="typedelete({$article_type_edit.article_type_id_edit}); return false;" class="topbutton_cpanel_small">
+                <input type="submit" value="Update" class="secondary_button">
+                <input type="submit" value="Delete" onClick="typedelete({$article_type_edit.article_type_id_edit}); return false;" class="secondary_button">
                 <input type="hidden" name="action" value="update">
                 <input type="hidden" name="article_type_id" value="{$article_type_edit.article_type_id_edit}">
             </form>

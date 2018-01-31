@@ -49,7 +49,7 @@ $(function() {
         </div>
         <br>
         <br>
-        <fieldset class="primary_fieldset">
+        <fieldset class="secondary_fieldset">
             <legend class="primary_legend">Upload image</legend>
                 Image Name
                 <br>
@@ -58,16 +58,15 @@ $(function() {
                 <br>
                 Image File
                 <br>
-                <!--<input type="file" name="news_image">-->
-                <label for="file_upload" class="file_upload">Select file</label>
+                <label for="file_upload" class="secondary_button">Select file</label>
                 <input id="file_upload" type="file" name="news_image">
                 <input type="text" class="standard_input input_large" id="file_upload_user_detail">&nbsp;
                 <br>
                 <br>
                 <input type="hidden" name="action" id="action" value="image_upload">
                 <input type="hidden" name="user_id" id="user_id" value="{$user_id}">
-                <input type="submit" value="Submit" class="topbutton_cpanel_small">
-                <input type="reset" class="topbutton_cpanel_small">
+                <input type="submit" value="Submit" class="secondary_button">
+                <input type="reset" class="secondary_button">
         </fieldset>
     </div>
 </div>

@@ -210,7 +210,7 @@ function storeCaret(textEl) {
         </div>
         <br>
         <br>
-        <fieldset class="primary_fieldset">
+        <fieldset class="secondary_fieldset">
             <legend class="primary_legend">Edit Company</legend>
             <form action="../company/db_company_edit.php" method="post" name="post" id="comp_edit">
                 <b>Name :</b>
@@ -220,16 +220,16 @@ function storeCaret(textEl) {
                 <b>Profile :</b>
                 <br>
                 <br>
-                <input type="button" accesskey= "b" name="addbbcode0" value="B" onclick="bbstyle(0,'textfield')">
-                <input type="button" accesskey= "u" name="addbbcode4" value="U" onclick="bbstyle(4,'textfield')">
-                <input type="button" accesskey= "i" name="addbbcode2" value="I" onclick="bbstyle(2,'textfield')">
-                <input type="button" accesskey="w" name="addbbcode6" value="URL" onClick="bbstyle(6,'textfield')">
-                <input type="button" accesskey="x" name="addbbcode8" value="@" onClick="bbstyle(8,'textfield')">
-                <textarea name="textfield" id="game_review_textfield" ONSELECT="javascript:storeCaret(this);" ONCLICK="javascript:storeCaret(this);" ONKEYUP="javascript:storeCaret(this);" ONCHANGE="javascript:storeCaret(this);" rows="15" style="padding-left:0px;" >{$company.comp_profile}</textarea>
+                <input type="button" class="secondary_button" accesskey= "b" name="addbbcode0" value="B" onclick="bbstyle(0,'textfield')">
+                <input type="button" class="secondary_button" accesskey= "u" name="addbbcode4" value="U" onclick="bbstyle(4,'textfield')">
+                <input type="button" class="secondary_button" accesskey= "i" name="addbbcode2" value="I" onclick="bbstyle(2,'textfield')">
+                <input type="button" class="secondary_button" accesskey="w" name="addbbcode6" value="URL" onClick="bbstyle(6,'textfield')">
+                <input type="button" class="secondary_button" accesskey="x" name="addbbcode8" value="@" onClick="bbstyle(8,'textfield')">
+                <textarea name="textfield" rows="15" class="primary_textarea" ONSELECT="javascript:storeCaret(this);" ONCLICK="javascript:storeCaret(this);" ONKEYUP="javascript:storeCaret(this);" ONCHANGE="javascript:storeCaret(this);">{$company.comp_profile}</textarea>
                 <br>
                 <br>
-                <input type="submit" value="Update" class="topbutton_cpanel_small">
-                <input type="submit" value="Delete" onClick="companydelete({$company.comp_id}); return false;" class="topbutton_cpanel_small">
+                <input type="submit" value="Update" class="secondary_button">
+                <input type="submit" value="Delete" onClick="companydelete({$company.comp_id}); return false;" class="secondary_button">
                 <input type="hidden" name="action" value="update">
                 <input type="hidden" name="comp_id" value="{$company.comp_id}">
             </form>
@@ -238,26 +238,24 @@ function storeCaret(textEl) {
         </fieldset>
         <br>
         {if $company.comp_image !== 'none'}
-            <fieldset class="primary_fieldset">
+            <fieldset class="secondary_fieldset">
             <legend class="primary_legend">Company Logo</legend>
             <br>
                 <img src="../../includes/show_image.php?file={$company.comp_image}" alt="company logo" class="user_stats_img" id="user_details_img_dark">
                 <br>
-                <input type="button" onclick="company_pic_delete({$company.comp_id});" class="topbutton_cpanel_small" value="Delete">
-                <!--<a href="javascript:company_pic_delete({$company.comp_id});" class="left_nav_link">delete logo</a>-->
+                <input type="button" onclick="company_pic_delete({$company.comp_id});" class="secondary_button" value="Delete">
                 <br>
             </fieldset>
         {else}
             <form action="../company/db_company_edit.php" method="post" enctype="multipart/form-data" name="company_pic_form" id="compnay_pic_form">
-            <fieldset class="primary_fieldset">
+            <fieldset class="secondary_fieldset">
             <legend class="primary_legend">Company Logo</legend>
-                <!--<input type="file" name="company_pic">-->
-                <label for="file_upload" class="file_upload">Select file</label>
+                <label for="file_upload" class="secondary_button">Select file</label>
                 <input id="file_upload" type="file" name="company_pic">
                 <input type="text" class="standard_input input_large" id="file_upload_user_detail">&nbsp;
                 <br>
                 <br>
-                <input type="submit" name="inserter" value="Upload" class="topbutton_cpanel_small">
+                <input type="submit" name="inserter" value="Upload" class="secondary_button">
             </fieldset>
             <input type="hidden" name="action" value="add_logo">
             <input type="hidden" name="comp_id" value="{$company.comp_id}">

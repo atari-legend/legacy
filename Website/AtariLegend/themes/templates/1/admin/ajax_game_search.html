@@ -43,18 +43,18 @@
     </div>
     <br>
     <br>
-    <div id="games_list_4">
-        <table class="secondary_table_list table_hover table_sm">
+    <div class="table-responsive">
+        <table class="secondary_table_list table_hover table_sm text-nowrap">
             <tr>
-                <th class="game_name_column w-40">Game Name</th>
-                <th class="publisher_table_column w-20">Publisher</th>
-                <th class="developer_table_column w-20">Developer</th>
-                <th class="release_year_column w-10">Year</th>
-                <th class="information_table_column w-10">Info</th>
+                <th class="mw-40">Game Name</th>
+                <th class="mw-20">Publisher</th>
+                <th class="mw-20">Developer</th>
+                <th class="mw-10">Year</th>
+                <th class="mw-10">Info</th>
             </tr>
             {foreach from=$game_search item=line}
             <tr>
-                <td class="game_name_column">
+                <td>
                     {if $line.game_name != ''}
                         <a href="games_detail.php?game_id={$line.game_id}" class="standard_tile_text_left">
                             {$line.game_name}
@@ -63,7 +63,7 @@
                         <i><span class="standard_tile_text_left">n/a</span></i>
                     {/if}
                 </td>
-                <td class="publisher_table_column">
+                <td>
                     {if $line.publisher_name != ''}
                         <a href="#" class="standard_tile_text_left" onclick="JSPublisherSelect({$line.publisher_id})" value="{$line.publisher_id}">
                         {$line.publisher_name}
@@ -72,7 +72,7 @@
                         <i><span class="standard_tile_text_left">n/a</span></i>
                     {/if}
                 </td>
-                <td class="developer_table_column">
+                <td>
                     {if $line.developer_name != ''}
                         <a href="#" onclick="JSDeveloperSelect({$line.developer_id})" class="standard_tile_text_left">
                             {$line.developer_name}
@@ -81,7 +81,7 @@
                         <i><span class="standard_tile_text_left">n/a</span></i>
                     {/if}
                 </td>
-                <td class="release_year_column">
+                <td>
                     {if $line.year != ''}
                         <a href="#" onclick="JSYearSelect({$line.year})" class="standard_tile_text_left">
                             {$line.year}
@@ -90,7 +90,7 @@
                         <i><span class="standard_tile_text_left">n/a</span></i>
                     {/if}
                 </td>
-                <td class="information_table_column">
+                <td>
                     {if isset($line.screenshot)}
                         <a href="games_screenshot_add.php?game_id={$line.game_id}" class="standard_tile_text_left">
                             <i class="fa fa-camera" aria-hidden="true" title="Screenshots available"></i>

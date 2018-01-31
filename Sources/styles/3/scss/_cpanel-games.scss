@@ -158,10 +158,6 @@
     display: inline;
 }
 
-#gce_area {
-    width: 100%;
-}
-
 //*----------------------------------------------------------
 //Games upload
 //------------------------------------------------------------ */
@@ -174,21 +170,6 @@
 #gu_child_2 {
     width: 50%;
     margin-left: 2%;
-}
-
-//*----------------------------------------------------------
-//Games review add
-//------------------------------------------------------------ */
-#game_review_textfield {
-    @extend .standard_tile_input_area;
-    width: 99%;
-    height: 450px;
-}
-
-.game_review_screenshot_text {
-    @extend .standard_tile_input_area;
-    width: 75%;
-    height: 75px;
 }
 
 //*----------------------------------------------------------

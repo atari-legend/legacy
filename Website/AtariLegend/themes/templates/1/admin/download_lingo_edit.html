@@ -44,7 +44,7 @@ function lingodelete(lingo_id)
     <h1>EDIT LANGUAGE</h1>
     <div class="standard_tile_line"></div>
     <div class="standard_tile_padding">
-        <fieldset class="primary_fieldset centered_fieldset">
+        <fieldset class="secondary_fieldset centered_fieldset">
             <legend class="primary_legend">Edit Language</legend>
             <form action="../downloads/db_download_lingo.php" method="post" name="post" id="lingo_edit">
                 <b>Name :</b>
@@ -52,8 +52,8 @@ function lingodelete(lingo_id)
                 <input type="text" name="lingo_short" value="{$lingo_edit.lingo_short_edit}" class="standard_input input_large">
                 <br>
                 <br>
-                <input type="submit" value="Update" style="padding:2px;" class="topbutton_cpanel_small">
-                <input type="submit" value="Delete" onClick="lingodelete({$lingo_edit.lingo_id_edit}); return false;" class="topbutton_cpanel_small">
+                <input type="submit" value="Update" class="secondary_button">
+                <input type="submit" value="Delete" onClick="lingodelete({$lingo_edit.lingo_id_edit}); return false;" class="secondary_button">
                 <input type="hidden" name="action" value="update">
                 <input type="hidden" name="lingo_id" value="{$lingo_edit.lingo_id_edit}">
             </form>

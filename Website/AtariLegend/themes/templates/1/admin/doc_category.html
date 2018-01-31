@@ -33,8 +33,8 @@ The main doc category page
         <br>
         <br>
         <div class="main_company_container">
-            <div class="text-center" id="child_edit_company">
-                <fieldset class="primary_fieldset">
+            <div class="child_edit_company text-center">
+                <fieldset class="secondary_fieldset">
                     <legend class="primary_legend">Edit a doc category</legend>
                     <form action="../docs/doc_category_edit.php" method="post" name="ind_edit" id="ind_edit">
                         <select name="doc_category_id" class="standard_select select_large">
@@ -44,16 +44,16 @@ The main doc category page
                             {/foreach}
                         </select>
                         <input type="hidden" name="user_id" id="user_id" value="{$user_id}">
-                        <input type="submit" value="Edit" class="topbutton_cpanel_small">
+                        <input type="submit" value="Edit" class="secondary_button">
                     </form>
                 </fieldset>
             </div>
-            <div class="text-center" id="child_add_company">
-                <fieldset class="primary_fieldset">
+            <div class="child_add_company text-center">
+                <fieldset class="secondary_fieldset">
                     <legend class="primary_legend">Add a doc category</legend>
                     <form action="../docs/db_doc_category.php" method="post" name="ind_add" id="ind_add">
                         <input type="text" name="category_name" class="standard_input input_large">
-                        <input type="submit" value="Add" class="topbutton_cpanel_small">
+                        <input type="submit" value="Add" class="secondary_button">
                         <input type="hidden" name="action" id="action" value="insert_category">
                         <input type="hidden" name="user_id" id="user_id" value="{$user_id}">
                     </form>

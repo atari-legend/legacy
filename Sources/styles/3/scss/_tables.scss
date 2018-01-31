@@ -65,12 +65,6 @@
     padding-left: 15px;
     vertical-align: middle;
 }
-.menu_state_column,
-.menu_delete_column,
-.log_subname_column,
-.karma_points_tablecell {
-    text-align: right;
-}
 #menu_list_table {
     background-color: #294f4f;
 }
@@ -80,13 +74,7 @@
 #menu_list_table tr:nth-child(odd) {
     background-color: #efefef;
 }
-.db_result_column,
-.db_state_column,
-.db_id_column,
-.db_description_column,
-.db_exe_column {
-    text-align: center;
-}
+
 //*----------------------------------------------------------
 //Games comment
 //------------------------------------------------------------ */

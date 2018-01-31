@@ -121,19 +121,12 @@
     height: 250px;
 }
 
-#file_upload_game_screenshots {
-    width: 60%;
-}
-#file_upload_game_file {
-    width: 60%;
-}
-#file_upload_game_box {
-    width: 60%;
-}
+#file_upload_game_screenshots,
+#file_upload_game_file,
+#file_upload_game_box,
 #file_upload_game_music {
     width: 60%;
 }
-
 
 //*----------------------------------------------------------
 //Games comment edit
@@ -143,9 +136,6 @@
     display: inline;
 }
 
-#gce_area {
-    width: 100%;
-}
 //*----------------------------------------------------------
 //Games upload
 //------------------------------------------------------------ */
@@ -156,21 +146,6 @@
 #gu_child_2 {
     width: 50%;
     margin-left: 2%;
-}
-
-//*----------------------------------------------------------
-//Games review add
-//------------------------------------------------------------ */
-#game_review_textfield {
-    @extend .standard_tile_input_area;
-    width: 99%;
-    height: 450px;
-}
-
-.game_review_screenshot_text {
-    @extend .standard_tile_input_area;
-    width: 75%;
-    height: 75px;
 }
 
 //*----------------------------------------------------------

@@ -242,7 +242,7 @@ function storeCaret(textEl) {
         <br>
         <br>
         <form action="../games/db_games_review_edit.php" method="post" name="post">
-            <fieldset class="primary_fieldset">
+            <fieldset class="secondary_fieldset">
                 <legend class="primary_legend">Other reviews</legend>
                 {foreach from=$review item=line}
                     <b>Review {$line.review_nr} ::  <a href="../games/games_review_edit.php?reviewid={$line.review_id}&amp;game_id={$game.game_id}" class="left_nav_link">Edit</a> ::
@@ -251,7 +251,7 @@ function storeCaret(textEl) {
             </fieldset>
             <br>
             <br>
-            <fieldset class="primary_fieldset">
+            <fieldset class="secondary_fieldset">
                 <legend class="primary_legend">Edit review</legend>
                 <br>
                 <div style="display:inline-block;">
@@ -277,14 +277,14 @@ function storeCaret(textEl) {
                 <br>
                 <b>Review :</b>
                 <br>
-                <input type="button" accesskey= "b" name="addbbcode0" value="B" onclick="bbstyle(0,'textfield')">
-                <input type="button" accesskey= "u" name="addbbcode4" value="U" onclick="bbstyle(4,'textfield')">
-                <input type="button" accesskey= "i" name="addbbcode2" value="I" onclick="bbstyle(2,'textfield')">
-                <input type="button" accesskey="w" name="addbbcode6" value="URL" onClick="bbstyle(6,'textfield')">
-                <input type="button" accesskey="x" name="addbbcode8" value="@" onClick="bbstyle(8,'textfield')">
-                <input type="button" accesskey="screenstar" name="addbbcode14" value="Screenstar" onClick="bbstyle(14,'textfield')">
-                <input type="button" accesskey="frontpage" name="addbbcode16" value="Frontpage" onClick="bbstyle(16,'textfield')">
-                <textarea name="textfield" id="game_review_textfield" ONSELECT="javascript:storeCaret(this);" ONCLICK="javascript:storeCaret(this);" ONKEYUP="javascript:storeCaret(this);" ONCHANGE="javascript:storeCaret(this);" rows="15" >{$edit_review.review_text}</textarea>
+                <input type="button" class="secondary_button" accesskey= "b" name="addbbcode0" value="B" onclick="bbstyle(0,'textfield')">
+                <input type="button" class="secondary_button" accesskey= "u" name="addbbcode4" value="U" onclick="bbstyle(4,'textfield')">
+                <input type="button" class="secondary_button" accesskey= "i" name="addbbcode2" value="I" onclick="bbstyle(2,'textfield')">
+                <input type="button" class="secondary_button" accesskey="w" name="addbbcode6" value="URL" onClick="bbstyle(6,'textfield')">
+                <input type="button" class="secondary_button" accesskey="x" name="addbbcode8" value="@" onClick="bbstyle(8,'textfield')">
+                <input type="button" class="secondary_button" accesskey="screenstar" name="addbbcode14" value="Screenstar" onClick="bbstyle(14,'textfield')">
+                <input type="button" class="secondary_button" accesskey="frontpage" name="addbbcode16" value="Frontpage" onClick="bbstyle(16,'textfield')">
+                <textarea name="textfield" rows="15" class="primary_textarea" ONSELECT="javascript:storeCaret(this);" ONCLICK="javascript:storeCaret(this);" ONKEYUP="javascript:storeCaret(this);" ONCHANGE="javascript:storeCaret(this);">{$edit_review.review_text}</textarea>
                 <br>
                 <br>
                 <b>Graphics :</b><br>
@@ -298,7 +298,7 @@ function storeCaret(textEl) {
                 <br>
             </fieldset>
             <br>
-            <fieldset class="primary_fieldset centered_fieldset">
+            <fieldset class="secondary_fieldset centered_fieldset">
                 <legend class="primary_legend">Screenshots</legend>
                 <br>
                 {if $screenshots_nr <> 0}
@@ -307,7 +307,7 @@ function storeCaret(textEl) {
                         <br>
                         <br>
                         add comment : <br>
-                        <input class="game_review_screenshot_text" type="text" name="inputfield[]" value="{$line.screenshot_comment}">
+                        <textarea rows="4" class="primary_textarea" name="inputfield[]">{$line.screenshot_comment}</textarea>
                         <br>
                         {if $line.screenshot_comment <> ''}
                             <a href="javascript:deletecomment({$game.game_id},{$reviewid},{$line.screenshot_id})" class="left_nav_link">
@@ -327,13 +327,13 @@ function storeCaret(textEl) {
                 <input type="hidden" name="action" value="{if isset($action) and $action == 'submitted'}submitted{else}edit_review{/if}">
                 <input type="hidden" name="game_id" value="{$game.game_id}">
                 <input type="hidden" name="reviewid" value="{$reviewid}">
-                <input type="submit" name="Create Review" value="{if isset($action) and $action == 'submitted'}Submit review{else}Edit{/if}" class="topbutton_cpanel_small" {if isset($action) and $action == 'submitted'}style="padding:2px;width:200px;"{/if}>
+                <input type="submit" name="Create Review" value="{if isset($action) and $action == 'submitted'}Submit review{else}Edit{/if}" class="secondary_button">
                 {if isset($action) and $action == 'submitted'}
-                    <input type="button" name="delete" value="Delete submission" onclick="deleteSubmission({$reviewid},{$game.game_id})" style="padding:2px;width:200px;" class="topbutton_cpanel_small">
+                    <input type="button" name="delete" value="Delete submission" onclick="deleteSubmission({$reviewid},{$game.game_id})" class="secondary_button">
                 {else}
-                    <input type="button" name="delete" value="Delete" onclick="deletereview({$reviewid},{$game.game_id})" style="padding:2px;" class="topbutton_cpanel_small">
+                    <input type="button" name="delete" value="Delete" onclick="deletereview({$reviewid},{$game.game_id})" class="secondary_button">
                 {/if}
-                <input type="button" name="delete" value="Move to Comments" onclick="move_to_comment({$reviewid},{$game.game_id})" class="topbutton_cpanel" style="padding:2px;width:200px;">
+                <input type="button" name="delete" value="Move to Comments" onclick="move_to_comment({$reviewid},{$game.game_id})" class="secondary_button">
                 <br>
                 <br>
             </fieldset>

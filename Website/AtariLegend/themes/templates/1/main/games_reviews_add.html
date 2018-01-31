@@ -435,12 +435,12 @@
                         <div class="standard_tile_padding">
                             <h6>Review :</h6>
                             <div style="width:100%;text-align:left;margin-top:10px;">
-                                <input type="button" accesskey= "b" name="addbbcode0" value="B" onclick="bbstyle(0,'textfield')" class="quick_search_games_button" style="min-width:20px;width:0;display:inline;" title="Bold">
-                                <input type="button" accesskey= "u" name="addbbcode4" value="U" onclick="bbstyle(4,'textfield')" class="quick_search_games_button" style="min-width:20px;width:0;display:inline;" title="Underline">
-                                <input type="button" accesskey= "i" name="addbbcode2" value="I" onclick="bbstyle(2,'textfield')" class="quick_search_games_button" style="min-width:20px;width:0;display:inline;" title="Recursive">
-                                <input type="button" accesskey="w" name="addbbcode6" value="URL" onClick="bbstyle(6,'textfield')" class="quick_search_games_button" style="min-width:40px;width:0;display:inline;" title="Add links">
-                                <input type="button" accesskey="x" name="addbbcode8" value="@" onClick="bbstyle(8,'textfield')" class="quick_search_games_button" style="min-width:20px;width:0;display:inline;" title="Add email address">
-                                <textarea name="textfield" id="game_review_textfield" ONSELECT="javascript:storeCaret(this);" ONCLICK="javascript:storeCaret(this);" ONKEYUP="javascript:storeCaret(this);" ONCHANGE="javascript:storeCaret(this);" rows="15" placeholder="Review (required)" required></textarea>
+                                <input type="button" accesskey= "b" name="addbbcode0" value="B" onclick="bbstyle(0,'textfield')" class="primary_button" title="Bold">
+                                <input type="button" accesskey= "u" name="addbbcode4" value="U" onclick="bbstyle(4,'textfield')" class="primary_button" title="Underline">
+                                <input type="button" accesskey= "i" name="addbbcode2" value="I" onclick="bbstyle(2,'textfield')" class="primary_button" title="Recursive">
+                                <input type="button" accesskey="w" name="addbbcode6" value="URL" onClick="bbstyle(6,'textfield')" class="primary_button" title="Add links">
+                                <input type="button" accesskey="x" name="addbbcode8" value="@" onClick="bbstyle(8,'textfield')" class="primary_button" title="Add email address">
+                                <textarea name="textfield" rows="15" class="primary_textarea" id="game_review_textfield" ONSELECT="javascript:storeCaret(this);" ONCLICK="javascript:storeCaret(this);" ONKEYUP="javascript:storeCaret(this);" ONCHANGE="javascript:storeCaret(this);" placeholder="Review (required)" required></textarea>
                             </div>
                             <br>
                             <h6>Score :</h6>
@@ -479,7 +479,7 @@
                             <br>
                             <input type="hidden" name="action" value="add_review">
                             <input type="hidden" name="game_id" value="{$game_info.game_id}">
-                            <input type="submit" value="Add" class="quick_search_games_button" style="margin-bottom:10px;">
+                            <input type="submit" value="Add" class="primary_button" style="margin-bottom:10px;">
                         </div>
                     </form>
                     <!--**************************-->

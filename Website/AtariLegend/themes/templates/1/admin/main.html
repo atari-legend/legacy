@@ -32,6 +32,8 @@
         <link type="text/css" href="{$style_dir}css/style.css" rel="stylesheet" id="main_stylesheet">
         <link type="text/css" href="{$style_dir}css/vendor/jquery-ui-1.11.4.custom-theme.css" rel="Stylesheet">
         <link type="text/css" href="{$style_dir}css/vendor/notify-osd-51f8de7.css" hreflang="en" rel="stylesheet">
+        <link type="text/css" href="{$style_dir}css/vendor/font-awesome-4.7.0/css/font-awesome.min.css" hreflang="en" rel="stylesheet"> <!-- Font awesome for icons-->
+
         <!-- start - get the icons used for mobile devices -->
         <link rel="icon" href="{$template_dir}includes/icons/favicon.png"> <!-- fav icon & Chrome mobile icon-->
         <link rel="apple-touch-icon" sizes="57x57" href="{$template_dir}includes/icons/icon-57x57.png">
@@ -247,7 +249,7 @@
                                                 <label for="remember_me"></label>&nbsp;Remember me
                                             </div>
                                             <br>
-                                            <input type="submit" value="Sign in" class="topbutton_cpanel_small">
+                                            <input type="submit" value="Sign in" class="primary_button">
                                             <br><br>
                                             <span class="log_on_text"><a href="../../main/front/front.php?action=reset" class="standard_tile_link_black"><i class="fa fa-angle-double-right" aria-hidden="true"></i>&nbsp;Forgot password?</a></span>
                                             <br>
@@ -262,7 +264,7 @@
                                             <span class="log_on_text"><a href="../../admin/user/user_detail.php?user_id_selected={$user_session.user_id}" class="standard_tile_link_black"><i class="fa fa-user-circle-o" aria-hidden="true"></i>&nbsp; User Profile</a></span>
                                             <br><br>
                                             <input type="hidden" name="action" value="cpanel">
-                                            <input type="Submit" value="Sign out" class="topbutton_cpanel_small">
+                                            <input type="Submit" value="Sign out" class="primary_button">
                                         </fieldset>
                                         </form>
                                     {/if}
