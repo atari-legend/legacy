@@ -29,7 +29,8 @@ class LinkCategoryDAO {
                 COUNT(website_category_cross_id)
             FROM
                 website_category
-            LEFT JOIN website_category_cross ON website_category.website_category_id = website_category_cross.website_category_id
+            LEFT JOIN website_category_cross
+                ON website_category.website_category_id = website_category_cross.website_category_id
             GROUP BY
                 website_category.website_category_id
             ORDER BY
@@ -56,7 +57,7 @@ class LinkCategoryDAO {
     /**
      * Retrieve a specific category
      *
-     * @param integer $category_id ID of the category to retrieve
+     * @param  integer $category_id ID of the category to retrieve
      * @return AL\Common\Model\Link\LinkCategory Category
      */
     public function getCategory($category_id) {
