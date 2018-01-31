@@ -13,9 +13,9 @@
 *
 ***************************************************************************/
 *}
-{extends file='1/admin/frontpage.html'}
+{extends file='1/admin/main.html'}
 {block name=java_script}
-<script src="{$template_dir}includes/js/menus.js"></script>
+<script src="{$template_dir}includes/js/vendor/jquery.ajaxQueue-0.1.1.min.js"></script>
 <script src="{$template_dir}includes/js/user_management.js"></script>
 {/block}
 
@@ -28,12 +28,6 @@
 {/block}
 
 {block name=main_tile}
-<div id="JSGenericModal" title="Delete Title?" style="display:none;">
-    <p>
-        <span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
-        <div id="JSGenericModalText">Are you sure?</div>
-    </p>
-</div>
 <form action="test" name="user_list" id="user_list">
 <div class="standard_tile">
     <div class="help-tip">

@@ -4,61 +4,6 @@
  *
  */
 
-// This handles the queues
-(function ($) {
-    // jQuery on an empty object, we are going to use this as our Queue
-    var ajaxQueue = $({});
-
-    $.ajaxQueue = function (ajaxOpts) {
-        var jqXHR,
-            dfd = $.Deferred(),
-            promise = dfd.promise();
-
-        // run the actual query
-        function doRequest (next) {
-            jqXHR = $.ajax(ajaxOpts);
-            jqXHR.done(dfd.resolve)
-                .fail(dfd.reject)
-                .then(next, next);
-        }
-
-        // queue our ajax request
-        ajaxQueue.queue(doRequest);
-
-        // add the abort method
-        promise.abort = function (statusText) {
-            // proxy abort to the jqXHR if it is active
-            if (jqXHR) {
-                return jqXHR.abort(statusText);
-            }
-
-            // if there wasn't already a jqXHR we need to remove from queue
-            var queue = ajaxQueue.queue(),
-                index = $.inArray(doRequest, queue);
-
-            if (index > -1) {
-                queue.splice(index, 1);
-            }
-
-            // and then reject the deferred
-            dfd.rejectWith(ajaxOpts.context || ajaxOpts, [promise, statusText, '']);
-            return promise;
-        };
-
-        return promise;
-    };
-})(jQuery);
-
-function OSDMessageDisplay (message) {
-    $.notify_osd.create({
-        'text': message, // notification message
-        'icon': '../../../themes/styles/1/images/osd_icons/star.png', // icon path, 48x48
-        'sticky': false, // if true, timeout is ignored
-        'timeout': 4, // disappears after 6 seconds
-        'dismissable': true // can be dismissed manually
-    });
-}
-
 window.editDisk = function (str) {
     var diskEditAjax = 'diskedit_ajax_'.concat(str);
     $.ajax({
@@ -198,7 +143,7 @@ window.addGametoMenu = function (softwareId, menuDiskId, softwareType) {
             success: function (html) {
                 var returnHtml = html.split('[BRK]');
                 $('#JSMenuSoftwareList').html(returnHtml[0]);
-                OSDMessageDisplay(returnHtml[1]);
+                window.OSDMessageDisplay(returnHtml[1]);
             }
         });
     }
@@ -503,7 +448,7 @@ window.addAuthorstoMenutitle = function (menuDiskTitleId) {
             success: function (html) {
                 var returnHtml = html.split('[BRK]');
                 $('#author_list').html(returnHtml[0]);
-                OSDMessageDisplay(returnHtml[1]);
+                window.OSDMessageDisplay(returnHtml[1]);
             }
         });
     }
@@ -523,7 +468,7 @@ window.addDoctoMenu = function (softwareId, menuDiskId, softwareType) {
             success: function (html) {
                 var returnHtml = html.split('[BRK]');
                 $('#menu_doc_list').html(returnHtml[0]);
-                OSDMessageDisplay(returnHtml[1]);
+                window.OSDMessageDisplay(returnHtml[1]);
             }
         });
     }
@@ -548,7 +493,7 @@ window.addScreenshottoMenu = function (menuDiskId) {
             success: function (html) {
                 var returnHtml = html.split('[BRK]');
                 $('#JSMenuScreenshotList').html(returnHtml[0]);
-                OSDMessageDisplay(returnHtml[1]);
+                window.OSDMessageDisplay(returnHtml[1]);
                 document.getElementById('screenshot_add_to_menu').reset();
             }
         });
@@ -574,7 +519,7 @@ window.addFiletoMenu = function (menuDiskId) {
             success: function (html) {
                 var returnHtml = html.split('[BRK]');
                 $('#JSMenuFileList').html(returnHtml[0]);
-                OSDMessageDisplay(returnHtml[1]);
+                window.OSDMessageDisplay(returnHtml[1]);
                 document.getElementById('File_add_to_menu').reset();
             }
         });
@@ -596,7 +541,7 @@ window.linkChain = function (menuDiskTitleId, menuDiskId) {
             success: function (html) {
                 var returnHtml = html.split('[BRK]');
                 $('#JSMenuSoftwareList').html(returnHtml[0]);
-                OSDMessageDisplay(returnHtml[1]);
+                window.OSDMessageDisplay(returnHtml[1]);
                 $('#JSMenuDetailExpandSet').html('');
             }
         });
@@ -617,7 +562,7 @@ window.deleteChain = function (menuDiskTitleId, menuDiskId, titleName) {
             success: function (html) {
                 var returnHtml = html.split('[BRK]');
                 $('#JSMenuSoftwareList').html(returnHtml[0]);
-                OSDMessageDisplay(returnHtml[1]);
+                window.OSDMessageDisplay(returnHtml[1]);
                 $('#JSMenuDetailExpandSet').html('');
             }
         });
@@ -638,7 +583,7 @@ window.createChain = function (str, menuDiskId) {
             success: function (html) {
                 var returnHtml = html.split('[BRK]');
                 $('#JSMenuSoftwareList').html(returnHtml[0]);
-                OSDMessageDisplay(returnHtml[1]);
+                window.OSDMessageDisplay(returnHtml[1]);
                 $('#JSMenuDetailExpandSet').html('');
             }
         });
@@ -661,7 +606,7 @@ window.addCreditstoMenu = function (menuDiskId) {
             success: function (html) {
                 var returnHtml = html.split('[BRK]');
                 $('#menu_credit_list').html(returnHtml[0]);
-                OSDMessageDisplay(returnHtml[1]);
+                window.OSDMessageDisplay(returnHtml[1]);
                 document.getElementById('menu_credit_list').reset();
             }
         });
@@ -684,7 +629,7 @@ window.changeState = function (stateId, menuDiskId) {
             success: function (html) {
                 var returnHtml = html.split('[BRK]');
                 $('#' + diskEditAjax).html(returnHtml[0]);
-                OSDMessageDisplay(returnHtml[1]);
+                window.OSDMessageDisplay(returnHtml[1]);
                 document.getElementById(diskEditAjax).reset();
             }
         });
@@ -705,7 +650,7 @@ window.changeDoctype = function (docTypeId, docId, menuDiskId) {
             success: function (html) {
                 var returnHtml = html.split('[BRK]');
                 $('#menu_doc_list').html(returnHtml[0]);
-                OSDMessageDisplay(returnHtml[1]);
+                window.OSDMessageDisplay(returnHtml[1]);
                 document.getElementById('menu_doc_list').reset();
             }
         });
@@ -728,7 +673,7 @@ window.changeYear = function (yearId, menuDiskId) {
             success: function (html) {
                 var returnHtml = html.split('[BRK]');
                 $('#' + diskEditAjax).html(returnHtml[0]);
-                OSDMessageDisplay(returnHtml[1]);
+                window.OSDMessageDisplay(returnHtml[1]);
                 document.getElementById(diskEditAjax).reset();
             }
         });
@@ -751,7 +696,7 @@ window.changeParent = function (parentId, menuDiskId) {
             success: function (html) {
                 var returnHtml = html.split('[BRK]');
                 $('#' + diskEditAjax).html(returnHtml[0]);
-                OSDMessageDisplay(returnHtml[1]);
+                window.OSDMessageDisplay(returnHtml[1]);
                 document.getElementById(diskEditAjax).reset();
             }
         });
@@ -792,7 +737,7 @@ function deleteGamefromMenu (menuDiskTitleId, menuDiskId) {
             success: function (html) {
                 var returnHtml = html.split('[BRK]');
                 $('#JSMenuSoftwareList').html(returnHtml[0]);
-                OSDMessageDisplay(returnHtml[1]);
+                window.OSDMessageDisplay(returnHtml[1]);
             }
         });
     }
@@ -831,7 +776,7 @@ function deleteMenuDisk (menuDiskId) {
             if (html === 'Menudisk completely removed') {
                 $('#' + diskEditAjax).html('');
             }
-            OSDMessageDisplay(html);
+            window.OSDMessageDisplay(html);
         }
     });
 }
@@ -916,7 +861,7 @@ window.deleteScreenshotfromMenu = function (str, menuDiskId) {
                     success: function (html) {
                         var returnHtml = html.split('[BRK]');
                         $('#JSMenuScreenshotList').html(returnHtml[0]);
-                        OSDMessageDisplay(returnHtml[1]);
+                        window.OSDMessageDisplay(returnHtml[1]);
                     }
                 });
             },
@@ -948,7 +893,7 @@ window.deleteDownload = function (str, menuDiskId) {
                     success: function (html) {
                         var returnHtml = html.split('[BRK]');
                         $('#JSMenuFileList').html(returnHtml[0]);
-                        OSDMessageDisplay(returnHtml[1]);
+                        window.OSDMessageDisplay(returnHtml[1]);
                     }
                 });
             },
@@ -980,7 +925,7 @@ window.deleteDocfromMenu = function (str, menuDiskId) {
                     success: function (html) {
                         var returnHtml = html.split('[BRK]');
                         $('#menu_doc_list').html(returnHtml[0]);
-                        OSDMessageDisplay(returnHtml[1]);
+                        window.OSDMessageDisplay(returnHtml[1]);
                     }
                 });
             },
@@ -1052,7 +997,7 @@ window.deleteCredits = function (menuDiskCreditsId, menuDiskId) {
                     success: function (html) {
                         var returnHtml = html.split('[BRK]');
                         $('#menu_credit_list').html(returnHtml[0]);
-                        OSDMessageDisplay(returnHtml[1]);
+                        window.OSDMessageDisplay(returnHtml[1]);
                         document.getElementById('menu_credit_list').reset();
                     }
                 });
@@ -1084,7 +1029,7 @@ window.deleteTitleCredits = function (menuDiskTitleId, indId, authorTypeId) {
                     success: function (html) {
                         var returnHtml = html.split('[BRK]');
                         $('#author_list').html(returnHtml[0]);
-                        OSDMessageDisplay(returnHtml[1]);
+                        window.OSDMessageDisplay(returnHtml[1]);
                         document.getElementById('author_list').reset();
                     }
                 });
