@@ -97,7 +97,7 @@ function TestURL() {
         <br>
         <br>
         <form enctype="multipart/form-data" action="../links/db_links.php" method="post" name="linkmod">
-        <fieldset class="primary_fieldset">
+        <fieldset class="secondary_fieldset">
             <legend class="primary_legend">Website Data</legend>
             <div class="links_mod_container">
                 <div class="links_mod_row">
@@ -110,7 +110,7 @@ function TestURL() {
                     <div class="links_mod_text">URL</div>
                     <div class="links_mod_input">
                         <input type="text" name="website_url" id="website_url" value="{$website.website_url}" class="standard_input input_large">
-                        <input type="button" onclick="TestURL()" class="topbutton_cpanel_small" value="Test" style="margin-left:1px;">
+                        <input type="button" onclick="TestURL()" class="secondary_button" value="Test" style="margin-left:1px;">
                     </div>
                 </div>
                 <div class="links_mod_row">
@@ -121,7 +121,7 @@ function TestURL() {
                                     <option value="{$line.category_id}" {$line.selected}>{$line.category_name}</option>
                             {/foreach}
                         </select>
-                        <input type="button" name="add_category" value="Add" onClick="addcat(); return false;" class="topbutton_cpanel_small">
+                        <input type="button" name="add_category" value="Add" onClick="addcat(); return false;" class="secondary_button">
                     </div>
                 </div>
                 <div class="links_mod_row">
@@ -144,7 +144,11 @@ function TestURL() {
                 </div>
                 <div class="links_mod_row">
                     <div class="links_mod_text">Description</div>
-                    <div class="links_mod_input"><textarea name="website_description_text" class="standard_tile_input_area" id="text_area_big">{$website.website_description_text}</textarea></div>
+                    <div class="links_mod_input">
+                        <textarea name="website_description_text" class="primary_textarea" rows="7" id="text_area_big">
+                            {$website.website_description_text}
+                        </textarea>
+                    </div>
                 </div>
                 <br>
                 <div class="links_mod_row">
@@ -153,7 +157,6 @@ function TestURL() {
                         <div class="links_mod_checkbox">
                             <input type="checkbox" id="delete_image" name="delete_image" value="yes">
                             <label for="delete_image"></label>&nbsp;Delete Image?
-                            <!--<input type="checkbox" name="delete_image" id="delete_image" value="yes">-->
                         </div>
                     </div>
                     <div class="links_mod_input">
@@ -166,8 +169,7 @@ function TestURL() {
                     <div class="links_mod_input">
                         <input type="hidden" name="MAX_FILE_SIZE" value="100000000">
                         <input type="hidden" name="file_upload" value="yes">
-                        <!--<input type="file" name="image">-->
-                        <label for="file_upload" class="file_upload">Select file</label>
+                        <label for="file_upload" class="secondary_button">Select file</label>
                         <input id="file_upload" type="file" name="image">
                         <input type="text" class="standard_input input_large" id="file_upload_user_detail">&nbsp;
                         <br><br>
@@ -185,8 +187,8 @@ function TestURL() {
                 <br>
                 <input type="hidden" name="website_id" id="delete_id" value="{$website_id}">
                 <input type="hidden" name="action" value="modify_link">
-                <input type="submit" name="Modify" value="Modify" class="topbutton_cpanel_small">
-                <input type="button" name="delete" value="Delete" onClick="deletelink(); return false;" class="topbutton_cpanel_small">
+                <input type="submit" name="Modify" value="Modify" class="secondary_button">
+                <input type="button" name="delete" value="Delete" onClick="deletelink(); return false;" class="secondary_button">
             </div>
         </fieldset>
     </form>

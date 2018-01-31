@@ -18,8 +18,8 @@ On this page we link authors to a menu disk title
 *}
 
 <div class="main_company_container" style="width:95%; margin:auto;">
-    <div class="text-center" id="child_edit_company">
-        <fieldset class="primary_fieldset">
+    <div class="child_edit_company text-center">
+        <fieldset class="secondary_fieldset">
             <legend class="primary_legend">Authors</legend>
             <form action="" method="post" id="authors_form">
                 <select class="standard_select select_small" name="m1" onchange="browseInd(this.value)">
@@ -47,27 +47,29 @@ On this page we link authors to a menu disk title
                 <br>
                 <input type="hidden" value="add_author" name="action">
                 <input type="hidden" value="{$menu_disk_title_id}" name="menu_disk_title_id">
-                <input type="button" value="Add" onclick="addAuthorstoMenutitle({$menu_disk_title_id})" class="topbutton_cpanel_small">
+                <input type="button" value="Add" onclick="addAuthorstoMenutitle({$menu_disk_title_id})" class="secondary_button">
             </form>
         </fieldset>
     </div>
-    <div class="text-center" id="child_edit_company">
-        <fieldset class="primary_fieldset">
+    <div class="child_edit_company text-center">
+        <fieldset class="secondary_fieldset">
             <legend class="primary_legend">Linked authors - {$title_name}</legend>
             <div id="author_list">
                 {if isset($title_credits)}
                     <table class="primary_table_list w-95">
                     <tr>
-                        <th class="menu_credits_column w-45">Credits</th>
-                        <th class="menu_scene_column w-45">"Sceners"</th>
-                        <th class="menu_delete_column w-10"></th>
+                        <th class="w-45">Credits</th>
+                        <th class="w-45">"Sceners"</th>
+                        <th class="text-right w-10"></th>
                     </tr>
                     {foreach name=outer item=individual from=$title_credits}
                         <tr>
-                            <td class="menu_credits_column w-45">{$individual.author_type_info}</td>
-                            <td class="menu_scene_column w-45"><a href="../individuals/individuals_edit.php?ind_id={$individual.ind_id}" class="standard_tile_text_left">{$individual.ind_name}</a></td>
-                            <td class="menu_delete_column w-10">
-                                <input type="button" onclick="deleteTitleCredits({$menu_disk_title_id},{$individual.ind_id},{$individual.author_type_id})" class="quick_search_games_button" value="delete" style="margin-right:5px;">
+                            <td class="w-45">{$individual.author_type_info}</td>
+                            <td class="w-45">
+                                <a href="../individuals/individuals_edit.php?ind_id={$individual.ind_id}" class="standard_tile_text_left">{$individual.ind_name}</a>
+                            </td>
+                            <td class="text-right w-10">
+                                <input type="button" onclick="deleteTitleCredits({$menu_disk_title_id},{$individual.ind_id},{$individual.author_type_id})" class="secondary_button" value="delete" style="margin-right:5px;">
                             </td>
                         </tr>
                     {/foreach}

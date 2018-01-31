@@ -169,20 +169,6 @@
     background-color: #006f6f;
 }
 
-.db_result_column,
-.db_state_column,
-.db_id_column,
-.db_description_column,
-.db_exe_column {
-    text-align: center;
-}
-
-.menu_state_column,
-.karma_points_tablecell,
-.log_subname_column {
-    text-align: right;
-}
-
 //*----------------------------------------------------------
 //Games comment
 //------------------------------------------------------------ */
@@ -255,4 +241,28 @@
     &.table-bordered {
         border: 0;
     }
+}
+//scrollbar CHROME and SAFARI
+.table-responsive::-webkit-scrollbar {
+    width: 1em;
+}
+
+.table-responsive::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0 , 0 , .3);
+}
+
+.table-responsive::-webkit-scrollbar-thumb {
+    background-color: #008b8b;
+    outline: 1px solid #708090;
+}
+
+//scrollbar IE
+.table-responsive {
+    scrollbar-3dlight-color: #008b8b;
+    scrollbar-arrow-color: white;
+    scrollbar-base-color: #008b8b;
+    scrollbar-darkshadow-color: #008b8b;
+    scrollbar-face-color: #008b8b;
+    scrollbar-highlight-color: #122323;
+    scrollbar-shadow-color: #008b8b;
 }

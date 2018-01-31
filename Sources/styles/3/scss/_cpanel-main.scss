@@ -27,7 +27,6 @@
     margin-left: auto;
 }
 
-
 //*----------------------------------------------------------
 //Left nav
 //------------------------------------------------------------ */
@@ -68,27 +67,7 @@
 #quick_search_options,
 #quick_search_user_options {
     display: table;
-    width: 75%;
     margin-right: auto;
     margin-left: auto;
     text-align: left;
-}
-
-.quick_search_games_button {
-    width: 80px;
-    height: 25px;
-    margin-left: 2px;
-    font-size: 10pt;
-    font-weight: bold;
-    color: #ffffff;
-    cursor: pointer;
-    background: #161c71;
-    border: 2px solid #000000;
-    border-radius: 0 15px 15px 0;
-}
-
-.quick_search_games_button:hover {
-    color: #000000;
-    background: #dbd7d1;
-    border: 2px solid #4f4f4f;
 }

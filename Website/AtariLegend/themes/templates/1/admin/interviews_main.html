@@ -110,8 +110,8 @@
         <br>
         <br>
         <div class="main_company_container">
-            <div class="text-center" id="child_edit_company">
-                <fieldset class="primary_fieldset">
+            <div class="child_edit_company text-center">
+                <fieldset class="secondary_fieldset">
                     <legend class="primary_legend">Search Interview</legend>
                     <form action="../interviews/interviews_edit.php" method="post" name="search">
                         <select name="interview_id" class="standard_select select_large">
@@ -120,13 +120,13 @@
                                 <option value="{$line.interview_id}">{$line.ind_name}</option>
                             {/foreach}
                         </select>
-                        <input type="submit" value="Search" class="topbutton_cpanel_small">
+                        <input type="submit" value="Search" class="secondary_button">
                         <input type="hidden" name="action" value="search">
                     </form>
                 </fieldset>
             </div>
-            <div class="text-center" id="child_add_company">
-                <fieldset class="primary_fieldset">
+            <div class="child_add_company text-center">
+                <fieldset class="secondary_fieldset">
                     <legend class="primary_legend">Add an Interview</legend>
                     <form action="../interviews/db_interview.php" method="post" name="insert">
                         <a href="javascript:;" class="left_nav_link" id="individual_select_toggle" ><i class="fa fa-chevron-circle-down" aria-hidden="true" ></i></a>
@@ -139,7 +139,7 @@
                                 <option value="{$line.ind_id}">{$line.ind_name}</option>
                             {/foreach}
                         </select>
-                        <input type="submit" value="Add" class="topbutton_cpanel_small">
+                        <input type="submit" value="Add" class="secondary_button">
                         <input type="hidden" name="action" value="add_interview">
                         <input type="hidden" name="user_id" id="user_id" value="{$user_id}">
                     </form>

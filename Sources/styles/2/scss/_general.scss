@@ -259,9 +259,6 @@ h1 {
     border: 1px solid #b2b2b2;
 }
 
-#text_area_big {
-    height: 150px;
-}
 a.standard_tile_link:link {
     color: #ffffff;
     text-shadow: -1px 1px 8px #666666, 1px -1px 8px #515151;
@@ -298,9 +295,6 @@ a.standard_tile_link:focus {
 }
 .standard_tile_link_black:hover {
     color: #666666;
-}
-.standard_tile_link_button:link {
-    color: #000000;
 }
 .standard_list_entry {
     position: relative;
@@ -367,26 +361,6 @@ a.standard_tile_link:focus {
     display: none;
 }
 
-.file_upload {
-    width: 80px;
-    height: 25px;
-    font-size: 14px;
-    color: #182727;
-    text-shadow: -1px 1px 5px #ffffff, 1px -1px 15px #acacac;
-    cursor: pointer;
-    background: #ffffff;
-    border: 0;
-    border-bottom: 3px solid #000000;
-    border-left: 1px solid #000000;
-    padding: 4px 10px;
-}
-
-.file_upload:hover {
-    color: #ffffff;
-    background: #000000;
-    border-bottom: 3px solid #000000;
-}
-
 .selected {
     font-weight: bold;
 }
@@ -439,49 +413,33 @@ a.standard_tile_link:focus {
 .checkbox_alt {
     @extend .checkbox;
 }
-
-
-
-.topbutton_cpanel_small {
-    width: 80px;
-    height: 25px;
-    font-size: 15px;
-    color: #182727;
-    text-shadow: -1px 1px 5px #ffffff, 1px -1px 15px #acacac;
-    cursor: pointer;
-    background: #ffffff;
-    border: 0;
-    border-bottom: 3px solid #000000;
-    border-left: 1px solid #000000;
-}
-
-.topbutton_cpanel_small:hover {
-    color: #ffffff;
-    background: #000000;
-    border-bottom: 3px solid #000000;
-}
-
-.topbutton_cpanel {
-    @extend .topbutton_cpanel_small;
-    width: 120px;
-}
-
-.topbutton_cpanel:hover {
-    @extend .topbutton_cpanel_small:hover;
-}
-fieldset {
+.primary_fieldset {
     padding: 15px;
-    font-size: 16px;
-    color: #182727;
-    background: #eeeeee;
-    border: solid 1px #b2b2b2;
+    font-size: 11pt;
+    background: $bg_color;
+    border: solid 1px #000000;
 }
 
-legend {
+.primary_legend {
     padding: 1px 10px;
-    color: #000000;
-    background: #dbd7d1;
-    border: solid 2px #b2b2b2;
+    color: #ffffff;
+    background: #006f6f;
+    border: #000000 solid 1px;
+}
+
+.secondary_fieldset {
+    padding: 15px;
+    font-size: 11pt;
+    background: #294f4f;
+    color: #ffffff;
+    border: solid 1px #000000;
+}
+
+.secondary_legend {
+    padding: 1px 10px;
+    color: #ffffff;
+    background: $bg_color;
+    border: #000000 solid 1px;
 }
 
 //*------------------------------------------------------------

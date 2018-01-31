@@ -181,7 +181,7 @@ function storeCaret(textEl) {
         <br>
         <br>
         <form action="../articles/db_articles.php" method="post" name="post">
-            <fieldset class="primary_fieldset">
+            <fieldset class="secondary_fieldset">
                 <legend class="primary_legend">Add article</legend>
                 <div style="display:inline-block;">
                     <b>Title</b>
@@ -215,38 +215,36 @@ function storeCaret(textEl) {
                     <br>
                     <br>
                 </div>
-                <div style="width:100%;">
-                    <div style="width:20%;"><b>Date :</b></div>
+                    <div><b>Date :</b></div>
                     <div>{html_select_date start_year="2000" class="standard_select"}</div>
-                </div>
                 <br>
                 <br>
                 <b>Intro :</b>
                 <br>
                 <br>
-                <input type="button" accesskey= "b" name="addbbcode0" value="B" onclick="bbstyle(0,'textintro')">
-                <input type="button" accesskey= "u" name="addbbcode4" value="U" onclick="bbstyle(4,'textintro')">
-                <input type="button" accesskey= "i" name="addbbcode2" value="I" onclick="bbstyle(2,'textintro')">
-                <input type="button" accesskey="w" name="addbbcode6" value="URL" onClick="bbstyle(6,'textintro')">
-                <input type="button" accesskey="x" name="addbbcode8" value="@" onClick="bbstyle(8,'textintro')">
-                <textarea name="textintro" id="game_review_textfield" ONSELECT="javascript:storeCaret(this);" ONCLICK="javascript:storeCaret(this);" ONKEYUP="javascript:storeCaret(this);" ONCHANGE="javascript:storeCaret(this);" rows="5" style="padding-left:0px;" >
+                <input type="button" class="secondary_button" accesskey= "b" name="addbbcode0" value="B" onclick="bbstyle(0,'textintro')">
+                <input type="button" class="secondary_button" accesskey= "u" name="addbbcode4" value="U" onclick="bbstyle(4,'textintro')">
+                <input type="button" class="secondary_button" accesskey= "i" name="addbbcode2" value="I" onclick="bbstyle(2,'textintro')">
+                <input type="button" class="secondary_button" accesskey="w" name="addbbcode6" value="URL" onClick="bbstyle(6,'textintro')">
+                <input type="button" class="secondary_button" accesskey="x" name="addbbcode8" value="@" onClick="bbstyle(8,'textintro')">
+                <textarea name="textintro" rows="25" class="primary_textarea" ONSELECT="javascript:storeCaret(this);" ONCLICK="javascript:storeCaret(this);" ONKEYUP="javascript:storeCaret(this);" ONCHANGE="javascript:storeCaret(this);">
                 </textarea>
                 <br>
                 <br>
                 <b>Article :</b>
                 <br>
-                <input type="button" accesskey= "b" name="addbbcode0" value="B" onclick="bbstyle(0,'textfield')">
-                <input type="button" accesskey= "u" name="addbbcode4" value="U" onclick="bbstyle(4,'textfield')">
-                <input type="button" accesskey= "i" name="addbbcode2" value="I" onclick="bbstyle(2,'textfield')">
-                <input type="button" accesskey="w" name="addbbcode6" value="URL" onClick="bbstyle(6,'textfield')">
-                <input type="button" accesskey="x" name="addbbcode8" value="@" onClick="bbstyle(8,'textfield')">
-                <textarea name="textfield" id="game_review_textfield" ONSELECT="javascript:storeCaret(this);" ONCLICK="javascript:storeCaret(this);" ONKEYUP="javascript:storeCaret(this);" ONCHANGE="javascript:storeCaret(this);" rows="15" style="padding-left:0px;">
+                <input type="button" class="secondary_button" accesskey= "b" name="addbbcode0" value="B" onclick="bbstyle(0,'textfield')">
+                <input type="button" class="secondary_button" accesskey= "u" name="addbbcode4" value="U" onclick="bbstyle(4,'textfield')">
+                <input type="button" class="secondary_button" accesskey= "i" name="addbbcode2" value="I" onclick="bbstyle(2,'textfield')">
+                <input type="button" class="secondary_button" accesskey="w" name="addbbcode6" value="URL" onClick="bbstyle(6,'textfield')">
+                <input type="button" class="secondary_button" accesskey="x" name="addbbcode8" value="@" onClick="bbstyle(8,'textfield')">
+                <textarea name="textfield" rows="25" class="primary_textarea" ONSELECT="javascript:storeCaret(this);" ONCLICK="javascript:storeCaret(this);" ONKEYUP="javascript:storeCaret(this);" ONCHANGE="javascript:storeCaret(this);">
                 </textarea>
                 <br>
                 <br>
                 <input type="hidden" name="article_id" value="{if isset($article.article_id)}{$article.article_id}{/if}">
                 <input type="hidden" name="action" value="add_article">
-                <input type="submit" name="Create article" value="Create" class="topbutton_cpanel_small">
+                <input type="submit" name="Create article" value="Create" class="secondary_button">
             </fieldset>
         </form>
         <br>

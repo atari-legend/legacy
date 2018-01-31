@@ -64,30 +64,9 @@
 #quick_search_options,
 #quick_search_user_options {
     display: table;
-    width: 75%;
     margin-right: auto;
     margin-left: auto;
     text-align: left;
     font-weight: bold;
     padding-left: 2px;
-}
-.quick_search_games_button {
-    display: block;
-    width: 80px;
-    height: 25px;
-    padding-top: 3px;
-    margin-right: auto;
-    margin-left: auto;
-    font-size: 10pt;
-    color: #182727;
-    cursor: pointer;
-    background: #00d3d3;
-    border: 0;
-    border-bottom: 3px solid #008b8b;
-    border-left: 1px solid #007878;
-}
-.quick_search_games_button:hover {
-    color: #182727;
-    background: #00a9a9;
-    border-bottom: 3px solid #006f6f;
 }

@@ -25,6 +25,12 @@
     margin: 0;
 }
 
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
 html {
     overflow-x: hidden;
     overflow-y: scroll;
@@ -279,10 +285,6 @@ img {
     border: 1px solid #008b8b;
 }
 
-#text_area_big {
-    height: 150px;
-}
-
 .standard_tile_link:link {
     color: #ffffff;
 }
@@ -310,9 +312,6 @@ img {
 }
 .standard_tile_link_black:hover {
     color: #ffffff;
-}
-.standard_tile_link_button:link {
-    color: #000000;
 }
 .standard_list_entry {
     position: relative;
@@ -368,6 +367,12 @@ img {
 .standard_tile_padding {
     padding: 20px;
 }
+.standard_tile_padding_medium {
+    padding: 15px;
+}
+.standard_tile_padding_mini {
+    padding: 10px;
+}
 #other {
     border-right: 1px solid #007878;
 }
@@ -380,25 +385,6 @@ img {
 #file_upload,
 #file_upload2 {
     display: none;
-}
-
-.file_upload {
-    width: 80px;
-    height: 25px;
-    font-size: 10pt;
-    color: #ffffff;
-    cursor: pointer;
-    background: #122323;
-    border: 0;
-    border-bottom: 3px solid #122323;
-    border-left: 1px solid #122323;
-    padding: 3px 10px;
-}
-
-.file_upload:hover {
-    color: #ffffff;
-    background: #006f6f;
-    border-bottom: 3px solid #122323;
 }
 
 #file_upload_medium {
@@ -472,34 +458,6 @@ img {
     width: 100%;
 }
 
-
-.topbutton_cpanel_small {
-    width: 80px;
-    height: 25px;
-    font-size: 10pt;
-    color: #ffffff;
-    cursor: pointer;
-    background: #122323;
-    border: 0;
-    border-bottom: 3px solid #122323;
-    border-left: 1px solid #122323;
-}
-
-.topbutton_cpanel_small:hover {
-    color: #ffffff;
-    background: #006f6f;
-    border-bottom: 3px solid #122323;
-}
-
-.topbutton_cpanel {
-    @extend .topbutton_cpanel_small;
-    width: 120px;
-}
-
-.topbutton_cpanel:hover {
-    @extend .topbutton_cpanel_small:hover;
-}
-
 .primary_fieldset {
     padding: 15px;
     font-size: 11pt;
@@ -520,6 +478,16 @@ img {
     background: #294f4f;
     color: #ffffff;
     border: solid 1px #000000;
+
+    a:link {
+        color: #ffffff;
+    }
+    a:visited {
+        color: #ffffff;
+    }
+    a:hover {
+        color: #00d3d3;
+    }
 }
 
 .secondary_legend {

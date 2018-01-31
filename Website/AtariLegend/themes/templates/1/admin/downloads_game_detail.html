@@ -653,7 +653,7 @@ function deleteDownload(str, game_id) {
                 <input type="text" name="new_format_name" value="" class="standard_input input_large">
                 <br>
                 <br>
-                <input type="submit" value="Add" class="quick_search_games_button">
+                <input type="submit" value="Add" class="primary_button">
                 <input type="hidden" name="game_id" value="{$game.game_id}">
                 <input type="hidden" name="action" value="game_download_format_add">
             </form>
@@ -665,7 +665,7 @@ function deleteDownload(str, game_id) {
                 <input type="text" name="new_option_name" value="" class="standard_input input_large">
                 <br>
                 <br>
-                <input type="submit" value="Add" class="quick_search_games_button">
+                <input type="submit" value="Add" class="primary_button">
                 <input type="hidden" name="game_id" value="{$game.game_id}">
                 <input type="hidden" name="action" value="game_download_option_add">
             </form>
@@ -678,7 +678,7 @@ function deleteDownload(str, game_id) {
                 <input type="text" name="lingo_short" class="standard_input input_small">
                 <br>
                 <br>
-                <input type="submit" value="Add" class="quick_search_games_button">
+                <input type="submit" value="Add" class="primary_button">
                 <input type="hidden" name="game_id" value="{$game.game_id}">
                 <input type="hidden" name="action" value="game_download_lingo_add">
             </form>
@@ -690,7 +690,7 @@ function deleteDownload(str, game_id) {
                 <input type="text" name="new_tos_name_name" value="" class="standard_input input_large">
                 <br>
                 <br>
-                <input type="submit" value="Add" class="quick_search_games_button">
+                <input type="submit" value="Add" class="primary_button">
                 <input type="hidden" name="game_id" value="{$game.game_id}">
                 <input type="hidden" name="action" value="game_download_tos_add">
             </form>
@@ -702,7 +702,7 @@ function deleteDownload(str, game_id) {
                 <input type="text" name="new_trainer_name" value="" class="standard_input input_large">
                 <br>
                 <br>
-                <input type="submit" value="Add" class="quick_search_games_button">
+                <input type="submit" value="Add" class="primary_button">
                 <input type="hidden" name="game_id" value="{$game.game_id}">
                 <input type="hidden" name="action" value="game_download_trainer_add">
             </form>
@@ -724,16 +724,14 @@ function deleteDownload(str, game_id) {
         <br>
         <div class="standard_tile_padding">
             <form action="../downloads/db_downloads_game.php?action=add_download" enctype="multipart/form-data" method="post" name="add_file">
-            <fieldset class="primary_fieldset centered_fieldset">
+            <fieldset class="secondary_fieldset centered_fieldset">
                 <legend class="primary_legend">Add a new download</legend>
                 <br>
-                <label for="file_upload" class="file_upload">Select file</label>
+                <label for="file_upload" class="secondary_button">Select file</label>
                 <input id="file_upload" type="file" name="game_download_name">
                 <input type="text" class="standard_input input_large" id="file_upload_game_detail">&nbsp;
                 <br><br>
-                <!--<b>Filename :</b>
-                <input type="file" name="game_download_name" accept="application/x-zip-compressed,application/x-zip-compressed,application/x-zip-compressed">-->
-                <input type="submit" class="topbutton_cpanel_small" value="Upload" style="padding:2px;">
+                <input type="submit" class="secondary_button" value="Upload">
                 <input type="hidden" name="game_id" value="{$game.game_id}">
                 <br>
                 <br>
@@ -741,25 +739,27 @@ function deleteDownload(str, game_id) {
             </form>
         </div>
         <br>
-        <table class="secondary_table_list table_hover table_sm ">
-            <tr>
-                <th class="menu_disk_list_column w-30">Filename</th>
-                <th class="menu_state_column w-30">Date</th>
-            </tr>
-            {if isset($downloads)}
-                {foreach from=$downloads item=line}
-                    <tr id="downloadedit_ajax_{$line.game_download_id}">
-                        <td class="menu_disk_list_column w-30">{if $line.filename != ''}<a onclick="editDownload({$line.game_download_id},{$game.game_id})" style="cursor: pointer;">{$line.filename}</a>{else}<i>n/a</i>{/if}</td>
-                        <td class="menu_state_column w-30">{if isset($line.date)}{$line.date}{else}<i>n/a</i>{/if}</td>
-                    </tr>
-                {/foreach}
-            {/if}
-            <tr>
-                <td colspan="2">
-                    <b>{if $nr_downloads == 1}1 download found {else} {$nr_downloads} downloads found{/if}</b>
-                </td>
-            </tr>
-        </table>
+        <div class="table-responsive">
+            <table class="secondary_table_list table_hover table_sm text-nowrap">
+                <tr>
+                    <th class="w-50">Filename</th>
+                    <th class="text-right w-50">Date</th>
+                </tr>
+                {if isset($downloads)}
+                    {foreach from=$downloads item=line}
+                        <tr id="downloadedit_ajax_{$line.game_download_id}">
+                            <td>{if $line.filename != ''}<a onclick="editDownload({$line.game_download_id},{$game.game_id})" style="cursor: pointer;">{$line.filename}</a>{else}<i>n/a</i>{/if}</td>
+                            <td class="text-right">{if isset($line.date)}{$line.date}{else}<i>n/a</i>{/if}</td>
+                        </tr>
+                    {/foreach}
+                {/if}
+                <tr>
+                    <td colspan="2">
+                        <b>{if $nr_downloads == 1}1 download found {else} {$nr_downloads} downloads found{/if}</b>
+                    </td>
+                </tr>
+            </table>
+        </div>
     </div>
     <div class="standard_tile_text_center"><a href="javascript:history.go(-1)" class="standard_tile_link">back</a></div>
     <br>

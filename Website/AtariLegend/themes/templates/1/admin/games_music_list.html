@@ -31,27 +31,29 @@ The main game page
         </div>
         <br>
         <br>
-        <table class="secondary_table_list  table_hover table_md">
-        <tr>
-            <th class="game_gm_column w-50">Game Name</th>
-            <th class="pub_gm_column w-25">Publisher</th>
-            <th class="year_gm_column w-15">Year</th>
-            <th class="zaks_gm_column w-10">Zaks</th>
-        </tr>
-        {foreach from=$music item=line}
+        <div class="table-responsive">
+            <table class="secondary_table_list table_hover table_md text-nowrap">
             <tr>
-                <td class="game_gm_column w-50">{if $line.game_name != ''}<a href="games_music_detail.php?game_id={$line.game_id}" class="standard_tile_text_center">{$line.game_name}</a>{else}<i>n/a</i>{/if}</td>
-                <td class="pub_gm_column w-25">{if $line.game_publisher != ''}{$line.game_publisher}{else}<i>n/a</i>{/if}</td>
-                <td class="year_gm_column w-15">{if $line.game_year != ''}{$line.game_year}{else}<i>n/a</i>{/if}</td>
-                <td class="zaks_gm_column w-10">{if $line.number_zaks != ''}{$line.number_zaks}{else}<i>0</i>{/if}</td>
+                <th class="mw-50">Game Name</th>
+                <th class="mw-25">Publisher</th>
+                <th class="mw-15">Year</th>
+                <th class="mw-10">Zaks</th>
             </tr>
-        {/foreach}
-        <tr>
-            <td colspan="4">
-                {if $nr_of_entries == 1}1 game found {else} {$nr_of_entries} games found{/if} in {$querytime} sec
-            </td>
-        </tr>
-        </table>
+            {foreach from=$music item=line}
+                <tr>
+                    <td>{if $line.game_name != ''}<a href="games_music_detail.php?game_id={$line.game_id}" class="standard_tile_text_center">{$line.game_name}</a>{else}<i>n/a</i>{/if}</td>
+                    <td>{if $line.game_publisher != ''}{$line.game_publisher}{else}<i>n/a</i>{/if}</td>
+                    <td>{if $line.game_year != ''}{$line.game_year}{else}<i>n/a</i>{/if}</td>
+                    <td>{if $line.number_zaks != ''}{$line.number_zaks}{else}<i>0</i>{/if}</td>
+                </tr>
+            {/foreach}
+            <tr>
+                <td colspan="4">
+                    {if $nr_of_entries == 1}1 game found {else} {$nr_of_entries} games found{/if} in {$querytime} sec
+                </td>
+            </tr>
+            </table>
+        </div>
         <br>
         <div class="standard_tile_text_center"><a href="../games/games_music.php" class="standard_tile_link">back</a></div>
     </div>
