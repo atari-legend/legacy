@@ -117,7 +117,7 @@
                         <tr></tr>
                         <tr style="display:none;" id="profile{$line.pub_id}">
                             <td colspan="3" style="text-align:center;">
-                                <textarea cols="70" id="profile{$line.pub_id}" class="latest_comments_textarea" style="margin-top:5px;margin-bottom:5px;font-size:10pt;" readonly>
+                                <textarea id="profile{$line.pub_id}" class="primary_textarea" rows="5" style="margin-top:5px;margin-bottom:5px;font-size:10pt;margin-left:auto;margin-right:auto;" readonly>
                                     {$line.pub_profile}
                                 </textarea>
                             </td>
@@ -189,8 +189,8 @@
                     {if $line.pub_profile != ''}
                         <tr></tr>
                         <tr style="display:none;" id="profile{$line.pub_id}">
-                            <td colspan="3" style="text-align:center;">
-                                <textarea cols="70" id="profile{$line.pub_id}" class="latest_comments_textarea" style="margin-top:5px;margin-bottom:5px;font-size:10pt;" readonly>
+                            <td colspan="3">
+                                <textarea id="profile{$line.pub_id}" class="primary_textarea" rows="6" style="margin-top:5px;margin-bottom:5px;font-size:10pt;margin-left:auto;margin-right:auto;" readonly>
                                     {$line.pub_profile}
                                 </textarea>
                             </td>
@@ -254,9 +254,9 @@
                     {if $line.ind_profile != ''}
                         <tr></tr>
                         <tr style="display:none;" id="profile_ind{$line.ind_id}">
-                            <td colspan="3" style="text-align:center;">
-                                <textarea cols="70" id="profile_ind{$line.ind_id}" class="latest_comments_textarea" style="margin-top:5px;margin-bottom:5px;font-size:10pt;" readonly>
-                                    {$line.ind_profile}
+                            <td colspan="3">
+                                <textarea id="profile{$line.pub_id}" class="primary_textarea" rows="6" style="margin-top:5px;margin-bottom:5px;font-size:10pt;margin-left:auto;margin-right:auto;" readonly>
+                                    {$line.pub_profile}
                                 </textarea>
                             </td>
                         </tr>
