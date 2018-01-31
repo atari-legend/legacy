@@ -111,5 +111,14 @@ if (isset($minimum_width) or isset($minimum_height)) {
         $image = $image->resize($minimum_width, $minimum_height, 'fill', 'up');
     }
 }
+
+// Send LMD and cache headers to have the browser cache the file,
+// which should never change
+$filedate = filemtime($file_path);
+// Use @ to avoid any possible warnings related to timezone if the PHP
+// host is misconfigured
+@header("Last-Modified: ".date("D, d M Y G:i:s T", $filedate));
+header("Cache-Control: max-age=157680000");
+
 //set the compression in the config.php file
-$image->output('jpg', "$jpeg_compression");
+$image->output('jpg', $jpeg_compression);
