@@ -47,7 +47,18 @@
     background-color: #006f6f;
     border-collapse: collapse;
     border-bottom: solid 1px #000000;
+
+    a:link {
+        color: #00d3d3;
+    }
+    a:visited {
+        color: #00d3d3;
+    }
+    a:hover {
+        color: #ffffff;
+    }
 }
+
 .left_nav_link:link {
     color: #122323;
 }

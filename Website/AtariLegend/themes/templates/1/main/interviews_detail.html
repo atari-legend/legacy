@@ -568,14 +568,15 @@
                     <div id="latest_comments_all">
                     {if isset($comments)}
                         <div class="games_main_detail_comments_container">
-                                <table class="primary_table_list table_md">
-                                {foreach from=$comments item=line}
-                                    <tr>
-                                        <td>
-                                            <span class="standard_tile_subtext" style="font-weight:bold;float:left;margin-left:5px;margin-right:5px;margin-top:15px;">
+                            {assign var="number" value=1}
+                            {foreach from=$comments item=line}
+
+                                        <div {if $number is even}class="standard_list_entry standard_tile_padding_mini"{else}class="standard_list_entry_odd standard_tile_padding_mini"{/if} style="border-bottom: 1px solid black;">
+
+                                            <span class="standard_tile_subtext" style="font-weight:bold;float:left;">
                                                 <a href="../../admin/user/user_detail.php?user_id_selected={$line.user_id}">{$line.user_name}</a>
                                             </span>
-                                            <span class="standard_tile_subtext" style="font-weight:bold;float:right;display:inline;margin-left:5px;margin-right:5px;margin-top:15px;">
+                                            <span class="standard_tile_subtext" style="font-weight:bold;float:right;display:inline;">
                                                 {if isset($user_session)}
                                                     <span style="font-weight:bold;float:left;margin-left:5px;">
                                                     {if $user_session.user_id == $line.user_id}
@@ -603,16 +604,17 @@
                                             </span>
                                             <div class="latest_comments_text">
                                                 <div id="latest_comment_edit{$line.comment_id}"><div class="standard_link_color">{$line.comment}</div></div>
-                                                <div style="width:100%;text-align:center;"><textarea id="comment_input{$line.comment_id}" class="latest_comments_textarea" style="display:none;" cols="80">{$line.comment_edit}</textarea></div>
+                                                <div class="text-center">
+                                                    <textarea id="comment_input{$line.comment_id}" class="primary_textarea" rows="5" style="display:none;">{$line.comment_edit}</textarea>
+                                                </div>
                                             </div>
-                                            <span class="standard_tile_subtext" style="font-weight:bold;float:right;display:inline;margin-right:5px;margin-bottom:15px;">
+                                            <div class="standard_tile_subtext text-right" style="font-weight:bold;display:table-footer-group;vertical-align:bottom;">
                                                 {$line.date}
-                                            </span>
-                                            <br><br>
-                                        </td>
-                                    </tr>
-                                {/foreach}
-                                </table>
+                                            </div>
+                                            </div>
+                                            {$number=$number+1}
+                                        {/foreach}
+
                         </div>
                     {/if}
                     </div>
