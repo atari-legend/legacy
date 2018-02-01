@@ -22,7 +22,7 @@ The main game page
     {block name=title}Atari ST games search results | Atari Legend{/block}
 {/if}
 
-{block name=main_body}
+{block name=additional_scripts}
     {literal}
     <script> <!-- script needed for the autocompletion search engine -->
         $(document).ready(function() {
@@ -120,6 +120,9 @@ The main game page
         year_drop_text.style.display='none';
     }
     </script>
+{/block}
+
+{block name=main_body}
     <div id="main" class="main_container_cpanel">
         <div class="content_box_cpanel" id="column_left_cpanel">
             <br>

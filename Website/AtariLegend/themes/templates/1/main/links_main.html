@@ -5,6 +5,19 @@
     {block name=title}Atari ST links and resources | Atari Legend{/block}
 {/if}
 
+{block name=additional_scripts}
+    <script src="{$template_dir}includes/js/vendor/lightbox-2.9.0.min.js"></script><!--lightbox popup script-->
+    <script>
+        lightbox.option({
+            'showImageNumberLabel': false
+        })
+    </script>
+{/block}
+
+{block name=additional_css}
+    <link type="text/css" href="{$style_dir}css/vendor/lightbox-2.9.0.css" hreflang="en" rel="stylesheet">
+{/block}
+
 {block name=main_body}
     <div id="main" class="main_container_cpanel">
         <div class="content_box_cpanel" id="column_left_cpanel">
@@ -89,11 +102,4 @@
             {include file='1/main/did_you_know_tile.html'}
         </div>
     </div>
-    <script src="{$template_dir}includes/js/vendor/lightbox-2.9.0.min.js"></script><!--lightbox popup script-->
-    <link type="text/css" href="{$style_dir}css/vendor/lightbox-2.9.0.css" hreflang="en" rel="stylesheet">
-    <script>
-        lightbox.option({
-            'showImageNumberLabel': false
-        })
-    </script>
 {/block}

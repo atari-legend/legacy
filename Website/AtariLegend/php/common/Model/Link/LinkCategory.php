@@ -26,5 +26,4 @@ class LinkCategory {
     public function getCount() {
         return $this->count;
     }
-
 }

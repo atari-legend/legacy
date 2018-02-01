@@ -132,19 +132,26 @@ module.exports = function (grunt) {
                     '<%= webRoot %>php/**/*.php',
                     '!<%= webRoot %>php/{temp,vendor}/**/*.php'
                 ],
-                tasks: ['phpcs']
+                tasks: ['phpcs:all']
             }
         },
 
         phpcs: {
             application: {
                 src: [
+                    '<%= webRoot %>php/common/DAO/**/*.php',
+                    '<%= webRoot %>php/common/Model/**/*.php',
+                    '<%= webRoot %>php/lib/Db.php'
+                ]
+            },
+            all: {
+                src: [
                     '<%= webRoot %>php/**/*.php',
                     '!<%= webRoot %>php/{temp,vendor}/**/*.php'
                 ]
             },
             options: {
-                standard: 'PSR2',
+                standard: '.phpcs-ruleset.xml',
                 severity: 3
             }
         },
@@ -212,11 +219,11 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-php-cs-fixer');
 
     // Default task(s).
-    grunt.registerTask('default', ['eslint:application', 'lintspaces', 'sass', 'pleeease']);
+    grunt.registerTask('default', ['eslint:application', 'lintspaces', 'sass', 'pleeease', 'phpcs:application']);
     grunt.registerTask('lint', ['scsslint']);
     grunt.registerTask('sass-lint', ['sasslint']);
     grunt.registerTask('css-fix', ['csscomb']);
-    grunt.registerTask('phpcheck', ['phpcs']);
+    grunt.registerTask('phpcheck', ['phpcs:all']);
     grunt.registerTask('phpfixer', ['phpcbf']);
     grunt.registerTask('phpfix', ['phpcsfixer']);
 };
