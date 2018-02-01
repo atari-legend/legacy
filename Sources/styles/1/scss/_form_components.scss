@@ -9,7 +9,7 @@
 // Selects
 .standard_select {
     margin-top: 5px;
-    height: 27px;
+    height: 25px;
     padding: 0;
     padding-left: 5px;
     background-color: #000000;
@@ -92,10 +92,6 @@
     @extend .standard_input;
     width: 90%;
 }
-.standard_tile_input_small_site {
-    @extend .standard_input;
-    width: 98.7%;
-}
 
 //
 // Standard Buttons
@@ -104,22 +100,22 @@
 .primary_button {
     margin-top: 5px;
     margin-left: 3px;
-    height: 27px;
+    height: 25px;
     font-size: 10pt;
     color: #ffffff;
     cursor: pointer;
     padding-left: 15px;
     padding-right: 15px;
-    padding-top: 4px;
+    padding-top: 5px;
     padding-bottom: 5px;
     background: #0d2e2e;
-    border: .5px solid #008b8b;
+    border: 1px solid #008b8b;
 }
 
 .primary_button:hover {
     color: #ffffff;
     background: #006f6f;
-    border: .5px solid #122323;
+    border: 1px solid #122323;
 }
 
 label.primary_button {
@@ -132,22 +128,22 @@ label.primary_button {
 .secondary_button {
     margin-top: 5px;
     margin-left: 3px;
-    height: 27px;
+    height: 25px;
     font-size: 10pt;
     color: #ffffff;
     cursor: pointer;
     padding-left: 15px;
     padding-right: 15px;
-    padding-top: 4px;
+    padding-top: 5px;
     padding-bottom: 5px;
     background: #006f6f;
-    border: .5px solid #122323;
+    border: 1px solid #122323;
 }
 
 .secondary_button:hover {
     color: #ffffff;
     background: #122323;
-    border: .5px solid #008b8b;
+    border: 1px solid #008b8b;
 }
 
 label.secondary_button {

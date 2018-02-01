@@ -25,15 +25,11 @@
         width: 100%;
     }
     #download_details_text,
-    .games_main_text,
-    .games_main_input {
+    .games_main_text_site {
         display: inline;
     }
     #leftnav_position_change_log {
         margin-top: 20px;
-    }
-    .games_main_row {
-        margin-left: 10%;
     }
     .links_addnew_text,
     .links_addnew_input {
@@ -106,11 +102,8 @@
     .tech_doc_img {
         width: 90%;
     }
-    .games_main_text {
+    .games_main_text_site {
         width: 35%;
-    }
-    .games_main_input {
-        width: 65%;
     }
     .links_mod_text,
     .links_mod_input {
@@ -156,7 +149,6 @@
     .games_main_row_site {
         width: 90%;
     }
-    .standard_tile_input_small_site,
     #games_main_select_site {
         margin-bottom: 10px;
     }
@@ -467,12 +459,6 @@
     }
 }
 
-@media screen and (max-width: 1000px) {
-    .standard_tile_input_small_site {
-        width: 97.7%;
-    }
-}
-
 @media screen and (max-width: 1050px) {
     .user_details_container,
     .game_upload_container {
@@ -488,23 +474,13 @@
     #child_1_user {
         margin-bottom: 5px;
     }
-    .games_check_container {
-        flex-direction: column;
-        width: 100%;
-    }
     #child_1,
     #child_2 {
         width: 100%;
         margin-left: 10%;
     }
-    .games_main_row {
-        width: 90%;
-    }
-    .games_main_text {
+    .games_main_text_site {
         width: 40%;
-    }
-    .games_main_input {
-        width: 60%;
     }
 }
 @media screen and (max-width: 1169px) {
@@ -837,11 +813,6 @@
     }
 }
 
-@media screen and (max-width: 1550px) {
-    .standard_tile_input_small_site {
-        width: 98%;
-    }
-}
 @media screen and (max-width: 1599px) {
     #games_main_list_4,
     #games_main_list_2,
@@ -853,11 +824,6 @@
     }
 }
 
-@media screen and (max-width: 1800px) {
-    .standard_tile_input_small_site {
-        width: 98.3%;
-    }
-}
 @media screen and (max-width: 1919px) {
     #games_nav,
     #games_main_space {

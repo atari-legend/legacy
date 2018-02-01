@@ -88,7 +88,7 @@ function delete_screenshot(screenshot_id, game_id)
             <legend class="primary_legend">Browse</legend>
             <form enctype="multipart/form-data" name="frmUploadShot" action="db_games_screenshot_add.php" method="post">
                 <label for="file_upload" class="secondary_button">Select file(s)</label>
-                <input id="file_upload" type="file" name="image[]" multiple>
+                <input type="file" id="file_upload" name="image[]" multiple>
                 <input type="text" class="standard_input input_large" id="file_upload_game_screenshots">&nbsp;
                 <br>
                 <br>

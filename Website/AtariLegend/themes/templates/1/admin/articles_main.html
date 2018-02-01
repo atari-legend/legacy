@@ -82,7 +82,7 @@ function deletearticle(article_id)
         <br>
         {if isset($article_selected)}
             {foreach from=$article_selected item=line}
-                <fieldset class="primary_fieldset">
+                <fieldset class="secondary_fieldset">
                     <legend class="primary_legend">
                     {if $line.user_email <> ''}
                         <a href="mailto:{$line.user_email}?subject=Your%20article%20-%20{$line.article_title}%20at%20Atari%20Legend" class="left_nav_link">{$line.user_id}</a> - {$line.article_date}
@@ -98,7 +98,7 @@ function deletearticle(article_id)
                             <i>{$line.article_text}</i>
 
                     <br><br>
-                    <div style="text-align:center;">
+                    <div class="text-center">
                         <a href="articles_edit.php?article_id={$line.article_id}" class="left_nav_link">EDIT</a> :: <a href="javascript:deletearticle({$line.article_id})" class="left_nav_link">DELETE</a> :: <a href="articles_preview.php?article_id={$line.article_id}" class="left_nav_link">PREVIEW</a> :: <a href="articles_screenshots_add.php?article_id={$line.article_id}" class="left_nav_link">ADD SCREENSHOTS</a>
                     </div>
                 </fieldset>
