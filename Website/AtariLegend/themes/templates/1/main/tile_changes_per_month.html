@@ -17,7 +17,8 @@
 *}
 <script src="{$template_dir}includes/js/vendor/Chart-2.5.0.min.js"></script> <!-- chart creation -->
 <script>
-jQuery(document).ready(function () {
+    // jQuery is not available yet at this point
+    document.addEventListener("DOMContentLoaded", function(event) {
 
     var data_cl_monthly = {$change_log_monthly_data};
     var labels_cl_monthly = {$change_log_monthly_label};
