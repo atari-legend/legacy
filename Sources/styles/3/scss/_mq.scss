@@ -64,14 +64,9 @@
         width: 100%;
         display: block;
     }
-    .games_main_input,
     #download_details_text,
-    .games_main_text {
+    .games_main_text_site {
         display: inline;
-    }
-    .games_main_row {
-        width: 50%;
-        margin-left: 10%;
     }
     #news_approve_icon {
         display: none;
@@ -108,11 +103,8 @@
     }
 }
 @media screen and (max-width: 550px) {
-    .games_main_text {
+    .games_main_text_site {
         width: 35%;
-    }
-    .games_main_input {
-        width: 65%;
     }
     .tech_doc_img {
         width: 90%;
@@ -203,7 +195,6 @@
     .games_main_row_site {
         width: 90%;
     }
-    .standard_tile_input_small_site,
     #games_main_select_site {
         margin-bottom: 10px;
     }
@@ -368,11 +359,7 @@
         display: none;
     }
 }
-@media screen and (max-width: 880px) {
-    .standard_tile_input_small_site {
-        width: 96.3%;
-    }
-}
+
 @media screen and (max-width: 900px) {
     .news_date {
         display: inline;
@@ -422,24 +409,9 @@
     }
 }
 
-@media screen and (max-width: 1000px) {
-    .standard_tile_input_small_site {
-        width: 96.8%;
-    }
-}
 @media screen and (max-width: 1050px) {
-    .games_main_row {
-        width: 90%;
-    }
-    .games_main_text {
+    .games_main_text_site {
         width: 40%;
-    }
-    .games_main_input {
-        width: 60%;
-    }
-    .games_check_container {
-        flex-direction: column;
-        width: 100%;
     }
     #child_1,
     #child_2 {
@@ -788,11 +760,7 @@
         width: 100%;
     }
 }
-@media screen and (max-width: 1560px) {
-    .standard_tile_input_small_site {
-        width: 97.3%;
-    }
-}
+
 @media screen and (max-width: 1599px) {
     #games_main_list_4,
     #games_main_list_2,
@@ -801,11 +769,6 @@
     }
     #games_main_list_3 {
         display: inline;
-    }
-}
-@media screen and (max-width: 1800px) {
-    .standard_tile_input_small_site {
-        width: 97.7%;
     }
 }
 

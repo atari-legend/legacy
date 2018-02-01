@@ -17,7 +17,9 @@
 }
 
 .games_main_text_site {
-    @extend .games_main_text;
+    display: table-cell;
+    width: 25%;
+    font-weight: bold;
 }
 
 .games_main_row_site {

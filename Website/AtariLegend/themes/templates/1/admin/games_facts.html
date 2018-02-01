@@ -156,7 +156,7 @@ function FactEditable(game_id,game_fact_id) {
                 <textarea name="fact_text" id="fact_text" class="primary_textarea" rows="10" ONSELECT="javascript:storeCaret(this);" ONCLICK="javascript:storeCaret(this);" ONKEYUP="javascript:storeCaret(this);" ONCHANGE="javascript:storeCaret(this);"></textarea>
                 <br><br>
                 <label for="file_upload" class="secondary_button">Select file(s)</label>
-                <input id="file_upload" type="file" name="image[]" multiple>
+                <input type="file" id="file_upload" name="image[]" multiple>
                 <input type="text" class="standard_input input_large" id="file_upload_fact_screenshots">&nbsp;
                 <br><br>
                 <input type="hidden" name="action" value="game_fact_insert">

@@ -9,7 +9,7 @@
 
 .standard_select {
     margin-top: 5px;
-    height: 27px;
+    height: 25px;
     padding: 0;
     padding-left: 5px;
     background-color: #666666;
@@ -108,9 +108,4 @@
 .user_details_input_small {
     @extend .standard_input;
     width: 90%;
-}
-
-.standard_tile_input_small_site {
-    @extend .standard_input;
-    width: 98.5%;
 }
