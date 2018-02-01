@@ -17,10 +17,9 @@
 
 {extends file='1/main/main.html'}
 {block name=title}{$review.game_name} review (Atari ST) | Atari Legend{/block}
-{block name=main_body}
+{block name=additional_scripts}
     <!-- lightbox screenshot pop up script -->
     <script src="{$template_dir}includes/js/vendor/lightbox-2.9.0.min.js"></script>
-    <link type="text/css" href="{$style_dir}css/vendor/lightbox-2.9.0.css" hreflang="en" rel="stylesheet">
 
     <script>
         lightbox.option({
@@ -306,8 +305,8 @@
 
     <script src="{$template_dir}includes/js/vendor/jquery.dotdotdot-1.8.3.min.js"></script> <!--this script is used for the elipsis (...) effect of the latest reviews tile -->
     <script>
-        window.onload = function() {
-            $(".standard_list_entry_news_text").dotdotdot({  <!--This is the script to truncate the latest interviews-->
+        jQuery(document).ready(function () {
+            $(".standard_list_entry_news_text").dotdotdot({  // This is the script to truncate the latest interviews-->
                 //  configuration goes here
 
             /*  The text to add as ellipsis. */
@@ -346,9 +345,15 @@
                 noEllipsis  : []
             }
         });
-    };
+    });
     </script>
+{/block}
 
+{block name=additional_css}
+    <link type="text/css" href="{$style_dir}css/vendor/lightbox-2.9.0.css" hreflang="en" rel="stylesheet">
+{/block}
+
+{block name=main_body}
     <div id="main" class="main_container_games_details">
         <div class="content_box_games_details" id="column_left_reviews_details">
 
