@@ -14,5 +14,4 @@ build:
     # Do the actual build / CI of the project
     ci:
         - shippable_retry npm install
-        - shippable_retry pear install PHP_CodeSniffer
         - npm run grunt
