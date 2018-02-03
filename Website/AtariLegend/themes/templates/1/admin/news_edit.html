@@ -181,12 +181,12 @@ function storeCaret(textEl) {
             <form action="db_news.php" method="post" name="post" id="news_edit_post">
                 <div class="links_mod_container">
                     <div class="links_mod_row">
-                        <div class="links_mod_text">Headline</div>
-                        <div class="links_mod_input"><input type="text" name="news_headline" id="headline" class="standard_input input_large" value="{$edit_submissions.edit_headline}"></div>
+                        Headline<br>
+                        <input type="text" name="news_headline" id="headline" class="standard_input input_full" value="{$edit_submissions.edit_headline}">
                     </div>
                     <div class="links_mod_row">
-                        <div class="links_mod_text">News Icon</div>
-                        <div class="links_mod_input">
+                        News Icon<br>
+
                             <select name="news_image_id" class="standard_select select_large">
                                 <option value="0">-</option>
                                 {foreach from=$news_images item=line}
@@ -197,12 +197,12 @@ function storeCaret(textEl) {
                                     {/if}
                                 {/foreach}
                             </select>
-                            <a href="../news/news_iconpreview.php" class="left_nav_link">Preview Icons</a>
-                        </div>
+                            &nbsp;<a href="../news/news_iconpreview.php" class="left_nav_link">Preview Icons</a>
+
                     </div>
                     <div class="links_mod_row">
-                        <div class="links_mod_text">Description</div>
-                        <div class="links_mod_input">
+                        Description<br>
+
                             <input type="button" class="secondary_button" accesskey= "b" name="addbbcode0" value="B" onclick="bbstyle(0,'news_text')">
                             <input type="button" class="secondary_button" accesskey= "u" name="addbbcode4" value="U" onclick="bbstyle(4,'news_text')">
                             <input type="button" class="secondary_button" accesskey= "i" name="addbbcode2" value="I" onclick="bbstyle(2,'news_text')">
@@ -213,7 +213,7 @@ function storeCaret(textEl) {
                             <textarea class="primary_textarea" rows="15" name="news_text" ONSELECT="javascript:storeCaret(this);" ONCLICK="javascript:storeCaret(this);" ONKEYUP="javascript:storeCaret(this);" ONCHANGE="javascript:storeCaret(this);">
                                 {$edit_submissions.edit_text}
                             </textarea>
-                        </div>
+
                     </div>
                 </div>
                 <br>

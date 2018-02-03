@@ -78,20 +78,10 @@
 //*----------------------------------------------------------
 //Links Modify
 //------------------------------------------------------------ */
-.links_mod_text {
-    display: table-cell;
-    width: 35%;
-    vertical-align: top;
-}
-
-.links_mod_input {
-    display: table-cell;
-    width: 65%;
-}
 
 .links_mod_row {
-    display: table;
     width: 100%;
+    margin-top: 5px;
 }
 
 .links_mod_checkbox {
