@@ -15,23 +15,26 @@ The trainer option edit page
 ************************************************************************************************
 *}
 {extends file='1/admin/main.html'}
-
 {block name=java_script}
 <script>
-function trainerdelete(trainer_id)
-{
-    // CONFIRM REQUIRES ONE ARGUMENT
-    var message = "Are you sure you want to delete this trainer option from the database?";
-    // CONFIRM IS BOOLEAN. THAT MEANS THAT
-    // IT RETURNS TRUE IF 'OK' IS CLICKED
-    // OTHERWISE IT RETURN FALSE
-    var return_value = confirm(message);
-
-    if (return_value !="0")
-    {
-        url="db_download_trainer.php?trainer_id="+trainer_id+"&action=delete_trainer";
-        location.href=url;
-    }
+function trainerdelete(trainer_id) {
+    $('#JSGenericModal').dialog({
+        title: 'Delete',
+        open: $('#JSGenericModalText').text('Are you sure you want to delete this trainer option from the database?'),
+        resizable: false,
+        height: 200,
+        modal: true,
+        buttons: {
+            'Delete': function () {
+                $(this).dialog('close');
+                url="db_download_trainer.php?trainer_id="+trainer_id+"&action=delete_trainer";
+                location.href=url;
+            },
+            Cancel: function () {
+                $(this).dialog('close');
+            }
+        }
+    });
 }
 </script>
 {/block}

@@ -30,20 +30,24 @@ $(function() {
         document.getElementById('file_upload_game_screenshots').value = 'file(s) selected';
     });
 });
-
-function delete_screenshot(screenshot_id, game_id)
-{
-    // CONFIRM REQUIRES ONE ARGUMENT
-    var message = "Are you sure you want to delete the screenshot?";
-    // CONFIRM IS BOOLEAN. THAT MEANS THAT
-    // IT RETURNS TRUE IF 'OK' IS CLICKED
-    // OTHERWISE IT RETURN FALSE
-    var return_value = confirm(message);
-    if (return_value !="0")
-    {
-        url="db_games_screenshot_add.php?game_id="+game_id+"&screenshot_id="+screenshot_id+"&action=delete_screen";
-        location.href=url;
-    }
+function delete_screenshot(screenshot_id, game_id) {
+    $("#JSGenericModal").dialog({
+        title: "Delete",
+        open: $("#JSGenericModalText").text("Are you sure you want to delete the screenshot?"),
+        resizable: false,
+        height: 200,
+        modal: true,
+        buttons: {
+            "Delete": function() {
+                $(this).dialog("close");
+                url="db_games_screenshot_add.php?game_id="+game_id+"&screenshot_id="+screenshot_id+"&action=delete_screen";
+                location.href=url;
+            },
+            Cancel: function() {
+                $(this).dialog("close");
+            }
+        }
+    });
 }
 </script>
 <script src="{$template_dir}includes/js/vendor/lightbox-2.9.0.min.js"></script>

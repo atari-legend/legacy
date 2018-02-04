@@ -20,28 +20,28 @@ The crew genealogy page
 
 {block name=java_script}
 <script>
-function crewinsert()
-{
+function crewinsert() {
     JSnewcrew=document.forms["insertcrew"].newcrew.value;
-
-    if (JSnewcrew=='')
-    {
+    if (JSnewcrew=='') {
         alert('Please fill in a crew name');
-    }
-    else
-    {
-        // CONFIRM REQUIRES ONE ARGUMENT
-        var message = "Are you sure you want to insert this crew into the database?";
-        // CONFIRM IS BOOLEAN. THAT MEANS THAT
-        // IT RETURNS TRUE IF 'OK' IS CLICKED
-        // OTHERWISE IT RETURN FALSE
-        var return_value = confirm(message);
-
-        if (return_value !="0")
-        {
-            url="db_crew.php?new_crew="+JSnewcrew+"&action=insert_crew";
-            location.href=url;
-        }
+    } else {
+        $('#JSGenericModal').dialog({
+            title: 'Add',
+            open: $('#JSGenericModalText').text('Are you sure you want to insert this crew into the database?'),
+            resizable: false,
+            height: 200,
+            modal: true,
+            buttons: {
+                'Add': function () {
+                    $(this).dialog('close');
+                    url="db_crew.php?crew_select="+crew_select+"&action=delete_crew";
+                    location.href=url;
+                },
+                Cancel: function () {
+                    $(this).dialog('close');
+                }
+            }
+        });
     }
 }
 
@@ -265,14 +265,14 @@ function searchInd(str) {
                 <fieldset class="secondary_fieldset">
                     <legend class="primary_legend">Subcrew</legend>
                     <form action="../crew/db_crew.php" method="post" name="crew_gene2" id="crew_gene2">
-                        <select class="standard_select select_small" onchange="browseSubCrew(this.value)">
+                        <select class="standard_select" onchange="browseSubCrew(this.value)">
                             <option value="" SELECTED>-</option>
                             {html_options values=$az_value output=$az_output}
                         </select>
                         <input type="text" name="crewsearch" value="" onkeyup="searchSubCrew(this.value)" class="standard_input input_large">
                         <br><br>
                         <div id="sub_crew">
-                            <select name="sub_crew[]" class="standard_select select_large">
+                            <select name="sub_crew[]" size="5" class="standard_select select_large">
                                 <option value="" SELECTED>-</option>
                                 {foreach from=$crew_gene item=line}
                                     {if $line.crew_id <> $crew_select.crew_id}
@@ -302,7 +302,7 @@ function searchInd(str) {
                         <input type="text" onkeyup="searchInd(this.value)" class="standard_input input_large">
                         <br><br>
                         <div id="ind_member">
-                            <select name="ind_id" class="standard_select select_large">
+                            <select name="ind_id" size="5" class="standard_select select_large">
                                 <option value="" SELECTED>-</option>
                                 {foreach from=$ind_gene item=line}
                                     <option value="{$line.ind_id}">{$line.ind_name}</option>

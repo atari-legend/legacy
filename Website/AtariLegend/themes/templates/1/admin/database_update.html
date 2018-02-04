@@ -14,20 +14,24 @@
 
 {block name=java_script}
 <script>
-function UpdateDatabase(database_update_id)
-{
-    // CONFIRM REQUIRES ONE ARGUMENT
-    var message = "Are you sure? There is no going back from this...";
-    // CONFIRM IS BOOLEAN. THAT MEANS THAT
-    // IT RETURNS TRUE IF 'OK' IS CLICKED
-    // OTHERWISE IT RETURN FALSE
-    var return_value = confirm(message);
-
-    if (return_value !="0")
-    {
-        url="db_database_update.php?action=update_database&update_script_id="+database_update_id;
-        location.href=url;
-    }
+function UpdateDatabase(database_update_id) {
+    $('#JSGenericModal').dialog({
+        title: 'Continue?',
+        open: $('#JSGenericModalText').text('Are you sure? There is no going back from this...'),
+        resizable: false,
+        height: 200,
+        modal: true,
+        buttons: {
+            'Yes': function () {
+                $(this).dialog('close');
+                url="db_crew.php?crew_select="+crew_select+"&action=delete_crew";
+                location.href=url;
+            },
+            Cancel: function () {
+                $(this).dialog('close');
+            }
+        }
+    });
 }
 </script>
 {/block}

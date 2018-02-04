@@ -28,65 +28,81 @@
 
 {block name=java_script}
 <script>
-
-function deletereview(reviewid, gameid)
-{
-    // CONFIRM REQUIRES ONE ARGUMENT
-    var message = "Are you sure you want to delete this review?";
-    // CONFIRM IS BOOLEAN. THAT MEANS THAT
-    // IT RETURNS TRUE IF 'OK' IS CLICKED
-    // OTHERWISE IT RETURN FALSE
-    var return_value = confirm(message);
-    if (return_value !="0")
-    {
-        url="db_games_review_edit.php?reviewid="+reviewid+"&game_id="+gameid+"&action=delete_review";
-        location.href=url;
-    }
+function deletereview(reviewid, gameid) {
+    $("#JSGenericModal").dialog({
+        title: "Delete",
+        open: $("#JSGenericModalText").text("Are you sure you want to delete this review?"),
+        resizable: false,
+        height: 200,
+        modal: true,
+        buttons: {
+            "Delete": function() {
+                $(this).dialog("close");
+                url="db_games_review_edit.php?reviewid="+reviewid+"&game_id="+gameid+"&action=delete_review";
+                location.href=url;
+            },
+            Cancel: function() {
+                $(this).dialog("close");
+            }
+        }
+    });
 }
-
-function deleteSubmission(reviewid, gameid)
-{
-    // CONFIRM REQUIRES ONE ARGUMENT
-    var message = "Are you sure you want to delete this review?";
-    // CONFIRM IS BOOLEAN. THAT MEANS THAT
-    // IT RETURNS TRUE IF 'OK' IS CLICKED
-    // OTHERWISE IT RETURN FALSE
-    var return_value = confirm(message);
-    if (return_value !="0")
-    {
-        url="db_games_review_edit.php?reviewid="+reviewid+"&game_id="+gameid+"&action=delete_submission";
-        location.href=url;
-    }
+function deleteSubmission(reviewid, gameid) {
+    $("#JSGenericModal").dialog({
+        title: "Delete",
+        open: $("#JSGenericModalText").text("Are you sure you want to delete this review?"),
+        resizable: false,
+        height: 200,
+        modal: true,
+        buttons: {
+            "Delete": function() {
+                $(this).dialog("close");
+                url="db_games_review_edit.php?reviewid="+reviewid+"&game_id="+gameid+"&action=delete_submission";
+                location.href=url;
+            },
+            Cancel: function() {
+                $(this).dialog("close");
+            }
+        }
+    });
 }
-
-function move_to_comment(reviewid, gameid)
-{
-    // CONFIRM REQUIRES ONE ARGUMENT
-    var message = "Are you sure you want to move this review to the comments section? Some content will be deleted in the moving process.";
-    // CONFIRM IS BOOLEAN. THAT MEANS THAT
-    // IT RETURNS TRUE IF 'OK' IS CLICKED
-    // OTHERWISE IT RETURN FALSE
-    var return_value = confirm(message);
-    if (return_value !="0")
-    {
-        url="db_games_review_edit.php?reviewid="+reviewid+"&game_id="+gameid+"&action=move_to_comment";
-        location.href=url;
-    }
+function move_to_comment(reviewid, gameid) {
+    $("#JSGenericModal").dialog({
+        title: "Move",
+        open: $("#JSGenericModalText").text("Are you sure you want to move this review to the comments section? Some content will be deleted in the moving process."),
+        resizable: false,
+        height: 200,
+        modal: true,
+        buttons: {
+            "Move": function() {
+                $(this).dialog("close");
+                url="db_games_review_edit.php?reviewid="+reviewid+"&game_id="+gameid+"&action=move_to_comment";
+                location.href=url;
+            },
+            Cancel: function() {
+                $(this).dialog("close");
+            }
+        }
+    });
 }
-
-function deletecomment(game_id,reviewid,screenshot_id)
-{
-    // CONFIRM REQUIRES ONE ARGUMENT
-    var message = "Are you sure you want to delete this comment?";
-    // CONFIRM IS BOOLEAN. THAT MEANS THAT
-    // IT RETURNS TRUE IF 'OK' IS CLICKED
-    // OTHERWISE IT RETURN FALSE
-    var return_value = confirm(message);
-    if (return_value !="0")
-    {
-        url="db_games_review_edit.php?game_id="+game_id+"&reviewid="+reviewid+"&screenshot_id="+screenshot_id+"&action=delete_comment";
-        location.href=url;
-    }
+function deletecomment(game_id,reviewid,screenshot_id) {
+    $("#JSGenericModal").dialog({
+        title: "Delete",
+        open: $("#JSGenericModalText").text("Are you sure you want to delete this comment?"),
+        resizable: false,
+        height: 200,
+        modal: true,
+        buttons: {
+            "Delete": function() {
+                $(this).dialog("close");
+                url="db_games_review_edit.php?game_id="+game_id+"&reviewid="+reviewid+"&screenshot_id="+screenshot_id+"&action=delete_comment";
+                location.href=url;
+            },
+            Cancel: function() {
+                $(this).dialog("close");
+            }
+        }
+    });
 }
 
 var clientPC = navigator.userAgent.toLowerCase(); // Get client info
