@@ -35,17 +35,15 @@ $RESULTGAME = "SELECT
                     game.game_name,
                     pub_dev.pub_dev_name,
                     pub_dev.pub_dev_id,
-                    game_year.game_year,
                     users.userid,
                     review_main.review_date
                     FROM game
                     LEFT JOIN game_publisher ON ( game.game_id = game_publisher.game_id )
                     LEFT JOIN pub_dev ON ( game_publisher.pub_dev_id = pub_dev.pub_dev_id )
-                    LEFT JOIN game_year ON ( game_year.game_id = game.game_id )
                     LEFT JOIN review_game ON ( review_game.game_id = game.game_id )
                     LEFT JOIN review_main ON ( review_main.review_id = review_game.review_id)
                     LEFT JOIN users ON ( review_main.user_id = users.user_id)
-                    WHERE review_game.game_id IS NOT NULL 
+                    WHERE review_game.game_id IS NOT NULL
                     GROUP BY game.game_id, game.game_name HAVING COUNT(DISTINCT game.game_id, game.game_name) = 1
                     ORDER BY review_main.review_date DESC";
 

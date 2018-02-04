@@ -19,6 +19,10 @@ include("../../config/common.php");
 //load the tiles
 include("../../common/tiles/latest_interviews_tile.php");
 
+require_once __DIR__."/../../common/DAO/GameReleaseDAO.php";
+
+$gameReleaseDao = new \AL\Common\DAO\GameReleaseDAO($mysqli);
+
 //***********************************************************************************
 //Let's get all the interview and author data
 //***********************************************************************************
@@ -127,15 +131,12 @@ $count = 0;
 while ($query_games = $sql_games->fetch_array(MYSQLI_BOTH)) {
     $count++;
 
-    //select the game year
-    $sql_game_year = $mysqli->query("SELECT * FROM game_year where game_id = $query_games[game_id]")
-    or die("error in game year query");
-    $query_game_year = $sql_game_year->fetch_array(MYSQLI_BOTH);
+    $releases = $gameReleaseDao->getReleasesForGame($query_games['game_id']);
 
     $smarty->append('games', array(
         'game_id' => $query_games['game_id'],
         'game_name' => $query_games['game_name'],
-        'game_year' => $query_game_year['game_year'],
+        'game_releases' => $releases,
         'auhthor_type_info' => $query_games['author_type_info'],
         'count' => $count
     ));

@@ -29,13 +29,13 @@ $RESULTGAME = "SELECT
                     game.game_name,
                     pub_dev.pub_dev_name,
                     pub_dev.pub_dev_id,
-                    game_year.game_year,
+                    YEAR(game_release.date) as game_release_year,
                     users.userid,
                     review_main.review_date
                     FROM game
                     LEFT JOIN game_publisher ON ( game.game_id = game_publisher.game_id )
                     LEFT JOIN pub_dev ON ( game_publisher.pub_dev_id = pub_dev.pub_dev_id )
-                    LEFT JOIN game_year ON ( game_year.game_id = game.game_id )
+                    LEFT JOIN game_release ON ( game_release.game_id = game.game_id )
                     LEFT JOIN review_game ON ( review_game.game_id = game.game_id )
                     LEFT JOIN review_main ON ( review_main.review_id = review_game.review_id)
                     LEFT JOIN users ON ( review_main.user_id = users.user_id)
@@ -99,11 +99,11 @@ if (isset($action) and $action == 'search') {
                             game.game_name,
                             pub_dev.pub_dev_name,
                             pub_dev.pub_dev_id,
-                            game_year.game_year
+                            YEAR(game_release.date) as game_release_year
                        FROM game
                        LEFT JOIN game_publisher ON ( game.game_id = game_publisher.game_id )
                        LEFT JOIN pub_dev ON ( game_publisher.pub_dev_id = pub_dev.pub_dev_id )
-                       LEFT JOIN game_year ON ( game_year.game_id = game.game_id ) WHERE ";
+                       LEFT JOIN game_release ON ( game_release.game_id = game.game_id ) WHERE ";
 
         $RESULTGAME .= $gamebrowse_select;
         $gamesearch = $mysqli->real_escape_string($gamesearch);
@@ -132,7 +132,7 @@ if (isset($action) and $action == 'search') {
                         'game_id' => $row['game_id'],
                         'game_name' => $row['game_name'],
                         'game_publisher' => $row['pub_dev_name'],
-                        'game_year' => $row['game_year'],
+                        'game_release_year' => $row['game_release_year'],
                         'number_reviews' => $array['count']
                     ));
                 }

@@ -441,7 +441,9 @@
                                 </td>
 
                                 <td style="width:10%;">
-                                    <a href="../games/games_main_list.php?year={$line.game_year}&amp;action=search" class="standard_tile_link" style="margin-right:10px;">{$line.game_year}</a>
+                                    {foreach from=$line.game_releases item=$release}
+                                        <a href="../games/games_main_list.php?year={$release->getDate()|date_format:"%Y"}&amp;action=search" class="standard_tile_link" style="margin-right:10px;">{$release->getDate()|date_format:"%Y"}</a>
+                                    {/foreach}
                                     <br><br>
                                 </td>
                             </tr>

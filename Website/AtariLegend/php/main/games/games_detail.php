@@ -15,12 +15,15 @@
 
 //load all common functions
 include("../../config/common.php");
+require_once __DIR__."/../../common/DAO/GameReleaseDAO.php";
+
+$gameReleaseDao = new \AL\Common\DAO\GameReleaseDAO($mysqli);
 
 /**
  * Generates an SEO-friendly description of a game, depending on the data available
  * @param $game_name Name of the game
  * @param $game_free Whether the game is free (non-commercial) or not
- * @param $game_years Year(s) the game was released
+ * @param $game_releases Game releases
  * @param $game_categories Categorie(s) the game belong to
  * @param $game_developers Developer(s) of the game
  * @param $screenshots Number of screenshots available
@@ -31,7 +34,7 @@ include("../../config/common.php");
 function generate_game_description(
     $game_name,
     $game_free,
-    $game_years,
+    $game_releases,
     $game_categories,
     $game_developers,
     $screenshots,
@@ -53,8 +56,12 @@ function generate_game_description(
         $desc .= "developed by ".join($game_developers, ", ")." ";
     }
 
-    if ($game_years) {
-        $desc .= "released in ".join($game_years, ", ");
+    if ($game_releases) {
+        $years = [];
+        foreach ($game_releases as $release) {
+            $years[] += $release->getDate();
+        }
+        $desc .= "released in ".join($years, ", ");
     }
 
     // Fixup a/an for vowels: "a Atari ST game" should be "an Atari ST game"
@@ -151,23 +158,9 @@ if ($game_info = $sql_game->fetch_array(MYSQLI_BOTH)) {
     ));
 }
 
-//***********************************************************************************
-//get the release dates
-//***********************************************************************************
-$sql_year = $mysqli->query("SELECT * FROM game_year
-               LEFT JOIN game_extra_info ON ( game_year.game_extra_info_id = game_extra_info.game_extra_info_id )
-               WHERE game_id='$game_id' ORDER BY game_year ASC") or die("Error loading year");
-
-$game_years = [];
-while ($year = $sql_year->fetch_array(MYSQLI_BOTH)) {
-    $game_years[] = $year['game_year'];
-
-    $smarty->append('game_year', array(
-        'game_year_id' => $year['game_year_id'],
-        'game_year' => $year['game_year'],
-        'extra_info' => $year['game_extra_info']
-    ));
-}
+// Get all releases
+$releases = $gameReleaseDao->getReleasesForGame($game_id);
+$smarty->assign('releases', $releases);
 
 //***********************************************************************************
 //get the game categories & the categories already selected for this game
@@ -605,7 +598,6 @@ while ($query_similar = $sql_similar->fetch_array(MYSQLI_BOTH)) {
     LEFT JOIN screenshot_main ON (screenshot_game.screenshot_id = screenshot_main.screenshot_id)
     LEFT JOIN game_developer ON (game_developer.game_id = game.game_id)
     LEFT JOIN pub_dev ON (pub_dev.pub_dev_id = game_developer.dev_pub_id)
-    LEFT JOIN game_year ON (game.game_id = game_year.game_id)
     WHERE game.game_id = '$query_similar[game_similar_cross]'
     ORDER BY RAND() LIMIT 1")
     or die("Error - Couldn't get similar game data");
@@ -619,7 +611,6 @@ while ($query_similar = $sql_similar->fetch_array(MYSQLI_BOTH)) {
         $smarty->assign('similar', array(
             'game_id' => $query_similar['game_similar_cross'],
             'game_name' => $sql_game_similar_data['game_name'],
-            'game_year' => $sql_game_similar_data['game_year'],
             'game_dev_name' => $sql_game_similar_data['pub_dev_name'],
             'game_dev_id' => $sql_game_similar_data['pub_dev_id'],
             'screenshot' => $new_path ));
@@ -680,7 +671,7 @@ $smarty->assign("game_id", $game_id);
 $smarty->assign("game_description", generate_game_description(
     $game_info['game_name'],
     $game_info['free'] or false,
-    $game_years,
+    $releases,
     $game_categories,
     $game_developers,
     $game_screenshots_count,
