@@ -94,15 +94,10 @@ $count = 0;
 while ($query_reviews_author = $sql_reviews_author->fetch_array(MYSQLI_BOTH)) {
     $count++;
 
-    //select the game year
-    $sql_game_year = $mysqli->query("SELECT * FROM game_year where game_id = $query_reviews_author[game_id]") or die("error in game year query");
-    $query_game_year = $sql_game_year->fetch_array(MYSQLI_BOTH);
-
     $smarty->append('reviews_author', array(
             'review_id' => $query_reviews_author['review_id'],
             'game_name' => $query_reviews_author['game_name'],
             'game_id' => $query_reviews_author['game_id'],
-            'game_year' => $query_game_year['game_year'],
             'user_name' => $query_reviews_author['userid'],
             'user_id' => $query_reviews_author['user_id']
         ));

@@ -66,9 +66,9 @@ if ($action == 'add_games_search') {
                        pd1.pub_dev_name as 'publisher_name',
                        game_developer.dev_pub_id as 'developer_id',
                        pd2.pub_dev_name as 'developer_name',
-                       game_year.game_year AS 'year'";
+                       YEAR(game_release.date) as 'year'";
         $sql_build .= " FROM game ";
-        $sql_build .= " LEFT JOIN game_year on (game_year.game_id = game.game_id) ";
+        $sql_build .= " LEFT JOIN game_release on (game_release.game_id = game.game_id) ";
         $sql_build .= " LEFT JOIN game_publisher ON (game_publisher.game_id = game.game_id)";
         $sql_build .= " LEFT JOIN pub_dev pd1 ON (pd1.pub_dev_id = game_publisher.pub_dev_id)";
         $sql_build .= " LEFT JOIN game_developer ON (game_developer.game_id = game.game_id)";
@@ -102,9 +102,9 @@ if ($action == 'add_games_search') {
                        pd1.pub_dev_name as 'publisher_name',
                        game_developer.dev_pub_id as 'developer_id',
                        pd2.pub_dev_name as 'developer_name',
-                       game_year.game_year AS 'year'";
+                       YEAR(game_release.date) as 'year'";
         $sql_build .= " FROM game ";
-        $sql_build .= " LEFT JOIN game_year on (game_year.game_id = game.game_id) ";
+        $sql_build .= " LEFT JOIN game_release on (game_release.game_id = game.game_id) ";
         $sql_build .= " LEFT JOIN game_publisher ON (game_publisher.game_id = game.game_id)";
         $sql_build .= " LEFT JOIN pub_dev pd1 ON (pd1.pub_dev_id = game_publisher.pub_dev_id)";
         $sql_build .= " LEFT JOIN game_developer ON (game_developer.game_id = game.game_id)";
@@ -142,9 +142,9 @@ if ($action == 'add_games_search') {
                    pd1.pub_dev_name as 'publisher_name',
                    game_developer.dev_pub_id as 'developer_id',
                    pd2.pub_dev_name as 'developer_name',
-                   game_year.game_year AS 'year'";
+                   YEAR(game_release.date) as 'year'";
     $sql_build .= " FROM game ";
-    $sql_build .= " LEFT JOIN game_year on (game_year.game_id = game.game_id) ";
+    $sql_build .= " LEFT JOIN game_release on (game_release.game_id = game.game_id) ";
     $sql_build .= " LEFT JOIN game_publisher ON (game_publisher.game_id = game.game_id)";
     $sql_build .= " LEFT JOIN pub_dev pd1 ON (pd1.pub_dev_id = game_publisher.pub_dev_id)";
     $sql_build .= " LEFT JOIN game_developer ON (game_developer.game_id = game.game_id)";

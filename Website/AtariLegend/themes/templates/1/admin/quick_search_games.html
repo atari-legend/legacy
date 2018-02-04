@@ -71,8 +71,8 @@
                         <select name="year" id="JSCpanelYearBrowse" class="standard_select select_large">
                             <option value="-" SELECTED>-</option>
                             <option value="no_year_set">No Release Year Set</option>
-                            {foreach from=$game_year item=line}
-                                <option value="{$line.game_year}">{$line.game_year}</option>
+                            {foreach from=$game_release_years item=year}
+                                <option value="{$year}">{$year}</option>
                             {/foreach}
                         </select>
                     </div>

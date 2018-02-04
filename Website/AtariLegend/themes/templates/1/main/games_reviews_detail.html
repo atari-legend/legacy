@@ -374,14 +374,9 @@
                         </tr>
                         {foreach from=$reviews_author item=line name=reviews_author}
                             <tr>
-                                <td class="w-90">
+                                <td>
                                     <span style="overflow: hidden;text-overflow: ellipsis"><a href="../games/games_detail.php?game_id={$line.game_id}" class="standard_tile_link" style="margin-left:10px;">{$line.game_name}</a></span>
                                     <br><span class="standard_tile_subtext" style="margin-left:15px;"><a href="../games/games_reviews_detail.php?review_id={$line.review_id}&game_id={$line.game_id}" style="margin-left:10px;">read more</a></span>
-                                </td>
-
-                                <td class="w-10">
-                                    <a href="../games/games_main_list.php?year={$line.game_year}&amp;action=search" class="standard_tile_link" style="margin-right:10px;">{$line.game_year}</a>
-                                    <br><br>
                                 </td>
                             </tr>
                         {/foreach}
