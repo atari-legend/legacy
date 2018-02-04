@@ -46,13 +46,20 @@ module.exports = function (grunt) {
             options: {
                 editorconfig: '.editorconfig'
             },
-            src: [
-                '<%= webRoot %>/themes/templates/1/**/*.html',
-                'Sources/styles/1/scss/*.scss',
-                'Sources/styles/2/scss/*.scss',
-                'Sources/styles/3/scss/*.scss',
-                'Sources/styles/common/main_scss/**/*.scss'
-            ]
+            sass: {
+                src: [
+                    'Sources/styles/1/scss/*.scss',
+                    'Sources/styles/2/scss/*.scss',
+                    'Sources/styles/3/scss/*.scss',
+                    'Sources/styles/common/main_scss/**/*.scss',
+                    '!Sources/styles/common/main_scss/font-awesome-4.7.0/**/*.scss'
+                ]
+            },
+            html: {
+                src: [
+                    '<%= webRoot %>/themes/templates/1/**/*.html'
+                ]
+            }
         },
 
         scsslint: {
@@ -112,19 +119,39 @@ module.exports = function (grunt) {
                     'Sources/styles/3/scss/*.scss',
                     'Sources/styles/common/main_scss/**/*.scss'
                 ],
-                tasks: ['default']
+                tasks: ['lintspaces:sass', 'sass', 'pleeease']
+            },
+            html: {
+                files: [
+                    '<%= webRoot %>/themes/templates/1/**/*.html'
+                ],
+                tasks: ['lintspaces:html']
+            },
+            php: {
+                files: [
+                    '<%= webRoot %>php/**/*.php',
+                    '!<%= webRoot %>php/{temp,vendor}/**/*.php'
+                ],
+                tasks: ['phpcs:all']
             }
         },
 
         phpcs: {
             application: {
                 src: [
+                    '<%= webRoot %>php/common/DAO/**/*.php',
+                    '<%= webRoot %>php/common/Model/**/*.php',
+                    '<%= webRoot %>php/lib/Db.php'
+                ]
+            },
+            all: {
+                src: [
                     '<%= webRoot %>php/**/*.php',
                     '!<%= webRoot %>php/{temp,vendor}/**/*.php'
                 ]
             },
             options: {
-                standard: 'PSR2',
+                standard: '.phpcs-ruleset.xml',
                 severity: 3
             }
         },
@@ -192,11 +219,11 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-php-cs-fixer');
 
     // Default task(s).
-    grunt.registerTask('default', ['eslint:application', 'lintspaces', 'sass', 'pleeease']);
+    grunt.registerTask('default', ['eslint:application', 'lintspaces', 'sass', 'pleeease', 'phpcs:application']);
     grunt.registerTask('lint', ['scsslint']);
     grunt.registerTask('sass-lint', ['sasslint']);
     grunt.registerTask('css-fix', ['csscomb']);
-    grunt.registerTask('phpcheck', ['phpcs']);
+    grunt.registerTask('phpcheck', ['phpcs:all']);
     grunt.registerTask('phpfixer', ['phpcbf']);
     grunt.registerTask('phpfix', ['phpcsfixer']);
 };

@@ -13,7 +13,7 @@
 The main doc type page
 ************************************************************************************************
 *}
-{extends file='1/admin/frontpage.html'}
+{extends file='1/admin/main.html'}
 
 {block name=title}Add/Edit a doc type{/block}
 
@@ -32,7 +32,7 @@ The main doc type page
         <br>
         <br>
         <div class="main_company_container">
-            <div class="main_company_child" id="child_edit_company">
+            <div class="text-center" id="child_edit_company">
                 <fieldset class="primary_fieldset">
                     <legend class="primary_legend">Edit a doc type</legend>
                     <form action="../docs/doc_type_edit.php" method="post" name="ind_edit" id="ind_edit">
@@ -47,7 +47,7 @@ The main doc type page
                     </form>
                 </fieldset>
             </div>
-            <div class="main_company_child" id="child_add_company">
+            <div class="text-center" id="child_add_company">
                 <fieldset class="primary_fieldset">
                     <legend class="primary_legend">Add a doc type</legend>
                     <form action="../docs/db_doc_type.php" method="post" name="ind_add" id="ind_add">

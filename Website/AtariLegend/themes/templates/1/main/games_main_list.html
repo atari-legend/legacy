@@ -22,7 +22,7 @@ The main game page
     {block name=title}Atari ST games search results | Atari Legend{/block}
 {/if}
 
-{block name=main_body}
+{block name=additional_scripts}
     {literal}
     <script> <!-- script needed for the autocompletion search engine -->
         $(document).ready(function() {
@@ -120,6 +120,74 @@ The main game page
         year_drop_text.style.display='none';
     }
     </script>
+
+    <!--This is the lazy load script with fader effect - fader is pure css class -->
+    <script src="{$template_dir}includes/js/vendor/lazyload-8.0.1.min.js"></script>
+    <script>
+    (function () {
+        var ll = new LazyLoad({
+            threshold: 0
+        });
+    }());
+    </script>
+    <!--end lazy load script with fader effect -->
+
+    {if isset($export) and ($export == 'export')}
+        <script src="{$template_dir}includes/js/vendor/tabulator-3.2.x.min.js"></script> <!-- tabulator script -->
+        <script src="{$template_dir}includes/js/vendor/xlsx.full-0.10.6.min.js"></script> <!-- export to xlsx script -->
+        <script>
+        //define some sample data
+        var tabledata = {$data};
+
+        {literal}
+
+            //create Tabulator on DOM element with id "example-table"
+            $("#games-table").tabulator({
+                responsiveLayout:true, // this option takes a boolean value (default = false)
+                fitColumns:true,
+                pagination:"local",
+                columns:[ //Define Table Columns
+                    {title:"Name", field:"game_name", sorter:"string", align:"left", headerFilter:"input", minWidth:150, responsive:0,cellClick:function(e, cell){window.location="../games/games_detail.php?game_id=" + cell.getRow().getData().game_id}},
+                    {title:"Publisher", field:"publisher_name", sorter:"string", align:"left", headerFilter:"input", minWidth:150, cellClick:function(e, cell){window.location="../games/games_main_list.php?publisher=" + cell.getRow().getData().publisher_id + "&action=search&export=1"}},
+                    {title:"Developer", field:"developer_name", sorter:"string", align:"left", headerFilter:"input", minWidth:150, cellClick:function(e, cell){window.location="../games/games_main_list.php?developer=" + cell.getRow().getData().developer_id + "&action=search&export=1"}},
+                    {title:"Year", field:"year", sorter:"string", align:"left",headerFilter:"input", width:75, minWidth:50, cellClick:function(e, cell){window.location="../games/games_main_list.php?year=" + cell.getRow().getData().year + "&action=search&export=1"}},
+                    {title:"Boxscan", field:"boxscan", sorter:"string", formatter:"tickCross",headerFilter:"input", width:100, minWidth:50},
+                    {title:"Screenshot", field:"screenshot", sorter:"string", formatter:"tickCross",headerFilter:"input", width:120, minWidth:50},
+                    {title:"Download", field:"download", sorter:"string", formatter:"tickCross",headerFilter:"input", width:110, minWidth:50},
+                    {title:"Music", field:"music", sorter:"string", formatter:"tickCross",headerFilter:"input", width:75, minWidth:50},
+                ],
+            });
+            $("#games-table").tabulator("setPageSize", 25); // show 25 rows per page
+
+            //trigger download of data.csv file
+            $("#download-csv").click(function(){
+                $("#games-table").tabulator("download", "csv", "data.csv");
+            });
+
+            //trigger download of data.json file
+            $("#download-json").click(function(){
+                $("#games-table").tabulator("download", "json", "data.json");
+            });
+
+            //trigger download of data.xlsx file
+            $("#download-xlsx").click(function(){
+                $("#games-table").tabulator("download", "xlsx", "data.xlsx");
+            });
+
+            //load sample data into the table
+            $("#games-table").tabulator("setData", tabledata);
+
+            $(window).on('resize', function () {
+                $(".tabulator").tabulator("redraw");
+            });
+
+        {/literal}
+        </script>
+    {/if}
+
+{/block}
+
+{block name=main_body}
     <div id="main" class="main_container_cpanel">
         <div class="content_box_cpanel" id="column_left_cpanel">
             <br>
@@ -130,6 +198,7 @@ The main game page
         <div class="content_box_cpanel" id="column_center_cpanel">
             <br>
             {if isset($export) and ($export == 'export')}
+
             <div class="standard_tile" id="games_main">
                 <div class="help-tip">
                     <p>
@@ -158,56 +227,7 @@ The main game page
                         <b>{if $nr_of_games == 1}1 game found {else} {$nr_of_games} games found{/if} in {$query_time} sec</b>
                     </div>
                 </div>
-                <script src="{$template_dir}includes/js/vendor/tabulator-3.2.x.min.js"></script> <!-- tabulator script -->
-                <script src="{$template_dir}includes/js/vendor/xlsx.full-0.10.6.min.js"></script> <!-- export to xlsx script -->
-                <script>
-                //define some sample data
-                var tabledata = {$data};
 
-                {literal}
-
-                //create Tabulator on DOM element with id "example-table"
-                $("#games-table").tabulator({
-                    responsiveLayout:true, // this option takes a boolean value (default = false)
-                    fitColumns:true,
-                    pagination:"local",
-                    columns:[ //Define Table Columns
-                        {title:"Name", field:"game_name", sorter:"string", align:"left", headerFilter:"input", minWidth:150, responsive:0,cellClick:function(e, cell){window.location="../games/games_detail.php?game_id=" + cell.getRow().getData().game_id}},
-                        {title:"Publisher", field:"publisher_name", sorter:"string", align:"left", headerFilter:"input", minWidth:150, cellClick:function(e, cell){window.location="../games/games_main_list.php?publisher=" + cell.getRow().getData().publisher_id + "&action=search&export=1"}},
-                        {title:"Developer", field:"developer_name", sorter:"string", align:"left", headerFilter:"input", minWidth:150, cellClick:function(e, cell){window.location="../games/games_main_list.php?developer=" + cell.getRow().getData().developer_id + "&action=search&export=1"}},
-                        {title:"Year", field:"year", sorter:"string", align:"left",headerFilter:"input", width:75, minWidth:50, cellClick:function(e, cell){window.location="../games/games_main_list.php?year=" + cell.getRow().getData().year + "&action=search&export=1"}},
-                        {title:"Boxscan", field:"boxscan", sorter:"string", formatter:"tickCross",headerFilter:"input", width:100, minWidth:50},
-                        {title:"Screenshot", field:"screenshot", sorter:"string", formatter:"tickCross",headerFilter:"input", width:120, minWidth:50},
-                        {title:"Download", field:"download", sorter:"string", formatter:"tickCross",headerFilter:"input", width:110, minWidth:50},
-                        {title:"Music", field:"music", sorter:"string", formatter:"tickCross",headerFilter:"input", width:75, minWidth:50},
-                    ],
-                });
-                $("#games-table").tabulator("setPageSize", 25); // show 25 rows per page
-
-                //trigger download of data.csv file
-                $("#download-csv").click(function(){
-                    $("#games-table").tabulator("download", "csv", "data.csv");
-                });
-
-                //trigger download of data.json file
-                $("#download-json").click(function(){
-                    $("#games-table").tabulator("download", "json", "data.json");
-                });
-
-                //trigger download of data.xlsx file
-                $("#download-xlsx").click(function(){
-                    $("#games-table").tabulator("download", "xlsx", "data.xlsx");
-                });
-
-                //load sample data into the table
-                $("#games-table").tabulator("setData", tabledata);
-
-                $(window).on('resize', function () {
-                    $(".tabulator").tabulator("redraw");
-                });
-
-                {/literal}
-                </script>
             </div>
             {else}
                 <div class="standard_tile" id="games_main">
@@ -235,7 +255,7 @@ The main game page
                             <div class="games_main_text_site"><h6>By Publisher <a style="cursor: pointer;" onClick="dropdown_pub()" class="latest_comments_link"><i class="fa fa-chevron-circle-down" aria-hidden="true" id="input_pub" title="Click for drop down mode"></i></a><a style="cursor: pointer;" onClick="input_pub()" class="latest_comments_link"><i class="fa fa-chevron-circle-down" aria-hidden="true" id="drop_pub" title="Click for input field mode" style="display:none;"></i></a></h6></div>
                             <div class="games_main_text_short"><h6>:</h6></div>
                             <div class="games_main_input_site">
-                                <select name="publisher" id="games_main_pub_drop" style="display:none;">
+                                <select name="publisher" id="games_main_pub_drop" style="display:none;" class="standard_select">
                                     <option value="-" SELECTED>-</option>
                                     {foreach from=$company_publisher item=line}
                                         <option value="{$line.comp_id}">{$line.comp_name}</option>
@@ -248,7 +268,7 @@ The main game page
                             <div class="games_main_text_site"><h6>By Developer <a style="cursor: pointer;" onClick="dropdown_dev()" class="latest_comments_link"><i class="fa fa-chevron-circle-down" aria-hidden="true" id="input_dev" title="Click for drop down mode"></i></a><a style="cursor: pointer;" onClick="input_dev()" class="latest_comments_link"><i class="fa fa-chevron-circle-down" aria-hidden="true" id="drop_dev" title="Click for input field mode" style="display:none;"></i></a></h6></div>
                             <div class="games_main_text_short"><h6>:</h6></div>
                             <div class="games_main_input_site">
-                                <select name="developer" id="games_main_dev_drop" style="display:none;">
+                                <select name="developer" id="games_main_dev_drop" style="display:none;" class="standard_select">
                                     <option value="-" SELECTED>-</option>
                                     {foreach from=$company_developer item=line}
                                         <option value="{$line.comp_id}">{$line.comp_name}</option>
@@ -261,7 +281,7 @@ The main game page
                             <div class="games_main_text_site"><h6>Release year <a style="cursor: pointer;" onClick="dropdown_year()" class="latest_comments_link"><i class="fa fa-chevron-circle-down" aria-hidden="true" id="input_year" title="Click for drop down mode"></i></a><a style="cursor: pointer;" onClick="input_year()" class="latest_comments_link"><i class="fa fa-chevron-circle-down" aria-hidden="true" id="drop_year" title="Click for input field mode" style="display:none;"></i></a></h6></div>
                             <div class="games_main_text_short"><h6>:</h6></div>
                             <div class="games_main_input_site">
-                                <select name="year" id="games_main_year_drop" style="display:none;">
+                                <select name="year" id="games_main_year_drop" style="display:none;" class="standard_select">
                                     <option value="-" SELECTED>-</option>
                                     {foreach from=$game_year item=line}
                                         <option value="{$line.game_year}">{$line.game_year}</option>
@@ -545,16 +565,6 @@ The main game page
                 </div>
             {/if}
             <br>
-            <!--This is the lazy load script with fader effect - fader is pure css class -->
-            <script src="{$template_dir}includes/js/vendor/lazyload-8.0.1.min.js"></script>
-            <script>
-            (function () {
-                var ll = new LazyLoad({
-                    threshold: 0
-                });
-            }());
-            </script>
-            <!--end lazy load script with fader effect -->
             <div class="standard_tile_text_center"><a href="javascript:history.go(-1)" class="standard_tile_link">back</a></div>
         </div>
         <div class="content_box_cpanel" id="column_right_cpanel">

@@ -7,6 +7,14 @@
 $skin_name: 'legacy';
 $bg_color: #00d3d3;
 
+$primary_base_color: #122323;
+$primary_odd_color: #0d2e2e;
+$primary_text_color: #ffffff;
+
+$secondary_base_color: #006f6f;
+$secondary_odd_color: #00d3d3;
+$secondary_text_color: #ffffff;
+
 // This variable affects the `.h-*` and `.w-*` classes.
 $sizes: (
     5: 5%,
@@ -39,10 +47,13 @@ $sizes: (
 //*----------------------------------------------------------
 // General settings
 //------------------------------------------------------------ */
+@import '../../1/scss/variables';                             //* --> Borrow from Bootstrap */
+@import '../../common/main_scss/bootstrap/bootstrap';                      //* --> Borrow from Bootstrap */
 @import '../../1/scss/general';                             //* --> general skin specific css settings */
 @import '../../1/scss/form_components';                             //* --> general skin specific css settings */
 @import '../../1/scss/tables';                             //* --> general skin specific css settings */
-@import '../../common/main_scss/bootstrap/sizing';                      //* --> Borrow from Bootstrap */
+@import '../../1/scss/list';                             //* --> general skin specific css settings */
+@import '../../common/main_scss/font-awesome-4.7.0/scss/font-awesome';  //* --> include Fontawesome into our main css */
 
 //*----------------------------------------------------------
 // Top
@@ -73,6 +84,7 @@ $sizes: (
 @import '../../1/scss/main-games';                          //* --> The game pages */
 @import '../../1/scss/main-interviews';                     //* --> The interview pages */
 @import '../../1/scss/main-news';                           //* --> The news pages */
+@import '../../1/scss/main-links';                          //* --> The links pages */
 @import '../../1/scss/main-reviews';                        //* --> The news pages */
 @import '../../1/scss/main-classAL';                        //* --> The Class of AL pages */
 

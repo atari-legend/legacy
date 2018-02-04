@@ -16,11 +16,6 @@
     display: none;
 }
 
-.download_details_input {
-    @extend .user_details_input;
-    width: 75%;
-}
-
 .download_details_text {
     @extend .user_details_text;
     width: 25%;
@@ -30,7 +25,7 @@
     @extend .user_details_row;
 }
 
-download_details_text_long {
+.download_details_text_long {
     @extend .user_details_text;
     width: 100%;
     text-align: center;

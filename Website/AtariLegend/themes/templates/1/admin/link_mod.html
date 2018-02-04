@@ -11,7 +11,7 @@
 *
 ***************************************************************************/
 *}
-{extends file='1/admin/frontpage.html'}
+{extends file='1/admin/main.html'}
 {block name=java_script}
 <script>
 $(function() {
@@ -148,7 +148,7 @@ function TestURL() {
                 </div>
                 <br>
                 <div class="links_mod_row">
-                {if  $website.website_imgext !== ""}
+                {if  $website.website_imgext !== null}
                     <div class="links_mod_text">
                         <div class="links_mod_checkbox">
                             <input type="checkbox" id="delete_image" name="delete_image" value="yes">

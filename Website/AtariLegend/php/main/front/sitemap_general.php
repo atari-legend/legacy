@@ -3,7 +3,8 @@
  * Generate the general sitemap for all content pages except the games
  */
 
-require("../../config/common.php");
+require_once __DIR__."/../../config/common.php";
+require_once __DIR__."/../../common/DAO/LinkCategoryDAO.php";
 
 // Retrieve all interview ids
 $stmt = $mysqli->prepare("SELECT interview_id FROM interview_main ORDER BY interview_id")
@@ -30,6 +31,10 @@ while ($stmt->fetch()) {
 }
 $stmt->close();
 $smarty->assign("review_ids", $review_ids);
+
+// Retrieve all Link categories
+$linkCategoryDao = new AL\Common\DAO\LinkCategoryDAO($mysqli);
+$smarty->assign("link_categories", $linkCategoryDao->getAllCategories());
 
 header("Content-Type: application/xml");
 

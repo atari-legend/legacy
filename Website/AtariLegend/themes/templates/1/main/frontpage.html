@@ -23,9 +23,9 @@
 *}
 
 {block name=description}Find information, reviews and comments about Atari ST games, read interviews of famous Atari ST game developers, contribute missing information to the Atari Legend database.{/block}
-{block name=javascript_slider}
+{block name=additional_scripts}
     <script src="{$template_dir}includes/js/vendor/lightbox-2.9.0.min.js"></script>
-    <link type="text/css" href="{$style_dir}css/vendor/lightbox-2.9.0.css" hreflang="en" rel="stylesheet">
+
 
     <script>
         lightbox.option({
@@ -185,8 +185,8 @@
     </script>
     {/if}
     <script>
-        window.onload = function() {
-            $(".standard_list_entry_news_text").dotdotdot({  <!--This is the script to truncate the latest news-->
+        jQuery(document).ready(function () {
+            $(".standard_list_entry_news_text").dotdotdot({  // This is the script to truncate the latest news-->
                     //  configuration goes here
 
                 /*  The text to add as ellipsis. */
@@ -225,8 +225,12 @@
                     noEllipsis  : []
                 }
             });
-        };
+        });
     </script>
+{/block}
+
+{block name="additional_css"}
+    <link type="text/css" href="{$style_dir}css/vendor/lightbox-2.9.0.css" hreflang="en" rel="stylesheet">
 {/block}
 
 {block name=main_body}
@@ -261,10 +265,6 @@
                 {include file='1/main/tile_open_db.html'}
             {/block}
 
-            <!--Start "hotlinks" tile
-            {block name=hotlinks_tile}
-                {include file='1/main/hotlinks_tile.html'}
-            {/block}-->
         </div>
         <!--this column is only visible with 3 and 2 columns-->
         <div class="column_wide_left">
@@ -323,6 +323,11 @@
                         {include file='1/main/tile_al_mobile.html'}
                     {/block}
                 </div>
+
+                <!--Start "statistics" tile-->
+                {block name=statistics_tile}
+                    {include file='1/main/statistics_tile.html'}
+                {/block}
             </div>
         </div>
 
@@ -353,14 +358,14 @@
                 {include file='1/main/who_is_it_tile.html'}
             {/block}
 
+            <!--Start "hotlinks" tile-->
+            {block name=hotlinks_tile}
+                {include file='1/main/hotlinks_tile.html'}
+            {/block}
+
             <!--Start "Did you know" tile-->
             {block name=did_you_know_tile}
                 {include file='1/main/did_you_know_tile.html'}
-            {/block}
-
-            <!--Start "statistics" tile-->
-            {block name=statistics_tile}
-                {include file='1/main/statistics_tile.html'}
             {/block}
 
             <!--Start spotlight tile-->
@@ -419,6 +424,11 @@
             {block name=date_quote_tile}
                 {include file='1/main/tile_open_db.html'}
             {/block}
+
+            <!--Start "hotlinks" tile-->
+            {block name=hotlinks_tile}
+                {include file='1/main/hotlinks_tile.html'}
+            {/block}
         </div>
 
         <!--this column is only visible in the 1 colum mode-->
@@ -454,14 +464,14 @@
                 {include file='1/main/who_is_it_tile.html'}
             {/block}
 
-            <!--Start date quote tile
-            {block name=date_quote_tile}
-                {include file='1/main/date_quote_tile.html'}
-            {/block}-->
-
             <!--Start open db tile-->
             {block name=date_quote_tile}
                 {include file='1/main/tile_open_db.html'}
+            {/block}
+
+            <!--Start "hotlinks" tile-->
+            {block name=hotlinks_tile}
+                {include file='1/main/hotlinks_tile.html'}
             {/block}
 
         </div>
@@ -564,14 +574,6 @@
                 <div class="contact_email_button"><a href="#"> </a></div>
                 <div class="contact_facebook_button"><a href="#"> </a></div>
             </div>-->
-
-            <!--Start "AL Mobile" tile-->
-            {block name=al_mobile}
-                <div class="contact_tiles">
-                    {include file='1/main/tile_al_mobile.html'}
-                </div>
-            {/block}
-
         </div>
 
         <!--this column is only visible in the 2 colum mode -->
@@ -580,6 +582,13 @@
             {block name=date_quote_tile}
                 {include file='1/main/date_quote_tile.html'}
             {/block}-->
+
+            <!--Start "AL Mobile" tile-->
+            {block name=al_mobile}
+                <div class="contact_tiles">
+                    {include file='1/main/tile_al_mobile.html'}
+                </div>
+            {/block}
         </div>
     </div>
     {if isset($smarty_action) and $smarty_action == 'first_time'}</div>{/if}

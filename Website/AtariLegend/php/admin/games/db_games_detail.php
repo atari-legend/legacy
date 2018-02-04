@@ -59,7 +59,11 @@ if (isset($action) and $action == 'delete_aka') {
 //If add aka button has been pressed
 //***********************************************************************************
 if (isset($action) and $action == 'game_aka') {
-    $sql_aka = $mysqli->query("INSERT INTO game_aka (game_id, aka_name) VALUES ('$game_id','$game_aka')") or die("Couldn't insert aka games");
+    //$sql_aka = $mysqli->query("INSERT INTO game_aka (game_id, aka_name) VALUES ('$game_id','$game_aka')") or die("Couldn't insert aka games");
+    $stmt = $mysqli->prepare("INSERT INTO game_aka (game_id, aka_name) VALUES (?,?)") or die($mysqli->error);
+    $stmt->bind_param("is", $game_id, $game_aka) or die($mysqli->error);
+    $stmt->execute() or die($mysqli->error);
+    $stmt->close();
 
     $new_aka_id = $mysqli->insert_id;
     create_log_entry('Games', $game_id, 'AKA', $new_aka_id, 'Insert', $_SESSION['user_id']);
