@@ -18,7 +18,7 @@
 User detail page. Overhere you can maintain the log on data of a user and have a look at his activities.
 *********************************************************************************************************
 *}
-{extends file='1/admin/frontpage.html'}
+{extends file='1/admin/main.html'}
 
 {block name=left_tile}
     {include file='1/admin/tile_user_contribution.html'}
@@ -85,7 +85,7 @@ function user_stats()
             After resetting, you are able to enter and save a new password for the account. Finally, 'Statistics' will display what this user has done at AL so far.
         </div>
         <br><br>
-        <fieldset class="primary_fieldset">
+        <fieldset class="secondary_fieldset">
             <legend class="primary_legend">User details</legend>
             <form action="../user/db_user.php?action=modify_user&amp;user_id_selected={$users.user_id}" method="post" name="user" id="user">
             <div class="user_details_container">
@@ -113,14 +113,6 @@ function user_stats()
                 </div>
                 <div class="user_details_child" id="child_3_user"></div>
                 <div class="user_details_child" id="child_2_user">
-                    <!--<div class="user_details_row">
-                        <div class="user_details_text">User pwd :</div>
-                        {if $users.user_pwd ==! ''}
-                            <div class="user_details_input"><input type="button" value="reset" class="topbutton_cpanel_small" onClick="reset_pwd();"></div>
-                        {else}
-                            <div class="user_details_input"><input type="text" name="user_pwd"  maxlength="255" class="user_details_input_small"></div>
-                        {/if}
-                    </div>-->
                     {if $user_session.permission != '2'}
                     <div class="user_details_row">
                         <div class="user_details_text">User permission :</div>
@@ -166,20 +158,20 @@ function user_stats()
             <tr>
                 <td><br><br>
                 {if $users.user_pwd ==! ''}
-                    <input type="submit" value="Modify" class="topbutton_cpanel_small">
+                    <input type="submit" value="Modify" class="secondary_button">
                 {else}
-                    <input type="button" value="Modify" class="topbutton_cpanel_small" onclick="formhash(this.form, this.form.user_pwd);">
+                    <input type="button" value="Modify" class="secondary_button" onclick="formhash(this.form, this.form.user_pwd);">
                 {/if}
                 </td>
-                <td><br><br><input type="button" value="Delete" onClick="delete_user();" class="topbutton_cpanel_small"></td>
-                <td><br><br><input type="button" value="Statistics" onClick="user_stats();" class="topbutton_cpanel_small"></td>
-                <td><br><br><input type="hidden" name="user_id_selected" value="{$users.user_id}" class="topbutton_cpanel_small"></td>
+                <td><br><br><input type="button" value="Delete" onClick="delete_user();" class="secondary_button"></td>
+                <td><br><br><input type="button" value="Statistics" onClick="user_stats();" class="secondary_button"></td>
+                <td><br><br><input type="hidden" name="user_id_selected" value="{$users.user_id}" class="secondary_button"></td>
             </tr>
             </table>
             </form>
         </fieldset>
         <br/><br/>
-        <fieldset class="primary_fieldset">
+        <fieldset class="secondary_fieldset">
             <legend class="primary_legend">Avatar</legend>
                 <div class="user_details_container">
                     <div class="user_details_child" id="child_1_user">
@@ -193,17 +185,19 @@ function user_stats()
                             </div>
                             <br>
                             <input type="hidden" name="user_id_selected" value="{$users.user_id}">
-                            <input type="submit" value="Delete" class="topbutton_cpanel_small">
+                            <input type="submit" value="Delete" class="secondary_button">
                             </form>
                         {else}
                             <form enctype="multipart/form-data" action="../user/db_user.php?user_id_selected={$users.user_id}" method="post" name="avatar" id="avatar">
                                 Attach image
                             <br><br>
-                            <label for="file_upload" class="file_upload">Select file</label>
+
+                            <label for="file_upload" class="secondary_button">Select file</label>
                             <input id="file_upload" type="file" name="image">
                             <input type="text" class="standard_input input_large" id="file_upload_user_detail">&nbsp;
+
                             <br><br>
-                            <input type="submit" name="Modify" value="Upload" class="topbutton_cpanel_small">
+                            <input type="submit" name="Modify" value="Upload" class="secondary_button">
                             <input type="hidden" name="MAX_FILE_SIZE" value="50000">
                             <input type="hidden" name="user_id_selected" value="{$users.user_id}">
                             <input type="hidden" name="action" value="avatar_upload">
@@ -213,7 +207,7 @@ function user_stats()
                 </div>
         </fieldset>
         <br/><br/>
-        <fieldset class="primary_fieldset">
+        <fieldset class="secondary_fieldset">
             <legend class="primary_legend">Reset Password</legend>
             <form action="../user/db_user.php" method="post" name="login_form">
             <div class="user_details_container">
@@ -225,7 +219,7 @@ function user_stats()
                             <div class="user_details_input"><input type="password" name="user_new_pwd"  maxlength="255" class="user_details_input_small"></div>
                         </div>
                         <br>
-                        <input type="submit" name="Modify" value="Modify" class="topbutton_cpanel_small">
+                        <input type="submit" name="Modify" value="Modify" class="secondary_button">
                         <input type="hidden" name="user_id_selected" value="{$users.user_id}">
                         <input type="hidden" name="action" value="reset_pwd">
                     {else}
@@ -243,7 +237,7 @@ function user_stats()
                                 <div class="user_details_input"><input type="password" name="user_confirm_pwd"  maxlength="255" class="user_details_input_small"></div>
                             </div>
                             <br>
-                            <input type="button" onclick="formhash(this.form, this.form.password);" name="Modify" value="Modify" class="topbutton_cpanel_small">
+                            <input type="button" onclick="formhash(this.form, this.form.password);" name="Modify" value="Modify" class="secondary_button">
                             <input type="hidden" name="user_id_selected" value="{$users.user_id}">
                             <input type="hidden" name="action" value="reset_pwd">
                         {else}

@@ -50,12 +50,10 @@
         width: 100%;
     }
     #download_details_text,
-    #download_details_input,
     .games_main_text,
     .games_main_input {
         display: inline;
     }
-    .interviews_main_photo,
     #news_approve_icon {
         display: none;
     }
@@ -70,21 +68,6 @@
     }
     .links_addnew_row {
         width: 100%;
-    }
-    #child_some_stats,
-    #child_good_karma_chart,
-    #child_bad_karma_chart,
-    #child_good_karma,
-    #child_bar,
-    #child_line,
-    #child_bad_karma {
-        width: 100%;
-        float: left;
-    }
-    .good_karma_chart,
-    .bad_karma_chart {
-        width: 100%;
-        height: 100%;
     }
     .user_details_text,
     .user_details_input {
@@ -179,6 +162,39 @@
         width: 90%;
     }
 }
+@media screen and (min-width: 576px) {
+    .main_stats_container {
+        flex-direction: row;
+        width: 100%;
+    }
+    #latest_changes_chart {
+        flex-wrap: wrap;
+    }
+    #child_some_stats,
+    #child_good_karma_chart,
+    #child_bad_karma_chart,
+    #child_good_karma,
+    #child_bar,
+    #child_line,
+    #child_bad_karma {
+        width: 75%;
+        float: left;
+    }
+    #child_good_karma,
+    #child_bar,
+    #child_line,
+    #child_good_karma_chart,
+    #child_bad_karma_chart,
+    #child_bad_karma {
+        margin-top: 20px;
+    }
+    .main_stats_child {
+        display: block;
+        margin: 0 auto;
+    }
+}
+
+
 @media screen and (max-width: 599px) {
     #quick_search_options,
     #quick_search_user_options {
@@ -427,6 +443,18 @@
         width: 100%;
     }
 }
+@media screen and (min-width: 800px) and (max-width: 991px) {
+    #column_left_cpanel,
+    #column_center_cpanel {
+        width: 100%;
+        float: left;
+        margin: auto;
+    }
+    #column_right_cpanel {
+        display: none;
+    }
+}
+
 @media screen and (min-width: 800px) {
     .column_right_tab,
     .column_left_tab,
@@ -661,34 +689,6 @@
 }
 
 @media screen and (max-width: 1199px) {
-    .main_stats_container {
-        flex-direction: column-reverse;
-    }
-    #child_some_stats,
-    #child_good_karma_chart,
-    #child_bad_karma_chart,
-    #child_good_karma,
-    #child_bar,
-    #child_line,
-    #child_bad_karma {
-        width: 75%;
-        float: left;
-    }
-    #child_good_karma,
-    #child_bar,
-    #child_line,
-    #child_good_karma_chart,
-    #child_bad_karma_chart,
-    #child_bad_karma {
-        margin-top: 20px;
-    }
-    .main_stats_container > div {
-        width: 100%;
-    }
-    .main_stats_child {
-        display: block;
-        margin: 0 auto;
-    }
     .review_container {
         flex-direction: column;
     }
@@ -712,6 +712,43 @@
         display: none;
     }
 }
+
+// Extra large devices (large desktops, 1200px and up)
+@media screen and (min-width: 1200px) {
+    .main_stats_container {
+        display: flex;
+        align-items: flex-start;
+    }
+    #latest_changes_chart {
+        flex-wrap: nowrap;
+    }
+    #child_some_stats {
+        float: left;
+        width: 45%;
+    }
+    #child_good_karma,
+    #child_bad_karma,
+    #child_bar,
+    #child_line,
+    #child_bad_karma_chart,
+    #child_good_karma_chart {
+        float: left;
+        width: 75%;
+        margin-left: auto;
+    }
+    .good_karma_chart,
+    .bad_karma_chart {
+        width: 400px;
+        height: 425px;
+    }
+    .bar_changelog,
+    .line_changelog {
+        width: 100%;
+        height: 100%;
+    }
+}
+
+
 @media screen and (max-width: 1210px) {
     .information_table_column,
     .release_year_column {
@@ -719,7 +756,6 @@
     }
 }
 @media screen and (min-width: 601px) and (max-width: 1279px) {
-
     #gd_other_features_left,
     #gd_left {
         float: left;
@@ -792,7 +828,9 @@
         width: 40%;
         margin-left: 0;
     }
+}
 
+@media screen and (min-width: 992px) and (max-width: 1280px) {
     #column_left_cpanel {
         width: 25%;
         float: left;
@@ -805,14 +843,9 @@
         display: none;
     }
 }
+
+
 @media screen and (max-width: 1449px) {
-    .good_karma_chart,
-    .bad_karma_chart,
-    .bar_changelog,
-    .line_changelog {
-        width: 100%;
-        height: 100%;
-    }
     .standard_tile_input_small_site {
         width: 98.3%;
     }
@@ -820,22 +853,12 @@
         display: none;
     }
 }
-@media screen and (min-width: 1450px) {
-    .good_karma_chart,
-    .bad_karma_chart {
-        width: 400px;
-        height: 425px;
-    }
-    .bar_changelog,
-    .line_changelog {
-        width: 100%;
-        height: 100%;
-    }
-}
 @media screen and (max-width: 1494px) {
     .datequote_position_front,
-    .tile_open_db_front {
+    .tile_open_db_front,
+    .hotlinks_position_front {
         float: right;
+        width: 100%;
     }
     .screenstar_position_front {
         margin-top: 0;
@@ -843,7 +866,8 @@
 }
 
 @media screen and (min-width: 1495px) {
-    .latest_news {
+    .latest_news,
+    .statistics_position_front{
         float: left;
         width: 48%;
     }
@@ -853,7 +877,6 @@
     .datequote_position_front,
     .tile_open_db_front,
     .social_corner_position_front,
-    .hotlinks_position_front,
     .class_position_front {
         float: left;
         width: 94%;
@@ -865,7 +888,7 @@
     }
     .didyouknow_position_front,
     .spotlight_position_front,
-    .statistics_position_front {
+    .hotlinks_position_front {
         float: left;
         width: 100%;
     }
@@ -905,10 +928,6 @@
     }
     .main_company_container > div {
         width: 100%;
-    }
-    .main_company_child {
-        display: block;
-        margin: 0 auto;
     }
 }
 @media screen and (min-width: 1600px) {

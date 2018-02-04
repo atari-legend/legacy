@@ -12,46 +12,38 @@
     width: 25%;
     font-weight: bold;
 }
-
 .games_main_input {
     display: table-cell;
     width: 75%;
 }
-
 .games_main_row {
     display: table;
     width: 75%;
     margin-left: auto;
 }
-
 .games_check_container {
     display: flex;
     width: 50%;
     margin: auto;
 }
-
 #child_1,
 #child_2 {
     width: 50%;
     margin: auto;
 }
-
 .games_check_text {
     display: table-cell;
     width: 95%;
     font-weight: bold;
 }
-
 .games_check_box {
     display: table-cell;
     width: 5%;
 }
-
 .games_check_row {
     display: table;
     width: 100%;
 }
-
 
 //*----------------------------------------------------------
 //Games detail
@@ -107,18 +99,12 @@
     width: 40%;
     margin-top: -285px;
 }
-
 #gd_other_features {
     float: right;
     width: 38%;
 }
-
-#gd_creator_info {
-    margin-bottom: 20px;
-}
-#gd_publisher_info {
-    margin-bottom: 20px;
-}
+#gd_creator_info,
+#gd_publisher_info,
 #gd_developer_info {
     margin-bottom: 20px;
 }
@@ -131,7 +117,6 @@
     float: left;
     width: 100%;
 }
-
 #gd_text_area_big {
     height: 250px;
 }

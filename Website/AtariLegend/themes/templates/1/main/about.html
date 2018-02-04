@@ -17,17 +17,23 @@
 {block name=title}The history of Atari Legend | Atari Legend{/block}
 {block name=description}Discover the history of the Atari Legend website from 1997 to today and the team behind it.{/block}
 
-{block name=main_body}
+{block name=additional_scripts}
     <script src="{$template_dir}includes/js/vendor/lightbox-2.9.0.min.js"></script>
-    <link type="text/css" href="{$style_dir}css/vendor/lightbox-2.9.0.css" hreflang="en" rel="stylesheet">
+
     <script>
         lightbox.option({
             'showImageNumberLabel': false
         })
     </script>
-    <link rel="stylesheet" href="{$style_dir}css/vendor/font-awesome-4.7.0/css/font-awesome.min.css"> <!-- Font awesome for icons-->
     <script src="{$template_dir}includes/js/vendor/modernizr-2.7.1.min.js"></script> <!-- Modernizr -->
+    <script src="{$template_dir}includes/js/about.js"></script>  <!-- jQuery script to animate the history blocks -->
+{/block}
 
+{block name=additional_css}
+    <link type="text/css" href="{$style_dir}css/vendor/lightbox-2.9.0.css" hreflang="en" rel="stylesheet">
+{/block}
+
+{block name=main_body}
     <div id="main" class="main_container_games_details">
         <div class="content_box_games_details" id="column_left_interviews_details">
             {if isset($action) and $action == 'andreas'}
@@ -627,5 +633,4 @@
             {/block}
         </div>
     </div>
-    <script src="{$template_dir}includes/js/about.js"></script>  <!-- jQuery script to animate the history blocks -->
 {/block}

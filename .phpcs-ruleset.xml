@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<ruleset name="Custom Standard" namespace="MyProject\CS\Standard">
+	<rule ref="PSR2">
+		<!-- Disable putting function braces on a new line -->
+		<exclude name="Squiz.Functions.MultiLineFunctionDeclaration.BraceOnSameLine" />
+		<!-- Disable puttin class braces on a new line -->
+		<exclude name="PSR2.Classes.ClassDeclaration.OpenBraceNewLine" />
+		<!-- Prevent warning for classes that use require_once() -->
+		<exclude name="PSR1.Files.SideEffects.FoundWithSymbols" />
+		<!-- Allow multiple arguments on the same line when calling functions -->
+		<exclude name="PSR2.Methods.FunctionCallSignature.MultipleArguments" />
+	</rule>
+	<!-- Ensure functions braces are on the same line -->
+	<rule ref="Generic.Functions.OpeningFunctionBraceKernighanRitchie" />
+</ruleset>

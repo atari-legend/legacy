@@ -55,15 +55,6 @@
 //
 // Table Headers
 //
-.table_textalign_right {
-    text-align: right;
-}
-.table_textalign_left {
-    text-align: left;
-}
-.table_textalign_center {
-    text-align: center;
-}
 
 .primary_table_list {
     padding: 0;
@@ -184,52 +175,6 @@
 .db_description_column,
 .db_exe_column {
     text-align: center;
-}
-.log_date_column,
-.log_action_column,
-.log_section_column,
-.log_subsection_column,
-.log_user_column,
-.log_name_column,
-.menu_disk_set_column,
-.menu_crew_column,
-.menu_individual_column,
-.nr_menus_column,
-.menu_type_column,
-.game_gm_column,
-.pub_gm_column,
-.year_gm_column,
-.zaks_gm_column,
-.username_gr_column,
-.gamepub_gr_column,
-.reviewdate_gr_column,
-.nrreviews_gr_column,
-.gamename_gr_column,
-.menu_list_crew_column,
-.menu_disk_list_column,
-.menu_list_individual_column,
-.game_name_column,
-.publisher_table_column,
-.developer_table_column,
-.information_table_column,
-.release_year_column,
-.username_column,
-.joindate_column,
-.lastvisit_column,
-.email_column,
-.menu_docname_column,
-.menu_doctype_column,
-.menu_docinfo_column,
-.menu_mark_column,
-.menu_gameinfo_column,
-.menu_gameset_column,
-.menu_gamename_column,
-.menu_gamedeveloper_column,
-.menu_gameyear_column,
-.menu_credits_column,
-.menu_scene_column,
-.menu_delete_column {
-    text-align: left;
 }
 
 .menu_state_column,

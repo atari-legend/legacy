@@ -149,8 +149,7 @@ if (isset($action) and $action == 'modify_link') {
         list($website_imgext) = $website_query->fetch_array(MYSQLI_BOTH);
         $full_filename = "$website_image_save_path$website_id.$website_imgext";
 
-        chmod($full_filename, 0777) or die("Couldn't set file permissions");
-        $mysqli->query("UPDATE website SET website_imgext='' WHERE website_id='$website_id'") or die("unable to delete the file from the database");
+        $mysqli->query("UPDATE website SET website_imgext=null WHERE website_id='$website_id'") or die("unable to delete the file from the database");
         unlink("$website_image_save_path$website_id.$website_imgext") or die("unable to delete the file from server");
     }
 

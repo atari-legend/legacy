@@ -58,89 +58,10 @@
     width: 100%;
     margin-top: 20px;
 }
-
 .register_input {
     width: 100%;
     text-align: center;
 }
-
-//*----------------------------------------------------------
-//logon tile --> front page --> Not used anymore
-//------------------------------------------------------------ */
-.logon {
-    float: right;
-    width: 100%;
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
-
-.logon_input_usn {
-    position: relative;
-    width: 100%;
-    margin-top: 20px;
-    margin-left: 10%;
-}
-
-.logon_username_icon::before {
-    display: block;
-    content: url('../images/logon_usn.png');
-}
-
-.logon_password_icon::before {
-    display: block;
-    content: url('../images/logon_pwd.png');
-}
-
-.logon_facebook_button,
-.logon_twitter_button {
-    text-align: center;
-}
-
-//* we will be implementing this at a later stage
-//*.logon_facebook_button::before {content: url('../images/login-facebook.png');} */
-
-//*.logon_twitter_button::before {content: url('../images/login_twitter.png');} */
-
-
-.logon_left {
-    position: absolute;
-    left: 0;
-    width: 10%;
-}
-
-.logon_right {
-    position: absolute;
-    left: 45px;
-    width: 90%;
-}
-
-.logon_input_pwd {
-    position: relative;
-    width: 100%;
-    margin-top: 85px;
-    margin-left: 10%;
-}
-
-.logon_signin {
-    margin-top: 170px;
-}
-.logon_signin img {
-    display: block;
-    margin: auto;
-}
-
-.logon_signin img:hover {
-    opacity: .7;
-}
-.logon_socmed {
-    width: 100%;
-    margin-top: 10px;
-}
-
-.logon_socmed:hover {
-    opacity: .7;
-}
-
 //*----------------------------------------------------------
 //screenstar --> front page
 //------------------------------------------------------------ */
@@ -148,15 +69,12 @@
     margin-top: 20px;
     margin-bottom: 20px;
 }
-
 //*----------------------------------------------------------
 //latest news tile --> front page
 //------------------------------------------------------------ */
 .latest_news {
     margin-bottom: 20px;
 }
-
-
 //*----------------------------------------------------------
 //datequote tile - front page
 //------------------------------------------------------------ */
@@ -175,21 +93,18 @@
     font-size: 85pt;
     color: #ffffff;
 }
-
 .datequote_month {
     margin-top: -10px;
     margin-bottom: -10px;
     font-size: 30pt;
     color: #ffffff;
 }
-
 .datequote_year {
     margin-top: -10px;
     font-size: 55pt;
     color: #cccccc;
     text-align: center;
 }
-
 .datequote_text {
     padding-top: 10px;
     padding-bottom: 10px;
@@ -206,50 +121,42 @@
 .tile_open_db_front {
     margin-bottom: 20px;
 }
-
-
 //*----------------------------------------------------------
 //Who is it - front page
 //------------------------------------------------------------ */
 .whoisit_position_front {
     margin-bottom: 20px;
 }
-
 //*----------------------------------------------------------
 //Latest reviews tile - front page
 //------------------------------------------------------------ */
 .latest_reviews {
     margin-bottom: 20px;
 }
-
 //*----------------------------------------------------------
 //Did you know tile - front page
 //------------------------------------------------------------ */
 .didyouknow_position_front {
     margin-bottom: 20px;
 }
-
 //*----------------------------------------------------------
 //Hotlinks tile - front page
 //------------------------------------------------------------ */
 .hotlinks_position_front {
     margin-bottom: 20px;
 }
-
 //*----------------------------------------------------------
 //Class tile - front page
 //------------------------------------------------------------ */
 .class_position_front {
     margin-bottom: 20px;
 }
-
 //*----------------------------------------------------------
 //Social corner tile - front page
 //------------------------------------------------------------ */
 .social_corner_position_front {
     margin-bottom: 20px;
 }
-
 //*----------------------------------------------------------
 //contact tiles - front page
 //------------------------------------------------------------ */
@@ -363,7 +270,6 @@
 }
 
 // Interaction states
-
 .ui-state-hover,
 .ui-widget-content .ui-state-hover,
 .ui-widget-header .ui-state-hover,

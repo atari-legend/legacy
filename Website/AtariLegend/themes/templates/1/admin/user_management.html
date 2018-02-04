@@ -13,294 +13,10 @@
 *
 ***************************************************************************/
 *}
-{extends file='1/admin/frontpage.html'}
-
-
+{extends file='1/admin/main.html'}
 {block name=java_script}
-<script src="{$template_dir}includes/js/menus.js"></script>
-<script>
-//$(document).ready(function() {
-
-//function UserSearch() {
-
-//    var form_values = $( "#user_search" ).serialize();
-
-//    $.ajax({
-
-//    // The URL for the request
-//    url: "ajax_user_management.php",
-
-//    // The data to send (will be converted to a query string)
-//    data: form_values,
-
-//    // Whether this is a POST or GET request
-//    type: "GET",
-
-//    // The type of data we expect back
-//   dataType : "html",
-
-//    // Code to run if the request succeeds;
-//    // the response is passed to the function
-//    success: function( html ) {
-//        $( "#ajax_usersearch" ).html( html );
-//    }
-//    });
-//}
-
-//    $( "#quick_search_small_select" ).change(function () { UserSearch(); });
-//    $( "#js_user_search" ).keyup(function () {
-//        var value = $(this).val();
-//        if (value.length >= 3 || value == "") {
-//            UserSearch();
-//        }
-//    });
-//    $( "#no_comments" ).change(function () {
-//        if ($(this).is(':checked')) { $("#with_comments").prop("checked", false);}
-//        UserSearch();
-//    });
-//    $( "#with_comments" ).change(function () {
-//        if ($(this).is(':checked')) { $("#no_comments").prop("checked", false);}
-//        UserSearch();
-//    });
-//   $( "#no_submissions" ).change(function () {
-//        if ($(this).is(':checked')) { $("#with_submissions").prop("checked", false);}
-//        UserSearch();
-//    });
-//    $( "#with_submissions" ).change(function () {
-//        if ($(this).is(':checked')) { $("#no_submissions").prop("checked", false);}
-//        UserSearch();
-//    });
-//    $( "#no_email" ).change(function () {
-//        if ($(this).is(':checked')) { $("#with_email").prop("checked", false);}
-//        UserSearch();
-//    });
-//    $( "#with_email" ).change(function () {
-//        if ($(this).is(':checked')) { $("#no_email").prop("checked", false);}
-//        UserSearch();
-//    });
-//    $( "#no_news" ).change(function () {
-//        if ($(this).is(':checked')) { $("#with_news").prop("checked", false);}
-//        UserSearch();
-//    });
-//    $( "#with_news" ).change(function () {
-//        if ($(this).is(':checked')) { $("#no_news").prop("checked", false);}
-//        UserSearch();
-//    });
-//    $( "#no_links" ).change(function () {
-//        if ($(this).is(':checked')) { $("#with_links").prop("checked", false);}
-//        UserSearch();
-//    });
-//    $( "#with_links" ).change(function () {
-//     if ($(this).is(':checked')) { $("#no_links").prop("checked", false);}
-//        UserSearch();
-//    });
-//    $( "#no_interviews" ).change(function () {
-//        if ($(this).is(':checked')) { $("#with_interviews").prop("checked", false);}
-//        UserSearch();
-//    });
-//    $( "#with_interviews" ).change(function () {
-//        if ($(this).is(':checked')) { $("#no_interviews").prop("checked", false);}
-//        UserSearch();
-//    });
-//    $( "#no_review" ).change(function () {
-//        if ($(this).is(':checked')) { $("#with_review").prop("checked", false);}
-//        UserSearch();
-//    });
-//    $( "#with_review" ).change(function () {
-//        if ($(this).is(':checked')) { $("#no_review").prop("checked", false);}
-//        UserSearch();
-//    });
-//    $( "#not_admin" ).change(function () {
-//        if ($(this).is(':checked')) { $("#is_admin").prop("checked", false);}
-//        UserSearch();
-//    });
-//    $( "#is_admin" ).change(function () {
-//        if ($(this).is(':checked')) { $("#not_admin").prop("checked", false);}
-//        UserSearch();
-//    });
-//    $( "#last_visit" ).change(function () {
-//        UserSearch();
-//    });
-
-//});
-
-$( document ).ajaxComplete(function() {
-    UserlistFunction();
-});
-
-$(document).ready(function() {
-    UserlistFunction();
-
-});
-
-
-function UserlistFunction() {
-
-            // select all checkboxes in list
-    $( '#user_select_all' ).click(function () {
-        $('.user_checkbox').prop('checked', $(this).prop('checked'));
-    });
-
-
-        // Are you sure question Delete
-    $( "#user_list_action" ).change(function () {
-        if ($(this).val() == "delete_user") {
-            $('#JSGenericModal').dialog({
-                title: 'Delete Users?',
-                open: $('#JSGenericModalText').text('These users will be permanently deleted. Are you sure?'),
-                resizable: false,
-                height: 200,
-                modal: true,
-                buttons: {
-                    'Delete': function () {
-                        $(this).dialog('close');
-                        UserModify();
-                    },
-                    Cancel: function () {
-                        $(this).dialog('close');
-                    }
-                }
-            });
-        }
-        if ($(this).val() == "deactivate_user") {
-            $('#JSGenericModal').dialog({
-                title: 'Deactivate Users?',
-                open: $('#JSGenericModalText').text('These users will be deactivated. Are you sure?'),
-                resizable: false,
-                height: 200,
-                modal: true,
-                buttons: {
-                    'Deactivate': function () {
-                        $(this).dialog('close');
-                        UserModify();
-                    },
-                    Cancel: function () {
-                        $(this).dialog('close');
-                    }
-                }
-            });
-        }
-        if ($(this).val() == "activate_user") {
-            $('#JSGenericModal').dialog({
-                title: 'Activate Users?',
-                open: $('#JSGenericModalText').text('These users will be activated. Are you sure?'),
-                resizable: false,
-                height: 200,
-                modal: true,
-                buttons: {
-                    'Activate': function () {
-                        $(this).dialog('close');
-                        UserModify();
-                    },
-                    Cancel: function () {
-                        $(this).dialog('close');
-                    }
-                }
-            });
-        }
-        if ($(this).val() == "email_user") {
-            // $( "#dialog_confirm_email" ).dialog({
-            //  resizable: false,
-            //  height:140,
-            //  modal: true,
-            //  buttons: {
-            //      "Email user(s)": function() {
-            //      $( this ).dialog( "close" );
-            //      UserModify();
-            //      },
-            //      Cancel: function() {
-            //      $( this ).dialog( "close" );
-            //      }
-            //  }
-            //});
-            document.getElementById('email_fields').style.visibility = 'visible';
-        }
-    });
-}
-function UserModify() {
-
-    // var form_values = $( "#user_list" ).serialize();
-
-    // $.ajax({
-
-    // The URL for the request
-    // url: "db_user_management.php",
-
-    // The data to send (will be converted to a query string)
-    // data: form_values,
-
-    // Whether this is a POST or GET request
-    // type: "POST",
-
-    // The type of data we expect back
-    // dataType : "text",
-
-    // Code to run if the request succeeds;
-    // the response is passed to the function
-    // success: function( text ) {
-
-        // $.notify_osd.create({
-                // 'text'        : text,             // notification message
-                // 'icon'        : '{$style_dir}/images/osd_icons/star.png', // icon path, 48x48
-                // 'sticky'      : false,             // if true, timeout is ignored
-                // 'timeout'     : 4,                 // disappears after 6 seconds
-                // 'dismissable' : true               // can be dismissed manually
-                // });
-
-        //Reload userlist
-            // var form_values = $( "#user_search" ).serialize();
-
-        // $.ajax({
-
-        // The URL for the request
-        // url: "ajax_user_management.php",
-
-        // The data to send (will be converted to a query string)
-        // data: form_values,
-
-        // Whether this is a POST or GET request
-        // type: "GET",
-
-        // The type of data we expect back
-        // dataType : "html",
-
-        // Code to run if the request succeeds;
-        // the response is passed to the function
-        // success: function( html ) {
-        // $( "#ajax_usersearch" ).html( html );
-        // }
-            // });
-    // }
-    // });
-
-    document.getElementById('user_list').method="post";
-    document.getElementById('user_list').action="../user/db_user_management.php?action=delete_user";
-    document.getElementById('user_list').submit();
-}
-
-</script>
-<script>
-function EmailSent(){
-    $('#JSGenericModal').dialog({
-        title: 'Email users?',
-        open: $('#JSGenericModalText').text('Email users?'),
-        resizable: false,
-        height: 200,
-        modal: true,
-        buttons: {
-            'Email user(s)': function () {
-                $(this).dialog('close');
-                document.getElementById('user_list').method="post";
-                document.getElementById('user_list').action="../user/db_user_management.php?action=email_user";
-                document.getElementById('user_list').submit();
-            },
-            Cancel: function () {
-                $(this).dialog('close');
-            }
-        }
-    });
-}
-</script>
+<script src="{$template_dir}includes/js/vendor/jquery.ajaxQueue-0.1.1.min.js"></script>
+<script src="{$template_dir}includes/js/user_management.js"></script>
 {/block}
 
 {block name=left_tile}
@@ -312,13 +28,6 @@ function EmailSent(){
 {/block}
 
 {block name=main_tile}
-<link rel="stylesheet" href="{$style_dir}css/vendor/font-awesome-4.7.0/css/font-awesome.min.css"> <!-- Font awesome for icons-->
-<div id="JSGenericModal" title="Delete Title?" style="display:none;">
-    <p>
-        <span class="ui-icon ui-icon-alert" style="float:left; margin:0 7px 20px 0;"></span>
-        <div id="JSGenericModalText">Are you sure?</div>
-    </p>
-</div>
 <form action="test" name="user_list" id="user_list">
 <div class="standard_tile">
     <div class="help-tip">
@@ -342,11 +51,11 @@ function EmailSent(){
     <h1>USER MANAGEMENT</h1>
     <div class="standard_tile_line"></div>
     <div class="standard_tile_padding">
-        <div class="left_nav_section">
+        <div class="left_nav_section centered_fieldset">
             This is the user area. Overhere you can maintain user accounts of the AL website! There are currently
             <b>{$nr_users_total}</b> users in the database.
             <br><br>
-            <div class="centered_fieldset"><a href="../user/karma_sync.php" class="standard_tile_link_reverse" onclick="SyncKarma(); return false;">Karma Re-Sync</a></div>
+            <a href="../user/karma_sync.php" class="standard_tile_link_reverse" onclick="SyncKarma(); return false;">Karma Re-Sync</a>
         </div>
         <br>
         <div class="main_stats_container" id="ajax_usersearch">
@@ -406,18 +115,16 @@ function EmailSent(){
         </div>
     </div>
 </div>
-{if isset($mail_link)}
-    <div class="standard_tile_padding" id="email_fields" style="visibility:hidden">
-        <fieldset class="primary_fieldset">
+    <div class="standard_tile_padding" id="email_fields" style="display:none">
+        <fieldset class="secondary_fieldset">
             <legend class="primary_legend">Create email</legend>
             <input type="text" name="email_head" id="email_head" class="standard_input input_large" Value="Email title">
             <br>
-            <textarea name="email_descr" id="email_descr" class="links_addnew_area">Email description</textarea>
+            <textarea name="email_descr" id="email_descr" class="links_addnew_area" style="margin-top: 5px;">Email description</textarea>
             <br>
             <br>
-            <input type="button" onclick="EmailSent()" name="email_sent" value="Sent" class="topbutton_cpanel_small">
+            <input type="button" name="email_sent" value="Sent" class="secondary_button" id="jsEmailBtn">
         </fieldset>
     </div>
-{/if}
 </form>
 {/block}
