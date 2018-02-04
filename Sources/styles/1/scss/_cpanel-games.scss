@@ -92,7 +92,7 @@
     width: 100%;
 }
 #gd_text_area_big {
-    height: 250px;
+    height: 100%;
 }
 
 #file_upload_game_screenshots,
@@ -147,4 +147,5 @@
 //------------------------------------------------------------ */
 .game_screenshot_img {
     @extend #user_details_img_dark;
+    width: 100%;
 }

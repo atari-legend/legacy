@@ -20,19 +20,27 @@
 {block name=java_script}
 <script src="../templates/0/js/game_comment.js"></script>
 <script>
-function deletecomment(screenshot_id, article_id)
-{
-    // CONFIRM REQUIRES ONE ARGUMENT
-    var message = "Are you sure you want to delete the screenshot with its comment?";
-    // CONFIRM IS BOOLEAN. THAT MEANS THAT
-    // IT RETURNS TRUE IF 'OK' IS CLICKED
-    // OTHERWISE IT RETURN FALSE
-    var return_value = confirm(message);
-    if (return_value !="0")
-    {
-        url="db_articles.php?article_id="+interview_id+"&screenshot_id="+screenshot_id+"&action=delete_comment";
-        location.href=url;
-    }
+
+
+
+function deletecomment(screenshot_id, article_id) {
+    $('#JSGenericModal').dialog({
+        title: 'Delete',
+        open: $('#JSGenericModalText').text('Are you sure you want to delete the screenshot with its comment?'),
+        resizable: false,
+        height: 200,
+        modal: true,
+        buttons: {
+            'Delete': function () {
+                $(this).dialog('close');
+                url="db_articles.php?article_id="+interview_id+"&screenshot_id="+screenshot_id+"&action=delete_comment";
+                location.href=url;
+            },
+            Cancel: function () {
+                $(this).dialog('close');
+            }
+        }
+    });
 }
 
 var clientPC = navigator.userAgent.toLowerCase(); // Get client info

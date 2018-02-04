@@ -15,16 +15,6 @@
 {extends file='1/admin/main.html'}
 {block name=java_script}
 <script>
-function OSDMessageDisplay(message) {
-    $.notify_osd.create({
-        'text': message, // notification message
-        'icon': '../../../themes/styles/1/images/osd_icons/star.png', // icon path, 48x48
-        'sticky': false, // if true, timeout is ignored
-        'timeout': 4, // disappears after 6 seconds
-        'dismissable': true // can be dismissed manually
-    });
-}
-
     function DidyouknowdeleteConfirmation(trivia_id) {
         $("#JSGenericModal").dialog({
             title: "Delete Quote",

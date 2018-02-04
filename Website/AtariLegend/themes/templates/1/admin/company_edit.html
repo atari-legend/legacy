@@ -30,36 +30,43 @@ $(function() {
     });
 });
 
-function company_pic_delete(comp_id)
-{
-    // CONFIRM REQUIRES ONE ARGUMENT
-    var message = "Are you sure you want to delete this logo from the database?";
-    // CONFIRM IS BOOLEAN. THAT MEANS THAT
-    // IT RETURNS TRUE IF 'OK' IS CLICKED
-    // OTHERWISE IT RETURN FALSE
-    var return_value = confirm(message);
-
-    if (return_value !="0")
-    {
-        url="db_company_edit.php?comp_id="+comp_id+"&action=delete_logo";
-        location.href=url;
-    }
+function company_pic_delete(comp_id) {
+    $('#JSGenericModal').dialog({
+        title: 'Delete',
+        open: $('#JSGenericModalText').text('Are you sure you want to delete this logo from the database?'),
+        resizable: false,
+        height: 200,
+        modal: true,
+        buttons: {
+            'Delete': function () {
+                $(this).dialog('close');
+                url="db_company_edit.php?comp_id="+comp_id+"&action=delete_logo";
+                location.href=url;
+            },
+            Cancel: function () {
+                $(this).dialog('close');
+            }
+        }
+    });
 }
-
-function companydelete(comp_id)
-{
-    // CONFIRM REQUIRES ONE ARGUMENT
-    var message = "Are you sure you want to delete this company from the database?";
-    // CONFIRM IS BOOLEAN. THAT MEANS THAT
-    // IT RETURNS TRUE IF 'OK' IS CLICKED
-    // OTHERWISE IT RETURN FALSE
-    var return_value = confirm(message);
-
-    if (return_value !="0")
-    {
-        url="db_company_edit.php?comp_id="+comp_id+"&action=delete_comp";
-        location.href=url;
-    }
+function companydelete(comp_id) {
+    $('#JSGenericModal').dialog({
+        title: 'Delete',
+        open: $('#JSGenericModalText').text('Are you sure you want to delete this company from the database?'),
+        resizable: false,
+        height: 200,
+        modal: true,
+        buttons: {
+            'Delete': function () {
+                $(this).dialog('close');
+                url="db_company_edit.php?comp_id="+comp_id+"&action=delete_comp";
+                location.href=url;
+            },
+            Cancel: function () {
+                $(this).dialog('close');
+            }
+        }
+    });
 }
 
 var clientPC = navigator.userAgent.toLowerCase(); // Get client info
@@ -172,8 +179,7 @@ function bbstyle(bbnumber, bbname) {
 }
 
 // From http://www.massless.org/mozedit/
-function mozWrap(txtarea, open, close)
-{
+function mozWrap(txtarea, open, close) {
     var selLength = txtarea.textLength;
     var selStart = txtarea.selectionStart;
     var selEnd = txtarea.selectionEnd;

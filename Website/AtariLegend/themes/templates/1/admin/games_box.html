@@ -28,19 +28,24 @@ $(function() {
     });
 });
 
-function deletescreen(JSgameboxID,JSmode)
-{
-    // CONFIRM REQUIRES ONE ARGUMENT
-    var message = "Are you sure you want to delete this scan?";
-    // CONFIRM IS BOOLEAN. THAT MEANS THAT
-    // IT RETURNS TRUE IF 'OK' IS CLICKED
-    // OTHERWISE IT RETURN FALSE
-    var return_value = confirm(message);
-    if (return_value !="0")
-    {
-        url="../games/db_games_box.php?mode="+JSmode+"&game_boxscan_id="+JSgameboxID+"&game_id={$game_info.game_id}&action=boxscan_delete";
-        location.href=url;
-    }
+function deletescreen(JSgameboxID,JSmode) {
+    $("#JSGenericModal").dialog({
+        title: "Delete",
+        open: $("#JSGenericModalText").text("Are you sure you want to delete this scan?"),
+        resizable: false,
+        height: 200,
+        modal: true,
+        buttons: {
+            "Delete": function() {
+                $(this).dialog("close");
+                url="../games/db_games_box.php?mode="+JSmode+"&game_boxscan_id="+JSgameboxID+"&game_id={$game_info.game_id}&action=boxscan_delete";
+                location.href=url;
+            },
+            Cancel: function() {
+                $(this).dialog("close");
+            }
+        }
+    });
 }
 </script>
 <script src="{$template_dir}includes/js/vendor/lightbox-2.9.0.min.js"></script>

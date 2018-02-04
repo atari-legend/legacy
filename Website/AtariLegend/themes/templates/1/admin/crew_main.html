@@ -24,17 +24,23 @@ function crewinsert() {
     if (JSnewcrew=='') {
         alert('Please fill in a crew name');
     } else {
-        // CONFIRM REQUIRES ONE ARGUMENT
-        var message = "Are you sure you want to insert this crew into the database?";
-        // CONFIRM IS BOOLEAN. THAT MEANS THAT
-        // IT RETURNS TRUE IF 'OK' IS CLICKED
-        // OTHERWISE IT RETURN FALSE
-        var return_value = confirm(message);
-
-        if (return_value !="0") {
-            url="db_crew.php?new_crew="+JSnewcrew+"&action=insert_crew";
-            location.href=url;
-        }
+        $('#JSGenericModal').dialog({
+            title: 'Add',
+            open: $('#JSGenericModalText').text('Are you sure you want to insert this crew into the database?'),
+            resizable: false,
+            height: 200,
+            modal: true,
+            buttons: {
+                'Add': function () {
+                    $(this).dialog('close');
+                    url="db_crew.php?crew_select="+crew_select+"&action=delete_crew";
+                    location.href=url;
+                },
+                Cancel: function () {
+                    $(this).dialog('close');
+                }
+            }
+        });
     }
 }
 
