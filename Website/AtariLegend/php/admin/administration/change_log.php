@@ -182,7 +182,7 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH)) {
     if ($log['section'] == 'Links') {
         $section_link = ("../links/link_mod.php" . '?website_id=' . $log['section_id']);
 
-        if ($log['sub_section'] == 'Link' or $log['sub_section'] == 'Category') {
+        if ($log['sub_section'] == 'Link' or $log['sub_section'] == 'Category' or $log['sub_section'] == 'Link submit') {
             $subsection_link = ("../links/link_mod.php" . '?website_id=' . $log['section_id']);
         }
     }
