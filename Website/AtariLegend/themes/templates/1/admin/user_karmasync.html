@@ -1,4 +1,4 @@
-{* 
+{*
 /***************************************************************************
 *                               user_karmasync.html
 *                            -----------------------
@@ -6,7 +6,7 @@
 *   copyright            : (C) 2005 Atari Legend
 *   email                : maarten.martens@freebel.net
 *   actual update        : file creation
-*							
+*
 *
 *   Id: user_karmasync.html,v 0.10 2005/11/13 silver
 *   Id: user_karmasync.html,v 0.20 2015/09/04 Grave - AL 2.0
@@ -18,39 +18,31 @@
 The the user karma sync page
 ************************************************************************************************
 *}
-{extends file='1/admin/frontpage.html'}
+{extends file='1/admin/main.html'}
 {block name=main_tile}
 <div class="standard_tile" id="karma">
-	<h1>KARMA SYNC</h1>
-	<div class="standard_tile_line"></div>
-	<div class="standard_tile_text">
-		<div class="left_nav_section">
-			Karma values have all been resynced for the total user population.
-		</div>
-		<br>
-		<br>
-		<table id="user_search_main_tabel">
-		<tr>
-			<td>	
-				<table class="standard_table_list">
-					<tr>
-						<th class="karma_column">User</th>
-						<th class="karma_column">Karma</th>
-					</tr>
-					{foreach from=$sync item=line}
-					<tr>
-						<td class="karma_column">{if $line.user_name != ''}<a class="standard_table_center">{$line.user_name}</a>{/if}</td>
-						<td class="karma_column">{if $line.karma_value != ''}<a class="standard_table_center">{$line.karma_value}</a>{/if}</td>
-					</tr>
-					{/foreach}
-				</table>
-			</td>
-		</tr>
-		</table>
-		<br>
-		<br>
-		<div class="standard_table_center"><a href="../user/user_main.php" class="standard_tile_link">back</a></div>
-		<br>
-	</div>
+    <h1>KARMA SYNC</h1>
+    <div class="standard_tile_line"></div>
+    <div class="standard_tile_padding">
+        <div class="left_nav_section">
+            Karma values have all been resynced for the total user population.
+        </div>
+        <br>
+        <br>
+                <table class="secondary_table_list table_hover table_md ">
+                    <tr>
+                        <th class="w-50">User</th>
+                        <th class="w-50">Karma</th>
+                    </tr>
+                    {foreach from=$sync item=line}
+                    <tr>
+                        <td class="w-50">{if $line.user_name != ''}<a class="standard_tile_text_center">{$line.user_name}</a>{/if}</td>
+                        <td class="w-50">{if $line.karma_value != ''}<a class="standard_tile_text_center">{$line.karma_value}</a>{/if}</td>
+                    </tr>
+                    {/foreach}
+                </table>
+        <br>
+        <div class="standard_tile_text_center"><a href="../user/user_main.php" class="standard_tile_link">back</a></div>
+    </div>
 </div>
 {/block}

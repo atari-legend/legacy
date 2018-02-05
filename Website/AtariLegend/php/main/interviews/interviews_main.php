@@ -17,7 +17,7 @@
 include("../../config/common.php");
 
 //load the tiles
-include("../../common/tiles/screenstar.php");
+include("../../common/tiles/hotlinks_tile.php");
 include("../../common/tiles/did_you_know_tile.php");
 include("../../common/tiles/latest_comments_tile.php");
 include("../../common/tiles/tile_bug_report.php");
@@ -32,13 +32,15 @@ $query_number = $mysqli->query("SELECT * FROM interview_main") or die("Couldn't 
 $v_rows = $query_number->num_rows;
 
 //main query
-$sql_interview = $mysqli->query("SELECT *
+$sql_interview = $mysqli->query("
+    SELECT *
     FROM interview_main
     LEFT JOIN interview_text on (interview_main.interview_id = interview_text.interview_id)
     LEFT JOIN users on (interview_main.user_id = users.user_id)
     LEFT JOIN individuals on (interview_main.ind_id = individuals.ind_id)
     LEFT JOIN individual_text on (interview_main.ind_id = individual_text.ind_id)
-    ORDER BY interview_text.interview_date DESC LIMIT  " . $v_counter . ", 5") or die("Error - Couldn't query interview data");
+    ORDER BY interview_text.interview_date DESC LIMIT  " . $v_counter . ", 5")
+    or die("Error - Couldn't query interview data");
 
 while ($query_interview = $sql_interview->fetch_array(MYSQLI_BOTH)) {
     $v_interview_date = date("F j, Y", $query_interview['interview_date']);
@@ -59,7 +61,9 @@ while ($query_interview = $sql_interview->fetch_array(MYSQLI_BOTH)) {
     }
 
     //The interviewed person's picture
-    if ($query_interview['ind_imgext'] == 'png' or $query_interview['ind_imgext'] == 'jpg' or $query_interview['ind_imgext'] == 'gif') {
+    if ($query_interview['ind_imgext'] == 'png'
+    or $query_interview['ind_imgext'] == 'jpg'
+    or $query_interview['ind_imgext'] == 'gif') {
         $v_ind_image = $individual_screenshot_path;
         $v_ind_image .= $query_interview['ind_id'];
         $v_ind_image .= '.';
@@ -116,7 +120,6 @@ $smarty->assign('links', array(
     'v_counter' => $v_counter,
     'c_counter' => $c_counter
 ));
-
 
 //Send all smarty variables to the templates
 $smarty->display("file:" . $mainsite_template_folder . "interviews_main.html");

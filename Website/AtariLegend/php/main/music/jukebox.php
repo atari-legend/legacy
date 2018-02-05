@@ -35,14 +35,15 @@ while ($sql_artist = $query_artist->fetch_array(MYSQLI_BOTH)) {
 if (isset($artist_id)) {
     $smarty->assign('artist_id', $artist_id);
 
-    $query_music = $mysqli->query("SELECT * FROM game_music
-						LEFT JOIN music ON (game_music.music_id = music.music_id)
-						LEFT JOIN music_author ON (music.music_id = music_author.music_id)
-						LEFT JOIN music_types ON (music.music_id = music_types.music_id)
-						LEFT JOIN music_types_main ON (music_types.music_types_main_id = music_types_main.music_types_main_id)
-						LEFT JOIN game ON (game_music.game_id = game.game_id)
-						WHERE music_author.ind_id = $artist_id
-						ORDER BY game.game_name") or die("fucked up query2");
+    $query_music = $mysqli->query("
+        SELECT * FROM game_music
+		LEFT JOIN music ON (game_music.music_id = music.music_id)
+		LEFT JOIN music_author ON (music.music_id = music_author.music_id)
+		LEFT JOIN music_types ON (music.music_id = music_types.music_id)
+		LEFT JOIN music_types_main ON (music_types.music_types_main_id = music_types_main.music_types_main_id)
+		LEFT JOIN game ON (game_music.game_id = game.game_id)
+		WHERE music_author.ind_id = $artist_id
+		ORDER BY game.game_name") or die("fucked up query2");
 
     while ($sql_music = $query_music->fetch_array(MYSQLI_BOTH)) {
         $smarty->append(

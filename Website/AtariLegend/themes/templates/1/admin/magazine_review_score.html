@@ -1,85 +1,85 @@
-{* 
+{*
 /***************************************************************************
- *                                magazine_review_Score.html
- *                            ----------------------------------
- *   begin                : ?
- *   copyright            : (C) 2005 Atari Legend
- *   email                : admin@atarilegend.com
- *	 actual update        : Creation of file
- *
- *   Id: magazine_review_Score.html,v 0.10 ? Silver Surfer
- *   Id: magazine_review_Score.html,v 0.20 2016/07/17 22:34 STG
- *											- AL 2.0 update
- *
- ***************************************************************************/
+*                            magazine_review_Score.html
+*                            ----------------------------------
+*   begin                : ?
+*   copyright            : (C) 2005 Atari Legend
+*   email                : admin@atarilegend.com
+*   actual update        : Creation of file
+*
+*   Id: magazine_review_Score.html,v 0.10 ? Silver Surfer
+*   Id: magazine_review_Score.html,v 0.20 2016/07/17 22:34 STG
+*                                          - AL 2.0 update
+*
+***************************************************************************/
 
 //****************************************************************************************
 // This is the page where we link a magazine to a game and give a score
-//**************************************************************************************** 
+//****************************************************************************************
 *}
 
-{extends file='1/admin/frontpage.html'}
+{extends file='1/admin/main.html'}
 {block name=java_script}
-<script type="text/javascript">
+<script>
 function scoredelete(JSmagID,JSgame_id)
-{ 
-    	// CONFIRM REQUIRES ONE ARGUMENT
-    	var message = "Are you sure you want to delete this review score?";
-    	// CONFIRM IS BOOLEAN. THAT MEANS THAT
-    	// IT RETURNS TRUE IF 'OK' IS CLICKED
-    	// OTHERWISE IT RETURN FALSE
-    	var return_value = confirm(message);
+{
+        // CONFIRM REQUIRES ONE ARGUMENT
+        var message = "Are you sure you want to delete this review score?";
+        // CONFIRM IS BOOLEAN. THAT MEANS THAT
+        // IT RETURNS TRUE IF 'OK' IS CLICKED
+        // OTHERWISE IT RETURN FALSE
+        var return_value = confirm(message);
 
-    	if (return_value !="0")
-    	{literal}{ {/literal} 
-    		url="../magazine/db_magazine.php?action=score_delete&magazine_game_id="+JSmagID+"&game_id="+JSgame_id+""
-			location.href=url;
-    	}  
-} 
+        if (return_value !="0")
+        {literal}{ {/literal}
+            url="../magazine/db_magazine.php?action=score_delete&magazine_game_id="+JSmagID+"&game_id="+JSgame_id+""
+            location.href=url;
+        }
+}
 </script>
 {/block}
 {block name=title}Add Review Score{/block}
 
 {block name=main_tile}
 <div class="standard_tile" id="magazine_review_score">
-	<h1>{$game.game_name}</h1>
-	<div class="standard_tile_line"></div>
-	<div class="standard_tile_text">
-		<div class="left_nav_section">
-			In this section you can link a game to a magazine and add the score it got in the issue.
-		</div> 
-		{if isset($game_score)}
-			<br>
-			<br>
-			<fieldset class="centered_fieldset">
-				<legend>Uploaded scores</legend>
-				{foreach from=$game_score item=line}
-					<a href="../games/games_detail.php?game_id={$game.game_id}" class="left_nav_link">{$line.game_name}</a> - 
-					<a href="../magazine/magazine_issue_edit.php?magazine_issue_id={$line.magazine_issue_id}" class="left_nav_link">{$line.magazine_name} {$line.magazine_issue_nr}</a> - score {$line.score} 
-					- <a onClick="scoredelete({$line.magazine_game_id},{$game.game_id})" style="cursor: pointer;" class="left_nav_link"><b>Delete Score</b></a><br>
-				{/foreach}<br>
-			</fieldset>
-		{/if}
-		<br>
-		<fieldset class="centered_fieldset">
-			<legend class="links_legend">Magazine issues</legend>
-			<br>
-			{* Marty! Hi mate! here you need to add the search variables. Take care /Matt *}
-			<form action="../magazine/magazine_setscore.php?source=gameinfo&game_id={$game.game_id}" method="post" name="pickissue" id="pickissue">
-				<select name="magazine_issue_id" id="magazine_issue_id">
-					{foreach from=$issues item=line}
-					<option value="{$line.magazine_issue_id}">{$line.magazine_name} issue {$line.magazine_issue_nr}</option>	
-					{/foreach}
-				</select>
+    <h1>{$game.game_name}</h1>
+    <div class="standard_tile_line"></div>
+    <div class="standard_tile_padding">
+        <div class="left_nav_section">
+            In this section you can link a game to a magazine and add the score it got in the issue.
+        </div>
+        {if isset($game_score)}
+            <br>
+            <br>
+            <fieldset class="primary_fieldset centered_fieldset">
+                <legend class="primary_legend">Uploaded scores</legend>
+                {foreach from=$game_score item=line}
+                    <a href="../games/games_detail.php?game_id={$game.game_id}" class="left_nav_link">{$line.game_name}</a> -
+                    <a href="../magazine/magazine_issue_edit.php?magazine_issue_id={$line.magazine_issue_id}" class="left_nav_link">{$line.magazine_name} {$line.magazine_issue_nr}</a> - score {$line.score}
+                    - <a onClick="scoredelete({$line.magazine_game_id},{$game.game_id})" style="cursor: pointer;" class="left_nav_link"><b>Delete Score</b></a><br>
+                {/foreach}<br>
+            </fieldset>
+        {/if}
+        <br>
+        <fieldset class="primary_fieldset centered_fieldset">
+            <legend class="primary_legend">Magazine issues</legend>
+            <br>
+            {* Marty! Hi mate! here you need to add the search variables. Take care /Matt *}
+            <form action="../magazine/magazine_setscore.php?source=gameinfo&game_id={$game.game_id}" method="post" name="pickissue" id="pickissue">
+                <select name="magazine_issue_id" id="magazine_issue_id" class="standard_select select_medium">
+                    {foreach from=$issues item=line}
+                    <option value="{$line.magazine_issue_id}">{$line.magazine_name} issue {$line.magazine_issue_nr}</option>
+                    {/foreach}
+                </select>
                 <br>
                 <br>
-				<input type="hidden" name="action" value="set_score">	
-				<input type="submit" value="Select" class="topbutton_cpanel_small">
-			</form>
-		</fieldset>
-	</div>
-	<br>
-	<div class="standard_table_center"><a href="../games/games_detail.php?game_id={$game.game_id}" class="standard_tile_link">back</a></div>
-	<br>
+                <input type="hidden" name="action" value="set_score">
+                <input type="submit" value="Select" class="topbutton_cpanel_small">
+            </form>
+        </fieldset>
+    </div>
+    <br>
+    <div class="standard_tile_text_center"><a href="../games/games_detail.php?game_id={$game.game_id}" class="standard_tile_link">back</a></div>
+    <br>
 </div>
 {/block}

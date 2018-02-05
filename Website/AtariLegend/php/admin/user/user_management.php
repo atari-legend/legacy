@@ -20,8 +20,7 @@ include("../../config/admin.php");
 
 $start = microtime(true);
 
-if ( isset($action) and $action == 'quick_search_users' )
-{ 
+if (isset($action) and $action == 'quick_search_users') {
     $last_visit_timestamp = date_to_timestamp($Date_Year, $Date_Month, $Date_Day);
 
     $sql_query = "SELECT users.user_id, users.userid, users.email, users.join_date, users.last_visit FROM users";
@@ -58,7 +57,7 @@ if ( isset($action) and $action == 'quick_search_users' )
     } else {
         $sql_query .= " WHERE userid LIKE '$userbrowse%'";
     }
-       
+
     if (!empty($usersearch)) {
         $usersearch = $mysqli->real_escape_string($usersearch);
         $sql_query .= " AND userid LIKE '%$usersearch%'";
@@ -146,16 +145,16 @@ if ( isset($action) and $action == 'quick_search_users' )
         } else {
             $last_visit = "Unknown";
         }
-                  
+
         $smarty->append('users', array(
             'user_id' => $query_users['user_id'],
             'user_name' => $query_users['userid'],
             'join_date' => $join_date,
             'last_visit' => $last_visit,
             'email' => $email
-        ));   
+        ));
     }
-    
+
     $smarty->assign('nr_users', $nr_users);
 
     $time_elapsed_secs = microtime(true) - $start;
@@ -180,10 +179,7 @@ if ( isset($action) and $action == 'quick_search_users' )
 
     $time_elapsed_secs = microtime(true) - $start;
     $smarty->assign("query_time", $time_elapsed_secs);
- 
-}
-else
-{
+} else {
     $sql_users = $mysqli->query("SELECT * FROM users WHERE userid REGEXP '^[0-9].*' ORDER BY users.userid") or die("Couldn't query users Database");
     $nr_users = 0;
     while ($query_users = $sql_users->fetch_array(MYSQLI_BOTH)) {
@@ -212,9 +208,9 @@ else
             'join_date' => $join_date,
             'last_visit' => $last_visit,
             'email' => $email
-        ));    
+        ));
     }
-    
+
     $smarty->assign('nr_users', $nr_users);
 
     // Create dropdown values a-z

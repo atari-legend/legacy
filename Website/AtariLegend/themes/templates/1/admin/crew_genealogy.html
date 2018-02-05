@@ -1,7 +1,7 @@
 {*
 /***************************************************************************
-                              crew_genealogy.html
-*                            --------------------------
+*                           crew_genealogy.html
+*                           --------------------------
 *   begin                : Sunday, August 28, 2005
 *   copyright            : (C) 2005 Atari Legend
 *   email                : admin@atarilegend.com
@@ -16,10 +16,10 @@
 The crew genealogy page
 ************************************************************************************************
 *}
-{extends file='1/admin/frontpage.html'}
+{extends file='1/admin/main.html'}
 
 {block name=java_script}
-<script type="text/javascript">
+<script>
 function crewinsert()
 {
     JSnewcrew=document.forms["insertcrew"].newcrew.value;
@@ -47,7 +47,7 @@ function crewinsert()
 
 function browseSubCrew(str2) {
     if (str2 == "") {
-        document.getElementById("sub_crew").innerHTML = "";
+        $('sub_crew').html('');
         return;
     } else {
         if (window.XMLHttpRequest) {
@@ -125,7 +125,6 @@ function searchCrew(str) {
                 document.getElementById("crew_list").innerHTML = xmlhttp.responseText;
             }
         }
-
     } else {
         if (window.XMLHttpRequest) {
             // code for IE7+, Firefox, Chrome, Opera, Safari
@@ -174,7 +173,6 @@ function searchInd(str) {
                 document.getElementById("ind_member").innerHTML = xmlhttp.responseText;
             }
         }
-
     } else {
         if (window.XMLHttpRequest) {
             // code for IE7+, Firefox, Chrome, Opera, Safari
@@ -192,12 +190,6 @@ function searchInd(str) {
         xmlhttp.send();
     }
 }
-
-function ChangeNick(individual_nicks_id,crew_individual_id,crew_select)
-{
-    url="../crew/db_crew.php?action=update_nick&individual_nicks_id="+individual_nicks_id+"&crew_individual_id="+crew_individual_id+"&crew_select="+crew_select;
-    location.href=url;
-}
 </script>
 {/block}
 
@@ -205,20 +197,20 @@ function ChangeNick(individual_nicks_id,crew_individual_id,crew_select)
 <div class="standard_tile">
     <h1>CREW EDITOR </h1>
     <div class="standard_tile_line"></div>
-    <div class="standard_table_center">
+    <div class="standard_tile_text_center">
         <br>
         Search for crew:<br>
         <form action="../crew/crew_editor.php" method="get" name="post_menu_crew_set" id="menu_crew_set">
-            <select name="crewbrowse" size="1" id="quick_search_small_select" onchange="browseCrew(this.value)">
+            <select name="crewbrowse" size="1" class="standard_select select_small" onchange="browseCrew(this.value)">
                 <option value="" SELECTED>-</option>
                 {html_options values=$az_value output=$az_output}
             </select>
-            <input type="text" name="crewsearch" value="" onkeyup="searchCrew(this.value)" class="standard_tile_input_small">
+            <input type="text" name="crewsearch" value="" onkeyup="searchCrew(this.value)" class="standard_input input_large">
             <br>
             <br>
             {* Ajax *}
             <div id="crew_list">
-                <select name="crew_select" id="quick_search_pub_select">
+                <select name="crew_select" class="standard_select select_large">
                     <option value="" SELECTED>-</option>
                     {foreach from=$crew item=line}
                         {html_options values=$line.crew_id output=$line.crew_name}
@@ -235,7 +227,7 @@ function ChangeNick(individual_nicks_id,crew_individual_id,crew_select)
         {* Add crew section *}
         Add new Crew to db:
         <form method="post" name="insertcrew">
-            <input type="text" name="newcrew" value="" class="standard_tile_input_small">
+            <input type="text" name="newcrew" value="" class="standard_input input_large">
             <br>
             <br>
             <input type="submit" value="Insert" class="quick_search_games_button" onClick="crewinsert(); return false;">
@@ -244,7 +236,7 @@ function ChangeNick(individual_nicks_id,crew_individual_id,crew_select)
     <br>
 </div>
 <br>
-{include file='1/admin/left_nav.html'}
+
 {/block}
 
 {block name=title}Crew editor - Genealogy{/block}
@@ -253,7 +245,7 @@ function ChangeNick(individual_nicks_id,crew_individual_id,crew_select)
 <div class="standard_tile">
     <h1>CREW GENEALOGY</h1>
     <div class="standard_tile_line"></div>
-    <div class="standard_tile_text">
+    <div class="standard_tile_padding">
         <div class="left_nav_section">
             This is the scene genealogy page for <b>{$crew_select.crew_name}</b>. Here we can add members to crews. We can add both indiviual members and subcrews.
         </div>
@@ -269,18 +261,18 @@ function ChangeNick(individual_nicks_id,crew_individual_id,crew_select)
         <br>
         <br>
         <div class="main_company_container">
-            <div class="main_company_child" id="child_edit_company">
-                <fieldset>
-                    <legend>Subcrew</legend>
+            <div class="text-center" id="child_edit_company">
+                <fieldset class="primary_fieldset">
+                    <legend class="primary_legend">Subcrew</legend>
                     <form action="../crew/db_crew.php" method="post" name="crew_gene2" id="crew_gene2">
-                        <select id="quick_search_small_select" onchange="browseSubCrew(this.value)">
+                        <select class="standard_select select_small" onchange="browseSubCrew(this.value)">
                             <option value="" SELECTED>-</option>
                             {html_options values=$az_value output=$az_output}
                         </select>
-                        <input type="text" name="crewsearch" value="" onkeyup="searchSubCrew(this.value)" class="standard_tile_input_small">
+                        <input type="text" name="crewsearch" value="" onkeyup="searchSubCrew(this.value)" class="standard_input input_large">
                         <br><br>
                         <div id="sub_crew">
-                            <select name="sub_crew[]" id="quick_search_pub_select">
+                            <select name="sub_crew[]" class="standard_select select_large">
                                 <option value="" SELECTED>-</option>
                                 {foreach from=$crew_gene item=line}
                                     {if $line.crew_id <> $crew_select.crew_id}
@@ -299,18 +291,18 @@ function ChangeNick(individual_nicks_id,crew_individual_id,crew_select)
                     </form>
                 </fieldset>
             </div>
-            <div class="main_company_child" id="child_edit_company">
-                <fieldset>
-                    <legend>Members</legend>
-                     <form action="../crew/db_crew.php" method="post">
-                        <select id="quick_search_small_select" name="m1" onchange="browseInd(this.value)">
+            <div class="text-center" id="child_edit_company">
+                <fieldset class="primary_fieldset">
+                    <legend class="primary_legend">Members</legend>
+                    <form action="../crew/db_crew.php" method="post">
+                        <select class="standard_select select_small" name="m1" onchange="browseInd(this.value)">
                             <option value="" SELECTED>-</option>
                             {html_options values=$az_value output=$az_output}
                         </select>
-                        <input type="text" onkeyup="searchInd(this.value)" class="standard_tile_input_small">
+                        <input type="text" onkeyup="searchInd(this.value)" class="standard_input input_large">
                         <br><br>
                         <div id="ind_member">
-                            <select name="ind_id" id="quick_search_pub_select">
+                            <select name="ind_id" class="standard_select select_large">
                                 <option value="" SELECTED>-</option>
                                 {foreach from=$ind_gene item=line}
                                     <option value="{$line.ind_id}">{$line.ind_name}</option>
@@ -331,73 +323,49 @@ function ChangeNick(individual_nicks_id,crew_individual_id,crew_select)
         {* MEMBERS OF CREW *}
         <br>
         <div class="main_company_container">
-            <div class="main_company_child" id="child_edit_company">
-                <fieldset>
-                    <table style="width:100%;">
+            <div class="text-center" id="child_edit_company">
+                <fieldset class="primary_fieldset">
+                    <table class="primary_table_list table_md">
                         <tr>
-                            <th style="width:50%;">SubCrews</th>
-                            <th style="width:50%;"></th>
+                            <th class="w-80">SubCrews</th>
+                            <th class="w-20"></th>
                         </tr>
                         {if isset($subcrew)}
                             {foreach from=$subcrew item=line}
                                 <tr>
-                                    <td style="width:50%;"><a href="../crew/crew_editor.php?crewbrowse=&crewsearch=&crew_select={$line.crew_id}" class="left_nav_link">{$line.crew_name}</a></td>
-                                    <td style="width:50%;"><a href="../crew/db_crew.php?action=delete_subcrew&amp;crew_select={if isset($crew_select.crew_id)}{$crew_select.crew_id}{/if}&amp;crewsearch={$tracking.crewsearch}&amp;crewbrowse={$tracking.crewbrowse}&amp;sub_crew_id={$line.sub_crew_id}" class="left_nav_link">Delete</a>
+                                    <td>
+                                        <a href="../crew/crew_editor.php?crewbrowse=&crewsearch=&crew_select={$line.crew_id}" class="standard_tile_link">{$line.crew_name}</a>
+                                    </td>
+                                    <td>
+                                        <a href="../crew/db_crew.php?action=delete_subcrew&amp;crew_select={if isset($crew_select.crew_id)}{$crew_select.crew_id}{/if}&amp;crewsearch={$tracking.crewsearch}&amp;crewbrowse={$tracking.crewbrowse}&amp;sub_crew_id={$line.sub_crew_id}" class="standard_tile_link">Delete</a>
                                     </td>
                                 </tr>
                             {/foreach}
                         {/if}
-                        <tr>
-                            <td class="game_list_footer" colspan="2">
-                                &nbsp;&nbsp;&nbsp;
-                            </td>
-                        </tr>
                     </table>
                 </fieldset>
             </div>
-            <div class="main_company_child" id="child_edit_company">
-                <fieldset>
-                    <table style="width:100%;">
+            <div class="text-center" id="child_edit_company">
+                <fieldset class="primary_fieldset">
+                    <table class="primary_table_list table_md">
                         <tr>
-                            <th style="width:40%;">"Sceners"</th>
-                            <th style="width:40%;">Used nick</th>
-                            <th style="width:20%;"></th>
+                            <th class="w-80">"Sceners"</th>
+                            <th class="w-20"></th>
                         </tr>
                         {if isset($crew_individuals)}
                             {foreach name=outer item=individual from=$crew_individuals}
                                 <tr>
-                                    <td style="width:40%;"><a href="../individuals/individuals_edit.php?ind_id={$individual.ind_id}" class="left_nav_link">{$individual.ind_name}</td>
-                                    <form action="../crew/db_crew.php" method="post" name="nick_edit{$individual.ind_id}" id="nick_edit{$individual.ind_id}">
-                                        <td style="width:40%;">
-                                            <select name="individual_nicks_id" id="individual_nicks_id" size="1" onchange="ChangeNick(this.value,{{$individual.crew_individual_id}},{$crew_select.crew_id})">
-                                                <option value="-" {if $individual.individual_nicks_id <> ''} {else}SELECTED{/if}>None</option>
-                                                {if isset($nick_names)}
-                                                    {foreach name=inner item=line from=$nick_names}
-                                                        {if (isset($individual.ind_id) and $individual.ind_id eq $line.ind_id)}
-                                                            <option value="{$line.individual_nicks_id}" {if $individual.individual_nicks_id eq $line.individual_nicks_id}SELECTED{/if}>{$line.nick}</option>
-                                                        {/if}
-                                                    {/foreach}
-                                                {/if}
-                                            </select>
-                                        </td>
-                                        <input type="hidden" name="action" value="update_nick">
-                                        <input type="hidden" name="crew_individual_id" value="{$individual.crew_individual_id}">
-                                        <input type="hidden" name="parent_id" value="{if isset($crew_select.crew_id)}{$crew_select.crew_id}{/if}">
-                                        <input type="hidden" name="crew_select" id="crew_select8" value="{if isset($crew_select.crew_id)}{$crew_select.crew_id}{/if}">
-                                        <input type="hidden" name="crewsearch" id="crewsearch8" value="{$tracking.crewsearch}">
-                                        <input type="hidden" name="crewbrowse" id="crewbrowse8" value="{$tracking.crewbrowse}">
-                                    </form>
-                                    <td style="width:20%">
-                                        <a href="../crew/db_crew.php?action=delete_crew_member&amp;crew_select={if isset($crew_select.crew_id)}{$crew_select.crew_id}{/if}&amp;crewsearch={$tracking.crewsearch}&amp;crewbrowse={$tracking.crewbrowse}&amp;crew_individual_id={$individual.crew_individual_id}" class="left_nav_link">Delete</a>
+                                    <td>
+                                        <a href="../individuals/individuals_edit.php?ind_id={$individual.ind_id}" class="standard_tile_link">
+                                            {$individual.ind_name}
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a href="../crew/db_crew.php?action=delete_crew_member&amp;crew_select={if isset($crew_select.crew_id)}{$crew_select.crew_id}{/if}&amp;crewsearch={$tracking.crewsearch}&amp;crewbrowse={$tracking.crewbrowse}&amp;crew_individual_id={$individual.crew_individual_id}" class="standard_tile_link">Delete</a>
                                     </td>
                                 </tr>
                             {/foreach}
                         {/if}
-                        <tr>
-                            <td class="game_list_footer" colspan="4">
-                                &nbsp;&nbsp;&nbsp;
-                            </td>
-                        </tr>
                     </table>
                 </fieldset>
             </div>

@@ -45,7 +45,7 @@ if (isset($action) and $action == 'delete_comment') {
     header("Location: ../games/games_review_edit.php?reviewid=$reviewid&game_id=$game_id");
 }
 
-if (isset($action) and ( $action == 'delete_review' or $action == 'delete_submission' )) {
+if (isset($action) and ($action == 'delete_review' or $action == 'delete_submission')) {
     $sql = $mysqli->query("DELETE FROM review_main WHERE review_id = '$reviewid' ") or die("deletion review_main failed");
     $sql = $mysqli->query("DELETE FROM review_game WHERE review_id = '$reviewid' AND game_id = '$game_id' ") or die("deletion review_game failed");
     $sql = $mysqli->query("DELETE FROM review_score WHERE review_id = '$reviewid' ") or die("deletion review_score failed");
@@ -62,12 +62,9 @@ if (isset($action) and ( $action == 'delete_review' or $action == 'delete_submis
     $_SESSION['edit_message'] = "Review deleted";
 
     create_log_entry('Games', $game_id, 'Review', $reviewid, 'Delete', $_SESSION['user_id']);
-    if ($action == 'delete_review')
-    {
+    if ($action == 'delete_review') {
         header("Location: ../games/games_review_add.php?game_id=$game_id");
-    }
-    else
-    {
+    } else {
         header("Location: ../games/games_review_submitted.php");
     }
 }
@@ -147,13 +144,10 @@ if ($action == 'edit_review' or $action == 'submitted') {
     $_SESSION['edit_message'] = "Review updated";
 
     create_log_entry('Games', $game_id, 'Review', $reviewid, 'Update', $_SESSION['user_id']);
-    
-    if ($action == 'submitted')
-    {
+
+    if ($action == 'submitted') {
         header("Location: ../games/games_review_submitted.php");
-    }
-    else
-    {
+    } else {
         header("Location: ../games/games_review_edit.php?reviewid=$reviewid&game_id=$game_id");
     }
 }

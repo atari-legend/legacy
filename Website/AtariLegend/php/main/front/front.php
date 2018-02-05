@@ -42,20 +42,7 @@ $smarty->assign('almobile_tile', 'almobile_tile_front');
 $smarty->assign('tile_social_corner', 'social_corner_position_front');
 $smarty->assign('spotlight_tile', 'spotlight_position_front');
 
-//if (isset($error))
-//{
-//    if ($error == 1)
-//   {
-//        $_SESSION['edit_message'] = 'Usn or pwd incorrect - Please try again';
-//        header("Location: ../front/front.php");
-//    }
-
-//    if ($error == 2)
-//    {
-//        $_SESSION['edit_message'] = 'User is set inactive - contact admin';
-//        header("Location: ../front/front.php");
-//    }
-//}
+$smarty->assign('database_dumps_path', $database_dumps_path);
 
 if (isset($action) and $action == 'register') {
     $smarty->assign("action", 'register');

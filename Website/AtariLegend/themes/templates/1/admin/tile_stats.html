@@ -17,21 +17,19 @@
 *}
 
 <div class="standard_tile">
-	<h1>STATS</h1>
-		<div class="standard_tile_line"></div>
-		<div class="standard_list_entry">
-			<div class="standard_tile_text">    
-                <table class="standard_table_list">
-                <tr>
-                    <th>Some Stats</th>
-                </tr>
+    <h1>STATS</h1>
+        <div class="standard_tile_line"></div>
+            <div class="standard_tile_padding">
+                <ul class="list-group secondary_list text-center">
+                    <li class="list-group-item"><b>Some Stats</b></li>
+                    {assign var="number" value=1}
                     {foreach from=$statistics item=line}
-                <tr>
-                    <td class="standard_table_center">{if $line.value != ''}{$line.value}{/if}</td>
-                </tr>
+                        <li class="list-group-item list-group-item-action {if $number is even}{else}secondary_list_odd{/if}">
+                            {if $line.value != ''}{$line.value}{/if}
+                        </li>
+                    {$number=$number+1}
                     {/foreach}
-                </table>
-			</div>
-		</div>
-	<div class="standard_tile_line"></div>
+                </ul>
+            </div>
+    <div class="standard_tile_line"></div>
 </div>

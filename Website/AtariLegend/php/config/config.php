@@ -54,10 +54,10 @@ $smarty->cache_dir = '../../../php/temp/smarty/cache/';
 define("CAN_REGISTER", "any");
 define("DEFAULT_ROLE", "member");
 
-define("SECURE", FALSE);    // FOR DEVELOPMENT ONLY!!!!
+define("SECURE", false);    // FOR DEVELOPMENT ONLY!!!!
 
 //***************************************************************
-// Mail server variables -- change these is we change server! 
+// Mail server variables -- change these is we change server!
 //***************************************************************
 
 //GMAIL SERVER for testing
@@ -74,8 +74,12 @@ define("SECURE", FALSE);    // FOR DEVELOPMENT ONLY!!!!
 //$confirm_account_link = "http://localhost/atarilegend/php/common/login/db_register.php?action=confirm";
 
 //PROD SERVER @ 1and1
-$ms_usn = '537971048';
-$ms_pwd = 'Tomsguide1%';
+//$ms_usn = '537971048';
+//$ms_pwd = 'Tomsguide1%';
+
+//PROD SERVER @ 1and1 - NEW
+$ms_usn = '172683540';
+$ms_pwd = 'spike99';
 $ms_port = 587;
 $ms_host = 'auth.smtp.1and1.fr';
 
@@ -89,6 +93,9 @@ $confirm_account_link = "http://www.atarilegend.com/php/common/login/db_register
 //***************************************************************
 // Setup filepath variables
 //***************************************************************
+
+// database dumps
+$database_dumps_path="../../data/database-dumps/";
 
 //articles
 $article_screenshot_path="../../data/images/article_screenshots/";
@@ -116,7 +123,6 @@ $game_fact_screenshot_save_path="../../../data/images/game_fact_screenshots/";
 $music_game_path="../../data/music/games/";
 $music_game_save_path="../../../data/music/games/";
 
-
 //interview
 $interview_screenshot_path="../../data/images/interview_screenshots/";
 $interview_screenshot_save_path="../../../data/images/interview_screenshots/";
@@ -132,6 +138,7 @@ $news_images_path="../../data/images/news_images/";
 $news_images_save_path="../../../data/images/news_images/";
 
 //links
+$website_image_path="../../data/images/website_images/";
 $website_image_path="../../data/images/website_images/";
 $website_image_save_path="../../../data/images/website_images/";
 
@@ -156,4 +163,3 @@ $magazine_scan_path="../../data/images/magazine_scans/";
 //users
 $user_avatar_path="../../data/images/user_avatars/";
 $user_avatar_save_path="../../../data/images/user_avatars/";
-?>

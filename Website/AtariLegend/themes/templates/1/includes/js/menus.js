@@ -4,1128 +4,1038 @@
  *
  */
 
- //This handles the queues
-(function($) {
-
-    // jQuery on an empty object, we are going to use this as our Queue
-    var ajaxQueue = $({});
-
-    $.ajaxQueue = function(ajaxOpts) {
-        var jqXHR,
-        dfd = $.Deferred(),
-        promise = dfd.promise();
-
-         // run the actual query
-         function doRequest(next) {
-             jqXHR = $.ajax(ajaxOpts);
-             jqXHR.done(dfd.resolve)
-                 .fail(dfd.reject)
-                 .then(next, next);
-         }
-
-         // queue our ajax request
-         ajaxQueue.queue(doRequest);
-
-         // add the abort method
-         promise.abort = function(statusText) {
-
-             // proxy abort to the jqXHR if it is active
-             if (jqXHR) {
-                 return jqXHR.abort(statusText);
-             }
-
-             // if there wasn't already a jqXHR we need to remove from queue
-             var queue = ajaxQueue.queue(),
-                 index = $.inArray(doRequest, queue);
-
-             if (index > -1) {
-                 queue.splice(index, 1);
-             }
-
-             // and then reject the deferred
-             dfd.rejectWith(ajaxOpts.context || ajaxOpts, [promise, statusText, ""]);
-             return promise;
-         };
-
-         return promise;
-     };
- })(jQuery);
-
-function OSDMessageDisplay(message) {
-    $.notify_osd.create({
-        'text': message, // notification message
-        'icon': '../../../themes/styles/1/images/osd_icons/star.png', // icon path, 48x48
-        'sticky': false, // if true, timeout is ignored
-        'timeout': 4, // disappears after 6 seconds
-        'dismissable': true // can be dismissed manually
-    });
-}
-
-function editDisk(str) {
-    var disk_edit_ajax = "diskedit_ajax_".concat(str);
+window.editDisk = function (str) {
+    var diskEditAjax = 'diskedit_ajax_'.concat(str);
     $.ajax({
         // The URL for the request
-        url: "ajax_menus_detail.php",
-        data: "action=edit_disk_box&menu_disk_id=" + str,
-        type: "GET",
-        dataType: "html",
+        url: 'ajax_menus_detail.php',
+        data: 'action=edit_disk_box&menu_disk_id=' + str,
+        type: 'GET',
+        dataType: 'html',
         // Code to run if the request succeeds;
         success: function (html) {
-            $("#" + disk_edit_ajax).html(html);
+            $('#' + diskEditAjax).html(html);
         }
     });
 }
 
-function CloseeditDisk(str) {
-    var disk_edit_ajax = "diskedit_ajax_".concat(str);
+window.closeeditDisk = function (str) {
+    var diskEditAjax = 'diskedit_ajax_'.concat(str);
     $.ajax({
         // The URL for the request
-        url: "ajax_menus_detail.php",
-        data: "action=close_edit_disk_box&menu_disk_id=" + str,
-        type: "GET",
-        dataType: "html",
+        url: 'ajax_menus_detail.php',
+        data: 'action=close_edit_disk_box&menu_disk_id=' + str,
+        type: 'GET',
+        dataType: 'html',
         // Code to run if the request succeeds;
         success: function (html) {
-            $("#" + disk_edit_ajax).html(html);
+            $('#' + diskEditAjax).html(html);
         }
     });
 }
 
-function popAddGames(str) {
-    if (str === "") {
-        $("#JSMenuDetailExpandGames").html("");
-        return;
+window.popAddGames = function (str) {
+    if (str === '') {
+        $('#JSMenuDetailExpandGames').html('');
     } else {
         $.ajax({
             // The URL for the request
-            url: "ajax_addgames_menus.php",
-            data: "action=game_browse&list=full&query=num&menu_disk_id=" + str,
-            type: "GET",
-            dataType: "html",
+            url: 'ajax_addgames_menus.php',
+            data: 'action=game_browse&list=full&query=num&menu_disk_id=' + str,
+            type: 'GET',
+            dataType: 'html',
             // Code to run if the request succeeds;
             success: function (html) {
-                $("#JSMenuDetailExpandGames").html(html);
-                $("#gameto_menu_link").html("<a onclick=\"closeAddGames(" + str + ")\" style=\"cursor: pointer;\" class=\"MAINNAV\">Add Game/Tool/Demo to menu</a>");
-                GameSearchListen();
+                $('#JSMenuDetailExpandGames').html(html);
+                $('#gameto_menu_link').html('<a onclick="closeAddGames(' + str + ')" style="cursor: pointer;" class="MAINNAV">Add Game/Tool/Demo to menu</a>');
+                gameSearchListen();
             }
         });
     }
-} 
-
-function closeAddGames(str) {
-    $("#JSMenuDetailExpandGames").html("");
-    $("#gameto_menu_link").html("<a onclick=\"popAddGames(" + str + ")\" style=\"cursor: pointer;\" class=\"MAINNAV\">Add Game/Tool/Demo to menu</a>");
-    return;
 }
 
-function SearchingGame(GameSearchAction) {
-    if (GameSearchAction === "game_browse") {
-        var form_values = $("#game_search_menu").serialize() + "&action=game_browse&list=inner&query=" + $(".JSGameBrowse").val();
+window.closeAddGames = function (str) {
+    $('#JSMenuDetailExpandGames').html('');
+    $('#gameto_menu_link').html('<a onclick="popAddGames(' + str + ')" style="cursor: pointer;" class="MAINNAV">Add Game/Tool/Demo to menu</a>');
+}
+
+function searchingGame (GameSearchAction) {
+    var formValues = '';
+    if (GameSearchAction === 'game_browse') {
+        formValues = $('#game_search_menu').serialize() + '&action=game_browse&list=inner&query=' + $('.JSGameBrowse').val();
     } else {
-        if (GameSearchAction === "game_search") {
-            var form_values = $("#game_search_menu").serialize() + "&action=game_search&list=inner&query=" + $(".JSGameSearch").val();
+        if (GameSearchAction === 'game_search') {
+            formValues = $('#game_search_menu').serialize() + '&action=game_search&list=inner&query=' + $('.JSGameSearch').val();
         }
     }
     $.ajaxQueue({
         // The URL for the request
-        url: "ajax_addgames_menus.php",
-        data: form_values,
-        type: "GET",
-        dataType: "html",
+        url: 'ajax_addgames_menus.php',
+        data: formValues,
+        type: 'GET',
+        dataType: 'html',
         // Code to run if the request succeeds;
         success: function (html) {
-            $("#game_list").html(html);
+            $('#game_list').html(html);
         }
     });
 }
 
-function GameSearchListen() {
-    $(".JSGameBrowse").change(function () {
-        SearchingGame("game_browse");
+function gameSearchListen () {
+    $('.JSGameBrowse').change(function () {
+        searchingGame('game_browse');
     });
 
-    $(".JSGameSearch").keyup(function () {
+    $('.JSGameSearch').keyup(function () {
         var value = $(this).val();
         if (value.length >= 3) {
-            SearchingGame("game_search");
+            searchingGame('game_search');
         }
     });
 }
 
-function SearchingDoc(DocSearchAction) {
-    if (DocSearchAction === "doc_browse") {
-        var form_values = $("#doc_search_menu").serialize() + "&action=game_browse&list=inner&query=" + $(".JSDocBrowse").val();
+function searchingDoc (DocSearchAction) {
+    var formValues = '';
+    if (DocSearchAction === 'doc_browse') {
+        formValues = $('#doc_search_menu').serialize() + '&action=game_browse&list=inner&query=' + $('.JSDocBrowse').val();
     } else {
-        if (DocSearchAction === "doc_search") {
-            var form_values = $("#doc_search_menu").serialize() + "&action=game_search&list=inner&query=" + $(".JSDocSearch").val();
+        if (DocSearchAction === 'doc_search') {
+            formValues = $('#doc_search_menu').serialize() + '&action=game_search&list=inner&query=' + $('.JSDocSearch').val();
         }
     }
     $.ajaxQueue({
         // The URL for the request
-        url: "ajax_adddocs_menus.php",
-        data: form_values,
-        type: "GET",
-        dataType: "html",
+        url: 'ajax_adddocs_menus.php',
+        data: formValues,
+        type: 'GET',
+        dataType: 'html',
         // Code to run if the request succeeds;
         success: function (html) {
-            $("#doc_list").html(html);
+            $('#doc_list').html(html);
         }
     });
 }
 
-function DocSearchListen() {
-    $(".JSDocBrowse").change(function () {
-        SearchingDoc("doc_browse");
+function docSearchListen () {
+    $('.JSDocBrowse').change(function () {
+        searchingDoc('doc_browse');
     });
 
-    $(".JSDocSearch").keyup(function () {
+    $('.JSDocSearch').keyup(function () {
         var value = $(this).val();
         if (value.length >= 3) {
-            SearchingDoc("doc_search");
+            searchingDoc('doc_search');
         }
     });
 }
 
-
-function addGametoMenu(software_id, menu_disk_id, software_type) {
-    if (software_id === "") {
-        $("#JSMenuSoftwareList").html("");
-        return;
+window.addGametoMenu = function (softwareId, menuDiskId, softwareType) {
+    if (softwareId === '') {
+        $('#JSMenuSoftwareList').html('');
     } else {
         $.ajax({
             // The URL for the request
-            url: "db_menu_disk.php",
-            data: "action=add_title_to_menu&software_id=" + software_id + "&menu_disk_id=" + menu_disk_id + "&software_type=" + software_type,
-            type: "POST",
-            dataType: "html",
+            url: 'db_menu_disk.php',
+            data: 'action=add_title_to_menu&software_id=' + softwareId + '&menu_disk_id=' + menuDiskId + '&software_type=' + softwareType,
+            type: 'POST',
+            dataType: 'html',
             // Code to run if the request succeeds;
-            success: function(html) {
-                var ReturnHtml = html.split('[BRK]');
-                $("#JSMenuSoftwareList").html(ReturnHtml[0]);
-                OSDMessageDisplay(ReturnHtml[1]);
+            success: function (html) {
+                var returnHtml = html.split('[BRK]');
+                $('#JSMenuSoftwareList').html(returnHtml[0]);
+                window.OSDMessageDisplay(returnHtml[1]);
             }
         });
     }
 }
 
-function addNewdisk(str) {
-    if (str === "") {
-        $("#new_disk").html("");
-        return;
+window.addNewdisk = function (str) {
+    if (str === '') {
+        $('#new_disk').html('');
     } else {
         $.ajax({
             // The URL for the request
-            url: "ajax_menus.php",
-            data: "action=add_new_disk_box&menu_sets_id=" + str,
-            type: "POST",
-            dataType: "html",
+            url: 'ajax_menus.php',
+            data: 'action=add_new_disk_box&menu_sets_id=' + str,
+            type: 'POST',
+            dataType: 'html',
             // Code to run if the request succeeds;
-            success: function(html) {
-                $("#new_disk").html(html);
-                $("#close_new_disk").html("<a onclick=\"CloseaddNewdisk(" + str + ")\" style=\"cursor: pointer;\" class=\"MAINNAV\">Add New Disk</a>");
+            success: function (html) {
+                $('#new_disk').html(html);
+                $('#close_new_disk').html('<a onclick="closeaddNewdisk(' + str + ')" style="cursor: pointer;" class="MAINNAV">Add New Disk</a>');
             }
         });
     }
 }
 
-function CloseaddNewdisk(str) {
-    $("#new_disk").html("");
-    $("#close_new_disk").html("<a onclick=\"addNewdisk(" + str + ")\" style=\"cursor: pointer;\" class=\"MAINNAV\">Add New Disk</a>");
-    return;
+window.closeaddNewdisk = function (str) {
+    $('#new_disk').html('');
+    $('#close_new_disk').html('<a onclick="addNewdisk(' + str + ')" style="cursor: pointer;" class="MAINNAV">Add New Disk</a>');
 }
 
-function myFunction() {
-    $but = $('#file_upload_game_file');
-    $("input:file[id=file_upload]").change(function() {
+window.myFunction = function () {
+    $('input:file[id=file_upload]').change(function () {
         document.getElementById('file_upload_game_screenshots').value = 'file(s) selected';
     });
-    $("input:file[id=file_upload2]").change(function() {
+    $('input:file[id=file_upload2]').change(function () {
         document.getElementById('file_upload_game_file').value = $(this).val();
     });
 }
 
-function browseCrew(str) {
-    if (str === "") {
-        $("#option_crew").html("");
-        return;
+window.browseCrew = function (str) {
+    if (str === '') {
+        $('#option_crew').html('');
     } else {
         $.ajax({
             // The URL for the request
-            url: "ajax_menus.php",
-            data: "action=crew_browse&query=" + str,
-            type: "GET",
-            dataType: "html",
+            url: 'ajax_menus.php',
+            data: 'action=crew_browse&query=' + str,
+            type: 'GET',
+            dataType: 'html',
             // Code to run if the request succeeds;
-            success: function(html) {
-                $("#option_crew").html(html);
+            success: function (html) {
+                $('#option_crew').html(html);
             }
         });
     }
 }
 
-function browseIndividual(str) {
-    if (str === "") {
-        $("#option_ind").html("");
-        return;
+window.browseIndividual = function (str) {
+    if (str === '') {
+        $('#option_ind').html('');
     } else {
         $.ajax({
             // The URL for the request
-            url: "ajax_menus.php",
-            data: "action=ind_browse&query=" + str,
-            type: "GET",
-            dataType: "html",
+            url: 'ajax_menus.php',
+            data: 'action=ind_browse&query=' + str,
+            type: 'GET',
+            dataType: 'html',
             // Code to run if the request succeeds;
-            success: function(html) {
-                $("#option_ind").html(html);
+            success: function (html) {
+                $('#option_ind').html(html);
             }
         });
     }
 }
 
-function browseInd(str) {
-    if (str === "") {
-        $("#ind_member").html("");
-        return;
+window.browseInd = function (str) {
+    if (str === '') {
+        $('#ind_member').html('');
     } else {
         $.ajaxQueue({
             // The URL for the request
-            url: "ajax_menus_detail.php",
-            data: "action=ind_gen_browse&query=" + str,
-            type: "GET",
-            dataType: "html",
+            url: 'ajax_menus_detail.php',
+            data: 'action=ind_gen_browse&query=' + str,
+            type: 'GET',
+            dataType: 'html',
             // Code to run if the request succeeds;
-            success: function(html) {
-                $("#ind_member").html(html);
+            success: function (html) {
+                $('#ind_member').html(html);
             }
         });
     }
 }
 
-function searchInd(str) {
-    if (str === "") {
-        $("#ind_member").html("");
+window.searchInd = function (str) {
+    if (str === '') {
+        $('#ind_member').html('');
     } else {
         $.ajaxQueue({
             // The URL for the request
-            url: "ajax_menus_detail.php",
-            data: "action=ind_gen_search&query=" + str,
-            type: "GET",
-            dataType: "html",
+            url: 'ajax_menus_detail.php',
+            data: 'action=ind_gen_search&query=' + str,
+            type: 'GET',
+            dataType: 'html',
             // Code to run if the request succeeds;
-            success: function(html) {
-                $("#ind_member").html(html);
+            success: function (html) {
+                $('#ind_member').html(html);
             }
         });
     }
 }
 
-function popAddIntroCred(str) {
-    if (str === "") {
-        $("#menu_detail_expand").html("");
-        return;
+window.popAddIntroCred = function (str) {
+    if (str === '') {
+        $('#menu_detail_expand').html('');
     } else {
         $.ajax({
             // The URL for the request
-            url: "ajax_menus_detail.php",
-            data: "action=add_intro_credit&query=" + str,
-            type: "GET",
-            dataType: "html",
+            url: 'ajax_menus_detail.php',
+            data: 'action=add_intro_credit&query=' + str,
+            type: 'GET',
+            dataType: 'html',
             // Code to run if the request succeeds;
-            success: function(html) {
-                $("#menu_detail_expand").html(html);
-                $("#intro_credit_link").html("<a onclick=\"closeAddIntroCred(" + str + ")\" style=\"cursor: pointer;\" class=\"MAINNAV\">Add intro credits</a>");
+            success: function (html) {
+                $('#menu_detail_expand').html(html);
+                $('#intro_credit_link').html('<a onclick="closeAddIntroCred(' + str + ')" style="cursor: pointer;" class="MAINNAV">Add intro credits</a>');
             }
         });
     }
 }
 
-function closeAddIntroCred(str) {
-    $("#menu_detail_expand").html("");
-    $("#intro_credit_link").html("<a onclick=\"popAddIntroCred(" + str + ")\" style=\"cursor: pointer;\" class=\"MAINNAV\">Add intro credits</a>");
-    return;
+window.closeAddIntroCred = function (str) {
+    $('#menu_detail_expand').html('');
+    $('#intro_credit_link').html('<a onclick="popAddIntroCred(' + str + ')" style="cursor: pointer;" class="MAINNAV">Add intro credits</a>');
 }
 
-function popAddAuthorMenutitle(menu_disk_title_id, game_id, game_name) {
-    if (menu_disk_title_id === "") {
-        $("#menu_detail_expand_author_title").html("");
-        return;
+window.popAddAuthorMenutitle = function (menuDiskTitleId, gameId, gameName) {
+    if (menuDiskTitleId === '') {
+        $('#menu_detail_expand_author_title').html('');
     } else {
         $.ajaxQueue({
             // The URL for the request
-            url: "ajax_add_author_menutitle.php",
-            data: "menu_disk_title_id=" + menu_disk_title_id + "&game_name=" + game_name + "&game_id=" + game_id,
-            type: "GET",
-            dataType: "html",
+            url: 'ajax_add_author_menutitle.php',
+            data: 'menu_disk_title_id=' + menuDiskTitleId + '&game_name=' + gameName + '&game_id=' + gameId,
+            type: 'GET',
+            dataType: 'html',
             // Code to run if the request succeeds;
-            success: function(html) {
-                $("#menu_detail_expand_author_title").html(html);
-                $("#author_to_menu_title" + game_id).html("<a onclick=\"closeAddAuthor(" + menu_disk_title_id + "," + game_id + ",'" + game_name + "')\" style=\"cursor: pointer;\" class=\"standard_tile_link\">" + game_name + "</a>");
+            success: function (html) {
+                $('#menu_detail_expand_author_title').html(html);
+                $('#author_to_menu_title' + gameId).html('<a onclick="closeAddAuthor(' + menuDiskTitleId + ',' + gameId + ',' + gameName + ')" style="cursor: pointer;" class="standard_tile_link">' + gameName + '</a>');
             }
         });
     }
 }
 
-function closeAddAuthor(menu_disk_title_id, game_id, game_name) {
-    $("#menu_detail_expand_author_title").html("");
-    $("#author_to_menu_title" + game_id).html("<a onclick=\"popAddAuthorMenutitle(" + menu_disk_title_id + "," + game_id + ",'" + game_name + "')\" style=\"cursor: pointer;\" class=\"standard_tile_link\">" + game_name + "</a>");
-    return;
+window.closeAddAuthor = function (menuDiskTitleId, gameId, gameName) {
+    $('#menu_detail_expand_author_title').html('');
+    $('#author_to_menu_title' + gameId).html('<a onclick="popAddAuthorMenutitle(' + menuDiskTitleId + ',' + gameId + ',' + gameName + ')" style="cursor: pointer;" class="standard_tile_link">' + gameName + '</a>');
 }
 
-function popAddAuthorMenutitleDoc(menu_disk_title_id, game_id, game_name) {
-    if (menu_disk_title_id === "") {
-        $("#menu_detail_expand_author_title_doc").html("");
-        return;
+window.popAddAuthorMenutitleDoc = function (menuDiskTitleId, gameId, gameName) {
+    if (menuDiskTitleId === '') {
+        $('#menu_detail_expand_author_title_doc').html('');
     } else {
         $.ajax({
             // The URL for the request
-            url: "ajax_add_author_menutitle.php",
-            data: "menu_disk_title_id=" + menu_disk_title_id + "&game_name=" + game_name + "&game_id=" + game_id,
-            type: "GET",
-            dataType: "html",
+            url: 'ajax_add_author_menutitle.php',
+            data: 'menu_disk_title_id=' + menuDiskTitleId + '&game_name=' + gameName + '&game_id=' + gameId,
+            type: 'GET',
+            dataType: 'html',
             // Code to run if the request succeeds;
-            success: function(html) {
-                $("#menu_detail_expand_author_title_doc").html(html);
-                $("#author_to_menu_title_doc" + game_id).html("<a onclick=\"closeAddAuthorDoc(" + menu_disk_title_id + "," + game_id + ",'" + game_name + "')\" style=\"cursor: pointer;\" class=\"standard_tile_link\">" + game_name + "</a>");
+            success: function (html) {
+                $('#menu_detail_expand_author_title_doc').html(html);
+                $('#author_to_menu_title_doc' + gameId).html('<a onclick="closeAddAuthorDoc(' + menuDiskTitleId + ',' + gameId + ',' + gameName + ')" style="cursor: pointer;" class="standard_tile_link">' + gameName + '</a>');
             }
         });
     }
 }
 
-function closeAddAuthorDoc(menu_disk_title_id, game_id, game_name) {
-    $("#menu_detail_expand_author_title_doc").html("");
-    $("#author_to_menu_title_doc" + game_id).html("<a onclick=\"popAddAuthorMenutitleDoc(" + menu_disk_title_id + "," + game_id + ",'" + game_name + "')\" style=\"cursor: pointer;\" class=\"standard_tile_link\">" + game_name + "</a>");
-    return;
+window.closeAddAuthorDoc = function (menuDiskTitleId, gameId, gameName) {
+    $('#menu_detail_expand_author_title_doc').html('');
+    $('#author_to_menu_title_doc' + gameId).html('<a onclick="popAddAuthorMenutitleDoc(' + menuDiskTitleId + ',' + gameId + ',' + gameName + ')" style="cursor: pointer;" class="standard_tile_link">' + gameName + '</a>');
 }
 
-function popAddDocs(str) {
-    if (str === "") {
-        $("#menu_detail_expand_docs").html("");
-        return;
+window.popAddDocs = function (str) {
+    if (str === '') {
+        $('#menu_detail_expand_docs').html('');
     } else {
         $.ajax({
             // The URL for the request
-            url: "ajax_adddocs_menus.php",
-            data: "action=game_browse&list=full&query=num&menu_disk_id=" + str,
-            type: "GET",
-            dataType: "html",
+            url: 'ajax_adddocs_menus.php',
+            data: 'action=game_browse&list=full&query=num&menu_disk_id=' + str,
+            type: 'GET',
+            dataType: 'html',
             // Code to run if the request succeeds;
-            success: function(html) {
-                $("#menu_detail_expand_docs").html(html);
-                $("#docto_menu_link").html("<a onclick=\"closeAddDocs(" + str + ")\" style=\"cursor: pointer;\" class=\"MAINNAV\">Add Doc to menu</a>");
-                DocSearchListen();
+            success: function (html) {
+                $('#menu_detail_expand_docs').html(html);
+                $('#docto_menu_link').html('<a onclick="closeAddDocs(' + str + ')" style="cursor: pointer;" class="MAINNAV">Add Doc to menu</a>');
+                docSearchListen();
             }
         });
     }
 }
 
-function closeAddDocs(str) {
-    $("#menu_detail_expand_docs").html("");
-    $("#docto_menu_link").html("<a onclick=\"popAddDocs(" + str + ")\" style=\"cursor: pointer;\" class=\"MAINNAV\">Add Doc to menu</a>");
-    return;
+window.closeAddDocs = function (str) {
+    $('#menu_detail_expand_docs').html('');
+    $('#docto_menu_link').html('<a onclick="popAddDocs(' + str + ')" style="cursor: pointer;" class="MAINNAV">Add Doc to menu</a>');
 }
 
-function popAddScreenshots(str) {
-    if (str === "") {
-        $("#JSMenuDetailExpandScreenshots").html("");
-        return;
+window.popAddScreenshots = function (str) {
+    if (str === '') {
+        $('#JSMenuDetailExpandScreenshots').html('');
     } else {
         $.ajax({
             // The URL for the request
-            url: "ajax_addscreenshots_menus.php",
-            data: "menu_disk_id=" + str,
-            type: "GET",
-            dataType: "html",
+            url: 'ajax_addscreenshots_menus.php',
+            data: 'menu_disk_id=' + str,
+            type: 'GET',
+            dataType: 'html',
             // Code to run if the request succeeds;
-            success: function(html) {
-                $("#JSMenuDetailExpandScreenshots").html(html);
-                $("#screenshot_link").html("<a onclick=\"closeAddScreenshots(" + str + ")\" style=\"cursor: pointer;\" class=\"MAINNAV\">Add Screenshots to menu</a>");
+            success: function (html) {
+                $('#JSMenuDetailExpandScreenshots').html(html);
+                $('#screenshot_link').html('<a onclick="closeAddScreenshots(' + str + ')" style="cursor: pointer;" class="MAINNAV">Add Screenshots to menu</a>');
             }
         });
     }
 }
 
-function closeAddScreenshots(str) {
-    $("#JSMenuDetailExpandScreenshots").html("");
-    $("#screenshot_link").html("<a onclick=\"popAddScreenshots(" + str + ")\" style=\"cursor: pointer;\" class=\"MAINNAV\">Add Screenshots to menu</a>");
-    return;
+window.closeAddScreenshots = function (str) {
+    $('#JSMenuDetailExpandScreenshots').html('');
+    $('#screenshot_link').html('<a onclick="popAddScreenshots(' + str + ')" style="cursor: pointer;" class="MAINNAV">Add Screenshots to menu</a>');
 }
 
-function popAddFile(str) {
-    if (str === "") {
-        $("#JSMenuDetailExpandFile").html("");
-        return;
+window.popAddFile = function (str) {
+    if (str === '') {
+        $('#JSMenuDetailExpandFile').html('');
     } else {
         $.ajax({
             // The URL for the request
-            url: "ajax_addfile_menus.php",
-            data: "menu_disk_id=" + str,
-            type: "GET",
-            dataType: "html",
+            url: 'ajax_addfile_menus.php',
+            data: 'menu_disk_id=' + str,
+            type: 'GET',
+            dataType: 'html',
             // Code to run if the request succeeds;
-            success: function(html) {
-                $("#JSMenuDetailExpandFile").html(html);
-                $("#file_link").html("<a onclick=\"closeAddFile(" + str + ")\" style=\"cursor: pointer;\" class=\"MAINNAV\">Add File to menu</a>");
+            success: function (html) {
+                $('#JSMenuDetailExpandFile').html(html);
+                $('#file_link').html('<a onclick="closeAddFile(' + str + ')" style="cursor: pointer;" class="MAINNAV">Add File to menu</a>');
             }
         });
     }
 }
 
-function closeAddFile(str) {
-    $("#JSMenuDetailExpandFile").html("");
-    $("#file_link").html("<a onclick=\"popAddFile(" + str + ")\" style=\"cursor: pointer;\" class=\"MAINNAV\">Add File to menu</a>");
-    return;
+window.closeAddFile = function (str) {
+    $('#JSMenuDetailExpandFile').html('');
+    $('#file_link').html('<a onclick="popAddFile(' + str + ')" style="cursor: pointer;" class="MAINNAV">Add File to menu</a>');
 }
 
-function addslashes(str) {
+function addslashes (str) {
     return (str + '').replace(/[\\"']/g, '\\$&').replace(/\u0000/g, '\\0');
 }
 
-function popAddSet(str, menu_disk_id, title_name) {
-    if (str === "") {
-        $("#JSMenuDetailExpandSet").html("");
-        return;
+window.popAddSet = function (str, menuDiskId, titleName) {
+    if (str === '') {
+        $('#JSMenuDetailExpandSet').html('');
     } else {
         $.ajax({
             // The URL for the request
-            url: "ajax_addset_menus.php",
-            data: "menu_disk_title_id=" + str + "&menu_disk_id=" + menu_disk_id + "&title_name=" + title_name,
-            type: "GET",
-            dataType: "html",
+            url: 'ajax_addset_menus.php',
+            data: 'menu_disk_title_id=' + str + '&menu_disk_id=' + menuDiskId + '&title_name=' + titleName,
+            type: 'GET',
+            dataType: 'html',
             // Code to run if the request succeeds;
-            success: function(html) {
-                $("#JSMenuDetailExpandSet").html(html);
-                var title = addslashes(title_name);
-                $("#" + str).html("<a onclick=\"closeAddSet(" + str + "," + menu_disk_id + ",'" + title + "')\" style=\"cursor: pointer;\" class=\"standard_tile_link\">Add</a>");
+            success: function (html) {
+                $('#JSMenuDetailExpandSet').html(html);
+                var title = addslashes(titleName);
+                $('#' + str).html('<a onclick="closeAddSet(' + str + ',' + menuDiskId + ',' + title + ')" style="cursor: pointer;" class="standard_tile_link">Add</a>');
             }
         });
-        var elementExists = document.getElementById("set_chain_update");
-        if (typeof(elementExists) != 'undefined' && elementExists !== null) {
-            $("#set_chain_update").html("");
+        var elementExists = document.getElementById('set_chain_update');
+        if (typeof (elementExists) !== 'undefined' && elementExists !== null) {
+            $('#set_chain_update').html('');
         }
     }
 }
 
-function closeAddSet(str, menu_disk_id, title_name) {
-    var title = addslashes(title_name);
-    $("#JSMenuDetailExpandSet").html("");
-    $("#" + str).html("<a onclick=\"popAddSet(" + str + "," + menu_disk_id + ",'" + title + "')\" style=\"cursor: pointer;\" class=\"standard_tile_link\">Add</a>");
-    return;
+window.closeAddSet = function (str, menuDiskId, titleName) {
+    var title = addslashes(titleName);
+    $('#JSMenuDetailExpandSet').html('');
+    $('#' + str).html('<a onclick="popAddSet(' + str + ',' + menuDiskId + ',' + title + ')" style="cursor: pointer;" class="standard_tile_link">Add</a>');
 }
 
-function addAuthorstoMenutitle(menu_disk_title_id) {
-    if (menu_disk_title_id === "") {
-        $("#author_list").html("");
-        return;
+window.addAuthorstoMenutitle = function (menuDiskTitleId) {
+    if (menuDiskTitleId === '') {
+        $('#author_list').html('');
     } else {
-        var form_values = $("#authors_form").serialize();
+        var formValues = $('#authors_form').serialize();
         $.ajax({
             // The URL for the request
-            url: "db_menu_disk.php",
-            data: form_values,
-            type: "POST",
-            dataType: "html",
+            url: 'db_menu_disk.php',
+            data: formValues,
+            type: 'POST',
+            dataType: 'html',
             // Code to run if the request succeeds;
-            success: function(html) {
-                var ReturnHtml = html.split('[BRK]');
-                $("#author_list").html(ReturnHtml[0]);
-                OSDMessageDisplay(ReturnHtml[1]);
+            success: function (html) {
+                var returnHtml = html.split('[BRK]');
+                $('#author_list').html(returnHtml[0]);
+                window.OSDMessageDisplay(returnHtml[1]);
             }
         });
     }
 }
 
-function addDoctoMenu(software_id, menu_disk_id, software_type) {
-    if (software_id === "") {
-        $("#menu_doc_list").html("");
-        return;
+window.addDoctoMenu = function (softwareId, menuDiskId, softwareType) {
+    if (softwareId === '') {
+        $('#menu_doc_list').html('');
     } else {
         $.ajax({
             // The URL for the request
-            url: "db_menu_disk.php",
-            data: "action=add_doc_to_menu&software_id=" + software_id + "&menu_disk_id=" + menu_disk_id + "&software_type=" + software_type,
-            type: "POST",
-            dataType: "html",
+            url: 'db_menu_disk.php',
+            data: 'action=add_doc_to_menu&software_id=' + softwareId + '&menu_disk_id=' + menuDiskId + '&software_type=' + softwareType,
+            type: 'POST',
+            dataType: 'html',
             // Code to run if the request succeeds;
-            success: function(html) {
-                var ReturnHtml = html.split('[BRK]');
-                $("#menu_doc_list").html(ReturnHtml[0]);
-                OSDMessageDisplay(ReturnHtml[1]);
+            success: function (html) {
+                var returnHtml = html.split('[BRK]');
+                $('#menu_doc_list').html(returnHtml[0]);
+                window.OSDMessageDisplay(returnHtml[1]);
             }
         });
     }
 }
 
-function addScreenshottoMenu(menu_disk_id) {
-    if (menu_disk_id === "") {
-        $("#JSMenuScreenshotList").html("");
-        return;
+window.addScreenshottoMenu = function (menuDiskId) {
+    if (menuDiskId === '') {
+        $('#JSMenuScreenshotList').html('');
     } else {
-        if (window.XMLHttpRequest) {
-            // code for IE7+, Firefox, Chrome, Opera, Safari
-            xmlhttp = new XMLHttpRequest();
-        } else {
-            // code for IE6, IE5
-            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-        }
-        xmlhttp.onreadystatechange = function() {
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                data = xmlhttp.responseText.split("[BRK]");
-                document.getElementById("JSMenuScreenshotList").innerHTML = data[0];
-                OSDMessageDisplay(data[1]);
-                document.getElementById("screenshot_add_to_menu").reset();
-            }
-        }
-        var formData = new FormData(document.getElementById("screenshot_add_to_menu"));
-        xmlhttp.open("POST", "../menus/db_menu_disk.php", true);
-        xmlhttp.send(formData);
-    }
-}
+        var form = $('#screenshot_add_to_menu')[0];
+        var formValues = new FormData(form);
 
-function addFiletoMenu(menu_disk_id) {
-    if (menu_disk_id === "") {
-        $("#JSMenuFileList").html("");
-        return;
-    } else {
-        if (window.XMLHttpRequest) {
-            // code for IE7+, Firefox, Chrome, Opera, Safari
-            xmlhttp = new XMLHttpRequest();
-        } else {
-            // code for IE6, IE5
-            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-        }
-        xmlhttp.onreadystatechange = function() {
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                data = xmlhttp.responseText.split("[BRK]");
-                document.getElementById("JSMenuFileList").innerHTML = data[0];
-                OSDMessageDisplay(data[1]);
-                document.getElementById("File_add_to_menu").reset();
-            }
-        }
-        var formData = new FormData(document.getElementById("file_add_to_menu"));
-        xmlhttp.open("POST", "../menus/db_menu_disk.php", true);
-        xmlhttp.send(formData);
-    }
-}
-
-function LinkChain(menu_disk_title_id, menu_disk_id) {
-    if (menu_disk_title_id === "") {
-        $("#JSMenuSoftwareList").html("");
-        return;
-    } else {
-        var form_values = $("#link_game_to_set").serialize();
         $.ajax({
             // The URL for the request
-            url: "db_menu_disk.php",
-            data: form_values,
-            type: "POST",
-            dataType: "html",
+            url: 'db_menu_disk.php',
+            data: formValues,
+            type: 'POST',
+            contentType: false,
+            processData: false,
+            dataType: 'html',
             // Code to run if the request succeeds;
-            success: function(html) {
-                var ReturnHtml = html.split('[BRK]');
-                $("#JSMenuSoftwareList").html(ReturnHtml[0]);
-                OSDMessageDisplay(ReturnHtml[1]);
-                $("#JSMenuDetailExpandSet").html("");
+            success: function (html) {
+                var returnHtml = html.split('[BRK]');
+                $('#JSMenuScreenshotList').html(returnHtml[0]);
+                window.OSDMessageDisplay(returnHtml[1]);
+                document.getElementById('screenshot_add_to_menu').reset();
             }
         });
     }
 }
 
-function DeleteChain(menu_disk_title_id, menu_disk_id, title_name) {
-    if (menu_disk_title_id === "") {
-        $("#JSMenuSoftwareList").html("");
-        return;
+window.addFiletoMenu = function (menuDiskId) {
+    if (menuDiskId === '') {
+        $('#JSMenuFileList').html('');
     } else {
+        var form = $('#file_add_to_menu')[0];
+        var formValues = new FormData(form);
+
         $.ajax({
             // The URL for the request
-            url: "db_menu_disk.php",
-            data: "action=delete_game_from_set&menu_disk_title_id=" + menu_disk_title_id + "&menu_disk_id=" + menu_disk_id + "&title_name=" + title_name,
-            type: "POST",
-            dataType: "html",
+            url: 'db_menu_disk.php',
+            data: formValues,
+            type: 'POST',
+            contentType: false,
+            processData: false,
+            dataType: 'html',
             // Code to run if the request succeeds;
-            success: function(html) {
-                var ReturnHtml = html.split('[BRK]');
-                $("#JSMenuSoftwareList").html(ReturnHtml[0]);
-                OSDMessageDisplay(ReturnHtml[1]);
-                $("#JSMenuDetailExpandSet").html("");
+            success: function (html) {
+                var returnHtml = html.split('[BRK]');
+                $('#JSMenuFileList').html(returnHtml[0]);
+                window.OSDMessageDisplay(returnHtml[1]);
+                document.getElementById('File_add_to_menu').reset();
             }
         });
     }
 }
 
-function CreateChain(str, menu_disk_id) {
-    if (str === "") {
-        $("#JSMenuSoftwareList").html("");
-        return;
+window.linkChain = function (menuDiskTitleId, menuDiskId) {
+    if (menuDiskTitleId === '') {
+        $('#JSMenuSoftwareList').html('');
     } else {
+        var formValues = $('#link_game_to_set').serialize();
         $.ajax({
             // The URL for the request
-            url: "db_menu_disk.php",
-            data: "action=add_set_to_menu&menu_disk_title_id=" + str + "&menu_disk_id=" + menu_disk_id,
-            type: "POST",
-            dataType: "html",
+            url: 'db_menu_disk.php',
+            data: formValues,
+            type: 'POST',
+            dataType: 'html',
             // Code to run if the request succeeds;
-            success: function(html) {
-                var ReturnHtml = html.split('[BRK]');
-                $("#JSMenuSoftwareList").html(ReturnHtml[0]);
-                OSDMessageDisplay(ReturnHtml[1]);
-                $("#JSMenuDetailExpandSet").html("");
+            success: function (html) {
+                var returnHtml = html.split('[BRK]');
+                $('#JSMenuSoftwareList').html(returnHtml[0]);
+                window.OSDMessageDisplay(returnHtml[1]);
+                $('#JSMenuDetailExpandSet').html('');
             }
         });
     }
 }
 
-function addCreditstoMenu(menu_disk_id) {
-    if (menu_disk_id === "") {
-        $("#menu_credit_list").html("");
-        return;
+window.deleteChain = function (menuDiskTitleId, menuDiskId, titleName) {
+    if (menuDiskTitleId === '') {
+        $('#JSMenuSoftwareList').html('');
     } else {
-        var ind_id = document.getElementById("menu_credits_form").elements.namedItem("ind_id").value;
-        var author_type_id = document.getElementById("menu_credits_form").elements.namedItem("author_type_id").value;
         $.ajax({
             // The URL for the request
-            url: "db_menu_disk.php",
-            data: "action=add_intro_credits&author_type_id=" + author_type_id + "&menu_disk_id=" + menu_disk_id + "&ind_id=" + ind_id,
-            type: "POST",
-            dataType: "html",
+            url: 'db_menu_disk.php',
+            data: 'action=delete_game_from_set&menu_disk_title_id=' + menuDiskTitleId + '&menu_disk_id=' + menuDiskId + '&title_name=' + titleName,
+            type: 'POST',
+            dataType: 'html',
             // Code to run if the request succeeds;
-            success: function(html) {
-                var ReturnHtml = html.split('[BRK]');
-                $("#menu_credit_list").html(ReturnHtml[0]);
-                OSDMessageDisplay(ReturnHtml[1]);
-                document.getElementById("menu_credit_list").reset();
+            success: function (html) {
+                var returnHtml = html.split('[BRK]');
+                $('#JSMenuSoftwareList').html(returnHtml[0]);
+                window.OSDMessageDisplay(returnHtml[1]);
+                $('#JSMenuDetailExpandSet').html('');
             }
         });
     }
 }
 
-function ChangeState(state_id, menu_disk_id) {
-    var str2 = "diskedit_ajax_";
-    var disk_edit_ajax = str2.concat(menu_disk_id);
-    if (menu_disk_id === "") {
-        $("#" + disk_edit_ajax).html("");
-        return;
+window.createChain = function (str, menuDiskId) {
+    if (str === '') {
+        $('#JSMenuSoftwareList').html('');
     } else {
         $.ajax({
             // The URL for the request
-            url: "db_menu_disk.php",
-            data: "action=change_menu_disk_state&state_id=" + state_id + "&menu_disk_id=" + menu_disk_id,
-            type: "POST",
-            dataType: "html",
+            url: 'db_menu_disk.php',
+            data: 'action=add_set_to_menu&menu_disk_title_id=' + str + '&menu_disk_id=' + menuDiskId,
+            type: 'POST',
+            dataType: 'html',
             // Code to run if the request succeeds;
-            success: function(html) {
-                var ReturnHtml = html.split('[BRK]');
-                $("#" + disk_edit_ajax).html(ReturnHtml[0]);
-                OSDMessageDisplay(ReturnHtml[1]);
-                document.getElementById(disk_edit_ajax).reset();
+            success: function (html) {
+                var returnHtml = html.split('[BRK]');
+                $('#JSMenuSoftwareList').html(returnHtml[0]);
+                window.OSDMessageDisplay(returnHtml[1]);
+                $('#JSMenuDetailExpandSet').html('');
             }
         });
     }
 }
 
-function ChangeDoctype(doc_type_id, doc_id, menu_disk_id) {
-    if (doc_type_id === "") {
-        $("#menu_doc_list").html("");
-        return;
+window.addCreditstoMenu = function (menuDiskId) {
+    if (menuDiskId === '') {
+        $('#menu_credit_list').html('');
     } else {
+        var indId = document.getElementById('menu_credits_form').elements.namedItem('ind_id').value;
+        var authorTypeId = document.getElementById('menu_credits_form').elements.namedItem('author_type_id').value;
         $.ajax({
             // The URL for the request
-            url: "db_menu_disk.php",
-            data: "action=change_doctype&doc_type_id=" + doc_type_id + "&doc_id=" + doc_id + "&menu_disk_id=" + menu_disk_id,
-            type: "POST",
-            dataType: "html",
+            url: 'db_menu_disk.php',
+            data: 'action=add_intro_credits&author_type_id=' + authorTypeId + '&menu_disk_id=' + menuDiskId + '&ind_id=' + indId,
+            type: 'POST',
+            dataType: 'html',
             // Code to run if the request succeeds;
-            success: function(html) {
-                var ReturnHtml = html.split('[BRK]');
-                $("#menu_doc_list").html(ReturnHtml[0]);
-                OSDMessageDisplay(ReturnHtml[1]);
-                document.getElementById("menu_doc_list").reset();
+            success: function (html) {
+                var returnHtml = html.split('[BRK]');
+                $('#menu_credit_list').html(returnHtml[0]);
+                window.OSDMessageDisplay(returnHtml[1]);
+                document.getElementById('menu_credit_list').reset();
             }
         });
     }
 }
 
-function ChangeYear(year_id, menu_disk_id) {
-    var str2 = "diskedit_ajax_";
-    var disk_edit_ajax = str2.concat(menu_disk_id);
-    if (menu_disk_id === "") {
-        $("#" + disk_edit_ajax).html("");
-        return;
+window.changeState = function (stateId, menuDiskId) {
+    var str2 = 'diskedit_ajax_';
+    var diskEditAjax = str2.concat(menuDiskId);
+    if (menuDiskId === '') {
+        $('#' + diskEditAjax).html('');
     } else {
         $.ajax({
             // The URL for the request
-            url: "db_menu_disk.php",
-            data: "action=change_menu_disk_year&year_id=" + year_id + "&menu_disk_id=" + menu_disk_id,
-            type: "POST",
-            dataType: "html",
+            url: 'db_menu_disk.php',
+            data: 'action=change_menu_disk_state&state_id=' + stateId + '&menu_disk_id=' + menuDiskId,
+            type: 'POST',
+            dataType: 'html',
             // Code to run if the request succeeds;
-            success: function(html) {
-                var ReturnHtml = html.split('[BRK]');
-                $("#" + disk_edit_ajax).html(ReturnHtml[0]);
-                OSDMessageDisplay(ReturnHtml[1]);
-                document.getElementById(disk_edit_ajax).reset();
+            success: function (html) {
+                var returnHtml = html.split('[BRK]');
+                $('#' + diskEditAjax).html(returnHtml[0]);
+                window.OSDMessageDisplay(returnHtml[1]);
+                document.getElementById(diskEditAjax).reset();
             }
         });
     }
 }
 
-function ChangeParent(parent_id, menu_disk_id) {
-    var str2 = "diskedit_ajax_";
-    var disk_edit_ajax = str2.concat(menu_disk_id);
-    if (menu_disk_id === "") {
-        $("#disk_edit_ajax").html("");
-        return;
+window.changeDoctype = function (docTypeId, docId, menuDiskId) {
+    if (docTypeId === '') {
+        $('#menu_doc_list').html('');
     } else {
         $.ajax({
             // The URL for the request
-            url: "db_menu_disk.php",
-            data: "action=change_menu_disk_parent&parent_id=" + parent_id + "&menu_disk_id=" + menu_disk_id,
-            type: "POST",
-            dataType: "html",
+            url: 'db_menu_disk.php',
+            data: 'action=change_doctype&doc_type_id=' + docTypeId + '&doc_id=' + docId + '&menu_disk_id=' + menuDiskId,
+            type: 'POST',
+            dataType: 'html',
             // Code to run if the request succeeds;
-            success: function(html) {
-                var ReturnHtml = html.split('[BRK]');
-                $("#" + disk_edit_ajax).html(ReturnHtml[0]);
-                OSDMessageDisplay(ReturnHtml[1]);
-                document.getElementById(disk_edit_ajax).reset();
+            success: function (html) {
+                var returnHtml = html.split('[BRK]');
+                $('#menu_doc_list').html(returnHtml[0]);
+                window.OSDMessageDisplay(returnHtml[1]);
+                document.getElementById('menu_doc_list').reset();
+            }
+        });
+    }
+}
+
+window.changeYear = function (yearId, menuDiskId) {
+    var str2 = 'diskedit_ajax_';
+    var diskEditAjax = str2.concat(menuDiskId);
+    if (menuDiskId === '') {
+        $('#' + diskEditAjax).html('');
+    } else {
+        $.ajax({
+            // The URL for the request
+            url: 'db_menu_disk.php',
+            data: 'action=change_menu_disk_year&year_id=' + yearId + '&menu_disk_id=' + menuDiskId,
+            type: 'POST',
+            dataType: 'html',
+            // Code to run if the request succeeds;
+            success: function (html) {
+                var returnHtml = html.split('[BRK]');
+                $('#' + diskEditAjax).html(returnHtml[0]);
+                window.OSDMessageDisplay(returnHtml[1]);
+                document.getElementById(diskEditAjax).reset();
+            }
+        });
+    }
+}
+
+window.changeParent = function (parentId, menuDiskId) {
+    var str2 = 'diskedit_ajax_';
+    var diskEditAjax = str2.concat(menuDiskId);
+    if (menuDiskId === '') {
+        $('#disk_edit_ajax').html('');
+    } else {
+        $.ajax({
+            // The URL for the request
+            url: 'db_menu_disk.php',
+            data: 'action=change_menu_disk_parent&parent_id=' + parentId + '&menu_disk_id=' + menuDiskId,
+            type: 'POST',
+            dataType: 'html',
+            // Code to run if the request succeeds;
+            success: function (html) {
+                var returnHtml = html.split('[BRK]');
+                $('#' + diskEditAjax).html(returnHtml[0]);
+                window.OSDMessageDisplay(returnHtml[1]);
+                document.getElementById(diskEditAjax).reset();
             }
         });
     }
 }
 // Are you sure question Delete
-function DeleteGamefromMenuButton(str, menu_disk_id) {
-    $("#JSGenericModal").dialog({
-        title: "Delete Title",
-        open: $("#JSGenericModalText").text("Are you sure you want to delete this title from the menu disk?"),
+window.deleteGamefromMenuButton = function (str, menuDiskId) {
+    $('#JSGenericModal').dialog({
+        title: 'Delete Title',
+        open: $('#JSGenericModalText').text('Are you sure you want to delete this title from the menu disk?'),
         resizable: false,
         height: 200,
         modal: true,
         buttons: {
-            "Delete title": function() {
-                $(this).dialog("close");
-                DeleteGamefromMenu(str, menu_disk_id);
+            'Delete title': function () {
+                $(this).dialog('close');
+                deleteGamefromMenu(str, menuDiskId);
             },
-            Cancel: function() {
-                $(this).dialog("close");
-                $("#menu_disk_title_id" + str).prop("checked", false);
+            Cancel: function () {
+                $(this).dialog('close');
+                $('#menu_disk_title_id' + str).prop('checked', false);
             }
         }
     });
 }
 
-function DeleteGamefromMenu(menu_disk_title_id, menu_disk_id) {
-    if (menu_disk_title_id === "") {
-        $("#JSMenuSoftwareList").html("");
-        return;
+function deleteGamefromMenu (menuDiskTitleId, menuDiskId) {
+    if (menuDiskTitleId === '') {
+        $('#JSMenuSoftwareList').html('');
     } else {
         $.ajax({
             // The URL for the request
-            url: "db_menu_disk.php",
-            data: "action=delete_from_menu_disk&menu_disk_title_id=" + menu_disk_title_id + "&menu_disk_id=" + menu_disk_id,
-            type: "POST",
-            dataType: "html",
+            url: 'db_menu_disk.php',
+            data: 'action=delete_from_menu_disk&menu_disk_title_id=' + menuDiskTitleId + '&menu_disk_id=' + menuDiskId,
+            type: 'POST',
+            dataType: 'html',
             // Code to run if the request succeeds;
-            success: function(html) {
-                var ReturnHtml = html.split('[BRK]');
-                $("#JSMenuSoftwareList").html(ReturnHtml[0]);
-                OSDMessageDisplay(ReturnHtml[1]);
+            success: function (html) {
+                var returnHtml = html.split('[BRK]');
+                $('#JSMenuSoftwareList').html(returnHtml[0]);
+                window.OSDMessageDisplay(returnHtml[1]);
             }
         });
     }
 }
 
-function DeleteMenuDiskModal(menu_disk_id) {
-    $("#JSGenericModal").dialog({
-        title: "Delete Disk?",
-        open: $("#JSGenericModalText").text("Are you sure you want to delete this menu disk?"),
+window.deleteMenuDiskModal = function (menuDiskId) {
+    $('#JSGenericModal').dialog({
+        title: 'Delete Disk?',
+        open: $('#JSGenericModalText').text('Are you sure you want to delete this menu disk?'),
         resizable: false,
         height: 200,
         modal: true,
         buttons: {
-            "Delete disk": function() {
-                $(this).dialog("close");
-                DeleteMenuDisk(menu_disk_id);
+            'Delete disk': function () {
+                $(this).dialog('close');
+                deleteMenuDisk(menuDiskId);
             },
-            Cancel: function() {
-                $(this).dialog("close");
+            Cancel: function () {
+                $(this).dialog('close');
             }
         }
     });
 }
 
-function DeleteMenuDisk(menu_disk_id) {
-    var str2 = "diskedit_ajax_";
-    var disk_edit_ajax = str2.concat(menu_disk_id);
+function deleteMenuDisk (menuDiskId) {
+    var str2 = 'diskedit_ajax_';
+    var diskEditAjax = str2.concat(menuDiskId);
     $.ajax({
         // The URL for the request
-        url: "db_menu_disk.php",
-        data: "action=delete_menu_disk&menu_disk_id=" + menu_disk_id,
-        type: "POST",
-        dataType: "html",
+        url: 'db_menu_disk.php',
+        data: 'action=delete_menu_disk&menu_disk_id=' + menuDiskId,
+        type: 'POST',
+        dataType: 'html',
         // Code to run if the request succeeds;
-        success: function(html) {
-            if (html == "Menudisk completely removed") {
-                $("#" + disk_edit_ajax).html("");
+        success: function (html) {
+            if (html === 'Menudisk completely removed') {
+                $('#' + diskEditAjax).html('');
             }
-            OSDMessageDisplay(html);
+            window.OSDMessageDisplay(html);
         }
     });
 }
 
-function DeleteMenuSetIndividualModal(ind_select,menu_sets_id) {
-    $("#JSGenericModal").dialog({
-        title: "Delete Individual?",
-        open: $("#JSGenericModalText").text("Are you sure you want to delete this Individual from the Menu Set?"),
+window.deleteMenuSetIndividualModal = function (indSelect, menuSetsId) {
+    $('#JSGenericModal').dialog({
+        title: 'Delete Individual?',
+        open: $('#JSGenericModalText').text('Are you sure you want to delete this Individual from the Menu Set?'),
         resizable: false,
         height: 200,
         modal: true,
         buttons: {
-            "Delete disk": function() {
-                $(this).dialog("close");
-                url = "db_menu_disk.php?menu_sets_id=" + menu_sets_id +"&ind_id=" + ind_select + "&action=delete_ind_from_menu_set";
+            'Delete disk': function () {
+                $(this).dialog('close');
+                var url = 'db_menu_disk.php?menu_sets_id=' + menuSetsId + '&ind_id=' + indSelect + '&action=delete_ind_from_menu_set';
                 location.href = url;
             },
-            Cancel: function() {
-                $(this).dialog("close");
+            Cancel: function () {
+                $(this).dialog('close');
             }
         }
     });
 }
 
-function DeleteMenuSetCrewModal(crew_select,menu_sets_id) {
-    $("#JSGenericModal").dialog({
-        title: "Delete Crew?",
-        open: $("#JSGenericModalText").text("Are you sure you want to delete this Crew from the Menu Set?"),
+window.deleteMenuSetCrewModal = function (crewSelect, menuSetsId) {
+    $('#JSGenericModal').dialog({
+        title: 'Delete Crew?',
+        open: $('#JSGenericModalText').text('Are you sure you want to delete this Crew from the Menu Set?'),
         resizable: false,
         height: 200,
         modal: true,
         buttons: {
-            "Delete disk": function() {
-                $(this).dialog("close");
-                url = "db_menu_disk.php?menu_sets_id=" + menu_sets_id + "&crew_id=" + crew_select + "&action=delete_crew_from_menu_set";
+            'Delete disk': function () {
+                $(this).dialog('close');
+                var url = 'db_menu_disk.php?menu_sets_id=' + menuSetsId + '&crew_id=' + crewSelect + '&action=delete_crew_from_menu_set';
                 location.href = url;
             },
-            Cancel: function() {
-                $(this).dialog("close");
+            Cancel: function () {
+                $(this).dialog('close');
             }
         }
     });
 }
 
-function MenuTypeDelete(menu_type_select,menu_sets_id) {
-    $("#JSGenericModal").dialog({
-        title: "Delete menu type?",
-        open: $("#JSGenericModalText").text("Are you sure you want to delete this menu type from this menu set?"),
+window.menuTypeDelete = function (menuTypeSelect, menuSetsId) {
+    $('#JSGenericModal').dialog({
+        title: 'Delete menu type?',
+        open: $('#JSGenericModalText').text('Are you sure you want to delete this menu type from this menu set?'),
         resizable: false,
         height: 200,
         modal: true,
         buttons: {
-            "Delete disk": function() {
-                $(this).dialog("close");
-                url = "db_menu_disk.php?menu_sets_id=" + menu_sets_id + "&menu_type_id=" + menu_type_select + "&action=delete_menu_type_from_menu_set";
+            'Delete disk': function () {
+                $(this).dialog('close');
+                var url = 'db_menu_disk.php?menu_sets_id=' + menuSetsId + '&menu_type_id=' + menuTypeSelect + '&action=delete_menu_type_from_menu_set';
                 location.href = url;
             },
-            Cancel: function() {
-                $(this).dialog("close");
+            Cancel: function () {
+                $(this).dialog('close');
             }
         }
     });
 }
 
-function deleteScreenshotfromMenu(str, menu_disk_id) {
-    $("#JSGenericModal").dialog({
-        title: "Delete Screenshot?",
-        open: $("#JSGenericModalText").text("Are you sure you want to delete this screenshot from this menu disk?"),
+window.deleteScreenshotfromMenu = function (str, menuDiskId) {
+    $('#JSGenericModal').dialog({
+        title: 'Delete Screenshot?',
+        open: $('#JSGenericModalText').text('Are you sure you want to delete this screenshot from this menu disk?'),
         resizable: false,
         height: 200,
         modal: true,
         buttons: {
-            "Delete": function() {
-                $(this).dialog("close");
+            'Delete': function () {
+                $(this).dialog('close');
                 $.ajax({
                     // The URL for the request
-                    url: "db_menu_disk.php",
-                    data: "action=delete_screen_from_menu_disk&screenshot_id=" + str + "&menu_disk_id=" + menu_disk_id,
-                    type: "POST",
-                    dataType: "html",
+                    url: 'db_menu_disk.php',
+                    data: 'action=delete_screen_from_menu_disk&screenshot_id=' + str + '&menu_disk_id=' + menuDiskId,
+                    type: 'POST',
+                    dataType: 'html',
                     // Code to run if the request succeeds;
-                    success: function(html) {
-                        var ReturnHtml = html.split('[BRK]');
-                        $("#JSMenuScreenshotList").html(ReturnHtml[0]);
-                        OSDMessageDisplay(ReturnHtml[1]);
+                    success: function (html) {
+                        var returnHtml = html.split('[BRK]');
+                        $('#JSMenuScreenshotList').html(returnHtml[0]);
+                        window.OSDMessageDisplay(returnHtml[1]);
                     }
                 });
             },
-            Cancel: function() {
-                $(this).dialog("close");
-                $("#JSMenuScreenshotList").html("");
+            Cancel: function () {
+                $(this).dialog('close');
+                $('#JSMenuScreenshotList').html('');
             }
         }
     });
 }
 
-function deleteDownload(str, menu_disk_id) {
-    $("#JSGenericModal").dialog({
-        title: "Delete download?",
-        open: $("#JSGenericModalText").text("Are you sure you want to delete this download from this menu disk?"),
+window.deleteDownload = function (str, menuDiskId) {
+    $('#JSGenericModal').dialog({
+        title: 'Delete download?',
+        open: $('#JSGenericModalText').text('Are you sure you want to delete this download from this menu disk?'),
         resizable: false,
         height: 200,
         modal: true,
         buttons: {
-            "Delete": function() {
-                $(this).dialog("close");
+            'Delete': function () {
+                $(this).dialog('close');
                 $.ajax({
                     // The URL for the request
-                    url: "db_menu_disk.php",
-                    data: "action=delete_download_from_menu_disk&menu_disk_download_id=" + str + "&menu_disk_id=" + menu_disk_id,
-                    type: "POST",
-                    dataType: "html",
+                    url: 'db_menu_disk.php',
+                    data: 'action=delete_download_from_menu_disk&menu_disk_download_id=' + str + '&menu_disk_id=' + menuDiskId,
+                    type: 'POST',
+                    dataType: 'html',
                     // Code to run if the request succeeds;
-                    success: function(html) {
-                        var ReturnHtml = html.split('[BRK]');
-                        $("#JSMenuFileList").html(ReturnHtml[0]);
-                        OSDMessageDisplay(ReturnHtml[1]);
+                    success: function (html) {
+                        var returnHtml = html.split('[BRK]');
+                        $('#JSMenuFileList').html(returnHtml[0]);
+                        window.OSDMessageDisplay(returnHtml[1]);
                     }
                 });
             },
-            Cancel: function() {
-                $(this).dialog("close");
+            Cancel: function () {
+                $(this).dialog('close');
             }
         }
     });
 }
 
-function deleteDocfromMenu(str, menu_disk_id) {
-    document.getElementById("menu_disk_title_id" + str).checked = false;
-    $("#JSGenericModal").dialog({
-        title: "Delete Doc title?",
-        open: $("#JSGenericModalText").text("Are you sure you want to delete this doc title from this menu disk?"),
+window.deleteDocfromMenu = function (str, menuDiskId) {
+    document.getElementById('menu_disk_title_id' + str).checked = false;
+    $('#JSGenericModal').dialog({
+        title: 'Delete Doc title?',
+        open: $('#JSGenericModalText').text('Are you sure you want to delete this doc title from this menu disk?'),
         resizable: false,
         height: 200,
         modal: true,
         buttons: {
-            "Delete": function() {
-                $(this).dialog("close");
+            'Delete': function () {
+                $(this).dialog('close');
                 $.ajax({
                     // The URL for the request
-                    url: "db_menu_disk.php",
-                    data: "action=delete_doc_from_menu_disk&menu_disk_title_id=" + str + "&menu_disk_id=" + menu_disk_id,
-                    type: "POST",
-                    dataType: "html",
+                    url: 'db_menu_disk.php',
+                    data: 'action=delete_doc_from_menu_disk&menu_disk_title_id=' + str + '&menu_disk_id=' + menuDiskId,
+                    type: 'POST',
+                    dataType: 'html',
                     // Code to run if the request succeeds;
-                    success: function(html) {
-                        var ReturnHtml = html.split('[BRK]');
-                        $("#menu_doc_list").html(ReturnHtml[0]);
-                        OSDMessageDisplay(ReturnHtml[1]);
+                    success: function (html) {
+                        var returnHtml = html.split('[BRK]');
+                        $('#menu_doc_list').html(returnHtml[0]);
+                        window.OSDMessageDisplay(returnHtml[1]);
                     }
                 });
             },
-            Cancel: function() {
-                $(this).dialog("close");
-                $("#menu_doc_list").html("");
+            Cancel: function () {
+                $(this).dialog('close');
+                $('#menu_doc_list').html('');
             }
         }
     });
 }
 
-function DeleteSet(str) {
-    $("#JSGenericModal").dialog({
-        title: "Delete menu set?",
-        open: $("#JSGenericModalText").text("Are you sure you want to delete this set?"),
+window.deleteSet = function (str) {
+    $('#JSGenericModal').dialog({
+        title: 'Delete menu set?',
+        open: $('#JSGenericModalText').text('Are you sure you want to delete this set?'),
         resizable: false,
         height: 200,
         modal: true,
         buttons: {
-            "Delete disk": function() {
-                $(this).dialog("close");
-                url = "../menus/db_menu_disk.php?action=delete_set&menu_sets_id=" + str;
+            'Delete disk': function () {
+                $(this).dialog('close');
+                var url = '../menus/db_menu_disk.php?action=delete_set&menu_sets_id=' + str;
                 location.href = url;
             },
-            Cancel: function() {
-                $(this).dialog("close");
+            Cancel: function () {
+                $(this).dialog('close');
             }
         }
     });
 }
 
-function PublishSet(str, action) {
-    $("#JSGenericModal").dialog({
-        title: "Change Status?",
-        open: $("#JSGenericModalText").text("Are you sure you want to change status on this set?"),
+window.publishSet = function (str, action) {
+    $('#JSGenericModal').dialog({
+        title: 'Change Status?',
+        open: $('#JSGenericModalText').text('Are you sure you want to change status on this set?'),
         resizable: false,
         height: 200,
         modal: true,
         buttons: {
-            "Change": function() {
-                $(this).dialog("close");
-                url = "../menus/db_menu_disk.php?action=publish_set&online=" + action + "&menu_sets_id=" + str;
+            'Change': function () {
+                $(this).dialog('close');
+                var url = '../menus/db_menu_disk.php?action=publish_set&online=' + action + '&menu_sets_id=' + str;
                 location.href = url;
             },
-            Cancel: function() {
-                $(this).dialog("close");
+            Cancel: function () {
+                $(this).dialog('close');
             }
         }
     });
 }
 
-function DeleteCredits(menu_disk_credits_id, menu_disk_id) {
-    $("#JSGenericModal").dialog({
-        title: "Delete from credits?",
-        open: $("#JSGenericModalText").text("Are you sure you want to delete this person from the credit list?"),
+window.deleteCredits = function (menuDiskCreditsId, menuDiskId) {
+    $('#JSGenericModal').dialog({
+        title: 'Delete from credits?',
+        open: $('#JSGenericModalText').text('Are you sure you want to delete this person from the credit list?'),
         resizable: false,
         height: 200,
         modal: true,
         buttons: {
-            "Delete": function() {
-                $(this).dialog("close");
+            'Delete': function () {
+                $(this).dialog('close');
                 $.ajax({
                     // The URL for the request
-                    url: "db_menu_disk.php",
-                    data: "action=delete_menu_disk_credits&menu_disk_credits_id=" + menu_disk_credits_id + "&menu_disk_id=" + menu_disk_id,
-                    type: "POST",
-                    dataType: "html",
+                    url: 'db_menu_disk.php',
+                    data: 'action=delete_menu_disk_credits&menu_disk_credits_id=' + menuDiskCreditsId + '&menu_disk_id=' + menuDiskId,
+                    type: 'POST',
+                    dataType: 'html',
                     // Code to run if the request succeeds;
-                    success: function(html) {
-                        var ReturnHtml = html.split('[BRK]');
-                        $("#menu_credit_list").html(ReturnHtml[0]);
-                        OSDMessageDisplay(ReturnHtml[1]);
-                        document.getElementById("menu_credit_list").reset();
+                    success: function (html) {
+                        var returnHtml = html.split('[BRK]');
+                        $('#menu_credit_list').html(returnHtml[0]);
+                        window.OSDMessageDisplay(returnHtml[1]);
+                        document.getElementById('menu_credit_list').reset();
                     }
                 });
             },
-            Cancel: function() {
-                $(this).dialog("close");
+            Cancel: function () {
+                $(this).dialog('close');
             }
         }
     });
 }
 
-function DeleteTitleCredits(menu_disk_title_id, ind_id, author_type_id) {
-    $("#JSGenericModal").dialog({
-        title: "Delete from credits?",
-        open: $("#JSGenericModalText").text("Are you sure you want to delete this person from the title credit list?"),
+window.deleteTitleCredits = function (menuDiskTitleId, indId, authorTypeId) {
+    $('#JSGenericModal').dialog({
+        title: 'Delete from credits?',
+        open: $('#JSGenericModalText').text('Are you sure you want to delete this person from the title credit list?'),
         resizable: false,
         height: 200,
         modal: true,
         buttons: {
-            "Delete": function() {
-                $(this).dialog("close");
+            'Delete': function () {
+                $(this).dialog('close');
                 $.ajax({
                     // The URL for the request
-                    url: "db_menu_disk.php",
-                    data: "action=delete_menu_disk_title_credits&menu_disk_title_id=" + menu_disk_title_id + "&author_type_id=" + author_type_id + "+&ind_id=" + ind_id,
-                    type: "POST",
-                    dataType: "html",
+                    url: 'db_menu_disk.php',
+                    data: 'action=delete_menu_disk_title_credits&menu_disk_title_id=' + menuDiskTitleId + '&author_type_id=' + authorTypeId + '+&ind_id=' + indId,
+                    type: 'POST',
+                    dataType: 'html',
                     // Code to run if the request succeeds;
-                    success: function(html) {
-                        var ReturnHtml = html.split('[BRK]');
-                        $("#author_list").html(ReturnHtml[0]);
-                        OSDMessageDisplay(ReturnHtml[1]);
-                        document.getElementById("author_list").reset();
+                    success: function (html) {
+                        var returnHtml = html.split('[BRK]');
+                        $('#author_list').html(returnHtml[0]);
+                        window.OSDMessageDisplay(returnHtml[1]);
+                        document.getElementById('author_list').reset();
                     }
                 });
             },
-            Cancel: function() {
-                $(this).dialog("close");
+            Cancel: function () {
+                $(this).dialog('close');
             }
         }
     });

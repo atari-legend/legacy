@@ -33,8 +33,7 @@ if ($action == "stop") {
 
 //If we are uploading new screenshots
 if (isset($action2) and $action2 == 'add_screens') {
-    if ($_SESSION['permission']==1 or $_SESSION['permission']=='1')
-    {
+    if ($_SESSION['permission']==1 or $_SESSION['permission']=='1') {
         //Here we'll be looping on each of the inputs on the page that are filled in with an image!
         $image = $_FILES['image'];
 
@@ -82,19 +81,15 @@ if (isset($action2) and $action2 == 'add_screens') {
                 }
             }
         }
-    }
-    else
-    {
+    } else {
         $osd_message = "You do not have the necessary authorizations to perform this action";
-    }    
-    
-    
-    if (isset($osd_message)){}
-    else
-    {
+    }
+
+    if (isset($osd_message)) {
+    } else {
         $osd_message = "No screenshot uploaded";
     }
-    
+
     //Let's get the screenshots for the interview
     $sql_screenshots = $mysqli->query("SELECT * FROM screenshot_interview
                     LEFT JOIN screenshot_main on ( screenshot_interview.screenshot_id = screenshot_main.screenshot_id )
@@ -126,9 +121,9 @@ if (isset($action2) and $action2 == 'add_screens') {
         ));
         $count = $count + 1;
     }
-    
+
     $smarty->assign('osd_message', $osd_message);
-   
+
     $smarty->assign('smarty_action', 'add_screen_to_interview_return');
     $smarty->assign('interview_id', $interview_id);
 
@@ -276,24 +271,20 @@ if (isset($action) and $action == 'update_interview' and (!isset($action2))) {
     $textfield    = $mysqli->real_escape_string($textfield);
     $textintro    = $mysqli->real_escape_string($textintro);
     $textchapters = $mysqli->real_escape_string($textchapters);
-    
+
     //check if this is first update. If yes, interview_text is not filled yet and we need to do a create
     //Let's get the screenshots for the interview
     $sql_interview_text = $mysqli->query("SELECT * FROM interview_text WHERE interview_id = '$interview_id'") or die("Database error - getting interview text");
 
     //get the number of screenshots in the archive
     $v_nr_text = $sql_interview_text->num_rows;
-    
-    if ($v_nr_text > 0)
-    {
+
+    if ($v_nr_text > 0) {
         $sdbquery = $mysqli->query("UPDATE interview_text SET interview_text = '$textfield', interview_date = '$date', interview_intro = '$textintro', interview_chapters = '$textchapters' WHERE interview_id = $interview_id") or die("Couldn't update into interview_text");
-    }
-    else
-    {
+    } else {
         $sdbquery = $mysqli->query("INSERT INTO interview_text (interview_id, interview_text, interview_date, interview_intro, interview_chapters) VALUES ($interview_id, '$textfield', '$date', '$textintro','$textchapters')") or die("Couldn't insert into interview_text");
- 
     }
-    
+
     //we're gonna add the screenhots into the screenshot_interview table and fill up the interview_comment table.
     //We need to loop on the screenshot table to check the shots used. If a comment field is filled,
     //the screenshot was used!
@@ -329,11 +320,11 @@ if (isset($action) and $action == 'update_interview' and (!isset($action2))) {
 
     header("Location: ../interviews/interviews_edit.php?interview_id=$interview_id");
 } elseif (isset($action) and $action == 'add_interview') {
-//****************************************************************************************
-//This is what happens when we press the create interview button in the interview creation
-//page
-//****************************************************************************************
-    if ($individual_create == '' or $individual_create == '-' ) {
+    //****************************************************************************************
+    //This is what happens when we press the create interview button in the interview creation
+    //page
+    //****************************************************************************************
+    if ($individual_create == '' or $individual_create == '-') {
         $_SESSION['edit_message'] = 'Some required info is not filled in. Make sure the -Add Interview- field is used';
         header("Location: ../interviews/interviews_main.php");
     } else {
@@ -342,7 +333,7 @@ if (isset($action) and $action == 'update_interview' and (!isset($action2))) {
 
         //get the id of the inserted interview
         $id = $mysqli->insert_id;
-        
+
         create_log_entry('Interviews', $individual_create, 'Interview', $id, 'Insert', $_SESSION['user_id']);
 
         $_SESSION['edit_message'] = 'Interview added succesfully';

@@ -22,7 +22,7 @@ include("../../admin/games/quick_search_games.php");
  ************************************************************************************************
  */
 //get all the menu types
-$result_download_tos = $mysqli->query("SELECT * FROM tos_version") or die ("problem getting tos version");
+$result_download_tos = $mysqli->query("SELECT * FROM tos_version") or die("problem getting tos version");
 
 $rows = $result_download_tos->num_rows;
 while ($row = $result_download_tos->fetch_array(MYSQLI_BOTH)) {

@@ -58,7 +58,7 @@ if (isset($action) and $action == 'add_download') {
         // check if the extention is valid.
         if ($ext == "stx" || $ext == "msa" || $ext == "st") { // pretty isn't it? ;)
         } else {
-              exit("Try uploading a diskimage type that is allowed, like stx or msa not $ext");
+            exit("Try uploading a diskimage type that is allowed, like stx or msa not $ext");
         }
 
         // create a timestamp for the date of upload

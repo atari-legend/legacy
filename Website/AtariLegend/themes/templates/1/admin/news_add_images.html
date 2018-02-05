@@ -1,4 +1,4 @@
-{* 
+{*
 ***************************************************************************
 *                                news_add_images.html
 *                            ----------------------------
@@ -6,27 +6,27 @@
 *   copyright            : (C) 2003 Atari Legend
 *   email                : maarten.martens@freebel.net
 *   actual update        : File creation
-*							 
+*
 *   Id: news_add_images.html,v 0.10 2004/05/01 ST Graveyard
 *   Id: news_add_images.html,v 0.20 2016/07/29 ST Graveyard
-*			- AL 2.0
+*           - AL 2.0
 *   Id: news_add_images.html,v 0.20 2017/05/08 ST Graveyard
-*			- Custom file selector
+*           - Custom file selector
 *
 ***************************************************************************/
 //****************************************************************************************
 // This is the sub template file to generate the newsimages page
-//**************************************************************************************** 
+//****************************************************************************************
 *}
-{extends file='1/admin/frontpage.html'}
+{extends file='1/admin/main.html'}
 
 {block name=title}Add a News Image{/block}
 
 {block name=main_tile}
-<script type="text/javascript">
-$(function() {    
+<script>
+$(function() {
     $but = $('#file_upload_user_detail');
-    
+
     $("input:file[id=file_upload]").change(function() {
         document.getElementById('file_upload_user_detail').value = $(this).val();
     });
@@ -35,41 +35,41 @@ $(function() {
 
 <form action="../news/db_news.php" enctype="multipart/form-data" method="post" name="imageadd">
 <div class="standard_tile" id="news_add_image">
-	<h1>ADD NEWS IMAGE</h1>
-	<div class="standard_tile_line"></div>
-	<div class="standard_tile_text">
-		<div class="left_nav_section">
-			Here you can add news images to go with a news update, add a name to describe the 
-			image and to what kind of news it should be used. You can use either jpg, 
-			png or gif images but png images are prefered. Keep the size to a minimun, we are talking icons here, no 300Kb images.
-			<br>
-			<br>
-			<a href="../news/news_add_images.php" class="left_nav_link"><b>Add images</b></a> / 
-			<a href="../news/news_edit_images.php" class="left_nav_link"><b>Edit images</b></a>
-		</div> 
-		<br>
-		<br>
-		<fieldset>
-			<legend>Upload image</legend>
-				Image Name
-				<br>
-				<input type="text" name="image_name" size='50' maxlength='64' class="standard_tile_input_small">
-				<br>
-				<br>
-				Image File
-				<br>
-				<!--<input type="file" name="news_image">-->
+    <h1>ADD NEWS IMAGE</h1>
+    <div class="standard_tile_line"></div>
+    <div class="standard_tile_padding">
+        <div class="left_nav_section">
+            Here you can add news images to go with a news update, add a name to describe the
+            image and to what kind of news it should be used. You can use either jpg,
+            png or gif images but png images are prefered. Keep the size to a minimun, we are talking icons here, no 300Kb images.
+            <br>
+            <br>
+            <a href="../news/news_add_images.php" class="left_nav_link"><b>Add images</b></a> /
+            <a href="../news/news_edit_images.php" class="left_nav_link"><b>Edit images</b></a>
+        </div>
+        <br>
+        <br>
+        <fieldset class="primary_fieldset">
+            <legend class="primary_legend">Upload image</legend>
+                Image Name
+                <br>
+                <input type="text" name="image_name" size='50' maxlength='64' class="standard_input input_large">
+                <br>
+                <br>
+                Image File
+                <br>
+                <!--<input type="file" name="news_image">-->
                 <label for="file_upload" class="file_upload">Select file</label>
                 <input id="file_upload" type="file" name="news_image">
-                <input type="text" class="standard_tile_input_small" id="file_upload_user_detail">&nbsp;
-				<br>
-				<br>
-				<input type="hidden" name="action" id="action" value="image_upload">
-				<input type="hidden" name="user_id" id="user_id" value="{$user_id}">
-				<input type="submit" value="Submit" class="topbutton_cpanel_small">
-				<input type="reset" class="topbutton_cpanel_small">	
-		</fieldset>
-	</div>
+                <input type="text" class="standard_input input_large" id="file_upload_user_detail">&nbsp;
+                <br>
+                <br>
+                <input type="hidden" name="action" id="action" value="image_upload">
+                <input type="hidden" name="user_id" id="user_id" value="{$user_id}">
+                <input type="submit" value="Submit" class="topbutton_cpanel_small">
+                <input type="reset" class="topbutton_cpanel_small">
+        </fieldset>
+    </div>
 </div>
-</form>	
+</form>
 {/block}

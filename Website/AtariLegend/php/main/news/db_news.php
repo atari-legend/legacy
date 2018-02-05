@@ -18,10 +18,13 @@
 include("../../config/common.php");
 include("../../config/admin.php");
 
-if (isset($news_headline) and $news_headline != 'Headline' and $news_headline != '' and isset($textfield) and $textfield != 'News item' and $textfield != '') {
+if (isset($news_headline) and $news_headline != 'Headline' and $news_headline != ''
+    and isset($textfield) and $textfield != 'News item' and $textfield != '') {
     $timestamp = time();
     $textfield = $mysqli->real_escape_string($textfield);
-    $mysqli->query("INSERT INTO news_submission (news_headline, news_text, user_id, news_date ) VALUES ('$news_headline', '$textfield', '$_SESSION[user_id]', '$timestamp')") or die("Inserting the news submission failed");
+    $mysqli->query("INSERT INTO news_submission (news_headline, news_text, user_id, news_date )
+    VALUES ('$news_headline', '$textfield', '$_SESSION[user_id]', '$timestamp')")
+    or die("Inserting the news submission failed");
 
     $new_news_id = $mysqli->insert_id;
     create_log_entry('News', $new_news_id, 'News submit', $new_news_id, 'Insert', $_SESSION['user_id']);

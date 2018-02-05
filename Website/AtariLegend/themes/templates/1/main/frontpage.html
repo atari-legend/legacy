@@ -10,9 +10,9 @@
 *
 *   Id: frontpage.html,v 0.1 2015/04/15 23:52 SilverSurfer
 *   Id: frontpage.html,v 0.2 2015/12/05 ST Graveyard - HTML validated
-*	Id: frontpage.html,v 0.3 2017/05/23 ST Graveyard
+*   Id: frontpage.html,v 0.3 2017/05/23 ST Graveyard
 *           - dotdotdot script active for news_text
-*	Id: frontpage.html,v 0.4 2017/06/16 ST Graveyard
+*   Id: frontpage.html,v 0.4 2017/06/16 ST Graveyard
 *           - New intro animation, adding the register tiles, enhancing responsivness
 *
 ***************************************************************************/
@@ -23,19 +23,19 @@
 *}
 
 {block name=description}Find information, reviews and comments about Atari ST games, read interviews of famous Atari ST game developers, contribute missing information to the Atari Legend database.{/block}
-{block name=javascript_slider}
-    <script type="text/javascript" src="{$template_dir}includes/js/vendor/lightbox-2.9.0.min.js"></script>
-    <link type="text/css" href="{$style_dir}css/vendor/lightbox-2.9.0.css" hreflang="en" rel="stylesheet">
-    
+{block name=additional_scripts}
+    <script src="{$template_dir}includes/js/vendor/lightbox-2.9.0.min.js"></script>
+
+
     <script>
-        lightbox.option({        
-          'showImageNumberLabel': false
+        lightbox.option({
+            'showImageNumberLabel': false
         })
     </script>
-    
-    <script type="text/javascript" src="{$template_dir}includes/js/vendor/jssor.slider-25.2.1.min.js"></script>  <!-- This script is needed for the animation in the welcome tile -->
-    {if isset($smarty_action) and $smarty_action == 'first_time'}<script type="text/javascript" src="{$template_dir}includes/js/vendor/animsition-4.0.2.min.js"></script>{/if}<!-- fade up script needed for the intro page -->
-    <script type="text/javascript" src="{$template_dir}includes/js/vendor/jquery.dotdotdot-1.8.3.min.js" type="text/javascript"></script> <!--this script is used for the elipsis (...) effect of the latest news / reviews tile -->
+
+    <script src="{$template_dir}includes/js/vendor/jssor.slider-25.2.1.min.js"></script>  <!-- This script is needed for the animation in the welcome tile -->
+    {if isset($smarty_action) and $smarty_action == 'first_time'}<script src="{$template_dir}includes/js/vendor/animsition-4.0.2.min.js"></script>{/if}<!-- fade up script needed for the intro page -->
+    <script src="{$template_dir}includes/js/vendor/jquery.dotdotdot-1.8.3.min.js"></script> <!--this script is used for the elipsis (...) effect of the latest news / reviews tile -->
     <script> <!-- This script is needed for the animation in the welcome tile -->
             jQuery(document).ready(function ($) {
 
@@ -111,7 +111,7 @@
                 //evaluate parent container width
                 var parentWidth = parentElement.clientWidth;
 
-               if (parentWidth) {
+                if (parentWidth) {
 
                     //exclude blank width
                     var availableWidth = parentWidth - paddingWidth;
@@ -156,9 +156,9 @@
         });
     </script>
     {if isset($smarty_action) and $smarty_action == 'first_time'}
-    <script type="text/javascript"> <!-- intro fade up script -->
-         $(document).ready(function() {
-              $(".animsition").animsition({
+    <script> <!-- intro fade up script -->
+        $(document).ready(function() {
+            $(".animsition").animsition({
                 inClass: 'fade-in-up',
                 outClass: 'fade-out-up',
                 inDuration: 1500,
@@ -180,53 +180,57 @@
                 overlayParentElement : 'body',
                 transition: function(url){ window.location.href = url; }
 
-              });
+            });
             });
     </script>
     {/if}
-    <script type="text/javascript"> 
-         window.onload = function() {
-            $(".standard_list_entry_news_text").dotdotdot({  <!--This is the script to truncate the latest news-->
-                    //	configuration goes here
-                    
-                /*	The text to add as ellipsis. */
-                ellipsis	: '... ',
-         
-                /*	How to cut off the text/html: 'word'/'letter'/'children' */
-                wrap		: 'word',
-         
-                /*	Wrap-option fallback to 'letter' for long words */
+    <script>
+        jQuery(document).ready(function () {
+            $(".standard_list_entry_news_text").dotdotdot({  // This is the script to truncate the latest news-->
+                    //  configuration goes here
+
+                /*  The text to add as ellipsis. */
+                ellipsis    : '... ',
+
+                /*  How to cut off the text/html: 'word'/'letter'/'children' */
+                wrap        : 'word',
+
+                /*  Wrap-option fallback to 'letter' for long words */
                 fallbackToLetter: false,
-         
-                /*	jQuery-selector for the element to keep and put after the ellipsis. */
-                after		: null,
-         
-                /*	Whether to update the ellipsis: true/'window' */
-                watch		: window,
 
-                /*	Optionally set a max-height, can be a number or function.
+                /*  jQuery-selector for the element to keep and put after the ellipsis. */
+                after       : null,
+
+                /*  Whether to update the ellipsis: true/'window' */
+                watch       : window,
+
+                /*  Optionally set a max-height, can be a number or function.
                     If null, the height will be measured. */
-                height		: null,
+                height      : null,
 
-                /*	Deviation for the height-option. */
-                tolerance	: 0,
-         
-                /*	Callback function that is fired after the ellipsis is added,
+                /*  Deviation for the height-option. */
+                tolerance   : 0,
+
+                /*  Callback function that is fired after the ellipsis is added,
                     receives two parameters: isTruncated(boolean), orgContent(string). */
-                callback	: function( isTruncated, orgContent ) {},
-         
-                lastCharacter	: {
-         
-                    /*	Remove these characters from the end of the truncated text. */
-                    remove		: [ ' ', ',', ';', '.', '!', '?' ],
-         
-                    /*	Don't add an ellipsis if this array contains 
+                callback    : function( isTruncated, orgContent ) {},
+
+                lastCharacter   : {
+
+                    /*  Remove these characters from the end of the truncated text. */
+                    remove      : [ ' ', ',', ';', '.', '!', '?' ],
+
+                    /*  Don't add an ellipsis if this array contains
                         the last character of the truncated text. */
-                    noEllipsis	: []
-                }   
+                    noEllipsis  : []
+                }
             });
-        };
+        });
     </script>
+{/block}
+
+{block name="additional_css"}
+    <link type="text/css" href="{$style_dir}css/vendor/lightbox-2.9.0.css" hreflang="en" rel="stylesheet">
 {/block}
 
 {block name=main_body}
@@ -245,32 +249,28 @@
             {block name=date_quote_tile}
                 {include file='1/main/date_quote_tile.html'}
             {/block}-->
-            
+
             <!--Start "class AL" tile-->
             {block name=class_tile}
                 {include file='1/main/tile_class_of_al.html'}
             {/block}
-            
+
             <!--Start "Social Corner" tile-->
             {block name=social_corner_tile}
                 {include file='1/main/tile_social_corner.html'}
             {/block}
-            
-             <!--Start open db tile-->
+
+            <!--Start open db tile-->
             {block name=date_quote_tile}
                 {include file='1/main/tile_open_db.html'}
             {/block}
-            
-            <!--Start "hotlinks" tile
-            {block name=hotlinks_tile}
-                {include file='1/main/hotlinks_tile.html'}
-            {/block}-->
+
         </div>
         <!--this column is only visible with 3 and 2 columns-->
         <div class="column_wide_left">
             <!-- Jssor Slider Begin -->
             <!-- To move inline styles to css file/block, please specify a class name for each element. -->
-            <div id="welcome">  
+            <div id="welcome">
                 <!-- Slides Container -->
                 <div data-u="slides" class="welcome_slides">
                     {foreach from=$image item=line}
@@ -286,7 +286,7 @@
                                             Details on all the classics, in-depth reviews, interviews with the creators of yesterday’s gems and much more.
                                         </span>
                                     </p>
-                                </figcaption>			
+                                </figcaption>
                             </figure>
                         </div>
                     {/foreach}
@@ -296,7 +296,7 @@
 
             <!--this column is only visible with 4 columns-->
             <div class="column_wide_center_1920">
-                
+
                 <!--Start latest news tile-->
                 {block name=latest_news_tile}
                     {include file='1/main/latest_news_tile.html'}
@@ -316,58 +316,63 @@
                     <div class="contact_email_button"><a href="#"> </a></div>
                     <div class="contact_facebook_button"><a href="#"> </a></div>
                 </div>-->
-                
+
                 <!--Start "AL Mobile" tile-->
                 <div class="contact_tiles">
                     {block name=al_mobile}
                         {include file='1/main/tile_al_mobile.html'}
                     {/block}
                 </div>
+
+                <!--Start "statistics" tile-->
+                {block name=statistics_tile}
+                    {include file='1/main/statistics_tile.html'}
+                {/block}
             </div>
         </div>
 
         <!--this column is only visible with 4 columns-->
-        <div class="column_wide_right_1920">          
+        <div class="column_wide_right_1920">
             {if (isset($action)) and ($action == 'register')}
                 {block name=user_register_tile}
                     {include file='1/main/user_register_tile.html'}
                 {/block}
             {/if}
-            
+
             <!--password reset tile -->
             {if (isset($action)) and ($action == 'reset')}
                 {block name=user_reset_tile}
                     {include file='1/main/user_reset_tile.html'}
                 {/block}
             {/if}
-            
+
             <!--password reset tile - enter new pwd -->
             {if (isset($action)) and ($action == 'new_pwd')}
                 {block name=user_reset_tile}
                     {include file='1/main/user_new_pwd_tile.html'}
                 {/block}
             {/if}
-                
+
             <!--Start "Who is it" tile-->
             {block name=who_is_it_tile}
                 {include file='1/main/who_is_it_tile.html'}
             {/block}
-            
+
+            <!--Start "hotlinks" tile-->
+            {block name=hotlinks_tile}
+                {include file='1/main/hotlinks_tile.html'}
+            {/block}
+
             <!--Start "Did you know" tile-->
             {block name=did_you_know_tile}
                 {include file='1/main/did_you_know_tile.html'}
             {/block}
 
-            <!--Start "statistics" tile-->
-            {block name=statistics_tile}
-                {include file='1/main/statistics_tile.html'}
-            {/block}
-            
             <!--Start spotlight tile-->
             {block name=spotlight_tile}
                 {include file='1/main/spotlight_tile.html'}
             {/block}
-            
+
             <!--Start "Social Corner" tile
             {block name=social_corner_tile}
                 {include file='1/main/tile_social_corner.html'}
@@ -382,90 +387,95 @@
                     {include file='1/main/user_register_tile.html'}
                 {/block}
             {/if}
-            
+
             <!--password reset tile -->
             {if (isset($action)) and ($action == 'reset')}
                 {block name=user_reset_tile}
                     {include file='1/main/user_reset_tile.html'}
                 {/block}
             {/if}
-            
+
             <!--password reset tile - enter new pwd -->
             {if (isset($action)) and ($action == 'new_pwd')}
                 {block name=user_reset_tile}
                     {include file='1/main/user_new_pwd_tile.html'}
                 {/block}
             {/if}
-            
+
             <!--Start "Who is it" tile-->
             {block name=who_is_it_tile}
                 {include file='1/main/who_is_it_tile.html'}
             {/block}
         </div>
-        
+
         <!--this column is only visible in the 3 colum mode-->
         <div class="column_left">
             <!--Start latest news tile-->
             {block name=latest_news_tile}
                 {include file='1/main/latest_news_tile.html'}
             {/block}
-            
+
             <!--Start date quote tile
             {block name=date_quote_tile}
                 {include file='1/main/date_quote_tile.html'}
-            {/block}-->       
-            
-             <!--Start open db tile-->
+            {/block}-->
+
+            <!--Start open db tile-->
             {block name=date_quote_tile}
                 {include file='1/main/tile_open_db.html'}
             {/block}
+
+            <!--Start "hotlinks" tile-->
+            {block name=hotlinks_tile}
+                {include file='1/main/hotlinks_tile.html'}
+            {/block}
         </div>
-        
+
         <!--this column is only visible in the 1 colum mode-->
         <div class="column_phone">
-             <!--register account tile -->
+            <!--register account tile -->
             {if (isset($action)) and ($action == 'register')}
                 {block name=user_register_tile}
                     {include file='1/main/user_register_tile.html'}
                 {/block}
             {/if}
-            
+
             <!--password reset tile -->
             {if (isset($action)) and ($action == 'reset')}
                 {block name=user_reset_tile}
                     {include file='1/main/user_reset_tile.html'}
                 {/block}
             {/if}
-            
+
             <!--password reset tile - enter new pwd -->
             {if (isset($action)) and ($action == 'new_pwd')}
                 {block name=user_reset_tile}
                     {include file='1/main/user_new_pwd_tile.html'}
                 {/block}
             {/if}
-            
+
             <!--Start latest news tile-->
             {block name=latest_news_tile}
                 {include file='1/main/latest_news_tile.html'}
             {/block}
-            
+
             <!--Start "Who is it" tile-->
             {block name=who_is_it_tile}
                 {include file='1/main/who_is_it_tile.html'}
             {/block}
-            
-            <!--Start date quote tile
-            {block name=date_quote_tile}
-                {include file='1/main/date_quote_tile.html'}
-            {/block}-->
-            
-             <!--Start open db tile-->
+
+            <!--Start open db tile-->
             {block name=date_quote_tile}
                 {include file='1/main/tile_open_db.html'}
             {/block}
-            
+
+            <!--Start "hotlinks" tile-->
+            {block name=hotlinks_tile}
+                {include file='1/main/hotlinks_tile.html'}
+            {/block}
+
         </div>
-        
+
         <!--this column is only visible in the 3 colum mode and 1 column mode-->
         <div class="column_center">
             <!--Start latest reviews tile-->
@@ -474,8 +484,8 @@
                     {include file='1/main/latest_reviews_tile.html'}
                 </div>
             {/block}
-            
-             <!--Start screenstar tile-->
+
+            <!--Start screenstar tile-->
             {block name=screenstar_tile}
                 {include file='1/main/tile_screenstar.html'}
             {/block}
@@ -484,21 +494,21 @@
             {block name=hotlinks_tile}
                 {include file='1/main/hotlinks_tile.html'}
             {/block}-->
-            
+
             <!--Start "class AL" tile-->
             {block name=class_tile}
                 {include file='1/main/tile_class_of_al.html'}
             {/block}
-            
+
             <!--Start spotlight tile-->
             {block name=spotlight_tile}
                 {include file='1/main/spotlight_tile.html'}
             {/block}
-            
+
             <!--{block name=social_corner_tile}
                 {include file='1/main/tile_social_corner.html'}
             {/block}-->
-            
+
         </div>
 
         <!--this column is only visible in the 3 colum mode and 1 column mode-->
@@ -521,18 +531,18 @@
                 <div class="contact_email_button"><a href="#"> </a></div>
                 <div class="contact_facebook_button"><a href="#"> </a></div>
             </div>-->
-            
+
             <!--Start "AL Mobile" tile-->
             {block name=al_mobile}
                 <div class="contact_tiles">
                     {include file='1/main/tile_al_mobile.html'}
                 </div>
             {/block}
-            
+
             {block name=social_corner_tile}
                 {include file='1/main/tile_social_corner.html'}
             {/block}
-                       
+
         </div>
 
         <!--this column is only visible in the 2 colum mode -->
@@ -547,7 +557,7 @@
             {block name=did_you_know_tile}
                 {include file='1/main/did_you_know_tile.html'}
             {/block}
-            
+
             {block name=social_corner_tile}
                 {include file='1/main/tile_social_corner.html'}
             {/block}
@@ -556,7 +566,7 @@
             {block name=statistics_tile}
                 {include file='1/main/statistics_tile.html'}
             {/block}
-            
+
             <!--Start contact tiles-->
             <!--<div class="contact_tiles">
                 <div class="contact_jukebox_button"><a href="#"> </a></div>
@@ -564,14 +574,6 @@
                 <div class="contact_email_button"><a href="#"> </a></div>
                 <div class="contact_facebook_button"><a href="#"> </a></div>
             </div>-->
-            
-            <!--Start "AL Mobile" tile-->
-            {block name=al_mobile}
-                <div class="contact_tiles">
-                    {include file='1/main/tile_al_mobile.html'}
-                </div>
-            {/block}
-            
         </div>
 
         <!--this column is only visible in the 2 colum mode -->
@@ -580,7 +582,14 @@
             {block name=date_quote_tile}
                 {include file='1/main/date_quote_tile.html'}
             {/block}-->
+
+            <!--Start "AL Mobile" tile-->
+            {block name=al_mobile}
+                <div class="contact_tiles">
+                    {include file='1/main/tile_al_mobile.html'}
+                </div>
+            {/block}
         </div>
     </div>
-  {if isset($smarty_action) and $smarty_action == 'first_time'}</div>{/if}
+    {if isset($smarty_action) and $smarty_action == 'first_time'}</div>{/if}
 {/block}

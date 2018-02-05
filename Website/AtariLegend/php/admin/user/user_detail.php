@@ -35,18 +35,14 @@ while ($query_users = $sql_users->fetch_array(MYSQLI_BOTH)) {
 
     if ($query_users['join_date'] !== '') {
         $join_date = date("F j, Y", $query_users['join_date']);
-    }
-    else
-    {
+    } else {
         $join_date = "Unknown";
-    }        
+    }
     if ($query_users['last_visit'] !== '') {
         $last_visit = date("F j, Y", $query_users['last_visit']);
-    }
-     else
-    {
+    } else {
         $last_visit = "Unknown";
-    }   
+    }
     $smarty->assign('users', array(
         'user_id' => $query_users['user_id'],
         'user_name' => $query_users['userid'],

@@ -1,4 +1,4 @@
-FROM php:7.1-apache
+FROM php:5.6-apache
 
 RUN apt-get update -y
 RUN apt-get install -y libpng-dev
@@ -14,3 +14,5 @@ RUN a2enmod expires
 RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
 RUN apt-get install -y nodejs
 RUN apt-get install -y build-essential
+
+RUN pear install PHP_CodeSniffer

@@ -1,8 +1,8 @@
-{* 
+{*
 /***************************************************************************
 *                             link_addnew.html
 *                            ------------------
-*	begin                : Sept 7, 2015
+*   begin                : Sept 7, 2015
 *   copyright            : (C) 2015 Atari Legend
 *   email                : admin@atarilegend.com
 *
@@ -11,11 +11,11 @@
 *
 ***************************************************************************/
 *}
-{extends file='1/admin/frontpage.html'}
+{extends file='1/admin/main.html'}
 {block name=java_script}
-<script type="text/javascript">
+<script>
 function deletelink(JSid)
-{  
+{
     // CONFIRM REQUIRES ONE ARGUMENT
     var message = "Are you sure you want to delete this link?";
     // CONFIRM IS BOOLEAN. THAT MEANS THAT
@@ -25,142 +25,145 @@ function deletelink(JSid)
 
     if (return_value !="0")
     {
-      url="../links/db_links.php?action=val_delete&website_id="+JSid;
-	  location.href=url;
-    } 
+        url="../links/db_links.php?action=val_delete&website_id="+JSid;
+        location.href=url;
+    }
 }
 
 function TestURL() {
-	var url = document.getElementById('website_url').value 
-	
-	if (url != 'http://' && url != '')
-	{
-		window.open(url);
-	}
-	else
-	{
-		window.alert("Please add an URL");
-	}
+    var url = document.getElementById('website_url').value
+
+    if (url != 'http://' && url != '')
+    {
+        window.open(url);
+    }
+    else
+    {
+        window.alert("Please add an URL");
+    }
 }
 </script>
 {/block}
 {block name=main_tile}
 <div class="standard_tile" id="linkaddnew">
-	<h1>ADD NEW LINK</h1>
-	<div class="standard_tile_line"></div>
-	<div class="standard_tile_text">
-		<div class="left_nav_section">
-			  Here you can add a new link by using the below text fields. Note, submitting this information, will add a link on to the online 
-			  Links Archive, which means that it wont be needing validation first.<br>
-			  You can link the website to more categories in the 'modify' section of the cpanel.
-		</div> 
-		<br>		
-		<br>
-		<form action="../links/db_links.php" method="post" name="linkadd" id="linkadd">
-		<div class="links_addnew_container">
-			<fieldset>
-			<legend>Add new link</legend>
-			<div class="links_addnew_row">
-				<div class="links_addnew_text">Site Name</div>
-				<div class="links_addnew_input"><input type="text" name="name" id="name" class="standard_tile_input_small"></div>
-			</div>
-			<div class="links_addnew_row">
-				<div class="links_addnew_text">URL</div>
-				<div class="links_addnew_input">
-					<input type="text" name="url" id="website_url" value="http://" class="standard_tile_input_small">
-					<input type="button" onclick="TestURL()" class="topbutton_cpanel_small" value="Test" style="margin-left:1px;">
-				</div>
-			</div>
-			<div class="links_addnew_row">
-				<div class="links_addnew_text">Category</div>
-				<div class="links_addnew_input"><select name="category">
-						{foreach from=$website_category item=line}
-							<option value="{$line.website_category_id}">{$line.website_category_name}</option>
-						{/foreach}	
-					</select>
-				</div>
-			</div>
-			<div class="links_addnew_row">
-				<div class="links_addnew_text">Description</div>
-				<div class="links_addnew_input"><textarea name="descr" class="links_addnew_area"></textarea></div>
-			</div>
-			<br>
-			<input type="hidden" name="action" id="action" value="addnew_link">
-			<input type="hidden" name="user_id" id="user_id" value="{$user_id}">
-			<input type="submit" value="Submit" class="topbutton_cpanel_small">
-			<input type="reset" class="topbutton_cpanel_small" value="Reset">
-			</fieldset>
-		</div>
-		</form>
-	</div>
-</div>	
+    <h1>ADD NEW LINK</h1>
+    <div class="standard_tile_line"></div>
+    <div class="standard_tile_padding">
+        <div class="left_nav_section">
+            Here you can add a new link by using the below text fields. Note, submitting this information, will add a link on to the online
+            Links Archive, which means that it wont be needing validation first.<br>
+            You can link the website to more categories in the 'modify' section of the cpanel.
+        </div>
+        <br>
+        <br>
+        <form action="../links/db_links.php" method="post" name="linkadd" id="linkadd">
+        <div class="links_addnew_container">
+            <fieldset class="primary_fieldset">
+            <legend class="primary_legend">Add new link</legend>
+            <div class="links_addnew_row">
+                <div class="links_addnew_text">Site Name</div>
+                <div class="links_addnew_input"><input type="text" name="name" id="name" class="standard_input input_large"></div>
+            </div>
+            <div class="links_addnew_row">
+                <div class="links_addnew_text">URL</div>
+                <div class="links_addnew_input">
+                    <input type="text" name="url" id="website_url" value="http://" class="standard_input input_large">
+                    <input type="button" onclick="TestURL()" class="topbutton_cpanel_small" value="Test" style="margin-left:1px;">
+                </div>
+            </div>
+            <div class="links_addnew_row">
+                <div class="links_addnew_text">Category</div>
+                <div class="links_addnew_input" class="standard_select select_large">
+                    <select name="category" class="standard_select select_large">
+                        {foreach from=$website_category item=line}
+                            <option value="{$line.website_category_id}">{$line.website_category_name}</option>
+                        {/foreach}
+                    </select>
+                </div>
+            </div>
+            <div class="links_addnew_row">
+                <div class="links_addnew_text">Description</div>
+                <div class="links_addnew_input"><textarea name="descr" class="links_addnew_area"></textarea></div>
+            </div>
+            <br>
+            <input type="hidden" name="action" id="action" value="addnew_link">
+            <input type="hidden" name="user_id" id="user_id" value="{$user_id}">
+            <input type="submit" value="Submit" class="topbutton_cpanel_small">
+            <input type="reset" class="topbutton_cpanel_small" value="Reset">
+            </fieldset>
+        </div>
+        </form>
+    </div>
+</div>
 <br>
 <div class="standard_tile" id="linkvalidate">
-	<h1>VALIDATE LINK</h1>
-	<div class="standard_tile_line"></div>
-	<div class="standard_tile_text">
-		<div class="left_nav_section">
-			  {if isset($error_msg.message)}
-				{$error_msg.message}
-			  {else}
-				Here you can check and validate submitted links. Once validated, they will be available on the website.<br>
-			  {/if}
-		</div> 
-		<br>		
-		<br>		
-		{if isset($validate)}
-			{foreach from=$validate item=lineweb}
-				<div class="links_addnew_container">
-					<form enctype="multipart/form-data" action="../links/db_links.php" method="post" name="linkmod{$lineweb.website_id}" id="linkmod{$lineweb.website_id}">
-					<fieldset>
-					<legend>New submitted website</legend>
-					<div class="links_addnew_row">
-						<div class="links_addnew_text">Site Name</div>
-						<div class="links_addnew_input"><input type="text" name="validate_website_name" value="{$lineweb.website_name}" class="standard_tile_input_small"></div>
-					</div>
-					<div class="links_addnew_row">
-						<div class="links_addnew_text">URL</div> 
-						<div class="links_addnew_input"><input type="text" name="validate_website_url" value="{$lineweb.website_url}" class="standard_tile_input_small"></div>	 
-					</div>
-					<div class="links_addnew_row">
-						<div class="links_addnew_text">Category</div>
-						<div class="links_addnew_input"><select name="validate_category">
-							{foreach from=$website_category item=line}
-								<option value="{$line.website_category_id}" {if $line.website_category_id eq $lineweb.website_category}SELECTED{/if}>{$line.website_category_name}</option>
-							{/foreach}
-						</select></div>
-					</div>
-					<div class="links_addnew_row">
-						<div class="links_addnew_text">Description</div>	
-						<div class="links_addnew_input"><textarea cols="50" rows="8" name="validate_website_description_text" class="links_addnew_area">{$lineweb.website_description}</textarea></div>
-					</div>
-					<br>
-					<br>
-					<input type="hidden" name="validate_website_id" value="{$lineweb.website_id}">
-					<input type="hidden" name="action" value="approve_link">
-					<input type="submit" name="Approve" value="Approve" class="topbutton_cpanel_small">
-					<input type="button" name="delete" value="Delete" onClick="deletelink({$lineweb.website_id}); return false;" class="topbutton_cpanel_small">
-					</fieldset> 
-					</form>
-					<fieldset>
-						<div class="links_addnew_info">Submitted by <a href="../user/user_detail.php?user_id_selected={$lineweb.user_id}" class="links_addnew_link">{$lineweb.user_name}</a> on {$lineweb.website_date}<br>
-						User Email : <a href="mailto:{$lineweb.user_email}?Subject=Thanks%20for%20the%20link%20you%20submitted" class="links_addnew_link">{$lineweb.user_email}</a><br>
-						<br>
-						{$lineweb.user_name} has submitted {$lineweb.link_sub} links before.</div>
-					</fieldset> 
-					<br>
-					<br>
-				</div>	
-			{/foreach}
-		{/if}
-		{if isset($error_msg.message)}
-		{else}
-			<div class="left_nav_section">
-				  Make the changes you want, then hit the 'Approve' button to modify. 
-				  Should you want to delete the link, click the delete button. The effects are immidiate.
-			  <br><br>
-			</div> 
-		{/if}
-	</div>
+    <h1>VALIDATE LINK</h1>
+    <div class="standard_tile_line"></div>
+    <div class="standard_tile_padding">
+        <div class="left_nav_section">
+            {if isset($error_msg.message)}
+                {$error_msg.message}
+            {else}
+                Here you can check and validate submitted links. Once validated, they will be available on the website.<br>
+            {/if}
+        </div>
+        <br>
+        <br>
+        {if isset($validate)}
+            {foreach from=$validate item=lineweb}
+                <div class="links_addnew_container">
+                    <form enctype="multipart/form-data" action="../links/db_links.php" method="post" name="linkmod{$lineweb.website_id}" id="linkmod{$lineweb.website_id}">
+                    <fieldset class="primary_fieldset">
+                    <legend class="primary_legend">New submitted website</legend>
+                    <div class="links_addnew_row">
+                        <div class="links_addnew_text">Site Name</div>
+                        <div class="links_addnew_input"><input type="text" name="validate_website_name" value="{$lineweb.website_name}" class="standard_input input_large"></div>
+                    </div>
+                    <div class="links_addnew_row">
+                        <div class="links_addnew_text">URL</div>
+                        <div class="links_addnew_input"><input type="text" name="validate_website_url" value="{$lineweb.website_url}" class="standard_input input_large"></div>
+                    </div>
+                    <div class="links_addnew_row">
+                        <div class="links_addnew_text">Category</div>
+                        <div class="links_addnew_input">
+                            <select name="validate_category" class="standard_select select_large">
+                                {foreach from=$website_category item=line}
+                                    <option value="{$line.website_category_id}" {if $line.website_category_id eq $lineweb.website_category}SELECTED{/if}>{$line.website_category_name}</option>
+                                {/foreach}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="links_addnew_row">
+                        <div class="links_addnew_text">Description</div>
+                        <div class="links_addnew_input"><textarea cols="50" rows="8" name="validate_website_description_text" class="links_addnew_area">{$lineweb.website_description}</textarea></div>
+                    </div>
+                    <br>
+                    <br>
+                    <input type="hidden" name="validate_website_id" value="{$lineweb.website_id}">
+                    <input type="hidden" name="action" value="approve_link">
+                    <input type="submit" name="Approve" value="Approve" class="topbutton_cpanel_small">
+                    <input type="button" name="delete" value="Delete" onClick="deletelink({$lineweb.website_id}); return false;" class="topbutton_cpanel_small">
+                    </fieldset>
+                    </form>
+                    <fieldset class="primary_fieldset">
+                        <div class="links_addnew_info">Submitted by <a href="../user/user_detail.php?user_id_selected={$lineweb.user_id}" class="links_addnew_link">{$lineweb.user_name}</a> on {$lineweb.website_date}<br>
+                        User Email : <a href="mailto:{$lineweb.user_email}?Subject=Thanks%20for%20the%20link%20you%20submitted" class="links_addnew_link">{$lineweb.user_email}</a><br>
+                        <br>
+                        {$lineweb.user_name} has submitted {$lineweb.link_sub} links before.</div>
+                    </fieldset>
+                    <br>
+                    <br>
+                </div>
+            {/foreach}
+        {/if}
+        {if isset($error_msg.message)}
+        {else}
+            <div class="left_nav_section">
+                Make the changes you want, then hit the 'Approve' button to modify.
+                Should you want to delete the link, click the delete button. The effects are immidiate.
+                <br><br>
+            </div>
+        {/if}
+    </div>
 </div>
 {/block}

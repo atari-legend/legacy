@@ -1,4 +1,4 @@
-{* 
+{*
 /***************************************************************************
 *                                spotlight_tile.html
 *                            ---------------------------
@@ -13,28 +13,26 @@
 
 //****************************************************************************************
 // This is the 'spotlight' tile
-//**************************************************************************************** 
+//****************************************************************************************
 *}
 {block name=spotlight_tile}
-	<div class="{$spotlight_tile}">
-		<div class="standard_tile">		
-			<h1>SPOTLIGHT</h1>
-			<div class="standard_tile_line"></div>
-			<div class="standard_tile_background">
+    <div class="{$spotlight_tile}">
+        <div class="standard_tile">
+            <h1>SPOTLIGHT</h1>
+            <div class="standard_tile_line"></div>
                 <div class="grid">
-                    <figure class="effect-tile" style="margin:0px;">           
-                        <img class="standard_tile_image" src="../../includes/show_image.php?file={$spotlight.spotlight_screenshot}&amp;resize=410,null,null,null&amp;crop=left,top,410,260" alt="Interview">	
+                    <figure class="effect-tile" style="margin:0px;">
+                        <img class="standard_tile_image" src="../../includes/show_image.php?file={$spotlight.spotlight_screenshot}&amp;resize=410,null,null,null&amp;crop=left,top,410,260" alt="Interview">
                     </figure>
                 </div>
-			</div>
-			<div class="standard_tile_explanation">
-				<br>	
-				<h6>{$spotlight.spotlight}</h6>
+            <div class="standard_tile_explanation">
+                <br>
+                <h6>{$spotlight.spotlight}</h6>
                 {if $spotlight.link != ''}
                     <br>
                     <h2><a href="{$spotlight.link}" class="standard_tile_link">More&nbsp;&nbsp;<i class="fa fa-chevron-right" aria-hidden="true"></i></a></h2>
                 {/if}
             </div>
-		</div>	
-	</div>
+        </div>
+    </div>
 {/block}

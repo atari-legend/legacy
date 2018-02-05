@@ -31,10 +31,10 @@ if (empty($catpick)) {
 $SQL = "SELECT website_category_id, website_category_name FROM website_category ORDER BY website_category_name";
 $linkcategorysql = $mysqli->query($SQL) or die("Couldn't query categories");
 
-list($website_category_id,$website_category_name) = $linkcategorysql->fetch_array(MYSQLI_BOTH);
+list($website_category_id, $website_category_name) = $linkcategorysql->fetch_array(MYSQLI_BOTH);
 
 mysqli_data_seek($linkcategorysql, 0) or die("what happend?");
-while (list($category_id,$category_name) = $linkcategorysql->fetch_array(MYSQLI_BOTH)) {
+while (list($category_id, $category_name) = $linkcategorysql->fetch_array(MYSQLI_BOTH)) {
     if ($category_id==$website_category_id) {
         $selected="SELECTED";
     } else {
@@ -53,13 +53,11 @@ while (list($category_id,$category_name) = $linkcategorysql->fetch_array(MYSQLI_
         'selected' => $selected));
 }
 
-
 if (isset($catpick)) {
     $website_category_id=$catpick;
 }
 
 $LINKSQL = $mysqli->query("SELECT * FROM website
-                        LEFT JOIN website_description ON (website.website_id = website_description.website_id)
                         LEFT JOIN website_category_cross ON (website.website_id = website_category_cross.website_id)
                         WHERE website_category_cross.website_category_id=$website_category_id ORDER by website.website_name")
                         or die("Couldn't query website and website description");
@@ -76,11 +74,12 @@ while ($rowlink = $LINKSQL->fetch_array(MYSQLI_BOTH)) {
         'website_id' => $rowlink['website_id'],
         'website_name' => $rowlink['website_name'],
         'website_url' => $rowlink['website_url'],
-        'website_description' => $rowlink['website_description_text'],
+        'website_description' => $rowlink['description'],
         'website_image' => $website_image,
         'timestamp' => $timestamp,
         'submitted' => $submitted,
         'user_id' => $rowlink['user_id'],
+        'inactive' => $rowlink['inactive'],
         'website_imgext' => $rowlink['website_imgext']));
 }
 

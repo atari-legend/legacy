@@ -11,7 +11,6 @@
  *
  ***************************************************************************/
 
-
 //load all common functions
 include("../../config/common.php");
 include("../../config/admin.php");
@@ -71,7 +70,6 @@ if (isset($action) and $action == 'pick_composer') {
         }
     }
 }
-
 
 //We need to get all the info of this game.
 $SQL_DEMO = $mysqli->query("SELECT demo.demo_name,
