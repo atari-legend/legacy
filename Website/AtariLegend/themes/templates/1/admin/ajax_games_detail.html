@@ -1,40 +1,40 @@
-{* 
+{*
 /***************************************************************************
- *                                ajax_games_detail.html
- *                            ------------------------
- *   begin                : December 2015
- *   copyright            : (C) 2015 Atari Legend
- *   email                : admin@atarilegend.com
- *	 actual update        : Creation of file
- *
- *   Id: ajax_games_detail.html,v 0.10 2015 Silver Surfer
- *
- ***************************************************************************/
+*                                ajax_games_detail.html
+*                            ------------------------
+*   begin                : December 2015
+*   copyright            : (C) 2015 Atari Legend
+*   email                : admin@atarilegend.com
+*   actual update        : Creation of file
+*
+*   Id: ajax_games_detail.html,v 0.10 2015 Silver Surfer
+*
+***************************************************************************/
 
 //****************************************************************************************
 // This bit of code is used to fill the dev and pub fields when using the A-Z select box
 // at the games detail page
-//**************************************************************************************** 
+//****************************************************************************************
 *}
 
 {if isset($smarty_action) and $smarty_action == "company_publisher_browse"}
-	{if isset($company)}
-		<select name="company_id_pub" id="company_id_pub">
-			<option value="-" selected>-</option>
-			{foreach from=$company item=line}
-				<option value="{$line.company_id}">{$line.company_name}</option>
-			{/foreach}
-		</select>
-	{/if}
+    {if isset($company)}
+        <select name="company_id_pub" class="standard_select select_medium">
+            <option value="-" selected>-</option>
+            {foreach from=$company item=line}
+                <option value="{$line.company_id}">{$line.company_name}</option>
+            {/foreach}
+        </select>
+    {/if}
 {/if}
 
 {if isset($smarty_action) and $smarty_action == "company_developer_browse"}
-	{if isset($company)}
-		<select name="company_id_dev" id="company_id_dev">
-			<option value="-" selected>-</option>
-			{foreach from=$company item=line}
-				<option value="{$line.company_id}">{$line.company_name}</option>
-			{/foreach}
-		</select>
-	{/if}
+    {if isset($company)}
+        <select name="company_id_dev" class="standard_select select_medium">
+            <option value="-" selected>-</option>
+            {foreach from=$company item=line}
+                <option value="{$line.company_id}">{$line.company_name}</option>
+            {/foreach}
+        </select>
+    {/if}
 {/if}

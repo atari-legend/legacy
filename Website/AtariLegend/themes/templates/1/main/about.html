@@ -17,17 +17,23 @@
 {block name=title}The history of Atari Legend | Atari Legend{/block}
 {block name=description}Discover the history of the Atari Legend website from 1997 to today and the team behind it.{/block}
 
-{block name=main_body}
-    <script type="text/javascript" src="{$template_dir}includes/js/vendor/lightbox-2.9.0.min.js"></script>
-    <link type="text/css" href="{$style_dir}css/vendor/lightbox-2.9.0.css" hreflang="en" rel="stylesheet">
+{block name=additional_scripts}
+    <script src="{$template_dir}includes/js/vendor/lightbox-2.9.0.min.js"></script>
+
     <script>
         lightbox.option({
-          'showImageNumberLabel': false
+            'showImageNumberLabel': false
         })
     </script>
-    <link rel="stylesheet" href="{$style_dir}css/vendor/font-awesome-4.7.0/css/font-awesome.min.css"> <!-- Font awesome for icons-->
     <script src="{$template_dir}includes/js/vendor/modernizr-2.7.1.min.js"></script> <!-- Modernizr -->
+    <script src="{$template_dir}includes/js/about.js"></script>  <!-- jQuery script to animate the history blocks -->
+{/block}
 
+{block name=additional_css}
+    <link type="text/css" href="{$style_dir}css/vendor/lightbox-2.9.0.css" hreflang="en" rel="stylesheet">
+{/block}
+
+{block name=main_body}
     <div id="main" class="main_container_games_details">
         <div class="content_box_games_details" id="column_left_interviews_details">
             {if isset($action) and $action == 'andreas'}
@@ -40,21 +46,21 @@
                 <h1>CREDITS</h1>
                 <div class="standard_tile_line"></div>
                 <div class="games_main_detail_comments_container">
-                    <table class="standard_table_list_stats">
+                    <table class="primary_table_list table_md no_border">
                         <tr>
-                            <td width="100%" colspan="2">
+                            <td colspan="2">
                                 <span class="latest_comments_text" style="text-align:center;">The Atari Legend website is created by the following people : </span>
                             </td>
                         </tr>
-                       <tr>
-                            <td width="85%" style="padding-top:5px;padding-bottom:5px;">
+                        <tr>
+                            <td class="w-85">
                                 <a href="https://www.facebook.com/maarten.martens.92" class="standard_tile_link" style="margin-left:10px;">Maarten Martens - <i class="fa fa-facebook-official" aria-hidden="true"></i></a>
                                 <br>
                                 <span class="standard_tile_subtext" style="margin-left:15px;margin-right:10px;">
                                     <a href="../../admin/user/user_detail.php?user_id_selected=3">ST Graveyard/STG</a> - Code|Design
                                 </span>
                             </td>
-                            <td width="15%" style="padding-top:5px;padding-bottom:5px;padding-right:5px;">
+                            <td class="w-15" style="padding-right:5px;">
                                 <a href="../../includes/show_image.php?file=../../themes/templates/1/includes/class_al/maarten.jpg" data-lightbox="image-1">
                                     <img src="../../includes/show_image.php?file=../../themes/templates/1/includes/class_al/maarten.jpg&amp;resize=30,null,null,null" alt="Avatar" class="log_on_avatar" style="display:inline;">
                                 </a>
@@ -62,64 +68,64 @@
                         </tr>
 
                         <tr>
-                            <td width="100%" style="padding-top:5px;padding-bottom:5px;">
+                            <td class="w-85">
                                 <a href="https://www.facebook.com/mattias.lonnback" class="standard_tile_link" style="margin-left:10px;">Mattias Lönnback - <i class="fa fa-facebook-official" aria-hidden="true"></i></a>
                                 <br>
                                 <span class="standard_tile_subtext" style="margin-left:15px;margin-right:10px;">
                                     <a href="../../admin/user/user_detail.php?user_id_selected=2">Silver Surfer</a> - Code
                                 </span>
                             </td>
-                            <td width="15%" style="padding-top:5px;padding-bottom:5px;padding-right:5px;">
+                            <td class="w-15" style="padding-right:5px;">
                                 <a href="../../includes/show_image.php?file=../../themes/templates/1/includes/class_al/mattias.jpg" data-lightbox="image-1">
                                     <img src="../../includes/show_image.php?file=../../themes/templates/1/includes/class_al/mattias.jpg&amp;resize=30,null,null,null" alt="Avatar" class="log_on_avatar" style="display:inline;">
                                 </a>
                             </td>
                         </tr>
                         <tr>
-                            <td width="100%" style="padding-top:5px;padding-bottom:5px;">
+                            <td class="w-85">
                                 <a href="https://www.facebook.com/bruno.mathieu" class="standard_tile_link" style="margin-left:10px;">Bruno Mathieu - <i class="fa fa-facebook-official" aria-hidden="true"></i></a>
                                 <br>
                                 <span class="standard_tile_subtext" style="margin-left:15px;margin-right:10px;">
                                     <a href="../../admin/user/user_detail.php?user_id_selected=4">Brume</a> - Database
                                 </span>
                             </td>
-                            <td width="15%" style="padding-top:5px;padding-bottom:5px;padding-right:5px;">
+                            <td class="w-15" style="padding-right:5px;">
                                 <a href="../../includes/show_image.php?file=../../themes/templates/1/includes/class_al/bruno.jpg" data-lightbox="image-1">
                                     <img src="../../includes/show_image.php?file=../../themes/templates/1/includes/class_al/bruno.jpg&amp;resize=32,null,null,null" alt="Avatar" class="log_on_avatar" style="display:inline;">
                                 </a>
                             </td>
                         </tr>
                         <tr>
-                            <td width="100%" style="padding-top:5px;padding-bottom:5px;">
+                            <td class="w-85">
                                 <a href="https://www.facebook.com/Marcer.Elite" class="standard_tile_link" style="margin-left:10px;">Marcus Lindberg - <i class="fa fa-facebook-official" aria-hidden="true"></i></a>
                                 <br>
                                 <span class="standard_tile_subtext" style="margin-left:15px;margin-right:10px;">
                                     <a href="../../admin/user/user_detail.php?user_id_selected=34">Marcer</a> - Database
                                 </span>
                             </td>
-                            <td width="15%" style="padding-top:5px;padding-bottom:5px;padding-right:5px;">
+                            <td class="w-15" style="padding-right:5px;">
                                 <a href="../../includes/show_image.php?file=../../themes/templates/1/includes/class_al/marcus.jpg" data-lightbox="image-1">
                                     <img src="../../includes/show_image.php?file=../../themes/templates/1/includes/class_al/marcus.jpg&amp;resize=30,null,null,null" alt="Avatar" class="log_on_avatar" style="display:inline;">
                                 </a>
                             </td>
                         </tr>
                         <tr>
-                            <td width="100%" style="padding-top:5px;padding-bottom:5px;">
+                            <td class="w-85">
                                 <a href="https://www.facebook.com/mike.mee" class="standard_tile_link" style="margin-left:10px;">Mike Mee - <i class="fa fa-facebook-official" aria-hidden="true"></i></a>
                                 <br>
                                 <span class="standard_tile_subtext" style="margin-left:15px;margin-right:10px;">
                                     <a href="../../admin/user/user_detail.php?user_id_selected=353">Mug UK</a> - Database
                                 </span>
                             </td>
-                            <td width="15%" style="padding-top:5px;padding-bottom:5px;padding-right:5px;">
+                            <td class="w-15" style="padding-right:5px;">
                                 <a href="../../includes/show_image.php?file=../../themes/templates/1/includes/class_al/mike.jpg" data-lightbox="image-1">
                                     <img src="../../includes/show_image.php?file=../../themes/templates/1/includes/class_al/mike.jpg&amp;resize=30,null,null,null" alt="Avatar" class="log_on_avatar" style="display:inline;">
                                 </a>
                             </td>
                         </tr>
                         <tr>
-                            <td width="100%" colspan="2">
-                                <span class="latest_comments_text" style="text-align:center;"><br><br>Thank you to everybody who has helped us out over the years. Without you this project would not exist.</span>
+                            <td class="w-100" colspan="2">
+                                <span class="latest_comments_text" style="text-align:center;">Thank you to everybody who has helped us out over the years. Without you this project would not exist.</span>
                             </td>
                         </tr>
                     </table>
@@ -146,7 +152,6 @@
             <div class="standard_tile">
                 <h1><a href="../about/about.php?action=andreas" class="standard_tile_link">IN LOVING MEMORY</a></h1>
                 <div class="standard_tile_line"></div>
-                <div class="standard_tile_background">
                     <div class="grid">
                         <figure class="effect-tile" style="margin:0px;">
                             <img class="standard_tile_image" src="../../includes/show_image.php?file=../../themes/templates/1/includes/class_al/Andreas3.jpg&amp;resize=410,null,null,null&amp;crop=left,top,410,260&amp;minimum_size=410,260" alt="screenstar">
@@ -156,7 +161,6 @@
                             </figcaption>
                         </figure>
                     </div>
-                </div>
                 <div class="standard_tile_explanation">
                     <br>
                     <h6>
@@ -179,7 +183,7 @@
                 <div class="standard_tile" id="games_main">
                     <h1>ANDREAS WAHLIN</h1>
                     <div class="standard_tile_line"></div>
-                    <div class="standard_tile_text">
+                    <div class="standard_tile_padding">
                         <h6>
                         Using this space, I would like to give you all the opportunity to learn a bit about a person who I consider, even though we only spoke daily in the digital world, as a good friend.
                         The first time I got in touch with Andreas was in the beginning of 2002. I was in the middle of creating a new version of my website, The ST Graveyard, and Andreas, who was also an
@@ -259,7 +263,7 @@
                 <div class="standard_tile" id="games_main">
                     <h1>HISTORY</h1>
                     <div class="standard_tile_line"></div>
-                    <div class="standard_tile_text">
+                    <div class="standard_tile_padding">
                         <h6 style="text-align:center;">By STG - September 2017</h6>
                     </div>
                     <section id="cd-timeline" class="cd-container">
@@ -314,7 +318,7 @@
 
                         <div class="cd-timeline-block">
                             <div class="cd-timeline-img cd-picture">
-                                 <div class="cd-icon2"><i class="fa fa-heart fa-2x" aria-hidden="true"></i></div>
+                                <div class="cd-icon2"><i class="fa fa-heart fa-2x" aria-hidden="true"></i></div>
                             </div> <!-- cd-timeline-img -->
                             <div class="cd-timeline-content">
                                 <div class="standard_tile_subtext" style="text-align:center">Reaching out</div>
@@ -327,7 +331,7 @@
 
                         <div class="cd-timeline-block">
                             <div class="cd-timeline-img cd-picture">
-                                 <div class="cd-icon2"><i class="fa fa-users fa-2x" aria-hidden="true"></i></div>
+                                <div class="cd-icon2"><i class="fa fa-users fa-2x" aria-hidden="true"></i></div>
                             </div> <!-- cd-timeline-img -->
                             <div class="cd-timeline-content">
                                 <div class="standard_tile_subtext" style="text-align:center">Old habits never die</div>
@@ -360,7 +364,7 @@
 
                         <div class="cd-timeline-block">
                             <div class="cd-timeline-img cd-picture">
-                                 <div class="cd-icon2"><i class="fa fa-database fa-2x" aria-hidden="true"></i></div>
+                                <div class="cd-icon2"><i class="fa fa-database fa-2x" aria-hidden="true"></i></div>
                             </div> <!-- cd-timeline-img -->
                             <div class="cd-timeline-content">
                                 <div class="standard_tile_subtext" style="text-align:center">Donation day</div>
@@ -373,7 +377,7 @@
 
                         <div class="cd-timeline-block">
                             <div class="cd-timeline-img cd-picture">
-                                 <div class="cd-icon"><i class="fa fa-ban fa-2x" aria-hidden="true"></i></div>
+                                <div class="cd-icon"><i class="fa fa-ban fa-2x" aria-hidden="true"></i></div>
                             </div> <!-- cd-timeline-img -->
                             <div class="cd-timeline-content">
                                 <div class="standard_tile_subtext" style="text-align:center">Ice Ice baby</div>
@@ -387,7 +391,7 @@
 
                         <div class="cd-timeline-block">
                             <div class="cd-timeline-img cd-picture">
-                                 <div class="cd-icon2"><i class="fa fa-users fa-2x" aria-hidden="true"></i></div>
+                                <div class="cd-icon2"><i class="fa fa-users fa-2x" aria-hidden="true"></i></div>
                             </div> <!-- cd-timeline-img -->
                             <div class="cd-timeline-content">
                                 <div class="standard_tile_subtext" style="text-align:center">One big happy family</div>
@@ -419,7 +423,7 @@
 
                         <div class="cd-timeline-block">
                             <div class="cd-timeline-img cd-picture">
-                                 <div class="cd-icon"><i class="fa fa-wrench fa-2x" aria-hidden="true"></i></div>
+                                <div class="cd-icon"><i class="fa fa-wrench fa-2x" aria-hidden="true"></i></div>
                             </div> <!-- cd-timeline-img -->
                             <div class="cd-timeline-content">
                                 <div class="standard_tile_subtext" style="text-align:center">Development of Atari Legend has begun</div>
@@ -453,7 +457,7 @@
 
                         <div class="cd-timeline-block">
                             <div class="cd-timeline-img cd-picture">
-                                 <div class="cd-icon2"><i class="fa fa-desktop fa-2x" aria-hidden="true"></i></div>
+                                <div class="cd-icon2"><i class="fa fa-desktop fa-2x" aria-hidden="true"></i></div>
                             </div> <!-- cd-timeline-img -->
                             <div class="cd-timeline-content">
                                 <div class="standard_tile_subtext" style="text-align:center">The ST Graveyard v2.0 is released</div>
@@ -469,7 +473,7 @@
                             </div> <!-- cd-timeline-content -->
                         </div> <!-- cd-timeline-block -->
 
-                         <div class="cd-timeline-block">
+                        <div class="cd-timeline-block">
                             <div class="cd-timeline-img cd-picture">
                                 <div class="cd-icon "><i class="fa fa-laptop fa-2x" aria-hidden="true"></i></div>
                             </div> <!-- cd-timeline-img -->
@@ -580,13 +584,11 @@
                 <div class="standard_tile">
                     <h1><a href="../../../demo/intro.html" class="standard_tile_link">AL INTRO</a></h1>
                     <div class="standard_tile_line"></div>
-                    <div class="standard_tile_background">
                         <div class="grid">
                             <figure class="effect-tile" style="margin:0px;">
                                 <img class="standard_tile_image" src="../../includes/show_image.php?file=../../themes/templates/1/includes/class_al/ALintro.png&amp;resize=410,null,null,null&amp;crop=left,top,410,230&amp;minimum_size=410,230" alt="screenstar">
                             </figure>
                         </div>
-                    </div>
                     <div class="standard_tile_explanation">
                         <br>
                         <h6>In July 2017, a Javascript intro screen was created by Dyno of EXO7, to promote the upcomming new website. Click and enjoy!
@@ -631,5 +633,4 @@
             {/block}
         </div>
     </div>
-    <script src="{$template_dir}includes/js/about.js"></script>  <!-- jQuery script to animate the history blocks -->
 {/block}

@@ -16,4 +16,14 @@ linters:
         enabled: false
     SelectorFormat:
         enabled: false
-
+    HexLength:
+        style: long
+    NameFormat:
+        enabled: true
+        convention: snake_case
+    PlaceholderInExtend:
+        enabled: false
+    SingleLinePerSelector:
+        enabled: false
+    MergeableSelector:
+        enabled: false

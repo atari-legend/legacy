@@ -30,7 +30,6 @@ while (list($magazine_id, $magazine_name) = $sql_magazine->fetch_row()) {
     ));
 }
 
-
 $smarty->assign('magazine_add_tpl', '1');
 
 //Send all smarty variables to the templates

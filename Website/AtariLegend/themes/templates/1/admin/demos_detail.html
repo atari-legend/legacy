@@ -1,22 +1,22 @@
-{* 
+{*
 /***************************************************************************
- *                                demos_detail.tpl
- *                            ------------------------
- *   begin                : Sunday, October 30, 2005
- *   copyright            : (C) 2005 Atari Legend
- *   email                : admin@atarilegend.com
- *
- *   Id: demos_detail.tpl,v 0.10 2005/10/11 14:50 Zombieman
- *
- ***************************************************************************/
+*                                demos_detail.tpl
+*                            ------------------------
+*   begin                : Sunday, October 30, 2005
+*   copyright            : (C) 2005 Atari Legend
+*   email                : admin@atarilegend.com
+*
+*   Id: demos_detail.tpl,v 0.10 2005/10/11 14:50 Zombieman
+*
+***************************************************************************/
 
 //****************************************************************************************
 // This is the detail page of a demo. Change all the specifics over here!
-//**************************************************************************************** 
+//****************************************************************************************
 *}
-{extends file='1/admin/frontpage.html'}
+{extends file='1/admin/main.html'}
 {block name=java_script}
-<script type="text/javascript">
+<script>
 function deletedemo(demo_id)
 {
     // CONFIRM REQUIRES ONE ARGUMENT
@@ -28,207 +28,207 @@ function deletedemo(demo_id)
 
     if (return_value !="0")
     {
-    	url="../demos/db_demos.php?demo_id="+demo_id+"&action=delete_demo";
-		location.href=url;
-    }  
+        url="../demos/db_demos.php?demo_id="+demo_id+"&action=delete_demo";
+        location.href=url;
+    }
 }
 
-function delete_crew() 
+function delete_crew()
 {
-	document.crew.method="post";
-	document.crew.action="../demos/db_demos.php?action=delete_crew";
-   	document.crew.submit();
+    document.crew.method="post";
+    document.crew.action="../demos/db_demos.php?action=delete_crew";
+    document.crew.submit();
 }
 
-function add_crew() 
+function add_crew()
 {
-	document.crew.method="post";
-	document.crew.action="../demos/db_demos.php?action=add_crew";
-   	document.crew.submit();
+    document.crew.method="post";
+    document.crew.action="../demos/db_demos.php?action=add_crew";
+    document.crew.submit();
 }
 
-function delete_author() 
+function delete_author()
 {
-	document.creator.method="post";
-	document.creator.action="../demos/db_demos.php?action=delete_author";
-   	document.creator.submit();
+    document.creator.method="post";
+    document.creator.action="../demos/db_demos.php?action=delete_author";
+    document.creator.submit();
 }
 
-function add_author() 
+function add_author()
 {
-	document.creator.method="post";
-	document.creator.action="../demos/db_demos.php?action=add_author";
-   	document.creator.submit();
+    document.creator.method="post";
+    document.creator.action="../demos/db_demos.php?action=add_author";
+    document.creator.submit();
 }
 </script>
 {/block}
 {block name=title}Edit demo - {$demo_info.demo_name}{/block}
 {block name=main_tile}
 <div class="NEWMAINCELL">
-	<fieldset class="game_set">
-		<legend class="links_legend">Crew/Creator info - help</legend>
+    <fieldset class="primary_fieldset">
+        <legend class="primary_legend">Crew/Creator info - help</legend>
 
-				A demo can be build by a crew, or can be created by an individual. If the demo is a one mans job, the crew data should not be filled.
-				However, if the demo is constructed by a crew, the crew should be added in the crew box. As well as the members (of this crew) who participated on this
-				demo, they should be added in the Creator box. You can link as many Crews/Creators to this demo as you wish.
+                A demo can be build by a crew, or can be created by an individual. If the demo is a one mans job, the crew data should not be filled.
+                However, if the demo is constructed by a crew, the crew should be added in the crew box. As well as the members (of this crew) who participated on this
+                demo, they should be added in the Creator box. You can link as many Crews/Creators to this demo as you wish.
 
-	</fieldset> 
+    </fieldset>
 
 <br/>
 
 <div style="display:inline-block;">
-	<fieldset class="game_set" style="display:inline;width:200px;">
-		<legend class="links_legend">Crew info</legend>
-	<form action="../demos/db_demos.php" method="post" name="crew">	
-					{if isset($demo_crew)} 
-					{foreach from=$demo_crew item=line}
-						<input type="checkbox" name="demo_crew_id[]" value="{$line.crew_id}">
-					  		<a href="../crew/crew_search.php?crew_select={$line.crew_id}&amp;crewsearch={$line.url_crew_name}&amp;action=main" class="MAINNAV">{$line.crew_name}</a>				
-					  	<br/>
-					  	<br/>
-					{/foreach}
-					{/if}	
-					{if isset($demo_crew_nr) and $demo_crew_nr == 1} 				
-						<img src="../templates/0/images/arrow_ltr.gif" alt="" width="38" height="22">		
-						<input type="button" value="Delete" onclick="delete_crew()">
-					{/if}
-					<br/>
-					<br/>
-					<select name="crew_id_select" class="authorSelects">
-					{foreach from=$crew item=line}
-						<option value="{$line.crew_id}">{$line.crew_name}</option>
-					{/foreach}
-					</select>
-					<input type="hidden" name="demo_id" value="{$demo_id}">	
-					<input type="button" value="Add" onclick="add_crew()">
-	</form>
-	</fieldset>
+    <fieldset class="primary_fieldset" style="display:inline;width:200px;">
+        <legend class="primary_legend">Crew info</legend>
+    <form action="../demos/db_demos.php" method="post" name="crew">
+                    {if isset($demo_crew)}
+                    {foreach from=$demo_crew item=line}
+                        <input type="checkbox" name="demo_crew_id[]" value="{$line.crew_id}">
+                            <a href="../crew/crew_search.php?crew_select={$line.crew_id}&amp;crewsearch={$line.url_crew_name}&amp;action=main" class="MAINNAV">{$line.crew_name}</a>
+                        <br/>
+                        <br/>
+                    {/foreach}
+                    {/if}
+                    {if isset($demo_crew_nr) and $demo_crew_nr == 1}
+                        <img src="../templates/0/images/arrow_ltr.gif" alt="" width="38" height="22">
+                        <input type="button" value="Delete" onclick="delete_crew()">
+                    {/if}
+                    <br/>
+                    <br/>
+                    <select name="crew_id_select" class="authorSelects">
+                    {foreach from=$crew item=line}
+                        <option value="{$line.crew_id}">{$line.crew_name}</option>
+                    {/foreach}
+                    </select>
+                    <input type="hidden" name="demo_id" value="{$demo_id}">
+                    <input type="button" value="Add" onclick="add_crew()">
+    </form>
+    </fieldset>
 
 
 
-	<fieldset class="game_set" style="display:inline;width:200px;vertical-align:top;">
-		<legend class="links_legend">Creator info</legend>
-	<form action="../demos/db_demos.php" method="post" name="creator">
-					{if isset($demo_author)} 
-					{foreach from=$demo_author item=line}
-						<input type="checkbox" name="demo_author_id[]" value="{$line.demo_author_id}">
-					  		<a href="../individuals/individuals_edit.php?ind_id={$line.ind_id}" class="MAINNAV">{$line.ind_name}</a> <b>({$line.auhthor_type_info})</b>
-					  	<br/>
-					  	<br/>
-					{/foreach}
-					{/if}
-					{if isset($demo_author_nr) and $demo_author_nr == 1} 
-				 		<img src="../templates/0/images/arrow_ltr.gif" alt="" width="38" height="22">		
-				 		<input type="button" value="Delete" onclick="delete_author()">
-					{/if}
-					<br/>
-					<br/>
-					<select name="ind_id" class="authorSelects">
-					{foreach from=$individuals item=line}
-						<option value="{$line.ind_id}">{$line.ind_name}</option>
-					{/foreach}
-					</select>
-					<b>Name</b>		
-					<br/>
-					<select name="author_type_id" class="authorSelects">
-					{foreach from=$author_types item=line}
-						<option value="{$line.author_type_id}">{$line.author_type}</option>
-					{/foreach}
-					</select>
-					<b>Job</b>		
-					<br/><br/>
-					<input type="hidden" name="demo_id" value="{$demo_id}">	
-					<input type="button" value="Add" onclick="add_author()">
-	</form>
-	</fieldset>
-	
-		<fieldset class="game_set" style="display:inline;width:200px;vertical-align:top;">
-		<legend class="links_legend">Other Features</legend>
-			<form action="../demos/db_demos.php" method="post" name="aka" style="text-align:center;">
-			
-					<b>Demo AKA :</b><br/>
-					<input type="text" name="demo_aka"><br/>
-					<input type="submit" name="valider" value="Add">
-					<input type="hidden" name="action" value="demo_aka">	
-					<input type="hidden" name="demo_id" value="{$demo_id}">	
-					<br/>
-					<br/>
-					{if $nr_aka <> 0}
-					<b>Current AKA</b>
-					<br/>
-						{foreach from=$aka item=line}
-							<a href="../demos/demos_detail.php?demo_id={$line.demo_id}" class="MAINNAV">{$line.demo_aka_name}</a> - <b><a href="../demos/db_demos.php?demo_aka_id={$line.demo_aka_id}&amp;action=delete_aka&amp;demo_id={$line.demo_id}" class="MAINNAV">delete</a></b> 
-							<br/>
-						{/foreach}
-					{/if}
-					<br/>
-					<br/>
-					<b><a href="../demos/demos_upload.php?demo_id={$demo_info.demo_id}" class="MAINNAV">Add file download</a></b><br/>
-				  	<b><a href="../demos/demos_screenshot_add.php?demo_id={$demo_info.demo_id}&amp;demo_name={$demo_info.url_demo_name}" class="MAINNAV">Add screenshots</a></b><br/>
-					<br/>
-					<b><a href="../administration/construction.php" class="MAINNAV">Moderate comments</a></b>
-	</form>
-	</fieldset>
-	
-		<fieldset class="game_set" style="display:inline;width:200px;vertical-align:top;">
-		<legend class="links_legend">Statistics</legend>
+    <fieldset class="primary_fieldset" style="display:inline;width:200px;vertical-align:top;">
+        <legend class="primary_legend">Creator info</legend>
+    <form action="../demos/db_demos.php" method="post" name="creator">
+                    {if isset($demo_author)}
+                    {foreach from=$demo_author item=line}
+                        <input type="checkbox" name="demo_author_id[]" value="{$line.demo_author_id}">
+                            <a href="../individuals/individuals_edit.php?ind_id={$line.ind_id}" class="MAINNAV">{$line.ind_name}</a> <b>({$line.auhthor_type_info})</b>
+                        <br/>
+                        <br/>
+                    {/foreach}
+                    {/if}
+                    {if isset($demo_author_nr) and $demo_author_nr == 1}
+                        <img src="../templates/0/images/arrow_ltr.gif" alt="" width="38" height="22">
+                        <input type="button" value="Delete" onclick="delete_author()">
+                    {/if}
+                    <br/>
+                    <br/>
+                    <select name="ind_id" class="authorSelects">
+                    {foreach from=$individuals item=line}
+                        <option value="{$line.ind_id}">{$line.ind_name}</option>
+                    {/foreach}
+                    </select>
+                    <b>Name</b>
+                    <br/>
+                    <select name="author_type_id" class="authorSelects">
+                    {foreach from=$author_types item=line}
+                        <option value="{$line.author_type_id}">{$line.author_type}</option>
+                    {/foreach}
+                    </select>
+                    <b>Job</b>
+                    <br/><br/>
+                    <input type="hidden" name="demo_id" value="{$demo_id}">
+                    <input type="button" value="Add" onclick="add_author()">
+    </form>
+    </fieldset>
 
-					Nr of Screenshots - {$nr_screenshots}<br/>
-					Nr of music files - {$nr_music}<br/>
+        <fieldset class="primary_fieldset" style="display:inline;width:200px;vertical-align:top;">
+        <legend class="primary_legend">Other Features</legend>
+            <form action="../demos/db_demos.php" method="post" name="aka" style="text-align:center;">
 
-	</fieldset>
-	
-	
-	
+                    <b>Demo AKA :</b><br/>
+                    <input type="text" name="demo_aka"><br/>
+                    <input type="submit" name="valider" value="Add">
+                    <input type="hidden" name="action" value="demo_aka">
+                    <input type="hidden" name="demo_id" value="{$demo_id}">
+                    <br/>
+                    <br/>
+                    {if $nr_aka <> 0}
+                    <b>Current AKA</b>
+                    <br/>
+                        {foreach from=$aka item=line}
+                            <a href="../demos/demos_detail.php?demo_id={$line.demo_id}" class="MAINNAV">{$line.demo_aka_name}</a> - <b><a href="../demos/db_demos.php?demo_aka_id={$line.demo_aka_id}&amp;action=delete_aka&amp;demo_id={$line.demo_id}" class="MAINNAV">delete</a></b>
+                            <br/>
+                        {/foreach}
+                    {/if}
+                    <br/>
+                    <br/>
+                    <b><a href="../demos/demos_upload.php?demo_id={$demo_info.demo_id}" class="MAINNAV">Add file download</a></b><br/>
+                    <b><a href="../demos/demos_screenshot_add.php?demo_id={$demo_info.demo_id}&amp;demo_name={$demo_info.url_demo_name}" class="MAINNAV">Add screenshots</a></b><br/>
+                    <br/>
+                    <b><a href="../administration/construction.php" class="MAINNAV">Moderate comments</a></b>
+    </form>
+    </fieldset>
+
+        <fieldset class="primary_fieldset" style="display:inline;width:200px;vertical-align:top;">
+        <legend class="primary_legend">Statistics</legend>
+
+                    Nr of Screenshots - {$nr_screenshots}<br/>
+                    Nr of music files - {$nr_music}<br/>
+
+    </fieldset>
+
+
+
 </div>
 <br/><br/>
 
 
-	<fieldset class="game_set">
-		<legend class="links_legend">Basic demo Info - help</legend>
+    <fieldset class="primary_fieldset">
+        <legend class="primary_legend">Basic demo Info - help</legend>
 
-				Add this part of the screen you can add additional demo info. Just select what you think is neceasrry, and press the modify button to link it all to the demo.
-				When you press the delete button, the complete demo and all table entries linked to this demo entity will be removed from the database!
+                Add this part of the screen you can add additional demo info. Just select what you think is neceasrry, and press the modify button to link it all to the demo.
+                When you press the delete button, the complete demo and all table entries linked to this demo entity will be removed from the database!
 
-	</fieldset> 
+    </fieldset>
 <br/>
 
-	<fieldset class="game_set">
-		<legend class="links_legend">Basic demo info</legend>
-			<form action="../demos/db_demos.php" method="post" name="edit">
-				<br/>
-				<b>Demo name :</b> <input type="text" name="demo_name" value="{$demo_info.demo_name}">
-				<br/><br/>
-				<b>Release year  :</b> {html_select_date time=$demo_info.demo_year start_year=1984 display_days=0 display_months=0}
-				<br/><br/>
-		<div style="display:table;">
-			<div style="display:table-cell;">
-				<br/>
-				<input type="checkbox" name="ste_enhanced" value="1"{if $demo_info.demo_ste_enhan == 1} checked{/if}>This demo is STE Enhanced&nbsp;<br/>
-				<input type="checkbox" name="ste_only" value="1"{if $demo_info.demo_ste_only == 1} checked{/if}>This demo is STE ONLY&nbsp;<br/>
-				<input type="checkbox" name="falcon_enhanced" value="1"{if $demo_info.demo_falcon_enhan == 1} checked{/if}>This demo is Falcon Enhanced&nbsp;<br/>
-				<input type="checkbox" name="falcon_only" value="1"{if $demo_info.demo_falcon_only == 1} checked{/if}>This demo is Falcon only&nbsp;<br/>
-				<input type="checkbox" name="mono_only" value="1"{if $demo_info.demo_mono_only == 1} checked{/if}>This demo is mono only&nbsp;<br/>
-			</div>
-			<div style="display:table-cell;">
-				<b>Category</b>
-				<br/>
-				<select name="category[]" multiple size="8">
-				{foreach from=$cat item=line}
-					<option value="{$line.cat_id}" {$line.cat_selected}>{$line.cat_name}</option>
-				{/foreach}
-				</select>
-			</div>
-		</div>
+    <fieldset class="primary_fieldset">
+        <legend class="primary_legend">Basic demo info</legend>
+            <form action="../demos/db_demos.php" method="post" name="edit">
+                <br/>
+                <b>Demo name :</b> <input type="text" name="demo_name" value="{$demo_info.demo_name}">
+                <br/><br/>
+                <b>Release year  :</b> {html_select_date time=$demo_info.demo_year start_year=1984 display_days=0 display_months=0}
+                <br/><br/>
+        <div style="display:table;">
+            <div style="display:table-cell;">
+                <br/>
+                <input type="checkbox" name="ste_enhanced" value="1"{if $demo_info.demo_ste_enhan == 1} checked{/if}>This demo is STE Enhanced&nbsp;<br/>
+                <input type="checkbox" name="ste_only" value="1"{if $demo_info.demo_ste_only == 1} checked{/if}>This demo is STE ONLY&nbsp;<br/>
+                <input type="checkbox" name="falcon_enhanced" value="1"{if $demo_info.demo_falcon_enhan == 1} checked{/if}>This demo is Falcon Enhanced&nbsp;<br/>
+                <input type="checkbox" name="falcon_only" value="1"{if $demo_info.demo_falcon_only == 1} checked{/if}>This demo is Falcon only&nbsp;<br/>
+                <input type="checkbox" name="mono_only" value="1"{if $demo_info.demo_mono_only == 1} checked{/if}>This demo is mono only&nbsp;<br/>
+            </div>
+            <div style="display:table-cell;">
+                <b>Category</b>
+                <br/>
+                <select name="category[]" multiple size="8">
+                {foreach from=$cat item=line}
+                    <option value="{$line.cat_id}" {$line.cat_selected}>{$line.cat_name}</option>
+                {/foreach}
+                </select>
+            </div>
+        </div>
 
-				<br/><br/>
-				<input type="submit" name="valider" value="Modify">
-				<input type="button" name="delete" value="Delete" onClick="deletedemo({$demo_id}); return false;">	
-				<input type="hidden" name="action" value="modify_demo">	
-				<input type="hidden" name="demo_id" value="{$demo_id}">	
-					</form>
+                <br/><br/>
+                <input type="submit" name="valider" value="Modify">
+                <input type="button" name="delete" value="Delete" onClick="deletedemo({$demo_id}); return false;">
+                <input type="hidden" name="action" value="modify_demo">
+                <input type="hidden" name="demo_id" value="{$demo_id}">
+                    </form>
 
-	</fieldset>
+    </fieldset>
 
 
 
@@ -244,7 +244,7 @@ function add_author()
 <br/>
 
 {if isset($message)}
-	<div class="message_box">{$message}</div>
+    <div class="message_box">{$message}</div>
 {/if}
 </div>
 {/block}

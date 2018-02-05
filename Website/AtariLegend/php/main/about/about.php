@@ -23,7 +23,6 @@ include("../../common/tiles/tile_bug_report.php");
 
 //Send all smarty variables to the templates
 if (isset($action) and $action == 'andreas') {
-
     // get the comments from the database
     $sql_comment = $mysqli->query("SELECT *
                                 FROM andreas
@@ -38,16 +37,12 @@ if (isset($action) and $action == 'andreas') {
 
         $date = date("F j, Y", $query_comment['timestamp']);
 
-        $smarty->append(
-
-            'comments_andreas',
-            array('comment' => $oldcomment,
-                  'date' => $date,
-                  'user_name' => $query_comment['user_name'])
-
-        );
+        $smarty->append('comments_andreas', array(
+            'comment' => $oldcomment,
+            'date' => $date,
+            'user_name' => $query_comment['user_name']
+        ));
     }
-
     $smarty->assign('action', 'andreas');
 }
 

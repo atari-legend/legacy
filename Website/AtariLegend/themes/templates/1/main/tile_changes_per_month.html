@@ -15,9 +15,10 @@
 // This is a small statistics tile
 //****************************************************************************************
 *}
-<script type="text/javascript" src="{$template_dir}includes/js/vendor/Chart-2.5.0.min.js"></script> <!-- chart creation -->
+<script src="{$template_dir}includes/js/vendor/Chart-2.5.0.min.js"></script> <!-- chart creation -->
 <script>
-window.onload = function () {
+    // jQuery is not available yet at this point
+    document.addEventListener("DOMContentLoaded", function(event) {
 
     var data_cl_monthly = {$change_log_monthly_data};
     var labels_cl_monthly = {$change_log_monthly_label};
@@ -48,22 +49,22 @@ window.onload = function () {
             }
         }
     })
-};
+});
 </script>
 
 <div class="standard_tile">
-	<h1>UPDATES</h1>
-		<div class="standard_tile_line"></div>
-		<div class="standard_list_entry">
-            <div class="standard_table_center" style="float:left;margin-left:5px;">
+    <h1>UPDATES</h1>
+        <div class="standard_tile_line"></div>
+        <div class="standard_list_entry">
+            <div class="standard_tile_text_center" style="float:left;margin-left:5px;">
                 <br><h6>This bar chart represents the nr of changes made to the database each month over the past year. Hover over the chart for more info.
-                For all the details of the changes made, please visit the <a href="../../admin/administration/change_log.php" class="standard_tile_link_cpanel">change log</a> section of the control panel.</h6><br><br>
+                For all the details of the changes made, please visit the <a href="../../admin/administration/change_log.php" class="standard_tile_link_reverse">change log</a> section of the control panel.</h6><br><br>
             </div>
-			<div class="standard_tile_text">
-                 <div class="line_changelog" style="width:98%;margin-left:auto;margin-right:auto;">
+            <div class="standard_tile_padding">
+                <div class="line_changelog" style="width:98%;margin-left:auto;margin-right:auto;">
                     <canvas id="changelog_line"></canvas>
                 </div>
-			</div>
-		</div>
-	<div class="standard_tile_line"></div>
+            </div>
+        </div>
+    <div class="standard_tile_line"></div>
 </div>

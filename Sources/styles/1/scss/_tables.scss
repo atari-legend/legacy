@@ -1,0 +1,240 @@
+//*************************************************************/
+//**********************LEGACY SKIN****************************/
+//*************************************************************/
+//*************************************************************/
+//*************** Tables****************/
+//*************************************************************/
+//*----------------------------------------------------------
+// Tables
+//------------------------------------------------------------ */
+
+
+.table_xs {
+    th {
+        padding-top: 3px;
+        padding-bottom: 3px;
+        padding-left: 3;
+        padding-right: 3;
+    }
+    td {
+        padding-top: 1px;
+        padding-bottom: 1px;
+        padding-left: 3;
+        padding-right: 3;
+    }
+}
+.table_sm {
+    th,
+    td {
+        padding-top: 3px;
+        padding-bottom: 3px;
+    }
+}
+.table_md {
+    th,
+    td {
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+}
+.table_lg {
+    th,
+    td {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+}
+.table_hover {
+    tbody tr:hover {
+        background-color: #294f4f;
+    }
+}
+.no_border {
+    border: 0 !important;
+}
+//
+// Table Headers
+//
+
+.primary_table_list {
+    padding: 0;
+    margin-right: auto;
+    margin-left: auto;
+    text-align: left;
+    background-color: #00d3d3;
+    color: #ffffff;
+    border-collapse: collapse;
+    border: solid 1px #000000;
+    border-spacing: 0;
+    font-size: 11pt;
+    width: 100%;
+}
+.primary_table_list th {
+    margin: 0;
+    padding-left: 5px;
+    padding-right: 5px;
+    background-color: #006f6f;
+    border-top: solid 1px #000000;
+    border-bottom: solid 1px #000000;
+}
+.primary_table_list td {
+    margin: 0;
+    padding-left: 5px;
+    padding-right: 5px;
+    border-top: solid 1px #000000;
+    border-bottom: solid 1px #000000;
+}
+.primary_table_list tr:first-child {
+    td {
+        border-top: 0;
+    }
+}
+.primary_table_list tr:last-child {
+    td {
+        border-bottom: 0;
+    }
+}
+.primary_table_list tr:nth-child(even) {
+    background-color: #122323;
+}
+.primary_table_list tr:nth-child(odd) {
+    background-color: #0d2e2e;
+}
+.secondary_table_list {
+    padding: 0;
+    margin-right: auto;
+    margin-left: auto;
+    text-align: left;
+    background-color: #00d3d3;
+    font-size: 11pt;
+    color: #ffffff;
+    border-collapse: collapse;
+    border: solid 1px #000000;
+    border-spacing: 0;
+    width: 100%;
+}
+.secondary_table_list th {
+    margin: 0;
+    padding-left: 5px;
+    padding-right: 5px;
+    background-color: #006f6f;
+    border-top: solid 1px #000000;
+    border-bottom: solid 1px #000000;
+}
+.secondary_table_list td {
+    margin: 0;
+    padding-left: 5px;
+    padding-right: 5px;
+    border-top: solid 1px #000000;
+    border-bottom: solid 1px #000000;
+}
+.secondary_table_list tr:first-child {
+    td {
+        border-top: 0;
+    }
+}
+.secondary_table_list tr:last-child {
+    td {
+        border-bottom: 0;
+    }
+}
+.secondary_table_list tr:nth-child(even) {
+    background-color: #00d3d3;
+}
+.secondary_table_list tr:nth-child(odd) {
+    background-color: #006f6f;
+}
+
+
+//
+// Table customizations
+//
+
+.standard_table_center {
+    font-size: 10pt;
+    font-weight: 100;
+    color: #ffffff;
+    text-align: center;
+}
+.standard_table_center img {
+    display: inline;
+}
+#menu_list_table {
+    background-color: #294f4f;
+}
+#menu_list_table tr:nth-child(even) {
+    background-color: #294f4f;
+}
+#menu_list_table tr:nth-child(odd) {
+    background-color: #006f6f;
+}
+
+.db_result_column,
+.db_state_column,
+.db_id_column,
+.db_description_column,
+.db_exe_column {
+    text-align: center;
+}
+
+.menu_state_column,
+.karma_points_tablecell,
+.log_subname_column {
+    text-align: right;
+}
+
+//*----------------------------------------------------------
+//Games comment
+//------------------------------------------------------------ */
+.gc_table_list {
+    margin-right: auto;
+    margin-left: auto;
+    text-align: left;
+    background-color: #00d3d3;
+    border: solid 1px #000000;
+    border-spacing: 0;
+    width: 100%;
+}
+.gc_table_list tr:nth-child(even) {
+    background-color: #00d3d3;
+}
+.gc_table_list tr:nth-child(odd) {
+    background-color: #006f6f;
+}
+.gc_table_list td {
+    padding: 5px;
+    margin: 0;
+    border-bottom: solid 1px #000000;
+}
+.gc_left_column,
+.gc_center_column {
+    font-size: 10pt;
+}
+.gc_right_head {
+    font-size: 10pt;
+    text-align: right;
+}
+
+.links_modlist_tdline {
+    padding: 5px;
+    font-size: 10pt;
+    color: #000000;
+}
+
+.news_left_head {
+    text-align: left;
+}
+.news_right_head {
+    text-align: right;
+}
+
+.news_images_check {
+    vertical-align: middle;
+}
+.news_images_display {
+    vertical-align: top;
+}
+.news_images_name {
+    padding-left: 15px;
+    vertical-align: top;
+}

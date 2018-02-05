@@ -7,129 +7,129 @@
 *   email                : admin@atarilegend.com
 *
 *   Id: ajax_menus_add_docs.html,v 0.10 2016/10/14 23:27 STG
-*			- AL 2.0
+*           - AL 2.0
 *   Id: ajax_menus_add_docs.html,v 0.11 2017/05/06 22:55 STG
-*			- New checkboxes
+*           - New checkboxes
 *
 ***************************************************************************/
 *}
 
 {* Full search list *}
 {if isset($smarty_action) and $smarty_action == "full_list"}
-	<form action="" method="post" name="game_search" id="doc_search_menu">
-		<div class="standard_tile_text">
-			<fieldset class="centered_fieldset">
-			<legend>Search (to add a doc)</legend>
-				By name : <br>
-				<select name="docbrowse" class="JSDocBrowse" id="quick_search_small_select">
+    <form action="" method="post" name="game_search" id="doc_search_menu">
+        <div class="standard_tile_padding">
+            <fieldset class="primary_fieldset centered_fieldset">
+            <legend class="primary_legend">Search (to add a doc)</legend>
+                By name : <br>
+                <select name="docbrowse" class="JSDocBrowse standard_select select_small">
                     <option value="" SELECTED>-</option>
                     {html_options values=$az_value output=$az_output}
-				</select>
-                <input type="text" name="docsearch" id="docsearch_menudisk" value="" class="standard_tile_input_small JSDocSearch">
+                </select>
+                <input type="text" name="docsearch" id="docsearch_menudisk" value="" class="standard_input input_large JSDocSearch">
                 <br><br>
                 <input type="hidden" name="menu_disk_id" id="menu_disk_id" value="{$menu_disk_id}">
-				<br>
-			</fieldset>
-		</div>
-	</form>
-	<br>
-	<form action="" method="get" name="doc_add_to_menu" id="doc_add_to_menu">
+                <br>
+            </fieldset>
+        </div>
+    </form>
+    <br>
+    <form action="" method="get" name="doc_add_to_menu" id="doc_add_to_menu">
         {if isset($series_link) }
-		<div id="doc_list">
-			<table class="table_game_list" style="width:95%;border: solid 1px black;margin:auto;">
-				<tr>
-					<th id="menu_mark_th">Add</th>
-					<th id="game_th">Name</th>
-					<th id="pub_th">Publisher</th>
-					<th id="dev_th">Developer</th>
-					<th id="year_th">Year</th>
-					<th id="info_th">Info</th>
-				</tr>
-				{foreach from=$series_link item=line}
-				<tr>
-					<td class="menu_mark_td">
+        <div id="doc_list">
+            <table class="primary_table_list w-95">
+                <tr>
+                    <th class="menu_mark_column w-5">Add</th>
+                    <th class="game_name_column w-40">Name</th>
+                    <th class="publisher_table_column w-20">Publisher</th>
+                    <th class="developer_table_column w-20">Developer</th>
+                    <th class="release_year_column w-10">Year</th>
+                    <th class="information_table_column w-10">Info</th>
+                </tr>
+                {foreach from=$series_link item=line}
+                <tr>
+                    <td class="menu_mark_column w-5">
                         <div class="links_mod_checkbox">
                             <input type="checkbox" id="{$line.game_id}" name="game_id[]" value="{$line.game_id}" style="margin-left:4px;" onchange="addDoctoMenu(this.value,{$menu_disk_id},'{$line.software_type}')">
                             <label for="{$line.game_id}"></label>&nbsp;
                             <!--<input type="checkbox" name="game_id[]" value="{$line.game_id}" style="margin-left:4px;" onchange="addDoctoMenu(this.value,{$menu_disk_id},'{$line.software_type}')">-->
                         </div>
-					</td>
-					<td class="game_td">
-						{if $line.game_name != ''}{if $line.software_type == 'Game'}<a href="../games/games_detail.php?game_id={$line.game_id}" class="standard_table_left">{$line.game_name}</a>{else}<a href="../administration/construction.php" class="standard_table_left">{$line.game_name}</a>{/if}
-							{else}<i>n/a</i>{/if}
-					</td>
-					<td class="pub_td">
-						{if $line.publisher_name != ''}
-							<a href="../games/games_list.php?publisher={$line.publisher_id}&amp;action=search" class="standard_table_left">
-								{$line.publisher_name}
-							</a>
-						{else}
-							<i>n/a</i>
-						{/if}
-					</td>
-					<td class="dev_td">
-						{if $line.developer_name != ''}
-							<a href="../games/games_list.php?developer={$line.developer_id}&amp;action=search" class="standard_table_left">
-								{$line.developer_name}
-							</a>
-						{else}
-							<i>n/a</i>
-						{/if}
-					</td>
-					<td class="year_td">
-						{if $line.year != ''}
-							<a href="../games/games_main.php?year={$line.year}&amp;action=search" class="standard_table_left">
-								{$line.year}
-							</a>
-						{else}
-							<i>n/a</i>
-						{/if}
-					</td>
-					<td class="info_td">
-						{if $line.software_type != ''}
-								{$line.software_type}
-						{else}
-							<i>n/a</i>
-						{/if}
-					</td>
-				</tr>
-				{/foreach}
-				<tr class="table_game_list">
-					<td class="game_list_footer" colspan="6">
-						<input type="hidden" name="action" value="add_doc_to_menu">
-						<img src="../../../themes/templates/1/includes/img/arrow_ltr.gif" alt="" width="38" height="22" style="display:inline;">
-						<input type="button" value="Add" class="quick_search_games_button" style="display:inline;" onclick="addDoctoMenu(this.form)">
-					</td>
-				</tr>
-			</table>
-		</div>
+                    </td>
+                    <td class="game_name_column w-40">
+                        {if $line.game_name != ''}{if $line.software_type == 'Game'}<a href="../games/games_detail.php?game_id={$line.game_id}" class="standard_tile_text_left">{$line.game_name}</a>{else}<a href="../administration/construction.php" class="standard_tile_text_left">{$line.game_name}</a>{/if}
+                            {else}<i>n/a</i>{/if}
+                    </td>
+                    <td class="publisher_table_column w-20">
+                        {if $line.publisher_name != ''}
+                            <a href="../games/games_list.php?publisher={$line.publisher_id}&amp;action=search" class="standard_tile_text_left">
+                                {$line.publisher_name}
+                            </a>
+                        {else}
+                            <i>n/a</i>
+                        {/if}
+                    </td>
+                    <td class="developer_table_column w-20">
+                        {if $line.developer_name != ''}
+                            <a href="../games/games_list.php?developer={$line.developer_id}&amp;action=search" class="standard_tile_text_left">
+                                {$line.developer_name}
+                            </a>
+                        {else}
+                            <i>n/a</i>
+                        {/if}
+                    </td>
+                    <td class="release_year_column w-10">
+                        {if $line.year != ''}
+                            <a href="../games/games_main.php?year={$line.year}&amp;action=search" class="standard_tile_text_left">
+                                {$line.year}
+                            </a>
+                        {else}
+                            <i>n/a</i>
+                        {/if}
+                    </td>
+                    <td class="information_table_column w-10">
+                        {if $line.software_type != ''}
+                                {$line.software_type}
+                        {else}
+                            <i>n/a</i>
+                        {/if}
+                    </td>
+                </tr>
+                {/foreach}
+                <tr>
+                    <td class="game_list_footer" colspan="6">
+                        <input type="hidden" name="action" value="add_doc_to_menu">
+                        <img src="../../../themes/templates/1/includes/img/arrow_ltr.gif" alt="" width="38" height="22" style="display:inline;">
+                        <input type="button" value="Add" class="quick_search_games_button" style="display:inline;" onclick="addDoctoMenu(this.form)">
+                    </td>
+                </tr>
+            </table>
+        </div>
         {else}
-            <div class="standard_tile_text">
+            <div class="standard_tile_padding">
                 <div class="left_nav_section">
                     No titles found for your query
                 </div>
             </div>
         {/if}
-	</form>
-	<br>
+    </form>
+    <br>
 {/if}
 
 {* INNER SEARCH LIST *}
 {if isset($smarty_action) and $smarty_action == "inner_list"}
     {if isset($series_link) }
-	<table class="table_game_list" style="width:95%;border: solid 1px black;margin:auto;">
-		<tr>
-			<th id="menu_mark_th">Add</th>
-			<th id="game_th">Game Name</th>
-			<th id="pub_th">Publisher</th>
-			<th id="dev_th">Developer</th>
-			<th id="year_th">Year</th>
-			<th id="info_th">Info</th>
-		</tr>
-		{foreach from=$series_link item=line}
-			<tr>
-				<td class="menu_mark_td">
-					<!--<input type="checkbox" name="game_id[]" value="{$line.game_id}" style="margin-left:4px;" onchange="addDoctoMenu(this.value,{$menu_disk_id},'{$line.software_type}')">
+    <table class="secondary_table_list w-95">
+        <tr>
+            <th class="menu_mark_column w-5">Add</th>
+            <th class="game_name_column w-40">Game Name</th>
+            <th class="publisher_table_column w-20">Publisher</th>
+            <th class="developer_table_column w-20">Developer</th>
+            <th class="release_year_column w-10">Year</th>
+            <th class="information_table_column w-10">Info</th>
+        </tr>
+        {foreach from=$series_link item=line}
+            <tr>
+                <td class="menu_mark_column w-5">
+                    <!--<input type="checkbox" name="game_id[]" value="{$line.game_id}" style="margin-left:4px;" onchange="addDoctoMenu(this.value,{$menu_disk_id},'{$line.software_type}')">
                     <label for="{$line.game_id}"></label>&nbsp;-->
                     <div class="links_mod_checkbox">
                         <input type="checkbox" id="{$line.game_id}" name="game_id[]" value="{$line.game_id}" style="margin-left:4px;" onchange="addDoctoMenu(this.value,{$menu_disk_id},'{$line.software_type}')">
@@ -137,55 +137,55 @@
                         <!--<input type="checkbox" name="game_id[]" value="{$line.game_id}" style="margin-left:4px;" onchange="addDoctoMenu(this.value,{$menu_disk_id},'{$line.software_type}')">-->
                     </div>
                 </td>
-				<td class="game_td">{if $line.game_name != ''}{if $line.software_type == 'Game'}<a href="../games/games_detail.php?game_id={$line.game_id}" class="standard_table_left">{$line.game_name}</a>{else}{$line.game_name}{/if}
-						{else}<i>n/a</i>{/if}
-				</td>
-				<td class="pub_td">
-					{if $line.publisher_name != ''}
-						<a href="../games/games_main.php?publisher={$line.publisher_id}&amp;action=search" class="standard_table_left">
-							{$line.publisher_name}
-						</a>
-					{else}
-						<i>n/a</i>
-					{/if}
-				</td>
-				<td class="dev_td">
-					{if $line.developer_name != ''}
-						<a href="../games/games_main.php?developer={$line.developer_id}&amp;action=search" class="standard_table_left">
-							{$line.developer_name}
-						</a>
-					{else}
-						<i>n/a</i>
-					{/if}
-				</td>
-				<td class="year_td">
-					{if $line.year != ''}
-						<a href="../games/games_main.php?year={$line.year}&amp;action=search" class="standard_table_left">
-							{$line.year}
-						</a>
-					{else}
-						<i>n/a</i>
-					{/if}
-				</td>
-				<td class="info_td">
-					{if $line.software_type != ''}
-						{$line.software_type}
-					{else}
-						<i>n/a</i>
-					{/if}
-				</td>
-			</tr>
-		{/foreach}
-		<tr class="table_game_list">
-			<td class="game_list_footer" colspan="6">
-				<input type="hidden" name="action" value="add_doc_to_menu">
-				<img src="../../../themes/templates/1/includes/img/arrow_ltr.gif" alt="" width="38" height="22" style="display:inline;">
-				<input type="button" value="Add" class="quick_search_games_button" style="display:inline;" onclick="addDoctoMenu(this.form)">
-			</td>
-		</tr>
-	</table>
-     {else}
-        <div class="standard_tile_text">
+                <td class="game_name_column w-40">{if $line.game_name != ''}{if $line.software_type == 'Game'}<a href="../games/games_detail.php?game_id={$line.game_id}" class="standard_tile_text_left">{$line.game_name}</a>{else}{$line.game_name}{/if}
+                        {else}<i>n/a</i>{/if}
+                </td>
+                <td class="publisher_table_column w-20">
+                    {if $line.publisher_name != ''}
+                        <a href="../games/games_main.php?publisher={$line.publisher_id}&amp;action=search" class="standard_tile_text_left">
+                            {$line.publisher_name}
+                        </a>
+                    {else}
+                        <i>n/a</i>
+                    {/if}
+                </td>
+                <td class="developer_table_column w-20">
+                    {if $line.developer_name != ''}
+                        <a href="../games/games_main.php?developer={$line.developer_id}&amp;action=search" class="standard_tile_text_left">
+                            {$line.developer_name}
+                        </a>
+                    {else}
+                        <i>n/a</i>
+                    {/if}
+                </td>
+                <td class="release_year_column w-10">
+                    {if $line.year != ''}
+                        <a href="../games/games_main.php?year={$line.year}&amp;action=search" class="standard_tile_text_left">
+                            {$line.year}
+                        </a>
+                    {else}
+                        <i>n/a</i>
+                    {/if}
+                </td>
+                <td class="information_table_column w-10">
+                    {if $line.software_type != ''}
+                        {$line.software_type}
+                    {else}
+                        <i>n/a</i>
+                    {/if}
+                </td>
+            </tr>
+        {/foreach}
+        <tr>
+            <td class="game_list_footer" colspan="6">
+                <input type="hidden" name="action" value="add_doc_to_menu">
+                <img src="../../../themes/templates/1/includes/img/arrow_ltr.gif" alt="" width="38" height="22" style="display:inline;">
+                <input type="button" value="Add" class="quick_search_games_button" style="display:inline;" onclick="addDoctoMenu(this.form)">
+            </td>
+        </tr>
+    </table>
+    {else}
+        <div class="standard_tile_padding">
             <div class="left_nav_section">
                 No titles found for your query
             </div>

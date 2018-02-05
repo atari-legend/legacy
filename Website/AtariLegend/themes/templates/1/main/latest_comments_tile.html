@@ -17,7 +17,7 @@
 *}
 
 {literal}
-<script type="text/javascript">
+<script>
 function CommentEditable(comment_id,user_id) {
     var string = "latest_comment_edit";
     var editable_comment = string.concat(comment_id);
@@ -90,44 +90,35 @@ function SaveEditable(comment_id,user_id,type) {
 
 function DeleteEditable(comment_id,user_id,type) {
 
-     // CONFIRM REQUIRES ONE ARGUMENT
-     var message = "Are you sure you want to delete this comment?";
-     // CONFIRM IS BOOLEAN. THAT MEANS THAT
-     // IT RETURNS TRUE IF 'OK' IS CLICKED
-     // OTHERWISE IT RETURN FALSE
-     var return_value = confirm(message);
+    // CONFIRM REQUIRES ONE ARGUMENT
+    var message = "Are you sure you want to delete this comment?";
+    // CONFIRM IS BOOLEAN. THAT MEANS THAT
+    // IT RETURNS TRUE IF 'OK' IS CLICKED
+    // OTHERWISE IT RETURN FALSE
+    var return_value = confirm(message);
 
-     if (return_value !="0")
-     {
-         if (comment_id == "")
-            {
-                document.getElementById("latest_comments_all").innerHTML = "";
-                return;
+    if (return_value !="0") {
+        if (comment_id == "") {
+            document.getElementById("latest_comments_all").innerHTML = "";
+            return;
+        } else {
+            if (window.XMLHttpRequest) {
+                // code for IE7+, Firefox, Chrome, Opera, Safari
+                xmlhttp = new XMLHttpRequest();
+            } else {
+                // code for IE6, IE5
+                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
             }
-            else
-            {
-                if (window.XMLHttpRequest)
-                {
-                    // code for IE7+, Firefox, Chrome, Opera, Safari
-                    xmlhttp = new XMLHttpRequest();
+            xmlhttp.onreadystatechange = function() {
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    document.getElementById("latest_comments_all").innerHTML = xmlhttp.responseText;
                 }
-                else
-                {
-                    // code for IE6, IE5
-                    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-                }
-                xmlhttp.onreadystatechange = function()
-                {
-                    if (xmlhttp.readyState == 4 && xmlhttp.status == 200)
-                    {
-                        document.getElementById("latest_comments_all").innerHTML = xmlhttp.responseText;
-                    }
-                }
-                xmlhttp.open("GET","../../common/tiles/db_latest_comments_tile.php?action=delete_comment&type="+type+"&comment_id="+comment_id,true);
-                xmlhttp.send();
             }
+            xmlhttp.open("GET","../../common/tiles/db_latest_comments_tile.php?action=delete_comment&type="+type+"&comment_id="+comment_id,true);
+            xmlhttp.send();
         }
-     }
+    }
+}
 </script>
 {/literal}
 
@@ -136,19 +127,25 @@ function DeleteEditable(comment_id,user_id,type) {
 {if isset($smarty_action) and $smarty_action == "delete_comment"}
     {if isset($comments)}
         <div class="games_main_detail_comments_container">
-            <table class="standard_table_list_comments">
+            <table class="primary_table_list table_md">
             {foreach from=$comments item=line}
                 <tr>
-                    <td class="standard_table_left">
+                    <td>
                         <span class="standard_tile_subtext" style="font-weight:bold;float:left;margin-left:5px;margin-right:5px;margin-top:15px;">
                             <a href="../../admin/user/user_detail.php?user_id_selected={$line.user_id}">{$line.user_name}</a>
                         </span>
                         <span class="standard_tile_subtext" style="font-weight:bold;float:right;display:inline;margin-left:5px;margin-right:5px;margin-top:15px;">
                             <a href="../games/games_detail.php?game_id={$line.game_id}">{$line.game}</a>
                         </span>
-                        <div class="latest_comments_text">
-                            <div id="latest_comment_edit{$line.comment_id}"><div id="games_detail_review_main_text">{$line.comment}</div></div>
-                            <div style="width:108%;"><textarea cols="70" id="comment_input{$line.comment_id}" class="latest_comments_textarea" style="display:none;">{$line.comment_edit}</textarea></div>
+                        <div class="latest_comments_text standard_link_color">
+                            <div id="latest_comment_edit{$line.comment_id}">
+                                    {$line.comment}
+                            </div>
+                            <div style="width:108%;">
+                                <textarea cols="70" id="comment_input{$line.comment_id}" class="latest_comments_textarea" style="display:none;">
+                                    {$line.comment_edit}
+                                </textarea>
+                            </div>
                         </div>
                         {if isset($user_session)}
                             <span style="font-weight:bold;float:left;margin-left:5px;margin-bottom:15px;">
@@ -205,12 +202,12 @@ function DeleteEditable(comment_id,user_id,type) {
         <div class="standard_list_entry">
             <div id="latest_comments_all">
                 <div class="games_main_detail_comments_container">
-                    <table class="standard_table_list_comments">
+                    <table class="primary_table_list">
                     {if isset($type) and $type=='user'}  <!--user specific comments mode! -->
                         {if isset($comments)}
                         <tr>
-                            <td width="100%" colspan="2">
-                                <div class="standard_list_entry_news_text" style="text-align:center;">
+                            <td class="w-100" colspan="2">
+                                <div class="standard_list_entry_news_text text-center">
                                     These are your latest game comments :
                                 </div>
                             </td>
@@ -220,7 +217,7 @@ function DeleteEditable(comment_id,user_id,type) {
                     {if isset($comments)}
                     {foreach from=$comments item=line}
                         <tr>
-                            <td class="standard_table_left">
+                            <td>
                                 <span class="standard_tile_subtext" style="font-weight:bold;float:left;margin-left:5px;margin-right:5px;margin-top:15px;">
                                     <a href="../../admin/user/user_detail.php?user_id_selected={$line.user_id}">{$line.user_name}</a>
                                 </span>
@@ -228,7 +225,11 @@ function DeleteEditable(comment_id,user_id,type) {
                                     <a href="../games/games_detail.php?game_id={$line.game_id}">{$line.game}</a>
                                 </span>
                                 <div class="latest_comments_text">
-                                    <div id="latest_comment_edit{$line.comment_id}"><div id="games_detail_review_main_text">{$line.comment}</div></div>
+                                    <div id="latest_comment_edit{$line.comment_id}">
+                                        <div class="standard_link_color">
+                                            {$line.comment}
+                                        </div>
+                                    </div>
                                     <div style="width:100%;text-align:center;"><textarea id="comment_input{$line.comment_id}" class="latest_comments_textarea" style="display:none;" cols="80">{$line.comment_edit}</textarea></div>
                                 </div>
                                 {if isset($user_session)}
@@ -266,9 +267,9 @@ function DeleteEditable(comment_id,user_id,type) {
                     {if isset($type) and $type=='user'}
                         {if isset($comments)}
                         {else}
-                         <tr>
-                            <td width="100%">
-                                <div class="standard_list_entry_news_text" style="text-align:center;">
+                        <tr>
+                            <td class="w-100">
+                                <div class="standard_list_entry_news_text text-center">
                                     You haven't written any game comments. Browse the library, share some memories and upgrade your karma stats ;-)
                                 </div>
                             </td>

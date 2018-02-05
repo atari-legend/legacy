@@ -1,7 +1,7 @@
 {*
 /***************************************************************************
-                              downloads_main.html
-*                            --------------------------
+*                           downloads_main.html
+*                           --------------------------
 *   begin                : Saturday, March 11, 2017
 *   copyright            : (C) 2017 Atari Legend
 *   email                : martens_maarten@hotmail.com
@@ -14,39 +14,39 @@
 The main downloads page
 ************************************************************************************************
 *}
-{extends file='1/admin/frontpage.html'}
+{extends file='1/admin/main.html'}
 
 {block name=right_tile}
-	{include file='1/admin/quick_search_games.html'}
+    {include file='1/admin/quick_search_games.html'}
 {/block}
 
 {block name=main_tile}
 <div class="standard_tile" id="games_main">
     <div class="help-tip">
-		<p>First search for a title to add a download. Use the 'type' dropdown to select the type of download you want to add</p>
-	</div>
-	<h1>ADD/EDIT A DOWNLOAD</h1>
-	<div class="standard_tile_line"></div>
-	<div class="standard_tile_text">
-		<div class="left_nav_section">
-			In this section you can add or edit a download. Search for a game/demo/menudisk by using any of the
-			functionalities below. There are currently <b>{$download_nr}</b> downloads in the Database.
-		</div>
-		<br>
-		<br>
-		<form action="../downloads/downloads_list.php" method="get" name="game_search">
-			<fieldset class="centered_fieldset">
-                <legend>Search</legend>
+        <p>First search for a title to add a download. Use the 'type' dropdown to select the type of download you want to add</p>
+    </div>
+    <h1>ADD/EDIT A DOWNLOAD</h1>
+    <div class="standard_tile_line"></div>
+    <div class="standard_tile_padding">
+        <div class="left_nav_section">
+            In this section you can add or edit a download. Search for a game/demo/menudisk by using any of the
+            functionalities below. There are currently <b>{$download_nr}</b> downloads in the Database.
+        </div>
+        <br>
+        <br>
+        <form action="../downloads/downloads_list.php" method="get" name="game_search">
+            <fieldset class="primary_fieldset centered_fieldset">
+                <legend class="primary_legend">Search</legend>
                     <br>
                     By Name :<br>
-                    <select name="gamebrowse" id="games_main_small_select">
+                    <select name="gamebrowse" class="standard_select select_small">
                         <option value="-" SELECTED>-</option>
                         {html_options values=$az_value output=$az_output}
                     </select>
-                    <input type="text" name="gamesearch" value="" class="standard_tile_input_small">
+                    <input type="text" name="gamesearch" value="" class="standard_input input_large">
                     <br><br>
                     Type :<br>
-                    <select name="download_type" id="games_main_pub_select">
+                    <select name="download_type" class="standard_select select_large">
                         <option value="-" SELECTED>-</option>
                             <option value="Game">Game</option>
                             <option value="Demo">Demo</option>
@@ -56,10 +56,10 @@ The main downloads page
                 <br>
                 <input type="submit" value="Search" class="topbutton_cpanel_small">
                 <br>
-			</fieldset>
-			<input type="hidden" name="action" id="action" value="search">
-			<input type="hidden" name="user_id" id="user_id" value="{$user_id}">
-		</form>
-	</div>
+            </fieldset>
+            <input type="hidden" name="action" id="action" value="search">
+            <input type="hidden" name="user_id" id="user_id" value="{$user_id}">
+        </form>
+    </div>
 </div>
 {/block}

@@ -36,22 +36,21 @@ if ($ind_id == '-') {
             'ind_name' => $individuals['ind_name']
         ));
     }
-    
+
     $_SESSION['edit_message'] = "Please select an individual";
-    
+
     $smarty->assign("user_id", $_SESSION['user_id']);
 
     //Send all smarty variables to the templates
     $smarty->display("file:" . $cpanel_template_folder . "individuals_main.html");
 } else {
-    
     //Let's see if we have selected a nickname
-    $sql_nick = $mysqli->query("SELECT * FROM individual_nicks WHERE nick_id=$ind_id") or die ("problem getting nickname");
-                                      
-    while ($ind_nicks = $sql_nick->fetch_array(MYSQLI_BOTH)) {       
-       $ind_id = $ind_nicks['ind_id'];
+    $sql_nick = $mysqli->query("SELECT * FROM individual_nicks WHERE nick_id=$ind_id") or die("problem getting nickname");
+
+    while ($ind_nicks = $sql_nick->fetch_array(MYSQLI_BOTH)) {
+        $ind_id = $ind_nicks['ind_id'];
     }
-                                         
+
     //Get the individual data
     $sql_individuals = $mysqli->query("SELECT * FROM individuals
                     LEFT JOIN individual_text ON (individuals.ind_id = individual_text.ind_id )
@@ -78,20 +77,20 @@ if ($ind_id == '-') {
     }
 
     // Get nickname information
-    $sql_nick = $mysqli->query("SELECT * FROM individual_nicks where ind_id=$ind_id") or die ("problem getting nickname");
-      
+    $sql_nick = $mysqli->query("SELECT * FROM individual_nicks where ind_id=$ind_id") or die("problem getting nickname");
+
     while ($ind_nicks = $sql_nick->fetch_array(MYSQLI_BOTH)) {
         $ind_id = $ind_nicks['nick_id'];
         $sql_nickname = $mysqli->query("SELECT * FROM individuals WHERE ind_id=$ind_id");
-        
+
         while ($ind_nickname = $sql_nickname->fetch_array(MYSQLI_BOTH)) {
             $smarty->append('nicks', array(
                 'nick_id' => $ind_nicks['nick_id'],
                 'nick_name' => $ind_nickname['ind_name']
             ));
         }
-    } 
-  
+    }
+
     $smarty->assign("user_id", $_SESSION['user_id']);
 
     //Send all smarty variables to the templates

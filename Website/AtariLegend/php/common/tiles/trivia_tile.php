@@ -13,11 +13,10 @@
 
 //*********************************************************************************************
 // This is the php code for the trivia tile with boxart
-//********************************************************************************************* 
+//*********************************************************************************************
 
 //Lets get some trivia quotes
-$query_trivia_quote = $mysqli->query("SELECT trivia_quote FROM trivia_quotes ORDER BY RAND() LIMIT 1"); 
+$query_trivia_quote = $mysqli->query("SELECT trivia_quote FROM trivia_quotes ORDER BY RAND() LIMIT 1");
 $sql_trivia_quote = $query_trivia_quote->fetch_array(MYSQLI_BOTH);
 
 $smarty->assign('trivia_quote', $sql_trivia_quote['trivia_quote']);
-?>

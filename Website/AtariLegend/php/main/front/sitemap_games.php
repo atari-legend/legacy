@@ -14,20 +14,20 @@ require("../../config/common.php");
 // Letter parameter is mandatory, and must only have one character
 // which is a letter, number or '-'
 if (! isset($letter) || !preg_match("/^[a-z0-9-]$/i", $letter)) {
-	http_response_code(400);
-	exit();
+    http_response_code(400);
+    exit();
 }
 
 if ($letter == "-") {
-	// Special case: Select all games that don't start with a letter or number
-	$stmt = $mysqli->prepare("SELECT game_id FROM game WHERE LOWER(game_name) NOT REGEXP('^[a-zA-Z0-9]') ORDER BY game_id")
-		or die($mysqli->error);
+    // Special case: Select all games that don't start with a letter or number
+    $stmt = $mysqli->prepare("SELECT game_id FROM game WHERE LOWER(game_name) NOT REGEXP('^[a-zA-Z0-9]') ORDER BY game_id")
+        or die($mysqli->error);
 } else {
-	// Select all games stating with the given letter or number
-	$stmt = $mysqli->prepare("SELECT game_id FROM game WHERE LOWER(game_name) LIKE CONCAT(LOWER(?), '%') ORDER BY game_id")
-		or die($mysqli->error);
-	$stmt->bind_param("s", $letter)
-		or die($mysqli->error);
+    // Select all games stating with the given letter or number
+    $stmt = $mysqli->prepare("SELECT game_id FROM game WHERE LOWER(game_name) LIKE CONCAT(LOWER(?), '%') ORDER BY game_id")
+        or die($mysqli->error);
+    $stmt->bind_param("s", $letter)
+        or die($mysqli->error);
 }
 
 $stmt->execute() or die($mysqli->error);
@@ -36,7 +36,7 @@ $stmt->bind_result($game_id) or die($mysqli->error);
 // Fetch all game ids for the letter
 $game_ids = [];
 while ($stmt->fetch()) {
-	$game_ids[] = $game_id;
+    $game_ids[] = $game_id;
 }
 
 $stmt->close();

@@ -24,14 +24,10 @@ include("../../config/admin.php");
 if (isset($action) and $action == "update_database") {
     // use glob and a foreach loop to search the database_scripts folder for update files
     foreach (glob("../../admin/administration/database_scripts/*.php") as $filename) {
-        
         //we don't want to execute additions just yet
-        if (strpos($filename, 'addition') !== false) 
-        {
+        if (strpos($filename, 'addition') !== false) {
             //do nothing
-        }
-        else
-        {
+        } else {
             // import update script
             require_once("$filename");
 
@@ -63,14 +59,10 @@ if (isset($action) and $action == "update_database") {
 
             // if the execute condition is met, execute update
             if ($key['execute_condition'] == $test_result) {
-                
                 //overhere we check if we are dealing with an addition - a script containing more than just SQL
-                if (strncmp($key['database_update_sql'], "..", 2) === 0)
-                {
+                if (strncmp($key['database_update_sql'], "..", 2) === 0) {
                     include $key['database_update_sql'];
-                }
-                else  
-                {
+                } else {
                     $mysqli->query("$key[database_update_sql]") or die("Database update $key[database_update_id] failed!");
                 }
 

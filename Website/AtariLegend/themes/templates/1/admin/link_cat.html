@@ -1,4 +1,4 @@
-{* 
+{*
 /***************************************************************************
 *                                link_cat.html
 *                            --------------------------
@@ -13,65 +13,65 @@
 *
 ***************************************************************************/
 *}
-{extends file='1/admin/frontpage.html'}
+{extends file='1/admin/main.html'}
 {block name=main_tile}
 <div class="standard_tile" id="linkcat">
 <h1>CATEGORIES</h1>
-	<div class="standard_tile_line"></div>
-	<div class="standard_tile_text">
-		<div class="left_nav_section">
-			Click delete to remove the category - Insert a new one below<br>
-		</div> 		
-		<br>
-		<fieldset>
-			<legend>Categories in Archive</legend>
-			<div id="linkcat_wide">
-				<table>
-				{foreach from=$category item=line}
-					<tr>
-						<td>
-							{$line.category_name}  
-						</td>
-						<td>
-							--
-						</td>
-						<td>
-							<a href="db_links.php?category_id={$line.category_id}&amp;action=del_category" class="links_addnew_link">Delete</a> 
-						</td>
-						<td>
-							--
-						</td>
-						<td>
-							({$line.category_count} links)<br>
-						</td>
-					</tr>
-				{/foreach}
-				</table>
-			</div>
-			<div id="linkcat_small">
-				<table>
-				{foreach from=$category item=line}
-					<tr>
-						<td>
-							{$line.category_name}  
-						</td>	
-					</tr>
-					<tr>
-						<td class="link_cat_td">
-							<a href="db_links.php?category_id={$line.category_id}&amp;action=del_category" class="links_addnew_link">Delete</a> 
-						</td>
-					</tr>
-				{/foreach}
-				</table>
-			</div>
-			<br>
-			<form action="../links/db_links.php" method="post" name="insertcat" id="insertcat">
-				<input type="text" name="newcat" class="standard_tile_input_small">
-				<input type="hidden" name="action" value="new_cat">
-				<input type="submit" value="Insert" class="topbutton_cpanel_small">
-			</form>
-		</fieldset>
-		<br>
-	</div>
+    <div class="standard_tile_line"></div>
+    <div class="standard_tile_padding">
+        <div class="left_nav_section">
+            Click delete to remove the category - Insert a new one below<br>
+        </div>
+        <br>
+        <fieldset class="primary_fieldset">
+            <legend class="primary_legend">Categories in Archive</legend>
+            <div id="linkcat_wide">
+                <table>
+                {foreach from=$categories item=category}
+                    <tr>
+                        <td>
+                            {$category->getName()}
+                        </td>
+                        <td>
+                            --
+                        </td>
+                        <td>
+                            <a href="db_links.php?category_id={$category->getId()}&amp;action=del_category" class="links_addnew_link">Delete</a>
+                        </td>
+                        <td>
+                            --
+                        </td>
+                        <td>
+                            ({$category->getCount()} links)<br>
+                        </td>
+                    </tr>
+                {/foreach}
+                </table>
+            </div>
+            <div id="linkcat_small">
+                <table>
+                {foreach from=$categories item=category}
+                    <tr>
+                        <td>
+                            {$category->getName()}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="link_cat_td">
+                            <a href="db_links.php?category_id={$category->getId()}&amp;action=del_category" class="links_addnew_link">Delete</a>
+                        </td>
+                    </tr>
+                {/foreach}
+                </table>
+            </div>
+            <br>
+            <form action="../links/db_links.php" method="post" name="insertcat" id="insertcat">
+                <input type="text" name="newcat" class="standard_input input_large">
+                <input type="hidden" name="action" value="new_cat">
+                <input type="submit" value="Insert" class="topbutton_cpanel_small">
+            </form>
+        </fieldset>
+        <br>
+    </div>
 </div>
 {/block}

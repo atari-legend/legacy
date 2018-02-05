@@ -1,4 +1,4 @@
-{* 
+{*
 /***************************************************************************
 *                                download_options_edit.html
 *                            ----------------------------------
@@ -14,24 +14,24 @@
 The download option edit page
 ************************************************************************************************
 *}
-{extends file='1/admin/frontpage.html'}
+{extends file='1/admin/main.html'}
 
-{block name=java_script}	
-<script type="text/javascript">
+{block name=java_script}
+<script>
 function optiondelete(option_id)
-{ 
-   	// CONFIRM REQUIRES ONE ARGUMENT
-   	var message = "Are you sure you want to delete this download option from the database?";
-   	// CONFIRM IS BOOLEAN. THAT MEANS THAT
-   	// IT RETURNS TRUE IF 'OK' IS CLICKED
-   	// OTHERWISE IT RETURN FALSE
-   	var return_value = confirm(message);
+{
+    // CONFIRM REQUIRES ONE ARGUMENT
+    var message = "Are you sure you want to delete this download option from the database?";
+    // CONFIRM IS BOOLEAN. THAT MEANS THAT
+    // IT RETURNS TRUE IF 'OK' IS CLICKED
+    // OTHERWISE IT RETURN FALSE
+    var return_value = confirm(message);
 
-   	if (return_value !="0")
-   	{
-   		url="db_download_options.php?option_id="+option_id+"&action=delete_option";
-		location.href=url;
-   	} 	
+    if (return_value !="0")
+    {
+        url="db_download_options.php?option_id="+option_id+"&action=delete_option";
+        location.href=url;
+    }
 }
 </script>
 {/block}
@@ -40,33 +40,33 @@ function optiondelete(option_id)
 
 {block name=main_tile}
 <div class="standard_tile" id="individuals_edit">
-	{if isset($option_edit.option_edit) }
-	<h1>EDIT OPTION</h1>
-	<div class="standard_tile_line"></div>
-	<div class="standard_tile_text">
-		<fieldset class="centered_fieldset">
-			<legend>Edit option</legend>
-			<form action="../downloads/db_download_options.php" method="post" name="post" id="option_edit">
-				<b>Name :</b>
-				<input type="text" name="option_name" value="{$option_edit.option_edit}" class="standard_tile_input_small">
+    {if isset($option_edit.option_edit) }
+    <h1>EDIT OPTION</h1>
+    <div class="standard_tile_line"></div>
+    <div class="standard_tile_padding">
+        <fieldset class="primary_fieldset centered_fieldset">
+            <legend class="primary_legend">Edit option</legend>
+            <form action="../downloads/db_download_options.php" method="post" name="post" id="option_edit">
+                <b>Name :</b>
+                <input type="text" name="option_name" value="{$option_edit.option_edit}" class="standard_input input_large">
                 <br><br>
                 <input type="submit" value="Update" style="padding:2px;" class="topbutton_cpanel_small">
-				<input type="submit" value="Delete" onClick="optiondelete({$option_edit.option_id_edit}); return false;" class="topbutton_cpanel_small">	
-				<input type="hidden" name="action" value="update">
-				<input type="hidden" name="option_id" value="{$option_edit.option_id_edit}">
-			</form>	
-		</fieldset>
-	</div>
-	{else}
-	<h1>Edit Option</h1>
-	<div class="standard_tile_line"></div>
-	<div class="standard_tile_text">
-		<div class="left_nav_section">
-			Option does not exist.
-		</div> 
-	</div>
-	{/if}
-	<div class="standard_table_center"><a href="../downloads/download_options.php" class="standard_tile_link">back</a></div>
-	<br>
+                <input type="submit" value="Delete" onClick="optiondelete({$option_edit.option_id_edit}); return false;" class="topbutton_cpanel_small">
+                <input type="hidden" name="action" value="update">
+                <input type="hidden" name="option_id" value="{$option_edit.option_id_edit}">
+            </form>
+        </fieldset>
+    </div>
+    {else}
+    <h1>Edit Option</h1>
+    <div class="standard_tile_line"></div>
+    <div class="standard_tile_padding">
+        <div class="left_nav_section">
+            Option does not exist.
+        </div>
+    </div>
+    {/if}
+    <div class="standard_tile_text_center"><a href="../downloads/download_options.php" class="standard_tile_link">back</a></div>
+    <br>
 </div>
 {/block}

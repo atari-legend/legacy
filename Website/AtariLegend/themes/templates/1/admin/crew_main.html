@@ -1,7 +1,7 @@
 {*
 /***************************************************************************
-                              crew_main.html
-*                            --------------------------
+*                           crew_main.html
+*                           --------------------------
 *   begin                : Sunday, August 28, 2005
 *   copyright            : (C) 2005 Atari Legend
 *   email                : admin@atarilegend.com
@@ -16,19 +16,14 @@
 The main game page
 ************************************************************************************************
 *}
-{extends file='1/admin/frontpage.html'}
+{extends file='1/admin/main.html'}
 {block name=java_script}
-<script type="text/javascript">
-function crewinsert()
-{
+<script>
+function crewinsert() {
     JSnewcrew=document.forms["insertcrew"].newcrew.value;
-
-    if (JSnewcrew=='')
-    {
+    if (JSnewcrew=='') {
         alert('Please fill in a crew name');
-    }
-    else
-    {
+    } else {
         // CONFIRM REQUIRES ONE ARGUMENT
         var message = "Are you sure you want to insert this crew into the database?";
         // CONFIRM IS BOOLEAN. THAT MEANS THAT
@@ -36,8 +31,7 @@ function crewinsert()
         // OTHERWISE IT RETURN FALSE
         var return_value = confirm(message);
 
-        if (return_value !="0")
-        {
+        if (return_value !="0") {
             url="db_crew.php?new_crew="+JSnewcrew+"&action=insert_crew";
             location.href=url;
         }
@@ -74,7 +68,6 @@ function searchCrew(str) {
                 document.getElementById("crew_list").innerHTML = xmlhttp.responseText;
             }
         }
-
     } else {
         if (window.XMLHttpRequest) {
             // code for IE7+, Firefox, Chrome, Opera, Safari
@@ -103,20 +96,20 @@ function searchCrew(str) {
 <div class="standard_tile">
     <h1>CREW EDITOR </h1>
     <div class="standard_tile_line"></div>
-    <div class="standard_table_center">
+    <div class="standard_tile_text_center">
         <br>
         Search for crew:<br>
         <form action="../crew/crew_editor.php" method="get" name="post_menu_crew_set" id="menu_crew_set">
-            <select name="crewbrowse" size="1" id="quick_search_small_select" onchange="browseCrew(this.value)">
+            <select name="crewbrowse" size="1" class="standard_select select_small" onchange="browseCrew(this.value)">
                 <option value="" SELECTED>-</option>
                 {html_options values=$az_value output=$az_output}
             </select>
-            <input type="text" name="crewsearch" value="" onkeyup="searchCrew(this.value)" class="standard_tile_input_small">
+            <input type="text" name="crewsearch" value="" onkeyup="searchCrew(this.value)" class="standard_input input_large">
             <br>
             <br>
             {* Ajax *}
             <div id="crew_list">
-                <select name="crew_select" id="quick_search_pub_select">
+                <select name="crew_select" class="standard_select select_large">
                     <option value="" SELECTED>-</option>
                     {foreach from=$crew item=line}
                         {html_options values=$line.crew_id output=$line.crew_name}
@@ -133,7 +126,7 @@ function searchCrew(str) {
         {* Add crew section *}
         Add new Crew to db:
         <form method="post" name="insertcrew">
-            <input type="text" name="newcrew" value="" class="standard_tile_input_small">
+            <input type="text" name="newcrew" value="" class="standard_input input_large">
             <br>
             <br>
             <input type="submit" value="Insert" class="quick_search_games_button" onClick="crewinsert(); return false;">
@@ -142,7 +135,6 @@ function searchCrew(str) {
     <br>
 </div>
 <br>
-{include file='1/admin/left_nav.html'}
 {* END crew section *}
 {/block}
 
@@ -150,14 +142,14 @@ function searchCrew(str) {
 <div class="standard_tile">
     <h1>EDIT CREW</h1>
     <div class="standard_tile_line"></div>
-    <div class="standard_tile_text">
-        <div class="left_nav_section">
+    <div class="standard_tile_padding">
+        <div class="secondary_fieldset">
             In this section you can add or edit a crew. Search for a crew by using any of the
             functionalities on the left.
         </div>
     <br>
     <br>
-    <div class="standard_table_center">{if (isset($new_crew) and $new_crew <> '')}{$new_crew} added to the database!{/if}</div>
+    <div class="standard_tile_text_center">{if (isset($new_crew) and $new_crew <> '')}{$new_crew} added to the database!{/if}</div>
     <br>
     </div>
 </div>

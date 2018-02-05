@@ -16,8 +16,8 @@
     margin-top: 20px;
     margin-bottom: 20px;
     overflow: hidden;
-    border-top: 10px solid #01b5b5;
-    border-bottom: 3px solid #01b5b5;
+    border-top: 10px solid #00d3d3;
+    border-bottom: 3px solid #00d3d3;
 }
 
 .welcome_slides {
@@ -38,12 +38,18 @@
 
 .trivia_title {
     font-size: 19pt;
-    color: #fff;
+    color: #ffffff;
 }
 
-.trivia_tag { font-size: 13pt; color: #01b5b5;}
+.trivia_tag {
+    font-size: 13pt;
+    color: #00d3d3;
+}
 
-.trivia_text { font-size: 12pt; color: #fff;}
+.trivia_text {
+    font-size: 12pt;
+    color: #ffffff;
+}
 
 //*----------------------------------------------------------
 //register tile --> front page
@@ -53,107 +59,55 @@
     margin-top: 20px;
 }
 
-.register_input{
+.register_input {
     width: 100%;
-    text-align:center;
+    text-align: center;
 }
 
-//*----------------------------------------------------------
-//logon tile --> front page --> Not used anymore
-//------------------------------------------------------------ */
-.logon {
-    float: right;
-    width: 100%;
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
-
-.logon_input_usn {
-    position: relative;
-    width: 100%;
-    margin-top: 20px;
-    margin-left: 10%;
-}
-
-.logon_username_icon::before {
-    display: block;
-    content: url('../images/logon_usn.png');
-}
-
-.logon_password_icon::before {
-    display: block;
-    content: url('../images/logon_pwd.png');
-}
-
-.logon_facebook_button, .logon_twitter_button{text-align: center;}
-
-/* we will be implementing this at a later stage
-/*.logon_facebook_button::before {content: url('../images/login-facebook.png');} */
-
-/*.logon_twitter_button::before {content: url('../images/login_twitter.png');} */
-
-.logon_left {
-    position: absolute;
-    left: 0;
-    width: 10%;
-}
-
-.logon_right {
-    position: absolute;
-    left: 45px;
-    width: 90%;
-}
-
-.logon_input_pwd {
-    position: relative;
-    width: 100%;
-    margin-top: 85px;
-    margin-left: 10%;
-}
-
-.logon_signin { margin-top: 170px; }
-.logon_signin img {
-    display: block;
+.register_input div {
+    color: white;
+    width: 70%;
     margin: auto;
+    margin-top: 20px;
 }
-
-.logon_signin img:hover { opacity: .7; }
-.logon_socmed {
-    width: 100%;
-    margin-top: 10px;
-}
-
-.logon_socmed:hover { opacity: .7; }
 
 //*----------------------------------------------------------
 //latest news tile --> front page
 //------------------------------------------------------------ */
-.latest_news { margin-bottom: 20px; }
+.latest_news {
+    margin-bottom: 20px;
+}
 
 //*----------------------------------------------------------
 //datequote tile - front page
 //------------------------------------------------------------ */
-.datequote_position_front { margin-bottom: 20px;}
-.datequote_bg { background: url('../images/datequote_bg.jpg'); }
-.datequote_bg p { text-align: center; }
+.datequote_position_front {
+    margin-bottom: 20px;
+}
+.datequote_bg {
+    background: url('../images/datequote_bg.jpg');
+}
+.datequote_bg p {
+    text-align: center;
+}
 .datequote_day {
     margin-top: 0;
     margin-bottom: -20px;
     font-size: 85pt;
-    color: #fff;
+    color: #ffffff;
 }
 
 .datequote_month {
     margin-top: -10px;
     margin-bottom: -10px;
     font-size: 30pt;
-    color: #fff;
+    color: #ffffff;
 }
 
 .datequote_year {
     margin-top: -10px;
     font-size: 55pt;
-    color: #ccc;
+    color: #cccccc;
     text-align: center;
 }
 
@@ -161,7 +115,7 @@
     padding-top: 10px;
     padding-bottom: 10px;
     //* RGBa with 0.6 opacity */
-    color: #fff;
+    color: #ffffff;
     background: rgb(0, 80, 80);
     //* Fallback for web browsers that doesn't support RGBa */
     background: rgba(0, 80, 80, .6);
@@ -170,52 +124,73 @@
 //*----------------------------------------------------------
 //tile open DB - front page
 //------------------------------------------------------------ */
-.tile_open_db_front { margin-bottom: 20px;}
+.tile_open_db_front {
+    margin-bottom: 20px;
+}
 
 //*----------------------------------------------------------
 //screenstar --> front page
 //------------------------------------------------------------ */
-.screenstar_position_front{margin-top: 20px; margin-bottom: 20px;}
+.screenstar_position_front {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
 
 //*----------------------------------------------------------
 //Who is it - front page
 //------------------------------------------------------------ */
-.whoisit_position_front { margin-bottom: 20px; }
+.whoisit_position_front {
+    margin-bottom: 20px;
+}
 
 //*----------------------------------------------------------
 //Latest reviews tile - front page
 //------------------------------------------------------------ */
-.latest_reviews { margin-bottom: 20px; }
+.latest_reviews {
+    margin-bottom: 20px;
+}
 
 //*----------------------------------------------------------
 //Did you know tile - front page
 //------------------------------------------------------------ */
-.didyouknow_position_front { margin-bottom: 20px; }
+.didyouknow_position_front {
+    margin-bottom: 20px;
+}
 
 //*----------------------------------------------------------
 //Statistics tile - front page
 //------------------------------------------------------------ */
-.statistics_position_front { margin-bottom: 20px; }
+.statistics_position_front {
+    margin-bottom: 20px;
+}
 
 //*----------------------------------------------------------
 //Hotlinks tile - front page
 //------------------------------------------------------------ */
-.hotlinks_position_front { margin-bottom: 20px; }
+.hotlinks_position_front {
+    margin-bottom: 20px;
+}
 
 //*----------------------------------------------------------
 //Class tile - front page
 //------------------------------------------------------------ */
-.class_position_front { margin-bottom: 20px; }
+.class_position_front {
+    margin-bottom: 20px;
+}
 
 //*----------------------------------------------------------
 //Social corner tile - front page
 //------------------------------------------------------------ */
-.social_corner_position_front { margin-bottom: 20px; }
+.social_corner_position_front {
+    margin-bottom: 20px;
+}
 
 //*----------------------------------------------------------
 //spotlight tile - front page
 //------------------------------------------------------------ */
-.spotlight_position_front { margin-bottom: 20px; } 
+.spotlight_position_front {
+    margin-bottom: 20px;
+}
 
 
 //*----------------------------------------------------------
@@ -228,7 +203,7 @@
     border: none;
 }
 
-.contact_tiles >a >div {
+.contact_tiles > a > div {
     max-width: 100%;
     margin-bottom: 20px;
 }
@@ -240,7 +215,7 @@
     background-size: contain;
 }
 
-.contact_email_button >a {
+.contact_email_button > a {
     display: block;
     width: 320px;
     height: 120px;
@@ -253,7 +228,7 @@
     background-size: contain;
 }
 
-.contact_facebook_button >a {
+.contact_facebook_button > a {
     display: block;
     width: 240px;
     height: 120px;
@@ -266,7 +241,7 @@
     background-size: contain;
 }
 
-.contact_jukebox_button >a {
+.contact_jukebox_button > a {
     display: block;
     width: 240px;
     height: 120px;
@@ -279,7 +254,7 @@
     background-size: contain;
 }
 
-.contact_chat_button >a {
+.contact_chat_button > a {
     display: block;
     width: 240px;
     height: 120px;
@@ -293,13 +268,13 @@
     width: 100%;
     margin-top: 20px;
     background: url('../images/bottom_bg_sides.jpg') left 0 repeat-x;
-    border-top: 10px solid #01b5b5;
+    border-top: 10px solid #00d3d3;
 }
 
 .footer_logo {
     height: 120px;
     font-size: 10pt;
-    color: #fff;
+    color: #ffffff;
     text-align: center;
     background: url('../images/footer_bg.jpg') center 0 no-repeat;
 }
@@ -315,6 +290,12 @@
     margin-left: auto;
 }
 
+footer img.license {
+    margin-left: 10px;
+    display: inline;
+    vertical-align: top;
+}
+
 //*----------------------------------------------------------
 // Skin specific code for the search results
 //------------------------------------------------------------ */
@@ -324,8 +305,8 @@
     width: 245px;
     font-family: Audiowide;
     font-size: 13px;
-    color: #fff;
-    background: #000;
+    color: #ffffff;
+    background: #000000;
     border: 1px solid #00d3d3;
 }
 
@@ -337,7 +318,7 @@
 .ui-state-focus,
 .ui-widget-content .ui-state-focus,
 .ui-widget-header .ui-state-focus {
-    color: #000;
+    color: #000000;
     background: #00d3d3;
-    border: 1px solid #000;
+    border: 1px solid #000000;
 }
