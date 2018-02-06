@@ -111,7 +111,7 @@ function TestURL() {
         <br>
         {if isset($validate)}
             {foreach from=$validate item=lineweb}
-                <div class="links_addnew_container">
+                <div class="links_addnew_container" id="new-link-{$lineweb.website_id}">
                     <form enctype="multipart/form-data" action="../links/db_links.php" method="post" name="linkmod{$lineweb.website_id}" id="linkmod{$lineweb.website_id}">
                     <fieldset class="primary_fieldset">
                     <legend class="primary_legend">New submitted website</legend>

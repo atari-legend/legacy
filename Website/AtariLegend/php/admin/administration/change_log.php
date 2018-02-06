@@ -182,8 +182,17 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH)) {
     if ($log['section'] == 'Links') {
         $section_link = ("../links/link_mod.php" . '?website_id=' . $log['section_id']);
 
-        if ($log['sub_section'] == 'Link' or $log['sub_section'] == 'Category' or $log['sub_section'] == 'Link submit') {
+        if ($log['sub_section'] == 'Link' or $log['sub_section'] == 'Category') {
             $subsection_link = ("../links/link_mod.php" . '?website_id=' . $log['section_id']);
+        }
+
+        if ($log['sub_section'] == 'Link submit') {
+            // There's no screen to point to for a single link to validate
+            // (They are all listed in the single "Validate link" page)
+            // Point the main section link to this page
+            // and point the subsection link to an anchor for the specific website to validate
+            $section_link = ("../links/link_addnew.php");
+            $subsection_link = ("../links/link_addnew.php#new-link-".$log['sub_section_id']);
         }
     }
 
