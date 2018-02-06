@@ -507,7 +507,7 @@
     .cd-timeline-content .cd-date {
         position: absolute;
         width: 100%;
-        left: 140%;
+        left: 160%;
         top: 6px;
         font-size: 16px;
         font-size: 1rem;
@@ -527,7 +527,7 @@
     }
     .cd-timeline-block:nth-child(even) .cd-timeline-content .cd-date {
         left: auto;
-        right: 140%;
+        right: 160%;
         text-align: right;
     }
     .cssanimations .cd-timeline-content.is-hidden {
@@ -613,7 +613,6 @@
     #column_left_cpanel {
         float: left;
         width: 20%;
-        margin-right: 1%;
     }
 
     #column_center_cpanel {
