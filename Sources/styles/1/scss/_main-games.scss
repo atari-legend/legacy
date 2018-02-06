@@ -14,6 +14,10 @@
 
 #games_nav_ul {
     @extend #main_nav_ul;
+    .primary_button {
+        padding-left: 14px;
+        padding-right: 14px;
+    }
 }
 
 .games_main_text_site {
@@ -103,6 +107,7 @@
     @extend .game_screenshot_img;
     display: inline;
     opacity: 0;
+    max-width: 200px;
 }
 
 .game_main_list_screenshot_img:not(.initial) {
