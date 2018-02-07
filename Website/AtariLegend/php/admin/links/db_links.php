@@ -206,7 +206,7 @@ if (isset($action) and $action == "val_delete") {
     //**************************************************************************************************************************
     // This is where we delete links that has been submitted that we don't want.
     //**************************************************************************************************************************
-    create_log_entry('Links', $website_id, 'Link', $website_id, 'Delete', $_SESSION['user_id']);
+    create_log_entry('Links', $website_id, 'Link submit', $website_id, 'Delete', $_SESSION['user_id']);
 
     $sql = $mysqli->query("DELETE FROM website_validate WHERE website_id = '$website_id'");
 
