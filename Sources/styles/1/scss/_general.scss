@@ -468,13 +468,16 @@ img {
     border: solid 1px #000000;
 
     a:link {
-        color: #ffffff;
+        color: #00d3d3;
     }
     a:visited {
-        color: #ffffff;
+        color: #00d3d3;
     }
     a:hover {
-        color: #00d3d3;
+        color: #ffffff;
+    }
+    img {
+        box-shadow: 0 0 12px #000000;
     }
 }
 
@@ -506,7 +509,7 @@ img {
     width: 10px;
     height: 10px;
     font-size: 10px;
-    line-height: 10px;
+    line-height: 7px;
     display: inline;
 }
 
@@ -532,6 +535,7 @@ img {
     right: 290px;
     //* The tooltip */
     display: none;
+    white-space: normal;
     width: 300px;
     padding: 5px;
     font-size: 13px;

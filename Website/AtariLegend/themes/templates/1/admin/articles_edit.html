@@ -281,12 +281,12 @@ function storeCaret(textEl) {
                 <br>
                 {if $screenshots_nr <> ''}
                     {foreach from=$screenshots item=line}
-                        <img src="../../includes/show_image.php?file={$line.article_screenshot}&amp;resize=200,null,null,null&amp;crop=null,null,null,null" alt="screenshot" style="display:inline;" class="game_screenshot_img">
+                        <img src="../../includes/show_image.php?file={$line.article_screenshot}&amp;resize=200,null,null,null&amp;crop=null,null,null,null" alt="screenshot" style="display:inline;">
                         <br>
                         <br>
                         <input class="standard_input input_large" type="text" name="inputfield[]" value="{$line.article_screenshot_comment}">
                         <br>
-                        <a href="javascript:deletecomment({$line.article_screenshot_id},{$article.article_id})" class="left_nav_link">Delete Shot</a>
+                        <a href="javascript:deletecomment({$line.article_screenshot_id},{$article.article_id})">Delete Shot</a>
                         <br>
                         <br>
                         <br>

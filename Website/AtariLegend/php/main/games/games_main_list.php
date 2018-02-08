@@ -494,7 +494,6 @@ if (isset($action) and $action == "search") {
         if (!empty($cat_input)) {
             $RESULTGAME .= " AND game_cat.game_cat_name LIKE '%$cat_input%'";
         } else {
-            //   $RESULTGAME .= " AND game_cat.game_cat_name LIKE '%'";
         }
 
         $RESULTGAME .= $gamebrowse_select;
@@ -799,10 +798,12 @@ if (isset($action) and $action == "search") {
                         } else {
                             if (isset($boxscan) and $boxscan == "1") {
                                 //Select a random boxscan record
-                                $sql_screenshots = $mysqli->query("SELECT *
-                                                                    FROM game_boxscan
-                                                                    WHERE game_id='$sql_game_search[game_id]' and game_boxscan_side = '0'
-                                                                    ORDER BY RAND() LIMIT 1") or die("Database error - selecting screenshots");
+                                $sql_screenshots = $mysqli->query("
+                                SELECT *
+                                FROM game_boxscan
+                                WHERE game_id='$sql_game_search[game_id]' and game_boxscan_side = '0'
+                                ORDER BY RAND() LIMIT 1")
+                                or die("Database error - selecting screenshots");
 
                                 while ($screenshot_result =  $sql_screenshots->fetch_array(MYSQLI_BOTH)) {
                                     //Ready screenshots path and filename

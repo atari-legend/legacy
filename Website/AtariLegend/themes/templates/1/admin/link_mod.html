@@ -102,31 +102,24 @@ function TestURL() {
             <div class="links_mod_container">
                 <div class="links_mod_row">
                     Site Name<br>
-
                     <input type="text" name="website_name" id="website_name" value="{$website.website_name}" class="standard_input input_large">
-
                 </div>
                 <div class="links_mod_row">
                     URL<br>
-
-                        <input type="text" name="website_url" id="website_url" value="{$website.website_url}" class="standard_input input_large">
-                        <input type="button" onclick="TestURL()" class="secondary_button" value="Test">
-
+                    <input type="text" name="website_url" id="website_url" value="{$website.website_url}" class="standard_input input_large">
+                    <input type="button" onclick="TestURL()" class="secondary_button" value="Test">
                 </div>
                 <div class="links_mod_row">
                     Category<br>
-
-                        <select name="category" class="standard_select" id="website_category_select">
-                            {foreach from=$category item=line}
-                                    <option value="{$line.category_id}" {$line.selected}>{$line.category_name}</option>
-                            {/foreach}
-                        </select>
-                        <input type="button" name="add_category" value="Add" onClick="addcat(); return false;" class="secondary_button">
-
+                    <select name="category" class="standard_select" id="website_category_select">
+                        {foreach from=$category item=line}
+                                <option value="{$line.category_id}">{$line.category_name}</option>
+                        {/foreach}
+                    </select>
+                    <input type="button" name="add_category" value="Add" onClick="addcat();" class="secondary_button">
                 </div>
                 <div class="links_mod_row">
                     Linked categories<br><br>
-
                         {foreach from=$website_category item=line}
                                 {if  $nr_of_cats == '1'}
                                     - {$line.category_name}
@@ -134,49 +127,39 @@ function TestURL() {
                                     - {$line.category_name} -- <a href="db_links.php?category_id={$line.category_id}&action=delete_category&website_id={$website.website_id}" class="links_addnew_link">Delete</a><br>
                                 {/if}
                         {/foreach}
-
-
                 </div><br>
                 <div class="links_mod_row">
                     Description<br>
-
-                        <textarea name="website_description_text" class="primary_textarea" rows="7" id="text_area_big">
-                            {$website.website_description_text}
-                        </textarea>
-
+                    <textarea name="website_description_text" class="primary_textarea" rows="7">{$website.website_description_text}</textarea>
                 </div>
                 <br>
                 <div class="links_mod_row">
                 {if  $website.website_imgext !== null}
-
-
+                        <div class="checkbox_alt">
                             <input type="checkbox" id="delete_image" name="delete_image" value="yes">
-                            <label for="delete_image"></label>&nbsp;Delete Image?<br><br>
-
-
-
+                            <label for="delete_image"></label><span style="margin-left:5px;">Delete Image?</span>
+                        </div>
+                        <br>
                         <a href="../../includes/show_image.php?file={$website.website_image}&amp;resize=410,null,null,null" data-lightbox="image-1" data-title="{$website.website_name}">
                             <img src="../../includes/show_image.php?file={$website.website_image}&amp;resize=160,null,null,null" class="user_stats_img" id="user_details_img_dark" alt="website image">
                         </a>
                         <br><br>
                 {else}
                     Attach image<br>
-
-                        <input type="hidden" name="MAX_FILE_SIZE" value="100000000">
-                        <input type="hidden" name="file_upload" value="yes">
-                        <label for="file_upload" class="secondary_button">Select file</label>
-                        <input type="file" id="file_upload" name="image">
-                        <input type="text" class="standard_input input_large" id="file_upload_user_detail">&nbsp;
-                        <br><br>
-
+                    <input type="hidden" name="MAX_FILE_SIZE" value="100000000">
+                    <input type="hidden" name="file_upload" value="yes">
+                    <label for="file_upload" class="secondary_button">Select file</label>
+                    <input type="file" id="file_upload" name="image">
+                    <input type="text" class="standard_input input_large" id="file_upload_user_detail">&nbsp;
+                    <br><br>
                 {/if}
                 </div>
                 <div class="links_mod_row">
-
-
-                            <input type="checkbox" value="1" id="website_inactive" name="website_inactive" {if $website.inactive == '1'} checked {/if}>
-                            <label for="website_inactive"></label>&nbsp;Inactive
-
+                    <div class="checkbox_alt">
+                        <input type="checkbox" value="1" id="website_inactive" name="website_inactive" {if $website.inactive == '1'} checked {/if}>
+                        <label for="website_inactive"></label>
+                        <span style="margin-left:5px;">Inactive</span>
+                    </div>
                 </div>
                 <br>
                 <input type="hidden" name="website_id" id="delete_id" value="{$website_id}">

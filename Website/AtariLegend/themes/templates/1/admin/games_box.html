@@ -72,7 +72,6 @@ function deletescreen(JSgameboxID,JSmode) {
             <div class="boxscan_table_body">
                 <form enctype="multipart/form-data" name="frmUploadShot" action="db_games_box.php" method="post">
                     <br>
-                    <!--<input type="file" name="image[1]">-->
                     <label for="file_upload" class="secondary_button">Select file</label>
                     <input type="file" id="file_upload" name="image[1]">
                     <input type="text" class="standard_input input_large" id="file_upload_game_box">&nbsp;
@@ -102,7 +101,7 @@ function deletescreen(JSgameboxID,JSmode) {
                             <br>
                             <br>
                             <a href="../../includes/show_image.php?file={$line.front_image}" data-lightbox="image-1" data-title="Front boxscans">
-                                <img style="display:inline;" src="../../includes/show_image.php?file={$line.front_image}&amp;resize=75,null,null,null" width="75" alt="Click to enlarge!"  class="game_screenshot_img">
+                                <img style="display:inline;" src="../../includes/show_image.php?file={$line.front_image}&amp;resize=75,null,null,null" width="75" alt="Click to enlarge!">
                             </a>
                             <br>
                             <a style="cursor:pointer;" class="left_nav_link" OnClick="deletescreen({$line.game_boxscan_id},'notback'); return false;">Delete</a> --
@@ -126,7 +125,7 @@ function deletescreen(JSgameboxID,JSmode) {
                             <br>
                             <br>
                             <a href="../../includes/show_image.php?file={$line.back_image}" data-lightbox="image-1" data-title="Back boxscan">
-                                <img style="display:inline;" src="../../includes/show_image.php?file={$line.back_image}&amp;resize=75,null,null,null" width="75" alt="Click to enlarge!"  class="game_screenshot_img">
+                                <img style="display:inline;" src="../../includes/show_image.php?file={$line.back_image}&amp;resize=75,null,null,null" width="75" alt="Click to enlarge!">
                             </a>
                             <br>
                             <a style="cursor:pointer;" class="left_nav_link" OnClick="deletescreen({$line.game_boxscan_id},'back'); return false;">Delete</a>
