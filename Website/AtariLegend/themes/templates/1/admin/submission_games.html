@@ -160,7 +160,7 @@ function submovetocomment(JSsubID)
                         {foreach from=$submission_screenshots item=line_screen}
                             {if $line.submit_id == $line_screen.game_submitinfo_id}
                                 <a href="../../includes/show_image.php?file={$line_screen.game_submitinfo_screenshot}&amp;resize=410,null,null,null" data-lightbox="image-1">
-                                    <img src="../../includes/show_image.php?file={$line_screen.game_submitinfo_screenshot}&amp;resize=170,null,null,null" alt="Click to enlarge!" style="display:inline;" class="game_screenshot_img">
+                                    <img src="../../includes/show_image.php?file={$line_screen.game_submitinfo_screenshot}&amp;resize=170,null,null,null" alt="Click to enlarge!" style="display:inline;">
                                 </a>
                             {/if}
                         {/foreach}

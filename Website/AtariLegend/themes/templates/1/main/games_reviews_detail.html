@@ -70,13 +70,11 @@
 
         var url = "../../main/games/db_games_reviews_detail.php?action=save_comment&comment_id="+comment_id+"&data="+comment+"&review_id="+review_id;
 
-        if (comment_id == "")
-        {
+        if (comment_id == "") {
             document.getElementById("latest_comments_all").innerHTML = "";
             return;
         }
-        else
-        {
+        else {
             if (window.XMLHttpRequest)
             {
                 // code for IE7+, Firefox, Chrome, Opera, Safari

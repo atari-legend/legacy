@@ -56,7 +56,7 @@
             <tr>
                 <td>
                     {if $line.game_name != ''}
-                        <a href="games_detail.php?game_id={$line.game_id}" class="standard_tile_text_left">
+                        <a href="../games/games_detail.php?game_id={$line.game_id}" class="standard_tile_text_left">
                             {$line.game_name}
                         </a>
                     {else}
@@ -92,38 +92,38 @@
                 </td>
                 <td>
                     {if isset($line.screenshot)}
-                        <a href="games_screenshot_add.php?game_id={$line.game_id}" class="standard_tile_text_left">
+                        <a href="../games/games_screenshot_add.php?game_id={$line.game_id}" class="standard_tile_text_left">
                             <i class="fa fa-camera" aria-hidden="true" title="Screenshots available"></i>
                         </a>
                     {else}
-                        <a href="games_screenshot_add.php?game_id={$line.game_id}" class="standard_tile_text_left" style="color:black;">
+                        <a href="../games/games_screenshot_add.php?game_id={$line.game_id}" class="standard_tile_text_left" style="color:black;">
                             <i class="fa fa-camera" aria-hidden="true" title="Add Screenshot"></i>
                         </a>
                     {/if}
                     {if isset($line.music)}
-                        <a href="games_music_detail.php?game_id={$line.game_id}" class="standard_tile_text_left">
+                        <a href="../games/games_music_detail.php?game_id={$line.game_id}" class="standard_tile_text_left">
                             <i class="fa fa-music" aria-hidden="true" title="Music available"></i>
                         </a>
                     {else}
-                        <a href="games_music_detail.php?game_id={$line.game_id}" class="standard_tile_text_left" style="color:black;">
+                        <a href="../games/games_music_detail.php?game_id={$line.game_id}" class="standard_tile_text_left" style="color:black;">
                             <i class="fa fa-music" aria-hidden="true" title="Add Music"></i>
                         </a>
                     {/if}
                     {if isset($line.boxscan)}
-                        <a href="games_box.php?game_id={$line.game_id}" class="standard_tile_text_left">
+                        <a href="../games/games_box.php?game_id={$line.game_id}" class="standard_tile_text_left">
                             <i class="fa fa-cube" aria-hidden="true" title="Boxscan available"></i>
                         </a>
                     {else}
-                        <a href="games_box.php?game_id={$line.game_id}" class="standard_tile_text_left" style="color:black;">
+                        <a href="../games/games_box.php?game_id={$line.game_id}" class="standard_tile_text_left" style="color:black;">
                             <i class="fa fa-cube" aria-hidden="true" title="Add Boxscan"></i>
                         </a>
                     {/if}
                     {if isset($line.download)}
-                        <a href="games_upload.php?game_id={$line.game_id}" class="standard_tile_text_left">
+                        <a href="../games/games_upload.php?game_id={$line.game_id}" class="standard_tile_text_left">
                             <i class="fa fa-file-o" aria-hidden="true" title="Download available"></i>
                         </a>
                     {else}
-                    <a href="games_upload.php?game_id={$line.game_id}" class="standard_tile_text_left" style="color:black;">
+                    <a href="../games/games_upload.php?game_id={$line.game_id}" class="standard_tile_text_left" style="color:black;">
                         <i class="fa fa-file-o" aria-hidden="true" title="Add Download"></i>
                     </a>
                     {/if}
