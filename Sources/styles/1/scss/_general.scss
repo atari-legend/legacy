@@ -139,6 +139,7 @@ img {
     background-color: #122323;
     border-top: 10px solid #00d3d3;
     border-bottom: 3px solid #00d3d3;
+    position: relative;
 }
 
 .standard_tile_line {
@@ -694,4 +695,18 @@ div.tab button.active {
 }
 .scroll-top-wrapper i.fa {
     line-height: inherit;
+}
+
+// Feed icon (on News, Reviews, Interview)
+a.atom {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    img {
+        opacity: .8;
+    }
+}
+
+a.atom.with-help-tip {
+    top: 40px;
 }
