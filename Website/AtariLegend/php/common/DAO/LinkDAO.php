@@ -33,7 +33,7 @@ class LinkDAO {
                 users.user_id,
                 website_date,
                 website_category.website_category_id,
-                website_category_name
+                website_category.website_category_name
             FROM
                 website
             LEFT JOIN website_category_cross
@@ -84,7 +84,8 @@ class LinkDAO {
                 $inactive,
                 $user,
                 $date,
-                $userid
+                $userid,
+                $category_name
             );
         }
 
@@ -136,7 +137,8 @@ class LinkDAO {
                 $inactive,
                 $user,
                 $date,
-                $userid
+                $userid,
+                $category_name
             );
         }
 
@@ -182,6 +184,8 @@ class LinkDAO {
 
     /**
      * Get a random link
+     * I have excluded youtube links in here as the youtube logo's do not fit the look 
+     * and it bothered me.
      */
     public function getRandomLink() {
         $stmt = \AL\Db\execute_query(
@@ -197,8 +201,10 @@ class LinkDAO {
                     users.userid,
                     users.user_id
                     FROM website
+                    LEFT JOIN website_category_cross ON (website.website_id = website_category_cross.website_id)
+                    LEFT JOIN website_category ON (website_category.website_category_id = website_category_cross.website_category_id)
                     LEFT JOIN users ON ( website.user_id = users.user_id )
-                    WHERE website.website_imgext <> ' ' and website.inactive = 0
+                    WHERE website.website_imgext <> ' ' and website.inactive = 0 and website_category.website_category_name <> 'Youtube'
                     ORDER BY RAND() LIMIT 1".
             null, null
         );
