@@ -234,7 +234,8 @@ class LinkDAO {
                 $inactive,
                 $user,
                 $date,
-                $userid
+                $userid,
+                null
             );
         }
 
