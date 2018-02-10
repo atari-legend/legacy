@@ -14,11 +14,6 @@
 ***************************************************************************/
 *}
 {extends file='1/admin/main.html'}
-{block name=java_script}
-<script src="{$template_dir}includes/js/vendor/jquery.ajaxQueue-0.1.1.min.js"></script>
-<script src="{$template_dir}includes/js/user_management.js"></script>
-{/block}
-
 {block name=left_tile}
     {include file='1/admin/quick_search_users.html'}
 {/block}
@@ -55,36 +50,37 @@
             This is the user area. Overhere you can maintain user accounts of the AL website! There are currently
             <b>{$nr_users_total}</b> users in the database.
             <br><br>
-            <a href="../user/karma_sync.php" class="standard_tile_link_reverse" onclick="SyncKarma(); return false;">Karma Re-Sync</a>
+            <a href="../user/karma_sync.php" onclick="SyncKarma(); return false;">Karma Re-Sync</a>
         </div>
         <br>
         <div class="main_stats_container" id="ajax_usersearch">
             {if isset($users)}
-            <table class="secondary_table_list  table_hover table_xs">
+            <div class="table-responsive">
+            <table class="secondary_table_list table_hover table_xs text-nowrap">
                 <tr>
-                    <th>
+                    <th class="mw-10">
                         <div class="checkbox">
                             <input type="checkbox" id="user_select_all" name="user_select_all">&nbsp; All
                             <label for="user_select_all"></label>
                         </div>
                     </th>
-                    <th class="username_column w-25">User Name</th>
-                    <th class="joindate_column w-25">Join Date</th>
-                    <th class="lastvisit_column w-25">Last Visit</th>
-                    <th class="email_column w-10">Email</th>
+                    <th class="mw-25">User Name</th>
+                    <th class="mw-25">Join Date</th>
+                    <th class="mw-25">Last Visit</th>
+                    <th class="mw-15">Email</th>
                 </tr>
                 {foreach from=$users item=line}
                 <tr>
-                    <td class="w-10">
+                    <td>
                         <div class="checkbox">
                             <input type="checkbox" value="{$line.user_id}" id="checkboxInput[{$line.user_id}]" name="user_id[]" class="user_checkbox">
                             <label for="checkboxInput[{$line.user_id}]"></label>
                         </div>
                     </td>
-                    <td class="username_column w-25">{if $line.user_name != ''}<a href="../user/user_detail.php?user_id_selected={$line.user_id}" class="standard_tile_text_center">{$line.user_name}</a>{else}<i>n/a</i>{/if}</td>
-                    <td class="joindate_column w-25">{if $line.join_date != ''}{$line.join_date}{else}<i>n/a</i>{/if}</td>
-                    <td class="lastvisit_column w-25">{if $line.last_visit != ''}{$line.last_visit}{else}<i>n/a</i>{/if}</td>
-                    <td class="email_column w-10">{if $line.email != ''}<a href="mailto:{$line.email}" class="standard_tile_link_black"><i class="fa fa-envelope" aria-hidden="true"></i></a>{/if}</td>
+                    <td>{if $line.user_name != ''}<a href="../user/user_detail.php?user_id_selected={$line.user_id}" class="standard_tile_text_center">{$line.user_name}</a>{else}<i>n/a</i>{/if}</td>
+                    <td>{if $line.join_date != ''}{$line.join_date}{else}<i>n/a</i>{/if}</td>
+                    <td>{if $line.last_visit != ''}{$line.last_visit}{else}<i>n/a</i>{/if}</td>
+                    <td>{if $line.email != ''}<a href="mailto:{$line.email}" class="standard_tile_link_black"><i class="fa fa-envelope" aria-hidden="true"></i></a>{/if}</td>
                 </tr>
                 {/foreach}
                 {else}
@@ -113,6 +109,7 @@
                 {/if}
             </table>
         </div>
+        </div>
     </div>
 </div>
     <div class="standard_tile_padding" id="email_fields" style="display:none">
@@ -120,7 +117,7 @@
             <legend class="primary_legend">Create email</legend>
             <input type="text" name="email_head" id="email_head" class="standard_input input_large" Value="Email title">
             <br>
-            <textarea name="email_descr" id="email_descr" class="links_addnew_area" style="margin-top: 5px;">Email description</textarea>
+            <textarea name="email_descr" id="email_descr" class="primary_textarea" rows="10">Email description</textarea>
             <br>
             <br>
             <input type="button" name="email_sent" value="Sent" class="secondary_button" id="jsEmailBtn">

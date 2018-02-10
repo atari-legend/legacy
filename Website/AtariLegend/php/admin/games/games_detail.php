@@ -96,7 +96,7 @@ $sql_year = $mysqli->query("SELECT * FROM game_year
                WHERE game_id='$game_id'") or die("Error loading year");
 
 while ($year = $sql_year->fetch_array(MYSQLI_BOTH)) {
-    $smarty->append('game_year', array(
+    $smarty->append('game_year_detail', array(
         'game_year_id' => $year['game_year_id'],
         'game_year' => $year['game_year'],
         'game_extra_info' => $year['game_extra_info']

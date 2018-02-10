@@ -166,10 +166,9 @@ function deleteinterview(interview_id)
 }
 
 //open the screenshot selection box
-function popAddScreenshots(str) {
+function popInterviewAddScreenshots(str) {
     if (str == "") {
-        document.getElementById("interview_expand_screenshots").innerHTML = "";
-        return;
+        $('#interview_expand_screenshots').html('');
     } else {
         if (window.XMLHttpRequest) {
             // code for IE7+, Firefox, Chrome, Opera, Safari
@@ -192,7 +191,7 @@ function popAddScreenshots(str) {
 //close the screenshot selection box
 function closeAddScreenshots(str) {
         document.getElementById("interview_expand_screenshots").innerHTML = "";
-        document.getElementById("screenshot_link").innerHTML = "<a onclick=\"popAddScreenshots("+str+")\" style=\"cursor: pointer;\" class=\"left_nav_link\"><i class=\"fa fa-plus-square-o\" aria-hidden=\"true\"></i> Add screenshots</a>";
+        document.getElementById("screenshot_link").innerHTML = "<a onclick=\"popInterviewAddScreenshots("+str+")\" style=\"cursor: pointer;\" class=\"left_nav_link\"><i class=\"fa fa-plus-square-o\" aria-hidden=\"true\"></i> Add screenshots</a>";
         return;
 }
 
@@ -300,7 +299,7 @@ function myFunction() {
             <br>
             <div id="edit" class="tabcontent">
                 <form action="../interviews/db_interview.php" method="post" name="post" id="screenshot_add_to_interview">
-                    <fieldset class="primary_fieldset">
+                    <fieldset class="secondary_fieldset">
                         <legend class="primary_legend">Edit interview</legend>
                         <br>
                         <div style="display:inline-block;">
@@ -351,38 +350,37 @@ function myFunction() {
                         <br>
                         <b>Intro :</b>
                         <br>
-                        <input type="button" accesskey= "b" name="addbbcode0" value="B" onclick="bbstyle(0,'textintro')">
-                        <input type="button" accesskey= "u" name="addbbcode4" value="U" onclick="bbstyle(4,'textintro')">
-                        <input type="button" accesskey= "i" name="addbbcode2" value="I" onclick="bbstyle(2,'textintro')">
-                        <input type="button" accesskey="w" name="addbbcode6" value="URL" onClick="bbstyle(6,'textintro')">
-                        <input type="button" accesskey="x" name="addbbcode8" value="@" onClick="bbstyle(8,'textintro')">
-                        <!--<input type="button" accesskey="frontpage" name="addbbcode16" value="Frontpage" onClick="bbstyle(14,'textintro')">-->
-                        <textarea name="textintro" id="game_review_textfield" ONSELECT="javascript:storeCaret(this);" ONCLICK="javascript:storeCaret(this);" ONKEYUP="javascript:storeCaret(this);" ONCHANGE="javascript:storeCaret(this);" rows="5" style="padding-left:0px;height:200px;">{$interview.interview_intro}</textarea>
+                        <input type="button" class="secondary_button" accesskey= "b" name="addbbcode0" value="B" onclick="bbstyle(0,'textintro')">
+                        <input type="button" class="secondary_button" accesskey= "u" name="addbbcode4" value="U" onclick="bbstyle(4,'textintro')">
+                        <input type="button" class="secondary_button" accesskey= "i" name="addbbcode2" value="I" onclick="bbstyle(2,'textintro')">
+                        <input type="button" class="secondary_button" accesskey="w" name="addbbcode6" value="URL" onClick="bbstyle(6,'textintro')">
+                        <input type="button" class="secondary_button" accesskey="x" name="addbbcode8" value="@" onClick="bbstyle(8,'textintro')">
+                        <textarea name="textintro" rows="15" class="primary_textarea" ONSELECT="javascript:storeCaret(this);" ONCLICK="javascript:storeCaret(this);" ONKEYUP="javascript:storeCaret(this);" ONCHANGE="javascript:storeCaret(this);">{$interview.interview_intro}</textarea>
                         <br>
                         <br>
                         <b>Chapters :</b>
                         <br>
-                        <input type="button" accesskey= "b" name="addbbcode0" value="B" onclick="bbstyle(0,'textchapters')">
-                        <input type="button" accesskey= "u" name="addbbcode4" value="U" onclick="bbstyle(4,'textchapters')">
-                        <input type="button" accesskey= "i" name="addbbcode2" value="I" onclick="bbstyle(2,'textchapters')">
-                        <input type="button" accesskey="w" name="addbbcode6" value="URL" onClick="bbstyle(6,'textchapters')">
-                        <input type="button" accesskey="x" name="addbbcode8" value="@" onClick="bbstyle(8,'textchapters')">
-                        <input type="button" accesskey= "s" name="addbbcode10" value="Hotspot Source" onclick="bbstyle(10,'textchapters')"/>
-                        <textarea name="textchapters" id="game_review_textfield" ONSELECT="javascript:storeCaret(this);" ONCLICK="javascript:storeCaret(this);" ONKEYUP="javascript:storeCaret(this);" ONCHANGE="javascript:storeCaret(this);" rows="5" style="padding-left:0px;">{$interview.interview_chapters}</textarea>
+                        <input type="button" class="secondary_button" accesskey= "b" name="addbbcode0" value="B" onclick="bbstyle(0,'textchapters')">
+                        <input type="button" class="secondary_button" accesskey= "u" name="addbbcode4" value="U" onclick="bbstyle(4,'textchapters')">
+                        <input type="button" class="secondary_button" accesskey= "i" name="addbbcode2" value="I" onclick="bbstyle(2,'textchapters')">
+                        <input type="button" class="secondary_button" accesskey="w" name="addbbcode6" value="URL" onClick="bbstyle(6,'textchapters')">
+                        <input type="button" class="secondary_button" accesskey="x" name="addbbcode8" value="@" onClick="bbstyle(8,'textchapters')">
+                        <input type="button" class="secondary_button" accesskey= "s" name="addbbcode10" value="Hotspot Source" onclick="bbstyle(10,'textchapters')"/>
+                        <textarea name="textchapters" rows="15" class="primary_textarea" ONSELECT="javascript:storeCaret(this);" ONCLICK="javascript:storeCaret(this);" ONKEYUP="javascript:storeCaret(this);" ONCHANGE="javascript:storeCaret(this);">{$interview.interview_chapters}</textarea>
                         <br>
                         <br>
                         <b>Interview :</b>
                         <br>
-                        <input type="button" accesskey= "b" name="addbbcode0" value="B" onclick="bbstyle(0,'textfield')">
-                        <input type="button" accesskey= "u" name="addbbcode4" value="U" onclick="bbstyle(4,'textfield')">
-                        <input type="button" accesskey= "i" name="addbbcode2" value="I" onclick="bbstyle(2,'textfield')">
-                        <input type="button" accesskey="w" name="addbbcode6" value="URL" onClick="bbstyle(6,'textfield')">
-                        <input type="button" accesskey="x" name="addbbcode8" value="@" onClick="bbstyle(8,'textfield')"/>
-                        <input type="button" accesskey= "t" name="addbbcode12" value="Hotspot Target" onclick="bbstyle(12,'textfield')">
-                        <textarea name="textfield" id="game_review_textfield" ONSELECT="javascript:storeCaret(this);" ONCLICK="javascript:storeCaret(this);" ONKEYUP="javascript:storeCaret(this);" ONCHANGE="javascript:storeCaret(this);" rows="15" style="padding-left:0px;">{$interview.interview_text}</textarea>
+                        <input type="button" class="secondary_button" accesskey= "b" name="addbbcode0" value="B" onclick="bbstyle(0,'textfield')">
+                        <input type="button" class="secondary_button" accesskey= "u" name="addbbcode4" value="U" onclick="bbstyle(4,'textfield')">
+                        <input type="button" class="secondary_button" accesskey= "i" name="addbbcode2" value="I" onclick="bbstyle(2,'textfield')">
+                        <input type="button" class="secondary_button" accesskey="w" name="addbbcode6" value="URL" onClick="bbstyle(6,'textfield')">
+                        <input type="button" class="secondary_button" accesskey="x" name="addbbcode8" value="@" onClick="bbstyle(8,'textfield')"/>
+                        <input type="button" class="secondary_button" accesskey= "t" name="addbbcode12" value="Hotspot Target" onclick="bbstyle(12,'textfield')">
+                        <textarea name="textfield" rows="25" class="primary_textarea" ONSELECT="javascript:storeCaret(this);" ONCLICK="javascript:storeCaret(this);" ONKEYUP="javascript:storeCaret(this);" ONCHANGE="javascript:storeCaret(this);">{$interview.interview_text}</textarea>
                     </fieldset>
                     <br>
-                    <fieldset class="primary_fieldset centered_fieldset">
+                    <fieldset class="secondary_fieldset centered_fieldset">
                         <legend class="primary_legend">Screenshots</legend>
                         <br>
                         <div id="interview_screenshot_list">
@@ -409,19 +407,19 @@ function myFunction() {
                             <br>
                         {/if}
                         </div>
-                        <div id="screenshot_link"><a onclick="popAddScreenshots({$interview.interview_id})" style="cursor: pointer;" class="left_nav_link"><i class="fa fa-plus-square-o" aria-hidden="true"></i> Add screenshots</a></div>
+                        <div id="screenshot_link"><a onclick="popInterviewAddScreenshots({$interview.interview_id})" style="cursor: pointer;" class="left_nav_link"><i class="fa fa-plus-square-o" aria-hidden="true"></i> Add screenshots</a></div>
                         <div id="interview_expand_screenshots"></div>
                         <br>
                         <br>
                         <input type="hidden" name="interview_id" value="{$interview.interview_id}">
                         <input type="hidden" name="action" value="update_interview">
-                        <input type="submit" name="update" value="Update" class="topbutton_cpanel_small">
-                        <input type="button" name="delete" value="Delete" onclick="deleteinterview({$interview.interview_id})" class="topbutton_cpanel_small">
+                        <input type="submit" name="update" value="Update" class="secondary_button">
+                        <input type="button" name="delete" value="Delete" onclick="deleteinterview({$interview.interview_id})" class="secondary_button">
                     </fieldset>
                 </form>
             </div>
             <div id="preview" class="tabcontent">
-                <fieldset class="primary_fieldset">
+                <fieldset class="secondary_fieldset">
                     <legend class="primary_legend">Preview</legend>
                     <div class="review_container">
                         <div class="review_child" id="review_text">

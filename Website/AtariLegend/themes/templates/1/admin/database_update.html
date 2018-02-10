@@ -14,20 +14,24 @@
 
 {block name=java_script}
 <script>
-function UpdateDatabase(database_update_id)
-{
-    // CONFIRM REQUIRES ONE ARGUMENT
-    var message = "Are you sure? There is no going back from this...";
-    // CONFIRM IS BOOLEAN. THAT MEANS THAT
-    // IT RETURNS TRUE IF 'OK' IS CLICKED
-    // OTHERWISE IT RETURN FALSE
-    var return_value = confirm(message);
-
-    if (return_value !="0")
-    {
-        url="db_database_update.php?action=update_database&update_script_id="+database_update_id;
-        location.href=url;
-    }
+function UpdateDatabase(database_update_id) {
+    $('#JSGenericModal').dialog({
+        title: 'Continue?',
+        open: $('#JSGenericModalText').text('Are you sure? There is no going back from this...'),
+        resizable: false,
+        height: 200,
+        modal: true,
+        buttons: {
+            'Yes': function () {
+                $(this).dialog('close');
+                url="db_crew.php?crew_select="+crew_select+"&action=delete_crew";
+                location.href=url;
+            },
+            Cancel: function () {
+                $(this).dialog('close');
+            }
+        }
+    });
 }
 </script>
 {/block}
@@ -49,28 +53,30 @@ function UpdateDatabase(database_update_id)
     <div class="standard_tile_line"></div>
     <div class="standard_tile_padding">
         <div class="main_stats_container">
-            <table class="secondary_table_list table_xs ">
+            <div class="table-responsive">
+            <table class="secondary_table_list table_xs text-nowrap">
             <tr>
-                <th class="db_id_column">ID</th>
-                <th class="db_description_column">Description</th>
-                <th class="db_result_column">Test</th>
-                <th class="db_state_column">Status</th>
-                <th class="db_exe_column">Action</th>
+                <th class="text-center">ID</th>
+                <th class="text-center">Description</th>
+                <th class="text-center">Test</th>
+                <th class="text-center">Status</th>
+                <th class="text-center">Action</th>
             </tr>
             {foreach from=$database_update item=line}
             <tr>
-                <td class="db_id_column">{$line.database_update_id}</td>
-                <td class="db_description_column">{$line.update_description}</td>
-                <td class="db_result_column">{$line.test_result}</td>
-                <td class="db_state_column">{$line.implementation_state}</td>
-                <td class="db_exe_column">
+                <td class="text-center">{$line.database_update_id}</td>
+                <td class="text-center">{$line.update_description}</td>
+                <td class="text-center">{$line.test_result}</td>
+                <td class="text-center">{$line.implementation_state}</td>
+                <td class="text-center">
                     {if $line.allow_execute=='yes'}
-                        <button class="quick_search_games_button" onclick="UpdateDatabase({$line.database_update_id});">Execute</button>
+                        <button class="secondary_button" onclick="UpdateDatabase({$line.database_update_id});">Execute</button>
                     {/if}
                 </td>
             </tr>
             {/foreach}
             </table>
+        </div>
         </div>
     </div>
 </div>

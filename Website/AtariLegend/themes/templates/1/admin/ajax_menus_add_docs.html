@@ -18,7 +18,7 @@
 {if isset($smarty_action) and $smarty_action == "full_list"}
     <form action="" method="post" name="game_search" id="doc_search_menu">
         <div class="standard_tile_padding">
-            <fieldset class="primary_fieldset centered_fieldset">
+            <fieldset class="secondary_fieldset centered_fieldset">
             <legend class="primary_legend">Search (to add a doc)</legend>
                 By name : <br>
                 <select name="docbrowse" class="JSDocBrowse standard_select select_small">
@@ -38,27 +38,26 @@
         <div id="doc_list">
             <table class="primary_table_list w-95">
                 <tr>
-                    <th class="menu_mark_column w-5">Add</th>
-                    <th class="game_name_column w-40">Name</th>
-                    <th class="publisher_table_column w-20">Publisher</th>
-                    <th class="developer_table_column w-20">Developer</th>
-                    <th class="release_year_column w-10">Year</th>
-                    <th class="information_table_column w-10">Info</th>
+                    <th class="w-5">Add</th>
+                    <th class="w-40">Name</th>
+                    <th class="w-20">Publisher</th>
+                    <th class="w-20">Developer</th>
+                    <th class="w-10">Year</th>
+                    <th class="w-10">Info</th>
                 </tr>
                 {foreach from=$series_link item=line}
                 <tr>
-                    <td class="menu_mark_column w-5">
+                    <td>
                         <div class="links_mod_checkbox">
                             <input type="checkbox" id="{$line.game_id}" name="game_id[]" value="{$line.game_id}" style="margin-left:4px;" onchange="addDoctoMenu(this.value,{$menu_disk_id},'{$line.software_type}')">
                             <label for="{$line.game_id}"></label>&nbsp;
-                            <!--<input type="checkbox" name="game_id[]" value="{$line.game_id}" style="margin-left:4px;" onchange="addDoctoMenu(this.value,{$menu_disk_id},'{$line.software_type}')">-->
                         </div>
                     </td>
-                    <td class="game_name_column w-40">
+                    <td class="w-40">
                         {if $line.game_name != ''}{if $line.software_type == 'Game'}<a href="../games/games_detail.php?game_id={$line.game_id}" class="standard_tile_text_left">{$line.game_name}</a>{else}<a href="../administration/construction.php" class="standard_tile_text_left">{$line.game_name}</a>{/if}
                             {else}<i>n/a</i>{/if}
                     </td>
-                    <td class="publisher_table_column w-20">
+                    <td class="w-20">
                         {if $line.publisher_name != ''}
                             <a href="../games/games_list.php?publisher={$line.publisher_id}&amp;action=search" class="standard_tile_text_left">
                                 {$line.publisher_name}
@@ -67,7 +66,7 @@
                             <i>n/a</i>
                         {/if}
                     </td>
-                    <td class="developer_table_column w-20">
+                    <td class="w-20">
                         {if $line.developer_name != ''}
                             <a href="../games/games_list.php?developer={$line.developer_id}&amp;action=search" class="standard_tile_text_left">
                                 {$line.developer_name}
@@ -76,7 +75,7 @@
                             <i>n/a</i>
                         {/if}
                     </td>
-                    <td class="release_year_column w-10">
+                    <td class="w-10">
                         {if $line.year != ''}
                             <a href="../games/games_main.php?year={$line.year}&amp;action=search" class="standard_tile_text_left">
                                 {$line.year}
@@ -85,7 +84,7 @@
                             <i>n/a</i>
                         {/if}
                     </td>
-                    <td class="information_table_column w-10">
+                    <td class="w-10">
                         {if $line.software_type != ''}
                                 {$line.software_type}
                         {else}
@@ -98,7 +97,7 @@
                     <td class="game_list_footer" colspan="6">
                         <input type="hidden" name="action" value="add_doc_to_menu">
                         <img src="../../../themes/templates/1/includes/img/arrow_ltr.gif" alt="" width="38" height="22" style="display:inline;">
-                        <input type="button" value="Add" class="quick_search_games_button" style="display:inline;" onclick="addDoctoMenu(this.form)">
+                        <input type="button" value="Add" class="primary_button" style="display:inline;" onclick="addDoctoMenu(this.form)">
                     </td>
                 </tr>
             </table>
@@ -119,28 +118,25 @@
     {if isset($series_link) }
     <table class="secondary_table_list w-95">
         <tr>
-            <th class="menu_mark_column w-5">Add</th>
-            <th class="game_name_column w-40">Game Name</th>
-            <th class="publisher_table_column w-20">Publisher</th>
-            <th class="developer_table_column w-20">Developer</th>
-            <th class="release_year_column w-10">Year</th>
-            <th class="information_table_column w-10">Info</th>
+            <th class="w-5">Add</th>
+            <th class="w-40">Game Name</th>
+            <th class="w-20">Publisher</th>
+            <th class="w-20">Developer</th>
+            <th class="w-10">Year</th>
+            <th class="w-10">Info</th>
         </tr>
         {foreach from=$series_link item=line}
             <tr>
-                <td class="menu_mark_column w-5">
-                    <!--<input type="checkbox" name="game_id[]" value="{$line.game_id}" style="margin-left:4px;" onchange="addDoctoMenu(this.value,{$menu_disk_id},'{$line.software_type}')">
-                    <label for="{$line.game_id}"></label>&nbsp;-->
+                <td class="w-5">
                     <div class="links_mod_checkbox">
                         <input type="checkbox" id="{$line.game_id}" name="game_id[]" value="{$line.game_id}" style="margin-left:4px;" onchange="addDoctoMenu(this.value,{$menu_disk_id},'{$line.software_type}')">
                         <label for="{$line.game_id}"></label>&nbsp;
-                        <!--<input type="checkbox" name="game_id[]" value="{$line.game_id}" style="margin-left:4px;" onchange="addDoctoMenu(this.value,{$menu_disk_id},'{$line.software_type}')">-->
                     </div>
                 </td>
-                <td class="game_name_column w-40">{if $line.game_name != ''}{if $line.software_type == 'Game'}<a href="../games/games_detail.php?game_id={$line.game_id}" class="standard_tile_text_left">{$line.game_name}</a>{else}{$line.game_name}{/if}
+                <td class="w-40">{if $line.game_name != ''}{if $line.software_type == 'Game'}<a href="../games/games_detail.php?game_id={$line.game_id}" class="standard_tile_text_left">{$line.game_name}</a>{else}{$line.game_name}{/if}
                         {else}<i>n/a</i>{/if}
                 </td>
-                <td class="publisher_table_column w-20">
+                <td class="w-20">
                     {if $line.publisher_name != ''}
                         <a href="../games/games_main.php?publisher={$line.publisher_id}&amp;action=search" class="standard_tile_text_left">
                             {$line.publisher_name}
@@ -149,7 +145,7 @@
                         <i>n/a</i>
                     {/if}
                 </td>
-                <td class="developer_table_column w-20">
+                <td class="w-20">
                     {if $line.developer_name != ''}
                         <a href="../games/games_main.php?developer={$line.developer_id}&amp;action=search" class="standard_tile_text_left">
                             {$line.developer_name}
@@ -158,7 +154,7 @@
                         <i>n/a</i>
                     {/if}
                 </td>
-                <td class="release_year_column w-10">
+                <td class="w-10">
                     {if $line.year != ''}
                         <a href="../games/games_main.php?year={$line.year}&amp;action=search" class="standard_tile_text_left">
                             {$line.year}
@@ -167,7 +163,7 @@
                         <i>n/a</i>
                     {/if}
                 </td>
-                <td class="information_table_column w-10">
+                <td class="w-10">
                     {if $line.software_type != ''}
                         {$line.software_type}
                     {else}
@@ -180,7 +176,7 @@
             <td class="game_list_footer" colspan="6">
                 <input type="hidden" name="action" value="add_doc_to_menu">
                 <img src="../../../themes/templates/1/includes/img/arrow_ltr.gif" alt="" width="38" height="22" style="display:inline;">
-                <input type="button" value="Add" class="quick_search_games_button" style="display:inline;" onclick="addDoctoMenu(this.form)">
+                <input type="button" value="Add" class="primary_button" style="display:inline;" onclick="addDoctoMenu(this.form)">
             </td>
         </tr>
     </table>

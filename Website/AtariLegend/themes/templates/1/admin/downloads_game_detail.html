@@ -17,15 +17,6 @@
 
 {block name=java_script}
 <script>
-function OSDMessageDisplay (message) {
-    $.notify_osd.create({
-        'text': message, // notification message
-        'icon': '../../../themes/styles/1/images/osd_icons/star.png', // icon path, 48x48
-        'sticky': false, // if true, timeout is ignored
-        'timeout': 4, // disappears after 6 seconds
-        'dismissable': true // can be dismissed manually
-    });
-}
 $(function() {
     $but = $('#file_upload_game_detail');
 
@@ -580,45 +571,36 @@ function addAuthorstoDownload(game_download_id, game_id) {
         xmlhttp.send();
     }
 }
-
 function deleteAuthors(game_download_ind_id,game_download_id,game_id,ind_id) {
-
-    // CONFIRM REQUIRES ONE ARGUMENT
-    var message = "Are you sure you want to delete this person from the download?";
-    // CONFIRM IS BOOLEAN. THAT MEANS THAT
-    // IT RETURNS TRUE IF 'OK' IS CLICKED
-    // OTHERWISE IT RETURN FALSE
-    var return_value = confirm(message);
-
-    if (return_value !="0")
-    {
-
-        if (game_download_ind_id == "") {
-            document.getElementById("download_credit_list").innerHTML = "";
-            return;
-        } else {
-            if (window.XMLHttpRequest) {
-                // code for IE7+, Firefox, Chrome, Opera, Safari
-                xmlhttp = new XMLHttpRequest();
-            } else {
-                // code for IE6, IE5
-                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    $('#JSGenericModal').dialog({
+        title: 'Delete',
+        open: $('#JSGenericModalText').text('Are you sure you want to delete this person from the download?'),
+        resizable: false,
+        height: 200,
+        modal: true,
+        buttons: {
+            'Delete': function () {
+                $(this).dialog('close');
+                $.ajaxQueue({
+                    // The URL for the request
+                    url: '../downloads/db_downloads_game.php',
+                    data: 'action=delete_download_authors&game_id='+game_id+'&ind_id='+ind_id+'&game_download_ind_id='+game_download_ind_id+'&game_download_id='+game_download_id,
+                    type: 'POST',
+                    dataType: 'html',
+                    // Code to run if the request succeeds;
+                    success: function (html) {
+                        var returnHtml = html.split('[BRK]');
+                        $('#download_credit_list').html(returnHtml[0]);
+                        window.OSDMessageDisplay(returnHtml[1]);
+                        document.getElementById("download_credit_list").reset();
+                    }
+                });
+            },
+            Cancel: function () {
+                $(this).dialog('close');
             }
-            xmlhttp.onreadystatechange = function() {
-                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                    data = xmlhttp.responseText.split ( "[BRK]" );
-                    document.getElementById("download_credit_list").innerHTML = data[0];
-
-                    OSDMessageDisplay (data[1]);
-
-                    document.getElementById("download_credit_list").reset();
-                }
-            }
-
-            xmlhttp.open("GET","../downloads/db_downloads_game.php?action=delete_download_authors&game_id="+game_id+"&ind_id="+ind_id+"&game_download_ind_id="+game_download_ind_id+"&game_download_id="+game_download_id,true);
-            xmlhttp.send();
         }
-    }
+    });
 }
 
 function addslashes( str ) {
@@ -626,19 +608,23 @@ function addslashes( str ) {
 }
 
 function deleteDownload(str, game_id) {
-
-    // CONFIRM REQUIRES ONE ARGUMENT
-    var message = "Are you sure you want to completely remove this download?";
-    // CONFIRM IS BOOLEAN. THAT MEANS THAT
-    // IT RETURNS TRUE IF 'OK' IS CLICKED
-    // OTHERWISE IT RETURN FALSE
-    var return_value = confirm(message);
-
-    if (return_value !="0")
-    {
-        url="../downloads/db_downloads_game.php?action=delete_download&game_id="+game_id+"&game_download_id="+str;
-        location.href=url;
-    }
+    $('#JSGenericModal').dialog({
+        title: 'Delete',
+        open: $('#JSGenericModalText').text('Are you sure you want to completely remove this download?'),
+        resizable: false,
+        height: 200,
+        modal: true,
+        buttons: {
+            'Delete': function () {
+                $(this).dialog('close');
+                url="../downloads/db_downloads_game.php?action=delete_download&game_id="+game_id+"&game_download_id="+str;
+                location.href=url;
+            },
+            Cancel: function () {
+                $(this).dialog('close');
+            }
+        }
+    });
 }
 </script>
 {/block}
@@ -653,7 +639,7 @@ function deleteDownload(str, game_id) {
                 <input type="text" name="new_format_name" value="" class="standard_input input_large">
                 <br>
                 <br>
-                <input type="submit" value="Add" class="quick_search_games_button">
+                <input type="submit" value="Add" class="primary_button">
                 <input type="hidden" name="game_id" value="{$game.game_id}">
                 <input type="hidden" name="action" value="game_download_format_add">
             </form>
@@ -665,7 +651,7 @@ function deleteDownload(str, game_id) {
                 <input type="text" name="new_option_name" value="" class="standard_input input_large">
                 <br>
                 <br>
-                <input type="submit" value="Add" class="quick_search_games_button">
+                <input type="submit" value="Add" class="primary_button">
                 <input type="hidden" name="game_id" value="{$game.game_id}">
                 <input type="hidden" name="action" value="game_download_option_add">
             </form>
@@ -678,7 +664,7 @@ function deleteDownload(str, game_id) {
                 <input type="text" name="lingo_short" class="standard_input input_small">
                 <br>
                 <br>
-                <input type="submit" value="Add" class="quick_search_games_button">
+                <input type="submit" value="Add" class="primary_button">
                 <input type="hidden" name="game_id" value="{$game.game_id}">
                 <input type="hidden" name="action" value="game_download_lingo_add">
             </form>
@@ -690,7 +676,7 @@ function deleteDownload(str, game_id) {
                 <input type="text" name="new_tos_name_name" value="" class="standard_input input_large">
                 <br>
                 <br>
-                <input type="submit" value="Add" class="quick_search_games_button">
+                <input type="submit" value="Add" class="primary_button">
                 <input type="hidden" name="game_id" value="{$game.game_id}">
                 <input type="hidden" name="action" value="game_download_tos_add">
             </form>
@@ -702,7 +688,7 @@ function deleteDownload(str, game_id) {
                 <input type="text" name="new_trainer_name" value="" class="standard_input input_large">
                 <br>
                 <br>
-                <input type="submit" value="Add" class="quick_search_games_button">
+                <input type="submit" value="Add" class="primary_button">
                 <input type="hidden" name="game_id" value="{$game.game_id}">
                 <input type="hidden" name="action" value="game_download_trainer_add">
             </form>
@@ -719,21 +705,19 @@ function deleteDownload(str, game_id) {
     <div class="standard_tile_line"></div>
     <div class="standard_tile_padding">
         <div class="left_nav_section">
-            In this section you can upload a download for <b><a href="../games/games_detail.php?game_id={$game.game_id}" class="standard_tile_link_reverse">{$game.game_name}</a></b>.
+            In this section you can upload a download for <b><a href="../games/games_detail.php?game_id={$game.game_id}">{$game.game_name}</a></b>.
         </div>
         <br>
         <div class="standard_tile_padding">
             <form action="../downloads/db_downloads_game.php?action=add_download" enctype="multipart/form-data" method="post" name="add_file">
-            <fieldset class="primary_fieldset centered_fieldset">
+            <fieldset class="secondary_fieldset centered_fieldset">
                 <legend class="primary_legend">Add a new download</legend>
                 <br>
-                <label for="file_upload" class="file_upload">Select file</label>
-                <input id="file_upload" type="file" name="game_download_name">
+                <label for="file_upload" class="secondary_button">Select file</label>
+                <input type="file" id="file_upload" name="game_download_name">
                 <input type="text" class="standard_input input_large" id="file_upload_game_detail">&nbsp;
                 <br><br>
-                <!--<b>Filename :</b>
-                <input type="file" name="game_download_name" accept="application/x-zip-compressed,application/x-zip-compressed,application/x-zip-compressed">-->
-                <input type="submit" class="topbutton_cpanel_small" value="Upload" style="padding:2px;">
+                <input type="submit" class="secondary_button" value="Upload">
                 <input type="hidden" name="game_id" value="{$game.game_id}">
                 <br>
                 <br>
@@ -741,25 +725,27 @@ function deleteDownload(str, game_id) {
             </form>
         </div>
         <br>
-        <table class="secondary_table_list table_hover table_sm ">
-            <tr>
-                <th class="menu_disk_list_column w-30">Filename</th>
-                <th class="menu_state_column w-30">Date</th>
-            </tr>
-            {if isset($downloads)}
-                {foreach from=$downloads item=line}
-                    <tr id="downloadedit_ajax_{$line.game_download_id}">
-                        <td class="menu_disk_list_column w-30">{if $line.filename != ''}<a onclick="editDownload({$line.game_download_id},{$game.game_id})" style="cursor: pointer;">{$line.filename}</a>{else}<i>n/a</i>{/if}</td>
-                        <td class="menu_state_column w-30">{if isset($line.date)}{$line.date}{else}<i>n/a</i>{/if}</td>
-                    </tr>
-                {/foreach}
-            {/if}
-            <tr>
-                <td colspan="2">
-                    <b>{if $nr_downloads == 1}1 download found {else} {$nr_downloads} downloads found{/if}</b>
-                </td>
-            </tr>
-        </table>
+        <div class="table-responsive">
+            <table class="secondary_table_list table_hover table_sm text-nowrap">
+                <tr>
+                    <th class="w-50">Filename</th>
+                    <th class="text-right w-50">Date</th>
+                </tr>
+                {if isset($downloads)}
+                    {foreach from=$downloads item=line}
+                        <tr id="downloadedit_ajax_{$line.game_download_id}">
+                            <td>{if $line.filename != ''}<a onclick="editDownload({$line.game_download_id},{$game.game_id})" style="cursor: pointer;">{$line.filename}</a>{else}<i>n/a</i>{/if}</td>
+                            <td class="text-right">{if isset($line.date)}{$line.date}{else}<i>n/a</i>{/if}</td>
+                        </tr>
+                    {/foreach}
+                {/if}
+                <tr>
+                    <td colspan="2">
+                        <b>{if $nr_downloads == 1}1 download found {else} {$nr_downloads} downloads found{/if}</b>
+                    </td>
+                </tr>
+            </table>
+        </div>
     </div>
     <div class="standard_tile_text_center"><a href="javascript:history.go(-1)" class="standard_tile_link">back</a></div>
     <br>

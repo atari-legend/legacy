@@ -31,7 +31,7 @@
         <br>
         <br>
         <form action="../games/db_games_review_comment.php" method="post" name="editgames_review_comment" id="editgames_review_comment">
-            <textarea name="comment_text" class="links_addnew_area" id="gce_area">{$comments.comment}</textarea>
+            <textarea name="comment_text" class="primary_textarea" rows="10">{$comments.comment}</textarea>
             <br>
             <br>
             <input type="hidden" name="action" id="action" value="edit_reviews_comment">
@@ -41,8 +41,8 @@
             <input type="hidden" name="c_counter" value="{$comments.c_counter}">
             <input type="hidden" name="v_counter" value="{$comments.v_counter}">
             <input type="hidden" name="comment_id" value="{$comments.comment_id}">
-            <input type="submit" value="Update" class="quick_search_games_button" id="gce_button">
-            <input type="reset" value="Reset" class="quick_search_games_button" id="gce_button2">
+            <input type="submit" value="Update" class="primary_button">
+            <input type="reset" value="Reset" class="primary_button">
         </form>
         <br>
         <div class="standard_tile_text_center"><a href="javascript:history.go(-1)" class="standard_tile_link">back</a></div>

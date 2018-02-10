@@ -41,7 +41,7 @@ $(function() {
         <div class="left_nav_section">
             Here you can add news images to go with a news update, add a name to describe the
             image and to what kind of news it should be used. You can use either jpg,
-            png or gif images but png images are prefered. Keep the size to a minimun, we are talking icons here, no 300Kb images.
+            png or gif images but png images are prefered.
             <br>
             <br>
             <a href="../news/news_add_images.php" class="left_nav_link"><b>Add images</b></a> /
@@ -49,7 +49,7 @@ $(function() {
         </div>
         <br>
         <br>
-        <fieldset class="primary_fieldset">
+        <fieldset class="secondary_fieldset">
             <legend class="primary_legend">Upload image</legend>
                 Image Name
                 <br>
@@ -58,16 +58,15 @@ $(function() {
                 <br>
                 Image File
                 <br>
-                <!--<input type="file" name="news_image">-->
-                <label for="file_upload" class="file_upload">Select file</label>
-                <input id="file_upload" type="file" name="news_image">
+                <label for="file_upload" class="secondary_button">Select file</label>
+                <input type="file" id="file_upload" name="news_image">
                 <input type="text" class="standard_input input_large" id="file_upload_user_detail">&nbsp;
                 <br>
                 <br>
                 <input type="hidden" name="action" id="action" value="image_upload">
                 <input type="hidden" name="user_id" id="user_id" value="{$user_id}">
-                <input type="submit" value="Submit" class="topbutton_cpanel_small">
-                <input type="reset" class="topbutton_cpanel_small">
+                <input type="submit" value="Submit" class="secondary_button">
+                <input type="reset"  value="Reset" class="secondary_button">
         </fieldset>
     </div>
 </div>

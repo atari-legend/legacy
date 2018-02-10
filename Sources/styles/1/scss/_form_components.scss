@@ -9,13 +9,41 @@
 // Selects
 .standard_select {
     margin-top: 5px;
-    height: 27px;
-    padding: 0;
+    //height: 25px;
+    padding: 2px;
+    padding-bottom: 3px;
     padding-left: 5px;
     background-color: #000000;
     color: #ffffff;
     border: 1px solid #008b8b;
 }
+
+.standard_select::-webkit-scrollbar {
+    width: 1em;
+    height: 1em;
+}
+
+.standard_select::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0 , 0 , .3);
+}
+
+.standard_select::-webkit-scrollbar-thumb {
+    background-color: #008b8b;
+    outline: 1px solid #708090;
+    border-radius: 10px;
+}
+
+//scrollbar IE
+.standard_select {
+    scrollbar-3dlight-color: #008b8b;
+    scrollbar-arrow-color: #008b8b;
+    scrollbar-base-color: #008b8b;
+    scrollbar-darkshadow-color: #008b8b;
+    scrollbar-face-color: #008b8b;
+    scrollbar-highlight-color: #122323;
+    scrollbar-shadow-color: #008b8b;
+}
+
 .select_small {
     width: 50px;
 }
@@ -31,41 +59,26 @@
 #changelog_select select {
     width: 50%;
 }
-#website_category_select {
-    @extend .select_large;
-    width: 51.3%;
-}
+
 #games_main_select_site {
     width: 100%;
-    height: 27px;
+    height: 28px;
     margin-top: 0;
 }
-#games_main_pub_drop {
-    @extend #games_main_select_site;
-    margin-top: 5px;
-    height: 27px;
-}
-#games_main_dev_drop {
-    @extend #games_main_select_site;
-    margin-top: 5px;
-    height: 27px;
-}
-#games_main_year_drop {
-    @extend #games_main_select_site;
-    margin-top: 5px;
-    height: 27px;
-}
+#games_main_pub_drop,
+#games_main_dev_drop,
+#games_main_year_drop,
 #games_main_cat_drop {
     @extend #games_main_select_site;
     margin-top: 5px;
-    height: 27px;
+    height: 28px;
 }
 
 // Inputs
 .standard_input {
     margin-top: 5px;
-    height: 25px;
-    padding: 0;
+    //height: 25px;
+    padding: 4px;
     padding-left: 5px;
     background: #000000;
     color: #ffffff;
@@ -84,21 +97,13 @@
 .input_full {
     width: 100%;
 }
-#download_version,
-#download_info {
-    @extend .standard_input;
-    width: 95%;
-}
+
 #file_upload_game_detail {
     width: 60%;
 }
 .user_details_input_small {
     @extend .standard_input;
     width: 90%;
-}
-.standard_tile_input_small_site {
-    @extend .standard_input;
-    width: 98.7%;
 }
 
 //
@@ -107,50 +112,95 @@
 
 .primary_button {
     margin-top: 5px;
-    height: 27px;
-    font-size: 100%;
+    margin-left: 3px;
+    height: 25px;
+    font-size: 10pt;
     color: #ffffff;
     cursor: pointer;
     padding-left: 15px;
     padding-right: 15px;
-    padding-top: 4px;
+    padding-top: 5px;
     padding-bottom: 5px;
     background: #0d2e2e;
-    border: .5px solid #008b8b;
+    border: 1px solid #008b8b;
 }
 
 .primary_button:hover {
     color: #ffffff;
     background: #006f6f;
-    border: .5px solid #122323;
+    border: 1px solid #122323;
 }
 
 label.primary_button {
-    padding-top: 4px;
-    padding-bottom: 3.5px;
+    padding-top: 5px;
+    padding-bottom: 2.5px;
+    height: 25px;
+    margin-right: 3px;
 }
 
 .secondary_button {
     margin-top: 5px;
-    height: 27px;
-    font-size: 100%;
+    margin-left: 3px;
+    height: 25px;
+    font-size: 10pt;
     color: #ffffff;
     cursor: pointer;
     padding-left: 15px;
     padding-right: 15px;
-    padding-top: 4px;
+    padding-top: 5px;
     padding-bottom: 5px;
     background: #006f6f;
-    border: .5px solid #122323;
+    border: 1px solid #122323;
 }
 
 .secondary_button:hover {
     color: #ffffff;
     background: #122323;
-    border: .5px solid #008b8b;
+    border: 1px solid #008b8b;
 }
 
 label.secondary_button {
-    padding-top: 4px;
-    padding-bottom: 3.5px;
+    padding-top: 5px;
+    padding-bottom: 2.5px;
+    height: 25px;
+    margin-right: 3px;
+}
+
+.primary_textarea {
+    margin-top: 5px;
+    display: block;
+    width: 100%;
+    padding: .375rem .75rem;
+    line-height: 1.5;
+    color: #ffffff;
+    text-align: left;
+    background: #000000;
+    border: 1px solid #008b8b;
+    resize: vertical;
+    overflow: auto;
+}
+
+//scrollbar CHROME and SAFARI
+.primary_textarea::-webkit-scrollbar {
+    width: 1em;
+}
+
+.primary_textarea::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0 , 0 , .3);
+}
+
+.primary_textarea::-webkit-scrollbar-thumb {
+    background-color: #008b8b;
+    outline: 1px solid #708090;
+}
+
+//scrollbar IE
+.primary_textarea {
+    scrollbar-3dlight-color: #008b8b;
+    scrollbar-arrow-color: #008b8b;
+    scrollbar-base-color: #008b8b;
+    scrollbar-darkshadow-color: #008b8b;
+    scrollbar-face-color: #008b8b;
+    scrollbar-highlight-color: #122323;
+    scrollbar-shadow-color: #008b8b;
 }

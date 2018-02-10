@@ -25,20 +25,17 @@
     </div>
     {if isset($user_session)}
         <form enctype="multipart/form-data" method="post" action="../../main/games/db_games_main_detail.php">
-            <div class="standard_list_entry">
-                <div style="width:100%;text-align:center;margin-top:10px;">
-                    <textarea class="games_main_detail_comments_add" style="margin-top:10px;margin-bottom:10px;" name="textfield">Game info</textarea>
+            <div class="standard_list_entry standard_tile_padding text-center">
+                    <textarea rows="4" class="primary_textarea" name="textfield" placeholder="Game info"></textarea>
                     <br>
-                    <label for="file_upload" class="file_upload_games_detail">Select file(s)</label>
-                    <input id="file_upload" type="file" name="image[]" multiple>
+                    <label for="file_upload" class="primary_button">Select file(s)</label>
+                    <input type="file" id="file_upload" name="image[]" multiple>
                     <input type="hidden" name="action" value="submit_info">
                     <input type="hidden" name="game_id" value="{$game_info.game_id}">
                     <input type="text" class="standard_input input_large" id="file_upload_game_screenshots">&nbsp;
-                </div>
-            </div>
-            <br>
-            <div style="text-align:center;">
-                <input type="submit" value="Add" class="quick_search_games_button" style="margin-bottom:10px;">
+            <br><br>
+                <input type="submit" value="Add" class="primary_button" style="margin-bottom:10px;">
+
             </div>
         </form>
     {else}

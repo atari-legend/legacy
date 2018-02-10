@@ -24,17 +24,23 @@ function crewinsert() {
     if (JSnewcrew=='') {
         alert('Please fill in a crew name');
     } else {
-        // CONFIRM REQUIRES ONE ARGUMENT
-        var message = "Are you sure you want to insert this crew into the database?";
-        // CONFIRM IS BOOLEAN. THAT MEANS THAT
-        // IT RETURNS TRUE IF 'OK' IS CLICKED
-        // OTHERWISE IT RETURN FALSE
-        var return_value = confirm(message);
-
-        if (return_value !="0") {
-            url="db_crew.php?new_crew="+JSnewcrew+"&action=insert_crew";
-            location.href=url;
-        }
+        $('#JSGenericModal').dialog({
+            title: 'Add',
+            open: $('#JSGenericModalText').text('Are you sure you want to insert this crew into the database?'),
+            resizable: false,
+            height: 200,
+            modal: true,
+            buttons: {
+                'Add': function () {
+                    $(this).dialog('close');
+                    url="db_crew.php?crew_select="+crew_select+"&action=delete_crew";
+                    location.href=url;
+                },
+                Cancel: function () {
+                    $(this).dialog('close');
+                }
+            }
+        });
     }
 }
 
@@ -117,8 +123,7 @@ function searchCrew(str) {
                 </select>
             </div>
             <br>
-            <br>
-            <input type="submit" value="Select" class="quick_search_games_button">
+            <input type="submit" value="Select" class="primary_button">
         </form>
         <br>
         <div class="standard_tile_line"></div>
@@ -129,7 +134,7 @@ function searchCrew(str) {
             <input type="text" name="newcrew" value="" class="standard_input input_large">
             <br>
             <br>
-            <input type="submit" value="Insert" class="quick_search_games_button" onClick="crewinsert(); return false;">
+            <input type="submit" value="Insert" class="primary_button" onClick="crewinsert(); return false;">
         </form>
     </div>
     <br>

@@ -15,16 +15,6 @@
 {extends file='1/admin/main.html'}
 {block name=java_script}
 <script>
-function OSDMessageDisplay(message) {
-    $.notify_osd.create({
-        'text': message, // notification message
-        'icon': '../../../themes/styles/1/images/osd_icons/star.png', // icon path, 48x48
-        'sticky': false, // if true, timeout is ignored
-        'timeout': 4, // disappears after 6 seconds
-        'dismissable': true // can be dismissed manually
-    });
-}
-
     function DidyouknowdeleteConfirmation(trivia_id) {
         $("#JSGenericModal").dialog({
             title: "Delete Quote",
@@ -104,21 +94,19 @@ function DidyouknowUpdate(trivia_id) {
         </div>
         <br>
         <br>
-        <fieldset class="primary_fieldset">
+        <fieldset class="secondary_fieldset centered_fieldset">
         <legend class="primary_legend">Add new Trivia</legend>
-        <div class="centered_fieldset">
             <form action="../trivia/db_trivia.php" method="post" name="trivia" id="trivia">
                 Trivia Text<br>
-                <textarea name="trivia_text" id="trivia_text" class="standard_tile_input_area"></textarea>
+                <textarea name="trivia_text" id="trivia_text" class="primary_textarea" rows="4"></textarea>
                 <br><br>
                 <input type="hidden" name="action" value="did_you_know_insert">
-                <input type="submit" value="Submit" class="topbutton_cpanel_small">
+                <input type="submit" value="Submit" class="secondary_button">
             </form>
-        </div>
         </fieldset>
         <br>
         {foreach from=$trivia item=line}
-            <fieldset class="primary_fieldset" id="JStrivia_id_{$line.trivia_id}">
+            <fieldset class="secondary_fieldset" id="JStrivia_id_{$line.trivia_id}">
                 <legend class="primary_legend">Trivia ID {$line.trivia_id}</legend>
                 <form action="" method="post" name="trivia{$line.trivia_id}" id="JSTrivia{$line.trivia_id}">
                     <br>
@@ -128,9 +116,9 @@ function DidyouknowUpdate(trivia_id) {
                     <br>
                     <br>
                     <input type="hidden" name="trivia_id" value="{$line.trivia_id}">
-                    <input type="button" value="Delete"  class="topbutton_cpanel_small" onclick="DidyouknowdeleteConfirmation({$line.trivia_id})">
+                    <input type="button" value="Delete"  class="secondary_button" onclick="DidyouknowdeleteConfirmation({$line.trivia_id})">
                     <div id="JSDidYouKnowEdit_{$line.trivia_id}" style="display:inline-block;">
-                    <input type="button" value="Edit"  class="topbutton_cpanel_small" onclick="DidyouknowEdit({$line.trivia_id})">
+                    <input type="button" value="Edit"  class="secondary_button" onclick="DidyouknowEdit({$line.trivia_id})">
                     </div>
                 </form>
             </fieldset>

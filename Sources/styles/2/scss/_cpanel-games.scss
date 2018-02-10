@@ -6,44 +6,16 @@
 //*************************************************************/
 //*----------------Games main-------------------------------- */
 
-.games_main_text {
+.games_main_text_site {
     display: table-cell;
     width: 25%;
     font-weight: bold;
-}
-
-.games_main_input {
-    display: table-cell;
-    width: 75%;
-}
-
-.games_main_row {
-    display: table;
-    width: 75%;
-    margin-left: auto;
-}
-
-.games_check_container {
-    display: flex;
-    width: 50%;
-    margin: auto;
 }
 
 #child_1,
 #child_2 {
     width: 50%;
     margin: auto;
-}
-
-.games_check_text {
-    display: table-cell;
-    width: 95%;
-    font-weight: bold;
-}
-
-.games_check_box {
-    display: table-cell;
-    width: 5%;
 }
 
 .games_check_row {
@@ -133,7 +105,7 @@
 }
 
 #gd_text_area_big {
-    height: 250px;
+    height: 100%;
 }
 
 #file_upload_game_screenshots {
@@ -150,17 +122,6 @@
 }
 
 //*----------------------------------------------------------
-//Games comment
-//------------------------------------------------------------ */
-
-
-//*----------------------------------------------------------
-//Games comment edit
-//------------------------------------------------------------ */
-#gce_area {
-    width: 100%;
-}
-//*----------------------------------------------------------
 //Games upload
 //------------------------------------------------------------ */
 .game_upload_container {
@@ -171,21 +132,6 @@
 #gu_child_2 {
     width: 50%;
     margin-left: 2%;
-}
-
-//*----------------------------------------------------------
-//Games review add
-//------------------------------------------------------------ */
-#game_review_textfield {
-    @extend .standard_tile_input_area;
-    width: 99%;
-    height: 450px;
-}
-
-.game_review_screenshot_text {
-    @extend .standard_tile_input_area;
-    width: 75%;
-    height: 75px;
 }
 
 //*----------------------------------------------------------

@@ -28,40 +28,40 @@ The the user stats page
             These are the changes made by the user since the start of AL in 2004
         </div>
         <br>
-        <ul class="primary_table_list ">
+        <ul class="secondary_table_list ">
 
         <li class="left_nav_section">This user has posted <b>{if $nr_comments ==! ''}{$nr_comments}{else}0{/if}</b> game comments.</li>
         {if $nr_comments ==! ''}
         {foreach from=$users_comments item=line}
-            <li><a href="../games/games_detail.php?game_id={$line.game_id}" class="left_nav_link">{$line.game_name}</a></li>
+            <a href="../games/games_detail.php?game_id={$line.game_id}" class="left_nav_link">{$line.game_name}</a><br>
         {/foreach}
         {/if}
 
         <li class="left_nav_section">This user has posted <b>{if $nr_reviews ==! ''}{$nr_reviews}{else}0{/if}</b> game reviews.</li>
         {if $nr_reviews ==! ''}
         {foreach from=$users_reviews item=line}
-            <li><a href="../administration/construction.php" class="left_nav_link">{$line.game_name}</a></li>
+            <a href="../administration/construction.php" class="left_nav_link">{$line.game_name}</a><br>
         {/foreach}
         {/if}
 
         <li class="left_nav_section">This user has posted <b>{if $nr_submission ==! ''}{$nr_submission}{else}0{/if}</b> game submissions.</li>
         {if $nr_submission ==! ''}
         {foreach from=$users_submission item=line}
-            <li><a href="../administration/construction.php" class="left_nav_link">{$line.game_name}</a></li>
+            <a href="../administration/construction.php" class="left_nav_link">{$line.game_name}</a><br>
         {/foreach}
         {/if}
 
         <li class="left_nav_section">This user has posted <b>{if $nr_links ==! ''}{$nr_links}{else}0{/if}</b> links.</li>
         {if $nr_links ==! ''}
         {foreach from=$users_website item=line}
-            <li><a href="../links/link_mod.php?website_id={$line.website_id}" class="left_nav_link">{$line.website_name}</a></li>
+            <a href="../links/link_mod.php?website_id={$line.website_id}" class="left_nav_link">{$line.website_name}</a><br>
         {/foreach}
         {/if}
 
         <li class="left_nav_section">This user has posted <b>{if $nr_news ==! ''}{$nr_news}{else}0{/if}</b> news updates.</li>
         {if $nr_news ==! ''}
         {foreach from=$users_news item=line}
-            <li><a href="../news/news_edit.php?news_id={$line.news_id}" class="left_nav_link">{$line.news_headline}</a></li>
+            <a href="../news/news_edit.php?news_id={$line.news_id}" class="left_nav_link">{$line.news_headline}</a><br>
         {/foreach}
         {/if}
 
