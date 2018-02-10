@@ -19,6 +19,11 @@
 include("../../config/common.php");
 include("../../vendor/phpmailer/phpmailer/PHPMailerAutoload.php");
 
+require_once __DIR__."/../../common/Model/Database/ChangeLog.php" ;
+require_once __DIR__."/../../common/DAO/ChangeLogDAO.php" ;
+
+$changeLogDao = new \AL\Common\DAO\ChangeLogDAO($mysqli);
+
 if (isset($action) and $action == 'confirm') {
     //when the confirmation email link is pressed we enter this part of the code. We check if the user exists and set the account to active.
     //Then we auto log in!
@@ -146,7 +151,20 @@ if (isset($action) and $action == 'confirm') {
 
                             $time_elapsed_secs = microtime(true) - $start;
 
-                            create_log_entry('Users', $new_user_id, 'User', $new_user_id, 'Insert', $new_user_id);
+                            $changeLogDao->insertChangeLog(
+                                new \AL\Common\Model\Database\ChangeLog(
+                                    -1,
+                                    "Users",
+                                    $new_user_id,
+                                    $user_name,
+                                    "User",
+                                    $new_user_id,
+                                    $user_name,
+                                    null,
+                                    \AL\Common\Model\Database\ChangeLog::ACTION_INSERT
+                                )
+                            );
+
                             $_SESSION['edit_message'] = "An email was sent to you. Please follow the link to activate the account";
                             header("Location: ../../main/front/front.php");
                         }

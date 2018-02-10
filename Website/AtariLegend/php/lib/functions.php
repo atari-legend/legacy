@@ -626,19 +626,6 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
         }
     }
 
-    //  Everything we do for the USERS SECTION
-    if ($section == 'Users') {
-        // Get the username
-        $query_username = "SELECT userid FROM users WHERE user_id = '$section_id'";
-        $result = $mysqli->query($query_username) or die("getting user name failed");
-        $query_data   = $result->fetch_array(MYSQLI_BOTH);
-        $section_name = $query_data['userid'];
-
-        if ($subsection == 'Avatar' or $subsection == 'User') {
-            $subsection_name = $section_name;
-        }
-    }
-
     //  Everything we do for the LINKS section
     if ($section == 'Links') {
         // Get the website name
