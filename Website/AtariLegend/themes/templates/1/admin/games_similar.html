@@ -28,7 +28,7 @@ The main game page
         <br>
         <br>
         <form action="../games/db_games_similar.php" method="post" name="similar">
-        <fieldset class="primary_fieldset centered_fieldset">
+        <fieldset class="secondary_fieldset centered_fieldset">
         <legend class="primary_legend">Games Similar to {$game_info.game_name}</legend>
             <b>Similar game :</b>
             <select name="game_similar" class="standard_select select_large">
@@ -39,7 +39,7 @@ The main game page
             </select>
             <br>
             <br>
-            <input type="submit" name="valider" value="Add" class="topbutton_cpanel_small">
+            <input type="submit" name="valider" value="Add" class="secondary_button">
             <input type="hidden" name="action" value="add_game_similar">
             <input type="hidden" name="game_id" value="{$game_info.game_id}">
             {if $nr_similar <> 0}

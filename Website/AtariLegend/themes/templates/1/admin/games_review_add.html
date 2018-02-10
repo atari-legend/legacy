@@ -180,7 +180,7 @@ function storeCaret(textEl) {
         <br>
         <br>
         <form action="../games/db_games_review.php" method="post" name="post">
-            <fieldset class="primary_fieldset">
+            <fieldset class="secondary_fieldset">
                 <legend class="primary_legend">Other reviews</legend>
                 {if isset($review)}
                 {foreach from=$review item=line}
@@ -191,7 +191,7 @@ function storeCaret(textEl) {
             </fieldset>
             <br>
             <br>
-            <fieldset class="primary_fieldset">
+            <fieldset class="secondary_fieldset">
                 <legend class="primary_legend">Create review</legend>
                 <br>
                 <div style="display:inline-block;">
@@ -213,14 +213,14 @@ function storeCaret(textEl) {
                 <br>
                 <b>Review :</b>
                 <br>
-                <input type="button" accesskey= "b" name="addbbcode0" value="B" onclick="bbstyle(0,'textfield')">
-                <input type="button" accesskey= "u" name="addbbcode4" value="U" onclick="bbstyle(4,'textfield')">
-                <input type="button" accesskey= "i" name="addbbcode2" value="I" onclick="bbstyle(2,'textfield')">
-                <input type="button" accesskey="w" name="addbbcode6" value="URL" onClick="bbstyle(6,'textfield')">
-                <input type="button" accesskey="x" name="addbbcode8" value="@" onClick="bbstyle(8,'textfield')">
-                <input type="button" accesskey="screenstar" name="addbbcode14" value="Screenstar" onClick="bbstyle(14,'textfield')">
-                <input type="button" accesskey="frontpage" name="addbbcode16" value="Frontpage" onClick="bbstyle(16,'textfield')">
-                <textarea name="textfield" id="game_review_textfield" ONSELECT="javascript:storeCaret(this);" ONCLICK="javascript:storeCaret(this);" ONKEYUP="javascript:storeCaret(this);" ONCHANGE="javascript:storeCaret(this);" rows="15" ></textarea>
+                <input type="button" class="secondary_button" accesskey= "b" name="addbbcode0" value="B" onclick="bbstyle(0,'textfield')">
+                <input type="button" class="secondary_button" accesskey= "u" name="addbbcode4" value="U" onclick="bbstyle(4,'textfield')">
+                <input type="button" class="secondary_button" accesskey= "i" name="addbbcode2" value="I" onclick="bbstyle(2,'textfield')">
+                <input type="button" class="secondary_button" accesskey="w" name="addbbcode6" value="URL" onClick="bbstyle(6,'textfield')">
+                <input type="button" class="secondary_button" accesskey="x" name="addbbcode8" value="@" onClick="bbstyle(8,'textfield')">
+                <input type="button" class="secondary_button" accesskey="screenstar" name="addbbcode14" value="Screenstar" onClick="bbstyle(14,'textfield')">
+                <input type="button" class="secondary_button" accesskey="frontpage" name="addbbcode16" value="Frontpage" onClick="bbstyle(16,'textfield')">
+                <textarea name="textfield" rows="15" class="primary_textarea" ONSELECT="javascript:storeCaret(this);" ONCLICK="javascript:storeCaret(this);" ONKEYUP="javascript:storeCaret(this);" ONCHANGE="javascript:storeCaret(this);"></textarea>
                 <br>
                 <br>
                 <b>Graphics :</b><br>
@@ -235,7 +235,7 @@ function storeCaret(textEl) {
                 <br>
             </fieldset>
             <br>
-            <fieldset class="primary_fieldset centered_fieldset">
+            <fieldset class="secondary_fieldset centered_fieldset">
                 <legend class="primary_legend">Screenshots</legend>
                 <br>
                 {if $screenshots_nr <> 0}
@@ -244,7 +244,7 @@ function storeCaret(textEl) {
                         <br>
                         <br>
                         add comment : <br>
-                        <input type="text" name="inputfield[]" class="game_review_screenshot_text">
+                        <textarea rows="4" class="primary_textarea" name="inputfield[]"></textarea>
                         <br>
                         <br>
                         <br>
@@ -257,7 +257,7 @@ function storeCaret(textEl) {
                 <br>
                 <input type="hidden" name="action" value="add_review">
                 <input type="hidden" name="game_id" value="{$game.game_id}">
-                <input type="submit" name="Create Review" value="Create" class="topbutton_cpanel_small">
+                <input type="submit" name="Create Review" value="Create" class="secondary_button">
                 <br>
                 <br>
             </fieldset>

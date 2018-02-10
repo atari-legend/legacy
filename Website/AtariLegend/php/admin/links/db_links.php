@@ -155,6 +155,7 @@ if (isset($action) and $action == 'modify_link') {
 
     // Do the website updating
     $website_description_text = $mysqli->real_escape_string($website_description_text);
+    $website_description_text = trim($website_description_text);
     if (isset($website_inactive)) {
         $mysqli->query("UPDATE website SET website_name='$website_name', website_url='$website_url', description='$website_description_text', inactive=TRUE WHERE website_id='$website_id'") or die($mysqli->error);
     } else {

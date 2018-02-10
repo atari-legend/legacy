@@ -8,13 +8,6 @@
 
 //****************Games main search page************************/
 
-.game_button {
-    @extend .topbutton;
-    max-width: 38px;
-    height: 25px;
-    line-height: 25px;
-}
-
 #games_nav {
     @extend #main_nav;
 }
@@ -88,27 +81,6 @@
     margin-right: 20px;
     margin-bottom: 20px;
 }
-.export_button {
-    padding-top: 3px;
-    padding-left: 5px;
-    padding-right: 5px;
-    margin-right: auto;
-    margin-left: auto;
-    font-size: 16px;
-    color: #182727;
-    cursor: pointer;
-    background: #dbd7d1;
-    border: 0;
-    border-bottom: 3px solid #666666;
-    border-left: 1px solid #666666;
-}
-
-.export_button:hover {
-    color: #ffffff;
-    color: #182727;
-    background: #b6b3ae;
-    border-bottom: 3px solid #666666;
-}
 
 #games_main_list_3,
 #games_main_list_2,
@@ -155,12 +127,6 @@
 .games_main_input_list_text {
     display: table-cell;
     width: 65%;
-}
-
-//****************Games main comments************************/
-.main_comments_textarea {
-    @extend .standard_tile_input_area;
-    height: 10em;
 }
 
 //****************Games detail page************************/
@@ -389,11 +355,6 @@
     opacity: 1;
 }
 
-.games_main_detail_comments_add {
-    @extend .latest_comments_textarea;
-    height: 7em;
-}
-
 .games_main_detail_comments_log_on {
     @extend .latest_comments_text;
     text-align: center;
@@ -405,10 +366,6 @@
     max-height: 500px;
     overflow: auto;
     width: 100%;
-}
-
-.file_upload_games_detail {
-    @extend .file_upload;
 }
 
 //scrollbar CHROME and SAFARI

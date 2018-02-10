@@ -111,7 +111,7 @@ $log_on_border: 0;
     $menu_top_button_height: 57px;
     $menu_top_button_width: 183px;
     $menu_top_button_font: 20px;
-    $menu_top_button_border_bottom: 3px solid #008b8b;
+    $menu_top_button_border_bottom: 0px solid #008b8b;
     $menu_top_button_border_left: 1px solid #008b8b;
     $menu_top_button_hover_bg: #00a9a9;
     $menu_top_button_hover_color: #182727;
@@ -726,22 +726,6 @@ header nav input[type=submit] {
     text-shadow: $searchbutton_shadow;
 }
 
-.signinbutton {
-    margin-bottom: 25px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    cursor: pointer;
-    border: $menu_top_button_border;
-    background: $sidebutton_bg;
-    color: $menu_top_button_color;
-    font-weight: $menu_top_button_font_weight;
-    border-bottom: $menu_top_button_border_bottom;
-    border-left: $menu_top_button_border_left;
-    border-radius: $menu_top_button_radius;
-    padding-top: 3px;
-}
-
 @if $skin_name == tos or $skin_name == picasso {
     #home:hover,
     #search:hover {
@@ -750,17 +734,6 @@ header nav input[type=submit] {
 }
 
 @if $skin_name == picasso {
-    .signinbutton {
-        margin-bottom: 30px;
-        height: 30px;
-        width: 170px;
-        font-size: 18px;
-    }
-    .signinbutton:hover {
-        background: #dbd7d1;
-        color: #000000;
-        border: 2px solid #4f4f4f;
-    }
     #home {
         display: block;
         border-radius: 0 15px 15px 0;
@@ -809,18 +782,6 @@ header nav input[type=submit] {
         background-color: #ffffff;
         border-bottom: 3px solid #000000;
     }
-    .signinbutton {
-        margin-bottom: 25px;
-        height: 60px;
-        width: 134px;
-        font-size: 20px;
-        border-bottom: 3px solid #000000;
-        border-left: 1px solid #000000;
-    }
-    .signinbutton:hover {
-        background: #6a6a6a;
-        color: #ffffff;
-    }
     #search {
         background: url('../images/menu_search.png') 0 0 no-repeat;
         padding-top: 30px;
@@ -858,16 +819,6 @@ header nav input[type=submit] {
         }
     }
 } @else if $skin_name == legacy {
-    .signinbutton {
-        height: 60px;
-        width: 134px;
-        font-size: 20px;
-    }
-    .signinbutton:hover {
-        background: #00a9a9;
-        color: #182727;
-        border-bottom: 3px solid #006f6f;
-    }
     #home {
         display: block;
         background: url('../images/menu_home.png') 0 0 no-repeat;

@@ -32,7 +32,7 @@ The main game page
                 <br>
                 <br>
                 <input type="hidden" name="action" value="menu_set_new">
-                <input type="submit" value="Add New" class="quick_search_games_button">
+                <input type="submit" value="Add New" class="primary_button">
             </form>
         </div>
     <br>
@@ -54,29 +54,31 @@ The main game page
             </div>
             <br>
             <br>
-            <table class="secondary_table_list  table_md table_hover">
-                <tr>
-                    <th class="menu_disk_set_column w-30">Menu Disk Set</th>
-                    <th class="menu_crew_column w-25">Crew</th>
-                    <th class="menu_individual_column w-25">Indvidual</th>
-                    <th class="menu_type_column w-10">type</th>
-                    <th class="nr_menus_column w-10">Nr</th>
-                </tr>
-                {foreach from=$menus item=line}
+            <div class="table-responsive">
+                <table class="secondary_table_list table_md table_hover text-nowrap">
                     <tr>
-                        <td class="menu_disk_set_column w-30">{if $line.menu_sets_name != ''}<a href="../menus/menus_disk_list.php?menu_sets_id={$line.menu_sets_id}" class="standard_tile_text_left">{$line.menu_sets_name}</a>{else}<i>n/a</i>{/if}</td>
-                        <td class="menu_crew_column w-25">{if $line.crew_name != ''}{$line.crew_name}{else}<i>n/a</i>{/if}</td>
-                        <td class="menu_individual_column w-25">{if $line.ind_name != ''}{$line.ind_name}{else}<i>n/a</i>{/if}</td>
-                        <td class="menu_type_column w-10">{if $line.menu_type != ''}{$line.menu_type}{else}<i>n/a</i>{/if}</td>
-                        <td class="nr_menus_column w-10">{if $line.numbermenus != ''}{$line.numbermenus}{else}<i>0</i>{/if}</td>
+                        <th class="mw-30">Menu Disk Set</th>
+                        <th class="mw-25">Crew</th>
+                        <th class="mw-25">Indvidual</th>
+                        <th class="mw-10">type</th>
+                        <th class="mw-10">Nr</th>
                     </tr>
-                {/foreach}
-                <tr>
-                    <td colspan="5">
-                        <br><b>{if $nr_of_entries == 1}1 menus set found {else} {$nr_of_entries} menus sets found{/if} in {$querytime} sec</b>
-                    </td>
-                </tr>
-            </table>
+                    {foreach from=$menus item=line}
+                        <tr>
+                            <td>{if $line.menu_sets_name != ''}<a href="../menus/menus_disk_list.php?menu_sets_id={$line.menu_sets_id}" class="standard_tile_text_left">{$line.menu_sets_name}</a>{else}<i>n/a</i>{/if}</td>
+                            <td>{if $line.crew_name != ''}{$line.crew_name}{else}<i>n/a</i>{/if}</td>
+                            <td>{if $line.ind_name != ''}{$line.ind_name}{else}<i>n/a</i>{/if}</td>
+                            <td>{if $line.menu_type != ''}{$line.menu_type}{else}<i>n/a</i>{/if}</td>
+                            <td>{if $line.numbermenus != ''}{$line.numbermenus}{else}<i>0</i>{/if}</td>
+                        </tr>
+                    {/foreach}
+                    <tr>
+                        <td colspan="5">
+                            <br><b>{if $nr_of_entries == 1}1 menus set found {else} {$nr_of_entries} menus sets found{/if} in {$querytime} sec</b>
+                        </td>
+                    </tr>
+                </table>
+            </div>
         {else}
             <div class="left_nav_section">
                 There are no menu sets in the database. Please create one.

@@ -32,7 +32,7 @@ The main game review
         <br>
         <br>
         <form action="../games/games_review_list.php" method="post" name="game_review" id="game_review">
-        <fieldset class="primary_fieldset centered_fieldset">
+        <fieldset class="secondary_fieldset centered_fieldset">
             <legend class="primary_legend">Add new Reviews</legend>
             <b>By name :</b>
             <select name="gamebrowse" class="standard_select select_small">
@@ -40,7 +40,7 @@ The main game review
                 {html_options values=$az_value output=$az_output}
             </select>
             <input type="text" name="gamesearch" value="" class="standard_input input_large">
-            <input type="submit" value="Search" class="topbutton_cpanel_small">
+            <input type="submit" value="Search" class="secondary_button">
             <br>
         </fieldset>
         <input type="hidden" name="action" id="action" value="search">
@@ -51,26 +51,28 @@ The main game review
         {if isset($message)}
             <div class="message_box">{$message}</div>
         {/if}
-        <table class="secondary_table_list table_md table_hover ">
-            <tr>
-                <th class="gamename_gr_column w-35">Game Name</th>
-                <th class="gamepub_gr_column w-20">Publisher</th>
-                <th class="username_gr_column w-20">Username</th>
-                <th class="reviewdate_gr_column w-20">Review date</th>
-                <th class="nrreviews_gr_column w-5">Nr</th>
-            </tr>
-            {if isset($review)}
-            {foreach from=$review item=line}
+        <div class="table-responsive">
+            <table class="secondary_table_list table_md table_hover text-nowrap">
                 <tr>
-                    <td class="gamename_gr_column w-35">{if $line.game_name != ''}<a href="games_review_add.php?game_id={$line.game_id}" class="standard_tile_text_center">{$line.game_name}</a>{else}<i>n/a</i>{/if}</td>
-                    <td class="gamepub_gr_column w-20"><span class="standard_tile_text_left">{if $line.game_publisher != ''}{$line.game_publisher}{else}<i>n/a</i>{/if}</span></td>
-                    <td class="username_gr_column w-20"><span class="standard_tile_text_left">{$line.username}</span></td>
-                    <td class="reviewdate_gr_column w-20"><span class="standard_tile_text_left">{$line.review_date}</span></td>
-                    <td class="nrreviews_gr_column w-5"><span class="standard_tile_text_left">{if $line.number_reviews != ''}{$line.number_reviews}{else}<i>0</i>{/if}</span></td>
+                    <th class="mw-35">Game Name</th>
+                    <th class="mw-20">Publisher</th>
+                    <th class="mw-20">Username</th>
+                    <th class="mw-20">Review date</th>
+                    <th class="mw-5">Nr</th>
                 </tr>
-            {/foreach}
-            {/if}
-        </table>
+                {if isset($review)}
+                {foreach from=$review item=line}
+                    <tr>
+                        <td>{if $line.game_name != ''}<a href="games_review_add.php?game_id={$line.game_id}" class="standard_tile_text_center">{$line.game_name}</a>{else}<i>n/a</i>{/if}</td>
+                        <td><span class="standard_tile_text_left">{if $line.game_publisher != ''}{$line.game_publisher}{else}<i>n/a</i>{/if}</span></td>
+                        <td><span class="standard_tile_text_left">{$line.username}</span></td>
+                        <td><span class="standard_tile_text_left">{$line.review_date}</span></td>
+                        <td><span class="standard_tile_text_left">{if $line.number_reviews != ''}{$line.number_reviews}{else}<i>0</i>{/if}</span></td>
+                    </tr>
+                {/foreach}
+                {/if}
+            </table>
+        </div>
         <br>
         <div class="standard_tile_text_center"><a href="javascript:history.go(-1)" class="standard_tile_link">back</a></div>
     </div>

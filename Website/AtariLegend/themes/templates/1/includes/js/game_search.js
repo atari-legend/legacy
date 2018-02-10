@@ -4,7 +4,7 @@ $(document).ready(function () {
 
         $.ajaxQueue({
             // The URL for the request
-            url: 'ajax_game_search.php',
+            url: '../games/ajax_game_search.php',
             data: formValues,
             type: 'GET',
             dataType: 'html',

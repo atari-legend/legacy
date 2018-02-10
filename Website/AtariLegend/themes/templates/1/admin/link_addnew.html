@@ -58,7 +58,7 @@ function TestURL() {
         <br>
         <form action="../links/db_links.php" method="post" name="linkadd" id="linkadd">
         <div class="links_addnew_container">
-            <fieldset class="primary_fieldset">
+            <fieldset class="secondary_fieldset">
             <legend class="primary_legend">Add new link</legend>
             <div class="links_addnew_row">
                 <div class="links_addnew_text">Site Name</div>
@@ -68,7 +68,7 @@ function TestURL() {
                 <div class="links_addnew_text">URL</div>
                 <div class="links_addnew_input">
                     <input type="text" name="url" id="website_url" value="http://" class="standard_input input_large">
-                    <input type="button" onclick="TestURL()" class="topbutton_cpanel_small" value="Test" style="margin-left:1px;">
+                    <input type="button" onclick="TestURL()" class="secondary_button" value="Test">
                 </div>
             </div>
             <div class="links_addnew_row">
@@ -83,13 +83,13 @@ function TestURL() {
             </div>
             <div class="links_addnew_row">
                 <div class="links_addnew_text">Description</div>
-                <div class="links_addnew_input"><textarea name="descr" class="links_addnew_area"></textarea></div>
+                <div class="links_addnew_input"><textarea name="descr" class="primary_textarea" rows="10"></textarea></div>
             </div>
             <br>
             <input type="hidden" name="action" id="action" value="addnew_link">
             <input type="hidden" name="user_id" id="user_id" value="{$user_id}">
-            <input type="submit" value="Submit" class="topbutton_cpanel_small">
-            <input type="reset" class="topbutton_cpanel_small" value="Reset">
+            <input type="submit" value="Submit" class="secondary_button">
+            <input type="reset" class="secondary_button" value="Reset">
             </fieldset>
         </div>
         </form>
@@ -113,7 +113,7 @@ function TestURL() {
             {foreach from=$validate item=lineweb}
                 <div class="links_addnew_container" id="new-link-{$lineweb.website_id}">
                     <form enctype="multipart/form-data" action="../links/db_links.php" method="post" name="linkmod{$lineweb.website_id}" id="linkmod{$lineweb.website_id}">
-                    <fieldset class="primary_fieldset">
+                    <fieldset class="secondary_fieldset">
                     <legend class="primary_legend">New submitted website</legend>
                     <div class="links_addnew_row">
                         <div class="links_addnew_text">Site Name</div>
@@ -135,17 +135,18 @@ function TestURL() {
                     </div>
                     <div class="links_addnew_row">
                         <div class="links_addnew_text">Description</div>
-                        <div class="links_addnew_input"><textarea cols="50" rows="8" name="validate_website_description_text" class="links_addnew_area">{$lineweb.website_description}</textarea></div>
+                        <div class="links_addnew_input">
+                            <textarea name="validate_website_description_text" class="primary_textarea" rows="10">{$lineweb.website_description}</textarea></div>
                     </div>
                     <br>
                     <br>
                     <input type="hidden" name="validate_website_id" value="{$lineweb.website_id}">
                     <input type="hidden" name="action" value="approve_link">
-                    <input type="submit" name="Approve" value="Approve" class="topbutton_cpanel_small">
-                    <input type="button" name="delete" value="Delete" onClick="deletelink({$lineweb.website_id}); return false;" class="topbutton_cpanel_small">
+                    <input type="submit" name="Approve" value="Approve" class="secondary_button">
+                    <input type="button" name="delete" value="Delete" onClick="deletelink({$lineweb.website_id}); return false;" class="secondary_button">
                     </fieldset>
                     </form>
-                    <fieldset class="primary_fieldset">
+                    <fieldset class="secondary_fieldset">
                         <div class="links_addnew_info">Submitted by <a href="../user/user_detail.php?user_id_selected={$lineweb.user_id}" class="links_addnew_link">{$lineweb.user_name}</a> on {$lineweb.website_date}<br>
                         User Email : <a href="mailto:{$lineweb.user_email}?Subject=Thanks%20for%20the%20link%20you%20submitted" class="links_addnew_link">{$lineweb.user_email}</a><br>
                         <br>

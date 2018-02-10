@@ -35,27 +35,27 @@
         <br>
         {if isset($load) and $load == '1'}
             <form action="../individuals/db_individuals_author.php" method="post" name="post">
-            <fieldset class="primary_fieldset">
+            <fieldset class="secondary_fieldset">
                 <legend class="primary_legend">Modify type</legend>
                 <input type="text" name="newtype" value="{$author_types_load.author_type}" class="standard_input input_large">
                 <input type="hidden" name="action" value="edit">
                 <input type="hidden" name="type_id" value="{$author_types_load.author_type_id}">
-                <input type="submit" value="Edit" class="topbutton_cpanel_small">
+                <input type="submit" value="Edit" class="secondary_button">
             </fieldset>
             </form>
         {else}
             <form action="../individuals/db_individuals_author.php" method="post" name="post">
-                <fieldset class="primary_fieldset">
+                <fieldset class="secondary_fieldset">
                 <legend class="primary_legend">Add a new type</legend>
                 <input type="text" name="newtype" class="standard_input input_large">
                 <input type="hidden" name="action" value="insert">
-                <input type="submit" value="Insert" class="topbutton_cpanel_small">
+                <input type="submit" value="Insert" class="secondary_button">
                 </fieldset>
             </form>
         {/if}
         <br>
         <br>
-        <fieldset class="primary_fieldset">
+        <fieldset class="secondary_fieldset">
             <legend class="primary_legend">Current types</legend>
             {foreach from=$author_types item=line}
                 <ul style="display:block;width:100%;padding:0px;margin:0px;">

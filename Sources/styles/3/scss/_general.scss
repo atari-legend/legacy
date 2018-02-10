@@ -253,21 +253,6 @@ img {
     border: 0;
 }
 
-.standard_tile_input_area {
-    width: 90%;
-    height: 40px;
-    padding: 3px;
-    padding-left: 7px;
-    margin-top: 0;
-    color: #ffffff;
-    text-align: left;
-    background: #666666;
-    border: 1px solid #b2b2b2;
-}
-
-#text_area_big {
-    height: 150px;
-}
 .standard_tile_link:link {
     color: #000000;
 }
@@ -297,9 +282,6 @@ img {
 }
 .standard_tile_link_black:hover {
     color: #6a6a6a;
-}
-.standard_tile_link_button:link {
-    color: #ffffff;
 }
 .standard_list_entry {
     position: relative;
@@ -366,26 +348,6 @@ img {
     display: none;
 }
 
-
-.file_upload {
-    width: 80px;
-    height: 25px;
-    margin-left: 2px;
-    font-size: 10pt;
-    color: #000000;
-    cursor: pointer;
-    background: #dbd7d1;
-    border: 1px solid #000000;
-    border-radius: 0 15px 15px 0;
-    padding: 4px 10px;
-}
-
-.file_upload:hover {
-    color: #ffffff;
-    background: $bg_color;
-    border: 1px solid #4f4f4f;
-}
-
 .selected {
     font-weight: bold;
 }
@@ -439,50 +401,34 @@ img {
     @extend .checkbox;
 }
 
-.standard_table_center img {
-    display: inline;
-}
-.topbutton_cpanel_small {
-    width: 80px;
-    height: 25px;
-    margin-left: 2px;
-    font-size: 10pt;
-    color: #000000;
-    cursor: pointer;
-    background: #dbd7d1;
-    border: 1px solid #000000;
-    border-radius: 0 15px 15px 0;
-}
-
-.topbutton_cpanel_small:hover {
-    color: #ffffff;
-    background: $bg_color;
-    border: 1px solid #4f4f4f;
-}
-
-.topbutton_cpanel {
-    @extend .topbutton_cpanel_small;
-    width: 120px;
-}
-
-.topbutton_cpanel:hover {
-    @extend .topbutton_cpanel_small:hover;
-}
-fieldset {
+.primary_fieldset {
     padding: 15px;
     font-size: 11pt;
-    background: #efefef;
-    border: solid 1px #b2b2b2;
+    background: $bg_color;
+    border: solid 1px #000000;
 }
 
-legend {
+.primary_legend {
     padding: 1px 10px;
-    font-weight: bold;
-    color: #122323;
-    background: #dbd7d1;
-    border: solid 2px #b2b2b2;
+    color: #ffffff;
+    background: #006f6f;
+    border: #000000 solid 1px;
 }
 
+.secondary_fieldset {
+    padding: 15px;
+    font-size: 11pt;
+    background: #294f4f;
+    color: #ffffff;
+    border: solid 1px #000000;
+}
+
+.secondary_legend {
+    padding: 1px 10px;
+    color: #ffffff;
+    background: $bg_color;
+    border: #000000 solid 1px;
+}
 //*------------------------------------------------------------
 //The CSS for the help tips
 //-------------------------------------------------------------*/
