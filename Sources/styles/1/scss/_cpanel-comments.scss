@@ -1,0 +1,138 @@
+//*************************************************************/
+//**********************LEGACY SKIN****************************/
+//*************************************************************/
+//*************************************************************/
+//***************CPanel INDIVIDUALS section css****************/
+//*************************************************************/
+//*----------------------------------------------------------
+//Individuals main
+//------------------------------------------------------------ */
+
+.comments_navigator {
+    button {
+        width: 90%;
+        margin-left: 0;
+    }
+}
+
+.comments_post_box {
+    padding: 10px;
+    font-size: 11pt;
+    background: #294f4f;
+    color: #ffffff;
+    border: solid 1px #000000;
+    margin-bottom: 5px;
+    display: flex;
+
+
+    .comments_userinfo {
+        float: left;
+        display: none;
+        width: 22%;
+        margin-right: 10px;
+
+        img {
+            margin-bottom: 5px;
+            margin-top: 0;
+            width: 75%;
+            @media (min-width: 992px) {
+                width: 100%;
+            }
+        }
+        @media (min-width: 576px) {
+            display: inline;
+        }
+
+    }
+    .comment_post_detail {
+        position: relative;
+        float: right;
+        display: inline;
+        width: 100%;
+
+        @media (min-width: 576px) {
+            width: 78%;
+        }
+        .comments_line {
+
+            border-bottom: 1px solid #1a3232;
+
+        }
+
+
+        .primary_button {
+            margin-top: 0;
+            padding-left: 10px;
+            padding-right: 10px;
+            display: inline-block;
+            float: left;
+        }
+        .comment_buttons {
+            position: absolute;
+            right: 0;
+            top: 0;
+            float: none;
+        }
+        .comments_post_info {
+            clear: both;
+            font-size: 9pt;
+
+            a:link {
+                color: #00d3d3;
+                font-weight: normal;
+            }
+            a:visited {
+                color: #00d3d3;
+                font-weight: normal;
+            }
+            a:hover {
+                color: #ffffff;
+                font-weight: normal;
+            }
+        }
+        .comment_post_text {
+            a:link {
+                color: #00d3d3;
+                font-weight: normal;
+            }
+            a:visited {
+                color: #00d3d3;
+                font-weight: normal;
+            }
+            a:hover {
+                color: #ffffff;
+                font-weight: normal;
+            }
+        }
+    }
+}
+#line_below_info {
+    display: none;
+    margin-top: 8px;
+}
+#line_above_info {
+    display: none;
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+@media (max-width: 991.99px) {
+    #line_above_info {
+        display: block;
+    }
+    #line_below_info {
+        display: none;
+    }
+
+}
+
+
+
+@media (min-width: 992px) {
+    #line_above_info {
+        display: none;
+    }
+    #line_below_info {
+        display: block;
+    }
+
+}
