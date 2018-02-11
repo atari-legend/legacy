@@ -699,14 +699,7 @@ div.tab button.active {
 
 // Feed icon (on News, Reviews, Interview)
 a.atom {
-    position: absolute;
-    right: 10px;
-    top: 10px;
-    img {
-        opacity: .8;
-    }
-}
-
-a.atom.with-help-tip {
-    top: 40px;
+    float: left;
+    margin-top: 25px;
+    margin-left: 10px;
 }
