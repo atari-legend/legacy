@@ -62,7 +62,6 @@
     .comments_userinfo {
         float: left;
         display: none;
-        width: 22%;
         margin-right: 10px;
 
         img {
@@ -89,9 +88,6 @@
         display: inline;
         width: 100%;
 
-        @media (min-width: 576px) {
-            width: 78%;
-        }
         .comments_line {
             border-bottom: 1px solid #1a3232;
         }

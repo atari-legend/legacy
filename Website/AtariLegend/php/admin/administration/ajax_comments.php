@@ -1,18 +1,17 @@
 <?php
 /***************************************************************************
- *                                comments.php
+ *                                ajax_comments.php
  *                            -----------------------
- *   begin                : 2018-02-10
+ *   begin                : 2018-02-12
  *   copyright            : (C) 2018 Atari Legend
  *   email                : silversurfer@atari-forum.com
+ *   actual update        : file creation
+ *
  *
  ***************************************************************************/
 
 include("../../config/common.php");
 include("../../config/admin.php");
-
-//load the search fields of the quick search side menu
-include("../../admin/games/quick_search_games.php");
 
 //*********************************************************************************************
 // User comments
@@ -20,9 +19,35 @@ include("../../admin/games/quick_search_games.php");
 
 if (isset($view) and $view == "users_comments") {
     $where_clause = "WHERE users.user_id = $user_id";
+    $where_clause_temp_table = "";
+} elseif ($view == "comments_game_comments") {
+    $where_clause_temp_table = "WHERE temp.comment_type = 'game_comment'";
+    $view = "comments_game_comments";
+    if (empty($where_clause)) {
+        $where_clause = "";
+    }
+} elseif ($view == "comments_all") {
+    $where_clause_temp_table = "";
+    $view = "comments_all";
+    if (empty($where_clause)) {
+        $where_clause = "";
+    }
+} elseif ($view == "comments_game_review_comments") {
+    $where_clause_temp_table = "WHERE temp.comment_type = 'game_review_comment'";
+    $view = "comments_game_review_comments";
+    if (empty($where_clause)) {
+        $where_clause = "";
+    }
+} elseif ($view == "comments_interview_comments") {
+    $where_clause_temp_table = "WHERE temp.comment_type = 'interview_comment'";
+    $view = "comments_interview_comments";
+    if (empty($where_clause)) {
+        $where_clause = "";
+    }
 } else {
     $where_clause = "";
     $view         = "latest_comments";
+    $where_clause_temp_table = "";
 }
 
 $sql_build_game = "SELECT
@@ -116,16 +141,10 @@ temp.comment_type,
 comments.comment
 FROM temp
 LEFT JOIN comments ON (temp.comments_id = comments.comments_id)
+". $where_clause_temp_table ."
 ORDER BY temp.timestamp DESC LIMIT 15";
 
 $sql_comment = $mysqli->query($sql_build) or die('Error: ' . mysqli_error($mysqli));;
-
-// get the total nr of comments in the DB
-$query_total_number = $mysqli->query("SELECT * FROM comments")
-or die("Couldn't get the total number of comments");
-$v_rows_total = $query_total_number->num_rows;
-
-$smarty->assign('total_nr_comments', $v_rows_total);
 
 // lets put the comments in a smarty array
 while ($query_comment = $sql_comment->fetch_array(MYSQLI_BOTH)) {
@@ -191,4 +210,4 @@ $smarty->assign('links', array(
 ));
 
 //Send all smarty variables to the templates
-$smarty->display("file:" . $cpanel_template_folder . "comments.html");
+$smarty->display("file:" . $cpanel_template_folder . "ajax_comments.html");
