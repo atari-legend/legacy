@@ -45,7 +45,7 @@
         <table class="secondary_table_list ">
         {foreach from=$link_list item=line}
             <tr>
-                <td class="links_modlist_tdline" style="width:20%">
+                <td class="links_modlist_tdline_left">
                     {if  $line.website_imgext !== null}
                         <a href="{$line.website_url}" target="_blank" class="links_addnew_link">
                         {if $line.category_name == 'Youtube'}
@@ -56,7 +56,7 @@
                         </a>
                     {/if}
                 </td>
-                <td class="links_modlist_tdline" style="padding-left:5px;width:80%">
+                <td class="links_modlist_tdline">
                     <br>
                     <a href="{$line.website_url}" class="links_addnew_link" target="_blank">{$line.website_name} - </a>
                     <a href="link_mod.php?website_id={$line.website_id}" class="links_addnew_link"><i class="fa fa-pencil" aria-hidden="true"></i></a><br>

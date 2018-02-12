@@ -187,28 +187,53 @@ class LinkDAO {
      * I have excluded youtube links in here as the youtube logo's do not fit the look 
      * and it bothered me.
      */
-    public function getRandomLink() {
-        $stmt = \AL\Db\execute_query(
-            "LinkDAO: Get random link",
-            $this->mysqli,
-            "SELECT website.website_id,
-                    website.website_name,
-                    website.website_url,
-                    website.website_imgext,
-                    website.website_date,
-                    website.description,
-                    website.inactive,
-                    users.userid,
-                    users.user_id
-                    FROM website
-                    LEFT JOIN website_category_cross ON (website.website_id = website_category_cross.website_id)
-                    LEFT JOIN website_category ON (website_category.website_category_id = website_category_cross.website_category_id)
-                    LEFT JOIN users ON ( website.user_id = users.user_id )
-                    WHERE website.website_imgext <> ' ' and website.inactive = 0 and website_category.website_category_name <> 'Youtube'
-                    ORDER BY RAND() LIMIT 1".
-            null, null
-        );
-
+    public function getRandomLink($ignore_category = null) {
+        if (isset($ignore_category)) {
+            $stmt = \AL\Db\execute_query(
+                "LinkDAO: Get random link",
+                $this->mysqli,
+                "SELECT website.website_id,
+                        website.website_name,
+                        website.website_url,
+                        website.website_imgext,
+                        website.website_date,
+                        website.description,
+                        website.inactive,
+                        users.userid,
+                        users.user_id
+                        FROM website
+                        LEFT JOIN website_category_cross ON (website.website_id = website_category_cross.website_id)
+                        LEFT JOIN website_category ON (website_category.website_category_id = website_category_cross.website_category_id)
+                        LEFT JOIN users ON ( website.user_id = users.user_id )
+                        WHERE website.website_imgext <> ' ' and website.inactive = 0 and website_category.website_category_name <> ?
+                        ORDER BY RAND() LIMIT 1",
+                        "s", $ignore_category
+            );
+        }
+        else
+        {
+            $stmt = \AL\Db\execute_query(
+                "LinkDAO: Get random link",
+                $this->mysqli,
+                "SELECT website.website_id,
+                        website.website_name,
+                        website.website_url,
+                        website.website_imgext,
+                        website.website_date,
+                        website.description,
+                        website.inactive,
+                        users.userid,
+                        users.user_id
+                        FROM website
+                        LEFT JOIN website_category_cross ON (website.website_id = website_category_cross.website_id)
+                        LEFT JOIN website_category ON (website_category.website_category_id = website_category_cross.website_category_id)
+                        LEFT JOIN users ON ( website.user_id = users.user_id )
+                        WHERE website.website_imgext <> ' ' and website.inactive = 0
+                        ORDER BY RAND() LIMIT 1".
+                         null, null
+                );
+        }
+        
         \AL\Db\bind_result(
             "LinkDAO: Get random link",
             $stmt,
