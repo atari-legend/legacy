@@ -333,6 +333,10 @@ if (isset($action) and $action == 'update_interview' and (!isset($action2))) {
 
         //get the id of the inserted interview
         $id = $mysqli->insert_id;
+        
+        //insert the date of today
+        $date = date_to_timestamp(date("Y"), date("m"), date("d"));
+        $sdbquery = $mysqli->query("INSERT INTO interview_text (interview_id, interview_date) VALUES ($id, '$date')") or die("Couldn't insert into interview_text");
 
         create_log_entry('Interviews', $individual_create, 'Interview', $id, 'Insert', $_SESSION['user_id']);
 
