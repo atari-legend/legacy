@@ -24,6 +24,40 @@
     margin-bottom: 5px;
     display: flex;
 
+    .comments_userinfo_phoneview {
+        display: inline-block;
+        img {
+            margin-bottom: 5px;
+            margin-right: 5px;
+            margin-left: 5px;
+            margin-top: 0;
+            max-width: 32px;
+            max-height: 32px;
+            opacity: .8;
+            filter: alpha(opacity = 40);
+            box-shadow: 0 0 12px #000000;
+            float: left;
+        }
+        h6 {
+            display: inline;
+            font-size: 9pt;
+        }
+        a:link {
+            color: #00d3d3;
+            font-weight: normal;
+        }
+        a:visited {
+            color: #00d3d3;
+            font-weight: normal;
+        }
+        a:hover {
+            color: #ffffff;
+            font-weight: normal;
+        }
+        @media (min-width: 576px) {
+            display: none;
+        }
+    }
 
     .comments_userinfo {
         float: left;
@@ -33,8 +67,14 @@
 
         img {
             margin-bottom: 5px;
+            margin-right: 5px;
+            margin-left: 5px;
             margin-top: 0;
+            max-width: 100px;
             width: 75%;
+            opacity: .8;
+            filter: alpha(opacity = 40);
+            box-shadow: 0 0 12px #000000;
             @media (min-width: 992px) {
                 width: 100%;
             }
@@ -42,7 +82,6 @@
         @media (min-width: 576px) {
             display: inline;
         }
-
     }
     .comment_post_detail {
         position: relative;
@@ -54,12 +93,20 @@
             width: 78%;
         }
         .comments_line {
-
             border-bottom: 1px solid #1a3232;
-
         }
-
-
+        .comments_title_phoneview {
+            display: block;
+            @media (min-width: 576px) {
+                display: none;
+            }
+        }
+        .comments_title {
+            display: none;
+            @media (min-width: 576px) {
+                display: block;
+            }
+        }
         .primary_button {
             margin-top: 0;
             padding-left: 10px;
@@ -89,6 +136,12 @@
                 color: #ffffff;
                 font-weight: normal;
             }
+            span {
+                display: none;
+                @media (min-width: 576px) {
+                    display: inline;
+                }
+            }
         }
         .comment_post_text {
             a:link {
@@ -111,22 +164,15 @@
     margin-top: 8px;
 }
 #line_above_info {
-    display: none;
-    margin-top: 15px;
+    display: block;
+    margin-top: 5px;
     margin-bottom: 5px;
 }
-@media (max-width: 991.99px) {
+@media (min-width: 576px) {
     #line_above_info {
-        display: block;
+        margin-top: 15px;
     }
-    #line_below_info {
-        display: none;
-    }
-
 }
-
-
-
 @media (min-width: 992px) {
     #line_above_info {
         display: none;
@@ -134,5 +180,4 @@
     #line_below_info {
         display: block;
     }
-
 }

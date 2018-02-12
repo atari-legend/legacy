@@ -86,16 +86,16 @@ function commentdelete(JScomID,JSusers_id) {
         <div class="comments_post_box">
 
             <div class="comments_userinfo">
-                {if isset($line.image) and $line.image != ''}
-                    <a href="../games/games_detail.php?game_id={$line.game_id}" class="links_addnew_link">
-                    <img src="../../includes/show_image.php?file={$line.image}&amp;resize=160,null,null,null" alt="{$line.game}" width="160px" class="user_stats_img_dark" style="max-width:95%;">
-                    </a>
+                {if isset($line.avatar_image) and $line.avatar_image != ''}
+                    <img src="../../includes/show_image.php?file={$line.avatar_image}&amp;resize=100,null,null,null" alt="{$line.user_name}" width="100px">
+                {else}
+                    <img src="../../includes/show_image.php?file={$style_dir}images/default_avatar_image.png&amp;resize=100,null,null,null" alt="{$line.user_name}" width="100px">
                 {/if}
                 <a href="../user/user_detail.php?user_id_selected={$line.users_id}" class="standard_tile_link">{$line.user_name}</a>
                 <br><br><br>
                 Joined: {$line.user_joindate}
                 <br>
-                Comments: <a href="../administration/comments.php?c_counter={$links.v_counter}&amp;users_id={$line.users_id}&amp;view=users_comments" class="links_addnew_link">{$line.user_comment_nr}</a>
+                Comments: <a href="../administration/comments.php?users_id={$line.users_id}&amp;view=users_comments" class="links_addnew_link">{$line.user_comment_nr}</a>
                 <br>
                 Submissions: {$line.usersubmit_number}
                 <br>
@@ -103,7 +103,17 @@ function commentdelete(JScomID,JSusers_id) {
             </div>
 
             <div class="comment_post_detail">
-                <h4>
+                <div class="comments_userinfo_phoneview">
+                    {if isset($line.avatar_image) and $line.avatar_image != ''}
+                        <img src="../../includes/show_image.php?file={$line.avatar_image}&amp;resize=100,null,null,null" alt="{$line.user_name}" width="100px">
+                    {else}
+                        <img src="../../includes/show_image.php?file={$style_dir}images/default_avatar_image.png&amp;resize=100,null,null,null" alt="{$line.user_name}" width="100px">
+                    {/if}
+                    <h6>
+                        <a href="../user/user_detail.php?user_id_selected={$line.users_id}">{$line.user_name}</a>
+                    </h6>
+                </div>
+                <h4 class="comments_title">
                     <a href="../games/games_detail.php?game_id={$line.game_id}" class="links_addnew_link">{$line.game}</a>
                 </h4>
                 <ul class="comment_buttons">
@@ -115,7 +125,7 @@ function commentdelete(JScomID,JSusers_id) {
                     </li>
                     {/if}
                     <li class="primary_button">
-                        <a href="../games/games_comment_edit.php?game_user_comments_id={$line.game_user_comments_id}{$links.users_comments}&amp;v_counter={$links.v_counter}" class="links_addnew_link">
+                        <a href="../games/games_comment_edit.php?comments_id={$line.comments_id}" class="links_addnew_link">
                                 <i class="fa fa-pencil" aria-hidden="true"></i>
                         </a>
                     </li>
@@ -131,8 +141,11 @@ function commentdelete(JScomID,JSusers_id) {
                     </li>
                 </ul>
                 <div class="comments_line" id="line_above_info"></div>
+                <h4 class="comments_title_phoneview">
+                    <a href="../games/games_detail.php?game_id={$line.game_id}" class="links_addnew_link">{$line.game}</a>
+                </h4>
                 <div class="comments_post_info">
-                    Posted by <a href="../user/user_detail.php?user_id_selected={$line.users_id}">{$line.user_name}</a> on {$line.date}
+                    Posted <span>by <a href="../user/user_detail.php?user_id_selected={$line.users_id}">{$line.user_name}</a></span> on {$line.date}
                 </div>
                 <div class="comments_line" id="line_below_info"></div>
                 <div class="comment_post_text">
@@ -141,27 +154,11 @@ function commentdelete(JScomID,JSusers_id) {
                     <br>
                     <br>
                 </div>
-
             </div>
-
         </div>
         {/foreach}
-
         {* END NEW COMMENT BOX *}
     </div>
-    <div class="standard_tile_text_center">
-        {if $links.linkback != ''}
-            <a href ="../games/games_comment.php{$links.linkback}" class="standard_tile_link">Previous Comments</a> |
-        {/if}
-        {if $links.linknext != ''}
-            <a href="../games/games_comment.php{$links.linknext}" class="standard_tile_link">Next Comments</a>
-        {/if}
-    </div>
-    <br>
-    <br>
-        <div class="standard_tile_text_center">
-            <a href="javascript:history.go(-1)" class="standard_tile_link">back</a>
-        </div>
     <br>
 </div>
 {/block}
