@@ -18,7 +18,8 @@ class Link {
     private $userid;
     private $category_name;
 
-    public function __construct($id, $name, $url, $description, $imgext, $inactive, $user, $date, $userid, $category_name) {
+    public function __construct($id, $name, $url, $description, $imgext, $inactive, $user, $date, $userid, 
+        $category_name) {
         $this->id = $id;
         $this->name = $name;
         $this->url = $url;
