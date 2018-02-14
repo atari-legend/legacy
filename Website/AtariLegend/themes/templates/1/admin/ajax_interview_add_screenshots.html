@@ -17,7 +17,7 @@
         {foreach from=$screenshots item=line}
             <tr>
                 <td style="width:1%;border:0;">
-                    <a href="javascript:deletecomment({$line.interview_screenshot_id},{$interview.interview_id})" class="standard_tile_link">
+                    <a href="javascript:deletecomment({$line.interview_screenshot_id},{$interview_id})" class="standard_tile_link">
                         <i class="fa fa-trash-o" aria-hidden="true" title="Click to delete screenshot"></i>
                     </a>
                 </td>
@@ -48,7 +48,7 @@
                 <br>
                 <br>
                 <input type="hidden" name="MAX_FILE_SIZE" value="100000">
-                <input type="button" value="Add" onclick="addScreenshottoInterview({$interview_id})" class="secondary_button">
+                <input type="button" value="Add" onclick="addScreenshottoInterview({$interview_id},'{$style_dir}')" class="secondary_button">
         </fieldset>
     </div>
     </br>
