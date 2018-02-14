@@ -134,11 +134,11 @@ while ($query_comment = $sql_comment->fetch_array(MYSQLI_BOTH)) {
     //  Retrive userstats from database
     $query_user = $mysqli->query("SELECT *
                                FROM comments
-                               WHERE user_id = $query_comment[user_id]")
+                               WHERE user_id = '$query_comment[user_id]'")
                                or die("Could not count user comments");
     $usercomment_number = $query_user->num_rows;
 
-    $query_submitinfo = $mysqli->query("SELECT * FROM game_submitinfo WHERE user_id = $query_comment[user_id]")
+    $query_submitinfo = $mysqli->query("SELECT * FROM game_submitinfo WHERE user_id = '$query_comment[user_id]'")
     or die("Could not count user submissions");
     $usersubmit_number = $query_submitinfo->num_rows;
 
