@@ -66,21 +66,14 @@ function openTab (evt, tabName, screenshotsNr) {
             var stringComment = string.concat(i);
             var comment = document.getElementById(stringComment).value;
 
-            if (comment === '') {
-                var string3 = 'output_';
-                var stringOutput = string3.concat(i);
-                var output = document.getElementById(stringOutput);
-                output.style.display = 'none';
-            } else {
-                var string2 = 'preview_comment_';
-                var stringPreviewComment = string2.concat(i);
-                document.getElementById(stringPreviewComment).innerHTML = comment;
+            var string2 = 'preview_comment_';
+            var stringPreviewComment = string2.concat(i);
+            document.getElementById(stringPreviewComment).innerHTML = comment;
 
-                var string4 = 'output_';
-                var stringOutput2 = string4.concat(i);
-                var output2 = document.getElementById(stringOutput2);
-                output2.style.display = 'inline';
-            }
+            var string3 = 'output_';
+            var stringOutput2 = string3.concat(i);
+            var output2 = document.getElementById(stringOutput2);
+            output2.style.display = 'inline';
         }
     }
 }
