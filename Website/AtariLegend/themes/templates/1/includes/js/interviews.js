@@ -9,7 +9,7 @@ $(document).ready(function () {
     $('select[name=individual]').altAutocomplete();
 });
 
-function openTab (evt, tabName, screenshotsNr) {
+window.openTab = function (evt, tabName, screenshotsNr) {
     // Declare all variables
     var i, tabcontent, tablinks;
 
@@ -128,72 +128,59 @@ window.deleteinterview = function (str) {
 }
 
 // open the screenshot selection box
-function popInterviewAddScreenshots (str) {
+window.popInterviewAddScreenshots = function (str) {
     if (str === '') {
         $('#interview_expand_screenshots').html('');
     } else {
-        if (window.XMLHttpRequest) {
-            // code for IE7+, Firefox, Chrome, Opera, Safari
-            xmlhttp = new XMLHttpRequest();
-        } else {
-            // code for IE6, IE5
-            xmlhttp = new ActiveXObject('Microsoft.XMLHTTP');
-        }
-        xmlhttp.onreadystatechange = function () {
-            if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
-                document.getElementById('interview_expand_screenshots').innerHTML = xmlhttp.responseText;
-                document.getElementById('screenshot_link').innerHTML = '<a onclick="closeAddScreenshots('+str+')" style="cursor: pointer;" class="left_nav_link"><i class="fa fa-minus-square-o" aria-hidden="true"></i> Add screenshots</a>';
+        $.ajaxQueue({
+            // The URL for the request
+            url: '../interviews/ajax_addscreenshots_interview.php',
+            data: 'interview_id=' + str,
+            type: 'GET',
+            dataType: 'html',
+            // Code to run if the request succeeds;
+            success: function (html) {
+                $('#interview_expand_screenshots').html(html);
+                $('#screenshot_link').html('<a onclick="closeAddScreenshots(' + str + ')" style="cursor: pointer;" class="left_nav_link"><i class="fa fa-minus-square-o" aria-hidden="true"></i> Add screenshots</a>');
             }
-        }
-        xmlhttp.open('GET', '../interviews/ajax_addscreenshots_interview.php?interview_id='+ str, true);
-        xmlhttp.send();
+        });
     }
 }
 
 // close the screenshot selection box
-function closeAddScreenshots (str) {
+window.closeAddScreenshots = function (str) {
     document.getElementById('interview_expand_screenshots').innerHTML = '';
     document.getElementById('screenshot_link').innerHTML = '<a onclick="popInterviewAddScreenshots(" +str+ ")" style="cursor: pointer;" class="left_nav_link"><i class="fa fa-plus-square-o" aria-hidden="true"></i> Add screenshots</a>';
 }
 
 // Save the screenshots to the interview
-function addScreenshottoInterview (interviewId, styleDir) {
+window.addScreenshottoInterview = function (interviewId, styleDir) {
     if (interviewId === '') {
-        document.getElementById('interview_screenshot_list').innerHTML = '';
+        $('#interview_screenshot_list').html('');
     } else {
-        if (window.XMLHttpRequest) {
-            // code for IE7+, Firefox, Chrome, Opera, Safari
-            xmlhttp = new XMLHttpRequest();
-        } else {
-            // code for IE6, IE5
-            xmlhttp = new ActiveXObject('Microsoft.XMLHTTP');
-        }
-        xmlhttp.onreadystatechange = function () {
-            if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
-                data = xmlhttp.responseText.split('[BRK]');
-                document.getElementById('interview_screenshot_list').innerHTML = data[0];
-                $.notify_osd.create({
-                    'text': data[1], // notification message
-                    'icon': styleDir + 'images/osd_icons/star.png', // icon path, 48x48
-                    'sticky': false, // if true, timeout is ignored
-                    'timeout': 4, // disappears after 6 seconds
-                    'dismissable': true// can be dismissed manually
-                });
+        var form = $('#screenshot_add_to_interview')[0];
+        var formValues = new FormData(form);
+        $.ajax({
+            // The URL for the request
+            url: '../interviews/db_interview.php?action2=add_screens',
+            data: formValues,
+            type: 'POST',
+            contentType: false,
+            processData: false,
+            dataType: 'html',
+            // Code to run if the request succeeds;
+            success: function (html) {
+                var returnHtml = html.split('[BRK]');
+                $('#interview_screenshot_list').html(returnHtml[0]);
+                window.OSDMessageDisplay(returnHtml[1]);
                 document.getElementById('screenshot_add_to_interview').reset();
             }
-        }
-
-        var formData = new FormData(document.getElementById('screenshot_add_to_interview'));
-
-        xmlhttp.open('POST', '../interviews/db_interview.php?action2=add_screens', true);
-        xmlhttp.send(formData);
+        });
     }
 }
 
 // the code for the screenshot selector
-function myFunction () {
-    $but = $('#file_upload_game_file');
-
+window.myFunction = function () {
     $('input:file[id=file_upload]').change(function () {
         document.getElementById('file_upload_game_screenshots').value = 'file(s) selected';
     });
