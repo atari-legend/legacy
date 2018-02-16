@@ -22,7 +22,7 @@ include("../../config/common.php");
 include("../../config/admin.php");
 //include("../../config/admin_rights.php"); /*--> We can not use it like this because of the ajax. redirecting does not work correctly with the inheritance of Ajax.
 
-if ($action == "stop") {
+if (isset($action) and $action == "stop") {
     echo "test";
     exit;
 }
