@@ -13,6 +13,7 @@
     "globals": {
         "Tabulator": true,
         "md5": true,
-        "hex_sha512": true
+        "hex_sha512": true,
+        "previewText": true
     }
 }
