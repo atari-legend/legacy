@@ -89,8 +89,20 @@ window.deletecomment = function (str, str2) {
         buttons: {
             'Delete': function () {
                 $(this).dialog('close');
-                var url = 'db_interview.php?interview_id=' + str2 + '&screenshot_id=' + str + '&action=delete_screenshot_comment';
-                location.href = url;
+                $.ajaxQueue({
+                    // The URL for the request
+                    url: 'db_interview.php',
+                    data: 'interview_id=' + str2 + '&screenshot_id=' + str + '&action=delete_screenshot_comment',
+                    type: 'POST',
+                    dataType: 'html',
+                    // Code to run if the request succeeds;
+                    success: function (html) {
+                        var returnHtml = html.split('[BRK]');
+                        $('#interview_screenshot_list').html(returnHtml[0]);
+                        window.OSDMessageDisplay(returnHtml[1]);
+                        document.getElementById('screenshot_add_to_interview').reset();
+                    }
+                });
             },
             Cancel: function () {
                 $(this).dialog('close');
@@ -143,7 +155,7 @@ window.popInterviewAddScreenshots = function (str) {
 // close the screenshot selection box
 window.closeAddScreenshots = function (str) {
     document.getElementById('interview_expand_screenshots').innerHTML = '';
-    document.getElementById('screenshot_link').innerHTML = '<a onclick="popInterviewAddScreenshots(" +str+ ")" style="cursor: pointer;" class="left_nav_link"><i class="fa fa-plus-square-o" aria-hidden="true"></i> Add screenshots</a>';
+    document.getElementById('screenshot_link').innerHTML = '<a onclick="popInterviewAddScreenshots(' + str + ')" style="cursor: pointer;" class="left_nav_link"><i class="fa fa-plus-square-o" aria-hidden="true"></i> Add screenshots</a>';
 }
 
 // Save the screenshots to the interview
