@@ -131,43 +131,6 @@ if (isset($action2) and $action2 == 'add_screens') {
     $smarty->display("file:" . $cpanel_template_folder . "ajax_interview_add_screenshots.html");
 }
 
-//If we pressed the delete screenshot link
-if (isset($action) and $action == 'delete_screen') {
-    include("../../config/admin_rights.php");
-    $sql_interviewshot = $mysqli->query("SELECT * FROM screenshot_interview
-                        WHERE interview_id = $interview_id
-                    AND screenshot_id = $screenshot_id") or die("Database error - selecting screenshots interview");
-
-    $interviewshot   = $sql_interviewshot->fetch_row();
-    $interviewshotid = $interviewshot[0];
-
-    create_log_entry('Interviews', $interview_id, 'Screenshots', $interview_id, 'Delete', $_SESSION['user_id']);
-
-    //delete the screenshot comment from the DB table
-    $sdbquery = $mysqli->query("DELETE FROM interview_comments WHERE screenshot_interview_id = $interviewshotid") or die("Error deleting comment");
-
-    //get the extension
-    $SCREENSHOT = $mysqli->query("SELECT * FROM screenshot_main
-                    WHERE screenshot_id = '$screenshot_id'") or die("Database error - selecting screenshots");
-
-    $screenshotrow  = $SCREENSHOT->fetch_array(MYSQLI_BOTH);
-    $screenshot_ext = $screenshotrow['imgext'];
-
-    $sql = $mysqli->query("DELETE FROM screenshot_main WHERE screenshot_id = '$screenshot_id' ");
-    $sql = $mysqli->query("DELETE FROM screenshot_interview WHERE screenshot_id = '$screenshot_id' ");
-
-    $new_path = $interview_screenshot_save_path;
-    $new_path .= $screenshot_id;
-    $new_path .= ".";
-    $new_path .= $screenshot_ext;
-
-    unlink("$new_path");
-
-    $_SESSION['edit_message'] = 'Screenshot (and comment) deleted succesfully';
-
-    header("Location: ../interviews/interviews_screenshots_add.php?interview_id=$interview_id");
-}
-
 //*************************************************************************
 // Delete the interview and return to the interview page
 //*************************************************************************
@@ -219,39 +182,84 @@ if (isset($action) and $action == "delete_interview") {
 
 //If the delete comment has been triggered
 if (isset($action) and $action == 'delete_screenshot_comment') {
-    include("../../config/admin_rights.php");
-    $sql_interviewshot = $mysqli->query("SELECT * FROM screenshot_interview
-                          WHERE interview_id = $interview_id
-                    AND screenshot_id = $screenshot_id") or die("Database error - selecting screenshots interview");
+    if ($_SESSION['permission']==1 or $_SESSION['permission']=='1') {
+        $sql_interviewshot = $mysqli->query("SELECT * FROM screenshot_interview
+                              WHERE interview_id = $interview_id
+                        AND screenshot_id = $screenshot_id") or die("Database error - selecting screenshots interview");
 
-    $interviewshot   = $sql_interviewshot->fetch_row();
-    $interviewshotid = $interviewshot[0];
+        $interviewshot   = $sql_interviewshot->fetch_row();
+        $interviewshotid = $interviewshot[0];
 
-    create_log_entry('Interviews', $interview_id, 'Screenshots', $interview_id, 'Delete', $_SESSION['user_id']);
+        create_log_entry('Interviews', $interview_id, 'Screenshots', $interview_id, 'Delete', $_SESSION['user_id']);
 
-    //delete the screenshot comment from the DB table
-    $sdbquery = $mysqli->query("DELETE FROM interview_comments WHERE screenshot_interview_id = $interviewshotid") or die("Error deleting comment");
+        //delete the screenshot comment from the DB table
+        $sdbquery = $mysqli->query("DELETE FROM interview_comments WHERE screenshot_interview_id = $interviewshotid") or die("Error deleting comment");
 
-    //get the extension
-    $SCREENSHOT = $mysqli->query("SELECT * FROM screenshot_main
-                    WHERE screenshot_id = '$screenshot_id'") or die("Database error - selecting screenshots");
+        //get the extension
+        $SCREENSHOT = $mysqli->query("SELECT * FROM screenshot_main
+                        WHERE screenshot_id = '$screenshot_id'") or die("Database error - selecting screenshots");
 
-    $screenshotrow  = $SCREENSHOT->fetch_array(MYSQLI_BOTH);
-    $screenshot_ext = $screenshotrow['imgext'];
+        $screenshotrow  = $SCREENSHOT->fetch_array(MYSQLI_BOTH);
+        $screenshot_ext = $screenshotrow['imgext'];
 
-    $sql = $mysqli->query("DELETE FROM screenshot_main WHERE screenshot_id = '$screenshot_id' ");
-    $sql = $mysqli->query("DELETE FROM screenshot_interview WHERE screenshot_id = '$screenshot_id' ");
+        $sql = $mysqli->query("DELETE FROM screenshot_main WHERE screenshot_id = '$screenshot_id' ");
+        $sql = $mysqli->query("DELETE FROM screenshot_interview WHERE screenshot_id = '$screenshot_id' ");
 
-    $new_path = $interview_screenshot_save_path;
-    $new_path .= $screenshot_id;
-    $new_path .= ".";
-    $new_path .= $screenshot_ext;
+        $new_path = $interview_screenshot_save_path;
+        $new_path .= $screenshot_id;
+        $new_path .= ".";
+        $new_path .= $screenshot_ext;
 
-    unlink("$new_path");
+        unlink("$new_path");
+    } else {
+        $osd_message = "You do not have the necessary authorizations to perform this action";
+    }
 
-    $_SESSION['edit_message'] = 'Screenshot and comment deleted succesfully';
+    if (isset($osd_message)) {
+    } else {
+        $osd_message = "No screenshot uploaded";
+    }
+    
+    //Let's get the screenshots for the interview
+    $sql_screenshots = $mysqli->query("SELECT * FROM screenshot_interview
+                    LEFT JOIN screenshot_main on ( screenshot_interview.screenshot_id = screenshot_main.screenshot_id )
+                    WHERE screenshot_interview.interview_id = '$interview_id' ORDER BY screenshot_interview.screenshot_id ASC") or die("Database error - getting screenshots & comments");
 
-    header("Location: ../interviews/interviews_edit.php?interview_id=$interview_id");
+    //get the number of screenshots in the archive
+    $v_screenshots = $sql_screenshots->num_rows;
+    $smarty->assign("screenshots_nr", $v_screenshots);
+
+    $count = 1;
+
+    while ($screenshots = $sql_screenshots->fetch_array(MYSQLI_BOTH)) {
+        $v_int_image = $interview_screenshot_path;
+        $v_int_image .= $screenshots['screenshot_id'];
+        $v_int_image .= '.';
+        $v_int_image .= $screenshots['imgext'];
+
+        //We need to get the comments with each screenshot
+        $sql_comments = $mysqli->query("SELECT * FROM interview_comments
+                     WHERE screenshot_interview_id  = $screenshots[screenshot_interview_id]") or die("Database error - getting screenshots comments");
+
+        $comments = $sql_comments->fetch_array(MYSQLI_BOTH);
+
+        $smarty->append('screenshots', array(
+            'interview_screenshot' => $v_int_image,
+            'interview_screenshot_id' => $screenshots['screenshot_id'],
+            'interview_screenshot_count' => $count,
+            'interview_screenshot_comment' => $comments['comment_text']
+        ));
+        $count = $count + 1;
+    }
+
+    $osd_message = 'Screenshot and comment deleted succesfully';
+    $smarty->assign('osd_message', $osd_message);
+
+    $smarty->assign('smarty_action', 'add_screen_to_interview_return');
+    $smarty->assign('interview_id', $interview_id);
+
+    //Send to smarty for return value
+    $smarty->display("file:" . $cpanel_template_folder . "ajax_interview_add_screenshots.html");
 }
 
 //*************************************************************************
