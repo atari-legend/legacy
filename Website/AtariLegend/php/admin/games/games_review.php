@@ -30,6 +30,9 @@ list($start2, $start3) = explode(":", exec('date +%N:%S'));
 $query_number = $mysqli->query("SELECT * FROM review_main WHERE review_edit = '0'") or die("Couldn't get the number of reviews");
 $v_reviews = $query_number->num_rows;
 
+$query_reviewed = $mysqli->query("SELECT * FROM review_game GROUP BY game_id HAVING COUNT(DISTINCT game_id) = 1") or die("Couldn't get the number of reviewed games");
+$v_review_games = $query_reviewed->num_rows;
+
 $RESULTGAME = "SELECT
                     game.game_id,
                     game.game_name,
@@ -46,13 +49,12 @@ $RESULTGAME = "SELECT
                     LEFT JOIN review_main ON ( review_main.review_id = review_game.review_id)
                     LEFT JOIN users ON ( review_main.user_id = users.user_id)
                     WHERE review_game.game_id IS NOT NULL 
-                    GROUP BY game.game_id, game.game_name HAVING COUNT(DISTINCT game.game_id, game.game_name) = 1
-                    ORDER BY review_main.review_date DESC";
+                    GROUP BY game.game_id, game.game_name, userid HAVING COUNT(DISTINCT game.game_id, game.game_name, userid) = 1
+                    ORDER BY game_name ASC";
 
 $games = $mysqli->query($RESULTGAME);
 
 $rows = $games->num_rows;
-$v_reviewed_games = $rows;
 
 if ($rows > 0) {
     if (empty($i)) {
@@ -62,18 +64,12 @@ if ($rows > 0) {
         $i++;
         $review_date = date("F j, Y", $row['review_date']);
 
-        //check how many reviews there are for the game
-        $number_revs = $mysqli->query("SELECT * FROM review_game WHERE game_id='$row[game_id]'") or die("couldn't get number of reviews");
-
-        $array_number = $number_revs->num_rows;
-
         $smarty->append('review', array(
             'game_id' => $row['game_id'],
             'game_name' => $row['game_name'],
             'game_publisher' => $row['pub_dev_name'],
             'review_date' => $review_date,
-            'username' => $row['userid'],
-            'number_reviews' => $array_number
+            'username' => $row['userid']
         ));
     }
 }
@@ -86,7 +82,7 @@ $smarty->assign('az_value', $az_value);
 $smarty->assign('az_output', $az_output);
 
 $smarty->assign('review_nr', $v_reviews);
-$smarty->assign('game_review_nr', $v_reviewed_games);
+$smarty->assign('game_review_nr', $v_review_games);
 $smarty->assign("user_id", $_SESSION['user_id']);
 
 //Send all smarty variables to the templates
