@@ -58,7 +58,7 @@ The main game review
                     <th class="mw-20">Publisher</th>
                     <th class="mw-20">Username</th>
                     <th class="mw-20">Review date</th>
-                    <th class="mw-5">Nr</th>
+                    <th class="mw-5">Edit</th>
                 </tr>
                 {if isset($review)}
                 {foreach from=$review item=line}
@@ -67,7 +67,7 @@ The main game review
                         <td><span class="standard_tile_text_left">{if $line.game_publisher != ''}{$line.game_publisher}{else}<i>n/a</i>{/if}</span></td>
                         <td><span class="standard_tile_text_left">{$line.username}</span></td>
                         <td><span class="standard_tile_text_left">{$line.review_date}</span></td>
-                        <td><span class="standard_tile_text_left">{if $line.number_reviews != ''}{$line.number_reviews}{else}<i>0</i>{/if}</span></td>
+                        <td><span class="standard_tile_text_left"></span></td>
                     </tr>
                 {/foreach}
                 {/if}
