@@ -18,13 +18,34 @@ include("../../config/admin.php");
 include("../../vendor/phpmailer/phpmailer/PHPMailerAutoload.php");
 include("../../config/admin_rights.php");
 
+require_once __DIR__."/../../common/Model/Database/ChangeLog.php" ;
+require_once __DIR__."/../../common/DAO/ChangeLogDAO.php" ;
+
+$changeLogDao = new \AL\Common\DAO\ChangeLogDAO($mysqli);
+
 // Ajax driven delete user query
 if (isset($action) and $action == "delete_user") {
     if (isset($user_id)) {
         $start = microtime(true);
         $i     = 0;
         foreach ($user_id as $user) {
-            create_log_entry('Users', $user, 'User', $user, 'Delete', $_SESSION['user_id']);
+            $result = $mysqli->query("SELECT userid FROM users WHERE user_id=$user");
+            $row = $result->fetch_assoc();
+            $user_name = $row["userid"];
+
+            $changeLogDao->insertChangeLog(
+                new \AL\Common\Model\Database\ChangeLog(
+                    -1,
+                    "Users",
+                    $user,
+                    $user_name,
+                    "User",
+                    $user,
+                    $user_name,
+                    $_SESSION['user_id'],
+                    \AL\Common\Model\Database\ChangeLog::ACTION_DELETE
+                )
+            );
 
             $sql = $mysqli->query("DELETE FROM users WHERE user_id = '$user' ") or die("error deleting user");
             $i++;
@@ -92,7 +113,23 @@ if ((isset($action) and $action == "deactivate_user")) {
         $start = microtime(true);
         $i     = 0;
         foreach ($user_id as $user) {
-            create_log_entry('Users', $user, 'User', $user, 'Update', $_SESSION['user_id']);
+            $result = $mysqli->query("SELECT userid FROM users WHERE user_id=$user");
+            $row = $result->fetch_assoc();
+            $user_name = $row["userid"];
+
+            $changeLogDao->insertChangeLog(
+                new \AL\Common\Model\Database\ChangeLog(
+                    -1,
+                    "Users",
+                    $user,
+                    $user_name,
+                    "User",
+                    $user,
+                    $user_name,
+                    $_SESSION['user_id'],
+                    \AL\Common\Model\Database\ChangeLog::ACTION_UPDATE
+                )
+            );
 
             $sql = $mysqli->query("UPDATE users SET inactive = '1' WHERE user_id = '$user'; ") or die("error updating user");
             $i++;
@@ -109,9 +146,25 @@ if ((isset($action) and $action == "activate_user")) {
         $start = microtime(true);
         $i     = 0;
         foreach ($user_id as $user) {
-            create_log_entry('Users', $user, 'User', $user, 'Update', $_SESSION['user_id']);
+            $result = $mysqli->query("SELECT userid FROM users WHERE user_id=$user");
+            $row = $result->fetch_assoc();
+            $user_name = $row["userid"];
 
-            $sql = $mysqli->query("UPDATE users SET inactive = ' ' WHERE user_id = '$user'; ") or die("error updating user");
+            $changeLogDao->insertChangeLog(
+                new \AL\Common\Model\Database\ChangeLog(
+                    -1,
+                    "Users",
+                    $user,
+                    $user_name,
+                    "User",
+                    $user,
+                    $user_name,
+                    $_SESSION['user_id'],
+                    \AL\Common\Model\Database\ChangeLog::ACTION_UPDATE
+                )
+            );
+
+            $sql = $mysqli->query("UPDATE users SET inactive = 0 WHERE user_id = '$user'; ") or die("error updating user");
             $i++;
         }
         $time_elapsed_secs        = microtime(true) - $start;
