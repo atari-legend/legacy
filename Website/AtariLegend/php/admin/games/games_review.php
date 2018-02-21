@@ -26,6 +26,17 @@ include("../../admin/games/quick_search_games.php");
 $start1 = gettimeofday();
 list($start2, $start3) = explode(":", exec('date +%N:%S'));
 
+//Get list of all games
+$sql_games = $mysqli->query("SELECT * FROM game ORDER BY game_name ASC") or die("Couldn't query games database");
+
+while ($games = $sql_games->fetch_array(MYSQLI_BOTH)) {
+    $smarty->append('games', array(
+        'game_id' => $games['game_id'],
+        'game_name' => $games['game_name']
+    ));
+}
+
+
 //get the number of reviews in the archive
 $query_number = $mysqli->query("SELECT * FROM review_main WHERE review_edit = '0'") or die("Couldn't get the number of reviews");
 $v_reviews = $query_number->num_rows;
