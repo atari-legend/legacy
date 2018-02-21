@@ -17,13 +17,17 @@
         {foreach from=$screenshots item=line}
             <tr>
                 <td style="width:1%;border:0;">
-                    <a href="javascript:deletecomment({$line.interview_screenshot_id},{$interview.interview_id})" class="standard_tile_link">
-                        <i class="fa fa-trash-o" aria-hidden="true" title="Click to delete screenshot"></i>
-                    </a>
+                    <ul class="interview_buttons edit">
+                        <a href="javascript:deletecomment({$line.interview_screenshot_id},{$interview_id})" class="standard_tile_link">
+                            <li class="primary_button">
+                                <i class="fa fa-trash-o" aria-hidden="true" title="Click to delete screenshot"></i>
+                            </li>
+                        </a>
+                    </ul>
                 </td>
                 <td style="width:9%;border:0;">
                     <a href="../../includes/show_image.php?file={$line.interview_screenshot}" data-lightbox="image-1">
-                        <img src="../../includes/show_image.php?file={$line.interview_screenshot}&amp;resize=75,null,null,null&amp;crop=null,null,null,null" alt="screenshot" style="display:inline; margin:5px;" class="game_screenshot_img">
+                        <img src="../../includes/show_image.php?file={$line.interview_screenshot}&amp;resize=75,null,null,null&amp;crop=null,null,null,null" alt="screenshot" style="display:inline; margin:5px;" class="interview_screenshot_img">
                     </a>
                 </td>
                 <td style="width:90%;border:0;">
@@ -48,7 +52,7 @@
                 <br>
                 <br>
                 <input type="hidden" name="MAX_FILE_SIZE" value="100000">
-                <input type="button" value="Add" onclick="addScreenshottoInterview({$interview_id})" class="secondary_button">
+                <input type="button" value="Add" onclick="addScreenshottoInterview({$interview_id},'{$style_dir}')" class="secondary_button">
         </fieldset>
     </div>
     </br>
