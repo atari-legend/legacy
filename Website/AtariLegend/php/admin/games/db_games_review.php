@@ -36,7 +36,9 @@ if (isset($action) and $action == 'add_review') {
     
     $date = date_to_timestamp($date_year, $date_month, $date_day);
     
-    $sdbquery = $mysqli->query("INSERT INTO review_main (review_date) VALUES ('$date')") or die("Couldn't insert into review_main");
+    $user_id_review = $_SESSION['user_id'];
+    
+    $sdbquery = $mysqli->query("INSERT INTO review_main (review_date, user_id) VALUES ('$date',$user_id_review)") or die("Couldn't insert into review_main");
 
     //get the id of the inserted review
     $REVIEW = $mysqli->query("SELECT review_id FROM review_main
