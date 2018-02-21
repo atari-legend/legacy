@@ -27,6 +27,13 @@
 {extends file='1/admin/main.html'}
 
 {block name=java_script}
+<script src="{$template_dir}includes/js/vendor/lightbox-2.9.0.min.js"></script><!--lightbox popup script-->
+<link type="text/css" href="{$style_dir}css/vendor/lightbox-2.9.0.css" hreflang="en" rel="stylesheet">
+<script>
+    lightbox.option({
+        'showImageNumberLabel': false
+    })
+</script>
 <script src="{$template_dir}includes/js/bbcode.js"></script> <!-- Load the BBCODE script -->
 <script src="{$template_dir}includes/js/game_review.js"></script> <!-- Load all game review scripts -->
 <script src="{$template_dir}includes/js/ui.widgets.js"></script> <!-- The autocomplete and dropdown switcher -->
@@ -103,45 +110,55 @@
                 <br>
             </fieldset>
             <br>
-            <fieldset class="secondary_fieldset centered_fieldset">
-                <legend class="primary_legend">Screenshots</legend>
-                <br>
-                {if $screenshots_nr <> 0}
-                    {foreach from=$screenshots item=line}
-                        <img src="../../includes/show_image.php?file={$line.screenshot_link}&amp;resize=200,null,null,null" alt="{$line.screenshot_comment}" style="display:inline;" class="game_screenshot_img">
+            {if $screenshots_nr <> ''}
+                <fieldset class="secondary_fieldset centered_fieldset">
+                    <legend class="primary_legend">Screenshots</legend>
+                    <br>
+                    <div id="interview_screenshot_list">
+                        <table class="primary_table_list">
+                        {foreach from=$screenshots item=line}
+                            <tr>
+                                <td style="width:1%;border:0;">
+                                    <ul class="interview_buttons edit">
+                                        <a href="javascript:deletecomment({$game.game_id},{$reviewid},{$line.screenshot_id})" class="left_nav_link">
+                                            <li class="primary_button">
+                                                <i class="fa fa-trash-o" aria-hidden="true" title="Click to delete screenshot"></i>
+                                            </li>
+                                        </a>
+                                    </ul>
+                                </td>
+                                <td style="width:9%;border:0;">
+                                    <a href="../../includes/show_image.php?file={$line.screenshot_link}" data-lightbox="image-1">
+                                        <img src="../../includes/show_image.php?file={$line.screenshot_link}&amp;resize=75,null,null,null&amp;crop=null,null,null,null" alt="screenshot" style="display:inline; margin:5px;" class="interview_screenshot_img">
+                                    </a>
+                                </td>
+                                <td style="width:90%;border:0;">
+                                    <input type="text" name="inputfield[]" value="{$line.screenshot_comment}" class="standard_input input_large" style="width:95%;" id="comment_{$line.interview_screenshot_count}">
+                                </td>
+                            </tr>
+                        {/foreach}
+                        </table>
                         <br>
-                        <br>
-                        add comment : <br>
-                        <textarea rows="4" class="primary_textarea" name="inputfield[]">{$line.screenshot_comment}</textarea>
-                        <br>
-                        {if $line.screenshot_comment <> ''}
-                            <a href="javascript:deletecomment({$game.game_id},{$reviewid},{$line.screenshot_id})" class="left_nav_link">
-                                <b>delete comment</b>
-                            </a>
-                        {/if}
-                        <br>
-                        <br>
-                        <br>
-                    {/foreach}
-                {else}
-                    There are currently no screenshots attached to this game. Go to the<a href="../games/games_detail.php?game_id={$game.game_id}" class="MAINNAV"> screenshot adding</a>
-                    page to link specific screenshots to this game.
-                {/if}
-                <br>
-                <br>
-                <input type="hidden" name="action" value="{if isset($action) and $action == 'submitted'}submitted{else}edit_review{/if}">
-                <input type="hidden" name="game_id" value="{$game.game_id}">
-                <input type="hidden" name="reviewid" value="{$reviewid}">
-                <input type="submit" name="Create Review" value="{if isset($action) and $action == 'submitted'}Submit review{else}Edit{/if}" class="secondary_button">
-                {if isset($action) and $action == 'submitted'}
-                    <input type="button" name="delete" value="Delete submission" onclick="deleteSubmission({$reviewid},{$game.game_id})" class="secondary_button">
-                {else}
-                    <input type="button" name="delete" value="Delete" onclick="deletereview({$reviewid},{$game.game_id})" class="secondary_button">
-                {/if}
-                <input type="button" name="delete" value="Move to Comments" onclick="move_to_comment({$reviewid},{$game.game_id})" class="secondary_button">
-                <br>
-                <br>
-            </fieldset>
+                    </div>
+                </fieldset>  
+            {else}
+                There are currently no screenshots attached to this game. Go to the<a href="../games/games_detail.php?game_id={$game.game_id}" class="MAINNAV"> screenshot adding</a>
+                page to link specific screenshots to this game.
+            {/if}
+            <br>
+            <br>
+            <input type="hidden" name="action" value="{if isset($action) and $action == 'submitted'}submitted{else}edit_review{/if}">
+            <input type="hidden" name="game_id" value="{$game.game_id}">
+            <input type="hidden" name="reviewid" value="{$reviewid}">
+            <input type="submit" name="Create Review" value="{if isset($action) and $action == 'submitted'}Submit{else}Update{/if}" class="secondary_button">
+            {if isset($action) and $action == 'submitted'}
+                <input type="button" name="delete" value="Delete submission" onclick="deleteSubmission({$reviewid},{$game.game_id})" class="secondary_button">
+            {else}
+                <input type="button" name="delete" value="Delete" onclick="deletereview({$reviewid},{$game.game_id})" class="secondary_button">
+            {/if}
+            <input type="button" name="delete" value="Move to Comments" onclick="move_to_comment({$reviewid},{$game.game_id})" class="secondary_button">
+            <br>
+            <br>
         </form>
         <br>
         <div class="standard_tile_text_center"><a href="javascript:history.go(-1)" class="standard_tile_link">back</a></div>
