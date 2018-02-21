@@ -21,31 +21,41 @@ The main game review
 
 {block name=title}Add/Edit a game review entry{/block}
 
+{block name=java_script}
+<script src="{$template_dir}includes/js/game_review.js"></script> <!-- Load all interviews scripts -->
+<script src="{$template_dir}includes/js/ui.widgets.js"></script> <!-- load the script for the input/dropdown switcher -->
+{/block}
+
 {block name=main_tile}
 <div class="standard_tile" id="games_review">
     <h1>GAME REVIEWS</h1>
     <div class="standard_tile_line"></div>
     <div class="standard_tile_padding">
         <div class="left_nav_section">
-            In this section you can add or edit game reviews. There are currently <b>{$review_nr}</b> reviews for <b>{$game_review_nr}</b> games in the database!
+            In this section you can add a new review or edit an existing one directly from the list below. There are currently <b>{$review_nr}</b> reviews for <b>{$game_review_nr}</b> games in the database!
         </div>
         <br>
         <br>
-        <form action="../games/games_review_list.php" method="post" name="game_review" id="game_review">
         <fieldset class="secondary_fieldset centered_fieldset">
-            <legend class="primary_legend">Add new Reviews</legend>
-            <b>By name :</b>
-            <select name="gamebrowse" class="standard_select select_small">
-                <option value="" SELECTED>-</option>
-                {html_options values=$az_value output=$az_output}
+            <legend class="primary_legend">Add review</legend>
+            <form action="../games/db_games_review.php" method="post" name="game_review" id="game_review">
+            <a href="javascript:;" class="left_nav_link" id="individual_select_toggle" ><i class="fa fa-chevron-circle-down" aria-hidden="true" ></i></a>
+            <select name="game_create"
+                data-alt-autocomplete-endpoint="../../../php/admin/common/autocomplete.php?extraParams=game"
+                data-alt-autocomplete-toggle="#individual_select_toggle"
+                id="member_select" class="standard_select select_large">
+                <option value="-">-</option>
+                {foreach from=$games item=line}
+                    <option value="{$line.game_id}">{$line.game_name}</option>
+                {/foreach}
             </select>
-            <input type="text" name="gamesearch" value="" class="standard_input input_large">
-            <input type="submit" value="Search" class="secondary_button">
+            <input type="submit" value="Add" class="secondary_button">
             <br>
+            <input type="hidden" name="action" id="action" value="add_review">
+            <input type="hidden" name="user_id" id="user_id" value="{$user_id}">
+            </form>
         </fieldset>
-        <input type="hidden" name="action" id="action" value="search">
-        <input type="hidden" name="user_id" id="user_id" value="{$user_id}">
-        </form>
+        <br>
         <br>
         <br>
         {if isset($message)}
@@ -58,7 +68,7 @@ The main game review
                     <th class="mw-20">Publisher</th>
                     <th class="mw-20">Username</th>
                     <th class="mw-20">Review date</th>
-                    <th class="mw-5">Edit</th>
+                    <th class="mw-5"></th>
                 </tr>
                 {if isset($review)}
                 {foreach from=$review item=line}
@@ -67,7 +77,13 @@ The main game review
                         <td><span class="standard_tile_text_left">{if $line.game_publisher != ''}{$line.game_publisher}{else}<i>n/a</i>{/if}</span></td>
                         <td><span class="standard_tile_text_left">{$line.username}</span></td>
                         <td><span class="standard_tile_text_left">{$line.review_date}</span></td>
-                        <td><span class="standard_tile_text_left"></span></td>
+                        <td>
+                            <span class="standard_tile_text_left">
+                                <a href="games_review_add.php?game_id={$line.game_id}" class="links_addnew_link">
+                                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                                </a>
+                            </span>
+                        </td>
                     </tr>
                 {/foreach}
                 {/if}
