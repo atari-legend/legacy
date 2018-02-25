@@ -143,7 +143,7 @@ function submovetocomment(JSsubID)
                     <br>
                     Joined: {$line.user_joindate}
                     <br>
-                    Comments: {if $line.user_comment_nr eq 0} {$line.user_comment_nr} {else}<a href="../games/games_comment.php?c_counter={$structure.v_counter}&amp;users_id={$line.user_id}&amp;view=users_comments" class="links_addnew_link">{$line.user_comment_nr}</a>{/if}
+                    Comments: {if $line.user_comment_nr eq 0} {$line.user_comment_nr} {else}<a href="../administration/comments.php?user_id={$line.user_id}&amp;view=users_comments" class="links_addnew_link">{$line.user_comment_nr}</a>{/if}
                     <br>
                     Submissions: {$line.usersubmit_number}
                     <br>

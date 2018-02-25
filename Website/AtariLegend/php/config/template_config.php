@@ -20,6 +20,7 @@ if (isset($_SESSION['skin'])) {
 
     $cpanel_template_folder   = "". ROOT_PATH ."../themes/templates/1/admin/";
     $mainsite_template_folder = "". ROOT_PATH ."../themes/templates/1/main/";
+    $style_folder = "". ROOT_PATH ."../themes/styles/1/";
     $smarty->assign("template_dir", "../../themes/templates/1/");
     $smarty->assign("style_dir", "../../themes/styles/1/");
     $smarty->assign("style_dir2", "../../themes/styles/1/");  //when called from the show_image function
@@ -33,6 +34,7 @@ if (isset($_SESSION['skin'])) {
 } else {
     $cpanel_template_folder   = "". ROOT_PATH ."../themes/templates/1/admin/";
     $mainsite_template_folder = "". ROOT_PATH ."../themes/templates/1/main/";
+    $style_folder = "". ROOT_PATH ."../themes/styles/1/";
     $smarty->assign("template_dir", "../../themes/templates/1/");
     $smarty->assign("style_dir", "../../themes/styles/1/");
     $smarty->assign("style_dir2", "../../themes/styles/1/");  //when called from the show_image function
