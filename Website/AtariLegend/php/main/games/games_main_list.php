@@ -26,14 +26,12 @@ include("../../admin/games/quick_search_games.php");
 include("../../common/tiles/latest_comments_tile.php");
 include("../../common/tiles/screenstar.php");
 
-// get the game_years from the game_year table
-$sql_year = $mysqli->query("SELECT distinct game_year from game_year order by game_year")
-                     or die("problems getting data from game_year table");
+require_once __DIR__."/../../common/DAO/GameReleaseDAO.php";
 
-while ($game_year = $sql_year->fetch_array(MYSQLI_BOTH)) {
-    $smarty->append('game_year', array(
-            'game_year' => $game_year['game_year']));
-}
+$gameReleaseDao = new \AL\Common\DAO\GameReleaseDAO($mysqli);
+
+// Get all releases years
+$smarty->assign('releases_year', $gameReleaseDao->getAllReleasesYears());
 
 date_default_timezone_set('UTC');
 $start = microtime(true);
@@ -57,7 +55,7 @@ if (empty($game_author)) {
             pd1.pub_dev_id as 'publisher_id',
             pd2.pub_dev_name as 'developer_name',
             pd2.pub_dev_id as 'developer_id',
-            game_year.game_year,
+            YEAR(game_release.date) as game_release_year,
             game_cat_cross.game_cat_id,
             game_cat.game_cat_name
             FROM game
@@ -88,7 +86,7 @@ if (empty($game_author)) {
           LEFT JOIN pub_dev pd1 ON (pd1.pub_dev_id = game_publisher.pub_dev_id)
           LEFT JOIN game_developer ON (game_developer.game_id = game.game_id)
           LEFT JOIN pub_dev pd2 on (pd2.pub_dev_id = game_developer.dev_pub_id)
-          LEFT JOIN game_year on (game_year.game_id = game.game_id)
+          LEFT JOIN game_release on (game_release.game_id = game.game_id)
         WHERE ";
 } else {
     $RESULTGAME = "SELECT game.game_id,
@@ -108,7 +106,7 @@ if (empty($game_author)) {
             pd1.pub_dev_id as 'publisher_id',
             pd2.pub_dev_name as 'developer_name',
             pd2.pub_dev_id as 'developer_id',
-            game_year.game_year,
+            YEAR(game_release.date) as game_release_year,
             game_cat_cross.game_cat_id,
             game_cat.game_cat_name
             FROM game
@@ -140,7 +138,7 @@ if (empty($game_author)) {
           LEFT JOIN pub_dev pd1 ON (pd1.pub_dev_id = game_publisher.pub_dev_id)
           LEFT JOIN game_developer ON (game_developer.game_id = game.game_id)
           LEFT JOIN pub_dev pd2 on (pd2.pub_dev_id = game_developer.dev_pub_id)
-          LEFT JOIN game_year on (game_year.game_id = game.game_id)
+          LEFT JOIN game_release on (game_release.game_id = game.game_id)
         WHERE ";
 }
 
@@ -163,7 +161,7 @@ if (empty($game_author)) {
              pd1.pub_dev_id as 'publisher_id',
              pd2.pub_dev_name as 'developer_name',
              pd2.pub_dev_id as 'developer_id',
-             game_year.game_year,
+             YEAR(game_release.date) as game_release_year,
              game_cat_cross.game_cat_id,
              game_cat.game_cat_name
           FROM game_aka
@@ -195,7 +193,7 @@ if (empty($game_author)) {
           LEFT JOIN pub_dev pd1 ON (game_publisher.pub_dev_id = pd1.pub_dev_id)
           LEFT JOIN game_developer ON (game.game_id = game_developer.game_id)
           LEFT JOIN pub_dev pd2 on (pd2.pub_dev_id = game_developer.dev_pub_id)
-          LEFT JOIN game_year on (game_year.game_id = game.game_id)
+          LEFT JOIN game_release on (game_release.game_id = game.game_id)
          WHERE ";
 } else {
     $RESULTAKA = "SELECT
@@ -216,7 +214,7 @@ if (empty($game_author)) {
              pd1.pub_dev_id as 'publisher_id',
              pd2.pub_dev_name as 'developer_name',
              pd2.pub_dev_id as 'developer_id',
-             game_year.game_year,
+             YEAR(game_release.date) as game_release_year,
              game_cat_cross.game_cat_id,
              game_cat.game_cat_name
           FROM game_aka
@@ -249,7 +247,7 @@ if (empty($game_author)) {
           LEFT JOIN pub_dev pd1 ON (game_publisher.pub_dev_id = pd1.pub_dev_id)
           LEFT JOIN game_developer ON (game.game_id = game_developer.game_id)
           LEFT JOIN pub_dev pd2 on (pd2.pub_dev_id = game_developer.dev_pub_id)
-          LEFT JOIN game_year on (game_year.game_id = game.game_id)
+          LEFT JOIN game_release on (game_release.game_id = game.game_id)
          WHERE ";
 }
 
@@ -328,9 +326,9 @@ if (isset($action) and $action == "search") {
     if (empty($year) or $year == '-') {
         $year_select = "";
     } elseif ($year == "null") {
-        $year_select = " AND game_year.game_year IS NULL";
+        $year_select = " AND game_release.date IS NULL";
     } else {
-        $year_select = " AND game_year.game_year LIKE '$year'";
+        $year_select = " AND YEAR(game_release.date) = $year";
     }
 
     //check the game_author select
@@ -486,7 +484,7 @@ if (isset($action) and $action == "search") {
         }
 
         if (!empty($year_input)) {
-            $RESULTGAME .= " AND game_year.game_year LIKE '%$year_input%'";
+            $RESULTGAME .= " AND YEAR(game_release.date) = $year_input";
         } else {
             //   $RESULTGAME .= " AND game_year.game_year LIKE '%'";
         }
@@ -613,7 +611,7 @@ if (isset($action) and $action == "search") {
                 }
 
                 if (!empty($year_input)) {
-                    $RESULTAKA .= " AND game_year.game_year LIKE '%$year_input%'";
+                    $RESULTAKA .= " AND YEAR(game_release.date) = $year_input";
                 } else {
                     //   $RESULTAKA .= " AND game_year.game_year LIKE '%'";
                 }
@@ -745,8 +743,8 @@ if (isset($action) and $action == "search") {
                     if ($pub_name == '') {
                         $pub_name = 'n/a';
                     }
-                    if ($sql_game_search['game_year'] == '') {
-                        $sql_game_search['game_year'] = 'n/a';
+                    if ($sql_game_search['game_release_year'] == '') {
+                        $sql_game_search['game_release_year'] = 'n/a';
                     }
 
                     $ignore = 0;
@@ -782,7 +780,7 @@ if (isset($action) and $action == "search") {
                                 'publisher_name' => $pub_name,
                                 'developer_id' => $sql_game_search['developer_id'],
                                 'developer_name' => $dev_name,
-                                'year' => $sql_game_search['game_year'],
+                                'year' => $sql_game_search['game_release_year'],
                                 'music' => $music,
                                 'boxscan' => $box,
                                 'download' => $down,
@@ -838,7 +836,7 @@ if (isset($action) and $action == "search") {
                                 'publisher_name' => $pub_name,
                                 'developer_id' => $sql_game_search['developer_id'],
                                 'developer_name' => $dev_name,
-                                'year' => $sql_game_search['game_year'],
+                                'year' => $sql_game_search['game_release_year'],
                                 'music' => $sql_game_search['music_id'],
                                 'boxscan' => $sql_game_search['game_boxscan_id'],
                                 'download' => $sql_game_search['game_download_id'],

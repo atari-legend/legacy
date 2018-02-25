@@ -10,6 +10,10 @@
 *
 ***************************************************************************/
 
+require_once __DIR__."/../../common/DAO/GameReleaseDAO.php";
+
+$gameReleaseDao = new \AL\Common\DAO\GameReleaseDAO($mysqli);
+
 /*
 ***********************************************************************************
 This is the include to fill the quick search games side menu
@@ -47,13 +51,8 @@ while ($company_developer = $sql_developer->fetch_array(MYSQLI_BOTH)) {
 }
 
 //Get Year values to fill the searchfield
-$sql_year = $mysqli->query("SELECT distinct game_year from game_year order by game_year")
-                     or die("problems getting data from game_year table");
-
-while ($game_year = $sql_year->fetch_array(MYSQLI_BOTH)) {
-    $smarty->append('game_year', array(
-            'game_year' => $game_year['game_year']));
-}
+$years = $gameReleaseDao->getAllReleasesYears();
+$smarty->assign("game_release_years", $years);
 
 // Create dropdown values a-z
 $az_value = az_dropdown_value(0);

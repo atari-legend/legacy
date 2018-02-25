@@ -24,7 +24,8 @@ class ChangeLog {
         "Game series" => array("Game", "Series"),
         "Games" => array("AKA", "Box back", "Box front", "Comment","Creator",
             "Developer", "Fact", "File", "Mag score", "Music","Game", "Publisher",
-            "Review", "Review comment", "Screenshot", "Similar", "Submission", "Year"
+            "Review", "Review comment", "Screenshot", "Similar", "Submission", "Year",
+            "Release"
         ),
         "Individuals" => array("Image", "Individual", "Nickname"),
         "Interviews" => array("Comment", "Interview", "Screenshots"),

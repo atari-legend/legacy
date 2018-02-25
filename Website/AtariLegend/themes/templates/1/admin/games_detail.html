@@ -85,17 +85,20 @@ function add_creator() {
     document.getElementById('creator').submit();
 }
 
-function delete_year() {
+function delete_release()
+{
     document.getElementById('year').method="post";
-    document.getElementById('year').action="../games/db_games_detail.php?action=delete_year";
+    document.getElementById('year').action="../games/db_games_detail.php?action=delete_release";
     document.getElementById('year').submit();
 }
 
-function add_year() {
+function add_release()
+{
     document.getElementById('year').method="post";
-    document.getElementById('year').action="../games/db_games_detail.php?action=add_year";
+    document.getElementById('year').action="../games/db_games_detail.php?action=add_release";
     document.getElementById('year').submit();
 }
+
 
 function browseCompany(str) {
     if (str == "") {
@@ -425,38 +428,30 @@ function browseDeveloper(str) {
                     <div id="gd_release_year">
                         <form action="../games/db_games_detail.php" method="post" name="year" id="year">
                             <fieldset class="secondary_fieldset">
-                                <legend class="primary_legend">Release Year</legend>
-                                    {if isset($game_year_detail)}
-                                        {foreach from=$game_year_detail item=line}
-                                            <div class="links_mod_checkbox">
-                                                <input type="checkbox" id="{$line.game_year_id}" name="game_year_id[]" value="{$line.game_year_id}">
-                                                <label for="{$line.game_year_id}"></label>&nbsp;{$line.game_year} {if  isset($line.game_extra_info)}<b>({$line.game_extra_info})</b>{/if}
-                                            </div>
-                                            <br>
-                                        {/foreach}
-                                        <img src="../../../themes/templates/1/includes/img/arrow_ltr.gif" alt="" width="38" height="22" style="display:inline;">
-                                        <input type="button" name="valider" value="Delete" onclick="delete_year()" class="secondary_button" style="display:inline;">
+                                <legend class="primary_legend">Releases</legend>
+                                    {foreach from=$game_releases item=release}
+                                        <div class="links_mod_checkbox">
+                                            <input type="checkbox" id="release-{$release->getId()}" name="game_release_id[]" value="{$release->getId()}">
+                                            <label for="release-{$release->getId()}"></label>&nbsp;{$release->getDate()|date_format:"%Y"} {if $release->getName() != null}<b>({$release->getName()})</b>{/if}
+                                        </div>
                                         <br>
                                         <br>
-                                    {/if}
-                                    {html_select_date start_year=1984 display_days=0 display_months=0 class="standard_select"}
+                                    {/foreach}
+                                    <img src="../../../themes/templates/1/includes/img/arrow_ltr.gif" alt="" width="38" height="22" style="display:inline;">
+                                    <input type="button" name="valider" value="Delete" onclick="delete_release()" class="secondary_button" style="display:inline;">
+                                    <br/><br/>
+                                    {html_select_date start_year=1984 display_days=0 display_months=0 class="standard_select select_small"}
                                     <b>Release Year</b>
                                     <br>
-                                    <select name="game_extra_info_year" class="standard_select select_medium">
-                                        <option value="-" selected="selected">-</option>
-                                        {if isset($game_extra_info)}
-                                        {foreach from=$game_extra_info item=line}
-                                            <option value="{$line.game_extra_info_id}">{$line.game_extra_info}</option>
-                                        {/foreach}
-                                        {/if}
-                                    </select>
-                                    <b>Extra Info</b>
+                                    <input type="text" placeholder="Alt. title (optional)" name="release_name" class="standard_input">
                                     <br><br>
                                     <input type="hidden" name="game_id" value="{$game_id}">
-                                    <input type="button" value="Add" onclick="add_year()" class="secondary_button">
+                                    <input type="button" value="Add" onclick="add_release()" class="secondary_button">
                             </fieldset>
                         </form>
                         <br>
+                    </div>
+                    <div>
                     </div>
                 </div>
                 <div id="gd_center">
