@@ -1,0 +1,276 @@
+//*************************************************************/
+//**********************LEGACY SKIN****************************/
+//*************************************************************/
+//*************************************************************/
+//***************CPanel INDIVIDUALS section css****************/
+//*************************************************************/
+//*----------------------------------------------------------
+//Individuals main
+//------------------------------------------------------------ */
+
+.comments_navigator {
+    button {
+        width: 90%;
+        margin-left: 0;
+    }
+}
+
+.dropdown_show {
+    display: block;
+}
+
+.dropdown_box {
+    display: none;
+    position: absolute;
+    transform: translate3d(0, 26px, 0);
+    top: 0;
+    right: 0;
+    will-change: transform;
+    background: #0d2e2e;
+    border: 1px solid #008b8b;
+    min-width: 10rem;
+    padding: .5rem 0;
+    margin: .125rem 0 0;
+    list-style: none;
+    background-clip: padding-box;
+    z-index: 1000;
+    .dropdown_item {
+        display: block;
+        width: 100%;
+        padding-left: 5px;
+        padding-right: 5px;
+        padding-top: 3px;
+        padding-bottom: 3px;
+        clear: both;
+        border: 0;
+        cursor: pointer;
+    }
+    .dropdown_item:hover {
+        background: #227777;
+        a:link {
+            color: #ffffff;
+        }
+        a:hover {
+            color: #ffffff;
+        }
+        a:visited {
+            color: #ffffff;
+        }
+    }
+}
+
+
+.comments_post_box {
+    padding: 10px;
+    font-size: 11pt;
+    background: #294f4f;
+    color: #ffffff;
+    border: solid 1px #000000;
+    margin-bottom: 5px;
+    display: flex;
+    overflow: hidden;
+
+    .comments_userinfo_phoneview {
+        display: inline-block;
+        img {
+            margin-bottom: 5px;
+            margin-right: 5px;
+            margin-left: 5px;
+            margin-top: 0;
+            max-width: 32px;
+            max-height: 32px;
+            opacity: .8;
+            filter: alpha(opacity = 40);
+            box-shadow: 0 0 12px #000000;
+            float: left;
+        }
+        h6 {
+            display: inline;
+            font-size: 9pt;
+        }
+        a:link {
+            color: #00d3d3;
+            font-weight: normal;
+        }
+        a:visited {
+            color: #00d3d3;
+            font-weight: normal;
+        }
+        a:hover {
+            color: #ffffff;
+            font-weight: normal;
+        }
+        @media (min-width: 576px) {
+            display: none;
+        }
+    }
+
+    .comments_userinfo {
+        float: left;
+        display: none;
+        margin-right: 10px;
+
+        img {
+            margin-bottom: 5px;
+            margin-right: 5px;
+            margin-left: 5px;
+            margin-top: 0;
+            max-width: 100px;
+            width: 75%;
+            opacity: .8;
+            filter: alpha(opacity = 40);
+            box-shadow: 0 0 12px #000000;
+            @media (min-width: 992px) {
+                width: 100%;
+            }
+        }
+        @media (min-width: 576px) {
+            display: inline;
+        }
+    }
+    .comment_post_detail {
+        position: relative;
+        float: right;
+        display: inline;
+        width: 100%;
+
+        .comments_line {
+            border-bottom: 1px solid #1a3232;
+        }
+        .comments_title_phoneview {
+            display: block;
+            @media (min-width: 576px) {
+                display: none;
+            }
+        }
+        .comments_title {
+            display: none;
+            @media (min-width: 576px) {
+                display: block;
+            }
+        }
+        .comment_buttons {
+            position: absolute;
+            right: 0;
+            top: 0;
+            float: none;
+            display: inline-flex;
+            .primary_button {
+                margin-top: 0;
+                padding-left: 10px;
+                padding-right: 10px;
+                display: inline-block;
+                float: left;
+            }
+            .comments_button_dropdown {
+                position: relative;
+                @media (min-width: 576px) and (max-width: 767.99px) {
+                    display: none;
+                }
+                @media screen and (min-width: 992px) {
+                    display: none;
+                }
+            }
+            .jsCommentsEmailButton,
+            .jsCommentsEditButton,
+            .jsCommentsDeleteButton {
+                display: none;
+                @media (min-width: 576px) and (max-width: 767.99px) {
+                    display: block;
+                }
+                @media screen and (min-width: 992px) {
+                    display: block;
+                }
+            }
+        }
+        .comments_post_info {
+            clear: both;
+            font-size: 9pt;
+
+            a:link {
+                color: #00d3d3;
+                font-weight: normal;
+            }
+            a:visited {
+                color: #00d3d3;
+                font-weight: normal;
+            }
+            a:hover {
+                color: #ffffff;
+                font-weight: normal;
+            }
+            span {
+                display: none;
+                @media (min-width: 576px) {
+                    display: inline;
+                }
+            }
+        }
+        .comment_post_text {
+            position: relative;
+            z-index: 1;
+            a:link {
+                color: #00d3d3;
+                font-weight: normal;
+            }
+            a:visited {
+                color: #00d3d3;
+                font-weight: normal;
+            }
+            a:hover {
+                color: #ffffff;
+                font-weight: normal;
+            }
+            .comments_save_button {
+                float: right;
+            }
+        }
+    }
+}
+#line_below_info {
+    display: none;
+    margin-top: 8px;
+}
+#line_above_info {
+    display: block;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+@media (min-width: 576px) {
+    #line_above_info {
+        margin-top: 15px;
+    }
+}
+@media (min-width: 992px) {
+    #line_above_info {
+        display: none;
+    }
+    #line_below_info {
+        display: block;
+    }
+}
+.badge_parent {
+    transform: translateX(-100%);
+    position: relative;
+
+}
+.badge_comment_type {
+    display: block;
+    position: absolute;
+    bottom: 21px;
+    right: -41px;
+    width: 150px;
+    transform: rotate(-45deg);
+    margin-top: 5px;
+    margin-left: 3px;
+    height: 25px;
+    font-size: 10pt;
+    color: #ffffff;
+    cursor: pointer;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background: #006f6f;
+    border: 1px solid #122323;
+}
