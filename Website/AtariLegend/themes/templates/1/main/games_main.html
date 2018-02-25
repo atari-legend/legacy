@@ -281,8 +281,8 @@ The main game page
                         <div class="games_main_input_site">
                             <select name="year" id="games_main_year_drop" style="display:none;" class="standard_select">
                                 <option value="-" SELECTED>-</option>
-                                {foreach from=$game_year item=line}
-                                    <option value="{$line.game_year}">{$line.game_year}</option>
+                                {foreach from=$releases_year item=year}
+                                    <option value="{$year}">{$year}</option>
                                 {/foreach}
                             </select>
                             <input type="text" name="year_input" value="" class="standard_input input_full autocompleted" id="games_main_year_input" data-autocomplete-param="year">

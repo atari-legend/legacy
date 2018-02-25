@@ -49,7 +49,7 @@ $sql_series_link = $mysqli->query("SELECT game.game_id,
                game_developer.dev_pub_id as 'developer_id',
                pd2.pub_dev_name as 'developer_name',
                game_series_cross.game_series_cross_id,
-               game_year.game_year
+               YEAR(game_release.date) as game_release_year
                 FROM game_series_cross
                 LEFT JOIN game ON (game_series_cross.game_id = game.game_id)
                 LEFT JOIN game_series ON (game_series_cross.game_series_id = game_series.game_series_id)
@@ -57,7 +57,7 @@ $sql_series_link = $mysqli->query("SELECT game.game_id,
                 LEFT JOIN pub_dev pd1 ON (pd1.pub_dev_id = game_publisher.pub_dev_id)
                 LEFT JOIN game_developer ON (game_developer.game_id = game.game_id)
                 LEFT JOIN pub_dev pd2 on (pd2.pub_dev_id = game_developer.dev_pub_id)
-                LEFT JOIN game_year ON (game.game_id = game_year.game_id)
+                LEFT JOIN game_release ON (game.game_id = game_release.game_id)
                 WHERE game_series_cross.game_series_id='$game_series_id' GROUP BY game.game_name ORDER BY game.game_name") or die("Couldn't query Game Series Database3.1");
 // check how many games is linked to a particular series
 $sql_series_link_nr = $sql_series_link->num_rows;
@@ -78,7 +78,7 @@ while ($query_series_link = $sql_series_link->fetch_array(MYSQLI_BOTH)) { // Thi
         'developer_name' => $query_series_link['developer_name'],
         'developer_id' => $query_series_link['developer_id'],
         'game_series_cross_id' => $query_series_link['game_series_cross_id'],
-        'year' => $query_series_link['game_year']
+        'year' => $query_series_link['game_release_year']
     ));
 }
 

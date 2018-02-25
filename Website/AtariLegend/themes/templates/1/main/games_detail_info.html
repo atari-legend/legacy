@@ -125,32 +125,28 @@
                     {/if}
                 {/foreach}
             {/if}
-            {if isset($game_year)}
-                {foreach from=$game_year item=line name=game_year}
-                    <tr>
-                        <td class="w-30">
-                        {if $smarty.foreach.game_year.index == 0}
-                            <span class="games_main_detail_info_right">Year</span>
+            {if isset($releases)}
+                {foreach from=$releases item=$release name=release}
+                <tr>
+                    <td class="w-30">
+                        {if $smarty.foreach.release.index == 0}
+                            <span class="games_main_detail_info_right">Releases</span>
                         {/if}
-                            {if $line.extra_info != ''}
-                                <br><br>
+                    </td>
+                    <td class="w-5">
+                        <span class="games_main_detail_info_left text-center">-</span>
+                    </td>
+                    <td class="w-60">
+                        <span class="games_main_detail_info_left">
+                            <a href="games_main_list.php?year={$release->getDate()|date_format:"%Y"}&amp;action=search" class="standard_tile_link">
+                                {$release->getDate()|date_format:"%Y"}
+                            </a>
+                            {if $release->getName()}
+                                <small class="standard_tile_subtext">as "<em>{$release->getName()}</em>"</small>
                             {/if}
-                        </td>
-                        <td class="w-5">
-                            <span class="games_main_detail_info_left text-center">-</span>
-                            {if $line.extra_info != ''}
-                                <br><br>
-                            {/if}
-                        </td>
-                        <td class="w-60">
-                            <span class="games_main_detail_info_left">
-                                <a href="games_main_list.php?year={$line.game_year}&amp;action=search" class="standard_tile_link">{$line.game_year}</a>
-                            </span>
-                            {if $line.extra_info != ''}
-                                <br><span class="standard_tile_subtext">{$line.extra_info}</span>
-                            {/if}
-                        </td>
-                    </tr>
+                        </span>
+                    </td>
+                </tr>
                 {/foreach}
             {/if}
             {if isset($developer)}

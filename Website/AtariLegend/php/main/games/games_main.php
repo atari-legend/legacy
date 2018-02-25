@@ -29,19 +29,17 @@ include("../../common/tiles/screenstar.php");
 include("../../common/tiles/latest_comments_tile.php");
 include("../../common/tiles/changes_per_month_tile.php");
 
+require_once __DIR__."/../../common/DAO/GameReleaseDAO.php";
+
+$gameReleaseDao = new \AL\Common\DAO\GameReleaseDAO($mysqli);
+
 //no special position necesarry for the tiles (compared to the front page)
 //but I just declare the smarty var to avoid error
 $smarty->assign('who_is_it_tile', '');
 $smarty->assign('statistics_tile', '');
 
-// get the game_years from the game_year table
-$sql_year = $mysqli->query("SELECT distinct game_year from game_year order by game_year")
-                     or die("problems getting data from game_year table");
-
-while ($game_year = $sql_year->fetch_array(MYSQLI_BOTH)) {
-    $smarty->append('game_year', array(
-            'game_year' => $game_year['game_year']));
-}
+// Get all releases years
+$smarty->assign('releases_year', $gameReleaseDao->getAllReleasesYears());
 
 // get the categories for the genre dropdown
 $sql_cat = $mysqli->query("SELECT * from game_cat order by game_cat_name")

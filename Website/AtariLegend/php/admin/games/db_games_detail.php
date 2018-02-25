@@ -24,6 +24,19 @@ include("../../config/common.php");
 include("../../config/admin.php");
 include("../../config/admin_rights.php");
 
+require_once __DIR__."/../../common/DAO/GameReleaseDAO.php";
+require_once __DIR__."/../../common/DAO/ChangeLogDAO.php";
+
+$changeLogDao = new \AL\Common\DAO\ChangeLogDAO($mysqli);
+$gameReleaseDao = new \AL\Common\DAO\GameReleaseDAO($mysqli);
+
+$stmt = $mysqli->prepare("SELECT game_name FROM game WHERE game_id = ?") or die($mysqli->error);
+$stmt->bind_param("s", $game_id) or die($mysqli->error);
+$stmt->execute() or die($mysqli->error);
+$stmt->bind_result($edited_game_name) or die($mysqli->error);
+$stmt->fetch() or die($mysqli->error);
+$stmt->close();
+
 //***********************************************************************************
 //Insert new game
 //***********************************************************************************
@@ -39,6 +52,23 @@ if (isset($action) and $action == "insert_game") {
     $new_game_id = $mysqli->insert_id;
 
     create_log_entry('Games', $new_game_id, 'Game', $new_game_id, 'Insert', $_SESSION['user_id']);
+
+    // Insert a new release by default
+    $new_release_id = $gameReleaseDao->addReleaseForGame($new_game_id);
+
+    $changeLogDao->insertChangeLog(
+        new \AL\Common\Model\Database\ChangeLog(
+            -1,
+            "Games",
+            $new_game_id,
+            $newgame,
+            "Release",
+            $new_release_id,
+            $newgame,
+            $_SESSION["user_id"],
+            \AL\Common\Model\Database\ChangeLog::ACTION_INSERT
+        )
+    );
 
     header("Location: ../games/games_detail.php?game_id=$new_game_id");
 }
@@ -172,32 +202,67 @@ if (isset($action) and $action == 'add_developer') {
 }
 
 //***********************************************************************************
-//If delete year button has been pressed
+//If delete release button has been pressed
 //***********************************************************************************
-if (isset($action) and $action == 'delete_year') {
-    if (isset($game_year_id)) {
-        foreach ($game_year_id as $year) {
-            create_log_entry('Games', $game_id, 'Year', $year, 'Delete', $_SESSION['user_id']);
+if (isset($action) and $action == 'delete_release') {
+    if (isset($game_release_id)) {
+        foreach ($game_release_id as $release_id) {
 
-            $mysqli->query("DELETE FROM game_year WHERE game_year_id = '$year' AND game_id = '$game_id'");
-            $_SESSION['edit_message'] = "Year has been deleted";
+            // create_log_entry('Games', $game_id, 'Year', $year, 'Delete', $_SESSION['user_id']);
+            $release = $gameReleaseDao->getRelease($release_id);
+
+            $gameReleaseDao->deleteRelease($release_id);
+
+            $changeLogDao->insertChangeLog(
+                new \AL\Common\Model\Database\ChangeLog(
+                    -1,
+                    "Games",
+                    $game_id,
+                    $edited_game_name,
+                    "Release",
+                    $release_id,
+                    empty($release->getName()) ? $edited_game_name : $release->getName(),
+                    $_SESSION["user_id"],
+                    \AL\Common\Model\Database\ChangeLog::ACTION_DELETE
+                )
+            );
+
+            $_SESSION['edit_message'] = "Release has been deleted";
         }
     } else {
-        $_SESSION['edit_message'] = "Please choose a release year";
+        $_SESSION['edit_message'] = "Please choose a release";
     }
     header("Location: ../games/games_detail.php?game_id=$game_id");
 }
 
 //***********************************************************************************
-//If add year button has been pressed
+//If add release button has been pressed
 //***********************************************************************************
-if (isset($action) and $action == 'add_year') {
-    $sql = $mysqli->query("INSERT INTO game_year (game_id, game_year, game_extra_info_id) VALUES ('$game_id','$Date_Year','$game_extra_info_year')") or die("Release year insertion failed");
-    $new_year_id = $mysqli->insert_id;
+if (isset($action) and $action == 'add_release') {
+    if ($edited_game_name == $release_name) {
+        // Prevent creating a relase with the exact same name as the game
+        $_SESSION['edit_message'] = "Alternative title for the release must be different than the game one."
+            ." If no alternative title, leave it empty";
+        header("Location: ../games/games_detail.php?game_id=$game_id");
+        exit();
+    }
+    $release_id = $gameReleaseDao->addReleaseForGame($game_id, $release_name, $Date_Year."-01-01");
 
-    create_log_entry('Games', $game_id, 'Year', $new_year_id, 'Insert', $_SESSION['user_id']);
+    $changeLogDao->insertChangeLog(
+        new \AL\Common\Model\Database\ChangeLog(
+            -1,
+            "Games",
+            $game_id,
+            $edited_game_name,
+            "Release",
+            $release_id,
+            empty($release_name) ? $edited_game_name : $release_name,
+            $_SESSION["user_id"],
+            \AL\Common\Model\Database\ChangeLog::ACTION_INSERT
+        )
+    );
 
-    $_SESSION['edit_message'] = "Year has been added";
+    $_SESSION['edit_message'] = "Release has been added";
     header("Location: ../games/games_detail.php?game_id=$game_id");
 }
 
@@ -434,10 +499,28 @@ if (isset($action) and $action == 'delete_game') {
                                     } else {
                                         create_log_entry('Games', $game_id, 'Game', $game_id, 'Delete', $_SESSION['user_id']);
 
+                                        $releases = $gameReleaseDao->getReleasesForGame($game_id);
+                                        foreach ($releases as $release) {
+                                            $gameReleaseDao->deleteRelease($release->getId());
+
+                                            $changeLogDao->insertChangeLog(
+                                                new \AL\Common\Model\Database\ChangeLog(
+                                                    -1,
+                                                    "Games",
+                                                    $game_id,
+                                                    $edited_game_name,
+                                                    "Release",
+                                                    $release->getId(),
+                                                    $edited_game_name,
+                                                    $_SESSION["user_id"],
+                                                    \AL\Common\Model\Database\ChangeLog::ACTION_DELETE
+                                                )
+                                            );
+                                        }
+
                                         $sdbquery = $mysqli->query("DELETE FROM game WHERE game_id = '$game_id' ");
                                         $sdbquery = $mysqli->query("DELETE FROM game_publisher WHERE game_id = '$game_id'");
                                         $sdbquery = $mysqli->query("DELETE FROM game_developer WHERE game_id = '$game_id' ");
-                                        $sdbquery = $mysqli->query("DELETE FROM game_year WHERE game_id = '$game_id' ");
                                         $sdbquery = $mysqli->query("DELETE FROM game_cat_cross WHERE game_id = '$game_id' ");
                                         $sdbquery = $mysqli->query("DELETE FROM game_development WHERE game_id='$game_id'");
                                         $sdbquery = $mysqli->query("DELETE FROM game_unreleased WHERE game_id='$game_id'");
