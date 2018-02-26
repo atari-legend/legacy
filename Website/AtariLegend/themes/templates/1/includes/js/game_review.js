@@ -1,7 +1,7 @@
 /*!
  * game_review.js
  */
-function openTab(evt, tabName, screenshotsNr) {
+window.openTab = function (evt, tabName, screenshotsNr) {
     // Declare all variables
     var i, tabcontent, tablinks;
 
@@ -69,7 +69,7 @@ function openTab(evt, tabName, screenshotsNr) {
             var stringComment = string.concat(i);
             var comment = document.getElementById(stringComment).value;
 
-            if (comment == '') {
+            if (comment === '') {
                 var string3 = 'output_';
                 var stringOutput = string3.concat(i);
                 var output = document.getElementById(stringOutput);
@@ -87,13 +87,11 @@ function openTab(evt, tabName, screenshotsNr) {
         }
     }
 }
- 
+
 $(document).ready(function () {
     $('select[name=game_create]').altAutocomplete();
     $('select[name=members]').altAutocomplete();
 });
-
-
 
 window.deletereview = function (reviewid, gameid) {
     $('#JSGenericModal').dialog({
@@ -105,8 +103,8 @@ window.deletereview = function (reviewid, gameid) {
         buttons: {
             'Delete': function () {
                 $(this).dialog('close');
-                url = 'db_games_review.php?reviewid='+reviewid+'&game_id='+gameid+'&action=delete_review';
-                location.href=url;
+                var url = 'db_games_review.php?reviewid=' + reviewid + '&game_id=' + gameid + '&action=delete_review';
+                location.href = url;
             },
             Cancel: function () {
                 $(this).dialog('close');
@@ -124,8 +122,8 @@ window.deleteSubmission = function (reviewid, gameid) {
         buttons: {
             'Delete': function () {
                 $(this).dialog('close');
-                url = 'db_games_review.php?reviewid='+reviewid+'&game_id='+gameid+'&action=delete_submission';
-                location.href=url;
+                var url = 'db_games_review.php?reviewid=' + reviewid + '&game_id=' + gameid + '&action=delete_submission';
+                location.href = url;
             },
             Cancel: function () {
                 $(this).dialog('close');
@@ -143,8 +141,8 @@ window.move_to_comment = function (reviewid, gameid) {
         buttons: {
             'Move': function () {
                 $(this).dialog('close');
-                url = 'db_games_review.php?reviewid='+reviewid+'&game_id='+gameid+'&action=move_to_comment';
-                location.href=url;
+                var url = 'db_games_review.php?reviewid=' + reviewid + '&game_id=' + gameid + '&action=move_to_comment';
+                location.href = url;
             },
             Cancel: function () {
                 $(this).dialog('close');
@@ -152,7 +150,7 @@ window.move_to_comment = function (reviewid, gameid) {
         }
     });
 }
-window.deletecomment = function (game_id,reviewid,screenshot_id) {
+window.deletecomment = function (gameId, reviewId, screenshotId) {
     $('#JSGenericModal').dialog({
         title: 'Delete',
         open: $('#JSGenericModalText').text('Are you sure you want to delete this comment?'),
@@ -162,8 +160,8 @@ window.deletecomment = function (game_id,reviewid,screenshot_id) {
         buttons: {
             'Delete': function () {
                 $(this).dialog('close');
-                url = 'db_games_review.php?game_id='+game_id+'&reviewid='+reviewid+'&screenshot_id='+screenshot_id+'&action=delete_comment';
-                location.href=url;
+                var url = 'db_games_review.php?game_id=' + gameId + '&reviewid=' + reviewId + '&screenshot_id=' + screenshotId + '&action=delete_comment';
+                location.href = url;
             },
             Cancel: function () {
                 $(this).dialog('close');
