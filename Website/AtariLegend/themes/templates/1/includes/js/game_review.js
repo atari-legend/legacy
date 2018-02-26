@@ -88,6 +88,11 @@ window.openTab = function (evt, tabName, screenshotsNr) {
     }
 }
 
+// Get the element with id="defaultOpen" and click on it
+jQuery(document).ready(function () {
+    document.getElementById('defaultOpen').click();
+});
+
 $(document).ready(function () {
     $('select[name=game_create]').altAutocomplete();
     $('select[name=members]').altAutocomplete();
