@@ -184,5 +184,5 @@ if (isset($action) and $action == 'move_to_comment') {
 
     $_SESSION['edit_message'] = "Review converted to comment";
 
-    header("Location: ../games/games_review_add.php?game_id=$game_id");
+    header("Location: ../games/games_review.php");
 }
