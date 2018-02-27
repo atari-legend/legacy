@@ -66,6 +66,29 @@ switch ($extraParams) {
     }
         $stmt->close();
         break;
+        
+    case "game":
+        $stmt = $mysqli->prepare("
+            SELECT game_id, game_name
+            FROM game
+            WHERE LOWER(game_name) LIKE CONCAT('%',LOWER(?),'%')")
+        or
+        die("Error querying games: ".$mysqli->error);
+
+        $stmt->bind_param("s", $term);
+        $stmt->execute();
+        $stmt->bind_result($game_id, $game_name);
+
+    while ($stmt->fetch()) {
+        array_push(
+            $json,
+            array(
+            "value" => $game_id,
+            "label" => $game_name)
+        );
+    }
+        $stmt->close();
+        break;
 }
 
 header("Content-Type: application/json");
