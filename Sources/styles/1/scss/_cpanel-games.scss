@@ -115,6 +115,24 @@
 }
 
 //*----------------------------------------------------------
+//Games review
+//------------------------------------------------------------ */
+.review_buttons {
+    right: 0;
+    top: 0;
+    float: right;
+    display: inline-flex;
+    .primary_button {
+        margin-top: 0;
+        padding-left: 10px;
+        padding-right: 10px;
+        display: inline-block;
+    }
+    .edit{float: right;}
+}
+
+
+//*----------------------------------------------------------
 //Games review preview
 //------------------------------------------------------------ */
 .review_container {
