@@ -35,7 +35,8 @@ class CommentsDAO {
                 users.avatar_ext,
                 game.game_id,
                 game.game_name,
-                'game_comment' AS comment_type
+                'game_comment' AS comment_type,
+                null
             FROM game_user_comments
             LEFT JOIN comments
                 ON ( game_user_comments.comment_id = comments.comments_id )
@@ -72,7 +73,8 @@ class CommentsDAO {
                 users.avatar_ext,
                 game.game_id AS game_id,
                 game.game_name AS game_name,
-                'game_review_comment' AS comment_type
+                'game_review_comment' AS comment_type,
+                review_game.review_id as review_id
             FROM review_user_comments
             LEFT JOIN comments
                 ON ( review_user_comments.comment_id = comments.comments_id )
@@ -111,7 +113,8 @@ class CommentsDAO {
                 users.avatar_ext,
                 interview_main.interview_id AS game_id,
                 individuals.ind_name AS game_name,
-                'interview_comment' AS comment_type
+                'interview_comment' AS comment_type,
+                null
             FROM interview_user_comments
             LEFT JOIN comments
                 ON ( interview_user_comments.comment_id = comments.comments_id )
@@ -149,7 +152,8 @@ class CommentsDAO {
             avatar_ext varchar(255),
             game_id int(11),
             game_name varchar(255),
-            comment_type varchar(255)
+            comment_type varchar(255),
+            review_id int(11)
         )";
 
         return $query;
@@ -195,7 +199,8 @@ class CommentsDAO {
             temp.game_id,
             temp.game_name,
             temp.comment_type,
-            comments.comment
+            comments.comment,
+            temp.review_id
         FROM temp
         LEFT JOIN comments
             ON (temp.comments_id = comments.comments_id)
@@ -287,7 +292,8 @@ class CommentsDAO {
             $game_id,
             $game_name,
             $comment_type,
-            $comment
+            $comment,
+            $review_id
         );
 
         $comments = [];
@@ -306,7 +312,8 @@ class CommentsDAO {
                 $game_id,
                 $game_name,
                 $comment_type,
-                $comment
+                $comment,
+                $review_id
             );
         }
 

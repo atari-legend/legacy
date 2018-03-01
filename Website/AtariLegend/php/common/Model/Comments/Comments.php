@@ -23,6 +23,7 @@ class Comments {
     private $game_name;
     private $comment_type;
     private $comment;
+    private $review_id;
 
     public function __construct(
         $comments_id,
@@ -38,7 +39,8 @@ class Comments {
         $game_id,
         $game_name,
         $comment_type,
-        $comment
+        $comment,
+        $review_id
     ) {
         $this->comments_id = $comments_id;
         $this->timestamp = $timestamp;
@@ -55,6 +57,7 @@ class Comments {
         $this->game_name = $game_name;
         $this->comment_type = $comment_type;
         $this->comment = $comment;
+        $this->review_id = $review_id;
 
         if ($avatar_ext && $avatar_ext !== "") {
             $this->avatar_image = $GLOBALS['user_avatar_path']."/${user_id}.${avatar_ext}";
@@ -115,6 +118,10 @@ class Comments {
 
     public function getGameId() {
         return $this->game_id;
+    }
+    
+    public function getReviewId() {
+        return $this->review_id;
     }
 
     public function getGameName() {
