@@ -64,6 +64,7 @@
         </div>
         <br>
         <br>
+        <form name="post">
         <div class="jsCommentsWrapper infinite-container">
             {* START NEW COMMENT BOX *}
             <div id="view" style="display:none;">{$links.view}</div>
@@ -107,7 +108,7 @@
                             {if $line->getCommentType() == "interview_comment" }
                                 <a href="../interviews/interviews_edit.php?interview_id={$line->getGameId()}" class="links_addnew_link">{$line->getGameName()}</a>
                             {elseif $line->getCommentType() == "game_review_comment" }
-                                <a href="../games/games_review_add.php?game_id={$line->getGameId()}" class="links_addnew_link">{$line->getGameName()}</a>
+                                <a href="../games/games_review_edit.php?game_id={$line->getGameId()}&reviewid={$line->getReviewId()}" class="links_addnew_link">{$line->getGameName()}</a>
                             {else}
                                     <a href="../games/games_detail.php?game_id={$line->getGameId()}" class="links_addnew_link">{$line->getGameName()}</a>
                             {/if}
@@ -156,7 +157,7 @@
                             {if $line->getCommentType() == "interview_comment" }
                                 <a href="../interviews/interviews_edit.php?interview_id={$line->getGameId()}" class="links_addnew_link">{$line->getGameName()}</a>
                             {elseif $line->getCommentType() == "game_review_comment" }
-                                <a href="../games/games_review_add.php?game_id={$line->getGameId()}" class="links_addnew_link">{$line->getGameName()}</a>
+                                <a href="../games/games_review_edit.php?game_id={$line->getGameId()}&reviewid={$line->getReviewId()}" class="links_addnew_link">{$line->getGameName()}</a>
                             {else}
                                 <a href="../games/games_detail.php?game_id={$line->getGameId()}" class="links_addnew_link">{$line->getGameName()}</a>
                             {/if}
@@ -188,6 +189,7 @@
             {/foreach}
             {* END NEW COMMENT BOX *}
         </div>
+        </form>
     </div>
     <br>
 </div>
