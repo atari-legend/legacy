@@ -88,11 +88,6 @@ window.openTab = function (evt, tabName, screenshotsNr) {
     }
 }
 
-// Get the element with id="defaultOpen" and click on it
-jQuery(document).ready(function () {
-    document.getElementById('defaultOpen').click();
-});
-
 $(document).ready(function () {
     $('select[name=game_create]').altAutocomplete();
     $('select[name=members]').altAutocomplete();
@@ -155,9 +150,11 @@ window.move_to_comment = function (reviewid, gameid) {
         }
     });
 }
+
+// Delete the comment
 window.deletecomment = function (gameId, reviewId, screenshotId) {
     $('#JSGenericModal').dialog({
-        title: 'Delete',
+        title: 'Delete comment?',
         open: $('#JSGenericModalText').text('Are you sure you want to delete this comment?'),
         resizable: false,
         height: 200,
@@ -165,8 +162,20 @@ window.deletecomment = function (gameId, reviewId, screenshotId) {
         buttons: {
             'Delete': function () {
                 $(this).dialog('close');
-                var url = 'db_games_review.php?game_id=' + gameId + '&reviewid=' + reviewId + '&screenshot_id=' + screenshotId + '&action=delete_comment';
-                location.href = url;
+                $.ajaxQueue({
+                    // The URL for the request
+                    url: 'db_games_review.php',
+                    data: 'game_id=' + gameId + '&reviewid=' + reviewId + '&screenshot_id=' + screenshotId + '&action=delete_comment',
+                    type: 'POST',
+                    dataType: 'html',
+                    // Code to run if the request succeeds;
+                    success: function (html) {
+                        var returnHtml = html.split('[BRK]');
+                        $('#review_screenshot_list').html(returnHtml[0]);
+                        window.OSDMessageDisplay(returnHtml[1]);
+                        document.getElementById('screenshot_add_to_review').reset();
+                    }
+                });
             },
             Cancel: function () {
                 $(this).dialog('close');
