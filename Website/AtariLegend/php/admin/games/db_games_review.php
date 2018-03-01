@@ -46,7 +46,98 @@ if (isset($action) and $action == 'delete_comment') {
 
     create_log_entry('Games', $game_id, 'Review comment', $reviewid, 'Delete', $_SESSION['user_id']);
 
-    header("Location: ../games/games_review_edit.php?reviewid=$reviewid&game_id=$game_id");
+    $osd_message = 'Comment deleted';
+    $smarty->assign('osd_message', $osd_message);
+    
+    
+    //get the name of the game
+    $sql_game = $mysqli->query("SELECT * FROM game WHERE game_id='$game_id'") or die("Database error - getting game name");
+
+    while ($game = $sql_game->fetch_array(MYSQLI_BOTH)) {
+        $smarty->assign('game', array(
+            'game_id' => $game_id,
+            'game_name' => $game['game_name']
+        ));
+    }
+
+    //Get the authors
+    $sql_author = $mysqli->query("SELECT user_id,userid FROM users") or die("Database error - getting members name");
+
+    while ($authors = $sql_author->fetch_array(MYSQLI_BOTH)) {
+        $smarty->append('authors', array(
+            'user_id' => $authors['user_id'],
+            'user_name' => $authors['userid']
+        ));
+    }
+
+    //get the actual edit review data
+    $sql_edit_REVIEW = $mysqli->query("SELECT
+                               user_id,
+                               review_text,
+                               review_date,
+                               review_score_id,
+                               review_graphics,
+                               review_sound,
+                               review_gameplay,
+                               review_overall
+                               FROM review_game
+                               LEFT JOIN review_main ON ( review_game.review_id = review_main.review_id )
+                               LEFT JOIN review_score ON ( review_main.review_id = review_score.review_id )
+                               WHERE review_game.review_id = $reviewid
+                               AND review_game.game_id='$game_id'
+                               ORDER BY review_game.review_id") or die("Database error - selecting review data");
+
+    while ($edit_review = $sql_edit_REVIEW->fetch_array(MYSQLI_BOTH)) {
+        $review_text = stripslashes($edit_review['review_text']);
+
+        $smarty->assign('edit_review', array(
+            'member_id' => $edit_review['user_id'],
+            'review_text' => $review_text,
+            'review_date' => $edit_review['review_date'],
+            'review_score_id' => $edit_review['review_score_id'],
+            'review_graphics' => $edit_review['review_graphics'],
+            'review_sound' => $edit_review['review_sound'],
+            'review_gameplay' => $edit_review['review_gameplay'],
+            'review_overall' => $edit_review['review_overall']
+        ));
+    }
+
+    //get the screenshots
+    $sql_screenshots = $mysqli->query("SELECT * FROM screenshot_game WHERE game_id = '$game_id' ORDER BY screenshot_id ASC") or die("Database error - getting screenshots");
+
+    $i = 0;
+
+    while ($screenshots = $sql_screenshots->fetch_array(MYSQLI_BOTH)) {
+        $i++;
+
+        $v_screenshot = $game_screenshot_path;
+        $v_screenshot .= $screenshots['screenshot_id'];
+        $v_screenshot .= '.';
+        $v_screenshot .= 'png';
+
+        $sql_COMMENTS = $mysqli->query("SELECT review_comments.comment_text FROM screenshot_review
+                                 LEFT JOIN review_comments on (screenshot_review.screenshot_review_id = review_comments.screenshot_review_id)
+                                 WHERE screenshot_review.screenshot_id = '$screenshots[2]' AND screenshot_review.review_id = '$reviewid'") or die("Database error - getting screenshots comments");
+
+        $screencomment = $sql_COMMENTS->fetch_array(MYSQLI_BOTH);
+
+        $smarty->append('screenshots', array(
+            'screenshot_id' => $screenshots['screenshot_id'],
+            'screenshot_link' => $v_screenshot,
+            'screenshot_comment' => htmlentities($screencomment['comment_text']),
+            'screenshot_id' => $screenshots[2],
+            'review_screenshot_count' => $i,
+        ));
+    }
+
+    $smarty->assign("screenshots_nr", $i);
+    
+    $smarty->assign('smarty_action', 'add_comment_to_review_return');
+    $smarty->assign('reviewid', $reviewid);
+    $smarty->assign('game_id', $game_id);
+
+    //Send to smarty for return value
+    $smarty->display("file:" . $cpanel_template_folder . "ajax_review_add_comment.html");  
 }
 
 if (isset($action) and ($action == 'delete_review' or $action == 'delete_submission')) {

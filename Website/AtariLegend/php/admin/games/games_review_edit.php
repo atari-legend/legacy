@@ -44,21 +44,6 @@ if (isset($reviewid) and isset($game_id)) {
         ));
     }
 
-    //get the reviews of the game
-    $sql_review = $mysqli->query("SELECT * FROM review_game
-                           LEFT JOIN review_main ON (review_game.review_id = review_main.review_id)
-                           LEFT JOIN users ON (review_main.user_id = users.user_id)
-                           WHERE review_game.game_id='$game_id' ORDER BY review_game.review_id") or die("Database error - selecting review");
-    $i = 1;
-    while ($review = $sql_review->fetch_array(MYSQLI_BOTH)) {
-        $smarty->append('review', array(
-            'review_id' => $review['review_id'],
-            'user_name' => $review['userid'],
-            'review_nr' => $i
-        ));
-        $i++;
-    }
-
     //get the actual edit review data
     $sql_edit_REVIEW = $mysqli->query("SELECT
                                user_id,

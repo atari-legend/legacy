@@ -37,6 +37,11 @@
 <script src="{$template_dir}includes/js/bbcode.js"></script> <!-- Load the BBCODE script -->
 <script src="{$template_dir}includes/js/game_review.js"></script> <!-- Load all game review scripts -->
 <script src="{$template_dir}includes/js/ui.widgets.js"></script> <!-- The autocomplete and dropdown switcher -->
+<script> <!-- Get the element with id="defaultOpen" and click on it -->
+    jQuery(document).ready(function () {
+        document.getElementById('defaultOpen').click();
+    });
+</script>
 {/block}
 
 {block name=title}Edit review - <a href="../games/games_detail.php?game_id={$game.game_id}">{$game.game_name}</a>{/block}
@@ -64,7 +69,7 @@
         <br>
         <br>
         <div id="edit" class="tabcontent">
-            <form action="../games/db_games_review.php" method="post" name="post">
+            <form action="../games/db_games_review.php" method="post" name="post" id="screenshot_add_to_review">
                 <fieldset class="secondary_fieldset">
                     <legend class="primary_legend">Edit review</legend>
                     <br>
@@ -117,6 +122,7 @@
                     <br>
                 </fieldset>
                 <br>
+                <div id="review_screenshot_list">
                 {if $screenshots_nr <> ''}
                     <fieldset class="secondary_fieldset centered_fieldset">
                         <legend class="primary_legend">Screenshots</legend>
@@ -126,13 +132,16 @@
                             {foreach from=$screenshots item=line}
                                 <tr>
                                     <td style="width:1%;border:0;">
-                                        <ul class="review_buttons edit">
-                                            <a href="javascript:deletecomment({$game.game_id},{$reviewid},{$line.screenshot_id})" class="left_nav_link">
-                                                <li class="primary_button">
-                                                    <i class="fa fa-trash-o" aria-hidden="true" title="Click to delete screenshot"></i>
-                                                </li>
-                                            </a>
-                                        </ul>
+                                        {if $line.screenshot_comment == ''}
+                                        {else}
+                                            <ul class="review_buttons edit">
+                                                <a href="javascript:deletecomment({$game.game_id},{$reviewid},{$line.screenshot_id})" class="left_nav_link">
+                                                    <li class="primary_button">
+                                                        <i class="fa fa-trash-o" aria-hidden="true" title="Click to delete comment"></i>
+                                                    </li>
+                                                </a>
+                                            </ul>
+                                        {/if}
                                     </td>
                                     <td style="width:9%;border:0;">
                                         <a href="../../includes/show_image.php?file={$line.screenshot_link}" data-lightbox="image-1">
@@ -148,6 +157,7 @@
                             <br>
                         </div>
                     </fieldset>
+                </div>
                 {else}
                     There are currently no screenshots attached to this game. Go to the<a href="../games/games_detail.php?game_id={$game.game_id}" class="MAINNAV"> screenshot adding</a>
                     page to link specific screenshots to this game.
@@ -201,7 +211,7 @@
                                         <a href="../../includes/show_image.php?file={$line.screenshot_link}" data-lightbox="image-1">
                                             <img src="../../includes/show_image.php?file={$line.screenshot_link}&amp;resize=170,null,null,null" alt="Click to enlarge!" style="display:inline;" class="game_screenshot_img">
                                         </a>
-                                        <br><b><span style="font-weight: bold;" id="preview_comment_{$line.review_screenshot_count}"></span></b>
+                                        <br><br><b><span style="font-weight: bold;" id="preview_comment_{$line.review_screenshot_count}"></span></b>
                                         <br>
                                         <br>
                                         <br>
