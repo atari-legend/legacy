@@ -59,8 +59,8 @@ $RESULTGAME = "SELECT
                     LEFT JOIN review_main ON ( review_main.review_id = review_game.review_id)
                     LEFT JOIN users ON ( review_main.user_id = users.user_id)
                     WHERE review_game.game_id IS NOT NULL
-                    GROUP BY game.game_id, game.game_name HAVING COUNT(DISTINCT game.game_id, game.game_name) = 1
-                    ORDER BY review_main.review_date DESC";
+                    GROUP BY game.game_id, game.game_name, userid, review_date HAVING COUNT(DISTINCT game.game_id, game.game_name, userid, review_date) = 1 
+                    ORDER BY game_name ASC"; 
 
 $games = $mysqli->query($RESULTGAME);
 
