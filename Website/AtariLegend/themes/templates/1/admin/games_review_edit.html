@@ -38,9 +38,9 @@
 <script src="{$template_dir}includes/js/game_review.js"></script> <!-- Load all game review scripts -->
 <script src="{$template_dir}includes/js/ui.widgets.js"></script> <!-- The autocomplete and dropdown switcher -->
 <script> <!-- Get the element with id="defaultOpen" and click on it -->
-jQuery(document).ready(function () {
-    document.getElementById('defaultOpen').click();
-});
+    jQuery(document).ready(function () {
+        document.getElementById('defaultOpen').click();
+    });
 </script>
 {/block}
 
@@ -132,9 +132,9 @@ jQuery(document).ready(function () {
                             {foreach from=$screenshots item=line}
                                 <tr>
                                     <td style="width:1%;border:0;">
-                                       {if $line.screenshot_comment == ''}
-                                       {else}
-                                           <ul class="review_buttons edit">
+                                        {if $line.screenshot_comment == ''}
+                                        {else}
+                                            <ul class="review_buttons edit">
                                                 <a href="javascript:deletecomment({$game.game_id},{$reviewid},{$line.screenshot_id})" class="left_nav_link">
                                                     <li class="primary_button">
                                                         <i class="fa fa-trash-o" aria-hidden="true" title="Click to delete comment"></i>
