@@ -16,11 +16,7 @@ include("../../config/common.php");
 include("../../config/admin.php");
 include("../../config/admin_rights.php");
 
-if (isset($trivia_quote_id) and $action == "edit_trivia_quoute") {
-    //****************************************************************************************
-    // Insert did you know quote!
-    //****************************************************************************************
-
+if (isset($trivia_quote_id) and $action == "edit_trivia_quote") {
     $sql_trivia = $mysqli->query("SELECT * FROM trivia_quotes WHERE trivia_quote_id = $trivia_quote_id");
 
     if ($query_trivia = $sql_trivia->fetch_array(MYSQLI_BOTH)) {
@@ -34,10 +30,6 @@ if (isset($trivia_quote_id) and $action == "edit_trivia_quoute") {
 }
 
 if (isset($trivia_quote_id) and $action == "display_trivia_quoute") {
-    //****************************************************************************************
-    // Insert did you know quote!
-    //****************************************************************************************
-
     $sql_trivia = $mysqli->query("SELECT * FROM trivia_quotes WHERE trivia_quote_id = $trivia_quote_id");
 
     if ($query_trivia = $sql_trivia->fetch_array(MYSQLI_BOTH)) {
@@ -51,10 +43,6 @@ if (isset($trivia_quote_id) and $action == "display_trivia_quoute") {
 }
 
 if (isset($trivia_id) and $action == "did_you_know_edit_view") {
-    //****************************************************************************************
-    // Insert did you know quote!
-    //****************************************************************************************
-
     $sql_trivia = $mysqli->query("SELECT * FROM trivia WHERE trivia_id = $trivia_id");
     $query_trivia = $sql_trivia->fetch_array(MYSQLI_BOTH);
     $smarty->assign('trivia_id', $query_trivia['trivia_id']);
