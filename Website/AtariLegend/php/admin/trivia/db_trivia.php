@@ -67,37 +67,38 @@ if (isset($action) and $action == "did_you_know_delete") {
     $smarty->assign('smarty_action', 'delete_did_you_know');
     
     //Send to smarty for return value
-    $smarty->display("file:" . $cpanel_template_folder . "ajax_did_you_know.html");
+    $smarty->display("file:" . $cpanel_template_folder . "ajax_trivia_quotes_edit.html");
 }
 
 //****************************************************************************************
 // Delete trivia quote!
 //****************************************************************************************
 if (isset($action) and $action == "delete_trivia_quote") {
-    if (isset($trivia_quote_id)) {
-        create_log_entry('Trivia', $trivia_quote_id, 'Quote', $trivia_quote_id, 'Delete', $_SESSION['user_id']);
+    create_log_entry('Trivia', $trivia_quote_id, 'Quote', $trivia_quote_id, 'Delete', $_SESSION['user_id']);
 
-        $sql = $mysqli->query("DELETE FROM trivia_quotes WHERE trivia_quote_id = '$trivia_quote_id'") or die("couldn't delete trivia quote");
+    $sql = $mysqli->query("DELETE FROM trivia_quotes WHERE trivia_quote_id = '$trivia_quote_id'") or die("couldn't delete trivia quote");
 
-        $osd_message = "trivia quote has been deleted";
+    $osd_message = "trivia quote has been deleted";
+    
+    //Get all the trivia quotes
+    $sql_trivia = $mysqli->query("SELECT * FROM trivia_quotes ORDER BY trivia_quote_id") or die("error getting trivia");
+
+    while ($query_trivia = $sql_trivia->fetch_array(MYSQLI_BOTH)) {
+        $trivia_text = nl2br($query_trivia['trivia_quote']);
+        $trivia_text = stripslashes($trivia_text);
         
-        //Get all the trivia quotes
-        $sql_trivia = $mysqli->query("SELECT * FROM trivia_quotes ORDER BY trivia_quote_id");
-
-        while ($query_trivia = $sql_trivia->fetch_array(MYSQLI_BOTH)) {
-            $smarty->append('trivia', array(
-                'trivia_quote_id' => $query_trivia['trivia_quote_id'],
-                'trivia_quote' => $query_trivia['trivia_quote']
-            ));
-        }
-        
-        $smarty->assign('osd_message', $osd_message);
-
-        $smarty->assign('smarty_action', 'delete_trivia_quote');
-        
-        //Send to smarty for return value
-        $smarty->display("file:" . $cpanel_template_folder . "ajax_trivia_quotes_edit.html");
+        $smarty->append('trivia', array(
+            'trivia_quote_id' => $query_trivia['trivia_quote_id'],
+            'trivia_quote' => $trivia_text
+        ));
     }
+    
+    $smarty->assign('osd_message', $osd_message);
+
+    $smarty->assign('smarty_action', 'delete_trivia_quote');
+    
+    //Send to smarty for return value
+    $smarty->display("file:" . $cpanel_template_folder . "ajax_trivia_quotes_edit.html");
 }
 
 //****************************************************************************************
