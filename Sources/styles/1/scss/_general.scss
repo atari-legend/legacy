@@ -25,6 +25,12 @@
     margin: 0;
 }
 
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
 html {
     overflow-x: hidden;
     overflow-y: scroll;
@@ -133,6 +139,7 @@ img {
     background-color: #122323;
     border-top: 10px solid #00d3d3;
     border-bottom: 3px solid #00d3d3;
+    position: relative;
 }
 
 .standard_tile_line {
@@ -267,22 +274,6 @@ img {
     border: 0;
 }
 
-.standard_tile_input_area {
-    width: 90%;
-    height: 40px;
-    padding: 0;
-    padding-left: 5px;
-    margin-top: 0;
-    color: #ffffff;
-    text-align: left;
-    background: #000000;
-    border: 1px solid #008b8b;
-}
-
-#text_area_big {
-    height: 150px;
-}
-
 .standard_tile_link:link {
     color: #ffffff;
 }
@@ -310,9 +301,6 @@ img {
 }
 .standard_tile_link_black:hover {
     color: #ffffff;
-}
-.standard_tile_link_button:link {
-    color: #000000;
 }
 .standard_list_entry {
     position: relative;
@@ -368,6 +356,12 @@ img {
 .standard_tile_padding {
     padding: 20px;
 }
+.standard_tile_padding_medium {
+    padding: 15px;
+}
+.standard_tile_padding_mini {
+    padding: 10px;
+}
 #other {
     border-right: 1px solid #007878;
 }
@@ -380,25 +374,6 @@ img {
 #file_upload,
 #file_upload2 {
     display: none;
-}
-
-.file_upload {
-    width: 80px;
-    height: 25px;
-    font-size: 10pt;
-    color: #ffffff;
-    cursor: pointer;
-    background: #122323;
-    border: 0;
-    border-bottom: 3px solid #122323;
-    border-left: 1px solid #122323;
-    padding: 3px 10px;
-}
-
-.file_upload:hover {
-    color: #ffffff;
-    background: #006f6f;
-    border-bottom: 3px solid #122323;
 }
 
 #file_upload_medium {
@@ -456,48 +431,20 @@ img {
 //*------------------------------------------------------------
 //Standard table settings
 //-------------------------------------------------------------*/
-#column_left_cpanel {
-    float: left;
-    width: 20%;
-    margin-right: 1%;
-}
-
-#column_center_cpanel {
-    float: left;
-    width: 58%;
-}
-
 #column_right_cpanel {
-    float: right;
-    width: 20%;
-    margin-left: 1%;
+    display: none;
 }
-
-.topbutton_cpanel_small {
-    width: 80px;
-    height: 25px;
-    font-size: 10pt;
-    color: #ffffff;
-    cursor: pointer;
-    background: #122323;
-    border: 0;
-    border-bottom: 3px solid #122323;
-    border-left: 1px solid #122323;
+#column_left_cpanel,
+#column_center_cpanel {
+    width: 100%;
+    float: left;
+    margin: auto;
 }
-
-.topbutton_cpanel_small:hover {
-    color: #ffffff;
-    background: #006f6f;
-    border-bottom: 3px solid #122323;
-}
-
-.topbutton_cpanel {
-    @extend .topbutton_cpanel_small;
-    width: 120px;
-}
-
-.topbutton_cpanel:hover {
-    @extend .topbutton_cpanel_small:hover;
+.main_container_cpanel {
+    display: flex;
+    flex-direction: column-reverse;
+    float: left;
+    width: 100%;
 }
 
 .primary_fieldset {
@@ -520,6 +467,16 @@ img {
     background: #294f4f;
     color: #ffffff;
     border: solid 1px #000000;
+
+    a:link {
+        color: #00d3d3;
+    }
+    a:visited {
+        color: #00d3d3;
+    }
+    a:hover {
+        color: #ffffff;
+    }
 }
 
 .secondary_legend {
@@ -538,7 +495,7 @@ img {
     margin-top: 5px;
     margin-right: 5px;
     font-size: 14px;
-    line-height: 19px;
+    line-height: 17px;
     text-align: center;
     cursor: default;
     background-color: #000000;
@@ -550,7 +507,7 @@ img {
     width: 10px;
     height: 10px;
     font-size: 10px;
-    line-height: 10px;
+    line-height: 7px;
     display: inline;
 }
 
@@ -576,6 +533,7 @@ img {
     right: 290px;
     //* The tooltip */
     display: none;
+    white-space: normal;
     width: 300px;
     padding: 5px;
     font-size: 13px;
@@ -737,4 +695,11 @@ div.tab button.active {
 }
 .scroll-top-wrapper i.fa {
     line-height: inherit;
+}
+
+// Feed icon (on News, Reviews, Interview)
+a.atom {
+    float: left;
+    margin-top: 5px;
+    margin-left: 10px;
 }

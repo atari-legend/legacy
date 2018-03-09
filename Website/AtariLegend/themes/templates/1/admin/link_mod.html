@@ -97,96 +97,75 @@ function TestURL() {
         <br>
         <br>
         <form enctype="multipart/form-data" action="../links/db_links.php" method="post" name="linkmod">
-        <fieldset class="primary_fieldset">
+        <fieldset class="secondary_fieldset">
             <legend class="primary_legend">Website Data</legend>
             <div class="links_mod_container">
                 <div class="links_mod_row">
-                    <div class="links_mod_text">Site Name</div>
-                    <div class="links_mod_input">
-                        <input type="text" name="website_name" id="website_name" value="{$website.website_name}" class="standard_input input_large">
-                    </div>
+                    Site Name<br>
+                    <input type="text" name="website_name" id="website_name" value="{$website.website_name}" class="standard_input input_large">
                 </div>
                 <div class="links_mod_row">
-                    <div class="links_mod_text">URL</div>
-                    <div class="links_mod_input">
-                        <input type="text" name="website_url" id="website_url" value="{$website.website_url}" class="standard_input input_large">
-                        <input type="button" onclick="TestURL()" class="topbutton_cpanel_small" value="Test" style="margin-left:1px;">
-                    </div>
+                    URL<br>
+                    <input type="text" name="website_url" id="website_url" value="{$website.website_url}" class="standard_input input_large">
+                    <input type="button" onclick="TestURL()" class="secondary_button" value="Test">
                 </div>
                 <div class="links_mod_row">
-                    <div class="links_mod_text">Category</div>
-                    <div class="links_mod_input">
-                        <select name="category" class="standard_select" id="website_category_select">
-                            {foreach from=$category item=line}
-                                    <option value="{$line.category_id}" {$line.selected}>{$line.category_name}</option>
-                            {/foreach}
-                        </select>
-                        <input type="button" name="add_category" value="Add" onClick="addcat(); return false;" class="topbutton_cpanel_small">
-                    </div>
+                    Category<br>
+                    <select name="category" class="standard_select" id="website_category_select">
+                        {foreach from=$category item=line}
+                                <option value="{$line.category_id}">{$line.category_name}</option>
+                        {/foreach}
+                    </select>
+                    <input type="button" name="add_category" value="Add" onClick="addcat();" class="secondary_button">
                 </div>
                 <div class="links_mod_row">
-                    <div class="links_mod_text">Linked categories</div>
-                    <div class="links_mod_input">
-                        <table>
+                    Linked categories<br><br>
                         {foreach from=$website_category item=line}
-                        <tr>
-                            <td>
                                 {if  $nr_of_cats == '1'}
                                     - {$line.category_name}
                                 {else}
-                                    - {$line.category_name} -- <a href="db_links.php?category_id={$line.category_id}&action=delete_category&website_id={$website.website_id}" class="links_addnew_link">Delete</a>
+                                    - {$line.category_name} -- <a href="db_links.php?category_id={$line.category_id}&action=delete_category&website_id={$website.website_id}" class="links_addnew_link">Delete</a><br>
                                 {/if}
-                            </td>
-                        </tr>
                         {/foreach}
-                        </table>
-                    </div>
-                </div>
+                </div><br>
                 <div class="links_mod_row">
-                    <div class="links_mod_text">Description</div>
-                    <div class="links_mod_input"><textarea name="website_description_text" class="standard_tile_input_area" id="text_area_big">{$website.website_description_text}</textarea></div>
+                    Description<br>
+                    <textarea name="website_description_text" class="primary_textarea" rows="7">{$website.website_description_text}</textarea>
                 </div>
                 <br>
                 <div class="links_mod_row">
                 {if  $website.website_imgext !== null}
-                    <div class="links_mod_text">
-                        <div class="links_mod_checkbox">
+                        <div class="checkbox_alt">
                             <input type="checkbox" id="delete_image" name="delete_image" value="yes">
-                            <label for="delete_image"></label>&nbsp;Delete Image?
-                            <!--<input type="checkbox" name="delete_image" id="delete_image" value="yes">-->
+                            <label for="delete_image"></label><span style="margin-left:5px;">Delete Image?</span>
                         </div>
-                    </div>
-                    <div class="links_mod_input">
+                        <br>
                         <a href="../../includes/show_image.php?file={$website.website_image}&amp;resize=410,null,null,null" data-lightbox="image-1" data-title="{$website.website_name}">
                             <img src="../../includes/show_image.php?file={$website.website_image}&amp;resize=160,null,null,null" class="user_stats_img" id="user_details_img_dark" alt="website image">
                         </a>
-                    </div>
-                {else}
-                    <div class="links_mod_text">Attach image</div>
-                    <div class="links_mod_input">
-                        <input type="hidden" name="MAX_FILE_SIZE" value="100000000">
-                        <input type="hidden" name="file_upload" value="yes">
-                        <!--<input type="file" name="image">-->
-                        <label for="file_upload" class="file_upload">Select file</label>
-                        <input id="file_upload" type="file" name="image">
-                        <input type="text" class="standard_input input_large" id="file_upload_user_detail">&nbsp;
                         <br><br>
-                    </div>
+                {else}
+                    Attach image<br>
+                    <input type="hidden" name="MAX_FILE_SIZE" value="100000000">
+                    <input type="hidden" name="file_upload" value="yes">
+                    <label for="file_upload" class="secondary_button">Select file</label>
+                    <input type="file" id="file_upload" name="image">
+                    <input type="text" class="standard_input input_large" id="file_upload_user_detail">&nbsp;
+                    <br><br>
                 {/if}
                 </div>
                 <div class="links_mod_row">
-                    <div class="links_mod_text">
-                        <div class="links_mod_checkbox">
-                            <input type="checkbox" value="1" id="website_inactive" name="website_inactive" {if $website.inactive == '1'} checked {/if}>
-                            <label for="website_inactive"></label>&nbsp;Inactive
-                        </div>
+                    <div class="checkbox_alt">
+                        <input type="checkbox" value="1" id="website_inactive" name="website_inactive" {if $website.inactive == '1'} checked {/if}>
+                        <label for="website_inactive"></label>
+                        <span style="margin-left:5px;">Inactive</span>
                     </div>
                 </div>
                 <br>
                 <input type="hidden" name="website_id" id="delete_id" value="{$website_id}">
                 <input type="hidden" name="action" value="modify_link">
-                <input type="submit" name="Modify" value="Modify" class="topbutton_cpanel_small">
-                <input type="button" name="delete" value="Delete" onClick="deletelink(); return false;" class="topbutton_cpanel_small">
+                <input type="submit" name="Modify" value="Modify" class="secondary_button">
+                <input type="button" name="delete" value="Delete" onClick="deletelink(); return false;" class="secondary_button">
             </div>
         </fieldset>
     </form>

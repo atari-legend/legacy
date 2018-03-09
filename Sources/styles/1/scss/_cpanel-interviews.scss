@@ -18,3 +18,23 @@
     padding-top: 8px;
     padding-right: 8px;
 }
+
+.interview_buttons {
+    right: 0;
+    top: 0;
+    float: right;
+    display: inline-flex;
+    .primary_button {
+        margin-top: 0;
+        padding-left: 10px;
+        padding-right: 10px;
+        display: inline-block;
+    }
+    .main{float: left;}
+    .edit{float: right;}
+}
+
+.interview_screenshot_img{
+    @extend .game_screenshot_img;
+    min-width: 50px;
+}

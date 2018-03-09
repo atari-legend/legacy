@@ -20,19 +20,24 @@
 
 {block name=java_script}
 <script>
-function deletearticle(article_id)
-{
-    // CONFIRM REQUIRES ONE ARGUMENT
-    var message = "Are you sure you want to delete this article?";
-    // CONFIRM IS BOOLEAN. THAT MEANS THAT
-    // IT RETURNS TRUE IF 'OK' IS CLICKED
-    // OTHERWISE IT RETURN FALSE
-    var return_value = confirm(message);
-    if (return_value !="0")
-    {
-        url="db_articles.php?action=delete_article&article_id="+article_id;
-        location.href=url;
-    }
+function deletearticle(article_id) {
+    $('#JSGenericModal').dialog({
+        title: 'Delete Article',
+        open: $('#JSGenericModalText').text('Are you sure you want to delete this article?'),
+        resizable: false,
+        height: 200,
+        modal: true,
+        buttons: {
+            'Delete': function () {
+                $(this).dialog('close');
+                url="db_articles.php?action=delete_article&article_id="+article_id;
+                location.href=url;
+            },
+            Cancel: function () {
+                $(this).dialog('close');
+            }
+        }
+    });
 }
 </script>
 {/block}
@@ -52,8 +57,8 @@ function deletearticle(article_id)
         <br>
         <br>
         <div class="main_company_container">
-            <div class="text-center" id="child_edit_company">
-                <fieldset class="primary_fieldset">
+            <div class="child_edit_company text-center">
+                <fieldset class="secondary_fieldset">
                     <legend class="primary_legend">Search Article</legend>
                     <form action="../articles/articles_main.php" method="post" name="search">
                         <select name="article_search" class="standard_select select_large">
@@ -62,17 +67,17 @@ function deletearticle(article_id)
                                 <option value="{$line.article_id}">{$line.article_title}</option>
                             {/foreach}
                         </select>
-                        <input type="submit" value="Search" class="topbutton_cpanel_small">
+                        <input type="submit" value="Search" class="secondary_button">
                         <input type="hidden" name="action" value="search">
                     </form>
                 </fieldset>
             </div>
-            <div class="text-center" id="child_add_company">
-                <fieldset class="primary_fieldset">
+            <div class="child_add_company text-center">
+                <fieldset class="secondary_fieldset">
                     <legend class="primary_legend">Add an Article</legend>
                     <form action="../articles/articles_add.php" method="post" name="insert">
                         <input type="text" name="article_title" class="standard_input input_large">
-                        <input type="submit" value="Add" class="topbutton_cpanel_small">
+                        <input type="submit" value="Add" class="secondary_button">
                         <input type="hidden" name="user_id" id="user_id" value="{$user_id}">
                     </form>
                 </fieldset>
@@ -82,7 +87,7 @@ function deletearticle(article_id)
         <br>
         {if isset($article_selected)}
             {foreach from=$article_selected item=line}
-                <fieldset class="primary_fieldset">
+                <fieldset class="secondary_fieldset">
                     <legend class="primary_legend">
                     {if $line.user_email <> ''}
                         <a href="mailto:{$line.user_email}?subject=Your%20article%20-%20{$line.article_title}%20at%20Atari%20Legend" class="left_nav_link">{$line.user_id}</a> - {$line.article_date}
@@ -98,7 +103,7 @@ function deletearticle(article_id)
                             <i>{$line.article_text}</i>
 
                     <br><br>
-                    <div style="text-align:center;">
+                    <div class="text-center">
                         <a href="articles_edit.php?article_id={$line.article_id}" class="left_nav_link">EDIT</a> :: <a href="javascript:deletearticle({$line.article_id})" class="left_nav_link">DELETE</a> :: <a href="articles_preview.php?article_id={$line.article_id}" class="left_nav_link">PREVIEW</a> :: <a href="articles_screenshots_add.php?article_id={$line.article_id}" class="left_nav_link">ADD SCREENSHOTS</a>
                     </div>
                 </fieldset>

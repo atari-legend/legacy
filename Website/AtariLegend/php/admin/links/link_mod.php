@@ -36,13 +36,14 @@ $rowlink= $LINKSQL->fetch_array(MYSQLI_BOTH);
   $website_image .= $rowlink['website_id'];
   $website_image .= ".";
   $website_image .= $rowlink['website_imgext'];
+  $website_description_text = trim($rowlink['description']);
 
 $smarty->assign('website', array(
     'website_name' => $rowlink['website_name'],
     'website_url' => $rowlink['website_url'],
     'website_id' => $rowlink['website_id'],
 //  'category_id' => $rowlink['website_category_id'],
-    'website_description_text' => $rowlink['description'],
+    'website_description_text' => $website_description_text,
     'website_imgext' => $rowlink['website_imgext'],
     'inactive' => $rowlink['inactive'],
     'website_image' => $website_image));
@@ -67,19 +68,10 @@ $smarty->assign('nr_of_cats', $nr_of_cats);
 // Do the category selector
 $RESULT=$mysqli->query("SELECT * FROM website_category ORDER BY website_category_name");
 
-$sel='';
-
 while ($rowlinkcat = $RESULT->fetch_array(MYSQLI_BOTH)) {
-    /*  $sel='';
-        if($rowlink['website_category_id']==$rowlinkcat['website_category_id'])
-        {
-          $sel="SELECTED";
-        } */
-
     $smarty->append('category', array(
         'category_id' => $rowlinkcat['website_category_id'],
-        'category_name' => $rowlinkcat['website_category_name'],
-        'selected' => $sel));
+        'category_name' => $rowlinkcat['website_category_name']));
 }
 
 //Send all smarty variables to the templates

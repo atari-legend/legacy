@@ -69,7 +69,7 @@
     position: absolute;
     bottom: 100%;
     color: #ffffff;
-    left: 80%;
+    left: 90%;
 }
 
 .tile_title {
@@ -95,7 +95,7 @@
 figure.effect-tile figcaption {
     top: auto;
     bottom: 0;
-    padding: 1em;
+    padding: 30px;
     height: 1em;
     @if $skin_name == legacy {
         background: rgba(0, 80, 80, .8);
@@ -380,10 +380,6 @@ figure.effect-bubba:hover p {
     .latest_comments_icons {
         color: #161c71;
     }
-    .latest_comments_textarea {
-        background: #eeeeee;
-        color: #000000;
-    }
     .latest_comments_link {
         @extend .standard_tile_link;
         color: #161c71;
@@ -391,11 +387,6 @@ figure.effect-bubba:hover p {
     .latest_comments_link:hover {
         color: #000000;
     }
-}
-
-.latest_comments_textarea {
-    @extend .standard_tile_input_area;
-    height: 10em;
 }
 
 .latest_comments_text {

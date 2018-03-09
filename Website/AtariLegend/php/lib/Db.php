@@ -39,7 +39,8 @@ function execute_query($context, $mysqli, $query, $bind_string, ...$params) {
         die("Error: The query [$query] contained parameters (?) but didn't have a bind string $err_ctx");
     }
 
-    $stmt->execute();
+    $stmt->execute()
+        or die("Error executing statement for [$query] $err_ctx: ".$mysqli->error);
 
     return $stmt;
 }

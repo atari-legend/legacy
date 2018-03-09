@@ -12,71 +12,11 @@
 ***************************************************************************/
 *}
 {extends file='1/admin/main.html'}
+
 {block name=java_script}
-<script>
-function OSDMessageDisplay(message) {
-    $.notify_osd.create({
-        'text': message, // notification message
-        'icon': '../../../themes/styles/1/images/osd_icons/star.png', // icon path, 48x48
-        'sticky': false, // if true, timeout is ignored
-        'timeout': 4, // disappears after 6 seconds
-        'dismissable': true // can be dismissed manually
-    });
-}
-function EditTriviaQuote(trivia_quote_id) {
-    if (trivia_quote_id !=='') {
-        $.ajax({
-            // The URL for the request
-            url: "ajax_trivia_quotes.php",
-            data: "action=edit_trivia_quoute&trivia_quote_id=" + trivia_quote_id,
-            type: "GET",
-            dataType: "html",
-            // Code to run if the request succeeds;
-            success: function (html) {
-                $("#Ajax_trivia_quote_" + trivia_quote_id).html(html);
-                ListenTrivia();
-            }
-        });
-    }
-}
-
-function DisplayTriviaQuote(trivia_quote_id) {
-    if (trivia_quote_id !=='') {
-        $.ajax({
-            // The URL for the request
-            url: "ajax_trivia_quotes.php",
-            data: "action=display_trivia_quoute&trivia_quote_id=" + trivia_quote_id,
-            type: "GET",
-            dataType: "html",
-            // Code to run if the request succeeds;
-            success: function (html) {
-                $("#Ajax_trivia_quote_" + trivia_quote_id).html(html);
-            }
-        });
-    }
-
-}
-
-function ListenTrivia() {
-$("#JSSubmitEditTriviaQuote").click(function() {
-    var form_values = $(".JSTriviaEditForm").serialize();
-    var trivia_quote_id = $(".JSTriviaEditForm").find('input[name="trivia_quote_id"]').val();
-    $.ajax({
-        // The URL for the request
-        url: "db_trivia.php",
-        data: form_values,
-        type: "POST",
-        dataType: "html",
-        // Code to run if the request succeeds;
-        success: function(html) {
-            DisplayTriviaQuote(trivia_quote_id);
-            OSDMessageDisplay(html);
-        }
-    });
-})
-}
-</script>
+    <script src="{$template_dir}includes/js/trivia.js"></script> <!-- Load all trivia scripts -->
 {/block}
+
 {block name=main_tile}
 <div class="standard_tile">
     <h1>TRIVIA QUOTES</h1>
@@ -87,36 +27,38 @@ $("#JSSubmitEditTriviaQuote").click(function() {
         </div>
         <br>
         <br>
-        <fieldset class="primary_fieldset">
-        <legend class="primary_legend">Add new Trivia</legend>
-        <div class="centered_fieldset">
-            <form action="../trivia/db_trivia.php" method="post" name="trivia" id="trivia">
-            Trivia Text<br>
-            <textarea name="trivia_quote" id="trivia_quote" class="standard_tile_input_area"></textarea>
-            <br><br>
-            <input type="hidden" name="action" value="add_trivia">
-            <input type="submit" value="Submit" class="topbutton_cpanel_small">
-
-            </form>
-        </div>
-        </fieldset>
-        <br>
-        {foreach from=$trivia item=line}
-            <fieldset class="primary_fieldset" id="Ajax_trivia_quote_{$line.trivia_quote_id}">
-            <legend class="primary_legend">Trivia ID {$line.trivia_quote_id}</legend>
-            <br>
-            {$line.trivia_quote}
-            <br>
-            <br>
-            <form action="../trivia/db_trivia.php" method="post" name="trivia{$line.trivia_quote_id}" id="trivia{$line.trivia_quote_id}">
-                <input type="hidden" name="action" value="delete_trivia_quote">
-                <input type="hidden" name="trivia_quote_id" value="{$line.trivia_quote_id}">
-                <input type="submit" value="Delete" class="topbutton_cpanel_small">
-                <input type="button" value="Edit" class="topbutton_cpanel_small" onclick="EditTriviaQuote({$line.trivia_quote_id})">
-            </form>
+        <form action="../trivia/db_trivia.php" method="post" name="triviaquote" id="triviaquote">
+            <fieldset class="secondary_fieldset centered_fieldset">
+            <legend class="primary_legend">Add new Trivia</legend>
+                Trivia Text<br>
+                <textarea name="trivia_quote" id="trivia_quote" class="primary_textarea" rows="4"></textarea>
+                <br><br>
+                <input type="hidden" name="action" value="add_trivia">
+                <input type="submit" value="Submit" class="secondary_button">
             </fieldset>
-            <br>
-        {/foreach}
+        </form>
+        <br>
+        <div id="add_quote_list">
+            {foreach from=$trivia item=line}
+                <fieldset class="secondary_fieldset" id="Ajax_trivia_quote_{$line.trivia_quote_id}">
+                    <legend class="primary_legend">Trivia ID {$line.trivia_quote_id}</legend>
+                    <form action="" method="post" name="trivia{$line.trivia_quote_id}" id="JSTrivia{$line.trivia_quote_id}">
+                        <br>
+                        <div id="JSTrivia_{$line.trivia_quote_id}">
+                            {$line.trivia_quote}
+                        </div>
+                        <br>
+                        <br>
+                        <input type="hidden" name="trivia_quote_id" value="{$line.trivia_quote_id}">
+                        <input type="button" value="Delete"  class="secondary_button" onclick="TriviaQuoteDeleteConfirmation({$line.trivia_quote_id})">
+                        <div id="JSTriviaEdit_{$line.trivia_quote_id}" style="display:inline-block;">
+                            <input type="button" value="Edit" class="secondary_button" onclick="EditTriviaQuote({$line.trivia_quote_id})">
+                        </div>
+                    </form>
+                </fieldset>
+                <br>
+            {/foreach}
+        </div>
     </div>
 </div>
 {/block}

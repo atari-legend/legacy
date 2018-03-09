@@ -155,6 +155,7 @@ if (isset($action) and $action == 'modify_link') {
 
     // Do the website updating
     $website_description_text = $mysqli->real_escape_string($website_description_text);
+    $website_description_text = trim($website_description_text);
     if (isset($website_inactive)) {
         $mysqli->query("UPDATE website SET website_name='$website_name', website_url='$website_url', description='$website_description_text', inactive=TRUE WHERE website_id='$website_id'") or die($mysqli->error);
     } else {
@@ -206,7 +207,7 @@ if (isset($action) and $action == "val_delete") {
     //**************************************************************************************************************************
     // This is where we delete links that has been submitted that we don't want.
     //**************************************************************************************************************************
-    create_log_entry('Links', $website_id, 'Link', $website_id, 'Delete', $_SESSION['user_id']);
+    create_log_entry('Links', $website_id, 'Link submit', $website_id, 'Delete', $_SESSION['user_id']);
 
     $sql = $mysqli->query("DELETE FROM website_validate WHERE website_id = '$website_id'");
 

@@ -333,6 +333,15 @@ function statistics_stack() {
 
     mysqli_free_result($query);
 
+    // START - RELEASE STATS
+    $query     = $mysqli->query("SELECT COUNT(id) AS count FROM game_release");
+    $game_releases = $query->fetch_array(MYSQLI_BOTH);
+    $stack[]   = "$game_releases[count] releases in archive";
+
+    // END - RELEASE STATS
+
+    mysqli_free_result($query);
+
     // START - COUNT GAME SCREENSHOTS IN ARCHIVE
     $query           = $mysqli->query("SELECT COUNT(*) AS count FROM screenshot_game");
     $gamescreencount = $query->fetch_array(MYSQLI_BOTH);
@@ -411,15 +420,6 @@ function statistics_stack() {
     $stack[]       = "$game_download[count] games have download";
 
     // END - COUNT HOW MANY GAMES HAS DOWNLOAD
-
-    mysqli_free_result($query);
-
-    // START - RELEASE YEAR STATS
-    $query     = $mysqli->query("SELECT COUNT(game_id) AS count FROM game_year");
-    $game_year = $query->fetch_array(MYSQLI_BOTH);
-    $stack[]   = "$game_year[count] games have a release year set";
-
-    // END - RELEASE YEAR STATS
 
     mysqli_free_result($query);
 
@@ -546,12 +546,7 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
         }
 
         if ($subsection == 'Year') {
-            //  get the game year
-            $query_gameyear = "SELECT game_year FROM game_year WHERE game_year_id = '$subsection_id'";
-            $result = $mysqli->query($query_gameyear) or die("getting gameyear failed");
-            $query_data      = $result->fetch_array(MYSQLI_BOTH);
-            $subsection_name = $query_data['game_year'];
-            $subsection_id   = $section_id;
+            die("The table game_year has been deprecated and should not be used anymore");
         }
 
         if ($subsection == 'Similar') {
@@ -623,19 +618,6 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
         if ($subsection == 'DYK' or $subsection == 'Quote' or $subsection == 'Spotlight') {
             $subsection_name = ("Trivia ID " . $subsection_id);
             $section_name    = ("Trivia ID " . $subsection_id);
-        }
-    }
-
-    //  Everything we do for the USERS SECTION
-    if ($section == 'Users') {
-        // Get the username
-        $query_username = "SELECT userid FROM users WHERE user_id = '$section_id'";
-        $result = $mysqli->query($query_username) or die("getting user name failed");
-        $query_data   = $result->fetch_array(MYSQLI_BOTH);
-        $section_name = $query_data['userid'];
-
-        if ($subsection == 'Avatar' or $subsection == 'User') {
-            $subsection_name = $section_name;
         }
     }
 

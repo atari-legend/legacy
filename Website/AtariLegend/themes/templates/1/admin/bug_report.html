@@ -19,7 +19,7 @@
     <div class="standard_tile_padding">
         {if isset($bug_report)}
             {foreach from=$bug_report item=line}
-                <fieldset class="primary_fieldset">
+                <fieldset class="secondary_fieldset">
                 <legend class="primary_legend">Posted by <a href="../user/user_detail.php?user_id_selected={$line.user_id}" class="standard_tile_link_reverse">{$line.userid}</a> on {$line.bug_report_date} </legend>
                 <br>
                 <b><u>Type : {$line.bug_report_type}</u></b>
@@ -30,7 +30,7 @@
                 <form action="../administration/db_bug_report.php" method="post" name="bug{$line.bug_report_id}" id="bug{$line.bug_report_id}">
                     <input type="hidden" name="action" value="delete">
                     <input type="hidden" name="bug_report_id" value="{$line.bug_report_id}">
-                    <input type="submit" value="Delete"  class="topbutton_cpanel_small">
+                    <input type="submit" value="Delete"  class="secondary_button">
                 </form>
                 </fieldset>
                 <br>

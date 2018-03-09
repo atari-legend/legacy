@@ -107,13 +107,15 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH)) {
             if ($log['action'] == 'Delete') {
                 $subsection_link = ("../administration/change_log.php");
             } else {
-                $subsection_link = ("../games/games_comment_edit.php" . '?game_user_comments_id=' . $log['sub_section_id'] . '&v_counter=0');
+                //$subsection_link = ("../games/games_comment_edit.php" . '?game_user_comments_id=' . $log['sub_section_id'] . '&v_counter=0');
+                $subsection_link = ("../administration/comments.php");
             }
         }
 
         if ($log['sub_section'] == 'Review' or $log['sub_section'] == 'Review comment') {
             if ($log['action'] == 'Delete') {
-                $subsection_link = ("../games/games_review_add.php" . '?game_id=' . $log['section_id']);
+                //$subsection_link = ("../games/games_review_add.php" . '?game_id=' . $log['section_id']);
+                $subsection_link = ("../games/games_review.php");
             } else {
                 $subsection_link = ("../games/games_review_edit.php" . '?reviewid=' . $log['sub_section_id'] . '&game_id=' . $log['section_id']);
             }
@@ -185,6 +187,15 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH)) {
         if ($log['sub_section'] == 'Link' or $log['sub_section'] == 'Category') {
             $subsection_link = ("../links/link_mod.php" . '?website_id=' . $log['section_id']);
         }
+
+        if ($log['sub_section'] == 'Link submit') {
+            // There's no screen to point to for a single link to validate
+            // (They are all listed in the single "Validate link" page)
+            // Point the main section link to this page
+            // and point the subsection link to an anchor for the specific website to validate
+            $section_link = ("../links/link_addnew.php");
+            $subsection_link = ("../links/link_addnew.php#new-link-".$log['sub_section_id']);
+        }
     }
 
     //  the LINKS CATEGORRY SECTION
@@ -233,20 +244,23 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH)) {
             if ($log['action'] == 'Delete') {
                 $subsection_link = ("../administration/change_log.php");
             } else {
-                $subsection_link = ("../interviews/interviews_comment_edit.php" . '?interview_user_comments_id=' . $log['sub_section_id'] . '&v_counter=0');
+                //$subsection_link = ("../interviews/interviews_comment_edit.php" . '?interview_user_comments_id=' . $log['sub_section_id'] . '&v_counter=0');
+                $subsection_link = ("../administration/comments.php");
             }
         }
     }
 
     //  the REVIEW SECTION
     if ($log['section'] == 'Reviews') {
-        $section_link = ("../games/games_review_comment_edit.php" . '?review_user_comments_id=' . $log['sub_section_id'] . '&v_counter=0');
+        //$section_link = ("../games/games_review_comment_edit.php" . '?review_user_comments_id=' . $log['sub_section_id'] . '&v_counter=0');
+        $subsection_link = ("../administration/comments.php");
 
         if ($log['sub_section'] == 'Comment') {
             if ($log['action'] == 'Delete') {
                 $subsection_link = ("../administration/change_log.php");
             } else {
-                $subsection_link = ("../games/games_review_comment_edit.php" . '?review_user_comments_id=' . $log['sub_section_id'] . '&v_counter=0');
+                //$subsection_link = ("../games/games_review_comment_edit.php" . '?review_user_comments_id=' . $log['sub_section_id'] . '&v_counter=0');
+                $subsection_link = ("../administration/comments.php");
             }
         }
     }

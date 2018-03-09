@@ -6,32 +6,6 @@
 // media queries
 //------------------------------------------------------------ */
 
-@media screen and (max-width: 360px) {
-    #file_upload_game_screenshots,
-    #file_upload_game_detail,
-    #file_upload_game_music {
-        width: 50%;
-    }
-}
-@media screen and (max-width: 399px) {
-    #quick_search_options,
-    #quick_search_user_options {
-        width: 75%;
-        margin-left: 15%;
-    }
-    .menu_list_crew_column {
-        display: none;
-    }
-}
-@media screen and (max-width: 450px) {
-    #download-json,
-    .joindate_column,
-    .log_subsection_column,
-    .log_date_column,
-    .menu_credits_column {
-        display: none;
-    }
-}
 @media screen and (min-width: 451px) {
     #games_main_list_4,
     #games_main_list_3,
@@ -50,16 +24,11 @@
         width: 100%;
     }
     #download_details_text,
-    .games_main_text,
-    .games_main_input {
+    .games_main_text_site {
         display: inline;
     }
     #news_approve_icon {
         display: none;
-    }
-    .games_main_row {
-        width: 50%;
-        margin-left: 10%;
     }
     .links_addnew_text,
     .links_addnew_input {
@@ -83,14 +52,6 @@
     #child_1_user {
         margin-bottom: 5px;
     }
-    #file_upload_user_detail {
-        width: 55%;
-    }
-}
-@media screen and (min-width: 499px) {
-    #linkcat_small {
-        display: none;
-    }
 }
 @media screen and (max-width: 500px) {
     .user_main_container {
@@ -99,18 +60,8 @@
     #user_main_child_3 {
         margin-top: 5px;
     }
-    .menu_list_individual_column,
-    .menu_crew_column,
-    .db_result_column,
-    .db_state_column,
-    .db_id_column,
-    .db_exe_column,
-    .nrreviews_gr_column,
     #linkcat_wide {
         display: none;
-    }
-    .menu_disk_set_column {
-        text-align: center;
     }
     .gc_center_column {
         width: 65%;
@@ -122,41 +73,17 @@
         flex-direction: column;
     }
 }
-@media screen and (max-width: 525px) {
-    .log_subsection_column {
-        display: none;
-    }
-}
+
 @media screen and (max-width: 550px) {
-    .links_mod_text,
-    .links_mod_input {
-        width: 100%;
-        display: block;
-    }
-    .links_mod_row {
-        width: 100%;
-        margin-bottom: 10px;
-    }
     #website_name,
     #website_url {
         width: 62%;
     }
-    #website_category_select {
-        width: 63.7%;
-    }
     .links_mod_container {
         margin-left: 3.5%;
     }
-    .games_main_text {
+    .games_main_text_site {
         width: 35%;
-    }
-    .games_main_input {
-        width: 65%;
-    }
-    .menu_state_column,
-    .menu_gamedeveloper_column,
-    .zaks_gm_column {
-        display: none;
     }
     .tech_doc_img {
         width: 90%;
@@ -169,6 +96,9 @@
     }
     #latest_changes_chart {
         flex-wrap: wrap;
+    }
+    #linkcat_small {
+        display: none;
     }
     #child_some_stats,
     #child_good_karma_chart,
@@ -196,10 +126,6 @@
 
 
 @media screen and (max-width: 599px) {
-    #quick_search_options,
-    #quick_search_user_options {
-        margin-left: 30%;
-    }
     .scroll-top-wrapper {
         width: 40px;
         height: 38px;
@@ -210,16 +136,8 @@
 }
 @media screen and (max-width: 600px) {
     .download_long_descr,
-    .db_result_column,
-    .db_state_column,
-    .db_id_column,
-    .nr_menus_column,
-    .menu_type_column,
     .news_images_name,
-    .username_gr_column,
-    .publisher_table_column,
     #user_stats_img_dark,
-    .lastvisit_column,
     .game_details_review_preview_left,
     .games_main_text_short,
     #child_3_games {
@@ -227,9 +145,6 @@
     }
     .download_short_descr {
         display: inline;
-    }
-    .game_name_column {
-        text-align: center;
     }
     #gd_basic_game_info_category {
         width: 100%;
@@ -259,9 +174,6 @@
     #gd_publisher_info {
         margin-top: 0;
     }
-    #gd_text_area_big {
-        height: 100%;
-    }
     .games_main_text_site {
         display: inline;
         width: 100%;
@@ -276,7 +188,6 @@
     .games_main_row_site {
         width: 90%;
     }
-    .standard_tile_input_small_site,
     #games_main_select_site {
         margin-bottom: 10px;
     }
@@ -333,11 +244,6 @@
     }
 }
 
-@media screen and (max-width: 650px) {
-    #interview_preview_photo {
-        display: none;
-    }
-}
 @media screen and (min-width: 671px) {
     #games_main_list_4,
     #games_main_list_2,
@@ -348,15 +254,7 @@
         display: inline;
     }
 }
-@media screen and (max-width: 700px) {
-    .menu_gameyear_column,
-    .menu_gameinfo_column,
-    .menu_gameset_column,
-    .menu_docinfo_column,
-    .log_name_column {
-        display: none;
-    }
-}
+
 @media screen and (min-width: 768px) {
     .cd-timeline-content h2 {
         font-size: 20px;
@@ -371,18 +269,47 @@
         font-size: 14px;
         font-size: .875rem;
     }
+    .main_container_cpanel {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: flex-start;
+        align-content: stretch;
+    }
+    #column_left_cpanel {
+        max-width: 360px;
+        min-width: 240px;
+        flex: 1 2 360px;
+        align-self: flex-start;
+        float: left;
+        margin-left: 0;
+        margin-top: 0;
+    }
+    #column_center_cpanel {
+        max-width: 74%;
+        min-width: 500px;
+        flex: 2 3 320px;
+        align-self: flex-start;
+        float: right;
+        margin-left: 15px;
+        margin-right: 15px;
+        margin-top: 0;
+    }
+    #column_right_cpanel {
+        display: none;
+        max-width: 360px;
+        min-width: 240px;
+    }
 }
 @media screen and (max-width: 799px) {
     .games_main_detail_nav,
-    .games_main_details_info_position_high,
-    #column_right_cpanel {
+    .games_main_details_info_position_high {
         display: none;
     }
     .games_main_details_info_position_low {
         display: inline;
     }
-    .main_container_games_details,
-    .main_container_cpanel {
+    .main_container_games_details {
         display: flex;
         flex-direction: column-reverse;
         float: left;
@@ -391,8 +318,7 @@
     .main_container_games_details > div {
         width: 100%;
     }
-    .content_box_games_details,
-    .content_box_cpanel {
+    .content_box_games_details {
         display: block;
         margin: 0 auto;
     }
@@ -425,34 +351,6 @@
         width: 100%;
         float: left;
     }
-    #quick_search_options,
-    #quick_search_user_options {
-        display: table;
-        width: 50%;
-        margin-left: 40%;
-        margin-right: auto;
-        text-align: left;
-    }
-    #column_left_cpanel,
-    #column_center_cpanel {
-        width: 100%;
-        float: left;
-        margin: auto;
-    }
-    .main_container_cpanel > div {
-        width: 100%;
-    }
-}
-@media screen and (min-width: 800px) and (max-width: 991px) {
-    #column_left_cpanel,
-    #column_center_cpanel {
-        width: 100%;
-        float: left;
-        margin: auto;
-    }
-    #column_right_cpanel {
-        display: none;
-    }
 }
 
 @media screen and (min-width: 800px) {
@@ -472,16 +370,23 @@
     .news_date {
         display: inline;
     }
-    .news_right_head,
-    .db_result_column,
-    .db_state_column {
+    .news_right_head {
         display: none;
     }
     .news_left_head {
         width: 100%;
     }
 }
-@media screen and (min-width: 950px) {
+
+@media screen and (min-width: 992px) {
+    .main_company_container {
+        flex-direction: row;
+    }
+    .child_edit_company,
+    .child_add_company {
+        float: left;
+        width: 100%;
+    }
     #games_main_list_4,
     #games_main_list_2,
     #games_main_list_1 {
@@ -489,11 +394,6 @@
     }
     #games_main_list_3 {
         display: inline;
-    }
-}
-@media screen and (max-width: 985px) {
-    .developer_table_column {
-        display: none;
     }
 }
 @media screen and (max-width: 999px) {
@@ -524,14 +424,6 @@
     }
 }
 
-@media screen and (max-width: 1000px) {
-    .standard_tile_input_small_site {
-        width: 97.7%;
-    }
-    .pub_gm_column {
-        display: none;
-    }
-}
 @media screen and (max-width: 1050px) {
     .games_main_input_site_text {
         width: 50%;
@@ -550,38 +442,16 @@
     #child_1_user {
         margin-bottom: 5px;
     }
-    .menu_individual_column {
-        display: none;
-    }
-    .games_check_container {
-        flex-direction: column;
-        width: 100%;
-    }
     #child_1,
     #child_2 {
         width: 100%;
         margin-left: 10%;
     }
-    .games_main_row {
-        width: 90%;
-    }
-    .games_main_text {
+    .games_main_text_site {
         width: 40%;
     }
-    .games_main_input {
-        width: 60%;
-    }
 }
-@media screen and (max-width: 1100px) {
-    .reviewdate_gr_column {
-        display: none;
-    }
-    #quick_search_options,
-    #quick_search_user_options {
-        margin-left: 5%;
-        width: 100%;
-    }
-}
+
 @media screen and (max-width: 1169px) {
     .fa-birthday-cake {
         margin-left: 10%;
@@ -597,9 +467,6 @@
     }
     .cd-icon2 {
         margin-top: 8px;
-    }
-    .email_column {
-        display: none;
     }
 }
 @media screen and (min-width: 1170px) {
@@ -640,7 +507,7 @@
     .cd-timeline-content .cd-date {
         position: absolute;
         width: 100%;
-        left: 140%;
+        left: 160%;
         top: 6px;
         font-size: 16px;
         font-size: 1rem;
@@ -660,7 +527,7 @@
     }
     .cd-timeline-block:nth-child(even) .cd-timeline-content .cd-date {
         left: auto;
-        right: 140%;
+        right: 160%;
         text-align: right;
     }
     .cssanimations .cd-timeline-content.is-hidden {
@@ -708,9 +575,6 @@
     #review_screenshots {
         background: #006f6f;
     }
-    .log_subname_column {
-        display: none;
-    }
 }
 
 // Extra large devices (large desktops, 1200px and up)
@@ -746,13 +610,18 @@
         width: 100%;
         height: 100%;
     }
-}
-
-
-@media screen and (max-width: 1210px) {
-    .information_table_column,
-    .release_year_column {
-        display: none;
+    #column_left_cpanel {
+        float: left;
+        width: 20%;
+    }
+    #column_center_cpanel {
+        float: left;
+        width: 58%;
+    }
+    #column_right_cpanel {
+        display: block;
+        float: right;
+        width: 20%;
     }
 }
 @media screen and (min-width: 601px) and (max-width: 1279px) {
@@ -776,7 +645,6 @@
     #welcome {
         margin-top: 0;
     }
-    .db_result_column,
     #gd_other_features {
         display: none;
     }
@@ -830,29 +698,6 @@
     }
 }
 
-@media screen and (min-width: 992px) and (max-width: 1280px) {
-    #column_left_cpanel {
-        width: 25%;
-        float: left;
-    }
-    #column_center_cpanel {
-        width: 73%;
-        float: right;
-    }
-    #column_right_cpanel {
-        display: none;
-    }
-}
-
-
-@media screen and (max-width: 1449px) {
-    .standard_tile_input_small_site {
-        width: 98.3%;
-    }
-    .year_gm_column {
-        display: none;
-    }
-}
 @media screen and (max-width: 1494px) {
     .datequote_position_front,
     .tile_open_db_front,
@@ -867,7 +712,7 @@
 
 @media screen and (min-width: 1495px) {
     .latest_news,
-    .statistics_position_front{
+    .statistics_position_front {
         float: left;
         width: 48%;
     }
@@ -918,17 +763,7 @@
     }
 }
 @media screen and (max-width: 1549px) {
-    .main_company_container {
-        flex-direction: column;
-    }
-    #child_edit_company,
-    #child_add_company {
-        float: left;
-        margin-bottom: 30px;
-    }
-    .main_company_container > div {
-        width: 100%;
-    }
+
 }
 @media screen and (min-width: 1600px) {
     #games_main_list_3,
@@ -938,11 +773,6 @@
     }
     #games_main_list_4 {
         display: inline;
-    }
-}
-@media screen and (max-width: 1750px) {
-    .gamepub_gr_column {
-        display: none;
     }
 }
 @media screen and (max-width: 1919px) {

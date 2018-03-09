@@ -117,7 +117,7 @@
                         <tr></tr>
                         <tr style="display:none;" id="profile{$line.pub_id}">
                             <td colspan="3" style="text-align:center;">
-                                <textarea cols="70" id="profile{$line.pub_id}" class="latest_comments_textarea" style="margin-top:5px;margin-bottom:5px;font-size:10pt;" readonly>
+                                <textarea id="profile{$line.pub_id}" class="primary_textarea" rows="5" style="margin-top:5px;margin-bottom:5px;font-size:10pt;margin-left:auto;margin-right:auto;" readonly>
                                     {$line.pub_profile}
                                 </textarea>
                             </td>
@@ -125,32 +125,28 @@
                     {/if}
                 {/foreach}
             {/if}
-            {if isset($game_year)}
-                {foreach from=$game_year item=line name=game_year}
-                    <tr>
-                        <td class="w-30">
-                        {if $smarty.foreach.game_year.index == 0}
-                            <span class="games_main_detail_info_right">Year</span>
+            {if isset($releases)}
+                {foreach from=$releases item=$release name=release}
+                <tr>
+                    <td class="w-30">
+                        {if $smarty.foreach.release.index == 0}
+                            <span class="games_main_detail_info_right">Releases</span>
                         {/if}
-                            {if $line.extra_info != ''}
-                                <br><br>
+                    </td>
+                    <td class="w-5">
+                        <span class="games_main_detail_info_left text-center">-</span>
+                    </td>
+                    <td class="w-60">
+                        <span class="games_main_detail_info_left">
+                            <a href="games_main_list.php?year={$release->getDate()|date_format:"%Y"}&amp;action=search" class="standard_tile_link">
+                                {$release->getDate()|date_format:"%Y"}
+                            </a>
+                            {if $release->getName()}
+                                <small class="standard_tile_subtext">as "<em>{$release->getName()}</em>"</small>
                             {/if}
-                        </td>
-                        <td class="w-5">
-                            <span class="games_main_detail_info_left text-center">-</span>
-                            {if $line.extra_info != ''}
-                                <br><br>
-                            {/if}
-                        </td>
-                        <td class="w-60">
-                            <span class="games_main_detail_info_left">
-                                <a href="games_main_list.php?year={$line.game_year}&amp;action=search" class="standard_tile_link">{$line.game_year}</a>
-                            </span>
-                            {if $line.extra_info != ''}
-                                <br><span class="standard_tile_subtext">{$line.extra_info}</span>
-                            {/if}
-                        </td>
-                    </tr>
+                        </span>
+                    </td>
+                </tr>
                 {/foreach}
             {/if}
             {if isset($developer)}
@@ -189,8 +185,8 @@
                     {if $line.pub_profile != ''}
                         <tr></tr>
                         <tr style="display:none;" id="profile{$line.pub_id}">
-                            <td colspan="3" style="text-align:center;">
-                                <textarea cols="70" id="profile{$line.pub_id}" class="latest_comments_textarea" style="margin-top:5px;margin-bottom:5px;font-size:10pt;" readonly>
+                            <td colspan="3">
+                                <textarea id="profile{$line.pub_id}" class="primary_textarea" rows="6" style="margin-top:5px;margin-bottom:5px;font-size:10pt;margin-left:auto;margin-right:auto;" readonly>
                                     {$line.pub_profile}
                                 </textarea>
                             </td>
@@ -254,8 +250,8 @@
                     {if $line.ind_profile != ''}
                         <tr></tr>
                         <tr style="display:none;" id="profile_ind{$line.ind_id}">
-                            <td colspan="3" style="text-align:center;">
-                                <textarea cols="70" id="profile_ind{$line.ind_id}" class="latest_comments_textarea" style="margin-top:5px;margin-bottom:5px;font-size:10pt;" readonly>
+                            <td colspan="3">
+                                <textarea id="profile{$line.ind_id}" class="primary_textarea" rows="6" style="margin-top:5px;margin-bottom:5px;font-size:10pt;margin-left:auto;margin-right:auto;" readonly>
                                     {$line.ind_profile}
                                 </textarea>
                             </td>
@@ -476,11 +472,15 @@
                         </td>
                         <td class="w-60">
                             {if isset($line.amiga_id) and $line.amiga_id != 0}
-                                <a href="http://www.lemonamiga.com/?game_id={$line.amiga_id}"><img src="../../includes/show_image.php?file={$style_dir2}images/Amiga.png&amp;resize=80,null,null,null" style="display:inline;margin-top:5px; border: 1px solid #666666; background: black;" class="game_screenshot_img"></a>
+                                <a href="http://www.lemonamiga.com/?game_id={$line.amiga_id}">
+                                    <img src="../../includes/show_image.php?file={$style_dir2}images/Amiga.png&amp;resize=80,null,null,null" style="display:inline;margin-top:5px; border: 1px solid #666666; background: black;" alt="Lemon Amiga">
+                                </a>
                             {/if}
                             {if isset($line.C64_id) and $line.C64_id != 0}
                                 <br>
-                                <a href="http://www.lemon64.com/?game_id={$line.C64_id}"><img src="../../includes/show_image.php?file={$style_dir2}images/c64.jpg&amp;resize=80,null,null,null" style="display:inline;margin-top:5px;border: 1px solid #666666; background: black;" class="game_screenshot_img"></a>
+                                <a href="http://www.lemon64.com/?game_id={$line.C64_id}">
+                                    <img src="../../includes/show_image.php?file={$style_dir2}images/c64.jpg&amp;resize=80,null,null,null" style="display:inline;margin-top:5px;border: 1px solid #666666; background: black;" alt="Lemon 64">
+                                </a>
                             {/if}
                         </td>
                     </tr>

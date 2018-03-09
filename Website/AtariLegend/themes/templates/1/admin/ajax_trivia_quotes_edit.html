@@ -1,41 +1,126 @@
 {* Edit form for the trivia quote *}
 {if isset($smarty_action) and $smarty_action == "trivia_quote_edit"}
-<legend class="primary_legend">Trivia ID {$trivia_quote_id}</legend>
-<br>
-<form action="../trivia/db_trivia.php" method="post" name="trivia{$trivia_quote_id}" id="trivia{$trivia_quote_id}" class="JSTriviaEditForm">
-    <input type="text" name="trivia_quote" value="{$trivia_quote}" class="standard_input input_full">
-    <br>
-    <br>
-
-    <input type="hidden" name="action" value="edit_trivia_quote">
-    <input type="hidden" name="trivia_quote_id" value="{$trivia_quote_id}">
-<input type="button" value="Edit" class="topbutton_cpanel_small" id="JSSubmitEditTriviaQuote">
-</form>
+    <textarea name="trivia_text" id="trivia_text" class="primary_textarea" rows="4">{$trivia_quote}</textarea>
+    [BRK]
+    <input type="button" value="Update" class="secondary_button" onclick="TriviaQuoteUpdate({$trivia_quote_id})">
 {/if}
 
-{if isset($smarty_action) and $smarty_action == "display_trivia_quoute"}
-<legend class="primary_legend">Trivia ID {$trivia_quote_id}</legend>
-<br>
-{$trivia_quote}
-<br>
-<br>
-<form action="../trivia/db_trivia.php" method="post" name="trivia{$trivia_quote_id}" id="trivia{$trivia_quote_id}">
-    <input type="hidden" name="action" value="delete_trivia_quote">
-    <input type="hidden" name="trivia_quote_id" value="{$trivia_quote_id}">
-    <input type="submit" value="Delete" class="topbutton_cpanel_small">
-    <input type="button" value="Edit" class="topbutton_cpanel_small" onclick="EditTriviaQuote({$trivia_quote_id})">
-</form>
+{* Return View for the trivia update *}
+{if isset($smarty_action) and $smarty_action == "trivia_quote_update_returnview"}
+    {$trivia_text}
+    [BRK]
+    <input type="button" value="Edit"  class="secondary_button" onclick="EditTriviaQuote({$trivia_quote_id})">
 {/if}
+
 {* Edit form for the did you know quote *}
 {if isset($smarty_action) and $smarty_action == "did_you_know_edit_view"}
-    <textarea name="trivia_text" id="trivia_text" class="standard_tile_input_area">{$trivia_text}</textarea>
+    <textarea name="trivia_text" id="trivia_text" class="primary_textarea" rows="4">{$trivia_text}</textarea>
     [BRK]
-    <input type="button" value="Update"  class="topbutton_cpanel_small" onclick="DidyouknowUpdate({$trivia_id})">
+    <input type="button" value="Update"  class="secondary_button" onclick="DidyouknowUpdate({$trivia_id})">
 {/if}
 
 {* Return View for the did you know update *}
 {if isset($smarty_action) and $smarty_action == "did_you_know_update_returnview"}
     {$trivia_text}
     [BRK]
-    <input type="button" value="Edit"  class="topbutton_cpanel_small" onclick="DidyouknowEdit({$trivia_id})">
+    <input type="button" value="Edit"  class="secondary_button" onclick="DidyouknowEdit({$trivia_id})">
+{/if}
+
+
+{if isset($smarty_action) and $smarty_action == "delete_trivia_quote"}
+{foreach from=$trivia item=line}
+    <fieldset class="secondary_fieldset" id="Ajax_trivia_quote_{$line.trivia_quote_id}">
+        <legend class="primary_legend">Trivia ID {$line.trivia_quote_id}</legend>
+        <form action="" method="post" name="trivia{$line.trivia_quote_id}" id="JSTrivia{$line.trivia_quote_id}">
+            <br>
+            <div id="JSTrivia_{$line.trivia_quote_id}">
+                {$line.trivia_quote}
+            </div>
+            <br>
+            <br>
+            <input type="hidden" name="trivia_quote_id" value="{$line.trivia_quote_id}">
+            <input type="button" value="Delete"  class="secondary_button" onclick="TriviaQuoteDeleteConfirmation({$line.trivia_quote_id})">
+            <div id="JSTriviaEdit_{$line.trivia_quote_id}" style="display:inline-block;">
+                <input type="button" value="Edit" class="secondary_button" onclick="EditTriviaQuote({$line.trivia_quote_id})">
+            </div>
+        </form>
+    </fieldset>
+    <br>
+{/foreach}
+
+{if isset($osd_message)}
+    [BRK]{$osd_message}
+{/if}
+{/if}
+
+{if isset($smarty_action) and $smarty_action == "delete_did_you_know"}
+{foreach from=$trivia item=line}
+    <fieldset class="secondary_fieldset" id="JStrivia_id_{$line.trivia_id}">
+        <legend class="primary_legend">Trivia ID {$line.trivia_id}</legend>
+        <form action="" method="post" name="trivia{$line.trivia_id}" id="JSTrivia{$line.trivia_id}">
+            <br>
+            <div id="JSDidYouKnow_{$line.trivia_id}">
+                {$line.trivia_text}
+            </div>
+            <br>
+            <br>
+            <input type="hidden" name="trivia_id" value="{$line.trivia_id}">
+            <input type="button" value="Delete"  class="secondary_button" onclick="DidyouknowdeleteConfirmation({$line.trivia_id})">
+            <div id="JSDidYouKnowEdit_{$line.trivia_id}" style="display:inline-block;">
+            <input type="button" value="Edit"  class="secondary_button" onclick="DidyouknowEdit({$line.trivia_id})">
+            </div>
+        </form>
+    </fieldset>
+    <br>
+{/foreach}
+
+{if isset($osd_message)}
+    [BRK]{$osd_message}
+{/if}
+{/if}
+
+{if isset($smarty_action) and $smarty_action == "delete_spotlight"}
+{foreach from=$spotlight item=line}
+    <fieldset class="secondary_fieldset centered_fieldset">
+        <legend class="primary_legend">Spotlight ID {$line.spotlight_id}</legend>
+        <form action="" method="post" name="Spotlight{$line.spotlight_id}" id="JSSpotlight{$line.spotlight_id}">
+            <br>
+            {$line.spotlight}
+            <br>
+            <br>
+            <div style="text-align:center;">
+                <a href="{$line.link}">
+                    <img src="../../includes/show_image.php?file={$line.spotlight_screenshot}&amp;resize=170,null,null,null" alt="Click to enlarge!" style="display:inline;"  class="user_stats_img" id="user_details_img_dark">
+                </a>
+            </div>
+            <br>
+            <br>
+            <input type="hidden" name="action" value="spotlight_delete">
+            <input type="hidden" name="spotlight_id" value="{$line.spotlight_id}">
+            <input type="button" value="Delete"  class="secondary_button" onclick="SpotlightdeleteConfirmation({$line.spotlight_id})">
+            <div id="JSSpotlightEdit_{$line.spotlight_id}" style="display:inline-block;">
+                <input type="button" value="Edit"  class="secondary_button" onclick="SpotlightEdit({$line.spotlight_id})">
+            </div>
+        </form>
+    </fieldset>
+    <br>
+{/foreach}
+
+{if isset($osd_message)}
+    [BRK]{$osd_message}
+{/if}
+{/if}
+
+{* Edit form for the spotlight *}
+{if isset($smarty_action) and $smarty_action == "spotlight_edit_view"}
+    <textarea name="spot_text" id="spot_text" class="primary_textarea" rows="4">{$spotlight.spotlight}</textarea>
+    [BRK]
+    <input type="button" value="Update"  class="secondary_button" onclick="SpotlightUpdate({$spotlight.spotlight_id})">
+{/if}
+
+{* Return View for the spotlight update *}
+{if isset($smarty_action) and $smarty_action == "spotlight_update_returnview"}
+    {$spot_text}
+    [BRK]
+    <input type="button" value="Edit"  class="secondary_button" onclick="SpotlightEdit({$spotlight_id})">
 {/if}

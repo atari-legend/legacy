@@ -6,18 +6,6 @@
 //*************************************************************/
 //*---------------------Links addnew------------------------ */
 
-.links_addnew_area {
-    width: 90%;
-    height: 150px;
-    padding: 0;
-    padding-left: 5px;
-    margin-top: 0;
-    color: #ffffff;
-    text-align: left;
-    background: #666666;
-    border: 1px solid #b2b2b2;
-}
-
 .links_addnew_text {
     display: table-cell;
     width: 25%;
@@ -91,21 +79,9 @@
 //*----------------------------------------------------------
 //Links Modify
 //------------------------------------------------------------ */
-
-.links_mod_text {
-    display: table-cell;
-    width: 35%;
-    vertical-align: top;
-}
-
-.links_mod_input {
-    display: table-cell;
-    width: 65%;
-}
-
 .links_mod_row {
-    display: table;
     width: 100%;
+    margin-top: 5px;
 }
 
 .links_mod_checkbox {

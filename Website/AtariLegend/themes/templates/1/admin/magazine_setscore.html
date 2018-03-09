@@ -31,7 +31,7 @@
         </div>
         <br>
         <br>
-        <fieldset class="primary_fieldset centered_fieldset">
+        <fieldset class="secondary_fieldset centered_fieldset">
             <legend class="primary_legend">Set review score.</legend>
             <form action="../magazine/db_magazine.php?source=gameinfo&game_id={$game.game_id}" method="post" name="set_score" id="set_score">
                 <label for="name">{$game.game_name} score</label>
@@ -40,7 +40,7 @@
                 <br>
                 <input type="hidden" name="magazine_issue_id" value="{$game.magazine_issue_id}">
                 <input type="hidden" name="action" value="set_score">
-                <input type="submit" value="Add" class="topbutton_cpanel_small">
+                <input type="submit" value="Add" class="secondary_button">
             </form>
         </fieldset>
         <br>

@@ -17,6 +17,10 @@
  *********************************************************************************/
 
 include("../config/connect.php");
+require_once __DIR__."/../common/DAO/GameReleaseDAO.php";
+
+$gameReleaseDao = new \AL\Common\DAO\GameReleaseDAO($mysqli);
+
 $text = $mysqli->real_escape_string($_GET['term']);
 
 $json = array();
@@ -79,13 +83,11 @@ if ($extraVar == 'developer') {
 }
 
 if ($extraVar == 'year') {
-    //Get the results
-    $result = $mysqli->query("SELECT distinct game_year from game_year WHERE game_year LIKE '%$upperString%'
-                                                                       ORDER BY game_year ASC LIMIT 10")
-                     or die("problems getting data from game_year table");
-
-    while ($row = $result->fetch_assoc()) {
-        $json[] = $row['game_year'];
+    $years = $gameReleaseDao->getAllReleasesYears();
+    foreach ($years as $year) {
+        if (strpos("$year", $upperString) === 0) {
+            $json[] = "$year";
+        }
     }
 }
 
