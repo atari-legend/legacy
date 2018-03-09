@@ -67,37 +67,38 @@ if (isset($action) and $action == "did_you_know_delete") {
     $smarty->assign('smarty_action', 'delete_did_you_know');
     
     //Send to smarty for return value
-    $smarty->display("file:" . $cpanel_template_folder . "ajax_did_you_know.html");
+    $smarty->display("file:" . $cpanel_template_folder . "ajax_trivia_quotes_edit.html");
 }
 
 //****************************************************************************************
 // Delete trivia quote!
 //****************************************************************************************
 if (isset($action) and $action == "delete_trivia_quote") {
-    if (isset($trivia_quote_id)) {
-        create_log_entry('Trivia', $trivia_quote_id, 'Quote', $trivia_quote_id, 'Delete', $_SESSION['user_id']);
+    create_log_entry('Trivia', $trivia_quote_id, 'Quote', $trivia_quote_id, 'Delete', $_SESSION['user_id']);
 
-        $sql = $mysqli->query("DELETE FROM trivia_quotes WHERE trivia_quote_id = '$trivia_quote_id'") or die("couldn't delete trivia quote");
+    $sql = $mysqli->query("DELETE FROM trivia_quotes WHERE trivia_quote_id = '$trivia_quote_id'") or die("couldn't delete trivia quote");
 
-        $osd_message = "trivia quote has been deleted";
+    $osd_message = "trivia quote has been deleted";
+    
+    //Get all the trivia quotes
+    $sql_trivia = $mysqli->query("SELECT * FROM trivia_quotes ORDER BY trivia_quote_id") or die("error getting trivia");
+
+    while ($query_trivia = $sql_trivia->fetch_array(MYSQLI_BOTH)) {
+        $trivia_text = nl2br($query_trivia['trivia_quote']);
+        $trivia_text = stripslashes($trivia_text);
         
-        //Get all the trivia quotes
-        $sql_trivia = $mysqli->query("SELECT * FROM trivia_quotes ORDER BY trivia_quote_id");
-
-        while ($query_trivia = $sql_trivia->fetch_array(MYSQLI_BOTH)) {
-            $smarty->append('trivia', array(
-                'trivia_quote_id' => $query_trivia['trivia_quote_id'],
-                'trivia_quote' => $query_trivia['trivia_quote']
-            ));
-        }
-        
-        $smarty->assign('osd_message', $osd_message);
-
-        $smarty->assign('smarty_action', 'delete_trivia_quote');
-        
-        //Send to smarty for return value
-        $smarty->display("file:" . $cpanel_template_folder . "ajax_trivia_quotes_edit.html");
+        $smarty->append('trivia', array(
+            'trivia_quote_id' => $query_trivia['trivia_quote_id'],
+            'trivia_quote' => $trivia_text
+        ));
     }
+    
+    $smarty->assign('osd_message', $osd_message);
+
+    $smarty->assign('smarty_action', 'delete_trivia_quote');
+    
+    //Send to smarty for return value
+    $smarty->display("file:" . $cpanel_template_folder . "ajax_trivia_quotes_edit.html");
 }
 
 //****************************************************************************************
@@ -157,6 +158,160 @@ if (isset($action) and $action == "update_trivia") {
         $smarty->assign('trivia_text', $trivia_text);
 
         $smarty->assign('smarty_action', 'did_you_know_update_returnview');
+        //Send all smarty variables to the templates
+        $smarty->display("file:" . $cpanel_template_folder . "ajax_trivia_quotes_edit.html");
+    }
+}
+
+//****************************************************************************************
+// This is the delete spotlight
+//****************************************************************************************
+if ($action == "spotlight_delete") {
+    if (isset($spotlight_id)) {
+        //Let's get the screenshot id
+        $query_spotlight_screenshot = $mysqli->query("SELECT * FROM spotlight WHERE spotlight_id = " . $spotlight_id . "") or die("something is wrong with mysqli of spotlight screenshots");
+
+        while ($sql_spotlight_screenshot = $query_spotlight_screenshot->fetch_array(MYSQLI_BOTH)) {
+            $screenshot_id = $sql_spotlight_screenshot['screenshot_id'];
+
+            //get the extension
+            $SCREENSHOT = $mysqli->query("SELECT * FROM screenshot_main
+                                      WHERE screenshot_id = '$screenshot_id'") or die("Database error - selecting screenshots");
+
+            $screenshotrow  = $SCREENSHOT->fetch_array(MYSQLI_BOTH);
+            $screenshot_ext = $screenshotrow['imgext'];
+
+            $sql = $mysqli->query("DELETE FROM screenshot_main WHERE screenshot_id = '$screenshot_id' ");
+
+            $new_path = $spotlight_screenshot_save_path;
+            $new_path .= $screenshot_id;
+            $new_path .= ".";
+            $new_path .= $screenshot_ext;
+
+            unlink("$new_path");
+        }
+
+        create_log_entry('Trivia', $spotlight_id, 'Spotlight', $spotlight_id, 'Delete', $_SESSION['user_id']);
+
+        $sql = $mysqli->query("DELETE FROM spotlight WHERE spotlight_id = '$spotlight_id'") or die("couldn't delete spotlight");
+        
+        //load the existing spotlight entries
+        $query_spotlight = $mysqli->query("SELECT * from spotlight
+                                                    LEFT JOIN screenshot_main ON (spotlight.screenshot_id = screenshot_main.screenshot_id)") or die("error in query spotlight");
+
+        while ($sql_spotlight = $query_spotlight->fetch_array(MYSQLI_BOTH)) {
+            $new_path = $spotlight_screenshot_path;
+            $new_path .= $sql_spotlight['screenshot_id'];
+            $new_path .= ".";
+            $new_path .= $sql_spotlight['imgext'];
+
+            $smarty->append('spotlight', array(
+                'spotlight_id' => $sql_spotlight['spotlight_id'],
+                'spotlight_screenshot' => $new_path,
+                'link' => $sql_spotlight['link'],
+                'spotlight' => $sql_spotlight['spotlight']
+            ));
+        }
+        
+        $osd_message = "Spotlight deleted";
+        $smarty->assign('osd_message', $osd_message);
+
+        $smarty->assign('smarty_action', 'delete_spotlight');
+        
+        //Send to smarty for return value
+        $smarty->display("file:" . $cpanel_template_folder . "ajax_trivia_quotes_edit.html");
+    }
+}
+
+//****************************************************************************************
+// This is we add a new spotlight
+//****************************************************************************************
+if ($action == "spotlight_insert") {
+    if ($spot_text == '') {
+        $_SESSION['edit_message'] = "Please add an actual spotlight in the textfield";
+        header("Location: ../trivia/spotlight.php");
+    } else {
+        if ($spot_screen != 'file(s) selected') {
+            $_SESSION['edit_message'] = "Please select a screenshot in the textfield";
+            header("Location: ../trivia/spotlight.php");
+        } else {
+            //Here we'll be looping on each of the inputs on the page that are filled in with an image!
+            $image = $_FILES['image'];
+
+            foreach ($image['tmp_name'] as $key => $tmp_name) {
+                if ($tmp_name !== 'none') {
+                    // Check what extention the file has and if it is allowed.
+
+                    $ext        = "";
+                    $type_image = $image['type'][$key];
+
+                    // set extension
+                    if ($type_image == 'image/png') {
+                        $ext = 'png';
+                    }
+
+                    if ($type_image == 'image/x-png') {
+                        $ext = 'png';
+                    } elseif ($type_image == 'image/gif') {
+                        $ext = 'gif';
+                    } elseif ($type_image == 'image/jpeg') {
+                        $ext = 'jpg';
+                    }
+
+                    if ($ext !== "") {
+                        // First we insert the directory path of where the file will be stored... this also creates an autoinc number for us.
+                        $sdbquery = $mysqli->query("INSERT INTO screenshot_main (screenshot_id,imgext) VALUES ('','$ext')") or die("Database error - inserting screenshots");
+
+                        $new_screenshot_id = $mysqli->insert_id;
+
+                        $spot_text = $mysqli->real_escape_string($spot_text);
+
+                        $mysqli->query("INSERT INTO spotlight ( spotlight, screenshot_id, link ) VALUES ('$spot_text', $new_screenshot_id, '$link')") or die("Inserting the spotlight failed");
+
+                        $new_spotlight_id = $mysqli->insert_id;
+                        create_log_entry('Trivia', $new_spotlight_id, 'Spotlight', $new_spotlight_id, 'Insert', $_SESSION['user_id']);
+
+                        //select the newly entered screenshot_id from the main table
+                        $SCREENSHOT = $mysqli->query("SELECT screenshot_id FROM screenshot_main
+                                               ORDER BY screenshot_id desc") or die("Database error - selecting screenshots");
+
+                        $screenshotrow = $SCREENSHOT->fetch_row();
+                        $screenshot_id = $screenshotrow[0];
+
+                        // Rename the uploaded file to its autoincrement number and move it to its proper place.
+                        $file_data = rename($image['tmp_name'][$key], "$spotlight_screenshot_save_path$screenshotrow[0].$ext");
+
+                        chmod("$spotlight_screenshot_save_path$screenshotrow[0].$ext", 0777);
+                        
+                        $_SESSION['edit_message'] = "Spotlight added to the database";
+                        header("Location: ../trivia/spotlight.php");
+                    } else {
+                        $_SESSION['edit_message'] = "Please select a screenshot in jpg, png or gif";
+                        header("Location: ../trivia/spotlight.php");
+                    }
+                }
+            }
+        }
+    }
+}
+
+//****************************************************************************************
+// Edit spotlight!
+//****************************************************************************************
+if (isset($action) and $action == "update_spotlight") {
+    if (isset($spot_text)) {
+        $trivia_text = $mysqli->real_escape_string($spot_text);
+
+        $mysqli->query("UPDATE spotlight SET spotlight='$trivia_text' WHERE spotlight_id = $spotlight_id") or die('Error: ' . mysqli_error($mysqli));
+
+        create_log_entry('Trivia', $spotlight_id, 'Spotlight', $spotlight_id, 'Edit', $_SESSION['user_id']);
+
+        $trivia_text = stripslashes($trivia_text);
+
+        $smarty->assign('spotlight_id', $spotlight_id);
+        $smarty->assign('spot_text', $trivia_text);
+
+        $smarty->assign('smarty_action', 'spotlight_update_returnview');
         //Send all smarty variables to the templates
         $smarty->display("file:" . $cpanel_template_folder . "ajax_trivia_quotes_edit.html");
     }
