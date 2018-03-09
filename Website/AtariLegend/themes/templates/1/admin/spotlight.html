@@ -9,26 +9,27 @@
 *   Id: spotlight.html,v 0.10 2017/09/20 ST Graveyard
 *
 ***************************************************************************/
-
 *}
 {extends file='1/admin/main.html'}
 
 {block name=java_script}
-<script>
-    $(function() {
-        $but = $('#file_upload_spot_screenshots');
+    <script src="{$template_dir}includes/js/trivia.js"></script> <!-- Load all trivia scripts -->
+    <script>
+        $(function() {
+            $but = $('#file_upload_spot_screenshots');
 
-        $("input:file[id=file_upload]").change(function() {
-            document.getElementById('file_upload_spot_screenshots').value = 'file(s) selected';
+            $("input:file[id=file_upload]").change(function() {
+                document.getElementById('file_upload_spot_screenshots').value = 'file(s) selected';
+            });
         });
-    });
-</script>
-<script src="{$template_dir}includes/js/vendor/lightbox-2.9.0.min.js"></script>
-<link type="text/css" href="{$style_dir}css/vendor/lightbox-2.9.0.css" hreflang="en" rel="stylesheet">
+    </script>
 {/block}
 
 {block name=main_tile}
 <div class="standard_tile">
+    <div class="help-tip">
+        <p>Overhere you can add a Spotlight. This entry will be placed at the front page in the 'Spotlight' tile. A Spotlight always contains a link and a picture. This is the place where you give a website or a product some extra attention.</p>
+    </div>
     <h1>SPOTLIGHT</h1>
     <div class="standard_tile_line"></div>
     <div class="standard_tile_padding">
@@ -39,16 +40,16 @@
         <br>
         <fieldset class="secondary_fieldset centered_fieldset">
         <legend class="primary_legend">Add new spot</legend>
-            <form enctype="multipart/form-data" action="../trivia/db_spotlight.php" method="post" name="fact" id="fact">
+            <form enctype="multipart/form-data" action="../trivia/db_trivia.php" method="post" name="spotlight" id="spotlight">
                 Spot Text<br>
-                <textarea name="spot_text" id="fact_text" class="primary_textarea" rows="4"></textarea>
+                <textarea name="spot_text" id="spot_text" class="primary_textarea" rows="4" required></textarea>
                 <br><br>
                 Link<br>
-                <input type="text" name="link" class="standard_input input_large">
+                <input type="text" name="link" class="standard_input input_large" required>
                 <br><br><br>
                 <label for="file_upload" class="secondary_button">Select file(s)</label>
                 <input type="file" id="file_upload" name="image[]">
-                <input type="text" class="standard_input input_large" id="file_upload_spot_screenshots" name="spot_screen">&nbsp;
+                <input type="text" class="standard_input input_large" id="file_upload_spot_screenshots" name="spot_screen" required>&nbsp;
                 <br><br>
                 <input type="hidden" name="action" value="spotlight_insert">
                 <input type="submit" value="Submit" class="secondary_button">
@@ -56,31 +57,35 @@
         </fieldset>
         <br>
         {if (isset($spotlight))}
-            {foreach from=$spotlight item=line}
-                <fieldset class="secondary_fieldset centered_fieldset">
-                <legend class="primary_legend">Spotlight ID {$line.spotlight_id}</legend>
-                <br>
-                {$line.spotlight}
-                <br>
-                <br>
-                <div style="text-align:center;">
-                    <a href="../../includes/show_image.php?file={$line.spotlight_screenshot}" data-lightbox="image-1">
-                        <img src="../../includes/show_image.php?file={$line.spotlight_screenshot}&amp;resize=170,null,null,null" alt="Click to enlarge!" style="display:inline;">
-                    </a>
+            <div id="spotlight_list">
+                {foreach from=$spotlight item=line}
+                    <fieldset class="secondary_fieldset centered_fieldset">
+                        <legend class="primary_legend">Spotlight ID {$line.spotlight_id}</legend>
+                        <form action="" method="post" name="Spotlight{$line.spotlight_id}" id="JSTrivia{$line.spotlight_id}">
+                            <br>
+                            <div id="JSSpotlight_{$line.spotlight_id}">
+                                {$line.spotlight}
+                            </div>
+                            <br>
+                            <br>
+                            <div style="text-align:center;">
+                                <a href="{$line.link}">
+                                    <img src="../../includes/show_image.php?file={$line.spotlight_screenshot}&amp;resize=170,null,null,null" alt="Click to enlarge!" style="display:inline;" class="user_stats_img" id="user_details_img_dark">
+                                </a>
+                            </div>
+                            <br>
+                            <br>
+                            <input type="hidden" name="action" value="spotlight_delete">
+                            <input type="hidden" name="spotlight_id" value="{$line.spotlight_id}">
+                            <input type="button" value="Delete"  class="secondary_button" onclick="SpotlightdeleteConfirmation({$line.spotlight_id})">
+                            <div id="JSSpotlightEdit_{$line.spotlight_id}" style="display:inline-block;">
+                                <input type="button" value="Edit"  class="secondary_button" onclick="SpotlightEdit({$line.spotlight_id})">
+                            </div>
+                        </form>
+                    </fieldset>
                     <br>
-                    <br>
-                    <a href="{$line.link}" class="left_nav_link">Link</a>
-                </div>
-                <br>
-                <br>
-                <form action="../trivia/db_spotlight.php" method="post" name="spot{$line.spotlight_id}" id="spot{$line.spotlight_id}">
-                    <input type="hidden" name="action" value="spotlight_delete">
-                    <input type="hidden" name="spotlight_id" value="{$line.spotlight_id}">
-                    <input type="submit" value="Delete"  class="secondary_button">
-                </form>
-                </fieldset>
-                <br>
-            {/foreach}
+                {/foreach}
+            </div>
         {/if}
     </div>
 </div>

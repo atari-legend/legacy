@@ -78,3 +78,49 @@
     [BRK]{$osd_message}
 {/if}
 {/if}
+
+{if isset($smarty_action) and $smarty_action == "delete_spotlight"}
+{foreach from=$spotlight item=line}
+    <fieldset class="secondary_fieldset centered_fieldset">
+        <legend class="primary_legend">Spotlight ID {$line.spotlight_id}</legend>
+        <form action="" method="post" name="Spotlight{$line.spotlight_id}" id="JSSpotlight{$line.spotlight_id}">
+            <br>
+            {$line.spotlight}
+            <br>
+            <br>
+            <div style="text-align:center;">
+                <a href="{$line.link}">
+                    <img src="../../includes/show_image.php?file={$line.spotlight_screenshot}&amp;resize=170,null,null,null" alt="Click to enlarge!" style="display:inline;"  class="user_stats_img" id="user_details_img_dark">
+                </a>
+            </div>
+            <br>
+            <br>
+            <input type="hidden" name="action" value="spotlight_delete">
+            <input type="hidden" name="spotlight_id" value="{$line.spotlight_id}">
+            <input type="button" value="Delete"  class="secondary_button" onclick="SpotlightdeleteConfirmation({$line.spotlight_id})">
+            <div id="JSSpotlightEdit_{$line.spotlight_id}" style="display:inline-block;">
+                <input type="button" value="Edit"  class="secondary_button" onclick="SpotlightEdit({$line.spotlight_id})">
+            </div>
+        </form>
+    </fieldset>
+    <br>
+{/foreach}
+
+{if isset($osd_message)}
+    [BRK]{$osd_message}
+{/if}
+{/if}
+
+{* Edit form for the spotlight *}
+{if isset($smarty_action) and $smarty_action == "spotlight_edit_view"}
+    <textarea name="spot_text" id="spot_text" class="primary_textarea" rows="4">{$spotlight.spotlight}</textarea>
+    [BRK]
+    <input type="button" value="Update"  class="secondary_button" onclick="SpotlightUpdate({$spotlight.spotlight_id})">
+{/if}
+
+{* Return View for the spotlight update *}
+{if isset($smarty_action) and $smarty_action == "spotlight_update_returnview"}
+    {$spot_text}
+    [BRK]
+    <input type="button" value="Edit"  class="secondary_button" onclick="SpotlightEdit({$spotlight_id})">
+{/if}

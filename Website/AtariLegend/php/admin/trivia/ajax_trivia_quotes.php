@@ -52,3 +52,28 @@ if (isset($trivia_id) and $action == "did_you_know_edit_view") {
     //Send all smarty variables to the templates
     $smarty->display("file:" . $cpanel_template_folder . "ajax_trivia_quotes_edit.html");
 }
+
+if (isset($spotlight_id) and $action == "spotlight_edit_view") {
+    //load the existing spotlight entries
+    $query_spotlight = $mysqli->query("SELECT * from spotlight
+                                            LEFT JOIN screenshot_main ON (spotlight.screenshot_id = screenshot_main.screenshot_id)
+                                            WHERE spotlight_id = $spotlight_id") or die("error in query spotlight");
+
+    if ($sql_spotlight = $query_spotlight->fetch_array(MYSQLI_BOTH)) {
+        $new_path = $spotlight_screenshot_path;
+        $new_path .= $sql_spotlight['screenshot_id'];
+        $new_path .= ".";
+        $new_path .= $sql_spotlight['imgext'];
+
+        $smarty->assign('spotlight', array(
+            'spotlight_id' => $sql_spotlight['spotlight_id'],
+            'spotlight_screenshot' => $new_path,
+            'link' => $sql_spotlight['link'],
+            'spotlight' => $sql_spotlight['spotlight']
+        ));
+    }
+
+    $smarty->assign('smarty_action', 'spotlight_edit_view');
+    //Send all smarty variables to the templates
+    $smarty->display("file:" . $cpanel_template_folder . "ajax_trivia_quotes_edit.html");
+}
