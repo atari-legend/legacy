@@ -29,8 +29,8 @@ The main bug report type page
         <br>
         <br>
         <div class="main_company_container">
-            <div class="text-center" id="child_edit_company">
-                <fieldset class="primary_fieldset">
+            <div class="child_edit_company text-center">
+                <fieldset class="secondary_fieldset">
                     <legend class="primary_legend">Edit a bug report type</legend>
                     <form action="../administration/bug_report_type_edit.php" method="post" name="ind_edit" id="ind_edit">
                         <select name="type_id" class="standard_select select_large">
@@ -40,16 +40,16 @@ The main bug report type page
                             {/foreach}
                         </select>
                         <input type="hidden" name="user_id" value="{$user_id}">
-                        <input type="submit" value="Edit" class="topbutton_cpanel_small">
+                        <input type="submit" value="Edit" class="secondary_button">
                     </form>
                 </fieldset>
             </div>
-            <div class="text-center" id="child_add_company">
-                <fieldset class="primary_fieldset">
+            <div class="child_add_company text-center">
+                <fieldset class="secondary_fieldset">
                     <legend class="primary_legend">Add a bug report type</legend>
                     <form action="../administration/db_bug_report_type.php" method="post" name="ind_add" id="ind_add">
                         <input type="text" name="type_name" class="standard_input input_large">
-                        <input type="submit" value="Add" class="topbutton_cpanel_small">
+                        <input type="submit" value="Add" class="secondary_button">
                         <input type="hidden" name="action" id="action" value="insert_type">
                         <input type="hidden" name="user_id" value="{$user_id}">
                     </form>

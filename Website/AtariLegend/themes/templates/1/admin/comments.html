@@ -1,0 +1,196 @@
+{*
+/***************************************************************************
+*                                comments.html
+*                            ------------------------
+*   begin                : February 10, 2018
+*   copyright            : (C) 2018 Atari Legend
+*   email                : admin@atarilegend.com
+*   actual update        : Creation of file
+*
+***************************************************************************/
+
+//****************************************************************************************
+// This is the main games comments page
+//****************************************************************************************
+*}
+
+{extends file='1/admin/main.html'}
+{block name=java_script}
+<script src="{$template_dir}includes/js/vendor/jquery.ajaxQueue-0.1.1.min.js"></script>
+<script src="{$template_dir}includes/js/comments.js"></script>
+<script src="{$template_dir}includes/js/bbcode.js"></script>
+{/block}
+{block name=left_tile}
+
+{* Comments navigation *}
+<div class="standard_tile">
+    <h1>OPTIONS</h1>
+    <div class="standard_tile_line"></div>
+    <div class="standard_tile_text_center">
+        <br>
+        Navigate comments:<br><br>
+        <div class="comments_navigator">
+            <button id="comments_all" class="primary_button">All Comments</button><br>
+            <button id="comments_game_comments" class="primary_button">Game Comments</button><br>
+            <button id="comments_game_review_comments" class="primary_button">Review Comments</button><br>
+            <button id="comments_interview_comments" class="primary_button">Interview Comments</button><br>
+            <button id="test_clicker" class="primary_button">Menu Disk Comments</button><br>
+            <button id="" class="primary_button">Demo Comments</button><br>
+            <button id="" class="primary_button">Article Comments</button><br>
+            <button id="" class="primary_button">Crew Comments</button><br>
+        </div>
+        <br>
+    </div>
+    <br>
+</div>
+<br>
+{* END Comments navigation *}
+{/block}
+{block name=main_tile}
+<div class="standard_tile" id="games_comment">
+    <div class="help-tip">
+        <p><i class="fa fa-envelope" aria-hidden="true"></i> - mail to <br>
+            <i class="fa fa-pencil" aria-hidden="true"></i> - edit comment <br>
+            <i class="fa fa-trash" aria-hidden="true"></i> - delete comment<br>
+            <i class="fa fa-arrow-up" aria-hidden="true"></i> - back to top
+        </p>
+    </div>
+    <h1>EDIT COMMENTS</h1>
+    <div class="standard_tile_line"></div>
+    <div class="standard_tile_padding">
+        <div class="left_nav_section">
+                This is the user comment edit page. Overhere you can edit or delete user comments.
+                There is currently a total of <b>{$links.getCommentCount}</b> comments in the AL Database!
+        </div>
+        <br>
+        <br>
+        <form name="post">
+        <div class="jsCommentsWrapper infinite-container">
+            {* START NEW COMMENT BOX *}
+            <div id="view" style="display:none;">{$links.view}</div>
+            {foreach from=$comments item=line}
+            <div id="jsCommentId{$line->getCommentsId()}" class="infinite-item">
+                <div class="comments_post_box" id="{$line->getTimestamp()}">
+                    <div class="comments_userinfo">
+                        {if (null !== $line->getAvatarImage()) and $line->getAvatarImage() != ''}
+                            <img src="../../includes/show_image.php?file={$line->getAvatarImage()}&amp;resize=100,null,null,null" alt="{$line->getUser()}" width="100px">
+                        {else}
+                        {/if}
+                        <a href="../user/user_detail.php?user_id_selected={$line->getUserId()}" class="standard_tile_link">{$line->getUser()}</a>
+                        <br><br><br>
+                        <span class="text-nowrap">
+                            Joined:  {$line->getJoinDate()}
+                            <br>
+                            Comments: <a href="#" data-user-id="{$line->getUserId()}" class="links_addnew_link jsUserCommentsLink">{$line->getUserCommentCount()}</a>
+                            <br>
+                            {if $line->getUserSubCount() > 0}
+                                Submissions:  <a href="../games/submission_games.php?user_id={$line->getUserId()}" class="standard_tile_link">{$line->getUserSubCount()}</a>
+                            {else}
+                                Submissions:  {$line->getUserSubCount()}
+                            {/if}
+                            <br>
+                            Karma: {$line->getKarma()}
+                        </span>
+                    </div>
+
+                    <div class="comment_post_detail">
+                        <div class="comments_userinfo_phoneview">
+                            {if (null !== $line->getAvatarImage()) and $line->getAvatarImage() !== ''}
+                                <img src="../../includes/show_image.php?file={$line->getAvatarImage()}&amp;resize=100,null,null,null" alt="{$line->getUser()}" width="100px">
+                            {else}
+                                <img src="../../includes/show_image.php?file={$style_dir} {$line->getAvatarImage()}&amp;resize=100,null,null,null" alt="{$line->getUser()}" width="100px">
+                            {/if}
+                            <h6>
+                                <a href="../user/user_detail.php?user_id_selected={$line->getUserId()}">{$line->getUser()}</a>
+                            </h6>
+                        </div>
+                        <h4 class="comments_title">
+                            {if $line->getCommentType() == "interview_comment" }
+                                <a href="../interviews/interviews_edit.php?interview_id={$line->getGameId()}" class="links_addnew_link">{$line->getGameName()}</a>
+                            {elseif $line->getCommentType() == "game_review_comment" }
+                                <a href="../games/games_review_edit.php?game_id={$line->getGameId()}&reviewid={$line->getReviewId()}" class="links_addnew_link">{$line->getGameName()}</a>
+                            {else}
+                                    <a href="../games/games_detail.php?game_id={$line->getGameId()}" class="links_addnew_link">{$line->getGameName()}</a>
+                            {/if}
+                        </h4>
+                        <ul class="comment_buttons">
+                            {if $line->getEmail() !== ''}
+                            <li class="primary_button jsCommentsEmailButton">
+                                <a href="mailto:{$line->getEmail()}?subject=Comment%20of%20{$line->getGameName()|escape:'url'}%20at%20Atari%20Legend" class="links_addnew_link">
+                                        <i class="fa fa-envelope" aria-hidden="true"></i>
+                                </a>
+                            </li>
+                            {/if}
+                            <li class="primary_button jsCommentsEditButton" data-comments-id="{$line->getCommentsId()}" data-comment-type="{$line->getCommentType()}">
+                                <a class="links_addnew_link">
+                                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                                </a>
+                            </li>
+                            <li class="primary_button jsCommentsDeleteButton" data-comments-id="{$line->getCommentsId()}">
+                                <a class="links_addnew_link">
+                                        <i class="fa fa-trash" aria-hidden="true"></i>
+                                </a>
+                            </li>
+                            <div class="comments_button_dropdown" data-dropdown-id="{$line->getCommentsId()}">
+                                <li class="primary_button">
+                                    <a class="links_addnew_link">
+                                            <i class="fa fa-bars" aria-hidden="true"></i>
+                                    </a>
+                                </li>
+                                <div class="dropdown_box" id="dropdown_box{$line->getCommentsId()}">
+                                    <li class="dropdown_item">
+                                        <a href="mailto:{$line->getEmail()}?subject=Comment%20of%20{$line->getGameName()|escape:'url'}%20at%20Atari%20Legend" class="links_addnew_link">
+                                            Email
+                                        </a>
+                                    </li>
+                                    <li class="dropdown_item jsCommentsEditDropdownItem" data-comments-id="{$line->getCommentsId()}" data-comment-type="{$line->getCommentType()}">
+                                        Edit
+                                    </li>
+                                    <li class="dropdown_item jsCommentsDeleteDropdownItem" data-comments-id="{$line->getCommentsId()}">
+                                        Delete
+                                    </li>
+                                </div>
+                            </div>
+                        </ul>
+                        <div class="comments_line" id="line_above_info"></div>
+                        <h4 class="comments_title_phoneview">
+                            {if $line->getCommentType() == "interview_comment" }
+                                <a href="../interviews/interviews_edit.php?interview_id={$line->getGameId()}" class="links_addnew_link">{$line->getGameName()}</a>
+                            {elseif $line->getCommentType() == "game_review_comment" }
+                                <a href="../games/games_review_edit.php?game_id={$line->getGameId()}&reviewid={$line->getReviewId()}" class="links_addnew_link">{$line->getGameName()}</a>
+                            {else}
+                                <a href="../games/games_detail.php?game_id={$line->getGameId()}" class="links_addnew_link">{$line->getGameName()}</a>
+                            {/if}
+                        </h4>
+                        <div class="comments_post_info">
+                            Posted <span>by <a href="../user/user_detail.php?user_id_selected={$line->getUserId()}">{$line->getUser()}</a></span> on {$line->getPostDate()}
+                        </div>
+                        <div class="comments_line" id="line_below_info"></div>
+                        <div class="comment_post_text" id="jsCommentTextBox{$line->getCommentsId()}">
+                            <br>
+                            {$line->getComments()}
+                            <br>
+                            <br>
+                        </div>
+                    </div>
+                    <div class="badge_parent">
+                        {if $links.view eq "users_comments" or $links.view eq "comments_all" or $links.view eq "latest_comments"}
+                            {if $line->getCommentType() == "game_comment" }
+                                <button class="badge_comment_type">Game</button>
+                            {elseif $line->getCommentType() == "game_review_comment"  }
+                                <button class="badge_comment_type">Game Review</button>
+                            {elseif $line->getCommentType() == "interview_comment"  }
+                                <button class="badge_comment_type">Interview</button>
+                            {/if}
+                        {/if}
+                    </div>
+                </div>
+            </div>
+            {/foreach}
+            {* END NEW COMMENT BOX *}
+        </div>
+        </form>
+    </div>
+    <br>
+</div>
+{/block}

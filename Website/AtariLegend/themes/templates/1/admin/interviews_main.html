@@ -22,50 +22,6 @@
 
 {block name=java_script}
 <script src="{$template_dir}includes/js/vendor/jquery.dotdotdot-1.8.3.min.js"></script> <!--this script is used for the elipsis (...) effect of the preview of the reviews -->
-<script>
-    window.onload = function() {
-        $(".interview_main_text").dotdotdot({  <!--This is the script to truncate the preview of the reviews-->
-                //  configuration goes here
-
-            /*  The text to add as ellipsis. */
-            ellipsis    : '... ',
-
-            /*  How to cut off the text/html: 'word'/'letter'/'children' */
-            wrap        : 'word',
-
-            /*  Wrap-option fallback to 'letter' for long words */
-            fallbackToLetter: false,
-
-            /*  jQuery-selector for the element to keep and put after the ellipsis. */
-            after       : null,
-
-            /*  Whether to update the ellipsis: true/'window' */
-            watch       : window,
-
-            /*  Optionally set a max-height, can be a number or function.
-                If null, the height will be measured. */
-            height      : null,
-
-            /*  Deviation for the height-option. */
-            tolerance   : 0,
-
-            /*  Callback function that is fired after the ellipsis is added,
-                receives two parameters: isTruncated(boolean), orgContent(string). */
-            callback    : function( isTruncated, orgContent ) {},
-
-            lastCharacter   : {
-
-                /*  Remove these characters from the end of the truncated text. */
-                remove      : [ ' ', ',', ';', '.', '!', '?' ],
-
-                /*  Don't add an ellipsis if this array contains
-                    the last character of the truncated text. */
-                noEllipsis  : []
-            }
-        });
-    };
-</script>
-
 <script src="{$template_dir}includes/js/vendor/lightbox-2.9.0.min.js"></script><!--lightbox popup script-->
 <link type="text/css" href="{$style_dir}css/vendor/lightbox-2.9.0.css" hreflang="en" rel="stylesheet">
 <script>
@@ -73,15 +29,8 @@
         'showImageNumberLabel': false
     })
 </script>
-
-<!-- The autocomplete and dropdown switcher -->
-<script src="{$template_dir}includes/js/ui.widgets.js"></script>
-<script>
-    $(document).ready(function() {
-        $("select[name=members]").altAutocomplete();
-        $("select[name=individual_create]").altAutocomplete();
-    });
-</script>
+<script src="{$template_dir}includes/js/interviews.js"></script> <!-- Load all interviews scripts -->
+<script src="{$template_dir}includes/js/ui.widgets.js"></script> <!-- load the script for the input/dropdown switcher -->
 {/block}
 
 {block name=title}Interviews{/block}
@@ -110,8 +59,8 @@
         <br>
         <br>
         <div class="main_company_container">
-            <div class="text-center" id="child_edit_company">
-                <fieldset class="primary_fieldset">
+            <div class="child_edit_company text-center">
+                <fieldset class="secondary_fieldset">
                     <legend class="primary_legend">Search Interview</legend>
                     <form action="../interviews/interviews_edit.php" method="post" name="search">
                         <select name="interview_id" class="standard_select select_large">
@@ -120,13 +69,13 @@
                                 <option value="{$line.interview_id}">{$line.ind_name}</option>
                             {/foreach}
                         </select>
-                        <input type="submit" value="Search" class="topbutton_cpanel_small">
+                        <input type="submit" value="Search" class="secondary_button">
                         <input type="hidden" name="action" value="search">
                     </form>
                 </fieldset>
             </div>
-            <div class="text-center" id="child_add_company">
-                <fieldset class="primary_fieldset">
+            <div class="child_add_company text-center">
+                <fieldset class="secondary_fieldset">
                     <legend class="primary_legend">Add an Interview</legend>
                     <form action="../interviews/db_interview.php" method="post" name="insert">
                         <a href="javascript:;" class="left_nav_link" id="individual_select_toggle" ><i class="fa fa-chevron-circle-down" aria-hidden="true" ></i></a>
@@ -139,7 +88,7 @@
                                 <option value="{$line.ind_id}">{$line.ind_name}</option>
                             {/foreach}
                         </select>
-                        <input type="submit" value="Add" class="topbutton_cpanel_small">
+                        <input type="submit" value="Add" class="secondary_button">
                         <input type="hidden" name="action" value="add_interview">
                         <input type="hidden" name="user_id" id="user_id" value="{$user_id}">
                     </form>
@@ -172,7 +121,13 @@
                     <div class="interview_main_text">
                         {$line.interview_intro}
                     </div>
-                    <h2><a href="../interviews/interviews_edit.php?interview_id={$line.interview_id}" class="standard_tile_link">Edit <i class="fa fa-chevron-right" aria-hidden="true"></i></a></h2>
+                    <ul class="interview_buttons main">
+                        <a href="../interviews/interviews_edit.php?interview_id={$line.interview_id}" class="links_addnew_link">
+                            <li class="primary_button">
+                                <i class="fa fa-pencil" aria-hidden="true"></i>
+                            </li>
+                        </a>
+                    </ul>
                     <br>
                 </div>
             </td>

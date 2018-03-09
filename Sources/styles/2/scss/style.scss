@@ -44,7 +44,6 @@ $sizes: (
 @import '../../2/scss/tables';   //* --> general skin specific css settings */
 @import '../../2/scss/variables';                             //* --> Borrow from Bootstrap */
 @import '../../common/main_scss/bootstrap/bootstrap';                      //* --> Borrow from Bootstrap */
-@import '../../common/main_scss/font-awesome-4.7.0/scss/font-awesome';  //* --> include Fontawesome into our main css */
 
 //*----------------------------------------------------------
 // Top
@@ -88,7 +87,7 @@ $sizes: (
 @import '../../2/scss/cpanel-magazines';      //* --> Magazine section */
 @import '../../2/scss/cpanel-news';           //* --> news section */
 @import '../../2/scss/cpanel-company';        //* --> company section */
-@import '../../2/scss/cpanel-individuals';    //* --> individuals section */
+@import '../../2/scss/cpanel-comments';    //* --> comments section */
 @import '../../2/scss/cpanel-interviews';     //* --> interviews section */
 @import '../../2/scss/cpanel-admin';          //* --> admin section */
 @import '../../2/scss/cpanel-menus';          //* --> menus section */

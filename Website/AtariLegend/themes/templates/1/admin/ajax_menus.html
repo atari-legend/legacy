@@ -22,8 +22,8 @@
 {if isset($smarty_action) and $smarty_action == "add_new_disk_box"}
 <br>
     <div class="main_company_container">
-        <div class="text-left" id="child_edit_company">
-            <fieldset class="primary_fieldset">
+        <div class="child_edit_company text-left">
+            <fieldset class="secondary_fieldset">
                 <legend class="primary_legend">Add Menu</legend>
                 <form action="../menus/db_menu_disk.php" method="post" name="post" id="menu_disk_add">
                     <div class="add_new_disk_space">Disk number: </div><div class="add_new_disk_space"><input type="text" name="menu_disk_number" value="" class="standard_input input_small"></div><br>
@@ -33,13 +33,13 @@
                     <br>
                     <input type="hidden" name="menu_sets_id" value="{$menu_sets_id}">
                     <input type="hidden" name="action" value="add_new_menu_disk">
-                    <input type="submit" value="Add new" class="topbutton_cpanel_small">
-                    <input type="button"  value="Cancel" onclick="closeaddNewdisk()" style="margin-left:5px;" class="topbutton_cpanel_small">
+                    <input type="submit" value="Add new" class="secondary_button">
+                    <input type="button"  value="Cancel" onclick="closeaddNewdisk()" class="secondary_button">
                 </form>
             </fieldset>
         </div>
-        <div class="text-left" id="child_add_company">
-            <fieldset class="primary_fieldset">
+        <div class="child_add_company text-left">
+            <fieldset class="secondary_fieldset">
                 <legend class="primary_legend">Add multiple Menus</legend>
                 <form action="../menus/db_menu_disk.php" method="post" name="post" id="menu_multi_disk_add">
                     <div class="add_new_disk_space">First number: </div><div class="add_new_disk_space"><input type="text" name="first_disk" value="" class="standard_input input_small"></div><br>
@@ -47,8 +47,8 @@
                     <input type="hidden" name="menu_sets_id" value="{$menu_sets_id}">
                     <input type="hidden" name="action" value="multi_add_new_menu_disk">
                     <br>
-                    <input type="submit" value="Add new" class="topbutton_cpanel_small">
-                    <input type="button" onclick="closeaddNewdisk()" style="margin-left:5px;" class="topbutton_cpanel_small" value="Cancel">
+                    <input type="submit" value="Add new" class="secondary_button">
+                    <input type="button" onclick="closeaddNewdisk()" class="secondary_button" value="Cancel">
                 </form>
             </fieldset>
         </div>

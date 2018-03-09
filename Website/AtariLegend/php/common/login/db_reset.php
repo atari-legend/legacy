@@ -19,6 +19,11 @@
 include("../../config/common.php");
 include("../../vendor/phpmailer/phpmailer/PHPMailerAutoload.php");
 
+require_once __DIR__."/../../common/Model/Database/ChangeLog.php" ;
+require_once __DIR__."/../../common/DAO/ChangeLogDAO.php" ;
+
+$changeLogDao = new \AL\Common\DAO\ChangeLogDAO($mysqli);
+
 if (isset($action) and $action == 'check_email') {
     if (!$_POST['email']) {
         $_SESSION['edit_message'] = "You didn't fill in a required field.";
@@ -160,14 +165,28 @@ if (isset($action) and $action == 'new_pwd') {
                             $update_password = hash('sha512', $sha512 . $random_salt); // Create salted password
                             $timestamp = time();
 
-                            $sdbquery = $mysqli->query("UPDATE users SET password = '$md5pass', sha512_password = '$update_password', salt = '$random_salt', last_visit = '$timestamp' WHERE user_id = '$sql_user_id[user_id];'") or die("Couldn't update the user table");
+                            $sdbquery = $mysqli->query("UPDATE users SET password = '$md5pass', sha512_password = '$update_password', salt = '$random_salt', last_visit = '$timestamp' WHERE user_id = '$sql_user_id[user_id]'") or die("Couldn't update the user table: ".$mysqli->error);
 
                             //delete the hash from the user_reset table so a new reset can be done
                             $sql_hash = $mysqli->query("DELETE FROM users_reset WHERE password = '$hash'") or die("Couldn't delete password from users_rest table");
 
                             //Let's log in - fill the session vars
+
                             if (login($sql_user_id['userid'], $sha512, $mysqli) == true) {
-                                create_log_entry('Users', $sql_user_id['user_id'], 'User', $sql_user_id['user_id'], 'Update', $_SESSION['user_id']);
+                                $changeLogDao->insertChangeLog(
+                                    new \AL\Common\Model\Database\ChangeLog(
+                                        -1,
+                                        "Users",
+                                        $sql_user_id['user_id'],
+                                        $sql_user_id['userid'],
+                                        "User",
+                                        $sql_user_id['userid'],
+                                        $sql_user_id['userid'],
+                                        $_SESSION['user_id'],
+                                        \AL\Common\Model\Database\ChangeLog::ACTION_UPDATE
+                                    )
+                                );
+
                                 $_SESSION['edit_message'] = "Password succesfully reset - You are logged in.";
                                 header("Location: ../../main/front/front.php");
                             } else {

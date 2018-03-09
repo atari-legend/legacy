@@ -28,26 +28,29 @@ $(function() {
         document.getElementById('file_upload_game_screenshots').value = 'file(s) selected';
     });
 });
-
-function deletecomment(screenshot_id, article_id)
-{
-    // CONFIRM REQUIRES ONE ARGUMENT
-    var message = "Are you sure you want to delete the screenshot with its comment?";
-    // CONFIRM IS BOOLEAN. THAT MEANS THAT
-    // IT RETURNS TRUE IF 'OK' IS CLICKED
-    // OTHERWISE IT RETURN FALSE
-    var return_value = confirm(message);
-    if (return_value !="0")
-    {
-        url="db_articles.php?article_id="+article_id+"&screenshot_id="+screenshot_id+"&action=delete_screen";
-        location.href=url;
-    }
+function deletecomment(screenshot_id, article_id) {
+    $('#JSGenericModal').dialog({
+        title: 'Delete',
+        open: $('#JSGenericModalText').text('Are you sure you want to delete the screenshot with its comment?'),
+        resizable: false,
+        height: 200,
+        modal: true,
+        buttons: {
+            'Delete': function () {
+                $(this).dialog('close');
+                url="db_articles.php?article_id="+article_id+"&screenshot_id="+screenshot_id+"&action=delete_screen";
+                location.href=url;
+            },
+            Cancel: function () {
+                $(this).dialog('close');
+            }
+        }
+    });
 }
 </script>
 
 <script src="{$template_dir}includes/js/vendor/lightbox-2.9.0.min.js"></script>
 <link type="text/css" href="{$style_dir}css/vendor/lightbox-2.9.0.css" hreflang="en" rel="stylesheet">
-
 {/block}
 
 {block name=title}Articles screenshots - <a href="../article/article_edit.php?article_id={$article.article_id}" class="left_nav_link">{$article.article_title}</a>{/block}
@@ -66,7 +69,7 @@ function deletecomment(screenshot_id, article_id)
         </div>
         <br>
         <br>
-        <fieldset class="primary_fieldset centered_fieldset">
+        <fieldset class="secondary_fieldset centered_fieldset">
             <legend class="primary_legend">screenshots</legend>
             {if $screenshots_nr <> ''}
                 {foreach from=$screenshots item=line name=screen}
@@ -82,33 +85,21 @@ function deletecomment(screenshot_id, article_id)
             {else}
                 No screenshots attached to this game
             {/if}
-            <!--{if $screenshots_nr <> ''}
-                {foreach from=$screenshots item=line}
-                    Image {$line.count} ::
-                    <a href="javascript:deletecomment({$line.id},{$article.article_id})" class="left_nav_link">Delete</a> ::
-                    <a href="javascript:void(window.open('../../includes/show_image.php?file={$line.image_path}','4','width={$line.width},height={$line.height},toolbar=no,statusbar=no'))" class="left_nav_link">Preview</a>
-                    <br/>
-                {/foreach}
-            {else}
-                No screenshots attached to this article
-            {/if}-->
+
         </fieldset>
         <br>
         <br>
-        <fieldset class="primary_fieldset centered_fieldset">
+        <fieldset class="secondary_fieldset centered_fieldset">
         <legend class="primary_legend">Browse</legend>
             <form enctype="multipart/form-data" name="frmUploadShot" action="db_articles.php" method="post">
-                <!--{section name=loop loop=11 start=1}
-                    <input type="file" name="image[{$smarty.section.loop.index}]">
-                {/section}-->
-                <label for="file_upload" class="file_upload">Select file(s)</label>
-                <input id="file_upload" type="file" name="image[]" multiple>
+                <label for="file_upload" class="secondary_button">Select file(s)</label>
+                <input type="file" id="file_upload" name="image[]" multiple>
                 <input type="text" class="standard_input input_large" id="file_upload_game_screenshots">&nbsp;
                 <br/><br/>
                 <input type="hidden" name="MAX_FILE_SIZE" value="100000">
                 <input type="hidden" name="article_id" value="{$article.article_id}">
                 <input type="hidden" name="action" value="add_screens">
-                <input type="submit" name="cmdSubmit" value="Add" class="topbutton_cpanel_small">
+                <input type="submit" name="cmdSubmit" value="Add" class="secondary_button">
             </form>
         </fieldset>
         <br>

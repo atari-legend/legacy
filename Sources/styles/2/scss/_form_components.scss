@@ -9,7 +9,7 @@
 
 .standard_select {
     margin-top: 5px;
-    height: 27px;
+    height: 25px;
     padding: 0;
     padding-left: 5px;
     background-color: #666666;
@@ -40,12 +40,6 @@
     width: 100%;
     margin-top: 0;
 }
-
-#website_category_select {
-    @extend .select_large;
-    width: 51.3%;
-}
-
 #games_main_select_site {
     width: 100%;
     height: 25px;
@@ -101,12 +95,6 @@
     width: 100%;
 }
 
-#download_version,
-#download_info {
-    @extend .standard_input;
-    width: 95%;
-}
-
 #file_upload_game_detail {
     width: 60%;
 }
@@ -114,9 +102,4 @@
 .user_details_input_small {
     @extend .standard_input;
     width: 90%;
-}
-
-.standard_tile_input_small_site {
-    @extend .standard_input;
-    width: 98.5%;
 }

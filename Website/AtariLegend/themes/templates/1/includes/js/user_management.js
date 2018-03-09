@@ -4,7 +4,7 @@ $(document).ready(function () {
 
         $.ajaxQueue({
             // The URL for the request
-            url: 'ajax_user_management.php',
+            url: '../user/ajax_user_management.php',
             data: formValues,
             type: 'GET',
             dataType: 'html',
@@ -12,7 +12,7 @@ $(document).ready(function () {
             // Code to run if the request succeeds;
             // the response is passed to the function
             success: function (html) {
-                $('#ajax_usersearch').html(html);
+                $('#column_center_cpanel').html(html);
             }
         });
     }

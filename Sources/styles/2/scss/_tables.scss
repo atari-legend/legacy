@@ -69,21 +69,6 @@
     vertical-align: middle;
 }
 
-.menu_state_column,
-.log_subname_column,
-.menu_delete_column {
-    text-align: right;
-}
-
-//*-----------------------Database updates-------------------------- */
-.db_result_column,
-.db_state_column,
-.db_id_column,
-.db_description_column,
-.db_exe_column {
-    text-align: center;
-}
-
 .gc_table_list {
     margin-right: auto;
     margin-left: auto;
@@ -183,16 +168,4 @@
     padding-left: 5px;
     padding-right: 5px;
     margin: 0;
-}
-.standard_table_center {
-    font-size: 16px;
-    font-weight: 100;
-    color: #000000;
-    text-align: center;
-}
-.karma_points_tablecell {
-    text-align: right;
-}
-.standard_table_center img {
-    display: inline;
 }

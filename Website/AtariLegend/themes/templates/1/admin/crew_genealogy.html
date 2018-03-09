@@ -20,28 +20,28 @@ The crew genealogy page
 
 {block name=java_script}
 <script>
-function crewinsert()
-{
+function crewinsert() {
     JSnewcrew=document.forms["insertcrew"].newcrew.value;
-
-    if (JSnewcrew=='')
-    {
+    if (JSnewcrew=='') {
         alert('Please fill in a crew name');
-    }
-    else
-    {
-        // CONFIRM REQUIRES ONE ARGUMENT
-        var message = "Are you sure you want to insert this crew into the database?";
-        // CONFIRM IS BOOLEAN. THAT MEANS THAT
-        // IT RETURNS TRUE IF 'OK' IS CLICKED
-        // OTHERWISE IT RETURN FALSE
-        var return_value = confirm(message);
-
-        if (return_value !="0")
-        {
-            url="db_crew.php?new_crew="+JSnewcrew+"&action=insert_crew";
-            location.href=url;
-        }
+    } else {
+        $('#JSGenericModal').dialog({
+            title: 'Add',
+            open: $('#JSGenericModalText').text('Are you sure you want to insert this crew into the database?'),
+            resizable: false,
+            height: 200,
+            modal: true,
+            buttons: {
+                'Add': function () {
+                    $(this).dialog('close');
+                    url="db_crew.php?crew_select="+crew_select+"&action=delete_crew";
+                    location.href=url;
+                },
+                Cancel: function () {
+                    $(this).dialog('close');
+                }
+            }
+        });
     }
 }
 
@@ -219,7 +219,7 @@ function searchInd(str) {
             </div>
             <br>
             <br>
-            <input type="submit" value="Select" class="quick_search_games_button">
+            <input type="submit" value="Select" class="primary_button">
         </form>
         <br>
         <div class="standard_tile_line"></div>
@@ -230,7 +230,7 @@ function searchInd(str) {
             <input type="text" name="newcrew" value="" class="standard_input input_large">
             <br>
             <br>
-            <input type="submit" value="Insert" class="quick_search_games_button" onClick="crewinsert(); return false;">
+            <input type="submit" value="Insert" class="primary_button" onClick="crewinsert(); return false;">
         </form>
     </div>
     <br>
@@ -261,18 +261,18 @@ function searchInd(str) {
         <br>
         <br>
         <div class="main_company_container">
-            <div class="text-center" id="child_edit_company">
-                <fieldset class="primary_fieldset">
+            <div class="child_edit_company text-center">
+                <fieldset class="secondary_fieldset">
                     <legend class="primary_legend">Subcrew</legend>
                     <form action="../crew/db_crew.php" method="post" name="crew_gene2" id="crew_gene2">
-                        <select class="standard_select select_small" onchange="browseSubCrew(this.value)">
+                        <select class="standard_select" onchange="browseSubCrew(this.value)">
                             <option value="" SELECTED>-</option>
                             {html_options values=$az_value output=$az_output}
                         </select>
                         <input type="text" name="crewsearch" value="" onkeyup="searchSubCrew(this.value)" class="standard_input input_large">
                         <br><br>
                         <div id="sub_crew">
-                            <select name="sub_crew[]" class="standard_select select_large">
+                            <select name="sub_crew[]" size="5" class="standard_select select_large">
                                 <option value="" SELECTED>-</option>
                                 {foreach from=$crew_gene item=line}
                                     {if $line.crew_id <> $crew_select.crew_id}
@@ -287,12 +287,12 @@ function searchInd(str) {
                         <input type="hidden" name="crew_select" id="crew_select8" value="{if isset($crew_select.crew_id)}{$crew_select.crew_id}{/if}">
                         <input type="hidden" name="crewsearch" id="crewsearch8" value="{$tracking.crewsearch}">
                         <input type="hidden" name="crewbrowse" id="crewbrowse8" value="{$tracking.crewbrowse}">
-                        <input type="submit" value="Add" class="topbutton_cpanel_small">
+                        <input type="submit" value="Add" class="secondary_button">
                     </form>
                 </fieldset>
             </div>
-            <div class="text-center" id="child_edit_company">
-                <fieldset class="primary_fieldset">
+            <div class="child_edit_company text-center">
+                <fieldset class="secondary_fieldset">
                     <legend class="primary_legend">Members</legend>
                     <form action="../crew/db_crew.php" method="post">
                         <select class="standard_select select_small" name="m1" onchange="browseInd(this.value)">
@@ -302,7 +302,7 @@ function searchInd(str) {
                         <input type="text" onkeyup="searchInd(this.value)" class="standard_input input_large">
                         <br><br>
                         <div id="ind_member">
-                            <select name="ind_id" class="standard_select select_large">
+                            <select name="ind_id" size="5" class="standard_select select_large">
                                 <option value="" SELECTED>-</option>
                                 {foreach from=$ind_gene item=line}
                                     <option value="{$line.ind_id}">{$line.ind_name}</option>
@@ -315,7 +315,7 @@ function searchInd(str) {
                         <input type="hidden" name="crew_select" id="crew_select8" value="{if isset($crew_select.crew_id)}{$crew_select.crew_id}{/if}">
                         <input type="hidden" name="crewsearch" id="crewsearch8" value="{$tracking.crewsearch}">
                         <input type="hidden" name="crewbrowse" id="crewbrowse8" value="{$tracking.crewbrowse}">
-                        <input type="submit" value="Add" class="topbutton_cpanel_small">
+                        <input type="submit" value="Add" class="secondary_button">
                     </form>
                 </fieldset>
             </div>
@@ -323,8 +323,8 @@ function searchInd(str) {
         {* MEMBERS OF CREW *}
         <br>
         <div class="main_company_container">
-            <div class="text-center" id="child_edit_company">
-                <fieldset class="primary_fieldset">
+            <div class="child_edit_company text-center">
+                <fieldset class="secondary_fieldset">
                     <table class="primary_table_list table_md">
                         <tr>
                             <th class="w-80">SubCrews</th>
@@ -345,8 +345,8 @@ function searchInd(str) {
                     </table>
                 </fieldset>
             </div>
-            <div class="text-center" id="child_edit_company">
-                <fieldset class="primary_fieldset">
+            <div class="child_edit_company text-center">
+                <fieldset class="secondary_fieldset">
                     <table class="primary_table_list table_md">
                         <tr>
                             <th class="w-80">"Sceners"</th>

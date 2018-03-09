@@ -33,6 +33,13 @@ $v_rows_total = $query_total_number->num_rows;
 $smarty->assign('total_nr_submissions', $v_rows_total);
 
 //$v_counter = (isset($_GET['v_counter']) ? $_GET['v_counter'] : 0);
+
+if (isset($user_id)) {
+    $where_condition = " AND users.user_id = $user_id";
+} else {
+    $where_condition = "";
+}
+
 if (empty($v_counter)) {
     $v_counter = 0;
 }
@@ -43,7 +50,7 @@ if ($list == "done") {
     $sql_submission = $mysqli->query("SELECT * FROM game_submitinfo
                                         LEFT JOIN game ON (game_submitinfo.game_id = game.game_id)
                                         LEFT JOIN users ON (game_submitinfo.user_id = users.user_id)
-                                        WHERE game_done = '1'
+                                        WHERE game_done = '1'" . $where_condition . "
                                         ORDER BY game_submitinfo.game_submitinfo_id
                                         DESC LIMIT  " . $v_counter . ", 25");
 
@@ -57,7 +64,7 @@ if ($list == "done") {
     $sql_submission = $mysqli->query("SELECT * FROM game_submitinfo
                                         LEFT JOIN game ON (game_submitinfo.game_id = game.game_id)
                                         LEFT JOIN users ON (game_submitinfo.user_id = users.user_id)
-                                        WHERE game_done <> '1'
+                                        WHERE game_done <> '1'" . $where_condition . "
                                         ORDER BY game_submitinfo.game_submitinfo_id
                                         DESC LIMIT  " . $v_counter . ", 25");
 

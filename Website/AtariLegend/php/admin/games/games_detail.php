@@ -24,6 +24,10 @@ include("../../config/common.php");
 include("../../config/admin.php");
 include("../../admin/games/quick_search_games.php");
 
+require_once __DIR__."/../../common/DAO/GameReleaseDAO.php";
+
+$gameReleaseDao = new \AL\Common\DAO\GameReleaseDAO($mysqli);
+
 //***********************************************************************************
 //Let's get the general game info first.
 //***********************************************************************************
@@ -91,17 +95,7 @@ while ($game_info = $sql_game->fetch_array(MYSQLI_BOTH)) {
 //get the release dates
 //***********************************************************************************
 
-$sql_year = $mysqli->query("SELECT * FROM game_year
-               LEFT JOIN game_extra_info ON ( game_year.game_extra_info_id = game_extra_info.game_extra_info_id )
-               WHERE game_id='$game_id'") or die("Error loading year");
-
-while ($year = $sql_year->fetch_array(MYSQLI_BOTH)) {
-    $smarty->append('game_year', array(
-        'game_year_id' => $year['game_year_id'],
-        'game_year' => $year['game_year'],
-        'game_extra_info' => $year['game_extra_info']
-    ));
-}
+$smarty->assign('game_releases', $gameReleaseDao->getReleasesForGame($game_id));
 
 //***********************************************************************************
 //get the game categories & the categories already selected for this game

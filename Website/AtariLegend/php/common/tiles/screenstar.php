@@ -25,7 +25,7 @@ $query_screenstar = $mysqli->query("SELECT
                     users.user_id,
                     users.userid,
                     pub_dev.pub_dev_name,
-                    game_year.game_year,
+                    YEAR(game_release.date) as game_release_year,
 					screenshot_main.screenshot_id,
 					screenshot_main.imgext
 					FROM review_game
@@ -36,7 +36,7 @@ $query_screenstar = $mysqli->query("SELECT
 					LEFT JOIN screenshot_main ON (screenshot_game.screenshot_id = screenshot_main.screenshot_id)
                     LEFT JOIN game_developer ON (game_developer.game_id = game.game_id)
                     LEFT JOIN pub_dev ON (pub_dev.pub_dev_id = game_developer.dev_pub_id)
-                    LEFT JOIN game_year ON (game_year.game_id = game.game_id)
+                    LEFT JOIN game_release ON (game_release.game_id = game.game_id)
 					WHERE CHAR_LENGTH( game_name ) <15 ORDER BY RAND() LIMIT 1") or die("query error, screenstar");
 
 $sql_screenstar = $query_screenstar->fetch_array(MYSQLI_BOTH);
@@ -76,6 +76,6 @@ $sql_screenstar = $query_screenstar->fetch_array(MYSQLI_BOTH);
            'screenstar_game_id' => $sql_screenstar['game_id'],
            'screenstar_date'  => date("d/m/Y", $sql_screenstar['review_date']),
            'screenstar_developer' => $sql_screenstar['pub_dev_name'],
-           'screenstar_year' => $sql_screenstar['game_year'],
+           'screenstar_year' => $sql_screenstar['game_release_year'],
            'screenstar_img' => $screenstar_image)
     );

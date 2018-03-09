@@ -56,7 +56,11 @@
                         {/if}
                         {if $link->getImage()}
                             <a href="../../includes/show_image.php?file={$link->getImage()}" target="_blank" title="Screenshot of {$link->getName()|escape}" data-lightbox="image-1">
-                                <img src="../../includes/show_image.php?file={$link->getImage()}&amp;resize=160,null,null,null&amp;crop=left,top,160,115&amp;minimum_size=160,115" alt="Screenshot of {$link->getName()|escape}">
+                                {if $link->getCategoryName() <> 'Youtube'}
+                                    <img src="../../includes/show_image.php?file={$link->getImage()}&amp;resize=160,null,null,null&amp;crop=left,top,160,115&amp;minimum_size=160,115" alt="Screenshot of {$link->getName()|escape}">
+                                {else}
+                                    <img src="../../includes/show_image.php?file={$link->getImage()}&amp;resize=160,null,null,null&amp;crop=left,top,160,115" alt="Screenshot of {$link->getName()|escape}">
+                                {/if}
                             </a>
                         {else}
                             <div class="image_placeholder">

@@ -52,25 +52,21 @@ if (isset($action) and $action == 'add_screens') {
             if ($ext !== "") {
                 // First we insert the directory path of where the file will be stored... this also creates an autoinc number for us.
 
-                $sdbquery = $mysqli->query("INSERT INTO screenshot_main (screenshot_id,imgext) VALUES ('','$ext')") or die("Database error - inserting screenshots");
+                $sdbquery = $mysqli->query("INSERT INTO screenshot_main (imgext) VALUES ('$ext')") or die('Error: ' . mysqli_error($mysqli));
 
                 //select the newly entered screenshot_id from the main table
-                $SCREENSHOT = $mysqli->query("SELECT screenshot_id FROM screenshot_main
-                       ORDER BY screenshot_id desc") or die("Database error - selecting screenshots");
-
-                $screenshotrow = $SCREENSHOT->fetch_row();
-                $screenshot_id = $screenshotrow[0];
+                $screenshot_id = $mysqli->insert_id;
 
                 $sdbquery = $mysqli->query("INSERT INTO screenshot_article (article_id, screenshot_id) VALUES ($article_id, $screenshot_id)") or die("Database error - inserting screenshots2");
 
                 // Rename the uploaded file to its autoincrement number and move it to its proper place.
-                $file_data = rename($image['tmp_name'][$key], "$article_screenshot_save_path$screenshotrow[0].$ext");
+                $file_data = rename($image['tmp_name'][$key], "$article_screenshot_save_path$screenshot_id.$ext");
 
                 $_SESSION['edit_message'] = 'Screenshots added';
 
                 create_log_entry('Articles', $article_id, 'Screenshots', $article_id, 'Insert', $_SESSION['user_id']);
 
-                chmod("$article_screenshot_save_path$screenshotrow[0].$ext", 0777);
+                chmod("$article_screenshot_save_path$screenshot_id.$ext", 0777);
             }
         }
     }

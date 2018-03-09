@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+     <title>Atari Legend - Latest News, Reviews and Interviews</title>
+     <subtitle>Legends Never Die!</subtitle>
+     <icon>{$smarty.const.REQUEST_SITEURL}/themes/templates/1/includes/icons/favicon.png</icon>
+     <link href="{$smarty.const.REQUEST_SITEURL}/news/" />
+     <link rel="self" href="{$smarty.const.REQUEST_SITEURL}/news/rss.php" />
+     <updated>{$last_updated|date_format:"%Y-%m-%dT%H:%M:%SZ"}</updated>
+     <author>
+       <name>Atari Legend</name>
+     </author>
+     <id>{$smarty.const.REQUEST_SITEURL}/news/news.php</id>
+
+    {foreach from=$items item=item}
+        <entry>
+            <title>{$item.title|escape}</title>
+            <link href="{$item.link}"/>
+            <id>{$item.id}</id>
+            <updated>{$item.updated|date_format:"%Y-%m-%dT%H:%M:%SZ"}</updated>
+            <author>
+                <name>{$item.author|escape}</name>
+            </author>
+            <content type="html">{$item.content|nl2br|escape}</content>
+        </entry>
+     {/foreach}
+</feed>
