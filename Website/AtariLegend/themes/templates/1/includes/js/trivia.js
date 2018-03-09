@@ -1,7 +1,6 @@
 /*!
  * trivia.js
  */
-
 window.DidyouknowdeleteConfirmation = function (triviaId) {
     $('#JSGenericModal').dialog({
         title: 'Delete Quote',
@@ -137,6 +136,76 @@ function TriviaQuoteDelete (triviaQuoteId) {
             $('#add_quote_list').html(returnHtml[0]);
             window.OSDMessageDisplay(returnHtml[1]);
             document.getElementById('triviaquote').reset();
+        }
+    });
+}
+
+window.SpotlightdeleteConfirmation = function (spotlightId) {
+    $('#JSGenericModal').dialog({
+        title: 'Delete spotlight',
+        open: $('#JSGenericModalText').text('Are you sure you want to delete this spotlight entry?'),
+        resizable: false,
+        height: 200,
+        modal: true,
+        buttons: {
+            'Delete': function () {
+                $(this).dialog('close');
+                SpotlightDelete(spotlightId);
+            },
+            Cancel: function () {
+                $(this).dialog('close');
+            }
+        }
+    });
+}
+
+function SpotlightDelete (spotlightId) {
+    $.ajaxQueue({
+        // The URL for the request
+        url: 'db_trivia.php',
+        data: 'action=spotlight_delete&spotlight_id=' + spotlightId,
+        type: 'POST',
+        dataType: 'html',
+        // Code to run if the request succeeds;
+        success: function (html) {
+            var returnHtml = html.split('[BRK]');
+            $('#spotlight_list').html(returnHtml[0]);
+            window.OSDMessageDisplay(returnHtml[1]);
+            document.getElementById('spotlight').reset();
+        }
+    });
+}
+
+window.SpotlightEdit = function (spotlightId) {
+    $.ajax({
+        // The URL for the request
+        url: 'ajax_trivia_quotes.php',
+        data: 'action=spotlight_edit_view&spotlight_id=' + spotlightId,
+        type: 'GET',
+        dataType: 'html',
+        // Code to run if the request succeeds;
+        success: function (html) {
+            var ReturnHtml = html.split('[BRK]');
+            $('#JSSpotlight_' + spotlightId).html(ReturnHtml[0]);
+            $('#JSSpotlightEdit_' + spotlightId).html(ReturnHtml[1]);
+        }
+    });
+}
+
+window.SpotlightUpdate = function (spotlightId) {
+    var form = $('#JSTrivia' + spotlightId).serialize() + '&action=update_spotlight';
+    $.ajax({
+        // The URL for the request
+        url: 'db_trivia.php',
+        data: form,
+        type: 'POST',
+        dataType: 'html',
+        // Code to run if the request succeeds;
+        success: function (html) {
+            var ReturnHtml = html.split('[BRK]');
+            $('#JSSpotlight_' + spotlightId).html(ReturnHtml[0]);
+            $('#JSSpotlightEdit_' + spotlightId).html(ReturnHtml[1]);
+            window.OSDMessageDisplay('Spotlight updated!');
         }
     });
 }
