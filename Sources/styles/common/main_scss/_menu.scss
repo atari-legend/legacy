@@ -111,7 +111,7 @@ $log_on_border: 0;
     $menu_top_button_height: 57px;
     $menu_top_button_width: 183px;
     $menu_top_button_font: 20px;
-    $menu_top_button_border_bottom: 0px solid #008b8b;
+    $menu_top_button_border_bottom: 3px solid #008b8b;
     $menu_top_button_border_left: 1px solid #008b8b;
     $menu_top_button_hover_bg: #00a9a9;
     $menu_top_button_hover_color: #182727;
@@ -265,7 +265,7 @@ html {
     }
     #searchbutton_side {
         background: $bg_color;
-        height: 38px;
+        height: 41px;
         width: 118px;
         border-bottom: 3px solid #008b8b;
         border-left: 1px solid #007878;
