@@ -44,12 +44,26 @@
                 Spot Text<br>
                 <textarea name="spot_text" id="spot_text" class="primary_textarea" rows="4" required></textarea>
                 <br><br>
-                Link<br>
-                <input type="text" name="link" class="standard_input input_large" required>
-                <br><br><br>
-                <label for="file_upload" class="secondary_button">Select file(s)</label>
-                <input type="file" id="file_upload" name="image[]">
-                <input type="text" class="standard_input input_large" id="file_upload_spot_screenshots" name="spot_screen" required>&nbsp;
+                <div class="spotlight_container">
+                    <div class="spotlight_child">
+                        <br>
+                        <div class="spotlight_row">
+                            Link <br>
+                            <input type="text" name="link" class="standard_input input_xl" required>
+                            <br><br>
+                        </div>
+                        <div class="spotlight_row">
+                            Screenshot<br>
+                            <input type="text" class="standard_input input_xl" id="file_upload_spot_screenshots" name="spot_screen" required>&nbsp;
+                            <br>
+                            <br>
+                            <label for="file_upload" class="secondary_button">Select file(s)</label>
+                            <input type="file" id="file_upload" name="image[]">
+                            <br>
+                            <br>
+                        </div>
+                    </div>
+                </div>
                 <br><br>
                 <input type="hidden" name="action" value="spotlight_insert">
                 <input type="submit" value="Submit" class="secondary_button">
