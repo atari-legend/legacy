@@ -65,7 +65,7 @@ if (isset($action) and $action == "add_news") {
         mysqli_close($mysqli);
     }
 
-    header("Location: ../news/news_add.php");
+    header("Location: ../news/news_approve.php");
 }
 
 //****************************************************************************************
