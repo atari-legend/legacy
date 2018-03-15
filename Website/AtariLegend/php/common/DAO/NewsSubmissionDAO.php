@@ -1,5 +1,5 @@
 <?php
-namespace AL\Common\DAO;
+namespace AL\Common\DAO;    
 
 require_once __DIR__."/../../lib/Db.php" ;
 require_once __DIR__."/../Model/News/NewsSubmission.php" ;
