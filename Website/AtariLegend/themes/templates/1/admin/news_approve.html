@@ -19,6 +19,9 @@ This is the sub template file to generate the news approve page
 {extends file='1/admin/main.html'}
 
 {block name=java_script}
+<script src="{$template_dir}includes/js/vendor/jquery.ajaxQueue-0.1.1.min.js"></script>
+<script src="{$template_dir}includes/js/bbcode.js"></script>
+
 <script>
 function delete_news(news_id)
 {
@@ -52,8 +55,8 @@ function delete_news(news_id)
     <div class="standard_tile_line"></div>
     <div class="standard_tile_padding">
         <div class="left_nav_section">
-            This is the approval page. News send in by users, or news which has just been added,
-            should be approved by the admin users before it gets online at the front porche of AL.
+            News submitted by users, or news which has just been added using the 'add news' page,
+            should be approved here by the admin users first before it is published online at the front page of AL.
         </div>
         <br>
         <br>
@@ -69,15 +72,15 @@ function delete_news(news_id)
                             <a href="../user/user_detail.php?user_id_selected={$line->getUserId()}" class="standard_tile_link">{$line->getUserName()}</a>
                             <br><br><br>
                             <span class="text-nowrap">
-                                Joined:  {$line->getJoinDate()}
+                                Joined: {$line->getJoinDate()}
                                 <br>
                                 {if $line->getUserSubCount() > 0}
-                                    Submissions:  <a href="" class="standard_tile_link">{$line->getUserSubCount()}</a>
+                                    Submissions:  <a href="../news/news_approve.php?user_id_selected={$line->getUserId()}" class="standard_tile_link">{$line->getUserSubCount()}</a>
                                 {else}
                                     Submissions:  {$line->getUserSubCount()}
                                 {/if}
                                 <br>
-                                Karma: {$line->getKarma()}
+                                Karma: <a href="../user/user_statistics.php?user_id_selected={$line->getUserId()}" class="standard_tile_link">{$line->getKarma()}</a>
                             </span>
                         </div>
                         <div class="comment_post_detail">
@@ -97,19 +100,19 @@ function delete_news(news_id)
                             <ul class="comment_buttons">
                                 {if $line->getEmail() !== ''}
                                 <li class="primary_button jsCommentsEmailButton">
-                                    <a href="mailto:{$line->getEmail()}?subject=Comment%20of%20{$line->getGameName()|escape:'url'}%20at%20Atari%20Legend" class="links_addnew_link">
-                                            <i class="fa fa-envelope" aria-hidden="true"></i>
+                                    <a href="mailto:{$line->getEmail()}?subject=Submission of news : '{$line->getHeadline()|escape:'url'}' at Atari Legend" class="links_addnew_link">
+                                        <i class="fa fa-envelope" aria-hidden="true"></i>
                                     </a>
                                 </li>
                                 {/if}
                                 <li class="primary_button jsCommentsApproveButton" data-comments-id="{$line->getId()}">
                                     <a class="links_addnew_link">
-                                            <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+                                        <i class="fa fa-thumbs-up" aria-hidden="true"></i>
                                     </a>
                                 </li>
                                 <li class="primary_button jsCommentsDeleteButton" data-comments-id="{$line->getId()}">
                                     <a class="links_addnew_link">
-                                            <i class="fa fa-trash" aria-hidden="true"></i>
+                                        <i class="fa fa-trash" aria-hidden="true"></i>
                                     </a>
                                 </li>
                                 <div class="comments_button_dropdown" data-dropdown-id="{$line->getId()}">
@@ -120,7 +123,7 @@ function delete_news(news_id)
                                     </li>
                                     <div class="dropdown_box" id="dropdown_box{$line->getId()}">
                                         <li class="dropdown_item">
-                                            <a href="mailto:{$line->getEmail()}?subject=Comment%20of%20{$line->getGameName()|escape:'url'}%20at%20Atari%20Legend" class="links_addnew_link">
+                                            <a href="mailto:{$line->getEmail()}?subject=Submission of news : '{$line->getHeadline()|escape:'url'}' at Atari Legend" class="links_addnew_link">
                                                 Email
                                             </a>
                                         </li>
@@ -141,7 +144,7 @@ function delete_news(news_id)
                                 Posted <span>by <a href="../user/user_detail.php?user_id_selected={$line->getUserId()}">{$line->getUserName()}</a></span> on {$line->getDate()}
                             </div>
                             <div class="comments_line" id="line_below_info"></div>
-                            <div class="comment_post_text" id="jsCommentTextBox{$line->getCommentsId()}">
+                            <div class="comment_post_text" id="jsCommentTextBox{$line->getId()}">
                                 <br>
                                 {$line->getText()}
                                 <br>

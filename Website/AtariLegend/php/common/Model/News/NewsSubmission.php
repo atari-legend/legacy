@@ -1,8 +1,6 @@
 <?php
 namespace AL\Common\Model\NewsSubmission;
 
-use AL\Common\DAO\NewsSubmissionDAO;
-
 require_once __DIR__."/../../../config/config.php";
 require_once __DIR__."/../../../lib/functions.php";
 
@@ -40,16 +38,22 @@ class NewsSubmission {
         $this->id = $id;
         $this->headline = $headline;
         $this->text = $text;
-        $this->date = $date;
+        $this->post_date = date("F j, Y", $date);
         $this->userid = $userid;
         $this->username = $username;
         $this->email = $email;
-        $this->join_date = $join_date;
+        
+        if ($join_date == "") {
+            $this->join = "unknown";
+        } else {
+            $this->join = date("d-m-y", $join_date);
+        }
+       
         $this->karma = $karma;
         $this->user_subm_count = $user_subm_count;
         
         if ($avatar_ext && $avatar_ext !== "") {
-            $this->avatar_image = $GLOBALS['user_avatar_path']."/${user_id}.${avatar_ext}";
+            $this->avatar_image = $GLOBALS['user_avatar_path']."/${userid}.${avatar_ext}";
         } else {
             $this->avatar_image = $GLOBALS['style_folder']."/images/default_avatar_image.png";
         }
@@ -72,7 +76,7 @@ class NewsSubmission {
     }
 
     public function getDate() {
-        return $this->date;
+        return $this->post_date;
     }
 
     public function getImage() {
@@ -92,7 +96,7 @@ class NewsSubmission {
     }
 
     public function getJoinDate() {
-        return $this->join_date;
+        return $this->join;
     }
 
     public function getKarma() {
