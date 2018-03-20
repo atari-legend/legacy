@@ -20,24 +20,8 @@ This is the sub template file to generate the news approve page
 
 {block name=java_script}
 <script src="{$template_dir}includes/js/vendor/jquery.ajaxQueue-0.1.1.min.js"></script>
+<script src="{$template_dir}includes/js/news.js"></script>
 <script src="{$template_dir}includes/js/bbcode.js"></script>
-
-<script>
-function delete_news(news_id)
-{
-    // CONFIRM REQUIRES ONE ARGUMENT
-    var message = "Are you sure you want to delete this news submission?";
-    // CONFIRM IS BOOLEAN. THAT MEANS THAT
-    // IT RETURNS TRUE IF 'OK' IS CLICKED
-    // OTHERWISE IT RETURN FALSE
-    var return_value = confirm(message);
-    if (return_value !="0")
-    {
-        url="db_news.php?news_submission_id="+news_id+"&action=delete_submission";
-        location.href=url;
-    }
-}
-</script>
 {/block}
 
 {block name=title}Approve News{/block}
@@ -60,11 +44,13 @@ function delete_news(news_id)
         </div>
         <br>
         <br>
+        <form name="post">
+        <div class="jsNewsWrapper infinite-container">
         {if $nr_submissions <> '0'}
             {foreach from=$news_submissions item=line}
-                <div id="jsSubmissionId{$line->getId()}" class="infinite-item">
-                    <div class="comments_post_box" id="{$line->getDate()}">
-                        <div class="comments_userinfo">
+                <div id="jsNewsId{$line->getId()}" class="infinite-item">
+                    <div class="news_post_box" id="{$line->getDate()}">
+                        <div class="news_userinfo">
                             {if (null !== $line->getAvatarImage()) and $line->getAvatarImage() != ''}
                                 <img src="../../includes/show_image.php?file={$line->getAvatarImage()}&amp;resize=100,null,null,null" alt="{$line->getUserName()}" width="100px">
                             {else}
@@ -75,7 +61,7 @@ function delete_news(news_id)
                                 Joined: {$line->getJoinDate()}
                                 <br>
                                 {if $line->getUserSubCount() > 0}
-                                    Submissions:  <a href="../news/news_approve.php?user_id_selected={$line->getUserId()}" class="standard_tile_link">{$line->getUserSubCount()}</a>
+                                    Submissions:  <a href="../news/news_approve.php?user_id={$line->getUserId()}" class="standard_tile_link">{$line->getUserSubCount()}</a>
                                 {else}
                                     Submissions:  {$line->getUserSubCount()}
                                 {/if}
@@ -83,8 +69,8 @@ function delete_news(news_id)
                                 Karma: <a href="../user/user_statistics.php?user_id_selected={$line->getUserId()}" class="standard_tile_link">{$line->getKarma()}</a>
                             </span>
                         </div>
-                        <div class="comment_post_detail">
-                            <div class="comments_userinfo_phoneview">
+                        <div class="news_post_detail">
+                            <div class="news_userinfo_phoneview">
                                 {if (null !== $line->getAvatarImage()) and $line->getAvatarImage() !== ''}
                                     <img src="../../includes/show_image.php?file={$line->getAvatarImage()}&amp;resize=100,null,null,null" alt="{$line->getUserName()}" width="100px">
                                 {else}
@@ -94,28 +80,33 @@ function delete_news(news_id)
                                     <a href="../user/user_detail.php?user_id_selected={$line->getUserId()}">{$line->getUserName()}</a>
                                 </h6>
                             </div>
-                            <h4 class="comments_title">
+                            <h4 class="news_title">
                                 {$line->getHeadline()}</a>
                             </h4>
-                            <ul class="comment_buttons">
+                            <ul class="news_buttons">
                                 {if $line->getEmail() !== ''}
-                                <li class="primary_button jsCommentsEmailButton">
+                                <li class="primary_button jsNewsEmailButton">
                                     <a href="mailto:{$line->getEmail()}?subject=Submission of news : '{$line->getHeadline()|escape:'url'}' at Atari Legend" class="links_addnew_link">
                                         <i class="fa fa-envelope" aria-hidden="true"></i>
                                     </a>
                                 </li>
                                 {/if}
-                                <li class="primary_button jsCommentsApproveButton" data-comments-id="{$line->getId()}">
+                                <li class="primary_button jsNewsApproveButton" data-news-id="{$line->getId()}">
                                     <a class="links_addnew_link">
                                         <i class="fa fa-thumbs-up" aria-hidden="true"></i>
                                     </a>
                                 </li>
-                                <li class="primary_button jsCommentsDeleteButton" data-comments-id="{$line->getId()}">
+                                <li class="primary_button jsNewsEditButton" data-news-id="{$line->getId()}">
+                                    <a class="links_addnew_link">
+                                        <i class="fa fa-pencil" aria-hidden="true"></i>
+                                    </a>
+                                </li>
+                                <li class="primary_button jsNewsDeleteButton" data-news-id="{$line->getId()}">
                                     <a class="links_addnew_link">
                                         <i class="fa fa-trash" aria-hidden="true"></i>
                                     </a>
                                 </li>
-                                <div class="comments_button_dropdown" data-dropdown-id="{$line->getId()}">
+                                <div class="news_button_dropdown" data-dropdown-id="{$line->getId()}">
                                     <li class="primary_button">
                                         <a class="links_addnew_link">
                                             <i class="fa fa-bars" aria-hidden="true"></i>
@@ -127,24 +118,27 @@ function delete_news(news_id)
                                                 Email
                                             </a>
                                         </li>
-                                        <li class="dropdown_item jsCommentsApproveDropdownItem" data-comments-id="{$line->getId()}">
+                                        <li class="dropdown_item jsNewsApproveDropdownItem" data-news-id="{$line->getId()}">
                                             Approve
                                         </li>
-                                        <li class="dropdown_item jsCommentsDeleteDropdownItem" data-comments-id="{$line->getId()}">
+                                        <li class="dropdown_item jsNewsEditDropdownItem" data-news-id="{$line->getId()}">
+                                            Edit
+                                        </li>
+                                        <li class="dropdown_item jsNewsDeleteDropdownItem" data-news-id="{$line->getId()}">
                                             Delete
                                         </li>
                                     </div>
                                 </div>
                             </ul>
-                            <div class="comments_line" id="line_above_info"></div>
-                            <h4 class="comments_title_phoneview">
+                            <div class="news_line" id="line_above_info"></div>
+                            <h4 class="news_title_phoneview">
                                 {$line->getHeadline()}</a>
                             </h4>
-                            <div class="comments_post_info">
+                            <div class="news_post_info">
                                 Posted <span>by <a href="../user/user_detail.php?user_id_selected={$line->getUserId()}">{$line->getUserName()}</a></span> on {$line->getDate()}
                             </div>
-                            <div class="comments_line" id="line_below_info"></div>
-                            <div class="comment_post_text" id="jsCommentTextBox{$line->getId()}">
+                            <div class="news_line" id="line_below_info"></div>
+                            <div class="news_post_text" id="jsNewsTextBox{$line->getId()}">
                                 <br>
                                 {$line->getText()}
                                 <br>
@@ -157,6 +151,7 @@ function delete_news(news_id)
         {else}
             <div class="standard_tile_text_center">No news entries to approve.</div>
         {/if}
+        </div>
     </div>
 </div>
 {/block}

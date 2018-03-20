@@ -37,13 +37,13 @@ $NewsSubmissionDAO = new AL\Common\DAO\NewsSubmissionDAO($mysqli);
 if (isset($user_id)){
     $smarty->assign(
         'news_submissions',
-        $NewsSubmissionDAO->getAllSubmissions(isset($user_id) ? $user_id : null)
-    ); 
-}else{
+        $NewsSubmissionDAO->getAllSubmissionsForUser(isset($user_id) ? $user_id : null)
+    );
+}else{   
     $smarty->assign(
         'news_submissions',
-        $NewsSubmissionDAO->getAllSubmissionsForUser(isset($user_id) ? $user_id : null)
-    );    
+        $NewsSubmissionDAO->getAllSubmissions(isset($user_id) ? $user_id : null)
+    ); 
 }
 
 $smarty->assign("nr_submissions", $NewsSubmissionDAO->getSubmissionCount());
