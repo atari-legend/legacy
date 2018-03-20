@@ -116,15 +116,19 @@ if (isset($action) and $action == "approve_submission") {
 //********************************************************************************************
 
 if (isset($action) and $action == "delete_submission") {
-    create_log_entry('News', $news_submission_id, 'News submit', $news_submission_id, 'Delete', $_SESSION['user_id']);
+    if ($_SESSION['permission']==1 or $_SESSION['permission']=='1') {
+        create_log_entry('News', $news_id, 'News submit', $news_id, 'Delete', $_SESSION['user_id']);
 
-    $mysqli->query("delete from
-           news_submission
-         WHERE news_submission_id='$news_submission_id'") or die("Deletion of the unapproved news update failed!");
+        $mysqli->query("delete from
+               news_submission
+             WHERE news_submission_id='$news_id'") or die("Deletion of the unapproved news update failed!");
 
-    $_SESSION['edit_message'] = "Submission deleted";
-
-    header("Location: ../news/news_approve.php");
+        $message = "Submission deleted";
+        echo $message;
+    }else{
+        $message = "You don't have permission to perform this task";
+        echo $message;
+    }
 }
 
 //Edit news posts
@@ -148,25 +152,6 @@ if (isset($action) and $action == "update_news") {
     $_SESSION['edit_message'] = "News updated";
 
     header("Location: ../news/news_edit.php?news_id=$news_id");
-}
-
-//Edit news submissions
-if (isset($action) and $action == "update_submission") {
-    $news_text = $mysqli->real_escape_string($news_text);
-
-    //Its a submission
-    $mysqli->query("UPDATE
-        news_submission SET
-        news_headline='$news_headline',
-        news_text='$news_text',
-        news_image_id='$news_image_id'
-        WHERE news_submission_id='$news_submission_id'") or die("The update failed submission");
-
-    $_SESSION['edit_message'] = "Submission updated";
-
-    create_log_entry('News', $news_submission_id, 'News submit', $news_submission_id, 'Update', $_SESSION['user_id']);
-
-    header("Location: ../news/news_edit.php?news_submission_id=$news_submission_id");
 }
 
 if (isset($action) and $action == "image_upload") {

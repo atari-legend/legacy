@@ -185,4 +185,60 @@ class NewsSubmissionDAO {
 
         return $count;
     }
+    
+    /**
+    * Get the comment text for a specific comment
+    *
+    * @param  integer $comments_id ID of a comment
+    * @return text the text of the comment
+    */
+    public function getNewsText($news_id = null) {
+        if (isset($news_id)) {
+            $stmt = \AL\Db\execute_query(
+                "NewsSubmissionDAO: Get news text for news_id $news_id",
+                $this->mysqli,
+                "SELECT news_text FROM news_submission WHERE news_submission_id = ?",
+                "i",
+                $news_id
+            );
+        }
+
+        \AL\Db\bind_result(
+            "NewsSubmissionDAO: Get news text",
+            $stmt,
+            $news
+        );
+
+        $stmt->fetch();
+        $stmt->close();
+
+        return $news;
+    }
+    
+    /**
+    * Update the comment text for a specific comment
+    *
+    * @param  integer $comments_id ID of a comment
+    * @param  text $comments_text the text of the comment
+    * @return text the text of the comment
+    */
+    public function saveNewsText($news_id, $news_text) {
+        if (isset($news_id)) {
+            $stmt = \AL\Db\execute_query(
+                "NewsSubmissionDAO: Save news text for news_id $news_id",
+                $this->mysqli,
+                "UPDATE news_submission SET news_text = ? WHERE news_submission_id = ?",
+                "si",
+                $news_text,
+                $news_id
+            );
+
+                create_log_entry('News', $news_id, 'News submit', $news_id, 'Update', $_SESSION['user_id']);
+        }
+
+        $stmt->fetch();
+        $stmt->close();
+
+        return;
+    }
 }
