@@ -12,7 +12,6 @@ $(document).ready(function () {
             // Code to run if the request succeeds;
             success: function (html) {
                 $('#' + jsNewsTextBoxId).html(html);
-                listenSaveButton();
             }
         });
     })
@@ -29,32 +28,31 @@ $(document).ready(function () {
             // Code to run if the request succeeds;
             success: function (html) {
                 $('#' + jsNewsTextBoxId).html(html);
-                listenSaveButton();
             }
         });
     })
     // Edit Save News Function
-    function listenSaveButton () {
-        $('.jsNewsWrapper').on('click', '.jsNewsEditSaveButton', function () {
-            var newsId = $(this).data('news-id');
-            var jsNewsTextBoxId = 'jsNewsTextBox'.concat(newsId);
-            var newsText = $('#' + jsNewsTextBoxId + ' > #jsNewsText').val();
-
-            $.ajaxQueue({
-                // The URL for the request
-                url: 'ajax_news_approve_edit.php',
-                data: 'action=save_news_text&news_id=' + newsId + '&news_text=' + newsText,
-                type: 'POST',
-                dataType: 'html',
-                // Code to run if the request succeeds;
-                success: function (html) {
-                    var returnHtml = html.split('[BRK]');
-                    $('#' + jsNewsTextBoxId).html(returnHtml[0]);
-                    window.OSDMessageDisplay(returnHtml[1]);
-                }
-            });
-        })
-    }
+    $('.jsNewsWrapper').on('click', '.jsNewsEditSaveButton', function () {
+        var newsId = $(this).data('news-id');
+        var jsNewsTextBoxId = 'jsNewsTextBox'.concat(newsId);
+        var newsText = $('#' + jsNewsTextBoxId + ' > #jsNewsText').val();
+        $.ajaxQueue({
+            // The URL for the request
+            url: 'db_news.php',
+            data: 'action=save_news_text&news_id=' + newsId + '&news_text=' + newsText,
+            type: 'POST',
+            dataType: 'html',
+            // Code to run if the request succeeds;
+            success: function (html) {
+                var returnHtml = html.split('[BRK]');
+                $('#news_submission_list').html(returnHtml[0]);
+                window.OSDMessageDisplay(returnHtml[1]);
+                document.getElementById('post').reset();
+            },
+            error: function (xhr, status, error) {
+            }
+        });
+    })
     // Delete Submission Function
     $('.jsNewsWrapper').on('click', '.jsNewsDeleteButton', function () {
         var newsId = $(this).data('news-id');
@@ -75,8 +73,10 @@ $(document).ready(function () {
                         dataType: 'html',
                         // Code to run if the request succeeds;
                         success: function (html) {
-                            $('#jsNewsId' + newsId).html('');
-                            window.OSDMessageDisplay(html);
+                            var returnHtml = html.split('[BRK]');
+                            $('#news_submission_list').html(returnHtml[0]);
+                            window.OSDMessageDisplay(returnHtml[1]);
+                            document.getElementById('post').reset();
                         }
                     });
                 },
@@ -86,7 +86,7 @@ $(document).ready(function () {
             }
         });
     })
-    // Delete Comment Function in dropdown
+    // Delete submission Function in dropdown
     $('.jsNewsWrapper').on('click', '.jsNewsDeleteDropdownItem', function () {
         var newsId = $(this).data('news-id');
         $('#JSGenericModal').dialog({
@@ -106,8 +106,76 @@ $(document).ready(function () {
                         dataType: 'html',
                         // Code to run if the request succeeds;
                         success: function (html) {
-                            $('#jsNewsId' + newsId).html('');
-                            window.OSDMessageDisplay(html);
+                            var returnHtml = html.split('[BRK]');
+                            $('#news_submission_list').html(returnHtml[0]);
+                            window.OSDMessageDisplay(returnHtml[1]);
+                            document.getElementById('post').reset();
+                        }
+                    });
+                },
+                Cancel: function () {
+                    $(this).dialog('close');
+                }
+            }
+        });
+    })
+    // Approve Submission Function
+    $('.jsNewsWrapper').on('click', '.jsNewsApproveButton', function () {
+        var newsId = $(this).data('news-id');
+        $('#JSGenericModal').dialog({
+            title: 'Approve Submission',
+            open: $('#JSGenericModalText').text('Are you sure you want to approve this submission?'),
+            resizable: false,
+            height: 200,
+            modal: true,
+            buttons: {
+                'Approve': function () {
+                    $(this).dialog('close');
+                    $.ajaxQueue({
+                        // The URL for the request
+                        url: 'db_news.php',
+                        data: 'action=approve_submission&news_submission_id=' + newsId,
+                        type: 'POST',
+                        dataType: 'html',
+                        // Code to run if the request succeeds;
+                        success: function (html) {
+                            var returnHtml = html.split('[BRK]');
+                            $('#news_submission_list').html(returnHtml[0]);
+                            window.OSDMessageDisplay(returnHtml[1]);
+                            document.getElementById('post').reset();
+                        }
+                    });
+                },
+                Cancel: function () {
+                    $(this).dialog('close');
+                }
+            }
+        });
+    })
+    // Approve submission Function in dropdown
+    $('.jsNewsWrapper').on('click', '.jsNewsApproveDropdownItem', function () {
+        var newsId = $(this).data('news-id');
+        $('#JSGenericModal').dialog({
+            title: 'Approve Submission',
+            open: $('#JSGenericModalText').text('Are you sure you want to approve this submission?'),
+            resizable: false,
+            height: 200,
+            modal: true,
+            buttons: {
+                'Approve': function () {
+                    $(this).dialog('close');
+                    $.ajaxQueue({
+                        // The URL for the request
+                        url: 'db_news.php',
+                        data: 'action=approve_submission&news_submission_id=' + newsId,
+                        type: 'POST',
+                        dataType: 'html',
+                        // Code to run if the request succeeds;
+                        success: function (html) {
+                            var returnHtml = html.split('[BRK]');
+                            $('#news_submission_list').html(returnHtml[0]);
+                            window.OSDMessageDisplay(returnHtml[1]);
+                            document.getElementById('post').reset();
                         }
                     });
                 },
@@ -118,33 +186,8 @@ $(document).ready(function () {
         });
     })
 
-    $(window).scroll(function () {
-        if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
-            var lastTimestamp = $('.comments_post_box:last').attr('id');
-            loadMoreData(lastTimestamp);
-        }
-    });
-
-    $('.jsCommentsWrapper').on('click', '.comments_button_dropdown', function () {
+    $('.jsNewsWrapper').on('click', '.news_button_dropdown', function () {
         var dropdownId = $(this).data('dropdown-id');
         $('#dropdown_box' + dropdownId).toggle('.dropdown_show');
     })
-
-    function loadMoreData (lastTimestamp) {
-        var view = $('#view').html();
-        if (view === 'users_comments') {
-            var userId = $('.jsUserCommentsLink:first').data('user-id');
-        }
-        $.ajaxQueue({
-            // The URL for the request
-            url: 'ajax_comments.php',
-            data: 'action=autoload&view=' + view + '&last_timestamp=' + lastTimestamp + '&user_id=' + userId,
-            type: 'GET',
-            dataType: 'html',
-            // Code to run if the request succeeds;
-            success: function (html) {
-                $('.infinite-item:last').append(html);
-            }
-        });
-    }
 })

@@ -12,6 +12,7 @@ class NewsSubmission {
     private $headline;
     private $text;
     private $date;
+    private $image_id;
     private $image;
     private $userid;
     private $username;
@@ -26,6 +27,7 @@ class NewsSubmission {
         $headline,
         $text,
         $date,
+        $image_id,
         $image,
         $userid,
         $username,
@@ -39,6 +41,7 @@ class NewsSubmission {
         $this->headline = $headline;
         $this->text = $text;
         $this->post_date = date("F j, Y", $date);
+        $this->image_id = $image_id;
         $this->userid = $userid;
         $this->username = $username;
         $this->email = $email;
@@ -65,6 +68,10 @@ class NewsSubmission {
 
     public function getId() {
         return $this->id;
+    }
+    
+    public function getImageId() {
+        return $this->image_id;
     }
 
     public function getHeadline() {
