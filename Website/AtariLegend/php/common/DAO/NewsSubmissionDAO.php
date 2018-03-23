@@ -2,6 +2,7 @@
 namespace AL\Common\DAO;
 
 require_once __DIR__."/../../lib/Db.php" ;
+require_once __DIR__."/../../lib/functions.php" ;
 require_once __DIR__."/../Model/News/NewsSubmission.php" ;
 
 use AL\Common\Model\NewsSubmission;
@@ -17,12 +18,13 @@ class NewsSubmissionDAO {
         $this->mysqli = $mysqli;
     }
     
-    private function getSubmissionQuery($user_id = null) {
+    private function getSubmissionQuery($user_id = null, $news_id = null) {
         $query =  "SELECT
                 news_submission.news_submission_id,
                   news_submission.news_headline,
                   news_submission.news_text, 
                   news_submission.news_date,
+                  news_image.news_image_id,
                   CONCAT(news_image.news_image_id, \".\", news_image.news_image_ext) as news_image,
                   news_submission.user_id,
                   users.userid,
@@ -65,6 +67,7 @@ class NewsSubmissionDAO {
             $headline,
             $text,
             $date,
+            $image_id,
             $image,
             $userid,
             $username,
@@ -76,12 +79,19 @@ class NewsSubmissionDAO {
         );
 
         $news = [];
+        
         while ($stmt->fetch()) {
+            $text = nl2br($text);
+            $text = InsertALCode($text);
+            $text = trim($text);
+            $text = RemoveSmillies($text);
+        
             $news[] = new \AL\Common\Model\NewsSubmission\NewsSubmission(
                 $id,
                 $headline,
                 $text,
                 $date,
+                $image_id,
                 $image,
                 $userid,
                 $username,
@@ -117,6 +127,7 @@ class NewsSubmissionDAO {
             $headline,
             $text,
             $date,
+            $image_id,
             $image,
             $userid,
             $username,
@@ -128,12 +139,100 @@ class NewsSubmissionDAO {
         );
 
         $news = [];
+        
         while ($stmt->fetch()) {
+            $text = nl2br($text);
+            $text = InsertALCode($text);
+            $text = trim($text);
+            $text = RemoveSmillies($text);
+        
             $news[] = new \AL\Common\Model\NewsSubmission\NewsSubmission(
                 $id,
                 $headline,
                 $text,
                 $date,
+                $image_id,
+                $image,
+                $userid,
+                $username,
+                $email,
+                $join_date,
+                $karma,
+                $avatar_ext,
+                $user_subm_count
+            );
+        }
+
+        $stmt->close();
+
+        return $news;
+    }
+    
+    
+    /**
+    * Return a specific news submissions
+    * @return \AL\Common\Model\News\News[] An array of news
+    */
+    public function getSpecificSubmissions($news_id) {
+        $stmt = \AL\Db\execute_query(
+            "NewsSubmissionDAO: getSpecificSubmissions",
+            $this->mysqli,
+            "SELECT
+            news_submission.news_submission_id,
+            news_submission.news_headline,
+            news_submission.news_text, 
+            news_submission.news_date,
+            news_image.news_image_id,
+            CONCAT(news_image.news_image_id, \".\", news_image.news_image_ext) as news_image,
+            news_submission.user_id,
+            users.userid,
+            users.email,
+            users.join_date,
+            users.karma,
+            users.avatar_ext,
+            (SELECT COUNT(*) 
+                FROM news_submission 
+                    WHERE news_submission.user_id = users.user_id) AS user_submission_count
+            FROM news_submission
+            LEFT JOIN news_image ON (news_submission.news_image_id = news_image.news_image_id)
+            LEFT JOIN users ON (news_submission.user_id = users.user_id)
+            WHERE news_submission.news_submission_id = ?",
+            "i",
+            $news_id
+        );
+
+        \AL\Db\bind_result(
+            "NewsSubmissionDAO: get specific Submissions",
+            $stmt,
+            $id,
+            $headline,
+            $text,
+            $date,
+            $image_id,
+            $image,
+            $userid,
+            $username,
+            $email,
+            $join_date,
+            $karma,
+            $avatar_ext,
+            $user_subm_count
+        );
+
+        $news = [];
+        
+        while ($stmt->fetch()) {
+            $text = nl2br($text);
+            $text = InsertALCode($text);
+            $text = trim($text);
+            $text = RemoveSmillies($text);
+        
+            $news[] = new \AL\Common\Model\NewsSubmission\NewsSubmission(
+                $id,
+                $headline,
+                $text,
+                $date,
+                $image_id,
                 $image,
                 $userid,
                 $username,
@@ -213,32 +312,5 @@ class NewsSubmissionDAO {
         $stmt->close();
 
         return $news;
-    }
-    
-    /**
-    * Update the comment text for a specific comment
-    *
-    * @param  integer $comments_id ID of a comment
-    * @param  text $comments_text the text of the comment
-    * @return text the text of the comment
-    */
-    public function saveNewsText($news_id, $news_text) {
-        if (isset($news_id)) {
-            $stmt = \AL\Db\execute_query(
-                "NewsSubmissionDAO: Save news text for news_id $news_id",
-                $this->mysqli,
-                "UPDATE news_submission SET news_text = ? WHERE news_submission_id = ?",
-                "si",
-                $news_text,
-                $news_id
-            );
-
-                create_log_entry('News', $news_id, 'News submit', $news_id, 'Update', $_SESSION['user_id']);
-        }
-
-        $stmt->fetch();
-        $stmt->close();
-
-        return;
     }
 }

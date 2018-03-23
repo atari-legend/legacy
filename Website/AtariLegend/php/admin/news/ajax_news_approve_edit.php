@@ -16,37 +16,10 @@ require_once __DIR__."/../../common/DAO/NewsSubmissionDAO.php";
 
 $newsSubmissionDAO = new AL\Common\DAO\NewsSubmissionDAO($mysqli);
 
-//*********************************************************************************************
-// User comments
-//*********************************************************************************************
-
 if (isset($action) and $action == "get_newsapprove_text") {
     if (isset($news_id)) {
-        $smarty->assign('news_text', $newsSubmissionDAO->getNewsText($news_id));
+        $smarty->assign('news_item', $newsSubmissionDAO->getSpecificSubmissions($news_id));
         $smarty->assign('action', $action);
-        $smarty->assign('news_id', $news_id);
-    }
-}
-
-if (isset($action) and $action == "save_news_text") {
-    if ($_SESSION['permission']==1 or $_SESSION['permission']=='1') {
-        if (isset($news_id)) {
-            if (!$newsSubmissionDAO->saveNewsText($news_id, $news_text)) {
-                $osd = "News Updated!";
-            } else {
-                $osd = "Update Failed!";
-            }
-
-            $smarty->assign('news_text', $newsSubmissionDAO->getNewsText($news_id));
-            $smarty->assign('action', $action);
-            $smarty->assign('osd_message', $osd);
-            $smarty->assign('news_id', $news_id);
-        }
-    }else{
-        $osd = "You don't have permission to perform this task";
-        $smarty->assign('news_text', $newsSubmissionDAO->getNewsText($news_id));
-        $smarty->assign('action', $action);
-        $smarty->assign('osd_message', $osd);
         $smarty->assign('news_id', $news_id);
     }
 }
