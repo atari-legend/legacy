@@ -27,7 +27,7 @@ class GameReleaseDAO {
             "GameReleaseDAO: addReleaseForGame",
             $this->mysqli,
             "INSERT INTO game_release (game_id, `name`, `date`) VALUES (?, ?, ?)",
-            "iss", $game_id, $name, $date." 00:00:00"
+            "iss", $game_id, $name, $date
         );
 
         $id = $stmt->insert_id;
