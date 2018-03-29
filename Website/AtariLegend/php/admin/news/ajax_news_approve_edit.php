@@ -24,5 +24,26 @@ if (isset($action) and $action == "get_newsapprove_text") {
     }
 }
 
+//Get the authors for the news post
+$sql_author = $mysqli->query("SELECT user_id,userid FROM users ORDER BY userid ASC") or die("Database error - getting members name");
+
+while ($authors = $sql_author->fetch_array(MYSQLI_BOTH)) {
+    $smarty->append('authors', array(
+        'user_id' => $authors['user_id'],
+        'user_name' => $authors['userid']
+    ));
+}
+
+//Get the news images
+$sql_newsimage = $mysqli->query("SELECT news_image_id,news_image_name FROM news_image ORDER BY news_image_name");
+
+while ($newsimages = $sql_newsimage->fetch_array(MYSQLI_BOTH)) {
+    $smarty->append('news_images', array(
+        'image_id' => $newsimages['news_image_id'],
+        'image_name' => $newsimages['news_image_name']
+    ));
+}
+
+
 //Send all smarty variables to the templates
 $smarty->display("file:" . $cpanel_template_folder . "ajax_news_approve_edit.html");

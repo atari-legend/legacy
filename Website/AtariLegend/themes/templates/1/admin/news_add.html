@@ -24,6 +24,8 @@
 
 {block name=java_script}
 <script src="{$template_dir}includes/js/bbcode.js"></script><!-- Load the BBCODE script -->
+<script src="{$template_dir}includes/js/news.js"></script><!-- Load all the news scripts -->
+<script src="{$template_dir}includes/js/ui.widgets.js"></script><!-- The autocomplete and dropdown switcher -->
 {/block}
 
 {block name=main_tile}
@@ -55,15 +57,35 @@
                         <input type="text" name="headline" id="headline" maxlength='64' class="standard_input input_full" required>
                     </div>
                     <div class="links_mod_row">
-                        News Icon<br>
+                        Author<br>
+                        <select name="members"
+                            data-alt-autocomplete-endpoint="../../../php/admin/common/autocomplete.php?extraParams=admin-user"
+                            data-alt-autocomplete-toggle="#members_select_toggle"
+                            id="member_select" class="standard_select select_large">
+                            {foreach from=$authors item=line_author}
+                                {if $user_id eq $line_author.user_id}
+                                    <option value="{$line_images.image_id}" selected>{$line_author.user_name}</option>
+                                {else}
+                                    <option value="{$line_author.user_id}">{$line_author.user_name}</option>
+                                {/if}
+                            {/foreach}
+                        </select>
+                        <a href="javascript:;" class="left_nav_link" id="members_select_toggle" ><i class="fa fa-chevron-circle-down" aria-hidden="true" ></i></a>
+                    </div>
+                    <div class="links_mod_row">
+                        News Icon&nbsp;<a href="../news/news_iconpreview.php">(Preview)</a><br>
                         <select name="icon" class="standard_select select_large">
                             <option value="-">-</option>
                             {foreach from=$news_images item=line}
                                 <option value="{$line.image_id}">{$line.image_name}</option>
                             {/foreach}
                         </select>
-                        &nbsp;<a href="../news/news_iconpreview.php">Preview Icons</a>
                     </div>
+                    <div class="links_mod_row">
+                        Date<br>
+                        {html_select_date start_year="2000" class="standard_select"}
+                    </div>
+                    <br>
                     <div class="links_mod_row">
                         Description<br>
                         <input type="button" class="secondary_button" accesskey= "b" name="addbbcode0" value="B" onclick="bbstyle(0,'descr')">

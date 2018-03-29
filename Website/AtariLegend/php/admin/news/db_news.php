@@ -42,9 +42,12 @@ if (isset($action) and $action == "delete_news") {
 // This is where we add the actual news to the submission table
 //****************************************************************************************
 if (isset($action) and $action == "add_news") {
-    $news_date = time();
-
-    // Check if form is filled.
+    include("../../config/admin_rights.php");
+    
+    // we have to convert the date vars into a time stamp to be inserted into the db
+    $news_date = date_to_timestamp($Date_Year, $Date_Month, $Date_Day);
+   
+   // Check if form is filled.
     if ($headline == '' or $descr == '') {
         $_SESSION['edit_message'] = "Please fill in the necessary fields";
     } else {
@@ -53,7 +56,7 @@ if (isset($action) and $action == "add_news") {
         // Insert the description and the image into the news_image table.
         $sdbquery = $mysqli->query("INSERT INTO news_submission
               (news_headline,news_text,news_image_id,user_id,news_date)
-               VALUES ('$headline','$descr','$icon','$user_id','$news_date')") or die("Error inserting news update");
+               VALUES ('$headline','$descr','$icon','$members','$news_date')") or die("Error inserting news update");
 
         $_SESSION['edit_message'] = "News added correctly";
 
@@ -76,9 +79,16 @@ if (isset($action) and $action == "save_news_text") {
             create_log_entry('News', $news_id, 'News submit', $news_id, 'Update', $_SESSION['user_id']);
             
             $news_text = $mysqli->real_escape_string($news_text);
+            
+            // we have to convert the date vars into a time stamp to be inserted into the db
+            $date = date_to_timestamp($news_year, $news_month, $news_day);
            
             $mysqli->query("UPDATE news_submission SET
-                    news_text='$news_text'
+                    news_text='$news_text', 
+                    news_headline = '$news_headline',
+                    user_id = '$news_userid',
+                    news_image_id = '$news_image_id',
+                    news_date = '$date'
                     WHERE news_submission_id='$news_id'") or die("The update failed");
             
             $osd = "News submission updated!";
@@ -314,6 +324,3 @@ if (isset($action) and $action == "delete_image") {
     }
     header("Location: ../news/news_edit_images.php");
 }
-
-//close the connection
-mysqli_close($mysqli);
