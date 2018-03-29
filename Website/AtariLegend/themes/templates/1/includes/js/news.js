@@ -1,8 +1,10 @@
 $(document).ready(function () {
+    $('select[name=members]').altAutocomplete();
+
     // Edit News Function
     $('.jsNewsWrapper').on('click', '.jsNewsEditButton', function () {
         var newsId = $(this).data('news-id');
-        var jsNewsTextBoxId = 'jsNewsTextBox'.concat(newsId);
+        var jsNewsEditBoxId = 'jsNewsEditBox'.concat(newsId);
         $.ajaxQueue({
             // The URL for the request
             url: 'ajax_news_approve_edit.php',
@@ -11,14 +13,14 @@ $(document).ready(function () {
             dataType: 'html',
             // Code to run if the request succeeds;
             success: function (html) {
-                $('#' + jsNewsTextBoxId).html(html);
+                $('#' + jsNewsEditBoxId).html(html);
             }
         });
     })
     // Edit News Function dropdown item
     $('.jsNewsWrapper').on('click', '.jsNewsEditDropdownItem', function () {
         var newsId = $(this).data('news-id');
-        var jsNewsTextBoxId = 'jsNewsTextBox'.concat(newsId);
+        var jsNewsEditBoxId = 'jsNewsEditBox'.concat(newsId);
         $.ajaxQueue({
             // The URL for the request
             url: 'ajax_news_approve_edit.php',
@@ -27,19 +29,27 @@ $(document).ready(function () {
             dataType: 'html',
             // Code to run if the request succeeds;
             success: function (html) {
-                $('#' + jsNewsTextBoxId).html(html);
+                $('#' + jsNewsEditBoxId).html(html);
             }
         });
     })
     // Edit Save News Function
     $('.jsNewsWrapper').on('click', '.jsNewsEditSaveButton', function () {
         var newsId = $(this).data('news-id');
-        var jsNewsTextBoxId = 'jsNewsTextBox'.concat(newsId);
-        var newsText = $('#' + jsNewsTextBoxId + ' > #jsNewsText').val();
+        var jsNewsEditBox = 'jsNewsEditBox'.concat(newsId);
+        var newsText = $('#' + jsNewsEditBox + ' > #jsNewsText').val();
+        var newsHeadline = $('#' + jsNewsEditBox + ' > #JsHeadlineText').val();
+        var newsUserId = $('#' + jsNewsEditBox + ' > #member_select').val();
+        var newsImageId = $('#' + jsNewsEditBox + ' > #news_images_select').val();
+
+        var day = document.getElementsByName('Date_Day')[0].value;
+        var month = document.getElementsByName('Date_Month')[0].value;
+        var year = document.getElementsByName('Date_Year')[0].value;
+
         $.ajaxQueue({
             // The URL for the request
             url: 'db_news.php',
-            data: 'action=save_news_text&news_id=' + newsId + '&news_text=' + newsText,
+            data: 'action=save_news_text&news_id=' + newsId + '&news_text=' + newsText + '&news_headline=' + newsHeadline + '&news_userid=' + newsUserId + '&news_image_id=' + newsImageId + '&news_day=' + day + '&news_month=' + month + '&news_year=' + year,
             type: 'POST',
             dataType: 'html',
             // Code to run if the request succeeds;

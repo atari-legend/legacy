@@ -13,14 +13,45 @@
 {* START NEW NEWS BOX *}
 {if isset($action) and $action=="get_newsapprove_text"}
     {foreach from=$news_item item=line}
+        <input type="text" name="headline" id="JsHeadlineText" maxlength='64' class="standard_input input_75" required value="{$line->getHeadline()}">
+        <ul class="news_buttons">
+            <button class="primary_button jsNewsEditSaveButton news_save_button" data-news-id="{$news_id}" type="button">
+                <i class="fa fa-floppy-o" aria-hidden="true"></i>
+            </button>
+        </ul>
+        <br>
+        <select name="members"
+            id="member_select" class="standard_select select_large">
+            <option value="-">-</option>
+            {foreach from=$authors item=line_author}
+                {if $line_author.user_id == $line->getUserId()}
+                    <option value="{$line_author.user_id}" selected>{$line_author.user_name}</option>
+                {else}
+                    <option value="{$line_author.user_id}">{$line_author.user_name}</option>
+                {/if}
+            {/foreach}
+        </select>
+        <br>
+        <select name="news_image_id" class="standard_select select_large" id="news_images_select">
+            <option value="0">-</option>
+            {foreach from=$news_images item=line_images}
+                {if $line->getImageId() eq $line_images.image_id}
+                    <option value="{$line_images.image_id}" selected>{$line_images.image_name}</option>
+                {else}
+                    <option value="{$line_images.image_id}">{$line_images.image_name}</option>
+                {/if}
+            {/foreach}
+        </select>
+        <br>
+        {html_select_date time=$line->getDate() start_year="2000" class="standard_select"}
+        <br>
+        <br>
         <input type="button" class="primary_button" accesskey= "b" name="addbbcode0" value="B" onclick="bbstyle(0,'textfield')">
         <input type="button" class="primary_button" accesskey= "u" name="addbbcode4" value="U" onclick="bbstyle(4,'textfield')">
         <input type="button" class="primary_button" accesskey= "i" name="addbbcode2" value="I" onclick="bbstyle(2,'textfield')">
         <input type="button" class="primary_button" accesskey="w" name="addbbcode6" value="URL" onClick="bbstyle(6,'textfield')">
         <input type="button" class="primary_button" accesskey="x" name="addbbcode8" value="@" onClick="bbstyle(8,'textfield')">
-        <button class="primary_button jsNewsEditSaveButton news_save_button" data-news-id="{$news_id}">
-            <i class="fa fa-floppy-o" aria-hidden="true"></i>
-        </button>
+        <br>
         <textarea class="primary_textarea" rows="4" name="textfield" id="jsNewsText" ONSELECT="javascript:storeCaret(this);" ONCLICK="javascript:storeCaret(this);" ONKEYUP="javascript:storeCaret(this);" ONCHANGE="javascript:storeCaret(this);">{$line->getText()}</textarea>
     {/foreach}
 {/if}
@@ -52,7 +83,7 @@
                         {/if}
                     </span>
                 </div>
-                <div class="news_post_detail">
+                <div class="news_post_detail" id="jsNewsEditBox{$line->getId()}">
                     <div class="news_userinfo_phoneview">
                         {if (null !== $line->getAvatarImage()) and $line->getAvatarImage() !== ''}
                             <img src="../../includes/show_image.php?file={$line->getAvatarImage()}&amp;resize=100,null,null,null" alt="{$line->getUserName()}" width="100px">

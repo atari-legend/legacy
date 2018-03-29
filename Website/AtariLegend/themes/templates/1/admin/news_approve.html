@@ -19,9 +19,9 @@ This is the sub template file to generate the news approve page
 {extends file='1/admin/main.html'}
 
 {block name=java_script}
-<script src="{$template_dir}includes/js/vendor/jquery.ajaxQueue-0.1.1.min.js"></script>
-<script src="{$template_dir}includes/js/news.js"></script>
-<script src="{$template_dir}includes/js/bbcode.js"></script>
+<script src="{$template_dir}includes/js/bbcode.js"></script><!-- Load the BBCODE script -->
+<script src="{$template_dir}includes/js/news.js"></script><!-- Load all the news scripts -->
+<script src="{$template_dir}includes/js/ui.widgets.js"></script><!-- The autocomplete and dropdown switcher -->
 {/block}
 
 {block name=title}Approve News{/block}
@@ -74,7 +74,7 @@ This is the sub template file to generate the news approve page
                                         {/if}
                                     </span>
                                 </div>
-                                <div class="news_post_detail">
+                                <div class="news_post_detail" id="jsNewsEditBox{$line->getId()}">
                                     <div class="news_userinfo_phoneview">
                                         {if (null !== $line->getAvatarImage()) and $line->getAvatarImage() !== ''}
                                             <img src="../../includes/show_image.php?file={$line->getAvatarImage()}&amp;resize=100,null,null,null" alt="{$line->getUserName()}" width="100px">
