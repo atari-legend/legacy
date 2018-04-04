@@ -226,6 +226,8 @@ class NewsSubmissionDAO {
             $text = InsertALCode($text);
             $text = trim($text);
             $text = RemoveSmillies($text);
+            $breaks = array("<br />","<br>","<br/>");
+            $text = str_ireplace($breaks, "\r\n", $text);
         
             $news[] = new \AL\Common\Model\NewsSubmission\NewsSubmission(
                 $id,

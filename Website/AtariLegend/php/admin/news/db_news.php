@@ -78,18 +78,28 @@ if (isset($action) and $action == "save_news_text") {
         if (isset($news_id)) {
             create_log_entry('News', $news_id, 'News submit', $news_id, 'Update', $_SESSION['user_id']);
             
-            $news_text = $mysqli->real_escape_string($news_text);
+            /*$news_text = $mysqli->real_escape_string($news_text);*/
             
             // we have to convert the date vars into a time stamp to be inserted into the db
             $date = date_to_timestamp($news_year, $news_month, $news_day);
+            
+            $stmt = $mysqli->prepare("UPDATE news_submission SET news_text = ?,
+                                 news_headline = ?,
+                                 user_id = ?,
+                                 news_image_id = ?,
+                                 news_date = ?
+                                 WHERE news_submission_id = ?") or die($mysqli->error);
+            $stmt->bind_param("ssiiis", $news_text, $news_headline, $news_userid, $news_image_id, $date, $news_id) or die($mysqli->error);
+            $stmt->execute() or die($mysqli->error);
+            $stmt->close();
            
-            $mysqli->query("UPDATE news_submission SET
+            /*$mysqli->query("UPDATE news_submission SET
                     news_text='$news_text', 
                     news_headline = '$news_headline',
                     user_id = '$news_userid',
                     news_image_id = '$news_image_id',
                     news_date = '$date'
-                    WHERE news_submission_id='$news_id'") or die("The update failed");
+                    WHERE news_submission_id='$news_id'") or die("The update failed");*/
             
             $osd = "News submission updated!";
         }
@@ -218,9 +228,71 @@ if (isset($action) and $action == "delete_submission") {
     $smarty->display("file:" . $cpanel_template_folder . "ajax_news_approve_edit.html");
 }
 
+//****************************************************************************************
+// This is where we will update a news post.
+//****************************************************************************************e
+if (isset($action) and $action == "save_news_post_text") {
+    if ($_SESSION['permission']==1 or $_SESSION['permission']=='1') {
+        if (isset($news_id)) {                    
+            create_log_entry('News', $news_id, 'News item', $news_id, 'Update', $_SESSION['user_id']);
+            
+            // we have to convert the date vars into a time stamp to be inserted into the db
+            $date = date_to_timestamp($news_year, $news_month, $news_day);
+            
+            $stmt = $mysqli->prepare("UPDATE news SET news_text = ?,
+                                 news_headline = ?,
+                                 user_id = ?,
+                                 news_image_id = ?,
+                                 news_date = ?
+                                 WHERE news_id = ?") or die($mysqli->error);
+            $stmt->bind_param("ssiiis", $news_text, $news_headline, $news_userid, $news_image_id, $date, $news_id) or die($mysqli->error);
+            $stmt->execute() or die($mysqli->error);
+            $stmt->close();
+            
+            /*$news_text = $mysqli->real_escape_string($news_text);
+
+            
+            // we have to convert the date vars into a time stamp to be inserted into the db
+            $date = date_to_timestamp($news_year, $news_month, $news_day);
+           
+            $mysqli->query("UPDATE news SET
+                    news_text='$news_text', 
+                    news_headline = '$news_headline',
+                    user_id = '$news_userid',
+                    news_image_id = '$news_image_id',
+                    news_date = '$date'
+                    WHERE news_id='$news_id'") or die("The update failed");*/
+            
+            $osd = "News post updated!";
+        }
+    }else{
+        $osd = "You don't have permission to perform this task";
+    }
+
+    $smarty->assign('action', 'save_news_text');
+    $smarty->assign('osd_message', $osd);
+    
+    require_once __DIR__."/../../lib/Db.php";
+    require_once __DIR__."/../../common/DAO/NewsDAO.php";
+
+    $newsDAO = new AL\Common\DAO\NewsDAO($mysqli);
+    
+    $smarty->assign(
+        'news',
+        $newsDAO->getLatestNews(isset($user_id) ? $user_id : null, isset($last_timestamp) ? $last_timestamp : null, isset($action) ? $action : null, isset($view) ? $view : null)
+    ); 
+        
+    $smarty->assign("nr_news", $newsDAO->getNewsCount());
+
+    $smarty->assign("user_id", $_SESSION['user_id']);
+    
+    //Send to smarty for return value
+    $smarty->display("file:" . $cpanel_template_folder . "ajax_news_post_edit.html");
+}
+
 
 //Edit news posts
-if (isset($action) and $action == "update_news") {
+/*if (isset($action) and $action == "update_news") {
     $news_text     = $mysqli->real_escape_string($news_text);
     $news_headline = $mysqli->real_escape_string($news_headline);
 
@@ -240,7 +312,7 @@ if (isset($action) and $action == "update_news") {
     $_SESSION['edit_message'] = "News updated";
 
     header("Location: ../news/news_edit.php?news_id=$news_id");
-}
+}*/
 
 if (isset($action) and $action == "image_upload") {
     //****************************************************************************************
