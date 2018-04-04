@@ -10,71 +10,41 @@
  *   Id: news_edit.php,v 0.10 2004/05/05 ST Graveyard
  *   Id: news_edit.php,v 0.20 2016/07/29 ST Graveyard
  *           - AL 2.0
+ *   Id: news_edit.php,v 0.25 2018/03/29 ST Graveyard
+ *           - Conversion to DAO
  *
  ***************************************************************************/
 //****************************************************************************************
-// This is where we can edit submitted news threads
+// This is where we can edit all the news sections
 //****************************************************************************************
 
 include("../../config/common.php");
 include("../../config/admin.php");
+require_once __DIR__."/../../lib/Db.php";
+require_once __DIR__."/../../common/DAO/NewsDAO.php";
 
 //load the search fields of the quick search side menu
 include("../../admin/games/quick_search_games.php");
 
-//This file deal with the editing of the still to approve news threads and the news threads online.
-//When we are dealing with the news_id var, we're talking about newsthreads online, the news_submission_id
-//is used for the submitted news threads.
+$NewsDAO = new AL\Common\DAO\NewsDAO($mysqli);
 
-if (empty($news_id)) {
-    //We're dealing with a submission. Get the actual submission we wanna edit
-    $sql_news = $mysqli->query("SELECT * FROM news_submission WHERE news_submission_id = '$news_submission_id'");
+//********************************************************************************************
+// Get all the needed data to load the news page!
+//********************************************************************************************
 
-    $news = $sql_news->fetch_array(MYSQLI_BOTH);
+//if (isset($user_id)){
+//    $smarty->assign(
+//        'news',
+//        $NewsDAO->getAllNewsForUser(isset($user_id) ? $user_id : null, isset($last_timestamp) ? $last_timestamp : null, isset($action) ? $action : null, isset($view) ? $view : null)
+//    );
+//}else{   
+    $smarty->assign(
+        'news',
+        $NewsDAO->getLatestNews(isset($user_id) ? $user_id : null, isset($last_timestamp) ? $last_timestamp : null, isset($action) ? $action : null, isset($view) ? $view : null)
+    ); 
+//}
 
-    $user_name = get_username_from_id($news['user_id']);
-    $news_date = date("F j, Y", $news['news_date']);
-    //$news_text = InsertALCode($news['news_text']);
-    //$news_text = InsertSmillies($news_text);
-
-    $smarty->assign('edit_submissions', array(
-        'edit_userid' => $user_name,
-        'edit_submission_id' => $news_submission_id,
-        'edit_headline' => $news['news_headline'],
-        'edit_date' => $news_date,
-        'edit_text' => $news['news_text'],
-        'edit_image_id' => $news['news_image_id']
-    ));
-} else {
-    //we're dealing with a news post which has to be altered
-    $sql_news = $mysqli->query("SELECT * FROM news WHERE news_id = '$news_id'");
-
-    $news = $sql_news->fetch_array(MYSQLI_BOTH);
-
-    $user_name = get_username_from_id($news['user_id']);
-    $news_date = date("F j, Y", $news['news_date']);
-    //$news_text = InsertALCode($news['news_text']);
-    //$news_text = InsertSmillies($news_text);
-
-    $smarty->assign('edit_submissions', array(
-        'edit_userid' => $user_name,
-        'edit_id' => $news_id,
-        'edit_headline' => $news['news_headline'],
-        'edit_date' => $news_date,
-        'edit_text' => $news['news_text'],
-        'edit_image_id' => $news['news_image_id']
-    ));
-}
-
-//Get the news images
-$sql_newsimage = $mysqli->query("SELECT news_image_id,news_image_name FROM news_image ORDER BY news_image_name");
-
-while ($newsimages = $sql_newsimage->fetch_array(MYSQLI_BOTH)) {
-    $smarty->append('news_images', array(
-        'image_id' => $newsimages['news_image_id'],
-        'image_name' => $newsimages['news_image_name']
-    ));
-}
+$smarty->assign("nr_news", $NewsDAO->getNewsCount());
 
 $smarty->assign("user_id", $_SESSION['user_id']);
 
