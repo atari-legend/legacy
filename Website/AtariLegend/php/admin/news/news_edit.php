@@ -31,18 +31,10 @@ $NewsDAO = new AL\Common\DAO\NewsDAO($mysqli);
 //********************************************************************************************
 // Get all the needed data to load the news page!
 //********************************************************************************************
-
-//if (isset($user_id)){
-//    $smarty->assign(
-//        'news',
-//        $NewsDAO->getAllNewsForUser(isset($user_id) ? $user_id : null, isset($last_timestamp) ? $last_timestamp : null, isset($action) ? $action : null, isset($view) ? $view : null)
-//    );
-//}else{   
-    $smarty->assign(
-        'news',
-        $NewsDAO->getLatestNews(isset($user_id) ? $user_id : null, isset($last_timestamp) ? $last_timestamp : null, isset($action) ? $action : null, isset($view) ? $view : null)
-    ); 
-//}
+$smarty->assign(
+    'news',
+    $NewsDAO->getLatestNews(isset($user_id) ? $user_id : null, isset($last_timestamp) ? $last_timestamp : null, isset($action) ? $action : null, isset($view) ? $view : null)
+); 
 
 $smarty->assign("nr_news", $NewsDAO->getNewsCount());
 

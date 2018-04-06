@@ -11,6 +11,8 @@
 *}
 
 <div id="view" style="display:none;">{$view}</div>
+<div id="action" style="display:none;">{$action}</div>
+<div id="news_edit_list">
 {foreach from=$news item=line}
     <div id="jsNewsId{$line->getId()}" class="infinite-item">
         <div class="news_post_box" id="{$line->getTimestamp()}">
@@ -113,3 +115,4 @@
         </div>
     </div>
 {/foreach}
+</div>
