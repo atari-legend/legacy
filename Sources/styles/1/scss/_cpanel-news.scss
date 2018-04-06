@@ -31,7 +31,7 @@
     @extend .comment_buttons;
 }
 
-.jsNewsEmailButton, .jsNewsDeleteButton, .jsNewsEditButton, .jsNewsApproveButton{
+.jsNewsEmailButton, .jsNewsDeleteButton, .jsNewsEditButton, .jsNewsApproveButton, .jsNewsPostEditButton, .jsNewsPostDeleteButton {
     @extend .jsCommentsEmailButton;
 }
 

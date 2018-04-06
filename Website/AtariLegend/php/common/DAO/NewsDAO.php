@@ -56,7 +56,20 @@ class NewsDAO {
             }
         }
         
-        $query .= " ORDER BY news_date DESC LIMIT 5";
+        //This is added when we save, we don't want the news page to 'refresh'
+        if (isset($action) and $action=="autoload_save") {
+            if (isset($view) and $view == "users_news") {
+                if (isset($user_id)) {
+                    $query .= " AND news.news_date >= $last_timestamp ORDER BY news_date DESC";
+                } else {
+                    $query .= " WHERE news.news_date >= $last_timestamp ORDER BY news_date DESC";
+                }
+            } else {
+                    $query .= " WHERE news.news_date >= $last_timestamp ORDER BY news_date DESC";
+            }
+        } else {
+            $query .= " ORDER BY news_date DESC LIMIT 5";
+        }
             
         return $query;
     }
