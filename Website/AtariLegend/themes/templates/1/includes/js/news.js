@@ -288,6 +288,7 @@ $(document).ready(function () {
                 $('#news_edit_list').html(returnHtml[0]);
                 window.OSDMessageDisplay(returnHtml[1]);
                 document.getElementById('post').reset();
+                document.getElementById('JSCpanelNewsSearchForm').reset();
             },
             error: function (xhr, status, error) {
             }
@@ -378,16 +379,20 @@ $(document).ready(function () {
             var userId = $('.jsUserNewsLink:first').data('user-id');
         }
 
-        $.ajaxQueue({
-            // The URL for the request
-            url: 'ajax_news_edit.php',
-            data: 'action=autoload&view=' + view + '&last_timestamp=' + lastTimestamp + '&user_id=' + userId,
-            type: 'GET',
-            dataType: 'html',
-            // Code to run if the request succeeds;
-            success: function (html) {
-                $('.infinite-item:last').append(html);
-            }
-        });
+        var action = $('#action_news_search').html();
+        if (action === 'news_search') {
+        } else {
+            $.ajaxQueue({
+                // The URL for the request
+                url: 'ajax_news_edit.php',
+                data: 'action=autoload&view=' + view + '&last_timestamp=' + lastTimestamp + '&user_id=' + userId,
+                type: 'GET',
+                dataType: 'html',
+                // Code to run if the request succeeds;
+                success: function (html) {
+                    $('.infinite-item:last').append(html);
+                }
+            });
+        }
     }
 })

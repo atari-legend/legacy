@@ -52,7 +52,20 @@
 }
 
 .news_post_text {
-    @extend .comment_post_text;
+    position: relative;
+    z-index: 0;
+    a:link {
+        color: #00d3d3;
+        font-weight: normal;
+    }
+    a:visited {
+        color: #00d3d3;
+        font-weight: normal;
+    }
+    a:hover {
+        color: #ffffff;
+        font-weight: normal;
+    }
     .news_save_button {
         @extend .comments_save_button;
     }
