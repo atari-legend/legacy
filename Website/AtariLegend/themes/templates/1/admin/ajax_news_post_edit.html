@@ -56,7 +56,7 @@
     {/foreach}
 {/if}
 
-{if isset($action) and ( $action=='delete_news' or $action=='save_news_text' )}
+{if isset($action) and ( $action=='delete_news' or $action=='save_news_text' or $action=='search_news_text' )}
     {foreach from=$news item=line}
         <div id="jsNewsId{$line->getId()}" class="infinite-item">
             <div class="news_post_box" id="{$line->getTimestamp()}">

@@ -1,30 +1,17 @@
 {*
 /***************************************************************************
-*                                news_edit.html
-*                            ---------------------------
-*   begin                : Thursday, May 5, 2005
-*   copyright            : (C) 2005 Atari Legend
-*   email                : maarten.martens@freebel.net
+*                                ajax_news_search.html
+*                            ----------------------------
+*   begin                : Tuesday, April 10, 2018
+*   copyright            : (C) 2018 Atari Legend
+*   email                : admin@atarilegend.com
 *   actual update        : File creation
-*
-*   Id: news_edit.html,v 0.10 2004/05/05 ST Graveyard
-*   Id: news_edit.html,v 0.10 2016/07/29 ST Graveyard
-*           - AL 2.0
 *
 ***************************************************************************/
 ****************************************************************************
 This is the sub template file to generate the news edit page
 ****************************************************************************
 *}
-{extends file='1/admin/main.html'}
-
-{block name=left_tile}
-    {include file='1/admin/quick_search_news.html'}
-{/block}
-
-{block name=right_tile}
-    {include file='1/admin/quick_search_games.html'}
-{/block}
 
 {block name=java_script}
 <script src="{$template_dir}includes/js/bbcode.js"></script><!-- Load the BBCODE script -->
@@ -163,6 +150,8 @@ This is the sub template file to generate the news edit page
                 {/if}
             </div>
         </div>
+        <div id="action_news_search" style="display:none;">{$search_action}</div>
     </div>
 </div>
+
 {/block}

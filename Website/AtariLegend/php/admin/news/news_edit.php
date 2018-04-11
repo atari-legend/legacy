@@ -25,6 +25,7 @@ require_once __DIR__."/../../common/DAO/NewsDAO.php";
 
 //load the search fields of the quick search side menu
 include("../../admin/games/quick_search_games.php");
+include("../../admin/news/quick_search_news.php");
 
 $NewsDAO = new AL\Common\DAO\NewsDAO($mysqli);
 
