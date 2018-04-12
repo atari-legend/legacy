@@ -291,6 +291,7 @@ if (isset($action) and $action == "save_news_post_text") {
 }
 
 if (isset($action) and $action == "image_upload") {
+    include("../../config/admin_rights.php");
     //****************************************************************************************
     // This is where we handle the uploaded images and rename them and save them to db and hd
     //****************************************************************************************
@@ -353,6 +354,7 @@ if (isset($action) and $action == "image_upload") {
 // This is where we delete a news image
 //****************************************************************************************
 if (isset($action) and $action == "delete_image") {
+    include("../../config/admin_rights.php");
     if (isset($news_image_id)) {
         foreach ($news_image_id as $image) {
             $sql = $mysqli->query("SELECT news_image_ext FROM news_image WHERE news_image_id='$image'") or die("Couldn't query images");

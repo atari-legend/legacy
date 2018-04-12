@@ -16,10 +16,8 @@ include("../../config/admin.php");
 
 require_once __DIR__."/../../lib/Db.php";
 require_once __DIR__."/../../common/DAO/NewsSearchDAO.php";
-require_once __DIR__."/../../common/DAO/NewsDAO.php";
 
 $NewsSearchDAO = new AL\Common\DAO\NewsSearchDAO($mysqli);
-$NewsDAO = new AL\Common\DAO\NewsDAO($mysqli);
 
 //********************************************************************************************
 // Get all the needed data to load the news page!
@@ -31,7 +29,7 @@ $smarty->assign(
     $NewsSearchDAO->getSearchNews(isset($author_search) ? $author_search : null, isset($date) ? $date : null, isset($newssearch) ? $newssearch : null)
 ); 
 
-$smarty->assign("nr_news", $NewsDAO->getNewsCount());
+$smarty->assign("nr_news", $NewsSearchDAO->getSearchNewsCount(isset($author_search) ? $author_search : null, isset($date) ? $date : null, isset($newssearch) ? $newssearch : null));
 
 $smarty->assign("user_id", $_SESSION['user_id']);
 

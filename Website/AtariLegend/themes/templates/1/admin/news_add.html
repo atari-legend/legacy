@@ -64,7 +64,7 @@
                             id="member_select" class="standard_select select_large">
                             {foreach from=$authors item=line_author}
                                 {if $user_id eq $line_author.user_id}
-                                    <option value="{$line_images.image_id}" selected>{$line_author.user_name}</option>
+                                    <option value="{$line_author.user_id}" selected>{$line_author.user_name}</option>
                                 {else}
                                     <option value="{$line_author.user_id}">{$line_author.user_name}</option>
                                 {/if}

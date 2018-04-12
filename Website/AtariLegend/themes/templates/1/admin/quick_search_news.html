@@ -15,9 +15,14 @@
 //****************************************************************************************
 *}
 
-{block name=quick_search_games}
+{block name=quick_search_news}
 <script src="{$template_dir}includes/js/news_search.js"></script>
 <div class="standard_tile">
+    <div class="help-tip">
+        <p>
+            When using the search fields, the query will be executed automatically. You can edit or delete an news entry but beware once you have made your change you are redirected to the main edit screen.
+        </p>
+    </div>
     <h1>NEWS SEARCH</h1>
     <div class="standard_tile_line"></div>
     <br>
@@ -41,7 +46,7 @@
             </div>
             <br>
             <div class="standard_tile_text_center">
-                Date : <br>
+                All entries up to : <br>
                 {html_select_date prefix="news_search" start_year="2000" class="standard_select"}
             </div>
             <br>
