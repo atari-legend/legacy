@@ -57,6 +57,7 @@
 {/if}
 
 {if isset($action) and ( $action=='delete_news' or $action=='save_news_text' or $action=='search_news_text' )}
+    {if $nr_news <> ''}<div class="standard_tile_text_center">There are currently {$nr_news} posts in the news table.</div><br>{/if}
     {foreach from=$news item=line}
         <div id="jsNewsId{$line->getId()}" class="infinite-item">
             <div class="news_post_box" id="{$line->getTimestamp()}">

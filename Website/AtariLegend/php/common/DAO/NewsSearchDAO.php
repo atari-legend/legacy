@@ -58,6 +58,35 @@ class NewsSearchDAO {
             
         return $query;
     }
+    
+    private function getNewsSearchCountQuery($user_id = null, $date = null, $text = null) {
+            
+        $query =  "SELECT count(news.news_id)
+            FROM
+                news
+            LEFT JOIN news_search_wordmatch ON (news_search_wordmatch.news_id = news.news_id) 
+            LEFT JOIN news_search_wordlist ON (news_search_wordlist.news_word_id = news_search_wordmatch.news_word_id) 
+            LEFT JOIN news_image ON
+                (news.news_image_id = news_image.news_image_id)
+            LEFT JOIN users ON
+                (news.user_id = users.user_id)";
+                
+        if (isset($text) and $text != '') {
+            $query .= " WHERE news_search_wordlist.news_word_text LIKE '$text'";
+        } else {
+            $query .= " WHERE news_search_wordlist.news_word_text LIKE '%'";
+        }
+             
+        if (isset($user_id) and $user_id != '-') {
+            $query .= " AND news.user_id = $user_id";
+        }
+        
+        $query .= " AND news.news_date < $date";
+             
+        $query .= " GROUP BY news.news_id";
+            
+        return $query;
+    }
 
     /**
      * Return the latest news, sorted by descending date
@@ -67,14 +96,14 @@ class NewsSearchDAO {
      */
     public function getSearchNews($user_id = null, $date = null, $text = null) {
         $stmt = \AL\Db\execute_query(
-            "NewsDAO: getSearchNews",
+            "NewsSearchDAO: getSearchNews",
             $this->mysqli,
             $this->getNewsSearchQuery($user_id, $date, $text),
             null, null
         );
 
         \AL\Db\bind_result(
-            "NewsDAO: getSearchNews",
+            "NewsSearchDAO: getSearchNews",
             $stmt,
             $id,
             $headline,
@@ -120,5 +149,25 @@ class NewsSearchDAO {
         $stmt->close();
 
         return $news;
+    }
+    
+    public function getSearchNewsCount($user_id = null, $date = null, $text = null) {
+        $stmt = \AL\Db\execute_query(
+            "NewsSearchDAO: getSearchNewsCount",
+            $this->mysqli,
+            $this->getNewsSearchCountQuery($user_id, $date, $text),
+            null, null
+        );
+
+        \AL\Db\bind_result(
+            "NewsSearchDAO: getSearchNewsCount",
+            $stmt,
+            $count
+        );
+
+        $stmt->fetch();
+        $stmt->close();
+
+        return $count;
     }
 }

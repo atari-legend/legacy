@@ -19,6 +19,14 @@
 *}
 {extends file='1/admin/main.html'}
 
+{block name=left_tile}
+    {include file='1/admin/quick_search_news.html'}
+{/block}
+
+{block name=right_tile}
+    {include file='1/admin/quick_search_games.html'}
+{/block}
+
 {block name=title}Edit a news image{/block}
 
 {block name=main_tile}
@@ -47,9 +55,11 @@
                     </tr>
                     {foreach name='outer' from=$news_images item='line'}
                     <tr>
-                        <td class="news_images_check">
+                        <td>
+                            <div class="checkbox_alt">
                             <input type="checkbox" id="{$line.image_id}" name="news_image_id[]" value="{$line.image_id}">
                             <label for="{$line.image_id}"></label>
+                            </div>
                         </td>
                         <td class="news_images_display">
                             <img src="../../includes/show_image.php?file={$line.image_link}&amp;resize=100,null,null,null" alt="newsbutton" class="game_screenshot_img">
@@ -62,11 +72,9 @@
                         </td>
                         <td class="news_images_name">
                             {foreach from=$news_headlines name='inner' item='line2'}
-                                {if $line.image_id == $line2.news_image_id}
-                                    <a href="../news/news_edit.php?news_id={$line2.news_id}" class="standard_tile_link">
-                                    {$line2.news_headline}
-                                </a>
-                                <br/>
+                                {if $line.image_id == $line2.news_image_id}                                   
+                                    - {$line2.news_headline}
+                                <br>
                                 {/if}
                             {/foreach}
                         </td>

@@ -271,7 +271,7 @@ $(document).ready(function () {
         if (view === 'users_news') {
             var userId = $('.jsUserNewsLink:first').data('user-id');
         }
-
+        
         var day = document.getElementsByName('Date_Day')[0].value;
         var month = document.getElementsByName('Date_Month')[0].value;
         var year = document.getElementsByName('Date_Year')[0].value;

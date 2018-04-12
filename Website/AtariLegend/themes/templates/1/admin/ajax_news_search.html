@@ -42,7 +42,8 @@ This is the sub template file to generate the news edit page
         <form name="post" id="post">
         <div class="jsNewsWrapper infinite-container">
             <div id="news_edit_list">
-                {if $nr_news <> '0'}
+                {if $nr_news <> ''}
+                    {if $nr_news <> ''}<div class="standard_tile_text_center">Your search query resulted in {$nr_news} entries.</div><br>{/if}
                     {foreach from=$news item=line}
                         <div id="jsNewsId{$line->getId()}" class="infinite-item">
                             <div class="news_post_box" id="{$line->getTimestamp()}">
@@ -146,7 +147,7 @@ This is the sub template file to generate the news edit page
                         </div>
                     {/foreach}
                 {else}
-                    <div class="standard_tile_text_center">No news entries to approve.</div>
+                    <div class="standard_tile_text_center">No news entries for your query.</div>
                 {/if}
             </div>
         </div>
