@@ -8,7 +8,7 @@
  */
 
 // Interval of backups to keep. See the PHP DateInterval class for the syntax
-const PURGE_INTERVAL = "P30D";
+const DEFAULT_PURGE_INTERVAL = "P30D";
 
 // Ensure this script is only run on command line
 if (php_sapi_name() !== "cli") {
@@ -22,18 +22,24 @@ if (version_compare(phpversion(), "7.1.0", "<")) {
 // Check presence of file path in arguments
 if (sizeof($argv) < 2) {
     echo "Usage: ".basename(__FILE__)." [-q] </path/to/dumps>\n\n";
-    echo "  Purge DB or media dumps older than an interval (".PURGE_INTERVAL.")\n\n";
-    echo "  -q      Quiet mode (only report errors)\n";
+    echo "  Purge DB or media dumps older than an interval\n\n";
+    echo "  -q            Quiet mode (only report errors)\n";
+    echo "  -i=<interval> Interval to purge (see PHP DateInterval for the syntax)\n";
+    echo "                Defaults to: ".DEFAULT_PURGE_INTERVAL."\n";
     exit(1);
 }
 
-$options = getopt("q", [], $optind);
+$options = getopt("qi::", [], $optind);
 $quiet_mode = isset($options["q"]);
 
 $path = $argv[$optind];
 
 $oldest_date = new DateTime();
-$oldest_date->sub(new DateInterval(PURGE_INTERVAL));
+if (isset($options["i"])) {
+    $oldest_date->sub(new DateInterval($options["i"]));
+} else {
+    $oldest_date->sub(new DateInterval(DEFAULT_PURGE_INTERVAL));
+}
 
 if (!$quiet_mode) {
     echo "Dumps older than ".$oldest_date->format("Y-m-d")
