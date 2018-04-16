@@ -65,7 +65,10 @@ window.DidyouknowUpdate = function (triviaId) {
             var ReturnHtml = html.split('[BRK]');
             $('#JSDidYouKnow_' + triviaId).html(ReturnHtml[0]);
             $('#JSDidYouKnowEdit_' + triviaId).html(ReturnHtml[1]);
-            window.OSDMessageDisplay('Trivia updated!');
+            //window.OSDMessageDisplay('Trivia updated!');
+            var ReturnHtml2 = html.split('[BRK2]');
+            window.OSDMessageDisplay(returnHtml[1]);
+            document.getElementById('trivia').reset();
         }
     });
 }
