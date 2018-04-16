@@ -24,6 +24,9 @@
     {$trivia_text}
     [BRK]
     <input type="button" value="Edit"  class="secondary_button" onclick="DidyouknowEdit({$trivia_id})">
+    {if isset($osd_message)}
+        [BRK2]{$osd_message}
+    {/if}
 {/if}
 
 
