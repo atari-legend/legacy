@@ -21,3 +21,19 @@
     display: inline;
     margin: 5px;
 }
+
+
+//*-----------------------Spotlight-------------------------- */
+.spotlight_container{
+    @extend .games_main_container;
+    width: 75%;
+}
+
+.spotlight_child{
+    width: 100%;
+    border: 1px solid #008b8b;
+}
+
+.spotlight_row{
+    @extend .games_main_row_site;
+}
