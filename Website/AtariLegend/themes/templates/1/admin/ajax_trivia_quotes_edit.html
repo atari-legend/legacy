@@ -5,13 +5,6 @@
     <input type="button" value="Update" class="secondary_button" onclick="TriviaQuoteUpdate({$trivia_quote_id})">
 {/if}
 
-{* Return View for the trivia update *}
-{if isset($smarty_action) and $smarty_action == "trivia_quote_update_returnview"}
-    {$trivia_text}
-    [BRK]
-    <input type="button" value="Edit"  class="secondary_button" onclick="EditTriviaQuote({$trivia_quote_id})">
-{/if}
-
 {* Edit form for the did you know quote *}
 {if isset($smarty_action) and $smarty_action == "did_you_know_edit_view"}
     <textarea name="trivia_text" id="trivia_text" class="primary_textarea" rows="4">{$trivia_text}</textarea>
@@ -19,15 +12,7 @@
     <input type="button" value="Update"  class="secondary_button" onclick="DidyouknowUpdate({$trivia_id})">
 {/if}
 
-{* Return View for the did you know update *}
-{if isset($smarty_action) and $smarty_action == "did_you_know_update_returnview"}
-    {$trivia_text}
-    [BRK]
-    <input type="button" value="Edit"  class="secondary_button" onclick="DidyouknowEdit({$trivia_id})">
-{/if}
-
-
-{if isset($smarty_action) and $smarty_action == "delete_trivia_quote"}
+{if isset($smarty_action) and ( $smarty_action == "delete_trivia_quote" or $smarty_action == "trivia_quote_update_returnview" )}
 {foreach from=$trivia item=line}
     <fieldset class="secondary_fieldset" id="Ajax_trivia_quote_{$line.trivia_quote_id}">
         <legend class="primary_legend">Trivia ID {$line.trivia_quote_id}</legend>
@@ -53,7 +38,7 @@
 {/if}
 {/if}
 
-{if isset($smarty_action) and $smarty_action == "delete_did_you_know"}
+{if isset($smarty_action) and ( $smarty_action == "delete_did_you_know" or $smarty_action == "did_you_know_update_returnview" ) }
 {foreach from=$trivia item=line}
     <fieldset class="secondary_fieldset" id="JStrivia_id_{$line.trivia_id}">
         <legend class="primary_legend">Trivia ID {$line.trivia_id}</legend>
@@ -79,18 +64,20 @@
 {/if}
 {/if}
 
-{if isset($smarty_action) and $smarty_action == "delete_spotlight"}
+{if isset($smarty_action) and ( $smarty_action == "delete_spotlight" or $smarty_action == "spotlight_update_returnview" ) }
 {foreach from=$spotlight item=line}
     <fieldset class="secondary_fieldset centered_fieldset">
         <legend class="primary_legend">Spotlight ID {$line.spotlight_id}</legend>
-        <form action="" method="post" name="Spotlight{$line.spotlight_id}" id="JSSpotlight{$line.spotlight_id}">
+        <form action="" method="post" name="Spotlight{$line.spotlight_id}" id="JSTrivia{$line.spotlight_id}">
             <br>
-            {$line.spotlight}
+            <div id="JSSpotlight_{$line.spotlight_id}">
+                {$line.spotlight}
+            </div>
             <br>
             <br>
             <div style="text-align:center;">
                 <a href="{$line.link}">
-                    <img src="../../includes/show_image.php?file={$line.spotlight_screenshot}&amp;resize=170,null,null,null" alt="Click to enlarge!" style="display:inline;"  class="user_stats_img" id="user_details_img_dark">
+                    <img src="../../includes/show_image.php?file={$line.spotlight_screenshot}&amp;resize=170,null,null,null" alt="Click to enlarge!" style="display:inline;" class="user_stats_img" id="user_details_img_dark">
                 </a>
             </div>
             <br>
@@ -116,11 +103,4 @@
     <textarea name="spot_text" id="spot_text" class="primary_textarea" rows="4">{$spotlight.spotlight}</textarea>
     [BRK]
     <input type="button" value="Update"  class="secondary_button" onclick="SpotlightUpdate({$spotlight.spotlight_id})">
-{/if}
-
-{* Return View for the spotlight update *}
-{if isset($smarty_action) and $smarty_action == "spotlight_update_returnview"}
-    {$spot_text}
-    [BRK]
-    <input type="button" value="Edit"  class="secondary_button" onclick="SpotlightEdit({$spotlight_id})">
 {/if}
