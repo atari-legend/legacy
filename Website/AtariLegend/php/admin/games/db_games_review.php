@@ -26,27 +26,30 @@
 //load all common functions
 include("../../config/common.php");
 include("../../config/admin.php");
-include("../../config/admin_rights.php");
+//include("../../config/admin_rights.php");
 
 if (isset($action) and $action == 'delete_comment') {
-    $REVIEWSHOT = $mysqli->query("SELECT * FROM screenshot_review
-                     WHERE review_id = $reviewid
-                 AND screenshot_id = $screenshot_id") or die("Database error - selecting screenshots review");
+    if ($_SESSION['permission']==1 or $_SESSION['permission']=='1') {
+        $REVIEWSHOT = $mysqli->query("SELECT * FROM screenshot_review
+                         WHERE review_id = $reviewid
+                     AND screenshot_id = $screenshot_id") or die("Database error - selecting screenshots review");
 
-    $reviewshotrow = $REVIEWSHOT->fetch_row();
-    $reviewshotid  = $reviewshotrow[0];
+        $reviewshotrow = $REVIEWSHOT->fetch_row();
+        $reviewshotid  = $reviewshotrow[0];
 
-    //delete the screenshot comment from the DB table
-    $sdbquery = $mysqli->query("DELETE FROM review_comments WHERE screenshot_review_id = $reviewshotid") or die("failed deleting review_comments");
+        //delete the screenshot comment from the DB table
+        $sdbquery = $mysqli->query("DELETE FROM review_comments WHERE screenshot_review_id = $reviewshotid") or die("failed deleting review_comments");
 
-    //delete the screenshot linked to the review
-    $sdbquery = $mysqli->query("DELETE FROM screenshot_review WHERE review_id = $reviewid AND screenshot_id = $screenshot_id") or die("failed deleting screenshot_review");
+        //delete the screenshot linked to the review
+        $sdbquery = $mysqli->query("DELETE FROM screenshot_review WHERE review_id = $reviewid AND screenshot_id = $screenshot_id") or die("failed deleting screenshot_review");
 
-    $_SESSION['edit_message'] = "Comment deleted";
+        create_log_entry('Games', $game_id, 'Review comment', $reviewid, 'Delete', $_SESSION['user_id']);
 
-    create_log_entry('Games', $game_id, 'Review comment', $reviewid, 'Delete', $_SESSION['user_id']);
-
-    $osd_message = 'Comment deleted';
+        $osd_message = 'Comment deleted';
+    } else {
+        $osd_message = "You don't have permission to perform this task";        
+    }
+        
     $smarty->assign('osd_message', $osd_message);
     
     
@@ -141,6 +144,8 @@ if (isset($action) and $action == 'delete_comment') {
 }
 
 if (isset($action) and ($action == 'delete_review' or $action == 'delete_submission')) {
+    include("../../config/admin_rights.php");
+    
     $sql = $mysqli->query("DELETE FROM review_main WHERE review_id = '$reviewid' ") or die("deletion review_main failed");
     $sql = $mysqli->query("DELETE FROM review_game WHERE review_id = '$reviewid' AND game_id = '$game_id' ") or die("deletion review_game failed");
     $sql = $mysqli->query("DELETE FROM review_score WHERE review_id = '$reviewid' ") or die("deletion review_score failed");
@@ -165,6 +170,8 @@ if (isset($action) and ($action == 'delete_review' or $action == 'delete_submiss
 }
 
 if ($action == 'edit_review' or $action == 'submitted') {
+    include("../../config/admin_rights.php");
+    
     // first we have to convert the date vars into a time stamp to be inserted to review_date
 
     $date = date_to_timestamp($Date_Year, $Date_Month, $Date_Day);
@@ -248,6 +255,8 @@ if ($action == 'edit_review' or $action == 'submitted') {
 }
 
 if (isset($action) and $action == 'move_to_comment') {
+    include("../../config/admin_rights.php");
+    
     $sql_edit_REVIEW = $mysqli->query("SELECT * FROM review_main WHERE review_id = $reviewid") or die("Database error - selecting review data");
 
     $edit_review = $sql_edit_REVIEW->fetch_array(MYSQLI_BOTH);
@@ -283,6 +292,8 @@ if (isset($action) and $action == 'move_to_comment') {
 }
 
 if (isset($action) and $action == 'add_review') {
+    include("../../config/admin_rights.php");
+    
     // first we have to convert the date vars into a time stamp to be inserted to review_date
     $date_year = date("Y");
     $date_month = date("m");

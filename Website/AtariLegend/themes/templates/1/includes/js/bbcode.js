@@ -135,6 +135,10 @@ function previewText (text) {
     text = text.replaceAll('[/url]', '</a>');
     text = text.replaceAll('[email=', '<a href=mailto:');
     text = text.replaceAll('[/email]', '</a>');
+    text = text.replaceAll('[screenstar]', '');
+    text = text.replaceAll('[/screenstar]', '');
+    text = text.replaceAll('[frontpage]', '');
+    text = text.replaceAll('[/frontpage]', '');
     for (i = 0; i < 30; i++) {
         var hotspotUrl = '[hotspotUrl=#';
         var hotspotUrl_output = hotspotUrl.concat(i);
