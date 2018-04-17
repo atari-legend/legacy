@@ -62,12 +62,9 @@ window.DidyouknowUpdate = function (triviaId) {
         dataType: 'html',
         // Code to run if the request succeeds;
         success: function (html) {
-            var ReturnHtml = html.split('[BRK]');
-            $('#JSDidYouKnow_' + triviaId).html(ReturnHtml[0]);
-            $('#JSDidYouKnowEdit_' + triviaId).html(ReturnHtml[1]);
-            // window.OSDMessageDisplay('Trivia updated!');
-            var ReturnHtml2 = html.split('[BRK2]');
-            window.OSDMessageDisplay(ReturnHtml2[1]);
+            var returnHtml = html.split('[BRK]');
+            $('#add_trivia_list').html(returnHtml[0]);
+            window.OSDMessageDisplay(returnHtml[1]);
             document.getElementById('trivia').reset();
         }
     });
@@ -99,10 +96,10 @@ window.TriviaQuoteUpdate = function (triviaQuoteId) {
         dataType: 'html',
         // Code to run if the request succeeds;
         success: function (html) {
-            var ReturnHtml = html.split('[BRK]');
-            $('#JSTrivia_' + triviaQuoteId).html(ReturnHtml[0]);
-            $('#JSTriviaEdit_' + triviaQuoteId).html(ReturnHtml[1]);
-            window.OSDMessageDisplay('Trivia updated!');
+            var returnHtml = html.split('[BRK]');
+            $('#add_quote_list').html(returnHtml[0]);
+            window.OSDMessageDisplay(returnHtml[1]);
+            document.getElementById('triviaquote').reset();
         }
     });
 }
@@ -205,10 +202,10 @@ window.SpotlightUpdate = function (spotlightId) {
         dataType: 'html',
         // Code to run if the request succeeds;
         success: function (html) {
-            var ReturnHtml = html.split('[BRK]');
-            $('#JSSpotlight_' + spotlightId).html(ReturnHtml[0]);
-            $('#JSSpotlightEdit_' + spotlightId).html(ReturnHtml[1]);
-            window.OSDMessageDisplay('Spotlight updated!');
+            var returnHtml = html.split('[BRK]');
+            $('#spotlight_list').html(returnHtml[0]);
+            window.OSDMessageDisplay(returnHtml[1]);
+            document.getElementById('spotlight').reset();
         }
     });
 }
