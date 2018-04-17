@@ -211,6 +211,7 @@ if (isset($action) and $action == 'delete_screenshot_comment') {
         $new_path .= $screenshot_ext;
 
         unlink("$new_path");
+        $osd_message = "Screenshot and comment deleted successfully";
     } else {
         $osd_message = "You do not have the necessary authorizations to perform this action";
     }
@@ -252,7 +253,6 @@ if (isset($action) and $action == 'delete_screenshot_comment') {
         $count = $count + 1;
     }
 
-    $osd_message = 'Screenshot and comment deleted succesfully';
     $smarty->assign('osd_message', $osd_message);
 
     $smarty->assign('smarty_action', 'add_screen_to_interview_return');
