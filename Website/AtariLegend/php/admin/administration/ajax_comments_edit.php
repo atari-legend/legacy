@@ -32,10 +32,14 @@ if (isset($action) and $action == "get_comment_text") {
 
 if (isset($action) and $action == "save_comment_text") {
     if (isset($comments_id)) {
-        if (!$commentsDao->saveCommentText($comments_id, $comment_text, $comment_type)) {
-            $osd = "Comment Updated!";
+        if ($_SESSION['permission']==1 or $_SESSION['permission']=='1') {
+            if (!$commentsDao->saveCommentText($comments_id, $comment_text, $comment_type)) {
+                $osd = "Comment Updated!";
+            } else {
+                $osd = "Update Failed!";
+            }
         } else {
-            $osd = "Update Failed!";
+            $osd = "You don't have permission to perform this task";
         }
 
         $smarty->assign('comment_text', $commentsDao->getCommentText($comments_id));
