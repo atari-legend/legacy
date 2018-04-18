@@ -145,7 +145,11 @@ $(document).ready(function () {
                         dataType: 'html',
                         // Code to run if the request succeeds;
                         success: function (html) {
-                            $('#jsCommentId' + commentsId).html('');
+                            var begin = html.startsWith('You');
+                            if (begin) {
+                            } else {
+                                $('#jsCommentId' + commentsId).html('');
+                            }
                             window.OSDMessageDisplay(html);
                         }
                     });
@@ -176,7 +180,11 @@ $(document).ready(function () {
                         dataType: 'html',
                         // Code to run if the request succeeds;
                         success: function (html) {
-                            $('#jsCommentId' + commentsId).html('');
+                            var begin = html.startsWith('You');
+                            if (begin) {
+                            } else {
+                                $('#jsCommentId' + commentsId).html('');
+                            }
                             window.OSDMessageDisplay(html);
                         }
                     });
