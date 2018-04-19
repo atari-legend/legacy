@@ -383,6 +383,14 @@ class CommentsDAO {
         );
 
         $stmt->fetch();
+        
+        $oldcomment = $comment;
+        $oldcomment = nl2br($oldcomment);
+        $oldcomment = InsertALCode($oldcomment);
+        $oldcomment = trim($oldcomment);
+        $oldcomment = RemoveSmillies($oldcomment);
+        $comment = stripslashes($oldcomment);
+        
         $stmt->close();
 
         return $comment;
