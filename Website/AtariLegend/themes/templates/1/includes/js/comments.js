@@ -108,6 +108,7 @@ $(document).ready(function () {
         var commentType = $(this).data('comment-type');
         var jsCommentTextBoxId = 'jsCommentTextBox'.concat(commentsId);
         var commentText = $('#' + jsCommentTextBoxId + ' > #jsCommentText').val();
+        commentText = commentText.replace(/\n\r?/g, '<br />');
 
         $.ajaxQueue({
             // The URL for the request

@@ -298,6 +298,7 @@ class CommentsDAO {
 
         $comments = [];
         while ($stmt->fetch()) {
+            
             $comments[] = new \AL\Common\Model\Comments\Comments(
                 $comments_id,
                 $timestamp,
@@ -365,7 +366,7 @@ class CommentsDAO {
      * @param  integer $comments_id ID of a comment
      * @return text the text of the comment
      */
-    public function getCommentText($comments_id = null) {
+    public function getCommentText($comments_id = null, $action = null) {
         if (isset($comments_id)) {
             $stmt = \AL\Db\execute_query(
                 "CommentsDAO: Get comment text for comments_id $comments_id",
@@ -390,6 +391,11 @@ class CommentsDAO {
         $oldcomment = trim($oldcomment);
         $oldcomment = RemoveSmillies($oldcomment);
         $comment = stripslashes($oldcomment);
+        if (isset ($action) and $action == 'get_comment_text')
+        {
+            $breaks = array("<br />","<br>","<br/>");
+            $comment = str_ireplace($breaks, "\r\n", $comment);
+        }
         
         $stmt->close();
 
