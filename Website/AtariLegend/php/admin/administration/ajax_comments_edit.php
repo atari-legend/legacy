@@ -23,7 +23,7 @@ $commentsDao = new AL\Common\DAO\CommentsDAO($mysqli);
 
 if (isset($action) and $action == "get_comment_text") {
     if (isset($comments_id)) {
-        $smarty->assign('comment_text', $commentsDao->getCommentText($comments_id));
+        $smarty->assign('comment_text', $commentsDao->getCommentText($comments_id, $action));
         $smarty->assign('comment_type', $comment_type);
         $smarty->assign('action', $action);
         $smarty->assign('comments_id', $comments_id);
@@ -42,7 +42,7 @@ if (isset($action) and $action == "save_comment_text") {
             $osd = "You don't have permission to perform this task";
         }
 
-        $smarty->assign('comment_text', $commentsDao->getCommentText($comments_id));
+        $smarty->assign('comment_text', $commentsDao->getCommentText($comments_id, $action));
         $smarty->assign('action', $action);
         $smarty->assign('osd_message', $osd);
         $smarty->assign('comments_id', $comments_id);
