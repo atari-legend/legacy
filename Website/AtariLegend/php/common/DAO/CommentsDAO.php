@@ -298,7 +298,6 @@ class CommentsDAO {
 
         $comments = [];
         while ($stmt->fetch()) {
-            
             $comments[] = new \AL\Common\Model\Comments\Comments(
                 $comments_id,
                 $timestamp,
@@ -391,8 +390,7 @@ class CommentsDAO {
         $oldcomment = trim($oldcomment);
         $oldcomment = RemoveSmillies($oldcomment);
         $comment = stripslashes($oldcomment);
-        if (isset ($action) and $action == 'get_comment_text')
-        {
+        if (isset($action) and $action == 'get_comment_text') {
             $breaks = array("<br />","<br>","<br/>");
             $comment = str_ireplace($breaks, "\r\n", $comment);
         }
