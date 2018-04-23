@@ -30,12 +30,14 @@ require_once __DIR__."/../../common/DAO/ChangeLogDAO.php";
 $changeLogDao = new \AL\Common\DAO\ChangeLogDAO($mysqli);
 $gameReleaseDao = new \AL\Common\DAO\GameReleaseDAO($mysqli);
 
-$stmt = $mysqli->prepare("SELECT game_name FROM game WHERE game_id = ?") or die($mysqli->error);
-$stmt->bind_param("s", $game_id) or die($mysqli->error);
-$stmt->execute() or die($mysqli->error);
-$stmt->bind_result($edited_game_name) or die($mysqli->error);
-$stmt->fetch() or die($mysqli->error);
-$stmt->close();
+if (isset($game_id)){
+    $stmt = $mysqli->prepare("SELECT game_name FROM game WHERE game_id = ?") or die($mysqli->error);
+    $stmt->bind_param("s", $game_id) or die($mysqli->error);
+    $stmt->execute() or die($mysqli->error);
+    $stmt->bind_result($edited_game_name) or die($mysqli->error);
+    $stmt->fetch() or die($mysqli->error);
+    $stmt->close();
+}
 
 //***********************************************************************************
 //Insert new game

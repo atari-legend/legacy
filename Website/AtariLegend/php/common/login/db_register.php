@@ -160,7 +160,7 @@ if (isset($action) and $action == 'confirm') {
                                     "User",
                                     $new_user_id,
                                     $user_name,
-                                    null,
+                                    $new_user_id,
                                     \AL\Common\Model\Database\ChangeLog::ACTION_INSERT
                                 )
                             );
