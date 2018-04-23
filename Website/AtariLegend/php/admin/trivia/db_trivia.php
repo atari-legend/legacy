@@ -18,12 +18,14 @@
 
 include("../../config/common.php");
 include("../../config/admin.php");
-include("../../config/admin_rights.php");
+//include("../../config/admin_rights.php");
 
 if (isset($action) and $action == "did_you_know_insert") {
     //****************************************************************************************
     // Insert did you know quote!
     //****************************************************************************************
+    include("../../config/admin_rights.php");
+    
     $trivia_text = $mysqli->real_escape_string($trivia_text);
 
     $sql = $mysqli->query("INSERT INTO trivia (trivia_text) VALUES ('$trivia_text')") or die("Couldn't insert trivia text");
@@ -43,15 +45,21 @@ if (isset($action) and $action == "did_you_know_insert") {
 // Delete did you know quote!
 //****************************************************************************************
 if (isset($action) and $action == "did_you_know_delete") {
-    create_log_entry('Trivia', $trivia_id, 'DYK', $trivia_id, 'Delete', $_SESSION['user_id']);
+    if ($_SESSION['permission']==1 or $_SESSION['permission']=='1') {
+        create_log_entry('Trivia', $trivia_id, 'DYK', $trivia_id, 'Delete', $_SESSION['user_id']);
 
-    $sql = $mysqli->query("DELETE FROM trivia WHERE trivia_id = '$trivia_id'") or die("Couldn't delete trivia text");
+        $sql = $mysqli->query("DELETE FROM trivia WHERE trivia_id = '$trivia_id'") or die("Couldn't delete trivia text");
+        
+        //Let's get all the trivia
+        $sql_trivia = $mysqli->query("SELECT * FROM trivia ORDER BY trivia_id");
+        
+        $osd_message = "Did you know quote has been deleted";
+    }else{
+        $osd_message = "You don't have permission to perform this task";        
+    }
     
-    //Let's get all the trivia
     $sql_trivia = $mysqli->query("SELECT * FROM trivia ORDER BY trivia_id");
     
-    $osd_message = "Did you know quote has been deleted";
-   
     while ($query_trivia = $sql_trivia->fetch_array(MYSQLI_BOTH)) {
         $trivia_text = nl2br($query_trivia['trivia_text']);
         $trivia_text = stripslashes($trivia_text);
@@ -74,11 +82,16 @@ if (isset($action) and $action == "did_you_know_delete") {
 // Delete trivia quote!
 //****************************************************************************************
 if (isset($action) and $action == "delete_trivia_quote") {
-    create_log_entry('Trivia', $trivia_quote_id, 'Quote', $trivia_quote_id, 'Delete', $_SESSION['user_id']);
+    if ($_SESSION['permission']==1 or $_SESSION['permission']=='1') {   
+        create_log_entry('Trivia', $trivia_quote_id, 'Quote', $trivia_quote_id, 'Delete', $_SESSION['user_id']);
 
-    $sql = $mysqli->query("DELETE FROM trivia_quotes WHERE trivia_quote_id = '$trivia_quote_id'") or die("couldn't delete trivia quote");
+        $sql = $mysqli->query("DELETE FROM trivia_quotes WHERE trivia_quote_id = '$trivia_quote_id'") or die("couldn't delete trivia quote");
 
-    $osd_message = "trivia quote has been deleted";
+        $osd_message = "trivia quote has been deleted";
+        
+    }else{
+        $osd_message = "You don't have permission to perform this task";        
+    }
     
     //Get all the trivia quotes
     $sql_trivia = $mysqli->query("SELECT * FROM trivia_quotes ORDER BY trivia_quote_id") or die("error getting trivia");
@@ -106,6 +119,8 @@ if (isset($action) and $action == "delete_trivia_quote") {
 //****************************************************************************************
 if (isset($action) and $action == "add_trivia") {
     if (isset($trivia_quote)) {
+        include("../../config/admin_rights.php");
+        
         $trivia_quote = $mysqli->real_escape_string($trivia_quote);
 
         $mysqli->query("INSERT INTO trivia_quotes (trivia_quote) VALUES ('$trivia_quote')") or die('Error: ' . mysqli_error($mysqli));
@@ -124,16 +139,29 @@ if (isset($action) and $action == "add_trivia") {
 //****************************************************************************************
 if (isset($action) and $action == "edit_trivia_quote") {
     if (isset($trivia_text)) {
-        $trivia_quote = $mysqli->real_escape_string($trivia_text);
+        if ($_SESSION['permission']==1 or $_SESSION['permission']=='1') {
+    
+            $trivia_quote = $mysqli->real_escape_string($trivia_text);
 
-        $mysqli->query("UPDATE trivia_quotes SET trivia_quote='$trivia_quote' WHERE trivia_quote_id = $trivia_quote_id") or die('Error: ' . mysqli_error($mysqli));
+            $mysqli->query("UPDATE trivia_quotes SET trivia_quote='$trivia_quote' WHERE trivia_quote_id = $trivia_quote_id") or die('Error: ' . mysqli_error($mysqli));
 
-        create_log_entry('Trivia', $trivia_quote_id, 'Quote', $trivia_quote_id, 'Edit', $_SESSION['user_id']);
+            create_log_entry('Trivia', $trivia_quote_id, 'Quote', $trivia_quote_id, 'Edit', $_SESSION['user_id']);
+            
+            $osd_message = "Trivia quote updated";      
+        }else{
+            $osd_message = "You don't have permission to perform this task";        
+        }
         
-        $trivia_text = stripslashes($trivia_quote);
+        $smarty->assign('osd_message', $osd_message);
+        
+        $sql_trivia = $mysqli->query("SELECT * FROM trivia_quotes ORDER BY trivia_quote_id");
 
-        $smarty->assign('trivia_quote_id', $trivia_quote_id);
-        $smarty->assign('trivia_text', $trivia_text);
+        while ($query_trivia = $sql_trivia->fetch_array(MYSQLI_BOTH)) {
+            $smarty->append('trivia', array(
+                'trivia_quote_id' => $query_trivia['trivia_quote_id'],
+                'trivia_quote' => $query_trivia['trivia_quote']
+            ));
+        }
 
         $smarty->assign('smarty_action', 'trivia_quote_update_returnview');
         //Send all smarty variables to the templates
@@ -146,16 +174,30 @@ if (isset($action) and $action == "edit_trivia_quote") {
 //****************************************************************************************
 if (isset($action) and $action == "update_trivia") {
     if (isset($trivia_text)) {
-        $trivia_text = $mysqli->real_escape_string($trivia_text);
+        if ($_SESSION['permission']==1 or $_SESSION['permission']=='1') {    
+            $trivia_text = $mysqli->real_escape_string($trivia_text);
 
-        $mysqli->query("UPDATE trivia SET trivia_text='$trivia_text' WHERE trivia_id = $trivia_id") or die('Error: ' . mysqli_error($mysqli));
+            $mysqli->query("UPDATE trivia SET trivia_text='$trivia_text' WHERE trivia_id = $trivia_id") or die('Error: ' . mysqli_error($mysqli));
 
-        create_log_entry('Trivia', $trivia_id, 'Quote', $trivia_id, 'Edit', $_SESSION['user_id']);
+            create_log_entry('Trivia', $trivia_id, 'Quote', $trivia_id, 'Edit', $_SESSION['user_id']);
+            $osd_message = "Trivia quote updated";
+        }else{
+            $osd_message = "You don't have permission to perform this task";        
+        }
+        
+        $sql_trivia = $mysqli->query("SELECT * FROM trivia ORDER BY trivia_id");
+    
+        while ($query_trivia = $sql_trivia->fetch_array(MYSQLI_BOTH)) {
+            $trivia_text = nl2br($query_trivia['trivia_text']);
+            $trivia_text = stripslashes($trivia_text);
 
-        $trivia_text = stripslashes($trivia_text);
-
-        $smarty->assign('trivia_id', $trivia_id);
-        $smarty->assign('trivia_text', $trivia_text);
+            $smarty->append('trivia', array(
+                'trivia_id' => $query_trivia['trivia_id'],
+                'trivia_text' => $trivia_text
+            ));
+        }
+        
+        $smarty->assign('osd_message', $osd_message);
 
         $smarty->assign('smarty_action', 'did_you_know_update_returnview');
         //Send all smarty variables to the templates
@@ -168,32 +210,39 @@ if (isset($action) and $action == "update_trivia") {
 //****************************************************************************************
 if ($action == "spotlight_delete") {
     if (isset($spotlight_id)) {
-        //Let's get the screenshot id
-        $query_spotlight_screenshot = $mysqli->query("SELECT * FROM spotlight WHERE spotlight_id = " . $spotlight_id . "") or die("something is wrong with mysqli of spotlight screenshots");
+        if ($_SESSION['permission']==1 or $_SESSION['permission']=='1') {    
+            //Let's get the screenshot id
+            $query_spotlight_screenshot = $mysqli->query("SELECT * FROM spotlight WHERE spotlight_id = " . $spotlight_id . "") or die("something is wrong with mysqli of spotlight screenshots");
 
-        while ($sql_spotlight_screenshot = $query_spotlight_screenshot->fetch_array(MYSQLI_BOTH)) {
-            $screenshot_id = $sql_spotlight_screenshot['screenshot_id'];
+            while ($sql_spotlight_screenshot = $query_spotlight_screenshot->fetch_array(MYSQLI_BOTH)) {
+                $screenshot_id = $sql_spotlight_screenshot['screenshot_id'];
 
-            //get the extension
-            $SCREENSHOT = $mysqli->query("SELECT * FROM screenshot_main
-                                      WHERE screenshot_id = '$screenshot_id'") or die("Database error - selecting screenshots");
+                //get the extension
+                $SCREENSHOT = $mysqli->query("SELECT * FROM screenshot_main
+                                          WHERE screenshot_id = '$screenshot_id'") or die("Database error - selecting screenshots");
 
-            $screenshotrow  = $SCREENSHOT->fetch_array(MYSQLI_BOTH);
-            $screenshot_ext = $screenshotrow['imgext'];
+                $screenshotrow  = $SCREENSHOT->fetch_array(MYSQLI_BOTH);
+                $screenshot_ext = $screenshotrow['imgext'];
 
-            $sql = $mysqli->query("DELETE FROM screenshot_main WHERE screenshot_id = '$screenshot_id' ");
+                $sql = $mysqli->query("DELETE FROM screenshot_main WHERE screenshot_id = '$screenshot_id' ");
 
-            $new_path = $spotlight_screenshot_save_path;
-            $new_path .= $screenshot_id;
-            $new_path .= ".";
-            $new_path .= $screenshot_ext;
+                $new_path = $spotlight_screenshot_save_path;
+                $new_path .= $screenshot_id;
+                $new_path .= ".";
+                $new_path .= $screenshot_ext;
 
-            unlink("$new_path");
+                unlink("$new_path");
+            }
+
+            create_log_entry('Trivia', $spotlight_id, 'Spotlight', $spotlight_id, 'Delete', $_SESSION['user_id']);
+
+            $sql = $mysqli->query("DELETE FROM spotlight WHERE spotlight_id = '$spotlight_id'") or die("couldn't delete spotlight");
+            
+            $osd_message = "Spotlight deleted";
+        }else{
+            $osd_message = "You don't have permission to perform this task";        
         }
-
-        create_log_entry('Trivia', $spotlight_id, 'Spotlight', $spotlight_id, 'Delete', $_SESSION['user_id']);
-
-        $sql = $mysqli->query("DELETE FROM spotlight WHERE spotlight_id = '$spotlight_id'") or die("couldn't delete spotlight");
+        
         
         //load the existing spotlight entries
         $query_spotlight = $mysqli->query("SELECT * from spotlight
@@ -213,7 +262,6 @@ if ($action == "spotlight_delete") {
             ));
         }
         
-        $osd_message = "Spotlight deleted";
         $smarty->assign('osd_message', $osd_message);
 
         $smarty->assign('smarty_action', 'delete_spotlight');
@@ -227,6 +275,9 @@ if ($action == "spotlight_delete") {
 // This is we add a new spotlight
 //****************************************************************************************
 if ($action == "spotlight_insert") {
+    
+    include("../../config/admin_rights.php");
+    
     if ($spot_text == '') {
         $_SESSION['edit_message'] = "Please add an actual spotlight in the textfield";
         header("Location: ../trivia/spotlight.php");
@@ -300,17 +351,39 @@ if ($action == "spotlight_insert") {
 //****************************************************************************************
 if (isset($action) and $action == "update_spotlight") {
     if (isset($spot_text)) {
-        $trivia_text = $mysqli->real_escape_string($spot_text);
+        if ($_SESSION['permission']==1 or $_SESSION['permission']=='1') {    
+        
+            $trivia_text = $mysqli->real_escape_string($spot_text);
 
-        $mysqli->query("UPDATE spotlight SET spotlight='$trivia_text' WHERE spotlight_id = $spotlight_id") or die('Error: ' . mysqli_error($mysqli));
+            $mysqli->query("UPDATE spotlight SET spotlight='$trivia_text' WHERE spotlight_id = $spotlight_id") or die('Error: ' . mysqli_error($mysqli));
 
-        create_log_entry('Trivia', $spotlight_id, 'Spotlight', $spotlight_id, 'Edit', $_SESSION['user_id']);
+            create_log_entry('Trivia', $spotlight_id, 'Spotlight', $spotlight_id, 'Edit', $_SESSION['user_id']);
+            
+            $osd_message = "Spotlight has been updated";        
+        }else{
+            $osd_message = "You don't have permission to perform this task";        
+        }
 
-        $trivia_text = stripslashes($trivia_text);
+        //load the existing spotlight entries
+        $query_spotlight = $mysqli->query("SELECT * from spotlight
+                                                    LEFT JOIN screenshot_main ON (spotlight.screenshot_id = screenshot_main.screenshot_id)") or die("error in query spotlight");
 
-        $smarty->assign('spotlight_id', $spotlight_id);
-        $smarty->assign('spot_text', $trivia_text);
+        while ($sql_spotlight = $query_spotlight->fetch_array(MYSQLI_BOTH)) {
+            $new_path = $spotlight_screenshot_path;
+            $new_path .= $sql_spotlight['screenshot_id'];
+            $new_path .= ".";
+            $new_path .= $sql_spotlight['imgext'];
 
+            $smarty->append('spotlight', array(
+                'spotlight_id' => $sql_spotlight['spotlight_id'],
+                'spotlight_screenshot' => $new_path,
+                'link' => $sql_spotlight['link'],
+                'spotlight' => $sql_spotlight['spotlight']
+            ));
+        }
+        
+        $smarty->assign('osd_message', $osd_message);
+        
         $smarty->assign('smarty_action', 'spotlight_update_returnview');
         //Send all smarty variables to the templates
         $smarty->display("file:" . $cpanel_template_folder . "ajax_trivia_quotes_edit.html");

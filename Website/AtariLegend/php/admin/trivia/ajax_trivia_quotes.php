@@ -14,7 +14,7 @@
 
 include("../../config/common.php");
 include("../../config/admin.php");
-include("../../config/admin_rights.php");
+//include("../../config/admin_rights.php");
 
 if (isset($trivia_quote_id) and $action == "edit_trivia_quote") {
     $sql_trivia = $mysqli->query("SELECT * FROM trivia_quotes WHERE trivia_quote_id = $trivia_quote_id");
