@@ -52,7 +52,7 @@ class NewsSearchDAO {
             $query .= " AND news.user_id = $user_id";
         }
         
-        $query .= " AND news.news_date < $date";
+        $query .= " AND news.news_date <= $date";
              
         $query .= " GROUP BY news.news_id ORDER BY news_date DESC";
             
@@ -61,7 +61,7 @@ class NewsSearchDAO {
     
     private function getNewsSearchCountQuery($user_id = null, $date = null, $text = null) {
             
-        $query =  "SELECT count(news.news_id)
+        $query =  "SELECT count(DISTINCT news.news_id)
             FROM
                 news
             LEFT JOIN news_search_wordmatch ON (news_search_wordmatch.news_id = news.news_id) 
@@ -81,9 +81,9 @@ class NewsSearchDAO {
             $query .= " AND news.user_id = $user_id";
         }
         
-        $query .= " AND news.news_date < $date";
+        $query .= " AND news.news_date <= $date";
              
-        $query .= " GROUP BY news.news_id";
+        // $query .= " GROUP BY news.news_id";
             
         return $query;
     }
