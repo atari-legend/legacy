@@ -47,9 +47,13 @@ $(document).ready(function () {
         var newsUserId = $('#' + jsNewsEditBox + ' > #member_select').val();
         var newsImageId = $('#' + jsNewsEditBox + ' > #news_images_select').val();
 
-        var day = document.getElementsByName('Date_Day')[0].value;
-        var month = document.getElementsByName('Date_Month')[0].value;
-        var year = document.getElementsByName('Date_Year')[0].value;
+        var dateDay = newsId + 'Date_Day';
+        var dateMonth = newsId + 'Date_Month';
+        var dateYear = newsId + 'Date_Year';
+
+        var day = document.getElementById(dateDay).value;
+        var month = document.getElementById(dateMonth).value;
+        var year = document.getElementById(dateYear).value;
 
         $.ajaxQueue({
             // The URL for the request
@@ -272,9 +276,13 @@ $(document).ready(function () {
             var userId = $('.jsUserNewsLink:first').data('user-id');
         }
 
-        var day = document.getElementsByName('Date_Day')[0].value;
-        var month = document.getElementsByName('Date_Month')[0].value;
-        var year = document.getElementsByName('Date_Year')[0].value;
+        var dateDay = newsId + 'Date_Day';
+        var dateMonth = newsId + 'Date_Month';
+        var dateYear = newsId + 'Date_Year';
+
+        var day = document.getElementById(dateDay).value;
+        var month = document.getElementById(dateMonth).value;
+        var year = document.getElementById(dateYear).value;
 
         $.ajaxQueue({
             // The URL for the request
