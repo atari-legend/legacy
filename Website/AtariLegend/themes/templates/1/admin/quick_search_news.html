@@ -1,0 +1,59 @@
+{*
+/***************************************************************************
+*                                quick_search_news.html
+*                            ----------------------------
+*   begin                : Tuesday, April 10, 2018
+*   copyright            : (C) 2018 Atari Legend
+*   email                : admin@atarilegend.com
+*
+*   Id: quick_search_news.php 10/04/2018 ST Graveyard - creation of file
+*
+***************************************************************************/
+
+//****************************************************************************************
+// This is the quick news search for the left part of the cpanel
+//****************************************************************************************
+*}
+
+{block name=quick_search_news}
+<script src="{$template_dir}includes/js/news_search.js"></script>
+<div class="standard_tile">
+    <div class="help-tip">
+        <p>
+            When using the search fields, the query will be executed automatically. You can edit or delete an news entry but beware once you have made your change you are redirected to the main edit screen.
+        </p>
+    </div>
+    <h1>NEWS SEARCH</h1>
+    <div class="standard_tile_line"></div>
+    <br>
+    <form method="get" name="news_search" id="JSCpanelNewsSearchForm">
+        <div class="standard_tile_text_center">
+            <h3>Search for news:</h3>
+            <br>
+            <div class="standard_tile_text_center">
+                Text search :<br>
+                <input type="text" name="newssearch" value="" id="JSCpanelNewsSearch" class="standard_input input_large">
+            </div>
+            <br>
+            <div class="standard_tile_text_center">
+                By Author : <br>
+                <select name="author_search" id="JSCpanelAuthorBrowse" class="standard_select select_large">
+                    <option value="-" SELECTED>-</option>
+                    {foreach from=$authors_search item=line}
+                        <option value="{$line.user_id}">{$line.user_name}</option>
+                    {/foreach}
+                </select>
+            </div>
+            <br>
+            <div class="standard_tile_text_center">
+                All entries up to : <br>
+                {html_select_date prefix="news_search" start_year="2000" class="standard_select"}
+            </div>
+            <br>
+            <input type="hidden" name="action" id="action_quick_search" value="search">
+            <br>
+            <hr>
+        </div>
+    </form>
+</div>
+{/block}
