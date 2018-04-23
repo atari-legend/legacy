@@ -24,28 +24,54 @@
 
 include("../../config/common.php");
 include("../../config/admin.php");
-include("../../config/admin_rights.php");
 
 //****************************************************************************************
 // This is where we delete news posts
 //****************************************************************************************
 if (isset($action) and $action == "delete_news") {
-    create_log_entry('News', $news_id, 'News item', $news_id, 'Delete', $_SESSION['user_id']);
+    if ($_SESSION['permission']==1 or $_SESSION['permission']=='1') {
+        create_log_entry('News', $news_id, 'News item', $news_id, 'Delete', $_SESSION['user_id']);
 
-    $mysqli->query("DELETE FROM news WHERE news_id ='$news_id'") or die("No Go with update!!");
+        $mysqli->query("delete from
+               news
+             WHERE news_id='$news_id'") or die("Deletion of the news post failed!");
+        
+        $osd_message = "News post deleted";
+    }else{
+        $osd_message = "You don't have permission to perform this task";        
+    }
+    
+    $smarty->assign('action', 'delete_news');
+    $smarty->assign('osd_message', $osd_message);
+    
+    // Get all the needed data to load the submission page!
+    require_once __DIR__."/../../lib/Db.php";
+    require_once __DIR__."/../../common/DAO/NewsDAO.php";
+    $newsDAO = new AL\Common\DAO\newsDAO($mysqli);
+    
+    $smarty->assign(
+        'news',
+        $newsDAO->getLatestNews(isset($user_id) ? $user_id : null, isset($last_timestamp) ? $last_timestamp : null, isset($action) ? $action : null, isset($view) ? $view : null)
+    ); 
+        
+    $smarty->assign("nr_news", $newsDAO->getNewsCount());
 
-    mysqli_close($mysqli);
-    $_SESSION['edit_message'] = "News post succesfully deleted";
-    header("Location: ../news/news_edit_all.php");
+    $smarty->assign("user_id", $_SESSION['user_id']);
+    
+    //Send to smarty for return value
+    $smarty->display("file:" . $cpanel_template_folder . "ajax_news_post_edit.html");
 }
 
 //****************************************************************************************
 // This is where we add the actual news to the submission table
 //****************************************************************************************
 if (isset($action) and $action == "add_news") {
-    $news_date = time();
-
-    // Check if form is filled.
+    include("../../config/admin_rights.php");
+    
+    // we have to convert the date vars into a time stamp to be inserted into the db
+    $news_date = date_to_timestamp($Date_Year, $Date_Month, $Date_Day);
+   
+   // Check if form is filled.
     if ($headline == '' or $descr == '') {
         $_SESSION['edit_message'] = "Please fill in the necessary fields";
     } else {
@@ -54,7 +80,7 @@ if (isset($action) and $action == "add_news") {
         // Insert the description and the image into the news_image table.
         $sdbquery = $mysqli->query("INSERT INTO news_submission
               (news_headline,news_text,news_image_id,user_id,news_date)
-               VALUES ('$headline','$descr','$icon','$user_id','$news_date')") or die("Error inserting news update");
+               VALUES ('$headline','$descr','$icon','$members','$news_date')") or die("Error inserting news update");
 
         $_SESSION['edit_message'] = "News added correctly";
 
@@ -65,111 +91,207 @@ if (isset($action) and $action == "add_news") {
         mysqli_close($mysqli);
     }
 
-    header("Location: ../news/news_add.php");
+    header("Location: ../news/news_approve.php");
+}
+
+//****************************************************************************************
+// This is where we will update a submission.
+//****************************************************************************************
+if (isset($action) and $action == "save_news_text") {
+    if ($_SESSION['permission']==1 or $_SESSION['permission']=='1') {
+        if (isset($news_id)) {
+            create_log_entry('News', $news_id, 'News submit', $news_id, 'Update', $_SESSION['user_id']);
+           
+            // we have to convert the date vars into a time stamp to be inserted into the db
+            $date = date_to_timestamp($news_year, $news_month, $news_day);
+            
+            $stmt = $mysqli->prepare("UPDATE news_submission SET news_text = ?,
+                                 news_headline = ?,
+                                 user_id = ?,
+                                 news_image_id = ?,
+                                 news_date = ?
+                                 WHERE news_submission_id = ?") or die($mysqli->error);
+            $stmt->bind_param("ssiiis", $news_text, $news_headline, $news_userid, $news_image_id, $date, $news_id) or die($mysqli->error);
+            $stmt->execute() or die($mysqli->error);
+            $stmt->close();
+                       
+            $osd = "News submission updated!";
+        }
+    }else{
+        $osd = "You don't have permission to perform this task";
+    }
+
+    $smarty->assign('action', 'save_news_text');
+    $smarty->assign('osd_message', $osd);
+    
+    require_once __DIR__."/../../lib/Db.php";
+    require_once __DIR__."/../../common/DAO/NewsSubmissionDAO.php";
+
+    $newsSubmissionDAO = new AL\Common\DAO\NewsSubmissionDAO($mysqli);
+    
+    $smarty->assign(
+        'news_submissions',
+        $newsSubmissionDAO->getAllSubmissions(isset($user_id) ? $user_id : null)
+    ); 
+        
+    $smarty->assign("nr_submissions", $newsSubmissionDAO->getSubmissionCount());
+
+    $smarty->assign("user_id", $_SESSION['user_id']);
+    
+    //Send to smarty for return value
+    $smarty->display("file:" . $cpanel_template_folder . "ajax_news_approve_edit.html");
 }
 
 //****************************************************************************************
 // This is where we will approve the news. Deleting it from the submission table and adding
 // it to the news page
 //****************************************************************************************
-
 if (isset($action) and $action == "approve_submission") {
-    include("../../lib/functions_search.php");
+    if ($_SESSION['permission']==1 or $_SESSION['permission']=='1') {
+        include("../../lib/functions_search.php");
+        $sql_submission = "SELECT
+                news_headline,
+                news_text,
+                news_image_id,
+                user_id,
+                news_date
+                FROM news_submission WHERE news_submission_id = '$news_submission_id'";
 
-    $sql_submission = "SELECT
-            news_headline,
-            news_text,
-            news_image_id,
-            user_id,
-            news_date
-            FROM news_submission WHERE news_submission_id = '$news_submission_id'";
+        $query_submission = $mysqli->query($sql_submission) or die("Couldn't find the submitted news!");
 
-    $query_submission = $mysqli->query($sql_submission) or die("Couldn't find the submitted news!");
+        list($news_headline, $news_text, $news_image_id, $user_id, $news_date) = $query_submission->fetch_array(MYSQLI_BOTH);
 
-    list($news_headline, $news_text, $news_image_id, $user_id, $news_date) = $query_submission->fetch_array(MYSQLI_BOTH);
+        $news_headline = $mysqli->real_escape_string($news_headline);
+        $news_text     = $mysqli->real_escape_string($news_text);
 
-    $news_headline = $mysqli->real_escape_string($news_headline);
-    $news_text     = $mysqli->real_escape_string($news_text);
+        // Insert the news story.
+        $mysqli->query("INSERT INTO news (news_headline,news_text,news_image_id,user_id,news_date) VALUES ('$news_headline','$news_text','$news_image_id','$user_id','$news_date')") or die("DOES NOT COMPUTE...DOES NOT COMPUTE...DOES NOT COMPUTE");
 
-    // Insert the news story.
-    $mysqli->query("INSERT INTO news (news_headline,news_text,news_image_id,user_id,news_date) VALUES ('$news_headline','$news_text','$news_image_id','$user_id','$news_date')") or die("DOES NOT COMPUTE...DOES NOT COMPUTE...DOES NOT COMPUTE");
+        $mysqli->query("DELETE FROM news_submission WHERE news_submission_id='$news_submission_id'") or die("Couldn't kill news_submission!!!");
 
-    $mysqli->query("DELETE FROM news_submission WHERE news_submission_id='$news_submission_id'") or die("Couldn't kill news_submission!!!");
+        $NEWS = $mysqli->query("SELECT news_id FROM news ORDER BY news_id desc") or die("Database error - selecting news_id");
 
-    $NEWS = $mysqli->query("SELECT news_id FROM news ORDER BY news_id desc") or die("Database error - selecting news_id");
+        $newsid = $NEWS->fetch_row();
 
-    $newsid = $NEWS->fetch_row();
+        $mode = "post";
 
-    $mode = "post";
+        add_search_words($mode, $newsid[0], $news_text, $news_headline);
 
-    add_search_words($mode, $newsid[0], $news_text, $news_headline);
+        create_log_entry('News', $newsid[0], 'News item', $newsid[0], 'Insert', $_SESSION['user_id']);
 
-    create_log_entry('News', $newsid[0], 'News item', $newsid[0], 'Insert', $_SESSION['user_id']);
+        $osd_message = "Submission approved";
+    }else{
+        $osd_message = "You don't have permission to perform this task";
+    }
+    
+    $smarty->assign('action', 'approve_submission');
+    $smarty->assign('osd_message', $osd_message);
+    
+    // Get all the needed data to load the submission page!
+    require_once __DIR__."/../../lib/Db.php";
+    require_once __DIR__."/../../common/DAO/NewsSubmissionDAO.php";
+    $NewsSubmissionDAO = new AL\Common\DAO\NewsSubmissionDAO($mysqli);
 
-    $_SESSION['edit_message'] = "Submission approved";
+    $smarty->assign(
+        'news_submissions',
+        $NewsSubmissionDAO->getAllSubmissions(isset($user_id) ? $user_id : null)
+    ); 
+        
+    $smarty->assign("nr_submissions", $NewsSubmissionDAO->getSubmissionCount());
 
-    header("Location: ../news/news_edit_all.php");
+    $smarty->assign("user_id", $_SESSION['user_id']);
+    
+    //Send to smarty for return value
+    $smarty->display("file:" . $cpanel_template_folder . "ajax_news_approve_edit.html");
 }
 
 //********************************************************************************************
 // This is where we will delete unapproved news. It will be deleted from the submission table
 //********************************************************************************************
-
 if (isset($action) and $action == "delete_submission") {
-    create_log_entry('News', $news_submission_id, 'News submit', $news_submission_id, 'Delete', $_SESSION['user_id']);
+    if ($_SESSION['permission']==1 or $_SESSION['permission']=='1') {
+        create_log_entry('News', $news_id, 'News submit', $news_id, 'Delete', $_SESSION['user_id']);
 
-    $mysqli->query("delete from
-           news_submission
-         WHERE news_submission_id='$news_submission_id'") or die("Deletion of the unapproved news update failed!");
+        $mysqli->query("delete from
+               news_submission
+             WHERE news_submission_id='$news_id'") or die("Deletion of the unapproved news update failed!");
+        
+        $osd_message = "Submission deleted";
+    }else{
+        $osd_message = "You don't have permission to perform this task";        
+    }
+    
+    $smarty->assign('action', 'delete_submission');
+    $smarty->assign('osd_message', $osd_message);
+    
+    // Get all the needed data to load the submission page!
+    require_once __DIR__."/../../lib/Db.php";
+    require_once __DIR__."/../../common/DAO/NewsSubmissionDAO.php";
+    $NewsSubmissionDAO = new AL\Common\DAO\NewsSubmissionDAO($mysqli);
 
-    $_SESSION['edit_message'] = "Submission deleted";
+    $smarty->assign(
+        'news_submissions',
+        $NewsSubmissionDAO->getAllSubmissions(isset($user_id) ? $user_id : null)
+    ); 
+        
+    $smarty->assign("nr_submissions", $NewsSubmissionDAO->getSubmissionCount());
 
-    header("Location: ../news/news_approve.php");
+    $smarty->assign("user_id", $_SESSION['user_id']);
+    
+    //Send to smarty for return value
+    $smarty->display("file:" . $cpanel_template_folder . "ajax_news_approve_edit.html");
 }
 
-//Edit news posts
-if (isset($action) and $action == "update_news") {
-    $news_text     = $mysqli->real_escape_string($news_text);
-    $news_headline = $mysqli->real_escape_string($news_headline);
+//****************************************************************************************
+// This is where we will update a news post.
+//****************************************************************************************e
+if (isset($action) and $action == "save_news_post_text") {
+    if ($_SESSION['permission']==1 or $_SESSION['permission']=='1') {
+        if (isset($news_id)) {                    
+            create_log_entry('News', $news_id, 'News item', $news_id, 'Update', $_SESSION['user_id']);
+            
+            // we have to convert the date vars into a time stamp to be inserted into the db
+            $date = date_to_timestamp($news_year, $news_month, $news_day);
+            
+            $stmt = $mysqli->prepare("UPDATE news SET news_text = ?,
+                                 news_headline = ?,
+                                 user_id = ?,
+                                 news_image_id = ?,
+                                 news_date = ?
+                                 WHERE news_id = ?") or die($mysqli->error);
+            $stmt->bind_param("ssiiis", $news_text, $news_headline, $news_userid, $news_image_id, $date, $news_id) or die($mysqli->error);
+            $stmt->execute() or die($mysqli->error);
+            $stmt->close();
+            
+            $osd = "News post updated!";
+        }
+    }else{
+        $osd = "You don't have permission to perform this task";
+    }
 
-    //Actual news thread change
-    $mysqli->query("UPDATE
-        news SET
-        news_headline='$news_headline',
-        news_text='$news_text',
-        news_image_id='$news_image_id'
-        WHERE news_id='$news_id'") or die("The update failed news");
+    $smarty->assign('action', 'save_news_text');
+    $smarty->assign('osd_message', $osd);
+    
+    require_once __DIR__."/../../lib/Db.php";
+    require_once __DIR__."/../../common/DAO/NewsDAO.php";
 
-    $message = "News thread updated correctly";
-    $smarty->assign('message', $message);
+    $newsDAO = new AL\Common\DAO\NewsDAO($mysqli);
+    
+    $smarty->assign(
+        'news',
+        $newsDAO->getLatestNews(isset($user_id) ? $user_id : null, isset($last_timestamp) ? $last_timestamp : null, isset($action2) ? $action2 : null, isset($view) ? $view : null)
+    ); 
+        
+    $smarty->assign("nr_news", $newsDAO->getNewsCount());
 
-    create_log_entry('News', $news_id, 'News item', $news_id, 'Update', $_SESSION['user_id']);
-
-    $_SESSION['edit_message'] = "News updated";
-
-    header("Location: ../news/news_edit.php?news_id=$news_id");
-}
-
-//Edit news submissions
-if (isset($action) and $action == "update_submission") {
-    $news_text = $mysqli->real_escape_string($news_text);
-
-    //Its a submission
-    $mysqli->query("UPDATE
-        news_submission SET
-        news_headline='$news_headline',
-        news_text='$news_text',
-        news_image_id='$news_image_id'
-        WHERE news_submission_id='$news_submission_id'") or die("The update failed submission");
-
-    $_SESSION['edit_message'] = "Submission updated";
-
-    create_log_entry('News', $news_submission_id, 'News submit', $news_submission_id, 'Update', $_SESSION['user_id']);
-
-    header("Location: ../news/news_edit.php?news_submission_id=$news_submission_id");
+    $smarty->assign("user_id", $_SESSION['user_id']);
+    
+    //Send to smarty for return value
+    $smarty->display("file:" . $cpanel_template_folder . "ajax_news_post_edit.html");
 }
 
 if (isset($action) and $action == "image_upload") {
+    include("../../config/admin_rights.php");
     //****************************************************************************************
     // This is where we handle the uploaded images and rename them and save them to db and hd
     //****************************************************************************************
@@ -232,6 +354,7 @@ if (isset($action) and $action == "image_upload") {
 // This is where we delete a news image
 //****************************************************************************************
 if (isset($action) and $action == "delete_image") {
+    include("../../config/admin_rights.php");
     if (isset($news_image_id)) {
         foreach ($news_image_id as $image) {
             $sql = $mysqli->query("SELECT news_image_ext FROM news_image WHERE news_image_id='$image'") or die("Couldn't query images");
@@ -251,6 +374,3 @@ if (isset($action) and $action == "delete_image") {
     }
     header("Location: ../news/news_edit_images.php");
 }
-
-//close the connection
-mysqli_close($mysqli);

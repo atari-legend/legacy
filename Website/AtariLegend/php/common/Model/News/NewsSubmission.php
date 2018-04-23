@@ -1,17 +1,16 @@
 <?php
-namespace AL\Common\Model\News;
+namespace AL\Common\Model\NewsSubmission;
 
 require_once __DIR__."/../../../config/config.php";
 require_once __DIR__."/../../../lib/functions.php";
 
 /**
- * Maps to the `news` and `news_image` tables
+ * Maps to the `newssubmissions`, `news_image` and `user` tables
  */
-class News {
+class NewsSubmission {
     private $id;
     private $headline;
     private $text;
-    private $timestamp;
     private $date;
     private $image_id;
     private $image;
@@ -21,13 +20,12 @@ class News {
     private $join_date;
     private $karma;
     private $avatar_ext;
-    private $user_news_count;
+    private $user_subm_count;
 
     public function __construct(
         $id,
         $headline,
         $text,
-        $timestamp,
         $date,
         $image_id,
         $image,
@@ -37,12 +35,11 @@ class News {
         $join_date,
         $karma,
         $avatar_ext,
-        $user_news_count
+        $user_subm_count
     ) {
         $this->id = $id;
         $this->headline = $headline;
         $this->text = $text;
-        $this->timestamp = $timestamp;
         $this->post_date = date("F j, Y", $date);
         $this->image_id = $image_id;
         $this->userid = $userid;
@@ -56,7 +53,7 @@ class News {
         }
        
         $this->karma = $karma;
-        $this->user_news_count = $user_news_count;
+        $this->user_subm_count = $user_subm_count;
         
         if ($avatar_ext && $avatar_ext !== "") {
             $this->avatar_image = $GLOBALS['user_avatar_path']."/${userid}.${avatar_ext}";
@@ -83,10 +80,6 @@ class News {
 
     public function getText() {
         return $this->text;
-    }
-    
-    public function getTimestamp() {
-        return $this->timestamp;
     }
 
     public function getDate() {
@@ -121,8 +114,8 @@ class News {
         return $this->avatar_image;
     }
     
-    public function getUserNewsCount() {
-        return $this->user_news_count;
+    public function getUserSubCount() {
+        return $this->user_subm_count;
     }
 
     /**

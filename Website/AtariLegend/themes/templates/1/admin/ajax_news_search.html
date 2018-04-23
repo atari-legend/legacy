@@ -1,22 +1,17 @@
 {*
 /***************************************************************************
-*                                news_approve.html
-*                            ---------------------------
-*   begin                : Thursday, May 5, 2005
-*   copyright            : (C) 2005 Atari Legend
-*   email                : maarten.martens@freebel.net
+*                                ajax_news_search.html
+*                            ----------------------------
+*   begin                : Tuesday, April 10, 2018
+*   copyright            : (C) 2018 Atari Legend
+*   email                : admin@atarilegend.com
 *   actual update        : File creation
-*
-*   Id: news_approve.html,v 0.10 2004/05/05 ST Graveyard
-*   Id: news_approve.html,v 0.20 2016/07/28 ST Graveyard 23:10
-*           -AL 2.0
 *
 ***************************************************************************/
 ****************************************************************************
-This is the sub template file to generate the news approve page
+This is the sub template file to generate the news edit page
 ****************************************************************************
 *}
-{extends file='1/admin/main.html'}
 
 {block name=java_script}
 <script src="{$template_dir}includes/js/bbcode.js"></script><!-- Load the BBCODE script -->
@@ -24,35 +19,34 @@ This is the sub template file to generate the news approve page
 <script src="{$template_dir}includes/js/ui.widgets.js"></script><!-- The autocomplete and dropdown switcher -->
 {/block}
 
-{block name=title}Approve News{/block}
+{block name=title}Edit News{/block}
 
 {block name=main_tile}
 <div class="standard_tile" id="news_approve">
     <div class="help-tip">
         <p>
             <i class="fa fa-envelope" aria-hidden="true"></i> - Email <br>
-            <i class="fa fa-thumbs-up fa-lg" aria-hidden="true"></i> - Approve <br>
             <i class="fa fa-pencil fa-lg" aria-hidden="true"></i> - Edit <br>
             <i class="fa fa-trash fa-lg" aria-hidden="true"></i> - Delete <br>
             <i class="fa fa-floppy-o" aria-hidden="true"></i> - Save
         </p>
     </div>
-    <h1>APPROVE NEWS</h1>
+    <h1>EDIT NEWS</h1>
     <div class="standard_tile_line"></div>
     <div class="standard_tile_padding">
         <div class="left_nav_section">
-            News submitted by users, or news which has just been added using the 'add news' page,
-            should be approved here by the admin users first before it is published online at the front page of AL.
+            This is the news editing page. News posts can be changed or deleted here. As these are all approved news entries, keep in mind these changes are instantly visible on the main site! Use the left side to perform a search query on the news table.
         </div>
         <br>
         <br>
         <form name="post" id="post">
         <div class="jsNewsWrapper infinite-container">
-            <div id="news_submission_list">
-                {if $nr_submissions <> '0'}
-                    {foreach from=$news_submissions item=line}
+            <div id="news_edit_list">
+                {if $nr_news <> ''}
+                    {if $nr_news <> ''}<div class="standard_tile_text_center">Your search query resulted in {$nr_news} entries.</div><br>{/if}
+                    {foreach from=$news item=line}
                         <div id="jsNewsId{$line->getId()}" class="infinite-item">
-                            <div class="news_post_box" id="{$line->getDate()}">
+                            <div class="news_post_box" id="{$line->getTimestamp()}">
                                 <div class="news_userinfo">
                                     {if (null !== $line->getAvatarImage()) and $line->getAvatarImage() != ''}
                                         <img src="../../includes/show_image.php?file={$line->getAvatarImage()}&amp;resize=100,null,null,null" alt="{$line->getUserName()}" width="100px">
@@ -63,10 +57,10 @@ This is the sub template file to generate the news approve page
                                     <span class="text-nowrap">
                                         Joined: {$line->getJoinDate()}
                                         <br>
-                                        {if $line->getUserSubCount() > 0}
-                                            Submissions:  <a href="../news/news_approve.php?user_id={$line->getUserId()}" class="standard_tile_link">{$line->getUserSubCount()}</a>
+                                        {if $line->getUserNewsCount() > 0}
+                                            News posts:  <a href="#" data-user-id="{$line->getUserId()}" class="standard_tile_link jsUserNewsLink">{$line->getUserNewsCount()}</a>
                                         {else}
-                                            Submissions:  {$line->getUserSubCount()}
+                                            News posts:  {$line->getUserNewsCount()}
                                         {/if}
                                         <br>
                                         {if $line->getKarma() == '' OR $line->getKarma() == 0}
@@ -93,22 +87,17 @@ This is the sub template file to generate the news approve page
                                     <ul class="news_buttons">
                                         {if $line->getEmail() !== ''}
                                         <li class="primary_button jsNewsEmailButton">
-                                            <a href="mailto:{$line->getEmail()}?subject=Submission of news : '{$line->getHeadline()|escape:'url'}' at Atari Legend" class="links_addnew_link">
+                                            <a href="mailto:{$line->getEmail()}?subject=Your news post : {$line->getHeadline()|escape:'url'} at Atari Legend" class="links_addnew_link">
                                                 <i class="fa fa-envelope" aria-hidden="true"></i>
                                             </a>
                                         </li>
                                         {/if}
-                                        <li class="primary_button jsNewsApproveButton" data-news-id="{$line->getId()}">
-                                            <a class="links_addnew_link">
-                                                <i class="fa fa-thumbs-up" aria-hidden="true"></i>
-                                            </a>
-                                        </li>
-                                        <li class="primary_button jsNewsEditButton" data-news-id="{$line->getId()}">
+                                        <li class="primary_button jsNewsPostEditButton" data-news-id="{$line->getId()}">
                                             <a class="links_addnew_link">
                                                 <i class="fa fa-pencil" aria-hidden="true"></i>
                                             </a>
                                         </li>
-                                        <li class="primary_button jsNewsDeleteButton" data-news-id="{$line->getId()}">
+                                        <li class="primary_button jsNewsPostDeleteButton" data-news-id="{$line->getId()}">
                                             <a class="links_addnew_link">
                                                 <i class="fa fa-trash" aria-hidden="true"></i>
                                             </a>
@@ -121,17 +110,14 @@ This is the sub template file to generate the news approve page
                                             </li>
                                             <div class="dropdown_box" id="dropdown_box{$line->getId()}">
                                                 <li class="dropdown_item">
-                                                    <a href="mailto:{$line->getEmail()}?subject=Submission of news : '{$line->getHeadline()|escape:'url'}' at Atari Legend" class="links_addnew_link">
+                                                    <a href="mailto:{$line->getEmail()}?subject=Your news post : {$line->getHeadline()|escape:'url'} at Atari Legend" class="links_addnew_link">
                                                         Email
                                                     </a>
                                                 </li>
-                                                <li class="dropdown_item jsNewsApproveDropdownItem" data-news-id="{$line->getId()}">
-                                                    Approve
-                                                </li>
-                                                <li class="dropdown_item jsNewsEditDropdownItem" data-news-id="{$line->getId()}">
+                                                <li class="dropdown_item jsNewsPostEditDropdownItem" data-news-id="{$line->getId()}">
                                                     Edit
                                                 </li>
-                                                <li class="dropdown_item jsNewsDeleteDropdownItem" data-news-id="{$line->getId()}">
+                                                <li class="dropdown_item jsNewsPostDeleteDropdownItem" data-news-id="{$line->getId()}">
                                                     Delete
                                                 </li>
                                             </div>
@@ -161,10 +147,12 @@ This is the sub template file to generate the news approve page
                         </div>
                     {/foreach}
                 {else}
-                    <div class="standard_tile_text_center">No news entries to approve.</div>
+                    <div class="standard_tile_text_center">No news entries for your query.</div>
                 {/if}
             </div>
         </div>
+        <div id="action_news_search" style="display:none;">{$search_action}</div>
     </div>
 </div>
+
 {/block}
