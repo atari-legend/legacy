@@ -1,54 +1,20 @@
 {*
 /***************************************************************************
-*                                comments.html
-*                            ------------------------
-*   begin                : February 10, 2018
+*                                ajax_comments_search.html
+*                            -------------------------------
+*   begin                : April 24, 2018
 *   copyright            : (C) 2018 Atari Legend
 *   email                : admin@atarilegend.com
 *   actual update        : Creation of file
 *
 ***************************************************************************/
-
-//****************************************************************************************
-// This is the main games comments page
-//****************************************************************************************
 *}
-
-{extends file='1/admin/main.html'}
 {block name=java_script}
 <script src="{$template_dir}includes/js/vendor/jquery.ajaxQueue-0.1.1.min.js"></script>
 <script src="{$template_dir}includes/js/comments.js"></script>
 <script src="{$template_dir}includes/js/bbcode.js"></script>
 {/block}
-{block name=left_tile}
-
-{* Comments navigation *}
-<div class="standard_tile">
-    <h1>OPTIONS</h1>
-    <div class="standard_tile_line"></div>
-    <div class="standard_tile_text_center">
-        <br>
-        Navigate comments:<br><br>
-        <div class="comments_navigator">
-            <button id="comments_all" class="primary_button">All Comments</button><br>
-            <button id="comments_game_comments" class="primary_button">Game Comments</button><br>
-            <button id="comments_game_review_comments" class="primary_button">Review Comments</button><br>
-            <button id="comments_interview_comments" class="primary_button">Interview Comments</button><br>
-            <button id="test_clicker" class="primary_button">Menu Disk Comments</button><br>
-            <button id="" class="primary_button">Demo Comments</button><br>
-            <button id="" class="primary_button">Article Comments</button><br>
-            <button id="" class="primary_button">Crew Comments</button><br>
-        </div>
-        <br>
-    </div>
-    <br>
-</div>
 <br>
-{include file='1/admin/quick_search_comments.html'}
-<br>
-{* END Comments navigation *}
-{/block}
-{block name=main_tile}
 <div class="standard_tile" id="games_comment">
     <div class="help-tip">
         <p><i class="fa fa-envelope" aria-hidden="true"></i> - mail to <br>
@@ -70,6 +36,9 @@
         <div class="jsCommentsWrapper infinite-container">
             {* START NEW COMMENT BOX *}
             <div id="view" style="display:none;">{$links.view}</div>
+            {if $comments|@count == 0}
+                <h3>No results for your query</h3>
+            {/if}
             {foreach from=$comments item=line}
             <div id="jsCommentId{$line->getCommentsId()}" class="infinite-item">
                 <div class="comments_post_box" id="{$line->getTimestamp()}">
@@ -110,7 +79,7 @@
                             {if $line->getCommentType() == "interview_comment" }
                                 <a href="../interviews/interviews_edit.php?interview_id={$line->getGameId()}" class="links_addnew_link">{$line->getGameName()}</a>
                             {elseif $line->getCommentType() == "game_review_comment" }
-                                <a href="../games/games_review_edit.php?game_id={$line->getGameId()}&reviewid={$line->getReviewId()}" class="links_addnew_link">{$line->getGameName()}</a>
+                                <a href="../games/games_review_add.php?game_id={$line->getGameId()}" class="links_addnew_link">{$line->getGameName()}</a>
                             {else}
                                     <a href="../games/games_detail.php?game_id={$line->getGameId()}" class="links_addnew_link">{$line->getGameName()}</a>
                             {/if}
@@ -159,7 +128,7 @@
                             {if $line->getCommentType() == "interview_comment" }
                                 <a href="../interviews/interviews_edit.php?interview_id={$line->getGameId()}" class="links_addnew_link">{$line->getGameName()}</a>
                             {elseif $line->getCommentType() == "game_review_comment" }
-                                <a href="../games/games_review_edit.php?game_id={$line->getGameId()}&reviewid={$line->getReviewId()}" class="links_addnew_link">{$line->getGameName()}</a>
+                                <a href="../games/games_review_add.php?game_id={$line->getGameId()}" class="links_addnew_link">{$line->getGameName()}</a>
                             {else}
                                 <a href="../games/games_detail.php?game_id={$line->getGameId()}" class="links_addnew_link">{$line->getGameName()}</a>
                             {/if}
@@ -189,10 +158,7 @@
                 </div>
             </div>
             {/foreach}
-            {* END NEW COMMENT BOX *}
         </div>
         </form>
     </div>
-    <br>
 </div>
-{/block}
