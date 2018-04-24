@@ -14,15 +14,15 @@
 {* START NEW COMMENT BOX *}
 {if isset($action) and $action=="get_comment_text"}
 
-    <input type="button" class="primary_button" accesskey= "b" name="addbbcode0" value="B" onclick="bbstyle(0,'textfield')">
-    <input type="button" class="primary_button" accesskey= "u" name="addbbcode4" value="U" onclick="bbstyle(4,'textfield')">
-    <input type="button" class="primary_button" accesskey= "i" name="addbbcode2" value="I" onclick="bbstyle(2,'textfield')">
-    <input type="button" class="primary_button" accesskey="w" name="addbbcode6" value="URL" onClick="bbstyle(6,'textfield')">
-    <input type="button" class="primary_button" accesskey="x" name="addbbcode8" value="@" onClick="bbstyle(8,'textfield')">
-    <button class="primary_button jsCommentsEditSaveButton comments_save_button" data-comments-id="{$comments_id}" data-comment-type="{$comment_type}">
+    <input type="button" class="primary_button" accesskey= "b" name="addbbcode0" value="B" onclick="bbstyle(0,'textfield{$comments_id}')">
+    <input type="button" class="primary_button" accesskey= "u" name="addbbcode4" value="U" onclick="bbstyle(4,'textfield{$comments_id}')">
+    <input type="button" class="primary_button" accesskey= "i" name="addbbcode2" value="I" onclick="bbstyle(2,'textfield{$comments_id}')">
+    <input type="button" class="primary_button" accesskey="w" name="addbbcode6" value="URL" onClick="bbstyle(6,'textfield{$comments_id}')">
+    <input type="button" class="primary_button" accesskey="x" name="addbbcode8" value="@" onClick="bbstyle(8,'textfield{$comments_id}')">
+    <button class="primary_button jsCommentsEditSaveButton comments_save_button" data-comments-id="{$comments_id}" data-comment-type="{$comment_type}" type="button">
         <i class="fa fa-floppy-o" aria-hidden="true"></i>
     </button>
-    <textarea class="primary_textarea" rows="4" name="textfield" id="jsCommentText" ONSELECT="javascript:storeCaret(this);" ONCLICK="javascript:storeCaret(this);" ONKEYUP="javascript:storeCaret(this);" ONCHANGE="javascript:storeCaret(this);">{$comment_text}</textarea>
+    <textarea class="primary_textarea" rows="4" name="textfield{$comments_id}" id="jsCommentText" ONSELECT="javascript:storeCaret(this);" ONCLICK="javascript:storeCaret(this);" ONKEYUP="javascript:storeCaret(this);" ONCHANGE="javascript:storeCaret(this);">{$comment_text}</textarea>
 
 {/if}
 {if isset($action) and $action=="save_comment_text"}

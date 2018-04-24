@@ -184,6 +184,10 @@ class CommentsDAO {
                 $where_clause .= " WHERE temp.timestamp < $last_timestamp ";
             }
         }
+        
+        if (isset($action) and $action=="search") {
+            $where_clause .= " WHERE temp.timestamp <= $last_timestamp ";
+        }
 
         $query = "SELECT
             temp.comments_id,
@@ -365,7 +369,7 @@ class CommentsDAO {
      * @param  integer $comments_id ID of a comment
      * @return text the text of the comment
      */
-    public function getCommentText($comments_id = null) {
+    public function getCommentText($comments_id = null, $action = null) {
         if (isset($comments_id)) {
             $stmt = \AL\Db\execute_query(
                 "CommentsDAO: Get comment text for comments_id $comments_id",
@@ -383,6 +387,18 @@ class CommentsDAO {
         );
 
         $stmt->fetch();
+        
+        $oldcomment = $comment;
+        $oldcomment = nl2br($oldcomment);
+        $oldcomment = InsertALCode($oldcomment);
+        $oldcomment = trim($oldcomment);
+        $oldcomment = RemoveSmillies($oldcomment);
+        $comment = stripslashes($oldcomment);
+        if (isset($action) and $action == 'get_comment_text') {
+            $breaks = array("<br />","<br>","<br/>");
+            $comment = str_ireplace($breaks, "\r\n", $comment);
+        }
+        
         $stmt->close();
 
         return $comment;
