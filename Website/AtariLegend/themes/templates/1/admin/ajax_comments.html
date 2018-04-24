@@ -66,7 +66,7 @@
                     </a>
                 </li>
                 {/if}
-                <li class="primary_button jsCommentsEditButton" data-comments-id="{$line->getCommentsId()}">
+                <li class="primary_button jsCommentsEditButton" data-comments-id="{$line->getCommentsId()}" data-comment-type="{$line->getCommentType()}">
                     <a class="links_addnew_link">
                             <i class="fa fa-pencil" aria-hidden="true"></i>
                     </a>
@@ -88,7 +88,7 @@
                                 Email
                             </a>
                         </li>
-                        <li class="dropdown_item jsCommentsEditDropdownItem" data-comments-id="{$line->getCommentsId()}">
+                        <li class="dropdown_item jsCommentsEditDropdownItem" data-comments-id="{$line->getCommentsId()}" data-comment-type="{$line->getCommentType()}">
                             Edit
                         </li>
                         <li class="dropdown_item jsCommentsDeleteDropdownItem" data-comments-id="{$line->getCommentsId()}">

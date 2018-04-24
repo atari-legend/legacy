@@ -50,5 +50,18 @@ $smarty->assign('links', array(
     'getCommentCount' => $commentsDao->getCommentCount(),
 ));
 
+//Get the authors for the interview
+$sql_author = $mysqli->query("SELECT comments.user_id,users.userid FROM comments 
+                              LEFT JOIN users ON ( comments.user_id = users.user_id ) 
+                              GROUP BY comments.user_id 
+                              ORDER BY users.userid ASC") or die("Database error - getting members name");
+
+while ($authors = $sql_author->fetch_array(MYSQLI_BOTH)) {
+    $smarty->append('authors_search', array(
+        'user_id' => $authors['user_id'],
+        'user_name' => $authors['userid']
+    ));
+}
+
 //Send all smarty variables to the templates
 $smarty->display("file:" . $cpanel_template_folder . "comments.html");
