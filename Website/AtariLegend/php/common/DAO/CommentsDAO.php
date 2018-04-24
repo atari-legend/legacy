@@ -184,6 +184,10 @@ class CommentsDAO {
                 $where_clause .= " WHERE temp.timestamp < $last_timestamp ";
             }
         }
+        
+        if (isset($action) and $action=="search") {
+            $where_clause .= " WHERE temp.timestamp <= $last_timestamp ";
+        }
 
         $query = "SELECT
             temp.comments_id,
