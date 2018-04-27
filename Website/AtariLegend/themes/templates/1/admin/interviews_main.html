@@ -40,7 +40,7 @@
     <div class="help-tip">
         <p>
             The first thing that needs to be done is to add an actual interview in the database. We need to link an
-            interview to an actual person. To add an interview to the AL database you click on the "Add an Interview" link at the left side. There you'll have to search for the individual you want to interview.
+            interview to an actual person. To add an interview to the AL database you click on the "Add an Interview" link at the right side. There you'll have to search for the individual you want to interview.
             Once this is done, you will enter the interview edit screen. This is where the actual interview is inserted in the database. When you are finished and come back to the main screen, your interview will be available in the
             'Search Interview' edit box and in the list below.
             <br>
@@ -53,7 +53,7 @@
     <div class="standard_tile_padding">
         <div class="left_nav_section">
             Overhere you can add a new interview or edit an existing interview. If you like to edit an interview,
-            just look up the person in the dropdown list and press <b>search</b>. If you like to add an interview, select the person
+            just look up the person in the dropdown list and press <b>edit</b>. If you like to add an interview, select the person
             and press the <b>add</b> button.
         </div>
         <br>
@@ -64,12 +64,11 @@
                     <legend class="primary_legend">Search Interview</legend>
                     <form action="../interviews/interviews_edit.php" method="post" name="search">
                         <select name="interview_id" class="standard_select select_large">
-                            <option value="-" selected>-</option>
                             {foreach from=$individuals_interviewed item=line}
                                 <option value="{$line.interview_id}">{$line.ind_name}</option>
                             {/foreach}
                         </select>
-                        <input type="submit" value="Search" class="secondary_button">
+                        <input type="submit" value="Edit" class="secondary_button">
                         <input type="hidden" name="action" value="search">
                     </form>
                 </fieldset>

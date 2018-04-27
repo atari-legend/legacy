@@ -47,7 +47,7 @@ while ($individuals2 = $sql_individuals2->fetch_array(MYSQLI_BOTH)) {
     ));
 }
 
-//Get the interviews
+// Get the interviews
 $v_counter = (isset($_GET["v_counter"]) ? $_GET["v_counter"] : 0);
 
 // count number of interviews
