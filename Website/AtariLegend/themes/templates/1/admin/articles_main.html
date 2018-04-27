@@ -19,40 +19,29 @@
 {extends file='1/admin/main.html'}
 
 {block name=java_script}
-<script>
-function deletearticle(article_id) {
-    $('#JSGenericModal').dialog({
-        title: 'Delete Article',
-        open: $('#JSGenericModalText').text('Are you sure you want to delete this article?'),
-        resizable: false,
-        height: 200,
-        modal: true,
-        buttons: {
-            'Delete': function () {
-                $(this).dialog('close');
-                url="db_articles.php?action=delete_article&article_id="+article_id;
-                location.href=url;
-            },
-            Cancel: function () {
-                $(this).dialog('close');
-            }
-        }
-    });
-}
-</script>
+<script src="{$template_dir}includes/js/vendor/jquery.dotdotdot-1.8.3.min.js"></script> <!--this script is used for the elipsis (...) effect of the preview of the reviews -->
+<script src="{$template_dir}includes/js/articles.js"></script> <!-- Load all articles scripts -->
+<script src="{$template_dir}includes/js/ui.widgets.js"></script> <!-- load the script for the input/dropdown switcher and top menu -->
 {/block}
 
 {block name=title}Articles{/block}
 
 {block name=main_tile}
 <div class="standard_tile" id="interviews_main">
+    <div class="help-tip">
+        <p>
+            The first thing that needs to be done is to add an actual article in the database. To add an article you click on the "Add an Article" link at the right side. Fill in the title of the article and press the button.
+            Once this is done, you will enter the article edit screen. This is where the actual article is inserted in the database. When you are finished and come back to the main screen, your article will be available in the
+            'Search article' edit box and in the list below.
+        </p>
+    </div>
     <h1>ARTICLES</h1>
     <div class="standard_tile_line"></div>
     <div class="standard_tile_padding">
         <div class="left_nav_section">
             Overhere you can add a new article or edit an existing article. If you like to edit an article,
-            just look up the article in the dropdown list and press <b>search</b>. If you like a list of all articles,
-            just press search without making a selection. If you like to add an article, enter the article title in the input field and press 'Add'.
+            just look up the article in the dropdown list and press <b>edit</b> or use the list below. If you like to add an article, fill in a title
+            and press the <b>add</b> button.
         </div>
         <br>
         <br>
@@ -60,14 +49,13 @@ function deletearticle(article_id) {
             <div class="child_edit_company text-center">
                 <fieldset class="secondary_fieldset">
                     <legend class="primary_legend">Search Article</legend>
-                    <form action="../articles/articles_main.php" method="post" name="search">
-                        <select name="article_search" class="standard_select select_large">
-                            <option value="-" selected>-</option>
+                    <form action="../articles/articles_edit.php" method="post" name="search">
+                        <select name="article_id" class="standard_select select_large">
                             {foreach from=$articles item=line}
                                 <option value="{$line.article_id}">{$line.article_title}</option>
                             {/foreach}
                         </select>
-                        <input type="submit" value="Search" class="secondary_button">
+                        <input type="submit" value="Edit" class="secondary_button">
                         <input type="hidden" name="action" value="search">
                     </form>
                 </fieldset>
@@ -75,9 +63,10 @@ function deletearticle(article_id) {
             <div class="child_add_company text-center">
                 <fieldset class="secondary_fieldset">
                     <legend class="primary_legend">Add an Article</legend>
-                    <form action="../articles/articles_add.php" method="post" name="insert">
-                        <input type="text" name="article_title" class="standard_input input_large">
+                    <form action="../articles/db_articles.php" method="post" name="insert">
+                        <input type="text" name="article_title" class="standard_input input_large" required>
                         <input type="submit" value="Add" class="secondary_button">
+                        <input type="hidden" name="action" value="add_article">
                         <input type="hidden" name="user_id" id="user_id" value="{$user_id}">
                     </form>
                 </fieldset>
@@ -85,32 +74,42 @@ function deletearticle(article_id) {
         </div>
         <br>
         <br>
-        {if isset($article_selected)}
-            {foreach from=$article_selected item=line}
-                <fieldset class="secondary_fieldset">
-                    <legend class="primary_legend">
-                    {if $line.user_email <> ''}
-                        <a href="mailto:{$line.user_email}?subject=Your%20article%20-%20{$line.article_title}%20at%20Atari%20Legend" class="left_nav_link">{$line.user_id}</a> - {$line.article_date}
-                    {else}
-                        Written by {$line.user_id} on {$line.article_date}
-                    {/if}
-                    </legend>
-                    <br>
-                    <div style="float:left"><b>{$line.article_title}</b></div><div style="float:right; margin-right:2px;">Type - {$line.article_type}</div>
-                    <br>
-                    <br>
-
-                            <i>{$line.article_text}</i>
-
-                    <br><br>
-                    <div class="text-center">
-                        <a href="articles_edit.php?article_id={$line.article_id}" class="left_nav_link">EDIT</a> :: <a href="javascript:deletearticle({$line.article_id})" class="left_nav_link">DELETE</a> :: <a href="articles_preview.php?article_id={$line.article_id}" class="left_nav_link">PREVIEW</a> :: <a href="articles_screenshots_add.php?article_id={$line.article_id}" class="left_nav_link">ADD SCREENSHOTS</a>
+        {if isset($article_list)}
+            <table class="primary_table_list">
+            {foreach from=$article_list item=line}
+                <tr>
+                    <td>
+                    <div class="standard_tile_padding">
+                        <h4 style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis">
+                            <a href="../articles/articles_edit.php?article_id={$line.article_id}" class="standard_tile_link">{$line.article_title}</a>
+                        </h4>
+                        <h5 style="font-weight: bold;">{$line.article_date} by <a href="../../admin/user/user_detail.php?user_id_selected={$line.user_id}" class="latest_comments_link">{$line.userid}</a> / {$line.article_type}</h5>
+                        <div class="interview_main_text">
+                            {$line.article_text}
+                        </div>
+                        <ul class="interview_buttons main">
+                            <a href="../articles/articles_edit.php?article_id={$line.article_id}" class="links_addnew_link">
+                                <li class="primary_button">
+                                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                                </li>
+                            </a>
+                        </ul>
+                        <br>
                     </div>
-                </fieldset>
-                <br>
-                <br>
+                    </td>
+                </tr>
             {/foreach}
+            </table>
         {/if}
+        <div class="standard_tile_text_center">
+            {if $links.linkback != ''}
+                <a href ="../interviews/interviews_main.php{$links.linkback}" class="standard_tile_link" style="float:left;margin-left:5px;margin-top:10px;">Previous page</a>
+            {/if}
+            {if $links.linknext != ''}
+                <a href="../interviews/interviews_main.php{$links.linknext}" class="standard_tile_link" style="float:right;margin-right:5px;margin-top:10px;">Next page</a>
+            {/if}
+            <br><br>
+        </div>
     </div>
 </div>
 {/block}
