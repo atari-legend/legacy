@@ -361,6 +361,16 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH)) {
         if ($log['sub_section'] == 'Article' or $log['sub_section'] == 'Screenshots') {
             $subsection_link = $section_link;
         }
+        
+        if ($log['sub_section'] == 'Comment') {
+            $section_link = ("../articles/articles_edit.php" . '?article_id=' . $log['section_id']);
+            if ($log['action'] == 'Delete') {
+                $subsection_link = ("../administration/comments.php");
+            } else {
+                //$subsection_link = ("../interviews/interviews_comment_edit.php" . '?interview_user_comments_id=' . $log['sub_section_id'] . '&v_counter=0');
+                $subsection_link = ("../administration/comments.php");
+            }
+        }
     }
 
     //  the ARTICLE TYPE SECTION

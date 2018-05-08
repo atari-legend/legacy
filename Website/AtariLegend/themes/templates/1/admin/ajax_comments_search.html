@@ -80,6 +80,8 @@
                                 <a href="../interviews/interviews_edit.php?interview_id={$line->getGameId()}" class="links_addnew_link">{$line->getGameName()}</a>
                             {elseif $line->getCommentType() == "game_review_comment" }
                                 <a href="../games/games_review_add.php?game_id={$line->getGameId()}" class="links_addnew_link">{$line->getGameName()}</a>
+                            {elseif $line->getCommentType() == "article_comment" }
+                                <a href="../articles/articles_edit.php?article_id={$line->getGameId()}" class="links_addnew_link">{$line->getGameName()}</a>
                             {else}
                                     <a href="../games/games_detail.php?game_id={$line->getGameId()}" class="links_addnew_link">{$line->getGameName()}</a>
                             {/if}
@@ -129,6 +131,8 @@
                                 <a href="../interviews/interviews_edit.php?interview_id={$line->getGameId()}" class="links_addnew_link">{$line->getGameName()}</a>
                             {elseif $line->getCommentType() == "game_review_comment" }
                                 <a href="../games/games_review_add.php?game_id={$line->getGameId()}" class="links_addnew_link">{$line->getGameName()}</a>
+                            {elseif $line->getCommentType() == "article_comment" }
+                                <a href="../articles/articles_edit.php?article_id={$line->getGameId()}" class="links_addnew_link">{$line->getGameName()}</a>
                             {else}
                                 <a href="../games/games_detail.php?game_id={$line->getGameId()}" class="links_addnew_link">{$line->getGameName()}</a>
                             {/if}
@@ -152,6 +156,8 @@
                                 <button class="badge_comment_type">Game Review</button>
                             {elseif $line->getCommentType() == "interview_comment"  }
                                 <button class="badge_comment_type">Interview</button>
+                            {elseif $line->getCommentType() == "article_comment"  }
+                                <button class="badge_comment_type">Article</button>
                             {/if}
                         {/if}
                     </div>
