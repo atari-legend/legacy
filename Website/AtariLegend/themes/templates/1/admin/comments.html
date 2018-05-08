@@ -36,7 +36,7 @@
             <button id="comments_interview_comments" class="primary_button">Interview Comments</button><br>
             <button id="test_clicker" class="primary_button">Menu Disk Comments</button><br>
             <button id="" class="primary_button">Demo Comments</button><br>
-            <button id="" class="primary_button">Article Comments</button><br>
+            <button id="comments_article_comments" class="primary_button">Article Comments</button><br>
             <button id="" class="primary_button">Crew Comments</button><br>
         </div>
         <br>
@@ -111,6 +111,8 @@
                                 <a href="../interviews/interviews_edit.php?interview_id={$line->getGameId()}" class="links_addnew_link">{$line->getGameName()}</a>
                             {elseif $line->getCommentType() == "game_review_comment" }
                                 <a href="../games/games_review_edit.php?game_id={$line->getGameId()}&reviewid={$line->getReviewId()}" class="links_addnew_link">{$line->getGameName()}</a>
+                            {elseif $line->getCommentType() == "article_comment" }
+                                <a href="../articles/articles_edit.php?article_id={$line->getGameId()}" class="links_addnew_link">{$line->getGameName()}</a>
                             {else}
                                     <a href="../games/games_detail.php?game_id={$line->getGameId()}" class="links_addnew_link">{$line->getGameName()}</a>
                             {/if}
@@ -160,6 +162,8 @@
                                 <a href="../interviews/interviews_edit.php?interview_id={$line->getGameId()}" class="links_addnew_link">{$line->getGameName()}</a>
                             {elseif $line->getCommentType() == "game_review_comment" }
                                 <a href="../games/games_review_edit.php?game_id={$line->getGameId()}&reviewid={$line->getReviewId()}" class="links_addnew_link">{$line->getGameName()}</a>
+                            {elseif $line->getCommentType() == "article_comment" }
+                                <a href="../articles/articles_edit.php?article_id={$line->getGameId()}" class="links_addnew_link">{$line->getGameName()}</a>
                             {else}
                                 <a href="../games/games_detail.php?game_id={$line->getGameId()}" class="links_addnew_link">{$line->getGameName()}</a>
                             {/if}
@@ -183,6 +187,8 @@
                                 <button class="badge_comment_type">Game Review</button>
                             {elseif $line->getCommentType() == "interview_comment"  }
                                 <button class="badge_comment_type">Interview</button>
+                            {elseif $line->getCommentType() == "article_comment"  }
+                                <button class="badge_comment_type">Article</button>
                             {/if}
                         {/if}
                     </div>

@@ -31,6 +31,8 @@ if (isset($view) and $view == "users_comments") {
     $view = "comments_game_review_comments";
 } elseif (isset($view) and $view == "comments_interview_comments") {
     $view = "comments_interview_comments";
+} elseif (isset($view) and $view == "comments_article_comments") {
+    $view = "comments_article_comments";
 } else {
     $view = "latest_comments";
 }

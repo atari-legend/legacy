@@ -131,6 +131,46 @@ class CommentsDAO {
 
         return $query;
     }
+    
+    /**
+     * Get the SQL query to get article comments, either all or comments for a
+     * specific user
+     *
+     * @param  integer $user_id Optional ID of the user to retrieve comments for
+     * @return string SQL query
+     */
+    public function getArticleCommentQuery($user_id = null) {
+        $query = "SELECT
+                comments.comments_id,
+                comments.timestamp,
+                users.user_id,
+                (SELECT COUNT(*) FROM comments WHERE comments.user_id = users.user_id) AS user_comment_count,
+                (SELECT COUNT(*) FROM game_submitinfo WHERE game_submitinfo.user_id = users.user_id) AS user_subm_count,
+                users.userid,
+                users.email,
+                users.join_date,
+                users.karma,
+                users.avatar_ext,
+                article_main.article_id AS game_id,
+                article_text.article_title AS game_name,
+                'article_comment' AS comment_type,
+                null
+            FROM article_user_comments
+            LEFT JOIN comments
+                ON ( article_user_comments.comments_id = comments.comments_id )
+            LEFT JOIN article_main
+                ON ( article_user_comments.article_id = article_main.article_id )
+            LEFT JOIN article_text
+                ON ( article_main.article_id = article_text.article_id )
+            LEFT JOIN users
+                ON ( comments.user_id = users.user_id )";
+
+        if (isset($user_id)) {
+            $query .= " WHERE users.user_id = $user_id";
+        }
+
+        return $query;
+    }
 
     /**
      * Get the SQL query to create a temporary table to hold the comments
@@ -174,6 +214,8 @@ class CommentsDAO {
             $where_clause = "WHERE temp.comment_type = 'game_review_comment'";
         } elseif ($view == "comments_interview_comments") {
             $where_clause = "WHERE temp.comment_type = 'interview_comment'";
+        } elseif ($view == "comments_article_comments") {
+            $where_clause = "WHERE temp.comment_type = 'article_comment'";
         } else {
             $where_clause = "";
         }
@@ -240,11 +282,13 @@ class CommentsDAO {
                 $sql_build_game = $this->getGameCommentQuery($user_id);
                 $sql_build_gamereview = $this->getGameReviewCommentQuery($user_id);
                 $sql_build_interview = $this->getInterviewCommentQuery($user_id);
+                $sql_build_article = $this->getArticleCommentQuery($user_id);
             }
         } else {
             $sql_build_game = $this->getGameCommentQuery();
             $sql_build_gamereview = $this->getGameReviewCommentQuery();
             $sql_build_interview = $this->getInterviewCommentQuery();
+            $sql_build_article = $this->getArticleCommentQuery();
         }
         // Insert game comments
         $stmt = \AL\Db\execute_query(
@@ -267,6 +311,14 @@ class CommentsDAO {
             "CommentsDAO: Insert interview comments into temp table",
             $this->mysqli,
             "INSERT INTO temp $sql_build_interview",
+            null,
+            null
+        );
+        // Insert Article comments
+        $stmt = \AL\Db\execute_query(
+            "CommentsDAO: Insert article comments into temp table",
+            $this->mysqli,
+            "INSERT INTO temp $sql_build_article",
             null,
             null
         );
@@ -428,6 +480,8 @@ class CommentsDAO {
                 create_log_entry('Reviews', $comments_id, 'Comment', $comments_id, 'Update', $_SESSION['user_id']);
             } elseif ($comment_type ==  "interview_comment") {
                 create_log_entry('Interviews', $comments_id, 'Comment', $comments_id, 'Update', $_SESSION['user_id']);
+            } elseif ($comment_type ==  "article_comment") {
+                create_log_entry('Articles', $comments_id, 'Comment', $comments_id, 'Update', $_SESSION['user_id']);
             }
         }
 
