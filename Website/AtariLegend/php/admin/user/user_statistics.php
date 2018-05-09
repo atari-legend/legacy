@@ -22,9 +22,9 @@
 include("../../config/common.php");
 include("../../config/admin.php");
 
-// START - NUMBER OF USERCOMMENTS
-$sql = $mysqli->query("SELECT * FROM comments
-                    LEFT JOIN game_user_comments ON (comments.comments_id = game_user_comments.comment_id)
+// START - NUMBER OF GAME COMMENTS
+$sql = $mysqli->query("SELECT * FROM game_user_comments
+                    LEFT JOIN comments ON (comments.comments_id = game_user_comments.comment_id)
                     LEFT JOIN game ON ( game_user_comments.game_id = game.game_id )
                     WHERE comments.user_id = $user_id_selected");
 
@@ -39,7 +39,74 @@ while ($query = $sql->fetch_array(MYSQLI_BOTH)) {
     ));
 }
 
-$smarty->assign('nr_comments', $nr_comments);
+$smarty->assign('nr_game_comments', $nr_comments);
+
+mysqli_free_result($sql);
+
+// START - NUMBER OF REVIEW COMMENTS
+$sql = $mysqli->query("SELECT * FROM review_user_comments
+                    LEFT JOIN comments ON (comments.comments_id = review_user_comments.comment_id)
+                    LEFT JOIN review_game ON ( review_user_comments.review_id = review_game.review_id )
+                    LEFT JOIN game ON ( review_game.game_id = game.game_id )
+                    WHERE comments.user_id = $user_id_selected") or die("error in game review stats query");
+
+$nr_comments = 0;
+
+while ($query = $sql->fetch_array(MYSQLI_BOTH)) {
+    $nr_comments++;
+
+    $smarty->append('review_users_comments', array(
+        'game_id' => $query['game_id'],
+        'review_id' => $query['review_id'],
+        'game_name' => $query['game_name']
+    ));
+}
+
+$smarty->assign('nr_review_comments', $nr_comments);
+
+mysqli_free_result($sql);
+
+// START - NUMBER OF INTERVIEW COMMENTS
+$sql = $mysqli->query("SELECT * FROM interview_user_comments
+                    LEFT JOIN comments ON (comments.comments_id = interview_user_comments.comment_id)
+                    LEFT JOIN interview_main ON ( interview_main.interview_id = interview_user_comments.interview_id )
+                    LEFT JOIN individuals ON ( individuals.ind_id = interview_main.ind_id )
+                    WHERE comments.user_id = $user_id_selected") or die("error in interview stats query");
+
+$nr_comments = 0;
+
+while ($query = $sql->fetch_array(MYSQLI_BOTH)) {
+    $nr_comments++;
+
+    $smarty->append('interview_users_comments', array(
+        'interview_id' => $query['interview_id'],
+        'ind_name' => $query['ind_name']
+    ));
+}
+
+$smarty->assign('nr_interview_comments', $nr_comments);
+
+mysqli_free_result($sql);
+
+// START - NUMBER OF article COMMENTS
+$sql = $mysqli->query("SELECT * FROM article_user_comments
+                    LEFT JOIN comments ON (comments.comments_id = article_user_comments.comments_id)
+                    LEFT JOIN article_main ON ( article_main.article_id = article_user_comments.article_id )
+                    LEFT JOIN article_text ON ( article_main.article_id = article_text.article_id )
+                    WHERE comments.user_id = $user_id_selected") or die("error in article stats query");
+
+$nr_comments = 0;
+
+while ($query = $sql->fetch_array(MYSQLI_BOTH)) {
+    $nr_comments++;
+
+    $smarty->append('article_users_comments', array(
+        'article_id' => $query['article_id'],
+        'article_title' => $query['article_title']
+    ));
+}
+
+$smarty->assign('nr_article_comments', $nr_comments);
 
 mysqli_free_result($sql);
 
