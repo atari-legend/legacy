@@ -109,7 +109,7 @@ $log_on_border: 0;
     $menu_input_font: 15pt;
     $menu_top_button_color: #182727;
     $menu_top_button_height: 57px;
-    $menu_top_button_width: 183px;
+    $menu_top_button_width: 164px;
     $menu_top_button_font: 20px;
     $menu_top_button_border_bottom: 3px solid #008b8b;
     $menu_top_button_border_left: 1px solid #008b8b;
@@ -515,7 +515,7 @@ html {
 }
 
 //* for the lower resolutions, we don't have the menu bar below the top */
-@media screen and (max-width: 1279px) {
+@media screen and (max-width: 1410px) {
     #main_nav {
         display: none;
     }
@@ -543,7 +543,7 @@ html {
 }
 
 //* for the high resolutions, we only have the skin switch in the side menu */
-@media screen and (min-width: 1280px) {
+@media screen and (min-width: 1410px) {
     .side_navigation {
         display: none;
     }
@@ -570,19 +570,38 @@ html {
     #sidebar {
         background-color: rgba(0, 0, 0, 0);
     }
-    header nav {
-        position: absolute;
-        margin-top: $menu_top;
+    @if $skin_name != legacy {
+        header nav {
+            position: absolute;
+            margin-top: $menu_top;
+        }
     }
+    @if $skin_name == picasso {
+        #main {
+            position: relative;
+            margin-top: 30px;
+        }
+    }
+}
+
+@media screen and (min-width: 1280px) and (max-width: 1410px){
+    @if $skin_name == legacy {
+        #main {
+            position: relative;
+            margin-top: -20px;
+        }
+    }
+}
+
+@media screen and (min-width: 1411px) {
     @if $skin_name == legacy {
         #main {
             position: relative;
             margin-top: 60px;
         }
-    } @else if $skin_name == picasso {
-        #main {
-            position: relative;
-            margin-top: 30px;
+        header nav {
+            position: absolute;
+            margin-top: $menu_top;
         }
     }
 }
