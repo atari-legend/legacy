@@ -428,18 +428,30 @@ function browseDeveloper(str) {
                     <div id="gd_release_year">
                         <form action="../games/db_games_detail.php" method="post" name="year" id="year">
                             <fieldset class="secondary_fieldset">
-                                <legend class="primary_legend">Releases</legend>
+                                <legend class="primary_legend">Releases <small>({count($game_releases)})</small></legend>
                                     {foreach from=$game_releases item=release}
                                         <div class="links_mod_checkbox">
                                             <input type="checkbox" id="release-{$release->getId()}" name="game_release_id[]" value="{$release->getId()}">
-                                            <label for="release-{$release->getId()}"></label>&nbsp;{$release->getDate()|date_format:"%Y"} {if $release->getName() != null}<b>({$release->getName()})</b>{/if}
+                                            <label for="release-{$release->getId()}"></label>&nbsp;
+                                            {if $release->getDate() != null}
+                                                {$release->getDate()|date_format:"%Y"}
+                                            {else}
+                                                (release with no date set)
+                                            {/if}
+                                            {if $release->getName() != null}<b>({$release->getName()})</b>{/if}
                                         </div>
-                                        <br>
-                                        <br>
                                     {/foreach}
-                                    <img src="../../../themes/templates/1/includes/img/arrow_ltr.gif" alt="" width="38" height="22" style="display:inline;">
-                                    <input type="button" name="valider" value="Delete" onclick="delete_release()" class="secondary_button" style="display:inline;">
-                                    <br/><br/>
+                                    {if count($game_releases) gt 1}
+                                        <img src="../../../themes/templates/1/includes/img/arrow_ltr.gif" alt="" width="38" height="22" style="display:inline;">
+                                        <input type="button" name="valider" value="Delete" onclick="delete_release()" class="secondary_button" style="display:inline;">
+                                        <br/><br/>
+                                    {elseif count($game_releases) eq 1}
+                                        <small>This game has a single release which cannot be deleted. To delete this release, create a new one first. All games must have at least one release.</small>
+                                        <br><br>
+                                    {else}
+                                        <small>This game has no releases yet</small>
+                                        <br><br>
+                                    {/if}
                                     {html_select_date start_year=1984 display_days=0 display_months=0 class="standard_select select_small"}
                                     <b>Release Year</b>
                                     <br>
