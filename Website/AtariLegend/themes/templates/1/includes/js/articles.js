@@ -5,7 +5,47 @@
  */
 
 window.onload = function () {
-    $('.article_main_text').dotdotdot({ // This is the script to truncate the preview of the reviews
+    $('.interview_main_text').dotdotdot({ // This is the script to truncate the preview of the reviews
+        //  configuration goes here
+
+        /*  The text to add as ellipsis. */
+        ellipsis: '... ',
+
+        /*  How to cut off the text/html: 'word'/'letter'/'children' */
+        wrap: 'word',
+
+        /*  Wrap-option fallback to 'letter' for long words */
+        fallbackToLetter: false,
+
+        /*  jQuery-selector for the element to keep and put after the ellipsis. */
+        after: null,
+
+        /*  Whether to update the ellipsis: true/'window' */
+        watch: window,
+
+        /*  Optionally set a max-height, can be a number or function.
+            If null, the height will be measured. */
+        height: null,
+
+        /*  Deviation for the height-option. */
+        tolerance: 0,
+
+        /*  Callback function that is fired after the ellipsis is added,
+            receives two parameters: isTruncated(boolean), orgContent(string). */
+        callback: function (isTruncated, orgContent) {},
+
+        lastCharacter: {
+
+            /*  Remove these characters from the end of the truncated text. */
+            remove: [ ' ', ',', ';', '.', '!', '?' ],
+
+            /*  Don't add an ellipsis if this array contains
+                the last character of the truncated text. */
+            noEllipsis: []
+        }
+    });
+
+    $('.standard_list_entry_news_text').dotdotdot({ // This is the script to truncate the preview of the reviews
         //  configuration goes here
 
         /*  The text to add as ellipsis. */
@@ -229,4 +269,126 @@ window.myFunction = function () {
     $('input:file[id=file_upload2]').change(function () {
         document.getElementById('file_upload_game_file').value = $(this).val();
     });
+}
+
+// *********************************************************************//
+// all code for the comments adding on the detail page of the main site //
+// *********************************************************************//
+window.CommentEditable = function (commentId, userId) {
+    var string = 'latest_comment_edit';
+    var editableComment = string.concat(commentId);
+
+    var string4 = 'comment_edit_icon';
+    var editIcon = string4.concat(commentId);
+
+    var string2 = 'comment_save_icon';
+    var saveIcon = string2.concat(commentId);
+
+    var string3 = 'comment_input';
+    var commentInput = string3.concat(commentId);
+
+    var input = document.getElementById(commentInput);
+    input.style.display = 'inline';
+
+    var save = document.getElementById(saveIcon);
+    save.style.display = 'inline';
+
+    var edit = document.getElementById(editIcon);
+    edit.style.display = 'none';
+
+    var output = document.getElementById(editableComment);
+    output.style.display = 'none';
+}
+
+window.SaveEditable = function (commentId, userId, articleId) {
+    var string = 'comment_input';
+    var commentData = string.concat(commentId);
+
+    var comment = document.getElementById(commentData).value
+    comment = comment.replace(/\n\r?/g, '<br />');
+
+    var url = '../../main/articles/db_articles_detail.php?action=save_comment&comment_id=' + commentId + '&data=' + comment + '&article_id=' + articleId;
+    var xmlhttp;
+    var ActiveXObject;
+
+    if (commentId === '') {
+        document.getElementById('latest_comments_all').innerHTML = '';
+    } else {
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject('Microsoft.XMLHTTP');
+        }
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+                document.getElementById('latest_comments_all').innerHTML = xmlhttp.responseText;
+            }
+        }
+        xmlhttp.open('GET', url, true);
+        xmlhttp.send();
+    }
+}
+
+window.DeleteEditable = function (commentId, userId, articleId) {
+    var xmlhttp;
+    var ActiveXObject;
+
+    var message = 'Are you sure you want to delete this comment?';
+    var returnValue = confirm(message);
+
+    if (returnValue !== '0') {
+        if (commentId === '') {
+            document.getElementById('latest_comments_all').innerHTML = '';
+        } else {
+            if (window.XMLHttpRequest) {
+                // code for IE7+, Firefox, Chrome, Opera, Safari
+                xmlhttp = new XMLHttpRequest();
+            } else {
+                // code for IE6, IE5
+                xmlhttp = new ActiveXObject('Microsoft.XMLHTTP');
+            }
+            xmlhttp.onreadystatechange = function () {
+                if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+                    document.getElementById('latest_comments_all').innerHTML = xmlhttp.responseText;
+                }
+            }
+            xmlhttp.open('GET', '../../main/articles/db_articles_detail.php?action=delete_comment&comment_id=' + commentId + '&article_id=' + articleId, true);
+            xmlhttp.send();
+        }
+    }
+}
+
+window.AddComment = function (userId, articleId) {
+    var xmlhttp;
+    var ActiveXObject;
+
+    var commentData = 'comment_add';
+
+    var comment = document.getElementById(commentData).value
+    comment = comment.replace(/\n\r?/g, '<br />');
+
+    var url = '../../main/articles/db_articles_detail.php?action=add_comment&user_id=' + userId + '&data=' + comment + '&article_id=' + articleId;
+
+    document.getElementById('comment_add').value = '';
+
+    if (articleId === '') {
+        document.getElementById('latest_comments_all').innerHTML = '';
+    } else {
+        if (window.XMLHttpRequest) {
+            // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {
+            // code for IE6, IE5
+            xmlhttp = new ActiveXObject('Microsoft.XMLHTTP');
+        }
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+                document.getElementById('latest_comments_all').innerHTML = xmlhttp.responseText;
+            }
+        }
+        xmlhttp.open('GET', url, true);
+        xmlhttp.send();
+    }
 }

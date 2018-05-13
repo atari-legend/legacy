@@ -9,6 +9,7 @@ require_once __DIR__."/../../config/common.php";
 require_once __DIR__."/../../common/DAO/NewsDAO.php";
 require_once __DIR__."/../../common/DAO/GameReviewDAO.php";
 require_once __DIR__."/../../common/DAO/InterviewDAO.php";
+require_once __DIR__."/../../common/DAO/ArticleDAO.php";
 
 $items = [];
 
@@ -21,7 +22,7 @@ foreach ($news as $article) {
         "link" => REQUEST_SITEURL."/news/news.php",
         "id" => REQUEST_SITEURL."/news/news.php?id=".$article->getId(),
         "updated" => $article->getDate(),
-        "author" => $article->getUser(),
+        "author" => $article->getUserName(),
         "content" => $article->getHtmlText()
     );
 }
@@ -51,6 +52,20 @@ foreach ($interviews as $interview) {
         "updated" => $interview->getDate(),
         "author" => $interview->getUser(),
         "content" => $interview->getIntroHtml()
+    );
+}
+
+// Get latest articles
+$articleDao = new AL\Common\DAO\ArticleDAO($mysqli);
+$articles = $articleDao->getLatestArticles();
+foreach ($articles as $article) {
+    $items[] = array(
+        "title" => "Article: ".$article->getTitle(),
+        "link" => REQUEST_SITEURL."/articles/articles_detail.php?selected_article_id=".$article->getId(),
+        "id" => REQUEST_SITEURL."/articles/articles_detail.php?selected_article_id=".$article->getId(),
+        "updated" => $article->getDate(),
+        "author" => $article->getUser(),
+        "content" => $article->getIntroHtml()
     );
 }
 
