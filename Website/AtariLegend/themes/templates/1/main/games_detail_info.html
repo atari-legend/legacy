@@ -127,26 +127,32 @@
             {/if}
             {if isset($releases)}
                 {foreach from=$releases item=$release name=release}
-                <tr>
-                    <td class="w-30">
-                        {if $smarty.foreach.release.index == 0}
-                            <span class="games_main_detail_info_right">Releases</span>
-                        {/if}
-                    </td>
-                    <td class="w-5">
-                        <span class="games_main_detail_info_left text-center">-</span>
-                    </td>
-                    <td class="w-60">
-                        <span class="games_main_detail_info_left">
-                            <a href="games_main_list.php?year={$release->getDate()|date_format:"%Y"}&amp;action=search" class="standard_tile_link">
-                                {$release->getDate()|date_format:"%Y"}
-                            </a>
-                            {if $release->getName()}
-                                <small class="standard_tile_subtext">as "<em>{$release->getName()}</em>"</small>
+                {if $release->getDate() != null or $release->getName() != null}
+                    <tr>
+                        <td class="w-30">
+                            {if $smarty.foreach.release.index == 0}
+                                <span class="games_main_detail_info_right">Releases</span>
                             {/if}
-                        </span>
-                    </td>
-                </tr>
+                        </td>
+                        <td class="w-5">
+                            <span class="games_main_detail_info_left text-center">-</span>
+                        </td>
+                        <td class="w-60">
+                            <span class="games_main_detail_info_left">
+                                {if $release->getDate() != null}
+                                    <a href="games_main_list.php?year={$release->getDate()|date_format:"%Y"}&amp;action=search" class="standard_tile_link">
+                                        {$release->getDate()|date_format:"%Y"}
+                                    </a>
+                                {else}
+                                    (no date)
+                                {/if}
+                                {if $release->getName()}
+                                    <small class="standard_tile_subtext">as "<em>{$release->getName()}</em>"</small>
+                                {/if}
+                            </span>
+                        </td>
+                    </tr>
+                {/if}
                 {/foreach}
             {/if}
             {if isset($developer)}
