@@ -1266,6 +1266,23 @@ function create_log_entry($section, $section_id, $subsection, $subsection_id, $a
         if ($subsection == 'Article' or $subsection == 'Screenshots') {
             $subsection_name = $section_name;
         }
+        
+        if ($subsection == 'Comment') {
+            //we need to get the title
+            $query_user_comment = "SELECT article_user_comments.article_id,
+                                          article_user_comments.article_user_comments_id,
+                                          article_text.article_title
+                                          FROM article_user_comments
+                                          LEFT JOIN article_main ON ( article_user_comments.article_id = article_main.article_id )
+                                          LEFT JOIN article_text on ( article_main.article_id = article_text.article_id )
+                                          WHERE article_user_comments.comments_id = '$subsection_id'";
+
+            $result = $mysqli->query($query_user_comment) or die("getting user comments id failed");
+            $query_data      = $result->fetch_array(MYSQLI_BOTH);
+            $section_id      = $query_data['article_id'];
+            $section_name    = $query_data['article_title'];
+            $subsection_name = $section_name;
+        }
     }
 
     //  Everything we do for the ARTICLE TYPE SECTION

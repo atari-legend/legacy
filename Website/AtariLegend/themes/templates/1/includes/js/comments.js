@@ -51,6 +51,19 @@ $(document).ready(function () {
             }
         });
     })
+    $('#comments_article_comments').click(function () {
+        $.ajaxQueue({
+            // The URL for the request
+            url: 'ajax_comments.php',
+            data: 'view=comments_article_comments',
+            type: 'GET',
+            dataType: 'html',
+            // Code to run if the request succeeds;
+            success: function (html) {
+                $('.jsCommentsWrapper').html(html);
+            }
+        });
+    })
     $('.jsCommentsWrapper').on('click', '.jsUserCommentsLink', function () {
         var view = 'users_comments';
         var userId = $(this).data('user-id');
