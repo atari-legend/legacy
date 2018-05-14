@@ -63,7 +63,7 @@ function user_stats()
 
 {block name=main_tile}
 <div class="standard_tile" id="user_details">
-    {if $user_session.permission != '2' OR ( $user_session.permission == '2' AND $user_session.user_id == $users.user_id )} 
+    {if $user_session.permission != '2' OR ( $user_session.permission == '2' AND $user_session.user_id == $users.user_id )}
         <div class="help-tip">
             <p>
                 Tip : To upload an avatar, click on 'select file'. Once the file is selected, just press the upload button.
@@ -94,7 +94,7 @@ function user_stats()
                 {else}
                     In here, you can examine the log-on data of a user and have a look at their activities. 'Statistics' will display what this user has done at AL so far.
                 {/if}
-            {/if}    
+            {/if}
         </div>
         <br><br>
         <fieldset class="secondary_fieldset">
@@ -106,7 +106,7 @@ function user_stats()
                         <div class="user_details_text">User name :</div>
                         <div class="user_details_input"><input type="text" name="user_name"  maxlength="60" value="{$users.user_name}" class="user_details_input_small"></div>
                     </div>
-                    {if $user_session.permission != '2' OR ( $user_session.permission == '2' AND $user_session.user_id == $users.user_id )} 
+                    {if $user_session.permission != '2' OR ( $user_session.permission == '2' AND $user_session.user_id == $users.user_id )}
                         <div class="user_details_row">
                             <div class="user_details_text">User email :</div>
                             <div class="user_details_input"><input type="text" name="user_email"  maxlength="255" value="{$users.user_email}" class="user_details_input_small"></div>
@@ -137,7 +137,7 @@ function user_stats()
                             <div class="user_details_input"><input type="hidden" name="user_permission"  maxlength="60" value="{$users.user_permission}" class="user_details_input_small"></div>
                         </div>
                     {/if}
-                    {if $user_session.permission != '2' OR ( $user_session.permission == '2' AND $user_session.user_id == $users.user_id )} 
+                    {if $user_session.permission != '2' OR ( $user_session.permission == '2' AND $user_session.user_id == $users.user_id )}
                         <div class="user_details_row">
                             <div class="user_details_text">AF Profile :</div>
                             <div class="user_details_input"><input type="text" name="user_af"  maxlength="255" value="{if ($users.user_af != '')}{$users.user_af}{else}http://{/if}" class="user_details_input_small" placeholder="http://"></div>
@@ -173,7 +173,7 @@ function user_stats()
             <table>
             <tr>
                 <td><br><br>
-                {if $user_session.permission != '2' OR ( $user_session.permission == '2' AND $user_session.user_id == $users.user_id )} 
+                {if $user_session.permission != '2' OR ( $user_session.permission == '2' AND $user_session.user_id == $users.user_id )}
                     {if $users.user_pwd ==! ''}
                         <input type="submit" value="Modify" class="secondary_button">
                     {else}
@@ -194,7 +194,7 @@ function user_stats()
                 <div class="user_details_container">
                     <div class="user_details_child" id="child_1_user">
                         {if $users.avatar_ext !=''}
-                            {if $user_session.permission != '2' OR ( $user_session.permission == '2' AND $user_session.user_id == $users.user_id )} 
+                            {if $user_session.permission != '2' OR ( $user_session.permission == '2' AND $user_session.user_id == $users.user_id )}
                                 <form action="../user/db_user.php?action=delete_avatar&amp;user_id_selected={$users.user_id}" method="post" name="delete_avatar">
                                     Delete Image?
                                     <div>
@@ -208,7 +208,7 @@ function user_stats()
                                 </form>
                             {/if}
                         {else}
-                            {if $user_session.permission != '2' OR ( $user_session.permission == '2' AND $user_session.user_id == $users.user_id )} 
+                            {if $user_session.permission != '2' OR ( $user_session.permission == '2' AND $user_session.user_id == $users.user_id )}
                                 <form enctype="multipart/form-data" action="../user/db_user.php?user_id_selected={$users.user_id}" method="post" name="avatar" id="avatar">
                                     Attach image
                                     <br><br>
@@ -249,7 +249,7 @@ function user_stats()
                         </form>
                     {else}
                         {if $user_session.user_id == $users.user_id}
-                            <form action="../user/db_user.php" method="post" name="login_form" onsubmit="formhash(this, this.password);">                        
+                            <form action="../user/db_user.php" method="post" name="login_form" onsubmit="formhash(this, this.password);">
                                 <div class="user_details_row">
                                     <div class="user_details_text">Current password :</div>
                                     <div class="user_details_input"><input name="password" type="password" required  maxlength="255" class="user_details_input_small"></div>
