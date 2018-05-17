@@ -64,13 +64,13 @@ if ($list == "done") {
     $sql_submission = $mysqli->query("SELECT * FROM game_submitinfo
                                         LEFT JOIN game ON (game_submitinfo.game_id = game.game_id)
                                         LEFT JOIN users ON (game_submitinfo.user_id = users.user_id)
-                                        WHERE game_done <> '1'" . $where_condition . "
+                                        WHERE game_done <> '1' OR game_done IS NULL" . $where_condition . "
                                         ORDER BY game_submitinfo.game_submitinfo_id
                                         DESC LIMIT  " . $v_counter . ", 25");
 
     //check the number of comments
     $query_number = $mysqli->query("SELECT * FROM game_submitinfo
-                                             WHERE game_done <> '1'
+                                             WHERE game_done <> '1' OR game_done IS NULL
                                              ORDER BY game_submitinfo_id DESC") or die("Couldn't get the number of game submissions");
 
     $v_rows = $query_number->num_rows;

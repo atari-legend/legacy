@@ -196,11 +196,12 @@
     position: relative;
     top: 10px;
     left: 240px;
-    width: 690px;
-    height: 431px;
+    width: 688px;
+    height: 430px;
     overflow: hidden;
     border: 1px solid #008b8b;
     image-rendering: pixelated;
+    box-sizing: initial;
 }
 
 .games_main_detail_thumbs {
@@ -225,6 +226,7 @@
     height: 97%;
     border: 1px solid #ffffff;
     opacity: .55;
+    box-sizing: initial;
 }
 .games_main_detail_thumbs .p:hover .t {
     opacity: .8;
@@ -377,6 +379,22 @@
     max-height: 500px;
     overflow: auto;
     width: 100%;
+}
+
+#games_main_details_facts_text{
+    @extend .latest_comments_text;
+    a {
+        text-decoration: none;
+        color: #00d3d3;
+    }
+    a:hover {
+        text-decoration: none;
+        color: #fff;
+    }
+    a:visited {
+        text-decoration: none;
+        color: #00d3d3;
+    }
 }
 
 //scrollbar CHROME and SAFARI

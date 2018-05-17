@@ -72,7 +72,7 @@ while ($article = $sql_article->fetch_array(MYSQLI_BOTH)) {
     ));
 }
 
-//Let's get the screenshots for the interview
+//Let's get the screenshots for the article
 $sql_screenshots = $mysqli->query("SELECT * FROM screenshot_article
                                   LEFT JOIN screenshot_main on ( screenshot_article.screenshot_id = screenshot_main.screenshot_id )
                                   WHERE screenshot_article.article_id = '$article_id' ORDER BY screenshot_article.screenshot_id ASC") or die("Database error - getting screenshots & comments");

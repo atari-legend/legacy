@@ -311,9 +311,9 @@ The main game page
                                     <tr>
                                     {$tr = false}
                                 {/if}
-                                    <td style="width:25%;">
+                                    <td style="width:25%;{if $line.screenshot_id != ''}vertical-align:top;{/if}">
                                         {if $line.screenshot_id != ''}
-                                            <div class="games_main_list_title">
+                                            <div class="games_main_list_title" style="vertical-align:top;">
                                                 <a href="games_detail.php?game_id={$line.game_id}">
                                                     <br>
                                                     <img data-original="../../includes/show_image.php?file={$line.screenshot_image}&amp;resize=200,null,null,null" width="200" alt="Click to enlarge!" class="game_main_list_screenshot_img">
@@ -390,7 +390,7 @@ The main game page
                                     <tr>
                                     {$tr = false}
                                 {/if}
-                                    <td style="width:25%;">
+                                    <td style="width:25%;{if $line.screenshot_id != ''}vertical-align:top;{/if}">
                                         {if $line.screenshot_id != ''}
                                             <div class="games_main_list_title">
                                                 <a href="games_detail.php?game_id={$line.game_id}">
@@ -460,7 +460,7 @@ The main game page
                                     <tr>
                                     {$tr = false}
                                 {/if}
-                                    <td style="width:25%;">
+                                    <td style="width:25%;{if $line.screenshot_id != ''}vertical-align:top;{/if}">
                                         {if $line.screenshot_id != ''}
                                             <div class="games_main_list_title">
                                                 <a href="games_detail.php?game_id={$line.game_id}">
@@ -520,7 +520,7 @@ The main game page
                             </tr>
                             {foreach from=$game_search item=line name=game_search}
                                 <tr>
-                                    <td class="w-25">
+                                    <td class="w-25" {if $line.screenshot_id != ''}style="vertical-align:top;"{/if}>
                                         {if $line.screenshot_id != ''}
                                             <div class="games_main_list_title">
                                                 <a href="games_detail.php?game_id={$line.game_id}">

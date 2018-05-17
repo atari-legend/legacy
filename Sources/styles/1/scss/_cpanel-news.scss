@@ -4,6 +4,73 @@
 //*************************************************************/
 //*****************CPanel NEWS section css********************/
 //*************************************************************/
-//*----------------------------------------------------------
-//News Edit Image
-//------------------------------------------------------------ */
+
+//*News approve page *//
+
+.news_post_box{
+    @extend .comments_post_box;
+}
+
+.news_userinfo{
+    @extend .comments_userinfo;
+}
+
+.news_post_detail {
+    @extend .comment_post_detail;
+}
+
+.news_userinfo_phoneview {
+    @extend .comments_userinfo_phoneview;
+}
+
+.news_title {
+    @extend .comments_title;
+}
+
+.news_buttons {
+    @extend .comment_buttons;
+}
+
+.jsNewsEmailButton, .jsNewsDeleteButton, .jsNewsEditButton, .jsNewsApproveButton, .jsNewsPostEditButton, .jsNewsPostDeleteButton {
+    @extend .jsCommentsEmailButton;
+}
+
+.news_button_dropdown {
+    @extend .comments_button_dropdown
+}
+
+.news_line {
+    @extend .comments_line;
+}
+
+.news_title_phoneview {
+    @extend .comments_title_phoneview;
+}
+
+.news_post_info {
+    @extend .comments_post_info;
+}
+
+.news_post_text {
+    position: relative;
+    z-index: 0;
+    a:link {
+        color: #00d3d3;
+        font-weight: normal;
+    }
+    a:visited {
+        color: #00d3d3;
+        font-weight: normal;
+    }
+    a:hover {
+        color: #ffffff;
+        font-weight: normal;
+    }
+    .news_save_button {
+        @extend .comments_save_button;
+    }
+}
+
+.dropdown_show {
+    display: block;
+}

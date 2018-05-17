@@ -670,6 +670,14 @@
         display: none;
     }
     body {
+        background-image: url('../images/top_bg_sides.jpg');
+        background-position: left top;
+        background-repeat: repeat-x;
+    }
+}
+
+@media screen and (min-width: 1411px) {
+    body {
         background-image: url('../images/top_bg_menu.png'), url('../images/top_bg_sides.jpg');
         background-position: left 225px, left top;
         background-repeat: repeat-x, repeat-x;

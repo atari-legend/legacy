@@ -1,0 +1,103 @@
+{*
+/***************************************************************************
+*                                articles_main.html
+*                            ------------------------------
+*   begin                : Wednesday May 2, 2018
+*   copyright            : (C) 2018 Atari Legend
+*   email                : martens_maarten@hotmail.com
+*
+*   Id: articles_main.html,v 0.1 2018/05/02 16:37 STG
+****************************************************************************/
+
+//****************************************************************************************
+// This is the main articles page
+//****************************************************************************************
+*}
+
+{extends file='1/main/main.html'}
+{block name=title}Latest Atari ST articles | Atari Legend{/block}
+
+{block name=additional_scripts}
+<script src="{$template_dir}includes/js/vendor/jquery.dotdotdot-1.8.3.min.js"></script> <!--this script is used for the elipsis (...) effect of the preview of the reviews -->
+<script src="{$template_dir}includes/js/vendor/lightbox-2.9.0.min.js"></script><!--lightbox popup script-->
+<link type="text/css" href="{$style_dir}css/vendor/lightbox-2.9.0.css" hreflang="en" rel="stylesheet">
+<script>
+    lightbox.option({
+        'showImageNumberLabel': false
+    })
+</script>
+<script src="{$template_dir}includes/js/articles.js"></script> <!-- Load all articles scripts -->
+<script src="{$template_dir}includes/js/ui.widgets.js"></script> <!-- load the script for the input/dropdown switcher and top menu -->
+{/block}
+
+{block name=main_body}
+    <div id="main" class="main_container_cpanel">
+        <div class="content_box_cpanel" id="column_left_cpanel">
+            <br>
+            {block name=left_tile}
+                {include file='1/main/tile_screenstar.html'}
+                <br>
+                {include file='1/main/tile_bug_report.html'}
+            {/block}
+        </div>
+        <div class="content_box_cpanel" id="column_center_cpanel">
+            <br>
+            <div class="standard_tile" id="games_main">
+                <a href="../../front/atom.php" title="Atari Legend Atom Feed" class="atom">
+                    <img src="../../themes/templates/1/includes/img/feed-icon.png" alt="Atom feed icon">
+                </a>
+                <h1>ARTICLES</h1>
+                <div class="standard_tile_line"></div>
+                <div class="standard_tile_padding">
+                    <h6 style="text-align:left;">
+                        This is the blog section of Atari Legend. In here we will try to deliver informative and entertaining articles on all that is Atari. There {if $nr_articles == '1'}is{else}are{/if} currently <span style="font-weight:bold;">{$nr_articles}</span>
+                        {if $nr_articles == '1'}article{else}articles{/if} in the AL database!<br><br>
+                    </h6>
+                </div>
+                <div class="standard_tile_line"></div>
+                {if isset($article_list)}
+                    <table class="primary_table_list no_border">
+                    {foreach from=$article_list item=line}
+                        <tr>
+                        <td>
+                            <div class="standard_tile_padding">
+                                <div style="display:inline-block;float:left;padding-right:15px;">
+                                    <a href="../../includes/show_image.php?file={$line.article_img}" data-lightbox="image-1">
+                                        <img src="../../includes/show_image.php?file={$line.article_img}&amp;resize=160,null,null,null" alt="{$line.article_title}" class="user_stats_img_dark" style="max-width:95%;">
+                                    </a>
+                                </div>
+                                <h4 style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis">
+                                    <a href="../articles/articles_detail.php?selected_article_id={$line.article_id}" class="standard_tile_link">{$line.article_title}</a>
+                                </h4>
+                                <h5 style="font-weight: bold;">{$line.article_date} by <a href="../../admin/user/user_detail.php?user_id_selected={$line.user_id}" class="latest_comments_link">{$line.userid}</a> / {$line.article_type}</h5>
+                                <div class="interview_main_text">
+                                    {$line.article_text}
+                                </div>
+                                <h2><a href="../articles/articles_detail.php?selected_article_id={$line.article_id}" class="standard_tile_link">Read more <i class="fa fa-chevron-right" aria-hidden="true"></i></a></h2>
+                                <br>
+                            </div>
+                        </td>
+                        </tr>
+                    {/foreach}
+                    </table>
+                {/if}
+                <div class="standard_tile_text_center">
+                    {if $links.linkback != ''}
+                        <a href ="../interviews/interviews_main.php{$links.linkback}" class="standard_tile_link" style="float:left;margin-left:5px;margin-top:10px;">Previous page</a>
+                    {/if}
+                    {if $links.linknext != ''}
+                        <a href="../interviews/interviews_main.php{$links.linknext}" class="standard_tile_link" style="float:right;margin-right:5px;margin-top:10px;">Next page</a>
+                    {/if}
+                </div>
+            </div>
+        </div>
+        <div class="content_box_cpanel" id="column_right_cpanel">
+            <br>
+            {block name=right_tile}
+                {include file='1/main/tile_class_of_al.html'}
+                <br>
+                {include file='1/main/hotlinks_tile.html'}
+            {/block}
+        </div>
+    </div>
+{/block}

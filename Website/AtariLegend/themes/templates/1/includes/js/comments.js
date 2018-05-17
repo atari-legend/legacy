@@ -51,6 +51,19 @@ $(document).ready(function () {
             }
         });
     })
+    $('#comments_article_comments').click(function () {
+        $.ajaxQueue({
+            // The URL for the request
+            url: 'ajax_comments.php',
+            data: 'view=comments_article_comments',
+            type: 'GET',
+            dataType: 'html',
+            // Code to run if the request succeeds;
+            success: function (html) {
+                $('.jsCommentsWrapper').html(html);
+            }
+        });
+    })
     $('.jsCommentsWrapper').on('click', '.jsUserCommentsLink', function () {
         var view = 'users_comments';
         var userId = $(this).data('user-id');
@@ -80,7 +93,7 @@ $(document).ready(function () {
             // Code to run if the request succeeds;
             success: function (html) {
                 $('#' + jsCommentTextBoxId).html(html);
-                listenSaveButton();
+                // listenSaveButton();
             }
         });
     })
@@ -98,33 +111,32 @@ $(document).ready(function () {
             // Code to run if the request succeeds;
             success: function (html) {
                 $('#' + jsCommentTextBoxId).html(html);
-                listenSaveButton();
+                // listenSaveButton();
             }
         });
     })
     // Edit Save Comment Function
-    function listenSaveButton () {
-        $('.jsCommentsWrapper').on('click', '.jsCommentsEditSaveButton', function () {
-            var commentsId = $(this).data('comments-id');
-            var commentType = $(this).data('comment-type');
-            var jsCommentTextBoxId = 'jsCommentTextBox'.concat(commentsId);
-            var commentText = $('#' + jsCommentTextBoxId + ' > #jsCommentText').val();
+    $('.jsCommentsWrapper').on('click', '.jsCommentsEditSaveButton', function () {
+        var commentsId = $(this).data('comments-id');
+        var commentType = $(this).data('comment-type');
+        var jsCommentTextBoxId = 'jsCommentTextBox'.concat(commentsId);
+        var commentText = $('#' + jsCommentTextBoxId + ' > #jsCommentText').val();
+        commentText = commentText.replace(/\n\r?/g, '<br />');
 
-            $.ajaxQueue({
-                // The URL for the request
-                url: 'ajax_comments_edit.php',
-                data: 'action=save_comment_text&comments_id=' + commentsId + '&comment_text=' + commentText + '&comment_type=' + commentType,
-                type: 'POST',
-                dataType: 'html',
-                // Code to run if the request succeeds;
-                success: function (html) {
-                    var returnHtml = html.split('[BRK]');
-                    $('#' + jsCommentTextBoxId).html(returnHtml[0]);
-                    window.OSDMessageDisplay(returnHtml[1]);
-                }
-            });
-        })
-    }
+        $.ajaxQueue({
+            // The URL for the request
+            url: 'ajax_comments_edit.php',
+            data: 'action=save_comment_text&comments_id=' + commentsId + '&comment_text=' + commentText + '&comment_type=' + commentType,
+            type: 'POST',
+            dataType: 'html',
+            // Code to run if the request succeeds;
+            success: function (html) {
+                var returnHtml = html.split('[BRK]');
+                $('#' + jsCommentTextBoxId).html(returnHtml[0]);
+                window.OSDMessageDisplay(returnHtml[1]);
+            }
+        });
+    })
     // Delete Comment Function
     $('.jsCommentsWrapper').on('click', '.jsCommentsDeleteButton', function () {
         var commentsId = $(this).data('comments-id');
@@ -145,7 +157,11 @@ $(document).ready(function () {
                         dataType: 'html',
                         // Code to run if the request succeeds;
                         success: function (html) {
-                            $('#jsCommentId' + commentsId).html('');
+                            var begin = html.startsWith('You');
+                            if (begin) {
+                            } else {
+                                $('#jsCommentId' + commentsId).html('');
+                            }
                             window.OSDMessageDisplay(html);
                         }
                     });
@@ -176,7 +192,11 @@ $(document).ready(function () {
                         dataType: 'html',
                         // Code to run if the request succeeds;
                         success: function (html) {
-                            $('#jsCommentId' + commentsId).html('');
+                            var begin = html.startsWith('You');
+                            if (begin) {
+                            } else {
+                                $('#jsCommentId' + commentsId).html('');
+                            }
                             window.OSDMessageDisplay(html);
                         }
                     });

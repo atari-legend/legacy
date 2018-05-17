@@ -32,6 +32,16 @@ while ($newsimages = $sql_newsimage->fetch_array(MYSQLI_BOTH)) {
     ));
 }
 
+//Get the authors for the news post
+$sql_author = $mysqli->query("SELECT user_id,userid FROM users ORDER BY userid ASC") or die("Database error - getting members name");
+
+while ($authors = $sql_author->fetch_array(MYSQLI_BOTH)) {
+    $smarty->append('authors', array(
+        'user_id' => $authors['user_id'],
+        'user_name' => $authors['userid']
+    ));
+}
+
 $smarty->assign("user_id", $_SESSION['user_id']);
 
 //Send all smarty variables to the templates
