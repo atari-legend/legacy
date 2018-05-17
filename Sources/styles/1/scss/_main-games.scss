@@ -201,6 +201,7 @@
     overflow: hidden;
     border: 1px solid #008b8b;
     image-rendering: pixelated;
+    box-sizing: initial;
 }
 
 .games_main_detail_thumbs {
@@ -225,6 +226,7 @@
     height: 97%;
     border: 1px solid #ffffff;
     opacity: .55;
+    box-sizing: initial;
 }
 .games_main_detail_thumbs .p:hover .t {
     opacity: .8;
