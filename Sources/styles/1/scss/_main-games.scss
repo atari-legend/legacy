@@ -379,6 +379,22 @@
     width: 100%;
 }
 
+#games_main_details_facts_text{
+    @extend .latest_comments_text;
+    a {
+        text-decoration: none;
+        color: #00d3d3;
+    }
+    a:hover {
+        text-decoration: none;
+        color: #fff;
+    }
+    a:visited {
+        text-decoration: none;
+        color: #00d3d3;
+    }
+}
+
 //scrollbar CHROME and SAFARI
 .games_main_detail_comments_container::-webkit-scrollbar {
     width: 1em;
