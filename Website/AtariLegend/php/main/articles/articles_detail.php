@@ -146,7 +146,8 @@ while ($query_comment = $sql_comment->fetch_array(MYSQLI_BOTH)) {
 $sql_articles_author = $mysqli->query("SELECT * FROM article_main
                            LEFT JOIN article_text ON (article_main.article_id = article_text.article_id)
                            LEFT JOIN users ON (article_main.user_id = users.user_id)
-                           WHERE article_main.user_id = '$article[user_id]'") or die("problem with query");
+                           WHERE article_main.user_id = '$article[user_id]'
+                           AND article_main.article_id <> '$selected_article_id'") or die("problem with query");
 
 $count = 0;
 

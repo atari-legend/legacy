@@ -69,21 +69,21 @@
                 <div class="games_main_detail_comments_container">
                     <table class="primary_table_list table_md no_border">
                         {if isset($articles_author)}
-                        <tr>
-                            <td colspan="2">
-                                <div class="standard_list_entry_news_text text-center">
-                                    {$article.article_author} has written {$nr_articles_author} additional articles :
-                                </div>
-                            </td>
-                        </tr>
-                        {foreach from=$articles_author item=line name=article_author}
                             <tr>
-                                <td>
-                                    <span style="overflow: hidden;text-overflow: ellipsis"><a href="../articles/articles_detail.php?selected_article_id={$line.article_id}" class="standard_tile_link" style="margin-left:10px;">{$line.article_title}</a></span>
-                                    <br><span class="standard_tile_subtext" style="margin-left:15px;"><a href="../articles/articles_detail.php?selected_article_id={$line.article_id}" style="margin-left:10px;">read more</a></span>
+                                <td colspan="2">
+                                    <div class="standard_list_entry_news_text text-center">
+                                        {$article.article_author} has written {$nr_articles_author} additional articles :
+                                    </div>
                                 </td>
                             </tr>
-                        {/foreach}
+                            {foreach from=$articles_author item=line name=article_author}
+                                <tr>
+                                    <td>
+                                        <span style="overflow: hidden;text-overflow: ellipsis"><a href="../articles/articles_detail.php?selected_article_id={$line.article_id}" class="standard_tile_link" style="margin-left:10px;">{$line.article_title}</a></span>
+                                        <br><span class="standard_tile_subtext" style="margin-left:15px;"><a href="../articles/articles_detail.php?selected_article_id={$line.article_id}" style="margin-left:10px;">read more</a></span>
+                                    </td>
+                                </tr>
+                            {/foreach}
                         {else}
                             <tr>
                                 <td class="w-100">
