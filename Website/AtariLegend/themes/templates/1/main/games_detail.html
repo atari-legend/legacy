@@ -187,14 +187,35 @@
             var string = "profile_off";
             var profile_off = string.concat(pub_id);
 
-            var profile = document.getElementById(show_profile);
-            profile.style.display='table-row';
+            var allDivTr = document.getElementById("main").getElementsByTagName("TR");
+            for(var i = 0; i < allDivTr.length; i++){
+                var tr = allDivTr[i];
+                var trId = allDivTr[i].getAttribute('id');
+                if ( trId == show_profile ){
+                    tr.style.display='table-row';
+                }
+            }
 
-            var profile_icon_on = document.getElementById(profile_on);
-            profile_icon_on.style.display='none';
+            //var profile = document.getElementById(show_profile);
+            //profile.style.display='table-row';
 
-            var profile_icon_off = document.getElementById(profile_off);
-            profile_icon_off.style.display='inline';
+            var allDivI = document.getElementById("main").getElementsByTagName("I");
+            for(var i = 0; i < allDivI.length; i++){
+                var I = allDivI[i];
+                var iId = allDivI[i].getAttribute('id');
+                if ( iId == profile_on ){
+                    I.style.display='none';
+                }
+                if ( iId == profile_off ){
+                    I.style.display='inline';
+                }
+            }
+
+            //var profile_icon_on = document.getElementById(profile_on);
+            //profile_icon_on.style.display='none';
+
+            //var profile_icon_off = document.getElementById(profile_off);
+            //profile_icon_off.style.display='inline';
         }
 
         function Hide_profile(pub_id) {
@@ -207,14 +228,35 @@
             var string = "profile_off";
             var profile_off = string.concat(pub_id);
 
-            var profile = document.getElementById(show_profile);
-            profile.style.display='none';
+            var allDivTr = document.getElementById("main").getElementsByTagName("TR");
+            for(var i = 0; i < allDivTr.length; i++){
+                var tr = allDivTr[i];
+                var trId = allDivTr[i].getAttribute('id');
+                if ( trId == show_profile ){
+                    tr.style.display='none';
+                }
+            }
 
-            var profile_icon_on = document.getElementById(profile_on);
-            profile_icon_on.style.display='inline';
+            //var profile = document.getElementById(show_profile);
+            //profile.style.display='none';
 
-            var profile_icon_off = document.getElementById(profile_off);
-            profile_icon_off.style.display='none';
+            var allDivI = document.getElementById("main").getElementsByTagName("I");
+            for(var i = 0; i < allDivI.length; i++){
+                var I = allDivI[i];
+                var iId = allDivI[i].getAttribute('id');
+                if ( iId == profile_on ){
+                    I.style.display='inline';
+                }
+                if ( iId == profile_off ){
+                    I.style.display='none';
+                }
+            }
+
+            //var profile_icon_on = document.getElementById(profile_on);
+            //profile_icon_on.style.display='inline';
+
+            //var profile_icon_off = document.getElementById(profile_off);
+            //profile_icon_off.style.display='none';
         }
 
         function Show_profile_ind(ind_id) {
@@ -227,14 +269,35 @@
             var string = "profile_off_ind";
             var profile_off_ind = string.concat(ind_id);
 
-            var profile_ind = document.getElementById(show_profile_ind);
-            profile_ind.style.display='table-row';
+            var allDivTr = document.getElementById("main").getElementsByTagName("TR");
+            for(var i = 0; i < allDivTr.length; i++){
+                var tr = allDivTr[i];
+                var trId = allDivTr[i].getAttribute('id');
+                if ( trId == show_profile_ind ){
+                    tr.style.display='table-row';
+                }
+            }
 
-            var profile_icon_on_ind = document.getElementById(profile_on_ind);
-            profile_icon_on_ind.style.display='none';
+            //var profile_ind = document.getElementById(show_profile_ind);
+            //profile_ind.style.display='table-row';
 
-            var profile_icon_off_ind = document.getElementById(profile_off_ind);
-            profile_icon_off_ind.style.display='inline';
+            var allDivI = document.getElementById("main").getElementsByTagName("I");
+            for(var i = 0; i < allDivI.length; i++){
+                var I = allDivI[i];
+                var iId = allDivI[i].getAttribute('id');
+                if ( iId == profile_on_ind ){
+                    I.style.display='none';
+                }
+                if ( iId == profile_off_ind ){
+                    I.style.display='inline';
+                }
+            }
+
+            //var profile_icon_on_ind = document.getElementById(profile_on_ind);
+            //profile_icon_on_ind.style.display='none';
+
+            //var profile_icon_off_ind = document.getElementById(profile_off_ind);
+            //profile_icon_off_ind.style.display='inline';
         }
 
         function Hide_profile_ind(ind_id) {
@@ -247,14 +310,35 @@
             var string = "profile_off_ind";
             var profile_off_ind = string.concat(ind_id);
 
-            var profile_ind = document.getElementById(show_profile_ind);
-            profile_ind.style.display='none';
+            var allDivTr = document.getElementById("main").getElementsByTagName("TR");
+            for(var i = 0; i < allDivTr.length; i++){
+                var tr = allDivTr[i];
+                var trId = allDivTr[i].getAttribute('id');
+                if ( trId == show_profile_ind ){
+                    tr.style.display='none';
+                }
+            }
 
-            var profile_icon_on_ind = document.getElementById(profile_on_ind);
-            profile_icon_on_ind.style.display='inline';
+            //var profile_ind = document.getElementById(show_profile_ind);
+            //profile_ind.style.display='none';
 
-            var profile_icon_off_ind = document.getElementById(profile_off_ind);
-            profile_icon_off_ind.style.display='none';
+            var allDivI = document.getElementById("main").getElementsByTagName("I");
+            for(var i = 0; i < allDivI.length; i++){
+                var I = allDivI[i];
+                var iId = allDivI[i].getAttribute('id');
+                if ( iId == profile_on_ind ){
+                    I.style.display='inline';
+                }
+                if ( iId == profile_off_ind ){
+                    I.style.display='none';
+                }
+            }
+
+            //var profile_icon_on_ind = document.getElementById(profile_on_ind);
+            //profile_icon_on_ind.style.display='inline';
+
+            //var profile_icon_off_ind = document.getElementById(profile_off_ind);
+            //profile_icon_off_ind.style.display='none';
         }
     </script>
 

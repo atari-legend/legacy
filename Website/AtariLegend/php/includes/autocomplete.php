@@ -26,6 +26,7 @@ $text = $mysqli->real_escape_string($_GET['term']);
 $json = array();
 
 $term = $_GET['term'];
+$term = $mysqli->real_escape_string($term);
 $upperString = strtoupper($term);
 $extraVar = $_GET['extraParams'];
 
