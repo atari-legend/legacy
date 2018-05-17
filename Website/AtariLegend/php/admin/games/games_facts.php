@@ -58,7 +58,14 @@ while ($sql_games_facts = $query_games_facts->fetch_array(MYSQLI_BOTH)) {
         'game_fact' => $fact_text
     ));
     
-    $smarty->assign('game_name', $sql_games_facts['game_name']);
+    if (isset($game_name)){     
+    }else{
+        $smarty->assign('game_name', $sql_games_facts['game_name']);
+    }
+}
+
+if (isset($game_name)){    
+    $smarty->assign('game_name', $game_name);
 }
 
 $smarty->assign('game_id', $game_id);
