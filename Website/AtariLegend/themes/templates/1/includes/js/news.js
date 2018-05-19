@@ -388,7 +388,7 @@ $(document).ready(function () {
         }
 
         var action = $('#action_news_search').html();
-        if (action === 'news_search') {
+        if (action === 'news_search' || action === 'news_approve') {
         } else {
             $.ajaxQueue({
                 // The URL for the request

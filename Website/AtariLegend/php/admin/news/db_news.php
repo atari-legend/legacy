@@ -76,6 +76,7 @@ if (isset($action) and $action == "add_news") {
         $_SESSION['edit_message'] = "Please fill in the necessary fields";
     } else {
         $descr = $mysqli->real_escape_string($descr);
+        $headline = $mysqli->real_escape_string($headline);
 
         // Insert the description and the image into the news_image table.
         $sdbquery = $mysqli->query("INSERT INTO news_submission

@@ -51,6 +51,7 @@
         <input type="button" class="primary_button" accesskey= "i" name="addbbcode2" value="I" onclick="bbstyle(2,'textfield{$news_id}')">
         <input type="button" class="primary_button" accesskey="w" name="addbbcode6" value="URL" onClick="bbstyle(6,'textfield{$news_id}')">
         <input type="button" class="primary_button" accesskey="x" name="addbbcode8" value="@" onClick="bbstyle(8,'textfield{$news_id}')">
+        <input type="button" class="primary_button" accesskey="frontpage" name="addbbcode14" value="Frontpage" onClick="bbstyle(14,'textfield{$news_id}')">
         <br>
         <textarea class="primary_textarea" rows="4" name="textfield{$news_id}" id="jsNewsText" ONSELECT="javascript:storeCaret(this);" ONCLICK="javascript:storeCaret(this);" ONKEYUP="javascript:storeCaret(this);" ONCHANGE="javascript:storeCaret(this);">{$line->getText()}</textarea>
     {/foreach}
