@@ -369,6 +369,7 @@ html {
     #demos_side,
     #users_side,
     #admin_side,
+    #home_side_high,
     .side_navigation * a {
         width: 168px;
     }
@@ -534,6 +535,14 @@ html {
             margin-top: 40px;
         }
     }
+    @media screen and (min-width: 1551px) {
+        #sidebar ul li a {
+            display: none;
+        }
+    }
+    @media screen and (max-width: 1410px) {
+        .clearfix_home { display: none; }
+    }
 } @else {
     @media screen and (max-width: 1919px) {
         .skin-wrap {
@@ -543,7 +552,7 @@ html {
 }
 
 //* for the high resolutions, we only have the skin switch in the side menu */
-@media screen and (min-width: 1410px) {
+@media screen and (min-width: 1411px) {
     .side_navigation {
         display: none;
     }
