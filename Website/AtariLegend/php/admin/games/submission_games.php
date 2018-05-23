@@ -1,6 +1,6 @@
 <?php
 /***************************************************************************
- *                                submission_games.php
+ *                             games_submission.php
  *                            -----------------------
  *   begin                : Saturday, Jan 08, 2005
  *   copyright            : (C) 2003 Atari Legend
@@ -8,10 +8,10 @@
  *   actual update        : Fixed counting bug
  *                          Fixed switch bug
  *
- *   Id: submission_games.php,v 0.12 2005/04/28 Silver Surfer
- *   Id: submission_games.php,v 0.13 2016/07/27 STG
+ *   Id: games_submission.php,v 0.12 2005/04/28 Silver Surfer
+ *   Id: games_submission.php,v 0.13 2016/07/27 STG
  *               - AL 2.0
- *   Id: submission_games.php,v 1.14 2017/09/08 STG
+ *   Id: games_submission.php,v 1.14 2017/09/08 STG
  *               - Enhanced for submissions with screenshots
  ***************************************************************************/
 
@@ -23,62 +23,73 @@
 
 include("../../config/common.php");
 include("../../config/admin.php");
+require_once __DIR__."/../../lib/Db.php";
+require_once __DIR__."/../../common/DAO/GameSubmissionDAO.php";
 
 //load the search fields of the quick search side menu
 include("../../admin/games/quick_search_games.php");
 
 // get the total nr of submissions in the DB
-$query_total_number = $mysqli->query("SELECT * FROM game_submitinfo") or die("Couldn't get the total number of submissions");
-$v_rows_total = $query_total_number->num_rows;
-$smarty->assign('total_nr_submissions', $v_rows_total);
+//$query_total_number = $mysqli->query("SELECT * FROM game_submitinfo") or die("Couldn't get the total number of submissions");
+//$v_rows_total = $query_total_number->num_rows;
+//$smarty->assign('total_nr_submissions', $v_rows_total);
+
+$GameSubmissionDAO = new AL\Common\DAO\GameSubmissionDAO($mysqli);
+
+$smarty->assign("nr_submission", $GameSubmissionDAO->getGameSubmissionCount());
 
 //$v_counter = (isset($_GET['v_counter']) ? $_GET['v_counter'] : 0);
 
-if (isset($user_id)) {
-    $where_condition = " AND users.user_id = $user_id";
-} else {
-    $where_condition = "";
-}
+//if (isset($user_id)) {
+//    $where_condition = " AND users.user_id = $user_id";
+//} else {
+//    $where_condition = "";
+//}
 
-if (empty($v_counter)) {
-    $v_counter = 0;
-}
-if (!isset($list)) {
-    $list = "current";
-}
-if ($list == "done") {
-    $sql_submission = $mysqli->query("SELECT * FROM game_submitinfo
-                                        LEFT JOIN game ON (game_submitinfo.game_id = game.game_id)
-                                        LEFT JOIN users ON (game_submitinfo.user_id = users.user_id)
-                                        WHERE game_done = '1'" . $where_condition . "
-                                        ORDER BY game_submitinfo.game_submitinfo_id
-                                        DESC LIMIT  " . $v_counter . ", 25");
+//if (isset($action) and $action == 'autoload'){
+//    " AND game_submitinfo.timestamp >= $last_timestamp";
+//}
+    
 
-    //check the number of comments
-    $query_number = $mysqli->query("SELECT * FROM game_submitinfo
-                                             WHERE game_done = '1'
-                                             ORDER BY game_submitinfo_id DESC") or die("Couldn't get the number of game submissions");
-
-    $v_rows = $query_number->num_rows;
-} else {
-    $sql_submission = $mysqli->query("SELECT * FROM game_submitinfo
-                                        LEFT JOIN game ON (game_submitinfo.game_id = game.game_id)
-                                        LEFT JOIN users ON (game_submitinfo.user_id = users.user_id)
-                                        WHERE game_done <> '1' OR game_done IS NULL" . $where_condition . "
-                                        ORDER BY game_submitinfo.game_submitinfo_id
-                                        DESC LIMIT  " . $v_counter . ", 25");
+//if (empty($v_counter)) {
+//    $v_counter = 0;
+//}
+//if (!isset($list)) {
+//    $list = "current";
+//}
+//if ($list == "done") {
+//    $sql_submission = $mysqli->query("SELECT * FROM game_submitinfo
+//                                        LEFT JOIN game ON (game_submitinfo.game_id = game.game_id)
+//                                        LEFT JOIN users ON (game_submitinfo.user_id = users.user_id)
+//                                        WHERE game_done = '1'" . $where_condition . "
+//                                        ORDER BY game_submitinfo.game_submitinfo_id
+//                                        DESC LIMIT 10") or die("Couldn't get the game submissions");
 
     //check the number of comments
-    $query_number = $mysqli->query("SELECT * FROM game_submitinfo
-                                             WHERE game_done <> '1' OR game_done IS NULL
-                                             ORDER BY game_submitinfo_id DESC") or die("Couldn't get the number of game submissions");
+//    $query_number = $mysqli->query("SELECT * FROM game_submitinfo
+//                                             WHERE game_done = '1'
+//                                             ORDER BY game_submitinfo_id DESC") or die("Couldn't get the number of game submissions");
 
-    $v_rows = $query_number->num_rows;
-}
+//    $v_rows = $query_number->num_rows;
+//} else {
+//    $sql_submission = $mysqli->query("SELECT * FROM game_submitinfo
+//                                        LEFT JOIN game ON (game_submitinfo.game_id = game.game_id)
+//                                        LEFT JOIN users ON (game_submitinfo.user_id = users.user_id)
+//                                        WHERE game_done <> '1' OR game_done IS NULL" . $where_condition . "
+//                                        ORDER BY game_submitinfo.game_submitinfo_id
+//                                        DESC LIMIT 10") or die("Couldn't get the game submissions");
 
-$number_sub = $sql_submission->num_rows;
+    //check the number of comments
+//    $query_number = $mysqli->query("SELECT * FROM game_submitinfo
+//                                             WHERE game_done <> '1' OR game_done IS NULL
+//                                             ORDER BY game_submitinfo_id DESC") or die("Couldn't get the number of game submissions");
 
-while ($query_submission = $sql_submission->fetch_array(MYSQLI_BOTH)) {
+//    $v_rows = $query_number->num_rows;
+//}
+
+//$number_sub = $sql_submission->num_rows;
+
+/* while ($query_submission = $sql_submission->fetch_array(MYSQLI_BOTH)) {
     if (isset($query_submission['game_id'])) {
         //Select a random screenshot record
         $query_game = $mysqli->query("SELECT
@@ -147,11 +158,12 @@ while ($query_submission = $sql_submission->fetch_array(MYSQLI_BOTH)) {
         $avatar_image .= '.';
         $avatar_image .= $query_submission['avatar_ext'];
     } else {
-        $avatar_image = "";
+        $avatar_image = $GLOBALS['style_folder']."/images/default_avatar_image.png";
     }
     $smarty->append('submission', array(
         'game_id' => $query_submission['game_id'],
         'game_name' => $query_submission['game_name'],
+        'date_load' => $query_submission['timestamp'],
         'date' => $converted_date,
         'image' => $v_game_image,
         'comment' => $comment,
@@ -167,9 +179,9 @@ while ($query_submission = $sql_submission->fetch_array(MYSQLI_BOTH)) {
         'email_game' => $email_game,
         'email' => $query_submission['email']
     ));
-}
+} */
 
-//Check if back arrow is needed
+/* //Check if back arrow is needed
 if ($v_counter > 0) {
     $back_arrow = $v_counter - 25;
 }
@@ -194,7 +206,25 @@ $smarty->assign('structure', array(
     'back_arrow' => $back_arrow,
     'forward_arrow' => $forward_arrow,
     'num_sub' => $number_sub
-));
+));*/
+
+if (isset($done)) {
+    $smarty->assign('done', $done );
+} else {
+    $smarty->assign('done', '' );
+}
+
+$smarty->assign(
+    'submission',
+    $GameSubmissionDAO->getLatestSubmissions(isset($user_id) ? $user_id : null, isset($last_timestamp) ? $last_timestamp : null, isset($action) ? $action : null, isset($done) ? $done : null)
+); 
+
+if (isset($user_id)) {
+    $smarty->assign("user_id", $user_id);
+}
 
 //Send all smarty variables to the templates
 $smarty->display("file:" . $cpanel_template_folder . "submission_games.html");
+
+//close the connection
+mysqli_close($mysqli);
