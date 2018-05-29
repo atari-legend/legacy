@@ -22,7 +22,7 @@ class GameSubmission {
     private $avatar_ext;
     private $user_subm_count;
     private $user_comment_count;
-    private $screenshot;
+    private $screenshots;
 
     public function __construct(
         $game_id,
@@ -39,7 +39,7 @@ class GameSubmission {
         $avatar_ext,
         $user_subm_count,
         $user_comment_count,
-        $screenshot
+        $screenshots
     ) {
         $this->game_id = $game_id;
         $this->game_name = $game_name;
@@ -50,7 +50,7 @@ class GameSubmission {
         $this->userid = $userid;
         $this->username = $username;
         $this->email = $email;
-        $this->screenshot = $screenshot;
+        $this->screenshots = $screenshots;
         
         if ($join_date == "") {
             $this->join = "unknown";
@@ -125,7 +125,7 @@ class GameSubmission {
         return $this->timestamp;
     }
     
-    public function getScreenshot() {
-        return $this->screenshot;
+    public function getScreenshots() {
+        return $this->screenshots;
     }
 }
