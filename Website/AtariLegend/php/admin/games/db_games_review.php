@@ -163,7 +163,7 @@ if (isset($action) and ($action == 'delete_review' or $action == 'delete_submiss
 
     create_log_entry('Games', $game_id, 'Review', $reviewid, 'Delete', $_SESSION['user_id']);
     if ($action == 'delete_review') {
-        header("Location: ../games/games_review_add.php?game_id=$game_id");
+        header("Location: ../games/games_review.php");
     } else {
         header("Location: ../games/games_review_submitted.php");
     }
@@ -316,7 +316,7 @@ if (isset($action) and $action == 'add_review') {
     //Then, we'll be filling up the game review table
     $sdbquery = $mysqli->query("INSERT INTO review_game (review_id, game_id) VALUES ($reviewid, $game_create)") or die("Couldn't insert into review_game");
 
-    create_log_entry('Games', $game_id, 'Review', $reviewid, 'Insert', $_SESSION['user_id']);
+    create_log_entry('Games', $game_create, 'Review', $reviewid, 'Insert', $_SESSION['user_id']);
 
     $_SESSION['edit_message'] = "Review added to DB";
 
