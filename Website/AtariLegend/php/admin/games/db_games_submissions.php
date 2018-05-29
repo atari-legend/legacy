@@ -25,19 +25,31 @@ include("../../config/admin.php");
 include("../../config/admin_rights.php");
 
 if ($action == "update_submission") {
+    require_once __DIR__."/../../lib/Db.php";
+    require_once __DIR__."/../../common/DAO/GameSubmissionDAO.php";
+
     if ($_SESSION['permission']==1 or $_SESSION['permission']=='1') {
         //****************************************************************************************
         // This is where the submissions get "sent" to "done"
         //****************************************************************************************
         if (isset($submit_id)) {
             $commentquery = $mysqli->query("UPDATE game_submitinfo SET game_done = '1' WHERE game_submitinfo_id='$submit_id'");
+            
+            //this means we are in user search mode (clicked on the user submissions)
+            if (isset($user_id)){
+                list($user_id) = $sql_user->fetch_array(MYSQLI_BOTH);
+                $karma_action = "game_submission";
 
-            $sql_user = $mysqli->query("SELECT user_id FROM game_submitinfo WHERE game_submitinfo_id='$submit_id'");
+                UserKarma($user_id, $karma_action);
+            } else {
+                $sql_user = $mysqli->query("SELECT user_id FROM game_submitinfo WHERE game_submitinfo_id='$submit_id'");
 
-            list($user_id) = $sql_user->fetch_array(MYSQLI_BOTH);
-            $karma_action = "game_submission";
+                list($user_id) = $sql_user->fetch_array(MYSQLI_BOTH);
+                $karma_action = "game_submission";
 
-            UserKarma($user_id, $karma_action);
+                UserKarma($user_id, $karma_action);
+                $user_id = null;
+            } 
         }
 
         $osd_message = "Submission set to done status - transferred to done list";
@@ -50,101 +62,28 @@ if ($action == "update_submission") {
     $smarty->assign('action', 'approve_submission');
     $smarty->assign('osd_message', $osd_message);
     
-//  Get the submissions    
-    if (empty($v_counter)) {
-        $v_counter = 0;
+    $GameSubmissionDAO = new AL\Common\DAO\GameSubmissionDAO($mysqli);
+    
+    $smarty->assign("nr_submission", $GameSubmissionDAO->getGameSubmissionCount());
+
+    if (isset($done)) {
+        $smarty->assign('done', $done );
+    } else {
+        $smarty->assign('done', '' );
     }
-    if (!isset($list)) {
-        $list = "current";
-    }
 
-    $sql_submission = $mysqli->query("SELECT * FROM game_submitinfo
-                                        LEFT JOIN game ON (game_submitinfo.game_id = game.game_id)
-                                        LEFT JOIN users ON (game_submitinfo.user_id = users.user_id)
-                                        WHERE game_done <> '1' OR game_done IS NULL
-                                        ORDER BY game_submitinfo.game_submitinfo_id
-                                        DESC LIMIT  " . $v_counter . ", 25");
+    $smarty->assign(
+        'submission',
+        $GameSubmissionDAO->getLatestSubmissions(isset($user_id) ? $user_id : null, isset($last_timestamp) ? $last_timestamp : null, isset($action) ? $action : null, isset($done) ? $done : null)
+    ); 
 
-    //check the number of comments
-    $query_number = $mysqli->query("SELECT * FROM game_submitinfo
-                                             WHERE game_done <> '1' OR game_done IS NULL
-                                             ORDER BY game_submitinfo_id DESC") or die("Couldn't get the number of game submissions");
 
-    $v_rows = $query_number->num_rows;
-    $number_sub = $sql_submission->num_rows;
-
-    while ($query_submission = $sql_submission->fetch_array(MYSQLI_BOTH)) {
-        //check if there are screenshot added to the submission
-        $query_screenshots_submission = $mysqli->query("SELECT * FROM screenshot_main
-                                            LEFT JOIN screenshot_game_submitinfo ON (screenshot_main.screenshot_id = screenshot_game_submitinfo.screenshot_id)
-                                            WHERE screenshot_game_submitinfo.game_submitinfo_id = '$query_submission[game_submitinfo_id]'") or die("Error - Couldn't query submitinfo screenshots");
-
-        while ($sql_screenshots_submission = $query_screenshots_submission->fetch_array(MYSQLI_BOTH)) {
-            $new_path = $game_submit_screenshot_path;
-            $new_path .= $sql_screenshots_submission['screenshot_id'];
-            $new_path .= ".";
-            $new_path .= $sql_screenshots_submission['imgext'];
-
-            $smarty->append(
-
-                'submission_screenshots',
-                array('game_submitinfo_id' => $sql_screenshots_submission['game_submitinfo_id'],
-                'game_submitinfo_screenshot' => $new_path)
-            );
-        }
-
-        // Retrive userstats from database
-        $query_user         = $mysqli->query("SELECT *
-                                   FROM game_user_comments
-                                   LEFT JOIN comments ON ( game_user_comments.comment_id = comments.comments_id )
-                                   WHERE user_id = " . $query_submission['user_id'] . "");
-        $usercomment_number = $query_user->num_rows;
-
-        $query_submitinfo = $mysqli->query("SELECT * FROM game_submitinfo WHERE user_id = " . $query_submission['user_id'] . "") or die("Could not count user submissions");
-        $usersubmit_number = $query_submitinfo->num_rows;
-
-        $converted_date = date("F j, Y", $query_submission['timestamp']);
-        if ($query_submission['join_date'] !== '') {
-            $user_joindate  = date("d-m-y", $query_submission['join_date']);
-        } else {
-            $user_joindate = "Unknown";
-        }
-        $comment        = InsertALCode($query_submission['submit_text']);
-        $comment        = InsertSmillies($comment);
-        $comment        = nl2br($comment);
-        $comment        = stripslashes($comment);
-
-        $email_game = rawurlencode($query_submission['game_name']);
-
-        if ($query_submission['avatar_ext'] !== "") {
-            $avatar_image = $user_avatar_path;
-            $avatar_image .= $query_submission['user_id'];
-            $avatar_image .= '.';
-            $avatar_image .= $query_submission['avatar_ext'];
-        } else {
-            $avatar_image = $GLOBALS['style_folder']."/images/default_avatar_image.png";
-        }
-        $smarty->append('submission', array(
-            'game_id' => $query_submission['game_id'],
-            'game_name' => $query_submission['game_name'],
-            'date' => $converted_date,
-            'comment' => $comment,
-            'submit_id' => $query_submission['game_submitinfo_id'],
-            'user_name' => $query_submission['userid'],
-            'user_id' => $query_submission['user_id'],
-            'avatar_ext' => $query_submission['avatar_ext'],
-            'avatar_image' => $avatar_image,
-            'karma' => $query_submission['karma'],
-            'user_joindate' => $user_joindate,
-            'user_comment_nr' => $usercomment_number,
-            'usersubmit_number' => $usersubmit_number,
-            'email_game' => $email_game,
-            'email' => $query_submission['email']
-        ));
+    if (isset($user_id)) {
+        $smarty->assign("user_id", $user_id);
     }
     
     //Send to smarty for return value
-    $smarty->display("file:" . $cpanel_template_folder . "ajax_submission_game.html");
+    $smarty->display("file:" . $cpanel_template_folder . "ajax_submission_games.html");
 }
 
 if ($action == "delete_submission") {

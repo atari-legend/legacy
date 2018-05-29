@@ -49,17 +49,9 @@ class GameSubmissionDAO {
             $query .= " AND users.user_id = $user_id";
         }
         
-        /**if (isset($action) and $action=="autoload") {
-            if (isset($done) and $done == "1") {
-                if (isset($user_id)) {
-                    $query .= " AND game_submitinfo.timestamp < $last_timestamp ";
-                } else {
-                    $query .= " AND game_submitinfo.timestamp < $last_timestamp ";
-                }
-            } else {
-                    $query .= " WHERE game_submitinfo.timestamp < $last_timestamp ";
-            }
-        }**/
+        if (isset($action) and $action=="autoload") {
+            $query .= " AND game_submitinfo.timestamp < $last_timestamp ";
+        }
         
         $query .= " ORDER BY game_submitinfo.timestamp DESC LIMIT 10";
             
@@ -122,6 +114,9 @@ class GameSubmissionDAO {
                 $user_comment_count,
                 null
             );
+            
+            $submission->screenshots = getGameSubmissionScreenshots($submission_id);
+            $submissions[] = $submission;
         }
 
         $stmt->close();

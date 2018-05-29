@@ -42,7 +42,7 @@ The main game submission page
 <div class="standard_tile" id="games_submissions">
     <div class="help-tip">
         <p><i class="fa fa-envelope" aria-hidden="true"></i> - Mail to user<br>
-            <i class="fa fa-check-square" aria-hidden="true"></i> - Move to CLOSED list<br>
+            {if isset($done) and $done == '1'}{else}<i class="fa fa-check-square" aria-hidden="true"></i> - Move to CLOSED list<br>{/if}
             <i class="fa fa-comment" aria-hidden="true"></i> - Move to COMMENTS<br>
             <i class="fa fa-trash" aria-hidden="true"></i> - Delete submission<br>
         </p>
@@ -63,14 +63,6 @@ The main game submission page
             {/if}
         </div>
         <br>
-        <div class="standard_tile_text_center">
-            <!--{if $structure.v_counter > 0}
-                <a href ="../games/submission_games.php?list={$structure.list}&amp;v_counter={$structure.back_arrow}" class="standard_tile_link">Previous</a> |
-            {/if}
-            {if $structure.forward_arrow >= 25}
-                <a href="../games/submission_games.php?list={$structure.list}&amp;v_counter={$structure.forward_arrow}" class="standard_tile_link">Next</a>
-            {/if}-->
-        </div>
         <br>
         <div class="jsSubmissionWrapper infinite-container">
         {* START NEW SUBMISSION BOX *}
@@ -205,7 +197,6 @@ The main game submission page
                         {else}
                             <button class="badge_comment_type">Open</button>
                         {/if}
-
                     </div>
                 </div>
             </div>
@@ -215,6 +206,7 @@ The main game submission page
             <div class="standard_tile_text_center">No submissions to approve.</div>
         {/if}
         </div>
+        <div id="JSdone" style="display:none;">{if isset($done)}{$done}{/if}</div>
     </div>
 </div>
 {/block}

@@ -76,16 +76,17 @@ $(document).ready(function () {
 
     $(window).scroll(function () {
         if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
-            var lastTimestamp = $('.news_post_box:last').attr('id');
+            var lastTimestamp = $('.submission_post_box:last').attr('id');
             loadMoreData(lastTimestamp);
         }
     });
 
     function loadMoreData (lastTimestamp) {
+        var done = $('#JSdone').html();
         $.ajaxQueue({
             // The URL for the request
             url: 'ajax_submission_games.php',
-            data: 'action=autoload&last_timestamp=' + lastTimestamp,
+            data: 'action=autoload&last_timestamp=' + lastTimestamp + '&done=' + done,
             type: 'GET',
             dataType: 'html',
             // Code to run if the request succeeds;
