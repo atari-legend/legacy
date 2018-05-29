@@ -32,8 +32,8 @@ if (isset($action) and $action == 'add_screens') {
 
     foreach ($image['tmp_name'] as $key => $tmp_name) {
         if ($tmp_name !== 'none') {
+            
             // Check what extention the file has and if it is allowed.
-
             $ext        = "";
             $type_image = $image['type'][$key];
 
@@ -41,7 +41,7 @@ if (isset($action) and $action == 'add_screens') {
             if ($type_image == 'image/png') {
                 $ext = 'png';
             }
-
+            
             if ($type_image == 'image/x-png') {
                 $ext = 'png';
             } elseif ($type_image == 'image/gif') {
@@ -72,6 +72,9 @@ if (isset($action) and $action == 'add_screens') {
 
                 $_SESSION['edit_message'] = "screenshot uploaded";
 
+                header("Location: ../games/games_screenshot_add.php?game_id=$game_id");
+            } else {
+                $_SESSION['edit_message'] = "screenshot format is not supported";
                 header("Location: ../games/games_screenshot_add.php?game_id=$game_id");
             }
         }
