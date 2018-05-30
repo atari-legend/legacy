@@ -90,14 +90,14 @@ class GameSubmissionDAO {
             $user_comment_count
         );
 
-        $submission = [];
+        $submissions = [];
         while ($stmt->fetch()) {
             $comment = nl2br($comment);
             $comment = InsertALCode($comment);
             $comment = trim($comment);
             $comment = RemoveSmillies($comment);
             
-            $submission[] = new \AL\Common\Model\GameSubmission\GameSubmission(
+            $submission = new \AL\Common\Model\GameSubmission\GameSubmission(
                 $game_id,
                 $game_name,
                 $timestamp,
@@ -115,13 +115,13 @@ class GameSubmissionDAO {
                 null
             );
             
-            $submission->screenshots = getGameSubmissionScreenshots($submission_id);
+            $submission->screenshots =  $submission->screenshots = $this->getGameSubmissionScreenshots($submission_id);
             $submissions[] = $submission;
         }
 
         $stmt->close();
 
-        return $submission;
+        return $submissions;
     }
     
      /**
@@ -174,13 +174,15 @@ class GameSubmissionDAO {
                 LEFT JOIN screenshot_game_submitinfo 
                     ON (screenshot_main.screenshot_id = screenshot_game_submitinfo.screenshot_id)
                 WHERE screenshot_game_submitinfo.game_submitinfo_id  = ?",
-            null, null
+            "i",
+            $submission_id
         );
-       
+        
         \AL\Db\bind_result(
             "GameSubmissionDAO: Get the screenshots of the submission",
             $stmt,
-            $screenshot_id, $imgext
+            $screenshot_id,
+            $imgext
         );
 
         $screenshots = [];
@@ -204,7 +206,7 @@ class GameSubmissionDAO {
                 null,
                 null,
                 null,
-                $screenshots
+                $new_path
             );
         }
         
