@@ -25,7 +25,6 @@ $(document).ready(function () {
                             var returnHtml = html.split('[BRK]');
                             $('#game_submission_list').html(returnHtml[0]);
                             window.OSDMessageDisplay(returnHtml[1]);
-                            document.getElementById('post').reset();
                         }
                     });
                 },
@@ -58,7 +57,134 @@ $(document).ready(function () {
                             var returnHtml = html.split('[BRK]');
                             $('#game_submission_list').html(returnHtml[0]);
                             window.OSDMessageDisplay(returnHtml[1]);
-                            document.getElementById('post').reset();
+                        }
+                    });
+                },
+                Cancel: function () {
+                    $(this).dialog('close');
+                }
+            }
+        });
+    })
+    // Delete Submission Function
+    $('.jsSubmissionWrapper').on('click', '.jsSubmissionDeleteButton', function () {
+        var submissionId = $(this).data('submission-id');
+        $('#JSGenericModal').dialog({
+            title: 'Delete Submission',
+            open: $('#JSGenericModalText').text('Are you sure you want to delete this submission?'),
+            resizable: false,
+            height: 200,
+            modal: true,
+            buttons: {
+                'Delete': function () {
+                    $(this).dialog('close');
+                    $.ajaxQueue({
+                        // The URL for the request
+                        url: 'db_games_submissions.php',
+                        data: 'action=delete_submission&submit_id=' + submissionId,
+                        type: 'POST',
+                        dataType: 'html',
+                        // Code to run if the request succeeds;
+                        success: function (html) {
+                            var returnHtml = html.split('[BRK]');
+                            $('#game_submission_list').html(returnHtml[0]);
+                            window.OSDMessageDisplay(returnHtml[1]);
+                        }
+                    });
+                },
+                Cancel: function () {
+                    $(this).dialog('close');
+                }
+            }
+        });
+    })
+    // Delete submission Function in dropdown
+    $('.jsSubmissionWrapper').on('click', '.jsSubmissionDeleteDropdownItem', function () {
+        var submissionId = $(this).data('submission-id');
+        $('#JSGenericModal').dialog({
+            title: 'Delete Submission',
+            open: $('#JSGenericModalText').text('Are you sure you want to delete this submission?'),
+            resizable: false,
+            height: 200,
+            modal: true,
+            buttons: {
+                'Delete': function () {
+                    $(this).dialog('close');
+                    $.ajaxQueue({
+                        // The URL for the request
+                        url: 'db_games_submissions.php',
+                        data: 'action=delete_submission&submit_id=' + submissionId,
+                        type: 'POST',
+                        dataType: 'html',
+                        // Code to run if the request succeeds;
+                        success: function (html) {
+                            var returnHtml = html.split('[BRK]');
+                            $('#game_submission_list').html(returnHtml[0]);
+                            window.OSDMessageDisplay(returnHtml[1]);
+                        }
+                    });
+                },
+                Cancel: function () {
+                    $(this).dialog('close');
+                }
+            }
+        });
+    })
+    // Delete Submission Function
+    $('.jsSubmissionWrapper').on('click', '.jsSubmissionMoveButton', function () {
+        var submissionId = $(this).data('submission-id');
+        $('#JSGenericModal').dialog({
+            title: 'Delete Submission',
+            open: $('#JSGenericModalText').text('Are you sure you want to move this submission to the comments section?'),
+            resizable: false,
+            height: 200,
+            modal: true,
+            buttons: {
+                'Move': function () {
+                    $(this).dialog('close');
+                    $.ajaxQueue({
+                        // The URL for the request
+                        url: 'db_games_submissions.php',
+                        data: 'action=move_submission_tocomment&submit_id=' + submissionId,
+                        type: 'POST',
+                        dataType: 'html',
+                        // Code to run if the request succeeds;
+                        success: function (html) {
+                            var returnHtml = html.split('[BRK]');
+                            $('#game_submission_list').html(returnHtml[0]);
+                            window.OSDMessageDisplay(returnHtml[1]);
+                        }
+                    });
+                },
+                Cancel: function () {
+                    $(this).dialog('close');
+                }
+            }
+        });
+    })
+    // Delete submission Function in dropdown
+    $('.jsSubmissionWrapper').on('click', '.jsSubmissionCommentDropdownItem', function () {
+        var submissionId = $(this).data('submission-id');
+        $('#JSGenericModal').dialog({
+            title: 'Delete Submission',
+            open: $('#JSGenericModalText').text('Are you sure you want to move this submission to the comments section?'),
+            resizable: false,
+            height: 200,
+            modal: true,
+            buttons: {
+                'Move': function () {
+                    $(this).dialog('close');
+                    $.ajaxQueue({
+                        // The URL for the request
+                        url: 'db_games_submissions.php',
+                        data: 'action=move_submission_tocomment&submit_id=' + submissionId,
+                        type: 'POST',
+                        dataType: 'html',
+                        // Code to run if the request succeeds;
+                        success: function (html) {
+                            var returnHtml = html.split('[BRK]');
+                            $('#game_submission_list').html(returnHtml[0]);
+                            window.OSDMessageDisplay(returnHtml[1]);
                         }
                     });
                 },

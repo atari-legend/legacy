@@ -10,7 +10,7 @@
 ***************************************************************************/
 *}
 
-{if isset($action) and ( $action=='approve_submission' or $action=='autoload' )}
+{if isset($action) and ( $action=='approve_submission' or $action=='delete_submission' or $action=='autoload' or $action=='move_submission' )}
     {foreach from=$submission item=line}
         <div id="jsSubmissionId{$line->getSubmissionId()}" class="infinite-item">
             <div class="submission_post_box" id="{$line->getTimestamp()}">
@@ -53,7 +53,7 @@
                         </h6>
                     </div>
                     <h4 class="submission_title">
-                        {$line->getName()}</a>
+                        {$line->getName()}
                     </h4>
                     <ul class="submission_buttons">
                         {if $line->getEmail() !== ''}
@@ -140,7 +140,6 @@
                     {else}
                         <button class="badge_comment_type">Open</button>
                     {/if}
-
                 </div>
             </div>
         </div>
