@@ -1,6 +1,7 @@
 FROM php:5.6-apache
 
 RUN apt-get update -y
+RUN apt-get install -y gnupg
 RUN apt-get install -y libpng-dev
 RUN apt-get install -y libjpeg62-turbo-dev
 
