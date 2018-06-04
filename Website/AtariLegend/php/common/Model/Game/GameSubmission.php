@@ -14,6 +14,7 @@ class GameSubmission {
     private $date;
     private $comment;
     private $submission_id;
+    private $done;
     private $userid;
     private $username;
     private $email;
@@ -31,6 +32,7 @@ class GameSubmission {
         $date,
         $comment,
         $submission_id,
+        $done,
         $userid,
         $username,
         $email,
@@ -47,6 +49,7 @@ class GameSubmission {
         $this->post_date = date("F j, Y", $date);
         $this->comment = $comment;
         $this->submission_id = $submission_id;
+        $this->done = $done;
         $this->userid = $userid;
         $this->username = $username;
         $this->email = $email;
@@ -87,6 +90,10 @@ class GameSubmission {
     
     public function getSubmissionId() {
         return $this->submission_id;
+    }
+    
+    public function getDone() {
+        return $this->done;
     }
 
     public function getUserId() {

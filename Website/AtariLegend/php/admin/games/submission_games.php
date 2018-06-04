@@ -64,6 +64,19 @@ $smarty->assign(
     $GameSubmissionDAO->getLatestSubmissions(isset($user_id) ? $user_id : null, isset($last_timestamp) ? $last_timestamp : null, isset($action) ? $action : null, isset($done) ? $done : null)
 ); 
 
+//Get the authors for submission search
+$sql_author = $mysqli->query("SELECT game_submitinfo.user_id, users.userid FROM game_submitinfo
+                              LEFT JOIN users ON ( game_submitinfo.user_id = users.user_id ) 
+                              GROUP BY game_submitinfo.user_id 
+                              ORDER BY users.userid ASC") or die("Database error - getting members name");
+
+while ($authors = $sql_author->fetch_array(MYSQLI_BOTH)) {
+    $smarty->append('authors_search', array(
+        'user_id' => $authors['user_id'],
+        'user_name' => $authors['userid']
+    ));
+}
+
 
 if (isset($user_id)) {
     $smarty->assign("user_id", $user_id);

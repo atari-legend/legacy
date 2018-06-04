@@ -1,45 +1,21 @@
 {*
 /***************************************************************************
-*                              games_submission.html
-*                            --------------------------
-*   begin                : Thursday, Septembre 29, 2005
-*   copyright            : (C) 2005 Atari Legend
+*                        ajax_submission_games_search.html
+*                      -------------------------------------
+*   begin                : Thursday, 31st May, 2018
+*   copyright            : (C) 2018 Atari Legend
 *   email                : admin@atarilegend.com
 *
-*   Id: games_submission.html,v 0.10 ?
-*   Id: games_submission.html,v 0.20 2016/07/27 22:06 Grave
-*                       - AL 2.0
-*   Id: games_submission.html,v 0.21 2017/04/28 23:19 Grave
-*                       - Added font awesome and updated layout
-*   Id: games_submission.html,v 1.22 2017/09/08 STG
-*                       - Enhanced for submissions with screenshots
-*   Id: games_submission.html,v 1.23 2018/05/22 STG
-*                       - New look/JS seperation...
+*   Id: ajax_submission_games_search.php 31/05/2018 ST Graveyard - creation of file
 *
 ***************************************************************************/
 
 ************************************************************************************************
-The main game submission page
+The game submission search result page
 ************************************************************************************************
 *}
-
-{extends file='1/admin/main.html'}
-
 {block name=java_script}
     <script src="{$template_dir}includes/js/game_submission.js"></script><!-- load all submission scripts -->
-    <script src="{$template_dir}includes/js/vendor/lightbox-2.9.0.min.js"></script><!-- lightbox screenshot pop up script -->
-    <link type="text/css" href="{$style_dir}css/vendor/lightbox-2.9.0.css" hreflang="en" rel="stylesheet">
-    <script>
-        lightbox.option({
-            'showImageNumberLabel': false
-        })
-    </script>
-{/block}
-
-{block name=left_tile}
-    {include file='1/admin/quick_search_gamesubmissions.html'}
-    <br>
-    {include file='1/admin/left_nav.html'}
 {/block}
 
 {block name=title}Game Submissions{/block}
@@ -204,6 +180,8 @@ The main game submission page
             <div class="standard_tile_text_center">No submissions to approve.</div>
         {/if}
         </div>
+        <div id="JSdone" style="display:none;">{if isset($done)}{$done}{/if}</div>
+        <div id="JSuserId" style="display:none;">{if isset($user_id)}{$user_id}{/if}</div>
     </div>
 </div>
 {/block}
