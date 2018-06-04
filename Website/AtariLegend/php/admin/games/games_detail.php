@@ -281,6 +281,32 @@ while ($aka = $sql_aka->fetch_array(MYSQLI_BOTH)) {
 $smarty->assign("nr_aka", $nr_aka);
 
 //***********************************************************************************
+// Systems list
+//***********************************************************************************
+
+$sql_system = $mysqli->query("SELECT * FROM system") or die("Couldn't query system list");
+
+while ($system_list = $sql_system->fetch_array(MYSQLI_BOTH)) {
+    $smarty->append('system_list', array(
+        'system_id' => $system_list['system_id'],
+        'system_name' => $system_list['system_name']
+    ));
+}
+
+//***********************************************************************************
+// Resolutions list
+//***********************************************************************************
+
+$sql_resolution = $mysqli->query("SELECT * FROM resolution") or die("Couldn't query resolution list");
+
+while ($resolution_list = $sql_resolution->fetch_array(MYSQLI_BOTH)) {
+    $smarty->append('resolution_list', array(
+        'resolution_id' => $resolution_list['resolution_id'],
+        'resolution_name' => $resolution_list['resolution_name']
+    ));
+}
+
+//***********************************************************************************
 //The game statistics below on the page
 //***********************************************************************************
 
