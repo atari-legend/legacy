@@ -1,31 +1,33 @@
 <?php
 /***************************************************************************
- *                             ajax_submission_games.php
- *                            ----------------------------
- *   begin                : Thursday, May 24, 2018
+ *                                ajax_submission_games_search.php
+ *                            ----------------------------------------
+ *   begin                : Thursday, 31st May, 2018
  *   copyright            : (C) 2018 Atari Legend
- *   actual update        : Creation of file
+ *   email                : admin@atarilegend.com
  *
- *   Id: ajax_submission_games.php,v 0.1 2018/05/24 STG
+ *   Id: ajax_submission_games_search.php 31/05/2018 ST Graveyard - creation of file
  ***************************************************************************/
-
-/*
- ***********************************************************************************
- Display submissions
- ***********************************************************************************
- */
-
+ 
 include("../../config/common.php");
 include("../../config/admin.php");
 require_once __DIR__."/../../lib/Db.php";
 require_once __DIR__."/../../common/DAO/GameSubmissionDAO.php";
 
-//load the search fields of the quick search side menu
-include("../../admin/games/quick_search_games.php");
-
 $GameSubmissionDAO = new AL\Common\DAO\GameSubmissionDAO($mysqli);
 
+//********************************************************************************************
+// Get all the needed data to load the comments page!
+//********************************************************************************************
 $smarty->assign("nr_submission", $GameSubmissionDAO->getGameSubmissionCount());
+
+$date = date_to_timestamp($submsission_searchYear, $submsission_searchMonth, $submsission_searchDay);
+
+if ( $author_search == '-' )
+{ 
+} else {
+    $user_id = $author_search;
+}
 
 if (isset($done) and $done == '1') {
     if (isset($open) and $open == '2') {
@@ -37,13 +39,9 @@ if (isset($done) and $done == '1') {
     $done = '2'; //only open is flagged
 }
 
-if ($last_timestamp == '') {
-    $last_timestamp = null;
-}
-
 $smarty->assign(
     'submission',
-    $GameSubmissionDAO->getLatestSubmissions(isset($user_id) ? $user_id : null, isset($last_timestamp) ? $last_timestamp : null, isset($action) ? $action : null, isset($done) ? $done : null)
+    $GameSubmissionDAO->getLatestSubmissions(isset($user_id) ? $user_id : null, isset($date) ? $date : null, isset($action) ? $action : null, isset($done) ? $done : null)
 ); 
 
 //Get the authors for submission search
@@ -63,11 +61,15 @@ if (isset($user_id)) {
     $smarty->assign("user_id", $user_id);
 }
 
+if (isset($done)) {
+    $smarty->assign("done", $done);
+}
+
 $smarty->assign("action", $action);
-$smarty->assign("last_timestamp", $last_timestamp);
+$smarty->assign("last_timestamp", $date);
 
 //Send all smarty variables to the templates
-$smarty->display("file:" . $cpanel_template_folder . "ajax_submission_games.html");
+$smarty->display("file:" . $cpanel_template_folder . "ajax_submission_games_search.html");
 
 //close the connection
 mysqli_close($mysqli);

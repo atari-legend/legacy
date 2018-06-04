@@ -20,11 +20,13 @@ $(document).ready(function () {
                         data: 'action=update_submission&submit_id=' + submissionId,
                         type: 'POST',
                         dataType: 'html',
-                        // Code to run if the request succeeds;
                         success: function (html) {
-                            var returnHtml = html.split('[BRK]');
-                            $('#game_submission_list').html(returnHtml[0]);
-                            window.OSDMessageDisplay(returnHtml[1]);
+                            var begin = html.startsWith('You');
+                            if (begin) {
+                            } else {
+                                $('#jsSubmissionId' + submissionId).html('');
+                            }
+                            window.OSDMessageDisplay(html);
                         }
                     });
                 },
@@ -54,9 +56,12 @@ $(document).ready(function () {
                         dataType: 'html',
                         // Code to run if the request succeeds;
                         success: function (html) {
-                            var returnHtml = html.split('[BRK]');
-                            $('#game_submission_list').html(returnHtml[0]);
-                            window.OSDMessageDisplay(returnHtml[1]);
+                            var begin = html.startsWith('You');
+                            if (begin) {
+                            } else {
+                                $('#jsSubmissionId' + submissionId).html('');
+                            }
+                            window.OSDMessageDisplay(html);
                         }
                     });
                 },
@@ -86,9 +91,12 @@ $(document).ready(function () {
                         dataType: 'html',
                         // Code to run if the request succeeds;
                         success: function (html) {
-                            var returnHtml = html.split('[BRK]');
-                            $('#game_submission_list').html(returnHtml[0]);
-                            window.OSDMessageDisplay(returnHtml[1]);
+                            var begin = html.startsWith('You');
+                            if (begin) {
+                            } else {
+                                $('#jsSubmissionId' + submissionId).html('');
+                            }
+                            window.OSDMessageDisplay(html);
                         }
                     });
                 },
@@ -118,9 +126,12 @@ $(document).ready(function () {
                         dataType: 'html',
                         // Code to run if the request succeeds;
                         success: function (html) {
-                            var returnHtml = html.split('[BRK]');
-                            $('#game_submission_list').html(returnHtml[0]);
-                            window.OSDMessageDisplay(returnHtml[1]);
+                            var begin = html.startsWith('You');
+                            if (begin) {
+                            } else {
+                                $('#jsSubmissionId' + submissionId).html('');
+                            }
+                            window.OSDMessageDisplay(html);
                         }
                     });
                 },
@@ -130,11 +141,11 @@ $(document).ready(function () {
             }
         });
     })
-    // Delete Submission Function
+    // Move Submission Function
     $('.jsSubmissionWrapper').on('click', '.jsSubmissionMoveButton', function () {
         var submissionId = $(this).data('submission-id');
         $('#JSGenericModal').dialog({
-            title: 'Delete Submission',
+            title: 'Move Submission',
             open: $('#JSGenericModalText').text('Are you sure you want to move this submission to the comments section?'),
             resizable: false,
             height: 200,
@@ -150,9 +161,12 @@ $(document).ready(function () {
                         dataType: 'html',
                         // Code to run if the request succeeds;
                         success: function (html) {
-                            var returnHtml = html.split('[BRK]');
-                            $('#game_submission_list').html(returnHtml[0]);
-                            window.OSDMessageDisplay(returnHtml[1]);
+                            var begin = html.startsWith('You');
+                            if (begin) {
+                            } else {
+                                $('#jsSubmissionId' + submissionId).html('');
+                            }
+                            window.OSDMessageDisplay(html);
                         }
                     });
                 },
@@ -162,11 +176,11 @@ $(document).ready(function () {
             }
         });
     })
-    // Delete submission Function in dropdown
+    // Move submission Function in dropdown
     $('.jsSubmissionWrapper').on('click', '.jsSubmissionCommentDropdownItem', function () {
         var submissionId = $(this).data('submission-id');
         $('#JSGenericModal').dialog({
-            title: 'Delete Submission',
+            title: 'Move Submission',
             open: $('#JSGenericModalText').text('Are you sure you want to move this submission to the comments section?'),
             resizable: false,
             height: 200,
@@ -182,9 +196,12 @@ $(document).ready(function () {
                         dataType: 'html',
                         // Code to run if the request succeeds;
                         success: function (html) {
-                            var returnHtml = html.split('[BRK]');
-                            $('#game_submission_list').html(returnHtml[0]);
-                            window.OSDMessageDisplay(returnHtml[1]);
+                            var begin = html.startsWith('You');
+                            if (begin) {
+                            } else {
+                                $('#jsSubmissionId' + submissionId).html('');
+                            }
+                            window.OSDMessageDisplay(html);
                         }
                     });
                 },
@@ -195,30 +212,32 @@ $(document).ready(function () {
         });
     })
 
-    $('.jsSubmissionWrapper').on('click', 'submission_button_dropdown', function () {
+    $('.jsSubmissionWrapper').on('click', '.submission_button_dropdown', function () {
         var dropdownId = $(this).data('dropdown-id');
         $('#dropdown_box' + dropdownId).toggle('.dropdown_show');
     })
+})
 
-    $(window).scroll(function () {
-        if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
-            var lastTimestamp = $('.submission_post_box:last').attr('id');
-            loadMoreData(lastTimestamp);
+$(window).scroll(function () {
+    if ($(window).scrollTop() + $(window).height() >= $(document).height()) {
+        var lastTimestamp = $('.submission_post_box:last').attr('id');
+        loadMoreData(lastTimestamp);
+    }
+});
+
+function loadMoreData (lastTimestamp) {
+    var done = $('#JSdone').html();
+    var userId = $('#JSuserId').html();
+
+    $.ajaxQueue({
+        // The URL for the request
+        url: 'ajax_submission_games.php',
+        data: 'action=autoload&last_timestamp=' + lastTimestamp + '&done=' + done + '&user_id=' + userId,
+        type: 'GET',
+        dataType: 'html',
+        // Code to run if the request succeeds;
+        success: function (html) {
+            $('.infinite-item:last').append(html);
         }
     });
-
-    function loadMoreData (lastTimestamp) {
-        var done = $('#JSdone').html();
-        $.ajaxQueue({
-            // The URL for the request
-            url: 'ajax_submission_games.php',
-            data: 'action=autoload&last_timestamp=' + lastTimestamp + '&done=' + done,
-            type: 'GET',
-            dataType: 'html',
-            // Code to run if the request succeeds;
-            success: function (html) {
-                $('.infinite-item:last').append(html);
-            }
-        });
-    }
-})
+}

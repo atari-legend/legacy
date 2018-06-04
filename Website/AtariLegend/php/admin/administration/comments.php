@@ -52,7 +52,7 @@ $smarty->assign('links', array(
     'getCommentCount' => $commentsDao->getCommentCount(),
 ));
 
-//Get the authors for the interview
+//Get the authors for comment search
 $sql_author = $mysqli->query("SELECT comments.user_id,users.userid FROM comments 
                               LEFT JOIN users ON ( comments.user_id = users.user_id ) 
                               GROUP BY comments.user_id 

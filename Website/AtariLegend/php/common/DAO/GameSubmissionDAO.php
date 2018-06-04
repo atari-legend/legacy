@@ -25,6 +25,7 @@ class GameSubmissionDAO {
                 game_submitinfo.timestamp as date,
                 game_submitinfo.submit_text,
                 game_submitinfo.game_submitinfo_id,
+                game_submitinfo.game_done,
                 users.user_id,
                 users.userid,
                 users.email,
@@ -38,23 +39,31 @@ class GameSubmissionDAO {
                 FROM game_submitinfo
                 LEFT JOIN game ON (game_submitinfo.game_id = game.game_id)
                 LEFT JOIN users ON (game_submitinfo.user_id = users.user_id)";
-                
-        if (isset($done) and $done == "1") {
-            $query .= " WHERE game_done = '1'";
+        
+        if (isset($action) and $action=="search") {
+            if (isset($done) and $done == "1") {
+                $query .= " WHERE game_done = '1'";
+            } elseif (isset($done) and $done == "2") {
+                $query .= " WHERE game_done <> '1'";
+            } else {
+                $query .= " WHERE ( game_done <> '1' or game_done = '1' )";
+            }
         } else {
-             $query .= " WHERE game_done <> '1'";
+            $query .= " WHERE ( game_done <> '1' or game_done = '1' )";
         }
         
-        if (isset($user_id)) {
+        if (isset($user_id) and $user_id <> '') {
             $query .= " AND users.user_id = $user_id";
         }
         
         if (isset($action) and $action=="autoload") {
             $query .= " AND game_submitinfo.timestamp < $last_timestamp ";
+        } elseif (isset($action) and $action=="search") {
+            $query .= " AND game_submitinfo.timestamp <= $last_timestamp ";
         }
         
         $query .= " ORDER BY game_submitinfo.timestamp DESC LIMIT 10";
-            
+        
         return $query;
     }
     
@@ -80,6 +89,7 @@ class GameSubmissionDAO {
             $date,
             $comment,
             $submission_id,
+            $done,
             $userid,
             $username,
             $email,
@@ -104,6 +114,7 @@ class GameSubmissionDAO {
                 $date,
                 $comment,
                 $submission_id,
+                $done,
                 $userid,
                 $username,
                 $email,
@@ -115,7 +126,7 @@ class GameSubmissionDAO {
                 null
             );
             
-            $submission->screenshots =  $submission->screenshots = $this->getGameSubmissionScreenshots($submission_id);
+            //$submission->screenshots = $submission->screenshots = $this->getGameSubmissionScreenshots($submission_id);
             $submissions[] = $submission;
         }
 
@@ -192,6 +203,7 @@ class GameSubmissionDAO {
             $new_path .= ".";
             $new_path .= $imgext;
             $screenshots[] = new \AL\Common\Model\GameSubmission\GameSubmission(
+                null,
                 null,
                 null,
                 null,

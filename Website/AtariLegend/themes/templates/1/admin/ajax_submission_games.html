@@ -10,7 +10,7 @@
 ***************************************************************************/
 *}
 
-{if isset($action) and ( $action=='approve_submission' or $action=='delete_submission' or $action=='autoload' or $action=='move_submission' )}
+{if isset($action) and ( $action=='autoload' )}
     {foreach from=$submission item=line}
         <div id="jsSubmissionId{$line->getSubmissionId()}" class="infinite-item">
             <div class="submission_post_box" id="{$line->getTimestamp()}">
@@ -63,7 +63,7 @@
                             </a>
                         </li>
                         {/if}
-                        {if isset($done) and $done == '1'}
+                        {if $line->getDone() == '1'}
                         {else}
                             <li class="primary_button jsSubmissionApproveButton" data-submission-id="{$line->getSubmissionId()}">
                                 <a class="links_addnew_link">
@@ -95,10 +95,10 @@
                                         </a>
                                     </li>
                                 {/if}
-                                {if isset($done) and $done == '1'}
+                                {if $line->getDone() == '1'}
                                 {else}
                                     <li class="dropdown_item jsSubmissionApproveDropdownItem" data-submission-id="{$line->getSubmissionId()}">
-                                        Done
+                                        Close
                                     </li>
                                 {/if}
                                 <li class="dropdown_item jsSubmissionCommentDropdownItem" data-submission-id="{$line->getSubmissionId()}">
@@ -112,7 +112,7 @@
                     </ul>
                     <div class="submission_line" id="line_above_info"></div>
                     <h4 class="submission_title_phoneview">
-                        {$line->getName()}</a>
+                        {$line->getName()}
                     </h4>
                     <div class="submission_post_info">
                         Posted <span>by <a href="../user/user_detail.php?user_id_selected={$line->getUserId()}">{$line->getUserName()}</a></span> on {$line->getDate()}
@@ -135,7 +135,7 @@
                     </div>
                 </div>
                 <div class="badge_parent">
-                    {if isset($done) and $done == '1'}
+                    {if $line->getDone() == '1'}
                         <button class="badge_comment_type">Closed</button>
                     {else}
                         <button class="badge_comment_type">Open</button>

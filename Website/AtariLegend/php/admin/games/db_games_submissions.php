@@ -52,38 +52,15 @@ if ($action == "update_submission") {
             } 
         }
 
-        $osd_message = "Submission set to done status - transferred to done list";
+        $message = "Submission set to done status - transferred to done list";
 
         create_log_entry('Games', $submit_id, 'Submission', $submit_id, 'Update', $_SESSION['user_id']);
     }else{
-        $osd_message = "You don't have permission to perform this task";
+        $message = "You don't have permission to perform this task";
     }
     
-    $smarty->assign('action', 'approve_submission');
-    $smarty->assign('osd_message', $osd_message);
-    
-    $GameSubmissionDAO = new AL\Common\DAO\GameSubmissionDAO($mysqli);
-    
-    $smarty->assign("nr_submission", $GameSubmissionDAO->getGameSubmissionCount());
-
-    if (isset($done)) {
-        $smarty->assign('done', $done );
-    } else {
-        $smarty->assign('done', '' );
-    }
-
-    $smarty->assign(
-        'submission',
-        $GameSubmissionDAO->getLatestSubmissions(isset($user_id) ? $user_id : null, isset($last_timestamp) ? $last_timestamp : null, isset($action) ? $action : null, isset($done) ? $done : null)
-    ); 
-
-
-    if (isset($user_id)) {
-        $smarty->assign("user_id", $user_id);
-    }
-    
-    //Send to smarty for return value
-    $smarty->display("file:" . $cpanel_template_folder . "ajax_submission_games.html");
+    echo $message;
+    mysqli_close($mysqli);
 }
 
 if ($action == "delete_submission") {
@@ -123,37 +100,14 @@ if ($action == "delete_submission") {
 
             $sql = $mysqli->query("DELETE FROM game_submitinfo WHERE game_submitinfo_id = '$submit_id'") or die("couldn't delete game_submissions quote");
             
-            $osd_message = "Submission deleted";
+            $message = "Submission deleted";
         }
     }else{
-        $osd_message = "You don't have permission to perform this task";
-    }
-
-    $smarty->assign('action', 'delete_submission');
-    $smarty->assign('osd_message', $osd_message);
-    
-    $GameSubmissionDAO = new AL\Common\DAO\GameSubmissionDAO($mysqli);
-    
-    $smarty->assign("nr_submission", $GameSubmissionDAO->getGameSubmissionCount());
-
-    if (isset($done)) {
-        $smarty->assign('done', $done );
-    } else {
-        $smarty->assign('done', '' );
-    }
-
-    $smarty->assign(
-        'submission',
-        $GameSubmissionDAO->getLatestSubmissions(isset($user_id) ? $user_id : null, isset($last_timestamp) ? $last_timestamp : null, isset($action) ? $action : null, isset($done) ? $done : null)
-    ); 
-
-
-    if (isset($user_id)) {
-        $smarty->assign("user_id", $user_id);
+        $message = "You don't have permission to perform this task";
     }
     
-    //Send to smarty for return value
-    $smarty->display("file:" . $cpanel_template_folder . "ajax_submission_games.html");
+    echo $message;
+    mysqli_close($mysqli);
 }
 
 // Move
@@ -190,39 +144,15 @@ if ($action == "move_submission_tocomment") {
 
                 $sql = $mysqli->query("DELETE FROM game_submitinfo WHERE game_submitinfo_id = " . $submit_id . "") or die("couldn't delete game_submissions quote");
 
-                $osd_message = "Submission converted to game comment";
+                $message = "Submission converted to game comment";
 
                 create_log_entry('Games', $new_comment_id, 'Comment', $new_comment_id, 'Insert', $_SESSION['user_id']);
             }
         } 
     } else {
-        $osd_message = "You don't have permission to perform this task";
-    }
-        
-
-    $smarty->assign('action', 'move_submission');
-    $smarty->assign('osd_message', $osd_message);
-    
-    $GameSubmissionDAO = new AL\Common\DAO\GameSubmissionDAO($mysqli);
-    
-    $smarty->assign("nr_submission", $GameSubmissionDAO->getGameSubmissionCount());
-
-    if (isset($done)) {
-        $smarty->assign('done', $done );
-    } else {
-        $smarty->assign('done', '' );
-    }
-
-    $smarty->assign(
-        'submission',
-        $GameSubmissionDAO->getLatestSubmissions(isset($user_id) ? $user_id : null, isset($last_timestamp) ? $last_timestamp : null, isset($action) ? $action : null, isset($done) ? $done : null)
-    ); 
-
-
-    if (isset($user_id)) {
-        $smarty->assign("user_id", $user_id);
+        $message = "You don't have permission to perform this task";
     }
     
-    //Send to smarty for return value
-    $smarty->display("file:" . $cpanel_template_folder . "ajax_submission_games.html");
+    echo $message;
+    mysqli_close($mysqli);
 }
