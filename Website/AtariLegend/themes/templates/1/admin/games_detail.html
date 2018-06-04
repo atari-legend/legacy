@@ -24,6 +24,81 @@
     {include file='1/admin/quick_search_games.html'}
 {/block}
 {block name=right_tile}
+
+
+<div class="standard_tile text-center">
+    <h1>OTHER FEATURES</h1>
+    <div class="standard_tile_line"></div>
+    <div class="standard_tile_padding">
+        <div class="gd_navigator">
+            <button id="comments_all" class="primary_button">Add file download</button><br>
+            <button id="comments_game_comments" class="primary_button">Add game facts</button><br>
+            <button id="comments_game_review_comments" class="primary_button">Add screenshots</button><br>
+            <button id="comments_interview_comments" class="primary_button">Add Mag review score</button><br>
+            <button id="test_clicker" class="primary_button">Add boxscans</button><br>
+            <button id="similar_games_link" class="primary_button">Add Similar Games</button><br>
+            <button id="write_review_link" class="primary_button">Write a review</button><br>
+            <button id="moderate_comments_link" class="primary_button">Moderate comments</button><br>
+        </div>
+        <div style="display:none;">
+        <a href="../downloads/downloads_game_detail.php?game_id={$game_info.game_id}" class="left_nav_link">Add file download</a><br>
+        <a href="../games/games_facts.php?game_id={$game_info.game_id}&amp;game_name={$game_info.game_name}" class="left_nav_link">Add game facts</a><br>
+        <a href="../games/games_screenshot_add.php?game_id={$game_info.game_id}&amp;game_name={$game_info.game_name}" class="left_nav_link">Add screenshots</a><br>
+        <a href="../magazine/magazine_review_score.php?game_id={$game_info.game_id}&amp;game_name={$game_info.game_name}" class="left_nav_link">Add Mag review score</a><br>
+        <a href="../games/games_box.php?game_id={$game_info.game_id}&amp;game_name={$game_info.game_name}" class="left_nav_link">Add boxscans</a><br>
+        <a href="../games/games_similar.php?game_id={$game_info.game_id}&amp;game_name={$game_info.game_name}" class="left_nav_link">Add Similar Games</a><br>
+        <a href="../games/games_review_add.php?game_id={$game_info.game_id}" class="left_nav_link">Write a review</a><br>
+        {if $nr_comments > 0}
+            <br>
+            <a href="../games/games_comment.php?game_id={$game_info.game_id}&amp;view=game_comments" class="left_nav_link">Moderate comments</a>
+        {/if}
+        </div>
+
+
+
+        <br>
+    </div>
+</div>
+<br>
+
+<div class="standard_tile text-center">
+    <h1>STATISTICS</h1>
+    <div class="standard_tile_line"></div>
+    <div class="standard_tile_padding">
+        <div class="standard_tile_text_center">
+            Nr of Screenshots - {$nr_screenshots}<br>
+            Nr of Box scans - {$nr_boxscans}<br>
+            Nr of reviews - {$nr_reviews}<br>
+            Nr of entries in Gallery - {$nr_pics}<br>
+            Nr of music files - {$nr_music}<br>
+            Nr of magazine reviews - {$nr_magazines}<br>
+            <br>
+        </div>
+    </div>
+</div>
+<br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     {include file='1/main/tile_bug_report.html'}
 {/block}
 {block name=java_script}
@@ -176,69 +251,7 @@ function browseDeveloper(str) {
                                 </div>
                                 <div class="gd_basic_game_info_row_checktxt">In development&nbsp;</div>
                             </div>
-                            <div class="gd_basic_game_info_row">
-                                <div class="gd_basic_game_info_row_check">
-                                    <div class="links_mod_checkbox">
-                                        <input type="checkbox" id="free" name="free" value="1" {if $game_info.game_free == 1} checked{/if}>
-                                        <label for="free"></label>
-                                    </div>
-                                </div>
-                                <div class="gd_basic_game_info_row_checktxt">Non-commercial&nbsp;</div>
-                            </div>
-                            <div class="gd_basic_game_info_row">
-                                <div class="gd_basic_game_info_row_check">
-                                    <div class="links_mod_checkbox">
-                                        <input type="checkbox" id="ste_only" name="ste_only" value="1" {if $game_info.game_ste_only == 1} checked{/if}>
-                                        <label for="ste_only"></label>
-                                    </div>
-                                </div>
-                                <div class="gd_basic_game_info_row_checktxt">STE ONLY&nbsp;</div>
-                            </div>
-                            <div class="gd_basic_game_info_row">
-                                <div class="gd_basic_game_info_row_check">
-                                    <div class="links_mod_checkbox">
-                                        <input type="checkbox" id="ste_enhanced" name="ste_enhanced" value="1" {if $game_info.game_ste_enhan == 1} checked{/if}>
-                                        <label for="ste_enhanced"></label>
-                                    </div>
-                                </div>
-                                <div class="gd_basic_game_info_row_checktxt">STE Enhanced&nbsp;</div>
-                            </div>
-                            <div class="gd_basic_game_info_row">
-                                <div class="gd_basic_game_info_row_check">
-                                    <div class="links_mod_checkbox">
-                                        <input type="checkbox" id="falcon_only" name="falcon_only" value="1" {if $game_info.game_falcon_only == 1} checked{/if}>
-                                        <label for="falcon_only"></label>
-                                    </div>
-                                </div>
-                                <div class="gd_basic_game_info_row_checktxt">Falcon only&nbsp;</div>
-                            </div>
-                            <div class="gd_basic_game_info_row">
-                                <div class="gd_basic_game_info_row_check">
-                                    <div class="links_mod_checkbox">
-                                        <input type="checkbox" id="falcon_enhanced" name="falcon_enhanced" value="1" {if $game_info.game_falcon_enhan == 1} checked{/if}>
-                                        <label for="falcon_enhanced"></label>
-                                    </div>
-                                </div>
-                                <div class="gd_basic_game_info_row_checktxt">Falcon Enhanced&nbsp;</div>
-                            </div>
-                            <div class="gd_basic_game_info_row">
-                                <div class="gd_basic_game_info_row_check">
-                                    <div class="links_mod_checkbox">
-                                        <input type="checkbox" id="falcon_rgb" name="falcon_rgb" value="1" {if $game_info.game_falcon_rgb == 1} checked{/if}>
-                                        <label for="falcon_rgb"></label>
-                                    </div>
-                                </div>
-                                <div class="gd_basic_game_info_row_checktxt">Falcon RGB&nbsp;</div>
-                            </div>
-                            <div class="gd_basic_game_info_row">
-                                <div class="gd_basic_game_info_row_check">
-                                    <div class="links_mod_checkbox">
-                                        <input type="checkbox" id="falcon_vga" name="falcon_vga" value="1" {if $game_info.game_falcon_vga == 1} checked{/if}>
-                                        <label for="falcon_vga"></label>
-                                    </div>
-                                </div>
-                                <div class="gd_basic_game_info_row_checktxt">Falcon VGA&nbsp;</div>
-                            </div>
+
                             <div class="gd_basic_game_info_row">
                                 <div class="gd_basic_game_info_row_check">
                                     <div class="links_mod_checkbox">
@@ -247,15 +260,6 @@ function browseDeveloper(str) {
                                     </div>
                                 </div>
                                 <div class="gd_basic_game_info_row_checktxt">Unfinished&nbsp;</div>
-                            </div>
-                            <div class="gd_basic_game_info_row">
-                                <div class="gd_basic_game_info_row_check">
-                                    <div class="links_mod_checkbox">
-                                        <input type="checkbox" id="monochrome" name="monochrome" value="1" {if $game_info.game_mono == 1} checked{/if}>
-                                        <label for="monochrome"></label>
-                                    </div>
-                                </div>
-                                <div class="gd_basic_game_info_row_checktxt">Monochrome&nbsp;</div>
                             </div>
                             <div class="gd_basic_game_info_row">
                                 <div class="gd_basic_game_info_row_check">
@@ -321,81 +325,53 @@ function browseDeveloper(str) {
                     </fieldset>
                     </div>
                 </form>
-                <div id="gd_other_features">
-                    <fieldset class="secondary_fieldset">
-                    <legend class="primary_legend">Other Features</legend>
-                        <a href="../downloads/downloads_game_detail.php?game_id={$game_info.game_id}" class="left_nav_link">Add file download</a><br>
-                        <a href="../games/games_facts.php?game_id={$game_info.game_id}&amp;game_name={$game_info.game_name}" class="left_nav_link">Add game facts</a><br>
-                        <a href="../games/games_screenshot_add.php?game_id={$game_info.game_id}&amp;game_name={$game_info.game_name}" class="left_nav_link">Add screenshots</a><br>
-                        <a href="../magazine/magazine_review_score.php?game_id={$game_info.game_id}&amp;game_name={$game_info.game_name}" class="left_nav_link">Add Mag review score</a><br>
-                        <a href="../games/games_box.php?game_id={$game_info.game_id}&amp;game_name={$game_info.game_name}" class="left_nav_link">Add boxscans</a><br>
-                        <a href="../games/games_similar.php?game_id={$game_info.game_id}&amp;game_name={$game_info.game_name}" class="left_nav_link">Add Similar Games</a><br>
-                        <a href="../games/games_review.php" class="left_nav_link">Write a review</a><br>
-                        {if $nr_comments > 0}
-                            <br>
-                            <a href="../games/games_comment.php?game_id={$game_info.game_id}&amp;view=game_comments" class="left_nav_link">Moderate comments</a>
-                        {/if}
-                    </fieldset>
-                    <br>
-                    <fieldset class="secondary_fieldset">
-                        <legend class="primary_legend">Statistics</legend>
-                        Nr of Screenshots - {$nr_screenshots}<br>
-                        Nr of Box scans - {$nr_boxscans}<br>
-                        Nr of reviews - {$nr_reviews}<br>
-                        Nr of entries in the Gallery - {$nr_pics}<br>
-                        Nr of music files - {$nr_music}<br>
-                        Nr of magazine reviews - {$nr_magazines}<br>
-                    </fieldset>
-                </div>
-                <div id="gd_other_features_left">
-                    <fieldset class="secondary_fieldset">
-                    <legend class="primary_legend">Other Features</legend>
-                        <a href="../downloads/downloads_game_detail.php?game_id={$game_info.game_id}" class="left_nav_link">Add file download</a><br>
-                        <a href="../games/games_facts.php?game_id={$game_info.game_id}&amp;game_name={$game_info.game_name}" class="left_nav_link">Add game facts</a><br>
-                        <a href="../games/games_screenshot_add.php?game_id={$game_info.game_id}&amp;game_name={$game_info.game_name}" class="left_nav_link">Add screenshots</a><br>
-                        <a href="../magazine/magazine_review_score.php?game_id={$game_info.game_id}&amp;game_name={$game_info.game_name}" class="left_nav_link">Add Mag review score</a><br>
-                        <a href="../games/games_box.php?game_id={$game_info.game_id}&amp;game_name={$game_info.game_name}" class="left_nav_link">Add boxscans</a><br>
-                        <a href="../games/games_similar.php?game_id={$game_info.game_id}&amp;game_name={$game_info.game_name}" class="left_nav_link">Add Similar Games</a><br>
-                        <a href="../games/games_review_add.php?game_id={$game_info.game_id}" class="left_nav_link">Write a review</a><br>
-                        {if $nr_comments > 0}
-                            <br>
-                            <a href="../games/games_comment.php?game_id={$game_info.game_id}&amp;view=game_comments" class="left_nav_link">Moderate comments</a>
-                        {/if}
-                    </fieldset>
-                </div>
-                <div id="gd_other_features_right">
-                    <fieldset class="secondary_fieldset">
-                        <legend class="primary_legend">Statistics</legend>
-                        Nr of Screenshots - {$nr_screenshots}<br>
-                        Nr of Box scans - {$nr_boxscans}<br>
-                        Nr of reviews - {$nr_reviews}<br>
-                        Nr of entries in Gallery - {$nr_pics}<br>
-                        Nr of music files - {$nr_music}<br>
-                        Nr of magazine reviews - {$nr_magazines}<br>
-                    </fieldset>
-                </div>
+
+
             </div>
+
+
+
+
+
+
+
+
+
+
             <div>
                 <div id="gd_development">
                     <fieldset class="secondary_fieldset">
-                    <legend class="primary_legend">
-                        Development info - help</legend>
-                                You can add as many publishers/developers/creators as you like to a game. Use the continent dropdown for example to add in which part of the world
-                                the game was released by that particular Publisher. The info dropdown is used for adding budget release info, or arcade release info.
+                    <legend class="primary_legend">Development info - help</legend>
+                        You can add as many developers/creators as you like to a game.
+                        Use the continent dropdown for example to add in which part of the world
+                        the game was released by that particular Publisher. The info dropdown
+                         is used for adding budget release info, or arcade release info.
                     </fieldset>
                     <br>
                 </div>
-                <div id="gd_left">
+
+                <div> <!-- DEVELOPMENT INFO AREA -->
                     <div id="gd_creator_info">
                         <fieldset class="secondary_fieldset">
                             <legend class="primary_legend">Creator info</legend>
                                 <form action="../games/db_games_detail.php" method="post" name="creator" id="creator">
                                     {if isset($game_author)}
                                         {foreach from=$game_author item=line}
-                                            <div class="links_mod_checkbox">
+                                            <div class="checkbox_alt" style="display:inline;">
                                                 <input type="checkbox" id="{$line.game_author_id}" name="game_author_id[]" value="{$line.game_author_id}">
-                                                <label for="{$line.game_author_id}"></label>&nbsp;
-                                                <a href="../individuals/individuals_edit.php?ind_id={$line.ind_id}" class="left_nav_link">{$line.ind_name}</a><br><b>({$line.auhthor_type_info})</b>
+                                                <label for="{$line.game_author_id}"></label>
+
+
+                                                <input type="text" maxlength="255" name="game_name" value="{$line.ind_name}" class="standard_input input_large" disabled>
+
+
+                                                <select name="author_type_id{$line.game_author_id}" class="standard_select select_medium">
+                                                <option value="-">-</option>
+                                                {foreach from=$author_types item=line2}
+                                                    <option value="{$line2.author_type_id}"{if $line2.author_type eq $line.auhthor_type_info} selected{/if}>{$line2.author_type}</option>
+                                                {/foreach}
+                                                </select>
+
                                             </div>
                                             <br>
                                         {/foreach}
@@ -404,27 +380,123 @@ function browseDeveloper(str) {
                                         <br>
                                         <br>
                                     {/if}
+                                    <b>Name</b>
                                     <select name="ind_id" id="ind_id" class="standard_select select_medium">
                                     <option value="-" selected="selected">-</option>
                                     {foreach from=$individuals item=line}
                                         <option value="{$line.ind_id}">{$line.ind_name}</option>
                                     {/foreach}
                                     </select>
-                                    <b>Name</b>
-                                    <br/>
+
+                                    <b>Job</b>
                                     <select name="author_type_id" class="standard_select select_medium">
                                     <option value="-" selected="selected">-</option>
                                     {foreach from=$author_types item=line}
                                         <option value="{$line.author_type_id}">{$line.author_type}</option>
                                     {/foreach}
                                     </select>
-                                    <b>Job</b>
-                                    <br/><br/>
+
+
                                     <input type="hidden" name="game_id" value="{$game_id}">
                                     <input type="button" value="Add" onclick="add_creator()" class="secondary_button">
                                 </form>
                         </fieldset>
                     </div>
+
+
+
+                <div id="gd_developer_info">
+                <fieldset class="secondary_fieldset">
+                    <legend class="primary_legend">Developer info</legend>
+                    <form action="../games/db_games_detail.php" method="post" name="developer" id="developer">
+                        {if isset($developer)}
+                            {foreach from=$developer item=line}
+                                <div class="links_mod_checkbox">
+                                    <input type="checkbox" id="game_developer_id[{$line.pub_id}]" name="game_developer_id[]" value="{$line.pub_id}">
+                                    <label for="game_developer_id[{$line.pub_id}]"></label>&nbsp;
+                                    <a href="../company/company_edit.php?comp_id={$line.pub_id}" class="left_nav_link">{$line.pub_name}</a> {if $line.continent <> '' }<b>({$line.continent})</b>{/if} {if  $line.extra_info <> '' }<b>({$line.extra_info})</b>{/if}
+                                </div>
+                                <br>
+                            {/foreach}
+                            <img src="../../../themes/templates/1/includes/img/arrow_ltr.gif" alt="" width="38" height="22" style="display:inline;">
+                            <input type="button" name="valider" value="Delete" onclick="delete_developer()" class="secondary_button" style="display:inline;">
+                            <br>
+                            <br>
+                        {/if}
+                        <table>
+                        <tr>
+                            <td>
+                                <select name="developerbrowse" onchange="browseDeveloper(this.value)" class="standard_select select_small">
+                                    <option value="" SELECTED>-</option>
+                                    {html_options values=$az_value output=$az_output}
+                                </select>
+                            </td>
+                            <td>
+                                <div id="ajax_developer_browse">
+                                    <select name="company_id_dev" class="standard_select select_medium">
+                                        <option value="-" selected="selected">-</option>
+                                        {foreach from=$company item=line}
+                                            <option value="{$line.comp_id}">{$line.comp_name}</option>
+                                        {/foreach}
+                                    </select>
+                                </div>
+                            </td>
+                            <td>
+                                <b>Name</b>
+                            </td>
+                        </tr>
+                        </table>
+
+                        <br/>
+                        <select name="game_extra_info_dev" class="standard_select select_medium">
+                            <option value="-" selected="selected">-</option>
+                            {foreach from=$game_extra_info item=line}
+                                <option value="{$line.game_extra_info_id}">{$line.game_extra_info}</option>
+                            {/foreach}
+                        </select>
+                        <b>Extra Info</b>
+                        <br><br>
+                        <input type="hidden" name="game_id" value="{$game_id}">
+                        <input type="button" value="Add" onclick="add_developer()" class="secondary_button">
+                    </form>
+                    </fieldset>
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+            <div id="gd_releases_info">
+                <fieldset class="secondary_fieldset">
+                <legend class="primary_legend">Releases info - help</legend>
+                    The releases section is used to add information about different releases.
+                    Different releases can be different officially published releases and also
+                    various fan made modifications, hacks, cracks etc
+                </fieldset>
+                <br>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                     <div id="gd_release_year">
                         <form action="../games/db_games_detail.php" method="post" name="year" id="year">
                             <fieldset class="secondary_fieldset">
@@ -465,71 +537,7 @@ function browseDeveloper(str) {
                     </div>
                     <div>
                     </div>
-                </div>
-                <div id="gd_center">
-                    <div id="gd_developer_info">
-                    <fieldset class="secondary_fieldset">
-                        <legend class="primary_legend">Developer info</legend>
-                        <form action="../games/db_games_detail.php" method="post" name="developer" id="developer">
-                            {if isset($developer)}
-                                {foreach from=$developer item=line}
-                                    <div class="links_mod_checkbox">
-                                        <input type="checkbox" id="game_developer_id[{$line.pub_id}]" name="game_developer_id[]" value="{$line.pub_id}">
-                                        <label for="game_developer_id[{$line.pub_id}]"></label>&nbsp;
-                                        <a href="../company/company_edit.php?comp_id={$line.pub_id}" class="left_nav_link">{$line.pub_name}</a> {if $line.continent <> '' }<b>({$line.continent})</b>{/if} {if  $line.extra_info <> '' }<b>({$line.extra_info})</b>{/if}
-                                    </div>
-                                    <br>
-                                {/foreach}
-                                <img src="../../../themes/templates/1/includes/img/arrow_ltr.gif" alt="" width="38" height="22" style="display:inline;">
-                                <input type="button" name="valider" value="Delete" onclick="delete_developer()" class="secondary_button" style="display:inline;">
-                                <br>
-                                <br>
-                            {/if}
-                            <table>
-                            <tr>
-                                <td>
-                                    <select name="developerbrowse" onchange="browseDeveloper(this.value)" class="standard_select select_small">
-                                        <option value="" SELECTED>-</option>
-                                        {html_options values=$az_value output=$az_output}
-                                    </select>
-                                </td>
-                                <td>
-                                    <div id="ajax_developer_browse">
-                                        <select name="company_id_dev" class="standard_select select_medium">
-                                            <option value="-" selected="selected">-</option>
-                                            {foreach from=$company item=line}
-                                                <option value="{$line.comp_id}">{$line.comp_name}</option>
-                                            {/foreach}
-                                        </select>
-                                    </div>
-                                </td>
-                                <td>
-                                    <b>Name</b>
-                                </td>
-                            </tr>
-                            </table>
-                            <br>
-                            <select name="continent_dev" class="standard_select select_medium">
-                                <option value="-" selected="selected">-</option>
-                                {foreach from=$continent item=line}
-                                    <option value="{$line.continent_id}">{$line.continent_name}</option>
-                                {/foreach}
-                            </select>
-                            <b>Continent</b>
-                            <br/>
-                            <select name="game_extra_info_dev" class="standard_select select_medium">
-                                <option value="-" selected="selected">-</option>
-                                {foreach from=$game_extra_info item=line}
-                                    <option value="{$line.game_extra_info_id}">{$line.game_extra_info}</option>
-                                {/foreach}
-                            </select>
-                            <b>Extra Info</b>
-                            <br><br>
-                            <input type="hidden" name="game_id" value="{$game_id}">
-                            <input type="button" value="Add" onclick="add_developer()" class="secondary_button">
-                        </form>
-                        </fieldset>
-                    </div>
+
                     <div id="gd_game_aka">
                         <form action="../games/db_games_detail.php" method="post" name="aka" id="aka">
                         <fieldset class="secondary_fieldset">
@@ -556,8 +564,7 @@ function browseDeveloper(str) {
                         </fieldset>
                         </form>
                     </div>
-                </div>
-                <div id="gd_right">
+
                     <div id="gd_publisher_info">
                     <fieldset class="secondary_fieldset">
                         <legend class="primary_legend">Publisher info</legend>
@@ -621,7 +628,80 @@ function browseDeveloper(str) {
                         </form>
                     </fieldset>
                     </div>
-                </div>
+
+                    <!-- Temporary solution while assuming only ONE release per game -->
+                    <div id="gd_release_attributes">
+                    <fieldset class="secondary_fieldset">
+                        <legend class="primary_legend">Release Attributes</legend>
+                        <form action="../games/db_games_detail.php" method="post" name="release_fieldset" id="release_fieldset">
+
+                            <div class="gd_basic_game_info_row">
+                                <div class="gd_basic_game_info_row_check">
+                                    <div class="links_mod_checkbox">
+                                        <input type="checkbox" id="free" name="free" value="1" {if $game_info.game_free == 1} checked{/if}>
+                                        <label for="free"></label>
+                                    </div>
+                                </div>
+                                <div class="gd_basic_game_info_row_checktxt">Non-commercial&nbsp;</div>
+                            </div>
+
+                            <br>
+                            Platform incompability<br>
+                            <br>
+                                {foreach from=$system_list item=line}
+                                    <div class="gd_basic_game_info_row">
+                                        <div class="gd_basic_game_info_row_check">
+                                            <div class="links_mod_checkbox">
+                                                <input type="checkbox" id="system_id{$line.system_id}" name="systems[]" value="{$line.system_id}" {if $game_info.game_free == 1} checked{/if}>
+                                                <label for="system_id{$line.system_id}"></label>
+                                            </div>
+                                        </div>
+                                        <div class="gd_basic_game_info_row_checktxt">{$line.system_name}&nbsp;</div>
+                                    </div>
+                                {/foreach}
+                            <br>
+                            Platform enhancements<br>
+                            <br>
+                                {foreach from=$system_list item=line}
+                                    <div class="gd_basic_game_info_row">
+                                        <div class="gd_basic_game_info_row_check">
+                                            <div class="links_mod_checkbox">
+                                                <input type="checkbox" id="system_enhancement_id{$line.system_id}" name="enhancements[]" value="{$line.system_id}" {if $game_info.game_free == 1} checked{/if}>
+                                                <label for="system_enhancement_id{$line.system_id}"></label>
+                                            </div>
+                                        </div>
+                                        <div class="gd_basic_game_info_row_checktxt">{$line.system_name}&nbsp;</div>
+                                    </div>
+                                {/foreach}
+                            <br>
+                            Screen resolution Compability<br>
+                            <br>
+                                {foreach from=$resolution_list item=line}
+                                    <div class="gd_basic_game_info_row">
+                                        <div class="gd_basic_game_info_row_check">
+                                            <div class="links_mod_checkbox">
+                                                <input type="checkbox" id="resolution_id{$line.resolution_id}" name="resolutions[]" value="{$line.resolution_id}" {if $game_info.game_free == 1} checked{/if}>
+                                                <label for="resolution_id{$line.resolution_id}"></label>
+                                            </div>
+                                        </div>
+                                        <div class="gd_basic_game_info_row_checktxt">{$line.resolution_name}&nbsp;</div>
+                                    </div>
+                                {/foreach}
+
+
+
+
+
+                            <br><br>
+                            <input type="hidden" name="game_id" value="{$game_id}">
+                            <input type="button" value="Add" onclick="add_publisher()" class="secondary_button">
+                        </form>
+                    </fieldset>
+                    </div>
+
+
+
+
             </div>
             <div id="gd_bottom">
                 <div id="gd_back">
