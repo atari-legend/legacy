@@ -153,24 +153,11 @@
         margin-bottom: 20px;
         margin-left: 5%;
     }
-    #gd_other_features_left {
-        float: left;
-        width: 100%;
-        margin-bottom: 20px;
-    }
+
     #gd_game_aka {
         margin-bottom: 20px;
     }
-    #gd_other_features_right,
-    #gd_center,
-    #gd_right {
-        float: right;
-        width: 100%;
-    }
-    #gd_left {
-        float: left;
-        width: 100%;
-    }
+
     #gd_publisher_info {
         margin-top: 0;
     }
@@ -625,17 +612,6 @@
     }
 }
 @media screen and (min-width: 601px) and (max-width: 1279px) {
-    #gd_other_features_left,
-    #gd_left {
-        float: left;
-        width: 49%;
-    }
-    #gd_other_features_right,
-    #gd_right,
-    #gd_center {
-        float: right;
-        width: 49%;
-    }
     #gd_back,
     #gd_publisher_info {
         margin-top: 20px;
@@ -644,9 +620,6 @@
 @media screen and (max-width: 1279px) {
     #welcome {
         margin-top: 0;
-    }
-    #gd_other_features {
-        display: none;
     }
     #gd_basic_game_info {
         width: 100%;
@@ -664,10 +637,6 @@
     .whoisit_position_front {
         float: right;
         margin-top: 20px;
-    }
-    #gd_other_features_left,
-    #gd_other_features_right {
-        display: none;
     }
     body {
         background-image: url('../images/top_bg_sides.jpg');

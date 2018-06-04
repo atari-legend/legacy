@@ -22,23 +22,16 @@
 //*----------------------------------------------------------
 //Games detail
 //------------------------------------------------------------ */
+
+.gd_navigator {
+    button {
+        width: 100%;
+        margin-left: 0;
+    }
+}
+
 #games_detail {
     float: left;
-}
-#gd_left {
-    float: left;
-    width: 32%;
-}
-
-#gd_center {
-    float: left;
-    width: 32%;
-    margin-left: 2%;
-}
-
-#gd_right {
-    float: right;
-    width: 32%;
 }
 
 #gd_development {
@@ -47,9 +40,15 @@
     margin-top: 20px;
 }
 
+#gd_releases_info {
+    float: left;
+    width: 100%;
+    margin-top: 20px;
+}
+
 #gd_basic_game_info {
     float: left;
-    width: 60%;
+    width: 100%;
 }
 
 .gd_basic_game_info_row {
@@ -73,10 +72,7 @@
     width: 40%;
     margin-top: -285px;
 }
-#gd_other_features {
-    float: right;
-    width: 38%;
-}
+
 #gd_creator_info,
 #gd_publisher_info,
 #gd_developer_info {
