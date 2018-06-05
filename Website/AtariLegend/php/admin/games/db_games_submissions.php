@@ -22,11 +22,11 @@
 
 include("../../config/common.php");
 include("../../config/admin.php");
-include("../../config/admin_rights.php");
+//include("../../config/admin_rights.php");
 
 if ($action == "update_submission") {
-    require_once __DIR__."/../../lib/Db.php";
-    require_once __DIR__."/../../common/DAO/GameSubmissionDAO.php";
+    //require_once __DIR__."/../../lib/Db.php";
+    //require_once __DIR__."/../../common/DAO/GameSubmissionDAO.php";
 
     if ($_SESSION['permission']==1 or $_SESSION['permission']=='1') {
         //****************************************************************************************
@@ -67,8 +67,8 @@ if ($action == "delete_submission") {
     //****************************************************************************************
     // This is the delete submission
     //****************************************************************************************
-    require_once __DIR__."/../../lib/Db.php";
-    require_once __DIR__."/../../common/DAO/GameSubmissionDAO.php";
+    //require_once __DIR__."/../../lib/Db.php";
+    //require_once __DIR__."/../../common/DAO/GameSubmissionDAO.php";
 
     if ($_SESSION['permission']==1 or $_SESSION['permission']=='1') {
         if (isset($submit_id)) {
@@ -115,8 +115,8 @@ if ($action == "move_submission_tocomment") {
     //****************************************************************************************
     // This is the move to comments place
     //****************************************************************************************
-    require_once __DIR__."/../../lib/Db.php";
-    require_once __DIR__."/../../common/DAO/GameSubmissionDAO.php";
+    //require_once __DIR__."/../../lib/Db.php";
+    //require_once __DIR__."/../../common/DAO/GameSubmissionDAO.php";
 
     if ($_SESSION['permission']==1 or $_SESSION['permission']=='1') {
         if (isset($submit_id)) {
@@ -125,7 +125,7 @@ if ($action == "move_submission_tocomment") {
             $v_rows = $query_submit_screenshot->num_rows;
 
             if ($v_rows > 0) {
-                $osd_message = "Submission has screenshots and is not suited for the comment section";
+                $message = "Submission has screenshots and is not suited for the comment section";
             } else {
                 $query_submit = $mysqli->query("SELECT * FROM game_submitinfo WHERE game_submitinfo_id = " . $submit_id . "") or die("something is wrong with mysqli");
                 $sql_submit = $query_submit->fetch_array(MYSQLI_BOTH) or die("something is wrong with mysqli2");

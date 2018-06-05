@@ -31,7 +31,9 @@
                         {/if}
                         <br>
                         {if $line->getUserCommentCount() > 0}
-                            Comments: <a href="#" data-user-id="{$line->getUserId()}" class="links_addnew_link jsUserCommentsLink">{$line->getUserCommentCount()}</a>
+                            Comments: <a href="../administration/comments.php" data-user-id="{$line->getUserId()}" class="standard_tile_link jsUserCommentsLink">{$line->getUserCommentCount()}</a>
+                        {else}
+                            Comments: 0
                         {/if}
                         <br>
                         {if $line->getKarma() == '' OR $line->getKarma() == 0}
@@ -119,15 +121,16 @@
                     </div>
                     <div class="submission_line" id="line_below_info"></div>
                     <div class="submission_post_text" id="jsSubmissionTextBox{$line->getSubmissionId()}">
-                        <!--{if isset($submission_screenshots)}
+                        {if isset($submission_screenshots)}
                             {foreach from=$submission_screenshots item=line_screen}
-                                {if $line.submit_id == $line_screen.game_submitinfo_id}
+                                {if $line->getSubmissionId() == $line_screen.game_submitinfo_id}
+                                    <br>
                                     <a href="../../includes/show_image.php?file={$line_screen.game_submitinfo_screenshot}&amp;resize=410,null,null,null" data-lightbox="image-1">
                                         <img src="../../includes/show_image.php?file={$line_screen.game_submitinfo_screenshot}&amp;resize=170,null,null,null" alt="Click to enlarge">
                                     </a>
                                 {/if}
                             {/foreach}
-                        {/if}-->
+                        {/if}
                         <br>
                         {$line->getComment()}
                         <br>
