@@ -21,7 +21,7 @@ $newsDAO = new AL\Common\DAO\NewsDAO($mysqli);
 
 if (isset($action) and $action == "get_newspost_text") {
     if (isset($news_id)) {
-        $smarty->assign('news_item', $newsDAO->getSpecificNews($news_id));
+        $smarty->assign('news_item', $newsDAO->getSpecificNews($news_id, null));
         $smarty->assign('action', $action);
         $smarty->assign('news_id', $news_id);
     }

@@ -41,7 +41,10 @@ if (isset($action) and $action == "delete_news") {
         $osd_message = "You don't have permission to perform this task";        
     }
     
-    $smarty->assign('action', 'delete_news');
+    echo $osd_message;
+    mysqli_close($mysqli);
+    
+    /*$smarty->assign('action', 'delete_news');
     $smarty->assign('osd_message', $osd_message);
     
     // Get all the needed data to load the submission page!
@@ -59,7 +62,7 @@ if (isset($action) and $action == "delete_news") {
     $smarty->assign("user_id", $_SESSION['user_id']);
     
     //Send to smarty for return value
-    $smarty->display("file:" . $cpanel_template_folder . "ajax_news_post_edit.html");
+    $smarty->display("file:" . $cpanel_template_folder . "ajax_news_post_edit.html");*/
 }
 
 //****************************************************************************************
@@ -280,7 +283,7 @@ if (isset($action) and $action == "save_news_post_text") {
     
     $smarty->assign(
         'news',
-        $newsDAO->getLatestNews(isset($user_id) ? $user_id : null, isset($last_timestamp) ? $last_timestamp : null, isset($action2) ? $action2 : null, isset($view) ? $view : null)
+        $newsDAO->getSpecificNews(isset($news_id) ? $news_id : null, isset($action) ? $action : null)
     ); 
         
     $smarty->assign("nr_news", $newsDAO->getNewsCount());

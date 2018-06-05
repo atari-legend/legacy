@@ -49,6 +49,7 @@ This is the sub template file to generate the news edit page
     <div class="standard_tile_padding">
         <div class="left_nav_section">
             This is the news editing page. News posts can be changed or deleted here. As these are all approved news entries, keep in mind these changes are instantly visible on the main site! Use the left side to perform a search query on the news table.
+            {if $nr_news <> ''}There are currently {$nr_news} posts in the news table.{/if}
         </div>
         <br>
         <br>
@@ -56,7 +57,6 @@ This is the sub template file to generate the news edit page
         <div class="jsNewsWrapper infinite-container">
             <div id="news_edit_list">
                 {if $nr_news <> '0'}
-                    {if $nr_news <> ''}<div class="standard_tile_text_center">There are currently {$nr_news} posts in the news table.</div><br>{/if}
                     {foreach from=$news item=line}
                         <div id="jsNewsId{$line->getId()}" class="infinite-item">
                             <div class="news_post_box" id="{$line->getTimestamp()}">
@@ -163,6 +163,7 @@ This is the sub template file to generate the news edit page
                     <div class="standard_tile_text_center">No news entries to approve.</div>
                 {/if}
             </div>
+            <div id="JSuserId" style="display:none;">{if isset($user_id)}{$user_id}{/if}</div>
         </div>
         </form>
     </div>

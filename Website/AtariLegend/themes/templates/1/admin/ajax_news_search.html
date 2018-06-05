@@ -151,7 +151,8 @@ This is the sub template file to generate the news edit page
                 {/if}
             </div>
         </div>
-        <div id="action_news_search" style="display:none;">{$search_action}</div>
+        <div id="JSnewsText" style="display:none;">{if isset($news_search)}{$news_search}{/if}</div>
+        <div id="JSuserId" style="display:none;">{if isset($user_id)}{$user_id}{/if}</div>
     </div>
 </div>
 
