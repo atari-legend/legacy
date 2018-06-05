@@ -39,31 +39,26 @@ class GameSubmissionDAO {
                 FROM game_submitinfo
                 LEFT JOIN game ON (game_submitinfo.game_id = game.game_id)
                 LEFT JOIN users ON (game_submitinfo.user_id = users.user_id)";
-        
-        if (isset($action) and $action=="search") {
-            if (isset($done) and $done == "1") {
-                $query .= " WHERE game_done = '1'";
-            } elseif (isset($done) and $done == "2") {
-                $query .= " WHERE game_done <> '1'";
-            } else {
-                $query .= " WHERE ( game_done <> '1' or game_done = '1' )";
-            }
+
+        if (isset($done) and $done == "1") {
+            $query .= " WHERE game_done = '1'";
+        } elseif (isset($done) and $done == "2") {
+            $query .= " WHERE game_done <> '1'";
         } else {
-            $query .= " WHERE ( game_done <> '1' or game_done = '1' )";
+            $query .= " WHERE ( game_done <> '1' or game_done = '1')";
         }
-        
+
         if (isset($user_id) and $user_id <> '') {
             $query .= " AND users.user_id = $user_id";
         }
-        
+
         if (isset($action) and $action=="autoload") {
             $query .= " AND game_submitinfo.timestamp < $last_timestamp ";
         } elseif (isset($action) and $action=="search") {
             $query .= " AND game_submitinfo.timestamp <= $last_timestamp ";
         }
-        
+
         $query .= " ORDER BY game_submitinfo.timestamp DESC LIMIT 10";
-        
         return $query;
     }
     
@@ -126,7 +121,6 @@ class GameSubmissionDAO {
                 null
             );
             
-            //$submission->screenshots = $submission->screenshots = $this->getGameSubmissionScreenshots($submission_id);
             $submissions[] = $submission;
         }
 
@@ -172,12 +166,12 @@ class GameSubmissionDAO {
     }
     
     
-     /**
+    /**
     * Get the submission screenshots
     *
     * @param  integer $submission_id
     * @return screenshots links    */
-    public function getGameSubmissionScreenshots($submission_id = null) {
+    /*public function getGameSubmissionScreenshots($submission_id = null) {
         $stmt = \AL\Db\execute_query(
             "GameSubmissionDAO: Get the screenshots of the submission",
             $this->mysqli,
@@ -225,5 +219,5 @@ class GameSubmissionDAO {
         $stmt->close();
 
         return $screenshots;
-    }
+    }*/
 }
