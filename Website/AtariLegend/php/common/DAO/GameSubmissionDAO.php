@@ -176,13 +176,13 @@ class GameSubmissionDAO {
             "GameSubmissionDAO: Get the screenshots of the submission",
             $this->mysqli,
             "SELECT screenshot_id, imgext FROM screenshot_main
-                LEFT JOIN screenshot_game_submitinfo 
+                LEFT JOIN screenshot_game_submitinfo
                     ON (screenshot_main.screenshot_id = screenshot_game_submitinfo.screenshot_id)
                 WHERE screenshot_game_submitinfo.game_submitinfo_id  = ?",
             "i",
             $submission_id
         );
-        
+
         \AL\Db\bind_result(
             "GameSubmissionDAO: Get the screenshots of the submission",
             $stmt,
@@ -215,7 +215,7 @@ class GameSubmissionDAO {
                 $new_path
             );
         }
-        
+
         $stmt->close();
 
         return $screenshots;
