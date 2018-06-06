@@ -167,3 +167,71 @@
     @extend #user_details_img_dark;
     width: 100%;
 }
+
+//*----------------------------------------------------------
+//Games submissions
+//------------------------------------------------------------ */
+.submission_post_box{
+    @extend .comments_post_box;
+}
+
+.submission_userinfo{
+    @extend .comments_userinfo;
+}
+
+.submission_post_detail {
+    @extend .comment_post_detail;
+}
+
+.submission_userinfo_phoneview {
+    @extend .comments_userinfo_phoneview;
+}
+
+.submission_title {
+    @extend .comments_title;
+}
+
+.submission_buttons {
+    @extend .comment_buttons;
+}
+
+.jsSubmissionEmailButton, .jsSubmissionDeleteButton, .jsSubmissionMoveButton, .jsSubmissionApproveButton {
+    @extend .jsCommentsEmailButton;
+}
+
+.submission_button_dropdown {
+    @extend .comments_button_dropdown
+}
+
+.submission_line {
+    @extend .comments_line;
+}
+
+.submission_title_phoneview {
+    @extend .comments_title_phoneview;
+}
+
+.submission_post_info {
+    @extend .comments_post_info;
+}
+
+.submission_post_text {
+    position: relative;
+    z-index: 0;
+    a:link {
+        color: #00d3d3;
+        font-weight: normal;
+    }
+    a:visited {
+        color: #00d3d3;
+        font-weight: normal;
+    }
+    a:hover {
+        color: #ffffff;
+        font-weight: normal;
+    }
+}
+
+.dropdown_show {
+    display: block;
+}
