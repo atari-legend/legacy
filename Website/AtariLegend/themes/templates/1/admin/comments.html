@@ -68,6 +68,7 @@
         <br>
         <form name="post">
         <div class="jsCommentsWrapper infinite-container">
+            <div id="comments_list">
             {* START NEW COMMENT BOX *}
             <div id="view" style="display:none;">{$links.view}</div>
             {foreach from=$comments item=line}
@@ -196,6 +197,7 @@
             </div>
             {/foreach}
             {* END NEW COMMENT BOX *}
+            </div>
         </div>
         </form>
     </div>

@@ -12,7 +12,7 @@ $(document).ready(function () {
             // Code to run if the request succeeds;
             // the response is passed to the function
             success: function (html) {
-                $('#column_center_cpanel').html(html);
+                $('#news_edit_list').html(html);
             }
         });
     }
