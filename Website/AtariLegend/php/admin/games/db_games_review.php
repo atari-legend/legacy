@@ -190,7 +190,7 @@ if ($action == 'edit_review' or $action == 'submitted') {
         $sdbquery = $mysqli->query("UPDATE review_score SET review_graphics = $graphics, review_sound = $sound, review_gameplay = $gameplay, review_overall = $conclusion
                  WHERE review_id = $reviewid") or die("Couldn't update review_score");
     } else {
-        $sdbquery = $mysqli->query("INSERT INTO review_score (review_id, review_graphics, review_sound, review_gameplay, review_overall) VALUES ($reviewid, '$graphics', '$sound', '$gameplay', '$overall')") or die("Couldn't insert the update of the review_score");
+        $sdbquery = $mysqli->query("INSERT INTO review_score (review_id, review_graphics, review_sound, review_gameplay, review_overall) VALUES ($reviewid, '$graphics', '$sound', '$gameplay', '$conclusion')") or die("Couldn't insert the update of the review_score");
     }
 
     //we're gonna add the screenhots into the screenshot_review table and fill up the review_comment table.
