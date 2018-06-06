@@ -1,18 +1,12 @@
 <?php
 /***************************************************************************
- *                             games_submission.php
- *                            -----------------------
- *   begin                : Saturday, Jan 08, 2005
- *   copyright            : (C) 2003 Atari Legend
- *   email                : silversurfer@atari-forum.com
- *   actual update        : Fixed counting bug
- *                          Fixed switch bug
+ *                             ajax_submission_games.php
+ *                            ----------------------------
+ *   begin                : Thursday, May 24, 2018
+ *   copyright            : (C) 2018 Atari Legend
+ *   actual update        : Creation of file
  *
- *   Id: games_submission.php,v 0.12 2005/04/28 Silver Surfer
- *   Id: games_submission.php,v 0.13 2016/07/27 STG
- *               - AL 2.0
- *   Id: games_submission.php,v 1.14 2017/09/08 STG
- *               - Enhanced for submissions with screenshots
+ *   Id: ajax_submission_games.php,v 0.1 2018/05/24 STG
  ***************************************************************************/
 
 /*
@@ -33,10 +27,18 @@ $GameSubmissionDAO = new AL\Common\DAO\GameSubmissionDAO($mysqli);
 
 $smarty->assign("nr_submission", $GameSubmissionDAO->getGameSubmissionCount());
 
-if (isset($done)) {
-    $smarty->assign('done', $done );
-} else {
-    $smarty->assign('done', '' );
+if (isset($done) and $done == '1') {
+    if (isset($open) and $open == '2') {
+        $done = '3'; //open and closed are flagged
+    } else {
+        $done = '1'; //only closed is flagged
+    }
+} elseif (isset($open) and $open == '2') {
+    $done = '2'; //only open is flagged
+}
+
+if ($last_timestamp == '') {
+    $last_timestamp = null;
 }
 
 $submissions = $GameSubmissionDAO->getLatestSubmissions(isset($user_id) ? $user_id : null, isset($last_timestamp) ? $last_timestamp : null, isset($action) ? $action : null, isset($done) ? $done : null);
@@ -76,13 +78,15 @@ while ($authors = $sql_author->fetch_array(MYSQLI_BOTH)) {
     ));
 }
 
-
 if (isset($user_id)) {
     $smarty->assign("user_id", $user_id);
 }
 
+$smarty->assign("action", $action);
+$smarty->assign("last_timestamp", $last_timestamp);
+
 //Send all smarty variables to the templates
-$smarty->display("file:" . $cpanel_template_folder . "submission_games.html");
+$smarty->display("file:" . $cpanel_template_folder . "ajax_submission_games.html");
 
 //close the connection
 mysqli_close($mysqli);

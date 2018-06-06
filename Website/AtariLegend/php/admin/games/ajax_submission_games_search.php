@@ -1,45 +1,45 @@
 <?php
 /***************************************************************************
- *                             games_submission.php
- *                            -----------------------
- *   begin                : Saturday, Jan 08, 2005
- *   copyright            : (C) 2003 Atari Legend
- *   email                : silversurfer@atari-forum.com
- *   actual update        : Fixed counting bug
- *                          Fixed switch bug
+ *                                ajax_submission_games_search.php
+ *                            ----------------------------------------
+ *   begin                : Thursday, 31st May, 2018
+ *   copyright            : (C) 2018 Atari Legend
+ *   email                : admin@atarilegend.com
  *
- *   Id: games_submission.php,v 0.12 2005/04/28 Silver Surfer
- *   Id: games_submission.php,v 0.13 2016/07/27 STG
- *               - AL 2.0
- *   Id: games_submission.php,v 1.14 2017/09/08 STG
- *               - Enhanced for submissions with screenshots
+ *   Id: ajax_submission_games_search.php 31/05/2018 ST Graveyard - creation of file
  ***************************************************************************/
-
-/*
- ***********************************************************************************
- Display submissions
- ***********************************************************************************
- */
-
+ 
 include("../../config/common.php");
 include("../../config/admin.php");
 require_once __DIR__."/../../lib/Db.php";
 require_once __DIR__."/../../common/DAO/GameSubmissionDAO.php";
 
-//load the search fields of the quick search side menu
-include("../../admin/games/quick_search_games.php");
-
 $GameSubmissionDAO = new AL\Common\DAO\GameSubmissionDAO($mysqli);
 
+//********************************************************************************************
+// Get all the needed data to load the comments page!
+//********************************************************************************************
 $smarty->assign("nr_submission", $GameSubmissionDAO->getGameSubmissionCount());
 
-if (isset($done)) {
-    $smarty->assign('done', $done );
+$date = date_to_timestamp($submsission_searchYear, $submsission_searchMonth, $submsission_searchDay);
+
+if ( $author_search == '-' )
+{ 
 } else {
-    $smarty->assign('done', '' );
+    $user_id = $author_search;
 }
 
-$submissions = $GameSubmissionDAO->getLatestSubmissions(isset($user_id) ? $user_id : null, isset($last_timestamp) ? $last_timestamp : null, isset($action) ? $action : null, isset($done) ? $done : null);
+if (isset($done) and $done == '1') {
+    if (isset($open) and $open == '2') {
+        $done = '3'; //open and closed are flagged
+    } else {
+        $done = '1'; //only closed is flagged
+    }
+} elseif (isset($open) and $open == '2') {
+    $done = '2'; //only open is flagged
+}
+
+$submissions = $GameSubmissionDAO->getLatestSubmissions(isset($user_id) ? $user_id : null, isset($date) ? $date : null, isset($action) ? $action : null, isset($done) ? $done : null);
 $smarty->assign('submission', $submissions);
 
 //check if there are screenshot added to the submission
@@ -76,13 +76,19 @@ while ($authors = $sql_author->fetch_array(MYSQLI_BOTH)) {
     ));
 }
 
-
 if (isset($user_id)) {
     $smarty->assign("user_id", $user_id);
 }
 
+if (isset($done)) {
+    $smarty->assign("done", $done);
+}
+
+$smarty->assign("action", $action);
+$smarty->assign("last_timestamp", $date);
+
 //Send all smarty variables to the templates
-$smarty->display("file:" . $cpanel_template_folder . "submission_games.html");
+$smarty->display("file:" . $cpanel_template_folder . "ajax_submission_games_search.html");
 
 //close the connection
 mysqli_close($mysqli);

@@ -34,12 +34,12 @@ $NewsDAO = new AL\Common\DAO\NewsDAO($mysqli);
 //********************************************************************************************
 $smarty->assign(
     'news',
-    $NewsDAO->getLatestNews(isset($user_id) ? $user_id : null, isset($last_timestamp) ? $last_timestamp : null, isset($action) ? $action : null, isset($view) ? $view : null)
+    $NewsDAO->getLatestNews(isset($user_id) ? $user_id : null, isset($last_timestamp) ? $last_timestamp : null, isset($action) ? $action : null, isset($news_text) ? $news_text : null)
 ); 
 
 $smarty->assign("nr_news", $NewsDAO->getNewsCount());
 
-$smarty->assign("user_id", $_SESSION['user_id']);
+//$smarty->assign("user_id", $_SESSION['user_id']);
 
 //Send all smarty variables to the templates
 $smarty->display("file:" . $cpanel_template_folder . "news_edit.html");

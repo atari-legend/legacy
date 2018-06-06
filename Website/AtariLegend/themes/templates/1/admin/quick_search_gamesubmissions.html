@@ -1,39 +1,34 @@
 {*
 /***************************************************************************
-*                                quick_search_news.html
-*                            ----------------------------
-*   begin                : Tuesday, April 10, 2018
+*                                quick_search_gamesubmissions.html
+*                            ----------------------------------------
+*   begin                : Wednesday, May 30, 2018
 *   copyright            : (C) 2018 Atari Legend
 *   email                : admin@atarilegend.com
 *
-*   Id: quick_search_news.php 10/04/2018 ST Graveyard - creation of file
+*   Id: uick_search_gamesubmissions.html 30/05/2018 ST Graveyard - creation of file
 *
 ***************************************************************************/
 
 //****************************************************************************************
-// This is the quick news search for the left part of the cpanel
+// This is the quick Game Submissions search for the left part of the cpanel
 //****************************************************************************************
 *}
 
-{block name=quick_search_news}
-<script src="{$template_dir}includes/js/news_search.js"></script>
+{block name=quick_search_gamesubmissions}
+<script src="{$template_dir}includes/js/gamesubmission_search.js"></script>
 <div class="standard_tile">
     <div class="help-tip">
         <p>
             When using the search fields, the query will be executed automatically.
         </p>
     </div>
-    <h1>NEWS SEARCH</h1>
+    <h1>SUBMISSION SEARCH</h1>
     <div class="standard_tile_line"></div>
     <br>
-    <form method="get" name="news_search" id="JSCpanelNewsSearchForm">
+    <form method="get" name="gamesubmissions_search" id="JSCpanelGamesubmissionsSearchForm">
         <div class="standard_tile_text_center">
-            <h3>Search for news:</h3>
-            <br>
-            <div class="standard_tile_text_center">
-                Text search :<br>
-                <input type="text" name="newssearch" value="" id="JSCpanelNewsSearch" class="standard_input input_large">
-            </div>
+            <h3>Search for submissions:</h3>
             <br>
             <div class="standard_tile_text_center">
                 By Author : <br>
@@ -47,10 +42,20 @@
             <br>
             <div class="standard_tile_text_center">
                 All entries up to : <br>
-                {html_select_date prefix="news_search" start_year="2000" class="standard_select"}
+                {html_select_date prefix="submsission_search" start_year="2000" class="standard_select"}
             </div>
             <br>
-            <input type="hidden" name="action" id="action_quick_search" value="search">
+            <div id="quick_search_options" class="standard_tile_text_left">
+                <div class="checkbox_alt">
+                    <input type="checkbox" value="2" id="JSOpen" name="open">&nbsp;&nbsp;Open
+                    <label for="JSOpen"></label>
+                </div>
+                <div class="checkbox_alt">
+                    <input type="checkbox" value="1" id="JSDone" name="done">&nbsp;&nbsp;Closed
+                    <label for="JSDone"></label>
+                </div>
+            </div>
+            <input type="hidden" name="action" id="action_quick_search_submission" value="search">
             <br>
             <hr>
         </div>
