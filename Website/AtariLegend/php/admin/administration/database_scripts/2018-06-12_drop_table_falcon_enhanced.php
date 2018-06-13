@@ -1,27 +1,26 @@
 <?php
-/***************************************************************************
- *   Update script to Add license column to game_release table
- *
- **************************************************************************/
+/*************************************************************************************************
+ *   Drop old table game_falcon_enhan which is now replaced by the game_release_system_enhanced
+ *   2018-06-12_drop_table_ste_enhanced.php
+ ************************************************************************************************/
 
 // Unique identifier set by developer.
-$database_update_id = 136;
+$database_update_id = 145;
 
 // Description of what the change will do.
-$update_description = "Add license column to release";
+$update_description = "Drop table game_falcon_enhance";
 
 // Should the database change query execute if test is "test_fail" or "test_success"
-$execute_condition = "test_fail";
+$execute_condition = "test_success";
 
 //This is the test query, the query should be made to get an either true or false result.
 $test_condition = "SELECT *
-FROM information_schema.columns
+FROM information_schema.tables
 WHERE table_schema = '$db_databasename'
-AND table_name = 'game_release'
-AND column_name = 'license' LIMIT 1";
+AND table_name = 'game_falcon_enhan' LIMIT 1";
 
 // Database change
-$database_update_sql = "ALTER TABLE game_release ADD `license` ENUM('Commercial','Non-Commercial')";
+$database_update_sql = "Drop table game_falcon_enhan";
 
 // If the update should auto execute without user interaction set to "yes".
 $database_autoexecute = "yes";

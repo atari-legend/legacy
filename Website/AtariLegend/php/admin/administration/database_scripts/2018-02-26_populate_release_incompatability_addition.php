@@ -14,46 +14,45 @@ $falcon = 1;
 // Lets do falcon First
 //
 
-// first fix bug
-$mysqli->query("
-DELETE FROM game_falcon_only WHERE game_id = 27")
-    or die("Error selecting game_faclon_only tables: ".$mysqli->error);
-
-$result3 = $mysqli->query("
-SELECT
-    game_release.id AS game_release_id
-FROM
-    game_falcon_only
-LEFT JOIN game_release ON (game_release.game_id = game_falcon_only.game_id )")
-or die("Unable to retrieve the list of falcon only titles: ".$mysqli->error);
-
+//Let's first loop over the Falcon only table
+$result3 = $mysqli->query("SELECT * FROM game_falcon_only")
+                            or die("Unable to retrieve the list of Falcon only titles: ".$mysqli->error);
+                            
 while ($falcon_only = $result3->fetch_array(MYSQLI_BOTH)) {
-    $game_release_id = $falcon_only['game_release_id'];
+    
+    //  Now let's see if we have a game release for this entry. This is not always the case so it seems.
+    $result4 = $mysqli->query("SELECT * FROM game_release WHERE game_id = $falcon_only[game_id]")
+                            or die("Unable to retrieve the game_id from the game release table: ".$mysqli->error);
 
-    // Insert incompatible systems into the incompatibility table
-    // ST
-    $mysqli->query("
-    INSERT INTO game_release_system_incompatible
-        (system_id,game_release_id)
-    VALUES
-        ($st, $game_release_id)")
-    or die("Error error inserting ST incompabilities: ".$mysqli->error);
+    while ($game_release = $result4->fetch_array(MYSQLI_BOTH)) {
 
-    // STE
-    $mysqli->query("
-    INSERT INTO game_release_system_incompatible
-        (system_id,game_release_id)
-    VALUES
-        ($ste, $game_release_id)")
-    or die("Error error inserting STE incompabilities: ".$mysqli->error);
+        $game_release_id = $game_release['id'];
 
-    // TT
-    $mysqli->query("
-    INSERT INTO game_release_system_incompatible
-        (system_id,game_release_id)
-    VALUES
-        ($tt, $game_release_id)")
-    or die("Error error inserting STE incompabilities: ".$mysqli->error);
+        // Insert incompatible systems into the incompatibility table
+        // ST
+        $mysqli->query("
+        INSERT INTO game_release_system_incompatible
+            (system_id,game_release_id)
+        VALUES
+            ($st, $game_release_id)")
+        or die("Error error inserting ST incompabilities: ".$mysqli->error);
+
+        // STE
+        $mysqli->query("
+        INSERT INTO game_release_system_incompatible
+            (system_id,game_release_id)
+        VALUES
+            ($ste, $game_release_id)")
+        or die("Error error inserting STE incompabilities: ".$mysqli->error);
+
+        // TT
+        $mysqli->query("
+        INSERT INTO game_release_system_incompatible
+            (system_id,game_release_id)
+        VALUES
+            ($tt, $game_release_id)")
+        or die("Error error inserting STE incompabilities: ".$mysqli->error);
+    }
 }
 
 //
@@ -63,14 +62,6 @@ while ($falcon_only = $result3->fetch_array(MYSQLI_BOTH)) {
 //Let's first loop over the STe only table
 $result1 = $mysqli->query("SELECT * FROM game_ste_only")
                             or die("Unable to retrieve the list of STe only titles: ".$mysqli->error);
-
-/*$result2 = $mysqli->query("
-SELECT
-    game_release.id AS game_release_id
-FROM
-    game_ste_only
-LEFT JOIN game_release ON (game_release.game_id = game_ste_only.game_id )")
-or die("Unable to retrieve the list of ste only titles: ".$mysqli->error);*/
 
 while ($ste_only = $result1->fetch_array(MYSQLI_BOTH)) {
     
