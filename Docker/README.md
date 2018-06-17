@@ -47,23 +47,23 @@ $ docker ps
 CONTAINER ID        IMAGE                   COMMAND                  CREATED              STATUS              PORTS                  NAMES
 d11c59db047e        docker_php              "docker-php-entryp..."   About a minute ago   Up About a minute   0.0.0.0:80->80/tcp     docker_php_1
 f6fb94013c05        phpmyadmin/phpmyadmin   "/run.sh phpmyadmin"     14 hours ago         Up About a minute   0.0.0.0:8080->80/tcp   docker_phpmyadmin_1
-b9dfeb9e2a87        mysql                   "docker-entrypoint..."   14 hours ago         Up About a minute   3306/tcp               docker_db_1
+b9dfeb9e2a87        mysql:5                 "docker-entrypoint..."   14 hours ago         Up About a minute   3306/tcp               docker_db_1
 ```
 
 In this case: `docker_db_1`
 
 As a result, the Docker commands to interact with the MySQL instance will need
 the `--net atarilegend_default` to access the virtual network, and the `--link
-atarilegend_db_1:db` to link the command with the running container.
+docker_db_1:db` to link the command with the running container.
 
 To create the database:
 
 ```bash
-docker run -it --link atarilegend_db_1:db --net atarilegend_default --rm mysql sh -c 'mysqladmin -hdb -uroot -patari create 'atari-legend'' 
+docker run -it --link docker_db_1:db --net atarilegend_default --rm mysql:5 sh -c 'mysqladmin -hdb -uroot -patari create 'atari-legend''
 ```
 
 To import the dump:
 
 ```bash
-docker run -it --link atarilegend_db_1:db --net atarilegend_default -v /path/to/your/dump.sql:/tmp/dump.sql --rm mysql sh -c 'mysql -hdb -uroot -patari atari-legend < /tmp/dump.sql'
+docker run -it --link docker_db_1:db --net atarilegend_default -v /path/to/your/dump.sql:/tmp/dump.sql --rm mysql:5 sh -c 'mysql -hdb -uroot -patari atari-legend < /tmp/dump.sql'
 ```
