@@ -29,7 +29,7 @@ $database_update_sql = "CREATE TABLE game_release_resolution (
 )
 ENGINE = InnoDB
 CHARSET = utf8
-COMMENT = 'Table used for setting resolutions'";
+COMMENT = 'List screen resolutions supported by a release'";
 
 // If the update should auto execute without user interaction set to "yes".
 $database_autoexecute = "yes";
