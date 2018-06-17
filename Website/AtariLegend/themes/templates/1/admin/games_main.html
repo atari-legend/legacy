@@ -28,6 +28,15 @@ The main game page
     {include file='1/admin/quick_search_users.html'}
 {/block}
 
+{block name=java_script}
+<script>
+    jQuery(document).ready(function () {
+        // Populate search results page on load
+        GameSearch.GameSearch();
+    });
+</script>
+{/block}
+
 {block name=main_tile}
 <div class="standard_tile" id="games_list">
     <div class="help-tip">
@@ -51,101 +60,21 @@ The main game page
         </div>
     <br>
     <br>
-    <div class="table-responsive">
-        <table class="secondary_table_list table_hover table_sm text-nowrap">
-            <tr>
-                <th class="mw-40">Game Name</th>
-                <th class="mw-20">Publisher</th>
-                <th class="mw-20">Developer</th>
-                <th class="mw-10">Year</th>
-                <th class="mw-10">Info</th>
-            </tr>
-            {foreach from=$game_search item=line}
-            <tr>
-                <td>
-                    {if $line.game_name != ''}
-                        <a href="games_detail.php?game_id={$line.game_id}" class="standard_tile_text_left">
-                            {$line.game_name}
-                        </a>
-                    {else}
-                        <i><span class="standard_tile_text_left">n/a</span></i>
-                    {/if}
-                </td>
-                <td>
-                    {if $line.publisher_name != ''}
-                        <a href="#" class="standard_tile_text_left" onclick="JSPublisherSelect({$line.publisher_id})" value="{$line.publisher_id}">
-                        {$line.publisher_name}
-                        </a>
-                    {else}
-                        <i><span class="standard_tile_text_left">n/a</span></i>
-                    {/if}
-                </td>
-                <td>
-                    {if $line.developer_name != ''}
-                        <a href="#" onclick="JSDeveloperSelect({$line.developer_id})" class="standard_tile_text_left">
-                            {$line.developer_name}
-                        </a>
-                    {else}
-                        <i><span class="standard_tile_text_left">n/a</span></i>
-                    {/if}
-                </td>
-                <td>
-                    {if $line.year != ''}
-                        <a href="#" onclick="JSYearSelect({$line.year})" class="standard_tile_text_left">
-                            {$line.year}
-                        </a>
-                    {else}
-                        <i><span class="standard_tile_text_left">n/a</span></i>
-                    {/if}
-                </td>
-                <td>
-                    {if isset($line.screenshot)}
-                        <a href="games_screenshot_add.php?game_id={$line.game_id}" class="standard_tile_text_left">
-                            <i class="fa fa-camera" aria-hidden="true" title="Screenshots available"></i>
-                        </a>
-                    {else}
-                        <a href="games_screenshot_add.php?game_id={$line.game_id}" class="standard_tile_text_left" style="color:black;">
-                            <i class="fa fa-camera" aria-hidden="true" title="Add Screenshot"></i>
-                        </a>
-                    {/if}
-                    {if isset($line.music)}
-                        <a href="games_music_detail.php?game_id={$line.game_id}" class="standard_tile_text_left">
-                            <i class="fa fa-music" aria-hidden="true" title="Music available"></i>
-                        </a>
-                    {else}
-                        <a href="games_music_detail.php?game_id={$line.game_id}" class="standard_tile_text_left" style="color:black;">
-                            <i class="fa fa-music" aria-hidden="true" title="Add Music"></i>
-                        </a>
-                    {/if}
-                    {if isset($line.boxscan)}
-                        <a href="games_box.php?game_id={$line.game_id}" class="standard_tile_text_left">
-                            <i class="fa fa-cube" aria-hidden="true" title="Boxscan available"></i>
-                        </a>
-                    {else}
-                        <a href="games_box.php?game_id={$line.game_id}" class="standard_tile_text_left" style="color:black;">
-                            <i class="fa fa-cube" aria-hidden="true" title="Add Boxscan"></i>
-                        </a>
-                    {/if}
-                    {if isset($line.download)}
-                        <a href="games_upload.php?game_id={$line.game_id}" class="standard_tile_text_left">
-                            <i class="fa fa-file-o" aria-hidden="true" title="Download available"></i>
-                        </a>
-                    {else}
-                    <a href="games_upload.php?game_id={$line.game_id}" class="standard_tile_text_left" style="color:black;">
-                        <i class="fa fa-file-o" aria-hidden="true" title="Add Download"></i>
-                    </a>
-                    {/if}
-                </td>
-            </tr>
-            {/foreach}
-            <tr>
-                <td colspan="5">
-                    {if $nr_of_games == 1}1 game found {else} {$nr_of_games} games found{/if} in {$query_time} sec
-                </td>
-            </tr>
-        </table>
-    </div>
+    <h6 class="text-center">
+        <i class="fa fa-circle-o-notch fa-spin fa-3x fa-fw"></i>
+    </h6>
     <br>
 </div>
 </div>
+
+<!--This is the lazy load script with fader effect - fader is pure css class -->
+<script src="{$template_dir}includes/js/vendor/lazyload-8.0.1.min.js"></script>
+<script>
+(function () {
+    var ll = new LazyLoad({
+        threshold: 0
+    });
+}());
+</script>
+<!--end lazy load script with fader effect -->
 {/block}

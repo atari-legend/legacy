@@ -1,4 +1,4 @@
-$(document).ready(function () {
+window.GameSearch = (function () {
     function GameSearch () {
         var formValues = $('#JSCpanelGameSearchForm').serialize();
 
@@ -176,4 +176,8 @@ $(document).ready(function () {
     $('#JSscreenshot').change(function () {
         GameSearch();
     });
-});
+
+    return {
+        GameSearch: GameSearch
+    }
+})();

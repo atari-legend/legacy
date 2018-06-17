@@ -14,6 +14,7 @@
         "Tabulator": true,
         "md5": true,
         "hex_sha512": true,
-        "previewText": true
+        "previewText": true,
+        "GameSearch": true
     }
 }
