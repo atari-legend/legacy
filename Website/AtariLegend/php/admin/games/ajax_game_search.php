@@ -346,9 +346,8 @@ if (isset($action) and $action == "search") {
     $RESULTGAME .= ' ORDER BY game_name ASC';
     $RESULTAKA .= ' GROUP BY game_aka.game_id, game_aka.aka_name HAVING COUNT(DISTINCT game_aka.game_id, game_aka.aka_name) = 1';
     $RESULTAKA .= ' ORDER BY game_aka.aka_name ASC';
-    
-    
-    echo $RESULTGAME;
+
+
     $mysqli->query("CREATE TEMPORARY TABLE temp ENGINE=MEMORY $RESULTGAME") or die(mysqli_error());
     $mysqli->query("INSERT INTO temp $RESULTAKA") or die(mysqli_error());
 
