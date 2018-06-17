@@ -29,7 +29,7 @@ $database_update_sql = "CREATE TABLE game_release_system_incompatible (
 )
 ENGINE = InnoDB
 CHARSET = utf8
-COMMENT = 'Table used for setting compatability'";
+COMMENT = 'List systems a release is not compatible with'";
 
 // If the update should auto execute without user interaction set to "yes".
 $database_autoexecute = "yes";

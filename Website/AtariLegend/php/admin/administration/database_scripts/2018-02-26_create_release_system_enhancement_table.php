@@ -29,7 +29,7 @@ $database_update_sql = "CREATE TABLE game_release_system_enhanced (
 )
 ENGINE = InnoDB
 CHARSET = utf8
-COMMENT = 'Table used for setting enhancements'";
+COMMENT = 'List systems for which a release has been enhanced'";
 
 // If the update should auto execute without user interaction set to "yes".
 $database_autoexecute = "yes";

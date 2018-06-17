@@ -26,7 +26,7 @@ $database_update_sql = "CREATE TABLE system (
 )
 ENGINE = InnoDB
 CHARSET = utf8
-COMMENT = 'System table used for setting enhancements or compability'";
+COMMENT = 'List systems a release is enhanced for or incompatible with'";
 
 // If the update should auto execute without user interaction set to "yes".
 $database_autoexecute = "yes";
