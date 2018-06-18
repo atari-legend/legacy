@@ -20,13 +20,13 @@ AND table_name = 'resolution' LIMIT 1";
 
 // Database change
 $database_update_sql = "CREATE TABLE resolution (
-    `resolution_id` INT NOT NULL AUTO_INCREMENT COMMENT 'Unique ID of a resolution',
-    `resolution_name` VARCHAR(255) NOT NULL COMMENT 'Name of resolution',
+    `resolution_id` INT NOT NULL AUTO_INCREMENT COMMENT 'Unique ID of a screen resolution',
+    `resolution_name` VARCHAR(255) NOT NULL COMMENT 'Name of screen resolution',
     PRIMARY KEY (`resolution_id`)
 )
 ENGINE = InnoDB
 CHARSET = utf8
-COMMENT = 'Resolution table used for setting resolutions'";
+COMMENT = 'List all screen resolutions'";
 
 // If the update should auto execute without user interaction set to "yes".
 $database_autoexecute = "yes";
