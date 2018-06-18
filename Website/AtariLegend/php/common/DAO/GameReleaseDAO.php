@@ -10,6 +10,9 @@ require_once __DIR__."/../Model/Game/GameRelease.php" ;
 class GameReleaseDAO {
     private $mysqli;
 
+    const LICENSE_COMMERCIAL = 'Commercial';
+    const LICENSE_NON_COMMERCIAL = 'Non-Commercial';
+
     public function __construct($mysqli) {
         $this->mysqli = $mysqli;
     }
@@ -46,20 +49,20 @@ class GameReleaseDAO {
         $stmt = \AL\Db\execute_query(
             "GameRelaseDAO: getReleasesForGame",
             $this->mysqli,
-            "SELECT id, `name`, `date` FROM game_release WHERE game_id = ?",
+            "SELECT id, `name`, `date`, license FROM game_release WHERE game_id = ?",
             "i", $game_id
         );
 
         \AL\Db\bind_result(
             "GameRelaseDAO: getReleasesForGame",
             $stmt,
-            $id, $name, $date
+            $id, $name, $date, $license
         );
 
         $releases = [];
         while ($stmt->fetch()) {
             $releases[] = new \AL\Common\Model\Game\GameRelease(
-                $id, $game_id, $name, $date
+                $id, $game_id, $name, $date, $license
             );
         }
 
@@ -78,20 +81,20 @@ class GameReleaseDAO {
         $stmt = \AL\Db\execute_query(
             "GameReleaseDAO: getRelease: $release_id",
             $this->mysqli,
-            "SELECT id, game_id, `name`, `date` FROM game_release WHERE id = ?",
+            "SELECT id, game_id, `name`, `date`, license FROM game_release WHERE id = ?",
             "i", $release_id
         );
 
         \AL\Db\bind_result(
             "GameReleaseDAO: getRelease: $release_id",
             $stmt,
-            $id, $game_id, $name, $date
+            $id, $game_id, $name, $date, $license
         );
 
         $release = null;
         if ($stmt->fetch()) {
             $release = new \AL\Common\Model\Game\GameRelease(
-                $id, $game_id, $name, $date
+                $id, $game_id, $name, $date, $license
             );
         }
 
@@ -106,11 +109,53 @@ class GameReleaseDAO {
      * @param integer $release_id ID of the release to delete
      */
     public function deleteRelease($release_id) {
+        // Delete linked data
+        $stmt = \AL\Db\execute_query(
+            "GameRelaseDAO: deleteRelease",
+            $this->mysqli,
+            "DELETE FROM game_release_resolution WHERE game_release_id = ?",
+            "i", $release_id
+        );
+        $stmt = \AL\Db\execute_query(
+            "GameRelaseDAO: deleteRelease",
+            $this->mysqli,
+            "DELETE FROM game_release_system_enhanced WHERE game_release_id = ?",
+            "i", $release_id
+        );
+        $stmt = \AL\Db\execute_query(
+            "GameRelaseDAO: deleteRelease",
+            $this->mysqli,
+            "DELETE FROM game_release_system_incompatible WHERE game_release_id = ?",
+            "i", $release_id
+        );
+
+
         $stmt = \AL\Db\execute_query(
             "GameRelaseDAO: deleteRelease",
             $this->mysqli,
             "DELETE FROM game_release WHERE id = ?",
             "i", $release_id
+        );
+
+        $stmt->close();
+    }
+
+    /**
+     * Update the base attributes of a release
+     *
+     * @param integer $release_id ID of the release to update
+     * @param string $name New name of the release
+     * @param string $date New date of the release
+     * @param string $license New license of the release
+     */
+    public function updateRelease($release_id, $name, $date, $license) {
+        $stmt = \AL\Db\execute_query(
+            "GameReleaseDAO: updateRelease",
+            $this->mysqli,
+            "UPDATE game_release
+            SET `name` = ?, `date` = ?, license = ?
+            WHERE id = ?",
+            "sssi", $name, $date, $license, $release_id
         );
 
         $stmt->close();
