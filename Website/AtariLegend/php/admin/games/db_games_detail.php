@@ -265,7 +265,9 @@ if (isset($action) and $action == 'add_release') {
     );
 
     $_SESSION['edit_message'] = "Release has been added";
-    header("Location: ../games/games_detail.php?game_id=$game_id");
+
+    // Send the user to the release editing page
+    header("Location: ../games/games_release_detail.php?release_id=$release_id");
 }
 
 //***********************************************************************************
