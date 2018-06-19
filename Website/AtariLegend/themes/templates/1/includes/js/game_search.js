@@ -42,7 +42,7 @@ window.GameSearch = (function () {
         }
     }
 
-    jQuery(document).ready(function() {
+    jQuery(document).ready(function () {
         $('#JSResetButton').click(function () {
             $('#JSCpanelGameSearchForm').trigger('reset');
             $('#JSCpanelGameBrowse').val('num').prop('selected', true);
@@ -183,5 +183,4 @@ window.GameSearch = (function () {
     return {
         GameSearch: GameSearch
     }
-
 })();
