@@ -602,12 +602,14 @@ $('#input-tags3').selectize({
                                         <div class="links_mod_checkbox">
                                             <input type="checkbox" id="release-{$release->getId()}" name="game_release_id[]" value="{$release->getId()}">
                                             <label for="release-{$release->getId()}"></label>&nbsp;
+                                            <a href="games_release_detail.php?release_id={$release->getId()}">
                                             {if $release->getDate() != null}
                                                 {$release->getDate()|date_format:"%Y"}
                                             {else}
                                                 (release with no date set)
                                             {/if}
                                             {if $release->getName() != null}<b>({$release->getName()})</b>{/if}
+                                            </a>
                                         </div>
                                     {/foreach}
                                     {if count($game_releases) gt 1}
@@ -615,7 +617,7 @@ $('#input-tags3').selectize({
                                         <input type="button" name="valider" value="Delete" onclick="delete_release()" class="secondary_button" style="display:inline;">
                                         <br/><br/>
                                     {elseif count($game_releases) eq 1}
-                                        <small>This game has a single release which cannot be deleted. To delete this release, create a new one first. All games must have at least one release.</small>
+                                        <small class="help-hint">This game has a single release which cannot be deleted. To delete this release, create a new one first. All games must have at least one release.</small>
                                         <br><br>
                                     {else}
                                         <small>This game has no releases yet</small>
@@ -726,75 +728,7 @@ $('#input-tags3').selectize({
                     </fieldset>
                     </div>
 
-                    <!-- Temporary solution while assuming only ONE release per game -->
-                    <div id="gd_release_attributes">
-                    <fieldset class="secondary_fieldset">
-                        <legend class="primary_legend">Release Attributes</legend>
-                        <form action="../games/db_games_detail.php" method="post" name="release_fieldset" id="release_fieldset">
 
-                            <div class="gd_basic_game_info_row">
-                                <div class="gd_basic_game_info_row_check">
-                                    <div class="links_mod_checkbox">
-                                        <input type="checkbox" id="free" name="free" value="1" {if $game_info.game_free == 1} checked{/if}>
-                                        <label for="free"></label>
-                                    </div>
-                                </div>
-                                <div class="gd_basic_game_info_row_checktxt">Non-commercial&nbsp;</div>
-                            </div>
-
-                            <br>
-                            Platform incompability<br>
-                            <br>
-                                {foreach from=$system_list item=line}
-                                    <div class="gd_basic_game_info_row">
-                                        <div class="gd_basic_game_info_row_check">
-                                            <div class="links_mod_checkbox">
-                                                <input type="checkbox" id="system_id{$line.system_id}" name="systems[]" value="{$line.system_id}" {if $game_info.game_free == 1} checked{/if}>
-                                                <label for="system_id{$line.system_id}"></label>
-                                            </div>
-                                        </div>
-                                        <div class="gd_basic_game_info_row_checktxt">{$line.system_name}&nbsp;</div>
-                                    </div>
-                                {/foreach}
-                            <br>
-                            Platform enhancements<br>
-                            <br>
-                                {foreach from=$system_list item=line}
-                                    <div class="gd_basic_game_info_row">
-                                        <div class="gd_basic_game_info_row_check">
-                                            <div class="links_mod_checkbox">
-                                                <input type="checkbox" id="system_enhancement_id{$line.system_id}" name="enhancements[]" value="{$line.system_id}" {if $game_info.game_free == 1} checked{/if}>
-                                                <label for="system_enhancement_id{$line.system_id}"></label>
-                                            </div>
-                                        </div>
-                                        <div class="gd_basic_game_info_row_checktxt">{$line.system_name}&nbsp;</div>
-                                    </div>
-                                {/foreach}
-                            <br>
-                            Screen resolution Compability<br>
-                            <br>
-                                {foreach from=$resolution_list item=line}
-                                    <div class="gd_basic_game_info_row">
-                                        <div class="gd_basic_game_info_row_check">
-                                            <div class="links_mod_checkbox">
-                                                <input type="checkbox" id="resolution_id{$line.resolution_id}" name="resolutions[]" value="{$line.resolution_id}" {if $game_info.game_free == 1} checked{/if}>
-                                                <label for="resolution_id{$line.resolution_id}"></label>
-                                            </div>
-                                        </div>
-                                        <div class="gd_basic_game_info_row_checktxt">{$line.resolution_name}&nbsp;</div>
-                                    </div>
-                                {/foreach}
-
-
-
-
-
-                            <br><br>
-                            <input type="hidden" name="game_id" value="{$game_id}">
-                            <input type="button" value="Add" onclick="add_publisher()" class="secondary_button">
-                        </form>
-                    </fieldset>
-                    </div>
 
 
 
