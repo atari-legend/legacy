@@ -57,13 +57,6 @@ $RESULTGAME = "SELECT game.game_id,
         LEFT JOIN game_developer ON (game_developer.game_id = game.game_id)
         LEFT JOIN pub_dev pd2 ON (pd2.pub_dev_id = game_developer.dev_pub_id)
         LEFT JOIN game_release ON (game_release.game_id = game.game_id)
-        LEFT JOIN game_release_system_enhanced falcon_enhanced ON (falcon_enhanced.game_release_id = game_release.id)
-        LEFT JOIN game_release_system_enhanced ste_enhanced ON (ste_enhanced.game_release_id = game_release.id)
-        LEFT JOIN game_release_system_incompatible ste_only ON (ste_only.game_release_id = game_release.id)
-        LEFT JOIN game_release_system_incompatible falcon_only ON (falcon_only.game_release_id = game_release.id)
-        LEFT JOIN game_release_resolution falcon_rgb ON (falcon_rgb.game_release_id = game_release.id)
-        LEFT JOIN game_release_resolution falcon_vga ON (falcon_vga.game_release_id = game_release.id)
-        LEFT JOIN game_release_resolution game_mono ON (game_mono.game_release_id = game_release.id)
         WHERE ";
 
 $RESULTAKA = "SELECT
@@ -97,13 +90,6 @@ $RESULTAKA = "SELECT
       LEFT JOIN game_developer ON (game.game_id = game_developer.game_id)
       LEFT JOIN pub_dev pd2 on (pd2.pub_dev_id = game_developer.dev_pub_id)
       LEFT JOIN game_release on (game_release.game_id = game.game_id)
-      LEFT JOIN game_release_system_enhanced falcon_enhanced ON (falcon_enhanced.game_release_id = game_release.id)
-      LEFT JOIN game_release_system_enhanced ste_enhanced ON (ste_enhanced.game_release_id = game_release.id)
-      LEFT JOIN game_release_system_incompatible ste_only ON (ste_only.game_release_id = game_release.id)
-      LEFT JOIN game_release_system_incompatible falcon_only ON (falcon_only.game_release_id = game_release.id)
-      LEFT JOIN game_release_resolution falcon_rgb ON (falcon_rgb.game_release_id = game_release.id)
-      LEFT JOIN game_release_resolution falcon_vga ON (falcon_vga.game_release_id = game_release.id)
-      LEFT JOIN game_release_resolution game_mono ON (game_mono.game_release_id = game_release.id)
      WHERE ";
 
 if (empty($action)) {
@@ -166,38 +152,6 @@ if (isset($action) and $action == "search") {
     // Here comes a bunch of tickbox checks.
     //
 
-    if (isset($falcon_only) and $falcon_only == "1") {
-        $falcon_only_select = " AND ( falcon_only.system_id <> 2 AND falcon_only.system_id <> 3 AND falcon_only.system_id <> 4 )";
-    }
-
-    if (isset($falcon_enhanced) and $falcon_enhanced == "1") {
-        $falcon_enhanced_select = " AND falcon_enhanced.system_id = 1";
-    }
-
-    if (isset($falcon_rgb) and $falcon_rgb == "1") {
-        $falcon_rgb_select = " AND falcon_rgb.resolution_id = 4";
-    }
-
-    if (isset($falcon_vga) and $falcon_vga == "1") {
-        $falcon_vga_select = " AND falcon_vga.resolution_id = 5";
-    }
-
-    if (isset($ste_only) and $ste_only == "1") {
-        $ste_only_select = " AND ( ste_only.system_id <> 1 AND ste_only.system_id <> 3 AND ste_only.system_id <> 4 )";
-    }
-
-    if (isset($ste_enhanced) and $ste_enhanced == "1") {
-        $ste_enhanced_select = " AND ste_enhanced.system_id = 2";
-    }
-
-    if (isset($free) and $free == "1") {
-        $free_select = " AND game_release.license = 'Non-Commercial'";
-    }
-
-    if (isset($commercial) and $commercial == "1") {
-        $free_select = " AND game_release.license = 'Commercial'";
-    }
-
     if (isset($arcade) and $arcade == "1") {
         $arcade_select = " AND game_arcade.arcade =$arcade";
     }
@@ -212,10 +166,6 @@ if (isset($action) and $action == "search") {
 
     if (isset($wanted) and $wanted == "1") {
         $wanted_select = " AND game_wanted.game_wanted_id IS NOT NULL";
-    }
-
-    if (isset($monochrome) and $monochrome == "1") {
-        $monochrome_select = " AND game_mono.resolution_id = 3";
     }
 
     if (isset($stos) and $stos == "1") {
@@ -284,10 +234,6 @@ if (isset($action) and $action == "search") {
     if (isset($ste_only) and $ste_only == "1") {
         $RESULTGAME .= $ste_only_select;
         $RESULTAKA .= $ste_only_select;
-    }
-    if (isset($ste_enhanced) and $ste_enhanced == "1") {
-        $RESULTGAME .= $ste_enhanced_select;
-        $RESULTAKA .= $ste_enhanced_select;
     }
     if (isset($free) and $free == "1") {
         $RESULTGAME .= $free_select;
