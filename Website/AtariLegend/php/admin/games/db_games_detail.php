@@ -290,15 +290,6 @@ if (isset($action) and $action == 'modify_game') {
         }
     }
 
-    // Update the public domain tick box info
-    // Start off by deleting previos value
-    $sdbquery = $mysqli->query("DELETE FROM game_free WHERE game_id='$game_id'");
-
-    // then insert the new value if it has been passed.
-    if (isset($free)) {
-        $sdbquery = $mysqli->query("INSERT INTO game_free (game_id,free) VALUES ('$game_id','$free')");
-    }
-
     // Update the Unreleased tick box info
     // Start off by deleting previos value
     $sdbquery = $mysqli->query("DELETE FROM game_unreleased WHERE game_id='$game_id'");
@@ -317,60 +308,6 @@ if (isset($action) and $action == 'modify_game') {
         $sdbquery = $mysqli->query("INSERT INTO game_development (game_id,development) VALUES ('$game_id','$development')");
     }
 
-    // Update the STE ONLY tick box info
-    // Start off by deleting previos value
-    $sdbquery = $mysqli->query("DELETE FROM game_ste_only WHERE game_id='$game_id'");
-
-    // then insert the new value if it has been passed.
-    if (isset($ste_only)) {
-        $sdbquery = $mysqli->query("INSERT INTO game_ste_only (game_id,ste_only) VALUES ('$game_id','$ste_only')");
-    }
-
-    // Update the STE ENHANCED tick box info
-    // Start off by deleting previos value
-    $sdbquery = $mysqli->query("DELETE FROM game_ste_enhan WHERE game_id='$game_id'");
-
-    // then insert the new value if it has been passed.
-    if (isset($ste_enhanced)) {
-        $sdbquery = $mysqli->query("INSERT INTO game_ste_enhan (game_id,ste_enhanced) VALUES ('$game_id','$ste_enhanced')");
-    }
-
-    // Update the FALCON ONLY tick box info
-    // Start off by deleting previos value
-    $sdbquery = $mysqli->query("DELETE FROM game_falcon_only WHERE game_id='$game_id'");
-
-    // then insert the new value if it has been passed.
-    if (isset($falcon_only)) {
-        $sdbquery = $mysqli->query("INSERT INTO game_falcon_only (game_id,falcon_only) VALUES ('$game_id','$falcon_only')");
-    }
-
-    // Update the FALCON ENHANCED tick box info
-    // Start off by deleting previos value
-    $sdbquery = $mysqli->query("DELETE FROM game_falcon_enhan WHERE game_id='$game_id'");
-
-    // then insert the new value if it has been passed.
-    if (isset($falcon_enhanced)) {
-        $sdbquery = $mysqli->query("INSERT INTO game_falcon_enhan (game_id,falcon_enhanced) VALUES ('$game_id','$falcon_enhanced')");
-    }
-
-    // Update the FALCON RGB tick box info
-    // Start off by deleting previos value
-    $sdbquery = $mysqli->query("DELETE FROM game_falcon_rgb WHERE game_id='$game_id'");
-
-    // then insert the new value if it has been passed.
-    if (isset($falcon_rgb)) {
-        $sdbquery = $mysqli->query("INSERT INTO game_falcon_rgb (game_id,falcon_rgb) VALUES ('$game_id','$falcon_rgb')");
-    }
-
-    // Update the FALCON VGA tick box info
-    // Start off by deleting previos value
-    $sdbquery = $mysqli->query("DELETE FROM game_falcon_vga WHERE game_id='$game_id'");
-
-    // then insert the new value if it has been passed.
-    if (isset($falcon_vga)) {
-        $sdbquery = $mysqli->query("INSERT INTO game_falcon_vga (game_id,falcon_vga) VALUES ('$game_id','$falcon_vga')");
-    }
-
     // Update the GAME UNFINISHED tick box info
     // Start off by deleting previos value
     $sdbquery = $mysqli->query("DELETE FROM game_unfinished WHERE game_id='$game_id'");
@@ -378,15 +315,6 @@ if (isset($action) and $action == 'modify_game') {
     // then insert the new value if it has been passed.
     if (isset($unfinished)) {
         $sdbquery = $mysqli->query("INSERT INTO game_unfinished (game_id,unfinished) VALUES ('$game_id','$unfinished')");
-    }
-
-    // Update the MONOCHROME GAME tick box info
-    // Start off by deleting previos value
-    $sdbquery = $mysqli->query("DELETE FROM game_mono WHERE game_id='$game_id'");
-
-    // then insert the new value if it has been passed.
-    if (isset($monochrome)) {
-        $sdbquery = $mysqli->query("INSERT INTO game_mono (game_id,monochrome) VALUES ('$game_id','$monochrome')");
     }
 
     // Update the game wanted tick box info

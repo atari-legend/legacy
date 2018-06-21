@@ -16,6 +16,8 @@ class ResolutionDAO {
 
     /**
      * Get all resolutions
+     *
+     * @return \AL\Common\Model\Game\Resolution[] An array of resolutions
      */
     public function getAllResolutions() {
         $stmt = \AL\Db\execute_query(
@@ -41,6 +43,21 @@ class ResolutionDAO {
         $stmt->close();
 
         return $resolutions;
+    }
+
+    /**
+     * Get a map containing all resolutions, indexed by ID
+     *
+     * @return \AL\Common\Model\Game\Resolution[] A map of resolutions
+     */
+    public function getAllResolutionsAsMap() {
+        $resolutions = $this->getAllResolutions();
+        $resolutionsMap = array();
+        foreach ($resolutions as $resolution) {
+            $resolutionsMap[$resolution->getId()] = $resolution;
+        }
+
+        return $resolutionsMap;
     }
 
     /**
