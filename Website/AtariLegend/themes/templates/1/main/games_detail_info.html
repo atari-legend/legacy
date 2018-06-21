@@ -125,36 +125,6 @@
                     {/if}
                 {/foreach}
             {/if}
-            {if isset($releases)}
-                {foreach from=$releases item=$release name=release}
-                {if $release->getDate() != null or $release->getName() != null}
-                    <tr>
-                        <td class="w-30">
-                            {if $smarty.foreach.release.index == 0}
-                                <span class="games_main_detail_info_right">Releases</span>
-                            {/if}
-                        </td>
-                        <td class="w-5">
-                            <span class="games_main_detail_info_left text-center">-</span>
-                        </td>
-                        <td class="w-60">
-                            <span class="games_main_detail_info_left">
-                                {if $release->getDate() != null}
-                                    <a href="games_main_list.php?year={$release->getDate()|date_format:"%Y"}&amp;action=search" class="standard_tile_link">
-                                        {$release->getDate()|date_format:"%Y"}
-                                    </a>
-                                {else}
-                                    (no date)
-                                {/if}
-                                {if $release->getName()}
-                                    <small class="standard_tile_subtext">as "<em>{$release->getName()}</em>"</small>
-                                {/if}
-                            </span>
-                        </td>
-                    </tr>
-                {/if}
-                {/foreach}
-            {/if}
             {if isset($developer)}
                 {foreach from=$developer item=line name=developer}
                     <tr>
@@ -265,15 +235,12 @@
                     {/if}
                 {/foreach}
             {/if}
-            {if $game_info.game_free == 1 || $game_info.game_unreleased == 1 || $game_info.game_development == 1 || $game_info.game_ste_only == 1 || $game_info.game_ste_enhan == 1
-                || $game_info.game_falcon_only == 1 ||  $game_info.game_falcon_enhan == 1 || $game_info.game_falcon_rgb == 1 || $game_info.game_falcon_vga == 1 || $game_info.game_mono == 1
+
+            {if $game_info.game_unreleased == 1 || $game_info.game_development == 1
                 || $game_info.game_wanted <> '' || $game_info.game_arcade == 1 || $game_info.game_seuck == 1 || $game_info.game_stos == 1 || $game_info.game_stac == 1}
                 <tr>
                     <td class="w-30">
                         <span class="games_main_detail_info_right">Specifics</span>
-                            {if $game_info.game_free == 1}
-                                <br>
-                            {/if}
                             {if $game_info.game_unreleased == 1}
                                 <br>
                             {/if}
@@ -281,27 +248,6 @@
                                 <br>
                             {/if}
                             {if $game_info.game_development == 1}
-                                <br>
-                            {/if}
-                            {if $game_info.game_ste_only == 1}
-                                <br>
-                            {/if}
-                            {if $game_info.game_ste_enhan == 1}
-                                <br>
-                            {/if}
-                            {if $game_info.game_falcon_only == 1}
-                                <br>
-                            {/if}
-                            {if $game_info.game_falcon_enhan == 1}
-                                <br>
-                            {/if}
-                            {if $game_info.game_falcon_rgb == 1}
-                                <br>
-                            {/if}
-                            {if $game_info.game_falcon_vga == 1}
-                                <br>
-                            {/if}
-                            {if $game_info.game_mono == 1}
                                 <br>
                             {/if}
                             {if $game_info.game_wanted <> ''}
@@ -322,9 +268,6 @@
                     </td>
                     <td class="w-5">
                         <span class="games_main_detail_info_left text-center">-</span>
-                            {if $game_info.game_free == 1}
-                                <br>
-                            {/if}
                             {if $game_info.game_unreleased == 1}
                                 <br>
                             {/if}
@@ -332,27 +275,6 @@
                                 <br>
                             {/if}
                             {if $game_info.game_development == 1}
-                                <br>
-                            {/if}
-                            {if $game_info.game_ste_only == 1}
-                                <br>
-                            {/if}
-                            {if $game_info.game_ste_enhan == 1}
-                                <br>
-                            {/if}
-                            {if $game_info.game_falcon_only == 1}
-                                <br>
-                            {/if}
-                            {if $game_info.game_falcon_enhan == 1}
-                                <br>
-                            {/if}
-                            {if $game_info.game_falcon_rgb == 1}
-                                <br>
-                            {/if}
-                            {if $game_info.game_falcon_vga == 1}
-                                <br>
-                            {/if}
-                            {if $game_info.game_mono == 1}
                                 <br>
                             {/if}
                             {if $game_info.game_wanted <> ''}
@@ -373,9 +295,6 @@
                     </td>
                     <td class="w-60">
                         <span class="standard_tile_subtext">
-                            {if $game_info.game_free == 1}
-                                Non-Commercial <br>
-                            {/if}
                             {if $game_info.game_unreleased == 1}
                                 Unreleased <br>
                             {/if}
@@ -384,27 +303,6 @@
                             {/if}
                             {if $game_info.game_development == 1}
                                 In development <br>
-                            {/if}
-                            {if $game_info.game_ste_only == 1}
-                                STe only <br>
-                            {/if}
-                            {if $game_info.game_ste_enhan == 1}
-                                STe enhanced <br>
-                            {/if}
-                            {if $game_info.game_falcon_only == 1}
-                                Falcon only <br>
-                            {/if}
-                            {if $game_info.game_falcon_enhan == 1}
-                                Falcon enhanced <br>
-                            {/if}
-                            {if $game_info.game_falcon_rgb == 1}
-                                Falcon RGB <br>
-                            {/if}
-                            {if $game_info.game_falcon_vga == 1}
-                                Falcon VGA <br>
-                            {/if}
-                            {if $game_info.game_mono == 1}
-                                Monochrome <br>
                             {/if}
                             {if $game_info.game_wanted <> ''}
                                 Wanted <br>
@@ -425,6 +323,7 @@
                     </td>
                 </tr>
             {/if}
+
             {if isset($aka)}
                 {foreach from=$aka item=line name=aka}
                     <tr>

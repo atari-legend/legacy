@@ -1,0 +1,49 @@
+{if isset($releases)}
+    <div class="standard_tile">
+        <h1>RELEASES</h1>
+        <div class="standard_tile_line"></div>
+
+        <div class="standard_list_entry">
+            <table class="primary_table_list table_sm no_border">
+                {foreach from=$releases item=$release name=release}
+                <tr>
+                    <td class="w-30">
+                        <span class="games_main_detail_info_right">{$release->getDate()|date_format:"%Y"|default:"(no date)"}</span>
+                    </td>
+                    <td class="w-5"><span class="games_main_detail_info_left text-center">-</span></td>
+                    <td class="w-60">
+                        {if $release->getName()}
+                            <small class="standard_tile_subtext">as "<em>{$release->getName()}</em>"</small>
+                            <br><br>
+                        {/if}
+
+                        {if $release_resolution[$release->getId()]}
+                            <span class="standard_tile_subtext">Resolutions:</span>
+                            {foreach from=$release_resolution[$release->getId()] item=resolution_id name=resolution}
+                                {$resolutions[$resolution_id]->getName()}{if ! $smarty.foreach.resolution.last},{/if}
+                            {/foreach}
+                            <br>
+                        {/if}
+                        {if $system_enhanced[$release->getId()]}
+                            <span class="standard_tile_subtext">Enhanced for:</span>
+                            {foreach from=$system_enhanced[$release->getId()] item=system_id name=system}
+                                {$systems[$system_id]->getName()}{if ! $smarty.foreach.system.last},{/if}
+                            {/foreach}
+                            <br>
+                        {/if}
+                        {if $system_incompatible[$release->getId()]}
+                            <span class="standard_tile_subtext">Incompatible with:</span>
+                            {foreach from=$system_incompatible[$release->getId()] item=system_id name=system}
+                                {$systems[$system_id]->getName()}{if ! $smarty.foreach.system.last},{/if}
+                            {/foreach}
+                            <br>
+                        {/if}
+
+                        <span class="standard_tile_subtext">License:</span> {$release->getLicense()}
+                    </td>
+                </tr>
+                {/foreach}
+            </table>
+        </div>
+    </div>
+{/if}
