@@ -19,14 +19,28 @@
     width: 100%;
 }
 
+h1 {
+    a {
+        color: #00d3d3;
+    }
+}
+
 //*----------------------------------------------------------
 //Games detail
 //------------------------------------------------------------ */
+
+img.edit-tile {
+    width: 100%;
+}
 
 .gd_navigator {
     button {
         width: 100%;
         margin-left: 0;
+    }
+
+    a {
+        display: block;
     }
 }
 
@@ -230,4 +244,47 @@
 
 .dropdown_show {
     display: block;
+}
+
+//*----------------------------------------------------------
+// Navigation list inside a tile
+//------------------------------------------------------------ */
+ul.navigation-list {
+    list-style-type: none;
+    text-align: left;
+
+    li {
+        padding-top: 5px;
+        padding-bottom: 5px;
+
+        &.active {
+            background-color: #00d3d3;
+
+            a {
+                color: black;
+            }
+
+            small {
+                color: #333;
+            }
+
+            i {
+                color: #666;
+            }
+        }
+    }
+
+    a {
+        color: #00d3d3;
+
+        small {
+            color: #bbb;
+        }
+
+        i {
+            color: white;
+            margin-left: 5px;
+        }
+
+    }
 }

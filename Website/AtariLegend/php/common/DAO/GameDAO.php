@@ -39,4 +39,31 @@ class GameDAO {
 
         return $game;
     }
+
+    public function getRandomScreenshot($game_id) {
+        $stmt = \AL\Db\execute_query(
+            "GameDAO: getRandomScreenshot: $game_id",
+            $this->mysqli,
+            "SELECT screenshot_game.screenshot_id, imgext FROM screenshot_game
+            LEFT JOIN screenshot_main ON (screenshot_game.screenshot_id  = screenshot_main.screenshot_id)
+            WHERE screenshot_game.game_id = ?
+            ORDER BY RAND() LIMIT 1",
+            "i", $game_id
+        );
+
+        \AL\Db\bind_result(
+            "GameDAO: getRandomScreenshot: $game_id",
+            $stmt,
+            $screenshot_id, $imgext
+        );
+
+        $screenshot = null;
+        if ($stmt->fetch()) {
+            $screenshot = $screenshot_id.".".$imgext;
+        }
+
+        $stmt->close();
+
+        return $GLOBALS['game_screenshot_path']."/".$screenshot;
+    }
 }
