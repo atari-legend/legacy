@@ -226,6 +226,10 @@ if (isset($action) and $action == 'insert_ind') {
 
             $sdbquery = $mysqli->query("INSERT INTO individual_text (ind_id, ind_profile) VALUES ($id, '$textfield')") or die("Couldn't insert into individual_text");
         }
+        else
+        {
+            $sdbquery = $mysqli->query("INSERT INTO individual_text (ind_id, ind_profile) VALUES ($id, ' ')") or die("Couldn't insert into individual_text");
+        }
 
         create_log_entry('Individuals', $id, 'Individual', $id, 'Insert', $_SESSION['user_id']);
 
