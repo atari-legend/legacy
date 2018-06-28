@@ -31,7 +31,7 @@ include("../../config/admin_rights.php");
 if (isset($ind_id) and isset($action) and $action == 'delete_pic') {
     $photo = $mysqli->query("SELECT ind_imgext FROM individual_text WHERE ind_id='$ind_id'");
     list($ind_imgext) = $photo->fetch_row();
-
+    
     $mysqli->query("UPDATE individual_text SET ind_imgext='' WHERE ind_id='$ind_id'");
     unlink("$individual_screenshot_save_path$ind_id.$ind_imgext");
 
@@ -66,8 +66,19 @@ if (isset($ind_id) and isset($action) and $action == 'add_photo') {
         }
 
         if ($ext !== "") {
-            // Rename the uploaded file to its autoincrement number and move it to its proper place.
-            $mysqli->query("UPDATE individual_text SET ind_imgext='$ext' WHERE ind_id='$ind_id'");
+            
+            //Check of there is a record for this individual in the text table
+            $INDIVIDUALtext = $mysqli->query("SELECT ind_id FROM individual_text WHERE ind_id = $ind_id") or die("Database error - selecting individual_text");
+            $indrowtext = $INDIVIDUALtext->num_rows;
+            
+            if ($indrowtext < 1) {
+                // Rename the uploaded file to its autoincrement number and move it to its proper place.
+                $mysqli->query(("INSERT INTO individual_text (ind_id, ind_imgext) VALUES ($ind_id, $ext)")) or die("Couldn't insert into individual_text");;
+            }else{
+                // Rename the uploaded file to its autoincrement number and move it to its proper place.
+                $mysqli->query("UPDATE individual_text SET ind_imgext='$ext' WHERE ind_id='$ind_id'");
+            }        
+            
             $file_data = rename("$tmp_name", "$individual_screenshot_save_path$ind_id.$ext");
 
             chmod("$individual_screenshot_save_path$ind_id.$ext", 0777);
