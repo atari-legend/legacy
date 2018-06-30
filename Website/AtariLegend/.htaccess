@@ -20,6 +20,11 @@ ErrorDocument 404 /themes/templates/1/page_not_found.html
 RewriteEngine On
 RewriteBase /
 
+# Send all traffic to HTTPS, except when serving on localhost for development
+RewriteCond "%{HTTPS}" "off"
+RewriteCond "%{SERVER_NAME}" !localhost
+RewriteRule (.*) https://%{SERVER_NAME}/$1 [R=301,L]
+
 # Rewrite old interviews URLs to the new structure, as multiple websites are
 # still linking to the old URLs. e.g.:
 # /interviews/interview.php?interview_id=4 -> /interviews/interviews_detail.php?selected_interview_id=4
