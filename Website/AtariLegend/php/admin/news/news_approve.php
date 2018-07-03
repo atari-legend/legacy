@@ -34,16 +34,16 @@ $NewsSubmissionDAO = new AL\Common\DAO\NewsSubmissionDAO($mysqli);
 //********************************************************************************************
 // Get all the needed data to load the submission page!
 //********************************************************************************************
-if (isset($user_id)){
+if (isset($user_id)) {
     $smarty->assign(
         'news_submissions',
         $NewsSubmissionDAO->getAllSubmissionsForUser(isset($user_id) ? $user_id : null)
     );
-}else{   
+} else {
     $smarty->assign(
         'news_submissions',
         $NewsSubmissionDAO->getAllSubmissions(isset($user_id) ? $user_id : null)
-    ); 
+    );
 }
 
 $smarty->assign("nr_submissions", $NewsSubmissionDAO->getSubmissionCount());

@@ -17,7 +17,7 @@ class InterviewDAO {
     /**
      * Return the latest interviews, sorted by descending date
      *
-     * @param integer $limit How many interviewsto return
+     * @param integer $limit How many interviews to return
      * @return \AL\Common\Model\Interview\Interview[] An array of interviews
      */
     public function getLatestInterviews($limit = 20) {

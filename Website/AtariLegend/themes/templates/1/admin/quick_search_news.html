@@ -38,7 +38,7 @@
             <div class="standard_tile_text_center">
                 By Author : <br>
                 <select name="author_search" id="JSCpanelAuthorBrowse" class="standard_select select_large">
-                    <option value="-" SELECTED>-</option>
+                    <option value="" SELECTED>-</option>
                     {foreach from=$authors_search item=line}
                         <option value="{$line.user_id}">{$line.user_name}</option>
                     {/foreach}
