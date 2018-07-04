@@ -52,6 +52,13 @@ $sql_interview = $mysqli->query("SELECT * FROM interview_main
 
 while ($interview = $sql_interview->fetch_array(MYSQLI_BOTH)) {
     
+    if (!(isset($interview['user_id']))) {
+        $author_id = $_SESSION['user_id'];
+    }
+    else { 
+        $author_id = $interview['user_id'];
+    }
+    
     $smarty->assign('interview', array(
         'interview_date' => $interview['interview_date'],
         'interview_id' => $interview_id,
@@ -59,7 +66,7 @@ while ($interview = $sql_interview->fetch_array(MYSQLI_BOTH)) {
         'interview_chapters' => $interview['interview_chapters'],
         'interview_text' => $interview['interview_text'],
         'interview_ind_name' => $interview['ind_name'],
-        'interview_author' => $interview['user_id'],
+        'interview_author' => $author_id ,
         'interview_author_name' => $interview['userid'],
         'interview_ind_id' => $interview['ind_id']
     ));
