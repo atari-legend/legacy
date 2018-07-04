@@ -342,6 +342,14 @@ if (isset($action) and $action == 'delete_user') {
                             $mysqli->query("DELETE from users WHERE user_id='$user_id_selected'") or die('deleting user failed');
 
                             $_SESSION['edit_message'] = 'User deleted succesfully';
+
+                            if ($user_id_selected == $_SESSION['user_id']) {
+                                // If the user deleted themselves, log them out
+                                $_SESSION = array();
+                                header("Location: /");
+                                mysqli_close($mysqli);
+                                die();
+                            }
                         }
                     }
                 }
