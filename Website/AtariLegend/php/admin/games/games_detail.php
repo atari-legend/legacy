@@ -25,8 +25,10 @@ include("../../config/admin.php");
 include("../../admin/games/quick_search_games.php");
 
 require_once __DIR__."/../../common/DAO/GameReleaseDAO.php";
+require_once __DIR__."/../../common/DAO/GameDAO.php";
 
 $gameReleaseDao = new \AL\Common\DAO\GameReleaseDAO($mysqli);
+$gameDao = new \AL\Common\DAO\GameDAO($mysqli);
 
 //***********************************************************************************
 //Let's get the general game info first.
@@ -66,6 +68,9 @@ while ($game_info = $sql_game->fetch_array(MYSQLI_BOTH)) {
         'game_stac' => $game_info['stac']
     ));
 }
+
+$smarty->assign('game', $gameDao->getGame($game_id));
+$smarty->assign('game_screenshot', $gameDao->getRandomScreenshot($game_id));
 
 //***********************************************************************************
 //get the release dates
@@ -236,6 +241,22 @@ while ($catcross = $sql_catcross->fetch_array(MYSQLI_BOTH)) {
 }
 
 $smarty->assign("nr_catcross", $nr_catcross);
+
+//***********************************************************************************
+// Game facts
+//***********************************************************************************
+
+$sql_facts = $mysqli->query("SELECT COUNT(*) AS C FROM game_fact WHERE game_id = $game_id") or die($mysqli->error);
+$facts = $sql_facts->fetch_array(MYSQLI_BOTH);
+$smarty->assign('nr_facts', $facts['C']);
+
+//***********************************************************************************
+// Similar games
+//***********************************************************************************
+
+$sql_similar = $mysqli->query("SELECT COUNT(*) AS C FROM game_similar WHERE game_id = $game_id") or die($mysqli->error);
+$similar = $sql_similar->fetch_array(MYSQLI_BOTH);
+$smarty->assign('nr_similar', $similar['C']);
 
 //***********************************************************************************
 //AKA's

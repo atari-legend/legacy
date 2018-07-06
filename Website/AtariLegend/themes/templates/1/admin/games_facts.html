@@ -31,7 +31,7 @@
             remove a fact and its screenshots from the DB. More facts can be added to a game.
         </p>
     </div>
-    <h1>{$game_name|upper}</h1>
+    <h1>{$game->getName()|upper}</h1>
     <div class="standard_tile_line"></div>
     <div class="standard_tile_padding">
         <div class="left_nav_section">
@@ -56,7 +56,7 @@
                 <br><br>
                 <input type="hidden" name="action" value="game_fact_insert">
                 <input type="hidden" name="game_id" value="{$game_id}">
-                <input type="hidden" name="game_name" value="{$game_name}">
+                <input type="hidden" name="game_name" value="{$game->getName()}">
                 <input type="submit" value="Submit" class="secondary_button">
             </fieldset>
         </form>

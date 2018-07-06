@@ -11,59 +11,78 @@ $gameDao = new \AL\Common\DAO\GameDao($mysqli);
 $resolutionDao = new \AL\Common\DAO\ResolutionDao($mysqli);
 $systemDao = new \AL\Common\DAO\SystemDao($mysqli);
 
-$release = $gameReleaseDao->getRelease($release_id);
+if ($_SERVER['REQUEST_METHOD'] == "GET") {
+    $smarty->assign('license_types', array(
+        \AL\Common\DAO\GameReleaseDAO::LICENSE_COMMERCIAL,
+        \AL\Common\DAO\GameReleaseDAO::LICENSE_NON_COMMERCIAL
+    ));
 
-if (isset($release)) {
+    $smarty->assign('resolutions', $resolutionDao->getAllResolutions());
+    $smarty->assign('systems', $systemDao->getAllSystems());
 
-    // Display release details
-    if ($_SERVER['REQUEST_METHOD'] == "GET") {
+    // Edit existing release
+    if (isset($release_id)) {
+        $release = $gameReleaseDao->getRelease($release_id);
         $game = $gameDao->getGame($release->getGameId());
+        $smarty->assign('game_screenshot', $gameDao->getRandomScreenshot($game->getId()));
 
         $smarty->assign('release', $release);
+        $smarty->assign('release_id', $release->getId());
         $smarty->assign('game', $game);
+        $smarty->assign('game_releases', $gameReleaseDao->getReleasesForGame($game->getId()));
 
         $smarty->assign('system_incompatible', $systemDao->getIncompatibleSystemsForRelease($release->getId()));
         $smarty->assign('system_enhanced', $systemDao->getEnhancedSystemsForRelease($release->getId()));
         $smarty->assign('release_resolutions', $resolutionDao->getResolutionsForRelease($release->getId()));
+    } else {
+        // Creating a new release
+        $game = $gameDao->getGame($game_id);
+        $smarty->assign('game', $game);
+        $smarty->assign('game_releases', $gameReleaseDao->getReleasesForGame($game->getId()));
 
-        $smarty->assign('license_types', array(
-            \AL\Common\DAO\GameReleaseDAO::LICENSE_COMMERCIAL,
-            \AL\Common\DAO\GameReleaseDAO::LICENSE_NON_COMMERCIAL
-        ));
+        $smarty->assign('release', new AL\Common\Model\Game\GameRelease(-1, $game->getId(), '', '', ''));
 
-        $smarty->assign('resolutions', $resolutionDao->getAllResolutions());
-        $smarty->assign('systems', $systemDao->getAllSystems());
+        $smarty->assign('system_incompatible', []);
+        $smarty->assign('system_enhanced', []);
+        $smarty->assign('release_resolutions', []);
 
-    // Update release
-    } else if ($_SERVER['REQUEST_METHOD'] == "POST") {
-        $game = $gameDao->getGame($release->getGameId());
+    }
+} else if ($_SERVER['REQUEST_METHOD'] == "POST") {
+    // Update existing release or create a new one
 
-        // Do not store an alternative title if it's identical to the game
-        if (strtolower($name) == strtolower($game->getName())) {
-            $name = null;
-        }
+    $game = $gameDao->getGame($game_id);
 
-        $gameReleaseDao->updateRelease(
-            $release->getId(),
-            $name,
-            $Date_Year."-01-01",
-            $license);
-
-        $systemDao->setIncompatibleSystemsForRelease($release->getId(), isset($system_incompatible) ? $system_incompatible : []);
-        $systemDao->setEnhancedSystemsForRelease($release->getId(), isset($system_enhanced) ? $system_enhanced : []);
-        $resolutionDao->setResolutionsForRelease($release->getId(), isset($resolution) ? $resolution : []);
-
-        if ($submit_type == "save_and_back") {
-            header("Location: games_detail.php?game_id=".$release->getGameId());
-        } else {
-            header("Location: ?release_id=".$release->getId());
-        }
+    // Do not store an alternative title if it's identical to the game
+    if (strtolower($name) == strtolower($game->getName())) {
+        $name = null;
     }
 
-    $smarty->display("file:" . $cpanel_template_folder . "games_release_detail.html");
-} else {
-    // Release not found
-    http_response_code(404);
+    $date = $Date_Year."-01-01";
+    if ($Date_Year == "") {
+        $date = null;
+    }
+
+    if ($release_id > -1) {
+    $gameReleaseDao->updateRelease(
+        $release_id,
+        $name,
+        $date,
+        $license);
+    } else {
+        $release_id = $gameReleaseDao->addReleaseForGame($game_id, $name, $Date_Year."-01-01");
+    }
+
+    $systemDao->setIncompatibleSystemsForRelease($release_id, isset($system_incompatible) ? $system_incompatible : []);
+    $systemDao->setEnhancedSystemsForRelease($release_id, isset($system_enhanced) ? $system_enhanced : []);
+    $resolutionDao->setResolutionsForRelease($release_id, isset($resolution) ? $resolution : []);
+
+    if ($submit_type == "save_and_back") {
+        header("Location: games_detail.php?game_id=".$game_id);
+    } else {
+        header("Location: ?release_id=".$release_id);
+    }
 }
+
+$smarty->display("file:" . $cpanel_template_folder . "games_release_detail.html");
 
 mysqli_close($mysqli);

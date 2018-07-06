@@ -1,54 +1,72 @@
+{block name=left_tile}
+    {include file='1/admin/games_detail_editing.html'}
+    <br>
+
+    {include file='1/admin/games_release_list.html'}
+{/block}
+
 {extends file='1/admin/main.html'} {block name=main_tile}
 <div class="standard_tile">
     {if isset ($release)}
-        <h1>Release for
+        <h1>
+            {if $release->getDate()}{$release->getDate()|date_format:"%Y"}{/if}
+            Release for
             <a href="games_detail.php?game_id={$game->getId()}">{$game->getName()}</a>
         </h1>
-        <div class="standard_tile_line"></div>
+    {else}
+    <h1>Add a new release for
+            <a href="games_detail.php?game_id={$game->getId()}">{$game->getName()}</a>
+        </h1>
+    {/if}
+
+    <div class="standard_tile_line"></div>
+    <div class="standard_tile_padding">
+        <fieldset class="secondary_fieldset">
+            <legend class="primary_legend">Editing a release</legend>
+            Each game can have multiple releases. A release has a date and different features, such as the fact that it was enhanced
+            for a system (e.g. STe) or incompatible with others (e.g. Falcon).
+        </fieldset>
+    </div>
+
+    <form method="POST">
+        <input type="hidden" name="game_id" value="{$game->getId()}">
+        <input type="hidden" name="release_id" value="{$release->getId()}">
         <div class="standard_tile_padding">
             <fieldset class="secondary_fieldset">
-                <legend class="primary_legend">Editing a release</legend>
-                Each game can have multiple releases. A release has a date and different features, such as the fact that it was enhanced
-                for a system (e.g. STe) or incompatible with others (e.g. Falcon).
-            </fieldset>
-        </div>
+                <legend class="primary_legend">Release attributes</legend>
 
-        <form method="POST">
-            <input type="hidden" name="release_id" value="{$release->getId()}">
-            <div class="standard_tile_padding">
-                <fieldset class="secondary_fieldset">
-                    <legend class="primary_legend">Release attributes</legend>
+                Release date: {html_select_date time=$release->getDate() year_empty="Unknown" start_year=1984 display_days=0 display_months=0 class="standard_select"}<br>
 
-                    Release date: {html_select_date time=$release->getDate() start_year=1984 display_days=0 display_months=0 class="standard_select"}<br>
+                Alternative title (optional): <input type="text" name="name" class="standard_input" value="{$release->getName()}">
+                <span class="help-hint">(e.g.: Translated title if it's a country-specific release. Leave blank if the title is the same as the game.)</span>
+                <br>
 
-                    Alternative title (optional): <input type="text" name="name" class="standard_input" value="{$release->getName()}">
-                    <span class="help-hint">(e.g.: Translated title if it's a country-specific release. Leave blank if the title is the same as the game.)</span>
-                    <br>
-
-                    License:
-                    <select name="license" class="standard_select">
-                        {foreach from=$license_types item=type}
-                        {$type}
-                        <option {if $type == $release->getLicense()}selected{/if}>{$type}</option>
-                        {/foreach}
-                    </select>
-                    <br><br>
-                    <h4>Screen resolution:</h4>
-                    {foreach from=$resolutions item=resolution}
-                        <div class="checkbox links_mod_checkbox">
-                            <input type="checkbox"
-                                id="resolution_{$resolution->getId()}"
-                                name="resolution[]"
-                                {if in_array($resolution->getId(), $release_resolutions)}checked{/if}
-                                value="{$resolution->getId()}">
-                            <label for="resolution_{$resolution->getId()}"></label>
-                            &nbsp;{$resolution->getName()}<br>
-                        </div>
+                License:
+                <select name="license" class="standard_select">
+                    {foreach from=$license_types item=type}
+                    {$type}
+                    <option {if $type == $release->getLicense()}selected{/if}>{$type}</option>
                     {/foreach}
-                    <br>
+                </select>
+                <br><br>
+                <h4>Screen resolution:</h4>
+                {foreach from=$resolutions item=resolution}
+                    <div class="checkbox links_mod_checkbox">
+                        <input type="checkbox"
+                            id="resolution_{$resolution->getId()}"
+                            name="resolution[]"
+                            {if in_array($resolution->getId(), $release_resolutions)}checked{/if}
+                            value="{$resolution->getId()}">
+                        <label for="resolution_{$resolution->getId()}"></label>
+                        &nbsp;{$resolution->getName()}<br>
+                    </div>
+                {/foreach}
+                <br>
 
-                    <h4>Enhanced for:</h4>
-                    {foreach from=$systems item=system}
+                <h4>Enhanced for:</h4>
+                {foreach from=$systems item=system}
+                    {* Nothing is ever enhanced for the base ST *}
+                    {if $system->getName() != 'ST'}
                         <div class="checkbox links_mod_checkbox">
                             <input type="checkbox"
                                 id="system_enhanced_{$system->getId()}"
@@ -58,46 +76,31 @@
                             <label for="system_enhanced_{$system->getId()}"></label>
                             &nbsp;{$system->getName()}<br>
                         </div>
-                    {/foreach}
-                    <br>
-
-                    <h4>Incompatible with:</h4>
-                    {foreach from=$systems item=system}
-                        <div class="checkbox links_mod_checkbox">
-                            <input type="checkbox"
-                                id="system_incompatible_{$system->getId()}"
-                                name="system_incompatible[]"
-                                {if in_array($system->getId(), $system_incompatible)}checked{/if}
-                                value="{$system->getId()}">
-                            <label for="system_incompatible_{$system->getId()}"></label>
-                            &nbsp;{$system->getName()}<br>
-                        </div>
-                    {/foreach}
-                    <br>
-
-                    <button type="submit" name="submit_type" value="save_and_back" class="primary_button">Save and go back to '{$game->getName()}'</button>
-                    <button type="submit" name="submit_type" value="save" class="secondary_button">Save changes</button>
-                    <a href="games_detail.php?game_id={$game->getId()}">Cancel</a>
-
-                </fieldset>
+                    {/if}
+                {/foreach}
                 <br>
-            </div>
-        </form>
 
-    {else}
-        <div class="standard_tile_line"></div>
-        <div class="standard_tile_padding">
-            <div class="left_nav_section">
-                Release not found
-            </div>
+                <h4>Incompatible with:</h4>
+                {foreach from=$systems item=system}
+                    <div class="checkbox links_mod_checkbox">
+                        <input type="checkbox"
+                            id="system_incompatible_{$system->getId()}"
+                            name="system_incompatible[]"
+                            {if in_array($system->getId(), $system_incompatible)}checked{/if}
+                            value="{$system->getId()}">
+                        <label for="system_incompatible_{$system->getId()}"></label>
+                        &nbsp;{$system->getName()}<br>
+                    </div>
+                {/foreach}
+                <br>
+
+                <button type="submit" name="submit_type" value="save_and_back" class="primary_button">Save and go back to '{$game->getName()}'</button>
+                <button type="submit" name="submit_type" value="save" class="secondary_button">Save changes</button>
+                <a href="games_detail.php?game_id={$game->getId()}">Cancel</a>
+
+            </fieldset>
+            <br>
         </div>
-        <div id="gd_bottom">
-            <div id="gd_back">
-                <div class="standard_tile_text_center">
-                    <a href="javascript:history.go(-1)" class="standard_tile_link">back</a>
-                </div>
-            </div>
-        </div>
-    {/if}
+    </form>
 </div>
 {/block}
