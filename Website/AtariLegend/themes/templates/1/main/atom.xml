@@ -4,7 +4,7 @@
      <title>Atari Legend - Latest News, Reviews and Interviews</title>
      <subtitle>Legends Never Die!</subtitle>
      <icon>{$smarty.const.REQUEST_SITEURL}/themes/templates/1/includes/icons/favicon.png</icon>
-     <link href="{$smarty.const.REQUEST_SITEURL}/news/" />
+     <link href="{$smarty.const.REQUEST_SITEURL}/news/news.php" />
      <link rel="self" href="{$smarty.const.REQUEST_SITEURL}/news/rss.php" />
      <updated>{$last_updated|date_format:"%Y-%m-%dT%H:%M:%SZ"}</updated>
      <author>
