@@ -22,7 +22,7 @@ foreach ($news as $article) {
         "link" => REQUEST_SITEURL."/news/news.php",
         "id" => REQUEST_SITEURL."/news/news.php?id=".$article->getId(),
         "updated" => $article->getDate(),
-        "author" => $article->getUserName(),
+        "author" => $article->getUser()->getName(),
         "content" => $article->getHtmlText()
     );
 }

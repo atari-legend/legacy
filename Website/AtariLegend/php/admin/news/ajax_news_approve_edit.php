@@ -25,7 +25,8 @@ if (isset($action) and $action == "get_newsapprove_text") {
 }
 
 //Get the authors for the news post
-$sql_author = $mysqli->query("SELECT user_id,userid FROM users ORDER BY userid ASC") or die("Database error - getting members name");
+$sql_author = $mysqli->query("SELECT user_id,userid FROM users ORDER BY userid ASC")
+    or die("Database error - getting members name");
 
 while ($authors = $sql_author->fetch_array(MYSQLI_BOTH)) {
     $smarty->append('authors', array(

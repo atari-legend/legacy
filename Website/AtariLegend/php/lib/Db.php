@@ -59,3 +59,23 @@ function bind_result($context, $stmt, &...$params) {
     $stmt->bind_result(...$params)
         or die("Error binding results $err_ctx");
 }
+
+/**
+ * Assemble multiple constraints into a SQL string with the proper
+ * WHERE / AND syntax depending on the number of constraints
+ * @param $constraints A list of constraints, like "id = ?" or
+ *  "name LIKE ?".
+ * @return String A SQL string with constraints suitable
+ *  to use in a SQL query
+ */
+function assemble_constraints($constraints) {
+    $query = "";
+    if (count($constraints) > 1) {
+        $query .= " WHERE ".array_shift($constraints);
+        $query .= " AND ".join($constraints, " AND ");
+    } elseif (count($constraints) == 1) {
+        $query .= " WHERE ".array_shift($constraints);
+    }
+
+    return $query;
+}
