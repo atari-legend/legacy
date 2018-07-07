@@ -20,11 +20,11 @@ AND table_name = 'game_release_system_incompatible' LIMIT 1";
 
 // Database change
 $database_update_sql = "CREATE TABLE game_release_system_incompatible (
-  `game_release_system_incompatible_id` INT NOT NULL AUTO_INCREMENT,
-  `system_id` INT NOT NULL,
-  `game_release_id` INT NOT NULL,
-  PRIMARY KEY (`game_release_system_incompatible_id`),
-  FOREIGN KEY (system_id) REFERENCES system(system_id),
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `system_id` INT NOT NULL COMMENT 'ID of the system the release is incompatible with',
+  `game_release_id` INT NOT NULL COMMENT 'ID of the release',
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (system_id) REFERENCES system(id),
   FOREIGN KEY (game_release_id) REFERENCES game_release(id)
 )
 ENGINE = InnoDB

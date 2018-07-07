@@ -23,20 +23,20 @@ class SystemDAO {
         $stmt = \AL\Db\execute_query(
             "SystemDAO: getAllSystems",
             $this->mysqli,
-            "SELECT system_id, system_name FROM system ORDER by system_name",
+            "SELECT id, name FROM system ORDER by name",
             null, null
         );
 
         \AL\Db\bind_result(
             "SystemDAO: getAllSystems",
             $stmt,
-            $system_id, $system_name
+            $id, $name
         );
 
         $systems = [];
         while ($stmt->fetch()) {
             $systems[] = new \AL\Common\Model\Game\System(
-                $system_id, $system_name
+                $id, $name
             );
         }
 
