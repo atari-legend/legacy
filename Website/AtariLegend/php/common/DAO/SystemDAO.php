@@ -46,6 +46,21 @@ class SystemDAO {
     }
 
     /**
+     * Get a map containing all systems, indexed by ID
+     *
+     * @return \AL\Common\Model\Game\System[] A map of systems
+     */
+    public function getAllSystemsAsMap() {
+        $systems = $this->getAllSystems();
+        $systemsMap = array();
+        foreach ($systems as $system) {
+            $systemsMap[$system->getId()] = $system;
+        }
+
+        return $systemsMap;
+    }
+
+    /**
      * Get all system IDs incompatible with a release
      *
      * @param integer Release ID

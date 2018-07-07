@@ -93,58 +93,6 @@ window.GameSearch = (function () {
             $('#JSCpanelDeveloperBrowse').val('-').prop('selected', true);
             GameSearch();
         };
-        $('#JSfalcon_only').change(function () {
-            if ($(this).is(':checked')) {
-                $('#JSste_enhanced').prop('checked', false);
-                $('#JSste_only').prop('checked', false);
-            }
-            GameSearch();
-        });
-        $('#JSfalcon_enhanced').change(function () {
-            if ($(this).is(':checked')) {
-                $('#JSste_only').prop('checked', false);
-            }
-            GameSearch();
-        });
-        $('#JSfalcon_rgb').change(function () {
-            if ($(this).is(':checked')) {
-                $('#JSste_only').prop('checked', false);
-            }
-            GameSearch();
-        });
-        $('#JSfalcon_vga').change(function () {
-            if ($(this).is(':checked')) {
-                $('#JSste_only').prop('checked', false);
-            }
-            GameSearch();
-        });
-        $('#JSste_only').change(function () {
-            if ($(this).is(':checked')) {
-                $('JSfalcon_enhanced').prop('checked', false);
-                $('#JSfalcon_only').prop('checked', false);
-                $('#JSfalcon_rgb').prop('checked', false);
-                $('#JSfalcon_vga').prop('checked', false);
-            }
-            GameSearch();
-        });
-        $('#JSste_enhanced').change(function () {
-            if ($(this).is(':checked')) {
-                $('#JSfalcon_only').prop('checked', false);
-            }
-            GameSearch();
-        });
-        $('#JScommercial').change(function () {
-            if ($(this).is(':checked')) {
-                $('#JSfree').prop('checked', false);
-            }
-            GameSearch();
-        });
-        $('#JSfree').change(function () {
-            if ($(this).is(':checked')) {
-                $('#JScommercial').prop('checked', false);
-            }
-            GameSearch();
-        });
         $('#JSarcade').change(function () {
             GameSearch();
         });
@@ -158,9 +106,6 @@ window.GameSearch = (function () {
             GameSearch();
         });
         $('#JSunfinished').change(function () {
-            GameSearch();
-        });
-        $('#JSmonochrome').change(function () {
             GameSearch();
         });
         $('#JSseuck').change(function () {
