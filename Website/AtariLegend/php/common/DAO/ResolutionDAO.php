@@ -23,20 +23,20 @@ class ResolutionDAO {
         $stmt = \AL\Db\execute_query(
             "ResolutionDAO: getAllResolutions",
             $this->mysqli,
-            "SELECT resolution_id, resolution_name FROM resolution ORDER BY resolution_id",
+            "SELECT id, name FROM resolution ORDER BY id",
             null, null
         );
 
         \AL\Db\bind_result(
             "ResolutionDAO: getAllResolutions",
             $stmt,
-            $resolution_id, $resolution_name
+            $id, $name
         );
 
         $resolutions = [];
         while ($stmt->fetch()) {
             $resolutions[] = new \AL\Common\Model\Game\Resolution(
-                $resolution_id, $resolution_name
+                $id, $name
             );
         }
 

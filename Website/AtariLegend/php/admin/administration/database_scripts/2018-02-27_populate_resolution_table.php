@@ -21,7 +21,7 @@ AND table_name = 'resolution' LIMIT 1";
 // Database change
 $database_update_sql = "
 INSERT INTO resolution
-  (resolution_name)
+  (name)
 VALUES
   ('ST Low'),
   ('ST Medium'),
