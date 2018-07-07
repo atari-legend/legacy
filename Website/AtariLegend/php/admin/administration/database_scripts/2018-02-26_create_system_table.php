@@ -20,9 +20,9 @@ AND table_name = 'system' LIMIT 1";
 
 // Database change
 $database_update_sql = "CREATE TABLE system (
-    `system_id` INT NOT NULL AUTO_INCREMENT COMMENT 'Unique ID of a system',
-    `system_name` VARCHAR(255) NOT NULL COMMENT 'Name of computer system',
-    PRIMARY KEY (`system_id`)
+    `id` INT NOT NULL AUTO_INCREMENT COMMENT 'Unique ID of a system',
+    `name` VARCHAR(255) NOT NULL COMMENT 'Name of computer system',
+    PRIMARY KEY (`id`)
 )
 ENGINE = InnoDB
 CHARSET = utf8

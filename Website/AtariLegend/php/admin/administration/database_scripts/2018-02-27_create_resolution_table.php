@@ -20,9 +20,9 @@ AND table_name = 'resolution' LIMIT 1";
 
 // Database change
 $database_update_sql = "CREATE TABLE resolution (
-    `resolution_id` INT NOT NULL AUTO_INCREMENT COMMENT 'Unique ID of a screen resolution',
-    `resolution_name` VARCHAR(255) NOT NULL COMMENT 'Name of screen resolution',
-    PRIMARY KEY (`resolution_id`)
+    `id` INT NOT NULL AUTO_INCREMENT COMMENT 'Unique ID of a screen resolution',
+    `name` VARCHAR(255) NOT NULL COMMENT 'Name of screen resolution',
+    PRIMARY KEY (`id`)
 )
 ENGINE = InnoDB
 CHARSET = utf8

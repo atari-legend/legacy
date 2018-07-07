@@ -20,11 +20,11 @@ AND table_name = 'game_release_resolution' LIMIT 1";
 
 // Database change
 $database_update_sql = "CREATE TABLE game_release_resolution (
-  `game_release_resolution_id` INT NOT NULL AUTO_INCREMENT,
-  `resolution_id` INT NOT NULL,
-  `game_release_id` INT NOT NULL,
-  PRIMARY KEY (`game_release_resolution_id`),
-  FOREIGN KEY (resolution_id) REFERENCES resolution(resolution_id),
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `resolution_id` INT NOT NULL COMMENT 'ID of a screen resolution the game supports',
+  `game_release_id` INT NOT NULL COMMENT 'ID of the release',
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (resolution_id) REFERENCES resolution(id),
   FOREIGN KEY (game_release_id) REFERENCES game_release(id)
 )
 ENGINE = InnoDB

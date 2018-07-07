@@ -21,7 +21,7 @@ AND table_name = 'system' LIMIT 1";
 // Database change
 $database_update_sql = "
 INSERT INTO system
-  (system_name)
+  (name)
 VALUES
   ('Falcon'),
   ('STE'),
