@@ -257,7 +257,7 @@ while ($log = $sql_log->fetch_array(MYSQLI_BOTH)) {
     //  the REVIEW SECTION
     if ($log['section'] == 'Reviews') {
         //$section_link = ("../games/games_review_comment_edit.php" . '?review_user_comments_id=' . $log['sub_section_id'] . '&v_counter=0');
-        $subsection_link = ("../administration/comments.php");
+        $section_link = ("../administration/comments.php");
 
         if ($log['sub_section'] == 'Comment') {
             if ($log['action'] == 'Delete') {
