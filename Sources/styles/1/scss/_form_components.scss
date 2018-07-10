@@ -84,6 +84,13 @@
     color: #ffffff;
     border: 1px solid #008b8b;
     text-align: left;
+
+    &:disabled {
+        border: dotted 1px #666;
+        background-color: #222;
+        color: #ccc;
+        cursor: not-allowed;
+    }
 }
 .input_small {
     width: 50px;
@@ -133,6 +140,17 @@
     padding-bottom: 5px;
     background: #0d2e2e;
     border: 1px solid #008b8b;
+
+    &.button_danger {
+        background-color: $danger;
+        color: darken($danger, 40%);
+        border: solid 1px darken($danger, 20%);
+
+        &:hover {
+            background-color: darken($danger, 20%);
+            color: $danger;
+        }
+    }
 }
 
 .primary_button:hover {

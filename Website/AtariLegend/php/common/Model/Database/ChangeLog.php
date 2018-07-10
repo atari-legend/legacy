@@ -22,7 +22,7 @@ class ChangeLog {
         "Downloads" => array("Crew", "Details", "TOS"),
         "Format" => array("Format"),
         "Game series" => array("Game", "Series"),
-        "Games" => array("AKA", "Box back", "Box front", "Comment","Creator",
+        "Games" => array("AKA", "Author", "Box back", "Box front", "Comment","Creator",
             "Developer", "Fact", "File", "Mag score", "Music","Game", "Publisher",
             "Review", "Review comment", "Screenshot", "Similar", "Submission", "Year",
             "Release"
