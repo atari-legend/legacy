@@ -16,25 +16,20 @@
 // at the games detail page
 //****************************************************************************************
 *}
-
 {if isset($smarty_action) and $smarty_action == "company_publisher_browse"}
-    {if isset($company)}
-        <select name="company_id_pub" class="standard_select select_medium">
-            <option value="-" selected>-</option>
-            {foreach from=$company item=line}
-                <option value="{$line.company_id}">{$line.company_name}</option>
-            {/foreach}
-        </select>
-    {/if}
+    <select name="pub_dev_id" class="standard_select select_medium" style="width: 131px;" required>
+        <option value="" selected disabled>{$letter|upper} &hellip;</option>
+        {foreach from=$pubdevs item=pubdev}
+            <option value="{$pubdev->getId()}">{$pubdev->getName()}</option>
+        {/foreach}
+    </select>
 {/if}
 
 {if isset($smarty_action) and $smarty_action == "company_developer_browse"}
-    {if isset($company)}
-        <select name="company_id_dev" class="standard_select select_medium">
-            <option value="-" selected>-</option>
-            {foreach from=$company item=line}
-                <option value="{$line.company_id}">{$line.company_name}</option>
-            {/foreach}
-        </select>
-    {/if}
+    <select name="pub_dev_id" class="standard_select select_medium" style="width: 131px;" required>
+        <option value="" selected disabled>{$letter|upper} &hellip;</option>
+        {foreach from=$pubdevs item=pubdev}
+            <option value="{$pubdev->getId()}">{$pubdev->getName()}</option>
+        {/foreach}
+    </select>
 {/if}
