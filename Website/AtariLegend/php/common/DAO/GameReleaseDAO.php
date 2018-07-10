@@ -49,7 +49,7 @@ class GameReleaseDAO {
         $stmt = \AL\Db\execute_query(
             "GameRelaseDAO: getReleasesForGame",
             $this->mysqli,
-            "SELECT id, `name`, `date`, license FROM game_release WHERE game_id = ?",
+            "SELECT id, `name`, `date`, license FROM game_release WHERE game_id = ? ORDER BY date ASC",
             "i", $game_id
         );
 

@@ -26,9 +26,13 @@ include("../../admin/games/quick_search_games.php");
 
 require_once __DIR__."/../../common/DAO/GameReleaseDAO.php";
 require_once __DIR__."/../../common/DAO/GameDAO.php";
+require_once __DIR__."/../../common/DAO/IndividualDAO.php";
+require_once __DIR__."/../../common/DAO/PubDevDAO.php";
 
 $gameReleaseDao = new \AL\Common\DAO\GameReleaseDAO($mysqli);
 $gameDao = new \AL\Common\DAO\GameDAO($mysqli);
+$individualDao = new \Al\Common\DAO\IndividualDAO($mysqli);
+$pubDevDao = new \AL\Common\DAO\PubDevDAO($mysqli);
 
 //***********************************************************************************
 //Let's get the general game info first.
@@ -75,7 +79,6 @@ $smarty->assign('game_screenshot', $gameDao->getRandomScreenshot($game_id));
 //***********************************************************************************
 //get the release dates
 //***********************************************************************************
-
 $smarty->assign('game_releases', $gameReleaseDao->getReleasesForGame($game_id));
 
 //***********************************************************************************
@@ -104,16 +107,7 @@ while ($categories = $sql_categories->fetch_array(MYSQLI_BOTH)) {
 //**********************************************************************************
 //Get the author info
 //**********************************************************************************
-
-//Get the individuals
-$sql_individuals = $mysqli->query("SELECT * FROM individuals ORDER BY ind_name ASC") or die("Couldn't query individual database");
-
-while ($individuals = $sql_individuals->fetch_array(MYSQLI_BOTH)) {
-    $smarty->append('individuals', array(
-        'ind_id' => $individuals['ind_id'],
-        'ind_name' => $individuals['ind_name']
-    ));
-}
+$smarty->assign('individuals', $individualDao->getAllIndividuals());
 
 // Get the author types
 $sql_author = $mysqli->query("SELECT * FROM author_type ORDER BY author_type_info ASC") or die("Couldn't query author_types");
@@ -136,7 +130,8 @@ while ($game_author = $sql_gameauthors->fetch_array(MYSQLI_BOTH)) {
         'game_author_id' => $game_author['game_author_id'],
         'ind_name' => $game_author['ind_name'],
         'ind_id' => $game_author['ind_id'],
-        'auhthor_type_info' => $game_author['author_type_info']
+        'author_type_info' => $game_author['author_type_info'],
+        'author_type_id' => $game_author['author_type_id']
     ));
 }
 
@@ -144,15 +139,7 @@ while ($game_author = $sql_gameauthors->fetch_array(MYSQLI_BOTH)) {
 //Get the companies info
 //**********************************************************************************
 
-//let's get all the companies in the DB
-$sql_company = $mysqli->query("SELECT * FROM pub_dev WHERE pub_dev_name REGEXP '^[0-9].*' ORDER BY pub_dev_name ASC") or die("Couldn't query Publisher and Developer database");
-
-while ($company = $sql_company->fetch_array(MYSQLI_BOTH)) {
-    $smarty->append('company', array(
-        'comp_id' => $company['pub_dev_id'],
-        'comp_name' => $company['pub_dev_name']
-    ));
-}
+$smarty->assign('pubdevs', $pubDevDao->getPubDevsStartingWith("^[0-9]"));
 
 //let's get the publishers for this game
 $sql_publisher = $mysqli->query("SELECT * FROM pub_dev
@@ -162,12 +149,13 @@ $sql_publisher = $mysqli->query("SELECT * FROM pub_dev
                  WHERE game_publisher.game_id = '$game_id' ORDER BY pub_dev_name ASC") or die("Couldn't query publishers");
 
 while ($publishers = $sql_publisher->fetch_array(MYSQLI_BOTH)) {
-    $smarty->append('publisher', array(
-        'pub_id' => $publishers['pub_dev_id'],
-        'pub_name' => $publishers['pub_dev_name'],
+    $smarty->append('publishers', array(
+        'pub_dev_id' => $publishers['pub_dev_id'],
+        'pub_dev_name' => $publishers['pub_dev_name'],
+        'game_extra_info' => $publishers['game_extra_info'],
+        'game_extra_info_id' => $publishers['game_extra_info_id'],
         'continent_id' => $publishers['continent_id'],
-        'extra_info' => $publishers['game_extra_info'],
-        'continent' => $publishers['continent_name']
+        'continent_name' => $publishers['continent_name']
     ));
 }
 
@@ -179,12 +167,13 @@ $sql_developer = $mysqli->query("SELECT * FROM pub_dev
                   WHERE game_developer.game_id = '$game_id' ORDER BY pub_dev_name ASC") or die("Couldn't query developers");
 
 while ($developers = $sql_developer->fetch_array(MYSQLI_BOTH)) {
-    $smarty->append('developer', array(
-        'pub_id' => $developers['pub_dev_id'],
-        'pub_name' => $developers['pub_dev_name'],
+    $smarty->append('developers', array(
+        'pub_dev_id' => $developers['pub_dev_id'],
+        'pub_dev_name' => $developers['pub_dev_name'],
+        'game_extra_info' => $developers['game_extra_info'],
+        'game_extra_info_id' => $developers['game_extra_info_id'],
         'continent_id' => $developers['continent_id'],
-        'extra_info' => $developers['game_extra_info'],
-        'continent' => $developers['continent_name']
+        'continent_name' => $developers['continent_name']
     ));
 }
 
@@ -195,7 +184,7 @@ while ($developers = $sql_developer->fetch_array(MYSQLI_BOTH)) {
 $sql_continent = $mysqli->query("SELECT * FROM continent ORDER BY continent_name ASC") or die("Couldn't query continent database");
 
 while ($continent = $sql_continent->fetch_array(MYSQLI_BOTH)) {
-    $smarty->append('continent', array(
+    $smarty->append('continents', array(
         'continent_id' => $continent['continent_id'],
         'continent_name' => $continent['continent_name']
     ));

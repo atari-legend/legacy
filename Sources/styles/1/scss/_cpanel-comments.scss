@@ -70,6 +70,10 @@
     display: flex;
     overflow: hidden;
 
+    a {
+        color: white;
+    }
+
     .comments_userinfo_phoneview {
         display: inline-block;
         img {

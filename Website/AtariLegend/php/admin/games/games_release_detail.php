@@ -5,11 +5,13 @@ require_once __DIR__."/../../common/DAO/GameDAO.php";
 require_once __DIR__."/../../common/DAO/GameReleaseDAO.php";
 require_once __DIR__."/../../common/DAO/ResolutionDAO.php";
 require_once __DIR__."/../../common/DAO/SystemDAO.php";
+require_once __DIR__."/../../common/DAO/ChangeLogDAO.php";
 
 $gameReleaseDao = new \AL\Common\DAO\GameReleaseDAO($mysqli);
 $gameDao = new \AL\Common\DAO\GameDao($mysqli);
 $resolutionDao = new \AL\Common\DAO\ResolutionDao($mysqli);
 $systemDao = new \AL\Common\DAO\SystemDao($mysqli);
+$changeLogDao = new \AL\Common\DAO\ChangeLogDAO($mysqli);
 
 if ($_SERVER['REQUEST_METHOD'] == "GET") {
     $smarty->assign('license_types', array(
@@ -63,14 +65,42 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
     }
 
     if ($release_id > -1) {
-    $gameReleaseDao->updateRelease(
-        $release_id,
-        $name,
-        $date,
-        $license);
+        $gameReleaseDao->updateRelease(
+            $release_id,
+            $name,
+            $date,
+            $license);
+
+        $changeLogDao->insertChangeLog(
+            new \AL\Common\Model\Database\ChangeLog(
+                -1,
+                "Games",
+                $game_id,
+                $game->getName(),
+                "Release",
+                $release_id,
+                ($name == '') ? $game->getName() : $name,
+                $_SESSION["user_id"],
+                \AL\Common\Model\Database\ChangeLog::ACTION_UPDATE
+            )
+        );
     } else {
         $release_id = $gameReleaseDao->addReleaseForGame($game_id, $name, $Date_Year."-01-01");
-    }
+
+        $changeLogDao->insertChangeLog(
+            new \AL\Common\Model\Database\ChangeLog(
+                -1,
+                "Games",
+                $game_id,
+                $game->getName(),
+                "Release",
+                $release_id,
+                ($name == '') ? $game->getName() : $name,
+                $_SESSION["user_id"],
+                \AL\Common\Model\Database\ChangeLog::ACTION_INSERT
+            )
+        );
+}
 
     $systemDao->setIncompatibleSystemsForRelease($release_id, isset($system_incompatible) ? $system_incompatible : []);
     $systemDao->setEnhancedSystemsForRelease($release_id, isset($system_enhanced) ? $system_enhanced : []);

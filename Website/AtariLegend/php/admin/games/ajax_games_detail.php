@@ -22,28 +22,20 @@
 include("../../config/common.php");
 include("../../config/admin.php");
 
-if ((isset($action) and $action == "company_publisher_browse") or (isset($action) and $action == "company_developer_browse")) {
-    // Do a simple gamesearch... no aka's or the likes of that.
-    if (isset($query) and $query == "num") {
-        $gamebrowse_select = " WHERE pub_dev_name REGEXP '^[0-9].*'";
-    } else {
-        $gamebrowse_select = " WHERE pub_dev_name LIKE '$query%'";
-    }
+require_once __DIR__."/../../common/DAO/PubDevDAO.php";
 
-    $sql_build = "SELECT * FROM pub_dev ";
-    $sql_build .= $gamebrowse_select;
-    $sql_build .= " ORDER BY pub_dev_name ASC";
+$pubDevDao = new \AL\Common\DAO\PubDevDAO($mysqli);
 
-    $query = $mysqli->query($sql_build) or die("Couldn't query company Database ($sql_build)");
-
+if ((isset($action)
+    and ($action == "company_publisher_browse"
+        or $action == "company_developer_browse"))) {
     $smarty->assign('smarty_action', $action);
-
-    while ($query_company = $query->fetch_array(MYSQLI_BOTH)) { // This smarty is used for creating the list of games contained within a game series
-        $smarty->append('company', array(
-            'company_id' => $query_company['pub_dev_id'],
-            'company_name' => $query_company['pub_dev_name']
-        ));
-    }
+    $smarty->assign('letter',
+        ($query == 'num') ? '0-9' : $query
+    );
+    $smarty->assign('pubdevs', $pubDevDao->getPubDevsStartingWith(
+        ($query == 'num') ? '^[0-9]' : '^'.$query
+    ));
 }
 
 //Send all smarty variables to the templates

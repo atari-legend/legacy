@@ -112,6 +112,28 @@ img.edit-tile {
     width: 60%;
 }
 
+hr.separator_add {
+    margin-top: 10px;
+    margin-bottom: 5px;
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, #122323, rgba(0, 0, 0, 0));
+}
+
+.gd_left {
+    width: 50%;
+    float: left;
+}
+
+.gd_right {
+    width: 50%;
+    float: right;
+}
+
+.gd_clear {
+    clear: both;
+}
+
 //*----------------------------------------------------------
 //Games upload
 //------------------------------------------------------------ */

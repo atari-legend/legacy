@@ -20,35 +20,41 @@
     {/if}
 
     <div class="standard_tile_line"></div>
-    <div class="standard_tile_padding">
-        <fieldset class="secondary_fieldset">
-            <legend class="primary_legend">Editing a release</legend>
-            Each game can have multiple releases. A release has a date and different features, such as the fact that it was enhanced
-            for a system (e.g. STe) or incompatible with others (e.g. Falcon).
-        </fieldset>
-    </div>
 
     <form method="POST">
         <input type="hidden" name="game_id" value="{$game->getId()}">
         <input type="hidden" name="release_id" value="{$release->getId()}">
         <div class="standard_tile_padding">
             <fieldset class="secondary_fieldset">
-                <legend class="primary_legend">Release attributes</legend>
+                <legend class="primary_legend">Release information</legend>
 
-                Release date: {html_select_date time=$release->getDate() year_empty="Unknown" start_year=1984 display_days=0 display_months=0 class="standard_select"}<br>
-
-                Alternative title (optional): <input type="text" name="name" class="standard_input" value="{$release->getName()}">
-                <span class="help-hint">(e.g.: Translated title if it's a country-specific release. Leave blank if the title is the same as the game.)</span>
+                <div class="help-hint">
+                    Each game can have multiple releases. A release has a date and different features, such as the fact that it was enhanced
+                    for a system (e.g. STe) or incompatible with others (e.g. Falcon).
+                </div>
                 <br>
 
-                License:
-                <select name="license" class="standard_select">
+                <b>Release date</b>
+                {html_select_date time=$release->getDate() year_empty="Unknown" start_year=1984 display_days=0 display_months=0 class="standard_select"}
+                <br>
+
+                <b>Alternative title (optional)</b>
+                <input type="text" name="name" class="standard_input input_large" value="{$release->getName()}">
+                <br>
+                <span class="help-hint">e.g.: Translated title if it's a country-specific release. Leave blank if the title is the same as the game.</span>
+                <br>
+                <br>
+
+                <b>License</b>
+                <select name="license" class="standard_select select_large">
                     {foreach from=$license_types item=type}
                     {$type}
                     <option {if $type == $release->getLicense()}selected{/if}>{$type}</option>
                     {/foreach}
                 </select>
+
                 <br><br>
+
                 <h4>Screen resolution:</h4>
                 {foreach from=$resolutions item=resolution}
                     <div class="checkbox links_mod_checkbox">
