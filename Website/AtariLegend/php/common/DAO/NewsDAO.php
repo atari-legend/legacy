@@ -49,7 +49,7 @@ class NewsDAO {
             $constraints[] = "news.user_id = ?";
         }
         if ($last_timestamp != null) {
-            $constraints[] = "news.news_date <= ?";
+            $constraints[] = "news.news_date < ?";
         }
         if ($words != null) {
             $constraints[] = "news_search_wordlist.news_word_text LIKE ?";
