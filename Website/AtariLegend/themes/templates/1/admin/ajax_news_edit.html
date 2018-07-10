@@ -11,102 +11,98 @@
 *}
 
 <div id="news_edit_list">
-        {if count($news) > 0}
-            {foreach from=$news item=article}
-                <div id="jsNewsId{$article->getId()}" class="infinite-item">
-                    <div class="news_post_box" id="{$article->getDate()}">
-                        <div class="news_userinfo">
-                            {if $article->getUser()->getAvatar() != null}
-                                <img src="../../includes/show_image.php?file={$article->getUser()->getAvatar()}&amp;resize=100,null,null,null" alt="{$article->getUser()->getName()}" width="100px">
-                            {/if}
-                            <a href="../user/user_detail.php?user_id_selected={$article->getUser()->getId()}" class="standard_tile_link">{$article->getUser()->getName()}</a>
-                            <br><br><br>
-                            <span class="text-nowrap">
-                                Joined: {$article->getUser()->getJoinDate()|date_format:"d-m-y"|default:"n/a"}
-                                <br>
-                                News posts:  <a href="../user/user_detail.php?user_id_selected={$article->getUser()->getId()}" data-user-id="{$article->getUser()->getId()}" class="standard_tile_link jsUserNewsLink">{$article->getUser()->getNewsCount()}</a>
-                                <br>
-                                Karma: <a href="../user/user_statistics.php?user_id_selected={$article->getUser()->getId()}" class="standard_tile_link">{$article->getUser()->getKarma()}</a>
-                            </span>
-                        </div>
-                        <div class="news_post_detail" id="jsNewsEditBox{$article->getId()}">
-                            <div class="news_userinfo_phoneview">
-                                {if $article->getUser()->getAvatar() != null}
-                                    <img src="../../includes/show_image.php?file={$article->getUser()->getAvatar()}&amp;resize=100,null,null,null" alt="{$article->getUser()->getName()}" width="100px">
-                                {else}
-                                    <img src="../../includes/show_image.php?file={$style_dir} {$article->getUser()->getAvatar()}&amp;resize=100,null,null,null" alt="{$article->getUser()->getName()}" width="100px">
-                                {/if}
-                                <h6>
-                                    <a href="../user/user_detail.php?user_id_selected={$article->getUser()->getId()}">{$article->getUser()->getName()}</a>
-                                </h6>
-                            </div>
-                            <h4 class="news_title">
-                                {$article->getHeadline()}</a>
-                            </h4>
-                            <ul class="news_buttons">
-                                {if $article->getUser()->getEmail() !== ''}
-                                <li class="primary_button jsNewsEmailButton">
+    {foreach from=$news item=article}
+        <div id="jsNewsId{$article->getId()}" class="infinite-item">
+            <div class="news_post_box" id="{$article->getDate()}">
+                <div class="news_userinfo">
+                    {if $article->getUser()->getAvatar() != null}
+                        <img src="../../includes/show_image.php?file={$article->getUser()->getAvatar()}&amp;resize=100,null,null,null" alt="{$article->getUser()->getName()}" width="100px">
+                    {/if}
+                    <a href="../user/user_detail.php?user_id_selected={$article->getUser()->getId()}" class="standard_tile_link">{$article->getUser()->getName()}</a>
+                    <br><br><br>
+                    <span class="text-nowrap">
+                        Joined: {$article->getUser()->getJoinDate()|date_format:"d-m-y"|default:"n/a"}
+                        <br>
+                        News posts:  <a href="../user/user_detail.php?user_id_selected={$article->getUser()->getId()}" data-user-id="{$article->getUser()->getId()}" class="standard_tile_link jsUserNewsLink">{$article->getUser()->getNewsCount()}</a>
+                        <br>
+                        Karma: <a href="../user/user_statistics.php?user_id_selected={$article->getUser()->getId()}" class="standard_tile_link">{$article->getUser()->getKarma()}</a>
+                    </span>
+                </div>
+                <div class="news_post_detail" id="jsNewsEditBox{$article->getId()}">
+                    <div class="news_userinfo_phoneview">
+                        {if $article->getUser()->getAvatar() != null}
+                            <img src="../../includes/show_image.php?file={$article->getUser()->getAvatar()}&amp;resize=100,null,null,null" alt="{$article->getUser()->getName()}" width="100px">
+                        {else}
+                            <img src="../../includes/show_image.php?file={$style_dir} {$article->getUser()->getAvatar()}&amp;resize=100,null,null,null" alt="{$article->getUser()->getName()}" width="100px">
+                        {/if}
+                        <h6>
+                            <a href="../user/user_detail.php?user_id_selected={$article->getUser()->getId()}">{$article->getUser()->getName()}</a>
+                        </h6>
+                    </div>
+                    <h4 class="news_title">
+                        {$article->getHeadline()}</a>
+                    </h4>
+                    <ul class="news_buttons">
+                        {if $article->getUser()->getEmail() !== ''}
+                        <li class="primary_button jsNewsEmailButton">
+                            <a href="mailto:{$article->getUser()->getEmail()}?subject=Your news post : {$article->getHeadline()|escape:'url'} at Atari Legend" class="links_addnew_link">
+                                <i class="fa fa-envelope" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                        {/if}
+                        <li class="primary_button jsNewsPostEditButton" data-news-id="{$article->getId()}">
+                            <a class="links_addnew_link">
+                                <i class="fa fa-pencil" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                        <li class="primary_button jsNewsPostDeleteButton" data-news-id="{$article->getId()}">
+                            <a class="links_addnew_link">
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                        <div class="news_button_dropdown" data-dropdown-id="{$article->getId()}">
+                            <li class="primary_button">
+                                <a class="links_addnew_link">
+                                    <i class="fa fa-bars" aria-hidden="true"></i>
+                                </a>
+                            </li>
+                            <div class="dropdown_box" id="dropdown_box{$article->getId()}">
+                                <li class="dropdown_item">
                                     <a href="mailto:{$article->getUser()->getEmail()}?subject=Your news post : {$article->getHeadline()|escape:'url'} at Atari Legend" class="links_addnew_link">
-                                        <i class="fa fa-envelope" aria-hidden="true"></i>
+                                        Email
                                     </a>
                                 </li>
-                                {/if}
-                                <li class="primary_button jsNewsPostEditButton" data-news-id="{$article->getId()}">
-                                    <a class="links_addnew_link">
-                                        <i class="fa fa-pencil" aria-hidden="true"></i>
-                                    </a>
+                                <li class="dropdown_item jsNewsPostEditDropdownItem" data-news-id="{$article->getId()}">
+                                    Edit
                                 </li>
-                                <li class="primary_button jsNewsPostDeleteButton" data-news-id="{$article->getId()}">
-                                    <a class="links_addnew_link">
-                                        <i class="fa fa-trash" aria-hidden="true"></i>
-                                    </a>
+                                <li class="dropdown_item jsNewsPostDeleteDropdownItem" data-news-id="{$article->getId()}">
+                                    Delete
                                 </li>
-                                <div class="news_button_dropdown" data-dropdown-id="{$article->getId()}">
-                                    <li class="primary_button">
-                                        <a class="links_addnew_link">
-                                            <i class="fa fa-bars" aria-hidden="true"></i>
-                                        </a>
-                                    </li>
-                                    <div class="dropdown_box" id="dropdown_box{$article->getId()}">
-                                        <li class="dropdown_item">
-                                            <a href="mailto:{$article->getUser()->getEmail()}?subject=Your news post : {$article->getHeadline()|escape:'url'} at Atari Legend" class="links_addnew_link">
-                                                Email
-                                            </a>
-                                        </li>
-                                        <li class="dropdown_item jsNewsPostEditDropdownItem" data-news-id="{$article->getId()}">
-                                            Edit
-                                        </li>
-                                        <li class="dropdown_item jsNewsPostDeleteDropdownItem" data-news-id="{$article->getId()}">
-                                            Delete
-                                        </li>
-                                    </div>
-                                </div>
-                            </ul>
-                            <div class="news_line" id="line_above_info"></div>
-                            <h4 class="news_title_phoneview">
-                                {$article->getHeadline()}</a>
-                            </h4>
-                            <div class="news_post_info">
-                                Posted <span>by <a href="../user/user_detail.php?user_id_selected={$article->getUser()->getId()}">{$article->getUser()->getName()}</a></span> on {$article->getDate()|date_format}
-                            </div>
-                            <div class="news_line" id="line_below_info"></div>
-                            <div class="news_post_text" id="jsNewsTextBox{$article->getId()}">
-                                {if $article->getImage() != null}
-                                    <div style="float:left;margin:15px;">
-                                        <img src="../../includes/show_image.php?file={$article->getImage()}&amp;resize=120,null,null,null" alt="newsbutton" class="game_screenshot_img">
-                                    </div>
-                                {/if}
-                                <br>
-                                {$article->getHtmlText()}
-                                <br>
-                                <br>
                             </div>
                         </div>
+                    </ul>
+                    <div class="news_line" id="line_above_info"></div>
+                    <h4 class="news_title_phoneview">
+                        {$article->getHeadline()}</a>
+                    </h4>
+                    <div class="news_post_info">
+                        Posted <span>by <a href="../user/user_detail.php?user_id_selected={$article->getUser()->getId()}">{$article->getUser()->getName()}</a></span> on {$article->getDate()|date_format}
+                    </div>
+                    <div class="news_line" id="line_below_info"></div>
+                    <div class="news_post_text" id="jsNewsTextBox{$article->getId()}">
+                        {if $article->getImage() != null}
+                            <div style="float:left;margin:15px;">
+                                <img src="../../includes/show_image.php?file={$article->getImage()}&amp;resize=120,null,null,null" alt="newsbutton" class="game_screenshot_img">
+                            </div>
+                        {/if}
+                        <br>
+                        {$article->getHtmlText()}
+                        <br>
+                        <br>
                     </div>
                 </div>
-            {/foreach}
-        {else}
-            <div class="standard_tile_text_center">No news entries to approve.</div>
-        {/if}
+            </div>
+        </div>
+    {/foreach}
     </div>
     <div id="JSnewsText" style="display:none;">{if isset($news_search)}{$news_search}{/if}</div>
