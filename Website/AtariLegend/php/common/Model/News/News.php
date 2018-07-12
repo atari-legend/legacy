@@ -70,6 +70,6 @@ class News {
      *  rendered to HTML and smilies removed)
      */
     public function getHtmlText() {
-        return InsertALCode(RemoveSmillies($this->text));
+        return nl2br(InsertALCode(RemoveSmillies($this->text)));
     }
 }
