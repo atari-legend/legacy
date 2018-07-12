@@ -246,13 +246,16 @@ if (isset($action) and $action == "save_news_post_text") {
             // we have to convert the date vars into a time stamp to be inserted into the db
             $date = date_to_timestamp($news_year, $news_month, $news_day);
 
+            // Replace <br> with newlines
+            $news_text = preg_replace("/<br *?\/?>/", "\r\n", $news_text);
+
             $stmt = $mysqli->prepare("UPDATE news SET news_text = ?,
                                  news_headline = ?,
                                  user_id = ?,
                                  news_image_id = ?,
                                  news_date = ?
                                  WHERE news_id = ?") or die($mysqli->error);
-            $stmt->bind_param("ssiiis", $news_text, $news_headline, $news_userid, $news_image_id, $date, $news_id)
+            $stmt->bind_param("ssiiii", $news_text, $news_headline, $news_userid, $news_image_id, $date, $news_id)
                 or die($mysqli->error);
             $stmt->execute() or die($mysqli->error);
             $stmt->close();
