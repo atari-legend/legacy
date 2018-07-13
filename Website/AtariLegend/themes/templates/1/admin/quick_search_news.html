@@ -40,7 +40,7 @@
                 <select name="author_search" id="JSCpanelAuthorBrowse" class="standard_select select_large">
                     <option value="" SELECTED>-</option>
                     {foreach from=$authors_search item=line}
-                        <option value="{$line.user_id}">{$line.user_name}</option>
+                        <option value="{$line.user_id}" {if isset($user_id) and $line.user_id == $user_id}selected{/if}>{$line.user_name}</option>
                     {/foreach}
                 </select>
             </div>

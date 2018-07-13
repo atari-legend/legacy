@@ -208,22 +208,6 @@ $(document).ready(function () {
     // ******************
     // NEWS EDIT BUTTONS
     // ******************
-    // when clicking on users news posts
-    $('.jsNewsWrapper').on('click', '.jsUserNewsLink', function () {
-        var view = 'users_news';
-        var userId = $(this).data('user-id');
-        $.ajaxQueue({
-            // The URL for the request
-            url: 'ajax_news_edit.php',
-            data: 'view=' + view + '&user_id=' + userId,
-            type: 'GET',
-            dataType: 'html',
-            // Code to run if the request succeeds;
-            success: function (html) {
-                $('.jsNewsWrapper').html(html);
-            }
-        });
-    })
     // Edit News Function
     $('.jsNewsWrapper').on('click', '.jsNewsPostEditButton', function () {
         var newsId = $(this).data('news-id');
