@@ -15,7 +15,7 @@ This is the sub template file to generate the news edit page
 
 <div id="news_edit_list">
     {if count($news) > 0}
-        <div class="standard_tile_text_center">Your search query resulted in {count($news)} entries.</div><br>
+        <div class="standard_tile_text_center">Your search query resulted in {$nr_news} entries.</div><br>
         {foreach from=$news item=article}
             <div id="jsNewsId{$article->getId()}" class="infinite-item">
                 <div class="news_post_box" id="{$article->getDate()}">
