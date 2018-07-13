@@ -23,7 +23,7 @@
                     <span class="text-nowrap">
                         Joined: {$article->getUser()->getJoinDate()|date_format:"d-m-y"|default:"n/a"}
                         <br>
-                        News posts:  <a href="../user/user_detail.php?user_id_selected={$article->getUser()->getId()}" data-user-id="{$article->getUser()->getId()}" class="standard_tile_link jsUserNewsLink">{$article->getUser()->getNewsCount()}</a>
+                        News posts:  <a href="news_edit.php?user_id={$article->getUser()->getId()}" data-user-id="{$article->getUser()->getId()}" class="standard_tile_link">{$article->getUser()->getNewsCount()}</a>
                         <br>
                         Karma: <a href="../user/user_statistics.php?user_id_selected={$article->getUser()->getId()}" class="standard_tile_link">{$article->getUser()->getKarma()}</a>
                     </span>
