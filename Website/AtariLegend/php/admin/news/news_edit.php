@@ -42,6 +42,10 @@ $smarty->assign(
     )
 );
 
+if (isset($user_id)) {
+    $smarty->assign('user_id', $user_id);
+}
+
 $smarty->assign('nr_news', $newsDAO->getNewsCount());
 
 //Send all smarty variables to the templates

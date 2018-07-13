@@ -25,7 +25,7 @@ $smarty->assign(
         5,
         isset($user_id) ? $user_id : null,
         isset($last_timestamp) ? $last_timestamp : null,
-        isset($news_text) ? $news_text : null
+        isset($newssearch) ? $newssearch : null
     )
 );
 

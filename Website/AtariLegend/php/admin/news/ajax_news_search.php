@@ -24,15 +24,15 @@ $newsDAO = new AL\Common\DAO\NewsDAO($mysqli);
 //********************************************************************************************
 $date = date_to_timestamp($news_searchYear, $news_searchMonth, $news_searchDay);
 
-$smarty->assign(
-    'news',
-    $newsDAO->getLatestNews(
-        -1,
-        isset($author_search) ? $author_search : null,
-        isset($date) ? $date : null,
-        isset($newssearch) ? $newssearch : null
-    )
+$news = $newsDAO->getLatestNews(
+    -1,
+    isset($author_search) ? $author_search : null,
+    isset($date) ? $date : null,
+    isset($newssearch) ? $newssearch : null
 );
+
+$smarty->assign('news', array_slice($news, 0, 5));
+$smarty->assign('nr_news', count($news));
 
 $smarty->assign("user_id", $author_search);
 $smarty->assign("news_search", $newssearch);
