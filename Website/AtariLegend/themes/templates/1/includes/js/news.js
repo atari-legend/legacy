@@ -358,13 +358,13 @@ $(document).ready(function () {
     });
 
     function loadMoreData (lastTimestamp) {
-        var userId = $('#JSuserId').html();
-        var newsSearch = $('#JSnewsText').html();
+        var userId = $('#JSCpanelAuthorBrowse option:selected').val();
+        var newsSearch = $('#JSCpanelNewsSearch').val();
 
         $.ajaxQueue({
             // The URL for the request
             url: 'ajax_news_edit.php',
-            data: 'action=autoload&last_timestamp=' + lastTimestamp + '&user_id=' + userId + '&news_search=' + newsSearch,
+            data: 'action=autoload&last_timestamp=' + lastTimestamp + '&user_id=' + userId + '&newssearch=' + newsSearch,
             type: 'GET',
             dataType: 'html',
             // Code to run if the request succeeds;
