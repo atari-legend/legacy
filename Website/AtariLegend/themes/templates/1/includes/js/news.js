@@ -261,7 +261,17 @@ $(document).ready(function () {
         $.ajaxQueue({
             // The URL for the request
             url: 'db_news.php',
-            data: 'action=save_news_post_text&news_id=' + newsId + '&news_text=' + newsText + '&news_headline=' + newsHeadline + '&news_userid=' + newsUserId + '&news_image_id=' + newsImageId + '&news_day=' + day + '&news_month=' + month + '&news_year=' + year,
+            data: {
+                action: 'save_news_post_text',
+                news_id: newsId,
+                news_text: newsText,
+                news_headline: newsHeadline,
+                news_userid: newsUserId,
+                news_image_id: newsImageId,
+                news_day: day,
+                news_month: month,
+                news_year: year
+            },
             type: 'POST',
             dataType: 'html',
             // Code to run if the request succeeds;
