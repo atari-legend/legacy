@@ -13,7 +13,7 @@
 {* START NEW NEWS BOX *}
 {if isset($action) and $action=="get_newsapprove_text"}
     {foreach from=$news_item item=line}
-        <input type="text" name="headline" id="JsHeadlineText" maxlength='64' class="standard_input input_75" required value="{$line->getHeadline()}">
+        <input type="text" name="headline" id="JsHeadlineText" maxlength='64' class="standard_input input_75" required value="{$line->getHeadline()|escape}">
         <ul class="news_buttons">
             <button class="primary_button jsNewsEditSaveButton news_save_button" data-news-id="{$news_id}" type="button">
                 <i class="fa fa-floppy-o" aria-hidden="true"></i>
