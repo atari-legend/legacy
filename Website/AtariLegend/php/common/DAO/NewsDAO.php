@@ -16,8 +16,14 @@ class NewsDAO {
     }
 
     private function getLatestNewsQuery($user_id = null, $last_timestamp = null, $words = null) {
+        // DISTINCT is currently needed because there may
+        // be multiple matches for a word in news_search_wordlist, one for
+        // the word is in the title and one for the word in the content.
+        // That result in the same news being returned twice. It would be
+        // preferable to fix the DB structure, but we have other priorities
+        // for now...
         $query = "SELECT
-                news.news_id,
+                DISTINCT(news.news_id),
                 news.news_headline,
                 news.news_text,
                 news.news_date,
@@ -52,7 +58,7 @@ class NewsDAO {
             $constraints[] = "news.news_date < ?";
         }
         if ($words != null) {
-            $constraints[] = "news_search_wordlist.news_word_text LIKE ?";
+            $constraints[] = "news_search_wordlist.news_word_text = ?";
         }
 
         $query .= \AL\Db\assemble_constraints($constraints);
