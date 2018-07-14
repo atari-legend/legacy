@@ -22,7 +22,7 @@
             <a href="../user/user_detail.php?user_id_selected={$article->getUser()->getId()}">{$article->getUser()->getName()}</a>
         </h6>
     </div>
-    <input type="text" name="headline" id="JsHeadlineText" maxlength='64' class="standard_input input_75" required value="{$article->getHeadline()}">
+    <input type="text" name="headline" id="JsHeadlineText" maxlength='64' class="standard_input input_75" required value="{$article->getHeadline()|escape}">
     <ul class="news_buttons">
         <button class="primary_button jsNewsPostEditSaveButton news_save_button" data-news-id="{$article->getId()}" type="button">
             <i class="fa fa-floppy-o" aria-hidden="true"></i>
