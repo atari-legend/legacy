@@ -9,11 +9,15 @@
                 selectName = selectElement.attr('name'),
                 // Currently selected label and value
                 selectedLabel = selectElement.find(':selected').text(),
+                // Wether the select is required or not
+                selectRequired = selectElement.attr('required'),
                 // Various attribute we need to perform the auto-complete:
                 // - the Ajax endpoint
                 completeEndpoint = selectElement.data('alt-autocomplete-endpoint'),
                 // - Which element is used to toggle between select / input mode
                 toggleControl = selectElement.data('alt-autocomplete-toggle'),
+                // Optional placeholder to use for the input
+                inputPlaceholder = selectElement.data('alt-autocomplete-placeholder'),
                 // Generate an ID for the auto-completed input based on the select name
                 displaySelectId = selectName + '-autocomplete-display';
 
@@ -25,6 +29,9 @@
 
             // Setup the autocomplete input field
             var autocompleteDisplayInput = $('<input type="text" class="ui-widget-inline standard_input input_large" id="' + displaySelectId + '" value="' + selectedLabel + '">');
+            autocompleteDisplayInput.attr('required', selectRequired);
+            autocompleteDisplayInput.attr('placeholder', inputPlaceholder);
+
             autocompleteDisplayInput
                 .autocomplete({
                     source: completeEndpoint,
