@@ -444,5 +444,8 @@
 
         <script src="{$template_dir}includes/js/forms.js"></script> <!-- log on security script -->
         <script src="{$template_dir}includes/js/main.js"></script>
+
+        {* Inner pages can inject additional JS that gets put here, after jQuery is included *}
+        {block name=additional_scripts}{/block}
     </body>
 </html>
