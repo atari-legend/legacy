@@ -30,6 +30,15 @@
     {include file='1/admin/quick_search_games.html'}
 {/block}
 
+{block name=additional_scripts}
+    <script src="{$template_dir}includes/js/ui.widgets.js"></script><!-- The autocomplete and dropdown switcher -->
+    <script>
+        $(document).ready(function () {
+            $('select[name=individual_id]').altAutocomplete();
+        });
+    </script>
+{/block}
+
 {block name=right_tile}
 
     <div class="standard_tile text-center">
@@ -299,9 +308,20 @@ $('#input-tags3').selectize({
                     <input type="hidden" name="action" value="add">
                     <input type="hidden" name="game_id" value="{$game->getId()}">
 
-                    <span class="fa fa-fw"></span>
-                    <select name="individual_id" class="standard_select select_large" required>
-                        <option value="" selected="selected" disabled>&mdash; Author name &mdash;</option>
+                    <a href="javascript:;"
+                        class="left_nav_link"
+                        id="individual_select_toggle"
+                        title="Click for dropdown mode">
+                        <i class="fa fa-fw fa-chevron-circle-down" aria-hidden="true"></i>
+                    </a>
+
+                    <select name="individual_id"
+                        class="standard_select select_large"
+                        data-alt-autocomplete-endpoint="../common/autocomplete.php?extraParams=individual"
+                        data-alt-autocomplete-toggle="#individual_select_toggle"
+                        data-alt-autocomplete-placeholder="Start typing a name…"
+                        required>
+                        <option value="" selected="selected" disabled></option>
                         {foreach from=$individuals item=individual}
                             <option value="{$individual->getId()}">{$individual->getName()}</option>
                         {/foreach}
