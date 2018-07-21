@@ -14,6 +14,9 @@ class PubDevDAO {
         $this->mysqli = $mysqli;
     }
 
+    public function getAllPubDevs() {
+        return $this->getPubDevsStartingWith(".");
+    }
     /**
      * Get all publishers and developers
      * @return \AL\Common\Model\PubDev\PubDev[] A list of PubDevs
