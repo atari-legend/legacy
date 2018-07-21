@@ -48,9 +48,7 @@
                             <tr></tr>
                             <tr style="display:none;" id="release_{$release->getId()}_publisher_profile_{$release->getPublisher()->getId()}">
                                 <td colspan="3">
-                                    <textarea id="profile{$release->getPublisher()->getId()}" class="primary_textarea" rows="6" style="margin-top:5px;margin-bottom:5px;font-size:10pt;margin-left:auto;margin-right:auto;" readonly>
-                                        {$release->getPublisher()->getProfile()}
-                                    </textarea>
+                                    <textarea id="profile{$release->getPublisher()->getId()}" class="primary_textarea" rows="6" style="margin-top:5px;margin-bottom:5px;font-size:10pt;margin-left:auto;margin-right:auto;" readonly>{$release->getPublisher()->getProfile()}</textarea>
                                 </td>
                             </tr>
                         {/if}
