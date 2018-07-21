@@ -58,6 +58,13 @@
             </div>
             <br>
             <div class="gd_navigator">
+                <a href="../../games/games_detail.php?game_id={$game->getId()}"
+                    class="primary_button button_info">
+                    <i class="fa fa-eye" aria-hidden="true"></i> View on main site
+                </a>
+            </div>
+            <br>
+            <div class="gd_navigator">
                 <a href="../games/db_games_detail.php?game_id={$game->getId()}&amp;action=delete_game"
                     class="primary_button button_danger"
                     onclick="javascript:return confirm('The game will be deleted')">
