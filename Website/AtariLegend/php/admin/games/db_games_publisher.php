@@ -7,10 +7,12 @@ require_once __DIR__.'/../../config/common.php';
 require_once __DIR__.'/../../config/admin.php';
 
 require_once __DIR__."/../../common/DAO/GameDAO.php";
+require_once __DIR__."/../../common/DAO/GameReleaseDAO.php";
 require_once __DIR__."/../../common/DAO/PubDevDAO.php";
 require_once __DIR__."/../../common/DAO/ChangeLogDAO.php";
 
 $gameDao = new \AL\Common\DAO\GameDAO($mysqli);
+$gameReleaseDao = new \AL\Common\DAO\GameReleaseDAO($mysqli);
 $pubDevDao = new \AL\Common\DAO\PubDevDao($mysqli);
 $changeLogDao = new \AL\Common\DAO\ChangeLogDAO($mysqli);
 
@@ -92,6 +94,54 @@ switch ($action) {
         );
 
         $_SESSION['edit_message'] = "Updated ".$pubdev->getName()." role on ".$game->getName();
+        break;
+
+    case "associate_to_release":
+        $release = $gameReleaseDao->getRelease($game_release_id);
+
+        $gameReleaseDao->updateRelease(
+            $release->getId(),
+            $release->getName(),
+            $release->getDate(),
+            $release->getLicense(),
+            ($game_extra_info_id != null && $game_extra_info_id == 1) ? \AL\Common\DAO\GameReleaseDAO::TYPE_BUDGET : $release->getType(),
+            ($continent_id != null) ? $continent_id : (($release->getContinent() != null) ? $release->getContinent()->getId() : null),
+            $pub_dev_id);
+
+        $changeLogDao->insertChangeLog(
+            new \AL\Common\Model\Database\ChangeLog(
+                -1,
+                "Games",
+                $game_id,
+                $game->getName(),
+                "Release",
+                $release->getId(),
+                ($release->getName() != null) ? $release->getName() : $game->getName(),
+                $_SESSION["user_id"],
+                \AL\Common\Model\Database\ChangeLog::ACTION_DELETE
+            )
+        );
+
+        $gameDao->removePublisher(
+            $game_id,
+            $pub_dev_id,
+            $continent_id,
+            $game_extra_info_id
+        );
+
+        $changeLogDao->insertChangeLog(
+            new \AL\Common\Model\Database\ChangeLog(
+                -1,
+                "Games",
+                $game_id,
+                $game->getName(),
+                "Publisher",
+                $pub_dev_id,
+                $pubdev->getName(),
+                $_SESSION["user_id"],
+                \AL\Common\Model\Database\ChangeLog::ACTION_DELETE
+            )
+        );
         break;
 }
 

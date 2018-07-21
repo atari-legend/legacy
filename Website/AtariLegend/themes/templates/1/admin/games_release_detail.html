@@ -5,6 +5,16 @@
     {include file='1/admin/games_release_list.html'}
 {/block}
 
+{block name=additional_scripts}
+    <script src="{$template_dir}includes/js/ui.widgets.js"></script><!-- The autocomplete and dropdown switcher -->
+    <script>
+        $(document).ready(function () {
+            $('select[name=pub_dev_id]').altAutocomplete();
+        });
+    </script>
+{/block}
+
+
 {extends file='1/admin/main.html'} {block name=main_tile}
 <div class="standard_tile">
     {if isset ($release)}
@@ -48,8 +58,45 @@
                 <b>License</b>
                 <select name="license" class="standard_select select_large">
                     {foreach from=$license_types item=type}
-                    {$type}
-                    <option {if $type == $release->getLicense()}selected{/if}>{$type}</option>
+                        <option {if $type == $release->getLicense()}selected{/if}>{$type}</option>
+                    {/foreach}
+                </select>
+                <br>
+
+                <b>Type</b>
+                <select name="type" class="standard_select select_large">
+                    <option value="">-</option>
+                    {foreach from=$release_types item=release_type}
+                        <option {if $release_type == $release->getType() or (isset($type) and $type == $release_type)}selected{/if}>{$release_type}</option>
+                    {/foreach}
+                </select>
+                <br>
+
+                <b>Continent</b>
+                <select name="continent_id" class="standard_select select_large">
+                    <option value="">-</option>
+                    {foreach from=$continents item=continent}
+                        <option value="{$continent->getId()}" {if ($release->getContinent() != null and $continent->getId() == $release->getContinent()->getId()) or (isset($continent_id) and $continent_id == $continent->getId())}selected{/if}>{$continent->getName()}</option>
+                    {/foreach}
+                </select>
+                <br>
+
+                <b>Publisher</b>
+                <a href="javascript:;"
+                    class="left_nav_link"
+                    id="pubdev_select_toggle"
+                    title="Click for dropdown mode">
+                    <i class="fa fa-fw fa-chevron-circle-down" aria-hidden="true"></i>
+                </a>
+
+                <select name="pub_dev_id"
+                    class="standard_select select_large"
+                    data-alt-autocomplete-endpoint="../common/autocomplete.php?extraParams=pub_dev"
+                    data-alt-autocomplete-toggle="#pubdev_select_toggle"
+                    data-alt-autocomplete-placeholder="Start typing a publisher name…">
+                    <option value="">-</option>
+                    {foreach from=$publishers item=publisher}
+                        <option value="{$publisher->getId()}" {if ($release->getPublisher() != null and $publisher->getId() == $release->getPublisher()->getId()) or (isset($pub_dev_id) and $pub_dev_id == $publisher->getId())}selected{/if}>{$publisher->getName()}</option>
                     {/foreach}
                 </select>
 

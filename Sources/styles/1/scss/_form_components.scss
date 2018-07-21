@@ -84,7 +84,10 @@
     color: #ffffff;
     border: 1px solid #008b8b;
     text-align: left;
+}
 
+.standard_input,
+.standard_select {
     &:disabled {
         border: dotted 1px #666;
         background-color: #222;
@@ -92,6 +95,8 @@
         cursor: not-allowed;
     }
 }
+
+
 .input_small {
     width: 50px;
 }

@@ -73,23 +73,6 @@
 {block name=java_script}
 <script>
 
-function browseCompany(str) {
-    if (str == "") {
-        $('#ajax_publisher_browse').html('');
-    } else {
-        $.ajaxQueue({
-            // The URL for the request
-            url: '../games/ajax_games_detail.php',
-            data: 'action=company_publisher_browse&query='+str,
-            type: 'GET',
-            dataType: 'html',
-            // Code to run if the request succeeds;
-            success: function (html) {
-                $('#ajax_publisher_browse').html(html);
-            }
-        });
-    }
-}
 function browseDeveloper(str) {
     if (str == "") {
         $('#ajax_developer_browse').html('');
@@ -460,11 +443,20 @@ $('#input-tags3').selectize({
                     </form>
                 </div>
                 <br>
-                <div id="gd_publisher_info">
-                    <fieldset class="secondary_fieldset">
-                        <legend class="primary_legend">Publisher info</legend>
 
-                        {if isset($publishers)}
+                {if isset($publishers)}
+                    <div id="gd_publisher_info">
+                        <fieldset class="secondary_fieldset">
+                            <legend class="primary_legend">Publisher info</legend>
+
+                            <div class="help-hint">
+                                <span class="fa fa-warning"></span> No new publishers can be added. Publisher should be associated to releases
+                                rather than directly to games. Use the releases menu on the left to navigate releases.
+                                This section is kept to allow manual merging of publishers into releases, and will be removed
+                                when this merging is complete.
+                            </div>
+                            <br>
+
                             {foreach from=$publishers item=publisher}
                                 <form action="db_games_publisher.php" method="get">
                                     <a title="Remove {$publisher.pub_dev_name|escape:"html"} from this game"
@@ -481,8 +473,7 @@ $('#input-tags3').selectize({
 
                                     <input type="text" value="{$publisher.pub_dev_name}" class="standard_input input_large" disabled>
 
-                                    <select name="new_continent_id"
-                                        onchange="jQuery('#update-publisher-{$publisher.pub_dev_id}').show()"
+                                    <select name="new_continent_id" disabled
                                         class="standard_select select_medium">
                                         <option value="">-</option>
                                         {foreach from=$continents item=continent}
@@ -490,8 +481,7 @@ $('#input-tags3').selectize({
                                         {/foreach}
                                     </select>
 
-                                    <select name="new_game_extra_info_id"
-                                        onchange="jQuery('#update-publisher-{$publisher.pub_dev_id}').show()"
+                                    <select name="new_game_extra_info_id" disabled
                                         class="standard_select select_medium">
                                         <option value="">-</option>
                                         {foreach from=$game_extra_info item=info}
@@ -499,51 +489,21 @@ $('#input-tags3').selectize({
                                         {/foreach}
                                     </select>
 
-                                    <input type="submit" id="update-publisher-{$publisher.pub_dev_id}" style="display: none;" class="secondary_button" value="Update">
+                                    &nbsp; Assign to release:
+                                    <a href="games_release_detail.php?game_id={$game->getId()}&amp;pub_dev_id={$publisher.pub_dev_id}&amp;continent_id={$publisher.continent_id}{if $publisher.game_extra_info_id == 1}&amp;type=Budget{/if}">[new release]</a>
+                                    {foreach from=$game_releases item=release}
+                                        {if $release->getPublisher() == null}
+                                            <a href="db_games_publisher.php?action=associate_to_release&amp;game_release_id={$release->getId()}&amp;game_id={$game->getId()}&amp;pub_dev_id={$publisher.pub_dev_id}&amp;continent_id={$publisher.continent_id}&amp;game_extra_info_id={$publisher.game_extra_info_id}"
+                                                onclick="javascript:return confirm('{$publisher.pub_dev_name|escape:"quotes"} will be associated to the {$release->getDate()|date_format:"Y"} release, along with the continent and type, then removed from the game')">
+                                                {$release->getDate()|date_format:"Y"}</a>
+                                        {/if}
+                                    {/foreach}
 
                                 </form>
                             {/foreach}
-                        {/if}
-
-                        <hr class="separator_add">
-
-                        <form action="../games/db_games_publisher.php" method="post" name="publisher" id="publisher">
-                            <input type="hidden" name="game_id" value="{$game_id}">
-                            <input type="hidden" name="action" value="add">
-
-                            <span class="fa fa-fw"></span>
-                            <select name="companybrowse" onchange="browseCompany(this.value)" class="standard_select select_small">
-                                <option value="" SELECTED>-</option>
-                                {html_options values=$az_value output=$az_output}
-                            </select>
-
-                            <span id="ajax_publisher_browse">
-                                <select name="pub_dev_id" class="standard_select select_medium" style="width: 131px" required>
-                                    <option value="" selected="selected" disabled>0-9 &hellip;</option>
-                                    {foreach from=$pubdevs item=pubdev}
-                                        <option value="{$pubdev->getId()}">{$pubdev->getName()}</option>
-                                    {/foreach}
-                                </select>
-                            </span>
-
-                            <select name="continent_id" class="standard_select select_medium">
-                                <option value="" selected="selected">-</option>
-                                {foreach from=$continents item=continent}
-                                    <option value="{$continent.continent_id}">{$continent.continent_name}</option>
-                                {/foreach}
-                            </select>
-
-                            <select name="game_extra_info_id" class="standard_select select_medium">
-                                <option value="" selected="selected">-</option>
-                                {foreach from=$game_extra_info item=line}
-                                    <option value="{$line.game_extra_info_id}">{$line.game_extra_info}</option>
-                                {/foreach}
-                            </select>
-
-                            <input type="submit" value="Add new publisher" class="secondary_button">
-                        </form>
-                    </fieldset>
-                </div>
+                        </fieldset>
+                    </div>
+                {/if}
             </div>
             <div id="gd_bottom">
                 <div id="gd_back">

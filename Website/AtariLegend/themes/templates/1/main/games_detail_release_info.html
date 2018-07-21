@@ -17,6 +17,21 @@
                             <br><br>
                         {/if}
 
+                        {if $release->getPublisher() != null}
+                            <span class="standard_tile_subtext">Publisher:</span>
+                            {$release->getPublisher()->getName()}
+                            <br>
+                        {/if}
+                        {if $release->getType()}
+                            <span class="standard_tile_subtext">Type:</span>
+                            {$release->getType()}
+                            <br>
+                        {/if}
+                        {if $release->getContinent() != null}
+                            <span class="standard_tile_subtext">Region:</span>
+                            {$release->getContinent()->getName()}
+                            <br>
+                        {/if}
                         {if $release_resolution[$release->getId()]}
                             <span class="standard_tile_subtext">Resolutions:</span>
                             {foreach from=$release_resolution[$release->getId()] item=resolution_id name=resolution}
