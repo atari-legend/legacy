@@ -27,19 +27,26 @@ require_once __DIR__."/../../common/DAO/NewsDAO.php";
 include("../../admin/games/quick_search_games.php");
 include("../../admin/news/quick_search_news.php");
 
-$NewsDAO = new AL\Common\DAO\NewsDAO($mysqli);
+$newsDAO = new AL\Common\DAO\NewsDAO($mysqli);
 
 //********************************************************************************************
 // Get all the needed data to load the news page!
 //********************************************************************************************
 $smarty->assign(
     'news',
-    $NewsDAO->getLatestNews(isset($user_id) ? $user_id : null, isset($last_timestamp) ? $last_timestamp : null, isset($action) ? $action : null, isset($view) ? $view : null)
-); 
+    $newsDAO->getLatestNews(
+        5,
+        isset($user_id) ? $user_id : null,
+        isset($last_timestamp) ? $last_timestamp : null,
+        isset($news_text) ? $news_text : null
+    )
+);
 
-$smarty->assign("nr_news", $NewsDAO->getNewsCount());
+if (isset($user_id)) {
+    $smarty->assign('user_id', $user_id);
+}
 
-$smarty->assign("user_id", $_SESSION['user_id']);
+$smarty->assign('nr_news', $newsDAO->getNewsCount());
 
 //Send all smarty variables to the templates
 $smarty->display("file:" . $cpanel_template_folder . "news_edit.html");

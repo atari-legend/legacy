@@ -20,7 +20,7 @@
 <div class="standard_tile">
     <div class="help-tip">
         <p>
-            When using the search fields, the query will be executed automatically. You can edit or delete an news entry but beware once you have made your change you are redirected to the main edit screen.
+            When using the search fields, the query will be executed automatically.
         </p>
     </div>
     <h1>NEWS SEARCH</h1>
@@ -38,9 +38,9 @@
             <div class="standard_tile_text_center">
                 By Author : <br>
                 <select name="author_search" id="JSCpanelAuthorBrowse" class="standard_select select_large">
-                    <option value="-" SELECTED>-</option>
+                    <option value="" SELECTED>-</option>
                     {foreach from=$authors_search item=line}
-                        <option value="{$line.user_id}">{$line.user_name}</option>
+                        <option value="{$line.user_id}" {if isset($user_id) and $line.user_id == $user_id}selected{/if}>{$line.user_name}</option>
                     {/foreach}
                 </select>
             </div>

@@ -141,7 +141,8 @@ module.exports = function (grunt) {
                 src: [
                     '<%= webRoot %>php/common/DAO/**/*.php',
                     '<%= webRoot %>php/common/Model/**/*.php',
-                    '<%= webRoot %>php/lib/Db.php'
+                    '<%= webRoot %>php/lib/Db.php',
+                    '<%= webRoot %>php/admin/news/**/*.php'
                 ]
             },
             all: {

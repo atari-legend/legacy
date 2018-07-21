@@ -40,7 +40,7 @@ if (isset($action)) {
             } else {
                 $timestamp = time();
                 $maxsize    = 10000000; //10mb
-                $mysqli->query("INSERT INTO game_submitinfo (game_id, user_id, timestamp, submit_text ) VALUES ('$game_id', '$_SESSION[user_id]', '$timestamp', '$textfield_medium')") or die("Inserting the game submission failed");
+                $mysqli->query("INSERT INTO game_submitinfo (game_id, user_id, timestamp, submit_text, game_done ) VALUES ('$game_id', '$_SESSION[user_id]', '$timestamp', '$textfield_medium', '2')") or die("Inserting the game submission failed");
 
                 $new_game_submit_id = $mysqli->insert_id;
                 create_log_entry('Games', $new_game_submit_id, 'Submission', $game_id, 'Insert', $_SESSION['user_id']);
@@ -106,7 +106,7 @@ if (isset($action)) {
             } else {
                 $timestamp = time();
                 $maxsize    = 10000000; //10mb
-                $mysqli->query("INSERT INTO game_submitinfo (game_id, user_id, timestamp, submit_text ) VALUES ('$game_id', '$_SESSION[user_id]', '$timestamp', '$textfield')") or die("Inserting the game submission failed");
+                $mysqli->query("INSERT INTO game_submitinfo (game_id, user_id, timestamp, submit_text, game_done ) VALUES ('$game_id', '$_SESSION[user_id]', '$timestamp', '$textfield', '2')") or die("Inserting the game submission failed");
 
                 $new_game_submit_id = $mysqli->insert_id;
                 create_log_entry('Games', $new_game_submit_id, 'Submission', $game_id, 'Insert', $_SESSION['user_id']);

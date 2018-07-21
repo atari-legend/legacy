@@ -163,7 +163,7 @@ if (isset($action) and ($action == 'delete_review' or $action == 'delete_submiss
 
     create_log_entry('Games', $game_id, 'Review', $reviewid, 'Delete', $_SESSION['user_id']);
     if ($action == 'delete_review') {
-        header("Location: ../games/games_review_add.php?game_id=$game_id");
+        header("Location: ../games/games_review.php");
     } else {
         header("Location: ../games/games_review_submitted.php");
     }
@@ -190,7 +190,7 @@ if ($action == 'edit_review' or $action == 'submitted') {
         $sdbquery = $mysqli->query("UPDATE review_score SET review_graphics = $graphics, review_sound = $sound, review_gameplay = $gameplay, review_overall = $conclusion
                  WHERE review_id = $reviewid") or die("Couldn't update review_score");
     } else {
-        $sdbquery = $mysqli->query("INSERT INTO review_score (review_id, review_graphics, review_sound, review_gameplay, review_overall) VALUES ($reviewid, '$graphics', '$sound', '$gameplay', '$overall')") or die("Couldn't insert the update of the review_score");
+        $sdbquery = $mysqli->query("INSERT INTO review_score (review_id, review_graphics, review_sound, review_gameplay, review_overall) VALUES ($reviewid, '$graphics', '$sound', '$gameplay', '$conclusion')") or die("Couldn't insert the update of the review_score");
     }
 
     //we're gonna add the screenhots into the screenshot_review table and fill up the review_comment table.
@@ -316,7 +316,7 @@ if (isset($action) and $action == 'add_review') {
     //Then, we'll be filling up the game review table
     $sdbquery = $mysqli->query("INSERT INTO review_game (review_id, game_id) VALUES ($reviewid, $game_create)") or die("Couldn't insert into review_game");
 
-    create_log_entry('Games', $game_id, 'Review', $reviewid, 'Insert', $_SESSION['user_id']);
+    create_log_entry('Games', $game_create, 'Review', $reviewid, 'Insert', $_SESSION['user_id']);
 
     $_SESSION['edit_message'] = "Review added to DB";
 

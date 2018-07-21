@@ -59,7 +59,7 @@ if (isset($action2) and $action2 == 'add_screens') {
 
                 if ($ext !== "") {
                     // First we insert the directory path of where the file will be stored... this also creates an autoinc number for us.
-                    $sdbquery = $mysqli->query("INSERT INTO screenshot_main (screenshot_id,imgext) VALUES ('','$ext')") or die("Database error - inserting screenshots");
+                    $sdbquery = $mysqli->query("INSERT INTO screenshot_main (imgext) VALUES ('$ext')") or die("Database error - inserting screenshots: ".$mysqli->error);
 
                     //select the newly entered screenshot_id from the main table
                     $SCREENSHOT = $mysqli->query("SELECT screenshot_id FROM screenshot_main
@@ -117,7 +117,7 @@ if (isset($action2) and $action2 == 'add_screens') {
             'interview_screenshot' => $v_int_image,
             'interview_screenshot_id' => $screenshots['screenshot_id'],
             'interview_screenshot_count' => $count,
-            'interview_screenshot_comment' => $comments['comment_text']
+            'interview_screenshot_comment' => htmlentities($comments['comment_text'])
         ));
         $count = $count + 1;
     }
@@ -220,7 +220,7 @@ if (isset($action) and $action == 'delete_screenshot_comment') {
     } else {
         $osd_message = "No screenshot uploaded";
     }
-    
+
     //Let's get the screenshots for the interview
     $sql_screenshots = $mysqli->query("SELECT * FROM screenshot_interview
                     LEFT JOIN screenshot_main on ( screenshot_interview.screenshot_id = screenshot_main.screenshot_id )
@@ -248,7 +248,7 @@ if (isset($action) and $action == 'delete_screenshot_comment') {
             'interview_screenshot' => $v_int_image,
             'interview_screenshot_id' => $screenshots['screenshot_id'],
             'interview_screenshot_count' => $count,
-            'interview_screenshot_comment' => $comments['comment_text']
+            'interview_screenshot_comment' => htmlentities($comments['comment_text'])
         ));
         $count = $count + 1;
     }
@@ -341,7 +341,7 @@ if (isset($action) and $action == 'update_interview' and (!isset($action2))) {
 
         //get the id of the inserted interview
         $id = $mysqli->insert_id;
-        
+
         //insert the date of today
         $date = date_to_timestamp(date("Y"), date("m"), date("d"));
         $sdbquery = $mysqli->query("INSERT INTO interview_text (interview_id, interview_date) VALUES ($id, '$date')") or die("Couldn't insert into interview_text");

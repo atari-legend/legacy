@@ -24,7 +24,6 @@ include("../../config/admin.php");
 
 //load the search fields of the quick search side menu
 include("../../admin/games/quick_search_games.php");
-include("../../admin/news/quick_search_news.php");
 
 $sql_images = $mysqli->query("SELECT * FROM news_image ORDER BY news_image_name ASC");
 
@@ -35,7 +34,8 @@ while ($news_images = $sql_images->fetch_array(MYSQLI_BOTH)) {
     $v_image .= $news_images['news_image_ext'];
 
     // Count how many times the image is used.
-    $query      = $mysqli->query("SELECT COUNT(*) AS count FROM news WHERE news_image_id = $news_images[news_image_id]");
+    $query      = $mysqli->query("SELECT COUNT(*) AS count"
+        ." FROM news WHERE news_image_id = $news_images[news_image_id]");
     $imagecount = $query->fetch_array(MYSQLI_BOTH);
 
     $smarty->append('news_images', array(

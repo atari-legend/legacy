@@ -59,7 +59,7 @@ function generate_game_description(
     if ($game_releases) {
         $years = [];
         foreach ($game_releases as $release) {
-            $years[] += strtotime($release->getDate()); 
+            $years[] += date("Y", strtotime($release->getDate()));
         }
         $desc .= "released in ".join($years, ", ");
     }
