@@ -33,14 +33,14 @@ switch ($extraParams) {
         $stmt->execute();
         $stmt->bind_result($user_id, $userid);
 
-    while ($stmt->fetch()) {
-        array_push(
-            $json,
-            array(
-            "value" => $user_id,
-            "label" => $userid)
-        );
-    }
+        while ($stmt->fetch()) {
+            array_push(
+                $json,
+                array(
+                "value" => $user_id,
+                "label" => $userid)
+            );
+        }
         $stmt->close();
         break;
 
@@ -56,17 +56,17 @@ switch ($extraParams) {
         $stmt->execute();
         $stmt->bind_result($ind_id, $ind_name);
 
-    while ($stmt->fetch()) {
-        array_push(
-            $json,
-            array(
-            "value" => $ind_id,
-            "label" => $ind_name)
-        );
-    }
+        while ($stmt->fetch()) {
+            array_push(
+                $json,
+                array(
+                "value" => $ind_id,
+                "label" => $ind_name)
+            );
+        }
         $stmt->close();
         break;
-        
+
     case "game":
         $stmt = $mysqli->prepare("
             SELECT game_id, game_name
@@ -79,16 +79,40 @@ switch ($extraParams) {
         $stmt->execute();
         $stmt->bind_result($game_id, $game_name);
 
-    while ($stmt->fetch()) {
-        array_push(
-            $json,
-            array(
-            "value" => $game_id,
-            "label" => $game_name)
-        );
-    }
+        while ($stmt->fetch()) {
+            array_push(
+                $json,
+                array(
+                "value" => $game_id,
+                "label" => $game_name)
+            );
+        }
         $stmt->close();
         break;
+
+    case "pub_dev":
+        $stmt = $mysqli->prepare("
+            SELECT pub_dev_id, pub_dev_name
+            FROM pub_dev
+            WHERE LOWER(pub_dev_name) LIKE CONCAT('%',LOWER(?),'%')")
+        or
+        die("Error querying pub_dev: ".$mysqli->error);
+
+        $stmt->bind_param("s", $term);
+        $stmt->execute();
+        $stmt->bind_result($pub_dev_id, $pub_dev_name);
+
+        while ($stmt->fetch()) {
+            array_push(
+                $json,
+                array(
+                "value" => $pub_dev_id,
+                "label" => $pub_dev_name)
+            );
+        }
+        $stmt->close();
+        break;
+
 }
 
 header("Content-Type: application/json");

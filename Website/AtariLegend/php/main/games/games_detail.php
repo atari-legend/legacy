@@ -18,10 +18,14 @@ include("../../config/common.php");
 require_once __DIR__."/../../common/DAO/GameReleaseDAO.php";
 require_once __DIR__."/../../common/DAO/ResolutionDAO.php";
 require_once __DIR__."/../../common/DAO/SystemDAO.php";
+require_once __DIR__."/../../common/DAO/PubDevDAO.php";
+require_once __DIR__."/../../common/DAO/ContinentDAO.php";
 
 $gameReleaseDao = new \AL\Common\DAO\GameReleaseDAO($mysqli);
 $resolutionDao = new \AL\Common\DAO\ResolutionDao($mysqli);
 $systemDao = new \AL\Common\DAO\SystemDao($mysqli);
+$pubDevDao = new \AL\Common\DAO\PubDevDAO($mysqli);
+$continentDao = new \AL\Common\DAO\ContinentDAO($mysqli);
 
 /**
  * Generates an SEO-friendly description of a game, depending on the data available

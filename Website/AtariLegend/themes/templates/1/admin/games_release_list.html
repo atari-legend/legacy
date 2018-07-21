@@ -8,20 +8,22 @@
             <ul class="navigation-list">
                 {foreach from=$game_releases item=release}
                     <li {if isset($release_id) and $release->getId() == $release_id}class="active"{/if}>
+                        <a title="Delete release"
+                            href="db_games_detail.php?action=delete_release&amp;game_id={$game->getId()}&amp;game_release_id[]={$release->getId()}"
+                            onclick="javascript:return confirm('This release will be deleted');">
+                            <i class="fa fa-fw fa-trash" aria-hidden="true"></i>
+                        </a>
+
                         <a href="games_release_detail.php?release_id={$release->getId()}">
                             {if $release->getDate()}
                                 {$release->getDate()|date_format:"%Y"}
                             {else}
-                                [unknown date]
+                                [no date]
                             {/if}
                             {if $release->getName() != null} <small> as "{$release->getName()}"</small>{/if}
+                            {if $release->getPublisher() != null} <small> by {$release->getPublisher()->getName()}</small>{/if}
                         </a>
 
-                        <a title="Delete release"
-                            href="db_games_detail.php?action=delete_release&amp;game_id={$game->getId()}&amp;game_release_id[]={$release->getId()}"
-                            onclick="javascript:return confirm('This release will be deleted');">
-                            <i class="fa fa-trash" aria-hidden="true"></i>
-                        </a>
                     </li>
                 {/foreach}
             </ul>

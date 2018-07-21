@@ -1,26 +1,31 @@
 <?php
 
 include("../../config/common.php");
+include("../../config/admin.php");
+
 require_once __DIR__."/../../common/DAO/GameDAO.php";
 require_once __DIR__."/../../common/DAO/GameReleaseDAO.php";
 require_once __DIR__."/../../common/DAO/ResolutionDAO.php";
 require_once __DIR__."/../../common/DAO/SystemDAO.php";
+require_once __DIR__."/../../common/DAO/PubDevDAO.php";
+require_once __DIR__."/../../common/DAO/ContinentDAO.php";
 require_once __DIR__."/../../common/DAO/ChangeLogDAO.php";
 
 $gameReleaseDao = new \AL\Common\DAO\GameReleaseDAO($mysqli);
 $gameDao = new \AL\Common\DAO\GameDao($mysqli);
 $resolutionDao = new \AL\Common\DAO\ResolutionDao($mysqli);
 $systemDao = new \AL\Common\DAO\SystemDao($mysqli);
+$pubDevDao = new \AL\Common\DAO\PubDevDAO($mysqli);
+$continentDao = new \AL\Common\DAO\ContinentDAO($mysqli);
 $changeLogDao = new \AL\Common\DAO\ChangeLogDAO($mysqli);
 
 if ($_SERVER['REQUEST_METHOD'] == "GET") {
-    $smarty->assign('license_types', array(
-        \AL\Common\DAO\GameReleaseDAO::LICENSE_COMMERCIAL,
-        \AL\Common\DAO\GameReleaseDAO::LICENSE_NON_COMMERCIAL
-    ));
-
+    $smarty->assign('license_types', $gameReleaseDao->getLicenseTypes());
+    $smarty->assign('release_types', $gameReleaseDao->getTypes());
+    $smarty->assign('continents', $continentDao->getAllContinents());
     $smarty->assign('resolutions', $resolutionDao->getAllResolutions());
     $smarty->assign('systems', $systemDao->getAllSystems());
+    $smarty->assign('publishers', $pubDevDao->getAllPubDevs());
 
     // Edit existing release
     if (isset($release_id)) {
@@ -42,11 +47,16 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
         $smarty->assign('game', $game);
         $smarty->assign('game_releases', $gameReleaseDao->getReleasesForGame($game->getId()));
 
-        $smarty->assign('release', new AL\Common\Model\Game\GameRelease(-1, $game->getId(), '', '', ''));
+        $smarty->assign('release', new AL\Common\Model\Game\GameRelease(-1, $game->getId(), '', '', '', '', null, null));
 
         $smarty->assign('system_incompatible', []);
         $smarty->assign('system_enhanced', []);
         $smarty->assign('release_resolutions', []);
+
+        // Pass through a pub_dev_id, continent_id and release type that may be in URL parameters
+        $smarty->assign('pub_dev_id', isset($pub_dev_id) ? $pub_dev_id : null);
+        $smarty->assign('continent_id', isset($continent_id) ? $continent_id : null);
+        $smarty->assign('type', isset($type) ? $type : null);
 
     }
 } else if ($_SERVER['REQUEST_METHOD'] == "POST") {
@@ -69,7 +79,10 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
             $release_id,
             $name,
             $date,
-            $license);
+            $license,
+            ($type != '') ? $type : null,
+            ($continent_id != '') ? $continent_id : null,
+            ($pub_dev_id != '') ? $pub_dev_id : null);
 
         $changeLogDao->insertChangeLog(
             new \AL\Common\Model\Database\ChangeLog(
@@ -85,7 +98,15 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
             )
         );
     } else {
-        $release_id = $gameReleaseDao->addReleaseForGame($game_id, $name, $Date_Year."-01-01");
+        $release_id = $gameReleaseDao->addReleaseForGame(
+            $game_id,
+            $name,
+            $Date_Year."-01-01",
+            $license,
+            ($type != '') ? $type : null,
+            ($continent_id != '') ? $continent_id : null,
+            ($pub_dev_id != '') ? $pub_dev_id : null
+        );
 
         $changeLogDao->insertChangeLog(
             new \AL\Common\Model\Database\ChangeLog(
