@@ -156,6 +156,17 @@
             color: $danger;
         }
     }
+
+    &.button_info {
+        background-color: $info;
+        color: darken($info, 40%);
+        border: solid 1px darken($info, 20%);
+
+        &:hover {
+            background-color: darken($info, 20%);
+            color: $info;
+        }
+    }
 }
 
 .primary_button:hover {
