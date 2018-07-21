@@ -10,13 +10,19 @@ class GameRelease {
     private $name;
     private $date;
     private $license;
+    private $type;
+    private $continent;
+    private $publisher;
 
-    public function __construct($id, $game_id, $name, $date, $license) {
+    public function __construct($id, $game_id, $name, $date, $license, $type, $continent, $publisher) {
         $this->id = $id;
         $this->game_id = $game_id;
         $this->name = $name;
         $this->date = $date;
         $this->license = $license;
+        $this->type = $type;
+        $this->continent = $continent;
+        $this->publisher = $publisher;
     }
 
     public function getId() {
@@ -37,5 +43,17 @@ class GameRelease {
 
     public function getLicense() {
         return $this->license;
+    }
+
+    public function getType() {
+        return $this->type;
+    }
+
+    public function getContinent() {
+        return $this->continent;
+    }
+
+    public function getPublisher() {
+        return $this->publisher;
     }
 }
