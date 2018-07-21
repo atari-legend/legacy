@@ -208,22 +208,6 @@ $(document).ready(function () {
     // ******************
     // NEWS EDIT BUTTONS
     // ******************
-    // when clicking on users news posts
-    $('.jsNewsWrapper').on('click', '.jsUserNewsLink', function () {
-        var view = 'users_news';
-        var userId = $(this).data('user-id');
-        $.ajaxQueue({
-            // The URL for the request
-            url: 'ajax_news_edit.php',
-            data: 'view=' + view + '&user_id=' + userId,
-            type: 'GET',
-            dataType: 'html',
-            // Code to run if the request succeeds;
-            success: function (html) {
-                $('.jsNewsWrapper').html(html);
-            }
-        });
-    })
     // Edit News Function
     $('.jsNewsWrapper').on('click', '.jsNewsPostEditButton', function () {
         var newsId = $(this).data('news-id');
@@ -266,16 +250,6 @@ $(document).ready(function () {
         var newsUserId = $('#' + jsNewsEditBox + ' > #member_select').val();
         var newsImageId = $('#' + jsNewsEditBox + ' > #news_images_select').val();
 
-        // we don't want the news page to refresh after saving when we are in autoload mode
-        var action2 = $('#action').html();
-        if (action2 === 'autoload_save') {
-            var lastTimestamp = $('.news_post_box:last').attr('id');
-        }
-        var view = $('#view').html();
-        if (view === 'users_news') {
-            var userId = $('.jsUserNewsLink:first').data('user-id');
-        }
-
         var dateDay = newsId + 'Date_Day';
         var dateMonth = newsId + 'Date_Month';
         var dateYear = newsId + 'Date_Year';
@@ -287,16 +261,24 @@ $(document).ready(function () {
         $.ajaxQueue({
             // The URL for the request
             url: 'db_news.php',
-            data: 'action=save_news_post_text&news_id=' + newsId + '&news_text=' + newsText + '&news_headline=' + newsHeadline + '&news_userid=' + newsUserId + '&news_image_id=' + newsImageId + '&news_day=' + day + '&news_month=' + month + '&news_year=' + year + '&last_timestamp=' + lastTimestamp + '&action2=' + action2 + '&user_id=' + userId + '&view=' + view,
+            data: {
+                action: 'save_news_post_text',
+                news_id: newsId,
+                news_text: newsText,
+                news_headline: newsHeadline,
+                news_userid: newsUserId,
+                news_image_id: newsImageId,
+                news_day: day,
+                news_month: month,
+                news_year: year
+            },
             type: 'POST',
             dataType: 'html',
             // Code to run if the request succeeds;
             success: function (html) {
                 var returnHtml = html.split('[BRK]');
-                $('#news_edit_list').html(returnHtml[0]);
+                $('#' + jsNewsEditBox).html(returnHtml[0]);
                 window.OSDMessageDisplay(returnHtml[1]);
-                document.getElementById('post').reset();
-                document.getElementById('JSCpanelNewsSearchForm').reset();
             },
             error: function (xhr, status, error) {
             }
@@ -322,10 +304,12 @@ $(document).ready(function () {
                         dataType: 'html',
                         // Code to run if the request succeeds;
                         success: function (html) {
-                            var returnHtml = html.split('[BRK]');
-                            $('#news_edit_list').html(returnHtml[0]);
-                            window.OSDMessageDisplay(returnHtml[1]);
-                            document.getElementById('post').reset();
+                            var begin = html.startsWith('You');
+                            if (begin) {
+                            } else {
+                                $('#jsNewsId' + newsId).html('');
+                            }
+                            window.OSDMessageDisplay(html);
                         }
                     });
                 },
@@ -355,10 +339,12 @@ $(document).ready(function () {
                         dataType: 'html',
                         // Code to run if the request succeeds;
                         success: function (html) {
-                            var returnHtml = html.split('[BRK]');
-                            $('#news_edit_list').html(returnHtml[0]);
-                            window.OSDMessageDisplay(returnHtml[1]);
-                            document.getElementById('post').reset();
+                            var begin = html.startsWith('You');
+                            if (begin) {
+                            } else {
+                                $('#jsNewsId' + newsId).html('');
+                            }
+                            window.OSDMessageDisplay(html);
                         }
                     });
                 },
@@ -382,25 +368,19 @@ $(document).ready(function () {
     });
 
     function loadMoreData (lastTimestamp) {
-        var view = $('#view').html();
-        if (view === 'users_news') {
-            var userId = $('.jsUserNewsLink:first').data('user-id');
-        }
+        var userId = $('#JSCpanelAuthorBrowse option:selected').val();
+        var newsSearch = $('#JSCpanelNewsSearch').val();
 
-        var action = $('#action_news_search').html();
-        if (action === 'news_search') {
-        } else {
-            $.ajaxQueue({
-                // The URL for the request
-                url: 'ajax_news_edit.php',
-                data: 'action=autoload&view=' + view + '&last_timestamp=' + lastTimestamp + '&user_id=' + userId,
-                type: 'GET',
-                dataType: 'html',
-                // Code to run if the request succeeds;
-                success: function (html) {
-                    $('.infinite-item:last').append(html);
-                }
-            });
-        }
+        $.ajaxQueue({
+            // The URL for the request
+            url: 'ajax_news_edit.php',
+            data: 'action=autoload&last_timestamp=' + lastTimestamp + '&user_id=' + userId + '&newssearch=' + newsSearch,
+            type: 'GET',
+            dataType: 'html',
+            // Code to run if the request succeeds;
+            success: function (html) {
+                $('.infinite-item:last').append(html);
+            }
+        });
     }
 })

@@ -16,25 +16,20 @@ include("../../config/common.php");
 include("../../config/admin.php");
 require_once __DIR__."/../../lib/Db.php";
 require_once __DIR__."/../../common/DAO/NewsDAO.php";
+require_once __DIR__."/../../common/DAO/UserDAO.php";
 
 $newsDAO = new AL\Common\DAO\NewsDAO($mysqli);
+$userDAO = new AL\Common\DAO\UserDAO($mysqli);
 
 if (isset($action) and $action == "get_newspost_text") {
     if (isset($news_id)) {
-        $smarty->assign('news_item', $newsDAO->getSpecificNews($news_id));
+        $smarty->assign('article', $newsDAO->getNews($news_id));
         $smarty->assign('action', $action);
         $smarty->assign('news_id', $news_id);
     }
 }
 //Get the authors for the news post
-$sql_author = $mysqli->query("SELECT user_id,userid FROM users ORDER BY userid ASC") or die("Database error - getting members name");
-
-while ($authors = $sql_author->fetch_array(MYSQLI_BOTH)) {
-    $smarty->append('authors', array(
-        'user_id' => $authors['user_id'],
-        'user_name' => $authors['userid']
-    ));
-}
+$smarty->assign("users", $userDAO->getAllUsers());
 
 //Get the news images
 $sql_newsimage = $mysqli->query("SELECT news_image_id,news_image_name FROM news_image ORDER BY news_image_name");

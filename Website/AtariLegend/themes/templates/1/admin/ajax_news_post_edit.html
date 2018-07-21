@@ -12,157 +12,130 @@
 
 {* START NEW NEWS BOX *}
 {if isset($action) and $action=="get_newspost_text"}
-    {foreach from=$news_item item=line}
-        <input type="text" name="headline" id="JsHeadlineText" maxlength='64' class="standard_input input_75" required value="{$line->getHeadline()}">
-        <ul class="news_buttons">
-            <button class="primary_button jsNewsPostEditSaveButton news_save_button" data-news-id="{$news_id}" type="button">
-                <i class="fa fa-floppy-o" aria-hidden="true"></i>
-            </button>
-        </ul>
-        <br>
-        <select name="members"
-            id="member_select" class="standard_select select_large">
-            <option value="-">-</option>
-            {foreach from=$authors item=line_author}
-                {if $line_author.user_id == $line->getUserId()}
-                    <option value="{$line_author.user_id}" selected>{$line_author.user_name}</option>
-                {else}
-                    <option value="{$line_author.user_id}">{$line_author.user_name}</option>
-                {/if}
-            {/foreach}
-        </select>
-        <br>
-        <select name="news_image_id" class="standard_select select_large" id="news_images_select">
-            <option value="0">-</option>
-            {foreach from=$news_images item=line_images}
-                {if $line->getImageId() eq $line_images.image_id}
-                    <option value="{$line_images.image_id}" selected>{$line_images.image_name}</option>
-                {else}
-                    <option value="{$line_images.image_id}">{$line_images.image_name}</option>
-                {/if}
-            {/foreach}
-        </select>
-        <br>
-        {html_select_date all_id="{$news_id}" time=$line->getDate() start_year="2000" class="standard_select"}
-        <br>
-        <br>
-        <input type="button" class="primary_button" accesskey= "b" name="addbbcode0" value="B" onclick="bbstyle(0,'textfield{$news_id}')">
-        <input type="button" class="primary_button" accesskey= "u" name="addbbcode4" value="U" onclick="bbstyle(4,'textfield{$news_id}')">
-        <input type="button" class="primary_button" accesskey= "i" name="addbbcode2" value="I" onclick="bbstyle(2,'textfield{$news_id}')">
-        <input type="button" class="primary_button" accesskey="w" name="addbbcode6" value="URL" onClick="bbstyle(6,'textfield{$news_id}')">
-        <input type="button" class="primary_button" accesskey="x" name="addbbcode8" value="@" onClick="bbstyle(8,'textfield{$news_id}')">
-        <br>
-        <textarea class="primary_textarea" rows="4" name="textfield{$news_id}" id="jsNewsText" ONSELECT="javascript:storeCaret(this);" ONCLICK="javascript:storeCaret(this);" ONKEYUP="javascript:storeCaret(this);" ONCHANGE="javascript:storeCaret(this);">{$line->getText()}</textarea>
-    {/foreach}
+    <div class="news_userinfo_phoneview">
+        {if $article->getUser()->getAvatar() != null}
+            <img src="../../includes/show_image.php?file={$article->getUser()->getAvatar()}&amp;resize=100,null,null,null" alt="{$article->getUser()->getName()}" width="100px">
+        {else}
+            <img src="../../includes/show_image.php?file={$style_dir} {$article->getUser()->getAvatar()}&amp;resize=100,null,null,null" alt="{$article->getUser()->getName()}" width="100px">
+        {/if}
+        <h6>
+            <a href="../user/user_detail.php?user_id_selected={$article->getUser()->getId()}">{$article->getUser()->getName()}</a>
+        </h6>
+    </div>
+    <input type="text" name="headline" id="JsHeadlineText" maxlength='64' class="standard_input input_75" required value="{$article->getHeadline()|escape}">
+    <ul class="news_buttons">
+        <button class="primary_button jsNewsPostEditSaveButton news_save_button" data-news-id="{$article->getId()}" type="button">
+            <i class="fa fa-floppy-o" aria-hidden="true"></i>
+        </button>
+    </ul>
+    <br>
+    <select name="members"
+        id="member_select" class="standard_select select_large">
+        <option value="-">-</option>
+        {foreach from=$users item=$user}
+            <option
+                value="{$user->getId()}"
+                {if $user->getId() == $article->getUser()->getId()}selected{/if}>
+                {$user->getName()}
+            </option>
+        {/foreach}
+    </select>
+    <br>
+    <select name="news_image_id" class="standard_select select_large" id="news_images_select">
+        <option value="0">-</option>
+        {foreach from=$news_images item=image}
+            {if $article->getImageId() eq $image.image_id}
+                <option value="{$image.image_id}" selected>{$image.image_name}</option>
+            {else}
+                <option value="{$image.image_id}">{$image.image_name}</option>
+            {/if}
+        {/foreach}
+    </select>
+    <br>
+    {html_select_date all_id="{$article->getId()}" time=$article->getDate() start_year="2000" class="standard_select"}
+    <br>
+    <br>
+    <input type="button" class="primary_button" accesskey= "b" name="addbbcode0" value="B" onclick="bbstyle(0,'textfield{$news_id}')">
+    <input type="button" class="primary_button" accesskey= "u" name="addbbcode4" value="U" onclick="bbstyle(4,'textfield{$news_id}')">
+    <input type="button" class="primary_button" accesskey= "i" name="addbbcode2" value="I" onclick="bbstyle(2,'textfield{$news_id}')">
+    <input type="button" class="primary_button" accesskey="w" name="addbbcode6" value="URL" onClick="bbstyle(6,'textfield{$news_id}')">
+    <input type="button" class="primary_button" accesskey="x" name="addbbcode8" value="@" onClick="bbstyle(8,'textfield{$news_id}')">
+    <input type="button" class="primary_button" accesskey="frontpage" name="addbbcode14" value="Frontpage" onClick="bbstyle(14,'textfield{$news_id}')">
+    <br>
+    <textarea class="primary_textarea" rows="4" name="textfield{$news_id}" id="jsNewsText" ONSELECT="javascript:storeCaret(this);" ONCLICK="javascript:storeCaret(this);" ONKEYUP="javascript:storeCaret(this);" ONCHANGE="javascript:storeCaret(this);">{$article->getText()}</textarea>
 {/if}
 
-{if isset($action) and ( $action=='delete_news' or $action=='save_news_text' or $action=='search_news_text' )}
-    {if $nr_news <> ''}<div class="standard_tile_text_center">There are currently {$nr_news} posts in the news table.</div><br>{/if}
-    {foreach from=$news item=line}
-        <div id="jsNewsId{$line->getId()}" class="infinite-item">
-            <div class="news_post_box" id="{$line->getTimestamp()}">
-                <div class="news_userinfo">
-                    {if (null !== $line->getAvatarImage()) and $line->getAvatarImage() != ''}
-                        <img src="../../includes/show_image.php?file={$line->getAvatarImage()}&amp;resize=100,null,null,null" alt="{$line->getUserName()}" width="100px">
-                    {else}
-                    {/if}
-                    <a href="../user/user_detail.php?user_id_selected={$line->getUserId()}" class="standard_tile_link">{$line->getUserName()}</a>
-                    <br><br><br>
-                    <span class="text-nowrap">
-                        Joined: {$line->getJoinDate()}
-                        <br>
-                        {if $line->getUserNewsCount() > 0}
-                            News posts:  <a href="#" data-user-id="{$line->getUserId()}" class="standard_tile_link jsUserNewsLink">{$line->getUserNewsCount()}</a>
-                        {else}
-                            News posts:  {$line->getUserNewsCount()}
-                        {/if}
-                        <br>
-                        {if $line->getKarma() == '' OR $line->getKarma() == 0}
-                            Karma : 0
-                        {else}
-                            Karma: <a href="../user/user_statistics.php?user_id_selected={$line->getUserId()}" class="standard_tile_link">{$line->getKarma()}</a>
-                        {/if}
-                    </span>
-                </div>
-                <div class="news_post_detail" id="jsNewsEditBox{$line->getId()}">
-                    <div class="news_userinfo_phoneview">
-                        {if (null !== $line->getAvatarImage()) and $line->getAvatarImage() !== ''}
-                            <img src="../../includes/show_image.php?file={$line->getAvatarImage()}&amp;resize=100,null,null,null" alt="{$line->getUserName()}" width="100px">
-                        {else}
-                            <img src="../../includes/show_image.php?file={$style_dir} {$line->getAvatarImage()}&amp;resize=100,null,null,null" alt="{$line->getUserName()}" width="100px">
-                        {/if}
-                        <h6>
-                            <a href="../user/user_detail.php?user_id_selected={$line->getUserId()}">{$line->getUserName()}</a>
-                        </h6>
-                    </div>
-                    <h4 class="news_title">
-                        {$line->getHeadline()}</a>
-                    </h4>
-                    <ul class="news_buttons">
-                        {if $line->getEmail() !== ''}
-                        <li class="primary_button jsNewsEmailButton">
-                            <a href="mailto:{$line->getEmail()}?subject=Your news post : {$line->getHeadline()|escape:'url'} at Atari Legend" class="links_addnew_link">
-                                <i class="fa fa-envelope" aria-hidden="true"></i>
-                            </a>
-                        </li>
-                        {/if}
-                        <li class="primary_button jsNewsPostEditButton" data-news-id="{$line->getId()}">
-                            <a class="links_addnew_link">
-                                <i class="fa fa-pencil" aria-hidden="true"></i>
-                            </a>
-                        </li>
-                        <li class="primary_button jsNewsPostDeleteButton" data-news-id="{$line->getId()}">
-                            <a class="links_addnew_link">
-                                <i class="fa fa-trash" aria-hidden="true"></i>
-                            </a>
-                        </li>
-                        <div class="news_button_dropdown" data-dropdown-id="{$line->getId()}">
-                            <li class="primary_button">
-                                <a class="links_addnew_link">
-                                    <i class="fa fa-bars" aria-hidden="true"></i>
-                                </a>
-                            </li>
-                            <div class="dropdown_box" id="dropdown_box{$line->getId()}">
-                                <li class="dropdown_item">
-                                    <a href="mailto:{$line->getEmail()}?subject=Your news post : {$line->getHeadline()|escape:'url'} at Atari Legend" class="links_addnew_link">
-                                        Email
-                                    </a>
-                                </li>
-                                <li class="dropdown_item jsNewsPostEditDropdownItem" data-news-id="{$line->getId()}">
-                                    Edit
-                                </li>
-                                <li class="dropdown_item jsNewsPostDeleteDropdownItem" data-news-id="{$line->getId()}">
-                                    Delete
-                                </li>
-                            </div>
-                        </div>
-                    </ul>
-                    <div class="news_line" id="line_above_info"></div>
-                    <h4 class="news_title_phoneview">
-                        {$line->getHeadline()}</a>
-                    </h4>
-                    <div class="news_post_info">
-                        Posted <span>by <a href="../user/user_detail.php?user_id_selected={$line->getUserId()}">{$line->getUserName()}</a></span> on {$line->getDate()}
-                    </div>
-                    <div class="news_line" id="line_below_info"></div>
-                    <div class="news_post_text" id="jsNewsTextBox{$line->getId()}">
-                        {if $line->getImageId() != ''}
-                            <div style="float:left;margin:15px;">
-                                <img src="../../includes/show_image.php?file={$line->getImage()}&amp;resize=120,null,null,null" alt="newsbutton" class="game_screenshot_img">
-                            </div>
-                        {/if}
-                        <br>
-                        {$line->getText()}
-                        <br>
-                        <br>
-                    </div>
-                </div>
+{if isset($action) and $action=='save_news_text'}
+    <div class="news_userinfo_phoneview">
+        {if $article->getUser()->getAvatar() != null}
+            <img src="../../includes/show_image.php?file={$article->getUser()->getAvatar()}&amp;resize=100,null,null,null" alt="{$article->getUser()->getAvatar()}" width="100px">
+        {else}
+            <img src="../../includes/show_image.php?file={$style_dir} {$article->getUser()->getAvatar()}&amp;resize=100,null,null,null" alt="{$article->getUser()->getAvatar()}" width="100px">
+        {/if}
+        <h6>
+            <a href="../user/user_detail.php?user_id_selected={$article->getUser()->getId()}">{$article->getUser()->getName()}</a>
+        </h6>
+    </div>
+    <h4 class="news_title">
+        {$article->getHeadline()}</a>
+    </h4>
+    <ul class="news_buttons">
+        {if $article->getUser()->getEmail() !== ''}
+        <li class="primary_button jsNewsEmailButton">
+            <a href="mailto:{$article->getUser()->getEmail()}?subject=Your news post : {$article->getHeadline()|escape:'url'} at Atari Legend" class="links_addnew_link">
+                <i class="fa fa-envelope" aria-hidden="true"></i>
+            </a>
+        </li>
+        {/if}
+        <li class="primary_button jsNewsPostEditButton" data-news-id="{$article->getId()}">
+            <a class="links_addnew_link">
+                <i class="fa fa-pencil" aria-hidden="true"></i>
+            </a>
+        </li>
+        <li class="primary_button jsNewsPostDeleteButton" data-news-id="{$article->getId()}">
+            <a class="links_addnew_link">
+                <i class="fa fa-trash" aria-hidden="true"></i>
+            </a>
+        </li>
+        <div class="news_button_dropdown" data-dropdown-id="{$article->getId()}">
+            <li class="primary_button">
+                <a class="links_addnew_link">
+                    <i class="fa fa-bars" aria-hidden="true"></i>
+                </a>
+            </li>
+            <div class="dropdown_box" id="dropdown_box{$article->getId()}">
+                <li class="dropdown_item">
+                    <a href="mailto:{$article->getUser()->getEmail()}?subject=Your news post : {$article->getHeadline()|escape:'url'} at Atari Legend" class="links_addnew_link">
+                        Email
+                    </a>
+                </li>
+                <li class="dropdown_item jsNewsPostEditDropdownItem" data-news-id="{$article->getId()}">
+                    Edit
+                </li>
+                <li class="dropdown_item jsNewsPostDeleteDropdownItem" data-news-id="{$article->getId()}">
+                    Delete
+                </li>
             </div>
         </div>
-    {/foreach}
-
-    {if isset($osd_message)}
-        [BRK]{$osd_message}
-    {/if}
-
+    </ul>
+    <div class="news_line" id="line_above_info"></div>
+    <h4 class="news_title_phoneview">
+        {$article->getHeadline()}</a>
+    </h4>
+    <div class="news_post_info">
+        Posted <span>by <a href="../user/user_detail.php?user_id_selected={$article->getUser()->getId()}">{$article->getUser()->getName()}</a></span> on {$article->getDate()|date_format}
+    </div>
+    <div class="news_line" id="line_below_info"></div>
+    <div class="news_post_text" id="jsNewsTextBox{$article->getId()}">
+        {if $article->getImage() != null}
+            <div style="float:left;margin:15px;">
+                <img src="../../includes/show_image.php?file={$article->getImage()}&amp;resize=120,null,null,null" alt="newsbutton" class="game_screenshot_img">
+            </div>
+        {/if}
+        <br>
+        {$article->getHtmlText()}
+        <br>
+        <br>
+    </div>
+    [BRK]{$osd_message}
 {/if}

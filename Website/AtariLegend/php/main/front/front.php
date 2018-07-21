@@ -59,8 +59,12 @@ if (isset($action) and $action == 'new_pwd') {
 
 if (isset($action) and $action == 'construction') {
     $_SESSION['edit_message'] = 'This section will be available soon - currently under construction';
-    header('Location: ' . $_SERVER['HTTP_REFERER']);
-    die('');
+    if (isset($_SERVER['HTTP_REFERER'])) {
+        header('Location: ' . $_SERVER['HTTP_REFERER']);
+    } else {
+        header('Location: /');
+    }
+    die();
 }
 
 //We are using this var to have the frontpage animation happen only once we visit AL

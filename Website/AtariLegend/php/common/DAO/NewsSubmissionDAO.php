@@ -222,10 +222,10 @@ class NewsSubmissionDAO {
         $news = [];
         
         while ($stmt->fetch()) {
-            $text = nl2br($text);
-            $text = InsertALCode($text);
-            $text = trim($text);
-            $text = RemoveSmillies($text);
+            //$text = nl2br($text);
+            //$text = InsertALCode($text);
+            //$text = trim($text);
+            //$text = RemoveSmillies($text);
             $breaks = array("<br />","<br>","<br/>");
             $text = str_ireplace($breaks, "\r\n", $text);
         

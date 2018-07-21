@@ -21,18 +21,13 @@ $NewsDAO = new AL\Common\DAO\NewsDAO($mysqli);
 //********************************************************************************************
 $smarty->assign(
     'news',
-    $NewsDAO->getLatestNews(isset($user_id) ? $user_id : null, isset($last_timestamp) ? $last_timestamp : null, isset($action) ? $action : null, isset($view) ? $view : null)
-); 
-
-$smarty->assign("nr_news", $NewsDAO->getNewsCount());
-
-if (isset($view) and $view == "users_news") {
-    $smarty->assign("view", 'users_news');
-}
-
-//if (isset($action) and $action == "autoload") {
-    $smarty->assign("action", 'autoload_save');
-//}
+    $NewsDAO->getLatestNews(
+        5,
+        isset($user_id) ? $user_id : null,
+        isset($last_timestamp) ? $last_timestamp : null,
+        isset($newssearch) ? $newssearch : null
+    )
+);
 
 //Send all smarty variables to the templates
 $smarty->display("file:" . $cpanel_template_folder . "ajax_news_edit.html");
