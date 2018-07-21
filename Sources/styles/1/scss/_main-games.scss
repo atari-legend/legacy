@@ -436,6 +436,23 @@
     display: none;
 }
 
+/* Games detail - Releases */
+
+.release_list .standard_list_entry {
+    height: initial;
+    padding-bottom: 10px;
+}
+
+.release_list .release_heading {
+    padding-top:20px;
+    padding-bottom: 5px;
+    text-align: center;
+}
+
+.release_list .release_heading h4 {
+    text-align: center;
+}
+
 //*****Games Reviews*********/
 
 .games_detail_review_container {
