@@ -310,3 +310,23 @@ ul.navigation-list {
 
     }
 }
+
+/* ------------------------------------------------------------
+* Release editor
+* ----------------------------------------------------------*/
+
+form.release_editor {
+    label.input {
+        font-weight: bold;
+        display: inline-block;
+        width: 230px;
+    }
+
+    .primary_button {
+        margin-left: 0;
+    }
+
+    .secondary_button {
+        padding-top: 4px;
+    }
+}
