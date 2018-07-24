@@ -30,6 +30,7 @@ $continentDao = new \AL\Common\DAO\ContinentDAO($mysqli);
 /**
  * Generates an SEO-friendly description of a game, depending on the data available
  * @param $game_name Name of the game
+ * @param $game_akas Optional names the game is known as
  * @param $game_releases Game releases
  * @param $game_categories Categorie(s) the game belong to
  * @param $game_developers Developer(s) of the game
@@ -40,6 +41,7 @@ $continentDao = new \AL\Common\DAO\ContinentDAO($mysqli);
  */
 function generate_game_description(
     $game_name,
+    $game_akas,
     $game_releases,
     $game_categories,
     $game_developers,
@@ -64,9 +66,13 @@ function generate_game_description(
         foreach ($game_releases as $release) {
             if ($release->getDate()) {
                 $year = date("Y", strtotime($release->getDate()));
-                // Avoid duplicate dates
-                if (!in_array($year, $years)) {
-                    $years[] = $year;
+                if ($release->getPublisher() != null) {
+                    $years[] = $year." (by ".$release->getPublisher()->getName().")";
+                } else {
+                    // Avoid duplicate dates
+                    if (!in_array($year, $years)) {
+                        $years[] = $year;
+                    }
                 }
             }
         }
@@ -107,7 +113,13 @@ function generate_game_description(
         $desc .= " (".join($extra_info, ", ").")";
     }
 
-    return $desc.".";
+    $desc .= ".";
+
+    if (count($game_akas) > 0) {
+        $desc .= " It's also known as: ".join($game_akas, ", ").".";
+    }
+
+    return $desc;
 }
 
 //***********************************************************************************
@@ -387,8 +399,9 @@ while ($developers = $sql_developer->fetch_array(MYSQLI_BOTH)) {
 $sql_aka = $mysqli->query("SELECT * FROM game_aka WHERE game_id='$game_id'") or die("Couldn't query aka games");
 
 $nr_aka = 0;
-
+$game_akas = [];
 while ($aka = $sql_aka->fetch_array(MYSQLI_BOTH)) {
+    $game_akas[] = $aka['aka_name'];
     $smarty->append('aka', array(
         'game_aka_name' => $aka['aka_name'],
         'game_id' => $aka['game_id'],
@@ -676,6 +689,7 @@ while ($query_vs = $sql_vs->fetch_array(MYSQLI_BOTH)) {
 $smarty->assign("game_id", $game_id);
 $smarty->assign("game_description", generate_game_description(
     $game_info['game_name'],
+    $game_akas,
     $releases,
     $game_categories,
     $game_developers,
