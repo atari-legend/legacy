@@ -5,7 +5,7 @@
 //***This is the css code for the news pages of the main site********/
 //*******************************************************************/
 
-#news_main_text {
+.news_main_text {
     @extend .interview_main_text;
     height: 100%;
 }
