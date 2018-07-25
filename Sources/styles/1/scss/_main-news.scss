@@ -5,20 +5,20 @@
 //***This is the css code for the news pages of the main site********/
 //*******************************************************************/
 
-#news_main_text {
+.news_main_text {
     @extend .interview_main_text;
     height: 100%;
 }
 
-#news_main_text a:link {
+.news_main_text a:link {
     color: #008b8b;
 }
 
-#news_main_text a:visited {
+.news_main_text a:visited {
     color: #008b8b;
 }
 
-#news_main_text a:hover {
+.news_main_text a:hover {
     color: #ffffff;
 }
 
