@@ -29,8 +29,9 @@
                                 {if $release->getPublisher()->getProfile() != null}
                                     <a style="cursor: pointer;"
                                         onclick="javascript:jQuery('#release_{$release->getId()}_publisher_profile_{$release->getPublisher()->getId()}').toggle()"
+                                        title="Click to view profile"
                                         class="latest_comments_link">
-                                        <i class="fa fa-info-circle" aria-hidden="true" text="Click to view profile"></i>
+                                        <i class="fa fa-info-circle" aria-hidden="true"></i>
                                     </a>
                                 {/if}
 
@@ -45,7 +46,7 @@
                             </td>
                         </tr>
                         {if $release->getPublisher()->getProfile() != null}
-                            <tr></tr>
+                            <tr style="display: none;"><td colspan="3"></td></tr>
                             <tr style="display:none;" id="release_{$release->getId()}_publisher_profile_{$release->getPublisher()->getId()}">
                                 <td colspan="3">
                                     <textarea id="profile{$release->getPublisher()->getId()}" class="primary_textarea" rows="6" style="margin-top:5px;margin-bottom:5px;font-size:10pt;margin-left:auto;margin-right:auto;" readonly>{$release->getPublisher()->getProfile()}</textarea>

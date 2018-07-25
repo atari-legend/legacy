@@ -176,171 +176,6 @@
             'showImageNumberLabel': false
         })
     </script>
-    <script> <!--game info box scripts -->
-        function Show_profile(pub_id) {
-            var string = "profile";
-            var show_profile = string.concat(pub_id);
-
-            var string = "profile_on";
-            var profile_on = string.concat(pub_id);
-
-            var string = "profile_off";
-            var profile_off = string.concat(pub_id);
-
-            var allDivTr = document.getElementById("main").getElementsByTagName("TR");
-            for(var i = 0; i < allDivTr.length; i++){
-                var tr = allDivTr[i];
-                var trId = allDivTr[i].getAttribute('id');
-                if ( trId == show_profile ){
-                    tr.style.display='table-row';
-                }
-            }
-
-            //var profile = document.getElementById(show_profile);
-            //profile.style.display='table-row';
-
-            var allDivI = document.getElementById("main").getElementsByTagName("I");
-            for(var i = 0; i < allDivI.length; i++){
-                var I = allDivI[i];
-                var iId = allDivI[i].getAttribute('id');
-                if ( iId == profile_on ){
-                    I.style.display='none';
-                }
-                if ( iId == profile_off ){
-                    I.style.display='inline';
-                }
-            }
-
-            //var profile_icon_on = document.getElementById(profile_on);
-            //profile_icon_on.style.display='none';
-
-            //var profile_icon_off = document.getElementById(profile_off);
-            //profile_icon_off.style.display='inline';
-        }
-
-        function Hide_profile(pub_id) {
-            var string = "profile";
-            var show_profile = string.concat(pub_id);
-
-            var string = "profile_on";
-            var profile_on = string.concat(pub_id);
-
-            var string = "profile_off";
-            var profile_off = string.concat(pub_id);
-
-            var allDivTr = document.getElementById("main").getElementsByTagName("TR");
-            for(var i = 0; i < allDivTr.length; i++){
-                var tr = allDivTr[i];
-                var trId = allDivTr[i].getAttribute('id');
-                if ( trId == show_profile ){
-                    tr.style.display='none';
-                }
-            }
-
-            //var profile = document.getElementById(show_profile);
-            //profile.style.display='none';
-
-            var allDivI = document.getElementById("main").getElementsByTagName("I");
-            for(var i = 0; i < allDivI.length; i++){
-                var I = allDivI[i];
-                var iId = allDivI[i].getAttribute('id');
-                if ( iId == profile_on ){
-                    I.style.display='inline';
-                }
-                if ( iId == profile_off ){
-                    I.style.display='none';
-                }
-            }
-
-            //var profile_icon_on = document.getElementById(profile_on);
-            //profile_icon_on.style.display='inline';
-
-            //var profile_icon_off = document.getElementById(profile_off);
-            //profile_icon_off.style.display='none';
-        }
-
-        function Show_profile_ind(ind_id) {
-            var string = "profile_ind";
-            var show_profile_ind = string.concat(ind_id);
-
-            var string = "profile_on_ind";
-            var profile_on_ind = string.concat(ind_id);
-
-            var string = "profile_off_ind";
-            var profile_off_ind = string.concat(ind_id);
-
-            var allDivTr = document.getElementById("main").getElementsByTagName("TR");
-            for(var i = 0; i < allDivTr.length; i++){
-                var tr = allDivTr[i];
-                var trId = allDivTr[i].getAttribute('id');
-                if ( trId == show_profile_ind ){
-                    tr.style.display='table-row';
-                }
-            }
-
-            //var profile_ind = document.getElementById(show_profile_ind);
-            //profile_ind.style.display='table-row';
-
-            var allDivI = document.getElementById("main").getElementsByTagName("I");
-            for(var i = 0; i < allDivI.length; i++){
-                var I = allDivI[i];
-                var iId = allDivI[i].getAttribute('id');
-                if ( iId == profile_on_ind ){
-                    I.style.display='none';
-                }
-                if ( iId == profile_off_ind ){
-                    I.style.display='inline';
-                }
-            }
-
-            //var profile_icon_on_ind = document.getElementById(profile_on_ind);
-            //profile_icon_on_ind.style.display='none';
-
-            //var profile_icon_off_ind = document.getElementById(profile_off_ind);
-            //profile_icon_off_ind.style.display='inline';
-        }
-
-        function Hide_profile_ind(ind_id) {
-            var string = "profile_ind";
-            var show_profile_ind = string.concat(ind_id);
-
-            var string = "profile_on_ind";
-            var profile_on_ind = string.concat(ind_id);
-
-            var string = "profile_off_ind";
-            var profile_off_ind = string.concat(ind_id);
-
-            var allDivTr = document.getElementById("main").getElementsByTagName("TR");
-            for(var i = 0; i < allDivTr.length; i++){
-                var tr = allDivTr[i];
-                var trId = allDivTr[i].getAttribute('id');
-                if ( trId == show_profile_ind ){
-                    tr.style.display='none';
-                }
-            }
-
-            //var profile_ind = document.getElementById(show_profile_ind);
-            //profile_ind.style.display='none';
-
-            var allDivI = document.getElementById("main").getElementsByTagName("I");
-            for(var i = 0; i < allDivI.length; i++){
-                var I = allDivI[i];
-                var iId = allDivI[i].getAttribute('id');
-                if ( iId == profile_on_ind ){
-                    I.style.display='inline';
-                }
-                if ( iId == profile_off_ind ){
-                    I.style.display='none';
-                }
-            }
-
-            //var profile_icon_on_ind = document.getElementById(profile_on_ind);
-            //profile_icon_on_ind.style.display='inline';
-
-            //var profile_icon_off_ind = document.getElementById(profile_off_ind);
-            //profile_icon_off_ind.style.display='none';
-        }
-    </script>
 
     {literal}
     <script> <!-- Comment tile scripts
@@ -704,7 +539,7 @@
             <!--START Game info tile -->
             <!--*********************-->
                 <div class="games_main_details_info_position_high">
-                    {include file='1/main/games_detail_info.html'}
+                    {include file='1/main/games_detail_info.html' position='high'}
                 </div>
             <!--*******************-->
             <!--END Game info tile -->
@@ -777,8 +612,8 @@
                             <div data-u="slides" class="games_main_detail_slides">
                                 {foreach from=$screenshots item=line name=screenshots}
                                 <div>
-                                    <img data-u="image" src="{$line.screenshot_image}">
-                                    <img data-u="thumb" src="{$line.screenshot_image}">
+                                    <img data-u="image" alt="Screenshot #{$smarty.foreach.screenshots.index}" src="{$line.screenshot_image}">
+                                    <img data-u="thumb" alt="Thumbnail #{$smarty.foreach.screenshots.index}" src="{$line.screenshot_image}">
                                 </div>
                                 {/foreach}
                             </div>
@@ -836,7 +671,7 @@
             <!--*********************-->
                 <div class="games_main_details_info_position_low">
                     <br>
-                    {include file='1/main/games_detail_info.html'}
+                    {include file='1/main/games_detail_info.html' position='low'}
                 </div>
             <!--*******************-->
             <!--END Game info tile -->
@@ -868,10 +703,10 @@
                         <tr>
                         <td>
                             <div class="standard_tile_padding">
-                            <div style="display:inline-block;float:left;padding-right:15px;">
-                                <a href="../../includes/show_image.php?file={$line.screenshot}&amp;resize=410,null,null,null" data-lightbox="image-1">
-                                <img src="../../includes/show_image.php?file={$line.screenshot}&amp;resize=210,null,null,null" alt="Click to enlarge!" class="user_stats_img_dark" style="max-width:95%;"></a>
-                            </div>
+                                <div style="display:inline-block;float:left;padding-right:15px;">
+                                    <a href="../../includes/show_image.php?file={$line.screenshot}&amp;resize=410,null,null,null" data-lightbox="image-1">
+                                    <img src="../../includes/show_image.php?file={$line.screenshot}&amp;resize=210,null,null,null" alt="Click to enlarge!" class="user_stats_img_dark" style="max-width:95%;"></a>
+                                </div>
                                 <h4 style="white-space: nowrap;overflow: hidden;text-overflow: ellipsis">
                                     Written by <a href="../../admin/user/user_detail.php?user_id_selected={$line.user_id}" class="standard_tile_link">{$line.user_name}</a>
                                 </h4>
@@ -881,7 +716,7 @@
                                 </div>
                                 <h2><a href="../games/games_reviews_detail.php?game_id={$game_id}&review_id={$line.review_id}" class="standard_tile_link">Read more <i class="fa fa-chevron-right" aria-hidden="true"></i></a></h2>
                                 <br>
-                            <div>
+                            </div>
                         </td>
                         </tr>
                     {/foreach}
@@ -943,8 +778,8 @@
                             <div data-u="slides" class="games_main_detail_slides_box">
                                 {foreach from=$boxscan item=line name=boxscan}
                                     <div>
-                                        <a href="../../includes/show_image.php?file={$line.image_pop}" data-lightbox="image-1" class="latest_comments_link"><img data-u="image" src="{$line.image}" class="games_main_detail_box_img"></a>
-                                        <div u="thumb">
+                                        <a href="../../includes/show_image.php?file={$line.image_pop}" data-lightbox="image-1" class="latest_comments_link"><img data-u="image" alt="Box scan" src="{$line.image}" class="games_main_detail_box_img"></a>
+                                        <div data-u="thumb">
                                             <div style="width: 100%; height: 100%; background-image: url({$line.image}); background-position: center center; background-repeat: no-repeat; background-size: contain;">
                                             </div>
                                         </div>
@@ -1070,4 +905,5 @@
                 {/if}
             {/if}
         </div>
+    </div>
 {/block}

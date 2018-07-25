@@ -23,7 +23,7 @@
         <meta charset="utf-8">
         <meta name="description" content="{block name=description}{/block}">
         <title>{block name=title}Atari ST games, reviews, interviews and news | Atari Legend{/block}</title>
-        <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
+        <meta name="viewport" content="width=device-width, minimum-scale=1.0">
         <!-- start - let the site behave like a mobile app on phone -->
         <meta name="mobile-web-app-capable" content="yes"><!-- Chrome-->
         <meta name="apple-mobile-web-app-capable" content="yes"><!-- apple -->
@@ -42,6 +42,20 @@
         <!-- end - get the icons used for mobile devices -->
 
         <link href="../../front/atom.php" type="application/atom+xml" rel="alternate" title="Latest News, Reviews and Interviews ATOM Feed" />
+
+        <script type="application/ld+json">
+            {
+                "@context": "http://schema.org",
+                "@type": "Organization",
+                "url": "{$smarty.const.REQUEST_SITEURL}",
+                "name": "Atari Legend",
+                "logo": "{$smarty.const.REQUEST_SITEURL}/themes/styles/1/images/class.png",
+                "sameAs": [
+                    "https://www.facebook.com/atarilegend",
+                    "https://twitter.com/AtariLegend"
+                ]
+            }
+        </script>
 
         {* Inner page can inject additional CSS that gets put here *}
         {block name=additional_css}{/block}
@@ -102,9 +116,9 @@
                                         <li>
                                             <button class="sidebutton" id="skin_side">SKIN</button>
                                             <ul class="sub-menu">
-                                                <li><a href="#" rel="1" class="sidebutton_cpanel">LEGACY</a></li>
-                                                <!--<li><a href="#" rel="2" class="sidebutton_cpanel">TOS 2.07</a></li>
-                                                <li><a href="#" rel="3" class="sidebutton_cpanel">PICASSO</a></li>-->
+                                                <li><a href="#" class="sidebutton_cpanel">LEGACY</a></li>
+                                                <!--<li><a href="#" class="sidebutton_cpanel">TOS 2.07</a></li>
+                                                <li><a href="#" class="sidebutton_cpanel">PICASSO</a></li>-->
                                             </ul>
                                         </li>
                                     </ul>
