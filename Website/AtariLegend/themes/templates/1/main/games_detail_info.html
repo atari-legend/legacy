@@ -101,8 +101,12 @@
                             <span class="games_main_detail_info_left">
                                 <a href="games_main_list.php?publisher={$line.pub_id}&amp;action=search" class="standard_tile_link">{$line.pub_name}</a>
                                 {if $line.pub_profile != 'none'}
-                                    <a style="cursor: pointer;" onClick="Show_profile({$line.pub_id})" class="latest_comments_link"><i class="fa fa-info-circle" aria-hidden="true" id="profile_on{$line.pub_id}" text="click to view profile"></i></a>
-                                    <a style="cursor: pointer;" onClick="Hide_profile({$line.pub_id})" class="latest_comments_link"><i class="fa fa-info-circle" aria-hidden="true" id="profile_off{$line.pub_id}" style="display:none;" text="click to view profile"></i></a>
+                                    <a style="cursor: pointer;"
+                                        onclick="javascript:jQuery('#publisher_profile_{$line.pub_id}_{$position}').toggle()"
+                                        title="Click to view profile"
+                                        class="latest_comments_link">
+                                        <i class="fa fa-info-circle" aria-hidden="true"></i>
+                                    </a>
                                 {/if}
                                 {if $line.logo != 'none'}
                                     <a href="../../includes/show_image.php?file={$line.logo_pop}" data-lightbox="image-1" data-title="{$line.pub_name}" class="latest_comments_link"><i class="fa fa-picture-o" aria-hidden="true"></i></a>
@@ -114,10 +118,10 @@
                         </td>
                     </tr>
                     {if $line.pub_profile != ''}
-                        <tr></tr>
-                        <tr style="display:none;" id="profile{$line.pub_id}">
+                        <tr style="display: none;"><td colspan="3"></td></tr>
+                        <tr style="display:none;" id="publisher_profile_{$line.pub_id}_{$position}">
                             <td colspan="3" style="text-align:center;">
-                                <textarea id="profile{$line.pub_id}" class="primary_textarea" rows="5" style="margin-top:5px;margin-bottom:5px;font-size:10pt;margin-left:auto;margin-right:auto;" readonly>
+                                <textarea class="primary_textarea" rows="5" style="margin-top:5px;margin-bottom:5px;font-size:10pt;margin-left:auto;margin-right:auto;" readonly>
                                     {$line.pub_profile}
                                 </textarea>
                             </td>
@@ -146,8 +150,12 @@
                             <span class="games_main_detail_info_left">
                                 <a href="games_main_list.php?developer={$line.pub_id}&amp;action=search" class="standard_tile_link">{$line.pub_name}</a>
                                 {if $line.pub_profile != 'none'}
-                                    <a style="cursor: pointer;" onClick="Show_profile({$line.pub_id})" class="latest_comments_link"><i class="fa fa-info-circle" aria-hidden="true" id="profile_on{$line.pub_id}" text="click to view profile"></i></a>
-                                    <a style="cursor: pointer;" onClick="Hide_profile({$line.pub_id})" class="latest_comments_link"><i class="fa fa-info-circle" aria-hidden="true" id="profile_off{$line.pub_id}" style="display:none;" text="click to view profile"></i></a>
+                                    <a style="cursor: pointer;"
+                                        onclick="javascript:jQuery('#developer_profile_{$line.pub_id}_{$position}').toggle()"
+                                        title="Click to view profile"
+                                        class="latest_comments_link">
+                                        <i class="fa fa-info-circle" aria-hidden="true"></i>
+                                    </a>
                                 {/if}
                                 {if $line.logo != 'none'}
                                     <a href="../../includes/show_image.php?file={$line.logo_pop}" data-lightbox="image-1" data-title="{$line.pub_name}" class="latest_comments_link"><i class="fa fa-picture-o" aria-hidden="true"></i></a>
@@ -159,10 +167,10 @@
                         </td>
                     </tr>
                     {if $line.pub_profile != ''}
-                        <tr></tr>
-                        <tr style="display:none;" id="profile{$line.pub_id}">
+                        <tr style="display: none;"><td colspan="3"></td></tr>
+                        <tr style="display:none;" id="developer_profile_{$line.pub_id}_{$position}">
                             <td colspan="3">
-                                <textarea id="profile{$line.pub_id}" class="primary_textarea" rows="6" style="margin-top:5px;margin-bottom:5px;font-size:10pt;margin-left:auto;margin-right:auto;" readonly>
+                                <textarea class="primary_textarea" rows="6" style="margin-top:5px;margin-bottom:5px;font-size:10pt;margin-left:auto;margin-right:auto;" readonly>
                                     {$line.pub_profile}
                                 </textarea>
                             </td>
@@ -205,8 +213,12 @@
                             <span class="games_main_detail_info_left">
                                 <a href="games_main_list.php?game_author={$line.ind_id}&amp;action=search" class="standard_tile_link">{$line.ind_name}</a>
                                 {if $line.ind_profile != 'none'}
-                                    <a style="cursor: pointer;" onClick="Show_profile_ind({$line.ind_id})" class="latest_comments_link"><i class="fa fa-info-circle" aria-hidden="true" id="profile_on_ind{$line.ind_id}" text="click to view profile"></i></a>
-                                    <a style="cursor: pointer;" onClick="Hide_profile_ind({$line.ind_id})" class="latest_comments_link"><i class="fa fa-info-circle" aria-hidden="true" id="profile_off_ind{$line.ind_id}" style="display:none;" text="click to view profile"></i></a>
+                                    <a style="cursor: pointer;"
+                                        onclick="javascript:jQuery('#individual_profile_{$line.ind_id}_{$smarty.foreach.game_author.index}_{$position}').toggle()"
+                                        title="Click to view profile"
+                                        class="latest_comments_link">
+                                        <i class="fa fa-info-circle" aria-hidden="true"></i>
+                                    </a>
                                 {/if}
                                 {if $line.ind_img != 'none'}
                                     <a href="../../includes/show_image.php?file={$line.ind_img}" data-lightbox="image-1" data-title="{$line.ind_name}" class="latest_comments_link"><i class="fa fa-picture-o" aria-hidden="true"></i></a>
@@ -224,10 +236,10 @@
                         </td>
                     </tr>
                     {if $line.ind_profile != ''}
-                        <tr></tr>
-                        <tr style="display:none;" id="profile_ind{$line.ind_id}">
+                        <tr style="display: none;"><td colspan="3"></td></tr>
+                        <tr style="display:none;" id="individual_profile_{$line.ind_id}_{$smarty.foreach.game_author.index}_{$position}">
                             <td colspan="3">
-                                <textarea id="profile{$line.ind_id}" class="primary_textarea" rows="6" style="margin-top:5px;margin-bottom:5px;font-size:10pt;margin-left:auto;margin-right:auto;" readonly>
+                                <textarea class="primary_textarea" rows="6" style="margin-top:5px;margin-bottom:5px;font-size:10pt;margin-left:auto;margin-right:auto;" readonly>
                                     {$line.ind_profile}
                                 </textarea>
                             </td>
