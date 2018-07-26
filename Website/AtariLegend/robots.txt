@@ -2,4 +2,4 @@ User-agent: *
 Disallow: /admin/
 Disallow: /data/database-dumps/
 
-Sitemap: http://www.atarilegend.com/front/sitemap_index.php
+Sitemap: https://www.atarilegend.com/front/sitemap_index.php
