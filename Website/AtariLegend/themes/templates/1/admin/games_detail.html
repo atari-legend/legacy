@@ -337,7 +337,7 @@ $('#input-tags3').selectize({
                     {foreach from=$developers item=developer}
                         <form action="db_games_developer.php" method="get">
                             <a title="Remove {$developer.pub_dev_name|escape:"html"} from this game"
-                                href="db_games_developer.php?game_id={$game->getId()}&amp;pub_dev_id={$developer.pub_dev_id}&amp;continent_id={$developer.continent_id}&amp;game_extra_info_id={$developer.game_extra_info_id}&amp;action=remove"
+                                href="db_games_developer.php?game_id={$game->getId()}&amp;pub_dev_id={$developer.pub_dev_id}&amp;game_extra_info_id={$developer.game_extra_info_id}&amp;action=remove"
                                 onclick="javascript:return confirm('This developer will be removed from the game')">
                                 <span class="fa fa-fw fa-trash"></span>
                             </a>
@@ -349,15 +349,6 @@ $('#input-tags3').selectize({
                             <input type="hidden" name="game_extra_info_id" value="{$developer.game_extra_info_id}">
 
                             <input type="text" value="{$developer.pub_dev_name}" class="standard_input input_large" disabled>
-
-                            <select name="new_continent_id"
-                                onchange="jQuery('#update-developer-{$developer.pub_dev_id}').show()"
-                                class="standard_select select_medium">
-                                <option value="">-</option>
-                                {foreach from=$continents item=continent}
-                                    <option value="{$continent.continent_id}" {if $developer.continent_id eq $continent.continent_id} selected{/if}>{$continent.continent_name}</option>
-                                {/foreach}
-                            </select>
 
                             <select name="new_game_extra_info_id"
                                 onchange="jQuery('#update-developer-{$developer.pub_dev_id}').show()"
@@ -395,13 +386,6 @@ $('#input-tags3').selectize({
                             {/foreach}
                         </select>
                     </span>
-
-                    <select name="continent_id" class="standard_select select_medium">
-                        <option value="" selected>-</option>
-                        {foreach from=$continents item=continent}
-                            <option value="{$continent.continent_id}">{$continent.continent_name}</option>
-                        {/foreach}
-                    </select>
 
                     <select name="game_extra_info_id" class="standard_select select_medium">
                         <option value="" selected="selected">-</option>

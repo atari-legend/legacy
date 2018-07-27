@@ -136,13 +136,13 @@
                             {if $smarty.foreach.developer.index == 0}
                                 <span class="games_main_detail_info_right">Developer</span>
                             {/if}
-                            {if $line.continent != '' ||  $line.extra_info != ''}
+                            {if $line.extra_info != ''}
                                 <br><br>
                             {/if}
                         </td>
                         <td class="w-5">
                             <span class="games_main_detail_info_left text-center">-</span>
-                            {if $line.continent != '' ||  $line.extra_info != ''}
+                            {if $line.extra_info != ''}
                                 <br><br>
                             {/if}
                         </td>
@@ -161,8 +161,8 @@
                                     <a href="../../includes/show_image.php?file={$line.logo_pop}" data-lightbox="image-1" data-title="{$line.pub_name}" class="latest_comments_link"><i class="fa fa-picture-o" aria-hidden="true"></i></a>
                                 {/if}
                             </span>
-                            {if $line.continent != '' ||  $line.extra_info != ''}
-                                <br><span class="standard_tile_subtext">{$line.continent}{if $line.continent != '' AND $line.extra_info != ''} - {/if}{$line.extra_info}</span>
+                            {if $line.extra_info != ''}
+                                <br><span class="standard_tile_subtext">{if $line.extra_info != ''} - {/if}{$line.extra_info}</span>
                             {/if}
                         </td>
                     </tr>
