@@ -307,7 +307,7 @@ if ($nr_interviews > 0) {
 $sql_publisher = $mysqli->query("SELECT * FROM pub_dev
                  LEFT JOIN pub_dev_text ON (pub_dev.pub_dev_id = pub_dev_text.pub_dev_id )
                  LEFT JOIN game_publisher ON ( pub_dev.pub_dev_id = game_publisher.pub_dev_id )
-                 LEFT JOIN game_extra_info ON ( game_publisher.game_extra_info_id = game_extra_info.game_extra_info_id )
+                 LEFT JOIN developer_role ON ( game_publisher.game_extra_info_id = developer_role.developer_role_id )
                  LEFT JOIN continent ON ( game_publisher.continent_id = continent.continent_id )
                  WHERE game_publisher.game_id = '$game_id' ORDER BY pub_dev_name ASC") or die("Couldn't query publishers");
 
@@ -339,7 +339,7 @@ while ($publishers = $sql_publisher->fetch_array(MYSQLI_BOTH)) {
         'pub_name' => $publishers['pub_dev_name'],
         'pub_profile' => $profile,
         'continent_id' => $publishers['continent_id'],
-        'extra_info' => $publishers['game_extra_info'],
+        'extra_info' => $publishers['developer_role'],
         'logo' => $v_comp_image,
         'logo_pop' => $v_comp_image_pop,
         'logo_path' => $company_screenshot_path,
@@ -351,8 +351,7 @@ while ($publishers = $sql_publisher->fetch_array(MYSQLI_BOTH)) {
 $sql_developer = $mysqli->query("SELECT * FROM game_developer
                   LEFT JOIN pub_dev ON ( pub_dev.pub_dev_id = game_developer.dev_pub_id )
                   LEFT JOIN pub_dev_text ON (pub_dev.pub_dev_id = pub_dev_text.pub_dev_id )
-                  LEFT JOIN game_extra_info ON ( game_developer.game_extra_info_id = game_extra_info.game_extra_info_id )
-                  LEFT JOIN continent ON ( game_developer.continent_id = continent.continent_id )
+                  LEFT JOIN developer_role ON ( game_developer.developer_role_id = developer_role.developer_role_id )
                   WHERE game_developer.game_id = '$game_id' ORDER BY pub_dev_name ASC") or die("Couldn't query developers");
 
 $game_developers = [];
@@ -384,12 +383,10 @@ while ($developers = $sql_developer->fetch_array(MYSQLI_BOTH)) {
         'pub_id' => $developers['dev_pub_id'],
         'pub_name' => $developers['pub_dev_name'],
         'pub_profile' =>$profile,
-        'continent_id' => $developers['continent_id'],
-        'extra_info' => $developers['game_extra_info'],
+        'extra_info' => $developers['developer_role'],
         'logo' => $v_ind_image,
         'logo_pop' => $v_ind_image_pop,
-        'logo_path' => $company_screenshot_path,
-        'continent' => $developers['continent_name']
+        'logo_path' => $company_screenshot_path
     ));
 }
 
