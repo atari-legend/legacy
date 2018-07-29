@@ -21,8 +21,8 @@ AND column_name = 'game_extra_info_id' LIMIT 1";
 
 // Database change
 $database_update_sql = "ALTER TABLE developer_role
-	CHANGE game_extra_info_id developer_role_id int(11), 
-    CHANGE game_extra_info developer_role varchar(50)";
+	CHANGE game_extra_info_id id int(11), 
+    CHANGE game_extra_info role varchar(50) COMMENT 'Name of a role'";
 
 // If the update should auto execute without user interaction set to "yes".
 $database_autoexecute = "yes";

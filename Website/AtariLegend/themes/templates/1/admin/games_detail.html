@@ -337,7 +337,7 @@ $('#input-tags3').selectize({
                     {foreach from=$developers item=developer}
                         <form action="db_games_developer.php" method="get">
                             <a title="Remove {$developer.pub_dev_name|escape:"html"} from this game"
-                                href="db_games_developer.php?game_id={$game->getId()}&amp;pub_dev_id={$developer.pub_dev_id}&amp;game_extra_info_id={$developer.game_extra_info_id}&amp;action=remove"
+                                href="db_games_developer.php?game_id={$game->getId()}&amp;pub_dev_id={$developer.pub_dev_id}&amp;developer_role_id={$developer.developer_role_id}&amp;action=remove"
                                 onclick="javascript:return confirm('This developer will be removed from the game')">
                                 <span class="fa fa-fw fa-trash"></span>
                             </a>
@@ -345,17 +345,16 @@ $('#input-tags3').selectize({
                             <input type="hidden" name="action" value="update">
                             <input type="hidden" name="game_id" value="{$game->getId()}">
                             <input type="hidden" name="pub_dev_id" value="{$developer.pub_dev_id}">
-                            <input type="hidden" name="continent_id" value="{$developer.continent_id}">
-                            <input type="hidden" name="game_extra_info_id" value="{$developer.game_extra_info_id}">
+                            <input type="hidden" name="developer_role_id" value="{$developer.developer_role_id}">
 
                             <input type="text" value="{$developer.pub_dev_name}" class="standard_input input_large" disabled>
 
-                            <select name="new_game_extra_info_id"
+                            <select name="new_developer_role_id"
                                 onchange="jQuery('#update-developer-{$developer.pub_dev_id}').show()"
                                 class="standard_select select_medium">
                                 <option value="">-</option>
-                                {foreach from=$game_extra_info item=info}
-                                    <option value="{$info.game_extra_info_id}" {if $developer.game_extra_info_id eq $info.game_extra_info_id} selected{/if}>{$info.game_extra_info}</option>
+                                {foreach from=$developer_role item=info}
+                                    <option value="{$info.developer_role_id}" {if $developer.developer_role_id eq $info.developer_role_id} selected{/if}>{$info.developer_role}</option>
                                 {/foreach}
                             </select>
 
@@ -387,10 +386,10 @@ $('#input-tags3').selectize({
                         </select>
                     </span>
 
-                    <select name="game_extra_info_id" class="standard_select select_medium">
+                    <select name="developer_role_id" class="standard_select select_medium">
                         <option value="" selected="selected">-</option>
-                        {foreach from=$game_extra_info item=line}
-                            <option value="{$line.game_extra_info_id}">{$line.game_extra_info}</option>
+                        {foreach from=$developer_role item=line}
+                            <option value="{$line.developer_role_id}">{$line.developer_role}</option>
                         {/foreach}
                     </select>
 

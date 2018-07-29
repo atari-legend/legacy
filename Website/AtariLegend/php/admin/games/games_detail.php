@@ -144,7 +144,7 @@ $smarty->assign('pubdevs', $pubDevDao->getPubDevsStartingWith("^[0-9]"));
 //let's get the publishers for this game
 $sql_publisher = $mysqli->query("SELECT * FROM pub_dev
                  LEFT JOIN game_publisher ON ( pub_dev.pub_dev_id = game_publisher.pub_dev_id )
-                 LEFT JOIN developer_role ON ( game_publisher.game_extra_info_id = developer_role.developer_role_id )
+                 LEFT JOIN developer_role ON ( game_publisher.game_extra_info_id = developer_role.id )
                  LEFT JOIN continent ON ( game_publisher.continent_id = continent.continent_id )
                  WHERE game_publisher.game_id = '$game_id' ORDER BY pub_dev_name ASC") or die("Couldn't query publishers");
 
@@ -152,8 +152,8 @@ while ($publishers = $sql_publisher->fetch_array(MYSQLI_BOTH)) {
     $smarty->append('publishers', array(
         'pub_dev_id' => $publishers['pub_dev_id'],
         'pub_dev_name' => $publishers['pub_dev_name'],
-        'game_extra_info' => $publishers['developer_role'],
-        'game_extra_info_id' => $publishers['developer_role_id'],
+        'game_extra_info' => $publishers['role'],
+        'game_extra_info_id' => $publishers['id'],
         'continent_id' => $publishers['continent_id'],
         'continent_name' => $publishers['continent_name']
     ));
@@ -162,15 +162,15 @@ while ($publishers = $sql_publisher->fetch_array(MYSQLI_BOTH)) {
 //let's get the developers for this game
 $sql_developer = $mysqli->query("SELECT * FROM pub_dev
                   LEFT JOIN game_developer ON ( pub_dev.pub_dev_id = game_developer.dev_pub_id )
-                  LEFT JOIN developer_role ON ( game_developer.developer_role_id = developer_role.developer_role_id )                 
+                  LEFT JOIN developer_role ON ( game_developer.developer_role_id = developer_role.id )                 
                   WHERE game_developer.game_id = '$game_id' ORDER BY pub_dev_name ASC") or die("Couldn't query developers");
 
 while ($developers = $sql_developer->fetch_array(MYSQLI_BOTH)) {
     $smarty->append('developers', array(
         'pub_dev_id' => $developers['pub_dev_id'],
         'pub_dev_name' => $developers['pub_dev_name'],
-        'game_extra_info' => $developers['developer_role'],
-        'game_extra_info_id' => $developers['developer_role_id']
+        'developer_role' => $developers['role'],
+        'developer_role_id' => $developers['id']
     ));
 }
 
@@ -191,12 +191,12 @@ while ($continent = $sql_continent->fetch_array(MYSQLI_BOTH)) {
 //Get the extra game info
 //**********************************************************************************
 
-$sql_developer_role = $mysqli->query("SELECT * FROM developer_role ORDER BY developer_role ASC") or die("Couldn't query developer_role database");
+$sql_developer_role = $mysqli->query("SELECT * FROM developer_role ORDER BY role ASC") or die("Couldn't query developer_role database");
 
 while ($developer_role = $sql_developer_role->fetch_array(MYSQLI_BOTH)) {
-    $smarty->append('game_extra_info', array(
-        'game_extra_info_id' => $developer_role['developer_role_id'],
-        'game_extra_info' => $developer_role['developer_role']
+    $smarty->append('developer_role', array(
+        'developer_role_id' => $developer_role['id'],
+        'developer_role' => $developer_role['role']
     ));
 }
 
