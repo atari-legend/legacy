@@ -15,14 +15,17 @@ $stmt = \AL\Db\execute_query(
             pub_dev.pub_dev_id,
             pub_dev.pub_dev_name,
             continent.continent_name,
-            game_extra_info.game_extra_info,
+            developer_role.role,
             ''
         FROM
             game
         LEFT JOIN game_publisher ON game_publisher.game_id = game.game_id
         LEFT JOIN pub_dev ON game_publisher.pub_dev_id = pub_dev.pub_dev_id
         LEFT JOIN continent ON game_publisher.continent_id = continent.continent_id
-        LEFT JOIN game_extra_info ON game_publisher.game_extra_info_id = game_extra_info.game_extra_info_id
+        -- `developer_role` is used here, even if it's a publisher, because
+        -- it was the table that held the publisher `game_extra_info` previously
+        -- This will disappear once all publishers linked to games have been merged
+        LEFT JOIN developer_role ON game_publisher.game_extra_info_id = developer_role.id
 
         UNION
 
@@ -53,7 +56,7 @@ $stmt = \AL\Db\execute_query(
 \AL\Db\bind_result(
     "games_publishers_to_merge",
     $stmt,
-    $game_id, $game_name, $pub_dev_id, $pub_dev_name, $continent_name, $game_extra_info, $release_date
+    $game_id, $game_name, $pub_dev_id, $pub_dev_name, $continent_name, $developer_role, $release_date
 );
 
 $previous_game_id = -1;
@@ -69,7 +72,7 @@ while ($stmt->fetch()) {
         'pub_dev_id' => $pub_dev_id,
         'pub_dev_name' => $pub_dev_name,
         'continent_name' => $continent_name,
-        'game_extra_info' => $game_extra_info,
+        'developer_role' => $developer_role,
         'release_date' => $release_date
     ));
 }
