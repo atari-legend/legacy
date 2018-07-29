@@ -20,8 +20,8 @@ AND table_name = 'game_developer'
 AND column_name = 'continent_id' LIMIT 1";
 
 // Database change
-$database_update_sql = "ALTER TABLE developer_role
-	CHANGE game_extra_info_id developer_role_id, game_extra_info developer_role";
+$database_update_sql = "ALTER TABLE game_developer
+	DROP COLUMN continent_id";
 
 // If the update should auto execute without user interaction set to "yes".
 $database_autoexecute = "yes";
