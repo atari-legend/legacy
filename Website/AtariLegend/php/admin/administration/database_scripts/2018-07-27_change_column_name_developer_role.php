@@ -16,13 +16,14 @@ $execute_condition = "test_success";
 $test_condition = "SELECT *
 FROM information_schema.columns
 WHERE table_schema = '$db_databasename'
-AND table_name = 'developer_role' 
+AND table_name = 'developer_role'
 AND column_name = 'game_extra_info_id' LIMIT 1";
 
 // Database change
 $database_update_sql = "ALTER TABLE developer_role
-	CHANGE game_extra_info_id id int(11), 
-    CHANGE game_extra_info role varchar(50) COMMENT 'Name of a role'";
+	CHANGE game_extra_info_id id int(11),
+    CHANGE game_extra_info role varchar(50) COMMENT 'Name of a role',
+    ADD PRIMARY KEY (id)";
 
 // If the update should auto execute without user interaction set to "yes".
 $database_autoexecute = "yes";

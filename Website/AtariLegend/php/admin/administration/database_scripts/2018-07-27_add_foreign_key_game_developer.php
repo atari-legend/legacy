@@ -1,27 +1,29 @@
 <?php
 /***************************************************************************
- * Rename the column game_extra_info_id to developer_role_id
+ * Add foreign key constraint on game_developer
  **************************************************************************/
 
 // Unique identifier set by developer.
-$database_update_id = 159;
+$database_update_id = 161;
 
 // Description of what the change will do.
-$update_description = "Rename the column game_extra_info_id to developer_role_id of table game_developer";
+$update_description = "Add foreign key constraint on game_developer";
 
 // Should the database change query execute if test is "test_fail" or "test_success"
-$execute_condition = "test_success";
+$execute_condition = "test_fail";
 
 //This is the test query, the query should be made to get an either true or false result.
 $test_condition = "SELECT *
-FROM information_schema.columns
-WHERE table_schema = '$db_databasename'
-AND table_name = 'game_developer'
-AND column_name = 'game_extra_info_id' LIMIT 1";
+FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE
+WHERE REFERENCED_TABLE_SCHEMA = '$db_databasename'
+AND REFERENCED_TABLE_NAME = 'developer_role'
+AND REFERENCED_COLUMN_NAME = 'id'
+AND TABLE_NAME = 'game_developer'
+AND COLUMN_NAME = 'developer_role_id'";
 
 // Database change
 $database_update_sql = "ALTER TABLE game_developer
-    CHANGE game_extra_info_id developer_role_id int(11) COMMENT 'Role the developer had on the game'";
+ADD FOREIGN KEY (developer_role_id) REFERENCES developer_role(id)";
 
 // If the update should auto execute without user interaction set to "yes".
 $database_autoexecute = "yes";
