@@ -8,7 +8,7 @@ require_once __DIR__."/../../common/DAO/GameReleaseDAO.php";
 require_once __DIR__."/../../common/DAO/ResolutionDAO.php";
 require_once __DIR__."/../../common/DAO/SystemDAO.php";
 require_once __DIR__."/../../common/DAO/PubDevDAO.php";
-require_once __DIR__."/../../common/DAO/ContinentDAO.php";
+require_once __DIR__."/../../common/DAO/LocationDAO.php";
 require_once __DIR__."/../../common/DAO/ChangeLogDAO.php";
 
 $gameReleaseDao = new \AL\Common\DAO\GameReleaseDAO($mysqli);
@@ -16,13 +16,13 @@ $gameDao = new \AL\Common\DAO\GameDao($mysqli);
 $resolutionDao = new \AL\Common\DAO\ResolutionDao($mysqli);
 $systemDao = new \AL\Common\DAO\SystemDao($mysqli);
 $pubDevDao = new \AL\Common\DAO\PubDevDAO($mysqli);
-$continentDao = new \AL\Common\DAO\ContinentDAO($mysqli);
+$locationDao = new \AL\Common\DAO\LocationDAO($mysqli);
 $changeLogDao = new \AL\Common\DAO\ChangeLogDAO($mysqli);
 
 if ($_SERVER['REQUEST_METHOD'] == "GET") {
     $smarty->assign('license_types', $gameReleaseDao->getLicenseTypes());
     $smarty->assign('release_types', $gameReleaseDao->getTypes());
-    $smarty->assign('continents', $continentDao->getAllContinents());
+    $smarty->assign('locations', $locationDao->getAllLocations());
     $smarty->assign('resolutions', $resolutionDao->getAllResolutions());
     $smarty->assign('systems', $systemDao->getAllSystems());
     $smarty->assign('publishers', $pubDevDao->getAllPubDevs());
@@ -41,6 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
         $smarty->assign('system_incompatible', $systemDao->getIncompatibleSystemsForRelease($release->getId()));
         $smarty->assign('system_enhanced', $systemDao->getEnhancedSystemsForRelease($release->getId()));
         $smarty->assign('release_resolutions', $resolutionDao->getResolutionsForRelease($release->getId()));
+        $smarty->assign('release_locations', $locationDao->getLocationsForRelease($release->getId()));
     } else {
         // Creating a new release
         $game = $gameDao->getGame($game_id);
@@ -52,10 +53,11 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
         $smarty->assign('system_incompatible', []);
         $smarty->assign('system_enhanced', []);
         $smarty->assign('release_resolutions', []);
+        $smarty->assign('release_locations', []);
 
-        // Pass through a pub_dev_id, continent_id and release type that may be in URL parameters
+        // Pass through a pub_dev_id, location_id and release type that may be in URL parameters
         $smarty->assign('pub_dev_id', isset($pub_dev_id) ? $pub_dev_id : null);
-        $smarty->assign('continent_id', isset($continent_id) ? $continent_id : null);
+        $smarty->assign('location_id', isset($location_id) ? $location_id : null);
         $smarty->assign('type', isset($type) ? $type : null);
 
     }
@@ -81,7 +83,6 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
             $date,
             $license,
             ($type != '') ? $type : null,
-            ($continent_id != '') ? $continent_id : null,
             ($pub_dev_id != '') ? $pub_dev_id : null);
 
         $changeLogDao->insertChangeLog(
@@ -104,7 +105,6 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
             $Date_Year."-01-01",
             $license,
             ($type != '') ? $type : null,
-            ($continent_id != '') ? $continent_id : null,
             ($pub_dev_id != '') ? $pub_dev_id : null
         );
 
@@ -126,6 +126,7 @@ if ($_SERVER['REQUEST_METHOD'] == "GET") {
     $systemDao->setIncompatibleSystemsForRelease($release_id, isset($system_incompatible) ? $system_incompatible : []);
     $systemDao->setEnhancedSystemsForRelease($release_id, isset($system_enhanced) ? $system_enhanced : []);
     $resolutionDao->setResolutionsForRelease($release_id, isset($resolution) ? $resolution : []);
+    $locationDao->setLocationsForRelease($release_id, isset($location) ? $location : []);
 
     if ($submit_type == "save_and_back") {
         header("Location: games_detail.php?game_id=".$game_id);

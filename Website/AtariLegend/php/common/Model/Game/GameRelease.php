@@ -11,17 +11,15 @@ class GameRelease {
     private $date;
     private $license;
     private $type;
-    private $continent;
     private $publisher;
 
-    public function __construct($id, $game_id, $name, $date, $license, $type, $continent, $publisher) {
+    public function __construct($id, $game_id, $name, $date, $license, $type, $publisher) {
         $this->id = $id;
         $this->game_id = $game_id;
         $this->name = $name;
         $this->date = $date;
         $this->license = $license;
         $this->type = $type;
-        $this->continent = $continent;
         $this->publisher = $publisher;
     }
 
@@ -47,10 +45,6 @@ class GameRelease {
 
     public function getType() {
         return $this->type;
-    }
-
-    public function getContinent() {
-        return $this->continent;
     }
 
     public function getPublisher() {

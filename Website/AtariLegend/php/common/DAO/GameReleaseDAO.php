@@ -3,7 +3,6 @@ namespace AL\Common\DAO;
 
 require_once __DIR__."/../../lib/Db.php" ;
 require_once __DIR__."/../Model/Game/GameRelease.php" ;
-require_once __DIR__."/../Model/Continent/Continent.php" ;
 require_once __DIR__."/../Model/PubDev/PubDev.php" ;
 
 /**
@@ -54,7 +53,6 @@ class GameReleaseDAO {
      * @param  date $date Date of the release (optional)
      * @param string $license New license of the release
      * @param string $type New type of release
-     * @param string $continent_id New ID of the continent of the release
      * @param string $publisher_id New ID of the publisher of the release
      * @return integer ID of the inserted release
      */
@@ -64,7 +62,6 @@ class GameReleaseDAO {
         $date = null,
         $license = null,
         $type = null,
-        $continent_id = null,
         $publisher_id = null
     ) {
 
@@ -72,10 +69,10 @@ class GameReleaseDAO {
             "GameReleaseDAO: addReleaseForGame",
             $this->mysqli,
             "INSERT INTO game_release
-                (game_id, `name`, `date`, license, type, continent_id, pub_dev_id)
+                (game_id, `name`, `date`, license, type, pub_dev_id)
             VALUES
-                (?, ?, ?, ?, ?, ?, ?)",
-            "issssii", $game_id, $name, $date, $license, $type, $continent_id, $publisher_id
+                (?, ?, ?, ?, ?, ?)",
+            "issssi", $game_id, $name, $date, $license, $type, $publisher_id
         );
 
         $id = $stmt->insert_id;
@@ -95,13 +92,11 @@ class GameReleaseDAO {
             "GameRelaseDAO: getReleasesForGame",
             $this->mysqli,
             "SELECT
-                id, `name`, `date`, license, type,
-                continent.continent_id, continent.continent_name,
+                game_release.id, game_release.name, `date`, license, game_release.type,
                 pub_dev.pub_dev_id, pub_dev.pub_dev_name, pub_dev_text.pub_dev_profile, pub_dev_text.pub_dev_imgext
             FROM game_release
             LEFT JOIN pub_dev ON game_release.pub_dev_id = pub_dev.pub_dev_id
             LEFT JOIN pub_dev_text ON pub_dev.pub_dev_id = pub_dev_text.pub_dev_id
-            LEFT JOIN continent ON game_release.continent_id = continent.continent_id
             WHERE game_id = ?
             ORDER BY date ASC",
             "i", $game_id
@@ -111,7 +106,6 @@ class GameReleaseDAO {
             "GameRelaseDAO: getReleasesForGame",
             $stmt,
             $id, $name, $date, $license, $type,
-            $continent_id, $continent_name,
             $pub_dev_id, $pub_dev_name, $pub_dev_profile, $pub_dev_imgext
         );
 
@@ -119,9 +113,6 @@ class GameReleaseDAO {
         while ($stmt->fetch()) {
             $releases[] = new \AL\Common\Model\Game\GameRelease(
                 $id, $game_id, $name, $date, $license, $type,
-                ($continent_id != null)
-                    ? new \AL\Common\Model\Continent\Continent($continent_id, $continent_name)
-                    : null,
                 ($pub_dev_id != null)
                     ? new \AL\Common\Model\PubDev\PubDev($pub_dev_id, $pub_dev_name, $pub_dev_profile, $pub_dev_imgext)
                     : null
@@ -144,13 +135,11 @@ class GameReleaseDAO {
             "GameReleaseDAO: getRelease: $release_id",
             $this->mysqli,
             "SELECT
-                id, game_id, `name`, `date`, license, type,
-                continent.continent_id, continent.continent_name,
+                game_release.id, game_id, game_release.name, `date`, license, game_release.type,
                 pub_dev.pub_dev_id, pub_dev.pub_dev_name, pub_dev_text.pub_dev_profile, pub_dev_text.pub_dev_imgext
             FROM game_release
             LEFT JOIN pub_dev ON game_release.pub_dev_id = pub_dev.pub_dev_id
             LEFT JOIN pub_dev_text ON pub_dev.pub_dev_id = pub_dev_text.pub_dev_id
-            LEFT JOIN continent ON game_release.continent_id = continent.continent_id
             WHERE game_release.id = ?",
             "i", $release_id
         );
@@ -159,7 +148,6 @@ class GameReleaseDAO {
             "GameReleaseDAO: getRelease: $release_id",
             $stmt,
             $id, $game_id, $name, $date, $license, $type,
-            $continent_id, $continent_name,
             $pub_dev_id, $pub_dev_name, $pub_dev_profile, $pub_dev_imgext
         );
 
@@ -167,9 +155,6 @@ class GameReleaseDAO {
         if ($stmt->fetch()) {
             $release = new \AL\Common\Model\Game\GameRelease(
                 $id, $game_id, $name, $date, $license, $type,
-                ($continent_id != null)
-                    ? new \AL\Common\Model\Continent\Continent($continent_id, $continent_name)
-                    : null,
                 ($pub_dev_id != null)
                     ? new \AL\Common\Model\PubDev\PubDev($pub_dev_id, $pub_dev_name, $pub_dev_profile, $pub_dev_imgext)
                     : null
@@ -226,10 +211,9 @@ class GameReleaseDAO {
      * @param string $date New date of the release
      * @param string $license New license of the release
      * @param string $type New type of release
-     * @param string $continent_id New ID of the continent of the release
      * @param string $publisher_id New ID of the publisher of the release
      */
-    public function updateRelease($release_id, $name, $date, $license, $type, $continent_id, $publisher_id) {
+    public function updateRelease($release_id, $name, $date, $license, $type, $publisher_id) {
         $stmt = \AL\Db\execute_query(
             "GameReleaseDAO: updateRelease",
             $this->mysqli,
@@ -239,10 +223,9 @@ class GameReleaseDAO {
                 `date` = ?,
                 `license` = ?,
                 `type` = ?,
-                `continent_id` = ?,
                 `pub_dev_id` = ?
             WHERE id = ?",
-            "ssssiii", $name, $date, $license, $type, $continent_id, $publisher_id, $release_id
+            "ssssii", $name, $date, $license, $type, $publisher_id, $release_id
         );
 
         $stmt->close();

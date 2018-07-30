@@ -453,6 +453,21 @@
     text-align: center;
 }
 
+.release_list img.location_flag {
+    display: inline;
+    vertical-align: middle;
+    width: 24px;
+    opacity: .8;
+    margin-right: 5px;
+    margin-top: 3px;
+    margin-bottom: 2px;
+    border: solid 1px #ccc;
+}
+
+.release_list table.primary_table_list td {
+    vertical-align: top;
+}
+
 //*****Games Reviews*********/
 
 .games_detail_review_container {
