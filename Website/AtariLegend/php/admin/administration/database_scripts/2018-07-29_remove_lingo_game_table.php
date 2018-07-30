@@ -4,7 +4,7 @@
  **************************************************************************/
 
 // Unique identifier set by developer.
-$database_update_id = 160;
+$database_update_id = 162;
 
 // Description of what the change will do.
 $update_description = "Remove the lingo_game table";

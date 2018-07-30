@@ -4,7 +4,7 @@
  **************************************************************************/
 
 // Unique identifier set by developer.
-$database_update_id = 162;
+$database_update_id = 164;
 
 // Description of what the change will do.
 $update_description = "Rename the column names of the language table";
