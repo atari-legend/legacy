@@ -397,8 +397,10 @@ while ($developers = $sql_developer->fetch_array(MYSQLI_BOTH)) {
 //***********************************************************************************
 //AKA's
 //***********************************************************************************
-$sql_aka = $mysqli->query("SELECT * FROM game_aka WHERE game_id='$game_id'") or die("Couldn't query aka games");
-
+$sql_aka = $mysqli->query("SELECT * FROM game_aka 
+                           LEFT JOIN game_aka_language ON (game_aka.game_aka_id = game_aka_language.game_aka_id)
+                           LEFT JOIN language ON (language.id = game_aka_language.language_id)
+                           WHERE game_id='$game_id'") or die("Couldn't query aka games");
 $nr_aka = 0;
 $game_akas = [];
 while ($aka = $sql_aka->fetch_array(MYSQLI_BOTH)) {
@@ -406,6 +408,7 @@ while ($aka = $sql_aka->fetch_array(MYSQLI_BOTH)) {
     $smarty->append('aka', array(
         'game_aka_name' => $aka['aka_name'],
         'game_id' => $aka['game_id'],
+        'language' => $aka['name'],
         'game_aka_id' => $aka['game_aka_id']
     ));
     $nr_aka++;
