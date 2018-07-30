@@ -68,11 +68,22 @@
                             <td class="w-60">{$release->getLicense()}</td>
                         </tr>
                     {/if}
-                    {if $release->getContinent() != null}
+                    {if $release_location[$release->getId()]}
                         <tr>
-                            <td class="w-30"><span class="games_main_detail_info_right">Region</span></td>
+                            <td class="w-30"><span class="games_main_detail_info_right">Locations</span></td>
                             <td class="w-5">-</td>
-                            <td class="w-60">{$release->getContinent()->getName()}</td>
+                            <td class="w-60">
+                                {foreach from=$release_location[$release->getId()] item=location_id name=location}
+                                    <div>
+                                        {if $locations[$location_id]->getCountryISO2() != null}
+                                            <img src="../../themes/templates/1/includes/img/vendor/country-flags-1.0/{$locations[$location_id]->getCountryISO2()|lower}.svg"
+                                                class="location_flag"
+                                                alt="Flag of {$locations[$location_id]->getName()|escape}">
+                                        {/if}
+                                        {$locations[$location_id]->getName()}
+                                    </div>
+                                {/foreach}
+                            </td>
                         </tr>
                     {/if}
 
