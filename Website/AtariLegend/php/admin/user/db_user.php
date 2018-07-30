@@ -239,6 +239,9 @@ if (isset($action) and $action == 'modify_user') {
     if ($user_af == 'http://') {
         $user_af = '';
     }
+    
+    if (isset($user_inactive)) { $user_inactive = '1'; } else { $user_inactive = '0';}
+    if (isset($user_show_email)) { $user_show_email = '1'; } else { $user_show_email = '0';}
 
     if (isset($_POST['pmd5']) &&  $_POST['pmd5'] != '' && isset($_POST['p']) && $_POST['p'] != '') {
         $user_name = $mysqli->real_escape_string($user_name);
@@ -247,20 +250,14 @@ if (isset($action) and $action == 'modify_user') {
         $random_salt = hash('sha512', uniqid(mt_rand(1, mt_getrandmax()), true));//create random salt
         $update_password = hash('sha512', $sha512 . $random_salt); // Create salted password
 
-        if (isset($user_inactive)) {
-            $mysqli->query("UPDATE users SET userid='$user_name', password='$md5pass', sha512_password='$update_password', salt='$random_salt', email='$user_email', permission='$user_permission', user_website='$user_website', user_fb='$user_fb', user_twitter='$user_twitter', user_af='$user_af', inactive='$user_inactive' WHERE user_id='$user_id_selected'");
-        } else {
-            $mysqli->query("UPDATE users SET userid='$user_name', password='$md5pass', sha512_password='$update_password', salt='$random_salt', email='$user_email', permission='$user_permission', user_website='$user_website', user_fb='$user_fb', user_twitter='$user_twitter', user_af='$user_af', inactive=' ' WHERE user_id='$user_id_selected'");
-        }
+        $mysqli->query("UPDATE users SET userid='$user_name', password='$md5pass', sha512_password='$update_password', salt='$random_salt', email='$user_email', permission='$user_permission', user_website='$user_website', user_fb='$user_fb', user_twitter='$user_twitter', user_af='$user_af', inactive=$user_inactive, show_email='$user_show_email' WHERE user_id='$user_id_selected'") or die($mysqli->error);
+       
         $_SESSION['edit_message'] = "User data modified";
     } else {
         $user_name = $mysqli->real_escape_string($user_name);
 
-        if (isset($user_inactive)) {
-            $mysqli->query("UPDATE users SET userid='$user_name', email='$user_email', permission='$user_permission', user_website='$user_website', user_fb='$user_fb', user_twitter='$user_twitter', user_af='$user_af', inactive='$user_inactive' WHERE user_id='$user_id_selected'");
-        } else {
-            $mysqli->query("UPDATE users SET userid='$user_name', email='$user_email', permission='$user_permission', user_website='$user_website', user_fb='$user_fb', user_twitter='$user_twitter', user_af='$user_af', inactive='0' WHERE user_id='$user_id_selected'");
-        }
+        $mysqli->query("UPDATE users SET userid='$user_name', email='$user_email', permission='$user_permission', user_website='$user_website', user_fb='$user_fb', user_twitter='$user_twitter', user_af='$user_af', inactive='$user_inactive', show_email='$user_show_email' WHERE user_id='$user_id_selected'") or die($mysqli->error);
+
         $_SESSION['edit_message'] = "User data modified";
     }
 
