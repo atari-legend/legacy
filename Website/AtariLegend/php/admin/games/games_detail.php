@@ -144,9 +144,13 @@ $smarty->assign('pubdevs', $pubDevDao->getPubDevsStartingWith("^[0-9]"));
 //let's get the publishers for this game
 $sql_publisher = $mysqli->query("SELECT * FROM pub_dev
                  LEFT JOIN game_publisher ON ( pub_dev.pub_dev_id = game_publisher.pub_dev_id )
+                 -- Developer role is still needed here as it's the old game_extra_info tables
+                 -- It's still used by publishers that are linked directly to a game, which
+                 -- need to be cleaned up. That will be removed once all game publishers have
+                 -- been merged into releases
                  LEFT JOIN developer_role ON ( game_publisher.game_extra_info_id = developer_role.id )
                  LEFT JOIN continent ON ( game_publisher.continent_id = continent.continent_id )
-                 WHERE game_publisher.game_id = '$game_id' ORDER BY pub_dev_name ASC") or die("Couldn't query publishers");
+                 WHERE game_publisher.game_id = '$game_id' ORDER BY pub_dev_name ASC") or die("Couldn't query publishers: ".$mysqli->error);
 
 while ($publishers = $sql_publisher->fetch_array(MYSQLI_BOTH)) {
     $smarty->append('publishers', array(
@@ -162,7 +166,7 @@ while ($publishers = $sql_publisher->fetch_array(MYSQLI_BOTH)) {
 //let's get the developers for this game
 $sql_developer = $mysqli->query("SELECT * FROM pub_dev
                   LEFT JOIN game_developer ON ( pub_dev.pub_dev_id = game_developer.dev_pub_id )
-                  LEFT JOIN developer_role ON ( game_developer.developer_role_id = developer_role.id )                 
+                  LEFT JOIN developer_role ON ( game_developer.developer_role_id = developer_role.id )
                   WHERE game_developer.game_id = '$game_id' ORDER BY pub_dev_name ASC") or die("Couldn't query developers");
 
 while ($developers = $sql_developer->fetch_array(MYSQLI_BOTH)) {
@@ -188,7 +192,7 @@ while ($continent = $sql_continent->fetch_array(MYSQLI_BOTH)) {
 }
 
 //**********************************************************************************
-//Get the extra game info
+//Get the developer roles
 //**********************************************************************************
 
 $sql_developer_role = $mysqli->query("SELECT * FROM developer_role ORDER BY role ASC") or die("Couldn't query developer_role database");
