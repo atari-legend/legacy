@@ -252,7 +252,9 @@ $smarty->assign('nr_similar', $similar['C']);
 //AKA's
 //***********************************************************************************
 
-$sql_aka = $mysqli->query("SELECT * FROM game_aka WHERE game_id='$game_id'") or die("Couldn't query aka games");
+$sql_aka = $mysqli->query("SELECT * FROM game_aka 
+                           LEFT JOIN game_aka_language ON (game_aka.game_aka_id = game_aka_language.game_aka_id)
+                           WHERE game_id='$game_id'") or die("Couldn't query aka games");
 
 $nr_aka = 0;
 
@@ -260,12 +262,26 @@ while ($aka = $sql_aka->fetch_array(MYSQLI_BOTH)) {
     $smarty->append('aka', array(
         'game_aka_name' => $aka['aka_name'],
         'game_id' => $aka['game_id'],
+        'language_id' => $aka['language_id'],
         'game_aka_id' => $aka['game_aka_id']
     ));
     $nr_aka++;
 }
 
 $smarty->assign("nr_aka", $nr_aka);
+
+//**********************************************************************************
+//Get the languages
+//**********************************************************************************
+
+$sql_languages = $mysqli->query("SELECT * FROM language ORDER BY name ASC") or die("Couldn't query language database");
+
+while ($languages = $sql_languages->fetch_array(MYSQLI_BOTH)) {
+    $smarty->append('languages', array(
+        'id' => $languages['id'],
+        'name' => $languages['name']
+    ));
+}
 
 //***********************************************************************************
 //The game statistics below on the page

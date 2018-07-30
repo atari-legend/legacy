@@ -123,8 +123,7 @@ $('#input-tags3').selectize({
                 <legend class="primary_legend">Basic game info</legend>
 
                 <div class="help-hint">
-                    Overhere you can add additional game info. Just select what you think is necessary, and press the modify button to link it all to the game.
-                    When you press the delete button, the complete game and all table entries linked to this game entity will be removed from the database!
+                    Overhere you can add additional game info. If you want to see the details of a release, use the links on the left. To delete a complete game and all its releases, press the delete button on the right.
                 </div>
                 <br>
 
@@ -249,10 +248,7 @@ $('#input-tags3').selectize({
             <fieldset class="secondary_fieldset">
                 <legend class="primary_legend">Development info</legend>
                 <div class="help-hint">
-                    You can add as many developers/creators as you like to a game.
-                    Use the continent dropdown for example to add in which part of the world
-                    the game was released by that particular Publisher. The info dropdown
-                    is used for adding budget release info, or arcade release info.
+                    You can add as many developers/creators as you like to a game. Use the dropdown to add a role to the person or team.
                 </div>
             <br>
 
@@ -402,35 +398,56 @@ $('#input-tags3').selectize({
 
             <div>
                 <div id="gd_game_aka">
-                    <form action="../games/db_games_detail.php" method="post" name="aka" id="aka">
-                        <input type="hidden" name="action" value="game_aka">
-                        <input type="hidden" name="game_id" value="{$game_id}">
+
 
                         <fieldset class="secondary_fieldset">
                         <legend class="primary_legend">Add game AKA</legend>
 
                         <div class="help-hint">
-                            If the game is known by other names enter them here. Note that if the name is country specific,
-                            it's probably better to create a separate release for it.
+                            If the game is known by other names that are not considered a seperate release, enter the title(s) here. Use the dropdown to add the language of the AKA title (optional).
                         </div>
                         <br>
                         {if $nr_aka <> 0}
                             {foreach from=$aka item=line}
+                            <form action="../games/db_games_detail.php" method="post" name="aka" id="aka">
+                                <input type="hidden" name="action" value="update_aka">
+                                <input type="hidden" name="game_id" value="{$line.game_id}">
+                                <input type="hidden" name="game_aka_id" value="{$line.game_aka_id}">
                                 <a href="../games/db_games_detail.php?game_aka_id={$line.game_aka_id}&action=delete_aka&game_id={$line.game_id}"
                                     class="left_nav_link"
                                     onclick="javascript:return confirm('This AKA will be removed from the game')">
                                     <span class="fa fa-fw fa-trash"></span>
                                 </a>
                                 <input type="text" value="{$line.game_aka_name}" class="standard_input input_large" disabled>
+
+                                <select name="new_language_id"
+                                    onchange="jQuery('#update-aka-{$line.game_aka_id}').show()"
+                                    class="standard_select select_medium">
+                                    <option value="">-</option>
+                                    {foreach from=$languages item=language}
+                                        <option value="{$language.id}" {if $line.language_id eq $language.id} selected{/if}>{$language.name}</option>
+                                    {/foreach}
+                                </select>
+                                <input type="submit" id="update-aka-{$line.game_aka_id}" style="display: none;" class="secondary_button" value="Update">
                                 <br>
+                            </form>
                             {/foreach}
                         {/if}
                         <hr class="separator_add">
                         <span class="fa fa-fw"></span>
-                        <input type="text" name="game_aka"  class="standard_input input_large" placeholder="Enter new AKA" required>
-                        <input type="submit" name="valider" value="Add new AKA" class="secondary_button">
+                        <form action="../games/db_games_detail.php" method="post" name="aka" id="aka">
+                            <input type="hidden" name="action" value="game_aka">
+                            <input type="hidden" name="game_id" value="{$game_id}">
+                            <input type="text" name="game_aka"  class="standard_input input_large" placeholder="Enter new AKA" required>
+                            <select name="language_id" class="standard_select select_medium">
+                                <option value="">-</option>
+                                {foreach from=$languages item=language}
+                                    <option value="{$language.id}">{$language.name}</option>
+                                {/foreach}
+                            </select>
+                            <input type="submit" name="valider" value="Add new AKA" class="secondary_button">
+                        </form>
                     </fieldset>
-                    </form>
                 </div>
                 <br>
 
