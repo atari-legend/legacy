@@ -73,7 +73,8 @@ function user_stats()
                 <b>User Website :</b> Link to your personal website. Make sure to start with the 'http://'.<br><br>
                 <b>Facebook profile :</b> Link to your facebook profile page eg. 'https://www.facebook.com/atarilegend/'<br><br>
                 <b>AF profile :</b> Link to your Atari-Forum profile page eg. 'http://www.atari-forum.com/memberlist.php?mode=viewprofile&u=5'<br><br>
-                <b>Twitter Profile :</b> Link to your Twitter profile page eg. 'https://twitter.com/MaartenMartens'
+                <b>Twitter Profile :</b> Link to your Twitter profile page eg. 'https://twitter.com/MaartenMartens'<br><br>
+                <b>Show email :</b> Use this field if you want other AtariLegend members to be able to see your email address when you write comments and other things
             </p>
         </div>
     {/if}
@@ -165,6 +166,17 @@ function user_stats()
                     <div class="user_details_row">
                         <div class="user_details_input">
                             <input type="hidden" value="1" id="user_inactive" name="user_inactive" {if $users.inactive == '1'} checked {/if}>
+                        </div>
+                    </div>
+                    {/if}
+                    {if $user_session.permission != '2' OR ( $user_session.permission == '2' AND $user_session.user_id == $users.user_id )}
+                    <div class="user_details_row">
+                        <div class="user_details_text">Show Email :</div>
+                        <div class="user_details_input">
+                            <div class="checkbox" id="checkbox_user_detail">
+                                <input type="checkbox" value="1" id="user_show_email" name="user_show_email" {if $users.show_email == '1'} checked {/if}>
+                                <label for="user_show_email"></label>
+                            </div>
                         </div>
                     </div>
                     {/if}
