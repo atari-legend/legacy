@@ -4,7 +4,7 @@
  **************************************************************************/
 
 // Unique identifier set by developer.
-$database_update_id = 161;
+$database_update_id = 163;
 
 // Description of what the change will do.
 $update_description = "Rename the lingo to language table";
