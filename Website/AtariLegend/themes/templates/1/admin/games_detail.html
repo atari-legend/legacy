@@ -474,8 +474,8 @@ $('#input-tags3').selectize({
                                     <select name="new_game_extra_info_id" disabled
                                         class="standard_select select_medium">
                                         <option value="">-</option>
-                                        {foreach from=$game_extra_info item=info}
-                                            <option value="{$info.game_extra_info_id}" {if $publisher.game_extra_info_id eq $info.game_extra_info_id} selected{/if}>{$info.game_extra_info}</option>
+                                        {foreach from=$developer_role item=role}
+                                            <option value="{$role.developer_role_id}" {if $publisher.game_extra_info_id eq $role.developer_role_id} selected{/if}>{$role.developer_role}</option>
                                         {/foreach}
                                     </select>
 

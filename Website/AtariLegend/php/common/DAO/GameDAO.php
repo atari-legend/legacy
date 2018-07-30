@@ -147,21 +147,12 @@ class GameDAO {
      * Remove a developer from a game
      * @param number $game_id ID of the game to remove the developer from
      * @param number $pub_dev_id ID of the developer to remove
-     * @param number $continent_id ID of the continent to remove
-     * @param number $game_extra_info_id ID of the extra info to remove
+     * @param number $developer_role_id ID of the developer role to remove
      */
     public function removeDeveloper($game_id, $pub_dev_id, $developer_role_id) {
         $query = "DELETE FROM game_developer WHERE game_id = ? AND dev_pub_id = ?";
         $bind_string = "ii";
         $bind_params = array($game_id, $pub_dev_id);
-
-        /* if ($continent_id != null && $continent_id != '') {
-            $query .= " AND continent_id = ?";
-            $bind_string .= "i";
-            $bind_params[] = $continent_id;
-        } else {
-            $query .= " AND continent_id IS NULL";
-        } */
 
         if ($developer_role_id != null && $developer_role_id != '') {
             $query .= " AND developer_role_id = ?";
@@ -186,8 +177,7 @@ class GameDAO {
      * Add a developer to a game
      * @param number $game_id ID of the game to add the developer to
      * @param number $pub_dev_id ID of the developer to add
-     * @param number $continent_id ID of the continent to add
-     * @param number $game_extra_info_id ID of the extra info to add
+     * @param number $developer_role_id ID of the developer role to add
      */
     public function addDeveloper($game_id, $pub_dev_id, $developer_role_id) {
         $stmt = \AL\Db\execute_query(
@@ -196,7 +186,6 @@ class GameDAO {
             "INSERT INTO game_developer (game_id, dev_pub_id, developer_role_id)
             VALUES (?, ?, ?)",
             "iii", $game_id, $pub_dev_id,
-            //$continent_id == '' ? null : $continent_id,
             $developer_role_id == '' ? null : $developer_role_id
         );
 
@@ -207,16 +196,13 @@ class GameDAO {
      * Update the developer on a game
      * @param number $game_id ID of the game to update the developer for
      * @param number $pub_dev_id ID of the developer to update
-     * @param number $game_extra_info_id ID of the extra info to update
-     * @param number $new_continent_id New ID of the continent to update
-     * @param number $new_game_extra_info_id New ID of the extra info to update
+     * @param number $developer_role_id ID of the developer role to update
+     * @param number $new_developer_role_id New ID of the developer role to update
      */
     public function updateDeveloper(
         $game_id,
         $pub_dev_id,
-        $continent_id,
         $developer_role_id,
-        //$new_continent_id,
         $new_developer_role_id
     ) {
 
@@ -224,18 +210,9 @@ class GameDAO {
             WHERE game_id = ? AND dev_pub_id = ?";
         $bind_string = "iii";
         $bind_params = array(
-            //$new_continent_id != '' ? $new_continent_id : null,
             $new_developer_role_id != '' ? $new_developer_role_id : null,
             $game_id,
             $pub_dev_id);
-
-        /* if ($continent_id != null && $continent_id != '') {
-            $query .= " AND continent_id = ?";
-            $bind_string .= "i";
-            $bind_params[] = $continent_id;
-        } else {
-            $query .= " AND continent_id IS NULL";
-        } */
 
         if ($developer_role_id != null && $developer_role_id != '') {
             $query .= " AND developer_role_id = ?";

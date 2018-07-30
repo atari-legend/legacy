@@ -307,6 +307,10 @@ if ($nr_interviews > 0) {
 $sql_publisher = $mysqli->query("SELECT * FROM pub_dev
                  LEFT JOIN pub_dev_text ON (pub_dev.pub_dev_id = pub_dev_text.pub_dev_id )
                  LEFT JOIN game_publisher ON ( pub_dev.pub_dev_id = game_publisher.pub_dev_id )
+                 -- Developer role is still needed here as it's the old game_extra_info tables
+                 -- It's still used by publishers that are linked directly to a game, which
+                 -- need to be cleaned up. That will be removed once all game publishers have
+                 -- been merged into releases
                  LEFT JOIN developer_role ON ( game_publisher.game_extra_info_id = developer_role.id )
                  LEFT JOIN continent ON ( game_publisher.continent_id = continent.continent_id )
                  WHERE game_publisher.game_id = '$game_id' ORDER BY pub_dev_name ASC") or die("Couldn't query publishers");
