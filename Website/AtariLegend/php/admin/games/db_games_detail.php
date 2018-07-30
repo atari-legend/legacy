@@ -82,6 +82,7 @@ if (isset($action) and $action == 'delete_aka') {
     create_log_entry('Games', $game_id, 'AKA', $game_aka_id, 'Delete', $_SESSION['user_id']);
 
     $sql_aka = $mysqli->query("DELETE FROM game_aka WHERE game_aka_id = '$game_aka_id' AND game_id = '$game_id'") or die("Couldn't delete aka");
+    $sql_aka_language = $mysqli->query("DELETE FROM game_aka_language WHERE game_aka_id = '$game_aka_id'") or die("Couldn't delete aka language");
 
     $_SESSION['edit_message'] = "AKA link has been deleted";
     header("Location: ../games/games_detail.php?game_id=$game_id#gd_game_aka");
@@ -96,11 +97,32 @@ if (isset($action) and $action == 'game_aka') {
     $stmt->bind_param("is", $game_id, $game_aka) or die($mysqli->error);
     $stmt->execute() or die($mysqli->error);
     $stmt->close();
-
+    
     $new_aka_id = $mysqli->insert_id;
+    
+    $stmt = $mysqli->prepare("INSERT INTO game_aka_language (language_id, game_aka_id) VALUES (?,?)") or die($mysqli->error);
+    $stmt->bind_param("ii", $language_id, $new_aka_id) or die($mysqli->error);
+    $stmt->execute() or die($mysqli->error);
+    $stmt->close();
+    
     create_log_entry('Games', $game_id, 'AKA', $new_aka_id, 'Insert', $_SESSION['user_id']);
 
     $_SESSION['edit_message'] = "AKA link has been added";
+    header("Location: ../games/games_detail.php?game_id=$game_id#gd_game_aka");
+}
+
+//***********************************************************************************
+//If update aka link has been pressed
+//***********************************************************************************
+if (isset($action) and $action == 'update_aka') {
+    create_log_entry('Games', $game_id, 'AKA', $game_aka_id, 'Update', $_SESSION['user_id']);
+
+    $stmt = $mysqli->prepare("UPDATE game_aka_language SET language_id = ? WHERE game_aka_id = ?") or die($mysqli->error);
+    $stmt->bind_param("ii", $new_language_id, $game_aka_id) or die($mysqli->error);
+    $stmt->execute() or die($mysqli->error);
+    $stmt->close();
+
+    $_SESSION['edit_message'] = "AKA link has been updated";
     header("Location: ../games/games_detail.php?game_id=$game_id#gd_game_aka");
 }
 
