@@ -21,7 +21,8 @@ AND column_name = 'game_extra_info_id' LIMIT 1";
 
 // Database change
 $database_update_sql = "ALTER TABLE game_developer
-    CHANGE game_extra_info_id developer_role_id int(11) COMMENT 'Role the developer had on the game'";
+    CHANGE game_extra_info_id developer_role_id int(11) COMMENT 'Role the developer had on the game',
+    ADD FOREIGN KEY (developer_role_id) REFERENCES developer_role(id)";
 
 // If the update should auto execute without user interaction set to "yes".
 $database_autoexecute = "yes";
