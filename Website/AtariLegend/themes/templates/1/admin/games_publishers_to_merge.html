@@ -31,7 +31,7 @@
                                 <td><a href="games_detail.php?game_id={$row.game_id}#gd_publisher_info" class="standard_tile_text_left">{$row.game_name}</a></td>
                                 <td>{$row.pub_dev_name|default:'-'}</td>
                                 <td>{$row.continent_name|default}</td>
-                                <td>{$row.game_extra_info|default}</td>
+                                <td>{$row.developer_role|default}</td>
                                 <td>{$row.release_date|default:'-'}</td>
                             </tr>
                         {/if}

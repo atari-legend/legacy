@@ -22,8 +22,7 @@ switch ($action) {
         $gameDao->removeDeveloper(
             $game_id,
             $pub_dev_id,
-            $continent_id,
-            $game_extra_info_id
+            $developer_role_id
         );
 
         $changeLogDao->insertChangeLog(
@@ -47,8 +46,7 @@ switch ($action) {
         $gameDao->addDeveloper(
             $game_id,
             $pub_dev_id,
-            $continent_id,
-            $game_extra_info_id
+            $developer_role_id
         );
 
         $changeLogDao->insertChangeLog(
@@ -72,10 +70,8 @@ switch ($action) {
         $gameDao->updateDeveloper(
             $game_id,
             $pub_dev_id,
-            $continent_id,
-            $game_extra_info_id,
-            $new_continent_id,
-            $new_game_extra_info_id);
+            $developer_role_id,
+            $new_developer_role_id);
 
         $changeLogDao->insertChangeLog(
             new \AL\Common\Model\Database\ChangeLog(
