@@ -398,8 +398,7 @@ while ($developers = $sql_developer->fetch_array(MYSQLI_BOTH)) {
 //AKA's
 //***********************************************************************************
 $sql_aka = $mysqli->query("SELECT * FROM game_aka 
-                           LEFT JOIN game_aka_language ON (game_aka.game_aka_id = game_aka_language.game_aka_id)
-                           LEFT JOIN language ON (language.id = game_aka_language.language_id)
+                           LEFT JOIN language ON (language.id = game_aka.language_id)
                            WHERE game_id='$game_id'") or die("Couldn't query aka games");
 $nr_aka = 0;
 $game_akas = [];
