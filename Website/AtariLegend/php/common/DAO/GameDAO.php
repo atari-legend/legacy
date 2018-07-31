@@ -147,28 +147,19 @@ class GameDAO {
      * Remove a developer from a game
      * @param number $game_id ID of the game to remove the developer from
      * @param number $pub_dev_id ID of the developer to remove
-     * @param number $continent_id ID of the continent to remove
-     * @param number $game_extra_info_id ID of the extra info to remove
+     * @param number $developer_role_id ID of the developer role to remove
      */
-    public function removeDeveloper($game_id, $pub_dev_id, $continent_id, $game_extra_info_id) {
+    public function removeDeveloper($game_id, $pub_dev_id, $developer_role_id) {
         $query = "DELETE FROM game_developer WHERE game_id = ? AND dev_pub_id = ?";
         $bind_string = "ii";
         $bind_params = array($game_id, $pub_dev_id);
 
-        if ($continent_id != null && $continent_id != '') {
-            $query .= " AND continent_id = ?";
+        if ($developer_role_id != null && $developer_role_id != '') {
+            $query .= " AND developer_role_id = ?";
             $bind_string .= "i";
-            $bind_params[] = $continent_id;
+            $bind_params[] = $developer_role_id;
         } else {
-            $query .= " AND continent_id IS NULL";
-        }
-
-        if ($game_extra_info_id != null && $game_extra_info_id != '') {
-            $query .= " AND game_extra_info_id = ?";
-            $bind_string .= "i";
-            $bind_params[] = $game_extra_info_id;
-        } else {
-            $query .= " AND game_extra_info_id IS NULL";
+            $query .= " AND developer_role_id IS NULL";
         }
 
 
@@ -186,18 +177,16 @@ class GameDAO {
      * Add a developer to a game
      * @param number $game_id ID of the game to add the developer to
      * @param number $pub_dev_id ID of the developer to add
-     * @param number $continent_id ID of the continent to add
-     * @param number $game_extra_info_id ID of the extra info to add
+     * @param number $developer_role_id ID of the developer role to add
      */
-    public function addDeveloper($game_id, $pub_dev_id, $continent_id, $game_extra_info_id) {
+    public function addDeveloper($game_id, $pub_dev_id, $developer_role_id) {
         $stmt = \AL\Db\execute_query(
             "GameDAO: addDeveloper",
             $this->mysqli,
-            "INSERT INTO game_developer (game_id, dev_pub_id, continent_id, game_extra_info_id)
-            VALUES (?, ?, ?, ?)",
-            "iiii", $game_id, $pub_dev_id,
-            $continent_id == '' ? null : $continent_id,
-            $game_extra_info_id == '' ? null : $game_extra_info_id
+            "INSERT INTO game_developer (game_id, dev_pub_id, developer_role_id)
+            VALUES (?, ?, ?)",
+            "iii", $game_id, $pub_dev_id,
+            $developer_role_id == '' ? null : $developer_role_id
         );
 
         $stmt->close();
@@ -207,43 +196,30 @@ class GameDAO {
      * Update the developer on a game
      * @param number $game_id ID of the game to update the developer for
      * @param number $pub_dev_id ID of the developer to update
-     * @param number $continent_id ID of the continent to update
-     * @param number $game_extra_info_id ID of the extra info to update
-     * @param number $new_continent_id New ID of the continent to update
-     * @param number $new_game_extra_info_id New ID of the extra info to update
+     * @param number $developer_role_id ID of the developer role to update
+     * @param number $new_developer_role_id New ID of the developer role to update
      */
     public function updateDeveloper(
         $game_id,
         $pub_dev_id,
-        $continent_id,
-        $game_extra_info_id,
-        $new_continent_id,
-        $new_game_extra_info_id
+        $developer_role_id,
+        $new_developer_role_id
     ) {
 
-        $query = "UPDATE game_developer SET continent_id = ?, game_extra_info_id = ?
+        $query = "UPDATE game_developer SET developer_role_id = ?
             WHERE game_id = ? AND dev_pub_id = ?";
-        $bind_string = "iiii";
+        $bind_string = "iii";
         $bind_params = array(
-            $new_continent_id != '' ? $new_continent_id : null,
-            $new_game_extra_info_id != '' ? $new_game_extra_info_id : null,
+            $new_developer_role_id != '' ? $new_developer_role_id : null,
             $game_id,
             $pub_dev_id);
 
-        if ($continent_id != null && $continent_id != '') {
-            $query .= " AND continent_id = ?";
+        if ($developer_role_id != null && $developer_role_id != '') {
+            $query .= " AND developer_role_id = ?";
             $bind_string .= "i";
-            $bind_params[] = $continent_id;
+            $bind_params[] = $developer_role_id;
         } else {
-            $query .= " AND continent_id IS NULL";
-        }
-
-        if ($game_extra_info_id != null && $game_extra_info_id != '') {
-            $query .= " AND game_extra_info_id = ?";
-            $bind_string .= "i";
-            $bind_params[] = $game_extra_info_id;
-        } else {
-            $query .= " AND game_extra_info_id IS NULL";
+            $query .= " AND developer_role_id IS NULL";
         }
 
         $stmt = \AL\Db\execute_query(
