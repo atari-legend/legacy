@@ -253,7 +253,7 @@ $smarty->assign('nr_similar', $similar['C']);
 //***********************************************************************************
 
 $sql_aka = $mysqli->query("SELECT * FROM game_aka 
-                           LEFT JOIN game_aka_language ON (game_aka.game_aka_id = game_aka_language.game_aka_id)
+                           LEFT JOIN language ON (game_aka.language_id = language.id)
                            WHERE game_id='$game_id'") or die("Couldn't query aka games");
 
 $nr_aka = 0;

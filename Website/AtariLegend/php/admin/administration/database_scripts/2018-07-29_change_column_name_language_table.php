@@ -20,11 +20,11 @@ AND table_name = 'language'
 AND column_name = 'lingo_id' LIMIT 1";
 
 // Database change
-$database_update_sql = "ALTER TABLE language
-	CHANGE lingo_id id int(11),
-    CHANGE lingo_name name varchar(50) COMMENT 'language name',
-    CHANGE lingo_short short varchar(3) COMMENT 'language short description'";
-
+$database_update_sql = "ALTER TABLE language 
+    CHANGE lingo_id id int(11), 
+    CHANGE lingo_name name varchar(50) COMMENT 'language name', 
+    DROP COLUMN lingo_short"; 
+ 
 // If the update should auto execute without user interaction set to "yes".
 $database_autoexecute = "yes";
 
