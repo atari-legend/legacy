@@ -21,7 +21,7 @@ AND column_name = 'language_id' LIMIT 1";
 
 // Database change
 $database_update_sql = "ALTER TABLE game_aka
-    ADD COLUMN language_id int(11), 
+    ADD COLUMN language_id int(11) COMMENT 'Foreign key to language table', 
     ADD FOREIGN KEY (language_id) REFERENCES language(id)"; 
  
 // If the update should auto execute without user interaction set to "yes".
