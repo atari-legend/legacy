@@ -92,16 +92,12 @@ if (isset($action) and $action == 'delete_aka') {
 //***********************************************************************************
 if (isset($action) and $action == 'game_aka') {
     
-    if ($language_id == ""){
-        $stmt = $mysqli->prepare("INSERT INTO game_aka (game_id, aka_name) VALUES (?,?)") or die($mysqli->error);
-        $stmt->bind_param("is", $game_id, $game_aka) or die($mysqli->error);
+    if ($language_id == ""){ 
+        $language_id = null;
     }
-    else{
-        $stmt = $mysqli->prepare("INSERT INTO game_aka (game_id, aka_name, language_id) VALUES (?,?,?)") or die($mysqli->error);
-        $stmt->bind_param("isi", $game_id, $game_aka, $language_id) or die($mysqli->error);
-    }
-    
-    
+   
+    $stmt = $mysqli->prepare("INSERT INTO game_aka (game_id, aka_name, language_id) VALUES (?,?,?)") or die($mysqli->error);
+    $stmt->bind_param("isi", $game_id, $game_aka, $language_id) or die($mysqli->error);
     $stmt->execute() or die($mysqli->error);
     $stmt->close();
    
@@ -117,14 +113,12 @@ if (isset($action) and $action == 'game_aka') {
 if (isset($action) and $action == 'update_aka') {
     create_log_entry('Games', $game_id, 'AKA', $game_aka_id, 'Update', $_SESSION['user_id']);
     
-    if ($new_language_id == ""){    
-        $stmt = $mysqli->prepare("UPDATE game_aka SET language_id = ? WHERE game_aka_id = ?") or die($mysqli->error);
-        $stmt->bind_param("ii", $a = null, $game_aka_id) or die($mysqli->error);
-    } else {
-        $stmt = $mysqli->prepare("UPDATE game_aka SET language_id = ? WHERE game_aka_id = ?") or die($mysqli->error);
-        $stmt->bind_param("ii", $new_language_id, $game_aka_id) or die($mysqli->error);
+    if ($new_language_id == ""){ 
+        $new_language_id = null;
     }
-    
+
+    $stmt = $mysqli->prepare("UPDATE game_aka SET language_id = ? WHERE game_aka_id = ?") or die($mysqli->error);
+    $stmt->bind_param("ii", $new_language_id, $game_aka_id) or die($mysqli->error);
     $stmt->execute() or die($mysqli->error);
     $stmt->close();
 
