@@ -20,6 +20,7 @@ class GameSubmission {
     private $email;
     private $join_date;
     private $karma;
+    private $show_email;
     private $avatar_ext;
     private $user_subm_count;
     private $user_comment_count;
@@ -38,6 +39,7 @@ class GameSubmission {
         $email,
         $join_date,
         $karma,
+        $show_email,
         $avatar_ext,
         $user_subm_count,
         $user_comment_count,
@@ -62,6 +64,7 @@ class GameSubmission {
         }
        
         $this->karma = $karma;
+        $this->show_email = $show_email;
         $this->user_subm_count = $user_subm_count;
         $this->user_comment_count = $user_comment_count;
         
@@ -114,6 +117,10 @@ class GameSubmission {
 
     public function getKarma() {
         return $this->karma;
+    }
+    
+    public function getShowEmail() {
+        return $this->show_email;
     }
     
     public function getAvatarImage() {

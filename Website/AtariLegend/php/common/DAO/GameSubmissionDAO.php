@@ -31,6 +31,7 @@ class GameSubmissionDAO {
                 users.email,
                 users.join_date,
                 users.karma,
+                users.show_email,
                 users.avatar_ext,
                 (SELECT COUNT(*) FROM game_submitinfo 
                     WHERE game_submitinfo.user_id = users.user_id) AS user_subm_count,
@@ -90,6 +91,7 @@ class GameSubmissionDAO {
             $email,
             $join_date,
             $karma,
+            $show_email,
             $avatar_ext,
             $user_subm_count,
             $user_comment_count
@@ -115,6 +117,7 @@ class GameSubmissionDAO {
                 $email,
                 $join_date,
                 $karma,
+                $show_email,
                 $avatar_ext,
                 $user_subm_count,
                 $user_comment_count,

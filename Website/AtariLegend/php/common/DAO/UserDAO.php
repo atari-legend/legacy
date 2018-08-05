@@ -28,6 +28,7 @@ class UserDAO {
                 email,
                 join_date,
                 karma,
+                show_email,
                 avatar_ext
             FROM users
             ORDER BY userid ASC",
@@ -42,6 +43,7 @@ class UserDAO {
             $email,
             $join_date,
             $karma,
+            $show_email,
             $avatar_ext
         );
 
@@ -54,6 +56,7 @@ class UserDAO {
                 $email,
                 $join_date,
                 $karma,
+                $show_email,
                 $avatar_ext,
                 0
             );

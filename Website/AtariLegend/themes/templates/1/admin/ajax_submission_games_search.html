@@ -63,12 +63,14 @@ The game submission search result page
                     <a href="../games/games_detail.php?game_id={$line->getGameId()}" class="standard_tile_link">{$line->getName()}</a>
                 </h4>
                 <ul class="submission_buttons">
-                    {if $line->getEmail() !== ''}
-                    <li class="primary_button jsSubmissionEmailButton">
-                        <a href="mailto:{$line->getEmail()}?subject=Submission for '{$line->getName()|escape:'url'}' at Atari Legend" class="links_addnew_link">
-                            <i class="fa fa-envelope" aria-hidden="true"></i>
-                        </a>
-                    </li>
+                    {if $line->getShowEmail() == '1'}
+                        {if $line->getEmail() !== ''}
+                        <li class="primary_button jsSubmissionEmailButton">
+                            <a href="mailto:{$line->getEmail()}?subject=Submission for '{$line->getName()|escape:'url'}' at Atari Legend" class="links_addnew_link">
+                                <i class="fa fa-envelope" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                        {/if}
                     {/if}
                     {if $line->getDone() == '1'}
                     {else}
@@ -95,12 +97,14 @@ The game submission search result page
                             </a>
                         </li>
                         <div class="dropdown_box" id="dropdown_box{$line->getSubmissionId()}">
-                            {if $line->getEmail() !== ''}
-                                <li class="dropdown_item">
-                                    <a href="mailto:{$line->getEmail()}?subject=Submission for '{$line->getName()|escape:'url'}' at Atari Legend" class="links_addnew_link">
-                                        Email
-                                    </a>
-                                </li>
+                            {if $line->getShowEmail() == '1'}
+                                {if $line->getEmail() !== ''}
+                                    <li class="dropdown_item">
+                                        <a href="mailto:{$line->getEmail()}?subject=Submission for '{$line->getName()|escape:'url'}' at Atari Legend" class="links_addnew_link">
+                                            Email
+                                        </a>
+                                    </li>
+                                {/if}
                             {/if}
                             {if $line->getDone() == '1'}
                             {else}
