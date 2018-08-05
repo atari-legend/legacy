@@ -1,13 +1,13 @@
 <?php
 /***************************************************************************
- *   add the show_email field to the user table
+ *   Convert inactive field of users table to boolean
  **************************************************************************/
 
 // Unique identifier set by developer.
-$database_update_id = 169;
+$database_update_id = 170;
 
 // Description of what the change will do.
-$update_description = "Add 'show_email' field to Users table";
+$update_description = "Convert inactive field of users table to boolean";
 
 // Should the database change query execute if test is "test_fail" or "test_success"
 $execute_condition = "test_success";
@@ -17,7 +17,7 @@ $test_condition = "SELECT * FROM information_schema.tables
 WHERE table_schema = '$db_databasename' AND table_name = 'users' LIMIT 1";
 
 // Database change
-$database_update_sql = "ALTER TABLE `users` ADD `show_email` BOOLEAN NULL DEFAULT FALSE COMMENT 'Display email address at comments'";
+$database_update_sql = "ALTER TABLE `users` CHANGE `inactive` `inactive` BOOLEAN NULL DEFAULT FALSE COMMENT 'Make user account inactive'";
 
 // If the update should auto execute without user interaction set to "yes".
 $database_autoexecute = "yes";
