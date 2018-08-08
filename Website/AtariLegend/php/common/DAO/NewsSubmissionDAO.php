@@ -31,6 +31,7 @@ class NewsSubmissionDAO {
                   users.email,
                   users.join_date,
                   users.karma,
+                  users.show_email,
                   users.avatar_ext,
                   (SELECT COUNT(*) 
                         FROM news_submission 
@@ -74,6 +75,7 @@ class NewsSubmissionDAO {
             $email,
             $join_date,
             $karma,
+            $show_email,
             $avatar_ext,
             $user_subm_count
         );
@@ -98,6 +100,7 @@ class NewsSubmissionDAO {
                 $email,
                 $join_date,
                 $karma,
+                $show_email,
                 $avatar_ext,
                 $user_subm_count
             );
@@ -134,6 +137,7 @@ class NewsSubmissionDAO {
             $email,
             $join_date,
             $karma,
+            $show_email,
             $avatar_ext,
             $user_subm_count
         );
@@ -158,6 +162,7 @@ class NewsSubmissionDAO {
                 $email,
                 $join_date,
                 $karma,
+                $show_email,
                 $avatar_ext,
                 $user_subm_count
             );
@@ -189,6 +194,7 @@ class NewsSubmissionDAO {
             users.email,
             users.join_date,
             users.karma,
+            users.show_email,
             users.avatar_ext,
             (SELECT COUNT(*) 
                 FROM news_submission 
@@ -215,6 +221,7 @@ class NewsSubmissionDAO {
             $email,
             $join_date,
             $karma,
+            $show_email,
             $avatar_ext,
             $user_subm_count
         );
@@ -241,6 +248,7 @@ class NewsSubmissionDAO {
                 $email,
                 $join_date,
                 $karma,
+                $show_email,
                 $avatar_ext,
                 $user_subm_count
             );

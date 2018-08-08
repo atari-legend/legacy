@@ -100,6 +100,8 @@ if (isset($action) and $action == 'game_aka') {
     $stmt->bind_param("isi", $game_id, $game_aka, $language_id) or die($mysqli->error);
     $stmt->execute() or die($mysqli->error);
     $stmt->close();
+    
+    $new_aka_id = $mysqli->insert_id;
    
     create_log_entry('Games', $game_id, 'AKA', $new_aka_id, 'Insert', $_SESSION['user_id']);
 
