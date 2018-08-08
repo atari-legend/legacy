@@ -82,13 +82,20 @@
                     </select>
                     <br>
 
-                    <label class="input">Continent</label>
-                    <select name="continent_id" class="standard_select select_large">
-                        <option value="">-</option>
-                        {foreach from=$continents item=continent}
-                            <option value="{$continent->getId()}" {if ($release->getContinent() != null and $continent->getId() == $release->getContinent()->getId()) or (isset($continent_id) and $continent_id == $continent->getId())}selected{/if}>{$continent->getName()}</option>
+                    <label class="input">Location</label>
+                    <select name="location[]" class="standard_select select_large" multiple size="15">
+                        {foreach from=$locations item=location}
+                            <option class="location_{$location->getType()|lower}"
+                                value="{$location->getId()}"
+                                {if in_array($location->getId(), $release_locations) or (isset($location_id) and $location_id == $location->getId())}selected{/if}>
+                                {if $location->getType() == 'Country'}&nbsp;&nbsp;{/if}
+                                {$location->getName()}
+                            </option>
                         {/foreach}
                     </select>
+                    <br>
+                    <span class="help-hint">Multiple values permitted. Unselect all values to remove all locations.</span>
+                    <br>
                     <br>
 
                     <label class="input">
