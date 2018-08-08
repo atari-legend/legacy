@@ -119,12 +119,14 @@
                             {/if}
                         </h4>
                         <ul class="comment_buttons">
-                            {if $line->getEmail() !== ''}
-                            <li class="primary_button jsCommentsEmailButton">
-                                <a href="mailto:{$line->getEmail()}?subject=Comment%20of%20{$line->getGameName()|escape:'url'}%20at%20Atari%20Legend" class="links_addnew_link">
-                                        <i class="fa fa-envelope" aria-hidden="true"></i>
-                                </a>
-                            </li>
+                            {if $line->getShowEmail() == '1'}
+                                {if $line->getEmail() !== ''}
+                                <li class="primary_button jsCommentsEmailButton">
+                                    <a href="mailto:{$line->getEmail()}?subject=Comment%20of%20{$line->getGameName()|escape:'url'}%20at%20Atari%20Legend" class="links_addnew_link">
+                                            <i class="fa fa-envelope" aria-hidden="true"></i>
+                                    </a>
+                                </li>
+                                {/if}
                             {/if}
                             <li class="primary_button jsCommentsEditButton" data-comments-id="{$line->getCommentsId()}" data-comment-type="{$line->getCommentType()}">
                                 <a class="links_addnew_link">
@@ -143,11 +145,13 @@
                                     </a>
                                 </li>
                                 <div class="dropdown_box" id="dropdown_box{$line->getCommentsId()}">
-                                    <li class="dropdown_item">
-                                        <a href="mailto:{$line->getEmail()}?subject=Comment%20of%20{$line->getGameName()|escape:'url'}%20at%20Atari%20Legend" class="links_addnew_link">
-                                            Email
-                                        </a>
-                                    </li>
+                                    {if $line->getShowEmail() == '1'}
+                                        <li class="dropdown_item">
+                                            <a href="mailto:{$line->getEmail()}?subject=Comment%20of%20{$line->getGameName()|escape:'url'}%20at%20Atari%20Legend" class="links_addnew_link">
+                                                Email
+                                            </a>
+                                        </li>
+                                    {/if}
                                     <li class="dropdown_item jsCommentsEditDropdownItem" data-comments-id="{$line->getCommentsId()}" data-comment-type="{$line->getCommentType()}">
                                         Edit
                                     </li>

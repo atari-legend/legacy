@@ -80,12 +80,14 @@
         {$article->getHeadline()}</a>
     </h4>
     <ul class="news_buttons">
-        {if $article->getUser()->getEmail() !== ''}
-        <li class="primary_button jsNewsEmailButton">
-            <a href="mailto:{$article->getUser()->getEmail()}?subject=Your news post : {$article->getHeadline()|escape:'url'} at Atari Legend" class="links_addnew_link">
-                <i class="fa fa-envelope" aria-hidden="true"></i>
-            </a>
-        </li>
+        {if $article->getUser()->getShowEmail() == '1'}
+            {if $article->getUser()->getEmail() !== ''}
+            <li class="primary_button jsNewsEmailButton">
+                <a href="mailto:{$article->getUser()->getEmail()}?subject=Your news post : {$article->getHeadline()|escape:'url'} at Atari Legend" class="links_addnew_link">
+                    <i class="fa fa-envelope" aria-hidden="true"></i>
+                </a>
+            </li>
+            {/if}
         {/if}
         <li class="primary_button jsNewsPostEditButton" data-news-id="{$article->getId()}">
             <a class="links_addnew_link">
@@ -104,11 +106,13 @@
                 </a>
             </li>
             <div class="dropdown_box" id="dropdown_box{$article->getId()}">
-                <li class="dropdown_item">
-                    <a href="mailto:{$article->getUser()->getEmail()}?subject=Your news post : {$article->getHeadline()|escape:'url'} at Atari Legend" class="links_addnew_link">
-                        Email
-                    </a>
-                </li>
+                {if $article->getUser()->getShowEmail() == '1'}
+                    <li class="dropdown_item">
+                        <a href="mailto:{$article->getUser()->getEmail()}?subject=Your news post : {$article->getHeadline()|escape:'url'} at Atari Legend" class="links_addnew_link">
+                            Email
+                        </a>
+                    </li>
+                {/if}
                 <li class="dropdown_item jsNewsPostEditDropdownItem" data-news-id="{$article->getId()}">
                     Edit
                 </li>
