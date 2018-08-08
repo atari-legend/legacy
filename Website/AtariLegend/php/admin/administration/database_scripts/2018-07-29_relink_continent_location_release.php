@@ -4,7 +4,7 @@
  **************************************************************************/
 
 // Unique identifier set by developer.
-$database_update_id = 169;
+$database_update_id = 174;
 
 // Description of what the change will do.
 $update_description = "Relink release continent to location";
