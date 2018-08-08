@@ -4,7 +4,7 @@
  **************************************************************************/
 
 // Unique identifier set by developer.
-$database_update_id = 167;
+$database_update_id = 172;
 
 // Description of what the change will do.
 $update_description = "Populate location table";

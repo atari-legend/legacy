@@ -4,7 +4,7 @@
  **************************************************************************/
 
 // Unique identifier set by developer.
-$database_update_id = 168;
+$database_update_id = 173;
 
 // Description of what the change will do.
 $update_description = "Create game_release_location table";
