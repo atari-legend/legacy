@@ -443,14 +443,19 @@
     padding-bottom: 10px;
 }
 
-.release_list .release_heading {
-    padding-top:20px;
-    padding-bottom: 5px;
+.release_list .release_logo {
     text-align: center;
 }
 
-.release_list .release_heading h4 {
+.release_list .release_logo img {
+    margin-bottom: 10px;
+    margin-top: 5px;
+}
+
+.release_list .release_logo h4 {
     text-align: center;
+    margin-top: 20px;
+    margin-bottom: 5px;
 }
 
 .release_list img.location_flag {
