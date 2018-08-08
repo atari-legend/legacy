@@ -17,7 +17,7 @@ $test_condition = "SELECT * FROM information_schema.tables
 WHERE table_schema = '$db_databasename' AND table_name = 'users' LIMIT 1";
 
 // Database change
-$database_update_sql = "ALTER TABLE `users` CHANGE `inactive` `inactive` BOOLEAN NULL DEFAULT FALSE COMMENT 'Make user account inactive'";
+$database_update_sql = "ALTER TABLE `users` CHANGE `inactive` `inactive` BOOLEAN NOT NULL DEFAULT FALSE COMMENT 'Make user account inactive'";
 
 // If the update should auto execute without user interaction set to "yes".
 $database_autoexecute = "yes";
