@@ -81,6 +81,7 @@ if (isset($action)) {
             'user_website' => $query_comment['user_website'],
             'user_twitter' => $query_comment['user_twitter'],
             'user_af' => $query_comment['user_af'],
+            'show_email' => $query_comment['show_email'],
             'email' => $query_comment['email']
         ));
     }
