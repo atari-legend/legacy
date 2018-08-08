@@ -19,13 +19,13 @@ require_once __DIR__."/../../common/DAO/GameReleaseDAO.php";
 require_once __DIR__."/../../common/DAO/ResolutionDAO.php";
 require_once __DIR__."/../../common/DAO/SystemDAO.php";
 require_once __DIR__."/../../common/DAO/PubDevDAO.php";
-require_once __DIR__."/../../common/DAO/ContinentDAO.php";
+require_once __DIR__."/../../common/DAO/LocationDAO.php";
 
 $gameReleaseDao = new \AL\Common\DAO\GameReleaseDAO($mysqli);
 $resolutionDao = new \AL\Common\DAO\ResolutionDao($mysqli);
 $systemDao = new \AL\Common\DAO\SystemDao($mysqli);
 $pubDevDao = new \AL\Common\DAO\PubDevDAO($mysqli);
-$continentDao = new \AL\Common\DAO\ContinentDAO($mysqli);
+$locationDao = new \AL\Common\DAO\LocationDAO($mysqli);
 
 /**
  * Generates an SEO-friendly description of a game, depending on the data available
@@ -163,6 +163,7 @@ if ($game_info = $sql_game->fetch_array(MYSQLI_BOTH)) {
 
 $smarty->assign('resolutions', $resolutionDao->getAllResolutionsAsMap());
 $smarty->assign('systems', $systemDao->getAllSystemsAsMap());
+$smarty->assign('locations', $locationDao->getAllLocationsAsMap());
 
 // Get all releases
 $releases = $gameReleaseDao->getReleasesForGame($game_id);
@@ -171,14 +172,17 @@ $smarty->assign('releases', $releases);
 $system_incompatible = [];
 $system_enhanced = [];
 $release_resolution = [];
+$release_location = [];
 foreach ($releases as $release) {
     $system_incompatible[$release->getId()] = $systemDao->getIncompatibleSystemsForRelease($release->getId());
     $system_enhanced[$release->getId()] = $systemDao->getEnhancedSystemsForRelease($release->getId());
     $release_resolution[$release->getId()] = $resolutionDao->getResolutionsForRelease($release->getId());
+    $release_location[$release->getId()] = $locationDao->getLocationsForRelease($release->getId());
 }
 $smarty->assign('system_incompatible', $system_incompatible);
 $smarty->assign('system_enhanced', $system_enhanced);
 $smarty->assign('release_resolution', $release_resolution);
+$smarty->assign('release_location', $release_location);
 
 //***********************************************************************************
 //get the game categories & the categories already selected for this game
