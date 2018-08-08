@@ -18,6 +18,7 @@ class Comments {
     private $email;
     private $join_date;
     private $karma;
+    private $show_email;
     private $avatar_ext;
     private $game_id;
     private $game_name;
@@ -35,6 +36,7 @@ class Comments {
         $email,
         $join_date,
         $karma,
+        $show_email,
         $avatar_ext,
         $game_id,
         $game_name,
@@ -52,6 +54,7 @@ class Comments {
         $this->email = $email;
         $this->join_date = $join_date;
         $this->karma = $karma;
+        $this->show_email = $show_email;
         $this->avatar_ext = $avatar_ext;
         $this->game_id = $game_id;
         $this->game_name = $game_name;
@@ -106,6 +109,10 @@ class Comments {
 
     public function getKarma() {
         return $this->karma;
+    }
+    
+    public function getShowEmail() {
+        return $this->show_email;
     }
 
     public function getPostDate() {

@@ -35,6 +35,7 @@ class NewsDAO {
                 users.email,
                 users.join_date,
                 users.karma,
+                users.show_email,
                 users.avatar_ext,
                 (SELECT COUNT(*)
                     FROM news
@@ -119,6 +120,7 @@ class NewsDAO {
             $user_email,
             $user_join_date,
             $user_karma,
+            $user_show_email,
             $user_avatar_ext,
             $user_news_count
         );
@@ -131,6 +133,7 @@ class NewsDAO {
                 $user_email,
                 $user_join_date,
                 $user_karma,
+                $user_show_email,
                 $user_avatar_ext,
                 $user_news_count
             );
@@ -173,6 +176,7 @@ class NewsDAO {
                 users.email,
                 users.join_date,
                 users.karma,
+                users.show_email,
                 users.avatar_ext,
                 (SELECT COUNT(*)
                     FROM news
@@ -199,6 +203,7 @@ class NewsDAO {
             $user_email,
             $user_join_date,
             $user_karma,
+            $user_show_email,
             $user_avatar_ext,
             $user_news_count
         );
@@ -212,6 +217,7 @@ class NewsDAO {
                 $user_email,
                 $user_join_date,
                 $user_karma,
+                $user_show_email,
                 $user_avatar_ext,
                 $user_news_count
             );
