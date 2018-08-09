@@ -9,11 +9,13 @@ require_once __DIR__.'/../../config/admin.php';
 require_once __DIR__."/../../common/DAO/GameDAO.php";
 require_once __DIR__."/../../common/DAO/GameReleaseDAO.php";
 require_once __DIR__."/../../common/DAO/PubDevDAO.php";
+require_once __DIR__."/../../common/DAO/LocationDAO.php";
 require_once __DIR__."/../../common/DAO/ChangeLogDAO.php";
 
 $gameDao = new \AL\Common\DAO\GameDAO($mysqli);
 $gameReleaseDao = new \AL\Common\DAO\GameReleaseDAO($mysqli);
 $pubDevDao = new \AL\Common\DAO\PubDevDao($mysqli);
+$locationDao = new \AL\Common\DAO\LocationDao($mysqli);
 $changeLogDao = new \AL\Common\DAO\ChangeLogDAO($mysqli);
 
 $game = $gameDao->getGame($game_id);
@@ -105,8 +107,36 @@ switch ($action) {
             $release->getDate(),
             $release->getLicense(),
             ($game_extra_info_id != null && $game_extra_info_id == 1) ? \AL\Common\DAO\GameReleaseDAO::TYPE_BUDGET : $release->getType(),
-            ($continent_id != null) ? $continent_id : (($release->getContinent() != null) ? $release->getContinent()->getId() : null),
             $pub_dev_id);
+
+        if ($continent_id != null) {
+            // The publisher had a continent_id associated to it. We need to
+            // convert this into a new entry in game_release_location, using the
+            // new location IDs
+            $location_id = -1;
+            switch ($continent_id) {
+                case 1: // Europe
+                    $location_id = 120;
+                    break;
+                case 2: // North America
+                    $location_id = 172;
+                    break;
+                case 3: // South America
+                    $location_id = 239;
+                    break;
+                case 4: // Asia
+                    $location_id = 65;
+                    break;
+                case 5: // Australia
+                    $location_id = 212;
+                    break;
+                case 6: // Rest of the world
+                    $location_id = 254;
+                    break;
+            }
+
+            $locationDao->setLocationsForRelease($release->getId(), array($location_id));
+        }
 
         $changeLogDao->insertChangeLog(
             new \AL\Common\Model\Database\ChangeLog(
