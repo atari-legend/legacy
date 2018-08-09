@@ -4,7 +4,7 @@
  **************************************************************************/
 
 // Unique identifier set by developer.
-$database_update_id = 168;
+$database_update_id = 167;
 
 // Description of what the change will do.
 $update_description = "Drop lingo_short field from language table";
@@ -16,12 +16,12 @@ $execute_condition = "test_success";
 $test_condition = "SELECT *
 FROM information_schema.columns
 WHERE table_schema = '$db_databasename'
-AND table_name = 'language' 
+AND table_name = 'language'
 AND column_name = 'lingo_short' LIMIT 1";
 
 // Database change
-$database_update_sql = "ALTER TABLE language DROP COLUMN lingo_short"; 
- 
+$database_update_sql = "ALTER TABLE language DROP COLUMN lingo_short";
+
 // If the update should auto execute without user interaction set to "yes".
 $database_autoexecute = "yes";
 
