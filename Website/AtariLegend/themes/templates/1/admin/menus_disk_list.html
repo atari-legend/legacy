@@ -35,8 +35,8 @@ The main game page
         <form action="../menus/menus_disk_list.php" method="get" name="post" id="menu_set_change">
             <select name="menu_sets_id" class="standard_select select_large" onchange="this.form.submit()">
                 <option value="" selected style="background-color:white;">Change Menu Set</option>
-                {foreach from=$menu_set_list item=line}
-                    {html_options values=$line.menu_sets_id output=$line.menu_sets_name}
+                {foreach from=$menuset_list item=line}
+                    {html_options values=$line->getMenuSetsId() output=$line->getMenuSetsName()}
                 {/foreach}
             </select>
         </form>
@@ -47,8 +47,8 @@ The main game page
         <form action="../menus/db_menu_disk.php" method="post" name="post" id="menu_name_edit">
             <b>Menu set Editor</b><br><br>
             Change name of menu set:<br>
-            <input type="text" name="menu_sets_name" value="{$menu_set.menu_sets_name}" class="standard_input input_large"><br/>
-            <input type="hidden" name="menu_sets_id" value="{$menu_set.menu_sets_id}">
+            <input type="text" name="menu_sets_name" value="{$menuset_info->getMenuSetsName()}" class="standard_input input_large"><br/>
+            <input type="hidden" name="menu_sets_id" value="{$menuset_info->getMenuSetsId()}">
             <input type="hidden" name="action" value="menu_set_name_update">
             <br>
             <input type="submit" value="Update" class="primary_button">
@@ -192,7 +192,7 @@ The main game page
     <div class="standard_tile_line"></div>
     <div class="standard_tile_padding">
         <div class="left_nav_section">
-            Overhere you can edit/delete menu set <b>{$menu_set.menu_sets_name}</b>, or you can add menu disks to it. You can also make the set available on the website with the publish options.
+            Overhere you can edit/delete menu set <b>{$menuset_info->getMenuSetsName()}</b>, or you can add menu disks to it. You can also make the set available on the website with the publish options.
         </div>
         <br>
         <div class="main_company_container">
@@ -222,13 +222,13 @@ The main game page
                     <th class="w-20">Individual</th>
                     <th class="text-right w-20">State</th>
                 </tr>
-                {if isset($menus)}
-                    {foreach from=$menus item=line}
-                        <tr id="diskedit_ajax_{$line.menu_disk_id}">
-                            <td>{if $line.menu_disk_id != ''}<a onclick="editDisk({$line.menu_disk_id})" style="cursor: pointer;">{$line.menu_disk_name}</a>{else}<i>n/a</i>{/if}</td>
-                            <td>{if isset($line.crew_id)}{$line.crew_name}{else}<i>n/a</i>{/if}</td>
-                            <td>{if isset($line.ind_id)}{$line.ind_name}{else}<i>n/a</i>{/if}</td>
-                            <td class="text-right">{if isset($line.menu_state)}{$line.menu_state}{else}<i>n/a</i>{/if}</td>
+                {if isset($menus_list)}
+                    {foreach from=$menus_list item=line}
+                        <tr id="diskedit_ajax_{$line->getMenuDiskId()}">
+                            <td>{if $line->getMenuDiskId() != ''}<a onclick="editDisk({$line->getMenuDiskId()})" style="cursor: pointer;">{$line->getMenuDiskName()}</a>{else}<i>n/a</i>{/if}</td>
+                            <td>{if $line->getCrewId() != ''}{$line->getCrewName()}{else}<i>n/a</i>{/if}</td>
+                            <td>{if $line->getIndId() != ''}{$line->getIndName()}{else}<i>n/a</i>{/if}</td>
+                            <td class="text-right">{if $line->getMenuState() != ''}{$line->getMenuState()}{else}<i>n/a</i>{/if}</td>
                         </tr>
                     {/foreach}
                 {/if}
