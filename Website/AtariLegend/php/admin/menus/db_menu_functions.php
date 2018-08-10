@@ -22,7 +22,7 @@ function menu_disk_software_list($menu_disk_id) {
          game.game_name AS 'software_name',
          pub_dev.pub_dev_id AS 'developer_id',
          pub_dev.pub_dev_name AS 'developer_name',
-         game_year.game_year AS 'year',
+         YEAR(game_release.date) AS 'year',
          menu_disk_title.menu_disk_title_id,
          menu_types_main.menu_types_text,
          menu_disk_title_author.menu_disk_title_author_id,
@@ -34,7 +34,7 @@ function menu_disk_software_list($menu_disk_id) {
          LEFT JOIN game ON (menu_disk_title_game.game_id = game.game_id)
          LEFT JOIN game_developer ON (game.game_id = game_developer.game_id)
          LEFT JOIN pub_dev ON (game_developer.dev_pub_id = pub_dev.pub_dev_id)
-         LEFT JOIN game_year ON (game.game_id = game_year.game_id)
+         LEFT JOIN game_release ON (game_release.game_id = game.game_id)
          LEFT JOIN menu_types_main ON (menu_disk_title.menu_types_main_id = menu_types_main.menu_types_main_id)
          WHERE menu_disk_title.menu_disk_id = '$menu_disk_id' AND menu_disk_title.menu_types_main_id = '1' ORDER BY game.game_name ASC";
 
@@ -93,7 +93,7 @@ function menu_disk_doc_list($menu_disk_id) {
 
     $sql_doc_games = "SELECT game.game_name AS 'software_name',
                               game.game_id AS 'software_id',
-                              game_year.game_year AS 'year',
+                              YEAR(game_release.date) AS 'year',
                               pub_dev.pub_dev_name AS 'developer_name',
                               pub_dev.pub_dev_id AS 'developer_id',
                               doc_disk_game.doc_id AS 'doc_id',
@@ -109,7 +109,7 @@ function menu_disk_doc_list($menu_disk_id) {
                               LEFT JOIN game ON (game.game_id = doc_disk_game.game_id)
                               LEFT JOIN game_developer ON (game.game_id = game_developer.game_id)
                               LEFT JOIN pub_dev ON (game_developer.dev_pub_id = pub_dev.pub_dev_id)
-                              LEFT JOIN game_year ON (game.game_id = game_year.game_id)
+                              LEFT JOIN game_release ON (game_release.game_id = game.game_id)
                               LEFT JOIN menu_types_main ON (menu_disk_title.menu_types_main_id = menu_types_main.menu_types_main_id)
                               WHERE menu_disk_title.menu_disk_id = '$menu_disk_id' AND menu_disk_title.menu_types_main_id = '6' ORDER BY game.game_name ASC";
 
