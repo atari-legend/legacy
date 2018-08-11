@@ -91,18 +91,18 @@ if (isset($action) and $action == 'delete_aka') {
 //If add aka button has been pressed
 //***********************************************************************************
 if (isset($action) and $action == 'game_aka') {
-    
-    if ($language_id == ""){ 
+
+    if ($language_id == ""){
         $language_id = null;
     }
-   
+
     $stmt = $mysqli->prepare("INSERT INTO game_aka (game_id, aka_name, language_id) VALUES (?,?,?)") or die($mysqli->error);
-    $stmt->bind_param("isi", $game_id, $game_aka, $language_id) or die($mysqli->error);
+    $stmt->bind_param("iss", $game_id, $game_aka, $language_id) or die($mysqli->error);
     $stmt->execute() or die($mysqli->error);
     $stmt->close();
-    
+
     $new_aka_id = $mysqli->insert_id;
-   
+
     create_log_entry('Games', $game_id, 'AKA', $new_aka_id, 'Insert', $_SESSION['user_id']);
 
     $_SESSION['edit_message'] = "AKA link has been added";
@@ -114,13 +114,13 @@ if (isset($action) and $action == 'game_aka') {
 //***********************************************************************************
 if (isset($action) and $action == 'update_aka') {
     create_log_entry('Games', $game_id, 'AKA', $game_aka_id, 'Update', $_SESSION['user_id']);
-    
-    if ($new_language_id == ""){ 
+
+    if ($new_language_id == ""){
         $new_language_id = null;
     }
 
     $stmt = $mysqli->prepare("UPDATE game_aka SET language_id = ? WHERE game_aka_id = ?") or die($mysqli->error);
-    $stmt->bind_param("ii", $new_language_id, $game_aka_id) or die($mysqli->error);
+    $stmt->bind_param("si", $new_language_id, $game_aka_id) or die($mysqli->error);
     $stmt->execute() or die($mysqli->error);
     $stmt->close();
 

@@ -16,14 +16,14 @@ $execute_condition = "test_success";
 $test_condition = "SELECT *
 FROM information_schema.columns
 WHERE table_schema = '$db_databasename'
-AND table_name = 'language' 
+AND table_name = 'language'
 AND column_name = 'lingo_id' LIMIT 1";
 
 // Database change
-$database_update_sql = "ALTER TABLE language 
-    CHANGE lingo_id id int(11), 
-    CHANGE lingo_name name varchar(50) COMMENT 'language name'"; 
- 
+$database_update_sql = "ALTER TABLE language
+    CHANGE lingo_id id CHAR(2) NOT NULL COMMENT 'ISO 639-1 code',
+    CHANGE lingo_name name varchar(64) COMMENT 'ISO language name'";
+
 // If the update should auto execute without user interaction set to "yes".
 $database_autoexecute = "yes";
 

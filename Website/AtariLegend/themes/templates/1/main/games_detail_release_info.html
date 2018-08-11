@@ -9,7 +9,7 @@
                     <tr>
                         <td colspan="3" class="release_logo">
                             <h4>{$release->getDate()|date_format:"Y"|default:"[no date]"}</h4>
-                            {if $release->getPublisher()->getImage() != null}<img src="{$release->getPublisher()->getImage()}" alt="company logo" class="games_details_img">{/if}
+                            {if $release->getPublisher() != null and $release->getPublisher()->getImage() != null}<img src="{$release->getPublisher()->getImage()}" alt="company logo" class="games_details_img">{/if}
                         </td>
                     </tr>
                     {if $release->getName() != null}
