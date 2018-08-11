@@ -16,14 +16,14 @@ $execute_condition = "test_fail";
 $test_condition = "SELECT *
 FROM information_schema.columns
 WHERE table_schema = '$db_databasename'
-AND table_name = 'game_aka' 
+AND table_name = 'game_aka'
 AND column_name = 'language_id' LIMIT 1";
 
 // Database change
 $database_update_sql = "ALTER TABLE game_aka
-    ADD COLUMN language_id int(11) COMMENT 'Foreign key to language table', 
-    ADD FOREIGN KEY (language_id) REFERENCES language(id)"; 
- 
+    ADD COLUMN language_id CHAR(2) COMMENT 'Foreign key to language table',
+    ADD FOREIGN KEY (language_id) REFERENCES language(id)";
+
 // If the update should auto execute without user interaction set to "yes".
 $database_autoexecute = "yes";
 
