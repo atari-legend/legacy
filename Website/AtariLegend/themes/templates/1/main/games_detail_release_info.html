@@ -1,6 +1,6 @@
 {if count($releases) > 0}
     <div class="standard_tile release_list">
-        <h1>{if count($releases) > 1}RELEASES{else}RELEASE INFO{/if}</h1> 
+        <h1>{if count($releases) > 1}RELEASES{else}RELEASE INFO{/if}</h1>
         <div class="standard_tile_line"></div>
 
         <div class="standard_list_entry">
@@ -8,7 +8,7 @@
                 {foreach from=$releases item=$release name=release}
                     <tr>
                         <td colspan="3" class="release_logo">
-                            <h4>{$release->getDate()|date_format:"Y"|default:"[no date]"}</h4>                           
+                            <h4>{$release->getDate()|date_format:"Y"|default:"[no date]"}</h4>
                         </td>
                     </tr>
                     {if $release->getName() != null}
