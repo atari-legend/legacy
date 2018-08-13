@@ -792,7 +792,7 @@ window.deleteMenuSetIndividualModal = function (indSelect, menuSetsId) {
         buttons: {
             'Delete disk': function () {
                 $(this).dialog('close');
-                var url = 'db_menu_disk.php?menu_sets_id=' + menuSetsId + '&ind_id=' + indSelect + '&action=delete_ind_from_menu_set';
+                var url = 'db_menu_set.php?menu_sets_id=' + menuSetsId + '&ind_id=' + indSelect + '&action=delete_ind_from_menu_set';
                 location.href = url;
             },
             Cancel: function () {
@@ -812,7 +812,7 @@ window.deleteMenuSetCrewModal = function (crewSelect, menuSetsId) {
         buttons: {
             'Delete disk': function () {
                 $(this).dialog('close');
-                var url = 'db_menu_disk.php?menu_sets_id=' + menuSetsId + '&crew_id=' + crewSelect + '&action=delete_crew_from_menu_set';
+                var url = 'db_menu_set.php?menu_sets_id=' + menuSetsId + '&crew_id=' + crewSelect + '&action=delete_crew_from_menu_set';
                 location.href = url;
             },
             Cancel: function () {
@@ -832,7 +832,7 @@ window.menuTypeDelete = function (menuTypeSelect, menuSetsId) {
         buttons: {
             'Delete disk': function () {
                 $(this).dialog('close');
-                var url = 'db_menu_disk.php?menu_sets_id=' + menuSetsId + '&menu_type_id=' + menuTypeSelect + '&action=delete_menu_type_from_menu_set';
+                var url = 'db_menu_set.php?menu_sets_id=' + menuSetsId + '&menu_type_id=' + menuTypeSelect + '&action=delete_menu_type_from_menu_set';
                 location.href = url;
             },
             Cancel: function () {
@@ -948,7 +948,7 @@ window.deleteSet = function (str) {
         buttons: {
             'Delete disk': function () {
                 $(this).dialog('close');
-                var url = '../menus/db_menu_disk.php?action=delete_set&menu_sets_id=' + str;
+                var url = '../menus/db_menu_set.php?action=delete_set&menu_sets_id=' + str;
                 location.href = url;
             },
             Cancel: function () {
@@ -968,7 +968,7 @@ window.publishSet = function (str, action) {
         buttons: {
             'Change': function () {
                 $(this).dialog('close');
-                var url = '../menus/db_menu_disk.php?action=publish_set&online=' + action + '&menu_sets_id=' + str;
+                var url = '../menus/db_menu_set.php?action=publish_set&online=' + action + '&menu_sets_id=' + str;
                 location.href = url;
             },
             Cancel: function () {

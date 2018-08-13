@@ -19,6 +19,11 @@ class MenusDiskList {
     private $crew_name;
     private $ind_id;
     private $ind_name;
+    private $state_id;
+    private $menu_state;
+    private $menu_disk_year_id;
+    private $menu_year;
+    private $parent_id;
 
     public function __construct(
         $menu_sets_id,
@@ -33,7 +38,11 @@ class MenusDiskList {
         $crew_name,
         $ind_id,
         $ind_name,
-        $menu_state
+        $state_id,
+        $menu_state,
+        $menu_disk_year_id,
+        $menu_year,
+        $parent_id
     ) {
         $this->menu_sets_id = $menu_sets_id;
         $this->menu_sets_name = $menu_sets_name;
@@ -47,7 +56,11 @@ class MenusDiskList {
         $this->crew_name = $crew_name;
         $this->ind_id = $ind_id;
         $this->ind_name = $ind_name;
+        $this->state_id = $state_id;
         $this->menu_state = $menu_state;
+        $this->menu_disk_year_id = $menu_disk_year_id;
+        $this->menu_year = $menu_year;
+        $this->parent_id = $parent_id;
     }
 
     public function getMenuSetsId() {
@@ -98,7 +111,23 @@ class MenusDiskList {
         return $this->ind_name;
     }
 
+    public function getMenuStateId() {
+        return $this->state_id;
+    }
+
     public function getMenuState() {
         return $this->menu_state;
+    }
+
+    public function getMenuDiskYearId() {
+        return $this->menu_disk_year_id;
+    }
+
+    public function getMenuYear() {
+        return $this->menu_year;
+    }
+
+    public function getMenuParentId() {
+        return $this->parent_id;
     }
 }

@@ -21,80 +21,25 @@
 include("../../config/common.php");
 include("../../config/admin.php");
 include("../../admin/menus/db_menu_functions.php");
+require_once __DIR__."/../../lib/Db.php";
+require_once __DIR__."/../../common/DAO/MenusDiskDetailDAO.php";
+require_once __DIR__."/../../common/DAO/IndividualDAO.php";
+
+$individualDao = new AL\Common\DAO\IndividualDAO($mysqli);
 
 // EDIT BOX FOR A MENU DISK!!!
 if (isset($action) and $action == "edit_disk_box" and $menu_disk_id !== '') {
-    $sql_menus = "SELECT menu_disk.menu_sets_id,
-                        menu_set.menu_sets_name,
-                        menu_disk.menu_disk_id,
-                        menu_disk.menu_disk_number,
-                        menu_disk.menu_disk_letter,
-                        menu_disk.menu_disk_version,
-                        menu_disk.menu_disk_part,
-                        crew.crew_id,
-                        crew.crew_name,
-                        individuals.ind_id,
-                        individuals.ind_name,
-                        menu_disk_state.state_id,
-                        menu_disk_state.menu_state,
-                        menu_disk_year.menu_disk_year_id,
-                        menu_disk_year.menu_year,
-                        menu_disk_submenu.parent_id
-                        FROM menu_disk
-                        LEFT JOIN menu_set ON (menu_disk.menu_sets_id = menu_set.menu_sets_id)
-                        LEFT JOIN crew_menu_prod ON (menu_set.menu_sets_id = crew_menu_prod.menu_sets_id)
-                        LEFT JOIN crew ON (crew_menu_prod.crew_id = crew.crew_id)
-                        LEFT JOIN ind_menu_prod ON (menu_set.menu_sets_id = ind_menu_prod.menu_sets_id)
-                        LEFT JOIN individuals ON (ind_menu_prod.ind_id = individuals.ind_id)
-                        LEFT JOIN menu_disk_state ON ( menu_disk.state = menu_disk_state.state_id)
-                        LEFT JOIN menu_disk_year ON ( menu_disk.menu_disk_id = menu_disk_year.menu_disk_id)
-                        LEFT JOIN menu_disk_submenu ON ( menu_disk.menu_disk_id = menu_disk_submenu.menu_disk_id)
-                        WHERE menu_disk.menu_disk_id = '$menu_disk_id'";
+    $menudetailDao = new AL\Common\DAO\MenusDiskDetailDAO($mysqli);
 
-    $result_menus = $mysqli->query($sql_menus);
-    $row          = $result_menus->fetch_array(MYSQLI_BOTH);
+    $menu_detail = $menudetailDao->getMenuDiskDetail($menu_disk_id);
 
-    $menu_disk_state  = $row['state_id'];
-    $menu_disk_year   = $row['menu_disk_year_id'];
-    $menu_disk_parent = $row['parent_id'];
+    $menu_disk_state  = $menu_detail->getMenuStateId();
+    $menu_disk_year   = $menu_detail->getMenuDiskYearId();
+    $menu_disk_parent = $menu_detail->getMenuParentId();
 
-    // Create Menu disk name
-    $menu_disk_name = "$row[menu_sets_name] ";
-    if (isset($row['menu_disk_number'])) {
-        $menu_disk_name .= "$row[menu_disk_number]";
-    }
-    if (isset($row['menu_disk_letter'])) {
-        $menu_disk_name .= "$row[menu_disk_letter]";
-    }
-    if (isset($row['menu_disk_part'])) {
-        if (is_numeric($row['menu_disk_part'])) {
-            $menu_disk_name .= " part $row[menu_disk_part]";
-        } else {
-            $menu_disk_name .= "$row[menu_disk_part]";
-        }
-    }
-    if (isset($row['menu_disk_version']) and $row['menu_disk_version'] !== '') {
-        $menu_disk_name .= " v$row[menu_disk_version]";
-    }
+    $smarty->assign('menus', $menu_detail);
 
-    $smarty->assign('menus', array(
-        'menu_sets_id' => $row['menu_sets_id'],
-        'menu_sets_name' => $row['menu_sets_name'],
-        'menu_disk_name' => $menu_disk_name,
-        'menu_disk_id' => $row['menu_disk_id'],
-        'menu_disk_number' => $row['menu_disk_number'],
-        'menu_disk_letter' => $row['menu_disk_letter'],
-        'menu_disk_version' => $row['menu_disk_version'],
-        'menu_disk_part' => $row['menu_disk_part'],
-        'crew_id' => $row['crew_id'],
-        'crew_name' => $row['crew_name'],
-        'ind_id' => $row['ind_id'],
-        'ind_name' => $row['ind_name'],
-        'menu_year' => $row['menu_year'],
-        'menu_state' => $row['menu_state']
-    ));
-
-    //list of games for the menu disk
+    //list of Software for the menu disk
     $temp_query = menu_disk_software_list($menu_disk_id);
 
     while ($query = $temp_query->fetch_array(MYSQLI_BOTH)) {
@@ -144,54 +89,11 @@ if (isset($action) and $action == "edit_disk_box" and $menu_disk_id !== '') {
     }
 
     // Get the menudisk credits
-    $sql_individuals = "SELECT
-                        individuals.ind_id,
-                        individuals.ind_name,
-                        menu_disk_credits.menu_disk_credits_id,
-                        author_type.author_type_info
-                        FROM individuals
-                        LEFT JOIN menu_disk_credits ON (individuals.ind_id = menu_disk_credits.ind_id)
-                        LEFT JOIN author_type ON (menu_disk_credits.author_type_id = author_type.author_type_id)
-                        WHERE menu_disk_credits.menu_disk_id = '$menu_disk_id'
-                        ORDER BY individuals.ind_name ASC";
-
-    $query_individual = $mysqli->query($sql_individuals) or die('Error: ' . mysqli_error($mysqli));
-
-    $query_ind_id = "";
-
-    while ($query = $query_individual->fetch_array(MYSQLI_BOTH)) {
-        if ($query_ind_id != $query['ind_id']) {
-            $sql_ind_nicks = $mysqli->query("SELECT nick_id FROM individual_nicks WHERE ind_id = '$query[ind_id]'");
-
-            while ($fetch_ind_nicks = $sql_ind_nicks->fetch_array(MYSQLI_BOTH)) {
-                $nick_id = $fetch_ind_nicks['nick_id'];
-
-                $sql_nick_names = $mysqli->query("SELECT ind_name from individuals WHERE ind_id = '$nick_id'") or die('Error: ' . mysqli_error($mysqli));
-
-                while ($fetch_nick_names = $sql_nick_names->fetch_array(MYSQLI_BOTH)) {
-                    $smarty->append('ind_nick', array(
-                        'ind_id' => $query['ind_id'],
-                        'individual_nicks_id' => $nick_id,
-                        'nick' => $fetch_nick_names['ind_name']
-                    ));
-                }
-            }
-        }
-
-        // This smarty is used for for the menu_disk credits
-        $smarty->append('individuals', array(
-            'menu_disk_credits_id' => $query['menu_disk_credits_id'],
-            'ind_id' => $query['ind_id'],
-            'ind_name' => $query['ind_name'],
-            'menu_disk_id' => $menu_disk_id,
-            'author_type_info' => $query['author_type_info']
-        ));
-
-        $query_ind_id = $query['ind_id'];
-    }
+    $menucreditDao = new AL\Common\DAO\MenusDiskDetailDAO($mysqli);
+    $smarty->assign('individuals', $menucreditDao->getMenuDiskCredits($menu_disk_id));
 
     // Menu state dropdown
-    $query_menu_state = $mysqli->query("SELECT * FROM menu_disk_state ORDER BY state_id ASC");
+    $query_menu_state = $mysqli->query("SELECT * FROM menu_disk_state ORDER BY state_id ASC") or die('Error: ' . mysqli_error($mysqli));
 
     while ($query = $query_menu_state->fetch_array(MYSQLI_BOTH)) {
         // This smarty is used for for the menu_disk credits
@@ -241,7 +143,8 @@ if (isset($action) and $action == "edit_disk_box" and $menu_disk_id !== '') {
     //Get the screenshots for this menu if they exist
     $sql_screenshots = $mysqli->query("SELECT * FROM screenshot_menu
                                     LEFT JOIN screenshot_main ON (screenshot_menu.screenshot_id = screenshot_main.screenshot_id)
-                                    WHERE screenshot_menu.menu_disk_id = '$menu_disk_id' ORDER BY screenshot_menu.screenshot_id") or die('Error: ' . mysqli_error($mysqli));
+                                    WHERE screenshot_menu.menu_disk_id = '$menu_disk_id' ORDER BY screenshot_menu.screenshot_id")
+                                    or die('Error: ' . mysqli_error($mysqli));
 
     $count         = 1;
     $v_screenshots = 0;
@@ -288,15 +191,16 @@ if (isset($action) and $action == "edit_disk_box" and $menu_disk_id !== '') {
 
     //In all cases we search we start searching through the menu_set table
     //first
-    $sql_menus = "SELECT menu_disk.menu_sets_id,
-                                menu_set.menu_sets_name,
-                                menu_disk.menu_disk_number,
-                                menu_disk.menu_disk_letter,
-                                menu_disk.menu_disk_version,
-                                menu_disk.menu_disk_part
-                                FROM menu_disk
-                                LEFT JOIN menu_set ON (menu_disk.menu_sets_id = menu_set.menu_sets_id)
-                                WHERE menu_disk.menu_disk_id = '$menu_disk_id'";
+    $sql_menus = "SELECT
+            menu_disk.menu_sets_id,
+            menu_set.menu_sets_name,
+            menu_disk.menu_disk_number,
+            menu_disk.menu_disk_letter,
+            menu_disk.menu_disk_version,
+            menu_disk.menu_disk_part
+            FROM menu_disk
+            LEFT JOIN menu_set ON (menu_disk.menu_sets_id = menu_set.menu_sets_id)
+            WHERE menu_disk.menu_disk_id = '$menu_disk_id'";
 
     $result_menus = $mysqli->query($sql_menus) or die('Error: ' . mysqli_error($mysqli));
 
@@ -321,75 +225,28 @@ if (isset($action) and $action == "edit_disk_box" and $menu_disk_id !== '') {
     $smarty->assign('menu_disk_name', $menu_disk_name);
 
     $smarty->assign('download_nr', $nr_downloads);
-
     $smarty->assign('menu_state_id', $menu_disk_state);
     $smarty->assign('menu_year_id', $menu_disk_year);
     $smarty->assign('menu_parent_id', $menu_disk_parent);
-
     $smarty->assign('smarty_action', 'edit_disk_box');
     $smarty->assign('menu_disk_id', $menu_disk_id);
 }
 
-// CLOSE EDIT BOX FOR A MENU DISK!
+/**
+ * Close Edit Box for menu disk
+ * @param integer $menu_disk_id ID of the menu disk to close
+ */
+
 if (isset($action) and $action == "close_edit_disk_box" and $menu_disk_id !== '') {
-    $sql_menus = "SELECT menu_disk.menu_sets_id,
-                        menu_set.menu_sets_name,
-                        menu_disk.menu_disk_id,
-                        menu_disk.menu_disk_number,
-                        menu_disk.menu_disk_letter,
-                        menu_disk.menu_disk_version,
-                        menu_disk.menu_disk_part,
-                        crew.crew_id,
-                        crew.crew_name,
-                        individuals.ind_id,
-                        individuals.ind_name,
-                        menu_disk_state.menu_state
-                        FROM menu_disk
-                        LEFT JOIN menu_set ON (menu_disk.menu_sets_id = menu_set.menu_sets_id)
-                        LEFT JOIN crew_menu_prod ON (menu_set.menu_sets_id = crew_menu_prod.menu_sets_id)
-                        LEFT JOIN crew ON (crew_menu_prod.crew_id = crew.crew_id)
-                        LEFT JOIN ind_menu_prod ON (menu_set.menu_sets_id = ind_menu_prod.menu_sets_id)
-                        LEFT JOIN individuals ON (ind_menu_prod.ind_id = individuals.ind_id)
-                        LEFT JOIN menu_disk_state ON ( menu_disk.state = menu_disk_state.state_id)
-                        WHERE menu_disk.menu_disk_id = '$menu_disk_id'";
+    $menudetailDao = new AL\Common\DAO\MenusDiskDetailDAO($mysqli);
 
-    $result_menus = $mysqli->query($sql_menus);
-    $row          = $result_menus->fetch_array(MYSQLI_BOTH);
+    $menu_detail = $menudetailDao->getMenuDiskDetail($menu_disk_id);
 
-    // Create Menu disk name
-    $menu_disk_name = "$row[menu_sets_name] ";
-    if (isset($row['menu_disk_number'])) {
-        $menu_disk_name .= "$row[menu_disk_number]";
-    }
-    if (isset($row['menu_disk_letter'])) {
-        $menu_disk_name .= "$row[menu_disk_letter]";
-    }
-    if (isset($row['menu_disk_part'])) {
-        if (is_numeric($row['menu_disk_part'])) {
-            $menu_disk_name .= " part $row[menu_disk_part]";
-        } else {
-            $menu_disk_name .= "$row[menu_disk_part]";
-        }
-    }
-    if (isset($row['menu_disk_version']) and $row['menu_disk_version'] !== '') {
-        $menu_disk_name .= " v$row[menu_disk_version]";
-    }
+    $menu_disk_state  = $menu_detail->getMenuStateId();
+    $menu_disk_year   = $menu_detail->getMenuDiskYearId();
+    $menu_disk_parent = $menu_detail->getMenuParentId();
 
-    $smarty->assign('menus', array(
-        'menu_sets_id' => $row['menu_sets_id'],
-        'menu_sets_name' => $row['menu_sets_name'],
-        'menu_disk_name' => $menu_disk_name,
-        'menu_disk_id' => $row['menu_disk_id'],
-        'menu_disk_number' => $row['menu_disk_number'],
-        'menu_disk_letter' => $row['menu_disk_letter'],
-        'menu_disk_version' => $row['menu_disk_version'],
-        'menu_disk_part' => $row['menu_disk_part'],
-        'crew_id' => $row['crew_id'],
-        'crew_name' => $row['crew_name'],
-        'ind_id' => $row['ind_id'],
-        'ind_name' => $row['ind_name'],
-        'menu_state' => $row['menu_state']
-    ));
+    $smarty->assign('menus', $menu_detail);
 
     $smarty->assign('smarty_action', 'close_edit_disk_box');
     $smarty->assign('menu_disk_id', $menu_disk_id);
@@ -397,17 +254,10 @@ if (isset($action) and $action == "close_edit_disk_box" and $menu_disk_id !== ''
 
 // POP ADD INTRO CREDITS
 if (isset($action) and $action == "add_intro_credit") {
-    // Create individuals array
+
+    // Get individual data for the author search
+    $smarty->assign('individuals', $individualDao->getIndividualsStartingWith("num"));
     $menu_disk_id = $query;
-
-    $query_temporary = $mysqli->query("SELECT ind_id,ind_name FROM individuals WHERE ind_name LIKE 'a%' ORDER BY ind_name ASC") or die('Error: ' . mysqli_error($mysqli));
-
-    while ($genealogy_ind = $query_temporary->fetch_array(MYSQLI_BOTH)) {
-        $smarty->append('ind', array(
-            'ind_id' => $genealogy_ind['ind_id'],
-            'ind_name' => $genealogy_ind['ind_name']
-        ));
-    }
 
     // Get Author types for
     $sql_author_types = "SELECT * FROM author_type ORDER BY author_type_info ASC";
@@ -436,18 +286,7 @@ if (isset($action) and $action == "add_intro_credit") {
 //
 if (isset($action) and $action == "ind_gen_browse") {
     if (isset($query)) {
-        if ($query == "num") {
-            $query_temporary = $mysqli->query("SELECT ind_id,ind_name FROM individuals WHERE ind_name REGEXP '^[0-9].*' ORDER BY ind_name ASC") or die('Error: ' . mysqli_error($mysqli));
-        } else {
-            $query = $mysqli->real_escape_string($query);
-            $query_temporary = $mysqli->query("SELECT ind_id,ind_name FROM individuals WHERE ind_name LIKE '$query%' ORDER BY ind_name ASC") or die('Error: ' . mysqli_error($mysqli));
-        }
-    }
-    while ($genealogy_ind = $query_temporary->fetch_array(MYSQLI_BOTH)) {
-        $smarty->append('author_type', array(
-            'ind_id' => $genealogy_ind['ind_id'],
-            'ind_name' => $genealogy_ind['ind_name']
-        ));
+        $smarty->assign('individuals', $individualDao->getIndividualsStartingWith($query));
     }
     $smarty->assign('smarty_action', 'ind_gen_browse');
 }

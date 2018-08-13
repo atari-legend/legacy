@@ -23,62 +23,68 @@ include("../../config/admin.php");
 
 //set base sqls
 $sql_build = "SELECT game.game_id AS 'software_id',
-                           game.game_name AS 'software_name',
-                           game_publisher.pub_dev_id as 'publisher_id',
-                           pd1.pub_dev_name as 'publisher_name',
-                           game_developer.dev_pub_id as 'developer_id',
-                           pd2.pub_dev_name as 'developer_name',
-                           YEAR(game_release.date) AS 'year',
-                           'Game' AS software_type
-                           FROM game
-                           LEFT JOIN game_release ON (game_release.game_id = game.game_id)
-                           LEFT JOIN game_publisher ON (game_publisher.game_id = game.game_id)
-                           LEFT JOIN pub_dev pd1 ON (pd1.pub_dev_id = game_publisher.pub_dev_id)
-                           LEFT JOIN game_developer ON (game_developer.game_id = game.game_id)
-                           LEFT JOIN pub_dev pd2 on (pd2.pub_dev_id = game_developer.dev_pub_id)";
+                   game.game_name AS 'software_name',
+                   game_publisher.pub_dev_id as 'publisher_id',
+                   pd1.pub_dev_name as 'publisher_name',
+                   game_developer.dev_pub_id as 'developer_id',
+                   pd2.pub_dev_name as 'developer_name',
+                   YEAR(game_release.date) AS 'year',
+                   'Game' AS software_type
+               FROM game
+               LEFT JOIN game_release ON (game_release.game_id = game.game_id)
+               LEFT JOIN game_publisher ON (game_publisher.game_id = game.game_id)
+               LEFT JOIN pub_dev pd1 ON (pd1.pub_dev_id = game_publisher.pub_dev_id)
+               LEFT JOIN game_developer ON (game_developer.game_id = game.game_id)
+               LEFT JOIN pub_dev pd2 on (pd2.pub_dev_id = game_developer.dev_pub_id)";
 
 $sql_build_aka = "SELECT game.game_id AS 'software_id',
-                           game_aka.aka_name AS 'software_name',
-                           game_publisher.pub_dev_id as 'publisher_id',
-                           pd1.pub_dev_name as 'publisher_name',
-                           game_developer.dev_pub_id as 'developer_id',
-                           pd2.pub_dev_name as 'developer_name',
-                           YEAR(game_release.date) AS 'year',
-                           'Game' AS software_type
-                           FROM game_aka
-                           LEFT JOIN game ON (game_aka.game_id = game.game_id)
-                           LEFT JOIN game_release ON (game_release.game_id = game.game_id)
-                           LEFT JOIN game_publisher ON (game_publisher.game_id = game.game_id)
-                           LEFT JOIN pub_dev pd1 ON (pd1.pub_dev_id = game_publisher.pub_dev_id)
-                           LEFT JOIN game_developer ON (game_developer.game_id = game.game_id)
-                           LEFT JOIN pub_dev pd2 on (pd2.pub_dev_id = game_developer.dev_pub_id)";
+                       game_aka.aka_name AS 'software_name',
+                       game_publisher.pub_dev_id as 'publisher_id',
+                       pd1.pub_dev_name as 'publisher_name',
+                       game_developer.dev_pub_id as 'developer_id',
+                       pd2.pub_dev_name as 'developer_name',
+                       YEAR(game_release.date) AS 'year',
+                       'Game' AS software_type
+                   FROM game_aka
+                   LEFT JOIN game ON (game_aka.game_id = game.game_id)
+                   LEFT JOIN game_release ON (game_release.game_id = game.game_id)
+                   LEFT JOIN game_publisher ON (game_publisher.game_id = game.game_id)
+                   LEFT JOIN pub_dev pd1 ON (pd1.pub_dev_id = game_publisher.pub_dev_id)
+                   LEFT JOIN game_developer ON (game_developer.game_id = game.game_id)
+                   LEFT JOIN pub_dev pd2 on (pd2.pub_dev_id = game_developer.dev_pub_id)";
 
 $sql_build_demo = "SELECT demo.demo_id AS 'software_id',
-                                demo.demo_name AS 'software_name',
-                                '0' AS publisher_id,
-                                'n/a' AS publisher_name,
-                                crew.crew_id AS 'developer_id',
-                                crew.crew_name AS 'developer_name',
-                                demo_year.demo_year AS 'year',
-                                'Demo' AS software_type
-                                FROM demo
-                                LEFT JOIN demo_year ON (demo_year.demo_id = demo.demo_id)
-                                LEFT JOIN crew_demo_prod ON (demo.demo_id = crew_demo_prod.demo_id)
-                                LEFT JOIN crew ON (crew_demo_prod.crew_id = crew.crew_id)";
+                        demo.demo_name AS 'software_name',
+                        '0' AS publisher_id,
+                        'n/a' AS publisher_name,
+                        crew.crew_id AS 'developer_id',
+                        crew.crew_name AS 'developer_name',
+                        demo_year.demo_year AS 'year',
+                        'Demo' AS software_type
+                    FROM demo
+                    LEFT JOIN demo_year ON (demo_year.demo_id = demo.demo_id)
+                    LEFT JOIN crew_demo_prod ON (demo.demo_id = crew_demo_prod.demo_id)
+                    LEFT JOIN crew ON (crew_demo_prod.crew_id = crew.crew_id)";
 
 $sql_build_demo_aka = "SELECT demo.demo_id AS 'software_id',
-                                demo_aka.aka_name AS 'software_name',
-                                '0' AS publisher_id,
-                                'n/a' AS publisher_name,
-                                crew.crew_id AS 'developer_id',
-                                crew.crew_name AS 'developer_name',
-                                demo_year.demo_year AS 'year',
-                                'Demo' AS software_type
-                                FROM demo_aka
-                                LEFT JOIN demo ON (demo_aka.demo_id = demo.demo_id)
-                                LEFT JOIN demo_year ON (demo_year.demo_id = demo.demo_id)
-                                LEFT JOIN crew_demo_prod ON (demo.demo_id = crew_demo_prod.demo_id)
-                                LEFT JOIN crew ON (crew_demo_prod.crew_id = crew.crew_id)";
+                            demo_aka.aka_name AS 'software_name',
+                            '0' AS publisher_id,
+                            'n/a' AS publisher_name,
+                            crew.crew_id AS 'developer_id',
+                            crew.crew_name AS 'developer_name',
+                            demo_year.demo_aka.aka_name AS 'software_name',
+                            '0' AS publisher_id,
+                            'n/a' AS publisher_name,
+                            crew.crew_id AS 'developer_id',
+                            crew.crew_name AS 'developer_name',
+                            demo_year.demo_year AS 'year',
+                            'Demo' AS software_typedemo_year AS 'year',
+                            'Demo' AS software_type
+                        FROM demo_aka
+                        LEFT JOIN demo ON (demo_aka.demo_id = demo.demo_id)
+                        LEFT JOIN demo_year ON (demo_year.demo_id = demo.demo_id)
+                        LEFT JOIN crew_demo_prod ON (demo.demo_id = crew_demo_prod.demo_id)
+                        LEFT JOIN crew ON (crew_demo_prod.crew_id = crew.crew_id)";
 
 $sql_build_tool = "SELECT tools.tools_id AS 'software_id',
                                 tools.tools_name AS 'software_name',

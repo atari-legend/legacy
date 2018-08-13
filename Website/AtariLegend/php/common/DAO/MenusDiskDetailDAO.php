@@ -3,11 +3,12 @@ namespace AL\Common\DAO;
 
 require_once __DIR__."/../../lib/Db.php";
 require_once __DIR__."/../Model/Menus/MenusDiskList.php";
+require_once __DIR__."/../Model/Menus/MenuDiskCredits.php";
 
 /**
  * DAO for Comments
  */
-class MenusDiskListDAO {
+class MenusDiskDetailDAO {
     private $mysqli;
 
     public function __construct($mysqli) {
@@ -16,7 +17,11 @@ class MenusDiskListDAO {
 
     /**
      * Build the menu disk name
-     * @param integer $menu_sets_id ID of the menu set to get menu disks for
+     * @param integer $menu_sets_name
+     * @param integer $menu_disk_number
+     * @param integer $menu_disk_letter
+     * @param integer $menu_disk_part
+     * @param integer $menu_disk_version
      * @return $menu_disk_name, name of menu disk
      */
     public function buildMenuDiskName(
@@ -51,12 +56,12 @@ class MenusDiskListDAO {
 
     /**
      * Get all the menu disks for a Menu set
-     * @param integer $menu_sets_id ID of the menu set to get menu disks for
-     * @return \AL\Common\Model\Menus\MenusDiskList[] An array of Menu disks
+     * @param integer $menu_disk_id ID of the menu disk to get deatils for
+     * @return \AL\Common\Model\Menus\MenusDiskList
      */
-    public function getMenuDisksForSet($menu_sets_id) {
+    public function getMenuDiskDetail($menu_disk_id) {
         $stmt = \AL\Db\execute_query(
-            "MenusDiskListDAO: getMenuDisksForSet",
+            "MenusDiskDetailDAO: getMenuDiskDetail",
             $this->mysqli,
             "SELECT
                  menu_disk.menu_sets_id,
@@ -84,14 +89,14 @@ class MenusDiskListDAO {
                  LEFT JOIN menu_disk_state ON ( menu_disk.state = menu_disk_state.state_id)
                  LEFT JOIN menu_disk_year ON ( menu_disk.menu_disk_id = menu_disk_year.menu_disk_id)
                  LEFT JOIN menu_disk_submenu ON ( menu_disk.menu_disk_id = menu_disk_submenu.menu_disk_id)
-                 WHERE menu_disk.menu_sets_id = ?
+                 WHERE menu_disk.menu_disk_id = ?
                  ORDER BY menu_disk_number, menu_disk_letter, menu_disk_part, menu_disk_version ASC",
             "i",
-            $menu_sets_id
+            $menu_disk_id
         );
 
         \AL\Db\bind_result(
-            "MenusDiskListDAO: getMenuDisksForSet",
+            "MenusDiskDetailDAO: getMenuDiskDetail",
             $stmt,
             $menu_sets_id,
             $menu_sets_name,
@@ -111,9 +116,9 @@ class MenusDiskListDAO {
             $parent_id
         );
 
-        $menudisks = [];
-        while ($stmt->fetch()) {
-            $menudisks[] = new \AL\Common\Model\Menus\MenusDiskList(
+        $menudisk = null;
+        if ($stmt->fetch()) {
+            $menudisk = new \AL\Common\Model\Menus\MenusDiskList(
                 $menu_sets_id,
                 $menu_sets_name,
                 $menu_disk_name = $this->buildMenuDiskName(
@@ -142,77 +147,53 @@ class MenusDiskListDAO {
 
         $stmt->close();
 
-        return $menudisks;
+        return $menudisk;
     }
 
     /**
-     * Get the SQL query to get the list of Menudisk sets,
+     * Get all the Credits for menu disk
+     * @param integer $menu_disk_id ID of the menu disk to get details for
+     * @return \AL\Common\Model\Menus\MenuDiskCredits
      */
-    public function getMenuSetListQuery() {
-        $query = "SELECT
-            menu_set.menu_sets_id,
-            menu_set.menu_sets_name,
-            (SELECT COUNT(*) FROM menu_disk WHERE menu_disk.menu_sets_id=menu_set.menu_sets_id) AS menu_disk_count,
-            crew.crew_id,
-            crew.crew_name,
-            individuals.ind_id,
-            individuals.ind_name,
-            menu_types_main.menu_types_text
-            FROM menu_set
-            LEFT JOIN crew_menu_prod ON (menu_set.menu_sets_id = crew_menu_prod.menu_sets_id)
-            LEFT JOIN crew ON (crew_menu_prod.crew_id = crew.crew_id)
-            LEFT JOIN ind_menu_prod ON (menu_set.menu_sets_id = ind_menu_prod.menu_sets_id)
-            LEFT JOIN individuals ON (ind_menu_prod.ind_id = individuals.ind_id)
-            LEFT JOIN menu_type ON (menu_set.menu_sets_id = menu_type.menu_sets_id)
-            LEFT JOIN menu_types_main ON (menu_type.menu_types_main_id = menu_types_main.menu_types_main_id)
-            ORDER BY menu_sets_name ASC";
-
-        return $query;
-    }
-
-    /**
-     * Get list of Menu sets
-     */
-    public function getMenuSetsBuild() {
-
-        // Query Menu Sets
+    public function getMenuDiskCredits($menu_disk_id) {
         $stmt = \AL\Db\execute_query(
-            "MenusDiskListDAO: getMenuSetsBuild",
+            "MenusDiskDetailDAO: getMenuDiskCredits",
             $this->mysqli,
-            $this->getMenuSetListQuery(),
-            null,
-            null
+            "SELECT
+                individuals.ind_id,
+                individuals.ind_name,
+                menu_disk_credits.menu_disk_credits_id,
+                author_type.author_type_info
+            FROM individuals
+            LEFT JOIN menu_disk_credits ON (individuals.ind_id = menu_disk_credits.ind_id)
+            LEFT JOIN author_type ON (menu_disk_credits.author_type_id = author_type.author_type_id)
+            WHERE menu_disk_credits.menu_disk_id = ?
+            ORDER BY individuals.ind_name ASC",
+            "i",
+            $menu_disk_id
         );
 
         \AL\Db\bind_result(
-            "MenusDiskListDAO: getMenuSetsBuild",
+            "MenusDiskDetailDAO: getMenuDiskCredits",
             $stmt,
-            $menu_sets_id,
-            $menu_sets_name,
-            $menu_disk_count,
-            $crew_id,
-            $crew_name,
             $ind_id,
             $ind_name,
-            $menu_types_text
+            $menu_disk_credits_id,
+            $author_type_info
         );
 
-        $menusets = [];
+        $menudiskcredits = [];
         while ($stmt->fetch()) {
-            $menusets[] = new \AL\Common\Model\Menus\MenuSetsList(
-                $menu_sets_id,
-                $menu_sets_name,
-                $menu_disk_count,
-                $crew_id,
-                $crew_name,
+            $menudiskcredits[] = new \AL\Common\Model\Menus\MenuDiskCredits(
                 $ind_id,
                 $ind_name,
-                $menu_types_text
+                $menu_disk_credits_id,
+                $author_type_info
             );
         }
 
         $stmt->close();
 
-        return $menusets;
+        return $menudiskcredits;
     }
 }
