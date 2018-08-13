@@ -189,10 +189,13 @@ figure.effect-tile:hover p.icon-links a:first-child {
 //*---------------------------------------************/
 
 figure.effect-bubba {
-    @if $skin_name == legacy {
-        background: rgb(0, 80, 80);
-    } @else if $skin_name == tos or $skin_name == picasso {
-        background: rgb(172, 172, 172);
+    background: transparent;
+    &:hover {
+        @if $skin_name == legacy {
+            background: rgba(0, 80, 80, .6);
+        } @else if $skin_name == tos or $skin_name == picasso {
+            background: rgba(172, 172, 172, .6);
+        }
     }
 }
 
