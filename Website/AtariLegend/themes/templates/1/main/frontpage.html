@@ -279,7 +279,9 @@
             <div id="welcome">
                 <!-- Slides Container -->
                 <div data-u="slides" class="welcome_slides">
+                    {capture}{$image|@shuffle}{/capture}
                     {foreach from=$image item=line}
+                        {if $line@iteration > 10}{break}{/if}
                         <div class="grid">
                             <figure class="effect-bubba" style="margin:0;max-width: 99.8%;">
                                 <img src="../../includes/show_image.php?file={$line.image_name}" data-u="image" class="standard_tile_image" alt=" ">
