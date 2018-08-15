@@ -23,6 +23,7 @@
 include("../../config/common.php");
 include("../../config/admin.php");
 include("../../admin/games/quick_search_games.php");
+include("../../admin/tiles/tile_shortlog.php");
 
 require_once __DIR__."/../../common/DAO/GameReleaseDAO.php";
 require_once __DIR__."/../../common/DAO/GameDAO.php";
@@ -252,7 +253,7 @@ $smarty->assign('nr_similar', $similar['C']);
 //AKA's
 //***********************************************************************************
 
-$sql_aka = $mysqli->query("SELECT * FROM game_aka 
+$sql_aka = $mysqli->query("SELECT * FROM game_aka
                            LEFT JOIN language ON (game_aka.language_id = language.id)
                            WHERE game_id='$game_id'") or die("Couldn't query aka games");
 

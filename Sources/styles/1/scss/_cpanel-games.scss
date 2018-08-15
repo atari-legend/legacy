@@ -137,6 +137,14 @@ hr.separator_add {
     background-image: linear-gradient(to right, #122323, rgba(0, 0, 0, 0));
 }
 
+hr.separator_add_secondary {
+    margin-top: 10px;
+    margin-bottom: 5px;
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, #006f6f, rgba(0, 0, 0, 0));
+}
+
 .gd_left {
     width: 50%;
     float: left;
