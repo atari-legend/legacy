@@ -44,138 +44,141 @@ class ShortLog {
         $this->timestamp = $timestamp;
 
         if ($section="Games") {
-            $shortlog = "$user_name ";
+            $shortlog = "";
 
             if ($sub_section =="Box back" or $sub_section =="Box front") {
                 if ($action == "Update") {
-                    $shortlog .= "updated the boxscan of $section_name";
+                    $shortlog .= "Updated the boxscan of $section_name";
                 }
                 if ($action == "Insert") {
-                    $shortlog .= "added boxscan to $section_name";
+                    $shortlog .= "Added boxscan to $section_name";
                 }
                 if ($action == "Delete") {
-                    $shortlog .= "removed a boxscan from $section_name";
+                    $shortlog .= "Removed a boxscan from $section_name";
                 }
             }
             if ($sub_section =="Screenshot") {
                 if ($action == "Update") {
-                    $shortlog .= "updated the screenshots of $section_name";
+                    $shortlog .= "Updated the screenshots of $section_name";
                 }
                 if ($action == "Insert") {
-                    $shortlog .= "added a screenshot to $section_name";
+                    $shortlog .= "Added a screenshot to $section_name";
                 }
                 if ($action == "Delete") {
-                    $shortlog .= "removed a screenshot from $section_name";
+                    $shortlog .= "Removed a screenshot from $section_name";
                 }
             }
             if ($sub_section =="Developer" or $sub_section =="Publisher") {
                 if ($action == "Update") {
-                    $shortlog .= "updated the developer of $section_name";
+                    $shortlog .= "Updated the developer of $section_name";
                 }
                 if ($action == "Insert") {
-                    $shortlog .= "added $sub_section_name to $section_name";
+                    $shortlog .= "Added $sub_section_name to $section_name";
                 }
                 if ($action == "Delete") {
-                    $shortlog .= "removed $sub_section_name from $section_name";
+                    $shortlog .= "Removed $sub_section_name from $section_name";
                 }
             }
             if ($sub_section =="Release") {
                 if ($action == "Update") {
-                    $shortlog .= "updated a release of $section_name";
+                    $shortlog .= "Updated a release of $section_name";
                 }
                 if ($action == "Insert") {
-                    $shortlog .= "added a release to $section_name";
+                    $shortlog .= "Added a release to $section_name";
                 }
                 if ($action == "Delete") {
-                    $shortlog .= "removed a release from $section_name";
+                    $shortlog .= "Removed a release from $section_name";
                 }
             }
             if ($sub_section =="Creator") {
                 if ($action == "Update") {
-                    $shortlog .= "updated $section_name";
+                    $shortlog .= "Updated $section_name";
                 }
                 if ($action == "Insert") {
-                    $shortlog .= "added $sub_section_name to $section_name";
+                    $shortlog .= "Added $sub_section_name to $section_name";
                 }
                 if ($action == "Delete") {
-                    $shortlog .= "removed $sub_section_name from $section_name";
+                    $shortlog .= "Removed $sub_section_name from $section_name";
                 }
             }
             if ($sub_section =="Author") {
                 if ($action == "Update") {
-                    $shortlog .= "updated $section_name";
+                    $shortlog .= "Updated $section_name";
                 }
                 if ($action == "Insert") {
-                    $shortlog .= "added $sub_section_name to $section_name";
+                    $shortlog .= "Added $sub_section_name to $section_name";
                 }
                 if ($action == "Delete") {
-                    $shortlog .= "removed $sub_section_name from $section_name";
+                    $shortlog .= "Removed $sub_section_name from $section_name";
                 }
             }
             if ($sub_section =="Similar") {
                 if ($action == "Update") {
-                    $shortlog .= "updated $section_name";
+                    $shortlog .= "Updated $section_name";
                 }
                 if ($action == "Insert") {
-                    $shortlog .= "added $sub_section_name as similar to $section_name";
+                    $shortlog .= "Added $sub_section_name as similar to $section_name";
                 }
                 if ($action == "Delete") {
-                    $shortlog .= "updated $section_name";
+                    $shortlog .= "Updated $section_name";
                 }
             }
             if ($sub_section =="Game") {
                 if ($action == "Update") {
-                    $shortlog .= "updated $section_name";
+                    $shortlog .= "Updated $section_name";
                 }
                 if ($action == "Insert") {
-                    $shortlog .= "added a new game: $section_name";
+                    $shortlog .= "Added a new game: $section_name";
                 }
                 if ($action == "Delete") {
-                    $shortlog .= "removed $section_name";
+                    $shortlog .= "Removed $section_name";
                 }
             }
             if ($sub_section =="AKA") {
                 if ($action == "Update") {
-                    $shortlog .= "updated $section_name";
+                    $shortlog .= "Updated $section_name";
                 }
                 if ($action == "Insert") {
-                    $shortlog .= "added $sub_section_name to $section_name";
+                    $shortlog .= "Added $sub_section_name to $section_name";
                 }
                 if ($action == "Delete") {
-                    $shortlog .= "removed $sub_section_name from $section_name";
+                    $shortlog .= "Removed $sub_section_name from $section_name";
                 }
             }
 
+            $this->shortlog = $shortlog;
+
             $date = new \DateTime();
             $now = $date->format('U');
+            $shortlog_date = "";
 
             if ($now-$timestamp <60) {
                 $diff = $now-$timestamp;
-                $shortlog .= " $diff seconds ago";
+                $shortlog_date .= " $diff seconds ago";
             }
             if ($now-$timestamp >60 and $now-$timestamp <3600) {
                 $diff = $now-$timestamp;
                 $diff = floor($diff / 60);
-                $shortlog .= " $diff minutes ago";
+                $shortlog_date .= " $diff minutes ago";
             }
             if ($now-$timestamp >3600 and $now-$timestamp <86400) {
                 $diff = $now-$timestamp;
                 $diff = floor($diff / 3600);
-                $shortlog .= " $diff hours ago";
+                $shortlog_date .= " $diff hours ago";
             }
             if ($now-$timestamp >86400 and $now-$timestamp <172800) {
                 $diff = $now-$timestamp;
                 $diff = floor($diff / 3600);
-                $shortlog .= " yesterday";
+                $shortlog_date .= " yesterday";
             }
             if ($now-$timestamp >172800) {
                 $time = new \DateTime();
                 $time->setTimestamp($timestamp);
                 $change_date = $time->format('M d');
-                $shortlog .= " on $change_date";
+                $shortlog_date .= " on $change_date";
             }
 
-            $this->shortlog = $shortlog;
+            $this->shortlog_date = $shortlog_date;
         }
     }
 
@@ -225,5 +228,9 @@ class ShortLog {
 
     public function getShortlog() {
         return $this->shortlog;
+    }
+
+    public function getShortlogDate() {
+        return $this->shortlog_date;
     }
 }
