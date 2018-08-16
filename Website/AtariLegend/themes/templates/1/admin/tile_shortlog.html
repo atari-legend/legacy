@@ -33,6 +33,8 @@
         <div class="help-hint" style="text-align:justify;" id="jsShortLog">
 
             {foreach from=$shortlog item=line}
+                {$line->getUserName()} - {$line->getShortlogDate()}
+                <hr class="separator_add_secondary">
                 {$line->getShortLog()} <br>
                 <hr class="separator_add_secondary">
             {/foreach}

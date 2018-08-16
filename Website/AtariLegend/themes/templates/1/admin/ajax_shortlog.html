@@ -13,7 +13,9 @@
 //****************************************************************************************
 *}
 
-            {foreach from=$shortlog item=line}
-                {$line->getShortLog()} <br>
-                <hr class="separator_add_secondary">
-            {/foreach}
+{foreach from=$shortlog item=line}
+    <span style="color:white;">{$line->getUserName()} - {$line->getShortlogDate()}</span>
+    <br><br>
+    {$line->getShortLog()} <br>
+    <hr class="separator_add_secondary">
+{/foreach}
