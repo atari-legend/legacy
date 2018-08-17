@@ -26,16 +26,16 @@
     <div class="standard_tile_line"></div>
     <div class="standard_tile_padding">
         <h6 style="text-align:center;">
-            Recent changes and updates
+            Recent changes and updates<br><br>
         </h6>
 
         <hr class="separator_add_secondary">
         <div class="help-hint" style="text-align:justify;" id="jsShortLog">
 
             {foreach from=$shortlog item=line}
-                {$line->getUserName()} - {$line->getShortlogDate()}
-                <hr class="separator_add_secondary">
-                {$line->getShortLog()} <br>
+                <span style="color:white;">{$line->getUserName()} - {$line->getShortlogDate()}</span>
+                <br><br>
+                {$line->getShortLog()}<br>
                 <hr class="separator_add_secondary">
             {/foreach}
         </div>
